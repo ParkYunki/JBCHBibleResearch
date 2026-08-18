@@ -1,0 +1,614 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 77;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		C0200F01302472A9009CCA96 /* BibleResearchModels in Frameworks */ = {isa = PBXBuildFile; productRef = C0200F00302472A9009CCA96 /* BibleResearchModels */; };
+		C05362983020342500B5FD10 /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = C05362973020341C00B5FD10 /* libsqlite3.tbd */; };
+		C08A75FC3030C5EB003C2725 /* CoreHwp in Frameworks */ = {isa = PBXBuildFile; productRef = C08A75FB3030C5EB003C2725 /* CoreHwp */; };
+		C08A75FE3030C5EB003C2725 /* HwpKitCore in Frameworks */ = {isa = PBXBuildFile; productRef = C08A75FD3030C5EB003C2725 /* HwpKitCore */; };
+		C08A76003030C5EB003C2725 /* HwpKit in Frameworks */ = {isa = PBXBuildFile; productRef = C08A75FF3030C5EB003C2725 /* HwpKit */; };
+		C0D155683031EB5800861DD1 /* SwiftText in Frameworks */ = {isa = PBXBuildFile; productRef = C0D155673031EB5800861DD1 /* SwiftText */; };
+		C0D1556A3031EB5800861DD1 /* SwiftTextAttributedString in Frameworks */ = {isa = PBXBuildFile; productRef = C0D155693031EB5800861DD1 /* SwiftTextAttributedString */; };
+		C0D1556C3031EB5800861DD1 /* SwiftTextCore in Frameworks */ = {isa = PBXBuildFile; productRef = C0D1556B3031EB5800861DD1 /* SwiftTextCore */; };
+		C0D1556E3031EB5800861DD1 /* SwiftTextDOCX in Frameworks */ = {isa = PBXBuildFile; productRef = C0D1556D3031EB5800861DD1 /* SwiftTextDOCX */; };
+		C0D155703031EB5800861DD1 /* SwiftTextIWA in Frameworks */ = {isa = PBXBuildFile; productRef = C0D1556F3031EB5800861DD1 /* SwiftTextIWA */; };
+		C0D155723031EB5800861DD1 /* SwiftTextMarkdown in Frameworks */ = {isa = PBXBuildFile; productRef = C0D155713031EB5800861DD1 /* SwiftTextMarkdown */; };
+		C0D155743031EB5800861DD1 /* SwiftTextOCR in Frameworks */ = {isa = PBXBuildFile; productRef = C0D155733031EB5800861DD1 /* SwiftTextOCR */; };
+		C0D155763031EB5800861DD1 /* SwiftTextOpenType in Frameworks */ = {isa = PBXBuildFile; productRef = C0D155753031EB5800861DD1 /* SwiftTextOpenType */; };
+		C0D155783031EB5800861DD1 /* SwiftTextPDF in Frameworks */ = {isa = PBXBuildFile; productRef = C0D155773031EB5800861DD1 /* SwiftTextPDF */; };
+		C0D1557A3031EB5800861DD1 /* SwiftTextPDFWriter in Frameworks */ = {isa = PBXBuildFile; productRef = C0D155793031EB5800861DD1 /* SwiftTextPDFWriter */; };
+		C0D1557C3031EB5800861DD1 /* SwiftTextPages in Frameworks */ = {isa = PBXBuildFile; productRef = C0D1557B3031EB5800861DD1 /* SwiftTextPages */; };
+		C0D1557E3031EB5800861DD1 /* SwiftTextRender in Frameworks */ = {isa = PBXBuildFile; productRef = C0D1557D3031EB5800861DD1 /* SwiftTextRender */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		C05362283020235D00B5FD10 /* JBCHBibleResearch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = JBCHBibleResearch.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		C05362973020341C00B5FD10 /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS26.5.sdk/usr/lib/libsqlite3.tbd; sourceTree = DEVELOPER_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		C0536295302033F800B5FD10 /* Exceptions for "JBCHBibleResearch" folder in "JBCHBibleResearch" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+				"Native/libdocxide_pdf_ffi.a",
+			);
+			target = C05362273020235D00B5FD10 /* JBCHBibleResearch */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
+/* Begin PBXFileSystemSynchronizedRootGroup section */
+		C053622A3020235D00B5FD10 /* JBCHBibleResearch */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				C0536295302033F800B5FD10 /* Exceptions for "JBCHBibleResearch" folder in "JBCHBibleResearch" target */,
+			);
+			path = JBCHBibleResearch;
+			sourceTree = "<group>";
+		};
+/* End PBXFileSystemSynchronizedRootGroup section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		C05362253020235D00B5FD10 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C0D1557C3031EB5800861DD1 /* SwiftTextPages in Frameworks */,
+				C0D1556C3031EB5800861DD1 /* SwiftTextCore in Frameworks */,
+				C0D155763031EB5800861DD1 /* SwiftTextOpenType in Frameworks */,
+				C0D1556A3031EB5800861DD1 /* SwiftTextAttributedString in Frameworks */,
+				C0D1557A3031EB5800861DD1 /* SwiftTextPDFWriter in Frameworks */,
+				C08A75FC3030C5EB003C2725 /* CoreHwp in Frameworks */,
+				C0D1556E3031EB5800861DD1 /* SwiftTextDOCX in Frameworks */,
+				C0D155723031EB5800861DD1 /* SwiftTextMarkdown in Frameworks */,
+				C08A75FE3030C5EB003C2725 /* HwpKitCore in Frameworks */,
+				C08A76003030C5EB003C2725 /* HwpKit in Frameworks */,
+				C0200F01302472A9009CCA96 /* BibleResearchModels in Frameworks */,
+				C0D1557E3031EB5800861DD1 /* SwiftTextRender in Frameworks */,
+				C0D155703031EB5800861DD1 /* SwiftTextIWA in Frameworks */,
+				C0D155783031EB5800861DD1 /* SwiftTextPDF in Frameworks */,
+				C05362983020342500B5FD10 /* libsqlite3.tbd in Frameworks */,
+				C0D155743031EB5800861DD1 /* SwiftTextOCR in Frameworks */,
+				C0D155683031EB5800861DD1 /* SwiftText in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		C053621F3020235D00B5FD10 = {
+			isa = PBXGroup;
+			children = (
+				C053622A3020235D00B5FD10 /* JBCHBibleResearch */,
+				C05362963020341C00B5FD10 /* Frameworks */,
+				C05362293020235D00B5FD10 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		C05362293020235D00B5FD10 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				C05362283020235D00B5FD10 /* JBCHBibleResearch.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		C05362963020341C00B5FD10 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				C05362973020341C00B5FD10 /* libsqlite3.tbd */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		C05362273020235D00B5FD10 /* JBCHBibleResearch */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = C05362333020235E00B5FD10 /* Build configuration list for PBXNativeTarget "JBCHBibleResearch" */;
+			buildPhases = (
+				C05362243020235D00B5FD10 /* Sources */,
+				C05362253020235D00B5FD10 /* Frameworks */,
+				C05362263020235D00B5FD10 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				C053622A3020235D00B5FD10 /* JBCHBibleResearch */,
+			);
+			name = JBCHBibleResearch;
+			packageProductDependencies = (
+				C0200F00302472A9009CCA96 /* BibleResearchModels */,
+				C08A75FB3030C5EB003C2725 /* CoreHwp */,
+				C08A75FD3030C5EB003C2725 /* HwpKitCore */,
+				C08A75FF3030C5EB003C2725 /* HwpKit */,
+				C0D155673031EB5800861DD1 /* SwiftText */,
+				C0D155693031EB5800861DD1 /* SwiftTextAttributedString */,
+				C0D1556B3031EB5800861DD1 /* SwiftTextCore */,
+				C0D1556D3031EB5800861DD1 /* SwiftTextDOCX */,
+				C0D1556F3031EB5800861DD1 /* SwiftTextIWA */,
+				C0D155713031EB5800861DD1 /* SwiftTextMarkdown */,
+				C0D155733031EB5800861DD1 /* SwiftTextOCR */,
+				C0D155753031EB5800861DD1 /* SwiftTextOpenType */,
+				C0D155773031EB5800861DD1 /* SwiftTextPDF */,
+				C0D155793031EB5800861DD1 /* SwiftTextPDFWriter */,
+				C0D1557B3031EB5800861DD1 /* SwiftTextPages */,
+				C0D1557D3031EB5800861DD1 /* SwiftTextRender */,
+			);
+			productName = JBCHBibleResearch;
+			productReference = C05362283020235D00B5FD10 /* JBCHBibleResearch.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		C05362203020235D00B5FD10 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 2660;
+				LastUpgradeCheck = 2660;
+				TargetAttributes = {
+					C05362273020235D00B5FD10 = {
+						CreatedOnToolsVersion = 26.6;
+					};
+				};
+			};
+			buildConfigurationList = C05362233020235D00B5FD10 /* Build configuration list for PBXProject "JBCHBibleResearch" */;
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				ko,
+				Base,
+			);
+			mainGroup = C053621F3020235D00B5FD10;
+			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				C0AB1C00302472A9009CCA96 /* XCLocalSwiftPackageReference "JBCHBibleResearch/BibleResearchPlatform" */,
+				C08A75FA3030C5EB003C2725 /* XCRemoteSwiftPackageReference "hwp-swift" */,
+				C0D155663031EB5800861DD1 /* XCRemoteSwiftPackageReference "SwiftText" */,
+			);
+			preferredProjectObjectVersion = 77;
+			productRefGroup = C05362293020235D00B5FD10 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				C05362273020235D00B5FD10 /* JBCHBibleResearch */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		C05362263020235D00B5FD10 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		C05362243020235D00B5FD10 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		C05362313020235E00B5FD10 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEAD_CODE_STRIPPING = YES;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = L59A3358CD;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		C05362323020235E00B5FD10 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEAD_CODE_STRIPPING = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = L59A3358CD;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_COMPILATION_MODE = wholemodule;
+			};
+			name = Release;
+		};
+		C05362343020235E00B5FD10 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = JBCHBibleResearch/JBCHBibleResearch.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEAD_CODE_STRIPPING = YES;
+				DEVELOPMENT_TEAM = L59A3358CD;
+				ENABLE_APP_SANDBOX = YES;
+				ENABLE_DEBUG_DYLIB = NO;
+				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_INCOMING_NETWORK_CONNECTIONS = NO;
+				ENABLE_OUTGOING_NETWORK_CONNECTIONS = NO;
+				ENABLE_PREVIEWS = YES;
+				ENABLE_RESOURCE_ACCESS_AUDIO_INPUT = NO;
+				ENABLE_RESOURCE_ACCESS_BLUETOOTH = NO;
+				ENABLE_RESOURCE_ACCESS_CALENDARS = NO;
+				ENABLE_RESOURCE_ACCESS_CAMERA = NO;
+				ENABLE_RESOURCE_ACCESS_CONTACTS = NO;
+				ENABLE_RESOURCE_ACCESS_LOCATION = NO;
+				ENABLE_RESOURCE_ACCESS_PRINTING = NO;
+				ENABLE_RESOURCE_ACCESS_USB = NO;
+				ENABLE_USER_SELECTED_FILES = readonly;
+				GENERATE_INFOPLIST_FILE = YES;
+				"HEADER_SEARCH_PATHS[sdk=macosx*]" = "$(PROJECT_DIR)/JBCHBibleResearch/Native";
+				INFOPLIST_FILE = JBCHBibleResearch/Info.plist;
+				"OTHER_LDFLAGS[sdk=macosx*]" = "-ldocxide_pdf_ffi";
+				INFOPLIST_KEY_CFBundleDisplayName = "JBCH 성경 연구";
+				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
+				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
+				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
+				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphonesimulator*]" = YES;
+				"INFOPLIST_KEY_UILaunchScreen_Generation[sdk=iphoneos*]" = YES;
+				"INFOPLIST_KEY_UILaunchScreen_Generation[sdk=iphonesimulator*]" = YES;
+				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphoneos*]" = UIStatusBarStyleDefault;
+				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphonesimulator*]" = UIStatusBarStyleDefault;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 26.5;
+				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
+				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/JBCHBibleResearch/Native",
+				);
+				"LIBRARY_SEARCH_PATHS[sdk=macosx*]" = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/JBCHBibleResearch/Native",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 26.5;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = org.jbch.djc.JBCHBibleResearch;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				REGISTER_APP_GROUPS = YES;
+				SDKROOT = auto;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SUPPORTS_MACCATALYST = NO;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "";
+				"SWIFT_OBJC_BRIDGING_HEADER[sdk=macosx*]" = "JBCHBibleResearch/JBCHBibleResearch-Bridging-Header.h";
+				SWIFT_OBJC_INTEROP_MODE = "";
+				"SWIFT_OBJC_INTEROP_MODE[sdk=macosx*]" = objc;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				XROS_DEPLOYMENT_TARGET = 26.5;
+			};
+			name = Debug;
+		};
+		C05362353020235E00B5FD10 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = JBCHBibleResearch/JBCHBibleResearch.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEAD_CODE_STRIPPING = YES;
+				DEVELOPMENT_TEAM = L59A3358CD;
+				ENABLE_APP_SANDBOX = YES;
+				ENABLE_DEBUG_DYLIB = NO;
+				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_INCOMING_NETWORK_CONNECTIONS = NO;
+				ENABLE_OUTGOING_NETWORK_CONNECTIONS = NO;
+				ENABLE_PREVIEWS = YES;
+				ENABLE_RESOURCE_ACCESS_AUDIO_INPUT = NO;
+				ENABLE_RESOURCE_ACCESS_BLUETOOTH = NO;
+				ENABLE_RESOURCE_ACCESS_CALENDARS = NO;
+				ENABLE_RESOURCE_ACCESS_CAMERA = NO;
+				ENABLE_RESOURCE_ACCESS_CONTACTS = NO;
+				ENABLE_RESOURCE_ACCESS_LOCATION = NO;
+				ENABLE_RESOURCE_ACCESS_PRINTING = NO;
+				ENABLE_RESOURCE_ACCESS_USB = NO;
+				ENABLE_USER_SELECTED_FILES = readonly;
+				GENERATE_INFOPLIST_FILE = YES;
+				"HEADER_SEARCH_PATHS[sdk=macosx*]" = "$(PROJECT_DIR)/JBCHBibleResearch/Native";
+				INFOPLIST_FILE = JBCHBibleResearch/Info.plist;
+				"OTHER_LDFLAGS[sdk=macosx*]" = "-ldocxide_pdf_ffi";
+				INFOPLIST_KEY_CFBundleDisplayName = "JBCH 성경 연구";
+				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
+				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
+				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
+				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphonesimulator*]" = YES;
+				"INFOPLIST_KEY_UILaunchScreen_Generation[sdk=iphoneos*]" = YES;
+				"INFOPLIST_KEY_UILaunchScreen_Generation[sdk=iphonesimulator*]" = YES;
+				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphoneos*]" = UIStatusBarStyleDefault;
+				"INFOPLIST_KEY_UIStatusBarStyle[sdk=iphonesimulator*]" = UIStatusBarStyleDefault;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 26.5;
+				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
+				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/JBCHBibleResearch/Native",
+				);
+				"LIBRARY_SEARCH_PATHS[sdk=macosx*]" = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/JBCHBibleResearch/Native",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 26.5;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = org.jbch.djc.JBCHBibleResearch;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				REGISTER_APP_GROUPS = YES;
+				SDKROOT = auto;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator macosx";
+				SUPPORTS_MACCATALYST = NO;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "";
+				"SWIFT_OBJC_BRIDGING_HEADER[sdk=macosx*]" = "JBCHBibleResearch/JBCHBibleResearch-Bridging-Header.h";
+				SWIFT_OBJC_INTEROP_MODE = "";
+				"SWIFT_OBJC_INTEROP_MODE[sdk=macosx*]" = objc;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				XROS_DEPLOYMENT_TARGET = 26.5;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		C05362233020235D00B5FD10 /* Build configuration list for PBXProject "JBCHBibleResearch" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C05362313020235E00B5FD10 /* Debug */,
+				C05362323020235E00B5FD10 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		C05362333020235E00B5FD10 /* Build configuration list for PBXNativeTarget "JBCHBibleResearch" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C05362343020235E00B5FD10 /* Debug */,
+				C05362353020235E00B5FD10 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCLocalSwiftPackageReference section */
+		C0AB1C00302472A9009CCA96 /* XCLocalSwiftPackageReference "JBCHBibleResearch/BibleResearchPlatform" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = JBCHBibleResearch/BibleResearchPlatform;
+		};
+/* End XCLocalSwiftPackageReference section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		C08A75FA3030C5EB003C2725 /* XCRemoteSwiftPackageReference "hwp-swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/sboh1214/hwp-swift";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
+		C0D155663031EB5800861DD1 /* XCRemoteSwiftPackageReference "SwiftText" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Cocoanetics/SwiftText.git";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		C0200F00302472A9009CCA96 /* BibleResearchModels */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = C0AB1C00302472A9009CCA96 /* XCLocalSwiftPackageReference "JBCHBibleResearch/BibleResearchPlatform" */;
+			productName = BibleResearchModels;
+		};
+		C08A75FB3030C5EB003C2725 /* CoreHwp */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = C08A75FA3030C5EB003C2725 /* XCRemoteSwiftPackageReference "hwp-swift" */;
+			productName = CoreHwp;
+		};
+		C08A75FD3030C5EB003C2725 /* HwpKitCore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = C08A75FA3030C5EB003C2725 /* XCRemoteSwiftPackageReference "hwp-swift" */;
+			productName = HwpKitCore;
+		};
+		C08A75FF3030C5EB003C2725 /* HwpKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = C08A75FA3030C5EB003C2725 /* XCRemoteSwiftPackageReference "hwp-swift" */;
+			productName = HwpKit;
+		};
+		C0D155673031EB5800861DD1 /* SwiftText */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = C0D155663031EB5800861DD1 /* XCRemoteSwiftPackageReference "SwiftText" */;
+			productName = SwiftText;
+		};
+		C0D155693031EB5800861DD1 /* SwiftTextAttributedString */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = C0D155663031EB5800861DD1 /* XCRemoteSwiftPackageReference "SwiftText" */;
+			productName = SwiftTextAttributedString;
+		};
+		C0D1556B3031EB5800861DD1 /* SwiftTextCore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = C0D155663031EB5800861DD1 /* XCRemoteSwiftPackageReference "SwiftText" */;
+			productName = SwiftTextCore;
+		};
+		C0D1556D3031EB5800861DD1 /* SwiftTextDOCX */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = C0D155663031EB5800861DD1 /* XCRemoteSwiftPackageReference "SwiftText" */;
+			productName = SwiftTextDOCX;
+		};
+		C0D1556F3031EB5800861DD1 /* SwiftTextIWA */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = C0D155663031EB5800861DD1 /* XCRemoteSwiftPackageReference "SwiftText" */;
+			productName = SwiftTextIWA;
+		};
+		C0D155713031EB5800861DD1 /* SwiftTextMarkdown */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = C0D155663031EB5800861DD1 /* XCRemoteSwiftPackageReference "SwiftText" */;
+			productName = SwiftTextMarkdown;
+		};
+		C0D155733031EB5800861DD1 /* SwiftTextOCR */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = C0D155663031EB5800861DD1 /* XCRemoteSwiftPackageReference "SwiftText" */;
+			productName = SwiftTextOCR;
+		};
+		C0D155753031EB5800861DD1 /* SwiftTextOpenType */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = C0D155663031EB5800861DD1 /* XCRemoteSwiftPackageReference "SwiftText" */;
+			productName = SwiftTextOpenType;
+		};
+		C0D155773031EB5800861DD1 /* SwiftTextPDF */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = C0D155663031EB5800861DD1 /* XCRemoteSwiftPackageReference "SwiftText" */;
+			productName = SwiftTextPDF;
+		};
+		C0D155793031EB5800861DD1 /* SwiftTextPDFWriter */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = C0D155663031EB5800861DD1 /* XCRemoteSwiftPackageReference "SwiftText" */;
+			productName = SwiftTextPDFWriter;
+		};
+		C0D1557B3031EB5800861DD1 /* SwiftTextPages */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = C0D155663031EB5800861DD1 /* XCRemoteSwiftPackageReference "SwiftText" */;
+			productName = SwiftTextPages;
+		};
+		C0D1557D3031EB5800861DD1 /* SwiftTextRender */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = C0D155663031EB5800861DD1 /* XCRemoteSwiftPackageReference "SwiftText" */;
+			productName = SwiftTextRender;
+		};
+/* End XCSwiftPackageProductDependency section */
+	};
+	rootObject = C05362203020235D00B5FD10 /* Project object */;
+}

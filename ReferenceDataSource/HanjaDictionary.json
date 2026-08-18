@@ -1,0 +1,14016 @@
+[
+ {
+  "char": "者",
+  "eum": "자",
+  "hun": "놈 자",
+  "count": 8041,
+  "confidence": "high"
+ },
+ {
+  "char": "主",
+  "eum": "주",
+  "hun": "주인 주",
+  "count": 3968,
+  "confidence": "high"
+ },
+ {
+  "char": "王",
+  "eum": "왕",
+  "hun": "임금 왕",
+  "count": 3627,
+  "confidence": "high"
+ },
+ {
+  "char": "子",
+  "eum": "자",
+  "hun": "아들 자",
+  "count": 3626,
+  "confidence": "high"
+ },
+ {
+  "char": "行",
+  "eum": "행",
+  "hun": "다닐 행",
+  "count": 2807,
+  "confidence": "high"
+ },
+ {
+  "char": "人",
+  "eum": "인",
+  "hun": "사람 인",
+  "count": 2670,
+  "confidence": "high"
+ },
+ {
+  "char": "百",
+  "eum": "백",
+  "hun": "일백 백",
+  "count": 2396,
+  "confidence": "high"
+ },
+ {
+  "char": "中",
+  "eum": "중",
+  "hun": "가운데 중",
+  "count": 2178,
+  "confidence": "high"
+ },
+ {
+  "char": "祭",
+  "eum": "제",
+  "hun": "제사 제",
+  "count": 2103,
+  "confidence": "high"
+ },
+ {
+  "char": "孫",
+  "eum": "손",
+  "hun": "손자 손",
+  "count": 1954,
+  "confidence": "high"
+ },
+ {
+  "char": "長",
+  "eum": "장",
+  "hun": "길 장",
+  "count": 1939,
+  "confidence": "high"
+ },
+ {
+  "char": "自",
+  "eum": "자",
+  "hun": "스스로 자",
+  "count": 1869,
+  "confidence": "high"
+ },
+ {
+  "char": "爲",
+  "eum": "위",
+  "hun": "할 위",
+  "count": 1862,
+  "confidence": "high"
+ },
+ {
+  "char": "姓",
+  "eum": "성",
+  "hun": "성 성",
+  "count": 1808,
+  "confidence": "high"
+ },
+ {
+  "char": "己",
+  "eum": "기",
+  "hun": "몸 기",
+  "count": 1688,
+  "confidence": "high"
+ },
+ {
+  "char": "城",
+  "eum": "성",
+  "hun": "재 성",
+  "count": 1643,
+  "confidence": "high"
+ },
+ {
+  "char": "對",
+  "eum": "대",
+  "hun": "대할 대",
+  "count": 1508,
+  "confidence": "high"
+ },
+ {
+  "char": "罪",
+  "eum": "죄",
+  "hun": "허물 죄",
+  "count": 1459,
+  "confidence": "high"
+ },
+ {
+  "char": "命",
+  "eum": "명",
+  "hun": "목숨 명",
+  "count": 1433,
+  "confidence": "high"
+ },
+ {
+  "char": "萬",
+  "eum": "만",
+  "hun": "일만 만",
+  "count": 1350,
+  "confidence": "high"
+ },
+ {
+  "char": "十",
+  "eum": "십",
+  "hun": "열 십",
+  "count": 1344,
+  "confidence": "high"
+ },
+ {
+  "char": "一",
+  "eum": "일",
+  "hun": "한 일",
+  "count": 1329,
+  "confidence": "high"
+ },
+ {
+  "char": "物",
+  "eum": "물",
+  "hun": "물건 물",
+  "count": 1312,
+  "confidence": "high"
+ },
+ {
+  "char": "族",
+  "eum": "족",
+  "hun": "겨레 족",
+  "count": 1297,
+  "confidence": "high"
+ },
+ {
+  "char": "惡",
+  "eum": "악",
+  "hun": "악할 악",
+  "count": 1271,
+  "confidence": "high"
+ },
+ {
+  "char": "當",
+  "eum": "당",
+  "hun": "마땅 당",
+  "count": 1262,
+  "confidence": "high"
+ },
+ {
+  "char": "女",
+  "eum": "녀",
+  "hun": "계집 녀",
+  "count": 1255,
+  "confidence": "high"
+ },
+ {
+  "char": "居",
+  "eum": "거",
+  "hun": "살 거",
+  "count": 1146,
+  "confidence": "high"
+ },
+ {
+  "char": "弟",
+  "eum": "제",
+  "hun": "아우 제",
+  "count": 1034,
+  "confidence": "high"
+ },
+ {
+  "char": "生",
+  "eum": "생",
+  "hun": "날 생",
+  "count": 999,
+  "confidence": "high"
+ },
+ {
+  "char": "聖",
+  "eum": "성",
+  "hun": "성인 성",
+  "count": 969,
+  "confidence": "high"
+ },
+ {
+  "char": "司",
+  "eum": "사",
+  "hun": "맡을 사",
+  "count": 945,
+  "confidence": "high"
+ },
+ {
+  "char": "因",
+  "eum": "인",
+  "hun": "인할 인",
+  "count": 895,
+  "confidence": "high"
+ },
+ {
+  "char": "所",
+  "eum": "소",
+  "hun": "바 소",
+  "count": 878,
+  "confidence": "high"
+ },
+ {
+  "char": "後",
+  "eum": "후",
+  "hun": "뒤 후",
+  "count": 870,
+  "confidence": "high"
+ },
+ {
+  "char": "各",
+  "eum": "각",
+  "hun": "각각 각",
+  "count": 864,
+  "confidence": "high"
+ },
+ {
+  "char": "山",
+  "eum": "산",
+  "hun": "메 산",
+  "count": 853,
+  "confidence": "high"
+ },
+ {
+  "char": "便",
+  "eum": "편",
+  "hun": "편할 편",
+  "count": 847,
+  "confidence": "high"
+ },
+ {
+  "char": "身",
+  "eum": "신",
+  "hun": "몸 신",
+  "count": 829,
+  "confidence": "high"
+ },
+ {
+  "char": "兄",
+  "eum": "형",
+  "hun": "형 형",
+  "count": 822,
+  "confidence": "high"
+ },
+ {
+  "char": "義",
+  "eum": "의",
+  "hun": "옳을 의",
+  "count": 815,
+  "confidence": "high"
+ },
+ {
+  "char": "門",
+  "eum": "문",
+  "hun": "문 문",
+  "count": 794,
+  "confidence": "high"
+ },
+ {
+  "char": "羊",
+  "eum": "양",
+  "hun": "양 양",
+  "count": 790,
+  "confidence": "high"
+ },
+ {
+  "char": "軍",
+  "eum": "군",
+  "hun": "군사 군",
+  "count": 779,
+  "confidence": "high"
+ },
+ {
+  "char": "列",
+  "eum": "렬",
+  "hun": "벌일 렬",
+  "count": 777,
+  "confidence": "high"
+ },
+ {
+  "char": "日",
+  "eum": "일",
+  "hun": "날 일",
+  "count": 771,
+  "confidence": "high"
+ },
+ {
+  "char": "年",
+  "eum": "년",
+  "hun": "해 년",
+  "count": 767,
+  "confidence": "high"
+ },
+ {
+  "char": "方",
+  "eum": "방",
+  "hun": "모 방",
+  "count": 750,
+  "confidence": "high"
+ },
+ {
+  "char": "永",
+  "eum": "영",
+  "hun": "길 영",
+  "count": 723,
+  "confidence": "high"
+ },
+ {
+  "char": "殿",
+  "eum": "전",
+  "hun": "전각 전",
+  "count": 713,
+  "confidence": "high"
+ },
+ {
+  "char": "取",
+  "eum": "취",
+  "hun": "가질 취",
+  "count": 707,
+  "confidence": "high"
+ },
+ {
+  "char": "答",
+  "eum": "답",
+  "hun": "대답 답",
+  "count": 702,
+  "confidence": "high"
+ },
+ {
+  "char": "救",
+  "eum": "구",
+  "hun": "구원할 구",
+  "count": 700,
+  "confidence": "high"
+ },
+ {
+  "char": "知",
+  "eum": "지",
+  "hun": "알 지",
+  "count": 699,
+  "confidence": "high"
+ },
+ {
+  "char": "神",
+  "eum": "신",
+  "hun": "귀신 신",
+  "count": 698,
+  "confidence": "high"
+ },
+ {
+  "char": "屬",
+  "eum": "속",
+  "hun": "붙일 속",
+  "count": 692,
+  "confidence": "high"
+ },
+ {
+  "char": "滅",
+  "eum": "멸",
+  "hun": "멸할 멸",
+  "count": 691,
+  "confidence": "high"
+ },
+ {
+  "char": "上",
+  "eum": "상",
+  "hun": "위 상",
+  "count": 689,
+  "confidence": "high"
+ },
+ {
+  "char": "邑",
+  "eum": "읍",
+  "hun": "고을 읍",
+  "count": 688,
+  "confidence": "high"
+ },
+ {
+  "char": "亡",
+  "eum": "망",
+  "hun": "망할 망",
+  "count": 681,
+  "confidence": "high"
+ },
+ {
+  "char": "靈",
+  "eum": "령",
+  "hun": "신령 령",
+  "count": 673,
+  "confidence": "high"
+ },
+ {
+  "char": "記",
+  "eum": "기",
+  "hun": "기록할 기",
+  "count": 670,
+  "confidence": "high"
+ },
+ {
+  "char": "二",
+  "eum": "이",
+  "hun": "두 이",
+  "count": 648,
+  "confidence": "high"
+ },
+ {
+  "char": "會",
+  "eum": "회",
+  "hun": "모일 회",
+  "count": 647,
+  "confidence": "high"
+ },
+ {
+  "char": "能",
+  "eum": "능",
+  "hun": "능할 능",
+  "count": 644,
+  "confidence": "high"
+ },
+ {
+  "char": "地",
+  "eum": "지",
+  "hun": "땅 지",
+  "count": 634,
+  "confidence": "high"
+ },
+ {
+  "char": "前",
+  "eum": "전",
+  "hun": "앞 전",
+  "count": 634,
+  "confidence": "high"
+ },
+ {
+  "char": "福",
+  "eum": "복",
+  "hun": "복 복",
+  "count": 628,
+  "confidence": "high"
+ },
+ {
+  "char": "告",
+  "eum": "고",
+  "hun": "알릴 고",
+  "count": 625,
+  "confidence": "high"
+ },
+ {
+  "char": "言",
+  "eum": "언",
+  "hun": "말씀 언",
+  "count": 618,
+  "confidence": "high"
+ },
+ {
+  "char": "先",
+  "eum": "선",
+  "hun": "먼저 선",
+  "count": 608,
+  "confidence": "high"
+ },
+ {
+  "char": "平",
+  "eum": "평",
+  "hun": "평평할 평",
+  "count": 601,
+  "confidence": "high"
+ },
+ {
+  "char": "法",
+  "eum": "법",
+  "hun": "법 법",
+  "count": 593,
+  "confidence": "high"
+ },
+ {
+  "char": "使",
+  "eum": "사",
+  "hun": "하여금 사",
+  "count": 590,
+  "confidence": "high"
+ },
+ {
+  "char": "四",
+  "eum": "사",
+  "hun": "넉 사",
+  "count": 585,
+  "confidence": "high"
+ },
+ {
+  "char": "三",
+  "eum": "삼",
+  "hun": "석 삼",
+  "count": 577,
+  "confidence": "high"
+ },
+ {
+  "char": "怒",
+  "eum": "노",
+  "hun": "성낼 노",
+  "count": 574,
+  "confidence": "high"
+ },
+ {
+  "char": "民",
+  "eum": "민",
+  "hun": "백성 민",
+  "count": 573,
+  "confidence": "high"
+ },
+ {
+  "char": "安",
+  "eum": "안",
+  "hun": "편안 안",
+  "count": 571,
+  "confidence": "high"
+ },
+ {
+  "char": "援",
+  "eum": "원",
+  "hun": "도울 원",
+  "count": 561,
+  "confidence": "high"
+ },
+ {
+  "char": "榮",
+  "eum": "영",
+  "hun": "영화 영",
+  "count": 551,
+  "confidence": "high"
+ },
+ {
+  "char": "求",
+  "eum": "구",
+  "hun": "구할 구",
+  "count": 548,
+  "confidence": "high"
+ },
+ {
+  "char": "事",
+  "eum": "사",
+  "hun": "일 사",
+  "count": 542,
+  "confidence": "high"
+ },
+ {
+  "char": "世",
+  "eum": "세",
+  "hun": "인간 세",
+  "count": 541,
+  "confidence": "high"
+ },
+ {
+  "char": "食",
+  "eum": "식",
+  "hun": "밥 식",
+  "count": 530,
+  "confidence": "high"
+ },
+ {
+  "char": "光",
+  "eum": "광",
+  "hun": "빛 광",
+  "count": 526,
+  "confidence": "high"
+ },
+ {
+  "char": "大",
+  "eum": "대",
+  "hun": "큰 대",
+  "count": 523,
+  "confidence": "high"
+ },
+ {
+  "char": "幕",
+  "eum": "막",
+  "hun": "장막 막",
+  "count": 521,
+  "confidence": "high"
+ },
+ {
+  "char": "實",
+  "eum": "실",
+  "hun": "열매 실",
+  "count": 517,
+  "confidence": "high"
+ },
+ {
+  "char": "祖",
+  "eum": "조",
+  "hun": "할아비 조",
+  "count": 508,
+  "confidence": "high"
+ },
+ {
+  "char": "金",
+  "eum": "금",
+  "hun": "쇠 금",
+  "count": 504,
+  "confidence": "high"
+ },
+ {
+  "char": "願",
+  "eum": "원",
+  "hun": "원할 원",
+  "count": 503,
+  "confidence": "high"
+ },
+ {
+  "char": "贖",
+  "eum": "속",
+  "hun": "속바칠 속",
+  "count": 500,
+  "confidence": "high"
+ },
+ {
+  "char": "代",
+  "eum": "대",
+  "hun": "대신할 대",
+  "count": 499,
+  "confidence": "high"
+ },
+ {
+  "char": "支",
+  "eum": "지",
+  "hun": "지탱할 지",
+  "count": 489,
+  "confidence": "high"
+ },
+ {
+  "char": "禮",
+  "eum": "례",
+  "hun": "예도 례",
+  "count": 488,
+  "confidence": "high"
+ },
+ {
+  "char": "不",
+  "eum": "불",
+  "hun": "아닐 불",
+  "count": 486,
+  "confidence": "high"
+ },
+ {
+  "char": "邦",
+  "eum": "방",
+  "hun": "나라 방",
+  "count": 480,
+  "confidence": "high"
+ },
+ {
+  "char": "臨",
+  "eum": "림",
+  "hun": "임할 림",
+  "count": 473,
+  "confidence": "high"
+ },
+ {
+  "char": "異",
+  "eum": "이",
+  "hun": "다를 이",
+  "count": 465,
+  "confidence": "high"
+ },
+ {
+  "char": "慧",
+  "eum": "혜",
+  "hun": "슬기로울 혜",
+  "count": 457,
+  "confidence": "high"
+ },
+ {
+  "char": "判",
+  "eum": "판",
+  "hun": "판단할 판",
+  "count": 455,
+  "confidence": "high"
+ },
+ {
+  "char": "約",
+  "eum": "약",
+  "hun": "맺을 약",
+  "count": 449,
+  "confidence": "high"
+ },
+ {
+  "char": "葡",
+  "eum": "포",
+  "hun": "포도 포",
+  "count": 449,
+  "confidence": "high"
+ },
+ {
+  "char": "萄",
+  "eum": "도",
+  "hun": "포도 도",
+  "count": 449,
+  "confidence": "high"
+ },
+ {
+  "char": "智",
+  "eum": "지",
+  "hun": "지혜 지",
+  "count": 447,
+  "confidence": "high"
+ },
+ {
+  "char": "證",
+  "eum": "증",
+  "hun": "증거 증",
+  "count": 447,
+  "confidence": "high"
+ },
+ {
+  "char": "像",
+  "eum": "상",
+  "hun": "형상 상",
+  "count": 443,
+  "confidence": "high"
+ },
+ {
+  "char": "親",
+  "eum": "친",
+  "hun": "친할 친",
+  "count": 441,
+  "confidence": "high"
+ },
+ {
+  "char": "壇",
+  "eum": "단",
+  "hun": "제단 단",
+  "count": 439,
+  "confidence": "high"
+ },
+ {
+  "char": "律",
+  "eum": "률",
+  "hun": "법칙 률",
+  "count": 438,
+  "confidence": "high"
+ },
+ {
+  "char": "息",
+  "eum": "식",
+  "hun": "쉴 식",
+  "count": 436,
+  "confidence": "high"
+ },
+ {
+  "char": "七",
+  "eum": "칠",
+  "hun": "일곱 칠",
+  "count": 433,
+  "confidence": "high"
+ },
+ {
+  "char": "業",
+  "eum": "업",
+  "hun": "업 업",
+  "count": 433,
+  "confidence": "high"
+ },
+ {
+  "char": "誓",
+  "eum": "서",
+  "hun": "맹세할 서",
+  "count": 429,
+  "confidence": "high"
+ },
+ {
+  "char": "全",
+  "eum": "전",
+  "hun": "온전 전",
+  "count": 428,
+  "confidence": "high"
+ },
+ {
+  "char": "千",
+  "eum": "천",
+  "hun": "일천 천",
+  "count": 421,
+  "confidence": "high"
+ },
+ {
+  "char": "向",
+  "eum": "향",
+  "hun": "향할 향",
+  "count": 420,
+  "confidence": "high"
+ },
+ {
+  "char": "五",
+  "eum": "오",
+  "hun": "다섯 오",
+  "count": 415,
+  "confidence": "high"
+ },
+ {
+  "char": "男",
+  "eum": "남",
+  "hun": "사내 남",
+  "count": 411,
+  "confidence": "high"
+ },
+ {
+  "char": "名",
+  "eum": "명",
+  "hun": "이름 명",
+  "count": 411,
+  "confidence": "high"
+ },
+ {
+  "char": "香",
+  "eum": "향",
+  "hun": "향기 향",
+  "count": 408,
+  "confidence": "high"
+ },
+ {
+  "char": "處",
+  "eum": "처",
+  "hun": "곳 처",
+  "count": 405,
+  "confidence": "high"
+ },
+ {
+  "char": "敵",
+  "eum": "적",
+  "hun": "대적할 적",
+  "count": 401,
+  "confidence": "high"
+ },
+ {
+  "char": "敬",
+  "eum": "경",
+  "hun": "공경 경",
+  "count": 401,
+  "confidence": "high"
+ },
+ {
+  "char": "國",
+  "eum": "국",
+  "hun": "나라 국",
+  "count": 399,
+  "confidence": "high"
+ },
+ {
+  "char": "數",
+  "eum": "수",
+  "hun": "셈 수",
+  "count": 399,
+  "confidence": "high"
+ },
+ {
+  "char": "苦",
+  "eum": "고",
+  "hun": "쓸 고",
+  "count": 395,
+  "confidence": "high"
+ },
+ {
+  "char": "遠",
+  "eum": "원",
+  "hun": "멀 원",
+  "count": 394,
+  "confidence": "high"
+ },
+ {
+  "char": "官",
+  "eum": "관",
+  "hun": "벼슬 관",
+  "count": 394,
+  "confidence": "high"
+ },
+ {
+  "char": "無",
+  "eum": "무",
+  "hun": "없을 무",
+  "count": 385,
+  "confidence": "high"
+ },
+ {
+  "char": "定",
+  "eum": "정",
+  "hun": "정할 정",
+  "count": 383,
+  "confidence": "high"
+ },
+ {
+  "char": "犯",
+  "eum": "범",
+  "hun": "범할 범",
+  "count": 376,
+  "confidence": "high"
+ },
+ {
+  "char": "眞",
+  "eum": "진",
+  "hun": "참 진",
+  "count": 372,
+  "confidence": "high"
+ },
+ {
+  "char": "讚",
+  "eum": "찬",
+  "hun": "기릴 찬",
+  "count": 371,
+  "confidence": "high"
+ },
+ {
+  "char": "恩",
+  "eum": "은",
+  "hun": "은혜 은",
+  "count": 370,
+  "confidence": "high"
+ },
+ {
+  "char": "心",
+  "eum": "심",
+  "hun": "마음 심",
+  "count": 370,
+  "confidence": "high"
+ },
+ {
+  "char": "派",
+  "eum": "파",
+  "hun": "갈래 파",
+  "count": 370,
+  "confidence": "high"
+ },
+ {
+  "char": "甚",
+  "eum": "심",
+  "hun": "심할 심",
+  "count": 363,
+  "confidence": "high"
+ },
+ {
+  "char": "基",
+  "eum": "기",
+  "hun": "터 기",
+  "count": 363,
+  "confidence": "high"
+ },
+ {
+  "char": "善",
+  "eum": "선",
+  "hun": "착할 선",
+  "count": 361,
+  "confidence": "high"
+ },
+ {
+  "char": "體",
+  "eum": "체",
+  "hun": "몸 체",
+  "count": 357,
+  "confidence": "high"
+ },
+ {
+  "char": "豫",
+  "eum": "예",
+  "hun": "미리 예",
+  "count": 354,
+  "confidence": "high"
+ },
+ {
+  "char": "外",
+  "eum": "외",
+  "hun": "바깥 외",
+  "count": 353,
+  "confidence": "high"
+ },
+ {
+  "char": "導",
+  "eum": "도",
+  "hun": "인도할 도",
+  "count": 353,
+  "confidence": "high"
+ },
+ {
+  "char": "盟",
+  "eum": "맹",
+  "hun": "맹세 맹",
+  "count": 351,
+  "confidence": "high"
+ },
+ {
+  "char": "從",
+  "eum": "종",
+  "hun": "좇을 종",
+  "count": 351,
+  "confidence": "high"
+ },
+ {
+  "char": "天",
+  "eum": "천",
+  "hun": "하늘 천",
+  "count": 349,
+  "confidence": "high"
+ },
+ {
+  "char": "淨",
+  "eum": "정",
+  "hun": "깨끗할 정",
+  "count": 349,
+  "confidence": "high"
+ },
+ {
+  "char": "士",
+  "eum": "사",
+  "hun": "선비 사",
+  "count": 346,
+  "confidence": "high"
+ },
+ {
+  "char": "難",
+  "eum": "난",
+  "hun": "어려울 난",
+  "count": 344,
+  "confidence": "high"
+ },
+ {
+  "char": "引",
+  "eum": "인",
+  "hun": "끌 인",
+  "count": 340,
+  "confidence": "high"
+ },
+ {
+  "char": "隊",
+  "eum": "대",
+  "hun": "무리 대",
+  "count": 340,
+  "confidence": "high"
+ },
+ {
+  "char": "銀",
+  "eum": "은",
+  "hun": "은 은",
+  "count": 338,
+  "confidence": "high"
+ },
+ {
+  "char": "分",
+  "eum": "분",
+  "hun": "나눌 분",
+  "count": 337,
+  "confidence": "high"
+ },
+ {
+  "char": "强",
+  "eum": "강",
+  "hun": "강할 강",
+  "count": 334,
+  "confidence": "high"
+ },
+ {
+  "char": "例",
+  "eum": "례",
+  "hun": "법식 례",
+  "count": 328,
+  "confidence": "high"
+ },
+ {
+  "char": "帳",
+  "eum": "장",
+  "hun": "장막 장",
+  "count": 326,
+  "confidence": "high"
+ },
+ {
+  "char": "據",
+  "eum": "거",
+  "hun": "근거 거",
+  "count": 325,
+  "confidence": "high"
+ },
+ {
+  "char": "錄",
+  "eum": "록",
+  "hun": "기록할 록",
+  "count": 322,
+  "confidence": "high"
+ },
+ {
+  "char": "權",
+  "eum": "권",
+  "hun": "권세 권",
+  "count": 314,
+  "confidence": "high"
+ },
+ {
+  "char": "或",
+  "eum": "혹",
+  "hun": "혹 혹",
+  "count": 305,
+  "confidence": "high"
+ },
+ {
+  "char": "望",
+  "eum": "망",
+  "hun": "바랄 망",
+  "count": 302,
+  "confidence": "high"
+ },
+ {
+  "char": "兵",
+  "eum": "병",
+  "hun": "병사 병",
+  "count": 300,
+  "confidence": "high"
+ },
+ {
+  "char": "下",
+  "eum": "하",
+  "hun": "아래 하",
+  "count": 297,
+  "confidence": "high"
+ },
+ {
+  "char": "惠",
+  "eum": "혜",
+  "hun": "은혜 혜",
+  "count": 296,
+  "confidence": "high"
+ },
+ {
+  "char": "傳",
+  "eum": "전",
+  "hun": "전할 전",
+  "count": 296,
+  "confidence": "high"
+ },
+ {
+  "char": "燔",
+  "eum": "번",
+  "hun": "구울 번",
+  "count": 295,
+  "confidence": "high"
+ },
+ {
+  "char": "禱",
+  "eum": "도",
+  "hun": "빌 도",
+  "count": 295,
+  "confidence": "high"
+ },
+ {
+  "char": "家",
+  "eum": "가",
+  "hun": "집 가",
+  "count": 291,
+  "confidence": "high"
+ },
+ {
+  "char": "祈",
+  "eum": "기",
+  "hun": "빌 기",
+  "count": 291,
+  "confidence": "high"
+ },
+ {
+  "char": "怨",
+  "eum": "원",
+  "hun": "원망할 원",
+  "count": 290,
+  "confidence": "high"
+ },
+ {
+  "char": "陣",
+  "eum": "진",
+  "hun": "진칠 진",
+  "count": 289,
+  "confidence": "high"
+ },
+ {
+  "char": "震",
+  "eum": "진",
+  "hun": "우레 진",
+  "count": 285,
+  "confidence": "high"
+ },
+ {
+  "char": "六",
+  "eum": "륙",
+  "hun": "여섯 륙",
+  "count": 279,
+  "confidence": "high"
+ },
+ {
+  "char": "讐",
+  "eum": "수",
+  "hun": "원수 수",
+  "count": 273,
+  "confidence": "high"
+ },
+ {
+  "char": "建",
+  "eum": "건",
+  "hun": "세울 건",
+  "count": 273,
+  "confidence": "high"
+ },
+ {
+  "char": "野",
+  "eum": "야",
+  "hun": "들 야",
+  "count": 273,
+  "confidence": "high"
+ },
+ {
+  "char": "有",
+  "eum": "유",
+  "hun": "있을 유",
+  "count": 272,
+  "confidence": "high"
+ },
+ {
+  "char": "逃",
+  "eum": "도",
+  "hun": "도망할 도",
+  "count": 272,
+  "confidence": "high"
+ },
+ {
+  "char": "頌",
+  "eum": "송",
+  "hun": "기릴 송",
+  "count": 271,
+  "confidence": "high"
+ },
+ {
+  "char": "病",
+  "eum": "병",
+  "hun": "병 병",
+  "count": 270,
+  "confidence": "high"
+ },
+ {
+  "char": "曠",
+  "eum": "광",
+  "hun": "빌 광",
+  "count": 267,
+  "confidence": "high"
+ },
+ {
+  "char": "備",
+  "eum": "비",
+  "hun": "갖출 비",
+  "count": 267,
+  "confidence": "high"
+ },
+ {
+  "char": "理",
+  "eum": "리",
+  "hun": "다스릴 리",
+  "count": 266,
+  "confidence": "high"
+ },
+ {
+  "char": "請",
+  "eum": "청",
+  "hun": "청할 청",
+  "count": 266,
+  "confidence": "high"
+ },
+ {
+  "char": "發",
+  "eum": "발",
+  "hun": "필 발",
+  "count": 264,
+  "confidence": "high"
+ },
+ {
+  "char": "築",
+  "eum": "축",
+  "hun": "쌓을 축",
+  "count": 255,
+  "confidence": "high"
+ },
+ {
+  "char": "擇",
+  "eum": "택",
+  "hun": "가릴 택",
+  "count": 255,
+  "confidence": "high"
+ },
+ {
+  "char": "淫",
+  "eum": "음",
+  "hun": "음란할 음",
+  "count": 254,
+  "confidence": "high"
+ },
+ {
+  "char": "常",
+  "eum": "상",
+  "hun": "항상 상",
+  "count": 252,
+  "confidence": "high"
+ },
+ {
+  "char": "父",
+  "eum": "부",
+  "hun": "아비 부",
+  "count": 252,
+  "confidence": "high"
+ },
+ {
+  "char": "伯",
+  "eum": "백",
+  "hun": "맏 백",
+  "count": 250,
+  "confidence": "high"
+ },
+ {
+  "char": "力",
+  "eum": "력",
+  "hun": "힘 력",
+  "count": 247,
+  "confidence": "high"
+ },
+ {
+  "char": "臣",
+  "eum": "신",
+  "hun": "신하 신",
+  "count": 246,
+  "confidence": "high"
+ },
+ {
+  "char": "産",
+  "eum": "산",
+  "hun": "낳을 산",
+  "count": 243,
+  "confidence": "high"
+ },
+ {
+  "char": "公",
+  "eum": "공",
+  "hun": "공평할 공",
+  "count": 240,
+  "confidence": "high"
+ },
+ {
+  "char": "老",
+  "eum": "로",
+  "hun": "늙을 로",
+  "count": 237,
+  "confidence": "high"
+ },
+ {
+  "char": "面",
+  "eum": "면",
+  "hun": "낯 면",
+  "count": 235,
+  "confidence": "high"
+ },
+ {
+  "char": "災",
+  "eum": "재",
+  "hun": "재앙 재",
+  "count": 235,
+  "confidence": "high"
+ },
+ {
+  "char": "服",
+  "eum": "복",
+  "hun": "옷 복",
+  "count": 234,
+  "confidence": "high"
+ },
+ {
+  "char": "石",
+  "eum": "석",
+  "hun": "돌 석",
+  "count": 233,
+  "confidence": "high"
+ },
+ {
+  "char": "明",
+  "eum": "명",
+  "hun": "밝을 명",
+  "count": 232,
+  "confidence": "high"
+ },
+ {
+  "char": "同",
+  "eum": "동",
+  "hun": "한가지 동",
+  "count": 232,
+  "confidence": "high"
+ },
+ {
+  "char": "敎",
+  "eum": "교",
+  "hun": "가르칠 교",
+  "count": 231,
+  "confidence": "high"
+ },
+ {
+  "char": "寶",
+  "eum": "보",
+  "hun": "보배 보",
+  "count": 230,
+  "confidence": "high"
+ },
+ {
+  "char": "氣",
+  "eum": "기",
+  "hun": "기운 기",
+  "count": 225,
+  "confidence": "high"
+ },
+ {
+  "char": "色",
+  "eum": "색",
+  "hun": "빛 색",
+  "count": 225,
+  "confidence": "high"
+ },
+ {
+  "char": "肉",
+  "eum": "육",
+  "hun": "고기 육",
+  "count": 225,
+  "confidence": "high"
+ },
+ {
+  "char": "宮",
+  "eum": "궁",
+  "hun": "집 궁",
+  "count": 225,
+  "confidence": "high"
+ },
+ {
+  "char": "目",
+  "eum": "목",
+  "hun": "눈 목",
+  "count": 225,
+  "confidence": "high"
+ },
+ {
+  "char": "貴",
+  "eum": "귀",
+  "hun": "귀할 귀",
+  "count": 225,
+  "confidence": "high"
+ },
+ {
+  "char": "避",
+  "eum": "피",
+  "hun": "피할 피",
+  "count": 224,
+  "confidence": "high"
+ },
+ {
+  "char": "酒",
+  "eum": "주",
+  "hun": "술 주",
+  "count": 224,
+  "confidence": "high"
+ },
+ {
+  "char": "動",
+  "eum": "동",
+  "hun": "움직일 동",
+  "count": 222,
+  "confidence": "high"
+ },
+ {
+  "char": "依",
+  "eum": "의",
+  "hun": "의지할 의",
+  "count": 222,
+  "confidence": "high"
+ },
+ {
+  "char": "音",
+  "eum": "음",
+  "hun": "소리 음",
+  "count": 221,
+  "confidence": "high"
+ },
+ {
+  "char": "計",
+  "eum": "계",
+  "hun": "셀 계",
+  "count": 221,
+  "confidence": "high"
+ },
+ {
+  "char": "荒",
+  "eum": "황",
+  "hun": "거칠 황",
+  "count": 221,
+  "confidence": "high"
+ },
+ {
+  "char": "櫃",
+  "eum": "궤",
+  "hun": "궤 궤",
+  "count": 220,
+  "confidence": "high"
+ },
+ {
+  "char": "殃",
+  "eum": "앙",
+  "hun": "재앙 앙",
+  "count": 215,
+  "confidence": "high"
+ },
+ {
+  "char": "足",
+  "eum": "족",
+  "hun": "발 족",
+  "count": 213,
+  "confidence": "high"
+ },
+ {
+  "char": "正",
+  "eum": "정",
+  "hun": "바를 정",
+  "count": 213,
+  "confidence": "high"
+ },
+ {
+  "char": "慈",
+  "eum": "자",
+  "hun": "사랑 자",
+  "count": 213,
+  "confidence": "high"
+ },
+ {
+  "char": "母",
+  "eum": "모",
+  "hun": "어미 모",
+  "count": 213,
+  "confidence": "high"
+ },
+ {
+  "char": "令",
+  "eum": "령",
+  "hun": "하여금 령",
+  "count": 213,
+  "confidence": "high"
+ },
+ {
+  "char": "感",
+  "eum": "감",
+  "hun": "느낄 감",
+  "count": 213,
+  "confidence": "high"
+ },
+ {
+  "char": "偶",
+  "eum": "우",
+  "hun": "짝 우",
+  "count": 213,
+  "confidence": "high"
+ },
+ {
+  "char": "境",
+  "eum": "경",
+  "hun": "지경 경",
+  "count": 212,
+  "confidence": "high"
+ },
+ {
+  "char": "魂",
+  "eum": "혼",
+  "hun": "넋 혼",
+  "count": 212,
+  "confidence": "high"
+ },
+ {
+  "char": "規",
+  "eum": "규",
+  "hun": "법 규",
+  "count": 212,
+  "confidence": "high"
+ },
+ {
+  "char": "果",
+  "eum": "과",
+  "hun": "실과 과",
+  "count": 211,
+  "confidence": "high"
+ },
+ {
+  "char": "器",
+  "eum": "기",
+  "hun": "그릇 기",
+  "count": 208,
+  "confidence": "high"
+ },
+ {
+  "char": "尺",
+  "eum": "척",
+  "hun": "자 척",
+  "count": 208,
+  "confidence": "high"
+ },
+ {
+  "char": "恒",
+  "eum": "항",
+  "hun": "항상 항",
+  "count": 207,
+  "confidence": "high"
+ },
+ {
+  "char": "徒",
+  "eum": "도",
+  "hun": "무리 도",
+  "count": 207,
+  "confidence": "high"
+ },
+ {
+  "char": "呪",
+  "eum": "주",
+  "hun": "빌 주",
+  "count": 205,
+  "confidence": "high"
+ },
+ {
+  "char": "詛",
+  "eum": "저",
+  "hun": "저주할 저",
+  "count": 204,
+  "confidence": "high"
+ },
+ {
+  "char": "謝",
+  "eum": "사",
+  "hun": "사례할 사",
+  "count": 204,
+  "confidence": "high"
+ },
+ {
+  "char": "衆",
+  "eum": "중",
+  "hun": "무리 중",
+  "count": 201,
+  "confidence": "high"
+ },
+ {
+  "char": "其",
+  "eum": "기",
+  "hun": "그 기",
+  "count": 199,
+  "confidence": "high"
+ },
+ {
+  "char": "月",
+  "eum": "월",
+  "hun": "달 월",
+  "count": 199,
+  "confidence": "high"
+ },
+ {
+  "char": "應",
+  "eum": "응",
+  "hun": "응할 응",
+  "count": 198,
+  "confidence": "high"
+ },
+ {
+  "char": "患",
+  "eum": "환",
+  "hun": "근심 환",
+  "count": 198,
+  "confidence": "high"
+ },
+ {
+  "char": "勢",
+  "eum": "세",
+  "hun": "형세 세",
+  "count": 198,
+  "confidence": "high"
+ },
+ {
+  "char": "憶",
+  "eum": "억",
+  "hun": "생각할 억",
+  "count": 197,
+  "confidence": "high"
+ },
+ {
+  "char": "故",
+  "eum": "고",
+  "hun": "연고 고",
+  "count": 196,
+  "confidence": "high"
+ },
+ {
+  "char": "重",
+  "eum": "중",
+  "hun": "무거울 중",
+  "count": 196,
+  "confidence": "high"
+ },
+ {
+  "char": "矜",
+  "eum": "긍",
+  "hun": "불쌍히여길 긍",
+  "count": 196,
+  "confidence": "high"
+ },
+ {
+  "char": "合",
+  "eum": "합",
+  "hun": "합할 합",
+  "count": 195,
+  "confidence": "high"
+ },
+ {
+  "char": "第",
+  "eum": "제",
+  "hun": "차례 제",
+  "count": 195,
+  "confidence": "high"
+ },
+ {
+  "char": "和",
+  "eum": "화",
+  "hun": "화할 화",
+  "count": 195,
+  "confidence": "high"
+ },
+ {
+  "char": "固",
+  "eum": "고",
+  "hun": "굳을 고",
+  "count": 194,
+  "confidence": "high"
+ },
+ {
+  "char": "堅",
+  "eum": "견",
+  "hun": "굳을 견",
+  "count": 193,
+  "confidence": "high"
+ },
+ {
+  "char": "直",
+  "eum": "직",
+  "hun": "곧을 직",
+  "count": 193,
+  "confidence": "high"
+ },
+ {
+  "char": "潛",
+  "eum": "잠",
+  "hun": "잠길 잠",
+  "count": 192,
+  "confidence": "high"
+ },
+ {
+  "char": "以",
+  "eum": "이",
+  "hun": "써 이",
+  "count": 191,
+  "confidence": "high"
+ },
+ {
+  "char": "斷",
+  "eum": "단",
+  "hun": "끊을 단",
+  "count": 191,
+  "confidence": "high"
+ },
+ {
+  "char": "節",
+  "eum": "절",
+  "hun": "마디 절",
+  "count": 191,
+  "confidence": "high"
+ },
+ {
+  "char": "歲",
+  "eum": "세",
+  "hun": "해 세",
+  "count": 190,
+  "confidence": "high"
+ },
+ {
+  "char": "逆",
+  "eum": "역",
+  "hun": "거스릴 역",
+  "count": 190,
+  "confidence": "high"
+ },
+ {
+  "char": "潔",
+  "eum": "결",
+  "hun": "깨끗할 결",
+  "count": 188,
+  "confidence": "high"
+ },
+ {
+  "char": "東",
+  "eum": "동",
+  "hun": "동녘 동",
+  "count": 185,
+  "confidence": "high"
+ },
+ {
+  "char": "辱",
+  "eum": "욕",
+  "hun": "욕될 욕",
+  "count": 185,
+  "confidence": "high"
+ },
+ {
+  "char": "恤",
+  "eum": "휼",
+  "hun": "불쌍할 휼",
+  "count": 185,
+  "confidence": "high"
+ },
+ {
+  "char": "時",
+  "eum": "시",
+  "hun": "때 시",
+  "count": 183,
+  "confidence": "high"
+ },
+ {
+  "char": "別",
+  "eum": "별",
+  "hun": "나눌 별",
+  "count": 183,
+  "confidence": "high"
+ },
+ {
+  "char": "審",
+  "eum": "심",
+  "hun": "살필 심",
+  "count": 180,
+  "confidence": "high"
+ },
+ {
+  "char": "仁",
+  "eum": "인",
+  "hun": "어질 인",
+  "count": 180,
+  "confidence": "high"
+ },
+ {
+  "char": "書",
+  "eum": "서",
+  "hun": "글 서",
+  "count": 180,
+  "confidence": "high"
+ },
+ {
+  "char": "界",
+  "eum": "계",
+  "hun": "지경 계",
+  "count": 179,
+  "confidence": "high"
+ },
+ {
+  "char": "慢",
+  "eum": "만",
+  "hun": "거만할 만",
+  "count": 179,
+  "confidence": "high"
+ },
+ {
+  "char": "木",
+  "eum": "목",
+  "hun": "나무 목",
+  "count": 176,
+  "confidence": "high"
+ },
+ {
+  "char": "接",
+  "eum": "접",
+  "hun": "이을 접",
+  "count": 176,
+  "confidence": "high"
+ },
+ {
+  "char": "可",
+  "eum": "가",
+  "hun": "옳을 가",
+  "count": 176,
+  "confidence": "high"
+ },
+ {
+  "char": "畏",
+  "eum": "외",
+  "hun": "두려울 외",
+  "count": 176,
+  "confidence": "high"
+ },
+ {
+  "char": "論",
+  "eum": "론",
+  "hun": "논할 론",
+  "count": 175,
+  "confidence": "high"
+ },
+ {
+  "char": "痛",
+  "eum": "통",
+  "hun": "아플 통",
+  "count": 175,
+  "confidence": "high"
+ },
+ {
+  "char": "勇",
+  "eum": "용",
+  "hun": "날랠 용",
+  "count": 173,
+  "confidence": "high"
+ },
+ {
+  "char": "通",
+  "eum": "통",
+  "hun": "통할 통",
+  "count": 173,
+  "confidence": "high"
+ },
+ {
+  "char": "至",
+  "eum": "지",
+  "hun": "이를 지",
+  "count": 173,
+  "confidence": "high"
+ },
+ {
+  "char": "懇",
+  "eum": "간",
+  "hun": "간절할 간",
+  "count": 169,
+  "confidence": "high"
+ },
+ {
+  "char": "江",
+  "eum": "강",
+  "hun": "강 강",
+  "count": 168,
+  "confidence": "high"
+ },
+ {
+  "char": "殺",
+  "eum": "살",
+  "hun": "죽일 살",
+  "count": 168,
+  "confidence": "high"
+ },
+ {
+  "char": "右",
+  "eum": "우",
+  "hun": "오른 우",
+  "count": 167,
+  "confidence": "high"
+ },
+ {
+  "char": "堂",
+  "eum": "당",
+  "hun": "집 당",
+  "count": 167,
+  "confidence": "high"
+ },
+ {
+  "char": "盛",
+  "eum": "성",
+  "hun": "성할 성",
+  "count": 164,
+  "confidence": "high"
+ },
+ {
+  "char": "布",
+  "eum": "포",
+  "hun": "베 포",
+  "count": 163,
+  "confidence": "high"
+ },
+ {
+  "char": "廣",
+  "eum": "광",
+  "hun": "넓을 광",
+  "count": 162,
+  "confidence": "high"
+ },
+ {
+  "char": "祝",
+  "eum": "축",
+  "hun": "빌 축",
+  "count": 162,
+  "confidence": "high"
+ },
+ {
+  "char": "憎",
+  "eum": "증",
+  "hun": "미울 증",
+  "count": 162,
+  "confidence": "high"
+ },
+ {
+  "char": "婦",
+  "eum": "부",
+  "hun": "며느리 부",
+  "count": 161,
+  "confidence": "high"
+ },
+ {
+  "char": "葬",
+  "eum": "장",
+  "hun": "장사지낼 장",
+  "count": 161,
+  "confidence": "high"
+ },
+ {
+  "char": "困",
+  "eum": "곤",
+  "hun": "곤할 곤",
+  "count": 160,
+  "confidence": "high"
+ },
+ {
+  "char": "拜",
+  "eum": "배",
+  "hun": "절 배",
+  "count": 159,
+  "confidence": "high"
+ },
+ {
+  "char": "爭",
+  "eum": "쟁",
+  "hun": "다툴 쟁",
+  "count": 159,
+  "confidence": "high"
+ },
+ {
+  "char": "土",
+  "eum": "토",
+  "hun": "흙 토",
+  "count": 158,
+  "confidence": "high"
+ },
+ {
+  "char": "八",
+  "eum": "팔",
+  "hun": "여덟 팔",
+  "count": 158,
+  "confidence": "high"
+ },
+ {
+  "char": "保",
+  "eum": "보",
+  "hun": "지킬 보",
+  "count": 157,
+  "confidence": "high"
+ },
+ {
+  "char": "本",
+  "eum": "본",
+  "hun": "근본 본",
+  "count": 157,
+  "confidence": "high"
+ },
+ {
+  "char": "鬼",
+  "eum": "귀",
+  "hun": "귀신 귀",
+  "count": 157,
+  "confidence": "high"
+ },
+ {
+  "char": "死",
+  "eum": "사",
+  "hun": "죽을 사",
+  "count": 156,
+  "confidence": "high"
+ },
+ {
+  "char": "問",
+  "eum": "문",
+  "hun": "물을 문",
+  "count": 156,
+  "confidence": "high"
+ },
+ {
+  "char": "車",
+  "eum": "차",
+  "hun": "수레 차",
+  "count": 155,
+  "confidence": "high"
+ },
+ {
+  "char": "間",
+  "eum": "간",
+  "hun": "사이 간",
+  "count": 154,
+  "confidence": "high"
+ },
+ {
+  "char": "尊",
+  "eum": "존",
+  "hun": "높을 존",
+  "count": 154,
+  "confidence": "high"
+ },
+ {
+  "char": "夫",
+  "eum": "부",
+  "hun": "지아비 부",
+  "count": 153,
+  "confidence": "high"
+ },
+ {
+  "char": "牲",
+  "eum": "생",
+  "hun": "희생 생",
+  "count": 152,
+  "confidence": "high"
+ },
+ {
+  "char": "祀",
+  "eum": "사",
+  "hun": "제사 사",
+  "count": 152,
+  "confidence": "high"
+ },
+ {
+  "char": "來",
+  "eum": "래",
+  "hun": "올 래",
+  "count": 150,
+  "confidence": "high"
+ },
+ {
+  "char": "床",
+  "eum": "상",
+  "hun": "평상 상",
+  "count": 150,
+  "confidence": "high"
+ },
+ {
+  "char": "北",
+  "eum": "북",
+  "hun": "북녘 북",
+  "count": 149,
+  "confidence": "high"
+ },
+ {
+  "char": "禁",
+  "eum": "금",
+  "hun": "금할 금",
+  "count": 148,
+  "confidence": "high"
+ },
+ {
+  "char": "南",
+  "eum": "남",
+  "hun": "남녘 남",
+  "count": 148,
+  "confidence": "high"
+ },
+ {
+  "char": "財",
+  "eum": "재",
+  "hun": "재물 재",
+  "count": 147,
+  "confidence": "high"
+ },
+ {
+  "char": "穩",
+  "eum": "온",
+  "hun": "편안할 온",
+  "count": 147,
+  "confidence": "high"
+ },
+ {
+  "char": "獅",
+  "eum": "사",
+  "hun": "사자 사",
+  "count": 147,
+  "confidence": "high"
+ },
+ {
+  "char": "作",
+  "eum": "작",
+  "hun": "지을 작",
+  "count": 146,
+  "confidence": "high"
+ },
+ {
+  "char": "破",
+  "eum": "파",
+  "hun": "깨뜨릴 파",
+  "count": 146,
+  "confidence": "high"
+ },
+ {
+  "char": "穀",
+  "eum": "곡",
+  "hun": "곡식 곡",
+  "count": 146,
+  "confidence": "high"
+ },
+ {
+  "char": "少",
+  "eum": "소",
+  "hun": "적을 소",
+  "count": 145,
+  "confidence": "high"
+ },
+ {
+  "char": "稱",
+  "eum": "칭",
+  "hun": "일컬을 칭",
+  "count": 144,
+  "confidence": "high"
+ },
+ {
+  "char": "蹟",
+  "eum": "적",
+  "hun": "자취 적",
+  "count": 144,
+  "confidence": "high"
+ },
+ {
+  "char": "識",
+  "eum": "식",
+  "hun": "알 식",
+  "count": 144,
+  "confidence": "high"
+ },
+ {
+  "char": "戒",
+  "eum": "계",
+  "hun": "경계할 계",
+  "count": 143,
+  "confidence": "high"
+ },
+ {
+  "char": "手",
+  "eum": "수",
+  "hun": "손 수",
+  "count": 142,
+  "confidence": "high"
+ },
+ {
+  "char": "蕪",
+  "eum": "무",
+  "hun": "거칠 무",
+  "count": 142,
+  "confidence": "high"
+ },
+ {
+  "char": "決",
+  "eum": "결",
+  "hun": "결단할 결",
+  "count": 141,
+  "confidence": "high"
+ },
+ {
+  "char": "害",
+  "eum": "해",
+  "hun": "해할 해",
+  "count": 141,
+  "confidence": "high"
+ },
+ {
+  "char": "廢",
+  "eum": "폐",
+  "hun": "폐할 폐",
+  "count": 141,
+  "confidence": "high"
+ },
+ {
+  "char": "冊",
+  "eum": "책",
+  "hun": "책 책",
+  "count": 141,
+  "confidence": "high"
+ },
+ {
+  "char": "素",
+  "eum": "소",
+  "hun": "흴 소",
+  "count": 140,
+  "confidence": "high"
+ },
+ {
+  "char": "割",
+  "eum": "할",
+  "hun": "벨 할",
+  "count": 139,
+  "confidence": "high"
+ },
+ {
+  "char": "胎",
+  "eum": "태",
+  "hun": "아이밸 태",
+  "count": 138,
+  "confidence": "high"
+ },
+ {
+  "char": "水",
+  "eum": "수",
+  "hun": "물 수",
+  "count": 137,
+  "confidence": "high"
+ },
+ {
+  "char": "戰",
+  "eum": "전",
+  "hun": "싸움 전",
+  "count": 136,
+  "confidence": "high"
+ },
+ {
+  "char": "極",
+  "eum": "극",
+  "hun": "다할 극",
+  "count": 136,
+  "confidence": "high"
+ },
+ {
+  "char": "道",
+  "eum": "도",
+  "hun": "길 도",
+  "count": 136,
+  "confidence": "high"
+ },
+ {
+  "char": "職",
+  "eum": "직",
+  "hun": "직분 직",
+  "count": 136,
+  "confidence": "high"
+ },
+ {
+  "char": "毁",
+  "eum": "훼",
+  "hun": "헐 훼",
+  "count": 136,
+  "confidence": "high"
+ },
+ {
+  "char": "受",
+  "eum": "수",
+  "hun": "받을 수",
+  "count": 135,
+  "confidence": "high"
+ },
+ {
+  "char": "報",
+  "eum": "보",
+  "hun": "갚을 보",
+  "count": 135,
+  "confidence": "high"
+ },
+ {
+  "char": "待",
+  "eum": "대",
+  "hun": "기다릴 대",
+  "count": 134,
+  "confidence": "high"
+ },
+ {
+  "char": "富",
+  "eum": "부",
+  "hun": "부자 부",
+  "count": 134,
+  "confidence": "high"
+ },
+ {
+  "char": "聲",
+  "eum": "성",
+  "hun": "소리 성",
+  "count": 133,
+  "confidence": "high"
+ },
+ {
+  "char": "容",
+  "eum": "용",
+  "hun": "얼굴 용",
+  "count": 133,
+  "confidence": "high"
+ },
+ {
+  "char": "治",
+  "eum": "치",
+  "hun": "다스릴 치",
+  "count": 133,
+  "confidence": "high"
+ },
+ {
+  "char": "關",
+  "eum": "관",
+  "hun": "관계할 관",
+  "count": 133,
+  "confidence": "high"
+ },
+ {
+  "char": "誡",
+  "eum": "계",
+  "hun": "경계할 계",
+  "count": 133,
+  "confidence": "high"
+ },
+ {
+  "char": "驕",
+  "eum": "교",
+  "hun": "교만할 교",
+  "count": 133,
+  "confidence": "high"
+ },
+ {
+  "char": "寢",
+  "eum": "침",
+  "hun": "잘 침",
+  "count": 132,
+  "confidence": "high"
+ },
+ {
+  "char": "量",
+  "eum": "량",
+  "hun": "헤아릴 량",
+  "count": 131,
+  "confidence": "high"
+ },
+ {
+  "char": "滿",
+  "eum": "만",
+  "hun": "찰 만",
+  "count": 129,
+  "confidence": "high"
+ },
+ {
+  "char": "期",
+  "eum": "기",
+  "hun": "기약할 기",
+  "count": 129,
+  "confidence": "high"
+ },
+ {
+  "char": "驗",
+  "eum": "험",
+  "hun": "시험할 험",
+  "count": 128,
+  "confidence": "high"
+ },
+ {
+  "char": "謀",
+  "eum": "모",
+  "hun": "꾀 모",
+  "count": 128,
+  "confidence": "high"
+ },
+ {
+  "char": "罰",
+  "eum": "벌",
+  "hun": "벌할 벌",
+  "count": 128,
+  "confidence": "high"
+ },
+ {
+  "char": "牌",
+  "eum": "패",
+  "hun": "패 패",
+  "count": 127,
+  "confidence": "high"
+ },
+ {
+  "char": "許",
+  "eum": "허",
+  "hun": "허락할 허",
+  "count": 127,
+  "confidence": "high"
+ },
+ {
+  "char": "試",
+  "eum": "시",
+  "hun": "시험 시",
+  "count": 127,
+  "confidence": "high"
+ },
+ {
+  "char": "禍",
+  "eum": "화",
+  "hun": "재앙 화",
+  "count": 127,
+  "confidence": "high"
+ },
+ {
+  "char": "責",
+  "eum": "책",
+  "hun": "꾸짖을 책",
+  "count": 126,
+  "confidence": "high"
+ },
+ {
+  "char": "順",
+  "eum": "순",
+  "hun": "순할 순",
+  "count": 126,
+  "confidence": "high"
+ },
+ {
+  "char": "園",
+  "eum": "원",
+  "hun": "동산 원",
+  "count": 126,
+  "confidence": "high"
+ },
+ {
+  "char": "益",
+  "eum": "익",
+  "hun": "더할 익",
+  "count": 125,
+  "confidence": "high"
+ },
+ {
+  "char": "康",
+  "eum": "강",
+  "hun": "편안 강",
+  "count": 125,
+  "confidence": "high"
+ },
+ {
+  "char": "暴",
+  "eum": "폭",
+  "hun": "사나울 폭",
+  "count": 124,
+  "confidence": "high"
+ },
+ {
+  "char": "牧",
+  "eum": "목",
+  "hun": "칠 목",
+  "count": 123,
+  "confidence": "high"
+ },
+ {
+  "char": "僕",
+  "eum": "복",
+  "hun": "종 복",
+  "count": 123,
+  "confidence": "high"
+ },
+ {
+  "char": "哭",
+  "eum": "곡",
+  "hun": "울 곡",
+  "count": 123,
+  "confidence": "high"
+ },
+ {
+  "char": "訓",
+  "eum": "훈",
+  "hun": "가르칠 훈",
+  "count": 123,
+  "confidence": "high"
+ },
+ {
+  "char": "今",
+  "eum": "금",
+  "hun": "이제 금",
+  "count": 122,
+  "confidence": "high"
+ },
+ {
+  "char": "裁",
+  "eum": "재",
+  "hun": "마를 재",
+  "count": 122,
+  "confidence": "high"
+ },
+ {
+  "char": "謗",
+  "eum": "방",
+  "hun": "헐뜯을 방",
+  "count": 121,
+  "confidence": "high"
+ },
+ {
+  "char": "悖",
+  "eum": "패",
+  "hun": "거스릴 패",
+  "count": 121,
+  "confidence": "high"
+ },
+ {
+  "char": "傷",
+  "eum": "상",
+  "hun": "다칠 상",
+  "count": 120,
+  "confidence": "high"
+ },
+ {
+  "char": "落",
+  "eum": "락",
+  "hun": "떨어질 락",
+  "count": 120,
+  "confidence": "high"
+ },
+ {
+  "char": "區",
+  "eum": "구",
+  "hun": "구역 구",
+  "count": 120,
+  "confidence": "high"
+ },
+ {
+  "char": "羞",
+  "eum": "수",
+  "hun": "부끄러울 수",
+  "count": 120,
+  "confidence": "high"
+ },
+ {
+  "char": "役",
+  "eum": "역",
+  "hun": "부릴 역",
+  "count": 119,
+  "confidence": "high"
+ },
+ {
+  "char": "敗",
+  "eum": "패",
+  "hun": "패할 패",
+  "count": 119,
+  "confidence": "high"
+ },
+ {
+  "char": "風",
+  "eum": "풍",
+  "hun": "바람 풍",
+  "count": 118,
+  "confidence": "high"
+ },
+ {
+  "char": "然",
+  "eum": "연",
+  "hun": "그럴 연",
+  "count": 117,
+  "confidence": "high"
+ },
+ {
+  "char": "弱",
+  "eum": "약",
+  "hun": "약할 약",
+  "count": 117,
+  "confidence": "high"
+ },
+ {
+  "char": "犧",
+  "eum": "희",
+  "hun": "희생 희",
+  "count": 117,
+  "confidence": "high"
+ },
+ {
+  "char": "座",
+  "eum": "좌",
+  "hun": "자리 좌",
+  "count": 116,
+  "confidence": "high"
+ },
+ {
+  "char": "種",
+  "eum": "종",
+  "hun": "씨 종",
+  "count": 115,
+  "confidence": "high"
+ },
+ {
+  "char": "形",
+  "eum": "형",
+  "hun": "모양 형",
+  "count": 115,
+  "confidence": "high"
+ },
+ {
+  "char": "奪",
+  "eum": "탈",
+  "hun": "빼앗을 탈",
+  "count": 115,
+  "confidence": "high"
+ },
+ {
+  "char": "播",
+  "eum": "파",
+  "hun": "뿌릴 파",
+  "count": 115,
+  "confidence": "high"
+ },
+ {
+  "char": "奇",
+  "eum": "기",
+  "hun": "기이할 기",
+  "count": 115,
+  "confidence": "high"
+ },
+ {
+  "char": "畜",
+  "eum": "축",
+  "hun": "짐승 축",
+  "count": 114,
+  "confidence": "high"
+ },
+ {
+  "char": "念",
+  "eum": "념",
+  "hun": "생각 념",
+  "count": 114,
+  "confidence": "high"
+ },
+ {
+  "char": "哀",
+  "eum": "애",
+  "hun": "슬플 애",
+  "count": 114,
+  "confidence": "high"
+ },
+ {
+  "char": "屍",
+  "eum": "시",
+  "hun": "주검 시",
+  "count": 114,
+  "confidence": "high"
+ },
+ {
+  "char": "除",
+  "eum": "제",
+  "hun": "덜 제",
+  "count": 113,
+  "confidence": "high"
+ },
+ {
+  "char": "燈",
+  "eum": "등",
+  "hun": "등잔 등",
+  "count": 112,
+  "confidence": "high"
+ },
+ {
+  "char": "海",
+  "eum": "해",
+  "hun": "바다 해",
+  "count": 111,
+  "confidence": "high"
+ },
+ {
+  "char": "窮",
+  "eum": "궁",
+  "hun": "다할 궁",
+  "count": 111,
+  "confidence": "high"
+ },
+ {
+  "char": "結",
+  "eum": "결",
+  "hun": "맺을 결",
+  "count": 110,
+  "confidence": "high"
+ },
+ {
+  "char": "靑",
+  "eum": "청",
+  "hun": "푸를 청",
+  "count": 110,
+  "confidence": "high"
+ },
+ {
+  "char": "火",
+  "eum": "화",
+  "hun": "불 화",
+  "count": 109,
+  "confidence": "high"
+ },
+ {
+  "char": "件",
+  "eum": "건",
+  "hun": "사건 건",
+  "count": 109,
+  "confidence": "high"
+ },
+ {
+  "char": "臺",
+  "eum": "대",
+  "hun": "대 대",
+  "count": 108,
+  "confidence": "high"
+ },
+ {
+  "char": "經",
+  "eum": "경",
+  "hun": "지날 경",
+  "count": 107,
+  "confidence": "high"
+ },
+ {
+  "char": "西",
+  "eum": "서",
+  "hun": "서녘 서",
+  "count": 107,
+  "confidence": "high"
+ },
+ {
+  "char": "叛",
+  "eum": "반",
+  "hun": "배반할 반",
+  "count": 107,
+  "confidence": "high"
+ },
+ {
+  "char": "豊",
+  "eum": "풍",
+  "hun": "풍성할 풍",
+  "count": 106,
+  "confidence": "high"
+ },
+ {
+  "char": "掠",
+  "eum": "략",
+  "hun": "노략질할 략",
+  "count": 106,
+  "confidence": "high"
+ },
+ {
+  "char": "誠",
+  "eum": "성",
+  "hun": "정성 성",
+  "count": 106,
+  "confidence": "high"
+ },
+ {
+  "char": "睦",
+  "eum": "목",
+  "hun": "화목할 목",
+  "count": 106,
+  "confidence": "high"
+ },
+ {
+  "char": "警",
+  "eum": "경",
+  "hun": "깨우칠 경",
+  "count": 106,
+  "confidence": "high"
+ },
+ {
+  "char": "度",
+  "eum": "도",
+  "hun": "법도 도",
+  "count": 105,
+  "confidence": "high"
+ },
+ {
+  "char": "勸",
+  "eum": "권",
+  "hun": "권할 권",
+  "count": 105,
+  "confidence": "high"
+ },
+ {
+  "char": "左",
+  "eum": "좌",
+  "hun": "왼 좌",
+  "count": 104,
+  "confidence": "high"
+ },
+ {
+  "char": "盜",
+  "eum": "도",
+  "hun": "도둑 도",
+  "count": 104,
+  "confidence": "high"
+ },
+ {
+  "char": "戮",
+  "eum": "륙",
+  "hun": "죽일 륙",
+  "count": 104,
+  "confidence": "high"
+ },
+ {
+  "char": "貌",
+  "eum": "모",
+  "hun": "모양 모",
+  "count": 103,
+  "confidence": "high"
+ },
+ {
+  "char": "糧",
+  "eum": "량",
+  "hun": "양식 량",
+  "count": 103,
+  "confidence": "high"
+ },
+ {
+  "char": "勞",
+  "eum": "로",
+  "hun": "수고로울 로",
+  "count": 103,
+  "confidence": "high"
+ },
+ {
+  "char": "具",
+  "eum": "구",
+  "hun": "갖출 구",
+  "count": 103,
+  "confidence": "high"
+ },
+ {
+  "char": "洗",
+  "eum": "세",
+  "hun": "씻을 세",
+  "count": 103,
+  "confidence": "high"
+ },
+ {
+  "char": "樣",
+  "eum": "양",
+  "hun": "모양 양",
+  "count": 102,
+  "confidence": "high"
+ },
+ {
+  "char": "丁",
+  "eum": "정",
+  "hun": "장정 정",
+  "count": 102,
+  "confidence": "high"
+ },
+ {
+  "char": "迫",
+  "eum": "박",
+  "hun": "핍박할 박",
+  "count": 102,
+  "confidence": "high"
+ },
+ {
+  "char": "密",
+  "eum": "밀",
+  "hun": "빽빽할 밀",
+  "count": 102,
+  "confidence": "high"
+ },
+ {
+  "char": "慰",
+  "eum": "위",
+  "hun": "위로할 위",
+  "count": 101,
+  "confidence": "high"
+ },
+ {
+  "char": "只",
+  "eum": "지",
+  "hun": "다만 지",
+  "count": 101,
+  "confidence": "high"
+ },
+ {
+  "char": "表",
+  "eum": "표",
+  "hun": "겉 표",
+  "count": 100,
+  "confidence": "high"
+ },
+ {
+  "char": "華",
+  "eum": "화",
+  "hun": "빛날 화",
+  "count": 100,
+  "confidence": "high"
+ },
+ {
+  "char": "揚",
+  "eum": "양",
+  "hun": "날릴 양",
+  "count": 100,
+  "confidence": "high"
+ },
+ {
+  "char": "防",
+  "eum": "방",
+  "hun": "막을 방",
+  "count": 99,
+  "confidence": "high"
+ },
+ {
+  "char": "視",
+  "eum": "시",
+  "hun": "볼 시",
+  "count": 99,
+  "confidence": "high"
+ },
+ {
+  "char": "迎",
+  "eum": "영",
+  "hun": "맞을 영",
+  "count": 98,
+  "confidence": "high"
+ },
+ {
+  "char": "解",
+  "eum": "해",
+  "hun": "풀 해",
+  "count": 98,
+  "confidence": "high"
+ },
+ {
+  "char": "內",
+  "eum": "내",
+  "hun": "안 내",
+  "count": 98,
+  "confidence": "high"
+ },
+ {
+  "char": "造",
+  "eum": "조",
+  "hun": "지을 조",
+  "count": 97,
+  "confidence": "high"
+ },
+ {
+  "char": "擄",
+  "eum": "로",
+  "hun": "사로잡을 로",
+  "count": 97,
+  "confidence": "high"
+ },
+ {
+  "char": "諾",
+  "eum": "락",
+  "hun": "허락할 락",
+  "count": 97,
+  "confidence": "high"
+ },
+ {
+  "char": "意",
+  "eum": "의",
+  "hun": "뜻 의",
+  "count": 96,
+  "confidence": "high"
+ },
+ {
+  "char": "虐",
+  "eum": "학",
+  "hun": "모질 학",
+  "count": 96,
+  "confidence": "high"
+ },
+ {
+  "char": "將",
+  "eum": "장",
+  "hun": "장수 장",
+  "count": 96,
+  "confidence": "high"
+ },
+ {
+  "char": "出",
+  "eum": "출",
+  "hun": "날 출",
+  "count": 95,
+  "confidence": "high"
+ },
+ {
+  "char": "番",
+  "eum": "번",
+  "hun": "차례 번",
+  "count": 95,
+  "confidence": "high"
+ },
+ {
+  "char": "見",
+  "eum": "견",
+  "hun": "볼 견",
+  "count": 95,
+  "confidence": "high"
+ },
+ {
+  "char": "絶",
+  "eum": "절",
+  "hun": "끊을 절",
+  "count": 95,
+  "confidence": "high"
+ },
+ {
+  "char": "殄",
+  "eum": "진",
+  "hun": "다할 진",
+  "count": 95,
+  "confidence": "high"
+ },
+ {
+  "char": "抵",
+  "eum": "저",
+  "hun": "막을 저",
+  "count": 95,
+  "confidence": "high"
+ },
+ {
+  "char": "精",
+  "eum": "정",
+  "hun": "정할 정",
+  "count": 94,
+  "confidence": "high"
+ },
+ {
+  "char": "盞",
+  "eum": "잔",
+  "hun": "잔 잔",
+  "count": 94,
+  "confidence": "high"
+ },
+ {
+  "char": "忿",
+  "eum": "분",
+  "hun": "성낼 분",
+  "count": 94,
+  "confidence": "high"
+ },
+ {
+  "char": "充",
+  "eum": "충",
+  "hun": "채울 충",
+  "count": 93,
+  "confidence": "high"
+ },
+ {
+  "char": "寧",
+  "eum": "령",
+  "hun": "편안할 령",
+  "count": 93,
+  "confidence": "high"
+ },
+ {
+  "char": "次",
+  "eum": "차",
+  "hun": "버금 차",
+  "count": 93,
+  "confidence": "high"
+ },
+ {
+  "char": "花",
+  "eum": "화",
+  "hun": "꽃 화",
+  "count": 93,
+  "confidence": "high"
+ },
+ {
+  "char": "恥",
+  "eum": "치",
+  "hun": "부끄러울 치",
+  "count": 93,
+  "confidence": "high"
+ },
+ {
+  "char": "制",
+  "eum": "제",
+  "hun": "절제할 제",
+  "count": 92,
+  "confidence": "high"
+ },
+ {
+  "char": "急",
+  "eum": "급",
+  "hun": "급할 급",
+  "count": 92,
+  "confidence": "high"
+ },
+ {
+  "char": "認",
+  "eum": "인",
+  "hun": "알 인",
+  "count": 92,
+  "confidence": "high"
+ },
+ {
+  "char": "變",
+  "eum": "변",
+  "hun": "변할 변",
+  "count": 92,
+  "confidence": "high"
+ },
+ {
+  "char": "工",
+  "eum": "공",
+  "hun": "장인 공",
+  "count": 92,
+  "confidence": "high"
+ },
+ {
+  "char": "蔑",
+  "eum": "멸",
+  "hun": "업신여길 멸",
+  "count": 91,
+  "confidence": "high"
+ },
+ {
+  "char": "復",
+  "eum": "복",
+  "hun": "회복할 복",
+  "count": 91,
+  "confidence": "high"
+ },
+ {
+  "char": "板",
+  "eum": "판",
+  "hun": "널 판",
+  "count": 91,
+  "confidence": "high"
+ },
+ {
+  "char": "字",
+  "eum": "자",
+  "hun": "글자 자",
+  "count": 90,
+  "confidence": "high"
+ },
+ {
+  "char": "總",
+  "eum": "총",
+  "hun": "거느릴 총",
+  "count": 90,
+  "confidence": "high"
+ },
+ {
+  "char": "膽",
+  "eum": "담",
+  "hun": "쓸개 담",
+  "count": 89,
+  "confidence": "high"
+ },
+ {
+  "char": "督",
+  "eum": "독",
+  "hun": "감독할 독",
+  "count": 88,
+  "confidence": "high"
+ },
+ {
+  "char": "賴",
+  "eum": "뢰",
+  "hun": "힘입을 뢰",
+  "count": 88,
+  "confidence": "high"
+ },
+ {
+  "char": "惑",
+  "eum": "혹",
+  "hun": "미혹할 혹",
+  "count": 88,
+  "confidence": "high"
+ },
+ {
+  "char": "暗",
+  "eum": "암",
+  "hun": "어두울 암",
+  "count": 87,
+  "confidence": "high"
+ },
+ {
+  "char": "鐵",
+  "eum": "철",
+  "hun": "쇠 철",
+  "count": 87,
+  "confidence": "high"
+ },
+ {
+  "char": "寡",
+  "eum": "과",
+  "hun": "적을 과",
+  "count": 87,
+  "confidence": "high"
+ },
+ {
+  "char": "細",
+  "eum": "세",
+  "hun": "가늘 세",
+  "count": 86,
+  "confidence": "high"
+ },
+ {
+  "char": "乏",
+  "eum": "핍",
+  "hun": "모자랄 핍",
+  "count": 86,
+  "confidence": "high"
+ },
+ {
+  "char": "焚",
+  "eum": "분",
+  "hun": "불사를 분",
+  "count": 86,
+  "confidence": "high"
+ },
+ {
+  "char": "黑",
+  "eum": "흑",
+  "hun": "검을 흑",
+  "count": 85,
+  "confidence": "high"
+ },
+ {
+  "char": "背",
+  "eum": "배",
+  "hun": "등 배",
+  "count": 85,
+  "confidence": "high"
+ },
+ {
+  "char": "衣",
+  "eum": "의",
+  "hun": "옷 의",
+  "count": 85,
+  "confidence": "high"
+ },
+ {
+  "char": "賊",
+  "eum": "적",
+  "hun": "도둑 적",
+  "count": 85,
+  "confidence": "high"
+ },
+ {
+  "char": "空",
+  "eum": "공",
+  "hun": "빌 공",
+  "count": 84,
+  "confidence": "high"
+ },
+ {
+  "char": "寓",
+  "eum": "우",
+  "hun": "머무를 우",
+  "count": 84,
+  "confidence": "high"
+ },
+ {
+  "char": "術",
+  "eum": "술",
+  "hun": "재주 술",
+  "count": 84,
+  "confidence": "high"
+ },
+ {
+  "char": "紅",
+  "eum": "홍",
+  "hun": "붉을 홍",
+  "count": 84,
+  "confidence": "high"
+ },
+ {
+  "char": "聽",
+  "eum": "청",
+  "hun": "들을 청",
+  "count": 83,
+  "confidence": "high"
+ },
+ {
+  "char": "毒",
+  "eum": "독",
+  "hun": "독 독",
+  "count": 83,
+  "confidence": "high"
+ },
+ {
+  "char": "欠",
+  "eum": "흠",
+  "hun": "모자랄 흠",
+  "count": 83,
+  "confidence": "high"
+ },
+ {
+  "char": "任",
+  "eum": "임",
+  "hun": "맡길 임",
+  "count": 82,
+  "confidence": "high"
+ },
+ {
+  "char": "終",
+  "eum": "종",
+  "hun": "마칠 종",
+  "count": 82,
+  "confidence": "high"
+ },
+ {
+  "char": "懲",
+  "eum": "징",
+  "hun": "징계할 징",
+  "count": 82,
+  "confidence": "high"
+ },
+ {
+  "char": "虛",
+  "eum": "허",
+  "hun": "빌 허",
+  "count": 81,
+  "confidence": "high"
+ },
+ {
+  "char": "略",
+  "eum": "략",
+  "hun": "간략할 략",
+  "count": 81,
+  "confidence": "high"
+ },
+ {
+  "char": "宗",
+  "eum": "종",
+  "hun": "마루 종",
+  "count": 81,
+  "confidence": "high"
+ },
+ {
+  "char": "饉",
+  "eum": "근",
+  "hun": "흉년들 근",
+  "count": 81,
+  "confidence": "high"
+ },
+ {
+  "char": "拒",
+  "eum": "거",
+  "hun": "막을 거",
+  "count": 80,
+  "confidence": "high"
+ },
+ {
+  "char": "護",
+  "eum": "호",
+  "hun": "보호할 호",
+  "count": 80,
+  "confidence": "high"
+ },
+ {
+  "char": "九",
+  "eum": "구",
+  "hun": "아홉 구",
+  "count": 79,
+  "confidence": "high"
+ },
+ {
+  "char": "侍",
+  "eum": "시",
+  "hun": "모실 시",
+  "count": 79,
+  "confidence": "high"
+ },
+ {
+  "char": "獄",
+  "eum": "옥",
+  "hun": "옥 옥",
+  "count": 79,
+  "confidence": "high"
+ },
+ {
+  "char": "磐",
+  "eum": "반",
+  "hun": "너럭바위 반",
+  "count": 79,
+  "confidence": "high"
+ },
+ {
+  "char": "亂",
+  "eum": "란",
+  "hun": "어지러울 란",
+  "count": 79,
+  "confidence": "high"
+ },
+ {
+  "char": "架",
+  "eum": "가",
+  "hun": "시렁 가",
+  "count": 79,
+  "confidence": "high"
+ },
+ {
+  "char": "存",
+  "eum": "존",
+  "hun": "있을 존",
+  "count": 78,
+  "confidence": "high"
+ },
+ {
+  "char": "饑",
+  "eum": "기",
+  "hun": "주릴 기",
+  "count": 78,
+  "confidence": "high"
+ },
+ {
+  "char": "舊",
+  "eum": "구",
+  "hun": "옛 구",
+  "count": 78,
+  "confidence": "high"
+ },
+ {
+  "char": "他",
+  "eum": "타",
+  "hun": "다를 타",
+  "count": 78,
+  "confidence": "high"
+ },
+ {
+  "char": "創",
+  "eum": "창",
+  "hun": "비롯할 창",
+  "count": 77,
+  "confidence": "high"
+ },
+ {
+  "char": "半",
+  "eum": "반",
+  "hun": "반 반",
+  "count": 77,
+  "confidence": "high"
+ },
+ {
+  "char": "哲",
+  "eum": "철",
+  "hun": "밝을 철",
+  "count": 77,
+  "confidence": "high"
+ },
+ {
+  "char": "詭",
+  "eum": "궤",
+  "hun": "속일 궤",
+  "count": 77,
+  "confidence": "high"
+ },
+ {
+  "char": "琴",
+  "eum": "금",
+  "hun": "거문고 금",
+  "count": 76,
+  "confidence": "high"
+ },
+ {
+  "char": "過",
+  "eum": "과",
+  "hun": "지날 과",
+  "count": 76,
+  "confidence": "high"
+ },
+ {
+  "char": "察",
+  "eum": "찰",
+  "hun": "살필 찰",
+  "count": 76,
+  "confidence": "high"
+ },
+ {
+  "char": "冠",
+  "eum": "관",
+  "hun": "갓 관",
+  "count": 76,
+  "confidence": "high"
+ },
+ {
+  "char": "亨",
+  "eum": "형",
+  "hun": "형통할 형",
+  "count": 75,
+  "confidence": "high"
+ },
+ {
+  "char": "思",
+  "eum": "사",
+  "hun": "생각 사",
+  "count": 75,
+  "confidence": "high"
+ },
+ {
+  "char": "嚴",
+  "eum": "엄",
+  "hun": "엄할 엄",
+  "count": 75,
+  "confidence": "high"
+ },
+ {
+  "char": "利",
+  "eum": "리",
+  "hun": "이로울 리",
+  "count": 75,
+  "confidence": "high"
+ },
+ {
+  "char": "限",
+  "eum": "한",
+  "hun": "한할 한",
+  "count": 74,
+  "confidence": "high"
+ },
+ {
+  "char": "辯",
+  "eum": "변",
+  "hun": "말씀 변",
+  "count": 74,
+  "confidence": "high"
+ },
+ {
+  "char": "情",
+  "eum": "정",
+  "hun": "뜻 정",
+  "count": 74,
+  "confidence": "high"
+ },
+ {
+  "char": "束",
+  "eum": "속",
+  "hun": "묶을 속",
+  "count": 74,
+  "confidence": "high"
+ },
+ {
+  "char": "威",
+  "eum": "위",
+  "hun": "위엄 위",
+  "count": 73,
+  "confidence": "high"
+ },
+ {
+  "char": "樂",
+  "eum": "락",
+  "hun": "즐길 락",
+  "count": 73,
+  "confidence": "high"
+ },
+ {
+  "char": "激",
+  "eum": "격",
+  "hun": "격할 격",
+  "count": 73,
+  "confidence": "high"
+ },
+ {
+  "char": "管",
+  "eum": "관",
+  "hun": "주관할 관",
+  "count": 72,
+  "confidence": "high"
+ },
+ {
+  "char": "孕",
+  "eum": "잉",
+  "hun": "아이밸 잉",
+  "count": 72,
+  "confidence": "high"
+ },
+ {
+  "char": "慕",
+  "eum": "모",
+  "hun": "사모할 모",
+  "count": 72,
+  "confidence": "high"
+ },
+ {
+  "char": "納",
+  "eum": "납",
+  "hun": "들일 납",
+  "count": 71,
+  "confidence": "high"
+ },
+ {
+  "char": "相",
+  "eum": "상",
+  "hun": "서로 상",
+  "count": 71,
+  "confidence": "high"
+ },
+ {
+  "char": "員",
+  "eum": "원",
+  "hun": "인원 원",
+  "count": 71,
+  "confidence": "high"
+ },
+ {
+  "char": "場",
+  "eum": "장",
+  "hun": "마당 장",
+  "count": 70,
+  "confidence": "high"
+ },
+ {
+  "char": "槍",
+  "eum": "창",
+  "hun": "창 창",
+  "count": 70,
+  "confidence": "high"
+ },
+ {
+  "char": "宣",
+  "eum": "선",
+  "hun": "베풀 선",
+  "count": 70,
+  "confidence": "high"
+ },
+ {
+  "char": "議",
+  "eum": "의",
+  "hun": "의논할 의",
+  "count": 70,
+  "confidence": "high"
+ },
+ {
+  "char": "品",
+  "eum": "품",
+  "hun": "물건 품",
+  "count": 69,
+  "confidence": "high"
+ },
+ {
+  "char": "注",
+  "eum": "주",
+  "hun": "부을 주",
+  "count": 69,
+  "confidence": "high"
+ },
+ {
+  "char": "信",
+  "eum": "신",
+  "hun": "믿을 신",
+  "count": 69,
+  "confidence": "high"
+ },
+ {
+  "char": "消",
+  "eum": "소",
+  "hun": "사라질 소",
+  "count": 69,
+  "confidence": "high"
+ },
+ {
+  "char": "悔",
+  "eum": "회",
+  "hun": "뉘우칠 회",
+  "count": 69,
+  "confidence": "high"
+ },
+ {
+  "char": "準",
+  "eum": "준",
+  "hun": "준할 준",
+  "count": 68,
+  "confidence": "high"
+ },
+ {
+  "char": "留",
+  "eum": "류",
+  "hun": "머무를 류",
+  "count": 68,
+  "confidence": "high"
+ },
+ {
+  "char": "姦",
+  "eum": "간",
+  "hun": "간음할 간",
+  "count": 68,
+  "confidence": "high"
+ },
+ {
+  "char": "般",
+  "eum": "반",
+  "hun": "일반 반",
+  "count": 68,
+  "confidence": "high"
+ },
+ {
+  "char": "猛",
+  "eum": "맹",
+  "hun": "사나울 맹",
+  "count": 68,
+  "confidence": "high"
+ },
+ {
+  "char": "改",
+  "eum": "개",
+  "hun": "고칠 개",
+  "count": 68,
+  "confidence": "high"
+ },
+ {
+  "char": "之",
+  "eum": "지",
+  "hun": "갈 지",
+  "count": 67,
+  "confidence": "high"
+ },
+ {
+  "char": "草",
+  "eum": "초",
+  "hun": "풀 초",
+  "count": 66,
+  "confidence": "high"
+ },
+ {
+  "char": "速",
+  "eum": "속",
+  "hun": "빠를 속",
+  "count": 66,
+  "confidence": "high"
+ },
+ {
+  "char": "點",
+  "eum": "점",
+  "hun": "점 점",
+  "count": 66,
+  "confidence": "high"
+ },
+ {
+  "char": "始",
+  "eum": "시",
+  "hun": "비로소 시",
+  "count": 65,
+  "confidence": "high"
+ },
+ {
+  "char": "指",
+  "eum": "지",
+  "hun": "가리킬 지",
+  "count": 65,
+  "confidence": "high"
+ },
+ {
+  "char": "縛",
+  "eum": "박",
+  "hun": "얽을 박",
+  "count": 65,
+  "confidence": "high"
+ },
+ {
+  "char": "烈",
+  "eum": "렬",
+  "hun": "매울 렬",
+  "count": 65,
+  "confidence": "high"
+ },
+ {
+  "char": "漸",
+  "eum": "점",
+  "hun": "점점 점",
+  "count": 64,
+  "confidence": "high"
+ },
+ {
+  "char": "示",
+  "eum": "시",
+  "hun": "보일 시",
+  "count": 64,
+  "confidence": "high"
+ },
+ {
+  "char": "迷",
+  "eum": "미",
+  "hun": "미혹할 미",
+  "count": 64,
+  "confidence": "high"
+ },
+ {
+  "char": "紙",
+  "eum": "지",
+  "hun": "종이 지",
+  "count": 64,
+  "confidence": "high"
+ },
+ {
+  "char": "修",
+  "eum": "수",
+  "hun": "닦을 수",
+  "count": 64,
+  "confidence": "high"
+ },
+ {
+  "char": "客",
+  "eum": "객",
+  "hun": "손 객",
+  "count": 63,
+  "confidence": "high"
+ },
+ {
+  "char": "室",
+  "eum": "실",
+  "hun": "집 실",
+  "count": 63,
+  "confidence": "high"
+ },
+ {
+  "char": "守",
+  "eum": "수",
+  "hun": "지킬 수",
+  "count": 63,
+  "confidence": "high"
+ },
+ {
+  "char": "由",
+  "eum": "유",
+  "hun": "말미암을 유",
+  "count": 63,
+  "confidence": "high"
+ },
+ {
+  "char": "確",
+  "eum": "확",
+  "hun": "굳을 확",
+  "count": 63,
+  "confidence": "high"
+ },
+ {
+  "char": "虔",
+  "eum": "건",
+  "hun": "공경할 건",
+  "count": 63,
+  "confidence": "high"
+ },
+ {
+  "char": "印",
+  "eum": "인",
+  "hun": "도장 인",
+  "count": 62,
+  "confidence": "high"
+ },
+ {
+  "char": "訟",
+  "eum": "송",
+  "hun": "송사할 송",
+  "count": 62,
+  "confidence": "high"
+ },
+ {
+  "char": "領",
+  "eum": "령",
+  "hun": "거느릴 령",
+  "count": 62,
+  "confidence": "high"
+ },
+ {
+  "char": "捕",
+  "eum": "포",
+  "hun": "잡을 포",
+  "count": 62,
+  "confidence": "high"
+ },
+ {
+  "char": "匠",
+  "eum": "장",
+  "hun": "장인 장",
+  "count": 62,
+  "confidence": "high"
+ },
+ {
+  "char": "壁",
+  "eum": "벽",
+  "hun": "벽 벽",
+  "count": 62,
+  "confidence": "high"
+ },
+ {
+  "char": "免",
+  "eum": "면",
+  "hun": "면할 면",
+  "count": 61,
+  "confidence": "high"
+ },
+ {
+  "char": "活",
+  "eum": "활",
+  "hun": "살 활",
+  "count": 61,
+  "confidence": "high"
+ },
+ {
+  "char": "奠",
+  "eum": "전",
+  "hun": "제사지낼 전",
+  "count": 61,
+  "confidence": "high"
+ },
+ {
+  "char": "越",
+  "eum": "월",
+  "hun": "넘을 월",
+  "count": 61,
+  "confidence": "high"
+ },
+ {
+  "char": "壓",
+  "eum": "압",
+  "hun": "누를 압",
+  "count": 61,
+  "confidence": "high"
+ },
+ {
+  "char": "初",
+  "eum": "초",
+  "hun": "처음 초",
+  "count": 60,
+  "confidence": "high"
+ },
+ {
+  "char": "進",
+  "eum": "진",
+  "hun": "나아갈 진",
+  "count": 60,
+  "confidence": "high"
+ },
+ {
+  "char": "慮",
+  "eum": "려",
+  "hun": "생각할 려",
+  "count": 60,
+  "confidence": "high"
+ },
+ {
+  "char": "流",
+  "eum": "류",
+  "hun": "흐를 류",
+  "count": 60,
+  "confidence": "high"
+ },
+ {
+  "char": "良",
+  "eum": "량",
+  "hun": "어질 량",
+  "count": 60,
+  "confidence": "high"
+ },
+ {
+  "char": "類",
+  "eum": "류",
+  "hun": "무리 류",
+  "count": 59,
+  "confidence": "high"
+ },
+ {
+  "char": "成",
+  "eum": "성",
+  "hun": "이룰 성",
+  "count": 59,
+  "confidence": "high"
+ },
+ {
+  "char": "逾",
+  "eum": "유",
+  "hun": "넘을 유",
+  "count": 59,
+  "confidence": "high"
+ },
+ {
+  "char": "衰",
+  "eum": "쇠",
+  "hun": "쇠할 쇠",
+  "count": 58,
+  "confidence": "high"
+ },
+ {
+  "char": "逼",
+  "eum": "핍",
+  "hun": "핍박할 핍",
+  "count": 58,
+  "confidence": "high"
+ },
+ {
+  "char": "冕",
+  "eum": "면",
+  "hun": "면류관 면",
+  "count": 58,
+  "confidence": "high"
+ },
+ {
+  "char": "旒",
+  "eum": "류",
+  "hun": "면류관술 류",
+  "count": 58,
+  "confidence": "high"
+ },
+ {
+  "char": "譬",
+  "eum": "비",
+  "hun": "비유할 비",
+  "count": 58,
+  "confidence": "high"
+ },
+ {
+  "char": "喩",
+  "eum": "유",
+  "hun": "깨우칠 유",
+  "count": 58,
+  "confidence": "high"
+ },
+ {
+  "char": "入",
+  "eum": "입",
+  "hun": "들 입",
+  "count": 57,
+  "confidence": "high"
+ },
+ {
+  "char": "雨",
+  "eum": "우",
+  "hun": "비 우",
+  "count": 57,
+  "confidence": "high"
+ },
+ {
+  "char": "位",
+  "eum": "위",
+  "hun": "자리 위",
+  "count": 57,
+  "confidence": "high"
+ },
+ {
+  "char": "兒",
+  "eum": "아",
+  "hun": "아이 아",
+  "count": 57,
+  "confidence": "high"
+ },
+ {
+  "char": "妄",
+  "eum": "망",
+  "hun": "망령될 망",
+  "count": 57,
+  "confidence": "high"
+ },
+ {
+  "char": "班",
+  "eum": "반",
+  "hun": "나눌 반",
+  "count": 57,
+  "confidence": "high"
+ },
+ {
+  "char": "巧",
+  "eum": "교",
+  "hun": "공교할 교",
+  "count": 56,
+  "confidence": "high"
+ },
+ {
+  "char": "遺",
+  "eum": "유",
+  "hun": "남길 유",
+  "count": 56,
+  "confidence": "high"
+ },
+ {
+  "char": "婚",
+  "eum": "혼",
+  "hun": "혼인할 혼",
+  "count": 56,
+  "confidence": "high"
+ },
+ {
+  "char": "弄",
+  "eum": "롱",
+  "hun": "희롱할 롱",
+  "count": 56,
+  "confidence": "high"
+ },
+ {
+  "char": "馬",
+  "eum": "마",
+  "hun": "말 마",
+  "count": 56,
+  "confidence": "high"
+ },
+ {
+  "char": "里",
+  "eum": "리",
+  "hun": "마을 리",
+  "count": 56,
+  "confidence": "high"
+ },
+ {
+  "char": "詔",
+  "eum": "조",
+  "hun": "고할 조",
+  "count": 56,
+  "confidence": "high"
+ },
+ {
+  "char": "完",
+  "eum": "완",
+  "hun": "완전할 완",
+  "count": 55,
+  "confidence": "high"
+ },
+ {
+  "char": "眷",
+  "eum": "권",
+  "hun": "돌볼 권",
+  "count": 55,
+  "confidence": "high"
+ },
+ {
+  "char": "營",
+  "eum": "영",
+  "hun": "경영할 영",
+  "count": 55,
+  "confidence": "high"
+ },
+ {
+  "char": "鑑",
+  "eum": "감",
+  "hun": "거울 감",
+  "count": 55,
+  "confidence": "high"
+ },
+ {
+  "char": "此",
+  "eum": "차",
+  "hun": "이 차",
+  "count": 55,
+  "confidence": "high"
+ },
+ {
+  "char": "務",
+  "eum": "무",
+  "hun": "힘쓸 무",
+  "count": 55,
+  "confidence": "high"
+ },
+ {
+  "char": "每",
+  "eum": "매",
+  "hun": "매양 매",
+  "count": 55,
+  "confidence": "high"
+ },
+ {
+  "char": "慾",
+  "eum": "욕",
+  "hun": "욕심 욕",
+  "count": 55,
+  "confidence": "high"
+ },
+ {
+  "char": "降",
+  "eum": "강",
+  "hun": "내릴 강",
+  "count": 54,
+  "confidence": "high"
+ },
+ {
+  "char": "緣",
+  "eum": "연",
+  "hun": "인연 연",
+  "count": 54,
+  "confidence": "high"
+ },
+ {
+  "char": "默",
+  "eum": "묵",
+  "hun": "잠잠할 묵",
+  "count": 54,
+  "confidence": "high"
+ },
+ {
+  "char": "謙",
+  "eum": "겸",
+  "hun": "겸손할 겸",
+  "count": 54,
+  "confidence": "high"
+ },
+ {
+  "char": "虜",
+  "eum": "로",
+  "hun": "사로잡을 로",
+  "count": 54,
+  "confidence": "high"
+ },
+ {
+  "char": "秘",
+  "eum": "비",
+  "hun": "숨길 비",
+  "count": 54,
+  "confidence": "high"
+ },
+ {
+  "char": "徵",
+  "eum": "징",
+  "hun": "부를 징",
+  "count": 53,
+  "confidence": "high"
+ },
+ {
+  "char": "隱",
+  "eum": "은",
+  "hun": "숨을 은",
+  "count": 53,
+  "confidence": "high"
+ },
+ {
+  "char": "邊",
+  "eum": "변",
+  "hun": "가 변",
+  "count": 53,
+  "confidence": "high"
+ },
+ {
+  "char": "爻",
+  "eum": "효",
+  "hun": "효 효",
+  "count": 53,
+  "confidence": "high"
+ },
+ {
+  "char": "赦",
+  "eum": "사",
+  "hun": "용서할 사",
+  "count": 53,
+  "confidence": "high"
+ },
+ {
+  "char": "搖",
+  "eum": "요",
+  "hun": "흔들 요",
+  "count": 53,
+  "confidence": "high"
+ },
+ {
+  "char": "畢",
+  "eum": "필",
+  "hun": "마칠 필",
+  "count": 52,
+  "confidence": "high"
+ },
+ {
+  "char": "高",
+  "eum": "고",
+  "hun": "높을 고",
+  "count": 52,
+  "confidence": "high"
+ },
+ {
+  "char": "多",
+  "eum": "다",
+  "hun": "많을 다",
+  "count": 52,
+  "confidence": "high"
+ },
+ {
+  "char": "都",
+  "eum": "도",
+  "hun": "도읍 도",
+  "count": 52,
+  "confidence": "high"
+ },
+ {
+  "char": "失",
+  "eum": "실",
+  "hun": "잃을 실",
+  "count": 52,
+  "confidence": "high"
+ },
+ {
+  "char": "末",
+  "eum": "말",
+  "hun": "끝 말",
+  "count": 52,
+  "confidence": "high"
+ },
+ {
+  "char": "連",
+  "eum": "련",
+  "hun": "이을 련",
+  "count": 52,
+  "confidence": "high"
+ },
+ {
+  "char": "愚",
+  "eum": "우",
+  "hun": "어리석을 우",
+  "count": 52,
+  "confidence": "high"
+ },
+ {
+  "char": "遵",
+  "eum": "준",
+  "hun": "좇을 준",
+  "count": 51,
+  "confidence": "high"
+ },
+ {
+  "char": "奉",
+  "eum": "봉",
+  "hun": "받들 봉",
+  "count": 51,
+  "confidence": "high"
+ },
+ {
+  "char": "探",
+  "eum": "탐",
+  "hun": "찾을 탐",
+  "count": 51,
+  "confidence": "high"
+ },
+ {
+  "char": "頭",
+  "eum": "두",
+  "hun": "머리 두",
+  "count": 51,
+  "confidence": "high"
+ },
+ {
+  "char": "玄",
+  "eum": "현",
+  "hun": "검을 현",
+  "count": 51,
+  "confidence": "high"
+ },
+ {
+  "char": "夜",
+  "eum": "야",
+  "hun": "밤 야",
+  "count": 50,
+  "confidence": "high"
+ },
+ {
+  "char": "竪",
+  "eum": "수",
+  "hun": "세울 수",
+  "count": 50,
+  "confidence": "high"
+ },
+ {
+  "char": "層",
+  "eum": "층",
+  "hun": "층 층",
+  "count": 50,
+  "confidence": "high"
+ },
+ {
+  "char": "口",
+  "eum": "구",
+  "hun": "입 구",
+  "count": 50,
+  "confidence": "high"
+ },
+ {
+  "char": "殘",
+  "eum": "잔",
+  "hun": "남을 잔",
+  "count": 50,
+  "confidence": "high"
+ },
+ {
+  "char": "否",
+  "eum": "부",
+  "hun": "아닐 부",
+  "count": 49,
+  "confidence": "high"
+ },
+ {
+  "char": "煙",
+  "eum": "연",
+  "hun": "연기 연",
+  "count": 49,
+  "confidence": "high"
+ },
+ {
+  "char": "小",
+  "eum": "소",
+  "hun": "작을 소",
+  "count": 49,
+  "confidence": "high"
+ },
+ {
+  "char": "村",
+  "eum": "촌",
+  "hun": "마을 촌",
+  "count": 49,
+  "confidence": "high"
+ },
+ {
+  "char": "剛",
+  "eum": "강",
+  "hun": "굳셀 강",
+  "count": 49,
+  "confidence": "high"
+ },
+ {
+  "char": "忠",
+  "eum": "충",
+  "hun": "충성 충",
+  "count": 49,
+  "confidence": "high"
+ },
+ {
+  "char": "條",
+  "eum": "조",
+  "hun": "가지 조",
+  "count": 48,
+  "confidence": "high"
+ },
+ {
+  "char": "釋",
+  "eum": "석",
+  "hun": "풀 석",
+  "count": 48,
+  "confidence": "high"
+ },
+ {
+  "char": "參",
+  "eum": "참",
+  "hun": "참여할 참",
+  "count": 48,
+  "confidence": "high"
+ },
+ {
+  "char": "監",
+  "eum": "감",
+  "hun": "볼 감",
+  "count": 48,
+  "confidence": "high"
+ },
+ {
+  "char": "陷",
+  "eum": "함",
+  "hun": "빠질 함",
+  "count": 48,
+  "confidence": "high"
+ },
+ {
+  "char": "悲",
+  "eum": "비",
+  "hun": "슬플 비",
+  "count": 48,
+  "confidence": "high"
+ },
+ {
+  "char": "折",
+  "eum": "절",
+  "hun": "꺾을 절",
+  "count": 48,
+  "confidence": "high"
+ },
+ {
+  "char": "蕃",
+  "eum": "번",
+  "hun": "우거질 번",
+  "count": 47,
+  "confidence": "high"
+ },
+ {
+  "char": "設",
+  "eum": "설",
+  "hun": "베풀 설",
+  "count": 47,
+  "confidence": "high"
+ },
+ {
+  "char": "乳",
+  "eum": "유",
+  "hun": "젖 유",
+  "count": 47,
+  "confidence": "high"
+ },
+ {
+  "char": "部",
+  "eum": "부",
+  "hun": "떼 부",
+  "count": 47,
+  "confidence": "high"
+ },
+ {
+  "char": "彼",
+  "eum": "피",
+  "hun": "저 피",
+  "count": 47,
+  "confidence": "high"
+ },
+ {
+  "char": "路",
+  "eum": "로",
+  "hun": "길 로",
+  "count": 47,
+  "confidence": "high"
+ },
+ {
+  "char": "師",
+  "eum": "사",
+  "hun": "스승 사",
+  "count": 47,
+  "confidence": "high"
+ },
+ {
+  "char": "聰",
+  "eum": "총",
+  "hun": "귀밝을 총",
+  "count": 47,
+  "confidence": "high"
+ },
+ {
+  "char": "寸",
+  "eum": "촌",
+  "hun": "마디 촌",
+  "count": 46,
+  "confidence": "high"
+ },
+ {
+  "char": "衛",
+  "eum": "위",
+  "hun": "지킬 위",
+  "count": 46,
+  "confidence": "high"
+ },
+ {
+  "char": "切",
+  "eum": "절",
+  "hun": "끊을 절",
+  "count": 46,
+  "confidence": "high"
+ },
+ {
+  "char": "誹",
+  "eum": "비",
+  "hun": "헐뜯을 비",
+  "count": 46,
+  "confidence": "high"
+ },
+ {
+  "char": "邪",
+  "eum": "사",
+  "hun": "간사할 사",
+  "count": 46,
+  "confidence": "high"
+ },
+ {
+  "char": "伏",
+  "eum": "복",
+  "hun": "엎드릴 복",
+  "count": 46,
+  "confidence": "high"
+ },
+ {
+  "char": "晝",
+  "eum": "주",
+  "hun": "낮 주",
+  "count": 45,
+  "confidence": "high"
+ },
+ {
+  "char": "恕",
+  "eum": "서",
+  "hun": "용서할 서",
+  "count": 45,
+  "confidence": "high"
+ },
+ {
+  "char": "喚",
+  "eum": "환",
+  "hun": "부를 환",
+  "count": 45,
+  "confidence": "high"
+ },
+ {
+  "char": "凡",
+  "eum": "범",
+  "hun": "무릇 범",
+  "count": 45,
+  "confidence": "high"
+ },
+ {
+  "char": "託",
+  "eum": "탁",
+  "hun": "부탁할 탁",
+  "count": 45,
+  "confidence": "high"
+ },
+ {
+  "char": "如",
+  "eum": "여",
+  "hun": "같을 여",
+  "count": 45,
+  "confidence": "high"
+ },
+ {
+  "char": "寵",
+  "eum": "총",
+  "hun": "사랑할 총",
+  "count": 45,
+  "confidence": "high"
+ },
+ {
+  "char": "擔",
+  "eum": "담",
+  "hun": "멜 담",
+  "count": 45,
+  "confidence": "high"
+ },
+ {
+  "char": "式",
+  "eum": "식",
+  "hun": "법 식",
+  "count": 45,
+  "confidence": "high"
+ },
+ {
+  "char": "疲",
+  "eum": "피",
+  "hun": "피곤할 피",
+  "count": 45,
+  "confidence": "high"
+ },
+ {
+  "char": "按",
+  "eum": "안",
+  "hun": "살필 안",
+  "count": 45,
+  "confidence": "high"
+ },
+ {
+  "char": "后",
+  "eum": "후",
+  "hun": "왕후 후",
+  "count": 45,
+  "confidence": "high"
+ },
+ {
+  "char": "譎",
+  "eum": "휼",
+  "hun": "속일 휼",
+  "count": 45,
+  "confidence": "high"
+ },
+ {
+  "char": "運",
+  "eum": "운",
+  "hun": "옮길 운",
+  "count": 44,
+  "confidence": "high"
+ },
+ {
+  "char": "近",
+  "eum": "근",
+  "hun": "가까울 근",
+  "count": 44,
+  "confidence": "high"
+ },
+ {
+  "char": "志",
+  "eum": "지",
+  "hun": "뜻 지",
+  "count": 44,
+  "confidence": "high"
+ },
+ {
+  "char": "河",
+  "eum": "하",
+  "hun": "물 하",
+  "count": 44,
+  "confidence": "high"
+ },
+ {
+  "char": "愎",
+  "eum": "퍅",
+  "hun": "강퍅할 퍅",
+  "count": 44,
+  "confidence": "high"
+ },
+ {
+  "char": "孤",
+  "eum": "고",
+  "hun": "외로울 고",
+  "count": 44,
+  "confidence": "high"
+ },
+ {
+  "char": "紫",
+  "eum": "자",
+  "hun": "자줏빛 자",
+  "count": 44,
+  "confidence": "high"
+ },
+ {
+  "char": "皮",
+  "eum": "피",
+  "hun": "가죽 피",
+  "count": 44,
+  "confidence": "high"
+ },
+ {
+  "char": "賞",
+  "eum": "상",
+  "hun": "상줄 상",
+  "count": 43,
+  "confidence": "high"
+ },
+ {
+  "char": "忌",
+  "eum": "기",
+  "hun": "꺼릴 기",
+  "count": 43,
+  "confidence": "high"
+ },
+ {
+  "char": "象",
+  "eum": "상",
+  "hun": "모양 상",
+  "count": 43,
+  "confidence": "high"
+ },
+ {
+  "char": "典",
+  "eum": "전",
+  "hun": "법 전",
+  "count": 43,
+  "confidence": "high"
+ },
+ {
+  "char": "卑",
+  "eum": "비",
+  "hun": "낮을 비",
+  "count": 43,
+  "confidence": "high"
+ },
+ {
+  "char": "育",
+  "eum": "육",
+  "hun": "기를 육",
+  "count": 42,
+  "confidence": "high"
+ },
+ {
+  "char": "洞",
+  "eum": "동",
+  "hun": "골 동",
+  "count": 42,
+  "confidence": "high"
+ },
+ {
+  "char": "與",
+  "eum": "여",
+  "hun": "더불 여",
+  "count": 42,
+  "confidence": "high"
+ },
+ {
+  "char": "骨",
+  "eum": "골",
+  "hun": "뼈 골",
+  "count": 42,
+  "confidence": "high"
+ },
+ {
+  "char": "陳",
+  "eum": "진",
+  "hun": "묵을 진",
+  "count": 42,
+  "confidence": "high"
+ },
+ {
+  "char": "鄕",
+  "eum": "향",
+  "hun": "시골 향",
+  "count": 42,
+  "confidence": "high"
+ },
+ {
+  "char": "收",
+  "eum": "수",
+  "hun": "거둘 수",
+  "count": 42,
+  "confidence": "high"
+ },
+ {
+  "char": "假",
+  "eum": "가",
+  "hun": "거짓 가",
+  "count": 42,
+  "confidence": "high"
+ },
+ {
+  "char": "刑",
+  "eum": "형",
+  "hun": "형벌 형",
+  "count": 42,
+  "confidence": "high"
+ },
+ {
+  "char": "打",
+  "eum": "타",
+  "hun": "칠 타",
+  "count": 42,
+  "confidence": "high"
+ },
+ {
+  "char": "白",
+  "eum": "백",
+  "hun": "흰 백",
+  "count": 42,
+  "confidence": "high"
+ },
+ {
+  "char": "離",
+  "eum": "리",
+  "hun": "떠날 리",
+  "count": 42,
+  "confidence": "high"
+ },
+ {
+  "char": "魔",
+  "eum": "마",
+  "hun": "마귀 마",
+  "count": 42,
+  "confidence": "high"
+ },
+ {
+  "char": "沒",
+  "eum": "몰",
+  "hun": "빠질 몰",
+  "count": 41,
+  "confidence": "high"
+ },
+ {
+  "char": "訴",
+  "eum": "소",
+  "hun": "하소연할 소",
+  "count": 41,
+  "confidence": "high"
+ },
+ {
+  "char": "崇",
+  "eum": "숭",
+  "hun": "높을 숭",
+  "count": 41,
+  "confidence": "high"
+ },
+ {
+  "char": "油",
+  "eum": "유",
+  "hun": "기름 유",
+  "count": 41,
+  "confidence": "high"
+ },
+ {
+  "char": "愆",
+  "eum": "건",
+  "hun": "허물 건",
+  "count": 41,
+  "confidence": "high"
+ },
+ {
+  "char": "肢",
+  "eum": "지",
+  "hun": "팔다리 지",
+  "count": 41,
+  "confidence": "high"
+ },
+ {
+  "char": "昧",
+  "eum": "매",
+  "hun": "어두울 매",
+  "count": 41,
+  "confidence": "high"
+ },
+ {
+  "char": "飾",
+  "eum": "식",
+  "hun": "꾸밀 식",
+  "count": 41,
+  "confidence": "high"
+ },
+ {
+  "char": "壽",
+  "eum": "수",
+  "hun": "목숨 수",
+  "count": 40,
+  "confidence": "high"
+ },
+ {
+  "char": "黃",
+  "eum": "황",
+  "hun": "누를 황",
+  "count": 40,
+  "confidence": "high"
+ },
+ {
+  "char": "愛",
+  "eum": "애",
+  "hun": "사랑 애",
+  "count": 40,
+  "confidence": "high"
+ },
+ {
+  "char": "隨",
+  "eum": "수",
+  "hun": "따를 수",
+  "count": 40,
+  "confidence": "high"
+ },
+ {
+  "char": "貧",
+  "eum": "빈",
+  "hun": "가난할 빈",
+  "count": 40,
+  "confidence": "high"
+ },
+ {
+  "char": "歷",
+  "eum": "력",
+  "hun": "지날 력",
+  "count": 40,
+  "confidence": "high"
+ },
+ {
+  "char": "沙",
+  "eum": "사",
+  "hun": "모래 사",
+  "count": 40,
+  "confidence": "high"
+ },
+ {
+  "char": "詐",
+  "eum": "사",
+  "hun": "속일 사",
+  "count": 40,
+  "confidence": "high"
+ },
+ {
+  "char": "橄",
+  "eum": "감",
+  "hun": "감람 감",
+  "count": 39,
+  "confidence": "high"
+ },
+ {
+  "char": "欖",
+  "eum": "람",
+  "hun": "감람 람",
+  "count": 39,
+  "confidence": "high"
+ },
+ {
+  "char": "涑",
+  "eum": "속",
+  "hun": "헹굴 속",
+  "count": 39,
+  "confidence": "high"
+ },
+ {
+  "char": "墓",
+  "eum": "묘",
+  "hun": "무덤 묘",
+  "count": 39,
+  "confidence": "high"
+ },
+ {
+  "char": "商",
+  "eum": "상",
+  "hun": "장사 상",
+  "count": 39,
+  "confidence": "high"
+ },
+ {
+  "char": "憤",
+  "eum": "분",
+  "hun": "분할 분",
+  "count": 39,
+  "confidence": "high"
+ },
+ {
+  "char": "妬",
+  "eum": "투",
+  "hun": "샘낼 투",
+  "count": 39,
+  "confidence": "high"
+ },
+ {
+  "char": "栢",
+  "eum": "백",
+  "hun": "측백나무 백",
+  "count": 39,
+  "confidence": "high"
+ },
+ {
+  "char": "曾",
+  "eum": "증",
+  "hun": "일찍 증",
+  "count": 39,
+  "confidence": "high"
+ },
+ {
+  "char": "根",
+  "eum": "근",
+  "hun": "뿌리 근",
+  "count": 38,
+  "confidence": "high"
+ },
+ {
+  "char": "呼",
+  "eum": "호",
+  "hun": "부를 호",
+  "count": 38,
+  "confidence": "high"
+ },
+ {
+  "char": "飮",
+  "eum": "음",
+  "hun": "마실 음",
+  "count": 38,
+  "confidence": "high"
+ },
+ {
+  "char": "麻",
+  "eum": "마",
+  "hun": "삼 마",
+  "count": 38,
+  "confidence": "high"
+ },
+ {
+  "char": "聞",
+  "eum": "문",
+  "hun": "들을 문",
+  "count": 38,
+  "confidence": "high"
+ },
+ {
+  "char": "恭",
+  "eum": "공",
+  "hun": "공손할 공",
+  "count": 38,
+  "confidence": "high"
+ },
+ {
+  "char": "仰",
+  "eum": "앙",
+  "hun": "우러를 앙",
+  "count": 38,
+  "confidence": "high"
+ },
+ {
+  "char": "膚",
+  "eum": "부",
+  "hun": "살갗 부",
+  "count": 38,
+  "confidence": "high"
+ },
+ {
+  "char": "寃",
+  "eum": "원",
+  "hun": "원통할 원",
+  "count": 38,
+  "confidence": "high"
+ },
+ {
+  "char": "柏",
+  "eum": "백",
+  "hun": "측백 백",
+  "count": 38,
+  "confidence": "high"
+ },
+ {
+  "char": "血",
+  "eum": "혈",
+  "hun": "피 혈",
+  "count": 37,
+  "confidence": "high"
+ },
+ {
+  "char": "牛",
+  "eum": "우",
+  "hun": "소 우",
+  "count": 37,
+  "confidence": "high"
+ },
+ {
+  "char": "顧",
+  "eum": "고",
+  "hun": "돌아볼 고",
+  "count": 37,
+  "confidence": "high"
+ },
+ {
+  "char": "裝",
+  "eum": "장",
+  "hun": "꾸밀 장",
+  "count": 37,
+  "confidence": "high"
+ },
+ {
+  "char": "凶",
+  "eum": "흉",
+  "hun": "흉할 흉",
+  "count": 37,
+  "confidence": "high"
+ },
+ {
+  "char": "秋",
+  "eum": "추",
+  "hun": "가을 추",
+  "count": 37,
+  "confidence": "high"
+ },
+ {
+  "char": "仔",
+  "eum": "자",
+  "hun": "자세할 자",
+  "count": 37,
+  "confidence": "high"
+ },
+ {
+  "char": "染",
+  "eum": "염",
+  "hun": "물들일 염",
+  "count": 37,
+  "confidence": "high"
+ },
+ {
+  "char": "稅",
+  "eum": "세",
+  "hun": "세금 세",
+  "count": 37,
+  "confidence": "high"
+ },
+ {
+  "char": "太",
+  "eum": "태",
+  "hun": "클 태",
+  "count": 36,
+  "confidence": "high"
+ },
+ {
+  "char": "蒼",
+  "eum": "창",
+  "hun": "푸를 창",
+  "count": 36,
+  "confidence": "high"
+ },
+ {
+  "char": "得",
+  "eum": "득",
+  "hun": "얻을 득",
+  "count": 36,
+  "confidence": "high"
+ },
+ {
+  "char": "窓",
+  "eum": "창",
+  "hun": "창 창",
+  "count": 36,
+  "confidence": "high"
+ },
+ {
+  "char": "柱",
+  "eum": "주",
+  "hun": "기둥 주",
+  "count": 36,
+  "confidence": "high"
+ },
+ {
+  "char": "疑",
+  "eum": "의",
+  "hun": "의심할 의",
+  "count": 36,
+  "confidence": "high"
+ },
+ {
+  "char": "貪",
+  "eum": "탐",
+  "hun": "탐할 탐",
+  "count": 36,
+  "confidence": "high"
+ },
+ {
+  "char": "礎",
+  "eum": "초",
+  "hun": "주춧돌 초",
+  "count": 36,
+  "confidence": "high"
+ },
+ {
+  "char": "農",
+  "eum": "농",
+  "hun": "농사 농",
+  "count": 35,
+  "confidence": "high"
+ },
+ {
+  "char": "彩",
+  "eum": "채",
+  "hun": "채색 채",
+  "count": 35,
+  "confidence": "high"
+ },
+ {
+  "char": "丈",
+  "eum": "장",
+  "hun": "어른 장",
+  "count": 35,
+  "confidence": "high"
+ },
+ {
+  "char": "看",
+  "eum": "간",
+  "hun": "볼 간",
+  "count": 35,
+  "confidence": "high"
+ },
+ {
+  "char": "嘲",
+  "eum": "조",
+  "hun": "비웃을 조",
+  "count": 35,
+  "confidence": "high"
+ },
+ {
+  "char": "把",
+  "eum": "파",
+  "hun": "잡을 파",
+  "count": 35,
+  "confidence": "high"
+ },
+ {
+  "char": "菜",
+  "eum": "채",
+  "hun": "나물 채",
+  "count": 34,
+  "confidence": "high"
+ },
+ {
+  "char": "兆",
+  "eum": "조",
+  "hun": "조 조",
+  "count": 34,
+  "confidence": "high"
+ },
+ {
+  "char": "往",
+  "eum": "왕",
+  "hun": "갈 왕",
+  "count": 34,
+  "confidence": "high"
+ },
+ {
+  "char": "忽",
+  "eum": "홀",
+  "hun": "갑자기 홀",
+  "count": 34,
+  "confidence": "high"
+ },
+ {
+  "char": "膳",
+  "eum": "선",
+  "hun": "반찬 선",
+  "count": 34,
+  "confidence": "high"
+ },
+ {
+  "char": "雹",
+  "eum": "박",
+  "hun": "우박 박",
+  "count": 34,
+  "confidence": "high"
+ },
+ {
+  "char": "榴",
+  "eum": "류",
+  "hun": "석류 류",
+  "count": 34,
+  "confidence": "high"
+ },
+ {
+  "char": "凌",
+  "eum": "릉",
+  "hun": "업신여길 릉",
+  "count": 34,
+  "confidence": "high"
+ },
+ {
+  "char": "新",
+  "eum": "신",
+  "hun": "새 신",
+  "count": 34,
+  "confidence": "high"
+ },
+ {
+  "char": "遜",
+  "eum": "손",
+  "hun": "겸손할 손",
+  "count": 34,
+  "confidence": "high"
+ },
+ {
+  "char": "穹",
+  "eum": "궁",
+  "hun": "하늘 궁",
+  "count": 33,
+  "confidence": "high"
+ },
+ {
+  "char": "竟",
+  "eum": "경",
+  "hun": "마침내 경",
+  "count": 33,
+  "confidence": "high"
+ },
+ {
+  "char": "標",
+  "eum": "표",
+  "hun": "표할 표",
+  "count": 33,
+  "confidence": "high"
+ },
+ {
+  "char": "易",
+  "eum": "역",
+  "hun": "바꿀 역",
+  "count": 33,
+  "confidence": "high"
+ },
+ {
+  "char": "陰",
+  "eum": "음",
+  "hun": "그늘 음",
+  "count": 33,
+  "confidence": "high"
+ },
+ {
+  "char": "府",
+  "eum": "부",
+  "hun": "관청 부",
+  "count": 33,
+  "confidence": "high"
+ },
+ {
+  "char": "號",
+  "eum": "호",
+  "hun": "이름 호",
+  "count": 33,
+  "confidence": "high"
+ },
+ {
+  "char": "擧",
+  "eum": "거",
+  "hun": "들 거",
+  "count": 33,
+  "confidence": "high"
+ },
+ {
+  "char": "柔",
+  "eum": "유",
+  "hun": "부드러울 유",
+  "count": 33,
+  "confidence": "high"
+ },
+ {
+  "char": "忍",
+  "eum": "인",
+  "hun": "참을 인",
+  "count": 33,
+  "confidence": "high"
+ },
+ {
+  "char": "埋",
+  "eum": "매",
+  "hun": "묻을 매",
+  "count": 32,
+  "confidence": "high"
+ },
+ {
+  "char": "付",
+  "eum": "부",
+  "hun": "부칠 부",
+  "count": 32,
+  "confidence": "high"
+ },
+ {
+  "char": "圖",
+  "eum": "도",
+  "hun": "그림 도",
+  "count": 32,
+  "confidence": "high"
+ },
+ {
+  "char": "璧",
+  "eum": "벽",
+  "hun": "구슬 벽",
+  "count": 32,
+  "confidence": "high"
+ },
+ {
+  "char": "性",
+  "eum": "성",
+  "hun": "성품 성",
+  "count": 32,
+  "confidence": "high"
+ },
+ {
+  "char": "闕",
+  "eum": "궐",
+  "hun": "대궐 궐",
+  "count": 32,
+  "confidence": "high"
+ },
+ {
+  "char": "皿",
+  "eum": "명",
+  "hun": "그릇 명",
+  "count": 32,
+  "confidence": "high"
+ },
+ {
+  "char": "源",
+  "eum": "원",
+  "hun": "근원 원",
+  "count": 31,
+  "confidence": "high"
+ },
+ {
+  "char": "奴",
+  "eum": "노",
+  "hun": "종 노",
+  "count": 31,
+  "confidence": "high"
+ },
+ {
+  "char": "溫",
+  "eum": "온",
+  "hun": "따뜻할 온",
+  "count": 31,
+  "confidence": "high"
+ },
+ {
+  "char": "委",
+  "eum": "위",
+  "hun": "맡길 위",
+  "count": 31,
+  "confidence": "high"
+ },
+ {
+  "char": "煩",
+  "eum": "번",
+  "hun": "번거로울 번",
+  "count": 31,
+  "confidence": "high"
+ },
+ {
+  "char": "賂",
+  "eum": "뢰",
+  "hun": "뇌물 뢰",
+  "count": 31,
+  "confidence": "high"
+ },
+ {
+  "char": "玉",
+  "eum": "옥",
+  "hun": "구슬 옥",
+  "count": 31,
+  "confidence": "high"
+ },
+ {
+  "char": "幅",
+  "eum": "폭",
+  "hun": "폭 폭",
+  "count": 31,
+  "confidence": "high"
+ },
+ {
+  "char": "姉",
+  "eum": "자",
+  "hun": "손윗누이 자",
+  "count": 31,
+  "confidence": "medium"
+ },
+ {
+  "char": "妹",
+  "eum": "매",
+  "hun": "누이 매",
+  "count": 31,
+  "confidence": "medium"
+ },
+ {
+  "char": "熱",
+  "eum": "열",
+  "hun": "더울 열",
+  "count": 31,
+  "confidence": "medium"
+ },
+ {
+  "char": "誘",
+  "eum": "유",
+  "hun": "꾈 유",
+  "count": 31,
+  "confidence": "medium"
+ },
+ {
+  "char": "紛",
+  "eum": "분",
+  "hun": "어지러울 분",
+  "count": 31,
+  "confidence": "medium"
+ },
+ {
+  "char": "鍊",
+  "eum": "련",
+  "hun": "단련할 련",
+  "count": 31,
+  "confidence": "medium"
+ },
+ {
+  "char": "機",
+  "eum": "기",
+  "hun": "틀 기",
+  "count": 30,
+  "confidence": "medium"
+ },
+ {
+  "char": "敢",
+  "eum": "감",
+  "hun": "감히 감",
+  "count": 30,
+  "confidence": "medium"
+ },
+ {
+  "char": "放",
+  "eum": "방",
+  "hun": "놓을 방",
+  "count": 30,
+  "confidence": "medium"
+ },
+ {
+  "char": "庫",
+  "eum": "고",
+  "hun": "곳집 고",
+  "count": 30,
+  "confidence": "medium"
+ },
+ {
+  "char": "胸",
+  "eum": "흉",
+  "hun": "가슴 흉",
+  "count": 30,
+  "confidence": "medium"
+ },
+ {
+  "char": "賤",
+  "eum": "천",
+  "hun": "천할 천",
+  "count": 30,
+  "confidence": "medium"
+ },
+ {
+  "char": "森",
+  "eum": "삼",
+  "hun": "수풀 삼",
+  "count": 30,
+  "confidence": "medium"
+ },
+ {
+  "char": "林",
+  "eum": "림",
+  "hun": "수풀 림",
+  "count": 30,
+  "confidence": "medium"
+ },
+ {
+  "char": "漠",
+  "eum": "막",
+  "hun": "넓을 막",
+  "count": 30,
+  "confidence": "medium"
+ },
+ {
+  "char": "妻",
+  "eum": "처",
+  "hun": "아내 처",
+  "count": 29,
+  "confidence": "medium"
+ },
+ {
+  "char": "陸",
+  "eum": "륙",
+  "hun": "뭍 륙",
+  "count": 29,
+  "confidence": "medium"
+ },
+ {
+  "char": "俗",
+  "eum": "속",
+  "hun": "풍속 속",
+  "count": 29,
+  "confidence": "medium"
+ },
+ {
+  "char": "用",
+  "eum": "용",
+  "hun": "쓸 용",
+  "count": 29,
+  "confidence": "medium"
+ },
+ {
+  "char": "想",
+  "eum": "상",
+  "hun": "생각 상",
+  "count": 29,
+  "confidence": "medium"
+ },
+ {
+  "char": "周",
+  "eum": "주",
+  "hun": "두루 주",
+  "count": 29,
+  "confidence": "medium"
+ },
+ {
+  "char": "養",
+  "eum": "양",
+  "hun": "기를 양",
+  "count": 29,
+  "confidence": "medium"
+ },
+ {
+  "char": "蘇",
+  "eum": "소",
+  "hun": "되살아날 소",
+  "count": 29,
+  "confidence": "medium"
+ },
+ {
+  "char": "頑",
+  "eum": "완",
+  "hun": "완고할 완",
+  "count": 29,
+  "confidence": "medium"
+ },
+ {
+  "char": "純",
+  "eum": "순",
+  "hun": "순수할 순",
+  "count": 29,
+  "confidence": "medium"
+ },
+ {
+  "char": "妓",
+  "eum": "기",
+  "hun": "기생 기",
+  "count": 29,
+  "confidence": "medium"
+ },
+ {
+  "char": "久",
+  "eum": "구",
+  "hun": "오랠 구",
+  "count": 29,
+  "confidence": "medium"
+ },
+ {
+  "char": "軟",
+  "eum": "연",
+  "hun": "연할 연",
+  "count": 29,
+  "confidence": "medium"
+ },
+ {
+  "char": "船",
+  "eum": "선",
+  "hun": "배 선",
+  "count": 29,
+  "confidence": "medium"
+ },
+ {
+  "char": "學",
+  "eum": "학",
+  "hun": "배울 학",
+  "count": 29,
+  "confidence": "medium"
+ },
+ {
+  "char": "聯",
+  "eum": "련",
+  "hun": "잇달 련",
+  "count": 28,
+  "confidence": "medium"
+ },
+ {
+  "char": "娶",
+  "eum": "취",
+  "hun": "장가들 취",
+  "count": 28,
+  "confidence": "medium"
+ },
+ {
+  "char": "恨",
+  "eum": "한",
+  "hun": "한 한",
+  "count": 28,
+  "confidence": "medium"
+ },
+ {
+  "char": "舟",
+  "eum": "주",
+  "hun": "배 주",
+  "count": 28,
+  "confidence": "medium"
+ },
+ {
+  "char": "婢",
+  "eum": "비",
+  "hun": "여종 비",
+  "count": 28,
+  "confidence": "medium"
+ },
+ {
+  "char": "交",
+  "eum": "교",
+  "hun": "사귈 교",
+  "count": 28,
+  "confidence": "medium"
+ },
+ {
+  "char": "壯",
+  "eum": "장",
+  "hun": "장할 장",
+  "count": 28,
+  "confidence": "medium"
+ },
+ {
+  "char": "雷",
+  "eum": "뢰",
+  "hun": "우레 뢰",
+  "count": 28,
+  "confidence": "medium"
+ },
+ {
+  "char": "診",
+  "eum": "진",
+  "hun": "진찰할 진",
+  "count": 28,
+  "confidence": "medium"
+ },
+ {
+  "char": "饒",
+  "eum": "요",
+  "hun": "넉넉할 요",
+  "count": 28,
+  "confidence": "medium"
+ },
+ {
+  "char": "轄",
+  "eum": "할",
+  "hun": "다스릴 할",
+  "count": 28,
+  "confidence": "medium"
+ },
+ {
+  "char": "勉",
+  "eum": "면",
+  "hun": "힘쓸 면",
+  "count": 28,
+  "confidence": "medium"
+ },
+ {
+  "char": "醉",
+  "eum": "취",
+  "hun": "취할 취",
+  "count": 27,
+  "confidence": "medium"
+ },
+ {
+  "char": "特",
+  "eum": "특",
+  "hun": "특별할 특",
+  "count": 27,
+  "confidence": "medium"
+ },
+ {
+  "char": "價",
+  "eum": "가",
+  "hun": "값 가",
+  "count": 27,
+  "confidence": "medium"
+ },
+ {
+  "char": "宿",
+  "eum": "숙",
+  "hun": "잘 숙",
+  "count": 27,
+  "confidence": "medium"
+ },
+ {
+  "char": "輕",
+  "eum": "경",
+  "hun": "가벼울 경",
+  "count": 27,
+  "confidence": "medium"
+ },
+ {
+  "char": "屈",
+  "eum": "굴",
+  "hun": "굽힐 굴",
+  "count": 27,
+  "confidence": "medium"
+ },
+ {
+  "char": "戀",
+  "eum": "련",
+  "hun": "그리워할 련",
+  "count": 27,
+  "confidence": "medium"
+ },
+ {
+  "char": "回",
+  "eum": "회",
+  "hun": "돌아올 회",
+  "count": 27,
+  "confidence": "medium"
+ },
+ {
+  "char": "貿",
+  "eum": "무",
+  "hun": "무역할 무",
+  "count": 27,
+  "confidence": "medium"
+ },
+ {
+  "char": "屠",
+  "eum": "도",
+  "hun": "잡을 도",
+  "count": 27,
+  "confidence": "medium"
+ },
+ {
+  "char": "粧",
+  "eum": "장",
+  "hun": "단장할 장",
+  "count": 27,
+  "confidence": "medium"
+ },
+ {
+  "char": "要",
+  "eum": "요",
+  "hun": "요긴할 요",
+  "count": 27,
+  "confidence": "medium"
+ },
+ {
+  "char": "鞫",
+  "eum": "국",
+  "hun": "국문할 국",
+  "count": 27,
+  "confidence": "medium"
+ },
+ {
+  "char": "醒",
+  "eum": "성",
+  "hun": "깰 성",
+  "count": 27,
+  "confidence": "medium"
+ },
+ {
+  "char": "續",
+  "eum": "속",
+  "hun": "이을 속",
+  "count": 26,
+  "confidence": "medium"
+ },
+ {
+  "char": "嗣",
+  "eum": "사",
+  "hun": "이을 사",
+  "count": 26,
+  "confidence": "medium"
+ },
+ {
+  "char": "步",
+  "eum": "보",
+  "hun": "걸음 보",
+  "count": 26,
+  "confidence": "medium"
+ },
+ {
+  "char": "博",
+  "eum": "박",
+  "hun": "넓을 박",
+  "count": 26,
+  "confidence": "medium"
+ },
+ {
+  "char": "鬚",
+  "eum": "수",
+  "hun": "수염 수",
+  "count": 26,
+  "confidence": "medium"
+ },
+ {
+  "char": "髥",
+  "eum": "염",
+  "hun": "구레나룻 염",
+  "count": 26,
+  "confidence": "medium"
+ },
+ {
+  "char": "馭",
+  "eum": "어",
+  "hun": "말부릴 어",
+  "count": 26,
+  "confidence": "medium"
+ },
+ {
+  "char": "琵",
+  "eum": "비",
+  "hun": "비파 비",
+  "count": 26,
+  "confidence": "medium"
+ },
+ {
+  "char": "琶",
+  "eum": "파",
+  "hun": "비파 파",
+  "count": 26,
+  "confidence": "medium"
+ },
+ {
+  "char": "朝",
+  "eum": "조",
+  "hun": "아침 조",
+  "count": 26,
+  "confidence": "medium"
+ },
+ {
+  "char": "鍛",
+  "eum": "단",
+  "hun": "단련할 단",
+  "count": 26,
+  "confidence": "medium"
+ },
+ {
+  "char": "嘆",
+  "eum": "탄",
+  "hun": "탄식할 탄",
+  "count": 25,
+  "confidence": "medium"
+ },
+ {
+  "char": "憊",
+  "eum": "비",
+  "hun": "고달플 비",
+  "count": 25,
+  "confidence": "medium"
+ },
+ {
+  "char": "堪",
+  "eum": "감",
+  "hun": "견딜 감",
+  "count": 25,
+  "confidence": "medium"
+ },
+ {
+  "char": "個",
+  "eum": "개",
+  "hun": "낱 개",
+  "count": 25,
+  "confidence": "medium"
+ },
+ {
+  "char": "誕",
+  "eum": "탄",
+  "hun": "낳을 탄",
+  "count": 25,
+  "confidence": "medium"
+ },
+ {
+  "char": "吏",
+  "eum": "리",
+  "hun": "벼슬아치 리",
+  "count": 25,
+  "confidence": "medium"
+ },
+ {
+  "char": "伍",
+  "eum": "오",
+  "hun": "대오 오",
+  "count": 25,
+  "confidence": "medium"
+ },
+ {
+  "char": "勝",
+  "eum": "승",
+  "hun": "이길 승",
+  "count": 25,
+  "confidence": "medium"
+ },
+ {
+  "char": "爐",
+  "eum": "로",
+  "hun": "화로 로",
+  "count": 25,
+  "confidence": "medium"
+ },
+ {
+  "char": "喜",
+  "eum": "희",
+  "hun": "기쁠 희",
+  "count": 25,
+  "confidence": "medium"
+ },
+ {
+  "char": "占",
+  "eum": "점",
+  "hun": "점칠 점",
+  "count": 25,
+  "confidence": "medium"
+ },
+ {
+  "char": "是",
+  "eum": "시",
+  "hun": "옳을 시",
+  "count": 25,
+  "confidence": "medium"
+ },
+ {
+  "char": "姻",
+  "eum": "인",
+  "hun": "혼인 인",
+  "count": 25,
+  "confidence": "medium"
+ },
+ {
+  "char": "歎",
+  "eum": "탄",
+  "hun": "탄식할 탄",
+  "count": 25,
+  "confidence": "medium"
+ },
+ {
+  "char": "耐",
+  "eum": "내",
+  "hun": "견딜 내",
+  "count": 25,
+  "confidence": "medium"
+ },
+ {
+  "char": "蔬",
+  "eum": "소",
+  "hun": "나물 소",
+  "count": 24,
+  "confidence": "medium"
+ },
+ {
+  "char": "奸",
+  "eum": "간",
+  "hun": "간사할 간",
+  "count": 24,
+  "confidence": "medium"
+ },
+ {
+  "char": "談",
+  "eum": "담",
+  "hun": "말씀 담",
+  "count": 24,
+  "confidence": "medium"
+ },
+ {
+  "char": "材",
+  "eum": "재",
+  "hun": "재목 재",
+  "count": 24,
+  "confidence": "medium"
+ },
+ {
+  "char": "穽",
+  "eum": "정",
+  "hun": "함정 정",
+  "count": 24,
+  "confidence": "medium"
+ },
+ {
+  "char": "德",
+  "eum": "덕",
+  "hun": "큰 덕",
+  "count": 24,
+  "confidence": "medium"
+ },
+ {
+  "char": "獻",
+  "eum": "헌",
+  "hun": "드릴 헌",
+  "count": 24,
+  "confidence": "medium"
+ },
+ {
+  "char": "壞",
+  "eum": "괴",
+  "hun": "무너질 괴",
+  "count": 24,
+  "confidence": "medium"
+ },
+ {
+  "char": "陽",
+  "eum": "양",
+  "hun": "볕 양",
+  "count": 24,
+  "confidence": "medium"
+ },
+ {
+  "char": "狀",
+  "eum": "상",
+  "hun": "형상 상",
+  "count": 24,
+  "confidence": "medium"
+ },
+ {
+  "char": "私",
+  "eum": "사",
+  "hun": "사사 사",
+  "count": 24,
+  "confidence": "medium"
+ },
+ {
+  "char": "澤",
+  "eum": "택",
+  "hun": "못 택",
+  "count": 24,
+  "confidence": "medium"
+ },
+ {
+  "char": "封",
+  "eum": "봉",
+  "hun": "봉할 봉",
+  "count": 24,
+  "confidence": "medium"
+ },
+ {
+  "char": "暫",
+  "eum": "잠",
+  "hun": "잠깐 잠",
+  "count": 24,
+  "confidence": "medium"
+ },
+ {
+  "char": "洪",
+  "eum": "홍",
+  "hun": "넓을 홍",
+  "count": 23,
+  "confidence": "medium"
+ },
+ {
+  "char": "料",
+  "eum": "료",
+  "hun": "헤아릴 료",
+  "count": 23,
+  "confidence": "medium"
+ },
+ {
+  "char": "猜",
+  "eum": "시",
+  "hun": "시기할 시",
+  "count": 23,
+  "confidence": "medium"
+ },
+ {
+  "char": "調",
+  "eum": "조",
+  "hun": "고를 조",
+  "count": 23,
+  "confidence": "medium"
+ },
+ {
+  "char": "偵",
+  "eum": "정",
+  "hun": "염탐할 정",
+  "count": 23,
+  "confidence": "medium"
+ },
+ {
+  "char": "瘟",
+  "eum": "온",
+  "hun": "염병 온",
+  "count": 23,
+  "confidence": "medium"
+ },
+ {
+  "char": "嫉",
+  "eum": "질",
+  "hun": "시기할 질",
+  "count": 23,
+  "confidence": "medium"
+ },
+ {
+  "char": "灌",
+  "eum": "관",
+  "hun": "물댈 관",
+  "count": 23,
+  "confidence": "medium"
+ },
+ {
+  "char": "揮",
+  "eum": "휘",
+  "hun": "휘두를 휘",
+  "count": 23,
+  "confidence": "medium"
+ },
+ {
+  "char": "刻",
+  "eum": "각",
+  "hun": "새길 각",
+  "count": 23,
+  "confidence": "medium"
+ },
+ {
+  "char": "統",
+  "eum": "통",
+  "hun": "거느릴 통",
+  "count": 23,
+  "confidence": "medium"
+ },
+ {
+  "char": "伸",
+  "eum": "신",
+  "hun": "펼 신",
+  "count": 23,
+  "confidence": "medium"
+ },
+ {
+  "char": "貢",
+  "eum": "공",
+  "hun": "바칠 공",
+  "count": 23,
+  "confidence": "medium"
+ },
+ {
+  "char": "甲",
+  "eum": "갑",
+  "hun": "갑옷 갑",
+  "count": 23,
+  "confidence": "medium"
+ },
+ {
+  "char": "狂",
+  "eum": "광",
+  "hun": "미칠 광",
+  "count": 23,
+  "confidence": "medium"
+ },
+ {
+  "char": "倨",
+  "eum": "거",
+  "hun": "거만할 거",
+  "count": 23,
+  "confidence": "medium"
+ },
+ {
+  "char": "欲",
+  "eum": "욕",
+  "hun": "하고자할 욕",
+  "count": 23,
+  "confidence": "medium"
+ },
+ {
+  "char": "賜",
+  "eum": "사",
+  "hun": "줄 사",
+  "count": 23,
+  "confidence": "medium"
+ },
+ {
+  "char": "遲",
+  "eum": "지",
+  "hun": "더딜 지",
+  "count": 22,
+  "confidence": "medium"
+ },
+ {
+  "char": "滯",
+  "eum": "체",
+  "hun": "막힐 체",
+  "count": 22,
+  "confidence": "medium"
+ },
+ {
+  "char": "査",
+  "eum": "사",
+  "hun": "조사할 사",
+  "count": 22,
+  "confidence": "medium"
+ },
+ {
+  "char": "幼",
+  "eum": "유",
+  "hun": "어릴 유",
+  "count": 22,
+  "confidence": "medium"
+ },
+ {
+  "char": "藥",
+  "eum": "약",
+  "hun": "약 약",
+  "count": 22,
+  "confidence": "medium"
+ },
+ {
+  "char": "田",
+  "eum": "전",
+  "hun": "밭 전",
+  "count": 22,
+  "confidence": "medium"
+ },
+ {
+  "char": "疫",
+  "eum": "역",
+  "hun": "전염병 역",
+  "count": 22,
+  "confidence": "medium"
+ },
+ {
+  "char": "微",
+  "eum": "미",
+  "hun": "작을 미",
+  "count": 22,
+  "confidence": "medium"
+ },
+ {
+  "char": "朗",
+  "eum": "랑",
+  "hun": "밝을 랑",
+  "count": 22,
+  "confidence": "medium"
+ },
+ {
+  "char": "頒",
+  "eum": "반",
+  "hun": "반포할 반",
+  "count": 22,
+  "confidence": "medium"
+ },
+ {
+  "char": "禧",
+  "eum": "희",
+  "hun": "복 희",
+  "count": 22,
+  "confidence": "medium"
+ },
+ {
+  "char": "旗",
+  "eum": "기",
+  "hun": "기 기",
+  "count": 22,
+  "confidence": "medium"
+ },
+ {
+  "char": "朔",
+  "eum": "삭",
+  "hun": "초하루 삭",
+  "count": 22,
+  "confidence": "medium"
+ },
+ {
+  "char": "測",
+  "eum": "측",
+  "hun": "헤아릴 측",
+  "count": 22,
+  "confidence": "medium"
+ },
+ {
+  "char": "濟",
+  "eum": "제",
+  "hun": "건널 제",
+  "count": 22,
+  "confidence": "medium"
+ },
+ {
+  "char": "寂",
+  "eum": "적",
+  "hun": "고요할 적",
+  "count": 22,
+  "confidence": "medium"
+ },
+ {
+  "char": "減",
+  "eum": "감",
+  "hun": "덜 감",
+  "count": 21,
+  "confidence": "medium"
+ },
+ {
+  "char": "夢",
+  "eum": "몽",
+  "hun": "꿈 몽",
+  "count": 21,
+  "confidence": "medium"
+ },
+ {
+  "char": "賈",
+  "eum": "가",
+  "hun": "성 가",
+  "count": 21,
+  "confidence": "medium"
+ },
+ {
+  "char": "圍",
+  "eum": "위",
+  "hun": "에워쌀 위",
+  "count": 21,
+  "confidence": "medium"
+ },
+ {
+  "char": "棕",
+  "eum": "종",
+  "hun": "종려나무 종",
+  "count": 21,
+  "confidence": "medium"
+ },
+ {
+  "char": "櫚",
+  "eum": "려",
+  "hun": "종려나무 려",
+  "count": 21,
+  "confidence": "medium"
+ },
+ {
+  "char": "讀",
+  "eum": "독",
+  "hun": "읽을 독",
+  "count": 21,
+  "confidence": "medium"
+ },
+ {
+  "char": "究",
+  "eum": "구",
+  "hun": "연구할 구",
+  "count": 21,
+  "confidence": "medium"
+ },
+ {
+  "char": "歌",
+  "eum": "가",
+  "hun": "노래 가",
+  "count": 21,
+  "confidence": "medium"
+ },
+ {
+  "char": "述",
+  "eum": "술",
+  "hun": "펼 술",
+  "count": 21,
+  "confidence": "medium"
+ },
+ {
+  "char": "率",
+  "eum": "솔",
+  "hun": "거느릴 솔",
+  "count": 21,
+  "confidence": "medium"
+ },
+ {
+  "char": "辨",
+  "eum": "변",
+  "hun": "분별할 변",
+  "count": 21,
+  "confidence": "medium"
+ },
+ {
+  "char": "的",
+  "eum": "적",
+  "hun": "과녁 적",
+  "count": 21,
+  "confidence": "medium"
+ },
+ {
+  "char": "局",
+  "eum": "국",
+  "hun": "판 국",
+  "count": 21,
+  "confidence": "medium"
+ },
+ {
+  "char": "貯",
+  "eum": "저",
+  "hun": "쌓을 저",
+  "count": 20,
+  "confidence": "medium"
+ },
+ {
+  "char": "吸",
+  "eum": "흡",
+  "hun": "마실 흡",
+  "count": 20,
+  "confidence": "medium"
+ },
+ {
+  "char": "昌",
+  "eum": "창",
+  "hun": "창성할 창",
+  "count": 20,
+  "confidence": "medium"
+ },
+ {
+  "char": "抑",
+  "eum": "억",
+  "hun": "누를 억",
+  "count": 20,
+  "confidence": "medium"
+ },
+ {
+  "char": "補",
+  "eum": "보",
+  "hun": "도울 보",
+  "count": 20,
+  "confidence": "medium"
+ },
+ {
+  "char": "悶",
+  "eum": "민",
+  "hun": "답답할 민",
+  "count": 20,
+  "confidence": "medium"
+ },
+ {
+  "char": "集",
+  "eum": "집",
+  "hun": "모을 집",
+  "count": 20,
+  "confidence": "medium"
+ },
+ {
+  "char": "健",
+  "eum": "건",
+  "hun": "굳셀 건",
+  "count": 20,
+  "confidence": "medium"
+ },
+ {
+  "char": "捷",
+  "eum": "첩",
+  "hun": "이길 첩",
+  "count": 20,
+  "confidence": "medium"
+ },
+ {
+  "char": "疾",
+  "eum": "질",
+  "hun": "병 질",
+  "count": 20,
+  "confidence": "medium"
+ },
+ {
+  "char": "彫",
+  "eum": "조",
+  "hun": "새길 조",
+  "count": 20,
+  "confidence": "medium"
+ },
+ {
+  "char": "騷",
+  "eum": "소",
+  "hun": "떠들 소",
+  "count": 20,
+  "confidence": "medium"
+ },
+ {
+  "char": "星",
+  "eum": "성",
+  "hun": "별 성",
+  "count": 20,
+  "confidence": "medium"
+ },
+ {
+  "char": "卽",
+  "eum": "즉",
+  "hun": "곧 즉",
+  "count": 20,
+  "confidence": "medium"
+ },
+ {
+  "char": "龍",
+  "eum": "룡",
+  "hun": "용 룡",
+  "count": 20,
+  "confidence": "medium"
+ },
+ {
+  "char": "戱",
+  "eum": "희",
+  "hun": "놀이 희",
+  "count": 19,
+  "confidence": "medium"
+ },
+ {
+  "char": "追",
+  "eum": "추",
+  "hun": "쫓을 추",
+  "count": 19,
+  "confidence": "medium"
+ },
+ {
+  "char": "汁",
+  "eum": "즙",
+  "hun": "즙 즙",
+  "count": 19,
+  "confidence": "medium"
+ },
+ {
+  "char": "蛇",
+  "eum": "사",
+  "hun": "뱀 사",
+  "count": 19,
+  "confidence": "medium"
+ },
+ {
+  "char": "腫",
+  "eum": "종",
+  "hun": "종기 종",
+  "count": 19,
+  "confidence": "medium"
+ },
+ {
+  "char": "臟",
+  "eum": "장",
+  "hun": "오장 장",
+  "count": 19,
+  "confidence": "medium"
+ },
+ {
+  "char": "卜",
+  "eum": "복",
+  "hun": "점 복",
+  "count": 19,
+  "confidence": "medium"
+ },
+ {
+  "char": "譽",
+  "eum": "예",
+  "hun": "명예 예",
+  "count": 19,
+  "confidence": "medium"
+ },
+ {
+  "char": "譯",
+  "eum": "역",
+  "hun": "번역할 역",
+  "count": 19,
+  "confidence": "medium"
+ },
+ {
+  "char": "悅",
+  "eum": "열",
+  "hun": "기쁠 열",
+  "count": 18,
+  "confidence": "medium"
+ },
+ {
+  "char": "宴",
+  "eum": "연",
+  "hun": "잔치 연",
+  "count": 18,
+  "confidence": "medium"
+ },
+ {
+  "char": "供",
+  "eum": "공",
+  "hun": "이바지할 공",
+  "count": 18,
+  "confidence": "medium"
+ },
+ {
+  "char": "娼",
+  "eum": "창",
+  "hun": "창녀 창",
+  "count": 18,
+  "confidence": "medium"
+ },
+ {
+  "char": "擊",
+  "eum": "격",
+  "hun": "칠 격",
+  "count": 18,
+  "confidence": "medium"
+ },
+ {
+  "char": "蟲",
+  "eum": "충",
+  "hun": "벌레 충",
+  "count": 18,
+  "confidence": "medium"
+ },
+ {
+  "char": "屋",
+  "eum": "옥",
+  "hun": "집 옥",
+  "count": 18,
+  "confidence": "medium"
+ },
+ {
+  "char": "繼",
+  "eum": "계",
+  "hun": "이을 계",
+  "count": 18,
+  "confidence": "medium"
+ },
+ {
+  "char": "障",
+  "eum": "장",
+  "hun": "막을 장",
+  "count": 18,
+  "confidence": "medium"
+ },
+ {
+  "char": "盤",
+  "eum": "반",
+  "hun": "소반 반",
+  "count": 18,
+  "confidence": "medium"
+ },
+ {
+  "char": "稟",
+  "eum": "품",
+  "hun": "받을 품",
+  "count": 18,
+  "confidence": "medium"
+ },
+ {
+  "char": "蕩",
+  "eum": "탕",
+  "hun": "방탕할 탕",
+  "count": 18,
+  "confidence": "medium"
+ },
+ {
+  "char": "端",
+  "eum": "단",
+  "hun": "끝 단",
+  "count": 18,
+  "confidence": "medium"
+ },
+ {
+  "char": "張",
+  "eum": "장",
+  "hun": "베풀 장",
+  "count": 18,
+  "confidence": "medium"
+ },
+ {
+  "char": "謹",
+  "eum": "근",
+  "hun": "삼갈 근",
+  "count": 18,
+  "confidence": "medium"
+ },
+ {
+  "char": "愼",
+  "eum": "신",
+  "hun": "삼갈 신",
+  "count": 18,
+  "confidence": "medium"
+ },
+ {
+  "char": "譜",
+  "eum": "보",
+  "hun": "족보 보",
+  "count": 17,
+  "confidence": "medium"
+ },
+ {
+  "char": "漲",
+  "eum": "창",
+  "hun": "불을 창",
+  "count": 17,
+  "confidence": "medium"
+ },
+ {
+  "char": "妾",
+  "eum": "첩",
+  "hun": "첩 첩",
+  "count": 17,
+  "confidence": "medium"
+ },
+ {
+  "char": "坦",
+  "eum": "탄",
+  "hun": "평탄할 탄",
+  "count": 17,
+  "confidence": "medium"
+ },
+ {
+  "char": "就",
+  "eum": "취",
+  "hun": "나아갈 취",
+  "count": 17,
+  "confidence": "medium"
+ },
+ {
+  "char": "房",
+  "eum": "방",
+  "hun": "방 방",
+  "count": 17,
+  "confidence": "medium"
+ },
+ {
+  "char": "徑",
+  "eum": "경",
+  "hun": "지름길 경",
+  "count": 17,
+  "confidence": "medium"
+ },
+ {
+  "char": "楔",
+  "eum": "설",
+  "hun": "쐐기 설",
+  "count": 17,
+  "confidence": "medium"
+ },
+ {
+  "char": "塗",
+  "eum": "도",
+  "hun": "칠할 도",
+  "count": 17,
+  "confidence": "medium"
+ },
+ {
+  "char": "抹",
+  "eum": "말",
+  "hun": "지울 말",
+  "count": 17,
+  "confidence": "medium"
+ },
+ {
+  "char": "階",
+  "eum": "계",
+  "hun": "섬돌 계",
+  "count": 17,
+  "confidence": "medium"
+ },
+ {
+  "char": "餠",
+  "eum": "병",
+  "hun": "떡 병",
+  "count": 17,
+  "confidence": "medium"
+ },
+ {
+  "char": "珠",
+  "eum": "주",
+  "hun": "구슬 주",
+  "count": 17,
+  "confidence": "medium"
+ },
+ {
+  "char": "政",
+  "eum": "정",
+  "hun": "정사 정",
+  "count": 17,
+  "confidence": "medium"
+ },
+ {
+  "char": "腐",
+  "eum": "부",
+  "hun": "썩을 부",
+  "count": 17,
+  "confidence": "medium"
+ },
+ {
+  "char": "美",
+  "eum": "미",
+  "hun": "아름다울 미",
+  "count": 17,
+  "confidence": "medium"
+ },
+ {
+  "char": "塵",
+  "eum": "진",
+  "hun": "티끌 진",
+  "count": 17,
+  "confidence": "medium"
+ },
+ {
+  "char": "索",
+  "eum": "색",
+  "hun": "찾을 색",
+  "count": 17,
+  "confidence": "medium"
+ },
+ {
+  "char": "提",
+  "eum": "제",
+  "hun": "끌 제",
+  "count": 17,
+  "confidence": "medium"
+ },
+ {
+  "char": "恢",
+  "eum": "회",
+  "hun": "넓을 회",
+  "count": 17,
+  "confidence": "medium"
+ },
+ {
+  "char": "慝",
+  "eum": "특",
+  "hun": "사특할 특",
+  "count": 17,
+  "confidence": "medium"
+ },
+ {
+  "char": "覺",
+  "eum": "각",
+  "hun": "깨달을 각",
+  "count": 17,
+  "confidence": "medium"
+ },
+ {
+  "char": "啓",
+  "eum": "계",
+  "hun": "열 계",
+  "count": 17,
+  "confidence": "medium"
+ },
+ {
+  "char": "瑪",
+  "eum": "마",
+  "hun": "마노 마",
+  "count": 16,
+  "confidence": "medium"
+ },
+ {
+  "char": "瑙",
+  "eum": "노",
+  "hun": "마노 노",
+  "count": 16,
+  "confidence": "medium"
+ },
+ {
+  "char": "焰",
+  "eum": "염",
+  "hun": "불꽃 염",
+  "count": 16,
+  "confidence": "medium"
+ },
+ {
+  "char": "宰",
+  "eum": "재",
+  "hun": "재상 재",
+  "count": 16,
+  "confidence": "medium"
+ },
+ {
+  "char": "鞍",
+  "eum": "안",
+  "hun": "안장 안",
+  "count": 16,
+  "confidence": "medium"
+ },
+ {
+  "char": "喪",
+  "eum": "상",
+  "hun": "잃을 상",
+  "count": 16,
+  "confidence": "medium"
+ },
+ {
+  "char": "盡",
+  "eum": "진",
+  "hun": "다할 진",
+  "count": 16,
+  "confidence": "medium"
+ },
+ {
+  "char": "媤",
+  "eum": "시",
+  "hun": "시집 시",
+  "count": 16,
+  "confidence": "medium"
+ },
+ {
+  "char": "囚",
+  "eum": "수",
+  "hun": "가둘 수",
+  "count": 16,
+  "confidence": "medium"
+ },
+ {
+  "char": "茂",
+  "eum": "무",
+  "hun": "무성할 무",
+  "count": 16,
+  "confidence": "medium"
+ },
+ {
+  "char": "廳",
+  "eum": "청",
+  "hun": "관청 청",
+  "count": 16,
+  "confidence": "medium"
+ },
+ {
+  "char": "覩",
+  "eum": "도",
+  "hun": "볼 도",
+  "count": 16,
+  "confidence": "medium"
+ },
+ {
+  "char": "施",
+  "eum": "시",
+  "hun": "베풀 시",
+  "count": 16,
+  "confidence": "medium"
+ },
+ {
+  "char": "短",
+  "eum": "단",
+  "hun": "짧을 단",
+  "count": 16,
+  "confidence": "medium"
+ },
+ {
+  "char": "妙",
+  "eum": "묘",
+  "hun": "묘할 묘",
+  "count": 16,
+  "confidence": "medium"
+ },
+ {
+  "char": "繁",
+  "eum": "번",
+  "hun": "번성할 번",
+  "count": 16,
+  "confidence": "medium"
+ },
+ {
+  "char": "執",
+  "eum": "집",
+  "hun": "잡을 집",
+  "count": 16,
+  "confidence": "medium"
+ },
+ {
+  "char": "宦",
+  "eum": "환",
+  "hun": "벼슬 환",
+  "count": 16,
+  "confidence": "medium"
+ },
+ {
+  "char": "齊",
+  "eum": "제",
+  "hun": "가지런할 제",
+  "count": 16,
+  "confidence": "medium"
+ },
+ {
+  "char": "配",
+  "eum": "배",
+  "hun": "짝 배",
+  "count": 15,
+  "confidence": "medium"
+ },
+ {
+  "char": "鹽",
+  "eum": "염",
+  "hun": "소금 염",
+  "count": 15,
+  "confidence": "medium"
+ },
+ {
+  "char": "硫",
+  "eum": "류",
+  "hun": "유황 류",
+  "count": 15,
+  "confidence": "medium"
+ },
+ {
+  "char": "適",
+  "eum": "적",
+  "hun": "맞을 적",
+  "count": 15,
+  "confidence": "medium"
+ },
+ {
+  "char": "沓",
+  "eum": "답",
+  "hun": "논 답",
+  "count": 15,
+  "confidence": "medium"
+ },
+ {
+  "char": "庭",
+  "eum": "정",
+  "hun": "뜰 정",
+  "count": 15,
+  "confidence": "medium"
+ },
+ {
+  "char": "達",
+  "eum": "달",
+  "hun": "통달할 달",
+  "count": 15,
+  "confidence": "medium"
+ },
+ {
+  "char": "洶",
+  "eum": "흉",
+  "hun": "물결칠 흉",
+  "count": 15,
+  "confidence": "medium"
+ },
+ {
+  "char": "湧",
+  "eum": "용",
+  "hun": "솟을 용",
+  "count": 15,
+  "confidence": "medium"
+ },
+ {
+  "char": "鼓",
+  "eum": "고",
+  "hun": "북 고",
+  "count": 15,
+  "confidence": "medium"
+ },
+ {
+  "char": "賠",
+  "eum": "배",
+  "hun": "물어줄 배",
+  "count": 15,
+  "confidence": "medium"
+ },
+ {
+  "char": "償",
+  "eum": "상",
+  "hun": "갚을 상",
+  "count": 15,
+  "confidence": "medium"
+ },
+ {
+  "char": "魚",
+  "eum": "어",
+  "hun": "물고기 어",
+  "count": 15,
+  "confidence": "medium"
+ },
+ {
+  "char": "吐",
+  "eum": "토",
+  "hun": "토할 토",
+  "count": 15,
+  "confidence": "medium"
+ },
+ {
+  "char": "武",
+  "eum": "무",
+  "hun": "굳셀 무",
+  "count": 15,
+  "confidence": "medium"
+ },
+ {
+  "char": "非",
+  "eum": "비",
+  "hun": "아닐 비",
+  "count": 15,
+  "confidence": "medium"
+ },
+ {
+  "char": "譴",
+  "eum": "견",
+  "hun": "꾸짖을 견",
+  "count": 15,
+  "confidence": "medium"
+ },
+ {
+  "char": "惱",
+  "eum": "뇌",
+  "hun": "번뇌할 뇌",
+  "count": 15,
+  "confidence": "medium"
+ },
+ {
+  "char": "元",
+  "eum": "원",
+  "hun": "으뜸 원",
+  "count": 15,
+  "confidence": "medium"
+ },
+ {
+  "char": "文",
+  "eum": "문",
+  "hun": "글월 문",
+  "count": 15,
+  "confidence": "medium"
+ },
+ {
+  "char": "寞",
+  "eum": "막",
+  "hun": "고요할 막",
+  "count": 15,
+  "confidence": "medium"
+ },
+ {
+  "char": "比",
+  "eum": "비",
+  "hun": "견줄 비",
+  "count": 15,
+  "confidence": "medium"
+ },
+ {
+  "char": "腸",
+  "eum": "장",
+  "hun": "창자 장",
+  "count": 15,
+  "confidence": "medium"
+ },
+ {
+  "char": "狼",
+  "eum": "랑",
+  "hun": "이리 랑",
+  "count": 15,
+  "confidence": "medium"
+ },
+ {
+  "char": "混",
+  "eum": "혼",
+  "hun": "섞을 혼",
+  "count": 14,
+  "confidence": "medium"
+ },
+ {
+  "char": "銅",
+  "eum": "동",
+  "hun": "구리 동",
+  "count": 14,
+  "confidence": "medium"
+ },
+ {
+  "char": "享",
+  "eum": "향",
+  "hun": "누릴 향",
+  "count": 14,
+  "confidence": "medium"
+ },
+ {
+  "char": "蓄",
+  "eum": "축",
+  "hun": "쌓을 축",
+  "count": 14,
+  "confidence": "medium"
+ },
+ {
+  "char": "給",
+  "eum": "급",
+  "hun": "줄 급",
+  "count": 14,
+  "confidence": "medium"
+ },
+ {
+  "char": "負",
+  "eum": "부",
+  "hun": "질 부",
+  "count": 14,
+  "confidence": "medium"
+ },
+ {
+  "char": "窟",
+  "eum": "굴",
+  "hun": "굴 굴",
+  "count": 14,
+  "confidence": "medium"
+ },
+ {
+  "char": "味",
+  "eum": "미",
+  "hun": "맛 미",
+  "count": 14,
+  "confidence": "medium"
+ },
+ {
+  "char": "斑",
+  "eum": "반",
+  "hun": "얼룩 반",
+  "count": 14,
+  "confidence": "medium"
+ },
+ {
+  "char": "巡",
+  "eum": "순",
+  "hun": "돌 순",
+  "count": 14,
+  "confidence": "medium"
+ },
+ {
+  "char": "住",
+  "eum": "주",
+  "hun": "살 주",
+  "count": 14,
+  "confidence": "medium"
+ },
+ {
+  "char": "單",
+  "eum": "단",
+  "hun": "홑 단",
+  "count": 14,
+  "confidence": "medium"
+ },
+ {
+  "char": "錢",
+  "eum": "전",
+  "hun": "돈 전",
+  "count": 14,
+  "confidence": "medium"
+ },
+ {
+  "char": "絡",
+  "eum": "락",
+  "hun": "얽을 락",
+  "count": 14,
+  "confidence": "medium"
+ },
+ {
+  "char": "帶",
+  "eum": "대",
+  "hun": "띠 대",
+  "count": 14,
+  "confidence": "medium"
+ },
+ {
+  "char": "錮",
+  "eum": "고",
+  "hun": "막을 고",
+  "count": 14,
+  "confidence": "medium"
+ },
+ {
+  "char": "鮮",
+  "eum": "선",
+  "hun": "고울 선",
+  "count": 14,
+  "confidence": "medium"
+ },
+ {
+  "char": "黨",
+  "eum": "당",
+  "hun": "무리 당",
+  "count": 14,
+  "confidence": "medium"
+ },
+ {
+  "char": "衝",
+  "eum": "충",
+  "hun": "찌를 충",
+  "count": 14,
+  "confidence": "medium"
+ },
+ {
+  "char": "曲",
+  "eum": "곡",
+  "hun": "굽을 곡",
+  "count": 14,
+  "confidence": "medium"
+ },
+ {
+  "char": "潤",
+  "eum": "윤",
+  "hun": "윤택할 윤",
+  "count": 14,
+  "confidence": "medium"
+ },
+ {
+  "char": "麗",
+  "eum": "려",
+  "hun": "고울 려",
+  "count": 14,
+  "confidence": "medium"
+ },
+ {
+  "char": "溢",
+  "eum": "일",
+  "hun": "넘칠 일",
+  "count": 13,
+  "confidence": "medium"
+ },
+ {
+  "char": "雜",
+  "eum": "잡",
+  "hun": "섞일 잡",
+  "count": 13,
+  "confidence": "medium"
+ },
+ {
+  "char": "等",
+  "eum": "등",
+  "hun": "무리 등",
+  "count": 13,
+  "confidence": "medium"
+ },
+ {
+  "char": "療",
+  "eum": "료",
+  "hun": "병고칠 료",
+  "count": 13,
+  "confidence": "medium"
+ },
+ {
+  "char": "勒",
+  "eum": "륵",
+  "hun": "굴레 륵",
+  "count": 13,
+  "confidence": "medium"
+ },
+ {
+  "char": "域",
+  "eum": "역",
+  "hun": "지경 역",
+  "count": 13,
+  "confidence": "medium"
+ },
+ {
+  "char": "騎",
+  "eum": "기",
+  "hun": "말탈 기",
+  "count": 13,
+  "confidence": "medium"
+ },
+ {
+  "char": "骸",
+  "eum": "해",
+  "hun": "뼈 해",
+  "count": 13,
+  "confidence": "medium"
+ },
+ {
+  "char": "算",
+  "eum": "산",
+  "hun": "셈 산",
+  "count": 13,
+  "confidence": "medium"
+ },
+ {
+  "char": "損",
+  "eum": "손",
+  "hun": "덜 손",
+  "count": 13,
+  "confidence": "medium"
+ },
+ {
+  "char": "獺",
+  "eum": "달",
+  "hun": "수달 달",
+  "count": 13,
+  "confidence": "medium"
+ },
+ {
+  "char": "較",
+  "eum": "교",
+  "hun": "견줄 교",
+  "count": 13,
+  "confidence": "medium"
+ },
+ {
+  "char": "被",
+  "eum": "피",
+  "hun": "입을 피",
+  "count": 13,
+  "confidence": "medium"
+ },
+ {
+  "char": "侵",
+  "eum": "침",
+  "hun": "침노할 침",
+  "count": 13,
+  "confidence": "medium"
+ },
+ {
+  "char": "討",
+  "eum": "토",
+  "hun": "칠 토",
+  "count": 13,
+  "confidence": "medium"
+ },
+ {
+  "char": "御",
+  "eum": "어",
+  "hun": "다스릴 어",
+  "count": 13,
+  "confidence": "medium"
+ },
+ {
+  "char": "諂",
+  "eum": "첨",
+  "hun": "아첨할 첨",
+  "count": 13,
+  "confidence": "medium"
+ },
+ {
+  "char": "幻",
+  "eum": "환",
+  "hun": "헛보일 환",
+  "count": 13,
+  "confidence": "medium"
+ },
+ {
+  "char": "郞",
+  "eum": "랑",
+  "hun": "사내 랑",
+  "count": 13,
+  "confidence": "medium"
+ },
+ {
+  "char": "市",
+  "eum": "시",
+  "hun": "저자 시",
+  "count": 13,
+  "confidence": "medium"
+ },
+ {
+  "char": "劃",
+  "eum": "획",
+  "hun": "그을 획",
+  "count": 12,
+  "confidence": "medium"
+ },
+ {
+  "char": "遍",
+  "eum": "편",
+  "hun": "두루 편",
+  "count": 12,
+  "confidence": "medium"
+ },
+ {
+  "char": "習",
+  "eum": "습",
+  "hun": "익힐 습",
+  "count": 12,
+  "confidence": "medium"
+ },
+ {
+  "char": "臭",
+  "eum": "취",
+  "hun": "냄새 취",
+  "count": 12,
+  "confidence": "medium"
+ },
+ {
+  "char": "倍",
+  "eum": "배",
+  "hun": "곱 배",
+  "count": 12,
+  "confidence": "medium"
+ },
+ {
+  "char": "珍",
+  "eum": "진",
+  "hun": "보배 진",
+  "count": 12,
+  "confidence": "medium"
+ },
+ {
+  "char": "燒",
+  "eum": "소",
+  "hun": "불사를 소",
+  "count": 12,
+  "confidence": "medium"
+ },
+ {
+  "char": "突",
+  "eum": "돌",
+  "hun": "갑자기 돌",
+  "count": 12,
+  "confidence": "medium"
+ },
+ {
+  "char": "觸",
+  "eum": "촉",
+  "hun": "닿을 촉",
+  "count": 12,
+  "confidence": "medium"
+ },
+ {
+  "char": "製",
+  "eum": "제",
+  "hun": "지을 제",
+  "count": 12,
+  "confidence": "medium"
+ },
+ {
+  "char": "硏",
+  "eum": "연",
+  "hun": "갈 연",
+  "count": 12,
+  "confidence": "medium"
+ },
+ {
+  "char": "丹",
+  "eum": "단",
+  "hun": "붉을 단",
+  "count": 12,
+  "confidence": "medium"
+ },
+ {
+  "char": "肝",
+  "eum": "간",
+  "hun": "간 간",
+  "count": 12,
+  "confidence": "medium"
+ },
+ {
+  "char": "菓",
+  "eum": "과",
+  "hun": "실과 과",
+  "count": 12,
+  "confidence": "medium"
+ },
+ {
+  "char": "褓",
+  "eum": "보",
+  "hun": "보자기 보",
+  "count": 12,
+  "confidence": "medium"
+ },
+ {
+  "char": "效",
+  "eum": "효",
+  "hun": "본받을 효",
+  "count": 12,
+  "confidence": "medium"
+ },
+ {
+  "char": "興",
+  "eum": "흥",
+  "hun": "일 흥",
+  "count": 12,
+  "confidence": "medium"
+ },
+ {
+  "char": "危",
+  "eum": "위",
+  "hun": "위태할 위",
+  "count": 12,
+  "confidence": "medium"
+ },
+ {
+  "char": "伐",
+  "eum": "벌",
+  "hun": "칠 벌",
+  "count": 12,
+  "confidence": "medium"
+ },
+ {
+  "char": "夕",
+  "eum": "석",
+  "hun": "저녁 석",
+  "count": 12,
+  "confidence": "medium"
+ },
+ {
+  "char": "侮",
+  "eum": "모",
+  "hun": "업신여길 모",
+  "count": 12,
+  "confidence": "medium"
+ },
+ {
+  "char": "擾",
+  "eum": "요",
+  "hun": "어지러울 요",
+  "count": 12,
+  "confidence": "medium"
+ },
+ {
+  "char": "着",
+  "eum": "착",
+  "hun": "붙을 착",
+  "count": 12,
+  "confidence": "medium"
+ },
+ {
+  "char": "阿",
+  "eum": "아",
+  "hun": "언덕 아",
+  "count": 12,
+  "confidence": "medium"
+ },
+ {
+  "char": "穴",
+  "eum": "혈",
+  "hun": "굴 혈",
+  "count": 12,
+  "confidence": "medium"
+ },
+ {
+  "char": "飜",
+  "eum": "번",
+  "hun": "번역할 번",
+  "count": 12,
+  "confidence": "medium"
+ },
+ {
+  "char": "獨",
+  "eum": "독",
+  "hun": "홀로 독",
+  "count": 11,
+  "confidence": "medium"
+ },
+ {
+  "char": "央",
+  "eum": "앙",
+  "hun": "가운데 앙",
+  "count": 11,
+  "confidence": "medium"
+ },
+ {
+  "char": "系",
+  "eum": "계",
+  "hun": "이어맬 계",
+  "count": 11,
+  "confidence": "medium"
+ },
+ {
+  "char": "現",
+  "eum": "현",
+  "hun": "나타날 현",
+  "count": 11,
+  "confidence": "medium"
+ },
+ {
+  "char": "排",
+  "eum": "배",
+  "hun": "밀칠 배",
+  "count": 11,
+  "confidence": "medium"
+ },
+ {
+  "char": "賣",
+  "eum": "매",
+  "hun": "팔 매",
+  "count": 11,
+  "confidence": "medium"
+ },
+ {
+  "char": "買",
+  "eum": "매",
+  "hun": "살 매",
+  "count": 11,
+  "confidence": "medium"
+ },
+ {
+  "char": "干",
+  "eum": "간",
+  "hun": "방패 간",
+  "count": 11,
+  "confidence": "medium"
+ },
+ {
+  "char": "醫",
+  "eum": "의",
+  "hun": "의원 의",
+  "count": 11,
+  "confidence": "medium"
+ },
+ {
+  "char": "膝",
+  "eum": "슬",
+  "hun": "무릎 슬",
+  "count": 11,
+  "confidence": "medium"
+ },
+ {
+  "char": "芥",
+  "eum": "개",
+  "hun": "겨자 개",
+  "count": 11,
+  "confidence": "medium"
+ },
+ {
+  "char": "說",
+  "eum": "설",
+  "hun": "말씀 설",
+  "count": 11,
+  "confidence": "medium"
+ },
+ {
+  "char": "淸",
+  "eum": "청",
+  "hun": "맑을 청",
+  "count": 11,
+  "confidence": "medium"
+ },
+ {
+  "char": "憑",
+  "eum": "빙",
+  "hun": "기댈 빙",
+  "count": 11,
+  "confidence": "medium"
+ },
+ {
+  "char": "藉",
+  "eum": "자",
+  "hun": "핑계 자",
+  "count": 11,
+  "confidence": "medium"
+ },
+ {
+  "char": "費",
+  "eum": "비",
+  "hun": "쓸 비",
+  "count": 11,
+  "confidence": "medium"
+ },
+ {
+  "char": "雇",
+  "eum": "고",
+  "hun": "고용할 고",
+  "count": 11,
+  "confidence": "medium"
+ },
+ {
+  "char": "削",
+  "eum": "삭",
+  "hun": "깎을 삭",
+  "count": 11,
+  "confidence": "medium"
+ },
+ {
+  "char": "召",
+  "eum": "소",
+  "hun": "부를 소",
+  "count": 11,
+  "confidence": "medium"
+ },
+ {
+  "char": "廓",
+  "eum": "확",
+  "hun": "둘레 확",
+  "count": 11,
+  "confidence": "medium"
+ },
+ {
+  "char": "講",
+  "eum": "강",
+  "hun": "강론할 강",
+  "count": 11,
+  "confidence": "medium"
+ },
+ {
+  "char": "劇",
+  "eum": "극",
+  "hun": "심할 극",
+  "count": 11,
+  "confidence": "medium"
+ },
+ {
+  "char": "蠢",
+  "eum": "준",
+  "hun": "꿈틀거릴 준",
+  "count": 11,
+  "confidence": "medium"
+ },
+ {
+  "char": "乘",
+  "eum": "승",
+  "hun": "탈 승",
+  "count": 11,
+  "confidence": "medium"
+ },
+ {
+  "char": "昏",
+  "eum": "혼",
+  "hun": "어두울 혼",
+  "count": 11,
+  "confidence": "medium"
+ },
+ {
+  "char": "際",
+  "eum": "제",
+  "hun": "즈음 제",
+  "count": 11,
+  "confidence": "medium"
+ },
+ {
+  "char": "捐",
+  "eum": "연",
+  "hun": "버릴 연",
+  "count": 11,
+  "confidence": "medium"
+ },
+ {
+  "char": "迅",
+  "eum": "신",
+  "hun": "빠를 신",
+  "count": 11,
+  "confidence": "medium"
+ },
+ {
+  "char": "傲",
+  "eum": "오",
+  "hun": "거만할 오",
+  "count": 11,
+  "confidence": "medium"
+ },
+ {
+  "char": "波",
+  "eum": "파",
+  "hun": "물결 파",
+  "count": 11,
+  "confidence": "medium"
+ },
+ {
+  "char": "濤",
+  "eum": "도",
+  "hun": "물결 도",
+  "count": 11,
+  "confidence": "medium"
+ },
+ {
+  "char": "豺",
+  "eum": "시",
+  "hun": "승냥이 시",
+  "count": 11,
+  "confidence": "medium"
+ },
+ {
+  "char": "蝗",
+  "eum": "황",
+  "hun": "메뚜기 황",
+  "count": 11,
+  "confidence": "medium"
+ },
+ {
+  "char": "耕",
+  "eum": "경",
+  "hun": "밭갈 경",
+  "count": 10,
+  "confidence": "medium"
+ },
+ {
+  "char": "致",
+  "eum": "치",
+  "hun": "이를 치",
+  "count": 10,
+  "confidence": "medium"
+ },
+ {
+  "char": "送",
+  "eum": "송",
+  "hun": "보낼 송",
+  "count": 10,
+  "confidence": "medium"
+ },
+ {
+  "char": "袋",
+  "eum": "대",
+  "hun": "자루 대",
+  "count": 10,
+  "confidence": "medium"
+ },
+ {
+  "char": "佩",
+  "eum": "패",
+  "hun": "찰 패",
+  "count": 10,
+  "confidence": "medium"
+ },
+ {
+  "char": "功",
+  "eum": "공",
+  "hun": "공 공",
+  "count": 10,
+  "confidence": "medium"
+ },
+ {
+  "char": "藏",
+  "eum": "장",
+  "hun": "감출 장",
+  "count": 10,
+  "confidence": "medium"
+ },
+ {
+  "char": "婆",
+  "eum": "파",
+  "hun": "할미 파",
+  "count": 10,
+  "confidence": "medium"
+ },
+ {
+  "char": "碑",
+  "eum": "비",
+  "hun": "비석 비",
+  "count": 10,
+  "confidence": "medium"
+ },
+ {
+  "char": "兼",
+  "eum": "겸",
+  "hun": "겸할 겸",
+  "count": 10,
+  "confidence": "medium"
+ },
+ {
+  "char": "抗",
+  "eum": "항",
+  "hun": "막을 항",
+  "count": 10,
+  "confidence": "medium"
+ },
+ {
+  "char": "乾",
+  "eum": "건",
+  "hun": "하늘 건",
+  "count": 10,
+  "confidence": "medium"
+ },
+ {
+  "char": "辰",
+  "eum": "진",
+  "hun": "별 진",
+  "count": 10,
+  "confidence": "medium"
+ },
+ {
+  "char": "移",
+  "eum": "이",
+  "hun": "옮길 이",
+  "count": 10,
+  "confidence": "medium"
+ },
+ {
+  "char": "陋",
+  "eum": "루",
+  "hun": "더러울 루",
+  "count": 10,
+  "confidence": "medium"
+ },
+ {
+  "char": "寄",
+  "eum": "기",
+  "hun": "부칠 기",
+  "count": 10,
+  "confidence": "medium"
+ },
+ {
+  "char": "泰",
+  "eum": "태",
+  "hun": "클 태",
+  "count": 10,
+  "confidence": "medium"
+ },
+ {
+  "char": "箴",
+  "eum": "잠",
+  "hun": "경계 잠",
+  "count": 10,
+  "confidence": "medium"
+ },
+ {
+  "char": "妃",
+  "eum": "비",
+  "hun": "왕비 비",
+  "count": 10,
+  "confidence": "medium"
+ },
+ {
+  "char": "古",
+  "eum": "고",
+  "hun": "옛 고",
+  "count": 10,
+  "confidence": "medium"
+ },
+ {
+  "char": "靜",
+  "eum": "정",
+  "hun": "고요할 정",
+  "count": 10,
+  "confidence": "medium"
+ },
+ {
+  "char": "笑",
+  "eum": "소",
+  "hun": "웃을 소",
+  "count": 10,
+  "confidence": "medium"
+ },
+ {
+  "char": "貨",
+  "eum": "화",
+  "hun": "재물 화",
+  "count": 10,
+  "confidence": "medium"
+ },
+ {
+  "char": "裔",
+  "eum": "예",
+  "hun": "후손 예",
+  "count": 9,
+  "confidence": "medium"
+ },
+ {
+  "char": "厚",
+  "eum": "후",
+  "hun": "두터울 후",
+  "count": 9,
+  "confidence": "medium"
+ },
+ {
+  "char": "午",
+  "eum": "오",
+  "hun": "낮 오",
+  "count": 9,
+  "confidence": "medium"
+ },
+ {
+  "char": "旺",
+  "eum": "왕",
+  "hun": "왕성할 왕",
+  "count": 9,
+  "confidence": "medium"
+ },
+ {
+  "char": "酬",
+  "eum": "수",
+  "hun": "갚을 수",
+  "count": 9,
+  "confidence": "medium"
+ },
+ {
+  "char": "歡",
+  "eum": "환",
+  "hun": "기쁠 환",
+  "count": 9,
+  "confidence": "medium"
+ },
+ {
+  "char": "襲",
+  "eum": "습",
+  "hun": "엄습할 습",
+  "count": 9,
+  "confidence": "medium"
+ },
+ {
+  "char": "俊",
+  "eum": "준",
+  "hun": "준걸 준",
+  "count": 9,
+  "confidence": "medium"
+ },
+ {
+  "char": "秀",
+  "eum": "수",
+  "hun": "빼어날 수",
+  "count": 9,
+  "confidence": "medium"
+ },
+ {
+  "char": "倉",
+  "eum": "창",
+  "hun": "곳집 창",
+  "count": 9,
+  "confidence": "medium"
+ },
+ {
+  "char": "窘",
+  "eum": "군",
+  "hun": "군색할 군",
+  "count": 9,
+  "confidence": "medium"
+ },
+ {
+  "char": "促",
+  "eum": "촉",
+  "hun": "재촉할 촉",
+  "count": 9,
+  "confidence": "medium"
+ },
+ {
+  "char": "兩",
+  "eum": "량",
+  "hun": "두 량",
+  "count": 9,
+  "confidence": "medium"
+ },
+ {
+  "char": "恣",
+  "eum": "자",
+  "hun": "방자할 자",
+  "count": 9,
+  "confidence": "medium"
+ },
+ {
+  "char": "綠",
+  "eum": "록",
+  "hun": "푸를 록",
+  "count": 9,
+  "confidence": "medium"
+ },
+ {
+  "char": "傍",
+  "eum": "방",
+  "hun": "곁 방",
+  "count": 9,
+  "confidence": "medium"
+ },
+ {
+  "char": "駝",
+  "eum": "타",
+  "hun": "낙타 타",
+  "count": 9,
+  "confidence": "medium"
+ },
+ {
+  "char": "鳥",
+  "eum": "조",
+  "hun": "새 조",
+  "count": 9,
+  "confidence": "medium"
+ },
+ {
+  "char": "跡",
+  "eum": "적",
+  "hun": "자취 적",
+  "count": 9,
+  "confidence": "medium"
+ },
+ {
+  "char": "鉢",
+  "eum": "발",
+  "hun": "바리때 발",
+  "count": 9,
+  "confidence": "medium"
+ },
+ {
+  "char": "刀",
+  "eum": "도",
+  "hun": "칼 도",
+  "count": 9,
+  "confidence": "medium"
+ },
+ {
+  "char": "旅",
+  "eum": "려",
+  "hun": "나그네 려",
+  "count": 9,
+  "confidence": "medium"
+ },
+ {
+  "char": "托",
+  "eum": "탁",
+  "hun": "맡길 탁",
+  "count": 9,
+  "confidence": "medium"
+ },
+ {
+  "char": "在",
+  "eum": "재",
+  "hun": "있을 재",
+  "count": 9,
+  "confidence": "medium"
+ },
+ {
+  "char": "幽",
+  "eum": "유",
+  "hun": "그윽할 유",
+  "count": 9,
+  "confidence": "medium"
+ },
+ {
+  "char": "童",
+  "eum": "동",
+  "hun": "아이 동",
+  "count": 9,
+  "confidence": "medium"
+ },
+ {
+  "char": "考",
+  "eum": "고",
+  "hun": "상고할 고",
+  "count": 9,
+  "confidence": "medium"
+ },
+ {
+  "char": "模",
+  "eum": "모",
+  "hun": "본뜰 모",
+  "count": 9,
+  "confidence": "medium"
+ },
+ {
+  "char": "策",
+  "eum": "책",
+  "hun": "꾀 책",
+  "count": 9,
+  "confidence": "medium"
+ },
+ {
+  "char": "史",
+  "eum": "사",
+  "hun": "역사 사",
+  "count": 9,
+  "confidence": "medium"
+ },
+ {
+  "char": "怪",
+  "eum": "괴",
+  "hun": "괴이할 괴",
+  "count": 9,
+  "confidence": "medium"
+ },
+ {
+  "char": "廊",
+  "eum": "랑",
+  "hun": "행랑 랑",
+  "count": 9,
+  "confidence": "medium"
+ },
+ {
+  "char": "牙",
+  "eum": "아",
+  "hun": "어금니 아",
+  "count": 9,
+  "confidence": "medium"
+ },
+ {
+  "char": "頹",
+  "eum": "퇴",
+  "hun": "무너질 퇴",
+  "count": 9,
+  "confidence": "medium"
+ },
+ {
+  "char": "掌",
+  "eum": "장",
+  "hun": "손바닥 장",
+  "count": 9,
+  "confidence": "medium"
+ },
+ {
+  "char": "郭",
+  "eum": "곽",
+  "hun": "성곽 곽",
+  "count": 9,
+  "confidence": "medium"
+ },
+ {
+  "char": "濫",
+  "eum": "람",
+  "hun": "넘칠 람",
+  "count": 9,
+  "confidence": "medium"
+ },
+ {
+  "char": "磨",
+  "eum": "마",
+  "hun": "갈 마",
+  "count": 9,
+  "confidence": "medium"
+ },
+ {
+  "char": "譁",
+  "eum": "화",
+  "hun": "시끄러울 화",
+  "count": 9,
+  "confidence": "medium"
+ },
+ {
+  "char": "洽",
+  "eum": "흡",
+  "hun": "흡족할 흡",
+  "count": 9,
+  "confidence": "medium"
+ },
+ {
+  "char": "寬",
+  "eum": "관",
+  "hun": "너그러울 관",
+  "count": 9,
+  "confidence": "medium"
+ },
+ {
+  "char": "儀",
+  "eum": "의",
+  "hun": "거동 의",
+  "count": 9,
+  "confidence": "medium"
+ },
+ {
+  "char": "縞",
+  "eum": "호",
+  "hun": "명주 호",
+  "count": 8,
+  "confidence": "medium"
+ },
+ {
+  "char": "沈",
+  "eum": "침",
+  "hun": "잠길 침",
+  "count": 8,
+  "confidence": "medium"
+ },
+ {
+  "char": "彷",
+  "eum": "방",
+  "hun": "헤맬 방",
+  "count": 8,
+  "confidence": "medium"
+ },
+ {
+  "char": "樹",
+  "eum": "수",
+  "hun": "나무 수",
+  "count": 8,
+  "confidence": "medium"
+ },
+ {
+  "char": "掩",
+  "eum": "엄",
+  "hun": "가릴 엄",
+  "count": 8,
+  "confidence": "medium"
+ },
+ {
+  "char": "詰",
+  "eum": "힐",
+  "hun": "꾸짖을 힐",
+  "count": 8,
+  "confidence": "medium"
+ },
+ {
+  "char": "隸",
+  "eum": "례",
+  "hun": "붙을 례",
+  "count": 8,
+  "confidence": "medium"
+ },
+ {
+  "char": "饋",
+  "eum": "궤",
+  "hun": "먹일 궤",
+  "count": 8,
+  "confidence": "medium"
+ },
+ {
+  "char": "險",
+  "eum": "험",
+  "hun": "험할 험",
+  "count": 8,
+  "confidence": "medium"
+ },
+ {
+  "char": "酷",
+  "eum": "혹",
+  "hun": "심할 혹",
+  "count": 8,
+  "confidence": "medium"
+ },
+ {
+  "char": "笏",
+  "eum": "홀",
+  "hun": "홀 홀",
+  "count": 8,
+  "confidence": "medium"
+ },
+ {
+  "char": "沐",
+  "eum": "목",
+  "hun": "머리감을 목",
+  "count": 8,
+  "confidence": "medium"
+ },
+ {
+  "char": "浴",
+  "eum": "욕",
+  "hun": "목욕할 욕",
+  "count": 8,
+  "confidence": "medium"
+ },
+ {
+  "char": "鈍",
+  "eum": "둔",
+  "hun": "둔할 둔",
+  "count": 8,
+  "confidence": "medium"
+ },
+ {
+  "char": "肩",
+  "eum": "견",
+  "hun": "어깨 견",
+  "count": 8,
+  "confidence": "medium"
+ },
+ {
+  "char": "巾",
+  "eum": "건",
+  "hun": "수건 건",
+  "count": 8,
+  "confidence": "medium"
+ },
+ {
+  "char": "藍",
+  "eum": "람",
+  "hun": "쪽 람",
+  "count": 8,
+  "confidence": "medium"
+ },
+ {
+  "char": "脚",
+  "eum": "각",
+  "hun": "다리 각",
+  "count": 8,
+  "confidence": "medium"
+ },
+ {
+  "char": "叔",
+  "eum": "숙",
+  "hun": "아재비 숙",
+  "count": 8,
+  "confidence": "medium"
+ },
+ {
+  "char": "勿",
+  "eum": "물",
+  "hun": "말 물",
+  "count": 8,
+  "confidence": "medium"
+ },
+ {
+  "char": "加",
+  "eum": "가",
+  "hun": "더할 가",
+  "count": 8,
+  "confidence": "medium"
+ },
+ {
+  "char": "詩",
+  "eum": "시",
+  "hun": "시 시",
+  "count": 8,
+  "confidence": "medium"
+ },
+ {
+  "char": "蝎",
+  "eum": "갈",
+  "hun": "전갈 갈",
+  "count": 8,
+  "confidence": "medium"
+ },
+ {
+  "char": "灰",
+  "eum": "회",
+  "hun": "재 회",
+  "count": 8,
+  "confidence": "medium"
+ },
+ {
+  "char": "驚",
+  "eum": "경",
+  "hun": "놀랄 경",
+  "count": 8,
+  "confidence": "medium"
+ },
+ {
+  "char": "症",
+  "eum": "증",
+  "hun": "증세 증",
+  "count": 8,
+  "confidence": "medium"
+ },
+ {
+  "char": "髮",
+  "eum": "발",
+  "hun": "터럭 발",
+  "count": 8,
+  "confidence": "medium"
+ },
+ {
+  "char": "纏",
+  "eum": "전",
+  "hun": "얽을 전",
+  "count": 8,
+  "confidence": "medium"
+ },
+ {
+  "char": "席",
+  "eum": "석",
+  "hun": "자리 석",
+  "count": 8,
+  "confidence": "medium"
+ },
+ {
+  "char": "更",
+  "eum": "경",
+  "hun": "고칠 경",
+  "count": 8,
+  "confidence": "medium"
+ },
+ {
+  "char": "晏",
+  "eum": "안",
+  "hun": "늦을 안",
+  "count": 8,
+  "confidence": "medium"
+ },
+ {
+  "char": "洋",
+  "eum": "양",
+  "hun": "큰바다 양",
+  "count": 8,
+  "confidence": "medium"
+ },
+ {
+  "char": "吩",
+  "eum": "분",
+  "hun": "분부할 분",
+  "count": 8,
+  "confidence": "medium"
+ },
+ {
+  "char": "咐",
+  "eum": "부",
+  "hun": "분부할 부",
+  "count": 8,
+  "confidence": "medium"
+ },
+ {
+  "char": "立",
+  "eum": "립",
+  "hun": "설 립",
+  "count": 8,
+  "confidence": "medium"
+ },
+ {
+  "char": "君",
+  "eum": "군",
+  "hun": "임금 군",
+  "count": 8,
+  "confidence": "medium"
+ },
+ {
+  "char": "籍",
+  "eum": "적",
+  "hun": "문서 적",
+  "count": 8,
+  "confidence": "medium"
+ },
+ {
+  "char": "赫",
+  "eum": "혁",
+  "hun": "빛날 혁",
+  "count": 8,
+  "confidence": "medium"
+ },
+ {
+  "char": "赤",
+  "eum": "적",
+  "hun": "붉을 적",
+  "count": 8,
+  "confidence": "medium"
+ },
+ {
+  "char": "閣",
+  "eum": "각",
+  "hun": "누각 각",
+  "count": 8,
+  "confidence": "medium"
+ },
+ {
+  "char": "弊",
+  "eum": "폐",
+  "hun": "폐단 폐",
+  "count": 8,
+  "confidence": "medium"
+ },
+ {
+  "char": "雙",
+  "eum": "쌍",
+  "hun": "두 쌍",
+  "count": 8,
+  "confidence": "medium"
+ },
+ {
+  "char": "荊",
+  "eum": "형",
+  "hun": "가시나무 형",
+  "count": 8,
+  "confidence": "medium"
+ },
+ {
+  "char": "棘",
+  "eum": "극",
+  "hun": "가시 극",
+  "count": 8,
+  "confidence": "medium"
+ },
+ {
+  "char": "批",
+  "eum": "비",
+  "hun": "비평할 비",
+  "count": 8,
+  "confidence": "medium"
+ },
+ {
+  "char": "底",
+  "eum": "저",
+  "hun": "밑 저",
+  "count": 8,
+  "confidence": "medium"
+ },
+ {
+  "char": "坑",
+  "eum": "갱",
+  "hun": "구덩이 갱",
+  "count": 8,
+  "confidence": "medium"
+ },
+ {
+  "char": "匹",
+  "eum": "필",
+  "hun": "짝 필",
+  "count": 7,
+  "confidence": "medium"
+ },
+ {
+  "char": "顔",
+  "eum": "안",
+  "hun": "낯 안",
+  "count": 7,
+  "confidence": "medium"
+ },
+ {
+  "char": "械",
+  "eum": "계",
+  "hun": "기계 계",
+  "count": 7,
+  "confidence": "medium"
+ },
+ {
+  "char": "止",
+  "eum": "지",
+  "hun": "그칠 지",
+  "count": 7,
+  "confidence": "medium"
+ },
+ {
+  "char": "練",
+  "eum": "련",
+  "hun": "익힐 련",
+  "count": 7,
+  "confidence": "medium"
+ },
+ {
+  "char": "鬱",
+  "eum": "울",
+  "hun": "답답할 울",
+  "count": 7,
+  "confidence": "medium"
+ },
+ {
+  "char": "競",
+  "eum": "경",
+  "hun": "다툴 경",
+  "count": 7,
+  "confidence": "medium"
+ },
+ {
+  "char": "臆",
+  "eum": "억",
+  "hun": "가슴 억",
+  "count": 7,
+  "confidence": "medium"
+ },
+ {
+  "char": "程",
+  "eum": "정",
+  "hun": "길 정",
+  "count": 7,
+  "confidence": "medium"
+ },
+ {
+  "char": "原",
+  "eum": "원",
+  "hun": "근원 원",
+  "count": 7,
+  "confidence": "medium"
+ },
+ {
+  "char": "泄",
+  "eum": "설",
+  "hun": "샐 설",
+  "count": 7,
+  "confidence": "medium"
+ },
+ {
+  "char": "劫",
+  "eum": "겁",
+  "hun": "위협할 겁",
+  "count": 7,
+  "confidence": "medium"
+ },
+ {
+  "char": "置",
+  "eum": "치",
+  "hun": "둘 치",
+  "count": 7,
+  "confidence": "medium"
+ },
+ {
+  "char": "整",
+  "eum": "정",
+  "hun": "가지런할 정",
+  "count": 7,
+  "confidence": "medium"
+ },
+ {
+  "char": "開",
+  "eum": "개",
+  "hun": "열 개",
+  "count": 7,
+  "confidence": "medium"
+ },
+ {
+  "char": "缺",
+  "eum": "결",
+  "hun": "이지러질 결",
+  "count": 7,
+  "confidence": "medium"
+ },
+ {
+  "char": "必",
+  "eum": "필",
+  "hun": "반드시 필",
+  "count": 7,
+  "confidence": "medium"
+ },
+ {
+  "char": "債",
+  "eum": "채",
+  "hun": "빚 채",
+  "count": 7,
+  "confidence": "medium"
+ },
+ {
+  "char": "甁",
+  "eum": "병",
+  "hun": "병 병",
+  "count": 7,
+  "confidence": "medium"
+ },
+ {
+  "char": "晶",
+  "eum": "정",
+  "hun": "수정 정",
+  "count": 7,
+  "confidence": "medium"
+ },
+ {
+  "char": "昆",
+  "eum": "곤",
+  "hun": "맏 곤",
+  "count": 7,
+  "confidence": "medium"
+ },
+ {
+  "char": "履",
+  "eum": "리",
+  "hun": "밟을 리",
+  "count": 7,
+  "confidence": "medium"
+ },
+ {
+  "char": "附",
+  "eum": "부",
+  "hun": "붙을 부",
+  "count": 7,
+  "confidence": "medium"
+ },
+ {
+  "char": "序",
+  "eum": "서",
+  "hun": "차례 서",
+  "count": 7,
+  "confidence": "medium"
+ },
+ {
+  "char": "漏",
+  "eum": "루",
+  "hun": "샐 루",
+  "count": 7,
+  "confidence": "medium"
+ },
+ {
+  "char": "距",
+  "eum": "거",
+  "hun": "떨어질 거",
+  "count": 7,
+  "confidence": "medium"
+ },
+ {
+  "char": "奬",
+  "eum": "장",
+  "hun": "장려할 장",
+  "count": 7,
+  "confidence": "medium"
+ },
+ {
+  "char": "搜",
+  "eum": "수",
+  "hun": "찾을 수",
+  "count": 7,
+  "confidence": "medium"
+ },
+ {
+  "char": "讒",
+  "eum": "참",
+  "hun": "참소할 참",
+  "count": 7,
+  "confidence": "medium"
+ },
+ {
+  "char": "睹",
+  "eum": "도",
+  "hun": "볼 도",
+  "count": 7,
+  "confidence": "medium"
+ },
+ {
+  "char": "隻",
+  "eum": "척",
+  "hun": "외짝 척",
+  "count": 7,
+  "confidence": "medium"
+ },
+ {
+  "char": "宥",
+  "eum": "유",
+  "hun": "용서할 유",
+  "count": 7,
+  "confidence": "medium"
+ },
+ {
+  "char": "勵",
+  "eum": "려",
+  "hun": "힘쓸 려",
+  "count": 7,
+  "confidence": "medium"
+ },
+ {
+  "char": "雲",
+  "eum": "운",
+  "hun": "구름 운",
+  "count": 7,
+  "confidence": "medium"
+ },
+ {
+  "char": "係",
+  "eum": "계",
+  "hun": "맬 계",
+  "count": 7,
+  "confidence": "medium"
+ },
+ {
+  "char": "鰐",
+  "eum": "악",
+  "hun": "악어 악",
+  "count": 7,
+  "confidence": "medium"
+ },
+ {
+  "char": "髓",
+  "eum": "수",
+  "hun": "골수 수",
+  "count": 7,
+  "confidence": "medium"
+ },
+ {
+  "char": "茴",
+  "eum": "회",
+  "hun": "회향풀 회",
+  "count": 7,
+  "confidence": "medium"
+ },
+ {
+  "char": "薦",
+  "eum": "천",
+  "hun": "천거할 천",
+  "count": 7,
+  "confidence": "medium"
+ },
+ {
+  "char": "嘶",
+  "eum": "시",
+  "hun": "말이울 시",
+  "count": 7,
+  "confidence": "medium"
+ },
+ {
+  "char": "語",
+  "eum": "어",
+  "hun": "말씀 어",
+  "count": 6,
+  "confidence": "medium"
+ },
+ {
+  "char": "腹",
+  "eum": "복",
+  "hun": "배 복",
+  "count": 6,
+  "confidence": "medium"
+ },
+ {
+  "char": "徨",
+  "eum": "황",
+  "hun": "헤맬 황",
+  "count": 6,
+  "confidence": "medium"
+ },
+ {
+  "char": "姑",
+  "eum": "고",
+  "hun": "시어미 고",
+  "count": 6,
+  "confidence": "medium"
+ },
+ {
+  "char": "麥",
+  "eum": "맥",
+  "hun": "보리 맥",
+  "count": 6,
+  "confidence": "medium"
+ },
+ {
+  "char": "薄",
+  "eum": "박",
+  "hun": "엷을 박",
+  "count": 6,
+  "confidence": "medium"
+ },
+ {
+  "char": "隔",
+  "eum": "격",
+  "hun": "사이뜰 격",
+  "count": 6,
+  "confidence": "medium"
+ },
+ {
+  "char": "辭",
+  "eum": "사",
+  "hun": "말씀 사",
+  "count": 6,
+  "confidence": "medium"
+ },
+ {
+  "char": "章",
+  "eum": "장",
+  "hun": "글 장",
+  "count": 6,
+  "confidence": "medium"
+ },
+ {
+  "char": "篤",
+  "eum": "독",
+  "hun": "도타울 독",
+  "count": 6,
+  "confidence": "medium"
+ },
+ {
+  "char": "乞",
+  "eum": "걸",
+  "hun": "빌 걸",
+  "count": 6,
+  "confidence": "medium"
+ },
+ {
+  "char": "起",
+  "eum": "기",
+  "hun": "일어날 기",
+  "count": 6,
+  "confidence": "medium"
+ },
+ {
+  "char": "殖",
+  "eum": "식",
+  "hun": "불릴 식",
+  "count": 6,
+  "confidence": "medium"
+ },
+ {
+  "char": "助",
+  "eum": "조",
+  "hun": "도울 조",
+  "count": 6,
+  "confidence": "medium"
+ },
+ {
+  "char": "才",
+  "eum": "재",
+  "hun": "재주 재",
+  "count": 6,
+  "confidence": "medium"
+ },
+ {
+  "char": "偏",
+  "eum": "편",
+  "hun": "치우칠 편",
+  "count": 6,
+  "confidence": "medium"
+ },
+ {
+  "char": "僻",
+  "eum": "벽",
+  "hun": "궁벽할 벽",
+  "count": 6,
+  "confidence": "medium"
+ },
+ {
+  "char": "碧",
+  "eum": "벽",
+  "hun": "푸를 벽",
+  "count": 6,
+  "confidence": "medium"
+ },
+ {
+  "char": "桂",
+  "eum": "계",
+  "hun": "계수나무 계",
+  "count": 6,
+  "confidence": "medium"
+ },
+ {
+  "char": "爛",
+  "eum": "란",
+  "hun": "빛날 란",
+  "count": 6,
+  "confidence": "medium"
+ },
+ {
+  "char": "寒",
+  "eum": "한",
+  "hun": "찰 한",
+  "count": 6,
+  "confidence": "medium"
+ },
+ {
+  "char": "首",
+  "eum": "수",
+  "hun": "머리 수",
+  "count": 6,
+  "confidence": "medium"
+ },
+ {
+  "char": "好",
+  "eum": "호",
+  "hun": "좋을 호",
+  "count": 6,
+  "confidence": "medium"
+ },
+ {
+  "char": "瞬",
+  "eum": "순",
+  "hun": "눈깜짝일 순",
+  "count": 6,
+  "confidence": "medium"
+ },
+ {
+  "char": "駁",
+  "eum": "박",
+  "hun": "논박할 박",
+  "count": 6,
+  "confidence": "medium"
+ },
+ {
+  "char": "嫌",
+  "eum": "혐",
+  "hun": "싫어할 혐",
+  "count": 6,
+  "confidence": "medium"
+ },
+ {
+  "char": "斫",
+  "eum": "작",
+  "hun": "벨 작",
+  "count": 6,
+  "confidence": "medium"
+ },
+ {
+  "char": "角",
+  "eum": "각",
+  "hun": "뿔 각",
+  "count": 6,
+  "confidence": "medium"
+ },
+ {
+  "char": "乖",
+  "eum": "괴",
+  "hun": "어그러질 괴",
+  "count": 6,
+  "confidence": "medium"
+ },
+ {
+  "char": "岸",
+  "eum": "안",
+  "hun": "언덕 안",
+  "count": 6,
+  "confidence": "medium"
+ },
+ {
+  "char": "線",
+  "eum": "선",
+  "hun": "줄 선",
+  "count": 6,
+  "confidence": "medium"
+ },
+ {
+  "char": "匪",
+  "eum": "비",
+  "hun": "비적 비",
+  "count": 6,
+  "confidence": "medium"
+ },
+ {
+  "char": "稀",
+  "eum": "희",
+  "hun": "드물 희",
+  "count": 6,
+  "confidence": "medium"
+ },
+ {
+  "char": "已",
+  "eum": "이",
+  "hun": "이미 이",
+  "count": 6,
+  "confidence": "medium"
+ },
+ {
+  "char": "凉",
+  "eum": "량",
+  "hun": "서늘할 량",
+  "count": 6,
+  "confidence": "medium"
+ },
+ {
+  "char": "未",
+  "eum": "미",
+  "hun": "아닐 미",
+  "count": 6,
+  "confidence": "medium"
+ },
+ {
+  "char": "輸",
+  "eum": "수",
+  "hun": "보낼 수",
+  "count": 6,
+  "confidence": "medium"
+ },
+ {
+  "char": "賦",
+  "eum": "부",
+  "hun": "구실 부",
+  "count": 6,
+  "confidence": "medium"
+ },
+ {
+  "char": "糞",
+  "eum": "분",
+  "hun": "똥 분",
+  "count": 6,
+  "confidence": "medium"
+ },
+ {
+  "char": "嬪",
+  "eum": "빈",
+  "hun": "왕비 빈",
+  "count": 6,
+  "confidence": "medium"
+ },
+ {
+  "char": "質",
+  "eum": "질",
+  "hun": "바탕 질",
+  "count": 6,
+  "confidence": "medium"
+ },
+ {
+  "char": "逸",
+  "eum": "일",
+  "hun": "편안할 일",
+  "count": 6,
+  "confidence": "medium"
+ },
+ {
+  "char": "琉",
+  "eum": "류",
+  "hun": "유리 류",
+  "count": 6,
+  "confidence": "medium"
+ },
+ {
+  "char": "璃",
+  "eum": "리",
+  "hun": "유리 리",
+  "count": 6,
+  "confidence": "medium"
+ },
+ {
+  "char": "漁",
+  "eum": "어",
+  "hun": "고기잡을 어",
+  "count": 6,
+  "confidence": "medium"
+ },
+ {
+  "char": "脅",
+  "eum": "협",
+  "hun": "위협할 협",
+  "count": 6,
+  "confidence": "medium"
+ },
+ {
+  "char": "渴",
+  "eum": "갈",
+  "hun": "목마를 갈",
+  "count": 6,
+  "confidence": "medium"
+ },
+ {
+  "char": "淹",
+  "eum": "엄",
+  "hun": "오랠 엄",
+  "count": 6,
+  "confidence": "medium"
+ },
+ {
+  "char": "絃",
+  "eum": "현",
+  "hun": "줄 현",
+  "count": 6,
+  "confidence": "medium"
+ },
+ {
+  "char": "喧",
+  "eum": "훤",
+  "hun": "시끄러울 훤",
+  "count": 6,
+  "confidence": "medium"
+ },
+ {
+  "char": "培",
+  "eum": "배",
+  "hun": "북돋울 배",
+  "count": 6,
+  "confidence": "medium"
+ },
+ {
+  "char": "戾",
+  "eum": "려",
+  "hun": "어그러질 려",
+  "count": 6,
+  "confidence": "medium"
+ },
+ {
+  "char": "冬",
+  "eum": "동",
+  "hun": "겨울 동",
+  "count": 6,
+  "confidence": "medium"
+ },
+ {
+  "char": "戶",
+  "eum": "호",
+  "hun": "지게 호",
+  "count": 6,
+  "confidence": "medium"
+ },
+ {
+  "char": "僭",
+  "eum": "참",
+  "hun": "참람할 참",
+  "count": 6,
+  "confidence": "medium"
+ },
+ {
+  "char": "谷",
+  "eum": "곡",
+  "hun": "골 곡",
+  "count": 5,
+  "confidence": "medium"
+ },
+ {
+  "char": "快",
+  "eum": "쾌",
+  "hun": "쾌할 쾌",
+  "count": 5,
+  "confidence": "medium"
+ },
+ {
+  "char": "餞",
+  "eum": "전",
+  "hun": "전별할 전",
+  "count": 5,
+  "confidence": "medium"
+ },
+ {
+  "char": "卓",
+  "eum": "탁",
+  "hun": "높을 탁",
+  "count": 5,
+  "confidence": "medium"
+ },
+ {
+  "char": "店",
+  "eum": "점",
+  "hun": "가게 점",
+  "count": 5,
+  "confidence": "medium"
+ },
+ {
+  "char": "諸",
+  "eum": "제",
+  "hun": "모두 제",
+  "count": 5,
+  "confidence": "medium"
+ },
+ {
+  "char": "觀",
+  "eum": "관",
+  "hun": "볼 관",
+  "count": 5,
+  "confidence": "medium"
+ },
+ {
+  "char": "湖",
+  "eum": "호",
+  "hun": "호수 호",
+  "count": 5,
+  "confidence": "medium"
+ },
+ {
+  "char": "斗",
+  "eum": "두",
+  "hun": "말 두",
+  "count": 5,
+  "confidence": "medium"
+ },
+ {
+  "char": "値",
+  "eum": "치",
+  "hun": "값 치",
+  "count": 5,
+  "confidence": "medium"
+ },
+ {
+  "char": "鷹",
+  "eum": "응",
+  "hun": "매 응",
+  "count": 5,
+  "confidence": "medium"
+ },
+ {
+  "char": "鶴",
+  "eum": "학",
+  "hun": "학 학",
+  "count": 5,
+  "confidence": "medium"
+ },
+ {
+  "char": "嫁",
+  "eum": "가",
+  "hun": "시집갈 가",
+  "count": 5,
+  "confidence": "medium"
+ },
+ {
+  "char": "傭",
+  "eum": "용",
+  "hun": "품팔 용",
+  "count": 5,
+  "confidence": "medium"
+ },
+ {
+  "char": "優",
+  "eum": "우",
+  "hun": "넉넉할 우",
+  "count": 5,
+  "confidence": "medium"
+ },
+ {
+  "char": "搬",
+  "eum": "반",
+  "hun": "옮길 반",
+  "count": 5,
+  "confidence": "medium"
+ },
+ {
+  "char": "縮",
+  "eum": "축",
+  "hun": "줄일 축",
+  "count": 5,
+  "confidence": "medium"
+ },
+ {
+  "char": "誤",
+  "eum": "오",
+  "hun": "그르칠 오",
+  "count": 5,
+  "confidence": "medium"
+ },
+ {
+  "char": "沃",
+  "eum": "옥",
+  "hun": "기름질 옥",
+  "count": 5,
+  "confidence": "medium"
+ },
+ {
+  "char": "吉",
+  "eum": "길",
+  "hun": "길할 길",
+  "count": 5,
+  "confidence": "medium"
+ },
+ {
+  "char": "妖",
+  "eum": "요",
+  "hun": "요사할 요",
+  "count": 5,
+  "confidence": "medium"
+ },
+ {
+  "char": "招",
+  "eum": "초",
+  "hun": "부를 초",
+  "count": 5,
+  "confidence": "medium"
+ },
+ {
+  "char": "僞",
+  "eum": "위",
+  "hun": "거짓 위",
+  "count": 5,
+  "confidence": "medium"
+ },
+ {
+  "char": "苟",
+  "eum": "구",
+  "hun": "구차할 구",
+  "count": 5,
+  "confidence": "medium"
+ },
+ {
+  "char": "奧",
+  "eum": "오",
+  "hun": "깊을 오",
+  "count": 5,
+  "confidence": "medium"
+ },
+ {
+  "char": "洩",
+  "eum": "설",
+  "hun": "샐 설",
+  "count": 5,
+  "confidence": "medium"
+ },
+ {
+  "char": "猝",
+  "eum": "졸",
+  "hun": "갑자기 졸",
+  "count": 5,
+  "confidence": "medium"
+ },
+ {
+  "char": "譏",
+  "eum": "기",
+  "hun": "비웃을 기",
+  "count": 5,
+  "confidence": "medium"
+ },
+ {
+  "char": "唱",
+  "eum": "창",
+  "hun": "부를 창",
+  "count": 5,
+  "confidence": "medium"
+ },
+ {
+  "char": "弔",
+  "eum": "조",
+  "hun": "조상할 조",
+  "count": 5,
+  "confidence": "medium"
+ },
+ {
+  "char": "寨",
+  "eum": "채",
+  "hun": "진터 채",
+  "count": 5,
+  "confidence": "medium"
+ },
+ {
+  "char": "駿",
+  "eum": "준",
+  "hun": "준마 준",
+  "count": 5,
+  "confidence": "medium"
+ },
+ {
+  "char": "尹",
+  "eum": "윤",
+  "hun": "다스릴 윤",
+  "count": 5,
+  "confidence": "medium"
+ },
+ {
+  "char": "隧",
+  "eum": "수",
+  "hun": "길 수",
+  "count": 5,
+  "confidence": "medium"
+ },
+ {
+  "char": "址",
+  "eum": "지",
+  "hun": "터 지",
+  "count": 5,
+  "confidence": "medium"
+ },
+ {
+  "char": "走",
+  "eum": "주",
+  "hun": "달릴 주",
+  "count": 5,
+  "confidence": "medium"
+ },
+ {
+  "char": "抄",
+  "eum": "초",
+  "hun": "뽑을 초",
+  "count": 5,
+  "confidence": "medium"
+ },
+ {
+  "char": "反",
+  "eum": "반",
+  "hun": "돌이킬 반",
+  "count": 5,
+  "confidence": "medium"
+ },
+ {
+  "char": "栽",
+  "eum": "재",
+  "hun": "심을 재",
+  "count": 5,
+  "confidence": "medium"
+ },
+ {
+  "char": "呻",
+  "eum": "신",
+  "hun": "신음할 신",
+  "count": 5,
+  "confidence": "medium"
+ },
+ {
+  "char": "吟",
+  "eum": "음",
+  "hun": "읊을 음",
+  "count": 5,
+  "confidence": "medium"
+ },
+ {
+  "char": "友",
+  "eum": "우",
+  "hun": "벗 우",
+  "count": 5,
+  "confidence": "medium"
+ },
+ {
+  "char": "怯",
+  "eum": "겁",
+  "hun": "겁낼 겁",
+  "count": 5,
+  "confidence": "medium"
+ },
+ {
+  "char": "杖",
+  "eum": "장",
+  "hun": "지팡이 장",
+  "count": 5,
+  "confidence": "medium"
+ },
+ {
+  "char": "唯",
+  "eum": "유",
+  "hun": "오직 유",
+  "count": 5,
+  "confidence": "medium"
+ },
+ {
+  "char": "碎",
+  "eum": "쇄",
+  "hun": "부술 쇄",
+  "count": 5,
+  "confidence": "medium"
+ },
+ {
+  "char": "閒",
+  "eum": "한",
+  "hun": "한가할 한",
+  "count": 5,
+  "confidence": "medium"
+ },
+ {
+  "char": "躁",
+  "eum": "조",
+  "hun": "조급할 조",
+  "count": 5,
+  "confidence": "medium"
+ },
+ {
+  "char": "擁",
+  "eum": "옹",
+  "hun": "안을 옹",
+  "count": 5,
+  "confidence": "medium"
+ },
+ {
+  "char": "洛",
+  "eum": "락",
+  "hun": "물이름 락",
+  "count": 5,
+  "confidence": "medium"
+ },
+ {
+  "char": "轉",
+  "eum": "전",
+  "hun": "구를 전",
+  "count": 5,
+  "confidence": "medium"
+ },
+ {
+  "char": "漆",
+  "eum": "칠",
+  "hun": "옻 칠",
+  "count": 5,
+  "confidence": "medium"
+ },
+ {
+  "char": "貞",
+  "eum": "정",
+  "hun": "곧을 정",
+  "count": 5,
+  "confidence": "medium"
+ },
+ {
+  "char": "痙",
+  "eum": "경",
+  "hun": "경련 경",
+  "count": 5,
+  "confidence": "medium"
+ },
+ {
+  "char": "攣",
+  "eum": "련",
+  "hun": "경련 련",
+  "count": 5,
+  "confidence": "medium"
+ },
+ {
+  "char": "拘",
+  "eum": "구",
+  "hun": "잡을 구",
+  "count": 5,
+  "confidence": "medium"
+ },
+ {
+  "char": "英",
+  "eum": "영",
+  "hun": "꽃부리 영",
+  "count": 4,
+  "confidence": "medium"
+ },
+ {
+  "char": "戚",
+  "eum": "척",
+  "hun": "친척 척",
+  "count": 4,
+  "confidence": "medium"
+ },
+ {
+  "char": "均",
+  "eum": "균",
+  "hun": "고를 균",
+  "count": 4,
+  "confidence": "medium"
+ },
+ {
+  "char": "巨",
+  "eum": "거",
+  "hun": "클 거",
+  "count": 4,
+  "confidence": "medium"
+ },
+ {
+  "char": "捨",
+  "eum": "사",
+  "hun": "버릴 사",
+  "count": 4,
+  "confidence": "medium"
+ },
+ {
+  "char": "甥",
+  "eum": "생",
+  "hun": "생질 생",
+  "count": 4,
+  "confidence": "medium"
+ },
+ {
+  "char": "姪",
+  "eum": "질",
+  "hun": "조카 질",
+  "count": 4,
+  "confidence": "medium"
+ },
+ {
+  "char": "斥",
+  "eum": "척",
+  "hun": "물리칠 척",
+  "count": 4,
+  "confidence": "medium"
+ },
+ {
+  "char": "泉",
+  "eum": "천",
+  "hun": "샘 천",
+  "count": 4,
+  "confidence": "medium"
+ },
+ {
+  "char": "雅",
+  "eum": "아",
+  "hun": "맑을 아",
+  "count": 4,
+  "confidence": "medium"
+ },
+ {
+  "char": "淡",
+  "eum": "담",
+  "hun": "맑을 담",
+  "count": 4,
+  "confidence": "medium"
+ },
+ {
+  "char": "箱",
+  "eum": "상",
+  "hun": "상자 상",
+  "count": 4,
+  "confidence": "medium"
+ },
+ {
+  "char": "津",
+  "eum": "진",
+  "hun": "나루 진",
+  "count": 4,
+  "confidence": "medium"
+ },
+ {
+  "char": "胞",
+  "eum": "포",
+  "hun": "세포 포",
+  "count": 4,
+  "confidence": "medium"
+ },
+ {
+  "char": "露",
+  "eum": "로",
+  "hun": "이슬 로",
+  "count": 4,
+  "confidence": "medium"
+ },
+ {
+  "char": "眉",
+  "eum": "미",
+  "hun": "눈썹 미",
+  "count": 4,
+  "confidence": "medium"
+ },
+ {
+  "char": "雄",
+  "eum": "웅",
+  "hun": "수컷 웅",
+  "count": 4,
+  "confidence": "medium"
+ },
+ {
+  "char": "織",
+  "eum": "직",
+  "hun": "짤 직",
+  "count": 4,
+  "confidence": "medium"
+ },
+ {
+  "char": "竣",
+  "eum": "준",
+  "hun": "마칠 준",
+  "count": 4,
+  "confidence": "medium"
+ },
+ {
+  "char": "塘",
+  "eum": "당",
+  "hun": "못 당",
+  "count": 4,
+  "confidence": "medium"
+ },
+ {
+  "char": "鵝",
+  "eum": "아",
+  "hun": "거위 아",
+  "count": 4,
+  "confidence": "medium"
+ },
+ {
+  "char": "肺",
+  "eum": "폐",
+  "hun": "허파 폐",
+  "count": 4,
+  "confidence": "medium"
+ },
+ {
+  "char": "麓",
+  "eum": "록",
+  "hun": "산기슭 록",
+  "count": 4,
+  "confidence": "medium"
+ },
+ {
+  "char": "嗔",
+  "eum": "진",
+  "hun": "성낼 진",
+  "count": 4,
+  "confidence": "medium"
+ },
+ {
+  "char": "網",
+  "eum": "망",
+  "hun": "그물 망",
+  "count": 4,
+  "confidence": "medium"
+ },
+ {
+  "char": "瘡",
+  "eum": "창",
+  "hun": "부스럼 창",
+  "count": 4,
+  "confidence": "medium"
+ },
+ {
+  "char": "若",
+  "eum": "약",
+  "hun": "만약 약",
+  "count": 4,
+  "confidence": "medium"
+ },
+ {
+  "char": "誼",
+  "eum": "의",
+  "hun": "옳을 의",
+  "count": 4,
+  "confidence": "medium"
+ },
+ {
+  "char": "慘",
+  "eum": "참",
+  "hun": "참혹할 참",
+  "count": 4,
+  "confidence": "medium"
+ },
+ {
+  "char": "愁",
+  "eum": "수",
+  "hun": "근심 수",
+  "count": 4,
+  "confidence": "medium"
+ },
+ {
+  "char": "慣",
+  "eum": "관",
+  "hun": "익숙할 관",
+  "count": 4,
+  "confidence": "medium"
+ },
+ {
+  "char": "胄",
+  "eum": "주",
+  "hun": "투구 주",
+  "count": 4,
+  "confidence": "medium"
+ },
+ {
+  "char": "凄",
+  "eum": "처",
+  "hun": "쓸쓸할 처",
+  "count": 4,
+  "confidence": "medium"
+ },
+ {
+  "char": "樓",
+  "eum": "루",
+  "hun": "다락 루",
+  "count": 4,
+  "confidence": "medium"
+ },
+ {
+  "char": "影",
+  "eum": "영",
+  "hun": "그림자 영",
+  "count": 4,
+  "confidence": "medium"
+ },
+ {
+  "char": "緊",
+  "eum": "긴",
+  "hun": "긴할 긴",
+  "count": 4,
+  "confidence": "medium"
+ },
+ {
+  "char": "慌",
+  "eum": "황",
+  "hun": "어리둥절할 황",
+  "count": 4,
+  "confidence": "medium"
+ },
+ {
+  "char": "衙",
+  "eum": "아",
+  "hun": "관청 아",
+  "count": 4,
+  "confidence": "medium"
+ },
+ {
+  "char": "忖",
+  "eum": "촌",
+  "hun": "헤아릴 촌",
+  "count": 4,
+  "confidence": "medium"
+ },
+ {
+  "char": "焦",
+  "eum": "초",
+  "hun": "탈 초",
+  "count": 4,
+  "confidence": "medium"
+ },
+ {
+  "char": "厄",
+  "eum": "액",
+  "hun": "액 액",
+  "count": 4,
+  "confidence": "medium"
+ },
+ {
+  "char": "襁",
+  "eum": "강",
+  "hun": "포대기 강",
+  "count": 4,
+  "confidence": "medium"
+ },
+ {
+  "char": "箭",
+  "eum": "전",
+  "hun": "화살 전",
+  "count": 4,
+  "confidence": "medium"
+ },
+ {
+  "char": "飢",
+  "eum": "기",
+  "hun": "주릴 기",
+  "count": 4,
+  "confidence": "medium"
+ },
+ {
+  "char": "狽",
+  "eum": "패",
+  "hun": "이리 패",
+  "count": 4,
+  "confidence": "medium"
+ },
+ {
+  "char": "潺",
+  "eum": "잔",
+  "hun": "물흐르는소리 잔",
+  "count": 4,
+  "confidence": "medium"
+ },
+ {
+  "char": "闊",
+  "eum": "활",
+  "hun": "넓을 활",
+  "count": 4,
+  "confidence": "medium"
+ },
+ {
+  "char": "勤",
+  "eum": "근",
+  "hun": "부지런할 근",
+  "count": 4,
+  "confidence": "medium"
+ },
+ {
+  "char": "顯",
+  "eum": "현",
+  "hun": "나타날 현",
+  "count": 4,
+  "confidence": "medium"
+ },
+ {
+  "char": "艱",
+  "eum": "간",
+  "hun": "어려울 간",
+  "count": 4,
+  "confidence": "medium"
+ },
+ {
+  "char": "盒",
+  "eum": "합",
+  "hun": "그릇 합",
+  "count": 4,
+  "confidence": "medium"
+ },
+ {
+  "char": "嶺",
+  "eum": "령",
+  "hun": "고개 령",
+  "count": 4,
+  "confidence": "medium"
+ },
+ {
+  "char": "掃",
+  "eum": "소",
+  "hun": "쓸 소",
+  "count": 4,
+  "confidence": "medium"
+ },
+ {
+  "char": "餘",
+  "eum": "여",
+  "hun": "남을 여",
+  "count": 4,
+  "confidence": "medium"
+ },
+ {
+  "char": "蓚",
+  "eum": "수",
+  "hun": "수산초 수",
+  "count": 4,
+  "confidence": "review"
+ },
+ {
+  "char": "梯",
+  "eum": "제",
+  "hun": "사다리 제",
+  "count": 4,
+  "confidence": "medium"
+ },
+ {
+  "char": "著",
+  "eum": "저",
+  "hun": "지을 저",
+  "count": 4,
+  "confidence": "medium"
+ },
+ {
+  "char": "詳",
+  "eum": "상",
+  "hun": "자세할 상",
+  "count": 4,
+  "confidence": "medium"
+ },
+ {
+  "char": "餐",
+  "eum": "찬",
+  "hun": "먹을 찬",
+  "count": 4,
+  "confidence": "medium"
+ },
+ {
+  "char": "綸",
+  "eum": "륜",
+  "hun": "낚싯줄 륜",
+  "count": 4,
+  "confidence": "medium"
+ },
+ {
+  "char": "讖",
+  "eum": "참",
+  "hun": "예언 참",
+  "count": 4,
+  "confidence": "medium"
+ },
+ {
+  "char": "沌",
+  "eum": "돈",
+  "hun": "혼돈 돈",
+  "count": 3,
+  "confidence": "medium"
+ },
+ {
+  "char": "征",
+  "eum": "정",
+  "hun": "칠 정",
+  "count": 3,
+  "confidence": "medium"
+ },
+ {
+  "char": "劍",
+  "eum": "검",
+  "hun": "칼 검",
+  "count": 3,
+  "confidence": "medium"
+ },
+ {
+  "char": "契",
+  "eum": "계",
+  "hun": "맺을 계",
+  "count": 3,
+  "confidence": "medium"
+ },
+ {
+  "char": "眼",
+  "eum": "안",
+  "hun": "눈 안",
+  "count": 3,
+  "confidence": "medium"
+ },
+ {
+  "char": "違",
+  "eum": "위",
+  "hun": "어긋날 위",
+  "count": 3,
+  "confidence": "medium"
+ },
+ {
+  "char": "辛",
+  "eum": "신",
+  "hun": "매울 신",
+  "count": 3,
+  "confidence": "medium"
+ },
+ {
+  "char": "涉",
+  "eum": "섭",
+  "hun": "건널 섭",
+  "count": 3,
+  "confidence": "medium"
+ },
+ {
+  "char": "積",
+  "eum": "적",
+  "hun": "쌓을 적",
+  "count": 3,
+  "confidence": "medium"
+ },
+ {
+  "char": "頓",
+  "eum": "돈",
+  "hun": "조아릴 돈",
+  "count": 3,
+  "confidence": "medium"
+ },
+ {
+  "char": "景",
+  "eum": "경",
+  "hun": "경치 경",
+  "count": 3,
+  "confidence": "medium"
+ },
+ {
+  "char": "齒",
+  "eum": "치",
+  "hun": "이 치",
+  "count": 3,
+  "confidence": "medium"
+ },
+ {
+  "char": "枋",
+  "eum": "방",
+  "hun": "다목 방",
+  "count": 3,
+  "confidence": "review"
+ },
+ {
+  "char": "株",
+  "eum": "주",
+  "hun": "그루 주",
+  "count": 3,
+  "confidence": "medium"
+ },
+ {
+  "char": "延",
+  "eum": "연",
+  "hun": "늘일 연",
+  "count": 3,
+  "confidence": "medium"
+ },
+ {
+  "char": "聘",
+  "eum": "빙",
+  "hun": "장가들 빙",
+  "count": 3,
+  "confidence": "medium"
+ },
+ {
+  "char": "幣",
+  "eum": "폐",
+  "hun": "폐백 폐",
+  "count": 3,
+  "confidence": "medium"
+ },
+ {
+  "char": "誣",
+  "eum": "무",
+  "hun": "속일 무",
+  "count": 3,
+  "confidence": "medium"
+ },
+ {
+  "char": "繡",
+  "eum": "수",
+  "hun": "수놓을 수",
+  "count": 3,
+  "confidence": "medium"
+ },
+ {
+  "char": "桶",
+  "eum": "통",
+  "hun": "통 통",
+  "count": 3,
+  "confidence": "medium"
+ },
+ {
+  "char": "菖",
+  "eum": "창",
+  "hun": "창포 창",
+  "count": 3,
+  "confidence": "medium"
+ },
+ {
+  "char": "蒲",
+  "eum": "포",
+  "hun": "부들 포",
+  "count": 3,
+  "confidence": "medium"
+ },
+ {
+  "char": "捧",
+  "eum": "봉",
+  "hun": "받들 봉",
+  "count": 3,
+  "confidence": "medium"
+ },
+ {
+  "char": "煎",
+  "eum": "전",
+  "hun": "달일 전",
+  "count": 3,
+  "confidence": "medium"
+ },
+ {
+  "char": "痕",
+  "eum": "흔",
+  "hun": "흔적 흔",
+  "count": 3,
+  "confidence": "medium"
+ },
+ {
+  "char": "閉",
+  "eum": "폐",
+  "hun": "닫을 폐",
+  "count": 3,
+  "confidence": "medium"
+ },
+ {
+  "char": "碍",
+  "eum": "애",
+  "hun": "거리낄 애",
+  "count": 3,
+  "confidence": "medium"
+ },
+ {
+  "char": "劣",
+  "eum": "렬",
+  "hun": "못할 렬",
+  "count": 3,
+  "confidence": "medium"
+ },
+ {
+  "char": "鎭",
+  "eum": "진",
+  "hun": "진압할 진",
+  "count": 3,
+  "confidence": "medium"
+ },
+ {
+  "char": "評",
+  "eum": "평",
+  "hun": "평할 평",
+  "count": 3,
+  "confidence": "medium"
+ },
+ {
+  "char": "攻",
+  "eum": "공",
+  "hun": "칠 공",
+  "count": 3,
+  "confidence": "medium"
+ },
+ {
+  "char": "振",
+  "eum": "진",
+  "hun": "떨칠 진",
+  "count": 3,
+  "confidence": "medium"
+ },
+ {
+  "char": "屯",
+  "eum": "둔",
+  "hun": "진칠 둔",
+  "count": 3,
+  "confidence": "medium"
+ },
+ {
+  "char": "操",
+  "eum": "조",
+  "hun": "잡을 조",
+  "count": 3,
+  "confidence": "medium"
+ },
+ {
+  "char": "增",
+  "eum": "증",
+  "hun": "더할 증",
+  "count": 3,
+  "confidence": "medium"
+ },
+ {
+  "char": "週",
+  "eum": "주",
+  "hun": "돌 주",
+  "count": 3,
+  "confidence": "medium"
+ },
+ {
+  "char": "毆",
+  "eum": "구",
+  "hun": "때릴 구",
+  "count": 3,
+  "confidence": "medium"
+ },
+ {
+  "char": "緯",
+  "eum": "위",
+  "hun": "가로 위",
+  "count": 3,
+  "confidence": "medium"
+ },
+ {
+  "char": "鬪",
+  "eum": "투",
+  "hun": "싸울 투",
+  "count": 3,
+  "confidence": "medium"
+ },
+ {
+  "char": "欄",
+  "eum": "란",
+  "hun": "난간 란",
+  "count": 3,
+  "confidence": "medium"
+ },
+ {
+  "char": "囊",
+  "eum": "낭",
+  "hun": "주머니 낭",
+  "count": 3,
+  "confidence": "medium"
+ },
+ {
+  "char": "恐",
+  "eum": "공",
+  "hun": "두려울 공",
+  "count": 3,
+  "confidence": "medium"
+ },
+ {
+  "char": "散",
+  "eum": "산",
+  "hun": "흩을 산",
+  "count": 3,
+  "confidence": "medium"
+ },
+ {
+  "char": "遇",
+  "eum": "우",
+  "hun": "만날 우",
+  "count": 3,
+  "confidence": "medium"
+ },
+ {
+  "char": "選",
+  "eum": "선",
+  "hun": "가릴 선",
+  "count": 3,
+  "confidence": "medium"
+ },
+ {
+  "char": "退",
+  "eum": "퇴",
+  "hun": "물러날 퇴",
+  "count": 3,
+  "confidence": "medium"
+ },
+ {
+  "char": "紋",
+  "eum": "문",
+  "hun": "무늬 문",
+  "count": 3,
+  "confidence": "medium"
+ },
+ {
+  "char": "替",
+  "eum": "체",
+  "hun": "바꿀 체",
+  "count": 3,
+  "confidence": "medium"
+ },
+ {
+  "char": "訊",
+  "eum": "신",
+  "hun": "물을 신",
+  "count": 3,
+  "confidence": "medium"
+ },
+ {
+  "char": "廟",
+  "eum": "묘",
+  "hun": "사당 묘",
+  "count": 3,
+  "confidence": "medium"
+ },
+ {
+  "char": "毫",
+  "eum": "호",
+  "hun": "터럭 호",
+  "count": 3,
+  "confidence": "medium"
+ },
+ {
+  "char": "裕",
+  "eum": "유",
+  "hun": "넉넉할 유",
+  "count": 3,
+  "confidence": "medium"
+ },
+ {
+  "char": "話",
+  "eum": "화",
+  "hun": "말씀 화",
+  "count": 3,
+  "confidence": "medium"
+ },
+ {
+  "char": "介",
+  "eum": "개",
+  "hun": "낄 개",
+  "count": 3,
+  "confidence": "medium"
+ },
+ {
+  "char": "濁",
+  "eum": "탁",
+  "hun": "흐릴 탁",
+  "count": 3,
+  "confidence": "medium"
+ },
+ {
+  "char": "奏",
+  "eum": "주",
+  "hun": "아뢸 주",
+  "count": 3,
+  "confidence": "medium"
+ },
+ {
+  "char": "陪",
+  "eum": "배",
+  "hun": "모실 배",
+  "count": 3,
+  "confidence": "medium"
+ },
+ {
+  "char": "禦",
+  "eum": "어",
+  "hun": "막을 어",
+  "count": 3,
+  "confidence": "medium"
+ },
+ {
+  "char": "構",
+  "eum": "구",
+  "hun": "얽을 구",
+  "count": 3,
+  "confidence": "medium"
+ },
+ {
+  "char": "帑",
+  "eum": "탕",
+  "hun": "국고 탕",
+  "count": 3,
+  "confidence": "medium"
+ },
+ {
+  "char": "錘",
+  "eum": "추",
+  "hun": "저울추 추",
+  "count": 3,
+  "confidence": "medium"
+ },
+ {
+  "char": "零",
+  "eum": "령",
+  "hun": "떨어질 령",
+  "count": 3,
+  "confidence": "medium"
+ },
+ {
+  "char": "綱",
+  "eum": "강",
+  "hun": "벼리 강",
+  "count": 3,
+  "confidence": "medium"
+ },
+ {
+  "char": "扶",
+  "eum": "부",
+  "hun": "도울 부",
+  "count": 3,
+  "confidence": "medium"
+ },
+ {
+  "char": "奮",
+  "eum": "분",
+  "hun": "떨칠 분",
+  "count": 3,
+  "confidence": "medium"
+ },
+ {
+  "char": "化",
+  "eum": "화",
+  "hun": "될 화",
+  "count": 3,
+  "confidence": "medium"
+ },
+ {
+  "char": "褻",
+  "eum": "설",
+  "hun": "속옷 설",
+  "count": 3,
+  "confidence": "medium"
+ },
+ {
+  "char": "卒",
+  "eum": "졸",
+  "hun": "군사 졸",
+  "count": 3,
+  "confidence": "medium"
+ },
+ {
+  "char": "植",
+  "eum": "식",
+  "hun": "심을 식",
+  "count": 3,
+  "confidence": "medium"
+ },
+ {
+  "char": "昴",
+  "eum": "묘",
+  "hun": "묘성 묘",
+  "count": 3,
+  "confidence": "medium"
+ },
+ {
+  "char": "頃",
+  "eum": "경",
+  "hun": "잠깐 경",
+  "count": 3,
+  "confidence": "medium"
+ },
+ {
+  "char": "拍",
+  "eum": "박",
+  "hun": "칠 박",
+  "count": 3,
+  "confidence": "medium"
+ },
+ {
+  "char": "珊",
+  "eum": "산",
+  "hun": "산호 산",
+  "count": 3,
+  "confidence": "medium"
+ },
+ {
+  "char": "瑚",
+  "eum": "호",
+  "hun": "산호 호",
+  "count": 3,
+  "confidence": "medium"
+ },
+ {
+  "char": "袍",
+  "eum": "포",
+  "hun": "도포 포",
+  "count": 3,
+  "confidence": "medium"
+ },
+ {
+  "char": "醜",
+  "eum": "추",
+  "hun": "추할 추",
+  "count": 3,
+  "confidence": "medium"
+ },
+ {
+  "char": "逐",
+  "eum": "축",
+  "hun": "쫓을 축",
+  "count": 3,
+  "confidence": "medium"
+ },
+ {
+  "char": "憐",
+  "eum": "련",
+  "hun": "불쌍히여길 련",
+  "count": 3,
+  "confidence": "medium"
+ },
+ {
+  "char": "尙",
+  "eum": "상",
+  "hun": "오히려 상",
+  "count": 3,
+  "confidence": "medium"
+ },
+ {
+  "char": "液",
+  "eum": "액",
+  "hun": "진 액",
+  "count": 3,
+  "confidence": "medium"
+ },
+ {
+  "char": "汎",
+  "eum": "범",
+  "hun": "넓을 범",
+  "count": 3,
+  "confidence": "medium"
+ },
+ {
+  "char": "賭",
+  "eum": "도",
+  "hun": "내기 도",
+  "count": 3,
+  "confidence": "medium"
+ },
+ {
+  "char": "踪",
+  "eum": "종",
+  "hun": "자취 종",
+  "count": 3,
+  "confidence": "medium"
+ },
+ {
+  "char": "俯",
+  "eum": "부",
+  "hun": "구부릴 부",
+  "count": 3,
+  "confidence": "medium"
+ },
+ {
+  "char": "撲",
+  "eum": "박",
+  "hun": "칠 박",
+  "count": 3,
+  "confidence": "medium"
+ },
+ {
+  "char": "狡",
+  "eum": "교",
+  "hun": "교활할 교",
+  "count": 3,
+  "confidence": "medium"
+ },
+ {
+  "char": "裂",
+  "eum": "렬",
+  "hun": "찢을 렬",
+  "count": 3,
+  "confidence": "medium"
+ },
+ {
+  "char": "港",
+  "eum": "항",
+  "hun": "항구 항",
+  "count": 3,
+  "confidence": "medium"
+ },
+ {
+  "char": "憂",
+  "eum": "우",
+  "hun": "근심 우",
+  "count": 3,
+  "confidence": "medium"
+ },
+ {
+  "char": "尋",
+  "eum": "심",
+  "hun": "찾을 심",
+  "count": 3,
+  "confidence": "medium"
+ },
+ {
+  "char": "奢",
+  "eum": "사",
+  "hun": "사치할 사",
+  "count": 3,
+  "confidence": "medium"
+ },
+ {
+  "char": "侈",
+  "eum": "치",
+  "hun": "사치할 치",
+  "count": 3,
+  "confidence": "medium"
+ },
+ {
+  "char": "錚",
+  "eum": "쟁",
+  "hun": "쇳소리 쟁",
+  "count": 3,
+  "confidence": "medium"
+ },
+ {
+  "char": "技",
+  "eum": "기",
+  "hun": "재주 기",
+  "count": 3,
+  "confidence": "medium"
+ },
+ {
+  "char": "暢",
+  "eum": "창",
+  "hun": "화창할 창",
+  "count": 3,
+  "confidence": "medium"
+ },
+ {
+  "char": "豹",
+  "eum": "표",
+  "hun": "표범 표",
+  "count": 3,
+  "confidence": "medium"
+ },
+ {
+  "char": "朱",
+  "eum": "주",
+  "hun": "붉을 주",
+  "count": 3,
+  "confidence": "medium"
+ },
+ {
+  "char": "岩",
+  "eum": "암",
+  "hun": "바위 암",
+  "count": 3,
+  "confidence": "medium"
+ },
+ {
+  "char": "暄",
+  "eum": "훤",
+  "hun": "따뜻할 훤",
+  "count": 3,
+  "confidence": "medium"
+ },
+ {
+  "char": "敏",
+  "eum": "민",
+  "hun": "민첩할 민",
+  "count": 3,
+  "confidence": "medium"
+ },
+ {
+  "char": "楊",
+  "eum": "양",
+  "hun": "버들 양",
+  "count": 3,
+  "confidence": "medium"
+ },
+ {
+  "char": "獸",
+  "eum": "수",
+  "hun": "짐승 수",
+  "count": 3,
+  "confidence": "medium"
+ },
+ {
+  "char": "墮",
+  "eum": "타",
+  "hun": "떨어질 타",
+  "count": 3,
+  "confidence": "medium"
+ },
+ {
+  "char": "嗤",
+  "eum": "치",
+  "hun": "비웃을 치",
+  "count": 3,
+  "confidence": "medium"
+ },
+ {
+  "char": "徙",
+  "eum": "사",
+  "hun": "옮길 사",
+  "count": 3,
+  "confidence": "medium"
+ },
+ {
+  "char": "卦",
+  "eum": "괘",
+  "hun": "점괘 괘",
+  "count": 3,
+  "confidence": "medium"
+ },
+ {
+  "char": "腥",
+  "eum": "성",
+  "hun": "비릴 성",
+  "count": 3,
+  "confidence": "medium"
+ },
+ {
+  "char": "殆",
+  "eum": "태",
+  "hun": "거의 태",
+  "count": 3,
+  "confidence": "medium"
+ },
+ {
+  "char": "笙",
+  "eum": "생",
+  "hun": "생황 생",
+  "count": 3,
+  "confidence": "medium"
+ },
+ {
+  "char": "簧",
+  "eum": "황",
+  "hun": "피리혀 황",
+  "count": 3,
+  "confidence": "review"
+ },
+ {
+  "char": "緘",
+  "eum": "함",
+  "hun": "봉할 함",
+  "count": 3,
+  "confidence": "medium"
+ },
+ {
+  "char": "茵",
+  "eum": "인",
+  "hun": "방석 인",
+  "count": 3,
+  "confidence": "medium"
+ },
+ {
+  "char": "蔯",
+  "eum": "진",
+  "hun": "사철쑥 진",
+  "count": 3,
+  "confidence": "review"
+ },
+ {
+  "char": "該",
+  "eum": "해",
+  "hun": "마땅 해",
+  "count": 3,
+  "confidence": "medium"
+ },
+ {
+  "char": "憫",
+  "eum": "민",
+  "hun": "민망할 민",
+  "count": 3,
+  "confidence": "medium"
+ },
+ {
+  "char": "冒",
+  "eum": "모",
+  "hun": "무릅쓸 모",
+  "count": 3,
+  "confidence": "medium"
+ },
+ {
+  "char": "瀆",
+  "eum": "독",
+  "hun": "더럽힐 독",
+  "count": 3,
+  "confidence": "medium"
+ },
+ {
+  "char": "晩",
+  "eum": "만",
+  "hun": "늦을 만",
+  "count": 3,
+  "confidence": "medium"
+ },
+ {
+  "char": "似",
+  "eum": "사",
+  "hun": "같을 사",
+  "count": 3,
+  "confidence": "medium"
+ },
+ {
+  "char": "貶",
+  "eum": "폄",
+  "hun": "낮출 폄",
+  "count": 3,
+  "confidence": "medium"
+ },
+ {
+  "char": "饗",
+  "eum": "향",
+  "hun": "잔치할 향",
+  "count": 2,
+  "confidence": "medium"
+ },
+ {
+  "char": "縱",
+  "eum": "종",
+  "hun": "놓을 종",
+  "count": 2,
+  "confidence": "medium"
+ },
+ {
+  "char": "橫",
+  "eum": "횡",
+  "hun": "가로 횡",
+  "count": 2,
+  "confidence": "medium"
+ },
+ {
+  "char": "貫",
+  "eum": "관",
+  "hun": "꿸 관",
+  "count": 2,
+  "confidence": "medium"
+ },
+ {
+  "char": "盈",
+  "eum": "영",
+  "hun": "찰 영",
+  "count": 2,
+  "confidence": "medium"
+ },
+ {
+  "char": "承",
+  "eum": "승",
+  "hun": "이을 승",
+  "count": 2,
+  "confidence": "medium"
+ },
+ {
+  "char": "甕",
+  "eum": "옹",
+  "hun": "독 옹",
+  "count": 2,
+  "confidence": "medium"
+ },
+ {
+  "char": "庶",
+  "eum": "서",
+  "hun": "여러 서",
+  "count": 2,
+  "confidence": "medium"
+ },
+ {
+  "char": "去",
+  "eum": "거",
+  "hun": "갈 거",
+  "count": 2,
+  "confidence": "medium"
+ },
+ {
+  "char": "什",
+  "eum": "집",
+  "hun": "세간 집",
+  "count": 2,
+  "confidence": "review"
+ },
+ {
+  "char": "嫂",
+  "eum": "수",
+  "hun": "형수 수",
+  "count": 2,
+  "confidence": "medium"
+ },
+ {
+  "char": "差",
+  "eum": "차",
+  "hun": "다를 차",
+  "count": 2,
+  "confidence": "medium"
+ },
+ {
+  "char": "綻",
+  "eum": "탄",
+  "hun": "터질 탄",
+  "count": 2,
+  "confidence": "medium"
+ },
+ {
+  "char": "針",
+  "eum": "침",
+  "hun": "바늘 침",
+  "count": 2,
+  "confidence": "medium"
+ },
+ {
+  "char": "逢",
+  "eum": "봉",
+  "hun": "만날 봉",
+  "count": 2,
+  "confidence": "medium"
+ },
+ {
+  "char": "琥",
+  "eum": "호",
+  "hun": "호박 호",
+  "count": 2,
+  "confidence": "medium"
+ },
+ {
+  "char": "珀",
+  "eum": "박",
+  "hun": "호박 박",
+  "count": 2,
+  "confidence": "medium"
+ },
+ {
+  "char": "孼",
+  "eum": "얼",
+  "hun": "서자 얼",
+  "count": 2,
+  "confidence": "medium"
+ },
+ {
+  "char": "兀",
+  "eum": "올",
+  "hun": "우뚝할 올",
+  "count": 2,
+  "confidence": "medium"
+ },
+ {
+  "char": "戴",
+  "eum": "대",
+  "hun": "일 대",
+  "count": 2,
+  "confidence": "medium"
+ },
+ {
+  "char": "鎖",
+  "eum": "쇄",
+  "hun": "쇠사슬 쇄",
+  "count": 2,
+  "confidence": "medium"
+ },
+ {
+  "char": "姨",
+  "eum": "이",
+  "hun": "이모 이",
+  "count": 2,
+  "confidence": "medium"
+ },
+ {
+  "char": "箇",
+  "eum": "개",
+  "hun": "낱 개",
+  "count": 2,
+  "confidence": "medium"
+ },
+ {
+  "char": "駐",
+  "eum": "주",
+  "hun": "머무를 주",
+  "count": 2,
+  "confidence": "medium"
+ },
+ {
+  "char": "硬",
+  "eum": "경",
+  "hun": "굳을 경",
+  "count": 2,
+  "confidence": "medium"
+ },
+ {
+  "char": "幸",
+  "eum": "행",
+  "hun": "다행 행",
+  "count": 2,
+  "confidence": "medium"
+ },
+ {
+  "char": "腎",
+  "eum": "신",
+  "hun": "콩팥 신",
+  "count": 2,
+  "confidence": "medium"
+ },
+ {
+  "char": "笞",
+  "eum": "태",
+  "hun": "볼기칠 태",
+  "count": 2,
+  "confidence": "medium"
+ },
+ {
+  "char": "懼",
+  "eum": "구",
+  "hun": "두려울 구",
+  "count": 2,
+  "confidence": "medium"
+ },
+ {
+  "char": "旱",
+  "eum": "한",
+  "hun": "가물 한",
+  "count": 2,
+  "confidence": "medium"
+ },
+ {
+  "char": "稚",
+  "eum": "치",
+  "hun": "어릴 치",
+  "count": 2,
+  "confidence": "medium"
+ },
+ {
+  "char": "段",
+  "eum": "단",
+  "hun": "층계 단",
+  "count": 2,
+  "confidence": "medium"
+ },
+ {
+  "char": "拓",
+  "eum": "척",
+  "hun": "넓힐 척",
+  "count": 2,
+  "confidence": "medium"
+ },
+ {
+  "char": "舞",
+  "eum": "무",
+  "hun": "춤출 무",
+  "count": 2,
+  "confidence": "medium"
+ },
+ {
+  "char": "蹈",
+  "eum": "도",
+  "hun": "밟을 도",
+  "count": 2,
+  "confidence": "medium"
+ },
+ {
+  "char": "猶",
+  "eum": "유",
+  "hun": "오히려 유",
+  "count": 2,
+  "confidence": "medium"
+ },
+ {
+  "char": "豪",
+  "eum": "호",
+  "hun": "호걸 호",
+  "count": 2,
+  "confidence": "medium"
+ },
+ {
+  "char": "褒",
+  "eum": "포",
+  "hun": "기릴 포",
+  "count": 2,
+  "confidence": "medium"
+ },
+ {
+  "char": "普",
+  "eum": "보",
+  "hun": "넓을 보",
+  "count": 2,
+  "confidence": "medium"
+ },
+ {
+  "char": "塞",
+  "eum": "새",
+  "hun": "변방 새",
+  "count": 2,
+  "confidence": "medium"
+ },
+ {
+  "char": "共",
+  "eum": "공",
+  "hun": "함께 공",
+  "count": 2,
+  "confidence": "medium"
+ },
+ {
+  "char": "廉",
+  "eum": "렴",
+  "hun": "청렴할 렴",
+  "count": 2,
+  "confidence": "medium"
+ },
+ {
+  "char": "累",
+  "eum": "루",
+  "hun": "여러 루",
+  "count": 2,
+  "confidence": "medium"
+ },
+ {
+  "char": "揀",
+  "eum": "간",
+  "hun": "가릴 간",
+  "count": 2,
+  "confidence": "medium"
+ },
+ {
+  "char": "沮",
+  "eum": "저",
+  "hun": "막을 저",
+  "count": 2,
+  "confidence": "medium"
+ },
+ {
+  "char": "垓",
+  "eum": "해",
+  "hun": "지경 해",
+  "count": 2,
+  "confidence": "medium"
+ },
+ {
+  "char": "恝",
+  "eum": "괄",
+  "hun": "걱정없을 괄",
+  "count": 2,
+  "confidence": "medium"
+ },
+ {
+  "char": "罷",
+  "eum": "파",
+  "hun": "마칠 파",
+  "count": 2,
+  "confidence": "medium"
+ },
+ {
+  "char": "董",
+  "eum": "동",
+  "hun": "바로잡을 동",
+  "count": 2,
+  "confidence": "medium"
+ },
+ {
+  "char": "環",
+  "eum": "환",
+  "hun": "고리 환",
+  "count": 2,
+  "confidence": "medium"
+ },
+ {
+  "char": "軸",
+  "eum": "축",
+  "hun": "굴대 축",
+  "count": 2,
+  "confidence": "medium"
+ },
+ {
+  "char": "蓮",
+  "eum": "련",
+  "hun": "연꽃 련",
+  "count": 2,
+  "confidence": "medium"
+ },
+ {
+  "char": "檀",
+  "eum": "단",
+  "hun": "박달나무 단",
+  "count": 2,
+  "confidence": "medium"
+ },
+ {
+  "char": "眩",
+  "eum": "현",
+  "hun": "어지러울 현",
+  "count": 2,
+  "confidence": "medium"
+ },
+ {
+  "char": "魁",
+  "eum": "괴",
+  "hun": "우두머리 괴",
+  "count": 2,
+  "confidence": "medium"
+ },
+ {
+  "char": "濯",
+  "eum": "탁",
+  "hun": "씻을 탁",
+  "count": 2,
+  "confidence": "medium"
+ },
+ {
+  "char": "募",
+  "eum": "모",
+  "hun": "모을 모",
+  "count": 2,
+  "confidence": "medium"
+ },
+ {
+  "char": "帥",
+  "eum": "수",
+  "hun": "장수 수",
+  "count": 2,
+  "confidence": "medium"
+ },
+ {
+  "char": "註",
+  "eum": "주",
+  "hun": "주낼 주",
+  "count": 2,
+  "confidence": "medium"
+ },
+ {
+  "char": "奔",
+  "eum": "분",
+  "hun": "달릴 분",
+  "count": 2,
+  "confidence": "medium"
+ },
+ {
+  "char": "歸",
+  "eum": "귀",
+  "hun": "돌아갈 귀",
+  "count": 2,
+  "confidence": "medium"
+ },
+ {
+  "char": "挽",
+  "eum": "만",
+  "hun": "당길 만",
+  "count": 2,
+  "confidence": "medium"
+ },
+ {
+  "char": "停",
+  "eum": "정",
+  "hun": "머무를 정",
+  "count": 2,
+  "confidence": "medium"
+ },
+ {
+  "char": "驛",
+  "eum": "역",
+  "hun": "역 역",
+  "count": 2,
+  "confidence": "medium"
+ },
+ {
+  "char": "恃",
+  "eum": "시",
+  "hun": "믿을 시",
+  "count": 2,
+  "confidence": "medium"
+ },
+ {
+  "char": "苑",
+  "eum": "원",
+  "hun": "나라동산 원",
+  "count": 2,
+  "confidence": "medium"
+ },
+ {
+  "char": "照",
+  "eum": "조",
+  "hun": "비칠 조",
+  "count": 2,
+  "confidence": "medium"
+ },
+ {
+  "char": "厭",
+  "eum": "염",
+  "hun": "싫을 염",
+  "count": 2,
+  "confidence": "medium"
+ },
+ {
+  "char": "廷",
+  "eum": "정",
+  "hun": "조정 정",
+  "count": 2,
+  "confidence": "medium"
+ },
+ {
+  "char": "格",
+  "eum": "격",
+  "hun": "격식 격",
+  "count": 2,
+  "confidence": "medium"
+ },
+ {
+  "char": "朽",
+  "eum": "후",
+  "hun": "썩을 후",
+  "count": 2,
+  "confidence": "medium"
+ },
+ {
+  "char": "摘",
+  "eum": "적",
+  "hun": "딸 적",
+  "count": 2,
+  "confidence": "medium"
+ },
+ {
+  "char": "鑛",
+  "eum": "광",
+  "hun": "쇳돌 광",
+  "count": 2,
+  "confidence": "medium"
+ },
+ {
+  "char": "詞",
+  "eum": "사",
+  "hun": "말씀 사",
+  "count": 2,
+  "confidence": "medium"
+ },
+ {
+  "char": "疎",
+  "eum": "소",
+  "hun": "성길 소",
+  "count": 2,
+  "confidence": "medium"
+ },
+ {
+  "char": "再",
+  "eum": "재",
+  "hun": "두 재",
+  "count": 2,
+  "confidence": "medium"
+ },
+ {
+  "char": "繩",
+  "eum": "승",
+  "hun": "줄 승",
+  "count": 2,
+  "confidence": "medium"
+ },
+ {
+  "char": "峻",
+  "eum": "준",
+  "hun": "높을 준",
+  "count": 2,
+  "confidence": "medium"
+ },
+ {
+  "char": "燭",
+  "eum": "촉",
+  "hun": "촛불 촉",
+  "count": 2,
+  "confidence": "medium"
+ },
+ {
+  "char": "瘦",
+  "eum": "수",
+  "hun": "여윌 수",
+  "count": 2,
+  "confidence": "medium"
+ },
+ {
+  "char": "瘠",
+  "eum": "척",
+  "hun": "파리할 척",
+  "count": 2,
+  "confidence": "medium"
+ },
+ {
+  "char": "貸",
+  "eum": "대",
+  "hun": "빌릴 대",
+  "count": 2,
+  "confidence": "medium"
+ },
+ {
+  "char": "凱",
+  "eum": "개",
+  "hun": "개선할 개",
+  "count": 2,
+  "confidence": "medium"
+ },
+ {
+  "char": "粉",
+  "eum": "분",
+  "hun": "가루 분",
+  "count": 2,
+  "confidence": "medium"
+ },
+ {
+  "char": "諱",
+  "eum": "휘",
+  "hun": "꺼릴 휘",
+  "count": 2,
+  "confidence": "medium"
+ },
+ {
+  "char": "惶",
+  "eum": "황",
+  "hun": "두려울 황",
+  "count": 2,
+  "confidence": "medium"
+ },
+ {
+  "char": "嶽",
+  "eum": "악",
+  "hun": "큰산 악",
+  "count": 2,
+  "confidence": "medium"
+ },
+ {
+  "char": "猾",
+  "eum": "활",
+  "hun": "교활할 활",
+  "count": 2,
+  "confidence": "medium"
+ },
+ {
+  "char": "莫",
+  "eum": "막",
+  "hun": "없을 막",
+  "count": 2,
+  "confidence": "medium"
+ },
+ {
+  "char": "筒",
+  "eum": "통",
+  "hun": "대통 통",
+  "count": 2,
+  "confidence": "medium"
+ },
+ {
+  "char": "韜",
+  "eum": "도",
+  "hun": "활집 도",
+  "count": 2,
+  "confidence": "medium"
+ },
+ {
+  "char": "楚",
+  "eum": "초",
+  "hun": "회초리 초",
+  "count": 2,
+  "confidence": "medium"
+ },
+ {
+  "char": "冥",
+  "eum": "명",
+  "hun": "어두울 명",
+  "count": 2,
+  "confidence": "medium"
+ },
+ {
+  "char": "桿",
+  "eum": "간",
+  "hun": "줄기 간",
+  "count": 2,
+  "confidence": "medium"
+ },
+ {
+  "char": "怠",
+  "eum": "태",
+  "hun": "게으를 태",
+  "count": 2,
+  "confidence": "medium"
+ },
+ {
+  "char": "饌",
+  "eum": "찬",
+  "hun": "반찬 찬",
+  "count": 2,
+  "confidence": "medium"
+ },
+ {
+  "char": "愉",
+  "eum": "유",
+  "hun": "즐거울 유",
+  "count": 2,
+  "confidence": "medium"
+ },
+ {
+  "char": "冷",
+  "eum": "랭",
+  "hun": "찰 랭",
+  "count": 2,
+  "confidence": "medium"
+ },
+ {
+  "char": "憾",
+  "eum": "감",
+  "hun": "섭섭할 감",
+  "count": 2,
+  "confidence": "medium"
+ },
+ {
+  "char": "諫",
+  "eum": "간",
+  "hun": "간할 간",
+  "count": 2,
+  "confidence": "medium"
+ },
+ {
+  "char": "輦",
+  "eum": "련",
+  "hun": "가마 련",
+  "count": 2,
+  "confidence": "medium"
+ },
+ {
+  "char": "幟",
+  "eum": "치",
+  "hun": "기 치",
+  "count": 2,
+  "confidence": "medium"
+ },
+ {
+  "char": "街",
+  "eum": "가",
+  "hun": "거리 가",
+  "count": 2,
+  "confidence": "medium"
+ },
+ {
+  "char": "掘",
+  "eum": "굴",
+  "hun": "팔 굴",
+  "count": 2,
+  "confidence": "medium"
+ },
+ {
+  "char": "誇",
+  "eum": "과",
+  "hun": "자랑할 과",
+  "count": 2,
+  "confidence": "medium"
+ },
+ {
+  "char": "資",
+  "eum": "자",
+  "hun": "재물 자",
+  "count": 2,
+  "confidence": "medium"
+ },
+ {
+  "char": "唐",
+  "eum": "당",
+  "hun": "당황할 당",
+  "count": 2,
+  "confidence": "medium"
+ },
+ {
+  "char": "航",
+  "eum": "항",
+  "hun": "배 항",
+  "count": 2,
+  "confidence": "medium"
+ },
+ {
+  "char": "孑",
+  "eum": "혈",
+  "hun": "외로울 혈",
+  "count": 2,
+  "confidence": "medium"
+ },
+ {
+  "char": "燥",
+  "eum": "조",
+  "hun": "마를 조",
+  "count": 2,
+  "confidence": "medium"
+ },
+ {
+  "char": "蔽",
+  "eum": "폐",
+  "hun": "덮을 폐",
+  "count": 2,
+  "confidence": "medium"
+ },
+ {
+  "char": "筆",
+  "eum": "필",
+  "hun": "붓 필",
+  "count": 2,
+  "confidence": "medium"
+ },
+ {
+  "char": "腑",
+  "eum": "부",
+  "hun": "장부 부",
+  "count": 2,
+  "confidence": "medium"
+ },
+ {
+  "char": "覆",
+  "eum": "복",
+  "hun": "덮을 복",
+  "count": 2,
+  "confidence": "medium"
+ },
+ {
+  "char": "篇",
+  "eum": "편",
+  "hun": "책 편",
+  "count": 2,
+  "confidence": "medium"
+ },
+ {
+  "char": "狹",
+  "eum": "협",
+  "hun": "좁을 협",
+  "count": 2,
+  "confidence": "medium"
+ },
+ {
+  "char": "窄",
+  "eum": "착",
+  "hun": "좁을 착",
+  "count": 2,
+  "confidence": "medium"
+ },
+ {
+  "char": "汚",
+  "eum": "오",
+  "hun": "더러울 오",
+  "count": 2,
+  "confidence": "medium"
+ },
+ {
+  "char": "穢",
+  "eum": "예",
+  "hun": "더러울 예",
+  "count": 2,
+  "confidence": "medium"
+ },
+ {
+  "char": "拷",
+  "eum": "고",
+  "hun": "칠 고",
+  "count": 2,
+  "confidence": "medium"
+ },
+ {
+  "char": "諷",
+  "eum": "풍",
+  "hun": "풍자할 풍",
+  "count": 2,
+  "confidence": "medium"
+ },
+ {
+  "char": "轟",
+  "eum": "굉",
+  "hun": "울릴 굉",
+  "count": 2,
+  "confidence": "medium"
+ },
+ {
+  "char": "欺",
+  "eum": "기",
+  "hun": "속일 기",
+  "count": 2,
+  "confidence": "medium"
+ },
+ {
+  "char": "癎",
+  "eum": "간",
+  "hun": "간질 간",
+  "count": 2,
+  "confidence": "medium"
+ },
+ {
+  "char": "案",
+  "eum": "안",
+  "hun": "책상 안",
+  "count": 2,
+  "confidence": "medium"
+ },
+ {
+  "char": "荷",
+  "eum": "하",
+  "hun": "멜 하",
+  "count": 2,
+  "confidence": "medium"
+ },
+ {
+  "char": "絨",
+  "eum": "융",
+  "hun": "융 융",
+  "count": 2,
+  "confidence": "medium"
+ },
+ {
+  "char": "貰",
+  "eum": "세",
+  "hun": "세낼 세",
+  "count": 2,
+  "confidence": "medium"
+ },
+ {
+  "char": "最",
+  "eum": "최",
+  "hun": "가장 최",
+  "count": 2,
+  "confidence": "medium"
+ },
+ {
+  "char": "畵",
+  "eum": "화",
+  "hun": "그림 화",
+  "count": 2,
+  "confidence": "medium"
+ },
+ {
+  "char": "且",
+  "eum": "차",
+  "hun": "또 차",
+  "count": 2,
+  "confidence": "medium"
+ },
+ {
+  "char": "飯",
+  "eum": "반",
+  "hun": "밥 반",
+  "count": 2,
+  "confidence": "medium"
+ },
+ {
+  "char": "昇",
+  "eum": "승",
+  "hun": "오를 승",
+  "count": 2,
+  "confidence": "medium"
+ },
+ {
+  "char": "旬",
+  "eum": "순",
+  "hun": "열흘 순",
+  "count": 2,
+  "confidence": "medium"
+ },
+ {
+  "char": "讓",
+  "eum": "양",
+  "hun": "사양할 양",
+  "count": 2,
+  "confidence": "medium"
+ },
+ {
+  "char": "礁",
+  "eum": "초",
+  "hun": "암초 초",
+  "count": 2,
+  "confidence": "medium"
+ },
+ {
+  "char": "瀁",
+  "eum": "양",
+  "hun": "물결 양",
+  "count": 2,
+  "confidence": "review"
+ },
+ {
+  "char": "膀",
+  "eum": "방",
+  "hun": "방광 방",
+  "count": 2,
+  "confidence": "medium"
+ },
+ {
+  "char": "態",
+  "eum": "태",
+  "hun": "모습 태",
+  "count": 2,
+  "confidence": "medium"
+ },
+ {
+  "char": "蠻",
+  "eum": "만",
+  "hun": "오랑캐 만",
+  "count": 2,
+  "confidence": "medium"
+ },
+ {
+  "char": "憚",
+  "eum": "탄",
+  "hun": "꺼릴 탄",
+  "count": 2,
+  "confidence": "medium"
+ },
+ {
+  "char": "蒙",
+  "eum": "몽",
+  "hun": "어두울 몽",
+  "count": 2,
+  "confidence": "medium"
+ },
+ {
+  "char": "猿",
+  "eum": "원",
+  "hun": "원숭이 원",
+  "count": 2,
+  "confidence": "medium"
+ },
+ {
+  "char": "投",
+  "eum": "투",
+  "hun": "던질 투",
+  "count": 2,
+  "confidence": "medium"
+ },
+ {
+  "char": "球",
+  "eum": "구",
+  "hun": "공 구",
+  "count": 2,
+  "confidence": "medium"
+ },
+ {
+  "char": "淪",
+  "eum": "륜",
+  "hun": "빠질 륜",
+  "count": 2,
+  "confidence": "medium"
+ },
+ {
+  "char": "彿",
+  "eum": "불",
+  "hun": "비슷할 불",
+  "count": 2,
+  "confidence": "medium"
+ },
+ {
+  "char": "型",
+  "eum": "형",
+  "hun": "모형 형",
+  "count": 2,
+  "confidence": "medium"
+ },
+ {
+  "char": "簡",
+  "eum": "간",
+  "hun": "간략할 간",
+  "count": 2,
+  "confidence": "medium"
+ },
+ {
+  "char": "券",
+  "eum": "권",
+  "hun": "문서 권",
+  "count": 2,
+  "confidence": "medium"
+ },
+ {
+  "char": "簫",
+  "eum": "소",
+  "hun": "퉁소 소",
+  "count": 1,
+  "confidence": "medium"
+ },
+ {
+  "char": "歆",
+  "eum": "흠",
+  "hun": "흠향할 흠",
+  "count": 1,
+  "confidence": "medium"
+ },
+ {
+  "char": "傑",
+  "eum": "걸",
+  "hun": "뛰어날 걸",
+  "count": 1,
+  "confidence": "medium"
+ },
+ {
+  "char": "徘",
+  "eum": "배",
+  "hun": "배회할 배",
+  "count": 1,
+  "confidence": "medium"
+ },
+ {
+  "char": "徊",
+  "eum": "회",
+  "hun": "배회할 회",
+  "count": 1,
+  "confidence": "medium"
+ },
+ {
+  "char": "酋",
+  "eum": "추",
+  "hun": "우두머리 추",
+  "count": 1,
+  "confidence": "medium"
+ },
+ {
+  "char": "匿",
+  "eum": "닉",
+  "hun": "숨길 닉",
+  "count": 1,
+  "confidence": "medium"
+ },
+ {
+  "char": "榧",
+  "eum": "비",
+  "hun": "비자나무 비",
+  "count": 1,
+  "confidence": "medium"
+ },
+ {
+  "char": "巴",
+  "eum": "파",
+  "hun": "땅이름 파",
+  "count": 1,
+  "confidence": "medium"
+ },
+ {
+  "char": "旦",
+  "eum": "단",
+  "hun": "아침 단",
+  "count": 1,
+  "confidence": "medium"
+ },
+ {
+  "char": "杏",
+  "eum": "행",
+  "hun": "살구 행",
+  "count": 1,
+  "confidence": "medium"
+ },
+ {
+  "char": "錯",
+  "eum": "착",
+  "hun": "어긋날 착",
+  "count": 1,
+  "confidence": "medium"
+ },
+ {
+  "char": "瑩",
+  "eum": "형",
+  "hun": "밝을 형",
+  "count": 1,
+  "confidence": "medium"
+ },
+ {
+  "char": "超",
+  "eum": "초",
+  "hun": "뛰어넘을 초",
+  "count": 1,
+  "confidence": "medium"
+ },
+ {
+  "char": "棺",
+  "eum": "관",
+  "hun": "널 관",
+  "count": 1,
+  "confidence": "medium"
+ },
+ {
+  "char": "休",
+  "eum": "휴",
+  "hun": "쉴 휴",
+  "count": 1,
+  "confidence": "medium"
+ },
+ {
+  "char": "申",
+  "eum": "신",
+  "hun": "펼 신",
+  "count": 1,
+  "confidence": "medium"
+ },
+ {
+  "char": "飭",
+  "eum": "칙",
+  "hun": "경계할 칙",
+  "count": 1,
+  "confidence": "medium"
+ },
+ {
+  "char": "釘",
+  "eum": "정",
+  "hun": "못 정",
+  "count": 1,
+  "confidence": "medium"
+ },
+ {
+  "char": "措",
+  "eum": "조",
+  "hun": "조치할 조",
+  "count": 1,
+  "confidence": "medium"
+ },
+ {
+  "char": "團",
+  "eum": "단",
+  "hun": "모일 단",
+  "count": 1,
+  "confidence": "medium"
+ },
+ {
+  "char": "檢",
+  "eum": "검",
+  "hun": "검사할 검",
+  "count": 1,
+  "confidence": "medium"
+ },
+ {
+  "char": "尾",
+  "eum": "미",
+  "hun": "꼬리 미",
+  "count": 1,
+  "confidence": "medium"
+ },
+ {
+  "char": "閭",
+  "eum": "려",
+  "hun": "마을 려",
+  "count": 1,
+  "confidence": "medium"
+ },
+ {
+  "char": "湯",
+  "eum": "탕",
+  "hun": "끓을 탕",
+  "count": 1,
+  "confidence": "medium"
+ },
+ {
+  "char": "罐",
+  "eum": "관",
+  "hun": "항아리 관",
+  "count": 1,
+  "confidence": "medium"
+ },
+ {
+  "char": "紊",
+  "eum": "문",
+  "hun": "어지러울 문",
+  "count": 1,
+  "confidence": "medium"
+ },
+ {
+  "char": "衡",
+  "eum": "형",
+  "hun": "저울대 형",
+  "count": 1,
+  "confidence": "medium"
+ },
+ {
+  "char": "膜",
+  "eum": "막",
+  "hun": "꺼풀 막",
+  "count": 1,
+  "confidence": "medium"
+ },
+ {
+  "char": "候",
+  "eum": "후",
+  "hun": "기후 후",
+  "count": 1,
+  "confidence": "medium"
+ },
+ {
+  "char": "換",
+  "eum": "환",
+  "hun": "바꿀 환",
+  "count": 1,
+  "confidence": "medium"
+ },
+ {
+  "char": "片",
+  "eum": "편",
+  "hun": "조각 편",
+  "count": 1,
+  "confidence": "medium"
+ },
+ {
+  "char": "躊",
+  "eum": "주",
+  "hun": "머뭇거릴 주",
+  "count": 1,
+  "confidence": "medium"
+ },
+ {
+  "char": "躇",
+  "eum": "저",
+  "hun": "머뭇거릴 저",
+  "count": 1,
+  "confidence": "medium"
+ },
+ {
+  "char": "擅",
+  "eum": "천",
+  "hun": "마음대로할 천",
+  "count": 1,
+  "confidence": "medium"
+ },
+ {
+  "char": "鋒",
+  "eum": "봉",
+  "hun": "칼날 봉",
+  "count": 1,
+  "confidence": "medium"
+ },
+ {
+  "char": "闇",
+  "eum": "암",
+  "hun": "어두울 암",
+  "count": 1,
+  "confidence": "medium"
+ },
+ {
+  "char": "群",
+  "eum": "군",
+  "hun": "무리 군",
+  "count": 1,
+  "confidence": "medium"
+ },
+ {
+  "char": "銘",
+  "eum": "명",
+  "hun": "새길 명",
+  "count": 1,
+  "confidence": "medium"
+ },
+ {
+  "char": "噴",
+  "eum": "분",
+  "hun": "뿜을 분",
+  "count": 1,
+  "confidence": "medium"
+ },
+ {
+  "char": "惜",
+  "eum": "석",
+  "hun": "아낄 석",
+  "count": 1,
+  "confidence": "medium"
+ },
+ {
+  "char": "寫",
+  "eum": "사",
+  "hun": "베낄 사",
+  "count": 1,
+  "confidence": "medium"
+ },
+ {
+  "char": "煮",
+  "eum": "자",
+  "hun": "삶을 자",
+  "count": 1,
+  "confidence": "medium"
+ },
+ {
+  "char": "邢",
+  "eum": "형",
+  "hun": "나라이름 형",
+  "count": 1,
+  "confidence": "medium"
+ },
+ {
+  "char": "痔",
+  "eum": "치",
+  "hun": "치질 치",
+  "count": 1,
+  "confidence": "medium"
+ },
+ {
+  "char": "疥",
+  "eum": "개",
+  "hun": "옴 개",
+  "count": 1,
+  "confidence": "medium"
+ },
+ {
+  "char": "牟",
+  "eum": "모",
+  "hun": "보리 모",
+  "count": 1,
+  "confidence": "medium"
+ },
+ {
+  "char": "季",
+  "eum": "계",
+  "hun": "계절 계",
+  "count": 1,
+  "confidence": "medium"
+ },
+ {
+  "char": "隣",
+  "eum": "린",
+  "hun": "이웃 린",
+  "count": 1,
+  "confidence": "medium"
+ },
+ {
+  "char": "傾",
+  "eum": "경",
+  "hun": "기울 경",
+  "count": 1,
+  "confidence": "medium"
+ },
+ {
+  "char": "斜",
+  "eum": "사",
+  "hun": "비낄 사",
+  "count": 1,
+  "confidence": "medium"
+ },
+ {
+  "char": "濱",
+  "eum": "빈",
+  "hun": "물가 빈",
+  "count": 1,
+  "confidence": "medium"
+ },
+ {
+  "char": "沿",
+  "eum": "연",
+  "hun": "물따라갈 연",
+  "count": 1,
+  "confidence": "medium"
+ },
+ {
+  "char": "澹",
+  "eum": "담",
+  "hun": "담박할 담",
+  "count": 1,
+  "confidence": "medium"
+ },
+ {
+  "char": "厘",
+  "eum": "리",
+  "hun": "리(단위) 리",
+  "count": 1,
+  "confidence": "medium"
+ },
+ {
+  "char": "廻",
+  "eum": "회",
+  "hun": "돌 회",
+  "count": 1,
+  "confidence": "medium"
+ },
+ {
+  "char": "脛",
+  "eum": "경",
+  "hun": "정강이 경",
+  "count": 1,
+  "confidence": "medium"
+ },
+ {
+  "char": "喊",
+  "eum": "함",
+  "hun": "소리칠 함",
+  "count": 1,
+  "confidence": "medium"
+ },
+ {
+  "char": "惹",
+  "eum": "야",
+  "hun": "이끌 야",
+  "count": 1,
+  "confidence": "medium"
+ },
+ {
+  "char": "鬧",
+  "eum": "료",
+  "hun": "시끄러울 료",
+  "count": 1,
+  "confidence": "medium"
+ },
+ {
+  "char": "帛",
+  "eum": "백",
+  "hun": "비단 백",
+  "count": 1,
+  "confidence": "medium"
+ },
+ {
+  "char": "煽",
+  "eum": "선",
+  "hun": "부채질할 선",
+  "count": 1,
+  "confidence": "medium"
+ },
+ {
+  "char": "雪",
+  "eum": "설",
+  "hun": "눈 설",
+  "count": 1,
+  "confidence": "medium"
+ },
+ {
+  "char": "嗚",
+  "eum": "오",
+  "hun": "탄식할 오",
+  "count": 1,
+  "confidence": "medium"
+ },
+ {
+  "char": "脈",
+  "eum": "맥",
+  "hun": "줄기 맥",
+  "count": 1,
+  "confidence": "medium"
+ },
+ {
+  "char": "鄙",
+  "eum": "비",
+  "hun": "비루할 비",
+  "count": 1,
+  "confidence": "medium"
+ },
+ {
+  "char": "檄",
+  "eum": "격",
+  "hun": "격문 격",
+  "count": 1,
+  "confidence": "medium"
+ },
+ {
+  "char": "扈",
+  "eum": "호",
+  "hun": "따를 호",
+  "count": 1,
+  "confidence": "medium"
+ },
+ {
+  "char": "驍",
+  "eum": "효",
+  "hun": "날랠 효",
+  "count": 1,
+  "confidence": "medium"
+ },
+ {
+  "char": "預",
+  "eum": "예",
+  "hun": "미리 예",
+  "count": 1,
+  "confidence": "medium"
+ },
+ {
+  "char": "恍",
+  "eum": "황",
+  "hun": "황홀할 황",
+  "count": 1,
+  "confidence": "medium"
+ },
+ {
+  "char": "孔",
+  "eum": "공",
+  "hun": "구멍 공",
+  "count": 1,
+  "confidence": "medium"
+ },
+ {
+  "char": "雀",
+  "eum": "작",
+  "hun": "참새 작",
+  "count": 1,
+  "confidence": "medium"
+ },
+ {
+  "char": "攝",
+  "eum": "섭",
+  "hun": "다스릴 섭",
+  "count": 1,
+  "confidence": "medium"
+ },
+ {
+  "char": "椅",
+  "eum": "의",
+  "hun": "의자 의",
+  "count": 1,
+  "confidence": "medium"
+ },
+ {
+  "char": "藤",
+  "eum": "등",
+  "hun": "등나무 등",
+  "count": 1,
+  "confidence": "medium"
+ },
+ {
+  "char": "亭",
+  "eum": "정",
+  "hun": "정자 정",
+  "count": 1,
+  "confidence": "medium"
+ },
+ {
+  "char": "課",
+  "eum": "과",
+  "hun": "공부할 과",
+  "count": 1,
+  "confidence": "medium"
+ },
+ {
+  "char": "鞠",
+  "eum": "국",
+  "hun": "국문할 국",
+  "count": 1,
+  "confidence": "review"
+ },
+ {
+  "char": "持",
+  "eum": "지",
+  "hun": "가질 지",
+  "count": 1,
+  "confidence": "medium"
+ },
+ {
+  "char": "幹",
+  "eum": "간",
+  "hun": "줄기 간",
+  "count": 1,
+  "confidence": "medium"
+ },
+ {
+  "char": "翁",
+  "eum": "옹",
+  "hun": "늙은이 옹",
+  "count": 1,
+  "confidence": "medium"
+ },
+ {
+  "char": "需",
+  "eum": "수",
+  "hun": "구할 수",
+  "count": 1,
+  "confidence": "medium"
+ },
+ {
+  "char": "井",
+  "eum": "정",
+  "hun": "우물 정",
+  "count": 1,
+  "confidence": "medium"
+ },
+ {
+  "char": "杜",
+  "eum": "두",
+  "hun": "막을 두",
+  "count": 1,
+  "confidence": "medium"
+ },
+ {
+  "char": "泣",
+  "eum": "읍",
+  "hun": "울 읍",
+  "count": 1,
+  "confidence": "medium"
+ },
+ {
+  "char": "爵",
+  "eum": "작",
+  "hun": "벼슬 작",
+  "count": 1,
+  "confidence": "medium"
+ },
+ {
+  "char": "慶",
+  "eum": "경",
+  "hun": "경사 경",
+  "count": 1,
+  "confidence": "medium"
+ },
+ {
+  "char": "秒",
+  "eum": "초",
+  "hun": "초(시간) 초",
+  "count": 1,
+  "confidence": "medium"
+ },
+ {
+  "char": "茫",
+  "eum": "망",
+  "hun": "아득할 망",
+  "count": 1,
+  "confidence": "medium"
+ },
+ {
+  "char": "遞",
+  "eum": "체",
+  "hun": "갈릴 체",
+  "count": 1,
+  "confidence": "medium"
+ },
+ {
+  "char": "祿",
+  "eum": "록",
+  "hun": "녹 록",
+  "count": 1,
+  "confidence": "medium"
+ },
+ {
+  "char": "鮎",
+  "eum": "점",
+  "hun": "메기 점",
+  "count": 1,
+  "confidence": "review"
+ },
+ {
+  "char": "砂",
+  "eum": "사",
+  "hun": "모래 사",
+  "count": 1,
+  "confidence": "medium"
+ },
+ {
+  "char": "含",
+  "eum": "함",
+  "hun": "머금을 함",
+  "count": 1,
+  "confidence": "medium"
+ },
+ {
+  "char": "腕",
+  "eum": "완",
+  "hun": "팔뚝 완",
+  "count": 1,
+  "confidence": "medium"
+ },
+ {
+  "char": "亦",
+  "eum": "역",
+  "hun": "또 역",
+  "count": 1,
+  "confidence": "medium"
+ },
+ {
+  "char": "署",
+  "eum": "서",
+  "hun": "관청 서",
+  "count": 1,
+  "confidence": "medium"
+ },
+ {
+  "char": "響",
+  "eum": "향",
+  "hun": "울릴 향",
+  "count": 1,
+  "confidence": "medium"
+ },
+ {
+  "char": "濕",
+  "eum": "습",
+  "hun": "젖을 습",
+  "count": 1,
+  "confidence": "medium"
+ },
+ {
+  "char": "驅",
+  "eum": "구",
+  "hun": "몰 구",
+  "count": 1,
+  "confidence": "medium"
+ },
+ {
+  "char": "价",
+  "eum": "개",
+  "hun": "클 개",
+  "count": 1,
+  "confidence": "review"
+ },
+ {
+  "char": "舌",
+  "eum": "설",
+  "hun": "혀 설",
+  "count": 1,
+  "confidence": "medium"
+ },
+ {
+  "char": "忘",
+  "eum": "망",
+  "hun": "잊을 망",
+  "count": 1,
+  "confidence": "medium"
+ },
+ {
+  "char": "企",
+  "eum": "기",
+  "hun": "꾀할 기",
+  "count": 1,
+  "confidence": "medium"
+ },
+ {
+  "char": "潑",
+  "eum": "발",
+  "hun": "활발할 발",
+  "count": 1,
+  "confidence": "medium"
+ },
+ {
+  "char": "瀑",
+  "eum": "폭",
+  "hun": "폭포 폭",
+  "count": 1,
+  "confidence": "medium"
+ },
+ {
+  "char": "踏",
+  "eum": "답",
+  "hun": "밟을 답",
+  "count": 1,
+  "confidence": "medium"
+ },
+ {
+  "char": "禾",
+  "eum": "화",
+  "hun": "벼 화",
+  "count": 1,
+  "confidence": "medium"
+ },
+ {
+  "char": "登",
+  "eum": "등",
+  "hun": "오를 등",
+  "count": 1,
+  "confidence": "medium"
+ },
+ {
+  "char": "忙",
+  "eum": "망",
+  "hun": "바쁠 망",
+  "count": 1,
+  "confidence": "medium"
+ },
+ {
+  "char": "隋",
+  "eum": "수",
+  "hun": "수나라 수",
+  "count": 1,
+  "confidence": "medium"
+ },
+ {
+  "char": "春",
+  "eum": "춘",
+  "hun": "봄 춘",
+  "count": 1,
+  "confidence": "medium"
+ },
+ {
+  "char": "遊",
+  "eum": "유",
+  "hun": "놀 유",
+  "count": 1,
+  "confidence": "medium"
+ },
+ {
+  "char": "稠",
+  "eum": "조",
+  "hun": "빽빽할 조",
+  "count": 1,
+  "confidence": "medium"
+ },
+ {
+  "char": "憺",
+  "eum": "담",
+  "hun": "편안할 담",
+  "count": 1,
+  "confidence": "medium"
+ },
+ {
+  "char": "圓",
+  "eum": "원",
+  "hun": "둥글 원",
+  "count": 1,
+  "confidence": "medium"
+ },
+ {
+  "char": "撻",
+  "eum": "달",
+  "hun": "매질할 달",
+  "count": 1,
+  "confidence": "medium"
+ },
+ {
+  "char": "飽",
+  "eum": "포",
+  "hun": "배부를 포",
+  "count": 1,
+  "confidence": "medium"
+ },
+ {
+  "char": "饍",
+  "eum": "선",
+  "hun": "반찬 선",
+  "count": 1,
+  "confidence": "medium"
+ },
+ {
+  "char": "懈",
+  "eum": "해",
+  "hun": "게으를 해",
+  "count": 1,
+  "confidence": "medium"
+ },
+ {
+  "char": "洑",
+  "eum": "보",
+  "hun": "보 보",
+  "count": 1,
+  "confidence": "medium"
+ },
+ {
+  "char": "賢",
+  "eum": "현",
+  "hun": "어질 현",
+  "count": 1,
+  "confidence": "medium"
+ },
+ {
+  "char": "淑",
+  "eum": "숙",
+  "hun": "맑을 숙",
+  "count": 1,
+  "confidence": "medium"
+ },
+ {
+  "char": "竝",
+  "eum": "병",
+  "hun": "나란히 병",
+  "count": 1,
+  "confidence": "medium"
+ },
+ {
+  "char": "仙",
+  "eum": "선",
+  "hun": "신선 선",
+  "count": 1,
+  "confidence": "medium"
+ },
+ {
+  "char": "胡",
+  "eum": "호",
+  "hun": "오랑캐 호",
+  "count": 1,
+  "confidence": "medium"
+ },
+ {
+  "char": "桃",
+  "eum": "도",
+  "hun": "복숭아 도",
+  "count": 1,
+  "confidence": "medium"
+ },
+ {
+  "char": "巖",
+  "eum": "암",
+  "hun": "바위 암",
+  "count": 1,
+  "confidence": "medium"
+ },
+ {
+  "char": "符",
+  "eum": "부",
+  "hun": "부호 부",
+  "count": 1,
+  "confidence": "medium"
+ },
+ {
+  "char": "剝",
+  "eum": "박",
+  "hun": "벗길 박",
+  "count": 1,
+  "confidence": "medium"
+ },
+ {
+  "char": "輜",
+  "eum": "치",
+  "hun": "짐수레 치",
+  "count": 1,
+  "confidence": "medium"
+ },
+ {
+  "char": "股",
+  "eum": "고",
+  "hun": "넓적다리 고",
+  "count": 1,
+  "confidence": "medium"
+ },
+ {
+  "char": "儉",
+  "eum": "검",
+  "hun": "검소할 검",
+  "count": 1,
+  "confidence": "medium"
+ },
+ {
+  "char": "閱",
+  "eum": "열",
+  "hun": "볼 열",
+  "count": 1,
+  "confidence": "medium"
+ },
+ {
+  "char": "覇",
+  "eum": "패",
+  "hun": "패권 패",
+  "count": 1,
+  "confidence": "medium"
+ },
+ {
+  "char": "霧",
+  "eum": "무",
+  "hun": "안개 무",
+  "count": 1,
+  "confidence": "medium"
+ },
+ {
+  "char": "夏",
+  "eum": "하",
+  "hun": "여름 하",
+  "count": 1,
+  "confidence": "medium"
+ },
+ {
+  "char": "腰",
+  "eum": "요",
+  "hun": "허리 요",
+  "count": 1,
+  "confidence": "medium"
+ },
+ {
+  "char": "希",
+  "eum": "희",
+  "hun": "바랄 희",
+  "count": 1,
+  "confidence": "medium"
+ },
+ {
+  "char": "池",
+  "eum": "지",
+  "hun": "못 지",
+  "count": 1,
+  "confidence": "medium"
+ },
+ {
+  "char": "悼",
+  "eum": "도",
+  "hun": "슬퍼할 도",
+  "count": 1,
+  "confidence": "medium"
+ },
+ {
+  "char": "擴",
+  "eum": "확",
+  "hun": "넓힐 확",
+  "count": 1,
+  "confidence": "medium"
+ },
+ {
+  "char": "尤",
+  "eum": "우",
+  "hun": "더욱 우",
+  "count": 1,
+  "confidence": "medium"
+ },
+ {
+  "char": "墾",
+  "eum": "간",
+  "hun": "개간할 간",
+  "count": 1,
+  "confidence": "medium"
+ },
+ {
+  "char": "霹",
+  "eum": "벽",
+  "hun": "벼락 벽",
+  "count": 1,
+  "confidence": "medium"
+ },
+ {
+  "char": "靂",
+  "eum": "력",
+  "hun": "벼락 력",
+  "count": 1,
+  "confidence": "medium"
+ },
+ {
+  "char": "枝",
+  "eum": "지",
+  "hun": "가지 지",
+  "count": 1,
+  "confidence": "medium"
+ },
+ {
+  "char": "莊",
+  "eum": "장",
+  "hun": "장중할 장",
+  "count": 1,
+  "confidence": "medium"
+ },
+ {
+  "char": "穫",
+  "eum": "확",
+  "hun": "거둘 확",
+  "count": 1,
+  "confidence": "medium"
+ },
+ {
+  "char": "葉",
+  "eum": "엽",
+  "hun": "잎 엽",
+  "count": 1,
+  "confidence": "medium"
+ },
+ {
+  "char": "櫓",
+  "eum": "로",
+  "hun": "노 로",
+  "count": 1,
+  "confidence": "medium"
+ },
+ {
+  "char": "羚",
+  "eum": "령",
+  "hun": "영양 령",
+  "count": 1,
+  "confidence": "medium"
+ },
+ {
+  "char": "遑",
+  "eum": "황",
+  "hun": "허둥거릴 황",
+  "count": 1,
+  "confidence": "medium"
+ },
+ {
+  "char": "欽",
+  "eum": "흠",
+  "hun": "공경할 흠",
+  "count": 1,
+  "confidence": "medium"
+ },
+ {
+  "char": "堞",
+  "eum": "첩",
+  "hun": "성가퀴 첩",
+  "count": 1,
+  "confidence": "medium"
+ },
+ {
+  "char": "巫",
+  "eum": "무",
+  "hun": "무당 무",
+  "count": 1,
+  "confidence": "medium"
+ },
+ {
+  "char": "仲",
+  "eum": "중",
+  "hun": "버금 중",
+  "count": 1,
+  "confidence": "medium"
+ },
+ {
+  "char": "鏡",
+  "eum": "경",
+  "hun": "거울 경",
+  "count": 1,
+  "confidence": "medium"
+ },
+ {
+  "char": "紗",
+  "eum": "사",
+  "hun": "비단 사",
+  "count": 1,
+  "confidence": "medium"
+ },
+ {
+  "char": "帽",
+  "eum": "모",
+  "hun": "모자 모",
+  "count": 1,
+  "confidence": "medium"
+ },
+ {
+  "char": "蹂",
+  "eum": "유",
+  "hun": "밟을 유",
+  "count": 1,
+  "confidence": "medium"
+ },
+ {
+  "char": "躪",
+  "eum": "린",
+  "hun": "짓밟을 린",
+  "count": 1,
+  "confidence": "medium"
+ },
+ {
+  "char": "轎",
+  "eum": "교",
+  "hun": "가마 교",
+  "count": 1,
+  "confidence": "medium"
+ },
+ {
+  "char": "鳩",
+  "eum": "구",
+  "hun": "비둘기 구",
+  "count": 1,
+  "confidence": "medium"
+ },
+ {
+  "char": "宅",
+  "eum": "택",
+  "hun": "집 택",
+  "count": 1,
+  "confidence": "medium"
+ },
+ {
+  "char": "箔",
+  "eum": "박",
+  "hun": "금박 박",
+  "count": 1,
+  "confidence": "medium"
+ },
+ {
+  "char": "慇",
+  "eum": "은",
+  "hun": "은근할 은",
+  "count": 1,
+  "confidence": "medium"
+ },
+ {
+  "char": "懃",
+  "eum": "근",
+  "hun": "은근할 근",
+  "count": 1,
+  "confidence": "medium"
+ },
+ {
+  "char": "殮",
+  "eum": "렴",
+  "hun": "염할 렴",
+  "count": 1,
+  "confidence": "medium"
+ },
+ {
+  "char": "巢",
+  "eum": "소",
+  "hun": "새집 소",
+  "count": 1,
+  "confidence": "medium"
+ },
+ {
+  "char": "李",
+  "eum": "리",
+  "hun": "오얏 리",
+  "count": 1,
+  "confidence": "medium"
+ },
+ {
+  "char": "熟",
+  "eum": "숙",
+  "hun": "익을 숙",
+  "count": 1,
+  "confidence": "medium"
+ },
+ {
+  "char": "副",
+  "eum": "부",
+  "hun": "버금 부",
+  "count": 1,
+  "confidence": "medium"
+ },
+ {
+  "char": "摹",
+  "eum": "모",
+  "hun": "본뜰 모",
+  "count": 1,
+  "confidence": "medium"
+ },
+ {
+  "char": "墻",
+  "eum": "장",
+  "hun": "담 장",
+  "count": 1,
+  "confidence": "medium"
+ },
+ {
+  "char": "垈",
+  "eum": "대",
+  "hun": "집터 대",
+  "count": 1,
+  "confidence": "medium"
+ },
+ {
+  "char": "籠",
+  "eum": "롱",
+  "hun": "대바구니 롱",
+  "count": 1,
+  "confidence": "medium"
+ },
+ {
+  "char": "鼻",
+  "eum": "비",
+  "hun": "코 비",
+  "count": 1,
+  "confidence": "medium"
+ },
+ {
+  "char": "賻",
+  "eum": "부",
+  "hun": "부의 부",
+  "count": 1,
+  "confidence": "medium"
+ },
+ {
+  "char": "槌",
+  "eum": "퇴",
+  "hun": "망치 퇴",
+  "count": 1,
+  "confidence": "medium"
+ },
+ {
+  "char": "遮",
+  "eum": "차",
+  "hun": "가릴 차",
+  "count": 1,
+  "confidence": "medium"
+ },
+ {
+  "char": "烏",
+  "eum": "오",
+  "hun": "까마귀 오",
+  "count": 1,
+  "confidence": "medium"
+ },
+ {
+  "char": "悴",
+  "eum": "췌",
+  "hun": "파리할 췌",
+  "count": 1,
+  "confidence": "medium"
+ },
+ {
+  "char": "遷",
+  "eum": "천",
+  "hun": "옮길 천",
+  "count": 1,
+  "confidence": "medium"
+ },
+ {
+  "char": "罕",
+  "eum": "한",
+  "hun": "드물 한",
+  "count": 1,
+  "confidence": "medium"
+ },
+ {
+  "char": "柄",
+  "eum": "병",
+  "hun": "자루 병",
+  "count": 1,
+  "confidence": "medium"
+ },
+ {
+  "char": "俳",
+  "eum": "배",
+  "hun": "광대 배",
+  "count": 1,
+  "confidence": "medium"
+ },
+ {
+  "char": "睡",
+  "eum": "수",
+  "hun": "졸 수",
+  "count": 1,
+  "confidence": "medium"
+ },
+ {
+  "char": "坐",
+  "eum": "좌",
+  "hun": "앉을 좌",
+  "count": 1,
+  "confidence": "medium"
+ },
+ {
+  "char": "悚",
+  "eum": "송",
+  "hun": "두려울 송",
+  "count": 1,
+  "confidence": "medium"
+ },
+ {
+  "char": "駑",
+  "eum": "노",
+  "hun": "둔한말 노",
+  "count": 1,
+  "confidence": "medium"
+ },
+ {
+  "char": "愴",
+  "eum": "창",
+  "hun": "슬퍼할 창",
+  "count": 1,
+  "confidence": "medium"
+ },
+ {
+  "char": "遣",
+  "eum": "견",
+  "hun": "보낼 견",
+  "count": 1,
+  "confidence": "medium"
+ },
+ {
+  "char": "壘",
+  "eum": "루",
+  "hun": "보루 루",
+  "count": 1,
+  "confidence": "medium"
+ },
+ {
+  "char": "弛",
+  "eum": "이",
+  "hun": "늦출 이",
+  "count": 1,
+  "confidence": "medium"
+ },
+ {
+  "char": "伶",
+  "eum": "령",
+  "hun": "영리할 령",
+  "count": 1,
+  "confidence": "medium"
+ },
+ {
+  "char": "蔭",
+  "eum": "음",
+  "hun": "그늘 음",
+  "count": 1,
+  "confidence": "medium"
+ },
+ {
+  "char": "艀",
+  "eum": "부",
+  "hun": "거룻배 부",
+  "count": 1,
+  "confidence": "review"
+ },
+ {
+  "char": "刺",
+  "eum": "자",
+  "hun": "찌를 자",
+  "count": 1,
+  "confidence": "medium"
+ },
+ {
+  "char": "祇",
+  "eum": "기",
+  "hun": "땅귀신 기",
+  "count": 1,
+  "confidence": "review"
+ },
+ {
+  "char": "怜",
+  "eum": "령",
+  "hun": "영리할 령",
+  "count": 1,
+  "confidence": "medium"
+ },
+ {
+  "char": "汾",
+  "eum": "분",
+  "hun": "물이름 분",
+  "count": 1,
+  "confidence": "review"
+ },
+ {
+  "char": "齋",
+  "eum": "재",
+  "hun": "재계할 재",
+  "count": 1,
+  "confidence": "medium"
+ },
+ {
+  "char": "咀",
+  "eum": "저",
+  "hun": "씹을 저",
+  "count": 1,
+  "confidence": "medium"
+ },
+ {
+  "char": "繞",
+  "eum": "요",
+  "hun": "두를 요",
+  "count": 1,
+  "confidence": "medium"
+ },
+ {
+  "char": "嘉",
+  "eum": "가",
+  "hun": "아름다울 가",
+  "count": 1,
+  "confidence": "medium"
+ },
+ {
+  "char": "漂",
+  "eum": "표",
+  "hun": "떠다닐 표",
+  "count": 1,
+  "confidence": "medium"
+ },
+ {
+  "char": "秕",
+  "eum": "비",
+  "hun": "쭉정이 비",
+  "count": 1,
+  "confidence": "medium"
+ },
+ {
+  "char": "芹",
+  "eum": "근",
+  "hun": "미나리 근",
+  "count": 1,
+  "confidence": "medium"
+ },
+ {
+  "char": "訥",
+  "eum": "눌",
+  "hun": "말더듬을 눌",
+  "count": 1,
+  "confidence": "medium"
+ },
+ {
+  "char": "謂",
+  "eum": "위",
+  "hun": "이를 위",
+  "count": 1,
+  "confidence": "medium"
+ },
+ {
+  "char": "瀋",
+  "eum": "심",
+  "hun": "즙낼 심",
+  "count": 1,
+  "confidence": "review"
+ },
+ {
+  "char": "浮",
+  "eum": "부",
+  "hun": "뜰 부",
+  "count": 1,
+  "confidence": "medium"
+ },
+ {
+  "char": "芸",
+  "eum": "운",
+  "hun": "향풀 운",
+  "count": 1,
+  "confidence": "review"
+ },
+ {
+  "char": "釐",
+  "eum": "리",
+  "hun": "다스릴 리",
+  "count": 1,
+  "confidence": "medium"
+ },
+ {
+  "char": "廐",
+  "eum": "구",
+  "hun": "마구간 구",
+  "count": 1,
+  "confidence": "medium"
+ },
+ {
+  "char": "蠱",
+  "eum": "고",
+  "hun": "뱃속벌레 고",
+  "count": 1,
+  "confidence": "medium"
+ },
+ {
+  "char": "脹",
+  "eum": "창",
+  "hun": "부을 창",
+  "count": 1,
+  "confidence": "medium"
+ },
+ {
+  "char": "浪",
+  "eum": "랑",
+  "hun": "물결 랑",
+  "count": 1,
+  "confidence": "medium"
+ },
+ {
+  "char": "渡",
+  "eum": "도",
+  "hun": "건널 도",
+  "count": 1,
+  "confidence": "medium"
+ },
+ {
+  "char": "殞",
+  "eum": "운",
+  "hun": "죽을 운",
+  "count": 1,
+  "confidence": "medium"
+ },
+ {
+  "char": "洸",
+  "eum": "광",
+  "hun": "물솟을 광",
+  "count": 1,
+  "confidence": "review"
+ },
+ {
+  "char": "努",
+  "eum": "노",
+  "hun": "힘쓸 노",
+  "count": 1,
+  "confidence": "medium"
+ },
+ {
+  "char": "苛",
+  "eum": "가",
+  "hun": "가혹할 가",
+  "count": 1,
+  "confidence": "medium"
+ },
+ {
+  "char": "黜",
+  "eum": "출",
+  "hun": "내칠 출",
+  "count": 1,
+  "confidence": "medium"
+ },
+ {
+  "char": "專",
+  "eum": "전",
+  "hun": "오로지 전",
+  "count": 1,
+  "confidence": "medium"
+ },
+ {
+  "char": "耀",
+  "eum": "요",
+  "hun": "빛날 요",
+  "count": 1,
+  "confidence": "medium"
+ },
+ {
+  "char": "曉",
+  "eum": "효",
+  "hun": "새벽 효",
+  "count": 1,
+  "confidence": "medium"
+ },
+ {
+  "char": "禽",
+  "eum": "금",
+  "hun": "새 금",
+  "count": 1,
+  "confidence": "medium"
+ },
+ {
+  "char": "社",
+  "eum": "사",
+  "hun": "모일 사",
+  "count": 1,
+  "confidence": "medium"
+ },
+ {
+  "char": "裏",
+  "eum": "리",
+  "hun": "속 리",
+  "count": 1,
+  "confidence": "medium"
+ },
+ {
+  "char": "閥",
+  "eum": "벌",
+  "hun": "문벌 벌",
+  "count": 1,
+  "confidence": "medium"
+ },
+ {
+  "char": "宛",
+  "eum": "완",
+  "hun": "완연할 완",
+  "count": 1,
+  "confidence": "medium"
+ },
+ {
+  "char": "秩",
+  "eum": "질",
+  "hun": "차례 질",
+  "count": 1,
+  "confidence": "medium"
+ },
+ {
+  "char": "吝",
+  "eum": "린",
+  "hun": "아낄 린",
+  "count": 1,
+  "confidence": "medium"
+ },
+ {
+  "char": "嗇",
+  "eum": "색",
+  "hun": "아낄 색",
+  "count": 1,
+  "confidence": "medium"
+ },
+ {
+  "char": "偉",
+  "eum": "위",
+  "hun": "클 위",
+  "count": 1,
+  "confidence": "medium"
+ },
+ {
+  "char": "訪",
+  "eum": "방",
+  "hun": "찾을 방",
+  "count": 1,
+  "confidence": "medium"
+ },
+ {
+  "char": "喝",
+  "eum": "갈",
+  "hun": "꾸짖을 갈",
+  "count": 1,
+  "confidence": "medium"
+ },
+ {
+  "char": "協",
+  "eum": "협",
+  "hun": "화합할 협",
+  "count": 1,
+  "confidence": "medium"
+ },
+ {
+  "char": "訣",
+  "eum": "결",
+  "hun": "이별할 결",
+  "count": 1,
+  "confidence": "medium"
+ },
+ {
+  "char": "孝",
+  "eum": "효",
+  "hun": "효도 효",
+  "count": 1,
+  "confidence": "medium"
+ },
+ {
+  "char": "簿",
+  "eum": "부",
+  "hun": "문서 부",
+  "count": 1,
+  "confidence": "medium"
+ },
+ {
+  "char": "脾",
+  "eum": "비",
+  "hun": "지라 비",
+  "count": 1,
+  "confidence": "medium"
+ },
+ {
+  "char": "胃",
+  "eum": "위",
+  "hun": "밥통 위",
+  "count": 1,
+  "confidence": "medium"
+ },
+ {
+  "char": "枕",
+  "eum": "침",
+  "hun": "베개 침",
+  "count": 1,
+  "confidence": "medium"
+ },
+ {
+  "char": "閑",
+  "eum": "한",
+  "hun": "한가할 한",
+  "count": 1,
+  "confidence": "medium"
+ },
+ {
+  "char": "銳",
+  "eum": "예",
+  "hun": "날카로울 예",
+  "count": 1,
+  "confidence": "medium"
+ },
+ {
+  "char": "革",
+  "eum": "혁",
+  "hun": "가죽 혁",
+  "count": 1,
+  "confidence": "medium"
+ },
+ {
+  "char": "曖",
+  "eum": "애",
+  "hun": "희미할 애",
+  "count": 1,
+  "confidence": "medium"
+ },
+ {
+  "char": "籬",
+  "eum": "리",
+  "hun": "울타리 리",
+  "count": 1,
+  "confidence": "medium"
+ },
+ {
+  "char": "錫",
+  "eum": "석",
+  "hun": "주석 석",
+  "count": 1,
+  "confidence": "medium"
+ },
+ {
+  "char": "皇",
+  "eum": "황",
+  "hun": "임금 황",
+  "count": 1,
+  "confidence": "medium"
+ },
+ {
+  "char": "鍮",
+  "eum": "유",
+  "hun": "놋쇠 유",
+  "count": 1,
+  "confidence": "medium"
+ },
+ {
+  "char": "翡",
+  "eum": "비",
+  "hun": "물총새 비",
+  "count": 1,
+  "confidence": "medium"
+ },
+ {
+  "char": "翠",
+  "eum": "취",
+  "hun": "비취 취",
+  "count": 1,
+  "confidence": "medium"
+ }
+]

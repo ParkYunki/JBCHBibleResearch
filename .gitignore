@@ -1,0 +1,28 @@
+# macOS
+.DS_Store
+
+# Xcode
+xcuserdata/
+*.xcuserstate
+DerivedData/
+*.moved-aside
+*.hmap
+*.ipa
+*.dSYM.zip
+*.dSYM
+
+# Xcode — 프로젝트 자체는 커밋하되(project.pbxproj), 사용자별 상태는 제외
+# (project.xcworkspace/xcuserdata, xcodeproj/xcuserdata 모두 위 xcuserdata/ 패턴에 걸림)
+
+# Swift Package Manager
+.swiftpm/
+.build/
+
+# Rust (native/docxide-pdf-ffi) — cargo 빌드 캐시, 소스에서 재생성 가능
+# (dist/libdocxide_pdf_ffi.a와 JBCHBibleResearch/Native/libdocxide_pdf_ffi.a는
+#  의도적으로 커밋 대상에 포함 — 다른 기기에서 Rust 툴체인 없이 바로 빌드되게 하기 위함)
+native/docxide-pdf-ffi/target/
+
+# Python (ReferenceDataSource 빌드 스크립트)
+__pycache__/
+*.pyc

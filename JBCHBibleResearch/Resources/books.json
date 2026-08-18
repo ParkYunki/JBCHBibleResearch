@@ -1,0 +1,794 @@
+[
+  {
+    "bookId": 1,
+    "testament": "old",
+    "orderIndex": 1,
+    "nameKo": "창세기",
+    "nameOriginal": "Genesis",
+    "abbreviation": [
+      "창",
+      "창세기"
+    ],
+    "chapterCount": 50
+  },
+  {
+    "bookId": 2,
+    "testament": "old",
+    "orderIndex": 2,
+    "nameKo": "출애굽기",
+    "nameOriginal": "Exodus",
+    "abbreviation": [
+      "출",
+      "출애굽기"
+    ],
+    "chapterCount": 40
+  },
+  {
+    "bookId": 3,
+    "testament": "old",
+    "orderIndex": 3,
+    "nameKo": "레위기",
+    "nameOriginal": "Leviticus",
+    "abbreviation": [
+      "레",
+      "레위기"
+    ],
+    "chapterCount": 27
+  },
+  {
+    "bookId": 4,
+    "testament": "old",
+    "orderIndex": 4,
+    "nameKo": "민수기",
+    "nameOriginal": "Numbers",
+    "abbreviation": [
+      "민",
+      "민수기"
+    ],
+    "chapterCount": 36
+  },
+  {
+    "bookId": 5,
+    "testament": "old",
+    "orderIndex": 5,
+    "nameKo": "신명기",
+    "nameOriginal": "Deuteronomy",
+    "abbreviation": [
+      "신",
+      "신명기"
+    ],
+    "chapterCount": 34
+  },
+  {
+    "bookId": 6,
+    "testament": "old",
+    "orderIndex": 6,
+    "nameKo": "여호수아",
+    "nameOriginal": "Joshua",
+    "abbreviation": [
+      "수",
+      "여호수아"
+    ],
+    "chapterCount": 24
+  },
+  {
+    "bookId": 7,
+    "testament": "old",
+    "orderIndex": 7,
+    "nameKo": "사사기",
+    "nameOriginal": "Judges",
+    "abbreviation": [
+      "삿",
+      "사사기"
+    ],
+    "chapterCount": 21
+  },
+  {
+    "bookId": 8,
+    "testament": "old",
+    "orderIndex": 8,
+    "nameKo": "룻기",
+    "nameOriginal": "Ruth",
+    "abbreviation": [
+      "룻",
+      "룻기"
+    ],
+    "chapterCount": 4
+  },
+  {
+    "bookId": 9,
+    "testament": "old",
+    "orderIndex": 9,
+    "nameKo": "사무엘상",
+    "nameOriginal": "1 Samuel",
+    "abbreviation": [
+      "삼상",
+      "사무엘상"
+    ],
+    "chapterCount": 31
+  },
+  {
+    "bookId": 10,
+    "testament": "old",
+    "orderIndex": 10,
+    "nameKo": "사무엘하",
+    "nameOriginal": "2 Samuel",
+    "abbreviation": [
+      "삼하",
+      "사무엘하"
+    ],
+    "chapterCount": 24
+  },
+  {
+    "bookId": 11,
+    "testament": "old",
+    "orderIndex": 11,
+    "nameKo": "열왕기상",
+    "nameOriginal": "1 Kings",
+    "abbreviation": [
+      "왕상",
+      "열왕기상"
+    ],
+    "chapterCount": 22
+  },
+  {
+    "bookId": 12,
+    "testament": "old",
+    "orderIndex": 12,
+    "nameKo": "열왕기하",
+    "nameOriginal": "2 Kings",
+    "abbreviation": [
+      "왕하",
+      "열왕기하"
+    ],
+    "chapterCount": 25
+  },
+  {
+    "bookId": 13,
+    "testament": "old",
+    "orderIndex": 13,
+    "nameKo": "역대상",
+    "nameOriginal": "1 Chronicles",
+    "abbreviation": [
+      "대상",
+      "역대상"
+    ],
+    "chapterCount": 29
+  },
+  {
+    "bookId": 14,
+    "testament": "old",
+    "orderIndex": 14,
+    "nameKo": "역대하",
+    "nameOriginal": "2 Chronicles",
+    "abbreviation": [
+      "대하",
+      "역대하"
+    ],
+    "chapterCount": 36
+  },
+  {
+    "bookId": 15,
+    "testament": "old",
+    "orderIndex": 15,
+    "nameKo": "에스라",
+    "nameOriginal": "Ezra",
+    "abbreviation": [
+      "스",
+      "에스라"
+    ],
+    "chapterCount": 10
+  },
+  {
+    "bookId": 16,
+    "testament": "old",
+    "orderIndex": 16,
+    "nameKo": "느헤미야",
+    "nameOriginal": "Nehemiah",
+    "abbreviation": [
+      "느",
+      "느헤미야"
+    ],
+    "chapterCount": 13
+  },
+  {
+    "bookId": 17,
+    "testament": "old",
+    "orderIndex": 17,
+    "nameKo": "에스더",
+    "nameOriginal": "Esther",
+    "abbreviation": [
+      "에",
+      "에스더"
+    ],
+    "chapterCount": 10
+  },
+  {
+    "bookId": 18,
+    "testament": "old",
+    "orderIndex": 18,
+    "nameKo": "욥기",
+    "nameOriginal": "Job",
+    "abbreviation": [
+      "욥",
+      "욥기"
+    ],
+    "chapterCount": 42
+  },
+  {
+    "bookId": 19,
+    "testament": "old",
+    "orderIndex": 19,
+    "nameKo": "시편",
+    "nameOriginal": "Psalms",
+    "abbreviation": [
+      "시",
+      "시편"
+    ],
+    "chapterCount": 150
+  },
+  {
+    "bookId": 20,
+    "testament": "old",
+    "orderIndex": 20,
+    "nameKo": "잠언",
+    "nameOriginal": "Proverbs",
+    "abbreviation": [
+      "잠",
+      "잠언"
+    ],
+    "chapterCount": 31
+  },
+  {
+    "bookId": 21,
+    "testament": "old",
+    "orderIndex": 21,
+    "nameKo": "전도서",
+    "nameOriginal": "Ecclesiastes",
+    "abbreviation": [
+      "전",
+      "전도서"
+    ],
+    "chapterCount": 12
+  },
+  {
+    "bookId": 22,
+    "testament": "old",
+    "orderIndex": 22,
+    "nameKo": "아가",
+    "nameOriginal": "Song of Songs",
+    "abbreviation": [
+      "아",
+      "아가"
+    ],
+    "chapterCount": 8
+  },
+  {
+    "bookId": 23,
+    "testament": "old",
+    "orderIndex": 23,
+    "nameKo": "이사야",
+    "nameOriginal": "Isaiah",
+    "abbreviation": [
+      "사",
+      "이사야"
+    ],
+    "chapterCount": 66
+  },
+  {
+    "bookId": 24,
+    "testament": "old",
+    "orderIndex": 24,
+    "nameKo": "예레미야",
+    "nameOriginal": "Jeremiah",
+    "abbreviation": [
+      "렘",
+      "예레미야"
+    ],
+    "chapterCount": 52
+  },
+  {
+    "bookId": 25,
+    "testament": "old",
+    "orderIndex": 25,
+    "nameKo": "예레미야애가",
+    "nameOriginal": "Lamentations",
+    "abbreviation": [
+      "애",
+      "예레미야애가"
+    ],
+    "chapterCount": 5
+  },
+  {
+    "bookId": 26,
+    "testament": "old",
+    "orderIndex": 26,
+    "nameKo": "에스겔",
+    "nameOriginal": "Ezekiel",
+    "abbreviation": [
+      "겔",
+      "에스겔"
+    ],
+    "chapterCount": 48
+  },
+  {
+    "bookId": 27,
+    "testament": "old",
+    "orderIndex": 27,
+    "nameKo": "다니엘",
+    "nameOriginal": "Daniel",
+    "abbreviation": [
+      "단",
+      "다니엘"
+    ],
+    "chapterCount": 12
+  },
+  {
+    "bookId": 28,
+    "testament": "old",
+    "orderIndex": 28,
+    "nameKo": "호세아",
+    "nameOriginal": "Hosea",
+    "abbreviation": [
+      "호",
+      "호세아"
+    ],
+    "chapterCount": 14
+  },
+  {
+    "bookId": 29,
+    "testament": "old",
+    "orderIndex": 29,
+    "nameKo": "요엘",
+    "nameOriginal": "Joel",
+    "abbreviation": [
+      "욜",
+      "요엘"
+    ],
+    "chapterCount": 3
+  },
+  {
+    "bookId": 30,
+    "testament": "old",
+    "orderIndex": 30,
+    "nameKo": "아모스",
+    "nameOriginal": "Amos",
+    "abbreviation": [
+      "암",
+      "아모스"
+    ],
+    "chapterCount": 9
+  },
+  {
+    "bookId": 31,
+    "testament": "old",
+    "orderIndex": 31,
+    "nameKo": "오바댜",
+    "nameOriginal": "Obadiah",
+    "abbreviation": [
+      "옵",
+      "오바댜"
+    ],
+    "chapterCount": 1
+  },
+  {
+    "bookId": 32,
+    "testament": "old",
+    "orderIndex": 32,
+    "nameKo": "요나",
+    "nameOriginal": "Jonah",
+    "abbreviation": [
+      "욘",
+      "요나"
+    ],
+    "chapterCount": 4
+  },
+  {
+    "bookId": 33,
+    "testament": "old",
+    "orderIndex": 33,
+    "nameKo": "미가",
+    "nameOriginal": "Micah",
+    "abbreviation": [
+      "미",
+      "미가"
+    ],
+    "chapterCount": 7
+  },
+  {
+    "bookId": 34,
+    "testament": "old",
+    "orderIndex": 34,
+    "nameKo": "나훔",
+    "nameOriginal": "Nahum",
+    "abbreviation": [
+      "나",
+      "나훔"
+    ],
+    "chapterCount": 3
+  },
+  {
+    "bookId": 35,
+    "testament": "old",
+    "orderIndex": 35,
+    "nameKo": "하박국",
+    "nameOriginal": "Habakkuk",
+    "abbreviation": [
+      "합",
+      "하박국"
+    ],
+    "chapterCount": 3
+  },
+  {
+    "bookId": 36,
+    "testament": "old",
+    "orderIndex": 36,
+    "nameKo": "스바냐",
+    "nameOriginal": "Zephaniah",
+    "abbreviation": [
+      "습",
+      "스바냐"
+    ],
+    "chapterCount": 3
+  },
+  {
+    "bookId": 37,
+    "testament": "old",
+    "orderIndex": 37,
+    "nameKo": "학개",
+    "nameOriginal": "Haggai",
+    "abbreviation": [
+      "학",
+      "학개"
+    ],
+    "chapterCount": 2
+  },
+  {
+    "bookId": 38,
+    "testament": "old",
+    "orderIndex": 38,
+    "nameKo": "스가랴",
+    "nameOriginal": "Zechariah",
+    "abbreviation": [
+      "슥",
+      "스가랴"
+    ],
+    "chapterCount": 14
+  },
+  {
+    "bookId": 39,
+    "testament": "old",
+    "orderIndex": 39,
+    "nameKo": "말라기",
+    "nameOriginal": "Malachi",
+    "abbreviation": [
+      "말",
+      "말라기"
+    ],
+    "chapterCount": 4
+  },
+  {
+    "bookId": 40,
+    "testament": "new",
+    "orderIndex": 40,
+    "nameKo": "마태복음",
+    "nameOriginal": "Matthew",
+    "abbreviation": [
+      "마",
+      "마태복음"
+    ],
+    "chapterCount": 28
+  },
+  {
+    "bookId": 41,
+    "testament": "new",
+    "orderIndex": 41,
+    "nameKo": "마가복음",
+    "nameOriginal": "Mark",
+    "abbreviation": [
+      "막",
+      "마가복음"
+    ],
+    "chapterCount": 16
+  },
+  {
+    "bookId": 42,
+    "testament": "new",
+    "orderIndex": 42,
+    "nameKo": "누가복음",
+    "nameOriginal": "Luke",
+    "abbreviation": [
+      "눅",
+      "누가복음"
+    ],
+    "chapterCount": 24
+  },
+  {
+    "bookId": 43,
+    "testament": "new",
+    "orderIndex": 43,
+    "nameKo": "요한복음",
+    "nameOriginal": "John",
+    "abbreviation": [
+      "요",
+      "요한복음"
+    ],
+    "chapterCount": 21
+  },
+  {
+    "bookId": 44,
+    "testament": "new",
+    "orderIndex": 44,
+    "nameKo": "사도행전",
+    "nameOriginal": "Acts",
+    "abbreviation": [
+      "행",
+      "사도행전"
+    ],
+    "chapterCount": 28
+  },
+  {
+    "bookId": 45,
+    "testament": "new",
+    "orderIndex": 45,
+    "nameKo": "로마서",
+    "nameOriginal": "Romans",
+    "abbreviation": [
+      "롬",
+      "로마서"
+    ],
+    "chapterCount": 16
+  },
+  {
+    "bookId": 46,
+    "testament": "new",
+    "orderIndex": 46,
+    "nameKo": "고린도전서",
+    "nameOriginal": "1 Corinthians",
+    "abbreviation": [
+      "고전",
+      "고린도전서"
+    ],
+    "chapterCount": 16
+  },
+  {
+    "bookId": 47,
+    "testament": "new",
+    "orderIndex": 47,
+    "nameKo": "고린도후서",
+    "nameOriginal": "2 Corinthians",
+    "abbreviation": [
+      "고후",
+      "고린도후서"
+    ],
+    "chapterCount": 13
+  },
+  {
+    "bookId": 48,
+    "testament": "new",
+    "orderIndex": 48,
+    "nameKo": "갈라디아서",
+    "nameOriginal": "Galatians",
+    "abbreviation": [
+      "갈",
+      "갈라디아서"
+    ],
+    "chapterCount": 6
+  },
+  {
+    "bookId": 49,
+    "testament": "new",
+    "orderIndex": 49,
+    "nameKo": "에베소서",
+    "nameOriginal": "Ephesians",
+    "abbreviation": [
+      "엡",
+      "에베소서"
+    ],
+    "chapterCount": 6
+  },
+  {
+    "bookId": 50,
+    "testament": "new",
+    "orderIndex": 50,
+    "nameKo": "빌립보서",
+    "nameOriginal": "Philippians",
+    "abbreviation": [
+      "빌",
+      "빌립보서"
+    ],
+    "chapterCount": 4
+  },
+  {
+    "bookId": 51,
+    "testament": "new",
+    "orderIndex": 51,
+    "nameKo": "골로새서",
+    "nameOriginal": "Colossians",
+    "abbreviation": [
+      "골",
+      "골로새서"
+    ],
+    "chapterCount": 4
+  },
+  {
+    "bookId": 52,
+    "testament": "new",
+    "orderIndex": 52,
+    "nameKo": "데살로니가전서",
+    "nameOriginal": "1 Thessalonians",
+    "abbreviation": [
+      "살전",
+      "데살로니가전서"
+    ],
+    "chapterCount": 5
+  },
+  {
+    "bookId": 53,
+    "testament": "new",
+    "orderIndex": 53,
+    "nameKo": "데살로니가후서",
+    "nameOriginal": "2 Thessalonians",
+    "abbreviation": [
+      "살후",
+      "데살로니가후서"
+    ],
+    "chapterCount": 3
+  },
+  {
+    "bookId": 54,
+    "testament": "new",
+    "orderIndex": 54,
+    "nameKo": "디모데전서",
+    "nameOriginal": "1 Timothy",
+    "abbreviation": [
+      "딤전",
+      "디모데전서"
+    ],
+    "chapterCount": 6
+  },
+  {
+    "bookId": 55,
+    "testament": "new",
+    "orderIndex": 55,
+    "nameKo": "디모데후서",
+    "nameOriginal": "2 Timothy",
+    "abbreviation": [
+      "딤후",
+      "디모데후서"
+    ],
+    "chapterCount": 4
+  },
+  {
+    "bookId": 56,
+    "testament": "new",
+    "orderIndex": 56,
+    "nameKo": "디도서",
+    "nameOriginal": "Titus",
+    "abbreviation": [
+      "딛",
+      "디도서"
+    ],
+    "chapterCount": 3
+  },
+  {
+    "bookId": 57,
+    "testament": "new",
+    "orderIndex": 57,
+    "nameKo": "빌레몬서",
+    "nameOriginal": "Philemon",
+    "abbreviation": [
+      "몬",
+      "빌레몬서"
+    ],
+    "chapterCount": 1
+  },
+  {
+    "bookId": 58,
+    "testament": "new",
+    "orderIndex": 58,
+    "nameKo": "히브리서",
+    "nameOriginal": "Hebrews",
+    "abbreviation": [
+      "히",
+      "히브리서"
+    ],
+    "chapterCount": 13
+  },
+  {
+    "bookId": 59,
+    "testament": "new",
+    "orderIndex": 59,
+    "nameKo": "야고보서",
+    "nameOriginal": "James",
+    "abbreviation": [
+      "약",
+      "야고보서"
+    ],
+    "chapterCount": 5
+  },
+  {
+    "bookId": 60,
+    "testament": "new",
+    "orderIndex": 60,
+    "nameKo": "베드로전서",
+    "nameOriginal": "1 Peter",
+    "abbreviation": [
+      "벧전",
+      "베드로전서"
+    ],
+    "chapterCount": 5
+  },
+  {
+    "bookId": 61,
+    "testament": "new",
+    "orderIndex": 61,
+    "nameKo": "베드로후서",
+    "nameOriginal": "2 Peter",
+    "abbreviation": [
+      "벧후",
+      "베드로후서"
+    ],
+    "chapterCount": 3
+  },
+  {
+    "bookId": 62,
+    "testament": "new",
+    "orderIndex": 62,
+    "nameKo": "요한일서",
+    "nameOriginal": "1 John",
+    "abbreviation": [
+      "요일",
+      "요한일서"
+    ],
+    "chapterCount": 5
+  },
+  {
+    "bookId": 63,
+    "testament": "new",
+    "orderIndex": 63,
+    "nameKo": "요한이서",
+    "nameOriginal": "2 John",
+    "abbreviation": [
+      "요이",
+      "요한이서"
+    ],
+    "chapterCount": 1
+  },
+  {
+    "bookId": 64,
+    "testament": "new",
+    "orderIndex": 64,
+    "nameKo": "요한삼서",
+    "nameOriginal": "3 John",
+    "abbreviation": [
+      "요삼",
+      "요한삼서"
+    ],
+    "chapterCount": 1
+  },
+  {
+    "bookId": 65,
+    "testament": "new",
+    "orderIndex": 65,
+    "nameKo": "유다서",
+    "nameOriginal": "Jude",
+    "abbreviation": [
+      "유",
+      "유다서"
+    ],
+    "chapterCount": 1
+  },
+  {
+    "bookId": 66,
+    "testament": "new",
+    "orderIndex": 66,
+    "nameKo": "요한계시록",
+    "nameOriginal": "Revelation",
+    "abbreviation": [
+      "계",
+      "요한계시록"
+    ],
+    "chapterCount": 22
+  }
+]

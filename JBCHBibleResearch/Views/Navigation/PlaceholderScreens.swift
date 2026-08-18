@@ -1,0 +1,109 @@
+//
+//  PlaceholderScreens.swift
+//  JBCHBibleResearch
+//
+//  이번 구현 범위(내비게이션 뼈대 + S1 + S2/S3 메모)에서는 성경 조회·메모 화면만
+//  실제로 만든다. 나머지 화면(S5~S7 문서/OCR, S8/S9 개요, S10 태그 관계, S11 통합
+//  검색, 설정, 번역본 관리)은 내비게이션 뼈대가 완전한 형태로 동작하는지 확인할 수
+//  있도록 자리만 잡아 두는 플레이스홀더다 — 실제 데이터/기능은 없다.
+//
+//  2026-08-06: 메모(S2/S3)가 실제로 구현되면서 MemosPlaceholderView는 제거하고
+//  Views/Memo/MemoHomeView.swift로 교체했다(SidebarNavigationView/PhoneTabView 참고).
+//  같은 날, 개요(S8/S9)가 구현되면서 OutlinePlaceholderView도 같은 이유로 제거하고
+//  Views/Outline/OutlineView.swift로 교체했다. 이어서 연구문서(S5/S6/S7)가
+//  구현되면서 DocumentsPlaceholderView도 제거하고 Views/Documents/
+//  DocumentsHomeView.swift로 교체했다. 이어서 태그 관계(S10)가 구현되면서
+//  TagRelationsPlaceholderView도 제거하고 Views/TagRelations/TagRelationsView.swift로
+//  교체했다(아이폰 "더보기" 진입점은 스펙 "iOS는 전체화면 모달로 대응"에 맞춰
+//  NavigationLink 대신 .fullScreenCover로 바꿨다 — MorePlaceholderView 참고).
+//  이어서 설정(8장)이 구현되면서 SettingsPlaceholderView도 제거하고
+//  Views/Settings/SettingsView.swift로 교체했다. 이어서 통합 검색(S11)이
+//  구현되면서 UnifiedSearchPlaceholderView도 제거하고 Views/Search/SearchView.swift로
+//  교체했다. 이어서 [2026-08-07] 번역본 관리(S12)가 구현되면서
+//  TranslationManagementPlaceholderView도 제거하고
+//  Views/Translations/TranslationManagementView.swift로 교체했다 — 이걸로 이
+//  파일에는 더 이상 대체 대상 플레이스홀더가 남아 있지 않다(MorePlaceholderView
+//  자체는 플레이스홀더가 아니라 "더보기" 탭의 진짜 메뉴 화면이라 남겨 둔다).
+//
+
+import SwiftUI
+
+private struct ComingSoonView: View {
+    let title: String
+    let systemImage: String
+
+    var body: some View {
+        VStack(spacing: 12) {
+            Image(systemName: systemImage)
+                .font(.system(size: 40))
+                .foregroundStyle(.secondary)
+            Text(title)
+                .font(.title3)
+            Text("곧 제공됩니다")
+                .font(.callout)
+                .foregroundStyle(.secondary)
+        }
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .navigationTitle(title)
+    }
+}
+
+/// iPhone "더보기" 탭 — screens.md 1장 IA: 태그관계·설정·번역본 관리로 진입.
+/// 태그 관계(S10)는 스펙 "iOS는 전체화면 모달로 대응"에 따라 NavigationLink push가
+/// 아니라 `.fullScreenCover`로 연다(macOS/iPadOS의 별도 창과 같은 역할을 하는
+/// iPhone식 대응). 번역본 관리(S12)는 [2026-08-07]부터 NavigationLink로
+/// `TranslationManagementView`를 push한다.
+///
+/// ⚠️ [2026-08-07 추가, IA 대비 보완] 1장 IA 원문은 iPhone 탭바를 "메모/성경/
+/// 문서·OCR/개요/더보기" 5개로만 명시했고 "통합 검색"은 그 목록에 없다. 하지만
+/// 2장 화면 총괄표는 S11(통합 검색)의 iOS 접근 수준을 "동일"(macOS/iPadOS와 같은
+/// 전체 기능)로 명시했다 — 즉 iPhone에서도 반드시 닿을 수 있어야 한다는 뜻인데
+/// 탭바엔 자리가 없다. 이미 같은 이유로 S12(번역본 관리)가 탭바 목록에 없으면서도
+/// "더보기"에 들어가 있는 선례가 있어, 통합 검색도 같은 자리에 추가했다.
+struct MorePlaceholderView: View {
+    @State private var isTagRelationsPresented = false
+
+    var body: some View {
+        List {
+            Button {
+                isTagRelationsPresented = true
+            } label: {
+                Label("태그 관계", systemImage: "circle.grid.cross")
+            }
+            NavigationLink {
+                SearchView()
+            } label: {
+                Label("통합 검색", systemImage: "magnifyingglass")
+            }
+            NavigationLink {
+                TranslationManagementView()
+            } label: {
+                Label("번역본 관리", systemImage: "character.book.closed")
+            }
+            NavigationLink {
+                SettingsView().navigationTitle("설정")
+            } label: {
+                Label("설정", systemImage: "gearshape")
+            }
+        }
+        .navigationTitle("더보기")
+        // ⚠️ 2026-08-06 Xcode 빌드 오류로 확인: `fullScreenCover`는 iOS/iPadOS
+        // 전용이라 macOS에는 심볼 자체가 없다(`'fullScreenCover(isPresented:onDismiss:content:)'
+        // is unavailable in macOS`). 이 뷰(MorePlaceholderView)는 실제로 PhoneTabView를
+        // 통해 아이폰에서만 쓰이지만, 멀티플랫폼 단일 타겟이라 macOS 빌드에서도 이
+        // 파일 전체가 컴파일되므로 `#if os(iOS)`로 감싸야 한다 — macOS 쪽은 이
+        // 뷰 자체가 쓰이지 않으니 대체 없이 그냥 비워 둔다.
+        #if os(iOS)
+        .fullScreenCover(isPresented: $isTagRelationsPresented) {
+            NavigationStack {
+                TagRelationsView()
+                    .toolbar {
+                        ToolbarItem(placement: .cancellationAction) {
+                            Button("닫기") { isTagRelationsPresented = false }
+                        }
+                    }
+            }
+        }
+        #endif
+    }
+}

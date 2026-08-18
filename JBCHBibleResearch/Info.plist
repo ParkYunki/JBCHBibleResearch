@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<!-- [2026-08-08 추가] "Unable to open a window when the app does not support
+	     multiple scenes" 런타임 오류 수정. `openWindow(id:)`/`WindowGroup(id:)`로
+	     별도 창을 여는 기능(성경 조회 새 창 S1, 태그 관계 S10, 문서 뷰어 S6)이
+	     여러 곳에 이미 있었는데, 이 Info.plist가 지금까지 완전히 비어 있어서
+	     (`<dict/>`) iOS/iPadOS가 이 앱을 "다중 씬을 전혀 지원하지 않는 앱"으로
+	     인식했다 — `UIApplicationSceneManifest`가 아예 없으면 기기가 iPad든
+	     아니든 무조건 이 오류가 난다. macOS는 AppKit 윈도우 체계라 이 키 자체를
+	     쓰지 않으므로(무시됨) 기존 macOS 동작에는 영향이 없다. -->
+	<key>UIApplicationSceneManifest</key>
+	<dict>
+		<key>UIApplicationSupportsMultipleScenes</key>
+		<true/>
+	</dict>
+
+	<!-- [2026-08-15 추가 → 같은 날 되돌림] 한때 여기 `NSUbiquitousContainers`/
+	     `NSUbiquitousContainerIsDocumentScopePublic`를 추가해 연구문서 저장
+	     컨테이너를 Finder의 "iCloud Drive"에 사용자가 직접 볼 수 있는 폴더로
+	     노출한 적이 있다. 사용자 확인 결과 — "비공개로 해줄 것. 괜히 공개했다가
+	     사용자가 마음대로 폴더 파일을 추가하거나, 삭제하는 것보다 나음." 즉
+	     Finder에서 사용자가 실수로/직접 파일을 지우거나 옮기면, 이 앱이 SwiftData
+	     에 들고 있는 북마크(`SourceDocument.fileBookmark`)가 깨져 원본을 못 여는
+	     문제가 생길 수 있어 — 다시 비공개(앱 전용, 프로그래밍적으로만 접근)로
+	     되돌렸다. 기기 간 iCloud 동기화 자체는 비공개 상태에서도 그대로 된다 —
+	     달라지는 건 "Finder에 보이는지" 뿐이다. -->
+</dict>
+</plist>

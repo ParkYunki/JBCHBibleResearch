@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>aps-environment</key>
+	<string>development</string>
+	<key>com.apple.developer.aps-environment</key>
+	<string>development</string>
+	<key>com.apple.developer.icloud-container-identifiers</key>
+	<array>
+		<string>iCloud.com.jbch.JBCHBibleResearch</string>
+	</array>
+	<key>com.apple.developer.icloud-services</key>
+	<array>
+		<string>CloudKit</string>
+		<string>CloudDocuments</string>
+	</array>
+	<key>com.apple.developer.ubiquity-container-identifiers</key>
+	<array>
+		<string>iCloud.com.jbch.JBCHBibleResearch</string>
+	</array>
+	<key>com.apple.security.app-sandbox</key>
+	<true/>
+	<!-- [2026-08-16 재추가] WKWebView(rhwp 웹 뷰어)가 App Sandbox 아래서 뜨려면
+	     Apple 공식 문서가 필수로 요구하는 엔타이틀먼트 — 로컬 hwpviewer:// 스킴만
+	     쓰고 실제 인터넷 요청이 전혀 없어도, WebKit의 WebContent/Network/GPU
+	     XPC 헬퍼 프로세스는 시작할 때 항상 네트워크 스택을 초기화하려고 시도한다.
+	     이 키가 없으면 그 초기화 단계에서 샌드박스가 거부해 헬퍼 프로세스가
+	     아예 실행되지 못하고 즉시 크래시한다(Xcode 콘솔의 "Application does not
+	     have permission to communicate with network resources. rc=1 : errno=34"
+	     / "web process failed to launch" 로그가 그 증거) — 지금 파일에 이 키가
+	     통째로 빠져 있었던 게 rhwp 웹 뷰어가 계속 크래시한 근본 원인으로 보인다. -->
+	<key>com.apple.security.network.client</key>
+	<true/>
+</dict>
+</plist>

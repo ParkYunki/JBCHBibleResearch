@@ -1,0 +1,27 @@
+[package]
+name = "docxide-pdf-ffi"
+version = "0.1.0"
+edition = "2021"
+publish = false
+
+# 2026-08-16 신설 — 사용자 요청 "docxide-pdf + PDFKit로 docx를 pdf로 변환하는 것을
+# 검토할 것" → "진행할 것." docxide-pdf(https://github.com/sverrejb/docxide-pdf,
+# Apache-2.0)는 순수 Rust crate라 Swift에서 직접 못 부른다. 이 crate는 그 라이브러리를
+# extern "C" 함수 두 개(변환 1개, 에러 문자열 해제 1개)로만 감싸는 아주 얇은 어댑터다 —
+# 우리 쪽 로직은 여기 안 두고, 실제 변환은 전부 docxide-pdf에 위임한다.
+#
+# ⚠️ 이 crate는 이 세션(Rust 툴체인이 없는 리눅스 샌드박스)에서 컴파일 검증을
+# 못 했다 — 실제 빌드는 사용자 macOS에서 build-macos-lib.sh로 해야 한다. Rust
+# 문법 자체는 신중히 작성했지만, cargo build로 처음 실행할 때 타입 불일치 등이
+# 나올 수 있다는 점을 감안하고 진행할 것(README.md 참고).
+
+[lib]
+name = "docxide_pdf_ffi"
+crate-type = ["staticlib"]
+
+[dependencies]
+# README가 명시한 방식 그대로 — "cargo add docxide-pdf --no-default-features"로
+# CLI 전용 의존성(clap, env_logger)을 뺀다. 우리는 라이브러리 함수
+# `convert_docx_bytes_to_pdf`만 쓴다(실제 소스 src/lib.rs를 직접 읽어 시그니처
+# 확인함 — README 예제 코드만 믿지 않았다).
+docxide-pdf = { version = "0.16", default-features = false }
