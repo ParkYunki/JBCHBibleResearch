@@ -109,15 +109,38 @@ enum BibleReferenceExtractor {
 
         let escaped = forms.map { NSRegularExpression.escapedPattern(for: $0.form) }
         let bookAlternation = escaped.joined(separator: "|")
-        // 그룹1 = 시작 장(필수), 그룹2 = 시작 절(선택).
-        // 그룹3 = 범위 끝 장(선택, "-2:1"처럼 장까지 다시 적었을 때만),
-        // 그룹4 = 범위 끝 절(선택, "-9"/"~8"/"-2:1"의 마지막 숫자) — 그룹4가 있어야
-        // "범위 표기가 있다"는 뜻이고, 그룹3은 그룹4가 있을 때만 "장을 넘어가는
-        // 범위인지"를 가른다(그룹3 없이 그룹4만 있으면 같은 장 안의 범위).
-        // ":"/","/"절"을 구분자로 허용하고, "장"/"절" 한글 단위 글자는 있어도
-        // 없어도 매칭되게 한다.
+        // [2026-08-20 수정, 버그 수정] 사용자 보고 — "창세기 1장 1절 -> 창1:1이나
+        // 창1:5절, 창1:12으로 검색이 됨. 창1:1로 검색이 될 수 있도록." 실제로
+        // Python `re`(ICU와 호환되는 부분집합)로 이 패턴을 직접 재현해 확인한
+        // 결과, "N장 M절"(장/절 조사가 숫자 뒤에 붙는 표준 한글 어순 — 파일
+        // 상단 주석이 지원 예시로 든 "요 3장 16절"도 포함)을 넣으면 절 그룹이
+        // 통째로 매칭 실패해 "책+장"까지만 잡히고 절 정보가 사라졌다(verse가
+        // nil). 원인은 바로 아래 옛 패턴의 `[:,절]`— 이건 절 앞에 구분자로
+        // ':'/','/'절' 문자가 "먼저" 와야 한다는 뜻인데, "1장 1절"은 숫자
+        // "1" 뒤에 "절"이 붙는 어순이라 앞쪽에 구분자가 없다. verse가 nil이면
+        // (챕터만 있는 참조로 취급되면) 아래 `extract(from:)`가 만드는 `Match`도
+        // `verse: nil`이 되고, 그 Match가 다른 `VerseMention`과 좌표 비교될 때
+        // (`query.verse == nil || ...`, DocumentViewerView.verseSearchLiteralTerms/
+        // SearchViewModel.verseMentionSearchTexts 등 여러 곳에서 반복되는 규칙)
+        // "장이 같으면 절 상관없이 다 일치"로 취급돼 — 정확히 신고된 증상
+        // (1절로 검색했는데 5절/12절짜리도 걸림)과 들어맞는다.
+        //
+        // 고침 — 절 앞에 구분자가 있는 기존 경로(그룹2, ":"/","+숫자, 뒤에
+        // "절"은 있어도 없어도 됨)에 더해, 구분자 없이 "숫자+절"만으로도 절로
+        // 인정하는 두 번째 경로(그룹3, 대신 뒤의 "절"은 필수 — 그래야 순수
+        // 숫자를 함부로 절로 오인하지 않는다, 이 파일 상단 "오탐 가능성" 주석과
+        // 같은 원칙)를 추가했다. 그룹3이 새로 끼어들면서 범위 끝 그룹 번호가
+        // 하나씩 밀렸다 — 그룹4 = 범위 끝 장(선택, "-2:1"처럼 장까지 다시
+        // 적었을 때만), 그룹5 = 범위 끝 절(선택, "-9"/"~8"/"-2:1"의 마지막
+        // 숫자). 아래 `extract(from:)`도 이 번호에 맞춰 함께 고쳤다.
+        //
+        // ⚠️ [건드리지 않은 부분] 아래 `continuationRegex`("장:절" 형태만
+        // 인정)는 그대로 뒀다 — 그 옆 주석이 이미 "숫자+절" 형태까지 넓히면
+        // 오탐 위험이 커진다고 명시적으로 판단해 둔 것이라(연속 인용 스캔은
+        // 임의의 뒤따르는 텍스트를 계속 훑는 더 위험한 문맥), 새 정보 없이
+        // 그 판단을 뒤집지 않았다.
         let pattern = "(?:\(bookAlternation))\\s*(\\d{1,3})\\s*장?\\s*"
-            + "(?:[:,절]\\s*(\\d{1,3})\\s*절?"
+            + "(?:(?:[:,]\\s*(\\d{1,3})\\s*절?|(\\d{1,3})\\s*절)"
             + "(?:\\s*[-~]\\s*(?:(\\d{1,3})\\s*[:장]\\s*)?(\\d{1,3})\\s*절?)?"
             + ")?"
         guard let regex = try? NSRegularExpression(pattern: pattern) else { return nil }
@@ -217,8 +240,20 @@ enum BibleReferenceExtractor {
                   let chapter = Int(ns.substring(with: chapterRange)), chapter > 0 else { return }
             let searchText = matchedText.trimmingCharacters(in: .whitespaces)
 
+            // [2026-08-20 수정] 위 `pattern` 상단 주석 참고 — 절 그룹이 이제 둘로
+            // 나뉜다(그룹2 = "구분자+숫자" 경로, 그룹3 = "숫자+절" 경로). 어느
+            // 한쪽만 매칭되므로 둘 중 실제로 값이 있는 쪽을 쓴다.
             let verseRange = result.range(at: 2)
-            guard verseRange.location != NSNotFound, let verse = Int(ns.substring(with: verseRange)), verse > 0 else {
+            let verseParticleRange = result.range(at: 3)
+            let verse: Int?
+            if verseRange.location != NSNotFound, let v = Int(ns.substring(with: verseRange)), v > 0 {
+                verse = v
+            } else if verseParticleRange.location != NSNotFound, let v = Int(ns.substring(with: verseParticleRange)), v > 0 {
+                verse = v
+            } else {
+                verse = nil
+            }
+            guard let verse else {
                 // 절 번호 없이 "책 이름 + 장"만 매칭된 경우 — 범위 표기가 있을 수
                 // 없으니 장 단위 Match 하나만 추가한다.
                 matches.append(Match(range: matchRange, searchText: searchText, bookId: book.bookId, chapter: chapter, verse: nil))
@@ -226,7 +261,7 @@ enum BibleReferenceExtractor {
                 return
             }
 
-            let endVerseRange = result.range(at: 4)
+            let endVerseRange = result.range(at: 5)
             guard endVerseRange.location != NSNotFound,
                   let endVerse = Int(ns.substring(with: endVerseRange)), endVerse > 0 else {
                 // 범위 표기 없음 — 절 하나만.
@@ -236,7 +271,7 @@ enum BibleReferenceExtractor {
             }
 
             var endChapter: Int?
-            let endChapterRange = result.range(at: 3)
+            let endChapterRange = result.range(at: 4)
             if endChapterRange.location != NSNotFound,
                let ec = Int(ns.substring(with: endChapterRange)), ec > 0 {
                 endChapter = ec

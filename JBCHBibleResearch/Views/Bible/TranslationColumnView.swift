@@ -170,9 +170,17 @@ struct TranslationColumnView: View {
         }
     }
 
+    /// [2026-08-20 추가] 사용자 요청 — "절 간격 조절 기능추가". 아래
+    /// `columnScrollView`의 `LazyVStack(spacing:)`이 예전엔 10으로 고정돼
+    /// 있었다 — `UserSettingsStore.bibleVerseSpacing`(설정 - 모양 - 성경 조회
+    /// 표시)을 그대로 전달한다. `VerseRow`가 쓰는 `settings`(아래)와 같은
+    /// 패턴이지만, 그건 `private struct VerseRow` 안이라 이 struct에서 따로
+    /// 하나 둔다.
+    private var settings: UserSettingsStore { .shared }
+
     private var columnScrollView: some View {
         ScrollView {
-            LazyVStack(alignment: .leading, spacing: 10) {
+            LazyVStack(alignment: .leading, spacing: CGFloat(settings.bibleVerseSpacing)) {
                 ForEach(verses, id: \.verse) { verse in
                     VerseRow(
                         verse: verse,

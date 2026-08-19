@@ -530,6 +530,7 @@ final class BibleReadingViewModel {
     }
 
     func selectBook(_ book: Book, chapter: Int = 1) {
+        pushCurrentLocationToBackStack()
         selectedBook = book
         selectedChapter = max(1, chapter)
         clearVerseSelection()
@@ -544,6 +545,7 @@ final class BibleReadingViewModel {
 
     func goToChapter(_ chapter: Int) {
         guard chapter >= 1 else { return }
+        pushCurrentLocationToBackStack()
         selectedChapter = chapter
         clearVerseSelection()
         reloadVerses()
@@ -794,8 +796,102 @@ final class BibleReadingViewModel {
         return String(text.prefix(limit)) + "…"
     }
 
-    func nextChapter() { goToChapter(selectedChapter + 1) }
-    func previousChapter() { goToChapter(max(1, selectedChapter - 1)) }
+    /// [2026-08-20 수정] 사용자 요청 — "요한계시록을 제외하고 각 성경의 마지막
+    /// 장에서 다음장을 클릭하면 다음 성경 1장으로 이동." 기존엔 상한 검사가
+    /// 아예 없어서(`goToChapter`의 `guard`는 하한 1만 본다) 마지막 장에서
+    /// 눌러도 존재하지 않는 장 번호로 그냥 넘어가 빈 화면("이 장에 표시할
+    /// 절이 없습니다")이 떴다. `selectedBook.chapterCount`가 곧 그 책의
+    /// 마지막 장 번호다.
+    func nextChapter() {
+        if selectedChapter < selectedBook.chapterCount {
+            goToChapter(selectedChapter + 1)
+        } else if let nextBook = booksProvider.book(after: selectedBook) {
+            selectBook(nextBook, chapter: 1)
+        }
+        // 요한계시록 마지막 장이면 `booksProvider.book(after:)`가 nil을 돌려주므로
+        // 아무 것도 하지 않는다 — 더 넘어갈 책이 없다.
+    }
+
+    /// [2026-08-20 수정] 사용자 요청 — "창세기를 제외하고 각 성경의 1장에서
+    /// 이전장을 클릭하면 전 성경(이전 책) 마지막 장으로 이동." 기존엔
+    /// `max(1, selectedChapter - 1)`이라 1장에서 눌러도 그냥 1장에 머물렀다.
+    func previousChapter() {
+        if selectedChapter > 1 {
+            goToChapter(selectedChapter - 1)
+        } else if let previousBook = booksProvider.book(before: selectedBook) {
+            selectBook(previousBook, chapter: previousBook.chapterCount)
+        }
+        // 창세기 1장이면 `booksProvider.book(before:)`가 nil을 돌려주므로
+        // 아무 것도 하지 않는다.
+    }
+
+    // MARK: - 브라우저 스타일 뒤로/앞으로 탐색 (2026-08-20 추가)
+    //
+    // 사용자 요청 — "이전 장 이동하는 화살표 옆에 이전에 찾아봤던 장 바로가기
+    // 아이콘 추가(history.back). 다음 장 이동하는 화살표 옆에 앞에서 온 성경
+    // 장을 바로가는 아이콘 추가(history.forward())." 바로 위 `previousChapter`/
+    // `nextChapter`(항상 인접한 장 ±1로만 이동)와는 완전히 다른 개념이다 — 이건
+    // 브라우저처럼 사용자가 실제로 거쳐온 임의의 책/장 순서(책 피커 선택, 검색
+    // 결과 클릭, 관주 이동, 조회 이력 항목 클릭 등 `selectBook`/`goToChapter`를
+    // 타는 모든 경로)를 그대로 되짚어 간다.
+    //
+    // 기존 `BibleReadingHistoryService`/`fetchHistory()`(위)는 SwiftData에 영구
+    // 저장되는 "방문 기록 목록"이고 되돌아가기/다시가기 포인터 개념이 없다 —
+    // 이 스택은 그와 별개로 이 뷰모델 인스턴스(=이 창) 안에서만 살아있는
+    // 순수 인메모리 상태다.
+
+    private struct ChapterLocation: Equatable {
+        let bookId: Int
+        let chapter: Int
+    }
+
+    private var backStack: [ChapterLocation] = []
+    private var forwardStack: [ChapterLocation] = []
+
+    var canGoBackInHistory: Bool { !backStack.isEmpty }
+    var canGoForwardInHistory: Bool { !forwardStack.isEmpty }
+
+    private var currentLocation: ChapterLocation {
+        ChapterLocation(bookId: selectedBook.bookId, chapter: selectedChapter)
+    }
+
+    /// `selectBook`/`goToChapter`가 실제 이동 직전에 호출한다 — "지금 있던
+    /// 자리"를 뒤로가기 스택에 쌓고, 새로 이동하는 순간 "앞으로" 갈 곳은
+    /// 무의미해지므로 앞으로가기 스택을 비운다(브라우저의 표준 동작과 동일 —
+    /// 뒤로 갔다가 새 링크를 클릭하면 그 이전의 "앞으로" 기록이 사라지는 것과
+    /// 같다). `goBackInHistory`/`goForwardInHistory`는 이 메서드를 거치지 않고
+    /// `selectedBook`/`selectedChapter`를 직접 대입하므로(아래) 뒤로/앞으로
+    /// 이동 자체가 다시 스택에 쌓이는 일은 없다.
+    private func pushCurrentLocationToBackStack() {
+        backStack.append(currentLocation)
+        forwardStack.removeAll()
+    }
+
+    /// 스택에서 꺼낸 위치로 이동한다 — `pushCurrentLocationToBackStack`을 타지
+    /// 않는다는 점만 빼면 `selectBook`과 같은 부수효과(재조회/관련내용
+    /// 새로고침/최근 위치·조회 이력 기록)를 그대로 수행한다.
+    private func navigate(toHistory location: ChapterLocation) {
+        guard let book = booksProvider.book(id: location.bookId) else { return }
+        selectedBook = book
+        selectedChapter = max(1, location.chapter)
+        clearVerseSelection()
+        reloadVerses()
+        refreshRelatedContent()
+        LastBiblePositionTracker.shared.update(bookId: book.bookId, chapter: selectedChapter)
+        BibleReadingHistoryService.record(bookId: book.bookId, chapter: selectedChapter, context: modelContext)
+    }
+
+    func goBackInHistory() {
+        guard let previous = backStack.popLast() else { return }
+        forwardStack.append(currentLocation)
+        navigate(toHistory: previous)
+    }
+
+    func goForwardInHistory() {
+        guard let next = forwardStack.popLast() else { return }
+        backStack.append(currentLocation)
+        navigate(toHistory: next)
+    }
 
     /// 번역본 선택 팝오버에서 호출 — 표시 목록을 교체한다(최대 maxColumns개까지만 유지).
     func setDisplayedTranslations(_ ids: [PersistentIdentifier]) {
