@@ -35,6 +35,18 @@ struct SemanticVerseMatch {
     let similarity: Float
 }
 
+/// [2026-08-19 신설] 관주(Cross Reference) 후보 확장 단계의 중복 제거용 키.
+/// `BibleStructuralRerankerService.VerseKey`와 같은 목적의 타입을 이 파일
+/// 안에서도 필요로 해서(서로 다른 파일이라 재사용 대신 각자 정의 — 둘 다
+/// 아주 작은 값 타입이라 공용 타입으로 뽑는 비용이 더 크다고 판단, 이
+/// 프로젝트의 "세 번째 사용처가 생기기 전엔 공통 헬퍼로 추출하지 않는다"
+/// 원칙과 같은 논리) 별도로 둔다.
+private struct VerseCoordinate: Hashable {
+    let bookId: Int
+    let chapter: Int
+    let verse: Int
+}
+
 /// [2026-08-19 신설] 사용자 요청 — "애플인텔리전스를 끈것과 켠것을 비교하고
 /// 싶음." 결과 목록뿐 아니라 "실제로 임베딩에 넘긴 문장"까지 같이 돌려준다 —
 /// 정제를 켰을 때와 껐을 때 검색어 자체가 어떻게 달라지는지 화면에 보여줘야
@@ -169,13 +181,69 @@ enum BibleSemanticSearchService {
         }
         guard !candidates.isEmpty else { return .failure(.noResults) }
 
+        // [2026-08-19 신설, Layer 3 연결] 사용자 요청 — "관주 데이터,
+        // 지금은 성경 읽기 화면에서만 쓰이는데 검색 파이프라인에도 연결할
+        // 것(저작권 문제없음 확인)." E5 상위 10개(전체 50개가 아니라
+        // 상위권만 — 관주 조회는 SQLite 왕복이 후보 수만큼 늘어나므로
+        // 비용을 상위권으로 제한)의 관주 대상 중, 아직 후보 목록에 없는
+        // 절을 추가로 끌어온다. 신규 유사도는 원래 E5 유사도를 매기지
+        // 않고(관주로 끌려온 절은 임베딩 유사도가 별도로 없음) 그 절을
+        // 끌어온 원본 후보의 유사도에서 소폭 낮춘 값을 부여해, 순수
+        // 임베딩 상위권을 밀어내지 않으면서도 리랭커(③ 단계)가 검토할
+        // 후보 풀에는 포함되도록 한다 — 예시 ②(예수=메시아 예언 성취)처럼
+        // 구약 예언 절이 신약 성취 절과 임베딩 유사도만으로는 잘 안
+        // 엮이는 경우, 관주가 그 다리를 놓아준다.
+        if let refStore = ReferenceDataProvider.shared.store {
+            var seen = Set(candidates.map { VerseCoordinate(bookId: $0.bookId, chapter: $0.chapter, verse: $0.verse) })
+            let originalCount = candidates.count
+            let expansionBudget = 20  // 무한정 늘어나지 않도록 상한
+            let sourceCandidates = Array(candidates.prefix(10))
+            outer: for source in sourceCandidates {
+                guard let targets = try? refStore.crossReferenceTargets(
+                    bookId: source.bookId, chapter: source.chapter, verse: source.verse
+                ) else { continue }
+                for target in targets {
+                    let key = VerseCoordinate(bookId: target.bookId, chapter: target.chapter, verse: target.verse)
+                    guard !seen.contains(key) else { continue }
+                    guard let verse = try? store.verse(bookId: target.bookId, chapter: target.chapter, verse: target.verse) else { continue }
+                    seen.insert(key)
+                    candidates.append(SemanticVerseMatch(
+                        bookId: verse.bookId, chapter: verse.chapter, verse: verse.verse,
+                        content: verse.content, similarity: source.similarity - 0.05
+                    ))
+                    if candidates.count >= originalCount + expansionBudget { break outer }
+                }
+            }
+        }
+
         // [③ reranker] 최대 50개 후보 전체를 리랭커에 넘긴다 — 임베딩 랭킹
         // 1~10위 안에 없던 정답이 11~50위 사이에 있었다면 여기서 앞으로
-        // 끌어올려질 수 있다. 리랭커가 꺼져 있으면(또는 실패하면) 후보
-        // 순서(코사인 유사도 순) 그대로 유지한다.
-        let reordered = rerankEnabled
-            ? await BibleSearchRerankerService.rerank(query: refinedQuery, matches: candidates)
-            : candidates
+        // 끌어올려질 수 있다. 리랭커가 꺼져 있으면(또는 둘 다 실패하면)
+        // 후보 순서(코사인 유사도 순) 그대로 유지한다.
+        //
+        // [2026-08-19 추가] 사용자 요청 — "Apple Intelligence 미지원 기기의
+        // 대체 알고리즘 — 인물/지명/관주 연결 여부를 가산 신호로 쓰는 방식."
+        // Apple Intelligence(`BibleSearchRerankerService`)를 우선 시도하고,
+        // 그게 이 기기에서 아예 불가능하면(iOS/macOS 26 미만, Apple
+        // Intelligence 비활성 등) `BibleStructuralRerankerService`(인물/
+        // 지명/관주 연결 기반, LLM 아님 — 항상 동작)로 자동 전환한다. 순수
+        // LLM 호출 실패(가용하다고는 판단됐지만 그 응답 파싱 등이 실패한
+        // 경우)까지 구조적 리랭커로 다시 넘기지는 않는다 — 그 경우는
+        // `BibleSearchRerankerService.rerank` 내부에서 이미 원래 순서로
+        // 안전하게 폴백하고, 여기서 또 다른 리랭커를 얹으면 "AI가 실패했을
+        // 때"와 "AI가 애초에 없을 때"를 구분해 비교하기 어려워진다
+        // (`isQueryRefinementEnabled`/`isRerankEnabled` 토글의 A/B 비교
+        // 목적과 같은 이유, 이 파일 상단 주석 참고).
+        let reordered: [SemanticVerseMatch]
+        if rerankEnabled {
+            if BibleSearchRerankerService.isAvailable {
+                reordered = await BibleSearchRerankerService.rerank(query: refinedQuery, matches: candidates)
+            } else {
+                reordered = await BibleStructuralRerankerService.rerank(query: refinedQuery, matches: candidates)
+            }
+        } else {
+            reordered = candidates
+        }
         // 최종 사용자 노출은 여전히 상위 10개로 자른다.
         let finalMatches = Array(reordered.prefix(maxResults))
         return .success(SemanticSearchOutcome(matches: finalMatches, queryUsedForEmbedding: refinedQuery))
