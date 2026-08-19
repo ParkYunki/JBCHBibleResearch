@@ -241,6 +241,18 @@ struct DocumentViewerView: View {
     // 판단으로 자동 대체된다. 사용자가 직접 탭을 눌러 전환할 방법은 이제 없다.
     private func shouldShowExtractedText(viewModel: DocumentViewerViewModel) -> Bool {
         if !viewModel.supportsNativePreview { return true }
+        // [2026-08-19 추가] 사용자 요청 — "성경 조회 - 탭클릭 - 오른쪽 인스펙터 -
+        // 관련 연구문서 항목 중 hwp 클릭시 뷰어 수정 -> 왼쪽 사이드바 연구문서
+        // 메뉴에서 hwp 항목을 클릭할 때 나오는 뷰어와 동일하게 할것." hwp/hwpx는
+        // "관련 내용"(이 절을 언급하는 문서)에서 검색어를 들고 들어와도 아래
+        // 분기(추출 텍스트로 대체)를 타지 않고 항상 실제 hwp 원본 뷰어
+        // (`originalPane`의 `.hwp, .hwpx` 분기 — 네이티브/rhwp웹/PDF변환 3-way)를
+        // 보여준다 — 사이드바에서 그냥 열 때(`initialSearchText`가 nil)와 정확히
+        // 같은 화면이 되도록. 검색어로 자동 스크롤/강조하는 편의는 이 경로에선
+        // 없어진다(hwp 뷰어 쪽 자체 검색 — `HwpSearchBar` — 을 손으로 써야 함).
+        if document.originalFormat == .hwp || document.originalFormat == .hwpx {
+            return false
+        }
         // [2026-08-11 추가 원칙 유지] 검색어를 갖고 열렸을 때(관련 내용에서 진입)
         // — PDF는 원본 보기(PDFKit 검색+이동)가 그대로 담당하고, PDF가 아니면
         // 원본 탭이 검색을 지원하지 않으므로 추출 텍스트(줄 단위 스크롤+강조)로.
@@ -449,6 +461,7 @@ struct DocumentViewerView: View {
                     ZStack {
                         HWPViewerPane(
                             documentData: hwpFileData,
+                            initialSearchText: initialSearchText,
                             onAvailabilityChange: { reportViewerAvailability($0, for: .hwpSwiftNative) }
                         )
                             .opacity(hwpViewerMode == .hwpSwiftNative ? 1 : 0)
@@ -1216,6 +1229,17 @@ private enum DocxViewerMode: String, CaseIterable, Identifiable {
 /// 검색창 + 자체 구현한 돋보기 아이콘 버튼 3개(`searchAndZoomBar`)로 대신한다.
 private struct HWPViewerPane: View {
     let documentData: Data
+    /// [2026-08-19 추가] "hwp 뷰어 안에서 검색어 자동 하이라이트" 요청 —
+    /// `DocumentViewerView.initialSearchText`(관련 연구문서에서 넘어온 검색어)를
+    /// 그대로 받아 `load()` 완료 직후 `search.search(text:)`로 흘려보낸다.
+    /// `pdfSearchController.query = initialSearchText` /
+    /// `docxSearchController.query = initialSearchText`(`setUpIfNeeded()`)와
+    /// 같은 목적의 hwp 전용 버전이다. `HwpSearchController.search(_:)`는
+    /// storedQuery만 갱신하고 지오메트리(선택 컨트롤러 attach)가 아직 없으면
+    /// 즉시 스캔하지 않고 조용히 반환하므로(`startScan`의 `guard let geometry`),
+    /// `HwpDocumentView`가 뒤늦게 `attach(to:)`할 때 그 안의 `restartScan()`이
+    /// 이미 저장된 질의로 다시 스캔한다 — 호출 순서를 신경 쓸 필요가 없다.
+    var initialSearchText: String? = nil
     /// [2026-08-16 추가] `hwpViewerModeToggle` 상단 주석 참고 — 로드 성공/실패를
     /// 상위(`DocumentViewerView.reportViewerAvailability`)에 보고한다.
     var onAvailabilityChange: ((Bool) -> Void)? = nil
@@ -1329,6 +1353,9 @@ private struct HWPViewerPane: View {
         do {
             document = try await HwpDocumentLoader().load(from: documentData)
             onAvailabilityChange?(true)
+            if let initialSearchText, !initialSearchText.isEmpty {
+                search.search(text: initialSearchText)
+            }
         } catch {
             errorMessage = "\(error)"
             onAvailabilityChange?(false)
