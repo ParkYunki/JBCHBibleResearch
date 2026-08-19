@@ -182,6 +182,217 @@ public final class ReferenceDataStore {
         return results
     }
 
+    // MARK: - Persons / Places / PersonRelations (2026-08-19 신설)
+    //
+    // [2026-08-19 신설] 사용자 요청 — "① 관주를 검색 파이프라인에 연결,
+    // ④ 인물 관계 데이터를 체크포인트 파일에서 규칙/AI 기반으로 추출하는
+    // 파이프라인을 만들 것." `ReferenceDataSource/build_reference_data.py`가
+    // 새로 만드는 Persons/Places/PersonRelations 세 테이블을 읽는 계층 —
+    // 위 crossReferences/marginalNotes/hanjaAnnotations와 완전히 같은 원칙
+    // (정적 참조 데이터, 번들 읽기전용 SQLite, SwiftData/CloudKit에 넣지
+    // 않음)을 따른다.
+    //
+    // ⚠️ [미검증] 이 파일의 나머지 부분과 달리 이 구간은 이 세션에서 새로
+    // 작성했고 Xcode 컴파일 확인을 못 했다 — 위 기존 메서드들과 같은 SQLite3
+    // C API 패턴을 그대로 따랐으니 구조적으로는 안전할 가능성이 높지만,
+    // 빌드 확인 전까지는 "미검증"으로 취급할 것.
+    //
+    // `verses` 컬럼은 `CrossReferences.targets`와 완전히 같은 포맷
+    // ("book:chapter:verse,book:chapter:verse")이라 기존 `parseTargets(_:)`를
+    // 그대로 재사용한다 — 새 파싱 함수를 또 만들지 않기 위함.
+
+    /// 질의 문자열 `query` 안에 실제로 등장하는 인물/지명 이름을 찾는다
+    /// (`SELECT ... WHERE instr(query, word) > 0` — 역방향 부분 문자열
+    /// 검색이라 인덱스를 타지 않지만, Persons+Places 합쳐 982건뿐이라
+    /// 전체 스캔 비용이 무시할 만하다). 한 글자짜리 word는 오탐이 너무
+    /// 많아(예: "그", "이") 제외한다.
+    public func personsAndPlaces(mentionedIn query: String) throws -> [ReferenceEntity] {
+        let sql = """
+            SELECT idx, word, description, verses, 'person' FROM Persons
+                WHERE length(word) >= 2 AND instr(?, word) > 0
+            UNION ALL
+            SELECT idx, word, description, verses, 'place' FROM Places
+                WHERE length(word) >= 2 AND instr(?, word) > 0
+            """
+        var statement: OpaquePointer?
+        defer { sqlite3_finalize(statement) }
+        guard sqlite3_prepare_v2(handle, sql, -1, &statement, nil) == SQLITE_OK else {
+            throw BibleReferenceError.statementPrepareFailed(code: sqlite3_errcode(handle))
+        }
+        sqlite3_bind_text(statement, 1, query, -1, SQLITE_TRANSIENT)
+        sqlite3_bind_text(statement, 2, query, -1, SQLITE_TRANSIENT)
+
+        var results: [ReferenceEntity] = []
+        while true {
+            let step = sqlite3_step(statement)
+            if step == SQLITE_DONE { break }
+            guard step == SQLITE_ROW else { throw BibleReferenceError.stepFailed(code: step) }
+            results.append(Self.makeReferenceEntity(statement: statement))
+        }
+        return results
+    }
+
+    /// 이름이 정확히 일치하는 인물/지명 하나를 찾는다(관계의 target 쪽을
+    /// 해석할 때 사용 — `PersonRelations.target_word`는 이미 build 스크립트
+    /// 단계에서 이 파일 안의 다른 항목과 정확히 일치하는 것만 `target_kind`가
+    /// 채워져 있으므로, 여기서도 정확 일치로 충분하다).
+    public func personOrPlace(exactWord word: String) throws -> ReferenceEntity? {
+        let sql = """
+            SELECT idx, word, description, verses, 'person' FROM Persons WHERE word = ?
+            UNION ALL
+            SELECT idx, word, description, verses, 'place' FROM Places WHERE word = ?
+            LIMIT 1
+            """
+        var statement: OpaquePointer?
+        defer { sqlite3_finalize(statement) }
+        guard sqlite3_prepare_v2(handle, sql, -1, &statement, nil) == SQLITE_OK else {
+            throw BibleReferenceError.statementPrepareFailed(code: sqlite3_errcode(handle))
+        }
+        sqlite3_bind_text(statement, 1, word, -1, SQLITE_TRANSIENT)
+        sqlite3_bind_text(statement, 2, word, -1, SQLITE_TRANSIENT)
+        guard sqlite3_step(statement) == SQLITE_ROW else { return nil }
+        return Self.makeReferenceEntity(statement: statement)
+    }
+
+    private static func makeReferenceEntity(statement: OpaquePointer?) -> ReferenceEntity {
+        let idx = sqlite3_column_text(statement, 0).map { String(cString: $0) } ?? ""
+        let word = sqlite3_column_text(statement, 1).map { String(cString: $0) } ?? ""
+        let description = sqlite3_column_text(statement, 2).map { String(cString: $0) } ?? ""
+        let versesRaw = sqlite3_column_text(statement, 3).map { String(cString: $0) } ?? ""
+        let kindRaw = sqlite3_column_text(statement, 4).map { String(cString: $0) } ?? "person"
+        return ReferenceEntity(
+            idx: idx, word: word, entityDescription: description,
+            verseRefs: parseTargets(versesRaw),
+            kind: kindRaw == "place" ? .place : .person
+        )
+    }
+
+    /// `sourceWord`(인물/지명 이름, 정확 일치)가 갖는 관계 전부. 예:
+    /// "골리앗" -> [(relation_type: "brother_of", target_word: "라흐미", ...)].
+    /// `target_kind`가 nil이면 규칙 추출은 됐지만 대상 이름이 이 번들
+    /// 데이터셋 안에서 확인되지 않은 경우다(build 스크립트 상단 주석의
+    /// "미해결" 항목) — 호출부는 이 경우 verse 연결을 시도하지 않아야 한다.
+    public func personRelations(forWord sourceWord: String) throws -> [PersonRelationRecord] {
+        let sql = """
+            SELECT relation_type, target_word, target_kind, raw_sentence
+            FROM PersonRelations WHERE source_word = ?
+            """
+        var statement: OpaquePointer?
+        defer { sqlite3_finalize(statement) }
+        guard sqlite3_prepare_v2(handle, sql, -1, &statement, nil) == SQLITE_OK else {
+            throw BibleReferenceError.statementPrepareFailed(code: sqlite3_errcode(handle))
+        }
+        sqlite3_bind_text(statement, 1, sourceWord, -1, SQLITE_TRANSIENT)
+
+        var results: [PersonRelationRecord] = []
+        while true {
+            let step = sqlite3_step(statement)
+            if step == SQLITE_DONE { break }
+            guard step == SQLITE_ROW else { throw BibleReferenceError.stepFailed(code: step) }
+            let relationType = sqlite3_column_text(statement, 0).map { String(cString: $0) } ?? ""
+            let targetWord = sqlite3_column_text(statement, 1).map { String(cString: $0) } ?? ""
+            let targetKindRaw = sqlite3_column_text(statement, 2).map { String(cString: $0) }
+            let rawSentence = sqlite3_column_text(statement, 3).map { String(cString: $0) } ?? ""
+            results.append(PersonRelationRecord(
+                sourceWord: sourceWord, relationType: relationType, targetWord: targetWord,
+                targetKind: targetKindRaw == "place" ? .place : (targetKindRaw == "person" ? .person : nil),
+                rawSentence: rawSentence
+            ))
+        }
+        return results
+    }
+
+    /// 절 하나(`bookId`/`chapter`/`verse`)의 관주(교차 참조) 대상만 필요할 때
+    /// 쓰는 가벼운 버전 — 위 `crossReferences(bookId:chapter:translationCode:)`는
+    /// 장 전체를 SwiftData `@Model`(`VerseCrossReference`)로 감싸 돌려주는
+    /// UI 전용 API라, `translationCode`를 요구하고 굳이 컨텍스트에 안 넣을
+    /// 인스턴스를 만드는 비용이 있다. 구조적 리랭커(`BibleStructuralRerankerService`)
+    /// 처럼 좌표 목록만 필요한 내부 계산용으로는 이 메서드를 쓴다.
+    public func crossReferenceTargets(bookId: Int, chapter: Int, verse: Int) throws -> [BibleVerseRef] {
+        let sql = "SELECT targets FROM CrossReferences WHERE book_id = ? AND chapter = ? AND verse = ?"
+        var statement: OpaquePointer?
+        defer { sqlite3_finalize(statement) }
+        guard sqlite3_prepare_v2(handle, sql, -1, &statement, nil) == SQLITE_OK else {
+            throw BibleReferenceError.statementPrepareFailed(code: sqlite3_errcode(handle))
+        }
+        sqlite3_bind_int(statement, 1, Int32(bookId))
+        sqlite3_bind_int(statement, 2, Int32(chapter))
+        sqlite3_bind_int(statement, 3, Int32(verse))
+        guard sqlite3_step(statement) == SQLITE_ROW else { return [] }
+        let targetsRaw = sqlite3_column_text(statement, 0).map { String(cString: $0) } ?? ""
+        return Self.parseTargets(targetsRaw)
+    }
+
+    // MARK: - 전문 검색(FTS5 unicode61 + prefix, Layer 1, 2026-08-19 신설, 같은 날 재확장)
+    //
+    // [경위] 처음엔 `trigram` 토크나이저로 만들었다(한글 조사(을/를/이/가
+    // 등)가 어절 끝에 붙어 기본 unicode61로는 "지혜를"/"지혜가"가 다른
+    // 토큰이 되어 매칭이 안 될 거라는 이유). 그런데 실제 31,102절 전체로
+    // `trigram`과 `unicode61`+prefix를 나란히 만들어 실측한 결과, 애초
+    // 가정이 틀렸다는 게 드러나 `unicode61`로 교체했다:
+    // - `trigram`은 검색어가 3글자 미만이면(믿음/사랑/은혜 등 흔한 2글자
+    //   신학 용어) 3-gram을 아예 못 만들어 MATCH가 조용히 0건을 반환한다.
+    // - `trigram`으로 "지혜를"을 검색해도 "지혜가"가 있는 절은 실제로는
+    //   안 잡힌다(각각 62건/57건, 서로 다른 집합) — "trigram이 조사 변화에
+    //   안정적으로 매칭된다"는 가정 자체가 실측으로 반증됨.
+    // - 한국어는 조사/어미가 어근 뒤에만 붙는 교착어라, `unicode61`(공백
+    //   기준 어절 토큰) + prefix 쿼리(`"지혜"*`)가 오히려 훨씬 잘 맞는다.
+    //   "지혜*"로 검색하면 지혜를/지혜가/지혜의/지혜로운/지혜롭게 412건이
+    //   전부 잡힌다(정확 문자열 매치는 41건뿐이었다). 2글자 검색어도
+    //   trigram의 근본 한계 없이 그대로 매칭된다.
+    // - 인덱스 크기도 실측 8.5MB(unicode61) vs 15.9MB(trigram)로 거의 절반.
+    // - 단점: prefix 매칭이라 토큰 "맨 앞부터"만 잡힌다(단어 중간 부분
+    //   문자열은 못 잡음) — 실사용에서 영향이 작다고 판단.
+    //
+    // 이제 3글자 미만 검색어도 그대로 지원되므로(trigram 때와 달리 길이
+    // 가드가 필요 없다), 호출부가 짧은 검색어를 기존 LIKE 경로로 우회시킬
+    // 필요가 없어졌다.
+    //
+    // 여러 단어를 공백 포함해 그대로 넘기는 경우는 여전히 검증하지 않았다
+    // — 이 메서드는 (trigram 때와 동일하게) **호출부가 이미 단어로 쪼갠
+    // 뒤(지금 `SearchViewModel`이 LIKE 경로에 이미 그렇게 하고 있는 것과
+    // 동일) 단어 하나씩** 넘기는 용도로 설계했다.
+    //
+    // 검색어는 FTS5 쿼리 문법(AND/OR/NOT, 괄호, 콜론 등)으로 해석되지 않도록
+    // 항상 큰따옴표로 감싼 리터럴 구문으로 바인딩하고, 그 바깥에 `*`를 붙여
+    // prefix 검색으로 만든다(내부 큰따옴표는 두 번 써서 이스케이프) —
+    // 사용자가 "삼상 17:4" 같은 콜론 포함 텍스트나 "AND"/"OR" 같은 단어를
+    // 그대로 입력해도, 또는 검색어 안에 큰따옴표가 섞여 있어도 FTS5 문법
+    // 에러 없이 안전하게 "그 글자로 시작하는 토큰"을 찾는다(Python sqlite3로
+    // `"16:8"*`, `"(참고)"*`, `"AND"*`, `"큰따옴표""포함"*` 등 실제 검증 완료).
+    public func searchVersesFullText(matching query: String, limit: Int = 50) throws -> [FullTextVerseMatch] {
+        guard !query.isEmpty else { return [] }
+        let escaped = query.replacingOccurrences(of: "\"", with: "\"\"")
+        let matchQuery = "\"\(escaped)\"*"
+
+        let sql = """
+            SELECT book_id, chapter, verse, content, bm25(VerseSearchIndex) AS rank
+            FROM VerseSearchIndex WHERE VerseSearchIndex MATCH ?
+            ORDER BY rank LIMIT ?
+            """
+        var statement: OpaquePointer?
+        defer { sqlite3_finalize(statement) }
+        guard sqlite3_prepare_v2(handle, sql, -1, &statement, nil) == SQLITE_OK else {
+            throw BibleReferenceError.statementPrepareFailed(code: sqlite3_errcode(handle))
+        }
+        sqlite3_bind_text(statement, 1, matchQuery, -1, SQLITE_TRANSIENT)
+        sqlite3_bind_int(statement, 2, Int32(limit))
+
+        var results: [FullTextVerseMatch] = []
+        while true {
+            let step = sqlite3_step(statement)
+            if step == SQLITE_DONE { break }
+            guard step == SQLITE_ROW else { throw BibleReferenceError.stepFailed(code: step) }
+            let bookId = Int(sqlite3_column_int(statement, 0))
+            let chapter = Int(sqlite3_column_int(statement, 1))
+            let verse = Int(sqlite3_column_int(statement, 2))
+            let content = sqlite3_column_text(statement, 3).map { String(cString: $0) } ?? ""
+            let rank = sqlite3_column_double(statement, 4)
+            results.append(FullTextVerseMatch(bookId: bookId, chapter: chapter, verse: verse, content: content, rank: rank))
+        }
+        return results
+    }
+
     /// 한자 사전(2,002자) 전체를 한 번에 불러온다 — 앱 레이어(`HanjaDictionaryProvider`)가
     /// 시작 시 한 번만 호출해 메모리에 캐시해 두는 용도라, 장 단위가 아니라 전체
     /// 테이블을 그대로 반환한다.
