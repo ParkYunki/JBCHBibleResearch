@@ -18,6 +18,10 @@ DerivedData/
 .swiftpm/
 .build/
 
+Scripts/.venv/
+Scripts/MultilingualE5Small.mlpackage/
+JBCHBibleResearch/Resources/MultilingualE5Small.mlpackage/
+
 # Rust (native/docxide-pdf-ffi) — cargo 빌드 캐시, 소스에서 재생성 가능
 # (dist/libdocxide_pdf_ffi.a와 JBCHBibleResearch/Native/libdocxide_pdf_ffi.a는
 #  의도적으로 커밋 대상에 포함 — 다른 기기에서 Rust 툴체인 없이 바로 빌드되게 하기 위함)
