@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		C0200F01302472A9009CCA96 /* BibleResearchModels in Frameworks */ = {isa = PBXBuildFile; productRef = C0200F00302472A9009CCA96 /* BibleResearchModels */; };
+		C02ADCD130353FA200D63D2F /* Tokenizers in Frameworks */ = {isa = PBXBuildFile; productRef = C02ADCD030353FA200D63D2F /* Tokenizers */; };
+		C02ADCDE3035465700D63D2F /* MultilingualE5SmallTokenizer in Resources */ = {isa = PBXBuildFile; fileRef = C02ADCDD3035465700D63D2F /* MultilingualE5SmallTokenizer */; };
 		C05362983020342500B5FD10 /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = C05362973020341C00B5FD10 /* libsqlite3.tbd */; };
 		C08A75FC3030C5EB003C2725 /* CoreHwp in Frameworks */ = {isa = PBXBuildFile; productRef = C08A75FB3030C5EB003C2725 /* CoreHwp */; };
 		C08A75FE3030C5EB003C2725 /* HwpKitCore in Frameworks */ = {isa = PBXBuildFile; productRef = C08A75FD3030C5EB003C2725 /* HwpKitCore */; };
@@ -27,6 +29,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		C02ADCDD3035465700D63D2F /* MultilingualE5SmallTokenizer */ = {isa = PBXFileReference; lastKnownFileType = folder; name = MultilingualE5SmallTokenizer; path = Scripts/MultilingualE5SmallTokenizer; sourceTree = "<group>"; };
 		C05362283020235D00B5FD10 /* JBCHBibleResearch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = JBCHBibleResearch.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C05362973020341C00B5FD10 /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS26.5.sdk/usr/lib/libsqlite3.tbd; sourceTree = DEVELOPER_DIR; };
 /* End PBXFileReference section */
@@ -36,7 +39,7 @@
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
 				Info.plist,
-				"Native/libdocxide_pdf_ffi.a",
+				Native/libdocxide_pdf_ffi.a,
 			);
 			target = C05362273020235D00B5FD10 /* JBCHBibleResearch */;
 		};
@@ -72,6 +75,7 @@
 				C0D1557E3031EB5800861DD1 /* SwiftTextRender in Frameworks */,
 				C0D155703031EB5800861DD1 /* SwiftTextIWA in Frameworks */,
 				C0D155783031EB5800861DD1 /* SwiftTextPDF in Frameworks */,
+				C02ADCD130353FA200D63D2F /* Tokenizers in Frameworks */,
 				C05362983020342500B5FD10 /* libsqlite3.tbd in Frameworks */,
 				C0D155743031EB5800861DD1 /* SwiftTextOCR in Frameworks */,
 				C0D155683031EB5800861DD1 /* SwiftText in Frameworks */,
@@ -84,6 +88,7 @@
 		C053621F3020235D00B5FD10 = {
 			isa = PBXGroup;
 			children = (
+				C02ADCDD3035465700D63D2F /* MultilingualE5SmallTokenizer */,
 				C053622A3020235D00B5FD10 /* JBCHBibleResearch */,
 				C05362963020341C00B5FD10 /* Frameworks */,
 				C05362293020235D00B5FD10 /* Products */,
@@ -142,6 +147,7 @@
 				C0D155793031EB5800861DD1 /* SwiftTextPDFWriter */,
 				C0D1557B3031EB5800861DD1 /* SwiftTextPages */,
 				C0D1557D3031EB5800861DD1 /* SwiftTextRender */,
+				C02ADCD030353FA200D63D2F /* Tokenizers */,
 			);
 			productName = JBCHBibleResearch;
 			productReference = C05362283020235D00B5FD10 /* JBCHBibleResearch.app */;
@@ -176,6 +182,7 @@
 				C0AB1C00302472A9009CCA96 /* XCLocalSwiftPackageReference "JBCHBibleResearch/BibleResearchPlatform" */,
 				C08A75FA3030C5EB003C2725 /* XCRemoteSwiftPackageReference "hwp-swift" */,
 				C0D155663031EB5800861DD1 /* XCRemoteSwiftPackageReference "SwiftText" */,
+				C02ADCCF30353FA200D63D2F /* XCRemoteSwiftPackageReference "swift-transformers" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = C05362293020235D00B5FD10 /* Products */;
@@ -192,6 +199,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C02ADCDE3035465700D63D2F /* MultilingualE5SmallTokenizer in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -358,7 +366,6 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				"HEADER_SEARCH_PATHS[sdk=macosx*]" = "$(PROJECT_DIR)/JBCHBibleResearch/Native";
 				INFOPLIST_FILE = JBCHBibleResearch/Info.plist;
-				"OTHER_LDFLAGS[sdk=macosx*]" = "-ldocxide_pdf_ffi";
 				INFOPLIST_KEY_CFBundleDisplayName = "JBCH 성경 연구";
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
@@ -383,6 +390,7 @@
 				);
 				MACOSX_DEPLOYMENT_TARGET = 26.5;
 				MARKETING_VERSION = 1.0;
+				"OTHER_LDFLAGS[sdk=macosx*]" = "-ldocxide_pdf_ffi";
 				PRODUCT_BUNDLE_IDENTIFIER = org.jbch.djc.JBCHBibleResearch;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				REGISTER_APP_GROUPS = YES;
@@ -432,7 +440,6 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				"HEADER_SEARCH_PATHS[sdk=macosx*]" = "$(PROJECT_DIR)/JBCHBibleResearch/Native";
 				INFOPLIST_FILE = JBCHBibleResearch/Info.plist;
-				"OTHER_LDFLAGS[sdk=macosx*]" = "-ldocxide_pdf_ffi";
 				INFOPLIST_KEY_CFBundleDisplayName = "JBCH 성경 연구";
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
@@ -457,6 +464,7 @@
 				);
 				MACOSX_DEPLOYMENT_TARGET = 26.5;
 				MARKETING_VERSION = 1.0;
+				"OTHER_LDFLAGS[sdk=macosx*]" = "-ldocxide_pdf_ffi";
 				PRODUCT_BUNDLE_IDENTIFIER = org.jbch.djc.JBCHBibleResearch;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				REGISTER_APP_GROUPS = YES;
@@ -509,6 +517,14 @@
 /* End XCLocalSwiftPackageReference section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		C02ADCCF30353FA200D63D2F /* XCRemoteSwiftPackageReference "swift-transformers" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/huggingface/swift-transformers";
+			requirement = {
+				kind = exactVersion;
+				version = 1.3.0;
+			};
+		};
 		C08A75FA3030C5EB003C2725 /* XCRemoteSwiftPackageReference "hwp-swift" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/sboh1214/hwp-swift";
@@ -532,6 +548,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = C0AB1C00302472A9009CCA96 /* XCLocalSwiftPackageReference "JBCHBibleResearch/BibleResearchPlatform" */;
 			productName = BibleResearchModels;
+		};
+		C02ADCD030353FA200D63D2F /* Tokenizers */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = C02ADCCF30353FA200D63D2F /* XCRemoteSwiftPackageReference "swift-transformers" */;
+			productName = Tokenizers;
 		};
 		C08A75FB3030C5EB003C2725 /* CoreHwp */ = {
 			isa = XCSwiftPackageProductDependency;

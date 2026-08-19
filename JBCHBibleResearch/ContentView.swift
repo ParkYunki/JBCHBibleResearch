@@ -20,6 +20,14 @@ struct ContentView: View {
 
     var body: some View {
         RootView()
+            // [2026-08-19 추가] 사용자 요청 — "앱을 설치할 때, 처음 시작할 때
+            // 색인을 자동으로 설치하면 안되는가?" 최초 실행(또는 아직 색인이
+            // 없는 실행) 1회, 성경 전체 임베딩 색인을 자동으로 시작하고 진행
+            // 상황을 보여준다 — BibleIndexOnboardingOverlay.swift 참고. 아래
+            // TranslationBootstrap 등 기존 부트스트랩 `.task`와는 독립적으로
+            // 동작한다(서로 순서 의존성 없음 — 색인은 번들 DB를 직접 열어
+            // 읽지 SwiftData 부트스트랩 결과를 필요로 하지 않는다).
+            .bibleIndexOnboarding()
             .task {
                 do {
                     try TranslationBootstrap.ensureBundledTranslationRegistered(in: modelContext)

@@ -215,7 +215,7 @@ struct OriginalTextInfoView: View {
 
             HStack(spacing: 5) {
                 Text(word.originalText)
-                    .font(.system(size: 26, weight: .bold))
+                    .font(originalTextFont(for: word))
                     .foregroundStyle(hebrewTextColor)
                     .multilineTextAlignment(.center)
                     .fixedSize(horizontal: false, vertical: true)
@@ -287,6 +287,22 @@ struct OriginalTextInfoView: View {
     /// 채도 높은 남색 계열)에 맞춘 커스텀 색.
     private var hebrewTextColor: Color {
         Color(red: 0.09, green: 0.25, blue: 0.78)
+    }
+
+    /// [2026-08-19 신설] 사용자 요청 — "히브리어 기본폰트(SILEOT)는 히브리어
+    /// 표기에, 헬라어 기본폰트(Gentium)는 그리스어 표기에 적용." 언어는
+    /// `word.isHebrew`(strongCode 접두 "H"/"G")로 가른다. 기존에 이 Text가
+    /// 항상 `.bold`였으므로(위 `HStack` — 이전엔 `.system(size: 26, weight:
+    /// .bold)`), 그리스어는 굵기가 있는 `Gentium-Bold`를 그대로 쓴다. 히브리어
+    /// 성서 조판체(Ezra SIL)는 애초에 굵은 변형이 따로 없어(SIL이 배포하는
+    /// 유일한 굵기) 인위적으로 `.bold()`를 씌우지 않는다 — 성서 히브리어
+    /// 조판에서 볼드체를 쓰는 관례 자체가 없다.
+    private func originalTextFont(for word: OriginalWordInfo) -> Font {
+        if word.isHebrew {
+            return .custom(SpecialPurposeFonts.hebrew, size: 26)
+        } else {
+            return .custom(SpecialPurposeFonts.greekBold, size: 26)
+        }
     }
 
     private var cardBorderColor: Color {

@@ -45,7 +45,7 @@ enum BundledFonts {
     }
 
     /// 가는 굵기 → 굵은 굵기 순.
-    static let entries: [Entry] = [
+    static let paperlogyEntries: [Entry] = [
         Entry(postScriptName: "Paperlogy-1Thin", displayName: "Paperlogy Thin"),
         Entry(postScriptName: "Paperlogy-2ExtraLight", displayName: "Paperlogy ExtraLight"),
         Entry(postScriptName: "Paperlogy-3Light", displayName: "Paperlogy Light"),
@@ -57,8 +57,51 @@ enum BundledFonts {
         Entry(postScriptName: "Paperlogy-9Black", displayName: "Paperlogy Black"),
     ]
 
+    /// [2026-08-19 신설] 사용자 요청 — "앱 내 기본 번들 폰트 추가: GowunBatang-
+    /// Regular.ttf, GowunBatang-Bold.ttf(페이퍼로지 폰트와 같은 번들)." 고운바탕
+    /// (yangheeryu/Gowun-Batang, OFL-1.1) 두 굵기 — Paperlogy와 정확히 같은 방식
+    /// (fonttools로 확인한 실제 PostScript 이름을 그대로 씀, family 이름이 아님)
+    /// 으로 등록·선택 가능하게 한다.
+    static let gowunBatangEntries: [Entry] = [
+        Entry(postScriptName: "GowunBatang-Regular", displayName: "고운바탕 Regular"),
+        Entry(postScriptName: "GowunBatang-Bold", displayName: "고운바탕 Bold"),
+    ]
+
+    /// 설정 화면 "글꼴" Picker의 "내장 기본 글꼴" 섹션에 그대로 나열하는 전체
+    /// 목록 — Paperlogy 9종 + 고운바탕 2종.
+    static let entries: [Entry] = paperlogyEntries + gowunBatangEntries
+
     /// 사용자 요청 그대로 — 앱 기본 글꼴.
     static let defaultPostScriptName = "Paperlogy-4Regular"
+}
+
+/// [2026-08-19 신설] 사용자가 목록에서 "고르는" 범용 글꼴(`BundledFonts`)과 달리,
+/// 특정 언어의 글자를 항상 이 글꼴로만 렌더링하도록 고정하는 특수 목적 폰트 —
+/// 한자 주석(ChosunGs)/원문 정보의 히브리어(SILEOT=Ezra SIL)/그리스어(Gentium).
+/// 한자만 사용자가 켜고 끌 수 있어(`UserSettingsStore.hanjaFontName`) 예외적으로
+/// "선택 가능"이지만, 그 선택지 자체가 이 상수 하나뿐이라 `BundledFonts.entries`
+/// 목록(여러 굵기 중 자유 선택)과는 성격이 달라 별도 타입으로 분리했다.
+///
+/// PostScript 이름은 전부 fonttools로 `Fonts/*.ttf`의 name 테이블(ID 6)을 직접
+/// 읽어 확인했다(Paperlogy 때와 같은 방법론, 위 BundledFontRegistrar 상단 주석
+/// 참고) — family 이름을 짐작해서 쓰지 않는다.
+enum SpecialPurposeFonts {
+    /// 한자 주석 기본 폰트 — 조선궁서체(ChosunGs.TTF). 지적재산권은 (주)조선일보사에
+    /// 있고 개인/기업에 무료로 제공되는 라이선스(설정 화면 오픈소스 라이선스 고지
+    /// 참고) — OFL/MIT 같은 표준 오픈소스 라이선스가 아니라 이 프로젝트 특유의
+    /// 재배포 조건이 있으므로, 이 상수 자체를 다른 프로젝트로 그대로 복사해 쓰지
+    /// 않도록 주의.
+    static let hanja = "ChosunGs"
+    /// 원문 정보 히브리어 표기 폰트 — Ezra SIL(SILEOT.ttf, software.sil.org/ezra).
+    /// 폰트 소프트웨어 자체는 SIL OFL 1.1, 히브리어 문자 배치 로직만 별도로
+    /// Ralph Hancock/John Hudson의 MIT 라이선스.
+    static let hebrew = "EzraSIL"
+    /// 원문 정보 그리스어(헬라어) 표기 폰트 — SIL Gentium(사용자 표기로는
+    /// "Gentium Plus", 번들 파일명 `Gentium-Regular.ttf`/`Gentium-Bold.ttf`,
+    /// fonttools로 확인한 실제 family/PostScript 이름은 "Gentium"/"Gentium-*"다 —
+    /// 업로드받은 OFL.txt의 Reserved Font Name도 "Gentium"과 일치). SIL OFL 1.1.
+    static let greekRegular = "Gentium-Regular"
+    static let greekBold = "Gentium-Bold"
 }
 
 enum BundledFontRegistrar {
@@ -67,13 +110,20 @@ enum BundledFontRegistrar {
 
     /// 앱 시작 시 1회만 호출하면 된다(`JBCHBibleResearchApp.init()`). 중복
     /// 호출해도 안전하다(두 번째 호출부터는 즉시 반환).
+    ///
+    /// [2026-08-19 수정] 이름은 그대로지만 범위가 넓어졌다 — 원래 Paperlogy
+    /// 9종만 등록했는데, 이제 사용자가 고르는 폰트(Paperlogy+고운바탕,
+    /// `BundledFonts.entries`)와 특수 목적 폰트(한자/히브리어/그리스어,
+    /// `SpecialPurposeFonts`) 전부를 이 한 번의 호출에서 함께 등록한다 —
+    /// CoreText 등록은 "이 폰트를 어디에 쓸지"와 무관하게 앱 시작 시 한 번만
+    /// 하면 되는 공통 절차라 굳이 나눌 이유가 없다.
     static func registerBundledFontsIfNeeded() {
         guard !didRegister else { return }
         didRegister = true
 
-        let urls = bundledPaperlogyFontURLs()
+        let urls = bundledCustomFontURLs()
         guard !urls.isEmpty else {
-            print("[BundledFontRegistrar] Paperlogy 폰트 파일을 앱 번들에서 찾지 못했습니다 — Fonts 폴더가 Xcode 타겟(Copy Bundle Resources)에 포함돼 있는지 확인하세요. 등록 전까지는 시스템 기본 글꼴로 표시됩니다.")
+            print("[BundledFontRegistrar] 번들 폰트 파일을 앱 번들에서 찾지 못했습니다 — Fonts 폴더가 Xcode 타겟(Copy Bundle Resources)에 포함돼 있는지 확인하세요. 등록 전까지는 시스템 기본 글꼴로 표시됩니다.")
             return
         }
 
@@ -87,20 +137,38 @@ enum BundledFontRegistrar {
                 print("[BundledFontRegistrar] \(url.lastPathComponent) 등록 실패: \(description)")
             }
         }
-        print("[BundledFontRegistrar] Paperlogy 폰트 \(registeredPostScriptNames.count)/\(BundledFonts.entries.count)개 등록 완료: \(registeredPostScriptNames)")
+        let expectedCount = BundledFonts.entries.count + 4 // 한자 1 + 히브리어 1 + 그리스어 2
+        print("[BundledFontRegistrar] 번들 폰트 \(registeredPostScriptNames.count)/\(expectedCount)개 등록 완료: \(registeredPostScriptNames)")
     }
 
-    /// `Fonts` 폴더가 "폴더 참조"(파란 폴더, 디렉터리 구조 유지)로 추가됐으면
-    /// `subdirectory: "Fonts"`에서 찾고, "그룹"(노란 폴더, 번들 루트로 평탄화)으로
-    /// 추가됐으면 루트에서 "Paperlogy"로 시작하는 .ttf 파일을 찾는다 — 둘 중 어느
-    /// 쪽으로 Xcode에 추가되더라도 동작하게 하기 위한 이중 조회다.
-    private static func bundledPaperlogyFontURLs() -> [URL] {
-        if let subdirectoryURLs = Bundle.main.urls(forResourcesWithExtension: "ttf", subdirectory: "Fonts"),
-           !subdirectoryURLs.isEmpty {
-            return subdirectoryURLs
+    /// [2026-08-19 수정, 이전 `bundledPaperlogyFontURLs`] `Fonts` 폴더가 "폴더
+    /// 참조"(파란 폴더, 디렉터리 구조 유지)로 추가됐으면 `subdirectory: "Fonts"`
+    /// 에서 그 안의 .ttf/.TTF 전부를 찾고(더 이상 "Paperlogy"로 시작하는 것만
+    /// 거르지 않는다 — ChosunGs/SILEOT/Gentium-*/GowunBatang-*도 이 폴더에 함께
+    /// 있다), "그룹"(노란 폴더, 번들 루트로 평탄화)으로 추가됐으면 루트에서 이
+    /// 프로젝트가 아는 접두어로 시작하는 파일만 찾는다 — 둘 중 어느 쪽으로
+    /// Xcode에 추가되더라도 동작하게 하기 위한 이중 조회는 그대로 유지한다.
+    ///
+    /// ⚠️ [대소문자] `ChosunGs.TTF`만 확장자가 대문자다(나머지는 소문자 .ttf) —
+    /// `Bundle.urls(forResourcesWithExtension:)`는 파일시스템 대소문자 구분
+    /// 설정에 따라 동작이 달라질 수 있어, 안전하게 "ttf"/"TTF" 둘 다 조회해
+    /// 합친 뒤 중복(같은 파일이 두 조회 모두에 걸리는 경우)을 제거한다.
+    private static func bundledCustomFontURLs() -> [URL] {
+        let subdirectoryURLs = (
+            (Bundle.main.urls(forResourcesWithExtension: "ttf", subdirectory: "Fonts") ?? [])
+                + (Bundle.main.urls(forResourcesWithExtension: "TTF", subdirectory: "Fonts") ?? [])
+        )
+        let dedupedSubdirectory = Array(Set(subdirectoryURLs))
+        if !dedupedSubdirectory.isEmpty { return dedupedSubdirectory }
+
+        let knownPrefixes = ["Paperlogy", "GowunBatang", "ChosunGs", "SILEOT", "Gentium"]
+        let rootURLs = (
+            (Bundle.main.urls(forResourcesWithExtension: "ttf", subdirectory: nil) ?? [])
+                + (Bundle.main.urls(forResourcesWithExtension: "TTF", subdirectory: nil) ?? [])
+        )
+        return Array(Set(rootURLs)).filter { url in
+            knownPrefixes.contains { url.lastPathComponent.hasPrefix($0) }
         }
-        let rootURLs = Bundle.main.urls(forResourcesWithExtension: "ttf", subdirectory: nil) ?? []
-        return rootURLs.filter { $0.lastPathComponent.hasPrefix("Paperlogy") }
     }
 }
 

@@ -2,8 +2,8 @@
 //  SearchViewModel.swift
 //  JBCHBibleResearch
 //
-//  S11(통합 검색/의미검색) 상태 관리. [키워드 검색]/[의미검색(AI)] 토글에 따라
-//  성경구절/내 메모/연구문서 3분류 결과를 채운다(screens.md S11 목업 그대로).
+//  S11(통합 검색) 상태 관리. 성경구절/개요/연구문서/메모/개인 묵상/말씀 요약
+//  6분류 키워드 검색 결과를 채운다(screens.md S11 목업 그대로).
 //
 //  [2026-08-18 대폭 확장] 사용자 요청 — "왼쪽 사이드바 맨 위 상단 검색기능 ...
 //  이전 대화의 내용의 연구문서 리스트 검색 기능처럼 성경 장절 검색기능이
@@ -19,13 +19,22 @@
 //  택한 "세 번째 사용처가 생기기 전엔 공통 헬퍼로 추출하지 않는다" 원칙 —
 //  `SearchViewModel.storeCache` 상단 주석 참고).
 //
-//  ⚠️ [범위 결정] 의미검색(AI) 모드는 이번 확장 대상이 아니다 — 사용자 요청
-//  문구가 명시한 것(일치 횟수/태그/본문/형광펜)은 전부 키워드 검색 특유의
-//  개념이고, `DocumentsHomeView` 쪽 원본 기능도 키워드 검색 전용이었다. 의미
-//  검색은 기존 3분류(성경구절/개인 묵상/연구문서, `EmbeddingChunk.sourceType`
-//  범위 그대로)를 그대로 유지한다 — 개요/메모/말씀 요약까지 의미검색 색인
-//  파이프라인(`EmbeddingIndexingService`)을 넓히는 건 이번 요청 범위 밖의 별도
-//  작업이라 판단했다.
+//  [2026-08-19 삭제] 사용자 요청 — "의미검색(AI) 기능 삭제, 관련 DB 삭제." 이
+//  파일에 있던 [키워드 검색]/[의미검색(AI)] 모드 토글과 `EmbeddingChunk` 기반
+//  코사인 유사도 검색을 통째로 뺐다.
+//
+//  [2026-08-19 신설, 이후 전면 교체] 사용자 요청 — "오른쪽 상단 검색창 왼쪽 옆
+//  AI 토글 추가. 애플 인텔리전스기능으로 검색어를 성경장절로 변환하여
+//  검색하도록." 처음엔 자유 문장을 FoundationModels로 "책이름장:절" 텍스트로
+//  직접 변환해 키워드 검색에 흘려보내는 방식이었다. 그런데 "AI 검색을 잘
+//  못함. 결과가 거의 나오지 않음"이라는 문제가 보고됐고, 뒤이어 "애플
+//  인텔리전스로 텍스트를 정제하고, 방식 A — 임베딩 기반 의미검색을 한다면?" →
+//  "이 새 파이프라인이 기존 AI 토글을 완전히 대체할까요?" → "완전 대체"로
+//  방향이 바뀌었다. 지금 `isAIQueryEnabled`가 켜져 있으면
+//  `BibleSemanticSearchService`(정제 → 임베딩 → 코사인 유사도 검색, 그 파일
+//  상단 주석 참고)를 쓴다 — 더 이상 `BibleReferenceExtractor`/키워드 검색
+//  경로를 거치지 않는다(AI 검색 결과는 이제 성경구절 섹션만 채운다 — 개요/
+//  메모/문서 등은 임베딩 색인 대상이 아니라서 비운다).
 //
 
 import Foundation
@@ -40,8 +49,6 @@ struct VerseSearchResult: Identifiable {
     let verse: Int
     let content: String
     let bookNameKo: String
-    /// 의미검색일 때만 채워진다(0~1, 코사인 유사도). 키워드 검색 결과는 nil.
-    var score: Float?
     /// [2026-08-18 추가] 키워드 검색에서 강조할 단어들 — 성경구절 참조 자체로
     /// 직접 조회된 결과(`referenceMatchedVerses`)는 비워 둔다(정확히 그 절을
     /// 찾아온 것이라 특정 단어를 강조할 이유가 없다).
@@ -49,14 +56,16 @@ struct VerseSearchResult: Identifiable {
     /// 검색어 자체가 이 절을 가리키는 성경 참조였는지(예: "창1:3") — true면
     /// 목록 맨 위, 본문 검색으로 걸린 결과와 구분해 보여준다.
     var isReferenceMatch: Bool = false
+    /// [2026-08-19 추가] AI 검색(의미검색) 결과에만 채워지는 코사인 유사도
+    /// (`BibleSemanticSearchService.SemanticVerseMatch.similarity`) — 일반
+    /// 키워드 검색 결과는 nil이다. `SearchView`가 이 값이 있으면 "참조 일치"
+    /// 배지 대신 "유사도 xx%" 배지를 보여준다.
+    var similarityScore: Double? = nil
 }
 
 struct MemoSearchResult: Identifiable {
     let memo: UserMemo
     var id: PersistentIdentifier { memo.persistentModelID }
-    var score: Float?
-    /// 의미검색 결과의 스니펫(고정 80자). 키워드 검색은 `bodyExcerpt`를 쓴다.
-    var snippet: String = ""
     var bodyExcerpt: String?
     var bodyOccurrenceSum: Int = 0
     var matchedTagNames: [String] = []
@@ -137,10 +146,7 @@ struct OutlineSearchResult: Identifiable {
 struct DocumentSearchResult: Identifiable {
     let document: SourceDocument
     var id: PersistentIdentifier { document.persistentModelID }
-    /// 의미검색(문서는 페이지 단위 청크)에서만 채워진다.
     let pageNumber: Int?
-    var score: Float?
-    var snippet: String = ""
     var bodyExcerpt: String?
     var bodyOccurrenceSum: Int = 0
     var matchedTagNames: [String] = []
@@ -150,37 +156,74 @@ struct DocumentSearchResult: Identifiable {
 @MainActor
 @Observable
 final class SearchViewModel {
-    enum Mode: String, CaseIterable {
-        case keyword = "키워드 검색"
-        case semantic = "의미검색(AI)"
+    /// [2026-08-19 변경] 사용자 요청 — "택스트 입력시 자동검색은 빼도록. 중간중간
+    /// 검색이 되는데, 프리징이 됨. 엔터를 쳐야만 검색이 되도록." 예전엔 타이핑을
+    /// 멈추고 350ms 뒤 자동으로 검색됐는데, AI 검색의 무거운 계산(코사인 유사도
+    /// brute-force, 31,102개 절 × 절/문맥 벡터 2개)이 타이핑 도중 반복 실행되며
+    /// 화면이 멈추는 문제가 있었다. 이제 텍스트를 입력하는 것만으로는 검색이
+    /// 실행되지 않는다 — 검색어가 비워졌을 때 결과만 정리하고, 실제 검색은
+    /// `searchImmediately()`(엔터/검색 버튼, `SearchView`의 `.onSubmit(of:
+    /// .search)`)로만 실행한다.
+    var query: String = "" {
+        didSet {
+            searchTask?.cancel()
+            if query.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
+                clearResults()
+            }
+        }
+    }
+    /// [2026-08-19 신설, 이후 전면 교체] 검색창 왼쪽 AI 토글 — 켜면 검색어를
+    /// `BibleSemanticSearchService`(질의 정제 → 임베딩 → 코사인 유사도)로 의미
+    /// 검색한다(아래 `performAIQuerySearch` 참고). 끄면(기본값) 예전과 같은 순수
+    /// 키워드 검색. [2026-08-19 변경] 타이핑과 달리 토글을 켜고 끄는 건 한 번의
+    /// 명시적 동작이라(연속 반복 호출이 아님) 여전히 곧바로 재검색한다.
+    var isAIQueryEnabled = false {
+        didSet { searchImmediately() }
     }
 
-    var query: String = "" {
-        didSet { scheduleSearch() }
+    /// [2026-08-19 신설] 사용자 요청 — "애플인텔리전스를 끈것과 켠것을 비교하고
+    /// 싶음." 기본 켜짐(정제 사용) — 끄면 `BibleSemanticSearchService`가 1단계
+    /// (Apple Intelligence 질의 정제)를 건너뛰고 사용자가 입력한 원문 그대로
+    /// 임베딩한다. `SearchView`에 AI 토글이 켜져 있을 때만 보이는 보조 토글로
+    /// 노출한다.
+    var isQueryRefinementEnabled = true {
+        didSet { searchImmediately() }
     }
-    var mode: Mode = .keyword {
-        didSet { scheduleSearch() }
+
+    /// [2026-08-19 추가] 사용자 요청 — "Reranker도 고민해볼것." 임베딩 검색
+    /// 결과(상위 10개)를 Apple Intelligence가 한 번 더 판단해 순서를 다듬는
+    /// 마지막 단계 켬/끔. `isQueryRefinementEnabled`와 독립적인 별도 스위치다
+    /// (`BibleSearchRerankerService.swift` 상단 주석 참고 — 두 AI 단계를 같은
+    /// 스위치에 묶으면 어느 쪽이 결과를 개선했는지 구분할 수 없다).
+    var isRerankEnabled = true {
+        didSet { searchImmediately() }
     }
+
+    /// [2026-08-19 v3 추가] 사용자 지시 — "verse/context weight 최적화... 0.4:
+    /// 0.6으로 고정... 이것도 상당히 임의적인 값입니다... 0.2/0.8 ... 0.8/0.2
+    /// 이렇게만 해도 검색 결과가 상당히 달라질 수 있습니다." 고정 상수 대신
+    /// 슬라이더로 노출해 재빌드 없이 스윕 테스트할 수 있게 한다
+    /// (`BibleSemanticSearchService.search(contextWeight:)` 참고). 절 가중치는
+    /// `1 - contextWeight`. 기본값 0.6은 이전 고정값과 동일 — 출발점일 뿐 최적값
+    /// 이라는 근거는 없다.
+    var contextWeight: Double = 0.6 {
+        didSet { searchImmediately() }
+    }
+
+    /// [2026-08-19 신설] 방금 AI 검색이 실제로 임베딩에 넘긴 문장 — 정제 토글을
+    /// 켰을 때 원문이 어떻게 바뀌었는지 화면에 보여줘서 비교를 돕는다
+    /// (`SearchView`의 "검색에 사용된 문장" 안내 참고). 일반 키워드 검색에서는
+    /// 항상 nil.
+    private(set) var lastAIQueryUsed: String?
 
     private(set) var verseResults: [VerseSearchResult] = []
     private(set) var memoResults: [MemoSearchResult] = []
     private(set) var documentResults: [DocumentSearchResult] = []
-    /// [2026-08-18 추가] 아래 세 분류는 키워드 검색 전용(의미검색 범위 밖 —
-    /// 파일 상단 "범위 결정" 주석 참고)이라, 의미검색 모드에서는 항상 빈 배열로
-    /// 남는다.
     private(set) var outlineResults: [OutlineSearchResult] = []
     private(set) var phraseNoteResults: [PhraseNoteSearchResult] = []
     private(set) var summaryResults: [SummarySearchResult] = []
     private(set) var isSearching = false
     var errorDescription: String?
-
-    private(set) var embeddingAvailability: EmbeddingService.Availability = .unknown
-    private(set) var isReindexingMemosAndDocuments = false
-
-    /// 성경 전체 장 단위 색인(수동 트리거) 진행 상태.
-    private(set) var isReindexingBible = false
-    private(set) var bibleIndexProgress: (done: Int, total: Int)?
-    private var bibleIndexTask: Task<Void, Never>?
 
     private let modelContext: ModelContext
     private let booksProvider: BooksProvider
@@ -197,77 +240,64 @@ final class SearchViewModel {
         self.booksProvider = booksProvider ?? .shared
     }
 
+    /// [2026-08-19 수정] 새 임베딩 의미검색이 들어오면서, 색인이 이미 있는지
+    /// (파일 헤더만 읽는 가벼운 확인) 화면 진입 시점에 한 번 확인해 둔다 —
+    /// 색인 자체를 여기서 만들지는 않는다(사용자가 명시적으로
+    /// `startBibleEmbeddingIndexing()`을 눌러야 시작).
     func onAppear() {
-        Task {
-            await EmbeddingService.shared.prepareIfNeeded()
-            embeddingAvailability = EmbeddingService.shared.availability
-        }
-        Task {
-            isReindexingMemosAndDocuments = true
-            await EmbeddingIndexingService.reindexMemosAndDocuments(context: modelContext)
-            isReindexingMemosAndDocuments = false
-            // 색인이 막 끝난 시점에 이미 의미검색 모드로 검색어가 입력돼 있었을 수
-            // 있으니 한 번 더 검색을 갱신한다.
-            if mode == .semantic { scheduleSearch() }
-        }
+        refreshBibleIndexStatus()
     }
 
     func onDisappear() {
         searchTask?.cancel()
-        bibleIndexTask?.cancel()
+        // [2026-08-19] 성경 전체 색인 작업(`EmbeddingIndexingService.shared`)은
+        // 여기서 취소하지 않는다 — 그 Task는 이 화면(뷰모델)이 아니라 앱 전역
+        // 싱글턴이 들고 있어서, 사용자가 검색 화면을 나가도 백그라운드에서 계속
+        // 진행된다(수 분 걸릴 수 있는 일회성 작업을 화면 전환마다 처음부터
+        // 다시 시작하게 만들고 싶지 않다).
     }
 
-    // MARK: - 성경 전체 색인(수동)
+    // MARK: - 검색 실행 (엔터/토글 변경 시에만 — 타이핑 자동검색 없음)
 
-    func startBibleReindex() {
-        guard !isReindexingBible else { return }
-        bibleIndexTask?.cancel()
-        isReindexingBible = true
-        bibleIndexProgress = nil
-        bibleIndexTask = Task { [weak self] in
-            guard let self else { return }
-            guard let (registry, store) = self.defaultBibleStore() else {
-                self.isReindexingBible = false
-                return
-            }
-            await EmbeddingIndexingService.reindexBundledBibleChapters(
-                context: self.modelContext,
-                store: store,
-                books: self.booksProvider.books,
-                translationCode: registry.code
-            ) { done, total in
-                Task { @MainActor in
-                    self.bibleIndexProgress = (done, total)
-                }
-            }
-            self.isReindexingBible = false
-            if self.mode == .semantic { self.scheduleSearch() }
-        }
+    /// [2026-08-19] 사용자 요청 — "AI토글을 누를 때 두글자 이상 입력시 검색이
+    /// 되도록." AI 검색은 한 글자마다 온디바이스 모델을 호출하면(타이핑 중간의
+    /// "ㅎ", "하" 같은 미완성 입력에도 매번 호출) 낭비도 크고 어차피 그런
+    /// 입력으로는 의미 있는 변환이 나올 수 없다 — 일반 키워드 검색(글자 수
+    /// 제한 없음)과 달리 AI 검색만 최소 길이를 둔다.
+    private static let minimumAIQueryLength = 2
+
+    /// [2026-08-19] 검색어가 비었을 때(또는 AI 검색 최소 길이 미만일 때)
+    /// 결과 상태를 한 번에 정리한다 — `query` didSet과 `searchImmediately()`
+    /// 양쪽에서 쓴다.
+    private func clearResults() {
+        verseResults = []
+        memoResults = []
+        documentResults = []
+        outlineResults = []
+        phraseNoteResults = []
+        summaryResults = []
+        errorDescription = nil
+        lastAIQueryUsed = nil
     }
 
-    func cancelBibleReindex() {
-        bibleIndexTask?.cancel()
-        isReindexingBible = false
-    }
-
-    // MARK: - 검색 디바운스
-
-    private func scheduleSearch() {
+    /// [2026-08-19 변경] 사용자 요청 — "엔터를 쳐야만 검색이 되도록." 예전엔
+    /// 타이핑 멈추고 350ms 뒤 자동 검색(디바운스)됐는데, 그 자동 검색 자체를
+    /// 없앴다 — 이제 이 함수(엔터/검색 버튼, `SearchView`의 `.onSubmit(of:
+    /// .search)`, 그리고 AI/정제/재순위화 토글 변경 시)를 호출해야만 실제
+    /// 검색(무거운 코사인 유사도 계산 포함)이 실행된다.
+    func searchImmediately() {
         searchTask?.cancel()
         let trimmed = query.trimmingCharacters(in: .whitespacesAndNewlines)
         guard !trimmed.isEmpty else {
-            verseResults = []
-            memoResults = []
-            documentResults = []
-            outlineResults = []
-            phraseNoteResults = []
-            summaryResults = []
-            errorDescription = nil
+            clearResults()
+            return
+        }
+        if isAIQueryEnabled && trimmed.count < Self.minimumAIQueryLength {
+            clearResults()
             return
         }
         searchTask = Task { [weak self] in
-            try? await Task.sleep(for: .milliseconds(350))
-            guard !Task.isCancelled, let self else { return }
+            guard let self else { return }
             await self.performSearch(query: trimmed)
         }
     }
@@ -275,11 +305,11 @@ final class SearchViewModel {
     private func performSearch(query: String) async {
         isSearching = true
         defer { isSearching = false }
-        switch mode {
-        case .keyword:
+        if isAIQueryEnabled {
+            await performAIQuerySearch(query: query)
+        } else {
+            lastAIQueryUsed = nil
             performKeywordSearch(query: query)
-        case .semantic:
-            await performSemanticSearch(query: query)
         }
     }
 
@@ -288,6 +318,11 @@ final class SearchViewModel {
     /// [2026-08-18 대폭 확장] 6개 분류 전부를 채운다. 성경장절 인식(4가지 요구사항
     /// — 띄어쓰기 무시/약어↔전체이름/범위 포함)은 `BibleReferenceExtractor` 하나로
     /// 충족한다(`DocumentsHomeView.searchVerseQueryMatches` 상단 주석과 같은 근거).
+    ///
+    /// [2026-08-19 단순화] 한때 AI 토글 검색이 이 함수에 `referenceOnlyMatches`를
+    /// 넘겨 재사용했었지만, AI 검색이 임베딩 기반 의미검색(`performAIQuerySearch`
+    /// 참고)으로 완전히 바뀌면서 더 이상 이 함수를 거치지 않는다 — 순수 키워드
+    /// 검색 전용으로 되돌렸다.
     private func performKeywordSearch(query: String) {
         errorDescription = nil
         let words = query.split(whereSeparator: { $0.isWhitespace }).map(String.init).filter { !$0.isEmpty }
@@ -609,114 +644,75 @@ final class SearchViewModel {
         return results.sorted { $0.score > $1.score }.map(\.result)
     }
 
-    // MARK: - 의미검색
+    // MARK: - AI 검색(임베딩 기반 의미검색, 2026-08-19 전면 교체)
 
-    private func performSemanticSearch(query: String) async {
-        guard EmbeddingService.shared.availability == .available else {
-            embeddingAvailability = EmbeddingService.shared.availability
-            errorDescription = semanticUnavailableMessage(for: EmbeddingService.shared.availability)
-            verseResults = []; memoResults = []; documentResults = []
-            outlineResults = []; phraseNoteResults = []; summaryResults = []
-            return
-        }
-        guard let queryVector = EmbeddingService.shared.embed(query) else {
-            errorDescription = "검색어를 해석하지 못했습니다."
-            return
-        }
-        guard let chunks = try? modelContext.fetch(FetchDescriptor<EmbeddingChunk>()), !chunks.isEmpty else {
-            errorDescription = nil
-            verseResults = []; memoResults = []; documentResults = []
-            outlineResults = []; phraseNoteResults = []; summaryResults = []
-            return
-        }
+    /// [2026-08-19] 사용자 요청 — "애플 인텔리전스로 텍스트를 정제하고, 방식 A —
+    /// 임베딩 기반 의미검색을 한다면?" → "완전 대체". `isAIQueryEnabled`가 켜져
+    /// 있을 때의 검색 경로를 `BibleSemanticSearchService`(정제→임베딩→코사인
+    /// 유사도, 그 파일 상단 주석 참고)로 완전히 바꿨다 — 더 이상 키워드 검색
+    /// 경로를 거치지 않는다. 의미검색은 성경 구절만 대상으로 하므로(개요/메모/
+    /// 문서는 임베딩 색인 대상이 아니다) 나머지 5개 섹션은 항상 비운다.
+    private func performAIQuerySearch(query: String) async {
         errorDescription = nil
-        // [2026-08-18 참고] 의미검색은 개요/메모/말씀 요약을 다루지 않는다(파일
-        // 상단 "범위 결정" 주석 참고) — 이 모드로 전환하면 그 세 목록은 그대로
-        // 비워 둔다.
-        outlineResults = []
-        phraseNoteResults = []
-        summaryResults = []
-
-        // schema.md 4장 확정 방식 — brute-force 코사인 유사도. ⚠️ 성능 유의사항(S11
-        // 원문)도 그대로 적용된다: 청크 수가 아주 많아지면(특히 성경 전체 색인 후)
-        // 이 루프가 오래 걸릴 수 있다 — 이번 구현은 async 컨텍스트에서 돌려 최소한
-        // UI를 완전히 멈추지는 않지만, 실제 대규모 성능은 실기기 검증이 필요하다.
-        var scored: [(chunk: EmbeddingChunk, score: Float)] = []
-        scored.reserveCapacity(chunks.count)
-        // [2026-08-07 수정] screens.md S11 성능 유의사항 — 청크 수가 많아지면 이
-        // 루프가 오래 걸릴 수 있다고 명시돼 있었는데, 지금까지는 async 함수 안에
-        // 있다는 것만으로 UI가 안 멈춘다고 (잘못) 적어 뒀다. 실제로는 이 for 루프
-        // 자체가 await 지점 없이 MainActor에서 끝까지 동기 실행되므로, 도중에
-        // SwiftUI가 화면을 다시 그릴 기회가 전혀 없어 청크가 많을 때 입력 중
-        // 끊김이 그대로 발생한다 — 200개마다 Task.yield()로 다른 작업(렌더링 등)에
-        // 제어를 양보한다.
-        for (index, chunk) in chunks.enumerated() {
-            let vector = chunk.embeddingVector.asFloatArray
-            guard !vector.isEmpty else { continue }
-            let score = EmbeddingService.shared.cosineSimilarity(queryVector, vector)
-            scored.append((chunk, score))
-            if index % 200 == 199 {
-                await Task.yield()
+        let result = await BibleSemanticSearchService.search(
+            query: query, refinementEnabled: isQueryRefinementEnabled, rerankEnabled: isRerankEnabled,
+            contextWeight: Float(contextWeight)
+        )
+        switch result {
+        case .success(let outcome):
+            verseResults = outcome.matches.map { match in
+                VerseSearchResult(
+                    bookId: match.bookId, chapter: match.chapter, verse: match.verse,
+                    content: match.content,
+                    bookNameKo: booksProvider.book(id: match.bookId)?.nameKo ?? "\(match.bookId)권",
+                    similarityScore: Double(match.similarity)
+                )
             }
+            lastAIQueryUsed = outcome.queryUsedForEmbedding
+        case .failure(let error):
+            errorDescription = error.description
+            verseResults = []
+            lastAIQueryUsed = nil
         }
-        scored.sort { $0.score > $1.score }
-        // ⚠️ 0.3 임계값은 임의 지정이다 — 실측 후 조정 필요(스펙에 근거 없음).
-        let top = scored.filter { $0.score > 0.3 }.prefix(60)
-
-        var newVerseResults: [VerseSearchResult] = []
-        var newMemoResults: [MemoSearchResult] = []
-        var newDocumentResults: [DocumentSearchResult] = []
-
-        for entry in top {
-            switch entry.chunk.sourceType {
-            case .verse:
-                guard let ref = entry.chunk.verseRef else { continue }
-                newVerseResults.append(VerseSearchResult(
-                    bookId: ref.bookId, chapter: ref.chapter, verse: ref.verse,
-                    content: entry.chunk.chunkText,
-                    bookNameKo: booksProvider.book(id: ref.bookId)?.nameKo ?? "\(ref.bookId)권",
-                    score: entry.score
-                ))
-            case .memo:
-                guard let uuid = UUID(uuidString: entry.chunk.sourceId) else { continue }
-                var descriptor = FetchDescriptor<UserMemo>(predicate: #Predicate { $0.id == uuid })
-                descriptor.fetchLimit = 1
-                guard let memo = try? modelContext.fetch(descriptor).first else { continue }
-                newMemoResults.append(MemoSearchResult(
-                    memo: memo,
-                    score: entry.score,
-                    snippet: String(entry.chunk.chunkText.prefix(80))
-                ))
-            case .document:
-                guard let uuid = UUID(uuidString: entry.chunk.sourceId) else { continue }
-                var descriptor = FetchDescriptor<SourceDocument>(predicate: #Predicate { $0.id == uuid })
-                descriptor.fetchLimit = 1
-                guard let document = try? modelContext.fetch(descriptor).first else { continue }
-                newDocumentResults.append(DocumentSearchResult(
-                    document: document, pageNumber: entry.chunk.chunkIndex,
-                    score: entry.score,
-                    snippet: String(entry.chunk.chunkText.prefix(80))
-                ))
-            }
-        }
-
-        verseResults = newVerseResults
-        memoResults = newMemoResults
-        documentResults = newDocumentResults
+        memoResults = []; documentResults = []
+        outlineResults = []; phraseNoteResults = []; summaryResults = []
     }
 
-    private func semanticUnavailableMessage(for availability: EmbeddingService.Availability) -> String {
-        switch availability {
-        case .unsupportedLanguage:
-            return "이 기기에서 한국어 의미검색 모델을 지원하지 않습니다."
-        case .assetPreparationFailed(let reason):
-            return "의미검색 모델을 준비하지 못했습니다: \(reason)"
-        case .unknown, .available:
-            return "의미검색을 준비하는 중입니다."
-        }
+    // MARK: - 성경 전체 임베딩 색인 (2026-08-19 신설)
+
+    /// AI 검색을 쓰려면 먼저 이 색인이 있어야 한다(`BibleSemanticSearchService.
+    /// SearchError.indexNotReady`). `SearchView`가 이 상태를 보고 색인이 없으면
+    /// "색인 만들기" 버튼을, 진행 중이면 진행률 바를 보여준다.
+    ///
+    /// [2026-08-19] `EmbeddingIndexingService`는 `@Observable`이 아닌 평범한
+    /// `@MainActor` 싱글턴이라(그 Task를 화면 생명주기와 분리해 계속 돌리기
+    /// 위한 선택 — `onDisappear()` 주석 참고), 그 내부 `status`가 바뀌어도
+    /// SwiftUI가 자동으로 다시 그리지 않는다. 그래서 이 프로퍼티는 계산
+    /// 프로퍼티가 아니라 저장 프로퍼티로 두고, 상태가 바뀌는 시점마다
+    /// (`refreshBibleIndexStatus()`/진행률 콜백/완료 콜백) 명시적으로 대입해
+    /// `@Observable`이 변경을 감지하게 한다.
+    private(set) var bibleIndexStatus: EmbeddingIndexingService.IndexStatus = .notBuilt
+
+    /// `onAppear()`에서 호출 — 파일 헤더만 읽는 가벼운 확인이라 매번 불러도 부담
+    /// 없다(전체 로드는 실제 검색 시점에만, `EmbeddingIndexingService.ensureLoaded()`).
+    func refreshBibleIndexStatus() {
+        EmbeddingIndexingService.shared.refreshStatus()
+        bibleIndexStatus = EmbeddingIndexingService.shared.status
     }
 
-    // MARK: - BibleReferenceStore 캐시(키워드 검색 + 성경 전체 색인 공용)
+    func startBibleEmbeddingIndexing() {
+        bibleIndexStatus = .building(progress: 0)
+        EmbeddingIndexingService.shared.startBuilding(
+            progress: { [weak self] fraction in self?.bibleIndexStatus = .building(progress: fraction) },
+            completion: { [weak self] finalStatus in self?.bibleIndexStatus = finalStatus }
+        )
+    }
+
+    func cancelBibleEmbeddingIndexing() {
+        EmbeddingIndexingService.shared.cancelBuilding()
+    }
+
+    // MARK: - BibleReferenceStore 캐시(키워드 검색 공용)
 
     private func store(for registry: TranslationRegistry) throws -> BibleReferenceStore {
         // 2026-08-07(S12): BibleReadingViewModel.store(for:)와 동일한 이유로
@@ -733,13 +729,4 @@ final class SearchViewModel {
         return store
     }
 
-    /// 성경 전체 색인은 여러 번역본을 동시에 처리하지 않는다(스펙에 다중 번역본
-    /// 동시 색인 요구가 없고, 규모를 키우는 선택이라 근거 없이 확장하지 않았다) —
-    /// 등록된 번역본 중 첫 번째(보통 번들 KRV)만 색인 대상으로 삼는다.
-    private func defaultBibleStore() -> (TranslationRegistry, BibleReferenceStore)? {
-        guard let registries = try? modelContext.fetch(FetchDescriptor<TranslationRegistry>(sortBy: [SortDescriptor(\.addedAt, order: .forward)])),
-              let first = registries.first,
-              let store = try? store(for: first) else { return nil }
-        return (first, store)
-    }
 }

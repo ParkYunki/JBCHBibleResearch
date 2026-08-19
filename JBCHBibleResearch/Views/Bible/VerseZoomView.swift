@@ -782,8 +782,12 @@ struct VerseZoomView: View {
     private func hanjaGlossCell(_ word: HanjaWordAnnotation) -> some View {
         VStack(alignment: .center, spacing: 2) {
             HStack(spacing: 4) {
-                Text("\(word.ko) \(word.hanja)")
-                    .font(bibleSwiftUIFont)
+                // [2026-08-19 수정] 사용자 요청 — "확대보기 한자 뜻풀이의 한자에
+                // 조선궁서체 적용." 한글(word.ko)과 한자(word.hanja)를 하나의
+                // `Text`로 합쳐 그리던 걸, SwiftUI `Text + Text`(서로 다른
+                // `.font()`를 유지한 채 한 줄로 이어 붙는다)로 나눴다 — 한글은
+                // 기존 성경 본문 글꼴 그대로, 한자만 한자 폰트 설정을 따른다.
+                (Text("\(word.ko) ").font(bibleSwiftUIFont) + Text(word.hanja).font(hanjaSwiftUIFont))
                 if let url = naverHanjaDictionaryURL(for: word.hanja) {
                     Link(destination: url) {
                         Image(systemName: "arrow.up.forward.app")
@@ -838,6 +842,13 @@ struct VerseZoomView: View {
         let settings = UserSettingsStore.shared
         guard settings.bibleFontName != "System" else { return .system(size: 17) }
         return .custom(settings.bibleFontName, size: 17)
+    }
+
+    /// [2026-08-19 신설] 위 `bibleSwiftUIFont`와 같은 17pt 고정 크기(확대보기
+    /// 성경 구절 크기와 동일하게 맞추라는 기존 요청, `hanjaGlossCell` 상단 주석
+    /// 참고), 이름만 `UserSettingsStore.hanjaFontName`(기본값 조선궁서체)을 따른다.
+    private var hanjaSwiftUIFont: Font {
+        UserSettingsStore.shared.hanjaFont(size: 17)
     }
 
     private var annotationStatusBar: some View {

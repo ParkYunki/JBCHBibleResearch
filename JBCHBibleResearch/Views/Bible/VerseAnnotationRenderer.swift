@@ -187,7 +187,12 @@ enum VerseAnnotationRenderer {
         hanjaWords: [HanjaWordAnnotation] = [],
         marginalNotes: [VerseMarginalNote] = [],
         font: PlatformFont,
-        textColor: PlatformColor
+        textColor: PlatformColor,
+        // [2026-08-19 추가] 사용자 요청 — "한자 기본 폰트(조선궁서체)를 성경
+        // 조회에 표시되는 한자에 적용." 넘기지 않으면(nil, 기본값) 예전처럼
+        // 본문 글꼴을 그대로 쓴다 — 호출부(TranslationColumnView)가 아직
+        // 안 고쳐졌어도 컴파일이 깨지지 않게 하기 위한 기본 인자.
+        hanjaFont: PlatformFont? = nil
     ) -> AttributedString {
         let base = attributedContent(
             text: text, highlights: highlights, phraseNotes: phraseNotes, font: font, textColor: textColor
@@ -213,7 +218,7 @@ enum VerseAnnotationRenderer {
             switch entry.item {
             case .hanja(let hanja):
                 var hanjaRun = AttributedString("(\(hanja))")
-                hanjaRun.font = Font(font).italic()
+                hanjaRun.font = Font(hanjaFont ?? font).italic()
                 hanjaRun.foregroundColor = Color(textColor).opacity(0.6)
                 result.insert(hanjaRun, at: index)
             case .marginalNoteMarker(let marker):

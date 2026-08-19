@@ -580,7 +580,7 @@ private struct VerseRow: View {
             let attributed = VerseAnnotationRenderer.attributedContentWithInlineAnnotations(
                 text: verse.content, highlights: highlights, phraseNotes: phraseNotes,
                 hanjaWords: shouldShowInlineHanja ? hanjaWords : [], marginalNotes: marginalNotes,
-                font: platformBodyFont, textColor: platformTextColor
+                font: platformBodyFont, textColor: platformTextColor, hanjaFont: platformHanjaFont
             )
             if verse.paragraph != nil {
                 // [macOS 26 대응] `Text + Text`(`+` 연산자)가 macOS 26.0부터
@@ -635,6 +635,15 @@ private struct VerseRow: View {
         let size = CGFloat(settings.bibleBodyFontSize)
         guard settings.bibleFontName != "System" else { return .systemFont(ofSize: size) }
         return PlatformFont(name: settings.bibleFontName, size: size) ?? .systemFont(ofSize: size)
+    }
+
+    /// [2026-08-19 추가] 사용자 요청 — "성경 조회에 표시되는 한자에 조선궁서체
+    /// 적용." 인라인 "(한자)" 괄호 표기의 크기는 본문 글꼴과 맞춰야 자연스러워
+    /// `platformBodyFont`와 같은 크기를 쓰되, 이름만 `settings.hanjaFontName`을
+    /// 따른다 — `settings.hanjaFontName == "System"`이면 본문 글꼴 그대로.
+    private var platformHanjaFont: PlatformFont {
+        guard settings.hanjaFontName != "System" else { return platformBodyFont }
+        return PlatformFont(name: settings.hanjaFontName, size: platformBodyFont.pointSize) ?? platformBodyFont
     }
 
     private var platformTextColor: PlatformColor {

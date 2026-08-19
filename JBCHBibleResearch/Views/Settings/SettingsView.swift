@@ -438,7 +438,7 @@ private struct StorageSettingsTab: View {
             }
 
             Section {
-                Text("⚠️ 캐시 용량 표시/비우기는 아직 구현되지 않았습니다 — 벡터 인덱스(EmbeddingChunk) 자체가 이번 범위에 없습니다.")
+                Text("⚠️ 캐시 용량 표시/비우기는 아직 구현되지 않았습니다.")
                     .foregroundStyle(.secondary)
             } header: {
                 Label("캐시", systemImage: "internaldrive")
@@ -560,6 +560,18 @@ private struct AppearanceSettingsTab: View {
                         Text(mode.displayName).tag(mode)
                     }
                 }
+
+                // [2026-08-19 추가] 사용자 요청 — "설정 내 모양 탭의 한자 주석
+                // 표시 밑에 '한자' 폰트를 변경할 수 있는 기능 추가." 지금은
+                // 번들 폰트(조선궁서체) 하나뿐이라 시스템 기본과의 이지선다 —
+                // 나중에 다른 한자 폰트가 추가되면 이 Picker에 항목만 늘리면
+                // 된다(`bibleFontName` Picker와 같은 구조). 한자 주석 표시
+                // 자체가 꺼져 있으면 무의미하므로 비활성화한다.
+                Picker("한자 폰트", selection: $settings.hanjaFontName) {
+                    Text("조선궁서체 (기본)").tag(SpecialPurposeFonts.hanja)
+                    Text("시스템 기본").tag("System")
+                }
+                .disabled(settings.hanjaDisplayMode == .off)
             } header: {
                 Label("성경 조회 표시", systemImage: "textformat")
             }
@@ -802,6 +814,29 @@ private struct AboutSettingsTab: View {
                 Label("앱 정보", systemImage: "info.circle")
             }
 
+            // [2026-08-19 추가] 사용자가 (재)대한성서공회 저작권부에 직접 문의해
+            // 받은 회신 그대로 반영 — "성경전서 개역한글판(1961)"과 "관주성경전서
+            // 개역한글판(1962)"은 저작재산권 보호기간이 만료돼 허가 없이 무료로
+            // 쓸 수 있으나, 동일성유지권(본문을 임의로 변경·수정하지 않고 그대로
+            // 사용)과 성명표시권(저작권이 (재)대한성서공회에 있다는 표시)은 지켜야
+            // 한다는 내용. 회신에 적힌 두 표준 문구(정식/약식)를 그대로 옮겼다 —
+            // 위 "오픈소스 라이선스 고지"와 성격이 달라(이 두 판본은 오픈소스가
+            // 아니라 저작권 보호기간 만료) 별도 섹션으로 분리했다.
+            //
+            // 이 회신은 아래 "오픈소스 라이선스 고지" 섹션에 있던 관주(구절 연결)
+            // 정보 출처 문구("아직 확인 중")도 함께 해소한다 — 그 문구를 이 회신
+            // 내용으로 갱신했다.
+            Section {
+                Text("여기에 사용한 성경전서 개역한글판의 저작권은 (재)대한성서공회에 있습니다.")
+                Text("성경전서 개역한글판 ⓒ (재)대한성서공회")
+                    .font(.caption)
+                    .foregroundStyle(.secondary)
+            } header: {
+                Label("성경 본문 저작권", systemImage: "book.closed")
+            } footer: {
+                Text("성경전서 개역한글판(1961)과 관주성경전서 개역한글판(1962)은 저작재산권 보호기간이 만료되어 (재)대한성서공회의 허가 없이 무료로 사용할 수 있습니다. 다만 본문을 임의로 변경·수정하지 않고 그대로 사용해야 하며(동일성유지권), 저작권이 (재)대한성서공회에 있다는 표시(성명표시권)를 해야 합니다 — (재)대한성서공회 저작권부 회신(2026-08-19) 기준.")
+            }
+
             // [2026-08-13 추가] OriginalTextLookupService.swift/README.md에 "라이선스
             // 고지 미구현"으로 남아 있던 TODO 해소 — STEPBible-Data(CC BY 4.0)
             // 크레딧을 hwp 뷰어 고지와 같은 섹션에 추가한다. STEPBible 라이선스
@@ -861,7 +896,47 @@ private struct AboutSettingsTab: View {
                 // 상단 주석과 같은 취지 — 대한성서공회 확인 전까지는 출처가
                 // 확정된 상태가 아님을 사용자에게도 투명하게 알린다(과장 없이
                 // 정직하게 표시하는 이 파일의 원래 원칙).
-                Text("관주(구절 연결) 정보는 개역한글 판본 체계를 따르는 자료를 사용했습니다 — 정확한 출처(예: 대한성서공회 관주성경전서 개역한글판)는 아직 확인 중이며, 확인 결과에 따라 추후 조정될 수 있습니다.")
+                // [2026-08-19 갱신] (재)대한성서공회 저작권부에 직접 문의해 회신을
+                // 받아 출처가 확정됐다 — 위 "성경 본문 저작권" 섹션 참고. "아직
+                // 확인 중"이던 이전 문구를 확정된 내용으로 바꿨다.
+                Text("관주(구절 연결) 정보는 (재)대한성서공회의 관주성경전서 개역한글판(1962)을 따릅니다. 저작재산권 보호기간이 만료되어 무료로 사용하되, 위 '성경 본문 저작권' 섹션과 같은 조건(동일성유지권·성명표시권)을 지킵니다.")
+
+                // [2026-08-19 추가] 사용자 요청 — "앱 내 언어별 폰트 추가"(한자/
+                // 히브리어/헬라어 전용 폰트 + 고운바탕 번들 폰트) 4건의 라이선스
+                // 고지. 조선궁서체는 표준 오픈소스 라이선스가 아니라 사용자가
+                // 직접 제공한 (주)조선일보사 고지 문구를 그대로 옮겼다(요청
+                // 원문 — "위 내용을 참고하여 적절하게 추가할 것").
+                Text("한자 주석 기본 폰트인 조선궁서체의 지적재산권은 (주)조선일보사에 있고 개인 및 기업 사용자에게 무료로 제공됩니다. 사용자들은 이를 다른 이에게 자유롭게 배포할 수 있습니다. 다만 어떠한 경우에도 복사 또는 배포에 따른 대가를 요구하거나 수정해서 판매할 수 없으며, 배포된 형태 그대로 사용해야 합니다.")
+
+                // [2026-08-19 추가] SILEOT.ttf(Ezra SIL) — software.sil.org/ezra
+                // 다운로드 페이지의 라이선스 절 그대로 옮김: 히브리어 문자 배치
+                // 지능(레이아웃 로직)만 별도로 Ralph Hancock·John Hudson의
+                // MIT/X11 라이선스이고, 그 외 폰트 소프트웨어 자체는 SIL Open
+                // Font License(OFL) 1.1이다.
+                Text("원문 정보 화면의 히브리어 원어 표기는 SIL Global이 배포하는 Ezra SIL 폰트를 사용합니다. 히브리어 문자 배치 지능은 Ralph Hancock과 John Hudson이 만든 MIT/X11 라이선스를, 그 외 폰트 소프트웨어 자체는 SIL Open Font License(OFL) 1.1을 따릅니다.")
+
+                Link("Ezra SIL 다운로드 페이지 보기", destination: URL(string: "https://software.sil.org/ezra/")!)
+
+                // [2026-08-19 추가] Gentium-Regular.ttf/Gentium-Bold.ttf — 사용자가
+                // 첨부한 OFL.txt(Copyright 2003-2025 SIL Global, Reserved Font
+                // Names "Gentium"·"SIL") 그대로. fonttools로 확인한 실제 번들
+                // 파일의 family 이름도 "Gentium"이라 이 문구와 일치한다(사용자가
+                // 요청 메시지에서 부른 "GentiumPlus"는 SIL이 이 폰트를 부르는
+                // 현재 마케팅 명칭 — BundledFontRegistrar.swift의
+                // `SpecialPurposeFonts.greekRegular/greekBold` 상단 주석 참고).
+                Text("원문 정보 화면의 그리스어(헬라어) 원어 표기는 SIL Global이 배포하는 Gentium 폰트(현재 명칭 Gentium Plus)를 사용하며, SIL Open Font License(OFL) 1.1을 따릅니다.")
+
+                Link("Gentium 폰트 페이지 보기", destination: URL(string: "https://software.sil.org/gentium/")!)
+
+                // [2026-08-19 추가] GowunBatang-Regular.ttf/GowunBatang-Bold.ttf —
+                // github.com/yangheeryu/Gowun-Batang의 OFL.txt(Copyright 2021 The
+                // Gowun Batang Project Authors) 그대로. Paperlogy와 같은 방식으로
+                // 앱에 번들해 "글꼴" 설정에서 바로 고를 수 있다(BundledFonts.
+                // gowunBatangEntries 참고) — 특정 언어 전용이 아니라 사용자가
+                // 자유롭게 고르는 일반 글꼴이라 위 세 항목과 성격이 다르다.
+                Text("앱 내장 기본 글꼴 중 고운바탕(Gowun Batang)은 The Gowun Batang Project Authors가 배포하는 오픈소스 폰트로, SIL Open Font License(OFL) 1.1을 따릅니다.")
+
+                Link("Gowun Batang 저장소 보기", destination: URL(string: "https://github.com/yangheeryu/Gowun-Batang")!)
             } header: {
                 Label("오픈소스 라이선스 고지", systemImage: "doc.plaintext")
             } footer: {
@@ -921,16 +996,17 @@ private struct DeveloperSettingsTab: View {
     //
     // `SourceDocument`를 지우면 `deleteRule: .cascade`로 걸린 자식들
     // (DocumentText/ConvertedPDF/OCRResult/DocumentAnchor/DocumentMarkdown,
-    // Documents.swift 참고)은 자동으로 같이 지워진다. 다만 `VerseMention`/
-    // `EmbeddingChunk`는 관계가 아니라 원시 문자열 `sourceId`로만 연결된 "관련
-    // DB자료"라 자동으로 안 지워진다 — 기존 단건 삭제(`DocumentsViewModel.
-    // delete(_:)`)도 `VerseMention`은 `BibleReferenceIndexingService.
-    // removeMentions`로 지우지만 `EmbeddingChunk`는 원래 지우지 않고 있던
-    // 빈틈이라, 여기서 둘 다 명시적으로 같이 정리한다. `ImageCategory`(문서
-    // 분류 이름표)는 문서에 딸린 "데이터"가 아니라 사용자가 만든 분류 체계라
-    // 삭제 대상에서 뺐다. 원본 파일 자체(사용자 지정 저장공간의 실제 파일)도
-    // 이 앱이 관리하는 DB 레코드가 아니므로 건드리지 않는다.
-    @State private var documentDataCounts: (document: Int, verseMention: Int, embeddingChunk: Int)?
+    // Documents.swift 참고)은 자동으로 같이 지워진다. 다만 `VerseMention`은
+    // 관계가 아니라 원시 문자열 `sourceId`로만 연결된 "관련 DB자료"라 자동으로
+    // 안 지워진다 — 기존 단건 삭제(`DocumentsViewModel.delete(_:)`)도
+    // `BibleReferenceIndexingService.removeMentions`로 이걸 지운다.
+    // `ImageCategory`(문서 분류 이름표)는 문서에 딸린 "데이터"가 아니라
+    // 사용자가 만든 분류 체계라 삭제 대상에서 뺐다. 원본 파일 자체(사용자
+    // 지정 저장공간의 실제 파일)도 이 앱이 관리하는 DB 레코드가 아니므로
+    // 건드리지 않는다.
+    // [2026-08-19 수정] `EmbeddingChunk`(임베딩 청크)는 의미검색(AI) 기능
+    // 삭제(사용자 요청)와 함께 이 카운트/삭제 대상에서도 뺐다.
+    @State private var documentDataCounts: (document: Int, verseMention: Int)?
     @State private var isDeleteDocumentsConfirmationPresented = false
     @State private var deleteDocumentsResultMessage: String?
 
@@ -984,7 +1060,7 @@ private struct DeveloperSettingsTab: View {
 
             Section {
                 if let counts = documentDataCounts {
-                    Text("연구문서 \(counts.document)개 · 구절 언급 \(counts.verseMention)개 · 임베딩 청크 \(counts.embeddingChunk)개")
+                    Text("연구문서 \(counts.document)개 · 구절 언급 \(counts.verseMention)개")
                         .font(.caption)
                         .foregroundStyle(.secondary)
                 }
@@ -1002,7 +1078,7 @@ private struct DeveloperSettingsTab: View {
             } header: {
                 Label("연구문서 데이터 삭제", systemImage: "doc.badge.gearshape")
             } footer: {
-                Text("사이드바 \"연구문서\"에 등록된 모든 문서(원본 파일 참조·OCR 결과·변환본·본문 텍스트)와 거기서 파생된 성경구절 언급/의미검색 색인을 전부 지웁니다 — 되돌릴 수 없습니다. 사용자 저장공간의 원본 파일 자체는 지우지 않고, 이 앱의 등록 정보만 지웁니다. \"연구문서\" 기능/화면은 그대로 남아 있어 다시 업로드할 수 있습니다.")
+                Text("사이드바 \"연구문서\"에 등록된 모든 문서(원본 파일 참조·OCR 결과·변환본·본문 텍스트)와 거기서 파생된 성경구절 언급을 전부 지웁니다 — 되돌릴 수 없습니다. 사용자 저장공간의 원본 파일 자체는 지우지 않고, 이 앱의 등록 정보만 지웁니다. \"연구문서\" 기능/화면은 그대로 남아 있어 다시 업로드할 수 있습니다.")
             }
         }
         .formStyle(.grouped)
@@ -1041,7 +1117,7 @@ private struct DeveloperSettingsTab: View {
             Button("취소", role: .cancel) {}
         } message: {
             if let counts = documentDataCounts {
-                Text("연구문서 \(counts.document)개와 관련 DB자료(구절 언급 \(counts.verseMention)개, 임베딩 청크 \(counts.embeddingChunk)개)가 삭제됩니다. 원본 파일 자체는 지워지지 않습니다. 되돌릴 수 없습니다.")
+                Text("연구문서 \(counts.document)개와 관련 DB자료(구절 언급 \(counts.verseMention)개)가 삭제됩니다. 원본 파일 자체는 지워지지 않습니다. 되돌릴 수 없습니다.")
             }
         }
     }
@@ -1079,17 +1155,14 @@ private struct DeveloperSettingsTab: View {
     }
 
     private func refreshDocumentCounts() {
-        // ⚠️ `VerseMention.sourceType`/`EmbeddingChunk.sourceType`은 String rawValue
-        // enum이라 `#Predicate` 등호 비교가 이 SwiftData 버전에서 안전하게 동작하는지
-        // 확신할 수 없어(이 파일의 `SourceDocument.indexStatus` 등 다른 곳에서도 같은
-        // 이유로 회피해 온 전례) 전체를 가져와 Swift에서 걸렀다 —
-        // `EmbeddingIndexingService.reindexDocuments` 상단 주석과 같은 원칙.
+        // ⚠️ `VerseMention.sourceType`은 String rawValue enum이라 `#Predicate`
+        // 등호 비교가 이 SwiftData 버전에서 안전하게 동작하는지 확신할 수
+        // 없어(이 파일의 `SourceDocument.indexStatus` 등 다른 곳에서도 같은
+        // 이유로 회피해 온 전례) 전체를 가져와 Swift에서 걸렀다.
         let documentCount = (try? modelContext.fetchCount(FetchDescriptor<SourceDocument>())) ?? 0
         let verseMentionCount = ((try? modelContext.fetch(FetchDescriptor<VerseMention>())) ?? [])
             .filter { $0.sourceType == .document }.count
-        let embeddingChunkCount = ((try? modelContext.fetch(FetchDescriptor<EmbeddingChunk>())) ?? [])
-            .filter { $0.sourceType == .document }.count
-        documentDataCounts = (documentCount, verseMentionCount, embeddingChunkCount)
+        documentDataCounts = (documentCount, verseMentionCount)
     }
 
     private func deleteAllDocuments() {
@@ -1108,9 +1181,6 @@ private struct DeveloperSettingsTab: View {
             // 관계가 아니라 원시 문자열 sourceId로만 연결된 "관련 DB자료" — 위
             // `documentDataCounts` 프로퍼티 주석 참고.
             for item in try modelContext.fetch(FetchDescriptor<VerseMention>()) where item.sourceType == .document {
-                modelContext.delete(item)
-            }
-            for item in try modelContext.fetch(FetchDescriptor<EmbeddingChunk>()) where item.sourceType == .document {
                 modelContext.delete(item)
             }
             try modelContext.save()

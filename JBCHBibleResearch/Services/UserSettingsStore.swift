@@ -30,6 +30,12 @@ final class UserSettingsStore {
         static let lastSelectedSection = "settings.lastSelectedSection"
         static let colorSchemePreference = "settings.colorSchemePreference"
         static let aiChapterDraftEnabled = "settings.aiChapterDraftEnabled"
+        // [2026-08-19 추가] 사용자 요청 — "앱을 설치할 때, 처음 시작할 때 색인을
+        // 자동으로 설치하면 안되는가?" 첫 실행 시 AI 의미검색 색인 만들기를
+        // 자동으로 시작하면서 안내 화면을 보여준 적이 있는지 — 한 번 보여준
+        // 뒤엔(완료/취소 여부와 무관하게) 앱을 켤 때마다 다시 뜨지 않게 막는
+        // 용도. `BibleIndexOnboardingOverlay.swift` 참고.
+        static let hasOfferedBibleIndexOnboarding = "settings.hasOfferedBibleIndexOnboarding"
         static let defaultTranslationCode = "settings.defaultTranslationCode"
         static let defaultDisplayedTranslationCodes = "settings.defaultDisplayedTranslationCodes"
         static let lastManualSyncAt = "settings.lastManualSyncAt"
@@ -86,6 +92,12 @@ final class UserSettingsStore {
         // 보기"/"항상 보기(국한문식)"/"끄기" 중 선택. 사용자가 "둘 다 지원,
         // 설정으로 전환"을 골라 셋 중 고르게 했다.
         static let hanjaDisplayMode = "settings.bible.hanjaDisplayMode"
+        // [2026-08-19 추가] 사용자 요청 — "설정 내 모양 탭의 한자 주석 표시
+        // 밑에 '한자' 폰트를 변경할 수 있는 기능 추가." `bibleFontName`과 같은
+        // 패턴("System" 문자열이면 시스템 기본, 아니면 PostScript 이름) —
+        // 다만 지금은 선택지가 `SpecialPurposeFonts.hanja`(조선궁서체) 하나뿐
+        // 이라 사실상 켜기/끄기에 가깝다.
+        static let hanjaFontName = "settings.bible.hanjaFontName"
     }
 
     // MARK: - S1 표시 폰트
@@ -194,6 +206,16 @@ final class UserSettingsStore {
     /// AND로 묶어 최종 버튼 표시 여부를 정한다.
     var isAIChapterDraftEnabled: Bool {
         didSet { defaults.set(isAIChapterDraftEnabled, forKey: Key.aiChapterDraftEnabled) }
+    }
+
+    /// [2026-08-19 추가] `BibleIndexOnboardingOverlay`가 앱 첫 실행 시 딱 한 번만
+    /// 뜨도록 막는 플래그. 사용자가 "백그라운드에서 계속하기"로 넘기든, 색인이
+    /// 실제로 끝나든, 어느 쪽이든 한 번 보여준 뒤엔 true로 바뀐다 — 색인 진행
+    /// 상태 자체는 `EmbeddingIndexingService.shared.status`가 앱을 껐다 켜도
+    /// 그대로 남아 있으므로(디스크 파일 기반), 이 플래그는 오직 "안내 화면을
+    /// 또 띄울지"만 결정한다.
+    var hasOfferedBibleIndexOnboarding: Bool {
+        didSet { defaults.set(hasOfferedBibleIndexOnboarding, forKey: Key.hasOfferedBibleIndexOnboarding) }
     }
 
     /// 8.1 "기본 성경 번역본" 피커. `TranslationRegistry.code`를 저장한다 — S1이
@@ -382,12 +404,23 @@ final class UserSettingsStore {
         didSet { defaults.set(hanjaDisplayMode.rawValue, forKey: Key.hanjaDisplayMode) }
     }
 
+    /// [2026-08-19 추가] 한자 주석(성경 조회 인라인 표시 + 확대보기 한자
+    /// 뜻풀이)에 쓰는 폰트. `bibleFontName`과 똑같이 "System"이면 시스템 기본,
+    /// 아니면 그 PostScript 이름을 그대로 쓴다. 기본값은 이 프로젝트가 번들한
+    /// 조선궁서체(`SpecialPurposeFonts.hanja`) — 등록에 실패해도(Fonts 폴더가
+    /// 타겟에 아직 안 걸려 있는 경우 등) `Font.custom`이 알아서 시스템 폰트로
+    /// 대체하므로 안전하다(`BundledFontRegistrar.swift` 상단 주석과 같은 안전망).
+    var hanjaFontName: String {
+        didSet { defaults.set(hanjaFontName, forKey: Key.hanjaFontName) }
+    }
+
     init(defaults: UserDefaults = .standard) {
         self.defaults = defaults
         self.openLastScreenOnLaunch = defaults.object(forKey: Key.openLastScreenOnLaunch) as? Bool ?? true
         self.lastSelectedSectionRawValue = defaults.string(forKey: Key.lastSelectedSection)
         self.colorSchemePreference = (defaults.string(forKey: Key.colorSchemePreference)).flatMap(ColorSchemePreference.init) ?? .system
         self.isAIChapterDraftEnabled = defaults.object(forKey: Key.aiChapterDraftEnabled) as? Bool ?? true
+        self.hasOfferedBibleIndexOnboarding = defaults.object(forKey: Key.hasOfferedBibleIndexOnboarding) as? Bool ?? false
         self.defaultTranslationCode = defaults.string(forKey: Key.defaultTranslationCode)
         self.defaultDisplayedTranslationCodes = defaults.stringArray(forKey: Key.defaultDisplayedTranslationCodes) ?? []
         self.lastManualSyncAt = defaults.object(forKey: Key.lastManualSyncAt) as? Date
@@ -415,6 +448,7 @@ final class UserSettingsStore {
         self.hasImportedHanjaAnnotationSeed = defaults.object(forKey: Key.hasImportedHanjaAnnotationSeed) as? Bool ?? false
         self.hasCleanedUpLegacyBundledReferenceData = defaults.object(forKey: Key.hasCleanedUpLegacyBundledReferenceData) as? Bool ?? false
         self.hanjaDisplayMode = (defaults.string(forKey: Key.hanjaDisplayMode)).flatMap(HanjaDisplayMode.init) ?? .off
+        self.hanjaFontName = defaults.string(forKey: Key.hanjaFontName) ?? SpecialPurposeFonts.hanja
 
         // [2026-08-14 추가] 기본값 — 구약을 펼친 채로 시작하는 편이(책이 39권,
         // 신약보다 훨씬 자주 참조됨) 처음 여는 사용자에게 자연스럽다고 판단했다.
@@ -453,5 +487,13 @@ extension UserSettingsStore {
     var bibleTextColor: Color? {
         guard !bibleTextColorHex.isEmpty else { return nil }
         return Color(hex: bibleTextColorHex)
+    }
+
+    /// [2026-08-19 추가] `hanjaFontName`을 실제 SwiftUI `Font`로 바꾼다 — 크기는
+    /// 호출부마다 다르므로(성경 조회 인라인은 본문 크기를 따라가고, 확대보기
+    /// 한자 뜻풀이는 17pt 고정) 인자로 받는다. `bibleBodyFont`와 같은 안전망 —
+    /// 폰트가 실제로 등록되지 않았어도 SwiftUI가 알아서 시스템 폰트로 대체한다.
+    func hanjaFont(size: CGFloat) -> Font {
+        hanjaFontName == "System" ? .system(size: size) : .custom(hanjaFontName, size: size)
     }
 }

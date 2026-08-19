@@ -2,134 +2,210 @@
 //  EmbeddingService.swift
 //  JBCHBibleResearch
 //
-//  S11(통합 검색/의미검색) — 텍스트 → 벡터 변환과 코사인 유사도 계산.
+//  [2026-08-19 신설, 이후 전면 교체] 사용자 요청 — "애플 인텔리전스로 텍스트를
+//  정제하고, 방식 A — 임베딩 기반 의미검색을 한다면?" 파이프라인의 "문장 → 벡터"
+//  단계. 처음엔 애플 내장 `NLContextualEmbedding`을 썼다 — 이후 사용자 질문
+//  ("내가 언제 애플 NLContextualEmbedding 임베딩으로 하라했나?")에 확인해보니
+//  실제로는 그 선택을 사용자에게 확인받지 않고 임의로 진행한 것이었다. 다시
+//  두 옵션(애플 내장 vs 한국어 특화 번들 모델)을 제시했고, 사용자가
+//  `intfloat/multilingual-e5-small`(오픈소스, 다국어 검색 특화, 한국어 지원
+//  명시)을 직접 지정해 그쪽으로 교체했다.
 //
-//  ⚠️⚠️ [이번 라운드에서 가장 불확실한 부분] schema.md 4장은 검색 단계만 "Swift +
-//  Accelerate(vDSP)로 brute-force 코사인 유사도"라고 확정했을 뿐, 임베딩 벡터
-//  자체를 무엇으로 만들지는 원본 세 문서 어디에도 없다 — 근거 없이 만들지 않는다는
-//  원칙에 따라 후보를 추측이 아니라 소거법으로 좁혔다:
-//    - FoundationModels(iOS/macOS 26+)는 텍스트 **생성** 전용 API만 제공하고
-//      임베딩 벡터를 반환하는 공개 API가 없다(ChapterOutlineDraftService.swift가
-//      쓰는 SystemLanguageModel/LanguageModelSession에는 그런 메서드가 없음).
-//    - 외부 네트워크 임베딩 API(OpenAI 등)는 schema.md 0장의 "온디바이스" 전제와
-//      정면으로 어긋난다.
-//    - 남는 유일한 Apple 온디바이스 문장 임베딩 API가 NaturalLanguage 프레임워크의
-//      `NLContextualEmbedding`(WWDC23 발표, iOS 17+/macOS 14+ — 이 프로젝트 최소
-//      배포 버전인 iOS 18/macOS 15보다 낮아 FoundationModels처럼 이중 가드가 필요
-//      없다)이다. 이걸 택했다.
+//  ⚠️⚠️ [실행 검증 안 됨, 사용자 로컬 변환 필요] 이 세션은 huggingface.co
+//  접속이 막혀 있고(허용 목록 방식 네트워크) torch 설치도 용량/시간 제약으로
+//  실패해 실제 모델을 받아 변환해보지 못했다. `Scripts/convert_multilingual_e5_small.py`
+//  (프로젝트 루트, 사용자 맥에서 직접 실행)가 `MultilingualE5Small.mlpackage`와
+//  `MultilingualE5SmallTokenizer/` 폴더를 만들어 준다 — 이 두 리소스를 Xcode
+//  프로젝트에 추가해야 이 파일이 실제로 동작한다(추가 전엔 `checkAvailability()`
+//  가 항상 `.unavailable`을 반환하도록 방어적으로 짰다).
 //
-//  ⚠️⚠️ [가장 큰 미확인 리스크] `NLContextualEmbedding`이 한국어를 실제로 지원하는지
-//  이 세션에서 확신할 수 없다 — 이 앱의 실제 콘텐츠(성경 본문/메모/연구문서)는
-//  거의 전부 한국어다. 그래서 지원 언어를 가정하지 않고 매번 `NLContextualEmbedding
-//  (language: .korean)`가 nil을 반환하는지로 런타임에 직접 확인하고, nil이면
-//  "이 기기에서 의미검색을 쓸 수 없음"으로 정직하게 비활성화한다(FoundationModels
-//  가용성 체크와 같은 패턴 — 추측 대신 런타임 확인 + 정직한 실패).
-//  `requestAssets()`가 실제로 모델 자산을 다운로드하는 동작·소요 시간·네트워크
-//  필요 여부도 실기기 검증 전까지는 미확인이다.
+//  [토크나이저] Core ML은 토큰화를 포함하지 않으므로, Hugging Face 공식 Swift
+//  패키지 `swift-transformers`(https://github.com/huggingface/swift-transformers,
+//  제품 이름 "Tokenizers")를 SPM 의존성으로 추가해야 한다 — Xcode: File > Add
+//  Package Dependencies > 위 URL 입력 > "Tokenizers" 제품만 이 앱 타겟에 추가.
+//  `multilingual-e5-small`은 XLM-RoBERTa 계열 토크나이저(SentencePiece Unigram)를
+//  쓰는데, `swift-transformers`의 `TokenizerModel.knownTokenizers`에
+//  `XLMRobertaTokenizer`가 `UnigramTokenizer`로 이미 등록돼 있는 것을
+//  GitHub에서 직접 확인했다(README/소스 코드까지 읽고 반영 — 추측이 아니다).
+//
+//  [query/passage 비대칭 검색] E5 계열 모델은 검색어와 색인 대상 문장에 서로
+//  다른 접두사("query: "/"passage: ")를 붙여야 정확도가 나온다(모델 카드
+//  공식 사용법) — `embedQuery(_:)`/`embedPassage(_:)`로 나눠 노출한다.
+//  `EmbeddingIndexingService`(성경 절 색인)는 `embedPassage`를,
+//  `BibleSemanticSearchService`(사용자 검색어)는 `embedQuery`를 쓴다.
 //
 
 import Foundation
-import NaturalLanguage
+import CoreML
+import Tokenizers
 #if canImport(Accelerate)
 import Accelerate
 #endif
 
 @MainActor
-final class EmbeddingService {
-    static let shared = EmbeddingService()
-
+enum EmbeddingService {
     enum Availability: Equatable {
-        /// 아직 `prepareIfNeeded()`를 호출하지 않았거나 준비 중.
-        case unknown
         case available
-        /// `NLContextualEmbedding(language: .korean)`이 nil을 반환 — 이 기기/OS
-        /// 버전에서 한국어 문장 임베딩 모델 자체가 없다는 뜻.
-        case unsupportedLanguage
-        /// 모델은 있지만 자산 다운로드/로드에 실패(네트워크 없음 등).
-        case assetPreparationFailed(String)
+        case unavailable(reason: String)
     }
 
-    private(set) var availability: Availability = .unknown
+    enum EmbeddingError: Error, CustomStringConvertible {
+        case unavailable(String)
+        case emptyResult
+        case underlyingFailure(String)
 
-    private var embedder: NLContextualEmbedding?
-    private let language: NLLanguage = .korean
-
-    private init() {}
-
-    /// 최초 1회(또는 실패 후 재시도) 호출. 자산이 없으면 다운로드를 시도할 수 있어
-    /// 비동기다 — SearchView.onAppear에서 호출한다.
-    func prepareIfNeeded() async {
-        guard embedder == nil else { return }
-        guard let candidate = NLContextualEmbedding(language: language) else {
-            availability = .unsupportedLanguage
-            return
-        }
-        do {
-            if !candidate.hasAvailableAssets {
-                try await candidate.requestAssets()
+        var description: String {
+            switch self {
+            case .unavailable(let reason): return reason
+            case .emptyResult: return "문장에서 임베딩 벡터를 만들지 못했습니다."
+            case .underlyingFailure(let message): return message
             }
-            try candidate.load()
-            embedder = candidate
-            availability = .available
-        } catch {
-            print("[EmbeddingService] 한국어 임베딩 모델 준비 실패: \(error)")
-            availability = .assetPreparationFailed(error.localizedDescription)
         }
     }
 
-    /// 문장(또는 문단) 전체를 하나의 고정 길이 벡터로 변환한다. `NLContextualEmbedding`은
-    /// 토큰(어절) 단위 벡터를 돌려주므로, 평균 풀링(mean pooling)으로 문장 전체
-    /// 벡터 하나를 만든다 — 트랜스포머 계열 문장 임베딩에서 흔히 쓰는 방식이지만,
-    /// 이 모델이 평균 풀링에 얼마나 적합한지는 실측 전까지 미확인이다.
-    func embed(_ text: String) -> [Float]? {
-        guard let embedder, !text.isEmpty else { return nil }
+    /// `Scripts/convert_multilingual_e5_small.py`가 만든 파일 이름과 반드시 같아야
+    /// 한다 — 바꾸려면 스크립트의 `OUTPUT_MODEL_NAME`/`OUTPUT_TOKENIZER_DIR`도
+    /// 같이 바꿔야 한다.
+    private static let modelResourceName = "MultilingualE5Small"
+    private static let tokenizerResourceName = "MultilingualE5SmallTokenizer"
+    /// 변환 스크립트의 `MAX_LENGTH`와 반드시 같아야 한다 — Core ML 모델이 고정
+    /// 입력 길이로 트레이싱됐기 때문에(가변 길이가 아님), Swift 쪽에서 이 길이에
+    /// 맞춰 패딩/자르기를 해야 한다.
+    private static let maxTokenLength = 128
+    /// intfloat/multilingual-e5-small은 384차원을 낸다(모델 카드 명시) —
+    /// `EmbeddingIndexingService`가 색인 파일 헤더에 이 값을 그대로 기록한다.
+    static let dimension = 384
+
+    private static var cachedModel: MLModel?
+    private static var cachedTokenizer: Tokenizer?
+    private static var cachedPadTokenId: Int?
+    private static var cachedAvailability: Availability?
+
+    static func checkAvailability() async -> Availability {
+        if let cachedAvailability { return cachedAvailability }
+
+        guard let modelURL = Bundle.main.url(forResource: modelResourceName, withExtension: "mlmodelc") else {
+            let result = Availability.unavailable(reason: "임베딩 모델(\(modelResourceName).mlpackage)이 앱에 포함되지 않았습니다. Scripts/convert_multilingual_e5_small.py로 변환한 뒤 Xcode 프로젝트에 추가해주세요.")
+            cachedAvailability = result
+            return result
+        }
+        guard let tokenizerFolderURL = Bundle.main.url(forResource: tokenizerResourceName, withExtension: nil) else {
+            let result = Availability.unavailable(reason: "토크나이저 파일(\(tokenizerResourceName)/)이 앱에 포함되지 않았습니다.")
+            cachedAvailability = result
+            return result
+        }
+
         do {
-            let result = try embedder.embeddingResult(for: text, language: language)
-            var accumulated: [Double]?
-            var tokenCount = 0
-            result.enumerateTokenVectors(in: text.startIndex..<text.endIndex) { vector, _ in
-                if accumulated == nil {
-                    accumulated = vector
-                } else {
-                    for i in 0..<vector.count { accumulated![i] += vector[i] }
-                }
-                tokenCount += 1
-                return true
-            }
-            guard var summed = accumulated, tokenCount > 0 else { return nil }
-            for i in 0..<summed.count { summed[i] /= Double(tokenCount) }
-            return summed.map { Float($0) }
+            let model = try MLModel(contentsOf: modelURL)
+            let tokenizer = try await AutoTokenizer.from(modelFolder: tokenizerFolderURL)
+            cachedModel = model
+            cachedTokenizer = tokenizer
+            // XLM-RoBERTa 계열 표준 pad 토큰 — 실제 vocab에 없으면(이론상 없어야
+            // 정상이지만 방어적으로) 공식 기본 ID인 1로 대체한다.
+            cachedPadTokenId = tokenizer.convertTokenToId("<pad>") ?? 1
+            let result = Availability.available
+            cachedAvailability = result
+            return result
         } catch {
-            print("[EmbeddingService] 임베딩 계산 실패: \(error)")
-            return nil
+            print("[EmbeddingService] 모델/토크나이저 로드 실패(원본 에러, 콘솔 전용): \(error)")
+            let result = Availability.unavailable(reason: "임베딩 모델을 불러오지 못했습니다.")
+            cachedAvailability = result
+            return result
         }
     }
 
-    /// schema.md 4장 확정 방식 — Accelerate(vDSP)로 코사인 유사도 계산.
-    nonisolated func cosineSimilarity(_ a: [Float], _ b: [Float]) -> Float {
+    /// 색인 대상(성경 절 본문)용 — E5 비대칭 검색 규약의 "passage: " 접두사.
+    static func embedPassage(_ text: String) async throws -> [Float] {
+        try await embed(withPrefix: "passage: ", text: text)
+    }
+
+    /// 사용자 검색어용 — E5 비대칭 검색 규약의 "query: " 접두사.
+    static func embedQuery(_ text: String) async throws -> [Float] {
+        try await embed(withPrefix: "query: ", text: text)
+    }
+
+    private static func embed(withPrefix prefix: String, text: String) async throws -> [Float] {
+        let availability = await checkAvailability()
+        guard case .available = availability, let model = cachedModel, let tokenizer = cachedTokenizer, let padTokenId = cachedPadTokenId else {
+            if case .unavailable(let reason) = availability {
+                throw EmbeddingError.unavailable(reason)
+            }
+            throw EmbeddingError.unavailable("임베딩 모델을 사용할 수 없습니다.")
+        }
+
+        let trimmed = text.trimmingCharacters(in: .whitespacesAndNewlines)
+        guard !trimmed.isEmpty else { throw EmbeddingError.emptyResult }
+
+        do {
+            var tokenIds = tokenizer.encode(text: prefix + trimmed)
+            if tokenIds.count > maxTokenLength {
+                tokenIds = Array(tokenIds.prefix(maxTokenLength))
+            }
+            let actualCount = tokenIds.count
+            let paddingCount = maxTokenLength - actualCount
+
+            let inputIdsArray = try MLMultiArray(shape: [1, NSNumber(value: maxTokenLength)], dataType: .int32)
+            let attentionMaskArray = try MLMultiArray(shape: [1, NSNumber(value: maxTokenLength)], dataType: .int32)
+            for i in 0..<actualCount {
+                inputIdsArray[i] = NSNumber(value: tokenIds[i])
+                attentionMaskArray[i] = NSNumber(value: 1)
+            }
+            for i in 0..<paddingCount {
+                inputIdsArray[actualCount + i] = NSNumber(value: padTokenId)
+                attentionMaskArray[actualCount + i] = NSNumber(value: 0)
+            }
+
+            let inputProvider = try MLDictionaryFeatureProvider(dictionary: [
+                "input_ids": MLFeatureValue(multiArray: inputIdsArray),
+                "attention_mask": MLFeatureValue(multiArray: attentionMaskArray),
+            ])
+            let output = try await model.prediction(from: inputProvider)
+            guard let embeddingArray = output.featureValue(for: "embedding")?.multiArrayValue else {
+                throw EmbeddingError.emptyResult
+            }
+            var vector = [Float](repeating: 0, count: dimension)
+            for i in 0..<min(dimension, embeddingArray.count) {
+                vector[i] = embeddingArray[i].floatValue
+            }
+            return vector
+        } catch let error as EmbeddingError {
+            throw error
+        } catch {
+            // [2026-08-19] "작업을 완료할 수 없습니다 (Swift...)" 문제와 같은
+            // 원인 방지 — Core ML/Tokenizers가 던지는 에러의 원문은 콘솔에만
+            // 남기고, 화면엔 영어 타입명 없는 문구만 보낸다.
+            print("[EmbeddingService] 임베딩 실패(원본 에러, 콘솔 전용): \(error)")
+            throw EmbeddingError.underlyingFailure("문장을 벡터로 변환하는 중 문제가 발생했습니다.")
+        }
+    }
+
+    // MARK: - 코사인 유사도
+
+    #if canImport(Accelerate)
+    static func cosineSimilarity(_ a: [Float], _ b: [Float]) -> Float {
         guard a.count == b.count, !a.isEmpty else { return 0 }
-        #if canImport(Accelerate)
         var dot: Float = 0
-        var sumSquaresA: Float = 0
-        var sumSquaresB: Float = 0
         vDSP_dotpr(a, 1, b, 1, &dot, vDSP_Length(a.count))
+        var sumSquaresA: Float = 0
         vDSP_svesq(a, 1, &sumSquaresA, vDSP_Length(a.count))
+        var sumSquaresB: Float = 0
         vDSP_svesq(b, 1, &sumSquaresB, vDSP_Length(b.count))
-        let denominator = (sumSquaresA.squareRoot()) * (sumSquaresB.squareRoot())
+        let denominator = (sumSquaresA * sumSquaresB).squareRoot()
         guard denominator > 0 else { return 0 }
         return dot / denominator
-        #else
-        // Accelerate가 없는 빌드 환경(이론상 발생하지 않아야 하지만 방어적으로 순수
-        // Swift 폴백을 남긴다).
-        var dot: Float = 0, normA: Float = 0, normB: Float = 0
+    }
+    #else
+    static func cosineSimilarity(_ a: [Float], _ b: [Float]) -> Float {
+        guard a.count == b.count, !a.isEmpty else { return 0 }
+        var dot: Float = 0, sumSquaresA: Float = 0, sumSquaresB: Float = 0
         for i in 0..<a.count {
             dot += a[i] * b[i]
-            normA += a[i] * a[i]
-            normB += b[i] * b[i]
+            sumSquaresA += a[i] * a[i]
+            sumSquaresB += b[i] * b[i]
         }
-        let denominator = normA.squareRoot() * normB.squareRoot()
+        let denominator = (sumSquaresA * sumSquaresB).squareRoot()
         guard denominator > 0 else { return 0 }
         return dot / denominator
-        #endif
     }
+    #endif
 }

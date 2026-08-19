@@ -43,8 +43,10 @@ public enum BibleResearchSchema {
         // 구조 인덱스 (ReferenceIndex.swift)
         ThemeIndex.self, ThemeLink.self, KeywordOccurrence.self, PersonIndex.self,
         PlaceIndex.self, TimelineEvent.self,
-        // 임베딩 / 번역본 레지스트리
-        EmbeddingChunk.self, TranslationRegistry.self,
+        // [2026-08-19 삭제] EmbeddingChunk.self — 의미검색(AI) 기능 삭제(사용자
+        // 요청)와 함께 뺐다. Models/Embedding.swift 상단 주석 참고.
+        // 번역본 레지스트리
+        TranslationRegistry.self,
         // 구간 주석 — 형광펜/표시/관주 (VerseAnnotations.swift) — 2026-08-08 신설
         VerseHighlight.self, VerseCrossReference.self,
         // 구간 주석 — 특정 표현 부연설명 "메모"(VerseAnnotations.swift) — 2026-08-11 신설
