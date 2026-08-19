@@ -148,25 +148,42 @@ struct SidebarNavigationView: View {
                 // 관계 행과 같은 이유로, `selection`(AppSection 전용) 대상에서
                 // 빠져야 하기 때문이다(탭하면 직접 `openQuickItem(_:)`으로
                 // 새 창을 열거나 다른 섹션으로 전환한다).
+                // [2026-08-19 추가] 사용자 요청 — "사이드바 메뉴 밑에 '고정됨'
+                // 윗부분 구분선 추가." 위 메뉴(AppSection)와 아래 고정됨/최근
+                // 목록 사이를 시각적으로 나눈다. 셋 다 비어 있으면(아직 고정한
+                // 것도, 최근 활동도 없음) 나눌 게 없으니 표시하지 않는다.
+                if !pinnedQuickItems.isEmpty || !thisWeekQuickItems.isEmpty || !olderQuickItems.isEmpty {
+                    Divider()
+                }
                 if !pinnedQuickItems.isEmpty {
-                    Section("고정됨") {
+                    Section {
                         ForEach(pinnedQuickItems) { item in
                             quickItemRow(item)
                         }
+                    } header: {
+                        // [2026-08-19 추가] 사용자 요청 — "고정됨/오늘/이번주/
+                        // 오래됨... 관련 항목들은 메뉴보다 살짝 흐리게." 위
+                        // AppSection 메뉴(`Label(section.title, ...)`, 기본
+                        // primary 색)보다 눈에 덜 띄도록 헤더도 `.secondary`로.
+                        Text("고정됨").foregroundStyle(.secondary)
                     }
                 }
                 if !thisWeekQuickItems.isEmpty {
-                    Section("이번 주") {
+                    Section {
                         ForEach(thisWeekQuickItems) { item in
                             quickItemRow(item)
                         }
+                    } header: {
+                        Text("이번 주").foregroundStyle(.secondary)
                     }
                 }
                 if !olderQuickItems.isEmpty {
-                    Section("이전") {
+                    Section {
                         ForEach(olderQuickItems) { item in
                             quickItemRow(item)
                         }
+                    } header: {
+                        Text("이전").foregroundStyle(.secondary)
                     }
                 }
             }
@@ -385,6 +402,11 @@ struct SidebarNavigationView: View {
         } label: {
             Label(item.title, systemImage: item.systemImage)
                 .lineLimit(1)
+                // [2026-08-19 추가] 사용자 요청 — "고정됨/오늘/이번주/오래됨...
+                // 관련 항목들은 메뉴보다 살짝 흐리게." 위 AppSection 메뉴는
+                // 기본(primary) 색 그대로 두고, 이 보조 목록만 `.secondary`로
+                // 낮춰 위계를 구분한다.
+                .foregroundStyle(.secondary)
         }
         // "태그 관계" 행과 같은 이유로 `.plain` — 이 Button들은 `selection`
         // 대상이 아니라 List 기본 버튼 틴트가 어울리지 않는다.

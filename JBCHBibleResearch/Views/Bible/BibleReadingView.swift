@@ -40,6 +40,11 @@ struct BibleReadingView: View {
     /// 명시한 호출은 "명확한 사용자 의도"로 보고 마지막 위치를 무시한다).
     var initialBook: Book? = nil
     var initialChapter: Int? = nil
+    /// [2026-08-19 추가] 사용자 요청 — "검색 결과중 - 성경구절을 클릭하면
+    /// 해당하는 절까지 스크롤 이동해서 잠시 하이라이트 표시해줄것." nil이면
+    /// (기존 호출부 전부) 동작이 전혀 바뀌지 않는다 — `SearchView.verseRow`만
+    /// 이 값을 넘긴다.
+    var initialVerse: Int? = nil
     /// [2026-08-08 추가] 사용자 요청 — macOS에서 "성경 조회 새 창"으로 연 보조
     /// 창은 관련 콘텐츠(인스펙터)/조회 이력 아이콘을 빼야 한다. 기본값 true는
     /// 기존 호출부(사이드바/탭바에서 매개변수 없이 그냥 `BibleReadingView()`로
@@ -57,6 +62,13 @@ struct BibleReadingView: View {
                     .onAppear {
                         let vm = BibleReadingViewModel(modelContext: modelContext, initialBook: initialBook, initialChapter: initialChapter)
                         vm.onAppear()
+                        // [2026-08-19 추가] `onAppear()`가 끝난 시점엔 이 장의
+                        // 절 목록이 이미 로드돼 있다(`reloadVerses()`가 동기
+                        // 호출이라 — `BibleReadingViewModel.selectBook` 참고) —
+                        // 그래서 여기서 바로 강조를 걸어도 안전하다.
+                        if let initialVerse {
+                            vm.highlightVerseTemporarily(initialVerse)
+                        }
                         viewModel = vm
                     }
             }
@@ -434,14 +446,17 @@ private struct BibleReadingContentView: View {
         memoBeingCreated = memo
     }
 
-    /// [2026-08-08 추가] 관주 팝오버에서 대상 구절을 탭했을 때 — 그 책/장으로
-    /// 이동한다. 정확한 절 위치로 스크롤까지 맞추는 것은 이번 구현 범위 밖이다
-    /// (README "이어서 17" 참고) — `TranslationColumnView.centerVerseID`가
-    /// private이라 밖에서 직접 지정할 방법이 없고, 아이폰 스와이프 정렬처럼
-    /// 새 상태 전달 경로를 또 만들 만큼 이 기능에 필수적이지 않다고 판단했다.
+    /// [2026-08-08 추가, 2026-08-19 보완] 관주 팝오버에서 대상 구절을 탭했을 때
+    /// — 그 책/장으로 이동한다. [2026-08-19] 정확한 절로 스크롤+강조하는 것은
+    /// 당시엔 범위 밖이었다("`TranslationColumnView.centerVerseID`가 private이라
+    /// 밖에서 직접 지정할 방법이 없고") — 검색 결과 탭 기능("검색 결과중 -
+    /// 성경구절을 클릭하면 해당하는 절까지 스크롤 이동해서 잠시 하이라이트
+    /// 표시해줄것")을 구현하며 그 경로(`BibleReadingViewModel.
+    /// highlightVerseTemporarily`)가 이미 생겼으므로, 여기서도 그대로 재사용한다.
     private func jumpToCrossReferenceTarget(_ target: BibleVerseRef) {
         guard let book = BooksProvider.shared.book(id: target.bookId) else { return }
         viewModel.selectBook(book, chapter: target.chapter)
+        viewModel.highlightVerseTemporarily(target.verse)
     }
 
     /// [2026-08-11 추가] 사용자 요청 — "[관련 내용]을 클릭하면 팝업으로 띄워 해당
@@ -587,6 +602,12 @@ private struct BibleReadingContentView: View {
                     localizedBookChapterLabel: column.localizedBookChapterLabel,
                     verses: column.verses,
                     errorDescription: column.errorDescription,
+                    // [2026-08-19 추가] 사용자 요청 — "검색 결과중 - 성경구절을
+                    // 클릭하면 해당하는 절까지 스크롤 이동해서 잠시 하이라이트
+                    // 표시해줄것." 모든 컬럼(번역본)에 같은 값을 넘긴다 — 검색
+                    // 결과는 특정 번역본을 지정하지 않으므로, 지금 보이는 컬럼
+                    // 전부에서 그 절이 강조된다.
+                    highlightedVerse: viewModel.highlightedVerse,
                     onCreateMemo: createMemo,
                     selectedVerses: viewModel.selectedVerses,
                     onSelectSingleVerse: viewModel.selectSingleVerse,
@@ -632,6 +653,12 @@ private struct BibleReadingContentView: View {
                     localizedBookChapterLabel: column.localizedBookChapterLabel,
                     verses: column.verses,
                     errorDescription: column.errorDescription,
+                    // [2026-08-19 추가] 사용자 요청 — "검색 결과중 - 성경구절을
+                    // 클릭하면 해당하는 절까지 스크롤 이동해서 잠시 하이라이트
+                    // 표시해줄것." 모든 컬럼(번역본)에 같은 값을 넘긴다 — 검색
+                    // 결과는 특정 번역본을 지정하지 않으므로, 지금 보이는 컬럼
+                    // 전부에서 그 절이 강조된다.
+                    highlightedVerse: viewModel.highlightedVerse,
                     onCreateMemo: createMemo,
                     selectedVerses: viewModel.selectedVerses,
                     onSelectSingleVerse: viewModel.selectSingleVerse,

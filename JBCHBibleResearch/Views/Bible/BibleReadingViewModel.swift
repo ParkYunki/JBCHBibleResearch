@@ -47,6 +47,30 @@ final class BibleReadingViewModel {
     private(set) var selectedVerses: Set<Int> = []
     var hasVerseSelection: Bool { !selectedVerses.isEmpty }
 
+    /// [2026-08-19 추가] 사용자 요청 — "검색 결과중 - 성경구절을 클릭하면
+    /// 해당하는 절까지 스크롤 이동해서 잠시 하이라이트 표시해줄것." 실제
+    /// 스크롤/강조 표시는 `TranslationColumnView.highlightedVerse`가 맡는다 —
+    /// 그 프로퍼티는 원래 이 용도로 미리 마련돼 있었지만(그쪽 `VerseRow.
+    /// isHighlighted` 상단 주석 참고) 실제로 연결된 적은 없었다. 이 뷰모델은
+    /// "지금 몇 절이 강조 대상인지"만 들고 있고, 몇 초 뒤 자동으로 끄는 타이머도
+    /// 여기서 관리한다.
+    private(set) var highlightedVerse: Int?
+    private var highlightClearWorkItem: DispatchWorkItem?
+    private static let highlightDuration: TimeInterval = 2.5
+
+    /// 이 절을 몇 초간만 강조 표시한다. 이미 다른 절이 강조돼 있었다면(또는 같은
+    /// 절의 이전 타이머가 아직 안 끝났다면) 그 타이머를 취소하고 새로 시작한다.
+    func highlightVerseTemporarily(_ verse: Int) {
+        highlightClearWorkItem?.cancel()
+        highlightedVerse = verse
+        let workItem = DispatchWorkItem { [weak self] in
+            guard let self, self.highlightedVerse == verse else { return }
+            self.highlightedVerse = nil
+        }
+        highlightClearWorkItem = workItem
+        DispatchQueue.main.asyncAfter(deadline: .now() + Self.highlightDuration, execute: workItem)
+    }
+
     // MARK: - 이 장의 관련 콘텐츠(개요/메모/연구문서) — 2026-08-08 추가
     //
     // 사용자 요청 — "성경 장을 읽을 때 이 성경의 개요와 메모, 연구문서가 있다는

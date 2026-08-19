@@ -43,6 +43,11 @@ struct OriginalTextInfoView: View {
 
     @Environment(\.dismiss) private var dismiss
     @Environment(\.modelContext) private var modelContext
+    /// [2026-08-19 추가] 사용자 보고 — "히브리어/헬라어가 파란색인데, 야간에는
+    /// 배경이 검은색이어서 눈에 잘 안보임." 아래 `hebrewTextColor`가 라이트
+    /// 모드 스크린샷에 맞춘 진한 남색 고정값이었다 — 다크모드에서 검은 배경과
+    /// 대비가 부족했다. 라이트/다크를 구분해 색을 고르기 위해 필요하다.
+    @Environment(\.colorScheme) private var colorScheme
     @State private var words: [OriginalWordInfo] = []
     /// [2026-08-13 추가] 사용자 요청 — "타이틀 아래 원문 정보 가장 상단에 해당
     /// 구절(개역한글 KRV) 텍스트를 보여줄것." 번들 기본 번역본(KRV=개역한글,
@@ -284,9 +289,14 @@ struct OriginalTextInfoView: View {
     }
 
     /// 스크린샷의 원어 텍스트 파란색(iOS 기본 System Blue보다 살짝 진하고
-    /// 채도 높은 남색 계열)에 맞춘 커스텀 색.
+    /// 채도 높은 남색 계열)에 맞춘 커스텀 색. [2026-08-19 수정] 사용자 보고 —
+    /// "야간에는 배경이 검은색이어서 눈에 잘 안보임." 이 진한 남색은 흰 배경
+    /// 기준으로 고른 값이라 다크모드 검은 배경에서는 대비가 부족했다 — 다크
+    /// 모드에서는 더 밝고 채도 낮은 블루를 대신 쓴다.
     private var hebrewTextColor: Color {
-        Color(red: 0.09, green: 0.25, blue: 0.78)
+        colorScheme == .dark
+            ? Color(red: 0.55, green: 0.7, blue: 1.0)
+            : Color(red: 0.09, green: 0.25, blue: 0.78)
     }
 
     /// [2026-08-19 신설] 사용자 요청 — "히브리어 기본폰트(SILEOT)는 히브리어

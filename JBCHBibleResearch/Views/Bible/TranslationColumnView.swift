@@ -255,6 +255,18 @@ struct TranslationColumnView: View {
             .padding()
         }
         .scrollPosition(id: $centerVerseID, anchor: .center)
+        // [2026-08-19 추가] 검색 결과 등에서 이 화면이 처음 만들어질 때부터
+        // 이미 `highlightedVerse`가 채워져 있는 경우 — 예: 검색 결과를 탭하면
+        // `BibleReadingView`가 새로 생기면서 `highlightedVerse`를 첫 렌더링
+        // 시점부터 갖고 시작한다. `.onChange(of: highlightedVerse)`(아래)는
+        // "그 이후의 변화"에만 반응하고 최초 값에는 반응하지 않으므로(SwiftUI
+        // 기본 동작), 최초 진입 케이스는 `.onAppear`에서 애니메이션 없이
+        // 바로 맞춰준다.
+        .onAppear {
+            if let highlightedVerse {
+                centerVerseID = highlightedVerse
+            }
+        }
         .onChange(of: centerVerseID) { _, newValue in
             reportCenterVerseIfNeeded(newValue)
         }
@@ -271,6 +283,18 @@ struct TranslationColumnView: View {
         .onChange(of: pendingCenterAlignment) { _, newValue in
             guard let newValue else { return }
             centerVerseID = newValue
+        }
+        // [2026-08-19 추가] 사용자 요청 — "검색 결과중 - 성경구절을 클릭하면
+        // 해당하는 절까지 스크롤 이동해서 잠시 하이라이트 표시해줄것."
+        // `highlightedVerse`가 새로 설정되면(검색 결과 탭 등) 그 절로 부드럽게
+        // 스크롤한다 — 실제 강조 표시(배경색)는 `VerseRow.isHighlighted`가
+        // 맡고, 몇 초 뒤 자동으로 꺼지는 타이머는 `BibleReadingViewModel.
+        // highlightVerseTemporarily`가 관리한다(여기선 스크롤만 담당).
+        .onChange(of: highlightedVerse) { _, newValue in
+            guard let newValue else { return }
+            withAnimation(.easeInOut(duration: Self.scrollAnimationDuration)) {
+                centerVerseID = newValue
+            }
         }
         // [2026-08-08 추가] 책/장이 바뀌면(=이 레이블 문자열이 바뀌면) 이전 장의
         // 중앙 절 id를 그대로 들고 있지 않도록 리셋한다 — 안 그러면 새 장에
@@ -319,6 +343,15 @@ struct TranslationColumnView: View {
     private func resetForChapterChange() {
         guardReleaseWorkItem?.cancel()
         isProgrammaticScroll = false
+        // [2026-08-19 추가] 관주/검색 결과로 "다른 장으로 이동 + 특정 절 강조"가
+        // 동시에 일어나는 경우(`highlightedVerse`가 이미 새 값으로 설정된 채
+        // 이 장 전환이 일어남) — 여기서 무조건 nil로 되돌리면, 곧이어 그 절로
+        // 맞출 `centerVerseID`가 초기화되며 스크롤이 무효화될 수 있다. 이때는
+        // 리셋을 건너뛴다 — 장이 바뀌었어도 `.onChange(of: highlightedVerse)`가
+        // 올바른 절로 맞춰준다. `highlightedVerse`는 이미 최종값으로 설정된
+        // 뒤에야 뷰가 다시 그려지므로(같은 뷰모델 메서드 안에서 순서대로
+        // 대입), 이 두 onChange 중 어느 게 먼저 실행되는지와 무관하게 안전하다.
+        guard highlightedVerse == nil else { return }
         centerVerseID = nil
     }
 }

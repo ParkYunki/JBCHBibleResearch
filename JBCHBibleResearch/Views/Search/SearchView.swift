@@ -496,7 +496,11 @@ private struct SearchContentView: View {
         NavigationLink {
             BibleReadingView(
                 initialBook: BooksProvider.shared.book(id: result.bookId),
-                initialChapter: result.chapter
+                initialChapter: result.chapter,
+                // [2026-08-19 추가] 사용자 요청 — "검색 결과중 - 성경구절을
+                // 클릭하면 해당하는 절까지 스크롤 이동해서 잠시 하이라이트
+                // 표시해줄것."
+                initialVerse: result.verse
             )
         } label: {
             rowLabel(
