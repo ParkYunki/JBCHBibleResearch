@@ -35,6 +35,28 @@ final class BooksProvider {
 
     func book(id: Int) -> Book? { byId[id] }
 
+    /// [2026-08-20 추가] 사용자 요청 — "성경 이전 장: 창세기를 제외하고 각
+    /// 성경의 1장에서 이전장을 클릭하면 전 성경(前, 이전 책) 마지막 장으로
+    /// 이동. 성경 다음장: 요한계시록을 제외하고 각 성경의 마지막 장에서
+    /// 다음장을 클릭하면 다음 성경 1장으로 이동." `books`가 이미 orderIndex
+    /// 순으로 정렬돼 있으므로(위 프로퍼티 주석) 배열 인덱스만 앞뒤로 옮기면
+    /// 된다. 첫/마지막 책(창세기/요한계시록)에서는 nil — 그 경계에서는 더
+    /// 넘어갈 책이 없다는 뜻이라, 호출부(`BibleReadingViewModel.previousChapter`/
+    /// `nextChapter`)가 nil이면 아무 것도 하지 않는다.
+    func book(after book: Book) -> Book? {
+        guard let index = books.firstIndex(where: { $0.bookId == book.bookId }), index + 1 < books.count else {
+            return nil
+        }
+        return books[index + 1]
+    }
+
+    func book(before book: Book) -> Book? {
+        guard let index = books.firstIndex(where: { $0.bookId == book.bookId }), index > 0 else {
+            return nil
+        }
+        return books[index - 1]
+    }
+
     /// 책 그리드 피커의 검색창(2026-08-06 추가) — `Book.matches(query:)`(초성 검색
     /// 포함, Book+Search.swift 참고)로 필터링한다.
     func search(query: String) -> [Book] {

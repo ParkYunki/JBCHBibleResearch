@@ -331,7 +331,9 @@ private struct BibleReadingContentView: View {
                     // 동작 두 경로로 처리한다.
                     WordSummaryEditorView(
                         summary: wordSummaryBeingEdited, presentationContext: .contextual,
-                        externalProxy: wordSummaryProxy
+                        externalProxy: wordSummaryProxy,
+                        onRequestVerseZoom: { isVerseZoomPresented = true },
+                        onRequestOriginalTextInfo: { isOriginalTextInfoPresented = true }
                     )
                 } else {
                     // [2026-08-15 변경] `onJumpToOutline` 콜백을 없앴다 — 사용자
@@ -916,12 +918,29 @@ private struct BibleReadingContentView: View {
 
     private var chapterNavigationControls: some View {
         HStack(spacing: 8) {
+            // [2026-08-20 추가] 사용자 요청 — "이전 장 이동하는 화살표 옆에
+            // 이전에 찾아봤던 장 바로가기 아이콘 추가(history.back)." 바로
+            // 옆의 `chevron.left`(항상 -1장, `previousChapter`)와는 다른
+            // 개념이라 아이콘도 다르게 뒀다 — 브라우저 뒤로가기와 같은
+            // `arrow.uturn.backward`(원 모양 화살표)를 써서 "인접 장 이동"과
+            // "임의 위치로 되짚어가기"가 시각적으로도 구분되게 했다.
+            // `viewModel.canGoBackInHistory`가 false면 갈 곳이 없다는 뜻이라
+            // 비활성화한다.
+            Button {
+                viewModel.goBackInHistory()
+            } label: {
+                Image(systemName: "arrow.uturn.backward")
+            }
+            .disabled(!viewModel.canGoBackInHistory)
+            .help("이전에 보던 위치로 돌아가기")
+
             Button {
                 viewModel.previousChapter()
             } label: {
                 Image(systemName: "chevron.left")
             }
-            .disabled(viewModel.selectedChapter <= 1)
+            .disabled(viewModel.selectedChapter <= 1 && BooksProvider.shared.book(before: viewModel.selectedBook) == nil)
+            .help("이전 장")
 
             BookChapterPicker(
                 books: BooksProvider.shared.books,
@@ -936,6 +955,22 @@ private struct BibleReadingContentView: View {
             } label: {
                 Image(systemName: "chevron.right")
             }
+            .disabled(
+                viewModel.selectedChapter >= viewModel.selectedBook.chapterCount
+                    && BooksProvider.shared.book(after: viewModel.selectedBook) == nil
+            )
+            .help("다음 장")
+
+            // [2026-08-20 추가] 사용자 요청 — "다음 장 이동하는 화살표 옆에
+            // 앞에서 온 성경 장을 바로가는 아이콘 추가(history.forward())."
+            // 위 뒤로가기 버튼과 대칭 — `arrow.uturn.forward`.
+            Button {
+                viewModel.goForwardInHistory()
+            } label: {
+                Image(systemName: "arrow.uturn.forward")
+            }
+            .disabled(!viewModel.canGoForwardInHistory)
+            .help("뒤로가기 이전 위치로 다시 가기")
         }
         // [2026-08-08 추가] 툴바 principal 자리(폭 제한)에서 상단 세이프에어리어
         // 인셋(화면 전체 너비)으로 옮기면서 가운데 정렬을 유지하려고 추가.

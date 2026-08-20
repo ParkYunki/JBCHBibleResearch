@@ -537,6 +537,24 @@ private struct AppearanceSettingsTab: View {
                     )
                 }
 
+                // [2026-08-20 추가] 사용자 요청 — "본문색상 위 절 간격 조절
+                // 기능추가". `bibleLineSpacing`(위 compactSizeControl "줄간격",
+                // 한 절 안에서 줄바꿈될 때의 간격)과는 다른 값이다 — 이건 절과
+                // 절 사이 간격(`TranslationColumnView.columnScrollView`의
+                // `LazyVStack(spacing:)`)이라 별도 컨트롤로 뒀다. 범위는 위
+                // "줄간격"과 같은 0...16 대신 절 사이는 더 넓게 벌릴 수 있어야
+                // 해서 0...30으로 잡았다.
+                HStack {
+                    Text("절 간격")
+                    Spacer()
+                    Stepper(value: $settings.bibleVerseSpacing, in: 0...30, step: 1) {
+                        Text("\(Int(settings.bibleVerseSpacing))pt")
+                            .foregroundStyle(.secondary)
+                            .monospacedDigit()
+                    }
+                    .fixedSize()
+                }
+
                 // ⚠️ [팔레트 제한, 근거] SwiftUI `Color`에서 값을 다시 hex로 뽑아내는
                 // 안전한 공개 API가 없다(Color+Hex.swift 상단 주석 참고) — 이 프로젝트가
                 // 메모 텍스트 색상(RichTextEditor)에서 이미 같은 이유로 자유

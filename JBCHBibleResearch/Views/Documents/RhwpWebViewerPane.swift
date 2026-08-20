@@ -102,6 +102,15 @@ import WebKit
 /// 구성된다.
 struct RhwpWebViewerPane: View {
     let documentData: Data
+    /// [2026-08-20 추가] 사용자 요청 — "hwp 한글파일 클릭시 pdf 탭으로 열리는데,
+    /// 해당 내용으로 바로 갈 수 있도록 검색어 자동 하이라이트 기능 추가하고,
+    /// 모든 뷰어에 동일하게 추가할 것." `HWPViewerPane`(네이티브 탭)에만 있던
+    /// 배선을 이 웹 뷰어 탭에도 똑같이 추가한다 — 문서가 `.ready` 상태가 된
+    /// 직후(아래 `.onChange`) `controller.searchQuery`에 대입하면
+    /// `RhwpViewerController.searchQuery`의 `didSet`이 알아서 검색을 실행하고
+    /// (일치 개수가 1개 이상이면) 첫 매치로 스크롤까지 한다 — 사용자가 직접
+    /// 검색창에 입력하는 것과 완전히 같은 경로다.
+    var initialSearchText: String? = nil
     /// [2026-08-16 추가] `DocumentViewerView.reportViewerAvailability` 참고 —
     /// `controller.state`가 `.ready`/`.failed`로 확정될 때마다 보고한다.
     var onAvailabilityChange: ((Bool) -> Void)? = nil
@@ -121,6 +130,9 @@ struct RhwpWebViewerPane: View {
                 switch newState {
                 case .ready:
                     onAvailabilityChange?(true)
+                    if let initialSearchText, !initialSearchText.isEmpty {
+                        controller.searchQuery = initialSearchText
+                    }
                 case .failed:
                     onAvailabilityChange?(false)
                 case .idle, .loadingViewer, .loadingDocument:

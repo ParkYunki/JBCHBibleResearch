@@ -469,6 +469,7 @@ struct DocumentViewerView: View {
                             .accessibilityHidden(hwpViewerMode != .hwpSwiftNative)
                         RhwpWebViewerPane(
                             documentData: hwpFileData,
+                            initialSearchText: initialSearchText,
                             onAvailabilityChange: { reportViewerAvailability($0, for: .rhwpWeb) }
                         )
                             .opacity(hwpViewerMode == .rhwpWeb ? 1 : 0)
@@ -478,6 +479,7 @@ struct DocumentViewerView: View {
                             documentData: hwpFileData,
                             preConvertedDocument: viewModel.convertedPDFDocument,
                             additionalSearchTerms: verseSearchLiteralTerms(for:),
+                            initialSearchText: initialSearchText,
                             onAvailabilityChange: { reportViewerAvailability($0, for: .pdfConverted) }
                         )
                             .opacity(hwpViewerMode == .pdfConverted ? 1 : 0)
@@ -1421,6 +1423,17 @@ private struct HWPToPDFPane: View {
     /// 대신 넘겨준다 — `DocumentViewerView.originalPane`의 `.hwp, .hwpx`
     /// 케이스에서 이 값을 채워 전달한다.
     var additionalSearchTerms: (String) -> [String] = { _ in [] }
+    /// [2026-08-20 추가] 사용자 요청 — "hwp 한글파일 클릭시 pdf 탭으로 열리는데,
+    /// 해당 내용으로 바로 갈 수 있도록 검색어 자동 하이라이트 기능 추가하고,
+    /// 모든 뷰어에 동일하게 추가할 것." 지금까지는 `HWPViewerPane`(네이티브
+    /// 탭)에만 `initialSearchText`를 배선해 뒀는데, 정작 네이티브 뷰어 로드가
+    /// 실패하면 `reportViewerAvailability`가 이 PDF 변환 탭으로 자동
+    /// 전환한다(hwp-swift 파싱 에러가 실기기에서 보고된 적 있다, 이 파일
+    /// 상단 조사 이력 참고) — 그 순간 검색어 하이라이트가 사라지는 게
+    /// 이번 신고의 실제 원인이다. `pdfSearchController.query = initialSearchText`
+    /// (`DocumentViewerView.setUpIfNeeded()`가 원본 `.pdf`/`.docx` 탭에 쓰는
+    /// 것과 같은 패턴)로 이 탭 전용 컨트롤러에도 똑같이 흘려보낸다.
+    var initialSearchText: String? = nil
     /// [2026-08-16 추가] `HWPViewerPane.onAvailabilityChange`와 같은 목적 —
     /// `hwpViewerModeToggle` 상단 주석 참고.
     var onAvailabilityChange: ((Bool) -> Void)? = nil
@@ -1538,6 +1551,7 @@ private struct HWPToPDFPane: View {
 
         if let preConvertedDocument {
             pdfDocument = preConvertedDocument
+            seedInitialSearchTextIfNeeded()
             onAvailabilityChange?(true)
             return
         }
@@ -1552,10 +1566,18 @@ private struct HWPToPDFPane: View {
                 return
             }
             pdfDocument = pdf
+            seedInitialSearchTextIfNeeded()
             onAvailabilityChange?(true)
         } catch {
             errorMessage = "\(error)"
             onAvailabilityChange?(false)
         }
+    }
+
+    /// 위 `initialSearchText` 프로퍼티 주석 참고 — `pdfDocument`가 막 채워진
+    /// 두 지점(사전 변환본 재사용/즉석 변환 성공) 모두에서 호출한다.
+    private func seedInitialSearchTextIfNeeded() {
+        guard let initialSearchText, !initialSearchText.isEmpty else { return }
+        pdfSearchController.query = initialSearchText
     }
 }

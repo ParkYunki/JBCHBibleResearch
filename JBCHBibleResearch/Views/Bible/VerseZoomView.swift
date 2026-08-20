@@ -844,11 +844,15 @@ struct VerseZoomView: View {
         return .custom(settings.bibleFontName, size: 17)
     }
 
-    /// [2026-08-19 신설] 위 `bibleSwiftUIFont`와 같은 17pt 고정 크기(확대보기
-    /// 성경 구절 크기와 동일하게 맞추라는 기존 요청, `hanjaGlossCell` 상단 주석
-    /// 참고), 이름만 `UserSettingsStore.hanjaFontName`(기본값 조선궁서체)을 따른다.
+    /// [2026-08-19 신설, 2026-08-20 크기 확대] 원래 위 `bibleSwiftUIFont`와 같은
+    /// 17pt 고정 크기(확대보기 성경 구절 크기와 동일하게 맞추라는 기존 요청)
+    /// 였다 — 이름은 계속 `UserSettingsStore.hanjaFontName`(기본값
+    /// 조선궁서체)을 따르되, 사용자 요청("한자 뜻풀이에서 한문을 좀더 키워서
+    /// 강조할것")에 맞춰 크기를 26pt로 키우고 굵기를 bold로 올렸다 — 한글
+    /// (뜻/음, `bibleSwiftUIFont` 그대로 17pt)보다 한자(원문 글자) 자체가
+    /// 시각적으로 먼저 눈에 들어와야 "강조"라는 취지에 맞는다고 판단했다.
     private var hanjaSwiftUIFont: Font {
-        UserSettingsStore.shared.hanjaFont(size: 17)
+        UserSettingsStore.shared.hanjaFont(size: 26).weight(.bold)
     }
 
     private var annotationStatusBar: some View {
@@ -871,9 +875,16 @@ struct VerseZoomView: View {
             // 확인: "삭제기능은 편집모드에 관주버튼 누르면 나오는 관주연결
             // 팝업에서의 리스트에 각 항목별로 (x)를 붙여 삭제기능을 옮길것."
             if !crossReferences.isEmpty {
+                // [2026-08-20 변경] 사용자 요청 — "관주 구절을 일반크기로 키울
+                // 것." 이 블록 전체가 부모 `annotationStatusBar`의
+                // `.font(.caption)`(아래) 아래 있어 원래는 캡션 크기였는데,
+                // 칩 텍스트에 별도로 `.footnote`를 얹어 그보다도 더 작게
+                // 나왔다 — `.body`(시스템 "일반" 텍스트 크기)로 바꿔 아이콘도
+                // 같이 키웠다. 부모의 `.caption`은 여전히 다른 자식(개인
+                // 묵상/관련 내용 라벨 등)에 적용되므로 그대로 둔다.
                 HStack(alignment: .top, spacing: 4) {
                     Image(systemName: "link.circle.fill")
-                        .font(.footnote)
+                        .font(.body)
                     FlowLayout(spacing: 6) {
                         ForEach(Array(crossReferenceInlineSegments.enumerated()), id: \.offset) { _, segment in
                             Button {
@@ -883,7 +894,7 @@ struct VerseZoomView: View {
                                 dismiss()
                             } label: {
                                 Text(segment.label)
-                                    .font(.footnote)
+                                    .font(.body)
                                     .underline()
                             }
                             .buttonStyle(.plain)

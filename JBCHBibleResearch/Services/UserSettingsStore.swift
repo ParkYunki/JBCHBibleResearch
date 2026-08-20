@@ -45,6 +45,7 @@ final class UserSettingsStore {
         static let bibleBodyFontSize = "settings.bible.bodyFontSize"
         static let bibleVerseNumberFontSize = "settings.bible.verseNumberFontSize"
         static let bibleLineSpacing = "settings.bible.lineSpacing"
+        static let bibleVerseSpacing = "settings.bible.verseSpacing"
         static let bibleTextColorHex = "settings.bible.textColorHex"
         // [2026-08-08 추가] 성경 구절 복사 형식 — 사용자 요청, FormatTabView.swift
         // (사용자가 업로드한 참고 소스) 참고.
@@ -280,6 +281,15 @@ final class UserSettingsStore {
         didSet { defaults.set(bibleLineSpacing, forKey: Key.bibleLineSpacing) }
     }
 
+    /// [2026-08-20 추가] 사용자 요청 — "성경조회표시 - 본문색상 위 절 간격 조절
+    /// 기능추가". `bibleLineSpacing`(한 절 안에서 줄바꿈될 때의 줄간격)과는
+    /// 다른 값이다 — 이건 절과 절(각 `VerseRow`) 사이의 간격으로,
+    /// `TranslationColumnView.columnScrollView`의 `LazyVStack(spacing:)`에
+    /// 전달한다(기존엔 10으로 고정돼 있었다).
+    var bibleVerseSpacing: Double {
+        didSet { defaults.set(bibleVerseSpacing, forKey: Key.bibleVerseSpacing) }
+    }
+
     /// 본문 글자 색 — 16진 문자열("#RRGGBB")로 저장한다. 빈 문자열이면 "시스템 기본
     /// 색(primary, 라이트/다크 모드에 자동 대응)"이라는 뜻으로 취급한다 — 색을
     /// 강제로 저장해 버리면 다크 모드에서 검정 글씨처럼 보이는 문제가 생길 수 있어,
@@ -429,6 +439,7 @@ final class UserSettingsStore {
         self.bibleBodyFontSize = defaults.object(forKey: Key.bibleBodyFontSize) as? Double ?? 17
         self.bibleVerseNumberFontSize = defaults.object(forKey: Key.bibleVerseNumberFontSize) as? Double ?? 12
         self.bibleLineSpacing = defaults.object(forKey: Key.bibleLineSpacing) as? Double ?? 4
+        self.bibleVerseSpacing = defaults.object(forKey: Key.bibleVerseSpacing) as? Double ?? 10
         self.bibleTextColorHex = defaults.string(forKey: Key.bibleTextColorHex) ?? ""
 
         self.copyReferencePosition = (defaults.string(forKey: Key.copyReferencePosition)).flatMap(TextPosition.init) ?? .afterBody

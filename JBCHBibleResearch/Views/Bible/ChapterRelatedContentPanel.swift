@@ -141,11 +141,45 @@ struct ChapterRelatedContentPanel: View {
     // `header:` 슬롯 자체를 쓰지 않고, "개요"를 "책 개요"/"장 개요"와 똑같이
     // 그냥 평범한 리스트 행으로 넣었다 — 평범한 행은 스크린샷에서 이미 폰트
     // 적용이 확인됐으므로 이 쪽이 훨씬 신뢰할 수 있다.
-    private var outlineSection: some View {
-        Section {
-            Text("개요")
+    // [2026-08-20 추가] 사용자 요청 — "인스펙터 전체적인 스타일을 UI/UX 전문가
+    // 관점에서 세련되게 조정 ... 적절한 색상과 아이콘을 추가할 것." macOS
+    // `List`가 `Section(header:)` 슬롯 안 텍스트에 강제로 작은 보조 스타일을
+    // 씌우는 문제(바로 위 [2026-08-15 4차 수정] 주석 참고) 때문에 애초에
+    // "개요" 제목은 header 슬롯을 안 쓰고 평범한 행으로 넣어 뒀었다 — 그
+    // 우회 패턴을 아래 세 섹션(개인 묵상/말씀 요약/연구문서, 지금까지는
+    // `Section("문자열")`로 header 슬롯을 그대로 쓰고 있었다)에도 똑같이
+    // 적용해 네 섹션 제목이 전부 같은 방식(아이콘+색 + 시스템이 축소하지
+    // 않는 일반 크기)으로 보이게 통일했다. 아이콘 색은 섹션마다 다르게 둬서
+    // (teal/blue/purple/orange) 한눈에 구분되게 하되, 제목 글자 자체는
+    // 계속 `.secondary`로 눌러 둔다(이 패널 전체가 "보조 정보" 패널이라
+    // 본문 성경 읽기 화면보다 시각적으로 튀면 안 된다는 기존 원칙 유지).
+    private func sectionTitleRow(_ title: String, systemImage: String, tint: Color) -> some View {
+        Label {
+            Text(title)
                 .font(.body)
                 .foregroundStyle(.secondary)
+        } icon: {
+            Image(systemName: systemImage)
+                .foregroundStyle(tint)
+        }
+    }
+
+    /// "이 절에 작성됨"/"본문에서 언급됨"/"이 장에 연결됨" — 각 항목이 왜 이
+    /// 목록에 나왔는지 알려주는 작은 배지. 전에는 아이콘 없이 굵은 캡션
+    /// 글자만 있었다 — 아이콘을 더해 항목들을 스캔하기 쉽게 했다(사용자 요청
+    /// "적절한 색상과 아이콘을 추가할 것").
+    private func originBadge(_ text: String, systemImage: String) -> some View {
+        Label {
+            Text(text).font(.caption.bold())
+        } icon: {
+            Image(systemName: systemImage).font(.caption2)
+        }
+        .foregroundStyle(.secondary)
+    }
+
+    private var outlineSection: some View {
+        Section {
+            sectionTitleRow("개요", systemImage: "list.bullet.clipboard", tint: .teal)
             if viewModel.relatedBookOutlineRTF == nil && viewModel.relatedChapterSummaryRTF == nil {
                 emptyRow("아직 작성된 개요가 없습니다.")
             }
@@ -247,7 +281,11 @@ struct ChapterRelatedContentPanel: View {
         // [2026-08-11 12차 수정] 사용자 요청 — "x절 관련 메모 -> x절 관련 개인
         // 주석." 사이드바 섹션명("개인 주석")과 일관되게 맞춘다.
         // [2026-08-12 변경] "개인 주석" → "개인 묵상" 메뉴명 일괄 변경.
-        Section("\(verse)절 관련 개인 묵상 (\(coordinateMemos.count + mentionedMemos.count))") {
+        Section {
+            sectionTitleRow(
+                "\(verse)절 관련 개인 묵상 (\(coordinateMemos.count + mentionedMemos.count))",
+                systemImage: "note.text", tint: .blue
+            )
             if coordinateMemos.isEmpty && mentionedMemos.isEmpty {
                 emptyRow("이 절에 달렸거나 이 절을 언급하는 개인 묵상이 없습니다.")
             } else {
@@ -255,15 +293,15 @@ struct ChapterRelatedContentPanel: View {
                     Button {
                         onSelectMemo(memo)
                     } label: {
-                        VStack(alignment: .leading, spacing: 4) {
-                            Text("이 절에 작성됨")
-                                .font(.caption.bold())
-                                .foregroundStyle(.secondary)
+                        VStack(alignment: .leading, spacing: 6) {
+                            originBadge("이 절에 작성됨", systemImage: "square.and.pencil")
                             Text(memoPreview(memo))
                                 .font(.callout)
                                 .foregroundStyle(.primary)
+                                .lineSpacing(2)
                                 .lineLimit(2)
                         }
+                        .padding(.vertical, 6)
                     }
                     .buttonStyle(.plain)
                 }
@@ -271,15 +309,15 @@ struct ChapterRelatedContentPanel: View {
                     Button {
                         onSelectVerseMention(mention)
                     } label: {
-                        VStack(alignment: .leading, spacing: 4) {
-                            Text("본문에서 언급됨")
-                                .font(.caption.bold())
-                                .foregroundStyle(.secondary)
+                        VStack(alignment: .leading, spacing: 6) {
+                            originBadge("본문에서 언급됨", systemImage: "text.magnifyingglass")
                             Text(mention.snippet.isEmpty ? mention.searchText : mention.snippet)
                                 .font(.callout)
                                 .foregroundStyle(.primary)
+                                .lineSpacing(2)
                                 .lineLimit(2)
                         }
+                        .padding(.vertical, 6)
                     }
                     .buttonStyle(.plain)
                 }
@@ -303,23 +341,46 @@ struct ChapterRelatedContentPanel: View {
     private func wordSummarySection(verse: Int) -> some View {
         let coordinateSummaries = viewModel.relatedChapterWordSummaries.filter { $0.verse == verse }
         let mentionedSummaries = viewModel.verseMentions(verse: verse).filter { $0.sourceType == .wordSummary }
-        Section("\(verse)절 관련 말씀 요약 (\(coordinateSummaries.count + mentionedSummaries.count))") {
+        Section {
+            sectionTitleRow(
+                "\(verse)절 관련 말씀 요약 (\(coordinateSummaries.count + mentionedSummaries.count))",
+                // `text.book.closed`는 `BibleReadingView.verseSelectionActionBar`의
+                // "말씀 요약" 버튼과 같은 아이콘 — 어디서 왔든 같은 기능은 같은
+                // 아이콘으로 보이게 통일했다(사용자 요청 "앱의 전체적인
+                // 통일성").
+                systemImage: "text.book.closed", tint: .purple
+            )
             if coordinateSummaries.isEmpty && mentionedSummaries.isEmpty {
                 emptyRow("이 절에 작성됐거나 이 절을 언급하는 말씀 요약이 없습니다.")
             } else {
+                // [2026-08-20 추가] 사용자 요청 — "관련 말씀 요약을 제목으로
+                // 인식하는 맨 앞줄을 좀더 강조하고, 그 밑에 본문의 일부를
+                // 표시할 것." `WordSummaryEditorView`가 새 요약을 만들 때
+                // 항상 "yyyy.MM.dd 말씀"으로 첫 줄을 미리 채워 두므로(그 화면
+                // 상단 주석 참고) 그 첫 줄이 사실상 제목 역할을 한다 — 아래
+                // `wordSummaryTitleLine`/`wordSummaryBodyPreview`가 그 첫 줄과
+                // 나머지 본문을 분리해서, 제목은 굵고 크게, 본문 일부는 그
+                // 아래 보조 색으로 보여준다.
                 ForEach(coordinateSummaries) { summary in
                     Button {
                         onSelectWordSummary(summary)
                     } label: {
-                        VStack(alignment: .leading, spacing: 4) {
-                            Text("이 절에 작성됨 · \(wordSummaryDateLabel(summary))")
-                                .font(.caption.bold())
-                                .foregroundStyle(.secondary)
-                            Text(wordSummaryPreview(summary))
-                                .font(.callout)
+                        VStack(alignment: .leading, spacing: 6) {
+                            originBadge("이 절에 작성됨 · \(wordSummaryDateLabel(summary))", systemImage: "square.and.pencil")
+                            Text(wordSummaryTitleLine(summary))
+                                .font(.callout.bold())
                                 .foregroundStyle(.primary)
-                                .lineLimit(2)
+                                .lineLimit(1)
+                            let body = wordSummaryBodyPreview(summary)
+                            if !body.isEmpty {
+                                Text(body)
+                                    .font(.callout)
+                                    .foregroundStyle(.secondary)
+                                    .lineSpacing(2)
+                                    .lineLimit(2)
+                            }
                         }
+                        .padding(.vertical, 6)
                     }
                     .buttonStyle(.plain)
                 }
@@ -327,15 +388,15 @@ struct ChapterRelatedContentPanel: View {
                     Button {
                         onSelectVerseMention(mention)
                     } label: {
-                        VStack(alignment: .leading, spacing: 4) {
-                            Text("본문에서 언급됨")
-                                .font(.caption.bold())
-                                .foregroundStyle(.secondary)
+                        VStack(alignment: .leading, spacing: 6) {
+                            originBadge("본문에서 언급됨", systemImage: "text.magnifyingglass")
                             Text(mention.snippet.isEmpty ? mention.searchText : mention.snippet)
                                 .font(.callout)
                                 .foregroundStyle(.primary)
+                                .lineSpacing(2)
                                 .lineLimit(2)
                         }
+                        .padding(.vertical, 6)
                     }
                     .buttonStyle(.plain)
                 }
@@ -343,9 +404,27 @@ struct ChapterRelatedContentPanel: View {
         }
     }
 
-    private func wordSummaryPreview(_ summary: VerseSummary) -> String {
+    /// 요약 본문의 첫 줄(제목처럼 보이는 줄, 위 주석 참고) — 없으면 전체
+    /// 트리밍된 텍스트를 그대로 쓴다(레거시로 줄바꿈 없이 한 줄만 쓴 요약도
+    /// 여전히 자연스럽게 보이도록).
+    private func wordSummaryTitleLine(_ summary: VerseSummary) -> String {
         let trimmed = summary.contentText.trimmingCharacters(in: .whitespacesAndNewlines)
-        return trimmed.isEmpty ? "(내용 없음)" : trimmed
+        guard !trimmed.isEmpty else { return "(내용 없음)" }
+        let firstLine = trimmed.components(separatedBy: .newlines).first ?? trimmed
+        let cleaned = firstLine.trimmingCharacters(in: .whitespaces)
+        return cleaned.isEmpty ? trimmed : cleaned
+    }
+
+    /// 첫 줄을 뺀 나머지 본문 — 미리보기용으로 줄바꿈을 공백으로 이어붙인다.
+    /// 둘째 줄부터가 없으면(제목 한 줄짜리 요약) 빈 문자열을 돌려주고, 호출부가
+    /// 그 경우 본문 줄 자체를 그리지 않는다.
+    private func wordSummaryBodyPreview(_ summary: VerseSummary) -> String {
+        let trimmed = summary.contentText.trimmingCharacters(in: .whitespacesAndNewlines)
+        let lines = trimmed.components(separatedBy: .newlines)
+        guard lines.count > 1 else { return "" }
+        return lines.dropFirst()
+            .joined(separator: " ")
+            .trimmingCharacters(in: .whitespacesAndNewlines)
     }
 
     private func wordSummaryDateLabel(_ summary: VerseSummary) -> String {
@@ -364,7 +443,11 @@ struct ChapterRelatedContentPanel: View {
     private func documentSection(verse: Int) -> some View {
         let taggedDocuments = viewModel.relatedDocuments
         let mentionedDocuments = viewModel.verseMentions(verse: verse).filter { $0.sourceType == .document }
-        Section("\(verse)절 관련 연구문서 (\(taggedDocuments.count + mentionedDocuments.count))") {
+        Section {
+            sectionTitleRow(
+                "\(verse)절 관련 연구문서 (\(taggedDocuments.count + mentionedDocuments.count))",
+                systemImage: "doc.text.magnifyingglass", tint: .orange
+            )
             if taggedDocuments.isEmpty && mentionedDocuments.isEmpty {
                 emptyRow("이 장에 연결됐거나 이 절을 언급하는 연구문서가 없습니다.")
             } else {
@@ -373,38 +456,59 @@ struct ChapterRelatedContentPanel: View {
                     // 푸시로(다중 씬 미지원, isPhoneIdiom 참고) — 이 패널은
                     // BibleReadingView의 인스펙터라 그 화면의 NavigationStack
                     // 안으로 그대로 밀려 들어간다.
-                    if isPhoneIdiom {
-                        NavigationLink {
-                            DocumentViewerWindowContent(documentID: document.persistentModelID)
-                        } label: {
-                            Label(document.originalFilename, systemImage: "doc.text")
+                    //
+                    // [2026-08-20 추가] 사용자 요청 — "관련 말씀 요약, 관련
+                    // 연구문서에 대한 간격, 줄간격을 여유롭게 할것." 예전엔
+                    // 파일명만 있는 한 줄짜리 `Label`이라 바로 아래
+                    // `mentionedDocuments`(본문에서 언급됨) 행과 생김새가
+                    // 달랐다 — 같은 배지+2줄 구조로 맞춰 통일했다.
+                    Group {
+                        if isPhoneIdiom {
+                            NavigationLink {
+                                DocumentViewerWindowContent(documentID: document.persistentModelID)
+                            } label: {
+                                documentRowLabel(document)
+                            }
+                        } else {
+                            Button {
+                                openWindow(id: "document-viewer", value: document.persistentModelID)
+                            } label: {
+                                documentRowLabel(document)
+                            }
+                            .buttonStyle(.plain)
                         }
-                    } else {
-                        Button {
-                            openWindow(id: "document-viewer", value: document.persistentModelID)
-                        } label: {
-                            Label(document.originalFilename, systemImage: "doc.text")
-                        }
-                        .buttonStyle(.plain)
                     }
+                    .padding(.vertical, 6)
                 }
                 ForEach(mentionedDocuments) { mention in
                     Button {
                         onSelectVerseMention(mention)
                     } label: {
-                        VStack(alignment: .leading, spacing: 4) {
-                            Text("본문에서 언급됨")
-                                .font(.caption.bold())
-                                .foregroundStyle(.secondary)
+                        VStack(alignment: .leading, spacing: 6) {
+                            originBadge("본문에서 언급됨", systemImage: "text.magnifyingglass")
                             Text(mention.snippet.isEmpty ? mention.searchText : mention.snippet)
                                 .font(.callout)
                                 .foregroundStyle(.primary)
+                                .lineSpacing(2)
                                 .lineLimit(2)
                         }
+                        .padding(.vertical, 6)
                     }
                     .buttonStyle(.plain)
                 }
             }
+        }
+    }
+
+    /// 위 `taggedDocuments` 행 — 파일명 위에 "이 장에 연결됨" 배지를 얹어
+    /// `mentionedDocuments` 행(originBadge + 본문)과 같은 리듬으로 보이게 한다.
+    private func documentRowLabel(_ document: SourceDocument) -> some View {
+        VStack(alignment: .leading, spacing: 6) {
+            originBadge("이 장에 연결됨", systemImage: "paperclip")
+            Label(document.originalFilename, systemImage: "doc.text")
+                .font(.callout)
+                .foregroundStyle(.primary)
+                .lineLimit(2)
         }
     }
 
