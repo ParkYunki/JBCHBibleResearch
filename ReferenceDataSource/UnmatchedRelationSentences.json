@@ -12,12 +12,6 @@
   "sentence": "에돔 족장의 한사람."
  },
  {
-  "source_word": "가레아",
-  "source_idx": "17",
-  "sense_index": 1,
-  "sentence": "유대 유잔민의 지도자 중의 한 사람인 요나단 과 요하난의 아비."
- },
- {
   "source_word": "가보",
   "source_idx": "34",
   "sense_index": 1,
@@ -364,12 +358,6 @@
   "source_idx": "343",
   "sense_index": 1,
   "sentence": "에스배의 자녀이다. 군인이다. 다윗과 관련이 있다. 다윗의 정예 부대인 30인의 용사 중 한 명. (사무엘하에서는 바아래로 표기됨)."
- },
- {
-  "source_word": "나아마",
-  "source_idx": "344",
-  "sense_index": 1,
-  "sentence": "두발가인의 누이."
  },
  {
   "source_word": "나하마니",
@@ -768,12 +756,6 @@
   "sentence": "여리고 성에 살던 기생으로 두 명의 정탐꾼을 숨겨주어 구출함."
  },
  {
-  "source_word": "람",
-  "source_idx": "668",
-  "sense_index": 3,
-  "sentence": "욥의 세 친구 중 하나인 엘리후의 선조."
- },
- {
   "source_word": "랍사게",
   "source_idx": "673",
   "sense_index": 1,
@@ -916,12 +898,6 @@
   "source_idx": "817",
   "sense_index": 2,
   "sentence": "막달라 출신의 여인."
- },
- {
-  "source_word": "마리아",
-  "source_idx": "817",
-  "sense_index": 5,
-  "sentence": "베다니에 사는 나사로의 누이이며, 마르다의 여동생."
  },
  {
   "source_word": "마리아",
@@ -1232,12 +1208,6 @@
  {
   "source_word": "므세사벨",
   "source_idx": "973",
-  "sense_index": 1,
-  "sentence": "성벽 중수를 도운 므술람의 선조."
- },
- {
-  "source_word": "므세사벨",
-  "source_idx": "973",
   "sense_index": 2,
   "sentence": "느헤미야와 함께 율법 준수를 서약한 사람."
  },
@@ -1348,12 +1318,6 @@
   "source_idx": "1003",
   "sense_index": 2,
   "sentence": "미디안의 후손들과 요단 강 건너 그들의 거주지."
- },
- {
-  "source_word": "미리암",
-  "source_idx": "1006",
-  "sense_index": 1,
-  "sentence": "모세와 아론의 누이."
  },
  {
   "source_word": "미사엘",
@@ -1468,12 +1432,6 @@
   "source_idx": "1124",
   "sense_index": 1,
   "sentence": "거짓 선지자, 마술사이다. 서기오 바울, 바울과 관련이 있다. 바울의 복음 전파를 방해하다가 맹인이 됨 (엘루마라고도 함)."
- },
- {
-  "source_word": "베레스",
-  "source_idx": "1185",
-  "sense_index": 2,
-  "sentence": "다윗 군대 반차의 우두머리인 야소브암의 선조."
  },
  {
   "source_word": "베스도",
@@ -1878,12 +1836,6 @@
   "sentence": "스룹바벨과 함께 귀환한 문지기의 자손."
  },
  {
-  "source_word": "소배",
-  "source_idx": "1620",
-  "sense_index": 2,
-  "sentence": "예언자 예레미야의 선조."
- },
- {
   "source_word": "소베렛",
   "source_idx": "1621",
   "sense_index": 1,
@@ -1954,12 +1906,6 @@
   "source_idx": "1667",
   "sense_index": 1,
   "sentence": "빌립보 교회의 여성도이다. 유오디아, 바울과 관련이 있다. 초기 빌립보 교회의 유력한 일원이었으나 유오디아와 갈등이 있어, 바울로부터 주 안에서 같은 마음을 품으라는 권면을 받음."
- },
- {
-  "source_word": "숩",
-  "source_idx": "1671",
-  "sense_index": 1,
-  "sentence": "예언자 사무엘의 선조."
  },
  {
   "source_word": "숩빔",
@@ -2140,12 +2086,6 @@
   "source_idx": "1721",
   "sense_index": 7,
   "sentence": "솔로몬의 신하로 스룹바벨과 함께 귀환한 가문의 선조."
- },
- {
-  "source_word": "스바댜",
-  "source_idx": "1721",
-  "sense_index": 8,
-  "sentence": "에스라와 함께 귀환한 미가엘의 선조."
  },
  {
   "source_word": "스바댜",
@@ -2448,12 +2388,6 @@
   "sentence": "아낙 자손의 선조, 기럇아르바의 창시자."
  },
  {
-  "source_word": "아르바",
-  "source_idx": "1966",
-  "sense_index": 2,
-  "sentence": "아비알본 또는 아비엘의 선조."
- },
- {
   "source_word": "아릇",
   "source_idx": "1972",
   "sense_index": 3,
@@ -2482,12 +2416,6 @@
   "source_idx": "1983",
   "sense_index": 2,
   "sentence": "느부갓네살의 시위대 장관."
- },
- {
-  "source_word": "아마랴",
-  "source_idx": "1986",
-  "sense_index": 1,
-  "sentence": "다윗 시대 대제사장 사독의 할아버지."
  },
  {
   "source_word": "아마랴",
@@ -2542,18 +2470,6 @@
   "source_idx": "1993",
   "sense_index": 2,
   "sentence": "아말렉 자손."
- },
- {
-  "source_word": "아므람",
-  "source_idx": "2004",
-  "sense_index": 1,
-  "sentence": "레위 자손, 아론과 모세의 부친."
- },
- {
-  "source_word": "아므람",
-  "source_idx": "2004",
-  "sense_index": 3,
-  "sentence": "모세의 부친 아므람의 가족."
  },
  {
   "source_word": "아미",
@@ -2946,12 +2862,6 @@
   "sentence": "로마 교회의 성도이다. 사도 바울과 관련이 있다. 바울이 주 안에서 사랑하는 자라고 부르며 문안함."
  },
  {
-  "source_word": "암시",
-  "source_idx": "2230",
-  "sense_index": 2,
-  "sentence": "포로에서 귀환한 아다야의 선조."
- },
- {
   "source_word": "압다",
   "source_idx": "2232",
   "sense_index": 2,
@@ -3222,22 +3132,10 @@
   "sentence": "에스라와 함께 귀환한 사람."
  },
  {
-  "source_word": "에브라다",
-  "source_idx": "2409",
-  "sense_index": 1,
-  "sentence": "갈렙의 둘째 아내."
- },
- {
   "source_word": "에브라임",
   "source_idx": "2411",
   "sense_index": 2,
   "sentence": "에브라임의 자손들과 그들의 영토."
- },
- {
-  "source_word": "에브랏",
-  "source_idx": "2413",
-  "sense_index": 1,
-  "sentence": "갈렙의 둘째 부인."
  },
  {
   "source_word": "에셀",
@@ -3322,12 +3220,6 @@
   "source_idx": "2475",
   "sense_index": 6,
   "sentence": "에스라와 함께 귀환한 사람의 선조."
- },
- {
-  "source_word": "엘람",
-  "source_idx": "2475",
-  "sense_index": 7,
-  "sentence": "이방 여자와 결혼한 것이 잘못이라고 고백한 스가냐의 선조."
  },
  {
   "source_word": "엘람",
@@ -3462,12 +3354,6 @@
   "sentence": "갓 지파, 다윗의 용사."
  },
  {
-  "source_word": "엘리압",
-  "source_idx": "2516",
-  "sense_index": 6,
-  "sentence": "예언자 사무엘의 선조."
- },
- {
   "source_word": "엘리야",
   "source_idx": "2517",
   "sense_index": 2,
@@ -3502,12 +3388,6 @@
   "source_idx": "2521",
   "sense_index": 8,
   "sentence": "이방 여자와 결혼한 제사장."
- },
- {
-  "source_word": "엘리엘",
-  "source_idx": "2522",
-  "sense_index": 1,
-  "sentence": "예언자 사무엘의 선조."
  },
  {
   "source_word": "엘리엘",
@@ -3914,12 +3794,6 @@
  {
   "source_word": "요엘",
   "source_idx": "2736",
-  "sense_index": 5,
-  "sentence": "예언자 사무엘의 선조."
- },
- {
-  "source_word": "요엘",
-  "source_idx": "2736",
   "sense_index": 8,
   "sentence": "다윗 시대 게르손 자손."
  },
@@ -4138,12 +4012,6 @@
   "source_idx": "2885",
   "sense_index": 5,
   "sentence": "예레미야 시대 제사장."
- },
- {
-  "source_word": "잇도",
-  "source_idx": "2897",
-  "sense_index": 5,
-  "sentence": "예언자 스가랴의 할아버지."
  },
  {
   "source_word": "잇도",
