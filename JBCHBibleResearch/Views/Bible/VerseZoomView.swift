@@ -134,14 +134,19 @@ struct VerseZoomView: View {
     /// `UserSettingsStore.bibleFontName`)를 그대로 재사용한다.
     /// [2026-08-12 변경] 사용자 요청 — "글꼴은 설정값을 유지하되, 글꼴크기는
     /// 보통크기로." 글꼴 "종류"(`bibleFontName`)는 계속 설정값을 따르지만,
-    /// 크기는 더 이상 `bibleBodyFontSize`(모양 탭에서 12~32pt로 조절 가능한
-    /// 값)를 따라가지 않고 시스템 본문 기본 크기와 같은 17pt로 고정한다 —
-    /// 사용자가 메인 화면 본문 크기를 크게/작게 키워도 확대보기 안에서
-    /// 줄바꿈·메모 박스 배치 계산이 그 값에 흔들리지 않게 하기 위함이기도
-    /// 하다.
+    /// 크기는 `bibleBodyFontSize`(모양 탭에서 12~32pt로 조절 가능한 값)를
+    /// 따라가지 않고 고정 크기를 쓴다 — 사용자가 메인 화면 본문 크기를
+    /// 크게/작게 키워도 확대보기 안에서 줄바꿈·메모 박스 배치 계산이 그 값에
+    /// 흔들리지 않게 하기 위함이다(설정값을 직접 반영하는 방안은 2026-08-21에
+    /// 다시 검토했으나, 그 흔들림 버그가 재발할 위험이 있어 여전히 피했다 —
+    /// 대신 아래처럼 고정값 자체를 조금 키웠다).
+    /// [2026-08-21 변경] 사용자 요청 — "확대보기 폰트크기를 20pt로." 위 이유로
+    /// 여전히 고정값이지만(설정 추종 아님), 17 → 20으로 올렸다 — 아래
+    /// `targetCharsPerLine`/`effectiveTextWidth`도 커진 글자 폭에 맞춰 함께
+    /// 조정했다.
     private var bibleFont: PlatformFont {
         let settings = UserSettingsStore.shared
-        let size: CGFloat = 17
+        let size: CGFloat = 20
         guard settings.bibleFontName != "System" else { return .systemFont(ofSize: size) }
         return PlatformFont(name: settings.bibleFontName, size: size) ?? .systemFont(ofSize: size)
     }
@@ -157,14 +162,24 @@ struct VerseZoomView: View {
     /// 콘텐츠 폭(패딩 32pt 제외) — 성경 본문 줄바꿈 목표 폭(`effectiveTextWidth`,
     /// 훨씬 좁게 제한됨)과 달리, 메모 박스가 실제로 화면 안에서 밀릴 수 있는
     /// 진짜 한계는 이 값이다(`AnnotatedVerseFlowView.availableWidth` 참고).
+    /// [2026-08-21 변경] 사용자 요청 — "확대보기 - 메모 가로 크기를 현 최대
+    /// 사이즈에서 20px을 줄여줄것." 기존엔 패딩(32pt)만 뺐는데, 메모 박스가
+    /// 닿을 수 있는 최대 폭 자체를 20px 더 줄이기 위해 빼는 값을 32 → 52로
+    /// 늘렸다(패딩 32 + 요청한 20). 성경 본문 줄바꿈 폭(`effectiveTextWidth`)은
+    /// 이 값과 별개 계산이라 영향받지 않는다.
     private var availableContentWidth: CGFloat {
-        max(scrollWidth - 32, 0)
+        max(scrollWidth - 52, 0)
     }
 
     private var effectiveTextWidth: CGFloat {
         let sample = "가" as NSString
         let charWidth = sample.size(withAttributes: [.font: bibleFont]).width
-        let idealWidth = charWidth * 21
+        // [2026-08-21 변경] 사용자 요청 — "확대보기 창을 가로로 조금 더 늘리고
+        // 20pt로." 이 21은 `targetCharsPerLine`(아래, 23 → 25로 함께 올림)보다
+        // 항상 2 작게 유지해 온 값이다(라틴/혼합 문자가 한글 "가"보다 평균적으로
+        // 조금 더 넓어서 그만큼 여유를 둔 것으로 보인다) — 같은 -2 여백을 그대로
+        // 유지해 23으로 올린다.
+        let idealWidth = charWidth * 23
         return idealWidth > 0 ? min(availableContentWidth, idealWidth) : availableContentWidth
     }
 
@@ -179,13 +194,17 @@ struct VerseZoomView: View {
         #endif
     }
 
-    /// 가로모드 - 현행 그대로(23자). 세로모드(아이폰) - 18자 기준으로 앞뒤
-    /// 가장 가까운 띄어쓰기에서 줄바꿈(사용자 요청) — 실제 알고리즘은 기존
+    /// 가로모드 - 25자(2026-08-21, 아래 참고). 세로모드(아이폰) - 18자 기준으로
+    /// 앞뒤 가장 가까운 띄어쓰기에서 줄바꿈(사용자 요청) — 실제 알고리즘은 기존
     /// `VerseAnnotationRenderer.koreanLineRanges`(2026-08-11 2차 수정에서 이미
     /// 구현된 "목표 글자수 근처 최근접 띄어쓰기" 방식)를 그대로 재사용하고,
     /// 목표 글자수만 이 값으로 바꿔 넘긴다.
+    /// [2026-08-21 변경] 사용자 요청 — "확대보기 창을 가로로 조금 더 늘리고
+    /// 20pt로." 23 → 25로 올렸다 — 2026-08-11 8차 수정이 정한 원래 허용
+    /// 범위("한 줄에 17~25자 정도로")의 상한 그대로라 그 결정을 벗어나지
+    /// 않는다. 아이폰 세로모드(18자)는 이번 요청 범위 밖이라 그대로 둔다.
     private var targetCharsPerLine: Int {
-        isPhonePortrait ? 18 : 23
+        isPhonePortrait ? 18 : 25
     }
 
     private var labelColor: PlatformColor {
@@ -455,7 +474,10 @@ struct VerseZoomView: View {
             }
         }
         #if os(macOS)
-        .frame(minWidth: 480, minHeight: 420)
+        // [2026-08-21 변경] 위 `bibleFont`/`targetCharsPerLine` 주석과 같은
+        // 이유 — 본문 글자·목표 줄폭이 커진 만큼 창 최소 폭도 조금 늘렸다
+        // (480 → 520, "가로로 조금 더 늘리고" 요청).
+        .frame(minWidth: 520, minHeight: 420)
         #endif
     }
 

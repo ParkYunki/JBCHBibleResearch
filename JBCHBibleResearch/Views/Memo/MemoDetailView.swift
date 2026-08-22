@@ -52,6 +52,18 @@ enum MemoPresentationContext {
     /// 에디터도 전용 서식(Paperlogy 3 Light 14pt/줄간격 1.5/편집 중 흰
     /// 배경/조회 중 시스템 배경)을 쓴다.
     case contextual
+    /// [2026-08-21 추가] 사용자 요청("아이패드 수정사항") — "(맥OS, iOS 공통)
+    /// 말씀노트 리스트에 항목 탭 - 에디터 화면의 상단 성경 매칭수정 영역은
+    /// 삭제할 것(수정하지 못하게, 불필요한 영역 제거)." `WordNoteHomeView`가
+    /// 여는 메모는 이미 목록에 있던 특정 메모라 좌표를 바꿔 "다른 절의
+    /// 메모"로 재배정할 이유가 없다(새 절 메모가 필요하면 새로 만들면 된다) —
+    /// `.contextual`처럼 좌표를 읽기전용 라벨로만 보여준다. 다만 이 화면은
+    /// 확대보기/사이드바 "팝업"이 아니라 전체 화면 분할 뷰라, `.contextual`
+    /// 전용인 iOS 툴바 재배치(위 `body`의 "toolbar를 header보다 먼저" 분기,
+    /// 2026-08-11)까지 함께 가져올 근거는 없다 — 그래서 `.contextual`을 그대로
+    /// 재사용하지 않고 별도 케이스로 둔다(`header`/아래 두 곳만 `.contextual`과
+    /// 같이 취급하고, 툴바 배치·서식은 `.standalone`과 동일하게 유지).
+    case wordNoteList
 }
 
 struct MemoDetailView: View {
@@ -219,12 +231,14 @@ struct MemoDetailView: View {
             }
             .padding()
 
-        case .contextual:
+        case .contextual, .wordNoteList:
             // [2026-08-09 추가] 사용자 요청 — "성경 및 장 선택, 텍스트로 성경검색,
             // 절이동 기능 제거". 이 메모는 이미 어느 절 것인지 정해진 채로 열리므로
             // (성경 조회 사이드바/확대보기에서 선택한 절), 좌표를 바꿀 수 있게
             // 하는 것 자체가 의미가 없다 — 대신 지금 좌표를 읽기전용 텍스트로만
-            // 보여준다.
+            // 보여준다. [2026-08-21 추가] `.wordNoteList`(말씀노트 목록에서 연
+            // 메모)도 같은 이유로 이 읽기전용 표시를 그대로 쓴다 — 위
+            // `MemoPresentationContext.wordNoteList` 주석 참고.
             HStack {
                 Text(contextualCoordinateLabel)
                     .font(.callout.bold())

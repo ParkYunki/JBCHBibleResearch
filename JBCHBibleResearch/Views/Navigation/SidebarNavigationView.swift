@@ -32,6 +32,46 @@ struct SidebarNavigationView: View {
     /// `sidebarSearchBar`/`submitSidebarSearch()` 참고.
     @State private var sidebarSearchText: String = ""
 
+    /// [2026-08-21 추가] 사용자 신고 — "검색결과중 성경구절을 클릭한 후, 왼쪽
+    /// 사이드바 상단 검색란에 검색을 하고 엔터를 치면 아무반응이 없음 -> 오른쪽
+    /// '이 장의 관련 콘텐츠' 텍스트 왼쪽편에 < 버튼을 눌러야만 검색결과를 확인할
+    /// 수 있음. ---> 검색을 하면 성경 조회페이지를 닫고 다시 검색결과로 보여지게
+    /// 할 것."
+    ///
+    /// [원인] `SearchView`의 성경구절 행은 `NavigationLink { BibleReadingView(...) }`
+    /// 로 `NavigationSplitView`의 detail 컬럼 안에 "밀어 넣는(push)" 방식이다
+    /// (SearchView.swift `personOrPlaceRow`/`prophecyRow` 등). 이 push는
+    /// `selection`(AppSection)과는 별개의, detail 컬럼 자체가 들고 있는 내비게이션
+    /// 스택 상태라서, `submitSidebarSearch()`가 `selection = .search`로 다시
+    /// 바꿔도(이미 `.search`였다면 값 자체가 안 바뀌어 더더욱) 이미 밀어 넣어진
+    /// `BibleReadingView`(그 안의 `ChapterRelatedContentPanel` — "이 장의 관련
+    /// 콘텐츠" 제목이 거기 있다)가 그대로 맨 위에 남는다. `SearchView`는
+    /// `SidebarSearchRequest.pendingQuery` 변화를 받아 결과는 이미 새로 갱신하고
+    /// 있지만(SearchView.swift `.onChange` 참고), 그 갱신된 결과 화면이 push된
+    /// 성경 조회 화면 "뒤에" 가려져 있을 뿐이다 — 그래서 "이 장의 관련 콘텐츠"
+    /// 왼쪽 자동 생성 뒤로가기(`<`) 버튼을 눌러 push를 pop해야만 보인다.
+    ///
+    /// [해결] `NavigationSplitView`는 detail 컬럼의 push 스택 상태를 그 안에 놓인
+    /// 뷰의 identity에 묶어 관리한다 — 그 identity를 강제로 바꾸면(SwiftUI의
+    /// `.id(_:)`) push된 화면을 포함해 통째로 새로 만들어지므로, push 여부와
+    /// 무관하게 항상 검색 결과 루트로 돌아간다(그리고 `SearchView`가 새로
+    /// 만들어지며 타는 최초 마운트 경로 — SearchView.swift `.onAppear` 안의
+    /// `SidebarSearchRequest.shared.pendingQuery` 처리 — 는 이미 있는 코드라
+    /// 새로 만들 필요가 없었다). `NavigationStack`/`NavigationPath`를 새로
+    /// 도입해 `SearchView.swift`(900줄, NavigationLink 10곳 이상)를 고치는
+    /// 대신, 이 파일 한 곳만 고치는 쪽이 훨씬 작고 검증하기 쉽다.
+    ///
+    /// ⚠️ [트레이드오프] 이 방식은 "이미 검색 화면이고 push된 것도 없는" 흔한
+    /// 경우에도 매번 `SearchView`를 통째로 다시 만든다 — `ProgressView()`가 아주
+    /// 잠깐(한 프레임) 보였다가 결과로 바뀔 수 있다(SearchView.swift 41~66줄,
+    /// `viewModel`이 nil로 리셋되는 경로). 기능은 그대로고 스크롤 위치가 매
+    /// 검색마다 초기화되는 정도의 비용이라, "검색을 다시 하면 항상 새 결과
+    /// 화면"이라는 요청 의도와도 맞다고 판단했다 — 다만 사용자가 실사용 중
+    /// 이 깜빡임이 거슬리면(예: 이미 검색 화면에서 스크롤을 내려놓은 채로 다시
+    /// 검색어만 바꾸는 경우) push된 화면이 있을 때만 리셋하도록 더 정교하게
+    /// 좁히는 후속 작업이 필요할 수 있다.
+    @State private var searchResetToken = UUID()
+
     /// [2026-08-18 추가] 사용자 요청 — "사이드바 메뉴 밑으로 클로드 앱처럼 기능을
     /// 추가할 것. 고정됨 / (일주일 이내 날짜)/이전 -> 작성/수정한 연구문서/개인
     /// 묵상/말씀 요약 리스트를 보여줄 것." `@Query`라 SwiftData 변경(고정 토글,
@@ -97,6 +137,7 @@ struct SidebarNavigationView: View {
         let trimmed = sidebarSearchText.trimmingCharacters(in: .whitespacesAndNewlines)
         guard trimmed.count >= 2 else { return }
         SidebarSearchRequest.shared.request(trimmed)
+        searchResetToken = UUID()
         selection = .search
     }
 
@@ -473,7 +514,7 @@ struct SidebarNavigationView: View {
         // 교체 — `WindowGroup(id: "outline")`(성경 조회 사이드바의 "개요 화면
         // 열기" 별도 창)은 이 경로를 타지 않으므로 영향 없다(JBCHBibleResearchApp.swift 참고).
         case .outline: OutlineTreeView()
-        case .search: SearchView()
+        case .search: SearchView().id(searchResetToken)
         case .tagRelations: EmptyView() // 별도 창으로만 열리므로 본문에는 그려지지 않는다.
         }
     }

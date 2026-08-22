@@ -146,6 +146,28 @@ private struct OutlineTreeSplitContent: View {
             }
             OutlineNavigationRequest.shared.clear()
         }
+        // [2026-08-21 추가] 사용자 요청("아이패드 수정사항") — "개요 리스트에
+        // 항목 탭시 - 왼쪽 사이드바 자동 숨김기능." `WordNoteHomeView.
+        // WordNoteSplitContent`(같은 날 추가)와 완전히 같은 계약 —
+        // `SidebarVisibilityRequest`(Services/SidebarVisibilityRequest.swift)로
+        // 첫 선택 시 hide, 선택이 풀리거나 화면을 떠나면 restore. 이 화면의
+        // `OutlineTreeSelection`은 이미 `Hashable`(= Equatable)이라
+        // `WordNoteItem`과 달리 `.id` 우회 없이 값 자체로 비교한다. macOS는
+        // 이 항목에 "(맥OS, iOS 공통)" 표기가 없어(성경 조회 세로보기 등 다른
+        // 아이패드 전용 항목들과 같은 취급) iOS로만 제한한다.
+        #if os(iOS)
+        .onChange(of: selection) { oldValue, newValue in
+            if newValue != nil && oldValue == nil {
+                SidebarVisibilityRequest.shared.requestHide()
+            } else if newValue == nil && oldValue != nil {
+                SidebarVisibilityRequest.shared.requestRestore()
+            }
+        }
+        .onDisappear {
+            guard selection != nil else { return }
+            SidebarVisibilityRequest.shared.requestRestore()
+        }
+        #endif
     }
 }
 

@@ -111,6 +111,15 @@ struct RhwpWebViewerPane: View {
     /// (일치 개수가 1개 이상이면) 첫 매치로 스크롤까지 한다 — 사용자가 직접
     /// 검색창에 입력하는 것과 완전히 같은 경로다.
     var initialSearchText: String? = nil
+    /// [2026-08-21 추가] 사용자 지적 — "성경조회 - 구절 탭 - 인스펙터에서
+    /// 연구문서 클릭하면 검색이 안됨(공백 불일치로 추정)." `RhwpViewerController.
+    /// searchQuery`도 `HwpSearchController.search(text:)`와 마찬가지로 한 번에
+    /// 검색어 하나만 받는다(`hwp_viewer.js` 쪽 검색 API가 여러 표현을 합쳐
+    /// 찾는 기능이 없다) — `HWPViewerPane.additionalSearchTerms`와 같은 목적,
+    /// 같은 해법: 부모(`DocumentViewerView.verseSearchLiteralTerms(for:)`)가
+    /// 돌려준 리터럴 표현이 있으면 그중 첫 번째를 쓰고, 없으면 원래 입력
+    /// 그대로 쓴다 — 아래 `.onChange` 참고.
+    var additionalSearchTerms: (String) -> [String] = { _ in [] }
     /// [2026-08-16 추가] `DocumentViewerView.reportViewerAvailability` 참고 —
     /// `controller.state`가 `.ready`/`.failed`로 확정될 때마다 보고한다.
     var onAvailabilityChange: ((Bool) -> Void)? = nil
@@ -131,7 +140,8 @@ struct RhwpWebViewerPane: View {
                 case .ready:
                     onAvailabilityChange?(true)
                     if let initialSearchText, !initialSearchText.isEmpty {
-                        controller.searchQuery = initialSearchText
+                        let resolvedTerm = additionalSearchTerms(initialSearchText).first ?? initialSearchText
+                        controller.searchQuery = resolvedTerm
                     }
                 case .failed:
                     onAvailabilityChange?(false)

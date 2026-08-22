@@ -162,6 +162,31 @@ private struct WordNoteSplitContent: View {
                 }
             }
         }
+        // [2026-08-21 추가] 사용자 요청("아이패드 수정사항") — "말씀노트 리스트에
+        // 항목 탭시 - 왼쪽 사이드바 자동 숨김기능." `SidebarVisibilityRequest`
+        // (Services/SidebarVisibilityRequest.swift)는 `BibleReadingContentView`가
+        // "말씀 요약" 편집기를 열 때 이미 쓰던 것과 같은 싱글턴이다 — 여기서도
+        // 같은 계약(열 때 hide, 닫을 때/화면을 떠날 때 restore)을 그대로
+        // 재사용한다. `WordNoteItem`은 `Equatable`을 선언하지 않아
+        // `.onChange(of: selectedItem)`을 바로 못 쓰므로, 이미 있는 `id: String`
+        // (Equatable)로 비교한다 — 타입에 새 프로토콜 준수를 추가하는 대신
+        // 가장 적은 변경으로 끝낸다. macOS는 사이드바를 접을 만큼 화면이 좁지
+        // 않고(이 항목만 "(맥OS, iOS 공통)" 표기가 없다 — 사용자가 이 화면 하단
+        // "성경 매칭 수정 영역 삭제"는 명시적으로 공통 표기했다는 점과 대비된다),
+        // 기존 macOS 동작을 건드리지 않기 위해 iOS(아이폰/아이패드)로만 제한한다.
+        #if os(iOS)
+        .onChange(of: selectedItem?.id) { oldValue, newValue in
+            if newValue != nil && oldValue == nil {
+                SidebarVisibilityRequest.shared.requestHide()
+            } else if newValue == nil && oldValue != nil {
+                SidebarVisibilityRequest.shared.requestRestore()
+            }
+        }
+        .onDisappear {
+            guard selectedItem != nil else { return }
+            SidebarVisibilityRequest.shared.requestRestore()
+        }
+        #endif
     }
 }
 
@@ -169,7 +194,13 @@ private struct WordNoteSplitContent: View {
 private func destinationView(for item: WordNoteItem) -> some View {
     switch item {
     case .memo(let memo):
-        MemoDetailView(memo: memo)
+        // [2026-08-21 수정] 사용자 요청("아이패드 수정사항", 맥OS·iOS 공통) —
+        // "말씀노트 리스트에 항목 탭 - 에디터 화면의 상단 성경 매칭수정 영역은
+        // 삭제할 것." 예전엔 기본값 `.standalone`이 그대로 쓰여 좌표 편집
+        // 헤더(BookChapterPicker+절 Stepper)가 보였다 —
+        // `MemoPresentationContext.wordNoteList`(MemoDetailView.swift 참고)로
+        // 바꿔 읽기전용 좌표 라벨만 보이게 한다.
+        MemoDetailView(memo: memo, presentationContext: .wordNoteList)
     case .summary(let summary):
         WordSummaryEditorView(summary: summary, presentationContext: .standalone)
     }

@@ -56,11 +56,6 @@ struct VerseSearchResult: Identifiable {
     /// 검색어 자체가 이 절을 가리키는 성경 참조였는지(예: "창1:3") — true면
     /// 목록 맨 위, 본문 검색으로 걸린 결과와 구분해 보여준다.
     var isReferenceMatch: Bool = false
-    /// [2026-08-19 추가] AI 검색(의미검색) 결과에만 채워지는 코사인 유사도
-    /// (`BibleSemanticSearchService.SemanticVerseMatch.similarity`) — 일반
-    /// 키워드 검색 결과는 nil이다. `SearchView`가 이 값이 있으면 "참조 일치"
-    /// 배지 대신 "유사도 xx%" 배지를 보여준다.
-    var similarityScore: Double? = nil
 }
 
 struct MemoSearchResult: Identifiable {
@@ -181,40 +176,55 @@ final class SearchViewModel {
         didSet { searchImmediately() }
     }
 
-    /// [2026-08-19 신설] 사용자 요청 — "애플인텔리전스를 끈것과 켠것을 비교하고
-    /// 싶음." 기본 켜짐(정제 사용) — 끄면 `BibleSemanticSearchService`가 1단계
-    /// (Apple Intelligence 질의 정제)를 건너뛰고 사용자가 입력한 원문 그대로
-    /// 임베딩한다. `SearchView`에 AI 토글이 켜져 있을 때만 보이는 보조 토글로
-    /// 노출한다.
-    var isQueryRefinementEnabled = true {
-        didSet { searchImmediately() }
-    }
-
-    /// [2026-08-19 추가] 사용자 요청 — "Reranker도 고민해볼것." 임베딩 검색
-    /// 결과(상위 10개)를 Apple Intelligence가 한 번 더 판단해 순서를 다듬는
-    /// 마지막 단계 켬/끔. `isQueryRefinementEnabled`와 독립적인 별도 스위치다
-    /// (`BibleSearchRerankerService.swift` 상단 주석 참고 — 두 AI 단계를 같은
-    /// 스위치에 묶으면 어느 쪽이 결과를 개선했는지 구분할 수 없다).
-    var isRerankEnabled = true {
-        didSet { searchImmediately() }
-    }
-
-    /// [2026-08-19 v3 추가] 사용자 지시 — "verse/context weight 최적화... 0.4:
-    /// 0.6으로 고정... 이것도 상당히 임의적인 값입니다... 0.2/0.8 ... 0.8/0.2
-    /// 이렇게만 해도 검색 결과가 상당히 달라질 수 있습니다." 고정 상수 대신
-    /// 슬라이더로 노출해 재빌드 없이 스윕 테스트할 수 있게 한다
-    /// (`BibleSemanticSearchService.search(contextWeight:)` 참고). 절 가중치는
-    /// `1 - contextWeight`. 기본값 0.6은 이전 고정값과 동일 — 출발점일 뿐 최적값
-    /// 이라는 근거는 없다.
-    var contextWeight: Double = 0.6 {
-        didSet { searchImmediately() }
-    }
+    /// [2026-08-19 신설, 2026-08-20 제거] "애플인텔리전스를 끈것과 켠것을
+    /// 비교하고 싶음"으로 만든 두 보조 토글(질의 정제/재순위화)이었으나,
+    /// 사용자가 "결과가 너무 이상함"(정제)/"너무 느리고 결과가 큰 차이
+    /// 안 남"(재순위화)이라는 이유로 두 체크박스 자체를 없애 달라고 요청했다
+    /// — `SearchView`의 Toggle 두 개도 함께 제거했다. `BibleSemanticSearchService.
+    /// search`는 이제 Apple Intelligence 질의 정제/재순위화를 아예 호출하지
+    /// 않는다(결정론적 `stripTrailingMetaPhrase`와, LLM이 아닌 `BibleStructuralRerankerService`는
+    /// 계속 항상 적용된다 — 이 둘은 "Apple Intelligence"가 아니라서 사용자가
+    /// 제거 대상으로 언급하지 않았다). `BibleQueryRefinementService.refine`/
+    /// `BibleSearchRerankerService`는 더 이상 호출되지 않지만 파일 자체는
+    /// 지우지 않았다(이 프로젝트의 기존 관례 — `AIRelationExtractor`처럼
+    /// 필요하면 나중에 다시 연결할 수 있도록 보관, 완전 삭제는 요청받지 않음).
+    ///
+    /// [2026-08-19 v3 신설, 2026-08-20 제거, Phase 5] 사용자 지시로 만들었던
+    /// "verse/context weight" 슬라이더("절 x% · 문맥 x%")를 없앴다. 사용자가
+    /// 직접 다시 리뷰하며 "의미가 있는가? 없으면 삭제할 것"이라고 물었는데,
+    /// 판단 근거: 이 값은 `BibleSemanticSearchService.search`의 코사인 유사도
+    /// 블렌드 비율(절 벡터 vs 문맥 벡터)을 바꾸는 내부 튜닝 파라미터일 뿐이고,
+    /// 애초에 만들 때부터 "0.6은 출발점일 뿐 최적값이라는 근거는 없다"고 밝혀둔
+    /// 값이었다(임의적 실험용 슬라이더, 이 문서 이전 버전 참고) — 최종
+    /// 사용자에게 "절/문맥 가중치"라는 ML 내부 개념 자체가 해석 가능한 정보가
+    /// 아니고, 어느 값이 "더 나은 결과"인지 검증된 기준도 없다. 슬라이더(UI)만
+    /// 없앴고, `BibleSemanticSearchService.search`의 `contextWeight` 매개변수
+    /// 자체는 그대로 남겨(기본값 0.6, 이전 슬라이더 기본값과 동일 — 동작 변화
+    /// 없음) 나중에 내부적으로 다시 스윕 테스트할 수 있게 했다(호출부는 이제
+    /// 인자를 넘기지 않고 기본값을 쓴다, 아래 `performAIQuerySearch` 참고).
+    /// `SearchView`의 슬라이더 UI도 함께 제거했다.
 
     /// [2026-08-19 신설] 방금 AI 검색이 실제로 임베딩에 넘긴 문장 — 정제 토글을
     /// 켰을 때 원문이 어떻게 바뀌었는지 화면에 보여줘서 비교를 돕는다
     /// (`SearchView`의 "검색에 사용된 문장" 안내 참고). 일반 키워드 검색에서는
     /// 항상 nil.
     private(set) var lastAIQueryUsed: String?
+
+    /// [2026-08-20 신설, 2026-08-20 재수정 Phase 5] Layer 1(`QueryIntentClassifier`)
+    /// + Layer 2(`QueryIntentHandler`) 결과 — 검색어가 관계/인물·지명 정보/
+    /// 예언/주제·속성/서사 중 하나로 읽히면, 그 카테고리의 실제 데이터를 찾아
+    /// 둔다. `SearchView`가 이 값이 있으면 결과 목록 맨 위에 카드로 보여준다.
+    ///
+    /// **[2026-08-20 재수정] 사용자 요청 — "단순 키워드 검색시(AI 토글 off
+    /// 상태) 순수 키워드 검색결과만 나올 것 ... 관계정보 라든지, 그런것은 AI
+    /// 토글을 켰을 때만 나오도록." 처음 설계(3계층 구조 문서 상단 주석)는
+    /// "Layer 1/2는 모드와 무관하게 항상 같은 결과를 내야 한다"는 전제였는데,
+    /// 사용자가 실사용 후 이 전제를 명시적으로 뒤집었다 — 이제 이 카드는
+    /// `isAIQueryEnabled`가 켜져 있을 때만 계산되고(꺼져 있으면 항상 nil),
+    /// 순수 키워드 검색은 이 카드의 존재 자체를 모른다(`performSearch` 참고).
+    /// 아래 `performAIQuerySearch`가 이 카드의 성경 좌표(`QueryIntentCard.
+    /// verseRefs`)를 "성경구절" 섹션에 직접 활용하기도 한다.
+    private(set) var intentCard: QueryIntentCard?
 
     private(set) var verseResults: [VerseSearchResult] = []
     private(set) var memoResults: [MemoSearchResult] = []
@@ -270,6 +280,7 @@ final class SearchViewModel {
     /// 결과 상태를 한 번에 정리한다 — `query` didSet과 `searchImmediately()`
     /// 양쪽에서 쓴다.
     private func clearResults() {
+        intentCard = nil
         verseResults = []
         memoResults = []
         documentResults = []
@@ -305,9 +316,18 @@ final class SearchViewModel {
     private func performSearch(query: String) async {
         isSearching = true
         defer { isSearching = false }
+
+        // [2026-08-20 재수정, Phase 5] 사용자 요청 — "단순 키워드 검색시(AI
+        // 토글 off)엔 순수 키워드 검색결과만, 관계정보 카드는 AI 토글을 켰을
+        // 때만." 이전엔 모드와 무관하게 항상 Layer 1/2를 먼저 계산했는데(3계층
+        // 구조의 원래 전제), 이제 AI 검색일 때만 계산한다 — `intentCard`
+        // 선언부 주석 참고.
         if isAIQueryEnabled {
+            let intent = QueryIntentClassifier.classify(query)
+            intentCard = QueryIntentHandler.handle(query, intent: intent)
             await performAIQuerySearch(query: query)
         } else {
+            intentCard = nil
             lastAIQueryUsed = nil
             performKeywordSearch(query: query)
         }
@@ -464,23 +484,73 @@ final class SearchViewModel {
             }
         }
 
+        // [2026-08-20 재작성] 사용자 요청 — "띄어쓰기 단어가 모두 일치하면
+        // 100, 한 단어만 일치하면 50, 그 중 여러 번 일치한 횟수*10처럼
+        // 가중치로 계산 ... 모두 일치해야 가장 높은 점수가 확보되어야 함 ...
+        // 가중치 내림차순으로 나와야 함." 이전엔 단어마다 순서대로 LIKE 조회해
+        // 30개 채우면 그 자리에서 바로 반환했다(정렬이라는 개념 자체가 없었다).
+        // 이제는 먼저 모든 단어(동의어 포함, `RelationSynonyms`)의 후보를 전부
+        // 모은 뒤 `KeywordMatchScorer`로 점수를 매기고, 내림차순 정렬 후에야
+        // 상위 30개를 자른다 — 그래야 "일부만 일치하지만 흔한 단어라 결과가
+        // 많은" 후보가 "모두 일치하는" 진짜 정답보다 먼저 채워져 뒤의 정답을
+        // 밀어내는 일이 없다.
+        //
+        // [2026-08-20 신설, FTS5 전환] 사용자 요청 — "개역한글 기본 번들
+        // 성경은 FTS5 unicode61로 변환할 것. 앞뒤 라이크하지 말고 뒤
+        // 라이크(prefix)로만." 번들 기본 번역본(`TranslationBootstrap.
+        // bundledTranslationCode`, 개역한글)에 한해 이미 만들어져 있었지만
+        // 실제 검색 경로 어디에도 연결되지 않았던 `ReferenceDataStore.
+        // searchVersesFullText`(FTS5 unicode61, prefix 검색, `ReferenceData.
+        // sqlite`의 `VerseSearchIndex` — 소스가 BibleDB.sqlite와 동일한
+        // 개역한글 31,102절이라 새 DB를 만들 필요가 없었다)를 쓴다. 사용자가
+        // 추가한 다른 번역본 파일은 이 FTS5 인덱스가 없으므로(요청 범위 밖)
+        // 기존 LIKE(`BibleReferenceStore.searchVerses`)를 그대로 쓴다.
+        var wordCandidates: [String: (verse: BibleVerse, bookNameKo: String)] = [:]
+        let fullTextStore = ReferenceDataProvider.shared.store
         for registry in registries {
             guard let store = try? store(for: registry) else { continue }
             let versionCode = store.hasVersionCodeColumn ? registry.code : nil
+            let useFullText = registry.code == TranslationBootstrap.bundledTranslationCode && fullTextStore != nil
+
             for word in words {
-                guard let verses = try? store.searchVerses(query: word, versionCode: versionCode, limit: 30) else { continue }
-                for verse in verses {
-                    let key = "\(verse.bookId)-\(verse.chapter)-\(verse.verse)"
-                    guard seen.insert(key).inserted else { continue }
-                    results.append(VerseSearchResult(
-                        bookId: verse.bookId, chapter: verse.chapter, verse: verse.verse,
-                        content: verse.content,
-                        bookNameKo: booksProvider.book(id: verse.bookId)?.nameKo ?? "\(verse.bookId)권",
-                        highlightKeywords: words
-                    ))
-                    if results.count >= 30 { return results }
+                for variant in RelationSynonyms.expanded(word) {
+                    if useFullText, let fullTextStore {
+                        guard let matches = try? fullTextStore.searchVersesFullText(matching: variant, limit: 50) else { continue }
+                        for match in matches {
+                            let key = "\(match.bookId)-\(match.chapter)-\(match.verse)"
+                            guard !seen.contains(key), wordCandidates[key] == nil else { continue }
+                            wordCandidates[key] = (
+                                BibleVerse(uid: 0, versionCode: versionCode, bookId: match.bookId, chapter: match.chapter, verse: match.verse, content: match.content, paragraph: nil),
+                                booksProvider.book(id: match.bookId)?.nameKo ?? "\(match.bookId)권"
+                            )
+                        }
+                    } else {
+                        guard let verses = try? store.searchVerses(query: variant, versionCode: versionCode, limit: 50) else { continue }
+                        for verse in verses {
+                            let key = "\(verse.bookId)-\(verse.chapter)-\(verse.verse)"
+                            guard !seen.contains(key), wordCandidates[key] == nil else { continue }
+                            wordCandidates[key] = (verse, booksProvider.book(id: verse.bookId)?.nameKo ?? "\(verse.bookId)권")
+                        }
+                    }
                 }
             }
+        }
+
+        let scoredCandidates = wordCandidates.values
+            .map { entry -> (result: VerseSearchResult, score: KeywordMatchScorer.Score) in
+                let score = KeywordMatchScorer.score(words: words, in: entry.verse.content)
+                let result = VerseSearchResult(
+                    bookId: entry.verse.bookId, chapter: entry.verse.chapter, verse: entry.verse.verse,
+                    content: entry.verse.content, bookNameKo: entry.bookNameKo, highlightKeywords: words
+                )
+                return (result, score)
+            }
+            .filter { $0.score.isAnyMatch }
+            .sorted { $0.score > $1.score }
+
+        for candidate in scoredCandidates {
+            guard results.count < 30 else { break }
+            results.append(candidate.result)
         }
         return results
     }
@@ -652,20 +722,35 @@ final class SearchViewModel {
     /// 유사도, 그 파일 상단 주석 참고)로 완전히 바꿨다 — 더 이상 키워드 검색
     /// 경로를 거치지 않는다. 의미검색은 성경 구절만 대상으로 하므로(개요/메모/
     /// 문서는 임베딩 색인 대상이 아니다) 나머지 5개 섹션은 항상 비운다.
+    ///
+    /// [2026-08-20 갱신, Phase 5] 사용자 리포트 — "'다윗의 아들들'을 검색하면
+    /// 성경구절 섹션에 각 아들의 실제 절이 아니라 키워드 검색 가중치 계산값이
+    /// 나오는 듯함." `intentCard`가 관계/인물·지명/예언/주제/서사 중 하나로
+    /// 확정되고 그 카드에 실제 성경 좌표가 있으면(`QueryIntentCard.verseRefs`),
+    /// 아래 근사 검색(임베딩+하이브리드 키워드 병합)을 아예 건너뛰고 그
+    /// 좌표를 그대로 "성경구절" 섹션에 채운다 — 카드가 이미 정확한 답을
+    /// 확정했는데 별도의 근사 검색으로 다른(때로는 무관한) 결과를 보여줄
+    /// 이유가 없다는 판단. 카드가 없거나(`.general`) 좌표가 비어 있으면(아직
+    /// 데이터가 없는 카테고리 등) 기존처럼 의미검색으로 넘어간다.
     private func performAIQuerySearch(query: String) async {
         errorDescription = nil
-        let result = await BibleSemanticSearchService.search(
-            query: query, refinementEnabled: isQueryRefinementEnabled, rerankEnabled: isRerankEnabled,
-            contextWeight: Float(contextWeight)
-        )
+
+        if let intentCard, !intentCard.verseRefs.isEmpty {
+            verseResults = resolveVerseResults(intentCard.verseRefs)
+            lastAIQueryUsed = nil
+            memoResults = []; documentResults = []
+            outlineResults = []; phraseNoteResults = []; summaryResults = []
+            return
+        }
+
+        let result = await BibleSemanticSearchService.search(query: query)
         switch result {
         case .success(let outcome):
             verseResults = outcome.matches.map { match in
                 VerseSearchResult(
                     bookId: match.bookId, chapter: match.chapter, verse: match.verse,
                     content: match.content,
-                    bookNameKo: booksProvider.book(id: match.bookId)?.nameKo ?? "\(match.bookId)권",
-                    similarityScore: Double(match.similarity)
+                    bookNameKo: booksProvider.book(id: match.bookId)?.nameKo ?? "\(match.bookId)권"
                 )
             }
             lastAIQueryUsed = outcome.queryUsedForEmbedding
@@ -676,6 +761,26 @@ final class SearchViewModel {
         }
         memoResults = []; documentResults = []
         outlineResults = []; phraseNoteResults = []; summaryResults = []
+    }
+
+    /// [2026-08-20 신설, Phase 5] `QueryIntentCard.verseRefs`(관계/인물·지명
+    /// 카드가 이미 확정한 성경 좌표)를 실제 절 본문과 함께 `VerseSearchResult`
+    /// 로 바꾼다. `SearchViewModel.searchVerses`(키워드 검색)의 30개 상한과
+    /// 같은 근거로 여기도 30개에서 자른다 — 관계가 많은 인물(예: 다윗의 아들
+    /// 20여 명, 각자 여러 절)일 때 목록이 무한정 길어지지 않게.
+    private func resolveVerseResults(_ refs: [BibleVerseRef]) -> [VerseSearchResult] {
+        guard let store = try? BibleReferenceStore(filePath: TranslationBootstrap.resolvedBundledDatabaseURL().path) else { return [] }
+        var results: [VerseSearchResult] = []
+        for ref in refs {
+            guard let verse = try? store.verse(bookId: ref.bookId, chapter: ref.chapter, verse: ref.verse) else { continue }
+            results.append(VerseSearchResult(
+                bookId: verse.bookId, chapter: verse.chapter, verse: verse.verse,
+                content: verse.content,
+                bookNameKo: booksProvider.book(id: verse.bookId)?.nameKo ?? "\(verse.bookId)권"
+            ))
+            if results.count >= 30 { break }
+        }
+        return results
     }
 
     // MARK: - 성경 전체 임베딩 색인 (2026-08-19 신설)

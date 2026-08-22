@@ -50,34 +50,28 @@ import AppKit
 import UIKit
 #endif
 
+// [2026-08-21 갱신] 사용자 요청(공통 — macOS/iOS 둘 다) — "일반 - 상위 탭
+// 추가: 기본/라이센스/단축키. 성경 - 상위 탭 추가: 번역본/모양/복사 형식.
+// 저장공간 탭 삭제. AI 탭 삭제." 기존엔 8개 탭이 한 줄로 나란히 있었는데,
+// 이제 최상위는 "일반"/"성경" 두 탭(+ DEBUG 전용 "개발자")뿐이고, 그 안에
+// 각각 하위 TabView를 하나 더 두는 2단 구조다 — 아래 `GeneralSettingsGroup`/
+// `BibleSettingsGroup`이 그 하위 TabView를 담는다. "AI"/"저장공간" 탭은
+// 자리 자체를 없앴다(위 `AISettingsTab`/`StorageSettingsTab` 삭제 주석 참고).
 struct SettingsView: View {
     var body: some View {
         TabView {
-            GeneralSettingsTab()
+            GeneralSettingsGroup()
                 .tabItem { Label("일반", systemImage: "gearshape") }
-            TranslationsSettingsTab()
-                .tabItem { Label("번역본", systemImage: "character.book.closed") }
-            AISettingsTab()
-                .tabItem { Label("AI", systemImage: "sparkles") }
-            StorageSettingsTab()
-                .tabItem { Label("저장공간", systemImage: "externaldrive") }
-            AppearanceSettingsTab()
-                .tabItem { Label("모양", systemImage: "paintbrush") }
-            // [2026-08-08 추가] 사용자 요청 — 성경 구절 클립보드 복사 형식(참조 위치/
-            // 괄호 스타일/약어/번역본 위치/줄바꿈/절 번호 스타일)을 위한 탭.
-            BibleCopyFormatSettingsTab()
-                .tabItem { Label("복사 형식", systemImage: "doc.on.doc") }
-            ShortcutsSettingsTab()
-                .tabItem { Label("단축키", systemImage: "keyboard") }
-            AboutSettingsTab()
-                .tabItem { Label("정보", systemImage: "info.circle") }
+            BibleSettingsGroup()
+                .tabItem { Label("성경", systemImage: "book.closed") }
             // [2026-08-14 복원] 사용자 지적 — "개요 시딩을 리치 에디터로 작성하고
             // 싶어서 임시(배포시 제외) 페이지를 요청했는데 왜 평문 JSON 방식으로
             // 마음대로 바꿨나." 개요 화면(`OutlineBookBulkEditView`) 자체가 이미
             // 리치 에디터 서식을 완전히 지원하므로 새 에디터를 만들 필요는 없고,
             // 그 화면에서 작성한 결과(서식 포함 RTF)를 배포용 시드 파일로 뽑아내는
             // "내보내기" 기능만 개발자 전용으로 복원하면 된다 — OutlineSeedExporter.swift
-            // 참고. #if DEBUG로 배포 빌드에서는 이 탭 자체가 빠진다.
+            // 참고. #if DEBUG로 배포 빌드에서는 이 탭 자체가 빠진다. 이 탭은 이번
+            // 재구성 요청 대상이 아니라 최상위에 그대로 남겨뒀다.
             #if DEBUG
             DeveloperSettingsTab()
                 .tabItem { Label("개발자", systemImage: "hammer") }
@@ -86,6 +80,38 @@ struct SettingsView: View {
         #if os(macOS)
         .frame(width: 560, height: 480)
         #endif
+    }
+}
+
+/// [2026-08-21 신설] "일반" 상위 탭의 하위 탭(기본/라이센스/단축키) — 각 하위
+/// 탭 뷰 자체는 그대로 재사용하고 이 안에 다시 `TabView`로 감싸기만 한다.
+private struct GeneralSettingsGroup: View {
+    var body: some View {
+        TabView {
+            GeneralSettingsTab()
+                .tabItem { Label("기본", systemImage: "gearshape") }
+            LicenseSettingsTab()
+                .tabItem { Label("라이센스", systemImage: "doc.plaintext") }
+            ShortcutsSettingsTab()
+                .tabItem { Label("단축키", systemImage: "keyboard") }
+        }
+    }
+}
+
+/// [2026-08-21 신설] "성경" 상위 탭의 하위 탭(번역본/모양/복사 형식) — 세
+/// 탭 모두 기존 탭을 그대로 옮겨왔을 뿐, 내용은 바뀌지 않았다.
+private struct BibleSettingsGroup: View {
+    var body: some View {
+        TabView {
+            TranslationsSettingsTab()
+                .tabItem { Label("번역본", systemImage: "character.book.closed") }
+            AppearanceSettingsTab()
+                .tabItem { Label("모양", systemImage: "paintbrush") }
+            // [2026-08-08 추가] 사용자 요청 — 성경 구절 클립보드 복사 형식(참조 위치/
+            // 괄호 스타일/약어/번역본 위치/줄바꿈/절 번호 스타일)을 위한 탭.
+            BibleCopyFormatSettingsTab()
+                .tabItem { Label("복사 형식", systemImage: "doc.on.doc") }
+        }
     }
 }
 
@@ -117,6 +143,12 @@ struct SettingsHostView: View {
 
 // MARK: - 일반
 
+// [2026-08-21 갱신] 사용자 요청 — "일반 - 상위 탭 추가: 기본/라이센스/단축키.
+// 기본 탭 에다 일반 에 있는 기능 + 정보의 앱 정보." 이 탭이 새 "기본" 하위 탭이
+// 되고, 옛 "정보" 탭(지금은 `LicenseSettingsTab`, 아래 MARK 참고) 맨 위에 있던
+// "앱 정보" Section(이름/버전)을 그대로 여기로 옮겨왔다 — 그 Section이 쓰던
+// `versionString`/`buildString`도 함께 옮겼다(옛 "정보" 탭 나머지 내용 중 이
+// 둘을 쓰는 곳이 없음을 확인 후 이동, 복사가 아님).
 private struct GeneralSettingsTab: View {
     @Environment(\.modelContext) private var modelContext
     @State private var settings = UserSettingsStore.shared
@@ -124,6 +156,23 @@ private struct GeneralSettingsTab: View {
 
     var body: some View {
         Form {
+            Section {
+                VStack(alignment: .leading, spacing: 4) {
+                    // [2026-08-11 변경] 사용자 요청 — 앱 이름을 "JBCH 성경 연구"로
+                    // 변경(프로젝트 코드명 "JBCHBibleResearch"는 내부 식별자로만
+                    // 남고, 사용자에게 보이는 이름은 여기와 앱 번들 표시 이름
+                    // 둘 다 바꿨다 — project.pbxproj의 INFOPLIST_KEY_CFBundleDisplayName
+                    // 참고).
+                    Text("JBCH 성경 연구")
+                        .font(.headline)
+                    Text("버전 \(versionString) (\(buildString))")
+                        .font(.caption)
+                        .foregroundStyle(.secondary)
+                }
+            } header: {
+                Label("앱 정보", systemImage: "info.circle")
+            }
+
             Section {
                 Toggle("시작 시 마지막으로 보던 화면 열기", isOn: $settings.openLastScreenOnLaunch)
             } header: {
@@ -150,6 +199,14 @@ private struct GeneralSettingsTab: View {
         .onAppear {
             translations = (try? modelContext.fetch(FetchDescriptor<TranslationRegistry>(sortBy: [SortDescriptor(\.addedAt)]))) ?? []
         }
+    }
+
+    private var versionString: String {
+        Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? "—"
+    }
+
+    private var buildString: String {
+        Bundle.main.infoDictionary?["CFBundleVersion"] as? String ?? "—"
     }
 }
 
@@ -297,156 +354,15 @@ private struct TranslationsSettingsTab: View {
     }
 }
 
-// MARK: - AI
-
-private struct AISettingsTab: View {
-    @State private var settings = UserSettingsStore.shared
-    private var status: ChapterOutlineDraftService.AppleIntelligenceStatus {
-        ChapterOutlineDraftService.appleIntelligenceStatus
-    }
-
-    var body: some View {
-        Form {
-            Section {
-                statusBadge
-            } header: {
-                Label("Apple Intelligence 상태", systemImage: "sparkles")
-            }
-
-            Section {
-                Toggle("장 개요 작성 시 AI 초안 제안 받기", isOn: $settings.isAIChapterDraftEnabled)
-                    .disabled(status != .available)
-            } header: {
-                Label("AI 초안 제안", systemImage: "wand.and.stars")
-            } footer: {
-                Text("온디바이스에서만 실행되며 인터넷으로 전송되지 않습니다. 비용이 발생하지 않습니다.")
-            }
-        }
-        .formStyle(.grouped)
-    }
-
-    @ViewBuilder
-    private var statusBadge: some View {
-        switch status {
-        case .available:
-            Label("사용 가능", systemImage: "checkmark.circle.fill").foregroundStyle(.green)
-        case .deviceUnsupported:
-            Label("이 기기 미지원", systemImage: "circle.slash").foregroundStyle(.gray)
-        case .disabledInSettings:
-            Label("설정에서 꺼짐", systemImage: "exclamationmark.triangle.fill").foregroundStyle(.orange)
-        }
-    }
-}
-
-// MARK: - 저장공간
-//
-// [2026-08-11 변경] 사용자 요청 — 연구문서 원본/OCR 이미지를 이 경로에 "표시만"
-// 하지 말고 실제로 그 위치에 저장하도록 했다. 실제 복사 로직은
-// `DocumentUploadService.copyIntoICloudDocuments(sourceURL:subfolder:)` 참고 —
-// 여기 표시된 경로 문구가 실제 동작과 어긋나지 않도록 같은 하위 폴더 이름
-// ("연구 문서"/"OCR 이미지")을 그대로 썼다. iCloud Drive를 쓸 수 없는 기기/
-// 계정에서는 자동으로 기존 방식(원본 위치 참조)으로 폴백한다.
-//
-// [2026-08-15 추가] 사용자 질문 — "파일을 업로드했는데 파일이 동기화 폴더에
-// 저장되지 않는 이유는?" 바로 위 문단이 답이다(iCloud 컨테이너를 못 쓰면
-// 조용히 원본 위치 참조로 폴백) — 그런데 예전엔 "그 폴백까지 화면에 실시간
-// 반영하려면 별도 상태 조회가 필요해 이번 범위에는 넣지 않았다"고 일부러
-// 미뤄 뒀던 부분이라, 사용자가 직접 원인을 확인할 방법이 아예 없었다. 이제
-// 그 상태 조회를 실제로 추가했다 — ①iCloud 컨테이너를 지금 이 순간 실제로
-// 쓸 수 있는지(`FileManager.url(forUbiquityContainerIdentifier:)`가 nil을
-// 돌려주는지), ②이미 업로드된 문서들이 실제로 `storageLocationKind`별로
-// 몇 개씩 나뉘어 있는지를 `@Query`로 그대로 보여준다.
-private struct StorageSettingsTab: View {
-    @Query private var documents: [SourceDocument]
-
-    /// `DocumentUploadService.copyIntoICloudDocuments`가 매 업로드 때마다
-    /// 확인하는 것과 정확히 같은 조건 — 여기서도 같은 API를 그대로 호출해서
-    /// "지금 이 순간" 상태를 보여준다(캐시하지 않음, 탭을 열 때마다 새로 확인).
-    private var isICloudContainerAvailable: Bool {
-        FileManager.default.url(
-            forUbiquityContainerIdentifier: BibleResearchSchema.defaultCloudKitContainerIdentifier
-        ) != nil
-    }
-
-    private var icloudStoredCount: Int {
-        documents.filter { $0.storageLocationKind == .icloudDrive }.count
-    }
-
-    /// `.userFolder`(정상 폴백 — 사용자가 고른 원래 위치)와
-    /// `.appManagedFallback`(휴리스틱으로도 못 알아낸 경우) 둘 다 "iCloud
-    /// 동기화 폴더로 복사되지 않고 원본 위치를 그대로 참조"라는 결과는 같아서
-    /// 하나로 합쳐 보여준다 — `DocumentUploadService.inferStorageLocationKind`
-    /// 참고.
-    private var referencedInPlaceCount: Int {
-        documents.filter { $0.storageLocationKind != .icloudDrive }.count
-    }
-
-    var body: some View {
-        Form {
-            Section {
-                LabeledContent("iCloud 컨테이너") {
-                    if isICloudContainerAvailable {
-                        Label("사용 가능", systemImage: "checkmark.circle.fill")
-                            .foregroundStyle(.green)
-                    } else {
-                        Label("사용 불가", systemImage: "xmark.circle.fill")
-                            .foregroundStyle(.red)
-                    }
-                }
-            } header: {
-                Label("iCloud 동기화 상태", systemImage: "icloud")
-            } footer: {
-                if isICloudContainerAvailable {
-                    Text("지금 업로드하는 파일은 이 앱의 iCloud 컨테이너(Documents 폴더)로 복사됩니다.")
-                } else {
-                    // 이 문구가 사용자 질문에 대한 직접적인 답이다.
-                    Text("iCloud 컨테이너를 지금 쓸 수 없습니다 — 그래서 업로드한 파일이 동기화 폴더로 복사되지 않고, 원래 있던 위치를 그대로 가리킵니다. 확인해볼 것: 이 Mac(또는 기기)이 iCloud에 로그인돼 있는지, 시스템 설정 > Apple ID > iCloud Drive가 켜져 있는지, Xcode의 Signing & Capabilities에서 \"iCloud\" > \"iCloud Documents\" 항목이 켜져 있고 프로비저닝 프로파일이 그 상태로 갱신됐는지.")
-                }
-            }
-
-            if !documents.isEmpty {
-                Section {
-                    LabeledContent("iCloud 드라이브에 저장됨") {
-                        Text("\(icloudStoredCount)개").foregroundStyle(.secondary)
-                    }
-                    LabeledContent("원본 위치를 그대로 참조") {
-                        Text("\(referencedInPlaceCount)개").foregroundStyle(.secondary)
-                    }
-                } header: {
-                    Label("업로드된 연구문서 현황", systemImage: "chart.bar.doc.horizontal")
-                } footer: {
-                    Text("\"원본 위치를 그대로 참조\"인 문서는 처음 선택했던 파일을 계속 가리킬 뿐, 동기화 폴더로 복사되지 않았습니다 — 그 원본 파일을 나중에 옮기거나 지우면 이 앱에서 더 이상 열 수 없습니다.")
-                }
-            }
-
-            Section {
-                Text("iCloud 컨테이너 / Documents / 연구 문서")
-                    .fontDesign(.monospaced)
-            } header: {
-                Label("연구문서 원본 저장 위치", systemImage: "doc.text")
-            } footer: {
-                Text("업로드한 원본 파일이 이 경로에 복사되어 기기 간 iCloud로 동기화됩니다. iCloud를 쓸 수 없으면 원본이 있던 위치를 대신 참조합니다.")
-            }
-
-            Section {
-                Text("iCloud 컨테이너 / Documents / OCR 이미지")
-                    .fontDesign(.monospaced)
-            } header: {
-                Label("OCR 이미지 저장 위치", systemImage: "text.viewfinder")
-            } footer: {
-                Text("OCR 대상으로 업로드한 이미지 원본이 이 경로에 복사됩니다.")
-            }
-
-            Section {
-                Text("⚠️ 캐시 용량 표시/비우기는 아직 구현되지 않았습니다.")
-                    .foregroundStyle(.secondary)
-            } header: {
-                Label("캐시", systemImage: "internaldrive")
-            }
-        }
-        .formStyle(.grouped)
-    }
-}
+// [2026-08-21 삭제] 사용자 요청 — "AI 탭 삭제" / "저장공간 탭 삭제". 옛
+// `AISettingsTab`(Apple Intelligence 상태 + 장 개요 AI 초안 토글)과
+// `StorageSettingsTab`(iCloud 동기화 상태/연구문서 저장 위치 표시) 두 탭을
+// 통째로 지웠다 — 둘 다 이 파일 안에서만 쓰이는 `private struct`라(위에서
+// 확인: `AISettingsTab()`/`StorageSettingsTab()` 호출부가 SettingsView.body
+// 한 곳씩뿐) 삭제해도 다른 파일에 영향이 없다. 이 탭들이 노출하던 설정값
+// (`UserSettingsStore.isAIChapterDraftEnabled` 등) 자체는 다른 화면
+// (`ChapterOutlineDraftService`)이 계속 참조하므로 그대로 남겨 뒀다 — 지운
+// 것은 어디까지나 이 설정 화면의 UI 진입점뿐이다.
 
 // MARK: - 모양
 
@@ -810,28 +726,16 @@ private struct ShortcutsSettingsTab: View {
     }
 }
 
-// MARK: - 정보
-
-private struct AboutSettingsTab: View {
+// MARK: - 라이센스
+//
+// [2026-08-21 수정] 사용자 요청 — "정보 이름 변경 - 라이센스." 옛 이름
+// `AboutSettingsTab`/탭 라벨 "정보"를 각각 `LicenseSettingsTab`/"라이센스"로
+// 바꿨다. 맨 위에 있던 "앱 정보" Section(이름/버전 표시)은 새 "기본" 탭
+// (`GeneralSettingsTab`)으로 옮겨서 여기서는 빠졌다 — 남은 내용은 전부
+// 라이선스·저작권 고지라 새 이름과 실제 내용이 맞는다.
+private struct LicenseSettingsTab: View {
     var body: some View {
         Form {
-            Section {
-                VStack(alignment: .leading, spacing: 4) {
-                    // [2026-08-11 변경] 사용자 요청 — 앱 이름을 "JBCH 성경 연구"로
-                    // 변경(프로젝트 코드명 "JBCHBibleResearch"는 내부 식별자로만
-                    // 남고, 사용자에게 보이는 이름은 여기와 앱 번들 표시 이름
-                    // 둘 다 바꿨다 — project.pbxproj의 INFOPLIST_KEY_CFBundleDisplayName
-                    // 참고).
-                    Text("JBCH 성경 연구")
-                        .font(.headline)
-                    Text("버전 \(versionString) (\(buildString))")
-                        .font(.caption)
-                        .foregroundStyle(.secondary)
-                }
-            } header: {
-                Label("앱 정보", systemImage: "info.circle")
-            }
-
             // [2026-08-19 추가] 사용자가 (재)대한성서공회 저작권부에 직접 문의해
             // 받은 회신 그대로 반영 — "성경전서 개역한글판(1961)"과 "관주성경전서
             // 개역한글판(1962)"은 저작재산권 보호기간이 만료돼 허가 없이 무료로
@@ -962,14 +866,6 @@ private struct AboutSettingsTab: View {
             }
         }
         .formStyle(.grouped)
-    }
-
-    private var versionString: String {
-        Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? "—"
-    }
-
-    private var buildString: String {
-        Bundle.main.infoDictionary?["CFBundleVersion"] as? String ?? "—"
     }
 }
 

@@ -232,9 +232,19 @@ struct TranslationColumnView: View {
                                 onSelectSingleVerse(verse.verse)
                             }
                             #else
-                            // iOS/iPadOS 터치에는 수식키 신호가 없으므로 항상
-                            // "교체" 선택만 지원한다.
-                            onSelectSingleVerse(verse.verse)
+                            // [2026-08-21 수정] 사용자 요청("아이패드 수정사항") —
+                            // "한번 탭하면 선택, 탭한 구절을 탭하면 탭취소.
+                            // 여러구절 탭 = 여러구절 선택." 예전엔 iOS/iPadOS
+                            // 터치에 수식키 신호가 없다는 이유로 항상 "교체"
+                            // 선택(onSelectSingleVerse)만 지원했다 — 이제 macOS의
+                            // Option+클릭과 같은 의미인 onToggleVerseSelection
+                            // (선택 추가/제거, 다른 절 선택은 유지)을 기본 탭
+                            // 동작으로 쓴다. 이 요청은 "아이패드 수정사항" 목록
+                            // 안에 있고 "(맥OS, iOS 공통)" 표기가 없어, macOS 쪽
+                            // 분기(위, 2026-08-15 설계)는 그대로 둔다 — 기존
+                            // 수식키 기반 3단 구분(일반 클릭=교체/Shift·Cmd=범위/
+                            // Option=개별 토글)을 건드리지 않는다.
+                            onToggleVerseSelection(verse.verse)
                             #endif
                         }
                         .contextMenu {

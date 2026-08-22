@@ -83,6 +83,31 @@ private struct PhoneAlignmentTarget: Equatable {
     let verse: Int
 }
 
+#if os(iOS)
+/// [2026-08-21 신설, 빌드에러 수정] `verseSelectionActionBar`(아래)가 사용자
+/// 요청 — "세로보기에서 탭하면 하단 메뉴는 한글 메뉴명은 빼고 아이콘만
+/// 나오도록" — 을 구현하려던 코드가 `.labelStyle(isNarrow ? .iconOnly :
+/// .automatic)`(삼항 연산자)로 되어 있었는데, 이게 Xcode 빌드 에러였다:
+/// `.iconOnly`(`IconOnlyLabelStyle`)와 `.automatic`(`DefaultLabelStyle`)은
+/// 서로 다른 구체 타입이라 삼항 연산자가 "공통 타입"을 찾지 못해 컴파일이
+/// 안 된다(`LabelStyle` 프로토콜은 연관 타입이 있어 두 구체 타입을 하나로
+/// 합칠 수 없다). `ViewModifier.body(content:)`는 `@ViewBuilder`라 if/else
+/// 분기(`_ConditionalContent`로 감싸져 서로 다른 구체 타입이어도 허용됨)는
+/// 문제없이 컴파일된다 — 그래서 삼항 연산자 대신 이 작은 전용
+/// `ViewModifier`로 옮겼다(로직 의도는 그대로: 세로 좁은 화면이면 아이콘만,
+/// 아니면 기존 기본 스타일).
+private struct BottomBarLabelStyleModifier: ViewModifier {
+    let isNarrow: Bool
+    func body(content: Content) -> some View {
+        if isNarrow {
+            content.labelStyle(.iconOnly)
+        } else {
+            content.labelStyle(.automatic)
+        }
+    }
+}
+#endif
+
 private struct BibleReadingContentView: View {
     @Environment(\.modelContext) private var modelContext
     /// [2026-08-07 추가] 사용자 요청 — "성경 조회 창은 여러 개를 띄울 수 있어야
@@ -147,20 +172,33 @@ private struct BibleReadingContentView: View {
     /// 하단 액션바의 [말씀 복사] 버튼이 이 프록시를 통해 인스펙터 안의 리치
     /// 텍스트뷰 커서 위치에 직접 삽입한다.
     @State private var wordSummaryProxy = RichTextEditingProxy()
-    /// [2026-08-12 추가] 사용자 요청 — "말씀 구절과 오른쪽 사이드바 에디터
-    /// 영역의 비율을 50:50으로 하게 할것." `.inspectorColumnWidth`는 고정 pt
-    /// 값만 받고 화면 폭 비율을 직접 알 방법이 없어, 이 화면(인스펙터가 아직
-    /// 열리기 전 = 성경 본문이 전체 폭을 다 쓰고 있는 상태)의 실제 렌더 폭을
-    /// 아래 `.background`의 `GeometryReader`로 계속 측정해 뒀다가, 인스펙터가
-    /// 열리는 "그 순간"의 값을 절반으로 얼려서 쓴다(`openWordSummaryEditor()`
-    /// 참고). 인스펙터가 열린 뒤에는 본문 폭 자체가 줄어들어 이 값을 계속
-    /// 실시간으로 다시 재는 방식은 "줄어든 폭의 절반 → 인스펙터가 더 좁아짐 →
-    /// 본문이 다시 넓어짐 → ..." 식으로 매 프레임 흔들리는 피드백 루프가 될 수
-    /// 있어 피했다.
-    @State private var lastMeasuredContentWidth: CGFloat = 0
-    /// 말씀 요약을 여는 순간 `lastMeasuredContentWidth`의 절반으로 고정한 값 —
-    /// nil이면 "지금 50:50 모드가 아님"을 뜻한다.
-    @State private var wordSummaryInspectorWidth: CGFloat?
+    /// [2026-08-12 추가, 2026-08-21 폐기] 사용자 요청 — "말씀 구절과 오른쪽
+    /// 사이드바 에디터 영역의 비율을 50:50으로 하게 할것." 처음엔 인스펙터가
+    /// 열리기 직전 본문 실측 폭을 `.background`의 `GeometryReader`로 얼려 그
+    /// 절반을 썼다. ⚠️ [2026-08-21 사용자 보고] 아이패드 실기기에서 이 폭이
+    /// "상황에 따라 왔다갔다함, 줄었다가 늘었다가 함, 절반보다 작아짐" — 얼린
+    /// 값이 iPad에서는 안정적으로 유지되지 않는 것으로 보인다(정확한 원인은
+    /// 미확인 — GeometryReader가 인스펙터 열림/닫힘 시점에 다시 그려지며
+    /// `.onAppear`가 재실행되는 등의 가능성을 의심할 뿐 실기기 없이 확정할
+    /// 근거는 없다). 사용자가 "고정 크기이길 바람"이라고 명확히 요청해, 화면
+    /// 폭에서 유도하는 계산을 완전히 버리고 아래 `.inspectorColumnWidth`에서
+    /// `Self.wordSummaryInspectorFixedWidth` 상수를 직접 쓰는 것으로 바꿨다 —
+    /// 더 이상 폭을 실측할 필요가 없어져 그 전용이던 `lastMeasuredContentWidth`
+    /// 상태 자체를 지웠다.
+    ///
+    /// [2026-08-21 신설] "세로보기에서 하단 메뉴 아이콘만 표시" 판정 — 위에서
+    /// 쓰던 것과 같은 `GeometryReader` 배경을 재활용한다. `UIDevice.current.
+    /// orientation`은 방향 알림 생성을 별도로 켜야 하고, Split View/Slide
+    /// Over에서는 "기기 방향"과 "이 화면이 실제로 받는 폭"이 다를 수 있어(예:
+    /// 가로로 눕힌 아이패드에서 세로로 좁게 Split View) 신뢰할 수 없다 — 이
+    /// 화면이 실제로 좁고 길게 그려지는지가 중요하지, 기기 자체의 방향 센서
+    /// 값은 중요하지 않다(하단 액션바 버튼이 잘리지 않게 하는 게 목적이므로).
+    @State private var isNarrowBottomBarLayout: Bool = false
+    /// [2026-08-21 신설] 위 주석 참고 — "말씀 요약" 인스펙터의 고정 폭. 예전
+    /// 계산값의 대략적인 중간값(최소 380/이상적 520이던 기존 폴백 범위)을
+    /// 그대로 가져왔다 — 정확한 pt 값에 대한 별도 요구가 없어, 이미 이 코드가
+    /// 써 온 값을 그대로 상수화했다(근거 없이 새 숫자를 지어내지 않기 위함).
+    private static let wordSummaryInspectorFixedWidth: CGFloat = 420
 
     private var isPhone: Bool {
         #if os(iOS)
@@ -224,16 +262,18 @@ private struct BibleReadingContentView: View {
                 sideBySideColumns
             }
         }
-        // [2026-08-12 추가] 위 `lastMeasuredContentWidth`/`wordSummaryInspectorWidth`
+        // [2026-08-12 추가, 2026-08-21 목적 축소] 위 `isNarrowBottomBarLayout`
         // 상단 주석 참고 — 레이아웃에 영향을 주지 않는 `.background`에 넣어
-        // 순수하게 폭 측정 용도로만 쓴다.
+        // 순수하게 세로/가로 판정용으로만 쓴다("말씀 요약" 50:50 폭 계산은
+        // 더 이상 이 측정값에 의존하지 않는다 — 고정 상수로 바뀌었다).
         .background(
             GeometryReader { proxy in
                 Color.clear
-                    .onAppear { lastMeasuredContentWidth = proxy.size.width }
-                    .onChange(of: proxy.size.width) { _, newValue in
-                        guard wordSummaryBeingEdited == nil else { return }
-                        lastMeasuredContentWidth = newValue
+                    .onAppear {
+                        isNarrowBottomBarLayout = proxy.size.width < proxy.size.height
+                    }
+                    .onChange(of: proxy.size) { _, newSize in
+                        isNarrowBottomBarLayout = newSize.width < newSize.height
                     }
             }
         )
@@ -329,11 +369,13 @@ private struct BibleReadingContentView: View {
                     // "관련 콘텐츠" 버튼(말씀 요약 중엔 "닫기"로 동작하도록 바꿈,
                     // `toolbarContent` 참고)과 시스템이 제공하는 인스펙터 접기
                     // 동작 두 경로로 처리한다.
+                    // [2026-08-21 수정] "확대보기"/"원문 정보" 진입점이 예전엔
+                    // 여기(WordSummaryEditorView 안)에 있었다 — 이제 아래
+                    // `verseSelectionActionBar`의 "말씀 복사" 옆으로 옮겨서
+                    // 그 두 콜백은 더 이상 넘기지 않는다.
                     WordSummaryEditorView(
                         summary: wordSummaryBeingEdited, presentationContext: .contextual,
-                        externalProxy: wordSummaryProxy,
-                        onRequestVerseZoom: { isVerseZoomPresented = true },
-                        onRequestOriginalTextInfo: { isOriginalTextInfoPresented = true }
+                        externalProxy: wordSummaryProxy
                     )
                 } else {
                     // [2026-08-15 변경] `onJumpToOutline` 콜백을 없앴다 — 사용자
@@ -367,18 +409,18 @@ private struct BibleReadingContentView: View {
                     )
                 }
             }
-            // [2026-08-12 변경] 사용자 요청 — "말씀 구절과 오른쪽 사이드바
-            // 에디터 영역의 비율을 50:50으로 하게 할것." 위
-            // `wordSummaryInspectorWidth`(연 시점에 측정해 얼려 둔 절반 값)를
-            // min/ideal/max에 모두 같은 값으로 넣어 사실상 고정폭처럼 동작하게
-            // 한다 — `.inspectorColumnWidth`가 세 값 사이에서 자유롭게 고르게
-            // 두면(예: 창을 늘렸다 줄였다 할 때) 50:50이 흐트러질 수 있어서다.
-            // 아직 측정 전(0)이면 이전의 근사값(아이패드 절반 정도)으로 폴백한다.
+            // [2026-08-12 변경, 2026-08-21 고정폭으로 교체] 사용자 요청 — "말씀
+            // 구절과 오른쪽 사이드바 에디터 영역의 비율을 50:50으로." → [2026-08-21
+            // 재요청] 아이패드에서 화면 폭 기반 계산이 불안정하다는 보고로 순수
+            // 고정 pt 상수(`Self.wordSummaryInspectorFixedWidth`)로 바꿨다 — 위
+            // 그 상수 상단 주석 참고. min/ideal/max에 모두 같은 값을 넣어 고정폭
+            // 처럼 동작하게 하는 원칙은 그대로 유지한다(`.inspectorColumnWidth`가
+            // 세 값 사이에서 자유롭게 고르게 두면 크기가 흔들릴 수 있어서).
             // 관련 내용 패널은 기존 폭 그대로 유지.
             .inspectorColumnWidth(
-                min: wordSummaryBeingEdited != nil ? (wordSummaryInspectorWidth ?? 380) : 260,
-                ideal: wordSummaryBeingEdited != nil ? (wordSummaryInspectorWidth ?? 520) : 300,
-                max: wordSummaryBeingEdited != nil ? (wordSummaryInspectorWidth ?? 520) : 400
+                min: wordSummaryBeingEdited != nil ? Self.wordSummaryInspectorFixedWidth : 260,
+                ideal: wordSummaryBeingEdited != nil ? Self.wordSummaryInspectorFixedWidth : 300,
+                max: wordSummaryBeingEdited != nil ? Self.wordSummaryInspectorFixedWidth : 400
             )
         }
         // [2026-08-12 추가] 안전망 — 말씀 요약 편집기가 열린 채로 이 화면 자체가
@@ -552,16 +594,10 @@ private struct BibleReadingContentView: View {
         // 이 요청을 구독하지 않아 조용히 무시된다.
         SidebarVisibilityRequest.shared.requestHide()
 
-        // [2026-08-12 추가] 사용자 요청 — "말씀 구절과 오른쪽 사이드바 에디터
-        // 영역의 비율을 50:50으로." 인스펙터가 열리기 직전(=아직 본문이 전체
-        // 폭을 다 쓰고 있는 지금) 측정된 폭의 절반을 얼려 둔다 — 위
-        // `lastMeasuredContentWidth` 상단 주석 참고. 이미 열려 있던 상태에서
-        // 다른 항목으로 갈아타는 경우엔 폭을 다시 재지 않는다(이미 좁아진 본문
-        // 폭 기준으로 재면 값이 계속 작아지는 문제 — 위 프로퍼티 상단 주석 참고).
-        if wordSummaryInspectorWidth == nil {
-            wordSummaryInspectorWidth = lastMeasuredContentWidth / 2
-        }
-
+        // [2026-08-12 추가, 2026-08-21 삭제] 예전엔 여기서 인스펙터가 열리기
+        // 직전 측정된 본문 폭의 절반을 얼려 뒀다 — 이제 `.inspectorColumnWidth`가
+        // `Self.wordSummaryInspectorFixedWidth` 고정 상수를 직접 쓰므로(위
+        // 그 상수 상단 주석 참고) 여기서 따로 계산해 둘 값이 없다.
         wordSummaryBeingEdited = summary
     }
 
@@ -574,7 +610,6 @@ private struct BibleReadingContentView: View {
             viewModel.setDisplayedTranslations(previousIDs)
         }
         displayedTranslationIDsBeforeWordSummary = nil
-        wordSummaryInspectorWidth = nil
         SidebarVisibilityRequest.shared.requestRestore()
     }
 
@@ -692,13 +727,31 @@ private struct BibleReadingContentView: View {
                 .foregroundStyle(.secondary)
             Spacer()
 
-            // [2026-08-12 변경] 사용자 요청 — "말씀 요약 상태일 때 왼쪽 성경 영역
-            // 하단 버튼 변화 -> [선택 해제][복사][말씀 요약]버튼 제거, [말씀 복사]
-            // 추가." 편집기가 열려 있는 동안은 이 줄 전체가 "지금 편집 중인 요약에
-            // 구절을 보태는" 용도로 바뀐다 — 원래 있던 확대보기/원문 정보/말씀
+            // [2026-08-12 변경, 2026-08-21 일부 복원] 사용자 요청 — "말씀 요약
+            // 상태일 때 왼쪽 성경 영역 하단 버튼 변화 -> [선택 해제][복사][말씀
+            // 요약]버튼 제거, [말씀 복사] 추가." 편집기가 열려 있는 동안은 이 줄
+            // 전체가 "지금 편집 중인 요약에 구절을 보태는" 용도로 바뀐다 — 말씀
             // 요약/선택 해제/복사는 편집 중엔 의미가 없거나 혼란을 준다고 판단해
-            // 감췄다.
+            // 계속 감춘다. [2026-08-21 재요청] 확대보기/원문 정보만은 사용자가
+            // "macOS처럼 하단 말씀복사 옆에 자리할 수 있도록" 다시 요청해 복원한다
+            // — 한때 `WordSummaryEditorView` 안(상단 좌표 라인)으로 옮겼었지만
+            // (2026-08-20), 실제로 원했던 자리는 여기였다. 확대보기/원문 정보는
+            // 태생적으로 "절 하나"를 다루므로(`VerseZoomView`/`OriginalTextInfoView`
+            // 모두 단일 verseNumber를 받는다) 아래 비-편집 분기와 똑같이 정확히
+            // 1개가 선택돼 있을 때만 보인다.
             if wordSummaryBeingEdited != nil {
+                if viewModel.selectedVerses.count == 1 {
+                    Button {
+                        isVerseZoomPresented = true
+                    } label: {
+                        Label("확대보기", systemImage: "arrow.up.left.and.arrow.down.right")
+                    }
+                    Button {
+                        isOriginalTextInfoPresented = true
+                    } label: {
+                        Label("원문 정보", systemImage: "character.book.closed")
+                    }
+                }
                 Button {
                     copySelectedVersesIntoWordSummary()
                 } label: {
@@ -740,7 +793,17 @@ private struct BibleReadingContentView: View {
                         Label("말씀 요약", systemImage: "text.book.closed")
                     }
                 }
-                Button("선택 해제") { viewModel.clearVerseSelection() }
+                Button {
+                    viewModel.clearVerseSelection()
+                } label: {
+                    // [2026-08-21 수정] 사용자 요청 — "세로보기에서 탭하면 하단
+                    // 메뉴는 한글 메뉴명은 빼고 아이콘만 나오도록." 아래
+                    // `.labelStyle(.iconOnly)`가 이 줄의 버튼 전부에 적용되려면
+                    // 이 버튼도 다른 버튼들처럼 `Label`(아이콘+텍스트)이어야 한다 —
+                    // 예전엔 순수 `Button("선택 해제")`(텍스트만, 아이콘 없음)라
+                    // 아이콘 전용으로 못 줄어들었다.
+                    Label("선택 해제", systemImage: "xmark.circle")
+                }
                 Button {
                     copySelectedVerses()
                 } label: {
@@ -749,6 +812,13 @@ private struct BibleReadingContentView: View {
                 .buttonStyle(.borderedProminent)
             }
         }
+        // [2026-08-21 추가] 사용자 요청 — "세로보기에서 탭하면 하단 메뉴는
+        // 한글 메뉴명은 빼고 아이콘만 나오도록." 위 `isNarrowBottomBarLayout`
+        // 상단 주석 참고 — macOS는 창 폭이 넉넉해 해당 요청 대상이 아니므로
+        // iOS(아이폰/아이패드)에서만 적용한다.
+        #if os(iOS)
+        .modifier(BottomBarLabelStyleModifier(isNarrow: isNarrowBottomBarLayout))
+        #endif
         .padding()
         .background(.bar)
         .sheet(isPresented: $isVerseZoomPresented, onDismiss: {
@@ -945,7 +1015,16 @@ private struct BibleReadingContentView: View {
             BookChapterPicker(
                 books: BooksProvider.shared.books,
                 selectedBook: viewModel.selectedBook,
-                selectedChapter: viewModel.selectedChapter
+                selectedChapter: viewModel.selectedChapter,
+                // [2026-08-21 추가] 사용자 요청 — "절까지 포함시키면... 스크롤한
+                // 다음 하이라이트 잠시 표시할 것(검색 결과 클릭한 것과 동일한
+                // 기능)". `jumpToCrossReferenceTarget`(바로 아래, 관주 팝오버
+                // 탭 처리)이 이미 쓰는 것과 똑같은 두 단계(장 이동 → 절 임시
+                // 하이라이트)를 그대로 재사용한다.
+                onSelectVerse: { book, chapter, verse in
+                    viewModel.selectBook(book, chapter: chapter)
+                    viewModel.highlightVerseTemporarily(verse)
+                }
             ) { book, chapter in
                 viewModel.selectBook(book, chapter: chapter)
             }

@@ -63,20 +63,13 @@ struct WordSummaryEditorView: View {
     /// 프록시를 만들어 이 뷰와 그 버튼 양쪽에 같은 인스턴스를 넘긴다. nil이면
     /// (기존 호출부, `WordSummaryHomeView`) 내부적으로 만드는 프록시를 그대로 쓴다.
     var externalProxy: RichTextEditingProxy? = nil
-    /// [2026-08-20 추가] 사용자 요청 — "성경 조회 - 구절 탭 - 말씀요약 - 확대보기와
-    /// 원문정보 버튼 추가." 이 화면(`.contextual`) 자체는 `BibleReadingViewModel`/
-    /// `columns`에 접근하지 않으므로 `VerseZoomView`/`OriginalTextInfoView`를 직접
-    /// 열 수 없다 — 대신 호출부(`BibleReadingView`)가 이미 갖고 있는 기존 시트
-    /// 상태(`isVerseZoomPresented`/`isOriginalTextInfoPresented`, 평소 하단
-    /// `verseSelectionActionBar`의 "확대보기"/"원문 정보" 버튼과 정확히 같은 시트)를
-    /// 그대로 켜는 클로저만 받는다 — 말씀 요약을 여는 동안에도
-    /// `viewModel.selectedVerses`는 그대로 유지되므로(요약을 만든 절 선택이
-    /// 지워지지 않는다, `openWordSummaryEditor()` 참고) 그 시트들이 올바른
-    /// 절을 그대로 보여준다. nil이면(예: `.standalone`, 이 화면이 읽기 뷰
-    /// 바깥의 "말씀 요약" 사이드바 탭에서 열렸을 때) 버튼 자체를 숨긴다 —
-    /// 그 컨텍스트에는 대응하는 성경 읽기 화면이 없다.
-    var onRequestVerseZoom: (() -> Void)? = nil
-    var onRequestOriginalTextInfo: (() -> Void)? = nil
+    /// [2026-08-20 추가, 2026-08-21 삭제] "확대보기"/"원문 정보" 버튼을 이 화면
+    /// 안(상단 좌표 라인)에 뒀었다 — 사용자가 "macOS처럼 하단 말씀복사 옆에
+    /// 자리할 수 있도록" 요청해, 진짜 목적지인 바깥 하단 액션바
+    /// (`BibleReadingView.verseSelectionActionBar`)로 옮겼다. 그 액션바가 이미
+    /// `isVerseZoomPresented`/`isOriginalTextInfoPresented` 시트 상태를 갖고
+    /// 있어(평소 절 선택 모드의 "확대보기"/"원문 정보" 버튼과 같은 시트) 이
+    /// 화면은 더 이상 그 상태를 클로저로 받아올 필요가 없다.
 
     @State private var autosave: AutosaveController?
     @State private var isEditable = true
@@ -206,31 +199,15 @@ struct WordSummaryEditorView: View {
             .padding()
 
         case .contextual:
+            // [2026-08-20 추가, 2026-08-21 이동] "확대보기"/"원문 정보" 버튼이
+            // 한때 여기 있었다 — 이제 바깥 하단 액션바(`BibleReadingView.
+            // verseSelectionActionBar`)의 "말씀 복사" 옆으로 옮겼다(위
+            // `onRequestVerseZoom`/`onRequestOriginalTextInfo` 삭제 주석 참고).
             HStack {
                 Text(contextualCoordinateLabel)
                     .font(.callout.bold())
                     .foregroundStyle(.secondary)
                 Spacer()
-                // [2026-08-20 추가] 사용자 요청 — "말씀요약: 확대보기와 원문정보
-                // 버튼 추가." 평소 읽기 화면 하단 액션바(`BibleReadingView.
-                // verseSelectionActionBar`)에서 절을 하나 골랐을 때 보이는 것과
-                // 똑같은 두 버튼 — 말씀 요약을 쓰는 도중에도 원문(히브리어/
-                // 그리스어)이나 확대된 본문을 바로 확인하고 싶을 때 편집기를
-                // 나가지 않고 열 수 있게 한다.
-                if let onRequestVerseZoom {
-                    Button(action: onRequestVerseZoom) {
-                        Label("확대보기", systemImage: "arrow.up.left.and.arrow.down.right")
-                    }
-                    .buttonStyle(.plain)
-                    .font(.caption)
-                }
-                if let onRequestOriginalTextInfo {
-                    Button(action: onRequestOriginalTextInfo) {
-                        Label("원문 정보", systemImage: "character.book.closed")
-                    }
-                    .buttonStyle(.plain)
-                    .font(.caption)
-                }
                 syncStatusLabel
             }
             .padding()

@@ -37,6 +37,15 @@ struct BookChapterPicker: View {
     /// 클로저가 `onSelect`와 매칭되려면 역방향 매칭(지원 중단 예정)을 타게 된다 —
     /// `onSelect`가 항상 마지막 프로퍼티로 남도록 이 프로퍼티를 그 앞으로 옮겼다.
     var showsFreeTextSearch: Bool = true
+    /// [2026-08-21 추가] 사용자 요청 — "성경이동 검색 란에 절까지 포함시키면
+    /// 해당 절까지 스크롤한다음 하이라이트 잠시 표시할 것(검색 결과 클릭한 것과
+    /// 동일한 기능)". `submitFreeText()`가 절 번호까지 인식했을 때만 호출되고,
+    /// 절이 없으면(기존 "창세기1"/"요3"처럼 장만 입력) 항상 그냥 `onSelect`로
+    /// 간다 — 기본값 nil이라 이 프로퍼티를 모르는 기존 호출부(BibleReadingView
+    /// 외엔 없지만)는 전혀 바뀌지 않는다. `onSelect` 바로 앞에 둔 이유는 위
+    /// "onSelect가 항상 마지막 프로퍼티로 남아야" 주석과 같다 — 트레일링
+    /// 클로저 매칭이 깨지지 않게.
+    var onSelectVerse: ((Book, Int, Int) -> Void)? = nil
     var onSelect: (Book, Int) -> Void
 
     @State private var isGridPresented = false
@@ -77,7 +86,9 @@ struct BookChapterPicker: View {
                 // 조금 더 넉넉하게 주고 `.lineLimit(1)`을 명시해, 혹시 다른
                 // 좁은 컨테이너에 다시 놓이더라도 placeholder 전체 글자가 상자
                 // 밖으로 삐져나오는 대신 상자 폭에 맞춰 잘리도록 방어했다.
-                TextField("예:창세기1, 요3", text: $freeText)
+                // [2026-08-21 수정] 절 입력도 지원한다는 것을 알리기 위해 예시에
+                // "요3:16"을 추가했다("장까지만"도 여전히 되므로 "요3" 예시는 남긴다).
+                TextField("예:창세기1, 요3, 요3:16", text: $freeText)
                     .font(.body)
                     .lineLimit(1)
                     .textFieldStyle(.roundedBorder)
@@ -108,8 +119,36 @@ struct BookChapterPicker: View {
         let remainder = match.remainder.trimmingCharacters(in: .whitespaces)
         let digits = remainder.prefix(while: { $0.isNumber })
         let chapter = Int(digits) ?? 1
-        onSelect(match.book, max(1, chapter))
+        // [2026-08-21 추가] 장 숫자 뒤 나머지에서 절을 인식한다. `BibleReferenceExtractor`
+        // (성경구절 자동 추출기)가 이미 검증해 둔 두 표기(콜론 "3:16", 한글 어순
+        // "3장 16절")와 같은 구분자 규칙을 그대로 따른다 — 새 규칙을 임의로
+        // 만들지 않고, 이 앱이 이미 쓰고 있는 절 표기 관행을 그대로 재사용한다.
+        let afterChapterDigits = remainder[digits.endIndex...]
+        let verse = Self.parseTrailingVerse(afterChapterDigits)
+        if let onSelectVerse, let verse {
+            onSelectVerse(match.book, max(1, chapter), verse)
+        } else {
+            onSelect(match.book, max(1, chapter))
+        }
         freeText = ""
+    }
+
+    /// "3:16"(콜론) 또는 "3장 16절"(한글 어순) 형태의 나머지 텍스트에서 절 번호만
+    /// 뽑는다. 두 구분자 모두 아니면(예: 장 번호만 입력한 기존 "창세기1"/"요3")
+    /// nil을 돌려줘 `submitFreeText()`가 기존과 동일하게 `onSelect`로 가게 한다.
+    private static func parseTrailingVerse<S: StringProtocol>(_ text: S) -> Int? {
+        var remainder = Substring(text)
+        if remainder.hasPrefix(":") {
+            remainder = remainder.dropFirst()
+        } else if remainder.hasPrefix("장") {
+            remainder = remainder.dropFirst()
+        } else {
+            return nil
+        }
+        remainder = remainder.drop(while: { $0 == " " })
+        let verseDigits = remainder.prefix(while: { $0.isNumber })
+        guard !verseDigits.isEmpty else { return nil }
+        return Int(verseDigits)
     }
 }
 

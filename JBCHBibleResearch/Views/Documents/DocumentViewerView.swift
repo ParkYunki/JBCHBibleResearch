@@ -134,6 +134,23 @@ private func documentNotFoundMessage() -> some View {
 
 struct DocumentViewerView: View {
     @Environment(\.modelContext) private var modelContext
+    /// [2026-08-21 추가] 사용자 요청 — "연구문서 뷰어에 닫기버튼." macOS는
+    /// `WindowGroup(id: "document-viewer"/"document-search", ...)`이 진짜
+    /// 독립 창을 만들어 트래픽라이트(빨간 닫기 버튼)가 이미 있어 추가 버튼이
+    /// 중복이라 붙이지 않는다(근거 없는 중복 UI 금지 원칙). iPadOS/iPhone은
+    /// 다르다 — `JBCHBibleResearchApp.swift`의 "document-viewer" 창 주석이
+    /// 이미 지적했듯 다중 창을 지원하지 않는 기기(아이폰, Stage Manager
+    /// 미사용 아이패드)에서는 `openWindow`가 새 창을 띄우는 대신 현재 화면
+    /// 콘텐츠를 이 뷰로 완전히 대체한다 — 뒤로 돌아갈 내비게이션 바/뒤로가기
+    /// 버튼이 아예 없어 사용자가 갇힌다. `dismissWindow()`(인자 없음 —
+    /// "이 환경 값이 속한 창을 닫는다")로 이전 화면으로 복귀시킨다.
+    /// `.overlay`로 직접 그린 이유: 이 뷰(및 이 뷰를 감싸는
+    /// `DocumentViewerWindowContent`/`DocumentSearchWindowContent`) 어디에도
+    /// `NavigationStack`이 없어 `.toolbar`가 표시될 내비게이션 바 자체가
+    /// 없다 — 순수 오버레이 버튼은 그 여부와 무관하게 항상 그려진다.
+    #if os(iOS)
+    @Environment(\.dismissWindow) private var dismissWindow
+    #endif
     let document: SourceDocument
     /// [2026-08-11 추가] "관련 내용"에서 넘어온 검색어 — 있으면 열자마자 그 텍스트를
     /// 찾아 이동한다("연구 문서는 pdf로 띄워 검색할 것", 사용자 요청). PDF 원본이
@@ -232,7 +249,30 @@ struct DocumentViewerView: View {
         .sheet(item: $drilldownTag) { tag in
             TagDrilldownView(tag: tag)
         }
+        #if os(iOS)
+        .overlay(alignment: .topTrailing) {
+            closeWindowButton
+        }
+        #endif
     }
+
+    #if os(iOS)
+    /// 위 `dismissWindow` 프로퍼티 주석 참고 — iPadOS/iPhone 전용 닫기 버튼.
+    private var closeWindowButton: some View {
+        Button {
+            dismissWindow()
+        } label: {
+            Image(systemName: "xmark.circle.fill")
+                .font(.system(size: 22))
+                .symbolRenderingMode(.hierarchical)
+                .foregroundStyle(.secondary)
+                .background(Circle().fill(.background))
+        }
+        .buttonStyle(.plain)
+        .padding(12)
+        .accessibilityLabel("닫기")
+    }
+    #endif
 
     // [2026-08-15 수정] 사용자 요청 — "텍스트 탭 삭제." "원본 보기"/"추출 텍스트"를
     // 수동으로 오가던 세그먼트 피커를 없애고, 항상 원본(네이티브 미리보기)을
@@ -462,6 +502,7 @@ struct DocumentViewerView: View {
                         HWPViewerPane(
                             documentData: hwpFileData,
                             initialSearchText: initialSearchText,
+                            additionalSearchTerms: verseSearchLiteralTerms(for:),
                             onAvailabilityChange: { reportViewerAvailability($0, for: .hwpSwiftNative) }
                         )
                             .opacity(hwpViewerMode == .hwpSwiftNative ? 1 : 0)
@@ -470,6 +511,7 @@ struct DocumentViewerView: View {
                         RhwpWebViewerPane(
                             documentData: hwpFileData,
                             initialSearchText: initialSearchText,
+                            additionalSearchTerms: verseSearchLiteralTerms(for:),
                             onAvailabilityChange: { reportViewerAvailability($0, for: .rhwpWeb) }
                         )
                             .opacity(hwpViewerMode == .rhwpWeb ? 1 : 0)
@@ -761,10 +803,20 @@ struct DocumentViewerView: View {
         let currentMatchID = matches.isEmpty ? nil : matches[min(extractedTextCurrentMatchIndex, matches.count - 1)]
         // 검색창이 비어 있을 때는(검색 안 하는 중) 기존처럼 "관련 내용"에서 넘어온
         // 1회성 자동 이동 매치를 강조 대상으로 쓴다.
+        // [2026-08-21 수정] 사용자 지적 — "성경조회 - 구절 탭 - 인스펙터에서
+        // 연구문서 클릭하면 검색어에 성경장절정보가 입력되어있는데 검색이
+        // 안됨." 원인: 인스펙터가 넘겨주는 `initialSearchText`는 정규화된
+        // 형태("창세기 1:3", 책과 장 사이 공백 있음)인데, 문서 원문은 다른
+        // 표기("창1:3", 공백 없음/약어)를 쓸 수 있어 리터럴 `.contains`만으로는
+        // 못 찾는다 — `extractedTextMatches`(위, 검색창 직접 입력 경로)가 이미
+        // `verseSearchLiteralTerms`로 이 문제를 풀어 뒀으므로 같은 로직을 여기
+        // 1회성 자동 이동 경로에도 적용한다.
         let fallbackMatchID: UUID? = {
             guard currentMatchID == nil, let initialSearchText, !initialSearchText.isEmpty else { return nil }
-            return viewModel.textLines.first {
-                $0.lineText.localizedCaseInsensitiveContains(initialSearchText)
+            let verseTerms = verseSearchLiteralTerms(for: initialSearchText)
+            return viewModel.textLines.first { line in
+                line.lineText.localizedCaseInsensitiveContains(initialSearchText)
+                    || verseTerms.contains { term in line.lineText.localizedCaseInsensitiveContains(term) }
             }?.id
         }()
         let highlightedID = currentMatchID ?? fallbackMatchID
@@ -1242,6 +1294,15 @@ private struct HWPViewerPane: View {
     /// `HwpDocumentView`가 뒤늦게 `attach(to:)`할 때 그 안의 `restartScan()`이
     /// 이미 저장된 질의로 다시 스캔한다 — 호출 순서를 신경 쓸 필요가 없다.
     var initialSearchText: String? = nil
+    /// [2026-08-21 추가] 사용자 지적 — "성경조회 - 구절 탭 - 인스펙터에서
+    /// 연구문서 클릭하면 검색이 안됨(공백 불일치로 추정)." `HwpSearchController.
+    /// search(text:)`는 `PDFSearchController.performSearch`와 달리 한 번에
+    /// 검색어 하나만 받는다(여러 리터럴 표현을 동시에 찾는 API가 없다) — 그래서
+    /// `HWPToPDFPane.additionalSearchTerms`처럼 "합쳐서 찾기"가 아니라, 부모
+    /// (`DocumentViewerView.verseSearchLiteralTerms(for:)`)가 돌려준 리터럴
+    /// 표현이 있으면 그중 첫 번째를(문서에 실제로 적힌 그대로) 쓰고, 없으면
+    /// 원래 입력 그대로 쓴다 — 아래 `load()` 참고.
+    var additionalSearchTerms: (String) -> [String] = { _ in [] }
     /// [2026-08-16 추가] `hwpViewerModeToggle` 상단 주석 참고 — 로드 성공/실패를
     /// 상위(`DocumentViewerView.reportViewerAvailability`)에 보고한다.
     var onAvailabilityChange: ((Bool) -> Void)? = nil
@@ -1356,7 +1417,8 @@ private struct HWPViewerPane: View {
             document = try await HwpDocumentLoader().load(from: documentData)
             onAvailabilityChange?(true)
             if let initialSearchText, !initialSearchText.isEmpty {
-                search.search(text: initialSearchText)
+                let resolvedTerm = additionalSearchTerms(initialSearchText).first ?? initialSearchText
+                search.search(text: resolvedTerm)
             }
         } catch {
             errorMessage = "\(error)"

@@ -207,11 +207,13 @@ public final class ReferenceDataStore {
     /// 전체 스캔 비용이 무시할 만하다). 한 글자짜리 word는 오탐이 너무
     /// 많아(예: "그", "이") 제외한다.
     public func personsAndPlaces(mentionedIn query: String) throws -> [ReferenceEntity] {
+        // [2026-08-21 수정] description 컬럼 제거(아래 CREATE TABLE Persons/Places,
+        // makeReferenceEntity 주석 참고) — 컬럼 목록에서 뺐다.
         let sql = """
-            SELECT idx, word, description, verses, 'person' FROM Persons
+            SELECT idx, word, remark, verses, 'person' FROM Persons
                 WHERE length(word) >= 2 AND instr(?, word) > 0
             UNION ALL
-            SELECT idx, word, description, verses, 'place' FROM Places
+            SELECT idx, word, remark, verses, 'place' FROM Places
                 WHERE length(word) >= 2 AND instr(?, word) > 0
             """
         var statement: OpaquePointer?
@@ -238,9 +240,9 @@ public final class ReferenceDataStore {
     /// 채워져 있으므로, 여기서도 정확 일치로 충분하다).
     public func personOrPlace(exactWord word: String) throws -> ReferenceEntity? {
         let sql = """
-            SELECT idx, word, description, verses, 'person' FROM Persons WHERE word = ?
+            SELECT idx, word, remark, verses, 'person' FROM Persons WHERE word = ?
             UNION ALL
-            SELECT idx, word, description, verses, 'place' FROM Places WHERE word = ?
+            SELECT idx, word, remark, verses, 'place' FROM Places WHERE word = ?
             LIMIT 1
             """
         var statement: OpaquePointer?
@@ -254,14 +256,22 @@ public final class ReferenceDataStore {
         return Self.makeReferenceEntity(statement: statement)
     }
 
+    /// [2026-08-21 수정] description 컬럼 제거에 맞춰 컬럼 인덱스가 하나씩
+    /// 당겨졌다(idx=0, word=1, remark=2, verses=3, kind=4). 예전엔
+    /// `remark.isEmpty ? description : remark`로 remark가 비었을 때
+    /// description으로 대체했는데, 실측 결과(2026-08-21 검토) remark가 빈
+    /// 194건은 description도 전부 빈 문자열이라 — 즉 이 대체가 실제로는 단
+    /// 한 건도 다른 값을 만들어낸 적이 없었다("빈 문자열" 대체 결과가
+    /// "빈 문자열"과 같으므로) — description을 지워도 동작 변화가 없다.
     private static func makeReferenceEntity(statement: OpaquePointer?) -> ReferenceEntity {
         let idx = sqlite3_column_text(statement, 0).map { String(cString: $0) } ?? ""
         let word = sqlite3_column_text(statement, 1).map { String(cString: $0) } ?? ""
-        let description = sqlite3_column_text(statement, 2).map { String(cString: $0) } ?? ""
+        let remark = sqlite3_column_text(statement, 2).map { String(cString: $0) } ?? ""
         let versesRaw = sqlite3_column_text(statement, 3).map { String(cString: $0) } ?? ""
         let kindRaw = sqlite3_column_text(statement, 4).map { String(cString: $0) } ?? "person"
         return ReferenceEntity(
-            idx: idx, word: word, entityDescription: description,
+            idx: idx, word: word,
+            entityRemark: remark,
             verseRefs: parseTargets(versesRaw),
             kind: kindRaw == "place" ? .place : .person
         )
@@ -300,6 +310,202 @@ public final class ReferenceDataStore {
             ))
         }
         return results
+    }
+
+    /// [2026-08-20 신설] 사용자 보고 — "골리앗의 아우" 검색이 잘 안 됨. 원인
+    /// 조사 결과, `personRelations(forWord:)`(정방향, source_word 기준)만
+    /// 있고 역방향이 없었다: PersonRelations엔 `('라흐미', 'younger_brother_of',
+    /// '골리앗')` 행이 실제로 있지만(정규식 추출, 확정 데이터), "골리앗"은
+    /// Persons 테이블에 행 자체가 없어(`personsAndPlaces(mentionedIn:)`가
+    /// "골리앗"을 애초에 entity로 못 찾음 — `BibleStructuralRerankerService`의
+    /// 기존 루프가 시작조차 못 함) 정방향 조회로는 이 관계에 절대 도달할 수
+    /// 없다. 이 메서드는 `target_word` 쪽을 `personsAndPlaces(mentionedIn:)`와
+    /// 같은 원칙(instr() 역방향 부분 문자열 검색, 2글자 미만 오탐 방지로 제외)
+    /// 으로 직접 질의 문자열과 대조한다 — target_word가 Persons/Places에
+    /// 없어도(바로 이 "골리앗" 케이스) 매칭된다는 점이 `personOrPlace(exactWord:)`
+    /// 를 쓸 수 없는 이유이자 이 메서드가 필요한 이유다.
+    public func personRelations(targetWordMentionedIn query: String) throws -> [PersonRelationRecord] {
+        let sql = """
+            SELECT source_word, relation_type, target_word, target_kind, raw_sentence
+            FROM PersonRelations WHERE length(target_word) >= 2 AND instr(?, target_word) > 0
+            """
+        var statement: OpaquePointer?
+        defer { sqlite3_finalize(statement) }
+        guard sqlite3_prepare_v2(handle, sql, -1, &statement, nil) == SQLITE_OK else {
+            throw BibleReferenceError.statementPrepareFailed(code: sqlite3_errcode(handle))
+        }
+        sqlite3_bind_text(statement, 1, query, -1, SQLITE_TRANSIENT)
+
+        var results: [PersonRelationRecord] = []
+        while true {
+            let step = sqlite3_step(statement)
+            if step == SQLITE_DONE { break }
+            guard step == SQLITE_ROW else { throw BibleReferenceError.stepFailed(code: step) }
+            let sourceWord = sqlite3_column_text(statement, 0).map { String(cString: $0) } ?? ""
+            let relationType = sqlite3_column_text(statement, 1).map { String(cString: $0) } ?? ""
+            let targetWord = sqlite3_column_text(statement, 2).map { String(cString: $0) } ?? ""
+            let targetKindRaw = sqlite3_column_text(statement, 3).map { String(cString: $0) }
+            let rawSentence = sqlite3_column_text(statement, 4).map { String(cString: $0) } ?? ""
+            results.append(PersonRelationRecord(
+                sourceWord: sourceWord, relationType: relationType, targetWord: targetWord,
+                targetKind: targetKindRaw == "place" ? .place : (targetKindRaw == "person" ? .person : nil),
+                rawSentence: rawSentence
+            ))
+        }
+        return results
+    }
+
+    // MARK: - Themes / Prophecies / TimelineEvents (2026-08-20 신설, 스키마만)
+    //
+    // [2026-08-20 신설] `ReferenceEntity.swift`의 같은 이름 MARK 주석 참고 —
+    // 질의 분류(QueryIntentClassifier)의 "예언/주제·속성/서사" 세 카테고리가
+    // 조회할 테이블. `build_reference_data.py`가 스키마만 만들어 뒀고 아직
+    // 데이터가 없으므로(사용자가 배포 전까지 항목 단위로 채우기로 확정),
+    // 아래 세 메서드는 지금은 전부 빈 배열을 반환한다.
+    //
+    // `search_keywords`는 콤마로 여러 값을 담는 자유 텍스트 컬럼이라, SQL
+    // `instr()` 하나로는 "질의 문자열 안에 이 키워드 중 하나라도 있는지"를
+    // 걸러낼 수 없다(콤마로 쪼개는 표준 SQLite 함수가 마땅치 않음). 세 테이블
+    // 모두 사람이 직접 큐레이션하는 작은 테이블(수십~수백 건 규모로 예상)이라,
+    // 위 `personsAndPlaces(mentionedIn:)`·`instr()` 전체 스캔과 같은 논리로
+    // — 테이블 전체를 읽어와 Swift 쪽에서 부분 문자열 비교한다.
+    //
+    // ⚠️ [미검증] 테이블이 비어 있어 이 세션에서 실제 매칭 동작을 실측할
+    // 방법이 없었다 — SQL 자체는 이 파일의 기존 메서드들과 같은 SQLite3
+    // C API 패턴을 그대로 따랐으니 구조적으로는 안전할 가능성이 높지만,
+    // 데이터가 들어간 뒤 반드시 실제 질의로 재확인할 것.
+
+    /// `title` 또는 `searchKeywords`(콤마 구분) 중 하나라도 `query` 문자열
+    /// 안에 부분 문자열로 등장하면 true — `personsAndPlaces(mentionedIn:)`의
+    /// `instr(query, word) > 0`과 같은 방향(항목 이름이 사용자 질의 "안에"
+    /// 나타나는지)이다. 1글자짜리 오탐 방지로 2글자 미만은 제외한다(같은
+    /// 이유로 위 `personsAndPlaces`도 `length(word) >= 2`를 건다).
+    private static func matchesQuery(_ query: String, title: String, searchKeywords: String?) -> Bool {
+        if title.count >= 2, query.contains(title) { return true }
+        guard let searchKeywords, !searchKeywords.isEmpty else { return false }
+        return searchKeywords.split(separator: ",").contains { raw in
+            let keyword = raw.trimmingCharacters(in: .whitespaces)
+            return keyword.count >= 2 && query.contains(keyword)
+        }
+    }
+
+    /// `Themes` 중 `query` 문자열 안에 제목/검색어가 등장하는 항목만 추려
+    /// 돌려준다(현재는 테이블이 비어 있어 항상 빈 배열).
+    public func themes(matching query: String) throws -> [ThemeRecord] {
+        let sql = "SELECT idx, category, title, search_keywords, verse_refs, tags, description FROM Themes"
+        var statement: OpaquePointer?
+        defer { sqlite3_finalize(statement) }
+        guard sqlite3_prepare_v2(handle, sql, -1, &statement, nil) == SQLITE_OK else {
+            throw BibleReferenceError.statementPrepareFailed(code: sqlite3_errcode(handle))
+        }
+
+        var results: [ThemeRecord] = []
+        while true {
+            let step = sqlite3_step(statement)
+            if step == SQLITE_DONE { break }
+            guard step == SQLITE_ROW else { throw BibleReferenceError.stepFailed(code: step) }
+            let idx = Int(sqlite3_column_int(statement, 0))
+            let category = sqlite3_column_text(statement, 1).map { String(cString: $0) } ?? ""
+            let title = sqlite3_column_text(statement, 2).map { String(cString: $0) } ?? ""
+            let searchKeywords = sqlite3_column_text(statement, 3).map { String(cString: $0) }
+            let verseRefsRaw = sqlite3_column_text(statement, 4).map { String(cString: $0) } ?? ""
+            let tags = sqlite3_column_text(statement, 5).map { String(cString: $0) }
+            let description = sqlite3_column_text(statement, 6).map { String(cString: $0) }
+            guard !title.isEmpty, Self.matchesQuery(query, title: title, searchKeywords: searchKeywords) else { continue }
+            results.append(ThemeRecord(
+                idx: idx, category: category, title: title, searchKeywords: searchKeywords,
+                verseRefs: Self.parseTargets(verseRefsRaw), tags: tags, themeDescription: description
+            ))
+        }
+        return results
+    }
+
+    /// `Prophecies` 중 `query` 문자열 안에 제목/검색어가 등장하는 항목만
+    /// 추려 돌려준다(현재는 테이블이 비어 있어 항상 빈 배열). 위
+    /// `themes(matching:)`와 완전히 같은 패턴 — 차이는 컬럼 구성뿐이다.
+    public func prophecies(matching query: String) throws -> [ProphecyRecord] {
+        let sql = """
+            SELECT idx, category, title, search_keywords, prophecy_refs, fulfillment_refs,
+                   timeline_period, tags, description
+            FROM Prophecies
+            """
+        var statement: OpaquePointer?
+        defer { sqlite3_finalize(statement) }
+        guard sqlite3_prepare_v2(handle, sql, -1, &statement, nil) == SQLITE_OK else {
+            throw BibleReferenceError.statementPrepareFailed(code: sqlite3_errcode(handle))
+        }
+
+        var results: [ProphecyRecord] = []
+        while true {
+            let step = sqlite3_step(statement)
+            if step == SQLITE_DONE { break }
+            guard step == SQLITE_ROW else { throw BibleReferenceError.stepFailed(code: step) }
+            let idx = Int(sqlite3_column_int(statement, 0))
+            let category = sqlite3_column_text(statement, 1).map { String(cString: $0) } ?? ""
+            let title = sqlite3_column_text(statement, 2).map { String(cString: $0) } ?? ""
+            let searchKeywords = sqlite3_column_text(statement, 3).map { String(cString: $0) }
+            let prophecyRefsRaw = sqlite3_column_text(statement, 4).map { String(cString: $0) } ?? ""
+            let fulfillmentRefsRaw = sqlite3_column_text(statement, 5).map { String(cString: $0) } ?? ""
+            let timelinePeriod = sqlite3_column_text(statement, 6).map { String(cString: $0) }
+            let tags = sqlite3_column_text(statement, 7).map { String(cString: $0) }
+            let description = sqlite3_column_text(statement, 8).map { String(cString: $0) }
+            guard !title.isEmpty, Self.matchesQuery(query, title: title, searchKeywords: searchKeywords) else { continue }
+            results.append(ProphecyRecord(
+                idx: idx, category: category, title: title, searchKeywords: searchKeywords,
+                prophecyRefs: Self.parseTargets(prophecyRefsRaw),
+                fulfillmentRefs: Self.parseTargets(fulfillmentRefsRaw),
+                timelinePeriod: timelinePeriod, tags: tags, prophecyDescription: description
+            ))
+        }
+        return results
+    }
+
+    /// `TimelineEvents` 중 서사 제목/검색어가 `query` 문자열 안에 등장하는
+    /// 서사에 속한 행 전부를(그 서사에 속한 다른 행이 직접 매칭되지 않아도)
+    /// `sequenceOrder` 순서로 돌려준다(현재는 테이블이 비어 있어 항상 빈
+    /// 배열). 한 서사 안에서 일부 행만 반환하면 서사가 끊겨 보이므로, 매칭은
+    /// 행 단위가 아니라 `narrativeKey` 단위로 판정한다.
+    public func timelineEvents(narrativeMentionedIn query: String) throws -> [TimelineEventRecord] {
+        let sql = """
+            SELECT idx, narrative_key, narrative_title, sequence_order, event_title, verse_refs,
+                   era, location, search_keywords, description
+            FROM TimelineEvents ORDER BY narrative_key ASC, sequence_order ASC
+            """
+        var statement: OpaquePointer?
+        defer { sqlite3_finalize(statement) }
+        guard sqlite3_prepare_v2(handle, sql, -1, &statement, nil) == SQLITE_OK else {
+            throw BibleReferenceError.statementPrepareFailed(code: sqlite3_errcode(handle))
+        }
+
+        var allEvents: [TimelineEventRecord] = []
+        while true {
+            let step = sqlite3_step(statement)
+            if step == SQLITE_DONE { break }
+            guard step == SQLITE_ROW else { throw BibleReferenceError.stepFailed(code: step) }
+            let idx = Int(sqlite3_column_int(statement, 0))
+            let narrativeKey = sqlite3_column_text(statement, 1).map { String(cString: $0) } ?? ""
+            let narrativeTitle = sqlite3_column_text(statement, 2).map { String(cString: $0) } ?? ""
+            let sequenceOrder = Int(sqlite3_column_int(statement, 3))
+            let eventTitle = sqlite3_column_text(statement, 4).map { String(cString: $0) } ?? ""
+            let verseRefsRaw = sqlite3_column_text(statement, 5).map { String(cString: $0) } ?? ""
+            let era = sqlite3_column_text(statement, 6).map { String(cString: $0) }
+            let location = sqlite3_column_text(statement, 7).map { String(cString: $0) }
+            let searchKeywords = sqlite3_column_text(statement, 8).map { String(cString: $0) }
+            let description = sqlite3_column_text(statement, 9).map { String(cString: $0) }
+            guard !narrativeKey.isEmpty else { continue }
+            allEvents.append(TimelineEventRecord(
+                idx: idx, narrativeKey: narrativeKey, narrativeTitle: narrativeTitle,
+                sequenceOrder: sequenceOrder, eventTitle: eventTitle,
+                verseRefs: Self.parseTargets(verseRefsRaw), era: era, location: location,
+                searchKeywords: searchKeywords, eventDescription: description
+            ))
+        }
+
+        var matchedKeys = Set<String>()
+        for event in allEvents where Self.matchesQuery(query, title: event.narrativeTitle, searchKeywords: event.searchKeywords) {
+            matchedKeys.insert(event.narrativeKey)
+        }
+        return allEvents.filter { matchedKeys.contains($0.narrativeKey) }
     }
 
     /// 절 하나(`bookId`/`chapter`/`verse`)의 관주(교차 참조) 대상만 필요할 때

@@ -135,7 +135,19 @@ struct OutlineBookBulkEditView: View {
                 defaultTextColor: EditorDefaultStyle.textColor,
                 lineHeightMultiple: EditorDefaultStyle.lineHeightMultiple,
                 editingBackgroundColor: EditorDefaultStyle.backgroundColor,
-                readOnlyBackgroundColor: EditorDefaultStyle.backgroundColor
+                readOnlyBackgroundColor: EditorDefaultStyle.backgroundColor,
+                // [2026-08-21 추가] 사용자 요청("아이패드 수정사항") — "아이패드에서
+                // macOS처럼 동일한 리치 에디터를 구현할 수 있는가?" macOS는 지금까지
+                // 이 화면(개요)에서 텍스트 선택 시에만 잠깐 뜨는 네이티브 서식 팝업
+                // (`usesInspectorBar`)만 썼고, iOS는 상시 노출되는 커스텀
+                // `RichTextEditorToolbar`(굵게/기울임/밑줄/색/글꼴/크기/정렬)를 써서
+                // 두 플랫폼 UI가 서로 달랐다 — `WordSummaryEditorView`("말씀 요약"
+                // 화면)가 2026-08-12에 이미 같은 문제를 겪어 만든
+                // `showsToolbarOnMac`(RichTextEditor.swift 상단 주석 참고)을 그대로
+                // 재사용한다 — macOS에서도 네이티브 팝업 대신 iOS와 완전히 같은
+                // 커스텀 툴바가 뜨게 된다(이미 검증된 기존 메커니즘 재사용이라 새
+                // 코드 경로를 만들지 않는다).
+                showsToolbarOnMac: true
             )
             .frame(minHeight: 160)
         } else {
@@ -177,7 +189,10 @@ struct OutlineBookBulkEditView: View {
                     defaultTextColor: EditorDefaultStyle.textColor,
                     lineHeightMultiple: EditorDefaultStyle.lineHeightMultiple,
                     editingBackgroundColor: EditorDefaultStyle.backgroundColor,
-                    readOnlyBackgroundColor: EditorDefaultStyle.backgroundColor
+                    readOnlyBackgroundColor: EditorDefaultStyle.backgroundColor,
+                    // [2026-08-21 추가] 위 `bookOutlineEditor`의 `showsToolbarOnMac`
+                    // 주석과 같은 이유 — 장별 개요 에디터도 동일하게 맞춘다.
+                    showsToolbarOnMac: true
                 )
                 .frame(minHeight: 200)
                 .padding(.bottom, 8)

@@ -14,11 +14,17 @@
 //  원칙 — 모델이 없거나(Apple Intelligence 미지원 기기), 실패하거나, 응답을
 //  파싱할 수 없으면 원래 순서(코사인 유사도 순)를 그대로 돌려준다.
 //
-//  ⚠️ [정제 토글과 독립적인 별도 스위치] "애플인텔리전스를 끈것과 켠것을
-//  비교하고 싶음" 요청으로 만든 `isQueryRefinementEnabled` 토글과 이 리랭커를
-//  같은 스위치에 묶지 않았다 — 묶으면 "정제가 도움이 되는지"와 "재순위화가
-//  도움이 되는지"를 따로 비교할 수 없게 된다(`SearchViewModel.isRerankEnabled`
-//  참고).
+//  ⚠️ [2026-08-20 더 이상 호출되지 않음] 위 "정제 토글과 독립적인 별도
+//  스위치" 문단은 그 스위치들이 있던 시절의 기록이다 — 사용자가 "너무
+//  느리고 결과가 큰 차이 안 남"이라는 이유로 Apple Intelligence 재순위화
+//  체크박스 자체를 없애 달라고 요청해, `SearchViewModel.isRerankEnabled`/
+//  `isQueryRefinementEnabled` 두 프로퍼티와 `BibleSemanticSearchService.
+//  search`의 이 서비스 호출부를 모두 제거했다. 이 파일은 더 이상 검색
+//  파이프라인에서 호출되지 않는다 — `AIRelationExtractor`와 같은 프로젝트
+//  관례대로 완전히 지우지 않고 참고용으로만 남겨 뒀다(필요하면
+//  `BibleSemanticSearchService.search`의 리랭킹 단계에서 다시 연결할 수
+//  있다). 현재 항상 쓰이는 리랭커는 `BibleStructuralRerankerService`(LLM
+//  아님, 결정론적)다.
 //
 
 import Foundation

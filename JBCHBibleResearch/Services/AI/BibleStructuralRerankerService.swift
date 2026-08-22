@@ -29,13 +29,20 @@
 //     연결돼 있으면 소폭 가산 — 임베딩만으로는 못 잡는 "구조적으로 서로
 //     연결된 절끼리 상호 검증"하는 효과.
 //
-//  ⚠️ [정직한 한계 고지] 사용자가 대화 중 예로 든 "골리앗의 형제 라흐미"는
-//  지금 번들에 들어간 체크포인트 데이터(`PersonPlaceSeed.json`, 인명 681건
-//  중 description이 있는 것은 229건뿐)에는 "골리앗"이라는 항목 자체가
-//  없고 "라흐미"는 있지만 description이 비어 있어(build_reference_data.py
-//  실행 로그 참고) 이 예시가 지금 당장 재현되지는 않는다. 이 서비스의
-//  로직 자체는 더 온전한 사전 데이터가 채워지면 그대로 통하도록 설계했다
-//  — 지금은 데이터가 부분적이라는 것이지 로직이 틀린 게 아니다.
+//  ⚠️ [2026-08-20 갱신, 이전 한계 고지가 낡음] 위 문단은 데이터가 훨씬 부실하던
+//  시점의 기록이다 — 그 뒤 build_reference_data.py가 여러 차례 갱신되며
+//  "라흐미"는 description까지 채워졌다("골리앗(형제)... 골리앗의 아우로서...").
+//  다만 실측해보니 "골리앗" 자체는 여전히 Persons 테이블에 행이 없고(성경에서
+//  "형제/아우"로만 언급되고 독립 인물 사전 항목으로 뽑히지 않음), 그 결과
+//  구조적으로 다른 버그가 하나 더 있었다: signal 2)가 "질의에 나온 이름이
+//  Persons/Places에 있어야만" PersonRelations를 조회하는 정방향 전용
+//  루프였다 — "골리앗"이 그 테이블에 없으니 이 루프에 아예 진입하지 못해,
+//  PersonRelations에 실제로 있는 `라흐미 -[younger_brother_of]-> 골리앗`
+//  관계까지 도달하지 못했다. 아래 2b) 블록(2026-08-20 추가)이 이 역방향
+//  경로를 메운다 — "골리앗"이 target_word로 등장하는 행을 직접 찾으므로
+//  "골리앗" 자신이 Persons에 없어도 동작한다. 이 수정은 아직 실기기 빌드로
+//  검증되지 않았다(이 세션엔 Xcode가 없음) — 실제 검색 결과 재현은 사용자가
+//  기기에서 확인해야 한다.
 //
 
 import Foundation
@@ -107,7 +114,9 @@ enum BibleStructuralRerankerService {
             }
         }
 
-        // 1) 인물/지명 이름 매칭 + 2) 관계 매칭
+        // 1) 인물/지명 이름 매칭 + 2) 관계 매칭(정방향 — 질의에 나온 이름이
+        // source_word 쪽인 경우, 예: "다윗의 아들" → "다윗"이 Persons에 있어
+        // entity로 잡히고, 그 정방향 관계의 target 쪽 절을 가산).
         if let matchedEntities = try? store.personsAndPlaces(mentionedIn: query) {
             for entity in matchedEntities {
                 addBoost(entity.verseRefs, amount: nameMatchBoost)
@@ -119,6 +128,21 @@ enum BibleStructuralRerankerService {
                     guard let targetEntity = try? store.personOrPlace(exactWord: relation.targetWord) else { continue }
                     addBoost(targetEntity.verseRefs, amount: relationMatchBoost)
                 }
+            }
+        }
+
+        // 2b) 관계 매칭(역방향, 2026-08-20 추가) — 질의에 나온 이름이 관계의
+        // target 쪽에만 있고 정작 그 이름 자체는 Persons/Places에 없는 경우
+        // (예: "골리앗의 아우" — "골리앗"은 Persons에 행이 없어 위 1)/2) 루프가
+        // entity로 잡지 못한다. 하지만 PersonRelations엔 `라흐미 -[younger_
+        // brother_of]-> 골리앗` 행이 이미 있다 — target_word="골리앗"이 질의
+        // 문자열에 그대로 등장하는지를 직접 찾아, source_word("라흐미")의 절을
+        // 가산한다. `personRelations(targetWordMentionedIn:)`의 문서 주석
+        // 참고.
+        if let reverseRelations = try? store.personRelations(targetWordMentionedIn: query) {
+            for relation in reverseRelations {
+                guard let sourceEntity = try? store.personOrPlace(exactWord: relation.sourceWord) else { continue }
+                addBoost(sourceEntity.verseRefs, amount: relationMatchBoost)
             }
         }
 

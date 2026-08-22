@@ -137,48 +137,27 @@ private struct SearchContentView: View {
                     .padding(.vertical, 2)
 
                     // [2026-08-19 신설] 사용자 요청 — "애플인텔리전스를 끈것과
-                    // 켠것을 비교하고 싶음." 시스템 설정을 건드리지 않고 앱
-                    // 안에서 바로 켬/끔을 비교할 수 있게 하는 토글.
-                    Toggle(isOn: Binding(
-                        get: { viewModel.isQueryRefinementEnabled },
-                        set: { viewModel.isQueryRefinementEnabled = $0 }
-                    )) {
-                        Text("Apple Intelligence로 검색어 정제")
-                    }
-                    .font(.caption)
-                    .padding(.vertical, 2)
+                    // 켠것을 비교하고 싶음." — [2026-08-20 제거] 사용자 요청으로
+                    // 이 자리에 있던 두 토글(Apple Intelligence로 검색어 정제/
+                    // 결과 재순위화)을 없앴다("결과가 너무 이상함"/"너무 느리고
+                    // 결과가 큰 차이 안 남"). `SearchViewModel.
+                    // isQueryRefinementEnabled`/`isRerankEnabled` 프로퍼티도
+                    // 함께 제거했다 — 이제 정제는 항상 건너뛰고(결정론적 꼬리표
+                    // 제거만 적용), 재순위화는 항상 결정론적
+                    // `BibleStructuralRerankerService`만 쓴다(둘 다 Apple
+                    // Intelligence가 아니라 사용자가 제거 대상으로 언급하지
+                    // 않았다).
 
-                    // [2026-08-19 신설] 사용자 요청 — "Reranker도 고민해볼것."
-                    // 검색어 정제와는 독립적인 별도 토글(SearchViewModel.
-                    // isRerankEnabled 상단 주석 참고) — 두 AI 단계를 따로
-                    // 비교할 수 있어야 한다.
-                    Toggle(isOn: Binding(
-                        get: { viewModel.isRerankEnabled },
-                        set: { viewModel.isRerankEnabled = $0 }
-                    )) {
-                        Text("Apple Intelligence로 결과 재순위화")
-                    }
-                    .font(.caption)
-                    .padding(.vertical, 2)
-
-                    // [2026-08-19 v3 신설] 사용자 지시 — "verse/context weight
-                    // 최적화... 0.2/0.8 ... 0.8/0.2 이렇게만 해도 검색 결과가
-                    // 상당히 달라질 수 있습니다." 재빌드 없이 직접 스윕
-                    // 테스트할 수 있도록 슬라이더로 노출한다.
-                    VStack(alignment: .leading, spacing: 2) {
-                        Text("절 \(Int((1 - viewModel.contextWeight) * 100))% · 문맥 \(Int(viewModel.contextWeight * 100))%")
-                            .font(.caption)
-                            .foregroundStyle(.secondary)
-                        Slider(
-                            value: Binding(
-                                get: { viewModel.contextWeight },
-                                set: { viewModel.contextWeight = $0 }
-                            ),
-                            in: 0.2...0.8,
-                            step: 0.1
-                        )
-                    }
-                    .padding(.vertical, 2)
+                    // [2026-08-19 v3 신설, 2026-08-20 제거, Phase 5] "절 x% ·
+                    // 문맥 x%" 슬라이더가 여기 있었다 — 사용자가 재검토하며
+                    // "의미가 있는가? 없으면 삭제할 것"이라고 물어서 없앴다.
+                    // 내부 코사인 유사도 블렌드 비율을 바꾸는 튜닝 값일 뿐,
+                    // 만들 때부터 "0.6은 출발점일 뿐 최적값 근거는 없다"고
+                    // 밝혀둔 실험용 슬라이더였고, "절/문맥 가중치"라는 개념 자체가
+                    // 최종 사용자에게 해석 가능한 정보가 아니다(어느 쪽이 "더
+                    // 나은 결과"인지 검증된 기준도 없음) — `SearchViewModel.
+                    // intentCard` 선언부 근처 주석 참고. 내부 파라미터 자체는
+                    // 기본값(0.6)으로 그대로 남아 있다(동작 변화 없음, UI만 제거).
 
                     // [2026-08-19 신설] 정제 켬/끔에 따라 실제로 임베딩에 들어간
                     // 문장이 달라지는 걸 눈으로 비교할 수 있게 보여준다 — 켰을
@@ -202,6 +181,19 @@ private struct SearchContentView: View {
             }
             .padding(.vertical, 4)
 
+            // [2026-08-20 신설, 2026-08-20 재수정 Phase 5] 일반 검색 결과 목록
+            // 보다 먼저 보여준다 — 관계/인물·지명 정보/예언/주제·속성/서사
+            // 카드가 "정답에 더 가까운 안내"이므로 우선 노출한다.
+            // `viewModel.intentCard`가 nil이면 이 Section 자체가 안 그려지는데,
+            // Phase 5부터는 `.general`로 분류되거나 참고 DB를 못 연 경우뿐
+            // 아니라 **AI 검색 토글이 꺼져 있을 때도 항상 nil**이다 — 사용자
+            // 요청("단순 키워드 검색시엔 순수 키워드 검색결과만, 관계정보는
+            // AI 토글을 켰을 때만")에 따라 `SearchViewModel.performSearch`가
+            // 키워드 검색 모드에선 이 카드를 아예 계산하지 않는다.
+            if let intentCard = viewModel.intentCard {
+                intentCardSection(intentCard)
+            }
+
             if !viewModel.query.trimmingCharacters(in: .whitespaces).isEmpty {
                 resultsSection
             }
@@ -217,13 +209,31 @@ private struct SearchContentView: View {
             viewModel.searchImmediately()
         }
         .toolbar {
+            // [2026-08-21 추가] 사용자 요청 — "PersonPlaceSeed.json 데이터를 좀더
+            // 고도화 정제 후에 다시 시도할 예정. 그전까지 AI 토글은 개발
+            // 상태에서만 보여주고 배포할 때는 뺄 수 있도록 할 것." `#if DEBUG`로
+            // 감싸 Release(배포용) 빌드에는 이 버튼 자체가 컴파일되지 않게
+            // 했다 — `viewModel.isAIQueryEnabled`는 이 버튼으로만 켤 수
+            // 있고(다른 진입점 없음, 영구 저장도 안 함 — SearchViewModel.swift
+            // 175번째 줄 선언 참고) 기본값이 `false`라, 버튼이 없으면 Release
+            // 빌드에서는 이 값이 구조적으로 항상 false로 남아 AI 검색 관련
+            // 코드 경로(안내 배너/색인 상태 행/의미검색 호출) 전체가 저절로
+            // 비활성 상태가 된다 — 아래 나머지 AI 관련 코드는 그대로 두고
+            // 진입점만 뺀 것.
+            #if DEBUG
             ToolbarItem(placement: .primaryAction) {
                 aiToggleButton
             }
+            #endif
         }
         .onDisappear { viewModel.onDisappear() }
     }
 
+    // [2026-08-21 추가] 위 toolbar의 `#if DEBUG` 주석 참고 — Release 빌드에서는
+    // 이 프로퍼티를 호출하는 곳이 아예 없어지므로(툴바에서만 참조됨), 선언
+    // 자체도 함께 `#if DEBUG`로 감싼다(안 그러면 미사용 private 프로퍼티로
+    // 남는다).
+    #if DEBUG
     /// [2026-08-19 신설] 사용자 요청 — "오른쪽 상단 검색창 왼쪽 옆 AI 토글
     /// 추가." `.searchable`이 만드는 시스템 검색창은 툴바 맨 끝(trailing)에
     /// 붙으므로, 이 항목을 그보다 먼저 선언해 검색창 왼쪽에 놓이게 한다.
@@ -248,6 +258,7 @@ private struct SearchContentView: View {
         .toggleStyle(.button)
         .help("켜면 검색어를 다듬은 뒤 성경 구절과 의미가 비슷한 순서로 찾아줍니다. 처음 한 번은 성경 전체 색인이 필요합니다.")
     }
+    #endif
 
     /// [2026-08-19 신설] `viewModel.bibleIndexStatus`에 따라 "색인 만들기"
     /// 버튼(미생성)/진행률 바(생성 중)/완료 안내(생성됨)/실패 안내를 보여준다.
@@ -308,6 +319,227 @@ private struct SearchContentView: View {
             .font(.caption)
             .padding(.vertical, 2)
         }
+    }
+
+    // MARK: - 질의 의도 카드 (관계/인물·지명 정보/예언/주제·속성/서사, 2026-08-20 신설)
+    //
+    // [2026-08-20 신설] `QueryIntentClassifier`+`QueryIntentHandler`(Services/
+    // Search) 결과를 아래 `resultsSection`(일반 검색) 위에 별도 Section으로
+    // 보여준다. 데이터가 없으면(지금은 Prophecies/Themes/TimelineEvents가
+    // 전부 스키마만 있고 0건) 안내 문구만 뜨고, 그 아래 일반 검색은 항상 그대로
+    // 나온다 — 이 카드가 오분류되거나 데이터가 없어도 검색 자체가 막히지
+    // 않는다는 3계층 구조의 안전장치를 그대로 반영한다.
+    //
+    // ⚠️ [미검증] 이 세션엔 Xcode가 없어 컴파일 확인을 못 했다 — 아이콘(SF
+    // Symbol)도 실제 렌더링을 미리보기하지 못한 채 이름만으로 골랐다(전부
+    // iOS 16 이전부터 있던 것으로 알고 있는 심볼만 썼다 — `scroll.fill`만
+    // iOS 16 시점 추가로 알고 있으나, 이 앱이 이미 SwiftData(`@Model`, iOS
+    // 17+ 요구)를 쓰고 있어 배포 대상이 그보다 낮을 수 없다고 판단했다).
+
+    @ViewBuilder
+    private func intentCardSection(_ card: QueryIntentCard) -> some View {
+        let meta = intentSectionMeta(card.intent)
+        Section {
+            switch card.status {
+            case .notReady(let message):
+                HStack(alignment: .top, spacing: 6) {
+                    Image(systemName: "info.circle")
+                    Text(message)
+                }
+                .font(.subheadline)
+                .foregroundStyle(.secondary)
+                .padding(.vertical, 4)
+            case .found(let content):
+                intentContentRows(content)
+            }
+        } header: {
+            sectionHeader(meta.title, icon: meta.icon, color: meta.color, count: card.foundCount)
+        }
+    }
+
+    private func intentSectionMeta(_ intent: QueryIntentClassifier.Intent) -> (title: String, icon: String, color: Color) {
+        switch intent {
+        case .relation: return ("관계 정보", "person.2.fill", .cyan)
+        case .personOrPlaceInfo: return ("인물·지명 정보", "person.crop.circle.fill", .mint)
+        case .prophecy: return ("예언", "scroll.fill", .yellow)
+        case .themeOrAttribute: return ("주제·속성", "lightbulb.fill", .green)
+        case .narrative: return ("서사·흐름", "list.number", .gray)
+        case .general: return ("", "questionmark", .gray)  // QueryIntentHandler.handle이 .general이면 nil을 돌려줘서 실제로는 안 쓰인다.
+        }
+    }
+
+    @ViewBuilder
+    private func intentContentRows(_ content: QueryIntentCard.Content) -> some View {
+        switch content {
+        case .relation(let items):
+            ForEach(Array(items.enumerated()), id: \.offset) { _, item in
+                relationRow(item)
+            }
+        case .personOrPlace(let entities):
+            ForEach(Array(entities.enumerated()), id: \.offset) { _, entity in
+                personOrPlaceRow(entity)
+            }
+        case .prophecy(let prophecies):
+            ForEach(Array(prophecies.enumerated()), id: \.offset) { _, prophecy in
+                prophecyRow(prophecy)
+            }
+        case .theme(let themes):
+            ForEach(Array(themes.enumerated()), id: \.offset) { _, theme in
+                themeRow(theme)
+            }
+        case .narrative(let groups):
+            ForEach(groups) { group in
+                narrativeGroupRows(group)
+            }
+        }
+    }
+
+    // MARK: - 관계 행
+
+    /// [2026-08-20 신설, Phase 4 — 2026-08-20 재수정, Phase 5] Phase 4에선 이
+    /// 행이 `item.verseRefs.first`로 이동하는 `NavigationLink`였다("다윗의
+    /// 아들들은?" 카드 아래 성경 구절이 관계와 무관하다는 리포트에 대한 수정,
+    /// `RelationDisplayItem` 주석 참고). Phase 5에서 사용자가 실사용 후 요청을
+    /// 바꿨다 — "클릭했을때 구절 이동 하지말고, 아래 성경구절로 표시될 수
+    /// 있도록." 이제 이 관계 카드의 좌표들은 `QueryIntentCard.verseRefs`를
+    /// 통해 "성경구절" 섹션 자체에 이미 나열되므로(`SearchViewModel.
+    /// performAIQuerySearch` 참고), 관계 행은 그 목록을 다시 가리키는
+    /// 내비게이션을 따로 둘 필요가 없다 — 텍스트 행으로 되돌렸다.
+    private func relationRow(_ item: RelationDisplayItem) -> some View {
+        relationLabel(item)
+    }
+
+    private func relationLabel(_ item: RelationDisplayItem) -> some View {
+        rowLabel(
+            icon: "person.2.fill", iconColor: .cyan,
+            title: PersonRelationLabeling.sentence(for: item.relation),
+            excerptText: item.relation.rawSentence
+        )
+    }
+
+    // MARK: - 인물·지명 정보 행
+
+    private func personOrPlaceRow(_ entity: ReferenceEntity) -> some View {
+        Group {
+            if let first = entity.verseRefs.first {
+                NavigationLink {
+                    BibleReadingView(
+                        initialBook: BooksProvider.shared.book(id: first.bookId),
+                        initialChapter: first.chapter, initialVerse: first.verse
+                    )
+                } label: {
+                    personOrPlaceLabel(entity)
+                }
+            } else {
+                personOrPlaceLabel(entity)
+            }
+        }
+    }
+
+    private func personOrPlaceLabel(_ entity: ReferenceEntity) -> some View {
+        // [2026-08-20 갱신, 2026-08-21 주석만 갱신] 화면 표시는 데이터 분석
+        // 전용이던 description(수기로 간결하게 다듬어짐, 2026-08-21에 이
+        // 값 타입에서 아예 제거됨) 대신 `entityRemark`(화면 출력용, 수기
+        // 편집 이전의 원문 서술)를 쓴다 — 사용자 요청, `ReferenceEntity.swift`
+        // 주석 참고.
+        rowLabel(
+            icon: entity.kind == .person ? "person.crop.circle.fill" : "location.fill",
+            iconColor: entity.kind == .person ? .mint : .teal,
+            title: entity.word,
+            excerptText: entity.entityRemark
+        )
+    }
+
+    // MARK: - 예언 행
+
+    private func prophecyRow(_ prophecy: ProphecyRecord) -> some View {
+        Group {
+            if let first = prophecy.prophecyRefs.first {
+                NavigationLink {
+                    BibleReadingView(
+                        initialBook: BooksProvider.shared.book(id: first.bookId),
+                        initialChapter: first.chapter, initialVerse: first.verse
+                    )
+                } label: {
+                    prophecyLabel(prophecy)
+                }
+            } else {
+                prophecyLabel(prophecy)
+            }
+        }
+    }
+
+    private func prophecyLabel(_ prophecy: ProphecyRecord) -> some View {
+        var tags = [prophecy.category]
+        if let period = prophecy.timelinePeriod, !period.isEmpty { tags.append(period) }
+        return rowLabel(
+            icon: "scroll.fill", iconColor: .yellow,
+            title: prophecy.title,
+            tagNames: tags.filter { !$0.isEmpty },
+            excerptText: prophecy.prophecyDescription
+        )
+    }
+
+    // MARK: - 주제·속성 행
+
+    private func themeRow(_ theme: ThemeRecord) -> some View {
+        Group {
+            if let first = theme.verseRefs.first {
+                NavigationLink {
+                    BibleReadingView(
+                        initialBook: BooksProvider.shared.book(id: first.bookId),
+                        initialChapter: first.chapter, initialVerse: first.verse
+                    )
+                } label: {
+                    themeLabel(theme)
+                }
+            } else {
+                themeLabel(theme)
+            }
+        }
+    }
+
+    private func themeLabel(_ theme: ThemeRecord) -> some View {
+        rowLabel(
+            icon: "lightbulb.fill", iconColor: .green,
+            title: theme.title,
+            tagNames: [theme.category].filter { !$0.isEmpty },
+            excerptText: theme.themeDescription
+        )
+    }
+
+    // MARK: - 서사 행
+
+    @ViewBuilder
+    private func narrativeGroupRows(_ group: NarrativeGroup) -> some View {
+        ForEach(Array(group.events.enumerated()), id: \.offset) { _, event in
+            narrativeEventRow(group: group, event: event)
+        }
+    }
+
+    private func narrativeEventRow(group: NarrativeGroup, event: TimelineEventRecord) -> some View {
+        Group {
+            if let first = event.verseRefs.first {
+                NavigationLink {
+                    BibleReadingView(
+                        initialBook: BooksProvider.shared.book(id: first.bookId),
+                        initialChapter: first.chapter, initialVerse: first.verse
+                    )
+                } label: {
+                    narrativeEventLabel(group: group, event: event)
+                }
+            } else {
+                narrativeEventLabel(group: group, event: event)
+            }
+        }
+    }
+
+    private func narrativeEventLabel(group: NarrativeGroup, event: TimelineEventRecord) -> some View {
+        rowLabel(
+            icon: "list.number", iconColor: .gray,
+            title: "\(group.narrativeTitle) — \(event.eventTitle)",
+            excerptText: event.eventDescription
+        )
     }
 
     // MARK: - 결과
@@ -421,7 +653,6 @@ private struct SearchContentView: View {
         iconColor: Color,
         title: String,
         isReferenceMatch: Bool = false,
-        similarityScore: Double? = nil,
         tagNames: [String] = [],
         occurrenceCount: Int? = nil,
         excerptText: String? = nil,
@@ -437,13 +668,23 @@ private struct SearchContentView: View {
                     if isReferenceMatch {
                         badge("참조 일치", color: .green, systemImage: "checkmark.seal.fill")
                     }
-                    // [2026-08-19 신설] AI 검색(의미검색) 결과 전용 — 코사인
-                    // 유사도를 퍼센트로 보여준다. "참조 일치"와 동시에 나올 일은
-                    // 없다(AI 검색 결과는 `isReferenceMatch`를 아예 안 씀,
-                    // `SearchViewModel.performAIQuerySearch` 참고).
-                    if let similarityScore {
-                        badge("유사도 \(Int(similarityScore * 100))%", color: .purple, systemImage: "sparkles")
-                    }
+                    // [2026-08-19 신설, 2026-08-20 제거, Phase 5] AI 검색(의미
+                    // 검색) 결과 전용 "유사도 xx%" 배지가 여기 있었다 — 사용자
+                    // 재검토 후 삭제. 삭제 근거(추측 아님, 코드로 확인한 사실):
+                    // `BibleSemanticSearchService.search`가 최종 반환 직전에
+                    // `BibleStructuralRerankerService.rerank`로 순서를 다시
+                    // 매기는데(인물/관계/관주 가산 신호 반영), 그 함수는 정렬만
+                    // 다시 하고 각 결과에 붙은 `similarity` 값 자체는 갱신하지
+                    // 않는다 — 그래서 화면에 최종적으로 보이는 "순서"와 배지에
+                    // 찍히는 "%" 값의 우선순위가 서로 어긋날 수 있었다(구조적
+                    // 신호로 끌어올려진 절이 자신보다 순위가 낮은 절보다 오히려
+                    // 낮은 %를 보여주는 경우가 생김). 게다가 하이브리드 키워드
+                    // 병합 후보는 전부 "1위 후보의 유사도"를 그대로 복사해 쓰고
+                    // (`hybridSimilarity`), 관주로 끌려온 후보는 원본에서 임의로
+                    // 0.05를 뺀 값이라 애초에 실제 유사도가 아니었다 — 표시된
+                    // 숫자가 실제 순위 근거와 다르면 사용자에게 오히려 혼란만
+                    // 준다고 판단해 배지 자체를 없앴다(내부 정렬 로직은 그대로
+                    // 유지 — 표시만 뺐다).
                     Spacer(minLength: 4)
                 }
                 if !tagNames.isEmpty {
@@ -507,7 +748,6 @@ private struct SearchContentView: View {
                 icon: "book.closed.fill", iconColor: .indigo,
                 title: "\(result.bookNameKo) \(result.chapter):\(result.verse)",
                 isReferenceMatch: result.isReferenceMatch,
-                similarityScore: result.similarityScore,
                 excerptText: result.content, excerptKeywords: result.highlightKeywords
             )
         }
