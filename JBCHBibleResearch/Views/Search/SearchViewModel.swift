@@ -536,17 +536,34 @@ final class SearchViewModel {
             }
         }
 
+        // [2026-08-25 변경] 사용자 요청 — "성경구절의 가중치가 동일한 경우 성경
+        // 순서대로 장절 오름차순대로 정렬할 것. 검색어 단어가 한개인 경우는
+        // 무조건 성경 순서 + 장절 오름차순 나타낼 것." `wordCandidates`는
+        // Dictionary라 `.values` 순회 순서가 해시 기반이라 실행마다 달라질 수
+        // 있다 — 이전엔 `$0.score > $1.score`만으로 정렬해서 점수가 같으면
+        // 사실상 무작위 순서로 보였다. 이제 점수가 같을 때 (정경 순서, 장, 절)
+        // 오름차순으로 명시적으로 끊는다 — `KeywordMatchScorer.Score`가 더 이상
+        // 등장 반복 횟수로 가중치를 안 매기므로(그 파일 상단 주석 참고), 단어가
+        // 한 개뿐인 질의는 매칭된 모든 결과의 점수가 항상 똑같아져 이 tie-break가
+        // 사실상 전체 정렬을 담당하게 되고, 그 결과 "단어가 한 개인 경우는
+        // 무조건 성경 순서" 요구사항도 별도 분기 없이 자동으로 충족된다.
         let scoredCandidates = wordCandidates.values
-            .map { entry -> (result: VerseSearchResult, score: KeywordMatchScorer.Score) in
+            .map { entry -> (result: VerseSearchResult, score: KeywordMatchScorer.Score, orderIndex: Int) in
                 let score = KeywordMatchScorer.score(words: words, in: entry.verse.content)
                 let result = VerseSearchResult(
                     bookId: entry.verse.bookId, chapter: entry.verse.chapter, verse: entry.verse.verse,
                     content: entry.verse.content, bookNameKo: entry.bookNameKo, highlightKeywords: words
                 )
-                return (result, score)
+                let orderIndex = booksProvider.book(id: entry.verse.bookId)?.orderIndex ?? entry.verse.bookId
+                return (result, score, orderIndex)
             }
             .filter { $0.score.isAnyMatch }
-            .sorted { $0.score > $1.score }
+            .sorted { lhs, rhs in
+                if lhs.score != rhs.score { return lhs.score > rhs.score }
+                if lhs.orderIndex != rhs.orderIndex { return lhs.orderIndex < rhs.orderIndex }
+                if lhs.result.chapter != rhs.result.chapter { return lhs.result.chapter < rhs.result.chapter }
+                return lhs.result.verse < rhs.result.verse
+            }
 
         for candidate in scoredCandidates {
             guard results.count < 30 else { break }

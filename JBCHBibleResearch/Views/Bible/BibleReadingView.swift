@@ -66,7 +66,24 @@ struct BibleReadingView: View {
                         // 절 목록이 이미 로드돼 있다(`reloadVerses()`가 동기
                         // 호출이라 — `BibleReadingViewModel.selectBook` 참고) —
                         // 그래서 여기서 바로 강조를 걸어도 안전하다.
-                        if let initialVerse {
+                        //
+                        // [2026-08-25 추가] 사이드바 "최근" 이력(형광펜/메모/관주)
+                        // 항목을 탭했을 때(`SidebarNavigationView.navigateToBibleVerse`,
+                        // `BibleVerseNavigationRequest.swift` 상단 주석 참고) — 다른
+                        // 섹션에 있다가 이 화면(`.bibleReading`, 매개변수 없는 단일
+                        // 상시 인스턴스)으로 막 전환돼 `viewModel`이 새로 만들어지는
+                        // 경로다. `initialBook`/`initialChapter`(둘 다 nil, 이
+                        // 인스턴스는 SearchView처럼 그 값을 넘겨받지 않는다)로는
+                        // 표현할 수 없는 목표 좌표라 별도로 처리한다 — 이미 떠 있는
+                        // 채로 다시 탭한 경우는 `BibleReadingContentView`의
+                        // `.onChange(of: BibleVerseNavigationRequest.shared.pendingTarget)`가
+                        // 대신 처리한다(이 `.onAppear`는 재생성될 때만 실행되므로).
+                        if let target = BibleVerseNavigationRequest.shared.pendingTarget,
+                           let book = BooksProvider.shared.book(id: target.bookId) {
+                            vm.selectBook(book, chapter: target.chapter)
+                            vm.highlightVerseTemporarily(target.verse)
+                            BibleVerseNavigationRequest.shared.clear()
+                        } else if let initialVerse {
                             vm.highlightVerseTemporarily(initialVerse)
                         }
                         viewModel = vm
@@ -474,6 +491,18 @@ private struct BibleReadingContentView: View {
         .navigationBarTitleDisplayMode(.inline)
         #endif
         .toolbar { toolbarContent }
+        // [2026-08-25 추가] 사이드바 "최근" 이력(형광펜/메모/관주) 항목을, 이미 이
+        // 화면(성경 조회)을 보고 있는 채로 다시 탭한 경우 — 이 화면 자체는 다시
+        // 만들어지지 않으므로(`viewModel`이 그대로 유지된다) 위 `BibleReadingView`
+        // 바깥쪽 `.onAppear`가 실행되지 않는다. `SidebarSearchRequest`를 소비하는
+        // `SearchView`가 `.onAppear`+`.onChange` 두 경로를 모두 처리하는 것과
+        // 같은 이유로, 여기서도 `.onChange`를 짝으로 둔다.
+        .onChange(of: BibleVerseNavigationRequest.shared.pendingTarget) { _, newValue in
+            guard let newValue, let book = BooksProvider.shared.book(id: newValue.bookId) else { return }
+            viewModel.selectBook(book, chapter: newValue.chapter)
+            viewModel.highlightVerseTemporarily(newValue.verse)
+            BibleVerseNavigationRequest.shared.clear()
+        }
     }
 
     /// screens.md 13.1 — 성경조회(S1)에서 절 클릭 → "메모 작성"은 클릭한 정확한

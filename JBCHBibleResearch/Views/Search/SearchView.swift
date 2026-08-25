@@ -854,6 +854,20 @@ private struct SearchContentView: View {
 
     // MARK: - 연구문서(SourceDocument)
 
+    /// [2026-08-25 추가] 사용자 요청 — "연구문서 클릭하면 해당 검색어가 뷰어의
+    /// 검색어로 입력되어 해당 부분으로 자동 하이라이트되게 할것. (성경구절
+    /// 클릭할 때 오른쪽 인스펙터에서의 연구문서 클릭과 동일한 기능)."
+    /// `BibleReadingView.handleVerseMentionSelected`(그 파일 참고 — "관련
+    /// 콘텐츠" 패널에서 연구문서를 고르면 `document-search` 창을 검색어와 함께
+    /// 연다)와 정확히 같은 메커니즘을 여기서도 그대로 쓴다. 개별 결과가 어떤
+    /// 단어들로 일치했는지는 `result.highlightKeywords`(복수)로 갈려 있어
+    /// `DocumentSearchRequest.searchText`(단수 String) 한 자리에 그대로 넣을 수
+    /// 없으므로, "뷰어의 검색어로 입력"이라는 요청 문구 그대로 사용자가 입력한
+    /// 검색창 문자열 자체(`viewModel.query`)를 넘긴다.
+    private var documentSearchText: String {
+        viewModel.query.trimmingCharacters(in: .whitespacesAndNewlines)
+    }
+
     @ViewBuilder
     private func documentRow(_ result: DocumentSearchResult) -> some View {
         // [2026-08-18 수정, 아이폰 실기기 크래시 fix] 아이폰은 다중 씬을
@@ -864,7 +878,9 @@ private struct SearchContentView: View {
         // 등록이 필요 없다).
         if isPhoneIdiom {
             NavigationLink {
-                DocumentViewerWindowContent(documentID: result.document.persistentModelID)
+                DocumentSearchWindowContent(
+                    request: DocumentSearchRequest(documentID: result.document.persistentModelID, searchText: documentSearchText)
+                )
             } label: {
                 rowLabel(
                     icon: "doc.text.fill", iconColor: .brown,
@@ -876,7 +892,10 @@ private struct SearchContentView: View {
             }
         } else {
             Button {
-                openWindow(id: "document-viewer", value: result.document.persistentModelID)
+                openWindow(
+                    id: "document-search",
+                    value: DocumentSearchRequest(documentID: result.document.persistentModelID, searchText: documentSearchText)
+                )
             } label: {
                 rowLabel(
                     icon: "doc.text.fill", iconColor: .brown,

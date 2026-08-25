@@ -114,14 +114,33 @@ enum DocumentUploadService {
     /// 놓쳤던 모듈). 그래서 지원 형식에 추가한다 — 자세한 추출 경위는
     /// DocumentTextExtractionService.swift의 `extractPages` 참고.
     ///
-    /// [2026-08-16 `docx` 추가] `.doc`(구 바이너리, macOS만 지원)과 별개로,
-    /// `.docx`(Office Open XML)는 표준 UTType이 있고(`org.openxmlformats.
-    /// wordprocessingml.document`, `UTType(filenameExtension:)`이 시스템에서
-    /// 알아서 찾아 준다 — hwp/hwpx처럼 직접 선언할 필요 없음), 텍스트 추출도
-    /// 크로스플랫폼 파서(SwiftTextDOCX)로 되므로 `allowHWP`(hwp만 아이폰
-    /// 제외하는 플래그)와 무관하게 항상 허용한다. `.pages`도 표준 UTType
-    /// (`com.apple.iwork.pages.pages`)이 있지만, hwp/hwpx와 마찬가지로 확장자
-    /// 기반 선언으로 통일해 둔다.
+    /// [2026-08-16 `docx` 추가, 2026-08-25 `doc`/`docx` 업로드 차단으로 번복]
+    /// 사용자가 "13데살로니가전서(황종순).docx" 실사례로 보고한 "인스펙터
+    /// 연구문서 검색창에서 성경과 장 사이 공백이 사라져 검색이 안 된다" 버그를
+    /// 조사한 결과 — 원본 docx의 `word/document.xml`(zip 내부 XML 직접 확인),
+    /// 그 문서를 변환한 PDF의 텍스트 레이어(pdfplumber로 글자 단위 폰트/좌표까지
+    /// 확인), `VerseMention.searchText` 추출 경로(`BibleReferenceExtractor`),
+    /// `PDFSearchController`/`PDFKitRepresentable`의 document/pdfView 대입
+    /// 순서, `DocumentViewerViewModel.onAppear()`의 동기 실행 여부까지 — 이 앱
+    /// 코드가 만지는 모든 지점을 직접 파일 바이트/문자 단위로 검증했지만 전부
+    /// 깨끗했다. 유일하게 직접 들여다볼 수 없는 지점은 `.docx → PDF` 변환을
+    /// 전담하는 서드파티 Rust 라이브러리 docxide-pdf(`DocxToPDFConverter.swift`)
+    /// 뿐이었고, 사용자가 "라이브러리의 버그로 보임. 라이브러리가 개선될때까지는
+    /// docx doc 업로드 기능을 막을 것"이라고 명시적으로 지시했다.
+    ///
+    /// 그래서 `.docx`뿐 아니라 `.doc`도 함께 막는다 — `.doc`은 docxide-pdf를
+    /// 쓰지 않지만(macOS AppKit `NSAttributedString(.docFormat)` 경로, 위
+    /// 예전 주석대로 iOS 지원 여부조차 "확인 안 됨"으로 남아 있던 형식이라
+    /// 어차피 신뢰도가 낮았다), 사용자가 "docx doc" 둘 다 명시했으므로 함께
+    /// 막는다. `.pages`는 이번 조사·지시 대상이 아니었고 별도의 순수 Swift
+    /// 파서(SwiftTextPages)를 쓰므로 그대로 둔다.
+    ///
+    /// 이미 업로드된 기존 `.doc`/`.docx` 문서는 이 목록과 무관하게 계속 열람·
+    /// 검색 가능하다(`SourceDocument.originalFormat`, `DocxToPDFConverter`,
+    /// `DocumentTextExtractionService` 등은 그대로 둠) — 이 함수는 파일 선택기
+    /// (Finder 열기 다이얼로그)에 노출되는 "새로 고를 수 있는 형식" 목록만
+    /// 제어한다. 드래그앤드롭 경로는 이 목록을 거치지 않으므로
+    /// `createSourceDocument`의 확장자 스위치에서 별도로 막는다(아래 참고).
     static func supportedContentTypes(allowHWP: Bool) -> [UTType] {
         var types: [UTType] = [.pdf, .jpeg, .png, .heic]
         if allowHWP {
@@ -129,12 +148,6 @@ enum DocumentUploadService {
             if let hwp = UTType(filenameExtension: "hwp") { types.append(hwp) }
             if let hwpx = UTType(filenameExtension: "hwpx") { types.append(hwpx) }
         }
-        // ⚠️ "doc(구 워드)" — 14.2가 macOS AppKit의 NSAttributedString(.docFormat)
-        // 경로만 확인했고 iOS 지원 여부는 스펙 자체가 "확인 안 됨"으로 남겨 뒀다.
-        // 그래도 파일 선택 자체는 전 플랫폼에서 허용한다(선택은 되지만 추출이 실패할
-        // 수 있음 — DocumentTextExtractionService.swift 참고).
-        if let doc = UTType(filenameExtension: "doc") { types.append(doc) }
-        if let docx = UTType(filenameExtension: "docx") { types.append(docx) }
         if let pages = UTType(filenameExtension: "pages") { types.append(pages) }
         return types
     }
@@ -164,8 +177,15 @@ enum DocumentUploadService {
         case "hwp": format = .hwp
         case "hwpx": format = .hwpx
         case "pdf": format = .pdf
-        case "doc": format = .doc
-        case "docx": format = .docx
+        // [2026-08-25 제거] `.doc`/`.docx` 업로드 차단 — 위
+        // `supportedContentTypes(allowHWP:)` 주석 참고. 파일 선택기는
+        // 이미 목록에서 뺐지만, 드래그앤드롭(`DropZoneModifier`)은 파일
+        // 확장자를 가리지 않고 아무 `.fileURL`이나 이 함수까지 그대로
+        // 넘기므로, 실제 차단은 이 스위치가 `default` 분기로 떨어져
+        // `DocumentUploadError.unsupportedFormat`을 던지는 지점에서
+        // 일어난다 — 기존에 정말 모르는 확장자를 막던 것과 동일한 경로.
+        // 이미 업로드된 `.doc`/`.docx` 문서의 `OriginalFormat` 케이스
+        // 자체는 그대로 남아 있으므로 기존 문서 열람/검색은 영향 없다.
         case "pages": format = .pages
         case "jpg", "jpeg", "png", "heic", "heif": format = .image
         default:

@@ -334,6 +334,10 @@ final class BibleReadingViewModel {
             deleteCrossReference(reference)
         } else {
             reference.targets = updated
+            // [2026-08-25 추가] 사이드바 "최근" 이력 목록이 이 시각을 정렬
+            // 기준으로 쓴다(`SidebarNavigationView.SidebarQuickItem.sortDate`
+            // 참고) — 대상을 하나 지우는 것도 이 관주를 "수정"한 것이므로 갱신한다.
+            reference.updatedAt = .now
             try? modelContext.save()
         }
     }
@@ -367,6 +371,8 @@ final class BibleReadingViewModel {
             deleteCrossReference(reference)
         } else {
             reference.targets = updated
+            // [2026-08-25 추가] 위 `removeCrossReferenceTarget`과 같은 이유.
+            reference.updatedAt = .now
             try? modelContext.save()
         }
     }

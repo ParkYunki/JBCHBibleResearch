@@ -79,6 +79,16 @@ struct SidebarNavigationView: View {
     @Query(sort: \SourceDocument.uploadedAt, order: .reverse) private var sidebarDocuments: [SourceDocument]
     @Query(sort: \UserMemo.updatedAt, order: .reverse) private var sidebarMemos: [UserMemo]
     @Query(sort: \VerseSummary.createdAt, order: .reverse) private var sidebarSummaries: [VerseSummary]
+    /// [2026-08-25 추가] 사용자 요청 — "메뉴 명 하단 수정된 이력 리스트에 성경
+    /// 내용의 메모, 형광펜, 주석 수정한 내용도 이력에 나타날 수 있도록." 위
+    /// 세 `@Query`(연구문서/개인 묵상/말씀 요약)만으로는 "성경 본문에 직접 붙는"
+    /// 세 가지 주석 작업(형광펜/표시 = `VerseHighlight`, 메모 = `VersePhraseNote`,
+    /// 관주 = `VerseCrossReference` — `VerseZoomView.swift`의 "네 버튼(형광펜/개인
+    /// 주석/메모/관주)" 구분 그대로)이 빠져 있었다 — "개인 주석"(`UserMemo`)은
+    /// 이미 `sidebarMemos`로 반영돼 있으므로 나머지 세 개를 추가한다.
+    @Query(sort: \VerseHighlight.createdAt, order: .reverse) private var sidebarHighlights: [VerseHighlight]
+    @Query(sort: \VersePhraseNote.updatedAt, order: .reverse) private var sidebarPhraseNotes: [VersePhraseNote]
+    @Query(sort: \VerseCrossReference.updatedAt, order: .reverse) private var sidebarCrossReferences: [VerseCrossReference]
 
     /// screens.md 8장/11장 — macOS는 환경설정을 앱 메뉴(⌘,)로만 노출한다("사이드바에
     /// 두지 않는다"). 하지만 iPadOS엔 그 메뉴 자체가 없어, 이 화면(사이드바 툴바)에
@@ -349,13 +359,27 @@ struct SidebarNavigationView: View {
 
     /// `WordNoteItem`(WordNoteHomeView.swift)과 같은 원칙 — 데이터 자체를 합치지
     /// 않고, 사이드바에 한 목록으로 섞어 보여주기 위한 얇은 열거형 래퍼.
-    /// 사용자 요청이 명시한 세 종류(연구문서/개인 묵상/말씀 요약)만 다룬다 —
-    /// 메모(VersePhraseNote)/개요는 이 섹션 범위 밖("작성/수정한 연구문서/개인
-    /// 묵상/말씀 요약 리스트를 보여줄 것" 문구 그대로).
+    /// 처음엔 사용자 요청이 명시한 세 종류(연구문서/개인 묵상/말씀 요약)만
+    /// 다뤘다 — 메모(VersePhraseNote)/개요는 그때 범위 밖("작성/수정한 연구문서/
+    /// 개인 묵상/말씀 요약 리스트를 보여줄 것" 문구 그대로).
+    ///
+    /// [2026-08-25 추가] 사용자 요청 — "메뉴 명 하단 수정된 이력 리스트에 성경
+    /// 내용의 메모, 형광펜, 주석 수정한 내용도 이력에 나타날 수 있도록." 성경
+    /// 본문에 직접 붙는 세 가지 주석 작업 — 형광펜/표시(`VerseHighlight`), 메모
+    /// (`VersePhraseNote`), 관주(`VerseCrossReference`) — 를 추가한다("개인
+    /// 주석"에 해당하는 `UserMemo`는 이미 `.memo` 케이스로 반영돼 있다). 이 세
+    /// 모델은 `SourceDocument`/`UserMemo`/`VerseSummary`와 달리 `isPinned` 필드가
+    /// 없다 — 사용자가 "이력에 나타날 수 있도록"만 요청했지 고정 기능까지
+    /// 요청하지는 않았으므로, 새로 스키마를 늘리는 대신 이 세 케이스는 항상
+    /// 고정 불가능(`isPinnable == false`)으로 둔다(아래 `isPinnable`/`quickItemRow`
+    /// 참고) — "고정됨" 섹션에는 나오지 않고 "이번 주"/"이전"에만 나온다.
     private enum SidebarQuickItemKind {
         case document(SourceDocument)
         case memo(UserMemo)
         case summary(VerseSummary)
+        case highlight(VerseHighlight)
+        case phraseNote(VersePhraseNote)
+        case crossReference(VerseCrossReference)
     }
 
     private struct SidebarQuickItem: Identifiable {
@@ -366,6 +390,9 @@ struct SidebarNavigationView: View {
             case .document(let document): return "quick-doc-\(document.id.uuidString)"
             case .memo(let memo): return "quick-memo-\(memo.id.uuidString)"
             case .summary(let summary): return "quick-summary-\(summary.id.uuidString)"
+            case .highlight(let highlight): return "quick-highlight-\(highlight.id.uuidString)"
+            case .phraseNote(let note): return "quick-phrasenote-\(note.id.uuidString)"
+            case .crossReference(let reference): return "quick-xref-\(reference.id.uuidString)"
             }
         }
         var title: String {
@@ -377,6 +404,15 @@ struct SidebarNavigationView: View {
             case .summary(let summary):
                 let bookName = BooksProvider.shared.book(id: summary.bookId)?.nameKo ?? "성경"
                 return "\(bookName) \(summary.chapter)장 말씀 요약"
+            case .highlight(let highlight):
+                let bookName = BooksProvider.shared.book(id: highlight.bookId)?.nameKo ?? "성경"
+                return "\(bookName) \(highlight.chapter):\(highlight.verse) 형광펜"
+            case .phraseNote(let note):
+                let bookName = BooksProvider.shared.book(id: note.bookId)?.nameKo ?? "성경"
+                return "\(bookName) \(note.chapter):\(note.verse) 메모"
+            case .crossReference(let reference):
+                let bookName = BooksProvider.shared.book(id: reference.bookId)?.nameKo ?? "성경"
+                return "\(bookName) \(reference.chapter):\(reference.verse) 관주"
             }
         }
         var systemImage: String {
@@ -384,6 +420,11 @@ struct SidebarNavigationView: View {
             case .document: return "doc.text"
             case .memo: return "note.text"
             case .summary: return "text.quote"
+            case .highlight: return "highlighter"
+            case .phraseNote: return "note.text"
+            // `VerseZoomView.actionButton(title: "관주", systemImage: "link")`와
+            // 같은 아이콘 — 어디서 왔든 같은 기능은 같은 아이콘으로.
+            case .crossReference: return "link"
             }
         }
         var isPinned: Bool {
@@ -391,17 +432,32 @@ struct SidebarNavigationView: View {
             case .document(let document): return document.isPinned
             case .memo(let memo): return memo.isPinned
             case .summary(let summary): return summary.isPinned
+            case .highlight, .phraseNote, .crossReference: return false
+            }
+        }
+        /// 위 enum 상단 주석 참고 — 형광펜/메모/관주는 고정 기능 자체가 없다.
+        var isPinnable: Bool {
+            switch kind {
+            case .document, .memo, .summary: return true
+            case .highlight, .phraseNote, .crossReference: return false
             }
         }
         /// "작성/수정한" 기준 — 연구문서는 업로드 시각, 개인 묵상은 마지막 수정
         /// 시각(WordNoteHomeView와 같은 원칙), 말씀 요약은 쓴 시각(같은 이유로
         /// "쓴 순서"가 그 모델의 저널 성격에 맞다 — `WordNoteItem.sortDate` 상단
-        /// 주석 참고).
+        /// 주석 참고). 형광펜은 수정 개념 없이 항상 추가/삭제만 되므로(`VerseHighlight`
+        /// 상단 주석 참고) `createdAt`이 곧 "마지막으로 손댄 시각"이다. 메모/관주는
+        /// 실제로 내용을 고칠 수 있어 `updatedAt`을 쓴다(`VersePhraseNote.updatedAt`은
+        /// `BibleReadingViewModel.updatePhraseNote`가, `VerseCrossReference.updatedAt`은
+        /// `removeCrossReferenceTarget`/`removeCrossReferenceGroup`이 갱신한다).
         var sortDate: Date {
             switch kind {
             case .document(let document): return document.uploadedAt
             case .memo(let memo): return memo.updatedAt
             case .summary(let summary): return summary.createdAt
+            case .highlight(let highlight): return highlight.createdAt
+            case .phraseNote(let note): return note.updatedAt
+            case .crossReference(let reference): return reference.updatedAt
             }
         }
     }
@@ -410,6 +466,9 @@ struct SidebarNavigationView: View {
         sidebarDocuments.map { SidebarQuickItem(kind: .document($0)) }
             + sidebarMemos.map { SidebarQuickItem(kind: .memo($0)) }
             + sidebarSummaries.map { SidebarQuickItem(kind: .summary($0)) }
+            + sidebarHighlights.map { SidebarQuickItem(kind: .highlight($0)) }
+            + sidebarPhraseNotes.map { SidebarQuickItem(kind: .phraseNote($0)) }
+            + sidebarCrossReferences.map { SidebarQuickItem(kind: .crossReference($0)) }
     }
 
     private var pinnedQuickItems: [SidebarQuickItem] {
@@ -437,8 +496,9 @@ struct SidebarNavigationView: View {
         recentQuickItems.filter { $0.sortDate < weekAgoDate }
     }
 
+    @ViewBuilder
     private func quickItemRow(_ item: SidebarQuickItem) -> some View {
-        Button {
+        let row = Button {
             openQuickItem(item)
         } label: {
             Label(item.title, systemImage: item.systemImage)
@@ -452,12 +512,20 @@ struct SidebarNavigationView: View {
         // "태그 관계" 행과 같은 이유로 `.plain` — 이 Button들은 `selection`
         // 대상이 아니라 List 기본 버튼 틴트가 어울리지 않는다.
         .buttonStyle(.plain)
-        .contextMenu {
-            Button {
-                togglePinQuickItem(item)
-            } label: {
-                Label(item.isPinned ? "고정 해제" : "고정", systemImage: item.isPinned ? "pin.slash" : "pin")
+
+        // [2026-08-25 추가] 형광펜/메모/관주는 고정 기능이 없다(`SidebarQuickItem.isPinnable`
+        // 상단 주석 참고) — 누르면 아무 항목도 없는 빈 컨텍스트 메뉴가 뜨는 걸
+        // 피하려고 그 셋에는 `.contextMenu` 자체를 붙이지 않는다.
+        if item.isPinnable {
+            row.contextMenu {
+                Button {
+                    togglePinQuickItem(item)
+                } label: {
+                    Label(item.isPinned ? "고정 해제" : "고정", systemImage: item.isPinned ? "pin.slash" : "pin")
+                }
             }
+        } else {
+            row
         }
     }
 
@@ -488,17 +556,39 @@ struct SidebarNavigationView: View {
         case .summary(let summary):
             WordNoteSelectionRequest.shared.request(.summary(summary.id))
             selection = .wordNote
+        // [2026-08-25 추가] 형광펜/메모/관주는 "말씀 노트"처럼 별도 목록 화면이
+        // 없다 — 이 세 가지가 실제로 사는 곳은 성경 조회 화면(구절 확대보기/
+        // 관련 콘텐츠 패널)뿐이므로, 그 절로 바로 이동해 보여준다.
+        // `BibleVerseNavigationRequest.swift` 상단 주석 참고.
+        case .highlight(let highlight):
+            navigateToBibleVerse(bookId: highlight.bookId, chapter: highlight.chapter, verse: highlight.verse)
+        case .phraseNote(let note):
+            navigateToBibleVerse(bookId: note.bookId, chapter: note.chapter, verse: note.verse)
+        case .crossReference(let reference):
+            navigateToBibleVerse(bookId: reference.bookId, chapter: reference.chapter, verse: reference.verse)
         }
+    }
+
+    /// 성경 조회 섹션으로 전환하고(이미 `selection`을 직접 들고 있어 memo/summary
+    /// 케이스처럼 바로 바꾼다), `BibleVerseNavigationRequest`로 목표 좌표를 넘긴다
+    /// — `BibleReadingView`가 이미 떠 있든(같은 섹션 안, `.onChange`) 막 새로
+    /// 만들어지든(다른 섹션에서 전환, `.onAppear`) 두 경로 모두 처리한다.
+    private func navigateToBibleVerse(bookId: Int, chapter: Int, verse: Int) {
+        BibleVerseNavigationRequest.shared.request(bookId: bookId, chapter: chapter, verse: verse)
+        selection = .bibleReading
     }
 
     /// `DocumentsViewModel.togglePin`/`WordNoteListContent.togglePin`과 같은
     /// 원칙(이산적 액션, 즉시 저장) — 이 화면은 뷰모델이 따로 없어 여기서 직접
-    /// `modelContext`에 저장한다.
+    /// `modelContext`에 저장한다. 형광펜/메모/관주는 고정 기능이 없어(`isPinnable
+    /// == false`) 이 함수를 호출하는 UI 경로 자체가 없다 — 그래도 `switch`를
+    /// 총망라(exhaustive)하게 두기 위해 그 세 케이스는 아무 것도 하지 않는다.
     private func togglePinQuickItem(_ item: SidebarQuickItem) {
         switch item.kind {
         case .document(let document): document.isPinned.toggle()
         case .memo(let memo): memo.isPinned.toggle()
         case .summary(let summary): summary.isPinned.toggle()
+        case .highlight, .phraseNote, .crossReference: return
         }
         try? modelContext.save()
     }

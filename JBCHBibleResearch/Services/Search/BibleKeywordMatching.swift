@@ -108,11 +108,25 @@ enum KeywordMatchScorer {
     /// 확보되어야 함")을 위해 `Comparable`을 튜플처럼 계층적으로 구현했다.
     struct Score: Comparable, Equatable {
         let allWordsMatched: Bool
-        /// 매칭된 단어들이 (동의어 포함) 본문에 등장한 총 횟수 — 같은
-        /// `allWordsMatched` 등급 안에서만 순위를 가른다.
+        /// [2026-08-25 변경] 사용자 요청 — "단어가 가장 많이 일치하는 경우를
+        /// 가중치를 가장 높이되, 같은 단어가 여러번 나온다해서 가중치를
+        /// 높게하지 않도록, 같은 단어가 여러번 나온다해도 한번 나온 구절과
+        /// 가중치는 같게 계산할 것." 순위 비교는 이제 오직 "서로 다른 단어가
+        /// 몇 개나 일치했는지"(matchedWordCount)에만 의존한다 — 흔한 단어
+        /// 하나가 본문에 여러 번 등장하는 절이, 서로 다른 단어 여러 개가 각각
+        /// 한 번씩만 걸린 절보다 부당하게 앞서는 일을 막는다. 검색어가 한
+        /// 단어뿐이면(`words.count == 1`) 매칭되는 모든 결과의 이 값이 항상
+        /// 1로 같아져(못 찾은 경우는 애초에 `isAnyMatch`가 false라 걸러진다)
+        /// 가중치 차이 자체가 없어진다 — "단어가 한 개인 경우는 무조건 성경
+        /// 순서" 요구사항이 이 규칙 하나로 자동으로 충족된다
+        /// (`SearchViewModel.searchVerses`의 정렬 쪽 tie-break 참고).
+        let matchedWordCount: Int
+        /// 매칭된 단어들이(동의어 포함) 본문에 등장한 총 횟수 — 더 이상 순위
+        /// 비교에는 쓰이지 않고, `isAnyMatch` 판정과 화면의 "N회 일치" 같은
+        /// 참고 표시 용도로만 남겨 둔다.
         let totalOccurrences: Int
 
-        static let none = Score(allWordsMatched: false, totalOccurrences: 0)
+        static let none = Score(allWordsMatched: false, matchedWordCount: 0, totalOccurrences: 0)
 
         var isAnyMatch: Bool { totalOccurrences > 0 }
 
@@ -120,22 +134,24 @@ enum KeywordMatchScorer {
             if lhs.allWordsMatched != rhs.allWordsMatched {
                 return !lhs.allWordsMatched && rhs.allWordsMatched
             }
-            return lhs.totalOccurrences < rhs.totalOccurrences
+            return lhs.matchedWordCount < rhs.matchedWordCount
         }
 
         /// 코사인 유사도(0~1대)와 한 배열에 섞어 정렬해야 하는 곳(하이브리드
         /// 검색 후보 병합)을 위한 단일 스칼라 근사값. "모두 일치 = 100,
-        /// 일부만 일치 = 50, 등장 횟수 * 10 가중치"라는 사용자 요청을
-        /// 그대로 쓰되, 등장 횟수 보너스는 상한(40)을 둔다 — 상한이 없으면
-        /// 단어 하나가 아주 여러 번(5회 이상) 반복되는 "일부 일치" 후보의
-        /// 점수(50 + 50)가 "모두 일치" 최저점(100)을 넘어설 수 있어, 사용자가
-        /// 명시한 "모두 일치해야 가장 높은 점수" 제약이 깨진다. 40으로 상한을
-        /// 두면 "일부 일치"의 최댓값(50+40=90)이 "모두 일치"의 최솟값(100)을
-        /// 절대 넘지 못한다.
+        /// 일부만 일치 = 50"이라는 사용자 요청의 기본 골격은 그대로 두되,
+        /// [2026-08-25] 보너스 산정 기준을 `totalOccurrences`(등장 총 횟수)에서
+        /// `matchedWordCount`(서로 다른 단어 일치 개수)로 바꿨다 — 위 `<`와
+        /// 같은 이유(반복 등장이 순위를 부풀리지 않게). 상한(40)을 두는 이유도
+        /// 그대로다 — 상한이 없으면 "일부 일치" 후보의 점수가 "모두 일치"
+        /// 최저점(100)을 넘어설 수 있어, 사용자가 명시한 "모두 일치해야 가장
+        /// 높은 점수" 제약이 깨진다. `matchedWordCount`는 `allWordsMatched`가
+        /// false인 경우 항상 `words.count - 1` 이하이므로, 실제 쓰이는 질의
+        /// 길이(수 단어)에서는 이 상한에 사실상 걸리지 않는다.
         var numericValue: Double {
             guard totalOccurrences > 0 else { return 0 }
             let base: Double = allWordsMatched ? 100 : 50
-            let bonus = min(Double(totalOccurrences) * 10, 40)
+            let bonus = min(Double(matchedWordCount) * 10, 40)
             return base + bonus
         }
     }
@@ -157,7 +173,11 @@ enum KeywordMatchScorer {
                 totalOccurrences += variantOccurrences
             }
         }
-        return Score(allWordsMatched: matchedWordCount == words.count, totalOccurrences: totalOccurrences)
+        return Score(
+            allWordsMatched: matchedWordCount == words.count,
+            matchedWordCount: matchedWordCount,
+            totalOccurrences: totalOccurrences
+        )
     }
 }
 

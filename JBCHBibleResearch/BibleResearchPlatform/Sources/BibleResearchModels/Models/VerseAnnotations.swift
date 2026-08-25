@@ -197,6 +197,18 @@ public final class VerseCrossReference {
     /// 안전하게 되돌아간다(이 모델은 그 폴백을 강제하지 않고 정합 여부만 알려준다).
     public var entryLabels: [String] = []
     public var entryVerseCounts: [Int] = []
+    /// [2026-08-25 추가] 사용자 요청 — "왼쪽 사이드바 메뉴 명 하단 수정된 이력
+    /// 리스트에 성경 내용의 ... 주석 수정한 내용도 이력에 나타날 수 있도록."
+    /// 이전엔 `createdAt`만 있어 대상 절 하나만 지우는 편집(`removeCrossReferenceTarget`/
+    /// `removeCrossReferenceGroup`, `BibleReadingViewModel.swift`)이 `targets`를
+    /// 제자리에서 바꿔도 어떤 시각도 갱신되지 않았다 — `VersePhraseNote.updatedAt`과
+    /// 완전히 같은 이유로 추가한다. 기존 레코드는 기본값(생성 시각과 같은 `.now`,
+    /// 실제로는 그 레코드의 `createdAt`과 마이그레이션 시점 값이 다를 수 있지만
+    /// 이 필드가 없던 과거엔 애초에 "마지막 수정" 개념 자체가 없었으므로 안전한
+    /// 폴백이다)으로 채워진다 — SwiftData의 추가적(additive) 라이트웨이트
+    /// 마이그레이션(신규 저장 프로퍼티 + 기본값)이라 기존 사용자 데이터에
+    /// 영향을 주지 않는다(`VersePhraseNote`가 이미 같은 방식으로 검증됨).
+    public var updatedAt: Date = Date.now
 
     public var source: VerseCrossReferenceSource {
         get { VerseCrossReferenceSource(rawValue: sourceRaw) ?? .user }
@@ -232,7 +244,8 @@ public final class VerseCrossReference {
         targets: [BibleVerseRef] = [],
         entryLabels: [String] = [],
         entryVerseCounts: [Int] = [],
-        createdAt: Date = .now
+        createdAt: Date = .now,
+        updatedAt: Date = .now
     ) {
         self.id = id
         self.translationCode = translationCode
@@ -247,6 +260,7 @@ public final class VerseCrossReference {
         self.entryLabels = entryLabels
         self.entryVerseCounts = entryVerseCounts
         self.createdAt = createdAt
+        self.updatedAt = updatedAt
     }
 }
 
