@@ -102,11 +102,19 @@ struct ChapterRelatedContentPanel: View {
         // 이 뷰의 `.navigationTitle`/`.navigationBarTitleDisplayMode(.inline)`이
         // (감싸는 스택이 없어) 화면에 아무 효과도 못 내고 있었을 가능성이 있어,
         // 단순히 감싸기만 하면 지금까지 없던 제목 표시줄이 새로 나타나는
-        // 의도치 않은 화면 변화가 생길 수 있다. 그래서 감싸되
-        // `.toolbar(.hidden, for: .navigationBar)`(iOS 16+/macOS 13+, 공간까지
-        // 완전히 접는 공식 API)로 그 표시줄 자체를 계속 숨겨 둔다 — 기존 화면
-        // 모양은 그대로 유지하면서 `NavigationLink`가 필요로 하는 스택만
-        // 새로 생기게 하는 최소 변경이다.
+        // 의도치 않은 화면 변화가 생길 수 있다. 그래서 감싸되 그 표시줄 자체를
+        // 계속 숨겨 둔다 — 기존 화면 모양은 그대로 유지하면서 `NavigationLink`가
+        // 필요로 하는 스택만 새로 생기게 하는 최소 변경이다.
+        //
+        // [2026-08-28 빌드 에러로 수정] `ToolbarPlacement.navigationBar`는
+        // iOS/iPadOS(+tvOS/watchOS) 전용이라 macOS엔 그 케이스 자체가 없다
+        // (`'navigationBar' is unavailable in macOS`) — `PhoneTabView.swift`의
+        // `fullScreenCover`와 같은 종류의 실수다. `#if os(iOS)`로 감싼다.
+        // macOS는 이 값을 숨길 대응되는 API가 없어 그대로 둔다 — macOS의
+        // `.inspector` 패널(보조 유틸리티 창 성격)이 `NavigationStack`의
+        // `.navigationTitle`을 실제로 어떻게 그리는지는 이 환경(빌드 도구 없음)
+        // 에서 확인할 수 없었다 — 혹시 제목 표시줄이 새로 보이면 알려주시면
+        // 됩니다.
         NavigationStack {
             List {
                 outlineSection
@@ -121,7 +129,9 @@ struct ChapterRelatedContentPanel: View {
             .navigationBarTitleDisplayMode(.inline)
             #endif
         }
+        #if os(iOS)
         .toolbar(.hidden, for: .navigationBar)
+        #endif
     }
 
     // MARK: - 개요(S8 책 개요 + S9 장 개요) — 선택 상태와 무관하게 항상 표시
@@ -250,15 +260,28 @@ struct ChapterRelatedContentPanel: View {
 
                 Spacer()
 
-                Button {
-                    openOutlineQuickViewWindow()
-                } label: {
-                    Image(systemName: "macwindow")
-                        .font(.caption)
-                        .foregroundStyle(.secondary)
+                // [2026-08-28 추가] 사용자 요청 — "개요 섹션의 '별도 창에서
+                // 보기' -> 아이폰에서 이 버튼을 아예 숨길 것." 다중 씬을
+                // 지원하지 않는 아이폰에서 `openOutlineQuickViewWindow()`가
+                // 부르는 `openWindow`는 "Unable to open a window when the
+                // app does not support multiple scenes" 크래시로 이어진다
+                // (아직 실제 신고는 없었지만 `documentSection`의
+                // `taggedDocuments`/`handleVerseMentionSelected`가 겪은 것과
+                // 완전히 같은 구조라 발견 즉시 공유했고, 사용자가 "숨길 것"으로
+                // 확정했다). 아이폰에는 이미 대체 진입점("개요 화면 열기" —
+                // 메인 내비게이션을 개요 섹션으로 전환)이 있어 대신 쓸 수
+                // 있다.
+                if !isPhoneIdiom {
+                    Button {
+                        openOutlineQuickViewWindow()
+                    } label: {
+                        Image(systemName: "macwindow")
+                            .font(.caption)
+                            .foregroundStyle(.secondary)
+                    }
+                    .buttonStyle(.plain)
+                    .help("별도 창에서 보기")
                 }
-                .buttonStyle(.plain)
-                .help("별도 창에서 보기")
             }
 
             if isExpanded.wrappedValue {

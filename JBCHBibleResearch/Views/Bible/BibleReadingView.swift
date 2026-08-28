@@ -262,6 +262,27 @@ private struct BibleReadingContentView: View {
     /// 재사용한다 — 새로 만든 메모든 기존 메모든 "이 메모를 시트로 편집기에
     /// 띄운다"는 동작 자체는 똑같기 때문.
     @State private var memoBeingCreated: UserMemo?
+    /// [2026-08-28 신설, 실기기 크래시 fix] 사용자 보고 — "성경조회 인스펙터 >
+    /// 관련 연구문서 클릭시 반응없음" 진단·수정 과정에서 별도로 발견된 크래시:
+    /// "Unable to open a window when the app does not support multiple scenes."
+    /// `handleVerseMentionSelected`(아래)의 `.document` 분기가 "본문에서
+    /// 언급됨"(자동 추출) 문서를 항상 `openWindow(id: "document-search", ...)`로
+    /// 열었는데, 이 자리는 `taggedDocuments`(바로 위 "이 장에 연결됨" 문서
+    /// 목록)의 `isPhoneIdiom` 분기와 달리 플랫폼 구분이 아예 없었다 — 다중 씬을
+    /// 지원하지 않는 아이폰에서 100% 크래시로 이어진다(`DocumentsHomeView.swift`
+    /// 등 이 코드베이스의 다른 `openWindow` 호출들이 전부 `isPhone`으로 막아
+    /// 두는 것과 같은 문제).
+    ///
+    /// 고치는 방법도 같은 원칙 — 아이폰은 새 창 대신 지금 화면의 `NavigationStack`
+    /// 안으로 밀어 넣는다. `taggedDocuments`처럼 `NavigationLink`로 직접 표현할
+    /// 수는 없다(이 호출은 `ChapterRelatedContentPanel`이 넘겨준 콜백
+    /// (`onSelectVerseMention`) 안에서 일어나는 값 기반 트리거라 탭 시점에 어떤
+    /// 문서/검색어인지 미리 알 수 없다) — 그래서 `.sheet(item:)`
+    /// (`memoBeingCreated`)과 같은 원리로 이 옵셔널 상태 + 아래
+    /// `.navigationDestination(item:)`을 쓴다. macOS/iPad는 기존 그대로
+    /// `openWindow`로 진짜 새 창을 연다(다중 씬 지원 플랫폼이라 크래시 리포트가
+    /// 없었다).
+    @State private var documentSearchRequest: DocumentSearchRequest?
     /// [2026-08-08 추가] 관련 콘텐츠 패널(ChapterRelatedContentPanel) 표시 여부 —
     /// `.inspector(isPresented:)`에 연결한다. 한때 실기기 크래시 때문에
     /// `.sheet`로 바꿨다가, 진짜 원인이 `.inspector`가 아니라 이 화면에서
@@ -624,6 +645,20 @@ private struct BibleReadingContentView: View {
             .frame(minWidth: 480, minHeight: 420)
             #endif
         }
+        // [2026-08-28 신설, 실기기 크래시 fix] 위 `documentSearchRequest` 상단
+        // 주석 참고 — 아이폰 전용 경로. `DocumentSearchRequest`가 이미
+        // `Hashable`이라(`DocumentSearchRequest.swift` 참고) `.navigationDestination
+        // (for:)`도 쓸 수 있었지만, 값 기반(item:)을 쓴 이유는 `BibleVerseDestination`
+        // 때 겪은 "같은 스택에 같은 타입의 `.navigationDestination`이 두 번
+        // 등록되면 스택 루트에 더 가까운 쪽만 쓰인다" 문제(`SearchView.swift`
+        // 상단 주석 참고)를 원천적으로 피하기 위해서다 — `item:` 쪽은 이
+        // 화면 하나에만 있는 전용 상태를 직접 바인딩하므로 다른 화면의 동일
+        // 타입 등록과 충돌할 여지가 없다. `DocumentSearchWindowContent`는
+        // macOS/iPad의 "document-search" `WindowGroup`이 쓰는 것과 완전히
+        // 같은 뷰(문서 조회 + `@Query` 기반 삭제 안전성)를 그대로 재사용한다.
+        .navigationDestination(item: $documentSearchRequest) { request in
+            DocumentSearchWindowContent(request: request)
+        }
         #if os(macOS)
         // [2026-08-08 신설, 크래시 조사 끝에 원래 배치로 복귀] 사용자 요청 —
         // "성경 장을 읽을 때 이 장의 개요/메모/연구문서가 있다는 것을 한번에
@@ -905,10 +940,15 @@ private struct BibleReadingContentView: View {
             }
         case .document:
             if let document = viewModel.resolveDocument(for: mention) {
-                openWindow(
-                    id: "document-search",
-                    value: DocumentSearchRequest(documentID: document.persistentModelID, searchText: mention.searchText)
-                )
+                let request = DocumentSearchRequest(documentID: document.persistentModelID, searchText: mention.searchText)
+                // [2026-08-28 변경, 실기기 크래시 fix] 위 `documentSearchRequest`
+                // 상단 주석 참고 — 아이폰은 새 창 대신 지금 화면 스택에 밀어
+                // 넣는다(`.navigationDestination(item: $documentSearchRequest)`).
+                if isPhone {
+                    documentSearchRequest = request
+                } else {
+                    openWindow(id: "document-search", value: request)
+                }
             }
         // [2026-08-12 추가] "[관련 말씀 요약]"도 개인 묵상과 같은 방식으로
         // 다룬다 — 이미 있는 말씀 요약을 인스펙터 편집기로 연다(번역본 좁히기/
