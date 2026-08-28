@@ -148,9 +148,34 @@ struct AnnotatedVerseFlowView: View {
                     collection.boxAnchors[note.id] != nil && collection.textAnchors[note.id] != nil
                 }) { note in
                     if let boxAnchor = collection.boxAnchors[note.id],
-                       let textAnchors = collection.textAnchors[note.id] {
+                       let textAnchors = collection.textAnchors[note.id],
+                       let firstTextAnchor = textAnchors.first {
                         let boxRect = proxy[boxAnchor]
-                        let textRect = textAnchors.map { proxy[$0] }.reduce(CGRect.null) { $0.union($1) }
+                        // [2026-08-26 수정] 사용자 보고 — "시50:1 확대보기 ...
+                        // '세상을 부르셨도다'를 선택하여 메모를 입력. 메모
+                        // 위치는 '세상을' 텍스트 아래에 위치하나 메모 화살표가
+                        // ... '부르셨도다'의 왼쪽 앞부분을 가르킴 -> 대각선으로
+                        // 길게 선이 그어짐." 원인: 앵커가 한 줄(line)에 다
+                        // 안 들어가고 줄바꿈 경계를 가로질러(예: "세상을"은
+                        // 1번 줄 끝, "부르셨도다"는 다음 줄 시작) 두 세그먼트로
+                        // 쪼개지면, `textAnchors`엔 두 줄의 사각형이 모두 담긴다
+                        // — 예전 코드는 이걸 `.union(...)`해 하나의 사각형으로
+                        // 합친 뒤 그 `.minX`/`.maxY`를 썼는데, 다음 줄은 항상
+                        // 본문 왼쪽 정렬 시작점(x가 작음)에서 시작하므로 union의
+                        // `.minX`가 실제로는 "다음 줄(부르셨도다)의 시작 x"가
+                        // 되어 버렸다(1번 줄의 "세상을" 쪽 x보다 더 작아서) —
+                        // `.maxY`도 마찬가지로 더 아래 줄(다음 줄) 기준이 되어
+                        // 화살표 끝점이 엉뚱한 줄의 엉뚱한 x로 대각선으로
+                        // 늘어졌다. `textAnchors`는 `lineRow`가 줄 순서대로(위→
+                        // 아래, 왼→오) `VerseAnchorCollectionKey.reduce`에 담는
+                        // 순서 그대로 쌓이므로(그 함수 상단 주석 참고), 배열의
+                        // 첫 번째 원소가 곧 "이 메모가 실제로 시작하는(=박스가
+                        // 놓이는 줄과 같은) 첫 세그먼트"다 — union 대신 이
+                        // 첫 세그먼트 하나만 기준으로 화살표를 그리면, 메모가
+                        // 한 줄에만 있던 기존 케이스는 결과가 그대로이면서
+                        // (세그먼트가 하나뿐이라 first == union), 줄을 가로지르는
+                        // 이 케이스만 고쳐진다.
+                        let textRect = proxy[firstTextAnchor]
                         // [2026-08-12 재수정] 사용자 요청 — "화살표가 텍스트길이의
                         // 가로 가운데를 가리키는 것 같은데, 텍스트의 가장 맨 왼쪽
                         // 글자의 가운데를 가리키게 할 것." `textRect.minX`(가장
@@ -291,7 +316,23 @@ struct AnnotatedVerseFlowView: View {
     /// 것을 피하려고 여유(+8pt)를 살짝 더 둔다. 아주 짧은 메모(예: 한 글자)도
     /// 너무 좁아 보이지 않도록 최소 60pt를 보장한다.
     private func estimatedBoxWidth(for note: VersePhraseNote) -> CGFloat {
-        let captionFont = PlatformFont.systemFont(ofSize: 12)
+        // [2026-08-26 수정] 사용자 보고 — "확대보기 메모입력: 텍스트를 길게
+        // 입력하면 메모 오른쪽 여백이 더 넓어짐. 이유는?" 원인: 실제
+        // `PhraseNoteBoxView`는 `Text(note.noteText).font(.caption)`으로
+        // 그리는데, 이 함수는 그 폭을 근사할 때 `.caption`이 아니라 고정
+        // `systemFont(ofSize: 12)`로 측정해 왔다 — `.caption`은 Dynamic
+        // Type 텍스트 스타일이라 실제 렌더링 포인트 크기가 플랫폼마다 다르고
+        // (예: macOS의 `.caption`은 iOS보다 작다) 사용자가 시스템 글자 크기를
+        // 조정했으면 더 벌어진다. 측정 폰트가 실제 렌더 폰트보다 넓게(또는
+        // 좁게) 어긋나는 정도는 텍스트가 길수록 누적 오차(px)도 커지므로,
+        // "길게 입력할수록 여백이 더 넓어진다"는 증상과 정확히 들어맞는다.
+        // `PlatformFont.preferredFont(forTextStyle: .caption1)`은 애플이
+        // 공식적으로 제공하는 "이 Dynamic Type 텍스트 스타일이 실제로 어떤
+        // UIFont/NSFont로 렌더링되는지"를 그대로 돌려주는 API라(iOS/macOS
+        // 공통, `.caption1` == SwiftUI `Font.caption`), 고정 12pt 대신 이걸
+        // 쓰면 플랫폼 차이와 사용자의 텍스트 크기 설정 둘 다 실제 렌더링과
+        // 항상 일치한다.
+        let captionFont = PlatformFont.preferredFont(forTextStyle: .caption1)
         let textWidth = (note.noteText as NSString).size(withAttributes: [.font: captionFont]).width
         let padded = textWidth + 16 + 8 // .padding(8) 좌우 = 16, 여유 8
         return min(max(padded, 60), PhraseNoteBoxView.boxWidth)

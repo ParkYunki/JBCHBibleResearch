@@ -54,9 +54,13 @@ import UIKit
 // 추가: 기본/라이센스/단축키. 성경 - 상위 탭 추가: 번역본/모양/복사 형식.
 // 저장공간 탭 삭제. AI 탭 삭제." 기존엔 8개 탭이 한 줄로 나란히 있었는데,
 // 이제 최상위는 "일반"/"성경" 두 탭(+ DEBUG 전용 "개발자")뿐이고, 그 안에
-// 각각 하위 TabView를 하나 더 두는 2단 구조다 — 아래 `GeneralSettingsGroup`/
-// `BibleSettingsGroup`이 그 하위 TabView를 담는다. "AI"/"저장공간" 탭은
+// 하위 탭을 다시 두는 2단 구조다 — 아래 `GeneralSettingsGroup`/
+// `BibleSettingsGroup`이 그 하위 탭 전환을 담당한다. "AI"/"저장공간" 탭은
 // 자리 자체를 없앴다(위 `AISettingsTab`/`StorageSettingsTab` 삭제 주석 참고).
+// [2026-08-25 정정] 하위 탭은 처음엔 `TabView` 중첩으로 구현했었으나, macOS
+// 데스크톱에서 그 안쪽 TabView가 아예 렌더링되지 않는 문제가 실기기에서
+// 확인돼 `Picker(...).pickerStyle(.segmented)` 기반 전환으로 바꿨다 — 상세
+// 원인은 `GeneralSettingsGroup`/`BibleSettingsGroup` 선언부 주석 참고.
 struct SettingsView: View {
     var body: some View {
         TabView {
@@ -83,34 +87,100 @@ struct SettingsView: View {
     }
 }
 
-/// [2026-08-21 신설] "일반" 상위 탭의 하위 탭(기본/라이센스/단축키) — 각 하위
-/// 탭 뷰 자체는 그대로 재사용하고 이 안에 다시 `TabView`로 감싸기만 한다.
+/// [2026-08-25 수정] 사용자 신고 — macOS 데스크톱 앱에서 이 하위 탭들이 아예
+/// 보이지 않고 눌러도 반응이 없음(실기기 재현으로 확인됨). 원인: 여기서
+/// `TabView`를 다시 `TabView` 안에 중첩하고 있었는데, macOS에서는 최상위
+/// TabView(SettingsView.body, `Settings { }` Scene의 루트)만 환경설정 창
+/// 전용 렌더링(윈도우 툴바의 세그먼트 아이콘)을 받고, 이 안쪽에 중첩된
+/// TabView는 그 처리를 받지 못해 탭 전환 UI 자체가 그려지지 않았다 — iOS의
+/// 기본(바닥) 탭 바처럼 중첩 상태에서도 자체 UI를 그려 주는 폴백이 macOS
+/// TabView에는 없다. 같은 파일 안에서 이미 검증된 대안 패턴 —
+/// `AppearanceSettingsTab`/`BibleCopyFormatSettingsTab`이 쓰는
+/// `Picker(...).pickerStyle(.segmented)` — 로 바꿔, 진짜 TabView를 중첩하지
+/// 않고 선택 상태(@State)에 따라 하위 화면만 전환한다. 하위 탭 뷰
+/// (GeneralSettingsTab/LicenseSettingsTab/ShortcutsSettingsTab 등) 자체는
+/// 전혀 손대지 않았다 — 감싸는 방식만 바뀌었을 뿐 내용/저장 로직은 동일하다.
 private struct GeneralSettingsGroup: View {
+    private enum Tab: String, CaseIterable, Identifiable {
+        case basic, license, shortcuts
+        var id: Self { self }
+        var title: String {
+            switch self {
+            case .basic: return "기본"
+            case .license: return "라이센스"
+            case .shortcuts: return "단축키"
+            }
+        }
+    }
+
+    @State private var selection: Tab = .basic
+
     var body: some View {
-        TabView {
-            GeneralSettingsTab()
-                .tabItem { Label("기본", systemImage: "gearshape") }
-            LicenseSettingsTab()
-                .tabItem { Label("라이센스", systemImage: "doc.plaintext") }
-            ShortcutsSettingsTab()
-                .tabItem { Label("단축키", systemImage: "keyboard") }
+        VStack(spacing: 0) {
+            Picker("", selection: $selection) {
+                ForEach(Tab.allCases) { tab in
+                    Text(tab.title).tag(tab)
+                }
+            }
+            .pickerStyle(.segmented)
+            .labelsHidden()
+            .padding([.horizontal, .top])
+
+            Group {
+                switch selection {
+                case .basic:
+                    GeneralSettingsTab()
+                case .license:
+                    LicenseSettingsTab()
+                case .shortcuts:
+                    ShortcutsSettingsTab()
+                }
+            }
         }
     }
 }
 
-/// [2026-08-21 신설] "성경" 상위 탭의 하위 탭(번역본/모양/복사 형식) — 세
-/// 탭 모두 기존 탭을 그대로 옮겨왔을 뿐, 내용은 바뀌지 않았다.
+/// [2026-08-25 수정] 위 `GeneralSettingsGroup`과 같은 원인·같은 방식으로 중첩
+/// TabView를 세그먼트 Picker로 교체했다 — 하위 탭 뷰(TranslationsSettingsTab/
+/// AppearanceSettingsTab/BibleCopyFormatSettingsTab) 자체는 그대로다.
 private struct BibleSettingsGroup: View {
+    private enum Tab: String, CaseIterable, Identifiable {
+        case translations, appearance, copyFormat
+        var id: Self { self }
+        var title: String {
+            switch self {
+            case .translations: return "번역본"
+            case .appearance: return "모양"
+            case .copyFormat: return "복사 형식"
+            }
+        }
+    }
+
+    @State private var selection: Tab = .translations
+
     var body: some View {
-        TabView {
-            TranslationsSettingsTab()
-                .tabItem { Label("번역본", systemImage: "character.book.closed") }
-            AppearanceSettingsTab()
-                .tabItem { Label("모양", systemImage: "paintbrush") }
-            // [2026-08-08 추가] 사용자 요청 — 성경 구절 클립보드 복사 형식(참조 위치/
-            // 괄호 스타일/약어/번역본 위치/줄바꿈/절 번호 스타일)을 위한 탭.
-            BibleCopyFormatSettingsTab()
-                .tabItem { Label("복사 형식", systemImage: "doc.on.doc") }
+        VStack(spacing: 0) {
+            Picker("", selection: $selection) {
+                ForEach(Tab.allCases) { tab in
+                    Text(tab.title).tag(tab)
+                }
+            }
+            .pickerStyle(.segmented)
+            .labelsHidden()
+            .padding([.horizontal, .top])
+
+            Group {
+                switch selection {
+                case .translations:
+                    TranslationsSettingsTab()
+                case .appearance:
+                    AppearanceSettingsTab()
+                case .copyFormat:
+                    // [2026-08-08 추가] 사용자 요청 — 성경 구절 클립보드 복사 형식(참조 위치/
+                    // 괄호 스타일/약어/번역본 위치/줄바꿈/절 번호 스타일)을 위한 탭.
+                    BibleCopyFormatSettingsTab()
+                }
+            }
         }
     }
 }
@@ -150,9 +220,7 @@ struct SettingsHostView: View {
 // `versionString`/`buildString`도 함께 옮겼다(옛 "정보" 탭 나머지 내용 중 이
 // 둘을 쓰는 곳이 없음을 확인 후 이동, 복사가 아님).
 private struct GeneralSettingsTab: View {
-    @Environment(\.modelContext) private var modelContext
     @State private var settings = UserSettingsStore.shared
-    @State private var translations: [TranslationRegistry] = []
 
     var body: some View {
         Form {
@@ -179,26 +247,25 @@ private struct GeneralSettingsTab: View {
                 Label("시작 옵션", systemImage: "power")
             }
 
-            Section {
-                Picker("기본 성경 번역본", selection: Binding(
-                    get: { settings.defaultTranslationCode ?? translations.first?.code ?? "" },
-                    set: { settings.defaultTranslationCode = $0 }
-                )) {
-                    ForEach(translations, id: \.code) { translation in
-                        Text(translation.displayName).tag(translation.code)
-                    }
-                }
-                .disabled(translations.isEmpty)
-            } header: {
-                Label("성경 조회 기본값", systemImage: "character.book.closed")
-            } footer: {
-                Text("새 메모 기본 폴더: 없음 — 항상 미분류로 시작합니다.")
-            }
+            // [2026-08-26 삭제] 사용자 보고 — "설정...->일반 -> 기본 -> 성경
+            // 조회 기본값 : 동작하지 않음 --> 제거." 여기 있던 "기본 성경
+            // 번역본" 피커(`settings.defaultTranslationCode`)를 없앴다 — 자세한
+            // 원인은 `TranslationsSettingsTab`의 "성경 조회 기본 표시" 섹션
+            // 상단 주석 참고(요약: 그 탭을 한 번이라도 열면 그 뒤로는 이 값이
+            // 다시 반영될 길이 없어 사실상 죽은 컨트롤이었다). 대신 그 탭의
+            // "성경 조회 기본 표시" 목록 하나가 순서(드래그로 변경 가능)까지
+            // 포함해 기본값을 전담한다. `defaultTranslationCode` 프로퍼티
+            // 자체(`UserSettingsStore`)와 그 값을 읽는 두 폴백 경로
+            // (`BibleReadingViewModel.loadAvailableTranslations`/
+            // `TranslationsSettingsTab.seedDefaultDisplayedCodesIfNeeded`)는
+            // 그대로 남겨 뒀다 — 이 값을 바꿀 UI가 이제 없으니 항상 nil이라
+            // 실질적으로 동작하지 않지만, "성경 조회 기본 표시" 목록이 아직
+            // 한 번도 채워지지 않은 이론상의 상태(예: 기존 사용자의 예전
+            // 선택값 이전)에 대한 안전한 폴백으로는 여전히 무해하다 — 요청
+            // 범위는 "설정 화면의 그 컨트롤 제거"였지 그 하부 폴백 로직 삭제가
+            // 아니었다.
         }
         .formStyle(.grouped)
-        .onAppear {
-            translations = (try? modelContext.fetch(FetchDescriptor<TranslationRegistry>(sortBy: [SortDescriptor(\.addedAt)]))) ?? []
-        }
     }
 
     private var versionString: String {
@@ -260,15 +327,46 @@ private struct TranslationsSettingsTab: View {
             // 넣어서, 토글이 켜져 있는 것 = 실제로 보인다는 뜻이 정확히 일치하게
             // 했다. 이후 토글을 끄면 목록에서 실제로 빠지므로 자동 선택 폴백
             // 문구도 더 이상 필요 없어 지웠다.
+            // [2026-08-26 재작성] 사용자 보고 — "설정...->일반 -> 기본 ->
+            // 성경 조회 기본값 : 동작하지 않음." 실제 원인: 이 탭이 처음 열릴
+            // 때마다 `seedDefaultDisplayedCodesIfNeeded()`가 그 시점의
+            // `defaultTranslationCode`(일반 탭의 그 피커) 값을 한 번 반영해
+            // `defaultDisplayedTranslationCodes`(바로 이 목록)를 채워 넣는데,
+            // 그 뒤로는 `BibleReadingViewModel.loadAvailableTranslations()`가
+            // "8.3(이 목록)이 있으면 최우선"이라 8.1(그 피커)은 이미 채워진
+            // 뒤로는 다시 반영될 길이 영영 없다 — 즉 이 번역본 탭을 한 번이라도
+            // 연 이후로는 그 피커를 바꿔도 실제 표시엔 아무 영향이 없었다.
+            // 사용자 요청대로 그 피커는 없애고(위 `GeneralSettingsTab` 참고),
+            // 이 목록 자체를 "드래그로 순서를 바꿀 수 있고, 맨 위가 기본값"인
+            // 진짜 단일 설정으로 승격한다 — 순서가 실제 성경 조회 컬럼 순서로
+            // 이어지는 것은 이미 위 `loadAvailableTranslations()`의
+            // `preferredCodes.compactMap { byCode[$0] }`가 배열 순서를 그대로
+            // 따르고 있어(멤버십 필터가 아니라 순서 있는 매핑), 별도로 고칠
+            // 필요가 없었다 — 여기 목록 자체가 정확한 순서로 저장되기만 하면
+            // 된다.
+            // [2026-08-27 재작성] 사용자 보고 — "설치된 성경을 보이게/안보이게
+            // 하는 옵션이 사라졌음, 드래그로 순서를 바꿀 수 없음." 원인:
+            // 바로 위 `editMode` 컴파일 에러와 같은 근본 원인이었다 —
+            // `.onMove`/`.onDelete`는 실제 드래그 손잡이나 스와이프-삭제
+            // 버튼 같은 조작 UI를 `List`가 그려 주는 경우에만 동작하는데,
+            // 이 화면은 `Form { Section { ForEach ... } } `이라 (특히 macOS
+            // `.formStyle(.grouped)`에서는) 그 조작 UI 자체가 전혀 나타나지
+            // 않는다 — 클로저 자체는 멀쩡해도 사용자가 그것을 트리거할 방법이
+            // 없었다는 뜻. 그 결과 "표시 중인 번역본을 뺄" 방법이 아예 없어,
+            // 3개가 이미 차 있으면 나머지 설치된 번역본은 "추가" 버튼이
+            // 비활성화된 채로만 보여 "옵션이 사라진 것"처럼 보였다. `List`의
+            // 암묵적 제스처 UI에 다시 기대는 대신, 평범한 버튼 탭(모든
+            // 플랫폼에서 동일하게 동작)으로 표시/숨김·순서 변경을 명시적으로
+            // 구현한다 — macOS Form의 드래그/스와이프 지원 여부를 또 추측하지
+            // 않기 위해서다.
             Section {
-                ForEach(translations, id: \.id) { translation in
-                    Toggle(translation.displayName, isOn: displayBinding(for: translation))
-                        .disabled(isDisplayToggleDisabled(for: translation))
+                ForEach(allTranslationsOrderedForDisplaySettings, id: \.id) { translation in
+                    translationDisplayRow(translation)
                 }
             } header: {
                 Label("성경 조회 기본 표시", systemImage: "eye")
             } footer: {
-                Text("최대 3개까지 고를 수 있습니다.")
+                Text("최대 3개까지 표시할 수 있습니다. 맨 위가 기본값입니다. 눈 아이콘으로 표시 여부를, 위/아래 화살표로 순서를 바꿀 수 있습니다.")
             }
 
             Section {
@@ -318,25 +416,118 @@ private struct TranslationsSettingsTab: View {
         return parts.joined(separator: " · ")
     }
 
-    private func displayBinding(for translation: TranslationRegistry) -> Binding<Bool> {
-        Binding(
-            get: { settings.defaultDisplayedTranslationCodes.contains(translation.code) },
-            set: { isOn in
-                var codes = settings.defaultDisplayedTranslationCodes
-                if isOn {
-                    guard !codes.contains(translation.code) else { return }
-                    codes.append(translation.code)
-                } else {
-                    codes.removeAll { $0 == translation.code }
-                }
-                settings.defaultDisplayedTranslationCodes = codes
-            }
-        )
+    /// [2026-08-26 신설] 위 "성경 조회 기본 표시" 섹션 재작성 참고 —
+    /// `defaultDisplayedTranslationCodes`(순서 있는 코드 배열)를 실제
+    /// `TranslationRegistry`로 그 순서 그대로 매핑한다. 코드에 대응하는
+    /// 번역본이 사라졌으면(삭제됨) `compactMap`이 조용히 건너뛴다 —
+    /// `BibleReadingViewModel.loadAvailableTranslations()`의 "더 이상 존재하지
+    /// 않는 선택은 걸러낸다"와 같은 방어.
+    private var orderedDisplayedTranslations: [TranslationRegistry] {
+        let byCode = Dictionary(uniqueKeysWithValues: translations.map { ($0.code, $0) })
+        return settings.defaultDisplayedTranslationCodes.compactMap { byCode[$0] }
     }
 
-    private func isDisplayToggleDisabled(for translation: TranslationRegistry) -> Bool {
-        !settings.defaultDisplayedTranslationCodes.contains(translation.code)
-            && settings.defaultDisplayedTranslationCodes.count >= 3
+    /// 아직 표시 목록에 없는 번역본 — 아래 통합 목록의 뒤쪽 절반에 쓴다.
+    private var notYetDisplayedTranslations: [TranslationRegistry] {
+        let shown = Set(settings.defaultDisplayedTranslationCodes)
+        return translations.filter { !shown.contains($0.code) }
+    }
+
+    /// [2026-08-27 신설] 위 섹션 재작성 참고 — 표시 중인 번역본(순서대로) +
+    /// 표시하지 않는 번역본을 이어 붙인 한 줄짜리 목록. "설치된 번역본
+    /// 전체를 놓고 각각 보이게/안보이게 고른다"는 사용자가 기억하는 예전
+    /// UX(토글 방식)를 그대로 복원하면서, 순서 정보(표시 중인 것만 앞쪽에
+    /// 그 순서 그대로)도 한 목록 안에서 같이 보여준다.
+    private var allTranslationsOrderedForDisplaySettings: [TranslationRegistry] {
+        orderedDisplayedTranslations + notYetDisplayedTranslations
+    }
+
+    /// [2026-08-27 신설] 표시 중인 번역본은 순서 배지(맨 위 "기본")와 위/아래
+    /// 화살표(인접한 두 항목을 맞바꾸는 것만으로 충분 — 한 번에 한 칸씩만
+    /// 옮기므로 `swapAt`이 `move(fromOffsets:toOffset:)`보다 오히려 더
+    /// 단순하고 경계 조건이 분명하다)를, 표시하지 않는 번역본은 "표시" 눈
+    /// 아이콘 버튼만 보여준다.
+    @ViewBuilder
+    private func translationDisplayRow(_ translation: TranslationRegistry) -> some View {
+        let displayedIndex = settings.defaultDisplayedTranslationCodes.firstIndex(of: translation.code)
+        HStack {
+            Text(translation.displayName)
+            if displayedIndex == 0 {
+                // "맨 위쪽이 기본 값이라는 것을 나타낼 수 있도록"
+                Text("기본")
+                    .font(.caption2)
+                    .padding(.horizontal, 6)
+                    .padding(.vertical, 2)
+                    .background(Capsule().fill(Color.accentColor.opacity(0.15)))
+                    .foregroundStyle(Color.accentColor)
+            }
+            Spacer()
+            if let index = displayedIndex {
+                Button {
+                    moveDisplayedTranslation(from: index, to: index - 1)
+                } label: {
+                    Image(systemName: "chevron.up")
+                }
+                .buttonStyle(.borderless)
+                .disabled(index == 0)
+
+                Button {
+                    moveDisplayedTranslation(from: index, to: index + 1)
+                } label: {
+                    Image(systemName: "chevron.down")
+                }
+                .buttonStyle(.borderless)
+                .disabled(index == settings.defaultDisplayedTranslationCodes.count - 1)
+
+                Button {
+                    removeDisplayedTranslation(code: translation.code)
+                } label: {
+                    Image(systemName: "eye.slash")
+                }
+                .buttonStyle(.borderless)
+            } else {
+                Button {
+                    addDisplayedTranslation(translation)
+                } label: {
+                    Image(systemName: "eye")
+                }
+                .buttonStyle(.borderless)
+                // [2026-08-27 수정] 사용자 보고 — "성경 조회 기본표시가 3번째
+                // 활성화가 되지 않음." 원인: 삭제된 번역본의 코드가
+                // `defaultDisplayedTranslationCodes`(원시 저장 배열)에 그대로
+                // 남아 있으면(바로 아래 `delete(_:)` 수정 참고), 실제로 화면에
+                // "표시 중"으로 보이는 항목은 2개뿐인데도 원시 배열 길이는
+                // 여전히 3이라 이 조건이 계속 true가 돼 새 번역본을 추가할 수
+                // 없었다. 실제 화면에 뜨는 유효한 항목 수(`orderedDisplayedTranslations`
+                // — 존재하지 않는 코드는 이미 걸러진 목록, 위 프로퍼티 주석
+                // 참고)를 기준으로 판정하도록 바꿨다.
+                .disabled(orderedDisplayedTranslations.count >= 3)
+            }
+        }
+    }
+
+    /// 표시 중인 두 항목(`index`, `index`±1)을 맞바꾼다 — 위/아래 화살표가 항상
+    /// 인접한 위치로만 옮기므로 `swapAt` 하나로 충분하고, 둘 다 유효한 인덱스일
+    /// 때만 수행해 경계에서 죽지 않는다(호출부에서 이미 `.disabled`로 막지만
+    /// 방어적으로 한 번 더 확인).
+    private func moveDisplayedTranslation(from index: Int, to newIndex: Int) {
+        var codes = settings.defaultDisplayedTranslationCodes
+        guard codes.indices.contains(index), codes.indices.contains(newIndex) else { return }
+        codes.swapAt(index, newIndex)
+        settings.defaultDisplayedTranslationCodes = codes
+    }
+
+    private func removeDisplayedTranslation(code: String) {
+        settings.defaultDisplayedTranslationCodes.removeAll { $0 == code }
+    }
+
+    /// "최대 3개까지"(기존 규칙 그대로) — 이미 가득 찼으면 버튼이 비활성화돼
+    /// 있으므로(호출부 `.disabled`) 여기서 다시 개수를 확인할 필요는 없지만,
+    /// 방어적으로 한 번 더 막는다.
+    private func addDisplayedTranslation(_ translation: TranslationRegistry) {
+        guard settings.defaultDisplayedTranslationCodes.count < 3,
+              !settings.defaultDisplayedTranslationCodes.contains(translation.code) else { return }
+        settings.defaultDisplayedTranslationCodes.append(translation.code)
     }
 
     private func reload() {
@@ -348,6 +539,15 @@ private struct TranslationsSettingsTab: View {
         // 함께 정리한다(best-effort) — 두 곳에서 삭제 경로가 갈라지면서 한쪽만
         // 정리하면 디스크에 고아 파일이 남는다.
         TranslationFileMaterializer.removeLocalCopy(for: translation)
+        // [2026-08-27 추가] 사용자 보고 — "성경 조회 기본표시가 3번째 활성화가
+        // 되지 않음." 근본 원인: 이 함수가 번역본을 지우면서도
+        // `defaultDisplayedTranslationCodes`(성경 조회 기본 표시 목록)에서 그
+        // 코드를 빼지 않아, 삭제된 번역본의 코드가 저장소에 영구히 남아
+        // "3개가 이미 찼다"는 판정을 계속 유발했다(위 `translationDisplayRow`
+        // "add" 버튼 `.disabled` 수정 참고). 삭제 시점에 바로 정리해 이 문제가
+        // 다시 쌓이지 않게 한다 — 기존 `removeDisplayedTranslation(code:)`를
+        // 그대로 재사용(이미 없는 코드를 지워도 `removeAll`은 안전하게 무동작).
+        removeDisplayedTranslation(code: translation.code)
         modelContext.delete(translation)
         try? modelContext.save()
         reload()

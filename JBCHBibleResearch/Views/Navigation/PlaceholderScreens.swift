@@ -59,9 +59,30 @@ private struct ComingSoonView: View {
 /// 2장 화면 총괄표는 S11(통합 검색)의 iOS 접근 수준을 "동일"(macOS/iPadOS와 같은
 /// 전체 기능)로 명시했다 — 즉 iPhone에서도 반드시 닿을 수 있어야 한다는 뜻인데
 /// 탭바엔 자리가 없다. 이미 같은 이유로 S12(번역본 관리)가 탭바 목록에 없으면서도
-/// "더보기"에 들어가 있는 선례가 있어, 통합 검색도 같은 자리에 추가했다.
+/// "더보기"에 들어가 있는 선례가 있어, 한때 통합 검색도 같은 자리에 추가했었다.
+///
+/// [2026-08-27, 최종적으로 자리를 다시 바꿈 — 사용자 결정 "개요→더보기,
+/// 검색→탭바"] "통합 검색"을 이 메뉴 안에 두는 동안(중첩된 `NavigationStack`
+/// 안에서 `.searchable`이 활성 상태로 그 자리에서 성경구절로 push하는 구조)
+/// 세 차례의 실기기 콘솔 로그로 근본적으로 못 고치는 구조적 결함이 확인됐다
+/// (`SearchView.swift` 상단 주석 참고). 그래서 "통합 검색"을 `PhoneTabView`의
+/// 정식 탭으로 승격하고, 대신 원래 탭이었던 "개요"(`OutlineTreeView`)를 이
+/// 메뉴 안 전체화면 모달로 옮겼다 — "태그 관계"와 똑같은 패턴이다. `OutlineTreeView`가
+/// 아이폰 분기에서 자기 자신의 `NavigationStack(path:)`를 이미 소유하고 있어서
+/// (`OutlineTreeView.swift` 상단 주석 참고) "태그 관계"처럼 이 파일에서 별도
+/// `NavigationStack`으로 한 번 더 감싸지 않는다 — 그러면 내비게이션 스택이
+/// 중첩돼(공식적으로 지원되지 않는 구성) `PhoneTabView.swift`가 이미 한 번 겪은
+/// 것과 같은 문제가 재현된다.
+///
+/// `isOutlinePresented`는 이 화면 로컬 상태가 아니라 `PhoneTabView`가 들고
+/// 있다가 바인딩으로 내려준다 — 성경 조회 화면의 "관련 콘텐츠 > 개요 화면
+/// 열기"(`AppNavigationRequest.shared.request(.outline)`)가 "더보기"가 현재
+/// 선택된 탭이 아닐 때도 이 모달을 띄워야 하는데, 이 값이 이 화면(현재
+/// 선택되지 않은 탭이면 화면 계층 자체가 안 보임) 안에 로컬로 있으면 그 경우
+/// 모달이 뜨지 않는다(`PhoneTabView.swift` 상단 주석 참고).
 struct MorePlaceholderView: View {
     @State private var isTagRelationsPresented = false
+    @Binding var isOutlinePresented: Bool
 
     var body: some View {
         List {
@@ -70,10 +91,10 @@ struct MorePlaceholderView: View {
             } label: {
                 Label("태그 관계", systemImage: "circle.grid.cross")
             }
-            NavigationLink {
-                SearchView()
+            Button {
+                isOutlinePresented = true
             } label: {
-                Label("통합 검색", systemImage: "magnifyingglass")
+                Label("개요", systemImage: "list.bullet.rectangle")
             }
             NavigationLink {
                 TranslationManagementView()

@@ -79,11 +79,41 @@ struct SearchView: View {
     }
 }
 
+/// [2026-08-27 신설] 위 `SearchContentView`의 `.navigationDestination(for:
+/// BibleVerseDestination.self)` 등록 위치 주석 참고 — 아이폰에서만 이 등록을
+/// 끄기 위한 조건부 modifier. `CircularNavButtonModifier(isCircular:)`
+/// (BibleReadingView.swift)와 같은 "isEnabled 플래그를 받는 ViewModifier" 패턴을
+/// 그대로 따랐다.
+private struct BibleVerseDestinationRegistration: ViewModifier {
+    let isEnabled: Bool
+
+    func body(content: Content) -> some View {
+        if isEnabled {
+            content.navigationDestination(for: BibleVerseDestination.self) { destination in
+                BibleReadingView(
+                    initialBook: BooksProvider.shared.book(id: destination.bookId),
+                    initialChapter: destination.chapter,
+                    initialVerse: destination.verse
+                )
+            }
+        } else {
+            content
+        }
+    }
+}
+
 private struct SearchContentView: View {
     let viewModel: SearchViewModel
     // [2026-08-07 추가] S6이 별도 창으로 바뀌면서(JBCHBibleResearchApp.swift
     // "document-viewer" WindowGroup 참고) 검색결과의 문서 진입점도 새 창을 연다.
     @Environment(\.openWindow) private var openWindow
+    // [2026-08-27 추가] 사용자 보고 — "아이폰 통합검색: 검색결과중 성경구절을
+    // 탭하면 성경조회로 이동해야 정상인데 이동을 안 하고, 대신 빈 통합검색
+    // 화면(검색하기 전 상태)이 뜬다. 뒤로가기를 누르면 그제서야 아까 그
+    // 성경구절이 성경조회 화면에 나온다." 검색을 제출하는 시점(`.onSubmit(of:
+    // .search)`)에 이 액션을 호출해 검색 활성 상태를 종료시킨다(Apple 문서가
+    // "탐색하기 전에 검색을 종료해야 할 때 호출" 용도로 명시).
+    @Environment(\.dismissSearch) private var dismissSearch
 
     /// [2026-08-18 신설, 아이폰 실기기 크래시 fix] DocumentsHomeView.swift의
     /// `isPhoneIdiom`과 같은 패턴 — 아이폰은 다중 씬(멀티 윈도우)을 지원하지
@@ -96,6 +126,68 @@ private struct SearchContentView: View {
         #else
         return false
         #endif
+    }
+
+    /// [2026-08-27, 여러 차례 시도 끝에 최종 확정 — 사용자 결정 "개요→더보기,
+    /// 검색→탭바"] 처음엔 이 화면 안에서 `NavigationLink(value:)`로 그 자리에서
+    /// 바로 `BibleVerseDestination`을 push하려 했는데, 검색이 "활성" 상태인
+    /// 채로 같은 화면에서 바로 push하는 조합 자체가 구조적으로 깨진다는 것을
+    /// 세 번의 실기기 콘솔 로그로 확인했다(탭과 동시에 dismiss → 전환 충돌;
+    /// dismiss 안 함 → 검색 활성 상태로 넘어감 경고; 이 화면을 pop한 뒤 push →
+    /// 이 화면이 "더보기" 서브메뉴에 중첩돼 있던 탓에 탭 선택 상태 자체가
+    /// 꼬여 엉뚱한 탭으로 튐). 근본 원인은 이 화면이 "더보기"라는 다른
+    /// 화면 안에 중첩돼 있었다는 것 — `SearchView`가 `PhoneTabView`의 정식
+    /// 탭(자기 자신만의 독립된 `NavigationStack`)으로 승격되면서 이 문제
+    /// 자체가 성립하지 않게 됐다.
+    ///
+    /// 그래서 이제 아이폰에서는 이 6곳(성경구절/메모/인물·지명/예언/주제·속성/
+    /// 서사)에서 이 화면 안에서 직접 push하지 않고, 사이드바 "최근 이력"
+    /// 항목 탭(`BibleVerseNavigationRequest.swift` 상단 주석 참고)과 완전히
+    /// 같은 방식 — "성경" 탭으로 전환(`AppNavigationRequest`)하고, 이미 그
+    /// 자리에 떠 있는 `BibleReadingView`에게 목표 좌표를 전달
+    /// (`BibleVerseNavigationRequest`)한다. 이 화면 자신은 pop되지도, 상태를
+    /// 잃지도 않는다 — 다른 탭들과 똑같이 `TabView`가 계속 살려 둔다.
+    ///
+    /// macOS/iPadOS(`SidebarNavigationView`)는 이 문제가 보고되지 않았으므로
+    /// 손대지 않고 그대로 `NavigationLink(value:)`를 쓴다. `Button`은 List
+    /// 행에서 시스템 디스클로저 화살표(`>`)를 자동으로 그려주지 않으므로,
+    /// `NavigationLink`와 같은 모양을 유지하기 위해 오른쪽 끝에 같은 스타일의
+    /// 화살표를 직접 그린다.
+    @ViewBuilder
+    private func bibleVerseRow<RowLabel: View>(
+        _ destination: BibleVerseDestination,
+        @ViewBuilder label: () -> RowLabel
+    ) -> some View {
+        if isPhoneIdiom {
+            Button {
+                AppNavigationRequest.shared.request(.bibleReading)
+                // [2026-08-27] `BibleVerseNavigationTarget.verse`는 옵셔널이
+                // 아니다(사이드바 "최근 이력"은 항상 특정 절을 가리킨다) —
+                // 이 화면의 메모(VersePhraseNote) 결과처럼 절이 없는 경우
+                // (`BibleVerseDestination.verse == nil`)는 그 장의 1절로
+                // 대체한다. `BibleReadingView`의 `initialVerse == nil` 기본
+                // 동작(장의 시작 부분을 보여줌)과 사실상 같은 결과다.
+                BibleVerseNavigationRequest.shared.request(
+                    bookId: destination.bookId,
+                    chapter: destination.chapter,
+                    verse: destination.verse ?? 1
+                )
+            } label: {
+                HStack(spacing: 8) {
+                    label()
+                    Spacer(minLength: 0)
+                    Image(systemName: "chevron.right")
+                        .font(.footnote.weight(.semibold))
+                        .foregroundStyle(.tertiary)
+                }
+                .contentShape(Rectangle())
+            }
+            .buttonStyle(.plain)
+        } else {
+            NavigationLink(value: destination) {
+                label()
+            }
+        }
     }
 
     var body: some View {
@@ -207,7 +299,57 @@ private struct SearchContentView: View {
         // 키보드의 검색 버튼)를 누르면 그 대기 없이 바로 검색한다.
         .onSubmit(of: .search) {
             viewModel.searchImmediately()
+            // 위 `dismissSearch` 선언부 주석 참고 — 검색 결과가 이미 화면에
+            // 나오는 조건(`resultsSection`)은 `viewModel.query`(실제 검색어)
+            // 텍스트에만 달려 있고 이 "검색 활성" 상태와는 무관해서, 여기서
+            // 종료해도 결과 표시엔 영향이 없다.
+            dismissSearch()
         }
+        // [2026-08-26 신설, 2026-08-27 아이폰 전용 예외로 변경] `BibleVerseDestination.
+        // swift` 상단 주석 참고 — 이 화면 안의 성경 조회 이동 링크 6곳(성경구절/
+        // 메모/인물·지명/예언/주제·속성/서사)을 전부 값 기반 `NavigationLink(value:)`로
+        // 바꾸면서, 그 값을 실제 화면으로 바꿔주는 목적지 등록이 필요해졌다. 원래는
+        // 이 화면을 담는 `NavigationStack`이 macOS/iPadOS(`SidebarNavigationView`,
+        // `path:` 바인딩 보유)와 iPhone(`PhoneTabView`의 "더보기" 탭) 둘로 갈려서,
+        // 호스트 쪽에 각각 등록하는 대신 이 화면 자신에 등록해 두 플랫폼 모두에서
+        // 동작하게 했었다.
+        //
+        // [2026-08-27 변경, 사용자 실기기 재현 중 Xcode 콘솔 로그로 원인 확정]
+        // "아이폰 통합검색 결과를 탭해도 반응이 없거나, 아주 가끔 탭이 되도 검색
+        // 화면이 다시 뜬다"는 신고를 재현하는 도중 콘솔에 "A navigationDestination
+        // for 'BibleVerseDestination' was declared earlier on the stack. Only the
+        // destination declared closest to the root view of the stack will be
+        // used."가 반복 출력됐다 — 애플이 명시한 대로, 같은 스택 안에 이 타입의
+        // `.navigationDestination`이 두 곳에 등록돼 있으면 "스택 루트에 더
+        // 가까운 쪽"만 실제로 쓰이고 나머지는 조용히 무시된다. 이 화면
+        // (`SearchContentView`)은 `.searchable`이 붙은 `List`라, 검색이 아직
+        // 활성 상태인 채로 `NavigationLink(value:)`가 push되면 iOS가 검색
+        // 결과를 별도 경로로 호스팅하면서 이 화면 자신의 modifier 체인이
+        // 스택 안에 실질적으로 두 번(원본 인스턴스 + 검색 호스팅용 인스턴스)
+        // 나타나는 것으로 보인다 — 아이패드/맥도 같은 `.searchable`을 쓰지만
+        // 이 증상은 보고되지 않았고, 재현도 전부 아이폰(`PhoneTabView`)에서만
+        // 됐다. 그래서 아이폰에서만 이 화면 자신에 등록하는 것을 껐다.
+        //
+        // [2026-08-27 재변경, 사용자 결정 — "개요→더보기, 검색→탭바"] 처음엔
+        // 등록 위치를 `PhoneTabView`의 "더보기" 탭(`MorePlaceholderView`, 그
+        // 당시 통합 검색이 그 안에 중첩돼 있었다)의 스택 루트로 옮기는
+        // 방식으로 고쳤었다. 하지만 그 구조에서 검색 결과를 탭하면 이번엔
+        // "A navigation item is losing its active search controller with
+        // visible search bar..." 경고와 함께 엉뚱한 탭으로 튀는 증상이
+        // 새로 발견됐고, 세 차례의 실기기 콘솔 로그로 "`.searchable`이 활성인
+        // 화면에서 그 자리에 push하는 조합" 자체가 근본적으로 못 고치는
+        // 구조적 결함임이 확인됐다. 그래서 등록 위치를 다시 옮기는 대신
+        // "통합 검색"을 `PhoneTabView`의 독립된 최상위 탭으로 승격하고,
+        // 아이폰에서는 `bibleVerseRow`(아래)가 `NavigationLink(value:)`/
+        // `.navigationDestination`을 아예 쓰지 않고 `AppNavigationRequest`+
+        // `BibleVerseNavigationRequest`로 "성경" 탭에 이미 떠 있는
+        // `BibleReadingView`에 메시지만 보내는 방식으로 바꿨다 — push 자체가
+        // 없으니 이 등록을 아이폰의 다른 어느 곳으로도 옮길 필요가 없어졌다.
+        // macOS/iPadOS(`SidebarNavigationView`)는 여전히 `NavigationLink(value:)`를
+        // 직접 쓰므로 기존 그대로 이 화면 자신의 등록을 계속 쓴다(그쪽은 이
+        // 화면이 스택의 유일한 "루트에 가장 가까운" 목적지 등록이라 원래도
+        // 문제가 없었다).
+        .modifier(BibleVerseDestinationRegistration(isEnabled: !isPhoneIdiom))
         .toolbar {
             // [2026-08-21 추가] 사용자 요청 — "PersonPlaceSeed.json 데이터를 좀더
             // 고도화 정제 후에 다시 시도할 예정. 그전까지 AI 토글은 개발
@@ -227,6 +369,29 @@ private struct SearchContentView: View {
             #endif
         }
         .onDisappear { viewModel.onDisappear() }
+        // [2026-08-26 신설] 사용자 요청 — "두 개 단어 이상 검색시 더보기를
+        // 누르면 확인창 - 각 성경별로 추가 검색결과를 반영했으니 확인해보라는
+        // 내용." AskUserQuestion으로 확정: 확인창은 검색 1회당 최초 1번만,
+        // "확인"을 누르면 그냥 닫히고 더보기가 정상 진행된다 —
+        // `SearchViewModel.confirmMoreResultsNotice()` 참고. `.alert(item:) ->
+        // Alert`는 iOS 15/macOS 12부터 deprecated라(`Text + Text` 연산자를
+        // deprecated로 피한 것과 같은 이유, `verseExcerptAttributedString`
+        // 주석 참고) 대신 현재 권장되는
+        // `.alert(_:isPresented:presenting:actions:message:)`를 쓴다.
+        .alert(
+            "추가 검색결과 안내",
+            isPresented: Binding(
+                get: { viewModel.pendingMoreResultsNotice != nil },
+                set: { if !$0 { viewModel.dismissMoreResultsNotice() } }
+            ),
+            presenting: viewModel.pendingMoreResultsNotice
+        ) { _ in
+            Button("확인") {
+                viewModel.confirmMoreResultsNotice()
+            }
+        } message: { notice in
+            Text("구약·신약 성경책 \(notice.additionalBookCount)권에 걸쳐 추가 검색결과가 반영되었습니다. 확인해보세요.")
+        }
     }
 
     // [2026-08-21 추가] 위 toolbar의 `#if DEBUG` 주석 참고 — Release 빌드에서는
@@ -422,12 +587,9 @@ private struct SearchContentView: View {
     private func personOrPlaceRow(_ entity: ReferenceEntity) -> some View {
         Group {
             if let first = entity.verseRefs.first {
-                NavigationLink {
-                    BibleReadingView(
-                        initialBook: BooksProvider.shared.book(id: first.bookId),
-                        initialChapter: first.chapter, initialVerse: first.verse
-                    )
-                } label: {
+                bibleVerseRow(BibleVerseDestination(
+                    bookId: first.bookId, chapter: first.chapter, verse: first.verse
+                )) {
                     personOrPlaceLabel(entity)
                 }
             } else {
@@ -455,12 +617,9 @@ private struct SearchContentView: View {
     private func prophecyRow(_ prophecy: ProphecyRecord) -> some View {
         Group {
             if let first = prophecy.prophecyRefs.first {
-                NavigationLink {
-                    BibleReadingView(
-                        initialBook: BooksProvider.shared.book(id: first.bookId),
-                        initialChapter: first.chapter, initialVerse: first.verse
-                    )
-                } label: {
+                bibleVerseRow(BibleVerseDestination(
+                    bookId: first.bookId, chapter: first.chapter, verse: first.verse
+                )) {
                     prophecyLabel(prophecy)
                 }
             } else {
@@ -485,12 +644,9 @@ private struct SearchContentView: View {
     private func themeRow(_ theme: ThemeRecord) -> some View {
         Group {
             if let first = theme.verseRefs.first {
-                NavigationLink {
-                    BibleReadingView(
-                        initialBook: BooksProvider.shared.book(id: first.bookId),
-                        initialChapter: first.chapter, initialVerse: first.verse
-                    )
-                } label: {
+                bibleVerseRow(BibleVerseDestination(
+                    bookId: first.bookId, chapter: first.chapter, verse: first.verse
+                )) {
                     themeLabel(theme)
                 }
             } else {
@@ -520,12 +676,9 @@ private struct SearchContentView: View {
     private func narrativeEventRow(group: NarrativeGroup, event: TimelineEventRecord) -> some View {
         Group {
             if let first = event.verseRefs.first {
-                NavigationLink {
-                    BibleReadingView(
-                        initialBook: BooksProvider.shared.book(id: first.bookId),
-                        initialChapter: first.chapter, initialVerse: first.verse
-                    )
-                } label: {
+                bibleVerseRow(BibleVerseDestination(
+                    bookId: first.bookId, chapter: first.chapter, verse: first.verse
+                )) {
                     narrativeEventLabel(group: group, event: event)
                 }
             } else {
@@ -555,11 +708,43 @@ private struct SearchContentView: View {
     private var resultsSection: some View {
         Section {
             if viewModel.verseResults.isEmpty { emptyRow() }
-            ForEach(viewModel.verseResults) { result in
-                verseRow(result)
+            // [2026-08-26 수정] 사용자 요청 — "성경 검색 결과가 장별로
+            // 그룹핑되고, 그 같은 장안에 절이 세부적으로 표시될 수 있도록."
+            // 예전엔 `verseResults`(가중치 랭킹 순서)를 그대로 평평하게
+            // 나열했다 — 이제 `SearchViewModel.groupedVerseResults`가 그
+            // 순서는 건드리지 않은 채(랭킹/더보기 페이지네이션은 여전히
+            // `verseResults` 기준) 화면 표시용으로만 장 단위 그룹(정경순 고정,
+            // 사용자 확인 사항)을 만들어 준다.
+            ForEach(viewModel.groupedVerseResults) { group in
+                verseChapterGroupHeader(group)
+                ForEach(group.verses) { result in
+                    groupedVerseRow(result)
+                }
+            }
+            // [2026-08-25 신설, 2026-08-26 100개로 확대] 사용자 요청 — "limit
+            // 50을 해제할 수 있는 방법도 추가할 것 — 더보기 버튼." /
+            // "검색결과를 100개 단위로 보여줄것." `SearchViewModel.searchVerses`가
+            // 이제 매칭된 절 전체를 성경순으로 갖고 있다가 화면엔 100개씩만
+            // 보여준다(`SearchViewModel.verseResultPageSize`) — 이 버튼을
+            // 누르면 DB를 다시 조회하지 않고 이미 메모리에 있는 다음 100개를
+            // 더 보여준다.
+            if viewModel.hasMoreVerseResults {
+                Button {
+                    viewModel.loadMoreVerseResults()
+                } label: {
+                    HStack {
+                        Spacer()
+                        Label("더보기 (\(viewModel.allVerseResults.count - viewModel.verseResults.count)개 남음)", systemImage: "chevron.down.circle")
+                            .font(.subheadline.weight(.medium))
+                        Spacer()
+                    }
+                }
+                .buttonStyle(.plain)
+                .foregroundStyle(.indigo)
+                .padding(.vertical, 6)
             }
         } header: {
-            sectionHeader("성경구절", icon: "book.closed.fill", color: .indigo, count: viewModel.verseResults.count)
+            sectionHeader("성경구절", icon: "book.closed.fill", color: .indigo, count: viewModel.allVerseResults.count)
         }
 
         Section {
@@ -733,23 +918,128 @@ private struct SearchContentView: View {
 
     // MARK: - 성경구절
 
-    private func verseRow(_ result: VerseSearchResult) -> some View {
-        NavigationLink {
-            BibleReadingView(
-                initialBook: BooksProvider.shared.book(id: result.bookId),
-                initialChapter: result.chapter,
-                // [2026-08-19 추가] 사용자 요청 — "검색 결과중 - 성경구절을
-                // 클릭하면 해당하는 절까지 스크롤 이동해서 잠시 하이라이트
-                // 표시해줄것."
-                initialVerse: result.verse
-            )
-        } label: {
-            rowLabel(
-                icon: "book.closed.fill", iconColor: .indigo,
-                title: "\(result.bookNameKo) \(result.chapter):\(result.verse)",
-                isReferenceMatch: result.isReferenceMatch,
-                excerptText: result.content, excerptKeywords: result.highlightKeywords
-            )
+    /// [2026-08-26 신설, 같은 날 재작성] "성경구절" 섹션 안에서 장 단위
+    /// 그룹을 나누는 헤더. 사용자 요청 — "수정하기 전에 아이콘의 크기와
+    /// 성경 장절의 형태를 유지하되 성경장절 대신 성경장만 표시." "수정하기
+    /// 전"이 가리키는 화면(스크린샷)은 실은 `rowLabel`(제목 줄 + `categoryIcon`
+    /// 아이콘 칩, 개요/메모 등 다른 분류 행과 같은 스타일)로 그려지던 예전
+    /// `verseRow`였다 — 그래서 아이콘은 그 함수가 쓰는 `categoryIcon`(34×34
+    /// 원형 배지)을 그대로 재사용하고, 제목 폰트도 `rowLabel`의 제목과 같은
+    /// `.body.weight(.semibold)`로 맞췄다. 내용만 "책 D:V"(절 번호 포함) 대신
+    /// "책 D장"(장만)으로 바꿨다 — 이 헤더 하나가 그 장에 속한 여러 절
+    /// (`groupedVerseRow`)을 대표하므로 특정 절 번호를 넣을 이유가 없다.
+    private func verseChapterGroupHeader(_ group: SearchViewModel.VerseSearchResultGroup) -> some View {
+        HStack(spacing: 10) {
+            categoryIcon("book.closed.fill", color: .indigo)
+            Text("\(group.bookNameKo) \(group.chapter)장")
+                .font(.body.weight(.semibold))
+                .lineLimit(1)
+            Spacer()
+            Text("\(group.verses.count)절")
+                .font(.caption2.weight(.medium))
+                .foregroundStyle(.tertiary)
+        }
+        .padding(.vertical, 4)
+        .listRowSeparator(.hidden)
+    }
+
+    /// [2026-08-26 재작성] 사용자 요청 — "그 아래 절 표시된 내용에 1절) ....
+    /// 3절) .... 이렇게 그루핑." 장 헤더(`verseChapterGroupHeader`)가 이미
+    /// 책+장을 보여주므로, 이 행에서는 그걸 반복하지 않고 "N절)" 접두어 +
+    /// 본문만 보여준다(예시 그대로 — "17절) 그 이웃 여인들이..."). 예전
+    /// `verseRow`가 쓰던 `rowLabel`(제목 줄 + 아이콘 칩 + 왼쪽 정렬 발췌)은
+    /// 이 배치와 맞지 않아 이 함수 전용으로 따로 그린다.
+    private func groupedVerseRow(_ result: VerseSearchResult) -> some View {
+        // [2026-08-19 추가] 사용자 요청 — "검색 결과중 - 성경구절을 클릭하면
+        // 해당하는 절까지 스크롤 이동해서 잠시 하이라이트 표시해줄것."
+        // [2026-08-26 변경] 클로저 기반 NavigationLink { BibleReadingView(...) }는
+        // `SidebarNavigationView.detailNavigationPath`(NavigationPath)에
+        // 전혀 기록되지 않아 "다시 검색해도 pop이 안 되는" 버그의 원인이었다
+        // — `BibleVerseDestination.swift` 상단 주석 참고. 값 기반으로 교체.
+        bibleVerseRow(BibleVerseDestination(
+            bookId: result.bookId, chapter: result.chapter, verse: result.verse
+        )) {
+            HStack(alignment: .firstTextBaseline, spacing: 8) {
+                Text(verseExcerptAttributedString(result))
+                    .lineLimit(2)
+                if result.isReferenceMatch {
+                    badge("참조 일치", color: .green, systemImage: "checkmark.seal.fill")
+                }
+                Spacer(minLength: 8)
+                // [2026-08-26 추가] 사용자 요청 — "각 절마다 몇개 매칭되었는지
+                // 오른쪽 끝에다 표시해줄것." 참조 매치는 `matchCount`가 항상
+                // 0이라(`VerseSearchResult.matchCount` 상단 주석 참고) 배지
+                // 자체를 숨긴다 — "0회"라고 보여주는 것보다 아예 안 보이는
+                // 편이 "이건 단어 매칭이 아니라 정확한 참조로 찾아온 절"이라는
+                // 뜻을 더 분명히 전달한다.
+                if result.matchCount > 0 {
+                    verseMatchCountBadge(result.matchCount)
+                }
+            }
+            .padding(.vertical, 4)
+        }
+    }
+
+    /// "N절) 강조된 본문" 하나로 합친 `AttributedString` — `Text + Text`(별도
+    /// 폰트 유지 목적)는 macOS 26에서 deprecated됐다(`VerseZoomView.
+    /// hanjaGlossCell` fix와 같은 이유). 대신 접두어와 강조된 본문을 하나의
+    /// `AttributedString`으로 합쳐(Foundation의 `+`, deprecated 아님) 단일
+    /// `Text(_:)`로 감싼다.
+    ///
+    /// [2026-08-26 수정] 사용자 요청 — "그 밑에 절들이 수정하기 전 스타일대로
+    /// 여러 절들이 나타나게." 본문(`body`) 색을 `.primary` → `.secondary`로
+    /// 되돌렸다 — 예전 `verseRow`가 쓰던 `rowLabel`의 발췌 텍스트가
+    /// `.subheadline` + `.secondary`였다(`rowLabel`의 `highlightedText(...)
+    /// .foregroundStyle(.secondary)` 호출부 참고). "N절)" 접두어는 이번에
+    /// 새로 추가된 요소라 "이전 스타일"의 대상이 아니므로 굵게(semibold) 그대로
+    /// 두되, 장 헤더와 마찬가지로 기본(primary) 색을 명시해 톤을 분명히 했다.
+    private func verseExcerptAttributedString(_ result: VerseSearchResult) -> AttributedString {
+        var prefix = AttributedString("\(result.verse)절) ")
+        prefix.font = .subheadline.weight(.semibold)
+        prefix.foregroundColor = .primary
+        var body = highlightedAttributedString(result.content, keywords: result.highlightKeywords)
+        body.font = .subheadline
+        body.foregroundColor = .secondary
+        return prefix + body
+    }
+
+    /// "각 절마다 몇 개 매칭되었는지 오른쪽 끝" 배지 — `occurrenceChip`(다른
+    /// 분류가 발췌 "왼쪽"에 쓰는 "N회 일치" 캡슐)과 비슷한 스타일이되, 이
+    /// 행에서는 오른쪽 끝에 붙는 용도라 별도 함수로 뒀다.
+    ///
+    /// [2026-08-26 문구 정정] 사용자 요청 — "각 성경구절 표시 옆에 [단어가
+    /// 일치된 숫자]가 아니라 중복제거된 매칭 검색어수를 나타낼 것." 값
+    /// 자체는 이미 `VerseSearchResult.matchCount`가 `matchedWordCount`(중복
+    /// 제거된 매칭 검색어 수)를 담도록 고쳤으므로(그 필드 상단 주석 참고),
+    /// 여기 문구도 "N회"(등장 횟수처럼 읽힘) → "N단어"(몇 개의 서로 다른
+    /// 단어가 일치했는지)로 바꿔 값의 의미와 라벨이 어긋나지 않게 했다.
+    private func verseMatchCountBadge(_ count: Int) -> some View {
+        let color = verseMatchCountBadgeColor(count)
+        return Text("\(count)단어")
+            .font(.caption2.weight(.semibold).monospacedDigit())
+            .padding(.horizontal, 6)
+            .padding(.vertical, 2)
+            .background(color.opacity(0.14), in: Capsule())
+            .foregroundStyle(color)
+            .fixedSize()
+    }
+
+    /// [2026-08-26 신설] 사용자 요청 — "뱃지 색상 디자인을 서로 다른 단어
+    /// 수마다 다르게 할것. 1회 - 회색 / 2회 - 초록색 / 3회 - 파란색 / 4회 -
+    /// 황금색 / 5회 - 주황색 / 6회이상 - 빨간색." 요청 문구의 "회"는 이
+    /// 배지가 보여주는 "N단어"(중복 제거된 매칭 검색어 수, `matchCount` 상단
+    /// 주석 참고)를 가리키는 것으로 해석했다 — 바로 이전 정정(11장)에서
+    /// "회"라는 표현 자체가 등장 횟수로 오해받기 쉬워 라벨을 "N단어"로
+    /// 바꿨었지만, 값 자체는 그대로이므로 색상 매핑 대상도 이 값이 맞다.
+    /// SwiftUI 표준 `Color`엔 "황금색(gold)"이 따로 없어 근사 RGB로 정의했다.
+    private func verseMatchCountBadgeColor(_ count: Int) -> Color {
+        switch count {
+        case 1: return .gray
+        case 2: return .green
+        case 3: return .blue
+        case 4: return Color(red: 0.83, green: 0.69, blue: 0.22)   // 황금색(gold) 근사값
+        case 5: return .orange
+        default: return .red   // 6 이상 (0 이하는 호출부가 `matchCount > 0`일 때만 부르므로 실질적으로 발생하지 않음)
         }
     }
 
@@ -789,12 +1079,9 @@ private struct SearchContentView: View {
     // MARK: - 메모(VersePhraseNote)
 
     private func phraseNoteRow(_ result: PhraseNoteSearchResult) -> some View {
-        NavigationLink {
-            BibleReadingView(
-                initialBook: BooksProvider.shared.book(id: result.note.bookId),
-                initialChapter: result.note.chapter
-            )
-        } label: {
+        bibleVerseRow(BibleVerseDestination(
+            bookId: result.note.bookId, chapter: result.note.chapter, verse: nil
+        )) {
             rowLabel(
                 icon: "note.text", iconColor: .orange,
                 title: phraseNoteTitle(result.note),
@@ -835,7 +1122,14 @@ private struct SearchContentView: View {
 
     private func summaryRow(_ result: SummarySearchResult) -> some View {
         NavigationLink {
-            WordSummaryEditorView(summary: result.summary, presentationContext: .standalone)
+            // [2026-08-27 변경] `WordNoteHomeView.destinationView`의 같은 변경과
+            // 같은 이유 — 사용자가 보고한 "말씀노트 화면이 아이폰 가로폭보다
+            // 커서 잘림" 버그가 `.standalone` 헤더(BookChapterPicker+Stepper를
+            // 한 줄에 다 넣고 줄바꿈하지 않음) 자체에 있어, 이 검색 결과 진입
+            // 경로도 같은 헤더를 그대로 쓰는 한 아이폰에서 똑같이 잘린다 —
+            // 이미 검색으로 찾은 특정 요약이라 좌표를 바꿀 이유도 없어(위
+            // `WordNoteHomeView`와 같은 논리) `.wordNoteList`로 바꾼다.
+            WordSummaryEditorView(summary: result.summary, presentationContext: .wordNoteList)
         } label: {
             rowLabel(
                 icon: "text.quote", iconColor: .purple,
@@ -926,10 +1220,22 @@ private struct SearchContentView: View {
     /// 원본 문자열 위에서 바로 대소문자 무시 검색해 겹치는 범위에 배경색을 입힌다
     /// (lowercased()로 만든 별도 문자열의 인덱스를 재사용하지 않는 이유도 같다).
     private func highlightedText(_ text: String, keywords: [String]) -> Text {
-        let trimmedKeywords = keywords.filter { !$0.isEmpty }
-        guard !trimmedKeywords.isEmpty else { return Text(text) }
+        Text(highlightedAttributedString(text, keywords: keywords))
+    }
 
+    /// [2026-08-26 추출] 기존 `highlightedText`의 하이라이트 계산 로직을
+    /// `AttributedString`을 반환하는 형태로 분리했다 — `groupedVerseRow`의
+    /// `verseExcerptAttributedString(_:)`가 "N절)" 접두사와 하나의
+    /// `AttributedString`으로 이어붙이려면(= 하나의 `Text(_:)`로 감싸려면)
+    /// `Text`가 아닌 `AttributedString`이 필요하기 때문이다(SwiftUI의
+    /// `Text + Text` 연산자는 deprecated — 상단 참고). 로직 자체는 옮기기만
+    /// 했을 뿐 한 글자도 바꾸지 않았으므로 `highlightedText`의 기존 5곳
+    /// 호출부 동작은 전부 그대로다.
+    private func highlightedAttributedString(_ text: String, keywords: [String]) -> AttributedString {
+        let trimmedKeywords = keywords.filter { !$0.isEmpty }
         var attributed = AttributedString(text)
+        guard !trimmedKeywords.isEmpty else { return attributed }
+
         for keyword in trimmedKeywords {
             var searchRange = text.startIndex..<text.endIndex
             while let found = text.range(of: keyword, options: [.caseInsensitive], range: searchRange) {
@@ -939,7 +1245,7 @@ private struct SearchContentView: View {
                 searchRange = found.upperBound..<text.endIndex
             }
         }
-        return Text(attributed)
+        return attributed
     }
 
     /// [2026-08-19 확장] 아이콘을 선택적으로 붙일 수 있게 했다("참조 일치" 배지는

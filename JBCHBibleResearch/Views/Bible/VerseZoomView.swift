@@ -146,7 +146,13 @@ struct VerseZoomView: View {
     /// 조정했다.
     private var bibleFont: PlatformFont {
         let settings = UserSettingsStore.shared
-        let size: CGFloat = 20
+        // [2026-08-26 변경] 사용자 요청 — "확대보기 - 영역수정: 성경구절
+        // 1pt 줄이고." 위 [2026-08-21 변경] 주석이 20으로 올린 이후 처음
+        // 받은 축소 요청이라 그 값에서 그대로 1만 뺀다 — `targetCharsPerLine`/
+        // `effectiveTextWidth`(아래)는 고정 글자 수/화면 실측 폭 기준이라
+        // 폰트가 1pt 작아진다고 별도로 다시 맞출 근거값이 없다(글자 수 기준
+        // 줄바꿈은 폰트 크기와 무관하게 그대로 유지되는 게 맞다).
+        let size: CGFloat = 19
         guard settings.bibleFontName != "System" else { return .systemFont(ofSize: size) }
         return PlatformFont(name: settings.bibleFontName, size: size) ?? .systemFont(ofSize: size)
     }
@@ -477,7 +483,11 @@ struct VerseZoomView: View {
         // [2026-08-21 변경] 위 `bibleFont`/`targetCharsPerLine` 주석과 같은
         // 이유 — 본문 글자·목표 줄폭이 커진 만큼 창 최소 폭도 조금 늘렸다
         // (480 → 520, "가로로 조금 더 늘리고" 요청).
-        .frame(minWidth: 520, minHeight: 420)
+        // [2026-08-26 변경] 사용자 요청 — "확대보기 영역을 좌우 넓이를 5px
+        // 키우도록." 이 파일에서 "확대보기 영역의 가로 폭"을 나타내는 유일한
+        // 명시적 pt 값이 이 macOS 창 최소 폭이라(위 이력 참고, 정확히 같은
+        // 종류의 요청으로 480→520이 된 값), 그 값에 5를 더한다.
+        .frame(minWidth: 525, minHeight: 420)
         #endif
     }
 
@@ -806,10 +816,26 @@ struct VerseZoomView: View {
             HStack(spacing: 4) {
                 // [2026-08-19 수정] 사용자 요청 — "확대보기 한자 뜻풀이의 한자에
                 // 조선궁서체 적용." 한글(word.ko)과 한자(word.hanja)를 하나의
-                // `Text`로 합쳐 그리던 걸, SwiftUI `Text + Text`(서로 다른
-                // `.font()`를 유지한 채 한 줄로 이어 붙는다)로 나눴다 — 한글은
-                // 기존 성경 본문 글꼴 그대로, 한자만 한자 폰트 설정을 따른다.
-                (Text("\(word.ko) ").font(bibleSwiftUIFont) + Text(word.hanja).font(hanjaSwiftUIFont))
+                // `Text`로 합쳐 그리던 걸, 서로 다른 `.font()`를 유지한 채 한
+                // 줄로 이어 붙여야 했다 — 한글은 기존 성경 본문 글꼴 그대로,
+                // 한자만 한자 폰트 설정을 따른다.
+                //
+                // [2026-08-25 수정, 경고] `Text + Text`(SwiftUI `Text`의 `+`
+                // 연산자로 두 `Text`를 이어 붙이는 방식)가 macOS 26에서
+                // deprecated됐다. Apple의 경고 메시지("Use string interpolation
+                // on Text instead")가 안내하는 단순 문자열 보간(`Text("\(a) \(b)")
+                // .font(...)`)으로 바꾸면 폰트 하나만 전체에 적용돼, 이 코드가
+                // 원래 요청받은 "한글/한자 각각 다른 폰트"가 깨진다 — 그래서
+                // 대신 `AttributedString`의 구간별(run) `.font` 속성으로 같은
+                // 결과(두 폰트가 한 줄에 유지)를 내는, 아직 deprecated되지
+                // 않은 방식으로 바꿨다.
+                {
+                    var koText = AttributedString("\(word.ko) ")
+                    koText.font = bibleSwiftUIFont
+                    var hanjaText = AttributedString(word.hanja)
+                    hanjaText.font = hanjaSwiftUIFont
+                    return Text(koText + hanjaText)
+                }()
                 if let url = naverHanjaDictionaryURL(for: word.hanja) {
                     Link(destination: url) {
                         Image(systemName: "arrow.up.forward.app")

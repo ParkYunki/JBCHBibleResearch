@@ -51,13 +51,27 @@ struct BookChapterPicker: View {
     @State private var isGridPresented = false
     @State private var freeText: String = ""
     @State private var parseErrorMessage: String?
+    // [2026-08-27 신설] 사용자 보고 — "상단 성경 검색영역에 포커스를 두면
+    // 키보드가 올라오는데, 포커스를 해제하거나 키보드를 내릴 수 있게 해야함.
+    // 키보드 때문에 다른 메뉴를 사용할 수 없음." 지금까지 이 TextField는
+    // 포커스 상태를 전혀 추적하지 않아(FocusState 없음), 프로그램적으로
+    // 키보드를 내릴 방법이 없었다 — 아래 키보드 액세서리 툴바의 "완료"
+    // 버튼과 `submitFreeText()` 성공 시 자동 해제(두 곳 모두 이 상태를 씀)로
+    // 해결한다.
+    @FocusState private var isFreeTextFocused: Bool
 
     var body: some View {
         HStack(spacing: 8) {
             Button {
                 isGridPresented = true
             } label: {
-                Label("\(selectedBook.nameKo) \(selectedChapter)장", systemImage: "book")
+                // [2026-08-26 수정] 사용자 요청 — "성경 전체 이름이 아닌, 약어로
+                // 줄일것(예: 베드로전서 1장 -> 벧전 1장)." `abbreviation.first`는
+                // `books.json`에서 항상 공식 약어가 첫 번째로 오도록 되어 있고,
+                // 이미 `VerseZoomView`/`CrossReferenceTargetPicker` 등 여러 곳에서
+                // "약어로 보여줄 때" 쓰는 것과 같은 관례다(못 찾으면 전체 이름으로
+                // 폴백 — books.json이 없는 이론상 경우에 대비).
+                Label("\(selectedBook.abbreviation.first ?? selectedBook.nameKo) \(selectedChapter)장", systemImage: "book")
             }
             .popover(isPresented: $isGridPresented) {
                 // [2026-08-08 추가] 사용자 요청 — "현재 성경에서 장만 이동하려면
@@ -94,6 +108,23 @@ struct BookChapterPicker: View {
                     .textFieldStyle(.roundedBorder)
                     .frame(minWidth: 140, maxWidth: 220)
                     .onSubmit(submitFreeText)
+                    .focused($isFreeTextFocused)
+                    // [2026-08-27 신설] 위 `isFreeTextFocused` 주석 참고 — 키보드
+                    // 위 액세서리 줄에 "완료" 버튼을 달아 명시적으로 포커스를
+                    // 해제(=키보드 내림)할 수 있게 한다. `.keyboard` 배치는
+                    // 소프트웨어 키보드가 있는 iOS 전용 개념이라(macOS는 하드웨어
+                    // 키보드뿐이라 이 액세서리 자체가 뜨지 않는다) `#if os(iOS)`로
+                    // 감쌌다.
+                    #if os(iOS)
+                    .toolbar {
+                        ToolbarItemGroup(placement: .keyboard) {
+                            Spacer()
+                            Button("완료") {
+                                isFreeTextFocused = false
+                            }
+                        }
+                    }
+                    #endif
 
                 Button("이동", action: submitFreeText)
                     .disabled(freeText.trimmingCharacters(in: .whitespaces).isEmpty)
@@ -131,6 +162,13 @@ struct BookChapterPicker: View {
             onSelect(match.book, max(1, chapter))
         }
         freeText = ""
+        // [2026-08-27 신설] 검색에 성공해 실제로 장(+절)을 이동시킨 뒤에는
+        // 이 입력창에 계속 머물 이유가 없다 — 키보드를 자동으로 내려 사용자가
+        // 곧바로 방금 이동한 화면(하단 메뉴 등)을 쓸 수 있게 한다. 입력을
+        // 이해하지 못해 실패한 경로(위 두 `guard`의 `return`)는 이 줄에
+        // 도달하지 않으므로, 오타를 고치려는 사용자의 포커스는 그대로
+        // 유지된다.
+        isFreeTextFocused = false
     }
 
     /// "3:16"(콜론) 또는 "3장 16절"(한글 어순) 형태의 나머지 텍스트에서 절 번호만
@@ -168,9 +206,28 @@ private struct BookGridPicker: View {
         _pendingBook = State(initialValue: initialBook)
     }
 
-    private var filteredBooks: [Book] {
-        searchText.isEmpty ? books : books.filter { $0.matches(query: searchText) }
+    /// [2026-08-26 추가] 사용자 요청 — "구약/신약으로 구분할것." 검색 중에도
+    /// 구분을 유지한다(검색 결과가 구약/신약 어느 한쪽에만 있으면 그 섹션만
+    /// 자연히 보이고, 빈 섹션은 `testamentSection`이 통째로 숨긴다).
+    private func matches(_ book: Book) -> Bool {
+        searchText.isEmpty || book.matches(query: searchText)
     }
+
+    private var oldTestamentBooks: [Book] {
+        books.filter { $0.testament == .old && matches($0) }
+    }
+
+    private var newTestamentBooks: [Book] {
+        books.filter { $0.testament == .new && matches($0) }
+    }
+
+    /// [2026-08-26 추가] 사용자 요청 — "4단~6단 고려할 것 - 스크롤 최소화 -
+    /// UI/UX 관점에서 유리한 방향으로." 팝오버 최소 폭(`BookChapterPicker`가
+    /// `.frame(minWidth: 360, ...)`로 고정해 둠)을 기준으로 계산했다 — 원 지름
+    /// 52~62pt + 칸 사이 10pt 간격이면 좌우 여백(padding 16*2)을 뺀 328pt 안에
+    /// 대략 5~6개(원이 작을 때)에서 4개(원이 클 때) 사이로 들어와, 폭이 이보다
+    /// 넓은 화면(맥OS 팝오버 등)에서도 같은 범위를 유지한다.
+    private static let columns = [GridItem(.adaptive(minimum: 52, maximum: 62), spacing: 10)]
 
     var body: some View {
         if let pendingBook {
@@ -188,16 +245,51 @@ private struct BookGridPicker: View {
                     .padding(.top, 8)
 
                 ScrollView {
-                    LazyVGrid(columns: [GridItem(.adaptive(minimum: 90))], spacing: 8) {
-                        ForEach(filteredBooks) { book in
-                            Button(book.nameKo) { pendingBook = book }
-                                .buttonStyle(.bordered)
-                        }
+                    VStack(alignment: .leading, spacing: 20) {
+                        testamentSection(title: "구약", books: oldTestamentBooks)
+                        testamentSection(title: "신약", books: newTestamentBooks)
                     }
                     .padding()
                 }
             }
         }
+    }
+
+    @ViewBuilder
+    private func testamentSection(title: String, books: [Book]) -> some View {
+        // 검색 결과가 한쪽 성경(구약/신약)에 하나도 없으면 그 섹션 헤더까지
+        // 통째로 숨긴다 — 빈 헤더만 남아 있으면 오히려 혼란스럽다.
+        if !books.isEmpty {
+            VStack(alignment: .leading, spacing: 10) {
+                Text(title)
+                    .font(.headline)
+                LazyVGrid(columns: Self.columns, spacing: 10) {
+                    ForEach(books) { book in
+                        bookCircleButton(book)
+                    }
+                }
+            }
+        }
+    }
+
+    /// [2026-08-26 신설] 사용자 요청 — "성경이름을 약어로 줄이고, 버튼을
+    /// 동그라미 버튼으로 할것." `abbreviation.first`는 이 앱 전반(예:
+    /// `VerseZoomView`, `CrossReferenceTargetPicker`)이 이미 "약어 표시"에 쓰는
+    /// 것과 같은 값이다 — 못 찾으면(이론상) 전체 이름으로 폴백.
+    private func bookCircleButton(_ book: Book) -> some View {
+        Button {
+            pendingBook = book
+        } label: {
+            Text(book.abbreviation.first ?? book.nameKo)
+                .font(.callout)
+                .lineLimit(1)
+                .minimumScaleFactor(0.6)
+                .padding(4)
+                .frame(width: 52, height: 52)
+                .background(Circle().fill(Color.accentColor.opacity(0.12)))
+                .overlay(Circle().stroke(Color.accentColor.opacity(0.35), lineWidth: 1))
+        }
+        .buttonStyle(.plain)
     }
 }
 

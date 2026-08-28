@@ -37,6 +37,8 @@ public enum BibleResearchSchema {
         VerseSummary.self,
         // 성경 조회 이력 (BibleReadingHistory.swift) — 2026-08-08 신설
         BibleReadingHistoryEntry.self,
+        // 성경 조회 책갈피 (BibleBookmark.swift) — 2026-08-28 신설
+        BibleBookmark.self,
         // 문서 파이프라인 (Documents.swift)
         ImageCategory.self, SourceDocument.self, DocumentText.self, ConvertedPDF.self,
         OCRResult.self, DocumentMarkdown.self, DocumentAnchor.self,

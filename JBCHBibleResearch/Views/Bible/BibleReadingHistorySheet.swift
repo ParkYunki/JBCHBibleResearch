@@ -62,9 +62,18 @@ struct BibleReadingHistorySheet: View {
         }
     }
 
+    /// [2026-08-26 수정] 사용자 요청 — "히스토리 이력에 장절까지 기록을 남겨둘것."
+    /// `entry.verse`가 있으면(확대보기/사이드바 검색으로 절까지 직접 이동한 경우)
+    /// "장:절"로, 없으면(책/장 단위 이동) 기존처럼 "장"으로 보여준다.
     private func bookChapterLabel(for entry: BibleReadingHistoryEntry) -> String {
         guard let book = BooksProvider.shared.book(id: entry.bookId) else {
+            if let verse = entry.verse {
+                return "책 \(entry.bookId) \(entry.chapter):\(verse)"
+            }
             return "책 \(entry.bookId) \(entry.chapter)장"
+        }
+        if let verse = entry.verse {
+            return "\(book.nameKo) \(entry.chapter):\(verse)"
         }
         return "\(book.nameKo) \(entry.chapter)장"
     }

@@ -215,6 +215,17 @@ enum BibleSemanticSearchService {
         // 대신 뒤 라이크만" 사용자 지시)를 쓴다. 이 인덱스는 개역한글 31,102절
         // 전체를 담고 있어 이 서비스가 다루는 번역본(번들 기본, 개역한글)과
         // 정확히 일치한다.
+        //
+        // [2026-08-25 변경] 이전엔 `limit: 50`을 넘겼는데, `searchVersesFullText`가
+        // bm25 관련도 순 상위 50개만 돌려주던 시절엔 흔한 단어(예: "동생")가
+        // 진짜 정답 절을 top-50 밖으로 밀어내 `allWordsMatched` 필터에서
+        // 걸러지기도 전에 후보 풀에서 통째로 빠지는 경우가 있었다 — 이 코드
+        // 블록이 원래 고치려던 문제("정답이 후보 풀에 아예 없을 수 있다",
+        // 위 주석)와 원인만 다를 뿐 증상이 똑같다. `searchVersesFullText`가
+        // 이제 (bm25가 아니라) 성경순으로 정렬하고 `limit`도 옵셔널이 됐으므로,
+        // 인자를 아예 넘기지 않아(기본값 `nil` = 무제한) 후보 풀 자체를
+        // 완전하게 만든다 — 어차피 최종 선택은 `hybridKeywordBudget`(20)이
+        // 그대로 제한한다.
         let hybridKeywordBudget = 20
         let hybridSimilarity = candidates.first?.similarity ?? 1.0
         var hybridSeen = Set(candidates.map { VerseCoordinate(bookId: $0.bookId, chapter: $0.chapter, verse: $0.verse) })
@@ -226,7 +237,7 @@ enum BibleSemanticSearchService {
             var hybridPool: [VerseCoordinate: String] = [:]  // 좌표 -> 본문(중복 조회 방지)
             for word in keywordWords {
                 for variant in RelationSynonyms.expanded(word) {
-                    guard let matches = try? fullTextStore.searchVersesFullText(matching: variant, limit: 50) else { continue }
+                    guard let matches = try? fullTextStore.searchVersesFullText(matching: variant) else { continue }
                     for match in matches {
                         let key = VerseCoordinate(bookId: match.bookId, chapter: match.chapter, verse: match.verse)
                         guard !hybridSeen.contains(key), hybridPool[key] == nil else { continue }

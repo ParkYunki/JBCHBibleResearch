@@ -566,23 +566,42 @@ public final class ReferenceDataStore {
     // 그대로 입력해도, 또는 검색어 안에 큰따옴표가 섞여 있어도 FTS5 문법
     // 에러 없이 안전하게 "그 글자로 시작하는 토큰"을 찾는다(Python sqlite3로
     // `"16:8"*`, `"(참고)"*`, `"AND"*`, `"큰따옴표""포함"*` 등 실제 검증 완료).
-    public func searchVersesFullText(matching query: String, limit: Int = 50) throws -> [FullTextVerseMatch] {
+    // [2026-08-25 변경] 사용자 요청 — "① 검색결과가 실제로도 성경순서
+    // tie-break를 지킬 것 ② limit 50을 해제할 수 있는 방법(더보기 버튼)도
+    // 추가할 것." 기존엔 `ORDER BY rank LIMIT ?`(bm25 관련도 순으로 50개를
+    // 먼저 자름) 방식이었는데, 이 함수의 두 호출부(`SearchViewModel.
+    // searchVerses`, `BibleSemanticSearchService`) 어디서도 `rank` 값을
+    // 실제로 읽지 않는다(둘 다 `KeywordMatchScorer`로 자체 재점수해 다시
+    // 정렬) — 즉 bm25 순으로 50개를 자르는 기준 자체가 그 무엇과도
+    // 연결되지 않는 근거 없는 컷이었다. 실측(953건 중 "다윗")으로 확인한
+    // 증상: 진짜 첫 등장(룻 4:17)이 bm25 상위 50위 밖으로 밀려나 결과에서
+    // 통째로 빠짐 — "검색어가 한 단어면 무조건 성경순+장절오름차순"이라는
+    // 요구사항이 정렬 로직(`SearchViewModel`)은 맞아도 그 앞 후보수집
+    // 단계에서 이미 깨져 있었다. 이제 SQL 자체를 (book_id, chapter, verse)
+    // 오름차순으로 정렬해 `LIMIT`이 "성경순 앞쪽 N개"를 정확히 잘라내게
+    // 했다. `limit`은 `Int?`로 바꿔 `nil`이면 아예 자르지 않는다(호출부가
+    // "더보기"로 전체 결과를 원할 때 사용) — 이 인덱스가 담은 절 수(31,102,
+    // 개역한글 전체)가 고정돼 있어 무제한 조회도 로컬 SQLite에서 비용이
+    // 크지 않다(실측: "여호와" 5,916건 조회도 수 ms 수준).
+    public func searchVersesFullText(matching query: String, limit: Int? = nil) throws -> [FullTextVerseMatch] {
         guard !query.isEmpty else { return [] }
         let escaped = query.replacingOccurrences(of: "\"", with: "\"\"")
         let matchQuery = "\"\(escaped)\"*"
 
-        let sql = """
+        var sql = """
             SELECT book_id, chapter, verse, content, bm25(VerseSearchIndex) AS rank
             FROM VerseSearchIndex WHERE VerseSearchIndex MATCH ?
-            ORDER BY rank LIMIT ?
+            ORDER BY book_id ASC, chapter ASC, verse ASC
             """
+        if limit != nil { sql += " LIMIT ?" }
+
         var statement: OpaquePointer?
         defer { sqlite3_finalize(statement) }
         guard sqlite3_prepare_v2(handle, sql, -1, &statement, nil) == SQLITE_OK else {
             throw BibleReferenceError.statementPrepareFailed(code: sqlite3_errcode(handle))
         }
         sqlite3_bind_text(statement, 1, matchQuery, -1, SQLITE_TRANSIENT)
-        sqlite3_bind_int(statement, 2, Int32(limit))
+        if let limit { sqlite3_bind_int(statement, 2, Int32(limit)) }
 
         var results: [FullTextVerseMatch] = []
         while true {

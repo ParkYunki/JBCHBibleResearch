@@ -239,14 +239,21 @@ public final class BibleReferenceStore {
     /// 단순하고 확실한 선택이라고 판단했다). `%`/`_` 같은 LIKE 와일드카드 문자를
     /// 사용자가 그대로 입력하면 의도치 않게 패턴으로 해석될 수 있으나, 검색 UI
     /// 특성상 큰 위험은 아니라고 보고 별도 이스케이프는 하지 않았다.
-    public func searchVerses(query: String, versionCode: String? = nil, limit: Int = 50) throws -> [BibleVerse] {
+    // [2026-08-25 변경] 사용자 요청 — "limit 50을 해제할 수 있는 방법(더보기
+    // 버튼)도 추가할 것." 이 경로는 이미 `ORDER BY ... LIMIT ?`(성경순 정렬 후
+    // 자름)이라 순서 버그는 없었지만, `searchVersesFullText`(FTS5 경로, 번들
+    // 개역한글 전용)와 짝을 맞춰 여기도 `limit`을 `Int?`로 바꿔 `nil`이면
+    // 자르지 않게 한다 — 사용자 추가 번역본(NKJV/NASB 등, 이 LIKE 경로를
+    // 쓴다)도 "더보기"로 50건을 넘는 전체 결과를 볼 수 있어야 하기 때문.
+    public func searchVerses(query: String, versionCode: String? = nil, limit: Int? = nil) throws -> [BibleVerse] {
         if hasVersionCodeColumn && versionCode == nil {
             throw BibleReferenceError.versionCodeRequired
         }
         guard !query.isEmpty else { return [] }
         var sql = "SELECT \(selectColumns) FROM \(tableName) WHERE \(contentColumn) LIKE ?"
         if hasVersionCodeColumn { sql += " AND version_code = ?" }
-        sql += " ORDER BY \(bookColumn) ASC, chapter ASC, verse ASC LIMIT ?"
+        sql += " ORDER BY \(bookColumn) ASC, chapter ASC, verse ASC"
+        if limit != nil { sql += " LIMIT ?" }
 
         var statement: OpaquePointer?
         defer { sqlite3_finalize(statement) }
@@ -260,7 +267,7 @@ public final class BibleReferenceStore {
             sqlite3_bind_text(statement, nextIndex, versionCode, -1, SQLITE_TRANSIENT)
             nextIndex += 1
         }
-        sqlite3_bind_int(statement, nextIndex, Int32(limit))
+        if let limit { sqlite3_bind_int(statement, nextIndex, Int32(limit)) }
 
         var results: [BibleVerse] = []
         while true {

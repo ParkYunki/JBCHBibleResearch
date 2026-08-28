@@ -137,6 +137,33 @@ enum KeywordMatchScorer {
             return lhs.matchedWordCount < rhs.matchedWordCount
         }
 
+        /// [2026-08-25 신설, 크리티컬 버그] `Equatable`을 직접 구현하지 않으면
+        /// Swift가 저장 프로퍼티 전부(=`totalOccurrences`까지 포함)로 `==`를
+        /// 합성한다. 그런데 위 `<`는 의도적으로 `totalOccurrences`를 무시한다
+        /// (이 struct 상단 주석 — "같은 단어가 여러 번 나와도 가중치는 같아야
+        /// 함") — 즉 `Comparable`의 관례("`a == b`는 `!(a < b) && !(b < a)`와
+        /// 반드시 일치해야 한다")를 이 타입이 깨고 있었다.
+        ///
+        /// 실제로 걸린 문제: `SearchViewModel.searchVerses`의 최종 정렬이
+        /// `lhs.score != rhs.score`로 "동점인지"를 판정하는데, 단일 단어
+        /// 질의(예: "다윗")는 매칭된 모든 결과가 `<`로는 전부 동점이어도
+        /// `totalOccurrences`(그 절 안에서 단어가 몇 번 나왔는지)만 다르면
+        /// 합성된 `==`가 `false`를 반환해 그 뒤의 "성경순 tie-break"(orderIndex/
+        /// chapter/verse) 코드를 건너뛰어 버렸다. 건너뛴 자리를 채운 건
+        /// `wordCandidates`(Dictionary라 `.values` 순회 순서가 해시 기반이라
+        /// 실행마다 달라질 수 있음, 위 주석 참고) 순서 그대로였다 — "검색어가
+        /// 한 단어면 무조건 성경순"이 실제로는 지켜지지 않던 원인이 정렬
+        /// 로직이 아니라 여기, `Equatable`/`Comparable` 불일치에 있었다.
+        ///
+        /// `==`를 `<`와 똑같은 두 필드(`allWordsMatched`, `matchedWordCount`)만
+        /// 비교하도록 명시 구현해 계약을 맞춘다 — 이러면 `SearchViewModel`의
+        /// `!=` 분기도 별도 수정 없이 올바르게 동작한다(호출부를 고치는 대신
+        /// 타입 자체의 계약을 고치는 쪽이, 앞으로 이 `Score`를 `==`/`!=`로
+        /// 비교할 모든 곳에 똑같이 적용되는 근본적인 수정이다).
+        static func == (lhs: Score, rhs: Score) -> Bool {
+            lhs.allWordsMatched == rhs.allWordsMatched && lhs.matchedWordCount == rhs.matchedWordCount
+        }
+
         /// 코사인 유사도(0~1대)와 한 배열에 섞어 정렬해야 하는 곳(하이브리드
         /// 검색 후보 병합)을 위한 단일 스칼라 근사값. "모두 일치 = 100,
         /// 일부만 일치 = 50"이라는 사용자 요청의 기본 골격은 그대로 두되,

@@ -56,9 +56,16 @@ struct ChapterRelatedContentPanel: View {
 
     /// [2026-08-15 추가] 사용자 요청 — "개요 상단에 줄이기/펼치기 버튼 추가."
     /// 책 개요/장 개요를 독립적으로 접고 펼 수 있어야 해서 각자 상태를
-    /// 따로 둔다 — `OutlineBookBulkEditView.expandedChapters`(장마다 개별
-    /// 접기/펼치기)와 같은 원칙. 기본값 `true`는 예전 동작(항상 내용이
-    /// 보이던 미리보기)과 가장 가까운 시작 상태다.
+    /// 따로 둔다. 기본값 `true`는 예전 동작(항상 내용이 보이던 미리보기)과
+    /// 가장 가까운 시작 상태다.
+    ///
+    /// [2026-08-27 주석 정정] 이 프로퍼티가 비교 대상으로 삼던
+    /// `OutlineBookBulkEditView.expandedChapters`(장마다 개별 접기/펼치기
+    /// 아코디언)는 그 화면이 "탭한 장 하나만 보여주기"로 재설계되며 없어졌다
+    /// (`OutlineBookBulkEditView.swift` 상단 주석 참고) — 이 패널 자체의
+    /// 접기/펼치기 상태(`isBookOutlineExpanded`/`isChapterSummaryExpanded`)는
+    /// 그 화면과 무관하게 독립적으로 계속 동작하므로 기능적으로는 영향이
+    /// 없고, 옛 비유가 더 이상 맞지 않아 정정만 한다.
     @State private var isBookOutlineExpanded = true
     @State private var isChapterSummaryExpanded = true
 
@@ -76,18 +83,45 @@ struct ChapterRelatedContentPanel: View {
     }
 
     var body: some View {
-        List {
-            outlineSection
-            if let selectedVerse {
-                memoSection(verse: selectedVerse)
-                wordSummarySection(verse: selectedVerse)
-                documentSection(verse: selectedVerse)
+        // [2026-08-28 추가, 사용자 보고 — "성경조회 인스펙터 > 관련 연구문서
+        // 클릭시 반응없음"] 원인 확정: 이 패널을 붙이는 `BibleReadingView`의
+        // `.inspector(isPresented:)`(iOS/iPadOS 분기)는 이 뷰를 그 어떤
+        // `NavigationStack`으로도 감싸지 않은 채 그대로 넘긴다 — `.sheet`/
+        // `.fullScreenCover`로 여는 다른 화면들(`MemoDetailView`,
+        // `TagRelationsView`, `OutlineTreeView`)은 전부 호출부가 명시적으로
+        // `NavigationStack { ... }`로 감싸는 것과 다르다. 그 결과 아이폰
+        // 전용 분기(`documentSection`의 `isPhoneIdiom`)가 쓰는
+        // `NavigationLink { DocumentViewerWindowContent(...) }`가 자신을
+        // 밀어 올릴 `NavigationStack`을 못 찾아 탭해도 아무 일도 일어나지
+        // 않는다(SwiftUI 표준 동작 — `NavigationLink`는 조상 `NavigationStack`/
+        // `NavigationView`가 없으면 조용히 아무 반응도 하지 않는다). 아이패드/
+        // 맥은 같은 자리에서 `Button { openWindow(...) }`(다중 씬 지원 플랫폼
+        // 전용, `isPhoneIdiom` 상단 주석 참고)만 쓰므로 이 문제 자체가 없었다.
+        //
+        // 고치려면 이 뷰 자신을 `NavigationStack`으로 감싸야 하는데, 지금까지
+        // 이 뷰의 `.navigationTitle`/`.navigationBarTitleDisplayMode(.inline)`이
+        // (감싸는 스택이 없어) 화면에 아무 효과도 못 내고 있었을 가능성이 있어,
+        // 단순히 감싸기만 하면 지금까지 없던 제목 표시줄이 새로 나타나는
+        // 의도치 않은 화면 변화가 생길 수 있다. 그래서 감싸되
+        // `.toolbar(.hidden, for: .navigationBar)`(iOS 16+/macOS 13+, 공간까지
+        // 완전히 접는 공식 API)로 그 표시줄 자체를 계속 숨겨 둔다 — 기존 화면
+        // 모양은 그대로 유지하면서 `NavigationLink`가 필요로 하는 스택만
+        // 새로 생기게 하는 최소 변경이다.
+        NavigationStack {
+            List {
+                outlineSection
+                if let selectedVerse {
+                    memoSection(verse: selectedVerse)
+                    wordSummarySection(verse: selectedVerse)
+                    documentSection(verse: selectedVerse)
+                }
             }
+            .navigationTitle("이 장의 관련 콘텐츠")
+            #if os(iOS)
+            .navigationBarTitleDisplayMode(.inline)
+            #endif
         }
-        .navigationTitle("이 장의 관련 콘텐츠")
-        #if os(iOS)
-        .navigationBarTitleDisplayMode(.inline)
-        #endif
+        .toolbar(.hidden, for: .navigationBar)
     }
 
     // MARK: - 개요(S8 책 개요 + S9 장 개요) — 선택 상태와 무관하게 항상 표시
@@ -344,11 +378,17 @@ struct ChapterRelatedContentPanel: View {
         Section {
             sectionTitleRow(
                 "\(verse)절 관련 말씀 요약 (\(coordinateSummaries.count + mentionedSummaries.count))",
-                // `text.book.closed`는 `BibleReadingView.verseSelectionActionBar`의
+                // `text.quote`는 `BibleReadingView.verseSelectionActionBar`의
                 // "말씀 요약" 버튼과 같은 아이콘 — 어디서 왔든 같은 기능은 같은
                 // 아이콘으로 보이게 통일했다(사용자 요청 "앱의 전체적인
                 // 통일성").
-                systemImage: "text.book.closed", tint: .purple
+                // [2026-08-28 변경] 사용자 보고 — "번역본 선택 아이콘과 말씀
+                // 요약 아이콘이 같다." 실제로 둘 다 `text.book.closed`를 썼던
+                // 것을 확인(`BibleReadingView.swift`의 "번역본 선택"/"설치된
+                // 번역본"(SettingsView.swift)은 그대로 두고, "말씀 요약" 쪽만
+                // `text.quote`로 바꿔 구분한다 — 위 통일성 원칙은 "말씀 요약"
+                // 두 곳(이 패널 + 액션바) 사이에서는 그대로 유지된다.
+                systemImage: "text.quote", tint: .purple
             )
             if coordinateSummaries.isEmpty && mentionedSummaries.isEmpty {
                 emptyRow("이 절에 작성됐거나 이 절을 언급하는 말씀 요약이 없습니다.")

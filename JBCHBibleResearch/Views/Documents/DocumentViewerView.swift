@@ -361,10 +361,13 @@ struct DocumentViewerView: View {
             Divider()
             switch docxViewerMode {
             case .preview:
-                if let url = viewModel.resolvedURL {
+                if case .ready = viewModel.downloadStatus, let url = viewModel.resolvedURL {
                     QLPreviewRepresentable(url: url)
                 } else {
-                    unavailableMessage("docx 원본 파일을 열 수 없습니다.")
+                    fileContentUnavailableView(
+                        status: viewModel.downloadStatus,
+                        fallbackMessage: "docx 원본 파일을 열 수 없습니다."
+                    )
                 }
             case .pdfConverted:
                 if let pdf = viewModel.convertedPDFDocument {
@@ -374,7 +377,10 @@ struct DocumentViewerView: View {
                         PDFKitRepresentable(document: pdf, searchController: docxSearchController)
                     }
                 } else {
-                    unavailableMessage("PDF로 변환된 파일이 없습니다.")
+                    fileContentUnavailableView(
+                        status: viewModel.convertedPDFDownloadStatus,
+                        fallbackMessage: "PDF로 변환된 파일이 없습니다."
+                    )
                 }
             }
         }
@@ -382,14 +388,35 @@ struct DocumentViewerView: View {
             // PDF 변환본이 있으면(macOS) 검색까지 되는 "PDF 변환" 탭을
             // 기본값으로 올려 준다 — 없으면(iOS 등) "미리보기"(QuickLook,
             // 초기값)를 그대로 유지. 검색어를 들고 들어온 경우의 실제 검색어
-            // 채우기는
-            // `setUpIfNeeded`에서 `docxSearchController.query`에 미리 넣어
-            // 둔다(원본 `.pdf` 탭이 `pdfSearchController.query`를 채우는 것과
-            // 같은 패턴) — 여기서는 그 값이 보이는 탭("PDF 변환")으로만
-            // 전환한다.
-            if viewModel.convertedPDFDocument != nil {
-                docxViewerMode = .pdfConverted
-            }
+            // 채우기도 아래 `syncDocxViewerModeIfConvertedPDFReady`가 함께
+            // 맡는다(원본 `.pdf` 탭이 `pdfSearchController.query`를 채우는 것과
+            // 같은 패턴).
+            syncDocxViewerModeIfConvertedPDFReady(viewModel: viewModel)
+        }
+        // [2026-08-26 추가] 사용자 요청 — 위 `fileContentUnavailableView` 도입
+        // 이유 참고. `convertedPDFDocument`가 `vm.onAppear()` 시점에 곧바로
+        // 채워지지 않고(iCloud 다운로드가 끝난 뒤에야) 나중에 채워질 수 있게
+        // 되면서, 위 `onAppear`의 1회성 체크만으로는 그 "나중에" 시점을 놓친다
+        // — `PDFDocument`가 `Equatable`이 아니라 `.onChange(of:
+        // viewModel.convertedPDFDocument)`는 쓸 수 없어, `!= nil` 결과(Bool,
+        // Equatable)가 false → true로 바뀌는 순간을 대신 관찰한다.
+        .onChange(of: viewModel.convertedPDFDocument != nil) { _, isAvailable in
+            guard isAvailable else { return }
+            syncDocxViewerModeIfConvertedPDFReady(viewModel: viewModel)
+        }
+    }
+
+    /// 위 `docxContent`의 `.onAppear`/`.onChange` 두 지점이 공유하는 로직 —
+    /// PDF 변환본이 있으면 "PDF 변환" 탭으로 올리고, 검색어를 들고 들어온
+    /// 경우 그 탭의 검색창에 미리 채워 둔다. 예전엔 `setUpIfNeeded()`가 이
+    /// 검색어 채우기를(`vm.onAppear()` 직후 1회) 대신했는데, 변환 PDF가
+    /// 나중에(iCloud 다운로드 완료 후) 도착할 수 있게 되면서 그 1회성 체크로는
+    /// 부족해져 이 함수로 합쳤다.
+    private func syncDocxViewerModeIfConvertedPDFReady(viewModel: DocumentViewerViewModel) {
+        guard viewModel.convertedPDFDocument != nil else { return }
+        docxViewerMode = .pdfConverted
+        if let initialSearchText, !initialSearchText.isEmpty {
+            docxSearchController.query = initialSearchText
         }
     }
 
@@ -418,10 +445,13 @@ struct DocumentViewerView: View {
             Divider()
             switch pagesViewerMode {
             case .quickLook:
-                if let url = viewModel.resolvedURL {
+                if case .ready = viewModel.downloadStatus, let url = viewModel.resolvedURL {
                     QLPreviewRepresentable(url: url)
                 } else {
-                    unavailableMessage("pages 원본 파일을 열 수 없습니다.")
+                    fileContentUnavailableView(
+                        status: viewModel.downloadStatus,
+                        fallbackMessage: "pages 원본 파일을 열 수 없습니다."
+                    )
                 }
             case .extractedText:
                 extractedTextPane(viewModel: viewModel)
@@ -465,17 +495,19 @@ struct DocumentViewerView: View {
                     PDFKitRepresentable(document: pdf, searchController: pdfSearchController)
                 }
             } else {
-                unavailableMessage("PDF를 열 수 없습니다.")
+                fileContentUnavailableView(status: viewModel.downloadStatus, fallbackMessage: "PDF를 열 수 없습니다.")
             }
         case .image:
-            if let url = viewModel.resolvedURL, let image = PlatformImage(contentsOfFile: url.path) {
+            if case .ready = viewModel.downloadStatus,
+               let url = viewModel.resolvedURL,
+               let image = PlatformImage(contentsOfFile: url.path) {
                 #if os(macOS)
                 ScrollView([.horizontal, .vertical]) { Image(nsImage: image).resizable().aspectRatio(contentMode: .fit) }
                 #else
                 ScrollView([.horizontal, .vertical]) { Image(uiImage: image).resizable().aspectRatio(contentMode: .fit) }
                 #endif
             } else {
-                unavailableMessage("이미지를 열 수 없습니다.")
+                fileContentUnavailableView(status: viewModel.downloadStatus, fallbackMessage: "이미지를 열 수 없습니다.")
             }
         case .hwp, .hwpx:
             if let hwpFileData = viewModel.hwpFileData {
@@ -530,7 +562,7 @@ struct DocumentViewerView: View {
                     }
                 }
             } else {
-                unavailableMessage("hwp 원본 파일을 열 수 없습니다.")
+                fileContentUnavailableView(status: viewModel.downloadStatus, fallbackMessage: "hwp 원본 파일을 열 수 없습니다.")
             }
         case .doc, .docx, .pages:
             // [2026-08-15 참고, 2026-08-16 docx/pages 재분리] `.doc`는
@@ -868,6 +900,46 @@ struct DocumentViewerView: View {
         .frame(maxWidth: .infinity, maxHeight: .infinity)
     }
 
+    /// [2026-08-26 추가] 사용자 요청 — "iCloud 상에는 있지만 현재 기기에 아직
+    /// 다운로드상태가 아닌 파일을 뷰어로 열면 다운로드가 이루어져서 뷰어로 볼 수
+    /// 있게 할것. 다운로드 중이면 다운로드 진행률이 나타날 수 있도록." 원본
+    /// 파일(또는 변환 PDF)의 바이트가 필요한 분기들(`originalPane`의 pdf/
+    /// image/hwp·hwpx, `docxContent`/`pagesContent`의 QuickLook 미리보기,
+    /// `docxContent`의 PDF 변환)이 기존에 쓰던 "파일을 열 수 없습니다" 류
+    /// `unavailableMessage`를 이걸로 대체한다 — `UbiquitousFileDownloadMonitor.
+    /// Status`가 `.downloading`이면 진행률을, `.failed`면 에러 원인을, `.ready`
+    /// (이미 다운로드됐는데도 못 열었다는 뜻)면 기존 폴백 메시지를 그대로
+    /// 보여준다.
+    @ViewBuilder
+    private func fileContentUnavailableView(
+        status: UbiquitousFileDownloadMonitor.Status,
+        fallbackMessage: String
+    ) -> some View {
+        switch status {
+        case .downloading(let progress):
+            downloadingMessage(progress: progress)
+        case .failed(let reason):
+            unavailableMessage("iCloud에서 파일을 다운로드하지 못했습니다.\n\(reason)")
+        case .ready:
+            unavailableMessage(fallbackMessage)
+        }
+    }
+
+    /// 위 `fileContentUnavailableView`의 `.downloading` 케이스 — `SearchView.
+    /// bibleIndexStatusRow`의 `.building` 케이스와 같은 `ProgressView(value:)`
+    /// 스타일을 그대로 따른다(이 앱에서 이미 쓰고 있는 진행률 UI 패턴과
+    /// 일관되게).
+    private func downloadingMessage(progress: Double) -> some View {
+        VStack(spacing: 8) {
+            ProgressView(value: progress)
+                .frame(maxWidth: 240)
+            Text("iCloud에서 다운로드하는 중… \(Int(progress * 100))%")
+                .font(.caption)
+                .foregroundStyle(.secondary)
+        }
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
+    }
+
     private func setUpIfNeeded() {
         guard viewModel == nil else { return }
         let vm = DocumentViewerViewModel(document: document, modelContext: modelContext)
@@ -886,13 +958,14 @@ struct DocumentViewerView: View {
         if let initialSearchText, document.originalFormat == .pdf {
             pdfSearchController.query = initialSearchText
         }
-        // [2026-08-16 추가] 위와 같은 이유, `.docx`용 — `docxContent`의
-        // "PDF 변환" 탭(macOS, 변환본 있을 때만)에서만 실제 검색이 가능하므로
-        // `vm.onAppear()`가 이미 채워 둔 `convertedPDFDocument`를 확인한 뒤에만
-        // 채운다.
-        if let initialSearchText, document.originalFormat == .docx, vm.convertedPDFDocument != nil {
-            docxSearchController.query = initialSearchText
-        }
+        // [2026-08-16 추가, 2026-08-26 이관] 위와 같은 이유, `.docx`용 —
+        // `docxContent`의 "PDF 변환" 탭(macOS, 변환본 있을 때만)에서만 실제
+        // 검색이 가능하다. 예전엔 여기서 `vm.onAppear()`가 이미 채워 둔
+        // `convertedPDFDocument`를 한 번만 확인했는데, 이제 그 값이 iCloud
+        // 다운로드가 끝난 뒤 나중에 채워질 수도 있어 이 1회성 체크로는
+        // 부족하다 — `docxContent`의 `syncDocxViewerModeIfConvertedPDFReady`
+        // (onAppear/onChange 둘 다에서 호출)로 옮겨 즉시/지연 도착 두 경우를
+        // 모두 커버한다.
         documentTags = (document.documentTags ?? []).compactMap(\.tag).filter { !$0.isMerged }
     }
 
@@ -1558,6 +1631,23 @@ private struct HWPToPDFPane: View {
         // 주석 참고.
         .onAppear {
             pdfSearchController.additionalSearchTerms = additionalSearchTerms
+        }
+        // [2026-08-26 추가] 사용자 요청 — iCloud 다운로드 상태 반영. 위
+        // `convert()`는 `documentData`가 바뀔 때만(`.task(id:)`) 다시 도는데,
+        // `preConvertedDocument`(부모 `DocumentViewerViewModel.
+        // convertedPDFDocument`)는 이 탭이 이미 떠 있는 도중에도(원본 hwp는
+        // 먼저 다운로드가 끝나 이 탭이 열렸지만, 별도 파일인 변환 PDF는 아직
+        // 다운로드 중이었다가 뒤늦게 끝나는 경우) 값이 nil에서 채워질 수
+        // 있다. 그 순간을 놓치면 이미 시작된 즉석 변환(`RhwpPDFExportService`)
+        // 결과가 계속 남아, 업로드 시 미리 만들어 둔 결과물 대신 즉석 변환본을
+        // 계속 보여주게 된다 — `PDFDocument`가 `Equatable`이 아니라 값 자체를
+        // 직접 관찰할 수 없으므로, `!= nil`(Bool, Equatable)이 false → true로
+        // 바뀌는 순간을 관찰해 그 시점의 최신 값을 채택한다.
+        .onChange(of: preConvertedDocument != nil) { _, isAvailable in
+            guard isAvailable, let preConvertedDocument else { return }
+            pdfDocument = preConvertedDocument
+            seedInitialSearchTextIfNeeded()
+            onAvailabilityChange?(true)
         }
     }
 

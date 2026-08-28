@@ -80,9 +80,48 @@ struct OutlineTreeView: View {
         #endif
     }
 
+    /// [2026-08-27 신설] 사용자 재보고 — "장 버튼을 누르면 무조건 마지막
+    /// 장으로 이동, 뒤로가기가 이전 화면이 아니라 이전 장으로 감." 8/26에
+    /// "값 기반 `NavigationLink(value:)` + 화면당 단 하나의
+    /// `.navigationDestination(for:)`"로 고쳤다고 기록돼 있었지만, 실제로는
+    /// 그 조합으로도 문제가 재현됐다 — 근본 원인은 그게 아니라, 장 칩
+    /// 여러 개가 `List`의 행(row) 하나(`LazyVGrid`) 안에 몰려 있는 구조
+    /// 자체였다: `NavigationLink`가 몇 개든, 그게 암묵적(각자 알아서 push하는)
+    /// 내비게이션 스택에 얹혀 있는 한, `List`/`NavigationStack`이 "한 행 안의
+    /// 여러 링크 중 실제로 탭된 게 어느 것인지"를 안정적으로 구분하지
+    /// 못했다. 해법은 그 자체를 없애는 것 — 칩을 `NavigationLink`가 아니라
+    /// 평범한 `Button`으로 바꾸고(어느 클로저가 눌렸는지는 Swift 클로저
+    /// 캡처만으로 100% 명확하다, `List`/링크 식별에 기댈 필요가 없다), 이동은
+    /// `NavigationStack(path:)`에 명시적으로 바인딩된 배열에 값을 직접
+    /// append하는 방식으로 프로그램적으로 처리한다. 이 `path`는 아이폰
+    /// 분기 전용이다 — 아이패드/맥(`OutlineTreeSplitContent`)은 원래부터
+    /// `NavigationLink`/`NavigationStack`을 전혀 안 쓰고 `@State selection`
+    /// 하나로 오른쪽 패널을 직접 바꿔치기하는 완전히 다른 구조라 이 변경과
+    /// 무관하다.
+    @State private var path: [OutlineTreeSelection] = []
+
+    /// [2026-08-27 신설, 사용자 결정 — "개요→더보기, 검색→탭바"] 아이폰
+    /// 탭바에서 개요를 빼고 "더보기" 메뉴 안 `.fullScreenCover`로 옮기면서
+    /// (`PlaceholderScreens.swift`/`PhoneTabView.swift` 참고) 생긴 매개변수다.
+    /// `.fullScreenCover`는(`.sheet`와 달리) 아래로 스와이프해 닫을 수 없어
+    /// 명시적 닫기 버튼이 필요한데, 기존 호출부(탭바에서 직접 쓰는 경우,
+    /// 매개변수 없음)는 탭 전환만으로 나가면 되므로 닫기 버튼이 필요 없다 —
+    /// 기본값 `nil`로 기존 동작을 그대로 유지하고, 이 값이 있을 때만 아이폰
+    /// 분기의 `NavigationStack` 툴바에 닫기 버튼을 추가한다.
+    var onRequestDismiss: (() -> Void)? = nil
+
     var body: some View {
         if isPhone {
-            OutlineTreeList(isPhoneLayout: true, selection: nil)
+            NavigationStack(path: $path) {
+                OutlineTreeList(isPhoneLayout: true, selection: nil, path: $path)
+                    .toolbar {
+                        if let onRequestDismiss {
+                            ToolbarItem(placement: .cancellationAction) {
+                                Button("닫기", action: onRequestDismiss)
+                            }
+                        }
+                    }
+            }
         } else {
             OutlineTreeSplitContent()
         }
@@ -188,6 +227,12 @@ private func destinationView(for selection: OutlineTreeSelection) -> some View {
 private struct OutlineTreeList: View {
     let isPhoneLayout: Bool
     var selection: Binding<OutlineTreeSelection?>?
+    /// [2026-08-27 신설] 위 `OutlineTreeView` 주석 참고 — 아이폰 전용,
+    /// `chapterChip`이 장 칩을 눌렀을 때 이 배열에 직접 append해 이동한다.
+    /// 아이패드/맥 쪽(`OutlineTreeSplitContent`가 만드는 인스턴스)은 이 값을
+    /// 넘기지 않아 nil로 남고, `chapterChip`의 `isPhoneLayout == false`
+    /// 분기는 애초에 이 값을 쓰지 않는다.
+    var path: Binding<[OutlineTreeSelection]>? = nil
 
     @State private var settings = UserSettingsStore.shared
     @State private var searchQuery = ""
@@ -273,6 +318,34 @@ private struct OutlineTreeList: View {
             .listStyle(.plain)
         }
         .navigationTitle("개요")
+        // [2026-08-26 추가, 사용자 보고 fix] "아이폰 개요 — 장 버튼을 누르면
+        // 무조건 마지막 장으로 이동, 뒤로가기(<)를 누르면 이전 장으로 이동
+        // (원래는 이전 화면으로 가야 함)." 원인 — `chapterChip`/`bookLabel`이
+        // (아이폰 전용 분기) 지금까지 클로저 기반 `NavigationLink { Destination()
+        // } label: { ... }`을 칩/책마다 하나씩 만들어 왔는데, 한 책을 펼치면
+        // 그 책의 모든 장 칩이 `chapterChipGrid` 하나 — 즉 `List`의 행(row)
+        // *하나*(`.chapterGrid` 케이스) 안에 통째로 들어간다(2026-08-15 스크롤
+        // 최소화 재설계, 파일 상단 주석 참고). `List`/`NavigationStack`은 한
+        // 행 안에 클로저 기반 `NavigationLink`가 여러 개 있는 구성을 안정적으로
+        // 구분하도록 설계돼 있지 않아 — 실제로 어느 칩을 탭했는지와 무관하게
+        // 그 행에 등록된 링크 중 하나(주로 마지막 것)로만 이동하는 것으로
+        // 보인다. 탭할 때마다 그 잘못된 목적지가 스택에 새로 push되니, "<"를
+        // 누르면 (사용자가 기대하는 "이전 화면"이 아니라) 그 직전에 잘못
+        // push됐던 다른 장 화면이 나와 "이전 장으로 이동"처럼 보인다 —
+        // `BibleVerseDestination.swift`가 이미 겪고 고친 것과 근본적으로
+        // 같은 종류의 문제(그 파일 상단 주석 참고)라, 같은 해법(값 기반
+        // `NavigationLink(value:)` + 화면 전체에 딱 하나뿐인
+        // `.navigationDestination(for:)`)을 그대로 적용한다 — 이러면 목적지
+        // 해석이 탭 위치가 아니라 실제로 전달된 값 하나로만 결정되어, 여러
+        // 링크가 한 행에 있어도 더 이상 서로 뒤섞이지 않는다.
+        //
+        // `destinationView(for:)`는 `OutlineTreeSplitContent`(맥OS/아이패드)가
+        // 이미 쓰고 있던 것을 그대로 재사용한다(같은 파일의 최상위 함수).
+        // 맥OS/아이패드 쪽(`isPhoneLayout == false`)은 `NavigationLink(value:)`를
+        // 전혀 만들지 않으므로 이 등록은 그쪽에선 그냥 쓰이지 않을 뿐 해가 없다.
+        .navigationDestination(for: OutlineTreeSelection.self) { selection in
+            destinationView(for: selection)
+        }
     }
 
     private var searchField: some View {
@@ -378,11 +451,28 @@ private struct OutlineTreeList: View {
     private func chapterChip(book: Book, chapter: Int) -> some View {
         let hasContent = chaptersWithContent.contains(book.bookId * 1000 + chapter)
         if isPhoneLayout {
-            NavigationLink {
-                OutlineBookBulkEditView(book: book, focusedChapter: chapter)
+            // [2026-08-26 시도, 2026-08-27 재시도 끝에 최종 구조로 교체]
+            // 처음엔 클로저 기반 `NavigationLink`, 그다음 값 기반
+            // `NavigationLink(value:)`, 그다음 그걸 `.background`에 숨기는
+            // 시도까지 — 셋 다 "장 칩 여러 개가 `List` 행 하나에 몰려
+            // 있다"는 근본 구조를 그대로 둔 채였고, 그래서 셋 다 결국
+            // "탭한 칩과 무관하게 마지막 장으로 이동, 뒤로가기가 이전
+            // 화면이 아니라 이전 장으로 감" 버그를 재현했다(위
+            // `OutlineTreeView.path` 주석 참고). 이번엔 `NavigationLink`
+            // 자체를 버리고 평범한 `Button`으로 바꿨다 — 어느 칩이 눌렸는지는
+            // 이 클로저가 캡처한 `chapter`/`book.bookId` 값만으로 결정되므로
+            // `List`나 내비게이션 링크의 행-단위 식별에 전혀 기대지 않는다.
+            // 이동은 `OutlineTreeView`가 소유한 `path` 배열에 직접 append해
+            // `NavigationStack(path:)`가 그대로 push하게 한다. 부수 효과로
+            // `Button`은 `List`가 자동으로 붙이는 화살표(disclosure indicator)
+            // 대상이 아니므로, 지난번 겪었던 꺽쇠 겹침 문제도 이 구조에서는
+            // 애초에 생기지 않는다.
+            Button {
+                path?.wrappedValue.append(.chapter(book.bookId, chapter))
             } label: {
                 chapterChipLabel(chapter: chapter, hasContent: hasContent)
             }
+            .buttonStyle(.plain)
         } else {
             Button {
                 selection?.wrappedValue = .chapter(book.bookId, chapter)
@@ -411,9 +501,11 @@ private struct OutlineTreeList: View {
     @ViewBuilder
     private func bookLabel(_ book: Book) -> some View {
         if isPhoneLayout {
-            NavigationLink {
-                OutlineBookBulkEditView(book: book)
-            } label: {
+            // [2026-08-26 수정] 위 `chapterChip`과 같은 이유 — 이 행도 같은
+            // `List` 행 하나(`.book` 케이스) 안에 다른 버튼(펼침 토글)과 함께
+            // 있어 잠재적으로 같은 문제의 소지가 있으므로 일관되게 값 기반으로
+            // 바꿔 둔다.
+            NavigationLink(value: OutlineTreeSelection.book(book.bookId)) {
                 Text(book.nameKo).font(.body)
             }
         } else {

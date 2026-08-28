@@ -32,11 +32,11 @@ struct SidebarNavigationView: View {
     /// `sidebarSearchBar`/`submitSidebarSearch()` 참고.
     @State private var sidebarSearchText: String = ""
 
-    /// [2026-08-21 추가] 사용자 신고 — "검색결과중 성경구절을 클릭한 후, 왼쪽
-    /// 사이드바 상단 검색란에 검색을 하고 엔터를 치면 아무반응이 없음 -> 오른쪽
-    /// '이 장의 관련 콘텐츠' 텍스트 왼쪽편에 < 버튼을 눌러야만 검색결과를 확인할
-    /// 수 있음. ---> 검색을 하면 성경 조회페이지를 닫고 다시 검색결과로 보여지게
-    /// 할 것."
+    /// [2026-08-21 추가, 2026-08-26 두 차례 수정] 사용자 신고 — "검색결과중
+    /// 성경구절을 클릭한 후, 왼쪽 사이드바 상단 검색란에 검색을 하고 엔터를
+    /// 치면 아무반응이 없음 -> 오른쪽 '이 장의 관련 콘텐츠' 텍스트 왼쪽편에 <
+    /// 버튼을 눌러야만 검색결과를 확인할 수 있음. ---> 검색을 하면 성경
+    /// 조회페이지를 닫고 다시 검색결과로 보여지게 할 것."
     ///
     /// [원인] `SearchView`의 성경구절 행은 `NavigationLink { BibleReadingView(...) }`
     /// 로 `NavigationSplitView`의 detail 컬럼 안에 "밀어 넣는(push)" 방식이다
@@ -45,32 +45,33 @@ struct SidebarNavigationView: View {
     /// 스택 상태라서, `submitSidebarSearch()`가 `selection = .search`로 다시
     /// 바꿔도(이미 `.search`였다면 값 자체가 안 바뀌어 더더욱) 이미 밀어 넣어진
     /// `BibleReadingView`(그 안의 `ChapterRelatedContentPanel` — "이 장의 관련
-    /// 콘텐츠" 제목이 거기 있다)가 그대로 맨 위에 남는다. `SearchView`는
-    /// `SidebarSearchRequest.pendingQuery` 변화를 받아 결과는 이미 새로 갱신하고
-    /// 있지만(SearchView.swift `.onChange` 참고), 그 갱신된 결과 화면이 push된
-    /// 성경 조회 화면 "뒤에" 가려져 있을 뿐이다 — 그래서 "이 장의 관련 콘텐츠"
-    /// 왼쪽 자동 생성 뒤로가기(`<`) 버튼을 눌러 push를 pop해야만 보인다.
+    /// 콘텐츠" 제목이 거기 있다)가 그대로 맨 위에 남는다.
     ///
-    /// [해결] `NavigationSplitView`는 detail 컬럼의 push 스택 상태를 그 안에 놓인
-    /// 뷰의 identity에 묶어 관리한다 — 그 identity를 강제로 바꾸면(SwiftUI의
-    /// `.id(_:)`) push된 화면을 포함해 통째로 새로 만들어지므로, push 여부와
-    /// 무관하게 항상 검색 결과 루트로 돌아간다(그리고 `SearchView`가 새로
-    /// 만들어지며 타는 최초 마운트 경로 — SearchView.swift `.onAppear` 안의
-    /// `SidebarSearchRequest.shared.pendingQuery` 처리 — 는 이미 있는 코드라
-    /// 새로 만들 필요가 없었다). `NavigationStack`/`NavigationPath`를 새로
-    /// 도입해 `SearchView.swift`(900줄, NavigationLink 10곳 이상)를 고치는
-    /// 대신, 이 파일 한 곳만 고치는 쪽이 훨씬 작고 검증하기 쉽다.
+    /// [첫 번째 시도, 실패] `searchResetToken: UUID` + `.id(_:)`로 그 push를
+    /// 감싸는 `NavigationStack` 자체의 identity를 강제로 바꿔 통째로 다시
+    /// 만드는 방식을 시도했다 — 이론상으로는 push 스택까지 포함해 전부 새로
+    /// 만들어져야 하지만, 실기기 재확인 결과 ① 갇히는 문제 자체가 전혀
+    /// 고쳐지지 않았고 ② 오히려 "다시 검색"할 때마다 흰 화면만 뜨는 새 증상이
+    /// 생겼다 — `NavigationSplitView`의 detail 컬럼 콘텐츠 전체(그 열의
+    /// `NavigationStack` 자신)를 매번 파괴·재생성하는 것은 `NavigationSplitView`가
+    /// 그 열을 다시 연결하는 과정과 충돌해 렌더링이 아예 실패하는 것으로
+    /// 보인다 — `.id(_:)`로 이 정도 큰 서브트리를 갈아 끼우는 건 너무 거친
+    /// 방법이었다.
     ///
-    /// ⚠️ [트레이드오프] 이 방식은 "이미 검색 화면이고 push된 것도 없는" 흔한
-    /// 경우에도 매번 `SearchView`를 통째로 다시 만든다 — `ProgressView()`가 아주
-    /// 잠깐(한 프레임) 보였다가 결과로 바뀔 수 있다(SearchView.swift 41~66줄,
-    /// `viewModel`이 nil로 리셋되는 경로). 기능은 그대로고 스크롤 위치가 매
-    /// 검색마다 초기화되는 정도의 비용이라, "검색을 다시 하면 항상 새 결과
-    /// 화면"이라는 요청 의도와도 맞다고 판단했다 — 다만 사용자가 실사용 중
-    /// 이 깜빡임이 거슬리면(예: 이미 검색 화면에서 스크롤을 내려놓은 채로 다시
-    /// 검색어만 바꾸는 경우) push된 화면이 있을 때만 리셋하도록 더 정교하게
-    /// 좁히는 후속 작업이 필요할 수 있다.
-    @State private var searchResetToken = UUID()
+    /// [해결, 2026-08-26] `NavigationStack`을 식별자 기반으로 파괴·재생성하는
+    /// 대신, Apple이 이런 "코드로 pop"을 위해 공식 제공하는 `NavigationPath`
+    /// 바인딩을 쓴다 — `detailNavigationPath`를 빈 값으로 대입하면 그 스택에
+    /// 쌓인 모든 push(값 기반 `NavigationLink(value:)`든, 이 앱이 실제로 쓰는
+    /// 목적지-클로저 `NavigationLink { Destination() }`든 전부 포함, Apple
+    /// 문서상 `NavigationPath`는 타입 소거돼 있어 두 방식을 섞어도 개수로
+    /// 추적된다)이 그대로 pop되면서, 그 스택 자체와 그 뿌리에 있던 `SearchView`
+    /// 인스턴스(따라서 그 안의 `viewModel` 상태)는 전혀 파괴되지 않는다. 이미
+    /// `.search`를 보고 있던 채로 다시 검색하는 경우 `SearchView`의 기존
+    /// `.onChange(of: SidebarSearchRequest.shared.pendingQuery)`가 그대로
+    /// 살아서 새 검색을 반영하고(그래서 흰 화면이 뜰 이유가 없다), 다른
+    /// 섹션에서 전환해 오는 경우는 `selection` 자체가 바뀌어 `detailView(for:)`가
+    /// 자연히 `SearchView()`를 새로 만든다(`.onAppear` 경로, 기존 그대로).
+    @State private var detailNavigationPath = NavigationPath()
 
     /// [2026-08-18 추가] 사용자 요청 — "사이드바 메뉴 밑으로 클로드 앱처럼 기능을
     /// 추가할 것. 고정됨 / (일주일 이내 날짜)/이전 -> 작성/수정한 연구문서/개인
@@ -94,6 +95,19 @@ struct SidebarNavigationView: View {
     /// 두지 않는다"). 하지만 iPadOS엔 그 메뉴 자체가 없어, 이 화면(사이드바 툴바)에
     /// 톱니바퀴 버튼을 하나 둔다 — 스펙이 명시하지 않은 iPad 전용 보완이다.
     private var showsSettingsToolbarButton: Bool {
+        #if os(iOS)
+        UIDevice.current.userInterfaceIdiom != .phone
+        #else
+        false
+        #endif
+    }
+
+    /// [2026-08-27 추가] 사이드바/인스펙터 동시 노출 방지 조율
+    /// (`IPadSidebarInspectorCoordination.swift` 상단 주석 참고) — 이 조율은
+    /// 아이패드 전용이다. 판정 로직은 위 `showsSettingsToolbarButton`과 같지만
+    /// (아이폰도 아니고 macOS도 아님 = 아이패드), 서로 다른 목적이라 별도
+    /// 프로퍼티로 둔다.
+    private var isIPadIdiom: Bool {
         #if os(iOS)
         UIDevice.current.userInterfaceIdiom != .phone
         #else
@@ -147,7 +161,11 @@ struct SidebarNavigationView: View {
         let trimmed = sidebarSearchText.trimmingCharacters(in: .whitespacesAndNewlines)
         guard trimmed.count >= 2 else { return }
         SidebarSearchRequest.shared.request(trimmed)
-        searchResetToken = UUID()
+        // [2026-08-26 추가] 위 `detailNavigationPath` 상단 주석 참고 — 검색
+        // 결과에서 성경 조회로 들어가 있던(push된) 상태였다면 이 대입으로
+        // 그 push를 전부 pop해 검색 결과 화면으로 돌아간다. 이미 push된 게
+        // 없었다면(빈 경로에 빈 경로를 대입) 그냥 아무 효과가 없다.
+        detailNavigationPath = NavigationPath()
         selection = .search
     }
 
@@ -162,6 +180,120 @@ struct SidebarNavigationView: View {
         return section
     }
 
+    /// [2026-08-26 신설] 사용자 요청 — "검색란 영역을 고정으로 두고 스크롤
+    /// 영역은 검색란 영역 아래부터 시작해서 검색란을 침범하지 않도록." 원래
+    /// `body` 안에 `List(selection:) { ... }`로 인라인돼 있던 사이드바
+    /// 메뉴/고정됨/최근 목록 전체를 그대로 옮겨 왔다 — 내용은 바뀌지 않았고
+    /// (아래 날짜별 그룹핑만 Task #4 요청대로 갈아 끼웠다), `body`가 이제
+    /// `VStack(sidebarSearchBar, sidebarMenuList)`로 이 목록을 검색창과
+    /// 형제 뷰로 감쌀 수 있도록 별도 계산 프로퍼티로 뺐을 뿐이다.
+    private var sidebarMenuList: some View {
+        List(selection: $selection) {
+            // [2026-08-18 변경] 사용자 요청 — "'태그 관계' 메뉴 삭제 - 기능
+            // 삭제는 추후 보류." `AppSection.sidebarMenuCases`(그 파일 상단
+            // 주석 참고)가 `.tagRelations`만 뺀 목록을 준다 — 이 화면 안의
+            // `.tagRelations` 분기(별도 창 열기)는 그대로 둬도 무해하다(이제
+            // 이 목록에 그 case가 안 나오니 실행될 일이 없을 뿐).
+            ForEach(AppSection.sidebarMenuCases) { section in
+                if section.opensSeparateWindow {
+                    // 별도 창으로 여는 항목은 선택 상태를 바꾸지 않고 그냥 새 창을 연다
+                    // (.tag를 붙이지 않아 List의 selection 대상에서 제외된다).
+                    Button {
+                        openWindow(id: "tag-relations")
+                    } label: {
+                        Label(section.title, systemImage: section.systemImage)
+                    }
+                    .buttonStyle(.plain)
+                } else {
+                    Label(section.title, systemImage: section.systemImage)
+                        .tag(section)
+                }
+            }
+
+            // [2026-08-18 추가] 사용자 요청 — "사이드바 메뉴 밑으로 클로드
+            // 앱처럼 기능을 추가할 것. 고정됨 / (일주일 이내 날짜)/이전 ->
+            // 작성/수정한 연구문서/개인 묵상/말씀 요약 리스트를 보여줄 것."
+            // 이 세 Section의 행들은 `.tag(_:)`를 붙이지 않는다 — 위 태그
+            // 관계 행과 같은 이유로, `selection`(AppSection 전용) 대상에서
+            // 빠져야 하기 때문이다(탭하면 직접 `openQuickItem(_:)`으로
+            // 새 창을 열거나 다른 섹션으로 전환한다).
+            // [2026-08-19 추가] 사용자 요청 — "사이드바 메뉴 밑에 '고정됨'
+            // 윗부분 구분선 추가." 위 메뉴(AppSection)와 아래 고정됨/최근
+            // 목록 사이를 시각적으로 나눈다. 모두 비어 있으면(아직 고정한
+            // 것도, 최근 활동도 없음) 나눌 게 없으니 표시하지 않는다.
+            //
+            // [2026-08-26 수정] 사용자 요청 — "수정이력 분류가 이번주로
+            // 통합이 아니라 -> [오늘], [어제], [그저께(날짜)], 그리고 그
+            // 이전의 내용은 [이번 주]로 할 것. 그것보다 더 전이면 [이전]으로
+            // 그룹핑." 기존 2단(이번 주/이전) 대신 5단으로 나눈다 — 그룹
+            // 판정 로직(`quickItemDateBucket(for:)`)이 각 항목을 정확히 한
+            // 버킷에만 넣도록(중복/누락 없이) `switch`가 아니라 순차적
+            // `if`-얼리리턴 방식으로 구현했다(아래 참고).
+            if !pinnedQuickItems.isEmpty || !todayQuickItems.isEmpty || !yesterdayQuickItems.isEmpty
+                || !dayBeforeYesterdayQuickItems.isEmpty || !thisWeekQuickItems.isEmpty || !olderQuickItems.isEmpty {
+                Divider()
+            }
+            if !pinnedQuickItems.isEmpty {
+                Section {
+                    ForEach(pinnedQuickItems) { item in
+                        quickItemRow(item)
+                    }
+                } header: {
+                    // [2026-08-19 추가] 사용자 요청 — "고정됨/오늘/이번주/
+                    // 오래됨... 관련 항목들은 메뉴보다 살짝 흐리게." 위
+                    // AppSection 메뉴(`Label(section.title, ...)`, 기본
+                    // primary 색)보다 눈에 덜 띄도록 헤더도 `.secondary`로.
+                    Text("고정됨").foregroundStyle(.secondary)
+                }
+            }
+            if !todayQuickItems.isEmpty {
+                Section {
+                    ForEach(todayQuickItems) { item in
+                        quickItemRow(item)
+                    }
+                } header: {
+                    Text("오늘").foregroundStyle(.secondary)
+                }
+            }
+            if !yesterdayQuickItems.isEmpty {
+                Section {
+                    ForEach(yesterdayQuickItems) { item in
+                        quickItemRow(item)
+                    }
+                } header: {
+                    Text("어제").foregroundStyle(.secondary)
+                }
+            }
+            if !dayBeforeYesterdayQuickItems.isEmpty {
+                Section {
+                    ForEach(dayBeforeYesterdayQuickItems) { item in
+                        quickItemRow(item)
+                    }
+                } header: {
+                    Text(dayBeforeYesterdayHeaderLabel).foregroundStyle(.secondary)
+                }
+            }
+            if !thisWeekQuickItems.isEmpty {
+                Section {
+                    ForEach(thisWeekQuickItems) { item in
+                        quickItemRow(item)
+                    }
+                } header: {
+                    Text("이번 주").foregroundStyle(.secondary)
+                }
+            }
+            if !olderQuickItems.isEmpty {
+                Section {
+                    ForEach(olderQuickItems) { item in
+                        quickItemRow(item)
+                    }
+                } header: {
+                    Text("이전").foregroundStyle(.secondary)
+                }
+            }
+        }
+    }
+
     var body: some View {
         NavigationSplitView(columnVisibility: $columnVisibility) {
             // ⚠️ [주의] `List(AppSection.allCases, selection:)`처럼 컬렉션을 첫 인자로
@@ -170,80 +302,24 @@ struct SidebarNavigationView: View {
             // 자체를 선택값으로 쓰는 것과는 다른 API다. 여기서는 `.tag(section)`으로
             // `AppSection?` 그대로 선택하고 싶으므로, 데이터 없이 `List(selection:content:)`
             // + `ForEach` 조합을 쓴다.
-            List(selection: $selection) {
-                // [2026-08-18 변경] 사용자 요청 — "'태그 관계' 메뉴 삭제 - 기능
-                // 삭제는 추후 보류." `AppSection.sidebarMenuCases`(그 파일 상단
-                // 주석 참고)가 `.tagRelations`만 뺀 목록을 준다 — 이 화면 안의
-                // `.tagRelations` 분기(별도 창 열기)는 그대로 둬도 무해하다(이제
-                // 이 목록에 그 case가 안 나오니 실행될 일이 없을 뿐).
-                ForEach(AppSection.sidebarMenuCases) { section in
-                    if section.opensSeparateWindow {
-                        // 별도 창으로 여는 항목은 선택 상태를 바꾸지 않고 그냥 새 창을 연다
-                        // (.tag를 붙이지 않아 List의 selection 대상에서 제외된다).
-                        Button {
-                            openWindow(id: "tag-relations")
-                        } label: {
-                            Label(section.title, systemImage: section.systemImage)
-                        }
-                        .buttonStyle(.plain)
-                    } else {
-                        Label(section.title, systemImage: section.systemImage)
-                            .tag(section)
-                    }
-                }
-
-                // [2026-08-18 추가] 사용자 요청 — "사이드바 메뉴 밑으로 클로드
-                // 앱처럼 기능을 추가할 것. 고정됨 / (일주일 이내 날짜)/이전 ->
-                // 작성/수정한 연구문서/개인 묵상/말씀 요약 리스트를 보여줄 것."
-                // 이 세 Section의 행들은 `.tag(_:)`를 붙이지 않는다 — 위 태그
-                // 관계 행과 같은 이유로, `selection`(AppSection 전용) 대상에서
-                // 빠져야 하기 때문이다(탭하면 직접 `openQuickItem(_:)`으로
-                // 새 창을 열거나 다른 섹션으로 전환한다).
-                // [2026-08-19 추가] 사용자 요청 — "사이드바 메뉴 밑에 '고정됨'
-                // 윗부분 구분선 추가." 위 메뉴(AppSection)와 아래 고정됨/최근
-                // 목록 사이를 시각적으로 나눈다. 셋 다 비어 있으면(아직 고정한
-                // 것도, 최근 활동도 없음) 나눌 게 없으니 표시하지 않는다.
-                if !pinnedQuickItems.isEmpty || !thisWeekQuickItems.isEmpty || !olderQuickItems.isEmpty {
-                    Divider()
-                }
-                if !pinnedQuickItems.isEmpty {
-                    Section {
-                        ForEach(pinnedQuickItems) { item in
-                            quickItemRow(item)
-                        }
-                    } header: {
-                        // [2026-08-19 추가] 사용자 요청 — "고정됨/오늘/이번주/
-                        // 오래됨... 관련 항목들은 메뉴보다 살짝 흐리게." 위
-                        // AppSection 메뉴(`Label(section.title, ...)`, 기본
-                        // primary 색)보다 눈에 덜 띄도록 헤더도 `.secondary`로.
-                        Text("고정됨").foregroundStyle(.secondary)
-                    }
-                }
-                if !thisWeekQuickItems.isEmpty {
-                    Section {
-                        ForEach(thisWeekQuickItems) { item in
-                            quickItemRow(item)
-                        }
-                    } header: {
-                        Text("이번 주").foregroundStyle(.secondary)
-                    }
-                }
-                if !olderQuickItems.isEmpty {
-                    Section {
-                        ForEach(olderQuickItems) { item in
-                            quickItemRow(item)
-                        }
-                    } header: {
-                        Text("이전").foregroundStyle(.secondary)
-                    }
-                }
-            }
-            // [2026-08-18 추가] 검색 텍스트박스+버튼을 목록 "맨 위"에 고정한다 —
-            // 목록 안 첫 행으로 넣으면 `List(selection:)`의 선택/포커스 처리에
-            // 섞여 들어가(예: 방향키 이동, 파란 선택 배경) 검색창처럼 보이지 않을
-            // 위험이 있어, `.safeAreaInset`으로 목록 바깥 위쪽에 별도로 붙인다.
-            .safeAreaInset(edge: .top) {
+            // [2026-08-26 변경] 사용자 보고 — "사이드바 아래 수정이력이 길어져서
+            // 스크롤을 할때 스크롤한 이력이 사이드바 상단 검색란 뒤로 올라가는
+            // 상황 -> 검색란 영역을 고정으로 두고 스크롤 영역은 검색란 영역
+            // 아래부터 시작해서 검색란을 침범하지 않도록." 예전엔 검색창을
+            // `List`에 `.safeAreaInset(edge: .top)`로 얹어 뒀다 —
+            // macOS의 `.listStyle(.sidebar)` List는 `.safeAreaInset` 콘텐츠를
+            // 진짜 "목록 밖 레이어"로 완전히 분리하지 못하고, 스크롤되는 행이
+            // 그 위로 살짝 비쳐 올라오는 경우가 있다(List 내부 스크롤 콘텐츠와
+            // safeAreaInset이 같은 스크롤 좌표계를 공유하는 구현 특성). 검색창을
+            // `List`와 완전히 동급인 형제 뷰(`VStack` 안)로 빼면 애초에 같은
+            // 스크롤 좌표계를 공유하지 않으므로 이 부류의 버그 자체가 성립하지
+            // 않는다 — `List` 쪽 modifier(`.navigationSplitViewColumnWidth`/
+            // `.navigationTitle`/`.toolbar`)는 전부 이 `VStack`으로 옮긴다(사이드바
+            // "컬럼" 전체에 적용돼야 하는 속성들이라 `List` 하나에만 걸려 있을
+            // 이유가 없다).
+            VStack(spacing: 0) {
                 sidebarSearchBar
+                sidebarMenuList
             }
             .navigationSplitViewColumnWidth(min: 200, ideal: 240, max: 280)
             .navigationTitle("JBCH Bible Research")
@@ -260,46 +336,32 @@ struct SidebarNavigationView: View {
                 }
             }
         } detail: {
-            NavigationStack {
-                // [2026-08-08 추가] 사용자 보고 — "왼쪽 사이드바 버튼을 클릭해서
-                // 사이드바를 닫아 화면을 확장한 후, 다시 사이드바를 볼 수 있도록
-                // 아이콘 추가해야 함". 사이드바 쪽 툴바(바로 위 List에 붙은
-                // `.toolbar`)에 토글 버튼을 두면, 정작 사이드바가 닫혀 있을 때는
-                // 그 사이드바 자체가 화면에서 사라져 버튼도 같이 사라진다 —
-                // "닫은 뒤엔 다시 열 방법이 없다"는 증상과 정확히 들어맞는다.
-                // 그래서 사이드바 열림/닫힘과 무관하게 항상 화면에 남아 있는
-                // detail 쪽 툴바에 이 버튼을 둔다. macOS는 사이드바가 있는 창에
-                // 시스템이 자동으로 툴바 토글 버튼을 제공하는 것으로 알려져 있고
-                // 사용자가 macOS에서는 이 문제를 보고하지 않았으므로, 기존 동작을
-                // 건드리지 않기 위해 iOS(아이패드)에만 적용한다.
-                //
-                // [2026-08-08 추가 수정] 사용자 보고 — "왼쪽 사이드바 바로 오른쪽에
-                // 왼쪽 사이드바 아이콘이 또 있음". 사이드바가 열려 있을 때는
-                // 아이패드가 사이드바 자체(또는 그 근처)에 이미 기본 접기 동작을
-                // 제공하고 있어, 사이드바가 열려 있는 동안은 이 버튼이 중복으로
-                // 보였다 — 이 버튼은 "닫았을 때 다시 여는" 용도로만 만든 것이므로,
-                // 사이드바가 실제로 닫혀 있을 때(`columnVisibility == .detailOnly`)만
-                // 보이게 한다.
-                //
-                // [2026-08-08 재수정, 근본 원인 발견] 사용자가 스크린샷으로 확인해준
-                // 결과 — 이 `.toolbar`를 (아래처럼 content 안이 아니라) NavigationStack
-                // "컨테이너" 자체에 형제 modifier로 붙였더니, "성경 조회" 타이틀은 물론
-                // BibleReadingContentView가 선언한 관련 콘텐츠/조회 이력 트레일링
-                // 아이콘까지 전부 사라졌다(스크린샷 상단이 완전히 빈 채로 나옴 — 아이콘이
-                // 더 보기 메뉴에 접힌 게 아니라 애초에 툴바 자체가 비어 있었다). 이전
-                // 라운드에 `.primaryAction`→`.topBarTrailing`로 배치를 바꿔도 전혀
-                // 효과가 없었던 이유가 바로 이것 — 문제는 배치가 아니라, NavigationStack
-                // 컨테이너 바로 바깥에 붙인 이 `.toolbar`가 (조건이 false라 빈 내용을
-                // 반환할 때조차) 내부 콘텐츠(detailView가 렌더링하는 BibleReadingView →
-                // BibleReadingContentView)가 선언한 타이틀/툴바 전체를 밀어내고 있었다.
-                // 해결책은 이 `.toolbar`를 NavigationStack "컨테이너"가 아니라 그 안의
-                // 루트 콘텐츠(`detailView(for:)`가 반환하는 뷰)에 붙이는 것 — 이러면
-                // 이 버튼과 BibleReadingContentView 안쪽 깊이 있는 `.navigationTitle`/
-                // `.toolbar`가 같은 콘텐츠 트리 안에서 정상적으로 합쳐진다.
+            // [2026-08-26 변경] 위 `detailNavigationPath` 상단 주석 참고 —
+            // `.id(_:)`로 이 `NavigationStack` 전체를 파괴·재생성하던 방식이
+            // 실기기에서 문제(갇힘 미해결 + 흰 화면 신규 발생)를 보여, 명시적
+            // `path:` 바인딩으로 교체했다. 이 바인딩이 있어도 기존 목적지-클로저
+            // `NavigationLink { Destination() }`(SearchView.swift 등 10곳 이상)는
+            // 코드 변경 없이 그대로 동작한다 — push될 때마다 이 경로에 항목이
+            // 쌓이고, `detailNavigationPath = NavigationPath()`로 한 번에
+            // 전부 pop할 수 있다는 점만 새로 얻는다.
+            NavigationStack(path: $detailNavigationPath) {
                 detailView(for: selection ?? .bibleReading)
                     #if os(iOS)
                     .toolbar {
-                        if columnVisibility == .detailOnly {
+                        // [2026-08-27 변경] 사용자 보고 — "성경조회 화면에서
+                        // 사이드바가 닫혀 있을 때 사이드바 아이콘이 트레일링
+                        // 그룹 양 끝에 하나씩(좌우로) 중복해서 뜸. 맨 우측
+                        // 사이드바 아이콘은 필요없음." 아이패드에서 이 `.navigation`
+                        // 배치 아이콘이, 뒤로가기 칸이 비어 있는 detail 루트
+                        // 화면에서는 적응형으로 트레일링 그룹 쪽에 붙어 나오는
+                        // 것으로 확인됐다 — 성경조회 화면은 이제 그 자리에
+                        // 전용 아이콘이 따로 있어(`BibleReadingView.swift`
+                        // `toolbarContent`의 "사이드바 열기" 버튼,
+                        // `IPadSidebarInspectorCoordination.swift` 상단 주석
+                        // 참고) 이 화면에서만 이 버튼을 뺀다. 다른 화면(말씀
+                        // 노트/검색/연구문서 등)은 그런 대체 아이콘이 없으므로
+                        // 계속 이 버튼으로 사이드바를 다시 연다.
+                        if columnVisibility == .detailOnly && (selection ?? .bibleReading) != .bibleReading {
                             ToolbarItem(placement: .navigation) {
                                 Button {
                                     columnVisibility = .all
@@ -336,6 +398,20 @@ struct SidebarNavigationView: View {
             selection = newValue
             AppNavigationRequest.shared.clear()
         }
+        // [2026-08-26 추가] `SearchResultsPopRequest.swift` 상단 주석 참고 —
+        // 사용자 재보고: "검색결과에서 성경구절 클릭 → 다시 검색해도
+        // 검색결과가 안 보임"이 사이드바 검색창 경로(위 `submitSidebarSearch()`의
+        // 직접 pop)만으로는 다 안 잡혔다 — `SearchView` 자신의 `.searchable`
+        // 검색창으로 다시 검색하는 경로가 남아 있었다. `SearchViewModel.
+        // searchImmediately()`가 실제 검색 시작 시점마다 보내는 이 신호를 여기
+        // 한 곳에서 받아 `detailNavigationPath`를 비우면, 진입점이 어디든(사이드바
+        // 검색창/이 화면 자체 검색창/앞으로 생길 다른 경로) 성경 조회 화면이
+        // push된 상태에서 다시 검색해도 항상 검색결과 화면으로 돌아온다. `token`은
+        // 매번 증가하는 카운터라(같은 값 재요청 시 `.onChange` 미반응 문제가
+        // 없음, `SearchResultsPopRequest.swift` 참고) `clear()`가 필요 없다.
+        .onChange(of: SearchResultsPopRequest.shared.token) { _, _ in
+            detailNavigationPath = NavigationPath()
+        }
         // [2026-08-12 추가] 말씀 요약 편집기 열기/닫기 — `SidebarVisibilityRequest.swift`
         // 상단 주석 참고. `AppNavigationRequest`와 같은 이유로 `@FocusedValue`
         // 대신 plain-Equatable 싱글턴 + `.onChange`를 쓴다.
@@ -349,6 +425,35 @@ struct SidebarNavigationView: View {
                 columnVisibility = SidebarVisibilityRequest.shared.wasVisibleBeforeHide ? .all : .detailOnly
             }
             SidebarVisibilityRequest.shared.clear()
+        }
+        // [2026-08-27 추가] 사용자 요청 — "아이패드에서 인스펙터 창과 사이드바가
+        // 동시에 나타나는 일이 없도록 할것." + "사이드바를 닫을 경우 아이콘
+        // 순서는 사이드바, 히스토리, 인스펙터 창 순서로 할 것."
+        // (`IPadSidebarInspectorCoordination.swift` 상단 주석 참고 — 아이패드
+        // 전용, macOS/아이폰에서는 아무도 이 싱글턴 값을 바꾸지 않아 실질적으로
+        // 비활성 상태다.)
+        //
+        // ① 이 화면(사이드바를 실제로 들고 있는 쪽)이 `columnVisibility`가
+        // 바뀔 때마다(경로 무관 — 아래 새 토큰이든, 기존 좌상단 버튼이든,
+        // 스와이프든) 최신 표시 상태를 싱글턴에 보고한다.
+        .onChange(of: columnVisibility) { _, newValue in
+            guard isIPadIdiom else { return }
+            IPadSidebarInspectorCoordination.shared.reportSidebarVisibility(newValue != .detailOnly)
+        }
+        // ② 트레일링 아이콘 그룹의 새 "사이드바 열기" 버튼(`BibleReadingView.swift`
+        // — 이 뷰는 사이드바를 소유하지 않아 명령을 보내는 방식만 가능하다,
+        // `SearchResultsPopRequest.token`과 같은 원리의 매번 증가하는 카운터)이
+        // 온 것을 받아 실제로 사이드바를 연다.
+        .onChange(of: IPadSidebarInspectorCoordination.shared.showSidebarRequestToken) { _, newValue in
+            guard isIPadIdiom, newValue > 0 else { return }
+            columnVisibility = .all
+        }
+        // ③ 관련 콘텐츠 인스펙터가 (어떤 경로로든) 열리는 순간을 관찰해, 이
+        // 화면 스스로(자기 로컬 상태만) 사이드바를 접는다 — 인스펙터 쪽에
+        // 사이드바를 대신 닫아 달라는 명령을 보낼 필요가 없다.
+        .onChange(of: IPadSidebarInspectorCoordination.shared.isInspectorVisible) { _, newValue in
+            guard isIPadIdiom, newValue, columnVisibility != .detailOnly else { return }
+            columnVisibility = .detailOnly
         }
         .sheet(isPresented: $isSettingsPresented) {
             SettingsHostView()
@@ -488,12 +593,62 @@ struct SidebarNavigationView: View {
         Calendar.current.date(byAdding: .day, value: -7, to: .now) ?? .now
     }
 
+    /// [2026-08-26 신설] 사용자 요청 — "수정이력 분류가 이번주로 통합이
+    /// 아니라 -> [오늘], [어제], [그저께(날짜)], 그리고 그 이전의 내용은
+    /// [이번 주]로 할 것. 그것보다 더 전이면 [이전]으로 그룹핑." 기존
+    /// `thisWeekQuickItems`/`olderQuickItems`(7일 경계 하나만 쓰던 2단
+    /// 구조)를 5단으로 늘리면서, 항목 하나가 정확히 한 버킷에만 들어가도록
+    /// (겹치거나 빠지는 경우 없이) 판정을 한 곳(`quickItemDateBucket(for:)`)에
+    /// 모았다 — 아래 다섯 계산 프로퍼티가 각자 다른 기준으로 다시 필터링하면
+    /// 그 기준들이 서로 어긋날 위험(예: "오늘" 판정과 "이번 주" 판정이 경계에서
+    /// 둘 다 true가 되는 경우)이 있어, 이렇게 한 번에 분류하는 편이 더 안전하다.
+    private enum SidebarQuickItemDateBucket {
+        case today, yesterday, dayBeforeYesterday, thisWeek, older
+    }
+
+    private func quickItemDateBucket(for date: Date) -> SidebarQuickItemDateBucket {
+        let calendar = Calendar.current
+        if calendar.isDateInToday(date) { return .today }
+        if calendar.isDateInYesterday(date) { return .yesterday }
+        if let dayBeforeYesterday = calendar.date(byAdding: .day, value: -2, to: .now),
+           calendar.isDate(date, inSameDayAs: dayBeforeYesterday) {
+            return .dayBeforeYesterday
+        }
+        return date >= weekAgoDate ? .thisWeek : .older
+    }
+
+    private var todayQuickItems: [SidebarQuickItem] {
+        recentQuickItems.filter { quickItemDateBucket(for: $0.sortDate) == .today }
+    }
+
+    private var yesterdayQuickItems: [SidebarQuickItem] {
+        recentQuickItems.filter { quickItemDateBucket(for: $0.sortDate) == .yesterday }
+    }
+
+    private var dayBeforeYesterdayQuickItems: [SidebarQuickItem] {
+        recentQuickItems.filter { quickItemDateBucket(for: $0.sortDate) == .dayBeforeYesterday }
+    }
+
     private var thisWeekQuickItems: [SidebarQuickItem] {
-        recentQuickItems.filter { $0.sortDate >= weekAgoDate }
+        recentQuickItems.filter { quickItemDateBucket(for: $0.sortDate) == .thisWeek }
     }
 
     private var olderQuickItems: [SidebarQuickItem] {
-        recentQuickItems.filter { $0.sortDate < weekAgoDate }
+        recentQuickItems.filter { quickItemDateBucket(for: $0.sortDate) == .older }
+    }
+
+    /// "그저께(날짜)" 헤더 문구 — 요청 문구("그저께(날짜)") 그대로, 실제
+    /// 날짜(예: "8월 24일")를 괄호 안에 보여준다.
+    private static let dayBeforeYesterdayDateFormatter: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "M월 d일"
+        formatter.locale = Locale(identifier: "ko_KR")
+        return formatter
+    }()
+
+    private var dayBeforeYesterdayHeaderLabel: String {
+        guard let date = Calendar.current.date(byAdding: .day, value: -2, to: .now) else { return "그저께" }
+        return "그저께(\(Self.dayBeforeYesterdayDateFormatter.string(from: date)))"
     }
 
     @ViewBuilder
@@ -604,7 +759,11 @@ struct SidebarNavigationView: View {
         // 교체 — `WindowGroup(id: "outline")`(성경 조회 사이드바의 "개요 화면
         // 열기" 별도 창)은 이 경로를 타지 않으므로 영향 없다(JBCHBibleResearchApp.swift 참고).
         case .outline: OutlineTreeView()
-        case .search: SearchView().id(searchResetToken)
+        // [2026-08-26 변경] 이 case 자체엔 더 이상 아무 특별 처리가 없다 —
+        // "다시 검색하면 push된 화면에 갇힌다" 문제는 이제 `body`의
+        // `NavigationStack(path: $detailNavigationPath)`(위 `detailNavigationPath`
+        // 상단 주석 참고)와 `submitSidebarSearch()`의 경로 초기화가 처리한다.
+        case .search: SearchView()
         case .tagRelations: EmptyView() // 별도 창으로만 열리므로 본문에는 그려지지 않는다.
         }
     }

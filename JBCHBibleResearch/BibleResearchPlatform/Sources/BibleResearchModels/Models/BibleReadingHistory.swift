@@ -18,14 +18,25 @@ public final class BibleReadingHistoryEntry {
     public var id: UUID = UUID()
     public var bookId: Int = 1
     public var chapter: Int = 1
+    /// [2026-08-26 추가] 사용자 요청 — "성경 조회 히스토리 이력에 성경 장에 대해
+    /// 기록하던 것을 장절까지 기록을 남겨둘것." 기존 필드(bookId/chapter)는 그대로
+    /// 두고 절 정보만 선택적으로 얹는다 — CloudKit 동기화 중인 기존 레코드와의
+    /// 호환을 위해 새 필드는 항상 옵셔널 + 기본값이어야 한다(UserContent.swift/
+    /// 다른 @Model 상단 주석의 공통 관례). nil이면 "장 단위" 이동(책/장 선택, 이전·
+    /// 다음 장 버튼, 뒤로/앞으로 가기 — `BibleReadingViewModel.selectBook`/
+    /// `goToChapter`/`navigate(toHistory:)`)이고, 값이 있으면 "절 단위" 이동
+    /// (확대보기를 열었거나, 사이드바 상단 검색에서 구절 결과를 눌러 그 절로 바로
+    /// 이동한 경우 — `BibleReadingViewModel.recordVerseHistory` 참고)이다.
+    public var verse: Int? = nil
     /// 사용자가 이 책/장을 조회한 시각(년월일 시분초 전부 필요 — 화면에서
     /// `yyyy-MM-dd HH:mm:ss` 포맷으로 표시한다).
     public var viewedAt: Date = Date.now
 
-    public init(id: UUID = UUID(), bookId: Int, chapter: Int, viewedAt: Date = .now) {
+    public init(id: UUID = UUID(), bookId: Int, chapter: Int, verse: Int? = nil, viewedAt: Date = .now) {
         self.id = id
         self.bookId = bookId
         self.chapter = chapter
+        self.verse = verse
         self.viewedAt = viewedAt
     }
 }

@@ -399,6 +399,43 @@ enum VerseAnnotationRenderer {
     /// 어긋날 수 없다. 메모 "내용"(박스/화살표)은 여기서 그리지 않는다 — 그건
     /// 여전히 표시 모드 전용이고, 여기서는 "이 표현에 메모가 있다"는 신호로
     /// 글자색만 바꾼다.
+    /// [2026-08-27 신설] 사용자 요청 — "성경구절 길게 누르거나(iOS) 마우스
+    /// 오른쪽 버튼을 눌러 '선택' 기능을 클릭하면, 개역한글(번들 성경)인
+    /// 경우 한자 주석까지 같이 나오도록(한자도 복사 가능하게)."
+    /// `VerseTextSelectionPopover` 전용 — `attributedContentWithInlineAnnotations`
+    /// (성경 조회 본문의 "항상 보기"/"탭하면 보기" 인라인 한자 표시)와 완전히
+    /// 같은 삽입 규칙(단어 뒤, `rangeEnd` 위치에 "(한자)")을 쓰되, 여기서는
+    /// `AttributedString`이 아니라 평범한 `String`을 돌려준다 — 이 결과가
+    /// 그대로 `SelectableVerseTextView`의 `text:`(선택 가능한 원본 문자열)로
+    /// 들어가서, 사용자가 드래그로 고르는 범위 자체에 한자 글자가 포함돼
+    /// 그대로 복사되게 하기 위해서다. 반대로 `selectionModeAttributedText`
+    /// (바로 아래, `VerseZoomView`의 "드래그로 새 형광펜/메모 만들기" 선택
+    /// 모드 전용)는 한자를 텍스트에 삽입하지 않고 단어 색상만 바꾸는데 —
+    /// 그건 그 화면이 만드는 형광펜/메모의 `rangeStart`/`rangeEnd`가 원본
+    /// `verse.content` 기준 오프셋으로 저장돼야 하기 때문에 텍스트 길이 자체를
+    /// 바꿀 수 없어서다(그 함수 자체 주석 참고). 이 팝오버는 그런 저장 용도가
+    /// 없이 "보이는 대로 복사"만 하면 되므로 텍스트에 직접 끼워 넣는 쪽을
+    /// 택했다 — 그래서 이 함수를 그 함수와 공유하지 않고 따로 둔다(용도가
+    /// 근본적으로 달라, 억지로 공유하면 오히려 두 화면 다 헷갈리게 만든다).
+    ///
+    /// 삽입은 내림차순(오프셋이 큰 것부터)으로 처리한다 — 오른쪽부터 끼워
+    /// 넣어야, 아직 처리하지 않은(더 왼쪽에 있는) 삽입 지점들의 오프셋이
+    /// 앞선 삽입 때문에 밀리지 않는다(`attributedContentWithInlineAnnotations`
+    /// 와 정확히 같은 이유로 같은 순서를 쓴다).
+    static func plainTextWithInlineHanja(text: String, hanjaWords: [HanjaWordAnnotation]) -> String {
+        guard !hanjaWords.isEmpty else { return text }
+        let insertions = hanjaWords
+            .map { (offset: $0.rangeEnd, hanja: $0.hanja) }
+            .sorted { $0.offset > $1.offset }
+        var result = text
+        for entry in insertions {
+            let nsRange = NSRange(location: entry.offset, length: 0)
+            guard let index = Range(nsRange, in: result)?.lowerBound else { continue }
+            result.insert(contentsOf: "(\(entry.hanja))", at: index)
+        }
+        return result
+    }
+
     static func selectionModeAttributedText(
         text: String, highlights: [VerseHighlight], phraseNotes: [VersePhraseNote],
         // [2026-08-12 추가] 사용자 요청 — "특정 텍스트를 선택하여 관주를 넣는

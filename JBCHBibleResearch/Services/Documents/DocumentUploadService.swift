@@ -141,6 +141,20 @@ enum DocumentUploadService {
     /// (Finder 열기 다이얼로그)에 노출되는 "새로 고를 수 있는 형식" 목록만
     /// 제어한다. 드래그앤드롭 경로는 이 목록을 거치지 않으므로
     /// `createSourceDocument`의 확장자 스위치에서 별도로 막는다(아래 참고).
+    // [2026-08-28 `pages` 업로드 차단으로 재번복] 사용자 요청 — "연구문서 업로드시
+    // pages 파일 차단할 것(hwp, pdf 파일만 업로드 가능하도록)." 위 2026-08-16 결정
+    // (SwiftTextPages 소스 코드까지 직접 확인해 "지원 확정")을 다시 번복한다 —
+    // 이번엔 파서 신뢰도 문제가 아니라 사용자가 업로드 가능한 "연구문서" 형식
+    // 자체를 hwp/pdf로 좁히기로 한 명시적 정책 결정이다. 이미지(jpg/png/heic)는
+    // 이 함수가 같이 다루긴 하지만 "연구문서"가 아니라 별도 기능인 "OCR
+    // 이미지" 업로드(DocumentsHomeView.swift "문서·OCR" 탭)라 사용자가 이번
+    // 차단 범위에서 명시적으로 제외했다 — 그대로 둔다.
+    //
+    // `.doc`/`.docx`를 막을 때와 같은 방식 — 파일 선택기 목록에서만 빼고
+    // (`createSourceDocument`의 스위치 문에서도 함께 막는다, 아래 참고),
+    // `OriginalFormat.pages`/`DocumentTextExtractionService.extractPages`
+    // 자체는 그대로 둔다 — 이미 업로드된 기존 `.pages` 문서는 계속 열람·검색
+    // 가능해야 한다.
     static func supportedContentTypes(allowHWP: Bool) -> [UTType] {
         var types: [UTType] = [.pdf, .jpeg, .png, .heic]
         if allowHWP {
@@ -148,7 +162,6 @@ enum DocumentUploadService {
             if let hwp = UTType(filenameExtension: "hwp") { types.append(hwp) }
             if let hwpx = UTType(filenameExtension: "hwpx") { types.append(hwpx) }
         }
-        if let pages = UTType(filenameExtension: "pages") { types.append(pages) }
         return types
     }
 
@@ -186,7 +199,11 @@ enum DocumentUploadService {
         // 일어난다 — 기존에 정말 모르는 확장자를 막던 것과 동일한 경로.
         // 이미 업로드된 `.doc`/`.docx` 문서의 `OriginalFormat` 케이스
         // 자체는 그대로 남아 있으므로 기존 문서 열람/검색은 영향 없다.
-        case "pages": format = .pages
+        // [2026-08-28 제거] `.pages` 업로드 차단 — 위 `supportedContentTypes(allowHWP:)`
+        // 주석 참고. `.doc`/`.docx`와 마찬가지로 드래그앤드롭은 이 스위치의
+        // `default` 분기(`DocumentUploadError.unsupportedFormat`)에서 막힌다.
+        // 이미 업로드된 `.pages` 문서의 `OriginalFormat.pages` 케이스 자체는
+        // 그대로 남아 있으므로 기존 문서 열람/검색은 영향 없다.
         case "jpg", "jpeg", "png", "heic", "heif": format = .image
         default:
             throw DocumentUploadError.unsupportedFormat(ext)
@@ -630,28 +647,37 @@ enum DocumentUploadService {
             resolvedURL = nil
         }
         guard let resolvedURL else { return }
-        do {
-            let url = resolvedURL
-            let didStartAccessing = url.startAccessingSecurityScopedResource()
-            defer { if didStartAccessing { url.stopAccessingSecurityScopedResource() } }
+        // [2026-08-25 수정, 경고] 이 블록을 감싸던 `do { ... } catch { ... }`가
+        // "'catch' block is unreachable because no errors are thrown in 'do'
+        // block" 경고를 냈다 — 실제로 이 블록 안에는 던지는 코드가 없다.
+        // `startAccessingSecurityScopedResource()`는 `Bool`을 반환할 뿐이고,
+        // `NSFileCoordinator.coordinate`는 에러를 던지는 대신 `error:` inout
+        // 파라미터로 보고하며(`coordinatorError`, 아래에서 이미 별도 처리),
+        // 안쪽 클로저의 `FileManager.removeItem`은 이미 자기 자신의 `do/catch`로
+        // 처리된다. 유일하게 던질 수 있었던 지점은 `resolveURL(from:)`인데,
+        // 위(627행)에서 이미 `try?`로 호출해 실패 시 `resolvedURL = nil` →
+        // `guard let resolvedURL else { return }`로 조용히 반환하는 경로를
+        // 타므로, 이 catch는 애초에 이 코드가 짜인 시점부터 한 번도 실행될
+        // 수 없었던 죽은 코드였다(삭제해도 동작 변화 없음 — 이 catch가 찍던
+        // 로그는 이미 `try?` 때문에 지금도 절대 찍히지 않는다).
+        let url = resolvedURL
+        let didStartAccessing = url.startAccessingSecurityScopedResource()
+        defer { if didStartAccessing { url.stopAccessingSecurityScopedResource() } }
 
-            var coordinatorError: NSError?
-            NSFileCoordinator().coordinate(
-                writingItemAt: url, options: .forDeleting, error: &coordinatorError
-            ) { writeURL in
-                do {
-                    try FileManager.default.removeItem(at: writeURL)
-                } catch let removeError as NSError where removeError.code == NSFileNoSuchFileError {
-                    // 이미 없는 파일 — 문제 아님(예: 사용자가 다른 경로로 이미 지움).
-                } catch {
-                    print("[DocumentUploadService] 파일 삭제 실패(\(url.lastPathComponent)): \(error.localizedDescription)")
-                }
+        var coordinatorError: NSError?
+        NSFileCoordinator().coordinate(
+            writingItemAt: url, options: .forDeleting, error: &coordinatorError
+        ) { writeURL in
+            do {
+                try FileManager.default.removeItem(at: writeURL)
+            } catch let removeError as NSError where removeError.code == NSFileNoSuchFileError {
+                // 이미 없는 파일 — 문제 아님(예: 사용자가 다른 경로로 이미 지움).
+            } catch {
+                print("[DocumentUploadService] 파일 삭제 실패(\(url.lastPathComponent)): \(error.localizedDescription)")
             }
-            if let coordinatorError {
-                print("[DocumentUploadService] 파일 삭제 조정 실패(\(url.lastPathComponent)): \(coordinatorError.localizedDescription)")
-            }
-        } catch {
-            print("[DocumentUploadService] 삭제할 파일의 북마크 해석 실패: \(error.localizedDescription)")
+        }
+        if let coordinatorError {
+            print("[DocumentUploadService] 파일 삭제 조정 실패(\(url.lastPathComponent)): \(coordinatorError.localizedDescription)")
         }
     }
 

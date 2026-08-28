@@ -56,6 +56,20 @@ struct VerseSearchResult: Identifiable {
     /// 검색어 자체가 이 절을 가리키는 성경 참조였는지(예: "창1:3") — true면
     /// 목록 맨 위, 본문 검색으로 걸린 결과와 구분해 보여준다.
     var isReferenceMatch: Bool = false
+    /// [2026-08-26 추가, 같은 날 정정] 사용자 요청 — "각 절마다 몇개
+    /// 매칭되었는지 오른쪽 끝에다 표시해줄것." 처음엔 `KeywordMatchScorer.
+    /// Score.totalOccurrences`(그 절 본문 안에서 검색어가 총 몇 번 등장했는지
+    /// — 같은 단어가 반복되면 계속 올라감)를 옮겨 왔었는데, 사용자가 이후
+    /// 명시적으로 정정했다: "[가장 많이 일치된 절]의 의미가 횟수를 의미하는
+    /// 것이 아니라 [중복 제거된 매칭된 검색어의 수]를 의미함." 즉 원하는 값은
+    /// `matchedWordCount`(서로 다른 검색어가 몇 개나 일치했는지, 중복 제거) —
+    /// 정확히 랭킹 tie-break가 이미 쓰는 바로 그 값이다(`BibleKeywordMatching.
+    /// swift` 상단 주석 참고). 이 필드는 `matchedWordCount`를 그대로 옮겨
+    /// 담으므로 정렬 기준과 화면 표시가 이제 같은 수치를 가리킨다(예전엔
+    /// 랭킹=matchedWordCount, 표시=totalOccurrences로 서로 달랐다). 참조 매치
+    /// (`referenceMatchedVerses`)는 단어 매칭 점수를 계산하지 않으므로 기본값
+    /// 0을 그대로 둔다(0이면 화면에서 배지 자체를 숨긴다).
+    var matchCount: Int = 0
 }
 
 struct MemoSearchResult: Identifiable {
@@ -226,7 +240,209 @@ final class SearchViewModel {
     /// verseRefs`)를 "성경구절" 섹션에 직접 활용하기도 한다.
     private(set) var intentCard: QueryIntentCard?
 
-    private(set) var verseResults: [VerseSearchResult] = []
+    /// [2026-08-25 신설] 사용자 요청 — "limit 50을 해제할 수 있는 방법도
+    /// 추가할 것 — 더보기 버튼." `searchVerses`가 이제 매칭된 절 전체(무제한)를
+    /// 성경순으로 정렬해 돌려주므로, 그 전체를 여기 들고 있다가 화면엔
+    /// `verseResults`(아래, `visibleVerseResultCount`만큼만 자른 부분집합)만
+    /// 보여준다. "더보기"를 누르면 `loadMoreVerseResults()`가 이 값만 늘릴
+    /// 뿐 DB를 다시 조회하지 않는다 — 이미 메모리에 다 있는 정렬된 배열에서
+    /// 더 꺼내 보여주는 것뿐이라 비용이 사실상 없다.
+    private(set) var allVerseResults: [VerseSearchResult] = []
+
+    /// [2026-08-26 신설] "더보기 확인창" 조건 판단(아래 `effectiveMatchedWordCount()`)
+    /// 에 쓰는, 이번 키워드 검색에 실제 쓰인 단어 목록. `performKeywordSearch`만
+    /// 채운다 — AI(의미) 검색은 문장을 단어로 쪼개지 않고 임베딩으로 통째로
+    /// 비교하므로 "단어 개수"라는 개념 자체가 없다. `performAIQuerySearch`가
+    /// 항상 빈 배열로 되돌리므로(해당 함수 상단 참고) AI 검색에서는 이
+    /// 배열이 비어 있어 확인창 조건(2개 이상)을 절대 만족하지 않는다.
+    private var lastSearchWords: [String] = []
+
+    /// [2026-08-26 신설] "더보기 확인창"을 이번 검색에서 이미 보여줬는지 —
+    /// AskUserQuestion으로 확정한 답변("검색 1회당 최초 1번만") 그대로.
+    /// `setVerseResults`가 새 결과를 채울 때마다(= 새 검색이 시작될 때마다)
+    /// 함께 리셋된다.
+    private var hasShownMoreResultsNotice = false
+
+    /// [2026-08-26 신설] 사용자 요청 — "두 개 단어 이상 검색시 더보기를 누르면
+    /// 확인창 ... 각 성경별로 추가 검색결과를 반영했으니 확인해보라는 내용."
+    /// nil이 아니면 `SearchView`가 alert을 띄운다. "확인"을 누르면
+    /// `confirmMoreResultsNotice()`가 호출되어 닫히고 이어서 더보기가
+    /// 진행된다(AskUserQuestion 답변: "그냥 닫히고 더보기가 정상 진행").
+    struct MoreResultsNotice: Identifiable {
+        let id = UUID()
+        /// 아직 화면에 보여주지 않은 결과들(`allVerseResults`의
+        /// `visibleVerseResultCount` 이후 구간)에 걸친 서로 다른 성경책 수.
+        /// AskUserQuestion에서 "성경별"이 번역본이 아니라 구약/신약 또는
+        /// 개별 책 단위를 뜻한다는 확인을 받았으므로, 추측이 아니라 이미
+        /// 메모리에 있는 데이터에서 직접 센 값을 안내 문구에 쓴다.
+        let additionalBookCount: Int
+    }
+    private(set) var pendingMoreResultsNotice: MoreResultsNotice?
+    // [2026-08-25 수정, 컴파일 에러] 저장 프로퍼티 초기화식 안에서는 `Self`
+    // (공변 타입)를 참조할 수 없다 — `final class`라도 예외가 아니다(Swift가
+    // 저장 프로퍼티 초기화 표현식 자체를 `Self`와 무관하게 컴파일하기
+    // 때문). 메서드 본문 안(`loadMoreVerseResults`, `setVerseResults`)의
+    // `Self.verseResultPageSize`는 이 제약이 적용되지 않아 문제없다 —
+    // 여기 초기화식만 타입 이름을 직접 써야 한다.
+    private var visibleVerseResultCount = SearchViewModel.verseResultPageSize
+    // [2026-08-26 변경] 사용자 요청 — "검색결과를 100개 단위로 보여줄것."
+    // 30 → 100. 페이지 크기만 바뀔 뿐 그 위 주석의 "더보기는 DB를 다시
+    // 조회하지 않는다"는 동작은 그대로다.
+    private static let verseResultPageSize = 100
+
+    var verseResults: [VerseSearchResult] {
+        Array(allVerseResults.prefix(visibleVerseResultCount))
+    }
+
+    /// [2026-08-26 신설] 사용자 요청 — "성경 검색 결과가 장별로 그룹핑되고, 그
+    /// 같은 장안에 절이 세부적으로 표시될 수 있도록." `verseResults`(현재 화면에
+    /// 보여주는, "더보기"로 늘어나는 부분집합)가 담긴 순서는 그대로 두되(가중치
+    /// 정렬 결과라 장이 뒤섞여 있을 수 있음), 그룹(장) 자체를 별도 규칙으로
+    /// 다시 나열한다. 그룹 안의 절은 절 번호 오름차순으로 다시 정렬해 "장 안에서
+    /// 절이 순서대로 세부 표시"되게 한다. 이 그룹핑은 순수 표시용이라
+    /// `allVerseResults`/`verseResults` 자체(가중치 랭킹, "더보기" 페이지네이션
+    /// 기준)는 전혀 건드리지 않는다.
+    ///
+    /// [2026-08-26 그룹 정렬 규칙 변경, 같은 날 재정정] 사용자 요청 — "절 내에
+    /// 가장 많이 일치가 된 이 구절을 가진 성경 장을 제일 먼저 나타내고, 일치된
+    /// 절이 동일한 성경장은 정경순서 장 오름차순으로 표현할 것." 이전엔 이
+    /// 자리에 "정경순(책/장) 오름차순 고정"이라고 사용자에게 직접 확인까지
+    /// 받아 적어뒀었는데(8.2 문서 기록 참고), 이번 요청이 그 결정을 명시적으로
+    /// 뒤집었다 — 애매한 요청이 아니라 구체적인 새 규칙이라 다시 확인을 구하지
+    /// 않고 그대로 반영했다.
+    ///
+    /// [재정정] "가장 많이 일치된 절"이 무엇을 뜻하는지도 사용자가 예시로 다시
+    /// 확인해 줬다 — "요약 횟수를 의미하는 것이 아니라 [중복 제거된 매칭된
+    /// 검색어의 수]를 의미함"(예: "다윗 요압 이스라엘" 검색 시 세 단어가 모두
+    /// 걸린 절이 있는 장이 1순위, 두 단어만 걸린 장들은 2순위 동점으로 묶여
+    /// 정경순 2차 정렬). `VerseSearchResult.matchCount`가 이제 정확히 이
+    /// "중복 제거된 매칭 단어 수"(`matchedWordCount`)를 담으므로(그 필드 상단
+    /// 주석 참고), 이 정렬 로직 자체는 고칠 게 없었다 — `matchCount`의 정의를
+    /// 고치는 것만으로 여기 정렬도 함께 올바르게 동작한다. 그룹 정렬의 1순위는
+    /// 그 그룹 안에서 가장 큰 `matchCount` 내림차순, 이 값이 같은 그룹끼리만
+    /// 정경순(책ID/장 오름차순)으로 2차 정렬한다.
+    struct VerseSearchResultGroup: Identifiable {
+        let bookId: Int
+        let chapter: Int
+        let bookNameKo: String
+        let verses: [VerseSearchResult]
+        var id: String { "\(bookId)-\(chapter)" }
+    }
+
+    var groupedVerseResults: [VerseSearchResultGroup] {
+        var versesByChapter: [String: [VerseSearchResult]] = [:]
+        var orderedKeys: [(bookId: Int, chapter: Int)] = []
+        for result in verseResults {
+            let key = "\(result.bookId)-\(result.chapter)"
+            if versesByChapter[key] == nil {
+                orderedKeys.append((bookId: result.bookId, chapter: result.chapter))
+            }
+            versesByChapter[key, default: []].append(result)
+        }
+        let groups = orderedKeys.map { key -> VerseSearchResultGroup in
+            let verses = (versesByChapter["\(key.bookId)-\(key.chapter)"] ?? [])
+                .sorted { $0.verse < $1.verse }
+            return VerseSearchResultGroup(
+                bookId: key.bookId,
+                chapter: key.chapter,
+                bookNameKo: verses.first?.bookNameKo ?? "",
+                verses: verses
+            )
+        }
+        return groups.sorted { lhs, rhs in
+            let lhsMaxMatchCount = lhs.verses.map(\.matchCount).max() ?? 0
+            let rhsMaxMatchCount = rhs.verses.map(\.matchCount).max() ?? 0
+            if lhsMaxMatchCount != rhsMaxMatchCount { return lhsMaxMatchCount > rhsMaxMatchCount }
+            return (lhs.bookId, lhs.chapter) < (rhs.bookId, rhs.chapter)
+        }
+    }
+
+    /// "더보기" 버튼을 보여줄지 — 아직 화면에 안 보여준 결과가 남아 있는지.
+    var hasMoreVerseResults: Bool {
+        allVerseResults.count > visibleVerseResultCount
+    }
+
+    /// [2026-08-25 신설, 2026-08-26 확인창 추가] "더보기" 버튼이 호출. 새
+    /// 검색이 시작되면 `performKeywordSearch`/`clearResults`가
+    /// `verseResultPageSize`로 되돌린다.
+    ///
+    /// [2026-08-26] 사용자 요청 — "두 개 단어 이상 검색시 더보기를 누르면
+    /// 확인창 ... 한 단어이거나 여러 단어를 검색했더라도 한 단어밖에 검색할
+    /// 수 없으면 확인창이 안떠도 됨." 이번 검색에서 아직 확인창을 안
+    /// 보여줬고, 실제로 매칭에 기여한 서로 다른 단어가 2개 이상이면
+    /// 페이지를 늘리는 대신 `pendingMoreResultsNotice`만 채우고 멈춘다 —
+    /// 실제 페이지 증가는 사용자가 확인창에서 "확인"을 눌러
+    /// `confirmMoreResultsNotice()`를 호출해야 일어난다.
+    func loadMoreVerseResults() {
+        if !hasShownMoreResultsNotice, effectiveMatchedWordCount() >= 2 {
+            hasShownMoreResultsNotice = true
+            let additionalBookCount = Set(allVerseResults.dropFirst(visibleVerseResultCount).map(\.bookId)).count
+            pendingMoreResultsNotice = MoreResultsNotice(additionalBookCount: additionalBookCount)
+            return
+        }
+        visibleVerseResultCount += Self.verseResultPageSize
+    }
+
+    /// [2026-08-26 신설] `pendingMoreResultsNotice` alert의 "확인" 버튼이
+    /// 호출 — 확인창을 닫고, 원래 `loadMoreVerseResults()`가 하려던 페이지
+    /// 증가를 그대로 이어서 한다(AskUserQuestion 답변: "그냥 닫히고 더보기가
+    /// 정상 진행").
+    func confirmMoreResultsNotice() {
+        pendingMoreResultsNotice = nil
+        visibleVerseResultCount += Self.verseResultPageSize
+    }
+
+    /// [2026-08-26 신설] `pendingMoreResultsNotice`가 `private(set)`이라
+    /// `SearchView`가 직접 `nil`을 대입할 수 없다(빌드 에러: "setter is
+    /// inaccessible") — alert이 "확인" 버튼이 아닌 다른 경로(시스템
+    /// 스와이프/ESC 등, `.alert(isPresented:)` 바인딩의 `set` 클로저가
+    /// `false`를 받는 모든 경우)로 닫힐 때 상태를 정리하는 전용 진입점을
+    /// 대신 둔다. `confirmMoreResultsNotice()`와 달리 더보기 페이지 증가는
+    /// 하지 않는다 — 그냥 닫기만 한다.
+    func dismissMoreResultsNotice() {
+        pendingMoreResultsNotice = nil
+    }
+
+    /// [2026-08-26 신설] "더보기 확인창"을 띄울지 판단하는 핵심 로직 —
+    /// AskUserQuestion으로 확정한 기준 그대로: `lastSearchWords`(이번 검색
+    /// 단어들, 중복 제거) 중 이미 메모리에 있는 `allVerseResults`(DB 재조회
+    /// 없음) 어딘가의 본문에 대소문자 무시 부분일치로 최소 1번이라도
+    /// 등장하는 서로 다른 단어의 개수를 센다. 예: "다윗 컴퓨터"는 두
+    /// 단어지만 "컴퓨터"가 성경 본문 어디에도 없어 매칭 0건이므로 이 값이
+    /// 1(다윗만)이 되어 확인창 조건(>= 2)을 만족하지 못한다. "다윗 다윗
+    /// 맥북"처럼 같은 단어가 중복 입력돼도 `Set`으로 중복 제거되어 정확히
+    /// 1로 계산된다.
+    private func effectiveMatchedWordCount() -> Int {
+        let distinctWords = Set(lastSearchWords.map { $0.lowercased() }).filter { !$0.isEmpty }
+        guard distinctWords.count > 1 else { return distinctWords.count }
+        var matched = Set<String>()
+        for result in allVerseResults {
+            if matched.count == distinctWords.count { break }
+            for word in distinctWords where !matched.contains(word) {
+                if result.content.range(of: word, options: [.caseInsensitive]) != nil {
+                    matched.insert(word)
+                }
+            }
+        }
+        return matched.count
+    }
+
+    /// [2026-08-25 신설] `allVerseResults`를 새로 채울 때마다 "더보기" 스크롤
+    /// 위치(`visibleVerseResultCount`)를 첫 페이지로 되돌린다 — 이전 검색에서
+    /// 눌러둔 "더보기" 상태가 새 검색 결과에 그대로 남아있으면 안 되므로,
+    /// 대입이 일어나는 여러 곳(`clearResults`, `performKeywordSearch`,
+    /// `performAIQuerySearch`)이 각자 리셋을 빠뜨릴 위험 없이 하나로 묶었다.
+    ///
+    /// [2026-08-26 확장] "더보기 확인창" 상태(`hasShownMoreResultsNotice`/
+    /// `pendingMoreResultsNotice`)도 같은 이유로 여기서 함께 리셋한다 — 새
+    /// 검색마다 확인창이 다시 최초 1번 뜰 수 있어야 한다.
+    private func setVerseResults(_ results: [VerseSearchResult]) {
+        allVerseResults = results
+        visibleVerseResultCount = Self.verseResultPageSize
+        hasShownMoreResultsNotice = false
+        pendingMoreResultsNotice = nil
+    }
+
     private(set) var memoResults: [MemoSearchResult] = []
     private(set) var documentResults: [DocumentSearchResult] = []
     private(set) var outlineResults: [OutlineSearchResult] = []
@@ -281,7 +497,7 @@ final class SearchViewModel {
     /// 양쪽에서 쓴다.
     private func clearResults() {
         intentCard = nil
-        verseResults = []
+        setVerseResults([])
         memoResults = []
         documentResults = []
         outlineResults = []
@@ -307,6 +523,12 @@ final class SearchViewModel {
             clearResults()
             return
         }
+        // [2026-08-26 추가] `SearchResultsPopRequest.swift` 상단 주석 참고 —
+        // 검색이 사이드바 상단 검색창이든 이 화면 자체의 `.searchable`
+        // 검색창이든, 실제로 새 검색이 시작되는 지점은 결국 여기 하나뿐이다.
+        // 성경 조회 화면이 push된 채로 다시 검색해도 검색결과 화면이 보이도록
+        // `SidebarNavigationView`에 pop을 요청한다.
+        SearchResultsPopRequest.shared.requestPop()
         searchTask = Task { [weak self] in
             guard let self else { return }
             await self.performSearch(query: trimmed)
@@ -346,9 +568,13 @@ final class SearchViewModel {
     private func performKeywordSearch(query: String) {
         errorDescription = nil
         let words = query.split(whereSeparator: { $0.isWhitespace }).map(String.init).filter { !$0.isEmpty }
+        // [2026-08-26 추가] "더보기 확인창" 조건 판단(`effectiveMatchedWordCount()`)
+        // 이 이번 검색에 실제 쓰인 단어들을 알아야 하므로 저장해 둔다 — 위
+        // `lastSearchWords` 선언부 주석 참고.
+        lastSearchWords = words
         let queryMatches = BibleReferenceExtractor.extract(from: query)
 
-        verseResults = searchVerses(query: query, words: words, queryMatches: queryMatches)
+        setVerseResults(searchVerses(query: query, words: words, queryMatches: queryMatches))
         outlineResults = searchOutlines(words: words, queryMatches: queryMatches)
         phraseNoteResults = searchPhraseNotes(words: words, queryMatches: queryMatches)
         memoResults = searchMemos(words: words, queryMatches: queryMatches)
@@ -479,7 +705,14 @@ final class SearchViewModel {
                         bookNameKo: booksProvider.book(id: verse.bookId)?.nameKo ?? "\(verse.bookId)권",
                         isReferenceMatch: true
                     ))
-                    if results.count >= 30 { return results }
+                    // [2026-08-25 삭제] 예전엔 여기서 `results.count >= 30`이면
+                    // 함수 전체를 조기 반환했다 — "시편 119편"처럼 참조 매치만으로
+                    // 30개를 넘는 질의는 뒤의 단어 기반 후보(scoredCandidates)를
+                    // 아예 계산하지도 못하고 끝나 버렸다. 이제 30개라는 화면
+                    // 표시 개수 자체가 없다(아래 최종 반환부 참고 — 전체를
+                    // 돌려주고 "더보기"는 `SearchViewModel`이 화면에 보여줄
+                    // 개수만 조절한다), 그러니 여기서도 조기 반환할 이유가
+                    // 없다.
                 }
             }
         }
@@ -512,10 +745,20 @@ final class SearchViewModel {
             let versionCode = store.hasVersionCodeColumn ? registry.code : nil
             let useFullText = registry.code == TranslationBootstrap.bundledTranslationCode && fullTextStore != nil
 
+            // [2026-08-25 변경] 사용자 요청 — "limit 50을 해제할 수 있는 방법도
+            // 추가할 것(더보기 버튼)." 예전엔 두 경로 다 `limit: 50`을 넘겨
+            // 후보 자체를 50개로 자른 뒤 재정렬했다 — FTS5 경로는 그 50개를
+            // bm25 관련도 순으로 골랐던 탓에 "다윗"(953건)처럼 흔한 단어는
+            // 성경순 앞쪽 결과가 통째로 후보에서 빠지는 문제가 있었다(위
+            // `ReferenceDataStore.searchVersesFullText` 변경 참고). 이제 두
+            // 함수 다 `limit`이 옵셔널이라, 인자를 넘기지 않으면(기본값
+            // `nil`) 해당 단어의 실제 등장 전체를 후보로 모은다 — 화면에
+            // 몇 개를 보여줄지는 이 함수가 아니라 `verseResults`/
+            // `loadMoreVerseResults()`(더보기 버튼)가 나중에 결정한다.
             for word in words {
                 for variant in RelationSynonyms.expanded(word) {
                     if useFullText, let fullTextStore {
-                        guard let matches = try? fullTextStore.searchVersesFullText(matching: variant, limit: 50) else { continue }
+                        guard let matches = try? fullTextStore.searchVersesFullText(matching: variant) else { continue }
                         for match in matches {
                             let key = "\(match.bookId)-\(match.chapter)-\(match.verse)"
                             guard !seen.contains(key), wordCandidates[key] == nil else { continue }
@@ -525,7 +768,7 @@ final class SearchViewModel {
                             )
                         }
                     } else {
-                        guard let verses = try? store.searchVerses(query: variant, versionCode: versionCode, limit: 50) else { continue }
+                        guard let verses = try? store.searchVerses(query: variant, versionCode: versionCode) else { continue }
                         for verse in verses {
                             let key = "\(verse.bookId)-\(verse.chapter)-\(verse.verse)"
                             guard !seen.contains(key), wordCandidates[key] == nil else { continue }
@@ -552,7 +795,14 @@ final class SearchViewModel {
                 let score = KeywordMatchScorer.score(words: words, in: entry.verse.content)
                 let result = VerseSearchResult(
                     bookId: entry.verse.bookId, chapter: entry.verse.chapter, verse: entry.verse.verse,
-                    content: entry.verse.content, bookNameKo: entry.bookNameKo, highlightKeywords: words
+                    content: entry.verse.content, bookNameKo: entry.bookNameKo, highlightKeywords: words,
+                    // [2026-08-26 추가, 같은 날 정정] 위 `VerseSearchResult.
+                    // matchCount` 상단 주석 참고 — 처음엔 `score.totalOccurrences`
+                    // 였는데, 사용자가 "중복 제거된 매칭된 검색어의 수"를 원한다고
+                    // 정정해 `score.matchedWordCount`로 바꿨다. 이 값은 바로 위에서
+                    // 계산한 `score`(정렬 tie-break가 쓰는 그 값)의 필드라 별도
+                    // 계산이 아니라 그대로 재사용한 것이다.
+                    matchCount: score.matchedWordCount
                 )
                 let orderIndex = booksProvider.book(id: entry.verse.bookId)?.orderIndex ?? entry.verse.bookId
                 return (result, score, orderIndex)
@@ -565,10 +815,14 @@ final class SearchViewModel {
                 return lhs.result.verse < rhs.result.verse
             }
 
-        for candidate in scoredCandidates {
-            guard results.count < 30 else { break }
-            results.append(candidate.result)
-        }
+        // [2026-08-25 변경] 예전엔 여기서 `results.count < 30`까지만 채우고
+        // 나머지 scoredCandidates는 버렸다 — "50개 후보 중 상위 30개"였던
+        // 예전 설계에서도 이미 실제 등장 전체를 반영하지 못했는데, 이제
+        // 후보 자체가 전체(무제한)이니 여기서 자르면 "더보기"가 보여줄
+        // 데이터 자체가 없어진다. 화면에 몇 개를 보여줄지는 더 이상 이
+        // 함수의 책임이 아니다 — 전체를 그대로 돌려주고, `verseResults`
+        // (더보기 버튼과 함께)가 그중 보여줄 개수만 결정한다.
+        results.append(contentsOf: scoredCandidates.map(\.result))
         return results
     }
 
@@ -751,9 +1005,15 @@ final class SearchViewModel {
     /// 데이터가 없는 카테고리 등) 기존처럼 의미검색으로 넘어간다.
     private func performAIQuerySearch(query: String) async {
         errorDescription = nil
+        // [2026-08-26 추가] AI(의미) 검색은 문장을 단어로 쪼개 검색하지 않으므로
+        // (임베딩 기반 유사도) "더보기 확인창" 조건(`effectiveMatchedWordCount()`)의
+        // 전제인 `lastSearchWords`가 이전 키워드 검색의 값으로 남아있으면 안
+        // 된다 — 매번 명시적으로 비워, 이 함수가 채우는 결과에서는 확인창이
+        // 절대 뜨지 않게 한다(위 `lastSearchWords` 선언부 주석 참고).
+        lastSearchWords = []
 
         if let intentCard, !intentCard.verseRefs.isEmpty {
-            verseResults = resolveVerseResults(intentCard.verseRefs)
+            setVerseResults(resolveVerseResults(intentCard.verseRefs))
             lastAIQueryUsed = nil
             memoResults = []; documentResults = []
             outlineResults = []; phraseNoteResults = []; summaryResults = []
@@ -763,17 +1023,17 @@ final class SearchViewModel {
         let result = await BibleSemanticSearchService.search(query: query)
         switch result {
         case .success(let outcome):
-            verseResults = outcome.matches.map { match in
+            setVerseResults(outcome.matches.map { match in
                 VerseSearchResult(
                     bookId: match.bookId, chapter: match.chapter, verse: match.verse,
                     content: match.content,
                     bookNameKo: booksProvider.book(id: match.bookId)?.nameKo ?? "\(match.bookId)권"
                 )
-            }
+            })
             lastAIQueryUsed = outcome.queryUsedForEmbedding
         case .failure(let error):
             errorDescription = error.description
-            verseResults = []
+            setVerseResults([])
             lastAIQueryUsed = nil
         }
         memoResults = []; documentResults = []

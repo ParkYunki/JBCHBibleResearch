@@ -46,9 +46,23 @@ enum WordSummaryPresentationContext {
     /// "말씀 요약" 사이드바 탭(WordSummaryHomeView) — 성경 좌표를 직접 바꿀 수
     /// 있는 헤더를 쓴다.
     case standalone
-    /// 성경 조회 화면의 [말씀 요약] 버튼으로 연 인스펙터 패널 — 이미 어느 절의
-    /// 요약인지 정해진 채로 열리므로 읽기전용 좌표 라벨만 보여준다.
+    /// 성경 조회 화면의 [말씀 요약] 버튼으로 연 패널 — 이미 어느 절의 요약인지
+    /// 정해진 채로 열리므로 읽기전용 좌표 라벨만 보여준다.
     case contextual
+    /// [2026-08-27 추가] 사용자 보고 — "iOS 아이폰 - 말씀노트 수정사항: 화면
+    /// 영역이 기기 가로폭보다 커서 잘림." `WordNoteHomeView`(말씀노트 통합
+    /// 목록)가 여는 말씀 요약은 지금까지 `.standalone`을 그대로 썼는데, 그
+    /// 헤더는 `BookChapterPicker` + 절 `Stepper` + 동기화 라벨을 한 줄
+    /// `HStack`에 다 넣고 아무것도 줄바꿈/축소하지 않는다 — 아이폰 폭에서
+    /// 이 줄 전체 폭이 화면 폭을 넘겨 잘리는 것으로 보인다. 같은 화면
+    /// (`WordNoteHomeView`)이 여는 개인 묵상(`MemoDetailView`)은 이미 똑같은
+    /// 이유로 `MemoPresentationContext.wordNoteList`(그 파일 주석 참고, "말씀노트
+    /// 리스트에서 연 항목은 좌표를 못 바꾸게" 요청으로 2026-08-21에 추가됨)를
+    /// 써서 이 문제가 없다 — 말씀 요약 쪽만 그 처리가 누락돼 있었다. 이미 목록에
+    /// 있던 특정 요약이라 좌표를 바꿔 다른 절로 재배정할 이유도 없으므로,
+    /// `.contextual`과 완전히 같은 읽기전용 좌표 라벨 헤더를 그대로 재사용한다
+    /// (아래 `header`/툴바 두 곳만 해당 — 이 케이스는 별도 로직이 없다).
+    case wordNoteList
 }
 
 struct WordSummaryEditorView: View {
@@ -118,12 +132,20 @@ struct WordSummaryEditorView: View {
                 // 바뀌는 것처럼 보이던 불일치를 없앴다.
                 editingBackgroundColor: EditorDefaultStyle.backgroundColor,
                 readOnlyBackgroundColor: EditorDefaultStyle.backgroundColor,
-                // [2026-08-12 추가] 사용자 요청 — "말씀 스타일 툴바는 오른쪽
-                // 사이드바 에디터영역에 위치하게." `.contextual`(성경 조회 화면의
-                // 인스펙터)일 때만 macOS 상시 노출 툴바를 켠다 — `RichTextEditor.
-                // showsToolbarOnMac` 상단 주석 참고. `.standalone`(말씀 요약
-                // 사이드바 탭)은 이번 요청 범위 밖이라 건드리지 않았다.
-                showsToolbarOnMac: presentationContext == .contextual,
+                // [2026-08-12 추가, 2026-08-27 최종 원복] 당시 사용자 보고 —
+                // "구절 선택후 하단 메뉴의 [말씀 요약] 버튼 클릭 - 서식 툴바
+                // 위치가 내 의도와는 다름." macOS 네이티브 서식 팝업
+                // (`usesInspectorBar`)이 좁은 인스펙터 열 안에서 왼쪽 성경 본문
+                // 위로 넘쳐 보이는 문제라, 한때 `.contextual`(성경 조회
+                // 인스펙터)일 때만 이 커스텀 툴바로 대체했었다 — 인스펙터 열을
+                // 넓히거나(420→640) 툴바를 두 줄로 접는 시도까지 해봤지만,
+                // 사용자가 명확히 지시했다: macOS 에디터는 어떤 화면이든 항상
+                // 네이티브로 유지할 것, 직접 요청하지 않은 수정은 하지 말 것.
+                // 그 지시에 따라 조건 없이 `false`로 고정한다 — 이 화면도 이제
+                // `OutlineBookBulkEditView`(개요)와 완전히 같은 취급이다. 팝업
+                // 위치 문제 자체는 여전히 남아 있을 수 있지만, 그 해결은 사용자가
+                // 다시 명시적으로 요청할 때까지 손대지 않는다.
+                showsToolbarOnMac: false,
                 externalProxy: externalProxy
             )
             .padding()
@@ -144,7 +166,12 @@ struct WordSummaryEditorView: View {
             // 만든 새 저널 항목을 곧바로 편집하는 흐름이라 항상 편집 가능한 채로
             // 두는 편이 자연스럽다. `.standalone`(말씀 요약 사이드바 탭, 기존
             // 항목을 훑어보기만 할 수도 있는 화면)에는 그대로 남긴다.
-            if presentationContext == .standalone {
+            // [2026-08-27 변경] 새로 추가한 `.wordNoteList`(위 enum 주석 참고)도
+            // `.standalone`과 같은 이유로 이 토글을 그대로 둔다 — `MemoDetailView`가
+            // 이미 자기 쪽 `.wordNoteList`에 쓰는 것과 같은 원칙(그 파일의
+            // 상응하는 토글 조건이 `== .contextual`이 아닌 전부라 자동으로
+            // `.wordNoteList`도 포함됨)을 여기서는 조건을 명시적으로 넓혀 맞춘다.
+            if presentationContext == .standalone || presentationContext == .wordNoteList {
                 ToolbarItem(placement: .primaryAction) {
                     Button {
                         isEditable.toggle()
@@ -198,11 +225,14 @@ struct WordSummaryEditorView: View {
             }
             .padding()
 
-        case .contextual:
+case .contextual, .wordNoteList:
             // [2026-08-20 추가, 2026-08-21 이동] "확대보기"/"원문 정보" 버튼이
             // 한때 여기 있었다 — 이제 바깥 하단 액션바(`BibleReadingView.
             // verseSelectionActionBar`)의 "말씀 복사" 옆으로 옮겼다(위
             // `onRequestVerseZoom`/`onRequestOriginalTextInfo` 삭제 주석 참고).
+            // [2026-08-27 추가] `.wordNoteList`도 같은 읽기전용 좌표 표시를
+            // 그대로 쓴다 — 위 `WordSummaryPresentationContext.wordNoteList`
+            // 상단 주석 참고(아이폰 가로폭 잘림 수정).
             HStack {
                 Text(contextualCoordinateLabel)
                     .font(.callout.bold())

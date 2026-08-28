@@ -202,7 +202,12 @@ private func destinationView(for item: WordNoteItem) -> some View {
         // 바꿔 읽기전용 좌표 라벨만 보이게 한다.
         MemoDetailView(memo: memo, presentationContext: .wordNoteList)
     case .summary(let summary):
-        WordSummaryEditorView(summary: summary, presentationContext: .standalone)
+        // [2026-08-27 변경] 사용자 보고 — "iOS 아이폰 - 말씀노트 수정사항: 화면
+        // 영역이 기기 가로폭보다 커서 잘림." 바로 위 `.memo` 케이스가 이미
+        // `.wordNoteList`를 쓰는 것과 같은 이유로(그 케이스 주석 참고)
+        // `.standalone` 대신 `.wordNoteList`로 바꾼다 — `WordSummaryEditorView.
+        // WordSummaryPresentationContext.wordNoteList` 상단 주석 참고.
+        WordSummaryEditorView(summary: summary, presentationContext: .wordNoteList)
     }
 }
 

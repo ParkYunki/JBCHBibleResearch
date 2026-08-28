@@ -535,7 +535,11 @@ final class BibleReadingViewModel {
         }
     }
 
-    func selectBook(_ book: Book, chapter: Int = 1) {
+    // [2026-08-28 변경] `recordHistory` 매개변수 추가 — 사용자 요청 "책갈피
+    // 기능은 히스토리 이력 제외". 기본값 `true`라 기존 호출부(전부 히스토리에
+    // 남아야 하는 실제 조회 이동)는 코드 수정 없이 그대로 동작한다 —
+    // `navigateToBookmark`(아래)만 명시적으로 `false`를 넘긴다.
+    func selectBook(_ book: Book, chapter: Int = 1, recordHistory: Bool = true) {
         pushCurrentLocationToBackStack()
         selectedBook = book
         selectedChapter = max(1, chapter)
@@ -546,10 +550,12 @@ final class BibleReadingViewModel {
         // [2026-08-08 추가] 조회 이력 기록 — `init`이 마지막 위치를 "복원"할 때는
         // 이 메서드를 거치지 않으므로(직접 selectedBook/selectedChapter를 대입) 여기서
         // 기록해도 탭 전환마다 중복 이력이 쌓이지 않는다.
-        BibleReadingHistoryService.record(bookId: book.bookId, chapter: selectedChapter, context: modelContext)
+        if recordHistory {
+            BibleReadingHistoryService.record(bookId: book.bookId, chapter: selectedChapter, context: modelContext)
+        }
     }
 
-    func goToChapter(_ chapter: Int) {
+    func goToChapter(_ chapter: Int, recordHistory: Bool = true) {
         guard chapter >= 1 else { return }
         pushCurrentLocationToBackStack()
         selectedChapter = chapter
@@ -557,7 +563,9 @@ final class BibleReadingViewModel {
         reloadVerses()
         refreshRelatedContent()
         LastBiblePositionTracker.shared.update(bookId: selectedBook.bookId, chapter: chapter)
-        BibleReadingHistoryService.record(bookId: selectedBook.bookId, chapter: chapter, context: modelContext)
+        if recordHistory {
+            BibleReadingHistoryService.record(bookId: selectedBook.bookId, chapter: chapter, context: modelContext)
+        }
     }
 
     // MARK: - 조회 이력 (2026-08-08 추가)
@@ -577,6 +585,76 @@ final class BibleReadingViewModel {
     func jumpToHistoryEntry(_ entry: BibleReadingHistoryEntry) {
         guard let book = booksProvider.book(id: entry.bookId) else { return }
         selectBook(book, chapter: entry.chapter)
+    }
+
+    /// [2026-08-26 신설] 사용자 요청 — "확대보기 하거나, 왼쪽 사이드바 상단
+    /// 검색기능을 통해 직접 성경 장절로 이동을 한 경우는 히스토리 이력에 남김."
+    /// `selectBook`/`goToChapter`(장 단위 이동)와 달리 이 두 이벤트는 "지금 있는
+    /// 장 안에서 절 하나를 더 구체적으로 가리키는" 행위라 장 이동 자체를 유발하지
+    /// 않을 수 있다(확대보기는 이미 그 장을 보고 있는 채로 열리고, 사이드바 검색
+    /// 직행은애초 `selectBook`을 거치지 않는다 — `BibleReadingView`의
+    /// `initialVerse` 처리 `.onAppear` 참고). 그래서 별도 메서드로 분리해
+    /// 호출부(확대보기 버튼, 검색 결과 직행 경로)가 명시적으로만 부르게 한다.
+    func recordVerseHistory(verse: Int) {
+        BibleReadingHistoryService.record(bookId: selectedBook.bookId, chapter: selectedChapter, verse: verse, context: modelContext)
+    }
+
+    // MARK: - 책갈피 (2026-08-28 신설)
+    //
+    // 사용자 요청 — "성경조회 기능의 책갈피 기능 추가. 히스토리 이력 제외." 저장
+    // 단위는 조회 이력과 같다(사용자 확인 — "절까지, 구절을 선택했으면 그 절,
+    // 아니면 장"): 절을 정확히 하나 선택 중이면 그 절, 아니면 지금 보고 있는
+    // 장 전체를 가리키는 책갈피가 된다.
+
+    /// 책갈피 목록/토글 상태가 바뀔 때마다 올라가는 카운터. `BibleBookmark`는
+    /// `selectedBook`/`selectedChapter`/`selectedVerses`처럼 `@Observable`이
+    /// 직접 추적하는 저장 프로퍼티가 아니라 SwiftData 저장소에 있는 별도
+    /// 컬렉션이라, `isCurrentPositionBookmarked`(아래) 같은 계산 프로퍼티만으로는
+    /// 토글 직후 뷰가 다시 그려질 이유가 없다 — `SearchResultsPopRequest.swift`와
+    /// 같은 "이벤트 발생 여부만 전달" 카운터 패턴을 그대로 따라, 이 값을 읽게
+    /// 해서 토글할 때마다 관찰 대상이 바뀌었다는 신호를 준다.
+    private(set) var bookmarkVersion = 0
+
+    /// 지금 위치(장, 또는 정확히 절 하나를 선택 중이면 그 절)가 이미 책갈피로
+    /// 설정돼 있는지. 툴바의 책갈피 아이콘이 "설정"/"해제" 중 어느 모양으로
+    /// 보일지 이 값으로 결정한다.
+    var isCurrentPositionBookmarked: Bool {
+        _ = bookmarkVersion
+        return BibleBookmarkService.isBookmarked(
+            bookId: selectedBook.bookId, chapter: selectedChapter,
+            verse: selectedVerses.count == 1 ? selectedVerses.first : nil,
+            context: modelContext
+        )
+    }
+
+    /// 툴바의 책갈피 아이콘 탭 — 지금 위치를 기준으로 설정/해제를 토글한다.
+    func toggleBookmarkForCurrentPosition() {
+        BibleBookmarkService.toggle(
+            bookId: selectedBook.bookId, chapter: selectedChapter,
+            verse: selectedVerses.count == 1 ? selectedVerses.first : nil,
+            context: modelContext
+        )
+        bookmarkVersion += 1
+    }
+
+    /// 책갈피 이동 팝오버가 열릴 때마다 새로 불러온다(히스토리 시트와 같은
+    /// 이유 — 다른 창에서 쌓인 책갈피까지 반영되도록 캐싱하지 않는다).
+    func fetchBookmarks() -> [BibleBookmark] {
+        BibleBookmarkService.fetchAll(context: modelContext)
+    }
+
+    /// 책갈피 목록에서 항목을 탭했을 때 그 책/장(+있으면 절)으로 이동한다.
+    /// `jumpToHistoryEntry`와 달리 `recordHistory: false`를 넘긴다 — 사용자가
+    /// 명시적으로 "히스토리 이력 제외"를 요청했다. 절이 있으면 확대보기/사이드바
+    /// 최근 이력 탭과 같은 방식(`highlightVerseTemporarily`)으로 잠깐 강조만
+    /// 하고, `selectedVerses`(책갈피 대상 판정에 쓰는 "선택" 상태)는 건드리지
+    /// 않는다 — `selectBook`이 이동 시점에 이미 그 값을 비운다.
+    func navigateToBookmark(_ bookmark: BibleBookmark) {
+        guard let book = booksProvider.book(id: bookmark.bookId) else { return }
+        selectBook(book, chapter: bookmark.chapter, recordHistory: false)
+        if let verse = bookmark.verse {
+            highlightVerseTemporarily(verse)
+        }
     }
 
     // MARK: - 클립보드 복사용 절 선택 (2026-08-08 추가)
@@ -912,7 +990,21 @@ final class BibleReadingViewModel {
     // 검증하고 싶을 때 재사용할 수 있다.
 
     private func reloadVerses() {
-        let displayed = availableTranslations.filter { displayedTranslationIDs.contains($0.persistentModelID) }
+        // [2026-08-27 수정] 사용자 보고 — "개역한글을 밑으로 떨궈도 항상
+        // 왼쪽에 있음." 원인: 여기서 `.filter`를 쓰면 결과 순서가 필터링
+        // 대상인 `availableTranslations`(등록 순, `addedAt` 오름차순)의
+        // 순서를 그대로 물려받는다 — `displayedTranslationIDs`가 아무리
+        // 올바른 순서로 채워져 있어도(설정 화면에서 위/아래로 옮긴 순서),
+        // 실제 컬럼을 만드는 이 지점에서 그 순서 정보가 완전히 버려지고
+        // 있었다. 번들 번역본(개역한글)은 항상 가장 먼저 등록되므로
+        // `availableTranslations`에서 항상 맨 앞이라, 결과적으로 설정에서
+        // 아무리 순서를 바꿔도 화면에서는 늘 맨 왼쪽에 고정돼 있었던 것.
+        // `displayedTranslationIDs`를 기준으로 순서대로 매핑하도록 바꿔
+        // 그 배열의 순서가 곧 컬럼 순서가 되게 한다(설정 화면 쪽
+        // `orderedDisplayedTranslations`가 이미 쓰던 것과 같은 패턴 —
+        // 순서 있는 키 배열을 딕셔너리로 매핑).
+        let byID = Dictionary(uniqueKeysWithValues: availableTranslations.map { ($0.persistentModelID, $0) })
+        let displayed = displayedTranslationIDs.compactMap { byID[$0] }
         columns = displayed.map { registry in
             let columnID = columnIDsByRegistry[registry.persistentModelID] ?? {
                 let newID = UUID()

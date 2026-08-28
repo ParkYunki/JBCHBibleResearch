@@ -59,6 +59,21 @@ struct TranslationColumnView: View {
     /// screens.md 5장 — "절 클릭 → 컨텍스트 메뉴 → 메모 작성(S3, 정확한 좌표 미리
     /// 채워짐)". 2026-08-06 추가.
     var onCreateMemo: (BibleVerse) -> Void = { _ in }
+    /// [2026-08-26 신설] 사용자 요청 — "iOS 성경 구절 길게 프레스/맥OS 마우스
+    /// 오른쪽버튼 → [복사] 메뉴 추가 - 해당 번역본만 복사." 아래 `.contextMenu`가
+    /// 넘기는 `verse`가 이미 "이 컬럼(번역본) 하나"의 절 내용이므로(이 뷰의
+    /// `verses` 자체가 번역본별로 갈라져 상위에서 내려온다), 하단 액션바의
+    /// 다중 절/다중 번역본 복사(`BibleReadingView.copySelectedVerses`)와 달리
+    /// 이 클로저는 "절 하나 + 번역본 이름 하나"만 넘긴다 — 실제 포매팅
+    /// (`BibleVerseCopyFormatter`)과 클립보드 접근, 토스트 표시는 book/chapter를
+    /// 알고 있는 호출부(`BibleReadingView`)의 책임이다.
+    var onCopySingleTranslation: (BibleVerse, String) -> Void = { _, _ in }
+    /// [2026-08-26 신설] 사용자 요청 — "iOS 성경 구절 길게 프레스/맥OS 마우스
+    /// 오른쪽버튼 → [선택] 메뉴 추가 - 일부 텍스트를 선택하여 복사할 수 있는
+    /// 기능." 위 `onCopySingleTranslation`과 같은 원칙으로 "절 하나 + 번역본
+    /// 이름 하나"만 넘기고, 실제 팝오버 표시는 호출부(`BibleReadingView`)의
+    /// 책임이다(`VerseTextSelectionPopover` 참고).
+    var onSelectPartialText: (BibleVerse, String) -> Void = { _, _ in }
     /// [2026-08-08 추가] 클립보드 복사용 다중 선택 — 절 번호 기준으로 컬럼(번역본)
     /// 여러 개에 걸쳐 공유되는 선택 상태다(같은 절 번호는 어느 컬럼에서도 같은
     /// "절"을 가리키므로). `BibleReadingViewModel.selectedVerses` 참고.
@@ -257,6 +272,28 @@ struct TranslationColumnView: View {
                                 // 경로라 동일하게 이름을 맞춘다.
                                 // [2026-08-12 변경] "개인 주석" → "개인 묵상".
                                 Label("개인 묵상 작성", systemImage: "square.and.pencil")
+                            }
+                            // [2026-08-26 신설] 사용자 요청 — iOS 길게 프레스/
+                            // macOS 오른쪽버튼 메뉴에 [선택] 추가("일부 텍스트를
+                            // 선택하여 복사할 수 있는 기능"). [복사](바로 아래)가
+                            // "번역본 전체"라면, 이건 "그 안에서 일부만" —
+                            // `VerseTextSelectionPopover`(호출부가 여는 작은
+                            // 팝오버/시트)에서 실제 드래그 선택이 이뤄진다.
+                            Button {
+                                onSelectPartialText(verse, translationDisplayName)
+                            } label: {
+                                Label("선택", systemImage: "character.cursor.ibeam")
+                            }
+                            // [2026-08-26 신설] 사용자 요청 — iOS 길게 프레스/
+                            // macOS 오른쪽버튼 메뉴에 [복사] 추가("해당 번역본만
+                            // 복사 -> 클릭하면 toast 메세지"). 위 `onCopySingleTranslation`
+                            // 상단 주석 참고 — 이 컬럼의 `translationDisplayName`과
+                            // 지금 행의 `verse`(이 번역본만의 내용)를 그대로
+                            // 넘긴다.
+                            Button {
+                                onCopySingleTranslation(verse, translationDisplayName)
+                            } label: {
+                                Label("복사", systemImage: "doc.on.doc")
                             }
                         }
                 }

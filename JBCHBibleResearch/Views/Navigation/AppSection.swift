@@ -55,12 +55,18 @@ enum AppSection: String, CaseIterable, Identifiable, Hashable {
     }
 
     /// [2026-08-08 추가] PhoneTabView.swift(iPhone 탭바)가 직접 탭으로 노출하는
-    /// 섹션만 모은 목록 — `.search`/`.tagRelations`는 탭바에 자리가 없다("더보기"
-    /// 후보, 아직 미확정). `@FocusedValue(\.selectSection)`으로 들어온 값이 탭바에
+    /// 섹션만 모은 목록 — `.tagRelations`는 탭바에 자리가 없다("더보기" 안
+    /// 전체화면 모달). `@FocusedValue(\.selectSection)`으로 들어온 값이 탭바에
     /// 없는 섹션이면 무시해야 하므로 그 판별에 쓴다.
     // [2026-08-13 변경] "개인 묵상"+"말씀 요약" 탭 통합 — `.wordNote` 하나로 대체.
+    // [2026-08-27 변경, 사용자 결정 — "개요→더보기, 검색→탭바"] `SearchView.swift`
+    // 상단 주석 참고 — 통합 검색이 "더보기" 서브메뉴에 중첩돼 있으면 검색이
+    // "활성" 상태인 채로 그 자리에서 성경구절로 push하는 조합이 구조적으로
+    // 깨진다는 걸 여러 차례 실기기 로그로 확인해, 검색을 이 탭바의 정식 탭으로
+    // 승격하고 개요는 대신 "더보기" 안 전체화면 모달로 옮겼다(`PlaceholderScreens.swift`
+    // 참고) — `.outline`은 이제 탭바 항목이 아니므로 이 목록에서 뺀다.
     static var phoneTabBarSections: Set<AppSection> {
-        [.wordNote, .bibleReading, .documents, .outline]
+        [.wordNote, .bibleReading, .documents, .search]
     }
 
     /// [2026-08-18 추가, 같은 날 검색창 이관으로 갱신] 사이드바(`SidebarNavigationView`)
