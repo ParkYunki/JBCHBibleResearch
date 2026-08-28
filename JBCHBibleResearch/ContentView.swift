@@ -20,6 +20,15 @@ struct ContentView: View {
 
     var body: some View {
         RootView()
+            // [2026-08-28 추가] 사용자 요청 — "처음 설치하시는 사람을 위한
+            // 가이드 화면이 필요함." 앱 최초 실행 시 1회, 5페이지 안내 카루셀을
+            // 보여준다 — AppOnboardingOverlay.swift 참고. `.bibleIndexOnboarding()`
+            // 보다 먼저 배치해 "앱 소개 → (필요 시) 색인 안내" 순서로 자연스럽게
+            // 읽히게 했다 — 다만 두 `.task`는 각각 독립적으로 실행되므로, 실제
+            // 기기에서 두 시트가 동시에 뜨려고 경합할 가능성은 남아 있다(코드
+            // 순서만으로 이 경합을 막지는 못한다 — 아래 `.bibleIndexOnboarding()`
+            // 주석 및 사용자에게 보고할 확인 사항 참고).
+            .appOnboarding()
             // [2026-08-19 추가] 사용자 요청 — "앱을 설치할 때, 처음 시작할 때
             // 색인을 자동으로 설치하면 안되는가?" 최초 실행(또는 아직 색인이
             // 없는 실행) 1회, 성경 전체 임베딩 색인을 자동으로 시작하고 진행
@@ -28,6 +37,12 @@ struct ContentView: View {
             // 동작한다(서로 순서 의존성 없음 — 색인은 번들 DB를 직접 열어
             // 읽지 SwiftData 부트스트랩 결과를 필요로 하지 않는다).
             .bibleIndexOnboarding()
+            // [2026-08-28 추가] 사용자 요청 — "업데이트 할때마다 어떤 것을
+            // 업데이트 했는지 소개해주는 화면 필요함. 처음 설치하는 사람에게는
+            // 필요하지 않음." `hasCompletedOnboarding`이 true인 기존 설치에서만,
+            // 버전이 바뀌었을 때 해당 버전의 `WhatsNewContent` 항목을 보여준다 —
+            // WhatsNewOverlay.swift 참고.
+            .whatsNewOverlay()
             .task {
                 do {
                     try TranslationBootstrap.ensureBundledTranslationRegistered(in: modelContext)

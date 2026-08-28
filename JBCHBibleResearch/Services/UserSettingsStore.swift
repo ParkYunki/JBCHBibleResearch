@@ -36,6 +36,15 @@ final class UserSettingsStore {
         // 뒤엔(완료/취소 여부와 무관하게) 앱을 켤 때마다 다시 뜨지 않게 막는
         // 용도. `BibleIndexOnboardingOverlay.swift` 참고.
         static let hasOfferedBibleIndexOnboarding = "settings.hasOfferedBibleIndexOnboarding"
+        // [2026-08-28 추가] 사용자 요청 — "처음 설치하시는 사람을 위한 가이드
+        // 화면"과 "업데이트 시 무엇이 바뀌었는지 소개하는 화면"을 구분하기 위한
+        // 플래그 두 개. `hasCompletedOnboarding`은 `AppOnboardingOverlay.swift`의
+        // 첫 실행 가이드 카루셀을 한 번만 보여주기 위한 완료 플래그 —
+        // `hasOfferedBibleIndexOnboarding`과 같은 1회성 패턴. `lastSeenAppVersion`은
+        // `WhatsNewOverlay.swift`가 "이번 버전의 새 소식을 이미 봤는지"를 판단하는
+        // 데 쓰는, 마지막으로 본 `CFBundleShortVersionString` 값이다.
+        static let hasCompletedOnboarding = "settings.hasCompletedOnboarding"
+        static let lastSeenAppVersion = "settings.lastSeenAppVersion"
         static let defaultTranslationCode = "settings.defaultTranslationCode"
         static let defaultDisplayedTranslationCodes = "settings.defaultDisplayedTranslationCodes"
         static let lastManualSyncAt = "settings.lastManualSyncAt"
@@ -217,6 +226,25 @@ final class UserSettingsStore {
     /// 또 띄울지"만 결정한다.
     var hasOfferedBibleIndexOnboarding: Bool {
         didSet { defaults.set(hasOfferedBibleIndexOnboarding, forKey: Key.hasOfferedBibleIndexOnboarding) }
+    }
+
+    /// [2026-08-28 추가] `AppOnboardingOverlay.swift`가 앱 첫 실행 시 5페이지
+    /// 가이드 카루셀을 딱 한 번만 보여주도록 막는 완료 플래그. 버튼으로 끝까지
+    /// 넘기든 스와이프로 시트를 내리든(`onDismiss`에서 처리) 상관없이 true로
+    /// 바뀐다. 이 값이 true가 되는 순간 `lastSeenAppVersion`도 현재 버전으로
+    /// 같이 기록해, 방금 설치를 마친 사람에게 "새 소식" 화면이 곧바로 뜨지
+    /// 않도록 한다(`WhatsNewOverlay.swift` 참고).
+    var hasCompletedOnboarding: Bool {
+        didSet { defaults.set(hasCompletedOnboarding, forKey: Key.hasCompletedOnboarding) }
+    }
+
+    /// [2026-08-28 추가] `WhatsNewOverlay.swift`가 마지막으로 "새 소식" 화면을
+    /// 보여준 시점의 앱 버전(`CFBundleShortVersionString`). 앱 실행 시 이 값과
+    /// 현재 버전이 다르면(그리고 `hasCompletedOnboarding`이 true이면) 해당 버전의
+    /// `WhatsNewContent` 항목을 찾아 보여주고, 보여준 뒤 현재 버전으로 갱신한다.
+    /// 아직 한 번도 기록된 적 없으면(신규 설치) nil.
+    var lastSeenAppVersion: String? {
+        didSet { defaults.set(lastSeenAppVersion, forKey: Key.lastSeenAppVersion) }
     }
 
     /// 8.1 "기본 성경 번역본" 피커. `TranslationRegistry.code`를 저장한다 — S1이
@@ -431,6 +459,8 @@ final class UserSettingsStore {
         self.colorSchemePreference = (defaults.string(forKey: Key.colorSchemePreference)).flatMap(ColorSchemePreference.init) ?? .system
         self.isAIChapterDraftEnabled = defaults.object(forKey: Key.aiChapterDraftEnabled) as? Bool ?? true
         self.hasOfferedBibleIndexOnboarding = defaults.object(forKey: Key.hasOfferedBibleIndexOnboarding) as? Bool ?? false
+        self.hasCompletedOnboarding = defaults.object(forKey: Key.hasCompletedOnboarding) as? Bool ?? false
+        self.lastSeenAppVersion = defaults.string(forKey: Key.lastSeenAppVersion)
         self.defaultTranslationCode = defaults.string(forKey: Key.defaultTranslationCode)
         self.defaultDisplayedTranslationCodes = defaults.stringArray(forKey: Key.defaultDisplayedTranslationCodes) ?? []
         self.lastManualSyncAt = defaults.object(forKey: Key.lastManualSyncAt) as? Date
