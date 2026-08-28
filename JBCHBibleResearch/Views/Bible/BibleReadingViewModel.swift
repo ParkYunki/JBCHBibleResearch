@@ -643,6 +643,20 @@ final class BibleReadingViewModel {
         BibleBookmarkService.fetchAll(context: modelContext)
     }
 
+    /// [2026-08-28 신설] 사용자 요청 — "책갈피 팝업과 그 항목들을 UI/UX 전문가
+    /// 관점에서 디자인을 변경할 것"에 따라 `BookmarkListPopover`에 스와이프
+    /// 삭제를 추가하며 필요해졌다 — 지금까지는 그 위치로 다시 이동해 툴바의
+    /// 토글 아이콘을 눌러야만 지울 수 있었다. `bookmark`가 이미 존재하는
+    /// 정확한 book/chapter/verse 조합이므로 `BibleBookmarkService.toggle`을
+    /// 그대로 재사용해도 항상 "삭제"만 일어난다(같은 조합이 이미 있으면
+    /// 지우는 쪽으로 분기하는 게 그 메서드의 규칙). 삭제한 책갈피가 마침
+    /// 지금 위치와 같으면 툴바 아이콘도 "미설정"으로 바뀌어야 하므로
+    /// `bookmarkVersion`도 함께 올린다.
+    func deleteBookmark(_ bookmark: BibleBookmark) {
+        BibleBookmarkService.toggle(bookId: bookmark.bookId, chapter: bookmark.chapter, verse: bookmark.verse, context: modelContext)
+        bookmarkVersion += 1
+    }
+
     /// 책갈피 목록에서 항목을 탭했을 때 그 책/장(+있으면 절)으로 이동한다.
     /// `jumpToHistoryEntry`와 달리 `recordHistory: false`를 넘긴다 — 사용자가
     /// 명시적으로 "히스토리 이력 제외"를 요청했다. 절이 있으면 확대보기/사이드바

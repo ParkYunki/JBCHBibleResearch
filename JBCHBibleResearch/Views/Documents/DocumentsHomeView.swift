@@ -678,7 +678,13 @@ struct DocumentsHomeView: View {
             Text(allowsDragAndDrop ? "드래그해서 파일을 놓거나 클릭해서 업로드" : "탭해서 업로드")
                 .font(.callout)
                 .foregroundStyle(.secondary)
-            Text(allowsHWP ? "hwp · hwpx · doc · pdf · 이미지" : "doc · pdf · 이미지 (아이폰은 hwp 업로드 미지원)")
+            // [2026-08-28 수정, 아이폰도 동일하게 적용] 사용자 요청 —
+            // "macOS 연구문서 업로드 영역에 doc 문구 삭제" → 이어서 "동일하게
+            // 수정"(아이폰 쪽도 빼 달라는 확인). `.doc`/`.docx` 업로드는 이미
+            // 2026-08-25에 막았는데(`DocumentUploadService.supportedContentTypes
+            // (allowHWP:)` 상단 주석 참고) 이 안내 문구는 그때 갱신되지 않아
+            // "doc"이 여전히 지원 형식인 것처럼 보였다 — 두 분기 모두에서 뺀다.
+            Text(allowsHWP ? "hwp · hwpx · pdf · 이미지" : "pdf · 이미지 (아이폰은 hwp 업로드 미지원)")
                 .font(.caption2)
                 .foregroundStyle(.tertiary)
         }
