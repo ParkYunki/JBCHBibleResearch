@@ -158,9 +158,16 @@ struct OriginalTextInfoView: View {
                 // 정상적으로 그려지는 것을 스크린샷으로 확인했으므로, 안
                 // 그려지던 `.primaryAction`/`.topBarTrailing` 대신 같은
                 // `.confirmationAction`을 쓴다.
+                // [2026-08-29 3차 수정] 사용자 요청 — "좌우 화살표 대신 메모하기
+                // 아이콘과, 원어 정보 아이콘으로 각각 대치할 것." 화살표 대신,
+                // "메모하기"가 성경 조회 하단 액션바에서 이미 쓰는 아이콘
+                // (`BibleReadingView.swift`의 `Label("메모하기", systemImage:
+                // "arrow.up.left.and.arrow.down.right")`)과 똑같은 걸 써서 —
+                // 이 버튼을 누르면 "메모하기"로 간다는 것을 아이콘만 보고도
+                // 알 수 있게 했다.
                 ToolbarItem(placement: .confirmationAction) {
                     Button(action: onSwitchToMemo) {
-                        Image(systemName: "arrow.left.circle")
+                        Image(systemName: "arrow.up.left.and.arrow.down.right")
                     }
                     .help("메모하기로 전환")
                 }

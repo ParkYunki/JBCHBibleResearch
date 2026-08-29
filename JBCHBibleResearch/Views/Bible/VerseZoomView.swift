@@ -413,9 +413,15 @@ struct VerseZoomView: View {
                 // 토글과 같은 `.confirmationAction` 그룹에 놓아, 실제로
                 // 화면 아래 버튼줄에 그려지는 것이 스크린샷으로 확인된
                 // 자리(닫기 오른쪽, 펜/눈동자 옆)에 나란히 보이게 한다.
+                // [2026-08-29 3차 수정] 사용자 요청 — "좌우 화살표 대신 메모하기
+                // 아이콘과, 원어 정보 아이콘으로 각각 대치할 것." 화살표 대신,
+                // "원문 정보"가 성경 조회 하단 액션바에서 이미 쓰는 아이콘
+                // (`BibleReadingView.swift`의 `Label("원문 정보", systemImage:
+                // "character.book.closed")`)과 똑같은 걸 써서 — 이 버튼을 누르면
+                // "원문 정보"로 간다는 것을 아이콘만 보고도 알 수 있게 했다.
                 ToolbarItem(placement: .confirmationAction) {
                     Button(action: onSwitchToOriginalTextInfo) {
-                        Image(systemName: "arrow.right.circle")
+                        Image(systemName: "character.book.closed")
                     }
                     .help("원문 정보로 전환")
                 }

@@ -32,5 +32,21 @@
 	     통째로 빠져 있었던 게 rhwp 웹 뷰어가 계속 크래시한 근본 원인으로 보인다. -->
 	<key>com.apple.security.network.client</key>
 	<true/>
+	<!-- [2026-08-29 추가] 크래시 로그로 확인 — "개요 시딩 파일 내보내기"(설정 >
+	     개발자 탭, `SettingsView.swift`의 `.fileExporter`)를 눌렀을 때
+	     `NSSavePanel init` → `REPORT_APP_ENTITLEMENTS_INSUFFICIENT`로 즉시
+	     크래시했다. App Sandbox 아래에서는 AppKit/SwiftUI가 표준 열기/저장
+	     패널(NSOpenPanel/NSSavePanel, `.fileImporter`/`.fileExporter`가 내부적으로
+	     쓰는 것과 동일)을 띄우려면 Apple 공식 문서가 요구하는 "User Selected
+	     File" 엔타이틀먼트가 반드시 있어야 한다 — 이 파일엔 그 키 자체가 아예
+	     없었다. `.read-write`를 쓴 이유: 이 앱은 저장(`.fileExporter`, 이번
+	     크래시)뿐 아니라 열기(`.fileImporter` — 연구문서 업로드
+	     `DocumentsHomeView.swift`, 번역본 sqlite 가져오기
+	     `TranslationImportSheet.swift`)도 쓰므로 읽기 전용으로는 부족하다 —
+	     이 키가 없으면 세 진입점 모두 macOS에서 똑같이 크래시할 것으로 보인다
+	     (아직 보고되지 않은 것은 사용자가 macOS에서 그 경로들을 아직 안
+	     눌러봤기 때문일 수 있다 — 추측이므로 실기기에서 함께 확인 바람). -->
+	<key>com.apple.security.files.user-selected.read-write</key>
+	<true/>
 </dict>
 </plist>

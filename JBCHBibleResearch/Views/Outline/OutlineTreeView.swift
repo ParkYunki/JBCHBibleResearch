@@ -309,11 +309,24 @@ private struct OutlineTreeList: View {
     }
 
     var body: some View {
+        // [2026-08-29 성능 수정] 사용자 보고 — "개요 등록 수가 많아 지면
+        // 많아질수록 느려짐." 원인: 바로 아래 `booksWithContent`/
+        // `chaptersWithContent`는 계산 프로퍼티인데, 지금까지 책 행마다
+        // (`rowView`의 `.book` 케이스)·장 칩마다(`chapterChip`) 각각 따로
+        // 접근해 왔다 — 즉 화면에 펼쳐진 책 수·장 칩 수만큼
+        // `bookOutlines`/`chapterSummaries` 전체를 매번 처음부터 다시
+        // 스캔한 것이다(예: 66권을 다 펼치면 장 칩 약 1,189개 × 매번
+        // 최대 1,189개 스캔 = 렌더 한 번에 백만 단위 연산). 계산 로직
+        // 자체(두 프로퍼티의 정의)는 전혀 바꾸지 않고, 이 화면을 그리는
+        // 동안 딱 한 번만 계산해 아래로 넘겨 재사용하도록 "계산 시점"만
+        // 바꾼다.
+        let booksWithContent = self.booksWithContent
+        let chaptersWithContent = self.chaptersWithContent
         VStack(spacing: 0) {
             searchField
             Divider()
             List(rows) { row in
-                rowView(row)
+                rowView(row, booksWithContent: booksWithContent, chaptersWithContent: chaptersWithContent)
             }
             .listStyle(.plain)
         }
@@ -377,7 +390,7 @@ private struct OutlineTreeList: View {
     }
 
     @ViewBuilder
-    private func rowView(_ row: OutlineTreeRow) -> some View {
+    private func rowView(_ row: OutlineTreeRow, booksWithContent: Set<Int>, chaptersWithContent: Set<Int>) -> some View {
         switch row {
         case .testamentHeader(let testament):
             HStack(spacing: 6) {
@@ -424,7 +437,7 @@ private struct OutlineTreeList: View {
             .padding(.vertical, 6)
 
         case .chapterGrid(let book):
-            chapterChipGrid(book)
+            chapterChipGrid(book, chaptersWithContent: chaptersWithContent)
                 .padding(.leading, 34)
                 .padding(.vertical, 8)
         }
@@ -435,20 +448,20 @@ private struct OutlineTreeList: View {
     /// `LazyVGrid(.adaptive(...))`를 쓴 이유: 칩 크기가 고정(30pt)이라 adaptive
     /// 컬럼이 흐름 레이아웃과 시각적으로 동일하게 줄바꿈되면서, 커스텀 `Layout`
     /// 구현 없이 훨씬 적은 코드로 같은 결과를 낸다.
-    private func chapterChipGrid(_ book: Book) -> some View {
+    private func chapterChipGrid(_ book: Book, chaptersWithContent: Set<Int>) -> some View {
         LazyVGrid(
             columns: [GridItem(.adaptive(minimum: 32, maximum: 32), spacing: 6)],
             alignment: .leading,
             spacing: 6
         ) {
             ForEach(1...max(book.chapterCount, 1), id: \.self) { chapter in
-                chapterChip(book: book, chapter: chapter)
+                chapterChip(book: book, chapter: chapter, chaptersWithContent: chaptersWithContent)
             }
         }
     }
 
     @ViewBuilder
-    private func chapterChip(book: Book, chapter: Int) -> some View {
+    private func chapterChip(book: Book, chapter: Int, chaptersWithContent: Set<Int>) -> some View {
         let hasContent = chaptersWithContent.contains(book.bookId * 1000 + chapter)
         if isPhoneLayout {
             // [2026-08-26 시도, 2026-08-27 재시도 끝에 최종 구조로 교체]
