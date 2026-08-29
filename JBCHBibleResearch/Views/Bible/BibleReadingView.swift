@@ -319,6 +319,15 @@ private struct BibleReadingContentView: View {
     /// 켠다. 원문은 번역본과 무관하게 book/chapter/verse에만 종속되므로(구절
     /// 확대보기와 달리) 별도의 열 선택 상태가 필요 없다.
     @State private var isOriginalTextInfoPresented = false
+    /// [2026-08-28 신설] 사용자 요청 — "[메모하기]-[원문정보] 각 레이어창 마다
+    /// 쉽게 오갈 수 있도록 화살표라든지 기능을 추가할 것." 두 시트는 같은
+    /// 화면에서 동시에 열 수 없으므로(`pendingPhraseMemo`와 같은 이유), "메모
+    /// 하기 → 원문 정보"로 전환할 때 이 값을 true로 세우고 메모하기 시트를
+    /// 닫은 뒤, 그 `onDismiss`에서 이 값을 보고 원문 정보 시트를 연다.
+    @State private var pendingSwitchToOriginalTextInfo = false
+    /// 반대 방향("원문 정보 → 메모하기") 전환용 — 원문 정보 시트가 완전히
+    /// 닫힌 뒤 이어서 메모하기(구절 확대보기) 시트를 연다.
+    @State private var pendingSwitchToVerseZoom = false
     /// [2026-08-12 추가] 사용자 요청 — "성경 구절 선택시 확대보기 오른쪽 옆
     /// [말씀 요약]버튼 ... 기존 [관련 내용] 인스펙터 자리를 재사용하되 필기가
     /// 용이하도록 넓게." nil이 아니면 그 값이 곧 "지금 인스펙터에 말씀 요약
@@ -1269,7 +1278,7 @@ private struct BibleReadingContentView: View {
                     Button {
                         openVerseZoom()
                     } label: {
-                        Label("확대보기", systemImage: "arrow.up.left.and.arrow.down.right")
+                        Label("메모하기", systemImage: "arrow.up.left.and.arrow.down.right")
                     }
                     #if os(iOS)
                     .modifier(ActionBarCircularIconModifier(isNarrow: isNarrowBottomBarLayout, isProminent: false))
@@ -1307,7 +1316,7 @@ private struct BibleReadingContentView: View {
                     Button {
                         openVerseZoom()
                     } label: {
-                        Label("확대보기", systemImage: "arrow.up.left.and.arrow.down.right")
+                        Label("메모하기", systemImage: "arrow.up.left.and.arrow.down.right")
                     }
                     #if os(iOS)
                     .modifier(ActionBarCircularIconModifier(isNarrow: isNarrowBottomBarLayout, isProminent: false))
@@ -1381,22 +1390,47 @@ private struct BibleReadingContentView: View {
                 pendingPhraseMemo = nil
                 memoBeingCreated = memo
             }
+            // [2026-08-28 신설] "메모하기 → 원문 정보" 전환 — 위
+            // `pendingSwitchToOriginalTextInfo` 상단 주석 참고.
+            if pendingSwitchToOriginalTextInfo {
+                pendingSwitchToOriginalTextInfo = false
+                isOriginalTextInfoPresented = true
+            }
         }) {
             if let verseNumber = viewModel.selectedVerses.first {
                 VerseZoomView(
                     verseNumber: verseNumber, columns: viewModel.columns, viewModel: viewModel,
                     onOpenPhraseMemo: { memo in pendingPhraseMemo = memo },
                     onJumpToCrossReference: jumpToCrossReferenceTarget,
-                    onSelectVerseMention: handleVerseMentionSelected
+                    onSelectVerseMention: handleVerseMentionSelected,
+                    onSwitchToOriginalTextInfo: {
+                        pendingSwitchToOriginalTextInfo = true
+                        isVerseZoomPresented = false
+                    }
                 )
             }
         }
-        .sheet(isPresented: $isOriginalTextInfoPresented) {
+        .sheet(isPresented: $isOriginalTextInfoPresented, onDismiss: {
+            // [2026-08-28 신설] "원문 정보 → 메모하기" 전환 — 위
+            // `pendingSwitchToVerseZoom` 상단 주석 참고. `openVerseZoom()`을
+            // 그대로 재사용해, 이 전환으로 열리는 경우에도 다른 진입 경로와
+            // 똑같이 조회 이력에 남게 한다(`openVerseZoom()` 상단 주석 —
+            // "시트를 여는 것과 이력 기록을 항상 같이 하게 해서, 나중에
+            // 버튼이 더 늘어나도 기록이 누락되지 않게 한다").
+            if pendingSwitchToVerseZoom {
+                pendingSwitchToVerseZoom = false
+                openVerseZoom()
+            }
+        }) {
             if let verseNumber = viewModel.selectedVerses.first {
                 OriginalTextInfoView(
                     bookId: viewModel.selectedBook.bookId,
                     chapter: viewModel.selectedChapter,
-                    verseNumber: verseNumber
+                    verseNumber: verseNumber,
+                    onSwitchToMemo: {
+                        pendingSwitchToVerseZoom = true
+                        isOriginalTextInfoPresented = false
+                    }
                 )
             }
         }

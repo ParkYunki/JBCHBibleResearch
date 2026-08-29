@@ -1082,6 +1082,13 @@ import UniformTypeIdentifiers
 
 private struct DeveloperSettingsTab: View {
     @Environment(\.modelContext) private var modelContext
+    /// [2026-08-29 신설] "온보딩 다시 보기" 버튼용 — 아이패드처럼 이 화면 자체가
+    /// `.sheet`(SettingsHostView, SidebarNavigationView 참고)로 떠 있는 경우
+    /// 그 시트부터 닫아야, 같은 RootView가 곧이어 온보딩 시트를 새로 띄울 수
+    /// 있다(SwiftUI는 같은 뷰가 시트 두 개를 동시에 띄우지 못한다). macOS의
+    /// `Settings` Scene(별도 창)이나 아이폰의 `NavigationLink` 진입(시트 아님)
+    /// 에서는 `dismiss()`가 그 창/화면을 닫을 뿐이라 무해하다.
+    @Environment(\.dismiss) private var dismiss
     @State private var exportDocument: OutlineSeedJSONDocument?
     @State private var isExporterPresented = false
     @State private var lastExportSummary: OutlineSeedExporter.Summary?
@@ -1147,6 +1154,27 @@ private struct DeveloperSettingsTab: View {
                 Label("개요 시딩", systemImage: "text.book.closed")
             } footer: {
                 Text("내보낸 파일을 Resources/OutlineSeed.json에 덮어쓰고 Xcode Copy Bundle Resources에 등록하면(최초 1회만 필요) 신규 사용자 DB에 기본값으로 채워집니다. 이 탭 자체는 배포 빌드에서 빠집니다.")
+            }
+
+            // [2026-08-29 신설] 사용자 요청 — "온보딩 메세지가 한번봤기 때문에
+            // 안보이는데 개발자모드에서는 볼 수 있도록 하게 해줘." 이 기기에서
+            // 이미 온보딩을 완료해 `hasCompletedOnboarding`이 true가 된 뒤에도,
+            // 개발자가 카루셀 내용(문구/디자인)을 다시 확인할 수 있게 한다.
+            // `AppOnboardingReplayRequest`(AppOnboardingOverlay.swift)에 신호만
+            // 보내고, 실제로 시트를 여는 것은 그 신호를 관찰하는
+            // `AppOnboardingPresenter`(ContentView가 붙인 `.appOnboarding()`)의
+            // 몫이다 — 이 화면 자신은 온보딩 뷰를 직접 열지 않는다.
+            Section {
+                Button {
+                    dismiss()
+                    AppOnboardingReplayRequest.shared.requestReplay()
+                } label: {
+                    Label("온보딩 다시 보기", systemImage: "sparkles")
+                }
+            } header: {
+                Label("온보딩 미리보기", systemImage: "sparkles")
+            } footer: {
+                Text("완료 플래그(hasCompletedOnboarding)와 마지막 확인 버전(lastSeenAppVersion)은 건드리지 않습니다 — 내용만 미리 봅니다. 이 화면이 시트로 떠 있는 경우(아이패드) 먼저 닫힌 뒤 온보딩이 뜹니다.")
             }
 
             Section {

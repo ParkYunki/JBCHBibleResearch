@@ -30,6 +30,34 @@
 //
 
 import SwiftUI
+#if DEBUG
+import Observation
+#endif
+
+#if DEBUG
+/// [2026-08-29 신설] 사용자 요청 — "온보딩 메세지가 한번봤기 때문에 안보이는데
+/// 개발자모드에서는 볼 수 있도록 하게 해줘." 설정 화면의 "개발자" 탭
+/// (`SettingsView.swift`, 마찬가지로 DEBUG 빌드 전용)이 이 값을 증가시키면
+/// `AppOnboardingPresenter`가 `hasCompletedOnboarding` 값과 무관하게 온보딩
+/// 카루셀을 다시 띄운다. `SearchResultsPopRequest`(Services/SearchResultsPopRequest.swift)
+/// 와 같은 "이벤트가 일어났다" 증가 카운터 싱글턴 패턴을 그대로 따랐다 — 값
+/// 자체엔 의미가 없고 매번 바뀐다는 사실만 `.onChange`가 감지하면 된다. DEBUG
+/// 빌드에서만 존재하므로 배포 빌드엔 이 타입 자체가 포함되지 않는다.
+@MainActor
+@Observable
+final class AppOnboardingReplayRequest {
+    static let shared = AppOnboardingReplayRequest()
+
+    private(set) var token: Int = 0
+
+    private init() {}
+
+    /// "개발자" 탭의 "온보딩 다시 보기" 버튼이 호출한다.
+    func requestReplay() {
+        token += 1
+    }
+}
+#endif
 
 private struct OnboardingPage {
     let icon: String
@@ -49,13 +77,19 @@ private let onboardingPages: [OnboardingPage] = [
         icon: "book",
         gradientColors: [.indigo, .blue],
         title: "성경 조회",
-        description: "여러 번역본을 나란히 놓고 비교하며 읽고, 구절을 탭해 확대보기·메모·말씀 요약으로 이어갈 수 있습니다."
+        description: "여러 번역본을 나란히 놓고 비교하며 읽고, 구절을 탭해 메모·말씀 요약으로 이어갈 수 있습니다."
     ),
+    // [2026-08-29 수정] 사용자 요청 — "현재는 DB구축이 완료되지 않았으므로
+    // 인물, 지명, 예언, AI 의미검색을 지원하지 않음." 실제 화면(SearchView)엔
+    // 이 기능들의 UI/의도 카드가 이미 있지만, 그 뒤에서 조회하는 데이터셋
+    // (인물/지명/예언 인덱스, 임베딩 색인)이 아직 다 채워지지 않아 온보딩에서
+    // 미리 홍보하면 첫 사용자에게 실망을 줄 수 있다 — 지금 실제로 안정적으로
+    // 동작하는 범위(성경구절/메모/연구문서 검색)만 소개한다.
     OnboardingPage(
         icon: "magnifyingglass",
         gradientColors: [.purple, .pink],
         title: "통합 검색",
-        description: "성경구절·메모·연구문서·인물·지명·예언까지 한 번에 검색합니다. AI 의미 검색을 켜면 정확한 단어가 기억나지 않아도 찾을 수 있습니다."
+        description: "성경구절·메모·연구문서를 한 번에 검색합니다."
     ),
     OnboardingPage(
         icon: "doc.text.magnifyingglass",
@@ -74,6 +108,15 @@ private let onboardingPages: [OnboardingPage] = [
 /// `ContentView`가 앱 시작 시 1회 붙이는 컨트롤러.
 struct AppOnboardingPresenter: ViewModifier {
     @State private var isPresented = false
+    #if DEBUG
+    /// [2026-08-29 신설] "개발자" 탭의 "온보딩 다시 보기"로 열린 것인지 표시한다
+    /// — 이 경로로 열렸을 때는 `markCompleted()`가 `hasCompletedOnboarding`/
+    /// `lastSeenAppVersion`을 건드리지 않게 막는다. 이미 온보딩을 마친 기기에서
+    /// 내용만 미리보는 용도라, 미리보기를 닫았다고 해서 (예: 다른 목적으로
+    /// 일부러 지워 둔) `lastSeenAppVersion`이 조용히 현재 버전으로 다시
+    /// 채워지면 "새로워진 점" 화면 테스트가 엉킬 수 있다.
+    @State private var isReplayPreview = false
+    #endif
 
     func body(content: Content) -> some View {
         content
@@ -82,6 +125,12 @@ struct AppOnboardingPresenter: ViewModifier {
                     isPresented = true
                 }
             }
+            #if DEBUG
+            .onChange(of: AppOnboardingReplayRequest.shared.token) { _, _ in
+                isReplayPreview = true
+                isPresented = true
+            }
+            #endif
             // [2026-08-28] `onDismiss`에서 완료 처리를 하는 이유 — "시작하기"
             // 버튼(명시적으로 `isPresented = false`)과 시스템 스와이프 종료
             // (버튼을 안 거치는 경로) 둘 다 결국 이 시트가 닫히는 것이므로,
@@ -95,6 +144,14 @@ struct AppOnboardingPresenter: ViewModifier {
     }
 
     private func markCompleted() {
+        #if DEBUG
+        // 위 `isReplayPreview` 상단 주석 참고 — 개발자 미리보기 경로는 완료
+        // 플래그/버전 기록을 건드리지 않고 조용히 끝낸다.
+        if isReplayPreview {
+            isReplayPreview = false
+            return
+        }
+        #endif
         UserSettingsStore.shared.hasCompletedOnboarding = true
         UserSettingsStore.shared.lastSeenAppVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String
     }
@@ -140,7 +197,7 @@ private struct AppOnboardingSheet: View {
                     .font(.title2.weight(.bold))
                     .multilineTextAlignment(.center)
                 Text(page.description)
-                    .font(.subheadline)
+                    .font(.body)
                     .foregroundStyle(.secondary)
                     .multilineTextAlignment(.center)
                     .padding(.horizontal, 28)

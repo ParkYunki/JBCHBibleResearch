@@ -40,6 +40,14 @@ struct OriginalTextInfoView: View {
     let bookId: Int
     let chapter: Int
     let verseNumber: Int
+    /// [2026-08-28 신설] 사용자 요청 — "[메모하기]-[원문정보] 각 레이어창 마다
+    /// 쉽게 오갈 수 있도록 화살표라든지 기능을 추가할 것." 이 화면의 툴바에
+    /// "메모하기로 전환" 버튼을 추가하기 위한 콜백 — 호출부(BibleReadingView)가
+    /// 이 시트를 닫고 메모하기(구 확대보기) 시트를 여는 순서를 책임진다(같은
+    /// 화면이 시트 두 개를 동시에 띄울 수 없는 기존 제약, `VerseZoomView.
+    /// onSwitchToOriginalTextInfo`와 같은 이유). 이 구조체는 커스텀 init이
+    /// 없어 컴파일러가 만들어 주는 memberwise init에 이 값도 자동으로 포함된다.
+    let onSwitchToMemo: () -> Void
 
     @Environment(\.dismiss) private var dismiss
     @Environment(\.modelContext) private var modelContext
@@ -143,6 +151,18 @@ struct OriginalTextInfoView: View {
             .toolbar {
                 ToolbarItem(placement: .cancellationAction) {
                     Button("닫기") { dismiss() }
+                }
+                // [2026-08-29 재수정] 사용자 요청 — "메모하기, 원문 정보 각각
+                // 하단에 닫기 오른쪽 버튼 옆에 두도록." `VerseZoomView.swift`의
+                // 펜/눈동자 토글이 실제로 이 자리(이 시트의 아래쪽 버튼줄)에
+                // 정상적으로 그려지는 것을 스크린샷으로 확인했으므로, 안
+                // 그려지던 `.primaryAction`/`.topBarTrailing` 대신 같은
+                // `.confirmationAction`을 쓴다.
+                ToolbarItem(placement: .confirmationAction) {
+                    Button(action: onSwitchToMemo) {
+                        Image(systemName: "arrow.left.circle")
+                    }
+                    .help("메모하기로 전환")
                 }
             }
         }

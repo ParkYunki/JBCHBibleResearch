@@ -56,6 +56,13 @@ struct VerseZoomView: View {
     /// 해당 구절로 바로 이동." 목록에서 하나를 고르면 호출부(BibleReadingView)가
     /// 메모는 편집기 시트로, 연구문서는 PDF 검색+이동 창으로 연다.
     var onSelectVerseMention: (VerseMention) -> Void
+    /// [2026-08-28 신설] 사용자 요청 — "[메모하기]-[원문정보] 각 레이어창 마다
+    /// 쉽게 오갈 수 있도록 화살표라든지 기능을 추가할 것." 이 화면(메모하기,
+    /// 구 확대보기)의 툴바에 "원문 정보로 전환" 버튼을 추가하기 위한 콜백 —
+    /// 호출부(BibleReadingView)가 이 시트를 닫고 원문 정보 시트를 여는 순서를
+    /// 책임진다(같은 화면이 시트 두 개를 동시에 띄울 수 없는 기존 제약,
+    /// `pendingPhraseMemo`와 같은 이유).
+    var onSwitchToOriginalTextInfo: () -> Void
 
     @Environment(\.dismiss) private var dismiss
     @State private var selectedColumnID: UUID
@@ -108,7 +115,8 @@ struct VerseZoomView: View {
         verseNumber: Int, columns: [BibleReadingViewModel.ColumnState], viewModel: BibleReadingViewModel,
         onOpenPhraseMemo: @escaping (UserMemo) -> Void,
         onJumpToCrossReference: @escaping (BibleVerseRef) -> Void,
-        onSelectVerseMention: @escaping (VerseMention) -> Void
+        onSelectVerseMention: @escaping (VerseMention) -> Void,
+        onSwitchToOriginalTextInfo: @escaping () -> Void
     ) {
         self.verseNumber = verseNumber
         self.columns = columns
@@ -116,6 +124,7 @@ struct VerseZoomView: View {
         self.onOpenPhraseMemo = onOpenPhraseMemo
         self.onJumpToCrossReference = onJumpToCrossReference
         self.onSelectVerseMention = onSelectVerseMention
+        self.onSwitchToOriginalTextInfo = onSwitchToOriginalTextInfo
         _selectedColumnID = State(initialValue: columns.first?.id ?? UUID())
     }
 
@@ -373,7 +382,11 @@ struct VerseZoomView: View {
             // "책이름 장번호"까지만 담고 "장" 글자는 없음 — BibleReadingViewModel.
             // reloadVerses 참고). "장"을 직접 붙여 "책이름 장번호장 절번호절"이 되게
             // 고쳤다.
-            .navigationTitle("\(currentColumn?.localizedBookChapterLabel ?? "")장 \(verseNumber)절 확대보기")
+            // [2026-08-29 수정] 사용자 요청 — "타이틀 : ... 확대하기 -> 확대하기
+            // 텍스트 제거." 이 화면(메모하기, 구 확대보기) 버튼 이름을 이미
+            // "메모하기"로 바꿨는데 타이틀에는 옛 이름("확대보기")이 그대로
+            // 남아 있었다 — 책/장/절 위치만 보여주도록 뒷부분을 뺐다.
+            .navigationTitle("\(currentColumn?.localizedBookChapterLabel ?? "")장 \(verseNumber)절")
             #if os(iOS)
             .navigationBarTitleDisplayMode(.inline)
             #endif
@@ -394,6 +407,17 @@ struct VerseZoomView: View {
                     } label: {
                         Image(systemName: isSelecting ? "eye" : "pencil")
                     }
+                }
+                // [2026-08-29 재수정] 사용자 요청 — "메모하기, 원문 정보 각각
+                // 하단에 닫기 오른쪽 버튼 옆에 두도록." 바로 위 펜/눈동자
+                // 토글과 같은 `.confirmationAction` 그룹에 놓아, 실제로
+                // 화면 아래 버튼줄에 그려지는 것이 스크린샷으로 확인된
+                // 자리(닫기 오른쪽, 펜/눈동자 옆)에 나란히 보이게 한다.
+                ToolbarItem(placement: .confirmationAction) {
+                    Button(action: onSwitchToOriginalTextInfo) {
+                        Image(systemName: "arrow.right.circle")
+                    }
+                    .help("원문 정보로 전환")
                 }
             }
             .onChange(of: selectedColumnID) { _, _ in
