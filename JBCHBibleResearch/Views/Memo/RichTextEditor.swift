@@ -626,6 +626,19 @@ struct RichTextEditorRepresentable: UIViewRepresentable {
         loadInitialContent(into: uiView, coordinator: context.coordinator)
     }
 
+    /// [2026-08-31 추가] macOS에서 신고된 크래시(아래 macOS 쪽 `dismantleNSView`
+    /// 주석 참고)와 정확히 같은 구조적 위험이 아이패드에도 있다 — `OutlineTreeView.
+    /// swift`의 `.id(selection)`이 장을 바꿀 때마다 이 `UITextView`도 통째로
+    /// 새로 만들고 버리는데, `UITextView`의 undo 관리자 역시 응답자 체인을 타고
+    /// 올라가 윈도우가 공유하는 것을 쓰는 건 UIKit도 AppKit과 같다. 아직 실제로
+    /// 보고되진 않았지만(외장 키보드로 Command+Z를 쓰는 경우가 적어서로 보임 —
+    /// 개요 편집 화면은 아이패드에서도 "풀 기능"으로 지원되는 화면이라 이 코드
+    /// 경로를 그대로 탄다), 같은 원인이 같은 결과를 낼 것이 확실해 macOS와
+    /// 대칭으로 미리 막는다.
+    static func dismantleUIView(_ uiView: UITextView, coordinator: Coordinator) {
+        uiView.undoManager?.removeAllActions(withTarget: uiView)
+    }
+
     /// [2026-08-09 추가] 사용자 요청 — "조회모드 스타일 도구 감추기". iOS의 "aA"
     /// 편집 메뉴(굵게/기울임/밑줄)와 하드웨어 키보드 단축키(⌘B/⌘I/⌘U)는
     /// `allowsEditingTextAttributes`가 켜져 있을 때만 나타난다 — 편집 가능할
@@ -930,6 +943,38 @@ struct RichTextEditorRepresentable: NSViewRepresentable {
 
         guard rtfText != context.coordinator.lastExportedText else { return }
         loadInitialContent(into: textView, coordinator: context.coordinator)
+    }
+
+    /// [2026-08-31 추가] 크래시 수정 — 사용자 보고: "개요 1장을 수정하고, 2장으로
+    /// 넘어갔다가, 다시 1장에서 Command Z 실행취소를 하면 크래시 발생." 크래시
+    /// 로그가 정확히 `-[NSUndoManager undoNestedGroup]` → `-[_NSUndoStack
+    /// popAndInvoke]` → `objc_msgSend`를 가리켰다.
+    ///
+    /// 원인: `OutlineTreeView.swift`의 `.id(selection)`(장을 바꿀 때마다 이
+    /// 화면 전체를 새로 만드는 그 modifier)이 장을 전환할 때마다 이
+    /// `NSTextView`를 통째로 새로 만들고 이전 것은 버린다. 그런데
+    /// `textView.allowsUndo = true`(위 `makeNSView`)가 등록하는 undo 액션은
+    /// 이 텍스트뷰 인스턴스 전용이 아니라 **윈도우가 공유하는 단 하나의
+    /// `NSUndoManager`**에 쌓인다 — `NSTextView`는 자기 것을 따로 만들지 않고
+    /// 응답자 체인을 타고 올라가 윈도우의 것을 그대로 쓰기 때문이다(이 프로젝트
+    /// 어디에도 `undoManager`를 서브클래싱하거나 재정의한 곳이 없다). 그래서
+    /// 1장을 편집하며 쌓인 undo 액션들이, 1장의 `NSTextView`가 사라진 뒤에도
+    /// 이미 해제된 그 인스턴스를 가리킨 채 스택에 그대로 남는다. 나중에 다시
+    /// 1장으로 돌아와(이때도 `.id(selection)`이 또 다른 새 `NSTextView`를
+    /// 만든다) Command Z를 누르면, 스택에 남아 있던 그 죽은 인스턴스를 가리키는
+    /// 액션이 다시 호출되면서 이미 해제된 객체에 메시지를 보내 크래시한다 —
+    /// 신고받은 크래시 로그와 정확히 일치하는 흐름이다.
+    ///
+    /// 해법은 Apple 공식 문서가 명시한 그대로다 — `NSUndoManager.
+    /// removeAllActions(withTarget:)` 문서: "타깃이 해제되기 직전에, 이후의
+    /// undo/redo 메시지가 유효하지 않은 객체로 가지 않도록 그 타깃을 가리키는
+    /// 등록된 액션을 전부 지워야 한다." `dismantleNSView`는 SwiftUI가 이 뷰를
+    /// 없애기 직전에 불러주는 지점이라 정확히 맞는 위치다. `withTarget:`을 써서
+    /// 이 텍스트뷰를 가리키는 액션만 지우므로, 같은 윈도우의 다른 화면이 갖고
+    /// 있을 수 있는 무관한 undo 기록은 건드리지 않는다.
+    static func dismantleNSView(_ nsView: NSScrollView, coordinator: Coordinator) {
+        guard let textView = nsView.documentView as? NSTextView else { return }
+        textView.undoManager?.removeAllActions(withTarget: textView)
     }
 
     /// [2026-08-09 추가] 사용자 요청 — "조회모드 스타일 도구 감추기". 참고 파일이

@@ -26,7 +26,7 @@ struct PhoneTabView: View {
     /// 읽는 쪽(BibleReadingContentView, 자체 `.toolbar`를 가진 뷰)에서 실기기
     /// 크래시가 나 `AppNavigationRequest`(평범한 `Equatable` 값 기반)로 바꿨다 —
     /// 자세한 이유는 `Services/AppNavigationRequest.swift` 상단 주석 참고.
-    @State private var selectedTab: AppSection = .wordNote
+    @State private var selectedTab: AppSection = .bibleReading
 
     /// [2026-08-27 신설, 사용자 결정 — "개요→더보기, 검색→탭바"] 개요
     /// (`OutlineTreeView`)를 탭바에서 빼고 "더보기" 메뉴 안 전체화면 모달로

@@ -29,7 +29,20 @@ public final class MemoFolder {
     }
 }
 
-/// 6.5 — 서식 있는 사용자 메모. `content_html`(서식) + `content_text`(검색·임베딩용) 이원화.
+/// [2026-09-01 신설] 사용자 요청 — "성경조회 - 구절 클릭(탭) - 메모하기 -
+/// 개인묵상 등록 변경 ... 리치에디터에서 -> 플레인 텍스트로 (메모와 동일하되
+/// 글자수 2000자 제한)." `VersePhraseNote`의 `NoteTextLimit`(`VerseAnnotations.swift`
+/// 참고, 200자 미만)과 같은 목적의 상수 — 값만 2000으로 다르다.
+public struct MemoTextLimit {
+    public static let maxCharacters = 2000
+}
+
+/// 6.5 — 사용자 메모. `content_html` + `content_text`(검색·임베딩용) 이원화.
+/// [2026-09-01 변경] 사용자 요청으로 편집 방식이 리치 텍스트 → 순수 텍스트로
+/// 바뀌면서(`Views/Memo/MemoDetailView.swift` 참고), 이제 `content_html`도
+/// 항상 `content_text`와 같은 값(서식 없는 평문)을 담는다 — 예전처럼 실제
+/// RTF 서식이 들어 있지 않다. 필드 자체는 CloudKit 마이그레이션 없이(스키마
+/// 변경 없음) 그대로 재사용한다.
 /// ⚠️ 태그는 더 이상 배열 필드가 아니다 — `MemoTag` 조인을 통해서만 연결된다
 /// (6.5 "⚠️ 6.3과의 정합성 수정" 참고).
 @Model

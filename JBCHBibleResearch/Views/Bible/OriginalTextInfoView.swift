@@ -167,7 +167,7 @@ struct OriginalTextInfoView: View {
                 // 알 수 있게 했다.
                 ToolbarItem(placement: .confirmationAction) {
                     Button(action: onSwitchToMemo) {
-                        Image(systemName: "arrow.up.left.and.arrow.down.right")
+                        Label("메모하기", systemImage: "arrow.up.left.and.arrow.down.right")
                     }
                     .help("메모하기로 전환")
                 }

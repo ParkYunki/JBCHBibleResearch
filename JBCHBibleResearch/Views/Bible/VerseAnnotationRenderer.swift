@@ -256,10 +256,17 @@ enum VerseAnnotationRenderer {
     /// [2026-08-11 2차 수정] 사용자 요청 — "띄어쓰기 포함 23자가 되는 글자를
     /// 찾고 앞뒤로 가까운 띄어쓰기 포인트를 찾아 그 띄어쓰기로 줄바꿈을 할
     /// 것." 줄 시작(`lineStart`)에서 `targetCharsPerLine`번째 글자 위치를
-    /// 목표점으로 잡고, 그 지점에서 가장 가까운 띄어쓰기를 앞뒤로 찾아 그
-    /// 자리를 줄바꿈 지점으로 삼는다 — 그 다음 줄도 같은 방식으로 반복.
-    /// 남은 구간에 띄어쓰기가 하나도 없으면(매우 긴 단일 단어) 그 지점에서
-    /// 멈춘다 — 글자 중간을 끊지 않는다는 원칙(어절 단위)을 지키기 위해서다.
+    /// 목표점으로 잡고, 그 지점에서 줄바꿈 지점을 찾아 그 다음 줄도 같은
+    /// 방식으로 반복한다. 남은 구간에 띄어쓰기가 하나도 없으면(매우 긴 단일
+    /// 단어) 그 지점에서 멈춘다 — 글자 중간을 끊지 않는다는 원칙(어절 단위)을
+    /// 지키기 위해서다.
+    ///
+    /// [2026-09-01 변경] 사용자 요청 — "한라인에서 20글자(공백포함) 이후
+    /// 나타나는 첫 공백에서 줄바꿈으로 바꿀 것." 원래는 목표 지점 앞뒤로
+    /// 가장 가까운 띄어쓰기를 찾았는데(`nearestSpaceIndex`, 앞으로도 뒤로도
+    /// 검색), 이제는 목표 지점부터 뒤로만 검색해 처음 만나는 띄어쓰기에서
+    /// 끊는다(`firstSpaceIndex`) — 목표 지점 이전에 띄어쓰기가 있어도 더는
+    /// 그쪽으로 끊지 않는다.
     private static func lineBreakPositions(in text: String, targetCharsPerLine: Int) -> [Int] {
         let ns = text as NSString
         guard targetCharsPerLine > 0, ns.length > targetCharsPerLine else { return [] }
@@ -267,7 +274,7 @@ enum VerseAnnotationRenderer {
         var lineStart = 0
         while ns.length - lineStart > targetCharsPerLine {
             let target = min(lineStart + targetCharsPerLine, ns.length - 1)
-            guard let spaceIndex = nearestSpaceIndex(in: ns, around: target, from: lineStart, to: ns.length) else {
+            guard let spaceIndex = firstSpaceIndex(in: ns, from: target, to: ns.length) else {
                 break
             }
             positions.append(spaceIndex)
@@ -276,21 +283,16 @@ enum VerseAnnotationRenderer {
         return positions
     }
 
-    /// `target` 위치를 기준으로 오프셋 0, 1, 2, ...씩 앞뒤를 번갈아 확인해
-    /// 가장 가까운 띄어쓰기(U+0020) 위치를 돌려준다. `[lowerBound, upperBound)`
-    /// 범위 밖으로는 나가지 않는다(줄 시작 이전이나 절 끝 이후로 넘어가지 않게).
-    private static func nearestSpaceIndex(in ns: NSString, around target: Int, from lowerBound: Int, to upperBound: Int) -> Int? {
-        guard upperBound > lowerBound else { return nil }
-        let clampedTarget = min(max(target, lowerBound), upperBound - 1)
-        let maxOffset = max(clampedTarget - lowerBound, upperBound - 1 - clampedTarget)
-        guard maxOffset >= 0 else { return nil }
-        for offset in 0...maxOffset {
-            let forward = clampedTarget + offset
-            if forward < upperBound, ns.character(at: forward) == 0x20 { return forward }
-            if offset > 0 {
-                let backward = clampedTarget - offset
-                if backward >= lowerBound, ns.character(at: backward) == 0x20 { return backward }
-            }
+    /// [2026-09-01 신설, `nearestSpaceIndex` 대체] `target` 위치부터
+    /// `upperBound` 방향으로(뒤로만) 훑어 처음 만나는 띄어쓰기(U+0020)
+    /// 위치를 돌려준다. `[target, upperBound)` 범위 밖으로는 나가지 않는다
+    /// (절 끝을 넘어가지 않게) — `target` 이전 구간은 아예 보지 않는다.
+    private static func firstSpaceIndex(in ns: NSString, from target: Int, to upperBound: Int) -> Int? {
+        guard upperBound > target else { return nil }
+        var index = max(target, 0)
+        while index < upperBound {
+            if ns.character(at: index) == 0x20 { return index }
+            index += 1
         }
         return nil
     }
@@ -363,8 +365,9 @@ enum VerseAnnotationRenderer {
     /// 두 모드가 항상 정확히 같은 자리에서 줄을 바꾸도록, `lineRanges(...)`가
     /// 고른 경계 사이에 "건너뛴 구분자"가 있으면(`koreanLineRanges`가
     /// `lineStart = position + 1`로 스킵하는 그 한 글자 — 설계상 항상 공백,
-    /// `lineBreakPositions`가 애초에 "가장 가까운 띄어쓰기"에서만 끊기
-    /// 때문이다) 그 자리를 U+2028(라인 구분자)로 바꿔치기해 강제로 줄을
+    /// `lineBreakPositions`가 애초에 띄어쓰기에서만 끊기(2026-09-01부터는
+    /// `firstSpaceIndex`로 목표 지점 이후 첫 띄어쓰기) 때문이다) 그 자리를
+    /// U+2028(라인 구분자)로 바꿔치기해 강제로 줄을
     /// 바꾼다. **삽입이 아니라 치환**이라 글자 수·인덱스가 그대로 유지되므로,
     /// 이 문자열을 기준으로 얻은 `selectedRange`는 원본 `text`에서도 똑같은
     /// 위치를 정확히 가리킨다(호출부가 별도 보정을 할 필요가 없다).
@@ -507,7 +510,7 @@ enum VerseAnnotationRenderer {
         return result
     }
 
-    /// 기존 `lineBreakPositions`(23자 최근접 띄어쓰기 지점)를 그대로 재사용해
+    /// 기존 `lineBreakPositions`(목표 글자수 이후 첫 띄어쓰기 지점)를 그대로 재사용해
     /// "지점 목록"이 아니라 "줄 범위 목록"으로 바꿔 준다. 지점 자체의 U+2028
     /// 문자(그 자리의 공백 하나)는 줄 사이의 "구분자"이지 어느 줄에도 속하지
     /// 않는 것으로 취급해, 각 줄 범위는 그 공백을 포함하지 않는다(줄 끝에
@@ -733,7 +736,7 @@ enum VerseAnnotationRenderer {
         // 달라져 실패한다 — 앵커 텍스트엔 원래 공백(U+0020)이 있는데 `full`
         // 에는 U+2028이 들어 있어 절대 같아질 수 없다. 강제 줄바꿈 치환은
         // 항상 "공백 자리에만, 길이 보존"으로 이뤄진다는 보장이 있으므로
-        // (`lineBreakPositions`/`nearestSpaceIndex` 참고), U+2028을 다시
+        // (`lineBreakPositions`/`firstSpaceIndex` 참고), U+2028을 다시
         // 공백으로 되돌린 정규화 사본에서 앵커 텍스트를 찾고, 그 결과
         // 위치(문자 인덱스)를 원본 `full`에 그대로 재사용한다 — 치환이
         // 길이를 바꾸지 않으므로 인덱스가 어긋나지 않는다.

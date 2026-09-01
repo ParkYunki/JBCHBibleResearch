@@ -190,10 +190,14 @@ struct VerseZoomView: View {
         let sample = "가" as NSString
         let charWidth = sample.size(withAttributes: [.font: bibleFont]).width
         // [2026-08-21 변경] 사용자 요청 — "확대보기 창을 가로로 조금 더 늘리고
-        // 20pt로." 이 21은 `targetCharsPerLine`(아래, 23 → 25로 함께 올림)보다
-        // 항상 2 작게 유지해 온 값이다(라틴/혼합 문자가 한글 "가"보다 평균적으로
-        // 조금 더 넓어서 그만큼 여유를 둔 것으로 보인다) — 같은 -2 여백을 그대로
-        // 유지해 23으로 올린다.
+        // 20pt로." 이 23은 그 때 `targetCharsPerLine`(당시 25)보다 항상 2 작게
+        // 유지해 온 값이었다(라틴/혼합 문자가 한글 "가"보다 평균적으로 조금 더
+        // 넓어서 그만큼 여유를 둔 것으로 보인다).
+        // [2026-09-01 변경] 사용자 결정 — "확대보기 줄바꿈 글자수(세로모드
+        // 아이폰 18자 유지 / 그 외 25→20자)를 바꾸되, 메모 박스 폭 계산은
+        // 그대로 둘 것." 이제 이 23은 `targetCharsPerLine`과 연동되지 않는
+        // 독립적인 고정값이다 — 아래 `targetCharsPerLine`이 20/18로 바뀌어도
+        // 이 값은 그대로 23을 쓴다.
         let idealWidth = charWidth * 23
         return idealWidth > 0 ? min(availableContentWidth, idealWidth) : availableContentWidth
     }
@@ -209,17 +213,22 @@ struct VerseZoomView: View {
         #endif
     }
 
-    /// 가로모드 - 25자(2026-08-21, 아래 참고). 세로모드(아이폰) - 18자 기준으로
-    /// 앞뒤 가장 가까운 띄어쓰기에서 줄바꿈(사용자 요청) — 실제 알고리즘은 기존
-    /// `VerseAnnotationRenderer.koreanLineRanges`(2026-08-11 2차 수정에서 이미
-    /// 구현된 "목표 글자수 근처 최근접 띄어쓰기" 방식)를 그대로 재사용하고,
-    /// 목표 글자수만 이 값으로 바꿔 넘긴다.
+    /// 가로모드(아이패드/맥/아이폰 가로모드) - 20자. 세로모드(아이폰) - 18자
+    /// 기준으로 그 지점 이후 나타나는 첫 띄어쓰기에서 줄바꿈(사용자 요청) —
+    /// 실제 알고리즘은 `VerseAnnotationRenderer.koreanLineRanges`(아래
+    /// `firstSpaceIndex` 참고)가 그대로 재사용하고, 목표 글자수만 이 값으로
+    /// 바꿔 넘긴다.
     /// [2026-08-21 변경] 사용자 요청 — "확대보기 창을 가로로 조금 더 늘리고
-    /// 20pt로." 23 → 25로 올렸다 — 2026-08-11 8차 수정이 정한 원래 허용
+    /// 20pt로." 23 → 25로 올렸었다 — 2026-08-11 8차 수정이 정한 원래 허용
     /// 범위("한 줄에 17~25자 정도로")의 상한 그대로라 그 결정을 벗어나지
-    /// 않는다. 아이폰 세로모드(18자)는 이번 요청 범위 밖이라 그대로 둔다.
+    /// 않았다. 아이폰 세로모드(18자)는 그 요청 범위 밖이라 그대로 뒀다.
+    /// [2026-09-01 변경] 사용자 요청 — "한라인에서 20글자(공백포함) 이후
+    /// 나타나는 첫 공백에서 줄바꿈으로 바꿀 것." 세로모드 아이폰은 그대로
+    /// 18자를 유지하고, 그 외(가로모드 아이폰/아이패드/맥)는 25 → 20으로
+    /// 내렸다(사용자가 명시적으로 확인한 값 — `effectiveTextWidth`의 메모
+    /// 박스 폭 계산은 이 변경과 별개로 그대로 둔다, 위 주석 참고).
     private var targetCharsPerLine: Int {
-        isPhonePortrait ? 18 : 25
+        isPhonePortrait ? 18 : 20
     }
 
     private var labelColor: PlatformColor {
@@ -376,6 +385,41 @@ struct VerseZoomView: View {
 
                 Divider()
                 actionBar
+
+                // [2026-09-01 신설] 사용자 보고 — "맥OS 버전에서 성경조회 -
+                // 메모하기에서 원문정보로 이동하는 버튼 없음... 버튼자체가
+                // 안보임." 리서치 결과 macOS `.sheet`의 `.confirmationAction`/
+                // `.cancellationAction`은 Apple 문서 자체가 "확인/취소 액션 하나"를
+                // 위한 자리로 명시하고 있고(ToolbarItemPlacement 문서, "a
+                // placement for confirmation actions"), 실측으로도 `ToolbarItem`
+                // 이든 `ToolbarItemGroup`이든 그 자리에 두 번째 버튼을 얹으면
+                // 조용히 사라진다(잘리거나 오버플로 메뉴로 가는 게 아니라
+                // 아예 그려지지 않음) — 한 placement당 버튼 하나만 그린다는
+                // 뜻으로 보인다. 그래서 macOS만 이 화면의 하단 버튼줄(닫기/
+                // 원문 정보/펜·눈동자)을 시스템 `.toolbar` 자리에 맡기지 않고
+                // 이 뷰 본문에 직접 그린다 — 순서 요청("닫기 오른쪽, 편집모드
+                // 버튼 왼쪽")대로 닫기 → 원문 정보 → 펜/눈동자 순으로 배치한다.
+                // iOS/iPadOS는 내비게이션 바 트레일링 영역이 이 제약이 없어(
+                // 여러 bar button item을 그대로 다 그린다) 기존 `.toolbar`
+                // 방식을 그대로 둔다(아래 `.toolbar` 참고).
+                #if os(macOS)
+                Divider()
+                HStack {
+                    Button("닫기") { dismiss() }
+                    Spacer()
+                    Button(action: onSwitchToOriginalTextInfo) {
+                        Label("원문 정보", systemImage: "character.book.closed")
+                    }
+                    .help("원문 정보로 전환")
+                    Button {
+                        isSelecting.toggle()
+                        selectedRange = NSRange(location: 0, length: 0)
+                    } label: {
+                        Image(systemName: isSelecting ? "eye" : "pencil")
+                    }
+                }
+                .padding()
+                #endif
             }
             // [2026-08-09 수정] 사용자 보고 — "[성경] [x] [x]절 확대보기"로 보여
             // 장 번호와 절 번호가 구분 없이 나란히 붙어 있었다(`localizedBookChapterLabel`이
@@ -390,6 +434,16 @@ struct VerseZoomView: View {
             #if os(iOS)
             .navigationBarTitleDisplayMode(.inline)
             #endif
+            // [2026-09-01 변경] 사용자 보고 — "맥OS 버전에서 ... 버튼자체가
+            // 안보임." macOS `.sheet`에서 `.confirmationAction`에 두 번째
+            // 버튼을 얹으면(`ToolbarItem`이든 `ToolbarItemGroup`이든) 조용히
+            // 사라지는 것을 실측으로 확인했다(위 `actionBar` 아래 `#if
+            // os(macOS)` 커스텀 버튼줄 참고 — 그쪽으로 옮겼다) — 그래서 이
+            // `.toolbar`는 이제 iOS/iPadOS 전용이다. iOS 내비게이션 바
+            // 트레일링 영역은 여러 bar button item을 그대로 다 그리므로
+            // (이 화면에서 원문 정보 버튼 미표시 문제가 iOS에서는 보고된 적
+            // 없음) 기존 `ToolbarItemGroup` 방식을 그대로 둔다.
+            #if os(iOS)
             .toolbar {
                 ToolbarItem(placement: .cancellationAction) {
                     Button("닫기") { dismiss() }
@@ -400,32 +454,29 @@ struct VerseZoomView: View {
                 // 버튼("선택 취소")을 표시/선택 모드를 오가는 상시 아이콘 토글로
                 // 바꿨다 — 표시 모드일 땐 펜(누르면 선택 모드 진입), 선택
                 // 모드일 땐 눈동자(누르면 표시 모드로 복귀 + 선택 해제).
-                ToolbarItem(placement: .confirmationAction) {
+                ToolbarItemGroup(placement: .confirmationAction) {
                     Button {
                         isSelecting.toggle()
                         selectedRange = NSRange(location: 0, length: 0)
                     } label: {
                         Image(systemName: isSelecting ? "eye" : "pencil")
                     }
-                }
-                // [2026-08-29 재수정] 사용자 요청 — "메모하기, 원문 정보 각각
-                // 하단에 닫기 오른쪽 버튼 옆에 두도록." 바로 위 펜/눈동자
-                // 토글과 같은 `.confirmationAction` 그룹에 놓아, 실제로
-                // 화면 아래 버튼줄에 그려지는 것이 스크린샷으로 확인된
-                // 자리(닫기 오른쪽, 펜/눈동자 옆)에 나란히 보이게 한다.
-                // [2026-08-29 3차 수정] 사용자 요청 — "좌우 화살표 대신 메모하기
-                // 아이콘과, 원어 정보 아이콘으로 각각 대치할 것." 화살표 대신,
-                // "원문 정보"가 성경 조회 하단 액션바에서 이미 쓰는 아이콘
-                // (`BibleReadingView.swift`의 `Label("원문 정보", systemImage:
-                // "character.book.closed")`)과 똑같은 걸 써서 — 이 버튼을 누르면
-                // "원문 정보"로 간다는 것을 아이콘만 보고도 알 수 있게 했다.
-                ToolbarItem(placement: .confirmationAction) {
+
+                    // [2026-08-29 3차 수정] 사용자 요청 — "좌우 화살표 대신
+                    // 메모하기 아이콘과, 원어 정보 아이콘으로 각각 대치할 것."
+                    // [2026-09-01 수정] 사용자 요청 — "하단 닫기 오른쪽에
+                    // 아이콘과 "원문 정보" 이름으로된 버튼 추가." 기존
+                    // 아이콘 전용 버튼을, 성경 조회 하단 액션바에서 이미 쓰는
+                    // 것과 같은 `Label("원문 정보", systemImage:
+                    // "character.book.closed")`(`BibleReadingView.swift` 참고)로
+                    // 바꿔 아이콘+이름이 함께 보이게 한다.
                     Button(action: onSwitchToOriginalTextInfo) {
-                        Image(systemName: "character.book.closed")
+                        Label("원문 정보", systemImage: "character.book.closed")
                     }
                     .help("원문 정보로 전환")
                 }
             }
+            #endif
             .onChange(of: selectedColumnID) { _, _ in
                 selectedRange = NSRange(location: 0, length: 0)
                 isSelecting = false

@@ -35,11 +35,6 @@
 import SwiftUI
 import SwiftData
 import BibleResearchModels
-#if os(iOS)
-import UIKit
-#elseif os(macOS)
-import AppKit
-#endif
 
 /// 위 파일 상단 주석 참고.
 enum MemoPresentationContext {
@@ -74,15 +69,10 @@ struct MemoDetailView: View {
     @State private var autosave: AutosaveController?
     @State private var isEditable = true
     @State private var hasLoadedMetadata = false
-    /// [2026-08-11 추가] 사용자 요청 — "확대보기/사이드바 메모 팝업: 맨 위 글꼴
-    /// 스타일 라인과 그 밑 성경장절정보-동기화정보 라인의 순서를 바꿀 것".
-    /// `.contextual`에서만 이 프록시로 `RichTextEditorToolbar`를 `header`보다
-    /// 먼저(=더 위에) 그린다 — `RichTextEditor`에는 `externalProxy`로 같은
-    /// 인스턴스를 넘겨 내부 툴바는 끄고 이 프록시가 실제 텍스트뷰를 제어하게
-    /// 한다(RichTextEditor.swift `showsToolbar`/`externalProxy` 상단 주석 참고).
-    /// `.standalone`(내 메모 탭)은 기존 그대로(헤더가 먼저, 툴바는 에디터
-    /// 안쪽에) 두므로 이 프록시를 쓰지 않는다.
-    @State private var contextualToolbarProxy = RichTextEditingProxy()
+    // [2026-09-01 삭제] `contextualToolbarProxy`(`RichTextEditorToolbar`를
+    // `header`보다 먼저 그리려고 쓰던 프록시) — 에디터가 순수 텍스트로 바뀌면서
+    // (아래 `body`의 에디터 부분 참고) 제어할 서식 툴바 자체가 없어져 필요
+    // 없어졌다.
 
     @State private var memoTags: [Tag] = []
     @State private var tagInput: String = ""
@@ -106,18 +96,11 @@ struct MemoDetailView: View {
     // 태그가 몇 개 안 되므로 실제로 문제가 되는 경우는 드물다고 판단했다.
     var body: some View {
         VStack(alignment: .leading, spacing: 0) {
-            // [2026-08-11 추가] 사용자 요청 — "맨 위 글꼴 스타일 라인과 그 밑
-            // 성경장절정보-동기화정보 라인의 순서를 바꿀 것". `.contextual`에서만
-            // 이 툴바를 `header`보다 먼저 그린다 — macOS는 이 커스텀 툴바 자체가
-            // 없어(텍스트 선택 시 뜨는 네이티브 서식 팝업을 쓴다, RichTextEditor.swift
-            // 상단 주석 참고) 이 순서 변경이 실제로 보이는 건 iOS/iPadOS뿐이다.
-            #if os(iOS)
-            if presentationContext == .contextual && isEditable {
-                RichTextEditorToolbar(proxy: contextualToolbarProxy)
-                Divider()
-            }
-            #endif
-
+            // [2026-08-11 추가, 2026-09-01 삭제] "맨 위 글꼴 스타일 라인과 그
+            // 밑 성경장절정보-동기화정보 라인의 순서를 바꿀 것" 요청으로
+            // `.contextual`에서 서식 툴바를 `header`보다 먼저 그리던 분기가
+            // 여기 있었다 — 에디터가 순수 텍스트로 바뀌며(위 상태 선언부 참고)
+            // 그 서식 툴바 자체가 없어져 함께 삭제했다.
             header
             Divider()
 
@@ -126,11 +109,34 @@ struct MemoDetailView: View {
                 .padding(.vertical, 6)
             Divider()
 
-            RichTextEditor(
-                rtfText: Binding(
-                    get: { memo.contentHtml },
+            // [2026-09-01 변경] 사용자 요청 — "성경조회 - 구절 클릭(탭) -
+            // 메모하기 - 개인묵상 등록 변경 ... 리치에디터에서 -> 플레인
+            // 텍스트로 (메모와 동일하되 글자수 2000자 제한)." `RichTextEditor`
+            // (서식 있는 본문) 대신 `VersePhraseNote`의 "메모" 팝오버
+            // (`PhraseNoteEditorPopover.swift`)가 쓰는 것과 같은 순수
+            // `TextEditor` + 글자수 제한(`MemoTextLimit`) 패턴을 그대로
+            // 재사용한다 — 다만 그 팝오버는 작은 시트라 고정 높이였고, 이
+            // 화면은 전체 화면 분할 뷰라 기존처럼 `.frame(maxHeight: .infinity)`로
+            // 남은 세로 공간을 채운다.
+            VStack(alignment: .trailing, spacing: 4) {
+                TextEditor(text: Binding(
+                    get: { memo.contentText },
                     set: { newValue in
-                        memo.contentHtml = newValue
+                        let limited = newValue.count > MemoTextLimit.maxCharacters
+                            ? String(newValue.prefix(MemoTextLimit.maxCharacters))
+                            : newValue
+                        memo.contentText = limited
+                        // [2026-09-01 변경] `contentHtml`은 이제 서식 있는 RTF를
+                        // 담지 않지만(위 `RichTextEditor` 제거 참고), 이 필드를
+                        // 예전 RTF 값 그대로 방치하면 "실제로 보이는 내용"과
+                        // 어긋난 값이 남는다 — 항상 `contentText`와 같은 값으로
+                        // 맞춰 둔다. `UserMemo.contentHtml`을 읽는 코드가 이
+                        // 화면 말고는 없음을 확인했고(사이드바/검색/인덱싱은
+                        // 전부 `contentText`만 읽는다), `RichTextCodec.decode`도
+                        // RTF 시그니처가 아니면 그대로 평문으로 폴백하므로
+                        // 만에 하나 남아 있는 예전 리치 텍스트 메모를 다시 열어도
+                        // 안전하다.
+                        memo.contentHtml = limited
                         memo.updatedAt = .now
                         // [2026-08-12 추가] 사용자 논의 — "화면을 벗어났을 때
                         // 트리거를 실행" 방식으로 바꾸면서 생긴 표시 —
@@ -139,29 +145,14 @@ struct MemoDetailView: View {
                         memo.pendingIndexRefresh = true
                         autosave?.scheduleSave()
                     }
-                ),
-                plainText: Binding(
-                    get: { memo.contentText },
-                    set: { memo.contentText = $0 }
-                ),
-                isEditable: isEditable,
-                typingFont: EditorDefaultStyle.typingFont,
-                defaultTextColor: EditorDefaultStyle.textColor,
-                lineHeightMultiple: EditorDefaultStyle.lineHeightMultiple,
-                // [2026-08-14 변경] 사용자 요청 — "모든 에디터 창 기본 설정"(공통) +
-                // "글을 클릭했을 때 에디터 배경은... 모드를 바꿨을 때 배경색과
-                // 동일하게 맞출 것." 조회/편집 두 배경을 서로 다른 값으로 뒀던
-                // 것이 바로 그 불일치의 원인이었다 — 이제 두 값을 완전히 같게
-                // 고정해(`EditorDefaultStyle.backgroundColor`) 모드를 전환해도,
-                // 처음 열었을 때와 전환한 뒤가 항상 같은 배경으로 보인다.
-                editingBackgroundColor: EditorDefaultStyle.backgroundColor,
-                readOnlyBackgroundColor: EditorDefaultStyle.backgroundColor,
-                // [2026-08-11 추가] `.contextual`은 위에서 `RichTextEditorToolbar`를
-                // 직접 그리므로 이 컴포넌트 내부 툴바는 끄고, 같은 프록시를
-                // 공유해 그 외부 툴바가 이 텍스트뷰를 제어하게 한다.
-                showsToolbar: presentationContext != .contextual,
-                externalProxy: presentationContext == .contextual ? contextualToolbarProxy : nil
-            )
+                ))
+                .font(.body)
+                .disabled(!isEditable)
+
+                Text("\(memo.contentText.count)/\(MemoTextLimit.maxCharacters)")
+                    .font(.caption2)
+                    .foregroundStyle(.secondary)
+            }
             .padding()
             .frame(maxHeight: .infinity)
 
@@ -258,10 +249,10 @@ struct MemoDetailView: View {
         return "\(bookName) \(memo.chapter)장"
     }
 
-    // [2026-08-14 삭제] `contextualTypingFont`(`.contextual`에서만 Paperlogy-3
-    // Light 14pt를 쓰던 프로퍼티) — 이제 `.standalone`/`.contextual` 구분 없이
-    // 모든 에디터가 `EditorDefaultStyle.typingFont`를 공유하므로 더 이상 필요
-    // 없다(위 `RichTextEditor(...)` 호출부 참고).
+    // [2026-08-14 삭제, 2026-09-01 편집기 자체가 순수 텍스트로 바뀌며 무의미해짐]
+    // `contextualTypingFont`(`.contextual`에서만 Paperlogy-3 Light 14pt를 쓰던
+    // 프로퍼티) — 이제 에디터가 `RichTextEditor`가 아닌 순수 `TextEditor`라
+    // `EditorDefaultStyle.typingFont` 자체를 쓰지 않는다(위 에디터 부분 참고).
 
     @ViewBuilder
     private var syncStatusLabel: some View {

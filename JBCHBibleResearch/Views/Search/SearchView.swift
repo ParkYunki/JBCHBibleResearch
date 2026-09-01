@@ -34,6 +34,9 @@ import BibleResearchModels
 #if os(iOS)
 import UIKit
 #endif
+#if os(macOS)
+import AppKit
+#endif
 
 struct SearchView: View {
     @Environment(\.modelContext) private var modelContext
@@ -102,6 +105,19 @@ private struct BibleVerseDestinationRegistration: ViewModifier {
     }
 }
 
+/// [2026-08-29 신설] `BibleReadingView`의 동명 타입(그 파일 참고)과 똑같은
+/// 얇은 `Identifiable` 래퍼 — "세 번째 사용처가 생기기 전엔 공통 타입으로
+/// 추출하지 않는다"는 이 프로젝트의 기존 원칙(`SearchViewModel.storeCache`
+/// 상단 주석 참고)에 따라 이 파일 전용으로 따로 둔다. 한자 주석 필드는 여기서는
+/// 두지 않았다(`VerseTextSelectionPopover.hanjaWords`가 기본값 `[]`을
+/// 지원하므로 생략해도 정상 동작 — 그 파일 상단 주석 참고).
+private struct PartialTextSelectionTarget: Identifiable {
+    let id = UUID()
+    let verseNumber: Int
+    let translationDisplayName: String
+    let text: String
+}
+
 private struct SearchContentView: View {
     let viewModel: SearchViewModel
     // [2026-08-07 추가] S6이 별도 창으로 바뀌면서(JBCHBibleResearchApp.swift
@@ -114,6 +130,10 @@ private struct SearchContentView: View {
     // .search)`)에 이 액션을 호출해 검색 활성 상태를 종료시킨다(Apple 문서가
     // "탐색하기 전에 검색을 종료해야 할 때 호출" 용도로 명시).
     @Environment(\.dismissSearch) private var dismissSearch
+
+    /// [2026-08-29 신설] "선택" 버튼(`verseRowActionButtons`)이 채우는 팝오버
+    /// 대상 — `BibleReadingView.partialTextSelectionTarget`과 같은 역할.
+    @State private var partialTextSelectionTarget: PartialTextSelectionTarget?
 
     /// [2026-08-18 신설, 아이폰 실기기 크래시 fix] DocumentsHomeView.swift의
     /// `isPhoneIdiom`과 같은 패턴 — 아이폰은 다중 씬(멀티 윈도우)을 지원하지
@@ -369,6 +389,24 @@ private struct SearchContentView: View {
             #endif
         }
         .onDisappear { viewModel.onDisappear() }
+        // [2026-08-29 신설] "선택" 버튼 — `TranslationColumnView`/`BibleReadingView`가
+        // 성경조회 화면에서 쓰는 것과 정확히 같은 `VerseTextSelectionPopover`를
+        // 그대로 띄운다(상단 `verseRowActionButtons` 주석 참고).
+        .popover(item: $partialTextSelectionTarget) { target in
+            VerseTextSelectionPopover(
+                verseNumber: target.verseNumber,
+                translationDisplayName: target.translationDisplayName,
+                text: target.text,
+                onCopy: { text in
+                    #if os(macOS)
+                    NSPasteboard.general.clearContents()
+                    NSPasteboard.general.setString(text, forType: .string)
+                    #else
+                    UIPasteboard.general.string = text
+                    #endif
+                }
+            )
+        }
         // [2026-08-26 신설] 사용자 요청 — "두 개 단어 이상 검색시 더보기를
         // 누르면 확인창 - 각 성경별로 추가 검색결과를 반영했으니 확인해보라는
         // 내용." AskUserQuestion으로 확정: 확인창은 검색 1회당 최초 1번만,
@@ -956,28 +994,114 @@ private struct SearchContentView: View {
         // `SidebarNavigationView.detailNavigationPath`(NavigationPath)에
         // 전혀 기록되지 않아 "다시 검색해도 pop이 안 되는" 버그의 원인이었다
         // — `BibleVerseDestination.swift` 상단 주석 참고. 값 기반으로 교체.
-        bibleVerseRow(BibleVerseDestination(
-            bookId: result.bookId, chapter: result.chapter, verse: result.verse
-        )) {
-            HStack(alignment: .firstTextBaseline, spacing: 8) {
-                Text(verseExcerptAttributedString(result))
-                    .lineLimit(2)
-                if result.isReferenceMatch {
-                    badge("참조 일치", color: .green, systemImage: "checkmark.seal.fill")
-                }
-                Spacer(minLength: 8)
-                // [2026-08-26 추가] 사용자 요청 — "각 절마다 몇개 매칭되었는지
-                // 오른쪽 끝에다 표시해줄것." 참조 매치는 `matchCount`가 항상
-                // 0이라(`VerseSearchResult.matchCount` 상단 주석 참고) 배지
-                // 자체를 숨긴다 — "0회"라고 보여주는 것보다 아예 안 보이는
-                // 편이 "이건 단어 매칭이 아니라 정확한 참조로 찾아온 절"이라는
-                // 뜻을 더 분명히 전달한다.
-                if result.matchCount > 0 {
-                    verseMatchCountBadge(result.matchCount)
-                }
+        //
+        // [2026-08-29 변경] 사용자 요청 — "각 행 오른쪽(단어 일치개수 뱃지
+        // 왼쪽)에 이동/선택/복사 버튼 추가." 이 세 버튼이 생기면서 "행 전체를
+        // 탭하면 이동"하던 기존 동작(`bibleVerseRow`)은 없앴다 — AskUserQuestion으로
+        // 확인: 한 List 행 안에 여러 인터랙티브 컨트롤(행 전체 탭 + 버튼 3개)이
+        // 공존하면 SwiftUI가 실제로 탭된 게 어느 것인지 안정적으로 구분하지
+        // 못하는 문제가 `OutlineTreeView.swift`(장 칩 여러 개를 `List` 행
+        // 하나에 몰아넣었을 때, 그 파일 상단 주석 참고)에서 이미 실제로
+        // 재현된 적이 있어 같은 위험을 피했다. "이동"은 이제 아래 버튼이
+        // 전담한다.
+        HStack(alignment: .firstTextBaseline, spacing: 8) {
+            Text(verseExcerptAttributedString(result))
+                .lineLimit(2)
+            if result.isReferenceMatch {
+                badge("참조 일치", color: .green, systemImage: "checkmark.seal.fill")
             }
-            .padding(.vertical, 4)
+            Spacer(minLength: 8)
+            verseRowActionButtons(result)
+            // [2026-08-26 추가] 사용자 요청 — "각 절마다 몇개 매칭되었는지
+            // 오른쪽 끝에다 표시해줄것." 참조 매치는 `matchCount`가 항상
+            // 0이라(`VerseSearchResult.matchCount` 상단 주석 참고) 배지
+            // 자체를 숨긴다 — "0회"라고 보여주는 것보다 아예 안 보이는
+            // 편이 "이건 단어 매칭이 아니라 정확한 참조로 찾아온 절"이라는
+            // 뜻을 더 분명히 전달한다.
+            if result.matchCount > 0 {
+                verseMatchCountBadge(result.matchCount)
+            }
         }
+        .padding(.vertical, 4)
+    }
+
+    /// [2026-08-29 신설] 사용자 요청 — "검색결과 - 성경구절 각 행 오른쪽 옆
+    /// (단어 일치개수 뱃지 왼쪽)에 버튼 추가 — 이동, 선택, 복사." 셋 다 이
+    /// 앱에 이미 있는 기능을 그대로 재사용한다(새로 설계하지 않음):
+    /// - 이동: `BibleReadingView`가 사이드바 "최근 이력" 등 다른 화면에서
+    ///   넘어올 때 이미 쓰는 것과 정확히 같은 `AppNavigationRequest`(성경
+    ///   섹션으로 전환) + `BibleVerseNavigationRequest`(그 절 하이라이트)
+    ///   조합이다. 이 조합은 `SidebarNavigationView.swift`의
+    ///   `.onChange(of: AppNavigationRequest.shared.requestedSection)`가
+    ///   플랫폼(아이폰 탭 vs 아이패드·맥 사이드바) 구분 없이 처리하므로,
+    ///   여기서도 분기 없이 버튼 하나로 만든다.
+    /// - 선택: `TranslationColumnView`의 컨텍스트 메뉴("선택")와 똑같이
+    ///   `VerseTextSelectionPopover`를 띄운다. 한자 주석(`hanjaWords`)은
+    ///   그 팝오버 자체가 기본값 `[]`을 지원하도록 설계돼 있어(그 파일 상단
+    ///   주석 참고) 생략한다 — 한자 조회에 필요한 `BibleReadingViewModel`
+    ///   의존성 없이도 정상 동작한다.
+    /// - 복사: `BibleReadingView.copySingleTranslation`과 정확히 같은
+    ///   패턴 — `BibleVerseCopyFormatter.format`에 번역본을 이 절 하나만
+    ///   담아 넘긴다("다른 번역본 제외, 검색에 나온 번역본만" 요청과 일치 —
+    ///   포매터의 `showTranslationLabel = translations.count > 1` 로직이
+    ///   1개일 땐 번역본 이름표도 자동으로 뺀다). 설정(`UserSettingsStore`의
+    ///   복사 형식)은 `BibleVerseCopyFormatter`가 알아서 반영한다.
+    private func verseRowActionButtons(_ result: VerseSearchResult) -> some View {
+        HStack(spacing: 14) {
+            Button {
+                AppNavigationRequest.shared.request(.bibleReading)
+                BibleVerseNavigationRequest.shared.request(
+                    bookId: result.bookId, chapter: result.chapter, verse: result.verse
+                )
+            } label: {
+                Image(systemName: "arrow.right.circle")
+            }
+            .help("이동")
+
+            Button {
+                partialTextSelectionTarget = PartialTextSelectionTarget(
+                    verseNumber: result.verse,
+                    translationDisplayName: result.translationDisplayName,
+                    text: result.content
+                )
+            } label: {
+                Image(systemName: "character.cursor.ibeam")
+            }
+            .help("선택")
+
+            Button {
+                copySearchResult(result)
+            } label: {
+                Image(systemName: "doc.on.doc")
+            }
+            .help("복사")
+        }
+        .buttonStyle(.plain)
+        .foregroundStyle(.secondary)
+        .font(.system(size: 14))
+    }
+
+    /// 위 `verseRowActionButtons`의 "복사" 버튼 — `BibleReadingView.
+    /// copySingleTranslation`과 동일한 패턴(그 함수 참고), 번역본 하나만
+    /// (`result.translationDisplayName`) 담아 포맷하고 클립보드에 쓴다.
+    private func copySearchResult(_ result: VerseSearchResult) {
+        guard let book = BooksProvider.shared.book(id: result.bookId) else { return }
+        let verse = BibleVerse(
+            uid: 0, versionCode: result.translationCode, bookId: result.bookId,
+            chapter: result.chapter, verse: result.verse, content: result.content, paragraph: nil
+        )
+        guard let text = BibleVerseCopyFormatter.format(
+            book: book, chapter: result.chapter, selectedVerses: [result.verse],
+            translations: [BibleVerseCopyFormatter.TranslationSnapshot(
+                displayName: result.translationDisplayName, verses: [verse]
+            )]
+        ) else { return }
+        #if os(macOS)
+        NSPasteboard.general.clearContents()
+        NSPasteboard.general.setString(text, forType: .string)
+        #else
+        UIPasteboard.general.string = text
+        #endif
     }
 
     /// "N절) 강조된 본문" 하나로 합친 `AttributedString` — `Text + Text`(별도

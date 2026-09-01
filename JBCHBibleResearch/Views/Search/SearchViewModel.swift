@@ -49,6 +49,15 @@ struct VerseSearchResult: Identifiable {
     let verse: Int
     let content: String
     let bookNameKo: String
+    /// [2026-08-29 추가] 검색결과 행의 "선택"/"복사" 버튼이 이 절이 실제로
+    /// 어느 번역본에서 나왔는지 알아야 해서 추가했다 — 원래는 검색 매칭
+    /// 과정(`searchVerses`)에서만 잠깐 쓰이고 화면까지 전달되지 않았다.
+    /// 같은 절에 여러 번역본이 매칭되면 먼저 처리된 번역본만 남는 기존
+    /// dedup 동작(`seen`/`wordCandidates` 키가 절 좌표만 쓰는 것)은 그대로
+    /// 두고(이 필드 추가가 그 동작을 바꾸지 않는다), 그 결과가 실제로 어느
+    /// 번역본인지 값만 함께 실어 나른다.
+    let translationCode: String
+    let translationDisplayName: String
     /// [2026-08-18 추가] 키워드 검색에서 강조할 단어들 — 성경구절 참조 자체로
     /// 직접 조회된 결과(`referenceMatchedVerses`)는 비워 둔다(정확히 그 절을
     /// 찾아온 것이라 특정 단어를 강조할 이유가 없다).
@@ -703,6 +712,7 @@ final class SearchViewModel {
                         bookId: verse.bookId, chapter: verse.chapter, verse: verse.verse,
                         content: verse.content,
                         bookNameKo: booksProvider.book(id: verse.bookId)?.nameKo ?? "\(verse.bookId)권",
+                        translationCode: registry.code, translationDisplayName: registry.displayName,
                         isReferenceMatch: true
                     ))
                     // [2026-08-25 삭제] 예전엔 여기서 `results.count >= 30`이면
@@ -738,7 +748,7 @@ final class SearchViewModel {
         // 개역한글 31,102절이라 새 DB를 만들 필요가 없었다)를 쓴다. 사용자가
         // 추가한 다른 번역본 파일은 이 FTS5 인덱스가 없으므로(요청 범위 밖)
         // 기존 LIKE(`BibleReferenceStore.searchVerses`)를 그대로 쓴다.
-        var wordCandidates: [String: (verse: BibleVerse, bookNameKo: String)] = [:]
+        var wordCandidates: [String: (verse: BibleVerse, bookNameKo: String, translationCode: String, translationDisplayName: String)] = [:]
         let fullTextStore = ReferenceDataProvider.shared.store
         for registry in registries {
             guard let store = try? store(for: registry) else { continue }
@@ -764,7 +774,8 @@ final class SearchViewModel {
                             guard !seen.contains(key), wordCandidates[key] == nil else { continue }
                             wordCandidates[key] = (
                                 BibleVerse(uid: 0, versionCode: versionCode, bookId: match.bookId, chapter: match.chapter, verse: match.verse, content: match.content, paragraph: nil),
-                                booksProvider.book(id: match.bookId)?.nameKo ?? "\(match.bookId)권"
+                                booksProvider.book(id: match.bookId)?.nameKo ?? "\(match.bookId)권",
+                                registry.code, registry.displayName
                             )
                         }
                     } else {
@@ -772,7 +783,7 @@ final class SearchViewModel {
                         for verse in verses {
                             let key = "\(verse.bookId)-\(verse.chapter)-\(verse.verse)"
                             guard !seen.contains(key), wordCandidates[key] == nil else { continue }
-                            wordCandidates[key] = (verse, booksProvider.book(id: verse.bookId)?.nameKo ?? "\(verse.bookId)권")
+                            wordCandidates[key] = (verse, booksProvider.book(id: verse.bookId)?.nameKo ?? "\(verse.bookId)권", registry.code, registry.displayName)
                         }
                     }
                 }
@@ -795,7 +806,9 @@ final class SearchViewModel {
                 let score = KeywordMatchScorer.score(words: words, in: entry.verse.content)
                 let result = VerseSearchResult(
                     bookId: entry.verse.bookId, chapter: entry.verse.chapter, verse: entry.verse.verse,
-                    content: entry.verse.content, bookNameKo: entry.bookNameKo, highlightKeywords: words,
+                    content: entry.verse.content, bookNameKo: entry.bookNameKo,
+                    translationCode: entry.translationCode, translationDisplayName: entry.translationDisplayName,
+                    highlightKeywords: words,
                     // [2026-08-26 추가, 같은 날 정정] 위 `VerseSearchResult.
                     // matchCount` 상단 주석 참고 — 처음엔 `score.totalOccurrences`
                     // 였는데, 사용자가 "중복 제거된 매칭된 검색어의 수"를 원한다고
@@ -1027,7 +1040,9 @@ final class SearchViewModel {
                 VerseSearchResult(
                     bookId: match.bookId, chapter: match.chapter, verse: match.verse,
                     content: match.content,
-                    bookNameKo: booksProvider.book(id: match.bookId)?.nameKo ?? "\(match.bookId)권"
+                    bookNameKo: booksProvider.book(id: match.bookId)?.nameKo ?? "\(match.bookId)권",
+                    translationCode: TranslationBootstrap.bundledTranslationCode,
+                    translationDisplayName: TranslationBootstrap.bundledDisplayName
                 )
             })
             lastAIQueryUsed = outcome.queryUsedForEmbedding
@@ -1053,7 +1068,9 @@ final class SearchViewModel {
             results.append(VerseSearchResult(
                 bookId: verse.bookId, chapter: verse.chapter, verse: verse.verse,
                 content: verse.content,
-                bookNameKo: booksProvider.book(id: verse.bookId)?.nameKo ?? "\(verse.bookId)권"
+                bookNameKo: booksProvider.book(id: verse.bookId)?.nameKo ?? "\(verse.bookId)권",
+                translationCode: TranslationBootstrap.bundledTranslationCode,
+                translationDisplayName: TranslationBootstrap.bundledDisplayName
             ))
             if results.count >= 30 { break }
         }
