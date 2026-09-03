@@ -36,7 +36,8 @@ enum EditorDefaultStyle {
     /// 상단 주석 참고) 시스템 폰트로 조용히 대체한다 — `MemoDetailView.
     /// contextualTypingFont`와 동일한 안전장치.
     static var typingFont: PlatformFont {
-        PlatformFont(name: fontName, size: fontSize) ?? .systemFont(ofSize: fontSize)
+        BundledFontRegistrar.ensureAvailable(fontName)
+        return PlatformFont(name: fontName, size: fontSize) ?? .systemFont(ofSize: fontSize)
     }
 
     static var backgroundColor: PlatformColor {

@@ -69,6 +69,12 @@ struct ChapterRelatedContentPanel: View {
     @State private var isBookOutlineExpanded = true
     @State private var isChapterSummaryExpanded = true
 
+    /// [2026-09-01 신설] 사용자 요청 — "책개요/장개요 사이즈를 고정시켜서
+    /// 내부에서 화면스크롤이 되게 하고, 개요는 한 화면에 다 표현될 수
+    /// 있도록." 아래 `outlineRow`가 펼쳐졌을 때 쓰는 고정 높이 — 대부분의
+    /// 개요는 이 안에 다 들어오고, 그보다 길면 이 높이 안에서만 스크롤된다.
+    private static let outlineBoxHeight: CGFloat = 260
+
     @Environment(\.openWindow) private var openWindow
 
     /// [2026-08-18 신설, 아이폰 실기기 크래시 fix] DocumentsHomeView.swift의
@@ -272,11 +278,17 @@ struct ChapterRelatedContentPanel: View {
                 // 메인 내비게이션을 개요 섹션으로 전환)이 있어 대신 쓸 수
                 // 있다.
                 if !isPhoneIdiom {
+                    // [2026-09-01 변경] 사용자 요청 — "책 개요/장 개요 타이틀
+                    // 우측에 있는 새창으로 보기 아이콘을 키우고 '새창으로 보기'
+                    // 설명을 넣을 것." 아이콘만 있던 버튼을 아이콘+글자
+                    // `Label`로 바꾸고, 크기도 옆의 "책 개요"/"장 개요" 제목과
+                    // 같은 `.body`로 키워 눈에 잘 띄게 했다(`.help(...)`는
+                    // macOS 마우스오버 툴팁으로 여전히 유효해 그대로 둔다).
                     Button {
                         openOutlineQuickViewWindow()
                     } label: {
-                        Image(systemName: "macwindow")
-                            .font(.caption)
+                        Label("새창으로 보기", systemImage: "macwindow")
+                            .font(.body)
                             .foregroundStyle(.secondary)
                     }
                     .buttonStyle(.plain)
@@ -285,14 +297,25 @@ struct ChapterRelatedContentPanel: View {
             }
 
             if isExpanded.wrappedValue {
-                Text(outlineAttributedText(rtfText))
-                    .lineSpacing(EditorDefaultStyle.lineSpacingPoints)
-                    .textSelection(.enabled)
-                    .fixedSize(horizontal: false, vertical: true)
-                    .frame(maxWidth: .infinity, alignment: .leading)
-                    .padding(8)
-                    .background(EditorDefaultStyle.backgroundSwiftUIColor)
-                    .clipShape(RoundedRectangle(cornerRadius: 6))
+                // [2026-09-01 변경] 사용자 요청 — "책개요/장개요 사이즈를
+                // 고정시켜서 내부에서 화면스크롤이 되게 하고, 개요는 한 화면에
+                // 다 표현될 수 있도록." 예전엔 `.fixedSize(vertical: true)`로
+                // 내용 길이만큼 이 행 자체가 한없이 늘어나서, 개요가 길면
+                // 인스펙터 전체(바깥 `List`)를 그만큼 더 스크롤해야 했다 —
+                // 이제 이 박스 자체를 고정 높이(`outlineBoxHeight`)로 두고
+                // `ScrollView`로 감싸, 길든 짧든 인스펙터에서 차지하는 자리는
+                // 항상 같고 넘치는 내용은 박스 안에서만 스크롤된다.
+                ScrollView {
+                    Text(outlineAttributedText(rtfText))
+                        .lineSpacing(EditorDefaultStyle.lineSpacingPoints)
+                        .textSelection(.enabled)
+                        .fixedSize(horizontal: false, vertical: true)
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                        .padding(8)
+                }
+                .frame(height: Self.outlineBoxHeight)
+                .background(EditorDefaultStyle.backgroundSwiftUIColor)
+                .clipShape(RoundedRectangle(cornerRadius: 6))
             }
         }
     }
@@ -506,9 +529,21 @@ struct ChapterRelatedContentPanel: View {
     private func documentSection(verse: Int) -> some View {
         let taggedDocuments = viewModel.relatedDocuments
         let mentionedDocuments = viewModel.verseMentions(verse: verse).filter { $0.sourceType == .document }
+        // [2026-09-02 추가] 사용자 보고 — 한 연구문서 안에서 같은 절을 가리키는
+        // "본문에서 언급됨" 행이 여러 개(예: 7개) 나타남. 원인을 확인해 보니
+        // 원본 hwp 문서 자체가 같은 절 인용구를 여러 페이지/문항마다 반복해서
+        // 적어두는 개요형 구조인 경우가 있어(사용자 확인), 이런 반복은 버그가
+        // 아니라 진짜 서로 다른 위치를 정직하게 하나씩 찾아낸 결과일 수 있다 —
+        // 그렇다고 화면에 완전히 똑같은 문장을 5~7번 그대로 나열하는 건
+        // 사용자에게 불필요하게 길고 헷갈린다. 화면에 실제로 보이는 텍스트
+        // (스니펫, 없으면 원문 검색어)가 글자 그대로 같은 항목들만 한 줄로
+        // 묶어 "N곳에서 언급됨"으로 개수를 알려준다 — 서로 다른 텍스트는 절대
+        // 합치지 않으므로 원본 자체가 반복 구조가 아닌 경우엔(즉 스니펫이 서로
+        // 다르면) 지금처럼 모두 그대로 보인다.
+        let groupedMentionedDocuments = groupedByDisplayText(mentionedDocuments)
         Section {
             sectionTitleRow(
-                "\(verse)절 관련 연구문서 (\(taggedDocuments.count + mentionedDocuments.count))",
+                "\(verse)절 관련 연구문서 (\(taggedDocuments.count + groupedMentionedDocuments.count))",
                 systemImage: "doc.text.magnifyingglass", tint: .orange
             )
             if taggedDocuments.isEmpty && mentionedDocuments.isEmpty {
@@ -543,13 +578,24 @@ struct ChapterRelatedContentPanel: View {
                     }
                     .padding(.vertical, 6)
                 }
-                ForEach(mentionedDocuments) { mention in
+                ForEach(groupedMentionedDocuments) { group in
+                    // 탭하면 그룹의 대표(가장 먼저 등장한 mention) 위치로
+                    // 이동한다 — 여러 위치가 텍스트만 같을 뿐 실제로는 문서
+                    // 안 서로 다른 곳일 수 있어, 완전히 같은 텍스트인 이상
+                    // 어느 곳으로 가도(글자상) 사용자가 찾던 내용은 동일하다.
                     Button {
-                        onSelectVerseMention(mention)
+                        onSelectVerseMention(group.representative)
                     } label: {
                         VStack(alignment: .leading, spacing: 6) {
-                            originBadge("본문에서 언급됨", systemImage: "text.magnifyingglass")
-                            Text(mention.snippet.isEmpty ? mention.searchText : mention.snippet)
+                            HStack(spacing: 6) {
+                                originBadge("본문에서 언급됨", systemImage: "text.magnifyingglass")
+                                if group.count > 1 {
+                                    Text("\(group.count)곳에서 언급됨")
+                                        .font(.caption2)
+                                        .foregroundStyle(.secondary)
+                                }
+                            }
+                            Text(group.representative.snippet.isEmpty ? group.representative.searchText : group.representative.snippet)
                                 .font(.callout)
                                 .foregroundStyle(.primary)
                                 .lineSpacing(2)
@@ -560,6 +606,32 @@ struct ChapterRelatedContentPanel: View {
                     .buttonStyle(.plain)
                 }
             }
+        }
+    }
+
+    /// [2026-09-02 추가] `documentSection`의 중복 스니펫 묶음용 — 화면에 보일
+    /// 텍스트가 완전히 같은 `VerseMention`들을 대표 1개 + 개수로 압축한다.
+    /// 딕셔너리만 쓰면 등장 순서가 흐트러지므로, `order` 배열로 "이 텍스트를
+    /// 처음 본 순서"를 따로 기억해 그 순서 그대로 돌려준다.
+    private struct GroupedMention: Identifiable {
+        let id: UUID
+        let representative: VerseMention
+        let count: Int
+    }
+
+    private func groupedByDisplayText(_ mentions: [VerseMention]) -> [GroupedMention] {
+        var order: [String] = []
+        var buckets: [String: [VerseMention]] = [:]
+        for mention in mentions {
+            let key = mention.snippet.isEmpty ? mention.searchText : mention.snippet
+            if buckets[key] == nil {
+                order.append(key)
+            }
+            buckets[key, default: []].append(mention)
+        }
+        return order.compactMap { key in
+            guard let group = buckets[key], let first = group.first else { return nil }
+            return GroupedMention(id: first.id, representative: first, count: group.count)
         }
     }
 

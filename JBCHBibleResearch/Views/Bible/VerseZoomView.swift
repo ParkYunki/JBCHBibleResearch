@@ -63,6 +63,36 @@ struct VerseZoomView: View {
     /// 책임진다(같은 화면이 시트 두 개를 동시에 띄울 수 없는 기존 제약,
     /// `pendingPhraseMemo`와 같은 이유).
     var onSwitchToOriginalTextInfo: () -> Void
+    /// [2026-09-02 신설] 사용자 요청 — "메모하기 버튼 옆 '개인 묵상' 버튼을
+    /// 클릭할 때 동작 = 메모하기 내 '개인 묵상' 버튼 클릭할 때와 동일하게."
+    /// 바깥 하단 액션바의 "개인 묵상" 버튼(`BibleReadingView.
+    /// openPersonalNoteDirectly()`)이 이 값을 `true`로 넘겨 이 화면을 열면,
+    /// 화면이 뜨자마자(`onAppear`) 아래 `beginComposingPersonalNote()`를 자동
+    /// 호출해 안(내부) 버튼을 누른 것과 완전히 같은 결과(말씀구절/한자/관주/
+    /// 개인묵상 목록이 다 보이는 채로, 그 목록 맨 위에 새 항목 입력칸이 열림)를
+    /// 만든다.
+    /// [2026-09-02 변경] 사용자 요청 — "개인 묵상의 텍스트를 꼭 팝오버에서
+    /// 작성을 해야하는가? ... 리스트 항목에 직접 작성을 해서 등록하는 UI"로
+    /// 전환하면서, 이 값이 트리거하는 것도 팝오버가 아니라 아래
+    /// `isComposingPersonalNote` 기반 인라인 입력칸이 됐다.
+    ///
+    /// [2026-09-02 버그 수정, 2차] 사용자 보고 — "다른 기능에서 성경 조회로
+    /// 넘어온 뒤 처음 개인 묵상 버튼을 누르면 입력칸이 안 뜨고, 팝업을 닫고
+    /// 다시 누르면 뜬다." 1차 시도(`BibleReadingView.openPersonalNoteDirectly()`
+    /// 에서 시트를 여는 시점만 다음 런루프 틱으로 미루는 것)로는 해결되지
+    /// 않았다 — 이 파일 위쪽 `PhraseNoteEditorPopover.swift`의 2026-08-11
+    /// 15차 수정 주석이 이미 실측으로 확인해 둔 것과 정확히 같은 근본 원인일
+    /// 가능성이 높다: 문제는 "언제 스냅샷을 뜨느냐"가 아니라 "생성자 인자로
+    /// 값을 한 번만(`let`) 받는 것 자체"다 — `.sheet`의 콘텐츠 클로저가 이
+    /// 화면을 처음 준비하는 시점에 `shouldAutoPresentPersonalNoteEditor`를
+    /// 읽어 `VerseZoomView.init`에 `let`으로 얼려서 넘기면, 그 시점이 실제로
+    /// 이 뷰가 화면에 붙어 `onAppear`가 도는 시점보다 이를 수 있어 값이
+    /// 어긋날 수 있다(런루프 틱을 미루는 정도로는 이 어긋남 자체가 없어지지
+    /// 않는다는 게 15차 수정에서 이미 확인된 바). `PhraseNoteEditorPopover`가
+    /// `editingPhraseNote`/`pendingAnchorText`를 `@Binding`으로 바꿔 해결한
+    /// 것과 동일하게, 이 값도 `@Binding`으로 바꿔 `onAppear`가 뷰가 실제로
+    /// 화면에 붙은 뒤 "그 순간의" 최신 값을 다시 읽게 한다.
+    @Binding var autoPresentPersonalNoteEditor: Bool
 
     @Environment(\.dismiss) private var dismiss
     @State private var selectedColumnID: UUID
@@ -76,6 +106,30 @@ struct VerseZoomView: View {
     /// [2026-08-11 추가] "메모"(드래그 표현 부연설명) 편집 팝오버 — nil이면 새로
     /// 만들기(현재 `selectedRange`/`anchorText` 기준), 값이 있으면 그 메모 수정.
     @State private var isPhraseNoteEditorPresented = false
+    /// [2026-09-02 변경] 사용자 요청 — "개인 묵상의 텍스트를 꼭 팝오버에서
+    /// 작성을 해야하는가? ... 리스트 항목에 직접 작성을 해서 등록하는 UI는
+    /// 불가능한지 검토하라." 확인 결과(1) 팝오버를 완전히 없애고 리스트
+    /// 카드 자체를 편집(작성) 모드로 바꾸는 방향으로 진행하기로 함 — 그래서
+    /// `PersonalNoteEditorPopover`/`isPersonalNoteEditorPresented` 팝오버
+    /// 상태는 지우고, 아래 `personalNoteList`가 이 값이 켜져 있을 때 목록
+    /// 맨 위에 입력칸(카드)을 직접 그린다.
+    /// 사용자 확인(2) — "수정은 지원하지 않는다. 삭제하고 다시 등록하는
+    /// 프로세스이다. 자동저장은 하지 않는다." 그래서 이 입력칸은 항상 "새
+    /// 항목 만들기" 전용이고(기존 항목을 다시 여는 편집 모드는 없음), 텍스트는
+    /// `newPersonalNoteText`에만 임시로 담겨 있다가 "등록" 버튼을 눌러야
+    /// `BibleReadingViewModel.createPersonalNote`로 실제 저장된다.
+    @State private var isComposingPersonalNote = false
+    @State private var newPersonalNoteText = ""
+    /// 사용자 확인 — "'+ 개인 묵상'을 눌러 입력칸이 열린 뒤, 아무것도 쓰지
+    /// 않고 다른 곳을 탭하면 그냥 닫히고 저장 안 됨." 포커스를 잃는 순간이
+    /// "다른 곳을 탭함"의 신호 — 아래 `body`의 `.onChange(of:
+    /// isNewPersonalNoteFieldFocused)`가 이 값이 `false`로 바뀔 때 아직
+    /// 등록되지 않은 입력칸이면(=`isComposingPersonalNote`가 여전히 `true`)
+    /// 초안을 버리고 입력칸을 닫는다. "등록" 버튼 자체를 눌렀을 때는 그
+    /// 버튼의 동작이 먼저 `isComposingPersonalNote`를 `false`로 만들어 두므로
+    /// (아래 `commitNewPersonalNote()`) 이 포커스-상실 처리와 겹쳐도 중복
+    /// 저장되지 않는다.
+    @FocusState private var isNewPersonalNoteFieldFocused: Bool
     @State private var editingPhraseNote: VersePhraseNote?
     /// [2026-08-11 12차 수정] 사용자 보고 — "선택모드 - 처음 텍스트 선택 -
     /// 처음 메모 클릭: 메모 팝업 상단에 선택된 텍스트 정보가 나타나지 않음.
@@ -116,7 +170,8 @@ struct VerseZoomView: View {
         onOpenPhraseMemo: @escaping (UserMemo) -> Void,
         onJumpToCrossReference: @escaping (BibleVerseRef) -> Void,
         onSelectVerseMention: @escaping (VerseMention) -> Void,
-        onSwitchToOriginalTextInfo: @escaping () -> Void
+        onSwitchToOriginalTextInfo: @escaping () -> Void,
+        autoPresentPersonalNoteEditor: Binding<Bool> = .constant(false)
     ) {
         self.verseNumber = verseNumber
         self.columns = columns
@@ -125,6 +180,7 @@ struct VerseZoomView: View {
         self.onJumpToCrossReference = onJumpToCrossReference
         self.onSelectVerseMention = onSelectVerseMention
         self.onSwitchToOriginalTextInfo = onSwitchToOriginalTextInfo
+        self._autoPresentPersonalNoteEditor = autoPresentPersonalNoteEditor
         _selectedColumnID = State(initialValue: columns.first?.id ?? UUID())
     }
 
@@ -163,6 +219,7 @@ struct VerseZoomView: View {
         // 줄바꿈은 폰트 크기와 무관하게 그대로 유지되는 게 맞다).
         let size: CGFloat = 19
         guard settings.bibleFontName != "System" else { return .systemFont(ofSize: size) }
+        BundledFontRegistrar.ensureAvailable(settings.bibleFontName)
         return PlatformFont(name: settings.bibleFontName, size: size) ?? .systemFont(ofSize: size)
     }
 
@@ -370,15 +427,21 @@ struct VerseZoomView: View {
                 // [2026-08-15 추가] 사용자 요청 — "관주 영역 위에 한문 단어
                 // 뜻풀이 영역을 따로 둘 것." 한자 뜻풀이가 있으면 관주/메모
                 // 상태줄보다 먼저(위에) 그린다.
-                if !hanjaWords.isEmpty || !crossReferences.isEmpty || !phraseMemos.isEmpty || !verseMentions.isEmpty {
+                // [2026-09-02 변경] 사용자 요청 — "개인 묵상의 텍스트를 꼭
+                // 팝오버에서 작성을 해야하는가? ... 리스트 항목에 직접
+                // 작성을 해서 등록하는 UI." 이 절에 개인 묵상/한자/관주/관련
+                // 내용이 하나도 없어도, "+ 개인 묵상"으로 입력칸을 여는
+                // 순간(`isComposingPersonalNote`)엔 그 입력칸을 보여줄 이
+                // 섹션 자체가 그려져야 한다 — 세 조건 모두에 추가했다.
+                if !hanjaWords.isEmpty || !crossReferences.isEmpty || !phraseMemos.isEmpty || !verseMentions.isEmpty || isComposingPersonalNote {
                     Divider()
                     if !hanjaWords.isEmpty {
                         hanjaGlossSection
-                        if !crossReferences.isEmpty || !phraseMemos.isEmpty || !verseMentions.isEmpty {
+                        if !crossReferences.isEmpty || !phraseMemos.isEmpty || !verseMentions.isEmpty || isComposingPersonalNote {
                             Divider()
                         }
                     }
-                    if !crossReferences.isEmpty || !phraseMemos.isEmpty || !verseMentions.isEmpty {
+                    if !crossReferences.isEmpty || !phraseMemos.isEmpty || !verseMentions.isEmpty || isComposingPersonalNote {
                         annotationStatusBar
                     }
                 }
@@ -559,6 +622,16 @@ struct VerseZoomView: View {
                 )
                 .id(editingPhraseNote?.id.uuidString ?? "new")
             }
+            // [2026-09-02 변경] 위 `isComposingPersonalNote` 상단 주석 참고 —
+            // 팝오버를 없애고 `personalNoteList`가 이 값을 직접 보고 입력칸을
+            // 그리므로, 여기엔 더 이상 별도 `.popover`가 필요 없다.
+            // 바깥 "개인 묵상" 버튼으로 열렸을 때만 화면이 뜨자마자 자동으로
+            // 그 입력칸을 연다(`autoPresentPersonalNoteEditor` 상단 주석 참고).
+            .onAppear {
+                if autoPresentPersonalNoteEditor {
+                    beginComposingPersonalNote()
+                }
+            }
         }
         #if os(macOS)
         // [2026-08-21 변경] 위 `bibleFont`/`targetCharsPerLine` 주석과 같은
@@ -664,7 +737,7 @@ struct VerseZoomView: View {
             // 드래그하지 않아도 절에 종속되도록. 이름을 [개인 주석]으로 변경."
             // [2026-08-12 변경] "개인 주석" → "개인 묵상" 메뉴명 일괄 변경.
             actionButton(title: "개인 묵상", systemImage: "note.text") {
-                openPersonalNote()
+                beginComposingPersonalNote()
             }
 
             // [2026-08-12 수정] 사용자 정정 — "관주 버튼 → 기존 관주 보기: 내
@@ -804,12 +877,47 @@ struct VerseZoomView: View {
         }
     }
 
-    /// "개인 주석" 버튼(위 actionBar 주석 참고) — 선택 여부와 무관하게 항상 절
-    /// 전체 메모를 열거나 만든다.
-    private func openPersonalNote() {
-        let memo = viewModel.openOrCreateVerseMemo(verse: verseNumber)
-        onOpenPhraseMemo(memo)
-        dismiss()
+    /// [2026-09-02 변경] 사용자 요청 — "개인 묵상의 텍스트를 꼭 팝오버에서
+    /// 작성을 해야하는가? ... 리스트 항목에 직접 작성을 해서 등록하는 UI는
+    /// 불가능한지 검토하라." 검토 후 사용자 확인(1) — 팝오버를 완전히 없애고
+    /// 리스트 카드 자체(맨 위의 입력칸)를 여는 방식으로 전환. 예전엔 이 버튼이
+    /// `openOrCreateVerseMemo`로 이 절의 (유일한) 절 전체 메모를 찾거나 만들어
+    /// 팝오버로 열었는데, 사용자 확인 — "묵상은 한 구절에 하나만 있는 것이
+    /// 아니라, 여러개가 등록될 수 있는 요소이다 ... '+ 개인 묵상' 누르면
+    /// 리스트 항목이 추가가 되어 새로 등록되는 것"이라, 기존 메모를 찾아
+    /// 재사용하지 않고 매번 빈 입력칸을 새로 연다 — 실제 레코드는 아래
+    /// `commitNewPersonalNote()`가 "등록"을 눌렀을 때만 만든다.
+    private func beginComposingPersonalNote() {
+        newPersonalNoteText = ""
+        isComposingPersonalNote = true
+    }
+
+    /// 위 입력칸의 "등록" 버튼 — 사용자 확인(2) "수정은 지원하지 않는다.
+    /// 삭제하고 다시 등록하는 프로세스이다. 자동저장은 하지 않는다."에 따라
+    /// 이 버튼을 눌러야만 실제로 저장되고(그 전까지 타이핑은 화면 로컬 상태일
+    /// 뿐 DB에 없다), 한 번 만든 뒤엔 고치는 API 자체가 없다(고치려면 리스트의
+    /// 삭제 버튼으로 지우고 이 입력칸으로 다시 등록).
+    private func commitNewPersonalNote() {
+        let trimmed = newPersonalNoteText.trimmingCharacters(in: .whitespacesAndNewlines)
+        guard !trimmed.isEmpty else { return }
+        viewModel.createPersonalNote(verse: verseNumber, contentText: trimmed)
+        isComposingPersonalNote = false
+        newPersonalNoteText = ""
+    }
+
+    /// 사용자 확인(2) — "'+ 개인 묵상'을 눌러 리스트에 입력칸(카드)이 열린 뒤,
+    /// 아무것도 쓰지 않고 다른 곳을 탭하면 어떻게 되어야 하나요?" → "그냥
+    /// 닫히고 저장 안 됨." 위 `isNewPersonalNoteFieldFocused` 상단 주석 참고 —
+    /// 포커스가 빠지는 것을 "다른 곳을 탭함"의 신호로 본다(아래 `body`의
+    /// `.onChange(of: isNewPersonalNoteFieldFocused)`). 입력칸의 명시적
+    /// "취소" 버튼도 같은 함수를 그대로 부른다 — 결과가 완전히 같기 때문(등록
+    /// 안 하고 초안을 버림). `commitNewPersonalNote()`가 먼저
+    /// `isComposingPersonalNote = false`로 바꿔 둔 경우(정상 등록)엔 아래
+    /// `guard`에 걸려 아무 일도 하지 않는다 — 중복 처리 아님.
+    private func discardComposingPersonalNote() {
+        guard isComposingPersonalNote else { return }
+        isComposingPersonalNote = false
+        newPersonalNoteText = ""
     }
 
     // MARK: - 기존 주석 표시 (2026-08-08 추가)
@@ -970,6 +1078,7 @@ struct VerseZoomView: View {
     private var bibleSwiftUIFont: Font {
         let settings = UserSettingsStore.shared
         guard settings.bibleFontName != "System" else { return .system(size: 17) }
+        BundledFontRegistrar.ensureAvailable(settings.bibleFontName)
         return .custom(settings.bibleFontName, size: 17)
     }
 
@@ -1022,9 +1131,18 @@ struct VerseZoomView: View {
                                 }
                                 dismiss()
                             } label: {
+                                // [2026-09-02 변경] 사용자 요청 — "메모하기 내
+                                // 관주 표시도 목업 html처럼 동일한 스타일로
+                                // 할것 (하늘색 배경 + 파란색 글씨)." 밑줄 텍스트
+                                // 하나였던 걸 칩 모양(옅은 파란 배경 + 파란
+                                // 글씨, 밑줄은 유지)으로 바꿨다.
                                 Text(segment.label)
                                     .font(.body)
                                     .underline()
+                                    .foregroundStyle(Color.blue)
+                                    .padding(.horizontal, 6)
+                                    .padding(.vertical, 2)
+                                    .background(Color.blue.opacity(0.12), in: RoundedRectangle(cornerRadius: 6))
                             }
                             .buttonStyle(.plain)
                         }
@@ -1032,34 +1150,31 @@ struct VerseZoomView: View {
                 }
             }
 
-            if !phraseMemos.isEmpty || !verseMentions.isEmpty {
-                HStack(spacing: 16) {
-                    if !phraseMemos.isEmpty {
-                        Menu {
-                            ForEach(phraseMemos) { memo in
-                                Button(phraseMemoLabel(memo)) {
-                                    onOpenPhraseMemo(memo)
-                                    dismiss()
-                                }
-                            }
-                        } label: {
-                            Label("개인 묵상 \(phraseMemos.count)개", systemImage: "note.text")
-                        }
-                    }
+            // [2026-09-02 변경] 사용자 요청 — "개인 묵상을 왼쪽 사이드바
+            // '말씀 노트'에서만 보지 말고 구절 클릭 시에도 보여줄 것. 한
+            // 구절에 여러 번 묵상할 수 있으므로 리스트로." 목업 확인(옵션
+            // 2b) 후 반영 — 탭해야 펼쳐지던 `Menu` 드롭다운을 없애고, 관주
+            // 칩 목록 바로 아래에 이 절의 개인 묵상 전부를 카드 목록으로
+            // 항상 펼쳐서 보여준다. 카드를 탭하면 기존과 동일하게
+            // `onOpenPhraseMemo`로 편집기 시트를 연다. "관련 내용"은 원래도
+            // 별도 버튼이었으므로 그대로 아래 자기 줄에 둔다.
+            if !phraseMemos.isEmpty || isComposingPersonalNote {
+                personalNoteList
+            }
 
-                    if !verseMentions.isEmpty {
-                        Button {
-                            isVerseMentionPopoverPresented = true
-                        } label: {
-                            Label("관련 내용 \(verseMentions.count)개", systemImage: "doc.text.magnifyingglass")
-                        }
-                        .buttonStyle(.plain)
-                        .popover(isPresented: $isVerseMentionPopoverPresented) {
-                            VerseMentionListView(mentions: verseMentions) { mention in
-                                isVerseMentionPopoverPresented = false
-                                onSelectVerseMention(mention)
-                                dismiss()
-                            }
+            if !verseMentions.isEmpty {
+                HStack(spacing: 16) {
+                    Button {
+                        isVerseMentionPopoverPresented = true
+                    } label: {
+                        Label("관련 내용 \(verseMentions.count)개", systemImage: "doc.text.magnifyingglass")
+                    }
+                    .buttonStyle(.plain)
+                    .popover(isPresented: $isVerseMentionPopoverPresented) {
+                        VerseMentionListView(mentions: verseMentions) { mention in
+                            isVerseMentionPopoverPresented = false
+                            onSelectVerseMention(mention)
+                            dismiss()
                         }
                     }
 
@@ -1072,6 +1187,142 @@ struct VerseZoomView: View {
         .padding(.horizontal)
         .padding(.vertical, 6)
         .frame(maxWidth: .infinity, alignment: .leading)
+    }
+
+    /// [2026-09-02 신설] 위 `annotationStatusBar`의 "개인 묵상" 섹션 — 예전
+    /// `Menu` 드롭다운을 대체하는 상시 카드 목록. 카드마다 마지막 수정일과
+    /// 본문 앞부분(최대 2줄) 미리보기를 보여준다 — `phraseMemos`는 이 절의
+    /// 절 전체 메모 + 이 번역본의 표현별 메모를 모두 합친 목록이라(위
+    /// `BibleReadingViewModel.phraseMemos(translationCode:verse:)` 참고),
+    /// 한 절에 여러 개가 있을 수 있다는 사용자 설명과 정확히 들어맞는다.
+    /// [2026-09-02 변경] 사용자 요청 — "개인 묵상의 텍스트를 꼭 팝오버에서
+    /// 작성을 해야하는가? ... 리스트 항목에 직접 작성을 해서 등록하는 UI는
+    /// 불가능한지 검토하라." 검토 후 확인받은 대로 팝오버를 없애고, 목록
+    /// 맨 위에 새 항목 입력칸(`composingPersonalNoteCard`)을 직접 그린다.
+    private var personalNoteList: some View {
+        VStack(alignment: .leading, spacing: 6) {
+            Label("개인 묵상 \(phraseMemos.count)개", systemImage: "note.text")
+            VStack(alignment: .leading, spacing: 6) {
+                if isComposingPersonalNote {
+                    composingPersonalNoteCard
+                }
+
+                ForEach(phraseMemos) { memo in
+                    // [2026-09-02 변경] 사용자 확인 — 이 목록엔 사실 두 종류가
+                    // 섞여 있다: ① "+ 개인 묵상"으로 만드는 절 전체 메모
+                    // (`rangeStart == nil`, 이번 변경으로 수정 미지원·삭제 후
+                    // 재등록), ② 텍스트를 드래그 선택한 뒤 "메모" 버튼으로
+                    // 만드는 표현별 메모(`rangeStart != nil`, 오늘 요청과
+                    // 무관한 기존 기능 — 지금도 카드를 탭하면
+                    // `onOpenPhraseMemo`로 편집기를 연다). 사용자 확인 —
+                    // "②만 계속 탭해서 수정 가능" — 그래서 탭 가능 여부를
+                    // `rangeStart` 유무로 가른다. 삭제 버튼은 두 종류 모두에
+                    // 그대로 유지(기존 동작 — "개인묵상 리스트에 삭제버튼을
+                    // 추가할 것" 요청이 종류를 구분하지 않았다).
+                    HStack(alignment: .top, spacing: 8) {
+                        if memo.rangeStart != nil {
+                            Button {
+                                onOpenPhraseMemo(memo)
+                                dismiss()
+                            } label: {
+                                personalNoteCardBody(memo)
+                            }
+                            .buttonStyle(.plain)
+                        } else {
+                            personalNoteCardBody(memo)
+                        }
+
+                        Button(role: .destructive) {
+                            viewModel.deletePersonalNote(memo)
+                        } label: {
+                            Image(systemName: "trash")
+                                .font(.footnote)
+                                .foregroundStyle(.secondary)
+                        }
+                        .buttonStyle(.plain)
+                    }
+                    .padding(8)
+                    .background(Color.yellow.opacity(0.15), in: RoundedRectangle(cornerRadius: 8))
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 8)
+                            .stroke(Color.yellow.opacity(0.6), lineWidth: 1)
+                    )
+                }
+            }
+        }
+    }
+
+    /// 위 `personalNoteList`의 카드 한 장의 본문(날짜 + 미리보기) — 탭
+    /// 가능한 표현별 메모(`Button` 라벨)와 탭 불가능한 절 전체 메모(맨몸)가
+    /// 똑같은 모양을 공유하도록 분리했다.
+    private func personalNoteCardBody(_ memo: UserMemo) -> some View {
+        VStack(alignment: .leading, spacing: 2) {
+            Text(memo.updatedAt, format: .dateTime.year().month().day())
+                .font(.caption2)
+                .foregroundStyle(.tertiary)
+            Text(phraseMemoLabel(memo))
+                .font(.body)
+                .foregroundStyle(.primary)
+                .lineLimit(2)
+                .multilineTextAlignment(.leading)
+        }
+        .frame(maxWidth: .infinity, alignment: .leading)
+    }
+
+    /// [2026-09-02 신설] "+ 개인 묵상"을 누르면 위 `personalNoteList` 맨
+    /// 위에 뜨는 새 항목 입력칸. 사용자 확인(3) — 카드 배경색(연노랑 + 노란
+    /// 테두리)은 다른 카드와 동일하게 유지. 사용자 확인(2) — 자동저장은
+    /// 하지 않으므로 "등록"을 눌러야만 `commitNewPersonalNote()`가 실제로
+    /// 저장하고, "취소"를 누르거나(또는 아무것도 안 쓰고 다른 곳을 탭해
+    /// 포커스를 잃으면) `discardComposingPersonalNote()`가 그냥 입력칸을
+    /// 닫는다 — 이 두 경우 다 DB엔 아무것도 남지 않는다.
+    private var composingPersonalNoteCard: some View {
+        VStack(alignment: .leading, spacing: 6) {
+            TextEditor(text: $newPersonalNoteText)
+                .font(.body)
+                .frame(minHeight: 60, maxHeight: 160)
+                .focused($isNewPersonalNoteFieldFocused)
+                .onChange(of: newPersonalNoteText) { _, newValue in
+                    // `UserMemo.contentText`의 저장 규칙과 같다 — "글자수
+                    // 2000자 제한"(`MemoTextLimit` 참고, 예전
+                    // `PersonalNoteEditorPopover`와 동일한 제한을 그대로 옮김).
+                    if newValue.count > MemoTextLimit.maxCharacters {
+                        newPersonalNoteText = String(newValue.prefix(MemoTextLimit.maxCharacters))
+                    }
+                }
+
+            HStack {
+                Text("\(newPersonalNoteText.count)/\(MemoTextLimit.maxCharacters)")
+                    .font(.caption2)
+                    .foregroundStyle(.secondary)
+                Spacer()
+                Button("취소") {
+                    discardComposingPersonalNote()
+                }
+                Button("등록") {
+                    commitNewPersonalNote()
+                }
+                .buttonStyle(.borderedProminent)
+                .disabled(newPersonalNoteText.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty)
+            }
+        }
+        .padding(8)
+        .background(Color.yellow.opacity(0.15), in: RoundedRectangle(cornerRadius: 8))
+        .overlay(
+            RoundedRectangle(cornerRadius: 8)
+                .stroke(Color.yellow.opacity(0.6), lineWidth: 1)
+        )
+        .onAppear {
+            // 새로 뜬 입력칸에 바로 타이핑을 시작할 수 있도록 커서를 둔다 —
+            // `PersonalNoteEditorPopover`가 없어졌으니 그 팝오버가 하던
+            // 포커스 이동 역할을 이 카드 스스로 진다.
+            isNewPersonalNoteFieldFocused = true
+        }
+        .onChange(of: isNewPersonalNoteFieldFocused) { _, focused in
+            if !focused {
+                discardComposingPersonalNote()
+            }
+        }
     }
 
     /// [2026-08-15 신설] 이 절에 걸린 `VerseCrossReference` 레코드 전부에서

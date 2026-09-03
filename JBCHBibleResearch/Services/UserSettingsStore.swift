@@ -56,6 +56,7 @@ final class UserSettingsStore {
         static let bibleLineSpacing = "settings.bible.lineSpacing"
         static let bibleVerseSpacing = "settings.bible.verseSpacing"
         static let bibleTextColorHex = "settings.bible.textColorHex"
+        static let bibleBackgroundColorHex = "settings.bible.backgroundColorHex"
         // [2026-08-08 추가] 성경 구절 복사 형식 — 사용자 요청, FormatTabView.swift
         // (사용자가 업로드한 참고 소스) 참고.
         static let copyReferencePosition = "settings.bible.copy.referencePosition"
@@ -326,6 +327,13 @@ final class UserSettingsStore {
         didSet { defaults.set(bibleTextColorHex, forKey: Key.bibleTextColorHex) }
     }
 
+    /// [2026-09-01 추가] 사용자 요청 — "성경 조회 배경색/글자색 테마색상 추가."
+    /// 배경색도 위 `bibleTextColorHex`와 완전히 같은 패턴(빈 문자열 = 시스템
+    /// 기본 배경, 사용자가 명시적으로 고르기 전엔 손대지 않음)으로 저장한다.
+    var bibleBackgroundColorHex: String {
+        didSet { defaults.set(bibleBackgroundColorHex, forKey: Key.bibleBackgroundColorHex) }
+    }
+
     // MARK: - 성경 구절 복사 형식 (2026-08-08 추가)
     //
     // 사용자가 참고 소스로 올린 FormatTabView.swift의 설정 항목을 이 앱의 저장
@@ -471,6 +479,7 @@ final class UserSettingsStore {
         self.bibleLineSpacing = defaults.object(forKey: Key.bibleLineSpacing) as? Double ?? 4
         self.bibleVerseSpacing = defaults.object(forKey: Key.bibleVerseSpacing) as? Double ?? 10
         self.bibleTextColorHex = defaults.string(forKey: Key.bibleTextColorHex) ?? ""
+        self.bibleBackgroundColorHex = defaults.string(forKey: Key.bibleBackgroundColorHex) ?? ""
 
         self.copyReferencePosition = (defaults.string(forKey: Key.copyReferencePosition)).flatMap(TextPosition.init) ?? .afterBody
         self.copyReferenceBracketStyle = (defaults.string(forKey: Key.copyReferenceBracketStyle)).flatMap(ReferenceBracketStyle.init) ?? .square
@@ -506,16 +515,16 @@ extension UserSettingsStore {
     /// `.custom`을 쓴다(글꼴 이름이 실제로 이 기기에 없으면 SwiftUI가 알아서
     /// 시스템 기본으로 대체한다 — 별도 존재 확인 로직이 필요 없다).
     var bibleBodyFont: Font {
-        bibleFontName == "System"
-            ? .system(size: bibleBodyFontSize)
-            : .custom(bibleFontName, size: bibleBodyFontSize)
+        guard bibleFontName != "System" else { return .system(size: bibleBodyFontSize) }
+        BundledFontRegistrar.ensureAvailable(bibleFontName)
+        return .custom(bibleFontName, size: bibleBodyFontSize)
     }
 
     /// 절 번호에 쓰는 `Font` — 글꼴은 본문과 같게 맞추고 크기만 별도로 뺐다.
     var bibleVerseNumberFont: Font {
-        bibleFontName == "System"
-            ? .system(size: bibleVerseNumberFontSize)
-            : .custom(bibleFontName, size: bibleVerseNumberFontSize)
+        guard bibleFontName != "System" else { return .system(size: bibleVerseNumberFontSize) }
+        BundledFontRegistrar.ensureAvailable(bibleFontName)
+        return .custom(bibleFontName, size: bibleVerseNumberFontSize)
     }
 
     /// `bibleTextColorHex`가 비어 있으면(기본값 — 사용자가 아직 색을 고르지
@@ -530,11 +539,21 @@ extension UserSettingsStore {
         return Color(hex: bibleTextColorHex)
     }
 
+    /// `bibleBackgroundColorHex`가 비어 있으면(기본값) nil을 돌려줘, 호출부가
+    /// 시스템 기본 배경(라이트/다크 모드 자동 대응, 예: `.background(.clear)`나
+    /// 배경 수정자 자체를 생략)을 쓰게 한다 — 위 `bibleTextColor`와 같은 이유.
+    var bibleBackgroundColor: Color? {
+        guard !bibleBackgroundColorHex.isEmpty else { return nil }
+        return Color(hex: bibleBackgroundColorHex)
+    }
+
     /// [2026-08-19 추가] `hanjaFontName`을 실제 SwiftUI `Font`로 바꾼다 — 크기는
     /// 호출부마다 다르므로(성경 조회 인라인은 본문 크기를 따라가고, 확대보기
     /// 한자 뜻풀이는 17pt 고정) 인자로 받는다. `bibleBodyFont`와 같은 안전망 —
     /// 폰트가 실제로 등록되지 않았어도 SwiftUI가 알아서 시스템 폰트로 대체한다.
     func hanjaFont(size: CGFloat) -> Font {
-        hanjaFontName == "System" ? .system(size: size) : .custom(hanjaFontName, size: size)
+        guard hanjaFontName != "System" else { return .system(size: size) }
+        BundledFontRegistrar.ensureAvailable(hanjaFontName)
+        return .custom(hanjaFontName, size: size)
     }
 }

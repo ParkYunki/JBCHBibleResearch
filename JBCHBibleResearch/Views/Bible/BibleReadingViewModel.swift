@@ -117,6 +117,23 @@ final class BibleReadingViewModel {
     // 전체 분량을 한 번에 불러와 두고 각 절 렌더링 시점에는 메모리에서 필터링만
     // 한다(장 하나 분량이라 매 절마다 새로 쿼리할 필요가 없다).
     private(set) var chapterHighlights: [VerseHighlight] = []
+    /// [2026-09-02 추가] 사용자 보고 — "성경 조회 맨 왼쪽(기본 성경) 빠르게
+    /// 스크롤시 버벅거림." 원인 중 하나 — 아래 `highlights(translationCode:
+    /// verse:)`가 스크롤로 `VerseRow`가 다시 그려질 때마다 장 전체 배열을
+    /// `.filter`로 처음부터 다시 훑었다(장 안 형광펜이 많을수록, 스크롤이
+    /// 빠를수록 매 프레임 O(장 전체 크기) 비용이 쌓인다). "(번역본코드|절번호)
+    /// → 형광펜 목록" 인덱스를 따로 두고, `chapterHighlights`를 실제로 바꾸는
+    /// 지점(`addHighlight`/`deleteHighlight`/`purgeLegacyMarkHighlights` 등, 아래
+    /// `rebuildHighlightsIndex` 호출부 참고) 각각에서 이 인덱스를 다시 만들어
+    /// 항상 최신으로 맞춘다 —
+    /// `didSet`으로 자동화하려 했으나 `@Observable` 매크로가 `private(set)` +
+    /// `didSet` + 초기값 조합을 계산 프로퍼티로 취급해 컴파일 에러가 나서(사용자
+    /// 실기기 빌드로 확인), 각 변경 지점에서 명시적으로 호출하는 방식으로
+    /// 바꿨다.
+    private var chapterHighlightsIndex: [String: [VerseHighlight]] = [:]
+    private func rebuildHighlightsIndex() {
+        chapterHighlightsIndex = Dictionary(grouping: chapterHighlights) { "\($0.translationCode)|\($0.verse)" }
+    }
     /// [2026-08-15 변경] 사용자 요청 — "성경관련 json seed 파일은 기본 제공 db에
     /// 넣을 것 ... 관주." 이제 이 배열은 두 출처를 섞어 담는다: 사용자가 실제로
     /// 만든 관주(SwiftData, `source == .user`)와, `ReferenceData.sqlite`에서 매번
@@ -126,20 +143,114 @@ final class BibleReadingViewModel {
     /// 손대지 않아도 된다 — 어차피 절 번호로만 걸러서 두 출처를 구분할 필요가
     /// 없다.
     private(set) var chapterCrossReferences: [VerseCrossReference] = []
+    /// [2026-09-02 추가] 위 `chapterHighlightsIndex`와 완전히 같은 이유·같은
+    /// 방식(명시적 호출)으로 유지한다.
+    private var chapterCrossReferencesIndex: [String: [VerseCrossReference]] = [:]
+    private func rebuildCrossReferencesIndex() {
+        chapterCrossReferencesIndex = Dictionary(grouping: chapterCrossReferences) { "\($0.translationCode)|\($0.verse)" }
+    }
     /// [2026-08-11 신설] "메모"(신규, 드래그한 특정 표현에 짧은 텍스트를 붙이는
     /// 기능) — 위 `chapterHighlights`와 완전히 같은 원칙(장 전체를 한 번에 불러와
     /// 절 렌더링 시점엔 메모리 필터링만).
     private(set) var chapterPhraseNotes: [VersePhraseNote] = []
+    /// [2026-09-02 추가] 위 `chapterHighlightsIndex`와 완전히 같은 이유·같은
+    /// 방식(명시적 호출)으로 유지한다.
+    private var chapterPhraseNotesIndex: [String: [VersePhraseNote]] = [:]
+    private func rebuildPhraseNotesIndex() {
+        chapterPhraseNotesIndex = Dictionary(grouping: chapterPhraseNotes) { "\($0.translationCode)|\($0.verse)" }
+    }
     /// [2026-08-14 신설, 2026-08-15 변경] 난외주 — 위 `chapterCrossReferences`와
     /// 완전히 같은 이유로 사용자 생성분(SwiftData, 지금은 편집 UI가 없어 항상
     /// 비어 있다)과 번들분(`ReferenceData.sqlite`, 인메모리 인스턴스)을 섞어 담는다.
     private(set) var chapterMarginalNotes: [VerseMarginalNote] = []
+    /// [2026-09-02 추가] 위 `chapterHighlightsIndex`와 완전히 같은 이유·같은
+    /// 방식(명시적 호출)으로 유지한다. 지금은 이 배열을 런타임에 바꾸는 지점이
+    /// 장 로드(전체 재대입) 한 곳뿐이라 호출 지점도 하나뿐이다.
+    private var chapterMarginalNotesIndex: [String: [VerseMarginalNote]] = [:]
+    private func rebuildMarginalNotesIndex() {
+        chapterMarginalNotesIndex = Dictionary(grouping: chapterMarginalNotes) { "\($0.translationCode)|\($0.verse)" }
+    }
     /// [2026-08-14 신설, 2026-08-15 변경] 절 단위 한자 주석 — 사용자가 직접 만드는
     /// 경로가 아예 없는 100% 번들 전용 데이터라(`VerseHanjaAnnotation` `@Model`
     /// 자체를 삭제했다, `BibleResearchModels`의 "삭제, 같은 날 되돌림" 주석 참고)
     /// 더 이상 SwiftData를 거치지 않는다 — `ReferenceDataStore.hanjaAnnotations(
     /// bookId:chapter:)`가 돌려준 절 번호별 딕셔너리를 그대로 들고 있는다.
     private(set) var chapterHanjaAnnotations: [Int: [HanjaWordAnnotation]] = [:]
+
+    // MARK: - 왼쪽 기본 성경 칸 한자/난외주 인라인 렌더링 캐시 — 2026-09-02 신설
+    //
+    // 사용자 보고 — "성경 조회 맨 왼쪽(기본 성경) 스크롤 버벅임 — 위 형광펜/
+    // 구간메모 인덱스 캐싱 이후에도, 한자·난외주 인라인 표시를 위해
+    // `AttributedString`을 절마다 다시 만드는 경로는 여전히 캐싱이 안 돼
+    // 있었다." 확인해보니 그 경로는 `TranslationColumnView.VerseRow.
+    // verseContentText`가 매 재렌더링마다 다시 부르는
+    // `VerseAnnotationRenderer.attributedContentWithInlineAnnotations`다.
+    //
+    // ⚠️ [정책 확정, 사용자와 여러 차례 논의 후 승인] 아래 세 가지가 위
+    // `chapterHighlightsIndex` 등과 다른 점이다 — 반드시 이 형태를 유지할 것:
+    //   1. 장이 바뀌어도 비우지 않는다(세션, 즉 앱이 떠 있는 동안 계속 유지) —
+    //      실측(`ReferenceData.sqlite`/`BibleDB.sqlite` 직접 조회) 결과 한자
+    //      주석이 걸린 절이 전체 31,102절 중 29,345절(94%)이나, 절 하나당
+    //      캐시 크기가 대략 0.5~2KB로 추정돼 성경 전체를 다 캐싱해도 최대
+    //      15~60MB 수준 — 장 단위로 비울 이유가 없다고 판단했다.
+    //   2. 디스크(SwiftData)에는 저장하지 않는다 — 재료(원문/한자주석/난외주)가
+    //      이미 번들 SQLite에 있어 다시 계산하는 비용 자체가 싸고,
+    //      `AttributedString` 직렬화 비용이 그보다 더 클 수 있으며, 이
+    //      "순수 렌더링 캐시"를 CloudKit 동기화 대상에 끼워 넣는 것도 낭비다.
+    //   3. 키에 `bookId`/`chapter`가 반드시 들어간다 — 위 다른 인덱스들의
+    //      "번역본코드|절번호" 키는 장이 바뀔 때마다 통째로 새로 만들어지므로
+    //      절 번호만으로 충분했지만, 이 캐시는 여러 장에 걸쳐 계속 남아 있어
+    //      절 번호만 쓰면 서로 다른 장의 같은 절 번호끼리 충돌한다.
+    private struct InlineAnnotationCacheKey: Hashable {
+        let bookId: Int
+        let chapter: Int
+        let translationCode: String
+        let verse: Int
+    }
+    private var inlineAnnotationCache: [InlineAnnotationCacheKey: AttributedString] = [:]
+    /// 마지막으로 캐시를 채울 때 쓴 폰트/글자색/한자폰트 — 설정 화면(모양 탭)에서
+    /// 이 값들이 바뀌면 캐시된 결과 전부가 낡은 값이 되므로, 매번 절마다 비교하는
+    /// 대신 이 세 값만 확인해 달라지면 그 순간 캐시 전체를 한 번에 비운다.
+    private var inlineAnnotationCacheFont: PlatformFont?
+    private var inlineAnnotationCacheTextColor: PlatformColor?
+    private var inlineAnnotationCacheHanjaFont: PlatformFont?
+
+    /// `TranslationColumnView.VerseRow.verseContentText`가 호출 — 위 정책대로
+    /// 캐시에 있으면 그대로 돌려주고, 없으면(또는 폰트/색이 바뀌었으면) 새로
+    /// 계산해서 캐시에 넣은 뒤 돌려준다.
+    func cachedInlineAnnotatedContent(
+        bookId: Int, chapter: Int, translationCode: String, verse: Int,
+        text: String, highlights: [VerseHighlight], phraseNotes: [VersePhraseNote],
+        hanjaWords: [HanjaWordAnnotation], marginalNotes: [VerseMarginalNote],
+        font: PlatformFont, textColor: PlatformColor, hanjaFont: PlatformFont?
+    ) -> AttributedString {
+        if inlineAnnotationCacheFont != font || inlineAnnotationCacheTextColor != textColor
+            || inlineAnnotationCacheHanjaFont != hanjaFont {
+            inlineAnnotationCache.removeAll()
+            inlineAnnotationCacheFont = font
+            inlineAnnotationCacheTextColor = textColor
+            inlineAnnotationCacheHanjaFont = hanjaFont
+        }
+        let key = InlineAnnotationCacheKey(bookId: bookId, chapter: chapter, translationCode: translationCode, verse: verse)
+        if let cached = inlineAnnotationCache[key] { return cached }
+        let attributed = VerseAnnotationRenderer.attributedContentWithInlineAnnotations(
+            text: text, highlights: highlights, phraseNotes: phraseNotes,
+            hanjaWords: hanjaWords, marginalNotes: marginalNotes, font: font, textColor: textColor, hanjaFont: hanjaFont
+        )
+        inlineAnnotationCache[key] = attributed
+        return attributed
+    }
+
+    /// 위 캐시는 형광펜/구간메모가 실제로 바뀌는 순간에만 그 절 하나를 지운다
+    /// (`addHighlight`/`deleteHighlight`/`addPhraseNote`/`deletePhraseNote` 참고) —
+    /// 이 네 함수는 전부 "지금 보고 있는 장"에서만 호출되므로 `selectedBook`/
+    /// `selectedChapter`를 그대로 쓸 수 있다.
+    private func invalidateInlineAnnotationCache(translationCode: String, verse: Int) {
+        let key = InlineAnnotationCacheKey(
+            bookId: selectedBook.bookId, chapter: selectedChapter, translationCode: translationCode, verse: verse
+        )
+        inlineAnnotationCache.removeValue(forKey: key)
+    }
 
     // MARK: - 메모/연구문서 안의 성경구절 언급("관련 내용") — 2026-08-11 신설
     //
@@ -153,17 +264,17 @@ final class BibleReadingViewModel {
     /// `TranslationColumnView.VerseRow`가 호출 — 이 번역본·이 절에 걸린 형광펜/표시만
     /// 골라 낸다.
     func highlights(translationCode: String, verse: Int) -> [VerseHighlight] {
-        chapterHighlights.filter { $0.translationCode == translationCode && $0.verse == verse }
+        chapterHighlightsIndex["\(translationCode)|\(verse)"] ?? []
     }
 
     func crossReferences(translationCode: String, verse: Int) -> [VerseCrossReference] {
-        chapterCrossReferences.filter { $0.translationCode == translationCode && $0.verse == verse }
+        chapterCrossReferencesIndex["\(translationCode)|\(verse)"] ?? []
     }
 
     /// `TranslationColumnView.VerseRow`가 호출 — 이 번역본·이 절에 걸린 난외주만
     /// 골라 낸다. 위 `crossReferences(translationCode:verse:)`와 같은 원칙.
     func marginalNotes(translationCode: String, verse: Int) -> [VerseMarginalNote] {
-        chapterMarginalNotes.filter { $0.translationCode == translationCode && $0.verse == verse }
+        chapterMarginalNotesIndex["\(translationCode)|\(verse)"] ?? []
     }
 
     /// `TranslationColumnView.VerseRow`가 호출 — 이 번역본·이 절의 한자 주석
@@ -180,7 +291,7 @@ final class BibleReadingViewModel {
     /// 걸린 "메모"(드래그 표현 부연설명)만 골라 낸다. 형광펜/표시와 같은 원칙 —
     /// 특정 표현에 종속되므로 번역본별로 다르다.
     func phraseNotes(translationCode: String, verse: Int) -> [VersePhraseNote] {
-        chapterPhraseNotes.filter { $0.translationCode == translationCode && $0.verse == verse }
+        chapterPhraseNotesIndex["\(translationCode)|\(verse)"] ?? []
     }
 
     /// [2026-08-11 추가] 이 절을 정확히 언급하는 메모/연구문서("관련 내용") —
@@ -254,12 +365,16 @@ final class BibleReadingViewModel {
         modelContext.insert(highlight)
         try? modelContext.save()
         chapterHighlights.append(highlight)
+        rebuildHighlightsIndex()
+        invalidateInlineAnnotationCache(translationCode: translationCode, verse: verse)
     }
 
     func deleteHighlight(_ highlight: VerseHighlight) {
         modelContext.delete(highlight)
         try? modelContext.save()
         chapterHighlights.removeAll { $0.id == highlight.id }
+        rebuildHighlightsIndex()
+        invalidateInlineAnnotationCache(translationCode: highlight.translationCode, verse: highlight.verse)
     }
 
     // MARK: - "메모"(신규, 드래그 표현 부연설명) — 2026-08-11 신설
@@ -283,6 +398,8 @@ final class BibleReadingViewModel {
         modelContext.insert(note)
         try? modelContext.save()
         chapterPhraseNotes.append(note)
+        rebuildPhraseNotesIndex()
+        invalidateInlineAnnotationCache(translationCode: translationCode, verse: verse)
     }
 
     /// 우클릭(macOS)/편집 메뉴(iOS)의 "메모 수정" 또는 편집 팝오버 저장 버튼에서 호출.
@@ -296,6 +413,8 @@ final class BibleReadingViewModel {
         modelContext.delete(note)
         try? modelContext.save()
         chapterPhraseNotes.removeAll { $0.id == note.id }
+        rebuildPhraseNotesIndex()
+        invalidateInlineAnnotationCache(translationCode: note.translationCode, verse: note.verse)
     }
 
     /// "관주 연결"에서 호출. `range`가 nil이면(절 전체 관주) `anchorText`도 nil로
@@ -313,12 +432,14 @@ final class BibleReadingViewModel {
         modelContext.insert(reference)
         try? modelContext.save()
         chapterCrossReferences.append(reference)
+        rebuildCrossReferencesIndex()
     }
 
     func deleteCrossReference(_ reference: VerseCrossReference) {
         modelContext.delete(reference)
         try? modelContext.save()
         chapterCrossReferences.removeAll { $0.id == reference.id }
+        rebuildCrossReferencesIndex()
     }
 
     /// [2026-08-09 추가] 사용자 요청 — "관주 -> 클릭했을 때 나오는 풍선 팝업의
@@ -380,26 +501,45 @@ final class BibleReadingViewModel {
     /// "메모 작성"(구간 메모)에서 호출 — 만든 메모를 그대로 돌려주므로 호출부(뷰)가
     /// 기존 `memoBeingCreated` 시트 흐름에 곧바로 넘길 수 있다(절 전체 메모를 만들
     /// 때와 동일한 패턴, `BibleReadingView.createMemo` 참고).
-    /// [2026-08-11 추가] 사용자 요청 — "메모(→개인 주석)는 관주처럼 항상
-    /// 활성화되도록. 드래그하지 않아도 절에 종속되도록." 이 절에 이미 있는
-    /// 절 전체 메모(`rangeStart == nil` — 구간 메모가 아님)를 찾는다. 번역본과
-    /// 무관하다(`phraseMemos(translationCode:verse:)` 상단 주석과 같은 이유 —
-    /// 절 전체 메모는 특정 번역본에 종속되지 않는다).
-    func verseLevelMemo(verse: Int) -> UserMemo? {
-        relatedChapterMemos.first { $0.verse == verse && $0.rangeStart == nil }
-    }
-
-    /// 위 `verseLevelMemo(verse:)`가 없으면 새로 만든다 — "개인 주석" 버튼(확대보기)
-    /// 전용. "내 메모"(MemoHomeView.createNewMemo)와 같은 방식으로 좌표만 채운
-    /// 빈 메모를 만들고, 호출부가 곧바로 편집기 시트로 연다.
-    func openOrCreateVerseMemo(verse: Int) -> UserMemo {
-        if let existing = verseLevelMemo(verse: verse) { return existing }
-        let memo = UserMemo(bookId: selectedBook.bookId, chapter: selectedChapter, verse: verse)
+    /// [2026-09-02 변경] 사용자 요청 — "개인 묵상의 텍스트를 꼭 팝오버에서
+    /// 작성을 해야하는가? ... 리스트 항목에 직접 작성을 해서 등록하는 UI"로
+    /// 전환하면서, 기존 "이 절의 절 전체 메모를 찾아서 없으면 만든다"(단일
+    /// 재사용, 예전 `verseLevelMemo`/`openOrCreateVerseMemo`)를 폐기했다.
+    /// 사용자 확인 — "묵상은 한 구절에 하나만 있는 것이 아니라, 여러개가
+    /// 등록될 수 있는 요소이다. ... '+ 개인 묵상' 누르면 리스트 항목이
+    /// 추가가 되어 새로 등록되는 것." 그래서 `createPhraseMemo`(아래)와 같은
+    /// 원칙으로 매번 새 `UserMemo`를 만든다 — range만 없을 뿐(`rangeStart`가
+    /// nil이면 "절 전체" 메모라는 규칙은 그대로, `phraseMemos(translationCode:
+    /// verse:)` 필터링과 호환된다).
+    /// [2026-09-02 변경] 사용자 확인 — "수정은 지원하지 않는다. 삭제하고
+    /// 다시 등록하는 프로세스이다. 자동저장은 하지 않는다." 그래서 팝오버/
+    /// 자동저장 때와 달리 내용이 없는 빈 메모를 미리 만들어 두지 않는다 —
+    /// 리스트의 입력칸(초안)은 화면 쪽 로컬 상태(`VerseZoomView.
+    /// newPersonalNoteText`)로만 있다가, "등록" 버튼을 눌러야 그 시점에
+    /// 완성된 내용으로 딱 한 번 레코드를 만든다. 그래서 예전
+    /// `openOrCreateVerseMemo`/`updatePersonalNote`처럼 "빈 채로 먼저 만들고
+    /// 나중에 갱신"하는 별도의 update API가 없다.
+    func createPersonalNote(verse: Int, contentText: String) {
+        let memo = UserMemo(
+            bookId: selectedBook.bookId, chapter: selectedChapter, verse: verse,
+            contentHtml: contentText, contentText: contentText
+        )
         modelContext.insert(memo)
         try? modelContext.save()
         relatedChapterMemos.insert(memo, at: 0)
         BibleReferenceIndexingService.reindexMemo(memo, context: modelContext)
-        return memo
+    }
+
+    /// [2026-09-02 신설] 개인 묵상 삭제 — 사이드바 "말씀 노트"
+    /// (`WordNoteHomeView.delete(_:)`)와 완전히 같은 순서(관련 내용 인덱스를
+    /// 먼저 지우고 → 모델 삭제 → 저장 → 메모리 배열에서도 제거)를 그대로 따른다.
+    func deletePersonalNote(_ memo: UserMemo) {
+        BibleReferenceIndexingService.removeMentions(
+            sourceType: .memo, sourceId: memo.id.uuidString, context: modelContext
+        )
+        modelContext.delete(memo)
+        try? modelContext.save()
+        relatedChapterMemos.removeAll { $0.id == memo.id }
     }
 
     func createPhraseMemo(translationCode: String, verse: Int, range: NSRange, anchorText: String) -> UserMemo {
@@ -493,6 +633,11 @@ final class BibleReadingViewModel {
         // 지금 메모리에 캐시된 장(`chapterHighlights`)에도 섞여 있을 수 있으니
         // 함께 제거한다 — 그대로 두면 다음 재조회 전까지 화면에 남아 보인다.
         chapterHighlights.removeAll { $0.styleRaw == markRaw }
+        rebuildHighlightsIndex()
+        // 여러 장(심지어 다른 책)에 흩어져 있던 레코드를 한꺼번에 지우는
+        // 일회성 정리라 특정 절 하나로 좁혀 지우기 어렵다 — 안전하게 캐시
+        // 전체를 비운다(자주 도는 경로가 아니라 비용 부담이 없다).
+        inlineAnnotationCache.removeAll()
     }
 
     func loadAvailableTranslations() {
@@ -832,6 +977,7 @@ final class BibleReadingViewModel {
                 predicate: #Predicate { $0.bookId == bookId && $0.chapter == chapter }
             )
         )) ?? []
+        rebuildHighlightsIndex()
         // [2026-08-15 변경] 사용자 요청 — "성경관련 json seed 파일은 기본 제공
         // db에 넣을 것." 관주/난외주의 "번들분"은 더 이상 SwiftData에 없다 —
         // `ReferenceDataProvider.shared.store`(ReferenceData.sqlite, 읽기 전용)에서
@@ -854,12 +1000,14 @@ final class BibleReadingViewModel {
             bookId: bookId, chapter: chapter, translationCode: TranslationBootstrap.bundledTranslationCode
         )
         chapterCrossReferences = userCrossReferences + (bundledCrossReferences ?? [])
+        rebuildCrossReferencesIndex()
 
         chapterPhraseNotes = (try? modelContext.fetch(
             FetchDescriptor<VersePhraseNote>(
                 predicate: #Predicate { $0.bookId == bookId && $0.chapter == chapter }
             )
         )) ?? []
+        rebuildPhraseNotesIndex()
 
         let userMarginalNotes = (try? modelContext.fetch(
             FetchDescriptor<VerseMarginalNote>(
@@ -870,6 +1018,7 @@ final class BibleReadingViewModel {
             bookId: bookId, chapter: chapter, translationCode: TranslationBootstrap.bundledTranslationCode
         )
         chapterMarginalNotes = userMarginalNotes + (bundledMarginalNotes ?? [])
+        rebuildMarginalNotesIndex()
 
         // [2026-08-15 변경] 절 단위 한자 주석은 이제 100% ReferenceData.sqlite에서만
         // 읽는다(SwiftData 경로 자체가 없어졌다 — 위 프로퍼티 선언부 주석 참고).

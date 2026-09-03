@@ -60,6 +60,12 @@ import PDFKit
 import HwpKit
 import HwpKitCore
 import BibleResearchModels
+// [2026-09-02 추가] `PDFSearchController`가 `NSRegularExpression`(숫자 경계
+// 오탐 방지, 아래 `matchesWithDigitBoundary` 참고)을 쓰기 위해 명시적으로
+// import한다 — 이 코드베이스에서 NSRegularExpression을 쓰는 다른 두 파일
+// (BulkCrossReferenceParser.swift, BibleReferenceExtractor.swift) 모두 같은
+// 이유로 명시적 import Foundation을 갖고 있다.
+import Foundation
 
 // MARK: - 별도 창(S6) 진입점 — PersistentIdentifier → SourceDocument 되찾기
 
@@ -609,7 +615,31 @@ struct DocumentViewerView: View {
     /// 그쪽으로 자동 전환한다 — 사용자가 빈 에러 화면을 계속 보고 있지 않게.
     private func reportViewerAvailability(_ isAvailable: Bool, for mode: HWPViewerMode) {
         viewerAvailability[mode] = isAvailable
-        guard !isAvailable, hwpViewerMode == mode else { return }
+        // [2026-09-01 수정] 사용자 지적 — 특정 hwp 문서에서 "rhwp 탭"을 보고 있다고
+        // 생각했는데 실제로는 hwp-swift 네이티브 파서의 에러("Presentation build
+        // failed: Bytes are not EOF... HwpIdMappings")가 그대로 보이는 사례가
+        // 실기기에서 확인됐다. 원인은 이 함수의 원래 로직에 있었다 — "실패"
+        // 보고가 들어온 시점에만 이미 성공(`== true`)한 다른 탭으로 전환을
+        // 시도했는데, hwp-swift 네이티브(동기 파싱이라 매우 빠름)가 rhwp(WKWebView
+        // + WASM 초기화가 필요해 훨씬 느림)보다 먼저 실패를 보고하는 게 보통이라,
+        // 네이티브가 실패하는 시점엔 아직 rhwp가 `true`를 보고하기 전이었다 —
+        // 그래서 폴백 후보가 없어 `hwpViewerMode`가 실패한 네이티브 탭에 그대로
+        // 머물렀다. 세그먼트 피커는 `viewerAvailability[.hwpSwiftNative] == false`가
+        // 되는 순간 그 탭을 목록에서 숨기므로(`hwpViewerModeToggle` 참고), 사용자
+        // 눈에는 "rhwp"만 옵션으로 보이는데 실제 화면(`hwpViewerMode`가 여전히
+        // `.hwpSwiftNative`라 ZStack에서 그 뷰만 보이는 상태, 위 hwp 뷰어 ZStack의
+        // opacity 배선 참고)엔 네이티브 실패 화면이 남아 있었다 — 이후 rhwp가
+        // 나중에 성공(`true`)을 보고해도, 원래 코드는 "성공" 보고 시점엔 아무
+        // 전환도 검사하지 않아 영영 그대로 남았다. 수정: 성공 보고가 들어올
+        // 때도 "지금 선택된 탭이 이미 실패로 확정돼 있다면" 그 성공한 탭으로
+        // 전환하도록 대칭적으로 보완한다.
+        if isAvailable {
+            if viewerAvailability[hwpViewerMode] == false {
+                hwpViewerMode = mode
+            }
+            return
+        }
+        guard hwpViewerMode == mode else { return }
         if let fallback = HWPViewerMode.allCases.first(where: { viewerAvailability[$0] == true }) {
             hwpViewerMode = fallback
         }
@@ -727,7 +757,19 @@ struct DocumentViewerView: View {
                     && queryMatches.contains { query in
                         query.bookId == mention.bookId
                             && query.chapter == mention.chapter
-                            && (query.verse == nil || mention.verse == nil || query.verse == mention.verse)
+                            // [2026-09-02 수정] 사용자 요청 — "장만 언급된
+                            // 문장이 있으면, 어떤 절로 검색해도 매칭되는
+                            // 기능은 제거할 것. 혼란만 가중함." 예전엔
+                            // `mention.verse == nil`(이 mention이 특정 절
+                            // 없이 장만 가리킴)이면 검색한 절이 무엇이든
+                            // 무조건 통과시켰다 — 장만 언급하는 문장이 그
+                            // 장의 모든 절 검색에 다 걸려나와 혼란을 줬다.
+                            // 검색어 자체가 장만 가리키는 경우(`query.verse
+                            // == nil`, 예: "창1장"으로 검색)는 여전히 그
+                            // 장의 모든 mention과 매칭돼야 하므로 그대로
+                            // 둔다 — 제거 대상은 딱 "mention이 장만
+                            // 가리키는" 쪽뿐이다.
+                            && (query.verse == nil || query.verse == mention.verse)
                     }
             }
             .map(\.searchText)
@@ -1209,12 +1251,46 @@ final class PDFSearchController {
             matches = []
             return
         }
-        var terms = [trimmed]
-        terms.append(contentsOf: additionalSearchTerms(trimmed))
+        // [2026-09-02 수정] 사용자 보고 — "PDF 탭에서 창1:1로 검색했는데 창1:14가
+        // 걸림." 원인: 이전엔 타이핑한 원문 그대로("창1:1")를 `additionalSearchTerms`
+        // 결과(성경 장절로 해석해 이 문서에 실제로 적힌 표현, 예: "창세기 1장
+        // 1절")에 "더해서" 항상 같이 찾았다. `PDFDocument.findString`은 순수
+        // 리터럴 부분 문자열 검색이라 "1:1"이 "1:14"의 접두사와 우연히 겹치면
+        // (뒤에 숫자가 더 있어도 상관없이) 그대로 매치로 잡힌다 — 검색어가
+        // 실제로 성경 장절 참조로 인식됐다면, 그 참조 그대로의 문자열("창1:1")을
+        // 리터럴로 또 찾을 이유가 없다(오히려 이런 접두사 오탐만 만든다). 그래서
+        // `additionalSearchTerms`가 뭔가 돌려줬으면(=참조로 인식돼 이 문서에
+        // 실제로 색인된 표현이 있으면) 그것만 신뢰하고, 원문 그대로는 그
+        // 결과가 비어 있을 때(=참조로 인식 안 됐거나, 참조로는 인식됐지만 이
+        // 문서엔 없음)만 예전처럼 폴백으로 쓴다 — `RhwpWebViewerPane`/
+        // `HWPViewerPane`에 이미 있는 "관련 내용 클릭 시 최초 이동"용
+        // `additionalSearchTerms(initialSearchText).first ?? initialSearchText`
+        // 패턴("있으면 그걸 쓰고, 없을 때만 원문 폴백")과 정확히 같은 원칙이다.
+        let resolvedTerms = additionalSearchTerms(trimmed)
+        let terms = resolvedTerms.isEmpty ? [trimmed] : resolvedTerms
         var seenTerms = Set<String>()
         let uniqueTerms = terms.filter { seenTerms.insert($0.lowercased()).inserted }
 
-        let found = uniqueTerms.flatMap { document.findString($0, withOptions: .caseInsensitive) }
+        // [2026-09-02 추가] 사용자 보고 — "PDF 검색에서도 창1:1로 검색을
+        // 해도 창1:14, 창1:11에 대한 내용도 검색이 되는 상황." 원인: 바로 위
+        // 수정(원문+해석된 표현을 항상 같이 찾던 문제)과는 별개로,
+        // `PDFDocument.findString`은 애초에 순수 리터럴 부분 문자열 검색이라
+        // 검색어가 "1:1"처럼 숫자로 끝나면 "1:14"/"1:11"처럼 뒤에 숫자가 더
+        // 붙은 다른 참조의 "접두사"로 우연히 걸린다(대칭적으로 "21:1"처럼
+        // 앞에 숫자가 더 붙은 경우의 "접미사"로도 걸릴 수 있다 — 같은 문제).
+        // `findString`엔 이 경계를 구분할 방법이 없고, `.regularExpression`
+        // 옵션은 PDFKit의 `findString`이 실제로 지원하지 않는다 — 애플
+        // 공식 헤더가 지원 옵션으로 대소문자/리터럴/역방향만 명시하고 있고,
+        // 애플 개발자 포럼(Developer Forums Thread 118654)에서도 그 옵션을
+        // 줘도 에러 없이 그냥 결과가 안 나온다는 게 확인된 사실이다. 그래서
+        // 아래 `matchesWithDigitBoundary`가 페이지 원문에 직접
+        // `NSRegularExpression`을 돌려 앞뒤에 숫자가 없을 때만 매치시키고,
+        // 문자 인덱스 범위를 `PDFDocument.
+        // selection(from:atCharacterIndex:to:atCharacterIndex:)`로 다시
+        // `PDFSelection`으로 바꾼다 — 같은 포럼 스레드에서 다른 개발자들이
+        // "findString이 정규식을 못 쓸 때"의 실제 우회법으로 검증해 쓰고
+        // 있는 조합이다.
+        let found = uniqueTerms.flatMap { matchesWithDigitBoundary(for: $0, in: document) }
         // 여러 검색어를 따로 찾아 이어붙인 결과라 문서 순서가 뒤섞여 있다 —
         // "다음/이전"이 위→아래로 자연스럽게 움직이도록 페이지·페이지 안
         // 세로 위치(위에서 아래) 기준으로 다시 정렬한다.
@@ -1231,6 +1307,41 @@ final class PDFSearchController {
             return lhsBounds.minX < rhsBounds.minX
         }
         highlightCurrent()
+    }
+
+    /// [2026-09-02 추가] `performSearch()`가 검색어 앞뒤 숫자 경계 오탐(예:
+    /// "1:1"이 "1:14"/"21:1"의 접두사·접미사로 우연히 걸리는 문제)을 막기
+    /// 위해 쓰는 헬퍼 — 위 `performSearch()`의 주석에 적은 근거(애플 공식
+    /// PDFKit 헤더 + 애플 개발자 포럼 Thread 118654) 그대로, `findString`
+    /// 대신 페이지 원문에 `NSRegularExpression`을 직접 돌린다. `term`에
+    /// 정규식 특수문자(괄호 등)가 있어도 안전하도록
+    /// `NSRegularExpression.escapedPattern(for:)`로 이스케이프한 뒤, 그
+    /// 앞뒤에 `(?<!\d)`/`(?!\d)`(바로 앞/뒤 문자가 숫자가 아님)를 붙인다 —
+    /// `term`이 숫자로 끝나거나 시작하지 않으면 이 조건은 항상 참이라
+    /// 기존 동작과 결과가 같고, 숫자로 끝나거나 시작할 때만 실제로 걸러진다.
+    private func matchesWithDigitBoundary(for term: String, in document: PDFDocument) -> [PDFSelection] {
+        guard !term.isEmpty else { return [] }
+        let pattern = "(?<!\\d)" + NSRegularExpression.escapedPattern(for: term) + "(?!\\d)"
+        guard let regex = try? NSRegularExpression(pattern: pattern, options: .caseInsensitive) else {
+            return []
+        }
+        var selections: [PDFSelection] = []
+        for pageIndex in 0..<document.pageCount {
+            guard let page = document.page(at: pageIndex), let text = page.string else { continue }
+            let fullRange = NSRange(location: 0, length: (text as NSString).length)
+            for result in regex.matches(in: text, range: fullRange) {
+                guard result.range.length > 0 else { continue }
+                let startIndex = result.range.location
+                let endIndex = result.range.location + result.range.length - 1
+                if let selection = document.selection(
+                    from: page, atCharacterIndex: startIndex,
+                    to: page, atCharacterIndex: endIndex
+                ) {
+                    selections.append(selection)
+                }
+            }
+        }
+        return selections
     }
 
     func goToNext() {

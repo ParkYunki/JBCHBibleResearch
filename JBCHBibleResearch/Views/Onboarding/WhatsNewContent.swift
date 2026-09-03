@@ -31,6 +31,11 @@ struct WhatsNewEntry: Identifiable {
 
 enum WhatsNewContent {
     static let entries: [WhatsNewEntry] = [
+        WhatsNewEntry(version: "1.0.1", items: [
+            "기타 버그 수정",
+            "pdf 검색기능 보정",
+            "성경 배경및 글꼴의 테마색상 추가"
+        ]),
         WhatsNewEntry(version: "1.0", items: [
             "성경 조회 화면에 책갈피 기능을 추가했습니다. 자주 보는 장·절을 저장해 두고, 목록에서 골라 바로 이동할 수 있습니다.",
             "통합 검색 결과에서 성경구절을 탭하면 이제 정확하게 성경 조회 화면의 해당 구절로 이동합니다.",

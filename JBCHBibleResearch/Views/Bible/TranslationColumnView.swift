@@ -139,6 +139,22 @@ struct TranslationColumnView: View {
     /// [2026-08-11 추가] "관련 내용" 목록에서 항목을 골랐을 때 — 메모는 편집기
     /// 시트로, 연구문서는 PDF 검색+이동 창으로 연다(호출부 BibleReadingView 책임).
     var onSelectVerseMention: (VerseMention) -> Void = { _ in }
+    /// [2026-09-02 신설] 사용자 보고 — "왼쪽 기본 성경 칸 스크롤 버벅임 —
+    /// 한자/난외주 인라인 표시용 `AttributedString`을 절마다 다시 만드는
+    /// 경로도 캐싱할 것." 위 다른 provider들과 같은 원칙으로, 실제 캐싱
+    /// 로직(`BibleReadingViewModel.cachedInlineAnnotatedContent`)은 상위가
+    /// 갖고 있고 이 뷰는 그 결과만 받는다. 기본값은 캐싱 없이 예전과 똑같이
+    /// `VerseAnnotationRenderer.attributedContentWithInlineAnnotations`를 바로
+    /// 부르는 경로라, 이 클로저를 안 넘기는 호출부(프리뷰 등)도 그대로 동작한다.
+    var inlineAnnotatedContentProvider: (
+        BibleVerse, [VerseHighlight], [VersePhraseNote], [HanjaWordAnnotation], [VerseMarginalNote],
+        PlatformFont, PlatformColor, PlatformFont?
+    ) -> AttributedString = { verse, highlights, phraseNotes, hanjaWords, marginalNotes, font, textColor, hanjaFont in
+        VerseAnnotationRenderer.attributedContentWithInlineAnnotations(
+            text: verse.content, highlights: highlights, phraseNotes: phraseNotes,
+            hanjaWords: hanjaWords, marginalNotes: marginalNotes, font: font, textColor: textColor, hanjaFont: hanjaFont
+        )
+    }
 
     /// 지금 뷰포트 중앙(anchor: .center)에 있는 절 번호 — `.scrollPosition(id:)`가
     /// 스크롤에 맞춰 자동으로 읽어 주고(리더 역할), 반대로 이 값을 대입하면 그
@@ -162,13 +178,18 @@ struct TranslationColumnView: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 0) {
             VStack(alignment: .leading, spacing: 2) {
+                // [2026-09-02 수정] 사용자 요청 — "테마색상/글자색 변경 시
+                // 번역본이름·성경장 텍스트 색상도 함께 바뀌어야 함." 기존엔
+                // `.secondary`/`.tertiary`(시스템 고정 톤)였다 — 사용자가 글자색을
+                // 직접 골랐으면(`bibleTextColor` != nil) 그 색을 그대로 쓰고,
+                // 안 골랐으면(nil) 기존 톤을 그대로 유지한다.
                 Text(translationDisplayName)
                     .font(.headline)
-                    .foregroundStyle(.secondary)
+                    .foregroundStyle(settings.bibleTextColor ?? .secondary)
                 if let localizedBookChapterLabel, !localizedBookChapterLabel.isEmpty {
                     Text(localizedBookChapterLabel)
                         .font(.caption)
-                        .foregroundStyle(.tertiary)
+                        .foregroundStyle(settings.bibleTextColor ?? systemTertiaryTextColor)
                 }
             }
             .padding(.horizontal)
@@ -183,6 +204,13 @@ struct TranslationColumnView: View {
                 columnScrollView
             }
         }
+        // [2026-09-01 추가] 사용자 요청 — "설정 - 성경 - 모양에 배경색 테마
+        // 추가." 이 컬럼 뷰는 지금까지 배경을 전혀 지정하지 않아 시스템 기본
+        // (라이트/다크 모드 자동 대응)이었다 — `UserSettingsStore.
+        // bibleBackgroundColor`가 nil(사용자가 아직 안 고름)이면 `Color.clear`로
+        // 그 기존 동작을 그대로 유지하고, 값이 있으면 그 색을 컬럼 전체
+        // (헤더+본문)에 칠한다.
+        .background(settings.bibleBackgroundColor ?? Color.clear)
     }
 
     /// [2026-08-20 추가] 사용자 요청 — "절 간격 조절 기능추가". 아래
@@ -192,6 +220,22 @@ struct TranslationColumnView: View {
     /// 패턴이지만, 그건 `private struct VerseRow` 안이라 이 struct에서 따로
     /// 하나 둔다.
     private var settings: UserSettingsStore { .shared }
+
+    /// [2026-09-02 추가] 컴파일 에러 수정 — `Color`엔 `.secondary`는 있어도
+    /// `.tertiary`는 없다(`.tertiary`는 `ShapeStyle`에만 있는 계층적 스타일이라
+    /// `Color?` 값과 `??`로 합칠 수 없다: "Instance member 'tertiary' cannot be
+    /// used on type 'Color'"). 이 파일 바로 아래 `platformTextColor`, 그리고
+    /// `OriginalTextInfoView.swift`의 `cardBorderColor`/`cardBackground`가 이미
+    /// 쓰고 있는 것과 같은 관례로, 시스템이 실제로 쓰는 3차 레이블 색(라이트/
+    /// 다크 모드 자동 대응)을 `Color`로 직접 감싼다 — `.tertiary` ShapeStyle이
+    /// 원래 나타내려던 것과 동일한 시각적 톤이다.
+    private var systemTertiaryTextColor: Color {
+        #if os(iOS)
+        Color(uiColor: .tertiaryLabel)
+        #else
+        Color(nsColor: .tertiaryLabelColor)
+        #endif
+    }
 
     private var columnScrollView: some View {
         ScrollView {
@@ -210,7 +254,8 @@ struct TranslationColumnView: View {
                         verseMentions: verseMentionsProvider(verse.verse),
                         onSelectCrossReferenceTarget: onSelectCrossReferenceTarget,
                         onSelectPhraseMemo: onSelectPhraseMemo,
-                        onSelectVerseMention: onSelectVerseMention
+                        onSelectVerseMention: onSelectVerseMention,
+                        inlineAnnotatedContentProvider: inlineAnnotatedContentProvider
                     )
                         .id(verse.verse)
                         // [2026-08-15 재작성, 이후 보조키 변경] 사용자 요청 3가지 —
@@ -400,14 +445,27 @@ struct TranslationColumnView: View {
         isProgrammaticScroll = false
         // [2026-08-19 추가] 관주/검색 결과로 "다른 장으로 이동 + 특정 절 강조"가
         // 동시에 일어나는 경우(`highlightedVerse`가 이미 새 값으로 설정된 채
-        // 이 장 전환이 일어남) — 여기서 무조건 nil로 되돌리면, 곧이어 그 절로
+        // 이 장 전환이 일어남) — 여기서 무조건 첫 절로 되돌리면, 곧이어 그 절로
         // 맞출 `centerVerseID`가 초기화되며 스크롤이 무효화될 수 있다. 이때는
         // 리셋을 건너뛴다 — 장이 바뀌었어도 `.onChange(of: highlightedVerse)`가
         // 올바른 절로 맞춰준다. `highlightedVerse`는 이미 최종값으로 설정된
         // 뒤에야 뷰가 다시 그려지므로(같은 뷰모델 메서드 안에서 순서대로
         // 대입), 이 두 onChange 중 어느 게 먼저 실행되는지와 무관하게 안전하다.
         guard highlightedVerse == nil else { return }
-        centerVerseID = nil
+        // [2026-09-01 수정] 사용자 보고 — "이전장/다음장 버튼, 장 숫자만 입력한
+        // 검색, 장 선택 버튼으로 장을 바꿨을 때 스크롤이 초기화되지 않고 이전
+        // 위치를 유지함." 예전엔 여기서 `centerVerseID = nil`로만 되돌렸는데,
+        // `.scrollPosition(id:)`는 "리더"(스크롤에 맞춰 값을 읽어만 줌) 겸
+        // "팔로워"(값을 대입하면 그 절로 실제로 스크롤도 해 줌) 역할을 하는
+        // 바인딩이라(위 `centerVerseID` 선언부 주석 참고), `nil`을 대입하는 것은
+        // "추적을 잠깐 놓는 것"에 가깝고 "1절로 스크롤하라"는 팔로워 동작을
+        // 명령하지 않는다 — 그 결과 화면은 이전 장의 스크롤 위치(픽셀 오프셋)에
+        // 그대로 남아 있을 수 있다. `respondToSyncEvent`(바로 위)가 이미
+        // 증명하듯, 팔로워로서 실제로 스크롤을 이동시키려면 구체적인 절 번호를
+        // 대입해야 한다 — 그래서 새 장의 첫 절(`verses.first?.verse`, 정상적인
+        // 성경 장은 항상 1절부터 시작하지만 하드코딩된 1 대신 실제 데이터를
+        // 그대로 쓴다)을 대입해 화면이 확실히 맨 위(1절)로 스크롤되게 한다.
+        centerVerseID = verses.first?.verse
     }
 }
 
@@ -439,6 +497,17 @@ private struct VerseRow: View {
     var onSelectCrossReferenceTarget: (BibleVerseRef) -> Void = { _ in }
     var onSelectPhraseMemo: (UserMemo) -> Void = { _ in }
     var onSelectVerseMention: (VerseMention) -> Void = { _ in }
+    /// [2026-09-02 신설] 위 `TranslationColumnView.inlineAnnotatedContentProvider`
+    /// 상단 주석 참고 — 그대로 전달받아 아래 `verseContentText`가 쓴다.
+    var inlineAnnotatedContentProvider: (
+        BibleVerse, [VerseHighlight], [VersePhraseNote], [HanjaWordAnnotation], [VerseMarginalNote],
+        PlatformFont, PlatformColor, PlatformFont?
+    ) -> AttributedString = { verse, highlights, phraseNotes, hanjaWords, marginalNotes, font, textColor, hanjaFont in
+        VerseAnnotationRenderer.attributedContentWithInlineAnnotations(
+            text: verse.content, highlights: highlights, phraseNotes: phraseNotes,
+            hanjaWords: hanjaWords, marginalNotes: marginalNotes, font: font, textColor: textColor, hanjaFont: hanjaFont
+        )
+    }
 
     @State private var isCrossReferencePopoverPresented = false
     @State private var isMarginalNotePopoverPresented = false
@@ -467,9 +536,11 @@ private struct VerseRow: View {
             // 보임). 절 번호 칸 자체를 세로 스택으로 바꿔 번호 아래에 아이콘을
             // 쌓아, 본문이 쓸 수 있는 가로 폭을 아이콘 너비만큼 돌려준다.
             VStack(alignment: .center, spacing: 3) {
+                // [2026-09-02 수정] 사용자 요청 — "각 구절별 왼쪽 끝 절번호,
+                // 아이콘 색상도 테마색상/글자색 변경에 맞춰 바뀌어야 함."
                 Text("\(verse.verse)")
                     .font(settings.bibleVerseNumberFont)
-                    .foregroundStyle(.secondary)
+                    .foregroundStyle(settings.bibleTextColor ?? .secondary)
 
                 // [2026-08-08 추가] 관주 마커 — 인쇄본처럼 본문 글자 사이에
                 // 정확히 끼워 넣지는 못한다(SwiftUI `Text(AttributedString)`은
@@ -482,7 +553,7 @@ private struct VerseRow: View {
                     } label: {
                         Image(systemName: "link.circle.fill")
                             .font(.caption2)
-                            .foregroundStyle(.secondary)
+                            .foregroundStyle(settings.bibleTextColor ?? .secondary)
                     }
                     .buttonStyle(.plain)
                     .popover(isPresented: $isCrossReferencePopoverPresented) {
@@ -499,7 +570,7 @@ private struct VerseRow: View {
                     } label: {
                         Image(systemName: "asterisk.circle")
                             .font(.caption2)
-                            .foregroundStyle(.secondary)
+                            .foregroundStyle(settings.bibleTextColor ?? .secondary)
                     }
                     .buttonStyle(.plain)
                     .popover(isPresented: $isMarginalNotePopoverPresented) {
@@ -515,7 +586,7 @@ private struct VerseRow: View {
                     } label: {
                         Image(systemName: "note.text")
                             .font(.caption2)
-                            .foregroundStyle(.secondary)
+                            .foregroundStyle(settings.bibleTextColor ?? .secondary)
                     }
                     .buttonStyle(.plain)
                 }
@@ -540,7 +611,7 @@ private struct VerseRow: View {
                     } label: {
                         Image(systemName: "doc.text.magnifyingglass")
                             .font(.caption2)
-                            .foregroundStyle(.secondary)
+                            .foregroundStyle(settings.bibleTextColor ?? .secondary)
                     }
                     .buttonStyle(.plain)
                     .popover(isPresented: $isVerseMentionPopoverPresented) {
@@ -665,10 +736,14 @@ private struct VerseRow: View {
         // 가 false일 때 빈 배열을 넘겨, 위첨자만 필요한 경우에 한자 괄호까지
         // 끼어들지 않게 한다.
         if shouldShowInlineHanja || shouldShowMarginalNoteMarkers {
-            let attributed = VerseAnnotationRenderer.attributedContentWithInlineAnnotations(
-                text: verse.content, highlights: highlights, phraseNotes: phraseNotes,
-                hanjaWords: shouldShowInlineHanja ? hanjaWords : [], marginalNotes: marginalNotes,
-                font: platformBodyFont, textColor: platformTextColor, hanjaFont: platformHanjaFont
+            // [2026-09-02 변경] 사용자 보고 — "왼쪽 기본 성경 칸 스크롤 버벅임 —
+            // 이 경로도 캐싱할 것." 직접 호출하던 것을
+            // `inlineAnnotatedContentProvider`(상위 `BibleReadingViewModel.
+            // cachedInlineAnnotatedContent`로 연결됨)로 바꿔, 같은 절을 다시
+            // 그릴 때 매번 새로 계산하지 않고 캐시된 결과를 재사용한다.
+            let attributed = inlineAnnotatedContentProvider(
+                verse, highlights, phraseNotes, shouldShowInlineHanja ? hanjaWords : [], marginalNotes,
+                platformBodyFont, platformTextColor, platformHanjaFont
             )
             if verse.paragraph != nil {
                 // [macOS 26 대응] `Text + Text`(`+` 연산자)가 macOS 26.0부터
@@ -722,6 +797,7 @@ private struct VerseRow: View {
     private var platformBodyFont: PlatformFont {
         let size = CGFloat(settings.bibleBodyFontSize)
         guard settings.bibleFontName != "System" else { return .systemFont(ofSize: size) }
+        BundledFontRegistrar.ensureAvailable(settings.bibleFontName)
         return PlatformFont(name: settings.bibleFontName, size: size) ?? .systemFont(ofSize: size)
     }
 
@@ -731,6 +807,7 @@ private struct VerseRow: View {
     /// 따른다 — `settings.hanjaFontName == "System"`이면 본문 글꼴 그대로.
     private var platformHanjaFont: PlatformFont {
         guard settings.hanjaFontName != "System" else { return platformBodyFont }
+        BundledFontRegistrar.ensureAvailable(settings.hanjaFontName)
         return PlatformFont(name: settings.hanjaFontName, size: platformBodyFont.pointSize) ?? platformBodyFont
     }
 

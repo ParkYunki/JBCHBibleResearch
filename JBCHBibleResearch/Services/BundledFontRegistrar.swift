@@ -26,6 +26,11 @@
 import Foundation
 import CoreText
 import SwiftUI
+#if os(iOS)
+import UIKit
+#elseif os(macOS)
+import AppKit
+#endif
 
 /// 이 프로젝트가 내장한 Paperlogy 폰트 9종의 메타데이터. `fonttools`로 각 .ttf의
 /// name 테이블을 직접 확인해 얻은 값이다 — 9개 굵기가 "Paperlogy"라는 하나의
@@ -139,6 +144,44 @@ enum BundledFontRegistrar {
         }
         let expectedCount = BundledFonts.entries.count + 4 // 한자 1 + 히브리어 1 + 그리스어 2
         print("[BundledFontRegistrar] 번들 폰트 \(registeredPostScriptNames.count)/\(expectedCount)개 등록 완료: \(registeredPostScriptNames)")
+    }
+
+    /// [2026-09-02 추가] 사용자 보고 — 아이패드에서 손글씨(Scribble) 도구모음을
+    /// 연 뒤 성경 조회로 돌아오면 한자 폰트(조선궁서체)가 기본 글꼴로 보이다가,
+    /// 앱을 재시작해야만 복구되는 증상. 조사해 보니 이 앱이 쓰는 화면들은
+    /// `PlatformFont(name:)`/`Font.custom(_:)`가 실패하면 이미 전부 시스템
+    /// 기본 글꼴로 조용히 대체하도록 돼 있어(`??`/SwiftUI의 기본 동작) 우리
+    /// 코드가 예전 값을 잘못 들고 있는 게 아니었다 — 그 순간 iOS(CoreText)가
+    /// 실제로 그 이름의 폰트를 못 찾겠다고 답하고 있었다는 뜻이다. iOS 17+에서
+    /// `.process` 범위로 등록한 커스텀 폰트가 메모리 압박(memory pressure)
+    /// 상황에서 시스템에 의해 조용히 등록 해제되는 사례가 실제로 보고돼 있고
+    /// (https://developer.apple.com/forums/thread/741720), "앱을 재시작해야만
+    /// 복구된다"는 것도 그 보고와 정확히 일치한다. 문제는 위
+    /// `registerBundledFontsIfNeeded()`가 `didRegister` 가드로 프로세스당 딱
+    /// 한 번만 등록을 시도해, 시스템이 등록을 취소해버린 뒤에는 앱이 다시는
+    /// 스스로 복구를 시도하지 않는다는 데 있었다. 이 함수는 이 앱이 등록해 둔
+    /// 커스텀 폰트(Paperlogy/고운바탕/조선궁서체/히브리어/그리스어 전부 —
+    /// 같은 원인이라 특정 폰트만 예외로 둘 근거가 없다)를 실제로 쓰기 직전마다
+    /// 불러, 그 이름이 아직 살아있는지 가볍게 확인하고(CoreText 캐시 조회라
+    /// 비용이 매우 작다) 없어졌으면 그 자리에서 전체 재등록을 한 번 더
+    /// 시도한다. `postScriptName`이 우리가 등록한 목록에 없는 이름(예:
+    /// "System", 사용자가 고른 시스템 폰트)이면 즉시 반환하고 아무 것도 하지
+    /// 않는다 — 우리가 관리하지 않는 이름까지 재등록을 시도할 이유가 없다.
+    static func ensureAvailable(_ postScriptName: String) {
+        guard didRegister, registeredPostScriptNames.contains(postScriptName) else { return }
+        guard !isFontCurrentlyAvailable(postScriptName) else { return }
+        didRegister = false
+        registerBundledFontsIfNeeded()
+    }
+
+    private static func isFontCurrentlyAvailable(_ postScriptName: String) -> Bool {
+        #if os(iOS)
+        return UIFont(name: postScriptName, size: 12) != nil
+        #elseif os(macOS)
+        return NSFont(name: postScriptName, size: 12) != nil
+        #else
+        return true
+        #endif
     }
 
     /// [2026-08-19 수정, 이전 `bundledPaperlogyFontURLs`] `Fonts` 폴더가 "폴더

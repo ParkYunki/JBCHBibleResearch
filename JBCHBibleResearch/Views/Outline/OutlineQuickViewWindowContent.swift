@@ -38,6 +38,17 @@ import AppKit
 
 struct OutlineQuickViewWindowContent: View {
     @Environment(\.modelContext) private var modelContext
+    /// [2026-09-01 추가] 사용자 요청 — "ipad상에서 개요를 새창으로 띄울때
+    /// 닫기버튼 넣어줄 것." `DocumentViewerView.dismissWindow` 상단 주석과
+    /// 정확히 같은 이유 — macOS는 `WindowGroup`이 진짜 독립 창을 만들어
+    /// 트래픽라이트(빨간 닫기 버튼)가 이미 있지만, iPadOS/iPhone은 이 창을
+    /// 닫을 시스템 제공 버튼이 없다(`openWindow`가 다중 씬 미지원 기기에서는
+    /// 새 창 대신 현재 화면을 통째로 대체하기도 해 뒤로 갈 방법조차 없을 수
+    /// 있다). `dismissWindow()`(인자 없음 — "이 환경 값이 속한 창을 닫는다")로
+    /// 닫는다.
+    #if os(iOS)
+    @Environment(\.dismissWindow) private var dismissWindow
+    #endif
     let request: OutlineQuickViewRequest?
 
     /// 책 개요/장 개요를 줄바꿈 기준으로 쪼갠 문단들 — 검색 "이동"이 실제로
@@ -168,7 +179,31 @@ struct OutlineQuickViewWindowContent: View {
         }
         .navigationTitle("\(book.nameKo) \(request.chapter)장 개요")
         .onAppear { loadIfNeeded(bookId: request.bookId, chapter: request.chapter) }
+        #if os(iOS)
+        .overlay(alignment: .topTrailing) {
+            closeWindowButton
+        }
+        #endif
     }
+
+    #if os(iOS)
+    /// 위 `dismissWindow` 프로퍼티 주석 참고 — iPadOS/iPhone 전용 닫기 버튼.
+    /// `DocumentViewerView.closeWindowButton`과 완전히 같은 모양·동작이다.
+    private var closeWindowButton: some View {
+        Button {
+            dismissWindow()
+        } label: {
+            Image(systemName: "xmark.circle.fill")
+                .font(.system(size: 22))
+                .symbolRenderingMode(.hierarchical)
+                .foregroundStyle(.secondary)
+                .background(Circle().fill(.background))
+        }
+        .buttonStyle(.plain)
+        .padding(12)
+        .accessibilityLabel("닫기")
+    }
+    #endif
 
     // MARK: - 상단 바 — 검색창(일치 개수 + 다음/이전) + 돋보기(개별 버튼 3개)
 

@@ -371,6 +371,12 @@ enum DocumentTextExtractionService {
             return
         }
 
+        // [2026-09-02 추가] 이 함수 자체가 "재시도" 액션으로 다시 호출될 수
+        // 있다(`extract(for:context:)` doc 주석 참고) — 이전 시도(성공이든
+        // 실패든)가 남긴 `DocumentText`가 있으면 이번 추출분과 중복 저장되므로,
+        // 1차 시도 전에 먼저 지운다.
+        clearDocumentTexts(for: document, context: context)
+
         var extracted = false
         do {
             extracted = try await extractHWPNative(data: data, document: document, context: context)
@@ -379,6 +385,17 @@ enum DocumentTextExtractionService {
         }
 
         if !extracted {
+            // [2026-09-02 추가] 사용자 보고 — "같은 절 언급이 한 문서에서 5개나
+            // 중복으로 뜸." 원인: `extractHWPNative`는 페이지마다 성공하는 대로
+            // `insertLines`로 즉시 저장하는데, 일부 페이지까지만 성공하고 그
+            // 다음 페이지에서 파싱 에러(예: `HwpIdMappings` 버전 경계 문제)로
+            // throw하면, 이미 저장된 앞쪽 페이지들의 `DocumentText`는 지워지지
+            // 않은 채 그대로 남는다. 그 상태에서 rhwp 폴백이 (보통 전체 페이지를)
+            // 다시 추출해 또 `insertLines`하면, 앞쪽 페이지 구간이 두 번
+            // 저장돼 — 그 구간에 있는 성경 장절 언급이 재인덱싱 시 문자 그대로
+            // 중복으로 걸린다("본문에서 언급됨"에 똑같은 행이 여러 번 뜨는 원인).
+            // 폴백을 시도하기 전에 방금 실패한 시도가 남긴 부분 결과부터 지운다.
+            clearDocumentTexts(for: document, context: context)
             do {
                 extracted = try await extractHWPViaRhwp(data: data, document: document, context: context)
             } catch {
@@ -387,6 +404,9 @@ enum DocumentTextExtractionService {
         }
 
         if !extracted {
+            // 위와 같은 이유 — rhwp 폴백이 일부만 성공하고 실패했을 가능성에
+            // 대비해 PDF 텍스트 레이어 폴백 전에도 한 번 더 지운다.
+            clearDocumentTexts(for: document, context: context)
             extracted = extractHWPFromConvertedPDF(document: document, context: context)
         }
 
@@ -489,9 +509,22 @@ enum DocumentTextExtractionService {
 
     // MARK: - 공통: 텍스트 → DocumentText 줄 단위 저장
 
+    /// [2026-09-02 추가] hwp 3단계 폴백 체인이 중간 tier에서 부분적으로
+    /// `insertLines`한 뒤 다음 tier로 넘어갈 때, 그리고 `extract(for:context:)`
+    /// 자체가 "재시도" 액션으로 다시 호출될 때(위 doc 주석 참고) 이전에 이미
+    /// 저장된 `DocumentText`가 남아 있으면 재추출분과 중복 저장된다 — 두
+    /// 경우 모두 다음 추출을 시작하기 전에 기존 레코드를 지워 정리한다.
+    private static func clearDocumentTexts(for document: SourceDocument, context: ModelContext) {
+        for text in document.documentTexts ?? [] {
+            context.delete(text)
+        }
+    }
+
     private static func insertLines(from text: String, pageNumber: Int, sourceDocument: SourceDocument, context: ModelContext) {
         let lines = text.components(separatedBy: .newlines)
-        for (index, line) in lines.enumerated() where !line.trimmingCharacters(in: .whitespaces).isEmpty {
+        for (index, rawLine) in lines.enumerated() {
+            let line = sanitizeLineText(rawLine)
+            guard !line.trimmingCharacters(in: .whitespaces).isEmpty else { continue }
             let record = DocumentText(
                 pageNumber: pageNumber,
                 lineIndex: index,
@@ -500,5 +533,21 @@ enum DocumentTextExtractionService {
             )
             context.insert(record)
         }
+    }
+
+    /// [2026-09-02 추가, 미확인/방어적 조치] 사용자 보고 — "성경조회 인스펙터의
+    /// 관련연구문서 목록에 줄바꿈 기호(\r\n)가 그대로 보임." `components(separatedBy:
+    /// .newlines)`는 실제 개행 제어문자(LF/CR/CRLF 등)는 이미 줄 단위로 나눠
+    /// 처리하므로, 화면에 "\r\n"이라는 4글자가 문자 그대로 보인다면 원본
+    /// 추출 텍스트 자체에 이스케이프된 백슬래시-r-백슬래시-n 문자열이 들어있는
+    /// 경우로 추정된다(예: 2차 rhwp(WKWebView/WASM) 폴백의 `getPageText`
+    /// 반환값). 실제 사용자 데이터를 확인할 방법이 없어 확정 원인은 아니지만,
+    /// 이 리터럴 이스케이프 시퀀스를 공백으로 치환해 두면 어느 추출 경로에서
+    /// 나오든 방어적으로 화면에 노출되지 않는다.
+    private static func sanitizeLineText(_ line: String) -> String {
+        line
+            .replacingOccurrences(of: "\\r\\n", with: " ")
+            .replacingOccurrences(of: "\\n", with: " ")
+            .replacingOccurrences(of: "\\r", with: " ")
     }
 }

@@ -568,6 +568,10 @@ private struct TranslationsSettingsTab: View {
 
 private struct AppearanceSettingsTab: View {
     @State private var settings = UserSettingsStore.shared
+    // [2026-09-01 추가] `Color.hexString(in:)`(Color+Hex.swift 참고)가 hex 추출에
+    // 필요로 하는 `EnvironmentValues`를 얻기 위함 — 아래 배경색/글자색
+    // `ColorPicker`가 고른 색을 저장할 때 쓴다.
+    @Environment(\.self) private var environment
 
     /// [2026-08-08 추가] 사용자 요청 — "본문크기, 색상, 절 크기, 줄간격, 글꼴"을
     /// 조정할 수 있어야 한다. 이 목록은 macOS(`NSFontManager`)/iOS(`UIFont`)에서
@@ -622,6 +626,12 @@ private struct AppearanceSettingsTab: View {
                         ForEach(BundledFonts.entries) { entry in
                             Text(entry.displayName).tag(entry.postScriptName)
                         }
+                        // [2026-09-02 추가] 사용자 요청 — "조선궁서체도 성경 본문
+                        // 글꼴에서 선택할 수 있도록". 지금까지는 "한자 폰트" Picker
+                        // (아래, 한자 주석 전용)에서만 고를 수 있었다 — 이 Picker의
+                        // 선택은 완전히 별도 설정(`bibleFontName`)이라 한자 주석
+                        // 표시(`hanjaFontName`)에는 영향이 없다.
+                        Text("조선궁서체").tag(SpecialPurposeFonts.hanja)
                     }
                     Section("시스템") {
                         Text("시스템 기본").tag("System")
@@ -671,16 +681,63 @@ private struct AppearanceSettingsTab: View {
                     .fixedSize()
                 }
 
-                // ⚠️ [팔레트 제한, 근거] SwiftUI `Color`에서 값을 다시 hex로 뽑아내는
-                // 안전한 공개 API가 없다(Color+Hex.swift 상단 주석 참고) — 이 프로젝트가
-                // 메모 텍스트 색상(RichTextEditor)에서 이미 같은 이유로 자유
-                // 컬러피커 대신 미리 정한 팔레트를 쓰고 있어서, 여기서도 그
-                // `Color.memoTextPalette`를 그대로 재사용해 일관성을 맞췄다.
-                Picker("본문 색상", selection: $settings.bibleTextColorHex) {
-                    Text("시스템 기본").tag("")
-                    ForEach(Color.memoTextPalette, id: \.hex) { entry in
-                        Text(entry.name).tag(entry.hex)
+                // [2026-09-02 수정] 사용자 요청 — "배경색 직접 선택/글자색
+                // 직접 선택이 있으므로 배경색/본문 색상(팔레트 Picker)은 제거할
+                // 것." 아래 두 `ColorPicker`만 남기고, 팔레트에서 고르던
+                // `Picker("배경색", ...)`/`Picker("본문 색상", ...)`는 삭제했다
+                // (`Color.bibleBackgroundPalette`도 이제 이 파일 말고는 쓰는
+                // 곳이 없어 `Color+Hex.swift`에서 함께 지웠다 — `Color.
+                // memoTextPalette`는 `RichTextEditor.swift`가 여전히 써서
+                // 그대로 남겨 뒀다). 팔레트 Picker에 있던 "시스템 기본"(빈
+                // 문자열로 리셋) 옵션이 함께 없어진 것을 사용자가 다시 지적해,
+                // 아래에 전용 초기화 버튼을 별도로 추가했다.
+                Group {
+                    // 배경과 글자색을 미리 맞춰 둔 테마 5종을 먼저 보여준다 —
+                    // 대비가 안 맞는 조합(예: 밝은 배경 + 밝은 글자)을 고를
+                    // 위험 없이 빠르게 고를 수 있다. `BibleSlideColorTheme.all`
+                    // 참고.
+                    VStack(alignment: .leading, spacing: 8) {
+                        Text("테마 색상")
+                            .font(.caption)
+                            .foregroundStyle(.secondary)
+                        ScrollView(.horizontal, showsIndicators: false) {
+                            HStack(spacing: 12) {
+                                ForEach(BibleSlideColorTheme.all) { theme in
+                                    themeSwatchButton(theme)
+                                }
+                            }
+                        }
                     }
+
+                    ColorPicker(
+                        "배경색 직접 선택",
+                        selection: Binding(
+                            get: { settings.bibleBackgroundColor ?? Color.white },
+                            set: { settings.bibleBackgroundColorHex = $0.hexString(in: environment) }
+                        ),
+                        supportsOpacity: false
+                    )
+
+                    ColorPicker(
+                        "글자색 직접 선택",
+                        selection: Binding(
+                            get: { settings.bibleTextColor ?? Color.primary },
+                            set: { settings.bibleTextColorHex = $0.hexString(in: environment) }
+                        ),
+                        supportsOpacity: false
+                    )
+
+                    // [2026-09-02 추가] 사용자 요청 — "시스템 기본색상으로 돌릴
+                    // 초기화 버튼 추가." 빈 문자열이 곧 "시스템 기본을 쓴다"는
+                    // 뜻이므로(`bibleBackgroundColor`/`bibleTextColor` 위
+                    // 선언부 주석 참고), 두 hex를 함께 빈 문자열로 되돌리기만
+                    // 하면 된다. 배경/글자 둘 다 안 골랐을 때는 되돌릴 게 없어
+                    // 버튼을 비활성화한다.
+                    Button("시스템 기본색상으로 되돌리기") {
+                        settings.bibleBackgroundColorHex = ""
+                        settings.bibleTextColorHex = ""
+                    }
+                    .disabled(settings.bibleBackgroundColorHex.isEmpty && settings.bibleTextColorHex.isEmpty)
                 }
 
                 // [2026-08-14 추가] 사용자 요청 — "두 번째 번역본(국한문 전체
@@ -731,6 +788,45 @@ private struct AppearanceSettingsTab: View {
                 .lineSpacing(settings.bibleLineSpacing)
                 .fixedSize(horizontal: false, vertical: true)
         }
+        // [2026-09-01 추가] 배경색 설정을 추가하면서, 미리보기도 실제 배경색을
+        // 반영하도록 확장했다 — 설정을 안 골랐으면(nil) 기존과 동일하게 투명.
+        .padding(8)
+        .background(settings.bibleBackgroundColor ?? Color.clear)
+        .clipShape(RoundedRectangle(cornerRadius: 6))
+    }
+
+    /// [2026-09-01 추가] "테마 색상" 한 항목(배경+글자색 조합)을 스와치 하나로
+    /// 보여주는 버튼 — 탭하면 배경색/글자색을 동시에 그 테마 값으로 바꾼다.
+    private func themeSwatchButton(_ theme: BibleSlideColorTheme) -> some View {
+        let isSelected = settings.bibleBackgroundColorHex == theme.backgroundHex
+            && settings.bibleTextColorHex == theme.textHex
+        return Button {
+            settings.bibleBackgroundColorHex = theme.backgroundHex
+            settings.bibleTextColorHex = theme.textHex
+        } label: {
+            VStack(spacing: 6) {
+                RoundedRectangle(cornerRadius: 8)
+                    .fill(theme.background)
+                    .frame(width: 56, height: 40)
+                    .overlay {
+                        Text("가")
+                            .font(.headline)
+                            .foregroundStyle(theme.text)
+                    }
+                    .overlay {
+                        RoundedRectangle(cornerRadius: 8)
+                            .strokeBorder(
+                                isSelected ? Color.accentColor : Color.secondary.opacity(0.3),
+                                lineWidth: isSelected ? 2 : 1
+                            )
+                    }
+                Text(theme.name)
+                    .font(.caption2)
+                    .foregroundStyle(.secondary)
+                    .lineLimit(1)
+            }
+        }
+        .buttonStyle(.plain)
     }
 
     /// [2026-08-11 신설] 본문 크기/절 번호 크기/줄간격을 한 줄에 나란히 배치하기

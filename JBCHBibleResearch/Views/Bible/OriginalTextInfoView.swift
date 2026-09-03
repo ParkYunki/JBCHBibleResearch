@@ -336,8 +336,10 @@ struct OriginalTextInfoView: View {
     /// 조판에서 볼드체를 쓰는 관례 자체가 없다.
     private func originalTextFont(for word: OriginalWordInfo) -> Font {
         if word.isHebrew {
+            BundledFontRegistrar.ensureAvailable(SpecialPurposeFonts.hebrew)
             return .custom(SpecialPurposeFonts.hebrew, size: 26)
         } else {
+            BundledFontRegistrar.ensureAvailable(SpecialPurposeFonts.greekBold)
             return .custom(SpecialPurposeFonts.greekBold, size: 26)
         }
     }

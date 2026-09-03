@@ -123,8 +123,23 @@ struct AnnotatedVerseFlowView: View {
         )
     }
 
+    /// [2026-09-02 수정] 사용자 요청 — "조회모드와 편집모드에서의 성경 구절
+    /// 라인간 간격을 동일하게 맞출 것. 조회 모드의 줄간격을 편집 모드처럼
+    /// 넓게 할 것." 여기서 "편집 모드"는 이 화면(VerseZoomView) 안에서 펜
+    /// 아이콘을 눌러 들어가는 "선택 모드"(`SelectableVerseTextView`)를
+    /// 가리킨다 — 그 모드의 줄간격은 `VerseAnnotationRenderer
+    /// .selectionModeAttributedText`가 `font.typographicLineHeight * (2.3 - 1)`
+    /// 로 계산한다. "표시 모드"인 이 뷰의 줄과 줄 사이(다른 줄 간 간격) 값을
+    /// 하드코딩된 10 대신 그 공식을 그대로 재사용해 두 모드가 실제로 같은
+    /// 값을 쓰도록 맞춘다. 한 줄과 그 줄에 딸린 메모 상자 사이 간격(바로 아래
+    /// 안쪽 VStack의 spacing: 6)은 이 요청과 무관하므로 그대로 둔다 — "라인과
+    /// 라인 사이에 메모가 있다면 메모만큼 늘어나는 것은 유지할 것".
+    private var lineSpacing: CGFloat {
+        font.typographicLineHeight * (2.3 - 1)
+    }
+
     var body: some View {
-        VStack(alignment: .leading, spacing: 10) {
+        VStack(alignment: .leading, spacing: lineSpacing) {
             ForEach(lines) { line in
                 VStack(alignment: .leading, spacing: 6) {
                     lineRow(line)

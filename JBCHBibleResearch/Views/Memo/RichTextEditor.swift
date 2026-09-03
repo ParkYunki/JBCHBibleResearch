@@ -345,14 +345,28 @@ private struct RichTextEditorToolbarContent: View {
             // 더했다 — `applyFontFamily`가 받는 이름은 family가 아니라 PostScript
             // 이름이라(`BundledFontRegistrar.swift` 상단 주석 참고) `entry.postScriptName`을
             // 그대로 넘긴다.
+            // [2026-09-02 수정] 사용자 지적 — "Paperlogy"라는 이름의 서브메뉴 안에
+            // 고운바탕(GowunBatang) 2종까지 섞여 있어 메뉴 이름과 내용물이 맞지
+            // 않았다(둘 다 `BundledFonts.entries` = paperlogyEntries + gowunBatangEntries
+            // 합본을 그대로 순회했기 때문). `paperlogyEntries`/`gowunBatangEntries`를
+            // 각각 이름에 맞는 별도 서브메뉴로 분리했다. 또한 사용자 요청으로 지금까지
+            // "한자 폰트" 설정에서만 고를 수 있던 조선궁서체(`SpecialPurposeFonts.hanja`)를
+            // 이 에디터의 일반 폰트 선택지에도 추가했다 — 단일 글꼴이라 하위 Menu 없이
+            // "기본 폰트"와 같은 방식으로 Button 하나만 둔다.
             Menu {
                 Button("기본 폰트") { proxy.applyFontFamily(nil) }
                 Divider()
                 Menu("Paperlogy") {
-                    ForEach(BundledFonts.entries) { entry in
+                    ForEach(BundledFonts.paperlogyEntries) { entry in
                         Button(entry.displayName) { proxy.applyFontFamily(entry.postScriptName) }
                     }
                 }
+                Menu("고운바탕") {
+                    ForEach(BundledFonts.gowunBatangEntries) { entry in
+                        Button(entry.displayName) { proxy.applyFontFamily(entry.postScriptName) }
+                    }
+                }
+                Button("조선궁서체") { proxy.applyFontFamily(SpecialPurposeFonts.hanja) }
                 Divider()
                 ForEach(systemToolbarFontNames, id: \.self) { name in
                     Button(name) { proxy.applyFontFamily(name) }
@@ -454,6 +468,7 @@ final class RichTextEditingProxy {
         let range = textView.selectedRange
         func makeFont(basedOn font: UIFont) -> UIFont {
             guard let family else { return UIFont.systemFont(ofSize: font.pointSize) }
+            BundledFontRegistrar.ensureAvailable(family)
             return UIFont(name: family, size: font.pointSize) ?? font
         }
         if range.length == 0 {
@@ -769,6 +784,7 @@ final class RichTextEditingProxy {
         let range = textView.selectedRange()
         func makeFont(basedOn font: NSFont) -> NSFont {
             guard let family else { return NSFont.systemFont(ofSize: font.pointSize) }
+            BundledFontRegistrar.ensureAvailable(family)
             return NSFont(name: family, size: font.pointSize) ?? font
         }
         if range.length == 0 {

@@ -309,6 +309,17 @@ private struct BibleReadingContentView: View {
     /// 표시 여부. `verseSelectionActionBar`의 새 버튼이 켠다(정확히 절 1개가
     /// 선택돼 있을 때만 보인다).
     @State private var isVerseZoomPresented = false
+    /// [2026-09-02 신설] 사용자 요청 — "메모하기 버튼 옆 '개인 묵상' 버튼을
+    /// 클릭할 때 동작 = 메모하기 내 '개인 묵상' 버튼 클릭할 때와 동일하게."
+    /// `openPersonalNoteDirectly()`가 이 값을 `true`로 세우고 확대보기를 열면,
+    /// `VerseZoomView(autoPresentPersonalNoteEditor:)`로 그대로 전달돼 그
+    /// 화면이 뜨자마자 안쪽 "개인 묵상" 버튼을 누른 것과 같은 동작이
+    /// 일어난다. [2026-09-02 변경] 그 "같은 동작"의 내용물은 팝오버에서
+    /// 목록 맨 위 입력칸(카드) 자동 표시로 바뀌었다(`VerseZoomView.
+    /// beginComposingPersonalNote()` 참고) — 이 값 자체의 역할은 그대로다.
+    /// 확대보기가 어떤 경로로 열렸든 다음 번엔 평범하게 열리도록, 시트가
+    /// 닫힐 때(`onDismiss`) 항상 `false`로 되돌린다.
+    @State private var shouldAutoPresentPersonalNoteEditor = false
     /// [2026-08-08 추가] 확대보기에서 "메모" 액션으로 만든 구간 메모를, 확대보기
     /// 시트가 완전히 닫힌 뒤 이어서 편집기 시트로 열기 위한 임시 저장소 — 같은
     /// 화면(BibleReadingContentView)이 시트를 두 개 동시에 띄울 수 없어서, 확대보기
@@ -1135,7 +1146,20 @@ private struct BibleReadingContentView: View {
                     verseMentionsProvider: { verse in viewModel.verseMentions(verse: verse) },
                     onSelectCrossReferenceTarget: jumpToCrossReferenceTarget,
                     onSelectPhraseMemo: { memo in memoBeingCreated = memo },
-                    onSelectVerseMention: handleVerseMentionSelected
+                    onSelectVerseMention: handleVerseMentionSelected,
+                    // [2026-09-02 신설] 사용자 보고 — "왼쪽 기본 성경 칸 스크롤
+                    // 버벅임 — 한자/난외주 인라인 캐싱." 위 다른 provider들과
+                    // 같은 패턴으로 `column.registry.code`를 붙잡아 넘긴다 —
+                    // 실제 캐시는 `BibleReadingViewModel.
+                    // cachedInlineAnnotatedContent`(세션 전체 유지 정책, 그
+                    // 함수 상단 주석 참고)가 갖고 있다.
+                    inlineAnnotatedContentProvider: { verse, highlights, phraseNotes, hanjaWords, marginalNotes, font, textColor, hanjaFont in
+                        viewModel.cachedInlineAnnotatedContent(
+                            bookId: verse.bookId, chapter: verse.chapter, translationCode: column.registry.code, verse: verse.verse,
+                            text: verse.content, highlights: highlights, phraseNotes: phraseNotes,
+                            hanjaWords: hanjaWords, marginalNotes: marginalNotes, font: font, textColor: textColor, hanjaFont: hanjaFont
+                        )
+                    }
                 )
                 .tag(column.id)
             }
@@ -1191,7 +1215,20 @@ private struct BibleReadingContentView: View {
                     verseMentionsProvider: { verse in viewModel.verseMentions(verse: verse) },
                     onSelectCrossReferenceTarget: jumpToCrossReferenceTarget,
                     onSelectPhraseMemo: { memo in memoBeingCreated = memo },
-                    onSelectVerseMention: handleVerseMentionSelected
+                    onSelectVerseMention: handleVerseMentionSelected,
+                    // [2026-09-02 신설] 사용자 보고 — "왼쪽 기본 성경 칸 스크롤
+                    // 버벅임 — 한자/난외주 인라인 캐싱." 위 다른 provider들과
+                    // 같은 패턴으로 `column.registry.code`를 붙잡아 넘긴다 —
+                    // 실제 캐시는 `BibleReadingViewModel.
+                    // cachedInlineAnnotatedContent`(세션 전체 유지 정책, 그
+                    // 함수 상단 주석 참고)가 갖고 있다.
+                    inlineAnnotatedContentProvider: { verse, highlights, phraseNotes, hanjaWords, marginalNotes, font, textColor, hanjaFont in
+                        viewModel.cachedInlineAnnotatedContent(
+                            bookId: verse.bookId, chapter: verse.chapter, translationCode: column.registry.code, verse: verse.verse,
+                            text: verse.content, highlights: highlights, phraseNotes: phraseNotes,
+                            hanjaWords: hanjaWords, marginalNotes: marginalNotes, font: font, textColor: textColor, hanjaFont: hanjaFont
+                        )
+                    }
                 )
                 .frame(maxWidth: .infinity)
             }
@@ -1206,6 +1243,40 @@ private struct BibleReadingContentView: View {
         if let verseNumber = viewModel.selectedVerses.first {
             viewModel.recordVerseHistory(verse: verseNumber)
         }
+        isVerseZoomPresented = true
+    }
+
+    /// [2026-09-02 변경] 사용자 요청 — "메모하기 버튼 옆 '개인 묵상' 버튼을
+    /// 클릭할 때 동작 = 메모하기 내 '개인 묵상' 버튼 클릭할 때와 동일하게."
+    /// 예전엔 확대보기(`VerseZoomView`)를 아예 열지 않고 바로 편집기 시트
+    /// (`MemoDetailView`)로 넘어갔다 — 그러면 말씀구절/한자/관주/다른 개인
+    /// 묵상 목록이 안 보이는 채로 등록하게 된다는 문제가 있었다(위 "메모하기
+    /// 내 개인 묵상" 요청과 같은 문제). 이제 `openVerseZoom()`과 똑같이
+    /// 확대보기를 열되, `shouldAutoPresentPersonalNoteEditor`를 함께 세워
+    /// 그 화면이 뜨자마자 안쪽 "개인 묵상" 버튼을 누른 것과 동일하게 동작하게
+    /// 한다(`VerseZoomView.autoPresentPersonalNoteEditor` 상단 주석 참고).
+    ///
+    /// [2026-09-02 버그 수정 시도 1, 실패] 사용자 보고 — "성경조회 - 메모하기
+    /// 옆 개인 묵상 버튼을 처음 눌렀을 때(다른 기능에서 성경 조회 기능을
+    /// 클릭한 후) 개인 묵상 UI가 나타나지 않음. 팝업을 닫고 다시 눌렀을 때는
+    /// 보여짐." 처음엔 "시트를 여는 시점(`isVerseZoomPresented = true`)이
+    /// 데이터 상태 변경과 같은 트랜잭션에 있어서"라고 보고 그 시점만
+    /// `DispatchQueue.main.async`로 미뤄 봤으나 — 사용자 재확인 결과 "해결
+    /// 안됨, 증상 동일함." 실제 원인은 이 함수 쪽 타이밍이 아니라
+    /// `VerseZoomView`가 `autoPresentPersonalNoteEditor`를 `let`으로(생성자
+    /// 인자로 한 번만) 받던 것 자체였다 — `PhraseNoteEditorPopover.swift`의
+    /// 2026-08-11 15차 수정이 이미 같은 결론(런루프 틱을 미루는 것만으로는
+    /// 이 어긋남이 없어지지 않는다)에 도달했던 것과 정확히 같다. 그래서
+    /// `VerseZoomView.autoPresentPersonalNoteEditor`를 `@Binding`으로
+    /// 바꿔(아래 호출부의 `$shouldAutoPresentPersonalNoteEditor` 참고) 그
+    /// 화면이 실제로 화면에 붙은 뒤 `onAppear`가 최신 값을 다시 읽게 했다 —
+    /// 그래서 이 함수 자체는 `openVerseZoom()`과 똑같이 다시 단순한 동기
+    /// 코드로 되돌린다.
+    private func openPersonalNoteDirectly() {
+        if let verseNumber = viewModel.selectedVerses.first {
+            viewModel.recordVerseHistory(verse: verseNumber)
+        }
+        shouldAutoPresentPersonalNoteEditor = true
         isVerseZoomPresented = true
     }
 
@@ -1283,6 +1354,19 @@ private struct BibleReadingContentView: View {
                     #if os(iOS)
                     .modifier(ActionBarCircularIconModifier(isNarrow: isNarrowBottomBarLayout, isProminent: false))
                     #endif
+                    // [2026-09-02 신설, 같은 날 재수정] 사용자 요청 —
+                    // "메모하기 버튼 옆 '개인 묵상' 버튼 클릭 시 동작 = 메모하기
+                    // 내 '개인 묵상' 버튼 클릭할 때와 동일하게." 위
+                    // `openPersonalNoteDirectly()` 상단 주석 참고 — 확대보기를
+                    // 열고 그 안의 개인 묵상 입력칸(카드)을 자동으로 연다.
+                    Button {
+                        openPersonalNoteDirectly()
+                    } label: {
+                        Label("개인 묵상", systemImage: "note.text")
+                    }
+                    #if os(iOS)
+                    .modifier(ActionBarCircularIconModifier(isNarrow: isNarrowBottomBarLayout, isProminent: false))
+                    #endif
                     Button {
                         isOriginalTextInfoPresented = true
                     } label: {
@@ -1317,6 +1401,19 @@ private struct BibleReadingContentView: View {
                         openVerseZoom()
                     } label: {
                         Label("메모하기", systemImage: "arrow.up.left.and.arrow.down.right")
+                    }
+                    #if os(iOS)
+                    .modifier(ActionBarCircularIconModifier(isNarrow: isNarrowBottomBarLayout, isProminent: false))
+                    #endif
+                    // [2026-09-02 신설, 같은 날 재수정] 사용자 요청 —
+                    // "메모하기 버튼 옆 '개인 묵상' 버튼 클릭 시 동작 = 메모하기
+                    // 내 '개인 묵상' 버튼 클릭할 때와 동일하게." 위
+                    // `openPersonalNoteDirectly()` 상단 주석 참고 — 확대보기를
+                    // 열고 그 안의 개인 묵상 입력칸(카드)을 자동으로 연다.
+                    Button {
+                        openPersonalNoteDirectly()
+                    } label: {
+                        Label("개인 묵상", systemImage: "note.text")
                     }
                     #if os(iOS)
                     .modifier(ActionBarCircularIconModifier(isNarrow: isNarrowBottomBarLayout, isProminent: false))
@@ -1396,6 +1493,10 @@ private struct BibleReadingContentView: View {
                 pendingSwitchToOriginalTextInfo = false
                 isOriginalTextInfoPresented = true
             }
+            // [2026-09-02 신설] 위 `shouldAutoPresentPersonalNoteEditor` 상단
+            // 주석 참고 — 이 확대보기 세션이 끝났으니, 다음 번엔(어느 버튼으로
+            // 열리든) 항상 기본값(자동 표시 없음)에서 다시 시작한다.
+            shouldAutoPresentPersonalNoteEditor = false
         }) {
             if let verseNumber = viewModel.selectedVerses.first {
                 VerseZoomView(
@@ -1406,7 +1507,8 @@ private struct BibleReadingContentView: View {
                     onSwitchToOriginalTextInfo: {
                         pendingSwitchToOriginalTextInfo = true
                         isVerseZoomPresented = false
-                    }
+                    },
+                    autoPresentPersonalNoteEditor: $shouldAutoPresentPersonalNoteEditor
                 )
             }
         }
