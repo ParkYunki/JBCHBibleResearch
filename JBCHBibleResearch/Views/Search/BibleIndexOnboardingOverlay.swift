@@ -32,17 +32,26 @@ import SwiftUI
 struct BibleIndexOnboardingPresenter: ViewModifier {
     @State private var isPresented = false
     @State private var status: EmbeddingIndexingService.IndexStatus = .notBuilt
-    /// [2026-09-03 추가] 사용자 보고 — "다른 맥에서 설치한 후 온보딩 내용
-    /// 또는 새로워진 점이 떠야 할텐데 뜨지 않고 내용 없는 빈 시트만 나타남."
-    /// `ContentView.swift`의 `.appOnboarding()` 상단 주석이 이미 예측해 둔
-    /// 경합이 실제로 재현된 것이었다 — 완전히 새로 설치한 기기에서는
-    /// `AppOnboardingPresenter`와 이 프레젠터의 `.task`가 동시에 실행되어,
-    /// 서로 독립적으로 자기 `.sheet`를 띄우려다 macOS에서 둘 다 제대로
-    /// 그려지지 않고 빈 시트만 남았다. 색인 자체(백그라운드 작업)는 온보딩과
-    /// 무관하게 즉시 시작해도 되지만(사용자 확인), 이 화면(시트)만큼은 온보딩
-    /// 카루셀이 끝난 뒤에 띄워 두 시트가 동시에 뜨는 일이 없게 한다 — 이
-    /// 플래그는 "색인은 이미 시작했고 보여줄 시트도 준비됐지만, 온보딩이 아직
-    /// 안 끝나 대기 중"이라는 뜻이다.
+    /// [2026-09-03 추가, 같은 날 확장] 사용자 보고 — "다른 맥에서 설치한 후
+    /// 온보딩 내용 또는 새로워진 점이 떠야 할텐데 뜨지 않고 내용 없는 빈
+    /// 시트만 나타남." `ContentView.swift`의 `.appOnboarding()` 상단 주석이
+    /// 이미 예측해 둔 경합이 실제로 재현된 것이었다 — 완전히 새로 설치한
+    /// 기기에서는 `AppOnboardingPresenter`와 이 프레젠터의 `.task`가 동시에
+    /// 실행되어, 서로 독립적으로 자기 `.sheet`를 띄우려다 macOS에서 둘 다
+    /// 제대로 그려지지 않고 빈 시트만 남았다.
+    ///
+    /// [같은 날 확장] 처음엔 "온보딩 카루셀 vs 이 화면"만 고쳤는데, 사용자가
+    /// "새로 버전업이 되어서 새로워진 점이 나타나야 하는 경우는 왜 배제하냐"고
+    /// 정확히 지적했다 — 맞는 지적이다. `WhatsNewPresenter`도 이 화면과
+    /// 완전히 독립적으로 자기 `.sheet`를 띄우므로, "이미 온보딩을 마친
+    /// 사용자가 버전업된 상태로 실행했는데 마침 색인도 아직 없는" 경우엔
+    /// "새로워진 점" 시트와 이 화면이 똑같은 방식으로 경합할 수 있었다. 그래서
+    /// 아래를 "온보딩 카루셀" 하나가 아니라 "온보딩 카루셀 **또는** 새로워진
+    /// 점 — 이번 실행에 뜰 차례였던 것"이 전부 끝난 뒤로 일반화했다. 색인
+    /// 자체(백그라운드 작업)는 여전히 온보딩/버전 안내와 무관하게 즉시
+    /// 시작한다(사용자 확인) — 이 플래그는 "색인은 이미 시작했고 보여줄 시트도
+    /// 준비됐지만, 위 두 안내 중 뜰 차례였던 게 아직 안 끝나 대기 중"이라는
+    /// 뜻이다.
     @State private var hasPendingSheet = false
 
     func body(content: Content) -> some View {
@@ -51,15 +60,16 @@ struct BibleIndexOnboardingPresenter: ViewModifier {
                 await presentIfNeeded()
             }
             // [2026-09-03 추가] `UserSettingsStore`가 `@Observable`이라(다른
-            // 화면들이 `settings.xxx`를 직접 읽는 것과 같은 방식) 이 값이
-            // `AppOnboardingPresenter.markCompleted()`에서 `true`로 바뀌는
-            // 순간을 별도의 알림 채널 없이 그대로 감지할 수 있다 — 온보딩
-            // 카루셀이 막 끝났고, 위 `presentIfNeeded()`가 대기시켜 둔 시트가
-            // 있으면 그제서야 띄운다.
-            .onChange(of: UserSettingsStore.shared.hasCompletedOnboarding) { _, completed in
-                guard completed, hasPendingSheet else { return }
-                hasPendingSheet = false
-                isPresented = true
+            // 화면들이 `settings.xxx`를 직접 읽는 것과 같은 방식) 이 값들이
+            // `AppOnboardingPresenter.markCompleted()`/`WhatsNewPresenter`에서
+            // 바뀌는 순간을 별도의 알림 채널 없이 그대로 감지할 수 있다 —
+            // 아래 `isFirstRunAnnouncementResolved` 둘 중 하나라도 바뀌면 대기
+            // 중이던 시트가 있는지 다시 확인한다.
+            .onChange(of: UserSettingsStore.shared.hasCompletedOnboarding) { _, _ in
+                presentPendingSheetIfReady()
+            }
+            .onChange(of: UserSettingsStore.shared.lastSeenAppVersion) { _, _ in
+                presentPendingSheetIfReady()
             }
             .sheet(isPresented: $isPresented) {
                 BibleIndexOnboardingSheet(status: status, onDismiss: dismiss)
@@ -70,6 +80,28 @@ struct BibleIndexOnboardingPresenter: ViewModifier {
             }
     }
 
+    /// 이번 실행에서 뜰 차례였던 "첫 화면 안내"(온보딩 카루셀 또는 새로워진
+    /// 점 — 둘은 `hasCompletedOnboarding`으로 서로 배타적이라 항상 둘 중
+    /// 하나만 해당된다)가 전부 끝났는지. `AppOnboardingPresenter`가 온보딩을
+    /// 아직 안 마쳤으면 당연히 아직 안 끝난 것이고, 이미 마쳤다면
+    /// `WhatsNewPresenter`가 "이번 버전은 보여줄 게 없다"고 판단해
+    /// `lastSeenAppVersion`을 즉시 현재 버전으로 맞췄거나, 실제로 보여주고
+    /// 닫힌 뒤(`markSeen()`) 그렇게 됐을 때만 참이 된다 — 평소(버전이 안
+    /// 바뀐 일반적인 실행)엔 애초에 `lastSeenAppVersion`이 이미 현재 버전과
+    /// 같으므로 즉시 참이라 동작이 그대로다.
+    private var isFirstRunAnnouncementResolved: Bool {
+        let settings = UserSettingsStore.shared
+        guard settings.hasCompletedOnboarding else { return false }
+        let currentVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String
+        return settings.lastSeenAppVersion == currentVersion
+    }
+
+    private func presentPendingSheetIfReady() {
+        guard hasPendingSheet, isFirstRunAnnouncementResolved else { return }
+        hasPendingSheet = false
+        isPresented = true
+    }
+
     /// 색인이 이미 있거나(`.ready`) 예전에 한 번이라도 이 화면을 보여준 적
     /// 있으면 아무것도 하지 않는다 — 그 외(첫 실행, 아직 색인 없음)에만
     /// 자동으로 색인을 시작하고 이 화면을 띄운다.
@@ -77,10 +109,10 @@ struct BibleIndexOnboardingPresenter: ViewModifier {
     /// [2026-09-03 변경] 색인 시작(`EmbeddingIndexingService.startBuilding`)은
     /// 여전히 무조건 즉시 실행하되(사용자 확인 — 온보딩 카루셀과 무관하게
     /// 앱 시작과 동시에 백그라운드에서 바로 시작), 시트를 "보여주는" 시점만
-    /// `hasCompletedOnboarding`에 따라 갈린다 — 이미 온보딩을 마친 기존
-    /// 사용자(가장 흔한 경우)는 예전과 동일하게 즉시 뜨고, 온보딩을 아직
-    /// 안 마친 새 설치에서만 위 `hasPendingSheet`로 대기시켰다가 온보딩이
-    /// 끝나는 순간(`onChange` 위 참고) 띄운다.
+    /// 위 `isFirstRunAnnouncementResolved`에 따라 갈린다 — 평소 실행(가장
+    /// 흔한 경우)은 예전과 동일하게 즉시 뜨고, 온보딩/새로워진 점 중 뜰
+    /// 차례였던 게 아직 안 끝난 실행에서만 `hasPendingSheet`로 대기시켰다가
+    /// 그게 끝나는 순간(`onChange` 위 참고) 띄운다.
     private func presentIfNeeded() async {
         guard !UserSettingsStore.shared.hasOfferedBibleIndexOnboarding else { return }
         EmbeddingIndexingService.shared.refreshStatus()
@@ -99,7 +131,7 @@ struct BibleIndexOnboardingPresenter: ViewModifier {
             completion: { finalStatus in status = finalStatus }
         )
 
-        if UserSettingsStore.shared.hasCompletedOnboarding {
+        if isFirstRunAnnouncementResolved {
             isPresented = true
         } else {
             hasPendingSheet = true

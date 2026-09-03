@@ -1273,6 +1273,25 @@ private struct DeveloperSettingsTab: View {
                 Text("완료 플래그(hasCompletedOnboarding)와 마지막 확인 버전(lastSeenAppVersion)은 건드리지 않습니다 — 내용만 미리 봅니다. 이 화면이 시트로 떠 있는 경우(아이패드) 먼저 닫힌 뒤 온보딩이 뜹니다.")
             }
 
+            // [2026-09-03 신설] 사용자 요청 — "설정.. 개발자 메뉴에 '새로워진
+            // 점'을 다시볼 수 있도록 기능을 추가할 것." 위 "온보딩 미리보기"와
+            // 완전히 같은 패턴 — `WhatsNewReplayRequest`(WhatsNewOverlay.swift)에
+            // 신호만 보내고, 실제로 시트를 여는 것은 그 신호를 관찰하는
+            // `WhatsNewPresenter`(ContentView가 붙인 `.whatsNewOverlay()`)의
+            // 몫이다.
+            Section {
+                Button {
+                    dismiss()
+                    WhatsNewReplayRequest.shared.requestReplay()
+                } label: {
+                    Label("새로워진 점 다시 보기", systemImage: "gift")
+                }
+            } header: {
+                Label("새로워진 점 미리보기", systemImage: "gift")
+            } footer: {
+                Text("마지막 확인 버전(lastSeenAppVersion)은 건드리지 않습니다 — 내용만 미리 봅니다. 현재 버전(\(Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? "?"))에 등록된 WhatsNewContent 항목이 없으면 아무 일도 일어나지 않습니다. 이 화면이 시트로 떠 있는 경우(아이패드) 먼저 닫힌 뒤 뜹니다.")
+            }
+
             Section {
                 if let counts = testDataCounts {
                     Text("형광펜 \(counts.highlight)개 · 관주 \(counts.crossReference)개 · 구절별 메모 \(counts.phraseNote)개")

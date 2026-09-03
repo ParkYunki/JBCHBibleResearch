@@ -23,17 +23,62 @@
 //
 
 import SwiftUI
+#if DEBUG
+import Observation
+#endif
+
+#if DEBUG
+/// [2026-09-03 신설] 사용자 요청 — "설정.. 개발자 메뉴에 '새로워진 점'을
+/// 다시볼 수 있도록 기능을 추가할 것." `AppOnboardingReplayRequest`
+/// (AppOnboardingOverlay.swift)와 완전히 같은 "이벤트가 일어났다" 증가 카운터
+/// 싱글턴 패턴을 그대로 따랐다 — 값 자체엔 의미가 없고 매번 바뀐다는 사실만
+/// `.onChange`가 감지하면 된다. DEBUG 빌드에서만 존재하므로 배포 빌드엔 이
+/// 타입 자체가 포함되지 않는다.
+@MainActor
+@Observable
+final class WhatsNewReplayRequest {
+    static let shared = WhatsNewReplayRequest()
+
+    private(set) var token: Int = 0
+
+    private init() {}
+
+    /// "개발자" 탭의 "새로워진 점 다시 보기" 버튼이 호출한다. 항상 현재 버전
+    /// (`CFBundleShortVersionString`)의 `WhatsNewContent` 항목을 미리 보여준다
+    /// — 그 버전에 등록된 항목이 없으면(예: 아직 이번 버전 문구를 안 적어 둔
+    /// 경우) 아래 `WhatsNewPresenter.presentReplayPreview()`가 조용히 아무
+    /// 일도 하지 않는다.
+    func requestReplay() {
+        token += 1
+    }
+}
+#endif
 
 /// `ContentView`가 앱 시작 시 1회 붙이는 컨트롤러.
 struct WhatsNewPresenter: ViewModifier {
     @State private var isPresented = false
     @State private var entry: WhatsNewEntry?
+    #if DEBUG
+    /// [2026-09-03 신설] "개발자" 탭의 "새로워진 점 다시 보기"로 열린 것인지
+    /// 표시한다 — `AppOnboardingPresenter.isReplayPreview`와 같은 이유. 이
+    /// 경로로 열렸을 때는 `markSeen()`이 `lastSeenAppVersion`을 건드리지
+    /// 않게 막는다 — 미리보기일 뿐인데 이 값이 조용히 현재 버전으로 채워지면
+    /// (아직 실제로 이번 버전 안내를 못 본 사용자 계정 상태에서 개발자가
+    /// 미리보기만 했는데) 다음 정식 실행에서 정작 "새로워진 점"이 안 뜨는
+    /// 부작용이 생긴다.
+    @State private var isReplayPreview = false
+    #endif
 
     func body(content: Content) -> some View {
         content
             .task {
                 presentIfNeeded()
             }
+            #if DEBUG
+            .onChange(of: WhatsNewReplayRequest.shared.token) { _, _ in
+                presentReplayPreview()
+            }
+            #endif
             .sheet(isPresented: $isPresented, onDismiss: markSeen) {
                 if let entry {
                     WhatsNewSheet(entry: entry, onDismiss: { isPresented = false })
@@ -65,7 +110,25 @@ struct WhatsNewPresenter: ViewModifier {
         isPresented = true
     }
 
+    #if DEBUG
+    private func presentReplayPreview() {
+        let currentVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String
+        guard let currentVersion, let matched = WhatsNewContent.entry(for: currentVersion) else { return }
+        isReplayPreview = true
+        entry = matched
+        isPresented = true
+    }
+    #endif
+
     private func markSeen() {
+        #if DEBUG
+        // 위 `isReplayPreview` 상단 주석 참고 — 개발자 미리보기 경로는
+        // `lastSeenAppVersion`을 건드리지 않고 조용히 끝낸다.
+        if isReplayPreview {
+            isReplayPreview = false
+            return
+        }
+        #endif
         UserSettingsStore.shared.lastSeenAppVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String
     }
 }
