@@ -32,11 +32,34 @@ import SwiftUI
 struct BibleIndexOnboardingPresenter: ViewModifier {
     @State private var isPresented = false
     @State private var status: EmbeddingIndexingService.IndexStatus = .notBuilt
+    /// [2026-09-03 추가] 사용자 보고 — "다른 맥에서 설치한 후 온보딩 내용
+    /// 또는 새로워진 점이 떠야 할텐데 뜨지 않고 내용 없는 빈 시트만 나타남."
+    /// `ContentView.swift`의 `.appOnboarding()` 상단 주석이 이미 예측해 둔
+    /// 경합이 실제로 재현된 것이었다 — 완전히 새로 설치한 기기에서는
+    /// `AppOnboardingPresenter`와 이 프레젠터의 `.task`가 동시에 실행되어,
+    /// 서로 독립적으로 자기 `.sheet`를 띄우려다 macOS에서 둘 다 제대로
+    /// 그려지지 않고 빈 시트만 남았다. 색인 자체(백그라운드 작업)는 온보딩과
+    /// 무관하게 즉시 시작해도 되지만(사용자 확인), 이 화면(시트)만큼은 온보딩
+    /// 카루셀이 끝난 뒤에 띄워 두 시트가 동시에 뜨는 일이 없게 한다 — 이
+    /// 플래그는 "색인은 이미 시작했고 보여줄 시트도 준비됐지만, 온보딩이 아직
+    /// 안 끝나 대기 중"이라는 뜻이다.
+    @State private var hasPendingSheet = false
 
     func body(content: Content) -> some View {
         content
             .task {
                 await presentIfNeeded()
+            }
+            // [2026-09-03 추가] `UserSettingsStore`가 `@Observable`이라(다른
+            // 화면들이 `settings.xxx`를 직접 읽는 것과 같은 방식) 이 값이
+            // `AppOnboardingPresenter.markCompleted()`에서 `true`로 바뀌는
+            // 순간을 별도의 알림 채널 없이 그대로 감지할 수 있다 — 온보딩
+            // 카루셀이 막 끝났고, 위 `presentIfNeeded()`가 대기시켜 둔 시트가
+            // 있으면 그제서야 띄운다.
+            .onChange(of: UserSettingsStore.shared.hasCompletedOnboarding) { _, completed in
+                guard completed, hasPendingSheet else { return }
+                hasPendingSheet = false
+                isPresented = true
             }
             .sheet(isPresented: $isPresented) {
                 BibleIndexOnboardingSheet(status: status, onDismiss: dismiss)
@@ -50,6 +73,14 @@ struct BibleIndexOnboardingPresenter: ViewModifier {
     /// 색인이 이미 있거나(`.ready`) 예전에 한 번이라도 이 화면을 보여준 적
     /// 있으면 아무것도 하지 않는다 — 그 외(첫 실행, 아직 색인 없음)에만
     /// 자동으로 색인을 시작하고 이 화면을 띄운다.
+    ///
+    /// [2026-09-03 변경] 색인 시작(`EmbeddingIndexingService.startBuilding`)은
+    /// 여전히 무조건 즉시 실행하되(사용자 확인 — 온보딩 카루셀과 무관하게
+    /// 앱 시작과 동시에 백그라운드에서 바로 시작), 시트를 "보여주는" 시점만
+    /// `hasCompletedOnboarding`에 따라 갈린다 — 이미 온보딩을 마친 기존
+    /// 사용자(가장 흔한 경우)는 예전과 동일하게 즉시 뜨고, 온보딩을 아직
+    /// 안 마친 새 설치에서만 위 `hasPendingSheet`로 대기시켰다가 온보딩이
+    /// 끝나는 순간(`onChange` 위 참고) 띄운다.
     private func presentIfNeeded() async {
         guard !UserSettingsStore.shared.hasOfferedBibleIndexOnboarding else { return }
         EmbeddingIndexingService.shared.refreshStatus()
@@ -63,11 +94,16 @@ struct BibleIndexOnboardingPresenter: ViewModifier {
         }
 
         status = .building(progress: 0)
-        isPresented = true
         EmbeddingIndexingService.shared.startBuilding(
             progress: { fraction in status = .building(progress: fraction) },
             completion: { finalStatus in status = finalStatus }
         )
+
+        if UserSettingsStore.shared.hasCompletedOnboarding {
+            isPresented = true
+        } else {
+            hasPendingSheet = true
+        }
     }
 
     private func dismiss() {
