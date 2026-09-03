@@ -56,8 +56,33 @@ final class WhatsNewReplayRequest {
 
 /// `ContentView`가 앱 시작 시 1회 붙이는 컨트롤러.
 struct WhatsNewPresenter: ViewModifier {
-    @State private var isPresented = false
-    @State private var entry: WhatsNewEntry?
+    /// [2026-09-03 변경] 사용자가 "새로워진 점 다시 보기"를 앱 실행 뒤 처음
+    /// 눌렀을 때만 빈 시트가 뜨고, 두 번째부터는 정상적으로 뜨는 걸 직접
+    /// 재현했다 — "이 프레젠터의 특정 시트가 이번 실행에서 처음 준비되는
+    /// 순간에만 실패하고, 그 다음부터는 잘 된다"는 패턴은 이번 세션에서 이미
+    /// 두 번 만난 것과 같은 종류다(`PhraseNoteEditorPopover.swift` 2026-08-11
+    /// 15차 수정, `VerseZoomView.autoPresentPersonalNoteEditor` — 둘 다 데이터
+    /// 값과 "열어라" 신호를 같은 트랜잭션에서 같이 바꾸고, 그 값을 `let`으로
+    /// (혹은 이 경우처럼 별도의 옵셔널 `@State` + 별도의 `Bool` 두 상태로)
+    /// 들고 있다가 시트/팝오버 콘텐츠 클로저가 그 값을 처음 읽는 순간에만
+    /// 방금 커밋된 값이 아니라 그 이전 스냅숏을 읽는 문제였다). 두 사례 모두
+    /// 고친 방법은 "값을 얼려서 들고 있지 않고, 프레젠테이션이 실제로 일어나는
+    /// 그 순간에 다시 읽게" 만드는 것이었다.
+    ///
+    /// 여기서는 `isPresented: Bool` + `entry: WhatsNewEntry?` 두 개의 별도
+    /// `@State`로 "보여줄지"와 "뭘 보여줄지"를 따로 관리하던 것이 바로 그
+    /// 위험한 모양이다 — `.sheet(isPresented:)`는 그 콘텐츠 클로저가 실제로
+    /// 평가되는 시점에 `entry`를 다시 읽긴 하지만, 이 프레젠터의 `.sheet`가
+    /// 이번 실행에서 "처음" 열리는 바로 그 순간엔 SwiftUI가 오래된(nil)
+    /// 스냅숏을 읽어 `if let entry`가 실패하고 — 그 결과 크기 지정(`.frame`)도
+    /// 못 받은 빈 콘텐츠만 시트로 뜬다. `WhatsNewEntry`가 이미 `Identifiable`
+    /// 이므로, 이 두 상태를 "보여줄 항목이 있으면 그게 곧 표시 여부"인 단일
+    /// 옵셔널 `presentedEntry`로 합치고 `.sheet(isPresented:)` 대신
+    /// `.sheet(item:)`을 쓰도록 바꿨다 — `.sheet(item:)`의 콘텐츠 클로저는
+    /// 언랩된 값 자체를 인자로 직접 받으므로("아직 nil인 별도 값을 클로저 밖에서
+    /// 다시 읽어와 언랩"하는 단계 자체가 없어), 애초에 이 클래스의 stale-read가
+    /// 일어날 지점이 없다.
+    @State private var presentedEntry: WhatsNewEntry?
     #if DEBUG
     /// [2026-09-03 신설] "개발자" 탭의 "새로워진 점 다시 보기"로 열린 것인지
     /// 표시한다 — `AppOnboardingPresenter.isReplayPreview`와 같은 이유. 이
@@ -79,13 +104,11 @@ struct WhatsNewPresenter: ViewModifier {
                 presentReplayPreview()
             }
             #endif
-            .sheet(isPresented: $isPresented, onDismiss: markSeen) {
-                if let entry {
-                    WhatsNewSheet(entry: entry, onDismiss: { isPresented = false })
-                        #if os(macOS)
-                        .frame(width: 420, height: 480)
-                        #endif
-                }
+            .sheet(item: $presentedEntry, onDismiss: markSeen) { entry in
+                WhatsNewSheet(entry: entry, onDismiss: { presentedEntry = nil })
+                    #if os(macOS)
+                    .frame(width: 420, height: 480)
+                    #endif
             }
     }
 
@@ -106,8 +129,7 @@ struct WhatsNewPresenter: ViewModifier {
             settings.lastSeenAppVersion = currentVersion
             return
         }
-        entry = matched
-        isPresented = true
+        presentedEntry = matched
     }
 
     #if DEBUG
@@ -115,8 +137,7 @@ struct WhatsNewPresenter: ViewModifier {
         let currentVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String
         guard let currentVersion, let matched = WhatsNewContent.entry(for: currentVersion) else { return }
         isReplayPreview = true
-        entry = matched
-        isPresented = true
+        presentedEntry = matched
     }
     #endif
 
