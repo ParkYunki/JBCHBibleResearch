@@ -1260,10 +1260,24 @@ private struct DeveloperSettingsTab: View {
             // 보내고, 실제로 시트를 여는 것은 그 신호를 관찰하는
             // `AppOnboardingPresenter`(ContentView가 붙인 `.appOnboarding()`)의
             // 몫이다 — 이 화면 자신은 온보딩 뷰를 직접 열지 않는다.
+            //
+            // [2026-09-03 수정] 사용자가 "새로워진 점 다시 보기"(아래, 완전히
+            // 같은 패턴)로 실제 재현 — 최초 신고했던 "빈 상자만 뜨는" 증상이
+            // 그대로 나타났다. 원인은 이 설정 화면을 닫는 `dismiss()`와 다음
+            // 시트를 열라는 신호(`requestReplay()`)를 같은 동기 실행 안에서
+            // 곧바로 이어 붙인 데 있었다 — macOS SwiftUI는 한 시트가 닫히는
+            // 애니메이션이 끝나기도 전에 같은 뷰 계층에서 다음 시트를 열려고
+            // 하면 상태가 꼬여 빈 시트만 뜨는 문제가 실제로 보고돼 있다(Apple
+            // 개발자 포럼 https://developer.apple.com/forums/thread/682219 —
+            // 권장 해법이 정확히 "짧은 지연을 두고 다음 시트를 요청하라"다).
+            // `requestReplay()` 호출만 짧게 지연시켜, 이 설정 시트의 닫힘
+            // 애니메이션이 끝난 뒤에 다음 시트를 요청하게 했다.
             Section {
                 Button {
                     dismiss()
-                    AppOnboardingReplayRequest.shared.requestReplay()
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+                        AppOnboardingReplayRequest.shared.requestReplay()
+                    }
                 } label: {
                     Label("온보딩 다시 보기", systemImage: "sparkles")
                 }
@@ -1279,10 +1293,15 @@ private struct DeveloperSettingsTab: View {
             // 신호만 보내고, 실제로 시트를 여는 것은 그 신호를 관찰하는
             // `WhatsNewPresenter`(ContentView가 붙인 `.whatsNewOverlay()`)의
             // 몫이다.
+            // [2026-09-03 수정] 사용자 보고 — 이 버튼으로 실제 재현된 최초
+            // 신고 증상("빈 상자") 원인 분석 — 위 "온보딩 다시 보기" 버튼
+            // 수정 주석 참고. 같은 패턴이라 같은 지연을 그대로 적용했다.
             Section {
                 Button {
                     dismiss()
-                    WhatsNewReplayRequest.shared.requestReplay()
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+                        WhatsNewReplayRequest.shared.requestReplay()
+                    }
                 } label: {
                     Label("새로워진 점 다시 보기", systemImage: "gift")
                 }

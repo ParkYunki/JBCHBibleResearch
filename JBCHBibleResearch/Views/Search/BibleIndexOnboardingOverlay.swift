@@ -99,7 +99,19 @@ struct BibleIndexOnboardingPresenter: ViewModifier {
     private func presentPendingSheetIfReady() {
         guard hasPendingSheet, isFirstRunAnnouncementResolved else { return }
         hasPendingSheet = false
-        isPresented = true
+        // [2026-09-03 추가] 사용자가 "새로워진 점 다시 보기"(SettingsView.swift
+        // 개발자 탭)로 실제 재현 — 앞선 시트가 닫히는 바로 그 순간(`onDismiss`/
+        // 이 `.onChange`가 반응하는 시점)에 같은 뷰 계층에서 곧바로 다음
+        // 시트를 열면 macOS SwiftUI가 상태를 제대로 못 정리해 빈 시트만
+        // 뜨는 문제가 실제로 있었다(Apple 개발자 포럼 https://developer.apple.
+        // com/forums/thread/682219 — 권장 해법이 정확히 "짧은 지연을 두고
+        // 다음 시트를 요청하라"다). 온보딩/새로워진 점 시트가 실제로 닫히는
+        // 이 경로도 정확히 같은 모양(한 시트 dismiss → 곧바로 이 시트
+        // present)이라 똑같이 지연을 둔다 — `SettingsView.swift`의 두 미리보기
+        // 버튼과 동일한 근거.
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+            isPresented = true
+        }
     }
 
     /// 색인이 이미 있거나(`.ready`) 예전에 한 번이라도 이 화면을 보여준 적
