@@ -288,10 +288,26 @@ final class EmbeddingIndexingService {
             // [2026-08-19] 장(chapter) 단위로 묶어 둔다 — 문맥(청크) 임베딩이
             // "같은 장 안에서 앞뒤 절"을 참조해야 하는데(장 경계를 넘으면
             // 안 됨), 평평한 배열 하나만으론 이웃 절을 안전하게 찾기 어렵다.
+            //
+            // [2026-09-03 변경] `OutlineSeedImporter.swift` 상단 주석 참고 —
+            // 이 아래 이중 루프(66권 × 최대 장 수, 총 66권/약 1,189장)는 매
+            // 반복마다 `store.maxChapter`/`store.verses`(동기 SQLite 조회)를
+            // 부르는데, 이 루프 전체가 첫 `await`(아래 절 단위 루프의
+            // `EmbeddingService.embedPassage` 호출)보다 앞서 실행돼 `await` 지점이
+            // 하나도 없다 — 색인이 아직 없는 첫 실행(정확히 이 함수가 온보딩과
+            // 무관하게 즉시 시작되는 그 경우)에 메인 액터를 계속 붙잡을 수
+            // 있었다. `OutlineSeedImporter`와 같은 방식으로, 장(chapter) 단위로
+            // 일정 개수마다 한 번씩 실행을 양보한다 — 무엇을 얼마나 읽는지는
+            // 그대로다.
             var chapters: [[VerseEntry]] = []
+            var scannedChapterCount = 0
             for book in books {
                 guard let maxChapter = try? store.maxChapter(bookId: book.bookId), maxChapter > 0 else { continue }
                 for chapter in 1...maxChapter {
+                    scannedChapterCount += 1
+                    if scannedChapterCount % 20 == 0 {
+                        await Task.yield()
+                    }
                     guard let verses = try? store.verses(bookId: book.bookId, chapter: chapter), !verses.isEmpty else { continue }
                     chapters.append(verses.map { VerseEntry(bookId: $0.bookId, chapter: $0.chapter, verse: $0.verse, content: $0.content) })
                 }

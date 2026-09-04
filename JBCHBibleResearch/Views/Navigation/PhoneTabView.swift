@@ -26,7 +26,35 @@ struct PhoneTabView: View {
     /// 읽는 쪽(BibleReadingContentView, 자체 `.toolbar`를 가진 뷰)에서 실기기
     /// 크래시가 나 `AppNavigationRequest`(평범한 `Equatable` 값 기반)로 바꿨다 —
     /// 자세한 이유는 `Services/AppNavigationRequest.swift` 상단 주석 참고.
-    @State private var selectedTab: AppSection = .bibleReading
+    ///
+    /// [2026-09-03 변경, `@State` → `@SceneStorage`] 사용자 보고 — "더보기 > 설정
+    /// > 성경 > 모양의 화면모드를 바꾸면 자동으로 성경으로 이동한다." 재확인
+    /// 결과 여전히 재현됨: 화면 모드를 바꾸면 정확히 이 프로퍼티의 선언 기본값
+    /// (`.bibleReading`, "성경" 탭)으로 되돌아간다 — 다른 값이 아니라 "정확히
+    /// 이 기본값"이라는 점이, `TabView`를 감싼 `PhoneTabView` 구조체 자체가
+    /// (정확한 트리거는 아직 못 밝혔다 — `.preferredColorScheme`가 iOS에서
+    /// `TabView`의 UIKit 구현(`UITabBarController`)에 트레이트 컬렉션 변경을
+    /// 전파하는 방식과 관련된 것으로 보인다) 통째로 다시 만들어지며 `@State`가
+    /// 초기화되고 있다는 뜻이다. 근본 원인(왜 다시 만들어지는지)을 확실히
+    /// 잡기 전이라도, `@State`를 이 뷰 인스턴스가 살아있는 동안만 유지되는
+    /// 저장소가 아니라 "같은 Scene(창) 안에서는 뷰가 다시 만들어져도 값이
+    /// 살아남는" `@SceneStorage`로 바꾸면 — 뷰가 다시 만들어지는 근본 원인과
+    /// 무관하게 — 마지막으로 선택돼 있던 탭이 그대로 복원된다(Apple 공식 문서가
+    /// `@SceneStorage`를 권장하는 바로 그 용도 — 시스템이 뷰를 다시 만드는
+    /// 상황에서도 UI 상태를 보존). `AppSection`이 이미 `String` raw value를
+    /// 가진 `RawRepresentable`이라 `@SceneStorage`가 바로 지원한다.
+    ///
+    /// ⚠️ [남은 한계, 사용자에게 고지] 이 수정은 "어느 탭에 있었는지"만
+    /// 복원한다 — "더보기" 탭 안에서 설정 > 성경 > 모양까지 눌러 들어간
+    /// 세부 위치(`NavigationStack` 푸시 경로)까지 복원하지는 못한다(그 경로는
+    /// `MorePlaceholderView`를 감싼 `NavigationStack`이 값 없는 단순한
+    /// `NavigationStack { ... }`라 애초에 외부에 저장할 대상이 없다 — 이 뷰
+    /// 자체가 다시 만들어지면 그 안의 `NavigationStack`도 함께 다시 만들어져
+    /// 푸시 기록이 비워진다). 그 경로까지 보존하려면 내비게이션을 값 기반
+    /// (`NavigationPath`/`.navigationDestination(for:)`)으로 바꾸고 그 경로 자체를
+    /// 별도로 영속화해야 하는, 이 파일 하나를 넘어서는 더 큰 구조 변경이 필요해
+    /// 이번 수정 범위에 넣지 않았다 — 필요하시면 별도로 진행하겠다.
+    @SceneStorage("PhoneTabView.selectedTab") private var selectedTab: AppSection = .bibleReading
 
     /// [2026-08-27 신설, 사용자 결정 — "개요→더보기, 검색→탭바"] 개요
     /// (`OutlineTreeView`)를 탭바에서 빼고 "더보기" 메뉴 안 전체화면 모달로

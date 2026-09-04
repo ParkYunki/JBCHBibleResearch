@@ -137,6 +137,13 @@ struct DocumentsHomeView: View {
             }
         }
         .navigationTitle("연구문서")
+        // [2026-09-03 추가] 사용자 보고 — "아이폰 하단 메뉴 중 말씀 노트/문서
+        // OCR/통합 검색/더보기는 상단 우측 아이콘과 그 밑 타이틀이 따로 있어
+        // 아이콘 좌측 영역이 낭비됨." `WordNoteHomeView.swift`의 같은 날짜
+        // 주석과 같은 이유·같은 해법 — `.navigationBarTitleDisplayMode(.inline)`.
+        #if os(iOS)
+        .navigationBarTitleDisplayMode(.inline)
+        #endif
         // [2026-08-18 추가] 아이폰 다중 씬 미지원 fix — `documentRow`가 아이폰에서
         // `NavigationLink(value: document.persistentModelID)`로 미는 목적지를
         // 이 탭(NavigationStack)의 스코프에 등록한다. `DocumentViewerWindowContent`는
@@ -1073,6 +1080,19 @@ private struct DocumentRowView: View {
     /// 라벨을 쓰도록 분리 — 위 iPhone 런타임 크래시 fix에서 라벨 중복을
     /// 피하려고 뺐다.
     private var documentRowLabel: some View {
+        // [2026-09-04 신설] 사용자 요청 — "07. 배경이 흐린 회색으로 보임 —
+        // 책등 강조선." 목록 전체가 시스템 기본 배경 그대로라 지금 누르고
+        // 있는 행 말고는 이 앱만의 색이 전혀 안 보인다는 지적에, 가이드
+        // artifact의 "① 책등 강조선" 안을 적용한다 — 카드 배경 자체를
+        // 바꾸지 않고(라이트/다크 모드 배경은 그대로 시스템 기본) 왼쪽
+        // 모서리에 3pt 남색 세로선만 더해, 제본된 책의 책등처럼 보이게 한다.
+        // `TranslationColumnView.VerseRow`의 선택 강조선(`RoundedRectangle
+        // ().fill(Color.accentColor).frame(width: 3)`)과 같은, 이미 검증된
+        // 패턴을 그대로 재사용했다 — 배경 자체를 바꾸는 "② 책장 아이보리
+        // 카드"는 라이트/다크 모드 양쪽에서 실제로 보기 좋은지 이 세션(Xcode
+        // 없음)에서 눈으로 확인할 수 없어, 실기기 확인 없이 넣기엔 위험이
+        // 크다고 판단해 이번엔 넣지 않았다 — 필요하시면 실기기로 같이
+        // 확인하며 추가하겠다.
         HStack {
                 Image(systemName: formatIcon)
                     .foregroundStyle(.secondary)
@@ -1130,6 +1150,14 @@ private struct DocumentRowView: View {
 
                 statusBadge
             }
+        .padding(.vertical, 4)
+        .padding(.leading, 10)
+        .overlay(alignment: .leading) {
+            RoundedRectangle(cornerRadius: 1.5)
+                .fill(JBCHCategoryPalette.navy)
+                .frame(width: 3)
+                .padding(.vertical, 3)
+        }
     }
 
     /// 컨텍스트 메뉴에서 시트를 열 때 기본값을 채운다 — 이미 연결돼 있으면 그
@@ -1190,24 +1218,35 @@ private struct DocumentRowView: View {
 
     // MARK: - 상태 배지(14.5 시맨틱 색상: 대기/추출중=주황, 완료=초록, 실패=빨강)
 
+    // [2026-09-04 수정] 사용자 요청 — "08. 채도만 살짝 낮추도록." 완료(성공)/
+    // 대기·진행(주황)/실패(빨강)라는 상태 신호 자체(색의 의미)는 그대로 두고,
+    // iOS 기본 순색(`.orange`/`.green`/`.red`) 대신 채도를 낮춘 톤으로만
+    // 바꿨다 — 화면 전체의 차분한 톤(서재 금박·밤빛 남색 등)과 어우러지게
+    // 하면서도, 성공=초록/진행=주황/실패=빨강이라는 구분 자체는 그대로라
+    // 상태 판별성은 잃지 않는다. `JBCHCategoryPalette`(항목 구분용)와는
+    // 성격이 달라(이건 상태 신호) 그 파일에 넣지 않고 여기 따로 둔다.
+    private static let statusAmber = Color(hex: "#B36A2E") ?? .orange
+    private static let statusGreen = Color(hex: "#5E8C5B") ?? .green
+    private static let statusRed = Color(hex: "#A6483C") ?? .red
+
     @ViewBuilder
     private var statusBadge: some View {
         if viewModel.hasPendingOCRReview(document) {
-            badge("검수 대기", color: .orange)
+            badge("검수 대기", color: Self.statusAmber)
         } else {
             switch document.conversionStatus {
             case .pending:
-                badge("대기", color: .orange)
+                badge("대기", color: Self.statusAmber)
             case .convertingNative:
-                badge("추출 중", color: .orange)
+                badge("추출 중", color: Self.statusAmber)
             case .converted:
                 if document.indexStatus == .indexed {
-                    badge("인덱싱 완료", color: .green)
+                    badge("인덱싱 완료", color: Self.statusGreen)
                 } else {
-                    badge("추출 중", color: .orange)
+                    badge("추출 중", color: Self.statusAmber)
                 }
             case .failedNeedsManual:
-                badge("실패", color: .red)
+                badge("실패", color: Self.statusRed)
             }
         }
     }

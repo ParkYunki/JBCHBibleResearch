@@ -18,10 +18,25 @@ import UIKit
 struct RootView: View {
     var body: some View {
         content
-            // 8.6 "화면 모드" — UserSettingsStore.shared.colorSchemePreference를
-            // body 안에서 직접 읽었으므로(Observation이 자동 추적) 설정 화면에서
-            // 값이 바뀌면 이 뷰도 다시 그려진다. `.system`은 nil이라 강제하지 않는다.
-            .preferredColorScheme(UserSettingsStore.shared.colorSchemePreference.colorScheme)
+            // [2026-09-03 이전] 여기서 `.preferredColorScheme(UserSettingsStore
+            // .shared.colorSchemePreference.colorScheme)`을 직접 걸었었다 —
+            // 사용자 보고: "설정 > 성경 > 모양의 화면모드를 바꾸면 자동으로
+            // 성경으로 이동한다(더보기 > 설정 하위 어느 화면에 있었든 상관없이)."
+            // 원인 확인(Apple Developer Forums 스레드 726363, "App Lost all
+            // selection info of navigation and tab, after update a AppStorage
+            // state" — 같은 증상: `@AppStorage` 값을 읽는 바로 그 뷰가 동시에
+            // `TabView`를 직접 구성하고 있으면, 그 값이 바뀔 때마다 `TabView`
+            // 자체가 다시 만들어져 선택된 탭(`PhoneTabView.selectedTab`, 기본값
+            // `.bibleReading` = "성경")과 그 안의 내비게이션 스택이 초기화된다):
+            // 이 `body`가 `content`(바로 아래, `PhoneTabView`를 직접 만든다)를
+            // 만드는 동시에 `colorSchemePreference`도 읽고 있어 정확히 같은
+            // 구성이었다. 그 포럼 답변의 해법대로 — 이 값을 읽는 자리와 TabView를
+            // 만드는 자리를 분리 — 이 modifier는 `ContentView.swift`의
+            // `RootView()`(이 뷰의 "바깥"에서 이 뷰를 만드는 자리)로 옮겼다.
+            // `RootView.body`는 이제 이 값을 전혀 읽지 않으므로, 값이 바뀌어도
+            // 이 아래 `content`/`PhoneTabView`는 다시 만들어지지 않고 그대로
+            // 유지된다 — "화면 모드"는 여전히 앱 전체(모든 창/탭)에 적용된다,
+            // 적용 위치만 한 단계 바깥으로 옮겼을 뿐이다.
             // [2026-08-08 추가, 2026-08-16 되돌림] 사용자 요청으로 한때 "앱에서
             // 사용되는 글꼴도 여기에 내장된 기본글꼴(Paperlogy-4Regular)로"
             // `.appDefaultFont()`(BundledFontRegistrar.swift)를 메인 창 전체에

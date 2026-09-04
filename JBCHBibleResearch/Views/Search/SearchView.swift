@@ -70,6 +70,13 @@ struct SearchView: View {
             }
         }
         .navigationTitle("통합 검색")
+        // [2026-09-03 추가] 사용자 보고 — "아이폰 하단 메뉴 중 말씀 노트/문서
+        // OCR/통합 검색/더보기는 상단 우측 아이콘과 그 밑 타이틀이 따로 있어
+        // 아이콘 좌측 영역이 낭비됨." `WordNoteHomeView.swift`의 같은 날짜
+        // 주석과 같은 이유·같은 해법 — `.navigationBarTitleDisplayMode(.inline)`.
+        #if os(iOS)
+        .navigationBarTitleDisplayMode(.inline)
+        #endif
         // [2026-08-18 추가] `SidebarNavigationView`의 `.onChange(of:
         // AppNavigationRequest.shared.requestedSection)`과 같은 패턴 — 평범한
         // Equatable(String?) 싱글턴 프로퍼티라 안전하게 관찰할 수 있다.
@@ -778,11 +785,11 @@ private struct SearchContentView: View {
                     }
                 }
                 .buttonStyle(.plain)
-                .foregroundStyle(.indigo)
+                .foregroundStyle(JBCHCategoryPalette.navy)
                 .padding(.vertical, 6)
             }
         } header: {
-            sectionHeader("성경구절", icon: "book.closed.fill", color: .indigo, count: viewModel.allVerseResults.count)
+            sectionHeader("성경구절", icon: "book.closed.fill", color: JBCHCategoryPalette.navy, count: viewModel.allVerseResults.count)
         }
 
         Section {
@@ -791,7 +798,7 @@ private struct SearchContentView: View {
                 outlineRow(result)
             }
         } header: {
-            sectionHeader("개요", icon: "list.bullet.rectangle.fill", color: .teal, count: viewModel.outlineResults.count)
+            sectionHeader("개요", icon: "list.bullet.rectangle.fill", color: JBCHCategoryPalette.slateTeal, count: viewModel.outlineResults.count)
         }
 
         Section {
@@ -800,7 +807,7 @@ private struct SearchContentView: View {
                 phraseNoteRow(result)
             }
         } header: {
-            sectionHeader("메모", icon: "note.text", color: .orange, count: viewModel.phraseNoteResults.count)
+            sectionHeader("메모", icon: "note.text", color: JBCHCategoryPalette.gold, count: viewModel.phraseNoteResults.count)
         }
 
         Section {
@@ -809,7 +816,7 @@ private struct SearchContentView: View {
                 memoRow(result)
             }
         } header: {
-            sectionHeader("개인 묵상", icon: "heart.text.square.fill", color: .pink, count: viewModel.memoResults.count)
+            sectionHeader("개인 묵상", icon: "heart.text.square.fill", color: JBCHCategoryPalette.wine, count: viewModel.memoResults.count)
         }
 
         Section {
@@ -818,7 +825,7 @@ private struct SearchContentView: View {
                 summaryRow(result)
             }
         } header: {
-            sectionHeader("말씀 요약", icon: "text.quote", color: .purple, count: viewModel.summaryResults.count)
+            sectionHeader("말씀 요약", icon: "text.quote", color: JBCHCategoryPalette.wood, count: viewModel.summaryResults.count)
         }
 
         Section {
@@ -827,7 +834,7 @@ private struct SearchContentView: View {
                 documentRow(result)
             }
         } header: {
-            sectionHeader("연구문서", icon: "doc.text.fill", color: .brown, count: viewModel.documentResults.count)
+            sectionHeader("연구문서", icon: "doc.text.fill", color: JBCHCategoryPalette.shelfSlate, count: viewModel.documentResults.count)
         }
     }
 
@@ -968,7 +975,7 @@ private struct SearchContentView: View {
     /// (`groupedVerseRow`)을 대표하므로 특정 절 번호를 넣을 이유가 없다.
     private func verseChapterGroupHeader(_ group: SearchViewModel.VerseSearchResultGroup) -> some View {
         HStack(spacing: 10) {
-            categoryIcon("book.closed.fill", color: .indigo)
+            categoryIcon("book.closed.fill", color: JBCHCategoryPalette.navy)
             Text("\(group.bookNameKo) \(group.chapter)장")
                 .font(.body.weight(.semibold))
                 .lineLimit(1)
@@ -1179,7 +1186,7 @@ private struct SearchContentView: View {
             }
         } label: {
             rowLabel(
-                icon: "list.bullet.rectangle.fill", iconColor: .teal,
+                icon: "list.bullet.rectangle.fill", iconColor: JBCHCategoryPalette.slateTeal,
                 title: outlineTitle(result),
                 isReferenceMatch: result.isReferenceMatch,
                 occurrenceCount: result.bodyExcerpt != nil ? result.bodyOccurrenceSum : nil,
@@ -1207,7 +1214,7 @@ private struct SearchContentView: View {
             bookId: result.note.bookId, chapter: result.note.chapter, verse: nil
         )) {
             rowLabel(
-                icon: "note.text", iconColor: .orange,
+                icon: "note.text", iconColor: JBCHCategoryPalette.gold,
                 title: phraseNoteTitle(result.note),
                 isReferenceMatch: result.isReferenceMatch,
                 occurrenceCount: result.bodyExcerpt != nil ? result.bodyOccurrenceSum : nil,
@@ -1228,7 +1235,7 @@ private struct SearchContentView: View {
             MemoDetailView(memo: result.memo)
         } label: {
             rowLabel(
-                icon: "heart.text.square.fill", iconColor: .pink,
+                icon: "heart.text.square.fill", iconColor: JBCHCategoryPalette.wine,
                 title: memoTitle(result.memo),
                 tagNames: result.matchedTagNames,
                 occurrenceCount: result.bodyExcerpt != nil ? result.bodyOccurrenceSum : nil,
@@ -1256,7 +1263,7 @@ private struct SearchContentView: View {
             WordSummaryEditorView(summary: result.summary, presentationContext: .wordNoteList)
         } label: {
             rowLabel(
-                icon: "text.quote", iconColor: .purple,
+                icon: "text.quote", iconColor: JBCHCategoryPalette.wood,
                 title: summaryTitle(result.summary),
                 tagNames: result.matchedTagNames,
                 occurrenceCount: result.bodyExcerpt != nil ? result.bodyOccurrenceSum : nil,
@@ -1301,7 +1308,7 @@ private struct SearchContentView: View {
                 )
             } label: {
                 rowLabel(
-                    icon: "doc.text.fill", iconColor: .brown,
+                    icon: "doc.text.fill", iconColor: JBCHCategoryPalette.shelfSlate,
                     title: documentTitle(result),
                     tagNames: result.matchedTagNames,
                     occurrenceCount: result.bodyExcerpt != nil ? result.bodyOccurrenceSum : nil,
@@ -1316,7 +1323,7 @@ private struct SearchContentView: View {
                 )
             } label: {
                 rowLabel(
-                    icon: "doc.text.fill", iconColor: .brown,
+                    icon: "doc.text.fill", iconColor: JBCHCategoryPalette.shelfSlate,
                     title: documentTitle(result),
                     tagNames: result.matchedTagNames,
                     occurrenceCount: result.bodyExcerpt != nil ? result.bodyOccurrenceSum : nil,

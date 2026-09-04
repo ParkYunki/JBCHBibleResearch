@@ -10,6 +10,21 @@
 //  동작은 S12(번역본 관리) 구현 후 재검증이 필요하다(BibleReadingViewModel.swift 상단
 //  주석 참고).
 //
+//  [2026-09-04 수정] 사용자 보고 — "번역본을 해제 선택했을 때, 어떤 순서 기준으로
+//  나오는지 불분명함. 1) 순서를 표시할 것. 2) 가장 나중에 선택된 것이 가장
+//  후순서로 배치되게 할 것." 원인: `selectedIDs`가 지금까지 `Set<PersistentIdentifier>`
+//  였다 — Set은 원래 순서 개념이 없어(해시 기반), 실제 화면 컬럼 순서를 정하는
+//  `BibleReadingViewModel.setDisplayedTranslations(_:)`/`reloadVerses()`(그 함수
+//  상단의 2026-08-27 주석 — "결과 순서가 필터링 대상의 순서를 그대로 물려받는다"는
+//  바로 그 문제)에 넘기기 직전 호출부(`BibleReadingView.swift`)가 `Array(selected)`로
+//  변환하는 순간 순서가 통째로(해시 순서로) 뒤섞였다. `setDisplayedTranslations`
+//  자체는 이미 "받은 배열 순서 그대로" 컬럼을 만들도록 돼 있어(위 주석 참고),
+//  이 팝오버가 순서를 보존해 넘기기만 하면 된다 — `selectedIDs`를 선택한 순서를
+//  그대로 유지하는 배열로 바꾸고(선택 시 맨 뒤에 추가, 해제 시 그 자리만 제거),
+//  선택된 칩에 순서 번호 배지를 붙여 사용자가 결과 순서를 미리 확인할 수 있게
+//  했다(iOS 사진 앱의 "다중 선택" 순서 배지와 같은 원칙 — 그리드 배치 자체는
+//  움직이지 않고, 번호만 선택 순서를 반영해 바뀐다).
+//
 
 import SwiftUI
 import SwiftData
@@ -18,13 +33,15 @@ import BibleResearchModels
 struct TranslationPickerPopover: View {
     let available: [TranslationRegistry]
     let maxSelection: Int
-    @State var selectedIDs: Set<PersistentIdentifier>
-    var onDone: (Set<PersistentIdentifier>) -> Void
+    /// [2026-09-04 변경] `Set` → 순서 보존 배열. 선택된 순서 그대로 유지되며,
+    /// 이 배열의 순서가 곧 `onDone`으로 넘어가 실제 컬럼 표시 순서가 된다.
+    @State var selectedIDs: [PersistentIdentifier]
+    var onDone: ([PersistentIdentifier]) -> Void
 
-    init(available: [TranslationRegistry], selected: [PersistentIdentifier], maxSelection: Int, onDone: @escaping (Set<PersistentIdentifier>) -> Void) {
+    init(available: [TranslationRegistry], selected: [PersistentIdentifier], maxSelection: Int, onDone: @escaping ([PersistentIdentifier]) -> Void) {
         self.available = available
         self.maxSelection = maxSelection
-        self._selectedIDs = State(initialValue: Set(selected))
+        self._selectedIDs = State(initialValue: selected)
         self.onDone = onDone
     }
 
@@ -70,9 +87,13 @@ struct TranslationPickerPopover: View {
         let canToggleOn = isSelected || selectedIDs.count < maxSelection
         return Button {
             if isSelected {
-                selectedIDs.remove(registry.persistentModelID)
+                // [2026-09-04 변경] 배열에서 그 값만 제거 — 나머지 항목들의
+                // 상대 순서(=선택된 순서)는 그대로 유지된다.
+                selectedIDs.removeAll { $0 == registry.persistentModelID }
             } else if canToggleOn {
-                selectedIDs.insert(registry.persistentModelID)
+                // [2026-09-04 변경] 사용자 요청 — "가장 나중에 선택된 것이
+                // 가장 후순서로 배치." 항상 배열 맨 뒤에 추가한다.
+                selectedIDs.append(registry.persistentModelID)
             }
         } label: {
             Text(registry.displayName)
@@ -83,5 +104,23 @@ struct TranslationPickerPopover: View {
         .buttonStyle(.bordered)
         .tint(isSelected ? .accentColor : .secondary)
         .disabled(!isSelected && !canToggleOn)
+        // [2026-09-04 신설] 위 파일 상단 주석 참고 — 선택된 칩에만 선택 순서
+        // 번호 배지를 얹는다(iOS 사진 앱 "다중 선택" 순서 배지와 같은 원칙).
+        // 칩 자체의 탭 영역(above Button)과 겹치지 않도록 배지는 순수 표시용
+        // 오버레이로만 얹고 탭 제스처는 받지 않는다(`allowsHitTesting(false)`).
+        .overlay(alignment: .topTrailing) {
+            if let order = selectedIDs.firstIndex(of: registry.persistentModelID) {
+                Text("\(order + 1)")
+                    .font(.caption2.weight(.semibold))
+                    .foregroundStyle(.white)
+                    .frame(width: 16, height: 16)
+                    .background(Circle().fill(Color.accentColor))
+                    .overlay(Circle().strokeBorder(.background, lineWidth: 1.5))
+                    .offset(x: 5, y: -5)
+                    .allowsHitTesting(false)
+                    .transition(.scale.combined(with: .opacity))
+            }
+        }
+        .animation(.spring(response: 0.25, dampingFraction: 0.8), value: selectedIDs)
     }
 }

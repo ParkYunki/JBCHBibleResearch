@@ -65,7 +65,26 @@ import BibleResearchModels
 
 @MainActor
 enum OutlineSeedImporter {
-    static func importIfNeeded(into context: ModelContext) {
+    /// [2026-09-03 변경] 사용자 보고 — "아이폰 초기설치후 실행시 온보딩 메세지
+    /// 하단에 다음버튼을 눌러도 십몇초 동안 반응이 없다가 나중에야 눌림." 이
+    /// 함수(최초 1회, `ContentView.swift`의 부트스트랩 `.task`가 부른다)는
+    /// `OutlineSeed.json`의 항목(최대 66권 + 각 장) 전부를 순회하며 항목마다
+    /// `ModelContext.fetch`/`insert`를 동기 호출한다 — 같은 `.task` 안의 다른
+    /// 부트스트랩 단계(`TranslationBootstrap`류)는 앱당 레코드 1~2개만 다뤄
+    /// 사실상 즉시 끝나지만, 이 함수만 유일하게 반복 횟수가 콘텐츠 분량(장 수)에
+    /// 비례해 늘어난다. 이 전부가 `@MainActor`에서 `await` 없이(=한 번도 실행을
+    /// 양보하지 않고) 끝까지 도는 하나의 동기 블록이라, 온보딩 시트가 이미 떠
+    /// 있어도 그 안의 "다음" 버튼 탭 이벤트가 메인 런루프 큐에 쌓인 채
+    /// 처리되지 못하고 이 함수가 다 끝난 뒤에야 뒤늦게 눌린 것으로 보인다 —
+    /// 기기에 새로 설치했을 때만(플래그로 1회만 실행) 재현된다는 사용자 보고와
+    /// 정확히 일치한다. 그래서 이 함수를 `async`로 바꾸고, 항목을 일정 개수
+    /// (`yieldInterval`)씩 처리할 때마다 `await Task.yield()`로 메인 런루프에
+    /// 제어를 잠깐 돌려준다 — 그 사이 큐에 쌓여 있던 탭 등 UI 이벤트가 처리될
+    /// 기회를 얻는다. 항목별 로직(무엇을 몇 번 채우는지)은 전혀 바뀌지 않았다 —
+    /// 실행 중 아주 짧게 여러 번 나눠 쉬는 것만 추가됐다.
+    private static let yieldInterval = 20
+
+    static func importIfNeeded(into context: ModelContext) async {
         guard !UserSettingsStore.shared.hasImportedOutlineSeed else { return }
         defer { UserSettingsStore.shared.hasImportedOutlineSeed = true }
 
@@ -85,7 +104,12 @@ enum OutlineSeedImporter {
             var filledChapterCount = 0
             var skippedCount = 0
 
-            for raw in rawEntries {
+            for (index, raw) in rawEntries.enumerated() {
+                // 위 타입 상단 주석 참고 — 메인 스레드를 계속 붙들지 않도록
+                // 일정 개수마다 한 번씩 실행을 양보한다.
+                if index > 0 && index % yieldInterval == 0 {
+                    await Task.yield()
+                }
                 guard let bookName = raw["book"] as? String, let text = raw["text"] as? String else {
                     print("[OutlineSeedImporter] 형식이 맞지 않아 건너뜁니다(book/text 필요): \(raw)")
                     skippedCount += 1

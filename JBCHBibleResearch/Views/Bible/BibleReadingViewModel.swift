@@ -96,6 +96,21 @@ final class BibleReadingViewModel {
     private(set) var relatedBookOutlineRTF: String?
     private(set) var relatedChapterSummaryRTF: String?
     private(set) var relatedChapterMemos: [UserMemo] = []
+    /// [2026-09-04 추가] 사용자 보고 — 스크롤 버벅거림 Time Profiler 분석 중 확인된
+    /// 원인 하나. 아래 `phraseMemos(translationCode:verse:)`가 `VerseRow`가
+    /// (스크롤 중 `LazyVStack`의 prefetch로도) 다시 만들어질 때마다 장 전체
+    /// 배열을 `.filter`로 처음부터 다시 훑었다 — 위 `chapterHighlightsIndex`와
+    /// 같은 문제, 같은 해법. 다만 `phraseMemos`는 절 번호 하나에 번역본 조건
+    /// (`rangeStart != nil`이면 특정 번역본에만, 아니면 전체 번역본에 노출)이
+    /// 섞여 있어 "번역본|절번호" 키로는 인덱싱할 수 없다 — 절 번호만으로 후보를
+    /// 좁혀 두고, 그 안에서 번역본 조건은 여전히 `phraseMemos`가 직접 거른다
+    /// (절 하나당 메모 개수는 원래도 적어 이 안에서의 `.filter`는 무시할 수준).
+    /// `UserMemo.verse`가 옵셔널이라(챕터 전체 메모 등 절이 없는 경우 대비),
+    /// 없는 경우는 절대 조회되지 않는 -1 키로 몰아 둔다.
+    private var relatedChapterMemosIndex: [Int: [UserMemo]] = [:]
+    private func rebuildRelatedChapterMemosIndex() {
+        relatedChapterMemosIndex = Dictionary(grouping: relatedChapterMemos) { $0.verse ?? -1 }
+    }
     /// [2026-08-12 추가] 사용자 요청 — "[성경 조회] 오른쪽 상단 버튼중 사이드
     /// 인스펙터 창 버튼 - 관련 문서 정보에 [관련 말씀 요약] 추가." 개인 묵상
     /// (`relatedChapterMemos`)과 완전히 같은 원칙 — 이 장 안의 `VerseSummary`를
@@ -206,6 +221,19 @@ final class BibleReadingViewModel {
         let chapter: Int
         let translationCode: String
         let verse: Int
+        /// [2026-09-04 신설] 사용자 보고 — "난외주 있는 구절이 한자가 보이지
+        /// 않음." 원인 — 이 키에 원래 이 필드가 없었다. 한자 "탭하면 보기"
+        /// 모드에서는 같은 절이 선택 여부에 따라 `hanjaWords`를 빈 배열로
+        /// (미선택) 또는 실제 한자 목록으로(선택) 서로 다르게 넘겨 호출되는데
+        /// (`TranslationColumnView.VerseRow.verseContentText` 참고), 이 절에
+        /// 난외주까지 있으면 `shouldShowMarginalNoteMarkers`가 항상 참이라
+        /// 선택 여부와 무관하게 항상 캐시 경로를 탄다 — 즉 이 절이 아직
+        /// 선택되기 "전에" 먼저 화면에 그려지면(예: 스크롤로 지나가며) 한자
+        /// 없는 결과가 이 키로 캐시되고, 이후 탭해서 선택해도(한자 있는
+        /// 호출로 바뀌어도) 캐시가 그 이전 값을 그대로 돌려줘 한자가 안
+        /// 나타났다. 한자 유무를 키에 포함시켜, 선택 전/후를 서로 다른
+        /// 캐시 항목으로 분리한다.
+        let includeHanja: Bool
     }
     private var inlineAnnotationCache: [InlineAnnotationCacheKey: AttributedString] = [:]
     /// 마지막으로 캐시를 채울 때 쓴 폰트/글자색/한자폰트 — 설정 화면(모양 탭)에서
@@ -231,7 +259,10 @@ final class BibleReadingViewModel {
             inlineAnnotationCacheTextColor = textColor
             inlineAnnotationCacheHanjaFont = hanjaFont
         }
-        let key = InlineAnnotationCacheKey(bookId: bookId, chapter: chapter, translationCode: translationCode, verse: verse)
+        let key = InlineAnnotationCacheKey(
+            bookId: bookId, chapter: chapter, translationCode: translationCode, verse: verse,
+            includeHanja: !hanjaWords.isEmpty
+        )
         if let cached = inlineAnnotationCache[key] { return cached }
         let attributed = VerseAnnotationRenderer.attributedContentWithInlineAnnotations(
             text: text, highlights: highlights, phraseNotes: phraseNotes,
@@ -246,10 +277,17 @@ final class BibleReadingViewModel {
     /// 이 네 함수는 전부 "지금 보고 있는 장"에서만 호출되므로 `selectedBook`/
     /// `selectedChapter`를 그대로 쓸 수 있다.
     private func invalidateInlineAnnotationCache(translationCode: String, verse: Int) {
-        let key = InlineAnnotationCacheKey(
-            bookId: selectedBook.bookId, chapter: selectedChapter, translationCode: translationCode, verse: verse
-        )
-        inlineAnnotationCache.removeValue(forKey: key)
+        // [2026-09-04 수정] 위 `InlineAnnotationCacheKey.includeHanja` 상단
+        // 주석 참고 — 같은 절이 이제 `includeHanja` true/false 두 항목으로
+        // 캐시될 수 있어, 형광펜/구절메모가 바뀌면 둘 다 지워야 어느 쪽이
+        // 남아 있든 다음 렌더링에서 새로 계산된다.
+        for includeHanja in [true, false] {
+            let key = InlineAnnotationCacheKey(
+                bookId: selectedBook.bookId, chapter: selectedChapter, translationCode: translationCode,
+                verse: verse, includeHanja: includeHanja
+            )
+            inlineAnnotationCache.removeValue(forKey: key)
+        }
     }
 
     // MARK: - 메모/연구문서 안의 성경구절 언급("관련 내용") — 2026-08-11 신설
@@ -260,6 +298,16 @@ final class BibleReadingViewModel {
     // 메모리에서 필터링만 한다(`BibleReferenceIndexingService`가 실제 인덱스
     // 재계산을 담당 — `onAppear` 참고).
     private(set) var chapterVerseMentions: [VerseMention] = []
+    /// [2026-09-04 추가] 위 `relatedChapterMemosIndex`와 완전히 같은 이유·같은
+    /// 방식. 아래 `verseMentions(verse:)`가 스크롤 prefetch 때마다 장 전체
+    /// 배열을 선형 탐색했다 — 절 번호 키 인덱스로 O(1) 조회로 바꾼다.
+    /// `VerseMention.verse`도 옵셔널이라(장만 가리키는 언급은 애초에
+    /// `verseMentions(verse:)`가 제외 대상으로 삼는다 — 위 함수 주석 참고),
+    /// 없는 경우는 절대 조회되지 않는 -1 키로 몰아 둔다.
+    private var chapterVerseMentionsIndex: [Int: [VerseMention]] = [:]
+    private func rebuildVerseMentionsIndex() {
+        chapterVerseMentionsIndex = Dictionary(grouping: chapterVerseMentions) { $0.verse ?? -1 }
+    }
 
     /// `TranslationColumnView.VerseRow`가 호출 — 이 번역본·이 절에 걸린 형광펜/표시만
     /// 골라 낸다.
@@ -300,7 +348,7 @@ final class BibleReadingViewModel {
     /// (`verse == nil`)은 여기 포함하지 않는다 — 포함하면 그 장의 모든 절 아이콘에
     /// 똑같이 나타나 오히려 신호가 흐려진다고 판단했다.
     func verseMentions(verse: Int) -> [VerseMention] {
-        chapterVerseMentions.filter { $0.verse == verse }
+        chapterVerseMentionsIndex[verse] ?? []
     }
 
     /// [2026-08-11 추가] `VerseMention.sourceId`(UUID 문자열)로 실제 `UserMemo`를
@@ -341,8 +389,7 @@ final class BibleReadingViewModel {
     /// 절 전체 메모(`rangeStart == nil`)는 번역본과 무관하게 그 절을 보여주는
     /// 모든 컬럼에 노출한다.
     func phraseMemos(translationCode: String, verse: Int) -> [UserMemo] {
-        relatedChapterMemos.filter { memo in
-            guard memo.verse == verse else { return false }
+        (relatedChapterMemosIndex[verse] ?? []).filter { memo in
             if memo.rangeStart != nil {
                 return memo.annotationTranslationCode == translationCode
             }
@@ -527,6 +574,7 @@ final class BibleReadingViewModel {
         modelContext.insert(memo)
         try? modelContext.save()
         relatedChapterMemos.insert(memo, at: 0)
+        rebuildRelatedChapterMemosIndex()
         BibleReferenceIndexingService.reindexMemo(memo, context: modelContext)
     }
 
@@ -540,6 +588,7 @@ final class BibleReadingViewModel {
         modelContext.delete(memo)
         try? modelContext.save()
         relatedChapterMemos.removeAll { $0.id == memo.id }
+        rebuildRelatedChapterMemosIndex()
     }
 
     func createPhraseMemo(translationCode: String, verse: Int, range: NSRange, anchorText: String) -> UserMemo {
@@ -551,6 +600,7 @@ final class BibleReadingViewModel {
         modelContext.insert(memo)
         try? modelContext.save()
         relatedChapterMemos.insert(memo, at: 0)
+        rebuildRelatedChapterMemosIndex()
         // [2026-08-11 추가] 새로 만든 메모도 이벤트 기반 인덱싱 대상 — 이 시점엔
         // 보통 본문이 비어 있어 실질적으로는 no-op이지만(사용자가 방금 만들었을
         // 뿐 아직 아무것도 안 씀), 다른 저장 경로와 일관되게 항상 호출해 둔다.
@@ -760,6 +810,44 @@ final class BibleReadingViewModel {
     /// 해서 토글할 때마다 관찰 대상이 바뀌었다는 신호를 준다.
     private(set) var bookmarkVersion = 0
 
+    /// [2026-09-04 신설] 사용자 요청 — "책갈피를 설정하면 성경 본문 절번호
+    /// 왼쪽에 길게 갈피실 색상으로 세로라인을 그어줄 수 있는가?" 절 하나하나
+    /// 렌더링할 때마다 `BibleBookmarkService.isBookmarked`를 부르면(그 함수는
+    /// 매번 책갈피 전체를 다시 읽어온다 — `BibleBookmarkService.swift` 상단
+    /// 주석 참고) 스크롤 중 화면에 보이는 절 수만큼, 그것도 스크롤할 때마다
+    /// 반복해서 책갈피 전체를 다시 훑게 된다 — 지금 막 점검한 스크롤 성능
+    /// 문제와 정확히 같은 종류의 비용이다. `chapterHighlightsIndex`와 같은
+    /// 원칙으로, 장이 바뀌거나(`refreshRelatedContent`) 책갈피가 바뀔 때만
+    /// (`toggleBookmarkForCurrentPosition`/`deleteBookmark`) 한 번 다시
+    /// 계산해 둔다. "장 전체"를 가리키는 책갈피(`verse == nil`)는 특정 절과
+    /// 무관해 세로선 대상에서 뺀다.
+    private(set) var bookmarkedVersesInChapter: Set<Int> = []
+    /// [2026-09-04 신설] 사용자 요청 — "절을 책갈피 할때는 해당 절에
+    /// 세로줄이 쳐지는데, 장을 책갈피 할때는 아무 표시가 없음. 스크롤영역
+    /// 뒤 왼쪽 변에 백그라운드로 길게 이어진 세로 라인을 그어줄 수 있나?"
+    /// "장 전체"를 가리키는 책갈피(`verse == nil`)가 지금 보고 있는 책/장에
+    /// 있는지 — 위 `bookmarkedVersesInChapter`와 같은 시점(장 로드/책갈피
+    /// 변경)에 같은 fetch 결과로 함께 계산해, `BibleBookmarkService.
+    /// fetchAll`을 두 번 부르지 않는다.
+    private(set) var isChapterBookmarked: Bool = false
+
+    /// 위 두 값을 다시 계산한다 — 지금 보고 있는 책/장 기준으로, 절 번호가
+    /// 있는 책갈피는 집합으로, "장 전체" 책갈피는 존재 여부로 모은다.
+    private func rebuildBookmarkedVersesIndex() {
+        let bookId = selectedBook.bookId
+        let chapter = selectedChapter
+        let all = BibleBookmarkService.fetchAll(context: modelContext)
+        let chapterBookmarks = all.filter { $0.bookId == bookId && $0.chapter == chapter }
+        bookmarkedVersesInChapter = Set(chapterBookmarks.compactMap { $0.verse })
+        isChapterBookmarked = chapterBookmarks.contains { $0.verse == nil }
+    }
+
+    /// `TranslationColumnView.VerseRow`가 호출 — 이 절을 정확히 가리키는
+    /// 책갈피가 있는지(절 번호 옆 세로선 표시 여부).
+    func isVerseBookmarked(_ verse: Int) -> Bool {
+        bookmarkedVersesInChapter.contains(verse)
+    }
+
     /// 지금 위치(장, 또는 정확히 절 하나를 선택 중이면 그 절)가 이미 책갈피로
     /// 설정돼 있는지. 툴바의 책갈피 아이콘이 "설정"/"해제" 중 어느 모양으로
     /// 보일지 이 값으로 결정한다.
@@ -780,6 +868,7 @@ final class BibleReadingViewModel {
             context: modelContext
         )
         bookmarkVersion += 1
+        rebuildBookmarkedVersesIndex()
     }
 
     /// 책갈피 이동 팝오버가 열릴 때마다 새로 불러온다(히스토리 시트와 같은
@@ -800,6 +889,7 @@ final class BibleReadingViewModel {
     func deleteBookmark(_ bookmark: BibleBookmark) {
         BibleBookmarkService.toggle(bookId: bookmark.bookId, chapter: bookmark.chapter, verse: bookmark.verse, context: modelContext)
         bookmarkVersion += 1
+        rebuildBookmarkedVersesIndex()
     }
 
     /// 책갈피 목록에서 항목을 탭했을 때 그 책/장(+있으면 절)으로 이동한다.
@@ -952,6 +1042,7 @@ final class BibleReadingViewModel {
                 sortBy: [SortDescriptor(\.updatedAt, order: .reverse)]
             )
         )) ?? []
+        rebuildRelatedChapterMemosIndex()
 
         // [2026-08-12 추가] "관련 말씀 요약" — 저널 성격을 살려 작성 순서
         // (`createdAt` 내림차순, `WordSummaryHomeView`와 같은 정렬 기준)로.
@@ -1031,11 +1122,14 @@ final class BibleReadingViewModel {
         // `onAppear`에서만 한다(여기서는 이미 계산된 결과를 읽기만 한다) — 장을
         // 이동할 때마다(`selectBook`/`goToChapter`) 메모/문서 전체를 다시 스캔할
         // 필요는 없다.
+        rebuildBookmarkedVersesIndex()
+
         chapterVerseMentions = (try? modelContext.fetch(
             FetchDescriptor<VerseMention>(
                 predicate: #Predicate { $0.bookId == bookId && $0.chapter == chapter }
             )
         )) ?? []
+        rebuildVerseMentionsIndex()
     }
 
     private static func makePreview(_ text: String, limit: Int = 80) -> String {

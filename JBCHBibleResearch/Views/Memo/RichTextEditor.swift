@@ -620,6 +620,13 @@ struct RichTextEditorRepresentable: UIViewRepresentable {
         textView.font = typingFont
         textView.textContainerInset = UIEdgeInsets(top: 8, left: 8, bottom: 8, right: 8)
         textView.textStorage.delegate = context.coordinator
+        // [2026-09-03 추가] 사용자 요청 — "iOS 아이폰 상에서 모든 글쓰기 기능에
+        // 키보드 내리기 기능 필요. (메모, 개인묵상, 말씀 요약)." 이 뷰
+        // (`RichTextEditorRepresentable`)가 메모/개인 묵상(`MemoDetailView`)과
+        // 말씀 요약(`WordSummaryEditorView`) 세 화면 전부가 공유하는 유일한
+        // 실제 텍스트 입력 컴포넌트라, 여기 한 곳에 키보드 위 "완료" 액세서리
+        // 바를 붙이는 것으로 세 화면 모두를 한 번에 해결한다.
+        textView.inputAccessoryView = Self.makeKeyboardDismissAccessoryView(for: textView)
 
         context.coordinator.textView = textView
         proxy.textView = textView
@@ -628,6 +635,32 @@ struct RichTextEditorRepresentable: UIViewRepresentable {
         applyBackground(to: textView)
         applyStyleToolsVisibility(to: textView)
         return textView
+    }
+
+    /// 위 `makeUIView`가 붙이는 키보드 액세서리 바 — 오른쪽 끝에 "완료" 버튼
+    /// 하나만 두고 누르면 이 `textView`가 첫 반응자(키보드)를 내려놓는다.
+    /// `UIToolbar` + `UIBarButtonItem(primaryAction:)`(iOS 14+, 이 프로젝트
+    /// 최소 배포 버전 이상이라 문제 없음)를 쓴다 — 셀렉터 기반
+    /// (`#selector(UIResponder.resignFirstResponder)`) 대신 클로저를 쓰면
+    /// 타깃/액션 체인 전달 문제 없이 이 `textView`를 직접 캡처해 부를 수 있다.
+    private static func makeKeyboardDismissAccessoryView(for textView: UITextView) -> UIToolbar {
+        let toolbar = UIToolbar(frame: CGRect(x: 0, y: 0, width: 0, height: 44))
+        toolbar.sizeToFit()
+        let flexibleSpace = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
+        let doneButton = UIBarButtonItem(
+            title: "완료",
+            primaryAction: UIAction { [weak textView] _ in
+                textView?.resignFirstResponder()
+            }
+        )
+        // [2026-09-03 수정] `UIBarButtonItem(title:style:primaryAction:)`는
+        // 존재하지 않는 이니셜라이저였다 — `primaryAction:`을 쓰는 이니셜라이저는
+        // `init(title:image:primaryAction:menu:)`뿐이라 `style:` 인자를 줄 수
+        // 없다(컴파일 에러: "Extra argument 'style' in call"). `style`은
+        // 생성 후에도 설정 가능한 프로퍼티라 여기서 따로 지정한다.
+        doneButton.style = .done
+        toolbar.items = [flexibleSpace, doneButton]
+        return toolbar
     }
 
     func updateUIView(_ uiView: UITextView, context: Context) {

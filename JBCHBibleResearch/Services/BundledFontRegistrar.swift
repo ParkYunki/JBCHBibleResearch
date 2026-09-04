@@ -167,8 +167,37 @@ enum BundledFontRegistrar {
     /// 시도한다. `postScriptName`이 우리가 등록한 목록에 없는 이름(예:
     /// "System", 사용자가 고른 시스템 폰트)이면 즉시 반환하고 아무 것도 하지
     /// 않는다 — 우리가 관리하지 않는 이름까지 재등록을 시도할 이유가 없다.
+    // [2026-09-04 신설] 사용자 보고 — "아이폰 성경 본문을 빠르게 스와이핑하면
+    // 탁 걸리는 느낌." 원인 조사 — 위 `ensureAvailable`가 호출될 때마다(성경
+    // 조회 화면은 절 번호/본문/한자 폰트를 가져올 때마다 매번 이 함수를 거친다,
+    // `UserSettingsStore.bibleBodyFont`/`TranslationColumnView.platformBodyFont`
+    // 등 참고) 아래 `isFontCurrentlyAvailable`가 매번 실제 `UIFont(name:)`/
+    // `NSFont(name:)` 조회를 새로 실행했다 — 이 함수를 처음 만들 때는 "화면
+    // 복귀 시 1회" 같은 드문 상황만 염두에 두고 "CoreText 캐시 조회라 비용이
+    // 매우 작다"고 판단했지만, 실제로는 화면에 보이는 절 수만큼(스크롤 중
+    // 중앙 절이 바뀔 때마다 그 순간 보이는 모든 절이 다시 계산됨) 반복
+    // 호출된다 — 빠르게 스와이핑할수록 짧은 시간에 이 호출이 몰려 프레임이
+    // 밀리는 원인 중 하나로 보인다.
+    //
+    // 고친 방법 — 이 함수가 원래 지키려던 것("등록이 사라졌으면 다시
+    // 등록한다")은 그대로 두고, "정말로 다시 확인해야 하는지"만 폰트 이름별로
+    // 최소 간격(1초)을 두고 걸렀다. 1초 안에는 직전 확인 결과를 그대로
+    // 신뢰한다 — 폰트가 메모리 압박으로 사라지는 것은 애초에 드문 사건이라
+    // 최대 1초 정도 늦게 알아차려도 실사용에는 차이가 없고, 반대로 이 1초
+    // 동안은 `UIFont(name:)` 호출 자체를 아예 하지 않아 스크롤 중 반복 호출을
+    // 없앤다. 폰트가 실제로 사라지지 않은 평소 상황(대다수)에서는 이 함수의
+    // 결과(무엇을 등록/반환하는지)가 이전과 완전히 동일하다 — 달라지는 것은
+    // "얼마나 자주 실제로 확인하는지"뿐이다.
+    private static var lastAvailabilityCheckAt: [String: Date] = [:]
+    private static let availabilityCheckInterval: TimeInterval = 1.0
+
     static func ensureAvailable(_ postScriptName: String) {
         guard didRegister, registeredPostScriptNames.contains(postScriptName) else { return }
+        let now = Date()
+        if let last = lastAvailabilityCheckAt[postScriptName], now.timeIntervalSince(last) < availabilityCheckInterval {
+            return
+        }
+        lastAvailabilityCheckAt[postScriptName] = now
         guard !isFontCurrentlyAvailable(postScriptName) else { return }
         didRegister = false
         registerBundledFontsIfNeeded()

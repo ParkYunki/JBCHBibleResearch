@@ -79,9 +79,21 @@ struct BookmarkListPopover: View {
                     .background(Color.secondary.opacity(0.15), in: Capsule())
             }
             Spacer()
+            // [2026-09-04 신설] 사용자 요청 — "닫기 버튼을 추가할 것." 팝오버는
+            // 바깥을 탭해도 닫히지만, 명시적인 닫기 동작을 요청하셔서 같은 줄에
+            // 추가했다 — 새 줄을 만들지 않아 세로 공간을 더 쓰지 않는다.
+            Button {
+                onDismiss()
+            } label: {
+                Image(systemName: "xmark.circle.fill")
+                    .font(.system(size: 18))
+                    .foregroundStyle(.secondary)
+            }
+            .buttonStyle(.plain)
+            .accessibilityLabel("닫기")
         }
         .padding(.horizontal, 16)
-        .padding(.vertical, 12)
+        .padding(.vertical, 10)
     }
 
     private var emptyState: some View {
@@ -106,6 +118,7 @@ struct BookmarkListPopover: View {
         List {
             ForEach(bookmarks) { bookmark in
                 row(for: bookmark)
+                    .listRowInsets(EdgeInsets(top: 0, leading: 16, bottom: 0, trailing: 16))
                     .swipeActions(edge: .trailing, allowsFullSwipe: true) {
                         Button(role: .destructive) {
                             delete(bookmark)
@@ -116,7 +129,12 @@ struct BookmarkListPopover: View {
             }
         }
         .listStyle(.plain)
-        .frame(height: min(CGFloat(bookmarks.count) * 56 + 8, 360))
+        // [2026-09-04 변경] 사용자 요청 — "화면영역이 낭비되지 않도록 정리."
+        // 예전엔 "책/장:절" 한 줄 + 저장 시각 한 줄, 총 두 줄짜리 행이라 한
+        // 행에 56pt를 잡아 뒀다. 아래 `row(for:)`를 한 줄(제목 + 오른쪽 정렬된
+        // 상대 시각)로 합쳐 행이 짧아진 만큼, 같은 화면 높이에 더 많은 항목이
+        // 보이도록 44pt(HIG 최소 탭 영역과도 맞는 값)로 줄였다.
+        .frame(height: min(CGFloat(bookmarks.count) * 44 + 8, 360))
     }
 
     private func row(for bookmark: BibleBookmark) -> some View {
@@ -124,15 +142,24 @@ struct BookmarkListPopover: View {
             viewModel.navigateToBookmark(bookmark)
             onDismiss()
         } label: {
-            VStack(alignment: .leading, spacing: 2) {
+            // [2026-09-04 변경] 사용자 요청 — "화면영역이 낭비되지 않도록
+            // 정리." 제목/시각을 세로로 나눈 두 줄 대신, 한 줄 안에서 제목은
+            // 왼쪽에 그대로 두고 시각은 오른쪽 끝으로 보내 가로 공간을 마저
+            // 쓴다(Safari 읽기 목록 등에서 흔한 배치) — 세로 공간을 절반 가까이
+            // 줄인다.
+            HStack(spacing: 8) {
                 Text(bookChapterLabel(for: bookmark))
                     .font(.body)
                     .foregroundStyle(.primary)
+                    .lineLimit(1)
+                Spacer(minLength: 8)
                 Text(Self.relativeTimeFormatter.localizedString(for: bookmark.createdAt, relativeTo: .now))
                     .font(.caption)
                     .foregroundStyle(.secondary)
+                    .lineLimit(1)
+                    .layoutPriority(1)
             }
-            .padding(.vertical, 4)
+            .padding(.vertical, 11)
             .contentShape(Rectangle())
         }
         .buttonStyle(.plain)

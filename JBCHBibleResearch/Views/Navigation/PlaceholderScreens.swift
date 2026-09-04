@@ -48,11 +48,18 @@ private struct ComingSoonView: View {
     }
 }
 
-/// iPhone "더보기" 탭 — screens.md 1장 IA: 태그관계·설정·번역본 관리로 진입.
+/// iPhone "더보기" 탭 — screens.md 1장 IA: 태그관계·설정 등으로 진입.
 /// 태그 관계(S10)는 스펙 "iOS는 전체화면 모달로 대응"에 따라 NavigationLink push가
 /// 아니라 `.fullScreenCover`로 연다(macOS/iPadOS의 별도 창과 같은 역할을 하는
-/// iPhone식 대응). 번역본 관리(S12)는 [2026-08-07]부터 NavigationLink로
-/// `TranslationManagementView`를 push한다.
+/// iPhone식 대응).
+///
+/// [2026-09-03 정정] 바로 위 문단이 "번역본 관리(S12)는 NavigationLink로
+/// `TranslationManagementView`를 push한다"고 적어 뒀던 것은 이제 사실이
+/// 아니다 — 사용자 결정("번역본 화면 통합안: 더보기 > 설정 > 성경 > 번역본으로
+/// 통합, 더보기 > 번역본 관리의 항목 삭제")으로 이 메뉴에서 "번역본 관리"
+/// 항목 자체를 뺐고, `TranslationManagementView.swift`도 삭제했다. 같은 기능은
+/// 이제 "설정" 항목 → 성경 → 번역본(`SettingsView.swift`의
+/// `TranslationsManagementTab`)에서 접근한다.
 ///
 /// ⚠️ [2026-08-07 추가, IA 대비 보완] 1장 IA 원문은 iPhone 탭바를 "메모/성경/
 /// 문서·OCR/개요/더보기" 5개로만 명시했고 "통합 검색"은 그 목록에 없다. 하지만
@@ -96,18 +103,40 @@ struct MorePlaceholderView: View {
             } label: {
                 Label("개요", systemImage: "list.bullet.rectangle")
             }
+            // [2026-09-03 삭제] 사용자 결정 — "번역본 화면 통합안: 더보기 >
+            // 설정 > 성경 > 번역본으로 통합(더보기 > 번역본 관리의 항목
+            // 삭제)." 여기 있던 "번역본 관리"(`TranslationManagementView`
+            // push) 항목을 없앴다 — 그 화면이 갖고 있던 표시 이름/라이선스
+            // 편집·책이름표 언어 피커는 `SettingsView.swift`의
+            // `TranslationsManagementTab`("번역본" MARK 섹션)으로 그대로
+            // 옮겨, 아래 "설정" 진입점 → 성경 → 번역본에서 이어서 접근한다.
+            // `TranslationManagementView.swift`/`TranslationManagementViewModel
+            // .swift` 자체도 이 항목이 유일한 참조처였어서 함께 지웠다.
+            // [2026-09-03 변경] 사용자 요청 — "아이폰 - 더보기 - 설정의
+            // 레이아웃을 UX/UI 전문가 관점에서 최적화." 여기서 직접 push하던
+            // `SettingsView()`(macOS `Settings` Scene용 최상위 `TabView` 구조를
+            // 그대로 갖고 있어, 이 화면 안에 중첩되면 하단에 탭바가 이중으로
+            // 뜨는 문제가 있었다 — 자세한 이유는 `SettingsView.swift`의
+            // `SettingsHomeView` 선언부 주석 참고) 대신, 같은 세 카테고리(일반/
+            // 성경/개발자)를 아이콘 목록으로 보여주는 iPhone 전용 진입 화면
+            // `SettingsHomeView`로 바꿨다.
             NavigationLink {
-                TranslationManagementView()
-            } label: {
-                Label("번역본 관리", systemImage: "character.book.closed")
-            }
-            NavigationLink {
-                SettingsView().navigationTitle("설정")
+                SettingsHomeView()
             } label: {
                 Label("설정", systemImage: "gearshape")
             }
         }
         .navigationTitle("더보기")
+        // [2026-09-03 추가] 사용자 보고 — "아이폰 하단 메뉴 중 말씀 노트/문서
+        // OCR/통합 검색/더보기는 상단 우측 아이콘과 그 밑 타이틀이 따로 있어
+        // 아이콘 좌측 영역이 낭비됨." `WordNoteHomeView.swift`의 같은 날짜
+        // 주석과 같은 이유·같은 해법 — `.navigationBarTitleDisplayMode(.inline)`.
+        // 이 화면 자체는 이미 아이폰 전용(PhoneTabView)이라 `#if os(iOS)` 없이도
+        // 안전하지만, 멀티플랫폼 단일 타겟이 macOS에서도 이 파일을 컴파일하는
+        // 것은 바로 아래 `.fullScreenCover`와 같은 사정이라 똑같이 감싼다.
+        #if os(iOS)
+        .navigationBarTitleDisplayMode(.inline)
+        #endif
         // ⚠️ 2026-08-06 Xcode 빌드 오류로 확인: `fullScreenCover`는 iOS/iPadOS
         // 전용이라 macOS에는 심볼 자체가 없다(`'fullScreenCover(isPresented:onDismiss:content:)'
         // is unavailable in macOS`). 이 뷰(MorePlaceholderView)는 실제로 PhoneTabView를

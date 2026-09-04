@@ -20,6 +20,22 @@ struct ContentView: View {
 
     var body: some View {
         RootView()
+            // [2026-09-03 신설] 사용자 보고 — "더보기 > 설정 > 성경 > 모양의
+            // 화면모드를 바꾸면 자동으로 성경으로 이동하는데, 화면모드를 바꿔도
+            // 현재 페이지를 유지하도록." 원래 `RootView.swift`의 `body`가
+            // `UserSettingsStore.shared.colorSchemePreference`를 직접 읽으면서
+            // 동시에 그 안에서 `PhoneTabView`(진짜 `TabView`)를 만들고 있었다 —
+            // Apple Developer Forums 스레드 726363("App Lost all selection
+            // info of navigation and tab, after update a AppStorage state")이
+            // 확인해 준 것과 같은 원인: 그 값이 바뀔 때마다 `TabView`를 직접
+            // 구성하는 바로 그 뷰의 body가 다시 실행되며 `TabView`가 통째로
+            // 다시 만들어져, 선택된 탭이 기본값(`.bibleReading` = "성경")으로
+            // 되돌아가고 그 안의 내비게이션 스택도 함께 초기화됐다(=화면모드를
+            // 바꾸면 자동으로 "성경"으로 이동). 그 포럼 답변의 해법 그대로 —
+            // 값을 읽는 자리와 TabView를 만드는 자리를 분리 — 이 modifier를
+            // `RootView`(TabView를 직접 만드는 그 뷰) 대신 여기(`RootView()`를
+            // 만드는 바깥 자리)로 옮겼다. `RootView.swift`의 옛 위치 주석 참고.
+            .preferredColorScheme(UserSettingsStore.shared.colorSchemePreference.colorScheme)
             // [2026-08-28 추가] 사용자 요청 — "처음 설치하시는 사람을 위한
             // 가이드 화면이 필요함." 앱 최초 실행 시 1회, 5페이지 안내 카루셀을
             // 보여준다 — AppOnboardingOverlay.swift 참고. `.bibleIndexOnboarding()`
@@ -50,6 +66,11 @@ struct ContentView: View {
             // WhatsNewOverlay.swift 참고.
             .whatsNewOverlay()
             .task {
+                // [2026-09-03 신설] 사용자 요청 — 온보딩 카루셀이 이 블록의
+                // 진행 상태를 보여줄 수 있도록(`AppBootstrapProgress.swift`
+                // 상단 주석 참고). `defer`로 걸어 성공/실패(catch) 어느 경로로
+                // 끝나도 항상 한 번 내려간다.
+                defer { AppBootstrapProgress.shared.markFinished() }
                 do {
                     try TranslationBootstrap.ensureBundledTranslationRegistered(in: modelContext)
                     // [2026-08-14 추가, 같은 날 되돌림] "개역한글 국한문혼용을
@@ -67,7 +88,7 @@ struct ContentView: View {
                     // 있으면)를 사용자 DB로 1회 복사한다. `OutlineSeedImporter.swift`
                     // 상단 주석 참고 — 실패해도(throw하지 않고 내부에서 처리) 다른
                     // 부트스트랩을 막지 않는다.
-                    OutlineSeedImporter.importIfNeeded(into: modelContext)
+                    await OutlineSeedImporter.importIfNeeded(into: modelContext)
                     // [2026-08-14 추가, 2026-08-15 방식 전환] 관주/난외주/한자주석/
                     // 한자사전 — 예전엔 여기서 CrossReferenceSeedImporter/
                     // MarginalNoteSeedImporter/HanjaAnnotationSeedImporter가 각각

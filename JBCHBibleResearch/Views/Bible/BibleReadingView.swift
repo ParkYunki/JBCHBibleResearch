@@ -345,6 +345,23 @@ private struct BibleReadingContentView: View {
     /// 편집기를 띄우는 중"이라는 신호다 — `isRelatedContentPresented`(관련 내용
     /// 패널)와 자리를 공유하되 내용만 바뀐다(아래 `.inspector` 참고).
     @State private var wordSummaryBeingEdited: VerseSummary?
+    /// [2026-09-03 신설] 사용자 리포트 — "'말씀 요약' 창에서 닫기 버튼을 누르면
+    /// 왜 개요화면이 잠깐 보였다가 사라지지?" 원인: 아이폰(좁은 폭)에서는
+    /// `.inspector`가 시트로 뜨는데(위 `.inspector(isPresented:)` 주석 참고),
+    /// 그동안 `isPresented`가 곧 `wordSummaryBeingEdited != nil`이었다 —
+    /// 그래서 닫기 버튼이 `wordSummaryBeingEdited = nil`을 하는 순간 시트 밑에
+    /// 깔린 콘텐츠가 즉시 "말씀 요약" → "관련 내용"(`ChapterRelatedContentPanel`,
+    /// 그 안의 "개요" 섹션 포함)으로 바뀌고, 시트 자체는 아직 닫히는 애니메이션
+    /// 중이라 그 전환이 잠깐 눈에 보였다. 그래서 "지금 시트를 닫으라는 신호"와
+    /// "지금 인스펙터가 그리는 데이터"를 분리한다 — 이 값은 전자(즉시 내려
+    /// 닫힘 애니메이션을 바로 시작시킨다)만 맡고, `wordSummaryBeingEdited`는
+    /// 애니메이션이 끝날 시간만큼 늦게 비운다(`closeWordSummaryEditor()` 참고,
+    /// `BibleIndexOnboardingOverlay.swift`가 인용한 Apple Developer Forums
+    /// 스레드(https://developer.apple.com/forums/thread/682219)와 같은 근거로
+    /// 0.3초 지연). macOS는 이 인스펙터 대신 별도 `NSPanel`을 쓰므로(아래
+    /// `.inspector(isPresented: $isRelatedContentPresented)` 참고) 이 값을
+    /// 읽지 않는다.
+    @State private var isWordSummaryInspectorVisible = false
     /// 말씀 요약 편집기를 여는 동안에만 기준 번역본 하나로 줄인 번역본 목록 —
     /// 편집을 마치면 이 값으로 되돌린다(사용자 확인 — "편집 종료 시 자동 복원").
     /// nil이면 "지금 좁혀 놓은 상태가 아님"을 뜻한다.
@@ -449,14 +466,12 @@ private struct BibleReadingContentView: View {
         !isPhone || !isNarrowBottomBarLayout
     }
 
-    /// [2026-08-12 추가] "말씀 요약" 첫 줄("현재날짜 '말씀'")용 — 요청 문구
-    /// 그대로 "년.월.일" 숫자 표기를 쓴다(다른 화면의 날짜 표기와 맞출 근거
-    /// 문서가 따로 없어 가장 무난한 표기를 골랐다).
-    private static let wordSummaryDateFormatter: DateFormatter = {
-        let formatter = DateFormatter()
-        formatter.dateFormat = "yyyy.MM.dd"
-        return formatter
-    }()
+    // [2026-08-12 추가, 2026-09-03 제거] "말씀 요약" 첫 줄("현재날짜 '말씀'")용
+    // 날짜 포매터가 여기 있었다 — 이제 `WordSummaryDefaultSeed.text(for:)`
+    // (`openWordSummaryEditor()` 참고)가 같은 포맷을 대신 계산하고, 그 결과를
+    // `WordSummaryEditorView.handleDisappear()`도 같이 참조해야 해서 그쪽으로
+    // 옮겼다 — 이 파일에 그대로 두면 두 곳이 각자 포매터를 만들어 형식이
+    // 어긋날 위험이 있었다.
 
     /// [2026-08-08 추가] 사용자 요청 — "아이패드에서는 새 창 아이콘 빼기",
     /// "아이폰에서는 새 창 아이콘 빼기" — 즉 "성경 조회 새 창"은 macOS
@@ -765,7 +780,10 @@ private struct BibleReadingContentView: View {
         // (번역본/사이드바 복원)까지 같이 처리한다 — 인스펙터의 자체 접기
         // 동작(코너의 화살표 등 시스템 UI)으로 닫아도 이 경로를 그대로 탄다.
         .inspector(isPresented: Binding(
-            get: { isRelatedContentPresented || wordSummaryBeingEdited != nil },
+            // [2026-09-03 변경] 위 `isWordSummaryInspectorVisible` 상단 주석
+            // 참고 — "표시 여부"는 이제 이 값이 맡고, `wordSummaryBeingEdited`는
+            // "지금 그릴 데이터"로만 쓴다(닫을 때 서로 다른 타이밍으로 바뀐다).
+            get: { isRelatedContentPresented || isWordSummaryInspectorVisible },
             set: { newValue in
                 guard !newValue else { return }
                 if wordSummaryBeingEdited != nil {
@@ -789,7 +807,13 @@ private struct BibleReadingContentView: View {
                     // 그 두 콜백은 더 이상 넘기지 않는다.
                     WordSummaryEditorView(
                         summary: wordSummaryBeingEdited, presentationContext: .contextual,
-                        externalProxy: wordSummaryProxy
+                        externalProxy: wordSummaryProxy,
+                        // [2026-09-03 신설] `WordSummaryEditorView.onRequestClose`
+                        // 상단 주석 참고 — 아이폰에서 `.inspector`가 시트로 바뀌어
+                        // 이 화면 바깥의 "말씀 요약 닫기" 툴바 버튼이 가려지는
+                        // 문제를, 그 버튼과 완전히 같은 동작(`closeWordSummaryEditor()`)을
+                        // 이 화면 안에서도 호출할 수 있게 넘겨서 해결한다.
+                        onRequestClose: closeWordSummaryEditor
                     )
                 } else {
                     // [2026-08-15 변경] `onJumpToOutline` 콜백을 없앴다 — 사용자
@@ -920,18 +944,29 @@ private struct BibleReadingContentView: View {
         }
     }
 
-    /// screens.md 13.1 — 성경조회(S1)에서 절 클릭 → "메모 작성"은 클릭한 정확한
-    /// (book_id, chapter, verse)로 채워진다.
+    /// screens.md 13.1 — 성경조회(S1)에서 절 길게 프레스(iOS)/오른쪽 클릭(macOS)
+    /// 팝업 메뉴의 "개인 묵상 작성"(`TranslationColumnView.onCreateMemo`, 항목
+    /// 순서상 선택/복사와 나란히 있는 그 메뉴).
+    ///
+    /// [2026-09-03 변경] 사용자 요청 — "성경 - 성경구절 길게프레스 또는 마우스
+    /// 오른쪽 버튼 - 팝업메뉴(개인묵상, 선택, 복사) 중 개인묵상 클릭(탭)시,
+    /// 성경 - 한 구절 선택시 하단 메뉴의 '개인 묵상'(메모하기 오른쪽 옆)을
+    /// 클릭한 것과 동일한 모습으로 기능할 수 있도록." 예전엔 이 메뉴 항목이
+    /// 빈 `UserMemo`를 곧바로 만들어 편집기 시트(`MemoDetailView`)로 바로
+    /// 넘어갔다 — 말씀구절/한자/관주/이미 있는 다른 개인 묵상 목록이 하나도
+    /// 안 보이는 채로 새 항목만 등록하게 된다는 점에서, 하단 액션바의 "개인
+    /// 묵상" 버튼이 예전에 겪었던 것과 같은 문제였다(아래 `openPersonalNoteDirectly()`
+    /// 상단 주석 참고 — 그 버튼도 원래 이 방식이었다가 확대보기를 거치도록
+    /// 바뀌었다). 이제 이 메뉴로 고른 절 하나만 선택 상태로 만든 다음
+    /// (`viewModel.selectSingleVerse` — 일반 탭에서 쓰는 것과 같은 "교체"
+    /// 선택, `TranslationColumnView`의 `.onTapGesture` 참고), `openPersonalNoteDirectly()`
+    /// 를 그대로 호출한다 — 확대보기가 열리고 그 안의 "개인 묵상" 버튼을
+    /// 누른 것과 동일하게 동작한다. 함수 이름(`createMemo`)과 매개변수 이름
+    /// (`TranslationColumnView.onCreateMemo`)은 두 호출부(폰/와이드 레이아웃)를
+    /// 다시 배선하지 않도록 그대로 남겨 뒀다 — 실제로 하는 일만 바뀌었다.
     private func createMemo(for verse: BibleVerse) {
-        let memo = UserMemo(bookId: verse.bookId, chapter: verse.chapter, verse: verse.verse)
-        modelContext.insert(memo)
-        try? modelContext.save()
-        // [2026-08-11 추가] 이벤트 기반 인덱싱 — 이 생성 경로가 누락돼 있었다.
-        // 다른 메모 생성 지점(MemoHomeView.createNewMemo/
-        // BibleReadingViewModel.createPhraseMemo/openOrCreateVerseMemo)과
-        // 동일하게 저장 직후 호출한다.
-        BibleReferenceIndexingService.reindexMemo(memo, context: modelContext)
-        memoBeingCreated = memo
+        viewModel.selectSingleVerse(verse.verse)
+        openPersonalNoteDirectly()
     }
 
     /// [2026-08-08 추가, 2026-08-19 보완] 관주 팝오버에서 대상 구절을 탭했을 때
@@ -995,13 +1030,20 @@ private struct BibleReadingContentView: View {
     /// "앵커"로 저장하고(목록/좌표 표시는 여전히 절 하나가 필요하므로), 프리필
     /// 본문은 선택된 절 전체를 `BibleVerseCopyFormatter`가 지원하는 "이어진 구간/
     /// 떨어진 구간" 표기로 채운다.
+    ///
+    /// [2026-09-03 변경] 사용자 요청 — "'말씀 요약' 클릭 시 선택한 말씀 구절이
+    /// 기본 텍스트로 입력되는 부분을 뺄 것"(날짜 줄은 남김 — 사용자 확인). 이
+    /// 함수가 만드는 기본 문구는 이제 `WordSummaryDefaultSeed.text(for:)` 하나로
+    /// 계산한다 — `WordSummaryEditorView.handleDisappear()`가 "닫을 때 이
+    /// 기본 문구뿐이었는지"를 판정할 때도 같은 함수로 다시 계산해서 비교하기
+    /// 때문에(그 타입 상단 주석 참고 — "아무 입력 없이 닫으면 등록되지 않게"
+    /// 요청과 짝을 이룬다), 두 곳이 서로 다른 문자열을 만들면 안 된다.
     private func openWordSummaryEditor() {
         let verses = viewModel.selectedVerses
         guard let anchorVerse = verses.sorted().first else { return }
 
-        let dateText = Self.wordSummaryDateFormatter.string(from: .now)
-        let verseText = viewModel.formattedBaseTranslationText(forVerses: verses) ?? ""
-        let seedText = verseText.isEmpty ? "\(dateText) 말씀" : "\(dateText) 말씀\n\(verseText)"
+        let now = Date.now
+        let seedText = WordSummaryDefaultSeed.text(for: now)
 
         let summary = VerseSummary(
             bookId: viewModel.selectedBook.bookId,
@@ -1012,7 +1054,8 @@ private struct BibleReadingContentView: View {
             // 텍스트"로 인식돼 기본 서식으로 표시된다. 여기서는 그 경로를 그대로
             // 이용해 프리필한다(별도 RTF 인코딩 불필요).
             contentHtml: seedText,
-            contentText: seedText
+            contentText: seedText,
+            createdAt: now
         )
         modelContext.insert(summary)
         try? modelContext.save()
@@ -1049,6 +1092,9 @@ private struct BibleReadingContentView: View {
         // 고정 상수를 직접 쓰므로(위 그 상수 상단 주석 참고) 여기서 따로
         // 계산해 둘 값이 없다.
         wordSummaryBeingEdited = summary
+        // [2026-09-03 신설] 위 `isWordSummaryInspectorVisible` 상단 주석 참고 —
+        // 아이폰 인스펙터(시트)의 표시 여부는 이제 이 값이 단독으로 맡는다.
+        isWordSummaryInspectorVisible = true
 
         // [2026-08-27 신설] 사용자 요청 — "팝업창으로 구현하기를 원함(macOS
         // 한정)." macOS는 위 `wordSummaryBeingEdited` 신호를 인스펙터가 아니라
@@ -1074,19 +1120,39 @@ private struct BibleReadingContentView: View {
     /// 되돌린다(사용자 확인 — "편집 종료 시 자동 복원").
     private func closeWordSummaryEditor() {
         guard wordSummaryBeingEdited != nil else { return }
-        wordSummaryBeingEdited = nil
+        // [2026-09-03 신설] 위 `isWordSummaryInspectorVisible` 상단 주석 참고 —
+        // "닫으라"는 신호는 즉시 내려 시트 닫힘 애니메이션을 바로 시작시킨다
+        // (macOS는 이 값을 읽지 않아 무해하다).
+        isWordSummaryInspectorVisible = false
         if let previousIDs = displayedTranslationIDsBeforeWordSummary {
             viewModel.setDisplayedTranslations(previousIDs)
         }
         displayedTranslationIDsBeforeWordSummary = nil
         SidebarVisibilityRequest.shared.requestRestore()
+        #if os(macOS)
+        // macOS는 인스펙터가 아니라 별도 `NSPanel`을 쓰므로(시트 닫힘 애니메이션과
+        // 무관) `wordSummaryBeingEdited`를 그대로 즉시 비운다.
         // [2026-08-27 신설] macOS 별도 패널 닫기 — `WordSummaryPanelController.
         // hide()`가 `NSPanel.close()`를 부르면 그 델리게이트(`windowWillClose`)가
         // 다시 이 함수를 재호출하지만(패널 쪽에 등록해 둔 `onClose`가 바로 이
         // 함수라서), 바로 위에서 이미 `wordSummaryBeingEdited = nil`을 실행한
         // 뒤라 맨 위 `guard`에서 조용히 반환된다 — 재진입은 안전하다.
-        #if os(macOS)
+        wordSummaryBeingEdited = nil
         WordSummaryPanelController.shared.hide()
+        #else
+        // [2026-09-03 신설] 아이폰은 인스펙터가 시트로 뜨므로, 시트가 실제로
+        // 화면에서 사라질 시간(0.3초)만큼 `wordSummaryBeingEdited`를 늦게
+        // 비운다 — 그동안은 인스펙터 안에 계속 같은 `WordSummaryEditorView`가
+        // 그려져 "개요"로의 전환이 눈에 보이지 않는다(위 상단 주석의 근거 참고).
+        // 지연 도중 사용자가 다른 항목을 다시 열었다면(`presentWordSummaryEditor`
+        // 재호출로 `wordSummaryBeingEdited`가 이미 다른 값으로 바뀌었다면) 그
+        // 새 값을 지우지 않도록 아이디를 확인한다.
+        let closingSummaryID = wordSummaryBeingEdited?.id
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+            if wordSummaryBeingEdited?.id == closingSummaryID {
+                wordSummaryBeingEdited = nil
+            }
+        }
         #endif
     }
 
@@ -1137,6 +1203,12 @@ private struct BibleReadingContentView: View {
                     coordinator: viewModel.scrollSyncCoordinator,
                     respondsToSyncEvents: false,
                     pendingCenterAlignment: phoneAlignmentTarget?.columnID == column.id ? phoneAlignmentTarget?.verse : nil,
+                    // [2026-09-04 신설] 사용자 요청 — "추가 번역본이 없거나
+                    // 보여지고 있지 않으면 자동 절 이동은 하지 않아도 된다."
+                    // 표시 중인 번역본이 하나뿐이면 스와이프해서 넘어갈 다른
+                    // 페이지가 없다 — `TranslationColumnView.
+                    // hasAdditionalDisplayedColumns` 상단 주석 참고.
+                    hasAdditionalDisplayedColumns: viewModel.columns.count > 1,
                     highlightsProvider: { verse in viewModel.highlights(translationCode: column.registry.code, verse: verse) },
                     crossReferencesProvider: { verse in viewModel.crossReferences(translationCode: column.registry.code, verse: verse) },
                     phraseMemosProvider: { verse in viewModel.phraseMemos(translationCode: column.registry.code, verse: verse) },
@@ -1144,6 +1216,21 @@ private struct BibleReadingContentView: View {
                     marginalNotesProvider: { verse in viewModel.marginalNotes(translationCode: column.registry.code, verse: verse) },
                     hanjaWordsProvider: { verse in viewModel.hanjaWords(translationCode: column.registry.code, verse: verse) },
                     verseMentionsProvider: { verse in viewModel.verseMentions(verse: verse) },
+                    // [2026-09-04 신설] 사용자 요청 — "책갈피를 설정하면 절번호
+                    // 왼쪽에 세로라인." 책갈피는 번역본과 무관하므로(`BibleBookmark`에
+                    // 번역본 코드가 없다) `column.registry.code`를 넘길 필요가 없다.
+                    // [2026-09-04 수정] 컴파일 에러 수정 — "Argument
+                    // 'phraseNotesProvider' must precede argument
+                    // 'isBookmarkedProvider'". `TranslationColumnView`는 커스텀
+                    // 이니셜라이저가 없어 멤버와이즈 초기화가 그대로 쓰이는데,
+                    // 이 초기화는 인자를 프로퍼티 "선언 순서"대로 요구한다 —
+                    // `isBookmarkedProvider`는 그 struct 안에서 `verseMentionsProvider`
+                    // 바로 다음에 선언돼 있는데, 처음엔 이 호출부에서
+                    // `phraseMemosProvider` 바로 뒤(선언 순서상 훨씬 앞)에 넣어
+                    // 어긋났었다 — 선언 순서와 맞게 여기로(`verseMentionsProvider`
+                    // 다음) 옮겼다.
+                    isBookmarkedProvider: { verse in viewModel.isVerseBookmarked(verse) },
+                    isChapterBookmarked: viewModel.isChapterBookmarked,
                     onSelectCrossReferenceTarget: jumpToCrossReferenceTarget,
                     onSelectPhraseMemo: { memo in memoBeingCreated = memo },
                     onSelectVerseMention: handleVerseMentionSelected,
@@ -1213,6 +1300,21 @@ private struct BibleReadingContentView: View {
                     marginalNotesProvider: { verse in viewModel.marginalNotes(translationCode: column.registry.code, verse: verse) },
                     hanjaWordsProvider: { verse in viewModel.hanjaWords(translationCode: column.registry.code, verse: verse) },
                     verseMentionsProvider: { verse in viewModel.verseMentions(verse: verse) },
+                    // [2026-09-04 신설] 사용자 요청 — "책갈피를 설정하면 절번호
+                    // 왼쪽에 세로라인." 책갈피는 번역본과 무관하므로(`BibleBookmark`에
+                    // 번역본 코드가 없다) `column.registry.code`를 넘길 필요가 없다.
+                    // [2026-09-04 수정] 컴파일 에러 수정 — "Argument
+                    // 'phraseNotesProvider' must precede argument
+                    // 'isBookmarkedProvider'". `TranslationColumnView`는 커스텀
+                    // 이니셜라이저가 없어 멤버와이즈 초기화가 그대로 쓰이는데,
+                    // 이 초기화는 인자를 프로퍼티 "선언 순서"대로 요구한다 —
+                    // `isBookmarkedProvider`는 그 struct 안에서 `verseMentionsProvider`
+                    // 바로 다음에 선언돼 있는데, 처음엔 이 호출부에서
+                    // `phraseMemosProvider` 바로 뒤(선언 순서상 훨씬 앞)에 넣어
+                    // 어긋났었다 — 선언 순서와 맞게 여기로(`verseMentionsProvider`
+                    // 다음) 옮겼다.
+                    isBookmarkedProvider: { verse in viewModel.isVerseBookmarked(verse) },
+                    isChapterBookmarked: viewModel.isChapterBookmarked,
                     onSelectCrossReferenceTarget: jumpToCrossReferenceTarget,
                     onSelectPhraseMemo: { memo in memoBeingCreated = memo },
                     onSelectVerseMention: handleVerseMentionSelected,
@@ -1326,10 +1428,108 @@ private struct BibleReadingContentView: View {
         // 이번엔 아이폰도 대상이라 `!isPhone` 제외 조건을 없앴다 — narrow일 때
         // (아이폰 세로/아이패드 세로 모두) 16pt를 쓴다. 새 숫자를 만들지 않고
         // 바로 위 2026-08-26에 이미 검증된 16pt를 그대로 재사용했다.
+        //
+        // [2026-09-03 변경] 사용자 보고 — "절을 탭하면 하단에서 올라오는
+        // 메뉴의 높이를 조정할 것 - 현재 너무 높이가 불필요하게 길어보임.
+        // (왼쪽에 'x개 절 선택됨' 문구가 안 보이는데 잘린 거라면 하단 메뉴
+        // 상단의 가로 한줄로 표시할 것.)" narrow(아이폰 세로/아이패드
+        // 세로)에서는 이 문구가 버튼들과 한 줄을 나눠 쓰고 있었는데, 아이콘
+        // 전용 원형 버튼들이 고정폭(44pt, `CircularNavButtonModifier.diameter`,
+        // HIG 최소 탭 영역이라 줄일 수 없다)을 여러 개 나란히 차지해 이
+        // 문구에 남는 공간이 거의 없어져 실제로 잘려 보이지 않게 된 것으로
+        // 보인다 — 그래서 narrow일 때만 이 문구를 버튼 줄 위 별도의 한 줄로
+        // 옮겨(가로 폭 전체를 혼자 쓰므로 더 이상 잘리지 않는다) 바깥을
+        // `VStack`으로 한 겹 더 감쌌다. 가로보기/아이패드 넓은 화면/맥OS
+        // (narrow가 아님)는 버튼과 자리를 다툴 만큼 좁았던 적이 없어 예전과
+        // 완전히 같은 한 줄 배치를 그대로 둔다. 아울러 바로 아래 `.padding()`도
+        // narrow일 때만 세로 여백을 줄여, 전체 높이를 조금 더 낮췄다(가로
+        // 여백은 좌우 버튼이 화면 끝에 바짝 붙지 않게 하는 최소 여백이라
+        // 그대로 둔다).
+        VStack(alignment: .leading, spacing: isNarrowBottomBarLayout ? 6 : 0) {
+            if isNarrowBottomBarLayout {
+                Text("\(viewModel.selectedVerses.count)개 절 선택됨")
+                    .font(.caption)
+                    .foregroundStyle(.secondary)
+            }
+            verseSelectionActionButtonsRow
+        }
+        // [2026-08-21 추가] 사용자 요청 — "세로보기에서 탭하면 하단 메뉴는
+        // 한글 메뉴명은 빼고 아이콘만 나오도록." 위 `isNarrowBottomBarLayout`
+        // 상단 주석 참고 — macOS는 창 폭이 넉넉해 해당 요청 대상이 아니므로
+        // iOS(아이폰/아이패드)에서만 적용한다.
+        #if os(iOS)
+        .modifier(BottomBarLabelStyleModifier(isNarrow: isNarrowBottomBarLayout))
+        #endif
+        .padding(.horizontal)
+        .padding(.vertical, isNarrowBottomBarLayout ? 8 : nil)
+        .background(.bar)
+        .sheet(isPresented: $isVerseZoomPresented, onDismiss: {
+            // [2026-08-08 추가] 확대보기에서 "메모"를 만들었으면, 확대보기 시트가
+            // 완전히 닫힌 뒤 이어서 편집기 시트를 연다 — 같은 화면이 시트 두 개를
+            // 동시에 띄울 수 없어 순서를 맞춘 것(위 `pendingPhraseMemo` 상단
+            // 주석 참고).
+            if let memo = pendingPhraseMemo {
+                pendingPhraseMemo = nil
+                memoBeingCreated = memo
+            }
+            // [2026-08-28 신설] "메모하기 → 원문 정보" 전환 — 위
+            // `pendingSwitchToOriginalTextInfo` 상단 주석 참고.
+            if pendingSwitchToOriginalTextInfo {
+                pendingSwitchToOriginalTextInfo = false
+                isOriginalTextInfoPresented = true
+            }
+            // [2026-09-02 신설] 위 `shouldAutoPresentPersonalNoteEditor` 상단
+            // 주석 참고 — 이 확대보기 세션이 끝났으니, 다음 번엔(어느 버튼으로
+            // 열리든) 항상 기본값(자동 표시 없음)에서 다시 시작한다.
+            shouldAutoPresentPersonalNoteEditor = false
+        }) {
+            if let verseNumber = viewModel.selectedVerses.first {
+                VerseZoomView(
+                    verseNumber: verseNumber, columns: viewModel.columns, viewModel: viewModel,
+                    onOpenPhraseMemo: { memo in pendingPhraseMemo = memo },
+                    onJumpToCrossReference: jumpToCrossReferenceTarget,
+                    onSelectVerseMention: handleVerseMentionSelected,
+                    onSwitchToOriginalTextInfo: {
+                        pendingSwitchToOriginalTextInfo = true
+                        isVerseZoomPresented = false
+                    },
+                    autoPresentPersonalNoteEditor: $shouldAutoPresentPersonalNoteEditor
+                )
+            }
+        }
+        .sheet(isPresented: $isOriginalTextInfoPresented, onDismiss: {
+            // [2026-08-28 신설] "원문 정보 → 메모하기" 전환 — 위
+            // `pendingSwitchToVerseZoom` 상단 주석 참고. `openVerseZoom()`을
+            // 그대로 재사용해, 이 전환으로 열리는 경우에도 다른 진입 경로와
+            // 똑같이 조회 이력에 남게 한다(`openVerseZoom()` 상단 주석 —
+            // "시트를 여는 것과 이력 기록을 항상 같이 하게 해서, 나중에
+            // 버튼이 더 늘어나도 기록이 누락되지 않게 한다").
+            if pendingSwitchToVerseZoom {
+                pendingSwitchToVerseZoom = false
+                openVerseZoom()
+            }
+        }) {
+            if let verseNumber = viewModel.selectedVerses.first {
+                OriginalTextInfoView(
+                    bookId: viewModel.selectedBook.bookId,
+                    chapter: viewModel.selectedChapter,
+                    verseNumber: verseNumber,
+                    onSwitchToMemo: {
+                        pendingSwitchToVerseZoom = true
+                        isOriginalTextInfoPresented = false
+                    }
+                )
+            }
+        }
+    }
+
+    private var verseSelectionActionButtonsRow: some View {
         HStack(spacing: isNarrowBottomBarLayout ? 16 : nil) {
-            Text("\(viewModel.selectedVerses.count)개 절 선택됨")
-                .font(.caption)
-                .foregroundStyle(.secondary)
+            if !isNarrowBottomBarLayout {
+                Text("\(viewModel.selectedVerses.count)개 절 선택됨")
+                    .font(.caption)
+                    .foregroundStyle(.secondary)
+            }
             Spacer()
 
             // [2026-08-12 변경, 2026-08-21 일부 복원] 사용자 요청 — "말씀 요약
@@ -1467,73 +1667,6 @@ private struct BibleReadingContentView: View {
                 #else
                 .buttonStyle(.borderedProminent)
                 #endif
-            }
-        }
-        // [2026-08-21 추가] 사용자 요청 — "세로보기에서 탭하면 하단 메뉴는
-        // 한글 메뉴명은 빼고 아이콘만 나오도록." 위 `isNarrowBottomBarLayout`
-        // 상단 주석 참고 — macOS는 창 폭이 넉넉해 해당 요청 대상이 아니므로
-        // iOS(아이폰/아이패드)에서만 적용한다.
-        #if os(iOS)
-        .modifier(BottomBarLabelStyleModifier(isNarrow: isNarrowBottomBarLayout))
-        #endif
-        .padding()
-        .background(.bar)
-        .sheet(isPresented: $isVerseZoomPresented, onDismiss: {
-            // [2026-08-08 추가] 확대보기에서 "메모"를 만들었으면, 확대보기 시트가
-            // 완전히 닫힌 뒤 이어서 편집기 시트를 연다 — 같은 화면이 시트 두 개를
-            // 동시에 띄울 수 없어 순서를 맞춘 것(위 `pendingPhraseMemo` 상단
-            // 주석 참고).
-            if let memo = pendingPhraseMemo {
-                pendingPhraseMemo = nil
-                memoBeingCreated = memo
-            }
-            // [2026-08-28 신설] "메모하기 → 원문 정보" 전환 — 위
-            // `pendingSwitchToOriginalTextInfo` 상단 주석 참고.
-            if pendingSwitchToOriginalTextInfo {
-                pendingSwitchToOriginalTextInfo = false
-                isOriginalTextInfoPresented = true
-            }
-            // [2026-09-02 신설] 위 `shouldAutoPresentPersonalNoteEditor` 상단
-            // 주석 참고 — 이 확대보기 세션이 끝났으니, 다음 번엔(어느 버튼으로
-            // 열리든) 항상 기본값(자동 표시 없음)에서 다시 시작한다.
-            shouldAutoPresentPersonalNoteEditor = false
-        }) {
-            if let verseNumber = viewModel.selectedVerses.first {
-                VerseZoomView(
-                    verseNumber: verseNumber, columns: viewModel.columns, viewModel: viewModel,
-                    onOpenPhraseMemo: { memo in pendingPhraseMemo = memo },
-                    onJumpToCrossReference: jumpToCrossReferenceTarget,
-                    onSelectVerseMention: handleVerseMentionSelected,
-                    onSwitchToOriginalTextInfo: {
-                        pendingSwitchToOriginalTextInfo = true
-                        isVerseZoomPresented = false
-                    },
-                    autoPresentPersonalNoteEditor: $shouldAutoPresentPersonalNoteEditor
-                )
-            }
-        }
-        .sheet(isPresented: $isOriginalTextInfoPresented, onDismiss: {
-            // [2026-08-28 신설] "원문 정보 → 메모하기" 전환 — 위
-            // `pendingSwitchToVerseZoom` 상단 주석 참고. `openVerseZoom()`을
-            // 그대로 재사용해, 이 전환으로 열리는 경우에도 다른 진입 경로와
-            // 똑같이 조회 이력에 남게 한다(`openVerseZoom()` 상단 주석 —
-            // "시트를 여는 것과 이력 기록을 항상 같이 하게 해서, 나중에
-            // 버튼이 더 늘어나도 기록이 누락되지 않게 한다").
-            if pendingSwitchToVerseZoom {
-                pendingSwitchToVerseZoom = false
-                openVerseZoom()
-            }
-        }) {
-            if let verseNumber = viewModel.selectedVerses.first {
-                OriginalTextInfoView(
-                    bookId: viewModel.selectedBook.bookId,
-                    chapter: viewModel.selectedChapter,
-                    verseNumber: verseNumber,
-                    onSwitchToMemo: {
-                        pendingSwitchToVerseZoom = true
-                        isOriginalTextInfoPresented = false
-                    }
-                )
             }
         }
     }
@@ -1701,6 +1834,11 @@ private struct BibleReadingContentView: View {
                         Label("책갈피 이동", systemImage: "list.star")
                     }
                     .help("책갈피로 이동")
+                    // [2026-09-04 신설] 사용자 요청 — "북마크 관련 아이콘을
+                    // 와인 적갈(#7A3B42) 팔레트로 표시." 검토 범위를 아이폰
+                    // 성경 조회로 한정했으므로 `isPhone`일 때만 오버라이드하고,
+                    // 맥/아이패드는 기존 액센트(퍼스널 컬러/금박)를 그대로 쓴다.
+                    .tint(isPhone ? JBCHCategoryPalette.wine : nil)
                     .popover(isPresented: $isBookmarkListPresented) {
                         BookmarkListPopover(viewModel: viewModel) {
                             isBookmarkListPresented = false
@@ -1717,7 +1855,17 @@ private struct BibleReadingContentView: View {
                             Label("책갈피 설정", systemImage: "bookmark")
                         }
                     }
+                    // [2026-09-04 되돌림] 사용자 요청 — "책갈피 설정/해제 아이콘,
+                    // 목록아이콘 모두 다시 SF Symbol으로 돌리고 색상만 갈피실
+                    // 색상으로만 적용할 것." 손으로 그린 리본 모양(`BookmarkRibbonIcon`,
+                    // 커스텀 `Label { Text } icon: { ... }` 이니셜라이저 — 툴바에서
+                    // 자동으로 아이콘만 보이지 않는 문제가 있었다, 바로 위 이력
+                    // 참고)은 폐기하고, 기존 `Label(_:systemImage:)` 그대로 SF
+                    // Symbol(`bookmark`/`bookmark.fill`)만 쓴다 — 색은 아래 `.tint`
+                    // 하나로만 준다. `BookmarkRibbonIcon.swift`는 이제 아무 데서도
+                    // 참조하지 않아 파일 자체를 지웠다.
                     .help(viewModel.isCurrentPositionBookmarked ? "이 위치 책갈피 해제" : "이 위치 책갈피로 설정")
+                    .tint(isPhone ? JBCHCategoryPalette.wine : nil)
                 }
             }
             // [2026-08-08 추가] 조회 이력(히스토리) 진입점.
@@ -1781,13 +1929,26 @@ private struct BibleReadingContentView: View {
                 } label: {
                     Label("번역본 선택", systemImage: "text.book.closed")
                 }
+                // [2026-09-04 신설] 사용자 요청 — "번역본 아이콘은 가죽표지,
+                // 또는 서고 청람 색상으로 적용하는 것을 검토하라." 두 후보 중
+                // "가죽 표지"(`JBCHCategoryPalette.wood`)를 골랐다 — 설정 화면의
+                // 번역본 카테고리 아이콘(밤빛 남색)과는 성격이 달라(그쪽은 이미
+                // 남색 계열을 씀) 겹치지 않게, 그리고 성경 본문 자체의 표지를
+                // 연상시키는 색이라는 점에서 이 자리에 더 맞다고 판단했다. 다른
+                // 후보(서고 청람)를 원하면 이 한 줄만 바꾸면 된다.
+                .tint(isPhone ? JBCHCategoryPalette.wood : nil)
                 .popover(isPresented: $isTranslationPickerPresented) {
                     TranslationPickerPopover(
                         available: viewModel.availableTranslations,
                         selected: viewModel.columns.map(\.registry.persistentModelID),
                         maxSelection: viewModel.maxColumns
                     ) { selected in
-                        viewModel.setDisplayedTranslations(Array(selected))
+                        // [2026-09-04 변경] `TranslationPickerPopover.selectedIDs`가
+                        // 이제 선택 순서를 보존하는 배열이라(상단 주석 참고),
+                        // 여기서 더 이상 `Set` → `Array` 변환이 필요 없다 — 예전엔
+                        // 이 변환(원래 `Set`이었을 때)이 순서를 해시 기준으로
+                        // 뒤섞는 지점이었다.
+                        viewModel.setDisplayedTranslations(selected)
                         isTranslationPickerPresented = false
                     }
                 }

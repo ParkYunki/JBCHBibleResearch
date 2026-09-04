@@ -96,7 +96,26 @@ enum EmbeddingService {
         }
 
         do {
-            let model = try MLModel(contentsOf: modelURL)
+            // [2026-09-03 변경] 사용자 보고 — "아이폰 초기설치후 실행시 온보딩
+            // 메세지 하단에 다음버튼을 눌러도 십몇초 동안 반응이 없다가 나중에야
+            // 눌림." `OutlineSeedImporter.swift` 상단 주석에서 고친 것과 같은
+            // 증상의 또 다른 원인 — 이 함수(`EmbeddingIndexingService.buildIndex`가
+            // 첫 절을 처리할 때 1회 호출)는 `@MainActor`로 격리된
+            // `EmbeddingService` 안에서 `MLModel(contentsOf:)`(모델 파일을 읽어
+            // 컴파일된 Core ML 모델을 메모리에 올리는 동기 호출)를 그 앞에 `await`
+            // 지점 하나 없이 그대로 실행했다 — 앱을 새로 설치했을 때(색인이 아직
+            // 없어 바로 색인 생성이 시작되는 유일한 경우) 메인 스레드를 잠깐
+            // 그대로 붙잡는다. `Task.detached`로 이 한 줄만 백그라운드 스레드에서
+            // 돌리고 결과만 `await`로 받아오면, 로드가 끝날 때까지 메인 액터
+            // (그리고 그 위에서 처리되는 UI 이벤트)는 자유롭다. `MLModel`은 Apple
+            // 문서에 명시된 스레드 안전 타입이라(추론뿐 아니라 로드도 임의
+            // 스레드에서 가능) 이 분리에 별도 위험이 없다 — 로드 결과(모델
+            // 자체)는 그대로, 그 뒤 `cachedModel`/`cachedTokenizer`에 대입하는
+            // 부분은 여전히 메인 액터에서(이 함수 자체가 `@MainActor`이므로)
+            // 실행된다.
+            let model = try await Task.detached(priority: .userInitiated) {
+                try MLModel(contentsOf: modelURL)
+            }.value
             let tokenizer = try await AutoTokenizer.from(modelFolder: tokenizerFolderURL)
             cachedModel = model
             cachedTokenizer = tokenizer

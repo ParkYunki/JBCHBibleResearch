@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<!-- [2026-09-03 신설] 사용자 요청 — "이 앱의 macOS 버전이 심사에서 리젝될
+	     가능성은?" 검토 중 발견한 문제 대응: 이 파일(PrivacyInfo.xcprivacy)이
+	     프로젝트에 아예 없었다. Apple 공식 문서에 따르면 2024년 5월 1일부터,
+	     "Required Reason API"를 쓰면서 그 이유를 이 매니페스트에 선언하지
+	     않은 앱은 App Store Connect가 업로드 자체를 받아주지 않는다
+	     (https://developer.apple.com/documentation/bundleresources/
+	     describing-use-of-required-reason-api 참고) — 심사 이전에 업로드
+	     단계에서부터 막히는 문제라, 아래 두 카테고리는 코드베이스 전체를
+	     검색해 실제로 어디서/왜 그 API를 쓰는지 확인한 뒤에만 선언했다.
+
+	     ⚠️ [범위] 아래 선언은 2026-09-03 기준 grep으로 확인한 사용처만
+	     반영한다 — 이후 새 코드가 UserDefaults/파일 타임스탬프류 API를
+	     추가로 쓰게 되면(또는 디스크 공간/시스템 부팅 시각/활성 키보드 등
+	     다른 Required Reason API 카테고리를 새로 쓰게 되면) 이 파일도 같이
+	     갱신해야 한다. 실제 제출 전에는 Xcode의 "Generate Privacy Report"
+	     (Product 메뉴)로 한 번 더 정적 분석해 빠진 게 없는지 확인 권장 —
+	     이 세션엔 Xcode가 없어 그 도구로 직접 검증하지 못했다. -->
+	<key>NSPrivacyTracking</key>
+	<false/>
+	<key>NSPrivacyTrackingDomains</key>
+	<array/>
+	<!-- [2026-09-03] "앱 프라이버시"(App Store Connect의 데이터 수집 설문,
+	     Nutrition Label)는 이 파일과 별개로 App Store Connect 화면에서 직접
+	     답변해야 한다 — 이 배열은 그 설문을 대신하지 않는다. CloudKit으로
+	     사용자의 메모/연구자료를 동기화하는 등 실제 수집 여부 판단은 코드
+	     검토만으로 확정할 수 없어 비워 둔다(추측 금지) — 제출 전 반드시
+	     직접 확인해서 채울 것. -->
+	<key>NSPrivacyCollectedDataTypes</key>
+	<array/>
+	<key>NSPrivacyAccessedAPITypes</key>
+	<array>
+		<!-- UserDefaults — `UserSettingsStore.swift`/`LastBiblePositionTracker.swift`가
+		     둘 다 `UserDefaults.standard`만 쓴다(App Group 엔타이틀먼트 자체가
+		     없음 — `JBCHBibleResearch.entitlements`에
+		     `com.apple.security.application-groups` 키 없음 확인됨). 앱
+		     자신만 접근하는 용도이므로 CA92.1(자기 앱 안에서만 접근)이
+		     맞는 사유다. -->
+		<dict>
+			<key>NSPrivacyAccessedAPIType</key>
+			<string>NSPrivacyAccessedAPICategoryUserDefaults</string>
+			<key>NSPrivacyAccessedAPITypeReasons</key>
+			<array>
+				<string>CA92.1</string>
+			</array>
+		</dict>
+		<!-- File timestamp — `DocumentViewerErrorLog.swift`의
+		     `rotateIfNeeded(url:)`가 `FileManager.attributesOfItem(atPath:)`로
+		     앱 자신의 Application Support/Logs 안 로그 파일 크기를 읽어
+		     "로테이션할지"를 내부적으로 판단한다(사용자에게 표시 안 함,
+		     앱 컨테이너 내부 파일). C617.1(앱 컨테이너 안 파일의 타임스탬프/
+		     메타데이터를 사용자에게 보여주지 않고 앱 자체 동작 판단에만
+		     쓰는 경우)이 맞는 사유다. -->
+		<dict>
+			<key>NSPrivacyAccessedAPIType</key>
+			<string>NSPrivacyAccessedAPICategoryFileTimestamp</string>
+			<key>NSPrivacyAccessedAPITypeReasons</key>
+			<array>
+				<string>C617.1</string>
+			</array>
+		</dict>
+	</array>
+</dict>
+</plist>

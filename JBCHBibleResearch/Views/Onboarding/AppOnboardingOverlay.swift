@@ -208,19 +208,39 @@ private struct AppOnboardingSheet: View {
 
             Spacer(minLength: 8)
 
-            HStack(spacing: 12) {
-                if pageIndex > 0 {
-                    Button("이전") { pageIndex -= 1 }
-                        .buttonStyle(.bordered)
+            VStack(spacing: 10) {
+                HStack(spacing: 12) {
+                    if pageIndex > 0 {
+                        Button("이전") { pageIndex -= 1 }
+                            .buttonStyle(.bordered)
+                    }
+                    Button(isLastPage ? "시작하기" : "다음") {
+                        if isLastPage {
+                            onFinish()
+                        } else {
+                            pageIndex += 1
+                        }
+                    }
+                    .buttonStyle(.borderedProminent)
                 }
-                Button(isLastPage ? "시작하기" : "다음") {
-                    if isLastPage {
-                        onFinish()
-                    } else {
-                        pageIndex += 1
+
+                // [2026-09-03 신설] 사용자 요청 — 이 화면의 "다음" 버튼이
+                // 반응하기까지 시간이 걸릴 수 있는 원인(`ContentView.swift`의
+                // 부트스트랩 `.task`, `AppBootstrapProgress.swift` 상단 주석
+                // 참고)이 실제로 아직 끝나지 않았을 때, 그냥 멈춘 것처럼
+                // 보이지 않도록 짧은 안내를 보여준다. 정확한 퍼센트 진행률은
+                // 굳이 계산하지 않는다(사용자 확인 — "단순 스피너/문구만") —
+                // 이 부트스트랩은 항목 수에 따라 걸리는 시간이 들쭉날쭉해
+                // 정확한 진행률을 매기기보다 "아직 하고 있다"는 사실만
+                // 전달하는 편이 더 정직하다.
+                if AppBootstrapProgress.shared.isPreparingInitialData {
+                    HStack(spacing: 6) {
+                        ProgressView()
+                        Text("초기 데이터를 준비하는 중입니다…")
+                            .font(.caption)
+                            .foregroundStyle(.secondary)
                     }
                 }
-                .buttonStyle(.borderedProminent)
             }
             .padding(.bottom, 28)
         }

@@ -12,6 +12,11 @@
 //  일도 안 하는 컨트롤을 만들지 않기 위해서다(과장 없이 정직하게 표시하는 원칙).
 //  연결된 것: 시작 시 마지막 화면/기본 번역본, AI 초안 토글, 화면 모드, 글꼴/
 //  본문 크기/절 번호 크기/줄간격/색상, 성경 구절 복사 형식, 번역본 추가/삭제.
+//  [2026-09-03 정정] 아래 "TranslationImportSheet에 연결돼 실제로 동작한다"
+//  문구가 가리키던 TranslationManagementView.swift는 번역본 화면 통합(사용자
+//  결정 — "더보기 > 설정 > 성경 > 번역본으로 통합, 더보기 > 번역본 관리 삭제")
+//  으로 삭제됐다 — 그 기능은 이제 `TranslationsManagementTab`(아래 "번역본"
+//  MARK 섹션) 하나가 전담한다.
 //  [2026-08-11 정정, 아래 "저장공간" 섹션 주석 참고] "저장공간"은 더 이상
 //  UI만 있는 상태가 아니다 — `DocumentUploadService.copyIntoICloudDocuments`가
 //  실제로 그 경로에 파일을 복사한다(단, iCloud 컨테이너를 못 쓰면 조용히
@@ -208,6 +213,167 @@ struct SettingsHostView: View {
                 }
         }
         .font(.body)
+    }
+}
+
+// MARK: - 일반
+
+/// [2026-09-03 개정] 사용자 요청 — "더보기 - 설정의 [일반], [성경] 그리고 그
+/// 각각 하위 메뉴들을 한 화면에 통합할 수 있도록." 원래 이 화면은 "일반"/
+/// "성경"/"개발자" 세 카테고리만 보여주고, 그 하위 항목(기본/라이센스,
+/// 번역본/모양/복사 형식)은 각각 한 번 더 눌러 들어가야 하는 `GeneralSettingsListView`/
+/// `BibleSettingsListView`(두 화면 모두 아래에서 지웠다)로 갈라져 있었다 —
+/// 3단 드릴다운(설정 → 일반/성경 → 그 하위 항목)이었던 것을, 여기 한 화면
+/// 안에 "일반"/"성경"을 `Section` 헤더로 두고 그 아래 하위 항목을 바로
+/// 늘어놓는 2단 구조(설정 → 하위 항목)로 평평하게 폈다. "개발자"는 원래도
+/// 하위 항목이 없는 단일 항목이라(DEBUG 전용) 그대로 별도 섹션에 둔다. 각
+/// 항목의 아이콘 배지(`SettingsCategoryRow`)와 목적지 화면(`GeneralSettingsTab`/
+/// `LicenseSettingsTab`/`TranslationsManagementTab`/`AppearanceSettingsTab`/
+/// `BibleCopyFormatSettingsTab`/`DeveloperSettingsTab`)은 전혀 손대지 않고
+/// 그대로 재사용한다 — 이 화면이 바꾸는 것은 오직 "몇 번 눌러야 거기 닿는지"
+/// 뿐이다.
+///
+/// [이전 안, 참고] 원래(2026-09-03 이전) 여기 있던 설계 — "더보기"의 "설정"
+/// 항목이 다른 진입점과 달리 `SettingsView()`(macOS `Settings` Scene용
+/// 최상위 `TabView`)를 그대로 push해 하단에 탭바가 이중으로 뜨던 문제를,
+/// 아이콘 목록 화면으로 바꿔 해결했던 것 — 은 그대로 유효하다. macOS
+/// (`Settings` Scene, 독립된 환경설정 창)와 iPadOS(`SettingsHostView`를
+/// `.sheet`로, 독립된 모달)는 이 문제 자체가 없어 그대로 뒀고, iPhone 전용
+/// 진입점만 계속 이 화면(`SettingsHomeView`)을 쓴다.
+struct SettingsHomeView: View {
+    var body: some View {
+        List {
+            Section {
+                NavigationLink {
+                    GeneralSettingsTab()
+                        .navigationTitle("기본")
+                        #if os(iOS)
+                        .navigationBarTitleDisplayMode(.inline)
+                        #endif
+                } label: {
+                    SettingsCategoryRow(title: "기본", systemImage: "gearshape.fill", tint: JBCHCategoryPalette.wood)
+                }
+                NavigationLink {
+                    LicenseSettingsTab()
+                        .navigationTitle("라이센스")
+                        #if os(iOS)
+                        .navigationBarTitleDisplayMode(.inline)
+                        #endif
+                } label: {
+                    SettingsCategoryRow(title: "라이센스", systemImage: "checkmark.seal.fill", tint: JBCHCategoryPalette.shelfSlate)
+                }
+                // [2026-09-03 삭제] 사용자 요청 — "아이폰 쪽에서는 단축키 내용을
+                // 뺄 것." `ShortcutsSettingsTab`이 보여주는 내용(⌘/⌥/⇧ 등 macOS/
+                // 하드웨어 키보드 단축키, `ShortcutsSettingsTab` 선언부 참고)
+                // 자체가 아이폰에는 해당하지 않아 이 목록에서만 뺐다 — macOS
+                // `Settings` Scene과 iPadOS `.sheet`가 쓰는 `GeneralSettingsGroup`
+                // (아래 참고)의 "단축키" 세그먼트는 그대로 남아 있고,
+                // `ShortcutsSettingsTab` 자체도 지우지 않았다(그 두 플랫폼에서는
+                // 여전히 유효한 내용이라 이 화면 이외에는 영향이 없다).
+            } header: {
+                // [2026-09-03 추가] 사용자 요청 — "일반, 성경의 중간 타이틀의
+                // 글자를 조금더 키우고 굵게 할것." `Section("일반")`처럼 문자열을
+                // 바로 주면 시스템 기본 섹션 헤더 스타일(작은 크기·보통 굵기)이
+                // 적용된다 — 그 크기/굵기만 키우기 위해 커스텀 `header:` 뷰로
+                // 바꿨다. 색상(`.secondary`)과 좌우 위치 등 그 외 스타일은
+                // 기존 그대로 유지한다.
+                Text("일반")
+                    .font(.title3.bold())
+                    .foregroundStyle(.secondary)
+            }
+
+            Section {
+                NavigationLink {
+                    TranslationsManagementTab()
+                        .navigationTitle("번역본")
+                        #if os(iOS)
+                        .navigationBarTitleDisplayMode(.inline)
+                        #endif
+                } label: {
+                    SettingsCategoryRow(title: "번역본", systemImage: "books.vertical.fill", tint: JBCHCategoryPalette.navy)
+                }
+                NavigationLink {
+                    AppearanceSettingsTab()
+                        .navigationTitle("모양")
+                        #if os(iOS)
+                        .navigationBarTitleDisplayMode(.inline)
+                        #endif
+                } label: {
+                    SettingsCategoryRow(title: "모양", systemImage: "paintpalette.fill", tint: JBCHCategoryPalette.gold)
+                }
+                NavigationLink {
+                    BibleCopyFormatSettingsTab()
+                        .navigationTitle("복사 형식")
+                        #if os(iOS)
+                        .navigationBarTitleDisplayMode(.inline)
+                        #endif
+                } label: {
+                    SettingsCategoryRow(title: "복사 형식", systemImage: "doc.on.doc.fill", tint: JBCHCategoryPalette.wine)
+                }
+            } header: {
+                // 위 "일반" 섹션 헤더와 같은 이유·같은 스타일.
+                Text("성경")
+                    .font(.title3.bold())
+                    .foregroundStyle(.secondary)
+            }
+
+            #if DEBUG
+            Section {
+                NavigationLink {
+                    DeveloperSettingsTab()
+                        .navigationTitle("개발자")
+                        #if os(iOS)
+                        .navigationBarTitleDisplayMode(.inline)
+                        #endif
+                } label: {
+                    SettingsCategoryRow(title: "개발자", systemImage: "hammer.fill", tint: Color(white: 0.35))
+                }
+            }
+            #endif
+        }
+        .navigationTitle("설정")
+        // [2026-09-03 추가] 사용자 보고 — "더보기 - 설정 이하 메뉴에 공통적으로
+        // 뒤로가기 아이콘과 그 밑에 타이틀이 있는데 뒤로가기 아이콘 우측 영역
+        // 빈공간이 낭비되고 있음." 기본(automatic) 표시 모드는 뒤로가기
+        // 버튼만 있는 좁은 줄 아래에 큰 제목을 별도 줄로 한 번 더 그려, 그
+        // 뒤로가기 버튼 옆(같은 줄) 공간이 그대로 비어 낭비된다 — 이미 이
+        // 코드베이스 다른 화면(`ChapterRelatedContentPanel`/`BibleReadingView`/
+        // `VerseZoomView`/`CrossReferenceTargetPicker`/`DocumentsHomeView`/
+        // `OriginalTextInfoView`)에서 같은 이유로 확인·적용해 둔 대안 —
+        // `.navigationBarTitleDisplayMode(.inline)` — 을 그대로 재사용해 뒤로가기
+        // 버튼과 제목을 한 줄로 합친다(macOS엔 이 모디파이어 자체가 없어
+        // `#if os(iOS)`로 감싼다).
+        #if os(iOS)
+        .navigationBarTitleDisplayMode(.inline)
+        #endif
+        // `SettingsHostView`와 같은 이유(위 주석 참고) — 이 화면도 NavigationLink
+        // push로 열리므로 명시적으로 시스템 기본 글꼴/보통 크기로 되돌린다.
+        .font(.body)
+    }
+}
+
+/// 위 `SettingsHomeView`의 각 행 — iOS "설정" 앱과 같은 "색이 있는 둥근 사각형
+/// 배경 위 흰색 SF Symbol" 아이콘 스타일. 아이콘마다 시스템이 주는 기본 크기를
+/// 그대로 쓰지 않고 고정 프레임(29pt, iOS 설정 앱 실측과 동일)으로 통일해
+/// 목록 전체의 세로 정렬이 흔들리지 않게 한다.
+private struct SettingsCategoryRow: View {
+    let title: String
+    let systemImage: String
+    let tint: Color
+
+    var body: some View {
+        Label {
+            Text(title)
+        } icon: {
+            RoundedRectangle(cornerRadius: 7, style: .continuous)
+                .fill(tint.gradient)
+                .frame(width: 29, height: 29)
+                .overlay {
+                    Image(systemName: systemImage)
+                        .font(.system(size: 16, weight: .medium))
+                        .foregroundStyle(.white)
+                }
+        }
     }
 }
 
@@ -535,8 +701,12 @@ private struct TranslationsSettingsTab: View {
     }
 
     private func delete(_ translation: TranslationRegistry) {
-        // TranslationManagementViewModel.delete(_:)와 동일하게 로컬 캐시 파일도
-        // 함께 정리한다(best-effort) — 두 곳에서 삭제 경로가 갈라지면서 한쪽만
+        // [2026-09-03 정정] 원래 "TranslationManagementViewModel.delete(_:)와
+        // 동일하게"였다 — 그 타입은 번역본 화면 통합(더보기 > 번역본 관리
+        // 삭제)으로 사라졌다. 아래 `TranslationsManagementTab.delete(_:)`(같은
+        // 파일, "번역본" MARK 섹션)가 이 함수를 그대로 포팅해 갔으니 이제는
+        // "그 함수와 동일하게"로 읽으면 된다 — 로컬 캐시 파일도 함께
+        // 정리한다(best-effort) — 두 곳에서 삭제 경로가 갈라지면서 한쪽만
         // 정리하면 디스크에 고아 파일이 남는다.
         TranslationFileMaterializer.removeLocalCopy(for: translation)
         // [2026-08-27 추가] 사용자 보고 — "성경 조회 기본표시가 3번째 활성화가
@@ -547,6 +717,285 @@ private struct TranslationsSettingsTab: View {
         // "add" 버튼 `.disabled` 수정 참고). 삭제 시점에 바로 정리해 이 문제가
         // 다시 쌓이지 않게 한다 — 기존 `removeDisplayedTranslation(code:)`를
         // 그대로 재사용(이미 없는 코드를 지워도 `removeAll`은 안전하게 무동작).
+        removeDisplayedTranslation(code: translation.code)
+        modelContext.delete(translation)
+        try? modelContext.save()
+        reload()
+    }
+}
+
+/// [2026-09-03 신설] 사용자 결정 — "번역본 화면 통합안: 더보기 > 설정 > 성경 >
+/// 번역본으로 통합(더보기 > 번역본 관리의 항목 삭제)." 이전에 두 화면으로
+/// 나뉘어 있던 기능을 하나로 합쳤다 — 위 `TranslationsSettingsTab`의 "성경
+/// 조회 기본 표시"(순서/노출 토글)와 "번역본 추가..."는 그대로 가져오고,
+/// (이제 삭제된) `TranslationManagementView`/`TranslationManagementViewModel`
+/// (더보기 > 번역본 관리)에만 있던 "표시 이름"/"라이선스" 인라인 편집과
+/// "책이름표 언어" 피커를 그 목록 행에 그대로 옮겨왔다. `updateDisplayName`/
+/// `updateLicenseType`이 타이핑마다 `reload()`를 다시 부르지 않는 것은
+/// `TranslationManagementViewModel`의 원래 이유 그대로다 — 매 타자마다 전체
+/// 목록을 다시 훑을 이유가 없어서다(SwiftData `@Model`은 자동으로 관찰되므로
+/// 값만 바꿔도 화면이 갱신된다).
+///
+/// [삭제 UI, 사용자 질의 — "번역본 삭제기능은 어디있지?"] 옛 번역본 관리
+/// 화면은 스와이프로만 삭제할 수 있었는데, 위 목업(정적 스크린샷)에는 스와이프
+/// 제스처가 보이지 않아 이 질문이 나왔다. 이 화면이 합쳐 들어가는 대상인
+/// `TranslationsSettingsTab`이 원래 쓰던 방식 — 각 행에 바로 보이는 휴지통
+/// 아이콘 버튼(번들이 아닌 것만) — 을 그대로 유지해 숨겨진 제스처 없이 항상
+/// 눈에 보이게 했다(옛 화면의 `.swipeActions`는 가져오지 않았다).
+///
+/// [동기화 상태 표시, 의도적으로 하나만 유지] 두 원본이 "동기화 상태"를 서로
+/// 다른 방식으로 계산했다 — `TranslationsSettingsTab.statusText(for:)`는
+/// `TranslationFileMaterializer.syncStatus(for:)`(그 파일 선언부 주석: "아무것도
+/// 쓰지 않는" 순수 조회, 렌더링마다 불러도 안전)만 읽고, `TranslationManagementViewModel
+/// .reload()`는 그 대신 매번 `ensureMaterialized`를 실제로 시도해(파일 쓰기
+/// 부작용 있음, 66권 순회) 실패하면 별도 오류 배지를 보여줬다. 이 화면은 전자
+/// (부작용 없는 `syncStatus`)만 유지한다 — 후자는 "번역본 조회 도중 화면을
+/// 열 때마다 파일 쓰기를 시도"하는 무거운 동작이라, 화면을 하나로 합치면서
+/// 더 자주(순서 변경/토글 때마다) 실행될 위험까지 새로 만들고 싶지 않았다.
+/// 필요하시면(=이 사전 복구 동작을 실제로 원하시면) 알려주시면 다시 넣겠다.
+///
+/// macOS `Settings` Scene/iPadOS `.sheet`가 쓰는 원래 `TranslationsSettingsTab`
+/// (위, 간단한 목록·편집 불가)은 그대로 남겨 뒀다 — 이번 통합은 "아이폰 →
+/// 더보기 → 설정 → 성경 → 번역본" 화면 하나로 한정된 결정이라, 다른 두
+/// 플랫폼에는 편집 기능이 새로 생기지 않는다.
+private struct TranslationsManagementTab: View {
+    @Environment(\.modelContext) private var modelContext
+    @State private var translations: [TranslationRegistry] = []
+    @State private var settings = UserSettingsStore.shared
+    @State private var isImportSheetPresented = false
+
+    var body: some View {
+        Form {
+            Section {
+                ForEach(allTranslationsOrderedForDisplaySettings, id: \.id) { translation in
+                    translationDisplayRow(translation)
+                }
+            } header: {
+                Label("성경 조회 기본 표시", systemImage: "eye")
+            } footer: {
+                Text("최대 3개까지 표시할 수 있습니다. 맨 위가 기본값입니다. 눈 아이콘으로 표시 여부를, 위/아래 화살표로 순서를 바꿀 수 있습니다.")
+            }
+
+            Section {
+                ForEach(translations, id: \.id) { translation in
+                    translationEditRow(translation)
+                }
+            } header: {
+                Label("설치된 번역본", systemImage: "text.book.closed")
+            }
+
+            Section {
+                Button {
+                    isImportSheetPresented = true
+                } label: {
+                    Label("번역본 추가...", systemImage: "plus.circle")
+                }
+            } footer: {
+                Text("sqlite, bdb 파일을 업로드할 수 있습니다.\n\n이 앱은 성경 번역본을 제공하거나 배포하지 않습니다. 사용자가 적법하게 보유하거나 사용할 권한이 있는 파일만 가져와주십시오. 가져온 데이터는 이 기기에만 저장되며, 다른 사용자와 공유되지 않습니다.")
+            }
+        }
+        .formStyle(.grouped)
+        .onAppear {
+            reload()
+            seedDefaultDisplayedCodesIfNeeded()
+        }
+        .sheet(isPresented: $isImportSheetPresented) {
+            TranslationImportSheet { _ in reload() }
+        }
+    }
+
+    /// [`TranslationManagementView.TranslationRowView` 포팅] 표시 이름/라이선스
+    /// 인라인 편집 + 책이름표 언어 피커 + (번들이 아니면) 삭제 버튼.
+    @ViewBuilder
+    private func translationEditRow(_ translation: TranslationRegistry) -> some View {
+        VStack(alignment: .leading, spacing: 6) {
+            HStack {
+                TextField("표시 이름", text: Binding(
+                    get: { translation.displayName },
+                    set: { updateDisplayName($0, for: translation) }
+                ))
+                .font(.headline)
+                #if os(iOS)
+                .textFieldStyle(.roundedBorder)
+                #else
+                .textFieldStyle(.plain)
+                #endif
+
+                if !translation.isBundled {
+                    Button(role: .destructive) {
+                        delete(translation)
+                    } label: {
+                        Image(systemName: "trash")
+                    }
+                    .buttonStyle(.borderless)
+                }
+            }
+
+            Text(statusText(for: translation))
+                .font(.caption2)
+                .foregroundStyle(.secondary)
+
+            TextField("라이선스(선택)", text: Binding(
+                get: { translation.licenseType ?? "" },
+                set: { updateLicenseType($0, for: translation) }
+            ))
+            .font(.caption)
+            #if os(iOS)
+            .textFieldStyle(.roundedBorder)
+            #else
+            .textFieldStyle(.plain)
+            #endif
+
+            Picker("책이름표 언어", selection: Binding(
+                get: { translation.bookNameTableID },
+                set: { setBookNameTable($0, for: translation) }
+            )) {
+                Text("한글 기본").tag(nil as String?)
+                ForEach(BookNameTableProvider.shared.builtIn) { table in
+                    Text(table.displayName).tag(table.id as String?)
+                }
+            }
+            .font(.caption)
+        }
+        .padding(.vertical, 4)
+    }
+
+    /// [`TranslationManagementViewModel.updateDisplayName` 포팅] 타이핑마다
+    /// `reload()`를 다시 부르지 않는다 — `translation`이 이미 이 인스턴스를
+    /// 그대로 참조하는 SwiftData `@Model`이라 값만 바꿔도 화면이 갱신된다.
+    private func updateDisplayName(_ name: String, for registry: TranslationRegistry) {
+        registry.displayName = name
+        try? modelContext.save()
+    }
+
+    /// [`TranslationManagementViewModel.updateLicenseType` 포팅] 위와 동일한
+    /// 이유로 `reload()` 없이 즉시 반영. 빈 문자열은 "라이선스 미상" 표시로
+    /// 되돌아가도록 nil로 정규화한다.
+    private func updateLicenseType(_ license: String, for registry: TranslationRegistry) {
+        let trimmed = license.trimmingCharacters(in: .whitespacesAndNewlines)
+        registry.licenseType = trimmed.isEmpty ? nil : trimmed
+        try? modelContext.save()
+    }
+
+    /// [`TranslationManagementViewModel.setBookNameTable` 포팅] 번들 번역본도
+    /// 원칙적으로는 바꿀 수 있게 막지 않는다 — 번들은 항상 nil이라는 규칙이
+    /// 사용자가 바꾸는 것 자체를 금지한 근거는 아니라서다.
+    private func setBookNameTable(_ tableID: String?, for registry: TranslationRegistry) {
+        registry.bookNameTableID = tableID
+        try? modelContext.save()
+        reload()
+    }
+
+    private func statusText(for translation: TranslationRegistry) -> String {
+        var parts = [translation.code, translation.isBundled ? "번들" : "사용자 추가"]
+        if !translation.isBundled {
+            parts.append(TranslationFileMaterializer.syncStatus(for: translation).label)
+        }
+        return parts.joined(separator: " · ")
+    }
+
+    private var orderedDisplayedTranslations: [TranslationRegistry] {
+        let byCode = Dictionary(uniqueKeysWithValues: translations.map { ($0.code, $0) })
+        return settings.defaultDisplayedTranslationCodes.compactMap { byCode[$0] }
+    }
+
+    private var notYetDisplayedTranslations: [TranslationRegistry] {
+        let shown = Set(settings.defaultDisplayedTranslationCodes)
+        return translations.filter { !shown.contains($0.code) }
+    }
+
+    private var allTranslationsOrderedForDisplaySettings: [TranslationRegistry] {
+        orderedDisplayedTranslations + notYetDisplayedTranslations
+    }
+
+    @ViewBuilder
+    private func translationDisplayRow(_ translation: TranslationRegistry) -> some View {
+        let displayedIndex = settings.defaultDisplayedTranslationCodes.firstIndex(of: translation.code)
+        HStack {
+            Text(translation.displayName)
+            if displayedIndex == 0 {
+                Text("기본")
+                    .font(.caption2)
+                    .padding(.horizontal, 6)
+                    .padding(.vertical, 2)
+                    .background(Capsule().fill(Color.accentColor.opacity(0.15)))
+                    .foregroundStyle(Color.accentColor)
+            }
+            Spacer()
+            if let index = displayedIndex {
+                Button {
+                    moveDisplayedTranslation(from: index, to: index - 1)
+                } label: {
+                    Image(systemName: "chevron.up")
+                }
+                .buttonStyle(.borderless)
+                .disabled(index == 0)
+
+                Button {
+                    moveDisplayedTranslation(from: index, to: index + 1)
+                } label: {
+                    Image(systemName: "chevron.down")
+                }
+                .buttonStyle(.borderless)
+                .disabled(index == settings.defaultDisplayedTranslationCodes.count - 1)
+
+                Button {
+                    removeDisplayedTranslation(code: translation.code)
+                } label: {
+                    Image(systemName: "eye.slash")
+                }
+                .buttonStyle(.borderless)
+            } else {
+                Button {
+                    addDisplayedTranslation(translation)
+                } label: {
+                    Image(systemName: "eye")
+                }
+                .buttonStyle(.borderless)
+                .disabled(orderedDisplayedTranslations.count >= 3)
+            }
+        }
+    }
+
+    private func moveDisplayedTranslation(from index: Int, to newIndex: Int) {
+        var codes = settings.defaultDisplayedTranslationCodes
+        guard codes.indices.contains(index), codes.indices.contains(newIndex) else { return }
+        codes.swapAt(index, newIndex)
+        settings.defaultDisplayedTranslationCodes = codes
+    }
+
+    private func removeDisplayedTranslation(code: String) {
+        settings.defaultDisplayedTranslationCodes.removeAll { $0 == code }
+    }
+
+    private func addDisplayedTranslation(_ translation: TranslationRegistry) {
+        guard settings.defaultDisplayedTranslationCodes.count < 3,
+              !settings.defaultDisplayedTranslationCodes.contains(translation.code) else { return }
+        settings.defaultDisplayedTranslationCodes.append(translation.code)
+    }
+
+    private func seedDefaultDisplayedCodesIfNeeded() {
+        guard settings.defaultDisplayedTranslationCodes.isEmpty, !translations.isEmpty else { return }
+        var ordered = translations
+        if let preferredCode = settings.defaultTranslationCode,
+           let index = ordered.firstIndex(where: { $0.code == preferredCode }) {
+            let preferred = ordered.remove(at: index)
+            ordered.insert(preferred, at: 0)
+        }
+        settings.defaultDisplayedTranslationCodes = Array(ordered.prefix(3).map(\.code))
+    }
+
+    private func reload() {
+        translations = (try? modelContext.fetch(FetchDescriptor<TranslationRegistry>(sortBy: [SortDescriptor(\.addedAt)]))) ?? []
+    }
+
+    /// [`TranslationManagementViewModel.delete` 포팅] 번들 번역본은 삭제 대상이
+    /// 아니다 — 호출부(위 `translationEditRow`)가 UI에서 애초에 삭제 버튼을
+    /// 숨기지만, 여기서도 한 번 더 막아 실수로 지워지는 걸 방지한다(원본의
+    /// 방어적 가드를 그대로 가져왔다).
+    private func delete(_ translation: TranslationRegistry) {
+        guard !translation.isBundled else { return }
+        TranslationFileMaterializer.removeLocalCopy(for: translation)
         removeDisplayedTranslation(code: translation.code)
         modelContext.delete(translation)
         try? modelContext.save()
@@ -607,173 +1056,213 @@ private struct AppearanceSettingsTab: View {
                 Label("화면 모드", systemImage: "circle.lefthalf.filled")
             }
 
-            // [2026-08-08 추가, 원래 "아직 구현 안 됨"으로 표시돼 있던 자리] 사용자
-            // 요청으로 실제 조정 UI를 만들었다. `RichTextEditor`(메모/개요 에디터,
-            // Views/Memo/RichTextEditor.swift)는 이번 범위에 포함하지 않았다 —
-            // 사용자 요청이 명시적으로 "S1(성경 조회) 화면"을 가리켰고, 에디터는
-            // 이미 자체 서식 도구모음이 있어 성격이 다르다고 판단했다.
-            Section {
-                // [2026-08-08 추가] 사용자 요청 — "환경설정에 폰트를 바꿀 때도 이
-                // 기본글꼴이 상단에 오도록". 내장 Paperlogy 9종을 맨 위에, 그
-                // 아래 "시스템 기본", 그 아래 시스템에 설치된 나머지 글꼴 순으로
-                // 보여준다. [2026-08-11] 한때 기본 선택값을 "시스템 기본"으로
-                // 되돌렸다가, 이 설정(S1 성경 조회 본문 글꼴)은 요청 대상이
-                // 아니었음이 확인돼 원래 기본값(내장 Paperlogy)으로 다시
-                // 되돌렸다(UserSettingsStore.bibleFontName 기본값 참고) — 사용자가
-                // 바꾸고 싶으면 이 Picker에서 언제든 "시스템 기본"을 고르면 된다.
-                Picker("글꼴", selection: $settings.bibleFontName) {
-                    Section("내장 기본 글꼴") {
-                        ForEach(BundledFonts.entries) { entry in
-                            Text(entry.displayName).tag(entry.postScriptName)
-                        }
-                        // [2026-09-02 추가] 사용자 요청 — "조선궁서체도 성경 본문
-                        // 글꼴에서 선택할 수 있도록". 지금까지는 "한자 폰트" Picker
-                        // (아래, 한자 주석 전용)에서만 고를 수 있었다 — 이 Picker의
-                        // 선택은 완전히 별도 설정(`bibleFontName`)이라 한자 주석
-                        // 표시(`hanjaFontName`)에는 영향이 없다.
-                        Text("조선궁서체").tag(SpecialPurposeFonts.hanja)
+            // [2026-09-03 변경] 사용자 요청 — "미리보기를 성경 조회 표시
+            // 단락 위에 이동시킬 것." 아이폰에서만 `previewSection`을
+            // `displaySettingsSection`보다 앞에 둔다 — 맥OS/아이패드는 이
+            // 요청 대상이 아니라(사용자가 "아이폰 - 더보기 - 설정 - 성경 -
+            // 모양"이라고 화면을 명시했다) 기존 순서(표시 설정 → 미리보기)를
+            // 그대로 둔다.
+            #if os(iOS)
+            if UIDevice.current.userInterfaceIdiom == .phone {
+                previewSection
+                displaySettingsSection
+            } else {
+                displaySettingsSection
+                previewSection
+            }
+            #else
+            displaySettingsSection
+            previewSection
+            #endif
+        }
+        .formStyle(.grouped)
+    }
+
+    /// [2026-09-03 신설] 사용자 요청 — "미리보기를 성경 조회 표시 단락 위에
+    /// 이동시킬 것(아이폰)." 아래 `body`가 아이폰에서만 이 프로퍼티를
+    /// `previewSection`보다 뒤에 배치를 바꿔 보여준다 — 원래 이 Section의
+    /// 내용(글꼴/크기/색상/한자 주석 Picker들)은 전혀 손대지 않고, `body`
+    /// 안에 인라인으로 있던 것을 이름 붙은 computed property로만 뽑아냈다
+    /// (순서를 조건부로 바꾸려면 각 Section이 독립된 표현식이어야 하므로).
+    @ViewBuilder
+    private var displaySettingsSection: some View {
+        // [2026-08-08 추가, 원래 "아직 구현 안 됨"으로 표시돼 있던 자리] 사용자
+        // 요청으로 실제 조정 UI를 만들었다. `RichTextEditor`(메모/개요 에디터,
+        // Views/Memo/RichTextEditor.swift)는 이번 범위에 포함하지 않았다 —
+        // 사용자 요청이 명시적으로 "S1(성경 조회) 화면"을 가리켰고, 에디터는
+        // 이미 자체 서식 도구모음이 있어 성격이 다르다고 판단했다.
+        Section {
+            // [2026-08-08 추가] 사용자 요청 — "환경설정에 폰트를 바꿀 때도 이
+            // 기본글꼴이 상단에 오도록". 내장 Paperlogy 9종을 맨 위에, 그
+            // 아래 "시스템 기본", 그 아래 시스템에 설치된 나머지 글꼴 순으로
+            // 보여준다. [2026-08-11] 한때 기본 선택값을 "시스템 기본"으로
+            // 되돌렸다가, 이 설정(S1 성경 조회 본문 글꼴)은 요청 대상이
+            // 아니었음이 확인돼 원래 기본값(내장 Paperlogy)으로 다시
+            // 되돌렸다(UserSettingsStore.bibleFontName 기본값 참고) — 사용자가
+            // 바꾸고 싶으면 이 Picker에서 언제든 "시스템 기본"을 고르면 된다.
+            Picker("글꼴", selection: $settings.bibleFontName) {
+                Section("내장 기본 글꼴") {
+                    ForEach(BundledFonts.entries) { entry in
+                        Text(entry.displayName).tag(entry.postScriptName)
                     }
-                    Section("시스템") {
-                        Text("시스템 기본").tag("System")
-                        ForEach(Self.fontFamilies, id: \.self) { family in
-                            Text(family).tag(family)
-                        }
+                    // [2026-09-02 추가] 사용자 요청 — "조선궁서체도 성경 본문
+                    // 글꼴에서 선택할 수 있도록". 지금까지는 "한자 폰트" Picker
+                    // (아래, 한자 주석 전용)에서만 고를 수 있었다 — 이 Picker의
+                    // 선택은 완전히 별도 설정(`bibleFontName`)이라 한자 주석
+                    // 표시(`hanjaFontName`)에는 영향이 없다.
+                    Text("조선궁서체").tag(SpecialPurposeFonts.hanja)
+                }
+                Section("시스템") {
+                    Text("시스템 기본").tag("System")
+                    ForEach(Self.fontFamilies, id: \.self) { family in
+                        Text(family).tag(family)
                     }
                 }
+            }
 
-                // [2026-08-11 변경] 사용자 요청 — "본문크기/절 번호 크기/줄
-                // 간격을 한 줄에 표현할 것". 세 Stepper를 세로로 나열하던 걸
-                // 한 HStack에 묶었다 — 각 항목은 위에 작은 캡션 라벨, 아래에
-                // 값+Stepper를 두는 compact 배치.
-                HStack(alignment: .top, spacing: 20) {
-                    compactSizeControl(
-                        title: "본문 크기",
-                        value: $settings.bibleBodyFontSize,
-                        range: 12...32
-                    )
-                    compactSizeControl(
-                        title: "절 번호 크기",
-                        value: $settings.bibleVerseNumberFontSize,
-                        range: 8...24
-                    )
-                    compactSizeControl(
-                        title: "줄간격",
-                        value: $settings.bibleLineSpacing,
-                        range: 0...16
-                    )
+            // [2026-08-11 변경] 사용자 요청 — "본문크기/절 번호 크기/줄
+            // 간격을 한 줄에 표현할 것". 세 Stepper를 세로로 나열하던 걸
+            // 한 HStack에 묶었다 — 각 항목은 위에 작은 캡션 라벨, 아래에
+            // 값+Stepper를 두는 compact 배치.
+            // [2026-09-03 변경] 사용자 보고 — "본문 크기, 절 번호 크기,
+            // 줄 간격 에 대한 숫자가 안보임." 이 세 컨트롤을 나란히 한
+            // `HStack`에 욱여넣은 건 2026-08-11 당시 "한 줄에 표현할 것"
+            // 요청대로 만든 것인데, 아이폰 폭에서는 각 컨트롤이 실제로
+            // 필요로 하는 너비(캡션 + "12pt" 같은 값 텍스트 + Stepper
+            // +/- 버튼)를 3개 합치면 화면 폭을 넘겨, `Stepper`가 자기
+            // 라벨(값 텍스트)보다 +/- 버튼 쪽을 우선해 값 텍스트가 잘려
+            // 안 보이게 된다 — 바로 아래 "절 간격" 행(한 줄 전체를 쓰는
+            // `HStack` + `Spacer()` + `Stepper`)은 이 문제가 없는 것과
+            // 대조된다. 그래서 아이폰에서만 그 "절 간격" 행과 같은
+            // 스타일(제목 - 여백 - 값+Stepper, 한 줄 전체 폭 사용)로
+            // 세로 3줄로 바꾸고, 그 외(맥OS/아이패드, 가로 폭이 넉넉해
+            // 원래도 문제가 없었다)는 기존 3열 가로 배치를 그대로 둔다.
+            #if os(iOS)
+            if UIDevice.current.userInterfaceIdiom == .phone {
+                fullWidthSizeControl(title: "본문 크기", value: $settings.bibleBodyFontSize, range: 12...32)
+                fullWidthSizeControl(title: "절 번호 크기", value: $settings.bibleVerseNumberFontSize, range: 8...24)
+                fullWidthSizeControl(title: "줄간격", value: $settings.bibleLineSpacing, range: 0...16)
+            } else {
+                compactSizeControlRow
+            }
+            #else
+            compactSizeControlRow
+            #endif
+
+            // [2026-08-20 추가] 사용자 요청 — "본문색상 위 절 간격 조절
+            // 기능추가". `bibleLineSpacing`(위 compactSizeControl "줄간격",
+            // 한 절 안에서 줄바꿈될 때의 간격)과는 다른 값이다 — 이건 절과
+            // 절 사이 간격(`TranslationColumnView.columnScrollView`의
+            // `LazyVStack(spacing:)`)이라 별도 컨트롤로 뒀다. 범위는 위
+            // "줄간격"과 같은 0...16 대신 절 사이는 더 넓게 벌릴 수 있어야
+            // 해서 0...30으로 잡았다.
+            HStack {
+                Text("절 간격")
+                Spacer()
+                Stepper(value: $settings.bibleVerseSpacing, in: 0...30, step: 1) {
+                    Text("\(Int(settings.bibleVerseSpacing))pt")
+                        .foregroundStyle(.secondary)
+                        .monospacedDigit()
                 }
+                .fixedSize()
+            }
 
-                // [2026-08-20 추가] 사용자 요청 — "본문색상 위 절 간격 조절
-                // 기능추가". `bibleLineSpacing`(위 compactSizeControl "줄간격",
-                // 한 절 안에서 줄바꿈될 때의 간격)과는 다른 값이다 — 이건 절과
-                // 절 사이 간격(`TranslationColumnView.columnScrollView`의
-                // `LazyVStack(spacing:)`)이라 별도 컨트롤로 뒀다. 범위는 위
-                // "줄간격"과 같은 0...16 대신 절 사이는 더 넓게 벌릴 수 있어야
-                // 해서 0...30으로 잡았다.
-                HStack {
-                    Text("절 간격")
-                    Spacer()
-                    Stepper(value: $settings.bibleVerseSpacing, in: 0...30, step: 1) {
-                        Text("\(Int(settings.bibleVerseSpacing))pt")
-                            .foregroundStyle(.secondary)
-                            .monospacedDigit()
-                    }
-                    .fixedSize()
-                }
-
-                // [2026-09-02 수정] 사용자 요청 — "배경색 직접 선택/글자색
-                // 직접 선택이 있으므로 배경색/본문 색상(팔레트 Picker)은 제거할
-                // 것." 아래 두 `ColorPicker`만 남기고, 팔레트에서 고르던
-                // `Picker("배경색", ...)`/`Picker("본문 색상", ...)`는 삭제했다
-                // (`Color.bibleBackgroundPalette`도 이제 이 파일 말고는 쓰는
-                // 곳이 없어 `Color+Hex.swift`에서 함께 지웠다 — `Color.
-                // memoTextPalette`는 `RichTextEditor.swift`가 여전히 써서
-                // 그대로 남겨 뒀다). 팔레트 Picker에 있던 "시스템 기본"(빈
-                // 문자열로 리셋) 옵션이 함께 없어진 것을 사용자가 다시 지적해,
-                // 아래에 전용 초기화 버튼을 별도로 추가했다.
-                Group {
-                    // 배경과 글자색을 미리 맞춰 둔 테마 5종을 먼저 보여준다 —
-                    // 대비가 안 맞는 조합(예: 밝은 배경 + 밝은 글자)을 고를
-                    // 위험 없이 빠르게 고를 수 있다. `BibleSlideColorTheme.all`
-                    // 참고.
-                    VStack(alignment: .leading, spacing: 8) {
-                        Text("테마 색상")
-                            .font(.caption)
-                            .foregroundStyle(.secondary)
-                        ScrollView(.horizontal, showsIndicators: false) {
-                            HStack(spacing: 12) {
-                                ForEach(BibleSlideColorTheme.all) { theme in
-                                    themeSwatchButton(theme)
-                                }
+            // [2026-09-02 수정] 사용자 요청 — "배경색 직접 선택/글자색
+            // 직접 선택이 있으므로 배경색/본문 색상(팔레트 Picker)은 제거할
+            // 것." 아래 두 `ColorPicker`만 남기고, 팔레트에서 고르던
+            // `Picker("배경색", ...)`/`Picker("본문 색상", ...)`는 삭제했다
+            // (`Color.bibleBackgroundPalette`도 이제 이 파일 말고는 쓰는
+            // 곳이 없어 `Color+Hex.swift`에서 함께 지웠다 — `Color.
+            // memoTextPalette`는 `RichTextEditor.swift`가 여전히 써서
+            // 그대로 남겨 뒀다). 팔레트 Picker에 있던 "시스템 기본"(빈
+            // 문자열로 리셋) 옵션이 함께 없어진 것을 사용자가 다시 지적해,
+            // 아래에 전용 초기화 버튼을 별도로 추가했다.
+            Group {
+                // 배경과 글자색을 미리 맞춰 둔 테마 5종을 먼저 보여준다 —
+                // 대비가 안 맞는 조합(예: 밝은 배경 + 밝은 글자)을 고를
+                // 위험 없이 빠르게 고를 수 있다. `BibleSlideColorTheme.all`
+                // 참고.
+                VStack(alignment: .leading, spacing: 8) {
+                    Text("테마 색상")
+                        .font(.caption)
+                        .foregroundStyle(.secondary)
+                    ScrollView(.horizontal, showsIndicators: false) {
+                        HStack(spacing: 12) {
+                            ForEach(BibleSlideColorTheme.all) { theme in
+                                themeSwatchButton(theme)
                             }
                         }
                     }
-
-                    ColorPicker(
-                        "배경색 직접 선택",
-                        selection: Binding(
-                            get: { settings.bibleBackgroundColor ?? Color.white },
-                            set: { settings.bibleBackgroundColorHex = $0.hexString(in: environment) }
-                        ),
-                        supportsOpacity: false
-                    )
-
-                    ColorPicker(
-                        "글자색 직접 선택",
-                        selection: Binding(
-                            get: { settings.bibleTextColor ?? Color.primary },
-                            set: { settings.bibleTextColorHex = $0.hexString(in: environment) }
-                        ),
-                        supportsOpacity: false
-                    )
-
-                    // [2026-09-02 추가] 사용자 요청 — "시스템 기본색상으로 돌릴
-                    // 초기화 버튼 추가." 빈 문자열이 곧 "시스템 기본을 쓴다"는
-                    // 뜻이므로(`bibleBackgroundColor`/`bibleTextColor` 위
-                    // 선언부 주석 참고), 두 hex를 함께 빈 문자열로 되돌리기만
-                    // 하면 된다. 배경/글자 둘 다 안 골랐을 때는 되돌릴 게 없어
-                    // 버튼을 비활성화한다.
-                    Button("시스템 기본색상으로 되돌리기") {
-                        settings.bibleBackgroundColorHex = ""
-                        settings.bibleTextColorHex = ""
-                    }
-                    .disabled(settings.bibleBackgroundColorHex.isEmpty && settings.bibleTextColorHex.isEmpty)
                 }
 
-                // [2026-08-14 추가] 사용자 요청 — "두 번째 번역본(국한문 전체
-                // 중복 테이블)을 지우고 → 절 단위 한자 주석 모델 ... 둘 다 지원,
-                // 설정으로 전환." 개역한글 컬럼에 한자 주석을 어떻게 보여줄지
-                // 고르는 3단 Picker. 기본값은 "끄기"(UserSettingsStore.
-                // hanjaDisplayMode 기본값 참고) — 기존에 이 기능을 몰랐던
-                // 사용자에게 갑자기 낯선 한자가 나타나지 않게.
-                Picker("한자 주석 표시", selection: $settings.hanjaDisplayMode) {
-                    ForEach(UserSettingsStore.HanjaDisplayMode.allCases) { mode in
-                        Text(mode.displayName).tag(mode)
-                    }
-                }
+                ColorPicker(
+                    "배경색 직접 선택",
+                    selection: Binding(
+                        get: { settings.bibleBackgroundColor ?? Color.white },
+                        set: { settings.bibleBackgroundColorHex = $0.hexString(in: environment) }
+                    ),
+                    supportsOpacity: false
+                )
 
-                // [2026-08-19 추가] 사용자 요청 — "설정 내 모양 탭의 한자 주석
-                // 표시 밑에 '한자' 폰트를 변경할 수 있는 기능 추가." 지금은
-                // 번들 폰트(조선궁서체) 하나뿐이라 시스템 기본과의 이지선다 —
-                // 나중에 다른 한자 폰트가 추가되면 이 Picker에 항목만 늘리면
-                // 된다(`bibleFontName` Picker와 같은 구조). 한자 주석 표시
-                // 자체가 꺼져 있으면 무의미하므로 비활성화한다.
-                Picker("한자 폰트", selection: $settings.hanjaFontName) {
-                    Text("조선궁서체 (기본)").tag(SpecialPurposeFonts.hanja)
-                    Text("시스템 기본").tag("System")
+                ColorPicker(
+                    "글자색 직접 선택",
+                    selection: Binding(
+                        get: { settings.bibleTextColor ?? Color.primary },
+                        set: { settings.bibleTextColorHex = $0.hexString(in: environment) }
+                    ),
+                    supportsOpacity: false
+                )
+
+                // [2026-09-02 추가] 사용자 요청 — "시스템 기본색상으로 돌릴
+                // 초기화 버튼 추가." 빈 문자열이 곧 "시스템 기본을 쓴다"는
+                // 뜻이므로(`bibleBackgroundColor`/`bibleTextColor` 위
+                // 선언부 주석 참고), 두 hex를 함께 빈 문자열로 되돌리기만
+                // 하면 된다. 배경/글자 둘 다 안 골랐을 때는 되돌릴 게 없어
+                // 버튼을 비활성화한다.
+                Button("시스템 기본색상으로 되돌리기") {
+                    settings.bibleBackgroundColorHex = ""
+                    settings.bibleTextColorHex = ""
                 }
-                .disabled(settings.hanjaDisplayMode == .off)
-            } header: {
-                Label("성경 조회 표시", systemImage: "textformat")
+                .disabled(settings.bibleBackgroundColorHex.isEmpty && settings.bibleTextColorHex.isEmpty)
             }
 
-            Section {
-                previewRow
-            } header: {
-                Label("미리보기", systemImage: "eye")
+            // [2026-08-14 추가] 사용자 요청 — "두 번째 번역본(국한문 전체
+            // 중복 테이블)을 지우고 → 절 단위 한자 주석 모델 ... 둘 다 지원,
+            // 설정으로 전환." 개역한글 컬럼에 한자 주석을 어떻게 보여줄지
+            // 고르는 3단 Picker. 기본값은 "끄기"(UserSettingsStore.
+            // hanjaDisplayMode 기본값 참고) — 기존에 이 기능을 몰랐던
+            // 사용자에게 갑자기 낯선 한자가 나타나지 않게.
+            Picker("한자 주석 표시", selection: $settings.hanjaDisplayMode) {
+                ForEach(UserSettingsStore.HanjaDisplayMode.allCases) { mode in
+                    Text(mode.displayName).tag(mode)
+                }
             }
+
+            // [2026-08-19 추가] 사용자 요청 — "설정 내 모양 탭의 한자 주석
+            // 표시 밑에 '한자' 폰트를 변경할 수 있는 기능 추가." 지금은
+            // 번들 폰트(조선궁서체) 하나뿐이라 시스템 기본과의 이지선다 —
+            // 나중에 다른 한자 폰트가 추가되면 이 Picker에 항목만 늘리면
+            // 된다(`bibleFontName` Picker와 같은 구조). 한자 주석 표시
+            // 자체가 꺼져 있으면 무의미하므로 비활성화한다.
+            Picker("한자 폰트", selection: $settings.hanjaFontName) {
+                Text("조선궁서체 (기본)").tag(SpecialPurposeFonts.hanja)
+                Text("시스템 기본").tag("System")
+            }
+            .disabled(settings.hanjaDisplayMode == .off)
+        } header: {
+            Label("성경 조회 표시", systemImage: "textformat")
         }
-        .formStyle(.grouped)
+    }
+
+    /// [2026-09-03 신설] 위 `displaySettingsSection`과 같은 이유로 뽑아낸
+    /// "미리보기" Section — 내용은 그대로, 이름만 붙였다.
+    @ViewBuilder
+    private var previewSection: some View {
+        Section {
+            previewRow
+        } header: {
+            Label("미리보기", systemImage: "eye")
+        }
     }
 
     private var previewRow: some View {
@@ -829,6 +1318,30 @@ private struct AppearanceSettingsTab: View {
         .buttonStyle(.plain)
     }
 
+    /// [2026-09-03 신설] 위 `compactSizeControlRow`를 macOS/iPadOS 전용으로
+    /// 옮기며 그 3열 배치 자체를 여기로 뽑아냈다 — 원래 `body`에 인라인으로
+    /// 있던 것을 이름 붙은 computed property로만 바꿨을 뿐, 내용은 그대로다.
+    @ViewBuilder
+    private var compactSizeControlRow: some View {
+        HStack(alignment: .top, spacing: 20) {
+            compactSizeControl(
+                title: "본문 크기",
+                value: $settings.bibleBodyFontSize,
+                range: 12...32
+            )
+            compactSizeControl(
+                title: "절 번호 크기",
+                value: $settings.bibleVerseNumberFontSize,
+                range: 8...24
+            )
+            compactSizeControl(
+                title: "줄간격",
+                value: $settings.bibleLineSpacing,
+                range: 0...16
+            )
+        }
+    }
+
     /// [2026-08-11 신설] 본문 크기/절 번호 크기/줄간격을 한 줄에 나란히 배치하기
     /// 위한 compact 컨트롤 — 캡션 라벨 아래 값(pt)과 Stepper.
     @ViewBuilder
@@ -840,6 +1353,24 @@ private struct AppearanceSettingsTab: View {
             Stepper(value: value, in: range, step: 1) {
                 Text("\(Int(value.wrappedValue))pt")
             }
+        }
+    }
+
+    /// [2026-09-03 신설] 아이폰 전용 — 바로 아래 "절 간격" 행과 완전히 같은
+    /// 스타일(제목 - Spacer - 값(pt) - Stepper)로, 한 줄 전체 폭을 쓴다 —
+    /// 위 `compactSizeControl`(3열 압축용)과 달리 이 컨트롤 하나가 그 줄
+    /// 전부를 쓰므로 값 텍스트가 잘릴 일이 없다.
+    @ViewBuilder
+    private func fullWidthSizeControl(title: String, value: Binding<Double>, range: ClosedRange<Double>) -> some View {
+        HStack {
+            Text(title)
+            Spacer()
+            Stepper(value: value, in: range, step: 1) {
+                Text("\(Int(value.wrappedValue))pt")
+                    .foregroundStyle(.secondary)
+                    .monospacedDigit()
+            }
+            .fixedSize()
         }
     }
 }

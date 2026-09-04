@@ -103,6 +103,14 @@ struct TranslationColumnView: View {
     /// 값. nil이 아닌 새 값이 들어올 때마다 애니메이션 없이 즉시 반영한다(탭
     /// 전환 자체에 이미 스와이프 전환 효과가 있어 추가 애니메이션이 필요 없다).
     var pendingCenterAlignment: Int? = nil
+    /// [2026-09-04 신설] 사용자 요청 — "만일 추가 번역본이 없거나, 번역본이
+    /// 보여지고 있지 않다면 자동 절 이동은 하지 않아도 된다." 아이폰에서
+    /// 번역본이 하나만 등록/표시돼 있으면 스와이프해서 넘어갈 다른 페이지
+    /// 자체가 없어, 아래 `reportCenterVerseIfNeeded`가 보고해도 맞춰 줄
+    /// 대상이 없다 — 그런데도 지금까지는 컬럼 개수와 무관하게 스크롤할
+    /// 때마다 항상 보고해 왔다. `respondsToSyncEvents == false`(아이폰)일
+    /// 때만 참조하는 값이라, macOS/iPadOS 기본값(true)에서는 영향이 없다.
+    var hasAdditionalDisplayedColumns: Bool = true
 
     /// [2026-08-08 추가] 구간 주석(형광펜/표시/관주/구간메모) — README "이어서 16"
     /// 설계 논의. 이 뷰는 기존에도 "이미 걸러진 데이터를 그대로 그리기만 한다"는
@@ -131,6 +139,19 @@ struct TranslationColumnView: View {
     /// [2026-08-11 추가] "관련 내용" — 관주/메모와 같은 원칙으로, 이 절을 언급하는
     /// 메모/연구문서가 있으면 절 번호 아래에 세 번째 아이콘으로 노출한다.
     var verseMentionsProvider: (Int) -> [VerseMention] = { _ in [] }
+    /// [2026-09-04 신설] 사용자 요청 — "책갈피를 설정하면 성경 본문 절번호
+    /// 왼쪽에 길게 갈피실 색상으로 세로라인을 그어줄 수 있는가?" 위 다른
+    /// Provider들과 같은 원칙 — `BibleReadingViewModel.isVerseBookmarked(_:)`가
+    /// 실제 구현이다(호출부 `BibleReadingView.swift` 참고).
+    var isBookmarkedProvider: (Int) -> Bool = { _ in false }
+    /// [2026-09-04 신설] 사용자 요청 — "장을 책갈피 할때는 아무 표시가
+    /// 없음. 스크롤영역 뒤 왼쪽 변에 백그라운드로 길게 이어진 세로 라인을
+    /// 그어줄 수 있나?" 위 `isBookmarkedProvider`(절 단위)와 달리 이건
+    /// "장 전체" 책갈피 하나에 대한 값이라 절마다 다시 물어볼 필요가 없어
+    /// 클로저가 아니라 값 하나로 받는다 — `BibleReadingViewModel.
+    /// isChapterBookmarked`가 실제 구현이다(호출부 `BibleReadingView.swift`
+    /// 참고).
+    var isChapterBookmarked: Bool = false
     /// 관주 팝오버에서 대상 구절을 탭했을 때 — 그 책/장으로 이동한다(정확한 절
     /// 위치로 스크롤하는 것까지는 이번 구현 범위 밖, README 참고).
     var onSelectCrossReferenceTarget: (BibleVerseRef) -> Void = { _ in }
@@ -174,6 +195,25 @@ struct TranslationColumnView: View {
     /// 맞춘다" 패턴의 그 지속 시간. `respondToSyncEvent`의 `withAnimation` duration과
     /// 반드시 같은 값을 써야 한다 — 상수 하나로 통일해 둘이 어긋나지 않게 한다.
     private static let scrollAnimationDuration: TimeInterval = 0.25
+
+    /// [2026-09-04 신설] 사용자 보고 — "아이폰 성경 본문에서 빨리 스크롤하면
+    /// 중간에 멈춤." 아이폰(`respondsToSyncEvents == false`)에서는 아래
+    /// `reportCenterVerseIfNeeded`가 매 스크롤 프레임마다(빠르게 스크롤하면
+    /// 초당 여러 번) `coordinator.reportCenterVerse`를 불러 `@Observable` 값을
+    /// 즉시 갱신해 왔다 — 그런데 아이폰에서 이 보고를 실시간으로 구독하는
+    /// 곳이 없다(`SyncEventSubscriptionModifier`가 그 구독 자체를 이미 꺼
+    /// 둠, 위 주석 참고). 유일한 소비처는 `BibleReadingView.phoneColumns`의
+    /// `.onChange(of: selectedPhoneColumnID)`로, 번역본 페이지를 스와이프해
+    /// 넘기는 "그 순간"에만 마지막 값을 한 번 읽는다 — 즉 아이폰은 스크롤
+    /// 도중 매 프레임 실시간으로 이 값이 필요하지 않다. 그런데도 매번 즉시
+    /// 보고하다 보니, 빠른 스크롤 중 이 메인 스레드 작업(Observation 갱신)이
+    /// 스크롤 렌더링과 겹쳐 프레임이 밀릴 여지가 있었다 — 아이폰 한정으로
+    /// 짧게 디바운스해(스크롤이 잠시라도 멈출 때까지 기다렸다가 마지막 값
+    /// 하나만 보고) 그 빈도를 크게 줄인다. macOS/iPadOS(`respondsToSyncEvents
+    /// == true`)는 이 값을 실시간 시각적 동기화에 그대로 쓰므로 그대로 즉시
+    /// 보고한다 — 손대지 않는다.
+    private static let phoneReportDebounceInterval: TimeInterval = 0.15
+    @State private var phoneReportWorkItem: DispatchWorkItem?
 
     var body: some View {
         VStack(alignment: .leading, spacing: 0) {
@@ -241,15 +281,26 @@ struct TranslationColumnView: View {
         ScrollView {
             LazyVStack(alignment: .leading, spacing: CGFloat(settings.bibleVerseSpacing)) {
                 ForEach(verses, id: \.verse) { verse in
+                    // [2026-09-04 변경] 사용자 보고 — "구절을 탭해 선택/해제할
+                    // 때 절 텍스트 위치가 살짝 움직임." 원인: 아래 난외주
+                    // 목록(`marginalNoteFootnoteList`)이 예전엔 `VerseRow`
+                    // 자신의 카드 안에서 선택 시에만 펼쳐졌다 — 그 절 카드
+                    // 자체의 높이가 바뀌면서, `.scrollPosition(id:anchor:
+                    // .center)`가 그 높이 변화를 보정하는 과정에서 카드 상단
+                    // (=절 텍스트)이 위로 밀렸다. 한 번만 계산해 `VerseRow`와
+                    // 아래 별도 형제 항목이 같은 값을 공유한다(불필요한 중복
+                    // 조회 방지).
+                    let marginalNotes = marginalNotesProvider(verse.verse)
                     VerseRow(
                         verse: verse,
                         isHighlighted: verse.verse == highlightedVerse,
                         isSelected: selectedVerses.contains(verse.verse),
+                        isBookmarked: isBookmarkedProvider(verse.verse),
                         highlights: highlightsProvider(verse.verse),
                         crossReferences: crossReferencesProvider(verse.verse),
                         phraseMemos: phraseMemosProvider(verse.verse),
                         phraseNotes: phraseNotesProvider(verse.verse),
-                        marginalNotes: marginalNotesProvider(verse.verse),
+                        marginalNotes: marginalNotes,
                         hanjaWords: hanjaWordsProvider(verse.verse),
                         verseMentions: verseMentionsProvider(verse.verse),
                         onSelectCrossReferenceTarget: onSelectCrossReferenceTarget,
@@ -341,6 +392,19 @@ struct TranslationColumnView: View {
                                 Label("복사", systemImage: "doc.on.doc")
                             }
                         }
+
+                    // [2026-09-04 신설] 위 `marginalNotes` 지역 변수 상단 주석
+                    // 참고 — 난외주 목록을 `VerseRow`의 카드 밖, 별도 형제
+                    // 항목으로 뺐다. `VerseRow`(`.id(verse.verse)`)는 선택
+                    // 여부와 무관하게 항상 같은 높이를 유지하므로, 이 절이
+                    // 지금 화면 중앙 정렬 대상이어도 더 이상 위로 밀리지
+                    // 않는다 — 대신 이 목록은 자신만의 `.id`를 가진 완전히
+                    // 별도 항목이라, 절 카드와 같은 배경/모서리를 공유하지
+                    // 않고 살짝 떨어진 블록으로 보인다.
+                    if selectedVerses.contains(verse.verse), !marginalNotes.isEmpty {
+                        MarginalNoteFootnoteList(notes: marginalNotes)
+                            .id("\(verse.verse)-marginalNotes")
+                    }
                 }
             }
             // [2026-08-08 추가, 핵심 누락분] `.scrollPosition(id:anchor:)`가
@@ -353,6 +417,24 @@ struct TranslationColumnView: View {
             // 여전히 동기화가 안 되는" 증상이 계속됐던 것으로 보인다.
             .scrollTargetLayout()
             .padding()
+        }
+        // [2026-09-04 신설] 사용자 요청 — "절을 책갈피 할때는 해당 절에
+        // 세로줄이 쳐지는데, 장을 책갈피 할때는 아무 표시가 없음.
+        // 스크롤영역 뒤 왼쪽 변에 백그라운드로 길게 이어진 세로 라인을
+        // 그어줄 수 있나?" 절 책갈피 세로선(`VerseRow`의 `isBookmarked`
+        // 분기)은 그 절과 함께 스크롤되지만, 이건 "장 전체"를 가리키는
+        // 책갈피(`verse == nil`)라 특정 절에 묶이지 않는다 — 그래서
+        // `LazyVStack` 안이 아니라 이 `ScrollView` 자체의 배경으로 붙여,
+        // 스크롤해도 화면 왼쪽에 항상 고정되어 보이게 한다(사용자 확인 —
+        // "화면에 고정" 방식). `.overlay`가 아니라 `.background`를 쓴 이유 —
+        // 본문 위에 겹쳐 그려지지 않고 뒤에 깔린다("백그라운드로"라는
+        // 요청 표현 그대로).
+        .background(alignment: .leading) {
+            if isChapterBookmarked {
+                RoundedRectangle(cornerRadius: 1.25)
+                    .fill(JBCHCategoryPalette.wine)
+                    .frame(width: 2.5)
+            }
         }
         .scrollPosition(id: $centerVerseID, anchor: .center)
         // [2026-08-19 추가] 검색 결과 등에서 이 화면이 처음 만들어질 때부터
@@ -370,13 +452,28 @@ struct TranslationColumnView: View {
         .onChange(of: centerVerseID) { _, newValue in
             reportCenterVerseIfNeeded(newValue)
         }
-        .onChange(of: coordinator.latestEvent) { _, event in
-            // [2026-08-08 추가] `respondsToSyncEvents == false`(아이폰)면 다른
-            // 컬럼이 스크롤해도 이 컬럼은 실시간으로 따라가지 않는다 — 위
-            // `respondsToSyncEvents` 프로퍼티 주석 참고.
-            guard respondsToSyncEvents else { return }
-            respondToSyncEvent(event)
-        }
+        // [2026-09-03 변경] 사용자 보고 — "아이폰 성경에서 빨리 스크롤할 때
+        // 중간에 멈춤." 원래는 이 `.onChange`를 항상 붙여 두고 안에서
+        // `respondsToSyncEvents == false`(아이폰)면 그냥 return만 했다 — 그런데
+        // `.onChange(of:)`가 관찰하는 `coordinator.latestEvent`는 이 컬럼이 아니라
+        // "다른" 컬럼이 리더로 스크롤할 때도(`reportCenterVerseIfNeeded` 참고,
+        // 이건 스와이프 정렬 기능에 쓰여 그대로 둬야 한다) 바뀐다 — 아이폰은
+        // 번역본마다 페이지(`BibleReadingView.phoneColumns`의 `TabView(.page)`)가
+        // 갈라져 있어 2~3개 번역본을 표시해 두면 지금 눈에 안 보이는 페이지의
+        // `TranslationColumnView`도 이 화면에 함께 떠 있는데, `.onChange(of:)`가
+        // 그 값을 계속 "관찰"하는 것 자체가(안에서 바로 return하더라도) 이
+        // 뷰의 body를 다시 계산하게 만든다 — 결국 빠르게 스크롤하는 동안
+        // 화면에 보이지 않는 다른 번역본 페이지들까지 매 절이 중앙을 지날
+        // 때마다 다시 그려지는 낭비가 쌓인다. `respondsToSyncEvents == false`면
+        // 애초에 `respondToSyncEvent`가 항상 조기 반환하던 것과 정확히 같은
+        // 결과이므로, 아래처럼 이 구독 자체를 붙이지 않아도 동작은 전혀
+        // 달라지지 않는다 — macOS/iPadOS(`respondsToSyncEvents == true`)는 이
+        // 조건 분기의 다른 쪽이라 기존과 완전히 동일하게 계속 구독한다.
+        .modifier(SyncEventSubscriptionModifier(
+            isEnabled: respondsToSyncEvents,
+            coordinator: coordinator,
+            onEvent: respondToSyncEvent
+        ))
         // [2026-08-08 추가] 아이폰 스와이프 정렬 — 부모가 새 값을 넘기면
         // 애니메이션 없이 즉시 그 절로 맞춘다(탭 전환 자체가 이미 전환
         // 애니메이션이라 추가 애니메이션은 오히려 어색하다).
@@ -411,7 +508,22 @@ struct TranslationColumnView: View {
     /// 코디네이터에 보고한다. 프로그램적으로(팔로워로서) 스크롤하는 중에는 건너뛴다.
     private func reportCenterVerseIfNeeded(_ verse: Int?) {
         guard !isProgrammaticScroll, let verse else { return }
-        coordinator.reportCenterVerse(verse, columnID: columnID)
+        // [2026-09-04 신설] 위 `phoneReportWorkItem` 상단 주석 참고 — 아이폰은
+        // 실시간 구독자가 없으므로 즉시 보고 대신 짧게 디바운스한다.
+        guard !respondsToSyncEvents else {
+            coordinator.reportCenterVerse(verse, columnID: columnID)
+            return
+        }
+        // [2026-09-04 신설] 위 `hasAdditionalDisplayedColumns` 상단 주석
+        // 참고 — 맞춰 줄 다른 컬럼(페이지)이 없으면 디바운스 예약조차
+        // 하지 않고 그냥 생략한다.
+        guard hasAdditionalDisplayedColumns else { return }
+        phoneReportWorkItem?.cancel()
+        let workItem = DispatchWorkItem { [coordinator, columnID] in
+            coordinator.reportCenterVerse(verse, columnID: columnID)
+        }
+        phoneReportWorkItem = workItem
+        DispatchQueue.main.asyncAfter(deadline: .now() + Self.phoneReportDebounceInterval, execute: workItem)
     }
 
     /// 팔로워 역할 — 다른 컬럼(리더)이 보고한 절로 이 컬럼도 맞춰 스크롤한다.
@@ -442,6 +554,10 @@ struct TranslationColumnView: View {
 
     private func resetForChapterChange() {
         guardReleaseWorkItem?.cancel()
+        // [2026-09-04 신설] 위 `phoneReportWorkItem` 상단 주석 참고 — 장이
+        // 바뀌는 순간 이전 장의 디바운스된 보고가 뒤늦게 나가 새 장의 첫
+        // 스크롤 위치를 엉뚱하게 흔들지 않도록 예약된 작업을 취소한다.
+        phoneReportWorkItem?.cancel()
         isProgrammaticScroll = false
         // [2026-08-19 추가] 관주/검색 결과로 "다른 장으로 이동 + 특정 절 강조"가
         // 동시에 일어나는 경우(`highlightedVerse`가 이미 새 값으로 설정된 채
@@ -469,12 +585,67 @@ struct TranslationColumnView: View {
     }
 }
 
+/// [2026-09-03 신설] 위 `TranslationColumnView.columnScrollView`의 `.onChange`
+/// 교체 주석 참고 — `isEnabled`가 false(아이폰)면 `.onChange(of:)` 자체를 붙이지
+/// 않아, `coordinator.latestEvent`가 바뀔 때마다 이 뷰의 body가 재계산되는 것을
+/// 원천적으로 막는다. `isEnabled`가 true(macOS/iPadOS)면 기존과 동일하게 매번
+/// 구독해 `onEvent`를 그대로 부른다 — 동작 자체는 손대지 않았다.
+private struct SyncEventSubscriptionModifier: ViewModifier {
+    let isEnabled: Bool
+    let coordinator: ScrollSyncCoordinator
+    let onEvent: (ScrollSyncCoordinator.SyncEvent?) -> Void
+
+    func body(content: Content) -> some View {
+        if isEnabled {
+            content.onChange(of: coordinator.latestEvent) { _, event in
+                onEvent(event)
+            }
+        } else {
+            content
+        }
+    }
+}
+
+/// [2026-09-04 신설] 사용자 보고 — "구절을 탭해 선택/해제할 때 절 텍스트
+/// 위치가 살짝 움직임" 수정의 일부 — 원래 `VerseRow` 안의 계산 프로퍼티
+/// (`marginalNoteFootnoteList`)였던 것을 별도 형제 뷰로 뺐다(`TranslationColumnView.
+/// columnScrollView`의 `ForEach` 참고). `VerseRow` 자신의 카드 높이가 절
+/// 선택 여부와 무관하게 항상 고정되게 하기 위함 — 본문 안 위첨자와 같은
+/// 번호(`note.markerText`, 원본 `<SUP>` 태그 글자를 그대로 쓴다 — 앱이
+/// 임의로 재부여하지 않는다, `VerseMarginalNote.markerText` 주석 참고)를
+/// 그대로 나열한다.
+private struct MarginalNoteFootnoteList: View {
+    let notes: [VerseMarginalNote]
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: 2) {
+            ForEach(Array(notes.enumerated()), id: \.offset) { _, note in
+                Text("\(note.markerText ?? "") \(note.noteText)")
+                    .font(.system(size: 14))
+                    .foregroundStyle(.secondary)
+            }
+        }
+        // 절 번호 칸(`VerseRow`의 `.frame(minWidth: 20)` + HStack spacing 8)만큼
+        // 들여써서 본문 시작 위치와 대략 맞춘다 — 별도 형제 항목이 됐어도
+        // 시각적으로는 여전히 그 절에 속한 것처럼 보이게 한다.
+        .padding(.leading, 28)
+        .padding(.vertical, 2)
+        .padding(.horizontal, 6)
+    }
+}
+
 private struct VerseRow: View {
     let verse: BibleVerse
     let isHighlighted: Bool
     /// [2026-08-08 추가] 클립보드 복사용으로 선택된 절인지 — `isHighlighted`(검색
     /// 결과 등에서 잠깐 스크롤 이동 대상이 됐다는 표시)와는 별개 개념이다.
     let isSelected: Bool
+    /// [2026-09-04 신설] 사용자 요청 — "책갈피를 설정하면 성경 본문 절번호
+    /// 왼쪽에 길게 갈피실 색상으로 세로라인을 그어줄 수 있는가?" 절 하나를
+    /// 정확히 가리키는 책갈피가 있는지(위 `TranslationColumnView.
+    /// isBookmarkedProvider` 참고) — 아래 `body`의 절 번호 칸 왼쪽에 세로선을
+    /// 그릴지 결정한다.
+    var isBookmarked: Bool = false
     /// [2026-08-08 추가] 이 절(이 컬럼의 번역본 기준)에 걸린 구간 주석 — 전부
     /// 이미 필터링된 상태로 들어온다(`TranslationColumnView.highlightsProvider`
     /// 등 상단 주석 참고).
@@ -528,6 +699,19 @@ private struct VerseRow: View {
         // 안(같은 배경색·모서리)에 포함되게 한다.
         VStack(alignment: .leading, spacing: 4) {
             HStack(alignment: .top, spacing: 8) {
+            // [2026-09-04 신설] 사용자 요청 — "책갈피를 설정하면 성경 본문
+            // 절번호 왼쪽에 길게 갈피실 색상으로 세로라인을 그어줄 수
+            // 있는가?" 너비만 정하고 높이는 지정하지 않는다 — `RoundedRectangle`은
+            // 기본적으로 남는 공간을 다 채우려 하므로, 이 `HStack`의 다른
+            // 자식(절 번호/아이콘 칸, 본문) 중 더 큰 쪽 높이에 자동으로
+            // 맞춰진다(여러 줄로 감기는 절일수록 선도 함께 길어진다). 절
+            // 선택 시 왼쪽에 그리는 강조색 세로선(아래 `.overlay` 참고)과는
+            // 서로 다른 자리(그건 카드 바깥쪽 가장자리)라 겹치지 않는다.
+            if isBookmarked {
+                RoundedRectangle(cornerRadius: 1.25)
+                    .fill(JBCHCategoryPalette.wine)
+                    .frame(width: 2.5)
+            }
             // [2026-08-09 수정] 사용자 요청 — "메모 아이콘, 관주아이콘 위치를
             // 절 번호 밑에 세로로 배치하여 차지하는 영역을 줄일 수 있도록 할
             // 것." 이전엔 두 아이콘이 절 번호·본문과 나란히(가로로) 놓여
@@ -629,22 +813,29 @@ private struct VerseRow: View {
                 .multilineTextAlignment(.leading)
                 .fixedSize(horizontal: false, vertical: true)
             }
-
-            // [2026-08-15 신설] 사용자 요청 — "성경구절 클릭했을 때 - 성경구절
-            // 밑으로 난외주 숫자순서대로 뜻을 표시할 것." 절 선택 상태
-            // (`isSelected`)를 그대로 트리거로 재사용한다 — 한자 "탭하면
-            // 보기"와 같은 원칙(위 `shouldShowInlineHanja` 주석 참고): 이미
-            // 있는 "절 탭 → 선택" 동작 하나가 이제 세 가지 의미(클립보드 복사
-            // 대상 표시 / 탭하면 보기 모드에서 한자 인라인 / 난외주 목록
-            // 펼치기)를 동시에 갖는다.
-            if isSelected, !marginalNotes.isEmpty {
-                marginalNoteFootnoteList
-            }
+            // [2026-09-04 삭제, 이동] 난외주 목록(`marginalNoteFootnoteList`)이
+            // 여기 있었다 — 절 선택(`isSelected`) 시 이 카드 안에서 펼쳐지며
+            // 카드 높이를 바꿔, 이 절이 화면 중앙 정렬 대상일 때 절 텍스트가
+            // 위로 밀리는 문제(사용자 보고)가 있었다. 카드 높이가 선택 여부와
+            // 무관하게 항상 고정되도록, `TranslationColumnView.columnScrollView`의
+            // `ForEach` 쪽에서 이 카드와 완전히 분리된 형제 항목
+            // (`MarginalNoteFootnoteList`, 그 struct 상단 주석 참고)으로 뺐다.
         }
         .padding(.vertical, 2)
         .padding(.horizontal, 6)
-        .background(backgroundColor)
-        .clipShape(RoundedRectangle(cornerRadius: 6))
+        // [2026-09-04 수정, 스크롤 성능] 사용자 요청 — Time Profiler로 확인된
+        // Core Animation 커밋 비용 절감 시도. `.background(color)` 뒤에
+        // `.clipShape(RoundedRectangle)`를 따로 거는 대신, 배경 채우기와
+        // 모양을 한 번에 지정하는 `.background(_:in:)`로 합쳤다 — Apple
+        // WWDC "Demystify SwiftUI performance" 권고: 이 조합은 별도 클립
+        // (마스킹) 레이어 없이 배경을 그 모양으로 바로 그려서, 절 하나당
+        // (그리고 스크롤 prefetch로 미리 만들어지는 절 수만큼) 레이어를
+        // 하나씩 줄인다. ⚠️ 차이점: 기존 `.clipShape`는 배경뿐 아니라 이
+        // 카드의 실제 내용(절 번호/아이콘/본문 텍스트)까지 둥근 모서리
+        // 바깥으로 나가지 않게 잘라냈지만, 이 카드의 내용은 이미 위
+        // `.padding`으로 안쪽에 들어와 있어 둥근 모서리 밖으로 나갈 일이
+        // 없다 — 시각적으로 동일해야 한다.
+        .background(backgroundColor, in: RoundedRectangle(cornerRadius: 6))
         .overlay(alignment: .leading) {
             // 배경 틴트만으로는 라이트 모드에서 눈에 잘 안 띌 수 있어, 선택된
             // 절에는 왼쪽에 강조색 세로선을 하나 더 그어 명확히 한다.
@@ -655,34 +846,6 @@ private struct VerseRow: View {
                     .padding(.vertical, 2)
             }
         }
-    }
-
-    /// [2026-08-15 신설] 절 선택 시 본문 아래 펼쳐지는 난외주 뜻풀이 목록 —
-    /// 본문 안 위첨자와 같은 번호를 써서, 위첨자 숫자와 이 목록의 번호가
-    /// 항상 대응하게 한다. `anchorOffset`이 없어(위치를 못 찾은 소수 사례)
-    /// 위첨자가 안 붙은 각주도 여기 목록에는 그대로 나온다 — 번호와
-    /// 뜻풀이는 여전히 유효한 정보이기 때문이다.
-    /// [2026-08-15 재수정] 사용자 요청 — "난외주 설명을 2pt정도 더 키울 수
-    /// 있도록." 기존 `.caption`(약 12pt)에서 14pt로 키웠다.
-    /// [2026-08-15 재수정, 이어서 67] 앱이 절마다 새로 매기던 번호
-    /// (`circledNumeral(index+1)`)를 버리고 원본 `<SUP>` 태그 글자
-    /// (`note.markerText`)를 그대로 쓴다 — 사용자 질문("원본 번호를
-    /// 유지했는가?")에 답하며 확인한 사실(원본은 절이 아니라 장 전체에
-    /// 걸쳐 번호가 이어지고, 반복 단어는 번호를 재사용하기도 함)에 따라
-    /// 앱이 임의로 재부여하지 않기로 했다(`VerseMarginalNote.markerText`
-    /// 주석 참고). `markerText`가 nil인 경우(있을 수 없지만 방어적으로)는
-    /// 빈 문자열로 대체한다.
-    private var marginalNoteFootnoteList: some View {
-        VStack(alignment: .leading, spacing: 2) {
-            ForEach(Array(marginalNotes.enumerated()), id: \.offset) { _, note in
-                Text("\(note.markerText ?? "") \(note.noteText)")
-                    .font(.system(size: 14))
-                    .foregroundStyle(.secondary)
-            }
-        }
-        // 절 번호 칸(`.frame(minWidth: 20)` + HStack spacing 8)만큼 들여써서
-        // 본문 시작 위치와 대략 맞춘다.
-        .padding(.leading, 28)
     }
 
     /// [2026-08-15 신설] 사용자 요청 — "한자 주석표시: 탭하면 보기 - 구절을
@@ -735,12 +898,20 @@ private struct VerseRow: View {
         // (`shouldShowMarginalNoteMarkers`). 한자 파라미터는 `shouldShowInlineHanja`
         // 가 false일 때 빈 배열을 넘겨, 위첨자만 필요한 경우에 한자 괄호까지
         // 끼어들지 않게 한다.
-        if shouldShowInlineHanja || shouldShowMarginalNoteMarkers {
-            // [2026-09-02 변경] 사용자 보고 — "왼쪽 기본 성경 칸 스크롤 버벅임 —
-            // 이 경로도 캐싱할 것." 직접 호출하던 것을
-            // `inlineAnnotatedContentProvider`(상위 `BibleReadingViewModel.
-            // cachedInlineAnnotatedContent`로 연결됨)로 바꿔, 같은 절을 다시
-            // 그릴 때 매번 새로 계산하지 않고 캐시된 결과를 재사용한다.
+        // [2026-09-04 통합, 스크롤 성능 개선] 사용자 보고 — "스크롤이 뻑뻑한
+        // 느낌이 있음." 원인 — 바로 위 분기(한자/난외주 있는 절)만
+        // `inlineAnnotatedContentProvider`(캐시됨)를 타고, 형광펜/표시/구절
+        // 메모만 있는 절(더 흔한 케이스)은 `VerseAnnotationRenderer.
+        // attributedContent`를 캐시 없이 직접 호출했다 — 스크롤 중
+        // `centerVerseID`가 바뀔 때마다 `TranslationColumnView.body`가
+        // 재평가되며 화면에 보이는 `VerseRow`가 전부 다시 만들어지는데, 이
+        // 형광펜 절들은 그때마다 구간 계산을 처음부터 다시 했다.
+        // `attributedContentWithInlineAnnotations`는 내부적으로
+        // `attributedContent`를 그대로 감싸 쓰고 한자/난외주 삽입 대상이
+        // 없으면 삽입 루프가 그냥 통과되므로, 형광펜/메모만 있는 절도 같은
+        // 결과를 낸다 — 두 조건을 하나로 합쳐 항상 캐시를 거치게 했다(기존
+        // 두 분기의 `Text` 조립 로직이 완전히 같아 중복 코드도 사라진다).
+        if shouldShowInlineHanja || shouldShowMarginalNoteMarkers || !highlights.isEmpty || !phraseNotes.isEmpty {
             let attributed = inlineAnnotatedContentProvider(
                 verse, highlights, phraseNotes, shouldShowInlineHanja ? hanjaWords : [], marginalNotes,
                 platformBodyFont, platformTextColor, platformHanjaFont
@@ -752,15 +923,6 @@ private struct VerseRow: View {
                 // `Text` 타입이라 각자의 폰트/색 스타일은 그대로 유지된다
                 // (`LocalizedStringKey.StringInterpolation`이 `Text` 보간을
                 // 지원 — Image를 Text 안에 넣을 때와 같은 메커니즘).
-                Text("\(paragraphMarkText)\(Text(attributed))")
-            } else {
-                Text(attributed)
-            }
-        } else if let attributed = VerseAnnotationRenderer.attributedContent(
-            text: verse.content, highlights: highlights, phraseNotes: phraseNotes,
-            font: platformBodyFont, textColor: platformTextColor
-        ) {
-            if verse.paragraph != nil {
                 Text("\(paragraphMarkText)\(Text(attributed))")
             } else {
                 Text(attributed)

@@ -282,6 +282,19 @@ private struct WordNoteListContent: View {
             .listStyle(.plain)
         }
         .navigationTitle("말씀 노트")
+        // [2026-09-03 추가] 사용자 보고 — "아이폰 하단 메뉴 중 말씀 노트/문서
+        // OCR/통합 검색/더보기는 상단 우측 아이콘과 그 밑 타이틀이 따로 있어
+        // 아이콘 좌측 영역이 낭비됨." 이 화면은 탭 최상위라 뒤로가기 버튼은
+        // 없지만, 기본(automatic) 표시 모드에서는 트레일링 툴바 아이콘만 있는
+        // 좁은 줄 아래에 큰 제목을 별도 줄로 한 번 더 그려 그 아이콘 왼쪽 줄
+        // 전체가 비어 낭비된다 — 이미 이 코드베이스 다른 화면(`SettingsView.swift`
+        // 의 `SettingsHomeView`/`BibleReadingView`/`ChapterRelatedContentPanel`
+        // 등)에서 같은 이유로 쓴 `.navigationBarTitleDisplayMode(.inline)`을
+        // 그대로 재사용해 제목과 아이콘을 한 줄로 합친다(macOS엔 이 모디파이어
+        // 자체가 없어 `#if os(iOS)`로 감싼다).
+        #if os(iOS)
+        .navigationBarTitleDisplayMode(.inline)
+        #endif
         .onAppear {
             reload()
             // [2026-08-18 추가] 사이드바 "고정됨"/"최근" 섹션에서 이 항목을 골라
