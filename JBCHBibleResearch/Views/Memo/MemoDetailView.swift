@@ -389,6 +389,9 @@ struct MemoDetailView: View {
             BibleReferenceIndexingService.removeMentions(
                 sourceType: .memo, sourceId: memo.id.uuidString, context: modelContext
             )
+            // [2026-09-05 추가] 위 VerseMention 정리와 같은 자리 — 빈 메모라
+            // 지워질 때 FTS 보조 인덱스에 남아 있을 수 있는 항목도 함께 지운다.
+            UserContentSearchIndexLocation.delete(category: .memo, sourceId: memo.id.uuidString)
         }
         // [2026-08-12 추가] 사용자 논의 — "화면을 닫으면 인덱스를 생성." 지워지지
         // 않은 메모만, 그리고 지난 저장 이후로 본문이 실제로 바뀌어 인덱스가
@@ -396,6 +399,14 @@ struct MemoDetailView: View {
         // 불필요한 재계산을 하지 않는다.
         if !isEmpty && memo.pendingIndexRefresh {
             BibleReferenceIndexingService.reindexMemo(memo, context: modelContext)
+            // [2026-09-05 추가] 사용자 요청 — "5개 카테고리 전체스캔 최적화
+            // → FTS5 보조 인덱스." VerseMention 재인덱싱과 같은 "본문이 실제로
+            // 바뀌었을 때만" 신호(`pendingIndexRefresh`)를 그대로 재사용해,
+            // 매 디바운스 자동저장마다가 아니라 화면을 벗어날 때 변경분만
+            // 인덱스에 반영한다 — 새 상태 플래그를 따로 만들지 않았다.
+            UserContentSearchIndexLocation.upsert(
+                category: .memo, sourceId: memo.id.uuidString, content: memo.contentText
+            )
             memo.pendingIndexRefresh = false
             try? modelContext.save()
         }

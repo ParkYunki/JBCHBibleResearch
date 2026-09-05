@@ -92,6 +92,25 @@ struct OutlineBookBulkEditView: View {
         }
         .onDisappear {
             autosave?.flush()
+            // [2026-09-05 추가] 사용자 요청 — "개요/메모/개인 묵상/말씀
+            // 요약/연구문서 5개 카테고리 전체스캔 최적화 → FTS5 보조
+            // 인덱스(unicode61)." `MemoDetailView.handleDisappear()`/
+            // `WordSummaryEditorView.handleDisappear()`와 같은 지점(화면을
+            // 벗어날 때) — 개요는 그 두 화면과 달리 `pendingIndexRefresh`
+            // 같은 "본문이 실제로 바뀌었는지" 플래그가 없으므로(VerseMention
+            // 재인덱싱 대상이 아니라 애초에 그런 플래그가 필요 없었다) 매번
+            // 무조건 upsert한다 — delete+insert라 여러 번 불러도 결과는
+            // 같고, 화면 하나 닫을 때 1회뿐이라 비용도 무시할 만하다.
+            if let bookOutline {
+                UserContentSearchIndexLocation.upsert(
+                    category: .outline, sourceId: bookOutline.id.uuidString, content: bookOutline.contentText
+                )
+            }
+            if let chapterSummary {
+                UserContentSearchIndexLocation.upsert(
+                    category: .chapterSummary, sourceId: chapterSummary.id.uuidString, content: chapterSummary.contentText
+                )
+            }
         }
     }
 

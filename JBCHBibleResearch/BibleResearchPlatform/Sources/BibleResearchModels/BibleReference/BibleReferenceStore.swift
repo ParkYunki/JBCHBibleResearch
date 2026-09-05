@@ -281,6 +281,42 @@ public final class BibleReferenceStore {
         return results
     }
 
+    /// [2026-09-05 추가] `TranslationSearchIndex`가 사용자 추가 번역본에 대한
+    /// 보조 FTS5 인덱스를 빌드할 때 필요한, 이 파일에 들어있는 절 전체 조회.
+    /// `verses(bookId:chapter:versionCode:)`와 동일한 규칙(파일에 version_code
+    /// 컬럼이 있으면 필수)이되 WHERE 절이 없을 뿐이다 — 화면에 표시할 목적이
+    /// 아니라 인덱스 빌드 한 번(번역본 추가 후 첫 검색 시점)에만 쓰이므로
+    /// 정렬 기준은 중요하지 않지만, 다른 조회 메서드와의 일관성을 위해 book_id/
+    /// chapter/verse 오름차순으로 반환한다.
+    public func allVerses(versionCode: String? = nil) throws -> [BibleVerse] {
+        if hasVersionCodeColumn && versionCode == nil {
+            throw BibleReferenceError.versionCodeRequired
+        }
+        var sql = "SELECT \(selectColumns) FROM \(tableName)"
+        if hasVersionCodeColumn { sql += " WHERE version_code = ?" }
+        sql += " ORDER BY \(bookColumn) ASC, chapter ASC, verse ASC"
+
+        var statement: OpaquePointer?
+        defer { sqlite3_finalize(statement) }
+        guard sqlite3_prepare_v2(handle, sql, -1, &statement, nil) == SQLITE_OK else {
+            throw BibleReferenceError.statementPrepareFailed(code: sqlite3_errcode(handle))
+        }
+        if hasVersionCodeColumn, let versionCode {
+            sqlite3_bind_text(statement, 1, versionCode, -1, SQLITE_TRANSIENT)
+        }
+
+        var results: [BibleVerse] = []
+        while true {
+            let step = sqlite3_step(statement)
+            if step == SQLITE_DONE { break }
+            guard step == SQLITE_ROW else {
+                throw BibleReferenceError.stepFailed(code: step)
+            }
+            results.append(Self.makeVerse(from: statement, hasVersionCode: hasVersionCodeColumn, hasParagraph: hasParagraphColumn))
+        }
+        return results
+    }
+
     /// 이 파일에 실제로 들어있는 `version_code` 목록. `version_code` 컬럼이 없는
     /// 파일(번역본이 하나뿐인 파일 — 번들 기본 테이블, 그리고 사용자가 확인해 준
     /// 실제 스키마상 사용자 추가 번역본도 여기 해당한다)에서는 빈 배열을 반환한다 —

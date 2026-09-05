@@ -43,7 +43,17 @@ import Observation
 import BibleResearchModels
 
 struct VerseSearchResult: Identifiable {
-    var id: String { "\(bookId)-\(chapter)-\(verse)" }
+    // [2026-09-05 변경] 사용자 요청("성경구절 탭의 하위 탭으로 활성
+    // 번역본별 결과 노출")에 따라 `searchVerses`의 dedup 키가 절 좌표만
+    // 쓰던 것에서 `registry.code`를 더하는 것으로 바뀌면서(이 파일
+    // 아래쪽 dedup 키 변경 주석 참고), 같은 절이 번역본마다 별도
+    // `VerseSearchResult`로 함께 존재할 수 있게 됐다. 이 `id`가 여전히
+    // 절 좌표만 쓰면 서로 다른 번역본의 같은 절 결과끼리 `id`가 충돌해
+    // `ForEach(group.verses)`(SearchView.groupedVerseRow 호출부)가 같은
+    // id를 가진 두 행을 받게 되어 SwiftUI가 행을 뒤섞거나 하나를 못
+    // 그리는 등 정의되지 않은 동작을 일으킨다 — dedup 키 변경의 직접적인
+    // 필연적 결과이므로 함께 고친다(새로운 범위 확장이 아니다).
+    var id: String { "\(bookId)-\(chapter)-\(verse)-\(translationCode)" }
     let bookId: Int
     let chapter: Int
     let verse: Int
@@ -295,9 +305,11 @@ final class SearchViewModel {
     // 여기 초기화식만 타입 이름을 직접 써야 한다.
     private var visibleVerseResultCount = SearchViewModel.verseResultPageSize
     // [2026-08-26 변경] 사용자 요청 — "검색결과를 100개 단위로 보여줄것."
-    // 30 → 100. 페이지 크기만 바뀔 뿐 그 위 주석의 "더보기는 DB를 다시
-    // 조회하지 않는다"는 동작은 그대로다.
-    private static let verseResultPageSize = 100
+    // 30 → 100.
+    // [2026-09-05 변경] 사용자 요청 — "성경 검색결과를 50개 단위로
+    // 불러올것." 100 → 50. 페이지 크기만 바뀔 뿐 그 위 주석의 "더보기는
+    // DB를 다시 조회하지 않는다"는 동작은 그대로다.
+    private static let verseResultPageSize = 50
 
     var verseResults: [VerseSearchResult] {
         Array(allVerseResults.prefix(visibleVerseResultCount))
@@ -338,10 +350,18 @@ final class SearchViewModel {
         var id: String { "\(bookId)-\(chapter)" }
     }
 
-    var groupedVerseResults: [VerseSearchResultGroup] {
+    /// [2026-09-05 추출] 사용자 요청 — "검색 결과에 [성경 구절] 탭의 하위
+    /// 탭으로서 현재 활성화되어있는 번역본별로 노출." 아래 `groupedVerseResults`
+    /// (전체 결과 기준)와 새로 추가하는 `groupedVerseResults(translationCode:)`
+    /// (번역본별 하위 탭 기준)이 "절 목록을 장 단위로 묶고 매치 강도순으로
+    /// 정렬한다"는 완전히 같은 로직을 입력만 다르게 받아 수행하므로, 그 로직을
+    /// 여기 공용 헬퍼로 뽑아냈다 — 기존 `groupedVerseResults`의 동작(정렬
+    /// 기준, 그룹 안 정렬 기준)은 한 글자도 바뀌지 않았고, 입력을 매개변수로
+    /// 받도록만 옮겼다.
+    private static func groupByChapter(_ results: [VerseSearchResult]) -> [VerseSearchResultGroup] {
         var versesByChapter: [String: [VerseSearchResult]] = [:]
         var orderedKeys: [(bookId: Int, chapter: Int)] = []
-        for result in verseResults {
+        for result in results {
             let key = "\(result.bookId)-\(result.chapter)"
             if versesByChapter[key] == nil {
                 orderedKeys.append((bookId: result.bookId, chapter: result.chapter))
@@ -364,6 +384,116 @@ final class SearchViewModel {
             if lhsMaxMatchCount != rhsMaxMatchCount { return lhsMaxMatchCount > rhsMaxMatchCount }
             return (lhs.bookId, lhs.chapter) < (rhs.bookId, rhs.chapter)
         }
+    }
+
+    var groupedVerseResults: [VerseSearchResultGroup] {
+        Self.groupByChapter(verseResults)
+    }
+
+    /// [2026-09-05 신설] 사용자 요청 — "검색 결과에 [성경 구절] 탭의 하위
+    /// 탭으로서 현재 사용하고 있는(활성화되어있는) 번역본별로 노출 시키도록."
+    /// `verseResults`(페이지네이션 적용된, `allVerseResults`가 아닌 현재 화면
+    /// 노출분)를 먼저 `translationCode`로 걸러낸 뒤 위 공용 헬퍼로 장 단위
+    /// 그룹핑한다 — "더보기"가 여전히 `allVerseResults`/`visibleVerseResultCount`
+    /// 하나만 관리하는 기존 페이지네이션 구조를 그대로 쓰므로(번역본별 별도
+    /// 페이지네이션이 아니다), 어떤 번역본은 아직 화면에 로드된 결과가 적어
+    /// "더보기"를 여러 번 눌러야 이 번역본 탭에 결과가 더 나타날 수 있다.
+    func groupedVerseResults(translationCode: String) -> [VerseSearchResultGroup] {
+        Self.groupByChapter(verseResults.filter { $0.translationCode == translationCode })
+    }
+
+    /// [2026-09-05 신설] "현재 활성화되어있는 번역본"의 근거 — `SearchViewModel`
+    /// 은 `BibleReadingViewModel.displayedTranslationIDs`(해당 뷰모델 인스턴스
+    /// 안에서만 사는 런타임 상태)에 접근할 방법이 없어(별개의 화면/뷰모델,
+    /// 공유되는 지속 상태가 아님), 그 값 자체를 그대로 가져올 수 없다. 대신
+    /// `BibleReadingViewModel.loadAvailableTranslations()`가 "표시할 번역본을
+    /// 처음 정할 때" 쓰는 것과 동일한, 실제로 영속화된 소스(`UserSettingsStore.
+    /// shared.defaultDisplayedTranslationCodes` 우선, 없으면 등록순 +
+    /// `defaultTranslationCode` 맨 앞) 규칙을 여기서도 그대로 재현한다 — 그
+    /// 뷰모델의 "이미 선택된 목록이 있으면 그대로 유지"(사용자가 팝오버에서
+    /// 직접 골라 그 세션 동안 바꾼 값) 분기는 이 화면엔 대응 개념이 없으므로
+    /// 재현하지 않는다. 따라서 이 값은 "설정상 기본 표시 번역본"의 최선의
+    /// 근사치이며, 사용자가 성경 조회 화면에서 그 세션 중 임시로 다른 조합을
+    /// 선택해둔 상태와는 다를 수 있음을 알린다(README/사용자 안내 필요).
+    private(set) var activeTranslations: [TranslationRegistry] = []
+
+    private func resolveActiveTranslations(from registries: [TranslationRegistry]) -> [TranslationRegistry] {
+        let maxCount = 3
+        let ordered = registries.sorted { $0.addedAt < $1.addedAt }
+        let preferredCodes = UserSettingsStore.shared.defaultDisplayedTranslationCodes
+        if !preferredCodes.isEmpty {
+            let byCode = Dictionary(uniqueKeysWithValues: ordered.map { ($0.code, $0) })
+            let chosen = preferredCodes.compactMap { byCode[$0] }
+            if !chosen.isEmpty {
+                return Array(chosen.prefix(maxCount))
+            }
+        }
+        var fallback = ordered
+        if let preferredCode = UserSettingsStore.shared.defaultTranslationCode,
+           let index = fallback.firstIndex(where: { $0.code == preferredCode }) {
+            let preferred = fallback.remove(at: index)
+            fallback.insert(preferred, at: 0)
+        }
+        return Array(fallback.prefix(maxCount))
+    }
+
+    /// [2026-09-05 신설] 사용자 요청 — "개요 검색결과를 성경단위로 그룹핑
+    /// 할것. (성경검색 결과가 장단위로 그룹핑 된것처럼)" 바로 위
+    /// `VerseSearchResultGroup`/`groupedVerseResults`와 같은 목적(순수
+    /// 표시용 재배열, `outlineResults` 자체의 순서/필터링은 건드리지 않음)
+    /// 이지만 그룹 키는 "장"이 아니라 "책"이다 — `OutlineSearchResult`가
+    /// 책 단위(`BookOutline`, `chapter == nil`)와 장 단위(`ChapterSummary`)
+    /// 결과를 함께 담고 있어(위 `OutlineSearchKind` 참고), 장 단위로
+    /// 나누면 같은 책의 "책 전체 개요"와 "N장 개요"가 서로 다른 그룹으로
+    /// 흩어져 버리기 때문이다.
+    ///
+    /// [그룹 정렬 규칙, 2026-09-05 수정] 사용자 요청 — "성경 정경 순서대로
+    /// 정렬할 것." 처음엔 대응하는 매칭-강도 필드가 없어(`VerseSearchResult.
+    /// matchCount`처럼 "중복 제거된 매칭 단어 수"를 담는 필드가
+    /// `OutlineSearchResult`엔 없음 — `bodyOccurrenceSum`은 "본문 총 등장
+    /// 횟수"라 의미가 다름) 관련도 순서(`outlineResults`가 이미 정렬해 온
+    /// 순서)를 그룹 등장 순서로 썼는데, 이번 요청이 그 결정을 명시적으로
+    /// 정경 순서로 뒤집었다 — `Book.orderIndex`(원본 `Books.order_index`
+    /// 컬럼, `BibleReferenceModels.Book` 선언부 주석 참고 — `bookId`는
+    /// 그냥 기본키일 뿐 정경 순서를 보장하는 필드가 아니다)를 오름차순으로
+    /// 쓴다. `searchVerses`의 정경순 정렬(`orderIndex` 사용, 이 파일
+    /// 위쪽)과 같은 필드·같은 근거다. 그룹 안에서는 여전히 `chapter`가
+    /// `nil`(책 전체 개요)인 항목을 먼저, 그다음 장 오름차순으로 정렬한다 —
+    /// `groupedVerseResults`가 그룹 안에서 절 오름차순으로 정렬하는 것과
+    /// 같은 이유(그룹 헤더 아래 세부 항목이 순서대로 읽히도록)이며, 책
+    /// 전체 개요가 장별 개요보다 상위 개념이므로 먼저 보여주는 것이
+    /// 자연스럽다.
+    struct OutlineSearchResultGroup: Identifiable {
+        let bookId: Int
+        let bookNameKo: String
+        let items: [OutlineSearchResult]
+        var id: Int { bookId }
+    }
+
+    var groupedOutlineResults: [OutlineSearchResultGroup] {
+        var itemsByBook: [Int: [OutlineSearchResult]] = [:]
+        var orderedBookIds: [Int] = []
+        for result in outlineResults {
+            if itemsByBook[result.bookId] == nil {
+                orderedBookIds.append(result.bookId)
+            }
+            itemsByBook[result.bookId, default: []].append(result)
+        }
+        return orderedBookIds
+            .map { bookId -> OutlineSearchResultGroup in
+                let items = (itemsByBook[bookId] ?? [])
+                    .sorted { ($0.chapter ?? -1) < ($1.chapter ?? -1) }
+                return OutlineSearchResultGroup(
+                    bookId: bookId,
+                    bookNameKo: booksProvider.book(id: bookId)?.nameKo ?? "\(bookId)권",
+                    items: items
+                )
+            }
+            .sorted { lhs, rhs in
+                let lhsOrder = booksProvider.book(id: lhs.bookId)?.orderIndex ?? lhs.bookId
+                let rhsOrder = booksProvider.book(id: rhs.bookId)?.orderIndex ?? rhs.bookId
+                return lhsOrder < rhsOrder
+            }
     }
 
     /// "더보기" 버튼을 보여줄지 — 아직 화면에 안 보여준 결과가 남아 있는지.
@@ -563,6 +693,28 @@ final class SearchViewModel {
         isSearching = true
         defer { isSearching = false }
 
+        // [2026-09-05 신설] 사용자 요청 — "검색어를 입력하고 검색하면
+        // 결과없음 이라는 페이지가 먼저 뜨다가 2-3초 후에 결과가 나옴...
+        // 스피너 또는 프로그레스 창이 뜰 수 있도록 할 것." `SearchView`엔
+        // 이미 `viewModel.isSearching`을 보고 "검색 중..." 스피너를 그리는
+        // 코드가 있었다(위 `isSearching` 프로퍼티 위 로직) — 문제는 이
+        // 함수가 실행되는 방식이었다. Swift 구조적 동시성에서 `Task { ... }`
+        // 클로저는 첫 `await` 지점까지는 동기적으로(런루프에 제어권을
+        // 넘기지 않고) 실행된다(Swift 공식 문서, "Tasks and Task Groups" —
+        // a task starts running immediately when created, up to its first
+        // suspension point). 아래 `else` 분기(AI 토글 off, 기본 키워드
+        // 검색)는 `performKeywordSearch`가 완전히 동기 함수라 `await`가
+        // 전혀 없었다 — 즉 `isSearching = true`를 SwiftUI가 화면에 반영할
+        // 기회(런루프 한 틱)를 얻기도 전에 2-3초짜리 동기 연산이 같은
+        // 틱에서 끝나 버리고 `defer`로 곧장 `false`가 되어, 스피너가 뜰 새
+        // 없이 "결과 없음"(검색 시작 직후의 빈 상태)이 먼저 그려졌다가
+        // 결과가 한꺼번에 나타난 것처럼 보였다. `Task.yield()`로 현재
+        // 실행을 한 번 실제로 중단시켜 런루프에 제어권을 돌려주면, SwiftUI가
+        // 그 사이에 `isSearching = true` 상태로 최소 한 프레임을 그릴 수
+        // 있다. AI 검색(`if` 분기)은 이미 `await performAIQuerySearch(...)`가
+        // 있어 이 문제가 없었다.
+        await Task.yield()
+
         // [2026-08-20 재수정, Phase 5] 사용자 요청 — "단순 키워드 검색시(AI
         // 토글 off)엔 순수 키워드 검색결과만, 관계정보 카드는 AI 토글을 켰을
         // 때만." 이전엔 모드와 무관하게 항상 Layer 1/2를 먼저 계산했는데(3계층
@@ -575,7 +727,7 @@ final class SearchViewModel {
         } else {
             intentCard = nil
             lastAIQueryUsed = nil
-            performKeywordSearch(query: query)
+            await performKeywordSearch(query: query)
         }
     }
 
@@ -589,7 +741,7 @@ final class SearchViewModel {
     /// 넘겨 재사용했었지만, AI 검색이 임베딩 기반 의미검색(`performAIQuerySearch`
     /// 참고)으로 완전히 바뀌면서 더 이상 이 함수를 거치지 않는다 — 순수 키워드
     /// 검색 전용으로 되돌렸다.
-    private func performKeywordSearch(query: String) {
+    private func performKeywordSearch(query: String) async {
         errorDescription = nil
         let words = query.split(whereSeparator: { $0.isWhitespace }).map(String.init).filter { !$0.isEmpty }
         // [2026-08-26 추가] "더보기 확인창" 조건 판단(`effectiveMatchedWordCount()`)
@@ -598,11 +750,51 @@ final class SearchViewModel {
         lastSearchWords = words
         let queryMatches = BibleReferenceExtractor.extract(from: query)
 
+        // [2026-09-05 변경] 사용자 요청 — "검색을 하면 성경검색 결과가
+        // 제일먼저 나오니.. 먼저 성경검색결과가 나오는대로 화면에 출력하고
+        // 병렬로 백그라운드에서 나머지 탭을 [개요][메모/말씀노트][연구문서]
+        // 구성할 것." 예전엔 이 함수가 완전한 동기 함수라 6개 분류를 전부
+        // 계산할 때까지 SwiftUI가 다시 그릴 기회 자체가 없었다 — 중간에
+        // `await`가 없으면 러프 한 틱 안에서 전부 끝나 버리기 때문이다(위
+        // `performSearch`의 `Task.yield()` 도입 주석과 같은 원리, Swift
+        // 공식 문서: 태스크는 첫 중단 지점까지 동기적으로 실행된다). 이제
+        // 각 결과를 채운 직후 `await Task.yield()`로 실행을 한 번 실제로
+        // 양보해 SwiftUI가 그 시점까지의 결과로 화면을 다시 그릴 기회를
+        // 준다 — 성경구절이 가장 먼저 채워지고, 그다음 개요, 그다음
+        // 메모/말씀노트(검색 결과 탭이 이 셋을 하나로 묶어 보여주므로
+        // 함께 채운다 — `SearchView.SearchResultTab.notes`, title "메모/
+        // 말씀노트" 참고), 마지막으로 연구문서 순으로 화면에 이어서
+        // 나타난다.
+        //
+        // [스레딩 근거 — 진짜 "백그라운드 스레드 병렬"을 쓰지 않은 이유]
+        // 이 클래스는 `@MainActor`이고, `modelContext`(SwiftData)와
+        // `storeCache`(`BibleReferenceStore` — "스레드 안전을 자체
+        // 보장하지 않는다"는 그 타입 상단 주석)도 전부 메인 액터에 묶여
+        // 있다. 이 상태 그대로 각 분류를 실제 백그라운드 스레드에서
+        // 동시에 돌리려면 분류마다 별도 `ModelContext`(SwiftData 표준
+        // 패턴 — `ModelContext(modelContext.container)`)와 별도
+        // `BibleReferenceStore` 인스턴스를 새로 만들어야 하고, 이 패키지가
+        // 이미 Swift 6(Package.swift `swift-tools-version: 6.0`)라 각
+        // 결과 타입의 `Sendable` 적합성까지 새로 맞아야 한다 — 이 세션은
+        // Xcode 빌드를 실행할 수 없어 그 정도 범위의 동시성 변경을
+        // "검증된 코드"로 낼 근거가 없다고 판단했다. 대신 메인 액터 위에서
+        // `Task.yield()`로 단계마다 실행을 양보하는 방식을 택했다 —
+        // 사용자가 실제로 체감하는 결과("성경 먼저, 나머지는 이어서 채워짐")는
+        // 동일하게 달성하면서, 컴파일 확인 없이 SwiftData/SQLite 동시성
+        // 코드를 새로 추가하는 위험을 지지 않는다. 진짜 멀티스레드 병렬화가
+        // 필요하면 Xcode에서 직접 빌드 검증이 가능한 별도 작업으로 진행할
+        // 것을 권장한다(아래 최종 요약에서도 안내).
         setVerseResults(searchVerses(query: query, words: words, queryMatches: queryMatches))
+        await Task.yield()
+
         outlineResults = searchOutlines(words: words, queryMatches: queryMatches)
+        await Task.yield()
+
         phraseNoteResults = searchPhraseNotes(words: words, queryMatches: queryMatches)
         memoResults = searchMemos(words: words, queryMatches: queryMatches)
         summaryResults = searchSummaries(words: words, queryMatches: queryMatches)
+        await Task.yield()
+
         documentResults = searchDocuments(words: words, queryMatches: queryMatches)
     }
 
@@ -619,7 +811,26 @@ final class SearchViewModel {
         var isTextMatch: Bool { distinctTermMatchCount > 0 }
     }
 
-    private func computeWordMatchScore(words: [String], verseTerms: [String], contentText: String) -> WordMatchScore {
+    /// [2026-09-05 `maxSegmentLength` 파라미터 추가] 사용자 요청(개요 검색
+    /// 결과 전용) — "일치하는 텍스트의 해당 라인의 노출되는 글자를 35자
+    /// 이내로 늘릴것." 기존엔 매칭된 단어마다 "단어 자체 + 뒤 9자"만 잘라
+    /// 발췌를 만들었는데(바로 아래 `nil` 분기 — 이 상수 9는 그대로 남아
+    /// 있다), 그 발췌가 이 함수를 공유하는 5개 분류(개요/메모/개인 묵상/
+    /// 말씀 요약/연구문서) 중 개요 화면에서 한 줄로 새로 그리기엔
+    /// (`SearchView.groupedOutlineRow`, 9.5일 재설계) 너무 짧았다. 이
+    /// 함수는 `DocumentsHomeView.searchScore`와 같은 발췌 규칙을 공유하는
+    /// 5곳 모두가 호출하므로, 상수 9를 그냥 35로 올리면 요청하지 않은 나머지
+    /// 4개 분류(메모/개인 묵상/말씀 요약/연구문서)의 발췌 길이까지 함께
+    /// 바뀐다 — 그건 이번 요청 범위 밖이다(근거 없는 리팩토링 금지). 그래서
+    /// 기본값 `nil`일 때는 기존 "단어 끝(`upperBound`) + 9자" 공식을 한 글자도
+    /// 안 바꾸고 그대로 두고, 값이 주어질 때만 "매칭 시작(`lowerBound`)부터
+    /// 최대 N자"로 총 노출 길이 자체를 상한선으로 못 박는 새 계산을 쓴다 —
+    /// `searchOutlines`(개요 전용 호출부, 아래)만 `maxSegmentLength: 35`를
+    /// 넘겨 이 새 계산을 쓰고, 나머지 4곳은 파라미터를 안 넘겨 기존 동작이
+    /// 100% 그대로다.
+    private func computeWordMatchScore(
+        words: [String], verseTerms: [String], contentText: String, maxSegmentLength: Int? = nil
+    ) -> WordMatchScore {
         var seenTerms = Set<String>()
         let allTerms = (words + verseTerms).filter { seenTerms.insert($0.lowercased()).inserted }
         guard !allTerms.isEmpty else {
@@ -633,7 +844,12 @@ final class SearchViewModel {
             while let found = contentText.range(of: term, options: [.caseInsensitive], range: searchRange) {
                 occurrenceCounts[term, default: 0] += 1
                 if firstExcerpts[term] == nil {
-                    let tailEnd = contentText.index(found.upperBound, offsetBy: 9, limitedBy: contentText.endIndex) ?? contentText.endIndex
+                    let tailEnd: String.Index
+                    if let maxSegmentLength {
+                        tailEnd = contentText.index(found.lowerBound, offsetBy: maxSegmentLength, limitedBy: contentText.endIndex) ?? contentText.endIndex
+                    } else {
+                        tailEnd = contentText.index(found.upperBound, offsetBy: 9, limitedBy: contentText.endIndex) ?? contentText.endIndex
+                    }
                     firstExcerpts[term] = String(contentText[found.lowerBound..<tailEnd])
                 }
                 searchRange = found.upperBound..<contentText.endIndex
@@ -688,6 +904,87 @@ final class SearchViewModel {
             .filter { seen.insert($0).inserted }
     }
 
+    /// [2026-09-05 신설] `verseMentionSearchTexts`와 같은 필터 조건이지만
+    /// 특정 `sourceId` 하나로 좁히지 않고 카테고리 전체 기준으로 모은다 —
+    /// `contentCandidateSourceIds`(FTS 후보 좁히기)는 항목 하나하나가 아니라
+    /// 카테고리 전체에 대해 한 번만 질의하므로, 그 카테고리 안 "어떤 항목의
+    /// 것이든" 매치될 수 있는 원문 표기를 전부 모아 둬야 한다 — 항목별
+    /// `verseMentionSearchTexts` 결과는 이 집합의 부분집합이므로(sourceId
+    /// 조건만 더 좁을 뿐 같은 필터), 이 값으로 후보를 좁혀도 개별 항목이
+    /// 실제로 검사할 verseTerms를 놓치지 않는다(안전한 상위집합).
+    private func categoryWideVerseSearchTexts(
+        mentions: [VerseMention], sourceType: VerseMentionSourceType, queryMatches: [BibleReferenceExtractor.Match]
+    ) -> [String] {
+        guard !queryMatches.isEmpty else { return [] }
+        var seen = Set<String>()
+        return mentions
+            .filter { mention in
+                guard mention.sourceType == sourceType else { return false }
+                return queryMatches.contains { query in
+                    query.bookId == mention.bookId
+                        && query.chapter == mention.chapter
+                        && (query.verse == nil || mention.verse == nil || query.verse == mention.verse)
+                }
+            }
+            .map(\.searchText)
+            .filter { seen.insert($0).inserted }
+    }
+
+    /// [2026-09-05 신설] 사용자 요청 — "개요/메모/개인 묵상/말씀 요약/연구문서
+    /// 5개 카테고리 전체스캔 최적화 → FTS5 보조 인덱스(unicode61)로 후보 축소."
+    /// 6개 SwiftData 모델(개요/장별개요/메모/개인묵상/말씀요약/연구문서) 검색
+    /// 함수가 공통으로 쓰는 "후보 좁히기" 한 단계 — `UserContentSearchIndex`
+    /// (BibleResearchModels 패키지)에 이 카테고리에서 아직 안 채워진 항목을
+    /// 자가 치유(self-healing)로 채워 넣은 뒤(`SourceDocument.cachedCombinedText`
+    /// 백필과 같은 패턴 — 이 기능 도입 이전의 기존 데이터를 위한 것, 새로
+    /// 저장되는 항목은 각 화면의 저장 지점에서 이미 최신 상태로 유지된다),
+    /// `words`(+`extraTerms` — 성경 참조 검색어의 원문 표기, 아래 호출부의
+    /// `verseMentionSearchTexts`와 같은 개념이지만 항목 하나가 아니라 카테고리
+    /// 전체 기준으로 모은 것) 중 하나라도 매치되는 source_id만 돌려준다.
+    ///
+    /// [정확성 안전장치] FTS든 자가 치유 백필이든 어느 단계에서 실패하면
+    /// (디렉터리 접근 실패, SQLite 오류) `liveContentById`의 모든 키를 후보로
+    /// 반환한다 — "속도보다 정확성이 보장돼야 한다"는 요청 원칙에 따라, 이
+    /// 최적화 계층 자체가 고장 나도 결과가 누락되는 일은 없어야 한다(그 경우
+    /// 그냥 기존처럼 호출부가 전체 항목에 `computeWordMatchScore`를 돌리게
+    /// 된다).
+    ///
+    /// [알려진 트레이드오프, 사용자에게 이미 고지·확정됨] `UserContentSearchIndex.
+    /// swift` 상단 주석 참고 — unicode61은 토큰 접두어 매칭이라 "검색어가
+    /// 토큰 중간에 낌"(예: "사랑"으로 "내사랑"을 못 찾음) 케이스는 이 좁히기
+    /// 단계에서 후보 밖으로 빠질 수 있다. 이미 성경구절 전체 검색(번들 FTS5)이
+    /// 갖고 있던 것과 같은 특성이고, 그 기준을 나머지 카테고리에도 그대로
+    /// 맞추는 것이 이번 요청의 취지다(trigram 방식은 사용자가 명시적으로
+    /// 거절했다, 2026-09-05).
+    private func contentCandidateSourceIds(
+        category: UserContentSearchIndexLocation.Category, words: [String], extraTerms: [String] = [],
+        liveContentById: [String: String]
+    ) -> Set<String> {
+        let allTerms = words + extraTerms
+        guard !allTerms.isEmpty else { return [] }
+        guard let indexDirectory = try? UserContentSearchIndexLocation.directory() else {
+            return Set(liveContentById.keys)
+        }
+        let indexedIds = UserContentSearchIndex.existingSourceIds(category: category.rawValue, indexDirectory: indexDirectory)
+        for (id, content) in liveContentById where !indexedIds.contains(id) {
+            UserContentSearchIndexLocation.upsert(category: category, sourceId: id, content: content)
+        }
+        var candidates = Set<String>()
+        var sawFailure = false
+        for term in allTerms where !term.isEmpty {
+            if let matches = try? UserContentSearchIndex.matchingSourceIds(
+                category: category.rawValue, indexDirectory: indexDirectory, matching: term
+            ) {
+                candidates.formUnion(matches)
+            } else {
+                sawFailure = true
+            }
+        }
+        // 질의 자체가 하나라도 실패했으면(파일 손상 등) 좁혀진 결과를 신뢰할
+        // 수 없으므로 안전하게 전체를 후보로 되돌린다.
+        return sawFailure ? Set(liveContentById.keys) : candidates
+    }
+
     // MARK: - 키워드 검색: 성경구절
 
     /// [2026-08-18 확장] 검색어가 성경 참조로 해석되면(`queryMatches`) 그 절(들)을
@@ -698,6 +995,14 @@ final class SearchViewModel {
     /// 조회한다.
     private func searchVerses(query: String, words: [String], queryMatches: [BibleReferenceExtractor.Match]) -> [VerseSearchResult] {
         guard let registries = try? modelContext.fetch(FetchDescriptor<TranslationRegistry>()) else { return [] }
+        // [2026-09-05 추가] 사용자 요청 — "성경구절 탭의 하위 탭으로 활성
+        // 번역본별 결과 노출." 이 함수가 검색 1회당 정확히 1번만 호출되므로
+        // (호출부 `performKeywordSearch` 참고, 이 파일 내 유일한 호출 지점)
+        // 여기서 한 번만 계산해 캐싱한다 — `activeTranslations`를 SwiftUI가
+        // 매 렌더링마다 다시 계산하는 연산 프로퍼티로 두면 렌더링 때마다
+        // SwiftData 재조회가 생기므로 피한다(위 `resolveActiveTranslations`
+        // 선언부 주석 참고).
+        activeTranslations = resolveActiveTranslations(from: registries)
         var seen = Set<String>()
         var results: [VerseSearchResult] = []
 
@@ -721,7 +1026,15 @@ final class SearchViewModel {
                     candidateVerses = (try? store.verses(bookId: match.bookId, chapter: match.chapter, versionCode: versionCode)) ?? []
                 }
                 for verse in candidateVerses {
-                    let key = "\(verse.bookId)-\(verse.chapter)-\(verse.verse)"
+                    // [2026-09-05 변경] 사용자 요청 — "성경구절 탭의 하위 탭으로
+                    // 활성 번역본별 결과를 노출." 이 dedup 키는 2026-08-29
+                    // 추가 당시엔 "같은 절에 여러 번역본이 매칭되면 먼저 처리된
+                    // 번역본만 남긴다"는 의도로 절 좌표만 썼다(VerseSearchResult.
+                    // translationCode 선언부의 그 날짜 주석 참고) — 번역본별
+                    // 하위 탭을 만들려면 같은 절이라도 번역본마다 별도 결과로
+                    // 남아야 하므로, 그 결정을 뒤집어 키에 `registry.code`를
+                    // 더한다(번역본이 다르면 같은 절이어도 별개 항목).
+                    let key = "\(verse.bookId)-\(verse.chapter)-\(verse.verse)-\(registry.code)"
                     guard seen.insert(key).inserted else { continue }
                     results.append(VerseSearchResult(
                         bookId: verse.bookId, chapter: verse.chapter, verse: verse.verse,
@@ -768,7 +1081,49 @@ final class SearchViewModel {
         for registry in registries {
             guard let store = try? store(for: registry) else { continue }
             let versionCode = store.hasVersionCodeColumn ? registry.code : nil
-            let useFullText = registry.code == TranslationBootstrap.bundledTranslationCode && fullTextStore != nil
+            let useBundledFullText = registry.code == TranslationBootstrap.bundledTranslationCode && fullTextStore != nil
+
+            // [2026-09-05 추가, 같은 날 재수정] 사용자 요청 — "사용자 추가
+            // 번역본에 대해서도 FTS5를 할 수 있도록 수정할 것"(검색 속도 질의에
+            // 대한 원인 설명 후속) → 이후 "인덱스 생성은 검색 시점이 아니라
+            // 번역본 업로드 시점을 기본으로 하고, 기존 업로드된 번역본은
+            // 신경쓰지 않도록" 요청으로 정정. 번들 번역본 전용이던 위 FTS5
+            // 경로를, 번들이 아닌 번역본에도 `TranslationSearchIndex`(보조
+            // FTS5 인덱스 파일 — 원본 번역본 파일은 `BibleReferenceStore`가
+            // 항상 SQLITE_OPEN_READONLY로 열므로 그 파일 자체는 손대지 않는다,
+            // 그 타입 상단 주석 참고)로 확장하되, 이 검색 경로는 인덱스를
+            // 새로 만들지 않고 "이미 있는지"만 확인한다 — 빌드는
+            // `TranslationFileMaterializer.writeLocalCopy`(번역본이 이 기기에
+            // 처음 로컬로 써지는 시점)에서만 일어난다. 그래서 이 변경 이전에
+            // 이미 이 기기에 있던 번역본은 인덱스가 없을 것이고, 그 경우
+            // `companionIndexDirectory`가 nil로 남아 기존 LIKE 경로로 그대로
+            // 폴백한다(요청하신 대로 자동 백필 없음).
+            var companionIndexDirectory: URL?
+            if !useBundledFullText {
+                let directory = URL(fileURLWithPath: store.filePath).deletingLastPathComponent()
+                if TranslationSearchIndex.indexExists(registryID: registry.id, indexDirectory: directory) {
+                    companionIndexDirectory = directory
+                }
+            }
+
+            // FTS5(번들 전용 경로/사용자 추가 번역본 보조 인덱스 경로) 매치
+            // 결과를 wordCandidates에 반영하는 공통 처리 — 두 경로 모두
+            // `FullTextVerseMatch` 배열을 반환하므로 동일한 변환 로직을
+            // 재사용한다(아래 각 호출부의 versionCode/registry는 이 registry
+            // 순회 스코프의 값을 그대로 캡처).
+            func ingestFullTextMatches(_ matches: [FullTextVerseMatch]) {
+                for match in matches {
+                    // [2026-09-05 변경] 위 참조매치 dedup 키 변경과 같은 이유 —
+                    // `registry.code`를 더해 번역본별로 별개 결과를 남긴다.
+                    let key = "\(match.bookId)-\(match.chapter)-\(match.verse)-\(registry.code)"
+                    guard !seen.contains(key), wordCandidates[key] == nil else { continue }
+                    wordCandidates[key] = (
+                        BibleVerse(uid: 0, versionCode: versionCode, bookId: match.bookId, chapter: match.chapter, verse: match.verse, content: match.content, paragraph: nil),
+                        booksProvider.book(id: match.bookId)?.nameKo ?? "\(match.bookId)권",
+                        registry.code, registry.displayName
+                    )
+                }
+            }
 
             // [2026-08-25 변경] 사용자 요청 — "limit 50을 해제할 수 있는 방법도
             // 추가할 것(더보기 버튼)." 예전엔 두 경로 다 `limit: 50`을 넘겨
@@ -782,21 +1137,17 @@ final class SearchViewModel {
             // `loadMoreVerseResults()`(더보기 버튼)가 나중에 결정한다.
             for word in words {
                 for variant in RelationSynonyms.expanded(word) {
-                    if useFullText, let fullTextStore {
+                    if useBundledFullText, let fullTextStore {
                         guard let matches = try? fullTextStore.searchVersesFullText(matching: variant) else { continue }
-                        for match in matches {
-                            let key = "\(match.bookId)-\(match.chapter)-\(match.verse)"
-                            guard !seen.contains(key), wordCandidates[key] == nil else { continue }
-                            wordCandidates[key] = (
-                                BibleVerse(uid: 0, versionCode: versionCode, bookId: match.bookId, chapter: match.chapter, verse: match.verse, content: match.content, paragraph: nil),
-                                booksProvider.book(id: match.bookId)?.nameKo ?? "\(match.bookId)권",
-                                registry.code, registry.displayName
-                            )
-                        }
+                        ingestFullTextMatches(matches)
+                    } else if let directory = companionIndexDirectory,
+                              let matches = try? TranslationSearchIndex.search(registryID: registry.id, indexDirectory: directory, matching: variant) {
+                        ingestFullTextMatches(matches)
                     } else {
                         guard let verses = try? store.searchVerses(query: variant, versionCode: versionCode) else { continue }
                         for verse in verses {
-                            let key = "\(verse.bookId)-\(verse.chapter)-\(verse.verse)"
+                            // [2026-09-05 변경] 위 두 곳과 같은 이유 — 번역본별 결과 유지.
+                            let key = "\(verse.bookId)-\(verse.chapter)-\(verse.verse)-\(registry.code)"
                             guard !seen.contains(key), wordCandidates[key] == nil else { continue }
                             wordCandidates[key] = (verse, booksProvider.book(id: verse.bookId)?.nameKo ?? "\(verse.bookId)권", registry.code, registry.displayName)
                         }
@@ -868,11 +1219,32 @@ final class SearchViewModel {
             FetchDescriptor<ChapterSummary>(sortBy: [SortDescriptor(\.updatedAt, order: .reverse)])
         )) ?? []
 
+        // [2026-09-05 추가] 위 `contentCandidateSourceIds` 선언부 주석 참고 —
+        // 책 개요/장별 개요는 서로 다른 모델이라 카테고리도 따로 좁힌다.
+        // `verseTerms`가 없는 카테고리(항상 `[]`로 호출, 아래 루프도 동일)라
+        // `extraTerms`는 넘기지 않는다.
+        let outlineContentCandidates = contentCandidateSourceIds(
+            category: .outline, words: words,
+            liveContentById: Dictionary(uniqueKeysWithValues: bookOutlines.map { ($0.id.uuidString, $0.contentText) })
+        )
+        let chapterSummaryContentCandidates = contentCandidateSourceIds(
+            category: .chapterSummary, words: words,
+            liveContentById: Dictionary(uniqueKeysWithValues: chapterSummaries.map { ($0.id.uuidString, $0.contentText) })
+        )
+
         var results: [(result: OutlineSearchResult, score: Int)] = []
 
         for outline in bookOutlines {
             let refMatch = queryMatches.contains { $0.bookId == outline.bookId }
-            let wordScore = computeWordMatchScore(words: words, verseTerms: [], contentText: outline.contentText)
+            // [2026-09-05 추가] 참조매치가 아니고 FTS 후보에도 없으면(=본문에
+            // 매치될 가능성이 거의 없으면) 아래 `computeWordMatchScore`의
+            // 전체 문자열 스캔 자체를 건너뛴다 — 결과는 그 스캔이 어차피
+            // "매치 없음"을 반환했을 경우와 같다(위 헬퍼의 트레이드오프 주석
+            // 참고).
+            guard refMatch || outlineContentCandidates.contains(outline.id.uuidString) else { continue }
+            // [2026-09-05] `maxSegmentLength: 35` — 위 `computeWordMatchScore`
+            // 선언부 주석 참고. 개요 전용 확장 발췌.
+            let wordScore = computeWordMatchScore(words: words, verseTerms: [], contentText: outline.contentText, maxSegmentLength: 35)
             guard refMatch || wordScore.isTextMatch else { continue }
             let result = OutlineSearchResult(
                 kind: .book(outline), bodyExcerpt: wordScore.bodyExcerpt, bodyOccurrenceSum: wordScore.bodyOccurrenceSum,
@@ -882,7 +1254,11 @@ final class SearchViewModel {
         }
         for summary in chapterSummaries {
             let refMatch = queryMatches.contains { $0.bookId == summary.bookId && $0.chapter == summary.chapter }
-            let wordScore = computeWordMatchScore(words: words, verseTerms: [], contentText: summary.contentText)
+            // [2026-09-05 추가] 위 책 개요 루프와 같은 이유.
+            guard refMatch || chapterSummaryContentCandidates.contains(summary.id.uuidString) else { continue }
+            // [2026-09-05] `maxSegmentLength: 35` — 위 `computeWordMatchScore`
+            // 선언부 주석 참고. 개요 전용 확장 발췌.
+            let wordScore = computeWordMatchScore(words: words, verseTerms: [], contentText: summary.contentText, maxSegmentLength: 35)
             guard refMatch || wordScore.isTextMatch else { continue }
             let result = OutlineSearchResult(
                 kind: .chapter(summary), bodyExcerpt: wordScore.bodyExcerpt, bodyOccurrenceSum: wordScore.bodyOccurrenceSum,
@@ -899,12 +1275,21 @@ final class SearchViewModel {
         let notes = (try? modelContext.fetch(
             FetchDescriptor<VersePhraseNote>(sortBy: [SortDescriptor(\.updatedAt, order: .reverse)])
         )) ?? []
+        // [2026-09-05 추가] 위 `contentCandidateSourceIds` 선언부 주석 참고.
+        let phraseNoteContentCandidates = contentCandidateSourceIds(
+            category: .phraseNote, words: words,
+            liveContentById: Dictionary(uniqueKeysWithValues: notes.map { ($0.id.uuidString, $0.noteText) })
+        )
         var results: [(result: PhraseNoteSearchResult, score: Int)] = []
         for note in notes {
             let refMatch = queryMatches.contains { query in
                 query.bookId == note.bookId && query.chapter == note.chapter
                     && (query.verse == nil || query.verse == note.verse)
             }
+            // [2026-09-05 추가] `searchOutlines`의 같은 자리와 같은 이유 —
+            // 참조매치도 아니고 FTS 후보에도 없으면 전체 문자열 스캔을
+            // 건너뛴다.
+            guard refMatch || phraseNoteContentCandidates.contains(note.id.uuidString) else { continue }
             let wordScore = computeWordMatchScore(words: words, verseTerms: [], contentText: note.noteText)
             guard refMatch || wordScore.isTextMatch else { continue }
             let result = PhraseNoteSearchResult(
@@ -923,6 +1308,14 @@ final class SearchViewModel {
             FetchDescriptor<UserMemo>(sortBy: [SortDescriptor(\.updatedAt, order: .reverse)])
         )) ?? []
         let mentions = queryMatches.isEmpty ? [] : ((try? modelContext.fetch(FetchDescriptor<VerseMention>())) ?? [])
+        // [2026-09-05 추가] 위 `contentCandidateSourceIds` 선언부 주석 참고 —
+        // `verseTerms`도 함께 후보를 좁히는 질의어에 포함해야 정확성이
+        // 유지된다(`categoryWideVerseSearchTexts` 선언부 주석 참고).
+        let memoContentCandidates = contentCandidateSourceIds(
+            category: .memo, words: words,
+            extraTerms: categoryWideVerseSearchTexts(mentions: mentions, sourceType: .memo, queryMatches: queryMatches),
+            liveContentById: Dictionary(uniqueKeysWithValues: memos.map { ($0.id.uuidString, $0.contentText) })
+        )
         var results: [(result: MemoSearchResult, score: Int)] = []
         for memo in memos {
             let tagNames = (memo.memoTags ?? []).compactMap { $0.tag?.name }
@@ -931,6 +1324,10 @@ final class SearchViewModel {
             let matchedTagNames = tagNames.filter { name in
                 words.contains { name.localizedCaseInsensitiveContains($0) } && seenTagNames.insert(name).inserted
             }
+            // [2026-09-05 추가] `searchOutlines`의 같은 자리와 같은 이유 —
+            // 태그매치도 아니고 FTS 후보에도 없으면 전체 문자열 스캔을
+            // 건너뛴다.
+            guard tagCount > 0 || memoContentCandidates.contains(memo.id.uuidString) else { continue }
             let verseTerms = verseMentionSearchTexts(mentions: mentions, sourceType: .memo, sourceId: memo.id.uuidString, queryMatches: queryMatches)
             let wordScore = computeWordMatchScore(words: words, verseTerms: verseTerms, contentText: memo.contentText)
             guard tagCount > 0 || wordScore.isTextMatch else { continue }
@@ -950,6 +1347,12 @@ final class SearchViewModel {
             FetchDescriptor<VerseSummary>(sortBy: [SortDescriptor(\.createdAt, order: .reverse)])
         )) ?? []
         let mentions = queryMatches.isEmpty ? [] : ((try? modelContext.fetch(FetchDescriptor<VerseMention>())) ?? [])
+        // [2026-09-05 추가] `searchMemos`의 같은 자리와 같은 이유.
+        let summaryContentCandidates = contentCandidateSourceIds(
+            category: .wordSummary, words: words,
+            extraTerms: categoryWideVerseSearchTexts(mentions: mentions, sourceType: .wordSummary, queryMatches: queryMatches),
+            liveContentById: Dictionary(uniqueKeysWithValues: summaries.map { ($0.id.uuidString, $0.contentText) })
+        )
         var results: [(result: SummarySearchResult, score: Int)] = []
         for summary in summaries {
             let tagNames = (summary.summaryTags ?? []).compactMap { $0.tag?.name }
@@ -958,6 +1361,8 @@ final class SearchViewModel {
             let matchedTagNames = tagNames.filter { name in
                 words.contains { name.localizedCaseInsensitiveContains($0) } && seenTagNames.insert(name).inserted
             }
+            // [2026-09-05 추가] `searchMemos`의 같은 자리와 같은 이유.
+            guard tagCount > 0 || summaryContentCandidates.contains(summary.id.uuidString) else { continue }
             let verseTerms = verseMentionSearchTexts(mentions: mentions, sourceType: .wordSummary, sourceId: summary.id.uuidString, queryMatches: queryMatches)
             let wordScore = computeWordMatchScore(words: words, verseTerms: verseTerms, contentText: summary.contentText)
             guard tagCount > 0 || wordScore.isTextMatch else { continue }
@@ -982,6 +1387,35 @@ final class SearchViewModel {
             FetchDescriptor<SourceDocument>(sortBy: [SortDescriptor(\.uploadedAt, order: .reverse)])
         )) ?? []
         let mentions = queryMatches.isEmpty ? [] : ((try? modelContext.fetch(FetchDescriptor<VerseMention>())) ?? [])
+        // [2026-09-05 추가] 사용자 요청 — "연구문서 combinedText 반복 재생성
+        // 문제를 캐싱 필드로 해결(캐싱 필드 도입 OK)." 이 필드 도입 이전에
+        // 이미 업로드된 문서는 `cachedCombinedText`가 기본값(빈 문자열)인 채로
+        // 남아 있다 — 아래에서 그런 문서를 만나면(실제 `documentTexts`는
+        // 있는데 캐시만 비어 있음) 그 자리에서 한 번만 다시 만들어 두고, 이
+        // 함수가 끝날 때 한 번에 저장한다. 그래야 검색 정확성이 이 캐싱
+        // 도입 전과 100% 동일하게 유지된다 — `documentTexts`가 실제로도
+        // 비어 있는 문서(텍스트 추출 실패 등)는 캐시도 정당하게 비어 있는
+        // 것이라 다시 만들 필요가 없다.
+        //
+        // [2026-09-05 이동] 이 백필을 아래 "FTS 후보 좁히기" 단계보다 먼저
+        // 끝낸다 — 그 단계에 넘길 `liveContentById`가 최신 `cachedCombinedText`
+        // 를 담고 있어야 하기 때문이다(로직 자체는 그대로, 실행 순서만
+        // 앞으로 옮겼다).
+        var needsBackfillSave = false
+        for document in documents {
+            if document.cachedCombinedText.isEmpty, !(document.documentTexts ?? []).isEmpty {
+                document.rebuildCachedCombinedText()
+                needsBackfillSave = true
+            }
+        }
+
+        // [2026-09-05 추가] 위 `contentCandidateSourceIds` 선언부 주석 참고.
+        let documentContentCandidates = contentCandidateSourceIds(
+            category: .document, words: words,
+            extraTerms: categoryWideVerseSearchTexts(mentions: mentions, sourceType: .document, queryMatches: queryMatches),
+            liveContentById: Dictionary(uniqueKeysWithValues: documents.map { ($0.id.uuidString, $0.cachedCombinedText) })
+        )
+
         var results: [(result: DocumentSearchResult, score: Int)] = []
         for document in documents {
             let tagNames = (document.documentTags ?? []).compactMap { $0.tag?.name }
@@ -995,10 +1429,11 @@ final class SearchViewModel {
             if let category = document.category { titleFields.append(category.name) }
             let titleCount = words.filter { word in titleFields.contains { $0.localizedCaseInsensitiveContains(word) } }.count
 
-            let lines = (document.documentTexts ?? []).sorted {
-                $0.pageNumber != $1.pageNumber ? $0.pageNumber < $1.pageNumber : $0.lineIndex < $1.lineIndex
-            }
-            let combinedText = lines.map(\.lineText).joined(separator: "\n")
+            // [2026-09-05 추가] `searchMemos`의 같은 자리와 같은 이유 — 태그/
+            // 제목매치도 아니고 FTS 후보에도 없으면 전체 문자열 스캔을
+            // 건너뛴다.
+            guard tagCount > 0 || titleCount > 0 || documentContentCandidates.contains(document.id.uuidString) else { continue }
+            let combinedText = document.cachedCombinedText
             let verseTerms = verseMentionSearchTexts(mentions: mentions, sourceType: .document, sourceId: document.id.uuidString, queryMatches: queryMatches)
             let wordScore = computeWordMatchScore(words: words, verseTerms: verseTerms, contentText: combinedText)
 
@@ -1009,6 +1444,9 @@ final class SearchViewModel {
                 matchedTagNames: matchedTagNames, highlightKeywords: wordScore.highlightKeywords
             )
             results.append((result, tagCount + titleCount + wordScore.distinctTermMatchCount))
+        }
+        if needsBackfillSave {
+            try? modelContext.save()
         }
         return results.sorted { $0.score > $1.score }.map(\.result)
     }

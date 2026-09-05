@@ -157,7 +157,7 @@ enum TranslationImportService {
         // 6.7이 요구하는 "동기화 데이터는 로컬 파일로 한 번 써낸 뒤 열어야 한다"는
         // 규칙을 import 시점에도 동일하게 적용한 것).
         do {
-            let localURL = try TranslationFileMaterializer.writeLocalCopy(data: data, registryID: registry.id)
+            let localURL = try TranslationFileMaterializer.writeLocalCopy(data: data, registry: registry)
             registry.sqliteFileReference = localURL.path
         } catch {
             throw TranslationImportError.migrationFailed(describe(error))

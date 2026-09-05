@@ -122,6 +122,46 @@ struct OutlineTreeView: View {
                         }
                     }
             }
+            // [2026-09-05 신설] 사용자 신고 — "개요 기능까지는 이동이 됨.
+            // 사용자가 마태복음 3장 개요을 탭하면 마태복음 3장의 개요가
+            // 나와야 하는데 개요까지만 나옴." 원인: `OutlineNavigationRequest.
+            // shared.requestedSelection`을 실제로 소비해 화면을 전환하는
+            // `.onChange` 핸들러가 지금까지 `OutlineTreeSplitContent`(맥OS/
+            // 아이패드 전용, 아래)에만 있었다 — 아이폰 분기(`isPhone`, 이 위)는
+            // `OutlineTreeList(..., selection: nil, path: $path)`만 그릴 뿐
+            // 이 요청을 전혀 관찰하지 않았다. 그래서 통합 검색의 "개요" 결과를
+            // 탭하면 `AppNavigationRequest.shared.request(.outline)`이
+            // `PhoneTabView`의 `.fullScreenCover`를 열어 이 화면 자체는 뜨지만
+            // (=사용자가 본 "개요 기능까지는 이동이 됨"), 정작 요청받은 책/장
+            // 선택은 아무도 반영하지 않아 트리 최상위 화면만 보였다. 아이패드/
+            // 맥(`OutlineTreeSplitContent`)의 같은 핸들러를 그대로 옮겨 쓰되,
+            // 그쪽은 `selection`(같은 화면 안에서 오른쪽 패널만 바꿔치기)을
+            // 쓰는 반면 이 화면은 `NavigationStack(path:)`으로 화면을 push하는
+            // 구조라(위 `path` 선언부 주석 — 장 칩 여러 개가 `List` 행 하나에
+            // 몰려 있던 문제 때문에 이 방식으로 바꿨다) `path`에 값을 담는다.
+            // 검색 결과를 연달아 다른 책/장으로 탭하는 경우를 고려해
+            // append 대신 교체(`= [newValue]`)한다 — 매번 새 목적지로 바로
+            // 이동해야지, 이전에 우연히 쌓인 push 위에 계속 얹으면 뒤로가기
+            // 스택이 뒤엉킨다.
+            .onChange(of: OutlineNavigationRequest.shared.requestedSelection) { _, newValue in
+                guard let newValue else { return }
+                path = [newValue]
+                let bookId: Int
+                switch newValue {
+                case .book(let id): bookId = id
+                case .chapter(let id, _): bookId = id
+                }
+                if let book = BooksProvider.shared.book(id: bookId) {
+                    var expandedTestaments = Set(UserSettingsStore.shared.outlineExpandedTestaments)
+                    expandedTestaments.insert(book.testament.rawValue)
+                    UserSettingsStore.shared.outlineExpandedTestaments = Array(expandedTestaments)
+
+                    var expandedBooks = Set(UserSettingsStore.shared.outlineExpandedBookIds)
+                    expandedBooks.insert(bookId)
+                    UserSettingsStore.shared.outlineExpandedBookIds = Array(expandedBooks)
+                }
+                OutlineNavigationRequest.shared.clear()
+            }
         } else {
             OutlineTreeSplitContent()
         }

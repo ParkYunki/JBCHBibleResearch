@@ -67,10 +67,42 @@ enum TranslationFileMaterializer {
 
     /// 가져오기(import) 시점에 실제 바이트를 로컬 캐시 파일로 써낸다. 반환된 경로를
     /// `TranslationRegistry.sqliteFileReference`에 저장하면 된다.
+    ///
+    /// [2026-09-05 변경] 사용자 요청 — "번역본을 검색할 때(마다) 인덱스가
+    /// 없으면 그 자리에서 만드는 대신, 번역본을 업로드할 때 인덱스를 만드는
+    /// 것을 기본으로 하고, 기존 업로드된 번역본에 대해서는 신경쓰지 않도록."
+    /// 이 함수가 로컬 사본을 "새로" 써내는 시점(= import 직후, 또는 다른
+    /// 기기에서 추가한 번역본이 이 기기로 CloudKit 동기화되어 처음
+    /// materialize되는 시점 — 아래 `ensureMaterialized` 참고. 이 기기 기준으로는
+    /// 두 경우 다 "이 번역본이 이 기기에 처음 생기는 순간"이라 같은 시점으로
+    /// 취급했다)에 `TranslationSearchIndex`(FTS5 보조 인덱스) 빌드도 함께
+    /// 한 번만 실행한다. 이미 로컬 사본이 있는 번역본은 `ensureMaterialized`가
+    /// 이 함수를 다시 부르지 않으므로(바로 아래 `fileExists` 분기) 이 함수
+    /// 자체가 호출되지 않는다 — 요청하신 대로 이 변경 이전에 이미 이 기기에
+    /// 있던 번역본은 인덱스가 생기지 않고 그대로 남는다(추가 백필 로직 없음).
+    /// 인덱스 빌드 실패는 검색 기능 자체를 막을 이유가 없으므로(느린 LIKE
+    /// 경로로 안전하게 폴백 가능 — `SearchViewModel.searchVerses` 참고)
+    /// best-effort로 무시한다(`try?`).
+    ///
+    /// 매개변수를 `registryID: UUID`에서 `registry: TranslationRegistry`로
+    /// 바꿨다 — 인덱스 빌드에 `registry.code`(version_code 컬럼이 있는 드문
+    /// 파일일 때만 필요, `BibleReferenceStore.hasVersionCodeColumn` 참고)가
+    /// 필요한데, 두 호출부(`ensureMaterialized`, `TranslationImportService.
+    /// importTranslation`) 모두 이미 registry 객체 전체를 갖고 있어 이 변경이
+    /// 호출부에 부담을 주지 않는다.
     @discardableResult
-    static func writeLocalCopy(data: Data, registryID: UUID) throws -> URL {
-        let url = try localFileURL(for: registryID)
+    static func writeLocalCopy(data: Data, registry: TranslationRegistry) throws -> URL {
+        let url = try localFileURL(for: registry.id)
         try data.write(to: url, options: .atomic)
+
+        if let sourceStore = try? BibleReferenceStore(filePath: url.path) {
+            let versionCode = sourceStore.hasVersionCodeColumn ? registry.code : nil
+            try? TranslationSearchIndex.ensureBuilt(
+                sourceStore: sourceStore, registryID: registry.id,
+                indexDirectory: url.deletingLastPathComponent(), versionCode: versionCode
+            )
+        }
+
         return url
     }
 
@@ -94,7 +126,7 @@ enum TranslationFileMaterializer {
             throw TranslationMaterializationError.noLocalCopyAvailable
         }
 
-        let url = try writeLocalCopy(data: data, registryID: registry.id)
+        let url = try writeLocalCopy(data: data, registry: registry)
         registry.sqliteFileReference = url.path
         try context.save()
         return url.path

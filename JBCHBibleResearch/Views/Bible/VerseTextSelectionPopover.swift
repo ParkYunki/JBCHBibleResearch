@@ -81,14 +81,28 @@ struct VerseTextSelectionPopover: View {
             // TextKit 대신 SwiftUI 기본 `.textSelection(.enabled)`. 드래그로
             // 고른 부분은 OS 자체 복사(⌘C/우클릭/길게 눌러 복사)로 바로
             // 복사할 수 있다.
-            ScrollView {
-                Text(displayText)
-                    .font(.system(size: 16))
-                    .foregroundStyle(.primary)
-                    .textSelection(.enabled)
-                    .frame(maxWidth: .infinity, alignment: .leading)
-            }
-            .frame(width: 280, height: 200)
+            //
+            // [2026-09-05 재수정] 사용자 보고 — "아이패드에서 ... '선택'
+            // 클릭하고 나서 나오는 팝업의 텍스트들이 선택되지 않음. 탭하면
+            // 복사하기, 공유하기라는 os메뉴가 뜸." 원인은 이 `Text`를 감싸던
+            // `ScrollView`였다 — iOS에서 `ScrollView`의 팬(스크롤) 제스처와
+            // `.textSelection(.enabled)`의 "길게 눌러 드래그로 범위 선택"
+            // 제스처가 같은 터치를 두고 경쟁하는 것은 잘 알려진 SwiftUI/
+            // UIKit 문제다. 대개 `ScrollView`의 팬 인식기가 이겨서 드래그
+            // 선택 모드 자체가 시작되지 못하고, 터치가 즉시 단순 탭으로
+            // 처리돼 OS "복사하기/공유하기" 퀵메뉴만 뜬다 — 사용자가 겪은
+            // 증상과 정확히 일치한다. 성경 한 절은 대부분 이 너비(280pt)
+            // 안에서 몇 줄이면 끝나 스크롤이 애초에 필요 없으므로,
+            // `ScrollView`를 없애고 팝업 높이를 내용에 맞게 늘어나도록
+            // (고정 200 대신 가변) 바꿔 이 제스처 충돌 자체를 없앤다 —
+            // AskUserQuestion으로 사용자에게 확인한 방향("ScrollView 제거,
+            // 팝업 높이 가변화"). 대가: 매우 긴 절은 스크롤이 안 되니 팝업이
+            // 그만큼 커진다(사용자도 확인한 트레이드오프).
+            Text(displayText)
+                .font(.system(size: 16))
+                .foregroundStyle(.primary)
+                .textSelection(.enabled)
+                .frame(maxWidth: 280, alignment: .leading)
 
             HStack {
                 Button("취소") { dismiss() }

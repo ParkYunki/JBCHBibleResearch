@@ -229,6 +229,27 @@ public final class SourceDocument {
     /// 자동 처리한다(이 파일의 다른 필드들처럼).
     public var isPinned: Bool = false
 
+    /// [2026-09-05 추가] 사용자 요청 — "연구문서 combinedText 반복 재생성
+    /// 문제를 캐싱 필드로 해결." `SearchViewModel.searchDocuments`가 검색할
+    /// 때마다 `documentTexts`(페이지×줄 전체)를 매번 새로 정렬·이어붙이던
+    /// 비용을 없애기 위해, 그 결과를 문서 텍스트가 실제로 바뀌는 시점에만
+    /// 계산해 여기 저장해 둔다 — 검색은 이 필드를 그냥 읽기만 한다.
+    /// `isPinned`(바로 위)와 같은 패턴 — 기본값 있는 저장 프로퍼티 추가만으로
+    /// SwiftData 가벼운 마이그레이션이 자동 처리된다.
+    ///
+    /// ⚠️ `documentTexts`의 파생값이라 두 값이 어긋나지 않도록, `documentTexts`를
+    /// 쓰는 모든 지점(`DocumentTextExtractionService.extract(for:context:)` 끝,
+    /// `OCRReviewViewModel.save()`)이 아래 `rebuildCachedCombinedText()`를
+    /// 반드시 함께 호출해야 한다 — 앞으로 `documentTexts`를 직접 수정하는
+    /// 코드를 새로 추가할 경우에도 마찬가지다.
+    ///
+    /// 이 필드 도입 이전에 이미 업로드된 문서는 값이 기본값(빈 문자열)인 채로
+    /// 남아 있다 — 그 백필(최초 검색 1회 때 한 번만 다시 만들어 저장)은
+    /// 이 모델이 아니라 호출부(`SearchViewModel.searchDocuments`)의 책임이다
+    /// (그 함수 주석 참고 — `documentTexts`는 있는데 캐시만 비어 있는 경우만
+    /// 골라 다시 만든다).
+    public var cachedCombinedText: String = ""
+
     public init(
         id: UUID = UUID(),
         originalFilename: String,
@@ -257,6 +278,18 @@ public final class SourceDocument {
         self.relatedChapterRef = relatedChapterRef
         self.isPinned = isPinned
         self.uploadedAt = uploadedAt
+    }
+
+    /// `documentTexts`를 페이지/줄 순서로 정렬해 이어붙인 뒤 `cachedCombinedText`에
+    /// 저장한다 — `SearchViewModel.searchDocuments`가 예전에 검색할 때마다
+    /// 직접 하던 것과 완전히 같은 규칙(book_id/chapter/verse 정렬 규칙과는
+    /// 무관 — 여기서는 `pageNumber`/`lineIndex` 오름차순)이다. 저장(`context.save()`)은
+    /// 호출부 책임이다(이 메서드는 SwiftData 컨텍스트를 모르므로).
+    public func rebuildCachedCombinedText() {
+        let lines = (documentTexts ?? []).sorted {
+            $0.pageNumber != $1.pageNumber ? $0.pageNumber < $1.pageNumber : $0.lineIndex < $1.lineIndex
+        }
+        cachedCombinedText = lines.map(\.lineText).joined(separator: "\n")
     }
 }
 

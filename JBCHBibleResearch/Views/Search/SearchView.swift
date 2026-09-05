@@ -142,6 +142,108 @@ private struct SearchContentView: View {
     /// 대상 — `BibleReadingView.partialTextSelectionTarget`과 같은 역할.
     @State private var partialTextSelectionTarget: PartialTextSelectionTarget?
 
+    /// [2026-09-05 신설] 사용자 요청(개요 검색결과 관련 검토 항목) — "이동한
+    /// 후 다시 검색결과로 돌아갈 수 있는 기능이 가능한가?" 조사 결과: 아이폰은
+    /// `PhoneTabView`가 "통합 검색" 탭을 계속 살려두므로(그 파일 상단 주석,
+    /// `bibleVerseRow` 선언부 주석 참고) 탭만 다시 누르면 재검색 없이 그대로
+    /// 돌아온다. 반면 macOS/iPadOS(`SidebarNavigationView`)는 사이드바에서
+    /// 다른 섹션(개요 등)으로 갔다가 돌아오면 `detailView(for:)`가
+    /// `SearchView()`를 매번 새로 만들어(그 파일 `detailNavigationPath`
+    /// 선언부 주석에 이미 명시된 사실) 검색어/결과가 사라진다 — 이 자체를
+    /// 고치려면 `SearchView`/`SearchViewModel`을 섹션 전환과 무관하게 계속
+    /// 살려두는 구조로 바꿔야 하는데, 그 파일 주석이 설명하는 비슷한
+    /// 시도(NavigationStack 서브트리를 `.id()`로 통째 재생성)가 이미 한 번
+    /// 실기기에서 실패한 이력이 있어 위험도가 높다(AskUserQuestion으로 확인:
+    /// "지금은 보류, 가벼운 절충안만"). 대신 이미 있는 "최근 검색이력"
+    /// (`.searchSuggestions`, 2026-09-04 신설)을 검색창에 포커스만 주면 바로
+    /// 볼 수 있다는 점에 착안해, 검색어가 비어 있는 채로 이 화면이 새로
+    /// 나타날 때(=위 macOS/iPadOS 시나리오를 포함) 검색창에 자동으로
+    /// 포커스를 줘서, 사용자가 검색창을 한 번 더 탭하지 않아도 최근 검색어
+    /// 목록이 바로 보이게 한다(재입력 없이 한 번 탭으로 같은 결과 재조회).
+    /// 아이폰에서도 해가 되지 않는다 — 이미 상태를 안 잃으므로 이 포커스는
+    /// 그저 처음 탭을 열 때 키보드가 한 번 더 빨리 뜨는 정도의 부수 효과다.
+    @FocusState private var isSearchFieldFocused: Bool
+
+    /// [2026-09-05 신설] 사용자 요청 — "검색 결과를 분류별로 탭으로 묶을
+    /// 것. ... 상단에 [성경구절] [개요] [메모/말씀노트] [연구문서] 이렇게
+    /// 4개의 탭으로 구분할 것." 예전엔 6개 분류(성경구절/개요/메모/개인
+    /// 묵상/말씀 요약/연구문서)가 `resultsSection` 안에 `Section`
+    /// 6개로 나란히 이어져 있어, 맨 아래 "연구문서"를 보려면 항상 끝까지
+    /// 스크롤해야 했다(사용자 지적). `SettingsView.GeneralSettingsGroup`/
+    /// `BibleSettingsGroup`이 이미 쓰고 있는, 중첩 `TabView` 대신 세그먼트
+    /// `Picker` + `@State` 선택값으로 하위 화면을 전환하는 이 프로젝트의
+    /// 기존 패턴을 그대로 재사용한다(그 파일 상단 주석 — macOS에서 중첩
+    /// `TabView`가 렌더링되지 않는 문제가 실기기로 확인돼 이 패턴으로
+    /// 정착했다는 근거도 그대로 적용된다). 사용자가 요청한 "메모/말씀노트"
+    /// 탭 하나는 기존 세 분류(메모=`VersePhraseNote`, 개인 묵상=`UserMemo`,
+    /// 말씀 요약=`VerseSummary`)를 그대로(각자의 헤더/행 유지) 한 탭 안에
+    /// 묶은 것 — 세 모델을 하나로 합치거나 각 섹션의 기존 표시 로직을
+    /// 바꾸지 않았다.
+    private enum SearchResultTab: String, CaseIterable, Identifiable {
+        case verse, outline, notes, document
+        var id: Self { self }
+        var title: String {
+            switch self {
+            case .verse: return "성경구절"
+            case .outline: return "개요"
+            case .notes: return "메모/말씀노트"
+            case .document: return "연구문서"
+            }
+        }
+
+        /// [2026-09-05 추가] 사용자 요청 — "메인탭에는 아이콘을 추가하고
+        /// ... 탭자체를 좀더 키울것." 각 탭 아이콘은 이 파일의 `sectionHeader`가
+        /// 같은 분류에 이미 쓰고 있는 아이콘과 맞췄다(1087/1109/1147행의
+        /// `sectionHeader("성경구절"/"개요"/"연구문서", icon: ...)` 참고) —
+        /// 탭과 그 안의 섹션 헤더가 같은 아이콘/색으로 이어지면 "지금 보는
+        /// 탭이 곧 이 아이콘·색"이라는 대응이 자연스럽다. "메모/말씀노트"는
+        /// 하단 탭바(`PhoneTabView.swift`)의 "말씀 노트" 탭이 이미 쓰는
+        /// "note.text"를 재사용했다.
+        var icon: String {
+            switch self {
+            case .verse: return "book.closed.fill"
+            case .outline: return "list.bullet.rectangle.fill"
+            case .notes: return "note.text"
+            case .document: return "doc.text.fill"
+            }
+        }
+
+        /// [2026-09-05 추가] 사용자 요청 — "색상을 하위 탭(성경번역본 탭)하고
+        /// 구분될 수 있도록 수정할 것(밤빛서제, 서고청람, 와인저녁 색상팔레트
+        /// 적극 활용)." `JBCHCategoryPalette`의 기존 6색 중 사용자가 이름으로
+        /// 짚은 세 색(밤빛 남색=navy, 서고 청람=slateTeal, 와인 적갈=wine)과,
+        /// 이 파일이 "연구문서" 섹션 헤더에 이미 쓰고 있는 shelfSlate를 그대로
+        /// 가져다 썼다 — 새 hex를 고르지 않고 이미 승인된 팔레트만 재사용
+        /// (디자인 가이드 10.1). "메모/말씀노트" 탭은 메모(gold)/개인 묵상
+        /// (wine)/말씀 요약(wood) 세 분류를 한 탭에 묶은 것이라 셋 중 하나를
+        /// 대표색으로 고정해야 하는데, 사용자가 이번 요청에서 "와인저녁"을
+        /// 직접 짚었고 기존 "개인 묵상" 섹션 헤더 색도 이미 wine이라 그대로
+        /// 썼다.
+        var color: Color {
+            switch self {
+            case .verse: return JBCHCategoryPalette.navy
+            case .outline: return JBCHCategoryPalette.slateTeal
+            case .notes: return JBCHCategoryPalette.wine
+            case .document: return JBCHCategoryPalette.shelfSlate
+            }
+        }
+    }
+
+    @State private var selectedResultTab: SearchResultTab = .verse
+
+    /// [2026-09-05 신설] 사용자 요청 — "검색 결과에 [성경 구절] 탭의 하위
+    /// 탭으로서 현재 사용하고 있는(활성화되어있는) 번역본별로 노출 시키도록.
+    /// (최대 3개)" 바로 위 `selectedResultTab`이 4개 분류 탭을 고르는 상태인
+    /// 것과 같은 방식으로, [성경구절] 탭 안에서 어느 번역본을 보고 있는지
+    /// 고르는 상태다. `viewModel.activeTranslations`(최대 3개, 이미
+    /// `SearchViewModel.resolveActiveTranslations`가 캡) 목록이 검색마다
+    /// 새로 계산되므로, 여기 저장한 코드가 그 목록에 더 이상 없으면(예:
+    /// 검색어를 바꿔 다른 결과가 나온 뒤 등록된 번역본 구성이 바뀐 경우)
+    /// 아래 `resultsSection`에서 매번 안전하게 첫 번째 활성 번역본으로
+    /// 대체한다 — 그래서 옵셔널로 두고 "마지막으로 사용자가 고른 값"만
+    /// 기억한다.
+    @State private var selectedVerseTranslationCode: String?
+
     /// [2026-08-18 신설, 아이폰 실기기 크래시 fix] DocumentsHomeView.swift의
     /// `isPhoneIdiom`과 같은 패턴 — 아이폰은 다중 씬(멀티 윈도우)을 지원하지
     /// 않아 `openWindow`가 "Unable to open a window when the app does not
@@ -337,6 +439,19 @@ private struct SearchContentView: View {
             get: { viewModel.query },
             set: { viewModel.query = $0 }
         ), prompt: "검색어 입력")
+        .searchFocused($isSearchFieldFocused)
+        // [2026-09-05 신설] 위 `isSearchFieldFocused` 선언부 주석 참고 —
+        // macOS/iPadOS에서 다른 섹션으로 갔다가 돌아와 이 화면이 새로 만들어질
+        // 때(검색어가 비어있는 첫 등장 시점) 검색창에 자동 포커스를 줘서
+        // "최근 검색이력" 제안이 바로 보이게 한다. 이미 검색어가 남아있는
+        // 채로 다시 나타나는 경우(이론상 발생하지 않음 — 새 인스턴스는 항상
+        // 빈 질문으로 시작)까지 불필요하게 포커스를 뺏지 않도록 빈 질문일
+        // 때만 켠다.
+        .onAppear {
+            if viewModel.query.trimmingCharacters(in: .whitespaces).isEmpty {
+                isSearchFieldFocused = true
+            }
+        }
         // [2026-09-04 신설] 사용자 요청 — "검색이력 기능 추가 - 아이폰 -
         // 통합검색을 클릭했을 때 검색창 밑으로 검색이력 최근 20개가 나올 수
         // 있도록 한다. macos, ipados는 UI/UX 관점에 검색이력이 나올 수
@@ -849,36 +964,166 @@ private struct SearchContentView: View {
     // 자리가 없다.
     @ViewBuilder
     private var resultsSection: some View {
+        // [2026-09-05 재작성] 사용자 요청 — "탭 디자인을 변경하라. 메인탭에는
+        // 아이콘을 추가하고 탭자체를 좀더 키울것. 그리고 색상을 하위 탭
+        // (성경번역본 탭)하고 구분될 수 있도록 수정할 것." 기존엔 이 상위
+        // 탭도 네이티브 `.pickerStyle(.segmented)`였다 — 그런데 macOS의
+        // `NSSegmentedControl`은 세그먼트 아이콘을 보통 템플릿(단색)으로
+        // 그리고 선택된 세그먼트의 내용색을 시스템 강조색으로 덮어써, 세그먼트
+        // 마다 다른 커스텀 색(navy/slateTeal/wine/shelfSlate)을 지정해도 실제
+        // macOS 렌더링에 반영되지 않을 위험이 크다(이 세션엔 Xcode/시뮬레이터가
+        // 없어 실기기로 확인 불가 — `Label(...).foregroundStyle(color)`를
+        // 세그먼트 안에 넣는 방식은 렌더링이 보장되지 않는 API 조합이라 채택
+        // 하지 않았다). 그래서 이 상위 탭만 커스텀 `HStack` + `Button` 행으로
+        // 바꿔 아이콘·글자·배경색을 직접 그린다 — 공식 `Image`/`Text`/
+        // `RoundedRectangle` 조합이라 색상 반영이 보장된다. 아래 번역본 하위
+        // 탭(`showsVerseTranslationTabs` 블록)은 여전히 `.pickerStyle(.segmented)`
+        // + `.controlSize(.small)`을 그대로 쓴다 — 하위 탭을 일부러 "더 작고
+        // 수수한 보조 컨트롤"로 남겨 두 탭의 위계 차이를 크기·모양(꽉 찬 색
+        // 버튼 vs 캡슐형 세그먼트)만으로도 한눈에 구분되게 했다.
+        HStack(spacing: 8) {
+            ForEach(SearchResultTab.allCases) { tab in
+                mainResultTabButton(tab)
+            }
+        }
+        .listRowSeparator(.hidden)
+        .padding(.vertical, 6)
+
+        switch selectedResultTab {
+        case .verse:
+        // [2026-09-05 신설, 같은 날 디자인 재수정] 사용자 요청 — "검색
+        // 결과에 [성경 구절] 탭의 하위 탭으로서 현재 사용하고 있는(활성화되어
+        // 있는) 번역본별로 노출 시키도록. (최대 3개)" → 곧이어 "상위 탭과
+        // 하위 탭의 크기와 색상을 좀더 구분하여 심미성을 좀더 높일것."으로
+        // 정정. 처음엔 위 4개 분류 탭과 완전히 같은 세그먼트 스타일을
+        // 그대로 재사용했으나(위계 구분 없이 같은 모양), 그 직후 요청으로
+        // 아래 `if showsVerseTranslationTabs` 블록에서 캡션 레이블 +
+        // `.controlSize(.small)` + 카드 배경으로 다시 다듬었다 — 구체적
+        // 근거는 그 블록 바로 위 주석 참고. `viewModel.activeTranslations`가
+        // 이미 최대 3개로 캡돼 있다(`SearchViewModel.resolveActiveTranslations`).
+        // 등록된 번역본이 1개뿐이면(가장 흔한 기본 상태) 굳이 하위 탭을
+        // 보여줄 필요가 없으므로 2개 이상일 때만 노출한다.
+        let activeVerseTranslations = viewModel.activeTranslations
+        let showsVerseTranslationTabs = activeVerseTranslations.count > 1
+        let selectedVerseTranslation: String? = {
+            guard showsVerseTranslationTabs else { return nil }
+            if let selectedVerseTranslationCode,
+               activeVerseTranslations.contains(where: { $0.code == selectedVerseTranslationCode }) {
+                return selectedVerseTranslationCode
+            }
+            return activeVerseTranslations.first?.code
+        }()
+        // [설계 근거] 이 화면은 `verseResults`(더보기 페이지네이션 적용분)를
+        // 필터링하므로, 번역본에 따라 아직 화면에 로드되지 않은 결과가 있을
+        // 수 있다(`SearchViewModel.groupedVerseResults(translationCode:)`
+        // 선언부 주석 참고) — 번역본별 독립 페이지네이션이 아니라 기존
+        // 공유 "더보기" 버튼 하나를 그대로 쓰는 절충이다.
+        let verseGroups = selectedVerseTranslation
+            .map { viewModel.groupedVerseResults(translationCode: $0) }
+            ?? viewModel.groupedVerseResults
+        // [2026-09-05 추가] "더보기" 잔여 개수 표시에 쓸, 선택된 번역본
+        // 기준의 전체/로드됨 개수 — 바로 아래 Button 라벨 계산에서 쓴다.
+        let selectedVerseTranslationTotalCount = selectedVerseTranslation
+            .map { code in viewModel.allVerseResults.filter { $0.translationCode == code }.count }
+        let selectedVerseTranslationLoadedCount = verseGroups.reduce(0) { $0 + $1.verses.count }
+
+        // [2026-09-05 재작성] 사용자 요청 — "성경번역본 탭은 성경구절의
+        // 하위탭임을 디자인만 봐도 알 수 있도록 레이아웃을 조정하라." 기존엔
+        // 캡션 레이블 + 시스템 이차 배경색 카드였는데, 그 배경색이 성경구절
+        // 탭과 아무 색상 연관이 없어 "어느 탭에 속한 하위 탭인지"가 배경만
+        // 봐서는 드러나지 않았다. 세 가지를 더했다 — (1) 왼쪽에
+        // `arrow.turn.down.right`(위에서 갈라져 내려오는 모양) 아이콘으로
+        // "바로 위 탭에서 갈라져 나온 것"을 시각적으로 표시, (2) 카드 바깥쪽에
+        // `.padding(.leading, 16)`을 줘 목록에서 하위 항목을 들여쓰는 관례를
+        // 그대로 따름, (3) 배경·테두리·레이블 색을 새 색상이 아니라 위
+        // 성경구절 탭 자체의 색(`JBCHCategoryPalette.navy`, 옅은 투명도)으로
+        // 채워 "이 카드는 성경구절 탭에 속한다"는 것을 색 상속으로 보여준다 —
+        // 디자인 가이드 10.1(커스텀 hex 금지)에 어긋나지 않는다(이미 승인된
+        // 팔레트 색을 그대로 재사용, 새 hex 없음). 이전에 이 자리를 감쌌던
+        // `verseTranslationTabBackground`(시스템 이차 배경색)는 이제 이
+        // 자리 말고는 쓰는 곳이 없어 함께 지웠다.
+        if showsVerseTranslationTabs {
+            HStack(spacing: 6) {
+                Image(systemName: "arrow.turn.down.right")
+                    .font(.caption.weight(.semibold))
+                    .foregroundStyle(JBCHCategoryPalette.navy.opacity(0.75))
+                Text("번역본")
+                    .font(.footnote.weight(.semibold))
+                    .foregroundStyle(JBCHCategoryPalette.navy)
+                    .fixedSize()
+                Picker("", selection: Binding(
+                    get: { selectedVerseTranslation ?? activeVerseTranslations.first?.code ?? "" },
+                    set: { selectedVerseTranslationCode = $0 }
+                )) {
+                    ForEach(activeVerseTranslations, id: \.code) { translation in
+                        Text(translation.displayName).tag(translation.code)
+                    }
+                }
+                .pickerStyle(.segmented)
+                .labelsHidden()
+                .controlSize(.small)
+            }
+            .padding(.leading, 10)
+            .padding(.trailing, 10)
+            .padding(.vertical, 6)
+            .background(
+                RoundedRectangle(cornerRadius: 8, style: .continuous)
+                    .fill(JBCHCategoryPalette.navy.opacity(0.08))
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 8, style: .continuous)
+                            .strokeBorder(JBCHCategoryPalette.navy.opacity(0.25), lineWidth: 1)
+                    )
+            )
+            .padding(.leading, 16)
+            .listRowSeparator(.hidden)
+        }
+
         Section {
-            if viewModel.verseResults.isEmpty { emptyRow() }
+            if verseGroups.isEmpty { emptyRow() }
             // [2026-08-26 수정] 사용자 요청 — "성경 검색 결과가 장별로
             // 그룹핑되고, 그 같은 장안에 절이 세부적으로 표시될 수 있도록."
             // 예전엔 `verseResults`(가중치 랭킹 순서)를 그대로 평평하게
             // 나열했다 — 이제 `SearchViewModel.groupedVerseResults`가 그
             // 순서는 건드리지 않은 채(랭킹/더보기 페이지네이션은 여전히
             // `verseResults` 기준) 화면 표시용으로만 장 단위 그룹(정경순 고정,
-            // 사용자 확인 사항)을 만들어 준다.
-            ForEach(viewModel.groupedVerseResults) { group in
+            // 사용자 확인 사항)을 만들어 준다. [2026-09-05 변경] 번역본별
+            // 하위 탭이 선택돼 있으면 위에서 이미 걸러낸 `verseGroups`를 쓴다.
+            ForEach(verseGroups) { group in
                 verseChapterGroupHeader(group)
                 ForEach(group.verses) { result in
                     groupedVerseRow(result)
                 }
             }
-            // [2026-08-25 신설, 2026-08-26 100개로 확대] 사용자 요청 — "limit
-            // 50을 해제할 수 있는 방법도 추가할 것 — 더보기 버튼." /
-            // "검색결과를 100개 단위로 보여줄것." `SearchViewModel.searchVerses`가
-            // 이제 매칭된 절 전체를 성경순으로 갖고 있다가 화면엔 100개씩만
+            // [2026-08-25 신설, 2026-08-26 100개로 확대, 2026-09-05 50개로
+            // 축소] 사용자 요청 — "limit 50을 해제할 수 있는 방법도 추가할
+            // 것 — 더보기 버튼." / "검색결과를 100개 단위로 보여줄것." /
+            // "성경 검색결과를 50개 단위로 불러올것." `SearchViewModel.searchVerses`가
+            // 이제 매칭된 절 전체를 성경순으로 갖고 있다가 화면엔 50개씩만
             // 보여준다(`SearchViewModel.verseResultPageSize`) — 이 버튼을
-            // 누르면 DB를 다시 조회하지 않고 이미 메모리에 있는 다음 100개를
-            // 더 보여준다.
+            // 누르면 DB를 다시 조회하지 않고 이미 메모리에 있는 다음 50개를
+            // 더 보여준다. [2026-09-05] 이 개수는 번역본별로 나뉘지 않은
+            // 전체 기준 그대로다 — 위 설계 근거 주석 참고.
             if viewModel.hasMoreVerseResults {
+                // [2026-09-05 수정] 사용자 지적 — "각 번역본마다 매칭 숫자가
+                // 달라야 하는 것 아닌가?" 정확한 버그였다: 번역본 하위 탭을
+                // 어느 걸 보고 있든 이 라벨은 항상 `allVerseResults.count -
+                // verseResults.count`(전체 기준 잔여량)만 보여줘 모든 탭에서
+                // 같은 숫자가 떴다. "더보기"를 누르면 여전히 전체
+                // 페이지네이션(`visibleVerseResultCount`)이 한 번에 늘어나는
+                // 공유 구조는 그대로 두되(위 설계 근거 주석 — 번역본별 독립
+                // 페이지네이션이 아님), 라벨에 보여주는 숫자만큼은 지금 선택된
+                // 번역본 탭 기준으로 "그 번역본의 전체 매칭 수 - 지금까지 이
+                // 탭에 로드된 수"를 계산해 실제로 그 탭에 남은 개수를 보여준다.
+                let remainingCount = selectedVerseTranslationTotalCount
+                    .map { max(0, $0 - selectedVerseTranslationLoadedCount) }
+                    ?? (viewModel.allVerseResults.count - viewModel.verseResults.count)
                 Button {
                     viewModel.loadMoreVerseResults()
                 } label: {
                     HStack {
                         Spacer()
-                        Label("더보기 (\(viewModel.allVerseResults.count - viewModel.verseResults.count)개 남음)", systemImage: "chevron.down.circle")
-                            .font(.subheadline.weight(.medium))
+                        Label("더보기 (\(remainingCount)개 남음)", systemImage: "chevron.down.circle")
+                            .font(.body.weight(.medium))
                         Spacer()
                     }
                 }
@@ -887,18 +1132,32 @@ private struct SearchContentView: View {
                 .padding(.vertical, 6)
             }
         } header: {
-            sectionHeader("성경구절", icon: "book.closed.fill", color: JBCHCategoryPalette.navy, count: viewModel.allVerseResults.count)
+            sectionHeader(
+                "성경구절", icon: "book.closed.fill", color: JBCHCategoryPalette.navy,
+                count: showsVerseTranslationTabs ? verseGroups.reduce(0) { $0 + $1.verses.count } : viewModel.allVerseResults.count
+            )
         }
 
+        case .outline:
         Section {
             if viewModel.outlineResults.isEmpty { emptyRow() }
-            ForEach(viewModel.outlineResults) { result in
-                outlineRow(result)
+            // [2026-09-05 수정] 사용자 요청 — "개요 검색결과를 성경단위로
+            // 그룹핑 할것. (성경검색 결과가 장단위로 그룹핑 된것처럼)"
+            // `resultsSection` 위 "성경구절" 섹션이 `groupedVerseResults`로
+            // 장 단위 그룹을 그리는 것과 같은 방식 — `outlineResults`
+            // 자체(순서/필터링)는 그대로 두고, 화면 표시만
+            // `SearchViewModel.groupedOutlineResults`로 책 단위 그룹을 만든다.
+            ForEach(viewModel.groupedOutlineResults) { group in
+                outlineGroupHeader(group)
+                ForEach(group.items) { result in
+                    groupedOutlineRow(result)
+                }
             }
         } header: {
             sectionHeader("개요", icon: "list.bullet.rectangle.fill", color: JBCHCategoryPalette.slateTeal, count: viewModel.outlineResults.count)
         }
 
+        case .notes:
         Section {
             if viewModel.phraseNoteResults.isEmpty { emptyRow() }
             ForEach(viewModel.phraseNoteResults) { result in
@@ -926,6 +1185,7 @@ private struct SearchContentView: View {
             sectionHeader("말씀 요약", icon: "text.quote", color: JBCHCategoryPalette.wood, count: viewModel.summaryResults.count)
         }
 
+        case .document:
         Section {
             if viewModel.documentResults.isEmpty { emptyRow() }
             ForEach(viewModel.documentResults) { result in
@@ -933,6 +1193,7 @@ private struct SearchContentView: View {
             }
         } header: {
             sectionHeader("연구문서", icon: "doc.text.fill", color: JBCHCategoryPalette.shelfSlate, count: viewModel.documentResults.count)
+        }
         }
     }
 
@@ -944,11 +1205,15 @@ private struct SearchContentView: View {
             Image(systemName: icon)
                 .foregroundStyle(color)
             Text(title)
-                .font(.headline)
+                // [2026-09-05 확대] 사용자 요청 — "검색 결과의 폰트가
+                // 전체적으로 작음 ... 그외 다른 폰트도 더 키울 것."
+                // `.headline`(iOS 기본 17pt) → `.title3.weight(.semibold)`
+                // (iOS 기본 20pt)로 한 단계 키웠다.
+                .font(.title3.weight(.semibold))
                 .foregroundStyle(.primary)
             Spacer()
             Text("\(count)")
-                .font(.caption.weight(.bold).monospacedDigit())
+                .font(.subheadline.weight(.bold).monospacedDigit())
                 .foregroundStyle(.secondary)
                 .padding(.horizontal, 7)
                 .padding(.vertical, 2)
@@ -958,6 +1223,35 @@ private struct SearchContentView: View {
         .padding(.vertical, 4)
     }
 
+    /// [2026-09-05 신설] 위 `resultsSection`의 상위(4개 분류) 탭 버튼 하나.
+    /// 선택 여부에 따라 배경을 "꽉 찬 색(선택됨)"과 "옅은 색(선택 안 됨)"으로
+    /// 바꿔 눌림 상태를 분명히 하고, 아이콘+제목을 세로로 쌓아 아래 번역본
+    /// 하위 탭(가로 한 줄, 작은 세그먼트)과 모양 자체를 다르게 가져갔다 —
+    /// 두 탭의 위계 차이가 크기뿐 아니라 형태로도 드러나게 하려는 의도.
+    private func mainResultTabButton(_ tab: SearchResultTab) -> some View {
+        let isSelected = selectedResultTab == tab
+        return Button {
+            selectedResultTab = tab
+        } label: {
+            VStack(spacing: 4) {
+                Image(systemName: tab.icon)
+                    .font(.system(size: 18, weight: .semibold))
+                Text(tab.title)
+                    .font(.footnote.weight(.semibold))
+                    .lineLimit(1)
+                    .minimumScaleFactor(0.85)
+            }
+            .frame(maxWidth: .infinity)
+            .padding(.vertical, 10)
+            .foregroundStyle(isSelected ? Color.white : tab.color)
+            .background(
+                RoundedRectangle(cornerRadius: 10, style: .continuous)
+                    .fill(isSelected ? tab.color : tab.color.opacity(0.12))
+            )
+        }
+        .buttonStyle(.plain)
+    }
+
     private func emptyRow(_ text: String = "결과 없음") -> some View {
         HStack(spacing: 6) {
             Image(systemName: "tray")
@@ -965,7 +1259,10 @@ private struct SearchContentView: View {
             Text(text)
                 .foregroundStyle(.secondary)
         }
-        .font(.subheadline)
+        // [2026-09-05 확대] 사용자 요청 — "검색 결과의 폰트가 전체적으로
+        // 작음. 가장 작은 폰트의 크기를 보통크기로 키우고, 그외 다른 폰트도
+        // 더 키울 것."
+        .font(.body)
         .padding(.vertical, 6)
     }
 
@@ -991,7 +1288,10 @@ private struct SearchContentView: View {
             VStack(alignment: .leading, spacing: 6) {
                 HStack(spacing: 8) {
                     Text(title)
-                        .font(.body.weight(.semibold))
+                        // [2026-09-05 확대] 사용자 요청 — "검색 결과의
+                        // 폰트가 전체적으로 작음 ... 그외 다른 폰트도 더
+                        // 키울 것."
+                        .font(.title3.weight(.semibold))
                         .lineLimit(1)
                     if isReferenceMatch {
                         badge("참조 일치", color: .green, systemImage: "checkmark.seal.fill")
@@ -1028,7 +1328,7 @@ private struct SearchContentView: View {
                             occurrenceChip(occurrenceCount)
                         }
                         highlightedText(excerptText, keywords: excerptKeywords)
-                            .font(.subheadline)
+                            .font(.body)
                             .foregroundStyle(.secondary)
                             .lineLimit(2)
                     }
@@ -1041,17 +1341,19 @@ private struct SearchContentView: View {
     /// 분류별 색상 원형 아이콘 배지.
     private func categoryIcon(_ systemImage: String, color: Color) -> some View {
         Image(systemName: systemImage)
-            .font(.system(size: 15, weight: .semibold))
+            // [2026-09-05 확대] 아이콘 15pt→18pt, 배지 34×34→40×40 — 아래
+            // rowLabel 제목이 `.body`→`.title3`로 커진 것과 비례를 맞췄다.
+            .font(.system(size: 18, weight: .semibold))
             .foregroundStyle(color)
-            .frame(width: 34, height: 34)
-            .background(color.opacity(0.14), in: RoundedRectangle(cornerRadius: 9, style: .continuous))
+            .frame(width: 40, height: 40)
+            .background(color.opacity(0.14), in: RoundedRectangle(cornerRadius: 10, style: .continuous))
     }
 
     /// "(xx 회 일치)" 접두어 — 예전엔 그냥 캡션 텍스트였는데, 강조색 캡슐 배지로
     /// 바꿔 본문 발췌와 시각적으로 구분되게 한다.
     private func occurrenceChip(_ count: Int) -> some View {
         Text("\(count)회 일치")
-            .font(.caption.weight(.semibold).monospacedDigit())
+            .font(.subheadline.weight(.semibold).monospacedDigit())
             .padding(.horizontal, 7)
             .padding(.vertical, 3)
             .background(Color.accentColor.opacity(0.14), in: Capsule())
@@ -1075,11 +1377,11 @@ private struct SearchContentView: View {
         HStack(spacing: 10) {
             categoryIcon("book.closed.fill", color: JBCHCategoryPalette.navy)
             Text("\(group.bookNameKo) \(group.chapter)장")
-                .font(.body.weight(.semibold))
+                .font(.title3.weight(.semibold))
                 .lineLimit(1)
             Spacer()
             Text("\(group.verses.count)절")
-                .font(.caption2.weight(.medium))
+                .font(.footnote.weight(.medium))
                 .foregroundStyle(.tertiary)
         }
         .padding(.vertical, 4)
@@ -1183,7 +1485,7 @@ private struct SearchContentView: View {
         }
         .buttonStyle(.plain)
         .foregroundStyle(.secondary)
-        .font(.system(size: 14))
+        .font(.system(size: 16))
     }
 
     /// 위 `verseRowActionButtons`의 "복사" 버튼 — `BibleReadingView.
@@ -1224,10 +1526,10 @@ private struct SearchContentView: View {
     /// 두되, 장 헤더와 마찬가지로 기본(primary) 색을 명시해 톤을 분명히 했다.
     private func verseExcerptAttributedString(_ result: VerseSearchResult) -> AttributedString {
         var prefix = AttributedString("\(result.verse)절) ")
-        prefix.font = .subheadline.weight(.semibold)
+        prefix.font = .body.weight(.semibold)
         prefix.foregroundColor = .primary
         var body = highlightedAttributedString(result.content, keywords: result.highlightKeywords)
-        body.font = .subheadline
+        body.font = .body
         body.foregroundColor = .secondary
         return prefix + body
     }
@@ -1245,7 +1547,7 @@ private struct SearchContentView: View {
     private func verseMatchCountBadge(_ count: Int) -> some View {
         let color = verseMatchCountBadgeColor(count)
         return Text("\(count)단어")
-            .font(.caption2.weight(.semibold).monospacedDigit())
+            .font(.caption.weight(.semibold).monospacedDigit())
             .padding(.horizontal, 6)
             .padding(.vertical, 2)
             .background(color.opacity(0.14), in: Capsule())
@@ -1274,7 +1576,44 @@ private struct SearchContentView: View {
 
     // MARK: - 개요(BookOutline/ChapterSummary)
 
-    private func outlineRow(_ result: OutlineSearchResult) -> some View {
+    /// [2026-09-05 신설] 사용자 요청 — "개요 검색결과를 성경단위로 그룹핑
+    /// 할것. (성경검색 결과가 장단위로 그룹핑 된것처럼)" 위
+    /// `verseChapterGroupHeader`와 같은 자리(그룹을 대표하는 헤더 행)지만
+    /// 개요는 책 단위로 묶이므로 장 번호 없이 책 이름만 보여준다.
+    private func outlineGroupHeader(_ group: SearchViewModel.OutlineSearchResultGroup) -> some View {
+        HStack(spacing: 10) {
+            categoryIcon("list.bullet.rectangle.fill", color: JBCHCategoryPalette.slateTeal)
+            Text(group.bookNameKo)
+                .font(.title3.weight(.semibold))
+                .lineLimit(1)
+            Spacer()
+            Text("\(group.items.count)개")
+                .font(.footnote.weight(.medium))
+                .foregroundStyle(.tertiary)
+        }
+        .padding(.vertical, 4)
+        .listRowSeparator(.hidden)
+    }
+
+    /// [2026-09-05 재작성] 사용자 요청 — "검색 결과마다 아이콘이 있는
+    /// 것이 아니라, 해당 성경에만 아이콘이 있고 그아래 책 개요, 장별 개요의
+    /// 결과를 나타내라. ... 성경구절 검색결과와 비슷하게 디자인 하되 성경은
+    /// 장으로 그룹해서 절단위로 표현했다면, 개요은 성경으로 그룹으로 묶어,
+    /// 장단위로 표현한 것." 아이콘은 위 `outlineGroupHeader`(책마다 한 번)
+    /// 하나로 옮기고, 이 행은 `groupedVerseRow`(장 헤더 아래 "N절) 본문
+    /// [N단어]" 한 줄)와 정확히 같은 뼈대로 다시 그린다 — `rowLabel`(아이콘
+    /// + 제목 줄 + 발췌 줄 두 줄 구조)은 이제 이 자리와 맞지 않아 더 이상
+    /// 쓰지 않는다. 접두어는 책 전체 개요면 "개요)", 장별 개요면 "N장)" —
+    /// 사용자가 준 예시(마태복음 아래 "개요) ...", "1장) ...", "2장) ...")
+    /// 그대로다. 오른쪽 끝 배지는 `verseMatchCountBadge`("N단어", 중복
+    /// 제거된 매칭 단어 수 전용)를 그대로 재사용하지 않았다 — 개요는 그
+    /// 개념(distinct word count)에 대응하는 값이 없고 `bodyOccurrenceSum`은
+    /// "본문에 등장한 총 횟수"라 의미가 다르기 때문이다(위
+    /// `groupedOutlineResults` 선언부 주석과 같은 근거). 대신 이 프로젝트가
+    /// 이미 그 정확한 의미("총 등장 횟수")로 쓰고 있는 기존 `occurrenceChip`
+    /// ("N회 일치")을 재사용해 위치만 행 오른쪽 끝(`verseMatchCountBadge`
+    /// 자리)으로 옮겼다 — 새 문구를 만들지 않았다.
+    private func groupedOutlineRow(_ result: OutlineSearchResult) -> some View {
         Button {
             AppNavigationRequest.shared.request(.outline)
             if let chapter = result.chapter {
@@ -1283,13 +1622,22 @@ private struct SearchContentView: View {
                 OutlineNavigationRequest.shared.requestBook(bookId: result.bookId)
             }
         } label: {
-            rowLabel(
-                icon: "list.bullet.rectangle.fill", iconColor: JBCHCategoryPalette.slateTeal,
-                title: outlineTitle(result),
-                isReferenceMatch: result.isReferenceMatch,
-                occurrenceCount: result.bodyExcerpt != nil ? result.bodyOccurrenceSum : nil,
-                excerptText: result.bodyExcerpt, excerptKeywords: result.highlightKeywords
-            )
+            HStack(alignment: .firstTextBaseline, spacing: 8) {
+                Text(outlineExcerptAttributedString(result))
+                    .lineLimit(2)
+                if result.isReferenceMatch {
+                    badge("참조 일치", color: .green, systemImage: "checkmark.seal.fill")
+                }
+                Spacer(minLength: 8)
+                // [원본 outlineRow와 같은 조건] 참조만 일치하고 본문 텍스트
+                // 자체엔 매칭이 없는 경우(`bodyExcerpt == nil`)는 "0회 일치"
+                // 처럼 보여주는 대신 배지를 아예 숨긴다.
+                if let bodyExcerpt = result.bodyExcerpt, !bodyExcerpt.isEmpty {
+                    occurrenceChip(result.bodyOccurrenceSum)
+                }
+            }
+            .padding(.vertical, 4)
+            .contentShape(Rectangle())
         }
         // SidebarNavigationView의 "태그 관계" 별도 창 항목과 같은 원칙 — 새
         // 화면으로 전환하는 Button이 List 안에서 기존 NavigationLink 행과 같은
@@ -1297,12 +1645,20 @@ private struct SearchContentView: View {
         .buttonStyle(.plain)
     }
 
-    private func outlineTitle(_ result: OutlineSearchResult) -> String {
-        let bookName = BooksProvider.shared.book(id: result.bookId)?.nameKo ?? "성경"
-        if let chapter = result.chapter {
-            return "\(bookName) \(chapter)장 개요"
-        }
-        return "\(bookName) 개요"
+    /// [2026-09-05 신설] `groupedVerseRow`의 `verseExcerptAttributedString`과
+    /// 같은 원리 — "N장)"/"개요)" 접두어(굵게, 1차색)와 하이라이트가 적용된
+    /// 발췌 본문(보통 굵기, 보조색)을 하나의 `AttributedString`으로 이어
+    /// 붙여 `Text` 한 줄로 그린다. 책 전체 개요는 장 번호가 없으므로
+    /// "개요)"를, 장별 개요는 "N장)"을 접두어로 쓴다(사용자 예시와 동일).
+    private func outlineExcerptAttributedString(_ result: OutlineSearchResult) -> AttributedString {
+        let prefixText = result.chapter.map { "\($0)장) " } ?? "개요) "
+        var prefix = AttributedString(prefixText)
+        prefix.font = .body.weight(.semibold)
+        prefix.foregroundColor = .primary
+        var body = highlightedAttributedString(result.bodyExcerpt ?? "", keywords: result.highlightKeywords)
+        body.font = .body
+        body.foregroundColor = .secondary
+        return prefix + body
     }
 
     // MARK: - 메모(VersePhraseNote)
@@ -1480,15 +1836,19 @@ private struct SearchContentView: View {
     /// [2026-08-19 확장] 아이콘을 선택적으로 붙일 수 있게 했다("참조 일치" 배지는
     /// 체크마크, 태그 배지는 태그 아이콘) — 폰트도 `.caption2`→`.caption`으로
     /// 한 단계 키워 다른 확대된 본문 요소들과 균형을 맞췄다.
+    /// [2026-09-05 재확대] 사용자 요청 — "검색 결과의 폰트가 전체적으로 작음
+    /// ... 그외 다른 폰트도 더 키울 것." 아이콘 `.caption2`→`.caption`,
+    /// 텍스트 `.caption`→`.subheadline`으로 한 단계씩 더 키웠다 — 위
+    /// `rowLabel`/그룹 헤더가 커진 것과 균형을 맞췄다.
     private func badge(_ text: String, color: Color, systemImage: String? = nil) -> some View {
         HStack(spacing: 3) {
             if let systemImage {
                 Image(systemName: systemImage)
-                    .font(.caption2)
+                    .font(.caption)
             }
             Text(text)
         }
-        .font(.caption.weight(.semibold))
+        .font(.subheadline.weight(.semibold))
         .padding(.horizontal, 8)
         .padding(.vertical, 4)
         .background(color.opacity(0.15), in: Capsule())

@@ -82,6 +82,26 @@ enum DocumentTextExtractionService {
         case .hwp, .hwpx:
             await extractHWP(document, context: context)
         }
+
+        // [2026-09-05 추가] 사용자 요청 — "연구문서 combinedText 반복 재생성
+        // 문제를 캐싱 필드로 해결." 위 분기가 무엇이었든(이미지 OCR은 여기서
+        // `documentTexts`를 아직 안 채운다 — 클래스 상단 주석 참고, 그 경우엔
+        // 그냥 빈 문자열로 정확히 반영된다) `documentTexts`가 이 호출로 확정된
+        // 뒤 캐시를 한 번만 다시 만들어 저장한다. 각 개별 분기(`extractPDF`
+        // 등) 안에서 이미 여러 차례 `context.save()`가 일어나지만, 캐시
+        // 필드는 여기 한 곳에서만 갱신·저장하면 모든 형식을 다 커버한다 —
+        // 형식별 함수 6개를 각각 건드릴 필요가 없다.
+        document.rebuildCachedCombinedText()
+        // [2026-09-05 추가] 사용자 요청 — "개요/메모/개인 묵상/말씀 요약/
+        // 연구문서 5개 카테고리 전체스캔 최적화 → FTS5 보조 인덱스(unicode61)."
+        // 캐시 필드를 다시 만든 바로 이 시점에 인덱스도 함께 최신화한다 —
+        // `cachedCombinedText`를 갱신하는 지점과 어긋나면 인덱스가 옛 본문을
+        // 가리키게 된다. 실패해도 무시(`UserContentSearchIndexLocation.upsert`
+        // 선언부 주석 참고).
+        UserContentSearchIndexLocation.upsert(
+            category: .document, sourceId: document.id.uuidString, content: document.cachedCombinedText
+        )
+        try? context.save()
     }
 
     // MARK: - PDF (높은 신뢰도)

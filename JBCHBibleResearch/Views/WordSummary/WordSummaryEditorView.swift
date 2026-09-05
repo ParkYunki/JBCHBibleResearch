@@ -500,6 +500,10 @@ case .contextual, .wordNoteList:
             BibleReferenceIndexingService.removeMentions(
                 sourceType: .wordSummary, sourceId: summary.id.uuidString, context: modelContext
             )
+            // [2026-09-05 추가] 위 VerseMention 정리와 같은 자리 — 빈
+            // 레코드라 지워질 때 FTS 보조 인덱스에 남아 있을 수 있는 항목도
+            // 함께 지운다.
+            UserContentSearchIndexLocation.delete(category: .wordSummary, sourceId: summary.id.uuidString)
         }
         // [2026-08-12 추가] 사용자 논의 — "화면을 닫으면 인덱스를 생성." 지워지지
         // 않고 남은(=`isEmpty`가 아니었던) 레코드만, 그리고 지난 저장 이후로
@@ -507,6 +511,12 @@ case .contextual, .wordNoteList:
         // — 아무것도 안 고치고 열어만 봤다 닫으면 불필요한 재계산을 또 하지 않는다.
         if !isEmpty && summary.pendingIndexRefresh {
             BibleReferenceIndexingService.reindexWordSummary(summary, context: modelContext)
+            // [2026-09-05 추가] `MemoDetailView.handleDisappear()`와 같은
+            // 이유 — 같은 "본문이 실제로 바뀌었을 때만" 신호를 재사용해 FTS
+            // 인덱스도 함께 최신화한다.
+            UserContentSearchIndexLocation.upsert(
+                category: .wordSummary, sourceId: summary.id.uuidString, content: summary.contentText
+            )
             summary.pendingIndexRefresh = false
             try? modelContext.save()
         }

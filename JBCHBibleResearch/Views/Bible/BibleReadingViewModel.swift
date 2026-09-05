@@ -444,6 +444,14 @@ final class BibleReadingViewModel {
         )
         modelContext.insert(note)
         try? modelContext.save()
+        // [2026-09-05 추가] 사용자 요청 — "개요/메모/개인 묵상/말씀 요약/
+        // 연구문서 5개 카테고리 전체스캔 최적화 → FTS5 보조 인덱스(unicode61)."
+        // 여기(확대보기 메모)는 `AutosaveController`를 쓰지 않고 항상 즉시
+        // 저장이라(디바운스 없음) `pendingIndexRefresh` 같은 지연 신호가
+        // 필요 없다 — 저장하는 이 자리에서 바로 인덱스도 최신화한다.
+        UserContentSearchIndexLocation.upsert(
+            category: .phraseNote, sourceId: note.id.uuidString, content: note.noteText
+        )
         chapterPhraseNotes.append(note)
         rebuildPhraseNotesIndex()
         invalidateInlineAnnotationCache(translationCode: translationCode, verse: verse)
@@ -454,11 +462,20 @@ final class BibleReadingViewModel {
         note.noteText = noteText
         note.updatedAt = .now
         try? modelContext.save()
+        // [2026-09-05 추가] 위 `addPhraseNote`와 같은 이유 — 수정 시에도 즉시
+        // 인덱스를 최신화한다.
+        UserContentSearchIndexLocation.upsert(
+            category: .phraseNote, sourceId: note.id.uuidString, content: note.noteText
+        )
     }
 
     func deletePhraseNote(_ note: VersePhraseNote) {
         modelContext.delete(note)
         try? modelContext.save()
+        // [2026-09-05 추가] 삭제 시 FTS 보조 인덱스에 남아 있는 항목도 함께
+        // 지운다(`MemoDetailView`/`WordSummaryEditorView`의 같은 정리와 동일한
+        // 이유 — 정확성엔 영향 없지만 죽은 행 누적을 막는다).
+        UserContentSearchIndexLocation.delete(category: .phraseNote, sourceId: note.id.uuidString)
         chapterPhraseNotes.removeAll { $0.id == note.id }
         rebuildPhraseNotesIndex()
         invalidateInlineAnnotationCache(translationCode: note.translationCode, verse: note.verse)

@@ -130,6 +130,15 @@ public enum BibleReferenceError: Error, LocalizedError, CustomStringConvertible 
     /// 아니다"라는 뜻 — `databaseOpenFailed`(파일 자체를 못 열었음)와는 다른 문제라
     /// 별도 케이스로 분리했다.
     case unrecognizedSchema(path: String)
+    /// [2026-09-05 추가] `TranslationSearchIndex`(사용자 추가 번역본용 보조
+    /// FTS5 인덱스) 파일을 열지 못했을 때. `databaseOpenFailed`와 별도 케이스로
+    /// 둔 이유는 대상이 원본 번역본 파일이 아니라 앱이 로컬에 만든 보조 인덱스
+    /// 파일이라 원인/조치가 다르기 때문(예: 캐시 디렉터리 접근 문제) — 호출부가
+    /// 이 실패를 감지하면 기존 LIKE 검색으로 안전하게 폴백한다(SearchViewModel.
+    /// searchVerses 참고).
+    case indexOpenFailed(path: String, code: Int32)
+    /// `TranslationSearchIndex` 빌드(가상 테이블 생성/데이터 삽입) 도중 실패.
+    case indexBuildFailed(reason: String)
 
     public var description: String {
         switch self {
@@ -145,6 +154,10 @@ public enum BibleReferenceError: Error, LocalizedError, CustomStringConvertible 
             return "이 파일은 여러 번역본을 포함하고 있어 versionCode를 반드시 지정해야 합니다."
         case .unrecognizedSchema(let path):
             return "알 수 없는 성경 데이터베이스 형식입니다(BibleVerses/Bible 테이블을 찾을 수 없음): \(path)"
+        case .indexOpenFailed(let path, let code):
+            return "전문 검색 보조 인덱스를 열지 못했습니다(code \(code)): \(path)"
+        case .indexBuildFailed(let reason):
+            return "전문 검색 보조 인덱스 생성에 실패했습니다: \(reason)"
         }
     }
 

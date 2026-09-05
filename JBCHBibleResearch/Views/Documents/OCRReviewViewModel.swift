@@ -59,6 +59,18 @@ final class OCRReviewViewModel {
             modelContext.insert(record)
         }
         document.indexStatus = .indexed
+        // [2026-09-05 추가] 사용자 요청 — "연구문서 combinedText 반복 재생성
+        // 문제를 캐싱 필드로 해결." `documentTexts`를 직접 수정하는 두 번째
+        // 지점(`DocumentTextExtractionService.extract`가 첫 번째) — 여기서도
+        // 캐시를 함께 갱신해야 어긋나지 않는다(`SourceDocument.cachedCombinedText`
+        // 선언부 주석 참고).
+        document.rebuildCachedCombinedText()
+        // [2026-09-05 추가] `DocumentTextExtractionService.extract(for:context:)`의
+        // 같은 훅과 동일한 이유 — 캐시를 갱신하는 두 지점 모두에서 FTS 인덱스도
+        // 함께 최신화해야 어긋나지 않는다.
+        UserContentSearchIndexLocation.upsert(
+            category: .document, sourceId: document.id.uuidString, content: document.cachedCombinedText
+        )
 
         do {
             try modelContext.save()
