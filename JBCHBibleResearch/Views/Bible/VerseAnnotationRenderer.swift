@@ -448,11 +448,38 @@ enum VerseAnnotationRenderer {
         // 있는 단어는 색깔로 표현해 줄 것." 표시 모드(`AnnotatedVerseFlowView`)
         // 와 시각적으로 어긋나지 않도록 선택 모드에도 같은 신호를 반영한다.
         hanjaWords: [HanjaWordAnnotation] = [],
+        // [2026-09-05 추가] 사용자 보고 — 우클릭 "선택"(`VerseTextSelectionPopover`)
+        // 에서 텍스트 드래그 선택 중 한글 번역본에서만 선택 영역이 빠르게
+        // 깜박임(영문은 정상). 원인: 아래 `forcedBreakText`가 하는 일은 바로
+        // 위 [2026-08-11 10차 수정] 주석이 설명하듯 "선택 모드 줄바꿈을 표시
+        // 모드와 맞추는 것"인데, `VerseTextSelectionPopover`는 애초에 표시
+        // 모드(`AnnotatedVerseFlowView`)를 같이 보여주지 않는 화면이라(그
+        // 파일 상단 주석 — "이 팝오버의 목적은... 주석을 보여주는 것이
+        // 아니다") 줄바꿈을 맞출 대상 자체가 없다 — 그런데도 지금까지
+        // 무조건 `forcedBreakText`를 거쳐 한글 텍스트에만 보이지 않는
+        // U+2028(줄 구분자)이 곳곳에(대략 23자마다) 끼워져 있었다. 영문/숫자
+        // 포함 텍스트는 이 치환이 사실상 없는 것과 같다(같은 파일
+        // `forcedBreakText` 주석 참고 — 라틴 줄 사이엔 "건너뛴 구분자"가
+        // 없어 실질적으로 치환되지 않는다) — 이게 지금까지 찾아낸, 한글/영문
+        // 경로 사이의 유일한 문자열 내용 차이다.
+        //
+        // 표시 모드와 맞출 필요가 없는 호출부(`VerseTextSelectionPopover`)는
+        // 이 플래그를 `false`로 넘겨 `forcedBreakText`를 건너뛰고 원본
+        // `text`를 그대로 쓰게 한다 — 그러면 `NSTextView`/`UITextView`가
+        // (영문과 똑같이) 자기 폭 기준으로 자연스럽게 줄바꿈하므로, 한글
+        // 텍스트에서도 영문과 동일한 코드 경로를 타게 되어 U+2028과 관련된
+        // 어떤 TextKit 상호작용이 원인이었든 이 화면에서는 아예 발생하지
+        // 않는다. 기본값은 `true`(기존 동작 유지)라 표시 모드와의 줄바꿈
+        // 일치가 실제로 필요한 `VerseZoomView`(선택 모드로 새 형광펜/표시/
+        // 메모/관주를 만들 때) 호출부는 코드를 바꾸지 않아도 그대로 동작한다.
+        matchDisplayModeLineBreaks: Bool = true,
         font: PlatformFont, textColor: PlatformColor, containerWidth: CGFloat, targetCharsPerLine: Int = 23
     ) -> NSAttributedString {
         let paragraph = NSMutableParagraphStyle()
         paragraph.lineSpacing = font.typographicLineHeight * (2.3 - 1)
-        let displayText = forcedBreakText(from: text, font: font, containerWidth: containerWidth, targetCharsPerLine: targetCharsPerLine)
+        let displayText = matchDisplayModeLineBreaks
+            ? forcedBreakText(from: text, font: font, containerWidth: containerWidth, targetCharsPerLine: targetCharsPerLine)
+            : text
         let result = NSMutableAttributedString(
             string: displayText,
             attributes: [.font: font, .foregroundColor: textColor, .paragraphStyle: paragraph]

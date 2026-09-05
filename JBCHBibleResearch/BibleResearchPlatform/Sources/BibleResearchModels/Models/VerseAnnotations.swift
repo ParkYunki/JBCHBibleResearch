@@ -197,18 +197,39 @@ public final class VerseCrossReference {
     /// 안전하게 되돌아간다(이 모델은 그 폴백을 강제하지 않고 정합 여부만 알려준다).
     public var entryLabels: [String] = []
     public var entryVerseCounts: [Int] = []
-    /// [2026-08-25 추가] 사용자 요청 — "왼쪽 사이드바 메뉴 명 하단 수정된 이력
-    /// 리스트에 성경 내용의 ... 주석 수정한 내용도 이력에 나타날 수 있도록."
-    /// 이전엔 `createdAt`만 있어 대상 절 하나만 지우는 편집(`removeCrossReferenceTarget`/
-    /// `removeCrossReferenceGroup`, `BibleReadingViewModel.swift`)이 `targets`를
-    /// 제자리에서 바꿔도 어떤 시각도 갱신되지 않았다 — `VersePhraseNote.updatedAt`과
-    /// 완전히 같은 이유로 추가한다. 기존 레코드는 기본값(생성 시각과 같은 `.now`,
-    /// 실제로는 그 레코드의 `createdAt`과 마이그레이션 시점 값이 다를 수 있지만
-    /// 이 필드가 없던 과거엔 애초에 "마지막 수정" 개념 자체가 없었으므로 안전한
-    /// 폴백이다)으로 채워진다 — SwiftData의 추가적(additive) 라이트웨이트
-    /// 마이그레이션(신규 저장 프로퍼티 + 기본값)이라 기존 사용자 데이터에
-    /// 영향을 주지 않는다(`VersePhraseNote`가 이미 같은 방식으로 검증됨).
-    public var updatedAt: Date = Date.now
+    /// [2026-08-25 추가, 2026-09-05 수정] 사용자 요청 — "왼쪽 사이드바 메뉴
+    /// 명 하단 수정된 이력 리스트에 성경 내용의 ... 주석 수정한 내용도 이력에
+    /// 나타날 수 있도록." 이전엔 `createdAt`만 있어 대상 절 하나만 지우는
+    /// 편집(`removeCrossReferenceTarget`/`removeCrossReferenceGroup`,
+    /// `BibleReadingViewModel.swift`)이 `targets`를 제자리에서 바꿔도 어떤
+    /// 시각도 갱신되지 않았다.
+    ///
+    /// [2026-09-05 수정] 사용자 보고 — "왼쪽 사이드 바 하단 데이터 중에
+    /// 사용자가 입력한 관주가 어제날짜로 고정되어있음." 원인: 처음 이 필드를
+    /// 추가했을 때 비-옵셔널 `Date = Date.now` 기본값을 썼는데, SwiftData의
+    /// 라이트웨이트 마이그레이션은 이 신규 컬럼을 "레코드마다 실제 생성
+    /// 시각"이 아니라 "마이그레이션이 실행된 그 순간"의 `Date.now`로 일괄
+    /// 채운다 — 그 결과 이 필드가 생기기 전부터 있던(한 번도 대상 절을 지운
+    /// 적 없는) 관주들이 전부 "마이그레이션이 실행된 그 하루"에 영원히
+    /// 고정된 채로 `sortDate`(`SidebarNavigationView.SidebarQuickItem`)에
+    /// 노출됐다. 옵셔널로 바꿔 "실제로 편집된 적 있음"과 "아직 한 번도
+    /// 편집되지 않음(nil)"을 구분할 수 있게 하고, 호출부(`SidebarQuickItem.
+    /// sortDate`)가 nil일 때 `createdAt`으로 대체 표시하게 한다 — 앞으로
+    /// 새로 만들어지는 관주는 편집 전까지 정확히 `createdAt`으로만 보이고,
+    /// 실제로 대상 절을 지우는 편집이 일어난 뒤에만(`removeCrossReferenceTarget`/
+    /// `removeCrossReferenceGroup`이 여전히 `.now`로 갱신) 그 시각이 우선한다.
+    ///
+    /// ⚠️ [알려진 한계] 이 옵셔널 전환은 "앞으로" 잘못된 값이 채워지는 것을
+    /// 막을 뿐, 이미 위 버그로 실제 기기에 저장돼 있는 기존 관주의 `updatedAt`
+    /// (마이그레이션 시점의 구체적인 날짜값, `nil`이 아님)까지 되돌리지는
+    /// 않는다 — SwiftData는 옵셔널로 바꿔도 이미 채워진 값을 nil로 되돌리지
+    /// 않는다. 이미 기기에 있는 그 관주들이 여전히 예전 날짜로 보인다면,
+    /// 그 기존 레코드들만 골라 `updatedAt`을 nil로 되돌리는 별도의 1회성
+    /// 자가 치유 마이그레이션(이 코드베이스의 `migrateLegacyBookmarksIfNeeded`/
+    /// `purgeLegacyMarkHighlights`와 같은 패턴)이 추가로 필요하다 — 어떤
+    /// 레코드가 "진짜 편집"이 아니라 "마이그레이션 오염"인지 구분할 확실한
+    /// 근거가 없어(추측 금지) 이번 수정에는 포함하지 않았다.
+    public var updatedAt: Date?
 
     public var source: VerseCrossReferenceSource {
         get { VerseCrossReferenceSource(rawValue: sourceRaw) ?? .user }
@@ -245,7 +266,11 @@ public final class VerseCrossReference {
         entryLabels: [String] = [],
         entryVerseCounts: [Int] = [],
         createdAt: Date = .now,
-        updatedAt: Date = .now
+        // [2026-09-05 수정] 위 `updatedAt` 프로퍼티 주석 참고 — 기본값을
+        // `nil`로 바꿔, 새로 만드는 관주는 실제로 편집되기 전까지 "편집된
+        // 적 없음"이 정확히 표현되게 한다(예전엔 `.now`가 기본값이라 생성
+        // 시각과 구분이 안 됐다 — 이번 버그의 근본 원인과 같은 부류).
+        updatedAt: Date? = nil
     ) {
         self.id = id
         self.translationCode = translationCode

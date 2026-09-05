@@ -244,6 +244,26 @@ struct TranslationColumnView: View {
                 columnScrollView
             }
         }
+        // [2026-09-04 수정] 사용자 요청 — "세로선을 번역본/성경 장이
+        // 타이틀로 나오는 상단영역까지 표시를 할 것." 예전엔 이 세로선이
+        // (아래 `columnScrollView`가 감싸는) `ScrollView` 자신의 배경으로만
+        // 붙어 있어 제목 영역(바로 위 `Text(translationDisplayName)` 등)
+        // 아래에서부터 시작했다 — 이 컬럼 전체(제목+본문)를 감싸는 이
+        // 바깥 `VStack`으로 옮겨 컬럼 맨 위부터 끝까지 하나로 이어지게
+        // 한다. `.overlay`가 아니라 `.background`를 쓴 이유는 그대로다 —
+        // 본문/제목 위에 겹쳐 그려지지 않고 뒤에 깔린다.
+        .background(alignment: .leading) {
+            if isChapterBookmarked {
+                // [2026-09-04 변경] 사용자 요청 — "장 북마크 세로선을 10pt로
+                // 좀더 굵게 표현할 것." 8pt → 10pt. 상단이 이제 컬럼 맨
+                // 위(제목 영역)까지 닿으므로 `ChapterBookmarkRibbonShape`의
+                // 상단 모양도 둥근 캡 대신 각진 사각형으로 바꿨다(그 struct
+                // 상단 주석 참고).
+                ChapterBookmarkRibbonShape()
+                    .fill(JBCHCategoryPalette.wine)
+                    .frame(width: 10)
+            }
+        }
         // [2026-09-01 추가] 사용자 요청 — "설정 - 성경 - 모양에 배경색 테마
         // 추가." 이 컬럼 뷰는 지금까지 배경을 전혀 지정하지 않아 시스템 기본
         // (라이트/다크 모드 자동 대응)이었다 — `UserSettingsStore.
@@ -277,134 +297,41 @@ struct TranslationColumnView: View {
         #endif
     }
 
+    @ViewBuilder
     private var columnScrollView: some View {
+        // ⚠️ [2026-09-04 신설, 아이폰 스크롤 버벅임 근본 수정] 사용자 실측 결과 —
+        // (1) VerseRow 내용물(형광펜/관주/메모/아이콘 전부)을 Text 하나로 바꿔도
+        // 스크롤은 여전히 버벅였고, (2) `.scrollPosition(id:anchor:)`/
+        // `.scrollTargetLayout()`(뷰포트 "중앙" 절을 스크롤 프레임마다 실시간으로
+        // 추적/보정하는 네이티브 메커니즘)만 잠깐 꺼 보니 그제서야 매끄러워졌다.
+        // 즉 버벅임의 실제 원인은 절 내용이 아니라 이 실시간 중앙 추적 자체다.
+        //
+        // 이 메커니즘이 실제로 필요한 곳은 macOS/아이패드의 "여러 번역본 실시간
+        // 스크롤 동기화"(`respondsToSyncEvents == true`, 사용자가 버벅임을 보고한
+        // 적 없는 쪽) 하나뿐이다 — 아이폰(`respondsToSyncEvents == false`)은
+        // 애초에 팔로워 실시간 동기화 자체를 안 쓰고(`SyncEventSubscriptionModifier`
+        // 참고), "검색 이동/장 리셋/페이지 스와이프 정렬"은 전부 "이 절로
+        // 스크롤해라"라는 1회성 지시일 뿐 실시간 추적이 필요 없다. 그래서
+        // macOS/아이패드(`columnScrollViewSyncTracking`) 쪽은 기존 코드를 그대로
+        // 두고, 아이폰(`columnScrollViewPhoneLightweight`) 쪽만 실시간 추적 없이
+        // 새로 짰다 — 사용자 확인 후 적용, 실기기 빌드로는 아직 재검증 못 했다.
+        if respondsToSyncEvents {
+            columnScrollViewSyncTracking
+        } else {
+            columnScrollViewPhoneLightweight
+        }
+    }
+
+    /// macOS/아이패드 전용 — 위 `columnScrollView` 상단 주석 참고. 리더/팔로워
+    /// 실시간 스크롤 동기화가 실제로 필요한 유일한 경로라, `.scrollPosition(id:
+    /// anchor:)` 기반 기존 구현을 그대로 옮겨왔다(행 하나하나 구성하는 부분만
+    /// 아래 `verseRowView(for:)`로 뽑아 아이폰 쪽과 공유하고, 그 외 이 프로퍼티
+    /// 안쪽 로직·순서·주석은 이번 수정으로 바꾸지 않았다).
+    private var columnScrollViewSyncTracking: some View {
         ScrollView {
             LazyVStack(alignment: .leading, spacing: CGFloat(settings.bibleVerseSpacing)) {
                 ForEach(verses, id: \.verse) { verse in
-                    // [2026-09-04 변경] 사용자 보고 — "구절을 탭해 선택/해제할
-                    // 때 절 텍스트 위치가 살짝 움직임." 원인: 아래 난외주
-                    // 목록(`marginalNoteFootnoteList`)이 예전엔 `VerseRow`
-                    // 자신의 카드 안에서 선택 시에만 펼쳐졌다 — 그 절 카드
-                    // 자체의 높이가 바뀌면서, `.scrollPosition(id:anchor:
-                    // .center)`가 그 높이 변화를 보정하는 과정에서 카드 상단
-                    // (=절 텍스트)이 위로 밀렸다. 한 번만 계산해 `VerseRow`와
-                    // 아래 별도 형제 항목이 같은 값을 공유한다(불필요한 중복
-                    // 조회 방지).
-                    let marginalNotes = marginalNotesProvider(verse.verse)
-                    VerseRow(
-                        verse: verse,
-                        isHighlighted: verse.verse == highlightedVerse,
-                        isSelected: selectedVerses.contains(verse.verse),
-                        isBookmarked: isBookmarkedProvider(verse.verse),
-                        highlights: highlightsProvider(verse.verse),
-                        crossReferences: crossReferencesProvider(verse.verse),
-                        phraseMemos: phraseMemosProvider(verse.verse),
-                        phraseNotes: phraseNotesProvider(verse.verse),
-                        marginalNotes: marginalNotes,
-                        hanjaWords: hanjaWordsProvider(verse.verse),
-                        verseMentions: verseMentionsProvider(verse.verse),
-                        onSelectCrossReferenceTarget: onSelectCrossReferenceTarget,
-                        onSelectPhraseMemo: onSelectPhraseMemo,
-                        onSelectVerseMention: onSelectVerseMention,
-                        inlineAnnotatedContentProvider: inlineAnnotatedContentProvider
-                    )
-                        .id(verse.verse)
-                        // [2026-08-15 재작성, 이후 보조키 변경] 사용자 요청 3가지 —
-                        // ① 일반 클릭: 선택을 "추가"가 아니라 "교체"한다.
-                        // ② Shift/Cmd 클릭: 마지막 기준 절부터 이 절까지 범위 선택.
-                        // ③ Option 클릭: 이 절 하나만 선택 목록에 추가/제거(개별
-                        //   다중 선택), 나머지 선택은 그대로 유지.
-                        //
-                        // ⚠️ [변경 이력] 원래는 ③을 Control 클릭으로 구현했으나,
-                        // macOS에서 Control+클릭은 관례적으로 "두 번째 클릭"(컨텍스트
-                        // 메뉴 열기)으로 OS/AppKit이 먼저 가로챌 수 있어 — 바로 아래
-                        // `.contextMenu`와 충돌할 위험이 있었다. 사용자 요청으로
-                        // Option 키로 교체했다 — Option 클릭은 그런 시스템 예약
-                        // 의미가 없어 같은 문제가 없다.
-                        //
-                        // 수식키 감지는 `NSEvent.modifierFlags`(macOS 전용, 클래스
-                        // 프로퍼티를 그냥 읽기만 하는 표준 AppKit API)를 쓴다 —
-                        // 시스템 전역 이벤트를 감시하는 `NSEvent.
-                        // addGlobalMonitorForEvents`나 `CGEventTap`과 달리, 이 앱
-                        // 자신의 클릭 처리 도중 "지금 눌려 있는 수식키가 뭔지"만
-                        // 물어보는 것이라 손쉬운 사용(접근성) 권한이 전혀 필요
-                        // 없다 — 사용자가 요청 마지막에 건 조건("손쉬운 사용을
-                        // 활성화해야 하는 기능이면 구현하지 말 것")에 해당하지
-                        // 않는다.
-                        .onTapGesture {
-                            onSelectVerse(verse)
-                            #if os(macOS)
-                            let flags = NSEvent.modifierFlags
-                            if flags.contains(.shift) || flags.contains(.command) {
-                                onExtendVerseSelection(verse.verse)
-                            } else if flags.contains(.option) {
-                                onToggleVerseSelection(verse.verse)
-                            } else {
-                                onSelectSingleVerse(verse.verse)
-                            }
-                            #else
-                            // [2026-08-21 수정] 사용자 요청("아이패드 수정사항") —
-                            // "한번 탭하면 선택, 탭한 구절을 탭하면 탭취소.
-                            // 여러구절 탭 = 여러구절 선택." 예전엔 iOS/iPadOS
-                            // 터치에 수식키 신호가 없다는 이유로 항상 "교체"
-                            // 선택(onSelectSingleVerse)만 지원했다 — 이제 macOS의
-                            // Option+클릭과 같은 의미인 onToggleVerseSelection
-                            // (선택 추가/제거, 다른 절 선택은 유지)을 기본 탭
-                            // 동작으로 쓴다. 이 요청은 "아이패드 수정사항" 목록
-                            // 안에 있고 "(맥OS, iOS 공통)" 표기가 없어, macOS 쪽
-                            // 분기(위, 2026-08-15 설계)는 그대로 둔다 — 기존
-                            // 수식키 기반 3단 구분(일반 클릭=교체/Shift·Cmd=범위/
-                            // Option=개별 토글)을 건드리지 않는다.
-                            onToggleVerseSelection(verse.verse)
-                            #endif
-                        }
-                        .contextMenu {
-                            Button {
-                                onCreateMemo(verse)
-                            } label: {
-                                // [2026-08-11 수정] 사용자 요청 — "메모의 이름을
-                                // [개인 주석]으로 변경." 확대보기 액션바와 같은
-                                // 절 전체 메모(UserMemo, rangeStart 없음)를 만드는
-                                // 경로라 동일하게 이름을 맞춘다.
-                                // [2026-08-12 변경] "개인 주석" → "개인 묵상".
-                                Label("개인 묵상 작성", systemImage: "square.and.pencil")
-                            }
-                            // [2026-08-26 신설] 사용자 요청 — iOS 길게 프레스/
-                            // macOS 오른쪽버튼 메뉴에 [선택] 추가("일부 텍스트를
-                            // 선택하여 복사할 수 있는 기능"). [복사](바로 아래)가
-                            // "번역본 전체"라면, 이건 "그 안에서 일부만" —
-                            // `VerseTextSelectionPopover`(호출부가 여는 작은
-                            // 팝오버/시트)에서 실제 드래그 선택이 이뤄진다.
-                            Button {
-                                onSelectPartialText(verse, translationDisplayName)
-                            } label: {
-                                Label("선택", systemImage: "character.cursor.ibeam")
-                            }
-                            // [2026-08-26 신설] 사용자 요청 — iOS 길게 프레스/
-                            // macOS 오른쪽버튼 메뉴에 [복사] 추가("해당 번역본만
-                            // 복사 -> 클릭하면 toast 메세지"). 위 `onCopySingleTranslation`
-                            // 상단 주석 참고 — 이 컬럼의 `translationDisplayName`과
-                            // 지금 행의 `verse`(이 번역본만의 내용)를 그대로
-                            // 넘긴다.
-                            Button {
-                                onCopySingleTranslation(verse, translationDisplayName)
-                            } label: {
-                                Label("복사", systemImage: "doc.on.doc")
-                            }
-                        }
-
-                    // [2026-09-04 신설] 위 `marginalNotes` 지역 변수 상단 주석
-                    // 참고 — 난외주 목록을 `VerseRow`의 카드 밖, 별도 형제
-                    // 항목으로 뺐다. `VerseRow`(`.id(verse.verse)`)는 선택
-                    // 여부와 무관하게 항상 같은 높이를 유지하므로, 이 절이
-                    // 지금 화면 중앙 정렬 대상이어도 더 이상 위로 밀리지
-                    // 않는다 — 대신 이 목록은 자신만의 `.id`를 가진 완전히
-                    // 별도 항목이라, 절 카드와 같은 배경/모서리를 공유하지
-                    // 않고 살짝 떨어진 블록으로 보인다.
-                    if selectedVerses.contains(verse.verse), !marginalNotes.isEmpty {
-                        MarginalNoteFootnoteList(notes: marginalNotes)
-                            .id("\(verse.verse)-marginalNotes")
-                    }
+                    verseRowView(for: verse)
                 }
             }
             // [2026-08-08 추가, 핵심 누락분] `.scrollPosition(id:anchor:)`가
@@ -418,24 +345,10 @@ struct TranslationColumnView: View {
             .scrollTargetLayout()
             .padding()
         }
-        // [2026-09-04 신설] 사용자 요청 — "절을 책갈피 할때는 해당 절에
-        // 세로줄이 쳐지는데, 장을 책갈피 할때는 아무 표시가 없음.
-        // 스크롤영역 뒤 왼쪽 변에 백그라운드로 길게 이어진 세로 라인을
-        // 그어줄 수 있나?" 절 책갈피 세로선(`VerseRow`의 `isBookmarked`
-        // 분기)은 그 절과 함께 스크롤되지만, 이건 "장 전체"를 가리키는
-        // 책갈피(`verse == nil`)라 특정 절에 묶이지 않는다 — 그래서
-        // `LazyVStack` 안이 아니라 이 `ScrollView` 자체의 배경으로 붙여,
-        // 스크롤해도 화면 왼쪽에 항상 고정되어 보이게 한다(사용자 확인 —
-        // "화면에 고정" 방식). `.overlay`가 아니라 `.background`를 쓴 이유 —
-        // 본문 위에 겹쳐 그려지지 않고 뒤에 깔린다("백그라운드로"라는
-        // 요청 표현 그대로).
-        .background(alignment: .leading) {
-            if isChapterBookmarked {
-                RoundedRectangle(cornerRadius: 1.25)
-                    .fill(JBCHCategoryPalette.wine)
-                    .frame(width: 2.5)
-            }
-        }
+        // [2026-09-04 수정] 장 북마크 세로선은 이제 이 컬럼(제목+본문) 전체
+        // 배경에 한 곳에서만 그린다 — 아래 `body` 상단 주석 참고. 예전엔
+        // 이 `ScrollView` 자신의 배경에 붙어 있었으나, "제목 영역까지
+        // 연장" 요청으로 더 바깥(제목을 포함하는 컨테이너)으로 옮겼다.
         .scrollPosition(id: $centerVerseID, anchor: .center)
         // [2026-08-19 추가] 검색 결과 등에서 이 화면이 처음 만들어질 때부터
         // 이미 `highlightedVerse`가 채워져 있는 경우 — 예: 검색 결과를 탭하면
@@ -504,8 +417,221 @@ struct TranslationColumnView: View {
         }
     }
 
+    /// [2026-09-04 신설] 아이폰 전용 — 위 `columnScrollView` 상단 주석 참고.
+    /// `.scrollPosition(id:anchor:)`/`.scrollTargetLayout()` 없이 `ScrollViewReader.
+    /// scrollTo(id:anchor:)`(호출 시점 1회만 이동, 스크롤 중 실시간 추적 없음)로
+    /// "검색 이동/장 리셋/페이지 스와이프 정렬"을 그대로 구현한다. "지금 중앙에
+    /// 가까운 절"이 필요한 유일한 소비처(페이지 전환 시 다음 페이지 정렬용
+    /// 디바운스 보고, `reportCenterVerseIfNeeded` 참고)는 각 절이 뷰포트에
+    /// "나타나는" 순간(`.onAppear` — 스크롤 중 매 프레임이 아니라 그 절이 화면에
+    /// 들어오는 딱 그 순간에만 한 번)의 값으로 근사한다 — 정확히 "중앙"은
+    /// 아니고 "마지막으로 화면에 들어온 절" 기준이라 근사치이지만, 페이지 전환
+    /// 시 "대략 그 근처로" 맞추는 기존 목적엔 충분하고 스크롤 중 실시간 비용은
+    /// 전혀 들지 않는다.
+    private var columnScrollViewPhoneLightweight: some View {
+        ScrollViewReader { proxy in
+            ScrollView {
+                LazyVStack(alignment: .leading, spacing: CGFloat(settings.bibleVerseSpacing)) {
+                    ForEach(verses, id: \.verse) { verse in
+                        verseRowView(for: verse, onRowAppear: { reportCenterVerseIfNeeded($0) })
+                    }
+                }
+                .padding()
+            }
+            // [2026-09-04 수정] 장 북마크 세로선은 이제 `body` 상단(제목+본문
+            // 전체) 배경 한 곳에서만 그린다 — 위 `columnScrollViewSyncTracking`의
+            // 같은 수정 참고.
+            .onAppear {
+                if let highlightedVerse {
+                    // ⚠️ [2026-09-04 신설, 버그 수정] 사용자 실측 —
+                    // "기본번역본 x절 -> 영어번역본 x-1절 -> 다시 기본번역본
+                    // x-2절..."처럼 페이지를 스와이프할 때마다 한 절씩 밀렸다.
+                    // 원인: `proxy.scrollTo`가 실행되는 동안에도 스크롤 경로에
+                    // 있는 절들의 `.onAppear`(위 `verseRowView`의
+                    // `onRowAppear`)가 연쇄로 fire되는데, 이걸 "사용자가 실제로
+                    // 스크롤해서 지나간 절"로 착각해 `reportCenterVerseIfNeeded`가
+                    // 그대로 코디네이터에 재보고해 버렸다 — 다음 페이지 전환 때
+                    // 이 잘못된 값을 그대로 돌려받는 게 반복되며 누적됐다.
+                    // `reportCenterVerseIfNeeded`엔 원래 `isProgrammaticScroll`
+                    // 가드가 있었지만(macOS/아이패드 팔로워 전용으로만 켜졌다),
+                    // 아이폰의 이 프로그램적 스크롤 경로들에서는 켠 적이 없어서
+                    // 놓쳤다 — 아래 `beginProgrammaticScrollPhone()`으로
+                    // 통일해서 켠다.
+                    beginProgrammaticScrollPhone()
+                    proxy.scrollTo(highlightedVerse, anchor: .center)
+                }
+            }
+            .onChange(of: pendingCenterAlignment) { _, newValue in
+                guard let newValue else { return }
+                beginProgrammaticScrollPhone()
+                proxy.scrollTo(newValue, anchor: .center)
+            }
+            .onChange(of: highlightedVerse) { _, newValue in
+                guard let newValue else { return }
+                beginProgrammaticScrollPhone()
+                withAnimation(.easeInOut(duration: Self.scrollAnimationDuration)) {
+                    proxy.scrollTo(newValue, anchor: .center)
+                }
+            }
+            .onChange(of: localizedBookChapterLabel) { _, _ in
+                resetForChapterChangePhone(proxy: proxy)
+            }
+        }
+    }
+
+    /// [2026-09-04 신설] 위 `columnScrollViewSyncTracking`/`columnScrollViewPhoneLightweight`
+    /// 상단 주석 참고 — 절 한 행을 실제로 구성하는 부분(VerseRow 생성 + 탭/컨텍스트
+    /// 메뉴 + 난외주 목록)은 두 플랫폼이 완전히 같아 여기 하나로 모았다.
+    /// `onRowAppear`는 아이폰 쪽(`columnScrollViewPhoneLightweight`)만 넘긴다 —
+    /// macOS/아이패드(`columnScrollViewSyncTracking`)는 인자 없이 호출해 아래
+    /// 조건문의 `else` 분기(추가 modifier 없음)를 타므로, 그 쪽 렌더링 결과는
+    /// 이번 수정 전과 완전히 동일하다.
+    @ViewBuilder
+    private func verseRowView(for verse: BibleVerse, onRowAppear: ((Int) -> Void)? = nil) -> some View {
+        // [2026-09-04 변경] 사용자 보고 — "구절을 탭해 선택/해제할
+        // 때 절 텍스트 위치가 살짝 움직임." 원인: 아래 난외주
+        // 목록(`marginalNoteFootnoteList`)이 예전엔 `VerseRow`
+        // 자신의 카드 안에서 선택 시에만 펼쳐졌다 — 그 절 카드
+        // 자체의 높이가 바뀌면서, `.scrollPosition(id:anchor:
+        // .center)`가 그 높이 변화를 보정하는 과정에서 카드 상단
+        // (=절 텍스트)이 위로 밀렸다. 한 번만 계산해 `VerseRow`와
+        // 아래 별도 형제 항목이 같은 값을 공유한다(불필요한 중복
+        // 조회 방지).
+        let marginalNotes = marginalNotesProvider(verse.verse)
+        let row = VerseRow(
+            verse: verse,
+            isHighlighted: verse.verse == highlightedVerse,
+            isSelected: selectedVerses.contains(verse.verse),
+            isBookmarked: isBookmarkedProvider(verse.verse),
+            highlights: highlightsProvider(verse.verse),
+            crossReferences: crossReferencesProvider(verse.verse),
+            phraseMemos: phraseMemosProvider(verse.verse),
+            phraseNotes: phraseNotesProvider(verse.verse),
+            marginalNotes: marginalNotes,
+            hanjaWords: hanjaWordsProvider(verse.verse),
+            verseMentions: verseMentionsProvider(verse.verse),
+            onSelectCrossReferenceTarget: onSelectCrossReferenceTarget,
+            onSelectPhraseMemo: onSelectPhraseMemo,
+            onSelectVerseMention: onSelectVerseMention,
+            inlineAnnotatedContentProvider: inlineAnnotatedContentProvider
+        )
+            .id(verse.verse)
+            // [2026-08-15 재작성, 이후 보조키 변경] 사용자 요청 3가지 —
+            // ① 일반 클릭: 선택을 "추가"가 아니라 "교체"한다.
+            // ② Shift/Cmd 클릭: 마지막 기준 절부터 이 절까지 범위 선택.
+            // ③ Option 클릭: 이 절 하나만 선택 목록에 추가/제거(개별
+            //   다중 선택), 나머지 선택은 그대로 유지.
+            //
+            // ⚠️ [변경 이력] 원래는 ③을 Control 클릭으로 구현했으나,
+            // macOS에서 Control+클릭은 관례적으로 "두 번째 클릭"(컨텍스트
+            // 메뉴 열기)으로 OS/AppKit이 먼저 가로챌 수 있어 — 바로 아래
+            // `.contextMenu`와 충돌할 위험이 있었다. 사용자 요청으로
+            // Option 키로 교체했다 — Option 클릭은 그런 시스템 예약
+            // 의미가 없어 같은 문제가 없다.
+            //
+            // 수식키 감지는 `NSEvent.modifierFlags`(macOS 전용, 클래스
+            // 프로퍼티를 그냥 읽기만 하는 표준 AppKit API)를 쓴다 —
+            // 시스템 전역 이벤트를 감시하는 `NSEvent.
+            // addGlobalMonitorForEvents`나 `CGEventTap`과 달리, 이 앱
+            // 자신의 클릭 처리 도중 "지금 눌려 있는 수식키가 뭔지"만
+            // 물어보는 것이라 손쉬운 사용(접근성) 권한이 전혀 필요
+            // 없다 — 사용자가 요청 마지막에 건 조건("손쉬운 사용을
+            // 활성화해야 하는 기능이면 구현하지 말 것")에 해당하지
+            // 않는다.
+            .onTapGesture {
+                onSelectVerse(verse)
+                #if os(macOS)
+                let flags = NSEvent.modifierFlags
+                if flags.contains(.shift) || flags.contains(.command) {
+                    onExtendVerseSelection(verse.verse)
+                } else if flags.contains(.option) {
+                    onToggleVerseSelection(verse.verse)
+                } else {
+                    onSelectSingleVerse(verse.verse)
+                }
+                #else
+                // [2026-08-21 수정] 사용자 요청("아이패드 수정사항") —
+                // "한번 탭하면 선택, 탭한 구절을 탭하면 탭취소.
+                // 여러구절 탭 = 여러구절 선택." 예전엔 iOS/iPadOS
+                // 터치에 수식키 신호가 없다는 이유로 항상 "교체"
+                // 선택(onSelectSingleVerse)만 지원했다 — 이제 macOS의
+                // Option+클릭과 같은 의미인 onToggleVerseSelection
+                // (선택 추가/제거, 다른 절 선택은 유지)을 기본 탭
+                // 동작으로 쓴다. 이 요청은 "아이패드 수정사항" 목록
+                // 안에 있고 "(맥OS, iOS 공통)" 표기가 없어, macOS 쪽
+                // 분기(위, 2026-08-15 설계)는 그대로 둔다 — 기존
+                // 수식키 기반 3단 구분(일반 클릭=교체/Shift·Cmd=범위/
+                // Option=개별 토글)을 건드리지 않는다.
+                onToggleVerseSelection(verse.verse)
+                #endif
+            }
+            .contextMenu {
+                Button {
+                    onCreateMemo(verse)
+                } label: {
+                    // [2026-08-11 수정] 사용자 요청 — "메모의 이름을
+                    // [개인 주석]으로 변경." 확대보기 액션바와 같은
+                    // 절 전체 메모(UserMemo, rangeStart 없음)를 만드는
+                    // 경로라 동일하게 이름을 맞춘다.
+                    // [2026-08-12 변경] "개인 주석" → "개인 묵상".
+                    Label("개인 묵상 작성", systemImage: "square.and.pencil")
+                }
+                // [2026-08-26 신설] 사용자 요청 — iOS 길게 프레스/
+                // macOS 오른쪽버튼 메뉴에 [선택] 추가("일부 텍스트를
+                // 선택하여 복사할 수 있는 기능"). [복사](바로 아래)가
+                // "번역본 전체"라면, 이건 "그 안에서 일부만" —
+                // `VerseTextSelectionPopover`(호출부가 여는 작은
+                // 팝오버/시트)에서 실제 드래그 선택이 이뤄진다.
+                Button {
+                    onSelectPartialText(verse, translationDisplayName)
+                } label: {
+                    Label("선택", systemImage: "character.cursor.ibeam")
+                }
+                // [2026-08-26 신설] 사용자 요청 — iOS 길게 프레스/
+                // macOS 오른쪽버튼 메뉴에 [복사] 추가("해당 번역본만
+                // 복사 -> 클릭하면 toast 메세지"). 위 `onCopySingleTranslation`
+                // 상단 주석 참고 — 이 컬럼의 `translationDisplayName`과
+                // 지금 행의 `verse`(이 번역본만의 내용)를 그대로
+                // 넘긴다.
+                Button {
+                    onCopySingleTranslation(verse, translationDisplayName)
+                } label: {
+                    Label("복사", systemImage: "doc.on.doc")
+                }
+            }
+
+        // [2026-09-04 신설] 아이폰 전용 실시간 추적 대체 — 위
+        // `columnScrollViewPhoneLightweight` 상단 주석 참고. `onRowAppear`가
+        // 없으면(macOS/아이패드) 이 절이 추가 없이 그대로 그려져, 이번 수정
+        // 전과 렌더링 결과가 완전히 같다.
+        if let onRowAppear {
+            row.onAppear { onRowAppear(verse.verse) }
+        } else {
+            row
+        }
+
+        // [2026-09-04 신설] 위 `marginalNotes` 지역 변수 상단 주석
+        // 참고 — 난외주 목록을 `VerseRow`의 카드 밖, 별도 형제
+        // 항목으로 뺐다. `VerseRow`(`.id(verse.verse)`)는 선택
+        // 여부와 무관하게 항상 같은 높이를 유지하므로, 이 절이
+        // 지금 화면 중앙 정렬 대상이어도 더 이상 위로 밀리지
+        // 않는다 — 대신 이 목록은 자신만의 `.id`를 가진 완전히
+        // 별도 항목이라, 절 카드와 같은 배경/모서리를 공유하지
+        // 않고 살짝 떨어진 블록으로 보인다.
+        if selectedVerses.contains(verse.verse), !marginalNotes.isEmpty {
+            MarginalNoteFootnoteList(notes: marginalNotes)
+                .id("\(verse.verse)-marginalNotes")
+        }
+    }
+
     /// 리더 역할 — `.scrollPosition(id:)`가 스크롤에 맞춰 읽어 준 "지금 중앙 절"을
     /// 코디네이터에 보고한다. 프로그램적으로(팔로워로서) 스크롤하는 중에는 건너뛴다.
+    /// [2026-09-04 신설] macOS/아이패드(`columnScrollViewSyncTracking`)는 기존과
+    /// 똑같이 `.onChange(of: centerVerseID)`에서 호출한다. 아이폰
+    /// (`columnScrollViewPhoneLightweight`)은 더 이상 `centerVerseID`를 쓰지
+    /// 않는 대신, 각 절이 뷰포트에 나타날 때(`verseRowView`의 `onRowAppear`)
+    /// 이 함수를 그 절 번호로 직접 호출한다 — 함수 내부 로직(디바운스 등)은
+    /// 손대지 않았다.
     private func reportCenterVerseIfNeeded(_ verse: Int?) {
         guard !isProgrammaticScroll, let verse else { return }
         // [2026-09-04 신설] 위 `phoneReportWorkItem` 상단 주석 참고 — 아이폰은
@@ -582,6 +708,90 @@ struct TranslationColumnView: View {
         // 성경 장은 항상 1절부터 시작하지만 하드코딩된 1 대신 실제 데이터를
         // 그대로 쓴다)을 대입해 화면이 확실히 맨 위(1절)로 스크롤되게 한다.
         centerVerseID = verses.first?.verse
+    }
+
+    /// [2026-09-04 신설] 아이폰 전용 — 위 `columnScrollViewPhoneLightweight`
+    /// 상단 주석 참고. 기존 `resetForChapterChange()`(macOS/아이패드,
+    /// `centerVerseID` 대입)와 같은 원칙이되, `.scrollPosition` 바인딩이 없어
+    /// `proxy.scrollTo`로 직접 1절까지 이동한다.
+    private func resetForChapterChangePhone(proxy: ScrollViewProxy) {
+        guardReleaseWorkItem?.cancel()
+        phoneReportWorkItem?.cancel()
+        isProgrammaticScroll = false
+        guard highlightedVerse == nil else { return }
+        if let firstVerse = verses.first?.verse {
+            // [2026-09-04 신설] 위 `columnScrollViewPhoneLightweight`의
+            // `.onAppear` 상단 주석 참고 — 같은 이유로 여기도 재보고를 막는다.
+            beginProgrammaticScrollPhone()
+            proxy.scrollTo(firstVerse, anchor: .center)
+        }
+    }
+
+    /// [2026-09-04 신설] 아이폰 전용 — 위 `columnScrollViewPhoneLightweight`의
+    /// `.onAppear` 상단 주석 참고. `proxy.scrollTo`가 유발하는 연쇄
+    /// `.onAppear`를 "사용자가 실제로 스크롤한 것"으로 잘못 보고하지 않도록,
+    /// macOS/아이패드 팔로워(`respondToSyncEvent`)가 쓰던 것과 같은
+    /// `isProgrammaticScroll` 가드를 프로그램적 스크롤 직전에 켠다(잠시 뒤
+    /// 자동으로 풀림) — `reportCenterVerseIfNeeded` 맨 위의
+    /// `guard !isProgrammaticScroll`이 이 가드를 그대로 활용한다.
+    private func beginProgrammaticScrollPhone() {
+        guardReleaseWorkItem?.cancel()
+        phoneReportWorkItem?.cancel()
+        isProgrammaticScroll = true
+        let releaseWorkItem = DispatchWorkItem {
+            isProgrammaticScroll = false
+        }
+        guardReleaseWorkItem = releaseWorkItem
+        DispatchQueue.main.asyncAfter(deadline: .now() + Self.scrollAnimationDuration, execute: releaseWorkItem)
+    }
+}
+
+/// [2026-09-04 신설] 사용자 요청 — "장을 북마크 설정할 때 왼쪽에 생기는 세로
+/// 라인을 좀더 굵게, 그리고 스크롤 맨 아래(성경 화면 끝)에서 세로 라인의
+/// 마무리를 바닥 가운데를 V자로 파낸 리본 모양으로 할 수 있는가?" 위
+/// `TranslationColumnView.columnScrollViewSyncTracking`/
+/// `columnScrollViewPhoneLightweight`가 이 도형을 `.background(alignment:
+/// .leading)`로 이 화면(ScrollView) "자체"의 배경에 붙이므로, 여기서 받는
+/// `rect`의 높이는 스크롤되는 내용 전체 길이가 아니라 화면에 실제로 보이는
+/// 뷰포트 높이다 — 즉 아래 V자 노치는 스크롤 위치와 무관하게 항상 "성경
+/// 화면 맨 아래"에서 그려진다(사용자 요청 그대로).
+///
+/// 상단은 기존과 같은 둥근 캡(반원, `rect.width / 2`)을 그대로 쓰고, 하단만
+/// 가운데를 `notchDepth`만큼 위로 파고들게 잘라 좌우 두 갈래(리본 꼬리)로
+/// 갈라지게 한다 — 리본/제비꼬리 깃발과 같은 원리다.
+private struct ChapterBookmarkRibbonShape: Shape {
+    /// 하단 V자 노치가 파고드는 깊이. 호출부의 막대 폭(10pt)에 맞춰 고른
+    /// 값 — 폭이 나중에 바뀌면 이 값도 함께 조정해야 비율이 어색해지지
+    /// 않는다.
+    /// [2026-09-04 수정] 사용자 요청 — "제비꼬리 모양이 좀 덜 날카롭게, 각도가
+    /// 덜 예리하도록." 값이 클수록 V자 노치가 더 깊이 파고들어(제비꼬리 자체는
+    /// 그대로 바닥까지 닿는 채로) 꼭짓점 각도가 좁아진다 — 12 → 6으로 줄여
+    /// 노치를 절반만큼 얕게 만들어 각도를 넓혔다(꼭짓점 각도 기준 약 29° →
+    /// 약 55°).
+    var notchDepth: CGFloat = 6
+
+    /// [2026-09-04 수정] 사용자 요청 — "세로선을 번역본/성경 장이 타이틀로
+    /// 나오는 상단영역까지 표시를 할 것 + 상단 모서리를 둥근 모서리가 아닌
+    /// 각진 모서리로 할 것." 이 라인이 이제 컬럼 맨 위(제목 영역)부터
+    /// 시작하므로, 예전의 둥근 캡(반원 `addArc` 두 번)은 더 이상 "책갈피
+    /// 탭" 모양이 아니라 어색한 빈 공백처럼 보인다 — 상단은 단순 직선
+    /// (사각형)으로 바꾸고, 하단 V자 노치는 그대로 둔다.
+    func path(in rect: CGRect) -> Path {
+        let w = rect.width
+        let h = rect.height
+        // 뷰 높이가 노치보다 작아지는 극단적인 경우(예: 레이아웃 계산 중
+        // 순간적으로 아주 작은 높이가 배정될 때) 노치가 상단까지 파고들지
+        // 않도록 안전 상한을 둔다.
+        let notch = max(0, min(notchDepth, h))
+
+        var path = Path()
+        path.move(to: CGPoint(x: 0, y: 0))
+        path.addLine(to: CGPoint(x: w, y: 0))
+        path.addLine(to: CGPoint(x: w, y: h))
+        path.addLine(to: CGPoint(x: w / 2, y: h - notch))
+        path.addLine(to: CGPoint(x: 0, y: h))
+        path.closeSubpath()
+        return path
     }
 }
 

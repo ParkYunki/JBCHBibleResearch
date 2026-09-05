@@ -33,6 +33,9 @@
 
 import SwiftUI
 import BibleResearchModels
+#if os(iOS)
+import UIKit
+#endif
 
 struct BookmarkListPopover: View {
     let viewModel: BibleReadingViewModel
@@ -47,6 +50,16 @@ struct BookmarkListPopover: View {
         return formatter
     }()
 
+    /// [2026-09-04 신설] 사용자 보고 — "전체 영역에 비해 컨텐츠 영역이
+    /// 1/3부분임. 작은 컨텐츠 영역에 스크롤까지 있음. 위아래 여백이
+    /// 불필요함." 아이폰에서는 `.popover`가 자동으로 시트로 바뀌는데(아래
+    /// `isPhone` 참고), 이 뷰 자체는 고정 폭(300)·높이 상한(최대 360, 아래
+    /// `list` 참고)짜리 작은 카드라 시트가 기본 크기(예: 화면 대부분)로
+    /// 뜨면 그 안에 작은 카드 하나만 떠 있고 나머지는 빈 여백이 된다.
+    /// `.presentationDetents`로 시트 높이 자체를 실제 컨텐츠 높이에 맞춰
+    /// 계산해, 여백을 없애는 쪽으로 정리했다(아이패드/macOS의 실제 팝오버는
+    /// 원래도 이 문제가 없어 손대지 않는다 — `isPhone`이 false면 기존과
+    /// 완전히 동일).
     var body: some View {
         VStack(alignment: .leading, spacing: 0) {
             header
@@ -57,7 +70,10 @@ struct BookmarkListPopover: View {
                 list
             }
         }
-        .frame(width: 300)
+        .frame(width: isPhone ? nil : 300)
+        #if os(iOS)
+        .modifier(BookmarkSheetSizingModifier(isPhone: isPhone, sheetHeight: sheetHeight))
+        #endif
         .onAppear {
             // [2026-08-08 조회 이력 시트와 같은 이유] 팝오버를 열 때마다 새로
             // 불러온다 — 다른 창에서 설정/해제한 책갈피까지 반영되도록
@@ -65,6 +81,29 @@ struct BookmarkListPopover: View {
             bookmarks = viewModel.fetchBookmarks()
         }
     }
+
+    /// [2026-09-04 신설] `BibleReadingView.swift`의 같은 이름 프로퍼티와
+    /// 정확히 같은 판정(그쪽은 `private`라 이 파일에서 직접 재사용은 안 돼,
+    /// 로직만 그대로 옮겨 왔다) — 아이폰이면 `.popover`가 시트로 바뀐다.
+    private var isPhone: Bool {
+        #if os(iOS)
+        UIDevice.current.userInterfaceIdiom == .phone
+        #else
+        false
+        #endif
+    }
+
+    #if os(iOS)
+    /// 위 `body`의 `.presentationDetents` 주석 참고 — 헤더(약 44) + 구분선(1)
+    /// + 컨텐츠(빈 상태 180 고정, 목록이면 `list`와 같은 계산식으로 최대
+    /// 360)를 더해 시트가 딱 그만큼만 뜨게 한다.
+    private var sheetHeight: CGFloat {
+        let headerHeight: CGFloat = 44
+        let dividerHeight: CGFloat = 1
+        let contentHeight: CGFloat = bookmarks.isEmpty ? 180 : min(CGFloat(bookmarks.count) * 44 + 8, 360)
+        return headerHeight + dividerHeight + contentHeight
+    }
+    #endif
 
     private var header: some View {
         HStack(spacing: 6) {
@@ -172,16 +211,51 @@ struct BookmarkListPopover: View {
 
     /// [2026-08-26 `BibleReadingHistorySheet.bookChapterLabel`과 동일한 규칙]
     /// `verse`가 있으면 "장:절", 없으면 "장"으로 보여준다.
+    ///
+    /// [2026-09-04 수정] 사용자 요청("북마크를 번역본 별로 저장하도록")의
+    /// 직접적인 결과 — 이제 같은 책/장(:절) 위치라도 번역본이 다르면 서로
+    /// 다른 책갈피가 될 수 있어(`BibleBookmark.translationCode`), 등록된
+    /// 번역본이 2개 이상일 때는 행 제목 끝에 번역본 이름을 붙여 구분한다(예:
+    /// "창세기 2장 · 개역개정"). 번역본이 1개뿐이면 구분할 필요가 없어(모든
+    /// 책갈피가 어차피 같은 번역본) 원래 표시 그대로 둔다 — 불필요한 잡음을
+    /// 더하지 않기 위해서다.
     private func bookChapterLabel(for bookmark: BibleBookmark) -> String {
-        guard let book = BooksProvider.shared.book(id: bookmark.bookId) else {
+        let base: String
+        if let book = BooksProvider.shared.book(id: bookmark.bookId) {
             if let verse = bookmark.verse {
-                return "책 \(bookmark.bookId) \(bookmark.chapter):\(verse)"
+                base = "\(book.nameKo) \(bookmark.chapter):\(verse)"
+            } else {
+                base = "\(book.nameKo) \(bookmark.chapter)장"
             }
-            return "책 \(bookmark.bookId) \(bookmark.chapter)장"
+        } else {
+            if let verse = bookmark.verse {
+                base = "책 \(bookmark.bookId) \(bookmark.chapter):\(verse)"
+            } else {
+                base = "책 \(bookmark.bookId) \(bookmark.chapter)장"
+            }
         }
-        if let verse = bookmark.verse {
-            return "\(book.nameKo) \(bookmark.chapter):\(verse)"
-        }
-        return "\(book.nameKo) \(bookmark.chapter)장"
+        guard viewModel.availableTranslations.count > 1 else { return base }
+        let translationName = viewModel.availableTranslations.first { $0.code == bookmark.translationCode }?.displayName ?? bookmark.translationCode
+        guard !translationName.isEmpty else { return base }
+        return "\(base) · \(translationName)"
     }
 }
+
+#if os(iOS)
+/// [2026-09-04 신설] 위 `body`의 `.presentationDetents` 주석 참고 — 아이폰
+/// (시트로 바뀔 때)에만 높이를 컨텐츠에 맞추고, 아이패드(진짜 팝오버)는
+/// 이 모디파이어 자체가 아무 것도 하지 않아 기존 그대로다.
+private struct BookmarkSheetSizingModifier: ViewModifier {
+    let isPhone: Bool
+    let sheetHeight: CGFloat
+    func body(content: Content) -> some View {
+        if isPhone {
+            content
+                .presentationDetents([.height(sheetHeight)])
+                .presentationDragIndicator(.visible)
+        } else {
+            content
+        }
+    }
+}
+#endif

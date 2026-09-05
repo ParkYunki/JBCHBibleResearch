@@ -292,6 +292,21 @@ struct SidebarNavigationView: View {
                 }
             }
         }
+        // [2026-09-05 수정] 사용자 보고 — "왼쪽 사이드바 선택된 기능의
+        // 배경색상이 낮에는 황금색이 아니라, 똥색처럼 보여 고급져보이지
+        // 않음." 원인: 이 목록은 `.listStyle(.sidebar)`라(위 `body`의
+        // `NavigationSplitView` 참고) macOS가 선택된 행 배경을 앱의
+        // `AccentColor`(Assets.xcassets — 라이트 모드 #B8863C)로 그대로
+        // 채운다 — 이 색은 아이콘/텍스트처럼 "작은 면적의 강조색"으로 쓸
+        // 땐 금색으로 읽히지만, 행 전체를 채우는 "큰 면적의 단색 배경"으로
+        // 쓰면 채도/명도가 낮아(HSB 대략 H36°·S67%·V72%) 갈색조로 보인다.
+        // 앱 전체에서 쓰는 `AccentColor` 자체(버튼/아이콘 등)를 바꾸면 영향
+        // 범위가 너무 넓어지므로(요청 범위를 벗어남), 이 목록의 선택
+        // 배경에만 `.tint`로 같은 색상(H)을 유지하되 채도를 낮추고
+        // 명도를 올린 색(#D1A35E, H36°·S55%·V82%)을 덧씌운다 — 어느
+        // 각도로 봐도 여전히 "이 앱의 그 금색 계열"로 보이면서, 큰 면적
+        // 배경에서도 탁하지 않게 밝은 금색으로 읽히도록 조정한 값이다.
+        .tint(Color(hex: "#D1A35E") ?? Color.accentColor)
     }
 
     var body: some View {
@@ -562,7 +577,14 @@ struct SidebarNavigationView: View {
             case .summary(let summary): return summary.createdAt
             case .highlight(let highlight): return highlight.createdAt
             case .phraseNote(let note): return note.updatedAt
-            case .crossReference(let reference): return reference.updatedAt
+            // [2026-09-05 수정] 사용자 보고 — "관주가 어제날짜로 고정되어있음."
+            // `VerseCrossReference.updatedAt`이 이제 옵셔널이다(그 프로퍼티
+            // 상단 주석 참고 — 옛 비-옵셔널 기본값이 마이그레이션 시점 값으로
+            // 잘못 고정되는 문제의 근본 수정). 아직 한 번도 대상 절을 지우는
+            // 편집이 없었던 관주(`nil`)는 `createdAt`(실제 생성 시각)으로
+            // 대체 표시한다 — 사용자 요청 "updatedAt이 없으면 createdAt으로
+            // 대체 표시" 그대로.
+            case .crossReference(let reference): return reference.updatedAt ?? reference.createdAt
             }
         }
     }

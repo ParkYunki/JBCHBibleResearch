@@ -313,7 +313,23 @@ private struct SearchContentView: View {
                 intentCardSection(intentCard)
             }
 
-            if !viewModel.query.trimmingCharacters(in: .whitespaces).isEmpty {
+            if viewModel.query.trimmingCharacters(in: .whitespaces).isEmpty {
+                // [2026-09-04 신설] 사용자 요청 — "아이폰에서의 검색이력을
+                // 하단 [통합검색] 기능을 누른 직후에 볼 수 있도록. (현재는
+                // 검색창에 포커스가 들어올때 검색이력이 보임)" 아래
+                // `.searchSuggestions`는 검색창이 실제로 포커스를 받아야만
+                // (iOS 네이티브 동작) 나타나는데, 사용자가 원하는 건 "탭을
+                // 누른 직후"(아직 검색창을 탭하기 전)에도 바로 보이는
+                // 것이다 — 그래서 아이폰만 이 List 본문 자체에 같은 내용을
+                // 한 번 더(포커스 여부와 무관하게) 넣는다. macOS/iPadOS는
+                // 이번 요청이 "아이폰에서의"로 범위가 한정돼 있어 그대로
+                // `.searchSuggestions`(포커스 시에만) 하나만 쓴다 — 그래서
+                // 아래 `.searchSuggestions`도 아이폰일 때는 끈다(안 그러면
+                // 아이폰에서 포커스 중엔 이 목록이 두 번 겹쳐 보인다).
+                if isPhoneIdiom {
+                    recentSearchesSection
+                }
+            } else {
                 resultsSection
             }
         }
@@ -321,6 +337,52 @@ private struct SearchContentView: View {
             get: { viewModel.query },
             set: { viewModel.query = $0 }
         ), prompt: "검색어 입력")
+        // [2026-09-04 신설] 사용자 요청 — "검색이력 기능 추가 - 아이폰 -
+        // 통합검색을 클릭했을 때 검색창 밑으로 검색이력 최근 20개가 나올 수
+        // 있도록 한다. macos, ipados는 UI/UX 관점에 검색이력이 나올 수
+        // 있도록 통일성있는 디자인으로 레이아웃을 제안하라." `.searchable`과
+        // 짝을 이루는 표준 SwiftUI API `.searchSuggestions`를 썼다 —
+        // macOS/iPadOS/iPhone 3개 타겟이 전부 이 `SearchContentView` 하나의
+        // `.searchable` 호출을 공유하므로(위 `.searchable` 참고, 플랫폼별로
+        // 따로 만든 검색창이 없다), 여기 붙이는 이 한 곳만으로 세 플랫폼
+        // 모두에서 같은 코드·같은 동작(검색창 아래 이력 목록)이 나온다 —
+        // 이것이 "통일성있는 디자인"에 대한 이번 제안이다: 플랫폼마다 다른
+        // 레이아웃을 새로 그리는 대신, 이미 3개 타겟이 공유하는 이 검색창
+        // 자체의 네이티브 제안(suggestions) 영역에 얹어 어느 플랫폼에서도
+        // 항상 검색창 바로 아래(iOS 기본 위치)에 뜨게 한다.
+        //
+        // 검색어가 비어 있을 때만 보여준다 — 사용자가 이미 뭔가 타이핑
+        // 중이면 "최근 검색어" 대신 지금 입력 중인 검색어에 대한 결과에
+        // 집중해야 한다(요청 문구의 "통합검색을 클릭했을 때"=아직 아무것도
+        // 입력하지 않은 시점과도 정확히 맞는다). 항목을 탭하면 그 검색어로
+        // 즉시 검색하고(재입력할 필요 없이 `.onSubmit(of: .search)`과 같은
+        // 동작), 검색을 종료한다(`dismissSearch` — 아래 `.onSubmit` 핸들러와
+        // 같은 이유).
+        .searchSuggestions {
+            // [2026-09-04 수정] 사용자 요청 — "아이폰에서의 검색이력을 하단
+            // [통합검색] 기능을 누른 직후에 볼 수 있도록." 아이폰은 위 `body`의
+            // `recentSearchesSection`(포커스와 무관하게 항상 보임)이 이 역할을
+            // 대신하므로, 여기서는 아이폰을 뺀다 — 안 그러면 검색창에 포커스가
+            // 있는 동안 같은 목록이 두 번(List 본문 + 네이티브 제안) 겹쳐
+            // 보인다. macOS/iPadOS는 이번 요청 범위 밖이라 원래 제안(포커스
+            // 시에만 나타나는 `.searchSuggestions`)을 그대로 쓴다.
+            if !isPhoneIdiom, viewModel.query.trimmingCharacters(in: .whitespaces).isEmpty {
+                let recentSearches = viewModel.recentSearchHistory()
+                if !recentSearches.isEmpty {
+                    Section("최근 검색") {
+                        ForEach(recentSearches) { entry in
+                            Button {
+                                viewModel.query = entry.query
+                                viewModel.searchImmediately()
+                                dismissSearch()
+                            } label: {
+                                Label(entry.query, systemImage: "clock")
+                            }
+                        }
+                    }
+                }
+            }
+        }
         // [2026-08-19 추가] 사용자 요청 — "엔터를 치면 검색이 되도록." 기본은
         // 타이핑을 멈추고 350ms 지나야 자동으로 검색되는데, 엔터(또는 iOS
         // 키보드의 검색 버튼)를 누르면 그 대기 없이 바로 검색한다.
@@ -738,6 +800,42 @@ private struct SearchContentView: View {
             title: "\(group.narrativeTitle) — \(event.eventTitle)",
             excerptText: event.eventDescription
         )
+    }
+
+    // MARK: - 최근 검색 (2026-09-04 신설, 아이폰 전용)
+
+    /// [2026-09-04 신설] 사용자 요청 — "아이폰에서의 검색이력을 하단
+    /// [통합검색] 기능을 누른 직후에 볼 수 있도록." 위 `body`가 아이폰이고
+    /// 검색어가 비어 있을 때만 이 Section을 보여준다(포커스 여부와 무관 —
+    /// 그래서 탭을 누른 직후에도 검색창을 따로 탭하지 않고 바로 보인다).
+    /// 항목을 탭하면 그 검색어로 즉시 검색한다 — `.searchSuggestions`(위
+    /// `.searchSuggestions` 참고, macOS/iPadOS 전용으로 남긴 것)의 탭 동작과
+    /// 같다.
+    private var recentSearchesSection: some View {
+        let recentSearches = viewModel.recentSearchHistory()
+        return Group {
+            if !recentSearches.isEmpty {
+                Section("최근 검색") {
+                    ForEach(recentSearches) { entry in
+                        Button {
+                            viewModel.query = entry.query
+                            viewModel.searchImmediately()
+                            dismissSearch()
+                        } label: {
+                            HStack(spacing: 8) {
+                                Image(systemName: "clock")
+                                    .foregroundStyle(.secondary)
+                                Text(entry.query)
+                                    .foregroundStyle(.primary)
+                                Spacer(minLength: 0)
+                            }
+                            .contentShape(Rectangle())
+                        }
+                        .buttonStyle(.plain)
+                    }
+                }
+            }
+        }
     }
 
     // MARK: - 결과

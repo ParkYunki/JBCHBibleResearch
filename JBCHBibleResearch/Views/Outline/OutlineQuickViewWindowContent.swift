@@ -245,28 +245,69 @@ struct OutlineQuickViewWindowContent: View {
             // [2026-08-15 2차 변경] 사용자 요청 — "메뉴 안에서 분기하지 말고
             // 아이콘 버튼 3개를 나열, 클릭 한 번으로 확대/축소/원본크기." 이전
             // `Menu` 하나 대신 독립된 `Button` 3개.
+            //
+            // [2026-09-05 수정] 사용자 요청(UX/UI 전문가 관점) — "개요 창의
+            // 상단 우측 돋보기 메뉴가 너무 작아서 구분도 어렵고 클릭하기도
+            // 어렵고 존재하는지도 모를 수 있다." 기존엔 `.buttonStyle(.plain)`
+            // 아이콘만 덩그러니 있어 배경/경계가 전혀 없었다 — 이 프로젝트가
+            // 이미 쓰는 "강조색 12% 원형 배경 + 35% 테두리" 언어
+            // (`BookChapterPicker.bookCircleButton`/`chapterButton`과 동일,
+            // 근거 없는 새 스타일 대신 기존 패턴 재사용)를 28pt 원으로 축소
+            // 적용해, 이 좁은 상단 바 안에서도 "여기 누를 수 있다"는 것이
+            // 한눈에 보이게 했다. `.contentShape(Circle())`을 더해 원 안
+            // 어디를 눌러도 반응하도록 탭 영역도 시각 크기와 맞췄다.
+            //
+            // [2026-09-05 2차 수정] 사용자 보고 — "버튼 크기는 됐는데, 확대/
+            // 축소/원본 아이콘 자체가 작아서 서로 구분이 잘 안 됨." 위 배경/
+            // 테두리를 더했을 때 아이콘 글리프 자체엔 명시적 크기를 주지
+            // 않아 주변 컨텍스트(검색창 행)의 기본 텍스트 크기를 그대로
+            // 물려받고 있었다 — `plus`/`minus.magnifyingglass`는 돋보기
+            // 안의 "+"/"-" 표시가, `arrow.up.left.and.down.right.
+            // magnifyingglass`는 대각선 화살표가 그 크기에서 서로 잘 안
+            // 구분됐다. 세 아이콘 모두 명시적 `.font(.system(size:weight:))`
+            // 를 줘 28pt 원 안에서 뚜렷하게 보이도록 키웠다(대각선 화살표
+            // 아이콘은 심볼 자체 폭이 더 넓어 12pt로 살짝 작게 잡아야 다른
+            // 두 아이콘과 시각적 크기가 비슷해 보인다).
             Button {
                 zoomScale = min(Self.maxZoom, zoomScale + Self.zoomStep)
             } label: {
                 Image(systemName: "plus.magnifyingglass")
+                    .font(.system(size: 14, weight: .semibold))
+                    .foregroundStyle(Color.accentColor)
+                    .frame(width: 28, height: 28)
+                    .background(Circle().fill(Color.accentColor.opacity(0.12)))
+                    .overlay(Circle().stroke(Color.accentColor.opacity(0.35), lineWidth: 1))
             }
             .buttonStyle(.plain)
+            .contentShape(Circle())
             .help("확대")
 
             Button {
                 zoomScale = max(Self.minZoom, zoomScale - Self.zoomStep)
             } label: {
                 Image(systemName: "minus.magnifyingglass")
+                    .font(.system(size: 14, weight: .semibold))
+                    .foregroundStyle(Color.accentColor)
+                    .frame(width: 28, height: 28)
+                    .background(Circle().fill(Color.accentColor.opacity(0.12)))
+                    .overlay(Circle().stroke(Color.accentColor.opacity(0.35), lineWidth: 1))
             }
             .buttonStyle(.plain)
+            .contentShape(Circle())
             .help("축소")
 
             Button {
                 zoomScale = 1.0
             } label: {
                 Image(systemName: "arrow.up.left.and.down.right.magnifyingglass")
+                    .font(.system(size: 12, weight: .semibold))
+                    .foregroundStyle(Color.accentColor)
+                    .frame(width: 28, height: 28)
+                    .background(Circle().fill(Color.accentColor.opacity(0.12)))
+                    .overlay(Circle().stroke(Color.accentColor.opacity(0.35), lineWidth: 1))
             }
             .buttonStyle(.plain)
+            .contentShape(Circle())
             .help("원본 크기 (\(Int((zoomScale * 100).rounded()))%)")
         }
         .padding(8)

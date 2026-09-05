@@ -663,7 +663,20 @@ final class BibleReadingViewModel {
         // OCRReviewViewModel/DocumentsViewModel)에서 개별적으로 책임진다
         // (BibleReferenceIndexingService.swift 상단 주석 참고).
         purgeLegacyMarkHighlights()
+        // [2026-09-05 신설] 사용자 확인 — "관주는 수정될 일이 없음. 잘못되면
+        // 지워버리고 다시 등록하게 될거라 예상함." — 바로 아래
+        // `resetLegacyCrossReferenceUpdatedAtIfNeeded()` 주석 참고. 번역본
+        // 로딩과 무관해 `loadAvailableTranslations()`보다 먼저 둬도 되고,
+        // 위 `purgeLegacyMarkHighlights()`와 같은 "가벼운 자가 치유" 그룹으로
+        // 묶었다.
+        resetLegacyCrossReferenceUpdatedAtIfNeeded()
         loadAvailableTranslations()
+        // [2026-09-04 신설] 사용자 요청 — "북마크를 번역본 별로 저장하도록."
+        // `availableTranslations`가 채워진 뒤(위 `loadAvailableTranslations()`)에
+        // 불러야 "기본 번역본"을 고를 수 있고, 아래 `refreshRelatedContent()`가
+        // 부르는 `rebuildBookmarkedVersesIndex()`가 이미 마이그레이션된 데이터를
+        // 보게 하려면 그보다 먼저 실행돼야 한다.
+        migrateLegacyBookmarksIfNeeded()
         refreshRelatedContent()
     }
 
@@ -688,6 +701,39 @@ final class BibleReadingViewModel {
         // 일회성 정리라 특정 절 하나로 좁혀 지우기 어렵다 — 안전하게 캐시
         // 전체를 비운다(자주 도는 경로가 아니라 비용 부담이 없다).
         inlineAnnotationCache.removeAll()
+    }
+
+    /// [2026-09-05 신설] 사용자 확인 — "관주는 수정될 일이 없음. 잘못되면
+    /// 지워버리고 다시 등록하게 될거라 예상함. 따라서 관주에 한해서는
+    /// updatedAt가 채워질 일은 없을거라고 예상함." `VerseAnnotations.swift`의
+    /// `VerseCrossReference.updatedAt` 상단 주석 참고 — 이 필드를 나중에
+    /// 추가했을 때(2026-08-25) SwiftData의 라이트웨이트 마이그레이션이 그
+    /// 이전부터 있던 관주들에게 "실제 생성 시각"이 아니라 "마이그레이션이
+    /// 실행된 순간"의 날짜를 일괄로 채워 넣었다 — 사이드바 "최근" 목록에서
+    /// 그 관주들이 실제로 만든 날짜와 무관하게 그 하루에 계속 고정된 채로
+    /// 보였다(사용자 보고 — "관주가 어제날짜로 고정되어있음"). `updatedAt`을
+    /// 옵셔널로 바꿔 앞으로는 이 문제가 재발하지 않게 했지만, 이미 오염된
+    /// 값이 저장된 기존 레코드는 그 값 자체를 되돌리지 않는 한 계속 예전
+    /// 그대로 보인다.
+    ///
+    /// 사용자가 실제 사용 패턴을 확인해 줬다 — 관주는 부분 수정
+    /// (`removeCrossReferenceTarget`/`removeCrossReferenceGroup`) 대신
+    /// 통째로 지우고 다시 만드는 방식으로 쓰이므로, 지금 저장돼 있는
+    /// `updatedAt` 값은 전부 "진짜 편집" 흔적이 아니라 마이그레이션 오염일
+    /// 뿐이라고 봐도 된다는 것 — 그래서 앱을 열 때마다(자주 도는 경로가
+    /// 아니라 비용 부담 없음, `purgeLegacyMarkHighlights()`와 같은 원칙)
+    /// 남아 있는 `updatedAt` 값을 전부 `nil`로 되돌린다. 되돌린 뒤로는
+    /// `SidebarNavigationView.SidebarQuickItem.sortDate`의
+    /// `updatedAt ?? createdAt` 폴백이 정확한 생성일을 보여준다. 이후 사용자가
+    /// 실제로 대상 절을 지우는 편집을 하면(위 두 함수) 그 시점에 다시
+    /// `updatedAt`이 채워지므로, 진짜 편집 이력까지 지우는 건 아니다.
+    private func resetLegacyCrossReferenceUpdatedAtIfNeeded() {
+        let descriptor = FetchDescriptor<VerseCrossReference>(predicate: #Predicate { $0.updatedAt != nil })
+        guard let contaminated = try? modelContext.fetch(descriptor), !contaminated.isEmpty else { return }
+        for reference in contaminated {
+            reference.updatedAt = nil
+        }
+        try? modelContext.save()
     }
 
     func loadAvailableTranslations() {
@@ -765,13 +811,22 @@ final class BibleReadingViewModel {
 
     // MARK: - 조회 이력 (2026-08-08 추가)
 
-    /// 최신순으로 정렬된 조회 이력 전체(최대 100개, `BibleReadingHistoryService.maxEntries`)를
-    /// 반환한다. 히스토리 시트가 열릴 때마다 새로 불러 쓴다(다른 창에서 쌓인 이력까지
-    /// 반영되도록 캐싱하지 않는다).
+    /// 최신순으로 정렬된 조회 이력을 반환한다(저장 자체는 최대 100개,
+    /// `BibleReadingHistoryService.maxEntries`). 히스토리 시트가 열릴 때마다
+    /// 새로 불러 쓴다(다른 창에서 쌓인 이력까지 반영되도록 캐싱하지 않는다).
+    ///
+    /// [2026-09-04 수정] 사용자 요청 — "조회이력은 한달까지의 이력을 보여줄
+    /// 것." 저장 상한(100개, `BibleReadingHistoryService`)은 그대로 두고,
+    /// 이 화면에 "보여주는" 범위만 최근 1개월로 제한한다 — 100개를 다
+    /// 채우기 전에도 아주 오래된(몇 달 전) 항목이 섞여 나오는 것을 막는다.
+    /// `fetchHistory()`는 `BibleReadingHistorySheet` 한 곳에서만 쓰므로
+    /// (다른 화면에 이 필터가 영향을 줄 일이 없다) 여기서 걸러도 안전하다.
     func fetchHistory() -> [BibleReadingHistoryEntry] {
-        (try? modelContext.fetch(
+        let oneMonthAgo = Calendar.current.date(byAdding: .month, value: -1, to: .now) ?? .now
+        let all = (try? modelContext.fetch(
             FetchDescriptor<BibleReadingHistoryEntry>(sortBy: [SortDescriptor(\.viewedAt, order: .reverse)])
         )) ?? []
+        return all.filter { $0.viewedAt >= oneMonthAgo }
     }
 
     /// 히스토리 목록에서 항목을 탭했을 때 그 책/장으로 이동한다. `selectBook`을
@@ -810,6 +865,36 @@ final class BibleReadingViewModel {
     /// 해서 토글할 때마다 관찰 대상이 바뀌었다는 신호를 준다.
     private(set) var bookmarkVersion = 0
 
+    /// [2026-09-04 신설] 사용자 요청 — "북마크를 번역본 별로 저장하도록.
+    /// (macos, ipados) 가장 왼쪽의 번역본에 저장. (iOS아이폰) 현재 화면에 표시된
+    /// 번역본에 저장." 위 필드가 생기기 전(레거시) 책갈피는 `BibleBookmark.
+    /// translationCode`가 빈 문자열("")로 저장돼 있다 — 사용자 확인("기존
+    /// 책갈피는 첫 번째(기본) 번역본으로 자동 전환")에 따라, `onAppear()`에서
+    /// `availableTranslations`가 채워진 뒤 한 번씩 이 기본 번역본 코드로 채워
+    /// 넣는다. `purgeLegacyMarkHighlights()`와 같은 자가 치유 패턴 — 한 번
+    /// 채워진 뒤로는 대상이 없어 사실상 저비용 무동작이다(CloudKit 동기화로
+    /// 다른 기기의 예전 데이터가 나중에 다시 들어올 가능성까지 자가 치유).
+    private func migrateLegacyBookmarksIfNeeded() {
+        let legacy = BibleBookmarkService.fetchAll(context: modelContext).filter { $0.translationCode.isEmpty }
+        guard !legacy.isEmpty, let code = defaultBookmarkTranslationCode else { return }
+        for bookmark in legacy {
+            bookmark.translationCode = code
+        }
+        try? modelContext.save()
+    }
+
+    /// 위 마이그레이션이 기준으로 삼는 "기본 번역본" — `loadAvailableTranslations()`가
+    /// 초기 표시 목록을 고를 때 쓰는 것과 같은 8.1 설정
+    /// (`UserSettingsStore.shared.defaultTranslationCode`)을 우선하고, 없거나
+    /// 이미 등록되지 않은 코드면 등록 순 첫 번째 번역본으로 대체한다.
+    private var defaultBookmarkTranslationCode: String? {
+        if let preferred = UserSettingsStore.shared.defaultTranslationCode,
+           availableTranslations.contains(where: { $0.code == preferred }) {
+            return preferred
+        }
+        return availableTranslations.first?.code
+    }
+
     /// [2026-09-04 신설] 사용자 요청 — "책갈피를 설정하면 성경 본문 절번호
     /// 왼쪽에 길게 갈피실 색상으로 세로라인을 그어줄 수 있는가?" 절 하나하나
     /// 렌더링할 때마다 `BibleBookmarkService.isBookmarked`를 부르면(그 함수는
@@ -821,50 +906,81 @@ final class BibleReadingViewModel {
     /// (`toggleBookmarkForCurrentPosition`/`deleteBookmark`) 한 번 다시
     /// 계산해 둔다. "장 전체"를 가리키는 책갈피(`verse == nil`)는 특정 절과
     /// 무관해 세로선 대상에서 뺀다.
-    private(set) var bookmarkedVersesInChapter: Set<Int> = []
+    ///
+    /// [2026-09-04 변경] 사용자 요청 — "화면에 북마크 세로선도 번역본마다
+    /// 다르게 나와야 한다." 값 하나(`Set<Int>`)를 모든 번역본 칼럼이 공유하던
+    /// 것을, 번역본 코드(`TranslationRegistry.code`)별로 나눈 딕셔너리로
+    /// 바꿨다 — 각 `TranslationColumnView` 호출부(`BibleReadingView.swift`)가
+    /// 자기 `column.registry.code`에 해당하는 값만 꺼내 쓴다.
+    private(set) var bookmarkedVersesInChapter: [String: Set<Int>] = [:]
     /// [2026-09-04 신설] 사용자 요청 — "절을 책갈피 할때는 해당 절에
     /// 세로줄이 쳐지는데, 장을 책갈피 할때는 아무 표시가 없음. 스크롤영역
     /// 뒤 왼쪽 변에 백그라운드로 길게 이어진 세로 라인을 그어줄 수 있나?"
     /// "장 전체"를 가리키는 책갈피(`verse == nil`)가 지금 보고 있는 책/장에
-    /// 있는지 — 위 `bookmarkedVersesInChapter`와 같은 시점(장 로드/책갈피
-    /// 변경)에 같은 fetch 결과로 함께 계산해, `BibleBookmarkService.
+    /// 있는 번역본 코드들의 집합 — 위 `bookmarkedVersesInChapter`와 같은
+    /// 시점(장 로드/책갈피 변경)에 같은 fetch 결과로 함께 계산해, `BibleBookmarkService.
     /// fetchAll`을 두 번 부르지 않는다.
-    private(set) var isChapterBookmarked: Bool = false
+    ///
+    /// [2026-09-04 변경] 위 `bookmarkedVersesInChapter`와 같은 이유로 `Bool`
+    /// 하나 대신 "장 전체 책갈피가 있는 번역본 코드"의 집합으로 바꿨다.
+    private(set) var chapterBookmarkedTranslationCodes: Set<String> = []
 
     /// 위 두 값을 다시 계산한다 — 지금 보고 있는 책/장 기준으로, 절 번호가
-    /// 있는 책갈피는 집합으로, "장 전체" 책갈피는 존재 여부로 모은다.
+    /// 있는 책갈피는 번역본 코드별 집합으로, "장 전체" 책갈피는 번역본 코드별
+    /// 존재 여부로 모은다.
     private func rebuildBookmarkedVersesIndex() {
         let bookId = selectedBook.bookId
         let chapter = selectedChapter
         let all = BibleBookmarkService.fetchAll(context: modelContext)
         let chapterBookmarks = all.filter { $0.bookId == bookId && $0.chapter == chapter }
-        bookmarkedVersesInChapter = Set(chapterBookmarks.compactMap { $0.verse })
-        isChapterBookmarked = chapterBookmarks.contains { $0.verse == nil }
+        var versesByTranslation: [String: Set<Int>] = [:]
+        var chapterCodes: Set<String> = []
+        for bookmark in chapterBookmarks {
+            if let verse = bookmark.verse {
+                versesByTranslation[bookmark.translationCode, default: []].insert(verse)
+            } else {
+                chapterCodes.insert(bookmark.translationCode)
+            }
+        }
+        bookmarkedVersesInChapter = versesByTranslation
+        chapterBookmarkedTranslationCodes = chapterCodes
     }
 
-    /// `TranslationColumnView.VerseRow`가 호출 — 이 절을 정확히 가리키는
-    /// 책갈피가 있는지(절 번호 옆 세로선 표시 여부).
-    func isVerseBookmarked(_ verse: Int) -> Bool {
-        bookmarkedVersesInChapter.contains(verse)
+    /// `TranslationColumnView.VerseRow`가 호출 — 이 절을 정확히 가리키는,
+    /// 그 번역본(`translationCode`)의 책갈피가 있는지(절 번호 옆 세로선 표시
+    /// 여부).
+    func isVerseBookmarked(translationCode: String, verse: Int) -> Bool {
+        bookmarkedVersesInChapter[translationCode]?.contains(verse) ?? false
     }
 
-    /// 지금 위치(장, 또는 정확히 절 하나를 선택 중이면 그 절)가 이미 책갈피로
-    /// 설정돼 있는지. 툴바의 책갈피 아이콘이 "설정"/"해제" 중 어느 모양으로
-    /// 보일지 이 값으로 결정한다.
-    var isCurrentPositionBookmarked: Bool {
+    /// `TranslationColumnView`가 호출 — 지금 보고 있는 장 전체가 그 번역본
+    /// (`translationCode`) 기준으로 책갈피돼 있는지(칼럼 세로 리본 표시 여부).
+    func isChapterBookmarked(translationCode: String) -> Bool {
+        chapterBookmarkedTranslationCodes.contains(translationCode)
+    }
+
+    /// 지금 위치(장, 또는 정확히 절 하나를 선택 중이면 그 절)가, 넘겨받은
+    /// 번역본(`translationCode`) 기준으로 이미 책갈피로 설정돼 있는지. 툴바의
+    /// 책갈피 아이콘이 "설정"/"해제" 중 어느 모양으로 보일지 이 값으로
+    /// 결정한다 — 대상 번역본은 호출부(`BibleReadingView.
+    /// bookmarkTargetTranslationCode` — 맨 왼쪽/현재 화면 번역본)가 정한다.
+    func isCurrentPositionBookmarked(translationCode: String) -> Bool {
         _ = bookmarkVersion
         return BibleBookmarkService.isBookmarked(
             bookId: selectedBook.bookId, chapter: selectedChapter,
             verse: selectedVerses.count == 1 ? selectedVerses.first : nil,
+            translationCode: translationCode,
             context: modelContext
         )
     }
 
-    /// 툴바의 책갈피 아이콘 탭 — 지금 위치를 기준으로 설정/해제를 토글한다.
-    func toggleBookmarkForCurrentPosition() {
+    /// 툴바의 책갈피 아이콘 탭 — 지금 위치를, 넘겨받은 번역본(`translationCode`)
+    /// 기준으로 설정/해제를 토글한다.
+    func toggleBookmarkForCurrentPosition(translationCode: String) {
         BibleBookmarkService.toggle(
             bookId: selectedBook.bookId, chapter: selectedChapter,
             verse: selectedVerses.count == 1 ? selectedVerses.first : nil,
+            translationCode: translationCode,
             context: modelContext
         )
         bookmarkVersion += 1
@@ -872,7 +988,9 @@ final class BibleReadingViewModel {
     }
 
     /// 책갈피 이동 팝오버가 열릴 때마다 새로 불러온다(히스토리 시트와 같은
-    /// 이유 — 다른 창에서 쌓인 책갈피까지 반영되도록 캐싱하지 않는다).
+    /// 이유 — 다른 창에서 쌓인 책갈피까지 반영되도록 캐싱하지 않는다). 모든
+    /// 번역본을 통틀어 보여준다(특정 번역본으로 좁히지 않는다) — 히스토리
+    /// 목록과 같은 전례.
     func fetchBookmarks() -> [BibleBookmark] {
         BibleBookmarkService.fetchAll(context: modelContext)
     }
@@ -881,13 +999,13 @@ final class BibleReadingViewModel {
     /// 관점에서 디자인을 변경할 것"에 따라 `BookmarkListPopover`에 스와이프
     /// 삭제를 추가하며 필요해졌다 — 지금까지는 그 위치로 다시 이동해 툴바의
     /// 토글 아이콘을 눌러야만 지울 수 있었다. `bookmark`가 이미 존재하는
-    /// 정확한 book/chapter/verse 조합이므로 `BibleBookmarkService.toggle`을
-    /// 그대로 재사용해도 항상 "삭제"만 일어난다(같은 조합이 이미 있으면
-    /// 지우는 쪽으로 분기하는 게 그 메서드의 규칙). 삭제한 책갈피가 마침
-    /// 지금 위치와 같으면 툴바 아이콘도 "미설정"으로 바뀌어야 하므로
-    /// `bookmarkVersion`도 함께 올린다.
+    /// 정확한 book/chapter/verse/translationCode 조합이므로
+    /// `BibleBookmarkService.toggle`을 그대로 재사용해도 항상 "삭제"만
+    /// 일어난다(같은 조합이 이미 있으면 지우는 쪽으로 분기하는 게 그 메서드의
+    /// 규칙). 삭제한 책갈피가 마침 지금 위치와 같으면 툴바 아이콘도 "미설정"으로
+    /// 바뀌어야 하므로 `bookmarkVersion`도 함께 올린다.
     func deleteBookmark(_ bookmark: BibleBookmark) {
-        BibleBookmarkService.toggle(bookId: bookmark.bookId, chapter: bookmark.chapter, verse: bookmark.verse, context: modelContext)
+        BibleBookmarkService.toggle(bookId: bookmark.bookId, chapter: bookmark.chapter, verse: bookmark.verse, translationCode: bookmark.translationCode, context: modelContext)
         bookmarkVersion += 1
         rebuildBookmarkedVersesIndex()
     }
@@ -917,7 +1035,23 @@ final class BibleReadingViewModel {
 
     /// 일반 클릭 — 기존 선택을 전부 지우고 이 절 하나만 선택한다("클릭하면
     /// 구절이 선택되고, 다른 구절을 클릭하면 선택이 바뀌게" 요청).
+    ///
+    /// [2026-09-05 수정] 사용자 요청 — "성경 조회 - 구절 탭 선택 - 선택된
+    /// 구절을 다시 클릭(탭)했을 때 선택 해제 되도록 하라." iOS/아이패드는
+    /// 이미 다른 기본 탭 경로(`onToggleVerseSelection`, 2026-08-21 "아이패드
+    /// 수정사항")를 타서 재탭 시 해제가 됐지만, macOS는 일반 클릭이 이 함수
+    /// (`onSelectSingleVerse`, `TranslationColumnView.swift`의 tap 핸들러
+    /// 참고)를 타서 항상 `[verse]`로 "교체"만 했다 — 이미 그 절 하나만 선택된
+    /// 상태에서 같은 절을 다시 클릭하면 아무 변화가 없어(교체 결과가 기존과
+    /// 동일) 해제되지 않았다. 지금 선택이 정확히 이 절 하나뿐일 때만 선택을
+    /// 비우고, 그 외(다른 절 클릭·여러 절이 선택된 상태에서 그중 하나 클릭)는
+    /// 기존과 동일하게 "이 절 하나로 교체"한다.
     func selectSingleVerse(_ verse: Int) {
+        if selectedVerses == [verse] {
+            selectedVerses = []
+            verseSelectionAnchor = nil
+            return
+        }
         selectedVerses = [verse]
         verseSelectionAnchor = verse
     }

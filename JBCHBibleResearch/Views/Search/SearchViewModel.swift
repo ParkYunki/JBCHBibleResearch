@@ -538,10 +538,25 @@ final class SearchViewModel {
         // 성경 조회 화면이 push된 채로 다시 검색해도 검색결과 화면이 보이도록
         // `SidebarNavigationView`에 pop을 요청한다.
         SearchResultsPopRequest.shared.requestPop()
+        // [2026-09-04 신설] 사용자 요청 — "검색이력 기능 추가." 실제로 검색이
+        // 실행되는 지점이 여기 하나뿐이라(위 주석 참고), 검색 이력도 정확히
+        // 여기서만 기록한다 — 타이핑 중간값이나(위 `guard` 이전) AI 검색
+        // 최소 길이 미달로 실행되지 못한 시도(바로 위 `guard` — 그 경우
+        // 이미 return해 여기까지 오지 않는다)는 기록되지 않는다.
+        SearchHistoryService.record(query: trimmed, context: modelContext)
         searchTask = Task { [weak self] in
             guard let self else { return }
             await self.performSearch(query: trimmed)
         }
+    }
+
+    /// [2026-09-04 신설] 사용자 요청 — "통합검색을 클릭했을 때 검색창 밑으로
+    /// 검색이력 최근 20개가 나올 수 있도록." `SearchView`의 `.searchSuggestions`가
+    /// 검색창이 포커스를 받을 때마다(검색어가 비어 있을 때) 이 값을 다시
+    /// 불러 보여준다 — 책갈피/조회 이력과 같은 이유로 캐싱하지 않는다(다른
+    /// 창에서 쌓인 검색이력까지 반영되도록).
+    func recentSearchHistory() -> [SearchHistoryEntry] {
+        SearchHistoryService.fetchRecent(context: modelContext)
     }
 
     private func performSearch(query: String) async {

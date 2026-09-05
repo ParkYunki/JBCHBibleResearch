@@ -124,6 +124,38 @@ private struct PartialTextSelectionTarget: Identifiable {
     let hanjaWords: [HanjaWordAnnotation]
 }
 
+/// [2026-09-05 수정] 사용자 보고(맥OS) — "Cannot find 'CircularNavButtonModifier'
+/// in scope" 컴파일 에러. 원인: 이 타입이 원래 `#if os(iOS) ... #endif` 블록
+/// 안에서만 선언돼 있었다 — macOS 빌드에는 이 타입 자체가 존재하지 않는데,
+/// `chapterNavigationControlsStandard`(맥/아이패드 공용 장 이동 버튼줄)에서
+/// macOS도 이 타입을 쓰도록 방금 바꿨으니 선언 자체를 플랫폼 조건 밖으로
+/// 꺼내야 한다. 이 타입은 `Color.accentColor`/`Circle()`/`.buttonStyle` 등
+/// 플랫폼 공용 SwiftUI API만 쓰므로(iOS 전용 API 없음) 조건 없이 꺼내도
+/// 안전하다 — 바로 아래 `BottomBarLabelStyleModifier`(여전히 iOS 전용)가
+/// `CircularNavButtonModifier.diameter`를 참조하는데, Swift는 파일 내 최상위
+/// 타입 선언 순서를 가리지 않으므로 이 위치 이동이 그 참조를 깨지 않는다.
+private struct CircularNavButtonModifier: ViewModifier {
+    static let diameter: CGFloat = 44
+    /// 호출부(`chapterNavigationControls`)가 `isCompactChapterNavButtons`를
+    /// 그대로 넘긴다 — false(아이폰 세로보기)면 이 모디파이어가 완전히
+    /// 아무것도 하지 않아 예전 모습(디폴트 버튼 스타일) 그대로다. 호출부에서
+    /// `#if os(iOS)`로 감싸는 대신 이렇게 항상 붙이고 내부에서 분기하는 이유는
+    /// 위 `BottomBarLabelStyleModifier`와 같다 — 버튼 4개마다 `#if`를 반복하는
+    /// 것보다 한 곳에서 조건을 관리하는 편이 낫다.
+    let isCircular: Bool
+    func body(content: Content) -> some View {
+        if isCircular {
+            content
+                .buttonStyle(.plain)
+                .frame(width: Self.diameter, height: Self.diameter)
+                .background(Circle().fill(Color.accentColor.opacity(0.12)))
+                .contentShape(Circle())
+        } else {
+            content
+        }
+    }
+}
+
 #if os(iOS)
 /// [2026-08-21 신설, 빌드에러 수정] `verseSelectionActionBar`(아래)가 사용자
 /// 요청 — "세로보기에서 탭하면 하단 메뉴는 한글 메뉴명은 빼고 아이콘만
@@ -221,25 +253,29 @@ private struct ActionBarCircularIconModifier: ViewModifier {
     }
 }
 
-private struct CircularNavButtonModifier: ViewModifier {
-    static let diameter: CGFloat = 44
-    /// 호출부(`chapterNavigationControls`)가 `isCompactChapterNavButtons`를
-    /// 그대로 넘긴다 — false(아이폰 세로보기)면 이 모디파이어가 완전히
-    /// 아무것도 하지 않아 예전 모습(디폴트 버튼 스타일) 그대로다. 호출부에서
-    /// `#if os(iOS)`로 감싸는 대신 이렇게 항상 붙이고 내부에서 분기하는 이유는
-    /// 위 `BottomBarLabelStyleModifier`와 같다 — 버튼 4개마다 `#if`를 반복하는
-    /// 것보다 한 곳에서 조건을 관리하는 편이 낫다.
-    let isCircular: Bool
+/// [2026-09-04 신설] `BibleReadingContentView.compactChapterNavigationBar`
+/// (아이폰 전용 "이어진 막대" 상단 이동 메뉴) 전용 — 아이콘 버튼 하나의
+/// 자리. 위 `CircularNavButtonModifier`처럼 개별 원형 배경을 주지 않는
+/// 이유는 그 바 전체가 하나의 캡슐 배경을 공유하기 때문이다(개별 배경을
+/// 겹쳐 주면 "이어진 막대" 대신 다시 낱개 버튼처럼 보인다). 폭 40 · 높이
+/// 44(막대 전체 높이)로 6개 아이콘 버튼 + 검색창이 좁은 화면에서도 겹치지
+/// 않게 하면서, 세로는 애플 HIG 최소 44pt를 만족한다.
+private struct JoinedNavIconButtonModifier: ViewModifier {
     func body(content: Content) -> some View {
-        if isCircular {
-            content
-                .buttonStyle(.plain)
-                .frame(width: Self.diameter, height: Self.diameter)
-                .background(Circle().fill(Color.accentColor.opacity(0.12)))
-                .contentShape(Circle())
-        } else {
-            content
-        }
+        content
+            .buttonStyle(.plain)
+            .frame(width: 40, height: 44)
+            .contentShape(Rectangle())
+    }
+}
+
+/// [2026-09-04 신설] `compactChapterNavigationBar` 전용 — 이어진 막대 안에서
+/// 버튼/검색창 사이를 나누는 얇은 세로 구분선.
+private struct NavBarDivider: View {
+    var body: some View {
+        Rectangle()
+            .fill(Color.primary.opacity(0.12))
+            .frame(width: 1, height: 24)
     }
 }
 #endif
@@ -453,17 +489,45 @@ private struct BibleReadingContentView: View {
         #endif
     }
 
-    /// [2026-08-26 신설] `CircularNavButtonModifier` 상단 주석 참고 — "아이패드
-    /// (세로/가로 모두) 또는 아이폰 가로보기"일 때만 true. `isNarrowBottomBarLayout`은
-    /// 화면 폭<높이로만 판정해 아이폰 세로/아이패드 세로 모두 narrow가 되므로
-    /// (`isNarrowBottomBarLayout` 상단 주석 참고), 기기 종류(`isPhone`)와 함께
-    /// 봐야 "아이폰 세로보기만 제외"라는 요구사항을 정확히 표현할 수 있다 —
-    /// 아이패드는 `!isPhone`이 항상 true라 방향과 무관하게 이 값도 항상 true,
-    /// 아이폰은 가로보기(narrow가 아닐 때)에만 true가 된다. macOS는 이 프로퍼티를
-    /// 아예 참조하지 않는(호출부가 `#if os(iOS)`로 감싼) 요청 범위라 여기 값
-    /// 자체는 macOS에서 의미가 없다.
+    /// [2026-09-04 신설] 사용자 요청 — "북마크를 번역본 별로 북마크 데이터를
+    /// 저장하도록. (macos, ipados) 여러 번역본이 표시되는 상황에서 저장되는
+    /// 북마크 번역본은 가장 왼쪽의 번역본에 북마크 데이터를 저장한다. (ios아이폰)
+    /// 현재 화면에 표시된 번역본의 북마크 데이터를 저장한다." 툴바의 책갈피
+    /// 토글/조회 버튼(아래 `.toolbar` 안)은 컬럼 하나하나가 아니라 화면 전체에
+    /// 하나뿐이라, 그 버튼이 "지금 어느 번역본을 대상으로 할지"를 여기서 미리
+    /// 정한다.
+    /// - macOS/iPadOS(나란히 표시, `sideBySideColumns`): 맨 왼쪽 컬럼 —
+    ///   `viewModel.columns`는 `displayedTranslationIDs` 순서 그대로라
+    ///   `columns.first`가 곧 맨 왼쪽이다(`sideBySideColumns`의 `HStack` 렌더
+    ///   순서와 동일).
+    /// - iPhone(한 번에 하나만 표시, `phoneColumns`): 지금 스와이프로 보고
+    ///   있는 컬럼 — `selectedPhoneColumnID`(`TabView` 선택 바인딩). 아직 한
+    ///   번도 스와이프하지 않아 nil이면(`phoneColumns`의 `TabView`가 그 경우
+    ///   기본으로 첫 페이지를 보여주는 것과 같게) 첫 번째 컬럼으로 대체한다.
+    /// 번역본이 하나도 표시돼 있지 않으면(`emptyState`) nil — 이때는 책갈피
+    /// 버튼 자체를 비활성화한다.
+    private var bookmarkTargetTranslationCode: String? {
+        #if os(iOS)
+        if isPhone {
+            let visibleColumnID = selectedPhoneColumnID ?? viewModel.columns.first?.id
+            return viewModel.columns.first(where: { $0.id == visibleColumnID })?.registry.code
+        }
+        #endif
+        return viewModel.columns.first?.registry.code
+    }
+
+    /// [2026-08-26 신설, 2026-09-04 수정] `CircularNavButtonModifier` 상단
+    /// 주석 참고 — 원래는 "아이패드(세로/가로 모두) 또는 아이폰 가로보기"일
+    /// 때만 true였다(유일한 예외가 "아이폰 세로보기"). 이후 사용자 요청 —
+    /// "아이폰 [성경]의 상단 메뉴 - 성경 장 위치 이동관련 메뉴 - 크기 조정
+    /// 필요. 손가락으로 터치하기엔 작은 느낌임." — 으로 그 예외마저 없애,
+    /// [2026-09-05 수정] 기기 종류/방향/플랫폼과 무관하게 항상 44pt 원형
+    /// 버튼을 쓴다. 예전엔 macOS 호출부가 `#if os(iOS)`로 이 값 자체를
+    /// 참조하지 않았으나(그 결과 macOS만 원형 스타일이 빠지는 구멍이
+    /// 있었다 — `chapterNavigationControlsStandard` 참고), 이제 macOS도
+    /// 같은 값을 참조해 원형 스타일을 적용한다.
     private var isCompactChapterNavButtons: Bool {
-        !isPhone || !isNarrowBottomBarLayout
+        true
     }
 
     // [2026-08-12 추가, 2026-09-03 제거] "말씀 요약" 첫 줄("현재날짜 '말씀'")용
@@ -1217,8 +1281,7 @@ private struct BibleReadingContentView: View {
                     hanjaWordsProvider: { verse in viewModel.hanjaWords(translationCode: column.registry.code, verse: verse) },
                     verseMentionsProvider: { verse in viewModel.verseMentions(verse: verse) },
                     // [2026-09-04 신설] 사용자 요청 — "책갈피를 설정하면 절번호
-                    // 왼쪽에 세로라인." 책갈피는 번역본과 무관하므로(`BibleBookmark`에
-                    // 번역본 코드가 없다) `column.registry.code`를 넘길 필요가 없다.
+                    // 왼쪽에 세로라인."
                     // [2026-09-04 수정] 컴파일 에러 수정 — "Argument
                     // 'phraseNotesProvider' must precede argument
                     // 'isBookmarkedProvider'". `TranslationColumnView`는 커스텀
@@ -1229,8 +1292,14 @@ private struct BibleReadingContentView: View {
                     // `phraseMemosProvider` 바로 뒤(선언 순서상 훨씬 앞)에 넣어
                     // 어긋났었다 — 선언 순서와 맞게 여기로(`verseMentionsProvider`
                     // 다음) 옮겼다.
-                    isBookmarkedProvider: { verse in viewModel.isVerseBookmarked(verse) },
-                    isChapterBookmarked: viewModel.isChapterBookmarked,
+                    // [2026-09-04 변경] 사용자 요청 — "북마크를 번역본 별로
+                    // 저장하도록. 화면에 북마크 세로선도 번역본마다 다르게
+                    // 나와야 한다." 이제 `BibleBookmark`가 `translationCode`를
+                    // 가지므로(위 다른 provider들과 같은 이유로) 이 컬럼 자신의
+                    // `column.registry.code`를 넘겨, 정확히 이 번역본의 책갈피
+                    // 여부만 반영한다.
+                    isBookmarkedProvider: { verse in viewModel.isVerseBookmarked(translationCode: column.registry.code, verse: verse) },
+                    isChapterBookmarked: viewModel.isChapterBookmarked(translationCode: column.registry.code),
                     onSelectCrossReferenceTarget: jumpToCrossReferenceTarget,
                     onSelectPhraseMemo: { memo in memoBeingCreated = memo },
                     onSelectVerseMention: handleVerseMentionSelected,
@@ -1301,8 +1370,7 @@ private struct BibleReadingContentView: View {
                     hanjaWordsProvider: { verse in viewModel.hanjaWords(translationCode: column.registry.code, verse: verse) },
                     verseMentionsProvider: { verse in viewModel.verseMentions(verse: verse) },
                     // [2026-09-04 신설] 사용자 요청 — "책갈피를 설정하면 절번호
-                    // 왼쪽에 세로라인." 책갈피는 번역본과 무관하므로(`BibleBookmark`에
-                    // 번역본 코드가 없다) `column.registry.code`를 넘길 필요가 없다.
+                    // 왼쪽에 세로라인."
                     // [2026-09-04 수정] 컴파일 에러 수정 — "Argument
                     // 'phraseNotesProvider' must precede argument
                     // 'isBookmarkedProvider'". `TranslationColumnView`는 커스텀
@@ -1313,8 +1381,14 @@ private struct BibleReadingContentView: View {
                     // `phraseMemosProvider` 바로 뒤(선언 순서상 훨씬 앞)에 넣어
                     // 어긋났었다 — 선언 순서와 맞게 여기로(`verseMentionsProvider`
                     // 다음) 옮겼다.
-                    isBookmarkedProvider: { verse in viewModel.isVerseBookmarked(verse) },
-                    isChapterBookmarked: viewModel.isChapterBookmarked,
+                    // [2026-09-04 변경] 사용자 요청 — "북마크를 번역본 별로
+                    // 저장하도록. 화면에 북마크 세로선도 번역본마다 다르게
+                    // 나와야 한다." 이제 `BibleBookmark`가 `translationCode`를
+                    // 가지므로(위 다른 provider들과 같은 이유로) 이 컬럼 자신의
+                    // `column.registry.code`를 넘겨, 정확히 이 번역본의 책갈피
+                    // 여부만 반영한다.
+                    isBookmarkedProvider: { verse in viewModel.isVerseBookmarked(translationCode: column.registry.code, verse: verse) },
+                    isChapterBookmarked: viewModel.isChapterBookmarked(translationCode: column.registry.code),
                     onSelectCrossReferenceTarget: jumpToCrossReferenceTarget,
                     onSelectPhraseMemo: { memo in memoBeingCreated = memo },
                     onSelectVerseMention: handleVerseMentionSelected,
@@ -1847,9 +1921,16 @@ private struct BibleReadingContentView: View {
                 }
                 ToolbarItem(placement: trailingIconPlacement) {
                     Button {
-                        viewModel.toggleBookmarkForCurrentPosition()
+                        // [2026-09-04 수정] 사용자 요청 — "북마크를 번역본
+                        // 별로 저장하도록." 위 `bookmarkTargetTranslationCode`
+                        // (맨 왼쪽/현재 화면 번역본)가 nil이면(표시 중인
+                        // 번역본이 없음, `emptyState`) 대상 자체가 없어 아무
+                        // 것도 하지 않는다 — 아래 `.disabled`가 이 경우 버튼
+                        // 자체를 비활성화하므로 실제로는 눌릴 일이 없다.
+                        guard let code = bookmarkTargetTranslationCode else { return }
+                        viewModel.toggleBookmarkForCurrentPosition(translationCode: code)
                     } label: {
-                        if viewModel.isCurrentPositionBookmarked {
+                        if let code = bookmarkTargetTranslationCode, viewModel.isCurrentPositionBookmarked(translationCode: code) {
                             Label("책갈피 해제", systemImage: "bookmark.fill")
                         } else {
                             Label("책갈피 설정", systemImage: "bookmark")
@@ -1864,8 +1945,19 @@ private struct BibleReadingContentView: View {
                     // Symbol(`bookmark`/`bookmark.fill`)만 쓴다 — 색은 아래 `.tint`
                     // 하나로만 준다. `BookmarkRibbonIcon.swift`는 이제 아무 데서도
                     // 참조하지 않아 파일 자체를 지웠다.
-                    .help(viewModel.isCurrentPositionBookmarked ? "이 위치 책갈피 해제" : "이 위치 책갈피로 설정")
-                    .tint(isPhone ? JBCHCategoryPalette.wine : nil)
+                    .disabled(bookmarkTargetTranslationCode == nil)
+                    .help(bookmarkTargetTranslationCode.map { viewModel.isCurrentPositionBookmarked(translationCode: $0) ? "이 위치 책갈피 해제" : "이 위치 책갈피로 설정" } ?? "이 위치 책갈피로 설정")
+                    // [2026-09-05 수정] 사용자 요청 — "성경 조회 - 우측 상단
+                    // 책갈피 설정 - 아이폰처럼 해당 아이콘의 색상을 수정하라."
+                    // 기존엔 `isPhone`일 때만 와인 색을 적용했는데(위
+                    // [2026-09-04 신설] 주석 참고 — 그때는 검토 범위를 아이폰
+                    // 성경 조회로 한정했다), 이번 요청은 명시적으로 macOS에도
+                    // 같은 색을 적용해 달라는 것이므로 플랫폼 조건을 없애고
+                    // 항상 적용한다. 사용자가 이 버튼("책갈피 설정/해제")만
+                    // 짚었으므로 바로 위 "책갈피 이동" 버튼의 `.tint`는 그대로
+                    // `isPhone` 조건을 유지했다(요청 범위 밖 — 필요하면 별도
+                    // 요청 시 동일하게 확장 가능).
+                    .tint(JBCHCategoryPalette.wine)
                 }
             }
             // [2026-08-08 추가] 조회 이력(히스토리) 진입점.
@@ -1956,7 +2048,26 @@ private struct BibleReadingContentView: View {
         }
     }
 
+    /// [2026-09-04 신설] 사용자 요청 — "아이폰 [성경]의 상단 메뉴 - 성경 장
+    /// 위치 이동관련 메뉴 - 크기 조정 필요." 아이폰은 아래 `compactChapterNavigationBar`
+    /// (7개 기능을 구분선만 있는 하나의 이어진 막대로 묶은 새 레이아웃)를,
+    /// 아이패드/macOS는 기존에 이미 승인된 `chapterNavigationControlsStandard`
+    /// (개별 원형 버튼)를 그대로 쓴다. `isPhone`은 macOS에서 항상 false라
+    /// macOS는 분기 없이 표준 레이아웃만 컴파일/실행된다.
+    @ViewBuilder
     private var chapterNavigationControls: some View {
+        #if os(iOS)
+        if isPhone {
+            compactChapterNavigationBar
+        } else {
+            chapterNavigationControlsStandard
+        }
+        #else
+        chapterNavigationControlsStandard
+        #endif
+    }
+
+    private var chapterNavigationControlsStandard: some View {
         HStack(spacing: 8) {
             // [2026-08-20 추가] 사용자 요청 — "이전 장 이동하는 화살표 옆에
             // 이전에 찾아봤던 장 바로가기 아이콘 추가(history.back)." 바로
@@ -1973,9 +2084,17 @@ private struct BibleReadingContentView: View {
             }
             .disabled(!viewModel.canGoBackInHistory)
             .help("이전에 보던 위치로 돌아가기")
-            #if os(iOS)
+            // [2026-09-05 수정] 사용자 보고(맥OS) — "성경 장 이동 및 검색
+            // 영역 - 아이폰 디자인을 참고하여 일관성을 갖추고 ... 수정하라."
+            // 바로 위 `chapterNavigationControls` 주석은 애초에 "아이패드/
+            // macOS는 이미 승인된 chapterNavigationControlsStandard(개별
+            // 원형 버튼)를 그대로 쓴다"고 적어 뒀지만, 실제로는 이 스타일이
+            // `#if os(iOS)`로만 감싸여 있어 아이패드에는 적용되고(아이패드도
+            // `os(iOS)`) macOS에는 전혀 적용되지 않는 구멍이 있었다 —
+            // macOS 버튼 4개가 전부 스타일 없는 기본 버튼으로 남아 아이폰/
+            // 아이패드와 시각적으로 어긋났다. 새 스타일을 만드는 대신 이미
+            // 승인된 이 원형 버튼 스타일을 macOS까지 그대로 확장한다.
             .modifier(CircularNavButtonModifier(isCircular: isCompactChapterNavButtons))
-            #endif
 
             Button {
                 viewModel.previousChapter()
@@ -1984,9 +2103,7 @@ private struct BibleReadingContentView: View {
             }
             .disabled(viewModel.selectedChapter <= 1 && BooksProvider.shared.book(before: viewModel.selectedBook) == nil)
             .help("이전 장")
-            #if os(iOS)
             .modifier(CircularNavButtonModifier(isCircular: isCompactChapterNavButtons))
-            #endif
 
             BookChapterPicker(
                 books: BooksProvider.shared.books,
@@ -2015,9 +2132,7 @@ private struct BibleReadingContentView: View {
                     && BooksProvider.shared.book(after: viewModel.selectedBook) == nil
             )
             .help("다음 장")
-            #if os(iOS)
             .modifier(CircularNavButtonModifier(isCircular: isCompactChapterNavButtons))
-            #endif
 
             // [2026-08-20 추가] 사용자 요청 — "다음 장 이동하는 화살표 옆에
             // 앞에서 온 성경 장을 바로가는 아이콘 추가(history.forward())."
@@ -2029,12 +2144,93 @@ private struct BibleReadingContentView: View {
             }
             .disabled(!viewModel.canGoForwardInHistory)
             .help("뒤로가기 이전 위치로 다시 가기")
-            #if os(iOS)
             .modifier(CircularNavButtonModifier(isCircular: isCompactChapterNavButtons))
-            #endif
         }
         // [2026-08-08 추가] 툴바 principal 자리(폭 제한)에서 상단 세이프에어리어
         // 인셋(화면 전체 너비)으로 옮기면서 가운데 정렬을 유지하려고 추가.
         .frame(maxWidth: .infinity)
     }
+
+    #if os(iOS)
+    /// [2026-09-04 신설] 사용자 요청 — 첫 시도(개별 원형/캡슐 버튼 + 사이
+    /// 간격)가 실기기에서 "책 2장" 텍스트가 좁은 폭에 눌려 3줄로 줄바꿈되며
+    /// 찌그러지는 문제로 나타났고, 이어서 사용자가 구체적으로 (1) 버튼 사이
+    /// 공백 없이 하나의 이어진 막대로, (2) 책 아이콘은 아이콘만 남기고 "창
+    /// 2장" 표시는 검색창(BookChapterPicker.compactBarBody) 쪽으로,
+    /// (3) "이동" 텍스트를 아이콘+다른 색으로 바꿔달라고 요청해 아이폰
+    /// 전용으로 새로 짰다. 7개 기능(히스토리 이전·이전장·현재장 표시
+    /// (아이콘, BookChapterPicker 내부)·검색창(BookChapterPicker 내부)·
+    /// 이동(아이콘, BookChapterPicker 내부)·다음장·히스토리 다음)을
+    /// spacing 0의 HStack 하나에 담고, 얇은 `NavBarDivider`(위
+    /// `CircularNavButtonModifier` 옆에 정의)로만 구분해 하나의 캡슐 배경
+    /// (아래 `.background`) 안에서 이어진 막대처럼 보이게 한다. iPad/macOS는
+    /// 이 프로퍼티 자체를 참조하지 않는다(위 `chapterNavigationControls` 참고).
+    private var compactChapterNavigationBar: some View {
+        HStack(spacing: 0) {
+            Button {
+                viewModel.goBackInHistory()
+            } label: {
+                Image(systemName: "arrow.uturn.backward")
+            }
+            .disabled(!viewModel.canGoBackInHistory)
+            .help("이전에 보던 위치로 돌아가기")
+            .modifier(JoinedNavIconButtonModifier())
+
+            NavBarDivider()
+
+            Button {
+                viewModel.previousChapter()
+            } label: {
+                Image(systemName: "chevron.left")
+            }
+            .disabled(viewModel.selectedChapter <= 1 && BooksProvider.shared.book(before: viewModel.selectedBook) == nil)
+            .help("이전 장")
+            .modifier(JoinedNavIconButtonModifier())
+
+            NavBarDivider()
+
+            BookChapterPicker(
+                books: BooksProvider.shared.books,
+                selectedBook: viewModel.selectedBook,
+                selectedChapter: viewModel.selectedChapter,
+                onSelectVerse: { book, chapter, verse in
+                    viewModel.selectBook(book, chapter: chapter)
+                    viewModel.highlightVerseTemporarily(verse)
+                },
+                compactTouchTargets: true
+            ) { book, chapter in
+                viewModel.selectBook(book, chapter: chapter)
+            }
+
+            NavBarDivider()
+
+            Button {
+                viewModel.nextChapter()
+            } label: {
+                Image(systemName: "chevron.right")
+            }
+            .disabled(
+                viewModel.selectedChapter >= viewModel.selectedBook.chapterCount
+                    && BooksProvider.shared.book(after: viewModel.selectedBook) == nil
+            )
+            .help("다음 장")
+            .modifier(JoinedNavIconButtonModifier())
+
+            NavBarDivider()
+
+            Button {
+                viewModel.goForwardInHistory()
+            } label: {
+                Image(systemName: "arrow.uturn.forward")
+            }
+            .disabled(!viewModel.canGoForwardInHistory)
+            .help("뒤로가기 이전 위치로 다시 가기")
+            .modifier(JoinedNavIconButtonModifier())
+        }
+        .padding(.horizontal, 6)
+        .frame(height: 44)
+        .background(Capsule().fill(Color.accentColor.opacity(0.12)))
+        .frame(maxWidth: .infinity)
+    }
+    #endif
 }

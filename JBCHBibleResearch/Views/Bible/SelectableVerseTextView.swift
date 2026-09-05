@@ -87,10 +87,57 @@ final class TightBackgroundLayoutManager: NSLayoutManager {
     /// 매번 `textStorage`를 다시 조회할 필요 없이 호출부가 미리 넣어 둔다.
     var referenceFont: PlatformFont?
 
+    // [2026-09-05 수정] 사용자 보고 — 우클릭 "선택"(`VerseTextSelectionPopover`,
+    // 이 파일의 `SelectableVerseTextView`를 재사용)에서 텍스트를 드래그로
+    // 선택하는 동안 한글 번역본에서만 선택 영역이 아주 빠르게 깜박임(영문
+    // 번역본은 정상). 원인 분석: `fillBackgroundRectArray`는 이 텍스트뷰의
+    // *모든* 배경 채우기 요청을 가로채는데, 그 요청에는 (1) 실제 하이라이트
+    // (`.backgroundColor` 속성이 걸린 구간 — `VerseAnnotationRenderer.
+    // selectionModeAttributedText`의 `.highlight` 케이스에서만 설정됨. 실제로
+    // `VerseTextSelectionPopover`는 highlights를 아예 빈 배열로 넘기므로 그
+    // 화면에선 (1)이 절대 발생하지 않는다) 뿐 아니라 (2) OS 기본 드래그-선택
+    // 강조 자체도 포함된다 — 지금까지 이 타이트-사각형 재계산이 (2)에도
+    // 무조건 적용되고 있었다.
+    //
+    // 한글 텍스트는 `VerseAnnotationRenderer.forcedBreakText`가 표시 모드와
+    // 줄바꿈 위치를 맞추려고 특정 공백을 U+2028(줄 구분자)로 치환해 넣는데
+    // (영문/숫자 포함 텍스트는 `containsLatinOrDigit` 분기로 이 치환이 전혀
+    // 없다), 드래그로 그 경계를 넘나들 때마다 `enumerateLineFragments`/
+    // `enumerateEnclosingRects`가 매 리드로우마다 살짝 다른 사각형 집합을
+    // 계산해 선택 영역이 깜박이는 것으로 추정된다.
+    //
+    // 이 재계산은 애초에 (1)(실제 하이라이트)을 "줄간격 없이 타이트하게"
+    // 그리기 위해 만든 것(위 [2026-08-11 12차 수정] 주석 참고)이므로,
+    // `.backgroundColor` 속성이 실제로 걸려 있는 구간에만 적용하고 그 외
+    // (선택 강조 등)는 시스템 기본 동작(`super`)에 맡긴다 — 기존 하이라이트
+    // 렌더링(`VerseZoomView`의 형광펜 표시)은 그대로 유지되고, 하이라이트가
+    // 없는 순수 드래그 선택만 기본 동작으로 되돌아간다.
+    //
+    // ⚠️ 미검증 — 이 세션은 Swift 컴파일러가 없어 직접 빌드/실행 확인이
+    // 불가능하다. 코드 분석에 근거한 가설이며 실제 기기에서 반드시 재확인이
+    // 필요하다.
+    private func hasExplicitBackgroundColorAttribute(in charRange: NSRange) -> Bool {
+        guard let storage = textStorage, charRange.length > 0,
+            charRange.location >= 0, charRange.location + charRange.length <= storage.length
+        else { return false }
+        var found = false
+        storage.enumerateAttribute(.backgroundColor, in: charRange, options: []) { value, _, stop in
+            if value != nil {
+                found = true
+                stop.pointee = true
+            }
+        }
+        return found
+    }
+
     override func fillBackgroundRectArray(
         _ rectArray: UnsafePointer<CGRect>, count rectCount: Int,
         forCharacterRange charRange: NSRange, color: PlatformColor
     ) {
+        guard hasExplicitBackgroundColorAttribute(in: charRange) else {
+            super.fillBackgroundRectArray(rectArray, count: rectCount, forCharacterRange: charRange, color: color)
+            return
+        }
         guard let container = textContainers.first, let font = referenceFont else {
             super.fillBackgroundRectArray(rectArray, count: rectCount, forCharacterRange: charRange, color: color)
             return
@@ -163,12 +210,23 @@ struct SelectableVerseTextView: UIViewRepresentable {
     /// 단어는 색깔로 표현해 줄 것." 표시 모드(`AnnotatedVerseFlowView`)와
     /// 같은 신호를 선택 모드에도 넘겨 시각적으로 어긋나지 않게 한다.
     var hanjaWords: [HanjaWordAnnotation] = []
+    /// [2026-09-05 신설] 사용자 보고 — 우클릭 "선택"(`VerseTextSelectionPopover`)
+    /// 에서 한글 번역본만 드래그 선택 중 빠르게 깜박임(영문은 정상). 원인과
+    /// 해결은 `VerseAnnotationRenderer.selectionModeAttributedText`의 같은
+    /// 이름 파라미터 주석 참고 — 요약하면, 이 값이 `true`(기본값)면 기존과
+    /// 똑같이 선택 모드 줄바꿈을 표시 모드와 맞추려고 한글 텍스트에 보이지
+    /// 않는 U+2028을 끼워 넣고(`VerseZoomView`가 필요로 하는 동작, 그대로
+    /// 유지), `false`면 그 치환을 건너뛰어 `NSTextView`/`UITextView`가 영문과
+    /// 똑같이 자기 폭 기준으로 자연스럽게 줄바꿈한다(표시 모드를 같이 보여줄
+    /// 필요가 없는 `VerseTextSelectionPopover` 전용).
+    var matchDisplayModeLineBreaks: Bool = true
     @Binding var selectedRange: NSRange
 
     private var attributedText: NSAttributedString {
         VerseAnnotationRenderer.selectionModeAttributedText(
             text: text, highlights: highlights, phraseNotes: phraseNotes, crossReferences: crossReferences,
-            hanjaWords: hanjaWords, font: font, textColor: textColor, containerWidth: containerWidth,
+            hanjaWords: hanjaWords, matchDisplayModeLineBreaks: matchDisplayModeLineBreaks,
+            font: font, textColor: textColor, containerWidth: containerWidth,
             targetCharsPerLine: targetCharsPerLine
         )
     }
@@ -206,6 +264,13 @@ struct SelectableVerseTextView: UIViewRepresentable {
         return textView
     }
 
+    // [2026-09-05 수정] 사용자 요청 — macOS 쪽 드래그 선택 깜박임 수정을
+    // "iOS도 동일하게 반영하라." macOS `updateNSView`와 정확히 같은 원인·
+    // 같은 수정(아래 `Coordinator.lastReportedSelectedRange` 참고) — 이
+    // 코드가 macOS `NSViewRepresentable`과 완전히 대칭 구조라 같은 레이스
+    // 컨디션이 이론상 그대로 있었다(사용자가 이번에 iOS에서도 명시적으로
+    // 재현/보고하지 않았어도 코드 구조가 동일하면 동일한 결함이 있다는 것은
+    // 추측이 아니다).
     func updateUIView(_ uiView: UITextView, context: Context) {
         context.coordinator.parent = self
         context.coordinator.layoutManager.referenceFont = font
@@ -213,7 +278,7 @@ struct SelectableVerseTextView: UIViewRepresentable {
         if !uiView.attributedText.isEqual(to: expected) {
             uiView.attributedText = expected
         }
-        if uiView.selectedRange != selectedRange {
+        if uiView.selectedRange != selectedRange && selectedRange != context.coordinator.lastReportedSelectedRange {
             uiView.selectedRange = selectedRange
         }
     }
@@ -237,6 +302,9 @@ struct SelectableVerseTextView: UIViewRepresentable {
         /// 절대 해제되지 않는다는 게 보장된다.
         let textStorage = NSTextStorage()
         let layoutManager = TightBackgroundLayoutManager()
+        /// [2026-09-05 신설] macOS `Coordinator.lastReportedSelectedRange`와
+        /// 같은 이유 — 위 `updateUIView` 주석 참고.
+        var lastReportedSelectedRange: NSRange?
 
         init(_ parent: SelectableVerseTextView) {
             self.parent = parent
@@ -253,6 +321,9 @@ struct SelectableVerseTextView: UIViewRepresentable {
         // "뷰 업데이트가 끝난 뒤"에 상태를 바꾸는 표준적인 우회법을 쓴다.
         func textViewDidChangeSelection(_ textView: UITextView) {
             let newRange = textView.selectedRange
+            // [2026-09-05 신설] macOS 쪽과 같은 이유 — 위 `updateUIView`
+            // 주석 참고.
+            lastReportedSelectedRange = newRange
             DispatchQueue.main.async { [weak self] in
                 self?.parent.selectedRange = newRange
             }
@@ -279,12 +350,23 @@ struct SelectableVerseTextView: NSViewRepresentable {
     /// 단어는 색깔로 표현해 줄 것." 표시 모드(`AnnotatedVerseFlowView`)와
     /// 같은 신호를 선택 모드에도 넘겨 시각적으로 어긋나지 않게 한다.
     var hanjaWords: [HanjaWordAnnotation] = []
+    /// [2026-09-05 신설] 사용자 보고 — 우클릭 "선택"(`VerseTextSelectionPopover`)
+    /// 에서 한글 번역본만 드래그 선택 중 빠르게 깜박임(영문은 정상). 원인과
+    /// 해결은 `VerseAnnotationRenderer.selectionModeAttributedText`의 같은
+    /// 이름 파라미터 주석 참고 — 요약하면, 이 값이 `true`(기본값)면 기존과
+    /// 똑같이 선택 모드 줄바꿈을 표시 모드와 맞추려고 한글 텍스트에 보이지
+    /// 않는 U+2028을 끼워 넣고(`VerseZoomView`가 필요로 하는 동작, 그대로
+    /// 유지), `false`면 그 치환을 건너뛰어 `NSTextView`/`UITextView`가 영문과
+    /// 똑같이 자기 폭 기준으로 자연스럽게 줄바꿈한다(표시 모드를 같이 보여줄
+    /// 필요가 없는 `VerseTextSelectionPopover` 전용).
+    var matchDisplayModeLineBreaks: Bool = true
     @Binding var selectedRange: NSRange
 
     private var attributedText: NSAttributedString {
         VerseAnnotationRenderer.selectionModeAttributedText(
             text: text, highlights: highlights, phraseNotes: phraseNotes, crossReferences: crossReferences,
-            hanjaWords: hanjaWords, font: font, textColor: textColor, containerWidth: containerWidth,
+            hanjaWords: hanjaWords, matchDisplayModeLineBreaks: matchDisplayModeLineBreaks,
+            font: font, textColor: textColor, containerWidth: containerWidth,
             targetCharsPerLine: targetCharsPerLine
         )
     }
@@ -311,6 +393,29 @@ struct SelectableVerseTextView: NSViewRepresentable {
         return textView
     }
 
+    // [2026-09-05 수정] 사용자 보고(맥OS) — "구절 클릭 - 마우스 오른쪽
+    // 버튼 - '선택' - 텍스트를 드래그 하는데 선택된 영역이 계속 깜박거림."
+    // 원인: 마우스로 드래그하는 동안 `NSTextView`의 실제 선택 영역은 계속
+    // (동기적으로) 앞서 나가는데, 그 변화를 감지한 `textViewDidChangeSelection`
+    // (아래 `Coordinator`)은 `DispatchQueue.main.async`로 한 틱 늦게
+    // `parent.selectedRange`(바인딩)에 반영한다(그 함수의 주석 참고 — 뷰
+    // 업데이트 도중 상태를 바꾸는 정의되지 않은 동작을 피하려고 일부러
+    // 늦춘 것). 문제는 이 함수가 그 뒤 다시 불릴 때 "지금 `nsView`의 실제
+    // 선택"과 "그 한 틱 전에 넘어온 `selectedRange` 바인딩 값"을 비교해
+    // 다르면 무조건 `nsView.setSelectedRange(selectedRange)`로 되돌린다는
+    // 점이다 — 사용자가 계속 드래그 중이면 그 사이 `nsView`의 실제 선택이
+    // 이미 더 나아가 있으므로, 이 되돌림이 방금 넓어진 선택 영역을 순간적
+    // 으로 다시 좁혀 버렸다가 다음 업데이트에서 다시 넓어지는 일이 반복돼
+    // "깜박거림"으로 보인다.
+    //
+    // 고치는 방법은 "이 바인딩 갱신이 `nsView` 스스로 방금 보고한 값을
+    // 그대로 돌려받은 것인지"를 구분하는 것이다 — 그런 경우엔 `nsView`가
+    // 이미 정확한 최신 선택을 들고 있으므로(드래그가 계속됐다면 그보다 더
+    // 나아가 있을 수도 있으므로) 되돌려 쓸 필요가 없다. `Coordinator`가
+    // 자신이 마지막으로 내보낸 값을 기억해 뒀다가(`lastReportedSelectedRange`,
+    // 아래), 여기로 그 값과 같은 바인딩이 돌아오면 `setSelectedRange`를
+    // 건너뛴다 — 반대로 다른 값(예: 화면을 새로 열거나 외부에서 선택을
+    // 프로그램적으로 초기화하는 경우)이 들어오면 여전히 정상 반영된다.
     func updateNSView(_ nsView: NSTextView, context: Context) {
         context.coordinator.parent = self
         context.coordinator.layoutManager.referenceFont = font
@@ -318,7 +423,7 @@ struct SelectableVerseTextView: NSViewRepresentable {
         if !nsView.attributedString().isEqual(to: expected) {
             nsView.textStorage?.setAttributedString(expected)
         }
-        if nsView.selectedRange() != selectedRange {
+        if nsView.selectedRange() != selectedRange && selectedRange != context.coordinator.lastReportedSelectedRange {
             nsView.setSelectedRange(selectedRange)
         }
     }
@@ -341,6 +446,11 @@ struct SelectableVerseTextView: NSViewRepresentable {
         /// [2026-08-11 12차 수정] 위 iOS 쪽 `Coordinator` 주석과 같은 이유.
         let textStorage = NSTextStorage()
         let layoutManager = TightBackgroundLayoutManager()
+        /// [2026-09-05 신설] 위 `updateNSView` 주석 참고 — 이 좌표기가
+        /// 마지막으로 바인딩에 내보낸 선택 범위. `nil`이면(아직 한 번도
+        /// 사용자가 선택을 바꾼 적 없음) 항상 정상적으로 `setSelectedRange`가
+        /// 동작한다.
+        var lastReportedSelectedRange: NSRange?
 
         init(_ parent: SelectableVerseTextView) {
             self.parent = parent
@@ -356,6 +466,11 @@ struct SelectableVerseTextView: NSViewRepresentable {
         func textViewDidChangeSelection(_ notification: Notification) {
             guard let textView = notification.object as? NSTextView else { return }
             let newRange = textView.selectedRange()
+            // [2026-09-05 신설] 위 `updateNSView` 주석 참고 — 이 값을 미리
+            // 기록해 둬야, 잠시 뒤 이 값이 다시 `updateNSView`로 돌아왔을 때
+            // "내가 방금 보고한 값의 메아리"임을 알아보고 되돌림을 건너뛸 수
+            // 있다.
+            lastReportedSelectedRange = newRange
             DispatchQueue.main.async { [weak self] in
                 self?.parent.selectedRange = newRange
             }
