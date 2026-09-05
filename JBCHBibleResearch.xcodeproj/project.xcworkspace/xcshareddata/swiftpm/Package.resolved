@@ -1,5 +1,5 @@
 {
-  "originHash" : "018effa71c33eec7bdcf288f1345f80a2f28ea941e6d88e0ae9e7c8ae66dd5cb",
+  "originHash" : "37d72b435d00a8a669586f5099ca36371ecca1b506a1684103e64a0a3b358de9",
   "pins" : [
     {
       "identity" : "eventsource",
@@ -15,8 +15,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/sboh1214/hwp-swift",
       "state" : {
-        "branch" : "main",
-        "revision" : "c325d137f9bbfe1d0b53a593ec24751e7f142aae"
+        "revision" : "93f5f1146929919b1a5084e2bbc0443b1f983dc8",
+        "version" : "0.17.0"
       }
     },
     {

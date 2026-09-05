@@ -232,28 +232,54 @@ struct RhwpWebViewerPane: View {
 
                 Spacer(minLength: 8)
 
+                // [2026-09-05 수정] 사용자 요청 — "한글 뷰어의 돋보기
+                // 3버튼도 개요 새창 돋보기와 동일한 디자인으로 수정할 것."
+                // `OutlineQuickViewWindowContent.header`가 이미 적용한
+                // "강조색 12% 원형 배경 + 35% 테두리(28pt) + 명시적 아이콘
+                // 크기" 패턴을 그대로 재사용한다(근거 없는 새 스타일 대신
+                // 기존 패턴 재사용) — 그 화면과 똑같이 확대/축소 아이콘은
+                // 14pt, 원본 크기(대각선 화살표) 아이콘은 심볼 폭이 더 넓어
+                // 12pt로 잡아야 시각적 크기가 맞는다.
                 Button {
                     controller.zoomIn()
                 } label: {
                     Image(systemName: "plus.magnifyingglass")
+                        .font(.system(size: 14, weight: .semibold))
+                        .foregroundStyle(Color.accentColor)
+                        .frame(width: 28, height: 28)
+                        .background(Circle().fill(Color.accentColor.opacity(0.12)))
+                        .overlay(Circle().stroke(Color.accentColor.opacity(0.35), lineWidth: 1))
                 }
                 .buttonStyle(.plain)
+                .contentShape(Circle())
                 .help("확대")
 
                 Button {
                     controller.zoomOut()
                 } label: {
                     Image(systemName: "minus.magnifyingglass")
+                        .font(.system(size: 14, weight: .semibold))
+                        .foregroundStyle(Color.accentColor)
+                        .frame(width: 28, height: 28)
+                        .background(Circle().fill(Color.accentColor.opacity(0.12)))
+                        .overlay(Circle().stroke(Color.accentColor.opacity(0.35), lineWidth: 1))
                 }
                 .buttonStyle(.plain)
+                .contentShape(Circle())
                 .help("축소")
 
                 Button {
                     controller.resetZoom()
                 } label: {
                     Image(systemName: "arrow.up.left.and.down.right.magnifyingglass")
+                        .font(.system(size: 12, weight: .semibold))
+                        .foregroundStyle(Color.accentColor)
+                        .frame(width: 28, height: 28)
+                        .background(Circle().fill(Color.accentColor.opacity(0.12)))
+                        .overlay(Circle().stroke(Color.accentColor.opacity(0.35), lineWidth: 1))
                 }
                 .buttonStyle(.plain)
+                .contentShape(Circle())
                 .help("원본 크기 (\(Int((controller.zoomScale * 100).rounded()))%)")
             }
             .padding(8)

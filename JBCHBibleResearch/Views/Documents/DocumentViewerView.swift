@@ -697,6 +697,58 @@ struct DocumentViewerView: View {
                 .disabled(controller.matches.isEmpty)
                 .help("다음 일치 항목")
             }
+
+            Spacer(minLength: 8)
+
+            // [2026-09-05 신설] 사용자 요청 — "pdf 뷰어에도 돋보기 3버튼
+            // 추가할 것." `OutlineQuickViewWindowContent.header`/
+            // `RhwpWebViewerPane`/`HWPViewerPane`이 이미 통일해 쓰는 "강조색
+            // 12% 원형 배경 + 35% 테두리(28pt) + 명시적 아이콘 크기(확대/
+            // 축소 14pt, 원본크기 12pt)" 디자인을 그대로 재사용한다. 실제
+            // 확대/축소는 `PDFSearchController.zoomIn/zoomOut/resetZoom`(그
+            // 프로퍼티 선언부 주석 참고 — `pdfView.scaleFactor`를 직접 읽고
+            // 써서 트랙패드 핀치줌과 항상 같은 값을 공유한다)이 담당한다.
+            Button {
+                controller.zoomIn()
+            } label: {
+                Image(systemName: "plus.magnifyingglass")
+                    .font(.system(size: 14, weight: .semibold))
+                    .foregroundStyle(Color.accentColor)
+                    .frame(width: 28, height: 28)
+                    .background(Circle().fill(Color.accentColor.opacity(0.12)))
+                    .overlay(Circle().stroke(Color.accentColor.opacity(0.35), lineWidth: 1))
+            }
+            .buttonStyle(.plain)
+            .contentShape(Circle())
+            .help("확대")
+
+            Button {
+                controller.zoomOut()
+            } label: {
+                Image(systemName: "minus.magnifyingglass")
+                    .font(.system(size: 14, weight: .semibold))
+                    .foregroundStyle(Color.accentColor)
+                    .frame(width: 28, height: 28)
+                    .background(Circle().fill(Color.accentColor.opacity(0.12)))
+                    .overlay(Circle().stroke(Color.accentColor.opacity(0.35), lineWidth: 1))
+            }
+            .buttonStyle(.plain)
+            .contentShape(Circle())
+            .help("축소")
+
+            Button {
+                controller.resetZoom()
+            } label: {
+                Image(systemName: "arrow.up.left.and.down.right.magnifyingglass")
+                    .font(.system(size: 12, weight: .semibold))
+                    .foregroundStyle(Color.accentColor)
+                    .frame(width: 28, height: 28)
+                    .background(Circle().fill(Color.accentColor.opacity(0.12)))
+                    .overlay(Circle().stroke(Color.accentColor.opacity(0.35), lineWidth: 1))
+            }
+            .buttonStyle(.plain)
+            .contentShape(Circle())
+            .help("원본 크기 (\(Int((controller.zoomScale * 100).rounded()))%)")
         }
         .padding(8)
     }
@@ -1235,6 +1287,49 @@ final class PDFSearchController {
         matches.isEmpty ? "0/0" : "\(currentIndex + 1)/\(matches.count)"
     }
 
+    // MARK: - 확대/축소 (2026-09-05 추가)
+
+    /// [2026-09-05 추가] 사용자 요청 — "pdf 뷰어에도 돋보기 3버튼 추가할
+    /// 것." 다른 뷰어들(`OutlineQuickViewWindowContent`/`RhwpWebViewerPane`/
+    /// `HWPViewerPane`)은 콘텐츠 자체가 순수 SwiftUI라 자체 `@State
+    /// zoomScale` 값을 직접 관리해야 하지만, `PDFView`는 PDFKit이 이미
+    /// 확대/축소용 공식 API(`scaleFactor`)를 제공하고 트랙패드 핀치줌도 그
+    /// 값을 직접 바꾼다 — 별도의 SwiftUI 상태를 새로 만들어 따로 관리하면
+    /// 사용자가 핀치로 확대한 뒤 이 버튼을 누르는 순간 핀치 결과를 무시하고
+    /// 되돌리는 충돌이 생긴다. 그래서 `pdfView.scaleFactor`를 그대로 읽고
+    /// 쓴다 — 이 버튼과 트랙패드 핀치가 항상 같은 값을 두고 협업한다.
+    /// 최소/최대/단위는 앱 전체가 이미 쓰는 값(위 다른 뷰어들과 동일,
+    /// `OutlineQuickViewWindowContent`부터 통일해 온 관례)을 그대로 맞췄다.
+    ///
+    /// ⚠️ [알려진 한계] 이 값은 `pdfView.scaleFactor`를 그때그때 읽어 오는
+    /// 계산 프로퍼티라, 사용자가 트랙패드 핀치로 확대한 직후에는(이 뷰가
+    /// 다른 이유로 다시 그려지기 전까지) 화면에 이미 보이는 `.help()` 툴팁
+    /// 퍼센트 문자열이 최신 값으로 즉시 갱신되지 않을 수 있다 — 버튼을 한
+    /// 번이라도 누르면 그 순간 다시 정확해진다. `PDFView`가 핀치줌마다
+    /// SwiftUI에 변경을 알리는 공식 옵저버블 API가 없어(있으려면
+    /// `NotificationCenter`의 `.PDFViewScaleChanged`를 별도로 구독해야 함),
+    /// 툴팁 문자열 하나만을 위해 그 복잡도를 더하지 않았다 — 실제 확대/축소
+    /// 동작 자체는 이 한계와 무관하게 항상 정확하다.
+    static let minZoom: CGFloat = 0.5
+    static let maxZoom: CGFloat = 3.0
+    static let zoomStep: CGFloat = 0.1
+
+    var zoomScale: CGFloat { pdfView?.scaleFactor ?? 1.0 }
+
+    func zoomIn() {
+        guard let pdfView else { return }
+        pdfView.scaleFactor = min(Self.maxZoom, pdfView.scaleFactor + Self.zoomStep)
+    }
+
+    func zoomOut() {
+        guard let pdfView else { return }
+        pdfView.scaleFactor = max(Self.minZoom, pdfView.scaleFactor - Self.zoomStep)
+    }
+
+    func resetZoom() {
+        pdfView?.scaleFactor = 1.0
+    }
+
     /// ⚠️ [알려진 한계] `PDFDocument.findString`은 문서 전체를 동기적으로 훑는다
     /// — 타이핑할 때마다 즉시 다시 검색하므로, 아주 긴 PDF(수백 페이지)에서는
     /// 검색창 반응이 잠깐 끊길 수 있다. 이번 요청 범위(단어 검색+개수+이동)엔
@@ -1567,28 +1662,51 @@ private struct HWPViewerPane: View {
 
             Spacer(minLength: 8)
 
+            // [2026-09-05 수정] 사용자 요청 — "한글 뷰어의 돋보기 3버튼도
+            // 개요 새창 돋보기와 동일한 디자인으로 수정할 것."
+            // `OutlineQuickViewWindowContent.header`가 이미 적용한 "강조색
+            // 12% 원형 배경 + 35% 테두리(28pt) + 명시적 아이콘 크기" 패턴을
+            // 그대로 재사용한다(근거 없는 새 스타일 대신 기존 패턴 재사용).
             Button {
                 zoomScale = min(Self.maxZoom, zoomScale + Self.zoomStep)
             } label: {
                 Image(systemName: "plus.magnifyingglass")
+                    .font(.system(size: 14, weight: .semibold))
+                    .foregroundStyle(Color.accentColor)
+                    .frame(width: 28, height: 28)
+                    .background(Circle().fill(Color.accentColor.opacity(0.12)))
+                    .overlay(Circle().stroke(Color.accentColor.opacity(0.35), lineWidth: 1))
             }
             .buttonStyle(.plain)
+            .contentShape(Circle())
             .help("확대")
 
             Button {
                 zoomScale = max(Self.minZoom, zoomScale - Self.zoomStep)
             } label: {
                 Image(systemName: "minus.magnifyingglass")
+                    .font(.system(size: 14, weight: .semibold))
+                    .foregroundStyle(Color.accentColor)
+                    .frame(width: 28, height: 28)
+                    .background(Circle().fill(Color.accentColor.opacity(0.12)))
+                    .overlay(Circle().stroke(Color.accentColor.opacity(0.35), lineWidth: 1))
             }
             .buttonStyle(.plain)
+            .contentShape(Circle())
             .help("축소")
 
             Button {
                 zoomScale = 1.0
             } label: {
                 Image(systemName: "arrow.up.left.and.down.right.magnifyingglass")
+                    .font(.system(size: 12, weight: .semibold))
+                    .foregroundStyle(Color.accentColor)
+                    .frame(width: 28, height: 28)
+                    .background(Circle().fill(Color.accentColor.opacity(0.12)))
+                    .overlay(Circle().stroke(Color.accentColor.opacity(0.35), lineWidth: 1))
             }
             .buttonStyle(.plain)
+            .contentShape(Circle())
             .help("원본 크기 (\(Int((zoomScale * 100).rounded()))%)")
         }
         .padding(8)
@@ -1798,6 +1916,61 @@ private struct HWPToPDFPane: View {
                 .disabled(pdfSearchController.matches.isEmpty)
                 .help("다음 일치 항목")
             }
+
+            Spacer(minLength: 8)
+
+            // [2026-09-05 신설] 사용자 요청 — "한글뷰어에 pdf 변환 탭에도
+            // 돋보기 추가할 것." 원본 `.pdf` 탭(`pdfSearchBar(controller:)`)
+            // 과 완전히 같은 디자인·같은 컨트롤러 API
+            // (`PDFSearchController.zoomIn/zoomOut/resetZoom`, 그 프로퍼티
+            // 선언부 주석 참고 — `pdfView.scaleFactor`를 직접 읽고 써서
+            // 트랙패드 핀치줌과 항상 같은 값을 공유한다)를 그대로 재사용한다
+            // — 이 탭은 원본 `.pdf` 탭과 별개의 `PDFSearchController`
+            // 인스턴스(위 `pdfSearchController` 프로퍼티 선언 주석 참고 —
+            // 매번 새로 변환한 문서를 보여주므로 공유하면 안 됨)를 쓰지만,
+            // 그 인스턴스도 `PDFKitRepresentable`이 실제 `PDFView`에 똑같이
+            // 연결해 주므로 확대/축소 메서드가 그대로 동작한다.
+            Button {
+                pdfSearchController.zoomIn()
+            } label: {
+                Image(systemName: "plus.magnifyingglass")
+                    .font(.system(size: 14, weight: .semibold))
+                    .foregroundStyle(Color.accentColor)
+                    .frame(width: 28, height: 28)
+                    .background(Circle().fill(Color.accentColor.opacity(0.12)))
+                    .overlay(Circle().stroke(Color.accentColor.opacity(0.35), lineWidth: 1))
+            }
+            .buttonStyle(.plain)
+            .contentShape(Circle())
+            .help("확대")
+
+            Button {
+                pdfSearchController.zoomOut()
+            } label: {
+                Image(systemName: "minus.magnifyingglass")
+                    .font(.system(size: 14, weight: .semibold))
+                    .foregroundStyle(Color.accentColor)
+                    .frame(width: 28, height: 28)
+                    .background(Circle().fill(Color.accentColor.opacity(0.12)))
+                    .overlay(Circle().stroke(Color.accentColor.opacity(0.35), lineWidth: 1))
+            }
+            .buttonStyle(.plain)
+            .contentShape(Circle())
+            .help("축소")
+
+            Button {
+                pdfSearchController.resetZoom()
+            } label: {
+                Image(systemName: "arrow.up.left.and.down.right.magnifyingglass")
+                    .font(.system(size: 12, weight: .semibold))
+                    .foregroundStyle(Color.accentColor)
+                    .frame(width: 28, height: 28)
+                    .background(Circle().fill(Color.accentColor.opacity(0.12)))
+                    .overlay(Circle().stroke(Color.accentColor.opacity(0.35), lineWidth: 1))
+            }
+            .buttonStyle(.plain)
+            .contentShape(Circle())
+            .help("원본 크기 (\(Int((pdfSearchController.zoomScale * 100).rounded()))%)")
         }
         .padding(8)
     }
