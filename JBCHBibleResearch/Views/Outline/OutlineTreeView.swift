@@ -170,6 +170,11 @@ struct OutlineTreeView: View {
 
 private struct OutlineTreeSplitContent: View {
     @State private var selection: OutlineTreeSelection?
+    /// [2026-09-10 추가] 사용자 요청 — "아이패드 개요화면을 다른 화면과
+    /// 동일하게 디자인-테마색에 따른 배경색으로 개선할 것." 아래 우측
+    /// "책이나 장을 선택하세요" 빈 상태 배경에 쓴다 — `OutlineTreeList`가
+    /// 이미 쓰는 것과 같은 읽기 전용 접근 패턴.
+    @State private var settings = UserSettingsStore.shared
 
     var body: some View {
         HStack(spacing: 0) {
@@ -192,10 +197,15 @@ private struct OutlineTreeSplitContent: View {
                     VStack {
                         Spacer()
                         Text("책이나 장을 선택하세요")
-                            .foregroundStyle(.secondary)
+                            .foregroundStyle(settings.bibleTextColor?.opacity(0.6) ?? Color.secondary)
                         Spacer()
                     }
                     .frame(maxWidth: .infinity, maxHeight: .infinity)
+                    // [2026-09-10 추가] 위 `settings` 선언부 주석 참고 —
+                    // 왼쪽 트리(`OutlineTreeList`)만 테마를 입고 이 빈 상태
+                    // 패널은 시스템 기본 배경 그대로 남아 있으면 화면 절반이
+                    // 어긋나 보인다.
+                    .background(settings.bibleBackgroundColor ?? Color.clear)
                 }
             }
         }
@@ -367,10 +377,64 @@ private struct OutlineTreeList: View {
             Divider()
             List(rows) { row in
                 rowView(row, booksWithContent: booksWithContent, chaptersWithContent: chaptersWithContent)
+                    // [2026-09-10 추가] 사용자 재보고 — "아이패드 개요 -
+                    // 리스트 행 배경색이 반영되지 않음." `WordNoteHomeView`/
+                    // `SearchView`가 이미 겪고 고친 것과 같은 원인 —
+                    // `.scrollContentBackground(.hidden)` + `List` 자체의
+                    // `.background()`(아래)는 리스트라는 "컨테이너"의 배경만
+                    // 바꾸지, 각 행 셀이 갖고 있는 자기(시스템 기본) 배경까지
+                    // 자동으로 투명하게 만들어주지는 않는다 —
+                    // `.listRowBackground(Color.clear)`로 명시적으로 지워야
+                    // 뒤의 `List` 배경(테마색)이 그대로 비친다.
+                    .listRowBackground(Color.clear)
             }
             .listStyle(.plain)
+            // [2026-09-10 추가] 사용자 요청 — "아이패드 개요화면을 다른
+            // 화면과 동일하게 디자인-테마색에 따른 배경색으로 개선할 것."
+            // `WordNoteHomeView`/`DocumentsHomeView`/`SearchView`가 이미
+            // 쓰는 3종 세트(`.scrollContentBackground(.hidden)` +
+            // `.background()` + `.foregroundStyle()`) 그대로 — `.plain`
+            // 스타일이라 행마다 별도 카드 배경이 없어 리스트 자체 배경
+            // 하나만 바꾸면 된다. 이 뷰는 아이폰(`OutlineTreeView.isPhone`
+            // 분기)과 아이패드/맥(`OutlineTreeSplitContent`) 양쪽이 공유
+            // 하므로 두 플랫폼 모두 함께 테마를 입는다.
+            .scrollContentBackground(.hidden)
+            .background(settings.bibleBackgroundColor ?? Color.clear)
+            .foregroundStyle(settings.bibleTextColor ?? Color.primary)
+            .listRowSeparatorTint(JBCHCategoryPalette.wood.opacity(0.3))
         }
+        .background(settings.bibleBackgroundColor ?? Color.clear)
         .navigationTitle("개요")
+        // [2026-09-10 추가] 사용자 재보고 — "타이틀의 폰트, 크기, 색상이
+        // 다른 기능들의 타이틀과 다름." 이 화면은 시스템 기본
+        // `.navigationTitle("개요")`만 쓰고 있었다 — `WordNoteHomeView`/
+        // `DocumentsHomeView`/`SearchView`가 이미 쓰는 `.principal` 오버라이드
+        // (성곡 세리프체 20pt/`.title3` + 테마 글자색, 그 화면들의 같은 자리
+        // 주석 참고)가 이 화면엔 없었던 것이 원인이라, 같은 패턴을 그대로
+        // 맞춘다. `.navigationTitle`은 시스템 내부용으로 그대로 남긴다.
+        //
+        // [2026-09-11 추가] 사용자 보고 — "맨위 개요 타이틀 밑에 왼쪽
+        // 정렬된 '개요'라는 글자가 있음." 위 9/10 수정이 `.principal`
+        // 오버라이드만 옮겨 오고, `WordNoteHomeView`/`DocumentsHomeView`/
+        // `SearchView`가 그 옆에 항상 짝으로 두는
+        // `.navigationBarTitleDisplayMode(.inline)`은 빠뜨렸다 — 이게
+        // 없으면 시스템이 `.navigationTitle` 문자열로 큰 왼쪽 정렬 타이틀을
+        // 압축 표시줄 아래 별도 줄로 계속 그려, 위(작은 센터 성곡 세리프)와
+        // 아래(큰 왼쪽 정렬 시스템 기본) "개요"가 겹쳐 보였다. 다른 세
+        // 화면과 같은 해법.
+        #if os(iOS)
+        .navigationBarTitleDisplayMode(.inline)
+        #endif
+        .toolbar {
+            #if os(iOS)
+            ToolbarItem(placement: .principal) {
+                Text("개요")
+                    .font(.custom(SpecialPurposeFonts.titleSerif, size: 20, relativeTo: .title3))
+                    .fontWeight(.semibold)
+                    .foregroundStyle(settings.bibleTextColor ?? .primary)
+            }
+            #endif
+        }
         // [2026-08-26 추가, 사용자 보고 fix] "아이폰 개요 — 장 버튼을 누르면
         // 무조건 마지막 장으로 이동, 뒤로가기(<)를 누르면 이전 장으로 이동
         // (원래는 이전 화면으로 가야 함)." 원인 — `chapterChip`/`bookLabel`이
@@ -437,8 +501,32 @@ private struct OutlineTreeList: View {
                 Image(systemName: isTestamentExpanded(testament) ? "chevron.down" : "chevron.right")
                     .font(.caption)
                     .frame(width: 14)
+                // [2026-09-11 수정] 사용자 요청 — "'구약', '신약' 목록은
+                // 국민대학교 성곡 세리프체로 변경할 것." `BibleReadingView.
+                // swift`가 `.headline`(17pt semibold)을 성곡 세리프로 바꿀 때
+                // 쓴 것과 같은 공식 — `relativeTo: .headline`으로 Dynamic
+                // Type 배율은 유지하고, 성곡 세리프의 유일한 굵기(Regular)
+                // 위에 `.fontWeight(.semibold)`로 원래 `.headline`의 semibold
+                // 느낌을 합성 볼드로 흉내낸다.
                 Text(testament == .old ? "구약" : "신약")
-                    .font(.headline)
+                    .font(.custom(SpecialPurposeFonts.titleSerif, size: 17, relativeTo: .headline))
+                    .fontWeight(.semibold)
+                Spacer()
+                // [2026-09-11 추가] 사용자 재검토 요청 — "테마색상 팔레트
+                // 6개가 실제로는 2~3톤처럼 보인다." 서가 슬레이트
+                // (JBCHCategoryPalette.shelfSlate, 지금까지 코드 전체에서
+                // 실사용처가 0.15 불투명도 구분선 한 곳뿐이라 사실상 안
+                // 보였다)를 이 헤더에 명시 배정한다 — 책 권수를 보여줘
+                // 장식이 아니라 실제 정보도 함께 준다.
+                Text("\(testament == .old ? oldTestamentBooks.count : newTestamentBooks.count)\u{AD8C}")
+                    .font(.caption2.weight(.semibold).monospacedDigit())
+                    .foregroundStyle(.white)
+                    .padding(.horizontal, 7)
+                    .padding(.vertical, 2)
+                    .background(JBCHCategoryPalette.shelfSlate, in: Capsule())
+                    .overlay(
+                        Capsule().strokeBorder(Color.white.opacity(0.25), lineWidth: 0.5)
+                    )
             }
             .contentShape(Rectangle())
             .onTapGesture { toggleTestament(testament) }
@@ -465,7 +553,7 @@ private struct OutlineTreeList: View {
 
                 if booksWithContent.contains(book.bookId) {
                     Circle()
-                        .fill(Color.accentColor)
+                        .fill(Color("AccentColor"))
                         .frame(width: 6, height: 6)
                 }
 
@@ -539,11 +627,11 @@ private struct OutlineTreeList: View {
     private func chapterChipLabel(chapter: Int, hasContent: Bool) -> some View {
         Text("\(chapter)")
             .font(.system(size: 12, weight: hasContent ? .semibold : .regular))
-            .foregroundStyle(hasContent ? Color.accentColor : Color.secondary)
+            .foregroundStyle(hasContent ? Color("AccentColor") : Color.secondary)
             .frame(width: 30, height: 30)
             .background(
                 RoundedRectangle(cornerRadius: 6)
-                    .fill(hasContent ? Color.accentColor.opacity(0.15) : Color.clear)
+                    .fill(hasContent ? Color("AccentColor").opacity(0.15) : Color.clear)
             )
             .overlay(
                 RoundedRectangle(cornerRadius: 6)
@@ -558,12 +646,17 @@ private struct OutlineTreeList: View {
             // `List` 행 하나(`.book` 케이스) 안에 다른 버튼(펼침 토글)과 함께
             // 있어 잠재적으로 같은 문제의 소지가 있으므로 일관되게 값 기반으로
             // 바꿔 둔다.
+            // [2026-09-11 수정] 사용자 요청 — "성경목록(창세기~요한계시록)은
+            // 국민대학교 성곡 세리프체로 변경할 것." `.body`(17pt Regular)는
+            // 원래도 Regular 한 굵기라, 위 구약/신약 헤더와 달리
+            // `.fontWeight` 보정 없이 크기만 맞춘다.
             NavigationLink(value: OutlineTreeSelection.book(book.bookId)) {
-                Text(book.nameKo).font(.body)
+                Text(book.nameKo)
+                    .font(.custom(SpecialPurposeFonts.titleSerif, size: 17, relativeTo: .body))
             }
         } else {
             Text(book.nameKo)
-                .font(.body)
+                .font(.custom(SpecialPurposeFonts.titleSerif, size: 17, relativeTo: .body))
                 .contentShape(Rectangle())
                 .onTapGesture { selection?.wrappedValue = .book(book.bookId) }
         }

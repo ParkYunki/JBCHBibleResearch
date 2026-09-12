@@ -140,12 +140,14 @@ struct OCRReviewView: View {
             } else {
                 Button("폐기", role: .destructive) { viewModel.discard() }
                 Button("재시도") { Task { await viewModel.retry() } }
+                    .tint(Color("AccentColor"))
                 Spacer()
                 // 큐 안에서 마지막이 아닌 문서를 검수 중이면 "저장 후 다음"으로
                 // 라벨을 바꿔, 저장하면 이 화면에 계속 머무는 게 아니라 다음
                 // 문서로 넘어간다는 걸 미리 알려준다.
                 Button(saveButtonTitle) { viewModel.save() }
                     .buttonStyle(.borderedProminent)
+                    .tint(Color("AccentColor"))
             }
         }
         .padding()

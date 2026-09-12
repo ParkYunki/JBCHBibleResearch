@@ -306,7 +306,7 @@ struct SidebarNavigationView: View {
         // 명도를 올린 색(#D1A35E, H36°·S55%·V82%)을 덧씌운다 — 어느
         // 각도로 봐도 여전히 "이 앱의 그 금색 계열"로 보이면서, 큰 면적
         // 배경에서도 탁하지 않게 밝은 금색으로 읽히도록 조정한 값이다.
-        .tint(Color(hex: "#D1A35E") ?? Color.accentColor)
+        .tint(Color(hex: "#D1A35E") ?? Color("AccentColor"))
     }
 
     var body: some View {
@@ -390,6 +390,21 @@ struct SidebarNavigationView: View {
                     #endif
             }
         }
+        // [2026-09-12 추가] 사용자 보고(아이패드) — "왼쪽 사이드바 선택된
+        // 기능의 파란색 -> 테마대로." 아래 `sidebarMenuList`에 이미 있는
+        // 같은 톤의 `.tint()`가 macOS에서는 선택 행 배경을 금색으로 바꾸는
+        // 데 성공했지만, 아이패드에서는 여전히 시스템 기본 파란색이 보인다는
+        // 보고다. `NavigationSplitView`는 사이드바 선택 강조색을 플랫폼별로
+        // 다르게 해석한다(macOS는 AppKit `NSOutlineView` 브리징, 아이패드는
+        // UIKit `UISplitViewController` 브리징) — 안쪽 `List`에만 건
+        // `.tint()`가 두 플랫폼 모두에 항상 반영된다는 보장이 없어,
+        // `NavigationSplitView` 자신을 감싸는 자리에도 같은 색을 한 번 더
+        // 걸어 스플릿 뷰 자체의 색 해석 시점에도 이 값이 보이게 한다.
+        // ⚠️ 이 세션엔 실기기/시뮬레이터가 없어 이 시도가 실제로 아이패드
+        // 에서 해결되는지 확인하지 못했다 — 빌드 후에도 여전히 파란색이면
+        // 알려달라(UIKit 브리징 특유의 알려진 제약이라 추가 조치가 더
+        // 필요할 수 있다).
+        .tint(Color(hex: "#D1A35E") ?? Color("AccentColor"))
         .focusedSceneValue(\.selectSection) { section in
             if section.opensSeparateWindow {
                 openWindow(id: "tag-relations")

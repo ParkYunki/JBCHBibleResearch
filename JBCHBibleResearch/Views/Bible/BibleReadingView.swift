@@ -129,7 +129,7 @@ private struct PartialTextSelectionTarget: Identifiable {
 /// 안에서만 선언돼 있었다 — macOS 빌드에는 이 타입 자체가 존재하지 않는데,
 /// `chapterNavigationControlsStandard`(맥/아이패드 공용 장 이동 버튼줄)에서
 /// macOS도 이 타입을 쓰도록 방금 바꿨으니 선언 자체를 플랫폼 조건 밖으로
-/// 꺼내야 한다. 이 타입은 `Color.accentColor`/`Circle()`/`.buttonStyle` 등
+/// 꺼내야 한다. 이 타입은 `Color("AccentColor")`/`Circle()`/`.buttonStyle` 등
 /// 플랫폼 공용 SwiftUI API만 쓰므로(iOS 전용 API 없음) 조건 없이 꺼내도
 /// 안전하다 — 바로 아래 `BottomBarLabelStyleModifier`(여전히 iOS 전용)가
 /// `CircularNavButtonModifier.diameter`를 참조하는데, Swift는 파일 내 최상위
@@ -148,11 +148,62 @@ private struct CircularNavButtonModifier: ViewModifier {
             content
                 .buttonStyle(.plain)
                 .frame(width: Self.diameter, height: Self.diameter)
-                .background(Circle().fill(Color.accentColor.opacity(0.12)))
+                .background(Circle().fill(Color("AccentColor").opacity(0.12)))
+                // [2026-09-09 추가] 사용자 요청으로 상단 메뉴 바 배경이 이제
+                // 시스템 재질(`.bar`)이 아니라 불투명 테마색일 수 있다(아래
+                // `chapterNavigationControls`의 `.safeAreaInset` 참고). 이
+                // 모디파이어는 원래 `.foregroundStyle`을 지정하지 않아 아이콘이
+                // `.buttonStyle(.plain)`의 기본값인 `.primary`(시스템 라이트/
+                // 다크에만 대응, 커스텀 배경색은 모름)로 그려졌다 — `.bar`처럼
+                // 배경 자체가 라이트/다크를 따라가는 재질일 때는 우연히 항상
+                // 맞았지만, 이제 배경이 임의의 테마색(예: 짙은 남색)이 되면
+                // 라이트 모드의 `.primary`(거의 검정)가 그 위에서 대비를 잃을
+                // 수 있다. 새 배지(`JoinedNavBadgeModifier`, 바로 아래)가 이미
+                // 같은 목적으로 쓰는 `Color("AccentColor")`를 그대로 재사용해
+                // 새 색 체계를 만들지 않았다 — 이 앱의 강조색(금색 계열)은
+                // 이미 아이보리/남색 등 기존 테마 배경 전부와 대비를 확보하도록
+                // 골라져 있다(AccentColor 에셋 다크/라이트 변형 참고).
+                .foregroundStyle(Color("AccentColor"))
                 .contentShape(Circle())
         } else {
             content
         }
+    }
+}
+
+/// [2026-09-09 신설] 사용자 요청 — "대안 B(아이패드/macOS의 원형 배지 모양을
+/// 아이폰 성경이동 막대에도 통일)"를 적용하면서, 기존 `JoinedNavIconButtonModifier`
+/// (아이콘만 놓고 얇은 구분선으로 나누던 방식, 이 파일에서 삭제함)를 대체한다.
+/// 위 `CircularNavButtonModifier`와 원리는 같지만(옅은 원형 배경) 이 타입은
+/// `private`가 아니다 — `BookChapterPicker.compactBarBody`(다른 파일, 이
+/// 파일과 달리 macOS/iPad 빌드에도 항상 컴파일돼야 함)의 "책 선택"/"이동"
+/// 버튼도 같은 배지 스타일을 써야 하기 때문이다. 그래서 `#if os(iOS)` 밖,
+/// `CircularNavButtonModifier` 바로 옆에 둔다 — 예전에 `CircularNavButtonModifier`
+/// 자체를 `#if os(iOS)` 안에 뒀다가 macOS 빌드가 그 타입을 못 찾아 컴파일
+/// 에러가 났던 적이 있어(바로 위 그 타입 선언부 주석 참고) 같은 실수를
+/// 반복하지 않는다.
+///
+/// `isProminent`로 두 가지를 한 타입에서 표현한다 — "이동"처럼 이 그룹의
+/// 주된 실행 동작(true, 진한 배경+흰 아이콘)과 나머지 탐색용 아이콘들
+/// (false, 옅은 배경+accentColor 아이콘). 지름은 새 값을 고르지 않고, 기존에
+/// 이미 실기기 문제(폭이 넉넉하지 않아 "책 2장" 텍스트가 3줄로 줄바꿈되던
+/// 버그, 2026-09-04)를 겪고 정착한 40×44 탭 영역은 그대로 둔 채 그 안에
+/// 34pt 원만 그린다 — 탭 영역 자체를 키우면 같은 폭 문제가 재발할 위험이
+/// 있어 배지(시각 요소)만 추가하고 폭 예산은 건드리지 않았다.
+struct JoinedNavBadgeModifier: ViewModifier {
+    static let diameter: CGFloat = 34
+    let isProminent: Bool
+    func body(content: Content) -> some View {
+        content
+            .buttonStyle(.plain)
+            .frame(width: 40, height: 44)
+            .background(
+                Circle()
+                    .fill(isProminent ? Color("AccentColor") : Color("AccentColor").opacity(0.14))
+                    .frame(width: Self.diameter, height: Self.diameter)
+            )
+            .foregroundStyle(isProminent ? Color.white : Color("AccentColor"))
+            .contentShape(Rectangle())
     }
 }
 
@@ -234,9 +285,9 @@ private struct ActionBarCircularIconModifier: ViewModifier {
                 .buttonStyle(.plain)
                 .frame(width: CircularNavButtonModifier.diameter, height: CircularNavButtonModifier.diameter)
                 .background(
-                    Circle().fill(isProminent ? Color.accentColor : Color.accentColor.opacity(0.12))
+                    Circle().fill(isProminent ? Color("AccentColor") : Color("AccentColor").opacity(0.12))
                 )
-                .foregroundStyle(isProminent ? Color.white : Color.accentColor)
+                .foregroundStyle(isProminent ? Color.white : Color("AccentColor"))
                 .contentShape(Circle())
         } else if isProminent {
             // [2026-08-27 신설] narrow가 아닐 때(가로보기/아이패드 등)는 예전
@@ -253,32 +304,88 @@ private struct ActionBarCircularIconModifier: ViewModifier {
     }
 }
 
-/// [2026-09-04 신설] `BibleReadingContentView.compactChapterNavigationBar`
-/// (아이폰 전용 "이어진 막대" 상단 이동 메뉴) 전용 — 아이콘 버튼 하나의
-/// 자리. 위 `CircularNavButtonModifier`처럼 개별 원형 배경을 주지 않는
-/// 이유는 그 바 전체가 하나의 캡슐 배경을 공유하기 때문이다(개별 배경을
-/// 겹쳐 주면 "이어진 막대" 대신 다시 낱개 버튼처럼 보인다). 폭 40 · 높이
-/// 44(막대 전체 높이)로 6개 아이콘 버튼 + 검색창이 좁은 화면에서도 겹치지
-/// 않게 하면서, 세로는 애플 HIG 최소 44pt를 만족한다.
-private struct JoinedNavIconButtonModifier: ViewModifier {
-    func body(content: Content) -> some View {
-        content
-            .buttonStyle(.plain)
-            .frame(width: 40, height: 44)
-            .contentShape(Rectangle())
-    }
-}
-
-/// [2026-09-04 신설] `compactChapterNavigationBar` 전용 — 이어진 막대 안에서
-/// 버튼/검색창 사이를 나누는 얇은 세로 구분선.
-private struct NavBarDivider: View {
-    var body: some View {
-        Rectangle()
-            .fill(Color.primary.opacity(0.12))
-            .frame(width: 1, height: 24)
-    }
-}
+// [2026-09-09 삭제] `JoinedNavIconButtonModifier`/`NavBarDivider`가 여기
+// 있었다 — 대안 B(원형 배지 통일) 적용으로 위 `JoinedNavBadgeModifier`
+// (지금은 `#if os(iOS)` 밖, `CircularNavButtonModifier` 옆)로 대체되면서
+// 두 타입 다 더 이상 쓰는 곳이 없어졌다.
 #endif
+
+/// [2026-09-09 신설] 사용자 보고 — "성경 상단 (책갈피 리스트, 책갈피, 히스토리,
+/// 인스펙터창, 번역본) 메뉴가 있는 영역은 왜 색깔이 흰색이지?" 조사 결과, 이
+/// 아이콘들은 `chapterNavigationControls`(이미 테마 적용됨 — 위
+/// `.safeAreaInset(edge: .top)` 참고)가 아니라, 그 아래 `toolbarContent`가
+/// 채우는 진짜 iOS 시스템 내비게이션 바(`.navigationTitle` + `.toolbar`)에
+/// 있다 — 서로 다른 층이라 지난 "테마 확장" 작업에서 빠졌다. 시스템
+/// 내비게이션 바 배경은 `.background()`로는 바뀌지 않고, Apple이 iOS 16+에
+/// 공식 제공하는 `.toolbarBackground(_:for:)`로만 바꿀 수 있다(이 앱 배포
+/// 타깃은 iOS 26.5라 사용 가능) — 이 코드베이스에 처음 쓰이지만, 이 배경을
+/// 바꿀 다른 표준 API가 없어 채택했다. 테마 배경을 고르지 않았으면(nil) 이
+/// 모디파이어 자체를 적용하지 않아 시스템 기본(automatic) 배경을 그대로
+/// 유지한다 — 바로 위 `CircularNavButtonModifier`와 같은 "if/else, content
+/// 그대로 반환" 패턴.
+private struct ThemedNavigationBarBackgroundModifier: ViewModifier {
+    let color: Color?
+
+    // [2026-09-10 추가] 위 `.toolbarBackground`가 요구하는 짝 API —
+    // `@Environment(\.self)`로 현재 환경을 받아 `Color.resolve(in:)`에
+    // 넘긴다(`Color+Hex.swift`의 `hexString(in:)`이 이미 쓰는 것과 같은,
+    // 확인된 패턴). `Color(hex:)`로 만든 고정 RGB 색이라 라이트/다크 모드와
+    // 무관하게 항상 같은 값이 나온다.
+    @Environment(\.self) private var environment
+
+    func body(content: Content) -> some View {
+        // [2026-09-10 수정, 컴파일 에러 fix] 사용자 보고 — Xcode 에러
+        // "'navigationBar' is unavailable in macOS"(WordNoteHomeView.swift
+        // 134:49/135:52). `ToolbarPlacement.navigationBar`는 iOS/iPadOS/
+        // tvOS/Mac Catalyst 전용이라, 이 앱의 macOS(순수 AppKit 창) 타깃에는
+        // 그 심볼 자체가 없다 — 이 파일들 주석이 애초에 "iOS 16+에 공식
+        // 제공하는 API"라고 적어 뒀던 전제를 `#if os(iOS)`로 실제 코드에도
+        // 반영한다. macOS는 원래도 이 모디파이어로 바꿀 표준 API가 없다고
+        // 판단해 채택한 적이 없으므로(각 파일 상단 주석 참고), macOS
+        // 분기는 `color` 값과 무관하게 항상 아무 효과 없이 통과시킨다.
+        #if os(iOS)
+        if let color {
+            content
+                .toolbarBackground(color, for: .navigationBar)
+                .toolbarBackground(.visible, for: .navigationBar)
+                // [2026-09-10 추가, 버그 수정 시도] 사용자 보고 — "테마를
+                // 바꾸면 [성경] 화면의 상단(타이틀·책갈피 리스트·책갈피
+                // 설정·히스토리·인스펙터 창·번역본 버튼 영역)이 사라짐."
+                // 이 세션엔 실기기 재현이 불가능해 100% 확정은 못 했지만,
+                // 코드로 확인되는 원인은 이렇다 — 지금까지 이 화면들은
+                // `.toolbarBackground(_:for:)`만 쓰고 Apple 공식 문서가
+                // 커스텀 배경색과 함께 쓰길 권하는 짝 API인
+                // `.toolbarColorScheme(_:for:)`은 지정하지 않았다. 이게
+                // 없으면 iOS는 내비게이션 바가 실제로 얼마나 밝은/어두운
+                // 배경인지가 아니라 "앱 전체의 현재 라이트/다크 모드"만
+                // 보고 시스템 제공 바 아이템의 기본 색을 정한다 — 예를 들어
+                // 라이트 모드에서 어두운 테마(밤빛 서재 등, 이 앱의 실제
+                // 프리셋 2개 중 1개가 어두운 배경 — `BibleSlideColorTheme.
+                // swift` 참고)를 고르면 어두운 배경 위에 여전히 라이트
+                // 모드용 짙은 색 아이템이 남아 거의 안 보이게 될 수 있다.
+                // 배경색의 WCAG 2.1 상대 휘도(`BibleSlideColorTheme.swift`
+                // 상단 주석이 2개 프리셋의 대비를 검증할 때 이미 수동으로
+                // 쓴 것과 같은 공식)를 계산해 어두우면 `.dark`(밝은 아이템),
+                // 밝으면 `.light`(어두운 아이템)를 명시적으로 지정한다.
+                // 이 수정으로도 증상이 그대로 재현되면(예: 매번이 아니라
+                // 설정 시트를 닫는 특정 시점에만 재현되는 등) 별도 원인이
+                // 더 있다는 뜻이니, 재현되는 정확한 상황을 알려주시면 추가로
+                // 조사한다.
+                .toolbarColorScheme(Self.isDarkBackground(color, in: environment) ? .dark : .light, for: .navigationBar)
+        } else {
+            content
+        }
+        #else
+        content
+        #endif
+    }
+
+    private static func isDarkBackground(_ color: Color, in environment: EnvironmentValues) -> Bool {
+        let resolved = color.resolve(in: environment)
+        let luminance = 0.2126 * Double(resolved.red) + 0.7152 * Double(resolved.green) + 0.0722 * Double(resolved.blue)
+        return luminance < 0.5
+    }
+}
 
 private struct BibleReadingContentView: View {
     @Environment(\.modelContext) private var modelContext
@@ -421,6 +528,16 @@ private struct BibleReadingContentView: View {
 #else
     @State private var wordSummaryProxy = RichTextEditingProxy()
 #endif
+    /// [2026-09-09 추가] 사용자 요청 — "테마를 적용하면 배경색과 글자색을
+    /// 전체적으로 적용할 수 있는가(상단 메뉴영역, 하단 메뉴영역...)." 지금까지
+    /// `UserSettingsStore.bibleBackgroundColor`/`bibleTextColor`는
+    /// `TranslationColumnView`(성경 본문 컬럼)만 읽었다 — 이 화면(상단/하단
+    /// 메뉴 바)도 같은 값을 읽어야 하므로, 그 파일들과 똑같은 읽기 전용
+    /// 접근 패턴(`private var settings: UserSettingsStore { .shared }`)을
+    /// 그대로 가져온다. 바인딩이 필요 없는(값을 읽기만 하는) 화면이라
+    /// `SettingsView`의 `@State private var settings = ...`가 아니라
+    /// `TranslationColumnView`의 계산 프로퍼티 방식을 따랐다.
+    private var settings: UserSettingsStore { .shared }
     /// [2026-08-12 추가, 2026-08-21 폐기] 사용자 요청 — "말씀 구절과 오른쪽
     /// 사이드바 에디터 영역의 비율을 50:50으로 하게 할것." 처음엔 인스펙터가
     /// 열리기 직전 본문 실측 폭을 `.background`의 `GeometryReader`로 얼려 그
@@ -443,6 +560,15 @@ private struct BibleReadingContentView: View {
     /// 화면이 실제로 좁고 길게 그려지는지가 중요하지, 기기 자체의 방향 센서
     /// 값은 중요하지 않다(하단 액션바 버튼이 잘리지 않게 하는 게 목적이므로).
     @State private var isNarrowBottomBarLayout: Bool = false
+    /// [2026-09-11 추가] 사용자 보고 — "키보드가 올라와있는 상황에서 구절을
+    /// 선택하면 하단 메뉴 텍스트가 세로로 보임." 위 `isNarrowBottomBarLayout`은
+    /// 일부러 키보드 세이프에어리어를 무시하게 만들어져(`.ignoresSafeArea(
+    /// .keyboard, edges: .bottom)`, 이 화면 세로/가로 판정 주석 참고) 키보드가
+    /// 떠 있어도 "가로로 넉넉하다"고 계속 판정할 수 있다 — 그 상태에서 실제
+    /// 가용 폭이 키보드 때문에 줄면 라벨이 비정상적으로 좁은 칸에 맞춰지며
+    /// 세로로 보이는 것으로 추정된다. 키보드가 떠 있는 동안은 이 판정과
+    /// 무관하게 무조건 아이콘 전용으로 강제해 증상 자체를 피한다.
+    @State private var isKeyboardVisible = false
     /// [2026-08-21 신설] 위 주석 참고 — "말씀 요약" 인스펙터의 고정 폭. 처음엔
     /// 예전 계산값의 대략적인 중간값(최소 380/이상적 520이던 기존 폴백 범위)을
     /// 그대로 상수화해 420을 썼다.
@@ -514,6 +640,28 @@ private struct BibleReadingContentView: View {
         }
         #endif
         return viewModel.columns.first?.registry.code
+    }
+
+    /// [2026-09-10 신설, 같은 날 수정] "지금 실제로 보고 있는 번역본"을
+    /// 구하는 로직은 바로 위 `bookmarkTargetTranslationCode`(북마크 대상
+    /// 결정)와 완전히 같다 — 아이폰은 지금 스와이프로 보고 있는 컬럼, 그
+    /// 외(맥/아이패드 나란히 표시)는 맨 왼쪽 컬럼. 번역본이 하나도 표시돼
+    /// 있지 않으면(`emptyState`) 빈 문자열.
+    ///
+    /// [2026-09-10 수정] 사용자 보고 — "성경구절 상단의 번역본 + 책 + 장은
+    /// 삭제할것 ... 아이폰에서는 두줄로 표현할 것(번역본/책+장) ... 아이패드
+    /// 에서는 '성경조회' 타이틀 유지할 것." 아이폰과 아이패드의 `.principal`
+    /// 내용 자체가 이제 서로 달라져(아래 `ToolbarItem` 참고 — 아이폰은 이
+    /// 값 + 책·장을 별도 두 줄로, 아이패드는 고정 "성경 조회") 번역본/책·장을
+    /// 하나로 합친 문자열 대신 번역본 이름만 반환하도록 되돌렸다.
+    private var currentColumnTranslationDisplayName: String {
+        #if os(iOS)
+        if isPhone {
+            let visibleColumnID = selectedPhoneColumnID ?? viewModel.columns.first?.id
+            return viewModel.columns.first(where: { $0.id == visibleColumnID })?.registry.displayName ?? ""
+        }
+        #endif
+        return viewModel.columns.first?.registry.displayName ?? ""
     }
 
     /// [2026-08-26 신설, 2026-09-04 수정] `CircularNavButtonModifier` 상단
@@ -692,7 +840,26 @@ private struct BibleReadingContentView: View {
             chapterNavigationControls
                 .padding(.horizontal)
                 .padding(.vertical, 4)
-                .background(.bar)
+                // [2026-09-09 수정] 사용자 요청 — "테마를 적용하면 배경색과
+                // 글자색을 전체적으로 적용할 수 있는가(상단 메뉴영역...)."
+                // 지금까지는 항상 시스템 반투명 재질(`.bar`)이라 테마와
+                // 무관했다 — 사용자가 배경 테마를 골랐으면(`bibleBackgroundColor`
+                // != nil) 그 색을 그대로 쓰고, 하나도 안 골랐으면(시스템 기본
+                // 색상으로 되돌리기를 눌렀거나 처음부터 손대지 않은 경우)
+                // 기존 그대로 `.bar` 재질을 쓴다 — `TranslationColumnView`
+                // 컬럼 배경이 이미 쓰는 것과 같은 "nil이면 기존 동작 그대로"
+                // 원칙. `Color`와 `Material`은 서로 다른 타입이라 하나의
+                // `.background(_:)` 호출에 삼항연산자로 넣을 수 없어(타입
+                // 불일치 컴파일 에러), 이미 이 파일의 다른 배경(`.background
+                // (alignment:) { if ... }`, `TranslationColumnView`의 책갈피
+                // 리본과 같은 패턴)이 쓰는 `@ViewBuilder` 기반 분기로 대신했다.
+                .background {
+                    if let bg = settings.bibleBackgroundColor {
+                        bg
+                    } else {
+                        Rectangle().fill(.bar)
+                    }
+                }
         }
         // [2026-08-08 추가] 사용자 요청 — 절 선택 → 클립보드 복사. 선택이 하나도
         // 없으면 아예 안 보이게 해서, 평소 화면(순수 뷰어)을 방해하지 않는다
@@ -977,6 +1144,10 @@ private struct BibleReadingContentView: View {
         .navigationBarTitleDisplayMode(.inline)
         #endif
         .toolbar { toolbarContent }
+        // [2026-09-09 추가] 위 `ThemedNavigationBarBackgroundModifier` 주석
+        // 참고 — 이 화면의 진짜 시스템 내비게이션 바(책갈피 이동/책갈피/조회
+        // 이력/관련 콘텐츠/번역본 선택 아이콘이 있는 곳) 배경을 테마에 맞춘다.
+        .modifier(ThemedNavigationBarBackgroundModifier(color: settings.bibleBackgroundColor))
         // [2026-08-25 추가] 사이드바 "최근" 이력(형광펜/메모/관주) 항목을, 이미 이
         // 화면(성경 조회)을 보고 있는 채로 다시 탭한 경우 — 이 화면 자체는 다시
         // 만들어지지 않으므로(`viewModel`이 그대로 유지된다) 위 `BibleReadingView`
@@ -1323,6 +1494,33 @@ private struct BibleReadingContentView: View {
         #if os(iOS)
         .tabViewStyle(.page(indexDisplayMode: viewModel.columns.count > 1 ? .always : .never))
         #endif
+        // [2026-09-09 추가] 사용자 보고(실기기 스크린샷) — 상단 내비게이션
+        // 바(이미 테마 적용됨 — 위 `ThemedNavigationBarBackgroundModifier`)와
+        // 본문(성경 구절 목록, 이미 테마 적용됨 — `TranslationColumnView`) 사이에
+        // 얇은 흰 줄이 남아 있었다. 조사 결과(Apple Developer Forums #774036,
+        // "Navigation Bar Background Hidden with TabView in NavigationStack") —
+        // `NavigationStack`의 본문이 `TabView`(이 `phoneColumns`가 바로 그것,
+        // 페이지 스와이프용)를 포함하면 시스템 내비게이션 바가 배경/구분선을
+        // 다른 뷰(`ScrollView` 단독 등)와 다르게 처리해, 조상 뷰에만 건
+        // `.toolbarBackground`가 완전히 반영되지 않는 경우가 보고돼 있다 —
+        // 그 스레드가 제시한 해법 그대로 이 `TabView` 자신에도 같은 모디파이어를
+        // 한 번 더 직접 건다(위 `BibleReadingContentView.body`의 것과 중복
+        // 적용이지만 해가 되지 않는다 — 둘 다 같은 `settings.bibleBackgroundColor`
+        // 값을 읽어 항상 같은 결과를 낸다). 이 세션엔 Xcode/실기기가 없어 이
+        // 수정 자체는 아직 재검증하지 못했다.
+        .modifier(ThemedNavigationBarBackgroundModifier(color: settings.bibleBackgroundColor))
+        // [2026-09-09 추가, 실기기 재확인 후] 위 `.toolbarBackground` 기반
+        // 수정(내비게이션 바 전용)을 적용해도 흰 줄이 남아 있는 것을 사용자가
+        // 재확인해줬다 — 그렇다면 이 얇은 띠는 "내비게이션 바 배경/구분선"이
+        // 아니라, 이 `TabView`(`.page` 스타일) 컨테이너 자신이 차지하는
+        // 프레임 어딘가가 자기 배경을 전혀 갖고 있지 않아 그 안(또는 시스템
+        // 페이지 컨트롤 관련 여백)이 기본색으로 보이는 것일 가능성이 더 크다.
+        // 이 컬럼(`TranslationColumnView`)은 자기 자신의 헤더+본문 배경만
+        // 칠하지, 그걸 감싸는 이 `TabView` 자체의 프레임 배경은 지금까지
+        // 아무도 칠한 적이 없다 — 이 코드베이스의 다른 컨테이너들(예:
+        // `TranslationColumnView` 자신, `WordNoteHomeView`의 List)과 같은
+        // "nil이면 기존 그대로" 폴백으로 이 `TabView` 자체에도 배경을 준다.
+        .background(settings.bibleBackgroundColor ?? Color.clear)
         .onChange(of: selectedPhoneColumnID) { _, newValue in
             // 방금까지 보고 있던(=스크롤 가능했던 유일한) 컬럼이 리더로서 마지막
             // 보고한 중앙 절을 그대로 새로 보이는 컬럼에 넘긴다. 아직 아무도
@@ -1523,20 +1721,46 @@ private struct BibleReadingContentView: View {
             if isNarrowBottomBarLayout {
                 Text("\(viewModel.selectedVerses.count)개 절 선택됨")
                     .font(.caption)
-                    .foregroundStyle(.secondary)
+                    // [2026-09-09 수정] 하단 메뉴 바 배경이 테마색일 수 있어
+                    // (위 `.background` 참고), 고정된 시스템 `.secondary`
+                    // 대신 테마 글자색을 우선 쓴다 — `TranslationColumnView`
+                    // 아이콘들이 이미 쓰는 `settings.bibleTextColor ?? .secondary`
+                    // 폴백 관례를 그대로 따랐다.
+                    .foregroundStyle(settings.bibleTextColor ?? .secondary)
             }
             verseSelectionActionButtonsRow
         }
+        // [2026-09-11 추가] 사용자 보고 — "키보드 떠 있을 때 구절 선택하면
+        // 하단 메뉴 텍스트가 세로로 보임." 위 `isKeyboardVisible` 선언부 주석
+        // 참고 — 키보드가 뜨고 내려가는 시점을 직접 관찰해 아이콘 전용 판정에
+        // OR로 더한다.
+        #if os(iOS)
+        .onReceive(NotificationCenter.default.publisher(for: UIResponder.keyboardWillShowNotification)) { _ in
+            isKeyboardVisible = true
+        }
+        .onReceive(NotificationCenter.default.publisher(for: UIResponder.keyboardWillHideNotification)) { _ in
+            isKeyboardVisible = false
+        }
+        #endif
         // [2026-08-21 추가] 사용자 요청 — "세로보기에서 탭하면 하단 메뉴는
         // 한글 메뉴명은 빼고 아이콘만 나오도록." 위 `isNarrowBottomBarLayout`
         // 상단 주석 참고 — macOS는 창 폭이 넉넉해 해당 요청 대상이 아니므로
         // iOS(아이폰/아이패드)에서만 적용한다.
         #if os(iOS)
-        .modifier(BottomBarLabelStyleModifier(isNarrow: isNarrowBottomBarLayout))
+        .modifier(BottomBarLabelStyleModifier(isNarrow: isNarrowBottomBarLayout || isKeyboardVisible))
         #endif
         .padding(.horizontal)
         .padding(.vertical, isNarrowBottomBarLayout ? 8 : nil)
-        .background(.bar)
+        // [2026-09-09 수정] 위 상단 메뉴 바(`.safeAreaInset(edge: .top)`)와
+        // 같은 이유·같은 패턴 — 테마를 골랐으면 그 배경색, 아니면 기존
+        // `.bar` 재질 그대로.
+        .background {
+            if let bg = settings.bibleBackgroundColor {
+                bg
+            } else {
+                Rectangle().fill(.bar)
+            }
+        }
         .sheet(isPresented: $isVerseZoomPresented, onDismiss: {
             // [2026-08-08 추가] 확대보기에서 "메모"를 만들었으면, 확대보기 시트가
             // 완전히 닫힌 뒤 이어서 편집기 시트를 연다 — 같은 화면이 시트 두 개를
@@ -1602,7 +1826,12 @@ private struct BibleReadingContentView: View {
             if !isNarrowBottomBarLayout {
                 Text("\(viewModel.selectedVerses.count)개 절 선택됨")
                     .font(.caption)
-                    .foregroundStyle(.secondary)
+                    // [2026-09-09 수정] 하단 메뉴 바 배경이 테마색일 수 있어
+                    // (위 `.background` 참고), 고정된 시스템 `.secondary`
+                    // 대신 테마 글자색을 우선 쓴다 — `TranslationColumnView`
+                    // 아이콘들이 이미 쓰는 `settings.bibleTextColor ?? .secondary`
+                    // 폴백 관례를 그대로 따랐다.
+                    .foregroundStyle(settings.bibleTextColor ?? .secondary)
             }
             Spacer()
 
@@ -1848,9 +2077,62 @@ private struct BibleReadingContentView: View {
         // iOS(아이폰/아이패드)에만 적용한다.
         #if os(iOS)
         ToolbarItem(placement: .principal) {
-            Text("성경 조회")
-                .font(.title2)
-                .fontWeight(.bold)
+            // [2026-09-10 재수정] 사용자 보고 — "성경구절 상단의 번역본 +
+            // 책 + 장은 삭제할것. 아이폰에서는 두줄로 표현할 것(번역본/책+장).
+            // 성경구절 상단에 있는 크기와 동일하게 최대한 유지할 것.
+            // 아이패드에서는 '성경조회' 타이틀 유지할 것 -> 단 타이틀에
+            // 걸맞는 크기로 바꿀 것." 바로 전 수정(한 줄로 합친 동적 문자열
+            // + `.title2.bold()`)을 되돌리고 기기별로 다시 나눴다.
+            //
+            // 아이폰 — 좁은 `.principal` 영역에 번역본/책+장을 두 줄로
+            // 나눠 보여준다. 크기는 "성경구절 상단"(바로 아래
+            // `chapterNavigationControls`가 그리는 `BookChapterPicker.
+            // compactBarBody` — 현재 위치를 "창2"처럼 보여주는 검색창/라벨)
+            // 이 이미 쓰는 `.title3`을 그대로 맞췄다(사용자 요청 — "성경구절
+            // 상단에 있는 크기와 동일하게 최대한 유지").
+            //
+            // 아이패드 — 원래 고정 문구("성경 조회")로 되돌리되, 폭이
+            // 넉넉한 아이패드에서도 원래 크기(`.title2.bold()`)는 과했다는
+            // 지적이라 다른 3개 화면(말씀노트/문서OCR/통합검색) 타이틀 색
+            // fix에 이미 쓴 `.headline`(시스템 기본 인라인 타이틀과 같은
+            // 크기·굵기)으로 맞췄다.
+            // [2026-09-10 수정] 사용자 요청 — 각 기능 타이틀을 국민대학교
+            // 성곡 세리프체로 표시(라이선스 CC BY-ND, 설정 > 라이센스 탭 고지
+            // 참고). 아이폰 두 줄은 원래 쓰던 `.title3`(시스템 기본, 20pt
+            // regular)의 크기·배율(`relativeTo:`)만 그대로 옮겼고(원래도
+            // regular 굵기라 `.fontWeight` 보정은 필요 없다), 아이패드 고정
+            // 문구는 `.headline`(17pt semibold)을 옮기며 다른 3개 화면과
+            // 같은 `.fontWeight(.semibold)` 합성 볼드 보정을 맞췄다.
+            if isPhone {
+                VStack(spacing: 0) {
+                    Text(currentColumnTranslationDisplayName)
+                        .font(.custom(SpecialPurposeFonts.titleSerif, size: 20, relativeTo: .title3))
+                        .lineLimit(1)
+                        .minimumScaleFactor(0.7)
+                    Text("\(viewModel.selectedBook.nameKo) \(viewModel.selectedChapter)장")
+                        .font(.custom(SpecialPurposeFonts.titleSerif, size: 20, relativeTo: .title3))
+                        .lineLimit(1)
+                        .minimumScaleFactor(0.7)
+                }
+                // [2026-09-09 추가] 내비게이션 바 배경이 이제(위 `.modifier
+                // (ThemedNavigationBarBackgroundModifier(...))`) 임의의 테마색일
+                // 수 있다 — 이 `Text`는 원래 명시적 색이 없어(`.primary`
+                // 상속) 라이트 모드 기본값(거의 검정)이 짙은 배경 위에서 대비를
+                // 잃을 수 있었다. `CircularNavButtonModifier`가 같은 이유로 이미
+                // 쓰는 폴백 관례를 그대로 따랐다.
+                .foregroundStyle(settings.bibleTextColor ?? .primary)
+            } else {
+                // [2026-09-12 수정] 사용자 요청(아이패드) — "성경-타이틀
+                // (성경 조회) 크기를 키울것 -> 연구문서, 말씀노트 타이틀과
+                // 동일하게." `DocumentsHomeView`/`WordNoteHomeView`의
+                // 타이틀이 쓰는 것과 정확히 같은 크기(size 20, `.title3`
+                // 배율)로 맞춘다 — 기존 17pt(`.headline` 배율)는 그 두
+                // 화면보다 작았다.
+                Text("성경 조회")
+                    .font(.custom(SpecialPurposeFonts.titleSerif, size: 20, relativeTo: .title3))
+                    .fontWeight(.semibold)
+                    .foregroundStyle(settings.bibleTextColor ?? .primary)
+            }
         }
         #endif
         //
@@ -2056,12 +2338,16 @@ private struct BibleReadingContentView: View {
     /// macOS는 분기 없이 표준 레이아웃만 컴파일/실행된다.
     @ViewBuilder
     private var chapterNavigationControls: some View {
+        // [2026-09-12 수정] 사용자 요청(아이패드) — "성경-성경이동버튼들
+        // 영역 -> 아이폰 디자인을 참고." 기존엔 아이패드가 macOS와 같은
+        // `chapterNavigationControlsStandard`(개별 원형 버튼 + 사이 간격)를
+        // 썼는데, 아이폰만 쓰던 `compactChapterNavigationBar`(하나로 이어진
+        // 캡슐 막대)로 통일해 달라는 요청이다. `compactChapterNavigationBar`는
+        // 이미 `#if os(iOS)`(아이폰+아이패드 공통) 안에 정의돼 있어 새로
+        // 만들 것 없이 그대로 아이패드에도 적용한다. macOS는 그대로 둔다 —
+        // 요청 대상이 "아이패드"로 명시됐다.
         #if os(iOS)
-        if isPhone {
-            compactChapterNavigationBar
-        } else {
-            chapterNavigationControlsStandard
-        }
+        compactChapterNavigationBar
         #else
         chapterNavigationControlsStandard
         #endif
@@ -2152,21 +2438,27 @@ private struct BibleReadingContentView: View {
     }
 
     #if os(iOS)
-    /// [2026-09-04 신설] 사용자 요청 — 첫 시도(개별 원형/캡슐 버튼 + 사이
-    /// 간격)가 실기기에서 "책 2장" 텍스트가 좁은 폭에 눌려 3줄로 줄바꿈되며
-    /// 찌그러지는 문제로 나타났고, 이어서 사용자가 구체적으로 (1) 버튼 사이
-    /// 공백 없이 하나의 이어진 막대로, (2) 책 아이콘은 아이콘만 남기고 "창
-    /// 2장" 표시는 검색창(BookChapterPicker.compactBarBody) 쪽으로,
-    /// (3) "이동" 텍스트를 아이콘+다른 색으로 바꿔달라고 요청해 아이폰
-    /// 전용으로 새로 짰다. 7개 기능(히스토리 이전·이전장·현재장 표시
-    /// (아이콘, BookChapterPicker 내부)·검색창(BookChapterPicker 내부)·
-    /// 이동(아이콘, BookChapterPicker 내부)·다음장·히스토리 다음)을
-    /// spacing 0의 HStack 하나에 담고, 얇은 `NavBarDivider`(위
-    /// `CircularNavButtonModifier` 옆에 정의)로만 구분해 하나의 캡슐 배경
-    /// (아래 `.background`) 안에서 이어진 막대처럼 보이게 한다. iPad/macOS는
+    /// [2026-09-04 신설, 2026-09-09 개정] 사용자 요청 — 첫 시도(개별 원형/캡슐
+    /// 버튼 + 사이 간격)가 실기기에서 "책 2장" 텍스트가 좁은 폭에 눌려 3줄로
+    /// 줄바꿈되며 찌그러지는 문제로 나타났고, 이어서 사용자가 구체적으로
+    /// (1) 버튼 사이 공백 없이 하나의 이어진 막대로, (2) 책 아이콘은 아이콘만
+    /// 남기고 "창 2장" 표시는 검색창(BookChapterPicker.compactBarBody)
+    /// 쪽으로, (3) "이동" 텍스트를 아이콘+다른 색으로 바꿔달라고 요청해
+    /// 아이폰 전용으로 새로 짰다. 2026-09-09, 사용자가 참고 앱 스크린샷을
+    /// 보고 "이동 아이콘이 통일성을 저해한다"고 지적해 목업(대안 A/B/C)을
+    /// 제시했고, 사용자가 선택한 "대안 B" — 모든 아이콘을 동일한 원형
+    /// 배지로 통일하고 "이동"만 배경을 진하게 채워 강조하는 방식 — 로
+    /// 교체했다. 기존의 "얇은 구분선(`NavBarDivider`)으로만 나누는" 방식은
+    /// 폐기하고, 위 `JoinedNavBadgeModifier`(각 아이콘을 40×44 탭 영역 안의
+    /// 34pt 원으로 감싸고, `isProminent`로 옅은 틴트/진한 채움을 구분)를
+    /// 각 버튼에 적용하며, 버튼 사이에는 작은 여백(spacing 4)만 둔다. 7개
+    /// 기능(히스토리 이전·이전장·현재장 표시(아이콘, BookChapterPicker
+    /// 내부)·검색창(BookChapterPicker 내부)·이동(아이콘, BookChapterPicker
+    /// 내부)·다음장·히스토리 다음)을 하나의 캡슐 배경(아래 `.background`)
+    /// 안에 담아 이어진 막대처럼 보이게 하는 전체 구조는 유지한다. iPad/macOS는
     /// 이 프로퍼티 자체를 참조하지 않는다(위 `chapterNavigationControls` 참고).
     private var compactChapterNavigationBar: some View {
-        HStack(spacing: 0) {
+        HStack(spacing: 4) {
             Button {
                 viewModel.goBackInHistory()
             } label: {
@@ -2174,9 +2466,7 @@ private struct BibleReadingContentView: View {
             }
             .disabled(!viewModel.canGoBackInHistory)
             .help("이전에 보던 위치로 돌아가기")
-            .modifier(JoinedNavIconButtonModifier())
-
-            NavBarDivider()
+            .modifier(JoinedNavBadgeModifier(isProminent: false))
 
             Button {
                 viewModel.previousChapter()
@@ -2185,9 +2475,7 @@ private struct BibleReadingContentView: View {
             }
             .disabled(viewModel.selectedChapter <= 1 && BooksProvider.shared.book(before: viewModel.selectedBook) == nil)
             .help("이전 장")
-            .modifier(JoinedNavIconButtonModifier())
-
-            NavBarDivider()
+            .modifier(JoinedNavBadgeModifier(isProminent: false))
 
             BookChapterPicker(
                 books: BooksProvider.shared.books,
@@ -2202,8 +2490,6 @@ private struct BibleReadingContentView: View {
                 viewModel.selectBook(book, chapter: chapter)
             }
 
-            NavBarDivider()
-
             Button {
                 viewModel.nextChapter()
             } label: {
@@ -2214,9 +2500,7 @@ private struct BibleReadingContentView: View {
                     && BooksProvider.shared.book(after: viewModel.selectedBook) == nil
             )
             .help("다음 장")
-            .modifier(JoinedNavIconButtonModifier())
-
-            NavBarDivider()
+            .modifier(JoinedNavBadgeModifier(isProminent: false))
 
             Button {
                 viewModel.goForwardInHistory()
@@ -2225,11 +2509,11 @@ private struct BibleReadingContentView: View {
             }
             .disabled(!viewModel.canGoForwardInHistory)
             .help("뒤로가기 이전 위치로 다시 가기")
-            .modifier(JoinedNavIconButtonModifier())
+            .modifier(JoinedNavBadgeModifier(isProminent: false))
         }
         .padding(.horizontal, 6)
         .frame(height: 44)
-        .background(Capsule().fill(Color.accentColor.opacity(0.12)))
+        .background(Capsule().fill(Color("AccentColor").opacity(0.12)))
         .frame(maxWidth: .infinity)
     }
     #endif

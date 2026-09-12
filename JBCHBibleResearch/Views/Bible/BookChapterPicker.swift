@@ -75,6 +75,14 @@ struct BookChapterPicker: View {
     // 버튼과 `submitFreeText()` 성공 시 자동 해제(두 곳 모두 이 상태를 씀)로
     // 해결한다.
     @FocusState private var isFreeTextFocused: Bool
+    /// [2026-09-09 추가] 사용자 요청 — "테마를 적용하면 배경색과 글자색을
+    /// 전체적으로 적용할 수 있는가(상단 메뉴영역...)." `compactBarBody`(아래)의
+    /// 검색창 텍스트/"장" 라벨은 배경이 투명(`.textFieldStyle(.plain)`)이라
+    /// 감싸는 `BibleReadingView` 상단 바가 이제 테마색일 수 있으면 그 색에
+    /// 맞춰 글자색도 같이 바뀌어야 한다 — `TranslationColumnView`/
+    /// `BibleReadingView.BibleReadingContentView`와 같은 읽기 전용 접근
+    /// 패턴을 그대로 가져왔다.
+    private var settings: UserSettingsStore { .shared }
 
     var body: some View {
         Group {
@@ -171,7 +179,7 @@ struct BookChapterPicker: View {
                     Image(systemName: "arrow.right")
                         .font(.system(size: 14, weight: .semibold))
                         .frame(width: 32, height: 32)
-                        .background(Circle().fill(Color.accentColor))
+                        .background(Circle().fill(Color("AccentColor")))
                         .foregroundStyle(.white)
                 }
                 .buttonStyle(.plain)
@@ -181,21 +189,24 @@ struct BookChapterPicker: View {
         }
     }
 
-    /// [2026-09-04 신설] 위 `compactTouchTargets` 주석 참고 — 아이폰 전용
-    /// "이어진 막대" 레이아웃. `BibleReadingView.compactChapterNavigationBar`가
-    /// 이 3개 요소(책 아이콘·검색창·이동 아이콘)를 자신의 다른 4개 버튼과
-    /// 함께 하나의 캡슐 배경 안에 넣으므로, 여기서는 개별 배경을 주지 않고
-    /// spacing 0의 얇은 구분선만 둔다.
+    /// [2026-09-04 신설, 2026-09-09 개정] 위 `compactTouchTargets` 주석
+    /// 참고 — 아이폰 전용 "이어진 막대" 레이아웃. `BibleReadingView.
+    /// compactChapterNavigationBar`가 이 3개 요소(책 아이콘·검색창·이동
+    /// 아이콘)를 자신의 다른 4개 버튼과 함께 하나의 캡슐 배경 안에 넣는다.
+    /// 2026-09-09, 사용자가 선택한 "대안 B"(원형 배지로 통일) 적용으로
+    /// 기존 "얇은 구분선(`CompactBarDivider`)으로만 나누는" 방식은 폐기하고,
+    /// `BibleReadingView.JoinedNavBadgeModifier`를 그대로 재사용한다 —
+    /// `compactChapterNavigationBar`의 나머지 4개 아이콘과 정확히 같은
+    /// 모듈을 쓰므로 두 파일 사이에서도 시각적으로 어긋나지 않는다. 같은
+    /// 요청으로 검색창 `TextField`의 자간(`tracking`)도 넓혔다(아래 참고).
     private var compactBarBody: some View {
-        HStack(spacing: 0) {
+        HStack(spacing: 4) {
             Button {
                 isGridPresented = true
             } label: {
                 Image(systemName: "book")
             }
-            .buttonStyle(.plain)
-            .frame(width: 40, height: 44)
-            .contentShape(Rectangle())
+            .modifier(JoinedNavBadgeModifier(isProminent: false))
             .popover(isPresented: $isGridPresented) {
                 BookGridPicker(books: books, initialBook: selectedBook) { book, chapter in
                     onSelect(book, chapter)
@@ -203,8 +214,6 @@ struct BookChapterPicker: View {
                 }
                 .frame(minWidth: 360, minHeight: 460)
             }
-
-            CompactBarDivider()
 
             // [2026-09-04 신설] 사용자 요청 — "책모양 아이콘의 현재 성경 장을
             // 표시하는 텍스트는 약어로 텍스트 박스에 넣도록. 직접텍스트를
@@ -227,10 +236,24 @@ struct BookChapterPicker: View {
             // 숨겨진 만큼 입력란이 넓어져 "텍스트 입력란이 좁아지면 안됨"도
             // 함께 만족한다.
             HStack(spacing: 2) {
+                // [2026-09-09 추가] 사용자 요청 — "성경이동하는 텍스트
+                // 입력창도 자간 폭을 넓게 해줄 것(지금보다 2배)." SwiftUI
+                // `Text`/`TextField`의 기본 자간(`tracking`)은 0이라 "지금의
+                // 2배"를 곱할 수치 기준이 없다 — 대신 이 검색창 특유의 짧은
+                // 약어 입력("창2", "요3:16")이 다른 본문 텍스트보다 살짝
+                // 성글게 보이도록 하라는 취지로 읽어, 눈에 띄되 글자가
+                // 서로 겹치거나 폭 예산을 크게 넘지 않는 값(2pt)을 골랐다.
+                // 실기기에서 보고 원하는 정도로 조정 가능.
                 TextField("예:창세기1, 요3, 요3:16", text: $freeText)
                     .font(.title3)
+                    .tracking(2)
                     .lineLimit(1)
                     .textFieldStyle(.plain)
+                    // [2026-09-09 추가] `.plain` 스타일은 자체 배경이 없어
+                    // 감싸는 상단 바의 배경(테마색일 수 있음)이 그대로
+                    // 비쳐 보인다 — 입력한 글자색도 시스템 기본(`.primary`)
+                    // 대신 테마 글자색을 우선 쓴다.
+                    .foregroundStyle(settings.bibleTextColor ?? .primary)
                     .onSubmit(submitFreeText)
                     .focused($isFreeTextFocused)
                     #if os(iOS)
@@ -247,39 +270,36 @@ struct BookChapterPicker: View {
                 if !isFreeTextFocused && !freeText.isEmpty {
                     Text("장")
                         .font(.title3)
-                        .foregroundStyle(.secondary)
+                        // [2026-09-09 수정] 위 TextField와 같은 이유 —
+                        // `TranslationColumnView` 아이콘들이 이미 쓰는
+                        // `settings.bibleTextColor ?? .secondary` 폴백
+                        // 관례를 그대로 따랐다.
+                        .foregroundStyle(settings.bibleTextColor ?? .secondary)
                         .lineLimit(1)
                         .fixedSize()
                 }
             }
-            // [2026-09-04 추가] 사용자 요청 — "이 검색창의 텍스트가 '|' 세로
-            // 바와 딱 붙지 않게 왼쪽 패딩? 여백?을 줄 수 있는가?" 왼쪽
-            // `CompactBarDivider()` 바로 옆에 텍스트가 밀착돼 보이는 문제라,
-            // 이 HStack 전체(TextField + "장" 라벨)에 왼쪽 여백만 추가한다 —
-            // 오른쪽은 원래도 붙지 않으므로(다음이 CompactBarDivider) 건드릴
-            // 필요 없음.
+            // [2026-09-04 추가, 2026-09-09 개정] 사용자 요청 — "이 검색창의
+            // 텍스트가 '|' 세로 바와 딱 붙지 않게 왼쪽 패딩? 여백?을 줄 수
+            // 있는가?" 원래는 바로 왼쪽의 `CompactBarDivider()`와의 간격
+            // 문제였으나, 2026-09-09 그 구분선을 없앤 뒤에도 책 아이콘
+            // 배지와 텍스트 사이 여백은 그대로 필요해 유지한다.
             .padding(.leading, 8)
             .frame(minWidth: 50, maxWidth: .infinity, minHeight: 44)
 
-            CompactBarDivider()
-
-            // [2026-09-04 신설] 사용자 요청 — "'이동'이라는 텍스트도 관련
-            // 아이콘으로 바꾸고, 색을 다르게 할 것 - 디자인 가이드에 맞춰서."
-            // `ActionBarCircularIconModifier`(BibleReadingView.swift)의
-            // `isProminent` 분기가 이미 쓰는 것과 같은 처리(진한 accentColor
-            // 배경 + 흰 아이콘)를 그대로 재사용해, 이 버튼이 이 그룹의 "주된
-            // 실행 동작"임을 시각적으로 구분한다.
+            // [2026-09-04 신설, 2026-09-09 개정] 사용자 요청 — "'이동'이라는
+            // 텍스트도 관련 아이콘으로 바꾸고, 색을 다르게 할 것 - 디자인
+            // 가이드에 맞춰서." 이어서 2026-09-09, "이동 아이콘이 통일성을
+            // 저해한다"는 지적에 따라 이 버튼만 별도로 그리던 진한 원형
+            // 배경(수동 `.background(Circle()...)`)을 걷어내고, 나머지
+            // 아이콘들과 동일한 `JoinedNavBadgeModifier`를 `isProminent: true`로
+            // 적용한다 — 모양(원형)은 통일하되 채움 강도만 달리해 이 버튼이
+            // 이 그룹의 "주된 실행 동작"임을 계속 구분해 보여준다.
             Button(action: submitFreeText) {
                 Image(systemName: "arrow.right")
-                    .font(.system(size: 14, weight: .semibold))
-                    .frame(width: 32, height: 32)
-                    .background(Circle().fill(Color.accentColor))
-                    .foregroundStyle(.white)
             }
-            .buttonStyle(.plain)
+            .modifier(JoinedNavBadgeModifier(isProminent: true))
             .disabled(freeText.trimmingCharacters(in: .whitespaces).isEmpty)
-            .frame(width: 40, height: 44)
-            .contentShape(Rectangle())
         }
         .onAppear {
             syncFreeTextToCurrentPositionIfNeeded()
@@ -377,17 +397,9 @@ struct BookChapterPicker: View {
     }
 }
 
-/// [2026-09-04 신설] `compactBarBody`(위) 전용 — 이어진 막대 안에서 요소
-/// 사이를 나누는 얇은 구분선. 전체 배경(캡슐)은 `BibleReadingView.
-/// compactChapterNavigationBar`가 이 뷰 바깥에서 주므로, 여기서는 세로선
-/// 하나만 그린다.
-private struct CompactBarDivider: View {
-    var body: some View {
-        Rectangle()
-            .fill(Color.primary.opacity(0.12))
-            .frame(width: 1, height: 24)
-    }
-}
+// [2026-09-09 삭제] `CompactBarDivider`가 여기 있었다 — 대안 B(원형 배지
+// 통일) 적용으로 `compactBarBody`가 더 이상 얇은 구분선을 쓰지 않아(위
+// `JoinedNavBadgeModifier` 참고) 쓰는 곳이 없어졌다.
 
 /// [2026-09-04 신설] 사용자 요청 — "다른 서브기능(책갈피 리스트, 히스토리,
 /// 번역본선택...)의 레이아웃(버튼 배치, 리스트 유형, 색상)도 디자인이
@@ -430,10 +442,10 @@ private struct PickerHeaderBar: View {
                 Button(action: onBack) {
                     Image(systemName: "chevron.left")
                         .font(.body.weight(.semibold))
-                        .foregroundStyle(Color.accentColor)
+                        .foregroundStyle(Color("AccentColor"))
                         .frame(width: 32, height: 32)
-                        .background(Circle().fill(Color.accentColor.opacity(0.12)))
-                        .overlay(Circle().stroke(Color.accentColor.opacity(0.35), lineWidth: 1))
+                        .background(Circle().fill(Color("AccentColor").opacity(0.12)))
+                        .overlay(Circle().stroke(Color("AccentColor").opacity(0.35), lineWidth: 1))
                 }
                 .buttonStyle(.plain)
                 .frame(width: 44, height: 44)
@@ -573,7 +585,7 @@ private struct BookGridPicker: View {
     /// 선명하게 눈에 잘 띌 수 있도록 수정할 것." 텍스트가 색 지정 없이
     /// 기본(`.primary`)으로만 그려지고 있어, 연한 액센트 틴트(0.12) 원 배경
     /// 위에서 뚜렷한 색 대비 없이 흐릿해 보였다 — 굵게(`.semibold`) + 이
-    /// 버튼 자체의 강조색(`Color.accentColor`)으로 텍스트 색을 명시해, 원
+    /// 버튼 자체의 강조색(`Color("AccentColor")`)으로 텍스트 색을 명시해, 원
     /// 배경·테두리와 한 벌로 보이는 또렷한 "강조색 텍스트" 버튼으로
     /// 바꿨다(아래 `ChapterGrid.chapterButton`도 같은 처리로 통일).
     private func bookCircleButton(_ book: Book) -> some View {
@@ -588,13 +600,13 @@ private struct BookGridPicker: View {
             // 들어간다.
             Text(book.abbreviation.first ?? book.nameKo)
                 .font(.title3.weight(.bold))
-                .foregroundStyle(Color.accentColor)
+                .foregroundStyle(Color("AccentColor"))
                 .lineLimit(1)
                 .minimumScaleFactor(0.5)
                 .padding(4)
                 .frame(width: 52, height: 52)
-                .background(Circle().fill(Color.accentColor.opacity(0.12)))
-                .overlay(Circle().stroke(Color.accentColor.opacity(0.35), lineWidth: 1))
+                .background(Circle().fill(Color("AccentColor").opacity(0.12)))
+                .overlay(Circle().stroke(Color("AccentColor").opacity(0.35), lineWidth: 1))
         }
         .buttonStyle(.plain)
     }
@@ -659,12 +671,12 @@ private struct ChapterGrid: View {
             Text("\(chapter)")
                 .font(.callout.weight(.semibold))
                 .monospacedDigit()
-                .foregroundStyle(Color.accentColor)
+                .foregroundStyle(Color("AccentColor"))
                 .lineLimit(1)
                 .minimumScaleFactor(0.7)
                 .frame(width: 52, height: 44)
-                .background(RoundedRectangle(cornerRadius: 10).fill(Color.accentColor.opacity(0.12)))
-                .overlay(RoundedRectangle(cornerRadius: 10).stroke(Color.accentColor.opacity(0.35), lineWidth: 1))
+                .background(RoundedRectangle(cornerRadius: 10).fill(Color("AccentColor").opacity(0.12)))
+                .overlay(RoundedRectangle(cornerRadius: 10).stroke(Color("AccentColor").opacity(0.35), lineWidth: 1))
         }
         .buttonStyle(.plain)
     }

@@ -38,9 +38,90 @@ import UIKit
 import AppKit
 #endif
 
+// [2026-09-11 추가] 사용자 재검토 요청 — `JBCHCategoryPalette.swift` 주석이
+// 예고한 "참조 일치·태그 배지(초록/파랑) 채도 낮추기, 별도 커밋"이 실제로는
+// 이 파일에 반영 안 돼 있었다(grep 확인). `DocumentsHomeView.swift`의
+// statusGreen/tagBadgeBlue와 같은 값 — "일치/성공"·"태그"라는 의미를 앱
+// 전체에서 통일한다(대비 실측 근거는 그 파일 주석 참고).
+fileprivate let referenceMatchGreen = Color(hex: "#5E8C5B") ?? .green
+fileprivate let tagBadgeBlue = Color(hex: "#4A6FA5") ?? .blue
+
+/// [2026-09-09 신설] 사용자 보고 — "성경 상단/말씀 노트 상단..."과 같은
+/// 맥락 — 이 화면의 진짜 iOS 시스템 내비게이션 바(`.navigationTitle("통합
+/// 검색")`) 배경도 지난 "테마 확장" 작업에서 다루지 않은 같은 층이다.
+/// `BibleReadingView.swift`/`WordNoteHomeView.swift`의
+/// `ThemedNavigationBarBackgroundModifier`와 완전히 같은 이유·같은 패턴.
+private struct ThemedNavigationBarBackgroundModifier: ViewModifier {
+    let color: Color?
+
+    // [2026-09-10 추가] 위 `.toolbarBackground`가 요구하는 짝 API —
+    // `@Environment(\.self)`로 현재 환경을 받아 `Color.resolve(in:)`에
+    // 넘긴다(`Color+Hex.swift`의 `hexString(in:)`이 이미 쓰는 것과 같은,
+    // 확인된 패턴). `Color(hex:)`로 만든 고정 RGB 색이라 라이트/다크 모드와
+    // 무관하게 항상 같은 값이 나온다.
+    @Environment(\.self) private var environment
+
+    func body(content: Content) -> some View {
+        // [2026-09-10 수정, 컴파일 에러 fix] 사용자 보고 — Xcode 에러
+        // "'navigationBar' is unavailable in macOS"(WordNoteHomeView.swift
+        // 134:49/135:52). `ToolbarPlacement.navigationBar`는 iOS/iPadOS/
+        // tvOS/Mac Catalyst 전용이라, 이 앱의 macOS(순수 AppKit 창) 타깃에는
+        // 그 심볼 자체가 없다 — 이 파일들 주석이 애초에 "iOS 16+에 공식
+        // 제공하는 API"라고 적어 뒀던 전제를 `#if os(iOS)`로 실제 코드에도
+        // 반영한다. macOS는 원래도 이 모디파이어로 바꿀 표준 API가 없다고
+        // 판단해 채택한 적이 없으므로(각 파일 상단 주석 참고), macOS
+        // 분기는 `color` 값과 무관하게 항상 아무 효과 없이 통과시킨다.
+        #if os(iOS)
+        if let color {
+            content
+                .toolbarBackground(color, for: .navigationBar)
+                .toolbarBackground(.visible, for: .navigationBar)
+                // [2026-09-10 추가, 버그 수정 시도] 사용자 보고 — "테마를
+                // 바꾸면 [성경] 화면의 상단(타이틀·책갈피 리스트·책갈피
+                // 설정·히스토리·인스펙터 창·번역본 버튼 영역)이 사라짐."
+                // 이 세션엔 실기기 재현이 불가능해 100% 확정은 못 했지만,
+                // 코드로 확인되는 원인은 이렇다 — 지금까지 이 화면들은
+                // `.toolbarBackground(_:for:)`만 쓰고 Apple 공식 문서가
+                // 커스텀 배경색과 함께 쓰길 권하는 짝 API인
+                // `.toolbarColorScheme(_:for:)`은 지정하지 않았다. 이게
+                // 없으면 iOS는 내비게이션 바가 실제로 얼마나 밝은/어두운
+                // 배경인지가 아니라 "앱 전체의 현재 라이트/다크 모드"만
+                // 보고 시스템 제공 바 아이템의 기본 색을 정한다 — 예를 들어
+                // 라이트 모드에서 어두운 테마(밤빛 서재 등, 이 앱의 실제
+                // 프리셋 2개 중 1개가 어두운 배경 — `BibleSlideColorTheme.
+                // swift` 참고)를 고르면 어두운 배경 위에 여전히 라이트
+                // 모드용 짙은 색 아이템이 남아 거의 안 보이게 될 수 있다.
+                // 배경색의 WCAG 2.1 상대 휘도(`BibleSlideColorTheme.swift`
+                // 상단 주석이 2개 프리셋의 대비를 검증할 때 이미 수동으로
+                // 쓴 것과 같은 공식)를 계산해 어두우면 `.dark`(밝은 아이템),
+                // 밝으면 `.light`(어두운 아이템)를 명시적으로 지정한다.
+                // 이 수정으로도 증상이 그대로 재현되면(예: 매번이 아니라
+                // 설정 시트를 닫는 특정 시점에만 재현되는 등) 별도 원인이
+                // 더 있다는 뜻이니, 재현되는 정확한 상황을 알려주시면 추가로
+                // 조사한다.
+                .toolbarColorScheme(Self.isDarkBackground(color, in: environment) ? .dark : .light, for: .navigationBar)
+        } else {
+            content
+        }
+        #else
+        content
+        #endif
+    }
+
+    private static func isDarkBackground(_ color: Color, in environment: EnvironmentValues) -> Bool {
+        let resolved = color.resolve(in: environment)
+        let luminance = 0.2126 * Double(resolved.red) + 0.7152 * Double(resolved.green) + 0.0722 * Double(resolved.blue)
+        return luminance < 0.5
+    }
+}
+
 struct SearchView: View {
     @Environment(\.modelContext) private var modelContext
     @State private var viewModel: SearchViewModel?
+    /// [2026-09-09 추가] `SearchContentView`가 이미 쓰는 것과 같은 읽기 전용
+    /// 접근 패턴 — 아래 `.modifier(ThemedNavigationBarBackgroundModifier(...))`
+    /// 에 쓴다.
+    private var settings: UserSettingsStore { .shared }
 
     var body: some View {
         Group {
@@ -76,6 +157,25 @@ struct SearchView: View {
         // 주석과 같은 이유·같은 해법 — `.navigationBarTitleDisplayMode(.inline)`.
         #if os(iOS)
         .navigationBarTitleDisplayMode(.inline)
+        #endif
+        // [2026-09-09 추가] 위 `ThemedNavigationBarBackgroundModifier` 주석
+        // 참고 — 이 화면의 진짜 시스템 내비게이션 바 배경을 테마에 맞춘다.
+        .modifier(ThemedNavigationBarBackgroundModifier(color: settings.bibleBackgroundColor))
+        #if os(iOS)
+        // [2026-09-10 추가] `WordNoteHomeView.swift`/`DocumentsHomeView.swift`
+        // 와 같은 이유·같은 해법 — 사용자 보고 "[성경] 화면을 제외한 기능의
+        // 화면(말씀노트, 문서OCR, 통합검색)의 타이틀이 검은색으로
+        // 고정되어있음."
+        .toolbar {
+            ToolbarItem(placement: .principal) {
+                // [2026-09-10 수정] `WordNoteHomeView.swift`와 같은 이유·같은
+                // 해법 — 각 기능 타이틀을 국민대학교 성곡 세리프체로 표시.
+                Text("통합 검색")
+                    .font(.custom(SpecialPurposeFonts.titleSerif, size: 20, relativeTo: .title3))
+                    .fontWeight(.semibold)
+                    .foregroundStyle(settings.bibleTextColor ?? .primary)
+            }
+        }
         #endif
         // [2026-08-18 추가] `SidebarNavigationView`의 `.onChange(of:
         // AppNavigationRequest.shared.requestedSection)`과 같은 패턴 — 평범한
@@ -163,6 +263,11 @@ private struct SearchContentView: View {
     /// 아이폰에서도 해가 되지 않는다 — 이미 상태를 안 잃으므로 이 포커스는
     /// 그저 처음 탭을 열 때 키보드가 한 번 더 빨리 뜨는 정도의 부수 효과다.
     @FocusState private var isSearchFieldFocused: Bool
+    /// [2026-09-09 추가] 사용자 요청 — "테마를 적용하면 배경색과 글자색을
+    /// 전체적으로 적용할 수 있는가(... 통합검색 화면 배경색)." `TranslationColumnView`/
+    /// `BibleReadingView.BibleReadingContentView`/`WordNoteHomeView`와 같은
+    /// 읽기 전용 접근 패턴.
+    private var settings: UserSettingsStore { .shared }
 
     /// [2026-09-05 신설] 사용자 요청 — "검색 결과를 분류별로 탭으로 묶을
     /// 것. ... 상단에 [성경구절] [개요] [메모/말씀노트] [연구문서] 이렇게
@@ -208,25 +313,18 @@ private struct SearchContentView: View {
             }
         }
 
-        /// [2026-09-05 추가] 사용자 요청 — "색상을 하위 탭(성경번역본 탭)하고
-        /// 구분될 수 있도록 수정할 것(밤빛서제, 서고청람, 와인저녁 색상팔레트
-        /// 적극 활용)." `JBCHCategoryPalette`의 기존 6색 중 사용자가 이름으로
-        /// 짚은 세 색(밤빛 남색=navy, 서고 청람=slateTeal, 와인 적갈=wine)과,
-        /// 이 파일이 "연구문서" 섹션 헤더에 이미 쓰고 있는 shelfSlate를 그대로
-        /// 가져다 썼다 — 새 hex를 고르지 않고 이미 승인된 팔레트만 재사용
-        /// (디자인 가이드 10.1). "메모/말씀노트" 탭은 메모(gold)/개인 묵상
-        /// (wine)/말씀 요약(wood) 세 분류를 한 탭에 묶은 것이라 셋 중 하나를
-        /// 대표색으로 고정해야 하는데, 사용자가 이번 요청에서 "와인저녁"을
-        /// 직접 짚었고 기존 "개인 묵상" 섹션 헤더 색도 이미 wine이라 그대로
-        /// 썼다.
-        var color: Color {
-            switch self {
-            case .verse: return JBCHCategoryPalette.navy
-            case .outline: return JBCHCategoryPalette.slateTeal
-            case .notes: return JBCHCategoryPalette.wine
-            case .document: return JBCHCategoryPalette.shelfSlate
-            }
-        }
+        // [2026-09-05 도입, 2026-09-10 제거] 탭마다 고정된 구분색(navy/
+        // slateTeal/wine/shelfSlate)을 주던 `var color: Color` 계산 프로퍼티가
+        // 여기 있었다. 그런데 이 고정색이 공교롭게도 특정 읽기 테마 프리셋
+        // 배경과 정확히 같은 값이라(예: navy #182644 == "밤빛 서재" 테마 배경,
+        // `BibleSlideColorTheme.swift` 참고) 그 테마에서는 선택된 탭이 배경과
+        // 완전히 같은 색이 되어 안 보이는 문제가 있었다. 사용자에게 직접
+        // 확인한 결과(AskUserQuestion, 2026-09-10) — "캡슐과 동일하게 accent색
+        // 하나로 통일"을 선택했다. 그래서 `mainResultTabButton`(아래)이 아이콘
+        // 색을 이 프로퍼티 대신, 캡슐 전체에 적용하는 `textColor`(선택 시
+        // accent, 평소엔 테마 글자색)를 그대로 물려받도록 다시 그렸고, 이
+        // 프로퍼티는 더 이상 어디에서도 쓰이지 않아 제거했다 — 남겨두면
+        // "아직 쓰이는 배색 규칙"으로 오해할 수 있다.
     }
 
     @State private var selectedResultTab: SearchResultTab = .verse
@@ -401,6 +499,20 @@ private struct SearchContentView: View {
                 }
             }
             .padding(.vertical, 4)
+            // [2026-09-09 신설, WordNoteHomeView.swift 조사 후] 사용자 요청 —
+            // "[통합 검색] 리스트 배경색을 확인할 것." `WordNoteHomeView.swift`
+            // 에서 확인된 것과 같은 원인이다 — `.scrollContentBackground(.hidden)`
+            // + `List` 자체의 `.background()`(위 body 하단 참고)는 리스트라는
+            // "컨테이너"의 배경만 바꾸지, 각 행(또는 Section) 셀이 갖고 있는
+            // 자기 배경까지 자동으로 투명하게 만들어주지는 않는다. 이 파일은
+            // `WordNoteHomeView`와 달리 개별 행이 아니라 `Section` 단위로 묶여
+            // 있는 곳이 대부분이라(아래 각 지점), `.listRowBackground(Color.clear)`
+            // 를 `Section`(또는 `Section`이 아닌 독립 행)에 한 번씩 적용했다 —
+            // `.listRowBackground`는 `Section`/`ForEach`처럼 여러 행을 만들어내는
+            // 컨테이너에 적용하면 그 안의 모든 행에 전파된다(Apple 표준 동작 —
+            // `WordNoteHomeView`에서는 행이 하나뿐이라 행에 직접 적용했지만,
+            // 여기서는 같은 효과를 Section 단위로 적용한다).
+            .listRowBackground(Color.clear)
 
             // [2026-08-20 신설, 2026-08-20 재수정 Phase 5] 일반 검색 결과 목록
             // 보다 먼저 보여준다 — 관계/인물·지명 정보/예언/주제·속성/서사
@@ -435,20 +547,51 @@ private struct SearchContentView: View {
                 resultsSection
             }
         }
+        // [2026-09-09 추가] 사용자 요청 — "테마를 적용하면 배경색과 글자색을
+        // 전체적으로 적용할 수 있는가(... 통합검색 화면 배경색)." 이 List는
+        // 지금까지 스타일을 명시하지 않아(`.automatic`) 시스템 기본 배경을
+        // 썼다 — 이 코드베이스의 다른 목록 화면들(`WordNoteHomeView`,
+        // `VerseMentionListView`, `BookmarkListPopover`, `CrossReferenceTargetPicker`,
+        // `OutlineTreeView`, `DocumentsHomeView`)은 전부 이미 `.listStyle(.plain)`을
+        // 명시적으로 쓰고 있어, 이 화면만 예외였다 — 새 스타일을 만드는 대신
+        // 이미 앱 전체에 자리 잡은 규칙을 그대로 따라 명시했다. `.plain`은
+        // 행마다 별도 카드 배경이 없어 `WordNoteHomeView`와 똑같이 리스트
+        // 배경 하나만 바꾸면 되고, `.foregroundStyle`을 이 컨테이너에
+        // 적용해 아래 각 결과 행(성경구절/개요/메모/연구문서 등 10여 개
+        // 유형)의 색을 명시하지 않은 평범한 `Text`/`Image`가 전부 이 색을
+        // 물려받게 한다 — 코드가 아주 큰 파일이라 유형마다 일일이 색을
+        // 지정하는 대신, SwiftUI가 표준으로 제공하는 "명시하지 않은
+        // 자식은 조상의 foregroundStyle을 물려받는다"는 동작에 기댄
+        // 것이다. 단, `.foregroundStyle(.secondary)`처럼 각 행이 이미
+        // 명시적으로 지정해 둔 보조 텍스트(날짜·매칭 개수 등)는 이 상속의
+        // 영향을 받지 않고 시스템 회색 그대로 남는다 — 그 부분까지 테마에
+        // 맞추려면 해당 행들을 개별적으로 더 손봐야 하며, 이번 적용 범위에는
+        // 포함하지 않았다(실기기에서 가독성 확인 권장).
+        .listStyle(.plain)
+        .scrollContentBackground(.hidden)
+        .background(settings.bibleBackgroundColor ?? Color.clear)
+        .foregroundStyle(settings.bibleTextColor ?? Color.primary)
+        // [2026-09-10 추가] 사용자 보고 — "어두운 배경에서는 리스트의
+        // 행을 구분하는 라인이 거의 안보임(... 통합검색 이력)."
+        // `WordNoteHomeView.swift`와 같은 이유·같은 해법.
+        .listRowSeparatorTint(JBCHCategoryPalette.wood.opacity(0.3))
         .searchable(text: Binding(
             get: { viewModel.query },
             set: { viewModel.query = $0 }
         ), prompt: "검색어 입력")
         .searchFocused($isSearchFieldFocused)
-        // [2026-09-05 신설] 위 `isSearchFieldFocused` 선언부 주석 참고 —
-        // macOS/iPadOS에서 다른 섹션으로 갔다가 돌아와 이 화면이 새로 만들어질
-        // 때(검색어가 비어있는 첫 등장 시점) 검색창에 자동 포커스를 줘서
-        // "최근 검색이력" 제안이 바로 보이게 한다. 이미 검색어가 남아있는
-        // 채로 다시 나타나는 경우(이론상 발생하지 않음 — 새 인스턴스는 항상
-        // 빈 질문으로 시작)까지 불필요하게 포커스를 뺏지 않도록 빈 질문일
-        // 때만 켠다.
+        // [2026-09-05 신설, 2026-09-10 아이폰 제외] 위 `isSearchFieldFocused`
+        // 선언부 주석 참고 — macOS/iPadOS에서 다른 섹션으로 갔다가 돌아와 이
+        // 화면이 새로 만들어질 때(검색어가 비어있는 첫 등장 시점) 검색창에
+        // 자동 포커스를 줘서 "최근 검색이력" 제안이 바로 보이게 한다는
+        // 의도였다(주석에 이미 "macOS/iPadOS에서"라고 명시돼 있었다). 그런데
+        // 조건에 플랫폼 분기가 없어 아이폰에도 그대로 적용돼, 사용자 보고
+        // 대로 아이폰에서 통합 검색 탭을 열 때마다 원치 않게 키보드가 바로
+        // 올라왔다 — `!isPhoneIdiom`(이 파일 안에 이미 있는, "아이폰만
+        // 안내창을 뺀다"는 같은 취지로 여러 곳에 쓰는 기존 프로퍼티)을 더해
+        // 원래 의도(맥/아이패드)만 남기고 아이폰은 뺀다.
         .onAppear {
-            if viewModel.query.trimmingCharacters(in: .whitespaces).isEmpty {
+            if !isPhoneIdiom, viewModel.query.trimmingCharacters(in: .whitespaces).isEmpty {
                 isSearchFieldFocused = true
             }
         }
@@ -663,6 +806,7 @@ private struct SearchContentView: View {
                     viewModel.startBibleEmbeddingIndexing()
                 }
                 .buttonStyle(.borderedProminent)
+                .tint(Color("AccentColor"))
                 .controlSize(.small)
             }
             .font(.caption)
@@ -676,6 +820,7 @@ private struct SearchContentView: View {
                         viewModel.cancelBibleEmbeddingIndexing()
                     }
                     .buttonStyle(.borderless)
+                    .tint(Color("AccentColor"))
                     .controlSize(.small)
                 }
                 .font(.caption)
@@ -701,6 +846,7 @@ private struct SearchContentView: View {
                     viewModel.startBibleEmbeddingIndexing()
                 }
                 .buttonStyle(.bordered)
+                .tint(Color("AccentColor"))
                 .controlSize(.small)
             }
             .font(.caption)
@@ -742,16 +888,28 @@ private struct SearchContentView: View {
         } header: {
             sectionHeader(meta.title, icon: meta.icon, color: meta.color, count: card.foundCount)
         }
+        .listRowBackground(Color.clear)
     }
 
+    // [2026-09-10 재수정] 사용자 요청 — "검색 결과에 나오는 아이콘
+    // 색상은 테마 글자 색상에 맞출것." 이 다섯 색(.cyan/.mint/.yellow/
+    // .green/.gray)도 앞서 고친 메인 탭·카테고리 캡슐(`JBCHCategoryPalette`
+    // 고정색)과 같은 종류의 문제 — 시스템 색이 이 화면의 커스텀 읽기
+    // 테마(`settings.bibleTextColor`/`bibleBackgroundColor`)와 전혀
+    // 연동되지 않아, 특정 테마 배경에서 대비가 낮아질 수 있다. 다섯 카테고리
+    // 색 구분을 포기하는 대신(아래 `relationLabel`/`personOrPlaceLabel`
+    // 등 각 행 아이콘도 같은 이유로 함께 바꿨다 — 카테고리 구분은 이제
+    // 아이콘 모양과 섹션 제목 텍스트가 전담한다), 테마를 고르지 않았을 때는
+    // `?? .primary`로 기존 동작을 그대로 유지한다.
     private func intentSectionMeta(_ intent: QueryIntentClassifier.Intent) -> (title: String, icon: String, color: Color) {
+        let themeColor = settings.bibleTextColor ?? .primary
         switch intent {
-        case .relation: return ("관계 정보", "person.2.fill", .cyan)
-        case .personOrPlaceInfo: return ("인물·지명 정보", "person.crop.circle.fill", .mint)
-        case .prophecy: return ("예언", "scroll.fill", .yellow)
-        case .themeOrAttribute: return ("주제·속성", "lightbulb.fill", .green)
-        case .narrative: return ("서사·흐름", "list.number", .gray)
-        case .general: return ("", "questionmark", .gray)  // QueryIntentHandler.handle이 .general이면 nil을 돌려줘서 실제로는 안 쓰인다.
+        case .relation: return ("관계 정보", "person.2.fill", themeColor)
+        case .personOrPlaceInfo: return ("인물·지명 정보", "person.crop.circle.fill", themeColor)
+        case .prophecy: return ("예언", "scroll.fill", themeColor)
+        case .themeOrAttribute: return ("주제·속성", "lightbulb.fill", themeColor)
+        case .narrative: return ("서사·흐름", "list.number", themeColor)
+        case .general: return ("", "questionmark", themeColor)  // QueryIntentHandler.handle이 .general이면 nil을 돌려줘서 실제로는 안 쓰인다.
         }
     }
 
@@ -798,7 +956,7 @@ private struct SearchContentView: View {
 
     private func relationLabel(_ item: RelationDisplayItem) -> some View {
         rowLabel(
-            icon: "person.2.fill", iconColor: .cyan,
+            icon: "person.2.fill", iconColor: settings.bibleTextColor ?? .primary,
             title: PersonRelationLabeling.sentence(for: item.relation),
             excerptText: item.relation.rawSentence
         )
@@ -828,7 +986,11 @@ private struct SearchContentView: View {
         // 주석 참고.
         rowLabel(
             icon: entity.kind == .person ? "person.crop.circle.fill" : "location.fill",
-            iconColor: entity.kind == .person ? .mint : .teal,
+            // [2026-09-10 수정] 사용자 요청 — "아이콘 색상은 테마 글자
+            // 색상에 맞출것." 인물/지명 구분은 위 icon(person.crop.circle.fill
+            // vs location.fill) 모양이 이미 전담하므로 색까지 나눌 필요가
+            // 없어 테마 글자색 하나로 통일했다.
+            iconColor: settings.bibleTextColor ?? .primary,
             title: entity.word,
             excerptText: entity.entityRemark
         )
@@ -854,7 +1016,7 @@ private struct SearchContentView: View {
         var tags = [prophecy.category]
         if let period = prophecy.timelinePeriod, !period.isEmpty { tags.append(period) }
         return rowLabel(
-            icon: "scroll.fill", iconColor: .yellow,
+            icon: "scroll.fill", iconColor: settings.bibleTextColor ?? .primary,
             title: prophecy.title,
             tagNames: tags.filter { !$0.isEmpty },
             excerptText: prophecy.prophecyDescription
@@ -879,7 +1041,7 @@ private struct SearchContentView: View {
 
     private func themeLabel(_ theme: ThemeRecord) -> some View {
         rowLabel(
-            icon: "lightbulb.fill", iconColor: .green,
+            icon: "lightbulb.fill", iconColor: settings.bibleTextColor ?? .primary,
             title: theme.title,
             tagNames: [theme.category].filter { !$0.isEmpty },
             excerptText: theme.themeDescription
@@ -911,7 +1073,7 @@ private struct SearchContentView: View {
 
     private func narrativeEventLabel(group: NarrativeGroup, event: TimelineEventRecord) -> some View {
         rowLabel(
-            icon: "list.number", iconColor: .gray,
+            icon: "list.number", iconColor: settings.bibleTextColor ?? .primary,
             title: "\(group.narrativeTitle) — \(event.eventTitle)",
             excerptText: event.eventDescription
         )
@@ -949,6 +1111,7 @@ private struct SearchContentView: View {
                         .buttonStyle(.plain)
                     }
                 }
+                .listRowBackground(Color.clear)
             }
         }
     }
@@ -988,6 +1151,14 @@ private struct SearchContentView: View {
         }
         .listRowSeparator(.hidden)
         .padding(.vertical, 6)
+        .listRowBackground(Color.clear)
+
+        // [2026-09-10 추가] 사용자 요청 — "메뉴와 컨텐츠를 구분하는 위치에
+        // 첨부파일의 구분선을 넣도록." "메뉴" = 위 4개 탭(+ 성경구절 탭일
+        // 때 번역본 하위 탭까지 포함, 아래 `switch` 안에서 그려짐), "컨텐츠"
+        // = 그 아래 실제 검색 결과 — 이 둘의 경계인 지금 이 자리 한 곳에만
+        // 넣는다.
+        menuContentOrnamentalDivider
 
         switch selectedResultTab {
         case .verse:
@@ -1043,39 +1214,34 @@ private struct SearchContentView: View {
         // `verseTranslationTabBackground`(시스템 이차 배경색)는 이제 이
         // 자리 말고는 쓰는 곳이 없어 함께 지웠다.
         if showsVerseTranslationTabs {
+            // [2026-09-10 재작성] 사용자 요청 — "성경구절을 선택했을 때
+            // 나오는 번역본 탭도 커스텀으로 UI캡슐형 디자인을 적용할 것."
+            // 네이티브 `.pickerStyle(.segmented)` 대신 아래 `mainResultTabButton`
+            // /`WordNoteHomeView.categoryCapsuleButton`과 같은 캡슐 규칙(선택
+            // 시 accent 테두리+틴트, 평소엔 테마 글자색)을 따르는 개별 버튼으로
+            // 바꿨다 — 네이티브 세그먼트는 macOS에서 커스텀 색이 반영되지
+            // 않을 위험이 있다는 것이 바로 위 `resultsSection` 상단 주석에서
+            // 이미 확인된 사실이라, 상위 탭과 같은 방식(공식 `Button`+
+            // `Capsule` 조합)으로 맞추는 편이 더 안전하다. "번역본" 캡션
+            // 라벨은 삭제하지 않고 색만 고정 navy 대신 테마 글자색으로
+            // 바꿨다 — 아이콘·라벨 색은 사용자가 이번에 별도로 요청한
+            // "탭 아이콘 색상 테마 맞춤"(4번째 항목) 범위라 별도 확인 후
+            // 마저 반영한다(진행 상황 안내 참고).
             HStack(spacing: 6) {
                 Image(systemName: "arrow.turn.down.right")
                     .font(.caption.weight(.semibold))
-                    .foregroundStyle(JBCHCategoryPalette.navy.opacity(0.75))
+                    .foregroundStyle(settings.bibleTextColor?.opacity(0.5) ?? Color.secondary)
                 Text("번역본")
                     .font(.footnote.weight(.semibold))
-                    .foregroundStyle(JBCHCategoryPalette.navy)
+                    .foregroundStyle(settings.bibleTextColor?.opacity(0.8) ?? Color.secondary)
                     .fixedSize()
-                Picker("", selection: Binding(
-                    get: { selectedVerseTranslation ?? activeVerseTranslations.first?.code ?? "" },
-                    set: { selectedVerseTranslationCode = $0 }
-                )) {
-                    ForEach(activeVerseTranslations, id: \.code) { translation in
-                        Text(translation.displayName).tag(translation.code)
-                    }
+                ForEach(activeVerseTranslations, id: \.code) { translation in
+                    translationCapsuleButton(translation, isSelected: translation.code == selectedVerseTranslation)
                 }
-                .pickerStyle(.segmented)
-                .labelsHidden()
-                .controlSize(.small)
             }
-            .padding(.leading, 10)
-            .padding(.trailing, 10)
-            .padding(.vertical, 6)
-            .background(
-                RoundedRectangle(cornerRadius: 8, style: .continuous)
-                    .fill(JBCHCategoryPalette.navy.opacity(0.08))
-                    .overlay(
-                        RoundedRectangle(cornerRadius: 8, style: .continuous)
-                            .strokeBorder(JBCHCategoryPalette.navy.opacity(0.25), lineWidth: 1)
-                    )
-            )
             .padding(.leading, 16)
             .listRowSeparator(.hidden)
+            .listRowBackground(Color.clear)
         }
 
         Section {
@@ -1089,9 +1255,23 @@ private struct SearchContentView: View {
             // 사용자 확인 사항)을 만들어 준다. [2026-09-05 변경] 번역본별
             // 하위 탭이 선택돼 있으면 위에서 이미 걸러낸 `verseGroups`를 쓴다.
             ForEach(verseGroups) { group in
-                verseChapterGroupHeader(group)
-                ForEach(group.verses) { result in
-                    groupedVerseRow(result)
+                groupCardBorder {
+                    VStack(alignment: .leading, spacing: 0) {
+                        verseChapterGroupHeader(group)
+                            .padding(.bottom, 6)
+                        ForEach(Array(group.verses.enumerated()), id: \.offset) { index, result in
+                            if index > 0 {
+                                // [2026-09-11 수정] 사용자 재검토 요청 — 같은
+                                // 화면의 List 구분선(569번 줄)/카드 테두리
+                                // (groupCardBorder)는 전부 wood 톤인데 이 안쪽
+                                // 구분선만 시스템 회색이었다 — 통일한다.
+                                Rectangle()
+                                    .fill(JBCHCategoryPalette.wood.opacity(0.3))
+                                    .frame(height: 0.5)
+                            }
+                            groupedVerseRow(result)
+                        }
+                    }
                 }
             }
             // [2026-08-25 신설, 2026-08-26 100개로 확대, 2026-09-05 50개로
@@ -1128,15 +1308,16 @@ private struct SearchContentView: View {
                     }
                 }
                 .buttonStyle(.plain)
-                .foregroundStyle(JBCHCategoryPalette.navy)
+                // [2026-09-10 수정] 사용자 요청 — "아이콘 색상은 테마 글자
+                // 색상에 맞출것." `JBCHCategoryPalette.navy`가 "밤빛 서재"
+                // 테마 배경과 정확히 같은 색이라(다른 탭들과 같은 근본
+                // 원인) 그 테마에서 이 "더보기" 버튼(아이콘+글자)이 거의
+                // 안 보일 수 있었다.
+                .foregroundStyle(settings.bibleTextColor ?? .primary)
                 .padding(.vertical, 6)
             }
-        } header: {
-            sectionHeader(
-                "성경구절", icon: "book.closed.fill", color: JBCHCategoryPalette.navy,
-                count: showsVerseTranslationTabs ? verseGroups.reduce(0) { $0 + $1.verses.count } : viewModel.allVerseResults.count
-            )
         }
+        .listRowBackground(Color.clear)
 
         case .outline:
         Section {
@@ -1148,14 +1329,25 @@ private struct SearchContentView: View {
             // 자체(순서/필터링)는 그대로 두고, 화면 표시만
             // `SearchViewModel.groupedOutlineResults`로 책 단위 그룹을 만든다.
             ForEach(viewModel.groupedOutlineResults) { group in
-                outlineGroupHeader(group)
-                ForEach(group.items) { result in
-                    groupedOutlineRow(result)
+                groupCardBorder {
+                    VStack(alignment: .leading, spacing: 0) {
+                        outlineGroupHeader(group)
+                            .padding(.bottom, 6)
+                        ForEach(Array(group.items.enumerated()), id: \.offset) { index, result in
+                            if index > 0 {
+                                // [2026-09-11 수정] 위 verseGroups 구분선과
+                                // 같은 이유.
+                                Rectangle()
+                                    .fill(JBCHCategoryPalette.wood.opacity(0.3))
+                                    .frame(height: 0.5)
+                            }
+                            groupedOutlineRow(result)
+                        }
+                    }
                 }
             }
-        } header: {
-            sectionHeader("개요", icon: "list.bullet.rectangle.fill", color: JBCHCategoryPalette.slateTeal, count: viewModel.outlineResults.count)
         }
+        .listRowBackground(Color.clear)
 
         case .notes:
         Section {
@@ -1164,8 +1356,9 @@ private struct SearchContentView: View {
                 phraseNoteRow(result)
             }
         } header: {
-            sectionHeader("메모", icon: "note.text", color: JBCHCategoryPalette.gold, count: viewModel.phraseNoteResults.count)
+            sectionHeader("메모", icon: "note.text", color: settings.bibleTextColor ?? .primary, count: viewModel.phraseNoteResults.count)
         }
+        .listRowBackground(Color.clear)
 
         Section {
             if viewModel.memoResults.isEmpty { emptyRow() }
@@ -1173,8 +1366,9 @@ private struct SearchContentView: View {
                 memoRow(result)
             }
         } header: {
-            sectionHeader("개인 묵상", icon: "heart.text.square.fill", color: JBCHCategoryPalette.wine, count: viewModel.memoResults.count)
+            sectionHeader("개인 묵상", icon: "heart.text.square.fill", color: settings.bibleTextColor ?? .primary, count: viewModel.memoResults.count)
         }
+        .listRowBackground(Color.clear)
 
         Section {
             if viewModel.summaryResults.isEmpty { emptyRow() }
@@ -1182,8 +1376,9 @@ private struct SearchContentView: View {
                 summaryRow(result)
             }
         } header: {
-            sectionHeader("말씀 요약", icon: "text.quote", color: JBCHCategoryPalette.wood, count: viewModel.summaryResults.count)
+            sectionHeader("말씀 요약", icon: "text.quote", color: settings.bibleTextColor ?? .primary, count: viewModel.summaryResults.count)
         }
+        .listRowBackground(Color.clear)
 
         case .document:
         Section {
@@ -1191,10 +1386,37 @@ private struct SearchContentView: View {
             ForEach(viewModel.documentResults) { result in
                 documentRow(result)
             }
-        } header: {
-            sectionHeader("연구문서", icon: "doc.text.fill", color: JBCHCategoryPalette.shelfSlate, count: viewModel.documentResults.count)
         }
+        .listRowBackground(Color.clear)
         }
+    }
+
+    /// [2026-09-10 신설] 사용자 요청 — "메뉴와 컨텐츠를 구분하는 위치에
+    /// 첨부파일의 구분선을 넣도록." 첨부 이미지 — 가로선-다이아몬드(별)
+    /// 장식-가로선 형태의 장식용 구분선. SF Symbol `sparkle`(iOS 16+/
+    /// macOS 13+ — 이 프로젝트 배포 타깃 iOS/macOS 26.5보다 훨씬 낮아
+    /// 안전하게 쓸 수 있다, `project.pbxproj`의 `IPHONEOS_DEPLOYMENT_TARGET`/
+    /// `MACOSX_DEPLOYMENT_TARGET` 확인)이 오목한 변을 가진 4방향 별 모양이라
+    /// 첨부 이미지의 장식과 가장 가깝다고 판단해 채택했다 — 이 세션엔
+    /// Xcode가 없어 실제 렌더링을 직접 비교해 보지 못했다, 실기기에서
+    /// 모양이 원하는 것과 다르면 알려달라. 선·장식 색은 위 `groupCardBorder`
+    /// 테두리와 같은 "테마 글자색 30% 톤"으로 통일했다.
+    private var menuContentOrnamentalDivider: some View {
+        HStack(spacing: 10) {
+            Rectangle()
+                .fill(JBCHCategoryPalette.wood.opacity(0.3))
+                .frame(height: 1)
+            Image(systemName: "sparkle")
+                .font(.system(size: 11))
+                .foregroundStyle(settings.bibleTextColor?.opacity(0.45) ?? Color.secondary)
+            Rectangle()
+                .fill(JBCHCategoryPalette.wood.opacity(0.3))
+                .frame(height: 1)
+        }
+        .padding(.horizontal, 6)
+        .padding(.vertical, 2)
+        .listRowSeparator(.hidden)
+        .listRowBackground(Color.clear)
     }
 
     /// 커스텀 섹션 헤더 — 아이콘 + 굵은 제목 + 캡슐형 개수 배지. `.textCase(nil)`로
@@ -1230,24 +1452,79 @@ private struct SearchContentView: View {
     /// 두 탭의 위계 차이가 크기뿐 아니라 형태로도 드러나게 하려는 의도.
     private func mainResultTabButton(_ tab: SearchResultTab) -> some View {
         let isSelected = selectedResultTab == tab
+        // [빌드 에러 재발 방지] `WordNoteHomeView.categoryCapsuleButton`과
+        // 같은 이유로 삼항 연산자 + 옵셔널 체이닝을 처음부터 명시적 타입의
+        // `let`으로 뽑는다(2026-09-10에 이 패턴을 인라인했다가 "The compiler
+        // is unable to type-check this expression in reasonable time" 빌드
+        // 에러를 겪었다).
+        let textColor: Color = isSelected ? Color("AccentColor") : (settings.bibleTextColor?.opacity(0.65) ?? Color.secondary)
+        let fillColor: Color = isSelected ? Color("AccentColor").opacity(0.12) : Color.clear
+        let borderColor: Color = isSelected ? Color("AccentColor") : (settings.bibleTextColor?.opacity(0.35) ?? Color.secondary.opacity(0.35))
+        let count = tabResultCount(tab)
         return Button {
             selectedResultTab = tab
         } label: {
-            VStack(spacing: 4) {
+            VStack(spacing: 3) {
                 Image(systemName: tab.icon)
-                    .font(.system(size: 18, weight: .semibold))
+                    .font(.system(size: 17, weight: .semibold))
                 Text(tab.title)
                     .font(.footnote.weight(.semibold))
                     .lineLimit(1)
-                    .minimumScaleFactor(0.85)
+                    .minimumScaleFactor(0.7)
+                if count > 0 {
+                    // [2026-09-10 추가] 사용자 요청 — "검색란 아래 4개의
+                    // 탭마다 나오는 [탭의 타이틀과 총 일치 숫자] ... 삭제하고,
+                    // 대신 총 일치 숫자는 ... 탭 안으로 넣도록." 화면 중간에
+                    // 따로 있던 섹션 헤더(아래 `resultsSection`에서 제거)의
+                    // 개수 표시를 이 탭 버튼 안으로 옮겼다. "메모/말씀노트"
+                    // 탭은 메모·개인 묵상·말씀 요약 세 분류 합계
+                    // (`tabResultCount` 참고).
+                    Text("\(count)")
+                        .font(.caption2.weight(.bold).monospacedDigit())
+                }
             }
             .frame(maxWidth: .infinity)
             .padding(.vertical, 10)
-            .foregroundStyle(isSelected ? Color.white : tab.color)
-            .background(
-                RoundedRectangle(cornerRadius: 10, style: .continuous)
-                    .fill(isSelected ? tab.color : tab.color.opacity(0.12))
-            )
+            .foregroundStyle(textColor)
+            .background(Capsule().fill(fillColor))
+            .overlay(Capsule().strokeBorder(borderColor, lineWidth: 1.4))
+        }
+        .buttonStyle(.plain)
+    }
+
+    /// [2026-09-10 신설] 위 `mainResultTabButton`에 넣을 탭별 총 일치 개수.
+    /// 번역본 하위 탭 선택 여부와 무관하게 항상 "그 카테고리 전체" 기준이다
+    /// — [성경구절] 탭은 지금 선택된 번역본만이 아니라 활성 번역본 전체
+    /// 합계(`allVerseResults`)를 보여준다("메모/말씀노트" 탭 하나가
+    /// 메모·개인 묵상·말씀 요약 세 모델을 합친 개수인 것과 같은 원칙).
+    private func tabResultCount(_ tab: SearchResultTab) -> Int {
+        switch tab {
+        case .verse: return viewModel.allVerseResults.count
+        case .outline: return viewModel.outlineResults.count
+        case .notes: return viewModel.phraseNoteResults.count + viewModel.memoResults.count + viewModel.summaryResults.count
+        case .document: return viewModel.documentResults.count
+        }
+    }
+
+    /// [2026-09-10 신설] 사용자 요청 — "성경구절을 선택했을 때 나오는
+    /// 번역본 탭도 커스텀으로 UI캡슐형 디자인을 적용할 것." 위
+    /// `mainResultTabButton`과 정확히 같은 캡슐 규칙(선택 시 accent 테두리+
+    /// 틴트, 평소엔 테마 글자색)을 번역본 하나하나에 적용한다.
+    private func translationCapsuleButton(_ translation: TranslationRegistry, isSelected: Bool) -> some View {
+        let textColor: Color = isSelected ? Color("AccentColor") : (settings.bibleTextColor?.opacity(0.55) ?? Color.secondary)
+        let fillColor: Color = isSelected ? Color("AccentColor").opacity(0.12) : Color.clear
+        let borderColor: Color = isSelected ? Color("AccentColor") : (settings.bibleTextColor?.opacity(0.35) ?? Color.secondary.opacity(0.35))
+        return Button {
+            selectedVerseTranslationCode = translation.code
+        } label: {
+            Text(translation.displayName)
+                .font(.caption.weight(isSelected ? .semibold : .regular))
+                .lineLimit(1)
+                .padding(.horizontal, 10)
+                .padding(.vertical, 5)
+                .foregroundStyle(textColor)
+                .background(Capsule().fill(fillColor))
+                .overlay(Capsule().strokeBorder(borderColor, lineWidth: 1.2))
         }
         .buttonStyle(.plain)
     }
@@ -1279,7 +1556,12 @@ private struct SearchContentView: View {
         title: String,
         isReferenceMatch: Bool = false,
         tagNames: [String] = [],
-        occurrenceCount: Int? = nil,
+        // [2026-09-10 이름 변경] 이 매개변수가 실어 나르는 값 자체를
+        // `bodyOccurrenceSum`(등장 총 횟수)에서 `matchedWordCount`(중복 제거된
+        // 매칭 검색어 수)로 바꾸면서, 이름도 실제 의미에 맞게 함께 바꿨다 —
+        // 아래 `groupedOutlineRow`의 같은 변경과 이유가 같다(성경구절 탭과
+        // 통일).
+        matchedWordCount: Int? = nil,
         excerptText: String? = nil,
         excerptKeywords: [String] = []
     ) -> some View {
@@ -1294,7 +1576,7 @@ private struct SearchContentView: View {
                         .font(.title3.weight(.semibold))
                         .lineLimit(1)
                     if isReferenceMatch {
-                        badge("참조 일치", color: .green, systemImage: "checkmark.seal.fill")
+                        badge("참조 일치", color: referenceMatchGreen, systemImage: "checkmark.seal.fill")
                     }
                     // [2026-08-19 신설, 2026-08-20 제거, Phase 5] AI 검색(의미
                     // 검색) 결과 전용 "유사도 xx%" 배지가 여기 있었다 — 사용자
@@ -1318,24 +1600,90 @@ private struct SearchContentView: View {
                 if !tagNames.isEmpty {
                     HStack(spacing: 6) {
                         ForEach(tagNames, id: \.self) { name in
-                            badge(name, color: .blue, systemImage: "tag.fill")
+                            badge(name, color: tagBadgeBlue, systemImage: "tag.fill")
                         }
                     }
                 }
                 if let excerptText {
                     HStack(alignment: .firstTextBaseline, spacing: 6) {
-                        if let occurrenceCount {
-                            occurrenceChip(occurrenceCount)
+                        if let matchedWordCount, matchedWordCount > 0 {
+                            verseMatchCountBadge(matchedWordCount)
                         }
+                        // [2026-09-10 수정] 위 `verseExcerptAttributedString`과
+                        // 같은 이유 — `.foregroundStyle(.secondary)`가 뷰
+                        // 모디파이어로 직접 지정돼 있어 조상의 테마
+                        // `.foregroundStyle`을 덮어쓴다. 관계/인물·지명/예언/
+                        // 주제·속성/서사/메모/개인 묵상/말씀 요약/연구문서 —
+                        // 이 함수(`rowLabel`)를 공유하는 모든 행의 발췌
+                        // 본문이 해당된다.
                         highlightedText(excerptText, keywords: excerptKeywords)
                             .font(.body)
-                            .foregroundStyle(.secondary)
+                            .foregroundStyle(settings.bibleTextColor?.opacity(0.75) ?? Color.secondary)
                             .lineLimit(2)
                     }
                 }
             }
         }
         .padding(.vertical, 8)
+    }
+
+    /// [2026-09-11 신설] 사용자 요청 — "검색결과의 [메모/말씀노트],
+    /// [연구문서] 결과 디자인 수정 — 라운드 처리된 사각형 내부 디자인을
+    /// 성경구절, 개요와 동일하게 변경할것." `rowLabel`은 관계/인물·지명/
+    /// 예언/주제·속성/서사 카테고리와도 공유하는 함수라 그대로 고치면
+    /// 사용자가 언급하지 않은 카테고리까지 함께 바뀐다 — 그래서
+    /// `phraseNoteRow`/`memoRow`/`summaryRow`/`documentRow`(메모, 개인
+    /// 묵상, 말씀 요약, 연구문서) 4곳 전용으로 새 함수를 만들어,
+    /// `verseChapterGroupHeader`/`verseExcerptAttributedString`이 이미
+    /// 쓰는 값을 그대로 재사용한다: 아이콘은 40×40 원형 배지 대신 18pt
+    /// 폭 프레임 + `.system(size: 13, weight: .semibold)`, 제목은
+    /// `.title3.weight(.semibold)` 대신 `.headline`, 발췌 본문은
+    /// `.body`(17pt) 대신 `.system(size: 15)`, 카드 내부 세로 여백은
+    /// `.padding(.vertical, 8)` 대신 `.padding(.vertical, 2)`.
+    private func compactItemLabel(
+        icon: String,
+        iconColor: Color,
+        title: String,
+        isReferenceMatch: Bool = false,
+        tagNames: [String] = [],
+        matchedWordCount: Int? = nil,
+        excerptText: String? = nil,
+        excerptKeywords: [String] = []
+    ) -> some View {
+        VStack(alignment: .leading, spacing: 6) {
+            HStack(spacing: 6) {
+                Image(systemName: icon)
+                    .font(.system(size: 13, weight: .semibold))
+                    .foregroundStyle(iconColor)
+                    .frame(width: 18)
+                Text(title)
+                    .font(.headline)
+                    .lineLimit(1)
+                if isReferenceMatch {
+                    badge("참조 일치", color: referenceMatchGreen, systemImage: "checkmark.seal.fill")
+                }
+                Spacer(minLength: 4)
+            }
+            if !tagNames.isEmpty {
+                HStack(spacing: 6) {
+                    ForEach(tagNames, id: \.self) { name in
+                        badge(name, color: tagBadgeBlue, systemImage: "tag.fill")
+                    }
+                }
+            }
+            if let excerptText {
+                HStack(alignment: .firstTextBaseline, spacing: 6) {
+                    if let matchedWordCount, matchedWordCount > 0 {
+                        verseMatchCountBadge(matchedWordCount)
+                    }
+                    highlightedText(excerptText, keywords: excerptKeywords)
+                        .font(.system(size: 15))
+                        .foregroundStyle(settings.bibleTextColor?.opacity(0.75) ?? Color.secondary)
+                        .lineLimit(2)
+                }
+            }
+        }
+        .padding(.vertical, 2)
     }
 
     /// 분류별 색상 원형 아이콘 배지.
@@ -1356,8 +1704,8 @@ private struct SearchContentView: View {
             .font(.subheadline.weight(.semibold).monospacedDigit())
             .padding(.horizontal, 7)
             .padding(.vertical, 3)
-            .background(Color.accentColor.opacity(0.14), in: Capsule())
-            .foregroundStyle(Color.accentColor)
+            .background(Color("AccentColor").opacity(0.14), in: Capsule())
+            .foregroundStyle(Color("AccentColor"))
             .fixedSize()
     }
 
@@ -1365,27 +1713,91 @@ private struct SearchContentView: View {
 
     /// [2026-08-26 신설, 같은 날 재작성] "성경구절" 섹션 안에서 장 단위
     /// 그룹을 나누는 헤더. 사용자 요청 — "수정하기 전에 아이콘의 크기와
+    /// [2026-09-10 신설] 사용자 요청 — "각 책별(성경구절-장별, 개요-성경별,
+    /// 메모/말씀노트-항목별, 연구문서-항목별)로 구분할 수 있도록 라운드
+    /// 사각 테두리를 추가할 것. 퍼스널컬러 디자인을 참고하여 통일성을
+    /// 유지하도록." 디자인 가이드(아티팩트)의 `.app-card` 카드 컴포넌트
+    /// (모서리 반경 16px, 옅은 중립 테두리 1px)를 참고했다 — 다만 가이드
+    /// 07-②("책장 아이보리 카드" 배경)는 실기기 라이트/다크 확인 전까지
+    /// 명시적으로 "보류" 처리된 항목이라 배경은 채우지 않고 테두리
+    /// (스트로크)만 그린다. 테두리 색은 이 화면이 이미 구조적 구분선에
+    /// 쓰는 `bibleTextColor` 30% 톤(`.listRowSeparatorTint`와 동일 값)을
+    /// 재사용했다 — 새 임의 색을 만들지 않았다. 성경구절/개요 탭은 이
+    /// 헬퍼로 "그룹"(장/책) 전체를 한 번에 감싸고, 메모·개인 묵상·말씀
+    /// 요약·연구문서 탭은 항목 하나하나를 이 헬퍼로 감싼다(아래 각 함수
+    /// 참고) — 사용자가 괄호로 명시한 "성경구절-장별, 개요-성경별,
+    /// 메모/말씀노트-항목별, 연구문서-항목별" 구분 단위를 그대로 따른다.
+    private func groupCardBorder<Content: View>(@ViewBuilder content: () -> Content) -> some View {
+        content()
+            // [2026-09-10 재수정] 사용자 요청 — "라운드 처리된 사각형
+            // 내부 여백도 지금보다 2.5배는 더 늘릴 수 있도록." 10→25,
+            // 4→10 (각각 2.5배).
+            .padding(.horizontal, 25)
+            .padding(.vertical, 10)
+            .overlay(
+                RoundedRectangle(cornerRadius: 16, style: .continuous)
+                    .strokeBorder(JBCHCategoryPalette.wood.opacity(0.3), lineWidth: 1)
+            )
+            // [2026-09-10 재수정] 사용자 요청 — "결과 단위의 상호 간격은
+            // 지금보다 절반으로 줄일 것." 카드(성경구절 장 그룹/개요 책
+            // 그룹/메모·개인 묵상·말씀 요약·연구문서 각 항목, 4개 카테고리
+            // 전부 이 함수 하나를 공유한다)와 다음 카드 사이 "바깥" 여백만
+            // 절반(4 → 2)으로 줄였다 — 바로 위 "안쪽" 여백(테두리-내용
+            // 간격)은 이 요청과 무관해 그대로 뒀다.
+            // [2026-09-10 재수정] 사용자 요청 — "너무 좁아. 2.5배는
+            // 다시 벌려야 하며." 2→5 (2.5배).
+            .padding(.vertical, 5)
+            // [2026-09-10 추가] 사용자 지적 — "결과 단위 상호 간격 절반이
+            // 실제로는 변하지 않았음." `List`가 각 행에 자체 기본
+            // `.listRowInsets`(위/아래 여백 포함)를 이미 적용하고 있어,
+            // 그 기본값을 0으로 만들지 않는 한 바로 위 `.padding(.vertical, ...)`
+            // 는 그 기본 여백 "위에 얹히는" 추가분일 뿐이라 눈에 띄는
+            // 변화가 나지 않았다 — `BookmarkListPopover.swift`의 리스트가
+            // 이미 같은 문제를 이렇게 고친 전례가 있다(그 파일 160행,
+            // `.listRowInsets(EdgeInsets(top: 0, leading: 16, bottom: 0,
+            // trailing: 16))`). 위/아래를 0으로 없애 이제 바로 위
+            // `.padding(.vertical, ...)` 하나만이 카드-카드 세로 간격을
+            // 전담하게 했다 — 좌/우는 List 기본값과 같은 16을 그대로
+            // 유지해 가로 위치는 바뀌지 않는다.
+            .listRowInsets(EdgeInsets(top: 0, leading: 16, bottom: 0, trailing: 16))
+            .listRowSeparator(.hidden)
+    }
+
     /// 성경 장절의 형태를 유지하되 성경장절 대신 성경장만 표시." "수정하기
     /// 전"이 가리키는 화면(스크린샷)은 실은 `rowLabel`(제목 줄 + `categoryIcon`
     /// 아이콘 칩, 개요/메모 등 다른 분류 행과 같은 스타일)로 그려지던 예전
-    /// `verseRow`였다 — 그래서 아이콘은 그 함수가 쓰는 `categoryIcon`(34×34
-    /// 원형 배지)을 그대로 재사용하고, 제목 폰트도 `rowLabel`의 제목과 같은
-    /// `.body.weight(.semibold)`로 맞췄다. 내용만 "책 D:V"(절 번호 포함) 대신
-    /// "책 D장"(장만)으로 바꿨다 — 이 헤더 하나가 그 장에 속한 여러 절
-    /// (`groupedVerseRow`)을 대표하므로 특정 절 번호를 넣을 이유가 없다.
+    /// `verseRow`였다.
+    ///
+    /// [2026-09-10 재수정] 사용자 요청 — "아이콘 + 성경 + 장으로 된
+    /// 중간타이틀과 하위 절과의 간격을 줄이고, 아이콘과 중간타이틀의
+    /// 크기를 [말씀노트]의 문서제목의 크기와 동일하게 줄일 것." 제목
+    /// 폰트를 `WordNoteRowView`의 문서 제목과 정확히 같은 `.font(.headline)`
+    /// 으로 맞췄다(기존 `.title3.weight(.semibold)`보다 작다). 아이콘은
+    /// `WordNoteRowView`에 직접 대응하는 아이콘이 없어(그 화면의 "카테고리"
+    /// 표시는 아이콘이 아니라 작은 텍스트 캡슐), 대신 `DocumentsHomeView.
+    /// DocumentRowView`의 문서 아이콘(배지 없는 단순 아이콘, `.frame(width: 24)`)
+    /// 과 같은 격의 작은 인라인 아이콘으로 바꿨다 — 다른 결과 행들이 공유해
+    /// 쓰는 `categoryIcon`(40×40 원형 배지)은 여기서 손대지 않았다(그 함수를
+    /// 고치면 관계/인물·지명/예언 등 무관한 행까지 함께 작아진다). 줄 간격도
+    /// `.padding(.vertical, 4)` → `WordNoteRowView`의 행 여백과 같은
+    /// `.padding(.vertical, 2)`로 줄였다. 이제 그룹 헤더는 `groupCardBorder`가
+    /// 감싸는 카드 안의 내부 요소라 `.listRowSeparator(.hidden)`은 더 이상
+    /// 의미가 없어(List 행 경계가 아니라 `VStack` 자식이 됨) 뺐다.
     private func verseChapterGroupHeader(_ group: SearchViewModel.VerseSearchResultGroup) -> some View {
-        HStack(spacing: 10) {
-            categoryIcon("book.closed.fill", color: JBCHCategoryPalette.navy)
+        HStack(spacing: 6) {
+            Image(systemName: "book.closed.fill")
+                .font(.system(size: 13, weight: .semibold))
+                .foregroundStyle(settings.bibleTextColor ?? .primary)
+                .frame(width: 18)
             Text("\(group.bookNameKo) \(group.chapter)장")
-                .font(.title3.weight(.semibold))
+                .font(.headline)
                 .lineLimit(1)
             Spacer()
             Text("\(group.verses.count)절")
                 .font(.footnote.weight(.medium))
                 .foregroundStyle(.tertiary)
         }
-        .padding(.vertical, 4)
-        .listRowSeparator(.hidden)
+        .padding(.vertical, 2)
     }
 
     /// [2026-08-26 재작성] 사용자 요청 — "그 아래 절 표시된 내용에 1절) ....
@@ -1409,13 +1821,37 @@ private struct SearchContentView: View {
         // 공존하면 SwiftUI가 실제로 탭된 게 어느 것인지 안정적으로 구분하지
         // 못하는 문제가 `OutlineTreeView.swift`(장 칩 여러 개를 `List` 행
         // 하나에 몰아넣었을 때, 그 파일 상단 주석 참고)에서 이미 실제로
-        // 재현된 적이 있어 같은 위험을 피했다. "이동"은 이제 아래 버튼이
-        // 전담한다.
+        // 재현된 적이 있어 같은 위험을 피했다.
+        //
+        // [2026-09-10 재변경] 사용자 재요청 — "성경구절 검색 결과의
+        // 이동아이콘은 제거하고, 성경구절을 클릭하면 이동하도록." 위 08/29
+        // 위험은 "행 전체(HStack 전부)를 하나의 탭 제스처/링크로 감싸, 그
+        // 안의 개별 버튼들과 히트테스트 영역이 겹치는" 경우에 한정된
+        // 문제였다 — `OutlineTreeView.swift`에서 실제 재현된 근본 원인도
+        // "한 행 안에 여러 개의 암묵적 NavigationLink가 뒤섞인 것"이지,
+        // "독립된 Button 여러 개가 한 행에 나란히 있는 것" 자체가 아니다.
+        // 지금 이 변경은 그 패턴과 다르다 — 행 전체가 아니라 본문 `Text`
+        // 하나만 별도 `Button`(닫힌 히트테스트 영역, `.buttonStyle(.plain)`)
+        // 으로 감싸고, 나머지 선택/복사 버튼은 여전히 각자 독립된 `Button`
+        // 으로 남아 있다. "이동+선택+복사" 3개가 모두 독립된 `Button`
+        // (NavigationLink가 아니라 클로저 캡처만으로 구분됨)으로 나란히
+        // 공존하던 08/29~09/10 사이의 구성이 실제로 문제없이 동작했다는
+        // 것이 이미 확인된 전례이므로, 그중 하나(이동)를 아이콘 버튼에서
+        // 본문 텍스트 버튼으로 옮겨도 "여러 독립 Button이 한 행에 공존"하는
+        // 구조 자체는 바뀌지 않는다.
         HStack(alignment: .firstTextBaseline, spacing: 8) {
-            Text(verseExcerptAttributedString(result))
-                .lineLimit(2)
+            Button {
+                AppNavigationRequest.shared.request(.bibleReading)
+                BibleVerseNavigationRequest.shared.request(
+                    bookId: result.bookId, chapter: result.chapter, verse: result.verse
+                )
+            } label: {
+                Text(verseExcerptAttributedString(result))
+                    .lineLimit(2)
+            }
+            .buttonStyle(.plain)
             if result.isReferenceMatch {
-                badge("참조 일치", color: .green, systemImage: "checkmark.seal.fill")
+                badge("참조 일치", color: referenceMatchGreen, systemImage: "checkmark.seal.fill")
             }
             Spacer(minLength: 8)
             verseRowActionButtons(result)
@@ -1429,19 +1865,21 @@ private struct SearchContentView: View {
                 verseMatchCountBadge(result.matchCount)
             }
         }
-        .padding(.vertical, 4)
+        // [2026-09-10 재수정] 사용자 요청 — "컨텐츠와 컨텐츠 사이
+        // (성경구절-절사이)는 지금보다 30% 더 벌어질 수 있도록."
+        // 4 * 1.3 = 5.2.
+        .padding(.vertical, 5.2)
     }
 
     /// [2026-08-29 신설] 사용자 요청 — "검색결과 - 성경구절 각 행 오른쪽 옆
-    /// (단어 일치개수 뱃지 왼쪽)에 버튼 추가 — 이동, 선택, 복사." 셋 다 이
-    /// 앱에 이미 있는 기능을 그대로 재사용한다(새로 설계하지 않음):
-    /// - 이동: `BibleReadingView`가 사이드바 "최근 이력" 등 다른 화면에서
-    ///   넘어올 때 이미 쓰는 것과 정확히 같은 `AppNavigationRequest`(성경
-    ///   섹션으로 전환) + `BibleVerseNavigationRequest`(그 절 하이라이트)
-    ///   조합이다. 이 조합은 `SidebarNavigationView.swift`의
-    ///   `.onChange(of: AppNavigationRequest.shared.requestedSection)`가
-    ///   플랫폼(아이폰 탭 vs 아이패드·맥 사이드바) 구분 없이 처리하므로,
-    ///   여기서도 분기 없이 버튼 하나로 만든다.
+    /// (단어 일치개수 뱃지 왼쪽)에 버튼 추가 — 이동, 선택, 복사." 이 중
+    /// "이동"은 [2026-09-10 재변경] 사용자 재요청 — "성경구절 검색 결과의
+    /// 이동아이콘은 제거하고, 성경구절을 클릭하면 이동하도록"에 따라 이
+    /// 아이콘 버튼에서 빠지고, 아래 `groupedVerseRow`가 본문 `Text` 자체를
+    /// 감싸는 `Button`으로 옮겨 그 역할을 대신한다(그 함수의 새 주석 —
+    /// 08/29에 "행 전체 탭"을 버렸던 것과는 다른 구성이라 안전한 이유
+    /// 참고). 남은 선택·복사 둘 다 이 앱에 이미 있는 기능을 그대로
+    /// 재사용한다(새로 설계하지 않음):
     /// - 선택: `TranslationColumnView`의 컨텍스트 메뉴("선택")와 똑같이
     ///   `VerseTextSelectionPopover`를 띄운다. 한자 주석(`hanjaWords`)은
     ///   그 팝오버 자체가 기본값 `[]`을 지원하도록 설계돼 있어(그 파일 상단
@@ -1455,16 +1893,6 @@ private struct SearchContentView: View {
     ///   복사 형식)은 `BibleVerseCopyFormatter`가 알아서 반영한다.
     private func verseRowActionButtons(_ result: VerseSearchResult) -> some View {
         HStack(spacing: 14) {
-            Button {
-                AppNavigationRequest.shared.request(.bibleReading)
-                BibleVerseNavigationRequest.shared.request(
-                    bookId: result.bookId, chapter: result.chapter, verse: result.verse
-                )
-            } label: {
-                Image(systemName: "arrow.right.circle")
-            }
-            .help("이동")
-
             Button {
                 partialTextSelectionTarget = PartialTextSelectionTarget(
                     verseNumber: result.verse,
@@ -1484,7 +1912,11 @@ private struct SearchContentView: View {
             .help("복사")
         }
         .buttonStyle(.plain)
-        .foregroundStyle(.secondary)
+        // [2026-09-10 추가] 사용자 요청 — "검색 결과에 나오는 아이콘
+        // 색상은 테마 글자 색상에 맞출것." 선택/복사 아이콘도 검색 결과에
+        // 나오는 아이콘이라 `.secondary`(시스템 전용 색) 대신 테마 글자색을
+        // 따르게 했다 — 테마를 고르지 않았으면(nil) 기존 `.secondary` 그대로.
+        .foregroundStyle(settings.bibleTextColor ?? Color.secondary)
         .font(.system(size: 16))
     }
 
@@ -1526,11 +1958,19 @@ private struct SearchContentView: View {
     /// 두되, 장 헤더와 마찬가지로 기본(primary) 색을 명시해 톤을 분명히 했다.
     private func verseExcerptAttributedString(_ result: VerseSearchResult) -> AttributedString {
         var prefix = AttributedString("\(result.verse)절) ")
-        prefix.font = .body.weight(.semibold)
-        prefix.foregroundColor = .primary
+        prefix.font = .system(size: 15, weight: .semibold)
+        // [2026-09-10 수정] 사용자 보고 — "본문 텍스트 색상이 흰색 또는
+        // 연한 흰색으로 고정되어있는지 살펴볼 것." `AttributedString.
+        // foregroundColor`에 직접 구운 `.primary`/`.secondary`는 조상의
+        // `.foregroundStyle(settings.bibleTextColor)`보다 우선해서 적용되며,
+        // 시스템 다크 모드에서는 밝은 읽기 테마 배경 위에도 흰색/연한
+        // 흰색으로 그대로 남는다 — `DocumentsHomeView.swift`의 드롭존
+        // 안내문(같은 날 먼저 고친, 반대 방향 증상 — 어두운 회색 고정이라
+        // 어두운 배경에서 안 보임) 사례와 근본 원인이 같다.
+        prefix.foregroundColor = settings.bibleTextColor ?? .primary
         var body = highlightedAttributedString(result.content, keywords: result.highlightKeywords)
-        body.font = .body
-        body.foregroundColor = .secondary
+        body.font = .system(size: 15)
+        body.foregroundColor = settings.bibleTextColor?.opacity(0.75) ?? .secondary
         return prefix + body
     }
 
@@ -1568,7 +2008,7 @@ private struct SearchContentView: View {
         case 1: return .gray
         case 2: return .green
         case 3: return .blue
-        case 4: return Color(red: 0.83, green: 0.69, blue: 0.22)   // 황금색(gold) 근사값
+        case 4: return JBCHCategoryPalette.gold   // [2026-09-11 수정] 근사 RGB 대신 이미 있는 팔레트 금색을 재사용
         case 5: return .orange
         default: return .red   // 6 이상 (0 이하는 호출부가 `matchCount > 0`일 때만 부르므로 실질적으로 발생하지 않음)
         }
@@ -1580,19 +2020,25 @@ private struct SearchContentView: View {
     /// 할것. (성경검색 결과가 장단위로 그룹핑 된것처럼)" 위
     /// `verseChapterGroupHeader`와 같은 자리(그룹을 대표하는 헤더 행)지만
     /// 개요는 책 단위로 묶이므로 장 번호 없이 책 이름만 보여준다.
+    ///
+    /// [2026-09-10 재수정] 위 `verseChapterGroupHeader`와 같은 이유·같은
+    /// 해법 — 제목 `.headline`(WordNote 문서 제목과 동일), 아이콘 소형화,
+    /// 여백 축소, 이제 `groupCardBorder` 내부 요소라 `.listRowSeparator` 제거.
     private func outlineGroupHeader(_ group: SearchViewModel.OutlineSearchResultGroup) -> some View {
-        HStack(spacing: 10) {
-            categoryIcon("list.bullet.rectangle.fill", color: JBCHCategoryPalette.slateTeal)
+        HStack(spacing: 6) {
+            Image(systemName: "list.bullet.rectangle.fill")
+                .font(.system(size: 13, weight: .semibold))
+                .foregroundStyle(settings.bibleTextColor ?? .primary)
+                .frame(width: 18)
             Text(group.bookNameKo)
-                .font(.title3.weight(.semibold))
+                .font(.headline)
                 .lineLimit(1)
             Spacer()
             Text("\(group.items.count)개")
                 .font(.footnote.weight(.medium))
                 .foregroundStyle(.tertiary)
         }
-        .padding(.vertical, 4)
-        .listRowSeparator(.hidden)
+        .padding(.vertical, 2)
     }
 
     /// [2026-09-05 재작성] 사용자 요청 — "검색 결과마다 아이콘이 있는
@@ -1626,17 +2072,29 @@ private struct SearchContentView: View {
                 Text(outlineExcerptAttributedString(result))
                     .lineLimit(2)
                 if result.isReferenceMatch {
-                    badge("참조 일치", color: .green, systemImage: "checkmark.seal.fill")
+                    badge("참조 일치", color: referenceMatchGreen, systemImage: "checkmark.seal.fill")
                 }
                 Spacer(minLength: 8)
                 // [원본 outlineRow와 같은 조건] 참조만 일치하고 본문 텍스트
                 // 자체엔 매칭이 없는 경우(`bodyExcerpt == nil`)는 "0회 일치"
                 // 처럼 보여주는 대신 배지를 아예 숨긴다.
-                if let bodyExcerpt = result.bodyExcerpt, !bodyExcerpt.isEmpty {
-                    occurrenceChip(result.bodyOccurrenceSum)
+                // [2026-09-10 변경] 사용자 재현 사례("다윗 솔로몬") —
+                // "몇회 일치보다 두 단어가 모두 포함되어있는지가 더 중요함.
+                // [성경구절] 탭처럼 바꿀 것." 등장 총 횟수(`occurrenceChip`,
+                // "N회 일치")는 검색어 커버리지와 무관한 값이라 오히려 "많이
+                // 나온 단어 하나"가 강조돼 보였다 — 성경구절 탭이 쓰는
+                // `verseMatchCountBadge`("N단어", 중복 제거된 매칭 검색어 수)
+                // 로 통일한다. `matchedWordCount == 0`(참조만 일치, 본문
+                // 매칭 없음)은 배지를 아예 숨긴다 — `verseMatchCountBadgeColor`
+                // 가 애초에 1 이상만 호출된다고 전제하기 때문.
+                if let bodyExcerpt = result.bodyExcerpt, !bodyExcerpt.isEmpty, result.matchedWordCount > 0 {
+                    verseMatchCountBadge(result.matchedWordCount)
                 }
             }
-            .padding(.vertical, 4)
+            // [2026-09-10 재수정] 사용자 요청 — "컨텐츠와 컨텐츠 사이
+            // (개요-장사이)는 지금보다 30% 더 벌어질 수 있도록."
+            // 4 * 1.3 = 5.2.
+            .padding(.vertical, 5.2)
             .contentShape(Rectangle())
         }
         // SidebarNavigationView의 "태그 관계" 별도 창 항목과 같은 원칙 — 새
@@ -1653,27 +2111,34 @@ private struct SearchContentView: View {
     private func outlineExcerptAttributedString(_ result: OutlineSearchResult) -> AttributedString {
         let prefixText = result.chapter.map { "\($0)장) " } ?? "개요) "
         var prefix = AttributedString(prefixText)
-        prefix.font = .body.weight(.semibold)
-        prefix.foregroundColor = .primary
+        prefix.font = .system(size: 15, weight: .semibold)
+        // [2026-09-10 수정] 위 `verseExcerptAttributedString`과 같은 이유·
+        // 같은 해법 — "본문 텍스트가 흰색/연한 흰색으로 고정" 버그.
+        prefix.foregroundColor = settings.bibleTextColor ?? .primary
         var body = highlightedAttributedString(result.bodyExcerpt ?? "", keywords: result.highlightKeywords)
-        body.font = .body
-        body.foregroundColor = .secondary
+        body.font = .system(size: 15)
+        body.foregroundColor = settings.bibleTextColor?.opacity(0.75) ?? .secondary
         return prefix + body
     }
 
     // MARK: - 메모(VersePhraseNote)
 
     private func phraseNoteRow(_ result: PhraseNoteSearchResult) -> some View {
-        bibleVerseRow(BibleVerseDestination(
-            bookId: result.note.bookId, chapter: result.note.chapter, verse: nil
-        )) {
-            rowLabel(
-                icon: "note.text", iconColor: JBCHCategoryPalette.gold,
-                title: phraseNoteTitle(result.note),
-                isReferenceMatch: result.isReferenceMatch,
-                occurrenceCount: result.bodyExcerpt != nil ? result.bodyOccurrenceSum : nil,
-                excerptText: result.bodyExcerpt ?? result.note.noteText, excerptKeywords: result.highlightKeywords
-            )
+        // [2026-09-10 추가] 사용자 요청 — "메모/말씀노트-항목별로 구분할 수
+        // 있도록 라운드 사각 테두리를 추가할 것." 항목 하나(`bibleVerseRow`
+        // 전체)를 `groupCardBorder`로 감싼다.
+        groupCardBorder {
+            bibleVerseRow(BibleVerseDestination(
+                bookId: result.note.bookId, chapter: result.note.chapter, verse: nil
+            )) {
+                compactItemLabel(
+                    icon: "note.text", iconColor: settings.bibleTextColor ?? .primary,
+                    title: phraseNoteTitle(result.note),
+                    isReferenceMatch: result.isReferenceMatch,
+                    matchedWordCount: result.bodyExcerpt != nil ? result.matchedWordCount : nil,
+                    excerptText: result.bodyExcerpt ?? result.note.noteText, excerptKeywords: result.highlightKeywords
+                )
+            }
         }
     }
 
@@ -1685,16 +2150,19 @@ private struct SearchContentView: View {
     // MARK: - 개인 묵상(UserMemo)
 
     private func memoRow(_ result: MemoSearchResult) -> some View {
-        NavigationLink {
-            MemoDetailView(memo: result.memo)
-        } label: {
-            rowLabel(
-                icon: "heart.text.square.fill", iconColor: JBCHCategoryPalette.wine,
-                title: memoTitle(result.memo),
-                tagNames: result.matchedTagNames,
-                occurrenceCount: result.bodyExcerpt != nil ? result.bodyOccurrenceSum : nil,
-                excerptText: result.bodyExcerpt, excerptKeywords: result.highlightKeywords
-            )
+        // [2026-09-10 추가] 위 `phraseNoteRow`와 같은 이유 — 항목별 테두리.
+        groupCardBorder {
+            NavigationLink {
+                MemoDetailView(memo: result.memo)
+            } label: {
+                compactItemLabel(
+                    icon: "heart.text.square.fill", iconColor: settings.bibleTextColor ?? .primary,
+                    title: memoTitle(result.memo),
+                    tagNames: result.matchedTagNames,
+                    matchedWordCount: result.bodyExcerpt != nil ? result.matchedWordCount : nil,
+                    excerptText: result.bodyExcerpt, excerptKeywords: result.highlightKeywords
+                )
+            }
         }
     }
 
@@ -1706,23 +2174,26 @@ private struct SearchContentView: View {
     // MARK: - 말씀 요약(VerseSummary)
 
     private func summaryRow(_ result: SummarySearchResult) -> some View {
-        NavigationLink {
-            // [2026-08-27 변경] `WordNoteHomeView.destinationView`의 같은 변경과
-            // 같은 이유 — 사용자가 보고한 "말씀노트 화면이 아이폰 가로폭보다
-            // 커서 잘림" 버그가 `.standalone` 헤더(BookChapterPicker+Stepper를
-            // 한 줄에 다 넣고 줄바꿈하지 않음) 자체에 있어, 이 검색 결과 진입
-            // 경로도 같은 헤더를 그대로 쓰는 한 아이폰에서 똑같이 잘린다 —
-            // 이미 검색으로 찾은 특정 요약이라 좌표를 바꿀 이유도 없어(위
-            // `WordNoteHomeView`와 같은 논리) `.wordNoteList`로 바꾼다.
-            WordSummaryEditorView(summary: result.summary, presentationContext: .wordNoteList)
-        } label: {
-            rowLabel(
-                icon: "text.quote", iconColor: JBCHCategoryPalette.wood,
-                title: summaryTitle(result.summary),
-                tagNames: result.matchedTagNames,
-                occurrenceCount: result.bodyExcerpt != nil ? result.bodyOccurrenceSum : nil,
-                excerptText: result.bodyExcerpt, excerptKeywords: result.highlightKeywords
-            )
+        // [2026-09-10 추가] 위 `phraseNoteRow`와 같은 이유 — 항목별 테두리.
+        groupCardBorder {
+            NavigationLink {
+                // [2026-08-27 변경] `WordNoteHomeView.destinationView`의 같은 변경과
+                // 같은 이유 — 사용자가 보고한 "말씀노트 화면이 아이폰 가로폭보다
+                // 커서 잘림" 버그가 `.standalone` 헤더(BookChapterPicker+Stepper를
+                // 한 줄에 다 넣고 줄바꿈하지 않음) 자체에 있어, 이 검색 결과 진입
+                // 경로도 같은 헤더를 그대로 쓰는 한 아이폰에서 똑같이 잘린다 —
+                // 이미 검색으로 찾은 특정 요약이라 좌표를 바꿀 이유도 없어(위
+                // `WordNoteHomeView`와 같은 논리) `.wordNoteList`로 바꾼다.
+                WordSummaryEditorView(summary: result.summary, presentationContext: .wordNoteList)
+            } label: {
+                compactItemLabel(
+                    icon: "text.quote", iconColor: settings.bibleTextColor ?? .primary,
+                    title: summaryTitle(result.summary),
+                    tagNames: result.matchedTagNames,
+                    matchedWordCount: result.bodyExcerpt != nil ? result.matchedWordCount : nil,
+                    excerptText: result.bodyExcerpt, excerptKeywords: result.highlightKeywords
+                )
+            }
         }
     }
 
@@ -1755,40 +2226,47 @@ private struct SearchContentView: View {
         // 넣는 destination 클로저 방식 `NavigationLink`를 쓴다(바로 위
         // `summaryRow`가 이미 쓰던 것과 같은 스타일이라 별도 `.navigationDestination`
         // 등록이 필요 없다).
+        //
+        // [2026-09-10 추가] 위 `phraseNoteRow`와 같은 이유 — 항목별 테두리.
+        // 두 분기(아이폰/그 외) 모두 각자 `groupCardBorder`로 감싼다.
         if isPhoneIdiom {
-            NavigationLink {
-                DocumentSearchWindowContent(
-                    request: DocumentSearchRequest(documentID: result.document.persistentModelID, searchText: documentSearchText)
-                )
-            } label: {
-                rowLabel(
-                    icon: "doc.text.fill", iconColor: JBCHCategoryPalette.shelfSlate,
-                    title: documentTitle(result),
-                    tagNames: result.matchedTagNames,
-                    occurrenceCount: result.bodyExcerpt != nil ? result.bodyOccurrenceSum : nil,
-                    excerptText: result.bodyExcerpt, excerptKeywords: result.highlightKeywords
-                )
+            groupCardBorder {
+                NavigationLink {
+                    DocumentSearchWindowContent(
+                        request: DocumentSearchRequest(documentID: result.document.persistentModelID, searchText: documentSearchText)
+                    )
+                } label: {
+                    compactItemLabel(
+                        icon: "doc.text.fill", iconColor: settings.bibleTextColor ?? .primary,
+                        title: documentTitle(result),
+                        tagNames: result.matchedTagNames,
+                        matchedWordCount: result.bodyExcerpt != nil ? result.matchedWordCount : nil,
+                        excerptText: result.bodyExcerpt, excerptKeywords: result.highlightKeywords
+                    )
+                }
             }
         } else {
-            Button {
-                openWindow(
-                    id: "document-search",
-                    value: DocumentSearchRequest(documentID: result.document.persistentModelID, searchText: documentSearchText)
-                )
-            } label: {
-                rowLabel(
-                    icon: "doc.text.fill", iconColor: JBCHCategoryPalette.shelfSlate,
-                    title: documentTitle(result),
-                    tagNames: result.matchedTagNames,
-                    occurrenceCount: result.bodyExcerpt != nil ? result.bodyOccurrenceSum : nil,
-                    excerptText: result.bodyExcerpt, excerptKeywords: result.highlightKeywords
-                )
+            groupCardBorder {
+                Button {
+                    openWindow(
+                        id: "document-search",
+                        value: DocumentSearchRequest(documentID: result.document.persistentModelID, searchText: documentSearchText)
+                    )
+                } label: {
+                    compactItemLabel(
+                        icon: "doc.text.fill", iconColor: settings.bibleTextColor ?? .primary,
+                        title: documentTitle(result),
+                        tagNames: result.matchedTagNames,
+                        matchedWordCount: result.bodyExcerpt != nil ? result.matchedWordCount : nil,
+                        excerptText: result.bodyExcerpt, excerptKeywords: result.highlightKeywords
+                    )
+                }
+                // SidebarNavigationView의 "태그 관계" 별도 창 항목과 같은 원칙 —
+                // 새 창을 여는 Button이 List 안에서 기존 NavigationLink 행과 같은
+                // 텍스트 색으로 보이도록 `.plain`을 쓴다(버튼 기본 스타일은 강조색
+                // 틴트를 입힌다).
+                .buttonStyle(.plain)
             }
-            // SidebarNavigationView의 "태그 관계" 별도 창 항목과 같은 원칙 —
-            // 새 창을 여는 Button이 List 안에서 기존 NavigationLink 행과 같은
-            // 텍스트 색으로 보이도록 `.plain`을 쓴다(버튼 기본 스타일은 강조색
-            // 틴트를 입힌다).
-            .buttonStyle(.plain)
         }
     }
 

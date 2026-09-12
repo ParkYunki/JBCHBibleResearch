@@ -34,6 +34,17 @@ struct JBCHBibleResearchApp: App {
         // BundledFontRegistrar.swift 상단 주석 참고(등록 실패해도 앱은 계속 켜진다).
         BundledFontRegistrar.registerBundledFontsIfNeeded()
 
+        // [2026-09-09 추가] 사용자 보고 — "성경 하단 기능메뉴... 배경도 왜
+        // 흰색이지?" `PhoneTabView.swift`의 `applyThemedTabBarAppearance`
+        // 상단 주석 참고 — `UITabBar.appearance()`(UIKit 외형 프록시)는
+        // 탭바가 윈도우에 "처음 추가되기 전"에 설정해야 확실히 반영된다.
+        // `PhoneTabView.onAppear`(뷰가 이미 화면에 나타난 뒤 불림)에서만
+        // 호출했을 때 실기기에서 반영되지 않는 것을 사용자가 확인해줘,
+        // 윈도우가 만들어지기도 전인 여기(`init()`)로 옮겨 먼저 호출한다.
+        #if os(iOS)
+        applyThemedTabBarAppearance(color: UserSettingsStore.shared.bibleBackgroundColor)
+        #endif
+
         do {
             modelContainer = try BibleResearchSchema.makeSharedModelContainer()
             print("[JBCHBibleResearchApp] 모델 컨테이너 생성 성공 (CloudKit 컨테이너: \(BibleResearchSchema.defaultCloudKitContainerIdentifier))")

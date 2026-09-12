@@ -198,6 +198,24 @@ final class DocumentsViewModel {
         return category
     }
 
+    /// [2026-09-11 신설] 사용자 요청 — 문서함 카테고리 관리(맥OS Inspector,
+    /// `DocumentsHomeView.categoryManagerPanel`) — 이름 변경. `createCategory`와
+    /// 같은 원칙(트리밍)을 따르되, 이미 있는 카테고리 객체 하나를 그대로
+    /// 고치므로 새 객체를 만들지 않는다. 이름이 같은 "다른" 카테고리가 이미
+    /// 있으면 아무 것도 하지 않는다(두 카테고리가 우연히 같은 이름을 갖게
+    /// 되는 걸 막는다 — `categoryMenu`/`folderGroups`처럼 이름으로 구분하는
+    /// 기존 화면들과의 일관성 때문). ⚠️ [범위 제한] 사용자 확인대로 삭제는
+    /// 이번에 포함하지 않았다 — "이미 문서가 속해 있는 카테고리를 지우면 그
+    /// 문서들은 어떻게 되는가"라는 별도 결정이 필요해서다.
+    func renameCategory(_ category: ImageCategory, to rawName: String) {
+        let name = rawName.trimmingCharacters(in: .whitespaces)
+        guard !name.isEmpty, name != category.name else { return }
+        guard !categories.contains(where: { $0.id != category.id && $0.name == name }) else { return }
+        category.name = name
+        try? modelContext.save()
+        loadCategories()
+    }
+
     /// 이 문서가 OCR 검수 대기 중인지(draft 상태 OCRResult가 있는지) — 목록 행에서
     /// "검수 대기" 배지를 따로 보여주고, 탭하면 S7로 바로 연결하기 위해 쓴다.
     func hasPendingOCRReview(_ document: SourceDocument) -> Bool {

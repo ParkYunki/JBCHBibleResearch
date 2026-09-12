@@ -38,6 +38,8 @@ import UIKit
 #endif
 
 struct BookmarkListPopover: View {
+    /// [2026-09-11 추가] 사용자 보고 — "책갈피 리스트"가 테마를 안 따름.
+    private var settings: UserSettingsStore { .shared }
     let viewModel: BibleReadingViewModel
     var onDismiss: () -> Void
 
@@ -70,6 +72,8 @@ struct BookmarkListPopover: View {
                 list
             }
         }
+        // [2026-09-11 추가] 위 `settings` 선언부 주석 참고.
+        .background(settings.bibleBackgroundColor ?? Color.clear)
         .frame(width: isPhone ? nil : 300)
         #if os(iOS)
         .modifier(BookmarkSheetSizingModifier(isPhone: isPhone, sheetHeight: sheetHeight))
@@ -109,13 +113,14 @@ struct BookmarkListPopover: View {
         HStack(spacing: 6) {
             Text("책갈피")
                 .font(.headline)
+                .foregroundStyle(settings.bibleTextColor ?? .primary)
             if !bookmarks.isEmpty {
                 Text("\(bookmarks.count)")
                     .font(.caption)
-                    .foregroundStyle(.secondary)
+                    .foregroundStyle(settings.bibleTextColor?.opacity(0.6) ?? Color.secondary)
                     .padding(.horizontal, 6)
                     .padding(.vertical, 2)
-                    .background(Color.secondary.opacity(0.15), in: Capsule())
+                    .background(settings.bibleTextColor?.opacity(0.12) ?? Color.secondary.opacity(0.15), in: Capsule())
             }
             Spacer()
             // [2026-09-04 신설] 사용자 요청 — "닫기 버튼을 추가할 것." 팝오버는
@@ -126,7 +131,7 @@ struct BookmarkListPopover: View {
             } label: {
                 Image(systemName: "xmark.circle.fill")
                     .font(.system(size: 18))
-                    .foregroundStyle(.secondary)
+                    .foregroundStyle(settings.bibleTextColor?.opacity(0.6) ?? Color.secondary)
             }
             .buttonStyle(.plain)
             .accessibilityLabel("닫기")
@@ -139,13 +144,13 @@ struct BookmarkListPopover: View {
         VStack(spacing: 8) {
             Image(systemName: "bookmark")
                 .font(.system(size: 28))
-                .foregroundStyle(.secondary)
+                .foregroundStyle(settings.bibleTextColor?.opacity(0.6) ?? Color.secondary)
             Text("책갈피가 없습니다")
                 .font(.callout)
-                .foregroundStyle(.secondary)
+                .foregroundStyle(settings.bibleTextColor?.opacity(0.6) ?? Color.secondary)
             Text("성경 조회 상단의 책갈피 아이콘을 눌러 지금 위치를 저장하세요.")
                 .font(.caption)
-                .foregroundStyle(.tertiary)
+                .foregroundStyle(settings.bibleTextColor?.opacity(0.4) ?? Color.secondary)
                 .multilineTextAlignment(.center)
         }
         .padding(.horizontal, 20)
@@ -154,6 +159,10 @@ struct BookmarkListPopover: View {
     }
 
     private var list: some View {
+        // [2026-09-11 추가] 위 `settings` 선언부 주석 참고 — `List`는
+        // `.background()`만으로는 안 바뀌는 자체 배경이 있어(`OutlineTreeView`
+        // 등 기존 화면과 같은 원인) `.scrollContentBackground(.hidden)` +
+        // `.background()`가 짝으로 필요하다.
         List {
             ForEach(bookmarks) { bookmark in
                 row(for: bookmark)
@@ -168,6 +177,8 @@ struct BookmarkListPopover: View {
             }
         }
         .listStyle(.plain)
+        .scrollContentBackground(.hidden)
+        .background(settings.bibleBackgroundColor ?? Color.clear)
         // [2026-09-04 변경] 사용자 요청 — "화면영역이 낭비되지 않도록 정리."
         // 예전엔 "책/장:절" 한 줄 + 저장 시각 한 줄, 총 두 줄짜리 행이라 한
         // 행에 56pt를 잡아 뒀다. 아래 `row(for:)`를 한 줄(제목 + 오른쪽 정렬된
@@ -189,12 +200,12 @@ struct BookmarkListPopover: View {
             HStack(spacing: 8) {
                 Text(bookChapterLabel(for: bookmark))
                     .font(.body)
-                    .foregroundStyle(.primary)
+                    .foregroundStyle(settings.bibleTextColor ?? .primary)
                     .lineLimit(1)
                 Spacer(minLength: 8)
                 Text(Self.relativeTimeFormatter.localizedString(for: bookmark.createdAt, relativeTo: .now))
                     .font(.caption)
-                    .foregroundStyle(.secondary)
+                    .foregroundStyle(settings.bibleTextColor?.opacity(0.6) ?? Color.secondary)
                     .lineLimit(1)
                     .layoutPriority(1)
             }

@@ -33,6 +33,8 @@ import SwiftUI
 import BibleResearchModels
 
 struct BibleReadingHistorySheet: View {
+    /// [2026-09-11 추가] 사용자 보고 — "성경 - 조회이력"이 테마를 안 따름.
+    private var settings: UserSettingsStore { .shared }
     let viewModel: BibleReadingViewModel
     var onDismiss: () -> Void
 
@@ -111,6 +113,8 @@ struct BibleReadingHistorySheet: View {
                 if entries.isEmpty {
                     ContentUnavailableView("조회 이력이 없습니다", systemImage: "clock")
                 } else {
+                    // [2026-09-11 추가] 위 `settings` 선언부 주석 참고 —
+                    // `BookmarkListPopover.list`와 같은 이유·같은 패턴.
                     List {
                         ForEach(groupedEntries, id: \.bucket) { group in
                             // [2026-09-05 수정] 사용자 요청 — "조회이력 -
@@ -135,13 +139,16 @@ struct BibleReadingHistorySheet: View {
                             } header: {
                                 Text(group.bucket.title)
                                     .font(.title3.weight(.semibold))
-                                    .foregroundStyle(.primary)
+                                    .foregroundStyle(settings.bibleTextColor ?? .primary)
                                     .textCase(nil)
                             }
                         }
                     }
+                    .scrollContentBackground(.hidden)
+                    .background(settings.bibleBackgroundColor ?? Color.clear)
                 }
             }
+            .background(settings.bibleBackgroundColor ?? Color.clear)
             .navigationTitle("조회 이력")
             .toolbar {
                 ToolbarItem(placement: .cancellationAction) {
@@ -166,12 +173,12 @@ struct BibleReadingHistorySheet: View {
             HStack(spacing: 8) {
                 Text(bookChapterLabel(for: entry))
                     .font(.body)
-                    .foregroundStyle(.primary)
+                    .foregroundStyle(settings.bibleTextColor ?? .primary)
                     .lineLimit(1)
                 Spacer(minLength: 8)
                 Text(timeLabel(for: entry, bucket: bucket))
                     .font(.caption)
-                    .foregroundStyle(.secondary)
+                    .foregroundStyle(settings.bibleTextColor?.opacity(0.6) ?? Color.secondary)
                     .lineLimit(1)
                     .layoutPriority(1)
             }
@@ -179,6 +186,12 @@ struct BibleReadingHistorySheet: View {
             .contentShape(Rectangle())
         }
         .buttonStyle(.plain)
+        // [2026-09-12 추가] 사용자 재보고 — "성경-히스토리 디자인도 테마에
+        // 맞도록 수정할것." `OutlineTreeView`/`WordNoteHomeView`가 이미
+        // 겪은 것과 같은 누락 — 위 `body`의 `.background(bibleBackgroundColor)`
+        // 는 List "컨테이너"의 배경만 바꾸지, 각 행 셀 자체의 배경까지
+        // 자동으로 투명하게 만들어주지는 않는다.
+        .listRowBackground(Color.clear)
     }
 
     /// [2026-09-04 신설] 위 파일 상단 재설계 주석 참고 — 오늘/어제/그저께는

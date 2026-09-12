@@ -508,7 +508,7 @@ enum VerseAnnotationRenderer {
                         )
                     case .mark:
                         result.addAttribute(.underlineStyle, value: NSUnderlineStyle.single.rawValue, range: range)
-                        result.addAttribute(.underlineColor, value: PlatformColor.orange, range: range)
+                        result.addAttribute(.underlineColor, value: PlatformColor.systemOrange, range: range)
                     }
                 }
                 // [2026-08-12 추가] 사용자 요청 — "관주가 있는 텍스트에 현재
@@ -520,7 +520,7 @@ enum VerseAnnotationRenderer {
                 // 무해하다(같은 속성을 같은 값으로 한 번 더 쓸 뿐).
                 if segment.hasCrossReference {
                     result.addAttribute(.underlineStyle, value: NSUnderlineStyle.single.rawValue, range: range)
-                    result.addAttribute(.underlineColor, value: PlatformColor.orange, range: range)
+                    result.addAttribute(.underlineColor, value: PlatformColor.systemOrange, range: range)
                 }
                 // [2026-08-15 추가] 사용자 요청 — "한자가 있는 단어는 색깔로
                 // 표현." 메모 글자색(아래)이 있으면 그게 우선이도록 이 블록을

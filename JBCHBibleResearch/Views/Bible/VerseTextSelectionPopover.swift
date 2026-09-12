@@ -46,6 +46,10 @@ import SwiftUI
 import BibleResearchModels
 
 struct VerseTextSelectionPopover: View {
+    /// [2026-09-11 추가] 사용자 재검토 요청 — 이 팝오버만 성경 본문 테마
+    /// (`bibleTextColor`)를 안 따르고 있었다. `DocumentsHomeView.swift` 등
+    /// 나머지 화면이 쓰는 것과 같은 계산 프로퍼티 패턴.
+    private var settings: UserSettingsStore { .shared }
     let verseNumber: Int
     let translationDisplayName: String
     let text: String
@@ -100,7 +104,7 @@ struct VerseTextSelectionPopover: View {
             // 그만큼 커진다(사용자도 확인한 트레이드오프).
             Text(displayText)
                 .font(.system(size: 16))
-                .foregroundStyle(.primary)
+                .foregroundStyle(settings.bibleTextColor ?? .primary)
                 .textSelection(.enabled)
                 .frame(maxWidth: 280, alignment: .leading)
 

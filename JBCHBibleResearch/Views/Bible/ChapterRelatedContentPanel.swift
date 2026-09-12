@@ -88,6 +88,12 @@ struct ChapterRelatedContentPanel: View {
         #endif
     }
 
+    /// [2026-09-12 추가] 사용자 요청 — "성경-인스펙터 창의 디자인도 테마에
+    /// 맞도록 수정할것." 이 패널은 지금까지 배경/본문 글자색이 전부 시스템
+    /// 기본값(`.primary`/`.secondary`, `List`의 시스템 배경)이라 성경 읽기
+    /// 테마(`bibleBackgroundColor`/`bibleTextColor`)를 전혀 따르지 않았다.
+    private var settings: UserSettingsStore { .shared }
+
     var body: some View {
         // [2026-08-28 추가, 사용자 보고 — "성경조회 인스펙터 > 관련 연구문서
         // 클릭시 반응없음"] 원인 확정: 이 패널을 붙이는 `BibleReadingView`의
@@ -130,6 +136,10 @@ struct ChapterRelatedContentPanel: View {
                     documentSection(verse: selectedVerse)
                 }
             }
+            // [2026-09-12 추가] 위 `settings` 선언부 주석 참고 — `OutlineTreeView`/
+            // `WordNoteHomeView`가 이미 쓰는 것과 같은 관례.
+            .scrollContentBackground(.hidden)
+            .background(settings.bibleBackgroundColor ?? Color.clear)
             .navigationTitle("이 장의 관련 콘텐츠")
             #if os(iOS)
             .navigationBarTitleDisplayMode(.inline)
@@ -207,11 +217,15 @@ struct ChapterRelatedContentPanel: View {
         Label {
             Text(title)
                 .font(.body)
-                .foregroundStyle(.secondary)
+                .foregroundStyle(settings.bibleTextColor?.opacity(0.6) ?? Color.secondary)
         } icon: {
+            // [2026-09-12 확인] `tint`(teal/blue/purple/orange)는 2026-08-20
+            // 주석대로 섹션을 한눈에 구분하기 위한 범주색이라 테마와 무관하게
+            // 그대로 둔다 — 다른 화면들의 상태/강조 색과 같은 원칙.
             Image(systemName: systemImage)
                 .foregroundStyle(tint)
         }
+        .listRowBackground(Color.clear)
     }
 
     /// "이 절에 작성됨"/"본문에서 언급됨"/"이 장에 연결됨" — 각 항목이 왜 이
@@ -224,7 +238,7 @@ struct ChapterRelatedContentPanel: View {
         } icon: {
             Image(systemName: systemImage).font(.caption2)
         }
-        .foregroundStyle(.secondary)
+        .foregroundStyle(settings.bibleTextColor?.opacity(0.6) ?? Color.secondary)
     }
 
     private var outlineSection: some View {
@@ -244,6 +258,7 @@ struct ChapterRelatedContentPanel: View {
             } label: {
                 Label("개요 화면 열기", systemImage: "arrow.up.right.square")
             }
+            .listRowBackground(Color.clear)
         }
     }
 
@@ -255,14 +270,14 @@ struct ChapterRelatedContentPanel: View {
                 } label: {
                     Image(systemName: isExpanded.wrappedValue ? "chevron.down" : "chevron.right")
                         .font(.caption2)
-                        .foregroundStyle(.secondary)
+                        .foregroundStyle(settings.bibleTextColor?.opacity(0.6) ?? Color.secondary)
                 }
                 .buttonStyle(.plain)
                 .help(isExpanded.wrappedValue ? "접기" : "펼치기")
 
                 Text(title)
                     .font(.body)
-                    .foregroundStyle(.secondary)
+                    .foregroundStyle(settings.bibleTextColor?.opacity(0.6) ?? Color.secondary)
 
                 Spacer()
 
@@ -289,7 +304,7 @@ struct ChapterRelatedContentPanel: View {
                     } label: {
                         Label("새창으로 보기", systemImage: "macwindow")
                             .font(.body)
-                            .foregroundStyle(.secondary)
+                            .foregroundStyle(settings.bibleTextColor?.opacity(0.6) ?? Color.secondary)
                     }
                     .buttonStyle(.plain)
                     .help("별도 창에서 보기")
@@ -314,10 +329,15 @@ struct ChapterRelatedContentPanel: View {
                         .padding(8)
                 }
                 .frame(height: Self.outlineBoxHeight)
+                // [2026-09-12 확인] 이 개요 미리보기 배경(#F5F1E8)은 2026-08-15
+                // 주석대로 실제 편집 화면(`OutlineBookBulkEditView`)과 일부러
+                // 맞춘 것이라 테마와 무관하게 그대로 둔다 — 여기만 바꾸면
+                // 원본 편집 화면과 미리보기가 서로 달라 보이게 된다.
                 .background(EditorDefaultStyle.backgroundSwiftUIColor)
                 .clipShape(RoundedRectangle(cornerRadius: 6))
             }
         }
+        .listRowBackground(Color.clear)
     }
 
     /// 저장된 RTF를 크기 변형 없이 그대로 디코딩해 `AttributedString`으로
@@ -377,13 +397,14 @@ struct ChapterRelatedContentPanel: View {
                             originBadge("이 절에 작성됨", systemImage: "square.and.pencil")
                             Text(memoPreview(memo))
                                 .font(.callout)
-                                .foregroundStyle(.primary)
+                                .foregroundStyle(settings.bibleTextColor ?? .primary)
                                 .lineSpacing(2)
                                 .lineLimit(2)
                         }
                         .padding(.vertical, 6)
                     }
                     .buttonStyle(.plain)
+                    .listRowBackground(Color.clear)
                 }
                 ForEach(mentionedMemos) { mention in
                     Button {
@@ -393,13 +414,14 @@ struct ChapterRelatedContentPanel: View {
                             originBadge("본문에서 언급됨", systemImage: "text.magnifyingglass")
                             Text(mention.snippet.isEmpty ? mention.searchText : mention.snippet)
                                 .font(.callout)
-                                .foregroundStyle(.primary)
+                                .foregroundStyle(settings.bibleTextColor ?? .primary)
                                 .lineSpacing(2)
                                 .lineLimit(2)
                         }
                         .padding(.vertical, 6)
                     }
                     .buttonStyle(.plain)
+                    .listRowBackground(Color.clear)
                 }
             }
         }
@@ -455,13 +477,13 @@ struct ChapterRelatedContentPanel: View {
                             originBadge("이 절에 작성됨 · \(wordSummaryDateLabel(summary))", systemImage: "square.and.pencil")
                             Text(wordSummaryTitleLine(summary))
                                 .font(.callout.bold())
-                                .foregroundStyle(.primary)
+                                .foregroundStyle(settings.bibleTextColor ?? .primary)
                                 .lineLimit(1)
                             let body = wordSummaryBodyPreview(summary)
                             if !body.isEmpty {
                                 Text(body)
                                     .font(.callout)
-                                    .foregroundStyle(.secondary)
+                                    .foregroundStyle(settings.bibleTextColor?.opacity(0.6) ?? Color.secondary)
                                     .lineSpacing(2)
                                     .lineLimit(2)
                             }
@@ -469,6 +491,7 @@ struct ChapterRelatedContentPanel: View {
                         .padding(.vertical, 6)
                     }
                     .buttonStyle(.plain)
+                    .listRowBackground(Color.clear)
                 }
                 ForEach(mentionedSummaries) { mention in
                     Button {
@@ -478,13 +501,14 @@ struct ChapterRelatedContentPanel: View {
                             originBadge("본문에서 언급됨", systemImage: "text.magnifyingglass")
                             Text(mention.snippet.isEmpty ? mention.searchText : mention.snippet)
                                 .font(.callout)
-                                .foregroundStyle(.primary)
+                                .foregroundStyle(settings.bibleTextColor ?? .primary)
                                 .lineSpacing(2)
                                 .lineLimit(2)
                         }
                         .padding(.vertical, 6)
                     }
                     .buttonStyle(.plain)
+                    .listRowBackground(Color.clear)
                 }
             }
         }
@@ -577,6 +601,7 @@ struct ChapterRelatedContentPanel: View {
                         }
                     }
                     .padding(.vertical, 6)
+                    .listRowBackground(Color.clear)
                 }
                 ForEach(groupedMentionedDocuments) { group in
                     // 탭하면 그룹의 대표(가장 먼저 등장한 mention) 위치로
@@ -592,18 +617,19 @@ struct ChapterRelatedContentPanel: View {
                                 if group.count > 1 {
                                     Text("\(group.count)곳에서 언급됨")
                                         .font(.caption2)
-                                        .foregroundStyle(.secondary)
+                                        .foregroundStyle(settings.bibleTextColor?.opacity(0.6) ?? Color.secondary)
                                 }
                             }
                             Text(group.representative.snippet.isEmpty ? group.representative.searchText : group.representative.snippet)
                                 .font(.callout)
-                                .foregroundStyle(.primary)
+                                .foregroundStyle(settings.bibleTextColor ?? .primary)
                                 .lineSpacing(2)
                                 .lineLimit(2)
                         }
                         .padding(.vertical, 6)
                     }
                     .buttonStyle(.plain)
+                    .listRowBackground(Color.clear)
                 }
             }
         }
@@ -642,7 +668,7 @@ struct ChapterRelatedContentPanel: View {
             originBadge("이 장에 연결됨", systemImage: "paperclip")
             Label(document.originalFilename, systemImage: "doc.text")
                 .font(.callout)
-                .foregroundStyle(.primary)
+                .foregroundStyle(settings.bibleTextColor ?? .primary)
                 .lineLimit(2)
         }
     }
@@ -650,6 +676,7 @@ struct ChapterRelatedContentPanel: View {
     private func emptyRow(_ text: String) -> some View {
         Text(text)
             .font(.caption)
-            .foregroundStyle(.secondary)
+            .foregroundStyle(settings.bibleTextColor?.opacity(0.6) ?? Color.secondary)
+            .listRowBackground(Color.clear)
     }
 }

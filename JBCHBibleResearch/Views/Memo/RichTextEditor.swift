@@ -321,6 +321,12 @@ private let toolbarFontSizes: [CGFloat] = [12, 13, 14, 15, 17, 19, 22, 26, 32]
 
 private struct RichTextEditorToolbarContent: View {
     var proxy: RichTextEditingProxy
+    /// [2026-09-11 추가] 사용자 요청 — "iOS 한정 에디터의 기능아이콘 색상
+    /// (볼드/이탤릭/언더라인...)"이 테마를 안 따름. macOS 전용 리치 텍스트
+    /// 에디터(네이티브 `usesInspectorBar` 등)는 별개 논의 대상 — 이 툴바는
+    /// 현재 모든 호출부가 `showsToolbarOnMac: false`라 실질적으로 iOS
+    /// 전용이다.
+    private var settings: UserSettingsStore { .shared }
 
     var body: some View {
         HStack(spacing: 14) {
@@ -400,6 +406,10 @@ private struct RichTextEditorToolbarContent: View {
         }
         .buttonStyle(.plain)
         .font(.system(size: 15))
+        // [2026-09-11 추가] 위 `settings` 선언부 주석 참고 — 아이콘 전부가
+        // `Image(systemName:)` + `.buttonStyle(.plain)`이라 개별 지정 없이
+        // 이 컨테이너 한 곳에서 색을 물려주면 전부 함께 바뀐다.
+        .foregroundStyle(settings.bibleTextColor ?? .primary)
         .padding(.vertical, 6)
     }
 }

@@ -13,6 +13,13 @@ import BibleResearchModels
 
 struct WordNoteRowView: View {
     let item: WordNoteItem
+    /// [2026-09-09 추가] 사용자 요청 — "테마를 적용하면 배경색과 글자색을
+    /// 전체적으로 적용할 수 있는가(... 말씀노트 화면 배경색...)." 이 행의
+    /// 제목/좌표 텍스트는 지금까지 시스템 기본색(`.primary`/`.secondary`)을
+    /// 썼다 — `WordNoteHomeView`가 이제 리스트 배경을 테마색으로 바꿀 수
+    /// 있으므로(그 파일 상단 주석 참고), 이 행 텍스트도 같은 색을 읽어야
+    /// 한다. `TranslationColumnView`와 같은 읽기 전용 접근 패턴.
+    private var settings: UserSettingsStore { .shared }
 
     var body: some View {
         VStack(alignment: .leading, spacing: 4) {
@@ -20,6 +27,11 @@ struct WordNoteRowView: View {
                 categoryBadge
                 Text(previewTitle)
                     .font(.headline)
+                    // [2026-09-09 추가] 위 `settings` 주석 참고 — 카테고리/
+                    // 인덱스 갱신 배지(아래)는 의미색(파랑·초록·주황)이라
+                    // 테마와 무관하게 그대로 두지만, 이 제목 텍스트는 리스트
+                    // 배경과 같은 테마 계열이어야 대비가 유지된다.
+                    .foregroundStyle(settings.bibleTextColor ?? .primary)
                     .lineLimit(1)
                 if item.pendingIndexRefresh {
                     indexRefreshBadge
@@ -33,7 +45,10 @@ struct WordNoteRowView: View {
                 }
             }
             .font(.caption)
-            .foregroundStyle(.secondary)
+            // [2026-09-09 수정] `TranslationColumnView` 아이콘들이 이미
+            // 쓰는 `settings.bibleTextColor ?? .secondary` 폴백 관례를
+            // 그대로 따랐다.
+            .foregroundStyle(settings.bibleTextColor ?? .secondary)
             if item.pendingIndexRefresh {
                 Text("이 항목을 열었다가 닫으면 관련 구절 인덱스가 다시 생성됩니다.")
                     .font(.caption2)
@@ -55,9 +70,14 @@ struct WordNoteRowView: View {
     }
 
     private var categoryColor: Color {
+        // [2026-09-11 수정] 사용자 재검토 요청 — "다른 화면(설정/검색/개요/
+        // 문서)의 항목 구분 배지는 전부 JBCHCategoryPalette를 쓰는데 이
+        // 배지만 iOS 기본색이다." 가죽 표지(개인 손글씨 느낌) → 개인 묵상,
+        // 서재 금박(이 탭 "새 항목" 버튼과 같은 대표색) → 말씀 요약으로
+        // 배정한다.
         switch item.category {
-        case .personalMemo: return .blue
-        case .verseSummary: return .green
+        case .personalMemo: return JBCHCategoryPalette.wood
+        case .verseSummary: return JBCHCategoryPalette.gold
         }
     }
 

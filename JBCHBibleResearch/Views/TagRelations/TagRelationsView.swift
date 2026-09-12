@@ -229,7 +229,7 @@ private struct TagNodeView: View {
     var body: some View {
         VStack(spacing: 2) {
             Circle()
-                .fill(Color.accentColor.opacity(0.85))
+                .fill(Color("AccentColor").opacity(0.85))
                 .frame(width: 14, height: 14)
             Text(node.tag.name)
                 .font(.caption2)

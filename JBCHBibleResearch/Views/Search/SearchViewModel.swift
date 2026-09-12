@@ -98,6 +98,11 @@ struct MemoSearchResult: Identifiable {
     var bodyOccurrenceSum: Int = 0
     var matchedTagNames: [String] = []
     var highlightKeywords: [String] = []
+    /// [2026-09-10 추가] `VerseSearchResult.matchCount`와 같은 개념 — 중복
+    /// 제거된 매칭 검색어 수(`WordMatchScore.distinctTermMatchCount`). 화면
+    /// 표시(`verseMatchCountBadge`)와 정렬(`sortedByWordCoverage`)이 이제
+    /// 성경구절 탭과 같은 이 값을 함께 쓴다.
+    var matchedWordCount: Int = 0
 }
 
 struct SummarySearchResult: Identifiable {
@@ -107,6 +112,8 @@ struct SummarySearchResult: Identifiable {
     var bodyOccurrenceSum: Int = 0
     var matchedTagNames: [String] = []
     var highlightKeywords: [String] = []
+    /// [2026-09-10 추가] `MemoSearchResult.matchedWordCount`와 같은 이유.
+    var matchedWordCount: Int = 0
 }
 
 /// [2026-08-18 신설] "메모" — `VersePhraseNote`(절 안의 특정 구간에 짧게 붙이는
@@ -121,6 +128,8 @@ struct PhraseNoteSearchResult: Identifiable {
     /// 검색어가 이 메모가 붙은 절을 가리키는 성경 참조였는지 — `noteText`
     /// 자체엔 매칭이 없어도(예: 참조만 입력) 이 값이 true면 목록에 포함한다.
     var isReferenceMatch: Bool = false
+    /// [2026-09-10 추가] `MemoSearchResult.matchedWordCount`와 같은 이유.
+    var matchedWordCount: Int = 0
 }
 
 /// [2026-08-18 신설] "개요" — 책 단위(`BookOutline`)와 장 단위(`ChapterSummary`)
@@ -138,6 +147,8 @@ struct OutlineSearchResult: Identifiable {
     var highlightKeywords: [String] = []
     /// 검색어가 이 개요의 책(+장)을 가리키는 성경 참조였는지.
     var isReferenceMatch: Bool = false
+    /// [2026-09-10 추가] `MemoSearchResult.matchedWordCount`와 같은 이유.
+    var matchedWordCount: Int = 0
 
     var id: String {
         switch kind {
@@ -179,6 +190,8 @@ struct DocumentSearchResult: Identifiable {
     var bodyOccurrenceSum: Int = 0
     var matchedTagNames: [String] = []
     var highlightKeywords: [String] = []
+    /// [2026-09-10 추가] `MemoSearchResult.matchedWordCount`와 같은 이유.
+    var matchedWordCount: Int = 0
 }
 
 @MainActor
@@ -452,11 +465,23 @@ final class SearchViewModel {
     /// matchCount`처럼 "중복 제거된 매칭 단어 수"를 담는 필드가
     /// `OutlineSearchResult`엔 없음 — `bodyOccurrenceSum`은 "본문 총 등장
     /// 횟수"라 의미가 다름) 관련도 순서(`outlineResults`가 이미 정렬해 온
-    /// 순서)를 그룹 등장 순서로 썼는데, 이번 요청이 그 결정을 명시적으로
-    /// 정경 순서로 뒤집었다 — `Book.orderIndex`(원본 `Books.order_index`
-    /// 컬럼, `BibleReferenceModels.Book` 선언부 주석 참고 — `bookId`는
-    /// 그냥 기본키일 뿐 정경 순서를 보장하는 필드가 아니다)를 오름차순으로
-    /// 쓴다. `searchVerses`의 정경순 정렬(`orderIndex` 사용, 이 파일
+    /// 순서)를 그룹 등장 순서로 썼는데, 그 요청이 그 결정을 명시적으로
+    /// 정경 순서로 뒤집었었다.
+    ///
+    /// [그룹 정렬 규칙 재수정, 2026-09-11] 사용자 보고 — "'다윗 솔로몬'
+    /// 검색시 두 단어 매칭하는 사사기가 제일 위에 나와야 하는데, 1단어
+    /// 매칭된 레위기가 먼저 나옴." 위 2026-09-05 결정 당시엔 `OutlineSearchResult`에
+    /// 매칭 강도 필드가 없다는 게 전제였는데, 2026-09-10에 바로 그 필드
+    /// (`matchedWordCount`, 이 struct 선언부 참고 — "서로 다른 검색어가 몇
+    /// 개나 일치했는지, 중복 제거")가 이미 추가되어 각 항목에 채워지고
+    /// 있어 그 전제가 더 이상 사실이 아니었다. 사용자에게 확인 결과("일치도
+    /// 우선, 동률일 때만 정경순") — 그룹의 대표 관련도는 그 책 그룹 안에서
+    /// 가장 강하게 매칭된 항목의 `matchedWordCount` 최댓값(각 항목에 이미
+    /// 채워져 있는 값 재사용, 새로 계산하지 않음)으로 잡고, 이 값이 같을
+    /// 때만 아래 `Book.orderIndex`(정경 순서)로 그룹 순서를 정한다.
+    /// `Book.orderIndex`는 `Books.order_index` 컬럼(`BibleReferenceModels.
+    /// Book` 선언부 주석 참고 — `bookId`는 그냥 기본키일 뿐 정경 순서를
+    /// 보장하는 필드가 아니다) — `searchVerses`의 정경순 정렬(이 파일
     /// 위쪽)과 같은 필드·같은 근거다. 그룹 안에서는 여전히 `chapter`가
     /// `nil`(책 전체 개요)인 항목을 먼저, 그다음 장 오름차순으로 정렬한다 —
     /// `groupedVerseResults`가 그룹 안에서 절 오름차순으로 정렬하는 것과
@@ -490,6 +515,14 @@ final class SearchViewModel {
                 )
             }
             .sorted { lhs, rhs in
+                // [2026-09-11 수정] 위 "그룹 정렬 규칙 재수정" 주석 참고 —
+                // 일치도(그룹 내 최댓값)를 우선 비교하고, 같을 때만 정경
+                // 순서로 비교한다.
+                let lhsRelevance = lhs.items.map(\.matchedWordCount).max() ?? 0
+                let rhsRelevance = rhs.items.map(\.matchedWordCount).max() ?? 0
+                if lhsRelevance != rhsRelevance {
+                    return lhsRelevance > rhsRelevance
+                }
                 let lhsOrder = booksProvider.book(id: lhs.bookId)?.orderIndex ?? lhs.bookId
                 let rhsOrder = booksProvider.book(id: rhs.bookId)?.orderIndex ?? rhs.bookId
                 return lhsOrder < rhsOrder
@@ -881,6 +914,32 @@ final class SearchViewModel {
         return String(joined[..<cutIndex]) + "…"
     }
 
+    /// [2026-09-10 신설] 사용자 요청 — "여러 단어(띄어쓰기로 구분된 단어)
+    /// 검색시 개요/메모 말씀 노트/연구 문서 검색결과도 성경 검색과 동일한
+    /// 로직으로 검색이 될 수 있도록." 사용자가 재현한 구체적 사례 — "다윗
+    /// 솔로몬"으로 검색하면 성경구절 탭은 "두 단어가 모두 포함된 구절"을
+    /// 최우선으로 두는데, 개요/메모/개인 묵상/말씀 요약/연구문서 5개 카테고리는
+    /// 지금까지 단어 커버리지(`distinctTermMatchCount`)와 태그/참조 일치
+    /// 보너스를 `tagCount + wordScore.distinctTermMatchCount`처럼 하나의
+    /// 정수로 합산해 비교했다 — 검색어가 2개뿐이면 대부분 같은 순서가
+    /// 나오지만(커버리지 최대값이 보너스보다 크게 벌어지므로), 보장된 우선순위는
+    /// 아니었고 실제로 사용자에게는 "몇회 일치가 강조됨"으로 보였다. 성경구절
+    /// 탭(`KeywordMatchScorer.Score`의 계층적 `<` — `allWordsMatched`를 먼저
+    /// 비교하고 그다음에만 개수를 본다)과 정확히 같은 원칙을 옮겨, 단어
+    /// 커버리지가 같을 때만 그 외 신호(태그/참조/제목 일치)로 순위를 가른다.
+    /// `Array.sorted(by:)`는 Swift 표준 라이브러리에서 안정 정렬이 보장되므로
+    /// (Swift 공식 문서, Collection.sorted(by:) 참고), 커버리지·보너스가 모두
+    /// 같은 항목은 각 카테고리가 원래 조회한 순서(`updatedAt`/`uploadedAt`
+    /// 내림차순)를 그대로 유지한다.
+    private static func sortedByWordCoverage<T>(
+        _ results: [(result: T, wordCount: Int, bonus: Int)]
+    ) -> [(result: T, wordCount: Int, bonus: Int)] {
+        results.sorted { lhs, rhs in
+            if lhs.wordCount != rhs.wordCount { return lhs.wordCount > rhs.wordCount }
+            return lhs.bonus > rhs.bonus
+        }
+    }
+
     /// `sourceType`/`sourceId`에 걸린 `VerseMention`들 중 이번 검색어의 성경 참조와
     /// 겹치는 것들의 원문 표현(중복 제거) — `DocumentsHomeView.verseMentionSearchTexts`와
     /// 같은 로직을, memo/document/wordSummary 세 소스 타입에 공용으로 쓸 수 있게
@@ -1232,7 +1291,7 @@ final class SearchViewModel {
             liveContentById: Dictionary(uniqueKeysWithValues: chapterSummaries.map { ($0.id.uuidString, $0.contentText) })
         )
 
-        var results: [(result: OutlineSearchResult, score: Int)] = []
+        var results: [(result: OutlineSearchResult, wordCount: Int, bonus: Int)] = []
 
         for outline in bookOutlines {
             let refMatch = queryMatches.contains { $0.bookId == outline.bookId }
@@ -1248,9 +1307,10 @@ final class SearchViewModel {
             guard refMatch || wordScore.isTextMatch else { continue }
             let result = OutlineSearchResult(
                 kind: .book(outline), bodyExcerpt: wordScore.bodyExcerpt, bodyOccurrenceSum: wordScore.bodyOccurrenceSum,
-                highlightKeywords: wordScore.highlightKeywords, isReferenceMatch: refMatch
+                highlightKeywords: wordScore.highlightKeywords, isReferenceMatch: refMatch,
+                matchedWordCount: wordScore.distinctTermMatchCount
             )
-            results.append((result, wordScore.distinctTermMatchCount + (refMatch ? 1 : 0)))
+            results.append((result, wordScore.distinctTermMatchCount, refMatch ? 1 : 0))
         }
         for summary in chapterSummaries {
             let refMatch = queryMatches.contains { $0.bookId == summary.bookId && $0.chapter == summary.chapter }
@@ -1262,11 +1322,12 @@ final class SearchViewModel {
             guard refMatch || wordScore.isTextMatch else { continue }
             let result = OutlineSearchResult(
                 kind: .chapter(summary), bodyExcerpt: wordScore.bodyExcerpt, bodyOccurrenceSum: wordScore.bodyOccurrenceSum,
-                highlightKeywords: wordScore.highlightKeywords, isReferenceMatch: refMatch
+                highlightKeywords: wordScore.highlightKeywords, isReferenceMatch: refMatch,
+                matchedWordCount: wordScore.distinctTermMatchCount
             )
-            results.append((result, wordScore.distinctTermMatchCount + (refMatch ? 1 : 0)))
+            results.append((result, wordScore.distinctTermMatchCount, refMatch ? 1 : 0))
         }
-        return results.sorted { $0.score > $1.score }.map(\.result)
+        return Self.sortedByWordCoverage(results).map(\.result)
     }
 
     // MARK: - 키워드 검색: 메모(VersePhraseNote)
@@ -1280,7 +1341,7 @@ final class SearchViewModel {
             category: .phraseNote, words: words,
             liveContentById: Dictionary(uniqueKeysWithValues: notes.map { ($0.id.uuidString, $0.noteText) })
         )
-        var results: [(result: PhraseNoteSearchResult, score: Int)] = []
+        var results: [(result: PhraseNoteSearchResult, wordCount: Int, bonus: Int)] = []
         for note in notes {
             let refMatch = queryMatches.contains { query in
                 query.bookId == note.bookId && query.chapter == note.chapter
@@ -1294,11 +1355,12 @@ final class SearchViewModel {
             guard refMatch || wordScore.isTextMatch else { continue }
             let result = PhraseNoteSearchResult(
                 note: note, bodyExcerpt: wordScore.bodyExcerpt, bodyOccurrenceSum: wordScore.bodyOccurrenceSum,
-                highlightKeywords: wordScore.highlightKeywords, isReferenceMatch: refMatch
+                highlightKeywords: wordScore.highlightKeywords, isReferenceMatch: refMatch,
+                matchedWordCount: wordScore.distinctTermMatchCount
             )
-            results.append((result, wordScore.distinctTermMatchCount + (refMatch ? 1 : 0)))
+            results.append((result, wordScore.distinctTermMatchCount, refMatch ? 1 : 0))
         }
-        return results.sorted { $0.score > $1.score }.map(\.result)
+        return Self.sortedByWordCoverage(results).map(\.result)
     }
 
     // MARK: - 키워드 검색: 개인 묵상(UserMemo)
@@ -1316,7 +1378,7 @@ final class SearchViewModel {
             extraTerms: categoryWideVerseSearchTexts(mentions: mentions, sourceType: .memo, queryMatches: queryMatches),
             liveContentById: Dictionary(uniqueKeysWithValues: memos.map { ($0.id.uuidString, $0.contentText) })
         )
-        var results: [(result: MemoSearchResult, score: Int)] = []
+        var results: [(result: MemoSearchResult, wordCount: Int, bonus: Int)] = []
         for memo in memos {
             let tagNames = (memo.memoTags ?? []).compactMap { $0.tag?.name }
             let tagCount = words.filter { word in tagNames.contains { $0.localizedCaseInsensitiveContains(word) } }.count
@@ -1333,11 +1395,12 @@ final class SearchViewModel {
             guard tagCount > 0 || wordScore.isTextMatch else { continue }
             let result = MemoSearchResult(
                 memo: memo, bodyExcerpt: wordScore.bodyExcerpt, bodyOccurrenceSum: wordScore.bodyOccurrenceSum,
-                matchedTagNames: matchedTagNames, highlightKeywords: wordScore.highlightKeywords
+                matchedTagNames: matchedTagNames, highlightKeywords: wordScore.highlightKeywords,
+                matchedWordCount: wordScore.distinctTermMatchCount
             )
-            results.append((result, tagCount + wordScore.distinctTermMatchCount))
+            results.append((result, wordScore.distinctTermMatchCount, tagCount))
         }
-        return results.sorted { $0.score > $1.score }.map(\.result)
+        return Self.sortedByWordCoverage(results).map(\.result)
     }
 
     // MARK: - 키워드 검색: 말씀 요약(VerseSummary)
@@ -1353,7 +1416,7 @@ final class SearchViewModel {
             extraTerms: categoryWideVerseSearchTexts(mentions: mentions, sourceType: .wordSummary, queryMatches: queryMatches),
             liveContentById: Dictionary(uniqueKeysWithValues: summaries.map { ($0.id.uuidString, $0.contentText) })
         )
-        var results: [(result: SummarySearchResult, score: Int)] = []
+        var results: [(result: SummarySearchResult, wordCount: Int, bonus: Int)] = []
         for summary in summaries {
             let tagNames = (summary.summaryTags ?? []).compactMap { $0.tag?.name }
             let tagCount = words.filter { word in tagNames.contains { $0.localizedCaseInsensitiveContains(word) } }.count
@@ -1368,11 +1431,12 @@ final class SearchViewModel {
             guard tagCount > 0 || wordScore.isTextMatch else { continue }
             let result = SummarySearchResult(
                 summary: summary, bodyExcerpt: wordScore.bodyExcerpt, bodyOccurrenceSum: wordScore.bodyOccurrenceSum,
-                matchedTagNames: matchedTagNames, highlightKeywords: wordScore.highlightKeywords
+                matchedTagNames: matchedTagNames, highlightKeywords: wordScore.highlightKeywords,
+                matchedWordCount: wordScore.distinctTermMatchCount
             )
-            results.append((result, tagCount + wordScore.distinctTermMatchCount))
+            results.append((result, wordScore.distinctTermMatchCount, tagCount))
         }
-        return results.sorted { $0.score > $1.score }.map(\.result)
+        return Self.sortedByWordCoverage(results).map(\.result)
     }
 
     // MARK: - 키워드 검색: 연구문서(SourceDocument)
@@ -1416,7 +1480,7 @@ final class SearchViewModel {
             liveContentById: Dictionary(uniqueKeysWithValues: documents.map { ($0.id.uuidString, $0.cachedCombinedText) })
         )
 
-        var results: [(result: DocumentSearchResult, score: Int)] = []
+        var results: [(result: DocumentSearchResult, wordCount: Int, bonus: Int)] = []
         for document in documents {
             let tagNames = (document.documentTags ?? []).compactMap { $0.tag?.name }
             let tagCount = words.filter { word in tagNames.contains { $0.localizedCaseInsensitiveContains(word) } }.count
@@ -1441,14 +1505,15 @@ final class SearchViewModel {
             let result = DocumentSearchResult(
                 document: document, pageNumber: nil,
                 bodyExcerpt: wordScore.bodyExcerpt, bodyOccurrenceSum: wordScore.bodyOccurrenceSum,
-                matchedTagNames: matchedTagNames, highlightKeywords: wordScore.highlightKeywords
+                matchedTagNames: matchedTagNames, highlightKeywords: wordScore.highlightKeywords,
+                matchedWordCount: wordScore.distinctTermMatchCount
             )
-            results.append((result, tagCount + titleCount + wordScore.distinctTermMatchCount))
+            results.append((result, wordScore.distinctTermMatchCount, tagCount + titleCount))
         }
         if needsBackfillSave {
             try? modelContext.save()
         }
-        return results.sorted { $0.score > $1.score }.map(\.result)
+        return Self.sortedByWordCoverage(results).map(\.result)
     }
 
     // MARK: - AI 검색(임베딩 기반 의미검색, 2026-08-19 전면 교체)

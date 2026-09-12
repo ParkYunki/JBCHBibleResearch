@@ -31,6 +31,9 @@ struct WhatsNewEntry: Identifiable {
 
 enum WhatsNewContent {
     static let entries: [WhatsNewEntry] = [
+        WhatsNewEntry(version: "1.0.3", items: [
+            "검색 기능 개선"
+        ]),
         WhatsNewEntry(version: "1.0.2", items: [
             "UI 색상 및 기타 레이아웃 수정",
             "성경 스크롤 버그 수정",

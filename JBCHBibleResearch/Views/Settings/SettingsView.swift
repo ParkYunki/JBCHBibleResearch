@@ -624,8 +624,8 @@ private struct TranslationsSettingsTab: View {
                     .font(.caption2)
                     .padding(.horizontal, 6)
                     .padding(.vertical, 2)
-                    .background(Capsule().fill(Color.accentColor.opacity(0.15)))
-                    .foregroundStyle(Color.accentColor)
+                    .background(Capsule().fill(Color("AccentColor").opacity(0.15)))
+                    .foregroundStyle(Color("AccentColor"))
             }
             Spacer()
             if let index = displayedIndex {
@@ -918,8 +918,8 @@ private struct TranslationsManagementTab: View {
                     .font(.caption2)
                     .padding(.horizontal, 6)
                     .padding(.vertical, 2)
-                    .background(Capsule().fill(Color.accentColor.opacity(0.15)))
-                    .foregroundStyle(Color.accentColor)
+                    .background(Capsule().fill(Color("AccentColor").opacity(0.15)))
+                    .foregroundStyle(Color("AccentColor"))
             }
             Spacer()
             if let index = displayedIndex {
@@ -1178,28 +1178,54 @@ private struct AppearanceSettingsTab: View {
             // 문자열로 리셋) 옵션이 함께 없어진 것을 사용자가 다시 지적해,
             // 아래에 전용 초기화 버튼을 별도로 추가했다.
             Group {
-                // 배경과 글자색을 미리 맞춰 둔 테마 5종을 먼저 보여준다 —
-                // 대비가 안 맞는 조합(예: 밝은 배경 + 밝은 글자)을 고를
-                // 위험 없이 빠르게 고를 수 있다. `BibleSlideColorTheme.all`
-                // 참고.
+                // [2026-09-11 교체] 사용자 논의 — "테마 색상 5개 중 실제로
+                // 안 쓸 것 같은 조합이 대부분이니 2개(서재 아이보리/밤빛
+                // 서재)로 줄이고, 화면 모드처럼 라이트/다크/자동 3단으로
+                // 고르게 할 것." 남은 2개 프리셋이 정확히 라이트/다크에
+                // 1:1 대응해, 예전 가로 스크롤 스와치 대신 "화면 모드"
+                // Picker(1049번 줄 근처)와 같은 3단 세그먼트 하나로
+                // 대체한다 — 같은 선택지를 두 컨트롤로 중복 제공하지
+                // 않기 위함이며, "자동"은 스와치로는 애초에 표현할 수
+                // 없었다. `settings.bibleThemeModePreference`가 nil(3단
+                // 중 어디에도 해당하지 않는 커스텀 상태)이면 세그먼트
+                // 컨트롤에는 아무 것도 선택되지 않은 채로 보인다.
                 VStack(alignment: .leading, spacing: 8) {
                     Text("테마 색상")
                         .font(.caption)
                         .foregroundStyle(.secondary)
-                    ScrollView(.horizontal, showsIndicators: false) {
-                        HStack(spacing: 12) {
-                            ForEach(BibleSlideColorTheme.all) { theme in
-                                themeSwatchButton(theme)
+                    Picker(
+                        "테마 색상",
+                        selection: Binding(
+                            get: { settings.bibleThemeModePreference },
+                            set: { newMode in
+                                guard let newMode else { return }
+                                settings.applyThemeMode(newMode, systemColorScheme: environment.colorScheme)
                             }
+                        )
+                    ) {
+                        ForEach(UserSettingsStore.BibleThemeModePreference.allCases) { mode in
+                            Text(mode.displayName).tag(Optional(mode))
                         }
                     }
+                    .pickerStyle(.segmented)
+                    // `VerseZoomView.translationSwitcher`와 같은 이유 —
+                    // macOS는 세그먼트 옆에 라벨을 텍스트로 그대로 보여줘
+                    // 바로 위 캡션과 중복되므로 숨긴다(iOS는 애초에 세그먼트
+                    // 라벨을 안 그림). 접근성 라벨("테마 색상")은 유지된다.
+                    .labelsHidden()
                 }
 
                 ColorPicker(
                     "배경색 직접 선택",
                     selection: Binding(
                         get: { settings.bibleBackgroundColor ?? Color.white },
-                        set: { settings.bibleBackgroundColorHex = $0.hexString(in: environment) }
+                        set: {
+                            settings.bibleBackgroundColorHex = $0.hexString(in: environment)
+                            // [2026-09-11 추가] 임의 색을 직접 고르면 위
+                            // 3단(라이트/다크/자동) 중 어디에도 더 이상
+                            // 해당하지 않는 상태가 된다 — 커스텀으로 표시.
+                            settings.markThemeModeAsCustom()
+                        }
                     ),
                     supportsOpacity: false
                 )
@@ -1208,7 +1234,11 @@ private struct AppearanceSettingsTab: View {
                     "글자색 직접 선택",
                     selection: Binding(
                         get: { settings.bibleTextColor ?? Color.primary },
-                        set: { settings.bibleTextColorHex = $0.hexString(in: environment) }
+                        set: {
+                            settings.bibleTextColorHex = $0.hexString(in: environment)
+                            // [2026-09-11 추가] 위 배경색 ColorPicker와 같은 이유.
+                            settings.markThemeModeAsCustom()
+                        }
                     ),
                     supportsOpacity: false
                 )
@@ -1222,6 +1252,9 @@ private struct AppearanceSettingsTab: View {
                 Button("시스템 기본색상으로 되돌리기") {
                     settings.bibleBackgroundColorHex = ""
                     settings.bibleTextColorHex = ""
+                    // [2026-09-11 추가] 위 ColorPicker와 같은 이유 — "시스템
+                    // 기본"도 3단 중 어디에도 해당하지 않는 커스텀 상태다.
+                    settings.markThemeModeAsCustom()
                 }
                 .disabled(settings.bibleBackgroundColorHex.isEmpty && settings.bibleTextColorHex.isEmpty)
             }
@@ -1266,11 +1299,32 @@ private struct AppearanceSettingsTab: View {
     }
 
     private var previewRow: some View {
-        HStack(alignment: .top, spacing: 8) {
+        // [2026-09-09 수정] `TranslationColumnView.VerseRow`에서 절 번호 뱃지
+        // 상단이 본문 텍스트 상단보다 위로 떠 보이는 문제를 `.firstTextBaseline`
+        // 정렬로 고친 것과 같은 이유로 여기도 맞춘다(그 파일의 해당 수정
+        // 주석 참고 — 작은 뱃지 글꼴과 큰 본문 글꼴의 "상자 윗변"은 같아도
+        // 폰트 어센더 차이로 잉크 시작 높이가 달라, 베이스라인 기준 정렬이
+        // 필요하다). 이 미리보기가 실제 조회 화면과 다른 정렬을 보여주면
+        // 아래 "테마 색상" 3단 선택을 눌러보는 사용자가 실제 결과를 여기서
+        // 확인할 수 없게 된다.
+        HStack(alignment: .firstTextBaseline, spacing: 8) {
+            // [2026-09-09 수정] `TranslationColumnView.VerseRow`의 절 번호를
+            // 짙은 뱃지로 바꾼 변경과 짝을 맞춘다 — 이 미리보기가 실제 성경
+            // 조회 화면과 다른 모양(예전 그대로의 회색 숫자)을 보여주면, 이
+            // 바로 위 "테마 색상" 3단 선택을 눌러보는 사용자가 실제로 뭐가
+            // 바뀌는지 여기서 확인할 수 없게 된다 — 뱃지 배경/숫자색 공식
+            // (글자색/배경색을 서로 뒤집어 쓰는 것)도 그 파일의 것과 완전히
+            // 동일하게 맞췄다.
             Text("1")
-                .font(settings.bibleVerseNumberFont)
-                .foregroundStyle(.secondary)
-                .frame(minWidth: 20, alignment: .trailing)
+                .font(settings.bibleVerseNumberFont.weight(.semibold))
+                .foregroundStyle(settings.bibleBackgroundColor ?? .white)
+                .padding(.horizontal, 4)
+                .padding(.vertical, 1)
+                .frame(minWidth: 20)
+                .background(
+                    settings.bibleTextColor ?? JBCHCategoryPalette.navy,
+                    in: RoundedRectangle(cornerRadius: 5, style: .continuous)
+                )
             Text("태초에 하나님이 천지를 창조하시니라")
                 .font(settings.bibleBodyFont)
                 .foregroundStyle(settings.bibleTextColor ?? Color.primary)
@@ -1282,40 +1336,6 @@ private struct AppearanceSettingsTab: View {
         .padding(8)
         .background(settings.bibleBackgroundColor ?? Color.clear)
         .clipShape(RoundedRectangle(cornerRadius: 6))
-    }
-
-    /// [2026-09-01 추가] "테마 색상" 한 항목(배경+글자색 조합)을 스와치 하나로
-    /// 보여주는 버튼 — 탭하면 배경색/글자색을 동시에 그 테마 값으로 바꾼다.
-    private func themeSwatchButton(_ theme: BibleSlideColorTheme) -> some View {
-        let isSelected = settings.bibleBackgroundColorHex == theme.backgroundHex
-            && settings.bibleTextColorHex == theme.textHex
-        return Button {
-            settings.bibleBackgroundColorHex = theme.backgroundHex
-            settings.bibleTextColorHex = theme.textHex
-        } label: {
-            VStack(spacing: 6) {
-                RoundedRectangle(cornerRadius: 8)
-                    .fill(theme.background)
-                    .frame(width: 56, height: 40)
-                    .overlay {
-                        Text("가")
-                            .font(.headline)
-                            .foregroundStyle(theme.text)
-                    }
-                    .overlay {
-                        RoundedRectangle(cornerRadius: 8)
-                            .strokeBorder(
-                                isSelected ? Color.accentColor : Color.secondary.opacity(0.3),
-                                lineWidth: isSelected ? 2 : 1
-                            )
-                    }
-                Text(theme.name)
-                    .font(.caption2)
-                    .foregroundStyle(.secondary)
-                    .lineLimit(1)
-            }
-        }
-        .buttonStyle(.plain)
     }
 
     /// [2026-09-03 신설] 위 `compactSizeControlRow`를 macOS/iPadOS 전용으로
@@ -1384,6 +1404,11 @@ private struct AppearanceSettingsTab: View {
 
 private struct BibleCopyFormatSettingsTab: View {
     @Environment(\.modelContext) private var modelContext
+    // [2026-09-11 추가] 아래 `quotePreviewAccent`가 시스템 라이트/다크
+    // 모드에 따라 밤빛 남색 중 어느 변형을 쓸지 고르는 데 필요하다 — 이
+    // 화면은 성경 조회 테마(배경/글자색)를 입지 않는 자리라 시스템 자체의
+    // 모드만 보면 된다.
+    @Environment(\.colorScheme) private var colorScheme
     @State private var settings = UserSettingsStore.shared
     /// "번역본이 한 개라면 비활성화"(사용자 요청 원문)를 위해 등록된 번역본 총
     /// 개수를 본다 — 실제 복사 시점에 몇 개를 함께 복사하는지가 아니라, 이
@@ -1482,11 +1507,27 @@ private struct BibleCopyFormatSettingsTab: View {
             }
 
             Section {
+                // [2026-09-11 변경] 사용자 재검토 요청 — "테마색상 팔레트
+                // 6개가 실제로는 2~3톤처럼 보인다." 밤빛 남색을 이 자리에
+                // 명시 배정한다 — 실제로 복사/공유될 성경 본문 서식을 그대로
+                // 보여주는 자리라, 팔레트 선언부 주석의 "성경 본문/번역본과
+                // 직접 관련된 항목" 의도와 맞는다. 배경은 아주 옅게(8%)만
+                // 깔아 미리보기 텍스트 자체의 대비를 해치지 않고, 테두리로
+                // 밤빛 남색의 존재를 분명히 드러낸다.
                 Text(previewText)
                     .font(.callout)
                     .textSelection(.enabled)
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .fixedSize(horizontal: false, vertical: true)
+                    .padding(12)
+                    .background(
+                        quotePreviewAccent.opacity(0.08),
+                        in: RoundedRectangle(cornerRadius: 8, style: .continuous)
+                    )
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 8, style: .continuous)
+                            .strokeBorder(quotePreviewAccent, lineWidth: 1)
+                    )
             } header: {
                 Label("미리보기", systemImage: "text.quote")
             }
@@ -1497,6 +1538,13 @@ private struct BibleCopyFormatSettingsTab: View {
 
     private func loadTranslationCount() {
         registeredTranslationCount = (try? modelContext.fetch(FetchDescriptor<TranslationRegistry>()))?.count ?? 0
+    }
+
+    /// [2026-09-11 신설] 위 미리보기 카드가 쓰는 밤빛 남색 — 시스템이
+    /// 다크 모드면 밝게 섞은 변형(`navyOnDark`)을, 아니면 원래 값을 쓴다
+    /// (`JBCHCategoryPalette.navyOnDark` 선언부 주석의 대비 계산 참고).
+    private var quotePreviewAccent: Color {
+        colorScheme == .dark ? JBCHCategoryPalette.navyOnDark : JBCHCategoryPalette.navy
     }
 
     /// 창세기 1:1-2 두 절, 번역본 1~2개(등록 개수에 따라)로 실제 서식 함수를
@@ -1690,6 +1738,34 @@ private struct LicenseSettingsTab: View {
                 Label("오픈소스 라이선스 고지", systemImage: "doc.plaintext")
             } footer: {
                 Text("원문 정보 화면의 한글 뜻풀이는 위 STEPBible 영어 뜻풀이를 기기 내(Apple Translation 프레임워크) 자동 번역한 것이며, 사용자가 직접 수정할 수 있습니다. 신학 용어의 표준 역어와 다를 수 있습니다.")
+            }
+
+            // [2026-09-10 추가] 사용자 요청 — "국민대학교 성곡 세리프체를 각
+            // 기능 타이틀에 사용, 라이선스 내용 추가, 첨부 이미지도 필요하면
+            // 표시." 국민대학교 창학 80주년 기념 서체 배포 페이지
+            // (https://80.kookmin.ac.kr/vision/font)에 명시된 라이선스 조건과,
+            // 폰트 파일 자체(Fonts/KMU80SungkokSerif.otf)의 name 테이블에 담긴
+            // 저작권/상표 고지(fonttools로 직접 확인, 추측 아님)를 그대로
+            // 옮겼다. 페이지에는 저작권 "표시 문구"의 정확한 예시 텍스트나
+            // 앱 내 임베딩에 대한 별도 조항은 없었다 — 있는 그대로만 적는다.
+            // 첨부받은 CC BY-ND 배지 이미지는 Assets.xcassets에
+            // "LicenseCCBYND" 이미지셋으로 추가해 아래에 함께 보여준다.
+            Section {
+                Text("각 기능 화면 상단 타이틀에는 국민대학교 창학 80주년 기념 서체 'KMU80 성곡 세리프(Sungkok Serif)'를 사용합니다. 이 폰트의 저작권은 국민대학교에 있으며(Copyright © 2026 KOOKMIN UNIVERSITY. ALL RIGHTS RESERVED.), 국민대학교 산학협력으로 (주)티랩이 제작했습니다.")
+
+                Link("성곡 세리프체 배포 페이지 보기", destination: URL(string: "https://80.kookmin.ac.kr/vision/font")!)
+
+                Image("LicenseCCBYND")
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+                    .frame(maxWidth: 220)
+                    .accessibilityLabel("CC BY-ND 라이선스 배지")
+
+                Text("라이선스: CC BY-ND(저작자표시-변경금지). 저작권 정보를 표시하면 상업적 이용을 포함해 사용할 수 있으나, 서체 자체를 변경하거나 2차적 저작물을 만들 수 없고, 폰트 파일 자체를 유료로 재판매할 수 없습니다.")
+            } header: {
+                Label("타이틀 서체 라이선스", systemImage: "textformat")
+            } footer: {
+                Text("배포 페이지에 저작권 표시 문구의 구체적 예시나 앱 내 임베딩에 대한 별도 조항은 없어, 위 문구는 페이지에 명시된 라이선스 조건과 폰트 파일에 내장된 저작권 고지를 그대로 옮긴 것입니다.")
             }
         }
         .formStyle(.grouped)

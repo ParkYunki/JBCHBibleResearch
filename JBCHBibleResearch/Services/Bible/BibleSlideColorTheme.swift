@@ -45,22 +45,23 @@ struct BibleSlideColorTheme: Identifiable {
     var background: Color { Color(hex: backgroundHex) ?? .black }
     var text: Color { Color(hex: textHex) ?? .white }
 
-    /// 퍼스널 컬러 팔레트 기반 5가지 테마 조합 — 위 2026-09-04 개정 주석 참고.
+    /// [2026-09-11 축소] 사용자 논의 — "테마 색상 5개 중 실제로 안 쓸 것
+    /// 같은 색상 세트가 대부분" → 5개 중 2개(서재 아이보리=라이트, 밤빛
+    /// 서재=다크)만 남기고 나머지 3개(가죽 서고/서고 청람/와인 저녁)는
+    /// 완전히 삭제했다. 그 3개 색 자체(가죽 표지·서고 청람·와인 적갈)가
+    /// 없어지는 것은 아니고, `JBCHCategoryPalette`의 고정 팔레트 색으로
+    /// 카드 테두리·리스트 구분선 같은 "읽기 배경과 무관한 구조적 UI" 역할에
+    /// 재배정했다(`SearchView.groupCardBorder` 등 각 호출부 주석 참고) —
+    /// "테마 색상"(배경/글자 조합) 자리에서만 빠졌을 뿐이다.
     static let all: [BibleSlideColorTheme] = [
         // 책장 아이보리(#F7F0E2) 배경 그대로 + 짙은 잉크색 글자 — 밝은 화면을
-        // 선호할 때의 기본값. 대비 15.1:1.
+        // 선호할 때의 기본값. 대비 15.1:1. `UserSettingsStore.
+        // BibleThemeModePreference.light`가 이 이름으로 찾아 쓴다.
         BibleSlideColorTheme(name: "서재 아이보리", backgroundHex: "#F7F0E2", textHex: "#241A10"),
         // 밤빛 남색(#182644) 배경 그대로 + 연한 금박(#E4C98A) 글자 — 이미
         // `AccentColor` 다크모드가 쓰는 것과 같은 남색·금색 조합. 대비 9.3:1.
+        // `UserSettingsStore.BibleThemeModePreference.dark`가 이 이름으로
+        // 찾아 쓴다.
         BibleSlideColorTheme(name: "밤빛 서재", backgroundHex: "#182644", textHex: "#E4C98A"),
-        // 가죽 표지(#5A3826) 배경 그대로 + 책장 아이보리 글자 — 가죽 장정
-        // 책을 펼친 듯한 조합. 대비 9.1:1.
-        BibleSlideColorTheme(name: "가죽 서고", backgroundHex: "#5A3826", textHex: "#F7F0E2"),
-        // 서고 청람(`JBCHCategoryPalette.slateTeal` #4F6D6A)은 원색 그대로는
-        // 대비가 4.97:1로 다소 빠듯해, 배경 전용으로 한 단계 어둡게 낮춘 값
-        // (#374C4A)을 썼다 — 글자색은 책장 아이보리 그대로. 대비 8.1:1.
-        BibleSlideColorTheme(name: "서고 청람", backgroundHex: "#374C4A", textHex: "#F7F0E2"),
-        // 와인 적갈(#7A3B42) 배경 그대로 + 책장 아이보리 글자. 대비 7.3:1.
-        BibleSlideColorTheme(name: "와인 저녁", backgroundHex: "#7A3B42", textHex: "#F7F0E2"),
     ]
 }

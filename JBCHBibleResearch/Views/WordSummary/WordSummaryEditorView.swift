@@ -67,6 +67,10 @@ enum WordSummaryPresentationContext {
 
 struct WordSummaryEditorView: View {
     @Environment(\.modelContext) private var modelContext
+    /// [2026-09-11 추가] 사용자 보고 — "성경 - 말씀요약" 화면이 테마를 안
+    /// 따름. 이 화면을 감싸는 배경/보조 텍스트 색에 쓴다 — `RichTextEditor`
+    /// 자체 배경/글자색(`EditorDefaultStyle` 사용, 아래)엔 안 쓴다.
+    private var settings: UserSettingsStore { .shared }
     @Bindable var summary: VerseSummary
     var presentationContext: WordSummaryPresentationContext = .standalone
     /// [2026-08-12 추가] 사용자 요청 — "[말씀 복사] 탭/클릭시 오른쪽 사이드바
@@ -172,6 +176,11 @@ struct WordSummaryEditorView: View {
             tagSection
                 .padding()
         }
+        // [2026-09-11 추가] 위 `settings` 선언부 주석 참고 — 화면 배경만
+        // 테마를 따르게 하고, `RichTextEditor` 자체 배경(위 `editingBackgroundColor`/
+        // `readOnlyBackgroundColor: EditorDefaultStyle.backgroundColor`)은
+        // 그대로 둔다.
+        .background(settings.bibleBackgroundColor ?? Color.clear)
         .sheet(item: $drilldownTag) { tag in
             TagDrilldownView(tag: tag)
         }
@@ -243,7 +252,7 @@ struct WordSummaryEditorView: View {
                 ), in: 0...176) {
                     Text(summary.verse.map { "\($0)절" } ?? "절 없음")
                         .font(.body)
-                        .foregroundStyle(.secondary)
+                        .foregroundStyle(settings.bibleTextColor?.opacity(0.6) ?? Color.secondary)
                 }
                 .disabled(!isEditable)
                 .fixedSize()
@@ -265,7 +274,7 @@ case .contextual, .wordNoteList:
             HStack {
                 Text(contextualCoordinateLabel)
                     .font(.callout.bold())
-                    .foregroundStyle(.secondary)
+                    .foregroundStyle(settings.bibleTextColor?.opacity(0.6) ?? Color.secondary)
                 Spacer()
                 syncStatusLabel
                 // [2026-09-03 변경] 사용자 요청 — "아이폰 말씀요약 시 말씀요약
@@ -318,15 +327,15 @@ case .contextual, .wordNoteList:
         case .saved, .none:
             Label("동기화됨", systemImage: "checkmark.icloud")
                 .font(.caption)
-                .foregroundStyle(.secondary)
+                .foregroundStyle(settings.bibleTextColor?.opacity(0.6) ?? Color.secondary)
         case .pending:
             Label("대기 중", systemImage: "icloud")
                 .font(.caption)
-                .foregroundStyle(.secondary)
+                .foregroundStyle(settings.bibleTextColor?.opacity(0.6) ?? Color.secondary)
         case .saving:
             Label("동기화 중", systemImage: "arrow.triangle.2.circlepath.icloud")
                 .font(.caption)
-                .foregroundStyle(.secondary)
+                .foregroundStyle(settings.bibleTextColor?.opacity(0.6) ?? Color.secondary)
         }
     }
 
@@ -335,7 +344,7 @@ case .contextual, .wordNoteList:
 
     private var tagSection: some View {
         VStack(alignment: .leading, spacing: 8) {
-            Text("태그").font(.caption).foregroundStyle(.secondary)
+            Text("태그").font(.caption).foregroundStyle(settings.bibleTextColor?.opacity(0.6) ?? Color.secondary)
 
             FlowLayoutHStack {
                 ForEach(summaryTags) { tag in
@@ -354,7 +363,7 @@ case .contextual, .wordNoteList:
                     .font(.caption)
                     .padding(.horizontal, 8)
                     .padding(.vertical, 4)
-                    .background(Color.accentColor.opacity(0.15))
+                    .background(Color("AccentColor").opacity(0.15))
                     .clipShape(Capsule())
                 }
             }

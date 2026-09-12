@@ -253,7 +253,7 @@ private struct AppOnboardingSheet: View {
         HStack(spacing: 6) {
             ForEach(onboardingPages.indices, id: \.self) { index in
                 Circle()
-                    .fill(index == pageIndex ? Color.accentColor : Color.secondary.opacity(0.3))
+                    .fill(index == pageIndex ? Color("AccentColor") : Color.secondary.opacity(0.3))
                     .frame(width: 6, height: 6)
             }
         }

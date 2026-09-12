@@ -16,7 +16,19 @@ import SwiftData
 
 struct ContentView: View {
     @Environment(\.modelContext) private var modelContext
+    // [2026-09-11 추가] "테마 색상"의 "자동" 모드가 지금 유효한 라이트/다크
+    // 상태를 따라가는 데 필요 — 아래 `effectiveColorScheme`/`.onChange`/
+    // `.task` 참고.
+    @Environment(\.colorScheme) private var systemColorScheme
     @State private var bootstrapErrorDescription: String?
+
+    /// 화면 모드가 라이트/다크를 강제하고 있으면 그 값을, "시스템 따름"이면
+    /// 실제 시스템 값(`systemColorScheme`)을 그대로 — "테마 색상 자동"이
+    /// 따라야 할 건 화면 모드가 실제로 렌더링하는 명암이지, 화면 모드가
+    /// 무시하고 있는 원본 시스템 값이 아니기 때문이다.
+    private var effectiveColorScheme: ColorScheme {
+        UserSettingsStore.shared.colorSchemePreference.colorScheme ?? systemColorScheme
+    }
 
     var body: some View {
         RootView()
@@ -36,6 +48,34 @@ struct ContentView: View {
             // `RootView`(TabView를 직접 만드는 그 뷰) 대신 여기(`RootView()`를
             // 만드는 바깥 자리)로 옮겼다. `RootView.swift`의 옛 위치 주석 참고.
             .preferredColorScheme(UserSettingsStore.shared.colorSchemePreference.colorScheme)
+            // [2026-09-11 추가] "테마 색상 자동" 반영 — 유효 라이트/다크가
+            // 바뀔 때마다 다시 계산, 앱이 처음 뜰 때도 1회 반영(`.task`).
+            // `syncAutoThemeIfNeeded`는 `bibleThemeModePreference == .auto`
+            // 일 때만 실제로 hex를 바꾸므로, 라이트/다크 고정이나 커스텀
+            // 상태에는 아무 영향이 없다.
+            .onChange(of: effectiveColorScheme) { _, newValue in
+                UserSettingsStore.shared.syncAutoThemeIfNeeded(systemColorScheme: newValue)
+            }
+            .task {
+                UserSettingsStore.shared.syncAutoThemeIfNeeded(systemColorScheme: effectiveColorScheme)
+            }
+            // [2026-09-11 추가, 사용자 보고 — "테마색상을 바꾸면 성경의 상단
+            // 메뉴가 사라짐"] 원래 `PhoneTabView.swift`의 body(TabView를 직접
+            // 구성하는 자리)에 있던 블록을 여기로 옮겼다 — 그 파일에 남겨 둔
+            // 이동 주석 참고. `colorSchemePreference`와 같은 이유로, 여기
+            // (TabView를 직접 구성하지 않는 자리)에서 `settings.
+            // bibleBackgroundColor`가 바뀔 때마다 UIKit 탭바 외형
+            // (`applyThemedTabBarAppearance`, `PhoneTabView.swift` 상단 선언)을
+            // 다시 적용한다. `PhoneTabView`는 아이폰 전용이라 이 부작용도
+            // iOS에만 필요하다.
+            #if os(iOS)
+            .onAppear {
+                applyThemedTabBarAppearance(color: UserSettingsStore.shared.bibleBackgroundColor)
+            }
+            .onChange(of: UserSettingsStore.shared.bibleBackgroundColor) { _, newValue in
+                applyThemedTabBarAppearance(color: newValue)
+            }
+            #endif
             // [2026-08-28 추가] 사용자 요청 — "처음 설치하시는 사람을 위한
             // 가이드 화면이 필요함." 앱 최초 실행 시 1회, 5페이지 안내 카루셀을
             // 보여준다 — AppOnboardingOverlay.swift 참고. `.bibleIndexOnboarding()`

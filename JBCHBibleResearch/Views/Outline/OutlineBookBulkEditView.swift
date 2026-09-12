@@ -46,6 +46,13 @@ import BibleResearchModels
 
 struct OutlineBookBulkEditView: View {
     @Environment(\.modelContext) private var modelContext
+    /// [2026-09-11 추가] 아래 화면 배경/타이틀 글자색이 읽기 테마를 따르게
+    /// 하기 위한 프로퍼티 — `DocumentsHomeView.swift` 등 나머지 화면과 같은
+    /// 패턴. ⚠️ 에디터(`RichTextEditor`) 자체의 배경/글자색엔 안 쓴다 —
+    /// `EditorDefaultStyle.swift` 상단 주석(8/14 확정, 사용자 재확인)이
+    /// 문서화한 "에디터 창은 읽기 테마와 무관한 고정 기본값" 원칙이 이
+    /// 화면(개요 책·장 편집기)도 명시적으로 포함한다.
+    private var settings: UserSettingsStore { .shared }
     let book: Book
     var focusedChapter: Int? = nil
     var initialIsEditable: Bool = true
@@ -71,13 +78,38 @@ struct OutlineBookBulkEditView: View {
                 bookOutlineOnlyEditor
             }
         }
+        // [2026-09-11 추가] 사용자 요청 — "개요의 세부화면(성경 개요 또는
+        // 성경의 장개요)의 다른 화면과 같이 색상 테마를 적용할 것." 에디터
+        // 자체 배경은 위 `settings` 선언부 주석 참고(고정 유지) — 이건 그
+        // 에디터를 감싸는 화면 바깥쪽 배경이다. `OutlineTreeSplitContent`의
+        // "책이나 장을 선택하세요" 빈 상태 배경과 같은 패턴.
+        .background(settings.bibleBackgroundColor ?? Color.clear)
         // [2026-08-27 신설] 사용자 요청 — "해당 장이 상단 타이틀로 나오고."
         // 장을 선택했을 때는 "책이름 N장"을, 책 개요만 볼 때는 기존처럼 책
         // 이름만 타이틀로 쓴다(macOS는 창 제목 표시줄, iOS는 내비게이션
         // 타이틀로 나온다 — 이 화면이 이미 `.navigationTitle`을 쓰던 기존
         // 관례를 그대로 따른다).
         .navigationTitle(focusedChapter.map { "\(book.nameKo) \($0)장" } ?? book.nameKo)
+        // [2026-09-11 추가] 사용자 요청 — "타이틀은 다른 화면과 동일하게
+        // 맨 위 중앙에 국민대학교 성곡 세리프체로 변경하고 크기도 동일하게
+        // 맞출 것." `WordNoteHomeView`/`DocumentsHomeView`/`SearchView`/
+        // `OutlineTreeView`가 공유하는 것과 완전히 같은 3종 세트
+        // (`.principal` 툴바 아이템 + `.navigationBarTitleDisplayMode(
+        // .inline)`, 성곡 세리프 20pt/`.title3`, 테마 글자색) — 그 화면들의
+        // 같은 자리 주석 참고. `.navigationTitle`(위)은 시스템 내부용으로
+        // 그대로 두고, 같은 문자열 계산식을 여기서도 재사용한다.
+        #if os(iOS)
+        .navigationBarTitleDisplayMode(.inline)
+        #endif
         .toolbar {
+            #if os(iOS)
+            ToolbarItem(placement: .principal) {
+                Text(focusedChapter.map { "\(book.nameKo) \($0)장" } ?? book.nameKo)
+                    .font(.custom(SpecialPurposeFonts.titleSerif, size: 20, relativeTo: .title3))
+                    .fontWeight(.semibold)
+                    .foregroundStyle(settings.bibleTextColor ?? .primary)
+            }
+            #endif
             ToolbarItem(placement: .primaryAction) {
                 Button {
                     isEditable.toggle()
@@ -122,10 +154,10 @@ struct OutlineBookBulkEditView: View {
     /// 있었다 — 이제 아코디언 자체가 없어져 `List`를 쓸 이유도 없다.
     @ViewBuilder
     private var bookOutlineOnlyEditor: some View {
+        // [2026-09-11 삭제] 사용자 요청 — "에디터 상단의 중간타이틀은
+        // 불필요하니 삭제할 것." 위 `.principal` 타이틀(같은 문자열,
+        // 책 이름)과 중복이던 `Text("\(book.nameKo) 책 개요")`를 없앤다.
         VStack(alignment: .leading, spacing: 8) {
-            Text("\(book.nameKo) 책 개요")
-                .font(.title3)
-                .fontWeight(.semibold)
             if let bookOutline {
                 RichTextEditor(
                     rtfText: Binding(
@@ -176,10 +208,10 @@ struct OutlineBookBulkEditView: View {
     /// 더 이상 그리지 않는다(위 파일 상단 주석 참고).
     @ViewBuilder
     private func chapterOnlyEditor(_ chapter: Int) -> some View {
+        // [2026-09-11 삭제] 위 `bookOutlineOnlyEditor`와 같은 이유 — 위
+        // `.principal` 타이틀(같은 문자열, "책이름 N장")과 중복이던
+        // `Text("\(book.nameKo) \(chapter)장 개요")`를 없앤다.
         VStack(alignment: .leading, spacing: 8) {
-            Text("\(book.nameKo) \(chapter)장 개요")
-                .font(.title3)
-                .fontWeight(.semibold)
             if let chapterSummary {
                 RichTextEditor(
                     rtfText: Binding(

@@ -209,6 +209,7 @@ private struct BibleIndexOnboardingSheet: View {
                     .frame(maxWidth: 260)
             }
             .buttonStyle(.borderedProminent)
+            .tint(Color("AccentColor"))
             .padding(.bottom, 28)
         }
         .padding(.top, 36)

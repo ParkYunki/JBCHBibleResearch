@@ -17,8 +17,96 @@
 //
 
 import SwiftUI
+#if os(iOS)
+import UIKit
+#endif
+
+/// [2026-09-09 신설] 사용자 보고 — "성경 하단 기능메뉴(말씀노트, 성경,
+/// 문서/OCR, 통합검색, 더보기) 배경도 왜 흰색이지?" 이 탭바는 `TabView`의
+/// 진짜 iOS 시스템 탭바(`.tabItem`)라 지난 "테마 확장" 작업이 손댄
+/// `BibleReadingView`의 `verseSelectionActionBar`(절 선택 시에만 뜨는 별개의
+/// 커스텀 바)와는 완전히 다른 층이다 — 그래서 그 작업에서 빠졌다.
+///
+/// ⚠️ [3차 시도, 사용자 실기기 확인 후 방식 교체] 처음 두 번은 SwiftUI
+/// `.toolbarBackground(_:for: .tabBar)`만 썼다 — 1차: `TabView` 전체에 한
+/// 번, 2차: 5개 탭 각각의 `NavigationStack`에 개별로. 사용자가 재빌드·재실행
+/// 후에도 "그대로임(흰색)"이라고 확인해줬다. Apple 개발자 포럼 여러
+/// 스레드(`developer.apple.com/forums/thread/796052`,
+/// `.../thread/798031` 등)가 iOS 26의 새 "Liquid Glass" 탭바에서 이
+/// SwiftUI API 자체가 아직 불안정/제한적이라고 보고하는 것과 일치한다 —
+/// 그래서 SwiftUI 래퍼 대신, 탭바를 실제로 그리는 더 오래되고 저수준인
+/// UIKit `UITabBarAppearance`를 `UITabBar.appearance()`(전역 외형 프록시)에
+/// 직접 설정하는 방식으로 바꿨다(아래 `applyThemedTabBarAppearance`). 사용자
+/// 확인 후 적용한 시도이며, 같은 포럼 스레드들이 Liquid Glass에서는
+/// `configureWithOpaqueBackground()`/`backgroundColor`조차 "유리" 모양
+/// 자체를 깨뜨리거나 반영이 불명확한 사례를 함께 보고하고 있어 이번에도
+/// 100% 보장되지는 않는다는 점을 사용자에게 그대로 고지했다.
+///
+/// ⚠️ [알려진 한계] `UITabBar.appearance()`는 UIKit의 "외형 프록시"라 이미
+/// 화면에 떠 있는 탭바 인스턴스에는 소급 적용되지 않는 것이 일반적인
+/// 동작이다 — 탭바가 "새로 만들어지는 시점"(앱을 새로 띄울 때)엔 반영되지만,
+/// 앱이 이미 떠 있는 채로 설정에서 테마를 바꾸면 반영이 늦거나 안 될 수
+/// 있다. 아래 `.onChange(of: settings.bibleBackgroundColor)`가 그 경우에도
+/// 다시 호출은 하지만, 실제로 이미 떠 있는 탭바에 반영되는지는 검증하지
+/// 못했다 — 이번에 사용자가 보고한 증상("재빌드·재실행 후에도 흰색")은
+/// "새로 띄울 때" 경우라 이 한계와는 무관하다.
+#if os(iOS)
+/// [2026-09-09 4차 시도] `private`를 뺐다 — 사용자 실기기 확인 결과 이 함수를
+/// `PhoneTabView.onAppear`에서 불러도 탭바가 여전히 흰색이었다. 원인으로
+/// 가장 유력한 것은 `UITabBar.appearance()`가 UIKit "외형 프록시"라는 점 —
+/// 이 프록시는 대상 뷰가 "윈도우에 처음 추가되는 시점"에 한 번 적용되는
+/// 것이 원칙이고, SwiftUI의 `.onAppear`는 그 뷰가 이미 화면 계층에 들어간
+/// "이후"에 불린다(공식 문서로 못 박혀 있진 않지만, UIAppearance의
+/// 전형적으로 알려진 동작이다). 즉 `.onAppear` 시점엔 이미 늦었을 수
+/// 있다 — 그래서 `JBCHBibleResearchApp.init()`(윈도우/탭바가 만들어지기
+/// 전, `BundledFontRegistrar.registerBundledFontsIfNeeded()`와 같은 자리)
+/// 에서도 이 함수를 먼저 호출하도록 옮긴다. `PhoneTabView`의 `.onAppear`/
+/// `.onChange`는 그대로 남겨 둔다(해가 되지 않고, 테마를 나중에 바꿨을 때
+/// 다시 시도라도 해보는 편이 아예 안 하는 것보다 낫다).
+func applyThemedTabBarAppearance(color: Color?) {
+    let appearance = UITabBarAppearance()
+    if let color {
+        appearance.configureWithOpaqueBackground()
+        appearance.backgroundColor = UIColor(color)
+    } else {
+        appearance.configureWithDefaultBackground()
+    }
+    // [2026-09-11 추가] 사용자 재검토 요청 — "테마색상 팔레트 6개가 실제로는
+    // 2~3톤처럼 보인다." 탭 전환마다 항상 보이는 이 자리에 서고 청람
+    // (JBCHCategoryPalette.slateTeal)을 선택 아이콘·글자색으로 명시
+    // 배정한다 — 이 세션 맨 처음 색상 논의에서 사용자가 직접 예로 들었던
+    // 배치와 일치하고, 지금까지 실제로 코드 어디에서도 쓰인 적 없던 색이라
+    // 미사용 문제도 함께 해결한다.
+    //
+    // ⚠️ [대비 계산 확인] 배경이 명시적으로 어두운 값(예: "밤빛 서재"
+    // #182644)일 때 원래 서고 청람을 그대로 쓰면 WCAG 대비 2.66:1로
+    // UI 구성요소 권장 최소치(3:1)에 못 미친다 — 그때만 밝게 섞은 변형
+    // (slateTealOnDark, 대비 4.09:1)을 쓴다. `color`가 nil(시스템 기본)일
+    // 때는 시스템이 그리는 반투명 배경이 다크 모드에서도 거의 검정에
+    // 가까워(대비 약 3.5~3.7:1로 계산 확인) 원래 색으로 충분하다고 보고
+    // 이 분기 대상에서 뺐다.
+    let isExplicitDarkBackground: Bool = {
+        guard let color else { return false }
+        var r: CGFloat = 0, g: CGFloat = 0, b: CGFloat = 0
+        UIColor(color).getRed(&r, green: &g, blue: &b, alpha: nil)
+        let luminance = 0.2126 * r + 0.7152 * g + 0.0722 * b
+        return luminance < 0.5
+    }()
+    let selectedTint = UIColor(isExplicitDarkBackground ? JBCHCategoryPalette.slateTealOnDark : JBCHCategoryPalette.slateTeal)
+    for layout in [appearance.stackedLayoutAppearance, appearance.inlineLayoutAppearance, appearance.compactInlineLayoutAppearance] {
+        layout.selected.iconColor = selectedTint
+        layout.selected.titleTextAttributes = [.foregroundColor: selectedTint]
+    }
+    UITabBar.appearance().standardAppearance = appearance
+    UITabBar.appearance().scrollEdgeAppearance = appearance
+}
+#endif
 
 struct PhoneTabView: View {
+    /// [2026-09-09 추가] `BibleReadingView.BibleReadingContentView`/
+    /// `WordNoteHomeView`/`SearchView`와 같은 읽기 전용 접근 패턴.
+    private var settings: UserSettingsStore { .shared }
+
     /// [2026-08-08 추가, 크래시 수정으로 방식 변경] S1의 "관련 콘텐츠" 패널에서
     /// "개요 화면 열기"를 누르면 이 탭뷰가 개요 탭으로 전환돼야 한다. 처음엔
     /// `@FocusedValue(\.selectSection)`(SidebarNavigationView가 macOS/iPadOS에서
@@ -87,7 +175,7 @@ struct PhoneTabView: View {
                 .tag(AppSection.bibleReading)
 
             NavigationStack { DocumentsHomeView() }
-                .tabItem { Label("문서·OCR", systemImage: "doc.text.viewfinder") }
+                .tabItem { Label("연구문서", systemImage: "doc.text.viewfinder") }
                 .tag(AppSection.documents)
 
             // [2026-08-27 변경, 사용자 결정 — "개요→더보기, 검색→탭바"] 예전엔
@@ -108,6 +196,18 @@ struct PhoneTabView: View {
             NavigationStack { MorePlaceholderView(isOutlinePresented: $isOutlinePresented) }
                 .tabItem { Label("더보기", systemImage: "ellipsis.circle") }
         }
+        // [2026-09-11 이동, 사용자 보고 — "테마색상을 바꾸면 성경의 상단
+        // 메뉴가 사라짐"] 이 자리에 있던 `.onAppear`/`.onChange(of: settings.
+        // bibleBackgroundColor)`(탭바 UIKit 외형 재적용)를 `ContentView.swift`로
+        // 옮겼다 — 여기(`PhoneTabView.body`)는 바로 위에서 `TabView`를 직접
+        // 구성하는 자리라, 여기서 `settings.bibleBackgroundColor`(관찰
+        // 프로퍼티)를 읽으면 그 값이 바뀔 때마다 이 body 전체가 다시 실행되며
+        // `TabView`가 통째로 다시 만들어질 위험이 있다 — `@SceneStorage`로
+        // 바꿔 고쳤던 위 `selectedTab` 관련 주석, 그리고 `ContentView.swift`가
+        // `colorSchemePreference`에 대해 이미 겪고 고친 것(Apple Developer
+        // Forums 스레드 726363)과 같은 계열의 문제다. `applyThemedTabBarAppearance`
+        // 함수 자체(바로 위 선언)는 `ContentView.swift`에서도 그대로 불러
+        // 쓰므로 여기 남겨 둔다.
         // [2026-08-27 변경, 사용자 결정 — "개요→더보기, 검색→탭바"] `.outline`은
         // 더 이상 탭바 항목이 아니므로(`AppSection.phoneTabBarSections`에서
         // 뺐다) 이 값이 오면 탭 전환 대신 전체화면 모달을 연다 — "관련 콘텐츠 >

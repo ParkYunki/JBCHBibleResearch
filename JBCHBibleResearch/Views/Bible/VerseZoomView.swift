@@ -95,6 +95,10 @@ struct VerseZoomView: View {
     @Binding var autoPresentPersonalNoteEditor: Bool
 
     @Environment(\.dismiss) private var dismiss
+    /// [2026-09-11 추가] 사용자 재검토 요청 — 아래 배경/글자색이 읽기 테마를
+    /// 따르게 하기 위한 프로퍼티. `DocumentsHomeView.swift` 등 나머지 화면과
+    /// 같은 패턴.
+    private var settings: UserSettingsStore { .shared }
     @State private var selectedColumnID: UUID
     @State private var selectedRange = NSRange(location: 0, length: 0)
     /// [2026-08-11 8차 수정] 표시 모드/선택 모드 전환 — 위 파일 상단 주석 참고.
@@ -296,6 +300,17 @@ struct VerseZoomView: View {
         #endif
     }
 
+    /// [2026-09-11 추가] 사용자 재검토 요청 — 본문 열(`TranslationColumnView`)
+    /// 등 나머지 성경 조회 화면은 전부 `settings.bibleTextColor` 폴백 체인을
+    /// 쓰는데 이 화면(확대보기)만 예외였다. `SelectableVerseTextView`/
+    /// `AnnotatedVerseFlowView`는 SwiftUI `Color`가 아니라 `PlatformColor`
+    /// (UIKit/AppKit 커스텀 텍스트 렌더러)를 받으므로, `HighlightColorTag.
+    /// platformColor`(이 파일이 이미 참조하는 타입)와 같은 변환 방식
+    /// (`PlatformColor(color)`)으로 맞춘다.
+    private var effectiveTextColor: PlatformColor {
+        settings.bibleTextColor.map { PlatformColor($0) } ?? labelColor
+    }
+
     // [2026-08-09 수정, 빌드 에러] 이전엔 지역 변수였다 — 형광펜/밑줄 취소
     // 기능 이후 여러 곳에서 필요해져 저장 프로퍼티(computed property)로
     // 승격해 재사용한다.
@@ -368,7 +383,7 @@ struct VerseZoomView: View {
                             // 어느 표현에 무엇이 붙어 있는지는 선택 모드에서도
                             // 보인다.
                             SelectableVerseTextView(
-                                text: verseText, font: bibleFont, textColor: labelColor,
+                                text: verseText, font: bibleFont, textColor: effectiveTextColor,
                                 containerWidth: effectiveTextWidth, targetCharsPerLine: targetCharsPerLine,
                                 highlights: highlights, phraseNotes: phraseNotes, crossReferences: crossReferences,
                                 hanjaWords: hanjaWords,
@@ -393,7 +408,7 @@ struct VerseZoomView: View {
                             AnnotatedVerseFlowView(
                                 text: verseText, highlights: highlights, phraseNotes: phraseNotes,
                                 crossReferences: crossReferences, hanjaWords: hanjaWords,
-                                font: bibleFont, textColor: labelColor, containerWidth: effectiveTextWidth,
+                                font: bibleFont, textColor: effectiveTextColor, containerWidth: effectiveTextWidth,
                                 availableWidth: availableContentWidth, targetCharsPerLine: targetCharsPerLine,
                                 onRequestRemoveHighlight: { highlight in
                                     viewModel.deleteHighlight(highlight)
@@ -484,6 +499,10 @@ struct VerseZoomView: View {
                 .padding()
                 #endif
             }
+            // [2026-09-11 추가] 사용자 재검토 요청 — 이 화면만 읽기 테마 배경을
+            // 안 따르고 있었다 — 나머지 성경 조회 화면과 같은 폴백(테마
+            // 없으면 시스템 기본 배경 그대로).
+            .background(settings.bibleBackgroundColor ?? Color.clear)
             // [2026-08-09 수정] 사용자 보고 — "[성경] [x] [x]절 확대보기"로 보여
             // 장 번호와 절 번호가 구분 없이 나란히 붙어 있었다(`localizedBookChapterLabel`이
             // "책이름 장번호"까지만 담고 "장" 글자는 없음 — BibleReadingViewModel.
@@ -508,6 +527,20 @@ struct VerseZoomView: View {
             // 없음) 기존 `ToolbarItemGroup` 방식을 그대로 둔다.
             #if os(iOS)
             .toolbar {
+                // [2026-09-11 추가] 사용자 요청 — "최상단의 타이틀(성경장절)
+                // -> 성곡 세리프 타이틀로 변경." 다른 화면들이 공유하는 것과
+                // 완전히 같은 패턴(성곡 세리프 20pt/`.title3` + 테마 글자색) —
+                // 문자열은 위 `.navigationTitle`과 같은 계산식을 재사용한다.
+                // `.navigationBarTitleDisplayMode(.inline)`은 이 화면에 이미
+                // 있다(위 참고) — 다른 화면과 달리 이 화면은 처음부터 큰
+                // 왼쪽 정렬 타이틀 없이 압축 모드였으므로 중복 타이틀 문제는
+                // 없었다.
+                ToolbarItem(placement: .principal) {
+                    Text("\(currentColumn?.localizedBookChapterLabel ?? "")장 \(verseNumber)절")
+                        .font(.custom(SpecialPurposeFonts.titleSerif, size: 20, relativeTo: .title3))
+                        .fontWeight(.semibold)
+                        .foregroundStyle(settings.bibleTextColor ?? .primary)
+                }
                 ToolbarItem(placement: .cancellationAction) {
                     Button("닫기") { dismiss() }
                 }
@@ -650,15 +683,48 @@ struct VerseZoomView: View {
     // 세그먼트 컨트롤 옆에 라벨을 텍스트로 그대로 보여준다 — `.labelsHidden()`
     // 으로 라벨만 숨기고 접근성 라벨("번역본")은 그대로 유지한다(스크린
     // 리더 등에서는 계속 "번역본"으로 읽힌다).
+    // [2026-09-11 재설계] 사용자 요청 — "최상단 타이틀 밑 번역본 선택
+    // 탭 -> 커스텀 탭 캡슐로 변경." 이 앱이 이미 여러 곳(`TranslationPickerPopover.
+    // chip(for:)`, `BookChapterPicker`)에서 재사용해 온 "강조색 배경 15% +
+    // 테두리 획" 캡슐 언어를 그대로 가져다 쓴다(근거 없는 새 스타일 발명
+    // 대신 기존 패턴 재사용) — 다만 저건 "최대 3개까지 다중 선택"용이고
+    // 이건 "이미 화면에 떠 있는 번역본 중 하나만 골라 보기"라 순서 배지 등
+    // 다중선택 전용 요소는 가져오지 않는다.
     private var translationSwitcher: some View {
-        Picker("번역본", selection: $selectedColumnID) {
-            ForEach(columns) { column in
-                Text(column.registry.displayName).tag(column.id)
+        ScrollView(.horizontal, showsIndicators: false) {
+            HStack(spacing: 8) {
+                ForEach(columns) { column in
+                    let isSelected = column.id == selectedColumnID
+                    // [2026-09-11 수정, 빌드 에러 수정] 사용자 보고 —
+                    // "The compiler is unable to type-check this expression
+                    // in reasonable time." 아래 세 색상을 각각 미리 계산해
+                    // 둔다 — modifier 체인 하나 안에 삼항연산자+`??`가
+                    // 여러 번 겹치면 타입 추론기가 시간 초과로 컴파일에
+                    // 실패하는 것으로 확인됐다(결과값 자체는 이전과 동일).
+                    let labelColor: Color = isSelected ? Color("AccentColor") : (settings.bibleTextColor ?? Color.primary)
+                    let fillColor: Color = isSelected ? Color("AccentColor").opacity(0.15) : (settings.bibleTextColor?.opacity(0.08) ?? Color.secondary.opacity(0.12))
+                    let strokeColor: Color = isSelected ? Color("AccentColor").opacity(0.5) : (settings.bibleTextColor?.opacity(0.3) ?? Color.secondary.opacity(0.4))
+                    Button {
+                        selectedColumnID = column.id
+                    } label: {
+                        Text(column.registry.displayName)
+                            .font(isSelected ? .subheadline.weight(.semibold) : .subheadline)
+                            .foregroundStyle(labelColor)
+                            .lineLimit(1)
+                            .padding(.horizontal, 12)
+                            .padding(.vertical, 6)
+                            .background(Capsule().fill(fillColor))
+                            .overlay(Capsule().stroke(strokeColor, lineWidth: 1))
+                    }
+                    .buttonStyle(.plain)
+                    .accessibilityLabel(column.registry.displayName)
+                    .accessibilityAddTraits(isSelected ? [.isSelected] : [])
+                }
             }
+            .padding(.horizontal, 12)
+            .padding(.vertical, 8)
         }
-        .pickerStyle(.segmented)
-        .labelsHidden()
-        .padding()
+        .accessibilityLabel("번역본")
     }
 
     // [2026-08-11 9차 수정] 사용자 요청 — "선택모드: ... 형광펜 .. ..메모 관주
@@ -694,7 +760,11 @@ struct VerseZoomView: View {
                         .buttonStyle(.plain)
                     }
                 }
-                Text("형광펜").font(.caption2).foregroundStyle(.secondary)
+                // [2026-09-11 수정] 사용자 재보고 — 하단 기능 메뉴 중
+                // "형광펜"만 `actionButton` 헬퍼(위 `actionButton(title:
+                // systemImage:action:)` 참고, 이미 테마 폴백 적용됨)를 안 쓰고
+                // 직접 그려서 테마가 안 반영돼 있었다 — 같은 값으로 맞춘다.
+                Text("형광펜").font(.caption2).foregroundStyle(settings.bibleTextColor ?? .primary)
             }
 
             // [2026-08-11 12차 수정] 사용자 요청 — "[개인 주석]과 [메모] 순서를
@@ -766,7 +836,9 @@ struct VerseZoomView: View {
             }
         }
         .buttonStyle(.plain)
-        .foregroundStyle(.primary)
+        // [2026-09-11 수정] 사용자 재검토 요청 — 나머지 화면과 같은 폴백으로
+        // 테마 글자색을 따르게 한다.
+        .foregroundStyle(settings.bibleTextColor ?? .primary)
     }
 
     private var anchorText: String {
@@ -946,9 +1018,12 @@ struct VerseZoomView: View {
     /// 남긴다(`uniqueHanjaWords`).
     private var hanjaGlossSection: some View {
         VStack(alignment: .leading, spacing: 4) {
+            // [2026-09-11 수정] 사용자 재보고 — "'한자 뜻풀이' 텍스트"가
+            // 테마를 안 따름. 이 화면 다른 보조 텍스트(훈음 등)와 같은
+            // 폴백으로 맞춘다.
             Text("한자 뜻풀이")
                 .font(.caption2)
-                .foregroundStyle(.secondary)
+                .foregroundStyle(settings.bibleTextColor?.opacity(0.6) ?? Color.secondary)
             VStack(spacing: 0) {
                 ForEach(Array(hanjaGlossRowPairs.enumerated()), id: \.offset) { rowIndex, pair in
                     HStack(spacing: 0) {
@@ -966,13 +1041,23 @@ struct VerseZoomView: View {
                         }
                     }
                     if rowIndex < hanjaGlossRowPairs.count - 1 {
-                        Divider()
+                        // [2026-09-11 수정] 사용자 재보고 — "한자 뜻풀이
+                        // 주변 라인"이 테마를 안 따름. 시스템 기본
+                        // `Divider()`는 색을 지정할 수 없어, 아래 세로
+                        // 구분선과 같은 방식(테마 글자색 기반 옅은
+                        // `Rectangle`)으로 바꾼다.
+                        Rectangle()
+                            .fill(settings.bibleTextColor?.opacity(0.3) ?? Color.secondary.opacity(0.3))
+                            .frame(height: 1)
                     }
                 }
             }
             .overlay {
+                // [2026-09-11 재수정] 사용자 재보고 — 이 세로 구분선도 "주변
+                // 라인"에 포함해 테마 글자색 기반으로 바꾼다(위 가로 구분선과
+                // 같은 값 — 둘 다 같은 표 안의 같은 성격 선이라 통일).
                 Rectangle()
-                    .fill(Color.gray.opacity(0.3))
+                    .fill(settings.bibleTextColor?.opacity(0.3) ?? Color.secondary.opacity(0.3))
                     .frame(width: 1)
             }
         }
@@ -1025,6 +1110,11 @@ struct VerseZoomView: View {
                     hanjaText.font = hanjaSwiftUIFont
                     return Text(koText + hanjaText)
                 }()
+                    // [2026-09-11 추가] 사용자 재보고 — "한자와 한자 음훈"이
+                    // 테마를 안 따름. 이 `Text`는 지금까지 명시적 색이 전혀
+                    // 없어 그냥 `.primary`를 상속했다 — 이 화면 본문(구절
+                    // 텍스트)이 이미 따르는 것과 같은 폴백을 맞춘다.
+                    .foregroundStyle(settings.bibleTextColor ?? .primary)
                 if let url = naverHanjaDictionaryURL(for: word.hanja) {
                     Link(destination: url) {
                         Image(systemName: "arrow.up.forward.app")
@@ -1038,9 +1128,11 @@ struct VerseZoomView: View {
                 // 기존 `.subheadline`(기본 크기 약 15pt)에서 16pt로 소폭 확대 —
                 // 성경 구절 크기(고정 17pt, `bibleSwiftUIFont`)보다는 여전히
                 // 작게 유지하라는 요구와 함께 만족시키는 값.
+                // [2026-09-11 수정] 사용자 재보고 — "한자 음훈"이 테마를
+                // 안 따름.
                 Text(infos.map { "\($0.hun)" }.joined(separator: " · "))
                     .font(.system(size: 16))
-                    .foregroundStyle(.secondary)
+                    .foregroundStyle(settings.bibleTextColor?.opacity(0.6) ?? Color.secondary)
                     .multilineTextAlignment(.center)
             }
         }

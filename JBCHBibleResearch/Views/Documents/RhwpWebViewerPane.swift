@@ -215,6 +215,7 @@ struct RhwpWebViewerPane: View {
                         controller.goToPreviousSearchMatch()
                     } label: {
                         Image(systemName: "chevron.up")
+                            .foregroundStyle(Color("AccentColor"))
                     }
                     .buttonStyle(.plain)
                     .disabled(controller.searchMatchCount == 0)
@@ -224,6 +225,7 @@ struct RhwpWebViewerPane: View {
                         controller.goToNextSearchMatch()
                     } label: {
                         Image(systemName: "chevron.down")
+                            .foregroundStyle(Color("AccentColor"))
                     }
                     .buttonStyle(.plain)
                     .disabled(controller.searchMatchCount == 0)
@@ -245,10 +247,10 @@ struct RhwpWebViewerPane: View {
                 } label: {
                     Image(systemName: "plus.magnifyingglass")
                         .font(.system(size: 14, weight: .semibold))
-                        .foregroundStyle(Color.accentColor)
+                        .foregroundStyle(Color("AccentColor"))
                         .frame(width: 28, height: 28)
-                        .background(Circle().fill(Color.accentColor.opacity(0.12)))
-                        .overlay(Circle().stroke(Color.accentColor.opacity(0.35), lineWidth: 1))
+                        .background(Circle().fill(Color("AccentColor").opacity(0.12)))
+                        .overlay(Circle().stroke(Color("AccentColor").opacity(0.35), lineWidth: 1))
                 }
                 .buttonStyle(.plain)
                 .contentShape(Circle())
@@ -259,10 +261,10 @@ struct RhwpWebViewerPane: View {
                 } label: {
                     Image(systemName: "minus.magnifyingglass")
                         .font(.system(size: 14, weight: .semibold))
-                        .foregroundStyle(Color.accentColor)
+                        .foregroundStyle(Color("AccentColor"))
                         .frame(width: 28, height: 28)
-                        .background(Circle().fill(Color.accentColor.opacity(0.12)))
-                        .overlay(Circle().stroke(Color.accentColor.opacity(0.35), lineWidth: 1))
+                        .background(Circle().fill(Color("AccentColor").opacity(0.12)))
+                        .overlay(Circle().stroke(Color("AccentColor").opacity(0.35), lineWidth: 1))
                 }
                 .buttonStyle(.plain)
                 .contentShape(Circle())
@@ -273,10 +275,10 @@ struct RhwpWebViewerPane: View {
                 } label: {
                     Image(systemName: "arrow.up.left.and.down.right.magnifyingglass")
                         .font(.system(size: 12, weight: .semibold))
-                        .foregroundStyle(Color.accentColor)
+                        .foregroundStyle(Color("AccentColor"))
                         .frame(width: 28, height: 28)
-                        .background(Circle().fill(Color.accentColor.opacity(0.12)))
-                        .overlay(Circle().stroke(Color.accentColor.opacity(0.35), lineWidth: 1))
+                        .background(Circle().fill(Color("AccentColor").opacity(0.12)))
+                        .overlay(Circle().stroke(Color("AccentColor").opacity(0.35), lineWidth: 1))
                 }
                 .buttonStyle(.plain)
                 .contentShape(Circle())
@@ -316,6 +318,7 @@ struct RhwpWebViewerPane: View {
                     controller.retry()
                 }
                 .buttonStyle(.bordered)
+                .tint(Color("AccentColor"))
                 .padding(.top, 4)
             }
             .padding()

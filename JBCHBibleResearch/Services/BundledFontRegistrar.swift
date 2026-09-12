@@ -107,6 +107,21 @@ enum SpecialPurposeFonts {
     /// 업로드받은 OFL.txt의 Reserved Font Name도 "Gentium"과 일치). SIL OFL 1.1.
     static let greekRegular = "Gentium-Regular"
     static let greekBold = "Gentium-Bold"
+
+    /// [2026-09-10 추가] 각 기능 화면 타이틀(말씀 노트/연구문서/통합 검색/
+    /// 성경 조회) 전용 서체 — 국민대학교 창학 80주년 기념 서체 'KMU80 성곡
+    /// 세리프(Sungkok Serif)'(번들 파일 `Fonts/KMU80SungkokSerif.otf`).
+    /// PostScript 이름은 fonttools로 name 테이블(ID 6)을 직접 읽어 확인했다
+    /// ("KMU-SungkokSerif" — family 이름 "KMU80 Sungkok Serif"와 다르다, 위
+    /// 다른 항목들과 같은 이유). 저작권은 국민대학교에 있고(폰트 파일 자체의
+    /// Copyright/Trademark 고지, name 테이블 ID 0/7에서 확인) 배포 페이지
+    /// (https://80.kookmin.ac.kr/vision/font)에 CC BY-ND(저작자표시-변경금지)
+    /// 라이선스로 명시돼 있다 — 설정 화면 "라이센스" 탭에 고지 문구를 추가해
+    /// 뒀다(SettingsView.swift LicenseSettingsTab 참고). Regular 굵기 하나만
+    /// 제공돼, 굵게 표시할 곳은 SwiftUI가 화면에 그릴 때만 합성 볼드(synthetic
+    /// bold)를 적용한다 — 배포되는 폰트 파일 자체를 바꾸는 것이 아니므로
+    /// "변경 금지" 조건과는 무관하다.
+    static let titleSerif = "KMU-SungkokSerif"
 }
 
 enum BundledFontRegistrar {
@@ -142,7 +157,7 @@ enum BundledFontRegistrar {
                 print("[BundledFontRegistrar] \(url.lastPathComponent) 등록 실패: \(description)")
             }
         }
-        let expectedCount = BundledFonts.entries.count + 4 // 한자 1 + 히브리어 1 + 그리스어 2
+        let expectedCount = BundledFonts.entries.count + 5 // 한자 1 + 히브리어 1 + 그리스어 2 + 타이틀 세리프 1
         print("[BundledFontRegistrar] 번들 폰트 \(registeredPostScriptNames.count)/\(expectedCount)개 등록 완료: \(registeredPostScriptNames)")
     }
 
@@ -226,17 +241,25 @@ enum BundledFontRegistrar {
     /// 설정에 따라 동작이 달라질 수 있어, 안전하게 "ttf"/"TTF" 둘 다 조회해
     /// 합친 뒤 중복(같은 파일이 두 조회 모두에 걸리는 경우)을 제거한다.
     private static func bundledCustomFontURLs() -> [URL] {
+        // [2026-09-10 수정] 국민대학교 성곡 세리프체(KMU80SungkokSerif.otf)가
+        // 이 프로젝트 최초의 .otf 번들 폰트라 ttf/TTF 두 확장자만 찾던 조회에
+        // otf/OTF를 추가했다 — 나머지(폴더 참조/그룹 이중 조회, 대소문자 이중
+        // 조회) 구조는 그대로 유지.
         let subdirectoryURLs = (
             (Bundle.main.urls(forResourcesWithExtension: "ttf", subdirectory: "Fonts") ?? [])
                 + (Bundle.main.urls(forResourcesWithExtension: "TTF", subdirectory: "Fonts") ?? [])
+                + (Bundle.main.urls(forResourcesWithExtension: "otf", subdirectory: "Fonts") ?? [])
+                + (Bundle.main.urls(forResourcesWithExtension: "OTF", subdirectory: "Fonts") ?? [])
         )
         let dedupedSubdirectory = Array(Set(subdirectoryURLs))
         if !dedupedSubdirectory.isEmpty { return dedupedSubdirectory }
 
-        let knownPrefixes = ["Paperlogy", "GowunBatang", "ChosunGs", "SILEOT", "Gentium"]
+        let knownPrefixes = ["Paperlogy", "GowunBatang", "ChosunGs", "SILEOT", "Gentium", "KMU80SungkokSerif"]
         let rootURLs = (
             (Bundle.main.urls(forResourcesWithExtension: "ttf", subdirectory: nil) ?? [])
                 + (Bundle.main.urls(forResourcesWithExtension: "TTF", subdirectory: nil) ?? [])
+                + (Bundle.main.urls(forResourcesWithExtension: "otf", subdirectory: nil) ?? [])
+                + (Bundle.main.urls(forResourcesWithExtension: "OTF", subdirectory: nil) ?? [])
         )
         return Array(Set(rootURLs)).filter { url in
             knownPrefixes.contains { url.lastPathComponent.hasPrefix($0) }

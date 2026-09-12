@@ -57,6 +57,12 @@ final class UserSettingsStore {
         static let bibleVerseSpacing = "settings.bible.verseSpacing"
         static let bibleTextColorHex = "settings.bible.textColorHex"
         static let bibleBackgroundColorHex = "settings.bible.backgroundColorHex"
+        // [2026-09-11 추가] "테마 색상"의 라이트/다크/자동 3단 선택 — 사용자
+        // 논의: "가죽 서고/서고 청람/와인 저녁 3개 프리셋을 삭제하고, 남은
+        // 2개(서재 아이보리/밤빛 서재)를 화면 모드와 비슷한 라이트/다크/자동
+        // 3단으로 고르게 할 것." `UserSettingsStore.BibleThemeModePreference`
+        // 참고.
+        static let bibleThemeModePreference = "settings.bible.themeModePreference"
         // [2026-08-08 추가] 성경 구절 복사 형식 — 사용자 요청, FormatTabView.swift
         // (사용자가 업로드한 참고 소스) 참고.
         static let copyReferencePosition = "settings.bible.copy.referencePosition"
@@ -334,6 +340,82 @@ final class UserSettingsStore {
         didSet { defaults.set(bibleBackgroundColorHex, forKey: Key.bibleBackgroundColorHex) }
     }
 
+    /// [2026-09-11 신설] 사용자 논의 — "테마 색상 5개 중 실제로 안 쓸 것
+    /// 같은 조합이 대부분이니 2개(서재 아이보리/밤빛 서재)로 줄이고, 화면
+    /// 모드(`ColorSchemePreference`)와 비슷하게 라이트/다크/자동으로 고르게
+    /// 할 것" — 다만 화면 모드와는 독립적인 별도 설정으로 둔다(예: 화면
+    /// 모드는 다크인데 성경 본문만 밝게 읽고 싶은 조합도 가능해야 하므로).
+    /// `nil`은 세 값 중 어디에도 해당하지 않는 "커스텀" 상태 — 아래 "배경색/
+    /// 글자색 직접 선택" `ColorPicker`로 임의 색을 고르면 이 상태가 된다
+    /// (`markThemeModeAsCustom()` 참고). `Optional`인 이유는 `AppearanceSettingsTab`의
+    /// 3단 `Picker`가 "셋 중 아무것도 선택 안 됨"을 그대로 표현할 수 있게
+    /// 하기 위함 — `ColorSchemePreference`(화면 모드)처럼 매번 반드시 셋 중
+    /// 하나여야 하는 값이 아니다.
+    enum BibleThemeModePreference: String, CaseIterable, Identifiable {
+        case light, dark, auto
+        var id: String { rawValue }
+        var displayName: String {
+            switch self {
+            case .light: return "라이트"
+            case .dark: return "다크"
+            case .auto: return "자동"
+            }
+        }
+    }
+
+    var bibleThemeModePreference: BibleThemeModePreference? {
+        didSet { defaults.set(bibleThemeModePreference?.rawValue, forKey: Key.bibleThemeModePreference) }
+    }
+
+    /// `mode`(또는 `.auto`일 때 `systemColorScheme`으로 판정한 실제 라이트/
+    /// 다크)에 대응하는 `BibleSlideColorTheme`의 배경/글자 hex 쌍. 두 프리셋
+    /// 이름("서재 아이보리"/"밤빛 서재")은 `BibleSlideColorTheme.swift`의
+    /// 2026-09-11 축소 이후 배열에 그대로 남아 있는 이름을 그대로 참조한다 —
+    /// 새 색을 만들지 않는다.
+    private static func fixedThemeHex(
+        for mode: BibleThemeModePreference,
+        systemColorScheme: ColorScheme
+    ) -> (background: String, text: String) {
+        let resolvedIsDark = mode == .auto ? systemColorScheme == .dark : mode == .dark
+        let themeName = resolvedIsDark ? "밤빛 서재" : "서재 아이보리"
+        let theme = BibleSlideColorTheme.all.first { $0.name == themeName } ?? BibleSlideColorTheme.all[0]
+        return (theme.backgroundHex, theme.textHex)
+    }
+
+    /// "테마 색상" 3단(라이트/다크/자동) 중 하나를 사용자가 직접 골랐을 때
+    /// `AppearanceSettingsTab`이 호출한다 — 모드를 저장하고, 그에 맞는 배경/
+    /// 글자 hex를 그 자리에서 바로 반영한다(기존 스와치 탭 방식과 같은
+    /// 메커니즘). "자동"을 고른 경우에도 이 호출 시점의 `systemColorScheme`
+    /// 기준으로 즉시 한 번 반영되고, 이후 상태가 바뀔 때마다
+    /// `syncAutoThemeIfNeeded(systemColorScheme:)`가 다시 불러 갱신한다.
+    func applyThemeMode(_ mode: BibleThemeModePreference, systemColorScheme: ColorScheme) {
+        bibleThemeModePreference = mode
+        let hex = Self.fixedThemeHex(for: mode, systemColorScheme: systemColorScheme)
+        bibleBackgroundColorHex = hex.background
+        bibleTextColorHex = hex.text
+    }
+
+    /// "자동" 모드일 때만 동작 — 지금 유효한 라이트/다크 상태에 맞춰 배경/
+    /// 글자 hex를 다시 써넣는다. `ContentView`가 그 상태가 바뀔 때마다,
+    /// 그리고 앱이 뜰 때 1회 호출한다(그 파일의 `effectiveColorScheme`
+    /// 관련 주석 참고). `.light`/`.dark`를 명시적으로 고른 경우나 커스텀
+    /// (nil)일 때는 아무 것도 하지 않는다.
+    func syncAutoThemeIfNeeded(systemColorScheme: ColorScheme) {
+        guard bibleThemeModePreference == .auto else { return }
+        let hex = Self.fixedThemeHex(for: .auto, systemColorScheme: systemColorScheme)
+        bibleBackgroundColorHex = hex.background
+        bibleTextColorHex = hex.text
+    }
+
+    /// 사용자가 "배경색/글자색 직접 선택" `ColorPicker`나 "시스템 기본색상으로
+    /// 되돌리기" 버튼으로 hex를 직접 바꾸면, 3단(라이트/다크/자동) 중 어디에도
+    /// 더 이상 해당하지 않는 상태가 된다 — `AppearanceSettingsTab`이 그
+    /// 시점에 이 함수를 호출해 `bibleThemeModePreference`를 nil로 되돌리고,
+    /// 3단 Picker가 "선택 없음"으로 보이게 한다.
+    func markThemeModeAsCustom() {
+        bibleThemeModePreference = nil
+    }
+
     // MARK: - 성경 구절 복사 형식 (2026-08-08 추가)
     //
     // 사용자가 참고 소스로 올린 FormatTabView.swift의 설정 항목을 이 앱의 저장
@@ -478,8 +560,44 @@ final class UserSettingsStore {
         self.bibleVerseNumberFontSize = defaults.object(forKey: Key.bibleVerseNumberFontSize) as? Double ?? 12
         self.bibleLineSpacing = defaults.object(forKey: Key.bibleLineSpacing) as? Double ?? 4
         self.bibleVerseSpacing = defaults.object(forKey: Key.bibleVerseSpacing) as? Double ?? 10
-        self.bibleTextColorHex = defaults.string(forKey: Key.bibleTextColorHex) ?? ""
-        self.bibleBackgroundColorHex = defaults.string(forKey: Key.bibleBackgroundColorHex) ?? ""
+        // [2026-09-09 수정] 사용자 요청 — "색상 자체는 이미 있으니, 먼저
+        // 기본값만 바꿔볼 것." 지금까지는 설정을 한 번도 안 건드린 사용자도
+        // 시스템 기본(라이트=흰 배경/검정 글자, 다크=검정 배경/흰 글자)으로
+        // 시작했다 — 이제 `BibleSlideColorTheme`의 "서재 아이보리"(#F7F0E2
+        // 배경 + #241A10 글자, 참고 화면과 거의 같은 톤)로 시작하게 한다.
+        // ⚠️ 주의: `bibleTextColorHex`/`bibleBackgroundColorHex`의 빈 문자열
+        // ("")은 이미 "설정 화면의 [시스템 기본색상으로 되돌리기] 버튼을 눌러
+        // 명시적으로 시스템 기본으로 되돌린 상태"라는 의미로도 쓰이고 있다
+        // (바로 위 두 프로퍼티 선언부 주석 참고) — "한 번도 설정 안 함"과
+        // "설정했다가 명시적으로 되돌림"을 구분하지 않고 그냥 "비어있으면
+        // 서재 아이보리로 채운다"로 바꾸면, 되돌리기 버튼을 눌러도 다시는
+        // 진짜 시스템 기본으로 못 돌아가는 회귀가 생긴다. 그래서 `UserDefaults`에
+        // 그 키 자체가 한 번도 저장된 적이 없을 때(`defaults.object(forKey:)
+        // == nil`, 순수 신규 상태)만 새 기본값을 쓰고, 이미 값이 저장돼
+        // 있으면(빈 문자열 포함, 즉 되돌리기를 눌렀던 경우) 그 저장된 값을
+        // 그대로 존중한다.
+        let defaultReadingTheme = BibleSlideColorTheme.all.first { $0.name == "서재 아이보리" }
+        if defaults.object(forKey: Key.bibleTextColorHex) == nil {
+            self.bibleTextColorHex = defaultReadingTheme?.textHex ?? ""
+        } else {
+            self.bibleTextColorHex = defaults.string(forKey: Key.bibleTextColorHex) ?? ""
+        }
+        if defaults.object(forKey: Key.bibleBackgroundColorHex) == nil {
+            self.bibleBackgroundColorHex = defaultReadingTheme?.backgroundHex ?? ""
+        } else {
+            self.bibleBackgroundColorHex = defaults.string(forKey: Key.bibleBackgroundColorHex) ?? ""
+        }
+        // [2026-09-11 추가] 위 "순수 신규 설치" 판정을 그대로 재사용 — 신규
+        // 설치는 방금 위에서 hex를 "서재 아이보리"로 채웠으니 모드도 `.light`로
+        // 맞춘다. 기존 사용자는 저장된 모드 문자열이 있으면 그대로 존중하고,
+        // 없으면(이 기능이 생기기 전부터 쓰던 경우) 커스텀(nil)으로 둔다 —
+        // 그 사람의 기존 hex가 이번에 삭제된 3개 프리셋 중 하나였을 수 있어
+        // 남은 2개 중 하나로 임의로 단정하지 않는다.
+        if defaults.object(forKey: Key.bibleTextColorHex) == nil {
+            self.bibleThemeModePreference = .light
+        } else {
+            self.bibleThemeModePreference = defaults.string(forKey: Key.bibleThemeModePreference).flatMap(BibleThemeModePreference.init)
+        }
 
         self.copyReferencePosition = (defaults.string(forKey: Key.copyReferencePosition)).flatMap(TextPosition.init) ?? .afterBody
         self.copyReferenceBracketStyle = (defaults.string(forKey: Key.copyReferenceBracketStyle)).flatMap(ReferenceBracketStyle.init) ?? .square

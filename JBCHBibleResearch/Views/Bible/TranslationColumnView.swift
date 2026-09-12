@@ -215,26 +215,45 @@ struct TranslationColumnView: View {
     private static let phoneReportDebounceInterval: TimeInterval = 0.15
     @State private var phoneReportWorkItem: DispatchWorkItem?
 
+    /// [2026-09-10 추가] 사용자 요청 — "성경구절 시작되는 상단, 성경구절이동
+    /// 툴 아래의 번역본 + 책 + 장은 삭제할것"(아이폰 한정). 아이폰은 [성경]
+    /// 화면의 진짜 시스템 내비게이션 바(`BibleReadingContentView.
+    /// toolbarContent`의 `.principal`)가 이미 번역본/책/장을 두 줄로 보여주고
+    /// 있어(2026-09-10 수정), 바로 아래 이 컬럼 제목 영역까지 같은 정보를 또
+    /// 보여주면 중복이다 — 아이폰만 이 제목 영역을 숨긴다(아래 `body` 참고).
+    /// 맥/아이패드는 한 화면에 여러 컬럼(번역본)을 나란히 보여줄 수 있어
+    /// 각 컬럼이 어느 번역본인지 구분할 방법이 이 제목 말고는 없으므로
+    /// 그대로 둔다. `BibleReadingContentView.isPhone`과 완전히 같은 패턴.
+    private var isPhone: Bool {
+        #if os(iOS)
+        UIDevice.current.userInterfaceIdiom == .phone
+        #else
+        false
+        #endif
+    }
+
     var body: some View {
         VStack(alignment: .leading, spacing: 0) {
-            VStack(alignment: .leading, spacing: 2) {
-                // [2026-09-02 수정] 사용자 요청 — "테마색상/글자색 변경 시
-                // 번역본이름·성경장 텍스트 색상도 함께 바뀌어야 함." 기존엔
-                // `.secondary`/`.tertiary`(시스템 고정 톤)였다 — 사용자가 글자색을
-                // 직접 골랐으면(`bibleTextColor` != nil) 그 색을 그대로 쓰고,
-                // 안 골랐으면(nil) 기존 톤을 그대로 유지한다.
-                Text(translationDisplayName)
-                    .font(.headline)
-                    .foregroundStyle(settings.bibleTextColor ?? .secondary)
-                if let localizedBookChapterLabel, !localizedBookChapterLabel.isEmpty {
-                    Text(localizedBookChapterLabel)
-                        .font(.caption)
-                        .foregroundStyle(settings.bibleTextColor ?? systemTertiaryTextColor)
+            if !isPhone {
+                VStack(alignment: .leading, spacing: 2) {
+                    // [2026-09-02 수정] 사용자 요청 — "테마색상/글자색 변경 시
+                    // 번역본이름·성경장 텍스트 색상도 함께 바뀌어야 함." 기존엔
+                    // `.secondary`/`.tertiary`(시스템 고정 톤)였다 — 사용자가 글자색을
+                    // 직접 골랐으면(`bibleTextColor` != nil) 그 색을 그대로 쓰고,
+                    // 안 골랐으면(nil) 기존 톤을 그대로 유지한다.
+                    Text(translationDisplayName)
+                        .font(.headline)
+                        .foregroundStyle(settings.bibleTextColor ?? .secondary)
+                    if let localizedBookChapterLabel, !localizedBookChapterLabel.isEmpty {
+                        Text(localizedBookChapterLabel)
+                            .font(.caption)
+                            .foregroundStyle(settings.bibleTextColor ?? systemTertiaryTextColor)
+                    }
                 }
+                .padding(.horizontal)
+                .padding(.top, 8)
+                .padding(.bottom, 4)
             }
-            .padding(.horizontal)
-            .padding(.top, 8)
-            .padding(.bottom, 4)
 
             if let errorDescription {
                 ContentUnavailableMessage(errorDescription)
@@ -832,7 +851,11 @@ private struct MarginalNoteFootnoteList: View {
             ForEach(Array(notes.enumerated()), id: \.offset) { _, note in
                 Text("\(note.markerText ?? "") \(note.noteText)")
                     .font(.system(size: 14))
-                    .foregroundStyle(.secondary)
+                    // [2026-09-11 수정] 사용자 재검토 요청 — 같은 절 행의 절
+                    // 번호/아이콘/본문은 전부 `settings.bibleTextColor` 폴백
+                    // 체인을 따르는데 이 각주만 고정 `.secondary`였다 — 형제
+                    // 요소와 같은 패턴으로 맞춘다.
+                    .foregroundStyle(UserSettingsStore.shared.bibleTextColor?.opacity(0.75) ?? Color.secondary)
             }
         }
         // 절 번호 칸(`VerseRow`의 `.frame(minWidth: 20)` + HStack spacing 8)만큼
@@ -908,20 +931,35 @@ private struct VerseRow: View {
         // 표시줄은 전부 이 바깥 `VStack`으로 옮겨서, 각주 목록도 같은 카드
         // 안(같은 배경색·모서리)에 포함되게 한다.
         VStack(alignment: .leading, spacing: 4) {
-            HStack(alignment: .top, spacing: 8) {
-            // [2026-09-04 신설] 사용자 요청 — "책갈피를 설정하면 성경 본문
-            // 절번호 왼쪽에 길게 갈피실 색상으로 세로라인을 그어줄 수
-            // 있는가?" 너비만 정하고 높이는 지정하지 않는다 — `RoundedRectangle`은
-            // 기본적으로 남는 공간을 다 채우려 하므로, 이 `HStack`의 다른
-            // 자식(절 번호/아이콘 칸, 본문) 중 더 큰 쪽 높이에 자동으로
-            // 맞춰진다(여러 줄로 감기는 절일수록 선도 함께 길어진다). 절
-            // 선택 시 왼쪽에 그리는 강조색 세로선(아래 `.overlay` 참고)과는
-            // 서로 다른 자리(그건 카드 바깥쪽 가장자리)라 겹치지 않는다.
-            if isBookmarked {
-                RoundedRectangle(cornerRadius: 1.25)
-                    .fill(JBCHCategoryPalette.wine)
-                    .frame(width: 2.5)
-            }
+            // [2026-09-09 수정] 사용자 보고 — "절 번호 남색 뱃지 상단 위치가
+            // 성경 구절 텍스트 상단 위치와 일치하지 않고 위로 올라가 있음."
+            // 원인 — `.top`은 절 번호 칸(아래 `VStack`)과 본문(`verseContentText`)
+            // 두 뷰의 "레이아웃 상자(프레임)" 윗변만 맞춘다. 절 번호는 작은
+            // 글꼴(`bibleVerseNumberFont`)에 위아래 padding 1만 더한 촘촘한
+            // 상자라 숫자 글자가 상자 위쪽에 바짝 붙어 있지만, 본문은 훨씬 큰
+            // 글꼴이라 글자가 그려지기 전에 폰트 자체의 어센더(글자 위 여백)
+            // 공간이 상자 위쪽에 더 많이 남는다 — 그래서 두 상자의 "윗변"은
+            // 맞아도 실제 숫자와 글자 "잉크"의 시작 높이는 어긋나 보인다.
+            // `.firstTextBaseline`은 상자 윗변이 아니라 각 폰트가 실제로
+            // 계산하는 베이스라인(글자가 앉는 기준선)을 맞추므로, 글꼴
+            // 크기가 서로 달라도 눈에 보이는 글자 시작 위치가 자연스럽게
+            // 정렬된다 — 임의의 여백 수치를 추정해 넣는 대신, SwiftUI가
+            // 폰트 메트릭으로 정확히 계산해 주는 정렬 방식을 그대로 쓴다.
+            // 절 번호 칸(아래 `VStack`)의 첫 자식이 뱃지 `Text`이므로, 이
+            // `VStack` 전체의 `firstTextBaseline`은 그 `Text`의 베이스라인을
+            // 그대로 따른다(SwiftUI 기본 동작 — 컨테이너가 이 정렬 기준을
+            // 따로 지정하지 않으면 첫 자식의 값을 물려받는다). 왼쪽 책갈피
+            // 세로선(바로 아래)은 높이를 지정하지 않은 채 남는 공간을 채우는
+            // 방식이라(아래 주석 참고) 정렬 기준이 바뀌어도 여전히 행 전체
+            // 높이를 그대로 채운다 — 시각적으로 영향 없다.
+            HStack(alignment: .firstTextBaseline, spacing: 8) {
+            // [2026-09-11 수정] 사용자 보고 — "절단위 책갈피시 그 절이
+            // 하단으로 밀려 밑에 구절과 겹침." 원래 여기 있던 "높이를
+            // 지정하지 않은 세로선"(`RoundedRectangle`, 남는 공간을 다
+            // 채우려는 성질)이 이 행의 레이아웃 높이 계산을 예상보다 키워
+            // 다음 절과 겹치는 것으로 추정된다 — 세로선 자체를 없애고, 절
+            // 번호 아래 아이콘 칸(바로 아래 `VStack`)에 관주/난외주와 같은
+            // 방식(고정 크기 아이콘)으로 옮겼다. 그쪽 구현 참고.
             // [2026-08-09 수정] 사용자 요청 — "메모 아이콘, 관주아이콘 위치를
             // 절 번호 밑에 세로로 배치하여 차지하는 영역을 줄일 수 있도록 할
             // 것." 이전엔 두 아이콘이 절 번호·본문과 나란히(가로로) 놓여
@@ -932,9 +970,45 @@ private struct VerseRow: View {
             VStack(alignment: .center, spacing: 3) {
                 // [2026-09-02 수정] 사용자 요청 — "각 구절별 왼쪽 끝 절번호,
                 // 아이콘 색상도 테마색상/글자색 변경에 맞춰 바뀌어야 함."
+                // [2026-09-09 재작성] 사용자 요청 — 참고 화면(다른 성경 앱)처럼
+                // "절 번호를 짙은 뱃지 안의 숫자로" 바꿔달라는 요청 + "테마
+                // (가죽 서고/밤빛 서재 등)를 고르면 뱃지 색도 같이 바뀌어야
+                // 함." 새 hex를 만드는 대신, 이 절이 이미 쓰고 있는 배경/글자
+                // 색 쌍을 그대로 "뒤집어" 쓴다 — 뱃지 배경 = 현재 글자색
+                // (`bibleTextColor`), 뱃지 안 숫자색 = 현재 배경색
+                // (`bibleBackgroundColor`). `BibleSlideColorTheme.all`의 5개
+                // 테마는 전부 이 배경/글자 쌍의 WCAG 대비를 이미 검증해 뒀고
+                // (그 파일 상단 주석 — 전부 AA 4.5:1 이상), 대비 비율은 두 색의
+                // 순서를 바꿔도 값이 그대로이므로(상대 휘도 비율 공식이
+                // 대칭적) 뒤집어도 같은 대비가 보장된다 — 테마 5종이 늘어나도
+                // 이 뱃지가 별도 매핑 없이 자동으로 맞는 색을 따라간다.
+                // 두 값 다 사용자가 아직 고르지 않았을 때만(= 설정 화면
+                // "시스템 기본색상으로 되돌리기"를 누른 뒤) `JBCHCategoryPalette.
+                // navy` + 흰 숫자로 대체한다 — 라이트/다크 모드 어느 쪽에서도
+                // 항상 또렷하게 보이는 고정 조합이라 시스템 기본 상태의
+                // 안전한 대체값으로 적절하다.
                 Text("\(verse.verse)")
-                    .font(settings.bibleVerseNumberFont)
-                    .foregroundStyle(settings.bibleTextColor ?? .secondary)
+                    .font(settings.bibleVerseNumberFont.weight(.semibold))
+                    .foregroundStyle(settings.bibleBackgroundColor ?? .white)
+                    .padding(.horizontal, 4)
+                    .padding(.vertical, 1)
+                    .frame(minWidth: 20)
+                    .background(
+                        settings.bibleTextColor ?? JBCHCategoryPalette.navy,
+                        in: RoundedRectangle(cornerRadius: 5, style: .continuous)
+                    )
+
+                // [2026-09-11 신설] 사용자 보고 — "절단위 책갈피시 그 절이
+                // 하단으로 밀려 밑에 구절과 겹침(책갈피 라인두께때문으로
+                // 추정)." 위 HStack 상단 주석 참고 — 세로선 대신 관주/난외주와
+                // 같은 고정 크기 아이콘으로 바꿨다. "절 숫자번호 밑에 살짝
+                // 겹치게"(요청사항) 보이도록 위쪽에 음수 패딩을 줘 끌어올린다.
+                if isBookmarked {
+                    Image(systemName: "bookmark.fill")
+                        .font(.caption2)
+                        .foregroundStyle(JBCHCategoryPalette.wine)
+                        .padding(.top, -4)
+                }
 
                 // [2026-08-08 추가] 관주 마커 — 인쇄본처럼 본문 글자 사이에
                 // 정확히 끼워 넣지는 못한다(SwiftUI `Text(AttributedString)`은
@@ -1051,7 +1125,7 @@ private struct VerseRow: View {
             // 절에는 왼쪽에 강조색 세로선을 하나 더 그어 명확히 한다.
             if isSelected {
                 RoundedRectangle(cornerRadius: 1.5)
-                    .fill(Color.accentColor)
+                    .fill(Color("AccentColor"))
                     .frame(width: 3)
                     .padding(.vertical, 2)
             }
@@ -1231,8 +1305,8 @@ private struct VerseRow: View {
     /// 판단했다 — 하이라이트는 "스크롤이 여기로 왔다"는 일시적 안내지만, 선택은
     /// 사용자가 직접 고른 상태라 실수로 놓치면 엉뚱한 절이 복사될 수 있다.
     private var backgroundColor: Color {
-        if isSelected { return Color.accentColor.opacity(0.28) }
-        if isHighlighted { return Color.accentColor.opacity(0.15) }
+        if isSelected { return Color("AccentColor").opacity(0.28) }
+        if isHighlighted { return Color("AccentColor").opacity(0.15) }
         return Color.clear
     }
 }
