@@ -3,8 +3,19 @@
 //  JBCHBibleResearch
 //
 //  S5(연구문서 업로드) 화면. screens.md 3장 S5/S6/S7 절 + 14장(업로드→인덱싱
-//  프로세스) 근거. 업로드 3가지 진입점(툴바 `+`, 드래그앤드롭 존, 드롭존 클릭)이
+//  프로세스) 근거. 업로드 진입점(툴바 `+`, 드래그앤드롭 존, 드롭존 클릭)이
 //  모두 `DocumentsViewModel.upload(urls:)` 하나를 공유한다.
+//
+//  [2026-09-17 추가] 사용자 요청 — "연구문서에 사진 앱에 있는 사진도 업로드할
+//  수 있게 할 것." 기존 세 진입점은 전부 파일 시스템 URL(Files 앱 선택기/
+//  드래그앤드롭)을 전제로 하는데, iOS의 사진 보관함(Photos)은 파일 시스템
+//  URL이 아니라 `PhotosPickerItem`(자산 식별자)으로만 접근할 수 있어 그대로는
+//  이 공유 파이프라인에 들어올 수 없다 — 그래서 아래 `handlePickedPhotos`가
+//  선택된 각 사진의 원본 데이터를 앱 임시 폴더에 파일로 써서 평범한 파일
+//  URL로 바꾼 뒤, 그 URL을 기존 `beginUpload(urls:)`에 그대로 흘려보낸다(4번째
+//  진입점이지만 결국 같은 파이프라인 재사용, 이 파일의 기존 원칙 그대로).
+//  `PhotosPicker`(PhotosUI)는 iOS/iPadOS 전용 API라 iOS에서만 노출한다 — 맥OS
+//  툴바 버튼은 기존과 동일하게 파일 선택기만 연다.
 //
 //  ⚠️ [아이폰 hwp 차단] `UIDevice.current.userInterfaceIdiom == .phone`일 때만
 //  `DocumentUploadService.supportedContentTypes(allowHWP:)`에 `false`를 넘긴다 —
@@ -25,6 +36,7 @@ import UniformTypeIdentifiers
 import BibleResearchModels
 #if os(iOS)
 import UIKit
+import PhotosUI
 #endif
 
 /// [2026-08-16 신설] 사용자 요청 — "카테고리는 1) 업로드할 때 지정한 성경
@@ -140,11 +152,13 @@ struct DocumentsHomeView: View {
 
     @State private var isFileImporterPresented = false
     @State private var isDropTargeted = false
-    /// [2026-08-07 추가] S7 "저장 후 다음" 큐 — 검수 대기 중인 문서 목록을 탭한
-    /// 문서부터 시작하도록 회전시켜 담는다. 비어 있지 않으면 시트가 떠 있다는 뜻.
-    /// `OCRReviewQueueView.swift` 참고.
-    @State private var ocrReviewQueue: [SourceDocument] = []
-
+    /// [2026-09-17 신설] 위 파일 상단 주석("사진 앱에서 업로드") 참고 — 사진
+    /// 보관함 선택기 표시 여부와 선택된 항목. iOS/iPadOS 전용(`PhotosPicker`가
+    /// PhotosUI, iOS 전용 API).
+    #if os(iOS)
+    @State private var isPhotosPickerPresented = false
+    @State private var selectedPhotosPickerItems: [PhotosPickerItem] = []
+    #endif
     /// [2026-08-08 추가] 사용자 요청 — "문서를 업로드할 때 관련 성경 장을 입력받을
     /// 수 있도록". 업로드 3가지 진입점(툴바/드래그앤드롭/드롭존 클릭)에서 URL을
     /// 얻으면 곧바로 업로드하지 않고 일단 여기 담아 뒀다가, 관련 장 확인 시트에서
@@ -327,11 +341,32 @@ struct DocumentsHomeView: View {
             #endif
             ToolbarItem(placement: .primaryAction) {
                 // 진입점 1: 툴바 상시 노출 버튼(13장 "새 메모" 버튼과 동일 원칙).
+                // [2026-09-17 수정] 위 파일 상단 주석 참고 — iOS/iPadOS는 "파일에서
+                // 선택"(기존 동작 그대로)과 "사진 보관함에서 선택"(신설) 중 고를 수
+                // 있도록 단일 버튼을 메뉴로 바꿨다. 맥OS는 `PhotosPicker`가 없는
+                // 플랫폼이라 기존과 똑같은 단일 버튼을 그대로 둔다.
+                #if os(iOS)
+                Menu {
+                    Button {
+                        isFileImporterPresented = true
+                    } label: {
+                        Label("파일에서 선택", systemImage: "folder")
+                    }
+                    Button {
+                        isPhotosPickerPresented = true
+                    } label: {
+                        Label("사진 보관함에서 선택", systemImage: "photo.on.rectangle")
+                    }
+                } label: {
+                    Label("업로드", systemImage: "square.and.arrow.up")
+                }
+                #else
                 Button {
                     isFileImporterPresented = true
                 } label: {
                     Label("업로드", systemImage: "square.and.arrow.up")
                 }
+                #endif
             }
         }
         .fileImporter(
@@ -343,6 +378,32 @@ struct DocumentsHomeView: View {
                 beginUpload(urls: urls)
             }
         }
+        // [2026-09-17 신설] 위 파일 상단 주석("사진 앱에서 업로드") 참고 — 선택
+        // 즉시 `handlePickedPhotos`가 각 사진을 임시 파일로 내려받아 기존
+        // `beginUpload(urls:)` 파이프라인에 그대로 흘려보낸다. `matching: .images`로
+        // 사진만 필터링한다(동영상은 "연구문서" 대상이 아니므로 제외 — 기존
+        // `DocumentUploadService.supportedContentTypes`가 이미지만 다루는 것과
+        // 같은 범위).
+        #if os(iOS)
+        .photosPicker(
+            isPresented: $isPhotosPickerPresented,
+            selection: $selectedPhotosPickerItems,
+            matching: .images
+        )
+        .onChange(of: selectedPhotosPickerItems) { _, newItems in
+            guard !newItems.isEmpty else { return }
+            let itemsToLoad = newItems
+            selectedPhotosPickerItems = []
+            // [2026-09-17 신설] 이 파일 하단 `DropZoneModifier`가 이미 쓰고 있는
+            // 것과 같은 패턴 — `PhotosPickerItem.loadTransferable`은 메인
+            // 액터에 격리돼 있지 않은 일반 async API라, 그 결과로 `@State`를
+            // 바꾸는(`beginUpload` 경유) 이어지는 작업은 명시적으로
+            // `@MainActor`로 감싼다(추론에 기대지 않음).
+            Task { @MainActor in
+                await handlePickedPhotos(itemsToLoad)
+            }
+        }
+        #endif
         // [2026-08-08 추가, 2026-08-18 카테고리 강제 추가] 업로드 확인 시트 —
         // "건너뛰기"로 닫으면 관련 장 없이 업로드, "이 장으로 업로드"를 고르면
         // 관련 장을 실어서 업로드한다. `pendingUploadURLs`가 비어 있지 않은
@@ -404,23 +465,12 @@ struct DocumentsHomeView: View {
         } message: {
             Text(viewModel?.lastErrorDescription ?? "")
         }
-        // [2026-08-07 추가] S7(OCR 검수) — screens.md 14.3 "검수 화면 진입(대기열
-        // 방식 — '저장 후 다음'으로 순차 처리)"을 이제 실제로 반영한다. 예전엔 검수
-        // 대기 행을 탭하면 NavigationLink로 OCRReviewView 하나만 열고, 저장하면
-        // 목록으로 돌아가 사용자가 다음 대기 행을 다시 찾아 탭해야 했다 — 여기서는
-        // 탭한 문서를 큐 맨 앞으로 오도록 회전시킨 뒤 시트로 열고, 저장/폐기할
-        // 때마다 큐 안에서 자동으로 다음 문서로 넘어간다(OCRReviewQueueView 참고).
-        .sheet(isPresented: Binding(
-            get: { !ocrReviewQueue.isEmpty },
-            set: { isPresented in
-                if !isPresented {
-                    ocrReviewQueue = []
-                    viewModel?.loadDocuments()
-                }
-            }
-        )) {
-            OCRReviewQueueView(queue: ocrReviewQueue)
-        }
+        // [2026-09-27 삭제] 사용자 요청 — "OCR 검수화면은 없앨 것." 예전엔
+        // 여기서 검수 대기 문서를 큐로 모아 `OCRReviewQueueView` 시트를
+        // 열었다 — `DocumentTextExtractionService.extractImageOCR`가 이제
+        // Vision 인식 결과를 곧바로 반영·인덱싱까지 마쳐 "검수 대기" 상태
+        // 자체가 없어졌으므로, 이 시트와 `ocrReviewQueue`/
+        // `presentOCRReviewQueue(startingAt:)`를 함께 제거했다.
     }
 
     // MARK: - 문서함 홈(카드형, 2026-09-11 신설)
@@ -535,8 +585,8 @@ struct DocumentsHomeView: View {
                                     bodyExcerpt: nil,
                                     bodyOccurrenceSum: 0,
                                     matchedTagNames: [],
-                                    viewModel: viewModel,
-                                    onOpenOCRReview: presentOCRReviewQueue
+                                    documentSearchText: "",
+                                    viewModel: viewModel
                                 )
                                 if document.id != recentDocuments.last?.id {
                                     Divider()
@@ -599,6 +649,7 @@ struct DocumentsHomeView: View {
             }
         }
         .buttonStyle(.plain)
+        .contentShape(Rectangle())
     }
 
     @ViewBuilder
@@ -753,6 +804,7 @@ struct DocumentsHomeView: View {
             )
         }
         .buttonStyle(.plain)
+        .contentShape(Rectangle())
     }
 
     /// [2026-09-11 신설] 위 `splitMainContent`/`phoneMainContent`가 공유하는
@@ -769,8 +821,8 @@ struct DocumentsHomeView: View {
                 bodyExcerpt: result.score.bodyExcerpt,
                 bodyOccurrenceSum: result.score.bodyOccurrenceSum,
                 matchedTagNames: result.score.matchedTagNames,
-                viewModel: viewModel,
-                onOpenOCRReview: presentOCRReviewQueue
+                documentSearchText: searchText,
+                viewModel: viewModel
             )
             .listRowBackground(Color.clear)
         }
@@ -1248,20 +1300,6 @@ struct DocumentsHomeView: View {
         }
     }
 
-    /// 탭한 문서를 맨 앞으로 오도록 검수 대기 문서 목록을 회전시켜 큐를 만든다 —
-    /// 목록 순서 자체는 그대로 유지하되(최근 업로드순), 사용자가 탭한 문서부터
-    /// 시작해서 나머지 대기 문서를 이어서 보여주는 것이 "저장 후 다음" 취지에
-    /// 맞다고 판단했다.
-    private func presentOCRReviewQueue(startingAt document: SourceDocument) {
-        guard let viewModel else { return }
-        let pending = queriedDocuments.filter { viewModel.hasPendingOCRReview($0) }
-        guard let startIndex = pending.firstIndex(where: { $0.persistentModelID == document.persistentModelID }) else {
-            ocrReviewQueue = [document]
-            return
-        }
-        ocrReviewQueue = Array(pending[startIndex...]) + Array(pending[..<startIndex])
-    }
-
     // MARK: - 드롭존(진입점 2, 3)
 
     private func dropZone(viewModel: DocumentsViewModel) -> some View {
@@ -1343,6 +1381,58 @@ struct DocumentsHomeView: View {
         pendingUploadCategory = nil
         pendingUploadURLs = urls
     }
+
+    // MARK: - 사진 앱(Photos)에서 업로드 (2026-09-17 신설)
+
+    /// 위 파일 상단 주석 참고 — 사진 보관함의 각 항목은 파일 시스템 URL이 아니라
+    /// `PhotosPickerItem`(자산 식별자)이라, 원본 데이터를 읽어 앱 임시 폴더에
+    /// 평범한 파일로 저장한 뒤에야 기존 `beginUpload(urls:)` 파이프라인(관련 장
+    /// 지정 시트 → `DocumentsViewModel.upload` → `DocumentUploadService.
+    /// createSourceDocument`)에 태울 수 있다. `createSourceDocument`가 내부에서
+    /// `startAccessingSecurityScopedResource()`를 호출하긴 하지만, 보안 스코프가
+    /// 필요 없는 평범한(앱 소유) URL에 대해서는 그 호출이 그냥 `false`를 돌려줄
+    /// 뿐 실패로 이어지지 않는다(`DocumentUploadService.swift` 해당 함수들 확인) —
+    /// 그래서 이 임시 파일들도 기존 세 진입점(Files 선택기·드래그앤드롭)이 주는
+    /// URL과 동일하게 안전하게 처리된다.
+    ///
+    /// 확장자는 각 항목의 `supportedContentTypes`(그 사진의 실제 형식 —
+    /// picker에 넘긴 필터 `.images`가 아니라 사용자가 고른 자산 자체의 타입)에서
+    /// 얻는다 — 알아낼 수 없으면 "jpg"로 폴백한다(대부분의 사진 보관함 원본이
+    /// JPEG/HEIC이고, `DocumentUploadService.createSourceDocument`의 스위치가
+    /// 어차피 jpg/jpeg/png/heic/heif를 전부 같은 `.image` 형식으로 다루므로
+    /// 확장자를 못 맞혀도 업로드 자체가 실패하지는 않는다).
+    ///
+    /// ⚠️ [알려진 사소한 한계, 의도적으로 범위에서 제외] 여기서 만든 임시 파일은
+    /// 업로드가 끝난 뒤에도 앱이 직접 지우지 않는다 — 기존 세 진입점(Files
+    /// 선택기·드래그앤드롭)이 넘기는 "원본" URL은 사용자 소유 파일이라 이
+    /// 파이프라인 어디에서도 원본을 지우는 코드가 없고(파일 상단 주석의 "복사"
+    /// 원칙 — 원본을 다른 용도로 계속 쓸 수 있어야 함), 그 공용 경로
+    /// (`pendingUploadURLs`/`finishPendingUpload`)에 "이 URL은 앱이 만든 임시
+    /// 파일이라 나중에 지워도 된다"는 표시를 얹으려면 세 진입점 모두가 공유하는
+    /// 상태에 손을 대야 한다 — 사소한 임시 저장공간 정리를 위해 검증된 기존
+    /// 경로를 건드리는 건 과한 대응이라 보류했다. iOS가 임시 폴더(`/tmp`)를
+    /// 알아서 주기적으로 정리하므로 실질적 위험은 낮다.
+    #if os(iOS)
+    @MainActor
+    private func handlePickedPhotos(_ items: [PhotosPickerItem]) async {
+        var savedURLs: [URL] = []
+        for item in items {
+            guard let data = try? await item.loadTransferable(type: Data.self) else { continue }
+            let ext = item.supportedContentTypes.first?.preferredFilenameExtension ?? "jpg"
+            let tempURL = FileManager.default.temporaryDirectory
+                .appendingPathComponent(UUID().uuidString)
+                .appendingPathExtension(ext)
+            do {
+                try data.write(to: tempURL)
+                savedURLs.append(tempURL)
+            } catch {
+                continue
+            }
+        }
+        guard !savedURLs.isEmpty else { return }
+        beginUpload(urls: savedURLs)
+    }
+    #endif
 
     private func finishPendingUpload(relatedChapter: BibleChapterRef?) {
         let urls = pendingUploadURLs
@@ -1576,11 +1666,20 @@ private struct DocumentRowView: View {
     /// 본문 앞에 태그명을 뱃지형식으로 보여줄것." 실제로 검색어와 일치한 태그
     /// 이름들 — 비어 있으면 뱃지를 그리지 않는다.
     let matchedTagNames: [String]
+    /// [2026-09-28 추가] 사용자 요청 — "연구문서 내 검색영역에서 검색한 결과를
+    /// 클릭했을 때 통합검색의 연구문서 결과를 클릭했을 때와 동일하도록 키워드
+    /// 강조표시 할것." 지금까지는 이 행을 눌러 뷰어를 열 때 검색 중이었는지와
+    /// 무관하게 항상 `document-viewer` 창(검색어 없음)만 열어서, 목록에서는
+    /// 하이라이트(`highlightKeywords`)가 보이는데 정작 뷰어를 열면 그 강조가
+    /// 사라졌다. `SearchView.documentSearchText`(통합검색의 연구문서 결과가
+    /// 이미 같은 문제를 이렇게 풀어 뒀다 — 그 파일 상단 주석 참고)와 정확히
+    /// 같은 방식: `highlightKeywords`(복수)는 `DocumentSearchRequest.searchText`
+    /// (단수 String) 한 자리에 그대로 못 넣으므로, 부모(`DocumentsHomeView`)의
+    /// 검색창 문자열 자체를 그대로 받아 둔다. 검색 중이 아니면(빈 문자열) 기존과
+    /// 동일하게 검색어 없이 연다 — "최근 문서" 목록(`recentDocuments`)에서 이
+    /// 타입을 만드는 자리는 검색 문맥이 아니므로 빈 문자열을 넘긴다.
+    let documentSearchText: String
     let viewModel: DocumentsViewModel
-    /// [2026-08-07 추가] 검수 대기 중인 문서를 탭했을 때 부모(DocumentsHomeView)에게
-    /// "이 문서부터 시작하는 검수 큐를 열어 달라"고 알린다.
-    let onOpenOCRReview: (SourceDocument) -> Void
-
     @Environment(\.openWindow) private var openWindow
     // [2026-09-11 추가] 사용자 재검토 요청 — 아래 문서 행 강조선이 다크
     // 배경(특히 "밤빛 서재" 테마, navy와 배경이 같은 색)에서 거의 안 보이는
@@ -1676,20 +1775,44 @@ private struct DocumentRowView: View {
         // 부분). 그래서 아이폰에서만 `openWindow` 대신 이 탭의 NavigationStack
         // 안으로 `NavigationLink(value:)`로 밀어 넣는다 — `.navigationDestination
         // (for: PersistentIdentifier.self)`는 이 파일 하단에 등록.
+        // [2026-09-27 삭제] 사용자 요청 — "OCR 검수화면은 없앨 것." 예전엔
+        // 여기서 검수 대기 문서만 별도로 시트+큐(S7)를 여는 분기가 있었다 —
+        // `extractImageOCR`가 이제 곧바로 인덱싱까지 마쳐 그 상태 자체가
+        // 없어졌으므로, 모든 문서가 아래 일반 뷰어 경로(아이폰은 같은
+        // NavigationStack 안 푸시, 그 외는 별도 창) 하나로 통일된다.
         Group {
-            if viewModel.hasPendingOCRReview(document) {
-                Button {
-                    onOpenOCRReview(document)
-                } label: {
-                    documentRowLabel
-                }
-            } else if isPhoneIdiom {
-                NavigationLink(value: document.persistentModelID) {
-                    documentRowLabel
+            // [2026-09-28 추가] 위 `documentSearchText` 프로퍼티 주석 참고 —
+            // 검색 중일 때만(공백 제거 후 비어 있지 않을 때만) 검색어를 함께
+            // 실어 여는 "document-search" 경로로 바꾸고, 검색 중이 아니면
+            // 기존 "document-viewer"(검색어 없음) 경로를 그대로 쓴다.
+            let trimmedSearchText = documentSearchText.trimmingCharacters(in: .whitespacesAndNewlines)
+            if isPhoneIdiom {
+                if trimmedSearchText.isEmpty {
+                    NavigationLink(value: document.persistentModelID) {
+                        documentRowLabel
+                    }
+                } else {
+                    // `SearchView.documentRow`의 아이폰 분기와 같은 패턴 —
+                    // `.navigationDestination(for:)` 등록 없이 클로저 기반
+                    // `NavigationLink`로 바로 `DocumentSearchWindowContent`를 민다.
+                    NavigationLink {
+                        DocumentSearchWindowContent(
+                            request: DocumentSearchRequest(documentID: document.persistentModelID, searchText: trimmedSearchText)
+                        )
+                    } label: {
+                        documentRowLabel
+                    }
                 }
             } else {
                 Button {
-                    openWindow(id: "document-viewer", value: document.persistentModelID)
+                    if trimmedSearchText.isEmpty {
+                        openWindow(id: "document-viewer", value: document.persistentModelID)
+                    } else {
+                        openWindow(
+                            id: "document-search",
+                            value: DocumentSearchRequest(documentID: document.persistentModelID, searchText: trimmedSearchText)
+                        )
+                    }
                 } label: {
                     documentRowLabel
                 }
@@ -1923,28 +2046,26 @@ private struct DocumentRowView: View {
 
     @ViewBuilder
     private var statusBadge: some View {
-        if viewModel.hasPendingOCRReview(document) {
-            badge("검수 대기", color: Self.statusAmber)
-        } else {
-            switch document.conversionStatus {
-            case .pending:
-                badge("대기", color: Self.statusAmber)
-            case .convertingNative:
+        // [2026-09-27 삭제] "검수 대기" 배지 — `hasPendingOCRReview` 자체가
+        // 없어졌다(위 `documentRow` 주석 참고).
+        switch document.conversionStatus {
+        case .pending:
+            badge("대기", color: Self.statusAmber)
+        case .convertingNative:
+            badge("추출 중", color: Self.statusAmber)
+        case .converted:
+            // [2026-09-11 수정] 사용자 요청 — "인덱싱 완료 뱃지는
+            // 불필요함. 인덱싱이 안되었을 때 처리를 하는 것이 낫고,
+            // 인덱싱 완료가 일반적인 상황이므로 굳이 뱃지를 붙일 필요가
+            // 없음." 완료 상태는 더 이상 뱃지를 그리지 않고, 아직 안 된
+            // 경우(예외적 상황)만 계속 보여준다.
+            if document.indexStatus == .indexed {
+                EmptyView()
+            } else {
                 badge("추출 중", color: Self.statusAmber)
-            case .converted:
-                // [2026-09-11 수정] 사용자 요청 — "인덱싱 완료 뱃지는
-                // 불필요함. 인덱싱이 안되었을 때 처리를 하는 것이 낫고,
-                // 인덱싱 완료가 일반적인 상황이므로 굳이 뱃지를 붙일 필요가
-                // 없음." 완료 상태는 더 이상 뱃지를 그리지 않고, 아직 안 된
-                // 경우(예외적 상황)만 계속 보여준다.
-                if document.indexStatus == .indexed {
-                    EmptyView()
-                } else {
-                    badge("추출 중", color: Self.statusAmber)
-                }
-            case .failedNeedsManual:
-                badge("실패", color: Self.statusRed)
             }
+        case .failedNeedsManual:
+            badge("실패", color: Self.statusRed)
         }
     }
 
@@ -2021,7 +2142,7 @@ private struct DocumentRowView: View {
                         .lineLimit(2)
                     Text(document.originalFormat.rawValue.uppercased())
                         .font(.caption)
-                        .foregroundStyle(.secondary)
+                        .foregroundStyle(settings.bibleTextColor?.opacity(0.6) ?? Color.secondary)
                 }
                 Divider()
                 LabeledContent("상태") {
@@ -2049,6 +2170,15 @@ private struct DocumentRowView: View {
             .padding()
         }
         .frame(minWidth: 260, idealWidth: 300, maxWidth: 340, minHeight: 200, idealHeight: 320, maxHeight: 420)
+        // [2026-09-12 신설] 사용자 보고(아이패드) — "'문서 정보' 팝업 자체
+        // 배경이 흰색으로 고정되어있는 듯함." 실제로 고정돼 있었다 — 이
+        // `ScrollView`는 신설(2026-09-11) 이후 지금까지 배경 자체가 테마
+        // 적용 대상에서 통째로 빠져 있어(`.background()` 호출이 아예 없었다)
+        // 시스템 기본 배경(라이트: 흰색)이 그대로 드러났다. 같은 struct의
+        // `settings`(위 `accentSpineColor` 주석 참고)를 그대로 써서
+        // `ChapterLinkEditorSheet`/다른 팝오버들과 같은 패턴으로 맞춘다.
+        .background(settings.bibleBackgroundColor ?? Color.clear)
+        .foregroundStyle(settings.bibleTextColor ?? Color.primary)
     }
 
     /// [2026-09-11 신설, `searchScore(for:)`와 같은 접근] 태그 이름 목록(읽기전용).
@@ -2059,7 +2189,8 @@ private struct DocumentRowView: View {
     /// 위 `DocumentsHomeView.statusBadge`(같은 이름, 다른 struct)와 같은 판정
     /// 기준 — 다만 팝오버는 배지 스타일 없이 텍스트 한 줄로만 보여준다.
     private var infoStatusText: String {
-        if viewModel.hasPendingOCRReview(document) { return "검수 대기" }
+        // [2026-09-27 삭제] "검수 대기" 판정 — `hasPendingOCRReview` 자체가
+        // 없어졌다(`DocumentRowView.documentRow` 주석 참고).
         switch document.conversionStatus {
         case .pending: return "대기"
         case .convertingNative: return "추출 중"
@@ -2088,7 +2219,7 @@ private struct ChapterLinkEditorSheet: View {
             // 파일 주석 참고) — `Form`/`Section` 행 레이아웃이 `BookChapterPicker`의
             // 검색창 placeholder를 상자 밖으로 밀어내는 문제가 있어 `Form` 자체를
             // 걷어내고 일반 `VStack`으로 바꿨다.
-            VStack(alignment: .leading, spacing: 16) {
+            VStack(alignment: .center, spacing: 16) {
                 BookChapterPicker(
                     books: BooksProvider.shared.books,
                     selectedBook: book,
@@ -2099,6 +2230,30 @@ private struct ChapterLinkEditorSheet: View {
                 }
                 Spacer(minLength: 0)
             }
+            // [2026-09-12 신설] 사용자 보고(아이패드) — "'관련성경 장 설정'
+            // 팝업 자체 배경 좌우에 흰 공백이 있음." 원인 — 이 `VStack`이
+            // `BookChapterPicker`(안의 내용물 실제 폭)만큼만 차지해, 시트가
+            // (아래 `.presentationDetents`로 높이만 고정, 폭은 시스템 기본)
+            // 내용보다 넓은 카드로 뜨면 남는 공간은 바로 아래 `.background()`가
+            // 칠하는 범위 밖이라 시트 자신의 기본 배경이 그대로 드러났다 —
+            // `.frame(maxWidth: .infinity)`로 이 VStack 자체를 시트 폭까지
+            // 넓혀 그 뒤 `.background()`가 전체 폭을 칠하게 한다.
+            //
+            // [2026-09-12 세 번의 시도 끝에 되돌림] 가로 폭을 줄이려던
+            // `.presentationSizing(.fitted)` 시도가 실기기에서 시트 전체가
+            // 손톱만 하게 쪼그라드는 회귀를 내 걷어냈다(위쪽 히스토리는
+            // 이 파일의 git 이력 참고) — 폭 자체는 시스템 기본값 그대로
+            // 넓게 유지하기로 했다.
+            //
+            // [2026-09-12 추가] 사용자 보고 — "가운데 정렬이라도 해. 왼쪽으로
+            // 쏠려서 보기 싫으니까." 폭을 줄이지 못하니 내용물(한 줄짜리
+            // `BookChapterPicker`)이 넓은 시트 왼쪽에 붙어 보이는 게 문제였다
+            // — `VStack`의 `alignment`를 `.leading`에서 `.center`로, 이
+            // `.frame`의 `alignment`도 `.center`로 바꿔 내용물이 시트
+            // 가로 중앙에 오도록 했다(`.background()`가 전체 폭을 칠하는
+            // 동작 자체는 그대로 유지된다 — `maxWidth: .infinity`는 그대로
+            // 두고 정렬 기준점만 바꿨을 뿐이다).
+            .frame(maxWidth: .infinity, alignment: .center)
             .padding()
             // [2026-09-11 신설] 위 `settings` 선언부 주석 참고 — `BookChapterPicker`
             // 의 "책 N장" 라벨은 자체 글자색이 없어(다른 화면들에서 이미
@@ -2146,6 +2301,25 @@ private struct ChapterLinkEditorSheet: View {
         // (같은 콘텐츠라 새 값을 추측하지 않고 그대로 재사용했다).
         .presentationDetents([.height(260)])
         .presentationDragIndicator(.visible)
+        // [2026-09-12 가로 폭 축소 시도 — 되돌림] 사용자 보고(아이패드) —
+        // "이 팝업이 가로로 길 필요가 없음." 두 가지를 순서대로 시도했다:
+        // (1) `.presentationCompactAdaptation(.sheet)` — 이미 컴팩트 크기
+        // 클래스일 때의 적응 방식만 바꿀 뿐 아이패드(레귤러 크기 클래스)를
+        // 강제 전환하지 않아 실기기에서 폭이 그대로였다(효과 없음, 다만
+        // 안전은 했다). (2) `.presentationSizing(.fitted)`(iOS 18) — 문서상
+        // "내용물 크기에 맞춤"이라 이론적으로는 맞는 방향이었으나, 실기기
+        // 스크린샷으로 확인한 결과 시트 전체가 드래그 인디케이터와 겹친
+        // 손톱만 한 카드로 쪼그라들어(버튼/텍스트 모두 조작 불가) 훨씬
+        // 심각한 회귀를 냈다 — `Spacer`/`.frame(maxWidth: .infinity)`을
+        // 고정값으로 바꿔도 문제가 재발해, `NavigationStack`+`.toolbar`
+        // 조합에서 이 API가 실제로 어떻게 계산하는지 이 세션(컴파일러 없이
+        // 코드만 보고 판단)에서는 신뢰할 수 없다고 결론지었다. 세 번의
+        // 실기기 확인 끝에 두 시도 모두 걷어내고, 확실히 정상 동작하는
+        // 이전 상태(가로 폭은 시스템 기본값 그대로라 넓지만, 배경/버튼/
+        // 텍스트 모두 정상 조작 가능)로 되돌린다 — "너무 넓다"가 "조작
+        // 불가능하다"보다 훨씬 가벼운 문제라고 판단했다. 가로 폭 축소는
+        // Xcode 프리뷰/시뮬레이터로 직접 확인 가능한 환경에서 다시 시도하는
+        // 것을 권장한다.
         #endif
     }
 }

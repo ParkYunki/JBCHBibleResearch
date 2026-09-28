@@ -302,6 +302,23 @@ public final class DocumentText {
     public var lineText: String = ""
     public var createdAt: Date = Date.now
 
+    /// [2026-09-27 추가] 사용자 요청 — "이미지 문서 클릭시 이미지 자체가
+    /// 보이도록 하고, 이미지 위에 OCR 텍스트를 위에 띄워서 위치를 정확하게
+    /// 표현할 것." Vision(`VNRecognizeTextRequest`)이 이미지 OCR 인식 시점에
+    /// 이미 이 줄의 이미지 내 위치(`VNRecognizedTextObservation.boundingBox`)를
+    /// 주는데, 예전엔 이걸 저장하지 않고 텍스트만 남겼다 —
+    /// `DocumentTextExtractionService.extractImageOCR`가 이제 이 값도 함께
+    /// 채운다. "x,y,width,height" 콤마 구분 문자열로 인코딩한다(`DocumentAnchor.
+    /// bboxOrOffset`과 같이 이 프로젝트가 이미 쓰는 관례 — 좌표 하나 때문에
+    /// 새 @Model 관계를 늘리지 않고 문자열로 인코딩). 값은 Vision이 주는 그대로
+    /// 정규화 좌표(0...1, **좌하단 원점** — Vision 좌표계, UIKit/SwiftUI의
+    /// 좌상단 원점과 다르다)이며, 화면에 그릴 때 y축을 뒤집어야 한다(뷰
+    /// 레이어의 변환 로직 참고). PDF/hwp/docx 등 OCR이 아닌 형식이나, 이
+    /// 필드가 추가되기 전에 이미 저장된 옛 OCR 레코드는 항상 nil이다 — 그
+    /// 경우 위치 오버레이 없이 텍스트만 취급한다(추측으로 위치를 만들어내지
+    /// 않는다).
+    public var ocrBoundingBox: String?
+
     public var sourceDocument: SourceDocument?
 
     public init(
@@ -309,6 +326,7 @@ public final class DocumentText {
         pageNumber: Int,
         lineIndex: Int,
         lineText: String,
+        ocrBoundingBox: String? = nil,
         sourceDocument: SourceDocument? = nil,
         createdAt: Date = .now
     ) {
@@ -316,6 +334,7 @@ public final class DocumentText {
         self.pageNumber = pageNumber
         self.lineIndex = lineIndex
         self.lineText = lineText
+        self.ocrBoundingBox = ocrBoundingBox
         self.sourceDocument = sourceDocument
         self.createdAt = createdAt
     }

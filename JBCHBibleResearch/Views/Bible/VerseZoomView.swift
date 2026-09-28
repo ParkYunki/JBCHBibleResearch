@@ -63,6 +63,18 @@ struct VerseZoomView: View {
     /// 책임진다(같은 화면이 시트 두 개를 동시에 띄울 수 없는 기존 제약,
     /// `pendingPhraseMemo`와 같은 이유).
     var onSwitchToOriginalTextInfo: () -> Void
+    /// [2026-09-27 신설] 사용자 요청 — "메모하기, 원문정보에 이전 구절/
+    /// 다음구절로 이동 할 수 있는 버튼기능 추가." 호출부(BibleReadingView)가
+    /// `BibleReadingViewModel.goToPreviousVerse(from:)`/`goToNextVerse(from:)`를
+    /// 그대로 연결한다 — 이동 자체(장/책 경계 넘기, 선택 절 갱신)는 전부
+    /// 뷰모델 책임이고, 이 화면은 버튼 활성화 여부(`canGoToPreviousVerse`/
+    /// `canGoToNextVerse`)와 탭 콜백만 받는다. 기본값을 둬서(다른 프리뷰/
+    /// 테스트 호출부가 있더라도) 이 값들을 안 넘겨도 컴파일이 깨지지 않게
+    /// 했다 — 그 경우 화살표가 항상 비활성 상태로만 보인다.
+    var onNavigateToPreviousVerse: () -> Void = {}
+    var onNavigateToNextVerse: () -> Void = {}
+    var canGoToPreviousVerse: Bool = false
+    var canGoToNextVerse: Bool = false
     /// [2026-09-02 신설] 사용자 요청 — "메모하기 버튼 옆 '개인 묵상' 버튼을
     /// 클릭할 때 동작 = 메모하기 내 '개인 묵상' 버튼 클릭할 때와 동일하게."
     /// 바깥 하단 액션바의 "개인 묵상" 버튼(`BibleReadingView.
@@ -175,6 +187,10 @@ struct VerseZoomView: View {
         onJumpToCrossReference: @escaping (BibleVerseRef) -> Void,
         onSelectVerseMention: @escaping (VerseMention) -> Void,
         onSwitchToOriginalTextInfo: @escaping () -> Void,
+        onNavigateToPreviousVerse: @escaping () -> Void = {},
+        onNavigateToNextVerse: @escaping () -> Void = {},
+        canGoToPreviousVerse: Bool = false,
+        canGoToNextVerse: Bool = false,
         autoPresentPersonalNoteEditor: Binding<Bool> = .constant(false)
     ) {
         self.verseNumber = verseNumber
@@ -184,6 +200,10 @@ struct VerseZoomView: View {
         self.onJumpToCrossReference = onJumpToCrossReference
         self.onSelectVerseMention = onSelectVerseMention
         self.onSwitchToOriginalTextInfo = onSwitchToOriginalTextInfo
+        self.onNavigateToPreviousVerse = onNavigateToPreviousVerse
+        self.onNavigateToNextVerse = onNavigateToNextVerse
+        self.canGoToPreviousVerse = canGoToPreviousVerse
+        self.canGoToNextVerse = canGoToNextVerse
         self._autoPresentPersonalNoteEditor = autoPresentPersonalNoteEditor
         _selectedColumnID = State(initialValue: columns.first?.id ?? UUID())
     }
@@ -676,6 +696,14 @@ struct VerseZoomView: View {
         // 종류의 요청으로 480→520이 된 값), 그 값에 5를 더한다.
         .frame(minWidth: 525, minHeight: 420)
         #endif
+        // [2026-09-27 추가] 이전/다음 구절 이동 화살표 — `VerseNavArrowsModifier`
+        // 선언부 주석 참고.
+        .modifier(VerseNavArrowsModifier(
+            canGoPrevious: canGoToPreviousVerse,
+            canGoNext: canGoToNextVerse,
+            onPrevious: onNavigateToPreviousVerse,
+            onNext: onNavigateToNextVerse
+        ))
     }
 
     // [2026-08-11 16차 수정] 사용자 요청 — "상단 타이틀 밑 picker의 '번역본'
@@ -717,6 +745,7 @@ struct VerseZoomView: View {
                             .overlay(Capsule().stroke(strokeColor, lineWidth: 1))
                     }
                     .buttonStyle(.plain)
+                    .contentShape(Rectangle())
                     .accessibilityLabel(column.registry.displayName)
                     .accessibilityAddTraits(isSelected ? [.isSelected] : [])
                 }
@@ -758,6 +787,7 @@ struct VerseZoomView: View {
                             Circle().fill(tag.swiftUIColor).frame(width: 20, height: 20)
                         }
                         .buttonStyle(.plain)
+                        .contentShape(Rectangle())
                     }
                 }
                 // [2026-09-11 수정] 사용자 재보고 — 하단 기능 메뉴 중
@@ -1237,6 +1267,7 @@ struct VerseZoomView: View {
                                     .background(Color.blue.opacity(0.12), in: RoundedRectangle(cornerRadius: 6))
                             }
                             .buttonStyle(.plain)
+                            .contentShape(Rectangle())
                         }
                     }
                 }

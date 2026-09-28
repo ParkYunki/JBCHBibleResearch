@@ -59,7 +59,10 @@ struct RelationDisplayItem {
 struct QueryIntentCard {
     enum Content {
         case relation([RelationDisplayItem])
-        case personOrPlace([ReferenceEntity])
+        /// [2026-09-15, `personOrPlace` 대체] `PersonEntity`(13개 보강
+        /// 컬럼 + 관계 리스트) 기반 — 장소는 포함하지 않는다(콘텐츠 미준비,
+        /// 10차 문서 확정).
+        case personProfile([PersonEntity])
         case prophecy([ProphecyRecord])
         case theme([ThemeRecord])
         case narrative([NarrativeGroup])
@@ -86,8 +89,8 @@ struct QueryIntentCard {
             switch self {
             case .relation(let items):
                 return dedup(items.flatMap { $0.verseRefs })
-            case .personOrPlace(let entities):
-                return dedup(entities.flatMap { $0.verseRefs })
+            case .personProfile(let persons):
+                return dedup(persons.flatMap { $0.verseRefs })
             case .prophecy(let records):
                 // 예언 절 + 성취/대응 절 둘 다 "이 예언에 관한 성경구절"이라
                 // 함께 담는다 — 성취 절이 없는(아직 이루어지지 않은) 예언은
@@ -135,7 +138,7 @@ extension QueryIntentCard {
         case .found(let content):
             switch content {
             case .relation(let items): return items.count
-            case .personOrPlace(let items): return items.count
+            case .personProfile(let items): return items.count
             case .prophecy(let items): return items.count
             case .theme(let items): return items.count
             case .narrative(let groups): return groups.reduce(0) { $0 + $1.events.count }
@@ -165,14 +168,38 @@ enum QueryIntentHandler {
     /// 이건 이 기능 자체의 "데이터 없음"이 아니라 앱 설치 문제라, 카테고리별
     /// 안내 문구로 설명할 성질이 아니라고 판단했다.
     static func handle(_ query: String, intent: QueryIntentClassifier.Intent) -> QueryIntentCard? {
-        guard intent != .general else { return nil }
         guard let store = ReferenceDataProvider.shared.store else { return nil }
+
+        // [2026-09-15 신설] `personOrPlaceInfo` 대체 — `QueryIntentClassifier`
+        // 우선순위상 관계 다음(2번째) 자리를 그대로 유지하되, 이 단계는 DB
+        // 접근이 필요해 classify()(순수 함수)가 아니라 여기서 직접
+        // 수행한다(`QueryIntentClassifier.classify` 갱신된 주석 참고).
+        // `.relation`으로 이미 확정된 경우는 건너뛴다 — 아래 switch가
+        // 처리한다. `intent == .general`이어도 이 단계는 시도한다 — "다윗"
+        // 처럼 트리거 문구 없이 표제어만 친 질의는 classify()가 `.general`로
+        // 분류하지만, 등록된 인물/주제 키워드는 여전히 여기서 잡아야 한다
+        // (11차 문서 1장 — 부분 문자열 포함 검사는 말투와 무관).
+        if intent != .relation, let card = handleKeywordCategoryLookup(query, store: store) {
+            return card
+        }
+
+        guard intent != .general else { return nil }
         switch intent {
         case .relation: return handleRelation(query, store: store)
-        case .personOrPlaceInfo: return handlePersonOrPlace(query, store: store)
         case .prophecy: return handleProphecy(query, store: store)
         case .themeOrAttribute: return handleTheme(query, store: store)
         case .narrative: return handleNarrative(query, store: store)
+        // [2026-09-16 추가, 빌드 에러 수정] "Switch must be exhaustive" —
+        // `QueryIntentClassifier.Intent`는 여전히 `.personProfile` 케이스를
+        // 갖고 있으므로(QueryIntentCard.intent 라벨용으로 계속 쓰인다) 이
+        // switch도 그 케이스를 다뤄야 한다. 다만 `classify()`는 더 이상
+        // `.personProfile`을 반환하지 않는다(2026-09-15 변경, 위 `classify`
+        // 갱신 주석 참고 — 트리거 문구 검사 자체를 없앴다) — 인물 조회는
+        // 이미 위 `handleKeywordCategoryLookup`이 `.relation`이 아닌 모든
+        // intent(`.general` 포함)에 대해 먼저 시도하므로, 여기 도달했다는
+        // 것은 그 조회가 이미 실패(또는 애초에 이론상 도달 불가)했다는
+        // 뜻이라 `.general`과 동일하게 안전한 nil로 처리한다.
+        case .personProfile: return nil
         case .general: return nil
         }
     }
@@ -348,16 +375,63 @@ enum QueryIntentHandler {
         return nil
     }
 
-    // MARK: - 인물·지명 정보
+    // MARK: - 인물 프로필 / 주제 (키워드·카테고리 조회, personOrPlaceInfo 대체)
 
-    private static func handlePersonOrPlace(_ query: String, store: ReferenceDataStore) -> QueryIntentCard {
-        let entities = (try? store.personsAndPlaces(mentionedIn: query)) ?? []
-        guard !entities.isEmpty else {
-            return QueryIntentCard(intent: .personOrPlaceInfo, status: .notReady(
-                message: "이 질의에서 등록된 인물·지명을 찾지 못했습니다. 아래 검색 결과를 확인해 보세요."
+    /// [2026-09-15 신설] `QueryIntentClassifier`가 텍스트 트리거로 판정하던
+    /// `personOrPlaceInfo`를 대체한다 — `KeywordCategoryIndex`(등록된
+    /// 인물/주제 표제어, `build_reference_data.py` 2026-09-15 갱신분)에
+    /// 질의와 일치하는 표제어가 있는지 먼저 확인하고, 카테고리에 맞는
+    /// 콘텐츠 저장소(`persons(mentionedIn:)`/`themes(matching:)`)를
+    /// 조회한다. 여기서 아무것도 못 찾으면(등록되지 않은 표현)
+    /// `personCategoryAIFallback`으로 넘어간다 — 규칙 기반이 항상 먼저이고
+    /// AI는 실패했을 때만 보조로 쓴다(claude/bible-research-platform-
+    /// search-category-expansion-proposal.md 11차 문서 1장 — 사전 찾기가
+    /// AI에게 매번 묻는 것보다 빠르고 확실하다는 근거).
+    ///
+    /// 장소는 이번 라운드에 포함하지 않는다 — `KeywordCategoryIndex` 자체가
+    /// '인물'/'주제' 두 카테고리만 갖고 있어(Places는 콘텐츠 미준비, 10차
+    /// 문서 확정) 이 메서드가 장소를 반환할 일이 구조적으로 없다.
+    private static func handleKeywordCategoryLookup(_ query: String, store: ReferenceDataStore) -> QueryIntentCard? {
+        let categories = (try? store.keywordCategories(mentionedIn: query)) ?? []
+
+        if categories.contains("인물") {
+            let persons = (try? store.persons(mentionedIn: query)) ?? []
+            if !persons.isEmpty {
+                return QueryIntentCard(intent: .personProfile, status: .found(.personProfile(persons)))
+            }
+        }
+        if categories.contains("주제") {
+            let themes = (try? store.themes(matching: query)) ?? []
+            if !themes.isEmpty {
+                return QueryIntentCard(intent: .themeOrAttribute, status: .found(.theme(themes)))
+            }
+        }
+        if !categories.isEmpty {
+            // 인덱스엔 걸렸지만(카테고리를 찾음) 콘텐츠 조회가 빈 배열인
+            // 드문 불일치(예: KeywordCategoryIndex는 활성인데 대응하는
+            // Persons/Themes 행이 그 사이 지워짐) — 규칙 기반이 카테고리는
+            // 이미 알아냈으므로 AI로 다시 보완할 이유는 없고, 준비중 카드로
+            // 명확히 안내한다.
+            return QueryIntentCard(intent: .personProfile, status: .notReady(
+                message: "이 표제어는 등록돼 있으나 상세 콘텐츠를 찾지 못했습니다. 아래 검색 결과를 확인해 보세요."
             ))
         }
-        return QueryIntentCard(intent: .personOrPlaceInfo, status: .found(.personOrPlace(entities)))
+
+        return personCategoryAIFallback(query, store: store)
+    }
+
+    /// [2026-09-15 신설, 자리만 확보 — 미구현] 규칙 기반(`KeywordCategoryIndex`
+    /// 부분 문자열 대조)으로 못 찾았을 때의 Apple Intelligence 폴백.
+    /// `claude/bible-research-platform-search-category-expansion-proposal.md`
+    /// 12차 문서에 프롬프트·출력 양식(`@Generable`/`@Guide`)·오탐 방지(후보
+    /// 목록 제한 + 재검증) 설계까지는 끝났지만, 정확한 `@Generable`/`@Guide`
+    /// 문법은 이 세션(Xcode 없음)에서 검증하지 못했다 — 검증 안 된 API
+    /// 호출을 그대로 넣으면 컴파일이 깨지거나(문법이 틀렸을 경우) 조용히
+    /// 틀린 동작을 할 위험이 있어(이 프로젝트의 "검증된 코드만 제공" 원칙),
+    /// 지금은 안전하게 nil을 돌려주는 자리만 만들어 뒀다 — Xcode에서
+    /// FoundationModels 문서와 대조해 실제 구현을 채워야 한다.
+    private static func personCategoryAIFallback(_ query: String, store: ReferenceDataStore) -> QueryIntentCard? {
+        nil
     }
 
     // MARK: - 예언
@@ -495,6 +569,17 @@ enum PersonRelationLabeling {
         case "wife_of": return "\(source)\(sourceEunNeun) \(target)의 아내"
         case "husband_of": return "\(source)\(sourceEunNeun) \(target)의 남편"
         case "daughter_in_law_of": return "\(source)\(sourceEunNeun) \(target)의 며느리"
+        // [2026-09-22 추가] build_reference_data.py에 새로 매핑된 기타관계
+        // 라벨(장인/시아버지/사위/증조부/대적/동맹/related_to)의 화면 표시
+        // 문장 — 위 grandmother_of 등과 같은 이유로 자연스러운 한국어
+        // 문장을 위해 추가했다("maternal_grandmother_of"는 이미 있었음,
+        // 과거 정규식 파이프라인용 선반영이 이번에 실제로 채워짐).
+        case "father_in_law_of": return "\(source)\(sourceEunNeun) \(target)의 장인"
+        case "son_in_law_of": return "\(source)\(sourceEunNeun) \(target)의 사위"
+        case "great_grandfather_of": return "\(source)\(sourceEunNeun) \(target)의 증조부"
+        case "adversary_of": return "\(source)\(sourceEunNeun) \(target)의 대적"
+        case "ally_of": return "\(source)\(sourceEunNeun) \(target)의 동맹"
+        case "related_to": return "\(source)\(sourceEunNeun) \(target)\(gwaWa(after: target)) 관련 있음"
         case "brother_of": return "\(source)\(sourceEunNeun) \(target)의 형제"
         case "younger_brother_of": return "\(source)\(sourceEunNeun) \(target)의 아우"
         case "older_brother_of": return "\(source)\(sourceEunNeun) \(target)의 형"
@@ -506,6 +591,14 @@ enum PersonRelationLabeling {
         case "teacher_of": return "\(source)\(sourceEunNeun) \(target)의 스승"
         case "king_of": return "\(source)\(sourceEunNeun) \(target)의 왕"
         case "married_to": return "\(source)\(sourceEunNeun) \(target)\(gwaWa(after: target)) 결혼한 사이"
+        // [2026-09-16 신설] build_reference_data.py에 새로 추가된 "친구"
+        // 기타관계 매핑(친구 -> friend_of) 대응 — PersonDetailView의 "친구"
+        // 버킷은 이 문장이 아니라 relationType 직접 필터링을 쓰지만, 관계
+        // 검색 인텐트(QueryIntentHandler.handleRelation, RelationDetailView)
+        // 등 이 함수를 공유하는 다른 화면에서도 friend_of가 어색한 방어적
+        // 폴백("source - friend of - target") 대신 자연스러운 문장으로
+        // 나오도록 다른 27종과 동일하게 case를 추가한다.
+        case "friend_of": return "\(source)\(sourceEunNeun) \(target)의 친구"
         case "tribe_of": return "\(source)\(sourceEunNeun) \(target) 지파 소속"
         case "people_of": return "\(source)\(sourceEunNeun) \(target) 족속 소속"
         case "affiliated_with_place": return "\(source)\(sourceEunNeun) \(target) 사람(출신)"

@@ -46,6 +46,40 @@ public final class ReferenceDataStore {
         sqlite3_close(handle)
     }
 
+    /// [2026-09-16 신설] 사용자 결정 — "이름#idx"(구분자 "#") 태그를 가족관계
+    /// (`rel_*` 콤마 목록)에서 분리한다. 태그가 없으면(기존 데이터 그대로)
+    /// 이름 전체가 그대로 온다 — 하위 호환, 동작 변화 없음. 파이썬 쪽
+    /// `build_reference_data.py`의 `parse_idx_tag`와 같은 규칙(끝이
+    /// "#숫자"인 경우만 인식)을 Swift에서 다시 구현한다 — 이쪽은 원본
+    /// 텍스트를 그대로 옮기기만 하는 컬럼이라 태그 분리를 빌드 시점이
+    /// 아니라 읽는 시점(여기)에서 해야 한다.
+    private static func parseFamilyMember(_ raw: String) -> PersonFamilyMember {
+        guard let hashRange = raw.range(of: "#", options: .backwards) else {
+            return PersonFamilyMember(name: raw, idx: "")
+        }
+        let namePart = raw[..<hashRange.lowerBound]
+        var idxPart = raw[hashRange.upperBound...]
+        // [2026-09-26 추가] build_reference_data.py의 `IDX_TAG_WITH_NOTE_RE`와
+        // 같은 이유 — PersonSeed.json 재정리 이후 "이름#idx(설명)" 형식(예:
+        // "야고보#4057(사도)")이 가족관계 필드에도 등장한다. 기존엔
+        // `idxPart.allSatisfy(isNumber)`가 실패해 원문 전체("야고보#4057(사도)")를
+        // 이름처럼 그대로 화면에 보여주는 버그가 있었다 — 끝에 붙은
+        // "(...)" 괄호 설명은 idx 검증을 위해 떼어내되, [2026-09-26 수정]
+        // 사용자 요청("화면에도 보여주게 해주세요")에 따라 버리지 않고
+        // `PersonFamilyMember.note`에 보존한다 — 화면 표시는
+        // PersonDetailView.familyRelationRows가 담당(이름 뒤에 이어붙임).
+        var note = ""
+        if idxPart.hasSuffix(")"), let parenStart = idxPart.firstIndex(of: "(") {
+            let noteRange = idxPart.index(after: parenStart)..<idxPart.index(before: idxPart.endIndex)
+            note = String(idxPart[noteRange])
+            idxPart = idxPart[..<parenStart]
+        }
+        guard !namePart.isEmpty, !idxPart.isEmpty, idxPart.allSatisfy({ $0.isNumber }) else {
+            return PersonFamilyMember(name: raw, idx: "")
+        }
+        return PersonFamilyMember(name: String(namePart), idx: String(idxPart), note: note)
+    }
+
     /// 관주 — 이 책/장 전체를 한 번에 불러온다(`BibleReadingViewModel`이 장 단위로
     /// 미리 로드해 두는 기존 패턴과 맞춘다). `targets` 컬럼(`"1:2:3,4:5:6"` 형식,
     /// `ReferenceData.sqlite` 빌드 스크립트가 책약어 파싱을 미리 끝내 둔 결과)을
@@ -284,7 +318,7 @@ public final class ReferenceDataStore {
     /// "미해결" 항목) — 호출부는 이 경우 verse 연결을 시도하지 않아야 한다.
     public func personRelations(forWord sourceWord: String) throws -> [PersonRelationRecord] {
         let sql = """
-            SELECT relation_type, target_word, target_kind, raw_sentence
+            SELECT relation_type, target_word, target_kind, raw_sentence, target_idx
             FROM PersonRelations WHERE source_word = ?
             """
         var statement: OpaquePointer?
@@ -303,10 +337,89 @@ public final class ReferenceDataStore {
             let targetWord = sqlite3_column_text(statement, 1).map { String(cString: $0) } ?? ""
             let targetKindRaw = sqlite3_column_text(statement, 2).map { String(cString: $0) }
             let rawSentence = sqlite3_column_text(statement, 3).map { String(cString: $0) } ?? ""
+            let targetIdx = sqlite3_column_text(statement, 4).map { String(cString: $0) } ?? ""
             results.append(PersonRelationRecord(
                 sourceWord: sourceWord, relationType: relationType, targetWord: targetWord,
                 targetKind: targetKindRaw == "place" ? .place : (targetKindRaw == "person" ? .person : nil),
-                rawSentence: rawSentence
+                rawSentence: rawSentence, targetIdx: targetIdx
+            ))
+        }
+        return results
+    }
+
+    /// [2026-09-22 신설, B그룹] `PersonContextNotes`(왕/총독/선지자 등
+    /// 직함·역할성 참고 정보, `PersonRelations`와 별도 테이블 — 위
+    /// `PersonContextNoteRecord` 주석 참고) 중 `sourceWord`(표제어) 자신의
+    /// 목록에 있는 것만 가져온다. `personRelations(forWord:)`와 완전히 같은
+    /// SQLite3 C API 패턴 — 역방향(이 사람이 target으로 언급된 쪽) 조회는
+    /// 만들지 않는다: 이 정보는 "표제어 자신의 PersonSeed 기타관계 원문"이라
+    /// 방향에 의미가 있고, 역방향은 애초에 build 스크립트가 만들지도 않는다.
+    public func personContextNotes(forWord sourceWord: String) throws -> [PersonContextNoteRecord] {
+        let sql = """
+            SELECT label, target_word, target_kind, target_idx, raw_sentence
+            FROM PersonContextNotes WHERE source_word = ?
+            """
+        var statement: OpaquePointer?
+        defer { sqlite3_finalize(statement) }
+        guard sqlite3_prepare_v2(handle, sql, -1, &statement, nil) == SQLITE_OK else {
+            throw BibleReferenceError.statementPrepareFailed(code: sqlite3_errcode(handle))
+        }
+        sqlite3_bind_text(statement, 1, sourceWord, -1, SQLITE_TRANSIENT)
+
+        var results: [PersonContextNoteRecord] = []
+        while true {
+            let step = sqlite3_step(statement)
+            if step == SQLITE_DONE { break }
+            guard step == SQLITE_ROW else { throw BibleReferenceError.stepFailed(code: step) }
+            let label = sqlite3_column_text(statement, 0).map { String(cString: $0) } ?? ""
+            let targetWord = sqlite3_column_text(statement, 1).map { String(cString: $0) } ?? ""
+            let targetKindRaw = sqlite3_column_text(statement, 2).map { String(cString: $0) }
+            let targetIdx = sqlite3_column_text(statement, 3).map { String(cString: $0) } ?? ""
+            let rawSentence = sqlite3_column_text(statement, 4).map { String(cString: $0) } ?? ""
+            results.append(PersonContextNoteRecord(
+                sourceWord: sourceWord, label: label, targetWord: targetWord,
+                targetKind: targetKindRaw == "place" ? .place : (targetKindRaw == "person" ? .person : nil),
+                targetIdx: targetIdx, rawSentence: rawSentence
+            ))
+        }
+        return results
+    }
+
+    /// [2026-09-27 신설, C그룹] "PersonGroups 같은 별도 테이블 설계부터
+    /// 검토"(사용자 확정) — `word`가 속한 각 그룹에서 "다른" 멤버들을
+    /// 자기 조인(self join)으로 한 번에 가져온다. `m1`으로 이 사람이 속한
+    /// 그룹(들)을 찾고, 같은 group_id를 가진 `m2` 중 이 사람 자신의 행만
+    /// 제외한다(idx까지 함께 비교 — 같은 word라도 idx가 다르면 다른 사람일
+    /// 수 있어 `PersonGroupMemberships.UNIQUE(group_id, person_word,
+    /// person_idx)`와 같은 신원 기준을 그대로 쓴다). 다른 조회 메서드
+    /// (`personRelations(forWord:)`/`personContextNotes(forWord:)`)와 동일하게
+    /// word만으로 질의한다 — idx는 화면(PersonDetailView)의 동명이인 폴백이
+    /// 처리한다.
+    public func personGroupMemberships(forWord word: String) throws -> [PersonGroupMembershipRow] {
+        let sql = """
+            SELECT m2.group_id, m2.person_word, m2.person_idx
+            FROM PersonGroupMemberships m1
+            JOIN PersonGroupMemberships m2 ON m1.group_id = m2.group_id
+            WHERE m1.person_word = ?
+              AND NOT (m2.person_word = m1.person_word AND m2.person_idx = m1.person_idx)
+            """
+        var statement: OpaquePointer?
+        defer { sqlite3_finalize(statement) }
+        guard sqlite3_prepare_v2(handle, sql, -1, &statement, nil) == SQLITE_OK else {
+            throw BibleReferenceError.statementPrepareFailed(code: sqlite3_errcode(handle))
+        }
+        sqlite3_bind_text(statement, 1, word, -1, SQLITE_TRANSIENT)
+
+        var results: [PersonGroupMembershipRow] = []
+        while true {
+            let step = sqlite3_step(statement)
+            if step == SQLITE_DONE { break }
+            guard step == SQLITE_ROW else { throw BibleReferenceError.stepFailed(code: step) }
+            let groupId = sqlite3_column_text(statement, 0).map { String(cString: $0) } ?? ""
+            let otherWord = sqlite3_column_text(statement, 1).map { String(cString: $0) } ?? ""
+            let otherIdx = sqlite3_column_text(statement, 2).map { String(cString: $0) } ?? ""
+            results.append(PersonGroupMembershipRow(
+                groupId: groupId, otherMemberWord: otherWord, otherMemberIdx: otherIdx
             ))
         }
         return results
@@ -353,6 +466,284 @@ public final class ReferenceDataStore {
             ))
         }
         return results
+    }
+
+    // MARK: - 키워드·카테고리 조회 / 인물 프로필 (2026-09-15 신설)
+    //
+    // [2026-09-15 신설] `personOrPlaceInfo` 인텐트를 대체하는 새 파이프라인
+    // — claude/bible-research-platform-search-category-expansion-proposal.md
+    // 10~11차 문서에서 확정한 설계. `KeywordCategoryIndex`(인물/주제 표제어
+    // 3,109건)로 카테고리만 먼저 확인하고, 콘텐츠는 카테고리에 맞는 저장소
+    // (`persons(mentionedIn:)`/`themes(matching:)`)에서 따로 가져온다.
+
+    /// `KeywordCategoryIndex`에 등록된 표제어가 질의 문자열 안에 부분
+    /// 문자열로 있는지 확인해 카테고리(`'인물'`/`'주제'`)만 돌려준다.
+    /// `personsAndPlaces(mentionedIn:)`와 같은 `instr(?, keyword) > 0`
+    /// 패턴이라 한국어 조사가 뒤에 붙어도(다윗+은/이란 등) 그대로 잡힌다
+    /// (11차 문서 1장 — 조사·어미 제거 없이 부분 문자열 포함 검사로 대체).
+    /// `status = 'active'`만 조회한다 — `'pending'`은 AI 폴백으로 유입됐지만
+    /// 아직 hit_count 승격 게이트를 못 넘은 항목이라 화면에 노출하지 않는다
+    /// (5·6차 문서 hit_count=3 승격 원칙).
+    public func keywordCategories(mentionedIn query: String) throws -> Set<String> {
+        let sql = """
+            SELECT DISTINCT category FROM KeywordCategoryIndex
+            WHERE status = 'active' AND length(keyword) >= 2 AND instr(?, keyword) > 0
+            """
+        var statement: OpaquePointer?
+        defer { sqlite3_finalize(statement) }
+        guard sqlite3_prepare_v2(handle, sql, -1, &statement, nil) == SQLITE_OK else {
+            throw BibleReferenceError.statementPrepareFailed(code: sqlite3_errcode(handle))
+        }
+        sqlite3_bind_text(statement, 1, query, -1, SQLITE_TRANSIENT)
+
+        var results: Set<String> = []
+        while true {
+            let step = sqlite3_step(statement)
+            if step == SQLITE_DONE { break }
+            guard step == SQLITE_ROW else { throw BibleReferenceError.stepFailed(code: step) }
+            if let category = sqlite3_column_text(statement, 0).map({ String(cString: $0) }) {
+                results.insert(category)
+            }
+        }
+        return results
+    }
+
+    /// 인물 프로필 카드 전용 조회 — `Persons`의 13개 보강 컬럼(PersonSeed.json
+    /// 기반)까지 전부 돌려준다. `personsAndPlaces(mentionedIn:)`(고정 5컬럼
+    /// UNION ALL, `handleRelation`이 여전히 씀, 위 주석 참고)는 이 컬럼들을
+    /// 구조적으로 담을 수 없어 새 메서드로 분리했다 — 기존 메서드는 그대로
+    /// 둔다(근거 없는 리팩토링 금지).
+    ///
+    /// `word2`(별칭, 콤마 구분)는 `themes(matching:)`/`prophecies(matching:)`가
+    /// `search_keywords`(마찬가지로 콤마 구분 자유 텍스트)를 다루는 것과
+    /// 같은 이유로 SQL `instr()`이 아니라 전체 로드 후 Swift에서 콤마 분리해
+    /// 대조한다 — `instr(query, word2)`는 word2에 별칭이 두 개 이상이면
+    /// (예: "고니야,여고냐") 그 콤마 포함 문자열 전체가 query 안에 그대로
+    /// 있어야 참이 되므로 실제 별칭 검색 대부분에서 거짓으로 나온다(오작동).
+    ///
+    /// 반환 카드의 제목은 항상 `word`(대표 이름)이고, 별칭으로 매칭된
+    /// 경우에만 `matchedAlias`에 그 별칭을 채운다(11차 문서 확정 — 화면은
+    /// 제목을 바꾸지 않고 부제로만 별칭을 보여준다).
+    public func persons(mentionedIn query: String) throws -> [PersonEntity] {
+        let sql = """
+            SELECT idx, word, remark, verses, word2, call_title, meaning, introduce,
+                   lifetime, event, character, origin, nation, tribe, gender, occupation, seed_memo,
+                   rel_grandfather, rel_grandmother, rel_father, rel_mother, rel_spouse, rel_sons,
+                   rel_daughters, rel_grandsons, rel_granddaughters
+            FROM Persons
+            """
+        var statement: OpaquePointer?
+        defer { sqlite3_finalize(statement) }
+        guard sqlite3_prepare_v2(handle, sql, -1, &statement, nil) == SQLITE_OK else {
+            throw BibleReferenceError.statementPrepareFailed(code: sqlite3_errcode(handle))
+        }
+
+        var results: [PersonEntity] = []
+        while true {
+            let step = sqlite3_step(statement)
+            if step == SQLITE_DONE { break }
+            guard step == SQLITE_ROW else { throw BibleReferenceError.stepFailed(code: step) }
+            func col(_ i: Int32) -> String { sqlite3_column_text(statement, i).map { String(cString: $0) } ?? "" }
+            // [2026-09-16 신설] `rel_*` 컬럼(콤마 구분, 빈 문자열이면 없음) 공용
+            // 파서 — `occupation`(col 15)이 이미 쓰는 것과 같은 콤마 분리 규칙.
+            func relNames(_ i: Int32) -> [PersonFamilyMember] {
+                col(i).split(separator: ",")
+                    .map { Self.parseFamilyMember($0.trimmingCharacters(in: .whitespaces)) }
+                    .filter { !$0.name.isEmpty }
+            }
+
+            let word = col(1)
+            guard word.count >= 2 else { continue }
+
+            let aliasCandidates = col(4).split(separator: ",").map { $0.trimmingCharacters(in: .whitespaces) }
+            var matchedAlias: String?
+            if !query.contains(word) {
+                guard let hit = aliasCandidates.first(where: { $0.count >= 2 && query.contains($0) }) else { continue }
+                matchedAlias = hit
+            }
+
+            let idx = col(0)
+            let occupation = col(15).split(separator: ",").map { $0.trimmingCharacters(in: .whitespaces) }
+            let relations = (try? personRelationRecords(involving: word)) ?? []
+            let contextNotes = (try? personContextNotes(forWord: word)) ?? []
+            let groupMemberships = (try? personGroupMemberships(forWord: word)) ?? []
+            // [2026-09-16] SELECT 컬럼 순서: 0=idx 1=word 2=remark 3=verses
+            // 4=word2 5=call_title 6=meaning 7=introduce 8=lifetime 9=event
+            // 10=character 11=origin 12=nation 13=tribe 14=gender 15=occupation
+            // 16=seed_memo, 그 다음이 아래 9개(17~25) — 위 SELECT 문의 컬럼
+            // 나열 순서와 정확히 일치해야 한다(어긋나면 엉뚱한 값이 섞여
+            // 들어가는데 컴파일 에러 없이 조용히 틀린 값을 낸다 — 이 인덱스
+            // 계산을 처음 18~26으로 잘못 썼다가 SELECT 문과 대조해 발견,
+            // 수정함).
+            let familyRelations = PersonFamilyRelations(
+                grandfathers: relNames(17), grandmothers: relNames(18),
+                fathers: relNames(19), mothers: relNames(20),
+                spouses: relNames(21), sons: relNames(22),
+                daughters: relNames(23), grandsons: relNames(24),
+                granddaughters: relNames(25)
+            )
+            results.append(PersonEntity(
+                idx: idx, word: word, aliases: aliasCandidates, entityRemark: col(2),
+                verseRefs: Self.parseTargets(col(3)), matchedAlias: matchedAlias,
+                callTitle: col(5), meaning: col(6), introduce: col(7), lifetime: col(8),
+                event: col(9), character: col(10), origin: col(11), nation: col(12),
+                tribe: col(13), gender: col(14), occupation: occupation, seedMemo: col(16),
+                relations: relations, familyRelations: familyRelations, contextNotes: contextNotes,
+                groupMemberships: groupMemberships
+            ))
+        }
+        return Self.filterSwallowedNameMatches(results)
+    }
+
+    /// [2026-09-16 신설] 사용자 보고 — "야고보, 요한, 빌립에 대해서는 링크가
+    /// 걸리지 않았음"(관계 절의 제자 이름 클릭). 위 `persons(mentionedIn:)`는
+    /// 이름 기준이라 동명이인이 있으면 여러 건을 돌려주고, 화면
+    /// (`PersonDetailView.resolvedRelationPerson`)은 그중 어느 쪽인지 추측할
+    /// 근거가 없어 링크를 포기했다 — 하지만 `PersonRelationRecord.targetIdx`가
+    /// 채워진 경우(예: 기타관계 "예수(스승)"의 target은 항상 그 항목 자신이라
+    /// 빌드 시점에 idx가 이미 정확히 확정됨, `build_reference_data.py`
+    /// `target_idx` 컬럼 참고)는 이름 재판정 없이 `Persons.idx`(유일 식별자)로
+    /// 바로 하나를 짚을 수 있다 — 새 추측이 아니라 이미 확정된 값을 그대로
+    /// 쓰는 것뿐이다. `idx`가 비어 있으면(모르는 경우) nil을 돌려줘 호출부가
+    /// 여전히 이름 기준 동명이인 검사로 폴백하게 한다.
+    public func person(idx targetIdx: String) throws -> PersonEntity? {
+        guard !targetIdx.isEmpty else { return nil }
+        let sql = """
+            SELECT idx, word, remark, verses, word2, call_title, meaning, introduce,
+                   lifetime, event, character, origin, nation, tribe, gender, occupation, seed_memo,
+                   rel_grandfather, rel_grandmother, rel_father, rel_mother, rel_spouse, rel_sons,
+                   rel_daughters, rel_grandsons, rel_granddaughters
+            FROM Persons WHERE idx = ?
+            """
+        var statement: OpaquePointer?
+        defer { sqlite3_finalize(statement) }
+        guard sqlite3_prepare_v2(handle, sql, -1, &statement, nil) == SQLITE_OK else {
+            throw BibleReferenceError.statementPrepareFailed(code: sqlite3_errcode(handle))
+        }
+        sqlite3_bind_text(statement, 1, targetIdx, -1, SQLITE_TRANSIENT)
+
+        let step = sqlite3_step(statement)
+        if step == SQLITE_DONE { return nil }
+        guard step == SQLITE_ROW else { throw BibleReferenceError.stepFailed(code: step) }
+        func col(_ i: Int32) -> String { sqlite3_column_text(statement, i).map { String(cString: $0) } ?? "" }
+        // [2026-09-16] `persons(mentionedIn:)`와 같은 SELECT 컬럼 순서(그 함수
+        // 주석 참고) — 이 함수도 WHERE 절만 다를 뿐 같은 컬럼 목록을 쓴다.
+        func relNames(_ i: Int32) -> [PersonFamilyMember] {
+            col(i).split(separator: ",")
+                .map { Self.parseFamilyMember($0.trimmingCharacters(in: .whitespaces)) }
+                .filter { !$0.name.isEmpty }
+        }
+        let word = col(1)
+        let aliasCandidates = col(4).split(separator: ",").map { $0.trimmingCharacters(in: .whitespaces) }
+        let idx = col(0)
+        let occupation = col(15).split(separator: ",").map { $0.trimmingCharacters(in: .whitespaces) }
+        let relations = (try? personRelationRecords(involving: word)) ?? []
+        let contextNotes = (try? personContextNotes(forWord: word)) ?? []
+        let groupMemberships = (try? personGroupMemberships(forWord: word)) ?? []
+        let familyRelations = PersonFamilyRelations(
+            grandfathers: relNames(17), grandmothers: relNames(18),
+            fathers: relNames(19), mothers: relNames(20),
+            spouses: relNames(21), sons: relNames(22),
+            daughters: relNames(23), grandsons: relNames(24),
+            granddaughters: relNames(25)
+        )
+        // [주의] 이 조회는 항상 idx(유일 식별자)로 짚어 부르므로 별칭 매칭
+        // 경로를 타지 않는다 — `matchedAlias`는 항상 nil.
+        return PersonEntity(
+            idx: idx, word: word, aliases: aliasCandidates, entityRemark: col(2),
+            verseRefs: Self.parseTargets(col(3)), matchedAlias: nil,
+            callTitle: col(5), meaning: col(6), introduce: col(7), lifetime: col(8),
+            event: col(9), character: col(10), origin: col(11), nation: col(12),
+            tribe: col(13), gender: col(14), occupation: occupation, seedMemo: col(16),
+            relations: relations, familyRelations: familyRelations, contextNotes: contextNotes,
+            groupMemberships: groupMemberships
+        )
+    }
+
+    /// [2026-09-16 신설, 사용자 보고] "아브라함"을 검색했더니 "라함"(실존하는
+    /// 다른 인물, 유다 지파 갈렙의 후손)도 결과에 함께 뜨는 문제 — 원인은
+    /// 위 매칭 기준 자체가 `query.contains(word)`(부분 문자열 포함, 위
+    /// `aliasCandidates.first(where:)` 분기도 마찬가지)라서다. "아브라함"
+    /// 이라는 문자열 안에 "라함"이 우연히 연속된 부분 문자열로 들어있어
+    /// (아-브-라-함), 사용자가 "라함"을 검색한 게 아닌데도 같이 걸린다.
+    ///
+    /// 고치는 방법 — "다른 매치 후보의 이름 문자열 안에 완전히 포함되는
+    /// 더 짧은 매치는 뺀다"(최장 일치 우선). "아브라함"도 이 함수가 이미
+    /// 매치 후보로 찾아냈으므로("아브라함"이라는 이름 자체가 query에
+    /// 포함되니 당연히 매치됨), "라함"은 그 "아브라함" 문자열에 완전히
+    /// 포함돼 걸러진다. 반대로 "아브라함과 다윗"처럼 서로 포함관계가 아닌
+    /// 이름 두 개는 어느 쪽도 다른 쪽 문자열에 포함되지 않으므로 이 규칙에
+    /// 영향받지 않고 둘 다 그대로 남는다 — 정상적인 "질의 하나에 여러 인물
+    /// 언급" 케이스를 오차단하지 않는다.
+    ///
+    /// ⚠️ [적용 범위, 의도적 한정] `keywordCategories(mentionedIn:)`(SQL
+    /// `instr()` 기반 카테고리 존재 여부 판정)도 원리상 같은 종류의 부분
+    /// 문자열 오탐 가능성이 있지만, 그건 "인물/주제 카테고리가 있는지"만
+    /// 판정하고 실제 화면에 나열되는 건 이 함수의 결과이므로, 사용자가
+    /// 보고한 증상(화면에 "라함"이 뜸)은 여기만 고쳐도 해결된다 — 근거 없이
+    /// 다른 함수까지 함께 손대지 않았다.
+    private static func filterSwallowedNameMatches(_ results: [PersonEntity]) -> [PersonEntity] {
+        let matchedNames = results.map { $0.matchedAlias ?? $0.word }
+        return results.filter { candidate in
+            let name = candidate.matchedAlias ?? candidate.word
+            return !matchedNames.contains { other in other != name && other.count > name.count && other.contains(name) }
+        }
+    }
+
+    /// `personRelations(forWord:)`(source 방향)의 대칭 버전 — `word`가
+    /// `target_word`와 정확히 일치하는 관계 전부. 기존
+    /// `personRelations(targetWordMentionedIn:)`는 "긴 질의 문자열 안에 이
+    /// 이름이 등장하는지"(instr 부분 문자열 검색)를 묻는 다른 목적이라
+    /// 재사용할 수 없어(이름이 비슷해 혼동 주의) 별도로 추가한다.
+    private func personRelations(exactTargetWord targetWord: String) throws -> [PersonRelationRecord] {
+        let sql = """
+            SELECT source_word, relation_type, target_word, target_kind, raw_sentence, target_idx, source_idx
+            FROM PersonRelations WHERE target_word = ?
+            """
+        var statement: OpaquePointer?
+        defer { sqlite3_finalize(statement) }
+        guard sqlite3_prepare_v2(handle, sql, -1, &statement, nil) == SQLITE_OK else {
+            throw BibleReferenceError.statementPrepareFailed(code: sqlite3_errcode(handle))
+        }
+        sqlite3_bind_text(statement, 1, targetWord, -1, SQLITE_TRANSIENT)
+
+        var results: [PersonRelationRecord] = []
+        while true {
+            let step = sqlite3_step(statement)
+            if step == SQLITE_DONE { break }
+            guard step == SQLITE_ROW else { throw BibleReferenceError.stepFailed(code: step) }
+            let sourceWord = sqlite3_column_text(statement, 0).map { String(cString: $0) } ?? ""
+            let relationType = sqlite3_column_text(statement, 1).map { String(cString: $0) } ?? ""
+            let targetWordCol = sqlite3_column_text(statement, 2).map { String(cString: $0) } ?? ""
+            let targetKindRaw = sqlite3_column_text(statement, 3).map { String(cString: $0) }
+            let rawSentence = sqlite3_column_text(statement, 4).map { String(cString: $0) } ?? ""
+            let targetIdx = sqlite3_column_text(statement, 5).map { String(cString: $0) } ?? ""
+            // [2026-09-16 추가] 위 `PersonRelationRecord.sourceIdx` 주석 참고
+            // — "이름#idx" 태그가 있던 경우만 채워진다(추측 아님).
+            let sourceIdx = sqlite3_column_text(statement, 6).map { String(cString: $0) } ?? ""
+            results.append(PersonRelationRecord(
+                sourceWord: sourceWord, relationType: relationType, targetWord: targetWordCol,
+                targetKind: targetKindRaw == "place" ? .place : (targetKindRaw == "person" ? .person : nil),
+                rawSentence: rawSentence, targetIdx: targetIdx, sourceIdx: sourceIdx
+            ))
+        }
+        return results
+    }
+
+    /// `word`가 source든 target이든 걸린 `PersonRelations` 전부(양방향,
+    /// 중복 제거) — `persons(mentionedIn:)`가 `PersonEntity.relations`를
+    /// 채울 때 쓴다.
+    private func personRelationRecords(involving word: String) throws -> [PersonRelationRecord] {
+        let forward = try personRelations(forWord: word)
+        let reverse = try personRelations(exactTargetWord: word)
+        var seen = Set<String>()
+        var combined: [PersonRelationRecord] = []
+        for relation in forward + reverse {
+            let key = "\(relation.sourceWord)|\(relation.relationType)|\(relation.targetWord)"
+            guard seen.insert(key).inserted else { continue }
+            combined.append(relation)
+        }
+        return combined
     }
 
     // MARK: - Themes / Prophecies / TimelineEvents (2026-08-20 신설, 스키마만)

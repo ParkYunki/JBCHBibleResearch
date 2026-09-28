@@ -70,7 +70,7 @@ private let onboardingPages: [OnboardingPage] = [
     OnboardingPage(
         icon: "book.closed.fill",
         gradientColors: [.blue, .cyan],
-        title: "JBCH 성경 연구에 오신 것을 환영합니다",
+        title: "엠마오 성경 연구에 오신 것을 환영합니다",
         description: "성경 본문, 연구자료, 개인 묵상을 한곳에서 관리하는 앱입니다. 주요 기능을 간단히 소개합니다."
     ),
     OnboardingPage(

@@ -13,6 +13,26 @@ import SwiftData
 import Observation
 import PDFKit
 import BibleResearchModels
+#if os(macOS)
+import AppKit
+#else
+import UIKit
+#endif
+
+// [2026-09-27 이동, 빌드 에러 수정] 사용자 보고 — "Cannot find type
+// 'PlatformImage' in scope"(DocumentViewerView.swift/DocumentViewerViewModel.swift
+// 여러 곳). 원인 — 이 typealias는 원래 `OCRReviewView.swift`에 선언돼
+// 있었는데, 같은 세션의 다른 요청("OCR 검수화면은 없앨 것")으로 그 파일
+// 자체를 삭제하면서 이 선언도 함께 사라졌다. 이 파일과 `DocumentViewerView.swift`
+// 둘 다 이 심볼을 계속 쓰므로, 더 이상 지워지지 않을 이 뷰모델 파일로
+// 옮겨 다시 선언한다 — 접근 수준이 기본(internal)이라 같은 모듈의 다른
+// 파일은 여전히 별도 import 없이 `PlatformImage`를 그대로 쓸 수 있다
+// (옛 위치에서도 그렇게 동작했던 것과 동일한 원리).
+#if os(macOS)
+typealias PlatformImage = NSImage
+#else
+typealias PlatformImage = UIImage
+#endif
 
 @MainActor
 @Observable
@@ -39,6 +59,20 @@ final class DocumentViewerViewModel {
     /// 이유로(재계산마다 디스크를 다시 읽으면 매번 문서를 새로 열게 돼
     /// 깜박임/재파싱 낭비가 생긴다) `onAppear`에서 한 번만 읽어 캐싱한다.
     private(set) var hwpFileData: Data?
+    /// [2026-09-27 신설] 사용자 보고 — "연구문서-이미지 문서 조회시 닫고 난
+    /// 후 다시 안 열리는 이슈." 기존엔 `originalPane`(뷰 쪽)이 매번
+    /// `PlatformImage(contentsOfFile: url.path)`로 직접 읽었는데, 이 파일의
+    /// 다른 모든 형식(hwp/hwpx 등)과 달리 `readSecurityScopedData`(보안 스코프
+    /// 열고/닫는 짝)를 안 거쳤다 — `resolvedURL`이 앱 소유 iCloud 컨테이너 밖의
+    /// 파일(오래된 문서, 또는 앱 밖에서 고른 파일)을 가리키는 보안 스코프
+    /// URL이면 스코프가 열려 있지 않을 때 조용히 실패한다(`PlatformImage`
+    /// 이니셜라이저는 실패해도 에러를 던지지 않고 nil만 준다). 처음 열렸을 때
+    /// 우연히 성공했더라도(예: 방금 업로드 흐름이 스코프를 열어 둔 채였던 경우)
+    /// 창을 닫았다 다시 열면 그 우연한 스코프가 이미 닫혀 있어 실패하는 것과
+    /// 정확히 들어맞는 증상이다. 아래 `loadPrimaryFileContent`가 hwp/hwpx와
+    /// 똑같이 `readSecurityScopedData`로 읽어 이 프로퍼티에 담아 두고,
+    /// `originalPane`은 이제 파일을 직접 읽지 않고 이 값만 본다.
+    private(set) var loadedImage: PlatformImage?
 
     /// [2026-08-16 추가] 사용자 요청 — "hwp 업로드할 때 pdf를 생성하고 pdf
     /// 파일을 열수 있도록." 업로드 시 `DocumentUploadService.
@@ -220,6 +254,15 @@ final class DocumentViewerViewModel {
                     try? Self.readSecurityScopedData(from: resolvedURL)
                 }.value
                 self?.hwpFileData = data
+            }
+        }
+        if document.originalFormat == .image {
+            Task { [weak self] in
+                let data = await Task.detached(priority: .userInitiated) {
+                    try? Self.readSecurityScopedData(from: resolvedURL)
+                }.value
+                guard let data else { return }
+                self?.loadedImage = PlatformImage(data: data)
             }
         }
     }

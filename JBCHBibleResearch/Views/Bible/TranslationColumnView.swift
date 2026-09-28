@@ -187,9 +187,46 @@ struct TranslationColumnView: View {
     /// `centerVerseID` 변경을 리더 보고로 착각해 되돌려 보고하지 않는다(안 그러면
     /// 팔로워가 스스로를 리더로 착각해 무한 루프에 빠질 수 있다).
     @State private var isProgrammaticScroll = false
+    /// [2026-09-16 신설] 사용자 보고 — "절을 스와이프로 넘길 때(특히 아래에서
+    /// 위로, 즉 뒤쪽 절을 볼 때) 다른 번역본의 자동 스크롤이 살짝 어긋난다."
+    /// 원인: 바로 위 `centerVerseID` 선언부 주석의 "팔로워 역할"(다른 컬럼이
+    /// 보고한 절로 이 컬럼도 맞춰 스크롤)은 `respondToSyncEvent`가
+    /// `centerVerseID`에 값을 대입하는 방식으로 스크롤을 일으키는데, 그
+    /// 대입이 정확히 정중앙까지 스크롤되게 하려면 그 순간 `anchor`가
+    /// `.center`여야 한다 — 그런데 바로 아래 `.scrollPosition(id:anchor:)`을
+    /// 이번 세션 앞선 수정에서 항상 `nil`로 고정해 버려서(절 선택/해제 시
+    /// 화면이 튀는 문제를 없애기 위함), 팔로워가 리더의 절에 딱 맞춰 정중앙
+    /// 정렬되는 게 아니라 "일단 화면에 보이기만 하면 되는" 정도로만 스크롤되어
+    /// 리더와 살짝 어긋나게 됐다. 그래서 "레이아웃이 바뀔 때마다 스스로
+    /// 재중앙정렬"하는 것(문제였던 부분, 계속 꺼 둬야 함)과 "지금 이 순간 딱
+    /// 한 번 정확히 특정 절에 맞춰 스크롤"하는 것(원래 필요했던 부분, 다시
+    /// 켜야 함)을 분리한다.
+    ///
+    /// [2026-09-18 수정, 이름·범위 확장] 사용자 보고(맥OS) — "통합검색 —
+    /// 성경구절 클릭 → 해당 성경구절로 자동스크롤 이동이 되지 않음." 원인:
+    /// 이 플래그는 처음엔 `respondToSyncEvent`(번역본 간 스크롤 동기화)만
+    /// 위해 만들었는데, `centerVerseID`에 값을 대입해 스크롤을 일으키는
+    /// 자리가 그 외에도 셋 더 있었다 — 검색 결과 탭 시 스크롤
+    /// (`.onChange(of: highlightedVerse)`), 이 화면이 처음 열릴 때 이미
+    /// 하이라이트가 지정된 경우(`.onAppear`), 아이폰 스와이프 페이지 정렬
+    /// (`.onChange(of: pendingCenterAlignment)`) — 이 셋은 이 플래그를 켜지
+    /// 않은 채로 대입했기 때문에, `anchor`가 계속 `nil`이라 대입은 되지만
+    /// 실제 화면 스크롤은 일어나지 않았다(바로 위 문단이 설명하는 것과 정확히
+    /// 같은 문제가 여기서도 재현된 것 — "레이아웃 변화로 인한 원치 않는 강제
+    /// 재중앙정렬"과 "의도된 프로그램적 스크롤" 중 후자까지 이 플래그가 없으면
+    /// 함께 꺼져 버린다). 그래서 이름을 이 넷 모두를 아우르게 바꾸고
+    /// (`ForSync` → `ForProgrammaticScroll`), 아래 `forceCenterAnchorTemporarily()`
+    /// 헬퍼로 네 곳 모두가 같은 방식으로 이 플래그를 켰다 끄게 통일했다.
+    @State private var forceCenterAnchorForProgrammaticScroll = false
     /// [2026-08-07 수정] 아래 `respondToSyncEvent` 참고 — 예약해 둔 가드 해제 작업을
     /// 취소할 수 있도록 들고 있는다.
     @State private var guardReleaseWorkItem: DispatchWorkItem?
+    /// [2026-09-18 신설] 위 `forceCenterAnchorForProgrammaticScroll` 선언부
+    /// 주석 참고 — `forceCenterAnchorTemporarily()`가 예약하는, 그 플래그를
+    /// 다시 끄는 작업을 취소·재예약할 수 있도록 들고 있는다.
+    /// `guardReleaseWorkItem`(팔로워 반복 응답 방지, 별개 목적)과는 독립적으로
+    /// 관리한다.
+    @State private var centerAnchorReleaseWorkItem: DispatchWorkItem?
 
     /// addendum.md 3장이 명시한 "가드 해제 시각을 애니메이션 지속 시간과 정확히
     /// 맞춘다" 패턴의 그 지속 시간. `respondToSyncEvent`의 `withAnimation` duration과
@@ -368,7 +405,46 @@ struct TranslationColumnView: View {
         // 배경에 한 곳에서만 그린다 — 아래 `body` 상단 주석 참고. 예전엔
         // 이 `ScrollView` 자신의 배경에 붙어 있었으나, "제목 영역까지
         // 연장" 요청으로 더 바깥(제목을 포함하는 컨테이너)으로 옮겼다.
-        .scrollPosition(id: $centerVerseID, anchor: .center)
+        // [2026-09-16 수정, 두 차례 후속 수정 끝에 방식 자체를 변경] 사용자
+        // 보고(아이패드) — "한자 표시 옵션이 켜진 상태에서 구절을 선택하면
+        // 선택 위치가 탭한 위치에서 벗어난다." → 1차 수정: `selectedVerses`가
+        // 하나라도 있는 동안만 `anchor`를 `nil`로 바꿔 강제 재중앙정렬을
+        // 껐다. → 그런데 이번엔 "절을 탭해서 선택했다가 다시 탭해서 해제할
+        // 때 화면이 위/아래로 튄다"는 새 보고가 이어졌다 — 원인: 선택을
+        // 해제하는 바로 그 순간 `anchor`가 `nil → .center`로 다시 바뀌면서,
+        // 그 시점에 `centerVerseID`가 가리키는 절이 화면 정중앙에서 조금이라도
+        // 벗어나 있으면(가운데보다 살짝 위/아래에 있는 절을 탭했을 때처럼)
+        // 그 절을 강제로 정중앙까지 끌어오는 보정이 걸려, 탭한 절이 화면
+        // 위쪽에 있었으면 위로, 아래쪽에 있었으면 아래로 화면이 튀었다(2차
+        // 수정으로 하단 액션바를 오버레이로 바꿔 뷰포트 크기 변화라는 원인
+        // 하나는 없앴지만, "다시 켜지는 순간의 강제 보정" 자체는 남아 있었다).
+        // 사용자 제안대로 — 선택을 해제할 때도 이 재중앙정렬 보정을 다시 켜지
+        // 않도록, 일단 `anchor`를 상황에 따라 켰다 껐다 하지 않고 항상 `nil`로
+        // 고정해 봤다.
+        // [2026-09-16 추가 수정] 그런데 이 항상-`nil` 버전으로는 사용자가 바로
+        // "절을 스와이프로 넘길 때(특히 아래에서 위로, 뒤쪽 절을 볼 때) 다른
+        // 번역본의 자동 스크롤이 살짝 어긋난다"고 보고했다 — 바로 위
+        // `forceCenterAnchorForProgrammaticScroll` 선언부 주석 참고. 원인: 팔로워
+        // (`respondToSyncEvent`)가 리더의 절에 정확히 정중앙으로 맞춰 스크롤
+        // 되려면 그 대입 순간 `anchor`가 `.center`여야 하는데, 항상 `nil`로
+        // 고정해 버려서 "화면에 보이기만 하면 되는" 정도로만 스크롤돼 리더와
+        // 살짝 어긋났다. 그래서 두 가지 목적을 다시 분리했다 — (a) 레이아웃이
+        // 바뀔 때마다(절 선택/해제, 한자 표시 등) 스스로 재중앙정렬하는 것은
+        // 계속 꺼 둬야 하고(이게 화면이 튀던 진짜 원인), (b) 팔로워가 리더의
+        // 절에 맞춰 스크롤하는 이 순간만큼은 정확히 정중앙까지 가야 한다.
+        // `forceCenterAnchorForProgrammaticScroll`가 켜져 있는 아주 짧은 순간
+        // (`respondToSyncEvent`의 애니메이션 지속 시간, `guardReleaseWorkItem`이
+        // 끝나면 자동으로 꺼짐)에만 `anchor`가 `.center`가 되어 (b)를 만족하고,
+        // 그 외 나머지 모든 시간(평소 읽기, 절 선택/해제, 검색 결과 이동·장
+        // 이동·아이폰 스와이프 정렬 등 다른 프로그램적 이동 포함)엔 `nil`이라
+        // (a)도 계속 만족한다. ⚠️ [미검증] 컴파일러가 없어 실기기로 확인하지
+        // 못했다 — 이 스크롤 동기화 코드는 과거 크래시/동기화 지연 이력이
+        // 있는 민감한 부분이라(이 뷰 상단 주석 참고), 재빌드 후 (1) 절을
+        // 선택/해제할 때 화면이 더 이상 위아래로 튀지 않는지 (2) 검색 결과
+        // 이동·장 이동·아이폰 스와이프 정렬이 평소대로 되는지 (3) 스와이프
+        // 방향(위/아래) 상관없이 번역본 간 실시간 스크롤 동기화가 정확히
+        // 맞는지 셋 다 꼭 확인해 달라고 안내했다.
+        .scrollPosition(id: $centerVerseID, anchor: forceCenterAnchorForProgrammaticScroll ? .center : nil)
         // [2026-08-19 추가] 검색 결과 등에서 이 화면이 처음 만들어질 때부터
         // 이미 `highlightedVerse`가 채워져 있는 경우 — 예: 검색 결과를 탭하면
         // `BibleReadingView`가 새로 생기면서 `highlightedVerse`를 첫 렌더링
@@ -378,6 +454,11 @@ struct TranslationColumnView: View {
         // 바로 맞춰준다.
         .onAppear {
             if let highlightedVerse {
+                // [2026-09-18 수정] 사용자 보고(맥OS) — "통합검색 성경구절
+                // 클릭 → 자동스크롤 안 됨." 위 `forceCenterAnchorForProgrammaticScroll`
+                // 선언부 주석 참고 — 이 대입도 실제 스크롤로 이어지려면 그
+                // 순간 `anchor`가 `.center`여야 한다.
+                forceCenterAnchorTemporarily()
                 centerVerseID = highlightedVerse
             }
         }
@@ -411,6 +492,8 @@ struct TranslationColumnView: View {
         // 애니메이션이라 추가 애니메이션은 오히려 어색하다).
         .onChange(of: pendingCenterAlignment) { _, newValue in
             guard let newValue else { return }
+            // [2026-09-18 수정] 위 `.onAppear`와 같은 이유·같은 해법.
+            forceCenterAnchorTemporarily()
             centerVerseID = newValue
         }
         // [2026-08-19 추가] 사용자 요청 — "검색 결과중 - 성경구절을 클릭하면
@@ -421,6 +504,17 @@ struct TranslationColumnView: View {
         // highlightVerseTemporarily`가 관리한다(여기선 스크롤만 담당).
         .onChange(of: highlightedVerse) { _, newValue in
             guard let newValue else { return }
+            // [2026-09-18 수정, 실제 버그 확인·수정] 사용자 보고(맥OS) —
+            // "통합검색 - 성경구절 클릭 -> 해당 성경구절로 자동스크롤 이동이
+            // 되지 않음." 위 `forceCenterAnchorForProgrammaticScroll` 선언부
+            // 주석 참고 — 원인은 정확히 그 주석이 설명하는 것과 같다: 이
+            // 대입 순간 `anchor`가 계속 `nil`이라(절 선택 중 화면이 튀는 걸
+            // 막으려던 앞선 수정 탓) 대입은 되지만 실제 스크롤은 전혀
+            // 일어나지 않았다 — Apple 문서를 근거로 "대입하면 nil이어도
+            // 스크롤은 될 것"이라 판단했던 앞선 추정이 실기기(맥OS) 확인
+            // 결과 틀렸다는 뜻이다. `respondToSyncEvent`가 이미 쓰던 것과
+            // 같은 해법(`forceCenterAnchorTemporarily()`)을 여기도 적용한다.
+            forceCenterAnchorTemporarily()
             withAnimation(.easeInOut(duration: Self.scrollAnimationDuration)) {
                 centerVerseID = newValue
             }
@@ -687,13 +781,39 @@ struct TranslationColumnView: View {
         guardReleaseWorkItem?.cancel()
 
         isProgrammaticScroll = true
+        forceCenterAnchorForProgrammaticScroll = true
         withAnimation(.easeInOut(duration: Self.scrollAnimationDuration)) {
             centerVerseID = target
         }
         let releaseWorkItem = DispatchWorkItem {
             isProgrammaticScroll = false
+            forceCenterAnchorForProgrammaticScroll = false
         }
         guardReleaseWorkItem = releaseWorkItem
+        DispatchQueue.main.asyncAfter(deadline: .now() + Self.scrollAnimationDuration, execute: releaseWorkItem)
+    }
+
+    /// [2026-09-18 신설] 위 `forceCenterAnchorForProgrammaticScroll` 선언부
+    /// 주석 참고 — `centerVerseID`에 값을 대입해 "지금 이 절로 스크롤해라"라고
+    /// 지시하는 자리(검색 결과 탭·최초 진입 하이라이트·아이폰 스와이프 페이지
+    /// 정렬)가 공통으로 필요로 하는 절차를 한 곳에 모았다: 대입 직전에 이
+    /// 플래그를 켜서(그 순간만 `anchor`가 `.center`가 되어 대입이 실제
+    /// 스크롤로 이어지게 함) 스크롤이 끝날 시간(`Self.scrollAnimationDuration`)
+    /// 뒤 자동으로 다시 끈다 — 계속 켜 두면 이 함수 상단 주석이 설명하는
+    /// "레이아웃이 바뀔 때마다 스스로 재중앙정렬"하는 문제(절 선택/해제 시
+    /// 화면이 튀던 원인)가 되돌아온다. `respondToSyncEvent`(위)는 팔로워
+    /// 반복 응답 방지(`isProgrammaticScroll`/`guardReleaseWorkItem`)라는 별도
+    /// 관심사가 얽혀 있어 이 헬퍼를 쓰지 않고 그 자신의 타이머로 두 플래그를
+    /// 함께 다룬다 — 나머지 세 호출부(아래 `.onAppear`/`.onChange(of:
+    /// pendingCenterAlignment)`/`.onChange(of: highlightedVerse)`)는 이 헬퍼로
+    /// 통일한다.
+    private func forceCenterAnchorTemporarily() {
+        forceCenterAnchorForProgrammaticScroll = true
+        centerAnchorReleaseWorkItem?.cancel()
+        let releaseWorkItem = DispatchWorkItem {
+            forceCenterAnchorForProgrammaticScroll = false
+        }
+        centerAnchorReleaseWorkItem = releaseWorkItem
         DispatchQueue.main.asyncAfter(deadline: .now() + Self.scrollAnimationDuration, execute: releaseWorkItem)
     }
 
@@ -726,6 +846,12 @@ struct TranslationColumnView: View {
         // 대입해야 한다 — 그래서 새 장의 첫 절(`verses.first?.verse`, 정상적인
         // 성경 장은 항상 1절부터 시작하지만 하드코딩된 1 대신 실제 데이터를
         // 그대로 쓴다)을 대입해 화면이 확실히 맨 위(1절)로 스크롤되게 한다.
+        // [2026-09-18 수정] 위 `forceCenterAnchorForProgrammaticScroll` 선언부
+        // 주석 참고 — 이 대입도 같은 부류(검색 결과 탭·번역본 동기화 등)라,
+        // `anchor`가 그때 `nil`이면 대입만 되고 실제 스크롤은 일어나지 않는다.
+        // 아직 사용자가 이 경로(장 이동 시 스크롤 리셋)가 깨졌다고 보고하진
+        // 않았지만, 원인이 완전히 같은 종류의 버그라 여기도 함께 고쳐 둔다.
+        forceCenterAnchorTemporarily()
         centerVerseID = verses.first?.verse
     }
 
@@ -1268,20 +1394,203 @@ private struct VerseRow: View {
         #endif
     }
 
+    // [2026-09-12 3차 재설계] 사용자가 목업(history-crossref-mockup.html —
+    // "조회 이력 · 관주 팝업 재설계 목업")을 검토하고 "이대로 구현할 것"이라고
+    // 확정한 내용을 그대로 옮겼다. 직전 커밋(테마 배경/글자색만 맞춘 것)
+    // 이후 사용자가 "디자인 자체가 마음에 안 든다"고 재보고해 전면 재검토한
+    // 결과다. `BibleReadingHistorySheet.header`/`BookmarkListPopover.header`와
+    // 같은 "제목 + 개수 배지 + 원형 닫기" 헤더를 새로 얹었다(지금까지는 헤더
+    // 자체가 없어 `List`만 덩그러니 있었다). 행도 책 이름을
+    // `Color("AccentColor")` 굵게로 키우고 장:절은 옅게, 탭 가능함을 알리는
+    // chevron을 더했다 — `BibleReadingHistorySheet.row(for:)`와 같은
+    // 시각 언어라 두 화면이 한 가족처럼 보인다.
+    //
+    // 아이폰에서 이 `.popover`가 시트로 바뀔 때 카드 위아래에 테마색이 아닌
+    // 여백이 남는 문제(`TranslationPickerPopover`가 같은 증상을 겪고 고친
+    // 것과 같은 원인 — 시트 자체는 이 뷰의 내용물 크기만큼만 차지하지 않는다)를
+    // 이 팝업도 똑같이 겪을 수 있어, 그때 쓴 것과 같은 두 겹 처리(근사
+    // `.presentationDetents` + 여유 공간을 항상 테마색으로 채우는
+    // `.frame(maxHeight: .infinity)`)를 아래 `crossReferenceSheetHeight`/
+    // `CrossReferenceSheetSizingModifier`로 그대로 적용했다.
+    //
+    // 바로 아래 `marginalNotePopoverContent`(난외주 팝오버)도 정확히 같은
+    // 문제를 갖고 있지만, 이번에도 사용자가 관주 팝업만 지목해 그 쪽은
+    // 손대지 않았다 — 필요하면 같은 패턴으로 알려주시면 된다.
+    //
+    // [2026-09-12 4차 수정] 사용자 재보고 — "①상단 타이틀 위 여백을 좀더
+    // 여유롭게. ②타이틀 밑에 이미지 구분선 추가. ③리스트 각 행에 연구문서
+    // 최근문서처럼 왼쪽 색상바 추가 + 구분선을 더 흐리게." 자세한 근거는
+    // `BibleReadingHistorySheet.swift`의 같은 날짜 주석 참고 — 관주 팝업도
+    // 그 화면과 완전히 같은 세 가지를 같은 방식으로 반영했다(같은 목업 재검토
+    // 대상이라 두 화면이 계속 한 가족처럼 같이 바뀐다).
     private var crossReferencePopoverContent: some View {
-        List(crossReferences.flatMap(\.targets), id: \.self) { target in
-            Button(crossReferenceTargetLabel(target)) {
-                isCrossReferencePopoverPresented = false
-                onSelectCrossReferenceTarget(target)
+        let targets = crossReferences.flatMap(\.targets)
+        return VStack(alignment: .leading, spacing: 0) {
+            crossReferenceHeader(count: targets.count)
+            crossReferenceContentOrnamentalDivider
+            List(targets, id: \.self) { target in
+                crossReferenceRow(for: target)
             }
+            .listStyle(.plain)
+            .scrollContentBackground(.hidden)
+            .background(settings.bibleBackgroundColor ?? Color.clear)
+            .listRowSeparatorTint(JBCHCategoryPalette.wood.opacity(0.15))
+            .frame(minWidth: 220, minHeight: 160)
         }
-        .frame(minWidth: 220, minHeight: 160)
+        // [2026-09-12 추가] `TranslationPickerPopover.body`의 같은 주석 참고 —
+        // 아이폰(시트로 바뀔 때)에만 이 VStack을 시트 프레임 전체 높이까지
+        // 늘려(`alignment: .top`으로 실제 내용은 그대로 위쪽에 붙임) 바로
+        // 아래 `.background()`가 시트 전체를 칠하게 한다 — `sheetHeight`
+        // 근사치가 다소 어긋나도 남는 여백이 항상 테마색이라 눈에 띄는 색
+        // 불일치가 생기지 않는다. 아이패드/macOS(진짜 popover)는 `nil`이라
+        // 기존과 동일(내용 크기에 맞춰짐)하다.
+        .frame(maxHeight: isPhone ? .infinity : nil, alignment: .top)
+        .background(settings.bibleBackgroundColor ?? Color.clear)
+        #if os(iOS)
+        .modifier(CrossReferenceSheetSizingModifier(isPhone: isPhone, sheetHeight: crossReferenceSheetHeight(count: targets.count)))
+        #endif
+    }
+
+    /// [2026-09-12 3차 재설계] `BibleReadingHistorySheet.header`/
+    /// `BookmarkListPopover.header`와 완전히 같은 구조.
+    private func crossReferenceHeader(count: Int) -> some View {
+        HStack(spacing: 6) {
+            Text("관주")
+                .font(.headline)
+                .foregroundStyle(settings.bibleTextColor ?? .primary)
+            Text("\(count)")
+                .font(.caption)
+                .foregroundStyle(settings.bibleTextColor?.opacity(0.6) ?? Color.secondary)
+                .padding(.horizontal, 6)
+                .padding(.vertical, 2)
+                .background(settings.bibleTextColor?.opacity(0.12) ?? Color.secondary.opacity(0.15), in: Capsule())
+            Spacer()
+            Button {
+                isCrossReferencePopoverPresented = false
+            } label: {
+                Image(systemName: "xmark.circle.fill")
+                    .font(.system(size: 18))
+                    .foregroundStyle(settings.bibleTextColor?.opacity(0.6) ?? Color.secondary)
+            }
+            .buttonStyle(.plain)
+            .accessibilityLabel("닫기")
+        }
+        .padding(.horizontal, 16)
+        // [2026-09-12 4차 수정] `BibleReadingHistorySheet.header`의 같은
+        // 날짜 주석 참고 — 위쪽만 더 띄운다.
+        .padding(.top, 18)
+        .padding(.bottom, 10)
+    }
+
+    /// [2026-09-12 4차 수정] `BibleReadingHistorySheet.
+    /// historyContentOrnamentalDivider`/`SearchView.
+    /// menuContentOrnamentalDivider`와 완전히 같은 모양(가로선-`sparkle`-
+    /// 가로선, wood 톤) — 전부 `private`라 이 파일에서 직접 재사용은 못 하고
+    /// 그대로 옮겨 적는다.
+    private var crossReferenceContentOrnamentalDivider: some View {
+        HStack(spacing: 10) {
+            Rectangle()
+                .fill(JBCHCategoryPalette.wood.opacity(0.3))
+                .frame(height: 1)
+            Image(systemName: "sparkle")
+                .font(.system(size: 11))
+                .foregroundStyle(settings.bibleTextColor?.opacity(0.45) ?? Color.secondary)
+            Rectangle()
+                .fill(JBCHCategoryPalette.wood.opacity(0.3))
+                .frame(height: 1)
+        }
+        .padding(.horizontal, 16)
+        .padding(.vertical, 4)
+    }
+
+    /// [2026-09-12 3차 재설계] 위 `crossReferencePopoverContent` 주석 참고 —
+    /// 책 이름을 `Color("AccentColor")`로 굵게 강조하고(목업의
+    /// `--app-accent`는 실제로 이 에셋 값 그대로다) 장:절은 옅게 뒀다. 끝에
+    /// `chevron.right`를 더해 탭하면 이동한다는 걸 알린다 — 이 행이 이미
+    /// `Button`이라 실제로 탭 가능한 게 맞으므로, 없는 기능을 있는 것처럼
+    /// 보이게 하는 게 아니라 이미 있는 기능을 드러내는 장치다.
+    private func crossReferenceRow(for target: BibleVerseRef) -> some View {
+        Button {
+            isCrossReferencePopoverPresented = false
+            onSelectCrossReferenceTarget(target)
+        } label: {
+            HStack(spacing: 8) {
+                Text(crossReferenceBookName(target))
+                    .font(.body.weight(.bold))
+                    .foregroundStyle(Color("AccentColor"))
+                Text(crossReferenceVerseLabel(target))
+                    .font(.body.weight(.semibold))
+                    .foregroundStyle(settings.bibleTextColor?.opacity(0.7) ?? Color.secondary)
+                Spacer(minLength: 8)
+                Image(systemName: "chevron.right")
+                    .font(.caption2)
+                    .foregroundStyle(settings.bibleTextColor?.opacity(0.4) ?? Color.secondary.opacity(0.6))
+            }
+            .padding(.leading, 10)
+            // [2026-09-12 4차 수정] `BibleReadingHistorySheet.row(for:)`의
+            // 같은 날짜 주석 참고 — `DocumentRowView.documentRowLabel`의
+            // "책등" 강조선 패턴, 색은 이 행이 이미 쓰는 강조색
+            // (`Color("AccentColor")`, 위 책 이름 텍스트)을 그대로 재사용.
+            .overlay(alignment: .leading) {
+                RoundedRectangle(cornerRadius: 1.5)
+                    .fill(Color("AccentColor"))
+                    .frame(width: 3)
+                    .padding(.vertical, 3)
+            }
+            .contentShape(Rectangle())
+        }
+        .buttonStyle(.plain)
+        .listRowBackground(Color.clear)
+        // [2026-09-12 추가] 책 이름/장:절을 두 개의 별도 `Text`로 나누면서
+        // VoiceOver가 각각 따로 읽을 수 있으므로, 접근성 레이블은 기존처럼
+        // 하나로 합친 문장("창세기 4:22")을 그대로 제공한다.
+        .accessibilityLabel(crossReferenceTargetLabel(target))
+    }
+
+    private func crossReferenceBookName(_ target: BibleVerseRef) -> String {
+        BooksProvider.shared.book(id: target.bookId)?.nameKo ?? "책 \(target.bookId)"
+    }
+
+    private func crossReferenceVerseLabel(_ target: BibleVerseRef) -> String {
+        "\(target.chapter):\(target.verse)"
     }
 
     private func crossReferenceTargetLabel(_ target: BibleVerseRef) -> String {
-        let name = BooksProvider.shared.book(id: target.bookId)?.nameKo ?? "책 \(target.bookId)"
-        return "\(name) \(target.chapter):\(target.verse)"
+        "\(crossReferenceBookName(target)) \(crossReferenceVerseLabel(target))"
     }
+
+    /// [2026-09-12 3차 재설계] `TranslationPickerPopover.isPhone`과 정확히
+    /// 같은 판정(그쪽도 `private`라 이 파일에서 직접 재사용은 안 돼, 로직만
+    /// 그대로 옮겨 왔다).
+    private var isPhone: Bool {
+        #if os(iOS)
+        UIDevice.current.userInterfaceIdiom == .phone
+        #else
+        false
+        #endif
+    }
+
+    #if os(iOS)
+    /// [2026-09-12 3차 재설계] `TranslationPickerPopover.sheetHeight`와 같은
+    /// 이유·같은 계산 방식 — 헤더(약 44, 같은 패딩) + 구분선(1) + 행 한 개당
+    /// 44(HIG 최소 탭 영역과도 맞는 값, `BookmarkListPopover.row`가 이미 쓰는
+    /// 근거와 동일). 대상이 하나도 없을 일은 없다(이 팝오버 자체가
+    /// `!crossReferences.isEmpty`일 때만 열리므로, `VerseRow.body`의 관주
+    /// 마커 조건 참고) — `max(count, 1)`은 그래도 0으로 나눠 시트 높이가
+    /// 0이 되는 걸 막는 안전장치일 뿐이다.
+    private func crossReferenceSheetHeight(count: Int) -> CGFloat {
+        // [2026-09-12 4차 수정] 헤더 위쪽 패딩을 늘리고(10→18) `Divider()`를
+        // `crossReferenceContentOrnamentalDivider`(세로 패딩 4×2 + `sparkle`
+        // 아이콘 한 줄 ≈ 20)로 바꾼 만큼 두 근사값을 올렸다 — 어차피 근사치라
+        // 딱 맞을 필요는 없다(아래 `crossReferencePopoverContent`의
+        // `.frame(maxHeight: .infinity)`가 어긋난 만큼을 항상 테마색으로
+        // 채워 시각적으로 어긋나지 않게 막아 준다).
+        let headerHeight: CGFloat = 52
+        let dividerHeight: CGFloat = 20
+        let rowHeight: CGFloat = 44
+        return headerHeight + dividerHeight + CGFloat(max(count, 1)) * rowHeight
+    }
+    #endif
 
     /// [2026-08-14 추가] 난외주 팝오버 — 탭할 대상이 없어(단순 텍스트 목록)
     /// `crossReferencePopoverContent`처럼 `Button` 대신 `Text`만 나열한다.
@@ -1310,6 +1619,29 @@ private struct VerseRow: View {
         return Color.clear
     }
 }
+
+#if os(iOS)
+/// [2026-09-12 3차 재설계] 위 `VerseRow.crossReferencePopoverContent` 주석
+/// 참고 — `TranslationPickerPopover.TranslationPickerSheetSizingModifier`/
+/// `BookmarkListPopover.BookmarkSheetSizingModifier`와 완전히 같은 구조
+/// (`private`라 이 파일에서 직접 재사용은 안 돼, 이 파일 전용으로 하나 더
+/// 둔다) — 아이폰(시트로 바뀔 때)에만 높이를 컨텐츠에 맞추고, 아이패드/
+/// macOS(진짜 팝오버)는 이 모디파이어 자체가 아무 것도 하지 않아 기존
+/// 그대로다.
+private struct CrossReferenceSheetSizingModifier: ViewModifier {
+    let isPhone: Bool
+    let sheetHeight: CGFloat
+    func body(content: Content) -> some View {
+        if isPhone {
+            content
+                .presentationDetents([.height(sheetHeight)])
+                .presentationDragIndicator(.visible)
+        } else {
+            content
+        }
+    }
+}
+#endif
 
 /// macOS 13/iOS 16까지 지원해야 한다면 `ContentUnavailableView`(macOS 14+/iOS 17+
 /// 전용)를 못 쓰지만, 이 프로젝트는 이미 SwiftData+CloudKit 스택 때문에 macOS 14+/iOS 17+

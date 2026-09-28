@@ -337,7 +337,19 @@ struct SidebarNavigationView: View {
                 sidebarMenuList
             }
             .navigationSplitViewColumnWidth(min: 200, ideal: 240, max: 280)
+            // [2026-09-27 수정] 사용자 요청 — "아이패드에서 성경조회 메뉴의
+            // 왼쪽 최상단 'JBCH Bible ...' 텍스트 삭제." 이 사이드바
+            // (NavigationSplitView 첫 번째 컬럼)의 navigationTitle은
+            // 아이패드에서는 목록 위 큰 인라인 제목으로 보이지만, macOS에서는
+            // 창 제목표시줄 텍스트로만 쓰인다(둘이 렌더링 위치가 다르다) —
+            // 요청이 "아이패드"로 명시됐고 macOS 창 제목은 언급되지 않았으므로,
+            // 그쪽은 그대로 두고 이 텍스트를 macOS 전용으로만 남긴다. 이 뷰는
+            // 애초에 아이폰에서는 쓰이지 않으므로(위 "userInterfaceIdiom ==
+            // .phone이면 이 뷰 대신" 참고) #if os(macOS)만으로 "아이패드에서는
+            // 항상 없음"이 정확히 성립한다.
+            #if os(macOS)
             .navigationTitle("JBCH Bible Research")
+            #endif
             .toolbar {
                 if showsSettingsToolbarButton {
                     ToolbarItem(placement: .automatic) {
@@ -535,6 +547,16 @@ struct SidebarNavigationView: View {
             case .document(let document): return document.originalFilename
             case .memo(let memo):
                 let bookName = BooksProvider.shared.book(id: memo.bookId)?.nameKo ?? "성경"
+                // [2026-09-27 수정] 사용자 보고 — "개인묵상 작성하면 사이드바
+                // 히스토리 내역에 '[성경] [ ]장 메모'라고 출력됨 -> 메모는 절
+                // 단위로 썼는데 장에 대한 메모로 보임." `UserMemo.verse`는 이미
+                // 존재하는 절 단위 필드(UserContent.swift 참고, "nil이면 절
+                // 전체 메모")인데 이 제목 조합만 그걸 무시하고 있었다 — 바로
+                // 아래 `.highlight`/`.phraseNote`/`.crossReference` 케이스가
+                // 이미 쓰고 있는 "장:절" 표기 관례를 그대로 따른다.
+                if let verse = memo.verse {
+                    return "\(bookName) \(memo.chapter):\(verse) 메모"
+                }
                 return "\(bookName) \(memo.chapter)장 메모"
             case .summary(let summary):
                 let bookName = BooksProvider.shared.book(id: summary.bookId)?.nameKo ?? "성경"

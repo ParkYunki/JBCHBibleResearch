@@ -16,9 +16,24 @@ import Foundation
 //  참조하지 않는 순수 값 타입이라 이동 비용이 낮다).
 //
 
+// [2026-09-15 추가, 2026-09-16 배경 변경] `ReferenceEntity.Kind`/
+// `PersonRelationRecord`/`PersonEntity`/`ThemeRecord`에 `Hashable`을
+// 추가했다. 원래(2026-09-15) 이유는 통합검색의 인물/주제 카드를 상세 화면
+// (PersonDetailView/ThemeDetailView)으로 보내는 값 기반 내비게이션
+// (`PersonDetailDestination`/`ThemeDetailDestination`)이 `NavigationLink
+// (value:)`에 쓰기 위해서였다. 2026-09-16 사용자 피드백("통합검색 페이지
+// 자체가 바뀌어야 한다는 의미") 이후 그 별도 push 방식 자체를 없애면서
+// `Views/Navigation/PersonThemeDetailDestination.swift`와 그 안의
+// `PersonDetailDestination`/`ThemeDetailDestination`은 삭제했지만(`SearchView.
+// swift`가 이제 값 기반 push 없이 자신의 `List` 안에서 직접 전환한다), 이
+// `Hashable` 채택 자체는 남겨 뒀다 — 제거해도 얻는 이득이 없고(다른 곳에서
+// 이 타입들을 `Set`/`Dictionary` 키 등으로 쓸 가능성을 막지 않는 것이 오히려
+// 안전하며), 이미 조회 시점에 메모리에 있는 값을 그대로 들고 다니는 것이라
+// 기존 저장/조회 로직에 아무 영향도 없는 순수 추가 프로토콜 채택이기 때문이다.
+
 /// `Persons`/`Places` 테이블 조회 결과 — 인물/지명 사전 한 항목.
 public struct ReferenceEntity {
-    public enum Kind {
+    public enum Kind: Hashable {
         case person
         case place
     }
@@ -55,7 +70,7 @@ public struct ReferenceEntity {
 }
 
 /// `PersonRelations` 테이블 조회 결과 — 관계 하나("~의 아들/형제/지파" 등).
-public struct PersonRelationRecord {
+public struct PersonRelationRecord: Hashable {
     public let sourceWord: String
     public let relationType: String
     public let targetWord: String
@@ -65,13 +80,241 @@ public struct PersonRelationRecord {
     /// 한다(어차피 nil이 나옴, 조회 낭비 방지 목적으로 여기서 미리 구분).
     public let targetKind: ReferenceEntity.Kind?
     public let rawSentence: String
+    /// [2026-09-16 신설] 빈 문자열이 아니면 `targetWord`가 가리키는 `Persons.idx`가
+    /// 이미 정확히 알려진 경우다(`build_reference_data.py`의 `PersonRelations.
+    /// target_idx` 컬럼 참고 — "기타관계 Y(라벨)"에서 target이 표제어 자신인
+    /// 경우처럼, 추측 없이 빌드 시점에 확정적으로 아는 경우에만 채워진다).
+    /// 빈 문자열이면 "모른다"는 뜻이지 "동명이인이 없다"는 뜻이 아니다 — 호출부는
+    /// 여전히 이름 기준 동명이인 검사로 폴백해야 한다(`PersonDetailView.
+    /// resolvedRelationPerson` 참고).
+    public let targetIdx: String
+    /// [2026-09-16 추가] 사용자 요청 — "관계 데이터에 idx를 붙이는 것에
+    /// 대해서 어떠한지?" 위 `targetIdx`의 대칭 — `sourceWord`가 가리키는
+    /// `Persons.idx`가 정확히 알려진 경우만 채워진다. `target_idx`와 달리
+    /// "자기 자신이라 자동으로 앎"이 아니라, PersonSeed.json에 "이름#idx"
+    /// 태그(`build_reference_data.py`의 `parse_idx_tag` 참고, "#" 구분자로
+    /// 동명이인을 직접 확정하는 표기법)를 사람이 직접 적어 뒀을 때만 채워진다
+    /// — 빈 문자열이면 "모른다"는 뜻(동명이인 검사 폴백 필요), targetIdx와
+    /// 같은 원칙.
+    public let sourceIdx: String
 
-    public init(sourceWord: String, relationType: String, targetWord: String, targetKind: ReferenceEntity.Kind?, rawSentence: String) {
+    public init(
+        sourceWord: String, relationType: String, targetWord: String,
+        targetKind: ReferenceEntity.Kind?, rawSentence: String, targetIdx: String = "",
+        sourceIdx: String = ""
+    ) {
         self.sourceWord = sourceWord
         self.relationType = relationType
         self.targetWord = targetWord
         self.targetKind = targetKind
         self.rawSentence = rawSentence
+        self.targetIdx = targetIdx
+        self.sourceIdx = sourceIdx
+    }
+}
+
+/// [2026-09-22 신설, B그룹] `PersonContextNotes` 테이블 조회 결과 한 건 —
+/// 왕/총독/선지자 등 직함·역할성 기타관계 라벨(build_reference_data.py의
+/// `is_context_label` 판정) 하나. `PersonRelationRecord`와 의도적으로 분리된
+/// 별도 타입이다 — 사용자 확정("인물관계에는 넣지 않더라도 보여주기를
+/// 원함")에 따라 `PersonRelations`(인물관계 그래프, 검색/관계 카드/
+/// QueryIntentHandler가 관계로 취급하는 테이블)에는 아예 들어가지 않고,
+/// `PersonDetailView`의 참고 전용 절에서만 표시된다.
+public struct PersonContextNoteRecord: Hashable {
+    public let sourceWord: String
+    /// 원본 라벨 그대로(예: "총독", "왕", "선지자") — 화면에 "라벨: 이름"
+    /// 형식으로 그대로 노출한다(가공하지 않음, 추측 금지).
+    public let label: String
+    public let targetWord: String
+    public let targetKind: ReferenceEntity.Kind?
+    /// `PersonRelationRecord.targetIdx`와 같은 규칙 — 빈 문자열이면 동명이인
+    /// 검사 폴백 필요, 아니면 "이름#idx" 태그로 정확히 확정된 값.
+    public let targetIdx: String
+    public let rawSentence: String
+
+    public init(
+        sourceWord: String, label: String, targetWord: String,
+        targetKind: ReferenceEntity.Kind?, targetIdx: String, rawSentence: String
+    ) {
+        self.sourceWord = sourceWord
+        self.label = label
+        self.targetWord = targetWord
+        self.targetKind = targetKind
+        self.targetIdx = targetIdx
+        self.rawSentence = rawSentence
+    }
+}
+
+/// [2026-09-27 신설, C그룹] "PersonGroups/PersonGroupMemberships" 참고 —
+/// 이 인물과 "같은 그룹"에 속한 다른 사람 한 명(자기 자신은 제외, 쿼리
+/// 단계에서 이미 걸러짐). "열두 제자"/"다윗의 30용사"/"다윗의 3대용사"처럼
+/// 가족관계도 개인 직함도 아닌 "소속 집단"을 위한 전용 레코드 —
+/// PersonContextNoteRecord(B그룹, 직함/역할)와 의도적으로 분리한다.
+public struct PersonGroupMembershipRow: Hashable {
+    /// PersonGroups.group_id — 원문 라벨 그대로(예: "열두 제자").
+    public let groupId: String
+    public let otherMemberWord: String
+    /// 비어 있을 수 있음(원본 "이름#idx" 태그에 idx가 없거나 Persons에
+    /// 존재하지 않는 경우) — `PersonRelationRecord.targetIdx`와 같은 규칙,
+    /// 화면은 비어 있으면 이름 기준 동명이인 검사로 폴백한다.
+    public let otherMemberIdx: String
+
+    public init(groupId: String, otherMemberWord: String, otherMemberIdx: String) {
+        self.groupId = groupId
+        self.otherMemberWord = otherMemberWord
+        self.otherMemberIdx = otherMemberIdx
+    }
+}
+
+/// [2026-09-16 신설] 사용자 요청 — "인물 정보의 관계 내용은 PersonSeed.json의
+/// 관계중 기타관계를 제외한 내용(할아버지, 할머니, 아버지, 어머니, 배우자,
+/// 아들, 딸, 손자, 손녀)를 설명없이 간단하게 표현할것." `PersonRelationRecord`
+/// (아래, `PersonRelations` 테이블 경유)는 이 9개 필드 중 같은 세대 그룹
+/// (예: 아버지/어머니, 아들/딸, 할아버지/할머니, 손자/손녀)을 표제어 본인의
+/// 성별만으로 son_of/daughter_of 등에 뭉뚱그려 저장하기 때문에(빌드 스크립트
+/// `RELATION_TYPE_BY_GENDER` 참고), relationType만으로는 원래 어느 필드였는지
+/// 구분이 구조적으로 불가능하다 — 그래서 이 9개 필드는 `PersonRelationRecord`를
+/// 거치지 않고 `Persons` 테이블의 전용 컬럼(`rel_*`, PersonSeed.json 원본을
+/// 추론 없이 그대로 옮김)에서 직접 읽어 이 별도 타입에 담는다. 이름은
+/// 콤마 분리된 배열 그대로 — 화면이 "라벨: 이름, 이름" 형식으로 렌더링한다.
+/// [2026-09-16 신설] 사용자 요청 — "PersonSeed.json의 관계(할아버지~손녀)...
+/// 데이터 안에 앞에 인덱스 숫자를 붙이는 것에 대해서 어떠한지?" 위
+/// `PersonFamilyRelations`의 이름 하나("이름#idx" 태그 있으면 분리된 상태,
+/// `ReferenceDataStore`의 파싱 참고). `idx`가 빈 문자열이면 태그가 없던
+/// 경우(기존 데이터 그대로, 하위 호환) — 화면 쪽 동명이인 검사 폴백은
+/// `PersonRelationRecord.targetIdx`와 완전히 같은 규칙을 그대로 쓴다.
+public struct PersonFamilyMember: Hashable {
+    public let name: String
+    public let idx: String
+    /// [2026-09-26 신설] 사용자 요청 — "화면에도 보여주게 해주세요"(PersonSeed.json
+    /// 가족관계 필드의 "이름#idx(설명)" 형식 중 괄호 안 설명, 예: "야고보#4057(사도)"의
+    /// "사도"). 태그가 없거나 설명이 없으면 "" — 하위 호환, 기존 데이터는 동작 변화 없음.
+    public let note: String
+
+    public init(name: String, idx: String, note: String = "") {
+        self.name = name
+        self.idx = idx
+        self.note = note
+    }
+}
+
+public struct PersonFamilyRelations: Hashable {
+    public let grandfathers: [PersonFamilyMember]
+    public let grandmothers: [PersonFamilyMember]
+    public let fathers: [PersonFamilyMember]
+    public let mothers: [PersonFamilyMember]
+    public let spouses: [PersonFamilyMember]
+    public let sons: [PersonFamilyMember]
+    public let daughters: [PersonFamilyMember]
+    public let grandsons: [PersonFamilyMember]
+    public let granddaughters: [PersonFamilyMember]
+
+    public var isEmpty: Bool {
+        grandfathers.isEmpty && grandmothers.isEmpty && fathers.isEmpty && mothers.isEmpty
+            && spouses.isEmpty && sons.isEmpty && daughters.isEmpty && grandsons.isEmpty
+            && granddaughters.isEmpty
+    }
+
+    public init(
+        grandfathers: [PersonFamilyMember], grandmothers: [PersonFamilyMember], fathers: [PersonFamilyMember], mothers: [PersonFamilyMember],
+        spouses: [PersonFamilyMember], sons: [PersonFamilyMember], daughters: [PersonFamilyMember], grandsons: [PersonFamilyMember],
+        granddaughters: [PersonFamilyMember]
+    ) {
+        self.grandfathers = grandfathers
+        self.grandmothers = grandmothers
+        self.fathers = fathers
+        self.mothers = mothers
+        self.spouses = spouses
+        self.sons = sons
+        self.daughters = daughters
+        self.grandsons = grandsons
+        self.granddaughters = granddaughters
+    }
+}
+
+/// `Persons` 테이블 조회 결과(전체 컬럼) — 인물 프로필 카드 전용.
+/// [2026-09-15 신설] `personOrPlaceInfo` 인텐트를 대체하는 새 파이프라인
+/// (`QueryIntentHandler.handleKeywordCategoryLookup`)이 쓴다. 기존
+/// `ReferenceEntity`(5컬럼 고정, `handleRelation`이 여전히 씀)와 별도 타입인
+/// 이유는 `ReferenceDataStore.swift` 상단 주석 참고 — `Persons` 테이블에
+/// 2026-09-15에 추가된 13개 보강 컬럼(PersonSeed.json 기반)을 `UNION ALL`
+/// 구조인 기존 조회로는 구조적으로 담을 수 없다.
+public struct PersonEntity: Hashable {
+    public let idx: String
+    /// 대표 이름 — 화면 제목은 별칭으로 검색됐어도 항상 이 값을 쓴다
+    /// (`matchedAlias` 참고, claude/bible-research-platform-search-
+    /// category-expansion-proposal.md 11차 문서 확정).
+    public let word: String
+    /// `word2` 콤마 분리 — 이표기/별칭 전체 목록.
+    public let aliases: [String]
+    public let entityRemark: String
+    public let verseRefs: [BibleVerseRef]
+    /// 별칭(`aliases`) 중 하나로 매칭됐을 때만 그 별칭 문자열, 대표 이름
+    /// 자체로 매칭됐으면 nil. 화면은 이 값이 있을 때만 "별칭 OOO로 검색됨"
+    /// 같은 부제를 보여주면 된다 — 제목(`word`)은 이 값과 무관하게 항상
+    /// 고정(11차 문서 확정).
+    public let matchedAlias: String?
+    public let callTitle: String
+    public let meaning: String
+    public let introduce: String
+    public let lifetime: String
+    public let event: String
+    public let character: String
+    public let origin: String
+    public let nation: String
+    public let tribe: String
+    public let gender: String
+    public let occupation: [String]
+    public let seedMemo: String
+    /// 이 인물이 source든 target이든 걸린 `PersonRelations` 전부(양방향,
+    /// 중복 제거) — `PersonRelationLabeling.sentence(for:)`로 문장을 만들어
+    /// 보여주면 된다(기존 관계 카드 렌더링 재사용, 새로 만들 필요 없음).
+    /// [2026-09-16] "관계" 절의 친인척 9종(할아버지~손녀)은 더 이상 이 배열을
+    /// 쓰지 않는다 — 위 `PersonFamilyRelations` 주석 참고. 이 배열은 이제
+    /// "기타관계"(제자/동역자/친구 등) 표시에만 쓰인다.
+    public let relations: [PersonRelationRecord]
+    /// [2026-09-16 신설] 위 `PersonFamilyRelations` 참고.
+    public let familyRelations: PersonFamilyRelations
+    /// [2026-09-22 신설, B그룹] 위 `PersonContextNoteRecord` 참고 — 이
+    /// 인물이 source인(자기 자신의 PersonSeed 기타관계 목록에 있는) 것만
+    /// 담는다(관계와 달리 방향에 의미가 있는 참고 정보라 역방향은 없음).
+    public let contextNotes: [PersonContextNoteRecord]
+    /// [2026-09-27 신설, C그룹] 위 `PersonGroupMembershipRow` 참고 — 이
+    /// 인물이 속한 각 그룹의 "다른" 멤버들(자기 자신 제외, 쿼리 단계에서
+    /// 이미 걸러짐).
+    public let groupMemberships: [PersonGroupMembershipRow]
+
+    public init(
+        idx: String, word: String, aliases: [String], entityRemark: String,
+        verseRefs: [BibleVerseRef], matchedAlias: String?, callTitle: String, meaning: String,
+        introduce: String, lifetime: String, event: String, character: String, origin: String,
+        nation: String, tribe: String, gender: String, occupation: [String], seedMemo: String,
+        relations: [PersonRelationRecord], familyRelations: PersonFamilyRelations,
+        contextNotes: [PersonContextNoteRecord] = [],
+        groupMemberships: [PersonGroupMembershipRow] = []
+    ) {
+        self.idx = idx
+        self.word = word
+        self.aliases = aliases
+        self.entityRemark = entityRemark
+        self.verseRefs = verseRefs
+        self.matchedAlias = matchedAlias
+        self.callTitle = callTitle
+        self.meaning = meaning
+        self.introduce = introduce
+        self.lifetime = lifetime
+        self.event = event
+        self.character = character
+        self.origin = origin
+        self.nation = nation
+        self.tribe = tribe
+        self.gender = gender
+        self.occupation = occupation
+        self.seedMemo = seedMemo
+        self.relations = relations
+        self.familyRelations = familyRelations
+        self.contextNotes = contextNotes
+        self.groupMemberships = groupMemberships
     }
 }
 
@@ -124,7 +367,7 @@ public struct FullTextVerseMatch {
 // 임의로 닫힌 집합을 강제하면 오히려 DB와 타입이 어긋날 위험이 생긴다).
 
 /// `Themes` 테이블 조회 결과 — 주제/교리/실천 또는 이름 붙은 본문 묶음 하나.
-public struct ThemeRecord {
+public struct ThemeRecord: Hashable {
     public let idx: Int
     /// 'doctrine' | 'practice' | 'topic' | 'named_passage'
     public let category: String

@@ -97,7 +97,12 @@ enum TranslationFileMaterializer {
 
         if let sourceStore = try? BibleReferenceStore(filePath: url.path) {
             let versionCode = sourceStore.hasVersionCodeColumn ? registry.code : nil
-            try? TranslationSearchIndex.ensureBuilt(
+            // [2026-09-16 수정, 빌드 경고 수정] "Result of 'try?' is unused" —
+            // `ensureBuilt(...)`가 `URL`을 반환하도록 바뀌었는데(색인 파일
+            // 경로), 이 호출부는 원래부터 색인 생성 실패를 best-effort로
+            // 무시하는 의도였다(위 주석 참고) — 그 의도는 그대로 두고
+            // 반환값만 명시적으로 버려 경고를 없앤다. 동작 변화 없음.
+            _ = try? TranslationSearchIndex.ensureBuilt(
                 sourceStore: sourceStore, registryID: registry.id,
                 indexDirectory: url.deletingLastPathComponent(), versionCode: versionCode
             )

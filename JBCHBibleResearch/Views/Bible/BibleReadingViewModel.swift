@@ -757,7 +757,13 @@ final class BibleReadingViewModel {
         let descriptor = FetchDescriptor<TranslationRegistry>(sortBy: [SortDescriptor(\.addedAt, order: .forward)])
         do {
             let all = try modelContext.fetch(descriptor)
-            availableTranslations = all
+            // [2026-09-16 추가] 사용자 요청 — "설정에서 활성화하지 않은
+            // 번역본에서는 ... 성경 - 표시할 번역본에서도 나타나지 않도록."
+            // 이 배열이 "성경 조회" 화면의 표시 후보 전체(팝오버
+            // `TranslationPickerPopover`의 `available`, 아래 최초 자동 선택
+            // 로직)이므로, 여기서 한 번만 걸러내면 두 군데 모두에 자동으로
+            // 반영된다 — `TranslationRegistry.isEnabled` 선언부 주석 참고.
+            availableTranslations = all.filter(\.isEnabled)
             // 아직 아무것도 선택돼 있지 않으면(최초 진입) 기본 표시 목록을 정한다.
             // 2026-08-07(원본 문서 재확인 라운드): 8.3 "성경 조회(S1) 기본 표시 3개
             // 체크박스 선택"(UserSettingsStore.defaultDisplayedTranslationCodes)이
@@ -849,9 +855,25 @@ final class BibleReadingViewModel {
     /// 히스토리 목록에서 항목을 탭했을 때 그 책/장으로 이동한다. `selectBook`을
     /// 그대로 재사용하므로 이 이동 자체도 새 이력으로 다시 기록된다 — "지금 다시
     /// 조회했다"는 것 역시 실제 조회 이벤트이므로 자연스러운 동작이다.
+    /// [2026-09-27 수정] 사용자 요청 — "히스토리 클릭/탭하면 성경 검색 결과
+    /// 클릭/탭한 것처럼 해당 절로 바로 이동할 수 있도록." `entry.verse`가
+    /// 있으면(확대보기/사이드바 검색으로 절까지 직접 이동했던 이력)
+    /// `navigateToBookmark`/`recordVerseHistory` 호출부(`BibleReadingView`의
+    /// `initialVerse` 처리)와 완전히 같은 조합 — `recordHistory: false`로
+    /// `selectBook`의 기본 장 단위 기록을 끄고, `highlightVerseTemporarily`로
+    /// 그 절로 이동·강조한 뒤, `recordVerseHistory`로 절 단위 이력 한 줄만
+    /// 남긴다. 끄지 않으면 한 번 탭했는데 "장 단위" 이력과 "절 단위" 이력
+    /// 두 줄이 동시에 쌓인다. `entry.verse`가 없으면(장 단위 이력) 기존처럼
+    /// `selectBook`이 알아서 장 단위로 다시 기록한다.
     func jumpToHistoryEntry(_ entry: BibleReadingHistoryEntry) {
         guard let book = booksProvider.book(id: entry.bookId) else { return }
-        selectBook(book, chapter: entry.chapter)
+        if let verse = entry.verse {
+            selectBook(book, chapter: entry.chapter, recordHistory: false)
+            highlightVerseTemporarily(verse)
+            recordVerseHistory(verse: verse)
+        } else {
+            selectBook(book, chapter: entry.chapter)
+        }
     }
 
     /// [2026-08-26 신설] 사용자 요청 — "확대보기 하거나, 왼쪽 사이드바 상단
@@ -1317,6 +1339,80 @@ final class BibleReadingViewModel {
         // 아무 것도 하지 않는다.
     }
 
+    // MARK: - 절 단위 이전/다음 이동 (2026-09-27 신설)
+    //
+    // 사용자 요청 — "메모하기, 원문정보에 이전 구절/다음구절로 이동 할 수
+    // 있는 버튼기능 추가... html 목업 확인 후 개발할 것." 목업 확인 후
+    // 사용자가 직접 확정한 세 가지 — (1) 시트 바깥 좌우에 원형 화살표를
+    // 겹쳐서 표시, (2) 장/책 경계를 넘어 이전 장 마지막 절 ↔ 다음 장 1절로
+    // 계속 이어짐(위 `previousChapter`/`nextChapter`와 같은 책 경계 처리
+    // 원칙을 절 단위로 그대로 확장), (3) 시트를 닫으면 이동한 그 절이
+    // `selectedVerses`에 그대로 선택된 채로 남음. 이 여섯 함수가 그 세
+    // 가지를 구현한다 — 실제 이동은 `goToChapter`/`selectBook`을 그대로
+    // 재사용해(조회 이력 기록·관련 내용 새로고침 등 기존 부수효과를 전부
+    // 그대로 물려받음) 새 이동 경로를 따로 만들지 않는다.
+
+    /// 지금 이 절(`verse`)에서 "이전 구절" 버튼을 눌렀을 때 실제로 갈 곳이
+    /// 있는지 — 화살표 비활성화 판정에 쓴다. 같은 장 안에 이전 절이 있으면
+    /// 항상 true, 장 첫 절이면 이전 장(또는 이전 책의 마지막 장)이 있어야
+    /// true다 — `previousChapter()`의 경계 판정과 정확히 같은 조건이다.
+    func canGoToPreviousVerse(from verse: Int) -> Bool {
+        if verse > 1 { return true }
+        return selectedChapter > 1 || booksProvider.book(before: selectedBook) != nil
+    }
+
+    /// `canGoToPreviousVerse(from:)`와 대칭 — 이 장에 남은 절이 있으면
+    /// true, 마지막 절이면 다음 장(또는 다음 책의 1장)이 있어야 true다.
+    /// `columns.first?.verses.count`가 "지금 로드된 장의 마지막 절 번호"다
+    /// (`reloadVerses()`가 동기 호출이라 `goToChapter`/`selectBook` 직후
+    /// 곧바로 최신값을 읽을 수 있다 — `ColumnState.verses` 선언부 참고).
+    func canGoToNextVerse(from verse: Int) -> Bool {
+        let versesInChapter = columns.first?.verses.count ?? 0
+        if verse < versesInChapter { return true }
+        return selectedChapter < selectedBook.chapterCount || booksProvider.book(after: selectedBook) != nil
+    }
+
+    /// [사용자 확정(2)] 장 경계를 넘으면 "이전 장의 마지막 절"로 이어진다.
+    /// `goToChapter`/`selectBook`이 내부에서 `clearVerseSelection()`을
+    /// 먼저 호출하므로, 그 다음에 `selectedVerses`를 설정해야 곧바로
+    /// 지워지지 않는다. [사용자 확정(3)] 여기서 설정한 절이 시트를 닫을 때
+    /// 화면(`BibleReadingView`)에 그대로 남아 있는 절이 된다.
+    func goToPreviousVerse(from verse: Int) {
+        guard canGoToPreviousVerse(from: verse) else { return }
+        if verse > 1 {
+            selectedVerses = [verse - 1]
+            verseSelectionAnchor = verse - 1
+            return
+        }
+        if selectedChapter > 1 {
+            goToChapter(selectedChapter - 1)
+        } else if let previousBook = booksProvider.book(before: selectedBook) {
+            selectBook(previousBook, chapter: previousBook.chapterCount)
+        }
+        let lastVerse = columns.first?.verses.count ?? 1
+        selectedVerses = [lastVerse]
+        verseSelectionAnchor = lastVerse
+    }
+
+    /// `goToPreviousVerse(from:)`와 대칭 — 장 경계를 넘으면 "다음 장의 1절"로
+    /// 이어진다.
+    func goToNextVerse(from verse: Int) {
+        guard canGoToNextVerse(from: verse) else { return }
+        let versesInChapter = columns.first?.verses.count ?? 0
+        if verse < versesInChapter {
+            selectedVerses = [verse + 1]
+            verseSelectionAnchor = verse + 1
+            return
+        }
+        if selectedChapter < selectedBook.chapterCount {
+            goToChapter(selectedChapter + 1)
+        } else if let nextBook = booksProvider.book(after: selectedBook) {
+            selectBook(nextBook, chapter: 1)
+        }
+        selectedVerses = [1]
+        verseSelectionAnchor = 1
+    }
+
     // MARK: - 브라우저 스타일 뒤로/앞으로 탐색 (2026-08-20 추가)
     //
     // 사용자 요청 — "이전 장 이동하는 화살표 옆에 이전에 찾아봤던 장 바로가기
@@ -1335,6 +1431,12 @@ final class BibleReadingViewModel {
     private struct ChapterLocation: Equatable {
         let bookId: Int
         let chapter: Int
+        /// [2026-09-27 추가] 사용자 요청 — "히스토리 이전 버튼 클릭시 히스토리
+        /// 내역에 절 정보가 있다면 해당 절로 바로 이동할 수 있도록." 이 장을
+        /// 떠나는 순간 절을 정확히 하나 선택 중이었다면(`BibleBookmark`/
+        /// `BibleReadingHistoryEntry`와 같은 기존 관례 — "절을 정확히 하나
+        /// 선택 중이면 그 절, 아니면 장 전체") 그 절도 같이 기억해 둔다.
+        let verse: Int?
     }
 
     private var backStack: [ChapterLocation] = []
@@ -1344,7 +1446,11 @@ final class BibleReadingViewModel {
     var canGoForwardInHistory: Bool { !forwardStack.isEmpty }
 
     private var currentLocation: ChapterLocation {
-        ChapterLocation(bookId: selectedBook.bookId, chapter: selectedChapter)
+        ChapterLocation(
+            bookId: selectedBook.bookId,
+            chapter: selectedChapter,
+            verse: selectedVerses.count == 1 ? selectedVerses.first : nil
+        )
     }
 
     /// `selectBook`/`goToChapter`가 실제 이동 직전에 호출한다 — "지금 있던
@@ -1370,7 +1476,15 @@ final class BibleReadingViewModel {
         reloadVerses()
         refreshRelatedContent()
         LastBiblePositionTracker.shared.update(bookId: book.bookId, chapter: selectedChapter)
-        BibleReadingHistoryService.record(bookId: book.bookId, chapter: selectedChapter, context: modelContext)
+        // [2026-09-27 수정] 사용자 요청 — "히스토리 이전 버튼 클릭시 절 정보가
+        // 있다면 해당 절로 바로 이동할 수 있도록." `location.verse`를 이력에도
+        // 그대로 반영하고(안 그러면 실제로는 절로 돌아갔는데 이력엔 장만 남는
+        // 불일치가 생긴다), 검색 결과 클릭/북마크 이동과 같은 관례
+        // (`highlightVerseTemporarily`)로 그 절을 바로 강조한다.
+        BibleReadingHistoryService.record(bookId: book.bookId, chapter: selectedChapter, verse: location.verse, context: modelContext)
+        if let verse = location.verse {
+            highlightVerseTemporarily(verse)
+        }
     }
 
     func goBackInHistory() {

@@ -75,4 +75,44 @@ public final class OriginalTextStore {
         }
         return results
     }
+
+    /// [2026-09-16 신설] 사용자 요청 — "OriginalText.sqlite 에 LiteralTranslation
+    /// 테이블을 추가하였음... 이 데이터를 성경 - 구절 선택 - 하단 원문 정보 에
+    /// 추가하고자 함." `LiteralTranslation` 테이블은 `UNIQUE(book_id, chapter,
+    /// verse)` 제약이라 최대 한 행만 있다. 데이터가 아직 없는 절이면(변환/입력이
+    /// 안 된 절) nil을 돌려준다 — `words(bookId:chapter:verse:)`와 같은 정책
+    /// (에러가 아니라 "정보 없음" 정상 상태).
+    public func literalTranslation(bookId: Int, chapter: Int, verse: Int) throws -> LiteralTranslationInfo? {
+        let sql = """
+            SELECT literal_translation, difference
+            FROM LiteralTranslation
+            WHERE book_id = ? AND chapter = ? AND verse = ?
+            LIMIT 1
+            """
+        var statement: OpaquePointer?
+        defer { sqlite3_finalize(statement) }
+        guard sqlite3_prepare_v2(handle, sql, -1, &statement, nil) == SQLITE_OK else {
+            throw BibleReferenceError.statementPrepareFailed(code: sqlite3_errcode(handle))
+        }
+        sqlite3_bind_int(statement, 1, Int32(bookId))
+        sqlite3_bind_int(statement, 2, Int32(chapter))
+        sqlite3_bind_int(statement, 3, Int32(verse))
+
+        let step = sqlite3_step(statement)
+        if step == SQLITE_DONE { return nil }
+        guard step == SQLITE_ROW else {
+            throw BibleReferenceError.stepFailed(code: step)
+        }
+        let literal = String(cString: sqlite3_column_text(statement, 0))
+        let difference: String?
+        if sqlite3_column_type(statement, 1) == SQLITE_NULL {
+            difference = nil
+        } else {
+            difference = String(cString: sqlite3_column_text(statement, 1))
+        }
+        return LiteralTranslationInfo(
+            bookId: bookId, chapter: chapter, verse: verse,
+            literalTranslation: literal, difference: difference
+        )
+    }
 }

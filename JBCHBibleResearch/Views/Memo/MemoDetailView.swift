@@ -170,6 +170,27 @@ struct MemoDetailView: View {
                 }
                 .help(isEditable ? "읽기 전용으로 보기" : "편집하기")
             }
+            // [2026-09-13 신설] 사용자 요청 — "묵상한 내용을 에어드롭으로
+            // 전달할 수 있는가?" iOS/iPadOS/macOS 표준 공유 시트(`ShareLink`)
+            // 를 열면 AirDrop은 별도 구현 없이 그 시트 안에 자동으로
+            // 포함되는 옵션 중 하나다 — 이 버튼이 그 표준 공유 시트를 연다.
+            // 실제 파일 인코딩/쓰기는 이 버튼이 보이는 시점이 아니라 사용자가
+            // 정말 공유를 실행하는 순간에만 일어나도록
+            // (`TransferableSharedMemo.transferRepresentation`의
+            // `FileRepresentation` 클로저, `SharedMemoPayload.swift` 참고)
+            // 미뤄 뒀다 — 그래야 화면을 열어 둔 채 내용을 수정한 뒤 공유해도
+            // 항상 최신 내용이 담긴다. 받는 쪽(같은 앱을 쓰는 다른 기기)이
+            // 이 파일을 열면 개인 묵상 목록에 추가할지 미리보기로 확인받는다
+            // (`PendingMemoImportRequest`/`ImportedMemoPreviewSheet` 참고).
+            ToolbarItem(placement: .secondaryAction) {
+                ShareLink(
+                    item: TransferableSharedMemo(payload: sharePayload, displayName: shareDisplayName),
+                    preview: SharePreview("\(shareDisplayName) 묵상")
+                ) {
+                    Image(systemName: "square.and.arrow.up")
+                }
+                .help("이 묵상 공유하기(에어드롭 포함)")
+            }
         }
         .onAppear(perform: loadIfNeeded)
         .onDisappear(perform: handleDisappear)
@@ -247,6 +268,38 @@ struct MemoDetailView: View {
             return "\(bookName) \(memo.chapter)장 \(verse)절"
         }
         return "\(bookName) \(memo.chapter)장"
+    }
+
+    /// [2026-09-13 신설] 위 공유 버튼(`ShareLink`)이 쓰는, 사람이 읽는
+    /// 좌표 라벨 — 위 `contextualCoordinateLabel`과 같은 계산이지만
+    /// (책 못 찾으면 빈 문자열 대신) 파일 이름/공유 미리보기에 그대로 써도
+    /// 어색하지 않게 "책 이름 없음" 문구로 폴백한다는 점만 다르다.
+    private var shareDisplayName: String {
+        let bookName = BooksProvider.shared.book(id: memo.bookId)?.nameKo ?? "성경"
+        if let verse = memo.verse {
+            return "\(bookName)\(memo.chapter)장\(verse)절"
+        }
+        return "\(bookName)\(memo.chapter)장"
+    }
+
+    /// [2026-09-13 신설] 지금 이 화면이 보여주는 `memo`/`memoTags`(이미
+    /// 로드돼 있는 상태)로 매번 새로 만드는 전송용 스냅샷 — `body`가 다시
+    /// 그려질 때마다 값만 새로 계산될 뿐 무거운 작업(파일 인코딩/쓰기)은
+    /// 전혀 하지 않는다(그건 `TransferableSharedMemo`의 `FileRepresentation`
+    /// 클로저가 공유 시점에만 한다 — 위 툴바 버튼 주석 참고).
+    private var sharePayload: SharedMemoPayload {
+        SharedMemoPayload(
+            bookId: memo.bookId,
+            chapter: memo.chapter,
+            verse: memo.verse,
+            rangeStart: memo.rangeStart,
+            rangeEnd: memo.rangeEnd,
+            annotationTranslationCode: memo.annotationTranslationCode,
+            anchorText: memo.anchorText,
+            contentText: memo.contentText,
+            tagNames: memoTags.map(\.name),
+            originalCreatedAt: memo.createdAt
+        )
     }
 
     // [2026-08-14 삭제, 2026-09-01 편집기 자체가 순수 텍스트로 바뀌며 무의미해짐]

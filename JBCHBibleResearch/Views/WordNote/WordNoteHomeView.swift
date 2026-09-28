@@ -21,6 +21,42 @@
 //  `MemoDetailView`의 폴더 메뉴에서 가능하고, ⌘⇧N "새 폴더" 메뉴 커맨드도 이 화면이
 //  그대로 이어받아 동작한다(알림창만 남기고 필터 메뉴 UI는 없앤 것).
 //
+//  [2026-09-12 대개편] 사용자가 검토·승인한 "말씀 노트 레이아웃 개선안" HTML
+//  목업(아이폰/아이패드/맥 시뮬레이션, "연구문서 서가" 목업과 통일한 spine 색선
+//  포함 — 세션 아티팩트로 공유)을 그대로 반영한다. 착수 전 실제 코드를 먼저
+//  확인해 목업이 못 봤던 두 가지 충돌을 발견했고, 사용자에게 직접 확인받아
+//  범위를 정했다(추측으로 정하지 않음):
+//    1) 목업의 "최근 작성·즐겨찾기"를 이 화면 분류 트리에도 넣을지 물었다 —
+//       이미 앱 왼쪽 사이드바(`SidebarNavigationView.swift`)에 연구문서·개인
+//       묵상·말씀 요약을 모두 아우르는 "고정됨/오늘/어제/그저께/이번 주/이전"
+//       전역 목록이 있어(그 파일 493번째 줄 부근 "MARK: - 고정됨/최근" 참고),
+//       사용자가 "빼고 노트 종류·성경별만"을 선택했다 — 그래서 아래 분류
+//       트리(`categoryTreeColumn`)엔 최근·즐겨찾기가 없다(전역 사이드바 기능과
+//       중복 방지).
+//    2) 아이폰도 목업처럼 분류→목록→내용 3단계 push로 바꿀지 물었다 — 사용자가
+//       "2단계 유지"를 선택했다. 그래서 아이폰(`isPhoneLayout == true`)은
+//       기존 캡슐 필터 + 목록 → 내용 구조를 그대로 두고(`phoneContent`),
+//       분류 트리·3열 레이아웃은 아이패드·맥(`isPhoneLayout == false`,
+//       `splitTreeContent`)에만 적용한다.
+//  이 범위 안에서 실제로 반영한 것:
+//    · 아이패드·맥: 기존 2단(목록·내용) → 3단(분류 트리·목록·내용). 분류
+//      트리는 "노트 종류"(기존 캡슐과 같은 3항목: 전체/개인 묵상/말씀 요약)와
+//      "성경별"(신설 — 구약/신약은 지어낸 분류가 아니라 `Book.testament`,
+//      `BookChapterPicker.swift`가 이미 같은 방식으로 쓰는 기존 필드다)로
+//      구성된다. 노트가 하나도 없는 책/성경 전체는 목록에서 뺀다(66권을
+//      항상 다 보여주면 대부분 0건이라 오히려 붐빈다 — 이 파일 상단
+//      "오버엔지니어링 방지" 원칙과 같은 결).
+//    · 행 정보 위계 재배열(`WordNoteRowView.swift` 참고)과 spine(책등) 왼쪽
+//      색선 — 두 파일이 정확히 같은 색을 쓰도록 `WordNoteCategory.spineColor`
+//      로 매핑을 한 곳에 모았다(기존엔 `WordNoteRowView`에만 있었음).
+//    · "항목을 선택하세요" 빈 화면 → 최근 노트 카드(`WordNoteRecentEmptyState`).
+//      목록 로딩(`WordNoteListContent.reload()`/`mergedItems`)은 건드리지
+//      않고, `WordNoteSplitContent`에서 "가장 최근 항목 1개"만 별도로 가볍게
+//      (`fetchLimit = 1`) 조회한다.
+//    · 목업에도 있었던 "연구문서 서가" 목업과의 폰트(KMU 성곡체 실제 파일
+//      로딩)·기기 베젤 통일은 이 화면(SwiftUI 코드)엔 애초에 해당되지 않는
+//      항목이라(그건 HTML 목업 두 개 사이의 통일성 문제) 여기선 다루지 않는다.
+//
 
 import SwiftUI
 import SwiftData
@@ -35,13 +71,31 @@ enum WordNoteCategory: String, CaseIterable, Identifiable {
     case verseSummary = "말씀 요약"
 
     var id: String { rawValue }
+
+    /// [2026-09-12 추가] 목업의 spine(책등) 왼쪽 색선·카테고리 배지가 이제
+    /// 두 곳(`WordNoteRowView`의 배지·spine, 이 파일의 분류 트리·최근 노트
+    /// 카드)에서 정확히 같은 색을 써야 해서, 원래 `WordNoteRowView`에만
+    /// private으로 있던 매핑을 이 enum으로 옮겨 단일 출처로 만들었다. 색
+    /// 배정 자체는 바뀌지 않았다 — 가죽 표지(개인 손글씨 느낌) → 개인 묵상,
+    /// 서재 금박(이 화면 "새 항목" 버튼과 같은 대표색) → 말씀 요약.
+    var spineColor: Color {
+        switch self {
+        case .personalMemo: return JBCHCategoryPalette.wood
+        case .verseSummary: return JBCHCategoryPalette.gold
+        }
+    }
 }
 
 /// 검색창 옆 카테고리 picker의 선택값 — "전체"까지 포함해야 해서 `WordNoteCategory`
 /// 자체가 아니라 한 단계 감싼 별도 enum을 쓴다.
+/// [2026-09-12 추가] `.book(bookId:)` — 아이패드·맥 전용 분류 트리의 "성경별"
+/// 필터(`WordNoteListContent.categoryTreeColumn` 참고). 아이폰은 여전히
+/// `.all`/`.category`만 쓰는 캡슐 필터라(이 화면 상단 새 주석의 결정 2번),
+/// 이 case를 몰라도 기존 동작에 영향이 없다.
 enum WordNoteCategoryFilter: Hashable {
     case all
     case category(WordNoteCategory)
+    case book(bookId: Int)
 }
 
 /// `UserMemo`/`VerseSummary` 두 모델을 한 목록에 섞어 보여주기 위한 얇은 래퍼.
@@ -116,6 +170,58 @@ enum WordNoteItem: Identifiable {
         case .memo(let memo): return memo.isPinned
         case .summary(let summary): return summary.isPinned
         }
+    }
+
+    /// [2026-09-12 추가] "말씀 노트 레이아웃" 목업 3·4항 반영 — 목록 행
+    /// (`WordNoteRowView`)과 상세 패널 빈 상태의 "최근 노트" 카드
+    /// (`WordNoteRecentEmptyState`, 이 파일 하단) 둘 다 같은 제목/좌표/
+    /// 미리보기/날짜 텍스트를 보여줘야 해서, 원래 `WordNoteRowView`에만
+    /// private으로 있던 이 네 계산 프로퍼티를 이 타입으로 옮겨 두 곳이
+    /// 정확히 같은 로직·같은 값을 쓰게 한다 — 값 자체는 바뀌지 않았다.
+    var previewTitle: String {
+        let trimmed = contentText.trimmingCharacters(in: .whitespacesAndNewlines)
+        let emptyLabel = category == .personalMemo ? "새 메모" : "새 말씀 요약"
+        guard !trimmed.isEmpty else { return emptyLabel }
+        let firstLine = trimmed.split(separator: "\n", maxSplits: 1).first.map(String.init) ?? trimmed
+        return String(firstLine.prefix(40))
+    }
+
+    /// 목업의 "본문 미리보기" 줄 — 새 데이터 필드가 아니라 `previewTitle`
+    /// (첫 줄)이 쓰고 남은 본문 나머지를 그대로 잘라 보여준다. 첫 줄이 본문
+    /// 전부였으면(짧은 메모 등) 보여줄 나머지가 없으므로 nil.
+    var previewSnippet: String? {
+        let trimmed = contentText.trimmingCharacters(in: .whitespacesAndNewlines)
+        guard !trimmed.isEmpty else { return nil }
+        let parts = trimmed.split(separator: "\n", maxSplits: 1)
+        guard parts.count > 1 else { return nil }
+        let rest = parts[1].trimmingCharacters(in: .whitespacesAndNewlines)
+        guard !rest.isEmpty else { return nil }
+        return String(rest.prefix(80))
+    }
+
+    var coordinateLabel: String {
+        let bookName = BooksProvider.shared.book(id: bookId)?.nameKo ?? "\(bookId)권"
+        var label = "\(bookName) \(chapter)장"
+        if let verse {
+            label += " \(verse)절"
+        }
+        return label
+    }
+
+    /// [2026-08-14 변경] 사용자 요청 — "리스트의 개인 묵상에도 작성일자를
+    /// 표시해줄 것." 말씀 요약은 "쓴 날짜"(createdAt, 저널 성격), 개인 묵상은
+    /// "마지막 수정일"(updatedAt, 절당 하나를 계속 고쳐 쓰는 성격이라 생성일
+    /// 보다 수정일이 더 의미 있다 — 위 `sortDate`가 이미 같은 기준으로
+    /// 정렬하는 것과 일관됨)을 쓴다.
+    var dateLabel: String? {
+        let date: Date
+        switch self {
+        case .memo(let memo): date = memo.updatedAt
+        case .summary(let summary): date = summary.createdAt
+        }
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy.MM.dd"
+        return formatter.string(from: date)
     }
 }
 
@@ -208,7 +314,16 @@ struct WordNoteHomeView: View {
 }
 
 private struct WordNoteSplitContent: View {
+    @Environment(\.modelContext) private var modelContext
     @State private var selectedItem: WordNoteItem?
+
+    /// [2026-09-12 추가] "말씀 노트 레이아웃" 목업 4항 — 빈 상세 화면의
+    /// "최근 노트" 카드용. `WordNoteListContent` 내부 상태(`allMemos`/
+    /// `allSummaries`, 목록 전체를 위해 로드됨)를 끌어올리는 대신, "가장
+    /// 최근 항목 1개"만 별도로 가볍게(`fetchLimit = 1`) 조회한다 — 목록
+    /// 자체의 로딩·정렬·필터링 로직(`WordNoteListContent.reload()`/
+    /// `mergedItems`)은 그대로 둔다.
+    @State private var mostRecentItem: WordNoteItem?
 
     /// [2026-09-12 추가] 사용자 보고 — "말씀노트-오른쪽 '항목을
     /// 선택하세요' 흰 영역 -> 테마대로." 이 struct는 지금까지 테마 대상에서
@@ -217,8 +332,13 @@ private struct WordNoteSplitContent: View {
 
     var body: some View {
         HStack(spacing: 0) {
+            // [2026-09-12 수정] "말씀 노트 레이아웃" 목업 5항 — 분류 트리
+            // 열이 새로 생겨(아래 `WordNoteListContent.splitTreeContent`)
+            // 이 struct가 감싸는 폭 자체를 넓혔다. 기존 260~380(목록 하나
+            // 만의 폭)을 분류 트리(약 200)+목록(약 300)을 합친 폭으로
+            // 늘렸을 뿐, 내부 목록 폭 비율은 그대로다.
             WordNoteListContent(isPhoneLayout: false, selectedItem: $selectedItem)
-                .frame(minWidth: 260, idealWidth: 300, maxWidth: 380)
+                .frame(minWidth: 460, idealWidth: 560, maxWidth: 720)
 
             Divider()
 
@@ -227,11 +347,11 @@ private struct WordNoteSplitContent: View {
                     destinationView(for: selectedItem)
                         .id(selectedItem.id)
                 } else {
-                    VStack {
-                        Spacer()
-                        Text("항목을 선택하세요")
-                            .foregroundStyle(settings.bibleTextColor?.opacity(0.6) ?? Color.secondary)
-                        Spacer()
+                    // [2026-09-12 수정] 목업 4항 — "항목을 선택하세요" 한 줄
+                    // 대신 최근 노트 카드를 보여주는 미니멀 Empty State로
+                    // 대체.
+                    WordNoteRecentEmptyState(recentItem: mostRecentItem) { item in
+                        selectedItem = item
                     }
                     .frame(maxWidth: .infinity, maxHeight: .infinity)
                     .background(settings.bibleBackgroundColor ?? Color.clear)
@@ -263,6 +383,91 @@ private struct WordNoteSplitContent: View {
             SidebarVisibilityRequest.shared.requestRestore()
         }
         #endif
+        // [2026-09-12 추가] 위 `mostRecentItem` 주석 참고 — 처음 뜰 때, 그리고
+        // 선택을 해제해 Empty State가 다시 보일 때마다 최신 상태로 새로
+        // 조회한다(macOS·iOS 공통이라 위 `#if os(iOS)` 블록 밖에 둔다).
+        .onAppear { reloadMostRecent() }
+        .onChange(of: selectedItem?.id) { _, newValue in
+            if newValue == nil { reloadMostRecent() }
+        }
+    }
+
+    private func reloadMostRecent() {
+        var memoDescriptor = FetchDescriptor<UserMemo>(sortBy: [SortDescriptor(\.updatedAt, order: .reverse)])
+        memoDescriptor.fetchLimit = 1
+        var summaryDescriptor = FetchDescriptor<VerseSummary>(sortBy: [SortDescriptor(\.createdAt, order: .reverse)])
+        summaryDescriptor.fetchLimit = 1
+        let latestMemo = (try? modelContext.fetch(memoDescriptor))?.first
+        let latestSummary = (try? modelContext.fetch(summaryDescriptor))?.first
+        switch (latestMemo, latestSummary) {
+        case let (memo?, summary?):
+            mostRecentItem = memo.updatedAt >= summary.createdAt ? .memo(memo) : .summary(summary)
+        case let (memo?, nil):
+            mostRecentItem = .memo(memo)
+        case let (nil, summary?):
+            mostRecentItem = .summary(summary)
+        case (nil, nil):
+            mostRecentItem = nil
+        }
+    }
+}
+
+/// [2026-09-12 신설] "말씀 노트 레이아웃" 목업 4항 — 아이패드·맥 상세 패널이
+/// 비어 있을 때(아무 노트도 선택 안 함) "항목을 선택하세요" 한 줄 대신
+/// 보여주는 최근 노트 카드. 작성된 노트가 하나도 없으면(카드에 보여줄 게
+/// 없음, `recentItem == nil`) 카드 없이 안내 문구만 보여준다 — 없는 데이터를
+/// 지어내 채우지 않는다.
+private struct WordNoteRecentEmptyState: View {
+    let recentItem: WordNoteItem?
+    let onSelect: (WordNoteItem) -> Void
+
+    private var settings: UserSettingsStore { .shared }
+
+    var body: some View {
+        VStack(spacing: 16) {
+            Spacer()
+            Text("아직 선택된 노트가 없습니다")
+                .font(.subheadline.weight(.semibold))
+                .foregroundStyle(settings.bibleTextColor?.opacity(0.7) ?? Color.secondary)
+            if let recentItem {
+                Button {
+                    onSelect(recentItem)
+                } label: {
+                    VStack(alignment: .leading, spacing: 6) {
+                        Text("최근 노트")
+                            .font(.caption2.weight(.bold))
+                            .foregroundStyle(settings.bibleTextColor?.opacity(0.55) ?? .secondary)
+                        Text(recentItem.previewTitle)
+                            .font(.subheadline.weight(.semibold))
+                            .foregroundStyle(settings.bibleTextColor ?? .primary)
+                            .lineLimit(1)
+                        Text(recentItem.coordinateLabel)
+                            .font(.caption.weight(.semibold))
+                            .foregroundStyle(recentItem.category.spineColor)
+                        if let dateLabel = recentItem.dateLabel {
+                            Text(dateLabel)
+                                .font(.caption2)
+                                .foregroundStyle(settings.bibleTextColor?.opacity(0.5) ?? .secondary)
+                        }
+                    }
+                    .padding(14)
+                    .frame(maxWidth: 280, alignment: .leading)
+                    .background(
+                        RoundedRectangle(cornerRadius: 14, style: .continuous)
+                            .fill(settings.bibleTextColor?.opacity(0.05) ?? Color.secondary.opacity(0.08))
+                    )
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 14, style: .continuous)
+                            .strokeBorder(settings.bibleTextColor?.opacity(0.15) ?? Color.secondary.opacity(0.2), lineWidth: 1)
+                    )
+                }
+                .buttonStyle(.plain)
+                .contentShape(Rectangle())
+            }
+            Spacer()
+        }
+        .padding(20)
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
     }
 }
 
@@ -300,6 +505,12 @@ private struct WordNoteListContent: View {
     @State private var searchText: String = ""
     @State private var isNewFolderPresented = false
     @State private var newFolderName = ""
+    /// [2026-09-12 추가] 아이패드·맥 전용 분류 트리(`categoryTreeColumn`)의
+    /// "성경별" 구약/신약 `DisclosureGroup` 펼침 상태. 기본은 둘 다 접힌
+    /// 상태 — 노트가 있는 책만 추려도(위 `booksWithNotes`) 처음부터 펼쳐
+    /// 두면 "노트 종류" 위에 목록이 바로 붐빌 수 있어, 필요할 때 펼쳐 보게
+    /// 했다.
+    @State private var expandedTestaments: Set<Book.Testament> = []
     /// [2026-09-09 추가] 사용자 요청 — "테마를 적용하면 배경색과 글자색을
     /// 전체적으로 적용할 수 있는가(... 말씀노트 화면 배경색...)." 지금까지
     /// 이 화면은 `List`(아래 `body`)가 시스템 기본 배경을 그대로 썼다 —
@@ -314,14 +525,57 @@ private struct WordNoteListContent: View {
 
     private var filteredItems: [WordNoteItem] {
         var result = mergedItems
-        if case .category(let category) = categoryFilter {
+        // [2026-09-12 수정] `.book(bookId:)` 케이스 추가 — 아이패드·맥 전용
+        // 분류 트리의 "성경별" 필터(아래 `categoryTreeColumn`). 기존
+        // `.category` 분기는 그대로다.
+        switch categoryFilter {
+        case .all:
+            break
+        case .category(let category):
             result = result.filter { $0.category == category }
+        case .book(let bookId):
+            result = result.filter { $0.bookId == bookId }
         }
         let trimmed = searchText.trimmingCharacters(in: .whitespaces)
         if !trimmed.isEmpty {
             result = result.filter { $0.contentText.localizedCaseInsensitiveContains(trimmed) }
         }
         return result
+    }
+
+    /// [2026-09-12 신설] 분류 트리 각 행의 개수 배지(`treeRow`)와 목록 헤더
+    /// (`listHeader`)가 같이 쓴다 — 검색어는 제외하고(트리는 "분류" 기준
+    /// 개수를 보여줘야지, 지금 검색창에 뭘 입력 중인지에 따라 숫자가 바뀌면
+    /// 오히려 헷갈린다) `mergedItems` 기준으로 센다.
+    private func count(for filter: WordNoteCategoryFilter) -> Int {
+        switch filter {
+        case .all: return mergedItems.count
+        case .category(let category): return mergedItems.filter { $0.category == category }.count
+        case .book(let bookId): return mergedItems.filter { $0.bookId == bookId }.count
+        }
+    }
+
+    /// [2026-09-12 신설] 목록 헤더(`listHeader`)용 — 지금 선택된 분류의 제목.
+    private var filterTitle: String {
+        switch categoryFilter {
+        case .all: return "전체"
+        case .category(let category): return category.rawValue
+        case .book(let bookId): return BooksProvider.shared.book(id: bookId)?.nameKo ?? "\(bookId)권"
+        }
+    }
+
+    /// [2026-09-12 신설] "성경별" 트리(아래 `testamentDisclosure`)에 보여줄
+    /// 책 목록 — 구약/신약 전체 66권을 항상 다 보여주지 않고, 실제로 노트가
+    /// 하나라도 있는 책만 추린다. 66권을 다 보여주면 대부분 0건이라 오히려
+    /// 붐빈다(이 파일 상단 "오버엔지니어링 방지" 원칙과 같은 결) — 구약/신약
+    /// 자체는 지어낸 분류가 아니라 `Book.testament`(이미 `BookChapterPicker.
+    /// swift`가 책 그리드에서 구약/신약을 나눌 때 쓰는 것과 같은 기존 필드)를
+    /// 그대로 쓴다.
+    private func booksWithNotes(in testament: Book.Testament) -> [Book] {
+        let bookIdsWithNotes = Set(mergedItems.map { $0.bookId })
+        return BooksProvider.shared.books.filter {
+            $0.testament == testament && bookIdsWithNotes.contains($0.bookId)
+        }
     }
 
     /// [2026-09-10 신설, 같은 날 재수정] 사용자 요청 — 카테고리 캡슐을
@@ -374,6 +628,7 @@ private struct WordNoteListContent: View {
                 )
         }
         .buttonStyle(.plain)
+        .contentShape(Rectangle())
     }
 
     /// [2026-09-12 신설] 사용자 요청 — "말씀노트 화면에서 캡슐 탭 밑에
@@ -401,35 +656,200 @@ private struct WordNoteListContent: View {
         .padding(.vertical, 4)
     }
 
-    var body: some View {
+    // MARK: - 분류 트리 (아이패드·맥 전용, 2026-09-12 신설)
+    //
+    // "말씀 노트 레이아웃" 목업 5항 — 아이패드·맥은 기존 2단(목록·내용)을
+    // 3단(분류 트리·목록·내용)으로 바꾼다. 이 트리는 아이폰(`phoneContent`,
+    // 위 캡슐 필터를 그대로 쓴다)에서는 쓰이지 않는다 — 이 화면 상단
+    // "2026-09-12 대개편" 주석의 결정 2번 참고. "노트 종류"는 기존 캡슐과
+    // 정확히 같은 3항목(전체/개인 묵상/말씀 요약)을 트리 행 스타일로 다시
+    // 그린 것뿐이라 `categoryFilter` 상태·필터링 로직은 전혀 바뀌지 않았다.
+    // "최근 작성·즐겨찾기"는 목업 원안엔 있었지만, 이미 앱 왼쪽 사이드바에
+    // 전역 기능이 있어(결정 1번) 여기엔 넣지 않았다.
+
+    private var categoryTreeColumn: some View {
+        ScrollView {
+            VStack(alignment: .leading, spacing: 2) {
+                Text("노트 종류")
+                    .font(.caption.weight(.bold))
+                    .foregroundStyle(settings.bibleTextColor?.opacity(0.55) ?? .secondary)
+                    .padding(.horizontal, 14)
+                    .padding(.top, 12)
+                    .padding(.bottom, 2)
+
+                treeRow(.all, title: "전체", systemImage: "list.bullet", count: count(for: .all))
+                ForEach(WordNoteCategory.allCases) { category in
+                    treeRow(
+                        .category(category), title: category.rawValue,
+                        systemImage: category == .personalMemo ? "note.text" : "doc.text",
+                        count: count(for: .category(category)), spine: category.spineColor
+                    )
+                }
+
+                let oldTestamentBooks = booksWithNotes(in: .old)
+                let newTestamentBooks = booksWithNotes(in: .new)
+                if !oldTestamentBooks.isEmpty || !newTestamentBooks.isEmpty {
+                    Divider().padding(.vertical, 8).padding(.horizontal, 14)
+                    Text("성경별")
+                        .font(.caption.weight(.bold))
+                        .foregroundStyle(settings.bibleTextColor?.opacity(0.55) ?? .secondary)
+                        .padding(.horizontal, 14)
+                        .padding(.bottom, 2)
+                    testamentDisclosure(title: "구약", testament: .old, books: oldTestamentBooks)
+                    testamentDisclosure(title: "신약", testament: .new, books: newTestamentBooks)
+                }
+            }
+            .padding(.bottom, 16)
+        }
+    }
+
+    /// 분류 트리 행 하나(노트 종류/성경별 공용). `spine`이 있으면(노트
+    /// 종류만 — 위 `categoryTreeColumn`) `WordNoteRowView`/`categoryBadge`와
+    /// 같은 색으로 왼쪽에 색선을 그린다 — "연구문서 서가" 목업의 folder-card/
+    /// shelf-row 왼쪽 색선과 통일한 시각 언어(그 목업·`WordNoteRowView.swift`
+    /// 상단 주석 참고). 성경별 책 행은 대응되는 코드베이스 색이 없어 spine을
+    /// 넣지 않았다(임의로 배정하지 않음).
+    private func treeRow(
+        _ filter: WordNoteCategoryFilter, title: String, systemImage: String, count: Int, spine: Color? = nil
+    ) -> some View {
+        let isSelected = categoryFilter == filter
+        // [2026-09-10 추가, 빌드 에러 fix] 주석 참고(위 `categoryCapsuleButton`)
+        // — 타입 추론 시간 초과를 피하려고 색 계산을 명시적 `Color` 상수로 분리.
+        let textColor: Color = isSelected ? Color("AccentColor") : (settings.bibleTextColor ?? .primary)
+        let iconColor: Color = isSelected ? Color("AccentColor") : (settings.bibleTextColor?.opacity(0.6) ?? .secondary)
+        let fillColor: Color = isSelected ? Color("AccentColor").opacity(0.14) : Color.clear
+        return Button {
+            categoryFilter = filter
+        } label: {
+            HStack(spacing: 9) {
+                Image(systemName: systemImage)
+                    .font(.system(size: 13))
+                    .foregroundStyle(iconColor)
+                    .frame(width: 16)
+                Text(title)
+                    .font(.subheadline.weight(.semibold))
+                    .foregroundStyle(textColor)
+                    .lineLimit(1)
+                Spacer(minLength: 4)
+                Text("\(count)")
+                    .font(.caption)
+                    .foregroundStyle(settings.bibleTextColor?.opacity(0.55) ?? .secondary)
+                    .monospacedDigit()
+            }
+            .padding(.vertical, 7)
+            .padding(.trailing, 10)
+            .padding(.leading, 11)
+            .background(fillColor, in: RoundedRectangle(cornerRadius: 9, style: .continuous))
+            .overlay(alignment: .leading) {
+                Rectangle()
+                    .fill(spine ?? Color.clear)
+                    .frame(width: 3)
+            }
+        }
+        .buttonStyle(.plain)
+        .contentShape(Rectangle())
+        .padding(.horizontal, 6)
+    }
+
+    /// "성경별" 아래 구약/신약 한 그룹 — 노트가 있는 책이 없으면(빈 목록)
+    /// 아무것도 그리지 않는다(호출부 `categoryTreeColumn`이 이미 구약·신약
+    /// 둘 다 비었을 때 "성경별" 표제 자체를 숨기지만, 한쪽만 비었을 수도
+    /// 있어 이 함수 자체도 한 번 더 확인한다).
+    @ViewBuilder
+    private func testamentDisclosure(title: String, testament: Book.Testament, books: [Book]) -> some View {
+        if !books.isEmpty {
+            DisclosureGroup(isExpanded: Binding(
+                get: { expandedTestaments.contains(testament) },
+                set: { isOn in
+                    if isOn { expandedTestaments.insert(testament) } else { expandedTestaments.remove(testament) }
+                }
+            )) {
+                VStack(alignment: .leading, spacing: 2) {
+                    ForEach(books) { book in
+                        treeRow(.book(bookId: book.bookId), title: book.nameKo, systemImage: "book.closed", count: count(for: .book(bookId: book.bookId)))
+                    }
+                }
+                .padding(.leading, 10)
+            } label: {
+                Text(title)
+                    .font(.subheadline.weight(.semibold))
+                    .foregroundStyle(settings.bibleTextColor ?? .primary)
+            }
+            .padding(.horizontal, 14)
+            .tint(settings.bibleTextColor?.opacity(0.6) ?? .secondary)
+        }
+    }
+
+    /// 목록 열 머리글(아이패드·맥 전용) — 지금 선택된 분류 제목 + 개수.
+    /// 아이폰은 캡슐 자체가 이미 선택 상태를 보여줘 따로 두지 않는다.
+    private var listHeader: some View {
+        HStack(alignment: .firstTextBaseline) {
+            Text(filterTitle)
+                .font(.title3.weight(.bold))
+                .foregroundStyle(settings.bibleTextColor ?? .primary)
+                .lineLimit(1)
+            Spacer()
+            Text("\(filteredItems.count)개의 노트")
+                .font(.caption)
+                .foregroundStyle(settings.bibleTextColor?.opacity(0.6) ?? .secondary)
+        }
+        .padding(.horizontal, 16)
+        .padding(.top, 14)
+        .padding(.bottom, 4)
+    }
+
+    /// 목록(`List`) 자체 — 기존 `body`에 있던 것을 그대로 옮겼다(동작 변경
+    /// 없음). 아이폰(`phoneContent`)·아이패드·맥(`splitTreeContent`) 둘 다
+    /// 이 프로퍼티 하나를 공유한다.
+    private var wordNoteList: some View {
+        List {
+            ForEach(filteredItems) { item in
+                rowContent(for: item)
+            }
+            .onDelete { offsets in
+                guard isPhoneLayout else { return }
+                deleteItems(at: offsets)
+            }
+        }
+        .listStyle(.plain)
+        // [2026-09-09 추가] 사용자 요청 — "테마를 적용하면 배경색과
+        // 글자색을 전체적으로 적용할 수 있는가(... 말씀노트 화면
+        // 배경색...)." `.plain` 스타일은 이미 개별 행마다 별도 카드
+        // 배경이 없어(시스템 기본도 지금처럼 하나의 배경 위에 얇은
+        // 구분선만 있는 모습이다), 리스트 자체 배경 하나만 바꾸면
+        // 되고 각 행 배경을 따로 손볼 필요가 없다 — `scrollContentBackground
+        // (.hidden)`으로 시스템 리스트 배경을 끄고, `TranslationColumnView`
+        // 컬럼 배경과 똑같은 "nil이면 기존(시스템 기본) 그대로" 폴백으로
+        // 교체한다.
+        //
+        // [2026-09-09 수정, 실기기 확인 후] "리스트 자체 배경 하나만
+        // 바꾸면 되고 각 행 배경을 따로 손볼 필요가 없다"는 위 판단은
+        // 틀렸다 — 실기기에서 각 행이 여전히 흰색이었다(위 `rowContent`
+        // 의 `.listRowBackground(Color.clear)` 추가 참고, 원인은 그
+        // 주석에 적었다).
+        .scrollContentBackground(.hidden)
+        .background(settings.bibleBackgroundColor ?? Color.clear)
+        // [2026-09-10 추가] 사용자 보고 — "어두운 배경에서는 리스트의
+        // 행을 구분하는 라인이 거의 안보임." 시스템 기본 구분선 색은
+        // 라이트/다크 모드에만 맞춰져 있어, 이 리스트처럼 임의의 테마
+        // 배경(`settings.bibleBackgroundColor`) 위에서는 배경과 거의
+        // 구별되지 않을 수 있다 — 이미 배경과 대비되도록 골라 둔
+        // `bibleTextColor`를 옅게(0.3) 써서 구분선도 항상 배경과
+        // 대비되게 한다. 테마를 고르지 않았으면(nil) `nil`을 그대로
+        // 넘겨 시스템 기본 구분선 색을 그대로 쓴다.
+        .listRowSeparatorTint(JBCHCategoryPalette.wood.opacity(0.3))
+        // [2026-09-09 추가] 위 `body` 상단 주석 참고 — `SearchView.swift`
+        // 의 `.searchable(text:prompt:)`와 같은 패턴. 문구("검색")는 이
+        // 화면이 원래 커스텀 텍스트필드에 쓰던 플레이스홀더를 그대로
+        // 유지했다(통합검색의 "검색어 입력"과 다른 것은 의도적 — 이
+        // 화면 고유의 짧은 문구를 바꿔 달라는 요청은 없었다).
+        .searchable(text: $searchText, prompt: "검색")
+    }
+
+    /// 아이폰 전용 콘텐츠 — 기존 캡슐 필터 + 구분선 + 목록. 이 화면 상단
+    /// "2026-09-12 대개편" 주석의 결정 2번대로 구조를 바꾸지 않았다.
+    private var phoneContent: some View {
         VStack(spacing: 0) {
-            // [2026-09-09 수정] 사용자 보고 — "검색란이 이질감이 있음.
-            // 통합검색의 검색란처럼 수정할 것." 원래(사용자 요청 — "리스트
-            // 위에 검색 창 옆에 카테고리 picker를 주어") 여기 있던 커스텀
-            // `TextField(.roundedBorder)`는 iOS 표준 흰색 알약 모양 텍스트필드라,
-            // 테마 배경을 입힌 화면 위에서 늘 튀어 보였다 — 배경색을 아무리
-            // 맞춰도 필드 자체가 시스템 고정 스타일이라 근본적으로 안 어울렸다.
-            // `SearchView.swift`(통합검색)의 검색창은 이 커스텀 필드가 아니라
-            // Apple 표준 `.searchable(text:prompt:)`(아래 `List`에 적용) —
-            // 시스템 내비게이션 바에 통합되는 검색창이라, 이미 테마를 입힌
-            // 내비게이션 바 배경(`ThemedNavigationBarBackgroundModifier`)에
-            // 자동으로 녹아든다. "통합검색의 검색란처럼"이라는 요청을 가장
-            // 정확히 만족하는 방법은 같은 메커니즘을 그대로 쓰는 것이라 —
-            // 커스텀 텍스트필드를 없애고 이 화면도 `.searchable`로 바꿨다
-            // (아래 `List` 뒤 `.searchable(text: $searchText, prompt: "검색")`
-            // 참고). 카테고리 picker는 검색창과 나란히 있을 필요가 없어져
-            // 이 줄에 단독으로 남는다.
-            // [2026-09-10 수정] 사용자 요청 — 카테고리 선택을 첨부
-            // 참고 화면(다른 성경 앱의 "1개 언어/2개 언어" 가로 캡슐형 탭)
-            // 처럼 가로로 나열된 캡슐형 버튼으로 바꿔 달라는 요청. 기존
-            // `.pickerStyle(.menu)`는 눌러야만 목록이 펼쳐져 지금 뭐가
-            // 선택돼 있는지 한눈에 안 보였다 — "전체/개인 묵상/말씀 요약"
-            // 단 3개뿐이라 굳이 펼치지 않고 한 줄에 다 보여줘도 자리를 많이
-            // 차지하지 않는다. 시스템 기본 글꼴로 표현하라는 기존 요청
-            // (2026-08-14, 위 옛 주석)은 이 화면 전체가 `.appDefaultFont()`를
-            // 물려받지 않는 이 위치에선 애초에 해당되지 않는다 — 아래
-            // `categoryCapsuleButton`도 명시적으로 `.subheadline`(시스템
-            // 기본)을 쓴다.
             HStack(spacing: 4) {
                 categoryCapsuleButton(.all, title: "전체")
                 ForEach(WordNoteCategory.allCases) { category in
@@ -445,52 +865,42 @@ private struct WordNoteListContent: View {
             .padding(.top, 8)
             .padding(.bottom, 8)
 
-            // [2026-09-12 추가] 위 `wordNoteContentOrnamentalDivider` 선언부
-            // 주석 참고 — 캡슐 탭과 목록(컨텐츠) 사이 경계.
             wordNoteContentOrnamentalDivider
+            wordNoteList
+        }
+    }
 
-            List {
-                ForEach(filteredItems) { item in
-                    rowContent(for: item)
-                }
-                .onDelete { offsets in
-                    guard isPhoneLayout else { return }
-                    deleteItems(at: offsets)
-                }
+    /// 아이패드·맥 전용 콘텐츠 — 분류 트리 | 목록. 상세(내용) 열은 이 view
+    /// 바깥, `WordNoteSplitContent`가 그 옆에 나란히 그린다.
+    private var splitTreeContent: some View {
+        HStack(spacing: 0) {
+            categoryTreeColumn
+                .frame(width: 200)
+
+            Divider()
+
+            VStack(spacing: 0) {
+                listHeader
+                wordNoteContentOrnamentalDivider
+                wordNoteList
             }
-            .listStyle(.plain)
-            // [2026-09-09 추가] 사용자 요청 — "테마를 적용하면 배경색과
-            // 글자색을 전체적으로 적용할 수 있는가(... 말씀노트 화면
-            // 배경색...)." `.plain` 스타일은 이미 개별 행마다 별도 카드
-            // 배경이 없어(시스템 기본도 지금처럼 하나의 배경 위에 얇은
-            // 구분선만 있는 모습이다), 리스트 자체 배경 하나만 바꾸면
-            // 되고 각 행 배경을 따로 손볼 필요가 없다 — `scrollContentBackground
-            // (.hidden)`으로 시스템 리스트 배경을 끄고, `TranslationColumnView`
-            // 컬럼 배경과 똑같은 "nil이면 기존(시스템 기본) 그대로" 폴백으로
-            // 교체한다.
-            //
-            // [2026-09-09 수정, 실기기 확인 후] "리스트 자체 배경 하나만
-            // 바꾸면 되고 각 행 배경을 따로 손볼 필요가 없다"는 위 판단은
-            // 틀렸다 — 실기기에서 각 행이 여전히 흰색이었다(위 `rowContent`
-            // 의 `.listRowBackground(Color.clear)` 추가 참고, 원인은 그
-            // 주석에 적었다).
-            .scrollContentBackground(.hidden)
-            .background(settings.bibleBackgroundColor ?? Color.clear)
-            // [2026-09-10 추가] 사용자 보고 — "어두운 배경에서는 리스트의
-            // 행을 구분하는 라인이 거의 안보임." 시스템 기본 구분선 색은
-            // 라이트/다크 모드에만 맞춰져 있어, 이 리스트처럼 임의의 테마
-            // 배경(`settings.bibleBackgroundColor`) 위에서는 배경과 거의
-            // 구별되지 않을 수 있다 — 이미 배경과 대비되도록 골라 둔
-            // `bibleTextColor`를 옅게(0.3) 써서 구분선도 항상 배경과
-            // 대비되게 한다. 테마를 고르지 않았으면(nil) `nil`을 그대로
-            // 넘겨 시스템 기본 구분선 색을 그대로 쓴다.
-            .listRowSeparatorTint(JBCHCategoryPalette.wood.opacity(0.3))
-            // [2026-09-09 추가] 위 `body` 상단 주석 참고 — `SearchView.swift`
-            // 의 `.searchable(text:prompt:)`와 같은 패턴. 문구("검색")는 이
-            // 화면이 원래 커스텀 텍스트필드에 쓰던 플레이스홀더를 그대로
-            // 유지했다(통합검색의 "검색어 입력"과 다른 것은 의도적 — 이
-            // 화면 고유의 짧은 문구를 바꿔 달라는 요청은 없었다).
-            .searchable(text: $searchText, prompt: "검색")
+        }
+    }
+
+    var body: some View {
+        // [2026-09-12 수정] 이 화면 상단 "2026-09-12 대개편" 주석 참고 —
+        // 기존엔 이 자리에 캡슐 필터+목록이 (아이폰·아이패드·맥 구분 없이)
+        // 그대로 인라인돼 있었다. 이제 아이폰은 그 구조를 그대로 유지하는
+        // `phoneContent`, 아이패드·맥은 분류 트리가 추가된 `splitTreeContent`
+        // 로 갈라진다 — `Group`으로 감싸 아래 `.navigationTitle`/`.toolbar`
+        // 등 화면 전체에 걸리는 모디파이어는 이전과 동일하게 분기와 무관하게
+        // 한 번만 적용되게 했다(동작 변경 없음, 배치만 정리).
+        Group {
+            if isPhoneLayout {
+                phoneContent
+            } else {
+                splitTreeContent
+            }
         }
         // [2026-09-09 추가] 위 검색창+카테고리 필터 줄은 이 `List` 바깥(이
         // `VStack` 안)이라 `List`의 `.background()`가 닿지 않는다 — 이

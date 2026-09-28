@@ -272,6 +272,22 @@ final class SearchViewModel {
     /// verseRefs`)를 "성경구절" 섹션에 직접 활용하기도 한다.
     private(set) var intentCard: QueryIntentCard?
 
+    /// [2026-09-16 신설] 사용자 피드백 — "통합검색 결과에서 인물과 주제가
+    /// 서로 다른 상세 화면으로 열려야 한다는 요구사항은, 통합검색 외 별도
+    /// 화면이 아니라 통합검색 페이지 자체가 바뀌어야 한다는 의미였다." AI
+    /// 토글 카드(관계/인물/주제 — 예언·서사는 항상 `.notReady`라 실질적으로
+    /// 해당 없음, `SearchView.InlineCardKind` 참고)가 항목을 여러 개 찾았을
+    /// 때, 사용자가 그중 몇 번째 행을 탭해 "단일 항목 상세"로 들어갔는지
+    /// 기억한다 — `intentCard`가 가리키는 배열(`[RelationDisplayItem]`/
+    /// `[PersonEntity]`/`[ThemeRecord]`)의 인덱스일 뿐이라(그 배열들이
+    /// `Hashable`/식별자가 아니어도 되도록) 값 자체가 아니라 정수만 든다.
+    /// `SearchView`가 항목 수가 1개뿐이면 이 값과 무관하게 자동으로 그
+    /// 항목을 상세로 보여준다 — 이 값은 "여러 항목 중 무엇을 골랐는지"만
+    /// 담당한다. 새 검색이 시작되면(아래 `clearResults`/`performSearch`)
+    /// 이전 검색의 선택이 새 결과에 잘못 대응되지 않도록 항상 `nil`로
+    /// 되돌린다.
+    var aiCardSelectedIndex: Int?
+
     /// [2026-08-25 신설] 사용자 요청 — "limit 50을 해제할 수 있는 방법도
     /// 추가할 것 — 더보기 버튼." `searchVerses`가 이제 매칭된 절 전체(무제한)를
     /// 성경순으로 정렬해 돌려주므로, 그 전체를 여기 들고 있다가 화면엔
@@ -669,6 +685,7 @@ final class SearchViewModel {
     /// 양쪽에서 쓴다.
     private func clearResults() {
         intentCard = nil
+        aiCardSelectedIndex = nil
         setVerseResults([])
         memoResults = []
         documentResults = []
@@ -753,6 +770,12 @@ final class SearchViewModel {
         // 때만." 이전엔 모드와 무관하게 항상 Layer 1/2를 먼저 계산했는데(3계층
         // 구조의 원래 전제), 이제 AI 검색일 때만 계산한다 — `intentCard`
         // 선언부 주석 참고.
+        // [2026-09-16 추가] 새 검색이 시작될 때마다 이전 검색에서 고른
+        // "카드 안 단일 항목 선택"을 지운다 — 안 그러면 예를 들어 이전
+        // 검색에서 3번째 행(인덱스 2)을 선택해 상세를 보다가 새 검색어로
+        // 다시 검색했을 때, 새 결과 배열의 인덱스 2가 전혀 다른 항목인데도
+        // 그 상세가 그대로 남아있는 것처럼 보일 수 있다.
+        aiCardSelectedIndex = nil
         if isAIQueryEnabled {
             let intent = QueryIntentClassifier.classify(query)
             intentCard = QueryIntentHandler.handle(query, intent: intent)
@@ -1053,7 +1076,13 @@ final class SearchViewModel {
     /// 각 단어를 `BibleReferenceStore.searchVerses`(본문 텍스트 검색)로 OR
     /// 조회한다.
     private func searchVerses(query: String, words: [String], queryMatches: [BibleReferenceExtractor.Match]) -> [VerseSearchResult] {
-        guard let registries = try? modelContext.fetch(FetchDescriptor<TranslationRegistry>()) else { return [] }
+        // [2026-09-16 추가] 사용자 요청 — "설정에서 활성화하지 않은
+        // 번역본에서는 검색결과도 나오지 않도록." 비활성 번역본은 아래
+        // for문에서 아예 조회 대상에서 빠지므로, 그 번역본의 절은 검색
+        // 결과·번역본 하위 탭 어디에도 나타나지 않는다(`TranslationRegistry.
+        // isEnabled` 선언부 주석 참고).
+        guard let allRegistries = try? modelContext.fetch(FetchDescriptor<TranslationRegistry>()) else { return [] }
+        let registries = allRegistries.filter(\.isEnabled)
         // [2026-09-05 추가] 사용자 요청 — "성경구절 탭의 하위 탭으로 활성
         // 번역본별 결과 노출." 이 함수가 검색 1회당 정확히 1번만 호출되므로
         // (호출부 `performKeywordSearch` 참고, 이 파일 내 유일한 호출 지점)

@@ -668,7 +668,11 @@ struct RichTextEditorRepresentable: UIViewRepresentable {
         // `init(title:image:primaryAction:menu:)`뿐이라 `style:` 인자를 줄 수
         // 없다(컴파일 에러: "Extra argument 'style' in call"). `style`은
         // 생성 후에도 설정 가능한 프로퍼티라 여기서 따로 지정한다.
-        doneButton.style = .done
+        // [2026-09-17 수정] 빌드 경고 — "'done' was deprecated in iOS 26.0:
+        // renamed to 'UIBarButtonItem.Style.prominent'." 컴파일러가 알려준
+        // 정확한 대체 이름 그대로 바꿨다 — 의미(강조된 스타일의 버튼)는
+        // 동일하고 이름만 바뀐 경우라 동작 변화는 없다.
+        doneButton.style = .prominent
         toolbar.items = [flexibleSpace, doneButton]
         return toolbar
     }

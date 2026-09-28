@@ -92,14 +92,27 @@ public enum QueryIntentClassifier {
     public enum Intent: String, Equatable {
         /// "OOO의 [관계어]" — `PersonRelations` 테이블이 대상.
         case relation
-        /// 인물/지명 이름 자체를 묻는 질의 — `Persons`/`Places` 테이블이 대상.
-        case personOrPlaceInfo
+        /// [2026-09-15, `personOrPlaceInfo` 대체] 인물 이름 자체를 묻는
+        /// 질의 — `Persons` 테이블이 대상. 더 이상 트리거 문구로 판정하지
+        /// 않는다(과거 `personOrPlaceInfoTriggers`, 아래 2절 삭제 참고).
+        /// `KeywordCategoryIndex` 조회는 DB 접근이 필요해 이 순수 함수
+        /// 계층(Classifier)의 책임 범위를 벗어나므로, 실제 판정은
+        /// `QueryIntentHandler.handle`이 `classify(_:)` 호출 전후로 직접
+        /// 수행한다(우선순위 2번째 자리는 그대로 유지) — 이 case는 그
+        /// 결과를 담는 태그 역할만 한다. 장소는 이번 라운드에 화면 노출
+        /// 대상이 아니라(콘텐츠 미준비) `personOrPlaceInfo`처럼 장소를
+        /// 함께 묶지 않는다(claude/bible-research-platform-search-
+        /// category-expansion-proposal.md 10~11차 문서 참고).
+        case personProfile
         /// 예언/성취, 또는 메시아·마지막 때·마지막 전쟁 관련 주제어 —
         /// `Prophecies` 테이블이 대상.
         case prophecy
         /// "(주제)+의+(속성/방법/의미 등 추상명사)" 구조, "~에 대한/관한
         /// 말씀·구절" 꼬리표, 또는 이름 붙은 본문(가상칠언 등) — `Themes`
-        /// 테이블이 대상.
+        /// 테이블이 대상. [2026-09-15] 새 키워드·카테고리 조회(위 참고)가
+        /// 주제 키워드도 먼저 잡아내므로, 이 인텐트는 사실상 그 폴백
+        /// 역할로 축소된다(제거하지는 않음 — 근거 없는 리팩토링 금지,
+        /// 10차 문서 3장 참고).
         case themeOrAttribute
         /// 서사·시간순 추적 — `TimelineEvents` 테이블이 대상.
         case narrative
@@ -107,15 +120,21 @@ public enum QueryIntentClassifier {
         case general
     }
 
-    /// 우선순위: 관계 -> 인물·지명 정보 -> 예언 -> 주제·속성·교리·유명 본문
-    /// -> 내용 추적·서사 -> 일반. 위에서부터 순서대로 시도해 처음 걸리는
-    /// 카테고리로 확정한다.
+    /// 우선순위: 관계 -> 예언 -> 주제·속성·교리·유명 본문 -> 내용 추적·서사
+    /// -> 일반. 위에서부터 순서대로 시도해 처음 걸리는 카테고리로 확정한다.
+    ///
+    /// [2026-09-15 변경] "인물 이름 자체를 묻는 질의" 판정은 이 함수에서
+    /// 뺐다 — `KeywordCategoryIndex` 조회가 필요해 순수 텍스트 패턴만
+    /// 다루는 이 계층의 책임 범위를 벗어나기 때문이다(위 `Intent.personProfile`
+    /// 주석 참고). 우선순위상 그 자리(관계 다음, 예언 이전)는
+    /// `QueryIntentHandler.handle`이 이 함수 호출과 별도로 직접 채운다 —
+    /// 이 함수만 보면 우선순위가 하나 줄어든 것처럼 보이지만, 실제
+    /// 파이프라인 전체(Handler 포함) 우선순위는 그대로다.
     public static func classify(_ rawQuery: String) -> Intent {
         let query = rawQuery.trimmingCharacters(in: .whitespacesAndNewlines)
         guard !query.isEmpty else { return .general }
 
         if isRelationQuery(query) { return .relation }
-        if isPersonOrPlaceInfoQuery(query) { return .personOrPlaceInfo }
         if isProphecyQuery(query) { return .prophecy }
         if isThemeOrAttributeQuery(query) { return .themeOrAttribute }
         if isNarrativeQuery(query) { return .narrative }
@@ -141,47 +160,20 @@ public enum QueryIntentClassifier {
         return baselineRelationWords.contains(where: { query.contains($0) })
     }
 
-    // MARK: - 2) 인물·지명 정보 (PERSON_OR_PLACE_INFO)
+    // MARK: - 2) 인물 프로필 (PERSON_PROFILE) — [2026-09-15 이동]
     //
-    // [2026-08-20 재검토] 처음엔 "에 대해 알려"/"에 대해 설명"도 트리거에
-    // 넣었었는데, 사용자가 지적한 문제가 있다 — 이 표현은 "주제 자체"를
-    // 가리키지 않는다("~ 앞의 단어로 인물/장소/정의/... 로 구분되어야 하지
-    // 않을까함"). "요셉에 대해 알려줘"뿐 아니라 "믿음에 대해 알려줘"도 똑같은
-    // 형태라서, 이 트리거만으로는 인물·지명 질문인지 주제·속성 질문인지 텍스트
-    // 자체에서 구분이 안 된다. 실제로 어느 쪽인지 알려면 "요셉"/"믿음"이라는
-    // 그 단어가 Persons/Places 테이블에 있는지 찾아봐야 하는데, 그건 DB 접근이
-    // 필요한 일이라 이 계층(순수 텍스트 패턴)의 책임 범위를 벗어난다. 그래서
-    // 이 두 트리거는 뺐다 — 애매한 경우는 억지로 이 카테고리에 우겨넣기보다
-    // GENERAL(일반 검색)로 그냥 넘기는 쪽이 안전하다(틀리게 확신하는 것보다
-    // 낫다).
-    //
-    // 대신 텍스트 자체가 카테고리를 직접 밝히는 경우("~이란 인물"/"~라는
-    // 장소"처럼 "인물"/"장소"/"지명"이라는 단어가 그대로 딸려 나오는 경우)는
-    // DB 없이도 확실히 판정할 수 있어 남겨 뒀다 — 사용자 요청("~이란 인물 ->
-    // 이라는 텍스트는 인물 검색")을 그대로 반영했고, 같은 논리로 대칭되는
-    // "장소"/"지명" 형태도 추가했다(⚠️ 이 대칭 확장은 사용자가 직접 요청한
-    // 건 아니고, 같은 규칙을 인물 쪽에서 장소 쪽으로 자연스럽게 넓힌 것 —
-    // 필요 없으면 빼도 된다).
-    //
-    // ⚠️ [여전히 초안] "OOO는 누구/어디(인가)" 같은 질문 구조는 별도로 실제
-    // 질의를 모아 재현 테스트하지는 못했다. 실제 이름이 무엇인지(어느 단어가
-    // 그 "OOO"인지)는 이 계층이 아니라 Handler가
-    // `ReferenceDataStore.personsAndPlaces(mentionedIn:)`로 알아낸다 —
-    // 여기서는 "이런 종류의 질문이다"만 판정한다.
-
-    private static let personOrPlaceInfoTriggers: [String] = [
-        "는 누구", "은 누구", "가 누구", "이 누구",
-        "는 어디", "은 어디",
-        "는 어떤 사람", "은 어떤 사람",
-        "는 어떤 곳", "은 어떤 곳",
-        "이란 인물", "라는 인물", "이라는 인물",
-        "이란 장소", "라는 장소", "이라는 장소",
-        "이란 지명", "라는 지명", "이라는 지명",
-    ]
-
-    private static func isPersonOrPlaceInfoQuery(_ query: String) -> Bool {
-        personOrPlaceInfoTriggers.contains(where: { query.contains($0) })
-    }
+    // 예전엔 여기 "~는 누구"/"~이란 인물" 같은 트리거 문구 19개
+    // (`personOrPlaceInfoTriggers`)로 판정했다. `KeywordCategoryIndex`
+    // (등록된 인물/주제 표제어 3,109건, `build_reference_data.py` 2026-09-15
+    // 갱신분) 도입 이후, 등록된 이름이 질의 안에 부분 문자열로 있는지만
+    // 확인하면 말투와 무관하게 "다윗"/"다윗은 누구"/"다윗에 대해 알려줘"를
+    // 전부 같게 잡을 수 있어(트리거 문구 목록은 목록에 없는 말투를 구조적
+    // 으로 못 잡는 한계가 있었다 — claude/bible-research-platform-search-
+    // category-expansion-proposal.md 9~11차 문서 참고), 트리거 문구 방식은
+    // 폐기했다. 이 조회는 DB 접근이 필요해 이 파일(순수 함수, 위 파일 상단
+    // 설명)이 아니라 `QueryIntentHandler.handleKeywordCategoryLookup`과
+    // `ReferenceDataStore.keywordCategories(mentionedIn:)`/
+    // `persons(mentionedIn:)`로 옮겼다.
 
     // MARK: - 3) 예언 (PROPHECY)
     //

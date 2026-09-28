@@ -200,6 +200,7 @@ struct OutlineQuickViewWindowContent: View {
                 .background(Circle().fill(.background))
         }
         .buttonStyle(.plain)
+        .contentShape(Rectangle())
         .padding(12)
         .accessibilityLabel("닫기")
     }

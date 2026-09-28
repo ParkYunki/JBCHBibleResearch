@@ -70,4 +70,19 @@ final class OriginalTextLookupService {
             return []
         }
     }
+
+
+    /// [2026-09-16 신설] 사용자 요청 — 위 `OriginalTextModels.swift`
+    /// `LiteralTranslationInfo` 주석 참고. 위 `words(bookId:chapter:verse:)`와
+    /// 같은 커넥션(`resolvedStore()`)을 재사용한다. 아직 데이터가 없는 절이면
+    /// nil — 호출부(OriginalTextInfoView)가 카드를 그냥 숨긴다.
+    func literalTranslation(bookId: Int, chapter: Int, verse: Int) -> LiteralTranslationInfo? {
+        guard let store = resolvedStore() else { return nil }
+        do {
+            return try store.literalTranslation(bookId: bookId, chapter: chapter, verse: verse)
+        } catch {
+            print("[OriginalTextLookupService] 직역 조회 실패: \(error)")
+            return nil
+        }
+    }
 }

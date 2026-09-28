@@ -14,6 +14,19 @@ public final class TranslationRegistry {
     public var licenseType: String?
     public var addedAt: Date = Date.now
 
+    /// [2026-09-16 신설] 사용자 요청 — "설정에서 활성화하지 않은 번역본에서는
+    /// 검색결과도 나오지 않도록. 성경 - 표시할 번역본에서도 나타나지 않도록
+    /// 바꿀것." 기본값 `true` — 기존에 이미 추가돼 있던 번역본들은 이 필드가
+    /// 새로 생겨도 전부 "활성" 상태 그대로 유지되어(SwiftData 라이트웨이트
+    /// 마이그레이션, `isBundled`/`bookNameTableID` 등 이 모델에 이미 있는
+    /// 다른 필드들과 같은 방식) 동작이 갑자기 바뀌지 않는다. `SettingsView`의
+    /// "설치된 번역본" 목록(전체, 삭제만 가능하던 곳)에 이 값을 끄고 켜는
+    /// 토글이 새로 생기고, 꺼지면 `SearchViewModel.searchVerses`(검색)와
+    /// `BibleReadingViewModel.loadAvailableTranslations()`(성경 조회 표시
+    /// 후보, 그 값을 그대로 쓰는 `TranslationPickerPopover`도 함께) 양쪽에서
+    /// 제외된다.
+    public var isEnabled: Bool = true
+
     /// `isBundled == true`: 앱 번들 내 정적 경로.
     /// `isUserAdded == true`: 로컬에 materialize된 캐시 파일 경로 — 기기별로 다시
     /// 생성되므로 이 필드 자체는 동기화 대상이 아니다(6.7).
@@ -49,7 +62,8 @@ public final class TranslationRegistry {
         sqliteFileReference: String = "",
         sqliteData: Data? = nil,
         bookNameTableID: String? = nil,
-        addedAt: Date = .now
+        addedAt: Date = .now,
+        isEnabled: Bool = true
     ) {
         self.id = id
         self.code = code
@@ -61,5 +75,6 @@ public final class TranslationRegistry {
         self.sqliteData = sqliteData
         self.bookNameTableID = bookNameTableID
         self.addedAt = addedAt
+        self.isEnabled = isEnabled
     }
 }

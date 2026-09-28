@@ -48,3 +48,33 @@ public struct OriginalWordInfo: Sendable, Hashable, Identifiable {
         self.glossEn = glossEn
     }
 }
+
+/// [2026-09-16 신설] 사용자 요청 — "OriginalText.sqlite 에 LiteralTranslation
+/// 테이블을 추가하였음. 원어 직역 표현임. 이 데이터를 성경 - 구절 선택 - 하단
+/// 원문 정보 에 추가하고자 함." 절 하나에 대한 "직역(원어 그대로의 표현)"과
+/// "번역과의 차이" 설명. `original_words`와 마찬가지로 book/chapter/verse에만
+/// 종속되는 정적 참조 데이터라 SwiftData가 아니라 OriginalTextStore로 읽는다.
+public struct LiteralTranslationInfo: Sendable, Hashable, Identifiable {
+    public var id: String { "\(bookId).\(chapter).\(verse)" }
+
+    public let bookId: Int
+    public let chapter: Int
+    public let verse: Int
+    /// 원어 직역 표현.
+    public let literalTranslation: String
+    /// 번역과의 차이 설명. `LiteralTranslation.difference` 컬럼은 NOT NULL이
+    /// 아니라 값이 없는 절이 있을 수 있다(직역만 채워진 경우) — 그런 경우 nil.
+    public let difference: String?
+
+    public init(
+        bookId: Int, chapter: Int, verse: Int,
+        literalTranslation: String, difference: String?
+    ) {
+        self.bookId = bookId
+        self.chapter = chapter
+        self.verse = verse
+        self.literalTranslation = literalTranslation
+        self.difference = difference
+    }
+}
+

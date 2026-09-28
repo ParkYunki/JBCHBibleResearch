@@ -212,6 +212,14 @@ private struct BibleVerseDestinationRegistration: ViewModifier {
     }
 }
 
+/// [2026-09-15 신설, 2026-09-16 삭제] 인물/주제 상세 화면을 `NavigationLink
+/// (value:)`로 push하기 위한 `.navigationDestination(for:)` 등록이 여기 있었다.
+/// 사용자 피드백("통합검색 페이지 자체가 인물/주제/관계 카드로 전환돼야
+/// 한다") 이후 그 push 방식 자체를 없애면서 함께 지웠다 — `PersonDetailView`/
+/// `ThemeDetailView`/`RelationDetailView`는 이제 `SearchContentView`가 자신의
+/// `List` 안에서 상태(`viewModel.aiCardSelectedIndex`)로 직접 전환한다.
+/// (`Views/Navigation/PersonThemeDetailDestination.swift`도 함께 삭제)
+
 /// [2026-08-29 신설] `BibleReadingView`의 동명 타입(그 파일 참고)과 똑같은
 /// 얇은 `Identifiable` 래퍼 — "세 번째 사용처가 생기기 전엔 공통 타입으로
 /// 추출하지 않는다"는 이 프로젝트의 기존 원칙(`SearchViewModel.storeCache`
@@ -418,163 +426,37 @@ private struct SearchContentView: View {
     }
 
     var body: some View {
-        List {
-            Section {
-                if viewModel.isSearching {
-                    HStack(spacing: 6) {
-                        ProgressView().controlSize(.small)
-                        Text("검색 중...")
-                            .font(.subheadline)
-                            .foregroundStyle(.secondary)
-                    }
-                    .padding(.vertical, 2)
-                }
-
-                if let errorDescription = viewModel.errorDescription {
-                    HStack(spacing: 6) {
-                        Image(systemName: "exclamationmark.triangle.fill")
-                        Text(errorDescription)
-                    }
-                    .font(.subheadline)
-                    .foregroundStyle(.orange)
-                    .padding(.vertical, 2)
-                }
-
-                // [2026-08-19 신설] 사용자 요청 — "검색이 완벽하지 않음을
-                // 설명하는 검색창 하단에 추가." AI 검색은 온디바이스 모델의
-                // 지식 한계로 정답을 놓치거나 틀릴 수 있다는 점을 미리
-                // 알려준다 — `.searchable` 검색창은 시스템 내비게이션
-                // 영역이라 그 안에 직접 넣을 수 없어, 검색창 바로 아래에
-                // 오는 이 List 맨 위 Section에 넣었다.
-                if viewModel.isAIQueryEnabled {
-                    HStack(alignment: .top, spacing: 6) {
-                        Image(systemName: "info.circle")
-                        Text("AI 검색은 완벽하지 않을 수 있습니다. 결과가 부정확하거나 부족하면 AI 검색을 끄고 다시 검색해보세요.")
-                    }
-                    .font(.caption)
-                    .foregroundStyle(.secondary)
-                    .padding(.vertical, 2)
-
-                    // [2026-08-19 신설] 사용자 요청 — "애플인텔리전스를 끈것과
-                    // 켠것을 비교하고 싶음." — [2026-08-20 제거] 사용자 요청으로
-                    // 이 자리에 있던 두 토글(Apple Intelligence로 검색어 정제/
-                    // 결과 재순위화)을 없앴다("결과가 너무 이상함"/"너무 느리고
-                    // 결과가 큰 차이 안 남"). `SearchViewModel.
-                    // isQueryRefinementEnabled`/`isRerankEnabled` 프로퍼티도
-                    // 함께 제거했다 — 이제 정제는 항상 건너뛰고(결정론적 꼬리표
-                    // 제거만 적용), 재순위화는 항상 결정론적
-                    // `BibleStructuralRerankerService`만 쓴다(둘 다 Apple
-                    // Intelligence가 아니라 사용자가 제거 대상으로 언급하지
-                    // 않았다).
-
-                    // [2026-08-19 v3 신설, 2026-08-20 제거, Phase 5] "절 x% ·
-                    // 문맥 x%" 슬라이더가 여기 있었다 — 사용자가 재검토하며
-                    // "의미가 있는가? 없으면 삭제할 것"이라고 물어서 없앴다.
-                    // 내부 코사인 유사도 블렌드 비율을 바꾸는 튜닝 값일 뿐,
-                    // 만들 때부터 "0.6은 출발점일 뿐 최적값 근거는 없다"고
-                    // 밝혀둔 실험용 슬라이더였고, "절/문맥 가중치"라는 개념 자체가
-                    // 최종 사용자에게 해석 가능한 정보가 아니다(어느 쪽이 "더
-                    // 나은 결과"인지 검증된 기준도 없음) — `SearchViewModel.
-                    // intentCard` 선언부 근처 주석 참고. 내부 파라미터 자체는
-                    // 기본값(0.6)으로 그대로 남아 있다(동작 변화 없음, UI만 제거).
-
-                    // [2026-08-19 신설] 정제 켬/끔에 따라 실제로 임베딩에 들어간
-                    // 문장이 달라지는 걸 눈으로 비교할 수 있게 보여준다 — 켰을
-                    // 때 원문과 달라졌으면("~인가?" 같은 어미가 빠지는 등) 바로
-                    // 확인 가능하다.
-                    if let usedQuery = viewModel.lastAIQueryUsed, !usedQuery.isEmpty {
-                        HStack(alignment: .top, spacing: 6) {
-                            Image(systemName: "text.magnifyingglass")
-                            Text("검색에 사용된 문장: \(usedQuery)")
-                        }
-                        .font(.caption)
-                        .foregroundStyle(.secondary)
-                        .padding(.vertical, 2)
-                    }
-
-                    // [2026-08-19 신설] 의미검색은 성경 전체를 미리 임베딩해 둔
-                    // 로컬 색인이 있어야 동작한다 — 색인 상태에 따라 만들기
-                    // 안내/진행률을 여기 보여준다.
-                    bibleIndexStatusRow
-                }
-            }
-            .padding(.vertical, 4)
-            // [2026-09-09 신설, WordNoteHomeView.swift 조사 후] 사용자 요청 —
-            // "[통합 검색] 리스트 배경색을 확인할 것." `WordNoteHomeView.swift`
-            // 에서 확인된 것과 같은 원인이다 — `.scrollContentBackground(.hidden)`
-            // + `List` 자체의 `.background()`(위 body 하단 참고)는 리스트라는
-            // "컨테이너"의 배경만 바꾸지, 각 행(또는 Section) 셀이 갖고 있는
-            // 자기 배경까지 자동으로 투명하게 만들어주지는 않는다. 이 파일은
-            // `WordNoteHomeView`와 달리 개별 행이 아니라 `Section` 단위로 묶여
-            // 있는 곳이 대부분이라(아래 각 지점), `.listRowBackground(Color.clear)`
-            // 를 `Section`(또는 `Section`이 아닌 독립 행)에 한 번씩 적용했다 —
-            // `.listRowBackground`는 `Section`/`ForEach`처럼 여러 행을 만들어내는
-            // 컨테이너에 적용하면 그 안의 모든 행에 전파된다(Apple 표준 동작 —
-            // `WordNoteHomeView`에서는 행이 하나뿐이라 행에 직접 적용했지만,
-            // 여기서는 같은 효과를 Section 단위로 적용한다).
-            .listRowBackground(Color.clear)
-
-            // [2026-08-20 신설, 2026-08-20 재수정 Phase 5] 일반 검색 결과 목록
-            // 보다 먼저 보여준다 — 관계/인물·지명 정보/예언/주제·속성/서사
-            // 카드가 "정답에 더 가까운 안내"이므로 우선 노출한다.
-            // `viewModel.intentCard`가 nil이면 이 Section 자체가 안 그려지는데,
-            // Phase 5부터는 `.general`로 분류되거나 참고 DB를 못 연 경우뿐
-            // 아니라 **AI 검색 토글이 꺼져 있을 때도 항상 nil**이다 — 사용자
-            // 요청("단순 키워드 검색시엔 순수 키워드 검색결과만, 관계정보는
-            // AI 토글을 켰을 때만")에 따라 `SearchViewModel.performSearch`가
-            // 키워드 검색 모드에선 이 카드를 아예 계산하지 않는다.
-            if let intentCard = viewModel.intentCard {
-                intentCardSection(intentCard)
-            }
-
-            if viewModel.query.trimmingCharacters(in: .whitespaces).isEmpty {
-                // [2026-09-04 신설] 사용자 요청 — "아이폰에서의 검색이력을
-                // 하단 [통합검색] 기능을 누른 직후에 볼 수 있도록. (현재는
-                // 검색창에 포커스가 들어올때 검색이력이 보임)" 아래
-                // `.searchSuggestions`는 검색창이 실제로 포커스를 받아야만
-                // (iOS 네이티브 동작) 나타나는데, 사용자가 원하는 건 "탭을
-                // 누른 직후"(아직 검색창을 탭하기 전)에도 바로 보이는
-                // 것이다 — 그래서 아이폰만 이 List 본문 자체에 같은 내용을
-                // 한 번 더(포커스 여부와 무관하게) 넣는다. macOS/iPadOS는
-                // 이번 요청이 "아이폰에서의"로 범위가 한정돼 있어 그대로
-                // `.searchSuggestions`(포커스 시에만) 하나만 쓴다 — 그래서
-                // 아래 `.searchSuggestions`도 아이폰일 때는 끈다(안 그러면
-                // 아이폰에서 포커스 중엔 이 목록이 두 번 겹쳐 보인다).
-                if isPhoneIdiom {
-                    recentSearchesSection
-                }
+        Group {
+            // [2026-09-16 신설] 사용자 피드백 — "통합검색 페이지 자체가
+            // 바뀌어야 한다" + "맥/아이패드는 결과 목록과 상세를 나란히
+            // (split)" (AskUserQuestion으로 확인). 항목이 여러 개인 카드가
+            // 뜬 상태에서 맥/아이패드일 때만 이 화면 전체를 결과 목록 +
+            // 상세 두 칼럼으로 바꾼다 — 그 외(아이폰 전부, 또는 항목이
+            // 0/1개, 또는 카드가 없는 일반 검색)는 지금까지와 같은 단일
+            // 목록(`mainResultsList`)을 쓴다.
+            if !isPhoneIdiom, let multi = multiItemInlineCard {
+                macSplitCardLayout(intent: multi.intent, kind: multi.kind)
             } else {
-                resultsSection
+                mainResultsList
             }
         }
-        // [2026-09-09 추가] 사용자 요청 — "테마를 적용하면 배경색과 글자색을
-        // 전체적으로 적용할 수 있는가(... 통합검색 화면 배경색)." 이 List는
-        // 지금까지 스타일을 명시하지 않아(`.automatic`) 시스템 기본 배경을
-        // 썼다 — 이 코드베이스의 다른 목록 화면들(`WordNoteHomeView`,
-        // `VerseMentionListView`, `BookmarkListPopover`, `CrossReferenceTargetPicker`,
-        // `OutlineTreeView`, `DocumentsHomeView`)은 전부 이미 `.listStyle(.plain)`을
-        // 명시적으로 쓰고 있어, 이 화면만 예외였다 — 새 스타일을 만드는 대신
-        // 이미 앱 전체에 자리 잡은 규칙을 그대로 따라 명시했다. `.plain`은
-        // 행마다 별도 카드 배경이 없어 `WordNoteHomeView`와 똑같이 리스트
-        // 배경 하나만 바꾸면 되고, `.foregroundStyle`을 이 컨테이너에
-        // 적용해 아래 각 결과 행(성경구절/개요/메모/연구문서 등 10여 개
-        // 유형)의 색을 명시하지 않은 평범한 `Text`/`Image`가 전부 이 색을
-        // 물려받게 한다 — 코드가 아주 큰 파일이라 유형마다 일일이 색을
-        // 지정하는 대신, SwiftUI가 표준으로 제공하는 "명시하지 않은
-        // 자식은 조상의 foregroundStyle을 물려받는다"는 동작에 기댄
-        // 것이다. 단, `.foregroundStyle(.secondary)`처럼 각 행이 이미
-        // 명시적으로 지정해 둔 보조 텍스트(날짜·매칭 개수 등)는 이 상속의
-        // 영향을 받지 않고 시스템 회색 그대로 남는다 — 그 부분까지 테마에
-        // 맞추려면 해당 행들을 개별적으로 더 손봐야 하며, 이번 적용 범위에는
-        // 포함하지 않았다(실기기에서 가독성 확인 권장).
-        .listStyle(.plain)
-        .scrollContentBackground(.hidden)
-        .background(settings.bibleBackgroundColor ?? Color.clear)
-        .foregroundStyle(settings.bibleTextColor ?? Color.primary)
-        // [2026-09-10 추가] 사용자 보고 — "어두운 배경에서는 리스트의
-        // 행을 구분하는 라인이 거의 안보임(... 통합검색 이력)."
-        // `WordNoteHomeView.swift`와 같은 이유·같은 해법.
-        .listRowSeparatorTint(JBCHCategoryPalette.wood.opacity(0.3))
+        // [2026-09-09 추가, 2026-09-16 위치 이동] 사용자 요청 — "테마를
+        // 적용하면 배경색과 글자색을 전체적으로 적용할 수 있는가(...
+        // 통합검색 화면 배경색)." 이 다섯 모디파이어(`.listStyle`/
+        // `.scrollContentBackground`/`.background`/`.foregroundStyle`/
+        // `.listRowSeparatorTint`)는 원래 이 자리(당시엔 `body`가 직접
+        // 감싸던 단일 `List`)에 있었다 — 이제 그 `List`가 `mainResultsList`
+        // (아래)로 옮겨지고 맥/아이패드 split 레이아웃(`macSplitCardLayout`)의
+        // `List` 두 개가 새로 생기면서, 세 곳 모두가 각자의 `List`에 직접
+        // 이 다섯 개를 그대로 들고 있다(코드는 중복되지만, "화면 전체가 테마를
+        // 따른다"는 이 주석의 원래 취지가 어느 레이아웃에서도 깨지지 않도록
+        // 하기 위한 의도적 중복이다 — 이 자리에서 `Group`에 한 번만 걸면
+        // `HStack` 안의 두 `List`가 서로 다른 `.background`/
+        // `.foregroundStyle`을 갖고 싶어질 경우(예: 나중에 왼쪽 목록과
+        // 오른쪽 상세를 시각적으로 구분하고 싶다는 요청이 생기는 경우) 다시
+        // 풀어야 하므로, 처음부터 각 `List` 단위로 명시했다). 아래
+        // `.searchable`부터는 검색창/모디파이어처럼 어느 레이아웃에서도
+        // 하나만 있으면 되는 것들이라 그대로 `Group`에 남는다.
         .searchable(text: Binding(
             get: { viewModel.query },
             set: { viewModel.query = $0 }
@@ -697,6 +579,10 @@ private struct SearchContentView: View {
         // 화면이 스택의 유일한 "루트에 가장 가까운" 목적지 등록이라 원래도
         // 문제가 없었다).
         .modifier(BibleVerseDestinationRegistration(isEnabled: !isPhoneIdiom))
+        // [2026-09-15 추가, 2026-09-16 삭제] 인물/주제 상세 화면의
+        // `.navigationDestination(for:)` 등록이 여기 있었다 — 위
+        // `BibleVerseDestinationRegistration` 선언부 주석 참고, 이제
+        // push 자체를 하지 않는다.
         .toolbar {
             // [2026-08-21 추가] 사용자 요청 — "PersonPlaceSeed.json 데이터를 좀더
             // 고도화 정제 후에 다시 시도할 예정. 그전까지 AI 토글은 개발
@@ -827,15 +713,11 @@ private struct SearchContentView: View {
                 ProgressView(value: progress)
             }
             .padding(.vertical, 2)
-        case .ready(let verseCount, _):
-            HStack(spacing: 6) {
-                Image(systemName: "checkmark.circle.fill")
-                    .foregroundStyle(.green)
-                Text("\(verseCount)개 절 색인 완료")
-            }
-            .font(.caption)
-            .foregroundStyle(.secondary)
-            .padding(.vertical, 2)
+        case .ready:
+            // [2026-09-16 삭제] 사용자 요청 — "그 다음줄 '...색인 완료' 내용
+            // 제거." 색인이 준비된 뒤엔 이를 알리는 문구를 더 이상 보여주지
+            // 않는다(다른 케이스 — 미생성/생성중/실패 — 는 그대로 유지).
+            EmptyView()
         case .failed(let message):
             HStack(spacing: 8) {
                 Image(systemName: "exclamationmark.triangle.fill")
@@ -854,6 +736,325 @@ private struct SearchContentView: View {
         }
     }
 
+    // [2026-09-16 신설] 사용자 피드백 — "통합검색 결과에서 인물과 주제가
+    // 서로 다른 상세 화면으로 열려야 한다는 요구사항은, 통합검색 외 별도
+    // 화면이 아니라 통합검색 페이지 자체가 바뀌어야 한다는 의미였다." + "AI
+    // 토글로 검색한 결과는 성경구절/개요/메모·말씀노트/연구문서 결과가 나올
+    // 필요가 없다. 단일 항목이면 바로 그 카테고리의 테마 디자인 상세로,
+    // 여러 항목이면 지금처럼 행 목록으로 나오고 클릭하면 상세로." 범위는
+    // AskUserQuestion으로 확인 — "AI토글의 모든 카드 유형"(관계 포함). 예언/
+    // 서사는 `QueryIntentHandler.swift` 상단 주석대로 데이터가 없어 항상
+    // `.notReady`이므로 실질적으로 이 열거형에 들어오지 않는다 — 데이터가
+    // 채워지면 그때 케이스를 추가한다(추측성으로 미리 만들지 않는다).
+    private enum InlineCardKind {
+        case relation([RelationDisplayItem])
+        case person([PersonEntity])
+        case theme([ThemeRecord])
+
+        var count: Int {
+            switch self {
+            case .relation(let items): return items.count
+            case .person(let items): return items.count
+            case .theme(let items): return items.count
+            }
+        }
+    }
+
+    private func inlineCardKind(for content: QueryIntentCard.Content) -> InlineCardKind? {
+        switch content {
+        case .relation(let items): return .relation(items)
+        case .personProfile(let persons): return .person(persons)
+        case .theme(let themes): return .theme(themes)
+        case .prophecy, .narrative: return nil
+        }
+    }
+
+    /// AI 카드가 통합검색 페이지 자체를 대체하는 중인지 — 참이면 `resultsSection`
+    /// (성경구절/개요/메모·말씀노트/연구문서 4개 탭)을 그리지 않는다. `body`와
+    /// `intentCardSection` 양쪽에서 쓴다.
+    private var isInlineCardDisplayActive: Bool {
+        guard let card = viewModel.intentCard, case .found(let content) = card.status else { return false }
+        return inlineCardKind(for: content) != nil
+    }
+
+    /// 맥/아이패드에서 결과 목록과 상세를 나란히(split) 보여줘야 하는 경우만
+    /// 값을 준다 — 항목이 1개뿐이면 나열할 목록 자체가 의미 없어 split 없이
+    /// (아이폰과 동일하게) 상세를 바로 보여주면 되므로 여기 포함하지 않는다
+    /// (`body`의 분기 참고).
+    private var multiItemInlineCard: (intent: QueryIntentClassifier.Intent, kind: InlineCardKind)? {
+        guard let card = viewModel.intentCard, case .found(let content) = card.status,
+              let kind = inlineCardKind(for: content), kind.count > 1 else { return nil }
+        return (card.intent, kind)
+    }
+
+    @ViewBuilder
+    private func inlineCardRow(_ kind: InlineCardKind, index: Int, onSelect: @escaping () -> Void) -> some View {
+        switch kind {
+        case .relation(let items):
+            inlineSelectableRow(onSelect: onSelect) { relationLabel(items[index]) }
+        case .person(let items):
+            inlineSelectableRow(onSelect: onSelect) { personOrPlaceLabel(items[index]) }
+        case .theme(let items):
+            inlineSelectableRow(onSelect: onSelect) { themeLabel(items[index]) }
+        }
+    }
+
+    @ViewBuilder
+    private func inlineCardDetail(_ kind: InlineCardKind, index: Int) -> some View {
+        switch kind {
+        case .relation(let items): RelationDetailView(item: items[index])
+        case .person(let items): PersonDetailView(person: items[index])
+        case .theme(let items): ThemeDetailView(theme: items[index])
+        }
+    }
+
+    /// 목록 행 하나 — 탭하면 `onSelect()`로 이 화면 안의 상태만 바꿔 상세를
+    /// 연다(push 없음). `bibleVerseRow`의 아이폰 분기와 같은 이유로 오른쪽에
+    /// 디스클로저 화살표를 직접 그린다 — `NavigationLink`처럼 보이되 실제로는
+    /// `NavigationLink`가 아니다.
+    private func inlineSelectableRow<RowLabel: View>(
+        onSelect: @escaping () -> Void,
+        @ViewBuilder label: () -> RowLabel
+    ) -> some View {
+        Button(action: onSelect) {
+            HStack(spacing: 8) {
+                label()
+                Spacer(minLength: 0)
+                Image(systemName: "chevron.right")
+                    .font(.footnote.weight(.semibold))
+                    .foregroundStyle(.tertiary)
+            }
+            .contentShape(Rectangle())
+        }
+        .buttonStyle(.plain)
+    }
+
+    /// `intentCardSection`/`macSplitCardLayout` 양쪽이 쓰는 공통 `Section`
+    /// 뼈대(헤더 + `.listRowBackground(Color.clear)`) — 내용만 다르다.
+    @ViewBuilder
+    private func cardSectionWrapper<Content: View>(
+        _ meta: (title: String, icon: String, color: Color),
+        count: Int,
+        // [2026-09-16 신설] 사용자 요청 — "목록이 아닌 결과 상세 컨텐츠에서는
+        // '인물 정보 몇 건' 표시하는 해당 영역을 삭제. <-목록에서만 표시."
+        // 항목이 여러 개라 실제로 "목록"을 보여줄 때만 이 헤더(아이콘+제목+
+        // 건수 배지)를 표시하고, 항목 1개짜리 상세 화면(아래 `intentCardSection`의
+        // `kind.count == 1` 분기, "목록으로" 버튼과 함께 상세를 보여주는 분기)은
+        // 헤더 자체를 없앤다 — `Section`은 유지해 리스트 행 스타일(배경 등)은
+        // 그대로 받는다.
+        showHeader: Bool = true,
+        @ViewBuilder content: () -> Content
+    ) -> some View {
+        if showHeader {
+            Section {
+                content()
+            } header: {
+                sectionHeader(meta.title, icon: meta.icon, color: meta.color, count: count)
+            }
+            .listRowBackground(Color.clear)
+        } else {
+            Section {
+                content()
+            }
+            .listRowBackground(Color.clear)
+        }
+    }
+
+    /// [2026-09-16 재작성] 통합검색의 "기본" 화면 — 카드가 없거나(일반
+    /// 키워드 검색), 카드가 있어도 항목이 1개뿐이거나 아이폰인 경우 항상
+    /// 이 하나의 `List`를 쓴다. 원래 `body`가 직접 갖고 있던 `List`를 그대로
+    /// 옮긴 것 — 내용은 전혀 바뀌지 않았고, 맥/아이패드에서 카드 항목이
+    /// 여러 개일 때만 `body`가 이 대신 `macSplitCardLayout`을 쓰도록
+    /// 갈라져 나왔다.
+    private var mainResultsList: some View {
+        List {
+            Section {
+                if viewModel.isSearching {
+                    HStack(spacing: 6) {
+                        ProgressView().controlSize(.small)
+                        Text("검색 중...")
+                            .font(.subheadline)
+                            .foregroundStyle(.secondary)
+                    }
+                    .padding(.vertical, 2)
+                }
+
+                if let errorDescription = viewModel.errorDescription {
+                    HStack(spacing: 6) {
+                        Image(systemName: "exclamationmark.triangle.fill")
+                        Text(errorDescription)
+                    }
+                    .font(.subheadline)
+                    .foregroundStyle(.orange)
+                    .padding(.vertical, 2)
+                }
+
+                // [2026-09-16 삭제] 사용자 요청 — "AI 검색란 밑에 경고
+                // 'AI 검색은 완벽하지 않을 수 있습니다..' 경고 제거 <- 현재는
+                // AI검색이라고 하기에는 너무 미약함." 위에 있던 안내 문구
+                // `HStack`을 삭제했다(이 `if viewModel.isAIQueryEnabled` 블록
+                // 자체와 아래 디버그 문구/`bibleIndexStatusRow`는 그대로 둔다).
+                if viewModel.isAIQueryEnabled {
+                    // [2026-08-19 신설] 사용자 요청 — "애플인텔리전스를 끈것과
+                    // 켠것을 비교하고 싶음." — [2026-08-20 제거] 사용자 요청으로
+                    // 이 자리에 있던 두 토글(Apple Intelligence로 검색어 정제/
+                    // 결과 재순위화)을 없앴다("결과가 너무 이상함"/"너무 느리고
+                    // 결과가 큰 차이 안 남"). `SearchViewModel.
+                    // isQueryRefinementEnabled`/`isRerankEnabled` 프로퍼티도
+                    // 함께 제거했다 — 이제 정제는 항상 건너뛰고(결정론적 꼬리표
+                    // 제거만 적용), 재순위화는 항상 결정론적
+                    // `BibleStructuralRerankerService`만 쓴다(둘 다 Apple
+                    // Intelligence가 아니라 사용자가 제거 대상으로 언급하지
+                    // 않았다).
+
+                    // [2026-08-19 v3 신설, 2026-08-20 제거, Phase 5] "절 x% ·
+                    // 문맥 x%" 슬라이더가 여기 있었다 — 사용자가 재검토하며
+                    // "의미가 있는가? 없으면 삭제할 것"이라고 물어서 없앴다.
+                    // 내부 코사인 유사도 블렌드 비율을 바꾸는 튜닝 값일 뿐,
+                    // 만들 때부터 "0.6은 출발점일 뿐 최적값 근거는 없다"고
+                    // 밝혀둔 실험용 슬라이더였고, "절/문맥 가중치"라는 개념 자체가
+                    // 최종 사용자에게 해석 가능한 정보가 아니다(어느 쪽이 "더
+                    // 나은 결과"인지 검증된 기준도 없음) — `SearchViewModel.
+                    // intentCard` 선언부 근처 주석 참고. 내부 파라미터 자체는
+                    // 기본값(0.6)으로 그대로 남아 있다(동작 변화 없음, UI만 제거).
+
+                    // [2026-08-19 신설] 정제 켬/끔에 따라 실제로 임베딩에 들어간
+                    // 문장이 달라지는 걸 눈으로 비교할 수 있게 보여준다 — 켰을
+                    // 때 원문과 달라졌으면("~인가?" 같은 어미가 빠지는 등) 바로
+                    // 확인 가능하다.
+                    if let usedQuery = viewModel.lastAIQueryUsed, !usedQuery.isEmpty {
+                        HStack(alignment: .top, spacing: 6) {
+                            Image(systemName: "text.magnifyingglass")
+                            Text("검색에 사용된 문장: \(usedQuery)")
+                        }
+                        .font(.caption)
+                        .foregroundStyle(.secondary)
+                        .padding(.vertical, 2)
+                    }
+
+                    // [2026-08-19 신설] 의미검색은 성경 전체를 미리 임베딩해 둔
+                    // 로컬 색인이 있어야 동작한다 — 색인 상태에 따라 만들기
+                    // 안내/진행률을 여기 보여준다.
+                    bibleIndexStatusRow
+                }
+            }
+            .padding(.vertical, 4)
+            // [2026-09-09 신설, WordNoteHomeView.swift 조사 후] 사용자 요청 —
+            // "[통합 검색] 리스트 배경색을 확인할 것." `WordNoteHomeView.swift`
+            // 에서 확인된 것과 같은 원인이다 — `.scrollContentBackground(.hidden)`
+            // + `List` 자체의 `.background()`(위 body 하단 참고)는 리스트라는
+            // "컨테이너"의 배경만 바꾸지, 각 행(또는 Section) 셀이 갖고 있는
+            // 자기 배경까지 자동으로 투명하게 만들어주지는 않는다. 이 파일은
+            // `WordNoteHomeView`와 달리 개별 행이 아니라 `Section` 단위로 묶여
+            // 있는 곳이 대부분이라(아래 각 지점), `.listRowBackground(Color.clear)`
+            // 를 `Section`(또는 `Section`이 아닌 독립 행)에 한 번씩 적용했다 —
+            // `.listRowBackground`는 `Section`/`ForEach`처럼 여러 행을 만들어내는
+            // 컨테이너에 적용하면 그 안의 모든 행에 전파된다(Apple 표준 동작 —
+            // `WordNoteHomeView`에서는 행이 하나뿐이라 행에 직접 적용했지만,
+            // 여기서는 같은 효과를 Section 단위로 적용한다).
+            .listRowBackground(Color.clear)
+
+            // [2026-08-20 신설, 2026-08-20 재수정 Phase 5] 일반 검색 결과 목록
+            // 보다 먼저 보여준다 — 관계/인물·지명 정보/예언/주제·속성/서사
+            // 카드가 "정답에 더 가까운 안내"이므로 우선 노출한다.
+            // `viewModel.intentCard`가 nil이면 이 Section 자체가 안 그려지는데,
+            // Phase 5부터는 `.general`로 분류되거나 참고 DB를 못 연 경우뿐
+            // 아니라 **AI 검색 토글이 꺼져 있을 때도 항상 nil**이다 — 사용자
+            // 요청("단순 키워드 검색시엔 순수 키워드 검색결과만, 관계정보는
+            // AI 토글을 켰을 때만")에 따라 `SearchViewModel.performSearch`가
+            // 키워드 검색 모드에선 이 카드를 아예 계산하지 않는다.
+            if let intentCard = viewModel.intentCard {
+                intentCardSection(intentCard)
+            }
+
+            if viewModel.query.trimmingCharacters(in: .whitespaces).isEmpty {
+                // [2026-09-04 신설] 사용자 요청 — "아이폰에서의 검색이력을
+                // 하단 [통합검색] 기능을 누른 직후에 볼 수 있도록. (현재는
+                // 검색창에 포커스가 들어올때 검색이력이 보임)" 아래
+                // `.searchSuggestions`는 검색창이 실제로 포커스를 받아야만
+                // (iOS 네이티브 동작) 나타나는데, 사용자가 원하는 건 "탭을
+                // 누른 직후"(아직 검색창을 탭하기 전)에도 바로 보이는
+                // 것이다 — 그래서 아이폰만 이 List 본문 자체에 같은 내용을
+                // 한 번 더(포커스 여부와 무관하게) 넣는다. macOS/iPadOS는
+                // 이번 요청이 "아이폰에서의"로 범위가 한정돼 있어 그대로
+                // `.searchSuggestions`(포커스 시에만) 하나만 쓴다 — 그래서
+                // 아래 `.searchSuggestions`도 아이폰일 때는 끈다(안 그러면
+                // 아이폰에서 포커스 중엔 이 목록이 두 번 겹쳐 보인다).
+                if isPhoneIdiom {
+                    recentSearchesSection
+                }
+            } else if !isInlineCardDisplayActive {
+                resultsSection
+            }
+        }
+        .listStyle(.plain)
+        .scrollContentBackground(.hidden)
+        .background(settings.bibleBackgroundColor ?? Color.clear)
+        .foregroundStyle(settings.bibleTextColor ?? Color.primary)
+        .listRowSeparatorTint(JBCHCategoryPalette.wood.opacity(0.3))
+    }
+
+    /// [2026-09-16 신설] 맥/아이패드 전용 — AI 카드(관계/인물/주제)가 항목을
+    /// 여러 개 찾았을 때, 참고 목업("인물·주제 상세 화면")의 `.split-search`
+    /// 그리드처럼 왼쪽에 목록, 오른쪽에 선택된 항목의 상세를 나란히
+    /// 보여준다. 아직 아무것도 선택하지 않았으면 오른쪽엔 안내 문구만
+    /// 보여준다(자동으로 첫 항목을 골라주지 않는다 — 사용자에게 확인하지
+    /// 않은 채 임의로 하나를 고르는 것을 피했다). `.searchable`/`.toolbar`
+    /// 등 화면 공통 모디파이어는 `body`의 `Group`에 그대로 남아 있으므로
+    /// (검색창/AI 토글은 이 레이아웃에서도 동일하게 동작), 여기서는 결과
+    /// 콘텐츠만 그린다.
+    ///
+    /// ⚠️ [미검증] 이 세션엔 Xcode가 없어 컴파일 확인을 못 했다 — `List`
+    /// 두 개를 `HStack`으로 나란히 두는 구성이 실기기 빌드로 확인이 필요하다.
+    @ViewBuilder
+    private func macSplitCardLayout(intent: QueryIntentClassifier.Intent, kind: InlineCardKind) -> some View {
+        let meta = intentSectionMeta(intent)
+        HStack(spacing: 0) {
+            List {
+                cardSectionWrapper(meta, count: kind.count) {
+                    ForEach(0..<kind.count, id: \.self) { index in
+                        inlineCardRow(kind, index: index) {
+                            viewModel.aiCardSelectedIndex = index
+                        }
+                    }
+                }
+            }
+            .listStyle(.plain)
+            .scrollContentBackground(.hidden)
+            .background(settings.bibleBackgroundColor ?? Color.clear)
+            .foregroundStyle(settings.bibleTextColor ?? Color.primary)
+            .listRowSeparatorTint(JBCHCategoryPalette.wood.opacity(0.3))
+            .frame(minWidth: 260, idealWidth: 320, maxWidth: 380)
+
+            Divider()
+
+            Group {
+                if let selected = viewModel.aiCardSelectedIndex, selected < kind.count {
+                    List {
+                        inlineCardDetail(kind, index: selected)
+                    }
+                    .listStyle(.plain)
+                    .scrollContentBackground(.hidden)
+                    .background(settings.bibleBackgroundColor ?? Color.clear)
+                    .foregroundStyle(settings.bibleTextColor ?? Color.primary)
+                    .listRowSeparatorTint(JBCHCategoryPalette.wood.opacity(0.3))
+                } else {
+                    VStack(spacing: 8) {
+                        Spacer()
+                        Image(systemName: meta.icon)
+                            .font(.largeTitle)
+                            .foregroundStyle(.tertiary)
+                        Text("왼쪽 목록에서 항목을 선택하세요")
+                            .font(.subheadline)
+                            .foregroundStyle(.secondary)
+                        Spacer()
+                    }
+                    .frame(maxWidth: .infinity, maxHeight: .infinity)
+                }
+            }
+        }
+    }
+
     // MARK: - 질의 의도 카드 (관계/인물·지명 정보/예언/주제·속성/서사, 2026-08-20 신설)
     //
     // [2026-08-20 신설] `QueryIntentClassifier`+`QueryIntentHandler`(Services/
@@ -862,6 +1063,13 @@ private struct SearchContentView: View {
     // 전부 스키마만 있고 0건) 안내 문구만 뜨고, 그 아래 일반 검색은 항상 그대로
     // 나온다 — 이 카드가 오분류되거나 데이터가 없어도 검색 자체가 막히지
     // 않는다는 3계층 구조의 안전장치를 그대로 반영한다.
+    //
+    // [2026-09-16 재작성] 관계/인물/주제(`InlineCardKind`)는 더 이상 이 카드
+    // 아래 일반 검색이 함께 나오지 않는다 — 위 `isInlineCardDisplayActive`
+    // 참고. 항목이 1개면 바로 상세, 여러 개면 목록(탭하면 상세로 전환) —
+    // 아이폰은 이 Section 안에서 전환하고, 맥/아이패드는 항목이 여러 개일 때
+    // `body`가 아예 `macSplitCardLayout`으로 갈아탄다(이 함수는 그 경우
+    // 호출되지 않는다).
     //
     // ⚠️ [미검증] 이 세션엔 Xcode가 없어 컴파일 확인을 못 했다 — 아이콘(SF
     // Symbol)도 실제 렌더링을 미리보기하지 못한 채 이름만으로 골랐다(전부
@@ -872,9 +1080,9 @@ private struct SearchContentView: View {
     @ViewBuilder
     private func intentCardSection(_ card: QueryIntentCard) -> some View {
         let meta = intentSectionMeta(card.intent)
-        Section {
-            switch card.status {
-            case .notReady(let message):
+        switch card.status {
+        case .notReady(let message):
+            cardSectionWrapper(meta, count: card.foundCount) {
                 HStack(alignment: .top, spacing: 6) {
                     Image(systemName: "info.circle")
                     Text(message)
@@ -882,13 +1090,42 @@ private struct SearchContentView: View {
                 .font(.subheadline)
                 .foregroundStyle(.secondary)
                 .padding(.vertical, 4)
-            case .found(let content):
-                intentContentRows(content)
             }
-        } header: {
-            sectionHeader(meta.title, icon: meta.icon, color: meta.color, count: card.foundCount)
+        case .found(let content):
+            if let kind = inlineCardKind(for: content) {
+                if kind.count == 1 {
+                    cardSectionWrapper(meta, count: 1, showHeader: false) {
+                        inlineCardDetail(kind, index: 0)
+                    }
+                } else if let selected = viewModel.aiCardSelectedIndex, selected < kind.count {
+                    cardSectionWrapper(meta, count: kind.count, showHeader: false) {
+                        Button {
+                            viewModel.aiCardSelectedIndex = nil
+                        } label: {
+                            Label("목록으로", systemImage: "chevron.left")
+                                .font(.subheadline.weight(.semibold))
+                        }
+                        .buttonStyle(.plain)
+                        .foregroundStyle(settings.bibleTextColor ?? .primary)
+                        .padding(.vertical, 2)
+
+                        inlineCardDetail(kind, index: selected)
+                    }
+                } else {
+                    cardSectionWrapper(meta, count: kind.count) {
+                        ForEach(0..<kind.count, id: \.self) { index in
+                            inlineCardRow(kind, index: index) {
+                                viewModel.aiCardSelectedIndex = index
+                            }
+                        }
+                    }
+                }
+            } else {
+                cardSectionWrapper(meta, count: card.foundCount) {
+                    intentContentRows(content)
+                }
+            }
         }
-        .listRowBackground(Color.clear)
     }
 
     // [2026-09-10 재수정] 사용자 요청 — "검색 결과에 나오는 아이콘
@@ -905,7 +1142,7 @@ private struct SearchContentView: View {
         let themeColor = settings.bibleTextColor ?? .primary
         switch intent {
         case .relation: return ("관계 정보", "person.2.fill", themeColor)
-        case .personOrPlaceInfo: return ("인물·지명 정보", "person.crop.circle.fill", themeColor)
+        case .personProfile: return ("인물 정보", "person.crop.circle.fill", themeColor)  // [2026-09-15] personOrPlaceInfo 대체, 장소 미포함
         case .prophecy: return ("예언", "scroll.fill", themeColor)
         case .themeOrAttribute: return ("주제·속성", "lightbulb.fill", themeColor)
         case .narrative: return ("서사·흐름", "list.number", themeColor)
@@ -913,24 +1150,20 @@ private struct SearchContentView: View {
         }
     }
 
+    // [2026-09-16 재작성] 관계/인물/주제는 이제 `intentCardSection`이 위
+    // `inlineCardKind` 경로로 먼저 처리하므로 이 함수까지 오지 않는다(예언/
+    // 서사만 실제로 도달) — `Content`가 5개 케이스인 열거형이라 switch는
+    // 그래도 전부 다뤄야 한다. 예언/서사는 데이터가 없어 항상 `.notReady`
+    // (`QueryIntentHandler.swift` 상단 주석)라 이 두 케이스도 현재는
+    // 실질적으로 실행되지 않는다 — 나중에 데이터가 채워지면 그대로 살아난다.
     @ViewBuilder
     private func intentContentRows(_ content: QueryIntentCard.Content) -> some View {
         switch content {
-        case .relation(let items):
-            ForEach(Array(items.enumerated()), id: \.offset) { _, item in
-                relationRow(item)
-            }
-        case .personOrPlace(let entities):
-            ForEach(Array(entities.enumerated()), id: \.offset) { _, entity in
-                personOrPlaceRow(entity)
-            }
+        case .relation, .personProfile, .theme:
+            EmptyView()
         case .prophecy(let prophecies):
             ForEach(Array(prophecies.enumerated()), id: \.offset) { _, prophecy in
                 prophecyRow(prophecy)
-            }
-        case .theme(let themes):
-            ForEach(Array(themes.enumerated()), id: \.offset) { _, theme in
-                themeRow(theme)
             }
         case .narrative(let groups):
             ForEach(groups) { group in
@@ -941,19 +1174,15 @@ private struct SearchContentView: View {
 
     // MARK: - 관계 행
 
-    /// [2026-08-20 신설, Phase 4 — 2026-08-20 재수정, Phase 5] Phase 4에선 이
-    /// 행이 `item.verseRefs.first`로 이동하는 `NavigationLink`였다("다윗의
-    /// 아들들은?" 카드 아래 성경 구절이 관계와 무관하다는 리포트에 대한 수정,
-    /// `RelationDisplayItem` 주석 참고). Phase 5에서 사용자가 실사용 후 요청을
-    /// 바꿨다 — "클릭했을때 구절 이동 하지말고, 아래 성경구절로 표시될 수
-    /// 있도록." 이제 이 관계 카드의 좌표들은 `QueryIntentCard.verseRefs`를
-    /// 통해 "성경구절" 섹션 자체에 이미 나열되므로(`SearchViewModel.
-    /// performAIQuerySearch` 참고), 관계 행은 그 목록을 다시 가리키는
-    /// 내비게이션을 따로 둘 필요가 없다 — 텍스트 행으로 되돌렸다.
-    private func relationRow(_ item: RelationDisplayItem) -> some View {
-        relationLabel(item)
-    }
-
+    /// [2026-08-20 신설, Phase 4 — 2026-08-20 재수정, Phase 5 — 2026-09-16
+    /// 재작성] Phase 4에선 이 행이 `item.verseRefs.first`로 이동하는
+    /// `NavigationLink`였고, Phase 5에서는 좌표가 "성경구절" 섹션에 이미
+    /// 나열된다는 이유로 아예 이동하지 않는 텍스트 행이었다. 2026-09-16
+    /// 사용자 피드백으로 그 "성경구절" 섹션 자체가 카드가 뜬 상태에서는
+    /// 보이지 않게 되면서, 관계 행이 가리키는 좌표를 볼 방법이 없어졌다 —
+    /// 이제 다시 탭 가능한 행이 되지만, push 대신 `viewModel.
+    /// aiCardSelectedIndex`로 이 화면 안에서 `RelationDetailView`(문장 + 관련
+    /// 성경구절 칩)로 전환한다(`intentCardSection`/`inlineCardRow` 참고).
     private func relationLabel(_ item: RelationDisplayItem) -> some View {
         rowLabel(
             icon: "person.2.fill", iconColor: settings.bibleTextColor ?? .primary,
@@ -964,32 +1193,19 @@ private struct SearchContentView: View {
 
     // MARK: - 인물·지명 정보 행
 
-    private func personOrPlaceRow(_ entity: ReferenceEntity) -> some View {
-        Group {
-            if let first = entity.verseRefs.first {
-                bibleVerseRow(BibleVerseDestination(
-                    bookId: first.bookId, chapter: first.chapter, verse: first.verse
-                )) {
-                    personOrPlaceLabel(entity)
-                }
-            } else {
-                personOrPlaceLabel(entity)
-            }
-        }
-    }
-
-    private func personOrPlaceLabel(_ entity: ReferenceEntity) -> some View {
-        // [2026-08-20 갱신, 2026-08-21 주석만 갱신] 화면 표시는 데이터 분석
-        // 전용이던 description(수기로 간결하게 다듬어짐, 2026-08-21에 이
-        // 값 타입에서 아예 제거됨) 대신 `entityRemark`(화면 출력용, 수기
-        // 편집 이전의 원문 서술)를 쓴다 — 사용자 요청, `ReferenceEntity.swift`
-        // 주석 참고.
+    // [2026-09-15 갱신] `ReferenceEntity`(5컬럼 고정) 대신 `PersonEntity`
+    // (13개 보강 컬럼 + 관계 리스트, `personOrPlaceInfo` 대체)를 받는다.
+    // 장소 분기(`entity.kind == .place`)는 삭제했다 — `PersonEntity`는
+    // 항상 인물이라 아이콘을 고정한다(10차 문서 확정, 장소 미노출).
+    //
+    // [2026-09-16 재작성] 탭하면 `PersonDetailView`로 push하던 동작
+    // (2026-09-15)을 되돌렸다 — 사용자 피드백("통합검색 페이지 자체가
+    // 바뀌어야 한다")에 따라 이제 `viewModel.aiCardSelectedIndex`로 이
+    // 화면 안에서 상세로 전환한다(`intentCardSection`/`inlineCardRow` 참고).
+    // 성경 구절 이동은 여전히 상세 안의 "관련 성경구절" 칩이 담당한다.
+    private func personOrPlaceLabel(_ entity: PersonEntity) -> some View {
         rowLabel(
-            icon: entity.kind == .person ? "person.crop.circle.fill" : "location.fill",
-            // [2026-09-10 수정] 사용자 요청 — "아이콘 색상은 테마 글자
-            // 색상에 맞출것." 인물/지명 구분은 위 icon(person.crop.circle.fill
-            // vs location.fill) 모양이 이미 전담하므로 색까지 나눌 필요가
-            // 없어 테마 글자색 하나로 통일했다.
+            icon: "person.crop.circle.fill",
             iconColor: settings.bibleTextColor ?? .primary,
             title: entity.word,
             excerptText: entity.entityRemark
@@ -1025,20 +1241,9 @@ private struct SearchContentView: View {
 
     // MARK: - 주제·속성 행
 
-    private func themeRow(_ theme: ThemeRecord) -> some View {
-        Group {
-            if let first = theme.verseRefs.first {
-                bibleVerseRow(BibleVerseDestination(
-                    bookId: first.bookId, chapter: first.chapter, verse: first.verse
-                )) {
-                    themeLabel(theme)
-                }
-            } else {
-                themeLabel(theme)
-            }
-        }
-    }
-
+    // [2026-09-16 재작성] 위 `personOrPlaceLabel`과 같은 이유 — 탭하면
+    // `ThemeDetailView`로 push하던 동작(2026-09-15)을 되돌리고 이 화면 안
+    // 상태 전환으로 바꿨다.
     private func themeLabel(_ theme: ThemeRecord) -> some View {
         rowLabel(
             icon: "lightbulb.fill", iconColor: settings.bibleTextColor ?? .primary,
@@ -1490,6 +1695,7 @@ private struct SearchContentView: View {
             .overlay(Capsule().strokeBorder(borderColor, lineWidth: 1.4))
         }
         .buttonStyle(.plain)
+        .contentShape(Rectangle())
     }
 
     /// [2026-09-10 신설] 위 `mainResultTabButton`에 넣을 탭별 총 일치 개수.
@@ -1527,6 +1733,7 @@ private struct SearchContentView: View {
                 .overlay(Capsule().strokeBorder(borderColor, lineWidth: 1.2))
         }
         .buttonStyle(.plain)
+        .contentShape(Rectangle())
     }
 
     private func emptyRow(_ text: String = "결과 없음") -> some View {
@@ -1846,8 +2053,21 @@ private struct SearchContentView: View {
                     bookId: result.bookId, chapter: result.chapter, verse: result.verse
                 )
             } label: {
-                Text(verseExcerptAttributedString(result))
-                    .lineLimit(2)
+                // [2026-09-16 수정] 사용자 요청 - "관련 성경구절의 스타일
+                // 조정 (절 영역 만큼 들여쓰기) 할것. (AI 검색이 아닌 성경구절
+                // 통합검색 결과페이지에도 동일 적용)." "N절) 본문"을 하나의
+                // `AttributedString`/`Text`로 합치면 본문이 줄바꿈될 때
+                // 둘째 줄부터 맨 왼쪽까지 붙는다 - `PersonDetailView.
+                // verseReferenceRow`와 같은 방식(접두어/본문을 별도 `Text`로
+                // `HStack(alignment: .top)`에 나란히 둬 본문 칸 자체를
+                // 접두어 폭만큼 오른쪽으로 미는 "매달린 들여쓰기" 우회법)
+                // 으로 맞췄다.
+                HStack(alignment: .top, spacing: 0) {
+                    Text(versePrefixAttributedString(result))
+                        .fixedSize()
+                    Text(verseBodyAttributedString(result))
+                }
+                .lineLimit(2)
             }
             .buttonStyle(.plain)
             if result.isReferenceMatch {
@@ -1956,7 +2176,10 @@ private struct SearchContentView: View {
     /// .foregroundStyle(.secondary)` 호출부 참고). "N절)" 접두어는 이번에
     /// 새로 추가된 요소라 "이전 스타일"의 대상이 아니므로 굵게(semibold) 그대로
     /// 두되, 장 헤더와 마찬가지로 기본(primary) 색을 명시해 톤을 분명히 했다.
-    private func verseExcerptAttributedString(_ result: VerseSearchResult) -> AttributedString {
+    // [2026-09-16 재작성] 위 `groupedVerseRow` 주석 참고 - 들여쓰기를 위해
+    // 접두어/본문을 별도 `Text`로 그려야 해서, 하나로 합쳐 돌려주던 이
+    // 함수를 둘로 나눴다. 각 부분의 폰트/색 값 자체는 전혀 바뀌지 않았다.
+    private func versePrefixAttributedString(_ result: VerseSearchResult) -> AttributedString {
         var prefix = AttributedString("\(result.verse)절) ")
         prefix.font = .system(size: 15, weight: .semibold)
         // [2026-09-10 수정] 사용자 보고 — "본문 텍스트 색상이 흰색 또는
@@ -1968,10 +2191,14 @@ private struct SearchContentView: View {
         // 안내문(같은 날 먼저 고친, 반대 방향 증상 — 어두운 회색 고정이라
         // 어두운 배경에서 안 보임) 사례와 근본 원인이 같다.
         prefix.foregroundColor = settings.bibleTextColor ?? .primary
+        return prefix
+    }
+
+    private func verseBodyAttributedString(_ result: VerseSearchResult) -> AttributedString {
         var body = highlightedAttributedString(result.content, keywords: result.highlightKeywords)
         body.font = .system(size: 15)
         body.foregroundColor = settings.bibleTextColor?.opacity(0.75) ?? .secondary
-        return prefix + body
+        return body
     }
 
     /// "각 절마다 몇 개 매칭되었는지 오른쪽 끝" 배지 — `occurrenceChip`(다른

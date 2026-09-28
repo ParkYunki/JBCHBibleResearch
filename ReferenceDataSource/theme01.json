@@ -1,0 +1,1592 @@
+[
+  {
+    "id": 1,
+    "title": "성경에 대하여",
+    "references": [
+      {
+        "book": 5,
+        "chapter": 17,
+        "start": 19,
+        "end": 19
+      },
+      {
+        "book": 23,
+        "chapter": 34,
+        "start": 16,
+        "end": 16
+      },
+      {
+        "book": 19,
+        "chapter": 119,
+        "start": 9,
+        "end": 9
+      },
+      {
+        "book": 19,
+        "chapter": 119,
+        "start": 11,
+        "end": 11
+      },
+      {
+        "book": 40,
+        "chapter": 4,
+        "start": 4,
+        "end": 4
+      },
+      {
+        "book": 43,
+        "chapter": 1,
+        "start": 1,
+        "end": 1
+      },
+      {
+        "book": 43,
+        "chapter": 5,
+        "start": 39,
+        "end": 39
+      },
+      {
+        "book": 45,
+        "chapter": 10,
+        "start": 17,
+        "end": 17
+      },
+      {
+        "book": 50,
+        "chapter": 2,
+        "start": 16,
+        "end": 16
+      },
+      {
+        "book": 55,
+        "chapter": 3,
+        "start": 16,
+        "end": 17
+      },
+      {
+        "book": 61,
+        "chapter": 3,
+        "start": 16,
+        "end": 16
+      },
+      {
+        "book": 61,
+        "chapter": 1,
+        "start": 20,
+        "end": 21
+      },
+      {
+        "book": 66,
+        "chapter": 22,
+        "start": 18,
+        "end": 19
+      }
+    ]
+  },
+  {
+    "id": 2,
+    "title": "하나님에 대하여",
+    "references": [
+      {
+        "book": 4,
+        "chapter": 23,
+        "start": 19,
+        "end": 19
+      },
+      {
+        "book": 11,
+        "chapter": 8,
+        "start": 39,
+        "end": 39
+      },
+      {
+        "book": 23,
+        "chapter": 40,
+        "start": 26,
+        "end": 26
+      },
+      {
+        "book": 23,
+        "chapter": 45,
+        "start": 18,
+        "end": 18
+      },
+      {
+        "book": 16,
+        "chapter": 9,
+        "start": 6,
+        "end": 6
+      },
+      {
+        "book": 18,
+        "chapter": 11,
+        "start": 7,
+        "end": 9
+      },
+      {
+        "book": 44,
+        "chapter": 17,
+        "start": 24,
+        "end": 25
+      },
+      {
+        "book": 54,
+        "chapter": 6,
+        "start": 15,
+        "end": 16
+      },
+      {
+        "book": 62,
+        "chapter": 1,
+        "start": 5,
+        "end": 5
+      },
+      {
+        "book": 62,
+        "chapter": 4,
+        "start": 16,
+        "end": 16
+      }
+    ]
+  },
+  {
+    "id": 3,
+    "title": "그리스도에 대하여",
+    "references": [
+      {
+        "book": 41,
+        "chapter": 10,
+        "start": 45,
+        "end": 45
+      },
+      {
+        "book": 44,
+        "chapter": 10,
+        "start": 43,
+        "end": 43
+      },
+      {
+        "book": 45,
+        "chapter": 1,
+        "start": 3,
+        "end": 4
+      },
+      {
+        "book": 23,
+        "chapter": 7,
+        "start": 14,
+        "end": 14
+      },
+      {
+        "book": 23,
+        "chapter": 9,
+        "start": 6,
+        "end": 6
+      },
+      {
+        "book": 42,
+        "chapter": 1,
+        "start": 35,
+        "end": 35
+      },
+      {
+        "book": 47,
+        "chapter": 5,
+        "start": 21,
+        "end": 21
+      },
+      {
+        "book": 58,
+        "chapter": 7,
+        "start": 24,
+        "end": 25
+      },
+      {
+        "book": 43,
+        "chapter": 14,
+        "start": 6,
+        "end": 6
+      },
+      {
+        "book": 58,
+        "chapter": 9,
+        "start": 28,
+        "end": 28
+      },
+      {
+        "book": 44,
+        "chapter": 13,
+        "start": 38,
+        "end": 39
+      }
+    ]
+  },
+  {
+    "id": 4,
+    "title": "인생에 대하여",
+    "references": [
+      {
+        "book": 18,
+        "chapter": 25,
+        "start": 4,
+        "end": 6
+      },
+      {
+        "book": 19,
+        "chapter": 39,
+        "start": 4,
+        "end": 5
+      },
+      {
+        "book": 19,
+        "chapter": 90,
+        "start": 3,
+        "end": 4
+      },
+      {
+        "book": 19,
+        "chapter": 90,
+        "start": 10,
+        "end": 10
+      },
+      {
+        "book": 19,
+        "chapter": 144,
+        "start": 3,
+        "end": 4
+      },
+      {
+        "book": 21,
+        "chapter": 5,
+        "start": 15,
+        "end": 16
+      },
+      {
+        "book": 59,
+        "chapter": 4,
+        "start": 14,
+        "end": 14
+      },
+      {
+        "book": 19,
+        "chapter": 14,
+        "start": 1,
+        "end": 1
+      },
+      {
+        "book": 21,
+        "chapter": 1,
+        "start": 2,
+        "end": 4
+      },
+      {
+        "book": 59,
+        "chapter": 1,
+        "start": 9,
+        "end": 10
+      },
+      {
+        "book": 20,
+        "chapter": 27,
+        "start": 1,
+        "end": 1
+      }
+    ]
+  },
+  {
+    "id": 5,
+    "title": "영혼에 대하여",
+    "references": [
+      {
+        "book": 18,
+        "chapter": 19,
+        "start": 26,
+        "end": 26
+      },
+      {
+        "book": 1,
+        "chapter": 2,
+        "start": 7,
+        "end": 7
+      },
+      {
+        "book": 23,
+        "chapter": 57,
+        "start": 16,
+        "end": 16
+      },
+      {
+        "book": 42,
+        "chapter": 12,
+        "start": 20,
+        "end": 21
+      },
+      {
+        "book": 21,
+        "chapter": 3,
+        "start": 11,
+        "end": 11
+      },
+      {
+        "book": 59,
+        "chapter": 2,
+        "start": 26,
+        "end": 26
+      },
+      {
+        "book": 21,
+        "chapter": 3,
+        "start": 20,
+        "end": 21
+      },
+      {
+        "book": 44,
+        "chapter": 7,
+        "start": 59,
+        "end": 60
+      },
+      {
+        "book": 26,
+        "chapter": 18,
+        "start": 4,
+        "end": 4
+      },
+      {
+        "book": 40,
+        "chapter": 10,
+        "start": 28,
+        "end": 28
+      },
+      {
+        "book": 21,
+        "chapter": 2,
+        "start": 24,
+        "end": 24
+      }
+    ]
+  },
+  {
+    "id": 6,
+    "title": "죄에 대하여",
+    "references": [
+      {
+        "book": 18,
+        "chapter": 15,
+        "start": 14,
+        "end": 16
+      },
+      {
+        "book": 19,
+        "chapter": 38,
+        "start": 3,
+        "end": 4
+      },
+      {
+        "book": 19,
+        "chapter": 51,
+        "start": 5,
+        "end": 5
+      },
+      {
+        "book": 20,
+        "chapter": 30,
+        "start": 12,
+        "end": 12
+      },
+      {
+        "book": 21,
+        "chapter": 9,
+        "start": 3,
+        "end": 3
+      },
+      {
+        "book": 23,
+        "chapter": 59,
+        "start": 1,
+        "end": 3
+      },
+      {
+        "book": 59,
+        "chapter": 2,
+        "start": 9,
+        "end": 10
+      },
+      {
+        "book": 24,
+        "chapter": 17,
+        "start": 9,
+        "end": 10
+      },
+      {
+        "book": 62,
+        "chapter": 2,
+        "start": 15,
+        "end": 16
+      },
+      {
+        "book": 62,
+        "chapter": 3,
+        "start": 8,
+        "end": 8
+      },
+      {
+        "book": 24,
+        "chapter": 2,
+        "start": 22,
+        "end": 22
+      },
+      {
+        "book": 24,
+        "chapter": 2,
+        "start": 35,
+        "end": 35
+      },
+      {
+        "book": 45,
+        "chapter": 3,
+        "start": 10,
+        "end": 12
+      },
+      {
+        "book": 18,
+        "chapter": 13,
+        "start": 26,
+        "end": 28
+      },
+      {
+        "book": 23,
+        "chapter": 64,
+        "start": 6,
+        "end": 6
+      }
+    ]
+  },
+  {
+    "id": 7,
+    "title": "심판에 대하여",
+    "references": [
+      {
+        "book": 21,
+        "chapter": 11,
+        "start": 9,
+        "end": 9
+      },
+      {
+        "book": 40,
+        "chapter": 3,
+        "start": 12,
+        "end": 12
+      },
+      {
+        "book": 44,
+        "chapter": 17,
+        "start": 30,
+        "end": 31
+      },
+      {
+        "book": 45,
+        "chapter": 14,
+        "start": 11,
+        "end": 12
+      },
+      {
+        "book": 40,
+        "chapter": 12,
+        "start": 36,
+        "end": 37
+      },
+      {
+        "book": 58,
+        "chapter": 4,
+        "start": 13,
+        "end": 13
+      },
+      {
+        "book": 58,
+        "chapter": 9,
+        "start": 27,
+        "end": 28
+      },
+      {
+        "book": 45,
+        "chapter": 2,
+        "start": 6,
+        "end": 8
+      },
+      {
+        "book": 66,
+        "chapter": 22,
+        "start": 10,
+        "end": 13
+      },
+      {
+        "book": 53,
+        "chapter": 2,
+        "start": 10,
+        "end": 12
+      }
+    ]
+  },
+  {
+    "id": 8,
+    "title": "율법에 대하여",
+    "references": [
+      {
+        "book": 18,
+        "chapter": 22,
+        "start": 2,
+        "end": 3
+      },
+      {
+        "book": 45,
+        "chapter": 3,
+        "start": 28,
+        "end": 28
+      },
+      {
+        "book": 45,
+        "chapter": 7,
+        "start": 7,
+        "end": 7
+      },
+      {
+        "book": 48,
+        "chapter": 2,
+        "start": 21,
+        "end": 21
+      },
+      {
+        "book": 48,
+        "chapter": 5,
+        "start": 1,
+        "end": 1
+      },
+      {
+        "book": 58,
+        "chapter": 10,
+        "start": 1,
+        "end": 1
+      },
+      {
+        "book": 59,
+        "chapter": 2,
+        "start": 10,
+        "end": 11
+      },
+      {
+        "book": 48,
+        "chapter": 2,
+        "start": 16,
+        "end": 16
+      },
+      {
+        "book": 48,
+        "chapter": 4,
+        "start": 9,
+        "end": 11
+      },
+      {
+        "book": 48,
+        "chapter": 3,
+        "start": 19,
+        "end": 19
+      },
+      {
+        "book": 45,
+        "chapter": 3,
+        "start": 20,
+        "end": 20
+      },
+      {
+        "book": 48,
+        "chapter": 5,
+        "start": 4,
+        "end": 4
+      }
+    ]
+  },
+  {
+    "id": 9,
+    "title": "속죄에 대하여",
+    "references": [
+      {
+        "book": 2,
+        "chapter": 12,
+        "start": 13,
+        "end": 13
+      },
+      {
+        "book": 3,
+        "chapter": 17,
+        "start": 11,
+        "end": 11
+      },
+      {
+        "book": 23,
+        "chapter": 1,
+        "start": 18,
+        "end": 18
+      },
+      {
+        "book": 23,
+        "chapter": 38,
+        "start": 17,
+        "end": 17
+      },
+      {
+        "book": 23,
+        "chapter": 43,
+        "start": 25,
+        "end": 25
+      },
+      {
+        "book": 23,
+        "chapter": 44,
+        "start": 22,
+        "end": 22
+      },
+      {
+        "book": 23,
+        "chapter": 53,
+        "start": 5,
+        "end": 6
+      },
+      {
+        "book": 33,
+        "chapter": 7,
+        "start": 19,
+        "end": 19
+      },
+      {
+        "book": 47,
+        "chapter": 5,
+        "start": 21,
+        "end": 21
+      },
+      {
+        "book": 51,
+        "chapter": 1,
+        "start": 13,
+        "end": 14
+      },
+      {
+        "book": 58,
+        "chapter": 1,
+        "start": 3,
+        "end": 3
+      },
+      {
+        "book": 58,
+        "chapter": 9,
+        "start": 12,
+        "end": 12
+      },
+      {
+        "book": 60,
+        "chapter": 2,
+        "start": 24,
+        "end": 25
+      },
+      {
+        "book": 58,
+        "chapter": 9,
+        "start": 25,
+        "end": 26
+      },
+      {
+        "book": 58,
+        "chapter": 10,
+        "start": 17,
+        "end": 18
+      }
+    ]
+  },
+  {
+    "id": 10,
+    "title": "의에 대하여",
+    "references": [
+      {
+        "book": 18,
+        "chapter": 35,
+        "start": 7,
+        "end": 8
+      },
+      {
+        "book": 23,
+        "chapter": 64,
+        "start": 6,
+        "end": 6
+      },
+      {
+        "book": 45,
+        "chapter": 3,
+        "start": 23,
+        "end": 24
+      },
+      {
+        "book": 45,
+        "chapter": 4,
+        "start": 25,
+        "end": 25
+      },
+      {
+        "book": 45,
+        "chapter": 5,
+        "start": 1,
+        "end": 1
+      },
+      {
+        "book": 45,
+        "chapter": 5,
+        "start": 18,
+        "end": 19
+      },
+      {
+        "book": 45,
+        "chapter": 10,
+        "start": 3,
+        "end": 4
+      },
+      {
+        "book": 46,
+        "chapter": 1,
+        "start": 30,
+        "end": 30
+      },
+      {
+        "book": 48,
+        "chapter": 3,
+        "start": 10,
+        "end": 11
+      },
+      {
+        "book": 19,
+        "chapter": 118,
+        "start": 19,
+        "end": 20
+      },
+      {
+        "book": 50,
+        "chapter": 3,
+        "start": 9,
+        "end": 9
+      }
+    ]
+  },
+  {
+    "id": 11,
+    "title": "구원에 대하여",
+    "references": [
+      {
+        "book": 19,
+        "chapter": 34,
+        "start": 18,
+        "end": 19
+      },
+      {
+        "book": 44,
+        "chapter": 4,
+        "start": 12,
+        "end": 12
+      },
+      {
+        "book": 46,
+        "chapter": 1,
+        "start": 18,
+        "end": 18
+      },
+      {
+        "book": 58,
+        "chapter": 2,
+        "start": 3,
+        "end": 4
+      },
+      {
+        "book": 49,
+        "chapter": 2,
+        "start": 8,
+        "end": 9
+      },
+      {
+        "book": 51,
+        "chapter": 1,
+        "start": 6,
+        "end": 6
+      },
+      {
+        "book": 54,
+        "chapter": 1,
+        "start": 15,
+        "end": 15
+      },
+      {
+        "book": 56,
+        "chapter": 3,
+        "start": 4,
+        "end": 5
+      },
+      {
+        "book": 60,
+        "chapter": 1,
+        "start": 8,
+        "end": 9
+      },
+      {
+        "book": 60,
+        "chapter": 1,
+        "start": 23,
+        "end": 23
+      },
+      {
+        "book": 54,
+        "chapter": 2,
+        "start": 4,
+        "end": 4
+      }
+    ]
+  },
+  {
+    "id": 12,
+    "title": "영생에 대하여",
+    "references": [
+      {
+        "book": 27,
+        "chapter": 12,
+        "start": 2,
+        "end": 3
+      },
+      {
+        "book": 40,
+        "chapter": 7,
+        "start": 13,
+        "end": 14
+      },
+      {
+        "book": 43,
+        "chapter": 3,
+        "start": 16,
+        "end": 16
+      },
+      {
+        "book": 43,
+        "chapter": 5,
+        "start": 24,
+        "end": 24
+      },
+      {
+        "book": 43,
+        "chapter": 6,
+        "start": 40,
+        "end": 40
+      },
+      {
+        "book": 43,
+        "chapter": 10,
+        "start": 28,
+        "end": 29
+      },
+      {
+        "book": 43,
+        "chapter": 11,
+        "start": 25,
+        "end": 26
+      },
+      {
+        "book": 43,
+        "chapter": 17,
+        "start": 3,
+        "end": 3
+      },
+      {
+        "book": 45,
+        "chapter": 6,
+        "start": 23,
+        "end": 23
+      },
+      {
+        "book": 48,
+        "chapter": 6,
+        "start": 7,
+        "end": 8
+      }
+    ]
+  },
+  {
+    "id": 13,
+    "title": "소망에 대하여",
+    "references": [
+      {
+        "book": 43,
+        "chapter": 14,
+        "start": 1,
+        "end": 3
+      },
+      {
+        "book": 45,
+        "chapter": 5,
+        "start": 5,
+        "end": 6
+      },
+      {
+        "book": 45,
+        "chapter": 8,
+        "start": 22,
+        "end": 23
+      },
+      {
+        "book": 46,
+        "chapter": 9,
+        "start": 25,
+        "end": 25
+      },
+      {
+        "book": 47,
+        "chapter": 4,
+        "start": 17,
+        "end": 18
+      },
+      {
+        "book": 60,
+        "chapter": 1,
+        "start": 3,
+        "end": 4
+      },
+      {
+        "book": 60,
+        "chapter": 3,
+        "start": 15,
+        "end": 16
+      },
+      {
+        "book": 62,
+        "chapter": 3,
+        "start": 1,
+        "end": 3
+      },
+      {
+        "book": 45,
+        "chapter": 15,
+        "start": 4,
+        "end": 4
+      },
+      {
+        "book": 44,
+        "chapter": 24,
+        "start": 15,
+        "end": 15
+      }
+    ]
+  },
+  {
+    "id": 14,
+    "title": "평안에 대하여",
+    "references": [
+      {
+        "book": 43,
+        "chapter": 14,
+        "start": 27,
+        "end": 27
+      },
+      {
+        "book": 40,
+        "chapter": 11,
+        "start": 28,
+        "end": 30
+      },
+      {
+        "book": 20,
+        "chapter": 14,
+        "start": 12,
+        "end": 13
+      },
+      {
+        "book": 19,
+        "chapter": 4,
+        "start": 7,
+        "end": 8
+      },
+      {
+        "book": 45,
+        "chapter": 14,
+        "start": 17,
+        "end": 17
+      },
+      {
+        "book": 51,
+        "chapter": 3,
+        "start": 15,
+        "end": 15
+      },
+      {
+        "book": 19,
+        "chapter": 119,
+        "start": 165,
+        "end": 165
+      },
+      {
+        "book": 21,
+        "chapter": 5,
+        "start": 10,
+        "end": 10
+      }
+    ]
+  },
+  {
+    "id": 15,
+    "title": "성령에 대하여",
+    "references": [
+      {
+        "book": 40,
+        "chapter": 12,
+        "start": 31,
+        "end": 32
+      },
+      {
+        "book": 43,
+        "chapter": 16,
+        "start": 13,
+        "end": 13
+      },
+      {
+        "book": 45,
+        "chapter": 8,
+        "start": 9,
+        "end": 9
+      },
+      {
+        "book": 45,
+        "chapter": 8,
+        "start": 14,
+        "end": 16
+      },
+      {
+        "book": 47,
+        "chapter": 13,
+        "start": 5,
+        "end": 5
+      },
+      {
+        "book": 48,
+        "chapter": 2,
+        "start": 20,
+        "end": 20
+      },
+      {
+        "book": 48,
+        "chapter": 5,
+        "start": 22,
+        "end": 23
+      },
+      {
+        "book": 50,
+        "chapter": 2,
+        "start": 13,
+        "end": 13
+      },
+      {
+        "book": 36,
+        "chapter": 3,
+        "start": 17,
+        "end": 17
+      },
+      {
+        "book": 60,
+        "chapter": 4,
+        "start": 14,
+        "end": 14
+      },
+      {
+        "book": 19,
+        "chapter": 139,
+        "start": 7,
+        "end": 8
+      }
+    ]
+  },
+  {
+    "id": 16,
+    "title": "성결에 대하여",
+    "references": [
+      {
+        "book": 18,
+        "chapter": 7,
+        "start": 17,
+        "end": 19
+      },
+      {
+        "book": 18,
+        "chapter": 23,
+        "start": 10,
+        "end": 10
+      },
+      {
+        "book": 21,
+        "chapter": 5,
+        "start": 2,
+        "end": 2
+      },
+      {
+        "book": 46,
+        "chapter": 6,
+        "start": 11,
+        "end": 11
+      },
+      {
+        "book": 20,
+        "chapter": 3,
+        "start": 5,
+        "end": 6
+      },
+      {
+        "book": 46,
+        "chapter": 10,
+        "start": 13,
+        "end": 13
+      },
+      {
+        "book": 47,
+        "chapter": 7,
+        "start": 1,
+        "end": 1
+      },
+      {
+        "book": 49,
+        "chapter": 5,
+        "start": 25,
+        "end": 27
+      },
+      {
+        "book": 51,
+        "chapter": 3,
+        "start": 9,
+        "end": 10
+      },
+      {
+        "book": 52,
+        "chapter": 5,
+        "start": 23,
+        "end": 23
+      },
+      {
+        "book": 59,
+        "chapter": 3,
+        "start": 17,
+        "end": 18
+      },
+      {
+        "book": 58,
+        "chapter": 12,
+        "start": 6,
+        "end": 6
+      },
+      {
+        "book": 55,
+        "chapter": 2,
+        "start": 20,
+        "end": 21
+      }
+    ]
+  },
+  {
+    "id": 17,
+    "title": "기도에 대하여",
+    "references": [
+      {
+        "book": 19,
+        "chapter": 51,
+        "start": 17,
+        "end": 17
+      },
+      {
+        "book": 19,
+        "chapter": 145,
+        "start": 18,
+        "end": 18
+      },
+      {
+        "book": 24,
+        "chapter": 29,
+        "start": 12,
+        "end": 13
+      },
+      {
+        "book": 24,
+        "chapter": 33,
+        "start": 3,
+        "end": 3
+      },
+      {
+        "book": 40,
+        "chapter": 6,
+        "start": 33,
+        "end": 33
+      },
+      {
+        "book": 43,
+        "chapter": 15,
+        "start": 7,
+        "end": 7
+      },
+      {
+        "book": 45,
+        "chapter": 8,
+        "start": 26,
+        "end": 27
+      },
+      {
+        "book": 50,
+        "chapter": 4,
+        "start": 6,
+        "end": 7
+      },
+      {
+        "book": 51,
+        "chapter": 4,
+        "start": 2,
+        "end": 4
+      },
+      {
+        "book": 54,
+        "chapter": 2,
+        "start": 1,
+        "end": 2
+      },
+      {
+        "book": 43,
+        "chapter": 15,
+        "start": 16,
+        "end": 16
+      },
+      {
+        "book": 62,
+        "chapter": 5,
+        "start": 14,
+        "end": 15
+      },
+      {
+        "book": 59,
+        "chapter": 1,
+        "start": 5,
+        "end": 6
+      },
+      {
+        "book": 40,
+        "chapter": 26,
+        "start": 41,
+        "end": 41
+      },
+      {
+        "book": 59,
+        "chapter": 5,
+        "start": 13,
+        "end": 13
+      },
+      {
+        "book": 23,
+        "chapter": 58,
+        "start": 9,
+        "end": 9
+      },
+      {
+        "book": 51,
+        "chapter": 4,
+        "start": 2,
+        "end": 2
+      },
+      {
+        "book": 36,
+        "chapter": 1,
+        "start": 6,
+        "end": 6
+      },
+      {
+        "book": 23,
+        "chapter": 64,
+        "start": 7,
+        "end": 7
+      },
+      {
+        "book": 42,
+        "chapter": 22,
+        "start": 40,
+        "end": 40
+      }
+    ]
+  },
+  {
+    "id": 18,
+    "title": "교제에 대하여",
+    "references": [
+      {
+        "book": 19,
+        "chapter": 133,
+        "start": 1,
+        "end": 3
+      },
+      {
+        "book": 23,
+        "chapter": 41,
+        "start": 10,
+        "end": 10
+      },
+      {
+        "book": 20,
+        "chapter": 3,
+        "start": 5,
+        "end": 7
+      },
+      {
+        "book": 40,
+        "chapter": 20,
+        "start": 27,
+        "end": 28
+      },
+      {
+        "book": 45,
+        "chapter": 6,
+        "start": 12,
+        "end": 13
+      },
+      {
+        "book": 45,
+        "chapter": 8,
+        "start": 5,
+        "end": 9
+      },
+      {
+        "book": 46,
+        "chapter": 1,
+        "start": 9,
+        "end": 9
+      },
+      {
+        "book": 46,
+        "chapter": 15,
+        "start": 57,
+        "end": 58
+      },
+      {
+        "book": 47,
+        "chapter": 2,
+        "start": 14,
+        "end": 16
+      },
+      {
+        "book": 47,
+        "chapter": 4,
+        "start": 7,
+        "end": 10
+      },
+      {
+        "book": 48,
+        "chapter": 5,
+        "start": 13,
+        "end": 14
+      },
+      {
+        "book": 49,
+        "chapter": 4,
+        "start": 15,
+        "end": 16
+      },
+      {
+        "book": 50,
+        "chapter": 2,
+        "start": 12,
+        "end": 14
+      },
+      {
+        "book": 52,
+        "chapter": 5,
+        "start": 14,
+        "end": 15
+      },
+      {
+        "book": 59,
+        "chapter": 4,
+        "start": 4,
+        "end": 4
+      },
+      {
+        "book": 62,
+        "chapter": 1,
+        "start": 3,
+        "end": 3
+      },
+      {
+        "book": 62,
+        "chapter": 1,
+        "start": 6,
+        "end": 7
+      },
+      {
+        "book": 58,
+        "chapter": 10,
+        "start": 9,
+        "end": 9
+      }
+    ]
+  },
+  {
+    "id": 19,
+    "title": "순종에 대하여",
+    "references": [
+      {
+        "book": 39,
+        "chapter": 3,
+        "start": 10,
+        "end": 10
+      },
+      {
+        "book": 44,
+        "chapter": 4,
+        "start": 19,
+        "end": 20
+      },
+      {
+        "book": 45,
+        "chapter": 6,
+        "start": 1,
+        "end": 2
+      },
+      {
+        "book": 45,
+        "chapter": 8,
+        "start": 12,
+        "end": 14
+      },
+      {
+        "book": 45,
+        "chapter": 14,
+        "start": 7,
+        "end": 8
+      },
+      {
+        "book": 46,
+        "chapter": 6,
+        "start": 19,
+        "end": 20
+      },
+      {
+        "book": 46,
+        "chapter": 10,
+        "start": 33,
+        "end": 33
+      },
+      {
+        "book": 49,
+        "chapter": 4,
+        "start": 22,
+        "end": 24
+      },
+      {
+        "book": 49,
+        "chapter": 5,
+        "start": 8,
+        "end": 11
+      },
+      {
+        "book": 58,
+        "chapter": 12,
+        "start": 8,
+        "end": 10
+      }
+    ]
+  },
+  {
+    "id": 20,
+    "title": "재림에 대하여",
+    "references": [
+      {
+        "book": 23,
+        "chapter": 57,
+        "start": 1,
+        "end": 2
+      },
+      {
+        "book": 38,
+        "chapter": 14,
+        "start": 4,
+        "end": 4
+      },
+      {
+        "book": 40,
+        "chapter": 24,
+        "start": 30,
+        "end": 30
+      },
+      {
+        "book": 42,
+        "chapter": 17,
+        "start": 34,
+        "end": 35
+      },
+      {
+        "book": 42,
+        "chapter": 21,
+        "start": 34,
+        "end": 34
+      },
+      {
+        "book": 52,
+        "chapter": 4,
+        "start": 16,
+        "end": 17
+      },
+      {
+        "book": 46,
+        "chapter": 15,
+        "start": 51,
+        "end": 52
+      },
+      {
+        "book": 52,
+        "chapter": 5,
+        "start": 3,
+        "end": 3
+      },
+      {
+        "book": 53,
+        "chapter": 1,
+        "start": 7,
+        "end": 9
+      },
+      {
+        "book": 50,
+        "chapter": 3,
+        "start": 20,
+        "end": 21
+      },
+      {
+        "book": 58,
+        "chapter": 9,
+        "start": 28,
+        "end": 28
+      },
+      {
+        "book": 66,
+        "chapter": 22,
+        "start": 20,
+        "end": 20
+      },
+      {
+        "book": 61,
+        "chapter": 3,
+        "start": 10,
+        "end": 13
+      },
+      {
+        "book": 66,
+        "chapter": 1,
+        "start": 7,
+        "end": 7
+      },
+      {
+        "book": 66,
+        "chapter": 16,
+        "start": 15,
+        "end": 15
+      }
+    ]
+  }
+]

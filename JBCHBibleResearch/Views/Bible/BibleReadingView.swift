@@ -207,6 +207,56 @@ struct JoinedNavBadgeModifier: ViewModifier {
     }
 }
 
+/// [2026-09-27 신설] 사용자 요청 — "메모하기, 원문정보에 이전 구절/다음구절로
+/// 이동 할 수 있는 버튼기능 추가. 레이어 창 바깥 왼쪽, 오른쪽 옆에 이동 버튼
+/// 추가 요청. html 목업 확인 후 개발할 것." 목업(verse_nav_arrows_mockup.html)
+/// 제시 후 사용자가 "목업의 대안안대로 겹쳐서 표시(권장)"로 확정 — 플랫폼별로
+/// 다른 두 안(맥/아이패드는 카드 바깥, 아이폰은 안쪽) 대신, 콘텐츠 가장자리
+/// 안쪽에 반투명 원형 화살표를 겹쳐 표시하는 단일 방식으로 macOS/아이패드/
+/// 아이폰 전부 통일한다.
+///
+/// 버튼 자체는 이 세션에서 이미 검증된 구조 — frame/background를 라벨(Image)
+/// 안쪽에 적용하고, `.buttonStyle(.plain)` + `.contentShape`는 Button 바깥에
+/// 붙이는 방식(`circularChapterNavButton`과 같은 원칙, 위 `chapterNavigationControlsStandard`
+/// 주석의 macOS 히트 영역 버그 설명 참고)을 그대로 따른다 — 새 버튼을
+/// 처음부터 알려진 결함 패턴으로 만들지 않기 위해서다.
+struct VerseNavArrowsModifier: ViewModifier {
+    let canGoPrevious: Bool
+    let canGoNext: Bool
+    let onPrevious: () -> Void
+    let onNext: () -> Void
+
+    private static let diameter: CGFloat = 34
+
+    func body(content: Content) -> some View {
+        content
+            .overlay(alignment: .leading) {
+                arrowButton(systemImage: "chevron.left", enabled: canGoPrevious, action: onPrevious)
+                    .padding(.leading, 6)
+            }
+            .overlay(alignment: .trailing) {
+                arrowButton(systemImage: "chevron.right", enabled: canGoNext, action: onNext)
+                    .padding(.trailing, 6)
+            }
+    }
+
+    @ViewBuilder
+    private func arrowButton(systemImage: String, enabled: Bool, action: @escaping () -> Void) -> some View {
+        Button(action: action) {
+            Image(systemName: systemImage)
+                .font(.system(size: 14, weight: .semibold))
+                .frame(width: Self.diameter, height: Self.diameter)
+                .background(Circle().fill(Color("AccentColor").opacity(0.85)))
+                .foregroundStyle(Color.white)
+        }
+        .buttonStyle(.plain)
+        .contentShape(Circle())
+        .opacity(enabled ? 1 : 0.35)
+        .disabled(!enabled)
+        .help(systemImage == "chevron.left" ? "이전 구절" : "다음 구절")
+    }
+}
+
 #if os(iOS)
 /// [2026-08-21 신설, 빌드에러 수정] `verseSelectionActionBar`(아래)가 사용자
 /// 요청 — "세로보기에서 탭하면 하단 메뉴는 한글 메뉴명은 빼고 아이콘만
@@ -297,9 +347,29 @@ private struct ActionBarCircularIconModifier: ViewModifier {
             // 기대는 대신(추측 금지 — 검증 없이 SwiftUI의 중복 환경값 우선순위를
             // 가정하지 않는다), 이 분기 자체가 그 스타일을 직접 낸다 — 어느
             // 경우든 `.buttonStyle` 호출은 딱 하나뿐이라 애매함이 없다.
-            content.buttonStyle(.borderedProminent)
-        } else {
             content
+                .buttonStyle(.borderedProminent)
+                // [2026-09-12 추가] 사용자 보고(아이패드) — "성경-구절선택
+                // 후 뜨는 하단기능버튼셋 -> 테마대로, 아이폰 디자인 참조."
+                // narrow(아이폰 세로/아이패드 세로)일 때는 바로 위 분기가
+                // 이미 `Color("AccentColor")`로 원형 배지를 채우는데,
+                // narrow가 아닐 때(아이패드를 가로로 놓거나 분할 화면으로
+                // 쓸 때 — 아이패드에서 흔한 레이아웃)는 `.tint()`를 따로
+                // 지정한 적이 없어 `.borderedProminent`가 주변 환경의 기본
+                // tint(명시적 지정이 없으면 시스템 파란색)로 채워지고
+                // 있었다 — 이게 "아이패드는 왜 파란 기본색이냐"는 보고의
+                // 원인으로 보인다. narrow일 때와 정확히 같은 색을 명시적으로
+                // 걸어, 두 레이아웃이 아이콘/버튼 배치만 다르고 색은 같게
+                // 한다.
+                .tint(Color("AccentColor"))
+        } else {
+            // [2026-09-12 추가] 위 `isProminent` 분기 새 주석과 같은 이유 —
+            // narrow가 아닐 때 이 자리(메모하기/개인 묵상/원문 정보/말씀
+            // 요약/선택 해제 등 강조 아닌 버튼들)는 지금까지 `content`를
+            // 그대로 반환해 색을 전혀 지정하지 않았다 — narrow일 때 이미
+            // 쓰는 `Color("AccentColor")`(옅은 원형 배경 없이 글자/아이콘
+            // 색만)를 여기도 명시적으로 걸어 아이폰과 같은 색이 되게 한다.
+            content.foregroundStyle(Color("AccentColor"))
         }
     }
 }
@@ -864,7 +934,31 @@ private struct BibleReadingContentView: View {
         // [2026-08-08 추가] 사용자 요청 — 절 선택 → 클립보드 복사. 선택이 하나도
         // 없으면 아예 안 보이게 해서, 평소 화면(순수 뷰어)을 방해하지 않는다
         // (OCRReviewView의 하단 액션바와 같은 배치 원칙).
-        .safeAreaInset(edge: .bottom) {
+        // [2026-09-16 수정, 근본 원인 확인·사용자 결정] 사용자 보고 — "절을
+        // 선택/해제할 때 화면이 위/아래로 불규칙하게 튄다." 원인: 이 자리에
+        // 있던 `.safeAreaInset(edge: .bottom)`은 나타나고 사라질 때마다 아래
+        // `TranslationColumnView`들이 쓰는 스크롤 영역의 세로 크기 자체를
+        // 늘렸다 줄였다 했다 — 그런데 정확히 같은 순간에
+        // `TranslationColumnView.columnScrollViewSyncTracking`의
+        // `.scrollPosition(id:anchor:)`도 `selectedVerses.isEmpty` 기준으로
+        // `nil ↔ .center`(강제 재중앙정렬 켜짐/꺼짐)를 오간다(그 파일 해당
+        // 위치 주석 참고) — 두 변화가 겹치면서 "강제 재중앙정렬이 방금 바뀐
+        // 스크롤 영역 크기 기준으로 다시 중앙을 맞추는" 보정이 일어나, 절을
+        // 선택한 화면 위치에 따라 위/아래로 불규칙하게 튀었다. 근본 해결책을
+        // 사용자에게 확인한 결과("액션바를 콘텐츠 위에 띄우기") — 바로 아래
+        // `toastOverlay`가 이미 쓰고 있는 것과 같은 `.overlay(alignment:)`
+        // 방식으로 바꿨다. `.overlay`는 부모(스크롤 영역 포함)의 레이아웃
+        // 크기에 전혀 영향을 주지 않고 그 위에 그리기만 하므로, 액션바가
+        // 나타나거나 사라져도 스크롤 영역 크기가 더 이상 바뀌지 않아 이
+        // 튐의 근본 원인 자체가 사라진다. ⚠️ 트레이드오프(사용자에게 설명하고
+        // 동의받음): 이제 스크롤 영역이 액션바 높이만큼 여백을 자동으로
+        // 확보해 주지 않으므로, 장의 맨 끝까지 스크롤한 채로 절을 선택하면
+        // 화면 맨 아래 절 1~2줄이 액션바에 가려질 수 있다. ⚠️ [미검증]
+        // 컴파일러가 없어 실기기로 확인하지 못했다 — 재빌드 후 (1) 절
+        // 선택/해제 시 화면이 더 이상 튀지 않는지 (2) 장 끝부분에서 절을
+        // 선택했을 때 액션바가 내용을 심하게 가리지는 않는지 확인해 달라고
+        // 안내했다.
+        .overlay(alignment: .bottom) {
             if viewModel.hasVerseSelection {
                 verseSelectionActionBar
             }
@@ -1754,12 +1848,29 @@ private struct BibleReadingContentView: View {
         // [2026-09-09 수정] 위 상단 메뉴 바(`.safeAreaInset(edge: .top)`)와
         // 같은 이유·같은 패턴 — 테마를 골랐으면 그 배경색, 아니면 기존
         // `.bar` 재질 그대로.
+        // [2026-09-16 수정] 사용자 보고(아이패드) — "하단 메뉴가 화면 바닥에
+        // 붙지 않고 일정 간격이 떨어져 있음." `.safeAreaInset(edge: .bottom)`
+        // 자체는 원래 내용물을 화면 맨 아래(홈 인디케이터 영역까지)까지
+        // 밀착시켜야 하는데, 아이패드에서 이 배경이 홈 인디케이터 안전영역
+        // 바로 위에서 멈추는 것으로 보인다(iPadOS의 `NavigationSplitView`
+        // detail 컬럼 안전영역 계산과 관련된 것으로 추정 — 이 세션엔
+        // 실기기가 없어 근본 원인까지 단정할 수는 없다). 배경(`Rectangle`/
+        // 테마색)에만 `.ignoresSafeArea(edges: .bottom)`을 줘서 화면 진짜
+        // 바닥까지 색을 채우게 했다 — 버튼이 놓인 `HStack`/`VStack`
+        // 콘텐츠 자체는 이 modifier 밖에 있어 안전영역 패딩을 그대로
+        // 유지하므로(탭 영역이 홈 인디케이터 제스처 구역과 겹치지 않음),
+        // 시각적으로만 화면 끝까지 색이 이어지고 버튼 위치는 기존과
+        // 동일하다. ⚠️ [미검증] 컴파일러가 없어 실기기로 확인하지 못했다 —
+        // 재빌드 후에도 간격이 남아 있으면 알려달라고 안내했다.
         .background {
-            if let bg = settings.bibleBackgroundColor {
-                bg
-            } else {
-                Rectangle().fill(.bar)
+            Group {
+                if let bg = settings.bibleBackgroundColor {
+                    bg
+                } else {
+                    Rectangle().fill(.bar)
+                }
             }
+            .ignoresSafeArea(edges: .bottom)
         }
         .sheet(isPresented: $isVerseZoomPresented, onDismiss: {
             // [2026-08-08 추가] 확대보기에서 "메모"를 만들었으면, 확대보기 시트가
@@ -1791,6 +1902,15 @@ private struct BibleReadingContentView: View {
                         pendingSwitchToOriginalTextInfo = true
                         isVerseZoomPresented = false
                     },
+                    // [2026-09-27 추가] 이전/다음 구절 이동 — `VerseNavArrowsModifier`
+                    // 선언부 주석 참고. 실제 이동은 뷰모델의
+                    // `goToPreviousVerse(from:)`/`goToNextVerse(from:)`가 다
+                    // 책임진다(장/책 경계 넘기 포함) — 이 화면은 지금 절
+                    // 번호만 넘겨준다.
+                    onNavigateToPreviousVerse: { viewModel.goToPreviousVerse(from: verseNumber) },
+                    onNavigateToNextVerse: { viewModel.goToNextVerse(from: verseNumber) },
+                    canGoToPreviousVerse: viewModel.canGoToPreviousVerse(from: verseNumber),
+                    canGoToNextVerse: viewModel.canGoToNextVerse(from: verseNumber),
                     autoPresentPersonalNoteEditor: $shouldAutoPresentPersonalNoteEditor
                 )
             }
@@ -1815,7 +1935,13 @@ private struct BibleReadingContentView: View {
                     onSwitchToMemo: {
                         pendingSwitchToVerseZoom = true
                         isOriginalTextInfoPresented = false
-                    }
+                    },
+                    // [2026-09-27 추가] 위 `VerseZoomView` 호출부와 같은 이유·
+                    // 같은 방식.
+                    onNavigateToPreviousVerse: { viewModel.goToPreviousVerse(from: verseNumber) },
+                    onNavigateToNextVerse: { viewModel.goToNextVerse(from: verseNumber) },
+                    canGoToPreviousVerse: viewModel.canGoToPreviousVerse(from: verseNumber),
+                    canGoToNextVerse: viewModel.canGoToNextVerse(from: verseNumber)
                 )
             }
         }
@@ -1849,10 +1975,17 @@ private struct BibleReadingContentView: View {
             // 1개가 선택돼 있을 때만 보인다.
             if wordSummaryBeingEdited != nil {
                 if viewModel.selectedVerses.count == 1 {
+                    // [2026-09-27 수정] 사용자 요청 — "메모하기 버튼 아이콘을
+                    // 확대하기 모양에서 메모 아이콘 모양으로." 아래
+                    // `VerseZoomView.swift` 액션바의 "메모"(`note.text`
+                    // "개인 묵상" 바로 왼쪽) 버튼이 쓰는 `text.bubble`을 그대로
+                    // 재사용 — 기존엔 이 버튼 이름이 "확대보기"였던 시절 아이콘
+                    // (`arrow.up.left.and.arrow.down.right`)이 이름만 "메모하기"로
+                    // 바뀐 뒤에도 그대로 남아 있었다.
                     Button {
                         openVerseZoom()
                     } label: {
-                        Label("메모하기", systemImage: "arrow.up.left.and.arrow.down.right")
+                        Label("메모하기", systemImage: "text.bubble")
                     }
                     #if os(iOS)
                     .modifier(ActionBarCircularIconModifier(isNarrow: isNarrowBottomBarLayout, isProminent: false))
@@ -1900,10 +2033,13 @@ private struct BibleReadingContentView: View {
                 // "절 하나"를 다룬다 — VerseZoomView/OriginalTextInfoView 모두
                 // 단일 verseNumber를 받는다).
                 if viewModel.selectedVerses.count == 1 {
+                    // [2026-09-27 수정] 위 `wordSummaryBeingEdited` 분기와
+                    // 같은 이유로 아이콘을 `text.bubble`로 통일(참고 주석은
+                    // 위 분기 쪽에 자세히 적어 뒀다).
                     Button {
                         openVerseZoom()
                     } label: {
-                        Label("메모하기", systemImage: "arrow.up.left.and.arrow.down.right")
+                        Label("메모하기", systemImage: "text.bubble")
                     }
                     #if os(iOS)
                     .modifier(ActionBarCircularIconModifier(isNarrow: isNarrowBottomBarLayout, isProminent: false))
@@ -2353,6 +2489,56 @@ private struct BibleReadingContentView: View {
         #endif
     }
 
+    /// [2026-09-27 신설] 사용자 재보고 — "히스토리 이전, 이전장, 다음장,
+    /// 히스토리 다음 버튼은 해결 안됨" — `.contentShape(Circle())`가 이미
+    /// 있는데도(아래 옛 `CircularNavButtonModifier`) 원형 배경 부분을 누르면
+    /// 반응이 없고, 아이콘 글리프 자체를 정확히 눌러야만 동작한다고 확인됨.
+    ///
+    /// 원인 — 옛 방식은 frame/background/contentShape를 "이미 완성된 Button
+    /// 전체"에 바깥에서 나중에 씌우는 구조였다(`.modifier(CircularNavButtonModifier(...))`
+    /// 를 Button 뒤에 붙이는 방식). 이 세션에서 앞서 고친 macOS 버튼 히트
+    /// 영역 버그 17건(`BookChapterPicker.swift`/`VerseZoomView.swift` 등)은
+    /// 전부 frame/background를 라벨 **안쪽**(Button으로 감싸기 전의 콘텐츠)에
+    /// 적용하고 나서 `.buttonStyle(.plain)` + `.contentShape`를 Button
+    /// **바깥**에 붙이는 구조로 바꿔야 실제로 클릭이 됐다 — macOS의
+    /// `.buttonStyle(.plain)`은 Button을 다 만든 "뒤에" 바깥에서 씌운 frame/
+    /// contentShape를 클릭 판정에 반영하지 못하는 것으로 보인다(이미 이
+    /// 세션에서 검증된 구조적 차이이지 새로운 추측이 아니다). 이 4개 버튼도
+    /// 같은 결함이라 같은 방식으로 고친다 — 아이콘에 frame/background를
+    /// 라벨 안쪽에서 직접 입힌 뒤 Button으로 감싸는 이 전용 헬퍼로 대체한다.
+    ///
+    /// `JoinedNavBadgeModifier`(iOS 전용, `BookChapterPicker.swift`에서도
+    /// 재사용 중이고 사용자가 문제 삼은 적이 없다)는 같은 "바깥에서 씌우는"
+    /// 모양이지만 이번 보고 대상이 아니라 범위 밖으로 남겨 둔다 — 근거 없이
+    /// 함께 바꾸지 않는다.
+    @ViewBuilder
+    private func circularChapterNavButton(
+        systemImage: String, help: String, disabled: Bool, action: @escaping () -> Void
+    ) -> some View {
+        if isCompactChapterNavButtons {
+            Button(action: action) {
+                Image(systemName: systemImage)
+                    .foregroundStyle(Color("AccentColor"))
+                    .frame(width: CircularNavButtonModifier.diameter, height: CircularNavButtonModifier.diameter)
+                    .background(Circle().fill(Color("AccentColor").opacity(0.12)))
+            }
+            .buttonStyle(.plain)
+            .contentShape(Circle())
+            .disabled(disabled)
+            .help(help)
+        } else {
+            // `isCompactChapterNavButtons`가 언젠가 다시 조건부로 바뀌더라도
+            // (현재는 항상 true — `isCompactChapterNavButtons` 선언부 참고)
+            // 옛 `CircularNavButtonModifier`의 "off일 땐 아무 것도 안 함"
+            // 동작을 그대로 보존한다.
+            Button(action: action) {
+                Image(systemName: systemImage)
+            }
+            .disabled(disabled)
+            .help(help)
+        }
+    }
+
     private var chapterNavigationControlsStandard: some View {
         HStack(spacing: 8) {
             // [2026-08-20 추가] 사용자 요청 — "이전 장 이동하는 화살표 옆에
@@ -2363,13 +2549,6 @@ private struct BibleReadingContentView: View {
             // "임의 위치로 되짚어가기"가 시각적으로도 구분되게 했다.
             // `viewModel.canGoBackInHistory`가 false면 갈 곳이 없다는 뜻이라
             // 비활성화한다.
-            Button {
-                viewModel.goBackInHistory()
-            } label: {
-                Image(systemName: "arrow.uturn.backward")
-            }
-            .disabled(!viewModel.canGoBackInHistory)
-            .help("이전에 보던 위치로 돌아가기")
             // [2026-09-05 수정] 사용자 보고(맥OS) — "성경 장 이동 및 검색
             // 영역 - 아이폰 디자인을 참고하여 일관성을 갖추고 ... 수정하라."
             // 바로 위 `chapterNavigationControls` 주석은 애초에 "아이패드/
@@ -2380,16 +2559,23 @@ private struct BibleReadingContentView: View {
             // macOS 버튼 4개가 전부 스타일 없는 기본 버튼으로 남아 아이폰/
             // 아이패드와 시각적으로 어긋났다. 새 스타일을 만드는 대신 이미
             // 승인된 이 원형 버튼 스타일을 macOS까지 그대로 확장한다.
-            .modifier(CircularNavButtonModifier(isCircular: isCompactChapterNavButtons))
+            //
+            // [2026-09-27 수정] 위 `circularChapterNavButton` 선언부 주석
+            // 참고 — 클릭 히트 영역 버그로 `.modifier(CircularNavButtonModifier(...))`
+            // 대신 이 헬퍼로 교체했다.
+            circularChapterNavButton(
+                systemImage: "arrow.uturn.backward",
+                help: "이전에 보던 위치로 돌아가기",
+                disabled: !viewModel.canGoBackInHistory,
+                action: { viewModel.goBackInHistory() }
+            )
 
-            Button {
-                viewModel.previousChapter()
-            } label: {
-                Image(systemName: "chevron.left")
-            }
-            .disabled(viewModel.selectedChapter <= 1 && BooksProvider.shared.book(before: viewModel.selectedBook) == nil)
-            .help("이전 장")
-            .modifier(CircularNavButtonModifier(isCircular: isCompactChapterNavButtons))
+            circularChapterNavButton(
+                systemImage: "chevron.left",
+                help: "이전 장",
+                disabled: viewModel.selectedChapter <= 1 && BooksProvider.shared.book(before: viewModel.selectedBook) == nil,
+                action: { viewModel.previousChapter() }
+            )
 
             BookChapterPicker(
                 books: BooksProvider.shared.books,
@@ -2408,29 +2594,23 @@ private struct BibleReadingContentView: View {
                 viewModel.selectBook(book, chapter: chapter)
             }
 
-            Button {
-                viewModel.nextChapter()
-            } label: {
-                Image(systemName: "chevron.right")
-            }
-            .disabled(
-                viewModel.selectedChapter >= viewModel.selectedBook.chapterCount
-                    && BooksProvider.shared.book(after: viewModel.selectedBook) == nil
+            circularChapterNavButton(
+                systemImage: "chevron.right",
+                help: "다음 장",
+                disabled: viewModel.selectedChapter >= viewModel.selectedBook.chapterCount
+                    && BooksProvider.shared.book(after: viewModel.selectedBook) == nil,
+                action: { viewModel.nextChapter() }
             )
-            .help("다음 장")
-            .modifier(CircularNavButtonModifier(isCircular: isCompactChapterNavButtons))
 
             // [2026-08-20 추가] 사용자 요청 — "다음 장 이동하는 화살표 옆에
             // 앞에서 온 성경 장을 바로가는 아이콘 추가(history.forward())."
             // 위 뒤로가기 버튼과 대칭 — `arrow.uturn.forward`.
-            Button {
-                viewModel.goForwardInHistory()
-            } label: {
-                Image(systemName: "arrow.uturn.forward")
-            }
-            .disabled(!viewModel.canGoForwardInHistory)
-            .help("뒤로가기 이전 위치로 다시 가기")
-            .modifier(CircularNavButtonModifier(isCircular: isCompactChapterNavButtons))
+            circularChapterNavButton(
+                systemImage: "arrow.uturn.forward",
+                help: "뒤로가기 이전 위치로 다시 가기",
+                disabled: !viewModel.canGoForwardInHistory,
+                action: { viewModel.goForwardInHistory() }
+            )
         }
         // [2026-08-08 추가] 툴바 principal 자리(폭 제한)에서 상단 세이프에어리어
         // 인셋(화면 전체 너비)으로 옮기면서 가운데 정렬을 유지하려고 추가.

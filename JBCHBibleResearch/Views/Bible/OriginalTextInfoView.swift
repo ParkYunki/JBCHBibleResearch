@@ -46,6 +46,14 @@ struct OriginalTextInfoView: View {
     /// onSwitchToOriginalTextInfo`와 같은 이유). 이 구조체는 커스텀 init이
     /// 없어 컴파일러가 만들어 주는 memberwise init에 이 값도 자동으로 포함된다.
     let onSwitchToMemo: () -> Void
+    /// [2026-09-27 신설] `VerseZoomView`의 같은 이름 프로퍼티들과 완전히
+    /// 같은 목적 — `VerseNavArrowsModifier` 선언부 주석 참고. 기본값이 있어
+    /// 이 구조체의 컴파일러 생성 memberwise init에서 생략 가능하다(이 파일에
+    /// 커스텀 init이 없으므로).
+    var onNavigateToPreviousVerse: () -> Void = {}
+    var onNavigateToNextVerse: () -> Void = {}
+    var canGoToPreviousVerse: Bool = false
+    var canGoToNextVerse: Bool = false
 
     @Environment(\.dismiss) private var dismiss
     @Environment(\.modelContext) private var modelContext
@@ -55,6 +63,11 @@ struct OriginalTextInfoView: View {
     /// 대비가 부족했다. 라이트/다크를 구분해 색을 고르기 위해 필요하다.
     @Environment(\.colorScheme) private var colorScheme
     @State private var words: [OriginalWordInfo] = []
+    /// [2026-09-16 추가] 사용자 요청 — "성경구절 밑 원어카드 위 부분에
+    /// 직역과 번역 차이점을 추가하고자 함." `LiteralTranslation` 테이블
+    /// (`OriginalTextModels.swift`의 `LiteralTranslationInfo` 참고) 조회
+    /// 결과 — 데이터가 없는 절이면 nil로 두고 카드 자체를 숨긴다.
+    @State private var literalInfo: LiteralTranslationInfo?
     /// [2026-08-13 추가] 사용자 요청 — "타이틀 아래 원문 정보 가장 상단에 해당
     /// 구절(개역한글 KRV) 텍스트를 보여줄것." 번들 기본 번역본(KRV=개역한글,
     /// `TranslationBootstrap`/`Resources/BibleDB.sqlite`)에서 직접 읽는다 —
@@ -119,6 +132,15 @@ struct OriginalTextInfoView: View {
                                     .stroke(cardBorderColor, lineWidth: 1)
                             )
                     }
+                    // [2026-09-16 추가] 사용자 요청 — "성경 - 구절 선택 -
+                    // 하단 원문 정보"에서 성경구절 밑, 원어카드 위 자리에
+                    // "직역과 번역 차이"를 넣는다(전달한 목업 HTML의 배치
+                    // 순서 그대로 — 목업의 점선 테두리·"NEW" 배지는 목업
+                    // 안내문에 적힌 대로 리뷰용 표시일 뿐이라 실제 화면에는
+                    // 넣지 않고, 기존 카드들과 같은 스타일로 통일한다).
+                    if let literalInfo {
+                        literalTranslationCard(literalInfo)
+                    }
                     if words.isEmpty {
                         ContentUnavailableView(
                             "원문 정보 없음",
@@ -162,12 +184,20 @@ struct OriginalTextInfoView: View {
                 // 아이콘과, 원어 정보 아이콘으로 각각 대치할 것." 화살표 대신,
                 // "메모하기"가 성경 조회 하단 액션바에서 이미 쓰는 아이콘
                 // (`BibleReadingView.swift`의 `Label("메모하기", systemImage:
-                // "arrow.up.left.and.arrow.down.right")`)과 똑같은 걸 써서 —
+                // "text.bubble")`)과 똑같은 걸 써서 —
                 // 이 버튼을 누르면 "메모하기"로 간다는 것을 아이콘만 보고도
                 // 알 수 있게 했다.
+                //
+                // [2026-09-27 수정] 사용자 요청 — "메모하기 버튼의 아이콘을
+                // 기존 확대하기 모양(`arrow.up.left.and.arrow.down.right`)에서
+                // 메모 아이콘 모양으로 변경." `VerseZoomView.swift`의
+                // 하단 액션바에서 "개인 묵상"(`note.text`) 바로 왼쪽에 있는
+                // "메모" 버튼이 이미 쓰는 `text.bubble`을 그대로 재사용해 —
+                // 이 앱 전체에서 "메모" 개념을 가리키는 아이콘을 하나로
+                // 통일한다(새 아이콘 발명 대신 기존 패턴 재사용).
                 ToolbarItem(placement: .confirmationAction) {
                     Button(action: onSwitchToMemo) {
-                        Label("메모하기", systemImage: "arrow.up.left.and.arrow.down.right")
+                        Label("메모하기", systemImage: "text.bubble")
                     }
                     .help("메모하기로 전환")
                 }
@@ -176,7 +206,20 @@ struct OriginalTextInfoView: View {
         #if os(macOS)
         .frame(minWidth: 420, minHeight: 420)
         #endif
-        .onAppear { loadWords() }
+        // [2026-09-27 추가] 이전/다음 구절 이동 화살표 — `VerseNavArrowsModifier`
+        // 선언부 주석 참고.
+        .modifier(VerseNavArrowsModifier(
+            canGoPrevious: canGoToPreviousVerse,
+            canGoNext: canGoToNextVerse,
+            onPrevious: onNavigateToPreviousVerse,
+            onNext: onNavigateToNextVerse
+        ))
+        // [2026-09-27 수정] 이전엔 `.onAppear`이라 시트가 이미 열린 상태에서
+        // 좌우 화살표로 `verseNumber`(및 장/권 경계를 넘을 때의 `chapter`/`bookId`)만
+        // 바뀌면(같은 뷰 identity가 새 프로퍼티 값으로 재평가되는 경우) 다시 불리지
+        // 않아 원어 정보가 첫 절 데이터로 멈춰 있는 버그가 있었다 — `.task(id:)`로
+        // 바꿔 이 세 값 중 하나라도 바뀌면 다시 로드되게 한다.
+        .task(id: "\(bookId)-\(chapter)-\(verseNumber)") { loadWords() }
         .translationTask(translationConfiguration) { session in
             await translateMissingGlosses(session: session)
         }
@@ -211,6 +254,53 @@ struct OriginalTextInfoView: View {
     // 스크린샷에는 Strong번호/연필 아이콘이 안 보이지만, 편집 기능(연필)과 기존
     // 4항목 스펙(Strong번호 포함)은 유지해야 해서 둘 다 카드 맨 아래에 아주 작게
     // 눈에 덜 띄게 남겨 뒀다 — 완전히 지우면 "한글 뜻풀이 수정" 기능이 없어진다.
+    /// [2026-09-16 신설] 위 `literalInfo` 주석 참고. 전달한 목업 HTML
+    /// (직역 텍스트 → 구분선 → "번역과의 차이" 설명 순서)을 그대로 옮기되,
+    /// 카드 스타일은 이 화면이 이미 쓰는 `cardBackground`/`cardBorderColor`
+    /// (테마 글자색 기반 옅은 opacity)를 그대로 따른다 — 목업의 점선
+    /// 테두리·"NEW" 배지는 리뷰용 표시라 제외했다(바로 위 주석 참고).
+    private func literalTranslationCard(_ info: LiteralTranslationInfo) -> some View {
+        VStack(alignment: .leading, spacing: 10) {
+            Label("직역 (원어 그대로)", systemImage: "text.alignleft")
+                .font(.system(size: 13, weight: .bold))
+                .foregroundStyle(settings.bibleTextColor?.opacity(0.75) ?? Color.secondary)
+
+            Text(info.literalTranslation)
+                .font(UserSettingsStore.shared.bibleBodyFont.italic())
+                .foregroundStyle(settings.bibleTextColor ?? Color.primary)
+                .multilineTextAlignment(.center)
+                .fixedSize(horizontal: false, vertical: true)
+                .frame(maxWidth: .infinity, alignment: .center)
+
+            if let difference = info.difference, !difference.isEmpty {
+                Rectangle()
+                    .fill(cardBorderColor)
+                    .frame(height: 1)
+
+                Label("번역과의 차이", systemImage: "arrow.left.arrow.right")
+                    .font(.system(size: 12, weight: .bold))
+                    .foregroundStyle(settings.bibleTextColor?.opacity(0.6) ?? Color.secondary)
+
+                Text(difference)
+                    .font(.system(size: 13.5))
+                    .foregroundStyle(settings.bibleTextColor?.opacity(0.75) ?? Color.secondary)
+                    .lineSpacing(3)
+                    .fixedSize(horizontal: false, vertical: true)
+            }
+        }
+        .frame(maxWidth: .infinity, alignment: .leading)
+        .padding(.horizontal, 18)
+        .padding(.vertical, 16)
+        .background(
+            RoundedRectangle(cornerRadius: 16, style: .continuous)
+                .fill(cardBackground)
+        )
+        .overlay(
+            RoundedRectangle(cornerRadius: 16, style: .continuous)
+                .stroke(cardBorderColor, lineWidth: 1)
+        )
+    }
+
     private func wordCard(_ word: OriginalWordInfo) -> some View {
         VStack(spacing: 8) {
             // [2026-08-13 재수정] 사용자 요청 — "한글 뜻풀이 수정용 연필
@@ -474,6 +564,7 @@ struct OriginalTextInfoView: View {
 
     private func loadWords() {
         words = OriginalTextLookupService.shared.words(bookId: bookId, chapter: chapter, verse: verseNumber)
+        literalInfo = OriginalTextLookupService.shared.literalTranslation(bookId: bookId, chapter: chapter, verse: verseNumber)
         loadCachedGlosses()
         loadKRVVerseText()
     }

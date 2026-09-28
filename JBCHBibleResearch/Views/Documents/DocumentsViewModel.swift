@@ -216,9 +216,12 @@ final class DocumentsViewModel {
         loadCategories()
     }
 
-    /// 이 문서가 OCR 검수 대기 중인지(draft 상태 OCRResult가 있는지) — 목록 행에서
-    /// "검수 대기" 배지를 따로 보여주고, 탭하면 S7로 바로 연결하기 위해 쓴다.
-    func hasPendingOCRReview(_ document: SourceDocument) -> Bool {
-        (document.ocrResults ?? []).contains { $0.status == .draft }
-    }
+    // [2026-09-27 삭제] 사용자 요청 — "OCR 검수화면은 없앨 것. OCR 된 내용이
+    // 그대로 보여지게 하도록." 이 문서가 "검수 대기" 중인지 판정하던
+    // `hasPendingOCRReview(_:)`를 없앴다 — `DocumentTextExtractionService.
+    // extractImageOCR`가 이제 Vision 인식 결과를 곧바로 `DocumentText`로
+    // 반영하고 `indexStatus = .indexed`까지 마치므로(더 이상 `.draft` 상태
+    // `OCRResult`가 생기지 않는다), "검수 대기"라는 상태 자체가 없어졌다.
+    // 호출부(`DocumentsHomeView.swift`의 "검수 대기" 배지/큐 라우팅)도 함께
+    // 제거했다.
 }

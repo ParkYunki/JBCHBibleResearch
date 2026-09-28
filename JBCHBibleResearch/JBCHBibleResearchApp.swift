@@ -73,6 +73,25 @@ struct JBCHBibleResearchApp: App {
                 // 1072로 지정할 것." 기존 1000 → 1072로 확대.
                 .frame(minWidth: 1072, minHeight: 700)
                 #endif
+                // [2026-09-13 신설] 사용자 요청 — "개인묵상을 공유받으면 이
+                // 앱의 개인묵상으로 들어갈수 있도록 할수 있는가?" 다른
+                // 기기에서 `MemoDetailView`의 공유 버튼(`ShareLink`)으로
+                // 내보낸 `.jbchmemo` 파일을 AirDrop 등으로 받아 "다음으로
+                // 열기"를 하면(또는 이 앱이 이미 켜져 있는 상태에서 받으면)
+                // iOS/macOS가 이 클로저를 그 파일의 URL과 함께 호출한다 —
+                // `Info.plist`의 `CFBundleDocumentTypes`가 이 파일 형식을
+                // 이 앱이 연다고 시스템에 등록해 둔 덕분이다(같은 파일의
+                // `UTExportedTypeDeclarations`도 함께 참고). 실제 파싱/
+                // 미리보기 시트 표시는 `PendingMemoImportRequest`(신호 전용
+                // 싱글턴)와 `ContentView`의 `.sheet(item:)`에 맡긴다 — 이
+                // 클로저는 그 둘을 잇는 통로일 뿐이다. 다른 보조 창
+                // (`bible-reading` 등, 아래)에는 붙이지 않았다 — 이 앱의
+                // 다른 앱 전체 진입점(`.appOnboarding()` 등, `ContentView.swift`
+                // 참고)도 전부 이 첫 번째 `WindowGroup`에만 붙는 것과 같은
+                // 관례다.
+                .onOpenURL { url in
+                    PendingMemoImportRequest.shared.handleOpenedFile(at: url)
+                }
         }
         .modelContainer(modelContainer)
         // 11장 macOS 메뉴 바 — AppCommands.swift(File/View/Bible), 나머지 메뉴는

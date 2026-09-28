@@ -465,30 +465,46 @@ private struct OutlineTreeList: View {
         }
     }
 
+    /// [2026-09-12 수정] 사용자 보고(아이패드) — "개요 타이틀 하단 검색
+    /// 입력란의 스타일을 연구문서의 검색란과 동일하게 할 것."
+    /// `DocumentsHomeView.searchAndFilterBar`(돋보기/지우기 아이콘·
+    /// placeholder를 테마 글자색으로 물들이고, 옅은 채움 + 테두리 상자를
+    /// 두는 구성, 그 파일의 같은 날짜 주석 참고)와 같은 모양으로 바꿨다 —
+    /// 아이콘/텍스트 구조 자체는 이미 같았고(돋보기 + `.plain` TextField +
+    /// 지우기 버튼), 색이 전부 `.secondary` 고정이고 감싸는 상자가 없던
+    /// 점만 달랐다.
     private var searchField: some View {
         HStack(spacing: 6) {
             Image(systemName: "magnifyingglass")
                 .font(.system(size: 13))
-                .foregroundStyle(.secondary)
-            TextField("책 이름 검색", text: $searchQuery)
-                .textFieldStyle(.plain)
+                .foregroundStyle(settings.bibleTextColor?.opacity(0.6) ?? Color.secondary)
+            TextField(
+                "책 이름 검색",
+                text: $searchQuery,
                 // [2026-08-15 4차 변경] 사용자 요청 — "검색 창 placeholder 텍스트는
                 // 시스템 기본폰트, 일반 크기로." `RootView`가 `.appDefaultFont()`
                 // (커스텀 Paperlogy 폰트)를 최상단 환경에 걸어 자식 뷰가 전부
                 // 물려받으므로, 명시적으로 `.font(.body)`를 줘서 이 필드(placeholder
                 // 포함 — SwiftUI에서 placeholder는 입력 텍스트와 같은 폰트를 쓴다)만
                 // 시스템 기본 폰트로 되돌린다.
+                prompt: Text("책 이름 검색")
+                    .foregroundStyle(settings.bibleTextColor?.opacity(0.5) ?? Color.secondary)
+            )
+                .textFieldStyle(.plain)
                 .font(.body)
             if !searchQuery.isEmpty {
                 Button {
                     searchQuery = ""
                 } label: {
                     Image(systemName: "xmark.circle.fill")
-                        .foregroundStyle(.secondary)
+                        .foregroundStyle(settings.bibleTextColor?.opacity(0.6) ?? Color.secondary)
                 }
                 .buttonStyle(.plain)
             }
         }
+        .padding(8)
+        .background(RoundedRectangle(cornerRadius: 8).fill(settings.bibleTextColor?.opacity(0.08) ?? Color.secondary.opacity(0.08)))
+        .overlay(RoundedRectangle(cornerRadius: 8).stroke(settings.bibleTextColor?.opacity(0.2) ?? Color.secondary.opacity(0.2), lineWidth: 1))
         .padding(.horizontal, 10)
         .padding(.vertical, 8)
     }

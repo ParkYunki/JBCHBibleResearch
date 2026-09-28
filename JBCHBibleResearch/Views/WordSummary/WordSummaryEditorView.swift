@@ -370,9 +370,24 @@ case .contextual, .wordNoteList:
 
             if isEditable {
                 HStack {
-                    TextField("태그 입력 후 Enter", text: $tagInput)
-                        .textFieldStyle(.roundedBorder)
+                    // [2026-09-12 수정] 사용자 보고(아이패드) — "말씀 요약의
+                    // 태그입력 텍스트입력란의 스타일을 연구문서의 검색란과
+                    // 동일하게 할 것." `DocumentsHomeView.searchAndFilterBar`
+                    // (`.plain` TextField + 테마 글자색 기반 옅은 채움/테두리
+                    // 상자, 그 파일의 같은 날짜 주석 참고)와 같은 모양으로
+                    // 바꿨다 — 검색창이 아니라 태그 입력이라 돋보기/지우기
+                    // 아이콘은 그대로 빼고 상자 스타일만 맞췄다.
+                    TextField(
+                        "태그 입력 후 Enter",
+                        text: $tagInput,
+                        prompt: Text("태그 입력 후 Enter")
+                            .foregroundStyle(settings.bibleTextColor?.opacity(0.5) ?? Color.secondary)
+                    )
+                        .textFieldStyle(.plain)
                         .font(.body)
+                        .padding(8)
+                        .background(RoundedRectangle(cornerRadius: 8).fill(settings.bibleTextColor?.opacity(0.08) ?? Color.secondary.opacity(0.08)))
+                        .overlay(RoundedRectangle(cornerRadius: 8).stroke(settings.bibleTextColor?.opacity(0.2) ?? Color.secondary.opacity(0.2), lineWidth: 1))
                         .onSubmit { commitTagInput() }
                         .onChange(of: tagInput) { _, newValue in
                             updateTagSuggestions(for: newValue)

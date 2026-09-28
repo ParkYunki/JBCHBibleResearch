@@ -33,7 +33,7 @@
   "source_word": "가야바",
   "source_idx": "44",
   "sense_index": 1,
-  "sentence": "배우자는 안나스의 자녀. 대제사장. 예수님을 심문하고 십자가 처형을 결의함."
+  "sentence": "대제사장."
  },
  {
   "source_word": "가이사",
@@ -276,12 +276,6 @@
   "sentence": "이스라엘의 족장."
  },
  {
-  "source_word": "나단",
-  "source_idx": "330",
-  "sense_index": 11,
-  "sentence": "예수 그리스도의 조상."
- },
- {
   "source_word": "나답",
   "source_idx": "332",
   "sense_index": 2,
@@ -320,12 +314,6 @@
  {
   "source_word": "나손",
   "source_idx": "339",
-  "sense_index": 3,
-  "sentence": "예수 그리스도의 조상."
- },
- {
-  "source_word": "나손",
-  "source_idx": "339",
   "sense_index": 4,
   "sentence": "구브로 출신으로 바울이 예루살렘 마지막 방문시 접대함."
  },
@@ -340,12 +328,6 @@
   "source_idx": "354",
   "sense_index": 1,
   "sentence": "바벨론 추정 출신. 지도자. 바벨론에서 돌아온 유대인 지도자."
- },
- {
-  "source_word": "나훔",
-  "source_idx": "363",
-  "sense_index": 2,
-  "sentence": "예수 그리스도의 조상."
  },
  {
   "source_word": "노배",
@@ -663,7 +645,7 @@
   "source_word": "레위",
   "source_idx": "694",
   "sense_index": 3,
-  "sentence": "사도 중 한 명으로 마태라고 불림. 로마의 공무원 또는 세리."
+  "sentence": "예수의 제자. 동명이인 마태. 로마의 공무원 또는 세리."
  },
  {
   "source_word": "루기오",
@@ -924,12 +906,6 @@
   "sentence": "느헤미야와 함께 율법 엄수를 서약한 백성의 지도자."
  },
  {
-  "source_word": "맛단",
-  "source_idx": "884",
-  "sense_index": 1,
-  "sentence": "예수 그리스도의 선조."
- },
- {
   "source_word": "맛디댜",
   "source_idx": "888",
   "sense_index": 2,
@@ -958,18 +934,6 @@
   "source_idx": "913",
   "sense_index": 3,
   "sentence": "게달에 거한 부족."
- },
- {
-  "source_word": "멜기",
-  "source_idx": "919",
-  "sense_index": 1,
-  "sentence": "예수 그리스도의 선조 중 한 사람."
- },
- {
-  "source_word": "멜기",
-  "source_idx": "919",
-  "sense_index": 2,
-  "sentence": "예수 그리스도의 선조 중 또 다른 사람."
  },
  {
   "source_word": "모르드개",
@@ -1185,7 +1149,7 @@
   "source_word": "바스훌",
   "source_idx": "1095",
   "sense_index": 1,
-  "sentence": "예루살렘에 거주한 제사장 가문의 선조."
+  "sentence": "예루살렘에 거주한 제사장 가문의 조상."
  },
  {
   "source_word": "바스훌",
@@ -1857,13 +1821,13 @@
   "source_word": "스바댜",
   "source_idx": "1721",
   "sense_index": 6,
-  "sentence": "스룹바벨과 함께 귀환한 가문의 선조."
+  "sentence": "스룹바벨과 함께 귀환한 가문의 조상."
  },
  {
   "source_word": "스바댜",
   "source_idx": "1721",
   "sense_index": 7,
-  "sentence": "솔로몬의 신하로 스룹바벨과 함께 귀환한 가문의 선조."
+  "sentence": "솔로몬의 신하로 스룹바벨과 함께 귀환한 가문의 조상."
  },
  {
   "source_word": "스바댜",
@@ -1917,7 +1881,7 @@
   "source_word": "슬로밋",
   "source_idx": "1756",
   "sense_index": 6,
-  "sentence": "에스라와 함께 귀환한 요시뱌 자손의 선조."
+  "sentence": "에스라와 함께 귀환한 요시뱌 자손의 조상."
  },
  {
   "source_word": "시돈",
@@ -1952,12 +1916,6 @@
  {
   "source_word": "시므온",
   "source_idx": "1790",
-  "sense_index": 4,
-  "sentence": "예수 그리스도의 조상."
- },
- {
-  "source_word": "시므온",
-  "source_idx": "1790",
   "sense_index": 5,
   "sentence": "안디옥 교회의 예언자요 교사."
  },
@@ -1971,7 +1929,7 @@
   "source_word": "시므이",
   "source_idx": "1792",
   "sense_index": 9,
-  "sentence": "예루살렘에 거한 족장 가문의 선조."
+  "sentence": "예루살렘에 거한 족장 가문의 조상."
  },
  {
   "source_word": "시므이",
@@ -2133,13 +2091,13 @@
   "source_word": "아딘",
   "source_idx": "1930",
   "sense_index": 1,
-  "sentence": "스룹바벨과 함께 귀환한 사람의 선조."
+  "sentence": "스룹바벨과 함께 귀환한 사람의 조상."
  },
  {
   "source_word": "아딘",
   "source_idx": "1930",
   "sense_index": 2,
-  "sentence": "에스라와 함께 귀환한 사람의 선조."
+  "sentence": "에스라와 함께 귀환한 사람의 조상."
  },
  {
   "source_word": "아딘",
@@ -2151,7 +2109,7 @@
   "source_word": "아라",
   "source_idx": "1931",
   "sense_index": 3,
-  "sentence": "포로에서 귀환한 가문의 선조."
+  "sentence": "포로에서 귀환한 가문의 조상."
  },
  {
   "source_word": "아람",
@@ -2175,7 +2133,7 @@
   "source_word": "아르바",
   "source_idx": "1966",
   "sense_index": 1,
-  "sentence": "아낙 자손의 선조, 기럇아르바의 창시자."
+  "sentence": "아낙 자손의 조상, 기럇아르바의 창시자."
  },
  {
   "source_word": "아릇",
@@ -2601,7 +2559,7 @@
   "source_word": "안드로니고",
   "source_idx": "2191",
   "sense_index": 1,
-  "sentence": "유대인의 후손. 사도들에게 존중받는 성도. 사도 바울, 유니아와 관련이 있다. 바울의 친척이자 함께 갇혔던 자로, 바울보다 먼저 그리스도인이 되어 헌신함."
+  "sentence": "유대인의 후손. 사도 바울, 유니아와 관련이 있다. 바울의 친척."
  },
  {
   "source_word": "안디바",
@@ -2727,7 +2685,7 @@
   "source_word": "야고보",
   "source_idx": "2261",
   "sense_index": 3,
-  "sentence": "예수 그리스도의 동생."
+  "sentence": "예수의 동생."
  },
  {
   "source_word": "야곱",
@@ -2880,18 +2838,6 @@
   "sentence": "에란의 자손들."
  },
  {
-  "source_word": "에르",
-  "source_idx": "2387",
-  "sense_index": 1,
-  "sentence": "유다가 가나안 여자 수아에게서 낳은 큰아들."
- },
- {
-  "source_word": "에르",
-  "source_idx": "2387",
-  "sense_index": 3,
-  "sentence": "예수 그리스도의 선조."
- },
- {
   "source_word": "에바",
   "source_idx": "2392",
   "sense_index": 1,
@@ -2907,7 +2853,7 @@
   "source_word": "에배네도",
   "source_idx": "2399",
   "sense_index": 1,
-  "sentence": "아시아 출신. (아마도 에베소). 로마 교회의 성도. 사도 바울과 관련이 있다. 아시아에서 그리스도께 처음 맺은 열매로 바울의 각별한 사랑을 받음."
+  "sentence": "아시아 출신. (아마도 에베소). 로마 교회의 성도. 사도 바울과 관련이 있다."
  },
  {
   "source_word": "에벨",
@@ -3003,19 +2949,19 @@
   "source_word": "엘람",
   "source_idx": "2475",
   "sense_index": 4,
-  "sentence": "포로에서 귀환한 어떤 가문의 선조."
+  "sentence": "포로에서 귀환한 어떤 가문의 조상."
  },
  {
   "source_word": "엘람",
   "source_idx": "2475",
   "sense_index": 5,
-  "sentence": "포로에서 귀환한 한 가문의 선조로 5번과는 다른 사람."
+  "sentence": "포로에서 귀환한 한 가문의 조상로 5번과는 다른 사람."
  },
  {
   "source_word": "엘람",
   "source_idx": "2475",
   "sense_index": 6,
-  "sentence": "에스라와 함께 귀환한 사람의 선조."
+  "sentence": "에스라와 함께 귀환한 사람의 조상."
  },
  {
   "source_word": "엘람",
@@ -3046,18 +2992,6 @@
   "source_idx": "2485",
   "sense_index": 1,
   "sentence": "유대인의 후손. 거짓 선지자, 마술사. (본명 바예수). 사도 바울, 서기오 바울과 관련이 있다(총독). 바보 섬에서 총독이 복음을 듣는 것을 방해하다가 바울의 저주를 받아 맹인이 됨."
- },
- {
-  "source_word": "엘르아살",
-  "source_idx": "2489",
-  "sense_index": 4,
-  "sentence": "느헤미야 시대에 성벽 낙성식에 참가한 제사장."
- },
- {
-  "source_word": "엘르아살",
-  "source_idx": "2489",
-  "sense_index": 7,
-  "sentence": "이방 여자와 결혼한 바로스 자손."
  },
  {
   "source_word": "엘르앗",
@@ -3094,12 +3028,6 @@
   "source_idx": "2509",
   "sense_index": 3,
   "sentence": "느헤미야 시대 예루살렘 성벽 낙성식을 도운 사람."
- },
- {
-  "source_word": "엘리아김",
-  "source_idx": "2509",
-  "sense_index": 4,
-  "sentence": "예수 그리스도의 선조 중 한 사람."
  },
  {
   "source_word": "엘리아십",
@@ -3411,13 +3339,13 @@
   "source_word": "예수",
   "source_idx": "2641",
   "sense_index": 1,
-  "sentence": "예수 그리스도."
+  "sentence": "예수."
  },
  {
   "source_word": "예수",
   "source_idx": "2641",
   "sense_index": 2,
-  "sentence": "예수 그리스도의 선조."
+  "sentence": "예수의 조상."
  },
  {
   "source_word": "예수아",
@@ -3585,7 +3513,7 @@
   "source_word": "요셉",
   "source_idx": "2717",
   "sense_index": 12,
-  "sentence": "예수 그리스도의 동생."
+  "sentence": "예수의 동생."
  },
  {
   "source_word": "요아스",
@@ -3664,6 +3592,12 @@
   "source_idx": "2757",
   "sense_index": 1,
   "sentence": "학자 또는 구도자. 아굴, 이디엘과 관련이 있다. 잠언 30장에서 아굴의 잠언을 전해 들은 인물."
+ },
+ {
+  "source_word": "우르바노",
+  "source_idx": "2759",
+  "sense_index": 1,
+  "sentence": "이탈리아 출신. 바울과 관련이 있다."
  },
  {
   "source_word": "우리",
@@ -3801,13 +3735,13 @@
   "source_word": "임마누엘",
   "source_idx": "2884",
   "sense_index": 1,
-  "sentence": "베들레헴 출신. 메시아. (그리스도). 이사야, 요셉과 관련이 있다. '하나님이 우리와 함께 계시다'는 뜻으로 예수 그리스도를 가리키는 예언적 칭호."
+  "sentence": "베들레헴 출신. 이사야, 요셉과 관련이 있다."
  },
  {
   "source_word": "임멜",
   "source_idx": "2885",
   "sense_index": 1,
-  "sentence": "바벨론 포로 귀환시의 제사장 가족의 선조."
+  "sentence": "바벨론 포로 귀환시의 제사장 가족의 조상."
  },
  {
   "source_word": "임멜",
@@ -3878,32 +3812,32 @@
  {
   "source_word": "하나냐",
   "source_idx": "2914",
+  "sense_index": 2,
+  "sentence": "군대장관."
+ },
+ {
+  "source_word": "하나냐",
+  "source_idx": "2914",
   "sense_index": 7,
-  "sentence": "다윗 가문으로 히브리 이름은 사드락."
+  "sentence": "사드락. 다니엘의 친구."
  },
  {
   "source_word": "하나냐",
   "source_idx": "2914",
   "sense_index": 10,
-  "sentence": "향품 장사, 제사장."
+  "sentence": "제사장."
  },
  {
   "source_word": "하나냐",
   "source_idx": "2914",
   "sense_index": 11,
-  "sentence": "하눈과 함께 예루살렘 성벽 일부를 중수한 사람."
+  "sentence": "12."
  },
  {
   "source_word": "하나냐",
   "source_idx": "2914",
   "sense_index": 13,
-  "sentence": "느헤미야와 함께 율법 엄수를 서약한 사람 또는 가족."
- },
- {
-  "source_word": "하나냐",
-  "source_idx": "2914",
-  "sense_index": 14,
-  "sentence": "요야김 시대의 제사장."
+  "sentence": "14."
  },
  {
   "source_word": "하나니",
@@ -3975,7 +3909,7 @@
   "source_word": "하립",
   "source_idx": "2958",
   "sense_index": 1,
-  "sentence": "스룹바벨과 함께 귀환한 120명의 하립 가문의 선조."
+  "sentence": "스룹바벨과 함께 귀환한 120명의 하립 가문의 조상."
  },
  {
   "source_word": "하립",
@@ -4035,7 +3969,7 @@
   "source_word": "하숨",
   "source_idx": "3000",
   "sense_index": 1,
-  "sentence": "스룹바벨과 함께 포로중에서 함께 귀환한 사람의 선조."
+  "sentence": "스룹바벨과 함께 포로중에서 함께 귀환한 사람의 조상."
  },
  {
   "source_word": "하숨",
@@ -4089,7 +4023,7 @@
   "source_word": "허마",
   "source_idx": "3051",
   "sense_index": 1,
-  "sentence": "로마 교회의 성도. 바울과 관련이 있다. 바울이 로마서에서 문안 인사를 전한 초기 그리스도인."
+  "sentence": "바울과 관련이 있다."
  },
  {
   "source_word": "허메",

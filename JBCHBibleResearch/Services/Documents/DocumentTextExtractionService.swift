@@ -152,7 +152,16 @@ enum DocumentTextExtractionService {
         BibleReferenceIndexingService.reindexDocument(document, context: context)
     }
 
-    // MARK: - 이미지 OCR (14.3, 검수 필수)
+    // MARK: - 이미지 OCR (14.3 원문은 "검수 필수"였으나, [2026-09-27 수정]
+    // 사용자 요청으로 별도 검수(S7) 단계를 없앴다 — "OCR 검수화면은 없앨 것.
+    // OCR 된 내용이 그대로 보여지게 하도록." 예전엔 여기서 `OCRResult`를
+    // `.draft` 상태로만 만들고 `DocumentText` 반영은 사용자가 S7에서
+    // "저장"을 눌러야(`OCRReviewViewModel.save()`, 이제 삭제됨) 비로소
+    // 일어났는데, 이제는 이 함수 하나가 그 역할까지 곧바로 다 한다 —
+    // Vision 인식 결과를 그대로 `DocumentText`로 반영하고 즉시
+    // `indexStatus = .indexed`로 만든다. `OCRResult`는 "원문 인식 결과
+    // 기록"으로서는 여전히 남기되(재-OCR 시 비교/디버깅 근거), 검수 대기라는
+    // 의미가 없어졌으므로 `status`는 처음부터 `.userReviewed`로 저장한다.
 
     private static func extractImageOCR(_ document: SourceDocument, context: ModelContext) async {
         document.indexStatus = .indexing
@@ -187,28 +196,71 @@ enum DocumentTextExtractionService {
         do {
             try handler.perform([request])
             let observations = request.results ?? []
-            let lines = observations.compactMap { $0.topCandidates(1).first }
-            let rawText = lines.map(\.string).joined(separator: "\n")
-            let averageConfidence = lines.isEmpty ? 0 : Double(lines.map(\.confidence).reduce(0, +)) / Double(lines.count)
+            // [2026-09-27 수정] `topCandidates(1)`만 뽑던 것에 더해, 이제
+            // 각 관측치의 `boundingBox`(정규화 좌표, 좌하단 원점 — Vision
+            // 좌표계 그대로)도 같이 챙긴다 — 이 순간을 놓치면(이 request
+            // 결과는 이 함수를 벗어나면 사라진다) 다시는 이 이미지의 실제
+            // 인식 위치를 알 수 없다. `DocumentText.ocrBoundingBox` 선언부
+            // 주석 참고.
+            let recognizedLines: [(text: String, confidence: Double, boundingBox: CGRect)] = observations.compactMap { observation in
+                guard let candidate = observation.topCandidates(1).first else { return nil }
+                return (candidate.string, Double(candidate.confidence), observation.boundingBox)
+            }
+            let rawText = recognizedLines.map(\.text).joined(separator: "\n")
+            let averageConfidence = recognizedLines.isEmpty ? 0 : recognizedLines.map(\.confidence).reduce(0, +) / Double(recognizedLines.count)
 
             let result = OCRResult(
                 rawText: rawText,
                 engine: "Vision(VNRecognizeTextRequest)",
                 confidence: averageConfidence,
-                status: .draft,
+                status: .userReviewed,
                 sourceDocument: document
             )
             context.insert(result)
-            // 14.3 — draft인 동안은 index_status가 indexed로 넘어가지 않는다. S7에서
-            // 사용자가 확정해야 비로소 indexed가 된다(OCRReviewViewModel 참고).
-            document.indexStatus = .notIndexed
-            document.conversionStatus = .converted // "추출(=OCR 실행) 자체"는 끝났다는 의미.
+
+            // [2026-09-27 추가] 검수 단계가 없어졌으므로, 예전에 S7 "저장"이
+            // 하던 일(`OCRReviewViewModel.save()`, 삭제됨) — 줄 단위
+            // `DocumentText` 반영 — 을 여기서 바로 한다. 다른 형식들과 같은
+            // 방어(중복 방지) — 재시도(`retry()`)로 이 함수가 다시 호출될 수
+            // 있으므로, 이전 시도가 남긴 레코드를 먼저 지운다(`extractHWP`와
+            // 같은 원칙).
+            clearDocumentTexts(for: document, context: context)
+            var anyLineInserted = false
+            for (index, line) in recognizedLines.enumerated() {
+                let trimmed = sanitizeLineText(line.text)
+                guard !trimmed.trimmingCharacters(in: .whitespaces).isEmpty else { continue }
+                let record = DocumentText(
+                    pageNumber: 0,
+                    lineIndex: index,
+                    lineText: trimmed,
+                    ocrBoundingBox: encodeOCRBoundingBox(line.boundingBox),
+                    sourceDocument: document
+                )
+                context.insert(record)
+                anyLineInserted = true
+            }
+
+            document.conversionStatus = .converted
+            document.indexStatus = anyLineInserted ? .indexed : .notIndexed
             try? context.save()
         } catch {
             document.conversionStatus = .failedNeedsManual
             document.indexStatus = .notIndexed
             try? context.save()
         }
+        // [2026-08-11 추가한 PDF/doc 분기와 같은 이유] 추출 직후 성경구절
+        // 인덱싱 — 실패 케이스는 함수 내부에서 `indexStatus != .indexed`로
+        // 스스로 걸러진다(PDF 분기 주석 참고).
+        BibleReferenceIndexingService.reindexDocument(document, context: context)
+    }
+
+    /// [2026-09-27 추가] `DocumentText.ocrBoundingBox` 선언부 주석 참고 —
+    /// "x,y,width,height" 콤마 구분 문자열로, Vision이 준 정규화 좌표(0...1,
+    /// 좌하단 원점)를 그대로(변환 없이) 인코딩한다. 소수점 6자리면 이미지
+    /// 픽셀 하나보다 훨씬 촘촘한 정밀도라(4K 이미지 기준 1/4096 ≈ 0.000244)
+    /// 위치 오차 걱정 없이 충분하다.
+    private static func encodeOCRBoundingBox(_ box: CGRect) -> String {
+        String(format: "%.6f,%.6f,%.6f,%.6f", box.origin.x, box.origin.y, box.width, box.height)
     }
 
     private static func loadCGImage(from url: URL) -> CGImage? {

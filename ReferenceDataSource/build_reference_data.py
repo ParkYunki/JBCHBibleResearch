@@ -121,6 +121,7 @@ foundationmodels)를 실행 시점 기준으로 직접 조회해 작성했지만
 컴파일·실행 검증은 사용자가 자신의 기기에서 해야 한다(자세한 사용법은
 `AIRelationExtractor/README.md` 참고).
 """
+import collections
 import json
 import os
 import re
@@ -131,6 +132,16 @@ BOOKS_JSON_PATH = os.path.join(SCRIPT_DIR, "..", "JBCHBibleResearch", "Resources
 OUTPUT_DB_PATH = os.path.join(SCRIPT_DIR, "..", "JBCHBibleResearch", "Resources", "ReferenceData.sqlite")
 BIBLE_DB_PATH = os.path.join(SCRIPT_DIR, "..", "JBCHBibleResearch", "Resources", "BibleDB.sqlite")
 PERSON_PLACE_SEED_PATH = os.path.join(SCRIPT_DIR, "PersonPlaceSeed.json")
+# [2026-09-15 신설] 통합검색 카테고리 확장(인물/장소/주제) 개선안 —
+# claude/bible-research-platform-search-category-expansion-proposal.md 4차
+# 갱신에서 사용자가 확정한 방향: PersonSeed.json(3,067건, description이
+# call/meaning/introduce/lifetime/event/character + 구조화된 관계 딕셔너리를
+# 담고 있음)으로 Persons 콘텐츠를 보강하고, theme01.json(20건)으로 Themes를
+# 채운다. 기존 PersonPlaceSeed.json 기반 정규식 관계추출(build_person_place_tables
+# 내부)은 description이 자유 텍스트라는 전제라 손대지 않고 그대로 둔다 —
+# PersonSeed.json은 별도 함수(enrich_persons_from_seed)로 순수 추가만 한다.
+PERSON_SEED_PATH = os.path.join(SCRIPT_DIR, "PersonSeed.json")
+THEME01_SEED_PATH = os.path.join(SCRIPT_DIR, "theme01.json")
 # [2026-08-19 신설, 2단계 AI 보조 추출 파이프라인]
 # UNMATCHED: 1단계(정규식)가 어느 패턴에도 걸리지 않은 문장을 이 스크립트가
 #   실행될 때마다 이 경로로 내보낸다(Swift AIRelationExtractor 도구의 입력).
@@ -696,6 +707,50 @@ def is_probable_noise(target, relation_type):
     return False
 
 
+# [2026-09-16 신설] 사용자 요청 — "PersonSeed.json의 관계(할아버지~손녀)와
+# 기타관계 데이터에 앞에 인덱스 숫자를 붙이는 것에 대해서 어떠한지?" 동명이인이
+# 있는 이름을 가족관계/기타관계에 적을 때 "이름#idx"(예: "노아#384")로 적으면
+# 어느 Persons.idx를 가리키는지 추측 없이 100% 확정할 수 있게 하는 표기법이다.
+# 구분자는 "#"(사용자 확정) — 실제 데이터 검사 결과 "70명의 아들"/"12사도"처럼
+# 숫자로 시작하는 기존 서술형 값이 있어(구분자 없는 순수 접두 숫자 방식은 이런
+# 값을 오인식함) 콜론/하이픈 등 후보 중 "#"을 골랐다(PersonSeed.json 전체에
+# "#" 문자가 기존에 전혀 안 쓰이고 있음을 확인함). [2026-09-16, 사용자 결정]
+# "앞으로 입력/수정할 때만" 지원 — 기존 3,068건 데이터에 소급 일괄 적용은
+# 하지 않는다. 태그가 없는 기존 값은 지금처럼 이름 그대로 처리된다(하위 호환,
+# 동작 변화 없음).
+IDX_TAG_RE = re.compile(r"^(.*)#(\d+)$")
+# [2026-09-26 추가] 사용자가 PersonSeed.json을 재정리하면서 가족관계 필드에도
+# "이름#idx(설명)" 형식(예: "야고보#4057(사도)", "리노#770(전승)")을 쓰기
+# 시작했다 — 위 IDX_TAG_RE는 "#idx"가 문자열 "끝"이어야 매치되므로 뒤에
+# "(설명)"이 붙으면 통째로 매치 실패해 idx를 못 뽑고, `resolve_target_kind`가
+# "야고보#4057(사도)"라는 문자열 그대로를 이름처럼 취급해 어떤 인물과도
+# 매칭되지 않는 채로 PersonRelations.target_word에 그 원문이 그대로 들어가는
+# 버그가 있었다(전수 스캔 결과 61건 확인). "#idx" 뒤에 괄호 설명이 붙는
+# 경우도 추가로 매치하는 관대한 정규식을 하나 더 두고, 있으면 그쪽으로
+# 폴백한다 — 괄호 안 내용은 자유 서술(사도/양자/전승/왕조 대응 등 고정
+# 어휘가 아님)이라 relation_type 판정에는 쓸 수 없어 그대로 버린다(현재는
+# 화면에도 노출되지 않는다 — 필요하면 별도 컬럼으로 보존하는 건 후속 논의).
+IDX_TAG_WITH_NOTE_RE = re.compile(r"^(.*)#(\d+)\([^()]*\)$")
+
+
+def parse_idx_tag(raw):
+    """`raw`(가족관계/기타관계 원문 항목 하나)에서 "#idx" 태그를 분리한다.
+    태그가 있으면 (표시용 이름, idx 문자열)을, 없으면 (raw 그대로, "")를
+    돌려준다 — 태그 없는 값은 100% 기존과 동일하게 동작한다. "#idx(설명)"
+    형식(위 `IDX_TAG_WITH_NOTE_RE` 참고)도 idx는 그대로 인정하고 괄호 설명만
+    버린다."""
+    m = IDX_TAG_RE.match(raw)
+    if not m:
+        m = IDX_TAG_WITH_NOTE_RE.match(raw)
+    if not m:
+        return raw, ""
+    name = m.group(1).strip()
+    idx = m.group(2)
+    if not name:
+        return raw, ""
+    return name, idx
+
+
 def resolve_target_kind(target, known_person_words, known_place_words):
     """대상 이름을 표제어 집합과 대조한다. 원문 그대로 먼저 확인하고,
     실패하면 조사 하나를 떼어낸 형태로 한 번 더 확인한다(느슨한
@@ -963,15 +1018,11 @@ def build_person_place_tables(cur, abbr_index):
     # description 읽기는 remark 폴백 계산에만 남아 있고, 튜플에는 담기지
     # 않는다. relation_person(Persons만)은 위 extract_relation_person_idxs
     # 참고.
-    person_rows = [
-        (
-            e["idx"], e["word"],
-            e.get("remark", "") or e.get("description", "") or "",
-            verses_str(e.get("verses", [])),
-            extract_relation_person_idxs(e.get("remark", ""), person_idx_by_word),
-        )
-        for e in persons
-    ]
+    # [2026-09-15 변경] Persons는 더 이상 여기서 만들지 않는다 — PersonSeed.json
+    # 단일 소스로 build_persons_from_person_seed()가 전담한다(사용자 확정:
+    # "PersonSeed.json 데이터가 정확하니 Persons 테이블을 다 비우고 다시
+    # PersonSeed.json 데이터로 채울 것"). Places는 기존 그대로 여기서 만든다
+    # (이번 라운드 범위 밖 — 사용자 확정 "장소는 아직 준비중").
     place_rows = [
         (
             e["idx"], e["word"],
@@ -981,12 +1032,18 @@ def build_person_place_tables(cur, abbr_index):
         for e in places
     ]
     cur.executemany(
-        "INSERT INTO Persons (idx, word, remark, verses, relation_person) VALUES (?, ?, ?, ?, ?)", person_rows
-    )
-    cur.executemany(
         "INSERT INTO Places (idx, word, remark, verses) VALUES (?, ?, ?, ?)", place_rows
     )
-    print("Persons 삽입:", len(person_rows), "/ Places 삽입:", len(place_rows))
+    print("Places 삽입:", len(place_rows), "(Persons는 build_persons_from_person_seed()에서 별도 삽입)")
+
+    # 관계 추출(아래)에서 쓸 known_person_words/known_place_words는 원본 JSON
+    # 리스트가 아니라 실제로 삽입된(될) 테이블 기준으로 다시 계산한다 — "함"
+    # 오매칭(4차 문서 §4)과 같은 부류의 문제를 정규식 추출 쪽에서도 막기 위함.
+    # Persons는 이 함수 실행 시점에 아직 비어 있을 수 있으므로, 호출부
+    # (main())가 build_persons_from_person_seed()를 먼저 실행한 뒤 이 함수를
+    # 불러야 한다 — 그래야 아래 조회가 최신 Persons를 반영한다.
+    known_person_words = {row[0] for row in cur.execute("SELECT DISTINCT word FROM Persons").fetchall()} or known_person_words
+    known_place_words = {row[0] for row in cur.execute("SELECT DISTINCT word FROM Places").fetchall()} or known_place_words
 
     relation_rows = []
     empty_description_count = 0
@@ -1018,10 +1075,47 @@ def build_person_place_tables(cur, abbr_index):
     relation_rows = [r for r in relation_rows if (r[0], r[3], r[5]) not in remove_set]
     manual_removed = before_remove - len(relation_rows)
 
+    # [2026-09-15 신설] Persons에서 빠진 legacy 표제어(PersonSeed.json에
+    # 없어 흡수된 11건)를 source로 하는 관계 행을, 흡수한 정식 표제어의
+    # idx/word로 재귀속한다 — dangling source_idx(존재하지 않는 Persons.idx를
+    # 가리키는 행)를 만들지 않으면서도 정보를 버리지 않는다. 대응하는 표제어가
+    # 없는 나머지("겔")는 그 행만 드롭한다(실행 확인 — 1건, tribe_of 유다).
+    LEGACY_WORD_REMAP = {
+        "고니야": "여호야긴", "디두모": "도마", "맛다니야": "시드기야", "사래": "사라",
+        "아브람": "아브라함", "아사랴": None,  # 아사랴는 여러 명(아벳느고/웃시야 등)과 겹쳐 자동 재귀속 보류
+        "여고냐": "여호야긴", "여디디야": "솔로몬", "여룹바알": "기드온",
+        "이스라엘": "야곱", "임마누엘": "예수", "겔": None,
+    }
+    canonical_idx_by_word = {}
+    for canon_word in set(v for v in LEGACY_WORD_REMAP.values() if v):
+        rows = cur.execute("SELECT idx FROM Persons WHERE word=?", (canon_word,)).fetchall()
+        if len(rows) == 1:
+            canonical_idx_by_word[canon_word] = rows[0][0]
+        # 동명이인으로 후보가 여럿이면 자동 재귀속하지 않는다(오귀속 위험) —
+        # 아래 루프에서 canonical_idx_by_word에 없으면 그 행은 드롭된다.
+
+    remapped_count = 0
+    dropped_count = 0
+    final_relation_rows = []
+    for r in relation_rows:
+        source_word = r[0]
+        if source_word in LEGACY_WORD_REMAP:
+            canon = LEGACY_WORD_REMAP[source_word]
+            canon_idx = canonical_idx_by_word.get(canon) if canon else None
+            if canon_idx is None:
+                dropped_count += 1
+                continue
+            r = (canon, canon_idx) + r[2:]
+            remapped_count += 1
+        final_relation_rows.append(r)
+    relation_rows = final_relation_rows
+    if remapped_count or dropped_count:
+        print(f"  (legacy 표제어 관계 행 재귀속 {remapped_count}건, 대응 표제어 없어 드롭 {dropped_count}건)")
+
     cur.executemany(
         "INSERT INTO PersonRelations "
         "(source_word, source_idx, sense_index, relation_type, pattern_label, target_word, target_kind, "
-        "raw_sentence, extraction_method) VALUES (?, ?, ?, ?, ?, ?, ?, ?, 'regex')",
+        "raw_sentence, target_idx, extraction_method) VALUES (?, ?, ?, ?, ?, ?, ?, ?, '', 'regex')",
         relation_rows,
     )
     resolved_count = sum(1 for r in relation_rows if r[6] is not None)
@@ -1080,7 +1174,7 @@ def build_person_place_tables(cur, abbr_index):
     cur.executemany(
         "INSERT INTO PersonRelations "
         "(source_word, source_idx, sense_index, relation_type, pattern_label, target_word, target_kind, "
-        "raw_sentence, extraction_method) VALUES (?, ?, ?, ?, ?, ?, ?, ?, 'manual')",
+        "raw_sentence, target_idx, extraction_method) VALUES (?, ?, ?, ?, ?, ?, ?, ?, '', 'manual')",
         manual_add_rows,
     )
     manual_add_resolved = sum(1 for r in manual_add_rows if r[6] is not None)
@@ -1136,7 +1230,7 @@ def build_person_place_tables(cur, abbr_index):
         cur.executemany(
             "INSERT INTO PersonRelations "
             "(source_word, source_idx, sense_index, relation_type, pattern_label, target_word, target_kind, "
-            "raw_sentence, extraction_method) VALUES (?, ?, ?, ?, ?, ?, ?, ?, 'ai')",
+            "raw_sentence, target_idx, extraction_method) VALUES (?, ?, ?, ?, ?, ?, ?, ?, '', 'ai')",
             ai_rows,
         )
         ai_inserted = len(ai_rows)
@@ -1200,6 +1294,697 @@ def build_verse_search_index(cur):
         "INSERT INTO VerseSearchIndex (book_id, chapter, verse, content) VALUES (?, ?, ?, ?)", rows
     )
     print("VerseSearchIndex(FTS5 unicode61) 삽입:", len(rows), "절 (개역한글, BibleDB.sqlite 기준)")
+
+
+# === PersonSeed.json 보강 (2026-09-15 신설) ===
+# 기존 build_person_place_tables()의 정규식 관계추출은 손대지 않는다 — 이
+# 함수는 그 뒤에 순수 추가(UPDATE 또는 신규 INSERT)만 한다.
+def build_persons_from_person_seed(cur, abbr_index):
+    """[2026-09-15 신설, 이전 enrich_persons_from_seed() 대체] 사용자 확정 —
+    "PersonSeed.json 데이터가 정확하니 Persons 테이블을 다 비우고 다시
+    PersonSeed.json 데이터로 채울 것". PersonPlaceSeed.json 기반 Persons
+    INSERT는 build_person_place_tables()에서 완전히 제거했다(Places만 거기서
+    유지) — Persons는 이제 이 함수 하나가 전담한다. 3,067건 전부를 UPDATE/
+    INSERT 구분 없이 그대로 삽입한다."""
+    if not os.path.exists(PERSON_SEED_PATH):
+        print(f"({PERSON_SEED_PATH} 없음 — Persons 테이블을 채울 수 없음, 중단)")
+        raise SystemExit(1)
+
+    with open(PERSON_SEED_PATH, encoding="utf-8") as f:
+        seed_entries = json.load(f)
+
+    def verses_str(verse_list):
+        resolved = [resolve_single_verse(v, abbr_index) for v in (verse_list or [])]
+        resolved = [r for r in resolved if r is not None]
+        return ",".join(f"{b}:{c}:{v}" for b, c, v in resolved)
+
+    def seed_relation_names(rel, field):
+        """[2026-09-16 신설] `rel`(관계 딕셔너리 하나)에서 `field`(할아버지·
+        할머니·아버지·어머니·배우자·아들·딸·손자·손녀 중 하나) 값을 콤마
+        구분 문자열로 정규화한다 — 원본이 단일 문자열이든 리스트든 결과는
+        항상 "이름,이름" 형태(값이 없으면 빈 문자열)다. 이름 자체는 원본
+        그대로 옮긴다(괄호 주석 등 어떤 가공도 하지 않음 — 추측 금지 원칙,
+        위 CREATE TABLE 주석 참고)."""
+        val = rel.get(field)
+        if not val:
+            return ""
+        items = val if isinstance(val, list) else [val]
+        names = [str(v).strip() for v in items if v and str(v).strip()]
+        return ",".join(names)
+
+    person_rows = []
+    for e in seed_entries:
+        desc = e.get("description") or {}
+        occupation = desc.get("직업/직위")
+        occupation_str = ",".join(occupation) if isinstance(occupation, list) else (occupation or "")
+        remark = e.get("remark") or e.get("introduce") or ""
+        rel = desc.get("관계")
+        if isinstance(rel, list) and rel:
+            rel = rel[0]
+        if not isinstance(rel, dict):
+            rel = {}
+        person_rows.append((
+            e["idx"], e["word"], remark, verses_str(e.get("verses")), "",
+            ",".join(e.get("word2") or []), e.get("call") or "", e.get("meaning") or "",
+            e.get("introduce") or "", e.get("lifetime") or "", e.get("event") or "",
+            e.get("character") or "", desc.get("출신") or "", desc.get("민족") or "",
+            desc.get("지파") or "", desc.get("성별") or "", occupation_str, e.get("memo") or "",
+            seed_relation_names(rel, "할아버지"), seed_relation_names(rel, "할머니"),
+            seed_relation_names(rel, "아버지"), seed_relation_names(rel, "어머니"),
+            seed_relation_names(rel, "배우자"), seed_relation_names(rel, "아들"),
+            seed_relation_names(rel, "딸"), seed_relation_names(rel, "손자"),
+            seed_relation_names(rel, "손녀"),
+        ))
+
+    cur.executemany(
+        "INSERT INTO Persons (idx, word, remark, verses, relation_person, word2, call_title, meaning, "
+        "introduce, lifetime, event, character, origin, nation, tribe, gender, occupation, seed_memo, "
+        "rel_grandfather, rel_grandmother, rel_father, rel_mother, rel_spouse, rel_sons, rel_daughters, "
+        "rel_grandsons, rel_granddaughters) "
+        "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
+        person_rows,
+    )
+    print(f"Persons(PersonSeed.json 단일 소스) 삽입: {len(person_rows)}건")
+
+
+def build_structured_person_relations(cur):
+    """PersonSeed.json의 description.관계(구조화된 딕셔너리)를 PersonRelations에
+    직접 반영한다 — 정규식 추정이 필요 없는 명시적 데이터라 extraction_method=
+    'structured_v2'로 구분한다. Persons/Places가 이미 채워진 뒤 호출해야
+    known_person_words/known_place_words가 정확하다."""
+    if not os.path.exists(PERSON_SEED_PATH):
+        return
+
+    with open(PERSON_SEED_PATH, encoding="utf-8") as f:
+        seed_entries = json.load(f)
+
+    known_person_words = {row[0] for row in cur.execute("SELECT DISTINCT word FROM Persons").fetchall()}
+    known_place_words = {row[0] for row in cur.execute("SELECT DISTINCT word FROM Places").fetchall()}
+    person_word_to_idx = {}
+    for w, i in cur.execute("SELECT word, idx FROM Persons").fetchall():
+        person_word_to_idx.setdefault(w, i)  # 동명이인이면 첫 idx만 사용(기존 관례와 동일)
+    known_idx_set = {row[0] for row in cur.execute("SELECT idx FROM Persons").fetchall()}
+    # [2026-09-22 추가] "동생"(성별 무관 라벨) 처리에 필요 — 태그된 idx가
+    # 있으면 그 사람의 실제 성별로, 없고 이름이 동명이인 없이 하나뿐이면
+    # 그 사람의 성별로 "아우"/"누이" 중 정확히 결정한다(추측 금지 원칙 —
+    # 결정 불가하면 스킵, 아래 resolve_dongsaeng_label 참고).
+    idx_to_gender = {}
+    word_to_genders = {}
+    for w, i, g in cur.execute("SELECT word, idx, gender FROM Persons").fetchall():
+        idx_to_gender[i] = g
+        word_to_genders.setdefault(w, []).append(g)
+    invalid_idx_tags = []  # [2026-09-22 추가] "이름#idx" 태그의 idx가 Persons에 실제로
+    # 존재하지 않는 경우(오타 등)를 여기 모아 마지막에 경고로 출력한다 — 추측
+    # 보정 없이 원본 그대로 로그만 남기고 target_idx는 빈 값(미상)으로 둔다.
+
+    def resolve_tagged_idx(name, tagged_idx):
+        """[2026-09-22 신설] `parse_idx_tag`가 뽑아낸 태그 문자열을 검증한다.
+        - 태그 없음("") -> 그대로 "" (기존과 동일, 추측하지 않음).
+        - "#0" -> 사용자 확인(2026-09-22, 채팅): "자세한 정보를 수집하지 못해
+          링크를 걸지 못하는" 경우를 표시하는 전용 기호다(실제 idx 0번인
+          사람은 Persons에 없음, idx 범위는 2~4636). 태그가 없는 것과 동일하게
+          취급해 target_idx는 "" 로 남긴다(경고 없음 — 사용자가 의도적으로
+          표시한 "미상"이므로 오류가 아니다).
+        - 그 외 값인데 Persons.idx에 실제로 존재하지 않으면 오타로 간주해
+          invalid_idx_tags에 기록하고 "" 로 폴백한다(정확히 아는 경우만
+          채운다는 target_idx 컬럼 원칙 — 위 CREATE TABLE 주석 참고, 추측
+          금지 원칙에 따라 임의로 후보를 골라 보정하지 않는다).
+        - Persons.idx에 실제로 존재하면 그 값을 그대로 쓴다."""
+        if not tagged_idx or tagged_idx == "0":
+            return ""
+        if tagged_idx not in known_idx_set:
+            invalid_idx_tags.append((name, tagged_idx))
+            return ""
+        return tagged_idx
+
+    RELATION_TYPE_BY_GENDER = {
+        "부모": {"남": "son_of", "여": "daughter_of", None: "son_of"},
+        "조부모": {"남": "grandson_of", "여": "granddaughter_of", None: "grandson_of"},
+        "자녀": {"남": "father_of", "여": "mother_of", None: "father_of"},
+        "손주": {"남": "grandfather_of", "여": "grandmother_of", None: "grandfather_of"},
+    }
+
+    def gender_key(desc):
+        g = (desc or {}).get("성별")
+        return g if g in ("남", "여") else None
+
+    relation_rows = []
+    other_relation_skipped = 0
+    spouse_skipped = 0
+    # [2026-09-22 버그 수정] 아래로 옮기기 전엔 이 셋이 `for e in seed_entries:`
+    # 루프 "안"에서 매번 새로 선언돼(원래 OTHER_RELATION_LABEL_MAP 딕셔너리가
+    # 루프 안에 있던 기존 구조를 그대로 따라가다 생긴 실수), 사람마다 리셋되고
+    # 최종적으로 마지막 한 명 분량만 남아 있었다(실행해보니 related_to/
+    # PersonContextNotes가 0건으로 나와 발견) — relation_rows와 같은 스코프인
+    # 여기로 옮겨 전체 인물에 걸쳐 누적되게 한다.
+    context_note_rows = []
+    related_to_count = 0
+    context_note_count = 0
+
+    for e in seed_entries:
+        desc = e.get("description") or {}
+        rel = desc.get("관계")
+        if isinstance(rel, list) and rel:
+            rel = rel[0]
+        if not isinstance(rel, dict):
+            continue
+        gk = gender_key(desc)
+        src_word, src_idx = e["word"], e["idx"]
+
+        def add(field, rtype_group, single=True):
+            nonlocal other_relation_skipped
+            val = rel.get(field)
+            if not val:
+                return
+            targets = [val] if (single and isinstance(val, str)) else (val if isinstance(val, list) else [val])
+            for t in targets:
+                t = (t or "").strip()
+                if not t:
+                    continue
+                # [2026-09-16 추가] 위 `parse_idx_tag` 주석 참고 — "이름#idx"
+                # 태그가 있으면 그 idx를 추측 없이 그대로 쓴다.
+                t, tagged_idx = parse_idx_tag(t)
+                tagged_idx = resolve_tagged_idx(t, tagged_idx)
+                rtype = RELATION_TYPE_BY_GENDER[rtype_group][gk]
+                target_word, target_kind = resolve_target_kind(t, known_person_words, known_place_words)
+                if target_kind == "place":
+                    # 가족관계는 정의상 대상이 사람이어야 한다(4차 문서 §4) —
+                    # 동음이의 지명과의 우연한 매칭을 걸러낸다.
+                    target_kind = None
+                relation_rows.append((
+                    src_word, src_idx, 0, rtype, "[PersonSeed 구조화 관계]",
+                    target_word, target_kind, "", tagged_idx, "structured_v2",
+                ))
+
+        add("할아버지", "조부모")
+        add("할머니", "조부모")
+        add("아버지", "부모")
+        add("어머니", "부모")
+        add("아들", "자녀", single=False)
+        add("딸", "자녀", single=False)
+        add("손자", "손주", single=False)
+        add("손녀", "손주", single=False)
+
+        spouse = rel.get("배우자")
+        if spouse:
+            spouse_list = spouse if isinstance(spouse, list) else [spouse]
+            for sp in spouse_list:
+                sp = (sp or "").strip()
+                if not sp:
+                    continue
+                # [2026-09-15, 6차 문서 §2 승인] 괄호가 있으면 앞부분만 이름으로
+                # 추출한다("푸데(전승)" -> "푸데"). 괄호가 아예 없는 순수 서술형
+                # ("포로에서 귀환한 사람으로 성전 문지기")은 추출할 이름 자체가
+                # 없으므로 여전히 스킵한다.
+                if "(" in sp:
+                    name_part = sp.split("(", 1)[0].strip()
+                else:
+                    name_part = sp
+                # [2026-09-16 추가] 위 `parse_idx_tag` 주석 참고 — 괄호
+                # 서술(전승 등)을 뗀 뒤 "이름#idx" 태그가 있으면 분리한다.
+                name_part, tagged_idx = parse_idx_tag(name_part)
+                if not name_part or len(name_part) > 8:
+                    spouse_skipped += 1
+                    continue
+                tagged_idx = resolve_tagged_idx(name_part, tagged_idx)
+                target_word, target_kind = resolve_target_kind(name_part, known_person_words, known_place_words)
+                if target_kind == "place":
+                    target_kind = None
+                relation_rows.append((
+                    src_word, src_idx, 0, "married_to", "[PersonSeed 구조화 관계]",
+                    target_word, target_kind, "", tagged_idx, "structured_v2",
+                ))
+
+        # [2026-09-15, 6차 문서 §4 승인] 기타관계 182건 매핑. "Y(라벨)"이 X의
+        # 기타관계 목록에 있다는 건 "Y는 X의 [라벨]"이라는 뜻이라, 대부분
+        # source=Y(목록의 사람)/target=X(표제어) 순서로 넣어야 문장이 맞는다
+        # (PersonRelationLabeling.sentence(for:)가 "source는 target의 [라벨]"로
+        # 렌더링하기 때문). "조카"만 예외 — 대응하는 relation_type이 없어
+        # uncle_of를 방향을 뒤집어 쓴다(X가 Y의 삼촌/고모라는 동치 표현).
+        # [2026-09-16 추가] 사용자 요청 — 기타관계 중 "친인척 관계가 아닌
+        # 특별한 경우(제자, 동역자, 친구)"만 화면에 표현. "동역자"/"스승"은
+        # 이미 매핑돼 있었다(스승은 방향을 뒤집어 읽으면 "제자" — 화면
+        # 쪽에서 teacher_of를 source=현재 인물 기준으로 뒤집어 "제자"로
+        # 보여준다, PersonDetailView 참고). "친구"만 매핑이 아예 없어 원본에
+        # 있는 사례(다윗-요나단, "다윗: 요나단(친구)")조차 지금까지 아래
+        # `other_relation_skipped`로 조용히 드랍되고 있었다 — 신설.
+        # "동역자"와 같은 성격(상호적 관계, 방향 구분 의미 없음)이라 같은
+        # "Y_to_X" 패턴을 그대로 따른다 — 화면은 source/target 어느 쪽이든
+        # 현재 인물이 걸린 friend_of 관계를 모두 "친구" 목록에 담는다.
+        OTHER_RELATION_LABEL_MAP = {
+            "형제": ("brother_of", "Y_to_X"), "동역자": ("co_worker_of", "Y_to_X"),
+            "아우": ("younger_brother_of", "Y_to_X"), "형": ("older_brother_of", "Y_to_X"),
+            "누이": ("sister_of", "Y_to_X"), "숙부": ("uncle_of", "Y_to_X"),
+            "오라비": ("brother_of", "Y_to_X"), "조카": ("uncle_of", "X_to_Y"),
+            "언니": ("sister_of", "Y_to_X"), "스승": ("teacher_of", "Y_to_X"),
+            "친형제": ("brother_of", "Y_to_X"), "자부": ("daughter_in_law_of", "Y_to_X"),
+            "선조": ("ancestor_of", "Y_to_X"), "외조부": ("maternal_grandfather_of", "Y_to_X"),
+            "친구": ("friend_of", "Y_to_X"),
+            # [2026-09-16 추가] 사용자 요청 — "가르가스 기타관계에 아하수에로가
+            # 있는데, idx3995인 아하수에로로 확실하게 지정할 수 있는가?" 원래
+            # 라벨 "주군"이 이 맵에 아예 없어 가르가스→아하수에로 관계 자체가
+            # 지금까지 조용히 드롭되고 있었다(핵심 원인). "주군"/"신하"를
+            # 새로 매핑한다 — "신하"는 "스승"과 완전히 같은 패턴(Y_to_X,
+            # target=자기 자신이라 idx 정확히 앎)이라, 동명이인이 있는
+            # 상대(예: 아하수에로 3명)를 가리킬 때도 "주군 쪽 레코드에
+            # '이름(신하)'를 적어 두면" 추측 없이 100% 정확하게 연결된다
+            # (이번 아하수에로 idx3995 케이스에 이 방법을 실제로 적용했다 —
+            # PersonSeed.json에서 idx3995 기타관계에 "가르가스(신하)" 추가,
+            # 가르가스 쪽의 원래 애매한 "아하수에로(주군)"는 제거). "주군"은
+            # "조카"(uncle_of를 뒤집어 쓰는 것)와 같은 이유로 X_to_Y 방향으로
+            # 매핑해 둔다 — 상대(주군) 이름만 아는 쪽(신하 본인)이 자기
+            # 기타관계에 "이름(주군)"이라고만 적어도 최소한 관계 자체는
+            # 기록되게(다만 상대가 동명이인이면 기존 관례대로 첫 idx 추측이
+            # 적용된다 — "조카"와 동일한 리스크, 새로 만든 리스크 아님).
+            "신하": ("servant_of", "Y_to_X"), "주군": ("servant_of", "X_to_Y"),
+            # [2026-09-22 추가, 사용자 확정 "A그룹 — 바로 반영"] PersonSeed.json에
+            # idx 태그 작업과 함께 새로 채워진 가족관계성 기타관계 라벨들.
+            # 기존 있는 relation_type의 동의어("며느리"=자부, "시아버지"=장인,
+            # "자매"=누이/언니, "이복형제/이복오라비"=형제 — "이복"이라는
+            # 구분은 화면에선 생략됨, "쌍둥이 형"=형 — "쌍둥이"라는 구분도
+            # 생략됨, "조상"=선조)는 새 relation_type 없이 그대로 합류시키고,
+            # 정확히 대응하는 게 없는 것만 신설했다:
+            #   - "장인"/"시아버지" -> father_in_law_of(신설, "사위"와 대칭)
+            #   - "사위" -> son_in_law_of(신설)
+            #   - "외손자"/"외손주" -> maternal_grandfather_of를 "외조부"와
+            #     반대 방향(X_to_Y)으로 재사용 — "조카"가 uncle_of를 방향만
+            #     뒤집어 쓰는 것과 완전히 같은 패턴(표제어 자신이 조부이고
+            #     목록의 사람이 그 손주라는 뜻).
+            #   - "증조부" -> great_grandfather_of(신설)
+            #   - "외조모" -> maternal_grandmother_of(신설, QueryIntentHandler
+            #     쪽엔 이미 문장 case가 있었음 — 과거 정규식 파이프라인용으로
+            #     선반영돼 있던 것을 이번에 실제로 채움)
+            "며느리": ("daughter_in_law_of", "Y_to_X"),
+            "장인": ("father_in_law_of", "Y_to_X"), "시아버지": ("father_in_law_of", "Y_to_X"),
+            "사위": ("son_in_law_of", "Y_to_X"),
+            "외손자": ("maternal_grandfather_of", "X_to_Y"), "외손주": ("maternal_grandfather_of", "X_to_Y"),
+            "이복형제": ("brother_of", "Y_to_X"), "이복오라비": ("brother_of", "Y_to_X"),
+            "자매": ("sister_of", "Y_to_X"), "쌍둥이 형": ("older_brother_of", "Y_to_X"),
+            "증조부": ("great_grandfather_of", "Y_to_X"), "외조모": ("maternal_grandmother_of", "Y_to_X"),
+            "조상": ("ancestor_of", "Y_to_X"),
+            # [2026-09-22 추가] "대적"/"동맹"은 가족관계가 아니라 상호관계
+            # (방향에 의미 없음) — "동역자"/"친구"와 완전히 같은 성격이라
+            # 같은 Y_to_X 저장 패턴을 그대로 따른다.
+            "대적": ("adversary_of", "Y_to_X"), "동맹": ("ally_of", "Y_to_X"),
+        }
+
+        def resolve_dongsaeng_label(name, idx):
+            """[2026-09-22 신설] "동생"은 성별을 명시하지 않는 라벨이라 그대로
+            매핑할 relation_type이 없다 — idx가 태그돼 있으면 그 사람의 실제
+            성별로, 없으면 이름이 동명이인 없이 하나뿐일 때만 그 성별로
+            "아우"(남)/"누이"(여)로 정확히 치환한다. 성별을 확정할 근거가
+            없으면 None을 돌려줘 호출부에서 미매핑 처리하게 한다(추측 금지)."""
+            g = idx_to_gender.get(idx) if idx else None
+            if g not in ("남", "여"):
+                cands = {gg for gg in word_to_genders.get(name, []) if gg in ("남", "여")}
+                g = cands.pop() if len(cands) == 1 else None
+            if g == "남":
+                return "아우"
+            if g == "여":
+                return "누이"
+            return None
+
+        def is_context_label(label):
+            """[2026-09-22 신설, B그룹 — 사용자 확정 "인물관계에는 넣지
+            않더라도 보여주기를 원함"] 특정 relation_type으로 정식 편입하지
+            않기로 한 직함/역할/사건성 라벨("왕","총독","선지자","피고" 등)을
+            인물관계 그래프(PersonRelations)엔 넣지 않되, 데이터 자체는
+            버리지 않고 PersonContextNotes(참고용 전용 테이블, 검색/인물관계
+            그래프에는 노출되지 않음)에 보존해 화면에 표시할 수 있게 한다.
+            "/"가 섞인 복합 라벨("누이/아론의 아내" 등)은 여러 사실이 뭉쳐
+            있어 의미가 불명확하므로 여기서도 제외한다(기존과 동일하게
+            미매핑 유지 — 추측 금지).
+
+            [2026-09-27 수정] "열두 제자"/"다윗의 30용사"/"다윗의 3대용사"
+            (GROUP_LABEL_DEFS, C그룹)는 이제 build_person_groups()가 전담
+            추출한다 — 여기서도 함께 잡히면 PersonContextNotes에 "열두 제자"
+            항목이 12번(멤버 수만큼) 중복으로 쌓이는 걸 실행 확인으로
+            발견했다(같은 정보가 화면 "기타 정보"와 "소속 그룹" 두 카드에
+            같은 모양 없이 중복 노출됨). GROUP_LABEL_DEFS는 이 함수보다
+            뒤에 정의되지만 모듈 전체가 먼저 로드된 뒤 main()이 호출되므로
+            (실행 시점 기준) 문제 없다."""
+            return bool(label) and "/" not in label and label not in GROUP_LABEL_DEFS
+
+        others = rel.get("기타관계")
+        if others:
+            other_items = others if isinstance(others, list) else [others]
+            for it in other_items:
+                it = (it or "").strip()
+                if not it:
+                    continue
+                # [2026-09-22 수정, 사용자 확정 "D그룹 — related_to 신설해서
+                # 최소 반영"] 괄호(라벨)가 아예 없는 "이름#idx" 항목은 예전엔
+                # 여기 도달하지도 못하고 이 아래 "괄호 1개 아니면 스킵" 검사에
+                # 걸려 조용히 버려졌다 — 이제는 라벨 없음을 나타내는
+                # label_part=""로 통일해서 아래 공통 로직(related_to 처리)을
+                # 그대로 태운다. 괄호가 여러 개거나 닫는 괄호로 안 끝나는 등
+                # 진짜 형식이 어긋난 것만 여전히 미매핑 처리한다(복합 라벨
+                # "누이/아론의 아내" 등은 애초에 "(" 자체가 있어 이 분기로
+                # 안 오고 아래 label_part 매칭 단계에서 걸러진다).
+                if "(" not in it:
+                    name_part, label_part = it, ""
+                elif it.count("(") == 1 and it.endswith(")"):
+                    name_part, _, label_part = it[:-1].partition("(")
+                    name_part = name_part.strip()
+                    label_part = label_part.strip()
+                else:
+                    other_relation_skipped += 1
+                    continue
+                if not name_part:
+                    other_relation_skipped += 1
+                    continue
+                # [2026-09-16 추가] 위 `parse_idx_tag` 주석 참고 — "이름#idx"
+                # 태그가 있으면 이 항목이 가리키는 사람의 idx를 추측 없이
+                # 정확히 안다(사용자가 직접 지정한 값이라 target_idx 컬럼의
+                # "추측 금지" 원칙에 어긋나지 않음).
+                name_part, tagged_idx = parse_idx_tag(name_part)
+                tagged_idx = resolve_tagged_idx(name_part, tagged_idx)
+
+                # [2026-09-22 추가] "동생"은 성별에 따라 아우/누이 중 하나로
+                # 확정해야 기존 relation_type에 태울 수 있다 — 확정 못 하면
+                # (동명이인이라 성별을 모르면) 추측하지 않고 미매핑 처리.
+                if label_part == "동생":
+                    resolved = resolve_dongsaeng_label(name_part, tagged_idx)
+                    if resolved is None:
+                        other_relation_skipped += 1
+                        continue
+                    label_part = resolved
+
+                if label_part == "" or label_part == "기타":
+                    # [2026-09-22, D그룹] 구체적 관계 유형은 모르지만(라벨
+                    # 없음 또는 "기타") 관련이 있다는 사실 자체는 살린다.
+                    mapping = ("related_to", "Y_to_X")
+                    is_related_to = True
+                else:
+                    mapping = OTHER_RELATION_LABEL_MAP.get(label_part)
+                    is_related_to = False
+
+                if not mapping:
+                    if is_context_label(label_part):
+                        # [2026-09-22, B그룹] 인물관계 그래프(PersonRelations)엔
+                        # 넣지 않고 참고용 전용 테이블에만 남긴다.
+                        target_word, target_kind = resolve_target_kind(
+                            name_part, known_person_words, known_place_words
+                        )
+                        if target_kind == "place":
+                            target_kind = None
+                        context_note_rows.append((
+                            src_word, src_idx, label_part, target_word, target_kind,
+                            tagged_idx, it,
+                        ))
+                        context_note_count += 1
+                        continue
+                    other_relation_skipped += 1
+                    continue
+                rtype, direction = mapping
+                if direction == "Y_to_X":
+                    row_source_word, row_source_idx = name_part, (tagged_idx or None)
+                    row_target_word = src_word
+                    # target(row_target_word)이 바로 이 항목(src_word/src_idx)
+                    # 자신이라 idx를 조회 없이 정확히 안다 — person_word_to_idx의
+                    # "동명이인이면 첫 idx" 폴백이 전혀 필요 없는 유일한 경우.
+                    row_target_idx = src_idx
+                else:  # "X_to_Y" — 조카 전용, source=표제어(X), target=목록의 사람(Y)
+                    row_source_word, row_source_idx = src_word, src_idx
+                    row_target_word = name_part
+                    row_target_idx = tagged_idx or None
+                if row_source_idx is None:
+                    # 목록에 적힌 사람(Y)의 idx를 Persons에서 실제로 조회한다
+                    # (동명이인이면 첫 idx, 못 찾으면 빈 문자열 폴백).
+                    row_source_idx = person_word_to_idx.get(name_part, "")
+                if row_target_idx is None:
+                    # "조카" 방향 전용 — source_idx와 같은 폴백을 target 쪽에도
+                    # 그대로 적용한다(새 추측 아님, 기존 관례 재사용).
+                    row_target_idx = person_word_to_idx.get(row_target_word, "")
+                target_word, target_kind = resolve_target_kind(
+                    row_target_word if direction == "Y_to_X" else name_part,
+                    known_person_words, known_place_words,
+                )
+                if target_kind == "place":
+                    target_kind = None
+                relation_rows.append((
+                    row_source_word, row_source_idx, 0, rtype, "[PersonSeed 기타관계]",
+                    target_word, target_kind, it, row_target_idx, "structured_v2",
+                ))
+                if is_related_to:
+                    related_to_count += 1
+
+    cur.executemany(
+        "INSERT INTO PersonRelations "
+        "(source_word, source_idx, sense_index, relation_type, pattern_label, target_word, target_kind, "
+        "raw_sentence, target_idx, extraction_method) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
+        relation_rows,
+    )
+    # [2026-09-22 신설, B그룹 — "인물관계에는 넣지 않더라도 보여주기를 원함"]
+    # 왕/총독/선지자 등 직함·역할성 기타관계 라벨은 PersonRelations(인물관계
+    # 그래프)엔 넣지 않되, 참고용으로 보존해 화면에 표시할 수 있도록 별도
+    # 테이블에 적재한다 — is_context_label() 판정 결과가 여기 모인다.
+    cur.executemany(
+        "INSERT INTO PersonContextNotes "
+        "(source_word, source_idx, label, target_word, target_kind, target_idx, raw_sentence) "
+        "VALUES (?, ?, ?, ?, ?, ?, ?)",
+        context_note_rows,
+    )
+    print(
+        f"PersonRelations(structured_v2) 삽입: {len(relation_rows)}건 "
+        f"(이 중 related_to(D그룹, 라벨없음/\"기타\") {related_to_count}건 — "
+        f"기타관계 미매핑 스킵 {other_relation_skipped}건, 배우자 서술형/리스트 스킵 {spouse_skipped}건 — "
+        f"claude/bible-research-platform-search-category-expansion-proposal.md 6차 문서 참고)"
+    )
+    print(f"PersonContextNotes(B그룹 — 직함/역할성, 참고용) 삽입: {len(context_note_rows)}건")
+    if invalid_idx_tags:
+        print(f"  ⚠️ idx 태그 오류(Persons에 존재하지 않는 idx) {len(invalid_idx_tags)}건 "
+              f"— target_idx는 빈 값(미상)으로 처리함, PersonSeed.json에서 직접 확인 필요:")
+        for name, idx in invalid_idx_tags:
+            print(f"     - {name}#{idx}")
+
+
+# [2026-09-26 신설, C그룹] "PersonGroups 같은 별도 테이블 설계부터 검토"(사용자
+# 확정) — 열두 제자/다윗의 30용사/다윗의 3대용사처럼 "여러 사람이 공유하는
+# 소속 집단"을 PersonRelations(가족·개인 간 관계 그래프)와 분리해서 담는다.
+#
+# [2026-09-27 수정] 처음엔 "열두 제자"만 "언급한 사람 자신도 멤버"
+# (include_source=True)로 특별 취급했다 — 그 시점엔 12명이 서로를 참조하는
+# 완전 대칭 mesh였기 때문(소스 12명 = 타겟 12명, 실행 확인). 그런데 그 뒤
+# 사용자가 예수#2641의 기타관계에도 "베드로#1777(열두 제자)" 등 같은 라벨을
+# 10건 추가하면서, include_source=True 규칙이 "예수도 열두 제자의 일원"이라는
+# 잘못된 13번째 멤버를 만들어내는 걸 재빌드로 발견했다 — 예수는 이 라벨을
+# 언급하는 사람이지 열두 제자의 "멤버"가 아니다. "타겟(라벨이 붙어 참조된
+# 사람)만 멤버로 센다"는 규칙 하나로 통일해도(예수 제외하고) 여전히 정확히
+# 12명이 나오는 걸 실행 확인했다(mesh 구조상 진짜 멤버는 결국 누군가의
+# 타겟으로 한 번은 등장하기 때문) — 그래서 include_source 특별 취급을
+# 완전히 없앴다. "다윗의 30용사"/"다윗의 3대용사"도 원래부터 다윗#468만
+# 언급하는 사람이라 타겟만 세는 이 규칙과 이미 맞았다(변경 없음). 이 편이
+# PersonSeed.json이 계속 수기로 바뀌어도(오늘처럼 새 멘션이 추가돼도) 더
+# 안전하다 — "누가 이 라벨을 언급했는가"가 아니라 "누가 이 라벨로
+# 지목됐는가"만 보므로 예수 같은 비-멤버가 자기 발언 때문에 잘못
+# 끼어들 여지가 없다.
+# 이 딕셔너리에 없는 라벨은 그룹으로 취급하지 않는다(추측 금지 — 새 그룹은
+# 사용자가 확인 후 이 딕셔너리에 명시적으로 추가해야 한다).
+GROUP_LABEL_DEFS = {
+    "열두 제자": {
+        "description": "예수께서 부르신 열두 사도",
+    },
+    "다윗의 30용사": {
+        "description": "다윗을 섬긴 정예 용사 집단(삼하 23장/대상 11장)",
+    },
+    "다윗의 3대용사": {
+        "description": "다윗의 30용사 중에서도 특히 뛰어난 세 용사",
+    },
+}
+
+# [2026-09-26 추가] 라벨 표기가 미세하게 달라졌는데(예: "다윗의 30 용사"처럼
+# 띄어쓰기가 다르거나 "삼십용사"처럼 다르게 표기) GROUP_LABEL_DEFS의 정확한
+# 문자열과 일치하지 않으면 조용히 그룹 추출에서 빠지기만 하고 아무 경고도
+# 없이 넘어가는 걸 막기 위한 안전장치 — "제자"/"용사"가 들어간 라벨인데
+# GROUP_LABEL_DEFS의 어느 것과도 정확히 일치하지 않으면 후보로 모아뒀다가
+# 마지막에 경고로 출력한다(자동 보정은 하지 않음 — 추측 금지).
+GROUP_LABEL_NEAR_MISS_KEYWORDS = ("제자", "용사")
+
+
+def build_person_groups(cur):
+    """PersonSeed.json의 기타관계 라벨 중 GROUP_LABEL_DEFS에 정의된 "소속
+    집단" 라벨만 뽑아 PersonGroups/PersonGroupMemberships에 채운다. Persons가
+    이미 채워진 뒤 호출해야 idx 검증이 정확하다(build_structured_person_relations
+    와 동일한 전제)."""
+    if not os.path.exists(PERSON_SEED_PATH):
+        return
+
+    with open(PERSON_SEED_PATH, encoding="utf-8") as f:
+        seed_entries = json.load(f)
+
+    known_idx_set = {row[0] for row in cur.execute("SELECT idx FROM Persons").fetchall()}
+    idx_to_word = dict(cur.execute("SELECT idx, word FROM Persons").fetchall())
+
+    def resolve_tagged_idx(tagged_idx):
+        # [2026-09-22 resolve_tagged_idx와 동일 관례] "#0"은 "미상" 전용
+        # 기호(사용자 확인) — 태그 없음과 동일하게 처리, 경고 없음.
+        if not tagged_idx or tagged_idx == "0":
+            return ""
+        if tagged_idx not in known_idx_set:
+            return None  # 존재하지 않는 idx — 호출부에서 invalid로 기록
+        return tagged_idx
+
+    def canonical_identity(name, idx):
+        """idx가 확정되면 Persons.word(정식 표기)로 통일해서 별칭 표기 차이
+        (예: "유다"/"가룟 유다"가 같은 idx 4631)로 중복 행이 생기는 걸 막는다
+        — idx가 없으면 원문 이름을 그대로 쓴다(더 나은 판단 근거가 없음)."""
+        if idx and idx in idx_to_word:
+            return idx_to_word[idx], idx
+        return name, idx
+
+    membership_rows = []
+    seen = set()  # (group_id, person_word, person_idx) — Python 쪽 선제 dedup
+    invalid_idx_tags = []
+    near_miss_labels = collections.Counter()
+
+    def add_member(group_id, name, idx, role_note, source_field):
+        word, idx = canonical_identity(name, idx)
+        key = (group_id, word, idx)
+        if key in seen:
+            return
+        seen.add(key)
+        membership_rows.append((group_id, word, idx, role_note, source_field))
+
+    for e in seed_entries:
+        word = e.get("word", "")
+        idx = e.get("idx", "")
+        rel_list = (e.get("description") or {}).get("관계") or [{}]
+        rel = rel_list[0] if rel_list else {}
+        other = rel.get("기타관계")
+        if not isinstance(other, list):
+            continue
+        for raw in other:
+            if not isinstance(raw, str):
+                continue
+            matched_label = None
+            for label in GROUP_LABEL_DEFS:
+                if raw.endswith(f"({label})"):
+                    matched_label = label
+                    break
+            if matched_label is None:
+                if any(kw in raw for kw in GROUP_LABEL_NEAR_MISS_KEYWORDS):
+                    near_miss_labels[raw] += 1
+                continue
+            name_part = raw[: -(len(matched_label) + 2)]  # "(라벨)" 길이만큼 제거
+            target_name, target_idx = parse_idx_tag(name_part)
+            resolved_idx = resolve_tagged_idx(target_idx)
+            if resolved_idx is None:
+                invalid_idx_tags.append((target_name, target_idx))
+                resolved_idx = ""
+            # [2026-09-27 수정] "언급한 사람 자신"(word/idx)은 더 이상 멤버로
+            # 넣지 않는다 — 위 GROUP_LABEL_DEFS 주석 참고(예수가 스스로
+            # 언급한 것 때문에 열두 제자 "멤버"로 잘못 들어가던 버그).
+            add_member(matched_label, target_name, resolved_idx, matched_label, "기타관계(target)")
+
+    cur.executemany(
+        "INSERT INTO PersonGroups (group_id, group_name, description) VALUES (?, ?, ?)",
+        [(label, label, defn["description"]) for label, defn in GROUP_LABEL_DEFS.items()],
+    )
+    cur.executemany(
+        "INSERT OR IGNORE INTO PersonGroupMemberships "
+        "(group_id, person_word, person_idx, role_note, source_field) VALUES (?, ?, ?, ?, ?)",
+        membership_rows,
+    )
+    per_group_counts = collections.Counter(row[0] for row in membership_rows)
+    summary = ", ".join(f"{label} {per_group_counts.get(label, 0)}명" for label in GROUP_LABEL_DEFS)
+    print(f"PersonGroups {len(GROUP_LABEL_DEFS)}건 / PersonGroupMemberships {len(membership_rows)}건 삽입 ({summary})")
+    if invalid_idx_tags:
+        print(f"  ⚠️ PersonGroups 쪽 idx 태그 오류 {len(invalid_idx_tags)}건 — PersonSeed.json에서 직접 확인 필요:")
+        for name, tagged_idx in invalid_idx_tags:
+            print(f"     - {name}#{tagged_idx}")
+    if near_miss_labels:
+        print(f"  ⚠️ \"제자\"/\"용사\"가 포함되지만 GROUP_LABEL_DEFS의 라벨과 정확히 일치하지 않는 기타관계 값 "
+              f"{sum(near_miss_labels.values())}건 — 표기가 달라졌을 수 있으니 확인 필요:")
+        for label, count in near_miss_labels.most_common():
+            print(f"     - {label!r} ({count}건)")
+
+
+# === theme01.json -> Themes (2026-09-15 신설) ===
+# load_topic_seed_files()(주제별 말씀*.txt)와 별개로, book/chapter/start/end
+# 숫자 형식인 theme01.json을 위한 전용 로더. idx는 지정하지 않고 SQLite
+# rowid 자동 할당에 맡긴다(주제별 말씀*.txt 로더와 동일한 관례) — theme01.json
+# 자체의 "id"(1~20)는 그대로 쓰지 않는다(다른 Themes 유입 경로와 충돌 방지).
+TRAILING_META_SUFFIXES = ["에 대하여", "에 관하여"]
+
+
+def _strip_theme_title(title):
+    for suf in sorted(TRAILING_META_SUFFIXES, key=len, reverse=True):
+        if title.endswith(suf):
+            return title[: -len(suf)].strip()
+    return title
+
+
+def load_theme01_seed(cur):
+    if not os.path.exists(THEME01_SEED_PATH):
+        print(f"({THEME01_SEED_PATH} 없음 — theme01 스킵)")
+        return 0
+
+    with open(THEME01_SEED_PATH, encoding="utf-8") as f:
+        raw = json.load(f)
+
+    bible_con = sqlite3.connect(BIBLE_DB_PATH)
+    all_bible_verses = set(bible_con.execute("SELECT book_id, chapter, verse FROM BibleVerses").fetchall())
+    bible_con.close()
+
+    theme_rows = []
+    missing = 0
+    for t in raw:
+        refs = []
+        for r in t["references"]:
+            book, ch, start, end = r["book"], r["chapter"], r["start"], r["end"]
+            for v in range(start, end + 1):
+                key = (book, ch, v)
+                if key in all_bible_verses:
+                    refs.append(key)
+                else:
+                    missing += 1
+        verse_refs_str = ",".join(f"{b}:{c}:{v}" for b, c, v in refs)
+        keyword = _strip_theme_title(t["title"])
+        theme_rows.append(("topic", t["title"], keyword, verse_refs_str, None, None))
+
+    cur.executemany(
+        "INSERT INTO Themes (category, title, search_keywords, verse_refs, tags, description) "
+        "VALUES (?, ?, ?, ?, ?, ?)",
+        theme_rows,
+    )
+    if missing:
+        print(f"  \u26a0\ufe0f theme01.json — BibleDB에 없는 절 {missing}건 스킵")
+    return len(theme_rows)
+
+
+# === KeywordCategoryIndex 생성 (2026-09-15 신설) ===
+# JSON을 다시 파싱하지 않고, 이미 채워진 Persons/Themes 테이블 자체에서
+# 뽑는다(단일 진실 공급원 유지 — 두 번 파싱하면 서로 어긋날 위험).
+def build_keyword_category_index(cur):
+    index_rows = []
+    seen = set()
+
+    for idx, word, word2 in cur.execute("SELECT idx, word, word2 FROM Persons").fetchall():
+        words = [word] + [w for w in (word2 or "").split(",") if w]
+        for w in words:
+            key = (w, "인물", "Persons", idx)
+            if key not in seen:
+                seen.add(key)
+                index_rows.append(key)
+
+    for idx, search_keywords in cur.execute(
+        "SELECT idx, search_keywords FROM Themes WHERE search_keywords IS NOT NULL AND search_keywords != ''"
+    ).fetchall():
+        for kw in search_keywords.split(","):
+            kw = kw.strip()
+            if not kw:
+                continue
+            key = (kw, "주제", "Themes", str(idx))
+            if key not in seen:
+                seen.add(key)
+                index_rows.append(key)
+
+    cur.executemany(
+        "INSERT INTO KeywordCategoryIndex (keyword, category, source_table, source_idx) VALUES (?, ?, ?, ?)",
+        index_rows,
+    )
+    return len(index_rows)
 
 
 def main():
@@ -1267,7 +2052,47 @@ def main():
         word TEXT NOT NULL,
         remark TEXT NOT NULL,
         verses TEXT NOT NULL,
-        relation_person TEXT NOT NULL DEFAULT ''
+        relation_person TEXT NOT NULL DEFAULT '',
+        -- [2026-09-15 신설] PersonSeed.json 보강 컬럼 — 전부 nullable/빈 문자열
+        -- 기본값. PersonPlaceSeed.json에만 있고 PersonSeed.json엔 없는(아직
+        -- 보강 안 된) 인물은 이 컬럼들이 전부 빈 문자열로 남는다(화면에서
+        -- 빈 값이면 해당 섹션을 숨기는 처리는 Swift 쪽 책임).
+        word2 TEXT NOT NULL DEFAULT '',        -- 이표기/별칭, 콤마 구분
+        call_title TEXT NOT NULL DEFAULT '',   -- PersonSeed.call — 짧은 호칭/요약
+        meaning TEXT NOT NULL DEFAULT '',
+        introduce TEXT NOT NULL DEFAULT '',
+        lifetime TEXT NOT NULL DEFAULT '',
+        event TEXT NOT NULL DEFAULT '',
+        character TEXT NOT NULL DEFAULT '',
+        origin TEXT NOT NULL DEFAULT '',       -- description.출신
+        nation TEXT NOT NULL DEFAULT '',       -- description.민족
+        tribe TEXT NOT NULL DEFAULT '',        -- description.지파
+        gender TEXT NOT NULL DEFAULT '',       -- description.성별
+        occupation TEXT NOT NULL DEFAULT '',   -- description.직업/직위, 콤마 구분
+        seed_memo TEXT NOT NULL DEFAULT '',    -- PersonSeed.memo
+        -- [2026-09-16 신설] 사용자 요청 — "인물 정보의 관계 내용은
+        -- PersonSeed.json의 관계중 기타관계를 제외한 내용(할아버지, 할머니,
+        -- 아버지, 어머니, 배우자, 아들, 딸, 손자, 손녀)를 설명없이 간단하게
+        -- 표현할것". 기존 PersonRelations 테이블(아래 CREATE TABLE
+        -- PersonRelations)은 이 9개 필드 중 같은 세대 그룹(예: 아버지/어머니)을
+        -- "표제어 본인의 성별"만으로 son_of/daughter_of 등에 뭉뚱그려
+        -- 저장해서(build_structured_person_relations의 RELATION_TYPE_BY_GENDER
+        -- 참고) 원래 어느 필드였는지 relationType만으로 역추적이 구조적으로
+        -- 불가능하다(예: "아버지" 필드였는지 "어머니" 필드였는지 구분 안 됨).
+        -- 화면이 "라벨: 이름" 형식으로 정확히 구분해 보여줘야 해서, 추론 없이
+        -- PersonSeed.json 원본 값을 그대로 옮겨 담는 전용 컬럼을 새로 뒀다
+        -- (콤마 구분 — 배우자/아들/딸/손자/손녀는 원본이 리스트인 경우가
+        -- 있고, 할아버지/할머니/아버지/어머니는 원본에 항상 단일 문자열뿐
+        -- 이지만 일관성을 위해 전부 같은 콤마 구분 표현을 쓴다).
+        rel_grandfather TEXT NOT NULL DEFAULT '',
+        rel_grandmother TEXT NOT NULL DEFAULT '',
+        rel_father TEXT NOT NULL DEFAULT '',
+        rel_mother TEXT NOT NULL DEFAULT '',
+        rel_spouse TEXT NOT NULL DEFAULT '',
+        rel_sons TEXT NOT NULL DEFAULT '',
+        rel_daughters TEXT NOT NULL DEFAULT '',
+        rel_grandsons TEXT NOT NULL DEFAULT '',
+        rel_granddaughters TEXT NOT NULL DEFAULT ''
     );
     CREATE INDEX idx_persons_word ON Persons(word);
 
@@ -1288,11 +2113,67 @@ def main():
         target_word TEXT NOT NULL,
         target_kind TEXT,
         raw_sentence TEXT NOT NULL,
+        -- [2026-09-16 신설] target(target_word)이 Persons.idx로 정확히
+        -- 특정될 때만 채운다(예: 기타관계 "Y(스승)" -> target=표제어 자신,
+        -- idx가 이미 정확히 알려져 있음). 모르면 빈 문자열 — "추측 금지"
+        -- 원칙에 따라 person_word_to_idx의 "동명이인이면 첫 idx" 폴백을
+        -- 이 컬럼에는 절대 쓰지 않는다(정확히 아는 경우만 채움).
+        target_idx TEXT NOT NULL DEFAULT '',
         extraction_method TEXT NOT NULL DEFAULT 'regex'
     );
     CREATE INDEX idx_person_relations_source ON PersonRelations(source_word);
     CREATE INDEX idx_person_relations_target ON PersonRelations(target_word);
     CREATE INDEX idx_person_relations_method ON PersonRelations(extraction_method);
+
+    -- [2026-09-22 신설, B그룹] 왕/총독/선지자 등 직함·역할성 기타관계
+    -- 라벨(is_context_label() 판정) — 가족관계도 아니고 상호적 인물관계도
+    -- 아니라서 PersonRelations(인물관계 그래프, 검색/QueryIntentHandler가
+    -- 관계로 취급) 대신 여기 별도로 보존한다. "인물관계에는 넣지 않더라도
+    -- 보여주기를 원함"(사용자 확정) — 화면(PersonDetailView)에서 표제어
+    -- 자신의 기타 정보로만 참고 표시하고, 관계 검색/카드 등 다른 화면에는
+    -- 노출하지 않는다.
+    CREATE TABLE PersonContextNotes (
+        source_word TEXT NOT NULL,
+        source_idx TEXT NOT NULL,
+        label TEXT NOT NULL,
+        target_word TEXT NOT NULL,
+        target_kind TEXT,
+        target_idx TEXT NOT NULL DEFAULT '',
+        raw_sentence TEXT NOT NULL
+    );
+    CREATE INDEX idx_person_context_notes_source ON PersonContextNotes(source_word);
+
+    -- [2026-09-26 신설, C그룹] "열두 제자"/"다윗의 30용사"/"다윗의 3대용사"처럼
+    -- 가족관계도 아니고(PersonRelations 대상 아님) 개인 직함·역할성도 아닌
+    -- (PersonContextNotes 대상 아님) "여러 사람이 공유하는 소속 집단"을 위한
+    -- 전용 테이블 — 사용자 확정("PersonGroups 같은 별도 테이블 설계부터
+    -- 검토"). group_id는 영문 슬러그를 새로 만들지 않고 PersonSeed.json
+    -- 원문 라벨 문자열을 그대로 쓴다(예: "열두 제자") — 소스 데이터와 1:1
+    -- 대응이라 그룹이 늘어나도 별도 매핑 레이어가 필요 없다.
+    CREATE TABLE PersonGroups (
+        group_id TEXT PRIMARY KEY,
+        group_name TEXT NOT NULL,
+        description TEXT NOT NULL DEFAULT ''
+    );
+
+    -- person_idx는 "이름#idx" 태그가 있고 그 idx가 Persons에 실제 존재할
+    -- 때만 채운다(추측 금지 원칙 — PersonRelations/PersonContextNotes와
+    -- 동일 관례). UNIQUE 제약은 오늘 이 세션에서 반복적으로 발견한 "같은
+    -- 사람이 수기 편집 중 같은 관계/목록에 실수로 두 번 등재되는" 버그
+    -- 패턴이 그룹 데이터에도 재발할 가능성에 대비한 방어 장치 — 위반 시
+    -- INSERT OR IGNORE로 조용히 걸러지므로(경고는 별도 카운트로 출력),
+    -- 데이터가 계속 수기로 바뀌어도 그룹 멤버 목록에 중복이 쌓이지 않는다.
+    CREATE TABLE PersonGroupMemberships (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        group_id TEXT NOT NULL,
+        person_word TEXT NOT NULL,
+        person_idx TEXT NOT NULL DEFAULT '',
+        role_note TEXT NOT NULL DEFAULT '',
+        source_field TEXT NOT NULL DEFAULT '',
+        UNIQUE(group_id, person_word, person_idx)
+    );
+    CREATE INDEX idx_person_group_memberships_person ON PersonGroupMemberships(person_idx);
+    CREATE INDEX idx_person_group_memberships_group ON PersonGroupMemberships(group_id);
 
     -- [2026-08-20 신설, 스키마만 — 데이터는 추후] 사용자 요청 — 검색 질의를
     -- "관계/인물정보/예언/주제·속성/서사(내용 추적)/일반"으로 먼저 분류한 뒤
@@ -1321,6 +2202,41 @@ def main():
     );
     CREATE INDEX idx_themes_title ON Themes(title);
     CREATE INDEX idx_themes_category ON Themes(category);
+
+    -- [2026-09-15 신설] 통합검색 키워드->카테고리 분류 전용 인덱스. 콘텐츠는
+    -- 담지 않는다(claude/bible-research-platform-search-category-expansion-
+    -- proposal.md 4차 갱신 §2.1 — 분류 인덱스와 콘텐츠 테이블을 분리 유지하기로
+    -- 확정). 같은 keyword가 여러 행을 가질 수 있다("가나안"처럼 동명이인/동음이의
+    -- 케이스) — 그 경우를 하나로 합치지 않고 전부 반환해 화면 구성에서 처리하기로
+    -- 확정했다(같은 문서 §2.1). Prophecies는 Themes와 구조가 겹칠 수 있어(사용자
+    -- 판단) 이번 인덱스에서 제외 — "기타말씀" 라운드에서 재검토.
+    CREATE TABLE KeywordCategoryIndex (
+        idx INTEGER PRIMARY KEY,
+        keyword TEXT NOT NULL,
+        category TEXT NOT NULL,       -- '인물' | '주제' (이번 라운드, 장소 제외 — 장소 콘텐츠 미준비)
+        source_table TEXT NOT NULL,   -- 'Persons' | 'Themes'
+        source_idx TEXT NOT NULL,
+        status TEXT NOT NULL DEFAULT 'active',  -- 'pending' | 'active' — AI 폴백으로 유입된 신규 키워드용
+        UNIQUE(keyword, category, source_table, source_idx)
+    );
+    CREATE INDEX idx_keyword_category_index_keyword ON KeywordCategoryIndex(keyword);
+
+    -- [2026-09-15 신설] 핵심표현(트리거) 테이블 — QueryIntentClassifier(순수
+    -- 함수, 하드코딩 트리거)는 그대로 두고, 그 옆에서 자동 학습형 트리거를
+    -- 쌓는 별도 저장소. hit_count가 임계값(N=3, 사용자 확정)에 도달하면
+    -- status가 'active'로 승격된다(같은 문서 §2.2) — 그 전까지는 pending으로만
+    -- 남아 오분류 하나가 바로 서비스에 영향을 주지 않는다.
+    CREATE TABLE ClassificationTrigger (
+        idx INTEGER PRIMARY KEY,
+        expression TEXT NOT NULL,
+        category TEXT NOT NULL,
+        source TEXT NOT NULL,          -- 'ai_auto' | 'user_confirmed'
+        hit_count INTEGER NOT NULL DEFAULT 1,
+        status TEXT NOT NULL DEFAULT 'pending',
+        created_at TEXT NOT NULL,
+        last_hit_at TEXT NOT NULL,
+        UNIQUE(expression, category)
+    );
 
     -- Prophecies — 메시아 예언/마지막 때 예언/마지막 전쟁을 category로만
     -- 구분한 한 테이블. 셋 다 "예언(이전 절) -> 성취/대응(이후 절)" +
@@ -1416,8 +2332,33 @@ def main():
     )
     print("HanjaDictionary 삽입:", len(dict_rows))
 
-    # 5) Persons / Places / PersonRelations [2026-08-19 신설]
-    build_person_place_tables(cur, abbr_index)
+    # 5) Persons(PersonSeed.json 단일 소스) -> Places/PersonRelations(정규식) 순서로
+    #    실행해야 관계추출이 최신 Persons를 기준으로 known_person_words를 계산한다
+    #    [2026-09-15 순서 변경]
+    build_persons_from_person_seed(cur, abbr_index)
+    # [2026-09-20 중단, 사용자 확정] "PersonPlaceSeed.json 이 파일은 쓰지 말도록."
+    # 이 파일로만 만들던 두 가지 — Places 테이블(999건)과, 이 파일 속 인물
+    # 설명문을 정규식으로 분석해 만드는 PersonRelations 1단계(3463건) +
+    # UnmatchedRelationSentences.json/AIExtractedRelations.json 2단계(AI 보조
+    # 추출) 파이프라인 전체 — 를 함께 중단한다(사용자가 둘 다 중단을 확정,
+    # Places는 기존에도 "아직 준비중"으로 남겨 둔 상태였다). 인물 관계는
+    # 이제 아래 build_structured_person_relations()(PersonSeed.json 자체의
+    # 구조화된 관계 딕셔너리, structured_v2)만 쓴다 — 그쪽은 이 함수의 정규식
+    # 추출 로직·MANUAL_RELATION_ADD/REMOVE·known_person_words 등 무엇도
+    # 공유하지 않아(직접 확인) 이 줄만 빼도 안전하게 분리된다.
+    #
+    # `build_person_place_tables()` 함수 정의 자체와 PERSON_PLACE_SEED_PATH,
+    # 관련 정규식 헬퍼(`extract_relations_from_sense` 등)는 지우지 않고 그대로
+    # 남겨 둔다 — 나중에 장소(Places) 데이터를 다른 소스로 다시 채우기로
+    # 하거나, 이 파이프라인이 다시 필요해지면 이 호출 한 줄만 되살리면 된다.
+    # `UnmatchedRelationSentences.json`(기존 727건)은 이제 이 스크립트가 더
+    # 이상 갱신하지 않는다 — 지우지는 않았으니(위 파일 상단 "손으로 정리한
+    # 데이터는 절대 지우지 말 것" 원칙과 별개로, 이건 자동 생성물이라 지워도
+    # 되지만 사용자가 직접 결정할 사안이라 그대로 뒀다) 필요 없으면 직접 지워도
+    # 된다.
+    # build_person_place_tables(cur, abbr_index)
+    build_structured_person_relations(cur)
+    build_person_groups(cur)
 
     # 6) VerseSearchIndex(FTS5 unicode61) [2026-08-19 신설, 같은 날 재확장]
     build_verse_search_index(cur)
@@ -1433,6 +2374,12 @@ def main():
     else:
         print("Themes: 0건 (주제별 말씀*.txt 파일 없음)")
     print("Prophecies/TimelineEvents 테이블 생성: 0건 (스키마만, 데이터는 추후 항목 단위로 채울 예정)")
+
+    theme01_row_count = load_theme01_seed(cur)
+    print(f"Themes(theme01.json) 삽입: {theme01_row_count}건")
+
+    keyword_index_count = build_keyword_category_index(cur)
+    print(f"KeywordCategoryIndex 삽입: {keyword_index_count}건 (인물 word/word2 + 주제 search_keywords)")
 
     conn.commit()
     conn.close()

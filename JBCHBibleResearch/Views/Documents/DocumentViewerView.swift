@@ -275,6 +275,7 @@ struct DocumentViewerView: View {
                 .background(Circle().fill(.background))
         }
         .buttonStyle(.plain)
+        .contentShape(Rectangle())
         .padding(12)
         .accessibilityLabel("닫기")
     }
@@ -297,6 +298,18 @@ struct DocumentViewerView: View {
         // 같은 화면이 되도록. 검색어로 자동 스크롤/강조하는 편의는 이 경로에선
         // 없어진다(hwp 뷰어 쪽 자체 검색 — `HwpSearchBar` — 을 손으로 써야 함).
         if document.originalFormat == .hwp || document.originalFormat == .hwpx {
+            return false
+        }
+        // [2026-09-27 추가] 사용자 보고 — "검색 - 연구문서 검색결과 - 이미지
+        // 문서 클릭시 OCR 텍스트가 보여지는 것이 아니라 이미지 자체가 보일
+        // 수 있도록 할 것." 원인 — 바로 아래 "PDF가 아니면 추출 텍스트로"
+        // 규칙이 `.image`에도 그대로 적용돼, 검색결과에서 진입(검색어를 들고
+        // 옴)하면 항상 텍스트 탭으로 떨어지고 있었다. `.image`는 이제
+        // `originalPane`의 `ZoomableImageView`가 자체적으로 OCR 텍스트를
+        // 이미지 위 정확한 위치에 겹쳐 보여주므로(그 struct 선언부 주석
+        // 참고), hwp/hwpx와 같은 이유로 이 규칙에서 제외한다 — 검색어가
+        // 있어도 항상 원본(이미지)을 보여준다.
+        if document.originalFormat == .image {
             return false
         }
         // [2026-08-11 추가 원칙 유지] 검색어를 갖고 열렸을 때(관련 내용에서 진입)
@@ -486,6 +499,221 @@ struct DocumentViewerView: View {
 
     // MARK: - 원본 보기
 
+    /// [2026-09-27 신설] 사용자 요청 — "연구문서-이미지 문서 조회시 scale to
+    /// fit으로 하되 핀치 줌 가능하게 할 것." 처음엔 화면에 맞춰 보이다가
+    /// (scale to fit), `MagnificationGesture`(핀치)로 확대/축소, 확대된
+    /// 상태에서는 `DragGesture`로 이동, 더블탭으로 원래 크기로 되돌린다.
+    /// 최소 배율을 1(=scale to fit 크기) 밑으로 못 내려가게 해 "너무 작아져
+    /// 다시 찾기 어려워지는" 상황을 막는다 — 이 화면 전용이라 `private`.
+    /// [2026-09-27 신설] 사용자 요청 — "이미지 위에 OCR 텍스트를 위에
+    /// 띄워서 해당 텍스트 위치를 정확하게 표현할 것 — 인식된 모든 줄에
+    /// 텍스트 레이어, PDF 텍스트 레이어처럼 겹쳐서 선택/복사 가능하게."
+    /// `DocumentText.ocrBoundingBox`(Vision이 인식 시점에 준 정규화 좌표,
+    /// 좌하단 원점)를 이 화면(좌상단 원점)이 쓸 수 있게 미리 담아 두는
+    /// 값 타입.
+    private struct OCRLineOverlayItem: Identifiable {
+        let id: UUID
+        let text: String
+        /// Vision 원본 그대로 — 정규화(0...1) 좌표, **좌하단 원점**.
+        let boundingBox: CGRect
+
+        /// "x,y,width,height" 콤마 구분 문자열(`DocumentTextExtractionService.
+        /// encodeOCRBoundingBox`가 쓴 형식)을 되돌린다. 형식이 어긋나거나
+        /// nil이면(옛 OCR 문서, 위치 정보 없음) nil을 돌려줘 그 줄은 오버레이
+        /// 없이 조용히 건너뛴다 — 위치를 추측해서 지어내지 않는다.
+        static func decodeBoundingBox(_ raw: String?) -> CGRect? {
+            guard let raw else { return nil }
+            let parts = raw.split(separator: ",").compactMap { Double($0) }
+            guard parts.count == 4 else { return nil }
+            return CGRect(x: parts[0], y: parts[1], width: parts[2], height: parts[3])
+        }
+    }
+
+    private struct ZoomableImageView: View {
+        let image: PlatformImage
+        /// 위치 정보가 있는 OCR 줄들(없으면 빈 배열 — 오버레이 없이 이미지만).
+        var ocrLines: [OCRLineOverlayItem] = []
+        /// 검색결과에서 진입했을 때의 검색어 — 일치하는 줄만 강조 박스를 얹는다.
+        var searchText: String? = nil
+
+        @State private var scale: CGFloat = 1
+        @State private var lastScale: CGFloat = 1
+        @State private var offset: CGSize = .zero
+        @State private var lastOffset: CGSize = .zero
+
+        private let minScale: CGFloat = 1
+        private let maxScale: CGFloat = 5
+
+        private var trimmedSearchText: String {
+            (searchText ?? "").trimmingCharacters(in: .whitespacesAndNewlines)
+        }
+
+        /// 이미지의 실제 픽셀 크기 — `.aspectRatio(contentMode: .fit)`이
+        /// 컨테이너 안에서 실제로 그려지는 사각형(레터박스 포함)을 계산하는
+        /// 데 쓴다. `NSImage`/`UIImage` 둘 다 `.size`를 갖고 있어 플랫폼
+        /// 분기 없이 그대로 쓸 수 있다.
+        private var imagePixelSize: CGSize {
+            // `NSImage.size`(macOS)와 `UIImage.size`(iOS) 둘 다 `CGSize`를
+            // 돌려주므로(`PlatformImage`가 어느 쪽이든) 플랫폼 분기가
+            // 필요 없다. `loadedImage`는 항상 `PlatformImage(data:)`로
+            // 만들어지고(`DocumentViewerViewModel.loadPrimaryFileContent`),
+            // 이 초기화 경로는 `scale`이 1.0으로 고정되므로 `.size`가 곧
+            // 실제 픽셀 크기다 — Vision이 `boundingBox`를 계산한 바로 그
+            // 좌표계(CGImage 픽셀 공간)와 일치한다.
+            image.size
+        }
+
+        /// `.aspectRatio(contentMode: .fit)`이 `containerSize` 안에서 실제로
+        /// 이미지를 그리는 사각형(레터박스 여백 제외) — 표준 aspect-fit 계산.
+        /// OCR 오버레이 박스는 이 사각형을 기준으로 위치를 잡아야 실제
+        /// 이미지 위 정확한 자리에 온다(컨테이너 전체를 기준으로 하면
+        /// 레터박스만큼 어긋난다).
+        private func fitRect(imageSize: CGSize, in containerSize: CGSize) -> CGRect {
+            guard imageSize.width > 0, imageSize.height > 0,
+                  containerSize.width > 0, containerSize.height > 0 else {
+                return CGRect(origin: .zero, size: containerSize)
+            }
+            let imageAspect = imageSize.width / imageSize.height
+            let containerAspect = containerSize.width / containerSize.height
+            if imageAspect > containerAspect {
+                let width = containerSize.width
+                let height = width / imageAspect
+                return CGRect(x: 0, y: (containerSize.height - height) / 2, width: width, height: height)
+            } else {
+                let height = containerSize.height
+                let width = height * imageAspect
+                return CGRect(x: (containerSize.width - width) / 2, y: 0, width: width, height: height)
+            }
+        }
+
+        /// Vision의 정규화 좌표(좌하단 원점)를 `rect`(화면 좌표, 좌상단 원점)
+        /// 기준의 실제 화면 사각형으로 바꾼다 — Vision → UIKit/SwiftUI 좌표계
+        /// 변환의 표준 공식(y축 반전)이다.
+        private func screenRect(for box: CGRect, in rect: CGRect) -> CGRect {
+            let x = rect.minX + box.origin.x * rect.width
+            let y = rect.minY + (1 - box.origin.y - box.height) * rect.height
+            return CGRect(x: x, y: y, width: box.width * rect.width, height: box.height * rect.height)
+        }
+
+        private func isSearchMatch(_ text: String) -> Bool {
+            guard !trimmedSearchText.isEmpty else { return false }
+            return text.range(of: trimmedSearchText, options: [.caseInsensitive, .diacriticInsensitive]) != nil
+        }
+
+        var body: some View {
+            #if os(macOS)
+            let baseImage = Image(nsImage: image)
+            #else
+            let baseImage = Image(uiImage: image)
+            #endif
+            GeometryReader { geometry in
+                let contentRect = fitRect(imageSize: imagePixelSize, in: geometry.size)
+                ZStack(alignment: .topLeading) {
+                    baseImage
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .frame(width: geometry.size.width, height: geometry.size.height)
+
+                    // [2026-09-27 신설] OCR 텍스트 레이어 — 인식된 줄마다
+                    // Vision이 준 위치에 그대로 겹친다. 평소엔 텍스트를
+                    // 완전히 투명하게 그려(이미지 위에 글자가 두 겹으로
+                    // 보이지 않게) 실제 PDF 텍스트 레이어처럼 "화면엔 원본
+                    // 이미지만 보이지만, 그 자리를 길게 눌러 선택·복사는
+                    // 가능"하게 하고(`.textSelection`), 검색어와 일치하는
+                    // 줄만 반투명 강조 박스를 더해 위치를 눈으로도 보여준다.
+                    ForEach(ocrLines) { line in
+                        let box = screenRect(for: line.boundingBox, in: contentRect)
+                        let matched = isSearchMatch(line.text)
+                        ZStack {
+                            if matched {
+                                RoundedRectangle(cornerRadius: 2)
+                                    .fill(Color.yellow.opacity(0.35))
+                            }
+                            // 항상 투명 — 이 텍스트 레이어의 목적은
+                            // "보이는 글자"가 아니라 "정확한 위치에 있는,
+                            // 길게 눌러 선택 가능한 글자"다(실제 원본 글자
+                            // 모양은 이미 그 밑의 이미지 자체가 보여준다).
+                            // 일치 여부는 위 노란 박스로만 표시한다.
+                            Text(line.text)
+                                .font(.system(size: max(box.height * 0.75, 1)))
+                                .foregroundStyle(Color.clear)
+                                .lineLimit(1)
+                                .minimumScaleFactor(0.1)
+                                .textSelection(.enabled)
+                        }
+                        .frame(width: box.width, height: box.height)
+                        .position(x: box.midX, y: box.midY)
+                    }
+                }
+                .scaleEffect(scale)
+                .offset(offset)
+                .frame(width: geometry.size.width, height: geometry.size.height)
+                .contentShape(Rectangle())
+                .gesture(
+                    MagnificationGesture()
+                        .onChanged { value in
+                            scale = min(max(lastScale * value, minScale), maxScale)
+                        }
+                        .onEnded { _ in
+                            lastScale = scale
+                            if scale <= minScale {
+                                withAnimation(.spring(response: 0.3, dampingFraction: 0.85)) {
+                                    scale = minScale
+                                    lastScale = minScale
+                                    offset = .zero
+                                    lastOffset = .zero
+                                }
+                            }
+                        }
+                )
+                .simultaneousGesture(
+                    DragGesture()
+                        .onChanged { value in
+                            guard scale > minScale else { return }
+                            offset = CGSize(
+                                width: lastOffset.width + value.translation.width,
+                                height: lastOffset.height + value.translation.height
+                            )
+                        }
+                        .onEnded { _ in
+                            lastOffset = offset
+                        }
+                )
+                .onTapGesture(count: 2) {
+                    withAnimation(.spring(response: 0.3, dampingFraction: 0.85)) {
+                        if scale > minScale {
+                            scale = minScale
+                            lastScale = minScale
+                            offset = .zero
+                            lastOffset = .zero
+                        } else {
+                            scale = 2
+                            lastScale = 2
+                        }
+                    }
+                }
+            }
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
+        }
+    }
+
+    /// [2026-09-27 추가] `DocumentText.ocrBoundingBox` 선언부 주석 참고 —
+    /// 이 문서(이미지)의 OCR 인식 줄 중 위치 정보(`ocrBoundingBox`)가 있는
+    /// 것만 골라 `lineIndex` 순으로 정렬한다. 이 필드가 추가되기 전에 이미
+    /// 저장된 옛 OCR 문서는 전부 nil이라(추측으로 위치를 지어내지 않음)
+    /// 자연히 빈 배열이 되어 오버레이 없이 텍스트만 있던 예전과 동일하게
+    /// 동작한다.
+    private var ocrOverlayLines: [OCRLineOverlayItem] {
+        guard document.originalFormat == .image else { return [] }
+        let lines = (document.documentTexts ?? [])
+            .filter { $0.pageNumber == 0 && $0.ocrBoundingBox != nil }
+            .sorted { $0.lineIndex < $1.lineIndex }
+        return lines.compactMap { line in
+            guard let box = OCRLineOverlayItem.decodeBoundingBox(line.ocrBoundingBox) else { return nil }
+            return OCRLineOverlayItem(id: line.id, text: line.lineText, boundingBox: box)
+        }
+    }
+
     @ViewBuilder
     private func originalPane(viewModel: DocumentViewerViewModel) -> some View {
         switch document.originalFormat {
@@ -504,14 +732,28 @@ struct DocumentViewerView: View {
                 fileContentUnavailableView(status: viewModel.downloadStatus, fallbackMessage: "PDF를 열 수 없습니다.")
             }
         case .image:
-            if case .ready = viewModel.downloadStatus,
-               let url = viewModel.resolvedURL,
-               let image = PlatformImage(contentsOfFile: url.path) {
-                #if os(macOS)
-                ScrollView([.horizontal, .vertical]) { Image(nsImage: image).resizable().aspectRatio(contentMode: .fit) }
-                #else
-                ScrollView([.horizontal, .vertical]) { Image(uiImage: image).resizable().aspectRatio(contentMode: .fit) }
-                #endif
+            // [2026-09-27 수정] 사용자 요청 — "scale to fit으로 하되 핀치 줌
+            // 가능하게 할 것" + "닫고 난 후 다시 안 열리는 이슈" — 두 가지를
+            // 함께 고친다. 파일을 더 이상 이 자리에서 직접 읽지 않고(보안
+            // 스코프 문제는 위 `DocumentViewerViewModel.loadedImage` 상단
+            // 주석 참고) `viewModel.loadedImage`(보안 스코프를 제대로 열고
+            // 닫아 읽어 온 값)만 본다. 렌더링은 기존 `ScrollView`(줌 기능
+            // 없음, 스크롤할 콘텐츠가 애초에 화면보다 커진 적이 없어 사실상
+            // 아무 效과 없었다) 대신 아래 `ZoomableImageView`(핀치 확대/축소
+            // + 확대 상태 드래그 이동 + 더블탭 리셋)로 바꾼다 — 처음 보일
+            // 때는 그대로 `aspectRatio(contentMode: .fit)`(scale to fit).
+            if case .ready = viewModel.downloadStatus {
+                if let image = viewModel.loadedImage {
+                    // [2026-09-27 추가] 사용자 요청 — "이미지 위에 OCR
+                    // 텍스트를 위에 띄워서 해당 텍스트 위치를 정확하게
+                    // 표현할 것(인식된 모든 줄에 텍스트 레이어, PDF 텍스트
+                    // 레이어처럼)." `ocrOverlayLines`(아래) + 검색어를
+                    // 함께 넘긴다.
+                    ZoomableImageView(image: image, ocrLines: ocrOverlayLines, searchText: initialSearchText)
+                } else {
+                    ProgressView("이미지를 불러오는 중…")
+                        .frame(maxWidth: .infinity, maxHeight: .infinity)
+                }
             } else {
                 fileContentUnavailableView(status: viewModel.downloadStatus, fallbackMessage: "이미지를 열 수 없습니다.")
             }
@@ -752,7 +994,28 @@ struct DocumentViewerView: View {
             .contentShape(Circle())
             .help("원본 크기 (\(Int((controller.zoomScale * 100).rounded()))%)")
         }
-        .padding(8)
+        .padding(.vertical, 8)
+        .padding(.leading, 8)
+        // [2026-09-12 신설] 사용자 보고(아이패드) — "pdf 뷰어의 닫기버튼이
+        // 돋보기 버튼들하고 겹쳐있음(원래비율로 보기 버튼과 정확하게 겹침)."
+        // 원인 — 위 `mainContent`의 `closeWindowButton`이 `#if os(iOS)`
+        // `.overlay(alignment: .topTrailing)`로 화면 오른쪽 위 모서리에
+        // 항상 떠 있는데(패딩 12 + 원형 배경 지름 약 24pt), 이 검색 바의
+        // 오른쪽 끝 "원본 크기" 버튼(28pt, `.padding(8)`만큼만 가장자리에서
+        // 떨어져 있음)도 같은 모서리에 있어 두 원이 거의 같은 자리를 차지한다
+        // — 실측(각 요소의 실제 크기/패딩)상 두 버튼이 화면 오른쪽 끝에서
+        // 약 8~36pt 구간을 똑같이 차지해 정확히 겹친다. `closeWindowButton`
+        // 자체는 다른 형식(hwp 네이티브 뷰어 등)에도 공유되는 자리라 그쪽을
+        // 옮기는 대신(다른 화면에 영향 없게), 겹침이 실제로 보고된 이 검색
+        // 바(그리고 바로 아래 `pdfConvertedSearchBar` — 완전히 같은 모양)의
+        // 오른쪽 여백만 iOS에서 늘려 "원본 크기" 버튼을 닫기 버튼 왼쪽으로
+        // 밀어낸다. macOS는 `closeWindowButton` 자체가 없어(트래픽라이트로
+        // 이미 닫을 수 있음, 그 프로퍼티 선언부 주석 참고) 기존 8 그대로 둔다.
+        #if os(iOS)
+        .padding(.trailing, 44)
+        #else
+        .padding(.trailing, 8)
+        #endif
     }
 
     // MARK: - 추출 텍스트(선택 가능한 순수 텍스트 + 검색)
@@ -1978,7 +2241,16 @@ private struct HWPToPDFPane: View {
             .contentShape(Circle())
             .help("원본 크기 (\(Int((pdfSearchController.zoomScale * 100).rounded()))%)")
         }
-        .padding(8)
+        .padding(.vertical, 8)
+        .padding(.leading, 8)
+        // [2026-09-12 신설] `pdfSearchBar(controller:)`의 같은 날짜 주석
+        // 참고 — 이 탭("PDF 변환")도 `pdfSearchBar`와 완전히 같은 모양
+        // (오른쪽 끝 "원본 크기" 버튼)이라 같은 겹침을 똑같이 겪는다.
+        #if os(iOS)
+        .padding(.trailing, 44)
+        #else
+        .padding(.trailing, 8)
+        #endif
     }
 
     /// [2026-08-16 사전 변환 연동] `preConvertedDocument`(업로드 시 미리 만들어

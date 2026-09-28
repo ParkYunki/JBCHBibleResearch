@@ -397,7 +397,7 @@ private struct GeneralSettingsTab: View {
                     // 남고, 사용자에게 보이는 이름은 여기와 앱 번들 표시 이름
                     // 둘 다 바꿨다 — project.pbxproj의 INFOPLIST_KEY_CFBundleDisplayName
                     // 참고).
-                    Text("JBCH 성경 연구")
+                    Text("엠마오 성경 연구")
                         .font(.headline)
                     Text("버전 \(versionString) (\(buildString))")
                         .font(.caption)
@@ -465,6 +465,20 @@ private struct TranslationsSettingsTab: View {
                                 .foregroundStyle(.secondary)
                         }
                         Spacer()
+                        // [2026-09-16 신설] 사용자 요청 — "설정에서 활성화하지
+                        // 않은 번역본에서는 검색결과도 나오지 않도록. 성경 -
+                        // 표시할 번역본에서도 나타나지 않도록 바꿀것." 삭제와
+                        // 달리 번들 번역본도 끌 수 있다(삭제는 번들 번역본을
+                        // 지울 수 없지만, "검색/표시에서만 잠시 빼두기"는
+                        // 번들이든 아니든 똑같이 의미가 있다). 꺼면 바로 아래
+                        // `setEnabled(_:for:)`가 "성경 조회 기본 표시" 목록
+                        // (`defaultDisplayedTranslationCodes`)에서도 함께 뺀다.
+                        Toggle("", isOn: Binding(
+                            get: { translation.isEnabled },
+                            set: { setEnabled($0, for: translation) }
+                        ))
+                        .labelsHidden()
+                        .toggleStyle(.switch)
                         if !translation.isBundled {
                             Button(role: .destructive) {
                                 delete(translation)
@@ -588,15 +602,25 @@ private struct TranslationsSettingsTab: View {
     /// 번역본이 사라졌으면(삭제됨) `compactMap`이 조용히 건너뛴다 —
     /// `BibleReadingViewModel.loadAvailableTranslations()`의 "더 이상 존재하지
     /// 않는 선택은 걸러낸다"와 같은 방어.
+    /// [2026-09-16 신설] 사용자 요청 — "성경 - 표시할 번역본에서도 나타나지
+    /// 않도록." 위 "설치된 번역본" 섹션(`translations` 그대로)은 끄고 켤 수
+    /// 있어야 하니 전체를 계속 보여주지만, 이 "성경 조회 기본 표시" 섹션은
+    /// 활성화된 번역본만 후보로 삼는다 — 꺼둔 번역본은 "표시" 눈 아이콘으로도
+    /// 다시 고를 수 없고(먼저 위에서 다시 켜야 함), 이미 표시 중이었다면
+    /// `setEnabled(_:for:)`가 끄는 시점에 바로 빼므로 여기 다시 나타나지 않는다.
+    private var enabledTranslations: [TranslationRegistry] {
+        translations.filter(\.isEnabled)
+    }
+
     private var orderedDisplayedTranslations: [TranslationRegistry] {
-        let byCode = Dictionary(uniqueKeysWithValues: translations.map { ($0.code, $0) })
+        let byCode = Dictionary(uniqueKeysWithValues: enabledTranslations.map { ($0.code, $0) })
         return settings.defaultDisplayedTranslationCodes.compactMap { byCode[$0] }
     }
 
     /// 아직 표시 목록에 없는 번역본 — 아래 통합 목록의 뒤쪽 절반에 쓴다.
     private var notYetDisplayedTranslations: [TranslationRegistry] {
         let shown = Set(settings.defaultDisplayedTranslationCodes)
-        return translations.filter { !shown.contains($0.code) }
+        return enabledTranslations.filter { !shown.contains($0.code) }
     }
 
     /// [2026-08-27 신설] 위 섹션 재작성 참고 — 표시 중인 번역본(순서대로) +
@@ -698,6 +722,20 @@ private struct TranslationsSettingsTab: View {
 
     private func reload() {
         translations = (try? modelContext.fetch(FetchDescriptor<TranslationRegistry>(sortBy: [SortDescriptor(\.addedAt)]))) ?? []
+    }
+
+    /// [2026-09-16 신설] 위 "설치된 번역본" 토글의 실제 구현. 끌 때는
+    /// `delete(_:)`가 이미 하던 것과 같은 원칙으로 "성경 조회 기본 표시"
+    /// 목록에서도 함께 빼서(`removeDisplayedTranslation(code:)` 재사용),
+    /// 끈 즉시 표시·검색 양쪽에서 사라지게 한다. 다시 켤 때는 표시 목록에
+    /// 자동으로 다시 넣지 않는다(사용자가 "표시" 눈 아이콘으로 직접 고르는
+    /// 기존 동작 그대로 — 여기서 추측으로 되돌리지 않는다).
+    private func setEnabled(_ isEnabled: Bool, for translation: TranslationRegistry) {
+        translation.isEnabled = isEnabled
+        if !isEnabled {
+            removeDisplayedTranslation(code: translation.code)
+        }
+        try? modelContext.save()
     }
 
     private func delete(_ translation: TranslationRegistry) {
@@ -821,6 +859,19 @@ private struct TranslationsManagementTab: View {
                 .textFieldStyle(.plain)
                 #endif
 
+                // [2026-09-16 신설] 사용자 요청 — "설정에서 활성화하지 않은
+                // 번역본에서는 검색결과도 나오지 않도록. 성경 - 표시할
+                // 번역본에서도 나타나지 않도록 바꿀것." `TranslationsSettingsTab`
+                // (같은 파일, 위 "번역본" MARK)에 추가한 것과 같은 토글 —
+                // 이 화면은 그 화면과 별개의 진입 경로(설정 > 일반 > 번역본)라
+                // 똑같이 적용해야 두 경로 어디로 들어와도 동작이 일치한다.
+                Toggle("", isOn: Binding(
+                    get: { translation.isEnabled },
+                    set: { setEnabled($0, for: translation) }
+                ))
+                .labelsHidden()
+                .toggleStyle(.switch)
+
                 if !translation.isBundled {
                     Button(role: .destructive) {
                         delete(translation)
@@ -894,14 +945,21 @@ private struct TranslationsManagementTab: View {
         return parts.joined(separator: " · ")
     }
 
+    /// [2026-09-16 신설] `TranslationsSettingsTab.enabledTranslations`(같은
+    /// 파일)와 동일한 이유 — 아래 두 프로퍼티가 "성경 조회 기본 표시" 후보를
+    /// 계산할 때 비활성 번역본을 뺀다.
+    private var enabledTranslations: [TranslationRegistry] {
+        translations.filter(\.isEnabled)
+    }
+
     private var orderedDisplayedTranslations: [TranslationRegistry] {
-        let byCode = Dictionary(uniqueKeysWithValues: translations.map { ($0.code, $0) })
+        let byCode = Dictionary(uniqueKeysWithValues: enabledTranslations.map { ($0.code, $0) })
         return settings.defaultDisplayedTranslationCodes.compactMap { byCode[$0] }
     }
 
     private var notYetDisplayedTranslations: [TranslationRegistry] {
         let shown = Set(settings.defaultDisplayedTranslationCodes)
-        return translations.filter { !shown.contains($0.code) }
+        return enabledTranslations.filter { !shown.contains($0.code) }
     }
 
     private var allTranslationsOrderedForDisplaySettings: [TranslationRegistry] {
@@ -987,6 +1045,17 @@ private struct TranslationsManagementTab: View {
 
     private func reload() {
         translations = (try? modelContext.fetch(FetchDescriptor<TranslationRegistry>(sortBy: [SortDescriptor(\.addedAt)]))) ?? []
+    }
+
+    /// [2026-09-16 신설] 위 `translationEditRow`의 토글 실제 구현 —
+    /// `TranslationsSettingsTab.setEnabled(_:for:)`(같은 파일)와 동일한
+    /// 원칙: 끌 때 "성경 조회 기본 표시" 목록에서도 함께 뺀다.
+    private func setEnabled(_ isEnabled: Bool, for translation: TranslationRegistry) {
+        translation.isEnabled = isEnabled
+        if !isEnabled {
+            removeDisplayedTranslation(code: translation.code)
+        }
+        try? modelContext.save()
     }
 
     /// [`TranslationManagementViewModel.delete` 포팅] 번들 번역본은 삭제 대상이

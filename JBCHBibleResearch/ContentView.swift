@@ -160,6 +160,38 @@ struct ContentView: View {
             } message: {
                 Text(bootstrapErrorDescription ?? "")
             }
+            // [2026-09-13 신설] 사용자 요청 — "개인묵상을 공유받으면 이 앱의
+            // 개인묵상으로 들어갈수 있도록 할수 있는가?" `JBCHBibleResearchApp`의
+            // `.onOpenURL`이 받은 파일을 `PendingMemoImportRequest`에 담아
+            // 두면, 여기서 감지해 미리보기 시트를 띄운다 — 위 `.appOnboarding()`
+            // 등과 같은 "신호 전용 싱글턴 → 최상단 뷰가 감지" 구조를 그대로
+            // 따른다(`PendingMemoImportRequest.swift` 상단 주석 참고).
+            // `.sheet(item:)`이라 시트가 닫히면(취소/추가 모두
+            // `ImportedMemoPreviewSheet`가 `onFinished()`로 `consume()`을
+            // 호출) 페이로드가 비워져, 같은 파일을 다시 열었을 때도 새
+            // 요청으로 인식된다.
+            .sheet(item: Binding(
+                get: { PendingMemoImportRequest.shared.pending },
+                set: { if $0 == nil { PendingMemoImportRequest.shared.consume() } }
+            )) { pending in
+                ImportedMemoPreviewSheet(payload: pending.payload) {
+                    PendingMemoImportRequest.shared.consume()
+                }
+            }
+            // 받은 파일이 이 앱의 형식이 아니거나 손상됐을 때(예: 다른 종류의
+            // 파일을 실수로 열었을 때) — 위 미리보기 시트 대신 이 알림을
+            // 띄운다(`PendingMemoImportRequest.handleOpenedFile` 참고).
+            .alert(
+                "받은 파일을 열 수 없습니다",
+                isPresented: Binding(
+                    get: { PendingMemoImportRequest.shared.lastImportError != nil },
+                    set: { if !$0 { PendingMemoImportRequest.shared.consumeError() } }
+                )
+            ) {
+                Button("확인") { PendingMemoImportRequest.shared.consumeError() }
+            } message: {
+                Text(PendingMemoImportRequest.shared.lastImportError ?? "")
+            }
     }
 }
 
