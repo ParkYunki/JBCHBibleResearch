@@ -94,7 +94,7 @@ private let onboardingPages: [OnboardingPage] = [
     OnboardingPage(
         icon: "doc.text.magnifyingglass",
         gradientColors: [.orange, .yellow],
-        title: "연구문서 관리",
+        title: "연구 문서 관리",
         description: "hwp·pdf 연구자료를 업로드하면 자동으로 텍스트를 추출하고 성경 장절과 연결해 줍니다."
     ),
     OnboardingPage(

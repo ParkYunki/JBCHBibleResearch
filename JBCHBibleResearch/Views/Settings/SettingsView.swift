@@ -1115,7 +1115,20 @@ private struct AppearanceSettingsTab: View {
     var body: some View {
         Form {
             Section {
-                Picker("화면 모드", selection: $settings.colorSchemePreference) {
+                // [2026-09-29 변경] 사용자 요청 — "화면모드의 요소를
+                // 선택하면, 테마 색상 선택이 해제되어야 함." 기존엔
+                // `$settings.colorSchemePreference`에 직접 바인딩했지만,
+                // 이제 고를 때마다 테마 색상 쪽도 함께 정리해야 해서
+                // (`UserSettingsStore.selectColorScheme(_:)` 참고, 바로 아래
+                // "테마 색상" Picker의 `applyThemeMode` 커스텀 Binding과
+                // 같은 방식) 커스텀 Binding으로 바꿨다.
+                Picker(
+                    "화면 모드",
+                    selection: Binding(
+                        get: { settings.colorSchemePreference },
+                        set: { settings.selectColorScheme($0) }
+                    )
+                ) {
                     ForEach(UserSettingsStore.ColorSchemePreference.allCases) { preference in
                         Text(preference.displayName).tag(preference)
                     }
@@ -1123,6 +1136,69 @@ private struct AppearanceSettingsTab: View {
                 .pickerStyle(.segmented)
             } header: {
                 Label("화면 모드", systemImage: "circle.lefthalf.filled")
+            }
+
+            // [2026-09-29 이동] 사용자 요청 — "테마색상의 위치를 화면모드
+            // 아래로 배치할 것." 원래 아래 `displaySettingsSection`("성경
+            // 조회 표시") 안, 글꼴/크기 설정 사이에 있었다 — 화면 모드를
+            // 고르면 테마 색상이 자동으로 풀리고(위 `selectColorScheme`
+            // 참고), 반대로 테마 색상을 고르면 화면 모드가 자동으로
+            // 맞춰지므로(아래 `applyThemeMode` 호출 참고) 두 설정이 서로
+            // 밀접하게 얽혀 있어, 화면 모드 바로 아래 둬야 그 연동 관계가
+            // 한눈에 보인다. "시스템 기본색상으로 되돌리기" 버튼은 사용자
+            // 요청으로 제거했다 — 화면 모드를 고르면 이제
+            // `selectColorScheme(_:)`가 같은 일을 자동으로 한다.
+            Section {
+                Picker(
+                    "테마 색상",
+                    selection: Binding(
+                        get: { settings.bibleThemeModePreference },
+                        set: { newMode in
+                            guard let newMode else { return }
+                            settings.applyThemeMode(newMode, systemColorScheme: environment.colorScheme)
+                        }
+                    )
+                ) {
+                    ForEach(UserSettingsStore.BibleThemeModePreference.allCases) { mode in
+                        Text(mode.displayName).tag(Optional(mode))
+                    }
+                }
+                .pickerStyle(.segmented)
+                // 위 "화면 모드" Picker와 달리 여기는 라벨을 숨긴다 —
+                // macOS는 세그먼트 옆에 라벨을 텍스트로 그대로 보여주는데,
+                // 이 라벨이 바로 위 Section 헤더("테마 색상")와 글자 그대로
+                // 겹쳐 보이기 때문이다(접근성 라벨은 유지된다).
+                .labelsHidden()
+
+                ColorPicker(
+                    "배경색 직접 선택",
+                    selection: Binding(
+                        get: { settings.bibleBackgroundColor ?? Color.white },
+                        set: {
+                            settings.bibleBackgroundColorHex = $0.hexString(in: environment)
+                            // [2026-09-11 추가] 임의 색을 직접 고르면 위
+                            // 3단(라이트/다크/자동) 중 어디에도 더 이상
+                            // 해당하지 않는 상태가 된다 — 커스텀으로 표시.
+                            settings.markThemeModeAsCustom()
+                        }
+                    ),
+                    supportsOpacity: false
+                )
+
+                ColorPicker(
+                    "글자색 직접 선택",
+                    selection: Binding(
+                        get: { settings.bibleTextColor ?? Color.primary },
+                        set: {
+                            settings.bibleTextColorHex = $0.hexString(in: environment)
+                            // [2026-09-11 추가] 위 배경색 ColorPicker와 같은 이유.
+                            settings.markThemeModeAsCustom()
+                        }
+                    ),
+                    supportsOpacity: false
+                )
+            } header: {
+                Label("테마 색상", systemImage: "paintpalette")
             }
 
             // [2026-09-03 변경] 사용자 요청 — "미리보기를 성경 조회 표시
@@ -1246,87 +1322,15 @@ private struct AppearanceSettingsTab: View {
             // 그대로 남겨 뒀다). 팔레트 Picker에 있던 "시스템 기본"(빈
             // 문자열로 리셋) 옵션이 함께 없어진 것을 사용자가 다시 지적해,
             // 아래에 전용 초기화 버튼을 별도로 추가했다.
-            Group {
-                // [2026-09-11 교체] 사용자 논의 — "테마 색상 5개 중 실제로
-                // 안 쓸 것 같은 조합이 대부분이니 2개(서재 아이보리/밤빛
-                // 서재)로 줄이고, 화면 모드처럼 라이트/다크/자동 3단으로
-                // 고르게 할 것." 남은 2개 프리셋이 정확히 라이트/다크에
-                // 1:1 대응해, 예전 가로 스크롤 스와치 대신 "화면 모드"
-                // Picker(1049번 줄 근처)와 같은 3단 세그먼트 하나로
-                // 대체한다 — 같은 선택지를 두 컨트롤로 중복 제공하지
-                // 않기 위함이며, "자동"은 스와치로는 애초에 표현할 수
-                // 없었다. `settings.bibleThemeModePreference`가 nil(3단
-                // 중 어디에도 해당하지 않는 커스텀 상태)이면 세그먼트
-                // 컨트롤에는 아무 것도 선택되지 않은 채로 보인다.
-                VStack(alignment: .leading, spacing: 8) {
-                    Text("테마 색상")
-                        .font(.caption)
-                        .foregroundStyle(.secondary)
-                    Picker(
-                        "테마 색상",
-                        selection: Binding(
-                            get: { settings.bibleThemeModePreference },
-                            set: { newMode in
-                                guard let newMode else { return }
-                                settings.applyThemeMode(newMode, systemColorScheme: environment.colorScheme)
-                            }
-                        )
-                    ) {
-                        ForEach(UserSettingsStore.BibleThemeModePreference.allCases) { mode in
-                            Text(mode.displayName).tag(Optional(mode))
-                        }
-                    }
-                    .pickerStyle(.segmented)
-                    // `VerseZoomView.translationSwitcher`와 같은 이유 —
-                    // macOS는 세그먼트 옆에 라벨을 텍스트로 그대로 보여줘
-                    // 바로 위 캡션과 중복되므로 숨긴다(iOS는 애초에 세그먼트
-                    // 라벨을 안 그림). 접근성 라벨("테마 색상")은 유지된다.
-                    .labelsHidden()
-                }
-
-                ColorPicker(
-                    "배경색 직접 선택",
-                    selection: Binding(
-                        get: { settings.bibleBackgroundColor ?? Color.white },
-                        set: {
-                            settings.bibleBackgroundColorHex = $0.hexString(in: environment)
-                            // [2026-09-11 추가] 임의 색을 직접 고르면 위
-                            // 3단(라이트/다크/자동) 중 어디에도 더 이상
-                            // 해당하지 않는 상태가 된다 — 커스텀으로 표시.
-                            settings.markThemeModeAsCustom()
-                        }
-                    ),
-                    supportsOpacity: false
-                )
-
-                ColorPicker(
-                    "글자색 직접 선택",
-                    selection: Binding(
-                        get: { settings.bibleTextColor ?? Color.primary },
-                        set: {
-                            settings.bibleTextColorHex = $0.hexString(in: environment)
-                            // [2026-09-11 추가] 위 배경색 ColorPicker와 같은 이유.
-                            settings.markThemeModeAsCustom()
-                        }
-                    ),
-                    supportsOpacity: false
-                )
-
-                // [2026-09-02 추가] 사용자 요청 — "시스템 기본색상으로 돌릴
-                // 초기화 버튼 추가." 빈 문자열이 곧 "시스템 기본을 쓴다"는
-                // 뜻이므로(`bibleBackgroundColor`/`bibleTextColor` 위
-                // 선언부 주석 참고), 두 hex를 함께 빈 문자열로 되돌리기만
-                // 하면 된다. 배경/글자 둘 다 안 골랐을 때는 되돌릴 게 없어
-                // 버튼을 비활성화한다.
-                Button("시스템 기본색상으로 되돌리기") {
-                    settings.bibleBackgroundColorHex = ""
-                    settings.bibleTextColorHex = ""
-                    // [2026-09-11 추가] 위 ColorPicker와 같은 이유 — "시스템
-                    // 기본"도 3단 중 어디에도 해당하지 않는 커스텀 상태다.
-                    settings.markThemeModeAsCustom()
-                }
-                .disabled(settings.bibleBackgroundColorHex.isEmpty && settings.bibleTextColorHex.isEmpty)
-            }
+            // [2026-09-29 이동] 사용자 요청 — "테마색상의 위치를 화면모드
+            // 아래로 배치할 것." 여기 있던 "테마 색상" Picker/배경색·글자색
+            // ColorPicker 묶음 전체를 `body`의 "화면 모드" Section 바로
+            // 아래 새 Section으로 옮겼다(이 파일 위쪽 참고). 그 묶음에
+            // 있던 "시스템 기본색상으로 되돌리기" 버튼은 사용자 요청으로
+            // 완전히 제거했다 — 화면 모드를 고르면 이제
+            // `UserSettingsStore.selectColorScheme(_:)`가 같은 일(배경/
+            // 글자 hex를 빈 문자열로, `bibleThemeModePreference`를 nil로)을
+            // 자동으로 해 준다.
 
             // [2026-08-14 추가] 사용자 요청 — "두 번째 번역본(국한문 전체
             // 중복 테이블)을 지우고 → 절 단위 한자 주석 모델 ... 둘 다 지원,
@@ -1641,9 +1645,9 @@ private struct BibleCopyFormatSettingsTab: View {
 
 private struct ShortcutsSettingsTab: View {
     private let shortcuts: [(String, String)] = [
-        ("새 메모", "⌘N"), ("새 폴더", "⇧⌘N"), ("연구문서 업로드", "⌘O"),
+        ("새 메모", "⌘N"), ("새 폴더", "⇧⌘N"), ("연구 문서 업로드", "⌘O"),
         ("사이드바 토글", "⌥⌘S"), ("성경조회로 이동", "⌘1"), ("개인 묵상으로 이동", "⌘2"),
-        ("연구문서로 이동", "⌘3"), ("개요로 이동", "⌘4"), ("통합검색으로 이동", "⌘5"),
+        ("연구 문서로 이동", "⌘3"), ("개요로 이동", "⌘4"), ("통합검색으로 이동", "⌘5"),
         ("말씀 요약으로 이동", "⌘6"),
         ("태그 관계 보기", "⇧⌘T"), ("다음 장", "⌘]"), ("이전 장", "⌘["),
     ]
@@ -2012,7 +2016,7 @@ private struct DeveloperSettingsTab: View {
 
             Section {
                 if let counts = documentDataCounts {
-                    Text("연구문서 \(counts.document)개 · 구절 언급 \(counts.verseMention)개")
+                    Text("연구 문서 \(counts.document)개 · 구절 언급 \(counts.verseMention)개")
                         .font(.caption)
                         .foregroundStyle(.secondary)
                 }
@@ -2020,7 +2024,7 @@ private struct DeveloperSettingsTab: View {
                     refreshDocumentCounts()
                     isDeleteDocumentsConfirmationPresented = true
                 } label: {
-                    Label("연구문서 전체 삭제", systemImage: "trash")
+                    Label("연구 문서 전체 삭제", systemImage: "trash")
                 }
                 if let deleteDocumentsResultMessage {
                     Text(deleteDocumentsResultMessage)
@@ -2028,9 +2032,9 @@ private struct DeveloperSettingsTab: View {
                         .foregroundStyle(.secondary)
                 }
             } header: {
-                Label("연구문서 데이터 삭제", systemImage: "doc.badge.gearshape")
+                Label("연구 문서 데이터 삭제", systemImage: "doc.badge.gearshape")
             } footer: {
-                Text("사이드바 \"연구문서\"에 등록된 모든 문서(원본 파일 참조·OCR 결과·변환본·본문 텍스트)와 거기서 파생된 성경구절 언급을 전부 지웁니다 — 되돌릴 수 없습니다. 사용자 저장공간의 원본 파일 자체는 지우지 않고, 이 앱의 등록 정보만 지웁니다. \"연구문서\" 기능/화면은 그대로 남아 있어 다시 업로드할 수 있습니다.")
+                Text("사이드바 \"연구 문서\"에 등록된 모든 문서(원본 파일 참조·OCR 결과·변환본·본문 텍스트)와 거기서 파생된 성경구절 언급을 전부 지웁니다 — 되돌릴 수 없습니다. 사용자 저장공간의 원본 파일 자체는 지우지 않고, 이 앱의 등록 정보만 지웁니다. \"연구 문서\" 기능/화면은 그대로 남아 있어 다시 업로드할 수 있습니다.")
             }
         }
         .formStyle(.grouped)
@@ -2061,7 +2065,7 @@ private struct DeveloperSettingsTab: View {
             }
         }
         .confirmationDialog(
-            "연구문서를 전부 삭제할까요?",
+            "연구 문서를 전부 삭제할까요?",
             isPresented: $isDeleteDocumentsConfirmationPresented,
             titleVisibility: .visible
         ) {
@@ -2069,7 +2073,7 @@ private struct DeveloperSettingsTab: View {
             Button("취소", role: .cancel) {}
         } message: {
             if let counts = documentDataCounts {
-                Text("연구문서 \(counts.document)개와 관련 DB자료(구절 언급 \(counts.verseMention)개)가 삭제됩니다. 원본 파일 자체는 지워지지 않습니다. 되돌릴 수 없습니다.")
+                Text("연구 문서 \(counts.document)개와 관련 DB자료(구절 언급 \(counts.verseMention)개)가 삭제됩니다. 원본 파일 자체는 지워지지 않습니다. 되돌릴 수 없습니다.")
             }
         }
     }

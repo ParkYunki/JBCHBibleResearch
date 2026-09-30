@@ -175,7 +175,7 @@ struct PhoneTabView: View {
                 .tag(AppSection.bibleReading)
 
             NavigationStack { DocumentsHomeView() }
-                .tabItem { Label("연구문서", systemImage: "doc.text.viewfinder") }
+                .tabItem { Label("연구 문서", systemImage: "doc.text.viewfinder") }
                 .tag(AppSection.documents)
 
             // [2026-08-27 변경, 사용자 결정 — "개요→더보기, 검색→탭바"] 예전엔

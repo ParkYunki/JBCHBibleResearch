@@ -31,6 +31,10 @@ enum UserContentSearchIndexLocation {
         case wordSummary
         case phraseNote
         case document
+        /// [2026-09-29 추가] 사용자 요청 — "통합 검색에 '내 설교' 탭." 다른
+        /// 6종과 같은 이유 — `searchSermons`가 처음 호출될 때 이 카테고리로
+        /// 자가 치유 백필된다(`contentCandidateSourceIds` 참고).
+        case sermon
     }
 
     static func directory() throws -> URL {

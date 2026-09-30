@@ -35,6 +35,70 @@ import BibleResearchModels
 import UIKit
 #endif
 
+/// [2026-09-29 신설] 사용자 보고(맥OS) — "성경 조회 오른쪽 컨텐츠 영역 상단
+/// '이 장의 관련 콘텐츠' 흰색 바 영역 -> 배경색 맞추기." 이 파일은 지금까지
+/// `ThemedNavigationBarBackgroundModifier`가 전혀 없었다 — `DocumentsHomeView`/
+/// `SermonHomeView`/`BibleReadingView`/`WordNoteHomeView`/`SearchView`가 이미
+/// 각자 파일에 두고 있는 것과 같은 타입을 이 파일에도 새로 둔다(그 5개 파일
+/// 주석 — "Swift는 파일 최상위 `private` 선언끼리는 같은 모듈 안에서도
+/// 이름이 충돌하지 않는다"는 관례를 그대로 따름, 공유 대신 파일별 중복).
+///
+/// ⚠️ [macOS 분기, 미검증] 기존 5개 파일의 macOS 분기는 "`ToolbarPlacement.
+/// navigationBar`가 macOS엔 아예 없다(컴파일 에러로 확인됨) -> 이 모디파이어로
+/// 바꿀 표준 API가 없다"고 결론 내리고 macOS를 언제나 no-op으로 두고 있었다.
+/// 그런데 그 결론은 `.navigationBar`(iOS/iPadOS/tvOS 전용 플레이스먼트) 하나만
+/// 시도해 본 결과이고, `ToolbarPlacement`에는 macOS 전용으로 별도 존재하는
+/// `.windowToolbar` 케이스(macOS 13+, 이 프로젝트 배포 타깃은 project.pbxproj
+/// 확인 결과 macOS 26.5라 버전 조건은 문제 없음)가 있다 — 이 뷰는
+/// `BibleReadingView`가 `.inspector(isPresented:)`로 붙이는 보조 패널이라,
+/// 이 패널 자신의 제목 표시줄이 macOS의 "윈도우 툴바" 체계에 실제로 속하는지
+/// (메인 창 툴바와 같은 건지, 인스펙터 전용의 별도 크롬인지)는 Xcode/실기기가
+/// 없는 이 환경에서 확인할 수 없다 — `DocumentsHomeView`/`SermonHomeView`처럼
+/// `NavigationSplitView`의 detail 컬럼에 바로 있는 화면과 달리, 이 패널은
+/// `.inspector`로 붙는 보조 패널이라는 구조적 차이가 있어 효과가 다를 수
+/// 있다는 뜻이다. 컴파일은 확실히 되는 코드(실존하는 공식 API)이지만, 원하는
+/// "흰색 바 -> 배경색 맞추기" 효과가 실제로 나는지는 빌드해서 확인해 주셔야
+/// 한다 — 안 되면 알려주시면 다음 방법을 찾겠다.
+private struct ThemedNavigationBarBackgroundModifier: ViewModifier {
+    let color: Color?
+
+    @Environment(\.self) private var environment
+
+    func body(content: Content) -> some View {
+        #if os(iOS)
+        // 이 패널은 iOS/아이패드에서 `.toolbar(.hidden, for: .navigationBar)`로
+        // 제목 표시줄 자체를 항상 숨기고 있어(아래 body 참고), 배경을 칠해도
+        // 보이는 바가 없다 — 그래도 다른 5개 파일과 같은 모양으로 남겨 둔다
+        // (나중에 그 숨김이 바뀌어도 바로 동작하도록).
+        if let color {
+            content
+                .toolbarBackground(color, for: .navigationBar)
+                .toolbarBackground(.visible, for: .navigationBar)
+                .toolbarColorScheme(Self.isDarkBackground(color, in: environment) ? .dark : .light, for: .navigationBar)
+        } else {
+            content
+        }
+        #elseif os(macOS)
+        if let color {
+            content
+                .toolbarBackground(color, for: .windowToolbar)
+                .toolbarBackground(.visible, for: .windowToolbar)
+                .toolbarColorScheme(Self.isDarkBackground(color, in: environment) ? .dark : .light, for: .windowToolbar)
+        } else {
+            content
+        }
+        #else
+        content
+        #endif
+    }
+
+    private static func isDarkBackground(_ color: Color, in environment: EnvironmentValues) -> Bool {
+        let resolved = color.resolve(in: environment)
+        let luminance = 0.2126 * Double(resolved.red) + 0.7152 * Double(resolved.green) + 0.0722 * Double(resolved.blue)
+        return luminance < 0.5
+    }
+}
+
 struct ChapterRelatedContentPanel: View {
     let viewModel: BibleReadingViewModel
     /// 메모를 탭하면 호출부(BibleReadingView)가 기존 "메모 작성" 시트를 그대로
@@ -134,20 +198,75 @@ struct ChapterRelatedContentPanel: View {
                     memoSection(verse: selectedVerse)
                     wordSummarySection(verse: selectedVerse)
                     documentSection(verse: selectedVerse)
+                    sermonSection(verse: selectedVerse)
                 }
             }
             // [2026-09-12 추가] 위 `settings` 선언부 주석 참고 — `OutlineTreeView`/
             // `WordNoteHomeView`가 이미 쓰는 것과 같은 관례.
             .scrollContentBackground(.hidden)
             .background(settings.bibleBackgroundColor ?? Color.clear)
-            .navigationTitle("이 장의 관련 콘텐츠")
+            // [2026-09-29 수정] 사용자 요청(맥OS) — "'이 장의 관련 콘텐츠'
+            // 텍스트 변경 -> 해당 성경+장으로 텍스트 변경." 바로 이 패널을
+            // 붙이는 `BibleReadingView`가 이미 같은 조합(책 한글명 + "장")을
+            // 아이폰 툴바 타이틀 두 번째 줄에 쓰고 있어(그 파일 `toolbarContent`
+            // 참고) 같은 관례를 따랐다.
+            .navigationTitle("\(viewModel.selectedBook.nameKo) \(viewModel.selectedChapter)장")
             #if os(iOS)
             .navigationBarTitleDisplayMode(.inline)
+            // [2026-09-28 위치 수정] 사용자 보고 — "아주 간혹 아이폰에서 성경탭의
+            // 맨위 영역(번역본, 성경+장 / 북마크 리스트, 북마크 설정·해제, 히스토리,
+            // 인스펙터창)이 통째로 사라짐." 조사 결과, 이 파일 전체(및 리포지토리
+            // 전체, grep 확인)에서 `.toolbar(.hidden, for: .navigationBar)`를 쓰는
+            // 곳은 여기 한 곳뿐이다 — 그런데 바로 위 [2026-08-28 추가] 주석대로 이
+            // 값은 원래 이 `NavigationStack` **바깥**(= 이 뷰 자신, 즉 인스펙터가
+            // 아이폰에서 시트로 바뀌었을 때의 시트 루트)에 붙어 있었다.
+            // `BibleReadingView.toolbarContent`가 그리는 항목들(번역본/성경+장
+            // 제목, 책갈피 이동/설정·해제, 조회 이력, 그리고 이 패널을 여는 "관련
+            // 콘텐츠" 버튼 자체)은 전부 그 화면의 단 하나의 진짜 네비게이션 바에
+            // 속해 있어, 그 바가 통째로 숨겨지면 사용자가 보고한 항목 전부가 한
+            // 번에 사라지는 증상과 정확히 일치한다 — 반면 이 화면 안의 개별 상태
+            // (예: 말씀 요약 편집 중 숨김)로는 "관련 콘텐츠" 버튼 자체나 제목까지
+            // 함께 사라지는 걸 설명하지 못한다.
+            //
+            // `.toolbar(.hidden, for:)`는 "이 콘텐츠가 속한 네비게이션 바"를
+            // 숨기라는 선호값(preference)이고, 통상 그 네비게이션 바를 실제로
+            // 그리는 `NavigationStack`의 **콘텐츠 안쪽**에 붙여야 그 스택 자신의
+            // 바로만 정확히 범위가 좁혀진다. 이 값이 스택 **바깥**(이 뷰가
+            // `.inspector`를 통해 아이폰에서 시트로 열릴 때는 그 시트의 루트
+            // 뷰 자체)에 붙어 있으면, 그 시트가 열리고 닫히는 전환 애니메이션
+            // 도중 이 선호값이 어느 네비게이션 바를 가리키는지 SwiftUI가
+            // 일시적으로 잘못 해석해, 시트를 띄운 부모 화면(`BibleReadingView`)의
+            // 네비게이션 바까지 함께 숨겨진 채로 남는 경우가 SwiftUI에서 보고된
+            // 적이 있다 — "아주 간혹, 재현 조건을 특정하기 어렵다"는 사용자 보고와
+            // 부합한다(애니메이션 타이밍에 따라 갈리는 경합 조건이라 매번 재현되진
+            // 않는다).
+            //
+            // 고치는 방법은 이 값을 `NavigationStack`의 **콘텐츠 안쪽**(바로 이
+            // 자리, `.navigationBarTitleDisplayMode` 바로 옆)으로 옮기는 것 —
+            // "이 스택 콘텐츠가 자기 자신의 바를 숨긴다"는 의미가 되어, 그 범위가
+            // 이 뷰의 `NavigationStack` 하나로 확실히 국한되고 부모 화면의
+            // 네비게이션 바로 새어나갈 경로 자체가 없어진다. 의도한 화면(이
+            // 패널의 제목 표시줄이 안 보임)은 이전과 완전히 동일하게 유지된다 —
+            // 범위만 정확해질 뿐, 다른 동작 변화는 없다.
+            //
+            // ⚠️ [확인 필요] 이 도구(클라우드 세션)에는 실기기/시뮬레이터가 없어
+            // 이 수정이 실제로 그 희귀 증상을 없애는지 직접 재현·검증하지
+            // 못했다 — 코드상 유일한 용의점(전체 리포지토리에서 이 API의 유일한
+            // 사용처)이자 증상 전체(제목+모든 트레일링 아이콘)를 한 번에 설명하는
+            // 가장 근거가 확실한 원인으로 판단해 적용했다. 적용 후 (1) 이 패널을
+            // 여러 번 열고 닫아도(특히 빠르게 연속으로) 상단 영역이 계속 정상
+            // 표시되는지 (2) 말씀 요약 편집기를 열고 닫는 과정과 겹쳐도 문제가
+            // 없는지 확인해 주시면 좋겠다 — 만약 그래도 재현되면, 이 가설이
+            // 틀렸다는 뜻이므로 재현 직전에 정확히 어떤 조작(관련 콘텐츠/말씀
+            // 요약 열기·닫기, 화면 회전, 백그라운드 전환 등)을 했는지 알려주시면
+            // 다음 용의점을 좁혀 나가겠다.
+            .toolbar(.hidden, for: .navigationBar)
             #endif
         }
-        #if os(iOS)
-        .toolbar(.hidden, for: .navigationBar)
-        #endif
+        // [2026-09-29 추가] 항목 1 — 위 새로 추가한
+        // `ThemedNavigationBarBackgroundModifier` 적용(macOS 흰색 바 배경
+        // 맞추기 시도, 효과 미검증 — 파일 상단 주석 참고).
+        .modifier(ThemedNavigationBarBackgroundModifier(color: settings.bibleBackgroundColor))
     }
 
     // MARK: - 개요(S8 책 개요 + S9 장 개요) — 선택 상태와 무관하게 항상 표시
@@ -667,6 +786,125 @@ struct ChapterRelatedContentPanel: View {
         VStack(alignment: .leading, spacing: 6) {
             originBadge("이 장에 연결됨", systemImage: "paperclip")
             Label(document.originalFilename, systemImage: "doc.text")
+                .font(.callout)
+                .foregroundStyle(settings.bibleTextColor ?? .primary)
+                .lineLimit(2)
+        }
+    }
+
+    // MARK: - 내 설교(구절 선택 시에만) — 이 구절에 "말씀구절"로 연결된 설교문 +
+    // 이 절을 언급하는 설교문 (documentSection과 완전히 같은 두 신호 원칙,
+    // 다만 수동 신호가 장 전체가 아니라 절 범위 자체를 좌표로 갖는다는 점만
+    // 다르다 — 위 `BibleReadingViewModel.sermonVerseReferences(verse:)` 상단
+    // 주석 참고)
+
+    /// [2026-09-29 신설] 사용자 요청 — "성경 조회의 성경 구절 에도 관련
+    /// 설교문이 있으면 아이콘 표시 + 인스펙터 창의 하단에도 관련 연구문서
+    /// 밑에 '관련 설교문' 추가."
+    @ViewBuilder
+    private func sermonSection(verse: Int) -> some View {
+        let taggedReferences = viewModel.sermonVerseReferences(verse: verse)
+        let mentionedSermons = viewModel.verseMentions(verse: verse).filter { $0.sourceType == .sermon }
+        // documentSection의 groupedByDisplayText와 같은 이유 — 완전히 같은
+        // 텍스트를 반복해서 나열하지 않고 "N곳에서 언급됨"으로 묶는다.
+        let groupedMentionedSermons = groupedByDisplayText(mentionedSermons)
+        Section {
+            sectionTitleRow(
+                "\(verse)절 관련 설교문 (\(taggedReferences.count + groupedMentionedSermons.count))",
+                systemImage: "mic.fill", tint: .purple
+            )
+            if taggedReferences.isEmpty && mentionedSermons.isEmpty {
+                emptyRow("이 절에 연결됐거나 이 절을 언급하는 설교문이 없습니다.")
+            } else {
+                ForEach(taggedReferences) { reference in
+                    sermonReferenceRow(reference)
+                }
+                ForEach(groupedMentionedSermons) { group in
+                    Button {
+                        onSelectVerseMention(group.representative)
+                    } label: {
+                        VStack(alignment: .leading, spacing: 6) {
+                            HStack(spacing: 6) {
+                                originBadge("본문에서 언급됨", systemImage: "text.magnifyingglass")
+                                if group.count > 1 {
+                                    Text("\(group.count)곳에서 언급됨")
+                                        .font(.caption2)
+                                        .foregroundStyle(settings.bibleTextColor?.opacity(0.6) ?? Color.secondary)
+                                }
+                            }
+                            Text(group.representative.snippet.isEmpty ? group.representative.searchText : group.representative.snippet)
+                                .font(.callout)
+                                .foregroundStyle(settings.bibleTextColor ?? .primary)
+                                .lineSpacing(2)
+                                .lineLimit(2)
+                        }
+                        .padding(.vertical, 6)
+                    }
+                    .buttonStyle(.plain)
+                    .listRowBackground(Color.clear)
+                }
+            }
+        }
+    }
+
+    /// 위 `taggedReferences`(수동 "말씀구절" 참조) 한 행 — `SermonVerseReference.
+    /// sermon`/`.delivery` 중 실제로 채워진 쪽(설계상 상호 배타적, `Sermons.swift`
+    /// 상단 주석 참고)으로 분기해 `SermonViewerView`/"sermon-viewer" 창을 연다.
+    /// `documentSection`의 `taggedDocuments` 행과 같은 아이폰/그 외 분기 원칙.
+    @ViewBuilder
+    private func sermonReferenceRow(_ reference: SermonVerseReference) -> some View {
+        if let sermon = reference.sermon {
+            Group {
+                if isPhoneIdiom {
+                    NavigationLink {
+                        SermonViewerView(subject: .sermon(sermon))
+                    } label: {
+                        sermonReferenceRowLabel(title: sermon.title.isEmpty ? "제목 없음" : sermon.title)
+                    }
+                } else {
+                    Button {
+                        openWindow(id: "sermon-viewer", value: SermonViewerTarget.sermon(sermon))
+                    } label: {
+                        sermonReferenceRowLabel(title: sermon.title.isEmpty ? "제목 없음" : sermon.title)
+                    }
+                    .buttonStyle(.plain)
+                }
+            }
+            .padding(.vertical, 6)
+            .listRowBackground(Color.clear)
+        } else if let delivery = reference.delivery {
+            // 회차 사본(SermonDelivery) — 소속 모임 이름 + 날짜로 표시한다
+            // (`SermonEditorView.bannerLabel`과 같은 조합, `Sermon`이 아니라
+            // `SermonDelivery` 쪽이라 그 함수를 그대로 재사용할 수는 없다).
+            let gatheringName = delivery.gathering?.name ?? "모임 미지정"
+            let dateText = delivery.deliveredAt.formatted(date: .abbreviated, time: .omitted)
+            Group {
+                if isPhoneIdiom {
+                    NavigationLink {
+                        SermonViewerView(subject: .delivery(delivery))
+                    } label: {
+                        sermonReferenceRowLabel(title: "\(gatheringName) \(dateText)")
+                    }
+                } else {
+                    Button {
+                        openWindow(id: "sermon-viewer", value: SermonViewerTarget.delivery(delivery))
+                    } label: {
+                        sermonReferenceRowLabel(title: "\(gatheringName) \(dateText)")
+                    }
+                    .buttonStyle(.plain)
+                }
+            }
+            .padding(.vertical, 6)
+            .listRowBackground(Color.clear)
+        }
+        // 둘 다 nil이면(설계상 있어서는 안 되는 상태) 아무 것도 그리지 않는다 —
+        // 추측성 기본값을 만들어 잘못된 정보를 보여주지 않는다.
+    }
+
+    private func sermonReferenceRowLabel(title: String) -> some View {
+        VStack(alignment: .leading, spacing: 6) {
+            originBadge("말씀구절로 연결됨", systemImage: "text.book.closed")
+            Label(title, systemImage: "mic.fill")
                 .font(.callout)
                 .foregroundStyle(settings.bibleTextColor ?? .primary)
                 .lineLimit(2)

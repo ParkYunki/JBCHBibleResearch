@@ -194,6 +194,20 @@ struct DocumentSearchResult: Identifiable {
     var matchedWordCount: Int = 0
 }
 
+/// [2026-09-29 신설] 사용자 요청 — "통합 검색에 '내 설교' 탭 — 연구문서,
+/// 말씀노트와 마찬가지로 동일하게 처리(본문, 태그, 제목) + 성경구절 파싱."
+/// `DocumentSearchResult`와 완전히 같은 모양 — 문서엔 있는 `pageNumber`(PDF
+/// 페이지 이동용)만 설교문엔 해당 개념이 없어 뺐다.
+struct SermonSearchResult: Identifiable {
+    let sermon: Sermon
+    var id: PersistentIdentifier { sermon.persistentModelID }
+    var bodyExcerpt: String?
+    var bodyOccurrenceSum: Int = 0
+    var matchedTagNames: [String] = []
+    var highlightKeywords: [String] = []
+    var matchedWordCount: Int = 0
+}
+
 @MainActor
 @Observable
 final class SearchViewModel {
@@ -636,6 +650,10 @@ final class SearchViewModel {
     private(set) var outlineResults: [OutlineSearchResult] = []
     private(set) var phraseNoteResults: [PhraseNoteSearchResult] = []
     private(set) var summaryResults: [SummarySearchResult] = []
+    /// [2026-09-29 신설] 사용자 요청 — "통합 검색에 '내 설교' 탭." 아래
+    /// `clearResults()`/`performKeywordSearch`/`performAIQuerySearch`도
+    /// `documentResults`와 같은 자리마다 함께 갱신한다.
+    private(set) var sermonResults: [SermonSearchResult] = []
     private(set) var isSearching = false
     var errorDescription: String?
 
@@ -692,6 +710,7 @@ final class SearchViewModel {
         outlineResults = []
         phraseNoteResults = []
         summaryResults = []
+        sermonResults = []
         errorDescription = nil
         lastAIQueryUsed = nil
     }
@@ -852,6 +871,7 @@ final class SearchViewModel {
         await Task.yield()
 
         documentResults = searchDocuments(words: words, queryMatches: queryMatches)
+        sermonResults = searchSermons(words: words, queryMatches: queryMatches)
     }
 
     // MARK: - 키워드 검색: 공통 단어 매칭 헬퍼
@@ -1545,6 +1565,52 @@ final class SearchViewModel {
         return Self.sortedByWordCoverage(results).map(\.result)
     }
 
+    // MARK: - 키워드 검색: 내 설교(Sermon)
+
+    /// [2026-09-29 신설] 사용자 요청 — "통합 검색에 '내 설교' 탭 — 연구문서,
+    /// 말씀노트와 마찬가지로 동일하게 처리(본문, 태그, 제목) + 성경구절 파싱."
+    /// `searchDocuments`와 완전히 같은 구조 — 제목(`sermon.title`)/태그
+    /// (`sermon.sermonTags`)/본문(`sermon.contentText`)을 그대로 대응시켰다.
+    /// 회차 사본(`SermonDelivery`)은 범위 밖이라 메인 설교문만 대상으로 한다
+    /// (`VerseMentionSourceType.sermon` 주석 참고).
+    private func searchSermons(words: [String], queryMatches: [BibleReferenceExtractor.Match]) -> [SermonSearchResult] {
+        let sermons = (try? modelContext.fetch(
+            FetchDescriptor<Sermon>(sortBy: [SortDescriptor(\.updatedAt, order: .reverse)])
+        )) ?? []
+        let mentions = queryMatches.isEmpty ? [] : ((try? modelContext.fetch(FetchDescriptor<VerseMention>())) ?? [])
+        let sermonContentCandidates = contentCandidateSourceIds(
+            category: .sermon, words: words,
+            extraTerms: categoryWideVerseSearchTexts(mentions: mentions, sourceType: .sermon, queryMatches: queryMatches),
+            liveContentById: Dictionary(uniqueKeysWithValues: sermons.map { ($0.id.uuidString, $0.contentText) })
+        )
+
+        var results: [(result: SermonSearchResult, wordCount: Int, bonus: Int)] = []
+        for sermon in sermons {
+            let tagNames = (sermon.sermonTags ?? []).compactMap { $0.tag?.name }
+            let tagCount = words.filter { word in tagNames.contains { $0.localizedCaseInsensitiveContains(word) } }.count
+            var seenTagNames = Set<String>()
+            let matchedTagNames = tagNames.filter { name in
+                words.contains { name.localizedCaseInsensitiveContains($0) } && seenTagNames.insert(name).inserted
+            }
+
+            let titleCount = words.filter { sermon.title.localizedCaseInsensitiveContains($0) }.count
+
+            guard tagCount > 0 || titleCount > 0 || sermonContentCandidates.contains(sermon.id.uuidString) else { continue }
+            let verseTerms = verseMentionSearchTexts(mentions: mentions, sourceType: .sermon, sourceId: sermon.id.uuidString, queryMatches: queryMatches)
+            let wordScore = computeWordMatchScore(words: words, verseTerms: verseTerms, contentText: sermon.contentText)
+
+            guard tagCount > 0 || titleCount > 0 || wordScore.isTextMatch else { continue }
+            let result = SermonSearchResult(
+                sermon: sermon,
+                bodyExcerpt: wordScore.bodyExcerpt, bodyOccurrenceSum: wordScore.bodyOccurrenceSum,
+                matchedTagNames: matchedTagNames, highlightKeywords: wordScore.highlightKeywords,
+                matchedWordCount: wordScore.distinctTermMatchCount
+            )
+            results.append((result, wordScore.distinctTermMatchCount, tagCount + titleCount))
+        }
+        return Self.sortedByWordCoverage(results).map(\.result)
+    }
+
     // MARK: - AI 검색(임베딩 기반 의미검색, 2026-08-19 전면 교체)
 
     /// [2026-08-19] 사용자 요청 — "애플 인텔리전스로 텍스트를 정제하고, 방식 A —
@@ -1577,6 +1643,7 @@ final class SearchViewModel {
             lastAIQueryUsed = nil
             memoResults = []; documentResults = []
             outlineResults = []; phraseNoteResults = []; summaryResults = []
+            sermonResults = []
             return
         }
 
@@ -1600,6 +1667,7 @@ final class SearchViewModel {
         }
         memoResults = []; documentResults = []
         outlineResults = []; phraseNoteResults = []; summaryResults = []
+        sermonResults = []
     }
 
     /// [2026-08-20 신설, Phase 5] `QueryIntentCard.verseRefs`(관계/인물·지명

@@ -17,6 +17,13 @@ enum AppSection: String, CaseIterable, Identifiable, Hashable {
     // picker로 구분해 한 목록에 섞어 보여준다(그 파일 상단 주석 참고).
     case wordNote
     case documents
+    // [2026-09-28 추가] "내 설교"(설교 관리) 기능 — 설계 문서
+    // (claude/sermon-management-screens-and-schema.md, 프로젝트) 참고.
+    // iPad/macOS 진입점은 사이드바의 이 항목, iPhone은 "더보기" 안
+    // 전체화면 모달(`PlaceholderScreens.swift` 참고 — `.searchable`을
+    // 쓰는 화면이라 `.tagRelations`/`.outline`과 같은 이유로 탭바가 아닌
+    // 전체화면 모달로 연다).
+    case sermons
     case outline
     case tagRelations
     case search
@@ -30,7 +37,8 @@ enum AppSection: String, CaseIterable, Identifiable, Hashable {
         // 문구를 그대로 썼다. 이전 이력(개인 주석→개인 묵상 개명 등)은
         // `WordNoteHomeView.swift` 상단 주석에 옮겨 적었다.
         case .wordNote: return "말씀 노트"
-        case .documents: return "연구문서"
+        case .documents: return "연구 문서"
+        case .sermons: return "내 설교"
         case .outline: return "개요"
         case .tagRelations: return "태그 관계"
         case .search: return "통합 검색"
@@ -42,6 +50,7 @@ enum AppSection: String, CaseIterable, Identifiable, Hashable {
         case .bibleReading: return "book"
         case .wordNote: return "note.text"
         case .documents: return "doc.text"
+        case .sermons: return "mic"
         case .outline: return "list.bullet.rectangle"
         case .tagRelations: return "circle.grid.cross"
         case .search: return "magnifyingglass"

@@ -23,6 +23,16 @@ import UIKit
 struct SidebarNavigationView: View {
     @Environment(\.openWindow) private var openWindow
     @Environment(\.modelContext) private var modelContext
+    /// [2026-09-29 신설] 사용자 보고 — "왼쪽 사이드바는 테마 색상이 적용되지
+    /// 않음." 지금까지 이 화면은 `settings.bibleBackgroundColor`/`bibleTextColor`
+    /// (성경 조회/연구문서/말씀노트/내 설교 등 다른 화면들이 이미 읽는 "테마
+    /// 색상" 설정)를 전혀 읽지 않았다 — 배경·글자색이 전부 시스템 기본(=
+    /// "화면 모드" 설정만 따름)이라, 테마 색상을 화면 모드와 다르게 골라 두면
+    /// 오른쪽 콘텐츠(테마 색상 적용)와 왼쪽 사이드바(화면 모드만 적용)가
+    /// 서로 다른 배경/글자색으로 어긋나 보였다. `ChapterRelatedContentPanel`/
+    /// `DocumentsHomeView` 등이 이미 쓰는 것과 같은 접근자 관례를 그대로
+    /// 들여온다.
+    private var settings: UserSettingsStore { .shared }
     @State private var selection: AppSection? = SidebarNavigationView.initialSelection()
     @State private var columnVisibility: NavigationSplitViewVisibility = .all
     @State private var isSettingsPresented = false
@@ -124,17 +134,28 @@ struct SidebarNavigationView: View {
 
     private var sidebarSearchBar: some View {
         HStack(spacing: 6) {
+            // [2026-09-29 수정] 사용자 보고 — "왼쪽 사이드바는 테마 색상이
+            // 적용되지 않음." `DocumentsHomeView.searchAndFilterBar`가 이미
+            // 겪고 고친 것과 같은 문제(돋보기/지우기 아이콘·placeholder·
+            // 상자 배경이 전부 `.secondary`/`Color.secondary` 고정이라
+            // 테마와 무관)라 같은 해법을 그대로 들여온다.
             Image(systemName: "magnifyingglass")
-                .foregroundStyle(.secondary)
-            TextField("검색 (2글자 이상)", text: $sidebarSearchText)
+                .foregroundStyle(settings.bibleTextColor?.opacity(0.6) ?? Color.secondary)
+            TextField(
+                "검색 (2글자 이상)",
+                text: $sidebarSearchText,
+                prompt: Text("검색 (2글자 이상)")
+                    .foregroundStyle(settings.bibleTextColor?.opacity(0.5) ?? Color.secondary)
+            )
                 .textFieldStyle(.plain)
+                .foregroundStyle(settings.bibleTextColor ?? .primary)
                 .onSubmit { submitSidebarSearch() }
             if !sidebarSearchText.isEmpty {
                 Button {
                     sidebarSearchText = ""
                 } label: {
                     Image(systemName: "xmark.circle.fill")
-                        .foregroundStyle(.secondary)
+                        .foregroundStyle(settings.bibleTextColor?.opacity(0.6) ?? Color.secondary)
                 }
                 .buttonStyle(.plain)
             }
@@ -142,13 +163,15 @@ struct SidebarNavigationView: View {
                 submitSidebarSearch()
             } label: {
                 Image(systemName: "arrow.right.circle.fill")
+                    .foregroundStyle(settings.bibleTextColor ?? .primary)
             }
             .buttonStyle(.plain)
             .disabled(!canSubmitSidebarSearch)
         }
         .font(.body)
         .padding(8)
-        .background(RoundedRectangle(cornerRadius: 8).fill(Color.secondary.opacity(0.1)))
+        .background(RoundedRectangle(cornerRadius: 8).fill(settings.bibleTextColor?.opacity(0.08) ?? Color.secondary.opacity(0.1)))
+        .overlay(RoundedRectangle(cornerRadius: 8).stroke(settings.bibleTextColor?.opacity(0.2) ?? Color.clear, lineWidth: 1))
         .padding(.horizontal, 12)
         .padding(.top, 8)
         .padding(.bottom, 4)
@@ -202,10 +225,12 @@ struct SidebarNavigationView: View {
                         openWindow(id: "tag-relations")
                     } label: {
                         Label(section.title, systemImage: section.systemImage)
+                            .foregroundStyle(settings.bibleTextColor ?? .primary)
                     }
                     .buttonStyle(.plain)
                 } else {
                     Label(section.title, systemImage: section.systemImage)
+                        .foregroundStyle(settings.bibleTextColor ?? .primary)
                         .tag(section)
                 }
             }
@@ -243,7 +268,7 @@ struct SidebarNavigationView: View {
                     // 오래됨... 관련 항목들은 메뉴보다 살짝 흐리게." 위
                     // AppSection 메뉴(`Label(section.title, ...)`, 기본
                     // primary 색)보다 눈에 덜 띄도록 헤더도 `.secondary`로.
-                    Text("고정됨").foregroundStyle(.secondary)
+                    Text("고정됨").foregroundStyle(settings.bibleTextColor?.opacity(0.6) ?? Color.secondary)
                 }
             }
             if !todayQuickItems.isEmpty {
@@ -252,7 +277,7 @@ struct SidebarNavigationView: View {
                         quickItemRow(item)
                     }
                 } header: {
-                    Text("오늘").foregroundStyle(.secondary)
+                    Text("오늘").foregroundStyle(settings.bibleTextColor?.opacity(0.6) ?? Color.secondary)
                 }
             }
             if !yesterdayQuickItems.isEmpty {
@@ -261,7 +286,7 @@ struct SidebarNavigationView: View {
                         quickItemRow(item)
                     }
                 } header: {
-                    Text("어제").foregroundStyle(.secondary)
+                    Text("어제").foregroundStyle(settings.bibleTextColor?.opacity(0.6) ?? Color.secondary)
                 }
             }
             if !dayBeforeYesterdayQuickItems.isEmpty {
@@ -270,7 +295,7 @@ struct SidebarNavigationView: View {
                         quickItemRow(item)
                     }
                 } header: {
-                    Text(dayBeforeYesterdayHeaderLabel).foregroundStyle(.secondary)
+                    Text(dayBeforeYesterdayHeaderLabel).foregroundStyle(settings.bibleTextColor?.opacity(0.6) ?? Color.secondary)
                 }
             }
             if !thisWeekQuickItems.isEmpty {
@@ -279,7 +304,7 @@ struct SidebarNavigationView: View {
                         quickItemRow(item)
                     }
                 } header: {
-                    Text("이번 주").foregroundStyle(.secondary)
+                    Text("이번 주").foregroundStyle(settings.bibleTextColor?.opacity(0.6) ?? Color.secondary)
                 }
             }
             if !olderQuickItems.isEmpty {
@@ -288,7 +313,7 @@ struct SidebarNavigationView: View {
                         quickItemRow(item)
                     }
                 } header: {
-                    Text("이전").foregroundStyle(.secondary)
+                    Text("이전").foregroundStyle(settings.bibleTextColor?.opacity(0.6) ?? Color.secondary)
                 }
             }
         }
@@ -307,6 +332,13 @@ struct SidebarNavigationView: View {
         // 각도로 봐도 여전히 "이 앱의 그 금색 계열"로 보이면서, 큰 면적
         // 배경에서도 탁하지 않게 밝은 금색으로 읽히도록 조정한 값이다.
         .tint(Color(hex: "#D1A35E") ?? Color("AccentColor"))
+        // [2026-09-29 추가] 사용자 보고 — "왼쪽 사이드바는 테마 색상이
+        // 적용되지 않음." `ChapterRelatedContentPanel`이 이미 쓰는 것과
+        // 같은 조합 — `List`는 기본적으로 자기 자신의 시스템 배경을 그리므로
+        // `.scrollContentBackground(.hidden)`으로 그 기본 배경을 먼저 끈
+        // 뒤에야 `.background(...)`로 준 색이 실제로 보인다.
+        .scrollContentBackground(.hidden)
+        .background(settings.bibleBackgroundColor ?? Color.clear)
     }
 
     var body: some View {
@@ -336,6 +368,12 @@ struct SidebarNavigationView: View {
                 sidebarSearchBar
                 sidebarMenuList
             }
+            // [2026-09-29 추가] 사용자 보고 — "왼쪽 사이드바는 테마 색상이
+            // 적용되지 않음." `sidebarMenuList`(위) 안쪽 `List`에는 이미
+            // 배경을 입혔지만, 검색창(`sidebarSearchBar`)은 그 `List` 밖의
+            // 형제 뷰라 이 `VStack` 자체에도 같은 배경을 한 번 더 줘야
+            // 검색창 주변 여백까지 빈틈없이 테마색으로 채워진다.
+            .background(settings.bibleBackgroundColor ?? Color.clear)
             .navigationSplitViewColumnWidth(min: 200, ideal: 240, max: 280)
             // [2026-09-27 수정] 사용자 요청 — "아이패드에서 성경조회 메뉴의
             // 왼쪽 최상단 'JBCH Bible ...' 텍스트 삭제." 이 사이드바
@@ -719,9 +757,12 @@ struct SidebarNavigationView: View {
                 .lineLimit(1)
                 // [2026-08-19 추가] 사용자 요청 — "고정됨/오늘/이번주/오래됨...
                 // 관련 항목들은 메뉴보다 살짝 흐리게." 위 AppSection 메뉴는
-                // 기본(primary) 색 그대로 두고, 이 보조 목록만 `.secondary`로
-                // 낮춰 위계를 구분한다.
-                .foregroundStyle(.secondary)
+                // 기본(테마 글자색) 그대로 두고, 이 보조 목록만 옅게 낮춰
+                // 위계를 구분한다.
+                // [2026-09-29 수정] 사용자 보고 — "왼쪽 사이드바는 테마
+                // 색상이 적용되지 않음." 고정 `.secondary` 대신 테마
+                // 글자색의 옅은 버전으로.
+                .foregroundStyle(settings.bibleTextColor?.opacity(0.6) ?? Color.secondary)
         }
         // "태그 관계" 행과 같은 이유로 `.plain` — 이 Button들은 `selection`
         // 대상이 아니라 List 기본 버튼 틴트가 어울리지 않는다.
@@ -813,6 +854,12 @@ struct SidebarNavigationView: View {
         case .bibleReading: BibleReadingView()
         case .wordNote: WordNoteHomeView()
         case .documents: DocumentsHomeView()
+        // [2026-09-28 추가] "내 설교" 기능 — 설계 문서(claude/sermon-
+        // management-screens-and-schema.md, 프로젝트) 참고. `SermonHomeView`는
+        // iPhone/Mac·iPad 양쪽에서 그대로 재사용된다(`SermonHomeView.swift`
+        // 상단 주석 참고 — NavigationSplitView의 detail 컬럼이 이미 독립된
+        // NavigationStack이라 `.searchable` 문제가 없다).
+        case .sermons: SermonHomeView()
         // [2026-08-14 변경] 사용자 요청 — "개요: 구약/신약 > 책 > 장 폴더 구조로."
         // 66권 평면 리스트(`OutlineBookListView`, 삭제됨)를 트리(`OutlineTreeView`)로
         // 교체 — `WindowGroup(id: "outline")`(성경 조회 사이드바의 "개요 화면

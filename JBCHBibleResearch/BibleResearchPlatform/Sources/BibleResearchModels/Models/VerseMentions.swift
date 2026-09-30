@@ -30,6 +30,14 @@ public enum VerseMentionSourceType: String, Codable, Sendable, CaseIterable {
     /// `VerseSummary`(말씀 요약) 전용 소스 타입 — `.memo`(UserMemo)와 데이터
     /// 모양은 비슷하지만 별개 모델이라 소스 타입도 구분해야 한다.
     case wordSummary
+    /// [2026-09-29 추가] 사용자 요청 — "통합 검색에 '내 설교' 탭 — 연구문서,
+    /// 말씀노트와 마찬가지로 동일하게 처리 + 성경구절 파싱" / "성경 조회의
+    /// 성경 구절에도 관련 설교문이 있으면 아이콘 표시." `Sermon`(메인 설교문)
+    /// 본문에서 자동 추출한 성경구절 언급 — 다른 소스 타입과 완전히 같은
+    /// 패턴(`BibleReferenceIndexingService.reindexSermon` 참고). 회차 사본
+    /// (`SermonDelivery`)은 이번 요청 범위 밖이라 별도 소스 타입을 두지
+    /// 않는다 — "내 설교" 탭/관련 콘텐츠 모두 메인 설교문 기준으로만 다룬다.
+    case sermon
 }
 
 /// 메모(`UserMemo`)/연구문서(`SourceDocument`) 본문 안에서 정규식으로 추출한 성경

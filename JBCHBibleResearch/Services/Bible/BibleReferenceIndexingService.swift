@@ -155,6 +155,17 @@ enum BibleReferenceIndexingService {
         )
     }
 
+    /// [2026-09-29 추가] 사용자 요청 — "통합 검색에 '내 설교' 탭... + 성경구절
+    /// 파싱." `reindexWordSummary`와 완전히 같은 모양 — 메인 설교문(`Sermon`)
+    /// 하나를 저장한 직후 호출한다. 회차 사본(`SermonDelivery`)은 이번 요청
+    /// 범위 밖이라 인덱싱하지 않는다(위 `VerseMentionSourceType.sermon` 주석
+    /// 참고).
+    static func reindexSermon(_ sermon: Sermon, context: ModelContext) {
+        reindexSingleSource(
+            context: context, sourceType: .sermon, sourceId: sermon.id.uuidString, text: sermon.contentText
+        )
+    }
+
     /// 연구문서 하나가 텍스트를 확보한(처음 `indexStatus == .indexed`가 된) 직후
     /// 호출. 아직 검수 전(초안)이면 인덱스에 남아 있으면 안 되므로 기존 레코드만
     /// 정리하고 새로 추출하지 않는다 — `reindexDocuments`(전체 재스캔)의 "인덱싱

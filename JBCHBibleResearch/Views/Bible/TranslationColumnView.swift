@@ -272,20 +272,20 @@ struct TranslationColumnView: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 0) {
             if !isPhone {
+                // [2026-09-29 수정] 사용자 요청(맥OS/아이패드) — "성경 이동
+                // 툴 하단 텍스트 '번역본 + 성경+장' -> 번역본 이름만 노출."
+                // 책/장은 바로 위 "성경 이동 툴"(`BookChapterPicker.
+                // standardBody`)이 이미 항상 보여주고 있어(그 뷰가 받는
+                // `selectedBook`/`selectedChapter`), 이 컬럼 제목 줄까지 같은
+                // 정보를 또 보여주는 게 중복이었다 — 컬럼을 구분하는 데 꼭
+                // 필요한 번역본 이름만 남긴다. `localizedBookChapterLabel`
+                // 프로퍼티 자체는 지우지 않았다(호출부가 여전히 값을
+                // 넘기고, 장 변경 감지용으로도 쓰인다 — 이 프로퍼티 선언부
+                // 주석 참고) — 여기서 화면에 그리지만 않는다.
                 VStack(alignment: .leading, spacing: 2) {
-                    // [2026-09-02 수정] 사용자 요청 — "테마색상/글자색 변경 시
-                    // 번역본이름·성경장 텍스트 색상도 함께 바뀌어야 함." 기존엔
-                    // `.secondary`/`.tertiary`(시스템 고정 톤)였다 — 사용자가 글자색을
-                    // 직접 골랐으면(`bibleTextColor` != nil) 그 색을 그대로 쓰고,
-                    // 안 골랐으면(nil) 기존 톤을 그대로 유지한다.
                     Text(translationDisplayName)
                         .font(.headline)
                         .foregroundStyle(settings.bibleTextColor ?? .secondary)
-                    if let localizedBookChapterLabel, !localizedBookChapterLabel.isEmpty {
-                        Text(localizedBookChapterLabel)
-                            .font(.caption)
-                            .foregroundStyle(settings.bibleTextColor ?? systemTertiaryTextColor)
-                    }
                 }
                 .padding(.horizontal)
                 .padding(.top, 8)

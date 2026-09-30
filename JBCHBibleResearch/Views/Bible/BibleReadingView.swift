@@ -475,6 +475,11 @@ private struct BibleReadingContentView: View {
     /// 재사용한다 — 새로 만든 메모든 기존 메모든 "이 메모를 시트로 편집기에
     /// 띄운다"는 동작 자체는 똑같기 때문.
     @State private var memoBeingCreated: UserMemo?
+    /// [2026-09-29 7번 항목 신설] 사용자 요청 — "성경구절 선택시(단일, 다중)
+    /// 하단 기능에 '설교작성' 메뉴 추가", 사용자 확정("항상 새 설교 작성 화면
+    /// 열기") — `memoBeingCreated`와 같은 패턴(옵셔널 모델 + `.sheet(item:)`).
+    /// `startSermonFromSelectedVerses()`가 채운다.
+    @State private var pendingSermonFromVerses: Sermon?
     /// [2026-08-28 신설, 실기기 크래시 fix] 사용자 보고 — "성경조회 인스펙터 >
     /// 관련 연구문서 클릭시 반응없음" 진단·수정 과정에서 별도로 발견된 크래시:
     /// "Unable to open a window when the app does not support multiple scenes."
@@ -496,6 +501,13 @@ private struct BibleReadingContentView: View {
     /// `openWindow`로 진짜 새 창을 연다(다중 씬 지원 플랫폼이라 크래시 리포트가
     /// 없었다).
     @State private var documentSearchRequest: DocumentSearchRequest?
+    /// [2026-09-29 신설] 위 `documentSearchRequest`와 완전히 같은 이유·같은
+    /// 패턴 — "관련 내용"(`handleVerseMentionSelected`)에서 "내 설교" 언급을
+    /// 골랐을 때 아이폰(다중 씬 미지원)에서 이 화면 스택 안으로 밀어 넣을
+    /// 값 기반 상태. `SermonContentTarget`은 이미 `WindowGroup(id:
+    /// "sermon-viewer", for: SermonContentTarget.self)`(JBCHBibleResearchApp.swift)
+    /// 이 쓰는 값 타입을 그대로 재사용한다.
+    @State private var sermonMentionTarget: SermonContentTarget?
     /// [2026-08-08 추가] 관련 콘텐츠 패널(ChapterRelatedContentPanel) 표시 여부 —
     /// `.inspector(isPresented:)`에 연결한다. 한때 실기기 크래시 때문에
     /// `.sheet`로 바꿨다가, 진짜 원인이 `.inspector`가 아니라 이 화면에서
@@ -1019,6 +1031,14 @@ private struct BibleReadingContentView: View {
         .navigationDestination(item: $documentSearchRequest) { request in
             DocumentSearchWindowContent(request: request)
         }
+        // [2026-09-29 신설] 위 `sermonMentionTarget` 상단 주석 참고 — 아이폰
+        // 전용 경로. `SermonContentWindowContent(mode: .viewer, target:)`는
+        // macOS/iPad의 "sermon-viewer" `WindowGroup`이 쓰는 것과 완전히 같은
+        // 뷰(대상 조회 + `@Query` 기반 삭제 안전성, `SermonSupport.swift`
+        // 참고)를 그대로 재사용한다.
+        .navigationDestination(item: $sermonMentionTarget) { target in
+            SermonContentWindowContent(mode: .viewer, target: target)
+        }
         #if os(macOS)
         // [2026-08-08 신설, 크래시 조사 끝에 원래 배치로 복귀] 사용자 요청 —
         // "성경 장을 읽을 때 이 장의 개요/메모/연구문서가 있다는 것을 한번에
@@ -1341,6 +1361,19 @@ private struct BibleReadingContentView: View {
         case .wordSummary:
             if let summary = viewModel.resolveWordSummary(for: mention) {
                 presentWordSummaryEditor(summary)
+            }
+        // [2026-09-29 추가] 사용자 요청 — "성경 조회의 성경 구절 에도 관련
+        // 설교문이 있으면 아이콘 표시." 위 `.document` 분기와 같은 원칙 —
+        // 아이폰은 이 화면 스택 안으로 밀어 넣고(`sermonMentionTarget`),
+        // macOS/iPad는 이미 있는 "sermon-viewer" 창을 그대로 연다
+        // (`SermonDetailView.viewerButton`이 쓰는 것과 같은 호출).
+        case .sermon:
+            if let sermon = viewModel.resolveSermon(for: mention) {
+                if isPhone {
+                    sermonMentionTarget = SermonContentTarget.sermon(sermon)
+                } else {
+                    openWindow(id: "sermon-viewer", value: SermonViewerTarget.sermon(sermon))
+                }
             }
         }
     }
@@ -1945,6 +1978,39 @@ private struct BibleReadingContentView: View {
                 )
             }
         }
+        // [2026-09-29 7번 항목 신설] `memoBeingCreated`와 같은 패턴(위
+        // `pendingSermonFromVerses` 상단 주석 참고) — `Sermon`은 `id: UUID`를
+        // 직접 선언해 뒀으므로(`Sermons.swift`) `@Model`이 이를 그대로
+        // `Identifiable.id`로 써 `.sheet(item:)`에 바로 쓸 수 있다(이 파일의
+        // 기존 `memoBeingCreated` 시트와 동일한 근거).
+        // [2026-09-29 7번 항목] `SermonEditorView`의 "취소" 툴바 버튼은
+        // 원래 호출부(`SermonHomeView`)의 두 프레젠테이션 방식(아이폰
+        // `navigationDestination` push엔 시스템 뒤로가기가 이미 있고, 아이패드
+        // ·맥 분할 패널엔 뒤로가기 자체가 없음)만 가정해 `!isPhoneIdiom`일 때만
+        // 보인다(`SermonEditorView.swift` 상단 주석 참고). 그런데 여기(성경
+        // 조회 화면)는 세 번째 방식 — 모든 플랫폼에서 `.sheet`(모달) — 이라
+        // 아이패드·맥은 `SermonEditorView` 내부 버튼이 그대로 보이지만, 아이폰은
+        // (스와이프로 내려서 닫을 수는 있어도) 내부 버튼이 `isPhoneIdiom`
+        // 조건에 걸려 안 보인다 — 그래서 이 시트를 감싸는 `NavigationStack`
+        // 쪽에서 아이폰일 때만 별도로 "취소" 버튼을 더한다(아이패드·맥은
+        // `SermonEditorView` 내부 버튼과 중복되지 않도록 여기선 추가하지 않음).
+        .sheet(item: $pendingSermonFromVerses) { sermon in
+            NavigationStack {
+                SermonEditorView(
+                    subject: .sermon(sermon), isNewSermon: true,
+                    onRequestClose: { pendingSermonFromVerses = nil }
+                )
+                #if os(iOS)
+                .toolbar {
+                    if UIDevice.current.userInterfaceIdiom == .phone {
+                        ToolbarItem(placement: .cancellationAction) {
+                            Button("취소") { pendingSermonFromVerses = nil }
+                        }
+                    }
+                }
+                #endif
+            }
+        }
     }
 
     private var verseSelectionActionButtonsRow: some View {
@@ -2081,6 +2147,16 @@ private struct BibleReadingContentView: View {
                     #if os(iOS)
                     .modifier(ActionBarCircularIconModifier(isNarrow: isNarrowBottomBarLayout, isProminent: false))
                     #endif
+                    // [2026-09-29 7번 항목 신설] "말씀 요약"과 같은 노출 조건
+                    // (1개 이상) — 위 상단 주석 참고.
+                    Button {
+                        startSermonFromSelectedVerses()
+                    } label: {
+                        Label("설교작성", systemImage: "text.book.closed")
+                    }
+                    #if os(iOS)
+                    .modifier(ActionBarCircularIconModifier(isNarrow: isNarrowBottomBarLayout, isProminent: false))
+                    #endif
                 }
                 Button {
                     viewModel.clearVerseSelection()
@@ -2194,6 +2270,43 @@ private struct BibleReadingContentView: View {
         wordSummaryProxy.insertTextAtCursor(text)
     }
 
+    /// [2026-09-29 7번 항목 신설] 사용자 요청 — "성경구절 선택시(단일, 다중)
+    /// 하단 기능에 '설교작성' 메뉴 추가", 사용자 확정("항상 새 설교 작성 화면
+    /// 열기, 구절 자동 삽입"). 선택된 절마다 "책 장:절 본문" 한 줄을 각각
+    /// `.verseQuote` 문단으로 만든다 — `BibleVerseCopyFormatter`(복사 전용,
+    /// 사용자의 복사 서식 설정에 따라 절들을 한 참조로 합칠 수 있음)를 쓰지
+    /// 않고 직접 만드는 이유: 여기서는 "복사 형식"이 아니라 "각 절이 독립된
+    /// 문단이어야 한다"는 에디터의 문단 모델 요구사항이 우선이라서다(합쳐진
+    /// 한 문단으로 만들면 나중에 절 하나만 따로 서식을 고치기 어려워진다).
+    /// 기준 번역본(맨 왼쪽 열, `columns.first`)만 쓴다 — `formattedBaseTranslationText`
+    /// 와 같은 이유(그 함수 상단 주석 참고, 말씀 요약도 기준 번역본 하나만 씀).
+    private func startSermonFromSelectedVerses() {
+        guard !viewModel.selectedVerses.isEmpty, let firstColumn = viewModel.columns.first else { return }
+        let sortedVerseNumbers = viewModel.selectedVerses.sorted()
+        let versesByNumber = Dictionary(uniqueKeysWithValues: firstColumn.verses.map { ($0.verse, $0) })
+        let selectedBibleVerses = sortedVerseNumbers.compactMap { versesByNumber[$0] }
+        guard !selectedBibleVerses.isEmpty else { return }
+
+        let bookName = viewModel.selectedBook.nameKo
+        let chapter = viewModel.selectedChapter
+        let paragraphTexts = selectedBibleVerses.map { verse in
+            "\(bookName) \(chapter):\(verse.verse) \(verse.content)"
+        }
+
+        let settings = UserSettingsStore.shared
+        let (rtf, plain, styles) = SermonParagraphStyleCodec.buildVerseQuoteDocument(verseTexts: paragraphTexts, settings: settings)
+        let sermon = Sermon(title: "", contentHtml: rtf, contentText: plain, paragraphStyles: styles)
+        for (index, verse) in selectedBibleVerses.enumerated() {
+            let reference = SermonVerseReference(
+                bookId: verse.bookId, chapter: verse.chapter, verseStart: verse.verse, verseEnd: nil,
+                paragraphIndex: index, sermon: sermon
+            )
+            modelContext.insert(reference)
+        }
+        pendingSermonFromVerses = sermon
+        viewModel.clearVerseSelection()
+    }
+
     @ToolbarContentBuilder
     private var toolbarContent: some ToolbarContent {
         // [2026-08-08 이동] `chapterNavigationControls`(이전/다음 장 + 책/장
@@ -2264,10 +2377,16 @@ private struct BibleReadingContentView: View {
                 // 타이틀이 쓰는 것과 정확히 같은 크기(size 20, `.title3`
                 // 배율)로 맞춘다 — 기존 17pt(`.headline` 배율)는 그 두
                 // 화면보다 작았다.
-                Text("성경 조회")
+                // [2026-09-29 수정] 사용자 요청(아이패드) — "'성경 조회'
+                // 텍스트 변경 -> 해당 성경+장으로 텍스트 변경." 바로 위
+                // 아이폰 분기가 두 번째 줄에 이미 쓰는 것과 같은 조합(책
+                // 한글명 + "장")으로 바꾼다 — 크기/폰트/굵기는 그대로 유지.
+                Text("\(viewModel.selectedBook.nameKo) \(viewModel.selectedChapter)장")
                     .font(.custom(SpecialPurposeFonts.titleSerif, size: 20, relativeTo: .title3))
                     .fontWeight(.semibold)
                     .foregroundStyle(settings.bibleTextColor ?? .primary)
+                    .lineLimit(1)
+                    .minimumScaleFactor(0.7)
             }
         }
         #endif

@@ -89,6 +89,11 @@ private struct ComingSoonView: View {
 /// 모달이 뜨지 않는다(`PhoneTabView.swift` 상단 주석 참고).
 struct MorePlaceholderView: View {
     @State private var isTagRelationsPresented = false
+    // [2026-09-28 추가] "내 설교" 진입점 — `.tagRelations`/`.outline`과
+    // 똑같은 이유(이 화면이 `.searchable`을 쓰는 `SermonHomeView`를 열기
+    // 때문)로 단순 NavigationLink push가 아니라 `.fullScreenCover`로
+    // 연다(`SermonHomeView.swift` 상단 주석 참고).
+    @State private var isSermonHomePresented = false
     @Binding var isOutlinePresented: Bool
 
     var body: some View {
@@ -120,6 +125,11 @@ struct MorePlaceholderView: View {
             // `SettingsHomeView` 선언부 주석 참고) 대신, 같은 세 카테고리(일반/
             // 성경/개발자)를 아이콘 목록으로 보여주는 iPhone 전용 진입 화면
             // `SettingsHomeView`로 바꿨다.
+            Button {
+                isSermonHomePresented = true
+            } label: {
+                Label("내 설교", systemImage: "mic")
+            }
             NavigationLink {
                 SettingsHomeView()
             } label: {
@@ -150,6 +160,16 @@ struct MorePlaceholderView: View {
                     .toolbar {
                         ToolbarItem(placement: .cancellationAction) {
                             Button("닫기") { isTagRelationsPresented = false }
+                        }
+                    }
+            }
+        }
+        .fullScreenCover(isPresented: $isSermonHomePresented) {
+            NavigationStack {
+                SermonHomeView()
+                    .toolbar {
+                        ToolbarItem(placement: .cancellationAction) {
+                            Button("닫기") { isSermonHomePresented = false }
                         }
                     }
             }

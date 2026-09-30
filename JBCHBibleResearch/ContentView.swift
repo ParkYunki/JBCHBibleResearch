@@ -129,6 +129,12 @@ struct ContentView: View {
                     // 상단 주석 참고 — 실패해도(throw하지 않고 내부에서 처리) 다른
                     // 부트스트랩을 막지 않는다.
                     await OutlineSeedImporter.importIfNeeded(into: modelContext)
+                    // [2026-09-28 추가] 설계 문서(claude/sermon-management-screens-
+                    // and-schema.md, 프로젝트) 확정사항 — "SermonGathering 초기
+                    // 시드값(주일설교/청년회 말씀/구역모임/조모임)을 최초 실행 시
+                    // 미리 생성." `SermonGatheringSeeder.swift` 상단 주석 참고 —
+                    // 비동기가 필요 없는 가벼운 작업이라 `await` 없이 호출한다.
+                    SermonGatheringSeeder.seedIfNeeded(into: modelContext)
                     // [2026-08-14 추가, 2026-08-15 방식 전환] 관주/난외주/한자주석/
                     // 한자사전 — 예전엔 여기서 CrossReferenceSeedImporter/
                     // MarginalNoteSeedImporter/HanjaAnnotationSeedImporter가 각각

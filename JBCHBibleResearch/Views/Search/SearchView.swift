@@ -293,14 +293,15 @@ private struct SearchContentView: View {
     /// 묶은 것 — 세 모델을 하나로 합치거나 각 섹션의 기존 표시 로직을
     /// 바꾸지 않았다.
     private enum SearchResultTab: String, CaseIterable, Identifiable {
-        case verse, outline, notes, document
+        case verse, outline, notes, document, sermon
         var id: Self { self }
         var title: String {
             switch self {
             case .verse: return "성경구절"
             case .outline: return "개요"
             case .notes: return "메모/말씀노트"
-            case .document: return "연구문서"
+            case .document: return "연구 문서"
+            case .sermon: return "내 설교"
             }
         }
 
@@ -318,6 +319,7 @@ private struct SearchContentView: View {
             case .outline: return "list.bullet.rectangle.fill"
             case .notes: return "note.text"
             case .document: return "doc.text.fill"
+            case .sermon: return "mic.fill"
             }
         }
 
@@ -1593,6 +1595,15 @@ private struct SearchContentView: View {
             }
         }
         .listRowBackground(Color.clear)
+
+        case .sermon:
+        Section {
+            if viewModel.sermonResults.isEmpty { emptyRow() }
+            ForEach(viewModel.sermonResults) { result in
+                sermonRow(result)
+            }
+        }
+        .listRowBackground(Color.clear)
         }
     }
 
@@ -1691,8 +1702,16 @@ private struct SearchContentView: View {
             .frame(maxWidth: .infinity)
             .padding(.vertical, 10)
             .foregroundStyle(textColor)
-            .background(Capsule().fill(fillColor))
-            .overlay(Capsule().strokeBorder(borderColor, lineWidth: 1.4))
+            // [2026-09-29 수정] 사용자 요청 — "통합검색 결과 상단 탭(성경구절~
+            // 내 설교) 디자인을 '타원'에서 '라운드 처리 사각형'으로 변경."
+            // `Capsule()`(양 끝이 완전히 둥근 알약 모양)을 이 화면의 다른
+            // 카드들(예: 아래 `documentRowLabel` 등)과 같은 계열인
+            // `RoundedRectangle(cornerRadius:)`로 바꿨다 — 이 탭 버튼은
+            // 세로로 아이콘+제목+개수까지 담아 상대적으로 큰 박스라 12pt를
+            // 골랐다(이 파일의 16pt/10pt 라운드 값 사이, 다른 화면의
+            // `SermonTheme.cardCornerRadius`류와 비슷한 체감).
+            .background(RoundedRectangle(cornerRadius: 12, style: .continuous).fill(fillColor))
+            .overlay(RoundedRectangle(cornerRadius: 12, style: .continuous).strokeBorder(borderColor, lineWidth: 1.4))
         }
         .buttonStyle(.plain)
         .contentShape(Rectangle())
@@ -1709,6 +1728,7 @@ private struct SearchContentView: View {
         case .outline: return viewModel.outlineResults.count
         case .notes: return viewModel.phraseNoteResults.count + viewModel.memoResults.count + viewModel.summaryResults.count
         case .document: return viewModel.documentResults.count
+        case .sermon: return viewModel.sermonResults.count
         }
     }
 
@@ -2502,6 +2522,59 @@ private struct SearchContentView: View {
             return "\(result.document.originalFilename) p.\(page + 1)"
         }
         return result.document.originalFilename
+    }
+
+    // MARK: - 내 설교(Sermon)
+
+    /// [2026-09-29 신설] 사용자 요청 — "통합 검색에 '내 설교'탭 ... 통합
+    /// 검색 결과의 내 설교 검색 결과를 눌렀을 때 뷰어로 보낼것." 위
+    /// `documentRow`와 정확히 같은 분기 구조를 그대로 따른다 — 아이폰은
+    /// 다중 씬을 지원하지 않아(`isPhoneIdiom` 선언부 참고) 이 화면의
+    /// `NavigationStack` 안으로 직접 `SermonViewerView`를 밀어 넣고, 그 외
+    /// (macOS/iPadOS)는 이미 `SermonDetailView.viewerButton`/
+    /// `SermonEditorView.referencedMainSermonBanner`가 쓰고 있는 것과 같은
+    /// `openWindow(id: "sermon-viewer", value: SermonViewerTarget.sermon(_:))`
+    /// 별도 창을 연다 — 연구문서와 달리 PDF 검색어 동기화가 필요 없어(설교는
+    /// PDF가 아니라 에디터 콘텐츠) `DocumentSearchRequest` 같은 별도 검색어
+    /// 전달용 값 타입 없이, 이미 있는 `SermonContentTarget`만으로 충분하다.
+    @ViewBuilder
+    private func sermonRow(_ result: SermonSearchResult) -> some View {
+        if isPhoneIdiom {
+            groupCardBorder {
+                NavigationLink {
+                    SermonViewerView(subject: .sermon(result.sermon))
+                } label: {
+                    compactItemLabel(
+                        icon: "mic.fill", iconColor: settings.bibleTextColor ?? .primary,
+                        title: sermonTitle(result),
+                        tagNames: result.matchedTagNames,
+                        matchedWordCount: result.bodyExcerpt != nil ? result.matchedWordCount : nil,
+                        excerptText: result.bodyExcerpt, excerptKeywords: result.highlightKeywords
+                    )
+                }
+            }
+        } else {
+            groupCardBorder {
+                Button {
+                    openWindow(id: "sermon-viewer", value: SermonViewerTarget.sermon(result.sermon))
+                } label: {
+                    compactItemLabel(
+                        icon: "mic.fill", iconColor: settings.bibleTextColor ?? .primary,
+                        title: sermonTitle(result),
+                        tagNames: result.matchedTagNames,
+                        matchedWordCount: result.bodyExcerpt != nil ? result.matchedWordCount : nil,
+                        excerptText: result.bodyExcerpt, excerptKeywords: result.highlightKeywords
+                    )
+                }
+                // documentRow와 같은 이유 — 새 창을 여는 Button이 List 안에서
+                // 기존 NavigationLink 행과 같은 텍스트 색으로 보이도록 `.plain`.
+                .buttonStyle(.plain)
+            }
+        }
+    }
+
+    private func sermonTitle(_ result: SermonSearchResult) -> String {
+        result.sermon.title.isEmpty ? "제목 없음" : result.sermon.title
     }
 
     // MARK: - 형광펜 강조 / 태그 뱃지 (DocumentsHomeView.DocumentRowView와 같은 원리)

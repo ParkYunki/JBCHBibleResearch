@@ -52,7 +52,7 @@ struct AppCommands: Commands {
                 .keyboardShortcut("n", modifiers: [.command, .shift])
                 .disabled(newFolderAction == nil)
 
-            Button("연구문서 업로드...") { uploadDocumentAction?() }
+            Button("연구 문서 업로드...") { uploadDocumentAction?() }
                 .keyboardShortcut("o", modifiers: .command)
                 .disabled(uploadDocumentAction == nil)
         }
@@ -75,7 +75,7 @@ struct AppCommands: Commands {
             Button("말씀 노트로 이동") { selectSection?(.wordNote) }
                 .keyboardShortcut("2", modifiers: .command)
                 .disabled(selectSection == nil)
-            Button("연구문서로 이동") { selectSection?(.documents) }
+            Button("연구 문서로 이동") { selectSection?(.documents) }
                 .keyboardShortcut("3", modifiers: .command)
                 .disabled(selectSection == nil)
             Button("개요로 이동") { selectSection?(.outline) }

@@ -108,6 +108,28 @@ private struct ThemedNavigationBarBackgroundModifier: ViewModifier {
         } else {
             content
         }
+        #elseif os(macOS)
+        // [2026-09-29 수정] 사용자 보고(맥OS) — 이 화면 상단 제목 표시줄
+        // "흰색 바" 영역이 테마 배경색과 안 맞음 -> 배경색 맞추기. 기존
+        // 결론("macOS는 `.navigationBar` 플레이스먼트 자체가 없어 이
+        // 모디파이어로 바꿀 표준 API가 없다")은 `.navigationBar`(iOS 전용)
+        // 하나만 시도해 본 결과였다 — `ToolbarPlacement`에는 macOS 전용으로
+        // 따로 존재하는 `.windowToolbar`(macOS 13+, 이 앱 배포 타깃은
+        // project.pbxproj 확인 결과 macOS 26.5라 버전 문제 없음) 케이스가
+        // 있고, 이 화면은 `SidebarNavigationView`의 `NavigationSplitView`
+        // detail 컬럼에 바로 들어가 macOS 창의 통합 툴바에 제목이 그려지는
+        // 구조(SidebarNavigationView.swift 확인)라 `.windowToolbar`가 바로 그
+        // 창 툴바를 가리킨다고 판단해 적용한다. 다만 이 환경(빌드 도구 없음)
+        // 에서 실제 빌드·실기기 확인은 못 했으니, 적용 후 기대한 배경색
+        // 매칭이 실제로 되는지 확인해 주시면 좋겠다.
+        if let color {
+            content
+                .toolbarBackground(color, for: .windowToolbar)
+                .toolbarBackground(.visible, for: .windowToolbar)
+                .toolbarColorScheme(Self.isDarkBackground(color, in: environment) ? .dark : .light, for: .windowToolbar)
+        } else {
+            content
+        }
         #else
         content
         #endif
@@ -261,7 +283,7 @@ struct DocumentsHomeView: View {
                 ProgressView()
             }
         }
-        .navigationTitle("연구문서")
+        .navigationTitle("연구 문서")
         // [2026-09-03 추가] 사용자 보고 — "아이폰 하단 메뉴 중 말씀 노트/문서
         // OCR/통합 검색/더보기는 상단 우측 아이콘과 그 밑 타이틀이 따로 있어
         // 아이콘 좌측 영역이 낭비됨." `WordNoteHomeView.swift`의 같은 날짜
@@ -319,7 +341,7 @@ struct DocumentsHomeView: View {
             ToolbarItem(placement: .principal) {
                 // [2026-09-10 수정] `WordNoteHomeView.swift`와 같은 이유·같은
                 // 해법 — 각 기능 타이틀을 국민대학교 성곡 세리프체로 표시.
-                Text("연구문서")
+                Text("연구 문서")
                     .font(.custom(SpecialPurposeFonts.titleSerif, size: 20, relativeTo: .title3))
                     .fontWeight(.semibold)
                     .foregroundStyle(settings.bibleTextColor ?? .primary)

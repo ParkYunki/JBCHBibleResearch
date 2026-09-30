@@ -17,6 +17,7 @@
 import Foundation
 import Observation
 import SwiftUI
+import BibleResearchModels
 
 @MainActor
 @Observable
@@ -105,6 +106,11 @@ final class UserSettingsStore {
         // 옮기며, 이전에 이미 SwiftData로 들어간 번들분을 1회성으로 정리하는
         // `ReferenceDataMigration.cleanupLegacyBundledRecords`용 플래그.
         static let hasCleanedUpLegacyBundledReferenceData = "settings.hasCleanedUpLegacyBundledReferenceData"
+        // [2026-09-28 추가] 설계 문서(claude/sermon-management-screens-and-schema.md,
+        // 프로젝트) 확정사항 — "SermonGathering 초기 시드값(주일설교/청년회 말씀/
+        // 구역모임/조모임)을 최초 실행 시 미리 생성해 둔다." `SermonGatheringSeeder`용
+        // 1회성 플래그. 기존 시더들과 동일한 관례.
+        static let hasSeededSermonGatherings = "settings.sermon.hasSeededGatherings"
         // [2026-08-14 추가] 개역한글 본문에 한자 주석을 표시하는 방식 — "탭하면
         // 보기"/"항상 보기(국한문식)"/"끄기" 중 선택. 사용자가 "둘 다 지원,
         // 설정으로 전환"을 골라 셋 중 고르게 했다.
@@ -115,6 +121,52 @@ final class UserSettingsStore {
         // 다만 지금은 선택지가 `SpecialPurposeFonts.hanja`(조선궁서체) 하나뿐
         // 이라 사실상 켜기/끄기에 가깝다.
         static let hanjaFontName = "settings.bible.hanjaFontName"
+        // [2026-09-28 3단계(에디터) 추가] 설계 문서(claude/sermon-management-screens-and-schema.md
+        // 3.3절) 확정사항 — 설교 작성 문단 스타일 6종마다 폰트/크기를 사용자가
+        // 나중에 바꿀 수 있어야 한다. `bibleFontName`/`bibleBodyFontSize`와
+        // 완전히 같은 저장 방식(UserDefaults, didSet 즉시 반영)을 스타일당
+        // 2개씩(fontName/fontSize) 그대로 확장한다 — 새 저장 패턴을 만들지 않는다.
+        static let sermonMainThemeFontName = "settings.sermon.mainTheme.fontName"
+        static let sermonMainThemeFontSize = "settings.sermon.mainTheme.fontSize"
+        static let sermonMidThemeFontName = "settings.sermon.midTheme.fontName"
+        static let sermonMidThemeFontSize = "settings.sermon.midTheme.fontSize"
+        static let sermonSubThemeFontName = "settings.sermon.subTheme.fontName"
+        static let sermonSubThemeFontSize = "settings.sermon.subTheme.fontSize"
+        static let sermonVerseQuoteFontName = "settings.sermon.verseQuote.fontName"
+        static let sermonVerseQuoteFontSize = "settings.sermon.verseQuote.fontSize"
+        static let sermonCitationFontName = "settings.sermon.citation.fontName"
+        static let sermonCitationFontSize = "settings.sermon.citation.fontSize"
+        static let sermonBodyFontName = "settings.sermon.body.fontName"
+        static let sermonBodyFontSize = "settings.sermon.body.fontSize"
+        // [2026-09-29 6번 항목 추가] 문단 스타일별 글자 색상 — 위 fontName/
+        // fontSize와 완전히 같은 저장 방식(UserDefaults, didSet 즉시 반영,
+        // hex 문자열). `bibleTextColorHex`처럼 "비어 있으면 시스템 기본"이
+        // 아니라 항상 값이 채워져 있다 — 사용자가 "각 스타일의 폰트크기,
+        // 폰트 색상, 줄간격을 제안할 것"이라 요청했으므로(추측이 아니라
+        // 명시적 요청), init에서 목업(Editor.dc.html) 기반 제안값으로 채운다.
+        static let sermonMainThemeFontColorHex = "settings.sermon.mainTheme.fontColorHex"
+        static let sermonMidThemeFontColorHex = "settings.sermon.midTheme.fontColorHex"
+        static let sermonSubThemeFontColorHex = "settings.sermon.subTheme.fontColorHex"
+        static let sermonVerseQuoteFontColorHex = "settings.sermon.verseQuote.fontColorHex"
+        static let sermonCitationFontColorHex = "settings.sermon.citation.fontColorHex"
+        static let sermonBodyFontColorHex = "settings.sermon.body.fontColorHex"
+        // [2026-09-29 6-2번 항목 추가] 말씀구절 "박스" 배경색(목업 --accent-soft) —
+        // 다른 5종 스타일엔 배경 박스 요구사항이 없어(사용자 요청에 말씀구절만
+        // "박스 안에 왼쪽 바 + 내용"으로 명시됨) 이 스타일 전용으로만 둔다.
+        static let sermonVerseQuoteBackgroundColorHex = "settings.sermon.verseQuote.backgroundColorHex"
+        // [2026-09-29 6-2번 항목, 뷰어 확장] 말씀구절 박스 왼쪽 세로 바 색 —
+        // 목업 `--accent`(#7A3B42, 중주제 색과 같은 값)를 그대로 가리키되,
+        // 나중에 중주제 색과 독립적으로 바꿀 수 있도록 별도 키로 둔다(뷰어는
+        // 이 색을 순정 SwiftUI로 그릴 수 있어 에디터와 달리 왼쪽 바까지 바로
+        // 구현한다 — `SermonViewerView.paragraphText` 참고).
+        static let sermonVerseQuoteBarColorHex = "settings.sermon.verseQuote.barColorHex"
+        // [2026-09-28 4단계(뷰어) 신설] 설계 문서 2.2 S-SER3 — 글꼴 확대 배율
+        // (80~200%)과 스크롤/페이지 넘김 모드를 기억해 둔다. 6종 스타일별
+        // 절대 크기(위)와 달리 이건 "전체 배율" 하나뿐이다 — 뷰어에서
+        // "상대 크기 비율은 유지한 채 전체 배율만 바뀐다"는 설계 문서
+        // 확정사항 그대로.
+        static let sermonViewerFontScale = "settings.sermon.viewer.fontScale"
+        static let sermonViewerUsesPageMode = "settings.sermon.viewer.usesPageMode"
     }
 
     // MARK: - S1 표시 폰트
@@ -216,6 +268,26 @@ final class UserSettingsStore {
     /// 8.6 화면 모드.
     var colorSchemePreference: ColorSchemePreference {
         didSet { defaults.set(colorSchemePreference.rawValue, forKey: Key.colorSchemePreference) }
+    }
+
+    /// [2026-09-29 신설] 사용자 요청 — "화면모드의 요소를 선택하면, 테마
+    /// 색상 선택이 해제되어야 함(\"시스템 기본색상으로 되돌리기\" 기본
+    /// 적용)." `AppearanceSettingsTab`의 "화면 모드" 세그먼트 Picker는 이제
+    /// `colorSchemePreference`를 직접 바꾸는 대신 이 함수를 거친다 — 기존에
+    /// 있던 "시스템 기본색상으로 되돌리기" 버튼(사용자 요청으로 제거,
+    /// `AppearanceSettingsTab` 참고)이 하던 일과 정확히 같은 동작(배경/
+    /// 글자 hex를 빈 문자열로, `bibleThemeModePreference`를 nil로)을 화면
+    /// 모드를 고를 때마다 자동으로 대신 해 준다. `didSet` 관찰자 대신 이렇게
+    /// 별도 함수로 만든 이유는, 아래 `applyThemeMode`도 반대 방향으로
+    /// `colorSchemePreference`를 바꾸기 때문이다 — 두 프로퍼티에 서로를
+    /// 되돌리는 `didSet`을 걸면 상호 되먹임(그리고 `init` 도중 아직 초기화
+    /// 안 된 프로퍼티에 접근할 위험)이 생기는데, 이렇게 "UI가 호출하는
+    /// 명시적 함수" 두 개로만 연동 지점을 한정하면 그 위험이 없다.
+    func selectColorScheme(_ preference: ColorSchemePreference) {
+        colorSchemePreference = preference
+        bibleBackgroundColorHex = ""
+        bibleTextColorHex = ""
+        markThemeModeAsCustom()
     }
 
     /// 8.4 "장 개요 작성 시 AI 초안 제안 받기"(기본 켜짐) — `OutlineViewModel.
@@ -352,13 +424,22 @@ final class UserSettingsStore {
     /// 하기 위함 — `ColorSchemePreference`(화면 모드)처럼 매번 반드시 셋 중
     /// 하나여야 하는 값이 아니다.
     enum BibleThemeModePreference: String, CaseIterable, Identifiable {
-        case light, dark, auto
+        // [2026-09-29 변경] 사용자 요청 — "테마 색상 탭 순서 변경: 자동 ->
+        // 맨 앞으로." `CaseIterable.allCases`는 case 선언 순서를 그대로
+        // 따르므로(런타임에 정렬하지 않음), `AppearanceSettingsTab`의 3단
+        // Picker가 자동/라이트/다크 순으로 보이도록 선언 순서 자체를
+        // 바꿨다 — `: String` raw value는 각 case의 "이름"에서 그대로
+        // 오므로(선언 순서와 무관) "light"/"dark"/"auto" 문자열 자체는
+        // 그대로다. 즉 이미 `UserDefaults`에 저장돼 있던 기존 값도 이
+        // 변경만으로는 전혀 깨지지 않는다.
+        case auto, light, dark
         var id: String { rawValue }
         var displayName: String {
             switch self {
-            case .light: return "라이트"
-            case .dark: return "다크"
-            case .auto: return "자동"
+            // [2026-09-29 변경] 사용자 요청 — 탭 텍스트 변경.
+            case .auto: return "자동 변경"
+            case .light: return "연한 금박"
+            case .dark: return "밤빛 남색"
             }
         }
     }
@@ -393,6 +474,17 @@ final class UserSettingsStore {
         let hex = Self.fixedThemeHex(for: mode, systemColorScheme: systemColorScheme)
         bibleBackgroundColorHex = hex.background
         bibleTextColorHex = hex.text
+        // [2026-09-29 추가] 사용자 요청 — "테마색상의 요소를 선택하면 …
+        // 라이트 탭 => 테마색상 라이트 + 화면모드 라이트 기본 적용 / 다크
+        // 탭 => …다크 + 화면모드 다크 기본 적용 / 자동 탭 => …자동 +
+        // 화면모드 시스템 따름 기본 적용." 위 `selectColorScheme(_:)`와
+        // 반대 방향의 연동 — 테마 색상을 고르면 화면 모드도 그에 맞춰
+        // 함께 바뀐다.
+        switch mode {
+        case .light: colorSchemePreference = .light
+        case .dark: colorSchemePreference = .dark
+        case .auto: colorSchemePreference = .system
+        }
     }
 
     /// "자동" 모드일 때만 동작 — 지금 유효한 라이트/다크 상태에 맞춰 배경/
@@ -526,6 +618,12 @@ final class UserSettingsStore {
         didSet { defaults.set(hasCleanedUpLegacyBundledReferenceData, forKey: Key.hasCleanedUpLegacyBundledReferenceData) }
     }
 
+    /// [2026-09-28 추가] `SermonGatheringSeeder.seedIfNeeded` 참고 — 기본 모임
+    /// 종류(주일설교/청년회 말씀/구역모임/조모임)를 1회성으로 시딩했는지.
+    var hasSeededSermonGatherings: Bool {
+        didSet { defaults.set(hasSeededSermonGatherings, forKey: Key.hasSeededSermonGatherings) }
+    }
+
     /// [2026-08-14 추가] `TranslationColumnView`가 개역한글 컬럼을 그릴 때 참고하는
     /// 한자 주석 표시 방식.
     var hanjaDisplayMode: HanjaDisplayMode {
@@ -540,6 +638,99 @@ final class UserSettingsStore {
     /// 대체하므로 안전하다(`BundledFontRegistrar.swift` 상단 주석과 같은 안전망).
     var hanjaFontName: String {
         didSet { defaults.set(hanjaFontName, forKey: Key.hanjaFontName) }
+    }
+
+    // MARK: - 설교 작성 문단 스타일 폰트 (3단계, 2026-09-28 추가)
+    //
+    // [설계 근거] claude/sermon-management-screens-and-schema.md 3.3 — 문단
+    // 스타일별 기본값(대주제=Paperlogy-8ExtraBold/34pt, 중주제=Paperlogy-6SemiBold/24pt,
+    // 소주제=Paperlogy-5Medium/16pt, 말씀구절=ChosunGs/20pt, 본문=GowunBatang-Regular/19pt,
+    // 인용=AppleGothic/17pt)은 이미 발행된 HTML 목업의 BASE_PX 값을 그대로
+    // 이어받은 확정값이다 — 여기서 새로 지어낸 숫자가 아니다.
+    //
+    // ⚠️ [플랫폼 확인 필요] `sermonCitationFontName`의 기본값 "AppleGothic"은
+    // 이 앱이 번들한 폰트가 아니라 시스템 폰트다(BundledFontRegistrar.swift
+    // 확인 결과 — Paperlogy/GowunBatang/ChosunGs 세 이름만 번들돼 있고
+    // "AppleGothic"은 어디에도 없다). macOS엔 오래전부터 내장된 것으로
+    // 알려져 있으나 iOS/iPadOS에도 정확히 같은 PostScript 이름으로 있는지는
+    // 이 세션에서 실기기 확인이 불가능해 검증하지 못했다(설계 문서 3.3 동일
+    // 경고). 없으면 `Font.custom`이 조용히 시스템 기본 폰트로 대체하므로
+    // 크래시는 안 나지만, iOS에서 "인용" 문단이 의도와 다른 폰트로 보일 수
+    // 있다 — Xcode에서 실기기로 꼭 확인해 주세요.
+    var sermonMainThemeFontName: String {
+        didSet { defaults.set(sermonMainThemeFontName, forKey: Key.sermonMainThemeFontName) }
+    }
+    var sermonMainThemeFontSize: Double {
+        didSet { defaults.set(sermonMainThemeFontSize, forKey: Key.sermonMainThemeFontSize) }
+    }
+    var sermonMidThemeFontName: String {
+        didSet { defaults.set(sermonMidThemeFontName, forKey: Key.sermonMidThemeFontName) }
+    }
+    var sermonMidThemeFontSize: Double {
+        didSet { defaults.set(sermonMidThemeFontSize, forKey: Key.sermonMidThemeFontSize) }
+    }
+    var sermonSubThemeFontName: String {
+        didSet { defaults.set(sermonSubThemeFontName, forKey: Key.sermonSubThemeFontName) }
+    }
+    var sermonSubThemeFontSize: Double {
+        didSet { defaults.set(sermonSubThemeFontSize, forKey: Key.sermonSubThemeFontSize) }
+    }
+    var sermonVerseQuoteFontName: String {
+        didSet { defaults.set(sermonVerseQuoteFontName, forKey: Key.sermonVerseQuoteFontName) }
+    }
+    var sermonVerseQuoteFontSize: Double {
+        didSet { defaults.set(sermonVerseQuoteFontSize, forKey: Key.sermonVerseQuoteFontSize) }
+    }
+    var sermonCitationFontName: String {
+        didSet { defaults.set(sermonCitationFontName, forKey: Key.sermonCitationFontName) }
+    }
+    var sermonCitationFontSize: Double {
+        didSet { defaults.set(sermonCitationFontSize, forKey: Key.sermonCitationFontSize) }
+    }
+    var sermonBodyFontName: String {
+        didSet { defaults.set(sermonBodyFontName, forKey: Key.sermonBodyFontName) }
+    }
+    var sermonBodyFontSize: Double {
+        didSet { defaults.set(sermonBodyFontSize, forKey: Key.sermonBodyFontSize) }
+    }
+    var sermonMainThemeFontColorHex: String {
+        didSet { defaults.set(sermonMainThemeFontColorHex, forKey: Key.sermonMainThemeFontColorHex) }
+    }
+    var sermonMidThemeFontColorHex: String {
+        didSet { defaults.set(sermonMidThemeFontColorHex, forKey: Key.sermonMidThemeFontColorHex) }
+    }
+    var sermonSubThemeFontColorHex: String {
+        didSet { defaults.set(sermonSubThemeFontColorHex, forKey: Key.sermonSubThemeFontColorHex) }
+    }
+    var sermonVerseQuoteFontColorHex: String {
+        didSet { defaults.set(sermonVerseQuoteFontColorHex, forKey: Key.sermonVerseQuoteFontColorHex) }
+    }
+    var sermonCitationFontColorHex: String {
+        didSet { defaults.set(sermonCitationFontColorHex, forKey: Key.sermonCitationFontColorHex) }
+    }
+    var sermonBodyFontColorHex: String {
+        didSet { defaults.set(sermonBodyFontColorHex, forKey: Key.sermonBodyFontColorHex) }
+    }
+    var sermonVerseQuoteBackgroundColorHex: String {
+        didSet { defaults.set(sermonVerseQuoteBackgroundColorHex, forKey: Key.sermonVerseQuoteBackgroundColorHex) }
+    }
+    var sermonVerseQuoteBarColorHex: String {
+        didSet { defaults.set(sermonVerseQuoteBarColorHex, forKey: Key.sermonVerseQuoteBarColorHex) }
+    }
+
+    /// [2026-09-28 4단계(뷰어) 신설] "Aa" 컨트롤이 조절하는 전체 배율
+    /// (0.8~2.0, 기본 1.0 = 100%) — 3.3절 표의 스타일별 크기에 곱해져 상대
+    /// 비율은 유지된다(`UserSettingsStore.sermonFont(for:scale:)` 참고).
+    var sermonViewerFontScale: Double {
+        didSet { defaults.set(sermonViewerFontScale, forKey: Key.sermonViewerFontScale) }
+    }
+    /// [2026-09-28 4단계(뷰어) 신설] 좌우 페이지 넘기기(true)/세로 스크롤
+    /// (false) 중 사용자가 마지막으로 선택한 모드 — 설계 문서 2.2 S-SER3
+    /// "사용자가 선택한 모드를 기억합니다". 요구사항 문서가 기본값을 못박지
+    /// 않아, 처음 열었을 때 내용이 잘려 보일 걱정이 없는 세로 스크롤을
+    /// 기본값(false)으로 뒀다 — 사용자 확인 필요(보고서 참고).
+    var sermonViewerUsesPageMode: Bool {
+        didSet { defaults.set(sermonViewerUsesPageMode, forKey: Key.sermonViewerUsesPageMode) }
     }
 
     init(defaults: UserDefaults = .standard) {
@@ -615,8 +806,48 @@ final class UserSettingsStore {
         self.hasImportedMarginalNoteSeed = defaults.object(forKey: Key.hasImportedMarginalNoteSeed) as? Bool ?? false
         self.hasImportedHanjaAnnotationSeed = defaults.object(forKey: Key.hasImportedHanjaAnnotationSeed) as? Bool ?? false
         self.hasCleanedUpLegacyBundledReferenceData = defaults.object(forKey: Key.hasCleanedUpLegacyBundledReferenceData) as? Bool ?? false
+        self.hasSeededSermonGatherings = defaults.object(forKey: Key.hasSeededSermonGatherings) as? Bool ?? false
         self.hanjaDisplayMode = (defaults.string(forKey: Key.hanjaDisplayMode)).flatMap(HanjaDisplayMode.init) ?? .off
         self.hanjaFontName = defaults.string(forKey: Key.hanjaFontName) ?? SpecialPurposeFonts.hanja
+        self.sermonMainThemeFontName = defaults.string(forKey: Key.sermonMainThemeFontName) ?? "Paperlogy-8ExtraBold"
+        self.sermonMainThemeFontSize = defaults.object(forKey: Key.sermonMainThemeFontSize) as? Double ?? 34
+        self.sermonMidThemeFontName = defaults.string(forKey: Key.sermonMidThemeFontName) ?? "Paperlogy-6SemiBold"
+        self.sermonMidThemeFontSize = defaults.object(forKey: Key.sermonMidThemeFontSize) as? Double ?? 24
+        self.sermonSubThemeFontName = defaults.string(forKey: Key.sermonSubThemeFontName) ?? "Paperlogy-5Medium"
+        self.sermonSubThemeFontSize = defaults.object(forKey: Key.sermonSubThemeFontSize) as? Double ?? 16
+        self.sermonVerseQuoteFontName = defaults.string(forKey: Key.sermonVerseQuoteFontName) ?? SpecialPurposeFonts.hanja
+        self.sermonVerseQuoteFontSize = defaults.object(forKey: Key.sermonVerseQuoteFontSize) as? Double ?? 20
+        self.sermonCitationFontName = defaults.string(forKey: Key.sermonCitationFontName) ?? "AppleGothic"
+        self.sermonCitationFontSize = defaults.object(forKey: Key.sermonCitationFontSize) as? Double ?? 17
+        self.sermonBodyFontName = defaults.string(forKey: Key.sermonBodyFontName) ?? "GowunBatang-Regular"
+        self.sermonBodyFontSize = defaults.object(forKey: Key.sermonBodyFontSize) as? Double ?? 19
+        // [2026-09-29 6번 항목 제안값, 출처: 이 세션이 정리한 Editor.dc.html
+        // 목업의 STYLE_DEFS 색상] 대주제/본문은 어두운 무채색(#2B211D, 사용자
+        // 요청 "무채색계열"), 중주제는 기존 액센트 와인색(#7A3B42), 소주제는
+        // 차분한 웜그레이(#6B5D52). 말씀구절은 박스 배경이 구분을 대신하므로
+        // 목업과 같은 어두운 무채색(#2B211D)을 텍스트색으로 쓴다.
+        // [2026-09-29 10번 항목 수정] 사용자 명시 지정 — "[인용] 스타일:
+        // 초록색 계열의 이탤릭체..." 바로 위 라운드에서 "본문/말씀구절과
+        // 대비되게 눈에 띄어야 한다"는 이유로 제안했던 액센트 와인색
+        // (#7A3B42, 중주제와 같은 색)을 이 새 명시적 색 방향으로 덮어쓴다.
+        // 정확한 초록 톤을 지정받지 않아 "초록색 계열"에 맞는 값을 하나
+        // 제안한다 — 이 앱의 기존 팔레트(어두운 무채색/와인색/웜그레이 계열,
+        // 채도를 낮춘 톤 위주)와 어울리도록 원색 그린이 아닌 차분한 세이지
+        // 그린(#3F7355)을 골랐다 — ⚠️ 정확한 색상값은 사용자 확인 필요
+        // (마음에 드는 초록 톤이 따로 있으면 설정 > 인용 폰트 색상에서 바로
+        // 바꿀 수 있다, 이 값은 어디까지나 기본값 제안).
+        self.sermonMainThemeFontColorHex = defaults.string(forKey: Key.sermonMainThemeFontColorHex) ?? "#2B211D"
+        self.sermonMidThemeFontColorHex = defaults.string(forKey: Key.sermonMidThemeFontColorHex) ?? "#7A3B42"
+        self.sermonSubThemeFontColorHex = defaults.string(forKey: Key.sermonSubThemeFontColorHex) ?? "#6B5D52"
+        self.sermonVerseQuoteFontColorHex = defaults.string(forKey: Key.sermonVerseQuoteFontColorHex) ?? "#2B211D"
+        self.sermonCitationFontColorHex = defaults.string(forKey: Key.sermonCitationFontColorHex) ?? "#3F7355"
+        self.sermonBodyFontColorHex = defaults.string(forKey: Key.sermonBodyFontColorHex) ?? "#2B211D"
+        // [2026-09-29 6-2번 항목 제안값, 출처: Editor.dc.html 목업의
+        // --accent-soft] 말씀구절 박스 배경색.
+        self.sermonVerseQuoteBackgroundColorHex = defaults.string(forKey: Key.sermonVerseQuoteBackgroundColorHex) ?? "#F3E4E1"
+        self.sermonVerseQuoteBarColorHex = defaults.string(forKey: Key.sermonVerseQuoteBarColorHex) ?? "#7A3B42"
+        self.sermonViewerFontScale = defaults.object(forKey: Key.sermonViewerFontScale) as? Double ?? 1.0
+        self.sermonViewerUsesPageMode = defaults.object(forKey: Key.sermonViewerUsesPageMode) as? Bool ?? false
 
         // [2026-08-14 추가] 기본값 — 구약을 펼친 채로 시작하는 편이(책이 39권,
         // 신약보다 훨씬 자주 참조됨) 처음 여는 사용자에게 자연스럽다고 판단했다.
@@ -673,5 +904,122 @@ extension UserSettingsStore {
         guard hanjaFontName != "System" else { return .system(size: size) }
         BundledFontRegistrar.ensureAvailable(hanjaFontName)
         return .custom(hanjaFontName, size: size)
+    }
+
+
+    /// [2026-09-28 3단계(에디터) 추가] `SermonParagraphStyle` 문단 스타일 하나를
+    /// 실제 SwiftUI `Font`로 바꾼다 — `bibleBodyFont`/`hanjaFont(size:)`와 같은
+    /// 안전망(폰트가 등록되지 않았으면 SwiftUI가 시스템 기본으로 대체).
+    /// `SermonParagraphEditor`(NSAttributedString 기반)는 이 값이 아니라 아래
+    /// `sermonPlatformFont(for:)`(UIFont/NSFont)를 쓴다 — 이 함수는 그 외
+    /// 순정 SwiftUI 화면(예: 문단 스타일 드롭다운의 라벨 미리보기)을 위한 것.
+    func sermonFont(for style: SermonParagraphStyle, scale: Double = 1.0) -> Font {
+        let name = sermonFontName(for: style)
+        let size = sermonFontSize(for: style) * scale
+        guard name != "System" else { return .system(size: size) }
+        BundledFontRegistrar.ensureAvailable(name)
+        return .custom(name, size: size)
+    }
+
+    /// `SermonParagraphEditor`가 실제 텍스트 스토리지에 적용할 `PlatformFont`
+    /// (iOS `UIFont`/macOS `NSFont`) — `EditorDefaultStyle.typingFont`와 같은
+    /// 안전망(등록 실패 시 시스템 폰트로 대체).
+    func sermonPlatformFont(for style: SermonParagraphStyle, scale: Double = 1.0) -> PlatformFont {
+        let name = sermonFontName(for: style)
+        let size = sermonFontSize(for: style) * scale
+        guard name != "System" else { return .systemFont(ofSize: size) }
+        BundledFontRegistrar.ensureAvailable(name)
+        return PlatformFont(name: name, size: size) ?? .systemFont(ofSize: size)
+    }
+
+    /// 문단 스타일별 폰트 이름 — 위 두 함수가 중복 스위치문을 만들지 않도록
+    /// 여기 한 곳에 모았다.
+    func sermonFontName(for style: SermonParagraphStyle) -> String {
+        switch style {
+        case .mainTheme: return sermonMainThemeFontName
+        case .midTheme: return sermonMidThemeFontName
+        case .subTheme: return sermonSubThemeFontName
+        case .verseQuote: return sermonVerseQuoteFontName
+        case .citation: return sermonCitationFontName
+        case .body: return sermonBodyFontName
+        }
+    }
+
+    /// 문단 스타일별 폰트 크기 — 위 `sermonFontName(for:)`와 같은 이유.
+    func sermonFontSize(for style: SermonParagraphStyle) -> Double {
+        switch style {
+        case .mainTheme: return sermonMainThemeFontSize
+        case .midTheme: return sermonMidThemeFontSize
+        case .subTheme: return sermonSubThemeFontSize
+        case .verseQuote: return sermonVerseQuoteFontSize
+        case .citation: return sermonCitationFontSize
+        case .body: return sermonBodyFontSize
+        }
+    }
+
+    /// 문단 스타일별 글자 색상(hex 문자열) — 위 두 함수와 같은 이유로 한 곳에
+    /// 모았다. `bibleTextColorHex`와 달리 빈 문자열이 "시스템 기본 사용"을
+    /// 뜻하지 않는다 — 6종 모두 항상 구체적인 제안값을 갖는다(위 `init` 주석
+    /// 참고).
+    func sermonFontColorHex(for style: SermonParagraphStyle) -> String {
+        switch style {
+        case .mainTheme: return sermonMainThemeFontColorHex
+        case .midTheme: return sermonMidThemeFontColorHex
+        case .subTheme: return sermonSubThemeFontColorHex
+        case .verseQuote: return sermonVerseQuoteFontColorHex
+        case .citation: return sermonCitationFontColorHex
+        case .body: return sermonBodyFontColorHex
+        }
+    }
+
+    /// 순정 SwiftUI 화면(스타일 드롭다운 미리보기 등)용 `Color` — hex가 잘못된
+    /// 값이면(이론상 발생하지 않지만 방어적으로) `.primary`로 안전하게 대체한다.
+    func sermonFontColor(for style: SermonParagraphStyle) -> Color {
+        Color(hex: sermonFontColorHex(for: style)) ?? .primary
+    }
+
+    /// `SermonParagraphEditor`가 실제 텍스트 스토리지에 적용할 `PlatformColor`
+    /// (iOS `UIColor`/macOS `NSColor`) — `RichTextEditor.RichTextEditingProxy.
+    /// applyColor(_:)`와 같은 hex → Color → PlatformColor 변환 관례를 그대로
+    /// 따른다(`Color+Hex.swift` 참고).
+    func sermonPlatformFontColor(for style: SermonParagraphStyle) -> PlatformColor {
+        PlatformColor(sermonFontColor(for: style))
+    }
+
+    /// 말씀구절 박스 배경색 — `SermonParagraphStyleCodec.applyStyle`이
+    /// `.verseQuote` 문단에만 `.backgroundColor` attribute로 적용한다(6-2번 항목).
+    var sermonVerseQuoteBackgroundColor: Color {
+        Color(hex: sermonVerseQuoteBackgroundColorHex) ?? Color(hex: "#F3E4E1")!
+    }
+
+    var sermonVerseQuoteBackgroundPlatformColor: PlatformColor {
+        PlatformColor(sermonVerseQuoteBackgroundColor)
+    }
+
+    /// `SermonViewerView.paragraphText`가 말씀구절 박스 왼쪽 세로 바에 쓴다.
+    var sermonVerseQuoteBarColor: Color {
+        Color(hex: sermonVerseQuoteBarColorHex) ?? Color(hex: "#7A3B42")!
+    }
+
+    /// 문단 스타일별 줄간격 배수 — `RichTextEditor.lineHeightMultiple`과 같은
+    /// 용어 해석(1.0 = 추가 줄간격 없음).
+    /// [2026-09-29 6번 항목 제안값, 출처: Editor.dc.html 목업의 STYLE_DEFS
+    /// line-height] 대주제/중주제/소주제=1.4(목업과 동일), 말씀구절=1.7(목업의
+    /// 인용구 박스 줄간격과 동일한 값을 재사용 — 목업이 말씀구절 자체엔 별도
+    /// line-height를 명시하지 않아, 같은 "박스형" 문단인 인용구 값을 이어받은
+    /// 것 — 사용자 확인 필요).
+    /// [2026-09-29 11번 항목 수정] 사용자 명시 지정 — "[본문] 스타일 : 줄간격
+    /// 160%." 바로 앞 라운드에서 설계 문서 3.3의 "기존 확정값"이라 적어 뒀던
+    /// 1.85를 이 새 명시값(1.6)으로 덮어쓴다 — 기존 확정값을 실수로 되돌리는
+    /// 것이 아니라, 사용자가 이번에 본문 줄간격만 새 수치로 다시 확정한 것.
+    func sermonLineHeightMultiple(for style: SermonParagraphStyle) -> CGFloat {
+        switch style {
+        case .mainTheme: return 1.4
+        case .midTheme: return 1.4
+        case .subTheme: return 1.4
+        case .verseQuote: return 1.7
+        case .citation: return 1.7
+        case .body: return 1.6
+        }
     }
 }

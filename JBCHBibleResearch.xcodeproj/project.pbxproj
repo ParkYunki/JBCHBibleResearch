@@ -11,21 +11,10 @@
 		C02ADCD130353FA200D63D2F /* Tokenizers in Frameworks */ = {isa = PBXBuildFile; productRef = C02ADCD030353FA200D63D2F /* Tokenizers */; };
 		C02ADCDE3035465700D63D2F /* MultilingualE5SmallTokenizer in Resources */ = {isa = PBXBuildFile; fileRef = C02ADCDD3035465700D63D2F /* MultilingualE5SmallTokenizer */; };
 		C05362983020342500B5FD10 /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = C05362973020341C00B5FD10 /* libsqlite3.tbd */; };
-		C08A75FC3030C5EB003C2725 /* CoreHwp in Frameworks */ = {isa = PBXBuildFile; productRef = C08A75FB3030C5EB003C2725 /* CoreHwp */; };
 		C08A75FE3030C5EB003C2725 /* HwpKitCore in Frameworks */ = {isa = PBXBuildFile; productRef = C08A75FD3030C5EB003C2725 /* HwpKitCore */; };
 		C08A76003030C5EB003C2725 /* HwpKit in Frameworks */ = {isa = PBXBuildFile; productRef = C08A75FF3030C5EB003C2725 /* HwpKit */; };
-		C0D155683031EB5800861DD1 /* SwiftText in Frameworks */ = {isa = PBXBuildFile; productRef = C0D155673031EB5800861DD1 /* SwiftText */; };
-		C0D1556A3031EB5800861DD1 /* SwiftTextAttributedString in Frameworks */ = {isa = PBXBuildFile; productRef = C0D155693031EB5800861DD1 /* SwiftTextAttributedString */; };
-		C0D1556C3031EB5800861DD1 /* SwiftTextCore in Frameworks */ = {isa = PBXBuildFile; productRef = C0D1556B3031EB5800861DD1 /* SwiftTextCore */; };
 		C0D1556E3031EB5800861DD1 /* SwiftTextDOCX in Frameworks */ = {isa = PBXBuildFile; productRef = C0D1556D3031EB5800861DD1 /* SwiftTextDOCX */; };
-		C0D155703031EB5800861DD1 /* SwiftTextIWA in Frameworks */ = {isa = PBXBuildFile; productRef = C0D1556F3031EB5800861DD1 /* SwiftTextIWA */; };
-		C0D155723031EB5800861DD1 /* SwiftTextMarkdown in Frameworks */ = {isa = PBXBuildFile; productRef = C0D155713031EB5800861DD1 /* SwiftTextMarkdown */; };
-		C0D155743031EB5800861DD1 /* SwiftTextOCR in Frameworks */ = {isa = PBXBuildFile; productRef = C0D155733031EB5800861DD1 /* SwiftTextOCR */; };
-		C0D155763031EB5800861DD1 /* SwiftTextOpenType in Frameworks */ = {isa = PBXBuildFile; productRef = C0D155753031EB5800861DD1 /* SwiftTextOpenType */; };
-		C0D155783031EB5800861DD1 /* SwiftTextPDF in Frameworks */ = {isa = PBXBuildFile; productRef = C0D155773031EB5800861DD1 /* SwiftTextPDF */; };
-		C0D1557A3031EB5800861DD1 /* SwiftTextPDFWriter in Frameworks */ = {isa = PBXBuildFile; productRef = C0D155793031EB5800861DD1 /* SwiftTextPDFWriter */; };
 		C0D1557C3031EB5800861DD1 /* SwiftTextPages in Frameworks */ = {isa = PBXBuildFile; productRef = C0D1557B3031EB5800861DD1 /* SwiftTextPages */; };
-		C0D1557E3031EB5800861DD1 /* SwiftTextRender in Frameworks */ = {isa = PBXBuildFile; productRef = C0D1557D3031EB5800861DD1 /* SwiftTextRender */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -62,23 +51,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				C0D1557C3031EB5800861DD1 /* SwiftTextPages in Frameworks */,
-				C0D1556C3031EB5800861DD1 /* SwiftTextCore in Frameworks */,
-				C0D155763031EB5800861DD1 /* SwiftTextOpenType in Frameworks */,
-				C0D1556A3031EB5800861DD1 /* SwiftTextAttributedString in Frameworks */,
-				C0D1557A3031EB5800861DD1 /* SwiftTextPDFWriter in Frameworks */,
-				C08A75FC3030C5EB003C2725 /* CoreHwp in Frameworks */,
 				C0D1556E3031EB5800861DD1 /* SwiftTextDOCX in Frameworks */,
-				C0D155723031EB5800861DD1 /* SwiftTextMarkdown in Frameworks */,
 				C08A75FE3030C5EB003C2725 /* HwpKitCore in Frameworks */,
 				C08A76003030C5EB003C2725 /* HwpKit in Frameworks */,
 				C0200F01302472A9009CCA96 /* BibleResearchModels in Frameworks */,
-				C0D1557E3031EB5800861DD1 /* SwiftTextRender in Frameworks */,
-				C0D155703031EB5800861DD1 /* SwiftTextIWA in Frameworks */,
-				C0D155783031EB5800861DD1 /* SwiftTextPDF in Frameworks */,
 				C02ADCD130353FA200D63D2F /* Tokenizers in Frameworks */,
 				C05362983020342500B5FD10 /* libsqlite3.tbd in Frameworks */,
-				C0D155743031EB5800861DD1 /* SwiftTextOCR in Frameworks */,
-				C0D155683031EB5800861DD1 /* SwiftText in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -132,21 +110,10 @@
 			name = JBCHBibleResearch;
 			packageProductDependencies = (
 				C0200F00302472A9009CCA96 /* BibleResearchModels */,
-				C08A75FB3030C5EB003C2725 /* CoreHwp */,
 				C08A75FD3030C5EB003C2725 /* HwpKitCore */,
 				C08A75FF3030C5EB003C2725 /* HwpKit */,
-				C0D155673031EB5800861DD1 /* SwiftText */,
-				C0D155693031EB5800861DD1 /* SwiftTextAttributedString */,
-				C0D1556B3031EB5800861DD1 /* SwiftTextCore */,
 				C0D1556D3031EB5800861DD1 /* SwiftTextDOCX */,
-				C0D1556F3031EB5800861DD1 /* SwiftTextIWA */,
-				C0D155713031EB5800861DD1 /* SwiftTextMarkdown */,
-				C0D155733031EB5800861DD1 /* SwiftTextOCR */,
-				C0D155753031EB5800861DD1 /* SwiftTextOpenType */,
-				C0D155773031EB5800861DD1 /* SwiftTextPDF */,
-				C0D155793031EB5800861DD1 /* SwiftTextPDFWriter */,
 				C0D1557B3031EB5800861DD1 /* SwiftTextPages */,
-				C0D1557D3031EB5800861DD1 /* SwiftTextRender */,
 				C02ADCD030353FA200D63D2F /* Tokenizers */,
 			);
 			productName = JBCHBibleResearch;
@@ -572,11 +539,6 @@
 			package = C02ADCCF30353FA200D63D2F /* XCRemoteSwiftPackageReference "swift-transformers" */;
 			productName = Tokenizers;
 		};
-		C08A75FB3030C5EB003C2725 /* CoreHwp */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = C08A75FA3030C5EB003C2725 /* XCRemoteSwiftPackageReference "hwp-swift" */;
-			productName = CoreHwp;
-		};
 		C08A75FD3030C5EB003C2725 /* HwpKitCore */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = C08A75FA3030C5EB003C2725 /* XCRemoteSwiftPackageReference "hwp-swift" */;
@@ -587,65 +549,15 @@
 			package = C08A75FA3030C5EB003C2725 /* XCRemoteSwiftPackageReference "hwp-swift" */;
 			productName = HwpKit;
 		};
-		C0D155673031EB5800861DD1 /* SwiftText */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = C0D155663031EB5800861DD1 /* XCRemoteSwiftPackageReference "SwiftText" */;
-			productName = SwiftText;
-		};
-		C0D155693031EB5800861DD1 /* SwiftTextAttributedString */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = C0D155663031EB5800861DD1 /* XCRemoteSwiftPackageReference "SwiftText" */;
-			productName = SwiftTextAttributedString;
-		};
-		C0D1556B3031EB5800861DD1 /* SwiftTextCore */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = C0D155663031EB5800861DD1 /* XCRemoteSwiftPackageReference "SwiftText" */;
-			productName = SwiftTextCore;
-		};
 		C0D1556D3031EB5800861DD1 /* SwiftTextDOCX */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = C0D155663031EB5800861DD1 /* XCRemoteSwiftPackageReference "SwiftText" */;
 			productName = SwiftTextDOCX;
 		};
-		C0D1556F3031EB5800861DD1 /* SwiftTextIWA */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = C0D155663031EB5800861DD1 /* XCRemoteSwiftPackageReference "SwiftText" */;
-			productName = SwiftTextIWA;
-		};
-		C0D155713031EB5800861DD1 /* SwiftTextMarkdown */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = C0D155663031EB5800861DD1 /* XCRemoteSwiftPackageReference "SwiftText" */;
-			productName = SwiftTextMarkdown;
-		};
-		C0D155733031EB5800861DD1 /* SwiftTextOCR */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = C0D155663031EB5800861DD1 /* XCRemoteSwiftPackageReference "SwiftText" */;
-			productName = SwiftTextOCR;
-		};
-		C0D155753031EB5800861DD1 /* SwiftTextOpenType */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = C0D155663031EB5800861DD1 /* XCRemoteSwiftPackageReference "SwiftText" */;
-			productName = SwiftTextOpenType;
-		};
-		C0D155773031EB5800861DD1 /* SwiftTextPDF */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = C0D155663031EB5800861DD1 /* XCRemoteSwiftPackageReference "SwiftText" */;
-			productName = SwiftTextPDF;
-		};
-		C0D155793031EB5800861DD1 /* SwiftTextPDFWriter */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = C0D155663031EB5800861DD1 /* XCRemoteSwiftPackageReference "SwiftText" */;
-			productName = SwiftTextPDFWriter;
-		};
 		C0D1557B3031EB5800861DD1 /* SwiftTextPages */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = C0D155663031EB5800861DD1 /* XCRemoteSwiftPackageReference "SwiftText" */;
 			productName = SwiftTextPages;
-		};
-		C0D1557D3031EB5800861DD1 /* SwiftTextRender */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = C0D155663031EB5800861DD1 /* XCRemoteSwiftPackageReference "SwiftText" */;
-			productName = SwiftTextRender;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

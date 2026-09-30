@@ -63,6 +63,32 @@ public final class Tag {
     @Relationship(deleteRule: .cascade, inverse: \DocumentTag.tag)
     public var documentTags: [DocumentTag]? = []
 
+    /// [2026-09-28 신설] 사용자 요청 — "[설교 관리] 기능... 태그가 기존 기능에
+    /// 잘 녹아들어야 함." `MemoTag`/`SummaryTag`/`DocumentTag`와 완전히 같은
+    /// 설계 원칙(원시 UUID 대신 `sermon: Sermon?` 관계를 직접 쓴다) — 위 세
+    /// 조인 엔티티 상단 주석과 같은 이유.
+    @Relationship(deleteRule: .cascade, inverse: \SermonTag.tag)
+    public var sermonTags: [SermonTag]? = []
+
+    /// [2026-09-29 신설, 버그 수정] 위 `sermonTags`와 완전히 같은 이유 —
+    /// `SermonDeliveryTag`(회차별 독립 태그, 이 파일 하단 참고) 쪽의
+    /// 인버스. 이 프로퍼티가 빠져 있으면 CloudKit 스키마 검증이 "SermonDeliveryTag:
+    /// tag에 인버스가 없다"(CoreData 134060, "CloudKit integration requires
+    /// that all relationships have an inverse")로 실패해 `ModelContainer`
+    /// 로드 자체가 막힌다 — 실기기 Xcode 콘솔 로그로 실제 확인된 크래시
+    /// 원인(2026-09-29, 사용자 보고: "'내 설교' 기능이 추가된 이후에 이전의
+    /// 데이터가 삭제됨"). `SermonTag`를 추가할 때는 `Tag` 쪽 인버스를 같이
+    /// 추가했는데, 뒤이어 `SermonDeliveryTag`를 추가할 때 이 짝을 빠뜨린
+    /// 것이 원인 — `JBCHBibleResearchApp.swift`의 3단계 폴백(CloudKit 포함
+    /// 디스크 → CloudKit 제외 디스크 → in-memory)이 실제로 이 실패를 잡아
+    /// "데이터가 사라진 것처럼 보이는" 증상(2번째 폴백 단계로 떨어지며 매번
+    /// 새 로컬 저장소를 만드는 게 아니라, 최종적으로 3번째 in-memory 폴백까지
+    /// 떨어져 앱을 껐다 켤 때마다 저장소가 초기화됐던 것)을 만든 근본 원인이다.
+    /// 이 인버스를 추가하면 애초에 폴백까지 갈 필요 없이 정상적으로 CloudKit
+    /// 포함 디스크 컨테이너가 로드되어야 한다.
+    @Relationship(deleteRule: .cascade, inverse: \SermonDeliveryTag.tag)
+    public var sermonDeliveryTags: [SermonDeliveryTag]? = []
+
     @Relationship(deleteRule: .cascade, inverse: \TagRelation.tagA)
     public var relationsAsA: [TagRelation]? = []
 
@@ -179,6 +205,64 @@ public final class TagRelation {
         self.id = id
         self.tagA = tagA
         self.tagB = tagB
+        self.createdAt = createdAt
+    }
+}
+
+/// 설교(`Sermon`) ↔ 태그 조인 엔티티. [2026-09-28 신설] 사용자 요청 — "[설교
+/// 관리] 기능... 태그가 기존 기능에 잘 녹아들어야 함." `MemoTag`/`SummaryTag`/
+/// `DocumentTag`와 완전히 같은 설계 원칙(원시 UUID 대신 `sermon: Sermon?` 관계를
+/// 직접 쓴다 — 설교가 삭제되면 CloudKit 동기화 상으로도 정합성이 자동 유지된다)
+/// — 위 세 조인 엔티티 상단 주석 참고.
+///
+/// ⚠️ [2026-09-29 설계 결정 번복] 이 주석은 원래 "`SermonDelivery`(모임별
+/// 사본)에는 별도 태그를 붙이지 않는다 — 태그는 메인 설교문(`Sermon`) 단위로만
+/// 붙는다"고 명시했었다. 사용자가 이번에 명시적으로 다시 확인한 결정으로 그
+/// 제약을 뒤집는다 — 회차(`SermonDelivery`)마다 메인 설교문과 완전히 독립된
+/// 자기만의 태그를 가질 수 있다(예: 메인은 #은혜 #거듭남, 특정 수요예배 사본만
+/// #단회용). 그 독립 태그 조인 엔티티가 바로 아래 `SermonDeliveryTag`다 — 이
+/// 타입과 완전히 같은 설계 원칙(원시 UUID 대신 관계 직접 참조)을 그대로 따른다.
+@Model
+public final class SermonTag {
+    public var id: UUID = UUID()
+    public var createdAt: Date = Date.now
+
+    @Relationship(deleteRule: .cascade, inverse: \Sermon.sermonTags)
+    public var sermon: Sermon?
+
+    public var tag: Tag?
+
+    public init(id: UUID = UUID(), sermon: Sermon? = nil, tag: Tag? = nil, createdAt: Date = .now) {
+        self.id = id
+        self.sermon = sermon
+        self.tag = tag
+        self.createdAt = createdAt
+    }
+}
+
+/// 설교 회차 사본(`SermonDelivery`) ↔ 태그 조인 엔티티. [2026-09-29 신설]
+/// 사용자 결정 — "회차마다 독립적인 태그"(위 `SermonTag` 주석의 "설계 결정
+/// 번복" 참고). `SermonTag`와 완전히 같은 설계 원칙·같은 모양이며, 가리키는
+/// 대상만 `Sermon` 대신 `SermonDelivery`다 — 메인 설교문의 `sermonTags`와는
+/// 서로 완전히 독립된 별도 태그 집합이라(공유하지 않음) 새 조인 엔티티를
+/// 하나 더 둔다(기존 `SermonTag`에 옵셔널 `delivery` 필드를 얹는 대신 —
+/// `SermonVerseReference`가 `sermon`/`delivery` 중 하나만 채우는 배타적
+/// 필드를 쓰는 것과 달리, 태그는 "이 조인이 어느 쪽 소속인지"가 타입 자체로
+/// 고정되는 편이 더 단순하다고 판단).
+@Model
+public final class SermonDeliveryTag {
+    public var id: UUID = UUID()
+    public var createdAt: Date = Date.now
+
+    @Relationship(deleteRule: .cascade, inverse: \SermonDelivery.deliveryTags)
+    public var delivery: SermonDelivery?
+
+    public var tag: Tag?
+
+    public init(id: UUID = UUID(), delivery: SermonDelivery? = nil, tag: Tag? = nil, createdAt: Date = .now) {
+        self.id = id
+        self.delivery = delivery
+        self.tag = tag
         self.createdAt = createdAt
     }
 }

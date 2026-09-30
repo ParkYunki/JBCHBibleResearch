@@ -123,6 +123,15 @@ final class BibleReadingViewModel {
     /// 있다). 문서가 아주 많아지면 매 장 이동마다 전체 스캔이 느려질 수 있다 —
     /// 지금 규모(v1)에서는 허용 가능하다고 판단했다.
     private(set) var relatedDocuments: [SourceDocument] = []
+    /// [2026-09-29 신설] 사용자 요청 — "성경 조회의 성경 구절 에도 관련
+    /// 설교문이 있으면 아이콘 표시 + 인스펙터 창의 하단에도 관련 연구문서
+    /// 밑에 '관련 설교문' 추가." 위 `relatedDocuments`(연구문서, 장 전체
+    /// 수동 태그 — `relatedChapterRef`)와 달리 `SermonVerseReference`는
+    /// 애초에 절 단위 좌표(`bookId`/`chapter`/`verseStart`/`verseEnd`)를
+    /// 직접 들고 있어, `relatedChapterMemos`/`relatedChapterWordSummaries`와
+    /// 같은 방식(장 전체를 한 번 불러와 두고 절별로는 Swift 레벨에서 거름)을
+    /// 그대로 쓸 수 있다 — 아래 `sermonVerseReferences(verse:)` 참고.
+    private(set) var relatedChapterSermonVerseReferences: [SermonVerseReference] = []
 
     // MARK: - 구간 주석(형광펜/표시/관주) — 2026-08-08 신설
     //
@@ -351,6 +360,16 @@ final class BibleReadingViewModel {
         chapterVerseMentionsIndex[verse] ?? []
     }
 
+    /// [2026-09-29 신설] 위 `relatedChapterSermonVerseReferences`를 정확히 이
+    /// 절(verseStart...verseEnd 구간에 포함되는 절)만 걸러 돌려준다 — 이미
+    /// 장 전체를 불러와 둔 배열만 필터링하므로 절을 옮길 때마다 다시
+    /// fetch하지 않는다(`phraseMemos`류와 같은 원칙).
+    func sermonVerseReferences(verse: Int) -> [SermonVerseReference] {
+        relatedChapterSermonVerseReferences.filter { ref in
+            verse >= ref.verseStart && verse <= (ref.verseEnd ?? ref.verseStart)
+        }
+    }
+
     /// [2026-08-11 추가] `VerseMention.sourceId`(UUID 문자열)로 실제 `UserMemo`를
     /// 되찾는다 — `VerseMention`은 `EmbeddingChunk`와 같은 이유로 관계가 아니라
     /// 원시 문자열 ID로만 출처를 가리킨다(`VerseMentions.swift` 상단 주석 참고).
@@ -374,6 +393,20 @@ final class BibleReadingViewModel {
         guard mention.sourceType == .wordSummary, let uuid = UUID(uuidString: mention.sourceId) else { return nil }
         return (try? modelContext.fetch(
             FetchDescriptor<VerseSummary>(predicate: #Predicate { $0.id == uuid })
+        ))?.first
+    }
+
+    /// [2026-09-29 신설] 위 `resolveMemo(for:)`와 같은 이유 — "내 설교"
+    /// (`VerseMention.sourceType == .sermon`, 본문 자동 추출) 쪽.
+    /// `SermonVerseReference`(수동 참조, 위 `sermonVerseReferences(verse:)`)와
+    /// 달리 이 mention은 `Sermon.id`(UUID 문자열)로만 출처를 가리킨다
+    /// (`BibleReferenceIndexingService.reindexSermon` 참고) — `SermonDelivery`는
+    /// 이 자동 추출 범위 밖이다(`VerseMentionSourceType.sermon` 선언부 주석
+    /// 참고, 메인 설교문만 대상으로 삼기로 한 기존 결정과 동일하다).
+    func resolveSermon(for mention: VerseMention) -> Sermon? {
+        guard mention.sourceType == .sermon, let uuid = UUID(uuidString: mention.sourceId) else { return nil }
+        return (try? modelContext.fetch(
+            FetchDescriptor<Sermon>(predicate: #Predicate { $0.id == uuid })
         ))?.first
     }
 
@@ -1233,6 +1266,16 @@ final class BibleReadingViewModel {
             FetchDescriptor<SourceDocument>(sortBy: [SortDescriptor(\.uploadedAt, order: .reverse)])
         )) ?? []
         relatedDocuments = allDocuments.filter { $0.relatedChapterRef == targetRef }
+
+        // [2026-09-29 신설] 위 `relatedChapterSermonVerseReferences` 상단 주석
+        // 참고 — `bookId`/`chapter`가 SwiftData 저장 프로퍼티(구조체 아님)라
+        // `#Predicate`로 바로 걸러도 안전하다(위 `relatedChapterMemos`/
+        // `relatedChapterWordSummaries`와 같은 근거).
+        relatedChapterSermonVerseReferences = (try? modelContext.fetch(
+            FetchDescriptor<SermonVerseReference>(
+                predicate: #Predicate { $0.bookId == bookId && $0.chapter == chapter }
+            )
+        )) ?? []
 
         // [2026-08-08 추가] 구간 주석(형광펜/표시/관주) — 이 장 분량을 통째로
         // 불러온다(위 `chapterHighlights` 상단 주석 참고).

@@ -48,8 +48,9 @@ struct VerseMentionListView: View {
     private func sourceLabel(_ mention: VerseMention) -> String {
         switch mention.sourceType {
         case .memo: return "메모"
-        case .document: return "연구문서"
+        case .document: return "연구 문서"
         case .wordSummary: return "말씀 요약"
+        case .sermon: return "내 설교"
         }
     }
 
@@ -58,6 +59,7 @@ struct VerseMentionListView: View {
         case .memo: return "note.text"
         case .document: return "doc.text"
         case .wordSummary: return "text.book.closed"
+        case .sermon: return "mic.fill"
         }
     }
 }

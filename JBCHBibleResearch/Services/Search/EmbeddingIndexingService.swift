@@ -29,6 +29,9 @@
 
 import Foundation
 import BibleResearchModels
+#if os(iOS)
+import UIKit
+#endif
 
 @MainActor
 final class EmbeddingIndexingService {
@@ -36,6 +39,19 @@ final class EmbeddingIndexingService {
 
     private init() {
         refreshStatus()
+        #if os(iOS)
+        // 싱글턴이라 해제될 일이 없어 옵저버 토큰은 보관하지 않는다.
+        NotificationCenter.default.addObserver(
+            forName: UIApplication.didReceiveMemoryWarningNotification, object: nil, queue: .main
+        ) { [weak self] _ in
+            MainActor.assumeIsolated { self?.releaseLoadedIndex() }
+        }
+        #endif
+    }
+
+    /// 메모리 압박 시 메모리에 올려 둔 색인 벡터를 버린다(파일은 그대로) — 다음 검색에서 다시 읽는다.
+    func releaseLoadedIndex() {
+        loadedIndex = nil
     }
 
     enum IndexStatus: Equatable {
@@ -134,7 +150,9 @@ final class EmbeddingIndexingService {
         // `.notBuilt`로 되돌려버리면 안 된다.
         if case .building = status { return }
         let url = indexFileURL(translationCode: TranslationBootstrap.bundledTranslationCode)
-        guard let data = try? Data(contentsOf: url), let header = Self.parseHeader(data: data) else {
+        // `.mappedIfSafe` — 헤더 몇십 바이트만 필요한데 `Data(contentsOf:)`는 파일 전체(≈95MB)를
+        // 메모리로 읽는다. 매핑하면 실제로 건드린 앞쪽 페이지만 올라온다.
+        guard let data = try? Data(contentsOf: url, options: .mappedIfSafe), let header = Self.parseHeader(data: data) else {
             status = .notBuilt
             return
         }
@@ -230,7 +248,10 @@ final class EmbeddingIndexingService {
     func ensureLoaded() throws -> LoadedIndex {
         if let loadedIndex { return loadedIndex }
         let url = indexFileURL(translationCode: TranslationBootstrap.bundledTranslationCode)
-        guard let data = try? Data(contentsOf: url) else {
+        // `.mappedIfSafe` — 원본 바이트는 매핑(회수 가능한 파일 캐시)으로 두고 `Record` 배열만
+        // 힙에 만든다. 이 함수는 동기라 매핑이 곧 해제되고, 색인 갱신은 원자적 교체(새 파일)라
+        // 읽는 도중 내용이 바뀌지 않는다.
+        guard let data = try? Data(contentsOf: url, options: .mappedIfSafe) else {
             throw IndexError.sourceUnavailable("색인 파일이 없습니다. 먼저 색인을 만들어주세요.")
         }
         guard let header = Self.parseHeader(data: data) else {

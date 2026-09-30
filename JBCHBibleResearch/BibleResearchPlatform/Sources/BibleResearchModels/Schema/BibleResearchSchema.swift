@@ -30,6 +30,10 @@ public enum BibleResearchSchema {
         SummaryTag.self,
         // 연구문서 태그 조인 (Tags.swift) — 2026-08-16 신설
         DocumentTag.self,
+        // 설교 ↔ 태그 조인 (Tags.swift) — 2026-09-28 신설
+        SermonTag.self,
+        // 설교 회차 사본 ↔ 태그 조인 (Tags.swift) — 2026-09-29 신설, "회차마다 독립적인 태그"
+        SermonDeliveryTag.self,
         // 사용자 콘텐츠 (UserContent.swift)
         MemoFolder.self, UserMemo.self, BookOutline.self, ChapterSummary.self,
         LectureNote.self, Comparison.self,
@@ -66,6 +70,12 @@ public enum BibleResearchSchema {
         VerseMarginalNote.self,
         // [2026-08-15 삭제] VerseHanjaAnnotation.self — 위 VerseAnnotations.swift의
         // "삭제, 같은 날 되돌림" 주석 참고. ReferenceData.sqlite로 완전히 대체.
+        // 설교 관리 (Sermons.swift) — 2026-09-28 신설. 설계 근거:
+        // claude/sermon-management-screens-and-schema.md(프로젝트 문서).
+        Sermon.self, SermonDelivery.self, SermonGathering.self, SermonVerseReference.self,
+        // 설교 마인드맵 (MindMaps.swift) — 2026-09-29 신설. 설계 근거: 대화 중
+        // 확정된 "내 설교 마인드맵" 기능(Claude 아티팩트 HTML 목업 참고).
+        MindMapNode.self,
     ]
 
     public static var schema: Schema {
@@ -79,14 +89,41 @@ public enum BibleResearchSchema {
     /// - Parameter cloudKitContainerIdentifier: 기본값은 `defaultCloudKitContainerIdentifier`
     ///   (entitlements와 일치). 다른 값을 넘기면 그 값을 그대로 쓴다 — 실제 값은 Xcode
     ///   프로젝트의 CloudKit 컨테이너 설정과 반드시 일치해야 한다.
+    /// [2026-09-29 신설] 사용자 보고 — "'내 설교' 기능이 추가된 이후에 이전의
+    /// 데이터가 삭제됨." 원인 추적 — `JBCHBibleResearchApp.init()`을 직접 읽어
+    /// 보니, 이 팩토리가 (CloudKit 문제든 스키마 문제든) 어떤 이유로든 던지면
+    /// 그 catch 분기가 곧장 `isStoredInMemoryOnly: true`(디스크에 전혀 안
+    /// 남는 임시 저장소)로 폴백하고 있었다 — 그 분기 자신의 기존 주석에도
+    /// "데이터는... 앱을 껐다 켜면 사라집니다"라고 이미 적혀 있다. 즉 지금
+    /// 사용자가 겪은 증상과 정확히 일치하는 폴백 경로가 코드에 이미 존재했다.
+    /// "내 설교" 기능이 `BibleResearchSchema.modelTypes`에 새 `@Model` 타입
+    /// 6종(Sermon 등)을 추가한 게 이 스키마의 가장 최근 변경이라, `ModelContainer`
+    /// 생성이 처음 실패하기 시작한 시점과 맞아떨어질 가능성이 가장 높다 —
+    /// 다만 이 환경(Xcode/실기기 없음)에서는 실제 에러 메시지를 직접 볼 수
+    /// 없어 정확한 원인(CloudKit 스키마 반영 문제인지, 그 6종 모델 자체의
+    /// 다른 문제인지)까지는 확정하지 못했다. `enableCloudKit` 매개변수를
+    /// 새로 둬, "CloudKit만 빼고 나머지는 그대로"인 중간 단계 폴백을
+    /// `JBCHBibleResearchApp.init()`이 시도할 수 있게 한다 — 아래 참고.
     public static func makeSharedModelContainer(
         cloudKitContainerIdentifier: String = defaultCloudKitContainerIdentifier,
-        isStoredInMemoryOnly: Bool = false
+        isStoredInMemoryOnly: Bool = false,
+        enableCloudKit: Bool = true
     ) throws -> ModelContainer {
+        // [2026-09-29 수정] in-memory 전용 스토어는 CloudKit과 함께 쓸 수 없다 —
+        // CloudKit 미러링은 디스크 기반 영구 저장소를 전제로 하며, SwiftData는
+        // isStoredInMemoryOnly == true인 ModelConfiguration에 .private/.automatic
+        // cloudKitDatabase를 함께 지정하면 ModelContainer 생성 시점에 에러를 던진다.
+        // 기존 코드는 이 폴백(JBCHBibleResearchApp.init()의 catch 분기, "CloudKit
+        // 동기화는 비활성 상태입니다" 주석 참고)에서도 항상 cloudKitDatabase를
+        // 넘기고 있어, 주석이 말하는 의도("동기화 비활성" 상태로 계속 켜지는 것)와
+        // 실제 동작(생성 자체가 실패)이 어긋나 있었다. isStoredInMemoryOnly이거나
+        // enableCloudKit이 false면 cloudKitDatabase를 .none으로 둬 그 의도대로
+        // 동작하게 한다 — `enableCloudKit: false` + `isStoredInMemoryOnly: false`
+        // 조합이 바로 "디스크에는 그대로 남기고 CloudKit만 끈" 새 중간 폴백이다.
         let configuration = ModelConfiguration(
             schema: schema,
             isStoredInMemoryOnly: isStoredInMemoryOnly,
-            cloudKitDatabase: .private(cloudKitContainerIdentifier)
+            cloudKitDatabase: (isStoredInMemoryOnly || !enableCloudKit) ? .none : .private(cloudKitContainerIdentifier)
         )
         return try ModelContainer(for: schema, configurations: [configuration])
     }

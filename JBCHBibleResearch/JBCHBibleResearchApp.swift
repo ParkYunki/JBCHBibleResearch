@@ -45,21 +45,47 @@ struct JBCHBibleResearchApp: App {
         applyThemedTabBarAppearance(color: UserSettingsStore.shared.bibleBackgroundColor)
         #endif
 
+        // [2026-09-29 수정] 사용자 보고 — "'내 설교' 기능이 추가된 이후에
+        // 이전의 데이터가 삭제됨." 기존 코드는 컨테이너 생성이 실패하면 곧장
+        // `isStoredInMemoryOnly: true`(디스크에 전혀 안 남는 임시 저장소)로
+        // 폴백했다 — 그 주석 자신도 "데이터는... 앱을 껐다 켜면 사라집니다"
+        // 라고 이미 경고하고 있었다. 즉 CloudKit 관련 원인으로 컨테이너 생성이
+        // 실패할 때마다, 기존에 디스크에 안전하게 남아 있는 로컬 데이터까지
+        // 통째로 안 보이게(그리고 그 세션에서 만든 새 데이터는 진짜로) 사라지는
+        // 구조였다 — 사용자가 겪은 증상과 정확히 일치한다.
+        //
+        // ⚠️ 정확한 실패 원인(CloudKit 스키마 반영 문제인지, "내 설교" 기능이
+        // 추가한 6개 모델 타입 중 다른 문제인지)은 이 환경(Xcode/실기기 없음)
+        // 에서는 실제 에러 메시지를 볼 수 없어 확정하지 못했다 — 아래
+        // "실패 1" 로그로 찍히는 `error` 값을 Xcode 콘솔에서 직접 확인해
+        // 주셔야 정확한 원인을 알 수 있다.
+        //
+        // 고친 내용 — 실패 시 곧장 in-memory로 가지 않고, "디스크에는 그대로
+        // 남기되 CloudKit만 끈" 중간 단계를 먼저 시도한다. CloudKit이 실패
+        // 원인이라면(가장 흔한 경우) 이 단계에서 성공하고, 이미 디스크에 있던
+        // 데이터도 그대로 다시 보인다 — 단지 이 기기 간 동기화만 잠시 꺼질
+        // 뿐이다. 이 단계까지 실패해야만(디스크 스토어 자체의 문제, CloudKit과
+        // 무관) 마지막 수단으로 in-memory 폴백을 쓴다.
         do {
             modelContainer = try BibleResearchSchema.makeSharedModelContainer()
             print("[JBCHBibleResearchApp] 모델 컨테이너 생성 성공 (CloudKit 컨테이너: \(BibleResearchSchema.defaultCloudKitContainerIdentifier))")
-        } catch {
-            // CloudKit 컨테이너 설정(Signing & Capabilities의 iCloud capability, Containers
-            // 목록)이 아직 안 돼 있으면 여기로 옵니다. 앱 자체는 계속 켜지도록 로컬 전용
-            // (in-memory) 컨테이너로 폴백합니다 — 이 경우 데이터는 기기 간 동기화되지 않고
-            // 앱을 껐다 켜면 사라집니다. 원인은 콘솔의 아래 로그로 확인하세요.
-            print("[JBCHBibleResearchApp] 모델 컨테이너 생성 실패: \(error)")
-            print("[JBCHBibleResearchApp] 로컬 전용(in-memory) 컨테이너로 폴백합니다 — CloudKit 동기화는 비활성 상태입니다.")
-            // in-memory 폴백은 CloudKit이 전혀 개입하지 않아 실패할 이유가 사실상 없다고
-            // 판단해 강제 언래핑으로 처리했습니다. 그래도 실패한다면 스키마 자체(위 캐치되지
-            // 않은 원인)에 문제가 있다는 뜻이라 앱을 계속 켜는 게 의미가 없어 fatalError가
-            // 맞다고 봤습니다.
-            modelContainer = try! BibleResearchSchema.makeSharedModelContainer(isStoredInMemoryOnly: true)
+        } catch let cloudKitError {
+            print("[JBCHBibleResearchApp] 모델 컨테이너 생성 실패(CloudKit 포함): \(cloudKitError)")
+            print("[JBCHBibleResearchApp] 디스크 로컬 전용(CloudKit 비활성) 컨테이너로 재시도합니다 — 기존에 저장된 데이터는 그대로 남아 있어야 합니다.")
+            do {
+                modelContainer = try BibleResearchSchema.makeSharedModelContainer(enableCloudKit: false)
+                print("[JBCHBibleResearchApp] 디스크 로컬 전용 컨테이너 생성 성공 — CloudKit 동기화만 비활성 상태입니다. 위 첫 번째 에러 메시지를 확인해 원인을 해결한 뒤 다시 켜 주세요.")
+            } catch let diskError {
+                // 여기까지 오면 CloudKit과 무관하게 디스크 스토어 자체(또는
+                // 스키마) 문제라는 뜻이다 — 이 경우에만, 앱이 완전히 못 켜지는
+                // 것보다는 낫다고 판단해 최후 수단으로 in-memory 폴백을 쓴다.
+                // 이 단계에선 정말로 기존 데이터가 안 보이고 새로 입력한 것도
+                // 저장되지 않으니, 이 로그가 찍히면 반드시 원인을 먼저 해결해야
+                // 한다.
+                print("[JBCHBibleResearchApp] 디스크 로컬 전용 컨테이너도 실패: \(diskError)")
+                print("[JBCHBibleResearchApp] ⚠️ 마지막 수단으로 in-memory 컨테이너로 폴백합니다 — 이 세션에서는 기존 데이터가 보이지 않고 새 데이터도 저장되지 않습니다. 위 두 에러 메시지를 반드시 확인해 주세요.")
+                modelContainer = try! BibleResearchSchema.makeSharedModelContainer(isStoredInMemoryOnly: true)
+            }
         }
     }
 
@@ -186,6 +212,62 @@ struct JBCHBibleResearchApp: App {
             OutlineQuickViewWindowContent(request: request)
                 #if os(macOS)
                 .frame(minWidth: 420, minHeight: 400)
+                #endif
+        }
+        .modelContainer(modelContainer)
+
+        // [2026-09-28 추가] "내 설교" 기능 — 설계 문서(claude/sermon-management-
+        // screens-and-schema.md, 프로젝트) 2.4 참고. 위 "document-viewer"와 같은
+        // 이유로 `@Query` 기반 `SermonDetailWindowContent`(Views/Sermon/
+        // SermonDetailView.swift)가 창이 떠 있는 동안 대상이 삭제돼도 안전하게
+        // "찾을 수 없음"으로 넘어가게 한다.
+        WindowGroup(id: "sermon-detail", for: PersistentIdentifier.self) { $sermonID in
+            SermonDetailWindowContent(sermonID: sermonID)
+                #if os(macOS)
+                .frame(minWidth: 760, minHeight: 640)
+                #endif
+        }
+        .modelContainer(modelContainer)
+
+        // [2026-09-28 추가, 3·4단계에서 완료] 설교 작성(S-SER2)/뷰어(S-SER3) 창 —
+        // `SermonContentWindowContent`(Views/Sermon/SermonSupport.swift)가 `mode`에
+        // 따라 실제 에디터(`SermonEditorView`)/뷰어(`SermonViewerView`)로 분기한다.
+        // `SermonContentTarget`이 Sermon(메인)/SermonDelivery(회차 사본) 중
+        // 어느 쪽을 열지 함께 실어 나른다(그 타입 상단 주석 참고).
+        WindowGroup(id: "sermon-editor", for: SermonContentTarget.self) { $target in
+            SermonContentWindowContent(mode: .editor, target: target)
+                #if os(macOS)
+                .frame(minWidth: 960, minHeight: 680)
+                #endif
+        }
+        .modelContainer(modelContainer)
+
+        // [2026-09-29 수정, 버그 수정] 사용자 보고 — "(아이패드) 내 설교 -
+        // 리스트 항목 클릭 - 메인 설교의 뷰어 버튼 클릭 반응 없음." 위
+        // "sermon-editor"와 정확히 같은 값 타입(`SermonContentTarget`)을
+        // 공유하던 것을 `SermonViewerTarget`(SermonSupport.swift 신설, 내용은
+        // 완전히 같고 타입만 다른 래퍼)으로 바꿔 두 WindowGroup이 더 이상
+        // 타입을 공유하지 않게 했다 — 그 타입 선언부 주석에 원인 분석 전체를
+        // 적어 뒀다.
+        WindowGroup(id: "sermon-viewer", for: SermonViewerTarget.self) { $wrapped in
+            SermonContentWindowContent(mode: .viewer, target: wrapped?.target)
+                #if os(macOS)
+                .frame(minWidth: 1000, minHeight: 700)
+                #endif
+        }
+        .modelContainer(modelContainer)
+
+        // [2026-09-29 신설] "마인드맵" 기능 — 사용자 요청 "버튼 누르면 새창으로
+        // 띄워서 보여줄것"(아이패드·맥. 아이폰은 `SermonMindMapView`를 여는
+        // `NavigationLink` push로 대체 — 다중 창을 지원하지 않는 아이폰의
+        // 기존 제약, 위 "sermon-editor"/"sermon-viewer" 주석 참고). 값 타입은
+        // 위 "sermon-viewer"와 같은 이유로 `SermonContentTarget`/
+        // `SermonViewerTarget`과 겹치지 않는 새 타입(`SermonMindMapTarget`,
+        // SermonSupport.swift)을 쓴다.
+        WindowGroup(id: "sermon-mindmap", for: SermonMindMapTarget.self) { $target in
+            SermonMindMapWindowContent(target: target)
+                #if os(macOS)
+                .frame(minWidth: 1000, minHeight: 700)
                 #endif
         }
         .modelContainer(modelContainer)
