@@ -1,9 +1,9 @@
 import Foundation
 
-// 근거: bible-research-platform-schema.md 2장 — "번역본 종속적인 verse row가 아니라
-// 성경 좌표(book_id, chapter, verse) 자체를 참조 키로 사용". BibleVerses는 번역본별
-// SQLite 파일(BibleReference/BibleReferenceStore.swift)로 이 SwiftData/CloudKit 레이어
-// 밖에 있으므로, 좌표를 가리키는 모든 곳에서 관계가 아니라 값 타입으로 저장한다.
+// 성경 좌표(book_id, chapter, verse) 자체를 참조 키로 쓰는 값 타입. BibleVerses는
+// 번역본별 SQLite 파일(BibleReference/BibleReferenceStore.swift)로 이 SwiftData/
+// CloudKit 레이어 밖에 있으므로, 좌표를 가리키는 곳에서는 관계가 아니라 값 타입으로
+// 저장한다.
 
 /// 책+장 단위 참조. `LectureNote.chapterRefs`에 사용.
 public struct BibleChapterRef: Codable, Hashable, Sendable {

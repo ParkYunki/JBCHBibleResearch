@@ -1,8 +1,7 @@
 import Foundation
 import SwiftData
 
-// 근거: bible-research-platform-screens.md 6.7 — 번들 번역본은 정적 자산(동기화 제외,
-// schema.md 0장), 사용자 추가 번역본은 CloudKit 파일 동기화 대상으로 변경 확정.
+// 번들 번역본은 정적 자산(동기화 제외), 사용자 추가 번역본은 CloudKit 파일 동기화 대상이다.
 
 @Model
 public final class TranslationRegistry {
@@ -14,42 +13,26 @@ public final class TranslationRegistry {
     public var licenseType: String?
     public var addedAt: Date = Date.now
 
-    /// [2026-09-16 신설] 사용자 요청 — "설정에서 활성화하지 않은 번역본에서는
-    /// 검색결과도 나오지 않도록. 성경 - 표시할 번역본에서도 나타나지 않도록
-    /// 바꿀것." 기본값 `true` — 기존에 이미 추가돼 있던 번역본들은 이 필드가
-    /// 새로 생겨도 전부 "활성" 상태 그대로 유지되어(SwiftData 라이트웨이트
-    /// 마이그레이션, `isBundled`/`bookNameTableID` 등 이 모델에 이미 있는
-    /// 다른 필드들과 같은 방식) 동작이 갑자기 바뀌지 않는다. `SettingsView`의
-    /// "설치된 번역본" 목록(전체, 삭제만 가능하던 곳)에 이 값을 끄고 켜는
-    /// 토글이 새로 생기고, 꺼지면 `SearchViewModel.searchVerses`(검색)와
-    /// `BibleReadingViewModel.loadAvailableTranslations()`(성경 조회 표시
-    /// 후보, 그 값을 그대로 쓰는 `TranslationPickerPopover`도 함께) 양쪽에서
-    /// 제외된다.
+    /// 설정에서 활성화한 번역본인지 여부. 꺼지면 검색과 성경 조회 표시 후보(`TranslationPickerPopover` 포함)에서 제외된다.
+    /// 기본값 `true` — 이 필드가 생기기 전에 추가된 번역본도 라이트웨이트 마이그레이션 후 모두 활성 상태로 유지된다.
     public var isEnabled: Bool = true
 
     /// `isBundled == true`: 앱 번들 내 정적 경로.
     /// `isUserAdded == true`: 로컬에 materialize된 캐시 파일 경로 — 기기별로 다시
-    /// 생성되므로 이 필드 자체는 동기화 대상이 아니다(6.7).
+    /// 생성되므로 이 필드 자체는 동기화 대상이 아니다.
     public var sqliteFileReference: String = ""
 
     /// `isUserAdded == true`일 때만 사용. `.externalStorage`로 표시해 SwiftData가
-    /// 대용량 바이너리를 CloudKit CKAsset으로 자동 처리하게 한다(6.7 — CKRecord/CKAsset을
-    /// 직접 다루는 코드 불필요). ⚠️ 놓치기 쉬운 구현 포인트(6.7): 동기화된 Data를
-    /// SQLite로 바로 열 수 없다 — 동기화 완료 시점에 로컬 앱지원 디렉터리에 실제
-    /// `.sqlite` 파일로 한 번 써낸 뒤(`sqliteFileReference` 갱신) 열어야 한다.
+    /// 대용량 바이너리를 CloudKit CKAsset으로 자동 처리하게 한다.
+    /// ⚠️ 동기화된 Data를 SQLite로 바로 열 수 없다 — 동기화 완료 시점에 로컬 앱지원 디렉터리에
+    /// 실제 `.sqlite` 파일로 써낸 뒤(`sqliteFileReference` 갱신) 열어야 한다.
     @Attribute(.externalStorage)
     public var sqliteData: Data?
 
-    /// 2026-08-06 추가 — 근거: 사용자가 이전에 만들어 쓰던 앱(BibleSeminarPresentationForIOS)의
-    /// `TranslationInfo.bookNameTableID`를 그대로 가져온 필드. 사용자 추가 번역본은
-    /// 파일 안에 책 이름이 안 들어있는 경우가 대부분이라(book_id 정수만 있음), 어느
-    /// 언어의 책 이름표(앱 레이어의 `BookNameTable`, `Services/BookNameTable.swift`
-    /// 참고)를 써서 표시할지 가리키는 식별자다. `nil`이면(번들 번역본은 항상 nil)
-    /// 한글 기본 이름(`BooksProvider`)으로 표시한다 — 원본 주석의 정책 그대로.
-    ///
-    /// ⚠️ `BookNameTable` 자체는 이 패키지가 아니라 앱 타겟에 있다(순수 표시용
-    /// 데이터라 CloudKit 동기화 대상 모델로 만들 필요가 없다고 판단) — 여기서는
-    /// 문자열 식별자만 보관하고, 실제 이름표 조회/해석은 앱 레이어의 책임이다.
+    /// 사용자 추가 번역본은 파일 안에 책 이름이 없는 경우가 대부분이라(book_id 정수만 있음), 어느 언어의
+    /// 책 이름표(앱 레이어 `BookNameTable`)로 표시할지 가리키는 식별자. `nil`이면(번들 번역본은 항상 nil)
+    /// 한글 기본 이름(`BooksProvider`)으로 표시한다. `BookNameTable` 자체는 앱 타겟에 있으므로
+    /// 여기서는 문자열 식별자만 보관한다.
     public var bookNameTableID: String?
 
     public init(

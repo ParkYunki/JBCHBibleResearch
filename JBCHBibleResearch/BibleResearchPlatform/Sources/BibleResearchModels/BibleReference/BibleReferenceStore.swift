@@ -3,60 +3,32 @@ import Foundation
 import SQLite3
 #endif
 
-// SQLite3의 C 매크로 `SQLITE_TRANSIENT`(`((sqlite3_destructor_type)-1)`)는 매크로라서
-// ClangImporter가 Swift로 들여오지 못한다 — Swift+SQLite3를 쓸 때 흔히 겪는 지점이라
-// 직접 정의해야 한다. 텍스트를 바인딩할 때 SQLite가 원본 버퍼를 참조만 하지 않고
-// 즉시 복사하게 해서, 바인딩 이후 Swift 문자열이 해제돼도 안전하도록 만든다.
+// SQLite3의 C 매크로 `SQLITE_TRANSIENT`는 Swift로 import되지 않아 직접 정의한다.
+// 바인딩 시점에 SQLite가 텍스트를 즉시 복사하므로 이후 Swift 문자열이 해제돼도 안전하다.
 private let SQLITE_TRANSIENT = unsafeBitCast(-1, to: sqlite3_destructor_type.self)
 
-// 근거: bible-research-platform-schema.md 1장 — 번역본 SQLite 파일은 CloudKit 동기화
-// 대상이 아닌 정적 참조 데이터이므로, SwiftData가 아니라 이 읽기 전용 리더로 직접 연다.
-// 사용 위치: 번들 기본 테이블(Resources/BibleDB.sqlite)과, 6.7의
-// TranslationRegistry.sqliteFileReference가 가리키는 사용자 추가 번역본 파일을
-// 이 타입으로 열어 조회한다.
+// 번역본 SQLite 파일(정적 참조 데이터, CloudKit 동기화 대상 아님)을 여는 읽기 전용 리더.
+// 번들 기본 테이블(Resources/BibleDB.sqlite)과 TranslationRegistry.sqliteFileReference가
+// 가리키는 사용자 추가 번역본 파일을 모두 이 타입으로 연다.
 //
-// ⚠️⚠️ [2026-08-07, 사용자가 실제 스키마 제공 — 이전 가정을 대체] 이전 라운드들은
-// "번들 기본 테이블과 사용자 추가 번역본이 같은 테이블(`BibleVerses`)을 쓰고,
-// 파일에 따라 `version_code` 컬럼 유무만 다르다"고 가정했다(2026-08-06 "정책
-// 확정"). 사용자가 실제 사용자 추가 번역본 파일(sqlite/bdb)의 스키마를 직접
-// 알려줘서 그 가정이 틀렸다는 게 확인됐다 — 실제로는 **테이블 이름과 컬럼 이름
-// 자체가 다른, 완전히 별개의 스키마**다:
+// 두 파일은 테이블/컬럼 이름이 다른 별개의 스키마다.
+//   - 번들 기본: `BibleVerses(uid, book_id, chapter, verse, content, paragraph)`, `version_code` 없음.
+//   - 사용자 추가(sqlite/bdb): `Bible(id, book, chapter, verse, btext)`, `paragraph`/`version_code` 없음.
 //
-//   - **번들 기본 테이블**(`Resources/BibleDB.sqlite`): `BibleVerses(uid, book_id,
-//     chapter, verse, content, paragraph)`, `version_code` 없음(1개 번역본만).
-//   - **사용자 추가 번역본**(sqlite 또는 bdb 확장자): `Bible(id, book, chapter,
-//     verse, btext)` — `paragraph`도 `version_code`도 없다. 즉 "한 파일 = 번역본
-//     하나"이고, 이전에 추측했던 "한 파일에 여러 번역본이 version_code로 섞여
-//     있을 수 있다"는 시나리오는 사용자가 알려준 실제 스키마에는 없다.
+// `init`에서 `sqlite_master`로 어느 테이블이 있는지 판별하고, 컬럼 이름 차이는 SELECT의
+// `AS` 별칭(`uid`/`book_id`/`content`)으로 흡수한다. `version_code`/`paragraph`는 다른 파일이
+// 갖고 있을 경우에 대비해 `PRAGMA table_info`로 존재 여부를 감지한다.
 //
-// 이 타입은 이제 `init` 시점에 `sqlite_master`에서 `BibleVerses`/`Bible` 중 어느
-// 테이블이 있는지 확인해 스키마를 판별하고, 컬럼 이름 차이는 SELECT 절의 `AS`
-// 별칭으로 흡수한다(`uid`/`book_id`/`content`로 통일) — 그래서 `makeVerse`를 포함한
-// 나머지 로직은 스키마 종류를 몰라도 된다. `version_code`/`paragraph`는 여전히
-// `PRAGMA table_info`로 존재 여부를 감지한다(사용자가 준 스키마엔 없지만, 혹시
-// 다른 사용자 추가 파일이 이 컬럼을 추가로 갖고 있는 경우까지 방어하기 위해 —
-// 하드코딩으로 완전히 배제하지 않았다).
-//
-// ⚠️ 이 동적 스키마 판별 로직 자체는 실제 사용자 추가 번역본 파일로 아직
-// 재검증되지 않았다(스키마 텍스트만 받았고 실물 파일로 열어본 적은 없다).
-//
-// 스레딩 참고: 이 타입은 스레드 안전을 자체적으로 보장하지 않는다. sqlite3 커넥션
-// 하나를 여러 스레드에서 동시에 쓰지 않아야 하며, 필요하면 호출부에서 직렬화하거나
-// 스레드별로 별도 인스턴스를 만들어야 한다 — 원본 문서에 동시성 정책이 명시돼 있지
-// 않아 가장 단순하고 안전한 "인스턴스당 단일 커넥션, 외부 직렬화 책임은 호출부" 원칙으로
-// 구현했다.
+// 스레딩: 스레드 안전을 보장하지 않는다. 인스턴스당 sqlite3 커넥션 하나이며,
+// 동시 사용 시 직렬화는 호출부 책임이다(또는 스레드별 인스턴스).
 public final class BibleReferenceStore {
     private var handle: OpaquePointer?
     public let filePath: String
 
-    /// 이 파일의 실제 테이블에 `version_code` 컬럼이 있는지. `init` 시점에
-    /// `PRAGMA table_info`로 한 번만 확인해 캐시한다. 사용자가 확인해 준 두 스키마
-    /// (`BibleVerses`/`Bible`) 중 어느 쪽에도 원래는 없는 컬럼이지만, 방어적으로
-    /// 계속 동적 감지한다.
+    /// 이 파일의 테이블에 `version_code` 컬럼이 있는지. `init`에서 한 번만 확인해 캐시한다.
     public let hasVersionCodeColumn: Bool
 
-    /// 실제 테이블 이름(`BibleVerses` 또는 `Bible`) — 아래 세 컬럼 이름 매핑과 함께
-    /// `init`에서 `sqlite_master` 조회로 확정된다.
+    /// 실제 테이블 이름(`BibleVerses` 또는 `Bible`). `init`의 `sqlite_master` 조회로 확정된다.
     private let tableName: String
     /// 절 고유 id 컬럼의 실제 이름(`uid` 또는 `id`) — SELECT 절에서 항상 `AS uid`로
     /// 별칭을 붙여 통일한다.
@@ -203,9 +175,7 @@ public final class BibleReferenceStore {
         return results
     }
 
-    /// 특정 책의 실제 최대 장 번호. 화면 레이어(장 선택 피커)가 "이 책이 몇 장까지
-    /// 있는지" 임의로 가정하지 않고 실제 데이터로 확인할 수 있도록 2026-08-06 추가.
-    /// 해당 book_id의 절이 하나도 없으면 nil(책이 존재하지 않거나 아직 비어 있음).
+    /// 특정 책의 실제 최대 장 번호. 해당 book_id의 절이 하나도 없으면 nil.
     public func maxChapter(bookId: Int, versionCode: String? = nil) throws -> Int? {
         if hasVersionCodeColumn && versionCode == nil {
             throw BibleReferenceError.versionCodeRequired
@@ -232,19 +202,9 @@ public final class BibleReferenceStore {
         return Int(sqlite3_column_int(statement, 0))
     }
 
-    /// S11(통합 검색) 키워드 검색 — `content LIKE '%query%'`(사용자 추가 번역본은
-    /// 실제 컬럼명이 `btext`이지만 `contentColumn`으로 흡수한다). sqlite-vec 같은
-    /// 전문 검색 확장 없이 순수 LIKE만 쓴다(schema.md 4장이 의미검색만 vDSP
-    /// brute-force로 확정했을 뿐, 키워드 검색 방식은 명시하지 않았다 — LIKE가 가장
-    /// 단순하고 확실한 선택이라고 판단했다). `%`/`_` 같은 LIKE 와일드카드 문자를
-    /// 사용자가 그대로 입력하면 의도치 않게 패턴으로 해석될 수 있으나, 검색 UI
-    /// 특성상 큰 위험은 아니라고 보고 별도 이스케이프는 하지 않았다.
-    // [2026-08-25 변경] 사용자 요청 — "limit 50을 해제할 수 있는 방법(더보기
-    // 버튼)도 추가할 것." 이 경로는 이미 `ORDER BY ... LIMIT ?`(성경순 정렬 후
-    // 자름)이라 순서 버그는 없었지만, `searchVersesFullText`(FTS5 경로, 번들
-    // 개역한글 전용)와 짝을 맞춰 여기도 `limit`을 `Int?`로 바꿔 `nil`이면
-    // 자르지 않게 한다 — 사용자 추가 번역본(NKJV/NASB 등, 이 LIKE 경로를
-    // 쓴다)도 "더보기"로 50건을 넘는 전체 결과를 볼 수 있어야 하기 때문.
+    /// `content LIKE '%query%'` 키워드 검색(사용자 추가 번역본의 `btext`는 `contentColumn`으로 흡수).
+    /// 성경순 정렬 후 `limit`으로 자르며, `limit`이 nil이면 자르지 않는다.
+    /// `%`/`_`는 이스케이프하지 않아 입력하면 LIKE 패턴으로 해석된다.
     public func searchVerses(query: String, versionCode: String? = nil, limit: Int? = nil) throws -> [BibleVerse] {
         if hasVersionCodeColumn && versionCode == nil {
             throw BibleReferenceError.versionCodeRequired
@@ -281,13 +241,8 @@ public final class BibleReferenceStore {
         return results
     }
 
-    /// [2026-09-05 추가] `TranslationSearchIndex`가 사용자 추가 번역본에 대한
-    /// 보조 FTS5 인덱스를 빌드할 때 필요한, 이 파일에 들어있는 절 전체 조회.
-    /// `verses(bookId:chapter:versionCode:)`와 동일한 규칙(파일에 version_code
-    /// 컬럼이 있으면 필수)이되 WHERE 절이 없을 뿐이다 — 화면에 표시할 목적이
-    /// 아니라 인덱스 빌드 한 번(번역본 추가 후 첫 검색 시점)에만 쓰이므로
-    /// 정렬 기준은 중요하지 않지만, 다른 조회 메서드와의 일관성을 위해 book_id/
-    /// chapter/verse 오름차순으로 반환한다.
+    /// `TranslationSearchIndex`의 보조 FTS5 인덱스 빌드용 전체 절 조회. `version_code` 컬럼이
+    /// 있으면 versionCode가 필수다. book_id/chapter/verse 오름차순으로 반환한다.
     public func allVerses(versionCode: String? = nil) throws -> [BibleVerse] {
         if hasVersionCodeColumn && versionCode == nil {
             throw BibleReferenceError.versionCodeRequired
@@ -317,11 +272,8 @@ public final class BibleReferenceStore {
         return results
     }
 
-    /// 이 파일에 실제로 들어있는 `version_code` 목록. `version_code` 컬럼이 없는
-    /// 파일(번역본이 하나뿐인 파일 — 번들 기본 테이블, 그리고 사용자가 확인해 준
-    /// 실제 스키마상 사용자 추가 번역본도 여기 해당한다)에서는 빈 배열을 반환한다 —
-    /// 에러가 아니라 "이 파일은 애초에 여러 번역본을 구분할 필요가 없다"는 정상
-    /// 상태다.
+    /// 이 파일에 들어있는 `version_code` 목록. 컬럼이 없는 파일은 여러 번역본을 구분할 필요가
+    /// 없으므로 에러가 아니라 빈 배열을 반환한다.
     public func availableVersionCodes() throws -> [String] {
         guard hasVersionCodeColumn else { return [] }
         let sql = "SELECT DISTINCT version_code FROM \(tableName) ORDER BY version_code ASC"
@@ -342,11 +294,9 @@ public final class BibleReferenceStore {
         return codes
     }
 
-    /// `hasVersionCodeColumn`/`hasParagraphColumn` 여부에 따라 SELECT 절의 컬럼
-    /// 목록·순서를 맞춘다. 실제 컬럼 이름이 스키마마다 달라도(`uid`/`id`,
-    /// `book_id`/`book`, `content`/`btext`) `AS`로 항상 같은 이름(`uid`/`book_id`/
-    /// `content`)으로 별칭을 붙이므로, `makeVerse(from:hasVersionCode:hasParagraph:)`는
-    /// 이 순서만 알면 되고 실제 스키마 종류는 몰라도 된다.
+    /// 스키마별 컬럼 이름 차이(`uid`/`id`, `book_id`/`book`, `content`/`btext`)를 `AS`로 통일하고,
+    /// 존재하는 선택 컬럼(`version_code`/`paragraph`)에 맞춰 목록·순서를 만든다.
+    /// `makeVerse`는 이 순서에만 의존한다.
     private var selectColumns: String {
         var columns = ["\(uidColumn) AS uid"]
         if hasVersionCodeColumn { columns.append("version_code") }

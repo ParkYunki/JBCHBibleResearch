@@ -1,24 +1,19 @@
 import Foundation
 import SwiftData
 
-// 근거: bible-research-platform-screens.md 6.1(BookOutline)/6.2(MemoFolder)/6.5(UserMemo)/
-// 6.6(ChapterSummary) + review-addendum.md 1.4(BookOutline 충돌 처리) + 13장(새 메모 생성 흐름).
-//
-// 성경 좌표(book_id/chapter/verse)는 관계가 아니라 원시 Int로 저장한다 — schema.md 2장의
-// 결정("번역본 종속적인 verse row가 아니라 성경 좌표 자체를 참조 키로 사용")을 그대로 따른다.
-// BibleVerses는 번역본별 SQLite 파일이라 애초에 이 SwiftData/CloudKit 레이어 안에 존재하지
-// 않으므로 관계로 연결할 대상 자체가 없다.
+// 성경 좌표(book_id/chapter/verse)는 관계가 아니라 원시 Int로 저장한다 — 번역본 종속적인 verse row가
+// 아니라 성경 좌표 자체를 참조 키로 쓰는 설계다. BibleVerses는 번역본별 SQLite 파일이라 이 SwiftData/CloudKit
+// 레이어에 존재하지 않아 관계로 연결할 대상도 없다.
 
-/// 6.2 — 메모 분류용 폴더. 메모당 1개만(단일 소속), 중첩 없음(플랫한 목록).
+/// 메모 분류용 폴더. 메모당 1개만(단일 소속), 중첩 없음(플랫한 목록).
 @Model
 public final class MemoFolder {
     public var id: UUID = UUID()
     public var name: String = ""
     public var createdAt: Date = Date.now
 
-    // ⚠️ 2026-08-06 실기기 확인: to-many @Relationship도 타입 자체가 Optional이어야
-    // CloudKit이 받아들인다([T] = []로는 컴파일은 되지만 런타임에 CoreData 134060으로
-    // 실패함). Tags.swift 상단 주석 참고.
+    // ⚠️ to-many @Relationship도 타입 자체가 Optional이어야 CloudKit이 받아들인다
+    // ([T] = []는 컴파일되지만 런타임에 CoreData 134060으로 실패). Tags.swift 상단 주석 참고.
     @Relationship(deleteRule: .nullify, inverse: \UserMemo.folder)
     public var memos: [UserMemo]? = []
 
@@ -29,40 +24,27 @@ public final class MemoFolder {
     }
 }
 
-/// [2026-09-01 신설] 사용자 요청 — "성경조회 - 구절 클릭(탭) - 메모하기 -
-/// 개인묵상 등록 변경 ... 리치에디터에서 -> 플레인 텍스트로 (메모와 동일하되
-/// 글자수 2000자 제한)." `VersePhraseNote`의 `NoteTextLimit`(`VerseAnnotations.swift`
-/// 참고, 200자 미만)과 같은 목적의 상수 — 값만 2000으로 다르다.
+/// 개인묵상(플레인 텍스트) 글자수 제한. `NoteTextLimit`(`VerseAnnotations.swift`)과 같은 목적이고 값만 2000이다.
 public struct MemoTextLimit {
     public static let maxCharacters = 2000
 }
 
-/// 6.5 — 사용자 메모. `content_html` + `content_text`(검색·임베딩용) 이원화.
-/// [2026-09-01 변경] 사용자 요청으로 편집 방식이 리치 텍스트 → 순수 텍스트로
-/// 바뀌면서(`Views/Memo/MemoDetailView.swift` 참고), 이제 `content_html`도
-/// 항상 `content_text`와 같은 값(서식 없는 평문)을 담는다 — 예전처럼 실제
-/// RTF 서식이 들어 있지 않다. 필드 자체는 CloudKit 마이그레이션 없이(스키마
-/// 변경 없음) 그대로 재사용한다.
-/// ⚠️ 태그는 더 이상 배열 필드가 아니다 — `MemoTag` 조인을 통해서만 연결된다
-/// (6.5 "⚠️ 6.3과의 정합성 수정" 참고).
+/// 사용자 메모. `content_html` + `content_text`(검색·임베딩용) 이원화.
+/// 편집이 순수 텍스트라 `content_html`에도 항상 `content_text`와 같은 평문이 들어간다(RTF 서식 없음).
+/// ⚠️ 태그는 배열 필드가 아니라 `MemoTag` 조인을 통해서만 연결된다.
 @Model
 public final class UserMemo {
     public var id: UUID = UUID()
 
-    /// 📝 구현 결정: CloudKit은 non-optional 프로퍼티에 리터럴 기본값을 요구한다.
-    /// 여기서는 13.1의 "마지막 위치가 없을 때의 고정 기본값"인 창세기 1장(book_id=1,
-    /// chapter=1)을 모델 레벨 기본값으로도 사용한다. 단, 13.1에 명시된 "이번 세션 마지막
-    /// 위치" 우선 로직은 이 모델 레이어가 아니라 메모 생성 화면(앱 레이어)의 책임이다 —
-    /// 이 기본값은 어디까지나 CloudKit 스키마 제약을 만족시키기 위한 자리표시자다.
+    /// CloudKit은 non-optional 프로퍼티에 리터럴 기본값을 요구해 창세기 1장(book_id=1, chapter=1)을 기본값으로 둔다.
+    /// "이번 세션 마지막 위치" 우선 로직은 이 모델이 아니라 메모 생성 화면(앱 레이어)의 책임이며,
+    /// 이 값은 스키마 제약을 만족시키기 위한 자리표시자다.
     public var bookId: Int = 1
     public var chapter: Int = 1
     public var verse: Int?
 
-    // [2026-08-08 추가] 사용자 요청 — "성경구절의 특정 표현에 메모를 넣고 싶음".
-    // 전부 옵셔널이라 기존 절 단위 메모(현재 데이터)는 전혀 영향받지 않는다 —
-    // nil이면 지금처럼 "절 전체" 메모, 채워지면 "그 표현"에 대한 메모다. 앵커
-    // 규칙(오프셋 단위, 자가 치유용 스냅샷)은 `VerseAnnotations.swift` 상단 주석과
-    // 완전히 동일하다.
+    // 절 안 특정 표현에 대한 메모용 앵커(전부 옵셔널). nil이면 "절 전체" 메모, 채워지면 "그 표현" 메모다.
+    // 앵커 규칙(오프셋 단위, 자가 치유용 스냅샷)은 `VerseAnnotations.swift` 상단 주석과 동일하다.
     public var rangeStart: Int?
     public var rangeEnd: Int?
     public var annotationTranslationCode: String?
@@ -74,25 +56,15 @@ public final class UserMemo {
     public var createdAt: Date = Date.now
     public var updatedAt: Date = Date.now
 
-    /// [2026-08-12 신설] 사용자 논의 — "말씀 요약 화면을 벗어났을 때 트리거를
-    /// 실행할 수 있는가?" 재인덱싱(`BibleReferenceIndexingService.reindexMemo`)을
-    /// 매 자동저장(디바운스)마다가 아니라 화면을 정상적으로 벗어날 때(닫기 버튼/
-    /// 사이드바 이동) 한 번만 실행하기로 결정하면서 생긴 필드다. 본문이 바뀌어
-    /// 인덱스가 이제 최신이 아니게 된 시점에 `true`로 저장되고(콘텐츠 변경과
-    /// 같은 저장에 함께 실려 나간다), 정상 종료로 실제 재인덱싱이 끝나면 다시
-    /// `false`로 저장된다. 편집 중 앱이 강제 종료되면 이 값이 `true`인 채로
-    /// 남는다 — 그게 정확히 "이 메모는 인덱스가 최신이 아닐 수 있다"는 신호라,
-    /// 목록 화면(MemoRowView)이 이 값을 읽어 배지로 보여준다.
+    /// 본문이 바뀌어 재인덱싱(`BibleReferenceIndexingService.reindexMemo`)이 필요한 상태면 `true`.
+    /// 재인덱싱은 자동저장마다가 아니라 화면을 정상적으로 벗어날 때 한 번만 실행되고, 끝나면 `false`로 저장된다.
+    /// 편집 중 강제 종료되면 `true`로 남는데, 이는 "인덱스가 최신이 아닐 수 있다"는 신호라 목록(MemoRowView)이 배지로 보여준다.
     public var pendingIndexRefresh: Bool = false
 
-    /// [2026-08-18 추가] 사용자 요청 — "사이드바 메뉴 밑으로 클로드 앱처럼 기능을
-    /// 추가할 것. 고정됨." 다른 필드들과 같은 패턴(기본값 있는 저장 프로퍼티
-    /// 추가만으로 SwiftData가 가벼운 마이그레이션을 자동 처리 — `pendingIndexRefresh`
-    /// 가 이미 이 방식으로 추가된 전례) — 기존 데이터는 전부 `false`로 시작한다.
+    /// 고정(핀) 여부. 기본값이 있는 저장 프로퍼티 추가라 SwiftData 가벼운 마이그레이션으로 처리되며 기존 데이터는 `false`다.
     public var isPinned: Bool = false
 
-    // deleteRule은 MemoFolder.memos 쪽(inverse 선언부)에서만 지정한다 — 같은 관계
-    // 양쪽에 deleteRule을 중복 지정하지 않는다(단순함 우선, 6.2).
+    // deleteRule은 MemoFolder.memos 쪽(inverse 선언부)에서만 지정한다 — 같은 관계 양쪽에 중복 지정하지 않는다.
     public var folder: MemoFolder?
 
     public var memoTags: [MemoTag]? = []
@@ -132,16 +104,9 @@ public final class UserMemo {
     }
 }
 
-/// [2026-08-12 신설] 사용자 요청 — "왼쪽 사이드바 [말씀 요약] 기능, 성경 구절
-/// 선택시 확대보기 오른쪽 옆 [말씀 요약]버튼추가 ... 왼쪽 사이드바 [말씀 요약] -
-/// 개인 주석과 기능 동일." `UserMemo`와 거의 같은 모양(서식 있는 본문을
-/// `contentHtml`(실제로는 RTF, `UserMemo`와 같은 관례)/`contentText`(검색·미리보기용)
-/// 이원화로 저장)이지만 의도적으로 별개 모델이다 — 성경 조회 화면에서 구절을
-/// 고르고 [말씀 요약]을 누를 때마다("매번 새 글 생성" 방식, 사용자 확인) 그
-/// 절에 대한 새 요약 레코드가 계속 쌓이는 저널/묵상노트 성격이라, "절 하나당
-/// 하나"로 덮어쓰는 `UserMemo`(개인 묵상)와 근본적으로 다른 데이터 모양이다.
-/// 폴더/태그는 이번 요청 범위에 없어 두지 않았다(필요해지면 `UserMemo`의
-/// `MemoFolder`/`MemoTag` 패턴을 그대로 가져오면 된다).
+/// 말씀 요약 — 구절을 골라 [말씀 요약]을 누를 때마다 새 레코드가 쌓이는 저널/묵상노트 성격이다.
+/// 절당 하나를 덮어쓰는 `UserMemo`(개인 묵상)와 데이터 모양이 달라 별개 모델이다.
+/// 본문은 `contentHtml`(실제로는 RTF, `UserMemo`와 같은 관례)/`contentText`(검색·미리보기용) 이원화. 폴더는 두지 않는다.
 @Model
 public final class VerseSummary {
     public var id: UUID = UUID()
@@ -155,17 +120,14 @@ public final class VerseSummary {
     public var createdAt: Date = Date.now
     public var updatedAt: Date = Date.now
 
-    /// [2026-08-12 신설] `UserMemo.pendingIndexRefresh`와 완전히 같은 이유 —
-    /// 그 프로퍼티 상단 주석 참고.
+    /// `UserMemo.pendingIndexRefresh`와 같은 용도.
     public var pendingIndexRefresh: Bool = false
 
-    /// [2026-08-14 신설] 사용자 요청 — "말씀 요약도 개인 묵상처럼 태그를 입력할
-    /// 수 있게." `UserMemo.memoTags`와 같은 이유로 관계 자체엔 `@Relationship`을
-    /// 붙이지 않는다(deleteRule은 `Tag.summaryTags`/`SummaryTag.summary` 쪽에서만
-    /// 지정 — `UserContent.swift`의 `UserMemo.folder` 옆 기존 주석과 같은 원칙).
+    /// 관계에 `@Relationship`을 붙이지 않는다 — deleteRule은 `Tag.summaryTags`/`SummaryTag.summary` 쪽에서만 지정한다
+    /// (`UserMemo.folder`와 같은 원칙).
     public var summaryTags: [SummaryTag]? = []
 
-    /// [2026-08-18 추가] `UserMemo.isPinned`와 같은 이유·같은 패턴.
+    /// `UserMemo.isPinned`와 같은 용도.
     public var isPinned: Bool = false
 
     public init(
@@ -193,10 +155,9 @@ public final class VerseSummary {
     }
 }
 
-/// 6.1 — 책 단위 개요. 항상 순수 사용자 입력(AI 없음, source 필드를 두지 않는다).
-/// ⚠️ 원본 6.1은 `book_id UNIQUE`였으나 addendum 1.1/1.4에 따라 unique 제약을 제거하고,
-/// 대신 `conflictingOutlineId`로 사용자 선택형 충돌 해소를 적용한다(Tag처럼 자동 병합하지
-/// 않는다 — BookOutline은 자유 텍스트라 두 기기의 내용이 다를 수 있기 때문, addendum 1.4).
+/// 책 단위 개요. 항상 순수 사용자 입력이다(AI 없음, source 필드 없음).
+/// ⚠️ unique 제약이 없다 — 대신 `conflictingOutlineId`로 사용자 선택형 충돌 해소를 쓴다.
+/// BookOutline은 자유 텍스트라 두 기기의 내용이 다를 수 있어 Tag처럼 자동 병합하지 않는다.
 @Model
 public final class BookOutline {
     public var id: UUID = UUID()
@@ -206,7 +167,7 @@ public final class BookOutline {
     public var createdAt: Date = Date.now
     public var updatedAt: Date = Date.now
 
-    /// non-nil = 다른 기기와 내용 충돌. S8에 경고 배너 표시(addendum 1.2/1.4).
+    /// non-nil = 다른 기기와 내용 충돌. 경고 배너를 표시한다.
     public var conflictingOutlineId: UUID?
 
     public init(
@@ -226,10 +187,8 @@ public final class BookOutline {
     }
 }
 
-/// 6.6 — 장 단위 개요. 원본 스키마엔 `source[user|ai]`가 있었으나, "AI가 제안해도 최종
-/// 확정은 순수 사용자 입력"이라는 확정 결정에 따라 제거했다(6.6). `content_md` →
-/// `content_html`+`content_text`로 BookOutline/UserMemo와 통일(서식 편집기 컴포넌트
-/// 공유를 위해, 6.8/6.9).
+/// 장 단위 개요. AI가 제안해도 최종 확정은 순수 사용자 입력이라 `source` 필드는 없다.
+/// BookOutline/UserMemo와 같은 `content_html`+`content_text` 구조(서식 편집기 컴포넌트 공유).
 @Model
 public final class ChapterSummary {
     public var id: UUID = UUID()
@@ -259,9 +218,7 @@ public final class ChapterSummary {
     }
 }
 
-/// 원본 schema.md 5장 — 그대로 유지, 6장에서 변경 대상 아님.
-/// ⚠️ `chapterRefs`/`linkedMemoIds`는 원본 스키마가 배열 필드로 정의했던 그대로
-/// 유지했다(관계로 바꾸는 근거 없는 리팩토링을 하지 않는다는 프로젝트 원칙).
+/// ⚠️ `chapterRefs`/`linkedMemoIds`는 관계가 아니라 배열 필드로 유지한다(원본 스키마 그대로).
 @Model
 public final class LectureNote {
     public var id: UUID = UUID()
@@ -291,7 +248,6 @@ public final class LectureNote {
     }
 }
 
-/// 원본 schema.md 5장 — 그대로 유지.
 @Model
 public final class Comparison {
     public var id: UUID = UUID()
@@ -318,5 +274,5 @@ public final class Comparison {
     }
 }
 
-// `LectureNote.chapterRefs`가 쓰는 `BibleChapterRef`는 Models/BibleCoordinates.swift에
-// 정의되어 있다(DocumentAnchor/TimelineEvent 등 다른 모델과 공유하기 위해 별도 파일로 분리).
+// `LectureNote.chapterRefs`가 쓰는 `BibleChapterRef`는 Models/BibleCoordinates.swift에 정의되어 있다
+// (다른 모델과 공유하기 위해 별도 파일로 분리).

@@ -2,25 +2,14 @@
 //  TagRelationsView.swift
 //  JBCHBibleResearch
 //
-//  S10(태그 관계 시각화, 별도 창). screens.md "S10. 태그 관계 시각화" 절 —
-//  force-directed 그래프, 점선(자동 추론)/실선(수동 연결) 엣지 구분, 태그를 다른
-//  태그 위로 드래그하면 수동 연결 생성.
+//  S10(태그 관계 시각화, 별도 창). force-directed 그래프로 점선(자동 추론)/
+//  실선(수동 연결) 엣지를 구분하고, 태그를 다른 태그 위로 드래그하면 수동 연결을
+//  만든다. 고정 캔버스라 경합할 제스처가 없어 롱프레스 없이 바로 드래그를 받는다.
 //
-//  ⚠️ [제스처 단순화] 원문은 "iOS는 롱프레스+드래그"라고 적었지만, 이 화면엔 드래그와
-//  경합할 다른 제스처(스크롤 등)가 없어(고정 캔버스) 롱프레스 없이 바로 드래그를
-//  받는다 — 더 단순하고 실기기에서 체감 차이도 크지 않을 것으로 판단했다.
-//
-//  [2026-08-07 추가] 실선(수동 엣지) 탭 → 삭제 UI. `TagGraphViewModel.deleteManualEdge`는
-//  이미 있었지만 진입점이 없었다 — Canvas로 그린 선은 SwiftUI 히트테스트 대상이
-//  아니라서, 탭 위치와 각 수동 엣지 선분 사이의 최단 거리를 직접 계산해(`distance
-//  (from:toSegment:)`) 임계값 안에 들어오는 가장 가까운 엣지를 찾는 방식으로
-//  구현했다. 자동 추론 엣지(점선)는 삭제 대상이 아니라 히트테스트에서 아예
-//  제외했다 — 실수로 자동 엣지를 "삭제"하려는 시도 자체가 성립하지 않게 만들기
-//  위해서다. 오탭으로 관계가 바로 지워지는 걸 막기 위해 탭 즉시 삭제하지 않고
-//  확인 알림(`.alert`)을 한 번 더 거친다 — 구현 당시엔 이 확인 단계가 원문에
-//  명시된 적이 없다고 추측으로 적어 뒀는데, 이후 원본 문서(screens.md 10.2
-//  "파괴적 행동은... 확인 다이얼로그 동반")를 다시 대조해 보니 실제로 근거가
-//  있는 결정이었다 — 추측이 아니라 스펙 준수였다.
+//  Canvas로 그린 선은 SwiftUI 히트테스트 대상이 아니므로, 실선(수동 엣지) 탭은
+//  탭 위치와 각 선분 사이의 최단 거리를 직접 계산해 처리한다. 자동 추론 엣지는
+//  삭제 대상이 아니라 히트테스트에서 제외하며, 오탭 방지를 위해 삭제 전 확인
+//  알림을 거친다.
 //
 
 import SwiftUI
@@ -31,9 +20,7 @@ struct TagRelationsView: View {
     @Environment(\.modelContext) private var modelContext
     @State private var viewModel: TagGraphViewModel?
     @State private var drilldownTag: Tag?
-    /// 실선(수동 엣지) 탭으로 삭제를 확인받는 중인 엣지 — nil이 아니면 확인 알림이
-    /// 떠 있다는 뜻이다. 탭 즉시 삭제하지 않고 한 번 더 확인하는 이유는 위 파일
-    /// 상단 [2026-08-07] 주석 참고.
+    /// 삭제 확인을 받는 중인 수동 엣지 — nil이 아니면 확인 알림이 떠 있다.
     @State private var edgePendingDeletion: TagEdge?
 
     var body: some View {
@@ -96,9 +83,7 @@ struct TagRelationsView: View {
         }
     }
 
-    /// 삭제 확인 알림에 보여줄 문구 — 연결된 두 태그 이름을 붙여 "A ↔ B 연결을
-    /// 삭제할까요?" 형태로 만든다. 노드를 못 찾는 경우(이론상 없어야 하지만
-    /// 방어적으로) 태그 이름 없이 일반 문구로 대체한다.
+    /// 삭제 확인 알림 문구. 노드를 못 찾으면 태그 이름 없는 일반 문구로 대체한다.
     private var edgeDeletionMessage: String {
         guard let edge = edgePendingDeletion, let viewModel else {
             return "이 연결을 삭제할까요?"
@@ -110,10 +95,8 @@ struct TagRelationsView: View {
         return "\"\(nameA)\" ↔ \"\(nameB)\" 연결을 삭제할까요? 태그 자체는 지워지지 않습니다."
     }
 
-    /// 탭 위치와 가장 가까운 수동 엣지(실선)를 찾아 삭제 확인을 띄운다. 자동
-    /// 추론 엣지(점선)는 애초에 히트테스트 대상에서 뺀다 — 삭제할 수 없는 대상을
-    /// 탭해도 아무 반응이 없는 게 "지워지지 않는 무언가를 지우려는 UI"보다 낫다고
-    /// 판단했다.
+    /// 탭 위치와 가장 가까운 수동 엣지(실선)를 찾아 삭제 확인을 띄운다.
+    /// 자동 추론 엣지(점선)는 히트테스트에서 제외한다.
     private func handleEdgeTap(at point: CGPoint, viewModel: TagGraphViewModel) {
         let positions = Dictionary(uniqueKeysWithValues: viewModel.nodes.map { ($0.id, $0.position) })
         let hitThreshold: CGFloat = 10
@@ -132,9 +115,8 @@ struct TagRelationsView: View {
         }
     }
 
-    /// 점 `point`와 선분 `a`-`b` 사이의 최단 거리. 선분을 매개변수 t(0...1)로 표현해
-    /// 투영점을 구하고(t를 0...1로 클램프해 "선분 밖" 연장선을 배제), 그 투영점까지의
-    /// 거리를 반환하는 표준 방식이다.
+    /// 점 `point`와 선분 `a`-`b` 사이의 최단 거리. 투영 매개변수 t를 0...1로
+    /// 클램프해 선분 밖 연장선은 배제한다.
     private static func distance(from point: CGPoint, toSegment a: CGPoint, _ b: CGPoint) -> CGFloat {
         let dx = b.x - a.x
         let dy = b.y - a.y
@@ -148,9 +130,8 @@ struct TagRelationsView: View {
         return hypot(point.x - projectedX, point.y - projectedY)
     }
 
-    /// TimelineView가 매 프레임 다시 그려질 때 `viewModel.tick(deltaTime:)`을 호출해
-    /// 물리 시뮬레이션을 진행시킨다. 화면에 아무것도 그리지 않는 투명 뷰라
-    /// `.background`에 숨겨 둔다.
+    /// TimelineView가 매 프레임 `viewModel.tick(deltaTime:)`을 호출해 물리
+    /// 시뮬레이션을 진행시킨다. 아무것도 그리지 않는 투명 뷰라 `.background`에 둔다.
     private var simulationDriver: some View {
         TimelineView(.animation) { timeline in
             Color.clear

@@ -2,16 +2,10 @@
 //  PendingMemoImportRequest.swift
 //  JBCHBibleResearch
 //
-//  [2026-09-13 신설] 사용자 요청 — "받은 개인묵상 파일을 열면 이 앱의
-//  개인묵상으로 들어갈 수 있는가?" `.onOpenURL`(앱 어디서든, 아직 특정
-//  화면의 `ModelContext`가 보장되지 않는 시점에 호출될 수 있음)이 받은
-//  파일을 이 신호 전용 싱글턴에 담아 두면, 최상단 화면(`ContentView`)이
-//  이를 관찰해 미리보기 시트를 띄운다 — `AppOnboardingReplayRequest`
-//  (`Views/Onboarding/AppOnboardingOverlay.swift`)와 같은 "신호 전용
-//  싱글턴 → 최상단 뷰가 감지해 시트를 띄움" 구조를 그대로 따랐다. 다만
-//  그쪽은 값 없는 카운터(`token`)만 올리면 됐지만, 여기는 실제로 받은
-//  내용(`SharedMemoPayload`)을 함께 넘겨야 해서 페이로드 자체를 옵셔널로
-//  들고 있는다.
+//  `.onOpenURL`로 받은 개인묵상 파일(`SharedMemoPayload`)을 담아 두는 신호 전용 싱글턴. `.onOpenURL`은 특정
+//  화면의 `ModelContext`가 보장되지 않는 시점에 호출될 수 있어, 최상단 화면(`ContentView`)이 이를 관찰해
+//  미리보기 시트를 띄운다. `AppOnboardingReplayRequest`(`Views/Onboarding/AppOnboardingOverlay.swift`)와
+//  같은 구조지만, 값 없는 카운터가 아니라 받은 내용을 함께 넘겨야 해서 페이로드를 옵셔널로 들고 있는다.
 //
 
 import Foundation
@@ -37,12 +31,9 @@ final class PendingMemoImportRequest {
     /// 성공하면 `pending`을, 실패하면 `lastImportError`를 채운다 — 실패
     /// 사유를 그냥 삼키지 않는다.
     func handleOpenedFile(at url: URL) {
-        // [2026-09-13 신설] AirDrop/"다음으로 열기"로 받은 파일은 이미 이
-        // 앱의 샌드박스(Documents/Inbox 등) 안으로 복사되어 들어오므로
-        // 일반 파일 읽기로 충분하지만, 혹시 다른 경로(예: 보안 스코프
-        // URL로 직접 넘어오는 경우)로 호출되더라도 안전하도록 방어적으로
-        // 시작/종료를 감싼다 — 스코프가 필요 없는 URL에 호출해도 그냥
-        // `false`를 돌려줄 뿐 부작용이 없다(Apple 문서).
+        // AirDrop/"다음으로 열기"로 받은 파일은 이미 앱 샌드박스 안으로 복사돼 오지만, 보안 스코프 URL로
+        // 직접 넘어오는 경우에도 안전하도록 시작/종료를 감싼다 — 스코프가 필요 없는 URL이면 `false`를
+        // 돌려줄 뿐 부작용이 없다(Apple 문서).
         let didStartAccessing = url.startAccessingSecurityScopedResource()
         defer {
             if didStartAccessing {
@@ -72,15 +63,10 @@ final class PendingMemoImportRequest {
         lastImportError = nil
     }
 
-    /// 실제로 받는 기기의 개인 묵상 목록에 추가한다 — `MemoDetailView.
-    /// addTag(_:)`/`commitTagInput()`(Views/Memo/MemoDetailView.swift)가
-    /// 이미 쓰는 것과 정확히 같은 "이름으로 태그 찾기/만들기"
-    /// (`TagDeduplication.findOrCreateTag`) 경로를 그대로 재사용해, 받는
-    /// 기기에 같은 이름의 태그가 이미 있으면 그 태그에 합류하고 없으면
-    /// 새로 만든다.
+    /// 실제로 받는 기기의 개인 묵상 목록에 추가한다. 태그는 `MemoDetailView`가 쓰는
+    /// `TagDeduplication.findOrCreateTag` 경로를 재사용해, 같은 이름의 태그가 있으면 합류하고 없으면 새로 만든다.
     static func importIntoLibrary(_ payload: SharedMemoPayload, context: ModelContext) throws {
-        // 사용자 결정 — "폴더는 폴더 없음으로 받되" — `folder`를 명시적으로
-        // 넘기지 않아 `UserMemo.init`의 기본값 `nil`을 그대로 쓴다.
+        // 폴더는 "폴더 없음"으로 받는다 — `folder`를 넘기지 않아 `UserMemo.init`의 기본값 `nil`을 쓴다.
         let memo = UserMemo(
             bookId: payload.bookId,
             chapter: payload.chapter,
@@ -94,7 +80,7 @@ final class PendingMemoImportRequest {
         )
         context.insert(memo)
 
-        // 사용자 결정 — "태그 정보는 같이 보내기".
+        // 태그 정보도 함께 받는다.
         for tagName in payload.tagNames {
             let tag = try TagDeduplication.findOrCreateTag(named: tagName, context: context)
             let join = MemoTag(memo: memo, tag: tag)

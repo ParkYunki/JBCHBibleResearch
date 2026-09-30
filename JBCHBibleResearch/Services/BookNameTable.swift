@@ -2,35 +2,16 @@
 //  BookNameTable.swift
 //  JBCHBibleResearch
 //
-//  2026-08-06: 사용자가 이전에 만들어 쓰던 앱(BibleSeminarPresentationForIOS)의
-//  TranslationInfo.swift(원래는 macOS BibleAutofill 프로젝트의 BibleBookInfo.swift /
-//  BibleDBManager.swift를 이식한 것)에서 `BookNameTable`과 내장 9개 언어 이름표를
-//  거의 그대로 가져왔다. 배경: 사용자 추가 번역본(user-added translation) SQLite
-//  파일은 대부분 책 이름이 안 들어있고 book_id(정수)만 있어서, 어느 언어로 책 이름을
-//  보여줄지 알 수 없다 — 이 이름표가 그 문제를 해결한다.
+//  내장 9개 언어 책 이름표(`BookNameTable`). 사용자 추가 번역본 SQLite는 대부분 책 이름 없이
+//  book_id(정수)만 있어 어느 언어로 이름을 보여줄지 알 수 없는데, 이 이름표가 그 문제를
+//  해결한다. `TranslationRegistry.bookNameTableID`가 사용할 이름표를 가리킨다.
 //
-//  [원본 대비 조정한 부분]
-//   - 원본은 책 이름을 book_id가 아니라 "한글 이름 문자열"로 관리하는 다른 스키마
-//     (macOS BibleAutofill) 대비 macOS/iOS 차이를 설명하는 주석이 있었는데, 이
-//     프로젝트는 애초에 BooksProvider/BibleReferenceStore가 book_id(1~66,
-//     books.json의 bookId와 매칭)로만 다루므로 그 비교 설명은 걷어냈다.
-//   - `TranslationInfo`(번역본 값 타입)는 이 프로젝트엔 이미 SwiftData
-//     `TranslationRegistry`(BibleResearchModels)가 그 역할을 하고 있어 새로 만들지
-//     않았다. 대신 `TranslationRegistry.bookNameTableID: String?` 필드를 추가해
-//     원본의 `TranslationInfo.bookNameTableID`와 같은 역할을 하게 했다
-//     (TranslationRegistry.swift 참고).
-//   - `nonisolated` 표시는 원본이 겪은 실제 버그(프로젝트의 기본 액터 격리 설정
-//     때문에 static 멤버가 의도치 않게 MainActor에 격리돼 컴파일 에러가 났던 것)에
-//     대한 방어이므로 그대로 유지했다 — 이 프로젝트가 같은 빌드 설정을 쓰는지
-//     확인하지 못했지만, 그대로 둬도 해가 없고(순수 Codable 값 타입이라 애초에
-//     액터 격리가 필요 없음) 원본이 이미 실전에서 검증한 해법이라 유지하는 쪽을
-//     택했다.
+//  `nonisolated`는 프로젝트 기본 액터 격리 설정 때문에 static 멤버가 의도치 않게 MainActor로
+//  격리되는 것을 막기 위한 것이다(순수 Codable 값 타입이라 액터 격리가 필요 없음).
 //
-//  ⚠️ [출처 신뢰도, 원본 주석 그대로 승계] 이 데이터는 macOS BibleAutofill
-//  프로젝트에서 이미 검증되어 쓰이던 값을 옮긴 것이다 — 새로 추측해서 채운 값이
-//  아니다. 영어=확신 높음(전 세계 공통 표준 표기) / 태국어·몽골어=단일 출처 확인
-//  (각각 bible.eu, mongol.bible) / 스페인어·독일어·이탈리아어·일본어·타갈로그=
-//  fullNames+shortNames 확보 / 네팔어=fullNames만 확보, shortNames는 비어 있음.
+//  ⚠️ 출처 신뢰도: 영어=전 세계 공통 표준 표기 / 태국어·몽골어=단일 출처 확인(각각 bible.eu,
+//  mongol.bible) / 스페인어·독일어·이탈리아어·일본어·타갈로그=fullNames+shortNames 확보 /
+//  네팔어=fullNames만 확보, shortNames는 비어 있음.
 //
 
 import Foundation
@@ -115,8 +96,7 @@ nonisolated struct BookNameTable: Codable, Identifiable, Hashable, Sendable {
                 ],
                 shortNames: Array(repeating: "", count: 66)
             ),
-            // 아래 두 언어(네팔어, 필리핀어/타갈로그)와 네 언어(스페인어/독일어/이탈리아어/일본어)는
-            // 신뢰할 만한 출처로 66권 전체를 검증한 원본 데이터를 그대로 옮긴 것이다.
+            // 네팔어·타갈로그·스페인어·독일어·이탈리아어·일본어는 66권 전체를 검증한 데이터다.
             BookNameTable(
                 id: BuiltInBookNameTable.nepali, displayName: "네팔어", isBuiltIn: true,
                 fullNames: [
@@ -234,20 +214,17 @@ nonisolated struct BookNameTable: Codable, Identifiable, Hashable, Sendable {
 
 // MARK: - 번역본 Import 에러 (UI 표시용)
 //
-// 원본(TranslationImportError)을 그대로 이식. S12(번역본 관리/가져오기)에서 실제로
-// 쓰기 전까지는 아직 어디서도 던지지 않는 "대기 중" 타입이다 — 지금 당장 쓰이진
-// 않지만, 나중에 새로 설계하지 않도록 미리 옮겨 둔다.
+// 번역본 가져오기 에러. S12(번역본 관리/가져오기)에서 실제로 쓰기 전까지는 던지는 곳이 없다.
 
 enum TranslationImportError: LocalizedError, Sendable {
     case fileNotReadable(String)
     case invalidSchema(String)
     case bookNumberingMismatch(book: Int, expectedChapters: Int, foundChapters: Int)
     case migrationFailed(String)
-    /// 2026-08-07 추가(S12 실제 구현 시점) — 원본에는 없던 케이스. `TranslationRegistry.code`가
-    /// CloudKit `@Attribute(.unique)`를 못 쓰는 것과 같은 이유(README "CloudKit 제약 적용" 절)로
-    /// DB 레벨 중복 방지가 불가능해, import 서비스가 저장 전에 직접 검사하고 이 에러로 알린다.
+    /// `TranslationRegistry.code`는 CloudKit `@Attribute(.unique)`를 못 써서 DB 레벨 중복 방지가
+    /// 불가능하다. import 서비스가 저장 전에 직접 검사해 이 에러로 알린다.
     case duplicateCode(String)
-    /// 2026-08-07 추가 — 표시 이름/코드를 비워 둔 채 가져오기를 누른 경우.
+    /// 표시 이름/코드를 비워 둔 채 가져오기를 누른 경우.
     case missingRequiredField(String)
 
     var errorDescription: String? {

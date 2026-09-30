@@ -1,13 +1,10 @@
 import Foundation
 
-// [2026-08-09 신설] 사용자 요청 — "각 절을 선택했을 때 확대보기 버튼 옆에 '원문 정보'라는
-// 버튼이 있어 히브리어 그리스어 원문에 대한 정보를 넣고자 함." 데이터 출처는
-// STEPBible-Data(TAHOT/TAGNT, CC BY 4.0) — Resources/OriginalText.sqlite로 변환해
-// 번들에 포함한다(정확한 변환 스크립트와 컬럼 매핑 근거는 앱 README 참고).
+// 원문 정보(히브리어/그리스어) 모델. 데이터 출처는 STEPBible-Data(TAHOT/TAGNT, CC BY 4.0)이며
+// Resources/OriginalText.sqlite로 변환해 번들에 포함한다.
 //
-// BibleVerse/Book과 같은 이유로 SwiftData @Model이 아니라 순수 값 타입 + 별도
-// 읽기 전용 SQLite 접근(OriginalTextStore)으로 구현한다 — 정적 참조 데이터라
-// CloudKit 동기화 대상이 아니다.
+// BibleVerse/Book과 같이 정적 참조 데이터(CloudKit 동기화 대상 아님)라 SwiftData @Model이 아니라
+// 순수 값 타입 + 읽기 전용 SQLite 접근(OriginalTextStore)으로 구현한다.
 
 /// 절 하나에 속한 원어 단어 하나. `wordOrder`로 원문 어순대로 정렬된다.
 public struct OriginalWordInfo: Sendable, Hashable, Identifiable {
@@ -49,11 +46,8 @@ public struct OriginalWordInfo: Sendable, Hashable, Identifiable {
     }
 }
 
-/// [2026-09-16 신설] 사용자 요청 — "OriginalText.sqlite 에 LiteralTranslation
-/// 테이블을 추가하였음. 원어 직역 표현임. 이 데이터를 성경 - 구절 선택 - 하단
-/// 원문 정보 에 추가하고자 함." 절 하나에 대한 "직역(원어 그대로의 표현)"과
-/// "번역과의 차이" 설명. `original_words`와 마찬가지로 book/chapter/verse에만
-/// 종속되는 정적 참조 데이터라 SwiftData가 아니라 OriginalTextStore로 읽는다.
+/// 절 하나에 대한 "직역(원어 그대로의 표현)"과 "번역과의 차이" 설명. `original_words`와 같이
+/// book/chapter/verse에만 종속되는 정적 참조 데이터라 OriginalTextStore로 읽는다.
 public struct LiteralTranslationInfo: Sendable, Hashable, Identifiable {
     public var id: String { "\(bookId).\(chapter).\(verse)" }
 

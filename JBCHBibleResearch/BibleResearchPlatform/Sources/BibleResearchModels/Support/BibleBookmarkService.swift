@@ -1,19 +1,11 @@
 import Foundation
 import SwiftData
 
-// [2026-08-28 신설] 사용자 요청 — "성경조회 기능의 책갈피 기능 추가." "설정/해제
-// 토글"과 "정확히 일치하는 책갈피 찾기" 정책을 모두 이 서비스가 책임진다 —
-// `BibleBookmark` 모델 자체엔 정책 로직을 넣지 않는다(`BibleReadingHistoryService.swift`와
-// 동일한 이 프로젝트의 관례).
-//
-// [2026-09-04 변경] 사용자 요청 — "북마크를 번역본 별로 저장." book/chapter/verse
-// 조합만으로 찾던 것을 `translationCode`까지 정확히 일치해야 같은 책갈피로 본다 —
-// `BibleBookmark.swift` 상단 주석 참고. 대상 번역본 코드 자체를 결정하는 규칙(맨
-// 왼쪽 컬럼/현재 화면 컬럼)은 이 서비스가 아니라 호출부(`BibleReadingViewModel`)의
-// 책임이다.
-//
-// ⚠️ 이 파일은 Xcode에서 컴파일·테스트되지 않았습니다(다른 Support 파일들과 동일한
-// 제약 승계).
+// 책갈피 "설정/해제 토글"과 "정확히 일치하는 책갈피 찾기" 정책을 이 서비스가 책임진다 —
+// `BibleBookmark` 모델 자체엔 정책 로직을 넣지 않는다(`BibleReadingHistoryService.swift`와 같은 관례).
+// 책갈피는 book/chapter/verse/`translationCode`가 모두 일치해야 같은 것으로 본다
+// (`BibleBookmark.swift` 상단 주석 참고). 대상 번역본 코드를 정하는 규칙은 호출부
+// (`BibleReadingViewModel`)의 책임이다.
 public enum BibleBookmarkService {
     /// bookId/chapter/verse/translationCode가 정확히 일치하는 책갈피가 있으면
     /// 그것을 돌려준다(없으면 nil). `verse`가 nil인 책갈피(장 전체)와 값이 있는
@@ -44,12 +36,9 @@ public enum BibleBookmarkService {
         return true
     }
 
-    /// 책갈피 전체 목록(모든 번역본 통틀어) — 최신 설정순. 조회 이력과 달리
-    /// 개수 상한은 없다(사용자가 직접 설정/해제하는 항목이라 자동으로 지울
-    /// 이유가 없다 — `BibleBookmark.swift` 상단 주석 참고). 특정 번역본으로
-    /// 좁히지 않는 이유는 호출부(`BibleReadingViewModel.fetchBookmarks`,
-    /// `rebuildBookmarkedVersesIndex`) 상단 주석 참고 — 각자 필요한 기준으로
-    /// 이 결과를 다시 거른다.
+    /// 책갈피 전체 목록(모든 번역본 통틀어) — 최신 설정순. 사용자가 직접 설정/해제하는 항목이라
+    /// 조회 이력과 달리 개수 상한이 없다. 번역본으로 좁히지 않으므로 호출부가 필요한 기준으로
+    /// 다시 거른다.
     public static func fetchAll(context: ModelContext) -> [BibleBookmark] {
         (try? context.fetch(
             FetchDescriptor<BibleBookmark>(sortBy: [SortDescriptor(\.createdAt, order: .reverse)])

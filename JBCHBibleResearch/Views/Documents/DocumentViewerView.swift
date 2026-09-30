@@ -2,56 +2,12 @@
 //  DocumentViewerView.swift
 //  JBCHBibleResearch
 //
-//  S6(연구문서 원문 뷰어). screens.md 3장 S5/S6/S7 절 — "원본 hwp 뷰어(S6)는
-//  WKWebView + rhwp-studio 새 창/시트로" + "⚠️ S6에 '추출 텍스트' 패널 필요".
-//
-//  [2026-08-15 교체] 사용자 요청 — "hwp관련 뷰어를 구현하고자 함." 처음엔
-//  rhwp(https://github.com/edwardkim/rhwp, Rust+WebAssembly, MIT)를
-//  WKWebView에 번들해 페이지별 SVG를 그리는 방식으로 구현했다.
-//
-//  [2026-08-16 전면 교체] 그런데 실기기 검증 내내(HWPWebViewSupport.swift·
-//  HWPTextExtractor.swift 옛 버전 상단 주석에 그 과정이 남아 있었다) WKWebView
-//  WebContent 프로세스가 App Sandbox 안에서 계속 실패했다 — network.client
-//  entitlement 누락, JS 모듈/WASM fetch 실패, off-screen WKWebView가 RunningBoard
-//  foreground assertion을 못 얻는 문제 등. 디버그 채널까지 추가해도 근본 원인이
-//  샌드박스/프로세스 provisioning 레벨이라 코드로 계속 우회하기 어려웠다.
-//
-//  사용자가 대안으로 제시한 hwp-swift(https://github.com/sboh1214/hwp-swift,
-//  LGPL-2.1)로 전면 교체했다 — 순수 네이티브 Swift 패키지(WKWebView/WASM 전혀
-//  없음)라 위 문제 전체가 구조적으로 사라진다. `HwpKit`이 제공하는
-//  `HwpDocumentLoader`(비동기 로더) + `HwpDocumentView`(SwiftUI 렌더러) +
-//  `HwpSearchController`/`HwpSearchBar`(문서 내 검색)를 그대로 쓴다.
-//
-//  [2026-08-16 PDF 변환 탭 추가] 위에서 "다음 라운드에 추가"라던 PDF 변환을
-//  이번에 붙였다 — 처음엔 `HwpKit.HwpPDFExporter`를 쓸 생각이었는데, 실제
-//  조사해 보니 그 타입의 소스 파일을 찾을 수 없었다(hwp-swift의
-//  `HwpKitCore/AGENTS.md`엔 "공개 표면은 HwpKit.HwpPDFExporter"라고 적혀
-//  있지만, GitHub API로 여러 경로를 시도해도 실제 파일이 안 잡혔다 — 이 저장소
-//  API 조회가 이번 세션 내내 종종 실패했던 것과 같은 증상). 대신 소스로 직접
-//  확인된 `HwpKitNative.HwpPDFRenderer`(순수 CoreGraphics PDF 렌더러)를
-//  곧바로 썼었다.
-//
-//  [2026-08-16 PDF 탭 재구현] 그런데 사용자가 이 첫 버전을 거부했다 — "현재
-//  pdf는 네이티브 뷰어와 동일하므로 존재 이유가 없음"(`HwpKitNative.
-//  HwpPDFRenderer`가 `HWPViewerPane`과 똑같은 `HwpDocument` paint list를
-//  그대로 PDF로 뽑는 것뿐이라, 두 탭의 렌더링 결과가 사실상 같았다). 대신
-//  처음에 검토만 하고 채택하지 않았던 postmelee/alhangeul-macos 방식(rhwp의
-//  `renderPageSvg` → 오프스크린 WKWebView → `WKWebView.createPDF`)을 "WKWebView
-//  취약점 범주가 그대로 재발할 수 있는 접근이라 해도 한번 구현테스트를 확인할
-//  수 있도록" 해 달라는 명시적 요청을 받아 `RhwpPDFExportService`
-//  (Services/Documents/RhwpPDFExportService.swift)로 새로 구현했다. 이제
-//  네이티브 탭(hwp-swift paint list)과 렌더링 파이프라인이 완전히 다른
-//  결과물이라 별도 탭으로서 존재 이유가 생긴다. 자세한 경위는
-//  `HWPToPDFPane`(DocumentViewerView.swift 하단) 상단 주석과
-//  `RhwpPDFExportService.swift` 상단 주석 참고. `HwpKitNative`는 더 이상 쓰지
-//  않는다.
-//
-//  Xcode에서 File > Add Package Dependencies로
-//  https://github.com/sboh1214/hwp-swift.git (branch: main)를 추가하고
-//  `HwpKit` 프로덕트를 이 타깃에 링크해야 빌드된다(SPM 원격 의존성은 Xcode
-//  GUI에서 추가하기로 결정 — project.pbxproj 직접 편집보다 안전).
-//
-//  PDF는 여전히 PDFKit이 이미 검증된 Apple 프레임워크라 그대로 구현했다(신뢰도 높음).
+//  S6(연구문서 원문 뷰어) — 연구문서 원본을 형식별로 보여주는 화면.
+//  - hwp/hwpx: hwp-swift(네이티브) / rhwp 웹 뷰어 / PDF 변환 세 뷰어를 탭으로 전환한다.
+//  - PDF: PDFKit + 검색 바. docx: QuickLook 미리보기 / 변환 PDF. pages: QuickLook / 추출 텍스트.
+//  - 이미지: 핀치 줌 + OCR 텍스트 레이어. 원본 미리보기가 없는 형식(.doc)은 추출 텍스트로 대체한다.
+//  - hwp-swift(`HwpKit`)는 Xcode에서 SPM 의존성으로 추가해 이 타깃에 링크해야 빌드된다
+//    (https://github.com/sboh1214/hwp-swift.git, branch: main).
 //
 
 import SwiftUI
@@ -60,36 +16,18 @@ import PDFKit
 import HwpKit
 import HwpKitCore
 import BibleResearchModels
-// [2026-09-02 추가] `PDFSearchController`가 `NSRegularExpression`(숫자 경계
-// 오탐 방지, 아래 `matchesWithDigitBoundary` 참고)을 쓰기 위해 명시적으로
-// import한다 — 이 코드베이스에서 NSRegularExpression을 쓰는 다른 두 파일
-// (BulkCrossReferenceParser.swift, BibleReferenceExtractor.swift) 모두 같은
-// 이유로 명시적 import Foundation을 갖고 있다.
+// `PDFSearchController`가 `NSRegularExpression`을 쓰기 위한 명시적 import.
 import Foundation
 
 // MARK: - 별도 창(S6) 진입점 — PersistentIdentifier → SourceDocument 되찾기
 
-/// [2026-08-07 추가] `WindowGroup(id: "document-viewer", for: PersistentIdentifier.self)`
-/// (JBCHBibleResearchApp.swift 참고)가 넘겨주는 `PersistentIdentifier?`를 실제
-/// `SourceDocument` 인스턴스로 되찾아 `DocumentViewerView`에 넘기는 얇은 래퍼.
-/// `nil`이거나(창을 값 없이 열었을 때) 해당 ID의 모델을 못 찾으면(문서가 그 사이
-/// 삭제된 경우 등) 안내 문구만 보여준다.
+/// `WindowGroup(id: "document-viewer", for: PersistentIdentifier.self)`가 넘겨주는 ID로
+/// `SourceDocument`를 되찾아 `DocumentViewerView`에 넘기는 래퍼. ID가 nil이거나 문서가
+/// 삭제돼 못 찾으면 안내 문구만 보여준다.
 struct DocumentViewerWindowContent: View {
-    /// [2026-08-15 수정, 크래시 fix] 사용자 보고 — `SourceDocument.originalFilename.getter`
-    /// fatal error(`DocumentViewerView.body.getter`에서 `.navigationTitle(document.
-    /// originalFilename)` 호출 중 발생). 원인 — 예전엔 `modelContext.model(for:)`로
-    /// 딱 한 번만 객체를 찾아 `DocumentViewerView`에 그대로 넘겼다. macOS는 이
-    /// S6 창을 열어 둔 채로 다른 창(문서 목록, 설정 개발자 탭의 "연구문서 전체
-    /// 삭제")에서 같은 `SourceDocument`를 지울 수 있는데, 그러면 이 창이 들고
-    /// 있던 참조가 SwiftData 쪽에서 이미 소멸된 객체를 가리키게 되고, 다음
-    /// 재렌더링(`body` 재계산)에서 그 객체의 아무 프로퍼티나 읽으려는 순간
-    /// 크래시한다 — `DocumentsHomeView`가 겪었던 것과 완전히 같은 종류의 버그
-    /// (그때는 `@Query`로 고쳤다, DocumentsViewModel.swift 상단 주석 참고).
-    /// 여기도 같은 처방 — `@Query`는 SwiftData 변경(삭제 포함)에 자동으로
-    /// 반응해 다시 계산되므로, 문서가 지워지면 `documents.first(where:)`가
-    /// 자연스럽게 nil이 되어 `documentNotFoundMessage()`로 넘어간다(크래시 대신
-    /// "문서를 찾을 수 없습니다" 안내) — `DocumentViewerView`가 죽은 참조를
-    /// 다시 렌더링할 기회 자체가 없어진다.
+    /// `modelContext.model(for:)`로 한 번만 찾아 넘기면, 창을 열어 둔 채 다른 창에서 같은 문서를
+    /// 지웠을 때 소멸된 SwiftData 객체의 프로퍼티를 읽다가 크래시한다. `@Query`는 삭제에도
+    /// 다시 계산되므로 문서가 지워지면 자연히 nil이 되어 "찾을 수 없음" 안내로 넘어간다.
     @Query private var documents: [SourceDocument]
     let documentID: PersistentIdentifier?
 
@@ -102,15 +40,11 @@ struct DocumentViewerWindowContent: View {
     }
 }
 
-/// [2026-08-11 신설] `WindowGroup(id: "document-search", for: DocumentSearchRequest.self)`
-/// (JBCHBibleResearchApp.swift 참고) 전용 — "관련 내용"에서 문서를 골랐을 때, 그
-/// 문서를 열면서 동시에 검색어(성경 구절 원문 표현)로 찾아 이동한다. 위
-/// `DocumentViewerWindowContent`와 거의 같지만 `initialSearchText`를 하나 더
-/// `DocumentViewerView`에 전달한다는 점만 다르다 — 별도 타입으로 둔 이유는 위
-/// `DocumentSearchRequest.swift` 상단 주석 참고.
+/// `WindowGroup(id: "document-search", for: DocumentSearchRequest.self)` 전용 — 문서를 열면서
+/// 검색어로 찾아 이동한다. `DocumentViewerWindowContent`와 같지만 `initialSearchText`를
+/// 추가로 전달한다.
 struct DocumentSearchWindowContent: View {
-    /// [2026-08-15 수정] 위 `DocumentViewerWindowContent`와 같은 크래시 fix —
-    /// 같은 이유로 `@Query`로 바꿨다.
+    /// `DocumentViewerWindowContent`와 같은 이유로 `@Query`를 쓴다(삭제된 문서 참조 크래시 방지).
     @Query private var documents: [SourceDocument]
     let request: DocumentSearchRequest?
 
@@ -140,89 +74,48 @@ private func documentNotFoundMessage() -> some View {
 
 struct DocumentViewerView: View {
     @Environment(\.modelContext) private var modelContext
-    /// [2026-08-21 추가] 사용자 요청 — "연구문서 뷰어에 닫기버튼." macOS는
-    /// `WindowGroup(id: "document-viewer"/"document-search", ...)`이 진짜
-    /// 독립 창을 만들어 트래픽라이트(빨간 닫기 버튼)가 이미 있어 추가 버튼이
-    /// 중복이라 붙이지 않는다(근거 없는 중복 UI 금지 원칙). iPadOS/iPhone은
-    /// 다르다 — `JBCHBibleResearchApp.swift`의 "document-viewer" 창 주석이
-    /// 이미 지적했듯 다중 창을 지원하지 않는 기기(아이폰, Stage Manager
-    /// 미사용 아이패드)에서는 `openWindow`가 새 창을 띄우는 대신 현재 화면
-    /// 콘텐츠를 이 뷰로 완전히 대체한다 — 뒤로 돌아갈 내비게이션 바/뒤로가기
-    /// 버튼이 아예 없어 사용자가 갇힌다. `dismissWindow()`(인자 없음 —
-    /// "이 환경 값이 속한 창을 닫는다")로 이전 화면으로 복귀시킨다.
-    /// `.overlay`로 직접 그린 이유: 이 뷰(및 이 뷰를 감싸는
-    /// `DocumentViewerWindowContent`/`DocumentSearchWindowContent`) 어디에도
-    /// `NavigationStack`이 없어 `.toolbar`가 표시될 내비게이션 바 자체가
-    /// 없다 — 순수 오버레이 버튼은 그 여부와 무관하게 항상 그려진다.
+    /// iOS 전용 닫기 버튼(`closeWindowButton`)이 쓴다. 다중 창 미지원 기기(아이폰, Stage Manager
+    /// 미사용 아이패드)에서는 `openWindow`가 현재 화면을 이 뷰로 대체하고 뒤로 갈 내비게이션이
+    /// 없다. macOS는 창의 닫기 버튼이 이미 있어 쓰지 않는다.
     #if os(iOS)
     @Environment(\.dismissWindow) private var dismissWindow
     #endif
     let document: SourceDocument
-    /// [2026-08-11 추가] "관련 내용"에서 넘어온 검색어 — 있으면 열자마자 그 텍스트를
-    /// 찾아 이동한다("연구 문서는 pdf로 띄워 검색할 것", 사용자 요청). PDF 원본이
-    /// 있으면 PDFKit 검색+이동, 없으면(hwp/이미지 등) 추출된 텍스트 화면에서 그
-    /// 줄로 스크롤+강조하는 것으로 대신한다(2026-08-15 — 수동 탭 전환 UI는
-    /// 삭제되고 이제 자동으로 판단된다, `shouldShowExtractedText` 참고).
+    /// "관련 내용"에서 넘어온 검색어. 있으면 열자마자 찾아 이동한다 — PDF는 PDFKit 검색+이동,
+    /// 그 외 형식은 추출 텍스트 화면에서 해당 줄로 스크롤+강조(`shouldShowExtractedText` 참고).
     var initialSearchText: String? = nil
 
     @State private var viewModel: DocumentViewerViewModel?
-    /// [2026-08-15 추가] 사용자 요청 — "pdf 창에 단어 검색기능 + 검색된 단어수 +
-    /// 검색이동 기능 추가." `PDFView`(AppKit/UIKit)를 직접 조작해야 하는 검색
-    /// 상태라 `PDFKitRepresentable`과 공유하는 별도 컨트롤러로 분리했다 — 아래
-    /// `PDFSearchController` 상단 주석 참고. `initialSearchText`가 있으면
-    /// `setUpIfNeeded`에서 이 컨트롤러의 검색어로 그대로 채워 넣는다(예전
-    /// `PDFSearchCoordinator`의 "1회성 자동 이동"을 이 검색창이 그대로 대신한다
-    /// — 검색창에 검색어가 미리 채워진 채로 열려서, 사용자가 곧바로 다음/이전으로
-    /// 더 살펴볼 수 있다).
+    /// PDF 검색 상태(검색어·일치 개수·이동). `PDFView`를 직접 조작해야 해서
+    /// `PDFKitRepresentable`과 공유하는 컨트롤러로 분리했다. `initialSearchText`는
+    /// `setUpIfNeeded`에서 이 컨트롤러의 검색어로 미리 채운다.
     @State private var pdfSearchController = PDFSearchController()
-    /// [2026-08-16 추가] `.docx`(docxide-pdf로 변환된 PDF)용 — 위
-    /// `pdfSearchController`(원본 `.pdf` 문서)와 서로 다른 `PDFDocument`를
-    /// 검색하므로 공유하면 안 된다(`HWPToPDFPane`이 원본 `.pdf` 탭과 별개
-    /// 컨트롤러를 쓰는 것과 같은 이유 — 그 struct 상단 주석 참고).
+    /// `.docx` 변환 PDF용. 원본 `.pdf`(`pdfSearchController`)와 다른 `PDFDocument`를 검색하므로
+    /// 컨트롤러를 공유하면 안 된다.
     @State private var docxSearchController = PDFSearchController()
-    /// [2026-08-16 추가] 사용자 요청 — hwp-swift 네이티브 뷰어의 렌더링이 rhwp
-    /// 만큼 완전하지 않다는 지적을 받아, rhwp 웹 뷰어(RhwpWebViewerPane.swift)를
-    /// "교체"가 아니라 "추가"로 되살렸다. 같은 문서를 두 뷰어로 각각 열어 렌더링
-    /// 완전성을 직접 비교해 보고 더 나은 쪽을 고를 수 있게, `.hwp`/`.hwpx` 문서를
-    /// 열 때만 이 상태로 두 뷰어를 전환한다(다른 형식엔 영향 없음).
+    /// `.hwp`/`.hwpx` 전용 뷰어 전환 상태(다른 형식엔 영향 없음). 같은 문서를 여러 뷰어로 열어
+    /// 렌더링을 비교할 수 있다.
     @State private var hwpViewerMode: HWPViewerMode = .hwpSwiftNative
-    /// [2026-08-16 추가] 사용자 지적 — 특정 문서에서 "hwp-swift (네이티브)" 탭만
-    /// 파서 한계("Presentation build failed: Bytes are not EOF..." 등)로 못 여는
-    /// 사례가 실기기에서 확인됐다. 세 탭 각각이 이 문서를 실제로 열 수 있는지
-    /// 로드가 끝나는 대로 보고받아 여기 채운다(`reportViewerAvailability` 참고) —
-    /// `nil`(아직 모름)/`true`(열림)/`false`(못 엶). `hwpViewerModeToggle`이 이
-    /// 값을 보고 못 여는 탭을 세그먼트에서 아예 숨긴다.
+    /// 각 hwp 뷰어가 이 문서를 열 수 있는지 로드 완료 시 보고받아 채운다(`reportViewerAvailability`).
+    /// nil=미확정, true=열림, false=못 엶 — `hwpViewerModeToggle`이 못 여는 탭을 숨긴다.
     @State private var viewerAvailability: [HWPViewerMode: Bool] = [:]
-    /// [2026-08-16 신설] `.pages` 전용 — 위 `PagesViewerMode` 참고. hwp의
-    /// `hwpViewerMode`와 같은 역할, 별개 상태로 둔 이유도 같다(형식마다 독립적인
-    /// 선택 상태).
+    /// `.pages` 전용 뷰어 선택 상태(`PagesViewerMode`). 형식마다 선택 상태를 독립적으로 둔다.
     @State private var pagesViewerMode: PagesViewerMode = .quickLook
-    /// [2026-08-16 신설] `.docx` 전용 — 위 `DocxViewerMode` 참고. 초기값은
-    /// "미리보기"(추출 텍스트, 크로스플랫폼 항상 가능)로 두고, `docxContent`의
-    /// `onAppear`에서 PDF 변환본이 있으면(macOS) "PDF 변환"으로 올려 준다.
+    /// `.docx` 전용 뷰어 선택 상태(`DocxViewerMode`). 초기값은 "미리보기"이고, PDF 변환본이 있으면
+    /// `docxContent`가 "PDF 변환"으로 올린다.
     @State private var docxViewerMode: DocxViewerMode = .preview
 
-    /// [2026-08-16 신설] 사용자 요청 — "각 뷰어에 tag를 추가할 수 있도록 하단에
-    /// 태그 추가/수정 라인 삽입." `MemoDetailView.tagSection`(Views/Memo/
-    /// MemoDetailView.swift)과 완전히 같은 패턴을 문서 쪽 조인 모델(`DocumentTag`,
-    /// Tags.swift 2026-08-16 신설)에 맞춰 그대로 옮겼다 — 아래 `documentTagSection`
-    /// 참고. 형식(pdf/hwp/doc/docx/image)마다 따로 두지 않고 `mainContent`
-    /// 최하단에 한 번만 둔다 — 사용자 문구 "각 뷰어에... 하단에"를 "뷰어가
-    /// 무엇으로 바뀌든 화면 맨 아래에 항상 보인다"로 해석했다(포맷별로 4~5번
-    /// 중복 구현하는 것보다 한 곳에서 관리하는 편이 실수 여지가 적다).
+    /// 문서 태그 입력 상태. `MemoDetailView.tagSection`과 같은 패턴이며(`documentTagSection` 참고),
+    /// 형식별 중복을 피하려고 `mainContent` 최하단에 한 번만 둔다.
     @State private var documentTags: [Tag] = []
     @State private var tagInput: String = ""
     @State private var tagSuggestions: [Tag] = []
     @State private var drilldownTag: Tag?
 
     var body: some View {
-        // [2026-08-15 추가, 크래시 fix — DocumentsHomeView.DocumentRowView와 같은
-        // 이유] 위 `DocumentViewerWindowContent`/`DocumentSearchWindowContent`를
-        // `@Query`로 바꿔 대부분의 경우를 막았지만, 그 wrapper가 매번 이 뷰의
-        // body 재계산과 정확히 같은 프레임에 반응한다는 보장까지는 없다 — 한
-        // 프레임짜리 경쟁 상태를 완전히 배제할 수 없으므로, 여기서도 같은
-        // `modelContext == nil` 사전 검사를 한 번 더 둔다(DocumentRowView.body
-        // 상단 주석에 이 API가 왜 안전한지 자세히 적어 뒀다).
+        // `@Query` wrapper만으로는 body 재계산과 같은 프레임의 경쟁 상태를 완전히 배제할 수 없어,
+        // 삭제된 문서 참조 크래시를 막기 위해 `modelContext == nil` 검사를 한 번 더 둔다
+        // (`DocumentRowView.body` 주석 참고).
         if document.modelContext == nil {
             documentNotFoundMessage()
         } else {
@@ -230,15 +123,10 @@ struct DocumentViewerView: View {
         }
     }
 
-    // ⚠️ 이 프로퍼티를 일부러 `content`가 아니라 `mainContent`로 이름 지었다 —
-    // 아래 `private func content(viewModel:)`와 이름이 겹치면 Swift 문법상으로는
-    // (프로퍼티 vs 인자 레이블 있는 함수라) 컴파일은 되지만, 읽는 사람이 헷갈리기
-    // 쉬워 피했다.
+    // ⚠️ 아래 `content(viewModel:)`와 혼동되지 않도록 `content`가 아닌 `mainContent`로 이름 지었다.
     @ViewBuilder
     private var mainContent: some View {
-        // [2026-08-16 수정] 태그 행을 넣기 위해 `Group`을 `VStack(spacing: 0)`으로
-        // 바꿨다 — 위 뷰어 콘텐츠(`content(viewModel:)`)는 기존처럼
-        // `.frame(maxHeight: .infinity)`로 남은 공간을 다 채우고, `documentTagSection`은
+        // 뷰어 콘텐츠는 `.frame(maxHeight: .infinity)`로 남은 공간을 채우고, `documentTagSection`은
         // 그 아래 고정 높이로 붙는다.
         VStack(spacing: 0) {
             if let viewModel {
@@ -263,7 +151,7 @@ struct DocumentViewerView: View {
     }
 
     #if os(iOS)
-    /// 위 `dismissWindow` 프로퍼티 주석 참고 — iPadOS/iPhone 전용 닫기 버튼.
+    /// iOS 전용 닫기 버튼(`dismissWindow` 프로퍼티 참고). `NavigationStack`이 없어 `.toolbar` 대신 `.overlay`로 그린다.
     private var closeWindowButton: some View {
         Button {
             dismissWindow()
@@ -281,40 +169,22 @@ struct DocumentViewerView: View {
     }
     #endif
 
-    // [2026-08-15 수정] 사용자 요청 — "텍스트 탭 삭제." "원본 보기"/"추출 텍스트"를
-    // 수동으로 오가던 세그먼트 피커를 없애고, 항상 원본(네이티브 미리보기)을
-    // 먼저 보여준다 — "추출 텍스트"는 원본 미리보기 자체가 없는 형식(.doc)이나
-    // 검색어를 들고 들어왔는데 PDFKit 검색이 안 되는 형식(비-PDF)일 때만 내부
-    // 판단으로 자동 대체된다. 사용자가 직접 탭을 눌러 전환할 방법은 이제 없다.
+    // 항상 원본(네이티브 미리보기)을 먼저 보여준다. 원본 미리보기가 없는 형식(.doc)이거나, 검색어가
+    // 있는데 원본 탭이 검색을 못 하는 형식일 때만 추출 텍스트로 자동 대체한다(수동 전환 UI 없음).
     private func shouldShowExtractedText(viewModel: DocumentViewerViewModel) -> Bool {
         if !viewModel.supportsNativePreview { return true }
-        // [2026-08-19 추가] 사용자 요청 — "성경 조회 - 탭클릭 - 오른쪽 인스펙터 -
-        // 관련 연구문서 항목 중 hwp 클릭시 뷰어 수정 -> 왼쪽 사이드바 연구문서
-        // 메뉴에서 hwp 항목을 클릭할 때 나오는 뷰어와 동일하게 할것." hwp/hwpx는
-        // "관련 내용"(이 절을 언급하는 문서)에서 검색어를 들고 들어와도 아래
-        // 분기(추출 텍스트로 대체)를 타지 않고 항상 실제 hwp 원본 뷰어
-        // (`originalPane`의 `.hwp, .hwpx` 분기 — 네이티브/rhwp웹/PDF변환 3-way)를
-        // 보여준다 — 사이드바에서 그냥 열 때(`initialSearchText`가 nil)와 정확히
-        // 같은 화면이 되도록. 검색어로 자동 스크롤/강조하는 편의는 이 경로에선
-        // 없어진다(hwp 뷰어 쪽 자체 검색 — `HwpSearchBar` — 을 손으로 써야 함).
+        // hwp/hwpx는 검색어가 있어도 추출 텍스트로 대체하지 않고, 사이드바에서 그냥 열 때와 같은
+        // 원본 hwp 뷰어(`originalPane`의 3-way)를 보여준다.
         if document.originalFormat == .hwp || document.originalFormat == .hwpx {
             return false
         }
-        // [2026-09-27 추가] 사용자 보고 — "검색 - 연구문서 검색결과 - 이미지
-        // 문서 클릭시 OCR 텍스트가 보여지는 것이 아니라 이미지 자체가 보일
-        // 수 있도록 할 것." 원인 — 바로 아래 "PDF가 아니면 추출 텍스트로"
-        // 규칙이 `.image`에도 그대로 적용돼, 검색결과에서 진입(검색어를 들고
-        // 옴)하면 항상 텍스트 탭으로 떨어지고 있었다. `.image`는 이제
-        // `originalPane`의 `ZoomableImageView`가 자체적으로 OCR 텍스트를
-        // 이미지 위 정확한 위치에 겹쳐 보여주므로(그 struct 선언부 주석
-        // 참고), hwp/hwpx와 같은 이유로 이 규칙에서 제외한다 — 검색어가
-        // 있어도 항상 원본(이미지)을 보여준다.
+        // `.image`도 hwp/hwpx처럼 제외한다 — `ZoomableImageView`가 OCR 텍스트를 이미지 위 정확한
+        // 위치에 겹쳐 보여주므로, 검색어가 있어도 항상 원본 이미지를 보여준다.
         if document.originalFormat == .image {
             return false
         }
-        // [2026-08-11 추가 원칙 유지] 검색어를 갖고 열렸을 때(관련 내용에서 진입)
-        // — PDF는 원본 보기(PDFKit 검색+이동)가 그대로 담당하고, PDF가 아니면
-        // 원본 탭이 검색을 지원하지 않으므로 추출 텍스트(줄 단위 스크롤+강조)로.
+        // 검색어가 있을 때 PDF는 원본 보기(PDFKit 검색+이동)가 담당하고, PDF가 아니면 원본 탭이
+        // 검색을 지원하지 않으므로 추출 텍스트(줄 단위 스크롤+강조)로 보여준다.
         if let initialSearchText, !initialSearchText.isEmpty, document.originalFormat != .pdf {
             return true
         }
@@ -323,11 +193,8 @@ struct DocumentViewerView: View {
 
     @ViewBuilder
     private func content(viewModel: DocumentViewerViewModel) -> some View {
-        // [2026-08-16 추가] `.pages`/`.docx`는 위 `shouldShowExtractedText`의
-        // "원본 지원 없으면 무조건 추출 텍스트" 이분법을 안 따른다 — 둘 다
-        // "원본(또는 변환본)"과 "검색 가능한 추출 텍스트"를 세그먼트로 함께
-        // 제공하기로 했으므로, 아예 별도 분기(`pagesContent`/`docxContent`)로
-        // 뺀다.
+        // `.pages`/`.docx`는 각자 뷰어 전환 세그먼트를 가지므로 `shouldShowExtractedText`의
+        // 이분법을 따르지 않고 별도 분기로 뺀다.
         if document.originalFormat == .pages {
             pagesContent(viewModel: viewModel)
         } else if document.originalFormat == .docx {
@@ -341,38 +208,14 @@ struct DocumentViewerView: View {
 
     // MARK: - docx 전용(미리보기 ↔ PDF 변환)
 
-    /// [2026-08-16 신설, 같은 날 재수정] 사용자 요청 — "docx는 hwp뷰어처럼,
-    /// 상단 탭을 줄것(미리보기, pdf변환)." → "미리보기는 맥 파인더에서
-    /// 스페이스바 누르면 보이는 퀵뷰를 말하는 것임." 처음엔 "미리보기"를
-    /// `extractedTextPane`(추출 텍스트)로 잘못 구현했었다 — 사용자가 명확히
-    /// "Finder 스페이스바 퀵룩"이라고 정정해서, `.pages`의 QuickLook 탭과 같은
-    /// `QLPreviewRepresentable`로 바꿨다. 세그먼트: "미리보기"(QuickLook,
-    /// 시각적 렌더링만 — 검색 불가) / "PDF 변환"(docxide-pdf로 변환된 PDF,
-    /// `.pdf` 원본 탭과 같은 `PDFKitRepresentable`+검색창 — 검색 가능).
+    /// docx 전용 뷰어. "미리보기"(QuickLook — 렌더링만 하고 텍스트를 앱에 돌려주지 못해 검색 불가) /
+    /// "PDF 변환"(docxide-pdf로 변환된 PDF를 `PDFKitRepresentable`+검색창으로 표시, 검색 가능).
     ///
-    /// ⚠️ 이 변경으로 "미리보기" 탭에선 더 이상 검색이 안 된다 — QuickLook은
-    /// 순수 렌더링 API라 텍스트를 앱에 못 돌려준다는 게 이미 pages 때 확인된
-    /// 사실(대화 참고)이라, docx도 같은 제약을 그대로 받는다. 검색은 "PDF
-    /// 변환" 탭에서만 가능.
-    ///
-    /// ⚠️⚠️ [2026-08-16 정정, 사용자 지적] "PDF 변환 탭·검색이 iOS에서 항상
-    /// 안 된다"고 처음에 잘못 설명했었다 — 변환 실행(`DocxToPDFConverter`,
-    /// Rust FFI)만 macOS 전용이지, 변환 결과물은 iCloud로 동기화되고 그걸
-    /// 읽는 `PDFDocument(url:)`/`PDFKitRepresentable`/검색은 전부 플랫폼
-    /// 제한이 없다. 그래서 **macOS에서 이미 변환된 문서를 iOS에서 열면 "PDF
-    /// 변환" 탭도 보이고 검색도 정상 동작**한다(아래 필터가 참조하는
-    /// `viewModel.convertedPDFDocument`는 그 문서가 어느 기기에서
-    /// 변환됐는지와 무관하게, "지금 이 기기에서 그 PDF 파일을 읽을 수
-    /// 있는지"만 본다 — `DocumentViewerViewModel.swift`의 관련 주석 정정
-    /// 참고). 진짜 제약은 "iOS에서 직접 새로 업로드한 docx는 그 세션에서
-    /// 변환이 시도조차 안 된다"는 것뿐 — macOS 앱에서 한 번 열어(재시도) 주면
-    /// 그 뒤로는 iOS에서도 보인다.
-    ///
-    /// "PDF 변환" 탭은 변환본이 실제로 있을 때만 보이게 아래 토글에서 걸러낸다
-    /// (`viewerAvailability`로 안 열리는 hwp 탭을 숨기는 것과 같은 원칙 —
-    /// 다만 docx는 비동기 로드 실패가 아니라 "그 문서가 아직 어느 기기에서도
-    /// 변환된 적이 없다"는 훨씬 단순한 조건이라 별도 상태 없이 그냥
-    /// `viewModel.convertedPDFDocument`를 직접 확인한다).
+    /// ⚠️ 변환 실행(`DocxToPDFConverter`, Rust FFI)만 macOS 전용이고 결과 PDF는 iCloud로 동기화된다.
+    /// 그래서 macOS에서 변환된 문서는 iOS에서도 "PDF 변환" 탭과 검색이 동작한다
+    /// (`convertedPDFDocument`는 "이 기기에서 그 PDF 파일을 읽을 수 있는지"만 본다). iOS에서 새로
+    /// 업로드한 docx는 그 세션에서 변환이 시도되지 않으며, macOS 앱에서 한 번 열면 이후 iOS에서도
+    /// 보인다. "PDF 변환" 탭은 변환본이 있을 때만 토글에 나타난다.
     @ViewBuilder
     private func docxContent(viewModel: DocumentViewerViewModel) -> some View {
         VStack(spacing: 0) {
@@ -404,33 +247,22 @@ struct DocumentViewerView: View {
             }
         }
         .onAppear {
-            // PDF 변환본이 있으면(macOS) 검색까지 되는 "PDF 변환" 탭을
-            // 기본값으로 올려 준다 — 없으면(iOS 등) "미리보기"(QuickLook,
-            // 초기값)를 그대로 유지. 검색어를 들고 들어온 경우의 실제 검색어
-            // 채우기도 아래 `syncDocxViewerModeIfConvertedPDFReady`가 함께
-            // 맡는다(원본 `.pdf` 탭이 `pdfSearchController.query`를 채우는 것과
-            // 같은 패턴).
+            // PDF 변환본이 있으면 검색 가능한 "PDF 변환" 탭을 기본으로 올리고, 없으면 "미리보기"를
+            // 유지한다. 검색어 채우기도 `syncDocxViewerModeIfConvertedPDFReady`가 맡는다.
             syncDocxViewerModeIfConvertedPDFReady(viewModel: viewModel)
         }
-        // [2026-08-26 추가] 사용자 요청 — 위 `fileContentUnavailableView` 도입
-        // 이유 참고. `convertedPDFDocument`가 `vm.onAppear()` 시점에 곧바로
-        // 채워지지 않고(iCloud 다운로드가 끝난 뒤에야) 나중에 채워질 수 있게
-        // 되면서, 위 `onAppear`의 1회성 체크만으로는 그 "나중에" 시점을 놓친다
-        // — `PDFDocument`가 `Equatable`이 아니라 `.onChange(of:
-        // viewModel.convertedPDFDocument)`는 쓸 수 없어, `!= nil` 결과(Bool,
-        // Equatable)가 false → true로 바뀌는 순간을 대신 관찰한다.
+        // 변환 PDF가 iCloud 다운로드 완료 후 나중에 채워질 수 있어 `onAppear`의 1회 체크만으로는
+        // 놓친다. `PDFDocument`는 `Equatable`이 아니라 `!= nil`(Bool)이 false → true로 바뀌는
+        // 시점을 대신 관찰한다.
         .onChange(of: viewModel.convertedPDFDocument != nil) { _, isAvailable in
             guard isAvailable else { return }
             syncDocxViewerModeIfConvertedPDFReady(viewModel: viewModel)
         }
     }
 
-    /// 위 `docxContent`의 `.onAppear`/`.onChange` 두 지점이 공유하는 로직 —
-    /// PDF 변환본이 있으면 "PDF 변환" 탭으로 올리고, 검색어를 들고 들어온
-    /// 경우 그 탭의 검색창에 미리 채워 둔다. 예전엔 `setUpIfNeeded()`가 이
-    /// 검색어 채우기를(`vm.onAppear()` 직후 1회) 대신했는데, 변환 PDF가
-    /// 나중에(iCloud 다운로드 완료 후) 도착할 수 있게 되면서 그 1회성 체크로는
-    /// 부족해져 이 함수로 합쳤다.
+    /// `docxContent`의 `.onAppear`/`.onChange`가 공유한다 — 변환 PDF가 있으면 "PDF 변환" 탭으로
+    /// 올리고, 검색어가 있으면 그 탭의 검색창에 미리 채운다. 변환 PDF가 나중에 도착할 수 있어
+    /// 1회성 체크 대신 이 함수로 합쳤다.
     private func syncDocxViewerModeIfConvertedPDFReady(viewModel: DocumentViewerViewModel) {
         guard viewModel.convertedPDFDocument != nil else { return }
         docxViewerMode = .pdfConverted
@@ -452,11 +284,8 @@ struct DocumentViewerView: View {
 
     // MARK: - pages 전용(QuickLook 원본 ↔ 추출 텍스트 검색)
 
-    /// [2026-08-16 신설] 사용자 요청 — "pages 뷰어는 QLPreviewController로
-    /// 보여지게 하되, 검색기능을 검토할 것." hwp의 `originalPane`
-    /// `.hwp, .hwpx` 분기(`hwpViewerModeToggle` + 두 뷰어 ZStack 캐싱)와 같은
-    /// 모양으로 만들었다 — 세그먼트로 QuickLook(원본)과 추출 텍스트(검색)를
-    /// 오간다.
+    /// pages 전용 뷰어 — 세그먼트로 QuickLook(원본)과 추출 텍스트(검색)를 오간다.
+    /// hwp의 `hwpViewerModeToggle` 구조와 같은 모양.
     @ViewBuilder
     private func pagesContent(viewModel: DocumentViewerViewModel) -> some View {
         VStack(spacing: 0) {
@@ -477,9 +306,7 @@ struct DocumentViewerView: View {
             }
         }
         .onAppear {
-            // "관련 내용"에서 검색어를 들고 들어왔으면 QuickLook이 아니라 검색이
-            // 가능한 텍스트 탭이 곧바로 보여야 자연스럽다 — hwp/PDF의
-            // `shouldShowExtractedText` 원칙(2026-08-11)과 같은 이유.
+            // 검색어가 있으면 검색 가능한 텍스트 탭을 바로 보여준다(`shouldShowExtractedText`와 같은 이유).
             if let initialSearchText, !initialSearchText.isEmpty {
                 pagesViewerMode = .extractedText
             }
@@ -499,18 +326,11 @@ struct DocumentViewerView: View {
 
     // MARK: - 원본 보기
 
-    /// [2026-09-27 신설] 사용자 요청 — "연구문서-이미지 문서 조회시 scale to
-    /// fit으로 하되 핀치 줌 가능하게 할 것." 처음엔 화면에 맞춰 보이다가
-    /// (scale to fit), `MagnificationGesture`(핀치)로 확대/축소, 확대된
-    /// 상태에서는 `DragGesture`로 이동, 더블탭으로 원래 크기로 되돌린다.
-    /// 최소 배율을 1(=scale to fit 크기) 밑으로 못 내려가게 해 "너무 작아져
-    /// 다시 찾기 어려워지는" 상황을 막는다 — 이 화면 전용이라 `private`.
-    /// [2026-09-27 신설] 사용자 요청 — "이미지 위에 OCR 텍스트를 위에
-    /// 띄워서 해당 텍스트 위치를 정확하게 표현할 것 — 인식된 모든 줄에
-    /// 텍스트 레이어, PDF 텍스트 레이어처럼 겹쳐서 선택/복사 가능하게."
-    /// `DocumentText.ocrBoundingBox`(Vision이 인식 시점에 준 정규화 좌표,
-    /// 좌하단 원점)를 이 화면(좌상단 원점)이 쓸 수 있게 미리 담아 두는
-    /// 값 타입.
+    /// 이미지 뷰어(아래 `ZoomableImageView`)는 scale to fit으로 시작해 핀치로 확대/축소하고,
+    /// 확대 상태에서는 드래그로 이동하며 더블탭으로 원래 크기로 되돌린다. 최소 배율은 1로 제한한다.
+    ///
+    /// 이미지 위 OCR 텍스트 레이어용 값 타입. `DocumentText.ocrBoundingBox`(Vision 정규화 좌표,
+    /// 좌하단 원점)를 이 화면(좌상단 원점)이 쓸 수 있게 미리 담아 둔다.
     private struct OCRLineOverlayItem: Identifiable {
         let id: UUID
         let text: String
@@ -548,18 +368,11 @@ struct DocumentViewerView: View {
             (searchText ?? "").trimmingCharacters(in: .whitespacesAndNewlines)
         }
 
-        /// 이미지의 실제 픽셀 크기 — `.aspectRatio(contentMode: .fit)`이
-        /// 컨테이너 안에서 실제로 그려지는 사각형(레터박스 포함)을 계산하는
-        /// 데 쓴다. `NSImage`/`UIImage` 둘 다 `.size`를 갖고 있어 플랫폼
-        /// 분기 없이 그대로 쓸 수 있다.
+        /// 이미지의 실제 픽셀 크기 — `.aspectRatio(contentMode: .fit)`이 그리는 사각형(레터박스 포함) 계산에 쓴다.
         private var imagePixelSize: CGSize {
-            // `NSImage.size`(macOS)와 `UIImage.size`(iOS) 둘 다 `CGSize`를
-            // 돌려주므로(`PlatformImage`가 어느 쪽이든) 플랫폼 분기가
-            // 필요 없다. `loadedImage`는 항상 `PlatformImage(data:)`로
-            // 만들어지고(`DocumentViewerViewModel.loadPrimaryFileContent`),
-            // 이 초기화 경로는 `scale`이 1.0으로 고정되므로 `.size`가 곧
-            // 실제 픽셀 크기다 — Vision이 `boundingBox`를 계산한 바로 그
-            // 좌표계(CGImage 픽셀 공간)와 일치한다.
+            // `loadedImage`는 항상 `PlatformImage(data:)`로 만들어져 `scale`이 1.0이므로 `.size`가 곧
+            // Vision이 `boundingBox`를 계산한 CGImage 픽셀 공간의 크기다(NSImage/UIImage 모두
+            // CGSize라 플랫폼 분기가 필요 없다).
             image.size
         }
 
@@ -614,13 +427,9 @@ struct DocumentViewerView: View {
                         .aspectRatio(contentMode: .fit)
                         .frame(width: geometry.size.width, height: geometry.size.height)
 
-                    // [2026-09-27 신설] OCR 텍스트 레이어 — 인식된 줄마다
-                    // Vision이 준 위치에 그대로 겹친다. 평소엔 텍스트를
-                    // 완전히 투명하게 그려(이미지 위에 글자가 두 겹으로
-                    // 보이지 않게) 실제 PDF 텍스트 레이어처럼 "화면엔 원본
-                    // 이미지만 보이지만, 그 자리를 길게 눌러 선택·복사는
-                    // 가능"하게 하고(`.textSelection`), 검색어와 일치하는
-                    // 줄만 반투명 강조 박스를 더해 위치를 눈으로도 보여준다.
+                    // OCR 텍스트 레이어 — 인식된 줄마다 Vision이 준 위치에 겹친다. 글자는 투명하게
+                    // 그려 화면엔 원본 이미지만 보이되 길게 눌러 선택·복사할 수 있고(`.textSelection`),
+                    // 검색어와 일치하는 줄만 반투명 강조 박스를 더한다.
                     ForEach(ocrLines) { line in
                         let box = screenRect(for: line.boundingBox, in: contentRect)
                         let matched = isSearchMatch(line.text)
@@ -629,11 +438,8 @@ struct DocumentViewerView: View {
                                 RoundedRectangle(cornerRadius: 2)
                                     .fill(Color.yellow.opacity(0.35))
                             }
-                            // 항상 투명 — 이 텍스트 레이어의 목적은
-                            // "보이는 글자"가 아니라 "정확한 위치에 있는,
-                            // 길게 눌러 선택 가능한 글자"다(실제 원본 글자
-                            // 모양은 이미 그 밑의 이미지 자체가 보여준다).
-                            // 일치 여부는 위 노란 박스로만 표시한다.
+                            // 항상 투명 — 글자 모양은 밑의 이미지가 보여주고, 일치 여부는 위 노란
+                            // 박스로만 표시한다.
                             Text(line.text)
                                 .font(.system(size: max(box.height * 0.75, 1)))
                                 .foregroundStyle(Color.clear)
@@ -697,12 +503,8 @@ struct DocumentViewerView: View {
         }
     }
 
-    /// [2026-09-27 추가] `DocumentText.ocrBoundingBox` 선언부 주석 참고 —
-    /// 이 문서(이미지)의 OCR 인식 줄 중 위치 정보(`ocrBoundingBox`)가 있는
-    /// 것만 골라 `lineIndex` 순으로 정렬한다. 이 필드가 추가되기 전에 이미
-    /// 저장된 옛 OCR 문서는 전부 nil이라(추측으로 위치를 지어내지 않음)
-    /// 자연히 빈 배열이 되어 오버레이 없이 텍스트만 있던 예전과 동일하게
-    /// 동작한다.
+    /// 이미지 문서의 OCR 줄 중 위치 정보(`ocrBoundingBox`)가 있는 것만 `lineIndex` 순으로 돌려준다.
+    /// 위치 정보가 없는 옛 OCR 문서는 위치를 추측하지 않고 빈 배열이 되어 오버레이 없이 동작한다.
     private var ocrOverlayLines: [OCRLineOverlayItem] {
         guard document.originalFormat == .image else { return [] }
         let lines = (document.documentTexts ?? [])
@@ -718,10 +520,8 @@ struct DocumentViewerView: View {
     private func originalPane(viewModel: DocumentViewerViewModel) -> some View {
         switch document.originalFormat {
         case .pdf:
-            // [2026-08-15 수정, 깜박임 fix] 매 재계산마다 `PDFDocument(url:)`를
-            // 새로 만들지 않고, `viewModel.onAppear()`에서 한 번만 읽어 캐싱해 둔
-            // 안정적인 인스턴스를 그대로 쓴다 — `DocumentViewerViewModel.
-            // pdfDocument` 상단 주석 참고.
+            // `viewModel.onAppear()`에서 한 번 읽어 캐싱한 인스턴스를 쓴다 — 재계산마다
+            // `PDFDocument(url:)`를 새로 만들면 깜박인다(`DocumentViewerViewModel.pdfDocument` 참고).
             if let pdf = viewModel.pdfDocument {
                 VStack(spacing: 0) {
                     pdfSearchBar
@@ -732,23 +532,12 @@ struct DocumentViewerView: View {
                 fileContentUnavailableView(status: viewModel.downloadStatus, fallbackMessage: "PDF를 열 수 없습니다.")
             }
         case .image:
-            // [2026-09-27 수정] 사용자 요청 — "scale to fit으로 하되 핀치 줌
-            // 가능하게 할 것" + "닫고 난 후 다시 안 열리는 이슈" — 두 가지를
-            // 함께 고친다. 파일을 더 이상 이 자리에서 직접 읽지 않고(보안
-            // 스코프 문제는 위 `DocumentViewerViewModel.loadedImage` 상단
-            // 주석 참고) `viewModel.loadedImage`(보안 스코프를 제대로 열고
-            // 닫아 읽어 온 값)만 본다. 렌더링은 기존 `ScrollView`(줌 기능
-            // 없음, 스크롤할 콘텐츠가 애초에 화면보다 커진 적이 없어 사실상
-            // 아무 效과 없었다) 대신 아래 `ZoomableImageView`(핀치 확대/축소
-            // + 확대 상태 드래그 이동 + 더블탭 리셋)로 바꾼다 — 처음 보일
-            // 때는 그대로 `aspectRatio(contentMode: .fit)`(scale to fit).
+            // 파일을 여기서 직접 읽지 않고 `viewModel.loadedImage`(보안 스코프를 열고 닫아 읽어 온
+            // 값)만 본다(`DocumentViewerViewModel.loadedImage` 참고). 렌더링은 `ZoomableImageView`
+            // (scale to fit + 핀치 줌).
             if case .ready = viewModel.downloadStatus {
                 if let image = viewModel.loadedImage {
-                    // [2026-09-27 추가] 사용자 요청 — "이미지 위에 OCR
-                    // 텍스트를 위에 띄워서 해당 텍스트 위치를 정확하게
-                    // 표현할 것(인식된 모든 줄에 텍스트 레이어, PDF 텍스트
-                    // 레이어처럼)." `ocrOverlayLines`(아래) + 검색어를
-                    // 함께 넘긴다.
+                    // `ocrOverlayLines`와 검색어를 함께 넘겨 OCR 텍스트 레이어를 겹친다.
                     ZoomableImageView(image: image, ocrLines: ocrOverlayLines, searchText: initialSearchText)
                 } else {
                     ProgressView("이미지를 불러오는 중…")
@@ -762,22 +551,10 @@ struct DocumentViewerView: View {
                 VStack(spacing: 0) {
                     hwpViewerModeToggle
                     Divider()
-                    // [2026-08-16 수정] 사용자 지적 — "탭을 바꿀때마다 파일을
-                    // 읽는 것 같음... 탭을 바꿔도 바로바로 전환되는 것이
-                    // 가능해보임." 원래는 `switch`로 셋 중 하나만 뷰 계층에
-                    // 존재했다 — SwiftUI는 `switch`/`if`로 조건부로 나타나는
-                    // 뷰를 다른 케이스로 바뀔 때 완전히 파괴하고 새로 만든다,
-                    // 그래서 각 Pane의 `@State`(파싱된 문서, WKWebView 등)가
-                    // 매번 사라지고 `.task(id:)`가 처음부터 다시 실행됐다 —
-                    // 이게 "탭 바꿀 때마다 다시 읽는" 것처럼 보인 이유다.
-                    //
-                    // 셋 다 항상 뷰 계층에 남겨 두고(`ZStack`) 안 보이는 것만
-                    // `opacity(0)` + `allowsHitTesting(false)`로 숨기면, 뷰
-                    // 정체성이 안 바뀌어 `@State`가 그대로 유지된다 — 각 Pane은
-                    // 이미 `.task(id: documentData)`라 `documentData`가 안
-                    // 바뀌는 한(같은 문서를 계속 보는 한) 딱 한 번만 로드하고,
-                    // 그 다음부터 탭 전환은 단순히 보이기/숨기기라 즉시
-                    // 전환된다.
+                    // 셋 다 항상 뷰 계층에 두고 안 보이는 것은 `opacity(0)` + `allowsHitTesting(false)`로
+                    // 숨긴다. `switch`로 하나만 두면 탭 전환마다 뷰가 파괴돼 각 Pane의 `@State`(파싱된
+                    // 문서, WKWebView 등)가 사라지고 `.task(id:)`가 다시 실행된다. 뷰 정체성이 유지되면
+                    // 같은 문서인 한 한 번만 로드하고 전환은 즉시 된다.
                     ZStack {
                         HWPViewerPane(
                             documentData: hwpFileData,
@@ -813,34 +590,22 @@ struct DocumentViewerView: View {
                 fileContentUnavailableView(status: viewModel.downloadStatus, fallbackMessage: "hwp 원본 파일을 열 수 없습니다.")
             }
         case .doc, .docx, .pages:
-            // [2026-08-15 참고, 2026-08-16 docx/pages 재분리] `.doc`는
-            // `supportsNativePreview == false`라 `shouldShowExtractedText`가
-            // 항상 true를 돌려줘 이 분기가 실제로는 그려지지 않는다(스위치
-            // 전체 케이스를 다뤄야 하는 Swift 문법상 남겨둔 자리). `.docx`/
-            // `.pages`도 이 스위치엔 여전히 있어야 하지만(exhaustive 요구),
-            // 실제로는 `content(viewModel:)`이 이 둘을 `originalPane` 자체에
-            // 도달하기 전에 각각 `docxContent`(미리보기 ↔ PDF 변환 세그먼트)/
-            // `pagesContent`(QuickLook ↔ 추출 텍스트 세그먼트)로 먼저
-            // 가로채므로 이 케이스들도 마찬가지로 그려지지 않는다.
+            // `.doc`는 `supportsNativePreview == false`라 `shouldShowExtractedText`가 항상 true이고,
+            // `.docx`/`.pages`는 `content(viewModel:)`이 먼저 가로채므로 이 분기는 실제로 그려지지
+            // 않는다. switch exhaustive 요구 때문에 남겨 둔 자리다.
             unavailableMessage("이 형식은 원본 미리보기를 지원하지 않습니다. 추출된 텍스트를 대신 보여드립니다.")
         }
     }
 
     // MARK: - hwp 뷰어 전환(네이티브 hwp-swift ↔ rhwp 웹 뷰어)
 
-    /// [2026-08-16 추가] `.hwp`/`.hwpx` 문서를 열 때만 보이는 세그먼트 컨트롤.
-    /// hwp-swift(HWPViewerPane, 순수 네이티브)와 rhwp(RhwpWebViewerPane,
-    /// WKWebView + WASM) 중 하나를 골라 같은 문서를 열어 렌더링을 비교해 볼 수
-    /// 있다 — RhwpWebViewerPane.swift 상단 주석 참고.
+    /// `.hwp`/`.hwpx` 전용 세그먼트 컨트롤 — hwp-swift(HWPViewerPane, 네이티브), rhwp(RhwpWebViewerPane,
+    /// WKWebView + WASM), PDF 변환 뷰어 중 선택한다.
     ///
-    /// [2026-08-16 수정] 사용자 지적 — 특정 문서가 hwp-swift 파서 한계로 "네이티브"
-    /// 탭에서만 안 열리는 사례가 실기기에서 확인됐다("hwp 문서를 열지 못했습니다.
-    /// Presentation build failed: Bytes are not EOF..." — hwp-swift 저장소를
-    /// 직접 조사해 보니 `HwpIdMappings.swift`가 문서 버전에 따라 필드 개수를
-    /// 다르게 읽는데, 이 문서는 그 버전 경계에서 어긋나는 것으로 보인다. 현재
-    /// hwp-swift에 이 케이스에 대한 알려진 수정은 없다). `viewerAvailability`가
-    /// `false`로 확정한 탭은 세그먼트에서 아예 숨긴다 — 안 열리는 탭을 굳이
-    /// 보여주고 에러 화면을 또 띄우기보다, 되는 탭만 고를 수 있게 한다.
+    /// hwp-swift 파서 한계로 특정 문서가 네이티브 탭에서만 안 열릴 수 있다("Presentation build
+    /// failed: Bytes are not EOF..." — `HwpIdMappings.swift`가 문서 버전별로 필드 개수를 다르게
+    /// 읽는 경계에서 어긋나는 것으로 보이며, 현재 hwp-swift에 알려진 수정은 없다).
+    /// `viewerAvailability`가 `false`로 확정한 탭은 세그먼트에서 숨긴다.
     private var hwpViewerModeToggle: some View {
         Picker("뷰어", selection: $hwpViewerMode) {
             ForEach(HWPViewerMode.allCases.filter { viewerAvailability[$0] != false }) { mode in
@@ -857,24 +622,10 @@ struct DocumentViewerView: View {
     /// 그쪽으로 자동 전환한다 — 사용자가 빈 에러 화면을 계속 보고 있지 않게.
     private func reportViewerAvailability(_ isAvailable: Bool, for mode: HWPViewerMode) {
         viewerAvailability[mode] = isAvailable
-        // [2026-09-01 수정] 사용자 지적 — 특정 hwp 문서에서 "rhwp 탭"을 보고 있다고
-        // 생각했는데 실제로는 hwp-swift 네이티브 파서의 에러("Presentation build
-        // failed: Bytes are not EOF... HwpIdMappings")가 그대로 보이는 사례가
-        // 실기기에서 확인됐다. 원인은 이 함수의 원래 로직에 있었다 — "실패"
-        // 보고가 들어온 시점에만 이미 성공(`== true`)한 다른 탭으로 전환을
-        // 시도했는데, hwp-swift 네이티브(동기 파싱이라 매우 빠름)가 rhwp(WKWebView
-        // + WASM 초기화가 필요해 훨씬 느림)보다 먼저 실패를 보고하는 게 보통이라,
-        // 네이티브가 실패하는 시점엔 아직 rhwp가 `true`를 보고하기 전이었다 —
-        // 그래서 폴백 후보가 없어 `hwpViewerMode`가 실패한 네이티브 탭에 그대로
-        // 머물렀다. 세그먼트 피커는 `viewerAvailability[.hwpSwiftNative] == false`가
-        // 되는 순간 그 탭을 목록에서 숨기므로(`hwpViewerModeToggle` 참고), 사용자
-        // 눈에는 "rhwp"만 옵션으로 보이는데 실제 화면(`hwpViewerMode`가 여전히
-        // `.hwpSwiftNative`라 ZStack에서 그 뷰만 보이는 상태, 위 hwp 뷰어 ZStack의
-        // opacity 배선 참고)엔 네이티브 실패 화면이 남아 있었다 — 이후 rhwp가
-        // 나중에 성공(`true`)을 보고해도, 원래 코드는 "성공" 보고 시점엔 아무
-        // 전환도 검사하지 않아 영영 그대로 남았다. 수정: 성공 보고가 들어올
-        // 때도 "지금 선택된 탭이 이미 실패로 확정돼 있다면" 그 성공한 탭으로
-        // 전환하도록 대칭적으로 보완한다.
+        // 성공 보고 때도 "현재 선택된 탭이 이미 실패로 확정돼 있으면" 성공한 탭으로 전환한다.
+        // 네이티브(동기 파싱)가 rhwp(WKWebView+WASM 초기화)보다 먼저 실패를 보고하는 게 보통이라,
+        // 실패 시점엔 폴백 후보가 없어 실패한 탭에 머문다 — 그 탭은 토글에서 숨겨진 채 실패 화면만
+        // 남는다.
         if isAvailable {
             if viewerAvailability[hwpViewerMode] == false {
                 hwpViewerMode = mode
@@ -889,22 +640,15 @@ struct DocumentViewerView: View {
 
     // MARK: - PDF 검색 바(단어 검색 + 일치 개수 + 다음/이전 이동)
 
-    /// [2026-08-15 신설] `OutlineQuickViewWindowContent.header`의 검색창과 같은
-    /// 모양(돋보기 아이콘 + 검색어 입력 + "N/M" 일치 개수 + 다음/이전 버튼)으로
-    /// 통일했다. `@Observable` 컨트롤러의 `query`에 양방향으로 쓰려면 `@Bindable`
-    /// 로컬 바인딩이 필요하다 — SwiftUI가 공식적으로 지원하는 패턴(`@Bindable var
-    /// x = x`로 `@State` 참조 타입을 셰도잉해 `$x.프로퍼티` 바인딩을 얻는다).
+    /// `OutlineQuickViewWindowContent.header`와 같은 모양의 검색창(검색어 입력 + "N/M" 일치 개수 +
+    /// 다음/이전). `@Observable` 컨트롤러의 `query`에 양방향으로 쓰려면 `@Bindable` 로컬 바인딩이
+    /// 필요하다.
     private var pdfSearchBar: some View {
         pdfSearchBar(controller: pdfSearchController)
     }
 
-    /// [2026-08-16 리팩터] 사용자 요청 — "docxide-pdf + PDFKit로 docx를 pdf로
-    /// 변환하는 것을 검토할 것" → "진행할 것." 원래 `pdfSearchController` 하나에
-    /// 고정돼 있던 걸 파라미터로 뺐다 — `.docx`가 원본(`.pdf`)과는 다른
-    /// `PDFDocument`(변환된 결과물)를 검색해야 해서 별도 컨트롤러 인스턴스가
-    /// 필요하기 때문(아래 `docxSearchController` 참고, `HWPToPDFPane`이 원본
-    /// `.pdf` 탭과 별개 컨트롤러를 쓰는 것과 같은 이유). 위 `pdfSearchBar`는
-    /// 기존 호출부(`.pdf` 케이스)가 그대로 쓸 수 있게 남겨 둔 얇은 래퍼.
+    /// 컨트롤러를 파라미터로 받는다 — `.docx` 변환 PDF는 원본과 다른 `PDFDocument`라 별도 컨트롤러가
+    /// 필요하다(`docxSearchController`). 위 `pdfSearchBar`는 `.pdf` 케이스용 얇은 래퍼.
     private func pdfSearchBar(controller: PDFSearchController) -> some View {
         @Bindable var searchController = controller
         return HStack(spacing: 8) {
@@ -944,14 +688,9 @@ struct DocumentViewerView: View {
 
             Spacer(minLength: 8)
 
-            // [2026-09-05 신설] 사용자 요청 — "pdf 뷰어에도 돋보기 3버튼
-            // 추가할 것." `OutlineQuickViewWindowContent.header`/
-            // `RhwpWebViewerPane`/`HWPViewerPane`이 이미 통일해 쓰는 "강조색
-            // 12% 원형 배경 + 35% 테두리(28pt) + 명시적 아이콘 크기(확대/
-            // 축소 14pt, 원본크기 12pt)" 디자인을 그대로 재사용한다. 실제
-            // 확대/축소는 `PDFSearchController.zoomIn/zoomOut/resetZoom`(그
-            // 프로퍼티 선언부 주석 참고 — `pdfView.scaleFactor`를 직접 읽고
-            // 써서 트랙패드 핀치줌과 항상 같은 값을 공유한다)이 담당한다.
+            // 돋보기 3버튼 — 다른 뷰어(`OutlineQuickViewWindowContent`/`RhwpWebViewerPane`/`HWPViewerPane`)와
+            // 같은 디자인(강조색 12% 원형 배경 + 35% 테두리, 28pt). 실제 확대/축소는
+            // `PDFSearchController`가 `pdfView.scaleFactor`를 직접 읽고 써서 처리한다.
             Button {
                 controller.zoomIn()
             } label: {
@@ -996,21 +735,10 @@ struct DocumentViewerView: View {
         }
         .padding(.vertical, 8)
         .padding(.leading, 8)
-        // [2026-09-12 신설] 사용자 보고(아이패드) — "pdf 뷰어의 닫기버튼이
-        // 돋보기 버튼들하고 겹쳐있음(원래비율로 보기 버튼과 정확하게 겹침)."
-        // 원인 — 위 `mainContent`의 `closeWindowButton`이 `#if os(iOS)`
-        // `.overlay(alignment: .topTrailing)`로 화면 오른쪽 위 모서리에
-        // 항상 떠 있는데(패딩 12 + 원형 배경 지름 약 24pt), 이 검색 바의
-        // 오른쪽 끝 "원본 크기" 버튼(28pt, `.padding(8)`만큼만 가장자리에서
-        // 떨어져 있음)도 같은 모서리에 있어 두 원이 거의 같은 자리를 차지한다
-        // — 실측(각 요소의 실제 크기/패딩)상 두 버튼이 화면 오른쪽 끝에서
-        // 약 8~36pt 구간을 똑같이 차지해 정확히 겹친다. `closeWindowButton`
-        // 자체는 다른 형식(hwp 네이티브 뷰어 등)에도 공유되는 자리라 그쪽을
-        // 옮기는 대신(다른 화면에 영향 없게), 겹침이 실제로 보고된 이 검색
-        // 바(그리고 바로 아래 `pdfConvertedSearchBar` — 완전히 같은 모양)의
-        // 오른쪽 여백만 iOS에서 늘려 "원본 크기" 버튼을 닫기 버튼 왼쪽으로
-        // 밀어낸다. macOS는 `closeWindowButton` 자체가 없어(트래픽라이트로
-        // 이미 닫을 수 있음, 그 프로퍼티 선언부 주석 참고) 기존 8 그대로 둔다.
+        // iOS에서는 `mainContent`의 `closeWindowButton`이 오른쪽 위 모서리에 떠 있어 "원본 크기"
+        // 버튼과 겹치므로, 검색 바(및 `pdfConvertedSearchBar`)의 오른쪽 여백만 늘려 왼쪽으로 민다.
+        // `closeWindowButton`은 다른 형식 뷰어와 공유하므로 옮기지 않는다. macOS는 이 버튼이 없어
+        // 기존 여백(8)을 유지한다.
         #if os(iOS)
         .padding(.trailing, 44)
         #else
@@ -1020,36 +748,16 @@ struct DocumentViewerView: View {
 
     // MARK: - 추출 텍스트(선택 가능한 순수 텍스트 + 검색)
 
-    /// [2026-08-16 추가] 사용자 요청 — "미리보기에 검색기능 추가할 것." PDF가
-    /// 아닌 형식(hwp/doc/docx/pages/이미지 OCR)의 "추출 텍스트" 화면엔 지금까지
-    /// `initialSearchText`(관련 내용에서 넘어온 1회성 자동 이동)만 있었고,
-    /// 사용자가 직접 입력해 찾는 검색창은 없었다. `pdfSearchBar`/
-    /// `PDFSearchController`(원본 `.pdf` 탭)와 같은 모양(돋보기+검색어+N/M+
-    /// 다음/이전)으로 통일했지만, PDFKit 대신 이미 메모리에 있는
-    /// `viewModel.textLines`(줄 단위 배열)를 그냥 필터링하면 되므로 별도
-    /// `@Observable` 컨트롤러 없이 이 뷰의 `@State` 두 개로 충분하다.
+    /// 추출 텍스트(PDF 외 형식) 화면의 검색 상태. PDFKit 대신 메모리의 `viewModel.textLines`를
+    /// 필터링하므로 별도 컨트롤러 없이 `@State`만으로 충분하다.
     @State private var extractedTextSearchQuery: String = ""
     @State private var extractedTextCurrentMatchIndex: Int = 0
 
-    /// [2026-08-18 추가] 사용자 요청 — "모든 뷰어창 검색기능에 연구문서 검색과
-    /// 동일하게 성경 장절을 검색할 수 있도록 할 것" — 4가지 조건(띄어쓰기 무시,
-    /// 약어↔전체이름 상호 검색, 범위 포함 검색) 전부 `DocumentsHomeView.
-    /// matchesVerseReference`가 이미 구현한 것과 완전히 같은 원리로 푼다 —
-    /// 검색어를 `BibleReferenceExtractor`로 파싱해 (책ID, 장, 절) 좌표로
-    /// 정규화하면, 그 파서 자체가 이미 띄어쓰기/약어/전체이름을 다 흡수한다
-    /// (DocumentsHomeView.swift의 `matchesVerseReference` 상단 주석 참고).
-    ///
-    /// 이 문서에 이미 색인된 `VerseMention`(`BibleReferenceIndexingService`가
-    /// 문서 저장 직후 만들어 둠) 중 그 좌표와 겹치는 것들의 `searchText`(문서
-    /// 원문에 실제로 적힌 표현 그대로, 예: "창1:1~5")를 돌려준다 — 이
-    /// 리터럴 문자열들을 아래 `extractedTextMatches`(줄 단위 `contains`)와
-    /// `PDFSearchController.performSearch`(PDFKit `findString`) 양쪽에 "추가
-    /// 검색어"로 먹이면, 사용자가 "창세기 1:3"이라고 입력해도 문서에 적힌
-    /// "창1:1~5" 같은 다른 표현을 실제로 찾아 강조할 수 있다. 범위 포함
-    /// 검색도 같은 방식으로 저절로 된다 — `BibleReferenceIndexingService.
-    /// reindexDocument`가 이미 범위를 절 단위로 펼쳐 색인해 뒀으므로("창1:1~5"
-    /// → 1,2,3,4,5절 각각의 `VerseMention`), 검색어가 그 범위 안의 절 하나만
-    /// 가리켜도 좌표가 겹친다.
+    /// 검색어를 `BibleReferenceExtractor`로 파싱해 (책ID, 장, 절)로 정규화한 뒤, 이 문서에
+    /// 색인된 `VerseMention` 중 좌표가 겹치는 것의 `searchText`(문서 원문 표기, 예: "창1:1~5")를
+    /// 돌려준다. 띄어쓰기/약어/전체이름은 파서가 흡수하고, 범위 표기는 색인 시 절 단위로
+    /// 펼쳐져 있어 범위 안의 한 절만 검색해도 겹친다(`DocumentsHomeView.matchesVerseReference`와
+    /// 같은 원리). 이 리터럴을 `extractedTextMatches`와 `PDFSearchController`의 추가 검색어로 쓴다.
     private func verseSearchLiteralTerms(for query: String) -> [String] {
         let trimmed = query.trimmingCharacters(in: .whitespacesAndNewlines)
         guard !trimmed.isEmpty else { return [] }
@@ -1057,11 +765,8 @@ struct DocumentViewerView: View {
         guard !queryMatches.isEmpty else { return [] }
 
         let docId = document.id.uuidString
-        // `VerseMention.sourceId`는 평범한 String 저장 프로퍼티라 #Predicate
-        // 등호 비교가 안전하다(`sourceType`처럼 enum rawValue인 경우만 이
-        // 프로젝트가 회피해 온 패턴 — BibleReferenceIndexingService.
-        // removeMentions 상단 주석 참고). `sourceType`은 여기서 Swift 쪽에서
-        // 한 번 더 확인한다.
+        // `sourceId`는 String 저장 프로퍼티라 #Predicate 등호 비교가 안전하다. enum rawValue인
+        // `sourceType`은 프로젝트에서 predicate를 피하므로 아래에서 Swift 쪽으로 확인한다.
         let predicate = #Predicate<VerseMention> { $0.sourceId == docId }
         guard let mentions = try? modelContext.fetch(FetchDescriptor<VerseMention>(predicate: predicate)) else {
             return []
@@ -1074,18 +779,8 @@ struct DocumentViewerView: View {
                     && queryMatches.contains { query in
                         query.bookId == mention.bookId
                             && query.chapter == mention.chapter
-                            // [2026-09-02 수정] 사용자 요청 — "장만 언급된
-                            // 문장이 있으면, 어떤 절로 검색해도 매칭되는
-                            // 기능은 제거할 것. 혼란만 가중함." 예전엔
-                            // `mention.verse == nil`(이 mention이 특정 절
-                            // 없이 장만 가리킴)이면 검색한 절이 무엇이든
-                            // 무조건 통과시켰다 — 장만 언급하는 문장이 그
-                            // 장의 모든 절 검색에 다 걸려나와 혼란을 줬다.
-                            // 검색어 자체가 장만 가리키는 경우(`query.verse
-                            // == nil`, 예: "창1장"으로 검색)는 여전히 그
-                            // 장의 모든 mention과 매칭돼야 하므로 그대로
-                            // 둔다 — 제거 대상은 딱 "mention이 장만
-                            // 가리키는" 쪽뿐이다.
+                            // 장만 가리키는 mention(`mention.verse == nil`)은 어떤 절 검색에도 걸리지 않게 한다(혼란 방지).
+                            // 검색어 자체가 장만 가리키면(`query.verse == nil`) 그 장의 모든 mention과 매칭한다.
                             && (query.verse == nil || query.verse == mention.verse)
                     }
             }
@@ -1095,10 +790,8 @@ struct DocumentViewerView: View {
             .filter { seen.insert($0).inserted }
     }
 
-    /// 검색어와 일치하는 줄들의 id 목록 — 검색어가 비어 있으면 빈 배열(검색
-    /// 바가 "N/M"을 안 보여줌). [2026-08-18 확장] 리터럴 부분 문자열 일치에
-    /// 더해, 성경 장절 참조로 해석되는 검색어(`verseSearchLiteralTerms`)와
-    /// 겹치는 줄도 함께 찾는다.
+    /// 검색어와 일치하는 줄들의 id 목록(검색어가 비면 빈 배열). 리터럴 부분 문자열 일치에
+    /// 더해 성경 장절 참조로 해석되는 검색어(`verseSearchLiteralTerms`)와 겹치는 줄도 찾는다.
     private func extractedTextMatches(viewModel: DocumentViewerViewModel) -> [UUID] {
         let trimmed = extractedTextSearchQuery.trimmingCharacters(in: .whitespacesAndNewlines)
         guard !trimmed.isEmpty else { return [] }
@@ -1123,13 +816,8 @@ struct DocumentViewerView: View {
         extractedTextCurrentMatchIndex = (extractedTextCurrentMatchIndex - 1 + count) % count
     }
 
-    /// [2026-08-11 신설] 사용자 요청 — "[관련 내용]에서 문서를 고르면 그 성경구절
-    /// 표현이 있는 위치로 바로 이동." + [2026-08-16 검색기능과 통합] 이전엔
-    /// `initialSearchText`가 있을 때만 줄 단위로 쪼개 스크롤+강조했고, 없으면
-    /// 그냥 전체를 이어붙인 `Text` 하나였다(검색 이동이 아예 불가능한 모양).
-    /// 이제 검색창이 생겼으니 두 경로를 하나로 합친다 — 강조 대상은
-    /// "검색창에 입력 중이면 현재 검색 일치 줄, 아니면(빈 검색어) 관련 내용에서
-    /// 넘어온 1회성 매치 줄".
+    /// 추출 텍스트 화면. 강조 대상은 검색창 입력 중이면 현재 검색 일치 줄, 빈 검색어면
+    /// [관련 내용]에서 넘어온 1회성 매치 줄(`initialSearchText`).
     private func extractedTextPane(viewModel: DocumentViewerViewModel) -> some View {
         Group {
             if viewModel.textLines.isEmpty {
@@ -1194,16 +882,9 @@ struct DocumentViewerView: View {
     private func extractedTextScrollView(viewModel: DocumentViewerViewModel) -> some View {
         let matches = extractedTextMatches(viewModel: viewModel)
         let currentMatchID = matches.isEmpty ? nil : matches[min(extractedTextCurrentMatchIndex, matches.count - 1)]
-        // 검색창이 비어 있을 때는(검색 안 하는 중) 기존처럼 "관련 내용"에서 넘어온
-        // 1회성 자동 이동 매치를 강조 대상으로 쓴다.
-        // [2026-08-21 수정] 사용자 지적 — "성경조회 - 구절 탭 - 인스펙터에서
-        // 연구문서 클릭하면 검색어에 성경장절정보가 입력되어있는데 검색이
-        // 안됨." 원인: 인스펙터가 넘겨주는 `initialSearchText`는 정규화된
-        // 형태("창세기 1:3", 책과 장 사이 공백 있음)인데, 문서 원문은 다른
-        // 표기("창1:3", 공백 없음/약어)를 쓸 수 있어 리터럴 `.contains`만으로는
-        // 못 찾는다 — `extractedTextMatches`(위, 검색창 직접 입력 경로)가 이미
-        // `verseSearchLiteralTerms`로 이 문제를 풀어 뒀으므로 같은 로직을 여기
-        // 1회성 자동 이동 경로에도 적용한다.
+        // 검색창이 비어 있으면 "관련 내용"에서 넘어온 1회성 매치를 강조한다. `initialSearchText`는
+        // 정규화된 표기("창세기 1:3")라 문서 원문("창1:3")과 리터럴로는 안 맞을 수 있어,
+        // `verseSearchLiteralTerms`로 같은 해석을 적용한다.
         let fallbackMatchID: UUID? = {
             guard currentMatchID == nil, let initialSearchText, !initialSearchText.isEmpty else { return nil }
             let verseTerms = verseSearchLiteralTerms(for: initialSearchText)
@@ -1261,16 +942,8 @@ struct DocumentViewerView: View {
         .frame(maxWidth: .infinity, maxHeight: .infinity)
     }
 
-    /// [2026-08-26 추가] 사용자 요청 — "iCloud 상에는 있지만 현재 기기에 아직
-    /// 다운로드상태가 아닌 파일을 뷰어로 열면 다운로드가 이루어져서 뷰어로 볼 수
-    /// 있게 할것. 다운로드 중이면 다운로드 진행률이 나타날 수 있도록." 원본
-    /// 파일(또는 변환 PDF)의 바이트가 필요한 분기들(`originalPane`의 pdf/
-    /// image/hwp·hwpx, `docxContent`/`pagesContent`의 QuickLook 미리보기,
-    /// `docxContent`의 PDF 변환)이 기존에 쓰던 "파일을 열 수 없습니다" 류
-    /// `unavailableMessage`를 이걸로 대체한다 — `UbiquitousFileDownloadMonitor.
-    /// Status`가 `.downloading`이면 진행률을, `.failed`면 에러 원인을, `.ready`
-    /// (이미 다운로드됐는데도 못 열었다는 뜻)면 기존 폴백 메시지를 그대로
-    /// 보여준다.
+    /// iCloud에만 있고 아직 내려받지 않은 파일의 안내 화면. `.downloading`이면 진행률,
+    /// `.failed`면 원인, `.ready`(받았는데도 못 연 경우)면 기존 폴백 메시지를 보여준다.
     @ViewBuilder
     private func fileContentUnavailableView(
         status: UbiquitousFileDownloadMonitor.Status,
@@ -1286,10 +959,8 @@ struct DocumentViewerView: View {
         }
     }
 
-    /// 위 `fileContentUnavailableView`의 `.downloading` 케이스 — `SearchView.
-    /// bibleIndexStatusRow`의 `.building` 케이스와 같은 `ProgressView(value:)`
-    /// 스타일을 그대로 따른다(이 앱에서 이미 쓰고 있는 진행률 UI 패턴과
-    /// 일관되게).
+    /// `fileContentUnavailableView`의 `.downloading` 케이스 — `SearchView.bibleIndexStatusRow`의
+    /// `.building`과 같은 `ProgressView(value:)` 스타일.
     private func downloadingMessage(progress: Double) -> some View {
         VStack(spacing: 8) {
             ProgressView(value: progress)
@@ -1306,27 +977,17 @@ struct DocumentViewerView: View {
         let vm = DocumentViewerViewModel(document: document, modelContext: modelContext)
         vm.onAppear()
         viewModel = vm
-        // [2026-08-18 추가] 사용자 요청 — "모든 뷰어창 검색기능에 연구문서
-        // 검색과 동일하게 성경 장절을 검색할 수 있도록 할 것." 이 창에서 쓰는
-        // PDFKit 기반 검색 컨트롤러 둘 다(`.pdf` 원본, `.docx` PDF 변환) 같은
-        // 문서(`document`)를 대상으로 하므로 같은 리졸버를 그대로 연결한다 —
-        // `HWPToPDFPane`(별도 struct, `document`에 직접 접근 못 함)의
-        // 내부 컨트롤러는 `originalPane`에서 이 함수를 파라미터로 넘겨 연결한다.
+        // PDFKit 검색 컨트롤러 둘(`.pdf` 원본, `.docx` PDF 변환)은 같은 `document`를 대상으로 하므로
+        // 같은 리졸버를 연결한다. `HWPToPDFPane`은 `document`에 접근할 수 없어 `originalPane`에서
+        // 이 함수를 파라미터로 넘겨 연결한다.
         pdfSearchController.additionalSearchTerms = verseSearchLiteralTerms(for:)
         docxSearchController.additionalSearchTerms = verseSearchLiteralTerms(for:)
-        // 옛 `PDFSearchCoordinator`의 "1회성 자동 이동"을 새 검색창이 대신한다 —
-        // 위 `pdfSearchController` 프로퍼티 주석 참고.
+        // 초기 검색어는 새 검색창(`pdfSearchController.query`)으로 전달한다.
         if let initialSearchText, document.originalFormat == .pdf {
             pdfSearchController.query = initialSearchText
         }
-        // [2026-08-16 추가, 2026-08-26 이관] 위와 같은 이유, `.docx`용 —
-        // `docxContent`의 "PDF 변환" 탭(macOS, 변환본 있을 때만)에서만 실제
-        // 검색이 가능하다. 예전엔 여기서 `vm.onAppear()`가 이미 채워 둔
-        // `convertedPDFDocument`를 한 번만 확인했는데, 이제 그 값이 iCloud
-        // 다운로드가 끝난 뒤 나중에 채워질 수도 있어 이 1회성 체크로는
-        // 부족하다 — `docxContent`의 `syncDocxViewerModeIfConvertedPDFReady`
-        // (onAppear/onChange 둘 다에서 호출)로 옮겨 즉시/지연 도착 두 경우를
-        // 모두 커버한다.
+        // `.docx`의 변환 PDF는 iCloud 다운로드 완료 후 늦게 채워질 수 있어, 그 검색어 연결은
+        // 여기서 한 번만 하지 않고 `docxContent`의 `syncDocxViewerModeIfConvertedPDFReady`에서 처리한다.
         documentTags = (document.documentTags ?? []).compactMap(\.tag).filter { !$0.isMerged }
     }
 
@@ -1334,12 +995,8 @@ struct DocumentViewerView: View {
 
     private var documentTagSection: some View {
         VStack(alignment: .leading, spacing: 8) {
-            // [2026-08-16 수정] 사용자 요청 — "'태그' 타이틀 일반사이즈로. 입력된
-            // 태그는 '태그' 타이틀 하단이 아니라 우측 옆으로 추가되게 할 것."
-            // 이전엔 `.caption` 크기 라벨을 위 줄에 혼자 두고, 그 아래 줄에
-            // `FlowLayoutHStack`(태그 칩들)을 별도로 배치했다 — 이제 라벨과 칩을
-            // 같은 `HStack`에 넣어 라벨 오른쪽에 칩이 붙게 한다. 칩이 많아 줄바꿈
-            // 되더라도 라벨이 아래로 같이 밀리지 않도록 `alignment: .top`.
+            // 라벨과 태그 칩을 같은 `HStack`에 두어 칩이 라벨 오른쪽에 붙게 한다. 칩이 줄바꿈되어도
+            // 라벨이 같이 밀리지 않도록 `alignment: .top`.
             HStack(alignment: .top, spacing: 8) {
                 Text("태그")
 
@@ -1451,11 +1108,8 @@ struct DocumentViewerView: View {
 #if os(macOS)
 private struct PDFKitRepresentable: NSViewRepresentable {
     let document: PDFDocument
-    /// [2026-08-15 변경] 예전엔 이 뷰가 자체 `PDFSearchCoordinator`로 "1회성
-    /// 검색+이동"만 했다 — 이제 `DocumentViewerView.pdfSearchController`
-    /// (양방향 검색창)가 검색 전체를 담당하므로, 이 표현형(representable)의
-    /// 유일한 역할은 실제로 만들어진 `PDFView`를 그 컨트롤러에 연결해 주는
-    /// 것뿐이다(컨트롤러가 이후 검색/이동을 직접 그 `PDFView`에 명령한다).
+    /// 생성된 `PDFView`를 `searchController`에 연결하는 것이 이 표현형의 유일한 역할이다.
+    /// 검색/이동은 컨트롤러가 그 `PDFView`에 직접 명령한다.
     let searchController: PDFSearchController
 
     func makeNSView(context: Context) -> PDFView {
@@ -1466,11 +1120,8 @@ private struct PDFKitRepresentable: NSViewRepresentable {
         return view
     }
     func updateNSView(_ nsView: PDFView, context: Context) {
-        // [2026-08-15 추가, 깜박임 fix] `document`가 캐싱된 뒤에도(위 originalPane
-        // 수정 참고) SwiftUI는 이 뷰가 재계산될 때마다 `updateNSView`를 부를 수
-        // 있다 — 매번 무조건 `.document`에 대입하면 같은 내용이라도 `PDFView`가
-        // 다시 그리며 스크롤/확대 위치가 흔들릴 수 있어, 참조가 실제로 바뀐
-        // 경우에만(`!==`, 클래스 타입 동일성) 대입한다.
+        // SwiftUI가 재계산할 때마다 `.document`에 무조건 대입하면 같은 내용이라도 `PDFView`가
+        // 다시 그려져 스크롤/확대 위치가 흔들릴 수 있어, 참조가 바뀐 경우에만(`!==`) 대입한다.
         if nsView.document !== document {
             nsView.document = document
         }
@@ -1504,22 +1155,14 @@ private struct PDFKitRepresentable: UIViewRepresentable {
 }
 #endif
 
-/// [2026-08-15 신설] 사용자 요청 — "pdf 창에 단어 검색기능 + 검색된 단어수 +
-/// 검색이동 기능 추가." `PDFView`(AppKit/UIKit `NSViewRepresentable`/
-/// `UIViewRepresentable` 안쪽에 있는 실제 뷰)를 SwiftUI 검색창에서 직접
-/// 조작해야 해서, `updateNSView`의 선언적 diff 타이밍에 기대는 대신(이전
-/// `PDFSearchCoordinator`가 쓰던 방식 — 검색어 하나가 바뀔 때만 반응하는 "1회성"
-/// 용도에는 맞았지만, "다음/이전" 같은 매번 다른 동작을 표현하기 어렵다) 이
-/// 컨트롤러가 `PDFView`에 대한 참조를 직접 들고 있다가 검색창의 버튼/타이핑에
-/// 바로 명령을 내리는 명령형(imperative) 패턴을 썼다 — AppKit/UIKit 상호운용에서
-/// 흔히 쓰는 방식이다.
+/// `PDFView`에 대한 참조를 직접 들고 검색창의 입력/버튼에 바로 명령을 내리는 명령형
+/// 컨트롤러. "다음/이전"처럼 매번 다른 동작은 `updateNSView`의 선언적 diff로 표현하기
+/// 어려워 이 패턴을 쓴다(AppKit/UIKit 상호운용의 일반적 방식).
 @MainActor
 @Observable
 final class PDFSearchController {
-    /// `PDFKitRepresentable.makeNSView`/`updateNSView`가 실제 `PDFView`가
-    /// 만들어지는 대로 연결해 준다. `PDFView`는 이미 SwiftUI 뷰 계층(그 안의
-    /// `NSViewRepresentable`)이 소유하고 있으므로, 이 컨트롤러 쪽에서는 강한
-    /// 참조를 잡을 필요가 없어 `weak`로 둔다(순환 참조 방지).
+    /// `PDFKitRepresentable`이 실제 `PDFView`가 만들어지는 대로 연결해 준다. `PDFView`는
+    /// SwiftUI 뷰 계층이 소유하므로 순환 참조 방지를 위해 `weak`로 둔다.
     weak var pdfView: PDFView? {
         didSet {
             guard pdfView != nil, !query.isEmpty else { return }
@@ -1537,17 +1180,10 @@ final class PDFSearchController {
     private(set) var matches: [PDFSelection] = []
     private(set) var currentIndex: Int = 0
 
-    /// [2026-08-18 추가] 사용자 요청 — "모든 뷰어창 검색기능에 연구문서 검색과
-    /// 동일하게 성경 장절을 검색할 수 있도록 할 것." `PDFDocument.findString`은
-    /// 리터럴 부분 문자열만 찾으므로, 타이핑된 검색어가 성경 참조("창세기
-    /// 1:3")면 문서에 실제로 적힌 다른 표현("창1:1~5")을 그대로 못 찾는다.
-    /// `DocumentViewerView`가 이 클로저에 `verseSearchLiteralTerms(for:)`를
-    /// 연결해 두면, `performSearch()`가 타이핑된 검색어 그대로에 더해 이
-    /// 클로저가 돌려주는 리터럴 표현들도 함께 찾아 하나의 결과로 합친다 —
-    /// 이 컨트롤러 자체는 "누가 이 결과를 채워 주는지" 몰라도 되게 의존성을
-    /// 역전시켰다(`PDFSearchController`는 `SourceDocument`/`VerseMention`을
-    /// 전혀 몰라도 된다 — 이 파일 최상단이 SwiftData 모델을 import하는 이유가
-    /// 이 컨트롤러 때문이 되지 않게 하려는 의도).
+    /// 타이핑된 검색어가 성경 참조("창세기 1:3")일 때 문서에 실제로 적힌 다른 표현("창1:1~5")도
+    /// 찾도록, `DocumentViewerView`가 `verseSearchLiteralTerms(for:)`를 연결하는 주입 지점.
+    /// `PDFDocument.findString`이 리터럴 부분 문자열만 찾기 때문이며, 이 컨트롤러가
+    /// `SourceDocument`/`VerseMention`을 몰라도 되도록 의존성을 역전시켰다.
     var additionalSearchTerms: (String) -> [String] = { _ in [] }
 
     var matchCountText: String {
@@ -1556,27 +1192,14 @@ final class PDFSearchController {
 
     // MARK: - 확대/축소 (2026-09-05 추가)
 
-    /// [2026-09-05 추가] 사용자 요청 — "pdf 뷰어에도 돋보기 3버튼 추가할
-    /// 것." 다른 뷰어들(`OutlineQuickViewWindowContent`/`RhwpWebViewerPane`/
-    /// `HWPViewerPane`)은 콘텐츠 자체가 순수 SwiftUI라 자체 `@State
-    /// zoomScale` 값을 직접 관리해야 하지만, `PDFView`는 PDFKit이 이미
-    /// 확대/축소용 공식 API(`scaleFactor`)를 제공하고 트랙패드 핀치줌도 그
-    /// 값을 직접 바꾼다 — 별도의 SwiftUI 상태를 새로 만들어 따로 관리하면
-    /// 사용자가 핀치로 확대한 뒤 이 버튼을 누르는 순간 핀치 결과를 무시하고
-    /// 되돌리는 충돌이 생긴다. 그래서 `pdfView.scaleFactor`를 그대로 읽고
-    /// 쓴다 — 이 버튼과 트랙패드 핀치가 항상 같은 값을 두고 협업한다.
-    /// 최소/최대/단위는 앱 전체가 이미 쓰는 값(위 다른 뷰어들과 동일,
-    /// `OutlineQuickViewWindowContent`부터 통일해 온 관례)을 그대로 맞췄다.
+    /// 확대/축소 범위와 단위(앱의 다른 뷰어와 동일). `pdfView.scaleFactor`를 그대로 읽고 써서
+    /// 트랙패드 핀치줌과 버튼이 항상 같은 값을 공유한다(별도 SwiftUI 상태를 두면 핀치 결과를
+    /// 되돌리는 충돌이 생긴다).
     ///
-    /// ⚠️ [알려진 한계] 이 값은 `pdfView.scaleFactor`를 그때그때 읽어 오는
-    /// 계산 프로퍼티라, 사용자가 트랙패드 핀치로 확대한 직후에는(이 뷰가
-    /// 다른 이유로 다시 그려지기 전까지) 화면에 이미 보이는 `.help()` 툴팁
-    /// 퍼센트 문자열이 최신 값으로 즉시 갱신되지 않을 수 있다 — 버튼을 한
-    /// 번이라도 누르면 그 순간 다시 정확해진다. `PDFView`가 핀치줌마다
-    /// SwiftUI에 변경을 알리는 공식 옵저버블 API가 없어(있으려면
-    /// `NotificationCenter`의 `.PDFViewScaleChanged`를 별도로 구독해야 함),
-    /// 툴팁 문자열 하나만을 위해 그 복잡도를 더하지 않았다 — 실제 확대/축소
-    /// 동작 자체는 이 한계와 무관하게 항상 정확하다.
+    /// ⚠️ [알려진 한계] `zoomScale`은 그때그때 읽는 계산 프로퍼티라, 핀치줌 직후에는 `.help()`
+    /// 툴팁의 퍼센트가 즉시 갱신되지 않을 수 있다(버튼을 누르면 정확해진다). 갱신하려면
+    /// `.PDFViewScaleChanged` 구독이 필요한데 툴팁 하나를 위해 추가하지 않았다. 실제
+    /// 확대/축소 동작은 영향받지 않는다.
     static let minZoom: CGFloat = 0.5
     static let maxZoom: CGFloat = 3.0
     static let zoomStep: CGFloat = 0.1
@@ -1597,15 +1220,9 @@ final class PDFSearchController {
         pdfView?.scaleFactor = 1.0
     }
 
-    /// ⚠️ [알려진 한계] `PDFDocument.findString`은 문서 전체를 동기적으로 훑는다
-    /// — 타이핑할 때마다 즉시 다시 검색하므로, 아주 긴 PDF(수백 페이지)에서는
-    /// 검색창 반응이 잠깐 끊길 수 있다. 이번 요청 범위(단어 검색+개수+이동)엔
-    /// 없던 요구라 디바운스/비동기화는 넣지 않았다 — 실제로 느리게 느껴지면
-    /// 다음 라운드에서 추가하면 된다. [2026-08-18 추가] 이제 검색어 하나당
-    /// `findString` 호출이 여러 번(타이핑된 검색어 + 성경 참조로 풀린 리터럴
-    /// 표현마다 한 번씩) 일어날 수 있어 이 비용이 조금 더 커졌다 — 리터럴
-    /// 표현 개수는 보통 한 자릿수라 실사용에서 체감될 정도는 아닐 것으로
-    /// 본다.
+    /// ⚠️ [알려진 한계] `PDFDocument.findString`은 문서 전체를 동기적으로 훑고 타이핑마다
+    /// 다시 검색하므로, 매우 긴 PDF(수백 페이지)에서는 검색창 반응이 잠깐 끊길 수 있다
+    /// (디바운스/비동기화 미적용). 성경 참조로 풀린 리터럴 표현마다 검색이 한 번씩 더 일어난다.
     func performSearch() {
         currentIndex = 0
         let trimmed = query.trimmingCharacters(in: .whitespacesAndNewlines)
@@ -1613,45 +1230,20 @@ final class PDFSearchController {
             matches = []
             return
         }
-        // [2026-09-02 수정] 사용자 보고 — "PDF 탭에서 창1:1로 검색했는데 창1:14가
-        // 걸림." 원인: 이전엔 타이핑한 원문 그대로("창1:1")를 `additionalSearchTerms`
-        // 결과(성경 장절로 해석해 이 문서에 실제로 적힌 표현, 예: "창세기 1장
-        // 1절")에 "더해서" 항상 같이 찾았다. `PDFDocument.findString`은 순수
-        // 리터럴 부분 문자열 검색이라 "1:1"이 "1:14"의 접두사와 우연히 겹치면
-        // (뒤에 숫자가 더 있어도 상관없이) 그대로 매치로 잡힌다 — 검색어가
-        // 실제로 성경 장절 참조로 인식됐다면, 그 참조 그대로의 문자열("창1:1")을
-        // 리터럴로 또 찾을 이유가 없다(오히려 이런 접두사 오탐만 만든다). 그래서
-        // `additionalSearchTerms`가 뭔가 돌려줬으면(=참조로 인식돼 이 문서에
-        // 실제로 색인된 표현이 있으면) 그것만 신뢰하고, 원문 그대로는 그
-        // 결과가 비어 있을 때(=참조로 인식 안 됐거나, 참조로는 인식됐지만 이
-        // 문서엔 없음)만 예전처럼 폴백으로 쓴다 — `RhwpWebViewerPane`/
-        // `HWPViewerPane`에 이미 있는 "관련 내용 클릭 시 최초 이동"용
-        // `additionalSearchTerms(initialSearchText).first ?? initialSearchText`
-        // 패턴("있으면 그걸 쓰고, 없을 때만 원문 폴백")과 정확히 같은 원칙이다.
+        // `additionalSearchTerms`가 결과를 돌려주면(참조로 인식되어 이 문서에 색인된 표현이 있으면)
+        // 그것만 신뢰하고, 원문은 결과가 비었을 때만 폴백으로 쓴다. 원문("창1:1")을 항상 같이 찾으면
+        // "창1:14" 같은 접두사 오탐이 생기기 때문이다(`RhwpWebViewerPane`/`HWPViewerPane`의
+        // `additionalSearchTerms(initialSearchText).first ?? initialSearchText`와 같은 원칙).
         let resolvedTerms = additionalSearchTerms(trimmed)
         let terms = resolvedTerms.isEmpty ? [trimmed] : resolvedTerms
         var seenTerms = Set<String>()
         let uniqueTerms = terms.filter { seenTerms.insert($0.lowercased()).inserted }
 
-        // [2026-09-02 추가] 사용자 보고 — "PDF 검색에서도 창1:1로 검색을
-        // 해도 창1:14, 창1:11에 대한 내용도 검색이 되는 상황." 원인: 바로 위
-        // 수정(원문+해석된 표현을 항상 같이 찾던 문제)과는 별개로,
-        // `PDFDocument.findString`은 애초에 순수 리터럴 부분 문자열 검색이라
-        // 검색어가 "1:1"처럼 숫자로 끝나면 "1:14"/"1:11"처럼 뒤에 숫자가 더
-        // 붙은 다른 참조의 "접두사"로 우연히 걸린다(대칭적으로 "21:1"처럼
-        // 앞에 숫자가 더 붙은 경우의 "접미사"로도 걸릴 수 있다 — 같은 문제).
-        // `findString`엔 이 경계를 구분할 방법이 없고, `.regularExpression`
-        // 옵션은 PDFKit의 `findString`이 실제로 지원하지 않는다 — 애플
-        // 공식 헤더가 지원 옵션으로 대소문자/리터럴/역방향만 명시하고 있고,
-        // 애플 개발자 포럼(Developer Forums Thread 118654)에서도 그 옵션을
-        // 줘도 에러 없이 그냥 결과가 안 나온다는 게 확인된 사실이다. 그래서
-        // 아래 `matchesWithDigitBoundary`가 페이지 원문에 직접
-        // `NSRegularExpression`을 돌려 앞뒤에 숫자가 없을 때만 매치시키고,
-        // 문자 인덱스 범위를 `PDFDocument.
-        // selection(from:atCharacterIndex:to:atCharacterIndex:)`로 다시
-        // `PDFSelection`으로 바꾼다 — 같은 포럼 스레드에서 다른 개발자들이
-        // "findString이 정규식을 못 쓸 때"의 실제 우회법으로 검증해 쓰고
-        // 있는 조합이다.
+        // `findString`은 리터럴 부분 문자열 검색이라 "1:1"이 "1:14"/"1:11"(접두사)이나 "21:1"(접미사)에도
+        // 걸리고, `.regularExpression` 옵션은 PDFKit이 지원하지 않는다(지원 옵션은 대소문자/리터럴/
+        // 역방향뿐). 그래서 `matchesWithDigitBoundary`가 페이지 원문에 직접 `NSRegularExpression`을
+        // 돌려 앞뒤에 숫자가 없을 때만 매치시키고, 문자 인덱스 범위를
+        // `PDFDocument.selection(from:atCharacterIndex:to:atCharacterIndex:)`로 `PDFSelection`으로 바꾼다.
         let found = uniqueTerms.flatMap { matchesWithDigitBoundary(for: $0, in: document) }
         // 여러 검색어를 따로 찾아 이어붙인 결과라 문서 순서가 뒤섞여 있다 —
         // "다음/이전"이 위→아래로 자연스럽게 움직이도록 페이지·페이지 안
@@ -1671,16 +1263,9 @@ final class PDFSearchController {
         highlightCurrent()
     }
 
-    /// [2026-09-02 추가] `performSearch()`가 검색어 앞뒤 숫자 경계 오탐(예:
-    /// "1:1"이 "1:14"/"21:1"의 접두사·접미사로 우연히 걸리는 문제)을 막기
-    /// 위해 쓰는 헬퍼 — 위 `performSearch()`의 주석에 적은 근거(애플 공식
-    /// PDFKit 헤더 + 애플 개발자 포럼 Thread 118654) 그대로, `findString`
-    /// 대신 페이지 원문에 `NSRegularExpression`을 직접 돌린다. `term`에
-    /// 정규식 특수문자(괄호 등)가 있어도 안전하도록
-    /// `NSRegularExpression.escapedPattern(for:)`로 이스케이프한 뒤, 그
-    /// 앞뒤에 `(?<!\d)`/`(?!\d)`(바로 앞/뒤 문자가 숫자가 아님)를 붙인다 —
-    /// `term`이 숫자로 끝나거나 시작하지 않으면 이 조건은 항상 참이라
-    /// 기존 동작과 결과가 같고, 숫자로 끝나거나 시작할 때만 실제로 걸러진다.
+    /// `findString` 대신 페이지 원문에 `NSRegularExpression`을 돌려, 검색어 앞뒤에 숫자가 붙은
+    /// 오탐("1:1" ↔ "1:14"/"21:1")을 막는다. `term`은 `escapedPattern(for:)`로 이스케이프하고
+    /// `(?<!\d)`/`(?!\d)`를 붙이므로, 숫자로 시작/끝나지 않는 `term`은 기존 결과와 같다.
     private func matchesWithDigitBoundary(for term: String, in document: PDFDocument) -> [PDFSelection] {
         guard !term.isEmpty else { return [] }
         let pattern = "(?<!\\d)" + NSRegularExpression.escapedPattern(for: term) + "(?!\\d)"
@@ -1728,36 +1313,10 @@ final class PDFSearchController {
 
 // MARK: - hwp 뷰어 종류(2026-08-16 재도입 — hwpViewerModeToggle 참고)
 
-/// `.hwp`/`.hwpx` 문서를 열 때 고를 수 있는 뷰어들. `HWPViewerPane`(hwp-swift
-/// 네이티브)과 `RhwpWebViewerPane`(rhwp WKWebView 웹 뷰어, 별도 파일
-/// RhwpWebViewerPane.swift)이 같은 `Data`를 받아 각자 렌더링한다.
-///
-/// [2026-08-16 정리] rhwp 웹 뷰어가 계속 실패하던 문제를 진단용 임시 탭
-/// 3단계(단순 WKWebView → 커스텀 스킴 핸들러만 → rhwp.js import/wasm init
-/// 단독 실행)로 근본 원인 두 가지를 확정하고 고쳤다 — (1) `HWPViewerSchemeHandler`
-/// 가 wasm 응답에 진짜 HTTP `Content-Type` 헤더를 안 채워서
-/// `WebAssembly.instantiateStreaming`이 실패하던 것(수정: `HTTPURLResponse
-/// (headerFields:)`), (2) `didFinish`가 `hwp_viewer.js` 모듈 실행 완료보다
-/// 먼저 와서 `window.rhwpLoadDocument`가 아직 정의 전이던 레이스 컨디션(수정:
-/// JS가 명시적으로 보내는 `hwpViewerReady` 신호를 기다리도록 변경) — 자세한
-/// 내용은 RhwpWebViewerPane.swift 상단 주석 참고. 진단용 탭/리소스는 문제
-/// 해결 확인 후 모두 제거했다.
-/// [2026-08-16 추가] 사용자 요청 — "rhwp 엔진중에 pdf 변환기능이 있던지
-/// 확인해서 업로드할 때 pdf 변환해서 보여주는 것을 네이티브, 웹, pdf 별도
-/// 탭에 구현할 것." 조사 결과(HWPToPDFPane 상단 주석에 자세히 정리) rhwp.js
-/// (WASM)엔 PDF 관련 기능이 전혀 없었다 — 처음엔 hwp-swift(HwpKit) 쪽
-/// `HwpKitNative.HwpPDFRenderer`(WebView 없는 순수 CoreGraphics 렌더러)로
-/// 세 번째 탭을 구현했다.
-///
-/// [2026-08-16 PDF 탭 재구현] 그 첫 버전을 사용자가 거부했다 — 네이티브 탭
-/// (`HWPViewerPane`)과 똑같은 `HwpDocument` paint list를 그대로 PDF로 뽑을
-/// 뿐이라 렌더링 결과가 사실상 같아서 "존재 이유가 없음." 대신 참고로 든
-/// https://github.com/postmelee/alhangeul-macos 가 실제로 쓰는 방식(rhwp
-/// 자체 PDF 기능이 아니라 `renderPageSvg` → 오프스크린 WKWebView →
-/// `WKWebView.createPDF`)을 "WKWebView 취약점 범주가 그대로 재발할 수 있는
-/// 접근이라 해도 한번 구현테스트를 확인할 수 있도록" 해 달라는 명시적 요청을
-/// 받아 `RhwpPDFExportService`로 새로 구현했다 — 자세한 내용은
-/// `RhwpPDFExportService.swift`와 `HWPToPDFPane` 상단 주석 참고.
+/// `.hwp`/`.hwpx` 문서를 열 때 고를 수 있는 뷰어들. `HWPViewerPane`(hwp-swift 네이티브),
+/// `RhwpWebViewerPane`(rhwp WKWebView 웹 뷰어), `HWPToPDFPane`(rhwp SVG를 오프스크린
+/// WKWebView의 `createPDF`로 PDF화)가 같은 `Data`를 받아 각자 렌더링한다. rhwp.js(WASM)
+/// 자체에는 PDF 기능이 없어 PDF 탭은 `RhwpPDFExportService`가 담당한다.
 private enum HWPViewerMode: String, CaseIterable, Identifiable {
     case hwpSwiftNative
     case rhwpWeb
@@ -1774,13 +1333,9 @@ private enum HWPViewerMode: String, CaseIterable, Identifiable {
     }
 }
 
-/// [2026-08-16 신설] 사용자 요청 — "pages 뷰어는 QLPreviewController로 보여지게
-/// 하되, 검색기능을 검토할 것." 검토 결과 — QuickLook은 순수 렌더링 API라
-/// 텍스트를 앱으로 못 돌려주므로 그 안에서 검색을 구현할 수 없다(대화에서 이미
-/// 확인). 그래서 `.hwp`/`.hwpx`의 `HWPViewerMode`(네이티브 ↔ 웹)와 같은 방식으로
-/// "원본(QuickLook, 시각적으로 정확·검색 불가)"과 "텍스트(SwiftTextPages로 추출,
-/// 검색 가능)"를 세그먼트로 오가게 한다 — 한쪽에 다 몰아넣지 않고 사용자가
-/// 목적에 맞게 고르게 했다.
+/// pages 뷰어 모드. QuickLook은 순수 렌더링 API라 텍스트를 앱으로 돌려주지 않아 그 안에서
+/// 검색할 수 없으므로, "원본(QuickLook, 시각적으로 정확·검색 불가)"과
+/// "텍스트(SwiftTextPages로 추출, 검색 가능)"를 세그먼트로 오가게 한다.
 private enum PagesViewerMode: String, CaseIterable, Identifiable {
     case quickLook
     case extractedText
@@ -1795,11 +1350,8 @@ private enum PagesViewerMode: String, CaseIterable, Identifiable {
     }
 }
 
-/// [2026-08-16 신설] 사용자 요청 — "docx는 hwp뷰어처럼, 상단 탭을 줄것(미리보기,
-/// pdf변환)." hwp의 `HWPViewerMode`/pages의 `PagesViewerMode`와 같은 패턴 —
-/// 자동으로 하나를 골라 보여주는 대신, 사용자가 세그먼트로 직접 오갈 수 있게
-/// 한다. "PDF 변환" 탭 이름은 `HWPViewerMode.pdfConverted`의 라벨과 그대로
-/// 맞췄다(같은 개념 — 업로드 시 미리 변환해 둔 PDF).
+/// docx 뷰어 모드. `HWPViewerMode`/`PagesViewerMode`와 같은 패턴으로 사용자가 세그먼트로 직접
+/// 오간다. "PDF 변환"은 `HWPViewerMode.pdfConverted`와 같은 개념(업로드 시 미리 변환해 둔 PDF).
 private enum DocxViewerMode: String, CaseIterable, Identifiable {
     case preview
     case pdfConverted
@@ -1816,55 +1368,30 @@ private enum DocxViewerMode: String, CaseIterable, Identifiable {
 
 // MARK: - hwp 뷰어(hwp-swift/HwpKit 네이티브 렌더러 기반, 위 파일 상단 [2026-08-16 전면 교체] 참고)
 
-/// 페이지(원본 보기)에서 문서 바이트가 준비돼 있을 때 그리는 실제 뷰어 화면.
-/// `HwpKit`의 네이티브 SwiftUI 컴포넌트(`HwpDocumentView`/`HwpSearchController`/
-/// `HwpSearchBar`)를 그대로 쓴다 — hwp-swift 저장소의
-/// `Sample/HwpSwiftSample/ContentView.swift` 실제 배선 예시를 그대로 따랐다.
-/// WKWebView/WASM이 없어 `pdfSearchBar` + `PDFKitRepresentable` 쌍과 마찬가지로
-/// 순수 SwiftUI/네이티브 뷰 조합이다.
-///
-/// [2026-08-16 수정] 사용자 요청으로 상단 툴바를 pdf 뷰어(`pdfSearchBar`)와 같은
-/// 모양으로 통일했다 — 이제 `HwpDocumentToolbar`/`HwpPageNavigator`/
-/// `HwpZoomControls`(HwpKit이 기본 제공하는 페이지 이동 버튼 툴바)는 쓰지 않고,
-/// 검색창 + 자체 구현한 돋보기 아이콘 버튼 3개(`searchAndZoomBar`)로 대신한다.
+/// 원본 보기에서 hwp 문서 바이트가 준비됐을 때 그리는 네이티브 뷰어.
+/// `HwpKit`의 `HwpDocumentView`/`HwpSearchController`/`HwpSearchBar`를 쓰는 순수 SwiftUI 구성이며,
+/// 상단은 검색창 + 돋보기 아이콘 버튼 3개(`searchAndZoomBar`)로 pdf 뷰어(`pdfSearchBar`)와 같은 모양이다.
 private struct HWPViewerPane: View {
     let documentData: Data
-    /// [2026-08-19 추가] "hwp 뷰어 안에서 검색어 자동 하이라이트" 요청 —
-    /// `DocumentViewerView.initialSearchText`(관련 연구문서에서 넘어온 검색어)를
-    /// 그대로 받아 `load()` 완료 직후 `search.search(text:)`로 흘려보낸다.
-    /// `pdfSearchController.query = initialSearchText` /
-    /// `docxSearchController.query = initialSearchText`(`setUpIfNeeded()`)와
-    /// 같은 목적의 hwp 전용 버전이다. `HwpSearchController.search(_:)`는
-    /// storedQuery만 갱신하고 지오메트리(선택 컨트롤러 attach)가 아직 없으면
-    /// 즉시 스캔하지 않고 조용히 반환하므로(`startScan`의 `guard let geometry`),
-    /// `HwpDocumentView`가 뒤늦게 `attach(to:)`할 때 그 안의 `restartScan()`이
-    /// 이미 저장된 질의로 다시 스캔한다 — 호출 순서를 신경 쓸 필요가 없다.
+    /// 관련 연구문서에서 넘어온 검색어 — `load()` 완료 직후 `search.search(text:)`로 흘려보낸다.
+    /// 지오메트리가 아직 없으면 `HwpSearchController`가 질의만 저장해 두고, `HwpDocumentView`가 나중에
+    /// `attach(to:)`할 때 저장된 질의로 다시 스캔하므로 호출 순서는 상관없다.
     var initialSearchText: String? = nil
-    /// [2026-08-21 추가] 사용자 지적 — "성경조회 - 구절 탭 - 인스펙터에서
-    /// 연구문서 클릭하면 검색이 안됨(공백 불일치로 추정)." `HwpSearchController.
-    /// search(text:)`는 `PDFSearchController.performSearch`와 달리 한 번에
-    /// 검색어 하나만 받는다(여러 리터럴 표현을 동시에 찾는 API가 없다) — 그래서
-    /// `HWPToPDFPane.additionalSearchTerms`처럼 "합쳐서 찾기"가 아니라, 부모
-    /// (`DocumentViewerView.verseSearchLiteralTerms(for:)`)가 돌려준 리터럴
-    /// 표현이 있으면 그중 첫 번째를(문서에 실제로 적힌 그대로) 쓰고, 없으면
-    /// 원래 입력 그대로 쓴다 — 아래 `load()` 참고.
+    /// `HwpSearchController.search(text:)`는 검색어 하나만 받으므로, 부모가 돌려준 리터럴 표현이 있으면
+    /// 그중 첫 번째(문서에 실제로 적힌 표기)를, 없으면 원래 입력을 쓴다 — `load()` 참고.
     var additionalSearchTerms: (String) -> [String] = { _ in [] }
-    /// [2026-08-16 추가] `hwpViewerModeToggle` 상단 주석 참고 — 로드 성공/실패를
-    /// 상위(`DocumentViewerView.reportViewerAvailability`)에 보고한다.
+    /// 로드 성공/실패를 상위(`DocumentViewerView.reportViewerAvailability`)에 보고한다.
     var onAvailabilityChange: ((Bool) -> Void)? = nil
     @State private var document: HwpDocument?
     @State private var errorMessage: String?
     @State private var currentPage: Int = 1
     @State private var zoomScale: CGFloat = 1.0
-    /// 문서 내 검색 세션 — `HwpDocumentView(searchController:)`와
-    /// `HwpSearchBar(controller:)`에 같은 인스턴스를 넘기면 하이라이트·매치
-    /// 이동이 라이브러리 안에서 자동으로 배선된다(hwp-swift Sample README 참고).
+    /// 문서 내 검색 세션 — `HwpDocumentView`와 `HwpSearchBar`에 같은 인스턴스를 넘기면
+    /// 하이라이트·매치 이동이 라이브러리 안에서 자동 연결된다.
     @State private var search = HwpSearchController()
     @FocusState private var searchFieldFocused: Bool
 
-    /// [2026-08-16 추가] `pdfSearchBar`/`OutlineQuickViewWindowContent.header`와
-    /// 같은 줌 범위 — 앱 전체에서 "돋보기 아이콘 3개(확대/축소/원본크기)" 패턴을
-    /// 통일하기 위해 값도 그대로 맞췄다.
+    /// 앱 전체의 돋보기 아이콘 3개(확대/축소/원본크기) 패턴과 같은 줌 범위.
     private static let minZoom: CGFloat = 0.5
     private static let maxZoom: CGFloat = 3.0
     private static let zoomStep: CGFloat = 0.1
@@ -1907,33 +1434,20 @@ private struct HWPViewerPane: View {
                     .frame(maxWidth: .infinity, maxHeight: .infinity)
             }
         }
-        // `.task(id:)`로 documentData가 바뀌면(다른 문서를 같은 뷰에서 다시
-        // 열게 되는 경우) 재로딩한다 — 값 비교이므로 같은 파일 재진입은
-        // 다시 파싱하지 않는다.
+        // documentData가 바뀌면 재로딩한다(값 비교라 같은 파일 재진입은 다시 파싱하지 않음).
         .task(id: documentData) {
             await load()
         }
     }
 
-    /// [2026-08-16 교체] 사용자 요청 — "hwp 뷰어를 pdf뷰어와 UI를 비슷하게 맞출것
-    /// (page 이동버튼 삭제, 검색기능 옆에 줌기능 버튼 세개(개요처럼))." 예전엔
-    /// `HwpDocumentToolbar { HwpPageNavigator; Spacer; HwpZoomControls }` +
-    /// 별도 줄의 `HwpSearchBar` 두 줄이었다 — `HwpPageNavigator`(페이지 이동
-    /// 버튼)를 없애고, `pdfSearchBar`/`OutlineQuickViewWindowContent.header`와
-    /// 똑같은 모양(검색창 + 돋보기 아이콘 버튼 3개)으로 한 줄에 합쳤다. 페이지
-    /// 이동은 `HwpDocumentView`의 자체 스크롤/제스처로 대신한다(PDFKitRepresentable도
-    /// 마찬가지로 별도 페이지 버튼 없이 스크롤로만 넘긴다).
+    /// 검색창 + 돋보기 버튼 3개를 한 줄로 배치한다. 페이지 이동은 `HwpDocumentView`의 스크롤/제스처로 대신한다.
     private var searchAndZoomBar: some View {
         HStack(spacing: 8) {
             HwpSearchBar(controller: search, isFocused: $searchFieldFocused)
 
             Spacer(minLength: 8)
 
-            // [2026-09-05 수정] 사용자 요청 — "한글 뷰어의 돋보기 3버튼도
-            // 개요 새창 돋보기와 동일한 디자인으로 수정할 것."
-            // `OutlineQuickViewWindowContent.header`가 이미 적용한 "강조색
-            // 12% 원형 배경 + 35% 테두리(28pt) + 명시적 아이콘 크기" 패턴을
-            // 그대로 재사용한다(근거 없는 새 스타일 대신 기존 패턴 재사용).
+            // `OutlineQuickViewWindowContent.header`와 같은 스타일(강조색 12% 원형 배경 + 35% 테두리, 28pt).
             Button {
                 zoomScale = min(Self.maxZoom, zoomScale + Self.zoomStep)
             } label: {
@@ -1998,83 +1512,30 @@ private struct HWPViewerPane: View {
 
 // MARK: - hwp → PDF 변환 탭(2026-08-16 신설, 위 HWPViewerMode 주석 참고)
 
-/// [2026-08-16 신설] 사용자 요청 — "rhwp 엔진중에 pdf 변환기능이 있던지
-/// 확인해서... pdf 별도 탭에 구현할 것." 조사 경과:
-///
-/// 1) 번들된 `Resources/rhwp.js`(WASM) 전체(HwpDocument 메서드 약 300개 +
-/// `DocumentExport` 결과 컨테이너)를 다 뒤져도 "pdf"라는 문자열 자체가 단 한
-/// 군데도 없다 — `exportHwp`/`exportHwpx`/`exportHml` 계열은 전부 HWP/HWPX/
-/// HML 포맷 내보내기지 PDF가 아니다. edwardkim/rhwp 상류 README의 로드맵도
-/// "다양한 출력 포맷(PDF, DOCX 등)"을 아직 시작 안 한 v2.0.0 항목으로 못박아
-/// 둬서(현재 배포 버전은 v0.7.15), 이 엔진 자체엔 PDF 변환 기능이 없다는 게
-/// 번들/상류 양쪽에서 다 확인된다.
-///
-/// 2) [2026-08-16 첫 버전, 이후 교체됨] 참고로 든
-/// https://github.com/postmelee/alhangeul-macos 를 실제로 조사해 보니
-/// (`Sources/HostApp/Services/RhwpStudioPagePDFRenderer.swift`/
-/// `RhwpStudioPDFExportController.swift`, MIT), 그 앱의 PDF 내보내기는
-/// rhwp-studio가 페이지별 SVG를 만들면 → 그 SVG를 오프스크린 `WKWebView`로
-/// 다시 열어 → `WKWebView.createPDF(configuration:)`로 한 쪽씩 PDF로 변환한
-/// 뒤 → PDFKit으로 이어붙이는 방식이었다. 처음엔 이번 세션 내내 겪은
-/// WKWebView 취약점 범주(App Sandbox/커스텀 스킴/타이밍)가 그대로 재발할 수
-/// 있다는 우려로 이 방식 대신 hwp-swift(HwpKit)의 `HwpKitNative.
-/// HwpPDFRenderer`(WebView 없는 순수 CoreGraphics 렌더러)를 채택했었다.
-///
-/// 3) [2026-08-16 재구현] 그런데 그 첫 버전은 `HWPViewerPane`(네이티브 탭)과
-/// 정확히 같은 `HwpDocument` paint list를 그대로 PDF로 뽑는 것뿐이라
-/// 렌더링이 사실상 동일했고, 사용자가 "네이티브 뷰어와 동일하므로 존재
-/// 이유가 없음"이라고 명확히 지적했다. 그리고 "WKWebView 취약점 범주가
-/// 그대로 재발할 수 있는 접근이라 해도 한번 구현테스트를 확인할 수 있도록"
-/// 위 2)의 alhangeul-macos 방식을 실제로 구현해 보라는 명시적 요청을 받아,
-/// `RhwpPDFExportService`(Services/Documents/RhwpPDFExportService.swift)로
-/// 다시 만들었다 — rhwp.js의 `renderPageSvg(page_num)` → 이 프로젝트가 이미
-/// 검증한 `hwpviewer://` 스킴/준비-신호 인프라를 재사용하는 오프스크린
-/// `WKWebView` → `WKWebView.createPDF` → PDFKit 이어붙이기. 이제 렌더링
-/// 파이프라인이 네이티브 탭과 완전히 달라(hwp-swift paint list가 아니라
-/// rhwp WASM의 SVG 렌더러) 별도 탭으로서 존재 이유가 생긴다. ⚠️ 알려진
-/// 위험은 `RhwpPDFExportService.swift` 상단 주석 참고 — 실기기 테스트 필요.
-///
-/// 4) [2026-08-16 사전 변환 연동] 사용자 지적 — "탭을 바꿀때마다 파일을 읽는
-/// 것 같음"과 "hwp 업로드할 때 pdf를 생성하고 pdf 파일을 열수 있도록"이 같은
-/// 라운드에 함께 들어와서, 이 탭이 열릴 때마다(또는 문서를 새로 열 때마다)
-/// `RhwpPDFExportService`로 즉석 변환하던 걸 업로드 시점에 딱 한 번만 변환해
-/// 두는 쪽으로 옮겼다 — `DocumentUploadService.generateConvertedPDF`가
-/// 만들어 둔 파일을 `preConvertedDocument`로 받으면 그걸 그대로 보여주고,
-/// 없으면(이 기능 이전에 업로드된 "기존 데이터") 예전처럼 이 탭을 열 때
-/// 즉석 변환하는 경로로 자동 대체된다 — "기존 데이터는 변환하지 않아도 됨."
+/// hwp를 PDF로 변환해 보여주는 탭.
+/// rhwp 엔진 자체에는 PDF 내보내기가 없어(`exportHwp*` 계열은 HWP/HWPX/HML 포맷 내보내기),
+/// `RhwpPDFExportService`가 rhwp.js의 `renderPageSvg` → 오프스크린 `WKWebView` →
+/// `WKWebView.createPDF` → PDFKit 이어붙이기로 변환한다. 렌더링 파이프라인이 네이티브 탭
+/// (`HWPViewerPane`)과 달라 별도 탭으로 둔다. ⚠️ 알려진 위험은 `RhwpPDFExportService.swift` 상단 주석 참고.
+/// 업로드 시 `DocumentUploadService.generateConvertedPDF`가 미리 만든 PDF(`preConvertedDocument`)가 있으면
+/// 그대로 보여주고, 없는 기존 문서는 탭을 열 때 즉석 변환한다.
 private struct HWPToPDFPane: View {
     let documentData: Data
-    /// `DocumentViewerViewModel.convertedPDFDocument` — 업로드 시 미리 변환해
-    /// 둔 결과가 있으면 이 값이 채워져 있다(위 4) 참고).
+    /// `DocumentViewerViewModel.convertedPDFDocument` — 업로드 시 미리 변환해 둔 결과(있을 때만 채워짐).
     let preConvertedDocument: PDFDocument?
-    /// [2026-08-18 추가] 사용자 요청 — "모든 뷰어창 검색기능에 연구문서 검색과
-    /// 동일하게 성경 장절을 검색할 수 있도록 할 것." 이 struct는 `document:
-    /// SourceDocument`에 직접 접근하지 못해(`documentData: Data`만 받음)
-    /// `DocumentViewerView.verseSearchLiteralTerms(for:)`를 부모가 클로저로
-    /// 대신 넘겨준다 — `DocumentViewerView.originalPane`의 `.hwp, .hwpx`
-    /// 케이스에서 이 값을 채워 전달한다.
+    /// 부모(`DocumentViewerView.verseSearchLiteralTerms(for:)`)가 넘겨주는 성경 장절 검색 리졸버.
+    /// 이 struct는 `SourceDocument`에 접근하지 못해 클로저로 받는다.
     var additionalSearchTerms: (String) -> [String] = { _ in [] }
-    /// [2026-08-20 추가] 사용자 요청 — "hwp 한글파일 클릭시 pdf 탭으로 열리는데,
-    /// 해당 내용으로 바로 갈 수 있도록 검색어 자동 하이라이트 기능 추가하고,
-    /// 모든 뷰어에 동일하게 추가할 것." 지금까지는 `HWPViewerPane`(네이티브
-    /// 탭)에만 `initialSearchText`를 배선해 뒀는데, 정작 네이티브 뷰어 로드가
-    /// 실패하면 `reportViewerAvailability`가 이 PDF 변환 탭으로 자동
-    /// 전환한다(hwp-swift 파싱 에러가 실기기에서 보고된 적 있다, 이 파일
-    /// 상단 조사 이력 참고) — 그 순간 검색어 하이라이트가 사라지는 게
-    /// 이번 신고의 실제 원인이다. `pdfSearchController.query = initialSearchText`
-    /// (`DocumentViewerView.setUpIfNeeded()`가 원본 `.pdf`/`.docx` 탭에 쓰는
-    /// 것과 같은 패턴)로 이 탭 전용 컨트롤러에도 똑같이 흘려보낸다.
+    /// 검색어 자동 하이라이트용 초기 검색어. 네이티브 뷰어 로드 실패 시 이 탭으로 자동 전환되므로
+    /// 이 탭에서도 `pdfSearchController.query`로 똑같이 흘려보낸다.
     var initialSearchText: String? = nil
-    /// [2026-08-16 추가] `HWPViewerPane.onAvailabilityChange`와 같은 목적 —
-    /// `hwpViewerModeToggle` 상단 주석 참고.
+    /// 로드 성공/실패를 상위에 보고한다(`HWPViewerPane.onAvailabilityChange`와 동일).
     var onAvailabilityChange: ((Bool) -> Void)? = nil
     @State private var pdfDocument: PDFDocument?
     @State private var errorMessage: String?
     @State private var conversionProgress: (pageIndex: Int, pageCount: Int)?
     @State private var exportService = RhwpPDFExportService()
-    /// 원본 `.pdf` 문서 탭(`DocumentViewerView.pdfSearchController`)과는 별개의
-    /// 인스턴스 — 이 탭이 보여주는 `PDFDocument`는 매번 새로 변환한 결과라
-    /// 서로 다른 문서를 검색하게 되므로 공유하면 안 된다.
+    /// 원본 `.pdf` 탭의 `pdfSearchController`와는 별개 인스턴스 — 서로 다른 문서를 검색하므로 공유하면 안 된다.
     @State private var pdfSearchController = PDFSearchController()
 
     var body: some View {
@@ -2117,28 +1578,17 @@ private struct HWPToPDFPane: View {
                     .frame(maxWidth: .infinity, maxHeight: .infinity)
             }
         }
-        // `HWPViewerPane.load()`와 같은 패턴 — documentData가 바뀌면(다른
-        // 문서를 같은 뷰에서 다시 열게 되는 경우) 다시 변환한다.
+        // documentData가 바뀌면 다시 변환한다(`HWPViewerPane.load()`와 같은 패턴).
         .task(id: documentData) {
             await convert()
         }
-        // [2026-08-18 추가] 부모가 넘겨준 성경 장절 검색 리졸버를 이 탭 전용
-        // `pdfSearchController`에 연결한다 — `additionalSearchTerms` 프로퍼티
-        // 주석 참고.
+        // 부모가 넘긴 성경 장절 검색 리졸버를 이 탭의 `pdfSearchController`에 연결한다.
         .onAppear {
             pdfSearchController.additionalSearchTerms = additionalSearchTerms
         }
-        // [2026-08-26 추가] 사용자 요청 — iCloud 다운로드 상태 반영. 위
-        // `convert()`는 `documentData`가 바뀔 때만(`.task(id:)`) 다시 도는데,
-        // `preConvertedDocument`(부모 `DocumentViewerViewModel.
-        // convertedPDFDocument`)는 이 탭이 이미 떠 있는 도중에도(원본 hwp는
-        // 먼저 다운로드가 끝나 이 탭이 열렸지만, 별도 파일인 변환 PDF는 아직
-        // 다운로드 중이었다가 뒤늦게 끝나는 경우) 값이 nil에서 채워질 수
-        // 있다. 그 순간을 놓치면 이미 시작된 즉석 변환(`RhwpPDFExportService`)
-        // 결과가 계속 남아, 업로드 시 미리 만들어 둔 결과물 대신 즉석 변환본을
-        // 계속 보여주게 된다 — `PDFDocument`가 `Equatable`이 아니라 값 자체를
-        // 직접 관찰할 수 없으므로, `!= nil`(Bool, Equatable)이 false → true로
-        // 바뀌는 순간을 관찰해 그 시점의 최신 값을 채택한다.
+        // `preConvertedDocument`는 탭이 떠 있는 도중(원본은 받아졌고 변환 PDF는 아직 다운로드 중이던 경우)
+        // nil에서 채워질 수 있다. 놓치면 이미 시작된 즉석 변환본이 계속 남으므로, `PDFDocument`가
+        // Equatable이 아니라 `!= nil`(Bool)의 false → true 전환을 관찰해 그 시점의 값을 채택한다.
         .onChange(of: preConvertedDocument != nil) { _, isAvailable in
             guard isAvailable, let preConvertedDocument else { return }
             pdfDocument = preConvertedDocument
@@ -2147,9 +1597,7 @@ private struct HWPToPDFPane: View {
         }
     }
 
-    /// `pdfSearchBar`(원본 `.pdf` 문서 탭)와 똑같은 모양 — 결과물이 결국
-    /// `PDFDocument`라 별도 줌 버튼 없이(PDFView가 이미 확대/축소 제스처를
-    /// 지원한다) 검색창만 둔다.
+    /// 원본 `.pdf` 탭의 `pdfSearchBar`와 같은 모양의 검색창 + 돋보기 버튼 3개.
     private var pdfConvertedSearchBar: some View {
         @Bindable var searchController = pdfSearchController
         return HStack(spacing: 8) {
@@ -2188,17 +1636,8 @@ private struct HWPToPDFPane: View {
 
             Spacer(minLength: 8)
 
-            // [2026-09-05 신설] 사용자 요청 — "한글뷰어에 pdf 변환 탭에도
-            // 돋보기 추가할 것." 원본 `.pdf` 탭(`pdfSearchBar(controller:)`)
-            // 과 완전히 같은 디자인·같은 컨트롤러 API
-            // (`PDFSearchController.zoomIn/zoomOut/resetZoom`, 그 프로퍼티
-            // 선언부 주석 참고 — `pdfView.scaleFactor`를 직접 읽고 써서
-            // 트랙패드 핀치줌과 항상 같은 값을 공유한다)를 그대로 재사용한다
-            // — 이 탭은 원본 `.pdf` 탭과 별개의 `PDFSearchController`
-            // 인스턴스(위 `pdfSearchController` 프로퍼티 선언 주석 참고 —
-            // 매번 새로 변환한 문서를 보여주므로 공유하면 안 됨)를 쓰지만,
-            // 그 인스턴스도 `PDFKitRepresentable`이 실제 `PDFView`에 똑같이
-            // 연결해 주므로 확대/축소 메서드가 그대로 동작한다.
+            // 원본 `.pdf` 탭과 같은 디자인·같은 `PDFSearchController.zoomIn/zoomOut/resetZoom` API를 쓴다
+            // (`pdfView.scaleFactor`를 직접 읽고 써서 트랙패드 핀치줌과 같은 값을 공유).
             Button {
                 pdfSearchController.zoomIn()
             } label: {
@@ -2243,9 +1682,7 @@ private struct HWPToPDFPane: View {
         }
         .padding(.vertical, 8)
         .padding(.leading, 8)
-        // [2026-09-12 신설] `pdfSearchBar(controller:)`의 같은 날짜 주석
-        // 참고 — 이 탭("PDF 변환")도 `pdfSearchBar`와 완전히 같은 모양
-        // (오른쪽 끝 "원본 크기" 버튼)이라 같은 겹침을 똑같이 겪는다.
+        // `pdfSearchBar(controller:)`와 같은 이유로 iOS에서는 오른쪽 끝 버튼이 겹치지 않게 trailing 여백을 더 둔다.
         #if os(iOS)
         .padding(.trailing, 44)
         #else
@@ -2253,11 +1690,7 @@ private struct HWPToPDFPane: View {
         #endif
     }
 
-    /// [2026-08-16 사전 변환 연동] `preConvertedDocument`(업로드 시 미리 만들어
-    /// 둔 결과)가 있으면 그걸 그대로 쓰고 끝낸다 — 없을 때만(위 4) 참고,
-    /// "기존 데이터") `RhwpPDFExportService`(오프스크린 WKWebView + rhwp의
-    /// `renderPageSvg` → `WKWebView.createPDF`)로 즉석 변환한다. 자세한 경위는
-    /// 이 struct와 `RhwpPDFExportService.swift` 상단 주석 참고.
+    /// 사전 변환본(`preConvertedDocument`)이 있으면 그대로 쓰고, 없을 때만 `RhwpPDFExportService`로 즉석 변환한다.
     private func convert() async {
         pdfDocument = nil
         errorMessage = nil
@@ -2288,8 +1721,7 @@ private struct HWPToPDFPane: View {
         }
     }
 
-    /// 위 `initialSearchText` 프로퍼티 주석 참고 — `pdfDocument`가 막 채워진
-    /// 두 지점(사전 변환본 재사용/즉석 변환 성공) 모두에서 호출한다.
+    /// `pdfDocument`가 채워진 두 지점(사전 변환본 재사용/즉석 변환 성공)에서 초기 검색어를 적용한다.
     private func seedInitialSearchTextIfNeeded() {
         guard let initialSearchText, !initialSearchText.isEmpty else { return }
         pdfSearchController.query = initialSearchText

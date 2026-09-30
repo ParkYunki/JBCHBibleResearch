@@ -3,11 +3,8 @@ import SwiftData
 import Testing
 @testable import BibleResearchModels
 
-// 근거 없음(원본 세 문서에 테스트 요구사항이 명시돼 있지 않음) — 다만
-// README "다음 단계 제안" 1번(1차 컴파일/스키마 검증)을 위한 최소 스모크 테스트.
-// CloudKit 실서버 왕복은 하지 않는다(로컬 in-memory ModelContainer만 검증) — 이
-// 세션은 Apple SDK가 없어 이 테스트 자체를 실행해보지 못했다. Xcode에서 최초 실행 시
-// 반드시 결과를 확인해야 한다.
+// 스키마 로드와 Tag 중복 방지에 대한 최소 스모크 테스트.
+// CloudKit 실서버 왕복은 하지 않는다(로컬 in-memory ModelContainer만 검증).
 
 @Suite("BibleResearchSchema")
 struct BibleResearchSchemaTests {

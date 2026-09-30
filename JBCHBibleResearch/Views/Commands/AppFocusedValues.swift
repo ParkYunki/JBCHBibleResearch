@@ -2,19 +2,13 @@
 //  AppFocusedValues.swift
 //  JBCHBibleResearch
 //
-//  screens.md 11장(macOS 메뉴 바) — "메뉴 항목은 해당 컨텍스트에 포커스가 없으면
-//  비활성화됩니다"를 그대로 구현하는 방법으로 `FocusedSceneValue`를 썼다.
+//  메뉴 바 커맨드가 쓰는 `FocusedSceneValue` 키 모음(AppCommands.swift가 `@FocusedValue`로 읽는다).
 //
-//  ⚠️ [설계 결정, 근거] 처음엔 사이드바 선택 상태를 앱 전역 싱글턴(@Observable
-//  static shared)으로 옮겨서 메뉴가 직접 조작하게 하려 했으나, 이 앱의 메인
-//  WindowGroup은 macOS에서 여러 창으로 동시에 열릴 수 있다(File > New Window 등
-//  표준 동작 — WindowGroup(id:for:)로 단일 인스턴스 제한을 걸지 않았다). 전역
-//  싱글턴을 쓰면 창 A에서 "성경조회"를 선택했을 때 창 B의 사이드바까지 같이
-//  바뀌는 버그가 생긴다. `FocusedSceneValue`는 "지금 활성(키) 상태인 창/씬"에만
-//  값을 연결하므로 이 문제가 없다 — 각 화면(SidebarNavigationView, MemoHomeView,
-//  DocumentsHomeView, BibleReadingView)이 자기 로컬 `@State`는 그대로 유지한 채
-//  `.focusedSceneValue`로 액션 클로저만 밖으로 노출하고, `AppCommands.swift`가
-//  `@FocusedValue`로 그 클로저를 읽어 메뉴 버튼에 연결한다.
+//  ⚠️ 설계 결정: 사이드바 선택 상태를 전역 싱글턴으로 두지 않았다. 메인 WindowGroup이 macOS에서
+//  여러 창으로 열릴 수 있어, 싱글턴이면 창 A의 선택이 창 B의 사이드바까지 바꾼다.
+//  `FocusedSceneValue`는 활성(키) 창/씬에만 값을 연결하므로, 각 화면(SidebarNavigationView,
+//  MemoHomeView, DocumentsHomeView, BibleReadingView)은 로컬 `@State`를 유지한 채
+//  `.focusedSceneValue`로 액션 클로저만 노출한다.
 //
 
 import SwiftUI
@@ -75,10 +69,7 @@ extension FocusedValues {
         set { self[PreviousChapterActionKey.self] = newValue }
     }
 
-    /// S1 활성 시 "스크롤 동기화" 체크 토글(11장 View 메뉴). `ScrollSyncCoordinator`에
-    /// 실제 on/off 플래그가 없어서 이번에 하나 추가했다(ScrollSyncCoordinator.swift
-    /// 참고) — Binding으로 노출해 메뉴의 체크 상태(⌘로 토글할 때 체크마크가
-    /// 즉시 반영)까지 맞춘다.
+    /// S1 활성 시 "스크롤 동기화" 체크 토글. Binding으로 노출해 메뉴 체크 상태가 즉시 반영되게 한다.
     var scrollSyncEnabled: Binding<Bool>? {
         get { self[ScrollSyncEnabledKey.self] }
         set { self[ScrollSyncEnabledKey.self] = newValue }

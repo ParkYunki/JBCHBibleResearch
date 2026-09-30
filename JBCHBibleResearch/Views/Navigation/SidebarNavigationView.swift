@@ -2,15 +2,12 @@
 //  SidebarNavigationView.swift
 //  JBCHBibleResearch
 //
-//  screens.md 9.1 — macOS/iPadOS 메인 창: 왼쪽 사이드바(폭 200~280) + 오른쪽 본문.
-//  최소 창 크기(1000×700)는 Scene 선언부(.defaultSize/.windowResizability)에서 다뤄야
-//  하는 부분이라 여기가 아니라 JBCHBibleResearchApp.swift에서 처리한다.
-//
-//  2026-08-06: 8.1 "시작 시 마지막으로 보던 화면 열기" + 11장 View 메뉴(화면 전환
-//  ⌘1-5, 사이드바 토글 ⌥⌘S)를 연결했다. 메뉴 커맨드는 `.focusedSceneValue`로
-//  이 화면의 로컬 상태를 노출받아 조작한다 — 전역 싱글턴을 안 쓴 이유는
-//  AppFocusedValues.swift 상단 주석 참고(멀티윈도우에서 창끼리 선택 상태가
-//  잘못 공유되는 걸 피하기 위함).
+//  macOS/iPadOS 메인 창: 왼쪽 사이드바(폭 200~280) + 오른쪽 본문.
+//  최소 창 크기(1000×700)는 Scene 선언부(JBCHBibleResearchApp.swift)에서 처리한다.
+//  시작 시 마지막 화면 복원과 View 메뉴(화면 전환 ⌘1-5, 사이드바 토글 ⌥⌘S)는
+//  `.focusedSceneValue`로 이 화면의 로컬 상태를 노출받아 조작한다. 전역 싱글턴을
+//  쓰지 않는 이유는 AppFocusedValues.swift 상단 주석 참고(멀티윈도우에서 창끼리
+//  선택 상태가 공유되는 것을 피하기 위함).
 //
 
 import SwiftUI
@@ -23,87 +20,35 @@ import UIKit
 struct SidebarNavigationView: View {
     @Environment(\.openWindow) private var openWindow
     @Environment(\.modelContext) private var modelContext
-    /// [2026-09-29 신설] 사용자 보고 — "왼쪽 사이드바는 테마 색상이 적용되지
-    /// 않음." 지금까지 이 화면은 `settings.bibleBackgroundColor`/`bibleTextColor`
-    /// (성경 조회/연구문서/말씀노트/내 설교 등 다른 화면들이 이미 읽는 "테마
-    /// 색상" 설정)를 전혀 읽지 않았다 — 배경·글자색이 전부 시스템 기본(=
-    /// "화면 모드" 설정만 따름)이라, 테마 색상을 화면 모드와 다르게 골라 두면
-    /// 오른쪽 콘텐츠(테마 색상 적용)와 왼쪽 사이드바(화면 모드만 적용)가
-    /// 서로 다른 배경/글자색으로 어긋나 보였다. `ChapterRelatedContentPanel`/
-    /// `DocumentsHomeView` 등이 이미 쓰는 것과 같은 접근자 관례를 그대로
-    /// 들여온다.
+    /// 테마 색상 설정(`bibleBackgroundColor`/`bibleTextColor`) 접근자.
+    /// 사이드바도 오른쪽 콘텐츠와 같은 테마 색상을 따르게 한다.
     private var settings: UserSettingsStore { .shared }
     @State private var selection: AppSection? = SidebarNavigationView.initialSelection()
     @State private var columnVisibility: NavigationSplitViewVisibility = .all
     @State private var isSettingsPresented = false
-    /// [2026-08-18 추가] 사용자 요청 — "왼쪽 사이드바 맨 위 상단 검색기능: 버튼이
-    /// 아니라 검색 텍스트박스+버튼으로 배치: 두글자이상 입력후 검색 버튼을
-    /// 누르면(또는 엔터키) 오른쪽 메인영역에 검색결과가 나타날 수 있도록."
-    /// `sidebarSearchBar`/`submitSidebarSearch()` 참고.
+    /// 사이드바 상단 검색 텍스트박스 입력값. `sidebarSearchBar`/`submitSidebarSearch()` 참고.
     @State private var sidebarSearchText: String = ""
 
-    /// [2026-08-21 추가, 2026-08-26 두 차례 수정] 사용자 신고 — "검색결과중
-    /// 성경구절을 클릭한 후, 왼쪽 사이드바 상단 검색란에 검색을 하고 엔터를
-    /// 치면 아무반응이 없음 -> 오른쪽 '이 장의 관련 콘텐츠' 텍스트 왼쪽편에 <
-    /// 버튼을 눌러야만 검색결과를 확인할 수 있음. ---> 검색을 하면 성경
-    /// 조회페이지를 닫고 다시 검색결과로 보여지게 할 것."
-    ///
-    /// [원인] `SearchView`의 성경구절 행은 `NavigationLink { BibleReadingView(...) }`
-    /// 로 `NavigationSplitView`의 detail 컬럼 안에 "밀어 넣는(push)" 방식이다
-    /// (SearchView.swift `personOrPlaceRow`/`prophecyRow` 등). 이 push는
-    /// `selection`(AppSection)과는 별개의, detail 컬럼 자체가 들고 있는 내비게이션
-    /// 스택 상태라서, `submitSidebarSearch()`가 `selection = .search`로 다시
-    /// 바꿔도(이미 `.search`였다면 값 자체가 안 바뀌어 더더욱) 이미 밀어 넣어진
-    /// `BibleReadingView`(그 안의 `ChapterRelatedContentPanel` — "이 장의 관련
-    /// 콘텐츠" 제목이 거기 있다)가 그대로 맨 위에 남는다.
-    ///
-    /// [첫 번째 시도, 실패] `searchResetToken: UUID` + `.id(_:)`로 그 push를
-    /// 감싸는 `NavigationStack` 자체의 identity를 강제로 바꿔 통째로 다시
-    /// 만드는 방식을 시도했다 — 이론상으로는 push 스택까지 포함해 전부 새로
-    /// 만들어져야 하지만, 실기기 재확인 결과 ① 갇히는 문제 자체가 전혀
-    /// 고쳐지지 않았고 ② 오히려 "다시 검색"할 때마다 흰 화면만 뜨는 새 증상이
-    /// 생겼다 — `NavigationSplitView`의 detail 컬럼 콘텐츠 전체(그 열의
-    /// `NavigationStack` 자신)를 매번 파괴·재생성하는 것은 `NavigationSplitView`가
-    /// 그 열을 다시 연결하는 과정과 충돌해 렌더링이 아예 실패하는 것으로
-    /// 보인다 — `.id(_:)`로 이 정도 큰 서브트리를 갈아 끼우는 건 너무 거친
-    /// 방법이었다.
-    ///
-    /// [해결, 2026-08-26] `NavigationStack`을 식별자 기반으로 파괴·재생성하는
-    /// 대신, Apple이 이런 "코드로 pop"을 위해 공식 제공하는 `NavigationPath`
-    /// 바인딩을 쓴다 — `detailNavigationPath`를 빈 값으로 대입하면 그 스택에
-    /// 쌓인 모든 push(값 기반 `NavigationLink(value:)`든, 이 앱이 실제로 쓰는
-    /// 목적지-클로저 `NavigationLink { Destination() }`든 전부 포함, Apple
-    /// 문서상 `NavigationPath`는 타입 소거돼 있어 두 방식을 섞어도 개수로
-    /// 추적된다)이 그대로 pop되면서, 그 스택 자체와 그 뿌리에 있던 `SearchView`
-    /// 인스턴스(따라서 그 안의 `viewModel` 상태)는 전혀 파괴되지 않는다. 이미
-    /// `.search`를 보고 있던 채로 다시 검색하는 경우 `SearchView`의 기존
-    /// `.onChange(of: SidebarSearchRequest.shared.pendingQuery)`가 그대로
-    /// 살아서 새 검색을 반영하고(그래서 흰 화면이 뜰 이유가 없다), 다른
-    /// 섹션에서 전환해 오는 경우는 `selection` 자체가 바뀌어 `detailView(for:)`가
-    /// 자연히 `SearchView()`를 새로 만든다(`.onAppear` 경로, 기존 그대로).
+    /// 검색결과에서 성경 조회로 push된 상태에서 다시 검색하면 검색결과로 돌아오게 하는
+    /// detail 컬럼의 내비게이션 경로. push는 `selection`과 별개인 detail 스택 상태라
+    /// `selection = .search`만으로는 pop되지 않는다.
+    /// `NavigationPath`를 비우면 값 기반/목적지-클로저 `NavigationLink` push가 모두 pop되고,
+    /// 스택과 루트 `SearchView`(viewModel 상태)는 유지된다. `.id(_:)`로 스택을 통째로
+    /// 재생성하면 detail 컬럼 재연결과 충돌해 흰 화면이 뜨므로 쓰지 않는다.
     @State private var detailNavigationPath = NavigationPath()
 
-    /// [2026-08-18 추가] 사용자 요청 — "사이드바 메뉴 밑으로 클로드 앱처럼 기능을
-    /// 추가할 것. 고정됨 / (일주일 이내 날짜)/이전 -> 작성/수정한 연구문서/개인
-    /// 묵상/말씀 요약 리스트를 보여줄 것." `@Query`라 SwiftData 변경(고정 토글,
-    /// 새 업로드/새 메모 등)이 생기면 이 목록들이 자동으로 갱신된다.
+    /// 사이드바 "고정됨/최근" 목록의 원본. `@Query`라 SwiftData 변경 시 자동 갱신된다.
     @Query(sort: \SourceDocument.uploadedAt, order: .reverse) private var sidebarDocuments: [SourceDocument]
     @Query(sort: \UserMemo.updatedAt, order: .reverse) private var sidebarMemos: [UserMemo]
     @Query(sort: \VerseSummary.createdAt, order: .reverse) private var sidebarSummaries: [VerseSummary]
-    /// [2026-08-25 추가] 사용자 요청 — "메뉴 명 하단 수정된 이력 리스트에 성경
-    /// 내용의 메모, 형광펜, 주석 수정한 내용도 이력에 나타날 수 있도록." 위
-    /// 세 `@Query`(연구문서/개인 묵상/말씀 요약)만으로는 "성경 본문에 직접 붙는"
-    /// 세 가지 주석 작업(형광펜/표시 = `VerseHighlight`, 메모 = `VersePhraseNote`,
-    /// 관주 = `VerseCrossReference` — `VerseZoomView.swift`의 "네 버튼(형광펜/개인
-    /// 주석/메모/관주)" 구분 그대로)이 빠져 있었다 — "개인 주석"(`UserMemo`)은
-    /// 이미 `sidebarMemos`로 반영돼 있으므로 나머지 세 개를 추가한다.
+    /// 성경 본문에 직접 붙는 주석 작업(형광펜 `VerseHighlight`, 메모 `VersePhraseNote`,
+    /// 관주 `VerseCrossReference`)의 이력용 쿼리. 개인 주석(`UserMemo`)은 `sidebarMemos`가 담당한다.
     @Query(sort: \VerseHighlight.createdAt, order: .reverse) private var sidebarHighlights: [VerseHighlight]
     @Query(sort: \VersePhraseNote.updatedAt, order: .reverse) private var sidebarPhraseNotes: [VersePhraseNote]
     @Query(sort: \VerseCrossReference.updatedAt, order: .reverse) private var sidebarCrossReferences: [VerseCrossReference]
 
-    /// screens.md 8장/11장 — macOS는 환경설정을 앱 메뉴(⌘,)로만 노출한다("사이드바에
-    /// 두지 않는다"). 하지만 iPadOS엔 그 메뉴 자체가 없어, 이 화면(사이드바 툴바)에
-    /// 톱니바퀴 버튼을 하나 둔다 — 스펙이 명시하지 않은 iPad 전용 보완이다.
+    /// macOS는 환경설정을 앱 메뉴(⌘,)로만 노출하지만 iPadOS엔 그 메뉴가 없어,
+    /// 사이드바 툴바에 톱니바퀴 버튼을 둔다.
     private var showsSettingsToolbarButton: Bool {
         #if os(iOS)
         UIDevice.current.userInterfaceIdiom != .phone
@@ -112,11 +57,9 @@ struct SidebarNavigationView: View {
         #endif
     }
 
-    /// [2026-08-27 추가] 사이드바/인스펙터 동시 노출 방지 조율
-    /// (`IPadSidebarInspectorCoordination.swift` 상단 주석 참고) — 이 조율은
-    /// 아이패드 전용이다. 판정 로직은 위 `showsSettingsToolbarButton`과 같지만
-    /// (아이폰도 아니고 macOS도 아님 = 아이패드), 서로 다른 목적이라 별도
-    /// 프로퍼티로 둔다.
+    /// 사이드바/인스펙터 동시 노출 방지 조율(`IPadSidebarInspectorCoordination.swift`)은
+    /// 아이패드 전용이다. 판정 로직은 `showsSettingsToolbarButton`과 같지만 목적이 달라
+    /// 별도 프로퍼티로 둔다.
     private var isIPadIdiom: Bool {
         #if os(iOS)
         UIDevice.current.userInterfaceIdiom != .phone
@@ -125,20 +68,15 @@ struct SidebarNavigationView: View {
         #endif
     }
 
-    /// [2026-08-18 추가] "두글자이상 입력후" 요청 그대로 — 공백을 뺀 길이가
-    /// 2 미만이면 검색 버튼을 누를 수 없다(엔터키도 `submitSidebarSearch()`
-    /// 안에서 같은 기준으로 한 번 더 막는다).
+    /// 공백을 뺀 길이가 2 미만이면 검색할 수 없다(엔터키도 `submitSidebarSearch()`에서
+    /// 같은 기준으로 막는다).
     private var canSubmitSidebarSearch: Bool {
         sidebarSearchText.trimmingCharacters(in: .whitespacesAndNewlines).count >= 2
     }
 
     private var sidebarSearchBar: some View {
         HStack(spacing: 6) {
-            // [2026-09-29 수정] 사용자 보고 — "왼쪽 사이드바는 테마 색상이
-            // 적용되지 않음." `DocumentsHomeView.searchAndFilterBar`가 이미
-            // 겪고 고친 것과 같은 문제(돋보기/지우기 아이콘·placeholder·
-            // 상자 배경이 전부 `.secondary`/`Color.secondary` 고정이라
-            // 테마와 무관)라 같은 해법을 그대로 들여온다.
+            // 아이콘·placeholder·상자 배경을 고정 `.secondary`가 아니라 테마 글자색 기반으로 그린다.
             Image(systemName: "magnifyingglass")
                 .foregroundStyle(settings.bibleTextColor?.opacity(0.6) ?? Color.secondary)
             TextField(
@@ -177,17 +115,13 @@ struct SidebarNavigationView: View {
         .padding(.bottom, 4)
     }
 
-    /// `SidebarSearchRequest`(그 파일 상단 주석 참고)로 검색어를 전달하고, 이
-    /// 화면이 이미 들고 있는 `selection`을 곧바로 `.search`로 바꿔 "오른쪽
-    /// 메인영역에 검색결과가 나타나도록" 한다.
+    /// `SidebarSearchRequest`(그 파일 상단 주석 참고)로 검색어를 전달하고,
+    /// `selection`을 `.search`로 바꿔 오른쪽 메인영역에 검색결과를 보여준다.
     private func submitSidebarSearch() {
         let trimmed = sidebarSearchText.trimmingCharacters(in: .whitespacesAndNewlines)
         guard trimmed.count >= 2 else { return }
         SidebarSearchRequest.shared.request(trimmed)
-        // [2026-08-26 추가] 위 `detailNavigationPath` 상단 주석 참고 — 검색
-        // 결과에서 성경 조회로 들어가 있던(push된) 상태였다면 이 대입으로
-        // 그 push를 전부 pop해 검색 결과 화면으로 돌아간다. 이미 push된 게
-        // 없었다면(빈 경로에 빈 경로를 대입) 그냥 아무 효과가 없다.
+        // push된 성경 조회 화면이 있었다면 전부 pop해 검색 결과로 돌아간다(`detailNavigationPath` 참고).
         detailNavigationPath = NavigationPath()
         selection = .search
     }
@@ -203,20 +137,12 @@ struct SidebarNavigationView: View {
         return section
     }
 
-    /// [2026-08-26 신설] 사용자 요청 — "검색란 영역을 고정으로 두고 스크롤
-    /// 영역은 검색란 영역 아래부터 시작해서 검색란을 침범하지 않도록." 원래
-    /// `body` 안에 `List(selection:) { ... }`로 인라인돼 있던 사이드바
-    /// 메뉴/고정됨/최근 목록 전체를 그대로 옮겨 왔다 — 내용은 바뀌지 않았고
-    /// (아래 날짜별 그룹핑만 Task #4 요청대로 갈아 끼웠다), `body`가 이제
-    /// `VStack(sidebarSearchBar, sidebarMenuList)`로 이 목록을 검색창과
-    /// 형제 뷰로 감쌀 수 있도록 별도 계산 프로퍼티로 뺐을 뿐이다.
+    /// 검색창을 스크롤 영역 밖의 형제 뷰로 두기 위해 `body`에서 분리한
+    /// 사이드바 메뉴/고정됨/최근 목록.
     private var sidebarMenuList: some View {
         List(selection: $selection) {
-            // [2026-08-18 변경] 사용자 요청 — "'태그 관계' 메뉴 삭제 - 기능
-            // 삭제는 추후 보류." `AppSection.sidebarMenuCases`(그 파일 상단
-            // 주석 참고)가 `.tagRelations`만 뺀 목록을 준다 — 이 화면 안의
-            // `.tagRelations` 분기(별도 창 열기)는 그대로 둬도 무해하다(이제
-            // 이 목록에 그 case가 안 나오니 실행될 일이 없을 뿐).
+            // `AppSection.sidebarMenuCases`는 `.tagRelations`를 뺀 목록이라, 아래 `.tagRelations`
+            // 분기(별도 창 열기)는 이 목록에서는 실행되지 않는다.
             ForEach(AppSection.sidebarMenuCases) { section in
                 if section.opensSeparateWindow {
                     // 별도 창으로 여는 항목은 선택 상태를 바꾸지 않고 그냥 새 창을 연다
@@ -235,25 +161,11 @@ struct SidebarNavigationView: View {
                 }
             }
 
-            // [2026-08-18 추가] 사용자 요청 — "사이드바 메뉴 밑으로 클로드
-            // 앱처럼 기능을 추가할 것. 고정됨 / (일주일 이내 날짜)/이전 ->
-            // 작성/수정한 연구문서/개인 묵상/말씀 요약 리스트를 보여줄 것."
-            // 이 세 Section의 행들은 `.tag(_:)`를 붙이지 않는다 — 위 태그
-            // 관계 행과 같은 이유로, `selection`(AppSection 전용) 대상에서
-            // 빠져야 하기 때문이다(탭하면 직접 `openQuickItem(_:)`으로
-            // 새 창을 열거나 다른 섹션으로 전환한다).
-            // [2026-08-19 추가] 사용자 요청 — "사이드바 메뉴 밑에 '고정됨'
-            // 윗부분 구분선 추가." 위 메뉴(AppSection)와 아래 고정됨/최근
-            // 목록 사이를 시각적으로 나눈다. 모두 비어 있으면(아직 고정한
-            // 것도, 최근 활동도 없음) 나눌 게 없으니 표시하지 않는다.
-            //
-            // [2026-08-26 수정] 사용자 요청 — "수정이력 분류가 이번주로
-            // 통합이 아니라 -> [오늘], [어제], [그저께(날짜)], 그리고 그
-            // 이전의 내용은 [이번 주]로 할 것. 그것보다 더 전이면 [이전]으로
-            // 그룹핑." 기존 2단(이번 주/이전) 대신 5단으로 나눈다 — 그룹
-            // 판정 로직(`quickItemDateBucket(for:)`)이 각 항목을 정확히 한
-            // 버킷에만 넣도록(중복/누락 없이) `switch`가 아니라 순차적
-            // `if`-얼리리턴 방식으로 구현했다(아래 참고).
+            // 고정됨/최근 Section의 행들은 `.tag(_:)`를 붙이지 않는다 — `selection`(AppSection 전용)
+            // 대상에서 빠져야 하기 때문이다(탭하면 `openQuickItem(_:)`이 새 창을 열거나 다른 섹션으로 전환한다).
+            // 위 메뉴와 아래 목록 사이 구분선이며, 모두 비어 있으면 표시하지 않는다.
+            // 날짜 그룹(오늘/어제/그저께/이번 주/이전)은 `quickItemDateBucket(for:)`가 각 항목을
+            // 정확히 한 버킷에만 넣는다.
             if !pinnedQuickItems.isEmpty || !todayQuickItems.isEmpty || !yesterdayQuickItems.isEmpty
                 || !dayBeforeYesterdayQuickItems.isEmpty || !thisWeekQuickItems.isEmpty || !olderQuickItems.isEmpty {
                 Divider()
@@ -264,10 +176,7 @@ struct SidebarNavigationView: View {
                         quickItemRow(item)
                     }
                 } header: {
-                    // [2026-08-19 추가] 사용자 요청 — "고정됨/오늘/이번주/
-                    // 오래됨... 관련 항목들은 메뉴보다 살짝 흐리게." 위
-                    // AppSection 메뉴(`Label(section.title, ...)`, 기본
-                    // primary 색)보다 눈에 덜 띄도록 헤더도 `.secondary`로.
+                    // 고정됨/날짜 헤더는 메뉴보다 옅게 표시한다.
                     Text("고정됨").foregroundStyle(settings.bibleTextColor?.opacity(0.6) ?? Color.secondary)
                 }
             }
@@ -317,26 +226,12 @@ struct SidebarNavigationView: View {
                 }
             }
         }
-        // [2026-09-05 수정] 사용자 보고 — "왼쪽 사이드바 선택된 기능의
-        // 배경색상이 낮에는 황금색이 아니라, 똥색처럼 보여 고급져보이지
-        // 않음." 원인: 이 목록은 `.listStyle(.sidebar)`라(위 `body`의
-        // `NavigationSplitView` 참고) macOS가 선택된 행 배경을 앱의
-        // `AccentColor`(Assets.xcassets — 라이트 모드 #B8863C)로 그대로
-        // 채운다 — 이 색은 아이콘/텍스트처럼 "작은 면적의 강조색"으로 쓸
-        // 땐 금색으로 읽히지만, 행 전체를 채우는 "큰 면적의 단색 배경"으로
-        // 쓰면 채도/명도가 낮아(HSB 대략 H36°·S67%·V72%) 갈색조로 보인다.
-        // 앱 전체에서 쓰는 `AccentColor` 자체(버튼/아이콘 등)를 바꾸면 영향
-        // 범위가 너무 넓어지므로(요청 범위를 벗어남), 이 목록의 선택
-        // 배경에만 `.tint`로 같은 색상(H)을 유지하되 채도를 낮추고
-        // 명도를 올린 색(#D1A35E, H36°·S55%·V82%)을 덧씌운다 — 어느
-        // 각도로 봐도 여전히 "이 앱의 그 금색 계열"로 보이면서, 큰 면적
-        // 배경에서도 탁하지 않게 밝은 금색으로 읽히도록 조정한 값이다.
+        // 이 목록은 `.listStyle(.sidebar)`라 macOS가 선택 행 배경을 `AccentColor`(#B8863C)로
+        // 채우는데, 큰 면적에서는 탁한 갈색으로 보인다. 앱 전체 `AccentColor`를 바꾸면 영향이
+        // 크므로, 이 목록의 선택 배경에만 같은 색상(H)의 밝은 금색(#D1A35E)을 `.tint`로 덧씌운다.
         .tint(Color(hex: "#D1A35E") ?? Color("AccentColor"))
-        // [2026-09-29 추가] 사용자 보고 — "왼쪽 사이드바는 테마 색상이
-        // 적용되지 않음." `ChapterRelatedContentPanel`이 이미 쓰는 것과
-        // 같은 조합 — `List`는 기본적으로 자기 자신의 시스템 배경을 그리므로
-        // `.scrollContentBackground(.hidden)`으로 그 기본 배경을 먼저 끈
-        // 뒤에야 `.background(...)`로 준 색이 실제로 보인다.
+        // `List` 기본 시스템 배경을 `.scrollContentBackground(.hidden)`으로 먼저 꺼야
+        // `.background(...)`의 테마 색이 보인다.
         .scrollContentBackground(.hidden)
         .background(settings.bibleBackgroundColor ?? Color.clear)
     }
@@ -349,42 +244,19 @@ struct SidebarNavigationView: View {
             // 자체를 선택값으로 쓰는 것과는 다른 API다. 여기서는 `.tag(section)`으로
             // `AppSection?` 그대로 선택하고 싶으므로, 데이터 없이 `List(selection:content:)`
             // + `ForEach` 조합을 쓴다.
-            // [2026-08-26 변경] 사용자 보고 — "사이드바 아래 수정이력이 길어져서
-            // 스크롤을 할때 스크롤한 이력이 사이드바 상단 검색란 뒤로 올라가는
-            // 상황 -> 검색란 영역을 고정으로 두고 스크롤 영역은 검색란 영역
-            // 아래부터 시작해서 검색란을 침범하지 않도록." 예전엔 검색창을
-            // `List`에 `.safeAreaInset(edge: .top)`로 얹어 뒀다 —
-            // macOS의 `.listStyle(.sidebar)` List는 `.safeAreaInset` 콘텐츠를
-            // 진짜 "목록 밖 레이어"로 완전히 분리하지 못하고, 스크롤되는 행이
-            // 그 위로 살짝 비쳐 올라오는 경우가 있다(List 내부 스크롤 콘텐츠와
-            // safeAreaInset이 같은 스크롤 좌표계를 공유하는 구현 특성). 검색창을
-            // `List`와 완전히 동급인 형제 뷰(`VStack` 안)로 빼면 애초에 같은
-            // 스크롤 좌표계를 공유하지 않으므로 이 부류의 버그 자체가 성립하지
-            // 않는다 — `List` 쪽 modifier(`.navigationSplitViewColumnWidth`/
-            // `.navigationTitle`/`.toolbar`)는 전부 이 `VStack`으로 옮긴다(사이드바
-            // "컬럼" 전체에 적용돼야 하는 속성들이라 `List` 하나에만 걸려 있을
-            // 이유가 없다).
+            // 검색창을 `List`의 `.safeAreaInset`이 아니라 형제 뷰(`VStack`)로 둔다: macOS
+            // `.listStyle(.sidebar)` List에서는 스크롤 행이 safeAreaInset 위로 비쳐 올라올 수 있다
+            // (같은 스크롤 좌표계 공유). `.navigationSplitViewColumnWidth`/`.navigationTitle`/`.toolbar`는
+            // 사이드바 컬럼 전체에 적용돼야 하므로 이 `VStack`에 건다.
             VStack(spacing: 0) {
                 sidebarSearchBar
                 sidebarMenuList
             }
-            // [2026-09-29 추가] 사용자 보고 — "왼쪽 사이드바는 테마 색상이
-            // 적용되지 않음." `sidebarMenuList`(위) 안쪽 `List`에는 이미
-            // 배경을 입혔지만, 검색창(`sidebarSearchBar`)은 그 `List` 밖의
-            // 형제 뷰라 이 `VStack` 자체에도 같은 배경을 한 번 더 줘야
-            // 검색창 주변 여백까지 빈틈없이 테마색으로 채워진다.
+            // 검색창 주변 여백까지 테마색으로 채우기 위해 `List` 밖의 `VStack`에도 배경을 준다.
             .background(settings.bibleBackgroundColor ?? Color.clear)
             .navigationSplitViewColumnWidth(min: 200, ideal: 240, max: 280)
-            // [2026-09-27 수정] 사용자 요청 — "아이패드에서 성경조회 메뉴의
-            // 왼쪽 최상단 'JBCH Bible ...' 텍스트 삭제." 이 사이드바
-            // (NavigationSplitView 첫 번째 컬럼)의 navigationTitle은
-            // 아이패드에서는 목록 위 큰 인라인 제목으로 보이지만, macOS에서는
-            // 창 제목표시줄 텍스트로만 쓰인다(둘이 렌더링 위치가 다르다) —
-            // 요청이 "아이패드"로 명시됐고 macOS 창 제목은 언급되지 않았으므로,
-            // 그쪽은 그대로 두고 이 텍스트를 macOS 전용으로만 남긴다. 이 뷰는
-            // 애초에 아이폰에서는 쓰이지 않으므로(위 "userInterfaceIdiom ==
-            // .phone이면 이 뷰 대신" 참고) #if os(macOS)만으로 "아이패드에서는
-            // 항상 없음"이 정확히 성립한다.
+            // 아이패드에서는 사이드바 위의 큰 인라인 제목으로 보이므로 macOS 전용으로만 둔다
+            // (이 뷰는 애초에 아이폰에서 쓰이지 않는다).
             #if os(macOS)
             .navigationTitle("JBCH Bible Research")
             #endif
@@ -401,31 +273,16 @@ struct SidebarNavigationView: View {
                 }
             }
         } detail: {
-            // [2026-08-26 변경] 위 `detailNavigationPath` 상단 주석 참고 —
-            // `.id(_:)`로 이 `NavigationStack` 전체를 파괴·재생성하던 방식이
-            // 실기기에서 문제(갇힘 미해결 + 흰 화면 신규 발생)를 보여, 명시적
-            // `path:` 바인딩으로 교체했다. 이 바인딩이 있어도 기존 목적지-클로저
-            // `NavigationLink { Destination() }`(SearchView.swift 등 10곳 이상)는
-            // 코드 변경 없이 그대로 동작한다 — push될 때마다 이 경로에 항목이
-            // 쌓이고, `detailNavigationPath = NavigationPath()`로 한 번에
-            // 전부 pop할 수 있다는 점만 새로 얻는다.
+            // `NavigationStack`은 `path:` 바인딩을 쓴다(`detailNavigationPath` 참고). 기존
+            // 목적지-클로저 `NavigationLink { Destination() }`도 그대로 동작하고, 경로를 비우면 전부 pop된다.
             NavigationStack(path: $detailNavigationPath) {
                 detailView(for: selection ?? .bibleReading)
                     #if os(iOS)
                     .toolbar {
-                        // [2026-08-27 변경] 사용자 보고 — "성경조회 화면에서
-                        // 사이드바가 닫혀 있을 때 사이드바 아이콘이 트레일링
-                        // 그룹 양 끝에 하나씩(좌우로) 중복해서 뜸. 맨 우측
-                        // 사이드바 아이콘은 필요없음." 아이패드에서 이 `.navigation`
-                        // 배치 아이콘이, 뒤로가기 칸이 비어 있는 detail 루트
-                        // 화면에서는 적응형으로 트레일링 그룹 쪽에 붙어 나오는
-                        // 것으로 확인됐다 — 성경조회 화면은 이제 그 자리에
-                        // 전용 아이콘이 따로 있어(`BibleReadingView.swift`
-                        // `toolbarContent`의 "사이드바 열기" 버튼,
-                        // `IPadSidebarInspectorCoordination.swift` 상단 주석
-                        // 참고) 이 화면에서만 이 버튼을 뺀다. 다른 화면(말씀
-                        // 노트/검색/연구문서 등)은 그런 대체 아이콘이 없으므로
-                        // 계속 이 버튼으로 사이드바를 다시 연다.
+                        // 성경조회 화면은 전용 "사이드바 열기" 아이콘이 있어(`BibleReadingView.swift`
+                        // `toolbarContent`, `IPadSidebarInspectorCoordination.swift` 참고), 아이패드에서 이
+                        // `.navigation` 아이콘이 트레일링 그룹에 중복으로 붙지 않도록 그 화면에서는 뺀다.
+                        // 다른 화면은 대체 아이콘이 없어 이 버튼으로 사이드바를 다시 연다.
                         if columnVisibility == .detailOnly && (selection ?? .bibleReading) != .bibleReading {
                             ToolbarItem(placement: .navigation) {
                                 Button {
@@ -440,20 +297,9 @@ struct SidebarNavigationView: View {
                     #endif
             }
         }
-        // [2026-09-12 추가] 사용자 보고(아이패드) — "왼쪽 사이드바 선택된
-        // 기능의 파란색 -> 테마대로." 아래 `sidebarMenuList`에 이미 있는
-        // 같은 톤의 `.tint()`가 macOS에서는 선택 행 배경을 금색으로 바꾸는
-        // 데 성공했지만, 아이패드에서는 여전히 시스템 기본 파란색이 보인다는
-        // 보고다. `NavigationSplitView`는 사이드바 선택 강조색을 플랫폼별로
-        // 다르게 해석한다(macOS는 AppKit `NSOutlineView` 브리징, 아이패드는
-        // UIKit `UISplitViewController` 브리징) — 안쪽 `List`에만 건
-        // `.tint()`가 두 플랫폼 모두에 항상 반영된다는 보장이 없어,
-        // `NavigationSplitView` 자신을 감싸는 자리에도 같은 색을 한 번 더
-        // 걸어 스플릿 뷰 자체의 색 해석 시점에도 이 값이 보이게 한다.
-        // ⚠️ 이 세션엔 실기기/시뮬레이터가 없어 이 시도가 실제로 아이패드
-        // 에서 해결되는지 확인하지 못했다 — 빌드 후에도 여전히 파란색이면
-        // 알려달라(UIKit 브리징 특유의 알려진 제약이라 추가 조치가 더
-        // 필요할 수 있다).
+        // 아이패드는 안쪽 `List`의 `.tint()`만으로는 선택 강조색이 시스템 파란색으로 남는다
+        // (macOS는 AppKit, 아이패드는 UIKit `UISplitViewController` 브리징이라 색 해석이 다르다).
+        // 그래서 `NavigationSplitView` 자체에도 같은 색을 건다.
         .tint(Color(hex: "#D1A35E") ?? Color("AccentColor"))
         .focusedSceneValue(\.selectSection) { section in
             if section.opensSeparateWindow {
@@ -469,32 +315,23 @@ struct SidebarNavigationView: View {
             guard let newValue, !newValue.opensSeparateWindow else { return }
             UserSettingsStore.shared.lastSelectedSectionRawValue = newValue.rawValue
         }
-        // [2026-08-08 추가] S1(성경 조회) 관련 콘텐츠 시트의 "개요 화면 열기"가
-        // 쓰는 경로 — `AppNavigationRequest.swift` 상단 주석 참고. 이 값은 평범한
-        // `AppSection?`(Equatable)이라 `@FocusedValue`의 클로저 게시 문제(툴바를
-        // 가진 뷰에서 읽으면 실기기 크래시)가 없다.
+        // S1(성경 조회) 관련 콘텐츠 시트의 "개요 화면 열기" 경로(`AppNavigationRequest.swift` 참고).
+        // 평범한 `AppSection?`(Equatable)이라 `@FocusedValue`의 클로저 게시 문제(툴바를 가진 뷰에서
+        // 읽으면 실기기 크래시)가 없다.
         .onChange(of: AppNavigationRequest.shared.requestedSection) { _, newValue in
             guard let newValue, !newValue.opensSeparateWindow else { return }
             selection = newValue
             AppNavigationRequest.shared.clear()
         }
-        // [2026-08-26 추가] `SearchResultsPopRequest.swift` 상단 주석 참고 —
-        // 사용자 재보고: "검색결과에서 성경구절 클릭 → 다시 검색해도
-        // 검색결과가 안 보임"이 사이드바 검색창 경로(위 `submitSidebarSearch()`의
-        // 직접 pop)만으로는 다 안 잡혔다 — `SearchView` 자신의 `.searchable`
-        // 검색창으로 다시 검색하는 경로가 남아 있었다. `SearchViewModel.
-        // searchImmediately()`가 실제 검색 시작 시점마다 보내는 이 신호를 여기
-        // 한 곳에서 받아 `detailNavigationPath`를 비우면, 진입점이 어디든(사이드바
-        // 검색창/이 화면 자체 검색창/앞으로 생길 다른 경로) 성경 조회 화면이
-        // push된 상태에서 다시 검색해도 항상 검색결과 화면으로 돌아온다. `token`은
-        // 매번 증가하는 카운터라(같은 값 재요청 시 `.onChange` 미반응 문제가
-        // 없음, `SearchResultsPopRequest.swift` 참고) `clear()`가 필요 없다.
+        // `SearchResultsPopRequest.swift` 참고 — `SearchViewModel.searchImmediately()`가 검색을
+        // 시작할 때마다 보내는 신호를 받아 `detailNavigationPath`를 비운다. 진입점(사이드바 검색창/
+        // `SearchView`의 `.searchable`)과 무관하게 성경 조회가 push된 상태에서 다시 검색하면
+        // 검색결과 화면으로 돌아온다. `token`은 매번 증가하는 카운터라 `clear()`가 필요 없다.
         .onChange(of: SearchResultsPopRequest.shared.token) { _, _ in
             detailNavigationPath = NavigationPath()
         }
-        // [2026-08-12 추가] 말씀 요약 편집기 열기/닫기 — `SidebarVisibilityRequest.swift`
-        // 상단 주석 참고. `AppNavigationRequest`와 같은 이유로 `@FocusedValue`
-        // 대신 plain-Equatable 싱글턴 + `.onChange`를 쓴다.
+        // 말씀 요약 편집기 열기/닫기(`SidebarVisibilityRequest.swift` 참고). `AppNavigationRequest`와
+        // 같은 이유로 `@FocusedValue` 대신 plain-Equatable 싱글턴 + `.onChange`를 쓴다.
         .onChange(of: SidebarVisibilityRequest.shared.pendingRequest) { _, newValue in
             guard let newValue else { return }
             switch newValue {
@@ -506,31 +343,22 @@ struct SidebarNavigationView: View {
             }
             SidebarVisibilityRequest.shared.clear()
         }
-        // [2026-08-27 추가] 사용자 요청 — "아이패드에서 인스펙터 창과 사이드바가
-        // 동시에 나타나는 일이 없도록 할것." + "사이드바를 닫을 경우 아이콘
-        // 순서는 사이드바, 히스토리, 인스펙터 창 순서로 할 것."
-        // (`IPadSidebarInspectorCoordination.swift` 상단 주석 참고 — 아이패드
-        // 전용, macOS/아이폰에서는 아무도 이 싱글턴 값을 바꾸지 않아 실질적으로
-        // 비활성 상태다.)
+        // 아이패드에서 인스펙터와 사이드바가 동시에 나타나지 않게 조율한다
+        // (`IPadSidebarInspectorCoordination.swift` 참고). 아이패드 전용이며 macOS/아이폰에서는
+        // 싱글턴 값을 바꾸는 쪽이 없어 실질적으로 비활성이다.
         //
-        // ① 이 화면(사이드바를 실제로 들고 있는 쪽)이 `columnVisibility`가
-        // 바뀔 때마다(경로 무관 — 아래 새 토큰이든, 기존 좌상단 버튼이든,
-        // 스와이프든) 최신 표시 상태를 싱글턴에 보고한다.
+        // ① `columnVisibility`가 바뀔 때마다(경로 무관) 최신 표시 상태를 싱글턴에 보고한다.
         .onChange(of: columnVisibility) { _, newValue in
             guard isIPadIdiom else { return }
             IPadSidebarInspectorCoordination.shared.reportSidebarVisibility(newValue != .detailOnly)
         }
-        // ② 트레일링 아이콘 그룹의 새 "사이드바 열기" 버튼(`BibleReadingView.swift`
-        // — 이 뷰는 사이드바를 소유하지 않아 명령을 보내는 방식만 가능하다,
-        // `SearchResultsPopRequest.token`과 같은 원리의 매번 증가하는 카운터)이
-        // 온 것을 받아 실제로 사이드바를 연다.
+        // ② 트레일링 아이콘 그룹의 "사이드바 열기" 버튼(`BibleReadingView.swift`)은 사이드바를
+        // 소유하지 않아 명령만 보낸다(매번 증가하는 카운터). 그 신호를 받아 실제로 사이드바를 연다.
         .onChange(of: IPadSidebarInspectorCoordination.shared.showSidebarRequestToken) { _, newValue in
             guard isIPadIdiom, newValue > 0 else { return }
             columnVisibility = .all
         }
-        // ③ 관련 콘텐츠 인스펙터가 (어떤 경로로든) 열리는 순간을 관찰해, 이
-        // 화면 스스로(자기 로컬 상태만) 사이드바를 접는다 — 인스펙터 쪽에
-        // 사이드바를 대신 닫아 달라는 명령을 보낼 필요가 없다.
+        // ③ 관련 콘텐츠 인스펙터가 열리는 순간을 관찰해, 이 화면이 자기 로컬 상태로 사이드바를 접는다.
         .onChange(of: IPadSidebarInspectorCoordination.shared.isInspectorVisible) { _, newValue in
             guard isIPadIdiom, newValue, columnVisibility != .detailOnly else { return }
             columnVisibility = .detailOnly
@@ -542,22 +370,10 @@ struct SidebarNavigationView: View {
 
     // MARK: - "고정됨"/"최근" (2026-08-18 신설)
 
-    /// `WordNoteItem`(WordNoteHomeView.swift)과 같은 원칙 — 데이터 자체를 합치지
-    /// 않고, 사이드바에 한 목록으로 섞어 보여주기 위한 얇은 열거형 래퍼.
-    /// 처음엔 사용자 요청이 명시한 세 종류(연구문서/개인 묵상/말씀 요약)만
-    /// 다뤘다 — 메모(VersePhraseNote)/개요는 그때 범위 밖("작성/수정한 연구문서/
-    /// 개인 묵상/말씀 요약 리스트를 보여줄 것" 문구 그대로).
-    ///
-    /// [2026-08-25 추가] 사용자 요청 — "메뉴 명 하단 수정된 이력 리스트에 성경
-    /// 내용의 메모, 형광펜, 주석 수정한 내용도 이력에 나타날 수 있도록." 성경
-    /// 본문에 직접 붙는 세 가지 주석 작업 — 형광펜/표시(`VerseHighlight`), 메모
-    /// (`VersePhraseNote`), 관주(`VerseCrossReference`) — 를 추가한다("개인
-    /// 주석"에 해당하는 `UserMemo`는 이미 `.memo` 케이스로 반영돼 있다). 이 세
-    /// 모델은 `SourceDocument`/`UserMemo`/`VerseSummary`와 달리 `isPinned` 필드가
-    /// 없다 — 사용자가 "이력에 나타날 수 있도록"만 요청했지 고정 기능까지
-    /// 요청하지는 않았으므로, 새로 스키마를 늘리는 대신 이 세 케이스는 항상
-    /// 고정 불가능(`isPinnable == false`)으로 둔다(아래 `isPinnable`/`quickItemRow`
-    /// 참고) — "고정됨" 섹션에는 나오지 않고 "이번 주"/"이전"에만 나온다.
+    /// `WordNoteItem`(WordNoteHomeView.swift)과 같은 원칙 — 데이터를 합치지 않고
+    /// 사이드바에 한 목록으로 섞어 보여주기 위한 얇은 열거형 래퍼.
+    /// 형광펜/메모/관주는 `isPinned` 필드가 없어 항상 고정 불가(`isPinnable == false`)이며
+    /// "고정됨" 섹션에는 나오지 않는다.
     private enum SidebarQuickItemKind {
         case document(SourceDocument)
         case memo(UserMemo)
@@ -585,13 +401,7 @@ struct SidebarNavigationView: View {
             case .document(let document): return document.originalFilename
             case .memo(let memo):
                 let bookName = BooksProvider.shared.book(id: memo.bookId)?.nameKo ?? "성경"
-                // [2026-09-27 수정] 사용자 보고 — "개인묵상 작성하면 사이드바
-                // 히스토리 내역에 '[성경] [ ]장 메모'라고 출력됨 -> 메모는 절
-                // 단위로 썼는데 장에 대한 메모로 보임." `UserMemo.verse`는 이미
-                // 존재하는 절 단위 필드(UserContent.swift 참고, "nil이면 절
-                // 전체 메모")인데 이 제목 조합만 그걸 무시하고 있었다 — 바로
-                // 아래 `.highlight`/`.phraseNote`/`.crossReference` 케이스가
-                // 이미 쓰고 있는 "장:절" 표기 관례를 그대로 따른다.
+                // 절 단위 메모(`UserMemo.verse`)는 아래 다른 케이스와 같은 "장:절" 표기를 쓴다.
                 if let verse = memo.verse {
                     return "\(bookName) \(memo.chapter):\(verse) 메모"
                 }
@@ -617,8 +427,7 @@ struct SidebarNavigationView: View {
             case .summary: return "text.quote"
             case .highlight: return "highlighter"
             case .phraseNote: return "note.text"
-            // `VerseZoomView.actionButton(title: "관주", systemImage: "link")`와
-            // 같은 아이콘 — 어디서 왔든 같은 기능은 같은 아이콘으로.
+            // `VerseZoomView`의 관주 버튼과 같은 아이콘.
             case .crossReference: return "link"
             }
         }
@@ -630,21 +439,16 @@ struct SidebarNavigationView: View {
             case .highlight, .phraseNote, .crossReference: return false
             }
         }
-        /// 위 enum 상단 주석 참고 — 형광펜/메모/관주는 고정 기능 자체가 없다.
+        /// 형광펜/메모/관주는 고정 기능이 없다.
         var isPinnable: Bool {
             switch kind {
             case .document, .memo, .summary: return true
             case .highlight, .phraseNote, .crossReference: return false
             }
         }
-        /// "작성/수정한" 기준 — 연구문서는 업로드 시각, 개인 묵상은 마지막 수정
-        /// 시각(WordNoteHomeView와 같은 원칙), 말씀 요약은 쓴 시각(같은 이유로
-        /// "쓴 순서"가 그 모델의 저널 성격에 맞다 — `WordNoteItem.sortDate` 상단
-        /// 주석 참고). 형광펜은 수정 개념 없이 항상 추가/삭제만 되므로(`VerseHighlight`
-        /// 상단 주석 참고) `createdAt`이 곧 "마지막으로 손댄 시각"이다. 메모/관주는
-        /// 실제로 내용을 고칠 수 있어 `updatedAt`을 쓴다(`VersePhraseNote.updatedAt`은
-        /// `BibleReadingViewModel.updatePhraseNote`가, `VerseCrossReference.updatedAt`은
-        /// `removeCrossReferenceTarget`/`removeCrossReferenceGroup`이 갱신한다).
+        /// "작성/수정한" 기준 시각 — 연구문서는 업로드 시각, 개인 묵상은 마지막 수정 시각,
+        /// 말씀 요약은 쓴 시각(저널 성격). 형광펜은 수정 개념이 없어 `createdAt`, 메모/관주는
+        /// 내용을 고칠 수 있어 `updatedAt`을 쓴다.
         var sortDate: Date {
             switch kind {
             case .document(let document): return document.uploadedAt
@@ -652,13 +456,8 @@ struct SidebarNavigationView: View {
             case .summary(let summary): return summary.createdAt
             case .highlight(let highlight): return highlight.createdAt
             case .phraseNote(let note): return note.updatedAt
-            // [2026-09-05 수정] 사용자 보고 — "관주가 어제날짜로 고정되어있음."
-            // `VerseCrossReference.updatedAt`이 이제 옵셔널이다(그 프로퍼티
-            // 상단 주석 참고 — 옛 비-옵셔널 기본값이 마이그레이션 시점 값으로
-            // 잘못 고정되는 문제의 근본 수정). 아직 한 번도 대상 절을 지우는
-            // 편집이 없었던 관주(`nil`)는 `createdAt`(실제 생성 시각)으로
-            // 대체 표시한다 — 사용자 요청 "updatedAt이 없으면 createdAt으로
-            // 대체 표시" 그대로.
+            // `VerseCrossReference.updatedAt`은 옵셔널이므로, 한 번도 편집되지 않은 관주(`nil`)는
+            // `createdAt`으로 대체한다.
             case .crossReference(let reference): return reference.updatedAt ?? reference.createdAt
             }
         }
@@ -677,11 +476,8 @@ struct SidebarNavigationView: View {
         allQuickItems.filter(\.isPinned).sorted { $0.sortDate > $1.sortDate }
     }
 
-    /// 고정된 항목은 "고정됨" 섹션에 이미 나오므로 "최근" 쪽에서는 뺀다(중복
-    /// 노출 방지, Claude 앱과 같은 방식). 항목이 아주 많아지면 사이드바가
-    /// 무한정 길어지는 걸 막기 위해 최근 30개로 캡을 둔다 — 스펙에 명시된
-    /// 숫자는 없지만("이번 주"/"이전" 두 구간만 명시), 개인용 앱 규모를
-    /// 고려한 실용적 상한이다.
+    /// 고정된 항목은 "고정됨" 섹션에 이미 나오므로 뺀다(중복 노출 방지). 사이드바가
+    /// 무한정 길어지지 않도록 최근 30개로 제한한다(스펙에 없는 실용적 상한).
     private var recentQuickItems: [SidebarQuickItem] {
         Array(allQuickItems.filter { !$0.isPinned }.sorted { $0.sortDate > $1.sortDate }.prefix(30))
     }
@@ -690,15 +486,9 @@ struct SidebarNavigationView: View {
         Calendar.current.date(byAdding: .day, value: -7, to: .now) ?? .now
     }
 
-    /// [2026-08-26 신설] 사용자 요청 — "수정이력 분류가 이번주로 통합이
-    /// 아니라 -> [오늘], [어제], [그저께(날짜)], 그리고 그 이전의 내용은
-    /// [이번 주]로 할 것. 그것보다 더 전이면 [이전]으로 그룹핑." 기존
-    /// `thisWeekQuickItems`/`olderQuickItems`(7일 경계 하나만 쓰던 2단
-    /// 구조)를 5단으로 늘리면서, 항목 하나가 정확히 한 버킷에만 들어가도록
-    /// (겹치거나 빠지는 경우 없이) 판정을 한 곳(`quickItemDateBucket(for:)`)에
-    /// 모았다 — 아래 다섯 계산 프로퍼티가 각자 다른 기준으로 다시 필터링하면
-    /// 그 기준들이 서로 어긋날 위험(예: "오늘" 판정과 "이번 주" 판정이 경계에서
-    /// 둘 다 true가 되는 경우)이 있어, 이렇게 한 번에 분류하는 편이 더 안전하다.
+    /// 항목 하나가 정확히 한 버킷(오늘/어제/그저께/이번 주/이전)에만 들어가도록 판정을
+    /// `quickItemDateBucket(for:)` 한 곳에 모은다. 프로퍼티마다 따로 필터링하면 경계에서
+    /// 기준이 어긋나 중복/누락이 생길 수 있다.
     private enum SidebarQuickItemDateBucket {
         case today, yesterday, dayBeforeYesterday, thisWeek, older
     }
@@ -734,8 +524,7 @@ struct SidebarNavigationView: View {
         recentQuickItems.filter { quickItemDateBucket(for: $0.sortDate) == .older }
     }
 
-    /// "그저께(날짜)" 헤더 문구 — 요청 문구("그저께(날짜)") 그대로, 실제
-    /// 날짜(예: "8월 24일")를 괄호 안에 보여준다.
+    /// "그저께(날짜)" 헤더 문구 — 실제 날짜(예: "8월 24일")를 괄호 안에 보여준다.
     private static let dayBeforeYesterdayDateFormatter: DateFormatter = {
         let formatter = DateFormatter()
         formatter.dateFormat = "M월 d일"
@@ -755,22 +544,15 @@ struct SidebarNavigationView: View {
         } label: {
             Label(item.title, systemImage: item.systemImage)
                 .lineLimit(1)
-                // [2026-08-19 추가] 사용자 요청 — "고정됨/오늘/이번주/오래됨...
-                // 관련 항목들은 메뉴보다 살짝 흐리게." 위 AppSection 메뉴는
-                // 기본(테마 글자색) 그대로 두고, 이 보조 목록만 옅게 낮춰
-                // 위계를 구분한다.
-                // [2026-09-29 수정] 사용자 보고 — "왼쪽 사이드바는 테마
-                // 색상이 적용되지 않음." 고정 `.secondary` 대신 테마
-                // 글자색의 옅은 버전으로.
+                // 보조 목록은 메뉴보다 옅은 테마 글자색으로 표시해 위계를 구분한다.
                 .foregroundStyle(settings.bibleTextColor?.opacity(0.6) ?? Color.secondary)
         }
         // "태그 관계" 행과 같은 이유로 `.plain` — 이 Button들은 `selection`
         // 대상이 아니라 List 기본 버튼 틴트가 어울리지 않는다.
         .buttonStyle(.plain)
 
-        // [2026-08-25 추가] 형광펜/메모/관주는 고정 기능이 없다(`SidebarQuickItem.isPinnable`
-        // 상단 주석 참고) — 누르면 아무 항목도 없는 빈 컨텍스트 메뉴가 뜨는 걸
-        // 피하려고 그 셋에는 `.contextMenu` 자체를 붙이지 않는다.
+        // 형광펜/메모/관주는 고정 기능이 없어(`isPinnable`), 빈 컨텍스트 메뉴가 뜨지 않도록
+        // 그 셋에는 `.contextMenu`를 붙이지 않는다.
         if item.isPinnable {
             row.contextMenu {
                 Button {
@@ -784,23 +566,13 @@ struct SidebarNavigationView: View {
         }
     }
 
-    /// 연구문서는 기존 검색결과와 같은 방식(새 창), 개인 묵상/말씀 요약은
-    /// "말씀 노트" 섹션으로 전환하면서 그 항목이 바로 선택되도록
-    /// `WordNoteSelectionRequest`(그 파일 상단 주석 참고)로 알린다.
+    /// 연구문서는 새 창으로 열고, 개인 묵상/말씀 요약은 "말씀 노트" 섹션으로 전환하면서
+    /// `WordNoteSelectionRequest`(그 파일 상단 주석 참고)로 선택할 항목을 알린다.
     ///
-    /// ⚠️ [2026-08-18 검토, 아이폰 크래시 fix 관련] `openWindow`가 아이폰에서
-    /// 런타임 에러를 내는 문제(DocumentsHomeView/SearchView/TagDrilldownView/
-    /// ChapterRelatedContentPanel 동일 fix 참고)가 이 함수에도 있어 보이지만,
-    /// `SidebarNavigationView` 자체가 macOS/iPadOS 전용이다(RootView.swift —
-    /// `UIDevice.current.userInterfaceIdiom == .phone`이면 이 뷰 대신
-    /// `PhoneTabView`를 쓴다). 즉 이 함수는 아이폰에서 아예 호출될 수 없어
-    /// 실제로는 안전하다 — 다른 4곳과 달리 이 함수 자체는 여러 View 중
-    /// 하나를 고르는 `@ViewBuilder` 컨텍스트가 아니라 명령형 함수라, 같은
-    /// `if isPhoneIdiom { NavigationLink … }` 패턴을 그대로 적용할 수도 없다
-    /// (NavigationLink는 View이지 명령형으로 "누르는" 액션이 아니다). 만약
-    /// 나중에 이 뷰가 아이패드 멀티태스킹 축소 등으로 아이폰에서도 쓰이게
-    /// 된다면, `NavigationSplitView`의 detail 쪽에 `NavigationPath` 바인딩을
-    /// 새로 도입해 `path.append(document.persistentModelID)`로 바꿔야 한다.
+    /// ⚠️ `openWindow`는 아이폰에서 런타임 에러를 내지만, 이 뷰는 macOS/iPadOS 전용이라
+    /// (RootView.swift는 아이폰에서 `PhoneTabView`를 쓴다) 여기서는 호출될 수 없다.
+    /// 이 뷰가 아이폰에서도 쓰이게 되면 detail 쪽에 `NavigationPath` 바인딩을 도입해
+    /// `path.append(document.persistentModelID)`로 바꿔야 한다.
     private func openQuickItem(_ item: SidebarQuickItem) {
         switch item.kind {
         case .document(let document):
@@ -811,10 +583,8 @@ struct SidebarNavigationView: View {
         case .summary(let summary):
             WordNoteSelectionRequest.shared.request(.summary(summary.id))
             selection = .wordNote
-        // [2026-08-25 추가] 형광펜/메모/관주는 "말씀 노트"처럼 별도 목록 화면이
-        // 없다 — 이 세 가지가 실제로 사는 곳은 성경 조회 화면(구절 확대보기/
-        // 관련 콘텐츠 패널)뿐이므로, 그 절로 바로 이동해 보여준다.
-        // `BibleVerseNavigationRequest.swift` 상단 주석 참고.
+        // 형광펜/메모/관주는 별도 목록 화면이 없고 성경 조회 화면에 있으므로 해당 절로 바로
+        // 이동한다(`BibleVerseNavigationRequest.swift` 참고).
         case .highlight(let highlight):
             navigateToBibleVerse(bookId: highlight.bookId, chapter: highlight.chapter, verse: highlight.verse)
         case .phraseNote(let note):
@@ -824,20 +594,16 @@ struct SidebarNavigationView: View {
         }
     }
 
-    /// 성경 조회 섹션으로 전환하고(이미 `selection`을 직접 들고 있어 memo/summary
-    /// 케이스처럼 바로 바꾼다), `BibleVerseNavigationRequest`로 목표 좌표를 넘긴다
-    /// — `BibleReadingView`가 이미 떠 있든(같은 섹션 안, `.onChange`) 막 새로
-    /// 만들어지든(다른 섹션에서 전환, `.onAppear`) 두 경로 모두 처리한다.
+    /// 성경 조회 섹션으로 전환하고 `BibleVerseNavigationRequest`로 목표 좌표를 넘긴다.
+    /// `BibleReadingView`가 이미 떠 있든(`.onChange`) 새로 만들어지든(`.onAppear`) 처리된다.
     private func navigateToBibleVerse(bookId: Int, chapter: Int, verse: Int) {
         BibleVerseNavigationRequest.shared.request(bookId: bookId, chapter: chapter, verse: verse)
         selection = .bibleReading
     }
 
-    /// `DocumentsViewModel.togglePin`/`WordNoteListContent.togglePin`과 같은
-    /// 원칙(이산적 액션, 즉시 저장) — 이 화면은 뷰모델이 따로 없어 여기서 직접
-    /// `modelContext`에 저장한다. 형광펜/메모/관주는 고정 기능이 없어(`isPinnable
-    /// == false`) 이 함수를 호출하는 UI 경로 자체가 없다 — 그래도 `switch`를
-    /// 총망라(exhaustive)하게 두기 위해 그 세 케이스는 아무 것도 하지 않는다.
+    /// `DocumentsViewModel.togglePin`/`WordNoteListContent.togglePin`과 같은 원칙(이산적 액션,
+    /// 즉시 저장). 뷰모델이 없어 여기서 직접 `modelContext`에 저장한다. 고정 불가 케이스는
+    /// `switch` 총망라를 위해 아무 것도 하지 않는다.
     private func togglePinQuickItem(_ item: SidebarQuickItem) {
         switch item.kind {
         case .document(let document): document.isPinned.toggle()
@@ -854,21 +620,13 @@ struct SidebarNavigationView: View {
         case .bibleReading: BibleReadingView()
         case .wordNote: WordNoteHomeView()
         case .documents: DocumentsHomeView()
-        // [2026-09-28 추가] "내 설교" 기능 — 설계 문서(claude/sermon-
-        // management-screens-and-schema.md, 프로젝트) 참고. `SermonHomeView`는
-        // iPhone/Mac·iPad 양쪽에서 그대로 재사용된다(`SermonHomeView.swift`
-        // 상단 주석 참고 — NavigationSplitView의 detail 컬럼이 이미 독립된
-        // NavigationStack이라 `.searchable` 문제가 없다).
+        // "내 설교" — `SermonHomeView`는 iPhone/Mac·iPad 양쪽에서 재사용된다
+        // (`SermonHomeView.swift` 참고).
         case .sermons: SermonHomeView()
-        // [2026-08-14 변경] 사용자 요청 — "개요: 구약/신약 > 책 > 장 폴더 구조로."
-        // 66권 평면 리스트(`OutlineBookListView`, 삭제됨)를 트리(`OutlineTreeView`)로
-        // 교체 — `WindowGroup(id: "outline")`(성경 조회 사이드바의 "개요 화면
-        // 열기" 별도 창)은 이 경로를 타지 않으므로 영향 없다(JBCHBibleResearchApp.swift 참고).
+        // 개요: 구약/신약 > 책 > 장 트리. 별도 창 `WindowGroup(id: "outline")`은 이 경로를 타지 않는다.
         case .outline: OutlineTreeView()
-        // [2026-08-26 변경] 이 case 자체엔 더 이상 아무 특별 처리가 없다 —
-        // "다시 검색하면 push된 화면에 갇힌다" 문제는 이제 `body`의
-        // `NavigationStack(path: $detailNavigationPath)`(위 `detailNavigationPath`
-        // 상단 주석 참고)와 `submitSidebarSearch()`의 경로 초기화가 처리한다.
+        // 다시 검색할 때 push된 화면에 갇히는 문제는 `NavigationStack(path:)`와
+        // `submitSidebarSearch()`의 경로 초기화가 처리한다.
         case .search: SearchView()
         case .tagRelations: EmptyView() // 별도 창으로만 열리므로 본문에는 그려지지 않는다.
         }

@@ -2,34 +2,22 @@
 //  SermonVerseReferencePicker.swift
 //  JBCHBibleResearch
 //
-//  [2026-09-28 3단계(에디터) 신설] 설계 문서 2.2 S-SER2 "말씀구절 스타일의 특수성" —
-//  "+ 추가" 버튼으로 책/장/절을 선택하면 본문에 그 구절 텍스트가 자동 삽입되면서
-//  문단 스타일이 "말씀구절"로 지정되고, 그 좌표가 `SermonVerseReference`로 함께
-//  저장된다. 책/장 선택 UI는 `CrossReferenceTargetPicker.swift`(관주 연결 시트)의
-//  단일 추가 구성(`BookChapterPicker` + 절 Stepper + "추가" 버튼)을 그대로 따른다 —
-//  이미 검증된 같은 성격의 화면이 있는데 새 패턴을 만들 근거가 없다. 다른 점은
-//  절 범위(시작~끝)를 받아 여러 절을 한 번에 삽입할 수 있다는 것과, 저장된 좌표만
-//  넘기는 관주 연결과 달리 이 화면은 실제 구절 "본문 텍스트"까지 가져와야 한다는
-//  것 — `BibleReferenceStore`를 그때그때 여는 관례(`SearchViewModel`/
-//  `ThemeDetailView`/`PersonDetailView`/`BibleReferenceExtractor` 등이 이미 쓰는
-//  `try? BibleReferenceStore(filePath: TranslationBootstrap.
-//  resolvedBundledDatabaseURL().path)` 패턴)를 그대로 재사용한다.
+//  말씀구절 삽입 시트 — 책/장/절 범위를 고르면 해당 구절 본문이 문단으로 삽입되고
+//  문단 스타일이 "말씀구절"로 지정되며, 좌표가 `SermonVerseReference`로 함께 저장된다.
+//  책/장 선택은 `CrossReferenceTargetPicker`의 `BookChapterPicker`를 재사용하고,
+//  본문은 `BibleReferenceStore`를 그때그때 열어 가져온다.
 //
-//  ⚠️ [번역본 범위] 항상 번들 기본 번역본(`TranslationBootstrap.
-//  resolvedBundledDatabaseURL()`)에서만 구절 텍스트를 가져온다 — 사용자가 추가
-//  등록한 다른 번역본을 고를 수 있게 하는 것은 이 설계 문서 범위 밖이라(S1의
-//  다중 번역본 비교와 달리 S-SER2는 애초에 번역본 선택 UI를 요구하지 않음)
-//  추측으로 넣지 않았다.
+//  ⚠️ 구절 텍스트는 항상 번들 기본 번역본(`TranslationBootstrap.resolvedBundledDatabaseURL()`)
+//  에서만 가져온다 — 사용자 추가 번역본 선택은 지원하지 않는다.
 //
 
 import SwiftUI
 import BibleResearchModels
 
 struct SermonVerseReferencePicker: View {
-    /// 삽입 확정 시 호출 — 조합된 구절 텍스트와 구조적 좌표(책/장/시작절/끝절)를
-    /// 그대로 넘긴다. 실제 문단 삽입 + `SermonVerseReference` 생성은 호출부
-    /// (`SermonEditorView`)의 책임이다 — 이 화면은 SwiftData를 직접 만지지
-    /// 않는다는 이 프로젝트의 기존 원칙(`CrossReferenceTargetPicker` 등)과 동일.
+    /// 삽입 확정 시 호출 — 조합된 구절 텍스트와 좌표(책/장/시작절/끝절)를 넘긴다.
+    /// 문단 삽입과 `SermonVerseReference` 생성은 호출부(`SermonEditorView`)의 책임이며,
+    /// 이 화면은 SwiftData를 직접 만지지 않는다.
     var onInsert: (_ text: String, _ bookId: Int, _ chapter: Int, _ verseStart: Int, _ verseEnd: Int?) -> Void
 
     @Environment(\.dismiss) private var dismiss
@@ -109,9 +97,7 @@ struct SermonVerseReferencePicker: View {
         dismiss()
     }
 
-    /// 선택한 절 범위의 본문을 이어 붙이고, 끝에 "(책이름 장:절)" 형태의
-    /// 참조 표기를 덧붙인다 — 목업(Editor.dc.html)의 말씀구절 예시("요한복음
-    /// 3:5 \"...\"")와 같은 모양.
+    /// 선택한 절 범위의 본문을 이어 붙이고 끝에 "(책이름 장:절)" 참조 표기를 덧붙인다.
     private func fetchVerseText() -> String? {
         guard let store = try? BibleReferenceStore(filePath: TranslationBootstrap.resolvedBundledDatabaseURL().path) else {
             return nil

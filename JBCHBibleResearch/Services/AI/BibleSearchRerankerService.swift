@@ -2,29 +2,16 @@
 //  BibleSearchRerankerService.swift
 //  JBCHBibleResearch
 //
-//  [2026-08-19 신설] 사용자 요청 — "Reranker도 고민해볼것." 임베딩 검색이 이미
-//  뽑아온 상위 후보(실제로 존재하는 성경 절, 지어낸 것 아님)를 원 질문에
-//  비추어 다시 순서를 매기는 마지막 단계. `BibleQueryRefinementService`와
-//  똑같은 이유로 안전하다 — "이 절이 몇 장 몇 절인지"를 모델의 기억에서
-//  끄집어내는 게 아니라, 이미 확정된 후보 목록 중 어느 게 더 어울리는지
-//  "비교/판단"만 시키기 때문에 성경 지식을 몰라도 상대적으로 잘 해낼 수 있는
-//  작업이다(`BibleSemanticSearchService.swift` 상단 주석 참고).
+//  임베딩 검색이 뽑아온 상위 후보(실제 존재하는 절)를 원 질문에 비추어 다시 정렬하는
+//  Apple Intelligence 재순위화 서비스. 모델에게 장절을 기억해 내게 하지 않고 확정된
+//  후보 중 더 어울리는 순서만 판단하게 하므로 성경 지식이 얕아도 안전하다.
 //
-//  ⚠️ [실패해도 검색을 막지 않음] `BibleQueryRefinementService.refine`과 같은
-//  원칙 — 모델이 없거나(Apple Intelligence 미지원 기기), 실패하거나, 응답을
-//  파싱할 수 없으면 원래 순서(코사인 유사도 순)를 그대로 돌려준다.
+//  모델이 없거나, 실패하거나, 응답을 파싱할 수 없으면 원래 순서(코사인 유사도 순)를
+//  그대로 돌려준다.
 //
-//  ⚠️ [2026-08-20 더 이상 호출되지 않음] 위 "정제 토글과 독립적인 별도
-//  스위치" 문단은 그 스위치들이 있던 시절의 기록이다 — 사용자가 "너무
-//  느리고 결과가 큰 차이 안 남"이라는 이유로 Apple Intelligence 재순위화
-//  체크박스 자체를 없애 달라고 요청해, `SearchViewModel.isRerankEnabled`/
-//  `isQueryRefinementEnabled` 두 프로퍼티와 `BibleSemanticSearchService.
-//  search`의 이 서비스 호출부를 모두 제거했다. 이 파일은 더 이상 검색
-//  파이프라인에서 호출되지 않는다 — `AIRelationExtractor`와 같은 프로젝트
-//  관례대로 완전히 지우지 않고 참고용으로만 남겨 뒀다(필요하면
-//  `BibleSemanticSearchService.search`의 리랭킹 단계에서 다시 연결할 수
-//  있다). 현재 항상 쓰이는 리랭커는 `BibleStructuralRerankerService`(LLM
-//  아님, 결정론적)다.
+//  ⚠️ 현재 검색 파이프라인에서 호출되지 않는다(속도 대비 효과가 작아 재순위화 토글과
+//  호출부를 제거함). 참고용으로만 남겨 두었으며, 항상 쓰이는 리랭커는 결정론적인
+//  `BibleStructuralRerankerService`다.
 //
 
 import Foundation
@@ -49,9 +36,8 @@ enum BibleSearchRerankerService {
         #endif
     }
 
-    /// `matches`(이미 임베딩 검색으로 확정된 실제 절 목록)를 `query`에 비추어
-    /// 다시 정렬한다. 실패/미지원이면 입력 순서를 그대로 돌려준다 — 절대
-    /// throw하지 않고, 새로운 절을 추가하거나 만들어내지 않는다(순서만 바꿈).
+    /// `matches`를 `query`에 비추어 다시 정렬한다. 실패/미지원이면 입력 순서를 그대로
+    /// 돌려주며, throw하지 않고 새 절을 만들지도 않는다(순서만 바꿈).
     static func rerank(query: String, matches: [SemanticVerseMatch]) async -> [SemanticVerseMatch] {
         guard matches.count > 1 else { return matches }
 
@@ -95,9 +81,8 @@ enum BibleSearchRerankerService {
                 seen.insert(index)
                 reordered.append(matches[index])
             }
-            // 모델이 언급하지 않은 나머지는 "관련 없다고 뺐다"고 단정하지 않고,
-            // 원래(코사인 유사도) 순서 그대로 뒤에 이어붙인다 — 결과 개수를
-            // 줄이는 결정까지는 이 단계에 맡기지 않는다.
+            // 모델이 언급하지 않은 나머지는 원래(코사인 유사도) 순서로 뒤에 이어붙인다.
+            // 결과 개수를 줄이는 결정까지는 이 단계에 맡기지 않는다.
             for (index, match) in matches.enumerated() where !seen.contains(index) {
                 reordered.append(match)
             }

@@ -2,10 +2,8 @@
 //  TranslationImportSheet.swift
 //  JBCHBibleResearch
 //
-//  S12(번역본 관리) "추가" 흐름의 공용 UI. 두 번째 사용처(설정 8.3 탭의 "번역본
-//  추가..." 버튼)가 처음부터 있어서(SettingsView.swift가 이미 비활성 버튼 + 안내
-//  문구로 자리를 잡아 뒀었다) sheet 하나로 분리해 TranslationManagementView와
-//  공유한다 — addendum 원칙("두 번째 사용처가 생긴 시점에 맞춰 공통화") 그대로.
+//  S12(번역본 관리) "추가" 흐름의 공용 UI. 설정 탭의 "번역본 추가..." 버튼도
+//  같은 흐름을 쓰므로 sheet 하나로 분리해 TranslationManagementView와 공유한다.
 //
 
 import SwiftUI
@@ -28,11 +26,8 @@ struct TranslationImportSheet: View {
     @State private var isValidating = false
     @State private var errorMessage: String?
 
-    // sqlite/sqlite3/db/bdb 표준 UTType이 없어(hwp/hwpx와 같은 이유,
-    // DocumentUploadService.swift 참고) 확장자 기반으로 직접 선언한다. "bdb"는
-    // 2026-08-07 사용자가 실제 사용자 추가 번역본 파일 확장자로 확인해 준 값이다
-    // (BibleReferenceStore.swift 상단 주석 — `Bible(id, book, chapter, verse,
-    // btext)` 스키마 참고).
+    // sqlite/sqlite3/db/bdb는 표준 UTType이 없어(hwp/hwpx와 같은 이유) 확장자
+    // 기반으로 직접 선언한다. "bdb"는 사용자 추가 번역본 파일의 실제 확장자다.
     private static let sqliteContentTypes: [UTType] = {
         let extensions = ["sqlite", "sqlite3", "db", "bdb"]
         let types = extensions.compactMap { UTType(filenameExtension: $0) }
@@ -123,11 +118,8 @@ struct TranslationImportSheet: View {
         .fileImporter(isPresented: $isFileImporterPresented, allowedContentTypes: Self.sqliteContentTypes) { result in
             handlePicked(result)
         }
-        // [2026-08-11 추가] 사용자 요청 — "[+ 번역본 추가...] 클릭하면 바로
-        // 파일선택 화면으로 열릴 것". 이 시트가 뜨자마자 파일 선택기를 자동으로
-        // 띄운다 — 사용자가 "SQLite 파일 선택..." 버튼을 한 번 더 누를 필요가
-        // 없다. 사용자가 취소하면 시트는 그대로 남아 있고, 이 버튼으로 다시
-        // 시도할 수 있다(기존 동작 그대로 유지).
+        // 시트가 뜨자마자 파일 선택기를 자동으로 연다. 선택을 취소해도 시트는
+        // 남아 있고 "SQLite 파일 선택..." 버튼으로 다시 시도할 수 있다.
         .onAppear {
             isFileImporterPresented = true
         }

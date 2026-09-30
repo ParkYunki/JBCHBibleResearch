@@ -6,10 +6,6 @@
 //  프로토콜(iOS16+/macOS13+)로 만들었다 — HStack만 쓰면 태그가 많을 때 화면 밖으로
 //  잘리기 때문.
 //
-//  [2026-08-14 분리] 원래 `MemoDetailView.swift`에 `private struct`로 있던 것을,
-//  `WordSummaryEditorView`도 태그 UI를 갖게 되면서(사용자 요청 — "말씀 요약의
-//  글을 클릭했을 때에도 개인 묵상 유형의 글처럼 태그를 입력할 수 있게") 두
-//  화면이 공유할 수 있도록 별도 파일로 뺐다. 구현 자체는 전혀 바뀌지 않았다.
 //
 
 import SwiftUI

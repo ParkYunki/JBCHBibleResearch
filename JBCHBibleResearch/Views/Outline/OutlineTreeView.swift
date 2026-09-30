@@ -2,39 +2,14 @@
 //  OutlineTreeView.swift
 //  JBCHBibleResearch
 //
-//  [2026-08-14 신설, `OutlineBookListView.swift`/`OutlineChapterListView.swift`
-//  대체] 사용자 요청 — "개요: 폴더 구조로 표현할 수 있도록 — 구약 > 창세기 >
-//  1장,2장 ... / 신약 > 마태복음 > 마가복음. 한번 펼친 폴더 내용은 다음에
-//  개요를 눌렀을 때에도 그 상태가 유지 되도록. 성경 자체를 눌러 성경개요와
-//  그 성경의 모든 장을 일괄로 편집할 수 있게 하거나 그 성경의 특정 장을
-//  클릭하여 그 특정장만 수정할 수 있게 하도록. 리치 에디터화면은 폴더 구조
-//  오른쪽에 나오도록."
-//
-//  이전 버전(66권 평면 리스트 → 장 리스트 → 편집기, 3단 push 내비게이션)을
-//  완전히 대체한다. 구조:
-//  - 왼쪽(또는 iPhone은 전체 화면): 구약/신약 → 책 → 장 3단 트리. `List`를
-//    직접 만들지 않고, 지금 펼쳐진 상태에 따라 "보여야 할 행"을 매번
-//    평면 배열로 계산해(`rows`) 그린다 — SwiftUI `DisclosureGroup`의 기본
-//    "행 전체를 누르면 펼침/접힘" 동작은 "책 이름을 누르면 그 책을 선택(=
-//    오른쪽에 일괄편집기 열기)"이라는 요구와 정확히 충돌해서(둘 다 "행 탭"을
-//    쓰려고 하면 하나를 고를 수밖에 없다), 화살표 아이콘 전용 버튼과 이름
-//    텍스트 전용 탭 영역을 분리해 직접 만들었다.
-//  - 펼침 상태(구약/신약, 책)는 `UserSettingsStore.outlineExpandedTestaments`/
-//    `outlineExpandedBookIds`(UserDefaults)에 저장 — 앱을 껐다 켜도 유지된다.
-//  - 오른쪽(또는 iPhone은 push 이동): `OutlineBookBulkEditView` — 책을
-//    선택하면 `focusedChapter: nil`(전부 접힌 채로 시작, "모두 펼치기"로 일괄
-//    가능), 장을 선택하면 `focusedChapter: 그 장`(그 장만 펼쳐진 채로 시작)
-//    을 넘긴다 — 같은 화면 하나가 "일괄 편집"과 "장 하나만 수정" 두 요구를
-//    함께 만족한다.
-//
-//  ⚠️ [범위 축소, 명확히 플래그] 옛 `OutlineView`가 갖고 있던 AI 초안 제안
-//  (9.9절, `ChapterOutlineDraftService`)과 `BookOutline` 충돌 배너(다른 기기가
-//  같은 책 개요를 오프라인에서 따로 만든 경우)는 이번 트리 재설계에 포함하지
-//  않았다 — 이번 요청 범위(폴더 트리 + 일괄/개별 편집)에 없었고, 장마다
-//  접고 펼 수 있는 아코디언 구조에 두 기능을 자연스럽게 녹이려면 추가 설계가
-//  필요해 별도 요청 없이 넣지 않기로 했다. 필요해지면 이후 라운드에 추가하면
-//  된다.
-//
+//  폴더 구조 개요 화면. 구약/신약 → 책 → 장 3단 트리(왼쪽, iPhone은 전체 화면)와
+//  편집기(`OutlineBookBulkEditView`, 오른쪽 또는 iPhone push)로 구성된다.
+//  - `List`를 직접 만들지 않고 펼침 상태에 따라 보여야 할 행을 평면 배열(`rows`)로 계산해 그린다.
+//    `DisclosureGroup`은 행 전체 탭이 펼침/접힘에 쓰여 "책 이름 탭 = 책 선택"과 충돌하므로
+//    화살표 버튼과 이름 탭 영역을 분리했다.
+//  - 펼침 상태는 `UserSettingsStore`(UserDefaults)에 저장돼 앱을 다시 켜도 유지된다.
+//  - 책 선택은 `focusedChapter: nil`(일괄 편집), 장 선택은 `focusedChapter: 그 장`을 넘긴다.
+//  ⚠️ 옛 `OutlineView`의 AI 초안 제안과 `BookOutline` 충돌 배너는 이 화면에 포함되어 있지 않다.
 
 import SwiftUI
 import SwiftData
@@ -50,13 +25,7 @@ enum OutlineTreeSelection: Hashable {
 }
 
 /// 트리를 평면 배열로 펼쳐 그리기 위한 행 하나.
-///
-/// ⚠️ [2026-08-15 재설계] 사용자 UX 피드백 — "빈 여백도 많고, 특정 장에 개요를
-/// 입력하기 위해서는 클릭을 여러번 클릭해야 함." 기존엔 장마다 `.chapter(Book,
-/// Int)` 행을 하나씩 만들어 시편(150장) 같은 책은 스크롤이 아주 길었다. 지금은
-/// 펼쳐진 책 하나당 "장 칩 그리드" 행 하나(`.chapterGrid`)만 만들고, 그 안에서
-/// `LazyVGrid`로 장 번호를 작게 줄바꿈해 늘어놓는다 — 같은 화면 안에 훨씬 많은
-/// 장이 한 번에 들어와 스크롤이 크게 줄어든다.
+/// 펼쳐진 책 하나당 장 번호 칩 그리드 행 하나(`.chapterGrid`)만 만들어, 장이 많은 책도 스크롤이 길어지지 않게 한다.
 private enum OutlineTreeRow: Identifiable {
     case testamentHeader(Book.Testament)
     case book(Book)
@@ -80,34 +49,13 @@ struct OutlineTreeView: View {
         #endif
     }
 
-    /// [2026-08-27 신설] 사용자 재보고 — "장 버튼을 누르면 무조건 마지막
-    /// 장으로 이동, 뒤로가기가 이전 화면이 아니라 이전 장으로 감." 8/26에
-    /// "값 기반 `NavigationLink(value:)` + 화면당 단 하나의
-    /// `.navigationDestination(for:)`"로 고쳤다고 기록돼 있었지만, 실제로는
-    /// 그 조합으로도 문제가 재현됐다 — 근본 원인은 그게 아니라, 장 칩
-    /// 여러 개가 `List`의 행(row) 하나(`LazyVGrid`) 안에 몰려 있는 구조
-    /// 자체였다: `NavigationLink`가 몇 개든, 그게 암묵적(각자 알아서 push하는)
-    /// 내비게이션 스택에 얹혀 있는 한, `List`/`NavigationStack`이 "한 행 안의
-    /// 여러 링크 중 실제로 탭된 게 어느 것인지"를 안정적으로 구분하지
-    /// 못했다. 해법은 그 자체를 없애는 것 — 칩을 `NavigationLink`가 아니라
-    /// 평범한 `Button`으로 바꾸고(어느 클로저가 눌렸는지는 Swift 클로저
-    /// 캡처만으로 100% 명확하다, `List`/링크 식별에 기댈 필요가 없다), 이동은
-    /// `NavigationStack(path:)`에 명시적으로 바인딩된 배열에 값을 직접
-    /// append하는 방식으로 프로그램적으로 처리한다. 이 `path`는 아이폰
-    /// 분기 전용이다 — 아이패드/맥(`OutlineTreeSplitContent`)은 원래부터
-    /// `NavigationLink`/`NavigationStack`을 전혀 안 쓰고 `@State selection`
-    /// 하나로 오른쪽 패널을 직접 바꿔치기하는 완전히 다른 구조라 이 변경과
-    /// 무관하다.
+    /// 아이폰 전용 내비게이션 경로. 장 칩 여러 개가 `List` 행 하나 안에 있으면 `NavigationLink`가
+    /// 탭된 칩을 구분하지 못해 잘못된 장으로 이동하므로, 칩을 `Button`으로 두고 이 배열에 직접 append한다.
+    /// 아이패드/맥은 `selection`으로 오른쪽 패널을 바꾸므로 사용하지 않는다.
     @State private var path: [OutlineTreeSelection] = []
 
-    /// [2026-08-27 신설, 사용자 결정 — "개요→더보기, 검색→탭바"] 아이폰
-    /// 탭바에서 개요를 빼고 "더보기" 메뉴 안 `.fullScreenCover`로 옮기면서
-    /// (`PlaceholderScreens.swift`/`PhoneTabView.swift` 참고) 생긴 매개변수다.
-    /// `.fullScreenCover`는(`.sheet`와 달리) 아래로 스와이프해 닫을 수 없어
-    /// 명시적 닫기 버튼이 필요한데, 기존 호출부(탭바에서 직접 쓰는 경우,
-    /// 매개변수 없음)는 탭 전환만으로 나가면 되므로 닫기 버튼이 필요 없다 —
-    /// 기본값 `nil`로 기존 동작을 그대로 유지하고, 이 값이 있을 때만 아이폰
-    /// 분기의 `NavigationStack` 툴바에 닫기 버튼을 추가한다.
+    /// `.fullScreenCover`로 띄울 때 전달하는 닫기 동작(스와이프로 닫을 수 없음).
+    /// 값이 있을 때만 아이폰 분기 툴바에 닫기 버튼을 추가한다.
     var onRequestDismiss: (() -> Void)? = nil
 
     var body: some View {
@@ -122,27 +70,8 @@ struct OutlineTreeView: View {
                         }
                     }
             }
-            // [2026-09-05 신설] 사용자 신고 — "개요 기능까지는 이동이 됨.
-            // 사용자가 마태복음 3장 개요을 탭하면 마태복음 3장의 개요가
-            // 나와야 하는데 개요까지만 나옴." 원인: `OutlineNavigationRequest.
-            // shared.requestedSelection`을 실제로 소비해 화면을 전환하는
-            // `.onChange` 핸들러가 지금까지 `OutlineTreeSplitContent`(맥OS/
-            // 아이패드 전용, 아래)에만 있었다 — 아이폰 분기(`isPhone`, 이 위)는
-            // `OutlineTreeList(..., selection: nil, path: $path)`만 그릴 뿐
-            // 이 요청을 전혀 관찰하지 않았다. 그래서 통합 검색의 "개요" 결과를
-            // 탭하면 `AppNavigationRequest.shared.request(.outline)`이
-            // `PhoneTabView`의 `.fullScreenCover`를 열어 이 화면 자체는 뜨지만
-            // (=사용자가 본 "개요 기능까지는 이동이 됨"), 정작 요청받은 책/장
-            // 선택은 아무도 반영하지 않아 트리 최상위 화면만 보였다. 아이패드/
-            // 맥(`OutlineTreeSplitContent`)의 같은 핸들러를 그대로 옮겨 쓰되,
-            // 그쪽은 `selection`(같은 화면 안에서 오른쪽 패널만 바꿔치기)을
-            // 쓰는 반면 이 화면은 `NavigationStack(path:)`으로 화면을 push하는
-            // 구조라(위 `path` 선언부 주석 — 장 칩 여러 개가 `List` 행 하나에
-            // 몰려 있던 문제 때문에 이 방식으로 바꿨다) `path`에 값을 담는다.
-            // 검색 결과를 연달아 다른 책/장으로 탭하는 경우를 고려해
-            // append 대신 교체(`= [newValue]`)한다 — 매번 새 목적지로 바로
-            // 이동해야지, 이전에 우연히 쌓인 push 위에 계속 얹으면 뒤로가기
-            // 스택이 뒤엉킨다.
+            // 통합 검색 등에서 요청된 책/장 선택을 아이폰 분기에서도 반영한다.
+            // 연속 요청 시 뒤로가기 스택이 엉키지 않도록 append 대신 `path`를 교체한다.
             .onChange(of: OutlineNavigationRequest.shared.requestedSelection) { _, newValue in
                 guard let newValue else { return }
                 path = [newValue]
@@ -170,20 +99,12 @@ struct OutlineTreeView: View {
 
 private struct OutlineTreeSplitContent: View {
     @State private var selection: OutlineTreeSelection?
-    /// [2026-09-10 추가] 사용자 요청 — "아이패드 개요화면을 다른 화면과
-    /// 동일하게 디자인-테마색에 따른 배경색으로 개선할 것." 아래 우측
-    /// "책이나 장을 선택하세요" 빈 상태 배경에 쓴다 — `OutlineTreeList`가
-    /// 이미 쓰는 것과 같은 읽기 전용 접근 패턴.
+    /// 오른쪽 빈 상태 패널의 테마 배경색용.
     @State private var settings = UserSettingsStore.shared
 
     var body: some View {
         HStack(spacing: 0) {
-            // [2026-08-15 4차 변경] 사용자 요청 — "성경 리스트 영역(왼쪽 사이드바와
-            // 오른쪽 리치텍스트 에디터 영역 사이 중간영역) 사이즈 크기를 375px
-            // 정도로 할 것." min/max를 375 근처로 좁혀 사용자가 스플릿 경계를
-            // 드래그해도 크게 벗어나지 않게 했다(완전 고정폭 대신 약간의 여유를
-            // 둔 이유 — "375px 정도로"라는 표현이 정확히 고정값을 요구한 것은
-            // 아니라고 판단).
+            // 목록 영역 폭을 375pt 근처로 좁혀, 스플릿 경계를 드래그해도 크게 벗어나지 않게 한다.
             OutlineTreeList(isPhoneLayout: false, selection: $selection)
                 .frame(minWidth: 360, idealWidth: 375, maxWidth: 390)
 
@@ -201,21 +122,13 @@ private struct OutlineTreeSplitContent: View {
                         Spacer()
                     }
                     .frame(maxWidth: .infinity, maxHeight: .infinity)
-                    // [2026-09-10 추가] 위 `settings` 선언부 주석 참고 —
-                    // 왼쪽 트리(`OutlineTreeList`)만 테마를 입고 이 빈 상태
-                    // 패널은 시스템 기본 배경 그대로 남아 있으면 화면 절반이
-                    // 어긋나 보인다.
+                    // 왼쪽 트리와 같은 테마 배경을 적용한다.
                     .background(settings.bibleBackgroundColor ?? Color.clear)
                 }
             }
         }
-        // [2026-08-15 추가] `ChapterRelatedContentPanel`의 "개요 화면 열기" 버튼
-        // — `OutlineNavigationRequest.swift` 상단 주석 참고. 요청받은 책/장을
-        // 그대로 선택해 오른쪽에 `OutlineBookBulkEditView`(기본 편집 가능)가
-        // 바로 뜨게 하고, 왼쪽 트리도 그 구약/신약과 책을 펼쳐 시각적으로
-        // 맞춰 둔다(펼침 상태는 `UserSettingsStore`에 영구 저장되는 값이라,
-        // `OutlineTreeList.isTestamentExpanded`/`isBookExpanded`가 자동으로
-        // 다시 읽어 반영한다).
+        // `ChapterRelatedContentPanel`의 "개요 화면 열기" 요청을 받아 해당 책/장을 선택하고,
+        // 왼쪽 트리에서도 그 구약/신약과 책을 펼쳐 둔다.
         .onChange(of: OutlineNavigationRequest.shared.requestedSelection) { _, newValue in
             guard let newValue else { return }
             selection = newValue
@@ -235,15 +148,7 @@ private struct OutlineTreeSplitContent: View {
             }
             OutlineNavigationRequest.shared.clear()
         }
-        // [2026-08-21 추가] 사용자 요청("아이패드 수정사항") — "개요 리스트에
-        // 항목 탭시 - 왼쪽 사이드바 자동 숨김기능." `WordNoteHomeView.
-        // WordNoteSplitContent`(같은 날 추가)와 완전히 같은 계약 —
-        // `SidebarVisibilityRequest`(Services/SidebarVisibilityRequest.swift)로
-        // 첫 선택 시 hide, 선택이 풀리거나 화면을 떠나면 restore. 이 화면의
-        // `OutlineTreeSelection`은 이미 `Hashable`(= Equatable)이라
-        // `WordNoteItem`과 달리 `.id` 우회 없이 값 자체로 비교한다. macOS는
-        // 이 항목에 "(맥OS, iOS 공통)" 표기가 없어(성경 조회 세로보기 등 다른
-        // 아이패드 전용 항목들과 같은 취급) iOS로만 제한한다.
+        // iOS: 첫 선택 시 왼쪽 사이드바를 숨기고, 선택이 풀리거나 화면을 떠나면 복원한다(`SidebarVisibilityRequest`).
         #if os(iOS)
         .onChange(of: selection) { oldValue, newValue in
             if newValue != nil && oldValue == nil {
@@ -277,22 +182,14 @@ private func destinationView(for selection: OutlineTreeSelection) -> some View {
 private struct OutlineTreeList: View {
     let isPhoneLayout: Bool
     var selection: Binding<OutlineTreeSelection?>?
-    /// [2026-08-27 신설] 위 `OutlineTreeView` 주석 참고 — 아이폰 전용,
-    /// `chapterChip`이 장 칩을 눌렀을 때 이 배열에 직접 append해 이동한다.
-    /// 아이패드/맥 쪽(`OutlineTreeSplitContent`가 만드는 인스턴스)은 이 값을
-    /// 넘기지 않아 nil로 남고, `chapterChip`의 `isPhoneLayout == false`
-    /// 분기는 애초에 이 값을 쓰지 않는다.
+    /// 아이폰 전용. 장 칩 탭 시 이 배열에 append해 이동한다(`OutlineTreeView.path` 참고). 아이패드/맥에서는 nil.
     var path: Binding<[OutlineTreeSelection]>? = nil
 
     @State private var settings = UserSettingsStore.shared
     @State private var searchQuery = ""
 
-    /// [2026-08-15 추가] 사용자 UX 피드백 — "빈 여백도 많고 ... 책 이름을 검색해
-    /// 바로 찾을 수 있게." 책/장 콘텐츠(RTF 원문)는 절대 읽지 않고, "이 책/장에
-    /// 뭔가 쓰여 있는가"만 알면 되므로 `contentText`(RTF에서 뽑아둔 평문 캐시,
-    /// `RichTextEditor.swift` 참고)의 공백 제거 후 빈 문자열 여부만 본다.
-    /// `@Query`는 SwiftData 변경을 자동 구독하므로 에디터에서 방금 글을 쓰고
-    /// 돌아와도 점 표시가 바로 갱신된다.
+    /// 책/장에 내용이 있는지만 알면 되므로 RTF 원문 대신 평문 캐시 `contentText`의 공백 제거 후 빈 여부만 본다.
+    /// `@Query`가 변경을 구독하므로 에디터에서 돌아오면 점 표시가 바로 갱신된다.
     @Query private var bookOutlines: [BookOutline]
     @Query private var chapterSummaries: [ChapterSummary]
 
@@ -359,17 +256,8 @@ private struct OutlineTreeList: View {
     }
 
     var body: some View {
-        // [2026-08-29 성능 수정] 사용자 보고 — "개요 등록 수가 많아 지면
-        // 많아질수록 느려짐." 원인: 바로 아래 `booksWithContent`/
-        // `chaptersWithContent`는 계산 프로퍼티인데, 지금까지 책 행마다
-        // (`rowView`의 `.book` 케이스)·장 칩마다(`chapterChip`) 각각 따로
-        // 접근해 왔다 — 즉 화면에 펼쳐진 책 수·장 칩 수만큼
-        // `bookOutlines`/`chapterSummaries` 전체를 매번 처음부터 다시
-        // 스캔한 것이다(예: 66권을 다 펼치면 장 칩 약 1,189개 × 매번
-        // 최대 1,189개 스캔 = 렌더 한 번에 백만 단위 연산). 계산 로직
-        // 자체(두 프로퍼티의 정의)는 전혀 바꾸지 않고, 이 화면을 그리는
-        // 동안 딱 한 번만 계산해 아래로 넘겨 재사용하도록 "계산 시점"만
-        // 바꾼다.
+        // 계산 프로퍼티를 행/칩마다 접근하면 `bookOutlines`/`chapterSummaries`를 그만큼 반복 스캔하므로,
+        // 렌더당 한 번만 계산해 아래로 넘긴다.
         let booksWithContent = self.booksWithContent
         let chaptersWithContent = self.chaptersWithContent
         VStack(spacing: 0) {
@@ -377,27 +265,12 @@ private struct OutlineTreeList: View {
             Divider()
             List(rows) { row in
                 rowView(row, booksWithContent: booksWithContent, chaptersWithContent: chaptersWithContent)
-                    // [2026-09-10 추가] 사용자 재보고 — "아이패드 개요 -
-                    // 리스트 행 배경색이 반영되지 않음." `WordNoteHomeView`/
-                    // `SearchView`가 이미 겪고 고친 것과 같은 원인 —
-                    // `.scrollContentBackground(.hidden)` + `List` 자체의
-                    // `.background()`(아래)는 리스트라는 "컨테이너"의 배경만
-                    // 바꾸지, 각 행 셀이 갖고 있는 자기(시스템 기본) 배경까지
-                    // 자동으로 투명하게 만들어주지는 않는다 —
-                    // `.listRowBackground(Color.clear)`로 명시적으로 지워야
-                    // 뒤의 `List` 배경(테마색)이 그대로 비친다.
+                    // `.scrollContentBackground(.hidden)`은 컨테이너 배경만 바꾸므로, 행 셀의 기본 배경은
+                    // `.listRowBackground(Color.clear)`로 지워야 List 배경(테마색)이 비친다.
                     .listRowBackground(Color.clear)
             }
             .listStyle(.plain)
-            // [2026-09-10 추가] 사용자 요청 — "아이패드 개요화면을 다른
-            // 화면과 동일하게 디자인-테마색에 따른 배경색으로 개선할 것."
-            // `WordNoteHomeView`/`DocumentsHomeView`/`SearchView`가 이미
-            // 쓰는 3종 세트(`.scrollContentBackground(.hidden)` +
-            // `.background()` + `.foregroundStyle()`) 그대로 — `.plain`
-            // 스타일이라 행마다 별도 카드 배경이 없어 리스트 자체 배경
-            // 하나만 바꾸면 된다. 이 뷰는 아이폰(`OutlineTreeView.isPhone`
-            // 분기)과 아이패드/맥(`OutlineTreeSplitContent`) 양쪽이 공유
-            // 하므로 두 플랫폼 모두 함께 테마를 입는다.
+            // 다른 화면과 같은 테마 배경/글자색을 적용한다. 아이폰과 아이패드/맥이 이 뷰를 공유하므로 양쪽에 반영된다.
             .scrollContentBackground(.hidden)
             .background(settings.bibleBackgroundColor ?? Color.clear)
             .foregroundStyle(settings.bibleTextColor ?? Color.primary)
@@ -405,23 +278,8 @@ private struct OutlineTreeList: View {
         }
         .background(settings.bibleBackgroundColor ?? Color.clear)
         .navigationTitle("개요")
-        // [2026-09-10 추가] 사용자 재보고 — "타이틀의 폰트, 크기, 색상이
-        // 다른 기능들의 타이틀과 다름." 이 화면은 시스템 기본
-        // `.navigationTitle("개요")`만 쓰고 있었다 — `WordNoteHomeView`/
-        // `DocumentsHomeView`/`SearchView`가 이미 쓰는 `.principal` 오버라이드
-        // (성곡 세리프체 20pt/`.title3` + 테마 글자색, 그 화면들의 같은 자리
-        // 주석 참고)가 이 화면엔 없었던 것이 원인이라, 같은 패턴을 그대로
-        // 맞춘다. `.navigationTitle`은 시스템 내부용으로 그대로 남긴다.
-        //
-        // [2026-09-11 추가] 사용자 보고 — "맨위 개요 타이틀 밑에 왼쪽
-        // 정렬된 '개요'라는 글자가 있음." 위 9/10 수정이 `.principal`
-        // 오버라이드만 옮겨 오고, `WordNoteHomeView`/`DocumentsHomeView`/
-        // `SearchView`가 그 옆에 항상 짝으로 두는
-        // `.navigationBarTitleDisplayMode(.inline)`은 빠뜨렸다 — 이게
-        // 없으면 시스템이 `.navigationTitle` 문자열로 큰 왼쪽 정렬 타이틀을
-        // 압축 표시줄 아래 별도 줄로 계속 그려, 위(작은 센터 성곡 세리프)와
-        // 아래(큰 왼쪽 정렬 시스템 기본) "개요"가 겹쳐 보였다. 다른 세
-        // 화면과 같은 해법.
+        // 다른 화면과 같이 `.principal` 툴바 타이틀(성곡 세리프체 + 테마 글자색)을 쓴다.
+        // `.inline`을 함께 지정하지 않으면 시스템의 큰 왼쪽 정렬 타이틀이 별도 줄로 겹쳐 보인다.
         #if os(iOS)
         .navigationBarTitleDisplayMode(.inline)
         #endif
@@ -435,44 +293,14 @@ private struct OutlineTreeList: View {
             }
             #endif
         }
-        // [2026-08-26 추가, 사용자 보고 fix] "아이폰 개요 — 장 버튼을 누르면
-        // 무조건 마지막 장으로 이동, 뒤로가기(<)를 누르면 이전 장으로 이동
-        // (원래는 이전 화면으로 가야 함)." 원인 — `chapterChip`/`bookLabel`이
-        // (아이폰 전용 분기) 지금까지 클로저 기반 `NavigationLink { Destination()
-        // } label: { ... }`을 칩/책마다 하나씩 만들어 왔는데, 한 책을 펼치면
-        // 그 책의 모든 장 칩이 `chapterChipGrid` 하나 — 즉 `List`의 행(row)
-        // *하나*(`.chapterGrid` 케이스) 안에 통째로 들어간다(2026-08-15 스크롤
-        // 최소화 재설계, 파일 상단 주석 참고). `List`/`NavigationStack`은 한
-        // 행 안에 클로저 기반 `NavigationLink`가 여러 개 있는 구성을 안정적으로
-        // 구분하도록 설계돼 있지 않아 — 실제로 어느 칩을 탭했는지와 무관하게
-        // 그 행에 등록된 링크 중 하나(주로 마지막 것)로만 이동하는 것으로
-        // 보인다. 탭할 때마다 그 잘못된 목적지가 스택에 새로 push되니, "<"를
-        // 누르면 (사용자가 기대하는 "이전 화면"이 아니라) 그 직전에 잘못
-        // push됐던 다른 장 화면이 나와 "이전 장으로 이동"처럼 보인다 —
-        // `BibleVerseDestination.swift`가 이미 겪고 고친 것과 근본적으로
-        // 같은 종류의 문제(그 파일 상단 주석 참고)라, 같은 해법(값 기반
-        // `NavigationLink(value:)` + 화면 전체에 딱 하나뿐인
-        // `.navigationDestination(for:)`)을 그대로 적용한다 — 이러면 목적지
-        // 해석이 탭 위치가 아니라 실제로 전달된 값 하나로만 결정되어, 여러
-        // 링크가 한 행에 있어도 더 이상 서로 뒤섞이지 않는다.
-        //
-        // `destinationView(for:)`는 `OutlineTreeSplitContent`(맥OS/아이패드)가
-        // 이미 쓰고 있던 것을 그대로 재사용한다(같은 파일의 최상위 함수).
-        // 맥OS/아이패드 쪽(`isPhoneLayout == false`)은 `NavigationLink(value:)`를
-        // 전혀 만들지 않으므로 이 등록은 그쪽에선 그냥 쓰이지 않을 뿐 해가 없다.
+        // `path`에 담긴 값과 `bookLabel`의 `NavigationLink(value:)`가 쓰는 목적지.
+        // 아이패드/맥은 링크를 만들지 않으므로 이 등록이 사용되지 않는다.
         .navigationDestination(for: OutlineTreeSelection.self) { selection in
             destinationView(for: selection)
         }
     }
 
-    /// [2026-09-12 수정] 사용자 보고(아이패드) — "개요 타이틀 하단 검색
-    /// 입력란의 스타일을 연구문서의 검색란과 동일하게 할 것."
-    /// `DocumentsHomeView.searchAndFilterBar`(돋보기/지우기 아이콘·
-    /// placeholder를 테마 글자색으로 물들이고, 옅은 채움 + 테두리 상자를
-    /// 두는 구성, 그 파일의 같은 날짜 주석 참고)와 같은 모양으로 바꿨다 —
-    /// 아이콘/텍스트 구조 자체는 이미 같았고(돋보기 + `.plain` TextField +
-    /// 지우기 버튼), 색이 전부 `.secondary` 고정이고 감싸는 상자가 없던
-    /// 점만 달랐다.
+    /// 책 이름 검색 입력란. 연구문서 검색란(`DocumentsHomeView.searchAndFilterBar`)과 같은 테마색 스타일.
     private var searchField: some View {
         HStack(spacing: 6) {
             Image(systemName: "magnifyingglass")
@@ -481,12 +309,8 @@ private struct OutlineTreeList: View {
             TextField(
                 "책 이름 검색",
                 text: $searchQuery,
-                // [2026-08-15 4차 변경] 사용자 요청 — "검색 창 placeholder 텍스트는
-                // 시스템 기본폰트, 일반 크기로." `RootView`가 `.appDefaultFont()`
-                // (커스텀 Paperlogy 폰트)를 최상단 환경에 걸어 자식 뷰가 전부
-                // 물려받으므로, 명시적으로 `.font(.body)`를 줘서 이 필드(placeholder
-                // 포함 — SwiftUI에서 placeholder는 입력 텍스트와 같은 폰트를 쓴다)만
-                // 시스템 기본 폰트로 되돌린다.
+                // `.appDefaultFont()`가 환경에서 상속되므로, placeholder를 포함한 이 필드만
+                // `.font(.body)`로 시스템 기본 폰트로 되돌린다.
                 prompt: Text("책 이름 검색")
                     .foregroundStyle(settings.bibleTextColor?.opacity(0.5) ?? Color.secondary)
             )
@@ -517,23 +341,13 @@ private struct OutlineTreeList: View {
                 Image(systemName: isTestamentExpanded(testament) ? "chevron.down" : "chevron.right")
                     .font(.caption)
                     .frame(width: 14)
-                // [2026-09-11 수정] 사용자 요청 — "'구약', '신약' 목록은
-                // 국민대학교 성곡 세리프체로 변경할 것." `BibleReadingView.
-                // swift`가 `.headline`(17pt semibold)을 성곡 세리프로 바꿀 때
-                // 쓴 것과 같은 공식 — `relativeTo: .headline`으로 Dynamic
-                // Type 배율은 유지하고, 성곡 세리프의 유일한 굵기(Regular)
-                // 위에 `.fontWeight(.semibold)`로 원래 `.headline`의 semibold
-                // 느낌을 합성 볼드로 흉내낸다.
+                // 성곡 세리프체는 Regular뿐이라 `.fontWeight(.semibold)`로 합성 볼드를 주고,
+                // Dynamic Type 배율 유지를 위해 `relativeTo: .headline`을 쓴다.
                 Text(testament == .old ? "구약" : "신약")
                     .font(.custom(SpecialPurposeFonts.titleSerif, size: 17, relativeTo: .headline))
                     .fontWeight(.semibold)
                 Spacer()
-                // [2026-09-11 추가] 사용자 재검토 요청 — "테마색상 팔레트
-                // 6개가 실제로는 2~3톤처럼 보인다." 서가 슬레이트
-                // (JBCHCategoryPalette.shelfSlate, 지금까지 코드 전체에서
-                // 실사용처가 0.15 불투명도 구분선 한 곳뿐이라 사실상 안
-                // 보였다)를 이 헤더에 명시 배정한다 — 책 권수를 보여줘
-                // 장식이 아니라 실제 정보도 함께 준다.
+                // 해당 성경의 책 권수 배지.
                 Text("\(testament == .old ? oldTestamentBooks.count : newTestamentBooks.count)\u{AD8C}")
                     .font(.caption2.weight(.semibold).monospacedDigit())
                     .foregroundStyle(.white)
@@ -546,9 +360,6 @@ private struct OutlineTreeList: View {
             }
             .contentShape(Rectangle())
             .onTapGesture { toggleTestament(testament) }
-            // [2026-08-15 4차 변경] 사용자 요청 — "리스트의 항목간 간격을 조금 더
-            // 여유롭게 둘것." 세 종류 행(구약/신약, 책, 장 칩 그리드) 모두 상하
-            // 여백을 늘려 전체적으로 더 널널하게 보이도록 했다.
             .padding(.vertical, 8)
 
         case .book(let book):
@@ -587,11 +398,7 @@ private struct OutlineTreeList: View {
         }
     }
 
-    /// [2026-08-15 신설] 장 하나당 행 하나이던 목록을 대체 — 작은 칩을 폭에 맞춰
-    /// 줄바꿈해 늘어놓는다. `Layout` 프로토콜로 직접 흐름 레이아웃을 만드는 대신
-    /// `LazyVGrid(.adaptive(...))`를 쓴 이유: 칩 크기가 고정(30pt)이라 adaptive
-    /// 컬럼이 흐름 레이아웃과 시각적으로 동일하게 줄바꿈되면서, 커스텀 `Layout`
-    /// 구현 없이 훨씬 적은 코드로 같은 결과를 낸다.
+    /// 장 칩을 폭에 맞춰 줄바꿈해 늘어놓는다. 칩 크기가 고정(30pt)이라 커스텀 `Layout` 없이 `LazyVGrid(.adaptive)`로 충분하다.
     private func chapterChipGrid(_ book: Book, chaptersWithContent: Set<Int>) -> some View {
         LazyVGrid(
             columns: [GridItem(.adaptive(minimum: 32, maximum: 32), spacing: 6)],
@@ -608,22 +415,8 @@ private struct OutlineTreeList: View {
     private func chapterChip(book: Book, chapter: Int, chaptersWithContent: Set<Int>) -> some View {
         let hasContent = chaptersWithContent.contains(book.bookId * 1000 + chapter)
         if isPhoneLayout {
-            // [2026-08-26 시도, 2026-08-27 재시도 끝에 최종 구조로 교체]
-            // 처음엔 클로저 기반 `NavigationLink`, 그다음 값 기반
-            // `NavigationLink(value:)`, 그다음 그걸 `.background`에 숨기는
-            // 시도까지 — 셋 다 "장 칩 여러 개가 `List` 행 하나에 몰려
-            // 있다"는 근본 구조를 그대로 둔 채였고, 그래서 셋 다 결국
-            // "탭한 칩과 무관하게 마지막 장으로 이동, 뒤로가기가 이전
-            // 화면이 아니라 이전 장으로 감" 버그를 재현했다(위
-            // `OutlineTreeView.path` 주석 참고). 이번엔 `NavigationLink`
-            // 자체를 버리고 평범한 `Button`으로 바꿨다 — 어느 칩이 눌렸는지는
-            // 이 클로저가 캡처한 `chapter`/`book.bookId` 값만으로 결정되므로
-            // `List`나 내비게이션 링크의 행-단위 식별에 전혀 기대지 않는다.
-            // 이동은 `OutlineTreeView`가 소유한 `path` 배열에 직접 append해
-            // `NavigationStack(path:)`가 그대로 push하게 한다. 부수 효과로
-            // `Button`은 `List`가 자동으로 붙이는 화살표(disclosure indicator)
-            // 대상이 아니므로, 지난번 겪었던 꺽쇠 겹침 문제도 이 구조에서는
-            // 애초에 생기지 않는다.
+            // `NavigationLink` 대신 `Button`을 쓴다. 어느 칩이 눌렸는지는 클로저가 캡처한 값으로 결정되며,
+            // 이동은 `OutlineTreeView.path`에 직접 append해 처리한다.
             Button {
                 path?.wrappedValue.append(.chapter(book.bookId, chapter))
             } label: {
@@ -658,14 +451,8 @@ private struct OutlineTreeList: View {
     @ViewBuilder
     private func bookLabel(_ book: Book) -> some View {
         if isPhoneLayout {
-            // [2026-08-26 수정] 위 `chapterChip`과 같은 이유 — 이 행도 같은
-            // `List` 행 하나(`.book` 케이스) 안에 다른 버튼(펼침 토글)과 함께
-            // 있어 잠재적으로 같은 문제의 소지가 있으므로 일관되게 값 기반으로
-            // 바꿔 둔다.
-            // [2026-09-11 수정] 사용자 요청 — "성경목록(창세기~요한계시록)은
-            // 국민대학교 성곡 세리프체로 변경할 것." `.body`(17pt Regular)는
-            // 원래도 Regular 한 굵기라, 위 구약/신약 헤더와 달리
-            // `.fontWeight` 보정 없이 크기만 맞춘다.
+            // 이 행도 같은 `List` 행 안에 펼침 토글 버튼과 함께 있어 값 기반 `NavigationLink(value:)`를 쓴다.
+            // 성곡 세리프체 17pt(`.body`)는 Regular라 굵기 보정이 필요 없다.
             NavigationLink(value: OutlineTreeSelection.book(book.bookId)) {
                 Text(book.nameKo)
                     .font(.custom(SpecialPurposeFonts.titleSerif, size: 17, relativeTo: .body))

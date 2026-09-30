@@ -2,36 +2,15 @@
 //  BibleReferenceAIQueryService.swift
 //  JBCHBibleResearch
 //
-//  [2026-08-19 전면 교체] 사용자 요청 — "애플 인텔리전스로 텍스트를 정제하고,
-//  방식 A — 임베딩 기반 의미검색을 한다면?" + "이 새 파이프라인이 기존 AI
-//  토글(장절 변환 방식)을 완전히 대체할까요?" → "완전 대체". 이 파일이 원래
-//  갖고 있던 `BibleReferenceAIQueryService`("자유 문장 → 성경 장절 텍스트로
-//  직접 변환")는 통째로 지우고, 역할이 완전히 다른 `BibleQueryRefinementService`
-//  ("자유 문장을 다듬기만 함, 정답 장절을 맞히려 하지 않음")로 바꿔 썼다 — 파일
-//  경로는 그대로 유지해(Xcode에서 또 수동 삭제를 요청하지 않으려고) 내용만
-//  갈아염었다.
+//  자유 문장을 검색에 유리한 평서문으로 다듬는 `BibleQueryRefinementService`를 제공한다.
+//  정답 장절을 맞히는 일은 하지 않는다 — 온디바이스 모델(FoundationModels)은 성경 지식이
+//  얕아 장절 직접 변환이 불안정했기 때문이다. 장절 검색은 `EmbeddingService`+
+//  `EmbeddingIndexingService`의 코사인 유사도 검색이 맡고(실제 본문 임베딩과 비교하므로
+//  없는 절을 지어낼 수 없음), 이 서비스는 그 앞단에서 질문형 껍데기만 걷어낸다.
 //
-//  ⚠️ [왜 "장절을 직접 답하기"를 그만뒀는지] 사용자 보고 — "AI 검색을 잘 못함.
-//  결과가 거의 나오지 않음." 원인은 온디바이스 모델(FoundationModels)이 성경
-//  지식을 얕게만 알고 있어서였다. 이번 새 구조는 "정답이 무슨 절인지 맞히는"
-//  역할을 이 모델에게 아예 맡기지 않는다 — 그 역할은 이제
-//  `EmbeddingService`+`EmbeddingIndexingService`(코사인 유사도 검색, 실제
-//  성경 본문 임베딩과 비교하므로 존재하지 않는 절을 지어낼 수 없음)가 맡는다.
-//  이 파일은 그 앞단에서 "질문형 문장을 검색에 유리한 평서문으로 다듬는" 훨씬
-//  가벼운 언어 작업만 한다 — 성경 지식이 필요 없는 순수 문장 정제라 온디바이스
-//  모델이 상대적으로 잘 해내는 영역이다(`BibleSemanticSearchService.swift`가
-//  이 서비스 다음 단계로 임베딩 검색을 이어붙인다).
-//
-//  ⚠️ [정제는 필수가 아니라 "있으면 더 좋은" 단계] `BibleSemanticSearchService`가
-//  이 서비스를 호출하지만, 이 서비스가 실패하거나(Apple Intelligence 미지원
-//  기기 등) 이용 불가능해도 원문 그대로 임베딩 검색을 계속 진행한다 — 정제
-//  실패가 전체 AI 검색 기능을 막지 않는다(`refine(query:)`가 항상 String을
-//  돌려주고 Result/throws가 아닌 이유).
-//
-//  `ChapterOutlineDraftService.swift`와 같은 FoundationModels 사용 패턴
-//  (`#if canImport(FoundationModels)` + `@available` 이중 가드, plain-text
-//  `session.respond(to:)`)을 그대로 따른다 — 이 세션엔 Xcode가 없어 실제
-//  컴파일 확인은 못 했다는 같은 caveat이 적용된다.
+//  정제는 필수 단계가 아니다. 실패하거나 Apple Intelligence를 쓸 수 없어도 원문 그대로
+//  임베딩 검색을 이어가므로 `refine(query:)`는 항상 String을 돌려준다(Result/throws 아님).
+//  FoundationModels 사용 패턴은 `ChapterOutlineDraftService.swift`와 같다.
 //
 
 import Foundation
@@ -41,24 +20,10 @@ import FoundationModels
 
 @MainActor
 enum BibleQueryRefinementService {
-    /// [2026-08-19 추가] 실사용 사례로 확인된 문제 — 사용자가 "지혜가 부족하면
-    /// 하나님께 구하라는 말씀"처럼 검색하면, 정작 정답인 약 1:5 대신 "말씀"이라는
-    /// 단어만 공유하는 무관한 절들(에베소서 6:17 "말씀을 가지라", 시편 119:81
-    /// "말씀을 바라나이다" 등)이 90%대 유사도로 상위를 뒤덮었다. 원인은 "~라는
-    /// 말씀"/"~하는 구절" 같은 꼬리표가 "나는 성경 구절을 찾고 있다"는 메타
-    /// 표현일 뿐 실제 검색 대상이 아닌데, 이 짧은 문장 안에서 임베딩이 이
-    /// 흔한 단어 하나에 지배당해버린 것 — 아래 few-shot 예시(질문형 어미가
-    /// 있는 문장만 다룸)는 이 사례처럼 물음표 없이 "~하라는 말씀" 형태로 끝나는
-    /// 문장에는 안정적으로 일반화되지 않았다. 그래서 Apple Intelligence
-    /// 가용 여부/토글 상태와 무관하게 항상 적용되는 결정적(비-AI) 정규화 단계를
-    /// 앞에 추가한다 — `BibleSemanticSearchService.search`가 정제 on/off와
-    /// 무관하게 이 함수를 먼저 거친다.
-    // [2026-08-20 신설] "에 대하여"/"에 관하여" 추가 — `QueryIntentClassifier
-    // .topicSuffixPhrases`와 동일하게 유지하는 값이라, 그쪽에 추가한 이유
-    // (Themes 시드 제목이 "OOO에 대하여" 형식이라 기존 목록으론 인식 못 함)
-    // 그대로 여기도 갱신한다. 이 배열의 원래 목적(문장 끝 메타 꼬리표를
-    // 잘라내고 임베딩)과도 자연스럽게 맞는다 — "성경에 대하여"도 "~라는
-    // 말씀"과 같은 부류의 메타 표현이라 잘라내는 게 맞다.
+    /// 문장 끝의 메타 꼬리표 목록. "~라는 말씀"처럼 "구절을 찾는다"는 메타 표현은 검색 대상이
+    /// 아닌데, 짧은 문장에서 임베딩이 "말씀" 같은 흔한 단어에 지배되어 무관한 절이 상위를
+    /// 덮는 문제가 있었다. 그래서 AI 정제 on/off와 무관하게 항상 적용한다.
+    /// `QueryIntentClassifier.topicSuffixPhrases`와 같은 값을 유지한다("에 대하여"/"에 관하여" 포함).
     private static let trailingMetaPhrases: [String] = [
         "이라는 말씀", "라는 말씀", "하는 말씀", "에 대한 말씀", "에 관한 말씀",
         "이라는 구절", "라는 구절", "하는 구절", "에 대한 구절", "에 관한 구절",
@@ -82,9 +47,8 @@ enum BibleQueryRefinementService {
         return result
     }
 
-    /// Apple Intelligence로 정제를 "시도"할 수 있는지. false여도
-    /// `refine(query:)`는 여전히 안전하게 원문을 그대로 돌려준다 — 이 값은
-    /// UI에 "AI로 다듬는 중" 같은 부가 안내를 보여줄지 결정하는 용도로만 쓴다.
+    /// Apple Intelligence로 정제를 시도할 수 있는지. false여도 `refine(query:)`는 원문을
+    /// 돌려주므로, UI에 "AI로 다듬는 중" 같은 안내를 보일지 정하는 용도로만 쓴다.
     static var isAvailable: Bool {
         #if canImport(FoundationModels)
         if #available(iOS 26.0, macOS 26.0, *) {
@@ -110,11 +74,8 @@ enum BibleQueryRefinementService {
         guard #available(iOS 26.0, macOS 26.0, *) else { return query }
         guard case .available = SystemLanguageModel.default.availability else { return query }
 
-        // [2026-08-19] 이 프롬프트는 "어느 절인지"를 절대 묻지 않는다 — 오직
-        // 문장 다듬기만 요청한다. 질문형 껍데기("~어디있지?", "~말씀이 뭐야?")를
-        // 걷어내면, 뒤이은 임베딩 유사도 비교가 핵심 의미에 더 집중할 수 있다는
-        // 판단(질문 껍데기 자체는 성경 본문 어디에도 없는 표현이라, 남겨두면
-        // 벡터가 그만큼 희석된다).
+        // 프롬프트는 "어느 절인지"를 묻지 않고 문장 다듬기만 요청한다. 질문 껍데기는
+        // 성경 본문에 없는 표현이라 남겨두면 임베딩 벡터가 희석된다.
         let prompt = """
         다음 문장을 성경 구절을 찾기 위한 검색어로 쓸 수 있도록 다듬으세요.
         질문형 어미("~어디있지?", "~말씀이 뭐야?" 등)를 없애고 핵심 내용만
@@ -142,9 +103,8 @@ enum BibleQueryRefinementService {
             let refined = response.content.trimmingCharacters(in: .whitespacesAndNewlines)
             return refined.isEmpty ? query : refined
         } catch {
-            // 정제는 부가 단계일 뿐이라 실패해도 원문으로 계속 진행한다 — 콘솔에만
-            // 원인을 남긴다(사용자에게 영어 타입명이 섞인 에러 문구를 보여주지
-            // 않는다, BibleSemanticSearchService.swift와 같은 원칙).
+            // 정제는 부가 단계라 실패해도 원문으로 진행한다. 콘솔에만 원인을 남기고
+            // 사용자에게 에러 문구는 보여주지 않는다.
             print("[BibleQueryRefinementService] 정제 실패(원문으로 계속 진행): \(error)")
             return query
         }

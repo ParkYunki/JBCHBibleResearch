@@ -2,27 +2,20 @@
 //  AppSection.swift
 //  JBCHBibleResearch
 //
-//  screens.md 9.1 — 메인 창 사이드바(macOS/iPadOS) 항목 정의. "태그 관계"만 본문
-//  영역을 바꾸지 않고 별도 창을 여는 예외라 opensSeparateWindow로 구분해 뒀다.
+//  메인 창 사이드바(macOS/iPadOS) 항목 정의. "태그 관계"만 본문 영역을 바꾸지 않고
+//  별도 창을 여는 예외라 opensSeparateWindow로 구분한다.
 //
 
 import Foundation
 
 enum AppSection: String, CaseIterable, Identifiable, Hashable {
     case bibleReading
-    // [2026-08-13 변경] 사용자 요청 — "왼쪽 사이드바 [개인 묵상], [말씀 요약]
-    // 통합할 것 : 메뉴명 - [말씀 노트]." 기존 `.memos`(개인 묵상)/`.wordSummary`
-    // (말씀 요약) 두 섹션을 이 케이스 하나로 합쳤다 — 실제 데이터(UserMemo/
-    // VerseSummary)는 여전히 별개 모델이고, `WordNoteHomeView`가 카테고리
-    // picker로 구분해 한 목록에 섞어 보여준다(그 파일 상단 주석 참고).
+    // 개인 묵상(UserMemo)과 말씀 요약(VerseSummary)은 데이터 모델이 별개지만
+    // 메뉴는 이 케이스 하나로 통합했다. `WordNoteHomeView`가 카테고리 picker로 구분한다.
     case wordNote
     case documents
-    // [2026-09-28 추가] "내 설교"(설교 관리) 기능 — 설계 문서
-    // (claude/sermon-management-screens-and-schema.md, 프로젝트) 참고.
-    // iPad/macOS 진입점은 사이드바의 이 항목, iPhone은 "더보기" 안
-    // 전체화면 모달(`PlaceholderScreens.swift` 참고 — `.searchable`을
-    // 쓰는 화면이라 `.tagRelations`/`.outline`과 같은 이유로 탭바가 아닌
-    // 전체화면 모달로 연다).
+    // "내 설교". iPhone에서는 `.searchable`을 쓰는 화면이라 `.tagRelations`/`.outline`처럼
+    // 탭바가 아닌 "더보기" 안 전체화면 모달로 연다(`PlaceholderScreens.swift` 참고).
     case sermons
     case outline
     case tagRelations
@@ -33,9 +26,6 @@ enum AppSection: String, CaseIterable, Identifiable, Hashable {
     var title: String {
         switch self {
         case .bibleReading: return "성경 조회"
-        // [2026-08-13 변경] "개인 묵상"+"말씀 요약" 통합 메뉴명 — 사용자 요청
-        // 문구를 그대로 썼다. 이전 이력(개인 주석→개인 묵상 개명 등)은
-        // `WordNoteHomeView.swift` 상단 주석에 옮겨 적었다.
         case .wordNote: return "말씀 노트"
         case .documents: return "연구 문서"
         case .sermons: return "내 설교"
@@ -57,39 +47,23 @@ enum AppSection: String, CaseIterable, Identifiable, Hashable {
         }
     }
 
-    /// screens.md 9.1 — 태그 관계 항목을 누르면 본문 영역을 바꾸는 대신 별도
-    /// WindowGroup("tag-relations")을 연다(macOS/iPadOS 멀티윈도우 특성 활용).
+    /// 태그 관계 항목은 본문 영역을 바꾸는 대신 별도 WindowGroup("tag-relations")을 연다.
     var opensSeparateWindow: Bool {
         self == .tagRelations
     }
 
-    /// [2026-08-08 추가] PhoneTabView.swift(iPhone 탭바)가 직접 탭으로 노출하는
-    /// 섹션만 모은 목록 — `.tagRelations`는 탭바에 자리가 없다("더보기" 안
-    /// 전체화면 모달). `@FocusedValue(\.selectSection)`으로 들어온 값이 탭바에
-    /// 없는 섹션이면 무시해야 하므로 그 판별에 쓴다.
-    // [2026-08-13 변경] "개인 묵상"+"말씀 요약" 탭 통합 — `.wordNote` 하나로 대체.
-    // [2026-08-27 변경, 사용자 결정 — "개요→더보기, 검색→탭바"] `SearchView.swift`
-    // 상단 주석 참고 — 통합 검색이 "더보기" 서브메뉴에 중첩돼 있으면 검색이
-    // "활성" 상태인 채로 그 자리에서 성경구절로 push하는 조합이 구조적으로
-    // 깨진다는 걸 여러 차례 실기기 로그로 확인해, 검색을 이 탭바의 정식 탭으로
-    // 승격하고 개요는 대신 "더보기" 안 전체화면 모달로 옮겼다(`PlaceholderScreens.swift`
-    // 참고) — `.outline`은 이제 탭바 항목이 아니므로 이 목록에서 뺀다.
+    /// iPhone 탭바(`PhoneTabView`)가 직접 탭으로 노출하는 섹션. `@FocusedValue(\.selectSection)`으로
+    /// 들어온 값이 탭바에 없는 섹션이면 무시해야 하므로 그 판별에 쓴다.
+    /// `.outline`/`.tagRelations`는 탭바가 아니라 "더보기" 안 전체화면 모달로 연다.
     static var phoneTabBarSections: Set<AppSection> {
         [.wordNote, .bibleReading, .documents, .search]
     }
 
-    /// [2026-08-18 추가, 같은 날 검색창 이관으로 갱신] 사이드바(`SidebarNavigationView`)
-    /// 목록에서 빼는 항목들.
-    /// - `.tagRelations`: 사용자 요청 — "'태그 관계' 메뉴 삭제 - 기능 삭제는
-    ///   추후 보류." case 자체와 `opensSeparateWindow`/WindowGroup("tag-relations")은
-    ///   그대로 남겨 둔다(AppCommands.swift "태그 관계 보기" 메뉴 커맨드가 여전히
-    ///   그 창을 직접 연다 — 기능은 살아 있고, 사이드바 진입점 하나만 없앤 것).
-    /// - `.search`: 사용자 요청 — "왼쪽 사이드바 맨 위 상단 검색기능: 버튼이
-    ///   아니라 검색 텍스트박스+버튼으로 배치." 지금까지 이 목록의 한 행(=버튼)
-    ///   이었던 "통합 검색" 진입점을, 목록 위에 고정된 검색 텍스트박스+버튼으로
-    ///   대체한다(`SidebarNavigationView.sidebarSearchBar` 참고) — 그 컨트롤이
-    ///   `selection`을 직접 `.search`로 바꾸므로, 목록에 같은 목적의 행이 두 번
-    ///   있을 필요가 없다. `.search` case/`SearchView` 자체는 그대로 남는다.
+    /// 사이드바(`SidebarNavigationView`) 목록에서 빼는 항목.
+    /// - `.tagRelations`: 사이드바 진입점만 없앴다. case와 WindowGroup("tag-relations")은
+    ///   유지되며 AppCommands의 "태그 관계 보기" 메뉴 커맨드가 여전히 그 창을 연다.
+    /// - `.search`: 목록 위 고정 검색창(`SidebarNavigationView.sidebarSearchBar`)이
+    ///   `selection`을 직접 `.search`로 바꾸므로 목록에 같은 목적의 행을 두지 않는다.
     static var sidebarMenuCases: [AppSection] {
         allCases.filter { $0 != .tagRelations && $0 != .search }
     }

@@ -2,16 +2,12 @@
 //  OriginalTextLookupService.swift
 //  JBCHBibleResearch
 //
-//  [2026-08-09 신설] "원문 정보" 기능 — 앱 번들의 Resources/OriginalText.sqlite를
-//  찾아 여는 부분만 앱 레이어 책임으로 둔다(TranslationBootstrap.resolvedBundledDatabaseURL
-//  과 같은 이유 — 패키지는 파일시스템 위치를 몰라도 되게). 실제 조회는
-//  BibleResearchModels.OriginalTextStore가 담당.
+//  앱 번들의 Resources/OriginalText.sqlite를 찾아 여는 앱 레이어 서비스. 패키지가 파일시스템 위치를 몰라도 되도록
+//  이 부분만 앱 레이어가 맡는다(`TranslationBootstrap.resolvedBundledDatabaseURL`과 같은 이유).
+//  실제 조회는 `BibleResearchModels.OriginalTextStore`가 담당한다.
 //
-//  ⚠️ [출처/라이선스] OriginalText.sqlite는 STEPBible-Data(github.com/STEPBible/STEPBible-Data,
-//  CC BY 4.0)의 TAHOT(히브리어 구약)·TAGNT(그리스어 신약) 텍스트를 변환한 것이다.
-//  [2026-08-13 해소] 앱 내 크레딧 고지 — 환경설정 "정보" 탭(SettingsView.swift,
-//  AboutSettingsTab)의 "오픈소스 라이선스 고지" 섹션에 STEPBible-Data(TAHOT/TAGNT,
-//  CC BY 4.0) 문구와 저장소 링크를 추가해 반영했다.
+//  ⚠️ 출처/라이선스: OriginalText.sqlite는 STEPBible-Data(CC BY 4.0)의 TAHOT(히브리어 구약)·TAGNT(그리스어 신약)를
+//  변환한 것이다. 크레딧은 설정 "정보" 탭의 "오픈소스 라이선스 고지" 섹션에 표기돼 있다.
 //
 
 import Foundation
@@ -57,10 +53,8 @@ final class OriginalTextLookupService {
         }
     }
 
-    /// 절 하나의 원어 단어 목록. 번들 DB를 못 열었거나 그 절이 파싱 대상에서
-    /// 빠졌으면(원본 변환 스크립트가 모든 절을 커버하지 못함, README 참고) 빈
-    /// 배열을 돌려준다 — 호출부(OriginalTextInfoView)가 "원문 정보 없음" 상태로
-    /// 처리한다.
+    /// 절 하나의 원어 단어 목록. 번들 DB를 못 열었거나 그 절이 파싱 대상에서 빠졌으면(원본 변환 스크립트가
+    /// 모든 절을 커버하지 못함) 빈 배열을 돌려준다 — 호출부(OriginalTextInfoView)가 "원문 정보 없음"으로 처리한다.
     func words(bookId: Int, chapter: Int, verse: Int) -> [OriginalWordInfo] {
         guard let store = resolvedStore() else { return [] }
         do {
@@ -72,10 +66,8 @@ final class OriginalTextLookupService {
     }
 
 
-    /// [2026-09-16 신설] 사용자 요청 — 위 `OriginalTextModels.swift`
-    /// `LiteralTranslationInfo` 주석 참고. 위 `words(bookId:chapter:verse:)`와
-    /// 같은 커넥션(`resolvedStore()`)을 재사용한다. 아직 데이터가 없는 절이면
-    /// nil — 호출부(OriginalTextInfoView)가 카드를 그냥 숨긴다.
+    /// 절 하나의 직역 정보(`LiteralTranslationInfo`, `OriginalTextModels.swift`). `words(bookId:chapter:verse:)`와
+    /// 같은 커넥션을 재사용한다. 아직 데이터가 없는 절이면 nil — 호출부(OriginalTextInfoView)가 카드를 숨긴다.
     func literalTranslation(bookId: Int, chapter: Int, verse: Int) -> LiteralTranslationInfo? {
         guard let store = resolvedStore() else { return nil }
         do {

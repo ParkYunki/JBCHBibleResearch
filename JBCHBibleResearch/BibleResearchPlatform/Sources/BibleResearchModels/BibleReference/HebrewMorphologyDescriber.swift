@@ -1,19 +1,12 @@
 import Foundation
 
-// [2026-08-13 신설] "원문 정보" 카드에 형태소(문법) 설명을 한글로 보여주기 위한 디코더.
+// 원문 정보 카드에 형태소(문법) 설명을 한글로 보여주기 위한 히브리어/아람어 디코더.
 //
-// 코드 체계 출처(정의표만 참고 — 코드 자체는 저작물이 아니라 언어학적 분류 체계):
-//   https://hb.openscriptures.org/parsing/HebrewMorphologyCodes.html
-//   (Open Scriptures Hebrew Bible Project, CC BY 4.0)
-// STEPBible-Data(TAHOT, 이 프로젝트가 실제로 사용 중인 원문 DB의 출처)도 동일한
-// OSHB 형태소 코드 체계를 그대로 쓴다.
+// 코드 체계 출처: https://hb.openscriptures.org/parsing/HebrewMorphologyCodes.html
+// (Open Scriptures Hebrew Bible Project, CC BY 4.0). 원문 DB(STEPBible-Data TAHOT)도
+// 같은 OSHB 형태소 코드 체계를 쓴다. 한국어 설명 문장은 새로 작성한 것이다.
 //
-// 이 파일이 만들어 내는 한국어 문장 자체는 우리가 새로 작성한 것이며, 특정 상용
-// 원어성경 DB의 문장을 옮긴 것이 아니다. (scratchpad의 morph_parser.py를 그대로
-// Swift로 이식 — 창세기 1장/출애굽기 2장/나훔 1~2장 데이터로 결과를 검증했다.)
-//
-// 그리스어(Robinson 태그, 예: "N-NSF")는 신뢰할 만한 단일 출처를 확보하지 못해
-// 이번에는 디코딩하지 않는다 — `OriginalWordInfo.isHebrew`가 false인 경우
+// 그리스어(Robinson 태그)는 디코딩하지 않는다 — `OriginalWordInfo.isHebrew`가 false이면
 // `morphDescriptionKo`는 빈 문자열을 돌려준다.
 public enum HebrewMorphologyDescriber {
 

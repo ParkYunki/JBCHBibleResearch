@@ -3,67 +3,47 @@ import Foundation
 import SQLite3
 #endif
 
-// SQLite3의 C 매크로 `SQLITE_TRANSIENT`는 매크로라서 ClangImporter가 Swift로
-// 들여오지 못한다 — `BibleReferenceStore.swift`와 동일한 이유로 이 파일에서도
-// 별도로 정의한다(모듈 파일별로 반복 정의하는 게 이 코드베이스의 기존 패턴).
+// `SQLITE_TRANSIENT`는 C 매크로라 Swift로 임포트되지 않으므로 파일마다 별도로
+// 정의한다(`BibleReferenceStore.swift`와 동일).
 private let SQLITE_TRANSIENT = unsafeBitCast(-1, to: sqlite3_destructor_type.self)
 
-// 근거: 사용자 요청(2026-09-05) — "검색이 느리다" 문제 진단 중, 사용자 추가
-// 번역본이 `BibleReferenceStore.searchVerses`(LIKE '%…%', 인덱스 불가한 풀
-// 테이블 스캔)만 쓰고 있어 번들 번역본(FTS5)보다 훨씬 느리다는 게 확인됨.
-// "사용자 추가 번역본에 대해서도 FTS5를 할 수 있도록 수정할 것" 요청에 따른
-// 신설 타입.
+// 사용자 추가 번역본용 FTS5 보조 인덱스. LIKE '%…%' 풀 테이블 스캔
+// (`BibleReferenceStore.searchVerses`)을 대체해 번들 번역본과 같은 속도를 낸다.
 //
-// [설계 근거] 왜 번역본 원본 파일에 직접 `CREATE VIRTUAL TABLE`을 안 하는가 —
-// `BibleReferenceStore`가 사용자 추가 번역본 파일을 항상 `SQLITE_OPEN_READONLY`로
-// 여는 이유(그 파일 상단 주석)는 "동기화된 원본 바이트를 그대로 보관하는 정적
-// 참조 데이터"이기 때문이다. 그 파일에 손을 대면(쓰기 모드 재오픈, 스키마 변경)
-// 원본을 훼손할 위험이 있고, 이 파일은 애초에 CloudKit에서 내려온 `sqliteData`를
-// 로컬에 그대로 써낸 캐시본(`TranslationFileMaterializer`)이라 다음 동기화/재
-// materialize 때 그대로 덮어써질 수도 있다. 대신 번들 번역본이 이미 쓰고 있는
-// 것과 동일한 패턴(`ReferenceDataStore.searchVersesFullText` — 원본 BibleDB.sqlite와
-// 별개의 파일에 FTS5 인덱스를 둔다, `ReferenceDataSource/build_reference_data.py`의
-// `build_verse_search_index` 참고)을 따라, 번역본마다 별도의 보조 SQLite 파일에
-// FTS5 인덱스를 만든다. 스키마도 그 빌드 스크립트가 만드는 `VerseSearchIndex`
-// (book_id/chapter/verse UNINDEXED + content, tokenize='unicode61')와 완전히
-// 동일하게 맞춰, 검색 결과 형태(`FullTextVerseMatch`)와 질의 방식(따옴표로 감싼
-// prefix 매치)을 번들 경로와 통일한다 — `ReferenceDataStore.searchVersesFullText`
-// 상단의 실측 근거(trigram보다 unicode61+prefix가 한국어 조사 변화에 더 안정적)가
-// 사용자 추가 번역본에도 동일하게 적용되기 때문이다.
+// 번역본 원본 파일에는 직접 `CREATE VIRTUAL TABLE`을 하지 않는다 — 그 파일은
+// CloudKit에서 내려온 `sqliteData`를 그대로 써낸 읽기 전용 캐시본
+// (`TranslationFileMaterializer`)이라, 수정하면 원본을 훼손하고 다음 동기화/재
+// materialize 때 덮어써질 수 있다. 대신 번들 번역본과 같은 패턴
+// (`ReferenceDataStore.searchVersesFullText`)으로 번역본마다 별도의 보조 SQLite
+// 파일에 FTS5 인덱스를 둔다. 스키마는 빌드 스크립트의 `VerseSearchIndex`
+// (book_id/chapter/verse UNINDEXED + content, tokenize='unicode61')와 동일하게 맞춰,
+// 검색 결과 형태(`FullTextVerseMatch`)와 질의 방식(따옴표로 감싼 prefix 매치)을
+// 번들 경로와 통일한다(unicode61+prefix가 trigram보다 한국어 조사 변화에 안정적).
 //
-// 인덱스는 번역본당 한 번만 만들어지고 로컬 파일로 남는다(호출부가 매 검색마다
-// 다시 만들지 않도록 `ensureBuilt`가 파일 존재 여부를 먼저 확인) — 번역본을 처음
-// 추가한 뒤 첫 검색 1회에서만 빌드 비용이 발생하고, 그 다음부터는 이미 만들어진
-// 인덱스를 그대로 연다.
+// 인덱스는 번역본당 한 번만 만들어져 로컬 파일로 남는다(`ensureBuilt`가 파일
+// 존재 여부를 먼저 확인).
 //
-// 스레딩: `BibleReferenceStore`와 동일하게 이 타입도 내부적으로 동시성을
-// 보장하지 않는다 — 호출부(`SearchViewModel`, 메인 액터에서 직렬 호출)가 여러
-// 스레드에서 동시에 같은 registryID를 빌드/조회하지 않는다는 전제다.
+// 스레딩: 내부적으로 동시성을 보장하지 않는다 — 호출부(`SearchViewModel`, 메인
+// 액터에서 직렬 호출)가 같은 registryID를 여러 스레드에서 동시에 빌드/조회하지
+// 않는다는 전제다.
 public enum TranslationSearchIndex {
-    /// `indexDirectory` 아래에 `<registryID>-fts.sqlite`로 보조 인덱스 파일을 둔다.
-    /// 호출부가 이미 번역본 원본 파일을 연 디렉터리(`BibleReferenceStore.filePath`의
-    /// 상위 디렉터리 — 사용자 추가 번역본이면 `TranslationFileMaterializer`가 관리하는
-    /// 로컬 캐시 디렉터리)를 그대로 넘겨주므로, 이 타입 자체는 앱 레이어의 디렉터리
-    /// 정책(`TranslationFileMaterializer.translationsDirectory()`)을 몰라도 된다 —
-    /// 이 패키지(BibleResearchModels)는 앱 타겟에 의존할 수 없기 때문에 필요한 설계다.
+    /// `indexDirectory` 아래의 `<registryID>-fts.sqlite` 보조 인덱스 파일 경로.
+    /// 호출부가 번역본 원본 파일이 있는 디렉터리를 넘기므로, 이 패키지
+    /// (BibleResearchModels)가 앱 타겟의 디렉터리 정책을 몰라도 된다.
     private static func indexFileURL(indexDirectory: URL, registryID: UUID) -> URL {
         indexDirectory.appendingPathComponent("\(registryID.uuidString)-fts.sqlite")
     }
 
-    /// [2026-09-05 추가] 사용자 요청 — "인덱스는 번역본 업로드 시점에만 만들고,
-    /// 검색 시점엔 만들지 않는다(기존 번역본은 신경 쓰지 않는다)." 검색 경로
-    /// (`SearchViewModel.searchVerses`)는 이제 이 함수로 "이미 만들어져 있는지"만
-    /// 확인하고, 없으면 만들지 않고 그냥 LIKE로 폴백한다 — 빌드는 오직
-    /// `TranslationFileMaterializer.writeLocalCopy`(번역본이 이 기기에 처음
-    /// 로컬로 써지는 시점)에서만 일어난다.
+    /// 보조 인덱스가 이미 만들어져 있는지 확인한다. 검색 경로는 인덱스가 없으면
+    /// 만들지 않고 LIKE로 폴백한다 — 빌드는 `TranslationFileMaterializer.writeLocalCopy`
+    /// (번역본이 이 기기에 처음 써지는 시점)에서만 일어난다.
     public static func indexExists(registryID: UUID, indexDirectory: URL) -> Bool {
         FileManager.default.fileExists(atPath: indexFileURL(indexDirectory: indexDirectory, registryID: registryID).path)
     }
 
-    /// 보조 인덱스가 이미 있으면(파일 존재) 아무 것도 하지 않고 즉시 반환한다.
-    /// 없으면 `sourceStore`(이미 열려 있는 해당 번역본의 `BibleReferenceStore`)의
-    /// 절 전체를 읽어 새로 만든다 — 실패 시(디스크 문제, 빌드 도중 오류 등) 이미
-    /// 만들다 만 파일이 남아 다음 시도를 오염시키지 않도록 삭제 후 에러를 던진다.
+    /// 보조 인덱스 파일이 있으면 즉시 반환하고, 없으면 `sourceStore`의 절 전체를
+    /// 읽어 새로 만든다. 실패 시 만들다 만 파일이 다음 시도를 오염시키지 않도록
+    /// 삭제 후 에러를 던진다.
     @discardableResult
     public static func ensureBuilt(
         sourceStore: BibleReferenceStore, registryID: UUID, indexDirectory: URL, versionCode: String? = nil
@@ -132,11 +112,10 @@ public enum TranslationSearchIndex {
         return url
     }
 
-    /// 이미 만들어진 보조 인덱스에서 FTS5 MATCH 검색. `ReferenceDataStore.
-    /// searchVersesFullText`와 완전히 동일한 질의 형태(따옴표로 감싼 리터럴 +
-    /// prefix `*`, 정경순 tie-break)를 쓴다 — 두 경로의 결과가 이후 같은
-    /// `KeywordMatchScorer` 재점수/정렬 로직으로 합쳐지므로, 결과의 "모양"이
-    /// 같아야 한다(그 함수 상단 주석의 이스케이프/정렬 근거를 그대로 따름).
+    /// 보조 인덱스에서 FTS5 MATCH 검색. `ReferenceDataStore.searchVersesFullText`와
+    /// 같은 질의 형태(따옴표로 감싼 리터럴 + prefix `*`, 정경순 tie-break)를 쓴다 —
+    /// 두 경로의 결과가 같은 `KeywordMatchScorer` 재점수/정렬로 합쳐지므로
+    /// 결과 형태가 같아야 한다.
     public static func search(
         registryID: UUID, indexDirectory: URL, matching query: String, limit: Int? = nil
     ) throws -> [FullTextVerseMatch] {

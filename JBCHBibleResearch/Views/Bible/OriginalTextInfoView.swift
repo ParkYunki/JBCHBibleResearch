@@ -2,29 +2,16 @@
 //  OriginalTextInfoView.swift
 //  JBCHBibleResearch
 //
-//  [2026-08-09 신설] "원문 정보" — 사용자 요청: "각 절을 선택했을 때 확대보기 버튼
-//  옆에 '원문 정보'라는 버튼이 있어 히브리어 그리스어 원문에 대한 정보를 넣고자 함."
-//  사용자가 고른 사양(AskUserQuestion) 그대로 구현한다:
-//    - 데이터셋: STEPBible-Data (CC BY 4.0)
-//    - 표시 정보: Strong번호 + 원어 + 음역 + 영어 + 한글(4가지 모두)
-//    - 화면 구조: 절 전체를 원어 단어 목록으로(드래그 선택 아님) — 원문은 번역본과
-//      무관하게 book/chapter/verse에만 종속되므로, 구절 확대보기와 달리 "번역본
-//      선택"이나 구간 드래그가 필요 없다.
+//  선택한 절의 히브리어/그리스어 원어 단어를 카드 그리드로 보여주는 "원문 정보" 시트.
+//  데이터셋은 STEPBible-Data(CC BY 4.0)이고, 카드에는 한글 뜻풀이·원어·음역·형태소(문법) 설명·
+//  Strong 번호를 표시한다. 원문은 번역본과 무관하게 book/chapter/verse에만 종속되므로
+//  번역본 선택이나 구간 드래그가 필요 없다. 형태소 설명은 `HebrewMorphologyDescriber`가
+//  히브리어만 지원해 그리스어는 영어 뜻풀이로 대체한다.
 //
-//  [2026-08-13 수정] 사용자 요청(첨부 카드 목업) — "완벽하지는 않더라도 되도록
-//  첨부파일 모양처럼 표현하고 싶음." 위 4항목 스펙에 한글 형태소(문법) 설명을
-//  더해 카드 그리드(`LazyVGrid`)로 다시 짰다. 형태소 설명은
-//  `HebrewMorphologyDescriber`(BibleResearchModels, OSHB 코드 체계 기반)가
-//  히브리어만 지원 — 그리스어 단어는 이 자리에 기존처럼 영어 뜻풀이를 보여준다.
-//
-//  ⚠️ [한글 뜻풀이 출처] 오픈 라이선스 한글 Strong 사전이 존재하지 않아(리서치 결과,
-//  바이블렉스/옥스퍼드 원어성경대전 등은 전부 상업 라이선스) STEPBible의 영어
-//  뜻풀이를 Apple `Translation` 프레임워크로 그때그때 번역한다. 사용자 결정 —
-//  "최초 번역된 내용은 DB에 저장될 수 있게 할 것. 그 이후부터는 DB내용을 조회할것."
-//  `StrongGlossTranslation`(SwiftData)에 Strong 번호 단위로 캐싱해, 두 번째부터는
-//  재번역 없이 캐시를 읽는다. 번역 품질은 기계번역 수준이며, 신학적으로 확립된
-//  용어(예: 전문 성경사전의 표준 역어)와 다를 수 있다는 한계가 있다.
-//
+//  ⚠️ 한글 뜻풀이: 오픈 라이선스 한글 Strong 사전이 없어 STEPBible의 영어 뜻풀이를 Apple
+//  `Translation` 프레임워크로 번역하고, `StrongGlossTranslation`(SwiftData)에 Strong 번호
+//  단위로 캐싱해 두 번째부터는 재번역 없이 캐시를 읽는다. 기계번역 수준이라 신학적 표준
+//  역어와 다를 수 있다.
 
 import SwiftUI
 import Translation
@@ -32,24 +19,15 @@ import SwiftData
 import BibleResearchModels
 
 struct OriginalTextInfoView: View {
-    /// [2026-09-11 추가] 사용자 보고 — "성경 - 원문정보" 화면이 테마를 안
-    /// 따름. 이 화면을 감싸는 배경/본문 보조 텍스트 색에 쓴다.
+    /// 화면 배경과 본문 보조 텍스트 색을 테마에 맞추는 데 쓴다.
     private var settings: UserSettingsStore { .shared }
     let bookId: Int
     let chapter: Int
     let verseNumber: Int
-    /// [2026-08-28 신설] 사용자 요청 — "[메모하기]-[원문정보] 각 레이어창 마다
-    /// 쉽게 오갈 수 있도록 화살표라든지 기능을 추가할 것." 이 화면의 툴바에
-    /// "메모하기로 전환" 버튼을 추가하기 위한 콜백 — 호출부(BibleReadingView)가
-    /// 이 시트를 닫고 메모하기(구 확대보기) 시트를 여는 순서를 책임진다(같은
-    /// 화면이 시트 두 개를 동시에 띄울 수 없는 기존 제약, `VerseZoomView.
-    /// onSwitchToOriginalTextInfo`와 같은 이유). 이 구조체는 커스텀 init이
-    /// 없어 컴파일러가 만들어 주는 memberwise init에 이 값도 자동으로 포함된다.
+    /// "메모하기로 전환" 툴바 버튼 콜백. 호출부가 이 시트를 닫고 메모하기 시트를 여는 순서를
+    /// 책임진다(한 화면이 시트 두 개를 동시에 띄울 수 없음).
     let onSwitchToMemo: () -> Void
-    /// [2026-09-27 신설] `VerseZoomView`의 같은 이름 프로퍼티들과 완전히
-    /// 같은 목적 — `VerseNavArrowsModifier` 선언부 주석 참고. 기본값이 있어
-    /// 이 구조체의 컴파일러 생성 memberwise init에서 생략 가능하다(이 파일에
-    /// 커스텀 init이 없으므로).
+    /// `VerseZoomView`의 같은 이름 프로퍼티들과 같은 목적 — `VerseNavArrowsModifier` 참고. 기본값이 있어 생략 가능.
     var onNavigateToPreviousVerse: () -> Void = {}
     var onNavigateToNextVerse: () -> Void = {}
     var canGoToPreviousVerse: Bool = false
@@ -57,28 +35,18 @@ struct OriginalTextInfoView: View {
 
     @Environment(\.dismiss) private var dismiss
     @Environment(\.modelContext) private var modelContext
-    /// [2026-08-19 추가] 사용자 보고 — "히브리어/헬라어가 파란색인데, 야간에는
-    /// 배경이 검은색이어서 눈에 잘 안보임." 아래 `hebrewTextColor`가 라이트
-    /// 모드 스크린샷에 맞춘 진한 남색 고정값이었다 — 다크모드에서 검은 배경과
-    /// 대비가 부족했다. 라이트/다크를 구분해 색을 고르기 위해 필요하다.
+    /// 원어 색을 라이트/다크에 맞춰 고르기 위해 필요하다.
     @Environment(\.colorScheme) private var colorScheme
     @State private var words: [OriginalWordInfo] = []
-    /// [2026-09-16 추가] 사용자 요청 — "성경구절 밑 원어카드 위 부분에
-    /// 직역과 번역 차이점을 추가하고자 함." `LiteralTranslation` 테이블
-    /// (`OriginalTextModels.swift`의 `LiteralTranslationInfo` 참고) 조회
-    /// 결과 — 데이터가 없는 절이면 nil로 두고 카드 자체를 숨긴다.
+    /// 직역/번역 차이 카드 데이터(`LiteralTranslation` 조회 결과). 데이터가 없는 절이면 nil이고 카드를 숨긴다.
     @State private var literalInfo: LiteralTranslationInfo?
-    /// [2026-08-13 추가] 사용자 요청 — "타이틀 아래 원문 정보 가장 상단에 해당
-    /// 구절(개역한글 KRV) 텍스트를 보여줄것." 번들 기본 번역본(KRV=개역한글,
-    /// `TranslationBootstrap`/`Resources/BibleDB.sqlite`)에서 직접 읽는다 —
-    /// 사용자가 다른 번역본을 화면에 켜 두었어도 이 시트는 항상 KRV 고정(원문
-    /// 정보는 절 자체에 종속되지 편집 화면에서 고른 번역본과는 무관하므로).
+    /// 번들 기본 번역본(KRV 개역한글)에서 읽은 절 본문. 원문 정보는 절에만 종속되므로
+    /// 화면에 켜 둔 번역본과 무관하게 항상 KRV로 고정한다.
     @State private var krvVerseText: String = ""
     @State private var koreanGlosses: [String: String] = [:]
     @State private var translationConfiguration: TranslationSession.Configuration?
     @State private var isTranslating = false
-    /// [2026-08-09 추가] 사용자 요청 — "원문정보의 한글 번역을 수정할 수 있게 할
-    /// 것." 편집 중인 단어(연필 아이콘을 누른 단어) — nil이면 편집 알림창이 안 뜬다.
+    /// 편집 중인 단어(연필 아이콘을 누른 단어). nil이면 편집 알림창이 뜨지 않는다.
     @State private var editingWord: OriginalWordInfo?
     @State private var editingText: String = ""
 
@@ -91,12 +59,8 @@ struct OriginalTextInfoView: View {
         NavigationStack {
             ScrollView {
                 VStack(alignment: .leading, spacing: 16) {
-                    // [2026-08-13 추가] 사용자 요청 — "원문 정보 상단에 [영문-원어성경]
-                    // 이라는 텍스트로 아이콘과 함께 biblehub.com 인터리니어 링크를
-                    // 넣어 웹브라우저로 열리게 할것." `Link`는 시스템 기본 브라우저로
-                    // 연다(별도 WebView 없이). 이 절에 대응하는 biblehub 슬러그를
-                    // 못 찾거나(성경 66권 밖 등, 사실상 없음) URL 자체가 안 만들어지면
-                    // 조용히 숨긴다 — 깨진 링크를 보여주는 것보다 낫다.
+                    // biblehub 인터리니어 링크(시스템 기본 브라우저로 열림). 슬러그를 못 찾거나 URL이 안 만들어지면
+                    // 깨진 링크를 보여주는 대신 숨긴다.
                     if let interlinearURL = bibleHubInterlinearURL {
                         Link(destination: interlinearURL) {
                             Label("영문-원어성경", systemImage: "safari")
@@ -104,16 +68,9 @@ struct OriginalTextInfoView: View {
                         }
                         .foregroundStyle(.blue)
                     }
-                    // [2026-08-13 추가] 사용자 요청 — "타이틀 아래 원문 정보 가장
-                    // 상단에 해당 구절(개역한글 KRV) 텍스트를 보여줄것." 원어 단어
-                    // 데이터가 없는 절(아직 못 채운 ~128개 장 중 하나)이어도 이
-                    // 텍스트만은 보이게, `words.isEmpty` 분기 밖으로 뺐다.
+                    // 원어 데이터가 없는 절에서도 KRV 본문은 보이도록 `words.isEmpty` 분기 밖에 둔다.
                     if !krvVerseText.isEmpty {
-                        // [2026-08-13 수정] 사용자 요청 — "상단 말씀 구절도 메인창
-                        // 성경 조회 내용처럼 글꼴을 동일하게 하고, 가운데 정렬로
-                        // 할것." 메인 본문 목록(TranslationColumnView)이 절 본문에
-                        // 쓰는 폰트/줄간격/글자색을 그대로 가져온다 — 사용자가
-                        // "모양" 설정에서 폰트를 바꾸면 여기도 같이 바뀐다.
+                        // 메인 본문 목록(TranslationColumnView)과 같은 폰트/줄간격/글자색을 써서 "모양" 설정을 따른다.
                         Text(krvVerseText)
                             .font(UserSettingsStore.shared.bibleBodyFont)
                             .foregroundStyle(UserSettingsStore.shared.bibleTextColor ?? Color.primary)
@@ -132,12 +89,7 @@ struct OriginalTextInfoView: View {
                                     .stroke(cardBorderColor, lineWidth: 1)
                             )
                     }
-                    // [2026-09-16 추가] 사용자 요청 — "성경 - 구절 선택 -
-                    // 하단 원문 정보"에서 성경구절 밑, 원어카드 위 자리에
-                    // "직역과 번역 차이"를 넣는다(전달한 목업 HTML의 배치
-                    // 순서 그대로 — 목업의 점선 테두리·"NEW" 배지는 목업
-                    // 안내문에 적힌 대로 리뷰용 표시일 뿐이라 실제 화면에는
-                    // 넣지 않고, 기존 카드들과 같은 스타일로 통일한다).
+                    // 직역과 번역 차이 카드 — 성경 구절 아래, 원어 카드 위. 다른 카드들과 같은 스타일로 통일한다.
                     if let literalInfo {
                         literalTranslationCard(literalInfo)
                     }
@@ -150,11 +102,7 @@ struct OriginalTextInfoView: View {
                         .frame(maxWidth: .infinity)
                         .padding(.top, 24)
                     } else {
-                        // [2026-08-13 수정] 사용자 요청 — "완벽하지는 않더라도 되도록
-                        // 첨부파일 모양처럼 표현하고 싶음"(카드 그리드 목업: 한글 뜻
-                        // 헤드라인 → 원어(파란색, 굵게) → 음역([...]) → 형태소 문법
-                        // 설명 순서). 세로 한 줄 카드였던 걸 `LazyVGrid`로 바꿔
-                        // 화면 너비에 맞게 여러 열로 자동 배치한다.
+                        // 화면 너비에 맞춰 여러 열로 자동 배치한다.
                         LazyVGrid(columns: gridColumns, spacing: 12) {
                             ForEach(words) { word in
                                 wordCard(word)
@@ -164,7 +112,6 @@ struct OriginalTextInfoView: View {
                 }
                 .padding(16)
             }
-            // [2026-09-11 추가] 위 `settings` 선언부 주석 참고.
             .background(settings.bibleBackgroundColor ?? Color.clear)
             .navigationTitle(displayTitle)
             #if os(iOS)
@@ -174,27 +121,8 @@ struct OriginalTextInfoView: View {
                 ToolbarItem(placement: .cancellationAction) {
                     Button("닫기") { dismiss() }
                 }
-                // [2026-08-29 재수정] 사용자 요청 — "메모하기, 원문 정보 각각
-                // 하단에 닫기 오른쪽 버튼 옆에 두도록." `VerseZoomView.swift`의
-                // 펜/눈동자 토글이 실제로 이 자리(이 시트의 아래쪽 버튼줄)에
-                // 정상적으로 그려지는 것을 스크린샷으로 확인했으므로, 안
-                // 그려지던 `.primaryAction`/`.topBarTrailing` 대신 같은
-                // `.confirmationAction`을 쓴다.
-                // [2026-08-29 3차 수정] 사용자 요청 — "좌우 화살표 대신 메모하기
-                // 아이콘과, 원어 정보 아이콘으로 각각 대치할 것." 화살표 대신,
-                // "메모하기"가 성경 조회 하단 액션바에서 이미 쓰는 아이콘
-                // (`BibleReadingView.swift`의 `Label("메모하기", systemImage:
-                // "text.bubble")`)과 똑같은 걸 써서 —
-                // 이 버튼을 누르면 "메모하기"로 간다는 것을 아이콘만 보고도
-                // 알 수 있게 했다.
-                //
-                // [2026-09-27 수정] 사용자 요청 — "메모하기 버튼의 아이콘을
-                // 기존 확대하기 모양(`arrow.up.left.and.arrow.down.right`)에서
-                // 메모 아이콘 모양으로 변경." `VerseZoomView.swift`의
-                // 하단 액션바에서 "개인 묵상"(`note.text`) 바로 왼쪽에 있는
-                // "메모" 버튼이 이미 쓰는 `text.bubble`을 그대로 재사용해 —
-                // 이 앱 전체에서 "메모" 개념을 가리키는 아이콘을 하나로
-                // 통일한다(새 아이콘 발명 대신 기존 패턴 재사용).
+                // `.primaryAction`/`.topBarTrailing`은 이 자리에 그려지지 않아 `.confirmationAction`을 쓴다.
+                // 아이콘은 앱 전체에서 "메모"를 가리키는 `text.bubble`로 통일해, 누르면 메모하기로 간다는 걸 알 수 있게 한다.
                 ToolbarItem(placement: .confirmationAction) {
                     Button(action: onSwitchToMemo) {
                         Label("메모하기", systemImage: "text.bubble")
@@ -206,29 +134,20 @@ struct OriginalTextInfoView: View {
         #if os(macOS)
         .frame(minWidth: 420, minHeight: 420)
         #endif
-        // [2026-09-27 추가] 이전/다음 구절 이동 화살표 — `VerseNavArrowsModifier`
-        // 선언부 주석 참고.
         .modifier(VerseNavArrowsModifier(
             canGoPrevious: canGoToPreviousVerse,
             canGoNext: canGoToNextVerse,
             onPrevious: onNavigateToPreviousVerse,
             onNext: onNavigateToNextVerse
         ))
-        // [2026-09-27 수정] 이전엔 `.onAppear`이라 시트가 이미 열린 상태에서
-        // 좌우 화살표로 `verseNumber`(및 장/권 경계를 넘을 때의 `chapter`/`bookId`)만
-        // 바뀌면(같은 뷰 identity가 새 프로퍼티 값으로 재평가되는 경우) 다시 불리지
-        // 않아 원어 정보가 첫 절 데이터로 멈춰 있는 버그가 있었다 — `.task(id:)`로
-        // 바꿔 이 세 값 중 하나라도 바뀌면 다시 로드되게 한다.
+        // `.task(id:)`로 절/장/권이 바뀔 때마다 다시 로드한다 — 시트가 열린 채 이전/다음 절로 이동해도
+        // 원어 정보가 첫 절 데이터로 멈춰 있지 않도록 하기 위해서다.
         .task(id: "\(bookId)-\(chapter)-\(verseNumber)") { loadWords() }
         .translationTask(translationConfiguration) { session in
             await translateMissingGlosses(session: session)
         }
-        // [2026-08-09 추가] 사용자 요청 — "원문정보의 한글 번역을 수정할 수 있게
-        // 할 것." Strong 번호 단위 캐시(`StrongGlossTranslation`)를 그대로
-        // 고쳐 쓴다 — 그래서 이 한 번의 수정이 같은 Strong 번호가 나오는 성경 내
-        // 다른 모든 절에도 똑같이 적용된다(캐시 설계 자체가 "절 단위"가 아니라
-        // "Strong 번호 단위"이기 때문 — StrongGlossTranslation.swift 상단 주석 참고).
-        // 이 점을 알림창 메시지에 명시해 사용자가 오해하지 않게 했다.
+        // Strong 번호 단위 캐시(`StrongGlossTranslation`)를 직접 고치므로, 같은 Strong 번호가 나오는
+        // 다른 모든 절에도 수정이 적용된다(알림창 메시지에 명시).
         .alert(
             "한글 뜻풀이 수정",
             isPresented: Binding(
@@ -246,19 +165,7 @@ struct OriginalTextInfoView: View {
         }
     }
 
-    // [2026-08-13 재작업] 사용자가 준 실제 스크린샷(카드: "허리를" 헤드라인 →
-    // "מָתְנַיִם" 파란 굵은 원어 → "[mot.Na.yim]" 음역 → "명사 보통명사 남성
-    // 쌍수 절대형" 회색 형태소 설명, 전부 가운데 정렬 + 옅은 회색 라운드 테두리)에
-    // "테두리 색상, 원문 색상, 품사 글꼴 색상, 정렬까지 동일하게" 맞춰 달라는
-    // 요청 — 이전 라운드의 좌측 정렬 + 파란 굵은 테두리 버전을 갈아엎는다.
-    // 스크린샷에는 Strong번호/연필 아이콘이 안 보이지만, 편집 기능(연필)과 기존
-    // 4항목 스펙(Strong번호 포함)은 유지해야 해서 둘 다 카드 맨 아래에 아주 작게
-    // 눈에 덜 띄게 남겨 뒀다 — 완전히 지우면 "한글 뜻풀이 수정" 기능이 없어진다.
-    /// [2026-09-16 신설] 위 `literalInfo` 주석 참고. 전달한 목업 HTML
-    /// (직역 텍스트 → 구분선 → "번역과의 차이" 설명 순서)을 그대로 옮기되,
-    /// 카드 스타일은 이 화면이 이미 쓰는 `cardBackground`/`cardBorderColor`
-    /// (테마 글자색 기반 옅은 opacity)를 그대로 따른다 — 목업의 점선
-    /// 테두리·"NEW" 배지는 리뷰용 표시라 제외했다(바로 위 주석 참고).
+    /// 직역과 "번역과의 차이" 설명 카드. 스타일은 `cardBackground`/`cardBorderColor`를 따른다.
     private func literalTranslationCard(_ info: LiteralTranslationInfo) -> some View {
         VStack(alignment: .leading, spacing: 10) {
             Label("직역 (원어 그대로)", systemImage: "text.alignleft")
@@ -303,12 +210,7 @@ struct OriginalTextInfoView: View {
 
     private func wordCard(_ word: OriginalWordInfo) -> some View {
         VStack(spacing: 8) {
-            // [2026-08-13 재수정] 사용자 요청 — "한글 뜻풀이 수정용 연필
-            // 아이콘은 한글 뜻 단어 오른쪽 옆에 배치하고, 조금더 진하고,
-            // 조금더 크게 할것." 카드 우상단 구석에 옅게 떠 있던 걸 한글
-            // 헤드라인과 같은 줄로 옮기고(HStack), 색은 `.quaternary`→
-            // `.secondary`로 진하게, 크기는 12→14로 키웠다(18로 한 번 키웠다가
-            // 사용자 요청으로 14·`pencil.circle`(테두리만, 채움 없음)로 재조정).
+            // 편집용 연필 아이콘은 한글 뜻 헤드라인 오른쪽에 둔다.
             HStack(spacing: 6) {
                 Group {
                     if let korean = koreanGlosses[word.strongCode] {
@@ -342,11 +244,7 @@ struct OriginalTextInfoView: View {
                     .multilineTextAlignment(.center)
                     .fixedSize(horizontal: false, vertical: true)
 
-                // [2026-08-15 추가] 사용자 요청 — "원문 옆에 네이버 링크 추가
-                // (원어-네이버링크-영문링크), 네이버 링크임을 표시할 수 있도록."
-                // 순서를 정확히 지키기 위해 원어 `Text` 바로 다음, 기존 biblehub
-                // ("영문") 링크 앞에 넣는다 — `naverDictionaryURL`/`naverBadge`
-                // 상단 주석 참고.
+                // 원어 바로 다음, biblehub 링크 앞에 네이버 사전 링크를 둔다(`naverDictionaryURL`/`naverBadge`).
                 if let naverURL = naverDictionaryURL(for: word) {
                     Link(destination: naverURL) {
                         naverBadge
@@ -354,9 +252,7 @@ struct OriginalTextInfoView: View {
                     .help("네이버 사전에서 찾기")
                 }
 
-                // [2026-08-13 추가] 사용자 요청 — "각 원어 단어 옆에 아이콘을
-                // 넣고 biblehub.com/hebrew|greek/{Strong숫자}.htm 주소를 넣고
-                // 웹브라우저로 열리게 할것."
+                // 원어 단어별 biblehub Strong 사전 링크.
                 if let strongURL = bibleHubStrongURL(for: word) {
                     Link(destination: strongURL) {
                         Image(systemName: "safari")
@@ -396,8 +292,6 @@ struct OriginalTextInfoView: View {
             RoundedRectangle(cornerRadius: 18, style: .continuous)
                 .fill(cardBackground)
         )
-        // [2026-08-13 수정] 사용자 요청 — 스크린샷의 옅은 회색 라운드 테두리와
-        // 동일하게(이전엔 진한 파란 테두리였음).
         .overlay(
             RoundedRectangle(cornerRadius: 18, style: .continuous)
                 .stroke(cardBorderColor, lineWidth: 1)
@@ -405,14 +299,8 @@ struct OriginalTextInfoView: View {
         .shadow(color: .black.opacity(0.05), radius: 6, x: 0, y: 2)
     }
 
-    /// [2026-09-12 수정] 사용자 요청 — "원어카드의 디자인도 기존 지정색을
-    /// 버리고 테마에 따라 색상을 수정할것." 테마 글자색(`settings.
-    /// bibleTextColor`)이 지정돼 있으면 그 색을 그대로 쓴다 — 원어 단어는
-    /// 이미 전용 서체(`originalTextFont`, 26pt, 히브리어/그리스어 전용
-    /// 폰트)로 바로 위 한글 뜻 헤드라인과 충분히 구분되므로 별도 강조색이
-    /// 없어도 된다. 테마 미지정 시엔 기존 라이트/다크 대응 남색(2026-08-19
-    /// 수정본, 아래 두 줄)을 그대로 유지한다 — 테마를 켜지 않은 기존
-    /// 사용자의 화면은 바뀌지 않도록.
+    /// 테마 글자색이 지정돼 있으면 그 색을 쓰고(전용 서체로 한글 헤드라인과 이미 구분됨),
+    /// 미지정 시엔 라이트/다크에 대응하는 남색을 쓴다.
     private var hebrewTextColor: Color {
         if let themeColor = settings.bibleTextColor {
             return themeColor
@@ -422,14 +310,8 @@ struct OriginalTextInfoView: View {
             : Color(red: 0.09, green: 0.25, blue: 0.78)
     }
 
-    /// [2026-08-19 신설] 사용자 요청 — "히브리어 기본폰트(SILEOT)는 히브리어
-    /// 표기에, 헬라어 기본폰트(Gentium)는 그리스어 표기에 적용." 언어는
-    /// `word.isHebrew`(strongCode 접두 "H"/"G")로 가른다. 기존에 이 Text가
-    /// 항상 `.bold`였으므로(위 `HStack` — 이전엔 `.system(size: 26, weight:
-    /// .bold)`), 그리스어는 굵기가 있는 `Gentium-Bold`를 그대로 쓴다. 히브리어
-    /// 성서 조판체(Ezra SIL)는 애초에 굵은 변형이 따로 없어(SIL이 배포하는
-    /// 유일한 굵기) 인위적으로 `.bold()`를 씌우지 않는다 — 성서 히브리어
-    /// 조판에서 볼드체를 쓰는 관례 자체가 없다.
+    /// 히브리어/그리스어 전용 폰트를 `word.isHebrew`로 고른다. 히브리어 성서 조판체(Ezra SIL)는
+    /// 굵은 변형이 없고 볼드체를 쓰는 관례도 없어 `.bold()`를 씌우지 않는다.
     private func originalTextFont(for word: OriginalWordInfo) -> Font {
         if word.isHebrew {
             BundledFontRegistrar.ensureAvailable(SpecialPurposeFonts.hebrew)
@@ -440,13 +322,8 @@ struct OriginalTextInfoView: View {
         }
     }
 
-    /// [2026-09-12 수정] 사용자 요청 — "성경구절, 원어카드의 디자인도 기존
-    /// 지정색을 버리고 테마에 따라 색상을 수정할것." 기존엔 플랫폼 구분선
-    /// 고정색(`.separator`/`.separatorColor`)이라 테마 배경(특히 어두운
-    /// 커스텀 배경) 위에서 대비가 어색했다 — `DocumentsHomeView.swift`의
-    /// 카드 테두리가 이미 쓰는 것과 같은 관례(테마 글자색의 옅은 opacity)로
-    /// 바꾼다. 테마 미지정 시엔 `TranslationPickerPopover`의 칩 테두리와
-    /// 같은 대체값(`Color.secondary` 계열)을 쓴다.
+    /// 테마 글자색의 옅은 opacity를 테두리색으로 쓴다(`DocumentsHomeView`의 카드 테두리와 같은 관례).
+    /// 테마 미지정 시엔 `Color.secondary` 계열로 대체한다.
     private var cardBorderColor: Color {
         settings.bibleTextColor?.opacity(0.2) ?? Color.secondary.opacity(0.2)
     }
@@ -459,19 +336,8 @@ struct OriginalTextInfoView: View {
         return morph.isEmpty ? word.glossEn : morph
     }
 
-    // [2026-08-13 추가] biblehub.com 딥링크 2건 — 사용자 요청:
-    // "① 원문 정보 상단에 [영문-원어성경] 텍스트로 인터리니어 링크
-    //    (biblehub.com/interlinear/{영문책이름}/{장}-{절}.htm)
-    //  ② 각 원어 단어 옆에 Strong 사전 링크
-    //    (biblehub.com/hebrew|greek/{Strong숫자}.htm)"
-    // biblehub은 book/chapter/verse REST API가 없어 URL에 박히는 영문 책
-    // 이름(슬러그)이 필요 — genesis/1-1.htm, 1_kings/1-1.htm(숫자+밑줄) 형태를
-    // 직접 https://biblehub.com/interlinear/genesis/1-1.htm,
-    // https://biblehub.com/interlinear/1_kings/1-1.htm,
-    // https://biblehub.com/interlinear/songs/1-1.htm(아가서만 예외 슬러그)로
-    // 조회해 확인한 뒤 66권 전체를 하드코딩했다. Strong 링크는
-    // https://biblehub.com/hebrew/430.htm, https://biblehub.com/greek/2316.htm
-    // 처럼 앞자리 "H"/"G"와 0-padding을 뗀 순수 숫자만 받는다.
+    // biblehub은 REST API가 없어 URL에 영문 책 이름 슬러그가 필요하다(`1_kings`처럼 숫자+밑줄, 아가서만 `songs`).
+    // 66권 전체를 하드코딩했다. Strong 링크는 앞자리 "H"/"G"와 0-padding을 뗀 순수 숫자만 받는다.
     private static let bibleHubSlugs: [Int: String] = [
         1: "genesis", 2: "exodus", 3: "leviticus", 4: "numbers", 5: "deuteronomy",
         6: "joshua", 7: "judges", 8: "ruth", 9: "1_samuel", 10: "2_samuel",
@@ -510,17 +376,10 @@ struct OriginalTextInfoView: View {
         return URL(string: "https://biblehub.com/\(langPath)/\(number).htm")
     }
 
-    // [2026-08-15 신설, 같은 날 수정] 네이버 사전 딥링크 — 사용자 요청: "원문
-    // 옆에 네이버 링크 추가(원어-네이버링크-영문링크), 네이버 링크임을 표시할
-    // 수 있도록." 처음엔 `query=`에 원어 단어 자체(유니코드 히브리어/그리스어
-    // 글자)를 percent-encoding해 넣었는데, 사용자가 다시 정정 — "query는 스트롱
-    // 코드 숫자만, range는 둘 다 all로":
-    //   히브리어: https://dict.naver.com/hbokodict/#/search?range=all&query=<스트롱번호>
-    //   헬라어:   https://dict.naver.com/grckodict/#/search?range=all&query=<스트롱번호>
-    // "스트롱번호"는 `bibleHubStrongURL`이 이미 하는 것과 같은 규칙(코드 앞자리
-    // "H"/"G"를 떼고 남은 숫자, 앞의 0도 자연히 사라짐 — 예: "H0430"→430)이라
-    // 그 로직을 그대로 따른다. `#/search?...`는 네이버 사전 SPA의 해시 라우팅
-    // 쿼리라 `URL(string:)`이 구조를 해석할 필요 없이 문자열 그대로 넘기면 된다.
+    // 네이버 사전 딥링크. `query`는 Strong 번호 숫자만(`bibleHubStrongURL`과 같은 규칙, 예: "H0430"→430), `range=all`.
+    //   히브리어: https://dict.naver.com/hbokodict/#/search?range=all&query=<번호>
+    //   헬라어:   https://dict.naver.com/grckodict/#/search?range=all&query=<번호>
+    // `#/search?...`는 SPA 해시 라우팅 쿼리라 문자열 그대로 넘긴다.
     private func naverDictionaryURL(for word: OriginalWordInfo) -> URL? {
         let code = word.strongCode
         guard let first = code.first else { return nil }
@@ -535,9 +394,7 @@ struct OriginalTextInfoView: View {
         return URL(string: "https://dict.naver.com/\(dictPath)/#/search?range=all&query=\(number)")
     }
 
-    /// 네이버 브랜드 그린(#03C75A)의 작은 원형 "N" 배지 — 실제 네이버 로고
-    /// 이미지 자산 없이도 "이 링크는 네이버로 연결된다"를 한눈에 표시하기
-    /// 위한 최소 구현이다(사용자 요청 "네이버 링크임을 표시할 수 있도록").
+    /// 네이버 브랜드 그린의 작은 원형 "N" 배지 — 로고 자산 없이 네이버 링크임을 표시한다.
     private var naverBadge: some View {
         Text("N")
             .font(.system(size: 10, weight: .bold))
@@ -554,10 +411,8 @@ struct OriginalTextInfoView: View {
         [GridItem(.adaptive(minimum: 160, maximum: 220), spacing: 12)]
     }
 
-    /// [2026-09-12 수정] 사용자 요청 — 위 `cardBorderColor` 주석 참고.
-    /// 기존엔 플랫폼 그룹 배경 고정색이라 테마 배경과 잘 어울리지 않았다 —
-    /// `DocumentsHomeView.swift`(약 900번째 줄)가 이미 쓰는 것과 같은 관례
-    /// (테마 글자색의 아주 옅은 opacity로 "카드"를 배경에서 살짝 띄운다).
+    /// 테마 글자색의 아주 옅은 opacity로 카드를 배경에서 살짝 띄운다(`DocumentsHomeView`와 같은 관례).
+    /// 미지정 시엔 `Color.secondary` 계열로 대체한다.
     private var cardBackground: Color {
         settings.bibleTextColor?.opacity(0.08) ?? Color.secondary.opacity(0.08)
     }
@@ -569,13 +424,8 @@ struct OriginalTextInfoView: View {
         loadKRVVerseText()
     }
 
-    /// [2026-08-13 추가] 번들 KRV(개역한글) DB에서 이 절 텍스트 한 줄을 읽어 온다.
-    /// `OriginalTextLookupService.shared`처럼 커넥션을 캐싱하지 않는다 — 이 시트가
-    /// 열릴 때 한 번만 조회하면 되는 값이라(원어 단어 목록처럼 반복 조회되지
-    /// 않음) 매번 새로 여는 편이 캐시 수명 관리보다 단순하다. 실패하면(번들 DB를
-    /// 못 찾음/해당 절이 없음) 빈 문자열로 두고 조용히 건너뛴다 — 원어 정보
-    /// 자체는 이 텍스트 유무와 무관하게 계속 보여야 하므로 별도 에러 UI를 만들지
-    /// 않았다.
+    /// 번들 KRV DB에서 이 절 텍스트를 읽는다. 시트가 열릴 때 한 번만 조회하므로 커넥션을 캐싱하지 않는다.
+    /// 실패하면 빈 문자열로 두고 조용히 건너뛴다(원어 정보는 이 텍스트와 무관하게 보여야 함).
     private func loadKRVVerseText() {
         do {
             let path = try TranslationBootstrap.resolvedBundledDatabaseURL().path
@@ -591,9 +441,7 @@ struct OriginalTextInfoView: View {
     /// `sourceEnglishGloss`가 지금 원문 데이터의 영어 뜻풀이와 다르면(원문 데이터가
     /// 나중에 갱신된 경우) 오래된 캐시로 취급해 다시 번역 대상에 포함시킨다.
     private func loadCachedGlosses() {
-        // ⚠️ [2026-08-09] `#Predicate`의 `contains` 매크로 변환은 `Set`보다 `Array`
-        // 캡처가 더 안정적으로 확인돼(SwiftData 초기 버전에서 Set 캡처 관련 알려진
-        // 이슈들이 있었음) 배열로 만들어 넘긴다.
+        // `#Predicate`의 `contains`는 `Set`보다 `Array` 캡처가 안정적이라 배열로 넘긴다.
         let codes = Array(Set(words.map(\.strongCode)))
         guard !codes.isEmpty else { return }
         let descriptor = FetchDescriptor<StrongGlossTranslation>(
@@ -603,12 +451,8 @@ struct OriginalTextInfoView: View {
         var cacheByCode: [String: StrongGlossTranslation] = [:]
         for entry in cached { cacheByCode[entry.strongCode] = entry }
 
-        // [2026-08-09 수정] 사용자 요청 — "한글정보가 없는 것도 수정할 수 있게 할
-        // 것." 이전엔 `word.glossEn`이 빈 단어는 여기서 통째로 건너뛰어서, 그런
-        // 단어에 사용자가 나중에 연필 아이콘으로 직접 입력해 캐시에 저장해 둬도
-        // 다시 열 때마다 안 불러와지는 버그가 있었다 — 캐시 조회는 영어 뜻풀이
-        // 유무와 무관하게 항상 하고, "자동번역 대상에 넣을지"만 영어 뜻풀이가
-        // 있을 때로 제한한다.
+        // 캐시 조회는 영어 뜻풀이 유무와 무관하게 항상 한다(사용자가 직접 입력해 둔 값을 불러오기 위해).
+        // 자동번역 대상만 영어 뜻풀이가 있는 단어로 제한한다.
         var freshGlosses: [String: String] = [:]
         var missing: [(strongCode: String, glossEn: String)] = []
         var seenCodes = Set<String>()
@@ -664,10 +508,7 @@ struct OriginalTextInfoView: View {
         pendingTranslationRequests = []
     }
 
-    /// [2026-08-09 추가] 연필 아이콘을 누르면 지금 값(있으면 캐시값, 없으면 빈
-    /// 문자열)을 편집창 초기값으로 채운다 — 자동번역 결과가 이미 있으면 그걸
-    /// 고쳐 쓰는 흐름이 되고, 아직 없으면(번역 중이거나 "-") 처음부터 직접
-    /// 입력하는 흐름이 된다.
+    /// 편집창 초기값을 현재 값(없으면 빈 문자열)으로 채운다.
     private func beginEditingKorean(for word: OriginalWordInfo) {
         editingText = koreanGlosses[word.strongCode] ?? ""
         editingWord = word

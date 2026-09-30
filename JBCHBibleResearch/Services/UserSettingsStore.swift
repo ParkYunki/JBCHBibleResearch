@@ -2,16 +2,13 @@
 //  UserSettingsStore.swift
 //  JBCHBibleResearch
 //
-//  screens.md 8장(환경설정) 값 중 실제로 다른 화면이 참조하는 것들을 담는
-//  UserDefaults 기반 저장소. 8장의 모든 항목을 다 담지는 않는다 — 이 타입에 없는
-//  설정(동기화 일시중지, 저장공간 경로 등)은 SettingsView.swift가 UI만 갖고 있고
-//  실제 동작에 연결돼 있지 않다는 뜻이다(SettingsView.swift 상단 주석 참고).
+//  UserDefaults 기반 사용자 설정 저장소. 다른 화면이 실제로 참조하는 설정만 담는다.
+//  이 타입에 없는 설정(동기화 일시중지, 저장공간 경로 등)은 SettingsView.swift에
+//  UI만 있고 동작에는 연결돼 있지 않다.
 //
-//  ⚠️ [범위] SwiftData/CloudKit로 옮기지 않고 UserDefaults를 쓴 이유: 이 값들은
-//  "이 기기에서의 앱 사용 방식" 설정이지, 여러 기기에서 동기화돼야 하는 연구
-//  데이터가 아니다(schema.md 어디에도 이런 종류의 설정을 CloudKit에 올리라는
-//  요구사항이 없다) — `NSUbiquitousKeyValueStore`로 기기 간 동기화하는 방안도
-//  있지만, 근거 없이 그렇게까지 확장하지 않았다.
+//  ⚠️ SwiftData/CloudKit 대신 UserDefaults를 쓴 이유: 이 값들은 "이 기기에서의 앱 사용
+//  방식" 설정이지 기기 간 동기화가 필요한 연구 데이터가 아니다.
+//  `NSUbiquitousKeyValueStore`를 통한 기기 간 동기화는 적용하지 않았다.
 //
 
 import Foundation
@@ -31,26 +28,16 @@ final class UserSettingsStore {
         static let lastSelectedSection = "settings.lastSelectedSection"
         static let colorSchemePreference = "settings.colorSchemePreference"
         static let aiChapterDraftEnabled = "settings.aiChapterDraftEnabled"
-        // [2026-08-19 추가] 사용자 요청 — "앱을 설치할 때, 처음 시작할 때 색인을
-        // 자동으로 설치하면 안되는가?" 첫 실행 시 AI 의미검색 색인 만들기를
-        // 자동으로 시작하면서 안내 화면을 보여준 적이 있는지 — 한 번 보여준
-        // 뒤엔(완료/취소 여부와 무관하게) 앱을 켤 때마다 다시 뜨지 않게 막는
-        // 용도. `BibleIndexOnboardingOverlay.swift` 참고.
+        // 첫 실행 시 AI 의미검색 색인 안내 화면을 보여준 적이 있는지(완료/취소와 무관하게 1회만 표시).
         static let hasOfferedBibleIndexOnboarding = "settings.hasOfferedBibleIndexOnboarding"
-        // [2026-08-28 추가] 사용자 요청 — "처음 설치하시는 사람을 위한 가이드
-        // 화면"과 "업데이트 시 무엇이 바뀌었는지 소개하는 화면"을 구분하기 위한
-        // 플래그 두 개. `hasCompletedOnboarding`은 `AppOnboardingOverlay.swift`의
-        // 첫 실행 가이드 카루셀을 한 번만 보여주기 위한 완료 플래그 —
-        // `hasOfferedBibleIndexOnboarding`과 같은 1회성 패턴. `lastSeenAppVersion`은
-        // `WhatsNewOverlay.swift`가 "이번 버전의 새 소식을 이미 봤는지"를 판단하는
-        // 데 쓰는, 마지막으로 본 `CFBundleShortVersionString` 값이다.
+        // 첫 실행 가이드 완료 여부(hasCompletedOnboarding)와, "새 소식" 화면이 마지막으로
+        // 확인한 앱 버전(lastSeenAppVersion, CFBundleShortVersionString).
         static let hasCompletedOnboarding = "settings.hasCompletedOnboarding"
         static let lastSeenAppVersion = "settings.lastSeenAppVersion"
         static let defaultTranslationCode = "settings.defaultTranslationCode"
         static let defaultDisplayedTranslationCodes = "settings.defaultDisplayedTranslationCodes"
         static let lastManualSyncAt = "settings.lastManualSyncAt"
-        // [2026-08-08 추가] S1(성경 조회) 표시 폰트 — 사용자 요청 "본문크기, 색상,
-        // 절 크기, 줄간격, 글꼴".
+        // S1(성경 조회) 표시 폰트/크기/간격/색상.
         static let bibleFontName = "settings.bible.fontName"
         static let bibleBodyFontSize = "settings.bible.bodyFontSize"
         static let bibleVerseNumberFontSize = "settings.bible.verseNumberFontSize"
@@ -58,14 +45,9 @@ final class UserSettingsStore {
         static let bibleVerseSpacing = "settings.bible.verseSpacing"
         static let bibleTextColorHex = "settings.bible.textColorHex"
         static let bibleBackgroundColorHex = "settings.bible.backgroundColorHex"
-        // [2026-09-11 추가] "테마 색상"의 라이트/다크/자동 3단 선택 — 사용자
-        // 논의: "가죽 서고/서고 청람/와인 저녁 3개 프리셋을 삭제하고, 남은
-        // 2개(서재 아이보리/밤빛 서재)를 화면 모드와 비슷한 라이트/다크/자동
-        // 3단으로 고르게 할 것." `UserSettingsStore.BibleThemeModePreference`
-        // 참고.
+        // 테마 색상 자동/라이트/다크 3단 선택(BibleThemeModePreference).
         static let bibleThemeModePreference = "settings.bible.themeModePreference"
-        // [2026-08-08 추가] 성경 구절 복사 형식 — 사용자 요청, FormatTabView.swift
-        // (사용자가 업로드한 참고 소스) 참고.
+        // 성경 구절 복사 형식.
         static let copyReferencePosition = "settings.bible.copy.referencePosition"
         static let copyReferenceBracketStyle = "settings.bible.copy.referenceBracketStyle"
         static let copyUseAbbreviatedBookName = "settings.bible.copy.useAbbreviatedBookName"
@@ -75,57 +57,32 @@ final class UserSettingsStore {
         static let copyShowVerseNumbers = "settings.bible.copy.showVerseNumbers"
         static let copyVerseNumberStyle = "settings.bible.copy.verseNumberStyle"
         static let copyShowFirstVerseNumber = "settings.bible.copy.showFirstVerseNumber"
-        // [2026-08-08 추가] "성경장절과 번역본이 동일하게 본문 앞/뒤에 위치했을 때,
-        // 합쳐서 보일지 분리해서 보일지" — copyReferencePosition과
+        // 장절과 번역본 표기를 합칠지 분리할지 — copyReferencePosition과
         // copyTranslationLabelPosition이 같은 값일 때만 의미가 있다.
         static let copyCombineReferenceAndTranslationLabel = "settings.bible.copy.combineReferenceAndTranslationLabel"
-        // [2026-08-13 추가] 사용자 요청 — "개요 기본 정보를 앱의 기본 DB에 넣되,
-        // 배포할 때는 사용자 DB로 복사해서 수정 가능하게." `OutlineSeedImporter`가
-        // 이 값을 이용해 "이미 한 번 복사했는지"를 판단한다(딱 한 번만 실행,
-        // 그 뒤엔 사용자가 지운 내용을 다시 채워 넣지 않도록).
+        // 1회성 시드 복사 완료 플래그 — 한 번만 실행해, 사용자가 지운 내용을 다시
+        // 채워 넣지 않도록 한다(OutlineSeedImporter).
         static let hasImportedOutlineSeed = "settings.hasImportedOutlineSeed"
-        // [2026-08-14 추가] 사용자 요청 — "개요: 폴더 구조 ... 한번 펼친 폴더
-        // 내용은 다음에 개요를 눌렀을 때에도 그 상태가 유지되도록." 왼쪽 트리의
-        // 펼침 상태(구약/신약, 책)를 앱 재실행 후에도 유지하기 위해 저장한다.
+        // 개요 트리의 펼침 상태(구약/신약, 책) — 재실행 후에도 유지한다.
         static let outlineExpandedTestaments = "settings.outline.expandedTestaments"
         static let outlineExpandedBookIds = "settings.outline.expandedBookIds"
-        // [2026-08-14 추가] 사용자 요청 — "기본 관주 정보도 시딩하기를 원함 ...
-        // 우선 넣어보고, 책을 보면서 확인을 하고자 함." `CrossReferenceSeedImporter`가
-        // "이미 한 번 넣었는지"를 판단하는 데 쓴다 — `hasImportedOutlineSeed`와
-        // 같은 1회성 플래그 패턴.
+        // CrossReferenceSeedImporter용 1회성 플래그(hasImportedOutlineSeed와 같은 패턴).
         static let hasImportedCrossReferenceSeed = "settings.hasImportedCrossReferenceSeed"
-        // [2026-08-14 추가] 사용자 요청 — "개역한글 난외주 정보가 있음 ... 각주와
-        // 국한문만." `MarginalNoteSeedImporter`용 1회성 플래그.
+        // MarginalNoteSeedImporter용 1회성 플래그.
         static let hasImportedMarginalNoteSeed = "settings.hasImportedMarginalNoteSeed"
-        // [2026-08-14 추가] 사용자 요청 — "두 번째 번역본(국한문 전체 중복
-        // 테이블)을 지우고 → 절 단위 한자 주석 모델." `HanjaAnnotationSeedImporter`용
-        // 1회성 플래그.
+        // HanjaAnnotationSeedImporter용 1회성 플래그.
         static let hasImportedHanjaAnnotationSeed = "settings.hasImportedHanjaAnnotationSeed"
-        // [2026-08-15 추가] 사용자 요청 — "성경관련 json seed 파일은 기본 제공
-        // db에 넣을 것." 관주/난외주 번들분을 SwiftData에서 ReferenceData.sqlite로
-        // 옮기며, 이전에 이미 SwiftData로 들어간 번들분을 1회성으로 정리하는
-        // `ReferenceDataMigration.cleanupLegacyBundledRecords`용 플래그.
+        // 번들 관주/난외주를 ReferenceData.sqlite로 옮기면서, 이미 SwiftData에 들어간 번들분을
+        // 1회성으로 정리했는지(ReferenceDataMigration.cleanupLegacyBundledRecords).
         static let hasCleanedUpLegacyBundledReferenceData = "settings.hasCleanedUpLegacyBundledReferenceData"
-        // [2026-09-28 추가] 설계 문서(claude/sermon-management-screens-and-schema.md,
-        // 프로젝트) 확정사항 — "SermonGathering 초기 시드값(주일설교/청년회 말씀/
-        // 구역모임/조모임)을 최초 실행 시 미리 생성해 둔다." `SermonGatheringSeeder`용
-        // 1회성 플래그. 기존 시더들과 동일한 관례.
+        // SermonGatheringSeeder용 1회성 플래그.
         static let hasSeededSermonGatherings = "settings.sermon.hasSeededGatherings"
-        // [2026-08-14 추가] 개역한글 본문에 한자 주석을 표시하는 방식 — "탭하면
-        // 보기"/"항상 보기(국한문식)"/"끄기" 중 선택. 사용자가 "둘 다 지원,
-        // 설정으로 전환"을 골라 셋 중 고르게 했다.
+        // 개역한글 본문의 한자 주석 표시 방식: 탭하면 보기/항상 보기(국한문식)/끄기.
         static let hanjaDisplayMode = "settings.bible.hanjaDisplayMode"
-        // [2026-08-19 추가] 사용자 요청 — "설정 내 모양 탭의 한자 주석 표시
-        // 밑에 '한자' 폰트를 변경할 수 있는 기능 추가." `bibleFontName`과 같은
-        // 패턴("System" 문자열이면 시스템 기본, 아니면 PostScript 이름) —
-        // 다만 지금은 선택지가 `SpecialPurposeFonts.hanja`(조선궁서체) 하나뿐
-        // 이라 사실상 켜기/끄기에 가깝다.
+        // 한자 주석 폰트 — bibleFontName과 같은 규칙("System"이면 시스템 기본, 아니면 PostScript 이름).
         static let hanjaFontName = "settings.bible.hanjaFontName"
-        // [2026-09-28 3단계(에디터) 추가] 설계 문서(claude/sermon-management-screens-and-schema.md
-        // 3.3절) 확정사항 — 설교 작성 문단 스타일 6종마다 폰트/크기를 사용자가
-        // 나중에 바꿀 수 있어야 한다. `bibleFontName`/`bibleBodyFontSize`와
-        // 완전히 같은 저장 방식(UserDefaults, didSet 즉시 반영)을 스타일당
-        // 2개씩(fontName/fontSize) 그대로 확장한다 — 새 저장 패턴을 만들지 않는다.
+        // 설교 문단 스타일 6종별 폰트/크기 — bibleFontName/bibleBodyFontSize와 같은 저장 방식
+        // (UserDefaults, didSet 즉시 반영).
         static let sermonMainThemeFontName = "settings.sermon.mainTheme.fontName"
         static let sermonMainThemeFontSize = "settings.sermon.mainTheme.fontSize"
         static let sermonMidThemeFontName = "settings.sermon.midTheme.fontName"
@@ -138,33 +95,21 @@ final class UserSettingsStore {
         static let sermonCitationFontSize = "settings.sermon.citation.fontSize"
         static let sermonBodyFontName = "settings.sermon.body.fontName"
         static let sermonBodyFontSize = "settings.sermon.body.fontSize"
-        // [2026-09-29 6번 항목 추가] 문단 스타일별 글자 색상 — 위 fontName/
-        // fontSize와 완전히 같은 저장 방식(UserDefaults, didSet 즉시 반영,
-        // hex 문자열). `bibleTextColorHex`처럼 "비어 있으면 시스템 기본"이
-        // 아니라 항상 값이 채워져 있다 — 사용자가 "각 스타일의 폰트크기,
-        // 폰트 색상, 줄간격을 제안할 것"이라 요청했으므로(추측이 아니라
-        // 명시적 요청), init에서 목업(Editor.dc.html) 기반 제안값으로 채운다.
+        // 문단 스타일별 글자 색상(hex). bibleTextColorHex와 달리 빈 값이 없고, init에서 항상
+        // 기본값이 채워진다.
         static let sermonMainThemeFontColorHex = "settings.sermon.mainTheme.fontColorHex"
         static let sermonMidThemeFontColorHex = "settings.sermon.midTheme.fontColorHex"
         static let sermonSubThemeFontColorHex = "settings.sermon.subTheme.fontColorHex"
         static let sermonVerseQuoteFontColorHex = "settings.sermon.verseQuote.fontColorHex"
         static let sermonCitationFontColorHex = "settings.sermon.citation.fontColorHex"
         static let sermonBodyFontColorHex = "settings.sermon.body.fontColorHex"
-        // [2026-09-29 6-2번 항목 추가] 말씀구절 "박스" 배경색(목업 --accent-soft) —
-        // 다른 5종 스타일엔 배경 박스 요구사항이 없어(사용자 요청에 말씀구절만
-        // "박스 안에 왼쪽 바 + 내용"으로 명시됨) 이 스타일 전용으로만 둔다.
+        // 말씀구절 박스 배경색 — 이 스타일만 배경 박스를 가진다.
         static let sermonVerseQuoteBackgroundColorHex = "settings.sermon.verseQuote.backgroundColorHex"
-        // [2026-09-29 6-2번 항목, 뷰어 확장] 말씀구절 박스 왼쪽 세로 바 색 —
-        // 목업 `--accent`(#7A3B42, 중주제 색과 같은 값)를 그대로 가리키되,
-        // 나중에 중주제 색과 독립적으로 바꿀 수 있도록 별도 키로 둔다(뷰어는
-        // 이 색을 순정 SwiftUI로 그릴 수 있어 에디터와 달리 왼쪽 바까지 바로
-        // 구현한다 — `SermonViewerView.paragraphText` 참고).
+        // 말씀구절 박스 왼쪽 세로 바 색 — 기본값은 중주제 색과 같지만, 독립적으로 바꿀 수
+        // 있도록 별도 키로 둔다(SermonViewerView.paragraphText).
         static let sermonVerseQuoteBarColorHex = "settings.sermon.verseQuote.barColorHex"
-        // [2026-09-28 4단계(뷰어) 신설] 설계 문서 2.2 S-SER3 — 글꼴 확대 배율
-        // (80~200%)과 스크롤/페이지 넘김 모드를 기억해 둔다. 6종 스타일별
-        // 절대 크기(위)와 달리 이건 "전체 배율" 하나뿐이다 — 뷰어에서
-        // "상대 크기 비율은 유지한 채 전체 배율만 바뀐다"는 설계 문서
-        // 확정사항 그대로.
+        // 설교 뷰어의 전체 글꼴 배율(80~200%)과 스크롤/페이지 넘김 모드. 스타일별 크기와 달리
+        // 전체 배율 하나뿐이며 상대 크기 비율은 유지된다.
         static let sermonViewerFontScale = "settings.sermon.viewer.fontScale"
         static let sermonViewerUsesPageMode = "settings.sermon.viewer.usesPageMode"
     }
@@ -185,8 +130,7 @@ final class UserSettingsStore {
         }
     }
 
-    /// 성경 장절 표기를 감싸는 괄호 스타일. 사용자 요청 예시 그대로 두 가지만—
-    /// [창세기 1:1] / (창세기 1:1).
+    /// 성경 장절 표기를 감싸는 괄호 스타일 — [창세기 1:1] / (창세기 1:1).
     enum ReferenceBracketStyle: String, CaseIterable, Identifiable {
         case square, round
         var id: String { rawValue }
@@ -194,7 +138,7 @@ final class UserSettingsStore {
         var suffix: String { self == .square ? "]" : ")" }
     }
 
-    /// 절 번호 표시 스타일. 사용자 요청 예시 그대로 세 가지 — (1), [1], 1).
+    /// 절 번호 표시 스타일 — (1), [1], 1).
     enum VerseNumberStyle: String, CaseIterable, Identifiable {
         case parenthesis, bracket, closingParen
         var id: String { rawValue }
@@ -214,9 +158,8 @@ final class UserSettingsStore {
         }
     }
 
-    /// [2026-08-14 추가] 개역한글 본문 한자 주석 표시 방식. `.off`가 기본값 —
-    /// 두 번째 번들 번역본(국한문)을 없앤 대신 넣는 기능이라, 기존에 이 화면을
-    /// 안 쓰던 사용자에게 갑자기 낯선 한자가 나타나지 않게 안전한 값으로 시작한다.
+    /// 개역한글 본문 한자 주석 표시 방식. `.off`가 기본값 — 기존 사용자에게 갑자기
+    /// 낯선 한자가 나타나지 않게 한다.
     enum HanjaDisplayMode: String, CaseIterable, Identifiable {
         /// 한자 주석을 표시하지 않는다.
         case off
@@ -234,7 +177,7 @@ final class UserSettingsStore {
         }
     }
 
-    /// 8.1 "시작 시 마지막으로 보던 화면 열기"(기본 켜짐).
+    /// "시작 시 마지막으로 보던 화면 열기"(기본 켜짐).
     var openLastScreenOnLaunch: Bool {
         didSet { defaults.set(openLastScreenOnLaunch, forKey: Key.openLastScreenOnLaunch) }
     }
@@ -265,24 +208,15 @@ final class UserSettingsStore {
         }
     }
 
-    /// 8.6 화면 모드.
+    /// 화면 모드.
     var colorSchemePreference: ColorSchemePreference {
         didSet { defaults.set(colorSchemePreference.rawValue, forKey: Key.colorSchemePreference) }
     }
 
-    /// [2026-09-29 신설] 사용자 요청 — "화면모드의 요소를 선택하면, 테마
-    /// 색상 선택이 해제되어야 함(\"시스템 기본색상으로 되돌리기\" 기본
-    /// 적용)." `AppearanceSettingsTab`의 "화면 모드" 세그먼트 Picker는 이제
-    /// `colorSchemePreference`를 직접 바꾸는 대신 이 함수를 거친다 — 기존에
-    /// 있던 "시스템 기본색상으로 되돌리기" 버튼(사용자 요청으로 제거,
-    /// `AppearanceSettingsTab` 참고)이 하던 일과 정확히 같은 동작(배경/
-    /// 글자 hex를 빈 문자열로, `bibleThemeModePreference`를 nil로)을 화면
-    /// 모드를 고를 때마다 자동으로 대신 해 준다. `didSet` 관찰자 대신 이렇게
-    /// 별도 함수로 만든 이유는, 아래 `applyThemeMode`도 반대 방향으로
-    /// `colorSchemePreference`를 바꾸기 때문이다 — 두 프로퍼티에 서로를
-    /// 되돌리는 `didSet`을 걸면 상호 되먹임(그리고 `init` 도중 아직 초기화
-    /// 안 된 프로퍼티에 접근할 위험)이 생기는데, 이렇게 "UI가 호출하는
-    /// 명시적 함수" 두 개로만 연동 지점을 한정하면 그 위험이 없다.
+    /// 화면 모드를 고를 때 호출한다 — 테마 색상 선택을 해제한다(배경/글자 hex를 빈 문자열로,
+    /// `bibleThemeModePreference`를 nil로). `didSet` 대신 명시적 함수로 둔 이유: `applyThemeMode`가
+    /// 반대 방향으로 `colorSchemePreference`를 바꾸므로, 서로를 되돌리는 `didSet`을 걸면
+    /// 상호 되먹임과 `init` 중 미초기화 프로퍼티 접근 위험이 생긴다.
     func selectColorScheme(_ preference: ColorSchemePreference) {
         colorSchemePreference = preference
         bibleBackgroundColorHex = ""
@@ -290,95 +224,72 @@ final class UserSettingsStore {
         markThemeModeAsCustom()
     }
 
-    /// 8.4 "장 개요 작성 시 AI 초안 제안 받기"(기본 켜짐) — `OutlineViewModel.
+    /// "장 개요 작성 시 AI 초안 제안 받기"(기본 켜짐) — `OutlineViewModel.
     /// isAIDraftAvailable`이 이 값과 `ChapterOutlineDraftService.isDraftAvailable`을
     /// AND로 묶어 최종 버튼 표시 여부를 정한다.
     var isAIChapterDraftEnabled: Bool {
         didSet { defaults.set(isAIChapterDraftEnabled, forKey: Key.aiChapterDraftEnabled) }
     }
 
-    /// [2026-08-19 추가] `BibleIndexOnboardingOverlay`가 앱 첫 실행 시 딱 한 번만
-    /// 뜨도록 막는 플래그. 사용자가 "백그라운드에서 계속하기"로 넘기든, 색인이
-    /// 실제로 끝나든, 어느 쪽이든 한 번 보여준 뒤엔 true로 바뀐다 — 색인 진행
-    /// 상태 자체는 `EmbeddingIndexingService.shared.status`가 앱을 껐다 켜도
-    /// 그대로 남아 있으므로(디스크 파일 기반), 이 플래그는 오직 "안내 화면을
-    /// 또 띄울지"만 결정한다.
+    /// `BibleIndexOnboardingOverlay`를 첫 실행 때 한 번만 띄우기 위한 플래그. "안내 화면을 또
+    /// 띄울지"만 결정하며, 색인 진행 상태는 `EmbeddingIndexingService.shared.status`가 디스크
+    /// 기반으로 유지한다.
     var hasOfferedBibleIndexOnboarding: Bool {
         didSet { defaults.set(hasOfferedBibleIndexOnboarding, forKey: Key.hasOfferedBibleIndexOnboarding) }
     }
 
-    /// [2026-08-28 추가] `AppOnboardingOverlay.swift`가 앱 첫 실행 시 5페이지
-    /// 가이드 카루셀을 딱 한 번만 보여주도록 막는 완료 플래그. 버튼으로 끝까지
-    /// 넘기든 스와이프로 시트를 내리든(`onDismiss`에서 처리) 상관없이 true로
-    /// 바뀐다. 이 값이 true가 되는 순간 `lastSeenAppVersion`도 현재 버전으로
-    /// 같이 기록해, 방금 설치를 마친 사람에게 "새 소식" 화면이 곧바로 뜨지
-    /// 않도록 한다(`WhatsNewOverlay.swift` 참고).
+    /// `AppOnboardingOverlay`의 첫 실행 가이드를 한 번만 보여주기 위한 완료 플래그(버튼으로
+    /// 끝까지 넘기든 시트를 내리든 true). true가 될 때 `lastSeenAppVersion`도 현재 버전으로
+    /// 기록해, 방금 설치한 사람에게 "새 소식" 화면이 바로 뜨지 않게 한다.
     var hasCompletedOnboarding: Bool {
         didSet { defaults.set(hasCompletedOnboarding, forKey: Key.hasCompletedOnboarding) }
     }
 
-    /// [2026-08-28 추가] `WhatsNewOverlay.swift`가 마지막으로 "새 소식" 화면을
-    /// 보여준 시점의 앱 버전(`CFBundleShortVersionString`). 앱 실행 시 이 값과
-    /// 현재 버전이 다르면(그리고 `hasCompletedOnboarding`이 true이면) 해당 버전의
-    /// `WhatsNewContent` 항목을 찾아 보여주고, 보여준 뒤 현재 버전으로 갱신한다.
-    /// 아직 한 번도 기록된 적 없으면(신규 설치) nil.
+    /// `WhatsNewOverlay`가 마지막으로 "새 소식"을 보여준 앱 버전(`CFBundleShortVersionString`).
+    /// 현재 버전과 다르고 `hasCompletedOnboarding`이 true이면 해당 버전 내용을 보여준 뒤 갱신한다.
+    /// 기록이 없으면(신규 설치) nil.
     var lastSeenAppVersion: String? {
         didSet { defaults.set(lastSeenAppVersion, forKey: Key.lastSeenAppVersion) }
     }
 
-    /// 8.1 "기본 성경 번역본" 피커. `TranslationRegistry.code`를 저장한다 — S1이
+    /// "기본 성경 번역본" 피커. `TranslationRegistry.code`를 저장한다 — S1이
     /// 아직 아무 번역본도 선택되지 않은 첫 진입 시(`BibleReadingViewModel.
     /// loadAvailableTranslations`) 이 코드를 우선 표시하도록 반영했다.
     var defaultTranslationCode: String? {
         didSet { defaults.set(defaultTranslationCode, forKey: Key.defaultTranslationCode) }
     }
 
-    /// [2026-08-07 추가, 원본 문서 재확인으로 발견한 누락] screens.md 8.3 "성경
-    /// 조회(S1) 기본 표시 3개 체크박스 선택" — `defaultTranslationCode`(8.1, 단일
-    /// 선택 "맨 앞으로 당기기" 용도)와는 다른 별개 항목이다. 여기엔 S1이 처음 열릴
-    /// 때 3개 컬럼에 기본으로 띄울 번역본을 사용자가 직접 고른 목록(등록 순서와
-    /// 무관하게, 고른 순서 그대로)을 저장한다. 비어 있으면(기본값) `BibleReadingViewModel
-    /// .loadAvailableTranslations()`가 기존처럼 "등록 순 + defaultTranslationCode
-    /// 맨 앞" 규칙으로 대체한다 — 즉 이 설정은 "있으면 우선, 없으면 기존 동작 유지"다.
+    /// S1이 처음 열릴 때 3개 컬럼에 기본으로 띄울 번역본 목록(고른 순서 그대로). 단일 선택인
+    /// `defaultTranslationCode`(맨 앞으로 당기기)와는 별개다. 비어 있으면
+    /// `BibleReadingViewModel.loadAvailableTranslations()`가 "등록 순 + defaultTranslationCode
+    /// 맨 앞" 규칙으로 대체한다.
     var defaultDisplayedTranslationCodes: [String] {
         didSet { defaults.set(defaultDisplayedTranslationCodes, forKey: Key.defaultDisplayedTranslationCodes) }
     }
 
-    /// [2026-08-07 추가, 원본 문서 재확인으로 발견한 누락] screens.md 8.2(동기화)
-    /// "마지막 동기화 시각" 표시 항목 — 지금까지 SyncSettingsTab엔 이 정보 자체가
-    /// 없었다. `modelContext.save()`가 성공한 시각을 기록할 뿐, 실제 iCloud 업로드
-    /// 완료 시각은 아니다(SwiftData/CloudKit엔 "지금 업로드 다 됐다"를 알려주는
-    /// 표준 API가 없다 — SyncSettingsTab의 기존 ⚠️ 주석과 같은 한계) — 그래서
-    /// "마지막으로 로컬 저장을 시도한 시각"이라는 의미로만 쓴다.
+    /// "마지막 동기화 시각" — `modelContext.save()`가 성공한 시각일 뿐 실제 iCloud 업로드
+    /// 완료 시각은 아니다(SwiftData/CloudKit에 완료를 알려주는 표준 API가 없음). 즉 "마지막으로
+    /// 로컬 저장을 시도한 시각"의 의미로만 쓴다.
     var lastManualSyncAt: Date? {
         didSet { defaults.set(lastManualSyncAt, forKey: Key.lastManualSyncAt) }
     }
 
     // MARK: - S1 표시 폰트 (2026-08-08 추가)
 
-    /// `NSFontManager.shared.availableFontFamilies`/`UIFont.familyNames`에서 고른
-    /// 글꼴 이름, 내장 Paperlogy 폰트의 PostScript 이름(`BundledFonts.entries`),
-    /// 또는 "System"(시스템 기본 서체). [2026-08-08 변경] 사용자 요청으로 기본값을
-    /// "System"에서 내장 기본 글꼴(`BundledFonts.defaultPostScriptName` =
-    /// "Paperlogy-4Regular")로 바꿨다 — 아직 Xcode 타겟에 폰트 파일이 등록되지
-    /// 않아 실제로 로드되지 않는 상태여도, `bibleBodyFont`가 알아서 시스템 폰트로
-    /// 대체하므로 안전하다(BundledFontRegistrar.swift 상단 주석 참고).
-    /// [2026-08-11] 한때 이 기본값을 "System"으로 되돌렸다가, 사용자 요청이
-    /// 이 S1 성경 조회 글꼴이 아니라 "환경설정 화면 자체의 메뉴/타이틀 글꼴"을
-    /// 가리킨 것으로 확인돼 다시 원래대로(내장 Paperlogy) 되돌렸다 — 환경설정
-    /// 화면 자체의 글꼴은 대신 SettingsView.swift/JBCHBibleResearchApp.swift에서
-    /// 처리한다(`.appDefaultFont()`를 그 화면들에만 적용하지 않는 방식).
+    /// 글꼴 이름 — 시스템 글꼴 목록에서 고른 이름, 내장 Paperlogy 폰트의 PostScript 이름
+    /// (`BundledFonts.entries`), 또는 "System"(시스템 기본 서체). 기본값은 내장 기본 글꼴
+    /// (`BundledFonts.defaultPostScriptName`)이며, 폰트가 로드되지 않았어도 `bibleBodyFont`가
+    /// 시스템 폰트로 대체한다(BundledFontRegistrar.swift 참고).
     var bibleFontName: String {
         didSet { defaults.set(bibleFontName, forKey: Key.bibleFontName) }
     }
 
-    /// 본문(절 텍스트) 크기. 기존 `TranslationColumnView`가 고정으로 쓰던
-    /// `.font(.body)`(시스템 기본, 대략 17pt)를 대체한다.
+    /// 본문(절 텍스트) 크기.
     var bibleBodyFontSize: Double {
         didSet { defaults.set(bibleBodyFontSize, forKey: Key.bibleBodyFontSize) }
     }
 
-    /// 절 번호(맨 앞 숫자) 크기. 기존엔 `.font(.caption)`(고정)이었다.
+    /// 절 번호(맨 앞 숫자) 크기.
     var bibleVerseNumberFontSize: Double {
         didSet { defaults.set(bibleVerseNumberFontSize, forKey: Key.bibleVerseNumberFontSize) }
     }
@@ -388,11 +299,8 @@ final class UserSettingsStore {
         didSet { defaults.set(bibleLineSpacing, forKey: Key.bibleLineSpacing) }
     }
 
-    /// [2026-08-20 추가] 사용자 요청 — "성경조회표시 - 본문색상 위 절 간격 조절
-    /// 기능추가". `bibleLineSpacing`(한 절 안에서 줄바꿈될 때의 줄간격)과는
-    /// 다른 값이다 — 이건 절과 절(각 `VerseRow`) 사이의 간격으로,
-    /// `TranslationColumnView.columnScrollView`의 `LazyVStack(spacing:)`에
-    /// 전달한다(기존엔 10으로 고정돼 있었다).
+    /// 절과 절(각 `VerseRow`) 사이 간격 — `TranslationColumnView.columnScrollView`의
+    /// `LazyVStack(spacing:)`에 전달한다. 한 절 안의 줄간격(`bibleLineSpacing`)과는 별개다.
     var bibleVerseSpacing: Double {
         didSet { defaults.set(bibleVerseSpacing, forKey: Key.bibleVerseSpacing) }
     }
@@ -405,38 +313,22 @@ final class UserSettingsStore {
         didSet { defaults.set(bibleTextColorHex, forKey: Key.bibleTextColorHex) }
     }
 
-    /// [2026-09-01 추가] 사용자 요청 — "성경 조회 배경색/글자색 테마색상 추가."
-    /// 배경색도 위 `bibleTextColorHex`와 완전히 같은 패턴(빈 문자열 = 시스템
-    /// 기본 배경, 사용자가 명시적으로 고르기 전엔 손대지 않음)으로 저장한다.
+    /// 배경색도 `bibleTextColorHex`와 같은 패턴으로 저장한다(빈 문자열 = 시스템 기본 배경).
     var bibleBackgroundColorHex: String {
         didSet { defaults.set(bibleBackgroundColorHex, forKey: Key.bibleBackgroundColorHex) }
     }
 
-    /// [2026-09-11 신설] 사용자 논의 — "테마 색상 5개 중 실제로 안 쓸 것
-    /// 같은 조합이 대부분이니 2개(서재 아이보리/밤빛 서재)로 줄이고, 화면
-    /// 모드(`ColorSchemePreference`)와 비슷하게 라이트/다크/자동으로 고르게
-    /// 할 것" — 다만 화면 모드와는 독립적인 별도 설정으로 둔다(예: 화면
-    /// 모드는 다크인데 성경 본문만 밝게 읽고 싶은 조합도 가능해야 하므로).
-    /// `nil`은 세 값 중 어디에도 해당하지 않는 "커스텀" 상태 — 아래 "배경색/
-    /// 글자색 직접 선택" `ColorPicker`로 임의 색을 고르면 이 상태가 된다
-    /// (`markThemeModeAsCustom()` 참고). `Optional`인 이유는 `AppearanceSettingsTab`의
-    /// 3단 `Picker`가 "셋 중 아무것도 선택 안 됨"을 그대로 표현할 수 있게
-    /// 하기 위함 — `ColorSchemePreference`(화면 모드)처럼 매번 반드시 셋 중
-    /// 하나여야 하는 값이 아니다.
+    /// 테마 색상 자동/라이트/다크 3단 선택. 화면 모드(`ColorSchemePreference`)와는 독립적인
+    /// 설정이다(예: 화면 모드는 다크여도 성경 본문만 밝게 읽을 수 있어야 함). `nil`은 셋 중
+    /// 어디에도 해당하지 않는 "커스텀" 상태(`markThemeModeAsCustom()`)이며, 3단 `Picker`가
+    /// "선택 없음"을 표현할 수 있도록 Optional로 둔다.
     enum BibleThemeModePreference: String, CaseIterable, Identifiable {
-        // [2026-09-29 변경] 사용자 요청 — "테마 색상 탭 순서 변경: 자동 ->
-        // 맨 앞으로." `CaseIterable.allCases`는 case 선언 순서를 그대로
-        // 따르므로(런타임에 정렬하지 않음), `AppearanceSettingsTab`의 3단
-        // Picker가 자동/라이트/다크 순으로 보이도록 선언 순서 자체를
-        // 바꿨다 — `: String` raw value는 각 case의 "이름"에서 그대로
-        // 오므로(선언 순서와 무관) "light"/"dark"/"auto" 문자열 자체는
-        // 그대로다. 즉 이미 `UserDefaults`에 저장돼 있던 기존 값도 이
-        // 변경만으로는 전혀 깨지지 않는다.
+        // `allCases`는 선언 순서를 따르므로 Picker에 자동/라이트/다크 순으로 보이도록 이 순서로
+        // 선언했다. raw value는 case 이름에서 오므로 순서를 바꿔도 저장된 기존 값은 깨지지 않는다.
         case auto, light, dark
         var id: String { rawValue }
         var displayName: String {
             switch self {
-            // [2026-09-29 변경] 사용자 요청 — 탭 텍스트 변경.
             case .auto: return "자동 변경"
             case .light: return "연한 금박"
             case .dark: return "밤빛 남색"
@@ -448,11 +340,9 @@ final class UserSettingsStore {
         didSet { defaults.set(bibleThemeModePreference?.rawValue, forKey: Key.bibleThemeModePreference) }
     }
 
-    /// `mode`(또는 `.auto`일 때 `systemColorScheme`으로 판정한 실제 라이트/
-    /// 다크)에 대응하는 `BibleSlideColorTheme`의 배경/글자 hex 쌍. 두 프리셋
-    /// 이름("서재 아이보리"/"밤빛 서재")은 `BibleSlideColorTheme.swift`의
-    /// 2026-09-11 축소 이후 배열에 그대로 남아 있는 이름을 그대로 참조한다 —
-    /// 새 색을 만들지 않는다.
+    /// `mode`(`.auto`이면 `systemColorScheme`으로 판정한 라이트/다크)에 대응하는
+    /// `BibleSlideColorTheme`의 배경/글자 hex 쌍. 프리셋 "서재 아이보리"/"밤빛 서재"를
+    /// 이름으로 참조한다.
     private static func fixedThemeHex(
         for mode: BibleThemeModePreference,
         systemColorScheme: ColorScheme
@@ -463,23 +353,15 @@ final class UserSettingsStore {
         return (theme.backgroundHex, theme.textHex)
     }
 
-    /// "테마 색상" 3단(라이트/다크/자동) 중 하나를 사용자가 직접 골랐을 때
-    /// `AppearanceSettingsTab`이 호출한다 — 모드를 저장하고, 그에 맞는 배경/
-    /// 글자 hex를 그 자리에서 바로 반영한다(기존 스와치 탭 방식과 같은
-    /// 메커니즘). "자동"을 고른 경우에도 이 호출 시점의 `systemColorScheme`
-    /// 기준으로 즉시 한 번 반영되고, 이후 상태가 바뀔 때마다
-    /// `syncAutoThemeIfNeeded(systemColorScheme:)`가 다시 불러 갱신한다.
+    /// 테마 색상 3단 중 하나를 골랐을 때 `AppearanceSettingsTab`이 호출한다 — 모드를 저장하고
+    /// 그에 맞는 배경/글자 hex를 즉시 반영한다. "자동"은 이후 상태가 바뀔 때마다
+    /// `syncAutoThemeIfNeeded(systemColorScheme:)`가 다시 갱신한다.
     func applyThemeMode(_ mode: BibleThemeModePreference, systemColorScheme: ColorScheme) {
         bibleThemeModePreference = mode
         let hex = Self.fixedThemeHex(for: mode, systemColorScheme: systemColorScheme)
         bibleBackgroundColorHex = hex.background
         bibleTextColorHex = hex.text
-        // [2026-09-29 추가] 사용자 요청 — "테마색상의 요소를 선택하면 …
-        // 라이트 탭 => 테마색상 라이트 + 화면모드 라이트 기본 적용 / 다크
-        // 탭 => …다크 + 화면모드 다크 기본 적용 / 자동 탭 => …자동 +
-        // 화면모드 시스템 따름 기본 적용." 위 `selectColorScheme(_:)`와
-        // 반대 방향의 연동 — 테마 색상을 고르면 화면 모드도 그에 맞춰
-        // 함께 바뀐다.
+        // 화면 모드도 함께 맞춘다(`selectColorScheme(_:)`의 반대 방향 연동).
         switch mode {
         case .light: colorSchemePreference = .light
         case .dark: colorSchemePreference = .dark
@@ -499,10 +381,8 @@ final class UserSettingsStore {
         bibleTextColorHex = hex.text
     }
 
-    /// 사용자가 "배경색/글자색 직접 선택" `ColorPicker`나 "시스템 기본색상으로
-    /// 되돌리기" 버튼으로 hex를 직접 바꾸면, 3단(라이트/다크/자동) 중 어디에도
-    /// 더 이상 해당하지 않는 상태가 된다 — `AppearanceSettingsTab`이 그
-    /// 시점에 이 함수를 호출해 `bibleThemeModePreference`를 nil로 되돌리고,
+    /// 사용자가 `ColorPicker`로 hex를 직접 바꾸면 3단 어디에도 해당하지 않게 된다 —
+    /// `AppearanceSettingsTab`이 이 함수로 `bibleThemeModePreference`를 nil로 되돌려
     /// 3단 Picker가 "선택 없음"으로 보이게 한다.
     func markThemeModeAsCustom() {
         bibleThemeModePreference = nil
@@ -510,12 +390,10 @@ final class UserSettingsStore {
 
     // MARK: - 성경 구절 복사 형식 (2026-08-08 추가)
     //
-    // 사용자가 참고 소스로 올린 FormatTabView.swift의 설정 항목을 이 앱의 저장
-    // 방식(UserDefaults 기반 @Observable 프로퍼티)으로 옮긴 것 — 이름과 의미는
-    // 최대한 그대로 유지했다. 다만 FormatTabView.swift에는 없던 항목 하나를
-    // 추가했다: `copyTranslationLabelPosition` — 이 앱은 S1에서 번역본을 최대
-    // 3개까지 나란히 볼 수 있어서, 여러 번역본을 한꺼번에 복사할 때 "번역본
-    // 이름표를 본문 앞/뒤 중 어디에 둘지"가 원본 앱에는 없던 새로운 결정 지점이다.
+    // 참고 소스 FormatTabView.swift의 설정 항목을 이 앱의 저장 방식(UserDefaults 기반
+    // @Observable 프로퍼티)으로 옮긴 것. `copyTranslationLabelPosition`은 이 앱에서 추가한
+    // 항목 — S1에서 번역본을 최대 3개까지 나란히 볼 수 있어, 여러 번역본을 복사할 때 번역본
+    // 이름표를 본문 앞/뒤 어디에 둘지 정해야 하기 때문이다.
 
     var copyReferencePosition: TextPosition {
         didSet { defaults.set(copyReferencePosition.rawValue, forKey: Key.copyReferencePosition) }
@@ -539,10 +417,8 @@ final class UserSettingsStore {
         didSet { defaults.set(copyNewlineBetweenVerses, forKey: Key.copyNewlineBetweenVerses) }
     }
 
-    /// `copyNewlineBetweenVerses`가 켜져 있을 때만 의미가 있다 — 켜면 매 절마다
-    /// "장:절 본문" 형태로 반복하고, 이 경우 절 번호 표시는 의미가 없어져
-    /// 자동으로 무시된다(BibleVerseCopyFormatter 참고, FormatTabView.swift의
-    /// `.disabled(repeatReferenceForEachVerse)`와 같은 원칙).
+    /// `copyNewlineBetweenVerses`가 켜져 있을 때만 의미가 있다 — 켜면 매 절마다 "장:절 본문"
+    /// 형태로 반복하고, 이때 절 번호 표시는 자동으로 무시된다(BibleVerseCopyFormatter 참고).
     var copyRepeatReferenceForEachVerse: Bool {
         didSet { defaults.set(copyRepeatReferenceForEachVerse, forKey: Key.copyRepeatReferenceForEachVerse) }
     }
@@ -562,7 +438,7 @@ final class UserSettingsStore {
         didSet { defaults.set(copyShowFirstVerseNumber, forKey: Key.copyShowFirstVerseNumber) }
     }
 
-    /// [2026-08-08 추가] `copyReferencePosition`과 `copyTranslationLabelPosition`이
+    /// `copyReferencePosition`과 `copyTranslationLabelPosition`이
     /// 같은 쪽(둘 다 본문 앞 또는 둘 다 본문 뒤)일 때만 의미가 있다. 켜면 한
     /// 괄호 안에 합친다 — 예: "[NKJV 창세기 1:1]". 끄면 같은 괄호 스타일로 각각
     /// 감싸 나란히 붙인다 — 예: "[NKJV][창세기 1:1]". 두 위치가 다르면 이 설정과
@@ -571,15 +447,13 @@ final class UserSettingsStore {
         didSet { defaults.set(copyCombineReferenceAndTranslationLabel, forKey: Key.copyCombineReferenceAndTranslationLabel) }
     }
 
-    /// [2026-08-13 추가] `OutlineSeedImporter.importIfNeeded` 참고 — 앱 번들에
-    /// 든 기본 개요(`OutlineSeed.sqlite`)를 사용자 DB로 딱 한 번만 복사하기 위한
-    /// 완료 플래그.
+    /// `OutlineSeedImporter.importIfNeeded`용 — 번들 기본 개요(`OutlineSeed.sqlite`)를
+    /// 사용자 DB로 한 번만 복사했는지.
     var hasImportedOutlineSeed: Bool {
         didSet { defaults.set(hasImportedOutlineSeed, forKey: Key.hasImportedOutlineSeed) }
     }
 
-    /// [2026-08-14 추가] 개요 트리(`OutlineTreeView`)에서 펼쳐 둔 구약/신약 —
-    /// 값은 `"old"`/`"new"`(`Testament.rawValue`)만 들어간다.
+    /// 개요 트리(`OutlineTreeView`)에서 펼쳐 둔 구약/신약 — `"old"`/`"new"`(`Testament.rawValue`)만 들어간다.
     var outlineExpandedTestaments: [String] {
         didSet { defaults.set(outlineExpandedTestaments, forKey: Key.outlineExpandedTestaments) }
     }
@@ -589,74 +463,58 @@ final class UserSettingsStore {
         didSet { defaults.set(outlineExpandedBookIds, forKey: Key.outlineExpandedBookIds) }
     }
 
-    /// [2026-08-14 추가] `CrossReferenceSeedImporter.importIfNeeded` 참고 — 앱
-    /// 번들에 든 기본 관주(`Resources/CrossReferenceSeed.json`)를 사용자 DB로
-    /// 딱 한 번만 복사하기 위한 완료 플래그. `hasImportedOutlineSeed`와 동일한
-    /// 패턴.
+    /// `CrossReferenceSeedImporter.importIfNeeded`용 — 번들 기본 관주
+    /// (`Resources/CrossReferenceSeed.json`)를 사용자 DB로 한 번만 복사했는지.
     var hasImportedCrossReferenceSeed: Bool {
         didSet { defaults.set(hasImportedCrossReferenceSeed, forKey: Key.hasImportedCrossReferenceSeed) }
     }
 
-    /// [2026-08-14 추가] `MarginalNoteSeedImporter.importIfNeeded` 참고 — 앱
-    /// 번들에 든 기본 난외주(`Resources/MarginalNoteSeed.json`)를 사용자 DB로
-    /// 딱 한 번만 복사하기 위한 완료 플래그.
+    /// `MarginalNoteSeedImporter.importIfNeeded`용 — 번들 기본 난외주
+    /// (`Resources/MarginalNoteSeed.json`)를 사용자 DB로 한 번만 복사했는지.
     var hasImportedMarginalNoteSeed: Bool {
         didSet { defaults.set(hasImportedMarginalNoteSeed, forKey: Key.hasImportedMarginalNoteSeed) }
     }
 
-    /// [2026-08-14 추가] `HanjaAnnotationSeedImporter.importIfNeeded` 참고 — 앱
-    /// 번들에 든 `Resources/HanjaAnnotationSeed.json`을 사용자 DB로 딱 한 번만
-    /// 복사하기 위한 완료 플래그.
+    /// `HanjaAnnotationSeedImporter.importIfNeeded`용 — 번들
+    /// `Resources/HanjaAnnotationSeed.json`을 사용자 DB로 한 번만 복사했는지.
     var hasImportedHanjaAnnotationSeed: Bool {
         didSet { defaults.set(hasImportedHanjaAnnotationSeed, forKey: Key.hasImportedHanjaAnnotationSeed) }
     }
 
-    /// [2026-08-15 추가] `ReferenceDataMigration.cleanupLegacyBundledRecords` 참고 —
-    /// 예전 방식(JSON→SwiftData 1회성 시딩)으로 이미 들어간 번들 관주/난외주
-    /// 레코드를 1회성으로 정리했는지.
+    /// `ReferenceDataMigration.cleanupLegacyBundledRecords`용 — JSON→SwiftData 시딩으로 이미
+    /// 들어간 번들 관주/난외주 레코드를 1회성으로 정리했는지.
     var hasCleanedUpLegacyBundledReferenceData: Bool {
         didSet { defaults.set(hasCleanedUpLegacyBundledReferenceData, forKey: Key.hasCleanedUpLegacyBundledReferenceData) }
     }
 
-    /// [2026-09-28 추가] `SermonGatheringSeeder.seedIfNeeded` 참고 — 기본 모임
-    /// 종류(주일설교/청년회 말씀/구역모임/조모임)를 1회성으로 시딩했는지.
+    /// `SermonGatheringSeeder.seedIfNeeded`용 — 기본 모임 종류(주일설교/청년회 말씀/구역모임/조모임)를
+    /// 시딩했는지.
     var hasSeededSermonGatherings: Bool {
         didSet { defaults.set(hasSeededSermonGatherings, forKey: Key.hasSeededSermonGatherings) }
     }
 
-    /// [2026-08-14 추가] `TranslationColumnView`가 개역한글 컬럼을 그릴 때 참고하는
-    /// 한자 주석 표시 방식.
+    /// `TranslationColumnView`가 개역한글 컬럼을 그릴 때 참고하는 한자 주석 표시 방식.
     var hanjaDisplayMode: HanjaDisplayMode {
         didSet { defaults.set(hanjaDisplayMode.rawValue, forKey: Key.hanjaDisplayMode) }
     }
 
-    /// [2026-08-19 추가] 한자 주석(성경 조회 인라인 표시 + 확대보기 한자
-    /// 뜻풀이)에 쓰는 폰트. `bibleFontName`과 똑같이 "System"이면 시스템 기본,
-    /// 아니면 그 PostScript 이름을 그대로 쓴다. 기본값은 이 프로젝트가 번들한
-    /// 조선궁서체(`SpecialPurposeFonts.hanja`) — 등록에 실패해도(Fonts 폴더가
-    /// 타겟에 아직 안 걸려 있는 경우 등) `Font.custom`이 알아서 시스템 폰트로
-    /// 대체하므로 안전하다(`BundledFontRegistrar.swift` 상단 주석과 같은 안전망).
+    /// 한자 주석(성경 조회 인라인 표시 + 확대보기 한자 뜻풀이)에 쓰는 폰트. `bibleFontName`과
+    /// 같은 규칙이며 기본값은 번들 조선궁서체(`SpecialPurposeFonts.hanja`). 등록되지 않았어도
+    /// `Font.custom`이 시스템 폰트로 대체한다.
     var hanjaFontName: String {
         didSet { defaults.set(hanjaFontName, forKey: Key.hanjaFontName) }
     }
 
     // MARK: - 설교 작성 문단 스타일 폰트 (3단계, 2026-09-28 추가)
     //
-    // [설계 근거] claude/sermon-management-screens-and-schema.md 3.3 — 문단
-    // 스타일별 기본값(대주제=Paperlogy-8ExtraBold/34pt, 중주제=Paperlogy-6SemiBold/24pt,
+    // 문단 스타일별 기본값(대주제=Paperlogy-8ExtraBold/34pt, 중주제=Paperlogy-6SemiBold/24pt,
     // 소주제=Paperlogy-5Medium/16pt, 말씀구절=ChosunGs/20pt, 본문=GowunBatang-Regular/19pt,
-    // 인용=AppleGothic/17pt)은 이미 발행된 HTML 목업의 BASE_PX 값을 그대로
-    // 이어받은 확정값이다 — 여기서 새로 지어낸 숫자가 아니다.
+    // 인용=AppleGothic/17pt)은 설계 문서 3.3의 확정값이다.
     //
-    // ⚠️ [플랫폼 확인 필요] `sermonCitationFontName`의 기본값 "AppleGothic"은
-    // 이 앱이 번들한 폰트가 아니라 시스템 폰트다(BundledFontRegistrar.swift
-    // 확인 결과 — Paperlogy/GowunBatang/ChosunGs 세 이름만 번들돼 있고
-    // "AppleGothic"은 어디에도 없다). macOS엔 오래전부터 내장된 것으로
-    // 알려져 있으나 iOS/iPadOS에도 정확히 같은 PostScript 이름으로 있는지는
-    // 이 세션에서 실기기 확인이 불가능해 검증하지 못했다(설계 문서 3.3 동일
-    // 경고). 없으면 `Font.custom`이 조용히 시스템 기본 폰트로 대체하므로
-    // 크래시는 안 나지만, iOS에서 "인용" 문단이 의도와 다른 폰트로 보일 수
-    // 있다 — Xcode에서 실기기로 꼭 확인해 주세요.
+    // ⚠️ `sermonCitationFontName`의 기본값 "AppleGothic"은 번들 폰트가 아닌 시스템 폰트다.
+    // macOS에는 내장돼 있으나 iOS/iPadOS에 같은 PostScript 이름이 있는지는 검증하지 못했다.
+    // 없으면 `Font.custom`이 시스템 기본 폰트로 대체하므로 크래시는 없지만, "인용" 문단이
+    // 의도와 다른 폰트로 보일 수 있다.
     var sermonMainThemeFontName: String {
         didSet { defaults.set(sermonMainThemeFontName, forKey: Key.sermonMainThemeFontName) }
     }
@@ -718,17 +576,13 @@ final class UserSettingsStore {
         didSet { defaults.set(sermonVerseQuoteBarColorHex, forKey: Key.sermonVerseQuoteBarColorHex) }
     }
 
-    /// [2026-09-28 4단계(뷰어) 신설] "Aa" 컨트롤이 조절하는 전체 배율
-    /// (0.8~2.0, 기본 1.0 = 100%) — 3.3절 표의 스타일별 크기에 곱해져 상대
-    /// 비율은 유지된다(`UserSettingsStore.sermonFont(for:scale:)` 참고).
+    /// 뷰어 "Aa" 컨트롤이 조절하는 전체 배율(0.8~2.0, 기본 1.0). 스타일별 크기에 곱해져
+    /// 상대 비율은 유지된다(`sermonFont(for:scale:)`).
     var sermonViewerFontScale: Double {
         didSet { defaults.set(sermonViewerFontScale, forKey: Key.sermonViewerFontScale) }
     }
-    /// [2026-09-28 4단계(뷰어) 신설] 좌우 페이지 넘기기(true)/세로 스크롤
-    /// (false) 중 사용자가 마지막으로 선택한 모드 — 설계 문서 2.2 S-SER3
-    /// "사용자가 선택한 모드를 기억합니다". 요구사항 문서가 기본값을 못박지
-    /// 않아, 처음 열었을 때 내용이 잘려 보일 걱정이 없는 세로 스크롤을
-    /// 기본값(false)으로 뒀다 — 사용자 확인 필요(보고서 참고).
+    /// 좌우 페이지 넘기기(true)/세로 스크롤(false) 중 마지막으로 선택한 모드. 기본값은
+    /// 내용이 잘려 보일 걱정이 없는 세로 스크롤(false).
     var sermonViewerUsesPageMode: Bool {
         didSet { defaults.set(sermonViewerUsesPageMode, forKey: Key.sermonViewerUsesPageMode) }
     }
@@ -751,21 +605,10 @@ final class UserSettingsStore {
         self.bibleVerseNumberFontSize = defaults.object(forKey: Key.bibleVerseNumberFontSize) as? Double ?? 12
         self.bibleLineSpacing = defaults.object(forKey: Key.bibleLineSpacing) as? Double ?? 4
         self.bibleVerseSpacing = defaults.object(forKey: Key.bibleVerseSpacing) as? Double ?? 10
-        // [2026-09-09 수정] 사용자 요청 — "색상 자체는 이미 있으니, 먼저
-        // 기본값만 바꿔볼 것." 지금까지는 설정을 한 번도 안 건드린 사용자도
-        // 시스템 기본(라이트=흰 배경/검정 글자, 다크=검정 배경/흰 글자)으로
-        // 시작했다 — 이제 `BibleSlideColorTheme`의 "서재 아이보리"(#F7F0E2
-        // 배경 + #241A10 글자, 참고 화면과 거의 같은 톤)로 시작하게 한다.
-        // ⚠️ 주의: `bibleTextColorHex`/`bibleBackgroundColorHex`의 빈 문자열
-        // ("")은 이미 "설정 화면의 [시스템 기본색상으로 되돌리기] 버튼을 눌러
-        // 명시적으로 시스템 기본으로 되돌린 상태"라는 의미로도 쓰이고 있다
-        // (바로 위 두 프로퍼티 선언부 주석 참고) — "한 번도 설정 안 함"과
-        // "설정했다가 명시적으로 되돌림"을 구분하지 않고 그냥 "비어있으면
-        // 서재 아이보리로 채운다"로 바꾸면, 되돌리기 버튼을 눌러도 다시는
-        // 진짜 시스템 기본으로 못 돌아가는 회귀가 생긴다. 그래서 `UserDefaults`에
-        // 그 키 자체가 한 번도 저장된 적이 없을 때(`defaults.object(forKey:)
-        // == nil`, 순수 신규 상태)만 새 기본값을 쓰고, 이미 값이 저장돼
-        // 있으면(빈 문자열 포함, 즉 되돌리기를 눌렀던 경우) 그 저장된 값을
+        // 설정을 한 번도 건드리지 않은 신규 사용자는 "서재 아이보리" 테마로 시작한다.
+        // ⚠️ 빈 문자열("")은 "명시적으로 시스템 기본으로 되돌린 상태"로도 쓰이므로, 비어 있다고
+        // 채우면 시스템 기본으로 돌아갈 수 없게 된다. 그래서 키 자체가 저장된 적 없을 때
+        // (`defaults.object(forKey:) == nil`)만 새 기본값을 쓰고, 저장된 값은 빈 문자열이어도
         // 그대로 존중한다.
         let defaultReadingTheme = BibleSlideColorTheme.all.first { $0.name == "서재 아이보리" }
         if defaults.object(forKey: Key.bibleTextColorHex) == nil {
@@ -778,12 +621,9 @@ final class UserSettingsStore {
         } else {
             self.bibleBackgroundColorHex = defaults.string(forKey: Key.bibleBackgroundColorHex) ?? ""
         }
-        // [2026-09-11 추가] 위 "순수 신규 설치" 판정을 그대로 재사용 — 신규
-        // 설치는 방금 위에서 hex를 "서재 아이보리"로 채웠으니 모드도 `.light`로
-        // 맞춘다. 기존 사용자는 저장된 모드 문자열이 있으면 그대로 존중하고,
-        // 없으면(이 기능이 생기기 전부터 쓰던 경우) 커스텀(nil)으로 둔다 —
-        // 그 사람의 기존 hex가 이번에 삭제된 3개 프리셋 중 하나였을 수 있어
-        // 남은 2개 중 하나로 임의로 단정하지 않는다.
+        // 위 "순수 신규 설치" 판정을 재사용 — 신규 설치는 모드도 `.light`로 맞춘다. 기존
+        // 사용자는 저장된 모드를 존중하고, 없으면 커스텀(nil)으로 둔다(기존 hex가 삭제된
+        // 프리셋 중 하나였을 수 있어 남은 2개 중 하나로 단정하지 않는다).
         if defaults.object(forKey: Key.bibleTextColorHex) == nil {
             self.bibleThemeModePreference = .light
         } else {
@@ -821,36 +661,23 @@ final class UserSettingsStore {
         self.sermonCitationFontSize = defaults.object(forKey: Key.sermonCitationFontSize) as? Double ?? 17
         self.sermonBodyFontName = defaults.string(forKey: Key.sermonBodyFontName) ?? "GowunBatang-Regular"
         self.sermonBodyFontSize = defaults.object(forKey: Key.sermonBodyFontSize) as? Double ?? 19
-        // [2026-09-29 6번 항목 제안값, 출처: 이 세션이 정리한 Editor.dc.html
-        // 목업의 STYLE_DEFS 색상] 대주제/본문은 어두운 무채색(#2B211D, 사용자
-        // 요청 "무채색계열"), 중주제는 기존 액센트 와인색(#7A3B42), 소주제는
-        // 차분한 웜그레이(#6B5D52). 말씀구절은 박스 배경이 구분을 대신하므로
-        // 목업과 같은 어두운 무채색(#2B211D)을 텍스트색으로 쓴다.
-        // [2026-09-29 10번 항목 수정] 사용자 명시 지정 — "[인용] 스타일:
-        // 초록색 계열의 이탤릭체..." 바로 위 라운드에서 "본문/말씀구절과
-        // 대비되게 눈에 띄어야 한다"는 이유로 제안했던 액센트 와인색
-        // (#7A3B42, 중주제와 같은 색)을 이 새 명시적 색 방향으로 덮어쓴다.
-        // 정확한 초록 톤을 지정받지 않아 "초록색 계열"에 맞는 값을 하나
-        // 제안한다 — 이 앱의 기존 팔레트(어두운 무채색/와인색/웜그레이 계열,
-        // 채도를 낮춘 톤 위주)와 어울리도록 원색 그린이 아닌 차분한 세이지
-        // 그린(#3F7355)을 골랐다 — ⚠️ 정확한 색상값은 사용자 확인 필요
-        // (마음에 드는 초록 톤이 따로 있으면 설정 > 인용 폰트 색상에서 바로
-        // 바꿀 수 있다, 이 값은 어디까지나 기본값 제안).
+        // 글자색 기본값(목업 Editor.dc.html의 STYLE_DEFS 기반): 대주제/본문/말씀구절은 어두운
+        // 무채색(#2B211D), 중주제는 와인색(#7A3B42), 소주제는 웜그레이(#6B5D52), 인용은 초록
+        // 계열 지정에 맞춘 차분한 세이지 그린(#3F7355)이다. 정확한 톤이 지정된 값이 아니라
+        // 제안 기본값이며, 설정에서 바꿀 수 있다.
         self.sermonMainThemeFontColorHex = defaults.string(forKey: Key.sermonMainThemeFontColorHex) ?? "#2B211D"
         self.sermonMidThemeFontColorHex = defaults.string(forKey: Key.sermonMidThemeFontColorHex) ?? "#7A3B42"
         self.sermonSubThemeFontColorHex = defaults.string(forKey: Key.sermonSubThemeFontColorHex) ?? "#6B5D52"
         self.sermonVerseQuoteFontColorHex = defaults.string(forKey: Key.sermonVerseQuoteFontColorHex) ?? "#2B211D"
         self.sermonCitationFontColorHex = defaults.string(forKey: Key.sermonCitationFontColorHex) ?? "#3F7355"
         self.sermonBodyFontColorHex = defaults.string(forKey: Key.sermonBodyFontColorHex) ?? "#2B211D"
-        // [2026-09-29 6-2번 항목 제안값, 출처: Editor.dc.html 목업의
-        // --accent-soft] 말씀구절 박스 배경색.
+        // 말씀구절 박스 배경색 기본값(목업의 --accent-soft).
         self.sermonVerseQuoteBackgroundColorHex = defaults.string(forKey: Key.sermonVerseQuoteBackgroundColorHex) ?? "#F3E4E1"
         self.sermonVerseQuoteBarColorHex = defaults.string(forKey: Key.sermonVerseQuoteBarColorHex) ?? "#7A3B42"
         self.sermonViewerFontScale = defaults.object(forKey: Key.sermonViewerFontScale) as? Double ?? 1.0
         self.sermonViewerUsesPageMode = defaults.object(forKey: Key.sermonViewerUsesPageMode) as? Bool ?? false
 
-        // [2026-08-14 추가] 기본값 — 구약을 펼친 채로 시작하는 편이(책이 39권,
-        // 신약보다 훨씬 자주 참조됨) 처음 여는 사용자에게 자연스럽다고 판단했다.
+        // 구약을 펼친 채로 시작한다(39권이라 신약보다 자주 참조됨).
         self.outlineExpandedTestaments = defaults.stringArray(forKey: Key.outlineExpandedTestaments) ?? ["old"]
         self.outlineExpandedBookIds = defaults.array(forKey: Key.outlineExpandedBookIds) as? [Int] ?? []
     }
@@ -876,13 +703,9 @@ extension UserSettingsStore {
         return .custom(bibleFontName, size: bibleVerseNumberFontSize)
     }
 
-    /// `bibleTextColorHex`가 비어 있으면(기본값 — 사용자가 아직 색을 고르지
-    /// 않음) nil을 돌려줘, 호출부가 `.foregroundStyle(.primary)`처럼 시스템
-    /// 기본색(라이트/다크 모드 자동 대응)을 쓰게 한다. `Color+Hex.swift`의 기존
-    /// 단방향 변환(hex → Color)을 그대로 재사용한다 — SwiftUI `Color`에서 값을
-    /// 다시 hex로 뽑아내는 안전한 공개 API가 없다는 그 파일의 기존 제약과 같은
-    /// 이유로, 설정 화면은 자유 색상 선택 대신 `Color.memoTextPalette`와 같은
-    /// 미리 정한 팔레트에서만 고르게 한다(AppearanceSettingsTab 참고).
+    /// `bibleTextColorHex`가 비어 있으면 nil을 돌려줘, 호출부가 시스템 기본색(`.primary`,
+    /// 라이트/다크 자동 대응)을 쓰게 한다. hex → Color 단방향 변환(`Color+Hex.swift`)만 쓴다 —
+    /// SwiftUI `Color`에서 hex를 다시 뽑는 안전한 공개 API가 없기 때문이다.
     var bibleTextColor: Color? {
         guard !bibleTextColorHex.isEmpty else { return nil }
         return Color(hex: bibleTextColorHex)
@@ -896,10 +719,9 @@ extension UserSettingsStore {
         return Color(hex: bibleBackgroundColorHex)
     }
 
-    /// [2026-08-19 추가] `hanjaFontName`을 실제 SwiftUI `Font`로 바꾼다 — 크기는
-    /// 호출부마다 다르므로(성경 조회 인라인은 본문 크기를 따라가고, 확대보기
-    /// 한자 뜻풀이는 17pt 고정) 인자로 받는다. `bibleBodyFont`와 같은 안전망 —
-    /// 폰트가 실제로 등록되지 않았어도 SwiftUI가 알아서 시스템 폰트로 대체한다.
+    /// `hanjaFontName`을 SwiftUI `Font`로 바꾼다. 크기는 호출부마다 달라(성경 조회 인라인은
+    /// 본문 크기, 확대보기 한자 뜻풀이는 17pt 고정) 인자로 받는다. 폰트가 등록되지 않았으면
+    /// SwiftUI가 시스템 폰트로 대체한다.
     func hanjaFont(size: CGFloat) -> Font {
         guard hanjaFontName != "System" else { return .system(size: size) }
         BundledFontRegistrar.ensureAvailable(hanjaFontName)
@@ -907,12 +729,10 @@ extension UserSettingsStore {
     }
 
 
-    /// [2026-09-28 3단계(에디터) 추가] `SermonParagraphStyle` 문단 스타일 하나를
-    /// 실제 SwiftUI `Font`로 바꾼다 — `bibleBodyFont`/`hanjaFont(size:)`와 같은
-    /// 안전망(폰트가 등록되지 않았으면 SwiftUI가 시스템 기본으로 대체).
-    /// `SermonParagraphEditor`(NSAttributedString 기반)는 이 값이 아니라 아래
-    /// `sermonPlatformFont(for:)`(UIFont/NSFont)를 쓴다 — 이 함수는 그 외
-    /// 순정 SwiftUI 화면(예: 문단 스타일 드롭다운의 라벨 미리보기)을 위한 것.
+    /// `SermonParagraphStyle` 하나를 SwiftUI `Font`로 바꾼다(폰트 미등록 시 시스템 기본으로
+    /// 대체). `SermonParagraphEditor`(NSAttributedString 기반)는 이 값 대신 아래
+    /// `sermonPlatformFont(for:)`를 쓰며, 이 함수는 순정 SwiftUI 화면(예: 스타일 드롭다운
+    /// 라벨 미리보기)용이다.
     func sermonFont(for style: SermonParagraphStyle, scale: Double = 1.0) -> Font {
         let name = sermonFontName(for: style)
         let size = sermonFontSize(for: style) * scale
@@ -957,10 +777,8 @@ extension UserSettingsStore {
         }
     }
 
-    /// 문단 스타일별 글자 색상(hex 문자열) — 위 두 함수와 같은 이유로 한 곳에
-    /// 모았다. `bibleTextColorHex`와 달리 빈 문자열이 "시스템 기본 사용"을
-    /// 뜻하지 않는다 — 6종 모두 항상 구체적인 제안값을 갖는다(위 `init` 주석
-    /// 참고).
+    /// 문단 스타일별 글자 색상(hex). `bibleTextColorHex`와 달리 빈 문자열이 "시스템 기본"을
+    /// 뜻하지 않고, 6종 모두 항상 구체적인 값을 갖는다(`init` 참고).
     func sermonFontColorHex(for style: SermonParagraphStyle) -> String {
         switch style {
         case .mainTheme: return sermonMainThemeFontColorHex
@@ -1001,17 +819,10 @@ extension UserSettingsStore {
         Color(hex: sermonVerseQuoteBarColorHex) ?? Color(hex: "#7A3B42")!
     }
 
-    /// 문단 스타일별 줄간격 배수 — `RichTextEditor.lineHeightMultiple`과 같은
-    /// 용어 해석(1.0 = 추가 줄간격 없음).
-    /// [2026-09-29 6번 항목 제안값, 출처: Editor.dc.html 목업의 STYLE_DEFS
-    /// line-height] 대주제/중주제/소주제=1.4(목업과 동일), 말씀구절=1.7(목업의
-    /// 인용구 박스 줄간격과 동일한 값을 재사용 — 목업이 말씀구절 자체엔 별도
-    /// line-height를 명시하지 않아, 같은 "박스형" 문단인 인용구 값을 이어받은
-    /// 것 — 사용자 확인 필요).
-    /// [2026-09-29 11번 항목 수정] 사용자 명시 지정 — "[본문] 스타일 : 줄간격
-    /// 160%." 바로 앞 라운드에서 설계 문서 3.3의 "기존 확정값"이라 적어 뒀던
-    /// 1.85를 이 새 명시값(1.6)으로 덮어쓴다 — 기존 확정값을 실수로 되돌리는
-    /// 것이 아니라, 사용자가 이번에 본문 줄간격만 새 수치로 다시 확정한 것.
+    /// 문단 스타일별 줄간격 배수 — `RichTextEditor.lineHeightMultiple`과 같은 해석(1.0 = 추가
+    /// 줄간격 없음). 대주제/중주제/소주제=1.4, 말씀구절/인용=1.7, 본문=1.6. 목업 STYLE_DEFS의
+    /// line-height 기반이며, 목업이 말씀구절 값을 따로 명시하지 않아 같은 박스형 문단인
+    /// 인용구 값(1.7)을 재사용했다.
     func sermonLineHeightMultiple(for style: SermonParagraphStyle) -> CGFloat {
         switch style {
         case .mainTheme: return 1.4

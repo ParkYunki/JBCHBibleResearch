@@ -2,26 +2,14 @@
 //  ChapterOutlineDraftService.swift
 //  JBCHBibleResearch
 //
-//  screens.md S9 — "AI로 초안 제안" 백엔드. FoundationModels(`SystemLanguageModel`,
-//  iOS/macOS 26+, Apple Intelligence 지원 기기 필요) 위에 얇게 얹은 래퍼다. 완전
-//  온디바이스·무료이며 클라우드 폴백(Private Cloud Compute)은 스펙에서 의도적으로
-//  제외했다.
+//  "AI로 초안 제안" 백엔드. FoundationModels(`SystemLanguageModel`, iOS/macOS 26+,
+//  Apple Intelligence 지원 기기 필요) 위에 얹은 얇은 래퍼로, 완전 온디바이스이며
+//  클라우드 폴백(Private Cloud Compute)은 의도적으로 쓰지 않는다.
 //
-//  ⚠️⚠️ [매우 높은 불확실성, Xcode 실기기 검증 필수] 이 세션엔 Xcode/컴파일러가 없어
-//  FoundationModels API를 실제로 컴파일해 본 적이 없다. 아래 심볼들(`SystemLanguageModel`,
-//  `.default`, `.availability`, `LanguageModelSession`, `session.respond(to:)`,
-//  `response.content`)은 2025년 WWDC 발표 시점 지식을 근거로 작성했고, 그 중
-//  `LanguageModelSession.GenerationError.exceededContextWindowSize`만은 사용자가 준
-//  screens.md 원문(9.9절)에 정확히 그 이름으로 명시돼 있어 신뢰도가 높다. 나머지
-//  세부 시그니처(특히 `Response` 타입의 프로퍼티 이름, `Availability`의 연관값 구조)는
-//  실제 빌드로 재확인이 필요하다 — 컴파일 오류가 나면 정확한 오류 메시지를 알려주면
-//  바로 고치겠다.
-//
-//  `#if canImport(FoundationModels)` + `@available` 이중 가드를 쓴 이유: 이 앱
-//  패키지(Package.swift)의 최소 배포 버전은 macOS(.v15)/iOS(.v18)로, FoundationModels가
-//  요구하는 26보다 훨씬 낮다. canImport로 감싸 두면 이 프레임워크 자체가 없는(더 이전
-//  Xcode/SDK) 환경에서도 이 파일이 컴파일은 되고 "사용 불가"로 조용히 폴백한다 —
-//  S9 스펙의 "미지원 기기: 버튼을 숨김(에러 메시지 없이)" 원칙과 정확히 같은 모양이다.
+//  `#if canImport(FoundationModels)` + `@available` 이중 가드를 쓴 이유: 패키지의 최소
+//  배포 버전(macOS .v15/iOS .v18)이 FoundationModels 요구 버전(26)보다 낮다. canImport로
+//  감싸면 프레임워크가 없는 SDK에서도 컴파일되고 "사용 불가"로 조용히 폴백하므로, 미지원
+//  기기에서는 에러 메시지 없이 버튼을 숨기는 동작과 일치한다.
 //
 
 import Foundation
@@ -41,7 +29,6 @@ enum ChapterOutlineDraftService {
             case .unavailable(let reason):
                 return reason
             case .exceededContextWindow:
-                // S9 스펙 9.9절의 안내 문구를 그대로 썼다.
                 return "이 장은 너무 길어 AI 초안을 만들 수 없습니다."
             case .underlyingFailure(let message):
                 return message
@@ -50,7 +37,7 @@ enum ChapterOutlineDraftService {
     }
 
     /// "AI로 초안 제안" 버튼을 보여줄지 여부. 미지원(OS 버전/기기/Apple Intelligence
-    /// 꺼짐 등) 상태에서는 버튼 자체를 숨긴다(에러 메시지 없이) — S9 스펙 그대로.
+    /// 꺼짐 등)이면 에러 메시지 없이 버튼을 숨긴다.
     static var isDraftAvailable: Bool {
         #if canImport(FoundationModels)
         if #available(iOS 26.0, macOS 26.0, *) {
@@ -66,13 +53,9 @@ enum ChapterOutlineDraftService {
         #endif
     }
 
-    /// 8.4 환경설정 "Apple Intelligence 상태 뱃지"용 3단계 상태.
-    /// ⚠️ `SystemLanguageModel.Availability.UnavailableReason`의 정확한 케이스
-    /// 이름(예: `.deviceNotEligible`/`.appleIntelligenceNotEnabled`)을 이 세션에서
-    /// 컴파일로 확인할 수 없어, 이름으로 직접 패턴 매칭하는 대신 `String(describing:)`
-    /// 결과에 "enabled"가 포함되는지로 "설정에서 꺼짐"과 "기기 자체 미지원"을
-    /// 구분한다 — 케이스 이름이 조금 달라도 이 휴리스틱은 깨지지 않을 가능성이 높다고
-    /// 판단했다(더 안전한 방향으로 타협).
+    /// 환경설정 "Apple Intelligence 상태 뱃지"용 3단계 상태.
+    /// `UnavailableReason`의 케이스 이름으로 직접 매칭하지 않고 `String(describing:)`에
+    /// "enabled"가 포함되는지로 "설정에서 꺼짐"과 "기기 미지원"을 구분한다(휴리스틱).
     enum AppleIntelligenceStatus: Equatable {
         case available
         case deviceUnsupported
@@ -89,8 +72,7 @@ enum ChapterOutlineDraftService {
                 let description = String(describing: reason).lowercased()
                 return description.contains("enabled") ? .disabledInSettings : .deviceUnsupported
             @unknown default:
-                // Apple 프레임워크의 non-frozen enum 대비(라이브러리 진화) — 이 세션에서
-                // 실제로 다른 케이스가 있는지 확인할 수 없어 안전한 쪽(미지원)으로 처리.
+                // non-frozen enum에 새 케이스가 추가될 경우 안전한 쪽(미지원)으로 처리한다.
                 return .deviceUnsupported
             }
         } else {
@@ -103,21 +85,16 @@ enum ChapterOutlineDraftService {
 
     // MARK: - 1단계: 사전 토큰 예산 휴리스틱(9.9절)
 
-    /// ⚠️ [실측 필요] "글자당 토큰 비율"은 Apple의 경험칙(영어 기준 대략 3~4자당
-    /// 1토큰)을 참고했으나 한글 기준으로는 검증된 바가 없다는 것이 스펙 원문의
-    /// 명시적 경고다. 한글은 음절 단위로 정보 밀도가 더 높을 가능성이 있어 보수적으로
-    /// 영어 경험치의 절반(글자당 토큰 소모가 더 크다고 가정) 수준으로 잡아 뒀다 —
-    /// 이 상수 자체가 검증 전 추정치임을 코드 밖에서도 계속 강조해야 한다. 실제
-    /// 기기에서 긴 장(시편 119편 등)으로 실측 후 보정 필요.
+    /// ⚠️ 글자당 토큰 비율은 영어 경험칙(대략 3~4자당 1토큰)을 참고한 추정치이며 한글 기준으로
+    /// 검증되지 않았다. 보수적으로 영어의 절반(글자당 토큰 소모가 더 크다고 가정)으로 잡았다.
+    /// 긴 장(시편 119편 등)으로 실측해 보정해야 한다.
     private static let estimatedCharactersPerToken = 2.0
     private static let promptAndResponseReserveTokens = 1000
-    /// 스펙 9.9절 "약 4K 토큰" 그대로.
+    /// 모델 컨텍스트 윈도우 약 4K 토큰.
     private static let modelContextWindowTokens = 4096
 
-    /// 장 절 본문 글자 수로 미리 걸러 "AI로 초안 제안" 버튼을 비활성화할지 판단한다.
-    /// 이 휴리스틱만 믿지 않고, 실제 생성 중 컨텍스트 초과 오류가 나면 2단계
-    /// (아래 `generateDraft`의 `.exceededContextWindow`)로도 반드시 걸러낸다(9.9절
-    /// "사전 추정만 믿지 않고 반드시 병행").
+    /// 장 본문 글자 수로 미리 걸러 "AI로 초안 제안" 버튼을 비활성화할지 판단한다.
+    /// 추정치이므로 생성 중 컨텍스트 초과 오류도 `generateDraft`에서 반드시 함께 처리한다.
     static func canRequestDraft(forChapterCharacterCount characterCount: Int) -> Bool {
         let estimatedTokens = Double(characterCount) / estimatedCharactersPerToken
         let budget = Double(modelContextWindowTokens - promptAndResponseReserveTokens)
@@ -126,12 +103,9 @@ enum ChapterOutlineDraftService {
 
     // MARK: - 2단계: 실제 생성 + 런타임 안전망(9.9절)
 
-    /// 장 본문을 넘기면 4~5개 주제로 나눈 요약 초안을 반환한다(2026-08-06 사용자
-    /// 지정 프롬프트 — "전문적으로 4~5개정도 주제로 요약, 말투는 간결하게 끝맺을
-    /// 것"). 결과는 편집기에 바로 반영되지 않는다 — 호출부(OutlineViewModel)가
-    /// 별도 미리보기 상태로만 들고 있다가, 사용자가 "편집기에 적용"을 눌러야 실제
-    /// 문서에 반영된다(9.9절 "미리보기 상태에서 그대로 두고 나가면 저장되지 않고
-    /// 사라진다").
+    /// 장 본문을 4~5개 주제로 요약한 초안을 반환한다. 결과는 편집기에 바로 반영되지 않는다.
+    /// 호출부(OutlineViewModel)가 미리보기로만 들고 있다가 사용자가 "편집기에 적용"을 눌러야
+    /// 문서에 반영되며, 그대로 나가면 저장되지 않는다.
     static func generateDraft(bookNameKo: String, chapter: Int, verseText: String) async -> Result<String, DraftError> {
         #if canImport(FoundationModels)
         guard #available(iOS 26.0, macOS 26.0, *) else {
@@ -144,11 +118,7 @@ enum ChapterOutlineDraftService {
             return .failure(.exceededContextWindow)
         }
 
-        // 2026-08-06: 사용자가 지정한 프롬프트 문구를 그대로 반영했다 — "해당
-        // 텍스트를 전문적으로 4~5개정도 주제로 요약할 것. 말투는 간결하게 끝맺을
-        // 것." 책/장 컨텍스트와 부가 제약(구절 번호 언급 금지, 신학적 해석 금지 —
-        // 기존 프롬프트에서 이미 확정돼 있던 조건, 사용자가 새로 바꾸라고 한 부분이
-        // 아니라 그대로 유지)만 앞뒤로 덧붙였다.
+        // 책/장 컨텍스트와 부가 제약(구절 번호 언급 금지, 신학적 해석 금지)을 프롬프트에 덧붙인다.
         let prompt = """
         다음은 성경 \(bookNameKo) \(chapter)장의 본문입니다. 해당 텍스트를
         전문적으로 4~5개정도 주제로 요약할 것. 말투는 간결하게 끝맺을 것. 각
@@ -163,7 +133,7 @@ enum ChapterOutlineDraftService {
             let response = try await session.respond(to: prompt)
             return .success(response.content)
         } catch LanguageModelSession.GenerationError.exceededContextWindowSize {
-            // 1단계 사전 휴리스틱이 틀렸을 때의 2단계 안전망(9.9절).
+            // 1단계 사전 휴리스틱이 틀렸을 때의 안전망.
             return .failure(.exceededContextWindow)
         } catch {
             return .failure(.underlyingFailure(error.localizedDescription))

@@ -2,11 +2,8 @@
 //  ImportedMemoPreviewSheet.swift
 //  JBCHBibleResearch
 //
-//  [2026-09-13 신설] 사용자 요청 — "받은 개인묵상 파일을 열었을 때, 바로
-//  목록에 추가할까요, 아니면 내용을 미리 보여주고 확인(추가/취소)을
-//  받을까요?" → "미리보기 후 확인"을 선택해, 내용을 먼저 보여주고
-//  사용자가 직접 "추가"를 눌러야만 실제로 저장되는 확인 화면이다. 실수로
-//  받은 파일이 조용히 저장되는 일이 없다.
+//  받은 개인묵상 파일을 미리 보여 주고, 사용자가 "추가"를 눌러야만 저장하는
+//  확인 시트. 받은 파일이 조용히 저장되는 일을 막는다.
 //
 
 import SwiftUI
@@ -58,17 +55,8 @@ struct ImportedMemoPreviewSheet: View {
                             Text("태그")
                                 .font(.caption)
                                 .foregroundStyle(.secondary)
-                            // 사용자 결정 — "폴더는 폴더 없음으로 받되, 태그
-                            // 정보는 같이 보내기." 폴더를 여기서 보여주지
-                            // 않는 이유가 이것이다 — 페이로드 자체에 폴더
-                            // 정보를 담지 않으므로(`SharedMemoPayload` 정의
-                            // 참고) 보여줄 것도 없다.
-                            //
-                            // 칩 스타일은 `MemoDetailView.body`의 태그 칩과
-                            // 정확히 같은 값(강조색 15% 채움 + 캡슐)을 그대로
-                            // 옮겨 왔다 — `FlowLayoutHStack`도 그 화면과 같은
-                            // 공용 레이아웃(`Views/Memo/FlowLayoutHStack.swift`)
-                            // 을 재사용한다.
+                            // 폴더는 페이로드에 담기지 않으므로(`SharedMemoPayload` 참고) 여기서 보여주지 않는다.
+                            // 칩 스타일과 `FlowLayoutHStack`은 `MemoDetailView.body`의 태그 칩과 같다.
                             FlowLayoutHStack {
                                 ForEach(payload.tagNames, id: \.self) { name in
                                     Text(name)
@@ -120,9 +108,7 @@ struct ImportedMemoPreviewSheet: View {
             onFinished()
             dismiss()
         } catch {
-            // [2026-09-13] 저장 자체가 실패했을 때는 시트를 닫지 않는다 —
-            // 사용자가 알림을 확인한 뒤 다시 "추가"를 시도하거나 "취소"를
-            // 직접 누를 수 있게, 미리보기 내용을 그대로 남겨 둔다.
+            // 저장 실패 시 시트를 닫지 않고 미리보기를 남겨, 다시 "추가"하거나 "취소"할 수 있게 한다.
             print("[ImportedMemoPreviewSheet] 개인묵상 추가 실패: \(error)")
             saveErrorMessage = error.localizedDescription
         }

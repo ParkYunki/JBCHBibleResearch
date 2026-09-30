@@ -2,50 +2,14 @@
 //  SermonParagraphEditor.swift
 //  JBCHBibleResearch
 //
-//  [2026-09-28 3단계(에디터) 신설] 설계 문서 5장 확정사항 — "기존 `RichTextEditor`는
-//  건드리지 않고, 설교 전용 새 에디터 컴포넌트를 별도로 만든다"(설계 문서 근거:
-//  `RichTextEditor.swift`가 2026-08-09에 "메모장처럼 풀 텍스트, 문단 구분 없음"으로
-//  전면 교체되며 문단 스타일 기능 자체를 의도적으로 제거했다 — 그 결정을 다시
-//  건드리지 않기 위해 별도 컴포넌트로 분리한다). 저수준 `NSTextView`/`UITextView`
-//  래핑 구조 자체는 `RichTextEditor.swift`의 것을 그대로 참고했지만(플랫폼별
-//  `#if os(iOS)/#elseif os(macOS)` 완전 분기, `RichTextEditingProxy`,
-//  `NSTextStorageDelegate` 훅 등 이 프로젝트의 기존 관례), 코드는 공유하지 않고
-//  완전히 새 타입으로 둔다 — 두 컴포넌트가 서로 다른 진화를 해도 서로 건드리지
-//  않게 하기 위함(이 파일의 존재 이유 자체가 "기존 걸 건드리지 않기" 위함이므로).
+//  설교 전용 문단 스타일 에디터. 문단 스타일이 없는 기존 `RichTextEditor`는 건드리지 않고
+//  별도 컴포넌트로 두며, `UITextView`/`NSTextView` 래핑 구조만 같은 관례를 따른다.
 //
-//  ⚠️ [저장 포맷, 중요] `RichTextEditor.swift` 상단 주석에서 직접 확인한 사실 —
-//  `contentHtml`은 실제로는 RTF 문자열이고(2026-08-09부터), RTF는 폰트/색상/
-//  문단정렬 같은 "표준" 서식만 보존하며 커스텀 attribute는 저장 과정에서 사라진다.
-//  그래서 이 에디터는 문단 스타일(`SermonParagraphStyle`)을 `contentHtml`(RTF) 안에
-//  넣지 않고, `Sermon`/`SermonDelivery.paragraphStyles`라는 별도 필드에 병행
-//  저장한다(`SermonParagraphStyleCodec` 참고). RTF 인코딩/디코딩 자체는
-//  `RichTextEditor.swift`의 `RichTextCodec`(같은 모듈, public 아님/internal이라
-//  그대로 재사용 가능)을 그대로 쓴다 — 이 부분까지 새로 만들 근거가 없다.
-//
-//  ⚠️ [렌더링 원칙] 문단 스타일의 실제 폰트/크기/줄간격은 저장 시점에 고정하지
-//  않고, 항상 그 순간의 `UserSettingsStore` 값에서 다시 계산한다(설계 문서 3.3 —
-//  "각 스타일의 폰트/크기는 사용자가 나중에 바꿀 수 있어야 한다"). 즉 이미 저장된
-//  설교라도 에디터를 다시 열면 그 시점의 최신 설정으로 다시 그려진다 — 별도의
-//  "열려 있는 에디터에 설정 변경을 실시간 반영" 메커니즘은 만들지 않았다(설정을
-//  바꾼 뒤 화면을 다시 열면 자연히 최신값으로 보이므로, 그 이상의 복잡도를 더할
-//  근거가 없다고 판단했다).
-//
-//  ⚠️ [굵게/기울임 보존] RTF는 굵게/기울임을 표준 서식으로 정확히 보존한다.
-//  문단 스타일 폰트를 다시 계산해 적용할 때 문단 전체의 `.font`를 통째로
-//  덮어쓰면 이 굵게/기울임 정보가 사라진다 — `SermonParagraphStyleCodec.
-//  fontPreservingBoldItalic(from:applying:)`가 문단 안 각 글자 단위(run)의
-//  기존 굵게/기울임 비트만 골라 새 폰트에 다시 입혀 이 문제를 막는다.
-//
-//  ⚠️ [Xcode 확인 필요] 아래 항목들은 이 세션이 Xcode 빌드/실기기 테스트를 할 수
-//  없어 코드 리뷰만으로 작성됐다 — 실제 빌드 후 반드시 확인해 주세요:
-//    1. `fontPreservingBoldItalic`의 `withSymbolicTraits` 결과(플랫폼별 옵셔널
-//       차이는 `RichTextEditor.swift`의 `togglingTrait` 관례를 그대로 따랐다).
-//    2. `insertVerseQuoteParagraph`의 문단 인덱스 계산 — 특히 빈 문서, 커서가
-//       문서 맨 앞/맨 뒤에 있을 때, 연속된 빈 줄이 있을 때의 경계 케이스.
-//    3. `SermonParagraphStyleCodec.apply`가 문단 수와 저장된 스타일 개수가
-//       어긋난 실제 데이터(예: 사용자가 수동으로 줄바꿈만 추가한 경우)에도
-//       크래시 없이 `.body`로 안전하게 대체하는지.
-//
+//  ⚠️ 저장 포맷: `contentHtml`은 실제로는 RTF이고 커스텀 attribute는 RTF에 남지 않는다.
+//  그래서 문단 스타일(`SermonParagraphStyle`)은 `paragraphStyles` 필드에 별도로 병행 저장한다.
+//  ⚠️ 렌더링: 스타일의 폰트/크기/줄간격은 저장하지 않고 열 때마다 `UserSettingsStore` 현재값으로
+//  다시 계산한다(열려 있는 에디터에 설정 변경을 실시간 반영하지는 않는다). 굵게/기울임은
+//  `fontPreservingBoldItalic`이 글자 단위로 보존한다.
 
 import SwiftUI
 import BibleResearchModels
@@ -58,36 +22,27 @@ import AppKit
 // MARK: - 커스텀 attribute 키
 
 extension NSAttributedString.Key {
-    /// 문단 하나가 어떤 `SermonParagraphStyle`인지 표시하는 커스텀 attribute.
-    /// 값은 `SermonParagraphStyle.rawValue`(String)다. RTF로 저장되지 않으므로
-    /// (상단 주석 참고) 오직 편집 중(in-memory)에만 의미가 있고, 저장은
-    /// `SermonParagraphStyleCodec.export`가 별도 필드로 담당한다.
+    /// 문단 하나의 `SermonParagraphStyle`(rawValue)을 표시하는 커스텀 attribute.
+    /// RTF로 저장되지 않아 편집 중에만 유효하며, 저장은 `SermonParagraphStyleCodec.export`가 담당한다.
     static let sermonParagraphStyle = NSAttributedString.Key("com.jbch.sermon.paragraphStyle")
 }
 
 // MARK: - 문단 스타일 ↔ 저장 문자열 변환
 
 enum SermonParagraphStyleCodec {
-    /// 문단 스타일 배열을 하나의 문자열로 합칠 때 쓰는 구분자 — ASCII Unit
-    /// Separator(U+001F). 사용자가 실제로 타이핑할 수 있는 문자가 아니라서
-    /// `SermonParagraphStyle.rawValue`(영문 카멜케이스)와 절대 충돌하지 않는다.
+    /// 문단 스타일 배열을 합칠 때 쓰는 구분자(ASCII Unit Separator, U+001F) —
+    /// 사용자가 입력할 수 없고 `rawValue`와 충돌하지 않는다.
     static let delimiter = "\u{1F}"
 
-    /// [2026-09-29 5번 항목(수동 서식 항상 유지) 신설] 마지막 저장 시점에 각
-    /// `SermonParagraphStyle`이 실제로 어떤 폰트/크기/색이었는지 찍어 둔 스냅샷
-    /// 한 칸 — `Sermon.styleFontSnapshot`/`SermonDelivery.styleFontSnapshot`
-    /// 상단 주석에 이 값이 왜 필요한지 자세히 적어 뒀다. `applyStyle`이 이
-    /// 스냅샷과 "지금 이 글자의 실제 폰트/색"을 비교해, 다르면 "사용자가
-    /// 수동으로 바꿔 둔 것"으로 보고 보존한다.
+    /// 마지막 저장 시점에 각 스타일이 실제로 어떤 폰트/크기/색이었는지의 스냅샷 한 칸.
+    /// `applyStyle`이 현재 글자의 폰트/색과 비교해 다르면 사용자가 수동 지정한 것으로 보고 보존한다.
     struct StyleSnapshot: Codable {
         var fontName: String
         var fontSize: Double
         var colorHex: String
     }
 
-    /// 지금 `UserSettingsStore`의 6종 스타일 값을 JSON 문자열로 찍는다 — 매
-    /// 저장(`export`가 아니라 `SermonEditorView.save()`가 호출하는 시점)마다
-    /// 새로 계산해 `styleFontSnapshot`에 넣는다.
+    /// 현재 `UserSettingsStore`의 스타일별 값을 JSON 문자열로 찍는다(`SermonEditorView.save()`가 저장 시마다 호출).
     static func captureSnapshot(settings: UserSettingsStore) -> String {
         var dict: [String: StyleSnapshot] = [:]
         for style in SermonParagraphStyle.allCases {
@@ -101,10 +56,8 @@ enum SermonParagraphStyleCodec {
         return json
     }
 
-    /// 저장된 스냅샷 문자열을 `[SermonParagraphStyle: StyleSnapshot]`로
-    /// 되돌린다 — 비어 있거나(처음 저장되는 문서) 디코딩에 실패하면(과거
-    /// 데이터 등) 빈 딕셔너리를 돌려줘, 호출부가 "스냅샷 없음 = 아직 아무것도
-    /// 수동 지정된 적 없음"으로 안전하게 처리하게 한다.
+    /// 저장된 스냅샷 문자열을 되돌린다. 비어 있거나 디코딩에 실패하면 빈 딕셔너리
+    /// ("아직 수동 지정된 적 없음")를 돌려준다.
     static func decodeSnapshot(_ raw: String) -> [SermonParagraphStyle: StyleSnapshot] {
         guard !raw.isEmpty, let data = raw.data(using: .utf8),
               let dict = try? JSONDecoder().decode([String: StyleSnapshot].self, from: data) else { return [:] }
@@ -116,12 +69,8 @@ enum SermonParagraphStyleCodec {
         return result
     }
 
-    /// 편집기 텍스트 스토리지를 문단(`NSString.enumerateSubstrings(options:
-    /// .byParagraphs)`, Apple 표준 API — 직접 인덱스를 계산하는 것보다 경계
-    /// 케이스에 안전하다) 단위로 순회하며 각 문단의 `.sermonParagraphStyle`
-    /// attribute를 읽어 저장용 문자열로 합친다. attribute가 없는 문단(예: 옛
-    /// 데이터를 막 불러온 직후, 아직 `apply`를 거치지 않은 상태)은 `.body`로
-    /// 채운다.
+    /// 텍스트 스토리지를 `.byParagraphs`로 순회하며 문단별 `.sermonParagraphStyle`을 읽어
+    /// 저장용 문자열로 합친다. attribute가 없는 문단은 `.body`로 채운다.
     static func export(from textStorage: NSTextStorage) -> String {
         let fullText = textStorage.string as NSString
         guard fullText.length > 0 else { return "" }
@@ -136,12 +85,8 @@ enum SermonParagraphStyleCodec {
         return styles.joined(separator: delimiter)
     }
 
-    /// 저장된 문자열을 실제 텍스트 스토리지에 되돌린다 — 각 문단에
-    /// `.sermonParagraphStyle` attribute를 심고, 그 스타일의 "현재" 설정값
-    /// (폰트/크기/줄간격)을 적용한다. 문단 수와 저장된 개수가 어긋나면(과거
-    /// 데이터, 수동 편집 등) 모자란 자리는 `.body`로 채운다 — 에디터가 절대
-    /// 크래시하지 않아야 한다는 이 프로젝트의 기존 방어적 원칙
-    /// (`BundledFontRegistrar` 등)과 동일하다.
+    /// 저장된 문자열을 텍스트 스토리지에 되돌려 문단별 스타일 attribute와 현재 설정값을 적용한다.
+    /// 문단 수와 저장 개수가 어긋나면 모자란 자리는 `.body`로 채워 크래시를 막는다.
     static func apply(_ stored: String, to textStorage: NSTextStorage, settings: UserSettingsStore, previousSnapshot: String = "") {
         let raw = stored.isEmpty ? [] : stored.components(separatedBy: delimiter)
         let fullText = textStorage.string as NSString
@@ -160,17 +105,10 @@ enum SermonParagraphStyleCodec {
         textStorage.endEditing()
     }
 
-    /// 문단 하나(`paragraphRange`)에 스타일 하나를 적용하는 실제 로직 —
-    /// `apply(_:to:settings:previousSnapshot:)`(불러오기)와 편집기의 스타일
-    /// pill(사용자가 지금 고르는 경우) 양쪽이 공유한다.
-    ///
-    /// [2026-09-29 5번 항목 확장] `previousSnapshot`(마지막 저장 시점의 프리셋
-    /// 값, 비어 있으면 "아직 아무것도 수동 지정된 적 없음")과 "지금 이 글자의
-    /// 실제 폰트/색"을 비교해 다르면 사용자가 수동으로 지정한 것으로 보고
-    /// 그대로 둔다 — 같으면(또는 스냅샷이 아예 없으면) 새 프리셋값을 새로
-    /// 계산해 적용한다(기존 동작, 굵게/기울임은 계속 보존). 정렬은 프리셋
-    /// 자체가 값을 지정하지 않으므로(항상 `.natural`) "natural이 아니면 곧
-    /// 수동 지정"으로 판단한다 — 별도 스냅샷이 필요 없다.
+    /// 문단 하나에 스타일을 적용한다(불러오기와 스타일 pill 선택 양쪽에서 공유).
+    /// `previousSnapshot`과 현재 글자의 실제 폰트/색이 다르면 수동 지정으로 보고 유지하고,
+    /// 같거나 스냅샷이 없으면 프리셋을 새로 적용한다(굵게/기울임은 보존). 정렬은 프리셋이
+    /// 값을 지정하지 않으므로(`.natural`) natural이 아니면 수동 지정으로 본다.
     static func applyStyle(
         _ style: SermonParagraphStyle, to paragraphRange: NSRange,
         in textStorage: NSTextStorage, settings: UserSettingsStore,
@@ -192,12 +130,7 @@ enum SermonParagraphStyleCodec {
             guard !isManualFont else { return }
             var resolvedFont = fontPreservingBoldItalic(from: originalFont, applying: baseFont)
             if style == .citation {
-                // [2026-09-29 10번 항목] 사용자 요청 — "[인용] 스타일:
-                // 초록색 계열의 이탤릭체..." 굵게/기울임은 원래 사용자가
-                // 직접 켠 것만 보존하는 게 이 함수의 원래 취지(파일 상단
-                // 주석)지만, 인용 스타일은 "항상 이탤릭"이 스타일 자체의
-                // 고정 속성이므로 위에서 보존한 굵게 비트는 그대로 두고
-                // 기울임만 추가로 강제한다.
+                // 인용은 "항상 이탤릭"이 스타일 고정 속성이므로, 보존한 굵게 비트는 두고 기울임만 강제한다.
                 resolvedFont = italicVariant(of: resolvedFont)
             }
             textStorage.addAttribute(.font, value: resolvedFont, range: subrange)
@@ -221,44 +154,19 @@ enum SermonParagraphStyleCodec {
                 paragraphStyle.alignment = existingAlignment
             }
             if style == .verseQuote {
-                // [2026-09-29 6-2번 항목] 목업의 "박스 안 왼쪽 바 + 내용" 중
-                // 안쪽 여백만 문단 들여쓰기로 흉내낸다 — 왼쪽 세로 바 자체는
-                // `NSAttributedString`/`NSParagraphStyle` 표준 attribute로
-                // 표현할 방법이 없고(커스텀 `NSLayoutManager` 서브클래스가
-                // 필요한 저수준 작업), 이 세션은 Xcode 빌드/실기기 렌더링
-                // 확인이 불가능해 검증 못 할 그림 그리기 코드를 프로덕션에
-                // 넣지 않는다는 원칙에 따라 이번엔 배경색 박스(아래
-                // `.backgroundColor`)까지만 구현한다 — 왼쪽 바는 Xcode에서
-                // 직접 확인하며 추가해야 하는 후속 작업으로 남긴다.
+                // 왼쪽 세로 바는 표준 attribute로 표현할 수 없어(커스텀 `NSLayoutManager` 필요)
+                // 에디터에서는 안쪽 여백과 배경색 박스까지만 구현한다.
                 paragraphStyle.headIndent = 14
                 paragraphStyle.firstLineHeadIndent = 14
                 paragraphStyle.paragraphSpacingBefore = 6
                 paragraphStyle.paragraphSpacing = 6
             }
             if style == .citation {
-                // [2026-09-29 10번 항목] 사용자 요청 — "왼쪽여백 10pt +
-                // 오른쪽여백 10pt." 왼쪽은 `verseQuote`와 같은 방식
-                // (`headIndent`/`firstLineHeadIndent`), 오른쪽은
-                // `NSParagraphStyle.tailIndent`를 음수로 주면 "trailing
-                // margin(오른쪽 끝)에서부터의 거리"가 된다는 Apple 표준
-                // 문서화된 동작(양수면 leading margin 기준 절대 위치,
-                // 0 이하면 trailing margin 기준 상대 거리)을 그대로 쓴 것 —
-                // 이 프로젝트가 지금까지 우측 여백을 준 적이 없어 새로
-                // 도입하지만, 커스텀 그리기가 필요한 `verseQuote` 왼쪽
-                // 바와 달리 표준 attribute만으로 완결되는 값이라 별도
-                // 검증 없이 적용한다.
+                // 오른쪽 여백은 `tailIndent`를 음수로 주면 trailing margin 기준 거리가 된다.
                 //
-                // ⚠️ [보류] "문단 위아래 점선(구분선)"은 `NSAttributedString`/
-                // `NSParagraphStyle` 표준 attribute로 표현할 방법이 없다
-                // (밑줄/취소선은 텍스트 줄 위치에 그려질 뿐, 문단 블록
-                // 전체 폭에 걸친 위아래 테두리와는 다르다) — 위 `verseQuote`
-                // 왼쪽 바와 정확히 같은 이유(커스텀 `NSLayoutManager`
-                // 서브클래스 필요, 이 세션은 Xcode 렌더링 확인 불가)로
-                // 에디터 쪽은 이번에 구현하지 않는다. 대신 읽기 전용
-                // 뷰어(`SermonViewerView.paragraphText`)는 순정 SwiftUI라
-                // `Path`+`StrokeStyle(dash:)`로 바로 그릴 수 있어 거기엔
-                // 넣었다 — verseQuote가 "에디터는 배경색만, 뷰어는 왼쪽
-                // 바까지" 였던 것과 같은 구조.
+                // ⚠️ 문단 위아래 점선(구분선)은 표준 attribute로 표현할 수 없어(커스텀
+                // `NSLayoutManager` 필요) 에디터에서는 구현하지 않았고, 읽기 전용 뷰어
+                // (`SermonViewerView.paragraphText`)에서만 그린다.
                 paragraphStyle.headIndent = 10
                 paragraphStyle.firstLineHeadIndent = 10
                 paragraphStyle.tailIndent = -10
@@ -273,20 +181,10 @@ enum SermonParagraphStyleCodec {
         }
     }
 
-    /// [2026-09-29 10번 항목] `style == .citation`에 강제로 이탤릭 비트만
-    /// 추가한다 — `fontPreservingBoldItalic`과 같은 계열(굵게/기울임 비트만
-    /// 옮기고 패밀리 분류 비트는 옮기지 않아 `withSymbolicTraits` 실패
-    /// 가능성을 줄임)이나, 원본 폰트의 기존 비트가 아니라 항상 이탤릭을
-    /// "추가"한다는 점만 다르다.
+    /// 인용 스타일용으로 원본 폰트에 이탤릭 비트를 강제로 추가한다. 실패 시 원래 폰트를 반환한다.
     ///
-    /// ⚠️ [Xcode 확인 필요] `withSymbolicTraits`는 그 폰트 패밀리가 이탤릭
-    /// 변형을 지원하지 않으면(커스텀 한글 폰트 다수가 별도 이탤릭 글리프를
-    /// 만들지 않음) 실패할 수 있다 — 실패 시 `?? font`로 원래(직립) 폰트를
-    /// 그대로 반환하는 기존 방어적 관례를 따랐다. 지금 인용 스타일에 쓰는
-    /// 폰트(`UserSettingsStore.sermonFontName(for: .citation)`)가 실제
-    /// 이탤릭을 지원하는지는 빌드 후 화면으로 확인해야 한다 — 지원하지
-    /// 않으면 시스템이 자동으로 "가짜 기울임(synthetic oblique)"을 그릴 수도,
-    /// 아무 변화가 없을 수도 있다(플랫폼/폰트에 따라 다름).
+    /// ⚠️ 폰트 패밀리가 이탤릭 변형을 지원하지 않으면(커스텀 한글 폰트 다수) 적용되지 않거나
+    /// 시스템의 가짜 기울임으로 그려질 수 있다.
     static func italicVariant(of font: PlatformFont) -> PlatformFont {
         #if os(iOS)
         var traits = font.fontDescriptor.symbolicTraits
@@ -294,13 +192,7 @@ enum SermonParagraphStyleCodec {
         guard let descriptor = font.fontDescriptor.withSymbolicTraits(traits) else { return font }
         return UIFont(descriptor: descriptor, size: font.pointSize)
         #elseif os(macOS)
-        // [2026-09-29 수정] `fontPreservingBoldItalic` 바로 위와 동일한 플랫폼
-        // 차이 -- `NSFontDescriptor.withSymbolicTraits`는 iOS의
-        // `UIFontDescriptor` 판(옵셔널)과 달리 macOS에서는 옵셔널이 아니다
-        // (non-optional 반환). 처음 `guard let`으로 썼던 건 iOS 쪽 시그니처를
-        // 그대로 옮긴 실수였고, 그대로 두면 "조건부 바인딩 초기화 값이
-        // Optional 타입이 아니다" 컴파일 에러가 난다 -- 바로 위 함수가 이미
-        // 쓰는 형태로 바로잡는다.
+        // macOS의 `NSFontDescriptor.withSymbolicTraits`는 iOS와 달리 옵셔널이 아니다.
         var traits = font.fontDescriptor.symbolicTraits
         traits.insert(.italic)
         let descriptor = font.fontDescriptor.withSymbolicTraits(traits)
@@ -308,15 +200,9 @@ enum SermonParagraphStyleCodec {
         #endif
     }
 
-    /// [2026-09-28 4단계(뷰어) 신설] 뷰어(`SermonViewerView`)는 `NSTextStorage`를
-    /// 만들지 않고 저장된 `contentText`(순수 문자열) + `paragraphStyles`만으로
-    /// 읽기 전용 렌더링을 한다 — `export(from:)`가 텍스트 스토리지의 `.string`을
-    /// 같은 `.byParagraphs` 옵션으로 순회해 만든 배열이 바로 이 `storedStyles`이므로
-    /// (`RichTextCodec.encode`가 `contentText`로 넘기는 값도 `attributed.string`,
-    /// 즉 텍스트 스토리지의 문자열 그대로 — `SermonParagraphEditor.swift` 상단
-    /// 주석 참고), 저장된 `text`를 여기서도 똑같이 `.byParagraphs`로 순회하면
-    /// 인덱스가 어긋나지 않는다. 문단 수와 저장된 스타일 개수가 어긋나면(과거
-    /// 데이터 등) `apply(_:to:settings:)`와 동일하게 `.body`로 안전하게 채운다.
+    /// 뷰어용 — 저장된 `contentText`와 `paragraphStyles`만으로 문단 배열을 만든다.
+    /// `export(from:)`와 같은 `.byParagraphs` 순회라 인덱스가 어긋나지 않으며,
+    /// 개수가 어긋나면 `apply`와 동일하게 `.body`로 채운다.
     static func parseParagraphs(text: String, styles storedStyles: String) -> [(text: String, style: SermonParagraphStyle)] {
         let fullText = text as NSString
         guard fullText.length > 0 else { return [] }
@@ -333,18 +219,9 @@ enum SermonParagraphStyleCodec {
         return result
     }
 
-    /// [2026-09-29 7번 항목 신설] 사용자 요청 — "성경구절 선택시(단일, 다중)
-    /// 하단 기능에 '설교작성' 메뉴 추가" — 사용자 확정: 누르면 항상 새 설교
-    /// 작성 화면을 연다(구절을 각각 `.verseQuote` 문단으로 자동 삽입). 이
-    /// 함수는 그 "삽입된 상태"를 살아있는 `UITextView`/`NSTextView` 없이
-    /// 미리 만든다 — `BibleReadingView`는 아직 에디터 화면 자체를 열기 전이라
-    /// (에디터가 열려야만 `SermonParagraphEditingProxy.textView`가 생긴다)
-    /// `insertVerseQuoteParagraph`(살아있는 텍스트뷰 전용)를 재사용할 수 없다.
-    /// 대신 임시 `NSTextStorage`에 문단별로 `applyStyle(.verseQuote, ...)`를
-    /// 직접 적용해 완전히 같은 서식(굵게/기울임 없음, 프리셋 폰트/색/박스)을
-    /// 만든 뒤 `RichTextCodec.encode`/`export(from:)`로 저장 가능한 형태(RTF+
-    /// 순수텍스트+문단스타일 문자열)까지 만들어 돌려준다 — `Sermon(contentHtml:
-    /// contentText:paragraphStyles:)`에 그대로 넣을 수 있다.
+    /// 성경구절 선택 → 새 설교 작성 시, 구절들을 `.verseQuote` 문단으로 삽입한 문서를 살아있는
+    /// 텍스트뷰 없이 임시 `NSTextStorage`로 미리 만든다(에디터가 열리기 전이라 `insertVerseQuoteParagraph`
+    /// 를 쓸 수 없음). RTF, 순수텍스트, 문단스타일 문자열을 돌려준다.
     static func buildVerseQuoteDocument(verseTexts: [String], settings: UserSettingsStore) -> (rtf: String, plainText: String, paragraphStyles: String) {
         guard !verseTexts.isEmpty else { return ("", "", "") }
         let storage = NSTextStorage()
@@ -363,14 +240,9 @@ enum SermonParagraphStyleCodec {
         return (rtf, plain, styles)
     }
 
-    /// ⚠️ [Xcode 확인 필요, 파일 상단 주석 참고] `originalFont`의 굵게/기울임
-    /// 비트만 골라 `applying`(현재 설정의 패밀리+크기)에 다시 입힌다.
-    /// `applying.fontDescriptor.symbolicTraits` 전체를 그대로 복사하지 않는
-    /// 이유 — 원래 폰트 계열의 분류 비트(예: 세리프)까지 함께 옮기면, 새
-    /// 계열(예: 산세리프)의 디스크립터가 그 조합을 지원하지 않아
-    /// `withSymbolicTraits`가 실패할 수 있다. 그래서 굵게/기울임 두 비트만
-    /// 골라 옮긴다 — `RichTextEditor.swift`의 `togglingTrait`와 같은 계열의
-    /// 방어적 처리(실패하면 원래 폰트를 그대로 반환).
+    /// `originalFont`의 굵게/기울임 비트만 골라 `applying`(현재 설정의 패밀리+크기)에 다시 입힌다.
+    /// 분류 비트(세리프 등)까지 복사하면 새 패밀리가 그 조합을 지원하지 않아
+    /// `withSymbolicTraits`가 실패할 수 있어 두 비트만 옮기며, 실패하면 `baseFont`를 반환한다.
     static func fontPreservingBoldItalic(from originalFont: PlatformFont, applying baseFont: PlatformFont) -> PlatformFont {
         #if os(iOS)
         let mask: UIFontDescriptor.SymbolicTraits = [.traitBold, .traitItalic]
@@ -396,9 +268,8 @@ enum SermonParagraphStyleCodec {
 
 // MARK: - iOS
 
-/// 툴바(`SermonEditorView`가 소유)가 "지금 포커스된 `UITextView`"에 문단
-/// 스타일/인라인 서식을 적용하기 위한 다리 — `RichTextEditingProxy`와 같은
-/// 역할·같은 이유(파일 상단 주석 참고, 코드는 공유하지 않고 새로 둔다).
+/// 툴바가 "지금 포커스된 `UITextView`"에 문단 스타일/인라인 서식을 적용하기 위한 다리
+/// (`RichTextEditingProxy`와 같은 역할).
 @MainActor
 final class SermonParagraphEditingProxy {
     weak var textView: UITextView?
@@ -406,8 +277,7 @@ final class SermonParagraphEditingProxy {
     func toggleBold() { toggleTrait(.traitBold) }
     func toggleItalic() { toggleTrait(.traitItalic) }
 
-    /// 커서가 있는 문단의 현재 스타일 — 툴바의 드롭다운이 지금 어느 스타일이
-    /// 선택돼 있는지 보여줄 때 쓴다.
+    /// 커서가 있는 문단의 현재 스타일(툴바 드롭다운 표시용).
     func currentParagraphStyle() -> SermonParagraphStyle {
         guard let textView, let storage = textView.textStorage as NSTextStorage?, storage.length > 0 else { return .body }
         let location = min(textView.selectedRange.location, storage.length - 1)
@@ -416,15 +286,12 @@ final class SermonParagraphEditingProxy {
         return raw.flatMap(SermonParagraphStyle.init(rawValue:)) ?? .body
     }
 
-    /// 커서가 있는 문단 전체에 스타일을 적용한다 — 정렬(`applyAlignment`)과
-    /// 같은 이유로 `NSString.paragraphRange(for:)`로 문단 전체 범위를 구한다
-    /// (선택 범위가 짧아도/캐럿만 있어도 그 문단 전체에 적용돼야 자연스럽다).
+    /// 커서가 있는 문단 전체에 스타일을 적용한다(캐럿만 있어도 `paragraphRange(for:)`로 문단 전체).
     func applyParagraphStyle(_ style: SermonParagraphStyle, settings: UserSettingsStore) {
         guard let textView, let storage = textView.textStorage as NSTextStorage? else { return }
         let fullText = storage.string as NSString
         guard fullText.length > 0 else {
-            // 빈 문서 — 다음에 입력할 글자부터 이 스타일이 적용되도록 타이핑
-            // 속성만 맞춰 둔다.
+            // 빈 문서 — 다음 입력 글자에 적용되도록 타이핑 속성만 맞춘다.
             applyTypingAttributes(for: style, settings: settings, to: textView)
             return
         }
@@ -435,12 +302,8 @@ final class SermonParagraphEditingProxy {
         applyTypingAttributes(for: style, settings: settings, to: textView)
     }
 
-    /// "말씀구절 + 추가" — 커서가 있는 문단 "다음"에 새 문단을 만들어 구절
-    /// 텍스트를 넣고 `.verseQuote` 스타일을 지정한다. 반환값은 그 새 문단의
-    /// 0부터 시작하는 순번(`SermonVerseReference.paragraphIndex`용).
-    ///
-    /// ⚠️ [Xcode 확인 필요, 파일 상단 주석 참고] 문단 인덱스 계산의 경계
-    /// 케이스(빈 문서/문서 맨 끝 등)는 실기기에서 재확인이 필요하다.
+    /// "말씀구절 + 추가" — 커서 문단 다음에 새 `.verseQuote` 문단을 만들어 구절 텍스트를 넣는다.
+    /// 반환값은 새 문단의 0부터 시작하는 순번(`SermonVerseReference.paragraphIndex`용).
     @discardableResult
     func insertVerseQuoteParagraph(text: String, settings: UserSettingsStore) -> Int {
         guard let textView, let storage = textView.textStorage as NSTextStorage? else { return 0 }
@@ -464,11 +327,7 @@ final class SermonParagraphEditingProxy {
         let needsLeadingNewline = insertionPoint > 0
         let insertedText = (needsLeadingNewline ? "\n" : "") + text + "\n"
 
-        // [2026-09-29 6-2/7번 항목 수정] 예전엔 여기서 폰트/줄간격만 직접
-        // 설정해 `SermonParagraphStyleCodec.applyStyle`이 매기는 박스 배경/
-        // 글자색/여백(6-2번 항목)을 못 받았다 — 새로 삽입한 문단도 다시 열었을
-        // 때와 똑같은 모양이어야 하므로, 직접 서식을 짜 넣는 대신 `applyStyle`을
-        // 그대로 재사용한다(중복 로직 제거 겸 일관성 확보).
+        // 새로 삽입한 문단도 다시 열었을 때와 같은 모양이도록 `applyStyle`을 그대로 재사용한다.
         let leadingOffset = needsLeadingNewline ? 1 : 0
         storage.beginEditing()
         storage.replaceCharacters(in: NSRange(location: insertionPoint, length: 0), with: NSAttributedString(string: insertedText))
@@ -482,17 +341,9 @@ final class SermonParagraphEditingProxy {
         return currentParagraphIndex + 1
     }
 
-    /// [2026-09-29 5번 항목 신설] 사용자 요청 — "에디터 기능에서 문단 정렬,
-    /// 글자 색상, 글자크기, 글꼴 선택을 지정할 수 있도록 기능을 추가할 것."
-    /// `RichTextEditor.RichTextEditingProxy`의 같은 이름 메서드들(Views/Memo/
-    /// RichTextEditor.swift)과 완전히 같은 구조를 그대로 옮겨왔다 — 다른 점은
-    /// `hex`/`family`/`size`가 `nil`이면 "이 문단 스타일의 프리셋 값으로
-    /// 되돌리기"라는 뜻이라는 것뿐(그 값들을 읽으려면 `currentParagraphStyle()`
-    /// + `settings`가 필요해 파라미터로 받는다). 이렇게 적용한 값이 "수동
-    /// 지정"으로 다음에 열 때도 유지되는 이유는 별도 마커가 아니라
-    /// `SermonParagraphStyleCodec.applyStyle`이 저장된 스냅샷과 "지금 값이
-    /// 다른지"만 비교하기 때문(그 함수 상단 주석 참고) — 여기는 그냥 값만
-    /// 바꾸면 된다.
+    /// 글자 색상 적용. `hex`가 `nil`이면 현재 문단 스타일의 프리셋 색으로 되돌린다.
+    /// 수동 지정 값이 다음에 열 때도 유지되는 것은 `applyStyle`이 저장된 스냅샷과 비교하기
+    /// 때문이라 별도 마커는 필요 없다.
     func applyColor(_ hex: String?, settings: UserSettingsStore) {
         guard let textView else { return }
         let resolvedColor: UIColor
@@ -504,8 +355,7 @@ final class SermonParagraphEditingProxy {
         apply(.foregroundColor, value: resolvedColor, on: textView)
     }
 
-    /// `family`가 `nil`이면 지금 문단 스타일의 프리셋 글꼴로 되돌린다(크기는
-    /// 그대로 유지) — `applyFontSize(_:settings:)`와 대칭.
+    /// `family`가 `nil`이면 현재 문단 스타일의 프리셋 글꼴로 되돌린다(크기는 유지).
     func applyFontFamily(_ family: String?, settings: UserSettingsStore) {
         guard let textView else { return }
         let range = textView.selectedRange
@@ -531,9 +381,8 @@ final class SermonParagraphEditingProxy {
         storage.endEditing()
     }
 
-    /// `size`가 `nil`이면 지금 문단 스타일의 프리셋 크기로 되돌린다(글꼴은
-    /// 그대로 유지) — `UIFont.withSize(_:)`가 트레이트(굵게/기울임)를 그대로
-    /// 유지해 준다(`RichTextEditor`의 같은 메서드와 같은 이유).
+    /// `size`가 `nil`이면 현재 문단 스타일의 프리셋 크기로 되돌린다(글꼴 유지).
+    /// `UIFont.withSize(_:)`는 굵게/기울임 트레이트를 유지한다.
     func applyFontSize(_ size: CGFloat?, settings: UserSettingsStore) {
         guard let textView else { return }
         let range = textView.selectedRange
@@ -557,11 +406,8 @@ final class SermonParagraphEditingProxy {
         storage.endEditing()
     }
 
-    /// 정렬은 프리셋이 애초에 값을 지정하지 않아(항상 `.natural`) 되돌리기
-    /// 항목도 그냥 `applyAlignment(.natural)`을 호출하면 된다 — 별도 분기 불필요.
-    /// `RichTextEditor.RichTextEditingProxy.applyAlignment(_:)`와 완전히 같은
-    /// 구조(그 파일 참고) — 정렬은 글자가 아니라 문단 단위 속성이라 캐럿만
-    /// 있어도 그 문단 전체에 적용한다.
+    /// 정렬은 프리셋이 값을 지정하지 않으므로(`.natural`) 되돌리기도 `applyAlignment(.natural)`이면 된다.
+    /// 문단 단위 속성이라 캐럿만 있어도 그 문단 전체에 적용한다.
     func applyAlignment(_ alignment: PlatformTextAlignment) {
         guard let textView else { return }
         func makeParagraphStyle(basedOn existing: NSParagraphStyle?) -> NSMutableParagraphStyle {
@@ -619,9 +465,7 @@ final class SermonParagraphEditingProxy {
         storage.endEditing()
     }
 
-    /// `applyColor(_:settings:)`가 쓰는 작은 공통 헬퍼 — `RichTextEditor.
-    /// RichTextEditingProxy.apply(_:value:on:)`와 완전히 같은 구조(캐럿만
-    /// 있으면 타이핑 속성, 선택 범위가 있으면 그 범위에 바로 적용).
+    /// `applyColor`가 쓰는 공통 헬퍼 — 캐럿만 있으면 타이핑 속성, 선택 범위가 있으면 그 범위에 적용한다.
     private func apply(_ key: NSAttributedString.Key, value: Any, on textView: UITextView) {
         let range = textView.selectedRange
         if range.length == 0 {
@@ -638,9 +482,7 @@ final class SermonParagraphEditingProxy {
 }
 
 private extension UIFont {
-    /// `RichTextEditor.swift`의 `UIFont.togglingTrait(_:)`와 완전히 같은 로직
-    /// (이름만 충돌 방지를 위해 다르게 뒀다 — 같은 모듈 안에 두 `private
-    /// extension UIFont`가 각자 다른 메서드 이름으로 공존한다).
+    /// `RichTextEditor.swift`의 `UIFont.togglingTrait(_:)`와 같은 로직(이름 충돌 방지용으로 이름만 다름).
     func togglingSermonTrait(_ trait: UIFontDescriptor.SymbolicTraits) -> UIFont {
         var traits = fontDescriptor.symbolicTraits
         if traits.contains(trait) { traits.remove(trait) } else { traits.insert(trait) }
@@ -653,11 +495,8 @@ struct SermonParagraphEditorRepresentable: UIViewRepresentable {
     @Binding var rtfText: String
     @Binding var plainText: String
     @Binding var paragraphStyles: String
-    /// [2026-09-29 5번 항목 신설] 마지막 저장 시점의 프리셋 스냅샷(읽기 전용,
-    /// `SermonParagraphStyleCodec.StyleSnapshot` 상단 주석 참고) — `@Binding`이
-    /// 아니라 일반 값이다. 이 에디터가 직접 갱신하지 않고(수동 서식 감지의
-    /// "기준선"일 뿐, 쓰기는 `SermonEditorView.save()`의 몫), 매 렌더마다
-    /// 호출부가 최신 `subject.styleFontSnapshot`을 그대로 넘겨준다.
+    /// 마지막 저장 시점의 프리셋 스냅샷(읽기 전용 기준선) — `@Binding`이 아니라 일반 값이며,
+    /// 쓰기는 `SermonEditorView.save()`가 담당한다.
     var styleFontSnapshot: String
     var isEditable: Bool
     var proxy: SermonParagraphEditingProxy
@@ -689,12 +528,8 @@ struct SermonParagraphEditorRepresentable: UIViewRepresentable {
         loadContent(into: uiView, coordinator: context.coordinator)
     }
 
-    /// `RichTextEditor.dismantleUIView`와 같은 이유 — 이 텍스트뷰가 화면
-    /// 전환(`.id(selection)` 등)으로 통째로 버려질 때, 응답자 체인을 타고
-    /// 올라가 윈도우가 공유하는 undo 관리자에 이 텍스트뷰를 대상으로 하는
-    /// 액션이 남아 있으면 이후 Cmd+Z가 이미 사라진 텍스트뷰를 참조해 크래시할
-    /// 수 있다(실제 보고된 macOS 크래시와 같은 구조적 위험, RichTextEditor.swift
-    /// 상단 주석 참고) — 대칭으로 미리 막는다.
+    /// 텍스트뷰가 화면 전환으로 버려질 때, 윈도우 공유 undo 관리자에 남은 액션이 이미 사라진
+    /// 텍스트뷰를 참조해 Cmd+Z에서 크래시하는 것을 막는다(`RichTextEditor.dismantleUIView`와 동일).
     static func dismantleUIView(_ uiView: UITextView, coordinator: Coordinator) {
         uiView.undoManager?.removeAllActions(withTarget: uiView)
     }
@@ -703,12 +538,8 @@ struct SermonParagraphEditorRepresentable: UIViewRepresentable {
         coordinator.isLoadingExternally = true
         let defaultAttributes: [NSAttributedString.Key: Any] = [.font: settings.sermonPlatformFont(for: .body)]
         let attributed = RichTextCodec.decode(rtfText, defaultAttributes: defaultAttributes)
-        // [빌드 에러 수정] `SermonParagraphStyleCodec.apply`는 `NSTextStorage`를
-        // 요구한다(내부에서 `beginEditing()/endEditing()`을 쓰기 때문 —
-        // `NSMutableAttributedString`엔 그 메서드가 없다). 그래서 별도의
-        // `NSMutableAttributedString`을 만들어 스타일을 입힌 뒤 텍스트뷰에
-        // 옮기는 대신, 디코딩한 내용을 먼저 실제 텍스트뷰의 `textStorage`
-        // (이미 `NSTextStorage`)에 넣고 그 위에 바로 스타일을 적용한다.
+        // `apply`는 `NSTextStorage`가 필요하므로(`beginEditing()` 사용), 디코딩한 내용을 먼저
+        // 텍스트뷰의 `textStorage`에 넣고 그 위에 바로 스타일을 적용한다.
         textView.textStorage.setAttributedString(attributed)
         SermonParagraphStyleCodec.apply(paragraphStyles, to: textView.textStorage, settings: settings, previousSnapshot: styleFontSnapshot)
         applyBodyTypingAttributesIfEmpty(to: textView)
@@ -716,20 +547,9 @@ struct SermonParagraphEditorRepresentable: UIViewRepresentable {
         coordinator.lastExportedRTF = rtfText
     }
 
-    /// [2026-09-29 버그 수정] 사용자 보고 — "새 설교 작성, 설교 편집에서
-    /// 기본스타일이 본문으로 선택되어있지만, 실제 본문 스타일이 적용되어있지
-    /// 않음." 원인: `SermonParagraphStyleCodec.apply`는 `.byParagraphs`로 실제
-    /// 문단을 순회하며 스타일을 입히는데, 완전히 빈 문서는 순회할 문단 자체가
-    /// 없어(`guard fullText.length > 0 else { return }`) 아무 일도 하지
-    /// 않는다 — 그래서 새로 만든 빈 설교를 열면 툴바의 스타일 필은 "본문"이
-    /// 선택돼 보이지만(`SermonEditorView.currentStyle` 초기값), 실제
-    /// `UITextView.typingAttributes`(다음에 입력할 글자가 받을 서식)는 UIKit
-    /// 기본값(시스템 폰트)에 머물러 있었다. 빈 문서일 때만 "본문" 스타일 하나를
-    /// 타이핑 속성에 직접 심어 이 간극을 메운다 — `SermonParagraphEditingProxy.
-    /// applyTypingAttributes`(private)와 완전히 같은 계산이지만, 그 함수는
-    /// "사용자가 지금 스타일을 고름" 경로 전용이라 여기서 재사용하지 않고
-    /// (private 스코프이기도 함) 같은 세 줄만 그대로 옮겨 왔다 — 새 함수를
-    /// 만들 만큼 복잡하지 않은 로직이라 중복을 감수했다.
+    /// 완전히 빈 문서는 `apply`가 순회할 문단이 없어 아무 일도 하지 않으므로, 빈 문서일 때만
+    /// "본문" 스타일을 타이핑 속성에 직접 심어 툴바 표시(본문)와 실제 서식을 맞춘다.
+    /// `applyTypingAttributes`(private)와 같은 계산이나 간단해 중복을 감수했다.
     private func applyBodyTypingAttributesIfEmpty(to textView: UITextView) {
         guard textView.textStorage.length == 0 else { return }
         let baseFont = settings.sermonPlatformFont(for: .body)
@@ -835,7 +655,7 @@ final class SermonParagraphEditingProxy {
         let needsLeadingNewline = insertionPoint > 0
         let insertedText = (needsLeadingNewline ? "\n" : "") + text + "\n"
 
-        // iOS `insertVerseQuoteParagraph`와 같은 이유(그 파일 위쪽 주석 참고).
+        // iOS 구현과 같은 이유로 `applyStyle`을 재사용한다.
         let leadingOffset = needsLeadingNewline ? 1 : 0
         storage.beginEditing()
         storage.replaceCharacters(in: NSRange(location: insertionPoint, length: 0), with: NSAttributedString(string: insertedText))
@@ -860,8 +680,7 @@ final class SermonParagraphEditingProxy {
         textView.typingAttributes = attrs
     }
 
-    /// iOS `SermonParagraphEditingProxy.applyColor(_:settings:)`와 같은
-    /// 이유·같은 구조(그 파일 참고).
+    /// iOS `applyColor(_:settings:)`와 같은 구조.
     func applyColor(_ hex: String?, settings: UserSettingsStore) {
         guard let textView else { return }
         let resolvedColor: NSColor
@@ -897,9 +716,7 @@ final class SermonParagraphEditingProxy {
         storage.endEditing()
     }
 
-    /// `NSFont`엔 `withSize(_:)`가 없어(AppKit) `NSFont(descriptor:size:)`로
-    /// 새 인스턴스를 만든다 — `RichTextEditor.RichTextEditingProxy.
-    /// applyFontSize(_:)`(macOS 쪽)와 완전히 같은 관례.
+    /// AppKit의 `NSFont`엔 `withSize(_:)`가 없어 `NSFont(descriptor:size:)`로 새 인스턴스를 만든다.
     func applyFontSize(_ size: CGFloat?, settings: UserSettingsStore) {
         guard let textView, let storage = textView.textStorage else { return }
         let range = textView.selectedRange()
@@ -922,9 +739,8 @@ final class SermonParagraphEditingProxy {
         storage.endEditing()
     }
 
-    /// `RichTextEditor.RichTextEditingProxy.applyAlignment(_:)`(macOS 쪽)와
-    /// 완전히 같은 구조 — `NSTextView`는 `.text`가 아니라 `.string`이 없고
-    /// `textStorage.length`로 빈 문서를 판정한다(그 파일 참고).
+    /// `RichTextEditor`의 macOS `applyAlignment(_:)`와 같은 구조 — `NSTextView`는
+    /// `textStorage.length`로 빈 문서를 판정한다.
     func applyAlignment(_ alignment: PlatformTextAlignment) {
         guard let textView, let storage = textView.textStorage else { return }
         func makeParagraphStyle(basedOn existing: NSParagraphStyle?) -> NSMutableParagraphStyle {
@@ -969,7 +785,7 @@ final class SermonParagraphEditingProxy {
         storage.endEditing()
     }
 
-    /// `apply(_:value:on:)`(iOS 쪽)와 같은 이유·같은 구조.
+    /// iOS `apply(_:value:on:)`와 같은 이유·같은 구조.
     private func apply(_ key: NSAttributedString.Key, value: Any, on textView: NSTextView) {
         let range = textView.selectedRange()
         if range.length == 0 {
@@ -986,8 +802,7 @@ final class SermonParagraphEditingProxy {
 }
 
 private extension NSFont {
-    /// `RichTextEditor.swift`의 `NSFont.togglingTrait(_:)`와 완전히 같은 로직
-    /// (이름만 충돌 방지를 위해 다르게 뒀다).
+    /// `RichTextEditor.swift`의 `NSFont.togglingTrait(_:)`와 같은 로직(이름 충돌 방지를 위해 이름만 다르다).
     func togglingSermonTrait(_ trait: NSFontDescriptor.SymbolicTraits) -> NSFont {
         var traits = fontDescriptor.symbolicTraits
         if traits.contains(trait) { traits.remove(trait) } else { traits.insert(trait) }
@@ -1000,8 +815,7 @@ struct SermonParagraphEditorRepresentable: NSViewRepresentable {
     @Binding var rtfText: String
     @Binding var plainText: String
     @Binding var paragraphStyles: String
-    /// iOS `SermonParagraphEditorRepresentable.styleFontSnapshot`와 같은
-    /// 이유·같은 구조(그 프로퍼티 상단 주석 참고).
+    /// iOS 쪽 `styleFontSnapshot`과 같은 역할(그 프로퍼티 주석 참고).
     var styleFontSnapshot: String
     var isEditable: Bool
     var proxy: SermonParagraphEditingProxy
@@ -1040,17 +854,15 @@ struct SermonParagraphEditorRepresentable: NSViewRepresentable {
         loadContent(into: textView, coordinator: context.coordinator)
     }
 
-    /// `RichTextEditor.swift`가 macOS에서 실제로 신고받은 크래시(문서 전환 시
-    /// 공유 undo 관리자에 죽은 텍스트뷰 참조가 남는 문제)와 같은 방어 — 상단
-    /// 주석 참고.
+    /// 문서 전환 시 공유 undo 관리자에 죽은 텍스트뷰 참조가 남아 크래시하는 문제를
+    /// 막는다(`RichTextEditor.swift`와 같은 방어).
     static func dismantleNSView(_ nsView: NSScrollView, coordinator: Coordinator) {
         (nsView.documentView as? NSTextView)?.undoManager?.removeAllActions(withTarget: nsView.documentView as Any)
     }
 
     private func loadContent(into textView: NSTextView, coordinator: Coordinator) {
         coordinator.isLoadingExternally = true
-        // [빌드 에러 수정, iOS 쪽과 같은 이유] macOS의 `NSTextView.textStorage`는
-        // Optional이라 guard로 먼저 꺼내 둔다.
+        // macOS의 `NSTextView.textStorage`는 Optional이라 guard로 먼저 꺼내 둔다.
         guard let textStorage = textView.textStorage else {
             coordinator.isLoadingExternally = false
             return
@@ -1064,9 +876,7 @@ struct SermonParagraphEditorRepresentable: NSViewRepresentable {
         coordinator.lastExportedRTF = rtfText
     }
 
-    /// iOS `loadContent`의 `applyBodyTypingAttributesIfEmpty`와 같은 이유·같은
-    /// 계산(파일 상단 iOS 쪽 주석 참고) — macOS `NSTextView.textStorage`가
-    /// Optional이라 이미 꺼내 둔 `textStorage`를 그대로 받는다.
+    /// iOS 쪽과 같은 계산 — macOS는 `textStorage`가 Optional이라 이미 꺼낸 값을 받는다.
     private func applyBodyTypingAttributesIfEmpty(to textView: NSTextView, textStorage: NSTextStorage) {
         guard textStorage.length == 0 else { return }
         let baseFont = settings.sermonPlatformFont(for: .body)
@@ -1096,11 +906,8 @@ struct SermonParagraphEditorRepresentable: NSViewRepresentable {
 
         init(_ parent: SermonParagraphEditorRepresentable) { self.parent = parent }
 
-        // [빌드 에러 수정] AppKit(macOS)의 `NSTextStorageDelegate`는 iOS와 달리
-        // 아직 `NSTextStorage.EditActions`(중첩 타입)가 아니라 예전 전역
-        // typealias `NSTextStorageEditActions`를 쓴다 — `RichTextEditor.swift`
-        // (Views/Memo/RichTextEditor.swift, 2026-08-12 수정 주석)에 이미 같은
-        // 이유로 기록된, 이 프로젝트에서 이전에 한 번 해결된 문제다.
+        // macOS `NSTextStorageDelegate`는 iOS와 달리 중첩 타입이 아니라 전역 typealias
+        // `NSTextStorageEditActions`를 쓴다(`RichTextEditor.swift`와 같은 이유).
         func textStorage(
             _ textStorage: NSTextStorage, didProcessEditing editedMask: NSTextStorageEditActions,
             range editedRange: NSRange, changeInLength delta: Int
@@ -1127,16 +934,13 @@ struct SermonParagraphEditorRepresentable: NSViewRepresentable {
 // MARK: - 공개 View
 
 /// 문단 프리셋 스타일을 지원하는 설교 작성 에디터 — 텍스트뷰만 감싼다(툴바는
-/// `SermonEditorView`가 화면 상단에 직접 구성한다, 파일 상단 주석 참고). 6종
-/// 스타일 드롭다운/B/I 토글/"말씀구절 + 추가"는 모두 `SermonParagraphEditingProxy`
-/// 를 통해 이 에디터를 조작한다.
+/// `SermonEditorView`가 화면 상단에 구성). 스타일 드롭다운/B/I 토글/"말씀구절 + 추가"는
+/// `SermonParagraphEditingProxy`를 통해 이 에디터를 조작한다.
 struct SermonParagraphEditor: View {
     @Binding var contentHtml: String
     @Binding var contentText: String
     @Binding var paragraphStyles: String
-    /// [2026-09-29 5번 항목] 호출부(`SermonEditorView`)가 `subject.
-    /// styleFontSnapshot`을 그대로 넘긴다 — `SermonParagraphEditorRepresentable.
-    /// styleFontSnapshot` 상단 주석 참고.
+    /// 호출부(`SermonEditorView`)가 `subject.styleFontSnapshot`을 그대로 넘긴다.
     var styleFontSnapshot: String
     var isEditable: Bool
     var proxy: SermonParagraphEditingProxy

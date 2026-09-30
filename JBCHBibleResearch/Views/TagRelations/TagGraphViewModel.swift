@@ -2,26 +2,16 @@
 //  TagGraphViewModel.swift
 //  JBCHBibleResearch
 //
-//  S10(태그 관계 시각화) 데이터/시뮬레이션 상태. screens.md "S10. 태그 관계 시각화"
-//  절 근거 — force-directed 그래프, 점선(자동 추론)/실선(수동 연결) 엣지 구분.
+//  S10(태그 관계 시각화)의 데이터/시뮬레이션 상태. force-directed 그래프이며 점선(자동 추론)/
+//  실선(수동 연결) 엣지를 구분한다.
 //
-//  ⚠️ [단순화, 확인 필요] "자동 추론 엣지"는 6.3의 "MemoTag를 조인해 같은 메모에
-//  동시 등장한 빈도를 계산"이라는 문구를 문서 쪽으로도 확장 해석했다 — 같은
-//  `SourceDocument`에 `DocumentAnchor(anchorType: .keyword)`로 동시에 걸린 태그도
-//  같은 방식으로 자동 엣지에 포함시켰다. 원문은 메모 동시 등장만 명시하고 문서
-//  동시 등장은 "실시간 계산"이라고만 적어 정확히 문서 채널도 포함하라는 뜻인지
-//  확실하지 않지만, S10의 드릴다운이 문서/OCR도 같은 자격으로 다루는 것과 일관되게
-//  맞추는 편이 낫다고 판단해 포함했다.
+//  ⚠️ 자동 추론 엣지는 메모 동시 등장뿐 아니라, 같은 SourceDocument에 DocumentAnchor(.keyword)로
+//  함께 걸린 태그도 포함한다(드릴다운이 문서/OCR도 같은 자격으로 다루는 것과 맞춤).
 //
-//  ⚠️ [노드 필터링] 그래프 노드는 "엣지가 하나라도 있는 태그"만 포함한다 — 아무
-//  관계도 없는 고립 태그까지 다 그리면 화면이 무의미하게 복잡해진다는 판단이다.
-//  원문에 이 필터링 규칙이 명시돼 있지는 않다.
+//  ⚠️ 노드는 엣지가 하나라도 있는 태그만 포함한다(고립 태그는 그리지 않음).
 //
-//  ⚠️ [물리 시뮬레이션] force-directed 레이아웃은 SwiftUI/Apple 표준 API가 아니라
-//  이 파일이 직접 구현한 단순 스프링+반발력 모델이다(반발력 ~ 1/거리², 엣지는
-//  스프링, 중심 쏠림 방지용 약한 구심력, 매 프레임 감쇠). 실제 컴파일/성능은
-//  검증되지 않았다 — 노드 수가 많아지면(태그 수백 개) 매 프레임 O(n²) 반발력
-//  계산이 느려질 수 있다는 점도 미리 남겨 둔다.
+//  ⚠️ 레이아웃은 직접 구현한 단순 스프링+반발력 모델이다(반발력 ~ 1/거리², 엣지 스프링,
+//  약한 구심력, 프레임마다 감쇠). 반발력 계산이 매 프레임 O(n²)라 태그가 수백 개면 느려질 수 있다.
 //
 
 import Foundation
@@ -49,8 +39,7 @@ struct TagEdge: Identifiable {
     var manualRelationID: PersistentIdentifier?
 }
 
-/// 태그 클릭 시 드릴다운에 쓰이는 3분류 결과(screens.md S10 "3분류 드릴다운").
-/// S10뿐 아니라 메모·문서의 태그 칩 클릭에서도 재사용한다(TagDrilldownView.swift).
+/// 태그 클릭 시 드릴다운에 쓰이는 3분류 결과. S10과 메모·문서의 태그 칩 클릭에서 함께 쓴다.
 struct TagDrilldownResult {
     struct MemoItem: Identifiable { let id: PersistentIdentifier; let memo: UserMemo; let label: String }
     struct DocumentItem: Identifiable { let id: PersistentIdentifier; let document: SourceDocument; let anchor: DocumentAnchor }
@@ -95,14 +84,14 @@ final class TagGraphViewModel {
             }
         }
 
-        // 채널 1 — 메모 동시 등장(6.3 원문 그대로).
+        // 채널 1 — 메모 동시 등장.
         let memos = (try? modelContext.fetch(FetchDescriptor<UserMemo>())) ?? []
         for memo in memos {
             let tagIDs = (memo.memoTags ?? []).compactMap { $0.tag }.filter { !$0.isMerged }.map(\.persistentModelID)
             for pair in allPairs(of: tagIDs) { addAutoPair(pair.0, pair.1) }
         }
 
-        // 채널 2 — 문서 동시 등장(위 파일 상단 ⚠️ 확장 해석).
+        // 채널 2 — 문서 동시 등장(파일 상단 참고).
         let documents = (try? modelContext.fetch(FetchDescriptor<SourceDocument>())) ?? []
         for document in documents {
             let tagIDs = (document.anchors ?? [])
@@ -124,7 +113,7 @@ final class TagGraphViewModel {
             builtEdges.append(TagEdge(tagAID: a, tagBID: b, kind: .manual, manualRelationID: relation.persistentModelID))
         }
 
-        // 노드 = 엣지가 하나라도 있는 태그만(위 파일 상단 ⚠️ 참고).
+        // 노드 = 엣지가 하나라도 있는 태그만(파일 상단 참고).
         var participatingIDs = Set<PersistentIdentifier>()
         for edge in builtEdges {
             participatingIDs.insert(edge.tagAID)
@@ -253,8 +242,7 @@ final class TagGraphViewModel {
         nodes[index].position = position
     }
 
-    /// 드래그 종료 — 다른 노드 위에서 놓으면(근접 판정) 수동 연결(TagRelation)을
-    /// 만든다(screens.md "빈 공간에서 태그를 다른 태그 위로 드래그하면 수동 연결 생성").
+    /// 드래그 종료 — 다른 노드 근처(proximityThreshold 이내)에 놓으면 수동 연결(TagRelation)을 만든다.
     func endDrag(nodeID: PersistentIdentifier, proximityThreshold: CGFloat = 36) {
         guard let index = nodes.firstIndex(where: { $0.id == nodeID }) else { return }
         nodes[index].isDragging = false
@@ -284,14 +272,10 @@ final class TagGraphViewModel {
         loadGraph()
     }
 
-    /// 수동 엣지 삭제(실선 클릭 등 — 뷰가 제공하는 진입점에서 호출).
+    /// 수동 엣지 삭제(뷰가 제공하는 진입점에서 호출).
     ///
-    /// ⚠️ `persistentModelID`는 `@Model`이 합성한 프로퍼티라 `#Predicate` 매크로
-    /// 안에서 직접 비교할 수 있는지 이 세션에서 확신할 수 없었다(같은 이유로
-    /// 이미 여러 번 플래그된 `#Predicate` 옵셔널/합성 프로퍼티 관련 불확실성,
-    /// addendum 6장 계열) — 그래서 전체를 가져와 Swift 배열 `first(where:)`로
-    /// 안전하게 걸러낸다. 태그 관계 개수가 아주 많아지면 비효율적일 수 있지만,
-    /// 이 앱 성격상(개인 연구 태그) 그 정도까지 커질 가능성은 낮다고 판단했다.
+    /// ⚠️ `persistentModelID`는 @Model이 합성한 프로퍼티라 `#Predicate`에서 직접 비교할 수 있는지
+    /// 확신할 수 없어, 전체를 가져와 `first(where:)`로 거른다. 관계가 매우 많아지면 비효율적일 수 있다.
     func deleteManualEdge(_ edge: TagEdge) {
         guard edge.kind == .manual, let relationID = edge.manualRelationID else { return }
         let allRelations = (try? modelContext.fetch(FetchDescriptor<TagRelation>())) ?? []
@@ -314,9 +298,8 @@ final class TagGraphViewModel {
         drilldown = TagDrilldownResult()
     }
 
-    /// S10과 메모/문서 태그 칩 클릭이 공유하는 조회 로직(6.3 "하나의 tag_id로 세
-    /// 쿼리"). static으로 둬서 이 뷰모델 인스턴스가 없는 곳(예: MemoDetailView)에서도
-    /// 바로 쓸 수 있게 했다.
+    /// S10과 메모/문서 태그 칩 클릭이 공유하는 조회 로직. 뷰모델 인스턴스가 없는 곳
+    /// (예: MemoDetailView)에서도 쓰도록 static이다.
     static func loadDrilldown(for tag: Tag, context: ModelContext) -> TagDrilldownResult {
         var result = TagDrilldownResult()
 

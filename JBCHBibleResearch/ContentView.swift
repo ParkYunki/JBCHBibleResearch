@@ -4,10 +4,9 @@
 //
 //  Created by 박윤기 on 8/3/26.
 //
-//  2026-08-06: 화면 레이어 시작 — 기본 템플릿(Hello, world) 대신 실제 내비게이션
-//  뼈대(RootView)를 띄운다. 여기서 앱 최초 진입 시 1회, TranslationBootstrap으로
-//  번들 번역본을 TranslationRegistry에 등록한다(Views/Navigation, Views/Bible,
-//  Services 참고).
+//  앱의 최상위 뷰. 내비게이션 뼈대(RootView)를 띄우고, 앱 최초 진입 시 1회
+//  TranslationBootstrap으로 번들 번역본을 TranslationRegistry에 등록한다.
+//  테마/온보딩/공유받은 메모 가져오기 등 앱 전체 진입점 modifier도 여기에 모아 둔다.
 //
 
 import SwiftUI
@@ -16,58 +15,36 @@ import SwiftData
 
 struct ContentView: View {
     @Environment(\.modelContext) private var modelContext
-    // [2026-09-11 추가] "테마 색상"의 "자동" 모드가 지금 유효한 라이트/다크
-    // 상태를 따라가는 데 필요 — 아래 `effectiveColorScheme`/`.onChange`/
-    // `.task` 참고.
+    // "테마 색상"의 "자동" 모드가 유효한 라이트/다크 상태를 따라가는 데 필요.
     @Environment(\.colorScheme) private var systemColorScheme
     @State private var bootstrapErrorDescription: String?
 
     /// 화면 모드가 라이트/다크를 강제하고 있으면 그 값을, "시스템 따름"이면
-    /// 실제 시스템 값(`systemColorScheme`)을 그대로 — "테마 색상 자동"이
-    /// 따라야 할 건 화면 모드가 실제로 렌더링하는 명암이지, 화면 모드가
-    /// 무시하고 있는 원본 시스템 값이 아니기 때문이다.
+    /// 실제 시스템 값(`systemColorScheme`)을 돌려준다 — "테마 색상 자동"이 따라야 할 건
+    /// 화면 모드가 실제로 렌더링하는 명암이기 때문이다.
     private var effectiveColorScheme: ColorScheme {
         UserSettingsStore.shared.colorSchemePreference.colorScheme ?? systemColorScheme
     }
 
     var body: some View {
         RootView()
-            // [2026-09-03 신설] 사용자 보고 — "더보기 > 설정 > 성경 > 모양의
-            // 화면모드를 바꾸면 자동으로 성경으로 이동하는데, 화면모드를 바꿔도
-            // 현재 페이지를 유지하도록." 원래 `RootView.swift`의 `body`가
-            // `UserSettingsStore.shared.colorSchemePreference`를 직접 읽으면서
-            // 동시에 그 안에서 `PhoneTabView`(진짜 `TabView`)를 만들고 있었다 —
-            // Apple Developer Forums 스레드 726363("App Lost all selection
-            // info of navigation and tab, after update a AppStorage state")이
-            // 확인해 준 것과 같은 원인: 그 값이 바뀔 때마다 `TabView`를 직접
-            // 구성하는 바로 그 뷰의 body가 다시 실행되며 `TabView`가 통째로
-            // 다시 만들어져, 선택된 탭이 기본값(`.bibleReading` = "성경")으로
-            // 되돌아가고 그 안의 내비게이션 스택도 함께 초기화됐다(=화면모드를
-            // 바꾸면 자동으로 "성경"으로 이동). 그 포럼 답변의 해법 그대로 —
-            // 값을 읽는 자리와 TabView를 만드는 자리를 분리 — 이 modifier를
-            // `RootView`(TabView를 직접 만드는 그 뷰) 대신 여기(`RootView()`를
-            // 만드는 바깥 자리)로 옮겼다. `RootView.swift`의 옛 위치 주석 참고.
+            // `colorSchemePreference`를 `RootView`가 아니라 여기서 읽어야 한다. 값을 읽는 뷰가
+            // `TabView`를 직접 만들면, 값이 바뀔 때마다 body가 다시 실행되어 `TabView`가 통째로
+            // 재생성되고 선택된 탭/내비게이션 스택이 초기화된다(화면모드를 바꾸면 "성경" 탭으로 이동).
+            // (Apple Developer Forums 스레드 726363과 같은 원인)
             .preferredColorScheme(UserSettingsStore.shared.colorSchemePreference.colorScheme)
-            // [2026-09-11 추가] "테마 색상 자동" 반영 — 유효 라이트/다크가
-            // 바뀔 때마다 다시 계산, 앱이 처음 뜰 때도 1회 반영(`.task`).
-            // `syncAutoThemeIfNeeded`는 `bibleThemeModePreference == .auto`
-            // 일 때만 실제로 hex를 바꾸므로, 라이트/다크 고정이나 커스텀
-            // 상태에는 아무 영향이 없다.
+            // 유효 라이트/다크가 바뀔 때마다, 그리고 앱이 처음 뜰 때 1회 다시 계산한다.
+            // `syncAutoThemeIfNeeded`는 `bibleThemeModePreference == .auto`일 때만
+            // 실제로 hex를 바꾸므로 라이트/다크 고정이나 커스텀 상태에는 영향이 없다.
             .onChange(of: effectiveColorScheme) { _, newValue in
                 UserSettingsStore.shared.syncAutoThemeIfNeeded(systemColorScheme: newValue)
             }
             .task {
                 UserSettingsStore.shared.syncAutoThemeIfNeeded(systemColorScheme: effectiveColorScheme)
             }
-            // [2026-09-11 추가, 사용자 보고 — "테마색상을 바꾸면 성경의 상단
-            // 메뉴가 사라짐"] 원래 `PhoneTabView.swift`의 body(TabView를 직접
-            // 구성하는 자리)에 있던 블록을 여기로 옮겼다 — 그 파일에 남겨 둔
-            // 이동 주석 참고. `colorSchemePreference`와 같은 이유로, 여기
-            // (TabView를 직접 구성하지 않는 자리)에서 `settings.
-            // bibleBackgroundColor`가 바뀔 때마다 UIKit 탭바 외형
-            // (`applyThemedTabBarAppearance`, `PhoneTabView.swift` 상단 선언)을
-            // 다시 적용한다. `PhoneTabView`는 아이폰 전용이라 이 부작용도
-            // iOS에만 필요하다.
+            // 배경색이 바뀔 때마다 UIKit 탭바 외형을 다시 적용한다(`applyThemedTabBarAppearance`,
+            // `PhoneTabView.swift`). 위 `colorSchemePreference`와 같은 이유로 `TabView`를 직접
+            // 구성하지 않는 이 자리에 둔다. `PhoneTabView`는 아이폰 전용이라 iOS에서만 필요하다.
             #if os(iOS)
             .onAppear {
                 applyThemedTabBarAppearance(color: UserSettingsStore.shared.bibleBackgroundColor)
@@ -76,76 +53,41 @@ struct ContentView: View {
                 applyThemedTabBarAppearance(color: newValue)
             }
             #endif
-            // [2026-08-28 추가] 사용자 요청 — "처음 설치하시는 사람을 위한
-            // 가이드 화면이 필요함." 앱 최초 실행 시 1회, 5페이지 안내 카루셀을
-            // 보여준다 — AppOnboardingOverlay.swift 참고. `.bibleIndexOnboarding()`
-            // 보다 먼저 배치해 "앱 소개 → (필요 시) 색인 안내" 순서로 자연스럽게
-            // 읽히게 했다.
-            //
-            // [2026-09-03 수정] 여기 남겨 뒀던 "두 `.task`는 각각 독립적으로
-            // 실행되므로 실제 기기에서 두 시트가 동시에 뜨려고 경합할
-            // 가능성은 남아 있다"는 경고가 실제로 재현됐다 — 다른 Mac에 새로
-            // 설치했을 때 온보딩 카루셀도 색인 안내 시트도 아닌, 내용 없는
-            // 빈 시트만 뜨는 문제로 보고됨. `BibleIndexOnboardingOverlay.swift`
-            // 쪽에서 색인 안내 "시트"만 온보딩이 끝난 뒤로 미루도록 고쳐 이
-            // 경합을 없앴다(색인 자체는 여전히 온보딩과 무관하게 즉시
-            // 시작함) — 그 파일의 `hasPendingSheet` 상단 주석 참고.
+            // 앱 최초 실행 시 1회 안내 카루셀(AppOnboardingOverlay.swift).
+            // `.bibleIndexOnboarding()`보다 먼저 배치해 "앱 소개 → (필요 시) 색인 안내" 순서로
+            // 보이게 한다. 두 시트가 동시에 뜨려고 경합하지 않도록 색인 안내 "시트"는
+            // 온보딩이 끝난 뒤로 미룬다(`BibleIndexOnboardingOverlay.swift`의
+            // `hasPendingSheet` 참고). 색인 자체는 온보딩과 무관하게 즉시 시작한다.
             .appOnboarding()
-            // [2026-08-19 추가] 사용자 요청 — "앱을 설치할 때, 처음 시작할 때
-            // 색인을 자동으로 설치하면 안되는가?" 최초 실행(또는 아직 색인이
-            // 없는 실행) 1회, 성경 전체 임베딩 색인을 자동으로 시작하고 진행
-            // 상황을 보여준다 — BibleIndexOnboardingOverlay.swift 참고. 아래
-            // TranslationBootstrap 등 기존 부트스트랩 `.task`와는 독립적으로
-            // 동작한다(서로 순서 의존성 없음 — 색인은 번들 DB를 직접 열어
-            // 읽지 SwiftData 부트스트랩 결과를 필요로 하지 않는다).
+            // 최초 실행(또는 아직 색인이 없는 실행) 1회, 성경 전체 임베딩 색인을 자동으로 시작하고
+            // 진행 상황을 보여준다(BibleIndexOnboardingOverlay.swift). 번들 DB를 직접 열어 읽으므로
+            // 아래 부트스트랩 `.task`와 순서 의존성이 없다.
             .bibleIndexOnboarding()
-            // [2026-08-28 추가] 사용자 요청 — "업데이트 할때마다 어떤 것을
-            // 업데이트 했는지 소개해주는 화면 필요함. 처음 설치하는 사람에게는
-            // 필요하지 않음." `hasCompletedOnboarding`이 true인 기존 설치에서만,
-            // 버전이 바뀌었을 때 해당 버전의 `WhatsNewContent` 항목을 보여준다 —
-            // WhatsNewOverlay.swift 참고.
+            // 업데이트 후 최초 실행 시 해당 버전의 `WhatsNewContent`를 보여준다.
+            // `hasCompletedOnboarding`이 true인 기존 설치에서만 뜬다(WhatsNewOverlay.swift).
             .whatsNewOverlay()
             .task {
-                // [2026-09-03 신설] 사용자 요청 — 온보딩 카루셀이 이 블록의
-                // 진행 상태를 보여줄 수 있도록(`AppBootstrapProgress.swift`
-                // 상단 주석 참고). `defer`로 걸어 성공/실패(catch) 어느 경로로
-                // 끝나도 항상 한 번 내려간다.
+                // 온보딩 카루셀이 이 블록의 진행 상태를 보여줄 수 있도록 한다
+                // (`AppBootstrapProgress.swift`). `defer`로 성공/실패 어느 경로로 끝나도
+                // 항상 한 번 내려간다.
                 defer { AppBootstrapProgress.shared.markFinished() }
                 do {
                     try TranslationBootstrap.ensureBundledTranslationRegistered(in: modelContext)
-                    // [2026-08-14 추가, 같은 날 되돌림] "개역한글 국한문혼용을
-                    // 두 번째 번들 번역본으로 등록"했던 것을, 사용자 요청으로 다시
-                    // 없앤다 — "두 번째 번역본(국한문 전체 중복 테이블)을 지우고
-                    // → 절 단위 한자 주석 모델"로 대체. 기존에 이미 등록된 사용자
-                    // 기기에서는 `TranslationBootstrap.removeHanjaTranslationIfPresent`가
-                    // 정리한다(TranslationBootstrap.swift 상단 주석 참고).
+                    // 예전에 등록됐던 국한문혼용 번들 번역본을 이미 등록된 기기에서 정리한다.
                     try TranslationBootstrap.removeHanjaTranslationIfPresent(in: modelContext)
-                    // [2026-08-07 추가] TranslationBootstrap.deduplicateRegistries 상단
-                    // 주석 참고 — CloudKit 다중 기기 초기 부트스트랩 경합으로 생길 수
-                    // 있는 code 중복 TranslationRegistry를 앱이 뜰 때마다 정리한다.
+                    // CloudKit 다중 기기 초기 부트스트랩 경합으로 생길 수 있는 code 중복
+                    // TranslationRegistry를 앱이 뜰 때마다 정리한다.
                     try TranslationBootstrap.deduplicateRegistries(in: modelContext)
-                    // [2026-08-13 추가] 사용자 요청 — 번들 기본 개요(OutlineSeed.sqlite,
-                    // 있으면)를 사용자 DB로 1회 복사한다. `OutlineSeedImporter.swift`
-                    // 상단 주석 참고 — 실패해도(throw하지 않고 내부에서 처리) 다른
-                    // 부트스트랩을 막지 않는다.
+                    // 번들 기본 개요(OutlineSeed.sqlite, 있으면)를 사용자 DB로 1회 복사한다.
+                    // 실패해도 throw하지 않고 내부에서 처리하므로 다른 부트스트랩을 막지 않는다.
                     await OutlineSeedImporter.importIfNeeded(into: modelContext)
-                    // [2026-09-28 추가] 설계 문서(claude/sermon-management-screens-
-                    // and-schema.md, 프로젝트) 확정사항 — "SermonGathering 초기
-                    // 시드값(주일설교/청년회 말씀/구역모임/조모임)을 최초 실행 시
-                    // 미리 생성." `SermonGatheringSeeder.swift` 상단 주석 참고 —
-                    // 비동기가 필요 없는 가벼운 작업이라 `await` 없이 호출한다.
+                    // SermonGathering 초기 시드(주일설교/청년회 말씀/구역모임/조모임)를 최초 실행 시
+                    // 생성한다. 비동기가 필요 없는 가벼운 작업이라 `await` 없이 호출한다.
                     SermonGatheringSeeder.seedIfNeeded(into: modelContext)
-                    // [2026-08-14 추가, 2026-08-15 방식 전환] 관주/난외주/한자주석/
-                    // 한자사전 — 예전엔 여기서 CrossReferenceSeedImporter/
-                    // MarginalNoteSeedImporter/HanjaAnnotationSeedImporter가 각각
-                    // JSON→SwiftData 1회성 복사를 했다. 사용자 요청 — "성경관련
-                    // json seed 파일은 기본 제공 db에 넣을 것." 이 네 데이터셋은
-                    // 사용자가 편집하지 않는 정적 참조 데이터라 애초에 CloudKit
-                    // 동기화 대상으로 삼을 이유가 없었다 — `Resources/
-                    // ReferenceData.sqlite`(번들, 읽기 전용)에서 직접 읽도록
-                    // 바꾸고(`ReferenceDataProvider`/`ReferenceDataStore` 참고),
-                    // 세 임포터는 전부 삭제했다. 이전에 이미 SwiftData로 들어간
-                    // 번들분(있다면)만 아래에서 1회성으로 정리한다.
+                    // 관주/난외주/한자주석/한자사전은 사용자가 편집하지 않는 정적 참조 데이터라
+                    // CloudKit 동기화 대상이 아니며, 번들 `Resources/ReferenceData.sqlite`(읽기 전용)에서
+                    // 직접 읽는다(`ReferenceDataProvider`/`ReferenceDataStore`). 예전에 SwiftData로
+                    // 복사돼 들어간 번들분(있다면)만 여기서 1회성으로 정리한다.
                     ReferenceDataMigration.cleanupLegacyBundledRecords(in: modelContext)
                 } catch {
                     // 번들 리소스 누락 등 부트스트랩 실패는 S1이 "표시할 번역본 없음"으로
@@ -166,16 +108,11 @@ struct ContentView: View {
             } message: {
                 Text(bootstrapErrorDescription ?? "")
             }
-            // [2026-09-13 신설] 사용자 요청 — "개인묵상을 공유받으면 이 앱의
-            // 개인묵상으로 들어갈수 있도록 할수 있는가?" `JBCHBibleResearchApp`의
-            // `.onOpenURL`이 받은 파일을 `PendingMemoImportRequest`에 담아
-            // 두면, 여기서 감지해 미리보기 시트를 띄운다 — 위 `.appOnboarding()`
-            // 등과 같은 "신호 전용 싱글턴 → 최상단 뷰가 감지" 구조를 그대로
-            // 따른다(`PendingMemoImportRequest.swift` 상단 주석 참고).
-            // `.sheet(item:)`이라 시트가 닫히면(취소/추가 모두
-            // `ImportedMemoPreviewSheet`가 `onFinished()`로 `consume()`을
-            // 호출) 페이로드가 비워져, 같은 파일을 다시 열었을 때도 새
-            // 요청으로 인식된다.
+            // 공유받은 `.jbchmemo` 파일: `JBCHBibleResearchApp`의 `.onOpenURL`이
+            // `PendingMemoImportRequest`에 담아 두면 여기서 감지해 미리보기 시트를 띄운다
+            // (`PendingMemoImportRequest.swift`). `.sheet(item:)`이라 시트가 닫히면
+            // (`ImportedMemoPreviewSheet`가 `consume()` 호출) 페이로드가 비워져,
+            // 같은 파일을 다시 열어도 새 요청으로 인식된다.
             .sheet(item: Binding(
                 get: { PendingMemoImportRequest.shared.pending },
                 set: { if $0 == nil { PendingMemoImportRequest.shared.consume() } }
@@ -184,9 +121,8 @@ struct ContentView: View {
                     PendingMemoImportRequest.shared.consume()
                 }
             }
-            // 받은 파일이 이 앱의 형식이 아니거나 손상됐을 때(예: 다른 종류의
-            // 파일을 실수로 열었을 때) — 위 미리보기 시트 대신 이 알림을
-            // 띄운다(`PendingMemoImportRequest.handleOpenedFile` 참고).
+            // 받은 파일이 이 앱의 형식이 아니거나 손상됐을 때 미리보기 시트 대신 알림을
+            // 띄운다(`PendingMemoImportRequest.handleOpenedFile`).
             .alert(
                 "받은 파일을 열 수 없습니다",
                 isPresented: Binding(

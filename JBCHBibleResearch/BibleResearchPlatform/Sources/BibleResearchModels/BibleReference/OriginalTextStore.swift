@@ -3,12 +3,11 @@ import Foundation
 import SQLite3
 #endif
 
-// [2026-08-09 신설] `OriginalText.sqlite`(단일 테이블 `original_words`, 변환 스크립트는
-// 앱 README 참고) 읽기 전용 접근. `BibleReferenceStore`와 같은 이유로 SwiftData가
-// 아니라 raw SQLite3 C API를 직접 쓴다(정적 참조 데이터, 스레드 안전은 호출부 책임 —
-// BibleReferenceStore.swift 상단 주석과 동일한 정책).
+// `OriginalText.sqlite`(테이블 `original_words`) 읽기 전용 접근. `BibleReferenceStore`와
+// 같은 이유로 SwiftData가 아니라 raw SQLite3 C API를 직접 쓴다(정적 참조 데이터,
+// 스레드 안전은 호출부 책임).
 //
-// 스키마(변환 스크립트가 만드는 그대로):
+// `original_words` 스키마:
 //   CREATE TABLE original_words (
 //     book_id INTEGER, chapter INTEGER, verse INTEGER, word_order INTEGER,
 //     original_text TEXT, transliteration TEXT, strong_code TEXT,
@@ -35,9 +34,8 @@ public final class OriginalTextStore {
         sqlite3_close(handle)
     }
 
-    /// 절 하나에 속한 원어 단어를 원문 어순(`word_order`)대로 돌려준다. 데이터가
-    /// 아예 없는 절(변환 과정에서 파싱되지 않은 절 — 예: 일부 시적 텍스트의 특수
-    /// 표기)이면 빈 배열을 돌려준다(에러 아님 — "원문 정보 없음"은 정상 상태).
+    /// 절 하나에 속한 원어 단어를 원문 어순(`word_order`)대로 돌려준다.
+    /// 데이터가 없는 절이면 빈 배열(에러 아님 — "원문 정보 없음"은 정상 상태).
     public func words(bookId: Int, chapter: Int, verse: Int) throws -> [OriginalWordInfo] {
         let sql = """
             SELECT word_order, original_text, transliteration, strong_code, morph_code, gloss_en
@@ -76,12 +74,9 @@ public final class OriginalTextStore {
         return results
     }
 
-    /// [2026-09-16 신설] 사용자 요청 — "OriginalText.sqlite 에 LiteralTranslation
-    /// 테이블을 추가하였음... 이 데이터를 성경 - 구절 선택 - 하단 원문 정보 에
-    /// 추가하고자 함." `LiteralTranslation` 테이블은 `UNIQUE(book_id, chapter,
-    /// verse)` 제약이라 최대 한 행만 있다. 데이터가 아직 없는 절이면(변환/입력이
-    /// 안 된 절) nil을 돌려준다 — `words(bookId:chapter:verse:)`와 같은 정책
-    /// (에러가 아니라 "정보 없음" 정상 상태).
+    /// 절의 직역(`LiteralTranslation` 테이블) 정보. 이 테이블은 `UNIQUE(book_id,
+    /// chapter, verse)`라 절당 최대 한 행이다. 데이터가 없으면 nil
+    /// (`words`와 같은 정책 — 에러가 아니라 "정보 없음" 정상 상태).
     public func literalTranslation(bookId: Int, chapter: Int, verse: Int) throws -> LiteralTranslationInfo? {
         let sql = """
             SELECT literal_translation, difference

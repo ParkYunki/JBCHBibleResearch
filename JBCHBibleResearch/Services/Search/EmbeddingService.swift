@@ -2,37 +2,22 @@
 //  EmbeddingService.swift
 //  JBCHBibleResearch
 //
-//  [2026-08-19 신설, 이후 전면 교체] 사용자 요청 — "애플 인텔리전스로 텍스트를
-//  정제하고, 방식 A — 임베딩 기반 의미검색을 한다면?" 파이프라인의 "문장 → 벡터"
-//  단계. 처음엔 애플 내장 `NLContextualEmbedding`을 썼다 — 이후 사용자 질문
-//  ("내가 언제 애플 NLContextualEmbedding 임베딩으로 하라했나?")에 확인해보니
-//  실제로는 그 선택을 사용자에게 확인받지 않고 임의로 진행한 것이었다. 다시
-//  두 옵션(애플 내장 vs 한국어 특화 번들 모델)을 제시했고, 사용자가
-//  `intfloat/multilingual-e5-small`(오픈소스, 다국어 검색 특화, 한국어 지원
-//  명시)을 직접 지정해 그쪽으로 교체했다.
+//  문장 → 벡터 변환. `intfloat/multilingual-e5-small`(Core ML, 384차원)을 쓴다.
 //
-//  ⚠️⚠️ [실행 검증 안 됨, 사용자 로컬 변환 필요] 이 세션은 huggingface.co
-//  접속이 막혀 있고(허용 목록 방식 네트워크) torch 설치도 용량/시간 제약으로
-//  실패해 실제 모델을 받아 변환해보지 못했다. `Scripts/convert_multilingual_e5_small.py`
-//  (프로젝트 루트, 사용자 맥에서 직접 실행)가 `MultilingualE5Small.mlpackage`와
-//  `MultilingualE5SmallTokenizer/` 폴더를 만들어 준다 — 이 두 리소스를 Xcode
-//  프로젝트에 추가해야 이 파일이 실제로 동작한다(추가 전엔 `checkAvailability()`
-//  가 항상 `.unavailable`을 반환하도록 방어적으로 짰다).
+//  [모델 리소스] `Scripts/convert_multilingual_e5_small.py`가 만든
+//  `MultilingualE5Small.mlpackage`와 `MultilingualE5SmallTokenizer/` 폴더를 Xcode
+//  프로젝트에 추가해야 동작한다. 없으면 `checkAvailability()`가 `.unavailable`을
+//  반환한다.
 //
-//  [토크나이저] Core ML은 토큰화를 포함하지 않으므로, Hugging Face 공식 Swift
-//  패키지 `swift-transformers`(https://github.com/huggingface/swift-transformers,
-//  제품 이름 "Tokenizers")를 SPM 의존성으로 추가해야 한다 — Xcode: File > Add
-//  Package Dependencies > 위 URL 입력 > "Tokenizers" 제품만 이 앱 타겟에 추가.
-//  `multilingual-e5-small`은 XLM-RoBERTa 계열 토크나이저(SentencePiece Unigram)를
-//  쓰는데, `swift-transformers`의 `TokenizerModel.knownTokenizers`에
-//  `XLMRobertaTokenizer`가 `UnigramTokenizer`로 이미 등록돼 있는 것을
-//  GitHub에서 직접 확인했다(README/소스 코드까지 읽고 반영 — 추측이 아니다).
+//  [토크나이저] Core ML은 토큰화를 포함하지 않으므로 SPM 패키지
+//  `swift-transformers`(https://github.com/huggingface/swift-transformers)의
+//  "Tokenizers" 제품이 필요하다. XLM-RoBERTa 계열 토크나이저(SentencePiece Unigram)는
+//  이 패키지에 `UnigramTokenizer`로 등록돼 있다.
 //
-//  [query/passage 비대칭 검색] E5 계열 모델은 검색어와 색인 대상 문장에 서로
-//  다른 접두사("query: "/"passage: ")를 붙여야 정확도가 나온다(모델 카드
-//  공식 사용법) — `embedQuery(_:)`/`embedPassage(_:)`로 나눠 노출한다.
-//  `EmbeddingIndexingService`(성경 절 색인)는 `embedPassage`를,
-//  `BibleSemanticSearchService`(사용자 검색어)는 `embedQuery`를 쓴다.
+//  [query/passage 비대칭 검색] E5 계열은 검색어와 색인 대상 문장에 서로 다른
+//  접두사("query: "/"passage: ")를 붙여야 한다 — `embedQuery(_:)`는
+//  `BibleSemanticSearchService`(검색어)가, `embedPassage(_:)`는
+//  `EmbeddingIndexingService`(성경 절 색인)가 쓴다.
 //
 
 import Foundation
@@ -96,23 +81,10 @@ enum EmbeddingService {
         }
 
         do {
-            // [2026-09-03 변경] 사용자 보고 — "아이폰 초기설치후 실행시 온보딩
-            // 메세지 하단에 다음버튼을 눌러도 십몇초 동안 반응이 없다가 나중에야
-            // 눌림." `OutlineSeedImporter.swift` 상단 주석에서 고친 것과 같은
-            // 증상의 또 다른 원인 — 이 함수(`EmbeddingIndexingService.buildIndex`가
-            // 첫 절을 처리할 때 1회 호출)는 `@MainActor`로 격리된
-            // `EmbeddingService` 안에서 `MLModel(contentsOf:)`(모델 파일을 읽어
-            // 컴파일된 Core ML 모델을 메모리에 올리는 동기 호출)를 그 앞에 `await`
-            // 지점 하나 없이 그대로 실행했다 — 앱을 새로 설치했을 때(색인이 아직
-            // 없어 바로 색인 생성이 시작되는 유일한 경우) 메인 스레드를 잠깐
-            // 그대로 붙잡는다. `Task.detached`로 이 한 줄만 백그라운드 스레드에서
-            // 돌리고 결과만 `await`로 받아오면, 로드가 끝날 때까지 메인 액터
-            // (그리고 그 위에서 처리되는 UI 이벤트)는 자유롭다. `MLModel`은 Apple
-            // 문서에 명시된 스레드 안전 타입이라(추론뿐 아니라 로드도 임의
-            // 스레드에서 가능) 이 분리에 별도 위험이 없다 — 로드 결과(모델
-            // 자체)는 그대로, 그 뒤 `cachedModel`/`cachedTokenizer`에 대입하는
-            // 부분은 여전히 메인 액터에서(이 함수 자체가 `@MainActor`이므로)
-            // 실행된다.
+            // `MLModel(contentsOf:)`는 모델을 메모리에 올리는 동기 호출이라 `@MainActor`에서
+            // 직접 실행하면 메인 스레드를 붙잡아 UI가 멈춘다(앱 첫 설치 직후 색인이 바로
+            // 시작되는 경우). `Task.detached`로 백그라운드에서 로드한다 — `MLModel`은
+            // 스레드 안전 타입이고, 캐시 대입은 여전히 메인 액터에서 이뤄진다.
             let model = try await Task.detached(priority: .userInitiated) {
                 try MLModel(contentsOf: modelURL)
             }.value
@@ -190,9 +162,8 @@ enum EmbeddingService {
         } catch let error as EmbeddingError {
             throw error
         } catch {
-            // [2026-08-19] "작업을 완료할 수 없습니다 (Swift...)" 문제와 같은
-            // 원인 방지 — Core ML/Tokenizers가 던지는 에러의 원문은 콘솔에만
-            // 남기고, 화면엔 영어 타입명 없는 문구만 보낸다.
+            // Core ML/Tokenizers 에러의 원문은 콘솔에만 남기고, 화면엔 영어 타입명이
+            // 없는 문구만 보낸다.
             print("[EmbeddingService] 임베딩 실패(원본 에러, 콘솔 전용): \(error)")
             throw EmbeddingError.underlyingFailure("문장을 벡터로 변환하는 중 문제가 발생했습니다.")
         }

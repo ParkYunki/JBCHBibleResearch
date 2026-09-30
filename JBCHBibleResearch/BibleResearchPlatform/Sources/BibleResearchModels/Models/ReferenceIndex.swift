@@ -1,13 +1,10 @@
 import Foundation
 import SwiftData
 
-// 근거: bible-research-platform-schema.md 2장(구조 인덱스 계층). 6.3에서 KeywordIndex는
-// Tag로 통합됐지만(Tags.swift 참고), ThemeIndex/ThemeLink/PersonIndex/PlaceIndex/
-// TimelineEvent는 6장에서 변경 대상이 아니었으므로 원본 스키마 그대로 유지한다.
+// ThemeIndex/ThemeLink/PersonIndex/PlaceIndex/TimelineEvent: 구조 인덱스 계층.
+// KeywordIndex는 Tag로 통합됐다(Tags.swift 참고).
 
-/// 주제(테마) 마스터 목록. ⚠️ `name UNIQUE`가 원본 스키마에 없었으므로 unique를
-/// 애초에 붙이지 않는다 — Tag/BookOutline과 달리 이 테이블은 addendum이 크리티컬
-/// 이슈로 지적한 대상이 아니었다(원본에 unique 표기 자체가 없었음).
+/// 주제(테마) 마스터 목록. ⚠️ `name`에 unique 제약을 두지 않는다.
 @Model
 public final class ThemeIndex {
     public var id: UUID = UUID()
@@ -15,8 +12,7 @@ public final class ThemeIndex {
     public var themeDescription: String = ""
     public var createdAt: Date = Date.now
 
-    // ⚠️ 2026-08-06 실기기 확인: to-many @Relationship은 타입 자체가 Optional이어야
-    // CloudKit이 받아들인다(Tags.swift 상단 주석 참고).
+    // to-many @Relationship은 타입 자체가 Optional이어야 CloudKit이 받아들인다(Tags.swift 상단 주석 참고).
     @Relationship(deleteRule: .cascade, inverse: \ThemeLink.theme)
     public var links: [ThemeLink]? = []
 
@@ -55,9 +51,7 @@ public final class ThemeLink {
     }
 }
 
-/// 원본 `KeywordOccurrence(id, keyword_id, book_id, chapter, verse?, context_snippet, position)`.
-/// 6.3: "원본의 keyword_id → tag_id로 통일". 성경 본문 내 발생 — 현재 어떤 화면도
-/// 이 테이블을 채우도록 설계돼 있지 않다(향후 확장 여지로만 유지, 6.3 그대로).
+/// 성경 본문 내 키워드 발생 위치(`Tag`와 연결). 현재 이 테이블을 채우는 화면은 없다(향후 확장용).
 @Model
 public final class KeywordOccurrence {
     public var id: UUID = UUID()
@@ -103,9 +97,7 @@ public final class PersonIndex {
     }
 }
 
-/// 원본 `coordinates?` — CoreLocation 등 특정 프레임워크에 종속시키지 않기 위해
-/// 위도/경도 원시값(Double?)으로 저장한다. 📝 구현 결정: 원본 문서에 좌표 표현 방식이
-/// 명시돼 있지 않아, 가장 프레임워크 중립적인 형태를 선택했다.
+/// 좌표는 CoreLocation 등 특정 프레임워크에 종속되지 않도록 위도/경도 원시값(Double?)으로 저장한다.
 @Model
 public final class PlaceIndex {
     public var id: UUID = UUID()
@@ -132,10 +124,7 @@ public final class PlaceIndex {
     }
 }
 
-/// 원본 `TimelineEvent(id, title, era_or_date, description, person_ids[], place_ids[],
-/// verse_refs[])`. person_ids/place_ids는 원본이 명시한 그대로 원시 UUID 배열로 유지한다
-/// (PersonIndex/PlaceIndex로의 실제 @Relationship 전환은 근거 없는 리팩토링이라 보류 —
-/// 필요해지면 별도 논의).
+/// `personIds`/`placeIds`는 PersonIndex/PlaceIndex로의 @Relationship이 아니라 원시 UUID 배열로 유지한다.
 @Model
 public final class TimelineEvent {
     public var id: UUID = UUID()

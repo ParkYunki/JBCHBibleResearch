@@ -2,34 +2,19 @@
 //  TranslationFileMaterializer.swift
 //  JBCHBibleResearch
 //
-//  근거: bible-research-platform-schema.md 6.7(TranslationRegistry) + README.md
-//  "🛠️ 런타임 오류 수정" 절 위쪽에 적힌 미해결 지점 — "동기화된 Data를 SQLite로
-//  바로 열 수 없다. 동기화 완료 시점에 로컬 앱지원 디렉터리에 실제 .sqlite 파일로
-//  한 번 써낸 뒤(sqliteFileReference 갱신) 열어야 한다"는 6.7 원문 요구를 실제
-//  코드로 만든 것이다. S12(번역본 관리) 작업 전까지는 이 함수가 없어도 문제가
-//  드러나지 않았다 — 지금까지 등록된 번역본이 번들 하나뿐이라 sqliteData가 채워질
-//  일이 없었기 때문이다(TranslationBootstrap은 sqliteData: nil로 만든다). S12로
-//  사용자 추가 번역본이 실제로 생기고, 그 레코드가 다른 기기로 CloudKit 동기화되면
-//  sqliteFileReference(이 기기에서만 유효한 로컬 경로)는 그대로 안 맞고 sqliteData만
-//  도착한 상태가 된다 — 이 타입이 그 간극을 메운다.
+//  동기화로 도착한 `sqliteData`를 이 기기의 Application Support에 실제 .sqlite 파일로 써내는 타입.
+//  동기화된 Data를 SQLite로 바로 열 수 없고, `sqliteFileReference`는 이 기기에서만 유효한 로컬 경로라
+//  다른 기기에서 추가된 번역본은 `sqliteData`만 도착한 상태가 되기 때문이다.
 //
-//  ⚠️ [범위, 검증 필요] 실제 CloudKit 동기화로 다른 기기에 sqliteData가 도착하는
-//  과정 자체는 이 세션에서 실기기로 확인할 수 없다. 여기서는 "sqliteFileReference가
-//  가리키는 파일이 이 기기 디스크에 없고 sqliteData는 있다"는 조건만으로 판단한다.
+//  ⚠️ "sqliteFileReference가 가리키는 파일이 디스크에 없고 sqliteData는 있다"는 조건만으로 판단한다.
 //
 
 import Foundation
 import SwiftData
 import BibleResearchModels
 
-/// `LocalizedError`도 함께 채택한다 — `Error, CustomStringConvertible`만 채택하면
-/// `error.localizedDescription`(Swift 표준 프로퍼티, 많은 호출부가 관성적으로 씀)이
-/// `.description`을 읽지 않고 Foundation의 일반 문구("작업을 완료할 수 없습니다")로
-/// 대체돼 버린다 — README의 "기존 버그" 절에 이미 `BibleReferenceError`에서 같은
-/// 함정을 발견해 기록해 뒀는데, 이 타입을 처음 만들 때 그 교훈을 놓쳤다. [2026-08-07,
-/// 프로젝트 원본 문서 재확인 라운드] screens.md 4.3/6.7이 "새 기기에서 처음 받는
-/// 동안은 S1/S12에 '동기화 중...' 로딩 상태가 필요하다"고 명시했는데, 이 에러가
-/// 바로 그 상태를 표현하는 통로라 정확한 문구가 실제로 표시되는 게 중요하다.
+/// `LocalizedError`도 채택한다 — `Error, CustomStringConvertible`만으로는 `error.localizedDescription`이
+/// `.description`을 읽지 않고 Foundation의 일반 문구로 대체된다. 이 에러는 "동기화 중" 상태 문구의 통로라 정확한 문구가 표시돼야 한다.
 enum TranslationMaterializationError: Error, LocalizedError, CustomStringConvertible {
     case noLocalCopyAvailable
 
@@ -45,9 +30,7 @@ enum TranslationMaterializationError: Error, LocalizedError, CustomStringConvert
 
 @MainActor
 enum TranslationFileMaterializer {
-    /// 사용자 추가 번역본의 로컬 사본을 보관하는 디렉터리. Application Support 아래
-    /// 전용 폴더를 쓴다 — Documents 디렉터리는 사용자에게 노출되는(파일 앱 등) 영역이라
-    /// 내부 캐시 파일을 두기에 맞지 않다고 판단했다.
+    /// 사용자 추가 번역본의 로컬 사본 디렉터리. Documents는 사용자에게 노출되는 영역(파일 앱 등)이라 Application Support 아래 전용 폴더를 쓴다.
     static func translationsDirectory() throws -> URL {
         let base = try FileManager.default.url(
             for: .applicationSupportDirectory, in: .userDomainMask,
@@ -65,31 +48,13 @@ enum TranslationFileMaterializer {
         try translationsDirectory().appendingPathComponent("\(registryID.uuidString).sqlite")
     }
 
-    /// 가져오기(import) 시점에 실제 바이트를 로컬 캐시 파일로 써낸다. 반환된 경로를
-    /// `TranslationRegistry.sqliteFileReference`에 저장하면 된다.
+    /// import 시점에 실제 바이트를 로컬 캐시 파일로 써낸다. 반환된 경로를 `TranslationRegistry.sqliteFileReference`에 저장하면 된다.
     ///
-    /// [2026-09-05 변경] 사용자 요청 — "번역본을 검색할 때(마다) 인덱스가
-    /// 없으면 그 자리에서 만드는 대신, 번역본을 업로드할 때 인덱스를 만드는
-    /// 것을 기본으로 하고, 기존 업로드된 번역본에 대해서는 신경쓰지 않도록."
-    /// 이 함수가 로컬 사본을 "새로" 써내는 시점(= import 직후, 또는 다른
-    /// 기기에서 추가한 번역본이 이 기기로 CloudKit 동기화되어 처음
-    /// materialize되는 시점 — 아래 `ensureMaterialized` 참고. 이 기기 기준으로는
-    /// 두 경우 다 "이 번역본이 이 기기에 처음 생기는 순간"이라 같은 시점으로
-    /// 취급했다)에 `TranslationSearchIndex`(FTS5 보조 인덱스) 빌드도 함께
-    /// 한 번만 실행한다. 이미 로컬 사본이 있는 번역본은 `ensureMaterialized`가
-    /// 이 함수를 다시 부르지 않으므로(바로 아래 `fileExists` 분기) 이 함수
-    /// 자체가 호출되지 않는다 — 요청하신 대로 이 변경 이전에 이미 이 기기에
-    /// 있던 번역본은 인덱스가 생기지 않고 그대로 남는다(추가 백필 로직 없음).
-    /// 인덱스 빌드 실패는 검색 기능 자체를 막을 이유가 없으므로(느린 LIKE
-    /// 경로로 안전하게 폴백 가능 — `SearchViewModel.searchVerses` 참고)
-    /// best-effort로 무시한다(`try?`).
-    ///
-    /// 매개변수를 `registryID: UUID`에서 `registry: TranslationRegistry`로
-    /// 바꿨다 — 인덱스 빌드에 `registry.code`(version_code 컬럼이 있는 드문
-    /// 파일일 때만 필요, `BibleReferenceStore.hasVersionCodeColumn` 참고)가
-    /// 필요한데, 두 호출부(`ensureMaterialized`, `TranslationImportService.
-    /// importTranslation`) 모두 이미 registry 객체 전체를 갖고 있어 이 변경이
-    /// 호출부에 부담을 주지 않는다.
+    /// 로컬 사본을 새로 써내는 시점(import 직후, 또는 다른 기기에서 동기화돼 처음 materialize될 때)에
+    /// `TranslationSearchIndex`(FTS5 보조 인덱스)도 한 번 빌드한다. 이미 로컬 사본이 있는 번역본은
+    /// `ensureMaterialized`가 이 함수를 부르지 않으므로 인덱스를 백필하지 않는다.
+    /// 인덱스 빌드 실패는 느린 LIKE 경로로 폴백할 수 있어(`SearchViewModel.searchVerses`) best-effort로 무시한다(`try?`).
+    /// 인덱스 빌드에 `registry.code`가 필요해(version_code 컬럼이 있는 파일일 때) registry 전체를 받는다.
     @discardableResult
     static func writeLocalCopy(data: Data, registry: TranslationRegistry) throws -> URL {
         let url = try localFileURL(for: registry.id)
@@ -97,11 +62,7 @@ enum TranslationFileMaterializer {
 
         if let sourceStore = try? BibleReferenceStore(filePath: url.path) {
             let versionCode = sourceStore.hasVersionCodeColumn ? registry.code : nil
-            // [2026-09-16 수정, 빌드 경고 수정] "Result of 'try?' is unused" —
-            // `ensureBuilt(...)`가 `URL`을 반환하도록 바뀌었는데(색인 파일
-            // 경로), 이 호출부는 원래부터 색인 생성 실패를 best-effort로
-            // 무시하는 의도였다(위 주석 참고) — 그 의도는 그대로 두고
-            // 반환값만 명시적으로 버려 경고를 없앤다. 동작 변화 없음.
+            // 색인 생성 실패는 best-effort로 무시하므로 반환값(색인 파일 경로)은 명시적으로 버린다.
             _ = try? TranslationSearchIndex.ensureBuilt(
                 sourceStore: sourceStore, registryID: registry.id,
                 indexDirectory: url.deletingLastPathComponent(), versionCode: versionCode
@@ -111,14 +72,11 @@ enum TranslationFileMaterializer {
         return url
     }
 
-    /// `registry.sqliteFileReference`가 이 기기에 실제로 존재하는 파일을 가리키는지
-    /// 확인하고, 없으면 `sqliteData`로부터 다시 써낸다(동기화로 막 도착한 레코드).
-    /// 성공 시 유효한 로컬 파일 경로 문자열을 반환한다 — 호출부(BibleReadingViewModel/
-    /// SearchViewModel의 `store(for:)`)는 이 경로로 `BibleReferenceStore`를 연다.
+    /// `registry.sqliteFileReference`가 이 기기의 실제 파일을 가리키는지 확인하고, 없으면 `sqliteData`로 다시 써낸다.
+    /// 성공 시 유효한 로컬 파일 경로를 반환한다.
     ///
-    /// `context`가 필요한 이유: sqliteFileReference를 새로 써낸 경로로 갱신해
-    /// 다음 호출부터는 다시 materialize할 필요가 없게 만들기 때문이다(이 필드 자체는
-    /// 기기마다 다시 생성되므로 동기화 대상이 아니라는 6.7 정책과 일치 — README 참고).
+    /// `context`는 새로 써낸 경로로 sqliteFileReference를 갱신해 다음부터 다시 materialize하지 않게 하려고 필요하다
+    /// (이 필드는 기기마다 다시 생성되므로 동기화 대상이 아니다).
     static func ensureMaterialized(_ registry: TranslationRegistry, context: ModelContext) throws -> String {
         precondition(!registry.isBundled, "번들 번역본은 TranslationBootstrap.resolvedBundledDatabaseURL()로 직접 연다 — materialize 대상이 아니다.")
 
@@ -137,21 +95,16 @@ enum TranslationFileMaterializer {
         return url.path
     }
 
-    /// 번역본 삭제 시 로컬 캐시 파일도 함께 정리한다(best-effort — 실패해도 삭제
-    /// 자체를 막지 않는다, 디스크에 고아 파일이 남는 정도라 치명적이지 않다고 판단).
+    /// 번역본 삭제 시 로컬 캐시 파일도 정리한다. best-effort — 실패해도 삭제를 막지 않는다(고아 파일이 남는 정도).
     static func removeLocalCopy(for registry: TranslationRegistry) {
         guard !registry.sqliteFileReference.isEmpty else { return }
         try? FileManager.default.removeItem(atPath: registry.sqliteFileReference)
     }
 
-    /// [2026-08-07 추가] screens.md 4.3/6.7 — "새 기기에서 처음 받는 동안은 S1/S12에
-    /// '동기화 중...' 로딩 상태가 필요합니다"를 화면(설정 8.3 탭, S12 관리 화면)에
-    /// 표시하기 위한 순수 조회 함수. `ensureMaterialized`와 달리 **아무것도 쓰지
-    /// 않는다**(파일 생성/저장 없음) — 목록을 그릴 때마다 부작용 없이 호출할 수
-    /// 있어야 하기 때문이다. 실제로 파일을 열어 써야 하는 시점(S1/S11에서 본문을
-    /// 읽을 때)에는 여전히 `ensureMaterialized`를 쓴다.
+    /// 번역본의 동기화 상태를 보여주기 위한 순수 조회. `ensureMaterialized`와 달리 **아무것도 쓰지 않으므로**
+    /// 목록을 그릴 때마다 부작용 없이 호출할 수 있다. 실제로 파일을 열어 읽을 때는 `ensureMaterialized`를 쓴다.
     enum SyncStatus: Equatable {
-        /// 번들 정적 자산 — 애초에 동기화 개념이 없다(schema.md 0장/6장).
+        /// 번들 정적 자산 — 동기화 개념이 없다.
         case bundled
         /// 이 기기에 실제로 열 수 있는 로컬 파일이 있다.
         case available

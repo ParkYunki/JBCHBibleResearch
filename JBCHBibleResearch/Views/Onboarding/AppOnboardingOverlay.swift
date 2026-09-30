@@ -2,31 +2,19 @@
 //  AppOnboardingOverlay.swift
 //  JBCHBibleResearch
 //
-//  [2026-08-28 신설] 사용자 요청 — "처음 설치하시는 사람을 위한 가이드 화면이
-//  필요함." 앱을 처음 실행했을 때 딱 한 번, 주요 기능(성경 조회/통합 검색/
-//  연구문서 관리/말씀 노트·책갈피)을 소개하는 카러셀을 보여준다.
+//  앱 최초 실행 시 한 번만 주요 기능(성경 조회/통합 검색/연구문서 관리/
+//  말씀 노트·책갈피)을 소개하는 카러셀 온보딩 화면.
 //
-//  구조는 `BibleIndexOnboardingOverlay.swift`(2026-08-19, 이 앱의 첫 "1회성
-//  안내 화면" 선례)와 같은 패턴 — `ViewModifier` + `extension View`로
-//  `ContentView`가 한 줄만 붙이면 되게 하고, 반복 노출은
-//  `UserSettingsStore.hasCompletedOnboarding` 플래그로 막는다. 다만 내용은
-//  진행 상태 하나가 아니라 여러 "페이지"라, `TabView(.page)`(macOS엔 이
-//  스타일 자체가 없다) 대신 직접 만든 최소 카러셀(현재 페이지 인덱스 +
-//  이전/다음 버튼 + 점 인디케이터)을 썼다 — 이러면 macOS/iPadOS/iPhone
-//  전부 같은 코드로 동작한다.
+//  `ViewModifier` + `extension View` 패턴이라 `ContentView`가 한 줄만 붙이면 되고,
+//  반복 노출은 `UserSettingsStore.hasCompletedOnboarding` 플래그로 막는다.
+//  `TabView(.page)`는 macOS에 없어 직접 만든 최소 카러셀(페이지 인덱스 +
+//  이전/다음 버튼 + 점 인디케이터)을 써서 macOS/iPadOS/iPhone이 같은 코드로 동작한다.
 //
-//  ⚠️ [의도적으로 "이미지" 대신 SF Symbol 조합을 씀] `BibleIndexOnboardingOverlay.
-//  swift` 상단 주석과 같은 이유 — 이 프로젝트엔 커스텀 일러스트 에셋이 없어,
-//  이미 앱 전체가 쓰는 언어(SF Symbol + 그라디언트 원)로 대신했다. 나중에
-//  실제 일러스트가 준비되면 `OnboardingPage.icon`을 쓰는 자리만
-//  `Image("파일명")`으로 바꾸면 된다.
+//  커스텀 일러스트 에셋이 없어 SF Symbol + 그라디언트 원을 쓴다. 일러스트가
+//  준비되면 `OnboardingPage.icon`을 쓰는 자리만 `Image("파일명")`으로 바꾸면 된다.
 //
-//  [완료 시점에 `lastSeenAppVersion`도 함께 채우는 이유] 사용자 요청 2번 —
-//  "업데이트 안내 화면은 처음 설치하는 사람에게는 필요하지 않음." 이 온보딩을
-//  마치는 순간 `UserSettingsStore.lastSeenAppVersion`을 지금 버전으로
-//  채워 둔다 — 그러면 `WhatsNewOverlay.swift`의 "버전이 달라졌으면 보여준다"
-//  조건이 곧바로 거짓이 되어, 방금 설치를 마친 사람에게 업데이트 안내가
-//  잇따라 뜨는 일이 없다.
+//  완료 시 `UserSettingsStore.lastSeenAppVersion`도 현재 버전으로 채워, 갓 설치한
+//  사용자에게 `WhatsNewOverlay`의 업데이트 안내가 잇따라 뜨지 않게 한다.
 //
 
 import SwiftUI
@@ -35,14 +23,9 @@ import Observation
 #endif
 
 #if DEBUG
-/// [2026-08-29 신설] 사용자 요청 — "온보딩 메세지가 한번봤기 때문에 안보이는데
-/// 개발자모드에서는 볼 수 있도록 하게 해줘." 설정 화면의 "개발자" 탭
-/// (`SettingsView.swift`, 마찬가지로 DEBUG 빌드 전용)이 이 값을 증가시키면
-/// `AppOnboardingPresenter`가 `hasCompletedOnboarding` 값과 무관하게 온보딩
-/// 카루셀을 다시 띄운다. `SearchResultsPopRequest`(Services/SearchResultsPopRequest.swift)
-/// 와 같은 "이벤트가 일어났다" 증가 카운터 싱글턴 패턴을 그대로 따랐다 — 값
-/// 자체엔 의미가 없고 매번 바뀐다는 사실만 `.onChange`가 감지하면 된다. DEBUG
-/// 빌드에서만 존재하므로 배포 빌드엔 이 타입 자체가 포함되지 않는다.
+/// DEBUG 전용 — 설정의 "개발자" 탭이 이 값을 증가시키면 `AppOnboardingPresenter`가
+/// `hasCompletedOnboarding`과 무관하게 온보딩을 다시 띄운다. 값 자체엔 의미가 없고
+/// 매번 바뀐다는 사실만 `.onChange`가 감지한다(`SearchResultsPopRequest`와 같은 패턴).
 @MainActor
 @Observable
 final class AppOnboardingReplayRequest {
@@ -79,12 +62,8 @@ private let onboardingPages: [OnboardingPage] = [
         title: "성경 조회",
         description: "여러 번역본을 나란히 놓고 비교하며 읽고, 구절을 탭해 메모·말씀 요약으로 이어갈 수 있습니다."
     ),
-    // [2026-08-29 수정] 사용자 요청 — "현재는 DB구축이 완료되지 않았으므로
-    // 인물, 지명, 예언, AI 의미검색을 지원하지 않음." 실제 화면(SearchView)엔
-    // 이 기능들의 UI/의도 카드가 이미 있지만, 그 뒤에서 조회하는 데이터셋
-    // (인물/지명/예언 인덱스, 임베딩 색인)이 아직 다 채워지지 않아 온보딩에서
-    // 미리 홍보하면 첫 사용자에게 실망을 줄 수 있다 — 지금 실제로 안정적으로
-    // 동작하는 범위(성경구절/메모/연구문서 검색)만 소개한다.
+    // 인물/지명/예언/AI 의미검색은 뒷단 데이터셋(인덱스, 임베딩 색인)이 아직 다 채워지지
+    // 않아 소개하지 않는다. 안정적으로 동작하는 성경구절/메모/연구문서 검색만 소개한다.
     OnboardingPage(
         icon: "magnifyingglass",
         gradientColors: [.purple, .pink],
@@ -109,12 +88,9 @@ private let onboardingPages: [OnboardingPage] = [
 struct AppOnboardingPresenter: ViewModifier {
     @State private var isPresented = false
     #if DEBUG
-    /// [2026-08-29 신설] "개발자" 탭의 "온보딩 다시 보기"로 열린 것인지 표시한다
-    /// — 이 경로로 열렸을 때는 `markCompleted()`가 `hasCompletedOnboarding`/
-    /// `lastSeenAppVersion`을 건드리지 않게 막는다. 이미 온보딩을 마친 기기에서
-    /// 내용만 미리보는 용도라, 미리보기를 닫았다고 해서 (예: 다른 목적으로
-    /// 일부러 지워 둔) `lastSeenAppVersion`이 조용히 현재 버전으로 다시
-    /// 채워지면 "새로워진 점" 화면 테스트가 엉킬 수 있다.
+    /// "온보딩 다시 보기"로 열린 미리보기 여부. 이 경우 `markCompleted()`가
+    /// `hasCompletedOnboarding`/`lastSeenAppVersion`을 건드리지 않아, 미리보기를 닫아도
+    /// 의도적으로 비워 둔 `lastSeenAppVersion`이 다시 채워지지 않는다.
     @State private var isReplayPreview = false
     #endif
 
@@ -131,10 +107,8 @@ struct AppOnboardingPresenter: ViewModifier {
                 isPresented = true
             }
             #endif
-            // [2026-08-28] `onDismiss`에서 완료 처리를 하는 이유 — "시작하기"
-            // 버튼(명시적으로 `isPresented = false`)과 시스템 스와이프 종료
-            // (버튼을 안 거치는 경로) 둘 다 결국 이 시트가 닫히는 것이므로,
-            // 어느 쪽으로 닫히든 "봤다"는 사실과 버전 기록은 항상 남아야 한다.
+            // "시작하기" 버튼과 시스템 스와이프 종료 모두 시트가 닫히는 것이므로,
+            // 어느 경로든 완료 기록이 남도록 `onDismiss`에서 처리한다.
             .sheet(isPresented: $isPresented, onDismiss: markCompleted) {
                 AppOnboardingSheet(onFinish: { isPresented = false })
                     #if os(macOS)
@@ -145,8 +119,7 @@ struct AppOnboardingPresenter: ViewModifier {
 
     private func markCompleted() {
         #if DEBUG
-        // 위 `isReplayPreview` 상단 주석 참고 — 개발자 미리보기 경로는 완료
-        // 플래그/버전 기록을 건드리지 않고 조용히 끝낸다.
+        // 개발자 미리보기 경로는 완료 플래그/버전 기록을 건드리지 않는다.
         if isReplayPreview {
             isReplayPreview = false
             return
@@ -224,15 +197,9 @@ private struct AppOnboardingSheet: View {
                     .buttonStyle(.borderedProminent)
                 }
 
-                // [2026-09-03 신설] 사용자 요청 — 이 화면의 "다음" 버튼이
-                // 반응하기까지 시간이 걸릴 수 있는 원인(`ContentView.swift`의
-                // 부트스트랩 `.task`, `AppBootstrapProgress.swift` 상단 주석
-                // 참고)이 실제로 아직 끝나지 않았을 때, 그냥 멈춘 것처럼
-                // 보이지 않도록 짧은 안내를 보여준다. 정확한 퍼센트 진행률은
-                // 굳이 계산하지 않는다(사용자 확인 — "단순 스피너/문구만") —
-                // 이 부트스트랩은 항목 수에 따라 걸리는 시간이 들쭉날쭉해
-                // 정확한 진행률을 매기기보다 "아직 하고 있다"는 사실만
-                // 전달하는 편이 더 정직하다.
+                // 부트스트랩(`ContentView`의 `.task`)이 끝나기 전에는 "다음" 반응이 늦을 수 있어,
+                // 멈춘 것처럼 보이지 않게 안내만 보여준다. 항목 수에 따라 소요 시간이 들쭉날쭉해
+                // 퍼센트 진행률은 계산하지 않는다.
                 if AppBootstrapProgress.shared.isPreparingInitialData {
                     HStack(spacing: 6) {
                         ProgressView()

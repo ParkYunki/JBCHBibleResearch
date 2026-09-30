@@ -2,19 +2,10 @@
 //  BookChapterPicker.swift
 //  JBCHBibleResearch
 //
-//  screens.md 3장/S1 — 책/장 선택 UI. "그리드 피커"와 "요한복음 3장" 같은 텍스트
-//  자동완성 두 방식을 제공한다.
-//
-//  ⚠️ [단순화, 원문서와 차이] 원문서가 말하는 "자동완성"은 입력 중 후보 목록을 실시간
-//  으로 보여주는 것을 뜻할 수 있으나, 이번 구현은 텍스트를 다 입력하고 이동 버튼(또는
-//  엔터)을 눌렀을 때 BooksProvider.matchBookPrefix로 한 번에 해석하는 방식으로
-//  단순화했다. 실시간 후보 드롭다운은 이후 필요 시 추가하면 된다.
-//
-//  2026-08-06: 장 개수는 더 이상 BibleReferenceStore에 매번 쿼리하지 않고
-//  `Book.chapterCount`(books.json 정적 데이터)를 그대로 쓴다 — 사용자가 이전에 실제
-//  배포했던 앱의 데이터를 옮겨 온 것이라 신뢰할 수 있고, DB를 열 필요도 없어졌다.
-//  그리드 피커에 검색창도 추가했다(KoreanUtil 이식, Book+Search.swift 참고) — 초성
-//  입력("ㅇㅎㅂㅇ")도 지원한다.
+//  책/장 선택 UI. 그리드 피커와 "요한복음 3장" 같은 텍스트 입력 두 방식을 제공한다.
+//  텍스트 입력은 이동 버튼(또는 엔터) 시점에 BooksProvider.matchBookPrefix로 한 번에
+//  해석한다(실시간 후보 드롭다운은 없음). 장 개수는 Book.chapterCount(books.json)를
+//  쓰고, 그리드 피커 검색창은 초성 입력("ㅇㅎㅂㅇ")도 지원한다.
 //
 
 import SwiftUI
@@ -24,64 +15,22 @@ struct BookChapterPicker: View {
     let books: [Book]
     let selectedBook: Book
     let selectedChapter: Int
-    /// [2026-08-12 추가] 사용자 요청 — "관주 연결시 화면 상단 중앙 성경을
-    /// 타이핑해서 성경을 찾는 텍스트 공간은 필요없음." 메인 조회 화면
-    /// (chapterNavigationControls)은 그대로 두고, `CrossReferenceTargetPicker`
-    /// 처럼 책/장 선택 버튼만 필요한 화면에서 자유 텍스트 입력(TextField + "이동")
-    /// 을 끌 수 있게 옵션으로 뺐다 — 기본값 true라 기존 호출부는 전혀 바뀌지 않는다.
-    ///
-    /// [2026-08-12 위치 수정] 컴파일러 경고 — "Backward matching of the
-    /// unlabeled trailing closure is deprecated." 암시적 멤버와이즈 이니셜라이저는
-    /// 프로퍼티 선언 순서를 그대로 따르는데, 이 프로퍼티가 `onSelect` 뒤에 있으면
-    /// `onSelect`가 더 이상 "마지막 파라미터"가 아니게 되어, 호출부의 트레일링
-    /// 클로저가 `onSelect`와 매칭되려면 역방향 매칭(지원 중단 예정)을 타게 된다 —
-    /// `onSelect`가 항상 마지막 프로퍼티로 남도록 이 프로퍼티를 그 앞으로 옮겼다.
+    /// false면 자유 텍스트 입력(TextField + "이동")을 숨긴다. 기본값 true.
+    /// 옵션 프로퍼티는 모두 `onSelect` 앞에 둔다 — memberwise init에서 `onSelect`가
+    /// 마지막 파라미터여야 트레일링 클로저 매칭이 깨지지 않는다.
     var showsFreeTextSearch: Bool = true
-    /// [2026-08-21 추가] 사용자 요청 — "성경이동 검색 란에 절까지 포함시키면
-    /// 해당 절까지 스크롤한다음 하이라이트 잠시 표시할 것(검색 결과 클릭한 것과
-    /// 동일한 기능)". `submitFreeText()`가 절 번호까지 인식했을 때만 호출되고,
-    /// 절이 없으면(기존 "창세기1"/"요3"처럼 장만 입력) 항상 그냥 `onSelect`로
-    /// 간다 — 기본값 nil이라 이 프로퍼티를 모르는 기존 호출부(BibleReadingView
-    /// 외엔 없지만)는 전혀 바뀌지 않는다. `onSelect` 바로 앞에 둔 이유는 위
-    /// "onSelect가 항상 마지막 프로퍼티로 남아야" 주석과 같다 — 트레일링
-    /// 클로저 매칭이 깨지지 않게.
+    /// 입력에 절 번호까지 있을 때만 호출된다(장만 입력하면 `onSelect`). 기본값 nil.
     var onSelectVerse: ((Book, Int, Int) -> Void)? = nil
-    /// [2026-09-04 신설, 같은 날 재설계] 사용자 요청 — "아이폰 [성경]의 상단
-    /// 메뉴 - 성경 장 위치 이동관련 메뉴 - 크기 조정 필요." 첫 시도(책/장
-    /// 버튼에 텍스트+캡슐 배경, 검색창만 살짝 축소)는 실기기에서 "창 2장"
-    /// 텍스트가 좁은 폭에 눌려 3줄로 줄바꿈되며 찌그러지는 문제로 나타났고,
-    /// 사용자가 이어서 (1) 개별 버튼 사이 공백 없이 하나의 이어진 막대로,
-    /// (2) 책 아이콘은 아이콘만 남기고 "창2장" 표시는 검색창 쪽으로,
-    /// (3) "이동" 텍스트를 아이콘+다른 색으로 바꿔달라고 구체적으로 요청해
-    /// `compactBarBody`(아래)로 완전히 다시 짰다. true면(현재는
-    /// `BibleReadingView.compactChapterNavigationBar`가 아이폰에서만 넘김)
-    /// `body`가 `compactBarBody`를, false면(기본값) 기존 `standardBody`를
-    /// 그대로 쓴다 — 기본값이 false라 다른 호출부(`CrossReferenceTargetPicker`,
-    /// `DocumentsHomeView`, `WordNoteHomeView`, `WordSummaryEditorView`,
-    /// `SearchView`)는 이 파라미터 자체를 안 넘겨 전혀 영향받지 않는다.
-    /// `onSelect` 바로 앞에 둔 이유는 위 "onSelect가 항상 마지막 프로퍼티로
-    /// 남아야" 주석과 같다 — 트레일링 클로저 매칭이 깨지지 않게.
+    /// true면 `body`가 `compactBarBody`(이어진 막대)를, false면 `standardBody`를 쓴다. 기본값 false.
     var compactTouchTargets: Bool = false
     var onSelect: (Book, Int) -> Void
 
     @State private var isGridPresented = false
     @State private var freeText: String = ""
     @State private var parseErrorMessage: String?
-    // [2026-08-27 신설] 사용자 보고 — "상단 성경 검색영역에 포커스를 두면
-    // 키보드가 올라오는데, 포커스를 해제하거나 키보드를 내릴 수 있게 해야함.
-    // 키보드 때문에 다른 메뉴를 사용할 수 없음." 지금까지 이 TextField는
-    // 포커스 상태를 전혀 추적하지 않아(FocusState 없음), 프로그램적으로
-    // 키보드를 내릴 방법이 없었다 — 아래 키보드 액세서리 툴바의 "완료"
-    // 버튼과 `submitFreeText()` 성공 시 자동 해제(두 곳 모두 이 상태를 씀)로
-    // 해결한다.
+    // 키보드 액세서리의 "완료" 버튼과 `submitFreeText()` 성공 시 키보드를 내리는 데 쓴다.
     @FocusState private var isFreeTextFocused: Bool
-    /// [2026-09-09 추가] 사용자 요청 — "테마를 적용하면 배경색과 글자색을
-    /// 전체적으로 적용할 수 있는가(상단 메뉴영역...)." `compactBarBody`(아래)의
-    /// 검색창 텍스트/"장" 라벨은 배경이 투명(`.textFieldStyle(.plain)`)이라
-    /// 감싸는 `BibleReadingView` 상단 바가 이제 테마색일 수 있으면 그 색에
-    /// 맞춰 글자색도 같이 바뀌어야 한다 — `TranslationColumnView`/
-    /// `BibleReadingView.BibleReadingContentView`와 같은 읽기 전용 접근
-    /// 패턴을 그대로 가져왔다.
+    /// 테마 글자색 읽기 전용 접근 — 투명 배경 검색창이 상단 바 테마색에 맞춰야 한다.
     private var settings: UserSettingsStore { .shared }
 
     var body: some View {
@@ -107,20 +56,11 @@ struct BookChapterPicker: View {
             Button {
                 isGridPresented = true
             } label: {
-                // [2026-08-26 수정] 사용자 요청 — "성경 전체 이름이 아닌, 약어로
-                // 줄일것(예: 베드로전서 1장 -> 벧전 1장)." `abbreviation.first`는
-                // `books.json`에서 항상 공식 약어가 첫 번째로 오도록 되어 있고,
-                // 이미 `VerseZoomView`/`CrossReferenceTargetPicker` 등 여러 곳에서
-                // "약어로 보여줄 때" 쓰는 것과 같은 관례다(못 찾으면 전체 이름으로
-                // 폴백 — books.json이 없는 이론상 경우에 대비).
+                // 약어 표시(`abbreviation.first`는 공식 약어). 없으면 전체 이름으로 폴백.
                 Label("\(selectedBook.abbreviation.first ?? selectedBook.nameKo) \(selectedChapter)장", systemImage: "book")
             }
             .popover(isPresented: $isGridPresented) {
-                // [2026-08-08 추가] 사용자 요청 — "현재 성경에서 장만 이동하려면
-                // 성경 버튼을 클릭하고 동일한 성경을 다시 클릭해야 장을 선택할 수
-                // 있음". 지금 보고 있는 책(selectedBook)을 그대로 넘겨 처음부터
-                // 장 그리드가 열리게 한다 — "책 목록" 버튼(ChapterGrid.onBack)으로
-                // 다른 책으로 바꾸는 경로는 그대로 남겨 둔다.
+                // 현재 책의 장 그리드로 바로 시작한다. "책 목록" 버튼(ChapterGrid.onBack)으로 다른 책 선택도 가능.
                 BookGridPicker(books: books, initialBook: selectedBook) { book, chapter in
                     onSelect(book, chapter)
                     isGridPresented = false
@@ -128,31 +68,9 @@ struct BookChapterPicker: View {
                 .frame(minWidth: 360, minHeight: 460)
             }
 
-            // [2026-08-08 변경] 사용자 요청 — placeholder 예시 문구를 더 짧고
-            // 실제 입력 형태에 가깝게("예:창세기1, 요3").
-            // [2026-08-11 추가] 사용자 요청 — "모든 검색창의 placeholder 글꼴은
-            // 기본 글꼴에 일반 사이즈로." `.appDefaultFont()`(Paperlogy)가 그대로
-            // 적용되던 것을 시스템 기본 글꼴/보통 크기로 되돌린다.
             if showsFreeTextSearch {
-                // [2026-08-15 추가] 사용자 보고 — "예:창세기1, 요3"가 검색창
-                // 안이 아니라 옆으로 밀려나 보임(호출부 `Form`/`Section` 행이
-                // 이 폭을 다시 계산하려 들면서 생긴 충돌 — 호출부인
-                // `DocumentsHomeView.UploadChapterLinkSheet`/`ChapterLinkEditorSheet`
-                // 쪽에서 `Form` 자체를 걷어내 근본 원인은 없앴다). 최소 폭을
-                // 조금 더 넉넉하게 주고 `.lineLimit(1)`을 명시해, 혹시 다른
-                // 좁은 컨테이너에 다시 놓이더라도 placeholder 전체 글자가 상자
-                // 밖으로 삐져나오는 대신 상자 폭에 맞춰 잘리도록 방어했다.
-                // [2026-08-21 수정] 절 입력도 지원한다는 것을 알리기 위해 예시에
-                // "요3:16"을 추가했다("장까지만"도 여전히 되므로 "요3" 예시는 남긴다).
-                //
-                // [2026-09-12 재수정] 사용자 확인 — "팝업 열면 바로 보이는
-                // 입력창의 스타일을 수정해야함." `DocumentsHomeView.
-                // searchAndFilterBar`(연구문서 검색란, 그 파일의 같은 날짜
-                // 주석 참고)와 같은 모양(돋보기 아이콘 + `.plain` TextField +
-                // 옅은 채움/테두리 상자)으로 바꿨다 — `settings`가 있으면
-                // 테마 글자색, 없으면(이 컴포넌트가 쓰이는 macOS 툴바 등
-                // 일부 자리는 애초에 테마 대상이 아닐 수 있어) `Color.secondary`
-                // 폴백을 그대로 쓴다.
+                // 테마 글자색이 없으면(macOS 툴바 등) `Color.secondary`로 폴백한다.
+                // 좁은 컨테이너에서도 placeholder가 상자 밖으로 삐져나오지 않도록 `.lineLimit(1)`.
                 HStack(spacing: 4) {
                     Image(systemName: "magnifyingglass")
                         .font(.caption)
@@ -168,12 +86,7 @@ struct BookChapterPicker: View {
                         .textFieldStyle(.plain)
                         .onSubmit(submitFreeText)
                         .focused($isFreeTextFocused)
-                        // [2026-08-27 신설] 위 `isFreeTextFocused` 주석 참고 — 키보드
-                        // 위 액세서리 줄에 "완료" 버튼을 달아 명시적으로 포커스를
-                        // 해제(=키보드 내림)할 수 있게 한다. `.keyboard` 배치는
-                        // 소프트웨어 키보드가 있는 iOS 전용 개념이라(macOS는 하드웨어
-                        // 키보드뿐이라 이 액세서리 자체가 뜨지 않는다) `#if os(iOS)`로
-                        // 감쌌다.
+                        // 키보드 위 액세서리 줄의 "완료" 버튼으로 포커스를 해제한다. `.keyboard` 배치는 iOS 전용.
                         #if os(iOS)
                         .toolbar {
                             ToolbarItemGroup(placement: .keyboard) {
@@ -189,34 +102,10 @@ struct BookChapterPicker: View {
                 .padding(.vertical, 6)
                 .background(RoundedRectangle(cornerRadius: 8).fill(settings.bibleTextColor?.opacity(0.08) ?? Color.secondary.opacity(0.08)))
                 .overlay(RoundedRectangle(cornerRadius: 8).stroke(settings.bibleTextColor?.opacity(0.2) ?? Color.secondary.opacity(0.2), lineWidth: 1))
-                // [2026-09-12 수정] 사용자 보고(아이패드) — "성경 이동
-                // 버튼 셋 - 가운데 텍스트 입력공간이 너무 길어서 전체가
-                // 늘어져 있음. 절반으로 줄이고 전체 길이도 줄어들게 할
-                // 것." 기존 140~220을 요청대로 정확히 절반(70~110)으로
-                // 줄인다 — 안쪽 `TextField`의 `.lineLimit(1)`이 이미 있어
-                // (위 2026-08-15 주석 참고) placeholder/입력 텍스트가
-                // 좁아진 상자 밖으로 삐져나오는 대신 상자 폭에 맞춰
-                // 잘린다. 위 아이콘/패딩이 늘어난 만큼 상자 폭(`.frame`)을
-                // 안쪽 `TextField`가 아니라 이 바깥 `HStack`으로 옮겼다.
-                //
-                // [2026-09-12 재수정, 같은 날] 사용자 재보고 — "아이폰,
-                // 아이패드 에서의 관련성경 장 설정 팝업의 성경입력텍스트란은
-                // 50%정도 더 늘릴 것." 바로 위 절반 축소(70~110)가 이
-                // 필드가 쓰이는 다른 화면(macOS 툴바 등)에는 맞았지만,
-                // `ChapterLinkEditorSheet`("관련성경 장 설정" 팝업)에서는
-                // 오히려 좁아 보인다는 재요청 — 70~110의 정확히 1.5배인
-                // 105~165로 넓힌다. 이 필드는 `standardBody` 안 유일한
-                // 호출부 공통 값이라(플랫폼별로 분기하지 않음) 이 변경은
-                // 아이폰/아이패드 양쪽에 동일하게 적용된다.
+                // 폭 제한은 안쪽 `TextField`가 아니라 아이콘/패딩을 포함한 바깥 `HStack`에 둔다.
                 .frame(minWidth: 105, maxWidth: 165)
 
-                // [2026-09-05 수정] 사용자 보고(맥OS) — "성경 장 이동 및
-                // 검색 영역 - 아이폰 디자인을 참고하여 일관성을 갖추고
-                // ... 수정하라." 아래 `compactBarBody`가 이미 쓰는 "이동"
-                // 아이콘 버튼(강조색 원 배경 + 흰 화살표 아이콘)과 정확히
-                // 같은 모양으로 바꿔, 텍스트 버튼("이동")보다 이 그룹의
-                // "주된 실행 동작"임이 더 뚜렷이 드러나게 한다(새 스타일
-                // 발명 대신 같은 파일 안의 기존 패턴 재사용).
+                // `compactBarBody`의 "이동" 아이콘 버튼과 같은 모양(강조색 원 + 흰 화살표).
                 Button(action: submitFreeText) {
                     Image(systemName: "arrow.right")
                         .font(.system(size: 14, weight: .semibold))
@@ -232,16 +121,8 @@ struct BookChapterPicker: View {
         }
     }
 
-    /// [2026-09-04 신설, 2026-09-09 개정] 위 `compactTouchTargets` 주석
-    /// 참고 — 아이폰 전용 "이어진 막대" 레이아웃. `BibleReadingView.
-    /// compactChapterNavigationBar`가 이 3개 요소(책 아이콘·검색창·이동
-    /// 아이콘)를 자신의 다른 4개 버튼과 함께 하나의 캡슐 배경 안에 넣는다.
-    /// 2026-09-09, 사용자가 선택한 "대안 B"(원형 배지로 통일) 적용으로
-    /// 기존 "얇은 구분선(`CompactBarDivider`)으로만 나누는" 방식은 폐기하고,
-    /// `BibleReadingView.JoinedNavBadgeModifier`를 그대로 재사용한다 —
-    /// `compactChapterNavigationBar`의 나머지 4개 아이콘과 정확히 같은
-    /// 모듈을 쓰므로 두 파일 사이에서도 시각적으로 어긋나지 않는다. 같은
-    /// 요청으로 검색창 `TextField`의 자간(`tracking`)도 넓혔다(아래 참고).
+    /// 아이폰/아이패드 공용 "이어진 막대" 레이아웃(책 아이콘·검색창·이동 아이콘).
+    /// `BibleReadingView.JoinedNavBadgeModifier`를 재사용해 상단 막대의 나머지 아이콘과 모양을 맞춘다.
     private var compactBarBody: some View {
         HStack(spacing: 4) {
             Button {
@@ -258,44 +139,18 @@ struct BookChapterPicker: View {
                 .frame(minWidth: 360, minHeight: 460)
             }
 
-            // [2026-09-04 신설] 사용자 요청 — "책모양 아이콘의 현재 성경 장을
-            // 표시하는 텍스트는 약어로 텍스트 박스에 넣도록. 직접텍스트를
-            // 입력하여 나온 결과도 텍스트 박스에 그대로 남기도록." 이 검색창
-            // 하나가 "현재 위치 표시"와 "직접 검색 입력"을 겸한다 — 포커스가
-            // 없을 때는 아래 `syncFreeTextToCurrentPositionIfNeeded()`가 항상
-            // 현재 선택된 책/장의 약어("창2" 등)로 채우고, 포커스가 있는
-            // (타이핑 중인) 동안에는 건드리지 않는다.
-            //
-            // [2026-09-04 수정] 사용자 요청 — "'장'이라는 텍스트가 자동으로
-            // 붙는데, 불편함. ... '장'이라는 텍스트를 보여주기 위해서
-            // 지울 필요가 없는 텍스트로 고정할 수 있는 방법을 제안바람.
-            // 대신 텍스트 입력란이 너무 좁아지면 안됨." `freeText` 자체
-            // ("창2" 등, 아래 `syncFreeTextToCurrentPositionIfNeeded`/
-            // `submitFreeText` 참고)에는 더 이상 "장"을 넣지 않는다 — 대신
-            // 바로 옆에 편집 불가능한 고정 `Text("장")`을 따로 붙여, 다른
-            // 책/장을 입력하려 할 때 의미 없는 "장" 글자부터 지울 필요가
-            // 없게 했다. 포커스 중(사용자가 직접 타이핑 중, "요3:16"처럼
-            // "장"이 안 맞는 입력도 나올 수 있음)에는 이 라벨을 숨긴다 —
-            // 숨겨진 만큼 입력란이 넓어져 "텍스트 입력란이 좁아지면 안됨"도
-            // 함께 만족한다.
+            // 이 검색창은 "현재 위치 표시"와 "직접 검색 입력"을 겸한다. 포커스가 없을 때는
+            // `syncFreeTextToCurrentPositionIfNeeded()`가 현재 책/장 약어로 채우고, 타이핑 중에는 건드리지 않는다.
+            // "장"은 `freeText`에 넣지 않고 옆의 고정 `Text("장")`으로 분리했다. 포커스 중에는
+            // "요3:16" 같은 입력도 있어 이 라벨을 숨긴다.
             HStack(spacing: 2) {
-                // [2026-09-09 추가] 사용자 요청 — "성경이동하는 텍스트
-                // 입력창도 자간 폭을 넓게 해줄 것(지금보다 2배)." SwiftUI
-                // `Text`/`TextField`의 기본 자간(`tracking`)은 0이라 "지금의
-                // 2배"를 곱할 수치 기준이 없다 — 대신 이 검색창 특유의 짧은
-                // 약어 입력("창2", "요3:16")이 다른 본문 텍스트보다 살짝
-                // 성글게 보이도록 하라는 취지로 읽어, 눈에 띄되 글자가
-                // 서로 겹치거나 폭 예산을 크게 넘지 않는 값(2pt)을 골랐다.
-                // 실기기에서 보고 원하는 정도로 조정 가능.
+                // 짧은 약어 입력이 성글게 보이도록 자간 2pt.
                 TextField("예:창세기1, 요3, 요3:16", text: $freeText)
                     .font(.title3)
                     .tracking(2)
                     .lineLimit(1)
                     .textFieldStyle(.plain)
-                    // [2026-09-09 추가] `.plain` 스타일은 자체 배경이 없어
-                    // 감싸는 상단 바의 배경(테마색일 수 있음)이 그대로
-                    // 비쳐 보인다 — 입력한 글자색도 시스템 기본(`.primary`)
-                    // 대신 테마 글자색을 우선 쓴다.
+                    // `.plain` 스타일은 배경이 없어 상단 바 배경(테마색일 수 있음)이 비친다 — 글자색도 테마색 우선.
                     .foregroundStyle(settings.bibleTextColor ?? .primary)
                     .onSubmit(submitFreeText)
                     .focused($isFreeTextFocused)
@@ -313,53 +168,20 @@ struct BookChapterPicker: View {
                 if !isFreeTextFocused && !freeText.isEmpty {
                     Text("장")
                         .font(.title3)
-                        // [2026-09-09 수정] 위 TextField와 같은 이유 —
-                        // `TranslationColumnView` 아이콘들이 이미 쓰는
-                        // `settings.bibleTextColor ?? .secondary` 폴백
-                        // 관례를 그대로 따랐다.
+                        // TextField와 같은 이유로 테마 글자색 우선, 없으면 `.secondary`.
                         .foregroundStyle(settings.bibleTextColor ?? .secondary)
                         .lineLimit(1)
                         .fixedSize()
                 }
             }
-            // [2026-09-04 추가, 2026-09-09 개정] 사용자 요청 — "이 검색창의
-            // 텍스트가 '|' 세로 바와 딱 붙지 않게 왼쪽 패딩? 여백?을 줄 수
-            // 있는가?" 원래는 바로 왼쪽의 `CompactBarDivider()`와의 간격
-            // 문제였으나, 2026-09-09 그 구분선을 없앤 뒤에도 책 아이콘
-            // 배지와 텍스트 사이 여백은 그대로 필요해 유지한다.
+            // 책 아이콘 배지와 텍스트 사이 여백.
             .padding(.leading, 8)
-            // [2026-09-12 수정] 사용자 재보고(아이패드) — "성경 이동 버튼
-            // 셋의 전체 길이가 항상 화면 가로 길이 전체를 의미하는 것 같음
-            // (사이드바 유무에 따라 늘었다 줄었다 함). 이전 수정(아래
-            // `standardBody`의 TextField 폭 조정)이 반영 안 된 것처럼
-            // 보임." 실제 원인은 그 수정과 무관했다 — 아이패드는
-            // 2026-09-12 변경으로 `BibleReadingView.chapterNavigationControls`가
-            // 이제 (macOS만 쓰는) `standardBody`가 아니라 이 `compactBarBody`
-            // (아이폰과 공유)를 쓰는데, 바로 이 줄의 `maxWidth: .infinity`가
-            // 진짜 원인이었다 — 바깥 `compactChapterNavigationBar`도
-            // `.frame(maxWidth: .infinity)`로 전체 폭을 요청받는데, 그 안에서
-            // 유일하게 폭이 고정되지 않은 이 텍스트 영역이 남는 폭을 전부
-            // 흡수해, 캡슐 배경 전체가 화면(사이드바를 뺀 나머지) 가로
-            // 길이만큼 늘어나 보인 것이다("책"/"다음 장" 등 나머지 5개
-            // 버튼은 전부 고정 크기라 후보가 아니었다). 무한대 대신 고정
-            // 상한을 둬 텍스트 영역 자체를 짧게 만들면, 이 HStack에 더
-            // 이상 늘어나는 자식이 없어져 캡슐 전체가 내용물 크기로
-            // 줄어들고(바깥 `.frame(maxWidth: .infinity)`는 그 결과를 화면
-            // 중앙에 놓는 역할만 하게 된다), 자연히 "전체 길이"도 함께
-            // 줄어든다. 상한 값(90)은 이 필드가 실제로 담는 약어("삼상18",
-            // "요3:16" 등 최대 6자 안팎)가 `.font(.title3)` + `tracking(2)`
-            // 로도 잘리지 않을 정도로 골랐다 — 더 좁거나 넓게 보이면
-            // 알려주시면 조정하겠다.
+            // `maxWidth: .infinity`를 쓰면 이 영역이 바깥 `.frame(maxWidth: .infinity)` 안에서 남는 폭을 모두
+            // 흡수해 캡슐 전체가 화면 폭만큼 늘어난다. 고정 상한(90)은 최대 6자 안팎의 약어("삼상18", "요3:16")가
+            // `.title3` + `tracking(2)`에서도 잘리지 않는 값이다.
             .frame(minWidth: 50, maxWidth: 90, minHeight: 44)
 
-            // [2026-09-04 신설, 2026-09-09 개정] 사용자 요청 — "'이동'이라는
-            // 텍스트도 관련 아이콘으로 바꾸고, 색을 다르게 할 것 - 디자인
-            // 가이드에 맞춰서." 이어서 2026-09-09, "이동 아이콘이 통일성을
-            // 저해한다"는 지적에 따라 이 버튼만 별도로 그리던 진한 원형
-            // 배경(수동 `.background(Circle()...)`)을 걷어내고, 나머지
-            // 아이콘들과 동일한 `JoinedNavBadgeModifier`를 `isProminent: true`로
-            // 적용한다 — 모양(원형)은 통일하되 채움 강도만 달리해 이 버튼이
-            // 이 그룹의 "주된 실행 동작"임을 계속 구분해 보여준다.
+            // `isProminent: true`로 다른 아이콘과 모양은 통일하되 채움 강도로 "주된 실행 동작"임을 구분한다.
             Button(action: submitFreeText) {
                 Image(systemName: "arrow.right")
             }
@@ -376,25 +198,17 @@ struct BookChapterPicker: View {
             syncFreeTextToCurrentPositionIfNeeded()
         }
         .onChange(of: isFreeTextFocused) { _, focused in
-            // [2026-09-04 신설] 사용자가 검색창을 탭했다가(포커스 획득) 아무
-            // 것도 제출하지 않고 다른 곳을 탭해 포커스를 잃으면(focused ==
-            // false), 입력하다 만 텍스트가 "현재 위치"인 것처럼 남아있으면
-            // 안 되므로 다시 현재 위치 약어로 되돌린다.
+            // 제출 없이 포커스를 잃으면 입력하다 만 텍스트를 현재 위치 약어로 되돌린다.
             if !focused {
                 syncFreeTextToCurrentPositionIfNeeded()
             }
         }
     }
 
-    /// [2026-09-04 신설] `compactBarBody` 전용 — 포커스가 없을 때 검색창을
-    /// 항상 현재 선택된 책/장의 약어로 채운다. 포커스 중(사용자가 직접
-    /// 타이핑하는 동안)에는 아무것도 하지 않아 입력을 방해하지 않는다.
+    /// `compactBarBody` 전용 — 포커스가 없을 때 검색창을 현재 책/장 약어로 채운다. 타이핑 중에는 건드리지 않는다.
     private func syncFreeTextToCurrentPositionIfNeeded() {
         guard !isFreeTextFocused else { return }
-        // [2026-09-04 수정] 사용자 요청 — "장"이 검색창 텍스트 자체에 있으면
-        // 매번 지우고 다시 입력해야 해 불편하다 — "장"은 이제 별도 고정
-        // 라벨(위 `compactBarBody`의 `Text("장")`)이 맡고, 이 텍스트에는
-        // 책/장 약어만 남긴다.
+        // "장"은 별도 고정 라벨이 맡으므로 책/장 약어만 넣는다.
         freeText = "\(selectedBook.abbreviation.first ?? selectedBook.nameKo)\(selectedChapter)"
     }
 
@@ -408,10 +222,7 @@ struct BookChapterPicker: View {
         let remainder = match.remainder.trimmingCharacters(in: .whitespaces)
         let digits = remainder.prefix(while: { $0.isNumber })
         let chapter = Int(digits) ?? 1
-        // [2026-08-21 추가] 장 숫자 뒤 나머지에서 절을 인식한다. `BibleReferenceExtractor`
-        // (성경구절 자동 추출기)가 이미 검증해 둔 두 표기(콜론 "3:16", 한글 어순
-        // "3장 16절")와 같은 구분자 규칙을 그대로 따른다 — 새 규칙을 임의로
-        // 만들지 않고, 이 앱이 이미 쓰고 있는 절 표기 관행을 그대로 재사용한다.
+        // 장 숫자 뒤 나머지에서 절을 인식한다(콜론 "3:16", 한글 어순 "3장 16절" — `BibleReferenceExtractor`와 같은 규칙).
         let afterChapterDigits = remainder[digits.endIndex...]
         let verse = Self.parseTrailingVerse(afterChapterDigits)
         if let onSelectVerse, let verse {
@@ -419,27 +230,15 @@ struct BookChapterPicker: View {
         } else {
             onSelect(match.book, max(1, chapter))
         }
-        // [2026-09-04 수정] 사용자 요청 — "직접텍스트를 입력하여 나온 결과도
-        // 텍스트 박스에 그대로 남기도록." 컴팩트 모드(아이폰)는 이 검색창이
-        // "현재 위치 표시"도 겸하므로(위 `compactBarBody`/`syncFreeTextToCurrentPositionIfNeeded`
-        // 참고), 방금 이동한 결과의 약어로 즉시 채운다 — 부모의
-        // selectedBook/selectedChapter가 다음 렌더에서 갱신되어 `onChange`가
-        // 다시 같은 값을 채우기 전에도 화면이 비어 보이지 않는다. 기존
-        // 호출부(컴팩트가 아닌 표준 모드)는 원래 동작(빈 문자열로 비우기)을
-        // 그대로 유지한다.
+        // 컴팩트 모드는 검색창이 "현재 위치 표시"를 겸하므로, 부모의 selectedBook/selectedChapter가
+        // 갱신되기 전에도 비어 보이지 않게 이동한 결과의 약어로 즉시 채운다. 표준 모드는 비운다.
         if compactTouchTargets {
-            // [2026-09-04 수정] 위 `syncFreeTextToCurrentPositionIfNeeded`와
-            // 같은 이유로 "장"을 붙이지 않는다 — 고정 라벨이 대신 보여준다.
+            // "장"은 고정 라벨이 보여주므로 붙이지 않는다.
             freeText = "\(match.book.abbreviation.first ?? match.book.nameKo)\(max(1, chapter))"
         } else {
             freeText = ""
         }
-        // [2026-08-27 신설] 검색에 성공해 실제로 장(+절)을 이동시킨 뒤에는
-        // 이 입력창에 계속 머물 이유가 없다 — 키보드를 자동으로 내려 사용자가
-        // 곧바로 방금 이동한 화면(하단 메뉴 등)을 쓸 수 있게 한다. 입력을
-        // 이해하지 못해 실패한 경로(위 두 `guard`의 `return`)는 이 줄에
-        // 도달하지 않으므로, 오타를 고치려는 사용자의 포커스는 그대로
-        // 유지된다.
+        // 이동에 성공하면 키보드를 내린다. 실패 경로(위 두 `guard`)는 여기 도달하지 않아 포커스가 유지된다.
         isFreeTextFocused = false
     }
 
@@ -462,23 +261,8 @@ struct BookChapterPicker: View {
     }
 }
 
-// [2026-09-09 삭제] `CompactBarDivider`가 여기 있었다 — 대안 B(원형 배지
-// 통일) 적용으로 `compactBarBody`가 더 이상 얇은 구분선을 쓰지 않아(위
-// `JoinedNavBadgeModifier` 참고) 쓰는 곳이 없어졌다.
 
-/// [2026-09-04 신설] 사용자 요청 — "다른 서브기능(책갈피 리스트, 히스토리,
-/// 번역본선택...)의 레이아웃(버튼 배치, 리스트 유형, 색상)도 디자인이
-/// 전체적으로 통일 될 수 있도록 검토할 것." 이 파일의 책/장 선택 팝오버만
-/// 지금까지 제목·닫기 버튼이 아예 없었다(검색창/그리드가 바로 시작) —
-/// `BookmarkListPopover.header`/`TranslationPickerPopover.header`와 정확히
-/// 같은 모양(제목 `.headline` + 우측 상단 원형 `xmark.circle.fill` 닫기
-/// 버튼, 같은 패딩 14/10)으로 맞춘 공용 헤더다. `onBack`을 넘기면(장 그리드
-/// 단계) 제목 왼쪽에 뒤로가기 셰브런도 함께 보여준다 — `BibleReadingHistorySheet`
-/// 처럼 이 팝오버 전체를 `NavigationStack`으로 바꾸지는 않았다(그 파일은
-/// `.sheet`로 뜨는 전체화면 시트라 네이티브 `.navigationTitle`+툴바가 맞는
-/// 반면, 이건 계속 `.popover`로 뜨는 작은 팝업이라 기존 `pendingBook` 토글
-/// 구조를 그대로 두고 헤더만 공용 컴포넌트로 뺀 것 — 근거 없는 구조 변경
-/// 방지).
+/// 책/장 선택 팝오버 공용 헤더(제목 + 닫기 버튼). `onBack`을 넘기면(장 그리드 단계) 뒤로가기 셰브런도 보인다.
 private struct PickerHeaderBar: View {
     let title: String
     var onBack: (() -> Void)? = nil
@@ -488,22 +272,9 @@ private struct PickerHeaderBar: View {
     var body: some View {
         HStack(spacing: 8) {
             if let onBack {
-                // [2026-09-04 수정] 사용자 보고 — "'<' 성경을 선택하는
-                // 아이콘이 작아서 터치하기가 어려움." 아이콘 자체(`.body`
-                // 크기)만큼만 탭 영역이 잡혀 있었다 — `JoinedNavIconButtonModifier`
-                // (BibleReadingView.swift, 아이폰 상단 이동 막대의 아이콘
-                // 버튼들과 같은 원칙)처럼 아이콘은 그대로 두고 보이지 않는
-                // 탭 영역만 HIG 최소치(44×44pt)로 넓힌다 — 시각적 위치/
-                // 크기는 그대로다.
-                // [2026-09-05 수정] 사용자 보고(맥OS) — "'<' 성경을
-                // 선택하는 아이콘이 작아서 터치하기가 어려움"(위 44×44 안 보이는
-                // 탭 영역만으로는 부족했다는 재보고). 마우스로 클릭하는
-                // macOS에서는 트랙패드/터치와 달리 목표를 "보고" 조준하므로,
-                // 탭 영역만 넓혀서는 클릭하기 쉬워 보이지 않는다 — 이 팝오버가
-                // 이미 쓰는 `bookCircleButton`/`chapterButton`(아래)과 같은
-                // "강조색 12% 원 배경 + 35% 테두리" 언어를 그대로 재사용해,
-                // 실제로 보이는 클릭 영역 자체를 키운다(새 스타일 발명 대신
-                // 기존 패턴 재사용 — 근거 없는 리팩토링 방지).
+                // 아이콘 크기는 그대로 두고 보이는 클릭 영역을 키운다(macOS는 조준해서 클릭하므로 투명
+                // 탭 영역만으론 부족). `bookCircleButton`/`chapterButton`과 같은 강조색 12% 배경 + 35% 테두리,
+                // 탭 영역은 HIG 최소치 44×44pt.
                 Button(action: onBack) {
                     Image(systemName: "chevron.left")
                         .font(.body.weight(.semibold))
@@ -521,9 +292,7 @@ private struct PickerHeaderBar: View {
                 .font(.headline)
                 .lineLimit(1)
             Spacer()
-            // [2026-09-04 수정] 사용자 보고 — "닫기버튼도 작아서 터치가
-            // 어려움." 위 뒤로가기 버튼과 같은 이유로 탭 영역만 44×44pt로
-            // 넓힌다.
+            // 탭 영역만 44×44pt로 넓힌다(뒤로가기 버튼과 동일).
             Button {
                 dismiss()
             } label: {
@@ -538,14 +307,7 @@ private struct PickerHeaderBar: View {
             .accessibilityLabel("닫기")
         }
         .padding(.horizontal, 10)
-        // [2026-09-04 수정] 사용자 보고 — "상단에 여백을 조금 주어서 위에
-        // 딱 붙어있는 느낌이 없도록 수정할 것." 기존엔 위아래 같은 값
-        // (`.padding(.vertical, 10)`)이라 팝오버 맨 위 모서리와 버튼 사이에
-        // 여유가 거의 없었다 — 위쪽만 더 띄운다(아래는 `Divider()`가 바로
-        // 이어지므로 그대로 둔다). 좌우 패딩은 44pt 탭 영역을 더한 만큼
-        // 버튼이 시각적으로 더 안쪽으로 들어와 보이지 않도록 14→10으로
-        // 살짝 줄였다(버튼 자체의 보이는 아이콘 위치는 그대로, 탭 영역만
-        // 늘어난 것과 맞춘 조정).
+        // 위쪽 여백을 더 준다(아래는 `Divider()`가 바로 이어짐). 좌우는 44pt 탭 영역만큼 버튼이 안쪽으로 들어와 보이지 않게 10.
         .padding(.top, 16)
         .padding(.bottom, 10)
     }
@@ -555,33 +317,20 @@ private struct BookGridPicker: View {
     let books: [Book]
     var onSelect: (Book, Int) -> Void
 
-    /// [2026-09-12 신설] 사용자 보고 — "책 아이콘 눌렀을 때 성경장을
-    /// 선택하는 레이어 팝업의 배경색... 아이폰과 아이패드 배경색이 각각
-    /// 다른 색으로 고정되어있음(아이폰 검정/아이패드 흰색). 테마색상에
-    /// 맞추도록." 두 기기가 서로 다른 고정색으로 보인 건 이 팝업이 애초에
-    /// 배경 자체를 지정한 적이 없어(시스템 기본 배경 그대로) 각 기기의
-    /// 현재 라이트/다크 모드 설정을 그대로 반영했을 뿐이었다 — 아래
-    /// `body` 끝의 `.background()`/`.foregroundStyle()`이 이 값을 쓴다.
-    /// 바로 아래 `아래 주석(2026-09-12 이전)`은 "이 파일은 테마 대상이
-    /// 아니다"라고 적어 뒀었는데, 배경색 자체를 테마에 맞추려면 이 값이
-    /// 필요해 이제는 읽기 전용으로 참조한다(다른 화면들과 같은 패턴).
+    /// 테마 배경/글자색 읽기 전용 접근 — `body` 끝의 `.background()`/`.foregroundStyle()`에서 쓴다.
     private var settings: UserSettingsStore { .shared }
 
     @State private var pendingBook: Book?
     @State private var searchText: String = ""
 
-    /// [2026-08-08 추가] `initialBook`을 넘기면 책 목록을 건너뛰고 곧바로 그 책의
-    /// 장 그리드로 시작한다(BookChapterPicker.swift 상단 호출부 주석 참고). nil이면
-    /// 기존과 동일하게 책 목록부터 보여준다.
+    /// `initialBook`을 넘기면 책 목록을 건너뛰고 그 책의 장 그리드로 바로 시작한다. nil이면 책 목록부터.
     init(books: [Book], initialBook: Book? = nil, onSelect: @escaping (Book, Int) -> Void) {
         self.books = books
         self.onSelect = onSelect
         _pendingBook = State(initialValue: initialBook)
     }
 
-    /// [2026-08-26 추가] 사용자 요청 — "구약/신약으로 구분할것." 검색 중에도
-    /// 구분을 유지한다(검색 결과가 구약/신약 어느 한쪽에만 있으면 그 섹션만
-    /// 자연히 보이고, 빈 섹션은 `testamentSection`이 통째로 숨긴다).
+    /// 검색 중에도 구약/신약 구분을 유지한다. 빈 섹션은 `testamentSection`이 숨긴다.
     private func matches(_ book: Book) -> Bool {
         searchText.isEmpty || book.matches(query: searchText)
     }
@@ -594,21 +343,12 @@ private struct BookGridPicker: View {
         books.filter { $0.testament == .new && matches($0) }
     }
 
-    /// [2026-08-26 추가] 사용자 요청 — "4단~6단 고려할 것 - 스크롤 최소화 -
-    /// UI/UX 관점에서 유리한 방향으로." 팝오버 최소 폭(`BookChapterPicker`가
-    /// `.frame(minWidth: 360, ...)`로 고정해 둠)을 기준으로 계산했다 — 원 지름
-    /// 52~62pt + 칸 사이 10pt 간격이면 좌우 여백(padding 16*2)을 뺀 328pt 안에
-    /// 대략 5~6개(원이 작을 때)에서 4개(원이 클 때) 사이로 들어와, 폭이 이보다
-    /// 넓은 화면(맥OS 팝오버 등)에서도 같은 범위를 유지한다.
+    /// 팝오버 최소 폭 360 기준: 원 지름 52~62pt + 간격 10pt로, 좌우 패딩 32를 뺀 328pt 안에 4~6개가 들어간다.
     private static let columns = [GridItem(.adaptive(minimum: 52, maximum: 62), spacing: 10)]
 
     var body: some View {
-        // [2026-09-12 수정] 위 `settings` 프로퍼티 주석 참고 — 기존엔 이
-        // `if/else` 두 분기(ChapterGrid / 책 목록)가 각각 아무 배경도
-        // 지정하지 않아 시스템 기본 배경이 그대로 드러났다(아이폰 다크모드→
-        // 검정, 아이패드 라이트모드→흰색). `Group`으로 두 분기를 감싸
-        // 배경/글자색을 한 번만 적용하면 두 상태(장 그리드 ↔ 책 목록) 모두
-        // 같은 테마를 따르고, 전환 시 배경이 깜빡이며 바뀌는 일도 없다.
+        // 두 분기(장 그리드 / 책 목록)를 `Group`으로 감싸 테마 배경/글자색을 한 번만 적용한다
+        // (배경을 지정하지 않으면 시스템 기본 배경이 드러난다).
         Group {
             if let pendingBook {
                 ChapterGrid(book: pendingBook) { chapter in
@@ -617,25 +357,11 @@ private struct BookGridPicker: View {
                     self.pendingBook = nil
                 }
             } else {
-                // [2026-09-04 신설] 사용자 요청 — "화면 레이아웃도 디자인 가이드를
-                // 충분히 참고하여 수정할 것." 위 `PickerHeaderBar` 참고 — 이
-                // 팝오버도 다른 두 팝오버(책갈피/번역본 선택)와 같은 제목+닫기
-                // 버튼 헤더를 갖춘다.
                 VStack(alignment: .leading, spacing: 0) {
                 PickerHeaderBar(title: "책 선택")
                 Divider()
                 VStack(spacing: 8) {
-                    // [2026-09-12 수정] 사용자 보고(아이패드) — "'관련성경 장
-                    // 설정' 팝업에서 성경을 검색하는 검색 입력란의 스타일을
-                    // 연구문서 검색란과 동일하게 할 것."
-                    // `DocumentsHomeView.searchAndFilterBar`(돋보기 아이콘 +
-                    // `.plain` TextField + 지우기 버튼 + 옅은 채움/테두리
-                    // 상자)와 같은 모양으로 바꿨다 — 다만 이 파일(`BookChapterPicker`/
-                    // `BookGridPicker`)은 애초에 `UserSettingsStore`(읽기
-                    // 테마) 대상이 아니라 이 화면 안에서 이미 쓰이고 있는
-                    // 색만 그대로 썼다(`Color.secondary`/`Color("AccentColor")`
-                    // — `PickerHeaderBar`/`bookCircleButton` 등 같은 파일의
-                    // 다른 요소들과 같은 관례, 새 의존성을 들여오지 않았다).
+                    // 연구문서 검색란(`DocumentsHomeView.searchAndFilterBar`)과 같은 모양(돋보기 + `.plain` TextField + 지우기 버튼 + 옅은 채움/테두리).
                     HStack(spacing: 6) {
                         Image(systemName: "magnifyingglass")
                             .foregroundStyle(.secondary)
@@ -669,13 +395,7 @@ private struct BookGridPicker: View {
                 }
             }
         }
-        // [2026-09-12 추가] 위 `settings`/`Group` 주석 참고 — 배경이 없어
-        // 시스템 기본색(다크모드 검정/라이트모드 흰색)이 그대로 보이던
-        // 문제를 고쳐, 이 팝오버도 다른 테마 대응 화면들과 같은
-        // 배경/글자색을 따르게 한다. `?? Color.clear`/`?? Color.primary`는
-        // `TranslationColumnView` 등 기존 화면들이 쓰는 것과 동일한 폴백
-        // 관례다(테마가 설정되지 않은 경우 기존 시스템 기본값과 동일하게
-        // 동작).
+        // 테마가 없으면 시스템 기본과 동일하게 동작하도록 폴백한다.
         .background(settings.bibleBackgroundColor ?? Color.clear)
         .foregroundStyle(settings.bibleTextColor ?? Color.primary)
     }
@@ -697,28 +417,12 @@ private struct BookGridPicker: View {
         }
     }
 
-    /// [2026-08-26 신설] 사용자 요청 — "성경이름을 약어로 줄이고, 버튼을
-    /// 동그라미 버튼으로 할것." `abbreviation.first`는 이 앱 전반(예:
-    /// `VerseZoomView`, `CrossReferenceTargetPicker`)이 이미 "약어 표시"에 쓰는
-    /// 것과 같은 값이다 — 못 찾으면(이론상) 전체 이름으로 폴백.
-    ///
-    /// [2026-09-04 수정] 사용자 요청 — "동그란 버튼안의 텍스트가 좀더
-    /// 선명하게 눈에 잘 띌 수 있도록 수정할 것." 텍스트가 색 지정 없이
-    /// 기본(`.primary`)으로만 그려지고 있어, 연한 액센트 틴트(0.12) 원 배경
-    /// 위에서 뚜렷한 색 대비 없이 흐릿해 보였다 — 굵게(`.semibold`) + 이
-    /// 버튼 자체의 강조색(`Color("AccentColor")`)으로 텍스트 색을 명시해, 원
-    /// 배경·테두리와 한 벌로 보이는 또렷한 "강조색 텍스트" 버튼으로
-    /// 바꿨다(아래 `ChapterGrid.chapterButton`도 같은 처리로 통일).
+    /// 약어 원형 버튼. 텍스트는 강조색 굵게로 원 배경/테두리와 한 벌로 보이게 한다(`ChapterGrid.chapterButton`도 동일).
     private func bookCircleButton(_ book: Book) -> some View {
         Button {
             pendingBook = book
         } label: {
-            // [2026-09-05 수정] 사용자 보고(맥OS) — "'책 선택' 기능에서 각
-            // 성경별 약어 버튼의 텍스트를 조금 더 크고 명확하게 표현하라."
-            // `.callout`(16pt)에서 `.title3`(20pt)로 올리고 굵기도
-            // `.bold`로 강화한다 — 원 지름(52pt)/`minimumScaleFactor`는
-            // 그대로 둬 "삼상"처럼 2글자 약어도 필요시 자동 축소로 안전하게
-            // 들어간다.
+            // 2글자 약어도 `minimumScaleFactor`로 원(52pt) 안에 들어간다.
             Text(book.abbreviation.first ?? book.nameKo)
                 .font(.title3.weight(.bold))
                 .foregroundStyle(Color("AccentColor"))
@@ -739,51 +443,19 @@ private struct ChapterGrid: View {
     var onSelect: (Int) -> Void
     var onBack: () -> Void
 
-    /// [2026-09-04 수정] 사용자 보고 — "책모양아이콘 탭 -> 장 목록: 현재
-    /// 2자리 숫자까지는 원활하게 표시되나 3자리 숫자는 3번째 숫자가 자동
-    /// 줄바꿈되는 상황, 시편 같은 경우 3자리 장 숫자가 있음." 원인: 예전
-    /// `Button("\(chapter)").buttonStyle(.bordered)`는 크기를 직접 정하지
-    /// 않고 `LazyVGrid`가 계산한 셀 폭에 맞춰 자동으로 잡히는데, 그 폭이
-    /// "150" 같은 3자리 숫자가 한 줄에 들어가기엔 좁을 수 있었고
-    /// `.lineLimit`/`.fixedSize` 보호도 없어 줄바꿈됐다 — 아래
-    /// `chapterButton`처럼 `bookCircleButton`과 같은 원칙(고정 크기 도형 +
-    /// `.lineLimit(1)`)으로 바꿔 원천적으로 줄바꿈될 수 없게 했다. 다만
-    /// 사용자 제안대로("꼭 원 아이콘이 아니어도 됨 — 라운드 사각형도
-    /// 고려") 원은 유지하지 않았다 — 3자리 숫자를 원 안에 넣으려면 지름을
-    /// 키워야 하는데, 그러면 1~2자리 장이 대부분인 다른 책들에서 불필요하게
-    /// 커 보인다. 라운드 사각형은 폭만 살짝 넓혀(52pt) 3자리를 여유 있게
-    /// 담고, 높이는 그대로(44pt, HIG 최소 탭 영역) 둘 수 있다.
+    /// 고정 크기 라운드 사각형(52×44pt, 44는 HIG 최소 탭 영역) — 3자리 장 번호(시편)가 줄바꿈되지 않도록
+    /// 크기와 `.lineLimit(1)`을 고정한다. 원형은 3자리를 담으려면 지름을 키워야 해 쓰지 않는다.
     private static let columns = [GridItem(.adaptive(minimum: 52, maximum: 64), spacing: 10)]
 
-    /// [2026-09-12 신설] 사용자 보고(아이패드) — "책 아이콘 탭했을 때 나오는
-    /// 팝업에 장번호가 나오는데 팝업이 작아서 내용이 다 안보임. 창세기의
-    /// 50장은 탭할 수도 없음." 원인 — 이 뷰를 담는 `.popover`(호출부
-    /// `standardBody`/`compactBarBody` 양쪽 다)가 `.frame(minWidth: 360,
-    /// minHeight: 460)`로 고정 높이만 줬는데, 이 값은 장이 적은 책 기준으로
-    /// 정해진 것으로 보인다 — 창세기(50장)처럼 장이 많은 책은 5열 기준
-    /// 10줄이 필요해(줄당 44pt 버튼 + 10pt 간격 ≈ 54pt) 460pt 안에 다
-    /// 안 들어간다. `ScrollView`가 있어 이론상 스크롤로 나머지를 볼 수는
-    /// 있지만, 애초에 그 책의 실제 필요 높이만큼 팝오버 자체를 키워 주면
-    /// (화면을 다 덮지 않도록 560을 상한으로 둠, 그 이상 필요한 책 — 시편
-    /// 150장 등 — 만 그 안에서 스크롤한다) 대부분의 책은 스크롤 없이
-    /// 한 화면에 다 보인다. `BookmarkListPopover.sheetHeight`/
-    /// `TranslationPickerPopover.sheetHeight` 등 이 코드베이스가 이미 쓰는
-    /// "내용물 개수로 팝업 높이를 역산" 관례와 같은 방식이다. 이 계산값은
-    /// `.frame(minHeight:)`로 적용해 호출부의 기존 460(장이 적은 책엔 이미
-    /// 충분한 값)과 자연히 "더 큰 쪽이 이긴다" — 기존 460을 그대로 두고
-    /// 여기서만 필요한 만큼 얹는다.
+    /// 팝오버 높이 추정치. 장이 많은 책(창세기 50장 등)은 호출부의 고정 minHeight 460으로 부족해
+    /// 5열 기준 필요 높이를 계산해 `.frame(minHeight:)`로 얹는다(상한 560, 그 이상은 스크롤). 460과는 큰 쪽이 적용된다.
     private var estimatedGridHeight: CGFloat {
         let headerHeight: CGFloat = 54
         let dividerHeight: CGFloat = 1
         let rowHeight: CGFloat = 54
         let outerPadding: CGFloat = 32
-        // 열 개수 추정 — 팝오버 최소 폭 360, 좌우 패딩(`.padding()` 16×2)을
-        // 뺀 328pt에 열 폭 52~64pt + 간격 10pt가 몇 개 들어가는지 계산한
-        // `BookGridPicker.columns` 상단 주석과 같은 계산(52pt 기준 최대
-        // 5열) — 실제로 팝오버가 360보다 넓게 뜨면(맥OS 등) 열이 더 늘어나
-        // 줄 수가 줄어들 수 있지만, 그 경우 이 추정치는 필요한 값보다
-        // 크게만 나와(더 낮은 상한이 아니라 여유 있는 쪽으로만 어긋남)
-        // 안전하다.
+        // 열 개수는 팝오버 최소 폭 360 기준(`BookGridPicker.columns`와 같은 계산)으로 5열 추정. 더 넓게 뜨면
+        // 실제 줄 수는 줄어 추정치가 여유 쪽으로만 어긋난다.
         let columnsEstimate = 5
         let rows = Int(ceil(Double(book.chapterCount) / Double(columnsEstimate)))
         let gridHeight = min(CGFloat(rows) * rowHeight + outerPadding, 560)
@@ -791,10 +463,6 @@ private struct ChapterGrid: View {
     }
 
     var body: some View {
-        // [2026-09-04 신설] 사용자 요청 — "다른 서브기능의 레이아웃도
-        // 디자인이 통일되도록 검토할 것." 기존 "책 목록" 텍스트 백 버튼을
-        // 위 `PickerHeaderBar`(제목 + 뒤로가기 셰브런 + 닫기 버튼)로 바꿔,
-        // `BookGridPicker`의 새 헤더와 같은 모양으로 맞췄다.
         VStack(alignment: .leading, spacing: 0) {
             PickerHeaderBar(title: "\(book.abbreviation.first ?? book.nameKo) — 장 선택", onBack: onBack)
             Divider()
@@ -817,11 +485,7 @@ private struct ChapterGrid: View {
         .frame(minHeight: estimatedGridHeight)
     }
 
-    /// [2026-09-04 신설] 위 `body`/`columns` 상단 주석 참고 — 고정 크기
-    /// 라운드 사각형 버튼. `bookCircleButton`과 같은 색 언어(강조색 12%
-    /// 배경 + 35% 테두리 + 강조색 굵은 텍스트)를 그대로 재사용해 이 팝오버
-    /// 안에서 "책 선택"과 "장 선택" 두 단계가 하나의 일관된 스타일로
-    /// 보이게 한다.
+    /// 고정 크기 라운드 사각형 버튼. `bookCircleButton`과 같은 색 언어(강조색 12% 배경 + 35% 테두리).
     private func chapterButton(_ chapter: Int) -> some View {
         Button {
             onSelect(chapter)
