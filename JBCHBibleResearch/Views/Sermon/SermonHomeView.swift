@@ -187,7 +187,10 @@ struct SermonHomeView: View {
         .modifier(ThemedNavigationBarBackgroundModifier(color: settings.bibleBackgroundColor))
         .toolbar {
             #if os(iOS)
+            // iOS 26(Liquid Glass)부터 툴바 항목은 자동으로 유리 캡슐 배경이 깔려 글자만 있는 제목도 버튼처럼 보인다.
+            // 이 항목은 제목일 뿐이라 공유 배경을 숨긴다(`sharedBackgroundVisibility`, iOS 26+ — 배포 타깃 26.5).
             ToolbarItem(placement: .topBarLeading) { leftAlignedTitle }
+                .sharedBackgroundVisibility(.hidden)
             #endif
             ToolbarItem(placement: .primaryAction) { composeButton }
         }

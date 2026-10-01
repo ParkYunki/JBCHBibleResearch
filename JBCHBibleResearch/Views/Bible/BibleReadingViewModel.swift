@@ -601,43 +601,70 @@ final class BibleReadingViewModel {
         try? modelContext.save()
     }
 
+    /// 번역본 목록(`availableTranslations`)과 표시 중인 열(`displayedTranslationIDs`)을 SwiftData의 현재 상태에 맞춘다.
+    /// 화면 진입 때뿐 아니라 설정에서 번역본을 켜고 끄거나 다른 기기의 변경이 CloudKit으로 도착할 때도 호출된다
+    /// (`BibleReadingContentView`가 `TranslationRegistry` 변화를 감지해 부른다).
+    ///
+    /// 후보는 항상 "활성(`isEnabled`)" 번역본뿐이다. 예전에는 최초 선택·정리 단계가 비활성 번역본까지 포함한 전체(`all`)를
+    /// 기준으로 해서, 한 기기에서 끈 번역본이 다른 기기에서 계속 열로 뜨고 — 그 기기에 파일이 아직 없으면
+    /// "이 번역본의 파일이 아직 이 기기에 없습니다" 오류 열만 남아 빈 화면이 됐다.
     func loadAvailableTranslations() {
         let descriptor = FetchDescriptor<TranslationRegistry>(sortBy: [SortDescriptor(\.addedAt, order: .forward)])
         do {
             let all = try modelContext.fetch(descriptor)
-            // 비활성화된 번역본은 표시 후보에서 제외한다. 이 배열이 팝오버(`TranslationPickerPopover`)와
-            // 아래 최초 자동 선택 양쪽의 후보 전체이므로 여기서 한 번만 걸러내면 된다
-            // (`TranslationRegistry.isEnabled` 참고).
-            availableTranslations = all.filter(\.isEnabled)
-            // 아직 선택된 것이 없으면(최초 진입) 기본 표시 목록을 정한다. `defaultDisplayedTranslationCodes`
-            // (표시 번역본 체크박스)가 있으면 최우선으로 쓰고, 비어 있으면 "등록 순 + defaultTranslationCode
-            // 맨 앞" 규칙으로 대체한다.
+            let enabled = all.filter(\.isEnabled)
+            // 팝오버(`TranslationPickerPopover`)의 후보 전체다(`TranslationRegistry.isEnabled` 참고).
+            availableTranslations = enabled
+
+            // "성경 조회 기본 표시" 목록(`defaultDisplayedTranslationCodes`)은 UserDefaults라 기기별이다. 다른 기기에서 끈
+            // 번역본의 코드가 이 기기 목록에 남아 있으면, 같은 기기에서 끌 때(`SettingsView.setEnabled`)와 똑같이 뺀다.
+            // 아직 동기화로 도착하지 않은 번역본(레코드 자체가 없음)은 건드리지 않는다. 다시 켜도 자동으로 되돌리지 않는다.
+            let disabledCodes = Set(all.filter { !$0.isEnabled }.map(\.code))
+            let enabledCodes = Set(enabled.map(\.code))
+            let staleCodes = disabledCodes.subtracting(enabledCodes)   // 같은 code의 활성 행이 있으면(중복 행) 유지한다.
+            if !staleCodes.isEmpty {
+                let pruned = UserSettingsStore.shared.defaultDisplayedTranslationCodes.filter { !staleCodes.contains($0) }
+                if pruned != UserSettingsStore.shared.defaultDisplayedTranslationCodes {
+                    UserSettingsStore.shared.defaultDisplayedTranslationCodes = pruned
+                }
+            }
+
+            // 모두 꺼져 있으면 열이 하나도 없는 빈 화면이 되므로, 이때만 번들 번역본을 표시용으로 쓴다(목록/팝오버는 그대로 비어 있다).
+            let candidates = enabled.isEmpty ? all.filter(\.isBundled) : enabled
+            let validIDs = Set(candidates.map(\.persistentModelID))
+            // 사용자가 세션 중 고른 조합은 유지하되, 꺼졌거나 삭제된 번역본은 걸러낸다.
+            let previousCount = displayedTranslationIDs.count
+            displayedTranslationIDs = displayedTranslationIDs.filter { validIDs.contains($0) }
             if displayedTranslationIDs.isEmpty {
-                let preferredCodes = UserSettingsStore.shared.defaultDisplayedTranslationCodes
-                if !preferredCodes.isEmpty {
-                    let byCode = Dictionary(uniqueKeysWithValues: all.map { ($0.code, $0) })
-                    let chosen = preferredCodes.compactMap { byCode[$0] }
-                    displayedTranslationIDs = Array(chosen.prefix(maxColumns)).map(\.persistentModelID)
-                }
-                if displayedTranslationIDs.isEmpty {
-                    var ordered = all
-                    if let preferredCode = UserSettingsStore.shared.defaultTranslationCode,
-                       let index = ordered.firstIndex(where: { $0.code == preferredCode }) {
-                        let preferred = ordered.remove(at: index)
-                        ordered.insert(preferred, at: 0)
-                    }
-                    displayedTranslationIDs = ordered.prefix(maxColumns).map(\.persistentModelID)
-                }
-            } else {
-                // 목록이 바뀌었을 수 있으니(예: 번역본 삭제) 더 이상 존재하지 않는 선택은
-                // 걸러낸다.
-                let stillValid = Set(all.map(\.persistentModelID))
-                displayedTranslationIDs = displayedTranslationIDs.filter { stillValid.contains($0) }
+                // 최초 진입이거나 표시 중이던 열이 전부 사라진 경우 — 이전 열 개수(없으면 최대 개수)만큼 기본 선택으로 채운다.
+                displayedTranslationIDs = defaultDisplayedSelection(from: candidates, limit: previousCount > 0 ? previousCount : maxColumns)
             }
             reloadVerses()
         } catch {
             lastErrorDescription = "등록된 번역본 목록을 불러오지 못했습니다: \(error.localizedDescription)"
         }
+    }
+
+    /// 기본 표시 번역본 선택 — `defaultDisplayedTranslationCodes`(표시 번역본 체크박스)가 있으면 최우선, 비어 있으면
+    /// "등록 순 + defaultTranslationCode 맨 앞" 규칙. 후보(`candidates`)는 호출부가 이미 활성 번역본으로 좁혀서 넘긴다.
+    private func defaultDisplayedSelection(from candidates: [TranslationRegistry], limit: Int) -> [PersistentIdentifier] {
+        let count = min(max(limit, 1), maxColumns)
+        let preferredCodes = UserSettingsStore.shared.defaultDisplayedTranslationCodes
+        if !preferredCodes.isEmpty {
+            // 중복 code 행이 있어도 `Dictionary(uniqueKeysWithValues:)`처럼 죽지 않게 첫 행을 쓴다.
+            let byCode = Dictionary(candidates.map { ($0.code, $0) }, uniquingKeysWith: { first, _ in first })
+            let chosen = preferredCodes.compactMap { byCode[$0] }
+            if !chosen.isEmpty {
+                return Array(chosen.prefix(count)).map(\.persistentModelID)
+            }
+        }
+        var ordered = candidates
+        if let preferredCode = UserSettingsStore.shared.defaultTranslationCode,
+           let index = ordered.firstIndex(where: { $0.code == preferredCode }) {
+            let preferred = ordered.remove(at: index)
+            ordered.insert(preferred, at: 0)
+        }
+        return ordered.prefix(count).map(\.persistentModelID)
     }
 
     // `recordHistory`가 false면 조회 이력에 남기지 않는다(`navigateToBookmark`만 false를 넘긴다).
@@ -1168,7 +1195,15 @@ final class BibleReadingViewModel {
 
     /// 번역본 선택 팝오버에서 호출 — 표시 목록을 교체한다(최대 maxColumns개까지만 유지).
     func setDisplayedTranslations(_ ids: [PersistentIdentifier]) {
-        displayedTranslationIDs = Array(ids.prefix(maxColumns))
+        // 말씀 요약 편집을 끝낼 때처럼 "예전에 저장해 둔 목록"을 되돌리는 호출이 있어, 그 사이 꺼졌거나 삭제된 번역본이 섞여
+        // 있을 수 있다 — 활성 번역본만 남긴다. 전부 사라졌으면(저장해 둔 열이 모두 꺼짐) 기본 선택으로 대체한다.
+        let validIDs = Set(availableTranslations.map(\.persistentModelID))
+        let filtered = ids.filter { validIDs.contains($0) }
+        if filtered.isEmpty, !ids.isEmpty, !availableTranslations.isEmpty {
+            displayedTranslationIDs = defaultDisplayedSelection(from: availableTranslations, limit: ids.count)
+        } else {
+            displayedTranslationIDs = Array(filtered.prefix(maxColumns))
+        }
         reloadVerses()
     }
 

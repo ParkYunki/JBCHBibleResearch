@@ -264,8 +264,20 @@ private struct ThemedNavigationBarBackgroundModifier: ViewModifier {
     }
 }
 
+/// `TranslationRegistry` 중 화면 구성에 영향을 주는 값만 뽑은 비교용 스냅샷 — 번역본이 추가/삭제되거나 켜고 꺼질 때만 달라진다.
+private struct TranslationRegistryState: Equatable {
+    let id: PersistentIdentifier
+    let code: String
+    let isEnabled: Bool
+}
+
 private struct BibleReadingContentView: View {
     @Environment(\.modelContext) private var modelContext
+    @Environment(\.scenePhase) private var scenePhase
+    /// 설정에서 번역본을 켜고 끄거나 다른 기기의 변경이 동기화로 도착하면 `@Query`가 갱신된다. 이를 아래 `.onChange`가 받아
+    /// 뷰모델의 번역본 목록·표시 열을 즉시 다시 맞춘다(뷰모델은 화면 진입 때만 목록을 읽어 와 변경을 스스로 알 수 없다).
+    /// 정렬은 뷰모델과 같은 등록 순이다. `sqliteData`(대용량)는 읽지 않고 id/code/isEnabled만 비교한다.
+    @Query(sort: \TranslationRegistry.addedAt, order: .forward) private var translationRegistries: [TranslationRegistry]
     /// "성경 조회 새 창" 진입점(메뉴 AppCommands.swift와 이 화면 툴바 아이콘). 창마다 다른 번역본을 조회할 수 있다.
     @Environment(\.openWindow) private var openWindow
     let viewModel: BibleReadingViewModel
@@ -689,6 +701,14 @@ private struct BibleReadingContentView: View {
         #endif
         // 이미 성경 조회를 보고 있는 채로 사이드바 "최근" 이력 항목을 다시 탭한 경우 — 화면이 다시 만들어지지 않아 `BibleReadingView`의
         // `.onAppear`가 실행되지 않으므로 `.onChange`로 처리한다.
+        .onChange(of: translationRegistries.map { TranslationRegistryState(id: $0.persistentModelID, code: $0.code, isEnabled: $0.isEnabled) }) { _, _ in
+            viewModel.loadAvailableTranslations()
+        }
+        // 동기화 대기 때문에 번역본 열이 오류로 남아 있다가(파일 도착 전) 앱이 다시 활성화되면 한 번 다시 시도한다.
+        .onChange(of: scenePhase) { _, newPhase in
+            guard newPhase == .active, viewModel.columns.contains(where: { $0.errorDescription != nil }) else { return }
+            viewModel.loadAvailableTranslations()
+        }
         .onChange(of: BibleVerseNavigationRequest.shared.pendingTarget) { _, newValue in
             guard let newValue, let book = BooksProvider.shared.book(id: newValue.bookId) else { return }
             viewModel.selectBook(book, chapter: newValue.chapter)
