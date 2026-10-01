@@ -23,11 +23,13 @@ import AppKit
 struct SermonMindMapWindowContent: View {
     @Query private var sermons: [Sermon]
     let target: SermonMindMapTarget?
+    /// 진짜 `WindowGroup` 창에서는 `@Environment(\.dismiss)`가 효과가 없어 `dismissWindow()`로 창을 닫는다.
+    @Environment(\.dismissWindow) private var dismissWindow
 
     var body: some View {
         if let target, let sermon = sermons.first(where: { $0.persistentModelID == target.sermonID }) {
             NavigationStack {
-                SermonMindMapView(sermon: sermon)
+                SermonMindMapView(sermon: sermon, onRequestClose: { dismissWindow() })
             }
         } else {
             sermonNotFoundMessage
@@ -50,6 +52,9 @@ struct SermonMindMapWindowContent: View {
 /// (중첩 스택 방지를 위해 자체 `NavigationStack`을 두지 않는다), 아이패드·맥은 `SermonMindMapWindowContent`가 별도 창으로 연다.
 struct SermonMindMapView: View {
     @Bindable var sermon: Sermon
+    /// 창(`WindowGroup`) 컨텍스트에서 창을 닫는 클로저. nil이면(아이폰 push) `dismiss()`로 이전 화면으로 돌아간다.
+    var onRequestClose: (() -> Void)? = nil
+    @Environment(\.dismiss) private var dismiss
     @Environment(\.modelContext) private var modelContext
     @Environment(\.colorScheme) private var colorScheme
     @Environment(\.self) private var environment
@@ -327,9 +332,22 @@ struct SermonMindMapView: View {
             Button("루트 노드 추가") { addRootNode() }
                 .buttonStyle(SermonPillButtonStyle(isFilled: true, tint: accent))
                 .frame(maxWidth: 220)
+            // 루트 노드를 만들지 않고 그냥 나간다 — 아무 데이터도 저장하지 않는다.
+            Button("닫기") { closeWithoutCreating() }
+                .buttonStyle(SermonPillButtonStyle(isFilled: false, tint: accent))
+                .frame(maxWidth: 220)
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .background(settings.bibleBackgroundColor ?? Color.clear)
+    }
+
+    /// 빈 상태에서 "닫기" — 노드를 만들지 않으므로 저장할 것이 없다. 창이면 창을, 아이폰 push면 이전 화면으로.
+    private func closeWithoutCreating() {
+        if let onRequestClose {
+            onRequestClose()
+        } else {
+            dismiss()
+        }
     }
 
     // MARK: - 캔버스
@@ -2504,26 +2522,6 @@ private struct StyleValueSlider: View {
                 draft = newValue
             }
         }
-    }
-}
-
-/// 선 템플릿 목록의 작은 미리보기 — `Canvas`로 실선/점선을 직접 그린다.
-private struct LineSwatch: View {
-    let color: Color
-    let dashed: Bool
-
-    var body: some View {
-        Canvas { context, size in
-            var path = Path()
-            path.move(to: CGPoint(x: 2, y: size.height / 2))
-            path.addLine(to: CGPoint(x: size.width - 2, y: size.height / 2))
-            context.stroke(
-                path,
-                with: .color(color),
-                style: StrokeStyle(lineWidth: 3, lineCap: .round, dash: dashed ? [6, 4] : [])
-            )
-        }
-        .frame(width: 32, height: 14)
     }
 }
 

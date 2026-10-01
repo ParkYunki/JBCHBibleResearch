@@ -322,8 +322,7 @@ private struct BibleReadingContentView: View {
     @State private var wordSummaryBeingEdited: VerseSummary?
     /// "닫으라는 신호"와 "인스펙터가 그리는 데이터"를 분리하는 값. 아이폰(좁은 폭)에서는 `.inspector`가 시트로 뜨는데,
     /// `wordSummaryBeingEdited`를 즉시 비우면 닫힘 애니메이션 중에 밑의 콘텐츠가 "관련 내용"으로 바뀌는 것이 잠깐 보인다. 이 값은 표시 여부(즉시
-    /// 내려 애니메이션 시작)만 맡고, `wordSummaryBeingEdited`는 0.3초 늦게 비운다(`closeWordSummaryEditor()` 참고,
-    /// `BibleIndexOnboardingOverlay.swift`가 인용한 Apple Developer Forums 스레드와 같은 근거). macOS는 인스펙터 대신
+    /// 내려 애니메이션 시작)만 맡고, `wordSummaryBeingEdited`는 0.3초 늦게 비운다(`closeWordSummaryEditor()` 참고). macOS는 인스펙터 대신
     /// 별도 `NSPanel`을 써서 이 값을 읽지 않는다.
     @State private var isWordSummaryInspectorVisible = false
     /// 말씀 요약 편집기를 여는 동안 기준 번역본 하나로 줄이기 전의 번역본 목록. 편집을 마치면 이 값으로 자동 복원하며, nil이면 좁혀 놓은 상태가 아니다.
@@ -422,6 +421,24 @@ private struct BibleReadingContentView: View {
         .primaryAction
         #endif
     }
+
+    /// 말씀 요약 편집 중 툴바 아이콘(책갈피/조회 이력/번역본 선택)을 숨길지 여부 — 아이패드/맥에서만 true가 될 수 있다.
+    /// 아이폰은 편집기가 시트로 화면을 덮어 아이콘이 어차피 가려지므로 숨기지 않는다. 숨기면 시트가 열리고 닫히는 동안(닫힐 때는
+    /// `closeWordSummaryEditor()`가 0.3초 뒤 `wordSummaryBeingEdited`를 비운다) 시스템 내비게이션 바의 항목이 통째로 제거/재삽입돼,
+    /// 시트 전환 애니메이션과 겹치는 순간 상단 바가 사라진 채 남을 수 있다(`NavigationBarGuard.swift` 참고). 아이폰은 툴바 구성을
+    /// 항상 같게 유지한다.
+    private var hidesToolbarIconsWhileEditingSummary: Bool {
+        !isPhone && wordSummaryBeingEdited != nil
+    }
+
+    #if os(iOS)
+    /// 시트/팝오버/커버 중 하나라도 떠 있는지 — 모두 닫힌 순간 `NavigationBarGuard`가 상단 바 상태를 다시 점검하게 하는 신호.
+    private var isAnyPresentationActive: Bool {
+        isRelatedContentPresented || isWordSummaryInspectorVisible || isHistoryPresented || isBookmarkListPresented
+            || isTranslationPickerPresented || isVerseZoomPresented || isOriginalTextInfoPresented
+            || memoBeingCreated != nil || partialTextSelectionTarget != nil
+    }
+    #endif
 
     var body: some View {
         VStack(spacing: 0) {
@@ -661,6 +678,15 @@ private struct BibleReadingContentView: View {
         .toolbar { toolbarContent }
         // 시스템 내비게이션 바 배경을 테마에 맞춘다(`ThemedNavigationBarBackgroundModifier` 참고).
         .modifier(ThemedNavigationBarBackgroundModifier(color: settings.bibleBackgroundColor))
+        #if os(iOS)
+        // 아이폰 상단 바가 간헐적으로 사라지는 증상 대응 — 시트/팝오버가 모두 닫힌 뒤와 화면이 다시 보일 때 바 상태를 점검하고,
+        // 숨겨져 있으면 되돌린다(`NavigationBarGuard.swift` 참고). 레이아웃/터치에 영향을 주지 않는다.
+        .background {
+            if isPhone {
+                NavigationBarGuard(recheckToken: isAnyPresentationActive)
+            }
+        }
+        #endif
         // 이미 성경 조회를 보고 있는 채로 사이드바 "최근" 이력 항목을 다시 탭한 경우 — 화면이 다시 만들어지지 않아 `BibleReadingView`의
         // `.onAppear`가 실행되지 않으므로 `.onChange`로 처리한다.
         .onChange(of: BibleVerseNavigationRequest.shared.pendingTarget) { _, newValue in
@@ -690,6 +716,39 @@ private struct BibleReadingContentView: View {
     private func createMemo(for verse: BibleVerse) {
         viewModel.selectSingleVerse(verse.verse)
         openPersonalNoteDirectly()
+    }
+
+    // MARK: - 장 끝 버튼 (이전 장 / 다음 장 / 이 장의 개인 묵상)
+
+    /// 이전/다음 장의 표시 이름. 책 경계를 넘으면 이웃 책의 첫/마지막 장이고(`BibleReadingViewModel.previousChapter/nextChapter`와 같은
+    /// 규칙), 창세기 1장의 이전·계시록 마지막 장의 다음은 nil이다.
+    private func adjacentChapterLabel(forward: Bool) -> String? {
+        let book = viewModel.selectedBook
+        let chapter = viewModel.selectedChapter
+        if forward {
+            if chapter < book.chapterCount { return "\(book.nameKo) \(chapter + 1)장" }
+            if let next = BooksProvider.shared.book(after: book) { return "\(next.nameKo) 1장" }
+        } else {
+            if chapter > 1 { return "\(book.nameKo) \(chapter - 1)장" }
+            if let previous = BooksProvider.shared.book(before: book) { return "\(previous.nameKo) \(previous.chapterCount)장" }
+        }
+        return nil
+    }
+
+    private var chapterEndActions: ChapterEndActions {
+        ChapterEndActions(
+            previousLabel: adjacentChapterLabel(forward: false),
+            nextLabel: adjacentChapterLabel(forward: true),
+            onPrevious: { viewModel.previousChapter() },
+            onNext: { viewModel.nextChapter() },
+            existingNotes: viewModel.chapterLevelMemos.prefix(8).map { memo in
+                let firstLine = memo.contentText
+                    .split(separator: "\n", omittingEmptySubsequences: true)
+                    .first.map { String($0).trimmingCharacters(in: .whitespaces) } ?? ""
+                return ChapterNoteItem(id: memo.id, preview: String(firstLine.prefix(28))) { memoBeingCreated = memo }
+            },
+            onNewNote: { memoBeingCreated = viewModel.createChapterMemo() }
+        )
     }
 
     /// 관주 팝오버에서 대상 구절을 탭했을 때 해당 책/장으로 이동한 뒤 그 절을 잠시 강조한다.
@@ -892,7 +951,9 @@ private struct BibleReadingContentView: View {
                             text: verse.content, highlights: highlights, phraseNotes: phraseNotes,
                             hanjaWords: hanjaWords, marginalNotes: marginalNotes, font: font, textColor: textColor, hanjaFont: hanjaFont
                         )
-                    }
+                    },
+                    // 아이폰은 컬럼마다 별도 페이지라 모든 페이지의 장 끝에 붙인다.
+                    chapterEndActions: chapterEndActions
                 )
                 .tag(column.id)
             }
@@ -966,7 +1027,9 @@ private struct BibleReadingContentView: View {
                             text: verse.content, highlights: highlights, phraseNotes: phraseNotes,
                             hanjaWords: hanjaWords, marginalNotes: marginalNotes, font: font, textColor: textColor, hanjaFont: hanjaFont
                         )
-                    }
+                    },
+                    // 여러 컬럼이면 버튼이 중복되지 않게 첫 컬럼에만 붙인다.
+                    chapterEndActions: index == 0 ? chapterEndActions : nil
                 )
                 .frame(maxWidth: .infinity)
             }
@@ -1066,14 +1129,23 @@ private struct BibleReadingContentView: View {
         // 아이패드에서 배경이 홈 인디케이터 안전영역 위에서 멈춰 화면 바닥과 간격이 생기므로 배경에만
         // `.ignoresSafeArea(edges: .bottom)`을 준다 — 버튼 콘텐츠는 이 modifier 밖이라 안전영역
         // 패딩을 유지해 홈 인디케이터 제스처 구역과 겹치지 않는다.
+        // 본문과 구분되도록 (1) 강조색 6% 톤을 얹고 (2) 맨 위에 0.5pt 헤어라인을 긋고 (3) 위쪽으로 옅은 그림자를 드리운다.
+        // 톤·라인은 테마 배경색/글자색에서 파생해 어떤 테마에서도 어색하지 않게 한다.
         .background {
-            Group {
+            ZStack {
                 if let bg = settings.bibleBackgroundColor {
                     bg
                 } else {
                     Rectangle().fill(.bar)
                 }
+                Color("AccentColor").opacity(0.06)
             }
+            .overlay(alignment: .top) {
+                Rectangle()
+                    .fill((settings.bibleTextColor ?? Color.secondary).opacity(0.25))
+                    .frame(height: 0.5)
+            }
+            .shadow(color: .black.opacity(0.10), radius: 6, x: 0, y: -2)
             .ignoresSafeArea(edges: .bottom)
         }
         .sheet(isPresented: $isVerseZoomPresented, onDismiss: {
@@ -1441,8 +1513,8 @@ private struct BibleReadingContentView: View {
                     .help("왼쪽 사이드바 보이기")
                 }
             }
-            // 책갈피 버튼 둘은 조회 이력/새 창/번역본 선택과 같은 이유로 말씀 요약 편집 중엔 감춘다.
-            if wordSummaryBeingEdited == nil {
+            // 책갈피 버튼 둘은 조회 이력/새 창/번역본 선택과 같은 이유로 말씀 요약 편집 중엔 감춘다(아이폰 제외 — `hidesToolbarIconsWhileEditingSummary`).
+            if !hidesToolbarIconsWhileEditingSummary {
                 ToolbarItem(placement: trailingIconPlacement) {
                     Button {
                         isBookmarkListPresented = true
@@ -1478,8 +1550,8 @@ private struct BibleReadingContentView: View {
                     .tint(JBCHCategoryPalette.wine)
                 }
             }
-            // 조회 이력 진입점. 말씀 요약 편집 중에는 조회 이력/새 창/번역본 선택 버튼을 숨긴다(편집 방해 방지).
-            if wordSummaryBeingEdited == nil {
+            // 조회 이력 진입점. 말씀 요약 편집 중에는 조회 이력/새 창/번역본 선택 버튼을 숨긴다(편집 방해 방지, 아이폰 제외).
+            if !hidesToolbarIconsWhileEditingSummary {
                 ToolbarItem(placement: trailingIconPlacement) {
                     Button {
                         isHistoryPresented = true
@@ -1522,7 +1594,7 @@ private struct BibleReadingContentView: View {
                 .help("성경 조회 새 창으로 열기")
             }
         }
-        if viewModel.availableTranslations.count > viewModel.maxColumns && wordSummaryBeingEdited == nil {
+        if viewModel.availableTranslations.count > viewModel.maxColumns && !hidesToolbarIconsWhileEditingSummary {
             ToolbarItem(placement: trailingIconPlacement) {
                 Button {
                     isTranslationPickerPresented = true

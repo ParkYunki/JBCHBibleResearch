@@ -174,6 +174,37 @@ public struct PersonFamilyRelations: Hashable {
     }
 }
 
+/// `Places` 테이블 조회 결과(전체 컬럼) — 장소 상세 페이지 전용(PlaceSeed.json 기반).
+///
+/// 같은 이름의 지명(동명이인, 예: "가나" 3곳)은 이름이 아니라 `idx`로 구분한다 — `remark` 앞의 "1. 2. 3."이
+/// 그 구분 표기다. 본문 4개(`introduce`/`bibleContents`/`geography`/`history`)는 데이터가 없거나 "기록 없음"만 있는
+/// 칸이 "-"로 저장돼 있다(`build_reference_data.py`의 `normalize_no_record`).
+public struct PlaceEntity: Hashable {
+    public let idx: String
+    public let word: String
+    /// 한 줄 설명(예: "1. 예수께서 이적을 행한 갈릴리의 한 동네."). 비어 있을 수 있다.
+    public let remark: String
+    public let verseRefs: [BibleVerseRef]
+    public let introduce: String
+    public let bibleContents: String
+    public let geography: String
+    public let history: String
+
+    public init(
+        idx: String, word: String, remark: String, verseRefs: [BibleVerseRef],
+        introduce: String, bibleContents: String, geography: String, history: String
+    ) {
+        self.idx = idx
+        self.word = word
+        self.remark = remark
+        self.verseRefs = verseRefs
+        self.introduce = introduce
+        self.bibleContents = bibleContents
+        self.geography = geography
+        self.history = history
+    }
+}
+
 /// `Persons` 테이블 조회 결과(전체 컬럼) — 인물 프로필 카드 전용.
 /// 5컬럼 고정인 `ReferenceEntity`와 별도 타입인 이유는 `ReferenceDataStore.swift` 상단 주석 참고 —
 /// PersonSeed.json 기반 보강 컬럼을 `UNION ALL` 구조의 기존 조회로는 담을 수 없다.

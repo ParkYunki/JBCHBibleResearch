@@ -92,23 +92,39 @@ struct PersonDetailView: View {
         return rows
     }
 
-    /// 이름 기준으로 중복을 제거하되 들어온 순서를 유지한다(먼저 온 항목의 idx가 비어 있으면
-    /// 뒤에 온 같은 이름의 idx로 채움).
+    /// 같은 사람이 두 번 나오지 않게 중복을 제거하되 들어온 순서를 유지한다. 기준은 idx가 있으면 idx, 없으면 이름이다 —
+    /// 이름만 보면 열두 제자의 "야고보"(#2261)와 "야고보"(#4055)처럼 이름만 같은 서로 다른 사람이 하나로 합쳐진다.
+    /// idx가 빈 항목은 같은 이름의 항목이 이미 있으면 그쪽에 합치고(뒤에 온 idx가 있으면 채움), 이름이 같은 항목이
+    /// idx로 이미 구분돼 여럿이면 어느 쪽인지 알 수 없어 새로 더하지 않는다.
     /// "동역자"/"친구" 같은 상호관계는 (가이오, co_worker_of, 바울)과 (바울, co_worker_of, 가이오)가
-    /// 별개 행으로 존재할 수 있어 `personRelationRecords(involving:)`의 dedup으로 걸러지지 않는다 —
-    /// 같은 이름이 두 번 나오지 않게 여기서 한 번 더 제거한다.
+    /// 별개 행으로 존재할 수 있어 `personRelationRecords`의 중복 제거로 걸러지지 않으므로 여기서 한 번 더 제거한다.
     private func uniqueOrdered(_ items: [(name: String, idx: String)]) -> [(name: String, idx: String)] {
-        var order: [String] = []
-        var idxByName: [String: String] = [:]
+        var result: [(name: String, idx: String)] = []
         for item in items {
-            if idxByName[item.name] == nil {
-                order.append(item.name)
-                idxByName[item.name] = item.idx
-            } else if idxByName[item.name]?.isEmpty == true && !item.idx.isEmpty {
-                idxByName[item.name] = item.idx
+            if !item.idx.isEmpty {
+                if result.contains(where: { $0.idx == item.idx }) { continue }
+                if let emptyIndex = result.firstIndex(where: { $0.idx.isEmpty && $0.name == item.name }) {
+                    result[emptyIndex].idx = item.idx
+                } else {
+                    result.append(item)
+                }
+            } else if !result.contains(where: { $0.name == item.name }) {
+                result.append(item)
             }
         }
-        return order.map { (name: $0, idx: idxByName[$0] ?? "") }
+        return result
+    }
+
+    /// 관계 행에서 이 인물이 source/target 쪽인지 판단한다. 이름(`person.word`) 비교가 아니라 idx 비교가 기본이다 —
+    /// 동명이인("예수" 3명, "야고보" 2명)은 이름이 같아 방향을 가를 수 없고, 별칭(word2)으로 적힌 행
+    /// (source_word "스보" = Persons "스비")은 이름이 달라 놓친다. idx가 없는 행(빌드 시점에 신원 미확정)만
+    /// 이름으로 비교한다.
+    private func isSource(_ relation: PersonRelationRecord) -> Bool {
+        relation.sourceIdx.isEmpty ? relation.sourceWord == person.word : relation.sourceIdx == person.idx
+    }
+
+    private func isTarget(_ relation: PersonRelationRecord) -> Bool {
+        relation.targetIdx.isEmpty ? relation.targetWord == person.word : relation.targetIdx == person.idx
     }
 
     /// 기타관계 중 표시 대상만 골라 라벨별로 묶는다.
@@ -156,54 +172,54 @@ struct PersonDetailView: View {
         for relation in person.relations {
             switch relation.relationType {
             case "teacher_of":
-                if relation.sourceWord == person.word { disciples.append((name: relation.targetWord, idx: relation.targetIdx)) }
+                if isSource(relation) { disciples.append((name: relation.targetWord, idx: relation.targetIdx)) }
             case "co_worker_of":
-                if relation.sourceWord == person.word { coWorkers.append((name: relation.targetWord, idx: relation.targetIdx)) }
-                else if relation.targetWord == person.word { coWorkers.append((name: relation.sourceWord, idx: relation.sourceIdx)) }
+                if isSource(relation) { coWorkers.append((name: relation.targetWord, idx: relation.targetIdx)) }
+                else if isTarget(relation) { coWorkers.append((name: relation.sourceWord, idx: relation.sourceIdx)) }
             case "friend_of":
-                if relation.sourceWord == person.word { friends.append((name: relation.targetWord, idx: relation.targetIdx)) }
-                else if relation.targetWord == person.word { friends.append((name: relation.sourceWord, idx: relation.sourceIdx)) }
+                if isSource(relation) { friends.append((name: relation.targetWord, idx: relation.targetIdx)) }
+                else if isTarget(relation) { friends.append((name: relation.sourceWord, idx: relation.sourceIdx)) }
             case "servant_of":
-                if relation.sourceWord == person.word { lords.append((name: relation.targetWord, idx: relation.targetIdx)) }
-                else if relation.targetWord == person.word { servants.append((name: relation.sourceWord, idx: relation.sourceIdx)) }
+                if isSource(relation) { lords.append((name: relation.targetWord, idx: relation.targetIdx)) }
+                else if isTarget(relation) { servants.append((name: relation.sourceWord, idx: relation.sourceIdx)) }
             case "brother_of":
-                if relation.sourceWord == person.word { siblings.append((name: relation.targetWord, idx: relation.targetIdx)) }
-                else if relation.targetWord == person.word { siblings.append((name: relation.sourceWord, idx: relation.sourceIdx)) }
+                if isSource(relation) { siblings.append((name: relation.targetWord, idx: relation.targetIdx)) }
+                else if isTarget(relation) { siblings.append((name: relation.sourceWord, idx: relation.sourceIdx)) }
             case "younger_brother_of":
-                if relation.targetWord == person.word { youngerBrothers.append((name: relation.sourceWord, idx: relation.sourceIdx)) }
+                if isTarget(relation) { youngerBrothers.append((name: relation.sourceWord, idx: relation.sourceIdx)) }
             case "older_brother_of":
-                if relation.targetWord == person.word { olderBrothers.append((name: relation.sourceWord, idx: relation.sourceIdx)) }
+                if isTarget(relation) { olderBrothers.append((name: relation.sourceWord, idx: relation.sourceIdx)) }
             case "sister_of":
-                if relation.targetWord == person.word { sisters.append((name: relation.sourceWord, idx: relation.sourceIdx)) }
+                if isTarget(relation) { sisters.append((name: relation.sourceWord, idx: relation.sourceIdx)) }
             case "uncle_of":
-                if relation.targetWord == person.word { uncles.append((name: relation.sourceWord, idx: relation.sourceIdx)) }
-                else if relation.sourceWord == person.word { nephews.append((name: relation.targetWord, idx: relation.targetIdx)) }
+                if isTarget(relation) { uncles.append((name: relation.sourceWord, idx: relation.sourceIdx)) }
+                else if isSource(relation) { nephews.append((name: relation.targetWord, idx: relation.targetIdx)) }
             case "ancestor_of":
-                if relation.targetWord == person.word { ancestors.append((name: relation.sourceWord, idx: relation.sourceIdx)) }
+                if isTarget(relation) { ancestors.append((name: relation.sourceWord, idx: relation.sourceIdx)) }
             case "daughter_in_law_of":
-                if relation.targetWord == person.word { daughtersInLaw.append((name: relation.sourceWord, idx: relation.sourceIdx)) }
+                if isTarget(relation) { daughtersInLaw.append((name: relation.sourceWord, idx: relation.sourceIdx)) }
             case "father_in_law_of":
                 // "장인"/"시아버지" 공통 relation_type — "자부"와 같은 이유로 target == person일 때만.
-                if relation.targetWord == person.word { fathersInLaw.append((name: relation.sourceWord, idx: relation.sourceIdx)) }
+                if isTarget(relation) { fathersInLaw.append((name: relation.sourceWord, idx: relation.sourceIdx)) }
             case "son_in_law_of":
-                if relation.targetWord == person.word { sonsInLaw.append((name: relation.sourceWord, idx: relation.sourceIdx)) }
+                if isTarget(relation) { sonsInLaw.append((name: relation.sourceWord, idx: relation.sourceIdx)) }
             case "maternal_grandfather_of":
-                if relation.targetWord == person.word { maternalGrandfathers.append((name: relation.sourceWord, idx: relation.sourceIdx)) }
+                if isTarget(relation) { maternalGrandfathers.append((name: relation.sourceWord, idx: relation.sourceIdx)) }
                 // "외손자"/"외손주" — "숙부"/"조카"처럼 같은 relationType을 반대 방향(내가 source)으로 재사용.
-                else if relation.sourceWord == person.word { grandchildrenViaDaughter.append((name: relation.targetWord, idx: relation.targetIdx)) }
+                else if isSource(relation) { grandchildrenViaDaughter.append((name: relation.targetWord, idx: relation.targetIdx)) }
             case "maternal_grandmother_of":
-                if relation.targetWord == person.word { maternalGrandmothers.append((name: relation.sourceWord, idx: relation.sourceIdx)) }
+                if isTarget(relation) { maternalGrandmothers.append((name: relation.sourceWord, idx: relation.sourceIdx)) }
             case "great_grandfather_of":
-                if relation.targetWord == person.word { greatGrandfathers.append((name: relation.sourceWord, idx: relation.sourceIdx)) }
+                if isTarget(relation) { greatGrandfathers.append((name: relation.sourceWord, idx: relation.sourceIdx)) }
             case "adversary_of":
-                if relation.sourceWord == person.word { adversaries.append((name: relation.targetWord, idx: relation.targetIdx)) }
-                else if relation.targetWord == person.word { adversaries.append((name: relation.sourceWord, idx: relation.sourceIdx)) }
+                if isSource(relation) { adversaries.append((name: relation.targetWord, idx: relation.targetIdx)) }
+                else if isTarget(relation) { adversaries.append((name: relation.sourceWord, idx: relation.sourceIdx)) }
             case "ally_of":
-                if relation.sourceWord == person.word { allies.append((name: relation.targetWord, idx: relation.targetIdx)) }
-                else if relation.targetWord == person.word { allies.append((name: relation.sourceWord, idx: relation.sourceIdx)) }
+                if isSource(relation) { allies.append((name: relation.targetWord, idx: relation.targetIdx)) }
+                else if isTarget(relation) { allies.append((name: relation.sourceWord, idx: relation.sourceIdx)) }
             case "related_to":
-                if relation.sourceWord == person.word { relatedPeople.append((name: relation.targetWord, idx: relation.targetIdx)) }
-                else if relation.targetWord == person.word { relatedPeople.append((name: relation.sourceWord, idx: relation.sourceIdx)) }
+                if isSource(relation) { relatedPeople.append((name: relation.targetWord, idx: relation.targetIdx)) }
+                else if isTarget(relation) { relatedPeople.append((name: relation.sourceWord, idx: relation.sourceIdx)) }
             default:
                 break
             }

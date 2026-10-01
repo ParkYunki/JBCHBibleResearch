@@ -68,6 +68,7 @@ struct SermonEditorView: View {
     @Environment(\.dismiss) private var dismiss
     @Environment(\.colorScheme) private var colorScheme
     @Environment(\.self) private var environment
+    @Environment(\.sermonHasFixedTitle) private var hasFixedTitle
 
     @State private var contentHtml: String = ""
     @State private var contentText: String = ""
@@ -134,7 +135,7 @@ struct SermonEditorView: View {
             Divider()
             tagSection
         }
-        .navigationTitle(isNewSermon ? "새 설교 작성" : "설교 작성")
+        .navigationTitle(hasFixedTitle ? SermonFixedTitle.navigationText : (isNewSermon ? "새 설교 작성" : "설교 작성"))
         #if os(iOS)
         .navigationBarTitleDisplayMode(.inline)
         #endif

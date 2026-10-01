@@ -21,6 +21,8 @@ struct SermonVerseReferencePicker: View {
     var onInsert: (_ text: String, _ bookId: Int, _ chapter: Int, _ verseStart: Int, _ verseEnd: Int?) -> Void
 
     @Environment(\.dismiss) private var dismiss
+    @Environment(\.colorScheme) private var colorScheme
+    @Environment(\.self) private var environment
     @State private var pendingBook: Book = BooksProvider.shared.books.first
         ?? Book(bookId: 1, testament: .old, orderIndex: 1, nameKo: "창세기", nameOriginal: "Genesis", abbreviation: ["창"], chapterCount: 50)
     @State private var pendingChapter: Int = 1
@@ -28,13 +30,27 @@ struct SermonVerseReferencePicker: View {
     @State private var pendingVerseEnd: Int = 1
     @State private var errorMessage: String?
 
-    var body: some View {
-        NavigationStack {
-            VStack(alignment: .leading, spacing: 16) {
-                Text("삽입할 말씀구절을 선택하세요")
-                    .font(.subheadline)
-                    .foregroundStyle(.secondary)
+    private var settings: UserSettingsStore { .shared }
 
+    private var accent: Color {
+        SermonTheme.accent(background: settings.bibleBackgroundColor, environment: environment, fallbackScheme: colorScheme)
+    }
+
+    private var textColor: Color { settings.bibleTextColor ?? .primary }
+
+    /// 선택한 범위를 "창세기 1:1-3" 꼴로 미리 보여 준다(삽입될 참조 표기와 같은 모양).
+    private var referencePreview: String {
+        let end = max(pendingVerseStart, pendingVerseEnd)
+        let range = end > pendingVerseStart ? "\(pendingVerseStart)-\(end)" : "\(pendingVerseStart)"
+        return "\(pendingBook.nameKo) \(pendingChapter):\(range)"
+    }
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: 16) {
+            header
+
+            VStack(alignment: .leading, spacing: 6) {
+                fieldLabel("책 · 장")
                 BookChapterPicker(
                     books: BooksProvider.shared.books,
                     selectedBook: pendingBook,
@@ -46,45 +62,89 @@ struct SermonVerseReferencePicker: View {
                     pendingVerseStart = 1
                     pendingVerseEnd = 1
                 }
-
-                VStack(alignment: .leading, spacing: 8) {
-                    Stepper(value: $pendingVerseStart, in: 1...176) {
-                        Text("\(pendingVerseStart)절부터").font(.body)
-                    }
-                    .onChange(of: pendingVerseStart) { _, newValue in
-                        if pendingVerseEnd < newValue { pendingVerseEnd = newValue }
-                    }
-
-                    Stepper(value: $pendingVerseEnd, in: pendingVerseStart...176) {
-                        Text("\(pendingVerseEnd)절까지").font(.body)
-                    }
-                }
-
-                if let errorMessage {
-                    Text(errorMessage)
-                        .font(.caption)
-                        .foregroundStyle(.red)
-                }
-
-                Spacer()
+                .tint(accent)
             }
-            .padding()
-            .navigationTitle("말씀구절 추가")
-            #if os(iOS)
-            .navigationBarTitleDisplayMode(.inline)
-            #endif
-            .toolbar {
-                ToolbarItem(placement: .cancellationAction) {
-                    Button("취소") { dismiss() }
-                }
-                ToolbarItem(placement: .confirmationAction) {
-                    Button("삽입") { insert() }
-                }
+
+            HStack(alignment: .bottom, spacing: 10) {
+                verseStepper(title: "시작 절", value: $pendingVerseStart, range: 1...176)
+                Image(systemName: "arrow.right")
+                    .font(.caption.weight(.bold))
+                    .foregroundStyle(textColor.opacity(0.4))
+                    .padding(.bottom, 14)
+                verseStepper(title: "끝 절", value: $pendingVerseEnd, range: pendingVerseStart...176)
+            }
+            .onChange(of: pendingVerseStart) { _, newValue in
+                if pendingVerseEnd < newValue { pendingVerseEnd = newValue }
+            }
+
+            HStack(spacing: 6) {
+                Image(systemName: "text.quote")
+                Text(referencePreview)
+                    .font(.subheadline.weight(.semibold))
+            }
+            .foregroundStyle(accent)
+            .padding(.horizontal, 12)
+            .padding(.vertical, 8)
+            .frame(maxWidth: .infinity, alignment: .leading)
+            .background(accent.opacity(0.10), in: RoundedRectangle(cornerRadius: SermonTheme.pillCornerRadius, style: .continuous))
+
+            if let errorMessage {
+                Text(errorMessage)
+                    .font(.caption)
+                    .foregroundStyle(.red)
+            }
+
+            HStack(spacing: 10) {
+                Button("취소") { dismiss() }
+                    .buttonStyle(SermonPillButtonStyle(isFilled: false, tint: accent))
+                Button("삽입") { insert() }
+                    .buttonStyle(SermonPillButtonStyle(isFilled: true, tint: accent))
             }
         }
+        .padding(20)
         #if os(macOS)
-        .frame(minWidth: 380, minHeight: 380)
+        .frame(width: 380)
         #endif
+        .background(settings.bibleBackgroundColor ?? Color.clear)
+        .presentationBackground(settings.bibleBackgroundColor.map { AnyShapeStyle($0) } ?? AnyShapeStyle(BackgroundStyle()))
+        .presentationSizing(.fitted)
+        .presentationDragIndicator(.visible)
+    }
+
+    private var header: some View {
+        HStack(spacing: 10) {
+            Image(systemName: "book.pages")
+                .font(.subheadline.weight(.semibold))
+                .foregroundStyle(.white)
+                .frame(width: 30, height: 30)
+                .background(accent, in: Circle())
+            Text("말씀구절 추가")
+                .font(.headline)
+                .foregroundStyle(textColor)
+            Spacer()
+        }
+    }
+
+    private func fieldLabel(_ text: String) -> some View {
+        Text(text)
+            .font(.caption.weight(.semibold))
+            .foregroundStyle(textColor.opacity(0.6))
+    }
+
+    /// 라벨 + 작은 스테퍼를 한 칸으로 묶는다. 숫자는 폭이 흔들리지 않게 고정폭 숫자로 그린다.
+    private func verseStepper(title: String, value: Binding<Int>, range: ClosedRange<Int>) -> some View {
+        VStack(alignment: .leading, spacing: 6) {
+            fieldLabel(title)
+            Stepper(value: value, in: range) {
+                Text("\(value.wrappedValue)절")
+                    .font(.body.weight(.semibold).monospacedDigit())
+                    .foregroundStyle(textColor)
+            }
+            .padding(.horizontal, 12)
+            .padding(.vertical, 8)
+            .background(Color.secondary.opacity(0.08), in: RoundedRectangle(cornerRadius: SermonTheme.pillCornerRadius, style: .continuous))
+        }
+        .frame(maxWidth: .infinity, alignment: .leading)
     }
 
     private func insert() {

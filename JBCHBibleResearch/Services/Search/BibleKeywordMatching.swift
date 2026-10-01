@@ -3,9 +3,8 @@
 //  JBCHBibleResearch
 //
 //  검색어 키워드 매칭 점수 계산과 친족 관계어 동의어 확장.
-//  `SearchViewModel.searchVerses`(키워드 단일 검색)와
-//  `BibleSemanticSearchService`(하이브리드 검색의 키워드 후보 병합)가
-//  반드시 같은 점수 규칙을 공유해야 해서 공용 파일로 분리했다.
+//  `SearchViewModel.searchVerses`(키워드 검색)와 `QueryIntentClassifier`(관계 질의 판정)가
+//  같은 어휘·점수 규칙을 공유해야 해서 공용 파일로 분리했다.
 //
 
 import Foundation

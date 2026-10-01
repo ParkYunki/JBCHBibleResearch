@@ -2,31 +2,10 @@
 //  PlaceholderScreens.swift
 //  JBCHBibleResearch
 //
-//  iPhone "더보기" 탭의 메뉴 화면(`MorePlaceholderView`)과 내부용 자리표시 화면.
-//  나머지 화면은 각자의 View 파일로 구현되어 있어 대체 대상 플레이스홀더는 남아 있지 않다.
+//  iPhone "더보기" 탭의 메뉴 화면(`MorePlaceholderView`).
 //
 
 import SwiftUI
-
-private struct ComingSoonView: View {
-    let title: String
-    let systemImage: String
-
-    var body: some View {
-        VStack(spacing: 12) {
-            Image(systemName: systemImage)
-                .font(.system(size: 40))
-                .foregroundStyle(.secondary)
-            Text(title)
-                .font(.title3)
-            Text("곧 제공됩니다")
-                .font(.callout)
-                .foregroundStyle(.secondary)
-        }
-        .frame(maxWidth: .infinity, maxHeight: .infinity)
-        .navigationTitle(title)
-    }
-}
 
 /// iPhone "더보기" 탭 — 태그 관계·개요·내 설교·설정으로 진입한다.
 /// 태그 관계·개요·내 설교는 NavigationLink push가 아니라 `.fullScreenCover`로 연다

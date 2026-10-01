@@ -7,9 +7,9 @@
 //  결과 표현(단어별 OR 매칭 + 태그 뱃지 + 본문 발췌 + 형광펜 강조 + 성경장절 인식)은
 //  `DocumentsHomeView.searchScore`와 같은 원리로 이 파일에 따로 작성했다(세 번째
 //  사용처가 생기기 전엔 공통 헬퍼로 추출하지 않는다 — `storeCache` 주석 참고).
-//  `isAIQueryEnabled`가 켜져 있으면 `BibleSemanticSearchService`(정제
-//  → 임베딩 → 코사인 유사도)로 의미 검색하며, 이때는 성경구절 섹션만 채운다(개요/메모/문서 등은
-//  임베딩 색인 대상이 아님).
+//  `isQuestionSearchEnabled`가 켜져 있으면 질의 의도 카드(관계/인물/주제/예언, `QueryIntentCard`)를
+//  먼저 계산해 결과 목록 위에 보여준다. 카드가 확정한 성경 좌표가 있으면 그 절들을, 없으면 키워드 검색
+//  결과를 그대로 쓴다.
 //
 
 import Foundation
@@ -156,7 +156,7 @@ struct SermonSearchResult: Identifiable {
 @MainActor
 @Observable
 final class SearchViewModel {
-    /// 텍스트 입력만으로는 검색하지 않는다(타이핑 중 AI 검색의 무거운 계산이 반복 실행되어 화면이 멈췄다).
+    /// 텍스트 입력만으로는 검색하지 않는다(타이핑 중 무거운 검색이 반복 실행되어 화면이 멈췄다).
     /// 비워지면 결과만 정리하고, 실제 검색은 `searchImmediately()`(엔터/검색 버튼)로만
     /// 실행한다.
     var query: String = "" {
@@ -167,37 +167,25 @@ final class SearchViewModel {
             }
         }
     }
-    /// 검색창 왼쪽 AI 토글 — 켜면 `BibleSemanticSearchService`로 의미
-    /// 검색(`performAIQuerySearch` 참고), 끄면(기본값) 순수 키워드 검색. 토글은 명시적 단발
-    /// 동작이라 곧바로 재검색한다.
-    var isAIQueryEnabled = false {
+    /// 검색창 왼쪽 질문형 검색 토글 — 켜면 질의 의도 카드(관계/인물/주제/예언)를 함께 계산하고,
+    /// 끄면(기본값) 카드 없이 순수 키워드 검색만 한다. 토글은 명시적 단발 동작이라 곧바로 재검색한다.
+    var isQuestionSearchEnabled = false {
         didSet { searchImmediately() }
     }
 
-    // `BibleSemanticSearchService.search`는 Apple Intelligence 질의
-    // 정제/재순위화를 호출하지 않는다(결정론적 `stripTrailingMetaPhrase`와 LLM이 아닌
-    // `BibleStructuralRerankerService`만 항상 적용). `BibleQueryRefinem
-    // entService.refine`/`BibleSearchRerankerService`는 호출되지 않지만
-    // 나중에 다시 연결할 수 있도록 파일을 보관한다.
-    //
-    // 절/문맥 가중치는 `search`의 `contextWeight` 매개변수(기본 0.6)로만 남아 있고
-    // 호출부는 기본값을 쓴다(`performAIQuerySearch` 참고). 0.6은 최적값이라는 근거가 없는
-    // 출발점이다.
-
-    /// 방금 AI 검색이 실제로 임베딩에 넘긴 문장(`SearchView`의 "검색에 사용된 문장" 안내에 표시).
-    /// 일반 키워드 검색에서는 항상 nil.
-    private(set) var lastAIQueryUsed: String?
+    /// 이스터 에그 오버레이 표시 여부(`ChurchYouthEasterEgg.swift`). 의미검색(질문형 검색 토글 켬) 상태에서 특정 검색어를
+    /// 검색했을 때만 `searchImmediately()`가 켠다.
+    var isEasterEggPresented = false
 
     /// Layer 1(`QueryIntentClassifier`) + Layer
     /// 2(`QueryIntentHandler`) 결과 — 검색어가 관계/인물·지명 정보/예언/주제·속성/서사 중
     /// 하나로 읽히면 해당 카테고리의 실제 데이터를 담는다. `SearchView`가 결과 목록 맨 위에 카드로
     /// 보여준다.
-    /// `isAIQueryEnabled`가 켜져 있을 때만 계산되고 순수 키워드 검색에서는 항상
-    /// nil이다(`performSearch` 참고). `performAIQuerySearch`는
-    /// `QueryIntentCard.verseRefs`를 "성경구절" 섹션에도 활용한다.
+    /// `isQuestionSearchEnabled`가 켜져 있을 때만 계산되고 꺼져 있으면 항상 nil이다(`performSearch`
+    /// 참고). 카드가 확정한 `QueryIntentCard.verseRefs`는 "성경구절" 섹션에도 활용한다.
     private(set) var intentCard: QueryIntentCard?
 
-    /// AI 카드가 항목을 여러 개 찾았을 때 사용자가 탭해 단일 항목 상세로 들어간 행의
+    /// 질의 의도 카드가 항목을 여러 개 찾았을 때 사용자가 탭해 단일 항목 상세로 들어간 행의
     /// 인덱스(`intentCard`가 가리키는 배열의 인덱스만 담는다). 항목이 1개뿐이면
     /// `SearchView`가 이 값과 무관하게 자동으로 상세를 보여준다. 이전 검색의 선택이 새 결과에 잘못
     /// 대응되지 않도록 새 검색 시작 시 항상 nil로
@@ -210,8 +198,8 @@ final class SearchViewModel {
     private(set) var allVerseResults: [VerseSearchResult] = []
 
     /// "더보기 확인창" 조건 판단(`effectiveMatchedWordCount()`)에 쓰는, 이번 키워드
-    /// 검색에 쓰인 단어 목록. `performKeywordSearch`만 채우고, AI 검색은 단어 개념이 없어
-    /// 빈 배열이므로 확인창 조건(2개 이상)을 만족하지 않는다.
+    /// 검색에 쓰인 단어 목록. `performKeywordSearch`만 채우고, 카드 좌표로 결과를 채우는
+    /// `applyIntentCardVerses`는 단어 개념이 없어 빈 배열이므로 확인창 조건(2개 이상)을 만족하지 않는다.
     private var lastSearchWords: [String] = []
 
     /// "더보기 확인창"을 이번 검색에서 이미 보여줬는지(검색 1회당 최초 1번).
@@ -429,7 +417,7 @@ final class SearchViewModel {
     /// `allVerseResults`를 채울 때 "더보기" 노출 개수와 확인창
     /// 상태(`hasShownMoreResultsNotice`/`pendingMoreResultsNotice`)를
     /// 함께 초기화한다 — 이전 검색의 상태가 새 결과에 남지 않도록 대입 지점(`clearResults`,
-    /// `performKeywordSearch`, `performAIQuerySearch`)의 리셋 누락을 한
+    /// `performKeywordSearch`, `applyIntentCardVerses`)의 리셋 누락을 한
     /// 곳으로 묶었다.
     private func setVerseResults(_ results: [VerseSearchResult]) {
         allVerseResults = results
@@ -443,8 +431,8 @@ final class SearchViewModel {
     private(set) var outlineResults: [OutlineSearchResult] = []
     private(set) var phraseNoteResults: [PhraseNoteSearchResult] = []
     private(set) var summaryResults: [SummarySearchResult] = []
-    /// `clearResults()`/`performKeywordSearch`/`performAIQuerySearc
-    /// h`가 `documentResults`와 같은 자리에서 함께 갱신한다.
+    /// `clearResults()`/`performKeywordSearch`/`applyIntentCardVerses`가
+    /// `documentResults`와 같은 자리에서 함께 갱신한다.
     private(set) var sermonResults: [SermonSearchResult] = []
     private(set) var isSearching = false
     var errorDescription: String?
@@ -463,25 +451,13 @@ final class SearchViewModel {
         self.booksProvider = booksProvider ?? .shared
     }
 
-    /// 화면 진입 시 색인이 이미 있는지(파일 헤더만 읽는 가벼운 확인) 한 번 확인한다. 색인 생성은 사용자가
-    /// 명시적으로 `startBibleEmbeddingIndexing()`을 눌러야 시작된다.
-    func onAppear() {
-        refreshBibleIndexStatus()
-    }
-
     func onDisappear() {
         searchTask?.cancel()
-        // 성경 전체 색인 작업(`EmbeddingIndexingService.shared`)은 앱 전역 싱글턴이 들고
-        // 있어 화면을 나가도 취소하지 않고 백그라운드에서 계속 진행한다(수 분 걸릴 수 있는 일회성 작업이라).
     }
 
     // MARK: - 검색 실행 (엔터/토글 변경 시에만 — 타이핑 자동검색 없음)
 
-    /// AI 검색의 최소 검색어 길이 — 미완성 입력("ㅎ", "하")으로 온디바이스 모델을 호출하는 낭비를
-    /// 막는다. 일반 키워드 검색은 글자 수 제한이 없다.
-    private static let minimumAIQueryLength = 2
-
-    /// 검색어가 비었을 때(또는 AI 검색 최소 길이 미만일 때) 결과 상태를 한 번에 정리한다.
+    /// 검색어가 비었을 때 결과 상태를 한 번에 정리한다.
     private func clearResults() {
         intentCard = nil
         aiCardSelectedIndex = nil
@@ -493,11 +469,10 @@ final class SearchViewModel {
         summaryResults = []
         sermonResults = []
         errorDescription = nil
-        lastAIQueryUsed = nil
     }
 
-    /// 실제 검색(무거운 코사인 유사도 계산 포함)을 실행하는 진입점 — 엔터/검색 버튼(`SearchView`의
-    /// `.onSubmit(of: .search)`)과 AI 토글 변경 시에만 호출된다.
+    /// 실제 검색을 실행하는 진입점 — 엔터/검색 버튼(`SearchView`의
+    /// `.onSubmit(of: .search)`)과 질문형 검색 토글 변경 시에만 호출된다.
     func searchImmediately() {
         searchTask?.cancel()
         let trimmed = query.trimmingCharacters(in: .whitespacesAndNewlines)
@@ -505,16 +480,17 @@ final class SearchViewModel {
             clearResults()
             return
         }
-        if isAIQueryEnabled && trimmed.count < Self.minimumAIQueryLength {
+        // 이스터 에그 — 의미검색(질문형 검색) 상태에서만 반응한다. 일반 검색 결과/검색 이력에는 남기지 않는다.
+        if isQuestionSearchEnabled, ChurchYouthEasterEgg.matches(trimmed) {
             clearResults()
+            isEasterEggPresented = true
             return
         }
         // 새 검색이 시작되는 지점은 여기 하나뿐이므로, 성경 조회 화면이 push된 채로 검색해도 결과 화면이
         // 보이도록 `SidebarNavigationView`에 pop을
         // 요청한다(`SearchResultsPopRequest.swift` 참고).
         SearchResultsPopRequest.shared.requestPop()
-        // 검색 이력도 실제 검색이 실행되는 이 지점에서만 기록한다(위 guard에서 걸러진 빈 입력/AI 최소 길이
-        // 미달은 기록되지 않는다).
+        // 검색 이력도 실제 검색이 실행되는 이 지점에서만 기록한다(위 guard에서 걸러진 빈 입력은 기록되지 않는다).
         SearchHistoryService.record(query: trimmed, context: modelContext)
         searchTask = Task { [weak self] in
             guard let self else { return }
@@ -536,20 +512,23 @@ final class SearchViewModel {
         // `Task.yield()`로 실행을 한 번 양보해 SwiftUI가 `isSearching = true`
         // 상태로 최소 한 프레임을 그리게 한다. Task는 첫 `await`까지 동기적으로 실행되는데 키워드
         // 검색(`performKeywordSearch`)에는 await가 없어, 양보하지 않으면 스피너가 뜰 틈 없이
-        // "결과 없음"이 먼저 보이다가 결과가 한꺼번에 나타난다. AI 검색은 이미 await가 있다.
+        // "결과 없음"이 먼저 보이다가 결과가 한꺼번에 나타난다.
         await Task.yield()
 
-        // 관계정보 카드(Layer 1/2)는 AI 토글이 켜졌을 때만 계산한다(`intentCard` 선언부 참고).
+        // 관계정보 카드(Layer 1/2)는 질문형 검색 토글이 켜졌을 때만 계산한다(`intentCard` 선언부 참고).
         // 새 검색마다 이전 카드 안 항목 선택을 지운다 — 남아 있으면 새 결과 배열의 같은 인덱스가 전혀 다른
         // 항목을 가리킬 수 있다.
         aiCardSelectedIndex = nil
-        if isAIQueryEnabled {
+        if isQuestionSearchEnabled {
             let intent = QueryIntentClassifier.classify(query)
             intentCard = QueryIntentHandler.handle(query, intent: intent)
-            await performAIQuerySearch(query: query)
+            if let intentCard, !intentCard.verseRefs.isEmpty {
+                applyIntentCardVerses(intentCard)
+            } else {
+                await performKeywordSearch(query: query)
+            }
         } else {
             intentCard = nil
-            lastAIQueryUsed = nil
             await performKeywordSearch(query: query)
         }
     }
@@ -1158,48 +1137,16 @@ final class SearchViewModel {
         return Self.sortedByWordCoverage(results).map(\.result)
     }
 
-    // MARK: - AI 검색(임베딩 기반 의미검색, 2026-08-19 전면 교체)
+    // MARK: - 질의 의도 카드의 성경 좌표
 
-    /// `isAIQueryEnabled`일 때의 검색 경로로, 키워드 검색을 거치지 않고
-    /// `BibleSemanticSearchService`(정제→임베딩→코사인 유사도)를 쓴다. 의미검색은 성경 구절만
-    /// 대상이므로 나머지 섹션은 항상 비운다.
-    ///
-    /// `intentCard`가 확정되고 실제 성경 좌표(`QueryIntentCard.verseRefs`)가 있으면 근사 검색을
-    /// 건너뛰고 그 좌표를 그대로 "성경구절" 섹션에 채운다. 카드가 없거나 좌표가 비어 있으면
-    /// 의미검색으로 넘어간다.
-    private func performAIQuerySearch(query: String) async {
+    /// 카드가 확정한 실제 성경 좌표(`QueryIntentCard.verseRefs`)를 그대로 "성경구절" 섹션에 채운다.
+    /// 좌표가 확정된 질의라 키워드 검색을 거치지 않으며, 나머지 섹션은 비운다.
+    private func applyIntentCardVerses(_ card: QueryIntentCard) {
         errorDescription = nil
-        // AI(의미) 검색은 단어로 쪼개지 않으므로, "더보기 확인창" 조건(`effectiveMatchedWordCount()`)의
-        // 전제인 `lastSearchWords`를 매번 비워 이전 키워드 검색의 값이 남지 않게 한다.
+        // 단어로 쪼개지 않으므로 "더보기 확인창" 조건(`effectiveMatchedWordCount()`)의 전제인
+        // `lastSearchWords`를 비워 이전 키워드 검색의 값이 남지 않게 한다.
         lastSearchWords = []
-
-        if let intentCard, !intentCard.verseRefs.isEmpty {
-            setVerseResults(resolveVerseResults(intentCard.verseRefs))
-            lastAIQueryUsed = nil
-            memoResults = []; documentResults = []
-            outlineResults = []; phraseNoteResults = []; summaryResults = []
-            sermonResults = []
-            return
-        }
-
-        let result = await BibleSemanticSearchService.search(query: query)
-        switch result {
-        case .success(let outcome):
-            setVerseResults(outcome.matches.map { match in
-                VerseSearchResult(
-                    bookId: match.bookId, chapter: match.chapter, verse: match.verse,
-                    content: match.content,
-                    bookNameKo: booksProvider.book(id: match.bookId)?.nameKo ?? "\(match.bookId)권",
-                    translationCode: TranslationBootstrap.bundledTranslationCode,
-                    translationDisplayName: TranslationBootstrap.bundledDisplayName
-                )
-            })
-            lastAIQueryUsed = outcome.queryUsedForEmbedding
-        case .failure(let error):
-            errorDescription = error.description
-            setVerseResults([])
-            lastAIQueryUsed = nil
-        }
+        setVerseResults(resolveVerseResults(card.verseRefs))
         memoResults = []; documentResults = []
         outlineResults = []; phraseNoteResults = []; summaryResults = []
         sermonResults = []
@@ -1223,35 +1170,6 @@ final class SearchViewModel {
             if results.count >= 30 { break }
         }
         return results
-    }
-
-    // MARK: - 성경 전체 임베딩 색인 (2026-08-19 신설)
-
-    /// AI 검색은 이 색인이 먼저 있어야 한다(`BibleSemanticSearchService.SearchError.indexNotReady`).
-    /// `SearchView`가 이 상태로 "색인 만들기" 버튼/진행률 바를 보여준다.
-    ///
-    /// `EmbeddingIndexingService`는 `@Observable`이 아닌 `@MainActor` 싱글턴이라(Task를 화면
-    /// 생명주기와 분리하기 위함 — `onDisappear()` 참고) 내부 `status` 변경으로 SwiftUI가 다시
-    /// 그리지 않는다. 그래서 저장 프로퍼티로 두고 상태가 바뀔 때마다 명시적으로 대입한다.
-    private(set) var bibleIndexStatus: EmbeddingIndexingService.IndexStatus = .notBuilt
-
-    /// `onAppear()`에서 호출 — 파일 헤더만 읽는 가벼운 확인이라 매번 불러도 부담
-    /// 없다(전체 로드는 실제 검색 시점에만, `EmbeddingIndexingService.ensureLoaded()`).
-    func refreshBibleIndexStatus() {
-        EmbeddingIndexingService.shared.refreshStatus()
-        bibleIndexStatus = EmbeddingIndexingService.shared.status
-    }
-
-    func startBibleEmbeddingIndexing() {
-        bibleIndexStatus = .building(progress: 0)
-        EmbeddingIndexingService.shared.startBuilding(
-            progress: { [weak self] fraction in self?.bibleIndexStatus = .building(progress: fraction) },
-            completion: { [weak self] finalStatus in self?.bibleIndexStatus = finalStatus }
-        )
-    }
-
-    func cancelBibleEmbeddingIndexing() {
-        EmbeddingIndexingService.shared.cancelBuilding()
     }
 
     // MARK: - BibleReferenceStore 캐시(키워드 검색 공용)

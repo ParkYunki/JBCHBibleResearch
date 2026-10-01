@@ -99,6 +99,9 @@ struct TranslationColumnView: View {
             hanjaWords: hanjaWords, marginalNotes: marginalNotes, font: font, textColor: textColor, hanjaFont: hanjaFont
         )
     }
+    /// 장 끝(마지막 절 아래)에 붙일 이전 장/다음 장 이동 + 장 개인 묵상 버튼. nil이면 붙이지 않는다.
+    /// 여러 컬럼을 나란히 볼 때는 호출부가 첫 컬럼에만 넘긴다. ⚠️ 마지막에 선언해야 호출부 인자 순서와 맞는다.
+    var chapterEndActions: ChapterEndActions? = nil
 
     /// 지금 뷰포트 중앙(anchor: .center)에 있는 절 번호 — `.scrollPosition(id:)`가 스크롤에 맞춰
     /// 읽어 주고(리더), 값을 대입하면 그 절이 중앙에 오도록 스크롤한다(팔로워).
@@ -220,6 +223,10 @@ struct TranslationColumnView: View {
                 ForEach(verses, id: \.verse) { verse in
                     verseRowView(for: verse)
                 }
+                // id가 없는 마지막 항목이라 `.scrollPosition(id:)` 추적 대상에는 들어가지 않는다.
+                if let chapterEndActions {
+                    ChapterEndFooterView(actions: chapterEndActions)
+                }
             }
             // `.scrollPosition(id:anchor:)`가 anchor 지점 항목의 id를 추적하려면 id를 매기는 컨테이너
             // (이 LazyVStack)를 `.scrollTargetLayout()`으로 표시해야 한다. 빠뜨리면 바인딩이 갱신되지 않는다.
@@ -285,6 +292,9 @@ struct TranslationColumnView: View {
                 LazyVStack(alignment: .leading, spacing: CGFloat(settings.bibleVerseSpacing)) {
                     ForEach(verses, id: \.verse) { verse in
                         verseRowView(for: verse, onRowAppear: { reportCenterVerseIfNeeded($0) })
+                    }
+                    if let chapterEndActions {
+                        ChapterEndFooterView(actions: chapterEndActions)
                     }
                 }
                 .padding()
@@ -1065,5 +1075,110 @@ private struct ContentUnavailableMessage: View {
             Spacer()
         }
         .frame(maxWidth: .infinity)
+    }
+}
+
+
+// MARK: - 장 끝 버튼 (이전 장 / 다음 장 / 이 장의 개인 묵상)
+
+/// 장 끝 버튼이 필요로 하는 값과 동작. 이동/저장은 호출부(`BibleReadingView`)가 맡고 이 뷰는 그리기만 한다.
+struct ChapterEndActions {
+    /// 이동 대상 장의 표시 이름(예: "요한복음 2장"). nil이면 그 방향으로 갈 장이 없어 버튼을 끈다(창세기 1장/계시록 마지막 장).
+    var previousLabel: String?
+    var nextLabel: String?
+    var onPrevious: () -> Void
+    var onNext: () -> Void
+    /// 이 장에 이미 있는 장 단위 개인 묵상(최근순). 비어 있으면 버튼이 바로 새 묵상을 연다.
+    var existingNotes: [ChapterNoteItem]
+    var onNewNote: () -> Void
+}
+
+struct ChapterNoteItem: Identifiable {
+    let id: UUID
+    let preview: String
+    let open: () -> Void
+}
+
+private struct ChapterEndFooterView: View {
+    let actions: ChapterEndActions
+
+    private var accent: Color { Color("AccentColor") }
+
+    var body: some View {
+        VStack(spacing: 10) {
+            HStack(spacing: 10) {
+                navButton(systemImage: "chevron.left", title: "이전 장", subtitle: actions.previousLabel, action: actions.onPrevious)
+                navButton(systemImage: "chevron.right", title: "다음 장", subtitle: actions.nextLabel, action: actions.onNext, trailingIcon: true)
+            }
+            noteButton
+        }
+        .padding(.top, 12)
+    }
+
+    /// 배경은 본문색을 옅게 깐 중립 톤, 글자는 본문색 그대로, 강조색은 화살표 아이콘과 테두리에만 쓴다 —
+    /// 강조색 글자를 강조색 옅은 배경 위에 얹으면 명도 차가 작아 읽기 어렵다.
+    private func navButton(
+        systemImage: String, title: String, subtitle: String?, action: @escaping () -> Void, trailingIcon: Bool = false
+    ) -> some View {
+        let textColor = UserSettingsStore.shared.bibleTextColor ?? Color.primary
+        let shape = RoundedRectangle(cornerRadius: 12, style: .continuous)
+        return Button(action: action) {
+            HStack(spacing: 8) {
+                if !trailingIcon {
+                    Image(systemName: systemImage).font(.subheadline.weight(.bold)).foregroundStyle(accent)
+                }
+                VStack(spacing: 2) {
+                    Text(title).font(.subheadline.weight(.semibold)).foregroundStyle(textColor)
+                    if let subtitle {
+                        Text(subtitle)
+                            .font(.caption2)
+                            .foregroundStyle(textColor.opacity(0.7))
+                            .lineLimit(1)
+                            .minimumScaleFactor(0.8)
+                    }
+                }
+                if trailingIcon {
+                    Image(systemName: systemImage).font(.subheadline.weight(.bold)).foregroundStyle(accent)
+                }
+            }
+            .frame(maxWidth: .infinity, minHeight: 52)
+            .background(shape.fill(textColor.opacity(0.08)))
+            .overlay(shape.strokeBorder(accent.opacity(0.45), lineWidth: 1))
+            .contentShape(shape)
+        }
+        .buttonStyle(.plain)
+        .disabled(subtitle == nil)
+        .opacity(subtitle == nil ? 0.35 : 1)
+    }
+
+    @ViewBuilder
+    private var noteButton: some View {
+        if actions.existingNotes.isEmpty {
+            Button(action: actions.onNewNote) { noteLabel }
+                .buttonStyle(.plain)
+        } else {
+            Menu {
+                Button("새 개인 묵상 작성", systemImage: "square.and.pencil", action: actions.onNewNote)
+                Divider()
+                ForEach(actions.existingNotes) { note in
+                    Button(note.preview, action: note.open)
+                }
+            } label: {
+                noteLabel
+            }
+            .buttonStyle(.plain)
+        }
+    }
+
+    private var noteLabel: some View {
+        HStack(spacing: 8) {
+            Image(systemName: "note.text")
+            Text(actions.existingNotes.isEmpty ? "이 장에 대한 개인 묵상" : "이 장에 대한 개인 묵상 (\(actions.existingNotes.count))")
+                .font(.subheadline.weight(.semibold))
+        }
+        .frame(maxWidth: .infinity, minHeight: 48)
+        .background(RoundedRectangle(cornerRadius: 12, style: .continuous).fill(accent))
+        .foregroundStyle(Color.white)
+        .contentShape(RoundedRectangle(cornerRadius: 12, style: .continuous))
     }
 }

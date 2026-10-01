@@ -27,19 +27,34 @@ struct RelationDisplayItem {
     let verseRefs: [BibleVerseRef]
 }
 
+/// `QueryIntentCard.Content.entityProfile`의 항목 하나 — 인물 또는 장소.
+enum ProfileItem {
+    case person(PersonEntity)
+    case place(PlaceEntity)
+
+    var verseRefs: [BibleVerseRef] {
+        switch self {
+        case .person(let person): return person.verseRefs
+        case .place(let place): return place.verseRefs
+        }
+    }
+}
+
 /// Handler 조회 결과 하나 — 카테고리(`intent`)와 상태(`status`).
 struct QueryIntentCard {
     enum Content {
         case relation([RelationDisplayItem])
         /// `PersonEntity`(보강 컬럼 + 관계 리스트) 기반 — 장소는 포함하지 않는다(콘텐츠 미준비).
         case personProfile([PersonEntity])
+        /// 장소(`PlaceEntity`)가 걸린 질의 — 같은 이름의 인물이 있으면 함께 담는다(`ProfileItem`).
+        case entityProfile([ProfileItem])
         case prophecy([ProphecyRecord])
         case theme([ThemeRecord])
         case narrative([NarrativeGroup])
 
         /// 이 카드가 가리키는 성경 좌표 전체 — 화면 순서 그대로, 중복 제거.
-        /// `SearchViewModel.performAIQuerySearch`가 "성경구절" 섹션에 직접 채워, 카드가 이미
-        /// 답을 확정한 경우 별도의 근사 검색 결과가 섞이지 않게 한다.
+        /// `SearchViewModel.applyIntentCardVerses`가 "성경구절" 섹션에 직접 채워, 카드가 이미
+        /// 답을 확정한 경우 별도의 키워드 검색 결과가 섞이지 않게 한다.
         /// 각 케이스가 이미 가진 verse 필드를 모을 뿐 DB를 새로 조회하지 않는다.
         var verseRefs: [BibleVerseRef] {
             var seen = Set<BibleVerseRef>()
@@ -51,6 +66,8 @@ struct QueryIntentCard {
                 return dedup(items.flatMap { $0.verseRefs })
             case .personProfile(let persons):
                 return dedup(persons.flatMap { $0.verseRefs })
+            case .entityProfile(let items):
+                return dedup(items.flatMap { $0.verseRefs })
             case .prophecy(let records):
                 // 예언 절 + 성취/대응 절을 함께 담는다(성취 절이 없으면 예언 절만 남는다).
                 return dedup(records.flatMap { $0.prophecyRefs + $0.fulfillmentRefs })
@@ -90,6 +107,7 @@ extension QueryIntentCard {
             switch content {
             case .relation(let items): return items.count
             case .personProfile(let items): return items.count
+            case .entityProfile(let items): return items.count
             case .prophecy(let items): return items.count
             case .theme(let items): return items.count
             case .narrative(let groups): return groups.reduce(0) { $0 + $1.events.count }
@@ -117,6 +135,18 @@ enum QueryIntentHandler {
     static func handle(_ query: String, intent: QueryIntentClassifier.Intent) -> QueryIntentCard? {
         guard let store = ReferenceDataProvider.shared.store else { return nil }
 
+        // "예수님의 (열두) 제자(들)" — 일반 인물 조회보다 먼저 확인한다. 안 그러면 질의 속 "예수"만 걸려 예수 한 사람의
+        // 카드가 나온다. 관계/키워드 분류와 무관하게 질의 문구만으로 판정한다.
+        if let card = handleGroupLookup(query, store: store) {
+            return card
+        }
+
+        // 지명 질의 — 질의가 지명 이름 중심일 때만(`handlePlaceLookup` 참고). 관계/예언/주제 등으로 분류된 질의는
+        // 건드리지 않아, "…에 대한 말씀" 같은 질의가 지명 카드에 가려지지 않는다.
+        if intent == .general, let card = handlePlaceLookup(query, store: store) {
+            return card
+        }
+
         // `QueryIntentClassifier` 우선순위상 관계 다음 자리. DB 접근이 필요해 classify()(순수
         // 함수)가 아니라 여기서 수행한다. `.relation`으로 확정된 경우는 아래 switch가 처리하므로
         // 건너뛰고, `.general`이어도 시도한다 — "다윗"처럼 트리거 문구 없는 표제어 질의도
@@ -135,13 +165,114 @@ enum QueryIntentHandler {
         // 반환하지 않고 인물 조회는 위 handleKeywordCategoryLookup이 먼저 시도하므로, 여기
         // 도달하면 `.general`과 같이 nil로 처리한다.
         case .personProfile: return nil
+        case .placeProfile: return nil
         case .general: return nil
         }
     }
 
+    // MARK: - 장소 (PlaceSeed.json)
+
+    /// 질의에서 이름 말고 남는 "조회 말" — 이런 말만 덧붙은 질의("가나 위치", "가나는 어디?")도 지명 질의로 본다.
+    private static let placeLookupFillers = [
+        "어디에있어", "어디있어", "어디에", "어디", "위치", "지리", "역사", "소개", "정보", "에대해서", "에대해", "에대하여",
+        "알려줘", "알려주세요", "설명해줘", "설명", "이란", "란", "은", "는", "이", "가", "의", "?", "？", "."
+    ]
+
+    /// 이름 중심의 지명 질의면 카드를 돌려준다. 판정:
+    ///  1) `places(mentionedIn:)`로 질의에 이름이 든 지명을 찾는다(동명이인은 모두).
+    ///  2) 조회 말(위 목록)을 뺀 질의에서 가장 긴 지명 이름이 차지하는 비율이 절반 이상이어야 한다 — 질의 속에 우연히
+    ///     지명과 같은 글자가 있을 뿐인 문장("광야 40년의 의미")이 일반 검색 결과를 가리지 않도록.
+    ///  3) 같은 이름의 인물이 함께 걸리면 한 카드에 같이 보여준다(예: "가나안" — 인물과 땅). 더 긴 이름 안에 포함돼
+    ///     삼켜지는 쪽은 뺀다.
+    /// 지명이 하나도 남지 않으면 nil(일반 흐름 계속 — 인물 조회는 이후 단계가 맡는다).
+    private static func handlePlaceLookup(_ query: String, store: ReferenceDataStore) -> QueryIntentCard? {
+        let places = (try? store.places(mentionedIn: query)) ?? []
+        guard !places.isEmpty else { return nil }
+
+        var residual = query.filter { !$0.isWhitespace }
+        for filler in placeLookupFillers.sorted(by: { $0.count > $1.count }) {
+            residual = residual.replacingOccurrences(of: filler, with: "")
+        }
+        // 위에서 조회 말로 이름 일부가 지워졌을 수 있어(예: "이스라엘"의 "이") 비율 계산은 지우기 전 길이가 아니라
+        // 조회 말을 뺀 질의 길이로 하되, 이름이 질의에 그대로 들어 있는지는 이미 `places(mentionedIn:)`가 확인했다.
+        let compactQuery = query.filter { !$0.isWhitespace }
+        let longestName = places.map { $0.word.filter { !$0.isWhitespace }.count }.max() ?? 0
+        let denominator = max(residual.count, longestName)
+        guard denominator > 0, Double(longestName) / Double(denominator) >= 0.5, longestName <= compactQuery.count else {
+            return nil
+        }
+
+        let persons = (try? store.persons(mentionedIn: query)) ?? []
+        func compact(_ text: String) -> String { text.filter { !$0.isWhitespace } }
+        let placeNames = places.map { compact($0.word) }
+        let personNames = persons.map { compact($0.matchedAlias ?? $0.word) }
+        let keptPersons = persons.filter { person in
+            let name = compact(person.matchedAlias ?? person.word)
+            return !placeNames.contains { $0.count > name.count && $0.contains(name) }
+        }
+        let keptPlaces = places.filter { place in
+            let name = compact(place.word)
+            return !personNames.contains { $0.count > name.count && $0.contains(name) }
+        }
+        guard !keptPlaces.isEmpty else { return nil }
+
+        let items = keptPersons.map(ProfileItem.person) + keptPlaces.map(ProfileItem.place)
+        return QueryIntentCard(intent: .placeProfile, status: .found(.entityProfile(items)))
+    }
+
+    // MARK: - 그룹 (예수님의 열두 제자)
+
+    /// `PersonGroups.group_id` — `build_reference_data.py`의 `GROUP_LABEL_DEFS`와 같은 원문 라벨.
+    private static let twelveDisciplesGroupId = "열두 제자"
+
+    /// 질의가 "예수님의 제자(들)" 또는 "예수님의 열두 제자(들)"(열두제자, 12제자 포함)를 가리키는지 판정한다.
+    ///
+    /// 오판을 막기 위해 아래 경우는 일부러 제외하고 일반 검색 흐름에 맡긴다:
+    ///  - "엘리사의 제자들", "세례 요한의 제자" 등 제자의 주인이 예수가 아닌 경우(`…의 제자` 바로 앞 단어로 판단).
+    ///  - "예수님의 제자 베드로"처럼 열두 제자 중 특정 인물 이름이 함께 들어간 경우(그 인물을 찾는 질의).
+    ///  - "제자훈련", "제자도" 등 제자 자체가 아니라 주제를 묻는 말.
+    /// 판정 근거는 공백을 모두 뺀 문자열이므로 "열두 제자"/"열두제자"/"12 제자"를 구분하지 않는다.
+    static func isTwelveDisciplesQuery(_ query: String, memberNames: [String]) -> Bool {
+        let compact = query.precomposedStringWithCanonicalMapping
+            .components(separatedBy: .whitespacesAndNewlines)
+            .joined()
+        guard compact.contains("제자") else { return false }
+
+        let mentionsTwelve = compact.contains("열두") || compact.contains("12") || compact.contains("십이")
+        let mentionsJesus = compact.contains("예수") || compact.contains("그리스도")
+        guard mentionsTwelve || mentionsJesus else { return false }
+
+        // 제자 자체가 아니라 신앙 주제를 묻는 표현.
+        let topicalSuffixes = ["제자훈련", "제자도", "제자삼", "제자양육", "제자화", "제자의삶", "제자의길"]
+        if topicalSuffixes.contains(where: { compact.contains($0) }) { return false }
+
+        // "<주인>의 제자" — 주인이 예수(님)/그리스도/주님이 아니면 그 사람의 제자들 질의다.
+        var searchRange = compact.startIndex..<compact.endIndex
+        while let hit = compact.range(of: "의제자", range: searchRange) {
+            let owner = String(compact[compact.startIndex..<hit.lowerBound])
+            let jesusOwners = ["예수", "예수님", "그리스도", "그리스도님", "주님"]
+            if !jesusOwners.contains(where: { owner.hasSuffix($0) }) { return false }
+            searchRange = hit.upperBound..<compact.endIndex
+        }
+
+        // 특정 제자 이름이 들어 있으면 그 사람을 찾는 질의다(2글자 미만 이름은 오탐이 커 제외).
+        if memberNames.contains(where: { $0.count >= 2 && compact.contains($0) }) { return false }
+        return true
+    }
+
+    /// 열두 제자 그룹 카드 — 멤버 12명을 `person(idx:)`로 확정해 인물 카드 목록(`.personProfile`)으로 보여준다.
+    /// 그룹 데이터가 없거나 질의가 해당하지 않으면 nil(일반 흐름으로 계속).
+    private static func handleGroupLookup(_ query: String, store: ReferenceDataStore) -> QueryIntentCard? {
+        let members = (try? store.personGroupMembers(groupId: twelveDisciplesGroupId)) ?? []
+        guard !members.isEmpty else { return nil }
+        let names = members.flatMap { [$0.word] + $0.aliases }
+        guard isTwelveDisciplesQuery(query, memberNames: names) else { return nil }
+        return QueryIntentCard(intent: .personProfile, status: .found(.personProfile(members)))
+    }
+
     // MARK: - 관계
 
-    /// `BibleStructuralRerankerService.computeBoosts`와 같은 원칙으로 정방향(질의의 이름이
+    /// 정방향(질의의 이름이
     /// source, 예: "다윗의 아들")과 역방향(이름이 target으로만 존재, 예: "골리앗의 동생" —
     /// "골리앗"은 Persons에 행이 없음)을 모두 모은다.
     ///
@@ -262,8 +393,7 @@ enum QueryIntentHandler {
 
     /// `KeywordCategoryIndex`(등록된 인물/주제 표제어)에 질의와 일치하는 표제어가 있는지 먼저
     /// 확인하고, 카테고리에 맞는 저장소(`persons(mentionedIn:)`/`themes(matching:)`)를
-    /// 조회한다. 못 찾으면 `personCategoryAIFallback`으로 넘어간다 — 규칙 기반이 먼저이고
-    /// AI는 실패했을 때만 보조로 쓴다. 장소는 `KeywordCategoryIndex`가 '인물'/'주제'만 갖고
+    /// 조회한다. 못 찾으면 nil을 돌려준다. 장소는 `KeywordCategoryIndex`가 '인물'/'주제'만 갖고
     /// 있어(Places 콘텐츠 미준비) 반환하지 않는다.
     /// 문서 확정) 이 메서드가 장소를 반환할 일이 구조적으로 없다.
     private static func handleKeywordCategoryLookup(_ query: String, store: ReferenceDataStore) -> QueryIntentCard? {
@@ -283,20 +413,13 @@ enum QueryIntentHandler {
         }
         if !categories.isEmpty {
             // 인덱스엔 걸렸지만 콘텐츠 조회가 빈 배열인 드문 불일치(예: 대응 행이 그 사이 지워짐) —
-            // 카테고리는 이미 알아냈으므로 AI 보완 없이 준비중 카드로 안내한다.
+            // 카테고리는 이미 알아냈으므로 추가 보완 없이 준비중 카드로 안내한다.
             return QueryIntentCard(intent: .personProfile, status: .notReady(
                 message: "이 표제어는 등록돼 있으나 상세 콘텐츠를 찾지 못했습니다. 아래 검색 결과를 확인해 보세요."
             ))
         }
 
-        return personCategoryAIFallback(query, store: store)
-    }
-
-    /// 규칙 기반으로 못 찾았을 때의 Apple Intelligence 폴백 자리 — 미구현이라 항상 nil.
-    /// 검증되지 않은 `@Generable`/`@Guide` 호출을 넣지 않으려고 자리만 두었으며,
-    /// FoundationModels 문서와 대조해 실제 구현을 채워야 한다.
-    private static func personCategoryAIFallback(_ query: String, store: ReferenceDataStore) -> QueryIntentCard? {
-        nil
+        return nil
     }
 
     // MARK: - 예언

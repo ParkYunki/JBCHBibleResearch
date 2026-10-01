@@ -27,9 +27,6 @@ final class UserSettingsStore {
         static let openLastScreenOnLaunch = "settings.openLastScreenOnLaunch"
         static let lastSelectedSection = "settings.lastSelectedSection"
         static let colorSchemePreference = "settings.colorSchemePreference"
-        static let aiChapterDraftEnabled = "settings.aiChapterDraftEnabled"
-        // 첫 실행 시 AI 의미검색 색인 안내 화면을 보여준 적이 있는지(완료/취소와 무관하게 1회만 표시).
-        static let hasOfferedBibleIndexOnboarding = "settings.hasOfferedBibleIndexOnboarding"
         // 첫 실행 가이드 완료 여부(hasCompletedOnboarding)와, "새 소식" 화면이 마지막으로
         // 확인한 앱 버전(lastSeenAppVersion, CFBundleShortVersionString).
         static let hasCompletedOnboarding = "settings.hasCompletedOnboarding"
@@ -106,7 +103,7 @@ final class UserSettingsStore {
         // 말씀구절 박스 배경색 — 이 스타일만 배경 박스를 가진다.
         static let sermonVerseQuoteBackgroundColorHex = "settings.sermon.verseQuote.backgroundColorHex"
         // 말씀구절 박스 왼쪽 세로 바 색 — 기본값은 중주제 색과 같지만, 독립적으로 바꿀 수
-        // 있도록 별도 키로 둔다(SermonViewerView.paragraphText).
+        // 있도록 별도 키로 둔다(현재 뷰어는 편집기와 같은 서식을 그려 이 색을 쓰지 않는다).
         static let sermonVerseQuoteBarColorHex = "settings.sermon.verseQuote.barColorHex"
         // 설교 뷰어의 전체 글꼴 배율(80~200%)과 스크롤/페이지 넘김 모드. 스타일별 크기와 달리
         // 전체 배율 하나뿐이며 상대 크기 비율은 유지된다.
@@ -222,20 +219,6 @@ final class UserSettingsStore {
         bibleBackgroundColorHex = ""
         bibleTextColorHex = ""
         markThemeModeAsCustom()
-    }
-
-    /// "장 개요 작성 시 AI 초안 제안 받기"(기본 켜짐) — `OutlineViewModel.
-    /// isAIDraftAvailable`이 이 값과 `ChapterOutlineDraftService.isDraftAvailable`을
-    /// AND로 묶어 최종 버튼 표시 여부를 정한다.
-    var isAIChapterDraftEnabled: Bool {
-        didSet { defaults.set(isAIChapterDraftEnabled, forKey: Key.aiChapterDraftEnabled) }
-    }
-
-    /// `BibleIndexOnboardingOverlay`를 첫 실행 때 한 번만 띄우기 위한 플래그. "안내 화면을 또
-    /// 띄울지"만 결정하며, 색인 진행 상태는 `EmbeddingIndexingService.shared.status`가 디스크
-    /// 기반으로 유지한다.
-    var hasOfferedBibleIndexOnboarding: Bool {
-        didSet { defaults.set(hasOfferedBibleIndexOnboarding, forKey: Key.hasOfferedBibleIndexOnboarding) }
     }
 
     /// `AppOnboardingOverlay`의 첫 실행 가이드를 한 번만 보여주기 위한 완료 플래그(버튼으로
@@ -592,8 +575,6 @@ final class UserSettingsStore {
         self.openLastScreenOnLaunch = defaults.object(forKey: Key.openLastScreenOnLaunch) as? Bool ?? true
         self.lastSelectedSectionRawValue = defaults.string(forKey: Key.lastSelectedSection)
         self.colorSchemePreference = (defaults.string(forKey: Key.colorSchemePreference)).flatMap(ColorSchemePreference.init) ?? .system
-        self.isAIChapterDraftEnabled = defaults.object(forKey: Key.aiChapterDraftEnabled) as? Bool ?? true
-        self.hasOfferedBibleIndexOnboarding = defaults.object(forKey: Key.hasOfferedBibleIndexOnboarding) as? Bool ?? false
         self.hasCompletedOnboarding = defaults.object(forKey: Key.hasCompletedOnboarding) as? Bool ?? false
         self.lastSeenAppVersion = defaults.string(forKey: Key.lastSeenAppVersion)
         self.defaultTranslationCode = defaults.string(forKey: Key.defaultTranslationCode)
@@ -814,7 +795,7 @@ extension UserSettingsStore {
         PlatformColor(sermonVerseQuoteBackgroundColor)
     }
 
-    /// `SermonViewerView.paragraphText`가 말씀구절 박스 왼쪽 세로 바에 쓴다.
+    /// 말씀구절 박스 왼쪽 세로 바 색 설정값(뷰어가 편집기와 같은 서식을 그리게 되면서 현재는 화면에서 쓰지 않는다).
     var sermonVerseQuoteBarColor: Color {
         Color(hex: sermonVerseQuoteBarColorHex) ?? Color(hex: "#7A3B42")!
     }

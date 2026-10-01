@@ -15,6 +15,31 @@ import SwiftData
 import SwiftUI
 import BibleResearchModels
 
+/// "내 설교" 오른쪽 패널(아이패드·맥)에 얹힌 상세/에디터가 자기 제목(선택한 설교 제목 등)을 내비게이션 바에 올리지
+/// 않도록 `SermonHomeView`가 켜는 환경값. 켜져 있으면 두 화면은 `SermonFixedTitle.navigationText`를 제목으로 쓴다.
+private struct SermonHasFixedTitleKey: EnvironmentKey {
+    static let defaultValue = false
+}
+
+extension EnvironmentValues {
+    var sermonHasFixedTitle: Bool {
+        get { self[SermonHasFixedTitleKey.self] }
+        set { self[SermonHasFixedTitleKey.self] = newValue }
+    }
+}
+
+enum SermonFixedTitle {
+    /// iOS는 제목을 툴바 왼쪽의 별도 `Text`로 그리므로 시스템 가운데 제목은 비운다. macOS는 시스템 제목이
+    /// 이미 툴바 왼쪽에 놓이므로 그대로 "내 설교"를 쓴다.
+    static var navigationText: String {
+        #if os(iOS)
+        return ""
+        #else
+        return "내 설교"
+        #endif
+    }
+}
+
 /// 설교 작성/뷰어가 열어야 할 대상 — 메인 설교문(`Sermon`) 또는 특정 회차
 /// 사본(`SermonDelivery`) 중 하나를 가리킨다.
 struct SermonContentTarget: Codable, Hashable, Sendable {

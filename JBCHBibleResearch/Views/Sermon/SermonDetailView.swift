@@ -91,6 +91,7 @@ struct SermonDetailView: View {
     @Environment(\.openWindow) private var openWindow
     @Environment(\.colorScheme) private var colorScheme
     @Environment(\.self) private var environment
+    @Environment(\.sermonHasFixedTitle) private var hasFixedTitle
 
     private var settings: UserSettingsStore { .shared }
 
@@ -124,7 +125,7 @@ struct SermonDetailView: View {
             }
             .padding(20)
         }
-        .navigationTitle(sermon.title.isEmpty ? "새 설교" : sermon.title)
+        .navigationTitle(hasFixedTitle ? SermonFixedTitle.navigationText : (sermon.title.isEmpty ? "새 설교" : sermon.title))
         #if os(iOS)
         .navigationBarTitleDisplayMode(.inline)
         #endif
@@ -332,51 +333,132 @@ struct SermonDetailView: View {
     }
 }
 
-/// "새 모임에서 사용" 시트 — 모임(기존 선택 또는 새로 만들기) + 날짜를 입력받아
-/// `SermonDelivery`를 만든다. 본문은 메인 `Sermon`의 현재 내용을 복사해 시작한다.
+/// "새 모임에서 사용" 시트 — 모임 종류(기존 선택 또는 새로 추가)만 고르면 `SermonDelivery`를 만든다.
+/// 날짜는 묻지 않고 만든 시각(`.now`)을 쓴다. 본문은 메인 `Sermon`의 현재 내용을 복사해 시작한다.
 /// `SermonHomeView.sermonSidebar`에서도 쓰므로 `private`가 아니다.
 struct SermonDeliveryCreationSheet: View {
     let sermon: Sermon
 
     @Environment(\.modelContext) private var modelContext
     @Environment(\.dismiss) private var dismiss
+    @Environment(\.colorScheme) private var colorScheme
+    @Environment(\.self) private var environment
 
     @Query(sort: \SermonGathering.name) private var allGatherings: [SermonGathering]
     @State private var selectedGatheringID: PersistentIdentifier?
-    @State private var isCreatingNewGathering = false
+    @State private var isAddingGathering = false
     @State private var newGatheringName = ""
-    @State private var deliveredAt: Date = .now
+    @FocusState private var isNameFieldFocused: Bool
+
+    private var settings: UserSettingsStore { .shared }
+
+    private var accent: Color {
+        SermonTheme.accent(background: settings.bibleBackgroundColor, environment: environment, fallbackScheme: colorScheme)
+    }
+
+    private var textColor: Color { settings.bibleTextColor ?? .primary }
 
     var body: some View {
-        NavigationStack {
-            Form {
-                Section("모임") {
-                    Picker("모임 종류", selection: $selectedGatheringID) {
-                        Text("선택 안 함").tag(PersistentIdentifier?.none)
-                        ForEach(allGatherings) { gathering in
-                            Text(gathering.name).tag(Optional(gathering.persistentModelID))
-                        }
+        VStack(alignment: .leading, spacing: 16) {
+            header
+
+            VStack(alignment: .leading, spacing: 8) {
+                Text("모임 종류")
+                    .font(.caption.weight(.semibold))
+                    .foregroundStyle(textColor.opacity(0.6))
+
+                // 모임 종류는 몇 개 안 되는 짧은 이름이라 칩으로 나열한다. 다시 누르면 선택이 풀려 "모임 미지정"이 된다.
+                FlowLayoutHStack(spacing: 8) {
+                    ForEach(allGatherings) { gathering in
+                        gatheringChip(gathering)
                     }
-                    Button("새 모임 이름 추가…") { isCreatingNewGathering = true }
+                    addChip
                 }
-                Section("날짜") {
-                    DatePicker("날짜", selection: $deliveredAt, displayedComponents: .date)
-                }
-            }
-            .navigationTitle("새 모임에서 사용")
-            .toolbar {
-                ToolbarItem(placement: .cancellationAction) {
-                    Button("취소") { dismiss() }
-                }
-                ToolbarItem(placement: .confirmationAction) {
-                    Button("만들기") { createDelivery() }
+
+                if isAddingGathering {
+                    newGatheringField
                 }
             }
-            .alert("새 모임", isPresented: $isCreatingNewGathering) {
-                TextField("모임 이름", text: $newGatheringName)
-                Button("취소", role: .cancel) { newGatheringName = "" }
-                Button("추가") { createGathering() }
+
+            HStack(spacing: 10) {
+                Button("취소") { dismiss() }
+                    .buttonStyle(SermonPillButtonStyle(isFilled: false, tint: accent))
+                Button("만들기") { createDelivery() }
+                    .buttonStyle(SermonPillButtonStyle(isFilled: true, tint: accent))
             }
+        }
+        .padding(20)
+        #if os(macOS)
+        .frame(width: 360)
+        #endif
+        .background(settings.bibleBackgroundColor ?? Color.clear)
+        .presentationBackground(settings.bibleBackgroundColor.map { AnyShapeStyle($0) } ?? AnyShapeStyle(BackgroundStyle()))
+        .presentationSizing(.fitted)
+        .presentationDragIndicator(.visible)
+    }
+
+    private var header: some View {
+        HStack(spacing: 10) {
+            Image(systemName: "person.3.fill")
+                .font(.caption.weight(.semibold))
+                .foregroundStyle(.white)
+                .frame(width: 30, height: 30)
+                .background(accent, in: Circle())
+            VStack(alignment: .leading, spacing: 2) {
+                Text("새 모임에서 사용")
+                    .font(.headline)
+                    .foregroundStyle(textColor)
+                Text(sermon.title.isEmpty ? "제목 없음" : sermon.title)
+                    .font(.caption)
+                    .foregroundStyle(textColor.opacity(0.6))
+                    .lineLimit(1)
+            }
+            Spacer()
+        }
+    }
+
+    private func gatheringChip(_ gathering: SermonGathering) -> some View {
+        let isSelected = selectedGatheringID == gathering.persistentModelID
+        return Button {
+            selectedGatheringID = isSelected ? nil : gathering.persistentModelID
+        } label: {
+            Text(gathering.name)
+                .font(.subheadline.weight(.semibold))
+                .padding(.horizontal, 14)
+                .padding(.vertical, 8)
+                .background(isSelected ? AnyShapeStyle(accent) : AnyShapeStyle(Color.secondary.opacity(0.12)), in: Capsule())
+                .foregroundStyle(isSelected ? Color.white : textColor)
+        }
+        .buttonStyle(.plain)
+    }
+
+    private var addChip: some View {
+        Button {
+            isAddingGathering.toggle()
+            if isAddingGathering { isNameFieldFocused = true }
+        } label: {
+            Label("새 모임", systemImage: "plus")
+                .font(.subheadline.weight(.semibold))
+                .padding(.horizontal, 12)
+                .padding(.vertical, 8)
+                .overlay(Capsule().strokeBorder(accent.opacity(0.6), style: StrokeStyle(lineWidth: 1, dash: [4, 3])))
+                .foregroundStyle(accent)
+        }
+        .buttonStyle(.plain)
+    }
+
+    private var newGatheringField: some View {
+        HStack(spacing: 8) {
+            TextField("모임 이름", text: $newGatheringName)
+                .textFieldStyle(.plain)
+                .focused($isNameFieldFocused)
+                .onSubmit(createGathering)
+                .padding(.horizontal, 12)
+                .padding(.vertical, 8)
+                .background(Color.secondary.opacity(0.08), in: RoundedRectangle(cornerRadius: SermonTheme.pillCornerRadius, style: .continuous))
+            Button("추가") { createGathering() }
+                .buttonStyle(SermonMiniPillButtonStyle(isFilled: true, tint: accent))
+                .disabled(newGatheringName.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty)
         }
     }
 
@@ -388,6 +470,7 @@ struct SermonDeliveryCreationSheet: View {
         try? modelContext.save()
         selectedGatheringID = gathering.persistentModelID
         newGatheringName = ""
+        isAddingGathering = false
     }
 
     private func createDelivery() {
@@ -395,7 +478,7 @@ struct SermonDeliveryCreationSheet: View {
             allGatherings.first { $0.persistentModelID == id }
         }
         let delivery = SermonDelivery(
-            deliveredAt: deliveredAt,
+            deliveredAt: .now,
             contentHtml: sermon.contentHtml,
             contentText: sermon.contentText,
             paragraphStyles: sermon.paragraphStyles,

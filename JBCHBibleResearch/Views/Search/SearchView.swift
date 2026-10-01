@@ -7,9 +7,8 @@
 //  키워드 검색 결과는 `DocumentsHomeView` 검색 결과와 같은 표현(일치 횟수 접두어 +
 //  태그 뱃지 + 형광펜 강조 발췌)을 쓴다. `highlightedText`/`badge`는 세 번째
 //  사용처가 생기기 전까지 공통 헬퍼로 추출하지 않고 이 파일에 따로 둔다.
-//  툴바의 AI 토글(`aiToggleButton`)은 `BibleSemanticSearchService`(정제 → 임베딩 →
-//  코사인 유사도)를 쓴다. 성경 전체를 미리 임베딩한 로컬 색인 파일이 필요하므로
-//  색인이 없으면 "색인 만들기" 안내 행(`bibleIndexCallToAction`)을 보여준다.
+//  툴바의 질문형 검색 토글(`questionToggleButton`)은 질의 의도 카드(관계/인물/주제/예언)를
+//  결과 목록 위에 보여준다.
 //
 
 import SwiftUI
@@ -77,7 +76,6 @@ struct SearchView: View {
                 ProgressView()
                     .onAppear {
                         let vm = SearchViewModel(modelContext: modelContext)
-                        vm.onAppear()
                         // 사이드바 검색창이 넘긴 검색어(SidebarSearchRequest)가 있으면 화면 생성
                         // 시점에 곧바로 반영한다. 아래 `.onChange`는 화면이 이미 떠 있을 때의 재검색용.
                         if let pending = SidebarSearchRequest.shared.pendingQuery {
@@ -333,16 +331,18 @@ private struct SearchContentView: View {
         // (`SidebarNavigationView`)만 이 화면 자신의 등록을 쓴다.
         .modifier(BibleVerseDestinationRegistration(isEnabled: !isPhoneIdiom))
         .toolbar {
-            // AI 토글은 DEBUG 빌드에서만 노출한다. `viewModel.isAIQueryEnabled`는 이 버튼으로만 켤
-            // 수 있고(영구 저장 안 함, 기본 false) Release에서는 AI 검색 코드 경로 전체가 구조적으로
-            // 비활성 상태로 남는다.
-            #if DEBUG
+            // 질문형 검색 토글은 배포판을 포함한 모든 빌드에서 노출한다. `viewModel.isQuestionSearchEnabled`는 이 버튼으로만
+            // 켤 수 있고 영구 저장하지 않으며 기본은 꺼짐이다.
             ToolbarItem(placement: .primaryAction) {
-                aiToggleButton
+                questionToggleButton
             }
-            #endif
         }
         .onDisappear { viewModel.onDisappear() }
+        // 이스터 에그(`ChurchYouthEasterEgg.swift`) — 의미검색 상태에서 특정 검색어를 검색하면 전체 화면 오버레이.
+        .modifier(ChurchYouthEasterEggPresenter(isPresented: Binding(
+            get: { viewModel.isEasterEggPresented },
+            set: { viewModel.isEasterEggPresented = $0 }
+        )))
         // "선택" 버튼용 `VerseTextSelectionPopover`(성경조회 화면과 동일).
         .popover(item: $partialTextSelectionTarget) { target in
             VerseTextSelectionPopover(
@@ -378,93 +378,34 @@ private struct SearchContentView: View {
         }
     }
 
-    // 툴바에서만 참조되므로 Release에서는 선언도 함께 `#if DEBUG`로 감싼다
-    // (미사용 private 프로퍼티 방지).
-    #if DEBUG
-    /// 검색창 왼쪽에 놓이는 AI 검색 토글. `.searchable` 시스템 검색창이 툴바 맨 끝(trailing)에
-    /// 붙으므로 이 항목을 먼저 선언한다. 임베딩 가용성 판정은 비동기(자산 다운로드 확인 포함)라
-    /// 툴바를 그리는 시점에 동기적으로 물을 수 없어 미리 비활성화하지 않는다. 안 되는 경우
-    /// (색인 미생성/임베딩 미지원)는 켠 뒤 `bibleIndexStatusRow`/검색 결과 에러 메시지로 알린다.
-    private var aiToggleButton: some View {
+    /// 검색창 왼쪽에 놓이는 질문형 검색 토글. `.searchable` 시스템 검색창이 툴바 맨 끝(trailing)에
+    /// 붙으므로 이 항목을 먼저 선언한다.
+    private var questionToggleButton: some View {
         Toggle(isOn: Binding(
-            get: { viewModel.isAIQueryEnabled },
-            set: { viewModel.isAIQueryEnabled = $0 }
+            get: { viewModel.isQuestionSearchEnabled },
+            set: { viewModel.isQuestionSearchEnabled = $0 }
         )) {
-            Label("AI 검색", systemImage: "sparkles")
+            Label("질문형 검색", systemImage: "questionmark.bubble")
         }
         .toggleStyle(.button)
-        .help("켜면 검색어를 다듬은 뒤 성경 구절과 의미가 비슷한 순서로 찾아줍니다. 처음 한 번은 성경 전체 색인이 필요합니다.")
-    }
-    #endif
-
-    /// `viewModel.bibleIndexStatus`에 따라 "색인 만들기" 버튼/진행률 바/실패 안내를 보여준다.
-    /// AI 검색은 이 색인이 있어야 결과를 내므로 결과 목록보다 먼저(상단 Section 안) 둔다.
-    @ViewBuilder
-    private var bibleIndexStatusRow: some View {
-        switch viewModel.bibleIndexStatus {
-        case .notBuilt:
-            HStack(spacing: 8) {
-                Image(systemName: "shippingbox")
-                Text("AI 검색을 쓰려면 먼저 성경 전체 색인이 필요합니다.")
-                Spacer()
-                Button("색인 만들기") {
-                    viewModel.startBibleEmbeddingIndexing()
-                }
-                .buttonStyle(.borderedProminent)
-                .tint(Color("AccentColor"))
-                .controlSize(.small)
-            }
-            .font(.caption)
-            .padding(.vertical, 2)
-        case .building(let progress):
-            VStack(alignment: .leading, spacing: 4) {
-                HStack(spacing: 8) {
-                    Text("성경 전체 색인 만드는 중… \(Int(progress * 100))%")
-                    Spacer()
-                    Button("취소") {
-                        viewModel.cancelBibleEmbeddingIndexing()
-                    }
-                    .buttonStyle(.borderless)
-                    .tint(Color("AccentColor"))
-                    .controlSize(.small)
-                }
-                .font(.caption)
-                ProgressView(value: progress)
-            }
-            .padding(.vertical, 2)
-        case .ready:
-            // 색인이 준비되면 안내 문구를 보여주지 않는다.
-            EmptyView()
-        case .failed(let message):
-            HStack(spacing: 8) {
-                Image(systemName: "exclamationmark.triangle.fill")
-                    .foregroundStyle(.orange)
-                Text(message)
-                Spacer()
-                Button("다시 시도") {
-                    viewModel.startBibleEmbeddingIndexing()
-                }
-                .buttonStyle(.bordered)
-                .tint(Color("AccentColor"))
-                .controlSize(.small)
-            }
-            .font(.caption)
-            .padding(.vertical, 2)
-        }
+        .help("켜면 ‘다윗의 아들은 누구인가’처럼 물었을 때 인물·관계·주제 정보를 카드로 먼저 보여줍니다.")
     }
 
-    // AI 카드가 통합검색 화면 자체를 대체할 때의 카드 종류. 단일 항목이면 바로 상세로,
+    // 질의 의도 카드가 통합검색 화면 자체를 대체할 때의 카드 종류. 단일 항목이면 바로 상세로,
     // 여러 항목이면 행 목록에서 선택해 상세로 간다. 예언/서사는 데이터가 없어 항상
     // `.notReady`이므로(`QueryIntentHandler.swift` 참고) 포함하지 않는다.
     private enum InlineCardKind {
         case relation([RelationDisplayItem])
         case person([PersonEntity])
+        /// 장소가 걸린 질의 — 인물이 함께 있으면 같은 목록에 섞여 있다(`ProfileItem`).
+        case entity([ProfileItem])
         case theme([ThemeRecord])
 
         var count: Int {
             switch self {
             case .relation(let items): return items.count
             case .person(let items): return items.count
+            case .entity(let items): return items.count
             case .theme(let items): return items.count
             }
         }
@@ -474,12 +415,13 @@ private struct SearchContentView: View {
         switch content {
         case .relation(let items): return .relation(items)
         case .personProfile(let persons): return .person(persons)
+        case .entityProfile(let items): return .entity(items)
         case .theme(let themes): return .theme(themes)
         case .prophecy, .narrative: return nil
         }
     }
 
-    /// AI 카드가 통합검색 페이지 자체를 대체하는 중인지 — 참이면 `resultsSection`
+    /// 질의 의도 카드가 통합검색 페이지 자체를 대체하는 중인지 — 참이면 `resultsSection`
     /// (성경구절/개요/메모·말씀노트/연구문서 4개 탭)을 그리지 않는다. `body`와
     /// `intentCardSection` 양쪽에서 쓴다.
     private var isInlineCardDisplayActive: Bool {
@@ -504,6 +446,8 @@ private struct SearchContentView: View {
             inlineSelectableRow(onSelect: onSelect) { relationLabel(items[index]) }
         case .person(let items):
             inlineSelectableRow(onSelect: onSelect) { personOrPlaceLabel(items[index]) }
+        case .entity(let items):
+            inlineSelectableRow(onSelect: onSelect) { entityLabel(items[index]) }
         case .theme(let items):
             inlineSelectableRow(onSelect: onSelect) { themeLabel(items[index]) }
         }
@@ -514,6 +458,11 @@ private struct SearchContentView: View {
         switch kind {
         case .relation(let items): RelationDetailView(item: items[index])
         case .person(let items): PersonDetailView(person: items[index])
+        case .entity(let items):
+            switch items[index] {
+            case .person(let person): PersonDetailView(person: person)
+            case .place(let place): PlaceDetailView(place: place)
+            }
         case .theme(let items): ThemeDetailView(theme: items[index])
         }
     }
@@ -592,28 +541,6 @@ private struct SearchContentView: View {
                     .padding(.vertical, 2)
                 }
 
-                if viewModel.isAIQueryEnabled {
-                    // AI 검색 모드에서 검색어 정제는 항상 건너뛰고(결정론적 꼬리표 제거만 적용) 재순위화는
-                    // 결정론적 `BibleStructuralRerankerService`만 쓴다.
-
-                    // 절/문맥 블렌드 비율(내부 코사인 유사도, 기본 0.6)은 튜닝용 값이고 최종 사용자가 해석할 수
-                    // 있는 정보가 아니라서 UI에 노출하지 않는다.
-
-                    // 정제 켬/끔에 따라 실제로 임베딩에 들어간 문장이 달라지는 것을 비교해 볼 수 있게 보여준다.
-                    if let usedQuery = viewModel.lastAIQueryUsed, !usedQuery.isEmpty {
-                        HStack(alignment: .top, spacing: 6) {
-                            Image(systemName: "text.magnifyingglass")
-                            Text("검색에 사용된 문장: \(usedQuery)")
-                        }
-                        .font(.caption)
-                        .foregroundStyle(.secondary)
-                        .padding(.vertical, 2)
-                    }
-
-                    // 의미검색은 성경 전체를 미리 임베딩해 둔 로컬 색인이 있어야 동작한다 — 색인 상태에 따라 만들기
-                    // 안내/진행률을 보여준다.
-                    bibleIndexStatusRow
-                }
             }
             .padding(.vertical, 4)
             // `.scrollContentBackground(.hidden)`와 `List`의 `.background()`는
@@ -623,8 +550,8 @@ private struct SearchContentView: View {
             .listRowBackground(Color.clear)
 
             // 일반 검색 결과보다 먼저 보여준다(정답에 더 가까운 안내). `viewModel.intentCard`가 nil이면
-            // Section 자체가 그려지지 않으며, AI 검색 토글이 꺼져 있을 때도 항상 nil이다(키워드 검색 모드에선
-            // `SearchViewModel.performSearch`가 카드를 계산하지 않는다).
+            // Section 자체가 그려지지 않으며, 질문형 검색 토글이 꺼져 있을 때도 항상 nil이다
+            // (`SearchViewModel.performSearch`가 카드를 계산하지 않는다).
             if let intentCard = viewModel.intentCard {
                 intentCardSection(intentCard)
             }
@@ -647,8 +574,8 @@ private struct SearchContentView: View {
         .listRowSeparatorTint(JBCHCategoryPalette.wood.opacity(0.3))
     }
 
-    /// 맥/아이패드 전용 — AI 카드가 항목을 여러 개 찾았을 때 왼쪽에 목록, 오른쪽에 선택된 항목의 상세를 나란히 보여준다. 선택
-    /// 전에는 오른쪽에 안내 문구만 보이며 첫 항목을 자동 선택하지 않는다. 검색창/AI 토글 등 공통 모디파이어는 `body`에 남아
+    /// 맥/아이패드 전용 — 질의 의도 카드가 항목을 여러 개 찾았을 때 왼쪽에 목록, 오른쪽에 선택된 항목의 상세를 나란히 보여준다. 선택
+    /// 전에는 오른쪽에 안내 문구만 보이며 첫 항목을 자동 선택하지 않는다. 검색창/질문형 검색 토글 등 공통 모디파이어는 `body`에 남아
     /// 있어 여기서는 결과 콘텐츠만 그린다.
     @ViewBuilder
     private func macSplitCardLayout(intent: QueryIntentClassifier.Intent, kind: InlineCardKind) -> some View {
@@ -765,6 +692,7 @@ private struct SearchContentView: View {
         switch intent {
         case .relation: return ("관계 정보", "person.2.fill", themeColor)
         case .personProfile: return ("인물 정보", "person.crop.circle.fill", themeColor)  // [2026-09-15] personOrPlaceInfo 대체, 장소 미포함
+        case .placeProfile: return ("인물·장소 정보", "mappin.and.ellipse", themeColor)  // [2026-10-01] 장소(PlaceSeed.json) 신설
         case .prophecy: return ("예언", "scroll.fill", themeColor)
         case .themeOrAttribute: return ("주제·속성", "lightbulb.fill", themeColor)
         case .narrative: return ("서사·흐름", "list.number", themeColor)
@@ -779,7 +707,7 @@ private struct SearchContentView: View {
     @ViewBuilder
     private func intentContentRows(_ content: QueryIntentCard.Content) -> some View {
         switch content {
-        case .relation, .personProfile, .theme:
+        case .relation, .personProfile, .entityProfile, .theme:
             EmptyView()
         case .prophecy(let prophecies):
             ForEach(Array(prophecies.enumerated()), id: \.offset) { _, prophecy in
@@ -818,6 +746,24 @@ private struct SearchContentView: View {
             title: entity.word,
             excerptText: entity.entityRemark
         )
+    }
+
+    // MARK: - 인물·장소 혼합 행
+
+    /// 인물은 인물 아이콘, 장소는 핀 아이콘. 같은 이름의 지명은 `remark`("1. …", "2. …")가 요약 줄에 나와 구분된다.
+    private func entityLabel(_ item: ProfileItem) -> some View {
+        switch item {
+        case .person(let person):
+            return rowLabel(
+                icon: "person.crop.circle.fill", iconColor: settings.bibleTextColor ?? .primary,
+                title: person.word, excerptText: person.entityRemark
+            )
+        case .place(let place):
+            return rowLabel(
+                icon: "mappin.circle.fill", iconColor: settings.bibleTextColor ?? .primary,
+                title: place.word, excerptText: place.remark
+            )
+        }
     }
 
     // MARK: - 예언 행
@@ -1273,10 +1219,6 @@ private struct SearchContentView: View {
                     if isReferenceMatch {
                         badge("참조 일치", color: referenceMatchGreen, systemImage: "checkmark.seal.fill")
                     }
-                    // AI 검색 결과에 "유사도 xx%" 배지는 두지 않는다 —
-                    // `BibleStructuralRerankerService.rerank`가 순서만 다시 매기고
-                    // `similarity` 값은 갱신하지 않으며, 하이브리드 키워드 병합/관주 후보의 값은 실제 유사도가
-                    // 아니라서 표시 %가 실제 순위 근거와 어긋난다.
                     Spacer(minLength: 4)
                 }
                 if !tagNames.isEmpty {
@@ -1361,17 +1303,6 @@ private struct SearchContentView: View {
             .foregroundStyle(color)
             .frame(width: 40, height: 40)
             .background(color.opacity(0.14), in: RoundedRectangle(cornerRadius: 10, style: .continuous))
-    }
-
-    /// "N회 일치" 강조색 캡슐 배지.
-    private func occurrenceChip(_ count: Int) -> some View {
-        Text("\(count)회 일치")
-            .font(.subheadline.weight(.semibold).monospacedDigit())
-            .padding(.horizontal, 7)
-            .padding(.vertical, 3)
-            .background(Color("AccentColor").opacity(0.14), in: Capsule())
-            .foregroundStyle(Color("AccentColor"))
-            .fixedSize()
     }
 
     // MARK: - 성경구절

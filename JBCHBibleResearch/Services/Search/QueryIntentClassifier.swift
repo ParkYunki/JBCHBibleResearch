@@ -13,7 +13,7 @@
 //     이 로직은 바꿀 필요가 없다.
 //  2) Handler(`QueryIntentHandler`) — 분류 결과별로 해당 테이블에서 질의에
 //     언급된 항목을 찾는다. 없으면 "아직 준비되지 않음" 안내만 띄운다.
-//  3) 일반 검색 폴백(`BibleSemanticSearchService`/`SearchViewModel`) — 분류
+//  3) 일반 검색 폴백(`SearchViewModel`의 키워드 검색) — 분류
 //     결과와 무관하게 항상 실행한다. 오분류가 나도 기존 검색보다 나빠지지
 //     않는 것이 이 구조의 안전장치다.
 //
@@ -62,6 +62,10 @@ public enum QueryIntentClassifier {
         /// `QueryIntentHandler.handle`이 수행하고(우선순위는 관계 다음) 이 case는
         /// 그 결과를 담는 태그일 뿐이다. 장소는 콘텐츠가 준비되지 않아 묶지 않는다.
         case personProfile
+        /// 지명 이름 자체를 묻는 질의 — `Places` 테이블이 대상(PlaceSeed.json). 인물처럼 DB 조회가 필요해
+        /// `classify()`는 반환하지 않고 `QueryIntentHandler.handle`이 결과를 담는 태그로만 쓴다. 같은 이름의
+        /// 인물이 함께 걸리면 한 카드에 인물·장소를 같이 보여준다.
+        case placeProfile
         /// 예언/성취, 또는 메시아·마지막 때·마지막 전쟁 관련 주제어 —
         /// `Prophecies` 테이블이 대상.
         case prophecy
@@ -149,8 +153,7 @@ public enum QueryIntentClassifier {
     // 세 가지 신호 중 하나라도 있으면 이 카테고리다:
     // (a) 이름 붙은 본문(named_passage)을 직접 언급 — 초안 예시 목록이라 데이터를
     //     채우면서 보강해야 한다.
-    // (b) "~에 대한/관한 말씀·구절"류 꼬리표 — `BibleQueryRefinementService.
-    //     trailingMetaPhrases`(`BibleReferenceAIQueryService.swift`)와 같은 값.
+    // (b) "~에 대한/관한 말씀·구절"류 꼬리표.
     // (c) "(주제)+의+(추상명사)" 구조 — 방법/중요성/의미/이유/목적/역할/모습/내용/
     //     특징/속성/성품/본질/정의라는 질문 형태를 나타내는 닫힌 명사 집합에 기댄다.
     //     주제어 목록은 끝이 없어 나열식으로는 회수율 구멍이 생기지만, "주제 + 이
@@ -160,8 +163,6 @@ public enum QueryIntentClassifier {
         "가상칠언", "팔복", "주기도문", "십계명", "사도신경",
     ]
 
-    /// `BibleQueryRefinementService.trailingMetaPhrases`(`BibleReferenceAIQueryService.swift`)
-    /// 와 동일한 값 — 그 프로퍼티가 private라 복사했으니 두 배열을 함께 갱신할 것.
     /// "에 대하여"/"에 관하여"는 `Themes` 시드 데이터 제목이 전부 "OOO에 대하여"
     /// 형식이라 그 표현과 일치시키기 위해 포함한다.
     private static let topicSuffixPhrases: [String] = [

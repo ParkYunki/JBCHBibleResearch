@@ -165,8 +165,8 @@ enum SermonParagraphStyleCodec {
                 // 오른쪽 여백은 `tailIndent`를 음수로 주면 trailing margin 기준 거리가 된다.
                 //
                 // ⚠️ 문단 위아래 점선(구분선)은 표준 attribute로 표현할 수 없어(커스텀
-                // `NSLayoutManager` 필요) 에디터에서는 구현하지 않았고, 읽기 전용 뷰어
-                // (`SermonViewerView.paragraphText`)에서만 그린다.
+                // `NSLayoutManager` 필요) 에디터에는 없다. 뷰어(`SermonViewerText.swift`)도 편집 화면과
+                // 똑같이 보이도록 이 파일의 서식만 그대로 그리므로 점선을 그리지 않는다.
                 paragraphStyle.headIndent = 10
                 paragraphStyle.firstLineHeadIndent = 10
                 paragraphStyle.tailIndent = -10

@@ -62,8 +62,8 @@ private let onboardingPages: [OnboardingPage] = [
         title: "성경 조회",
         description: "여러 번역본을 나란히 놓고 비교하며 읽고, 구절을 탭해 메모·말씀 요약으로 이어갈 수 있습니다."
     ),
-    // 인물/지명/예언/AI 의미검색은 뒷단 데이터셋(인덱스, 임베딩 색인)이 아직 다 채워지지
-    // 않아 소개하지 않는다. 안정적으로 동작하는 성경구절/메모/연구문서 검색만 소개한다.
+    // 인물/지명/예언 카드는 뒷단 데이터셋이 아직 다 채워지지 않아 소개하지 않는다.
+    // 안정적으로 동작하는 성경구절/메모/연구문서 검색만 소개한다.
     OnboardingPage(
         icon: "magnifyingglass",
         gradientColors: [.purple, .pink],

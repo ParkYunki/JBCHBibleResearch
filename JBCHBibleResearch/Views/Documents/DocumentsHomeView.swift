@@ -472,11 +472,15 @@ struct DocumentsHomeView: View {
     @ViewBuilder
     private func content(viewModel: DocumentsViewModel) -> some View {
         VStack(spacing: 0) {
-            dropZone(viewModel: viewModel)
-                .padding(.horizontal)
-                .padding(.vertical, 8)
+            // 아이폰은 드래그 앤 드롭을 쓸 수 없고 탭 업로드는 우측 상단 업로드 아이콘과 겹치므로 점선 박스를
+            // 없애고 아이콘 하나로 통일한다. 아이패드/맥은 그대로 둔다.
+            if !isPhone {
+                dropZone(viewModel: viewModel)
+                    .padding(.horizontal)
+                    .padding(.vertical, 8)
 
-            Divider()
+                Divider()
+            }
 
             searchAndFilterBar(viewModel: viewModel)
 

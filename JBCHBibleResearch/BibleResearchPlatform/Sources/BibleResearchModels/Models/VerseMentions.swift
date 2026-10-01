@@ -23,7 +23,7 @@ public enum VerseMentionSourceType: String, Codable, Sendable, CaseIterable {
 }
 
 /// 메모/연구문서 등 본문 안에서 정규식으로 추출한 성경 구절 참조 1건. `BibleReferenceIndexingService`(앱 레이어)가
-/// 채우며, 본문이 바뀔 때마다 통째로 다시 계산해 갱신한다(`EmbeddingIndexingService`와 같은 "전체 재스캔, 바뀐 것만 갱신" 원칙).
+/// 채우며, 본문이 바뀔 때마다 통째로 다시 계산해 갱신한다("전체 재스캔, 바뀐 것만 갱신" 원칙).
 @Model
 public final class VerseMention {
     public var id: UUID = UUID()

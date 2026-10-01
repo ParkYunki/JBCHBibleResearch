@@ -478,6 +478,26 @@ final class BibleReadingViewModel {
         rebuildRelatedChapterMemosIndex()
     }
 
+    /// 이 장 전체에 대한 개인 묵상 — `verse == nil`(장 단위 좌표)인 빈 `UserMemo`를 만들어 돌려준다. 호출부가 메모 편집기로 열고,
+    /// 내용 없이 닫히면 편집기(`MemoDetailView`)가 빈 메모를 스스로 지운다(`createPhraseMemo`와 같은 흐름).
+    func createChapterMemo() -> UserMemo {
+        let memo = UserMemo(bookId: selectedBook.bookId, chapter: selectedChapter)
+        modelContext.insert(memo)
+        try? modelContext.save()
+        relatedChapterMemos.insert(memo, at: 0)
+        rebuildRelatedChapterMemosIndex()
+        BibleReferenceIndexingService.reindexMemo(memo, context: modelContext)
+        return memo
+    }
+
+    /// 이 장 단위(절·구간에 달리지 않은) 개인 묵상, 최근 수정순. 내용이 비어 있는 것은 뺀다.
+    var chapterLevelMemos: [UserMemo] {
+        relatedChapterMemos.filter {
+            $0.verse == nil && $0.rangeStart == nil
+                && !$0.contentText.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty
+        }
+    }
+
     func createPhraseMemo(translationCode: String, verse: Int, range: NSRange, anchorText: String) -> UserMemo {
         let memo = UserMemo(
             bookId: selectedBook.bookId, chapter: selectedChapter, verse: verse,

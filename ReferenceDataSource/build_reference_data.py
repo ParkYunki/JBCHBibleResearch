@@ -199,6 +199,114 @@ def resolve_single_verse(v, abbr_index):
     return (book_id, chapter, verse)
 
 
+# [2026-10-01 신설, 사용자 확정] 시드의 `verses` 원소는 한 절("마 26:14")뿐 아니라 범위("마 26:14-16",
+# "사8:1-4", "창세기 30:5-6", "왕하 15:8–12")로도 적혀 있다. 범위는 절 하나하나로 풀어 등록한다 —
+# 예) "마 26:14-16" -> 마26:14, 마26:15, 마26:16. 책 이름은 약어/전체 이름 모두(`books.json`의 abbreviation에
+# 둘 다 들어 있음), 책과 장 사이 공백은 있어도 없어도 되며, 구분 기호는 -, –(en dash), —(em dash), ~를 받는다.
+# 형식에 안 맞거나 책을 못 찾거나 끝 절이 시작 절보다 작으면(예: "5-3") 추측하지 않고 빈 목록을 돌려주며,
+# 호출부(`expand_verse_list`)가 경고로 모아 출력한다. 장을 넘는 범위("창 1:1-2:3")는 현재 시드에 없어 지원하지 않는다.
+VERSE_RANGE_RE = re.compile(r'^([가-힣]+)\s*(\d+)\s*:\s*(\d+)(?:\s*[-\u2013\u2014~]\s*(\d+))?$')
+
+
+def resolve_verse_refs(v, abbr_index):
+    """시드 구절 문자열 하나를 [(book_id, chapter, verse), ...]로 푼다. 한 절이면 원소 1개, 범위면 절마다 1개."""
+    m = VERSE_RANGE_RE.match((v or "").strip())
+    if not m:
+        return []
+    abbr, chapter, start = m.group(1), int(m.group(2)), int(m.group(3))
+    end = int(m.group(4)) if m.group(4) else start
+    book_id = abbr_index.get(abbr)
+    if book_id is None or end < start:
+        return []
+    return [(book_id, chapter, verse) for verse in range(start, end + 1)]
+
+
+def expand_verse_list(verse_list, abbr_index, warnings=None, label=""):
+    """`verses` 배열 전체를 "book:chapter:verse,book:chapter:verse" 문자열(CrossReferences.targets와 같은 포맷)로 만든다.
+    범위는 절 단위로 풀고, 같은 절이 중복되면 첫 번째만 남긴다(순서 유지). 풀지 못한 원소는 `warnings`에
+    (label, 원문)으로 모아 호출부가 출력하게 한다 — 조용히 버리지 않는다."""
+    seen = set()
+    parts = []
+    for raw in (verse_list or []):
+        refs = resolve_verse_refs(raw, abbr_index)
+        if not refs:
+            if warnings is not None:
+                warnings.append((label, raw))
+            continue
+        for b, c, v in refs:
+            if (b, c, v) not in seen:
+                seen.add((b, c, v))
+                parts.append(f"{b}:{c}:{v}")
+    return ",".join(parts)
+
+
+def report_unresolved_verses(title, warnings):
+    if not warnings:
+        print(f"{title}: 구절 변환 실패 0건")
+        return
+    print(f"  ⚠️ {title}: 구절 {len(warnings)}건을 변환하지 못함(형식 확인 필요) — 처음 20건:")
+    for label, raw in warnings[:20]:
+        print(f"     - {label}: {raw!r}")
+
+
+def report_missing_bible_verses(title, labeled_targets):
+    """변환된 구절이 BibleDB.sqlite에 실제로 존재하는지 확인해 없는 것만 경고한다(삭제하지는 않는다 — 앱은 없는 절을 건너뜀)."""
+    if not os.path.exists(BIBLE_DB_PATH):
+        return
+    conn = sqlite3.connect(BIBLE_DB_PATH)
+    cache = {}
+    missing = []
+    try:
+        for label, targets in labeled_targets:
+            for token in (targets or "").split(","):
+                if not token:
+                    continue
+                b, c, v = (int(x) for x in token.split(":"))
+                key = (b, c, v)
+                if key not in cache:
+                    cache[key] = conn.execute(
+                        "SELECT 1 FROM BibleVerses WHERE book_id=? AND chapter=? AND verse=? LIMIT 1", key
+                    ).fetchone() is not None
+                if not cache[key]:
+                    missing.append((label, token))
+    finally:
+        conn.close()
+    if missing:
+        print(f"  ⚠️ {title}: BibleDB에 없는 절 {len(missing)}건 — 책/장/절 오기 가능성(처음 20건):")
+        for label, token in missing[:20]:
+            print(f"     - {label}: {token}")
+    else:
+        print(f"{title}: 변환된 모든 절이 BibleDB에 존재")
+
+
+# [2026-10-01 신설, 사용자 요청 "기록이 없다는 문구는 화면에 '-' 표시"] 본문 필드(소개/생애/사건/성품/지리/역사 등)가
+# "~기록되어 있지 않다" 류 문장**만**으로 이뤄졌으면 "-"로 바꾼다. 실제 정보가 함께 들어 있는 필드는 건드리지 않는다:
+#  - 문장 중 하나라도 "기록 없음" 표현이 없으면(=다른 정보 문장이 있음) 원문 유지.
+#  - 대조/보충 표현(다만, 외에, 뿐, 으나, 으며 …)이 있으면 그 뒤에 정보가 이어지는 것이라 원문 유지.
+#  - 빈 값은 "-" (사용자 시드가 비어 있는 칸을 "-"로 적는 관례와 같음).
+# 성경 인용 괄호("(역대상 4:15)")와 흩어진 "-" 표시는 판정에서만 지우고 원문은 건드리지 않는다.
+NO_RECORD_RE = re.compile(
+    r'기록되어 있지 않|기록이 존재하지 않|기록은 존재하지 않|기록이 나타나지 않|기록이 없|'
+    r'나타나지 않|확인되지 않|확인할 수 없|존재하지 않|언급되지 않|전해지지 않|알려져 있지 않|명시되어 있지 않|기술되어 있지 않'
+)
+NO_RECORD_CONTRAST_RE = re.compile(r'다만|외에|이외|뿐|단지|오직|만이|으나|지만|으며|이며|으로만|그러나|하지만|반면|[가-힣]나,|므로|추정|분류|묘사|보이|것으로|용도|으로,')
+
+
+def normalize_no_record(text):
+    value = (text or "").strip()
+    if not value or value == "-":
+        return "-"
+    cleaned = re.sub(r'\([^)]*\)', ' ', value)          # (성경 인용) 제거
+    cleaned = re.sub(r'(?:^|\s)-(?=\s|$)', ' ', cleaned)   # 홀로 놓인 "-" 제거
+    sentences = [x.strip() for x in re.split(r'(?<=[.。])\s*', cleaned) if x.strip()]
+    if not sentences:
+        return "-"
+    for sentence in sentences:
+        if not NO_RECORD_RE.search(sentence) or NO_RECORD_CONTRAST_RE.search(sentence) or len(sentence) > 90:
+            return value
+    return "-"
+
+
 # === 주제별 말씀(Themes) 시드 텍스트 파싱 (2026-08-20 신설, 사용자 요청) ===
 # 사용자가 "주제별 말씀01.txt"를 올리고 "분석볼것"이라고 지시 — 실제로 열어
 # 확인해 보니 "N. 제목" 헤더 아래 성경 구절 목록이 줄줄이 나열된 형태였고,
@@ -1313,10 +1421,14 @@ def build_persons_from_person_seed(cur, abbr_index):
     with open(PERSON_SEED_PATH, encoding="utf-8") as f:
         seed_entries = json.load(f)
 
-    def verses_str(verse_list):
-        resolved = [resolve_single_verse(v, abbr_index) for v in (verse_list or [])]
-        resolved = [r for r in resolved if r is not None]
-        return ",".join(f"{b}:{c}:{v}" for b, c, v in resolved)
+    # [2026-10-01 변경] 범위("마 26:14-16")를 절 단위로 풀어 등록한다(`expand_verse_list` 참고).
+    verse_warnings = []
+    labeled_targets = []
+
+    def verses_str(verse_list, label=""):
+        result = expand_verse_list(verse_list, abbr_index, verse_warnings, label)
+        labeled_targets.append((label, result))
+        return result
 
     def seed_relation_names(rel, field):
         """[2026-09-16 신설] `rel`(관계 딕셔너리 하나)에서 `field`(할아버지·
@@ -1344,10 +1456,15 @@ def build_persons_from_person_seed(cur, abbr_index):
         if not isinstance(rel, dict):
             rel = {}
         person_rows.append((
-            e["idx"], e["word"], remark, verses_str(e.get("verses")), "",
+            e["idx"], e["word"], remark, verses_str(e.get("verses"), f"인물 {e['idx']} {e['word']}"), "",
             ",".join(e.get("word2") or []), e.get("call") or "", e.get("meaning") or "",
-            e.get("introduce") or "", e.get("lifetime") or "", e.get("event") or "",
-            e.get("character") or "", desc.get("출신") or "", desc.get("민족") or "",
+            # [2026-10-01] "기록 없음"만 있는 본문은 "-"로(`normalize_no_record`). 빈 값은 기존대로 빈 문자열을 유지해
+            # 화면이 그 카드를 숨기는 동작을 바꾸지 않는다 — 시드가 직접 "-"를 적은 칸은 원래부터 "-"다.
+            normalize_no_record(e.get("introduce")) if (e.get("introduce") or "").strip() else "",
+            normalize_no_record(e.get("lifetime")) if (e.get("lifetime") or "").strip() else "",
+            normalize_no_record(e.get("event")) if (e.get("event") or "").strip() else "",
+            normalize_no_record(e.get("character")) if (e.get("character") or "").strip() else "",
+            desc.get("출신") or "", desc.get("민족") or "",
             desc.get("지파") or "", desc.get("성별") or "", occupation_str, e.get("memo") or "",
             seed_relation_names(rel, "할아버지"), seed_relation_names(rel, "할머니"),
             seed_relation_names(rel, "아버지"), seed_relation_names(rel, "어머니"),
@@ -1365,6 +1482,55 @@ def build_persons_from_person_seed(cur, abbr_index):
         person_rows,
     )
     print(f"Persons(PersonSeed.json 단일 소스) 삽입: {len(person_rows)}건")
+    report_unresolved_verses("Persons 구절", verse_warnings)
+    report_missing_bible_verses("Persons 구절", labeled_targets)
+
+
+# === PlaceSeed.json -> Places (2026-10-01 신설) ===
+PLACE_SEED_PATH = os.path.join(SCRIPT_DIR, "PlaceSeed.json")
+
+
+def build_places_from_place_seed(cur, abbr_index):
+    """[2026-10-01 신설, 사용자 확정] PlaceSeed.json(지명 사전, 소개·성경 내용·지리·역사 필드 포함)을 Places 테이블에
+    그대로 담는다. PersonPlaceSeed.json은 삭제됐고(2026-09-20 사용 중단, 이후 파일 삭제) 이 파일이 지명의 단일 소스다.
+
+    - idx는 PlaceSeed.json의 값을 그대로 쓴다(유일, 실행 확인 — 중복이면 마지막 항목이 이긴다고 가정하지 않고 오류로 중단).
+    - 동명이인(같은 word)은 행이 여러 개이며 remark 앞 "1. 2. 3."으로 구분된다 — 합치지 않는다.
+    - introduce/biblecontents/geography/history: 비어 있거나 "기록 없음"만 있으면 "-"(`normalize_no_record`).
+    - verses: 범위를 절 단위로 풀어 `book:chapter:verse,...`로 저장한다."""
+    if not os.path.exists(PLACE_SEED_PATH):
+        print(f"({PLACE_SEED_PATH} 없음 — Places 테이블을 채울 수 없음, 중단)")
+        raise SystemExit(1)
+    with open(PLACE_SEED_PATH, encoding="utf-8") as f:
+        entries = json.load(f)
+
+    idxs = [e["idx"] for e in entries]
+    if len(idxs) != len(set(idxs)):
+        dup = sorted({i for i in idxs if idxs.count(i) > 1})
+        print(f"PlaceSeed.json에 중복 idx가 있습니다: {dup[:20]} — 중단")
+        raise SystemExit(1)
+
+    verse_warnings = []
+    labeled_targets = []
+    rows = []
+    for e in entries:
+        label = f"장소 {e['idx']} {e['word']}"
+        verses = expand_verse_list(e.get("verses"), abbr_index, verse_warnings, label)
+        labeled_targets.append((label, verses))
+        rows.append((
+            e["idx"], e["word"], e.get("remark") or "", verses,
+            normalize_no_record(e.get("introduce")), normalize_no_record(e.get("biblecontents")),
+            normalize_no_record(e.get("geography")), normalize_no_record(e.get("history")),
+        ))
+    cur.executemany(
+        "INSERT INTO Places (idx, word, remark, verses, introduce, biblecontents, geography, history) "
+        "VALUES (?, ?, ?, ?, ?, ?, ?, ?)", rows,
+    )
+    dash = {name: sum(1 for r in rows if r[i] == "-") for name, i in
+            (("introduce", 4), ("biblecontents", 5), ("geography", 6), ("history", 7))}
+    print(f"Places(PlaceSeed.json) 삽입: {len(rows)}건 — '-' 표시 칸 수 {dash}")
+    report_unresolved_verses("Places 구절", verse_warnings)
+    report_missing_bible_verses("Places 구절", labeled_targets)
 
 
 def build_structured_person_relations(cur):
@@ -2096,11 +2262,18 @@ def main():
     );
     CREATE INDEX idx_persons_word ON Persons(word);
 
+    -- [2026-10-01 변경] PlaceSeed.json(1,094건)으로 채운다. 같은 이름의 지명(동명이인, 68개 표제어)은 idx로 구분하고
+    -- remark 앞 "1. 2. 3."이 그 구분이다. introduce/biblecontents/geography/history는 화면 표시용 본문이며 비어 있거나
+    -- "기록 없음"만 있는 칸은 "-"로 저장한다(build_places_from_place_seed 참고).
     CREATE TABLE Places (
         idx TEXT PRIMARY KEY,
         word TEXT NOT NULL,
         remark TEXT NOT NULL,
-        verses TEXT NOT NULL
+        verses TEXT NOT NULL,
+        introduce TEXT NOT NULL DEFAULT '-',
+        biblecontents TEXT NOT NULL DEFAULT '-',
+        geography TEXT NOT NULL DEFAULT '-',
+        history TEXT NOT NULL DEFAULT '-'
     );
     CREATE INDEX idx_places_word ON Places(word);
 
@@ -2336,6 +2509,9 @@ def main():
     #    실행해야 관계추출이 최신 Persons를 기준으로 known_person_words를 계산한다
     #    [2026-09-15 순서 변경]
     build_persons_from_person_seed(cur, abbr_index)
+    # [2026-10-01] 지명은 PlaceSeed.json이 단일 소스다(PersonPlaceSeed.json은 삭제됨). 아래 build_person_place_tables()
+    # 호출은 계속 중단 상태로 두며, 그 함수/PERSON_PLACE_SEED_PATH는 삭제된 파일을 가리키는 죽은 코드다.
+    build_places_from_place_seed(cur, abbr_index)
     # [2026-09-20 중단, 사용자 확정] "PersonPlaceSeed.json 이 파일은 쓰지 말도록."
     # 이 파일로만 만들던 두 가지 — Places 테이블(999건)과, 이 파일 속 인물
     # 설명문을 정규식으로 분석해 만드는 PersonRelations 1단계(3463건) +

@@ -295,17 +295,25 @@ public final class ReferenceDataStore {
     ///
     /// 이 정보는 "표제어 자신의 PersonSeed 기타관계 원문"이라 방향에 의미가 있어, 역방향(target으로 언급된 쪽) 조회는 만들지
     /// 않는다(build 스크립트도 만들지 않는다).
-    public func personContextNotes(forWord sourceWord: String) throws -> [PersonContextNoteRecord] {
+    ///
+    /// 조회 기준은 이름이 아니라 `Persons.idx`(`source_idx`)다. 이름으로 찾으면 동명이인(예: "예수" 3명)이 서로의 참고 정보를
+    /// 가져간다. `source_idx`가 빈 행은 이름이 `Persons`에서 유일할 때만 이름으로 이어 붙인다(`isUniquePersonName`).
+    public func personContextNotes(forIdx sourceIdx: String, word sourceWord: String) throws -> [PersonContextNoteRecord] {
+        let nameIsUnique = try isUniquePersonName(sourceWord)
         let sql = """
             SELECT label, target_word, target_kind, target_idx, raw_sentence
-            FROM PersonContextNotes WHERE source_word = ?
+            FROM PersonContextNotes
+            WHERE (source_idx <> '' AND source_idx = ?1)
+               OR (source_idx = '' AND source_word = ?2 AND ?3 = 1)
             """
         var statement: OpaquePointer?
         defer { sqlite3_finalize(statement) }
         guard sqlite3_prepare_v2(handle, sql, -1, &statement, nil) == SQLITE_OK else {
             throw BibleReferenceError.statementPrepareFailed(code: sqlite3_errcode(handle))
         }
-        sqlite3_bind_text(statement, 1, sourceWord, -1, SQLITE_TRANSIENT)
+        sqlite3_bind_text(statement, 1, sourceIdx, -1, SQLITE_TRANSIENT)
+        sqlite3_bind_text(statement, 2, sourceWord, -1, SQLITE_TRANSIENT)
+        sqlite3_bind_int(statement, 3, nameIsUnique ? 1 : 0)
 
         var results: [PersonContextNoteRecord] = []
         while true {
@@ -330,14 +338,19 @@ public final class ReferenceDataStore {
     /// 찾고, 같은 group_id의 `m2` 중 자기 자신의 행만 제외한다.
     ///
     /// 자기 행 판별은 word와 idx를 함께 비교한다(같은 word라도 idx가 다르면 다른 사람일 수 있어
-    /// `PersonGroupMemberships.UNIQUE(group_id, person_word, person_idx)`와 같은 신원
-    /// 기준). 다른 조회 메서드처럼 word로만 질의하며, 동명이인은 화면(PersonDetailView)의 폴백이 처리한다.
-    public func personGroupMemberships(forWord word: String) throws -> [PersonGroupMembershipRow] {
+    /// `PersonGroupMemberships.UNIQUE(group_id, person_word, person_idx)`와 같은 신원 기준).
+    ///
+    /// 이 사람(m1)을 찾는 기준은 이름이 아니라 `person_idx`다. 이름으로 찾으면 "야고보"/"유다"/"시몬"처럼 동명이인이
+    /// 있는 이름이 열두 제자가 아닌 사람의 카드에도 열두 제자 그룹을 붙인다. `person_idx`가 빈 행은 이름이
+    /// `Persons`에서 유일할 때만 이름으로 이어 붙인다(`isUniquePersonName`).
+    public func personGroupMemberships(forIdx idx: String, word: String) throws -> [PersonGroupMembershipRow] {
+        let nameIsUnique = try isUniquePersonName(word)
         let sql = """
             SELECT m2.group_id, m2.person_word, m2.person_idx
             FROM PersonGroupMemberships m1
             JOIN PersonGroupMemberships m2 ON m1.group_id = m2.group_id
-            WHERE m1.person_word = ?
+            WHERE ((m1.person_idx <> '' AND m1.person_idx = ?1)
+                   OR (m1.person_idx = '' AND m1.person_word = ?2 AND ?3 = 1))
               AND NOT (m2.person_word = m1.person_word AND m2.person_idx = m1.person_idx)
             """
         var statement: OpaquePointer?
@@ -345,7 +358,9 @@ public final class ReferenceDataStore {
         guard sqlite3_prepare_v2(handle, sql, -1, &statement, nil) == SQLITE_OK else {
             throw BibleReferenceError.statementPrepareFailed(code: sqlite3_errcode(handle))
         }
-        sqlite3_bind_text(statement, 1, word, -1, SQLITE_TRANSIENT)
+        sqlite3_bind_text(statement, 1, idx, -1, SQLITE_TRANSIENT)
+        sqlite3_bind_text(statement, 2, word, -1, SQLITE_TRANSIENT)
+        sqlite3_bind_int(statement, 3, nameIsUnique ? 1 : 0)
 
         var results: [PersonGroupMembershipRow] = []
         while true {
@@ -360,6 +375,113 @@ public final class ReferenceDataStore {
             ))
         }
         return results
+    }
+
+    // MARK: - Places (2026-10-01 PlaceSeed.json 반영)
+
+    private static let placeColumns = "idx, word, remark, verses, introduce, biblecontents, geography, history"
+
+    private static func makePlace(from statement: OpaquePointer?) -> PlaceEntity {
+        func col(_ i: Int32) -> String { sqlite3_column_text(statement, i).map { String(cString: $0) } ?? "" }
+        return PlaceEntity(
+            idx: col(0), word: col(1), remark: col(2), verseRefs: parseTargets(col(3)),
+            introduce: col(4), bibleContents: col(5), geography: col(6), history: col(7)
+        )
+    }
+
+    /// 질의에 이름이 들어 있는 지명 전부. 공백은 양쪽 모두 뺀 뒤 비교한다("가드 림몬"이 "가드림몬" 질의에 걸리게).
+    /// 2글자 미만 이름은 제외하고, 더 긴 매칭 이름 안에 완전히 포함되는 짧은 이름은 뺀다("가나안" 질의에서 "가나"가
+    /// 같이 걸리는 것을 막는 `filterSwallowedNameMatches`와 같은 원칙). 같은 이름의 지명은 모두 돌려주며 idx 오름차순이다.
+    public func places(mentionedIn query: String) throws -> [PlaceEntity] {
+        let compactQuery = query.filter { !$0.isWhitespace }
+        guard !compactQuery.isEmpty else { return [] }
+        let sql = "SELECT \(Self.placeColumns) FROM Places"
+        var statement: OpaquePointer?
+        defer { sqlite3_finalize(statement) }
+        guard sqlite3_prepare_v2(handle, sql, -1, &statement, nil) == SQLITE_OK else {
+            throw BibleReferenceError.statementPrepareFailed(code: sqlite3_errcode(handle))
+        }
+        var matched: [(place: PlaceEntity, compactName: String)] = []
+        while true {
+            let step = sqlite3_step(statement)
+            if step == SQLITE_DONE { break }
+            guard step == SQLITE_ROW else { throw BibleReferenceError.stepFailed(code: step) }
+            let place = Self.makePlace(from: statement)
+            let compactName = place.word.filter { !$0.isWhitespace }
+            guard compactName.count >= 2, compactQuery.contains(compactName) else { continue }
+            matched.append((place, compactName))
+        }
+        let names = matched.map(\.compactName)
+        return matched
+            .filter { candidate in
+                !names.contains { other in other.count > candidate.compactName.count && other.contains(candidate.compactName) }
+            }
+            .map(\.place)
+            .sorted { (Int($0.idx) ?? 0) < (Int($1.idx) ?? 0) }
+    }
+
+    /// `idx`(유일 식별자)로 지명 하나를 짚는다. 없으면 nil.
+    public func place(idx: String) throws -> PlaceEntity? {
+        guard !idx.isEmpty else { return nil }
+        let sql = "SELECT \(Self.placeColumns) FROM Places WHERE idx = ?"
+        var statement: OpaquePointer?
+        defer { sqlite3_finalize(statement) }
+        guard sqlite3_prepare_v2(handle, sql, -1, &statement, nil) == SQLITE_OK else {
+            throw BibleReferenceError.statementPrepareFailed(code: sqlite3_errcode(handle))
+        }
+        sqlite3_bind_text(statement, 1, idx, -1, SQLITE_TRANSIENT)
+        let step = sqlite3_step(statement)
+        if step == SQLITE_DONE { return nil }
+        guard step == SQLITE_ROW else { throw BibleReferenceError.stepFailed(code: step) }
+        return Self.makePlace(from: statement)
+    }
+
+    /// 이름이 같은 다른 지명들(동명이인) — `excludingIdx` 자신은 뺀다. 이름 비교는 정확 일치이며 idx 오름차순이다.
+    public func placesSharingName(word: String, excludingIdx idx: String) throws -> [PlaceEntity] {
+        let sql = "SELECT \(Self.placeColumns) FROM Places WHERE word = ?1 AND idx <> ?2 ORDER BY CAST(idx AS INTEGER) ASC"
+        var statement: OpaquePointer?
+        defer { sqlite3_finalize(statement) }
+        guard sqlite3_prepare_v2(handle, sql, -1, &statement, nil) == SQLITE_OK else {
+            throw BibleReferenceError.statementPrepareFailed(code: sqlite3_errcode(handle))
+        }
+        sqlite3_bind_text(statement, 1, word, -1, SQLITE_TRANSIENT)
+        sqlite3_bind_text(statement, 2, idx, -1, SQLITE_TRANSIENT)
+        var results: [PlaceEntity] = []
+        while true {
+            let step = sqlite3_step(statement)
+            if step == SQLITE_DONE { break }
+            guard step == SQLITE_ROW else { throw BibleReferenceError.stepFailed(code: step) }
+            results.append(Self.makePlace(from: statement))
+        }
+        return results
+    }
+
+    /// 그룹(예: "열두 제자")의 멤버 전원을 `PersonGroupMemberships`의 등록 순서대로 돌려준다.
+    ///
+    /// 멤버는 이름이 아니라 `person_idx`로 `person(idx:)`를 불러 확정한다 — "야고보"/"유다"/"시몬"처럼 동명이인이
+    /// 있는 이름이 엉뚱한 사람으로 붙지 않게 하기 위함이다. `person_idx`가 빈 행은 어느 사람인지 알 수 없어(이름만으로
+    /// 추측하지 않는다) 건너뛰고, 같은 idx가 중복 등록돼 있어도 한 번만 담는다. 그룹이 없거나 멤버가 하나도 확정되지
+    /// 않으면 빈 배열이다.
+    public func personGroupMembers(groupId: String) throws -> [PersonEntity] {
+        let sql = "SELECT person_idx FROM PersonGroupMemberships WHERE group_id = ? ORDER BY id ASC"
+        var statement: OpaquePointer?
+        defer { sqlite3_finalize(statement) }
+        guard sqlite3_prepare_v2(handle, sql, -1, &statement, nil) == SQLITE_OK else {
+            throw BibleReferenceError.statementPrepareFailed(code: sqlite3_errcode(handle))
+        }
+        sqlite3_bind_text(statement, 1, groupId, -1, SQLITE_TRANSIENT)
+
+        var idxs: [String] = []
+        var seen = Set<String>()
+        while true {
+            let step = sqlite3_step(statement)
+            if step == SQLITE_DONE { break }
+            guard step == SQLITE_ROW else { throw BibleReferenceError.stepFailed(code: step) }
+            let idx = sqlite3_column_text(statement, 0).map { String(cString: $0) } ?? ""
+            if !idx.isEmpty, seen.insert(idx).inserted { idxs.append(idx) }
+        }
+        // 위 statement를 다 읽은 뒤에 `person(idx:)`(자체 statement)를 부른다 — 한 커넥션에서 두 statement를 겹쳐 쓰지 않는다.
+        return idxs.compactMap { try? person(idx: $0) }
     }
 
     /// `personRelations(forWord:)`(정방향, source_word 기준)의 역방향 — `target_word` 쪽을
@@ -482,9 +604,10 @@ public final class ReferenceDataStore {
 
             let idx = col(0)
             let occupation = col(15).split(separator: ",").map { $0.trimmingCharacters(in: .whitespaces) }
-            let relations = (try? personRelationRecords(involving: word)) ?? []
-            let contextNotes = (try? personContextNotes(forWord: word)) ?? []
-            let groupMemberships = (try? personGroupMemberships(forWord: word)) ?? []
+            // 관계/참고 정보/소속 그룹은 이름이 아니라 idx로 조회한다 — 동명이인 카드가 서로의 정보를 가져가지 않게.
+            let relations = (try? personRelationRecords(involvingIdx: idx, word: word)) ?? []
+            let contextNotes = (try? personContextNotes(forIdx: idx, word: word)) ?? []
+            let groupMemberships = (try? personGroupMemberships(forIdx: idx, word: word)) ?? []
             // SELECT 컬럼 순서: 0=idx 1=word 2=remark 3=verses 4=word2 5=call_title 6=meaning
             // 7=introduce 8=lifetime 9=event 10=character 11=origin 12=nation 13=tribe
             // 14=gender 15=occupation 16=seed_memo, 17~25=rel_* 아홉 개. 위 SELECT 문의 나열 순서와
@@ -544,9 +667,9 @@ public final class ReferenceDataStore {
         let aliasCandidates = col(4).split(separator: ",").map { $0.trimmingCharacters(in: .whitespaces) }
         let idx = col(0)
         let occupation = col(15).split(separator: ",").map { $0.trimmingCharacters(in: .whitespaces) }
-        let relations = (try? personRelationRecords(involving: word)) ?? []
-        let contextNotes = (try? personContextNotes(forWord: word)) ?? []
-        let groupMemberships = (try? personGroupMemberships(forWord: word)) ?? []
+        let relations = (try? personRelationRecords(involvingIdx: idx, word: word)) ?? []
+        let contextNotes = (try? personContextNotes(forIdx: idx, word: word)) ?? []
+        let groupMemberships = (try? personGroupMemberships(forIdx: idx, word: word)) ?? []
         let familyRelations = PersonFamilyRelations(
             grandfathers: relNames(17), grandmothers: relNames(18),
             fathers: relNames(19), mothers: relNames(20),
@@ -581,21 +704,34 @@ public final class ReferenceDataStore {
         }
     }
 
-    /// `personRelations(forWord:)`(source 방향)의 대칭 버전 — `word`가 `target_word`와 정확히
-    /// 일치하는 관계 전부. `personRelations(targetWordMentionedIn:)`는 긴 질의 문자열 안의 부분 문자열
-    /// 검색이라 목적이 달라 재사용할 수 없다(이름이 비슷해 혼동 주의).
-    private func personRelations(exactTargetWord targetWord: String) throws -> [PersonRelationRecord] {
+    /// 이 인물(`idx`)이 source든 target이든 걸린 `PersonRelations` 전부(양방향) — `persons(mentionedIn:)`/
+    /// `person(idx:)`가 `PersonEntity.relations`를 채울 때 쓴다.
+    ///
+    /// 기준은 이름이 아니라 `source_idx`/`target_idx`다. 이름(`source_word`/`target_word`)으로 찾으면 "예수"처럼
+    /// 동명이인이 여럿인 이름은 세 사람이 모두 예수 그리스도의 열두 제자 관계를 그대로 받는다. 별칭(word2)으로 적힌
+    /// 행(예: source_word "스보" = Persons "스비")도 idx로는 정확히 잡힌다.
+    ///
+    /// idx가 빈 행은 "빌드 시점에 신원을 특정하지 못함"이라(`target_idx` 컬럼 주석: 추측 금지) 이름이 `Persons`에서
+    /// 유일할 때만 이름으로 이어 붙이고, 동명이인이 있는 이름이면 어느 쪽인지 알 수 없어 넣지 않는다.
+    private func personRelationRecords(involvingIdx idx: String, word: String) throws -> [PersonRelationRecord] {
+        let nameIsUnique = try isUniquePersonName(word)
         let sql = """
             SELECT source_word, relation_type, target_word, target_kind, raw_sentence, target_idx, source_idx
-            FROM PersonRelations WHERE target_word = ?
+            FROM PersonRelations
+            WHERE (source_idx <> '' AND source_idx = ?1)
+               OR (target_idx <> '' AND target_idx = ?1)
+               OR (?3 = 1 AND ((source_idx = '' AND source_word = ?2) OR (target_idx = '' AND target_word = ?2)))
             """
         var statement: OpaquePointer?
         defer { sqlite3_finalize(statement) }
         guard sqlite3_prepare_v2(handle, sql, -1, &statement, nil) == SQLITE_OK else {
             throw BibleReferenceError.statementPrepareFailed(code: sqlite3_errcode(handle))
         }
-        sqlite3_bind_text(statement, 1, targetWord, -1, SQLITE_TRANSIENT)
+        sqlite3_bind_text(statement, 1, idx, -1, SQLITE_TRANSIENT)
+        sqlite3_bind_text(statement, 2, word, -1, SQLITE_TRANSIENT)
+        sqlite3_bind_int(statement, 3, nameIsUnique ? 1 : 0)
 
+        var seen = Set<String>()
         var results: [PersonRelationRecord] = []
         while true {
             let step = sqlite3_step(statement)
@@ -603,14 +739,16 @@ public final class ReferenceDataStore {
             guard step == SQLITE_ROW else { throw BibleReferenceError.stepFailed(code: step) }
             let sourceWord = sqlite3_column_text(statement, 0).map { String(cString: $0) } ?? ""
             let relationType = sqlite3_column_text(statement, 1).map { String(cString: $0) } ?? ""
-            let targetWordCol = sqlite3_column_text(statement, 2).map { String(cString: $0) } ?? ""
+            let targetWord = sqlite3_column_text(statement, 2).map { String(cString: $0) } ?? ""
             let targetKindRaw = sqlite3_column_text(statement, 3).map { String(cString: $0) }
             let rawSentence = sqlite3_column_text(statement, 4).map { String(cString: $0) } ?? ""
             let targetIdx = sqlite3_column_text(statement, 5).map { String(cString: $0) } ?? ""
-            // "이름#idx" 태그가 있던 경우만 채워진다.
             let sourceIdx = sqlite3_column_text(statement, 6).map { String(cString: $0) } ?? ""
+            // 중복 제거 키에 idx를 넣는다 — 같은 이름의 다른 사람("야고보" 2명 등)을 같은 행으로 오인해 지우지 않게.
+            let key = "\(sourceWord)#\(sourceIdx)|\(relationType)|\(targetWord)#\(targetIdx)"
+            guard seen.insert(key).inserted else { continue }
             results.append(PersonRelationRecord(
-                sourceWord: sourceWord, relationType: relationType, targetWord: targetWordCol,
+                sourceWord: sourceWord, relationType: relationType, targetWord: targetWord,
                 targetKind: targetKindRaw == "place" ? .place : (targetKindRaw == "person" ? .person : nil),
                 rawSentence: rawSentence, targetIdx: targetIdx, sourceIdx: sourceIdx
             ))
@@ -618,20 +756,17 @@ public final class ReferenceDataStore {
         return results
     }
 
-    /// `word`가 source든 target이든 걸린 `PersonRelations` 전부(양방향,
-    /// 중복 제거) — `persons(mentionedIn:)`가 `PersonEntity.relations`를
-    /// 채울 때 쓴다.
-    private func personRelationRecords(involving word: String) throws -> [PersonRelationRecord] {
-        let forward = try personRelations(forWord: word)
-        let reverse = try personRelations(exactTargetWord: word)
-        var seen = Set<String>()
-        var combined: [PersonRelationRecord] = []
-        for relation in forward + reverse {
-            let key = "\(relation.sourceWord)|\(relation.relationType)|\(relation.targetWord)"
-            guard seen.insert(key).inserted else { continue }
-            combined.append(relation)
+    /// 이 이름의 인물이 `Persons`에 정확히 한 명일 때만 true. idx가 빈 관계/그룹/참고 행을 이름으로 이어 붙여도
+    /// 되는지 판단하는 데 쓴다(동명이인이 있으면 어느 쪽 행인지 알 수 없다).
+    private func isUniquePersonName(_ word: String) throws -> Bool {
+        var statement: OpaquePointer?
+        defer { sqlite3_finalize(statement) }
+        guard sqlite3_prepare_v2(handle, "SELECT COUNT(*) FROM Persons WHERE word = ?", -1, &statement, nil) == SQLITE_OK else {
+            throw BibleReferenceError.statementPrepareFailed(code: sqlite3_errcode(handle))
         }
-        return combined
+        sqlite3_bind_text(statement, 1, word, -1, SQLITE_TRANSIENT)
+        guard sqlite3_step(statement) == SQLITE_ROW else { return false }
+        return sqlite3_column_int(statement, 0) == 1
     }
 
     // MARK: - Themes / Prophecies / TimelineEvents (2026-08-20 신설, 스키마만)
@@ -781,8 +916,7 @@ public final class ReferenceDataStore {
 
     /// 절 하나의 관주 대상만 필요할 때 쓰는 가벼운 버전.
     /// `crossReferences(bookId:chapter:translationCode:)`는 장 전체를 `@Model`로 감싸
-    /// `translationCode`를 요구하는 UI 전용 API라, 구조적
-    /// 리랭커(`BibleStructuralRerankerService`)처럼 좌표 목록만 필요한 내부 계산에는 이 메서드를 쓴다.
+    /// `translationCode`를 요구하는 UI 전용 API라, 좌표 목록만 필요한 내부 계산에는 이 메서드를 쓴다.
     public func crossReferenceTargets(bookId: Int, chapter: Int, verse: Int) throws -> [BibleVerseRef] {
         let sql = "SELECT targets FROM CrossReferences WHERE book_id = ? AND chapter = ? AND verse = ?"
         var statement: OpaquePointer?
@@ -813,7 +947,7 @@ public final class ReferenceDataStore {
     // 문법 에러 없이 "그 글자로 시작하는 토큰"을 찾는다.
     //
     // 정렬은 SQL에서 (book_id, chapter, verse) 오름차순으로 하고 `LIMIT`이 "성경순 앞쪽 N개"를 자른다.
-    // 호출부(`SearchViewModel.searchVerses`, `BibleSemanticSearchService`)는 `rank`를
+    // 호출부(`SearchViewModel.searchVerses`)는 `rank`를
     // 읽지 않고 자체 재점수하므로 bm25 순 컷은 의미가 없고, 오히려 진짜 첫 등장 절이 상위 N개 밖으로 밀려 빠질 수 있다.
     // `limit`이 `nil`이면 자르지 않는다("더보기"용) — 31,102절 로컬 SQLite라 무제한 조회도 비용이 크지 않다.
     public func searchVersesFullText(matching query: String, limit: Int? = nil) throws -> [FullTextVerseMatch] {

@@ -959,8 +959,7 @@ struct DocumentViewerView: View {
         }
     }
 
-    /// `fileContentUnavailableView`의 `.downloading` 케이스 — `SearchView.bibleIndexStatusRow`의
-    /// `.building`과 같은 `ProgressView(value:)` 스타일.
+    /// `fileContentUnavailableView`의 `.downloading` 케이스 — `ProgressView(value:)`로 다운로드 진행률을 보여준다.
     private func downloadingMessage(progress: Double) -> some View {
         VStack(spacing: 8) {
             ProgressView(value: progress)

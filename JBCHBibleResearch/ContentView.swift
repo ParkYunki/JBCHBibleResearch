@@ -54,15 +54,7 @@ struct ContentView: View {
             }
             #endif
             // 앱 최초 실행 시 1회 안내 카루셀(AppOnboardingOverlay.swift).
-            // `.bibleIndexOnboarding()`보다 먼저 배치해 "앱 소개 → (필요 시) 색인 안내" 순서로
-            // 보이게 한다. 두 시트가 동시에 뜨려고 경합하지 않도록 색인 안내 "시트"는
-            // 온보딩이 끝난 뒤로 미룬다(`BibleIndexOnboardingOverlay.swift`의
-            // `hasPendingSheet` 참고). 색인 자체는 온보딩과 무관하게 즉시 시작한다.
             .appOnboarding()
-            // 최초 실행(또는 아직 색인이 없는 실행) 1회, 성경 전체 임베딩 색인을 자동으로 시작하고
-            // 진행 상황을 보여준다(BibleIndexOnboardingOverlay.swift). 번들 DB를 직접 열어 읽으므로
-            // 아래 부트스트랩 `.task`와 순서 의존성이 없다.
-            .bibleIndexOnboarding()
             // 업데이트 후 최초 실행 시 해당 버전의 `WhatsNewContent`를 보여준다.
             // `hasCompletedOnboarding`이 true인 기존 설치에서만 뜬다(WhatsNewOverlay.swift).
             .whatsNewOverlay()
@@ -89,6 +81,8 @@ struct ContentView: View {
                     // 직접 읽는다(`ReferenceDataProvider`/`ReferenceDataStore`). 예전에 SwiftData로
                     // 복사돼 들어간 번들분(있다면)만 여기서 1회성으로 정리한다.
                     ReferenceDataMigration.cleanupLegacyBundledRecords(in: modelContext)
+                    // 의미(임베딩) 검색 제거 전 버전이 만들어 둔 성경 임베딩 색인 파일(약 95MB)을 정리한다.
+                    LegacyEmbeddingIndexCleanup.run()
                 } catch {
                     // 번들 리소스 누락 등 부트스트랩 실패는 S1이 "표시할 번역본 없음"으로
                     // 조용히 보이는 대신, 사용자가 원인을 바로 알 수 있도록 알림으로

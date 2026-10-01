@@ -16,7 +16,7 @@
 //  `DocumentsHomeView.splitMainContent`와 같은 패턴(HStack + 고정폭 왼쪽 열)으로
 //  왼쪽 "설교함"(말씀단위 목록), 오른쪽 상세(`SermonDetailView`)를 제자리에 보여준다.
 //
-//  새 설교: 시트 없이 `SermonEditorView`(`isNewSermon: true`)를 바로 연다. 제목과 본문이
+//  새 설교: 툴바의 "설교 작성" 아이콘으로, 시트 없이 `SermonEditorView`(`isNewSermon: true`)를 바로 연다. 제목과 본문이
 //  모두 비면 저장하지 않으며 그 검증은 `SermonEditorView.save()`가 맡는다. 수정일은
 //  저장 시 `touchUpdatedAt()`이 현재 시각으로 넣는다.
 //
@@ -180,11 +180,17 @@ struct SermonHomeView: View {
                 splitContent
             }
         }
-        .navigationTitle("내 설교")
+        .navigationTitle(SermonFixedTitle.navigationText)
         #if os(iOS)
         .navigationBarTitleDisplayMode(.inline)
         #endif
         .modifier(ThemedNavigationBarBackgroundModifier(color: settings.bibleBackgroundColor))
+        .toolbar {
+            #if os(iOS)
+            ToolbarItem(placement: .topBarLeading) { leftAlignedTitle }
+            #endif
+            ToolbarItem(placement: .primaryAction) { composeButton }
+        }
         .confirmationDialog(
             "이 설교를 삭제할까요?",
             isPresented: Binding(
@@ -209,8 +215,6 @@ struct SermonHomeView: View {
     private var phoneContent: some View {
         ScrollView {
             LazyVStack(alignment: .leading, spacing: 14) {
-                header
-
                 SermonSegmentedPill(
                     items: [
                         .init(tag: SermonListViewMode.bySermon, label: SermonListViewMode.bySermon.rawValue),
@@ -249,12 +253,6 @@ struct SermonHomeView: View {
     // 왼쪽 설교함과 오른쪽 상세를 나란히 놓는 구성(`DocumentsHomeView.splitMainContent`와 같은 패턴).
     private var splitContent: some View {
         VStack(spacing: 0) {
-            header
-                .padding([.horizontal, .top], 16)
-                .padding(.bottom, 8)
-
-            Divider()
-
             HStack(spacing: 0) {
                 sermonSidebar
                     // 행 버튼 4개가 폭을 나눠 갖기 때문에 버튼 텍스트가 잘리지 않을 만큼의 폭이 필요하다.
@@ -284,6 +282,8 @@ struct SermonHomeView: View {
             }
         }
         .searchable(text: $searchText, prompt: "제목·본문 검색")
+        // 오른쪽 패널의 상세/에디터가 자기 제목을 툴바에 올리지 않게 한다(`SermonFixedTitle` 참고).
+        .environment(\.sermonHasFixedTitle, true)
         // 마인드맵 "설교문 적용" 후 해당 설교를 선택해 오른쪽 패널이 `SermonDetailView`를 보이게 한다.
         // 그 설교의 인라인 편집기가 열려 있었다면 편집기가 스스로 저장 없이 닫히므로 `editingSermon`도
         // 비운다. 새 설교 작성 중(`pendingNewSermon`)은 다른 설교라 건드리지 않는다.
@@ -388,27 +388,32 @@ struct SermonHomeView: View {
         .frame(maxWidth: .infinity, maxHeight: .infinity)
     }
 
-    // MARK: - 상단(제목 + 새 설교) — 목업 Main.dc.html 헤더
+    // MARK: - 상단 툴바(제목 + 설교 작성)
 
-    private var header: some View {
-        HStack {
-            Text("내 설교")
-                .font(.title2.bold())
-                .foregroundStyle(settings.bibleTextColor ?? .primary)
-            Spacer()
-            Button {
-                startNewSermon()
-            } label: {
-                Label("새 설교", systemImage: "plus")
-                    .font(.subheadline.weight(.bold))
-                    .padding(.horizontal, 14)
-                    .padding(.vertical, 9)
-                    .background(accent)
-                    .foregroundStyle(.white)
-                    .clipShape(Capsule())
-            }
-            .buttonStyle(.plain)
+    #if os(iOS)
+    /// 왼쪽 정렬 고정 제목 — "말씀 노트"(`WordNoteHomeView`)와 같은 서체·크기. 선택한 설교의 제목이 아니라
+    /// 항상 "내 설교"로 고정한다(시스템 가운데 제목은 비워 둔다, `SermonFixedTitle` 참고).
+    private var leftAlignedTitle: some View {
+        Text("내 설교")
+            .font(.custom(SpecialPurposeFonts.titleSerif, size: 20, relativeTo: .title3))
+            .fontWeight(.semibold)
+            .foregroundStyle(settings.bibleTextColor ?? .primary)
+    }
+    #endif
+
+    /// 검색창 왼쪽의 "설교 작성" 아이콘 — 예전 "+ 새 설교" 버튼을 대체한다.
+    private var composeButton: some View {
+        Button {
+            startNewSermon()
+        } label: {
+            Image(systemName: "square.and.pencil")
+                .font(.body.weight(.semibold))
+                .foregroundStyle(.white)
+                .frame(width: 30, height: 30)
+                .background(accent, in: Circle())
         }
+        .help("새 설교 작성")
+        .accessibilityLabel("새 설교 작성")
     }
 
     private func emptyState(text: String) -> some View {

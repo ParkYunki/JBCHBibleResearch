@@ -10,8 +10,7 @@
 //  싱글턴)으로 값을 공유한다. 이벤트가 아니라 상태 자체라 카운터 대신 `Bool`을 쓴다.
 //
 //  ⚠️ 안내 문구를 보여주는 용도로만 쓴다. 메인 스레드를 오래 붙잡지 않게 하는 작업(주기적
-//  `Task.yield()`)은 `OutlineSeedImporter`/`EmbeddingIndexingService`/`EmbeddingService`가
-//  따로 하며, 이 플래그를 끈다고 그 작업이 빨라지지는 않는다.
+//  `Task.yield()`)은 `OutlineSeedImporter`가 따로 하며, 이 플래그를 끈다고 그 작업이 빨라지지는 않는다.
 //
 
 import Foundation
