@@ -53,6 +53,12 @@ enum JBCHCategoryPalette {
     /// 가죽 표지를 흰색과 40% 섞은 변형 — 밤빛 남색 대비 4.45:1.
     static let woodOnDark = Color(hex: "#9C887D") ?? .brown
 
+    /// 가죽 표지를 흰색과 55% 섞은 "글자용" 변형(2026-10-02). `woodOnDark`(40%)는 밤빛 남색 위 4.3:1이라 작은 글씨(12pt 안팎의
+    /// 배지·좌표 글자)에 4.5:1 미만이다. 이 변형은 글자가 놓이는 어두운 배경 4종(중립 다크 #2A2927, 남색 테마 #1D2744, 시스템 다크 #1C1C1E,
+    /// 밤빛 남색 #182644) 위에서 6.1~7.2:1이고, 같은 색 15% 틴트 배지 위에서도 4.6~5.4:1이다. 가죽 표지 원색(#5A3826)은 같은 배경에서 1.4~1.6:1이라
+    /// 거의 보이지 않는다. `WordNoteCategory.spineColor(onDark:)`가 어두운 면에서만 쓴다.
+    static let woodTextOnDark = Color(hex: "#B5A59D") ?? .brown
+
     /// 와인 적갈을 흰색과 40% 섞은 변형 — 밤빛 남색 대비 4.85:1.
     static let wineOnDark = Color(hex: "#AF898E") ?? .pink
 

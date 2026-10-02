@@ -9,7 +9,9 @@
 //  아이폰은 캡슐 필터 + 목록 → 내용 2단, 아이패드·맥은 분류 트리 | 목록 | 내용 3단 구조다.
 //  분류 트리는 "노트 종류"와 "성경별"(`Book.testament` 기준, 노트가 있는 책만)로 구성하며,
 //  최근/즐겨찾기는 전역 사이드바(`SidebarNavigationView`)와 중복이라 넣지 않았다.
-//  폴더 필터 UI는 없다 — 폴더 배정은 `MemoDetailView` 메뉴에서, ⌘⇧N "새 폴더" 커맨드는 이 화면이 받는다.
+//  개인 묵상 폴더(`MemoFolder`, 플랫·단일 소속) — 분류 트리(아이패드·맥)/폴더 칩(아이폰)으로 폴더별 보기, 폴더 만들기·이름 변경·삭제,
+//  행 컨텍스트 메뉴/선택 모드(여러 개)/맥·아이패드 드래그 앤 드롭으로 폴더 이동을 지원한다. 말씀 요약에는 폴더가 없다.
+//  같은 이름 폴더는 `MemoFolderMaintenance.deduplicate`가 앱 시작·이 화면이 뜰 때 하나로 합친다. ⌘⇧N "새 폴더" 커맨드도 이 화면이 받는다.
 //
 
 import SwiftUI
@@ -27,9 +29,13 @@ enum WordNoteCategory: String, CaseIterable, Identifiable {
     var id: String { rawValue }
 
     /// 카테고리 배지·spine(책등) 색선의 단일 출처 — `WordNoteRowView`와 분류 트리·최근 노트 카드가 같은 색을 쓴다.
-    var spineColor: Color {
+    var spineColor: Color { spineColor(onDark: false) }
+
+    /// 배지·좌표 글자·spine이 놓이는 면이 어두운지(`onDark`)에 따라 고른다. 가죽 표지 원색(#5A3826)은 어두운 배경(시스템 다크 모드 또는 어두운 테마)에서
+    /// 1.4~1.6:1이라 거의 안 보여 글자용 밝은 변형(`woodTextOnDark`)을 쓴다. 금박은 어두운 배경 위에서도 4.5:1 이상이라 그대로 둔다.
+    func spineColor(onDark: Bool) -> Color {
         switch self {
-        case .personalMemo: return JBCHCategoryPalette.wood
+        case .personalMemo: return onDark ? JBCHCategoryPalette.woodTextOnDark : JBCHCategoryPalette.wood
         case .verseSummary: return JBCHCategoryPalette.gold
         }
     }
@@ -41,6 +47,10 @@ enum WordNoteCategoryFilter: Hashable {
     case all
     case category(WordNoteCategory)
     case book(bookId: Int)
+    /// 개인 묵상 폴더 필터 — 말씀 요약은 폴더가 없어 결과에 나오지 않는다.
+    case folder(UUID)
+    /// 폴더가 없는 개인 묵상(말씀 요약 제외).
+    case unfiled
 }
 
 /// `UserMemo`/`VerseSummary` 두 모델을 한 목록에 섞어 보여주기 위한 얇은 래퍼.
@@ -104,6 +114,17 @@ enum WordNoteItem: Identifiable {
         case .memo(let memo): return memo.verse
         case .summary(let summary): return summary.verse
         }
+    }
+
+    /// 개인 묵상이 속한 폴더 id. 말씀 요약은 폴더가 없어 항상 nil.
+    var folderID: UUID? {
+        if case .memo(let memo) = self { return memo.folder?.id }
+        return nil
+    }
+
+    var isMemo: Bool {
+        if case .memo = self { return true }
+        return false
     }
 
     var isPinned: Bool {
@@ -225,7 +246,18 @@ private struct WordNoteSplitContent: View {
             WordNoteListContent(isPhoneLayout: false, selectedItem: $selectedItem)
                 .frame(minWidth: 460, idealWidth: 560, maxWidth: 720)
 
+            // 목록/본문 구분선 — 툴바(타이틀·아이콘) 영역까지 올라가지 않도록 safe area 상단만큼 띄워 시작한다.
+            #if os(macOS)
+            GeometryReader { geo in
+                Rectangle()
+                    .fill(Color(nsColor: .separatorColor))
+                    .frame(width: 1)
+                    .padding(.top, geo.safeAreaInsets.top)
+            }
+            .frame(width: 1)
+            #else
             Divider()
+            #endif
 
             Group {
                 if let selectedItem {
@@ -289,6 +321,18 @@ private struct WordNoteRecentEmptyState: View {
     let onSelect: (WordNoteItem) -> Void
 
     private var settings: UserSettingsStore { .shared }
+    @Environment(\.self) private var environment
+    @Environment(\.colorScheme) private var colorScheme
+
+    /// 카드가 놓인 배경이 어두운지 — `WordNoteListContent.isDarkTheme`/`WordNoteRowView.isDarkSurface`와 같은 공식.
+    private var isDarkTheme: Bool {
+        if let background = settings.bibleBackgroundColor {
+            let resolved = background.resolve(in: environment)
+            let luminance = 0.2126 * Double(resolved.red) + 0.7152 * Double(resolved.green) + 0.0722 * Double(resolved.blue)
+            return luminance < 0.5
+        }
+        return colorScheme == .dark
+    }
 
     var body: some View {
         VStack(spacing: 16) {
@@ -310,7 +354,7 @@ private struct WordNoteRecentEmptyState: View {
                             .lineLimit(1)
                         Text(recentItem.coordinateLabel)
                             .font(.caption.weight(.semibold))
-                            .foregroundStyle(recentItem.category.spineColor)
+                            .foregroundStyle(recentItem.category.spineColor(onDark: isDarkTheme))
                         if let dateLabel = recentItem.dateLabel {
                             Text(dateLabel)
                                 .font(.caption2)
@@ -367,6 +411,22 @@ private struct WordNoteListContent: View {
     @State private var newFolderName = ""
     /// 분류 트리(`categoryTreeColumn`) "성경별" 구약/신약 `DisclosureGroup` 펼침 상태. 기본은 접힘.
     @State private var expandedTestaments: Set<Book.Testament> = []
+    // 폴더 관리 상태 — 이름 변경/삭제는 alert·dialog가 닫히며 바인딩이 먼저 비워질 수 있어 대상 객체를 별도 상태로 들고 있는다.
+    @State private var isRenameFolderPresented = false
+    @State private var folderBeingRenamed: MemoFolder?
+    @State private var renameFolderName = ""
+    @State private var isDeleteFolderPresented = false
+    @State private var folderPendingDeletion: MemoFolder?
+    @State private var folderErrorMessage: String?
+    /// "새 폴더…"를 "폴더로 이동" 메뉴에서 눌렀을 때, 폴더를 만든 뒤 옮길 묵상 id들.
+    @State private var pendingMoveMemoIDs: [UUID] = []
+    /// 여러 개 선택 모드(폴더로 한꺼번에 이동용). 개인 묵상만 선택 대상이다.
+    @State private var isSelecting = false
+    @State private var selectedMemoIDs: Set<UUID> = []
+    /// 드래그 앤 드롭 중 지금 올라가 있는 트리 행(강조 표시용).
+    @State private var dropTargetFilter: WordNoteCategoryFilter?
+    @Environment(\.colorScheme) private var colorScheme
+    @Environment(\.self) private var environment
     /// 테마 배경/글자색 읽기 전용 접근.
     private var settings: UserSettingsStore { .shared }
 
@@ -384,6 +444,10 @@ private struct WordNoteListContent: View {
             result = result.filter { $0.category == category }
         case .book(let bookId):
             result = result.filter { $0.bookId == bookId }
+        case .folder(let folderID):
+            result = result.filter { $0.folderID == folderID }
+        case .unfiled:
+            result = result.filter { $0.isMemo && $0.folderID == nil }
         }
         let trimmed = searchText.trimmingCharacters(in: .whitespaces)
         if !trimmed.isEmpty {
@@ -399,6 +463,8 @@ private struct WordNoteListContent: View {
         case .all: return mergedItems.count
         case .category(let category): return mergedItems.filter { $0.category == category }.count
         case .book(let bookId): return mergedItems.filter { $0.bookId == bookId }.count
+        case .folder(let folderID): return mergedItems.filter { $0.folderID == folderID }.count
+        case .unfiled: return mergedItems.filter { $0.isMemo && $0.folderID == nil }.count
         }
     }
 
@@ -408,6 +474,8 @@ private struct WordNoteListContent: View {
         case .all: return "전체"
         case .category(let category): return category.rawValue
         case .book(let bookId): return BooksProvider.shared.book(id: bookId)?.nameKo ?? "\(bookId)권"
+        case .folder(let folderID): return folders.first(where: { $0.id == folderID })?.name ?? "폴더"
+        case .unfiled: return "미분류"
         }
     }
 
@@ -476,11 +544,50 @@ private struct WordNoteListContent: View {
     // "노트 종류"는 캡슐과 같은 3항목을 트리 행으로 그린 것이라 `categoryFilter` 상태·필터링 로직을 공유한다.
     // 최근/즐겨찾기는 전역 사이드바와 중복이라 넣지 않았다.
 
+    // 분류 트리(아이패드·맥) 글꼴 — macOS는 텍스트 스타일 간 크기 차이가 작아(caption/footnote 10pt, subheadline 11pt) 한 단계 키운 값을 명시한다.
+    // 섹션 제목 10→12, 행 제목 11→13, 개수/안내 10→12, 아이콘 13→15. 아이패드는 기존 스타일 그대로.
+    private var treeSectionFont: Font {
+        #if os(macOS)
+        .system(size: 12, weight: .bold)
+        #else
+        .caption.weight(.bold)
+        #endif
+    }
+    private var treeRowFont: Font {
+        #if os(macOS)
+        .system(size: 13, weight: .semibold)
+        #else
+        .subheadline.weight(.semibold)
+        #endif
+    }
+    private var treeCountFont: Font {
+        #if os(macOS)
+        .system(size: 12)
+        #else
+        .caption
+        #endif
+    }
+    private var treeIconSize: CGFloat {
+        #if os(macOS)
+        15
+        #else
+        13
+        #endif
+    }
+    /// 글자가 커진 만큼 macOS 트리 열 폭도 넓힌다(200→224).
+    private static var treeColumnWidth: CGFloat {
+        #if os(macOS)
+        224
+        #else
+        200
+        #endif
+    }
+
     private var categoryTreeColumn: some View {
         ScrollView {
             VStack(alignment: .leading, spacing: 2) {
                 Text("노트 종류")
-                    .font(.caption.weight(.bold))
+                    .font(treeSectionFont)
                     .foregroundStyle(settings.bibleTextColor?.opacity(0.55) ?? .secondary)
                     .padding(.horizontal, 14)
                     .padding(.top, 12)
@@ -491,16 +598,18 @@ private struct WordNoteListContent: View {
                     treeRow(
                         .category(category), title: category.rawValue,
                         systemImage: category == .personalMemo ? "note.text" : "doc.text",
-                        count: count(for: .category(category)), spine: category.spineColor
+                        count: count(for: .category(category)), spine: category.spineColor(onDark: isDarkTheme)
                     )
                 }
+
+                folderTreeSection
 
                 let oldTestamentBooks = booksWithNotes(in: .old)
                 let newTestamentBooks = booksWithNotes(in: .new)
                 if !oldTestamentBooks.isEmpty || !newTestamentBooks.isEmpty {
                     Divider().padding(.vertical, 8).padding(.horizontal, 14)
                     Text("성경별")
-                        .font(.caption.weight(.bold))
+                        .font(treeSectionFont)
                         .foregroundStyle(settings.bibleTextColor?.opacity(0.55) ?? .secondary)
                         .padding(.horizontal, 14)
                         .padding(.bottom, 2)
@@ -527,16 +636,16 @@ private struct WordNoteListContent: View {
         } label: {
             HStack(spacing: 9) {
                 Image(systemName: systemImage)
-                    .font(.system(size: 13))
+                    .font(.system(size: treeIconSize))
                     .foregroundStyle(iconColor)
                     .frame(width: 16)
                 Text(title)
-                    .font(.subheadline.weight(.semibold))
+                    .font(treeRowFont)
                     .foregroundStyle(textColor)
                     .lineLimit(1)
                 Spacer(minLength: 4)
                 Text("\(count)")
-                    .font(.caption)
+                    .font(treeCountFont)
                     .foregroundStyle(settings.bibleTextColor?.opacity(0.55) ?? .secondary)
                     .monospacedDigit()
             }
@@ -573,7 +682,7 @@ private struct WordNoteListContent: View {
                 .padding(.leading, 10)
             } label: {
                 Text(title)
-                    .font(.subheadline.weight(.semibold))
+                    .font(treeRowFont)
                     .foregroundStyle(settings.bibleTextColor ?? .primary)
             }
             .padding(.horizontal, 14)
@@ -593,6 +702,7 @@ private struct WordNoteListContent: View {
             Text("\(filteredItems.count)개의 노트")
                 .font(.caption)
                 .foregroundStyle(settings.bibleTextColor?.opacity(0.6) ?? .secondary)
+            selectToggleButton
         }
         .padding(.horizontal, 16)
         .padding(.top, 14)
@@ -618,6 +728,9 @@ private struct WordNoteListContent: View {
         // 시스템 기본 구분선은 임의의 테마 배경 위에서 거의 안 보일 수 있어 wood 톤을 옅게(0.3) 지정한다.
         .listRowSeparatorTint(JBCHCategoryPalette.wood.opacity(0.3))
         .searchable(text: $searchText, prompt: "검색")
+        .safeAreaInset(edge: .bottom, spacing: 0) {
+            if isSelecting { selectionBar }
+        }
     }
 
     /// 아이폰 전용 콘텐츠 — 캡슐 필터 + 구분선 + 목록.
@@ -638,6 +751,10 @@ private struct WordNoteListContent: View {
             .padding(.top, 8)
             .padding(.bottom, 8)
 
+            phoneFolderBar
+                .padding(.horizontal)
+                .padding(.bottom, 8)
+
             wordNoteContentOrnamentalDivider
             wordNoteList
         }
@@ -648,7 +765,7 @@ private struct WordNoteListContent: View {
     private var splitTreeContent: some View {
         HStack(spacing: 0) {
             categoryTreeColumn
-                .frame(width: 200)
+                .frame(width: Self.treeColumnWidth)
 
             Divider()
 
@@ -673,6 +790,7 @@ private struct WordNoteListContent: View {
         // 검색창+필터 줄은 `List` 바깥이라 `List`의 `.background()`가 닿지 않아, 전체에도 테마 배경을 칠한다.
         .background(settings.bibleBackgroundColor ?? Color.clear)
         .navigationTitle("말씀 노트")
+        .macSerifTitle("말씀 노트")
         // 탭 최상위 화면이라 뒤로가기가 없어, automatic이면 큰 제목이 별도 줄로 그려져 툴바 아이콘 왼쪽이 낭비된다.
         // inline으로 제목과 아이콘을 한 줄에 합친다(macOS엔 이 모디파이어가 없어 iOS로 제한).
         #if os(iOS)
@@ -681,6 +799,8 @@ private struct WordNoteListContent: View {
         // 시스템 내비게이션 바 배경을 테마에 맞춘다(`ThemedNavigationBarBackgroundModifier`).
         .modifier(ThemedNavigationBarBackgroundModifier(color: settings.bibleBackgroundColor))
         .onAppear {
+            // 동기화로 도착한 같은 이름 폴더를 먼저 하나로 합친 뒤 목록을 읽는다.
+            MemoFolderMaintenance.deduplicate(in: modelContext)
             reload()
             // 사이드바 "고정됨"/"최근"에서 진입했을 수 있다(`WordNoteSelectionRequest.swift` 참고).
             // `reload()`로 `allMemos`/`allSummaries`가 채워진 뒤라야 대상 UUID를 찾을 수 있어 이 순서로 둔다.
@@ -720,17 +840,45 @@ private struct WordNoteListContent: View {
         }
         .alert("새 폴더", isPresented: $isNewFolderPresented) {
             TextField("폴더 이름", text: $newFolderName)
-            Button("취소", role: .cancel) { newFolderName = "" }
+            Button("취소", role: .cancel) {
+                newFolderName = ""
+                pendingMoveMemoIDs = []
+            }
             Button("만들기") { createFolder() }
+        } message: {
+            Text(pendingMoveMemoIDs.isEmpty ? "개인 묵상을 묶어 둘 폴더 이름을 입력하세요." : "폴더를 만들고 선택한 묵상을 옮깁니다.")
+        }
+        .alert("폴더 이름 변경", isPresented: $isRenameFolderPresented) {
+            TextField("폴더 이름", text: $renameFolderName)
+            Button("취소", role: .cancel) { folderBeingRenamed = nil }
+            Button("변경") { commitRenameFolder() }
+        }
+        .confirmationDialog(
+            "폴더 삭제", isPresented: $isDeleteFolderPresented, titleVisibility: .visible, presenting: folderPendingDeletion
+        ) { folder in
+            Button("'\(folder.name)' 삭제", role: .destructive) { deleteFolder(folder) }
+            Button("취소", role: .cancel) {}
+        } message: { folder in
+            Text("이 폴더의 개인 묵상 \(count(for: .folder(folder.id)))개는 삭제되지 않고 '미분류'로 이동합니다.")
+        }
+        .alert("폴더", isPresented: Binding(
+            get: { folderErrorMessage != nil },
+            set: { if !$0 { folderErrorMessage = nil } }
+        )) {
+            Button("확인", role: .cancel) {}
+        } message: {
+            Text(folderErrorMessage ?? "")
         }
         // File 메뉴 "새 메모 ⌘N" / "새 폴더 ⇧⌘N" — AppCommands.swift 참고. "새 메모"는 개인 묵상을 새로 만든다.
         .focusedSceneValue(\.newMemoAction) { createNewMemo() }
-        .focusedSceneValue(\.newFolderAction) { isNewFolderPresented = true }
+        .focusedSceneValue(\.newFolderAction) { beginNewFolder() }
     }
 
     @ViewBuilder
     private func rowContent(for item: WordNoteItem) -> some View {
-        if isPhoneLayout {
+        if isSelecting {
+            selectionRow(for: item)
+        } else if isPhoneLayout {
             NavigationLink {
                 destinationView(for: item)
             } label: {
@@ -739,29 +887,437 @@ private struct WordNoteListContent: View {
             // 이 행 셀 배경을 명시적으로 지워야 List 배경(테마색)이 비친다.
             // `.scrollContentBackground(.hidden)`은 컨테이너 배경만 바꾸고 각 행 셀 배경은 투명하게 하지 않는다.
             .listRowBackground(Color.clear)
+            .contextMenu { rowContextMenu(for: item) }
         } else {
-            WordNoteRowView(item: item)
-                .contentShape(Rectangle())
-                .listRowBackground(
-                    selectedItem?.wrappedValue?.id == item.id
-                        ? Color("AccentColor").opacity(0.15) : Color.clear
-                )
-                .onTapGesture {
-                    selectedItem?.wrappedValue = item
-                }
-                .contextMenu {
-                    Button {
-                        togglePin(item)
-                    } label: {
-                        Label(item.isPinned ? "고정 해제" : "고정", systemImage: item.isPinned ? "pin.slash" : "pin")
+            dragSource(
+                WordNoteRowView(item: item)
+                    .contentShape(Rectangle())
+                    .listRowBackground(
+                        selectedItem?.wrappedValue?.id == item.id
+                            ? Color("AccentColor").opacity(0.15) : Color.clear
+                    )
+                    .onTapGesture {
+                        selectedItem?.wrappedValue = item
                     }
-                    Button(role: .destructive) {
-                        delete(item)
-                    } label: {
-                        Label("삭제", systemImage: "trash")
-                    }
-                }
+                    .contextMenu { rowContextMenu(for: item) },
+                item: item
+            )
         }
+    }
+
+    /// 행 컨텍스트 메뉴(길게 누르기/우클릭) — 고정, 폴더로 이동(개인 묵상만), 삭제.
+    @ViewBuilder
+    private func rowContextMenu(for item: WordNoteItem) -> some View {
+        Button {
+            togglePin(item)
+        } label: {
+            Label(item.isPinned ? "고정 해제" : "고정", systemImage: item.isPinned ? "pin.slash" : "pin")
+        }
+        if case .memo(let memo) = item {
+            Menu {
+                moveMenuContent(for: [memo.id])
+            } label: {
+                Label("폴더로 이동", systemImage: "folder")
+            }
+        }
+        Button(role: .destructive) {
+            delete(item)
+        } label: {
+            Label("삭제", systemImage: "trash")
+        }
+    }
+
+    /// 선택 모드의 행 — 개인 묵상만 체크할 수 있고(말씀 요약은 폴더가 없다), 탭하면 열지 않고 선택만 토글한다.
+    private func selectionRow(for item: WordNoteItem) -> some View {
+        var isChecked = false
+        if case .memo(let memo) = item { isChecked = selectedMemoIDs.contains(memo.id) }
+        let checkColor: Color = isChecked ? Color("AccentColor") : (settings.bibleTextColor?.opacity(0.4) ?? Color.secondary)
+        let symbol = item.isMemo ? (isChecked ? "checkmark.circle.fill" : "circle") : "minus.circle"
+        return HStack(spacing: 10) {
+            Image(systemName: symbol)
+                .font(.title3)
+                .foregroundStyle(checkColor)
+            WordNoteRowView(item: item)
+        }
+        .opacity(item.isMemo ? 1 : 0.4)
+        .contentShape(Rectangle())
+        .listRowBackground(Color.clear)
+        .onTapGesture { toggleSelection(item) }
+    }
+
+    /// 아이패드·맥 — 개인 묵상 행을 분류 트리의 폴더로 끌어다 놓아 옮길 수 있게 한다(말씀 요약은 끌 수 없다).
+    @ViewBuilder
+    private func dragSource<V: View>(_ content: V, item: WordNoteItem) -> some View {
+        if case .memo(let memo) = item {
+            content.draggable("memo:\(memo.id.uuidString)")
+        } else {
+            content
+        }
+    }
+
+    // MARK: - 폴더 (분류 트리 섹션 / 폴더 칩 / 관리 / 이동)
+
+    /// 지금 보이는 배경이 어두운지 — 폴더 책등 색 변형 선택용(`DocumentsHomeView.isDarkBibleBackground`와 같은 공식).
+    private var isDarkTheme: Bool {
+        if let background = settings.bibleBackgroundColor {
+            let resolved = background.resolve(in: environment)
+            let luminance = 0.2126 * Double(resolved.red) + 0.7152 * Double(resolved.green) + 0.0722 * Double(resolved.blue)
+            return luminance < 0.5
+        }
+        return colorScheme == .dark
+    }
+
+    /// 폴더 책등 색 — 연구 문서 문서함 카드와 같은 4색을 순서대로 순환한다(폴더에 색 필드가 없다).
+    private func folderSpineColor(_ index: Int) -> Color {
+        let onLight: [Color] = [JBCHCategoryPalette.gold, JBCHCategoryPalette.wood, JBCHCategoryPalette.slateTeal, JBCHCategoryPalette.wine]
+        let onDark: [Color] = [JBCHCategoryPalette.gold, JBCHCategoryPalette.woodOnDark, JBCHCategoryPalette.slateTealOnDark, JBCHCategoryPalette.wineOnDark]
+        let palette = isDarkTheme ? onDark : onLight
+        return palette[index % palette.count]
+    }
+
+    private var unfiledSpineColor: Color {
+        isDarkTheme ? JBCHCategoryPalette.shelfSlateOnDark : JBCHCategoryPalette.shelfSlate
+    }
+
+    /// 분류 트리의 "폴더" 섹션(아이패드·맥) — 폴더가 없어도 "+"가 보이도록 항상 그린다.
+    private var folderTreeSection: some View {
+        VStack(alignment: .leading, spacing: 2) {
+            Divider().padding(.vertical, 8).padding(.horizontal, 14)
+            HStack {
+                Text("폴더")
+                    .font(treeSectionFont)
+                    .foregroundStyle(settings.bibleTextColor?.opacity(0.55) ?? .secondary)
+                Spacer()
+                Button {
+                    beginNewFolder()
+                } label: {
+                    Image(systemName: "plus")
+                        .font(treeSectionFont)
+                        .foregroundStyle(JBCHCategoryPalette.gold)
+                        .frame(width: 22, height: 22)
+                        .contentShape(Rectangle())
+                }
+                .buttonStyle(.plain)
+                .help("새 폴더")
+            }
+            .padding(.horizontal, 14)
+            .padding(.bottom, 2)
+
+            ForEach(Array(folders.enumerated()), id: \.element.id) { index, folder in
+                let filter = WordNoteCategoryFilter.folder(folder.id)
+                memoDropTarget(
+                    treeRow(filter, title: folder.name, systemImage: "folder", count: count(for: filter), spine: folderSpineColor(index))
+                        .contextMenu {
+                            Button { beginRenameFolder(folder) } label: { Label("이름 변경", systemImage: "pencil") }
+                            Button(role: .destructive) { requestDeleteFolder(folder) } label: { Label("폴더 삭제", systemImage: "trash") }
+                        },
+                    filter: filter, folder: folder
+                )
+            }
+            memoDropTarget(
+                treeRow(.unfiled, title: "미분류", systemImage: "tray", count: count(for: .unfiled), spine: unfiledSpineColor),
+                filter: .unfiled, folder: nil
+            )
+            if folders.isEmpty {
+                Text("폴더를 만들어 개인 묵상을 묶어 보세요. 묵상을 끌어다 놓거나 행을 길게 눌러(우클릭) 옮길 수 있습니다.")
+                    .font(treeCountFont)
+                    .foregroundStyle(settings.bibleTextColor?.opacity(0.5) ?? .secondary)
+                    .padding(.horizontal, 14)
+                    .padding(.top, 4)
+            }
+        }
+    }
+
+    /// 트리 행을 개인 묵상 드롭 대상으로 만든다. `folder == nil`이면 "미분류"로 옮긴다.
+    private func memoDropTarget<V: View>(_ content: V, filter: WordNoteCategoryFilter, folder: MemoFolder?) -> some View {
+        content
+            .overlay {
+                if dropTargetFilter == filter {
+                    RoundedRectangle(cornerRadius: 9, style: .continuous)
+                        .strokeBorder(JBCHCategoryPalette.gold, lineWidth: 1.5)
+                        .padding(.horizontal, 6)
+                }
+            }
+            .dropDestination(for: String.self) { payloads, _ in
+                handleMemoDrop(payloads, into: folder)
+            } isTargeted: { isTargeted in
+                if isTargeted {
+                    dropTargetFilter = filter
+                } else if dropTargetFilter == filter {
+                    dropTargetFilter = nil
+                }
+            }
+    }
+
+    private func handleMemoDrop(_ payloads: [String], into folder: MemoFolder?) -> Bool {
+        var ids: [UUID] = []
+        for payload in payloads where payload.hasPrefix("memo:") {
+            ids += payload.dropFirst("memo:".count).split(separator: ",").compactMap { UUID(uuidString: String($0)) }
+        }
+        guard !ids.isEmpty else { return false }
+        moveMemos(ids, to: folder)
+        return true
+    }
+
+    /// 아이폰 — 캡슐 아래 한 줄: 폴더 필터/관리 메뉴 + 선택 모드 토글.
+    private var phoneFolderBar: some View {
+        var isActive = false
+        var title = "폴더"
+        switch categoryFilter {
+        case .folder(let folderID):
+            isActive = true
+            title = folders.first(where: { $0.id == folderID })?.name ?? "폴더"
+        case .unfiled:
+            isActive = true
+            title = "미분류"
+        default:
+            break
+        }
+        let textColor: Color = isActive ? Color("AccentColor") : (settings.bibleTextColor?.opacity(0.7) ?? Color.secondary)
+        let fillColor: Color = isActive ? Color("AccentColor").opacity(0.12) : Color.clear
+        let borderColor: Color = isActive ? Color("AccentColor") : (settings.bibleTextColor?.opacity(0.35) ?? Color.secondary.opacity(0.35))
+        return HStack(spacing: 8) {
+            Menu {
+                phoneFolderMenuContent
+            } label: {
+                HStack(spacing: 5) {
+                    Image(systemName: "folder")
+                        .font(.caption)
+                    Text(title)
+                        .font(.subheadline.weight(isActive ? .semibold : .regular))
+                        .lineLimit(1)
+                    Image(systemName: "chevron.down")
+                        .font(.caption2.weight(.semibold))
+                }
+                .foregroundStyle(textColor)
+                .padding(.vertical, 5)
+                .padding(.horizontal, 12)
+                .background(Capsule().fill(fillColor))
+                .overlay(Capsule().strokeBorder(borderColor, lineWidth: 1.2))
+            }
+            Spacer()
+            selectToggleButton
+        }
+    }
+
+    @ViewBuilder
+    private var phoneFolderMenuContent: some View {
+        Button {
+            categoryFilter = .all
+        } label: {
+            Label("폴더 필터 해제", systemImage: "line.3.horizontal.decrease.circle")
+        }
+        if !folders.isEmpty { Divider() }
+        ForEach(folders) { folder in
+            Button {
+                categoryFilter = .folder(folder.id)
+            } label: {
+                Text("\(folder.name) (\(count(for: .folder(folder.id))))")
+            }
+        }
+        Button {
+            categoryFilter = .unfiled
+        } label: {
+            Text("미분류 (\(count(for: .unfiled)))")
+        }
+        Divider()
+        Button {
+            beginNewFolder()
+        } label: {
+            Label("새 폴더…", systemImage: "folder.badge.plus")
+        }
+        if !folders.isEmpty {
+            Menu("이름 변경") {
+                ForEach(folders) { folder in
+                    Button(folder.name) { beginRenameFolder(folder) }
+                }
+            }
+            Menu("폴더 삭제") {
+                ForEach(folders) { folder in
+                    Button(folder.name, role: .destructive) { requestDeleteFolder(folder) }
+                }
+            }
+        }
+    }
+
+    /// "폴더로 이동" 메뉴 항목들(행 컨텍스트 메뉴·선택 모드 바 공용).
+    @ViewBuilder
+    private func moveMenuContent(for ids: [UUID]) -> some View {
+        Button {
+            moveMemos(ids, to: nil)
+        } label: {
+            Label("미분류", systemImage: "tray")
+        }
+        if !folders.isEmpty { Divider() }
+        ForEach(folders) { folder in
+            Button {
+                moveMemos(ids, to: folder)
+            } label: {
+                Label(folder.name, systemImage: "folder")
+            }
+        }
+        Divider()
+        Button {
+            beginNewFolder(thenMove: ids)
+        } label: {
+            Label("새 폴더…", systemImage: "folder.badge.plus")
+        }
+    }
+
+    // MARK: 선택 모드
+
+    private var selectToggleButton: some View {
+        let textColor: Color = isSelecting ? Color("AccentColor") : (settings.bibleTextColor?.opacity(0.7) ?? Color.secondary)
+        let borderColor: Color = isSelecting ? Color("AccentColor") : (settings.bibleTextColor?.opacity(0.35) ?? Color.secondary.opacity(0.35))
+        return Button {
+            isSelecting.toggle()
+            if !isSelecting { selectedMemoIDs = [] }
+        } label: {
+            Text(isSelecting ? "완료" : "선택")
+                .font(.caption.weight(.semibold))
+                .foregroundStyle(textColor)
+                .padding(.horizontal, 10)
+                .padding(.vertical, 4)
+                .overlay(Capsule().strokeBorder(borderColor, lineWidth: 1))
+        }
+        .buttonStyle(.plain)
+        .help("여러 묵상을 선택해 폴더로 이동")
+    }
+
+    /// 지금 목록에 보이는(필터·검색 통과) 선택 항목만 — 필터를 바꿔 가려진 묵상이 모르는 사이 같이 옮겨지지 않게 한다.
+    private var visibleSelectedMemoIDs: [UUID] {
+        filteredItems.compactMap { item -> UUID? in
+            if case .memo(let memo) = item, selectedMemoIDs.contains(memo.id) { return memo.id }
+            return nil
+        }
+    }
+
+    private var selectionBar: some View {
+        let ids = visibleSelectedMemoIDs
+        return VStack(spacing: 0) {
+            Divider()
+            HStack {
+                Text(ids.isEmpty ? "묵상을 선택하세요" : "\(ids.count)개 선택")
+                    .font(.subheadline)
+                    .foregroundStyle(settings.bibleTextColor ?? .primary)
+                Spacer()
+                Menu {
+                    moveMenuContent(for: ids)
+                } label: {
+                    Label("폴더로 이동", systemImage: "folder")
+                        .font(.subheadline.weight(.semibold))
+                        .foregroundStyle(.white)
+                        .padding(.vertical, 6)
+                        .padding(.horizontal, 12)
+                        .background(JBCHCategoryPalette.gold, in: Capsule())
+                }
+                .disabled(ids.isEmpty)
+                .opacity(ids.isEmpty ? 0.4 : 1)
+            }
+            .padding(.horizontal, 16)
+            .padding(.vertical, 10)
+        }
+        .background {
+            if let background = settings.bibleBackgroundColor {
+                background
+            } else {
+                Rectangle().fill(.bar)
+            }
+        }
+    }
+
+    private func toggleSelection(_ item: WordNoteItem) {
+        guard case .memo(let memo) = item else { return }
+        if selectedMemoIDs.contains(memo.id) {
+            selectedMemoIDs.remove(memo.id)
+        } else {
+            selectedMemoIDs.insert(memo.id)
+        }
+    }
+
+    // MARK: 폴더 생성/이름 변경/삭제/이동
+
+    private func beginNewFolder(thenMove ids: [UUID] = []) {
+        pendingMoveMemoIDs = ids
+        newFolderName = ""
+        isNewFolderPresented = true
+    }
+
+    /// 같은 이름(공백·대소문자·전각 무시)의 폴더가 이미 있으면 새로 만들지 않고 그 폴더를 쓴다(중복 방지).
+    private func createFolder() {
+        let trimmed = newFolderName.trimmingCharacters(in: .whitespacesAndNewlines)
+        let moveIDs = pendingMoveMemoIDs
+        pendingMoveMemoIDs = []
+        newFolderName = ""
+        guard !trimmed.isEmpty else { return }
+        reload()
+        let key = MemoFolderMaintenance.normalizedKey(trimmed)
+        let folder: MemoFolder
+        if let existing = folders.first(where: { MemoFolderMaintenance.normalizedKey($0.name) == key }) {
+            folder = existing
+        } else {
+            folder = MemoFolder(name: trimmed)
+            modelContext.insert(folder)
+            try? modelContext.save()
+            reload()
+        }
+        if moveIDs.isEmpty {
+            categoryFilter = .folder(folder.id)
+        } else {
+            moveMemos(moveIDs, to: folder)
+        }
+    }
+
+    private func beginRenameFolder(_ folder: MemoFolder) {
+        folderBeingRenamed = folder
+        renameFolderName = folder.name
+        isRenameFolderPresented = true
+    }
+
+    private func commitRenameFolder() {
+        defer { folderBeingRenamed = nil }
+        guard let folder = folderBeingRenamed else { return }
+        let trimmed = renameFolderName.trimmingCharacters(in: .whitespacesAndNewlines)
+        guard !trimmed.isEmpty, trimmed != folder.name else { return }
+        let key = MemoFolderMaintenance.normalizedKey(trimmed)
+        if folders.contains(where: { $0.id != folder.id && MemoFolderMaintenance.normalizedKey($0.name) == key }) {
+            folderErrorMessage = "같은 이름의 폴더가 이미 있습니다."
+            return
+        }
+        folder.name = trimmed
+        try? modelContext.save()
+        reload()
+    }
+
+    private func requestDeleteFolder(_ folder: MemoFolder) {
+        folderPendingDeletion = folder
+        isDeleteFolderPresented = true
+    }
+
+    /// 폴더만 지운다 — 안의 묵상은 삭제하지 않고 폴더 없음("미분류")으로 돌린다(`MemoFolder.memos` 삭제 규칙 nullify와 같은 결과를 명시).
+    private func deleteFolder(_ folder: MemoFolder) {
+        let folderID = folder.id
+        for memo in Array(folder.memos ?? []) {
+            memo.folder = nil
+        }
+        modelContext.delete(folder)
+        try? modelContext.save()
+        if categoryFilter == .folder(folderID) { categoryFilter = .all }
+        folderPendingDeletion = nil
+        reload()
+    }
+
+    /// 개인 묵상을 폴더로 옮긴다(`folder == nil`이면 미분류). 수정일(`updatedAt`)은 건드리지 않아 목록 순서가 바뀌지 않는다.
+    private func moveMemos(_ ids: [UUID], to folder: MemoFolder?) {
+        guard !ids.isEmpty else { return }
+        let idSet = Set(ids)
+        for memo in allMemos where idSet.contains(memo.id) && memo.folder?.id != folder?.id {
+            memo.folder = folder
+        }
+        try? modelContext.save()
+        selectedMemoIDs = []
+        isSelecting = false
+        reload()
     }
 
     private func reload() {
@@ -794,16 +1350,6 @@ private struct WordNoteListContent: View {
         guard let resolved else { return }
         selectedItem?.wrappedValue = resolved
         WordNoteSelectionRequest.shared.clear()
-    }
-
-    private func createFolder() {
-        let trimmed = newFolderName.trimmingCharacters(in: .whitespaces)
-        guard !trimmed.isEmpty else { return }
-        let folder = MemoFolder(name: trimmed)
-        modelContext.insert(folder)
-        try? modelContext.save()
-        newFolderName = ""
-        reload()
     }
 
     /// `MemoHomeView.createNewMemo()`와 같은 기본 좌표 규칙(이번 세션 마지막 위치 →
@@ -868,5 +1414,44 @@ private struct WordNoteListContent: View {
         guard !skipReload else { return }
         try? modelContext.save()
         reload()
+    }
+}
+
+/// 개인 묵상 폴더(`MemoFolder`) 유지보수 — 같은 이름 폴더 병합.
+/// CloudKit은 `@Attribute(.unique)`를 지원하지 않아, 여러 기기가 같은 이름의 폴더를 각각 만들면 동기화 후 이름이 같은 행이 둘 이상 남는다
+/// (`SermonGatheringSeeder.deduplicate`와 같은 유형의 문제).
+enum MemoFolderMaintenance {
+    /// 이름 비교용 키 — 공백, 대소문자, 전각/반각 차이를 무시한다.
+    static func normalizedKey(_ name: String) -> String {
+        name.folding(options: [.caseInsensitive, .widthInsensitive], locale: nil)
+            .components(separatedBy: .whitespacesAndNewlines)
+            .joined()
+    }
+
+    /// 가장 먼저 만든 폴더를 남기고, 중복 폴더의 묵상은 남긴 폴더로 옮긴 뒤 중복 폴더를 지운다. 이름이 빈 폴더는 건드리지 않는다.
+    /// 변경이 없으면 저장하지 않는다(여러 번 불러도 안전 — 멱등).
+    static func deduplicate(in context: ModelContext) {
+        do {
+            let all = try context.fetch(FetchDescriptor<MemoFolder>(sortBy: [SortDescriptor(\.createdAt, order: .forward)]))
+            var survivors: [String: MemoFolder] = [:]
+            var didChange = false
+            for folder in all {
+                let key = normalizedKey(folder.name)
+                guard !key.isEmpty else { continue }
+                if let survivor = survivors[key] {
+                    // 관계를 바꾸면 `folder.memos`가 함께 변하므로 복사본을 돈다.
+                    for memo in Array(folder.memos ?? []) {
+                        memo.folder = survivor
+                    }
+                    context.delete(folder)
+                    didChange = true
+                } else {
+                    survivors[key] = folder
+                }
+            }
+            if didChange { try context.save() }
+        } catch {
+            print("[MemoFolderMaintenance] 중복 폴더 정리 실패: \(error)")
+        }
     }
 }

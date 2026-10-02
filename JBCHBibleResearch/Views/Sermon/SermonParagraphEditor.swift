@@ -506,6 +506,8 @@ struct SermonParagraphEditorRepresentable: UIViewRepresentable {
 
     func makeUIView(context: Context) -> UITextView {
         let textView = UITextView()
+        // 편집 배경이 뷰어와 같은 고정 미색이므로 캐럿·선택·메뉴도 라이트 외형으로 고정한다(`SermonViewerPaper`).
+        if isEditable { textView.overrideUserInterfaceStyle = .light }
         textView.isEditable = isEditable
         textView.isSelectable = true
         textView.textContainerInset = UIEdgeInsets(top: 12, left: 12, bottom: 12, right: 12)
@@ -824,23 +826,26 @@ struct SermonParagraphEditorRepresentable: NSViewRepresentable {
     var readOnlyBackgroundColor: NSColor? = nil
 
     func makeNSView(context: Context) -> NSScrollView {
-        let textView = NSTextView()
+        // `RichTextEditor`(말씀 요약/메모/개요)와 같은 방식으로 `scrollableTextView()`를 쓴다. 폭 추적·세로 리사이즈가 이미 맞게 설정된
+        // 텍스트뷰라, 네이티브 서식 팝업(`usesInspectorBar`)이 올바른 위치/폭 기준으로 뜬다.
+        let scrollView = NSTextView.scrollableTextView()
+        guard let textView = scrollView.documentView as? NSTextView else { return scrollView }
         textView.isEditable = isEditable
         textView.isSelectable = true
         textView.isRichText = true
         textView.textContainerInset = NSSize(width: 12, height: 12)
         textView.textStorage?.delegate = context.coordinator
         textView.allowsUndo = true
-
-        let scrollView = NSScrollView()
-        scrollView.documentView = textView
         scrollView.hasVerticalScroller = true
         scrollView.drawsBackground = false
+        // 편집 배경이 뷰어와 같은 고정 미색이므로 캐럿·선택색도 라이트 외형으로 고정한다(`SermonViewerPaper`).
+        if isEditable { scrollView.appearance = NSAppearance(named: .aqua) }
 
         context.coordinator.textView = textView
         proxy.textView = textView
         loadContent(into: textView, coordinator: context.coordinator)
         applyBackground(to: textView)
+        applyStyleToolsVisibility(to: textView)
         return scrollView
     }
 
@@ -850,6 +855,7 @@ struct SermonParagraphEditorRepresentable: NSViewRepresentable {
         textView.isEditable = isEditable
         proxy.textView = textView
         applyBackground(to: textView)
+        applyStyleToolsVisibility(to: textView)
         guard rtfText != context.coordinator.lastExportedRTF else { return }
         loadContent(into: textView, coordinator: context.coordinator)
     }
@@ -887,6 +893,16 @@ struct SermonParagraphEditorRepresentable: NSViewRepresentable {
             .paragraphStyle: paragraphStyle,
             .sermonParagraphStyle: SermonParagraphStyle.body.rawValue
         ]
+    }
+
+    /// 말씀 요약 에디터(`RichTextEditor`, `showsToolbarOnMac == false`)와 같은 macOS 네이티브 서식 도구를 편집 가능할 때만 켠다:
+    /// 서식 팝업(`usesInspectorBar` — 굵게/기울임/밑줄/글꼴/크기/글자색/정렬/목록), 글꼴 패널(⌘T), 눈금자.
+    /// 여기서 바꾼 글꼴·색·정렬은 글자 단위 서식으로 남고, 문단 스타일의 프리셋 재적용 때 "수동 지정"으로 보존된다
+    /// (`SermonParagraphStyleCodec.applyStyle`의 스냅샷 비교).
+    private func applyStyleToolsVisibility(to textView: NSTextView) {
+        textView.usesInspectorBar = isEditable
+        textView.usesFontPanel = isEditable
+        textView.usesRuler = isEditable
     }
 
     private func applyBackground(to textView: NSTextView) {
@@ -956,7 +972,7 @@ struct SermonParagraphEditor: View {
             isEditable: isEditable,
             proxy: proxy,
             settings: settings,
-            editingBackgroundColor: .systemBackground,
+            editingBackgroundColor: SermonViewerPaper.platformColor,
             readOnlyBackgroundColor: nil
         )
         #elseif os(macOS)
@@ -968,7 +984,7 @@ struct SermonParagraphEditor: View {
             isEditable: isEditable,
             proxy: proxy,
             settings: settings,
-            editingBackgroundColor: .textBackgroundColor,
+            editingBackgroundColor: SermonViewerPaper.platformColor,
             readOnlyBackgroundColor: nil
         )
         #endif

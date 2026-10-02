@@ -45,7 +45,8 @@ struct SermonViewerView: View {
     private static let pageHorizontalInset: CGFloat = 28
     private static let pageVerticalInset: CGFloat = 24
 
-    private var accent: Color { SermonTheme.accent(colorScheme) }
+    // 뷰어는 라이트 외형으로 고정이라(`SermonViewerPaper`) 강조색도 라이트 값을 쓴다. 바깥 환경의 colorScheme을 읽으면 다크 모드에서 밝은 강조색이 된다.
+    private var accent: Color { SermonTheme.accent(.light) }
     private var isPageMode: Bool { settings.sermonViewerUsesPageMode }
 
     /// 페이지 나누기를 다시 해야 하는 조건 — 크기/본문/모드 중 하나라도 바뀌면 값이 달라진다.
@@ -85,9 +86,17 @@ struct SermonViewerView: View {
         .onChange(of: pageIndex) { _, newValue in
             if let paginator { readingLocation = paginator.characterLocation(ofPage: newValue) }
         }
+        // 배경은 설정 테마·다크 모드와 무관하게 부드러운 미색으로 고정한다(`SermonViewerPaper`). 배경이 항상 밝으므로
+        // SwiftUI 요소(글자·버튼·스피너)도 라이트 외형으로 고정한다. `preferredColorScheme`은 이 화면을 연 창 전체에
+        // 번질 수 있어 쓰지 않는다.
+        .background(SermonViewerPaper.color.ignoresSafeArea())
+        .environment(\.colorScheme, .light)
         .navigationTitle("설교 뷰어")
         #if os(iOS)
         .navigationBarTitleDisplayMode(.inline)
+        .toolbarBackground(SermonViewerPaper.color, for: .navigationBar)
+        .toolbarBackground(.visible, for: .navigationBar)
+        .toolbarColorScheme(.light, for: .navigationBar)
         #endif
         #if os(macOS)
         .frame(minWidth: 760, minHeight: 600)
@@ -128,7 +137,7 @@ struct SermonViewerView: View {
                 paginator: paginator, index: pageIndex,
                 insets: NSSize(width: Self.pageHorizontalInset, height: Self.pageVerticalInset)
             )
-            .background(Color(nsColor: .textBackgroundColor))
+            .background(SermonViewerPaper.color)
             .contentShape(Rectangle())
             .gesture(
                 DragGesture(minimumDistance: 24)
@@ -210,7 +219,7 @@ struct SermonViewerView: View {
         }
         .padding(.horizontal, 16)
         .padding(.vertical, 10)
-        .background(.bar)
+        .background(SermonViewerPaper.color)
     }
 
     /// "A-  100%  A+" 알약 스테퍼 — `scaleSteps`를 한 단계씩 넘긴다.
@@ -301,7 +310,7 @@ struct SermonViewerView: View {
         }
         .padding(.horizontal, 20)
         .padding(.vertical, 10)
-        .background(.bar)
+        .background(SermonViewerPaper.color)
     }
 
     private func goToNextPage() {

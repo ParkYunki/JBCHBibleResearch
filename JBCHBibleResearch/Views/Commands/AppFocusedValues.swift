@@ -21,6 +21,8 @@ private struct ToggleSidebarKey: FocusedValueKey { typealias Value = () -> Void 
 // MARK: - 메모(File 메뉴 — 새 메모/새 폴더)
 
 private struct NewMemoActionKey: FocusedValueKey { typealias Value = () -> Void }
+// 성경 조회 "본문에서 찾기"(⌘F) — `BibleChapterFind.swift`가 노출하고 Bible 메뉴가 읽는다.
+private struct FindInChapterActionKey: FocusedValueKey { typealias Value = () -> Void }
 private struct NewFolderActionKey: FocusedValueKey { typealias Value = () -> Void }
 
 // MARK: - 연구문서(File 메뉴 — 업로드)
@@ -57,6 +59,11 @@ extension FocusedValues {
     var uploadDocumentAction: (() -> Void)? {
         get { self[UploadDocumentActionKey.self] }
         set { self[UploadDocumentActionKey.self] = newValue }
+    }
+
+    var findInChapterAction: (() -> Void)? {
+        get { self[FindInChapterActionKey.self] }
+        set { self[FindInChapterActionKey.self] = newValue }
     }
 
     var nextChapterAction: (() -> Void)? {

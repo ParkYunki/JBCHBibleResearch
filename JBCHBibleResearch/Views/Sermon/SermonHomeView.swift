@@ -16,9 +16,10 @@
 //  `DocumentsHomeView.splitMainContent`와 같은 패턴(HStack + 고정폭 왼쪽 열)으로
 //  왼쪽 "설교함"(말씀단위 목록), 오른쪽 상세(`SermonDetailView`)를 제자리에 보여준다.
 //
-//  새 설교: 툴바의 "설교 작성" 아이콘으로, 시트 없이 `SermonEditorView`(`isNewSermon: true`)를 바로 연다. 제목과 본문이
+//  새 설교: 툴바의 "설교 작성" 아이콘으로 연다. 아이패드·맥은 새 창("sermon-new", `SermonNewWindowContent`)에서, 아이폰은 같은
+//  NavigationStack에 push해 `SermonEditorView`(`isNewSermon: true`)를 보인다. 제목과 본문이
 //  모두 비면 저장하지 않으며 그 검증은 `SermonEditorView.save()`가 맡는다. 수정일은
-//  저장 시 `touchUpdatedAt()`이 현재 시각으로 넣는다.
+//  저장 시 `touchUpdatedAt()`이 현재 시각으로 넣는다. 설교 편집(왼쪽 설교함의 "편집")도 아이패드·맥은 새 창("sermon-editor")이다.
 //
 //  ⚠️ `JBCHBibleResearchApp.swift`의 `WindowGroup(id: "sermon-detail", ...)` 등록은 이
 //  화면에서 더 이상 호출하지 않지만 다른 곳에서 참조할 수 있어 남겨 두었다.
@@ -90,10 +91,10 @@ struct SermonHomeView: View {
 
     @State private var viewMode: SermonListViewMode = .bySermon
     @State private var searchText = ""
-    /// "새 설교" 버튼이 담는, 아직 `modelContext`에 insert하지 않은 `Sermon`. 아이폰은
-    /// `.navigationDestination(item:)`으로 에디터를 push하고, 아이패드·맥은 `splitContent`가
-    /// 오른쪽 패널에 에디터를 직접 얹는다. 실제 insert는 `SermonEditorView.save()`가 제목/본문
-    /// 중 하나라도 채워졌을 때만 하므로 이 값은 화면 전환용일 뿐 데이터 등록과 무관하다.
+    /// (아이폰 전용) "새 설교" 버튼이 담는, 아직 `modelContext`에 insert하지 않은 `Sermon`. 아이폰은
+    /// `.navigationDestination(item:)`으로 에디터를 push한다. 아이패드·맥은 새 창("sermon-new")을 열어 이 값을 쓰지 않는다.
+    /// 실제 insert는 `SermonEditorView.save()`가 제목/본문 중 하나라도 채워졌을 때만 하므로 이 값은 화면 전환용일 뿐
+    /// 데이터 등록과 무관하다.
     @State private var pendingNewSermon: Sermon?
     /// 메인 `Sermon` 삭제 확인 대화상자 대상. `Sermon.deliveries`/`verseReferences`가
     /// `.cascade`라(Sermons.swift) 삭제 시 이력·구절 레코드도 함께 사라지므로 확인 후 삭제한다.
@@ -102,10 +103,6 @@ struct SermonHomeView: View {
     @State private var selectedSermonID: PersistentIdentifier?
     /// "새 모임" 시트 대상. `.sheet(item:)`이라 nil이 아니면 그 설교에 대해 시트가 열린다.
     @State private var sermonPendingNewDelivery: Sermon?
-    /// 아이패드·맥 전용 — 이미 있는 설교를 편집 중일 때의 대상. 값이 있으면 오른쪽 패널이
-    /// `SermonDetailView` 대신 `SermonEditorView`(`isNewSermon: false`)를 보여준다.
-    /// `pendingNewSermon`과 별개 상태이며 저장은 일반 경로(지연 삽입 없음)를 탄다.
-    @State private var editingSermon: Sermon?
 
     private var settings: UserSettingsStore { .shared }
 
@@ -165,9 +162,7 @@ struct SermonHomeView: View {
         Group {
             if isPhoneIdiom {
                 // 아이폰에서만 `.navigationDestination(item:)`으로 에디터를 push한다. 아이패드·맥은
-                // `splitContent`가 이미 오른쪽 패널에 에디터를 직접 얹고 detail 컬럼 자체가
-                // NavigationStack이라, 여기에도 걸면 에디터가 한 겹 더 push되어 "<"와 "취소"가
-                // 동시에 보이는 문제가 생긴다.
+                // 새 설교를 별도 창("sermon-new")으로 열기 때문에 push할 일이 없다.
                 phoneContent
                     .navigationDestination(item: $pendingNewSermon) { sermon in
                         SermonEditorView(
@@ -181,6 +176,7 @@ struct SermonHomeView: View {
             }
         }
         .navigationTitle(SermonFixedTitle.navigationText)
+        .macSerifTitle("내 설교")
         #if os(iOS)
         .navigationBarTitleDisplayMode(.inline)
         #endif
@@ -263,21 +259,8 @@ struct SermonHomeView: View {
 
                 Divider()
 
-                if let pendingNewSermon {
-                    // 새 설교는 팝업 없이 이 자리에 에디터를 바로 얹는다. 시트/창이 아니라 그냥 얹힌 뷰라
-                    // `@Environment(\.dismiss)`가 기댈 프레젠테이션이 없으므로 `onRequestClose`로 값을 직접 nil로 되돌린다.
-                    SermonEditorView(
-                        subject: .sermon(pendingNewSermon),
-                        isNewSermon: true,
-                        onRequestClose: { self.pendingNewSermon = nil }
-                    )
-                } else if let editingSermon {
-                    // 이미 있는 설교 편집. 위 분기와 같은 패턴이되 `isNewSermon: false`라 지연 삽입 없이 저장된다.
-                    SermonEditorView(
-                        subject: .sermon(editingSermon),
-                        onRequestClose: { self.editingSermon = nil }
-                    )
-                } else if let selectedSermon {
+                // 새 설교 작성/설교 편집은 오른쪽 패널이 아니라 별도 창에서 한다(아래 `startNewSermon`, 행의 "편집" 버튼).
+                if let selectedSermon {
                     SermonDetailView(sermon: selectedSermon)
                 } else {
                     emptySelectionPane
@@ -288,12 +271,8 @@ struct SermonHomeView: View {
         // 오른쪽 패널의 상세/에디터가 자기 제목을 툴바에 올리지 않게 한다(`SermonFixedTitle` 참고).
         .environment(\.sermonHasFixedTitle, true)
         // 마인드맵 "설교문 적용" 후 해당 설교를 선택해 오른쪽 패널이 `SermonDetailView`를 보이게 한다.
-        // 그 설교의 인라인 편집기가 열려 있었다면 편집기가 스스로 저장 없이 닫히므로 `editingSermon`도
-        // 비운다. 새 설교 작성 중(`pendingNewSermon`)은 다른 설교라 건드리지 않는다.
+        // 그 설교의 편집 창이 열려 있었다면 편집기가 스스로 저장 없이 창을 닫는다(`SermonEditorView.closeForExternalChange`).
         .onSermonExternalContentChange(onReplaced: { id in
-            if editingSermon?.persistentModelID == id {
-                editingSermon = nil
-            }
             selectedSermonID = id
         })
         .background(settings.bibleBackgroundColor ?? Color.clear)
@@ -313,10 +292,6 @@ struct SermonHomeView: View {
                     ForEach(filteredSermons) { sermon in
                         VStack(alignment: .leading, spacing: 0) {
                             Button {
-                                // 새 설교 작성 중에 다른 설교를 고르면 만들던 설교는 버려진다(제목/본문이 비어 있으면
-                                // 뷰가 사라질 때 호출되는 `SermonEditorView.save()`의 검증이 저장하지 않음).
-                                pendingNewSermon = nil
-                                editingSermon = nil
                                 selectedSermonID = sermon.persistentModelID
                             } label: {
                                 sermonRowLabel(sermon)
@@ -347,10 +322,9 @@ struct SermonHomeView: View {
                                 }
                                 .buttonStyle(SermonMiniPillButtonStyle(isFilled: true, tint: mapButtonTint))
                                 Button {
-                                    // 별도 창 대신 `editingSermon`을 채워 오른쪽 패널이 그 자리에서 에디터를 보이게 한다(`splitContent` 참고).
-                                    pendingNewSermon = nil
+                                    // 편집은 별도 창에서 한다(`SermonDetailView.editorButton`과 같은 창). 같은 설교는 창이 하나만 뜬다.
                                     selectedSermonID = sermon.persistentModelID
-                                    editingSermon = sermon
+                                    openWindow(id: "sermon-editor", value: SermonContentTarget.sermon(sermon))
                                 } label: {
                                     sermonRowActionLabel(title: "편집", systemImage: "square.and.pencil")
                                 }
@@ -401,6 +375,10 @@ struct SermonHomeView: View {
             .font(.custom(SpecialPurposeFonts.titleSerif, size: 20, relativeTo: .title3))
             .fontWeight(.semibold)
             .foregroundStyle(settings.bibleTextColor ?? .primary)
+            // 같은 내비게이션 바의 검색창(`.searchable`)·툴바 버튼과 폭을 나눌 때 툴바 항목은 제목부터 줄어 "내…"로 잘린다.
+            // 한 줄로 고정하고 글자 본래 폭을 요구해, 모자란 폭은 다른 항목이 양보하게 한다.
+            .lineLimit(1)
+            .fixedSize(horizontal: true, vertical: false)
     }
     #endif
 
@@ -596,9 +574,14 @@ struct SermonHomeView: View {
 
     // MARK: - 새 설교
 
-    /// "새 설교" 버튼 동작 — 아직 insert하지 않은 `Sermon`을 `pendingNewSermon`에 담기만 한다.
-    /// 화면 전환은 `body`/`splitContent`가, 실제 insert는 `SermonEditorView.save()`가 맡는다.
+    /// "새 설교" 버튼 동작. 아이폰은 아직 insert하지 않은 `Sermon`을 `pendingNewSermon`에 담아 push하고(실제 insert는
+    /// `SermonEditorView.save()`), 아이패드·맥은 다중 창을 쓸 수 있어 새 창("sermon-new")을 연다. 아이폰은 다중 씬을 지원하지
+    /// 않아 `openWindow`를 부르면 런타임 오류가 나므로 반드시 분기한다(`SermonDetailView.editorButton` 주석 참고).
     private func startNewSermon() {
-        pendingNewSermon = Sermon(title: "")
+        if isPhoneIdiom {
+            pendingNewSermon = Sermon(title: "")
+        } else {
+            openWindow(id: "sermon-new", value: SermonNewTarget())
+        }
     }
 }

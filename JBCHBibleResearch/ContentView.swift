@@ -76,6 +76,10 @@ struct ContentView: View {
                     // SermonGathering 초기 시드(주일설교/청년회 말씀/구역모임/조모임)를 최초 실행 시
                     // 생성한다. 비동기가 필요 없는 가벼운 작업이라 `await` 없이 호출한다.
                     SermonGatheringSeeder.seedIfNeeded(into: modelContext)
+                    // 기기마다 시드가 돌아 생긴 같은 이름의 모임 종류를 하나로 합친다(모임 선택 시트의 칩 중복 방지).
+                    SermonGatheringSeeder.deduplicate(in: modelContext)
+                    // 기기마다 만들어져 생긴 같은 이름의 개인 묵상 폴더를 하나로 합친다(`MemoFolderMaintenance`).
+                    MemoFolderMaintenance.deduplicate(in: modelContext)
                     // 관주/난외주/한자주석/한자사전은 사용자가 편집하지 않는 정적 참조 데이터라
                     // CloudKit 동기화 대상이 아니며, 번들 `Resources/ReferenceData.sqlite`(읽기 전용)에서
                     // 직접 읽는다(`ReferenceDataProvider`/`ReferenceDataStore`). 예전에 SwiftData로

@@ -11,16 +11,20 @@ public final class ImageCategory {
     public var id: UUID = UUID()
     public var name: String = ""
     public var createdAt: Date = Date.now
+    /// 사용자가 정한 표시 순서(작을수록 앞). 기본값이 있는 새 필드라 기존 저장소에 경량 마이그레이션으로 추가된다.
+    /// 기존 카테고리는 모두 0이므로 같은 값끼리는 이름순으로 보여 예전 표시 순서와 같다.
+    public var sortOrder: Int = 0
 
     // ⚠️ to-many @Relationship은 타입 자체가 Optional이어야 CloudKit이 받아들인다
     // (Tags.swift 상단 주석 참고).
     @Relationship(deleteRule: .nullify, inverse: \SourceDocument.category)
     public var sourceDocuments: [SourceDocument]? = []
 
-    public init(id: UUID = UUID(), name: String, createdAt: Date = .now) {
+    public init(id: UUID = UUID(), name: String, createdAt: Date = .now, sortOrder: Int = 0) {
         self.id = id
         self.name = name
         self.createdAt = createdAt
+        self.sortOrder = sortOrder
     }
 }
 

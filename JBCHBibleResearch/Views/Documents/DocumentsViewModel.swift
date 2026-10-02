@@ -41,7 +41,7 @@ final class DocumentsViewModel {
     }
 
     func loadCategories() {
-        categories = (try? modelContext.fetch(FetchDescriptor<ImageCategory>(sortBy: [SortDescriptor(\.name)]))) ?? []
+        categories = (try? modelContext.fetch(FetchDescriptor<ImageCategory>(sortBy: [SortDescriptor(\.sortOrder), SortDescriptor(\.name)]))) ?? []
     }
 
     /// 같은 파일 경로로 짧은 시간 안에 들어온 중복 업로드 요청을 무시하기 위한 기록. 드래그 앤 드롭
@@ -140,7 +140,8 @@ final class DocumentsViewModel {
         let name = rawName.trimmingCharacters(in: .whitespaces)
         guard !name.isEmpty else { return nil }
         if let existing = categories.first(where: { $0.name == name }) { return existing }
-        let category = ImageCategory(name: name)
+        // 새 카테고리는 맨 뒤에 둔다(수동 순서 `sortOrder`의 최댓값 + 1).
+        let category = ImageCategory(name: name, sortOrder: (categories.map(\.sortOrder).max() ?? -1) + 1)
         modelContext.insert(category)
         try? modelContext.save()
         categories.append(category)
@@ -149,7 +150,6 @@ final class DocumentsViewModel {
 
     /// 카테고리 이름 변경. `createCategory`처럼 트리밍하고, 같은 이름의 다른 카테고리가 이미 있으면
     /// 아무 것도 하지 않는다(이름으로 구분하는 `categoryMenu`/`folderGroups`와의 일관성).
-    /// ⚠️ 삭제는 지원하지 않는다 — 소속 문서를 어떻게 처리할지 별도 결정이 필요하다.
     func renameCategory(_ category: ImageCategory, to rawName: String) {
         let name = rawName.trimmingCharacters(in: .whitespaces)
         guard !name.isEmpty, name != category.name else { return }
@@ -159,4 +159,29 @@ final class DocumentsViewModel {
         loadCategories()
     }
 
+
+    /// 카테고리 삭제. 소속 문서는 지워지지 않는다 — `ImageCategory.sourceDocuments`의 deleteRule이 `.nullify`라
+    /// 문서의 `category`만 비워져 "분류 없음"으로 보인다.
+    func deleteCategory(_ category: ImageCategory) {
+        modelContext.delete(category)
+        try? modelContext.save()
+        loadCategories()
+    }
+
+    /// 수동 순서 변경(`List.onMove`/위·아래 이동 공용). 변경 후 전체를 0...n-1로 다시 매겨
+    /// 기존 카테고리의 동률(모두 0)이나 동기화로 생긴 값 겹침도 이 시점에 정리한다.
+    func moveCategories(from source: IndexSet, to destination: Int) {
+        // SwiftUI의 `move(fromOffsets:toOffset:)`와 같은 의미를 직접 구현(이 파일은 SwiftUI를 import하지 않는다).
+        var reordered = categories
+        let moving = source.sorted().compactMap { reordered.indices.contains($0) ? reordered[$0] : nil }
+        guard !moving.isEmpty else { return }
+        let insertionIndex = destination - source.filter { $0 < destination }.count
+        for index in source.sorted(by: >) where reordered.indices.contains(index) { reordered.remove(at: index) }
+        reordered.insert(contentsOf: moving, at: max(0, min(insertionIndex, reordered.count)))
+        for (index, category) in reordered.enumerated() where category.sortOrder != index {
+            category.sortOrder = index
+        }
+        try? modelContext.save()
+        categories = reordered
+    }
 }

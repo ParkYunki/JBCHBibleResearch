@@ -83,6 +83,19 @@ struct ChapterRelatedContentPanel: View {
     private static let outlineBoxHeight: CGFloat = 260
 
     @Environment(\.openWindow) private var openWindow
+    /// macOS 떠 있는 도구창(`RelatedContentPanelController`)은 SwiftUI 씬(`WindowGroup`) 밖의 `NSHostingController`에 올라가
+    /// `@Environment(\.openWindow)`가 동작한다는 보장이 없다. 그래서 호출부(성경 조회 창)가 자기 환경의 `OpenWindowAction`을
+    /// 넘기면 그것을 우선 쓴다. nil(기본)이면 기존처럼 환경 값을 쓴다 — iOS/아이패드 인스펙터 경로는 변화 없음.
+    var injectedOpenWindow: OpenWindowAction? = nil
+
+    /// `openWindow(id:value:)`의 단일 진입점 — 주입된 액션이 있으면 그것을, 없으면 환경 값을 쓴다.
+    private func openAppWindow<V: Hashable & Codable>(id: String, value: V) {
+        if let injectedOpenWindow {
+            injectedOpenWindow(id: id, value: value)
+        } else {
+            openWindow(id: id, value: value)
+        }
+    }
 
     /// 아이폰은 다중 씬을 지원하지 않아 `openWindow`가 런타임 에러를 낸다
     /// (DocumentsHomeView의 `isPhoneIdiom`과 같은 패턴).
@@ -251,7 +264,7 @@ struct ChapterRelatedContentPanel: View {
     /// "별도 창에서 보기" — 항상 새 창을 연다(`requestID`가 매번 새 `UUID`라, 같은 값이면
     /// 기존 창을 재사용하는 SwiftUI 기본 동작을 우회한다).
     private func openOutlineQuickViewWindow() {
-        openWindow(
+        openAppWindow(
             id: "outline-quick-view",
             value: OutlineQuickViewRequest(bookId: viewModel.selectedBook.bookId, chapter: viewModel.selectedChapter)
         )
@@ -445,7 +458,7 @@ struct ChapterRelatedContentPanel: View {
                             }
                         } else {
                             Button {
-                                openWindow(id: "document-viewer", value: document.persistentModelID)
+                                openAppWindow(id: "document-viewer", value: document.persistentModelID)
                             } label: {
                                 documentRowLabel(document)
                             }
@@ -584,7 +597,7 @@ struct ChapterRelatedContentPanel: View {
                     }
                 } else {
                     Button {
-                        openWindow(id: "sermon-viewer", value: SermonViewerTarget.sermon(sermon))
+                        openAppWindow(id: "sermon-viewer", value: SermonViewerTarget.sermon(sermon))
                     } label: {
                         sermonReferenceRowLabel(title: sermon.title.isEmpty ? "제목 없음" : sermon.title)
                     }
@@ -606,7 +619,7 @@ struct ChapterRelatedContentPanel: View {
                     }
                 } else {
                     Button {
-                        openWindow(id: "sermon-viewer", value: SermonViewerTarget.delivery(delivery))
+                        openAppWindow(id: "sermon-viewer", value: SermonViewerTarget.delivery(delivery))
                     } label: {
                         sermonReferenceRowLabel(title: "\(gatheringName) \(dateText)")
                     }

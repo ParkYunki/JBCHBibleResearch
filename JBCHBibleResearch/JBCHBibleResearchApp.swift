@@ -29,6 +29,17 @@ struct JBCHBibleResearchApp: App {
         // (BundledFontRegistrar.swift 참고 — 등록에 실패해도 앱은 계속 켜진다).
         BundledFontRegistrar.registerBundledFontsIfNeeded()
 
+        // macOS 안전망(2026-10-01) — 성경 조회에서 인스펙터를 연 채 툴바 ">>"(넘침 메뉴)를 누르면 `NSGenericException: The window has
+        // been marked as needing another Update Constraints in Window pass, but it has already had more ... passes than there are
+        // views`로 앱이 종료됐다. 스택에 앱 코드는 없고 `SplitViewChildController.hostingView(_:didUpdateMinSize:maxSize:)`가
+        // 제약 갱신 중에 다시 무효화를 거는 SwiftUI/AppKit 내부 순환이다(근본 원인은 미확정). AppKit은 이 한도 초과를 기본값으로는 예외로
+        // 종료시키지만, 이 UserDefaults 키(비공개 키 — 공식 문서 없음, UTM 등 다른 앱도 같은 우회를 사용)를 끄면 예외 없이 이후 갱신
+        // 표시를 무시한다(크래시 로그의 "Future marking ... might be ignored" 문구가 그 경로다). 순환 자체를 없애지는 못하므로
+        // 근본 원인을 찾으면 제거한다. 다른 곳에서 읽는 값이 아니라 `init()` 맨 앞(윈도우 생성 전)에서 한 번만 설정한다.
+        #if os(macOS)
+        UserDefaults.standard.set(false, forKey: "NSWindowAssertWhenDisplayCycleLimitReached")
+        #endif
+
         // `UITabBar.appearance()`(UIKit 외형 프록시)는 탭바가 윈도우에 "처음 추가되기 전"에
         // 설정해야 확실히 반영된다. `PhoneTabView.onAppear`만으로는 실기기에서 반영되지
         // 않아, 윈도우가 만들어지기 전인 여기에서 먼저 호출한다
@@ -100,6 +111,7 @@ struct JBCHBibleResearchApp: App {
             // 이 "새 창"으로 연 보조 창에서는 관련 콘텐츠(인스펙터)/조회 이력 아이콘을 뺀다
             // (`BibleReadingView.isPrimaryWindow` 참고).
             BibleReadingView(isPrimaryWindow: false)
+                .modifier(AppColorSchemeModifier())
                 #if os(macOS)
                 .frame(minWidth: 500, minHeight: 400)
                 #endif
@@ -109,6 +121,7 @@ struct JBCHBibleResearchApp: App {
         // "태그 관계" 사이드바 항목이 여는 별도 창(SidebarNavigationView.swift 참고).
         WindowGroup(id: "tag-relations") {
             TagRelationsView()
+                .modifier(AppColorSchemeModifier())
                 #if os(macOS)
                 .frame(minWidth: 600, minHeight: 500)
                 #endif
@@ -124,6 +137,7 @@ struct JBCHBibleResearchApp: App {
         // 예상된다("tag-relations" 창도 같은 특성, 실기기 미검증).
         WindowGroup(id: "document-viewer", for: PersistentIdentifier.self) { $documentID in
             DocumentViewerWindowContent(documentID: documentID)
+                .modifier(AppColorSchemeModifier())
                 #if os(macOS)
                 .frame(minWidth: 500, minHeight: 400)
                 #endif
@@ -134,6 +148,7 @@ struct JBCHBibleResearchApp: App {
         // 달라 별도 WindowGroup으로 분리했다(DocumentSearchRequest.swift 참고).
         WindowGroup(id: "document-search", for: DocumentSearchRequest.self) { $request in
             DocumentSearchWindowContent(request: request)
+                .modifier(AppColorSchemeModifier())
                 #if os(macOS)
                 .frame(minWidth: 500, minHeight: 400)
                 #endif
@@ -146,6 +161,7 @@ struct JBCHBibleResearchApp: App {
         // SwiftUI가 새 창을 연다.
         WindowGroup(id: "outline-quick-view", for: OutlineQuickViewRequest.self) { $request in
             OutlineQuickViewWindowContent(request: request)
+                .modifier(AppColorSchemeModifier())
                 #if os(macOS)
                 .frame(minWidth: 420, minHeight: 400)
                 #endif
@@ -157,6 +173,7 @@ struct JBCHBibleResearchApp: App {
         // 대상이 삭제돼도 안전하게 "찾을 수 없음"으로 넘어가게 한다.
         WindowGroup(id: "sermon-detail", for: PersistentIdentifier.self) { $sermonID in
             SermonDetailWindowContent(sermonID: sermonID)
+                .modifier(AppColorSchemeModifier())
                 #if os(macOS)
                 .frame(minWidth: 760, minHeight: 640)
                 #endif
@@ -168,6 +185,18 @@ struct JBCHBibleResearchApp: App {
         // `SermonContentTarget`이 Sermon(메인)/SermonDelivery(회차 사본) 중 어느 쪽을 열지 함께 싣는다.
         WindowGroup(id: "sermon-editor", for: SermonContentTarget.self) { $target in
             SermonContentWindowContent(mode: .editor, target: target)
+                .modifier(AppColorSchemeModifier())
+                #if os(macOS)
+                .frame(minWidth: 960, minHeight: 680)
+                #endif
+        }
+        .modelContainer(modelContainer)
+
+        // "새 설교" 작성 창 — 아직 저장하지 않은 `Sermon`을 창 안에서 만들어 들고 있어 별도 `WindowGroup`/값 타입
+        // (`SermonNewTarget`, SermonSupport.swift)을 쓴다. 에디터 창("sermon-editor")과 크기는 같다.
+        WindowGroup(id: "sermon-new", for: SermonNewTarget.self) { $target in
+            SermonNewWindowContent(target: target)
+                .modifier(AppColorSchemeModifier())
                 #if os(macOS)
                 .frame(minWidth: 960, minHeight: 680)
                 #endif
@@ -191,6 +220,7 @@ struct JBCHBibleResearchApp: App {
         // (SermonSupport.swift)을 쓴다.
         WindowGroup(id: "sermon-mindmap", for: SermonMindMapTarget.self) { $target in
             SermonMindMapWindowContent(target: target)
+                .modifier(AppColorSchemeModifier())
                 #if os(macOS)
                 .frame(minWidth: 1000, minHeight: 700)
                 #endif
@@ -213,3 +243,13 @@ struct JBCHBibleResearchApp: App {
     }
 }
 
+/// 보조 `WindowGroup` 창에 앱의 화면 모드(라이트/다크/시스템)를 적용하는 수정자.
+/// `.preferredColorScheme`은 메인 창의 `ContentView`에서만 걸려 있어, 보조 창(마인드맵·편집기 등)은 앱을 라이트로 설정해도
+/// macOS가 다크 외형이면 시스템 다크로 그려져 글자색(`.primary`)이 흰색이 되고 앱 테마 배경(미색)과 겹쳐 안 보였다(2026-10-01 보고).
+/// 작은 창 콘텐츠에서 값을 읽으므로 `ContentView` 주석의 TabView 재생성 문제는 해당되지 않는다.
+/// 설교 뷰어 창("sermon-viewer")은 자체적으로 라이트 외형을 고정하므로 제외한다.
+private struct AppColorSchemeModifier: ViewModifier {
+    func body(content: Content) -> some View {
+        content.preferredColorScheme(UserSettingsStore.shared.colorSchemePreference.colorScheme)
+    }
+}

@@ -83,6 +83,71 @@ struct SermonViewerTarget: Codable, Hashable, Sendable {
     }
 }
 
+/// "새 설교" 작성 창 전용 값 타입(`WindowGroup(id: "sermon-new", for: SermonNewTarget.self)`).
+///
+/// 새 설교는 아직 `modelContext`에 insert하지 않은 `Sermon`이라(제목·본문이 비면 저장하지 않는 지연 삽입 —
+/// `SermonEditorView.save()`) `PersistentIdentifier`로 가리킬 수 없다. 그래서 창 안에서 `Sermon`을 새로 만들고, 이
+/// 값은 "창을 구분하는 표식"만 한다. `WindowGroup(for:)`는 같은 값이면 기존 창을 앞으로 가져오므로 열 때마다 새
+/// `UUID`를 넣어 항상 새 창이 뜨게 한다(`OutlineQuickViewRequest`와 같은 방식).
+///
+/// 성경 조회에서 절을 골라 "설교작성"을 누른 경우에는 `verseSeeds`에 선택한 절을 실어 보낸다 — 창이 그 절들을 "책 장:절 본문"
+/// `.verseQuote` 문단으로 채워 시작한다(`SermonNewWindowContent.makeSermon`). 비어 있으면 빈 설교다.
+struct SermonNewTarget: Codable, Hashable, Sendable {
+    /// 선택한 절 하나 — `text`는 이미 "책 장:절 본문" 형태로 만든 문단 문자열이다(번역본 본문은 창에서 다시 읽지 않는다).
+    struct VerseSeed: Codable, Hashable, Sendable {
+        let bookId: Int
+        let chapter: Int
+        let verse: Int
+        let text: String
+    }
+
+    let token: UUID
+    let verseSeeds: [VerseSeed]
+
+    init(token: UUID = UUID(), verseSeeds: [VerseSeed] = []) {
+        self.token = token
+        self.verseSeeds = verseSeeds
+    }
+}
+
+/// "sermon-new" 창의 콘텐츠 — 이 창이 만들어질 때 빈 `Sermon`을 하나 들고, 제목/본문이 채워졌을 때만
+/// `SermonEditorView.save()`가 insert한다(아무 입력 없이 닫으면 저장되지 않는다).
+/// `@State`라 창이 떠 있는 동안 같은 인스턴스가 유지된다.
+struct SermonNewWindowContent: View {
+    @State private var sermon: Sermon
+    @Environment(\.dismissWindow) private var dismissWindow
+
+    init(target: SermonNewTarget?) {
+        _sermon = State(initialValue: Self.makeSermon(from: target))
+    }
+
+    /// 아직 `modelContext`에 insert하지 않은 `Sermon`을 만든다. 선택한 절이 있으면 본문 문단과 구절 참조를 미리 채운다.
+    /// 구절 참조는 insert하지 않고 `sermon.verseReferences`에만 달아 둔다 — 컨텍스트에 먼저 넣으면 아직 저장 전인 설교까지
+    /// 끌려 들어가 취소해도 남을 수 있다. 실제 insert는 `SermonEditorView.save()`가 설교와 함께 한다.
+    private static func makeSermon(from target: SermonNewTarget?) -> Sermon {
+        guard let seeds = target?.verseSeeds, !seeds.isEmpty else { return Sermon(title: "") }
+        let (rtf, plain, styles) = SermonParagraphStyleCodec.buildVerseQuoteDocument(
+            verseTexts: seeds.map(\.text), settings: UserSettingsStore.shared
+        )
+        let sermon = Sermon(title: "", contentHtml: rtf, contentText: plain, paragraphStyles: styles)
+        for (index, seed) in seeds.enumerated() {
+            _ = SermonVerseReference(
+                bookId: seed.bookId, chapter: seed.chapter, verseStart: seed.verse, verseEnd: nil,
+                paragraphIndex: index, sermon: sermon
+            )
+        }
+        return sermon
+    }
+
+    var body: some View {
+        SermonEditorView(
+            subject: .sermon(sermon),
+            isNewSermon: true,
+            onRequestClose: { dismissWindow() }
+        )
+    }
+}
+
 /// 마인드맵 전용 창 대상(`WindowGroup(id: "sermon-mindmap", for: SermonMindMapTarget.self)`).
 ///
 /// `PersistentIdentifier`를 직접 쓰지 않고 감싸는 이유는 `SermonViewerTarget`과 같다 —

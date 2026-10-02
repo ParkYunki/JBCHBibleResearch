@@ -51,7 +51,10 @@ struct BibleReadingView: View {
                         // 넘어와 viewModel이 새로 만들어지는 경로 — `initialBook`/`initialChapter`로 표현할 수 없는 좌표라
                         // 별도 처리한다. 이미 떠 있는 상태에서 다시 탭한 경우는 `BibleReadingContentView`의 `.onChange`가
                         // 처리한다.
-                        if let target = BibleVerseNavigationRequest.shared.pendingTarget,
+                        // ⚠️ 이동 요청(검색 결과 탭 등)은 메인 창만 소비한다. macOS "성경 조회 새 창"(`isPrimaryWindow == false`)이
+                        // 먼저 요청을 가져가면 이동·강조가 메인 창이 아닌 새 창에서 일어난다.
+                        if isPrimaryWindow,
+                           let target = BibleVerseNavigationRequest.shared.pendingTarget,
                            let book = BooksProvider.shared.book(id: target.bookId) {
                             vm.selectBook(book, chapter: target.chapter)
                             vm.highlightVerseTemporarily(target.verse)
@@ -238,8 +241,7 @@ private struct ThemedNavigationBarBackgroundModifier: ViewModifier {
     @Environment(\.self) private var environment
 
     func body(content: Content) -> some View {
-        // `ToolbarPlacement.navigationBar`는 iOS 계열 전용이라 macOS에는 심볼이 없다. macOS는 이 모디파이어로 바꿀 표준 API가
-        // 없어 `color`와 무관하게 그대로 통과시킨다.
+        // `ToolbarPlacement.navigationBar`는 iOS 계열 전용이라 macOS에는 심볼이 없다(macOS는 아래 `.windowToolbar` 분기).
         #if os(iOS)
         if let color {
             content
@@ -249,6 +251,19 @@ private struct ThemedNavigationBarBackgroundModifier: ViewModifier {
                 // 정해져, 라이트 모드에서 어두운 테마 배경을 고르면 짙은 색 아이템이 거의 안 보일 수 있다. 배경색의 상대 휘도(WCAG 2.1 공식)로
                 // 어두우면 `.dark`, 밝으면 `.light`를 지정한다.
                 .toolbarColorScheme(Self.isDarkBackground(color, in: environment) ? .dark : .light, for: .navigationBar)
+        } else {
+            content
+        }
+        #elseif os(macOS)
+        // macOS도 창 통합 툴바(`.windowToolbar`) 배경을 테마색에 맞춘다 — 연구 문서/말씀 노트 등 다른 화면의 같은 이름 수정자와 동일(2026-10-01).
+        // ⚠️ 그래도 이 화면은 툴바 띠가 본문보다 살짝 밝게(48 vs 42) 남는다 — 아래 시도들이 모두 효과 없었음(2026-10-01 실기기 확인):
+        // `.toolbarBackgroundVisibility(.hidden)`, 루트 테마 `.background`/`.overlay`, `.inspector` 제거, 상단 `.safeAreaInset` 제거,
+        // `.scrollEdgeEffectHidden(true, for: .top)`(루트/ScrollView 양쪽). 원인 미확정(툴바 뒤로 스크롤 영역이 닿을 때 시스템이 그리는 재질 추정).
+        if let color {
+            content
+                .toolbarBackground(color, for: .windowToolbar)
+                .toolbarBackground(.visible, for: .windowToolbar)
+                .toolbarColorScheme(Self.isDarkBackground(color, in: environment) ? .dark : .light, for: .windowToolbar)
         } else {
             content
         }
@@ -284,6 +299,8 @@ private struct BibleReadingContentView: View {
     /// false면(macOS 보조 창) 관련 콘텐츠/조회 이력 아이콘을 툴바에서 뺀다(`BibleReadingView.isPrimaryWindow` 참고).
     let isPrimaryWindow: Bool
     @State private var isTranslationPickerPresented = false
+    /// "본문에서 찾기"(⌘F) 상태 — 창마다 따로다(`BibleChapterFind.swift` 참고).
+    @State private var findModel = BibleChapterFindModel()
     /// 절 컨텍스트 메뉴의 "메모 작성"으로 만든 새 메모나 관련 콘텐츠 패널에서 고른 기존 메모를 시트 편집기로 띄운다. UserMemo가 SwiftData
     /// `@Model`이라 이미 Identifiable이어서 `.sheet(item:)`에 바로 쓸 수 있다.
     @State private var memoBeingCreated: UserMemo?
@@ -302,7 +319,7 @@ private struct BibleReadingContentView: View {
     /// 원인은 `.inspector`가 아니라 이 화면에서 `@FocusedValue(\.selectSection)`을 읽은 것(자체 툴바가 있는 뷰에서 읽으면 툴바 무한
     /// 재계산 루프)이었다(`AppNavigationRequest.swift` 참고).
     @State private var isRelatedContentPresented = false
-    /// 조회 이력(`BibleReadingHistorySheet`) 시트 표시 여부. 가끔 열어 보는 용도라 인스펙터가 아닌 시트로 띄운다.
+    /// 조회 이력(`BibleReadingHistorySheet`) 팝오버 표시 여부. 가끔 열어 보는 용도라 인스펙터가 아닌 팝오버로 띄운다.
     @State private var isHistoryPresented = false
     /// 책갈피 이동 팝오버(`TranslationPickerPopover`와 같은 `.popover` 패턴) 표시 여부.
     @State private var isBookmarkListPresented = false
@@ -462,6 +479,32 @@ private struct BibleReadingContentView: View {
                     .padding(.top, 4)
             }
 
+            // "본문에서 찾기"(⌘F) 막대 — 겹쳐 그리지 않고 본문 위의 한 줄로 끼워 상단 바/레일과 충돌하지 않게 한다.
+            if findModel.isPresented {
+                BibleChapterFindBar(model: findModel, onNext: findNext, onPrevious: findPrevious)
+            }
+
+            #if os(macOS)
+            // macOS: 본문 왼쪽에 세로 도구 레일(`BibleToolRail`)을 둔다 — 예전 툴바 오른쪽 아이콘 묶음(시스템 유리 캡슐)을 대체한다.
+            // 번역본이 하나도 없는 빈 화면에서도 레일(번역본 선택·새 창)을 쓸 수 있도록 빈 화면도 같은 HStack 안에 둔다.
+            HStack(spacing: 0) {
+                BibleToolRail(
+                    viewModel: viewModel,
+                    isPrimaryWindow: isPrimaryWindow,
+                    isWordSummaryEditing: wordSummaryBeingEdited != nil,
+                    isBookmarkListPresented: $isBookmarkListPresented,
+                    isHistoryPresented: $isHistoryPresented,
+                    isRelatedContentPresented: $isRelatedContentPresented,
+                    isTranslationPickerPresented: $isTranslationPickerPresented,
+                    onCloseWordSummary: closeWordSummaryEditor
+                )
+                if viewModel.columns.isEmpty {
+                    emptyState
+                } else {
+                    sideBySideColumns
+                }
+            }
+            #else
             if viewModel.columns.isEmpty {
                 emptyState
             } else if isPhone {
@@ -469,6 +512,7 @@ private struct BibleReadingContentView: View {
             } else {
                 sideBySideColumns
             }
+            #endif
         }
         // 레이아웃에 영향을 주지 않는 `.background`의 `GeometryReader`로 세로/가로 판정(`isNarrowBottomBarLayout`)만 한다.
         // 값이 실제로 바뀔 때만 대입한다 — 인스펙터가 열리는 동안 매 프레임 폭이 바뀌는데, 같은 값을 무조건 대입하면 `@State` 쓰기가 "변경"으로 취급돼
@@ -571,33 +615,17 @@ private struct BibleReadingContentView: View {
             SermonContentWindowContent(mode: .viewer, target: target)
         }
         #if os(macOS)
-        // 관련 콘텐츠 보조 사이드 패널 — 창 폭이 넓으면 상시 노출, 좁으면 모달처럼 접히는 `.inspector(isPresented:)`.
-        // `.inspector`는 과거 크래시의 원인이 아니었다 — 진짜 원인은 자체 `.toolbar`를 가진 이 뷰에서
-        // `@FocusedValue(\.selectSection)`을 읽은 것이다. 게시하는 쪽이 비교 불가능한 클로저를 넘겨 뷰가 다시 그려질 때마다 포커스 값이 바뀐
-        // 것으로 취급돼 툴바 재계산 루프가 생겼다(`AppNavigationRequest.swift` 참고).
-        // macOS의 "말씀 요약"은 이 인스펙터가 아니라 별도 `NSPanel`(`WordSummaryPanelController.swift`)에서 열리며,
-        // `openWordSummaryEditor`/`presentWordSummaryEditor`/`closeWordSummaryEditor`/`wordSummaryProxy`를
-        // 그대로 재사용한다.
-        .inspector(isPresented: $isRelatedContentPresented) {
-            // 개요 화면 열기/별도 창에서 보기는 이 패널이 직접(싱글턴을 통해) 요청하므로 콜백을 넘기지
-            // 않는다(`ChapterRelatedContentPanel.swift`의
-            // `jumpToOutlineEditor`/`openOutlineQuickViewWindow` 참고).
-            ChapterRelatedContentPanel(
-                viewModel: viewModel,
-                onSelectMemo: { memo in
-                    memoBeingCreated = memo
-                },
-                // "[관련 말씀 요약]" 항목을 고르면 `presentWordSummaryEditor`를 통해 별도
-                // 패널(`WordSummaryPanelController`)이 뜬다.
-                // ⚠️ 이 인자는 `selectedVerse`보다 앞에 와야 한다 — 레이블이 있어도 Swift는 선언
-                // 순서(`ChapterRelatedContentPanel`의 프로퍼티 순서)와 다르면 "Argument 'X' must precede
-                // argument 'Y'" 컴파일 에러를 낸다.
-                onSelectWordSummary: presentWordSummaryEditor,
-                // 정확히 절 하나가 선택돼 있을 때만 넘긴다(`ChapterRelatedContentPanel.selectedVerse` 참고).
-                selectedVerse: viewModel.selectedVerses.count == 1 ? viewModel.selectedVerses.first : nil,
-                onSelectVerseMention: handleVerseMentionSelected
-            )
-            .inspectorColumnWidth(min: 260, ideal: 300, max: 400)
+        // 관련 콘텐츠는 macOS에서 `.inspector`가 아니라 떠 있는 도구창(`RelatedContentPanelController`)으로 띄운다(2026-10-01).
+        // 인스펙터를 열면 창 폭에서 사이드바 + 본문 최소 폭 + 인스펙터가 빠듯해 분할 뷰가 자식 호스팅 뷰의 최소 크기를 제약 갱신 도중
+        // 계속 다시 알리는 순환에 빠져 "Update Constraints in Window pass" 한도 초과로 앱이 종료됐다(상세는 컨트롤러 파일 머리말).
+        // 열림/닫힘은 기존처럼 `isRelatedContentPresented` 하나로 맞춘다 — 툴바 버튼이 토글하고, 패널의 닫기 버튼은 `onClose`로 이 값을 내린다.
+        // 이 화면의 `.sheet`/`.popover`는 그대로이며, 메모·말씀 요약·언급 항목을 고르면 기존 콜백이 이 창에서 동작한다.
+        .onChange(of: isRelatedContentPresented) { _, newValue in
+            if newValue {
+                presentRelatedContentPanel()
+            } else {
+                RelatedContentPanelController.shared.hide(owner: ObjectIdentifier(viewModel))
+            }
         }
 #else
         // 관련 콘텐츠 보조 사이드 패널(`.inspector(isPresented:)`). 크래시의 원인은 `.inspector`가 아니라
@@ -663,15 +691,13 @@ private struct BibleReadingContentView: View {
 #endif
         .onDisappear {
             closeWordSummaryEditor()
-        }
-        .sheet(isPresented: $isHistoryPresented) {
-            BibleReadingHistorySheet(viewModel: viewModel) {
-                isHistoryPresented = false
-            }
             #if os(macOS)
-            .frame(minWidth: 360, minHeight: 420)
+            // 이 창(또는 성경 조회 화면)이 사라지면 그 창이 연 관련 콘텐츠 패널도 닫는다 — 패널은 이 화면의 `viewModel`에 묶여 있다.
+            RelatedContentPanelController.shared.hide(owner: ObjectIdentifier(viewModel))
             #endif
         }
+        // 조회 이력은 시트가 아니라 팝오버로 띄운다 — macOS는 `BibleToolRail`의 시계 아이콘, iOS는 아래 툴바 버튼에 붙는다
+        // (책갈피 목록과 같은 방식, 아이폰은 시스템이 시트로 바꾼다).
         // Bible 메뉴 "다음 장 ⌘]"/"이전 장 ⌘[", View 메뉴 "스크롤 동기화" — AppCommands.swift 참고.
         .focusedSceneValue(\.nextChapterAction) { viewModel.nextChapter() }
         .focusedSceneValue(\.previousChapterAction) { viewModel.previousChapter() }
@@ -679,15 +705,21 @@ private struct BibleReadingContentView: View {
             get: { viewModel.scrollSyncCoordinator.isEnabled },
             set: { viewModel.scrollSyncCoordinator.isEnabled = $0 }
         ))
+        // Bible 메뉴 "본문에서 찾기… ⌘F" — 일치 계산·표시·메뉴 연결은 `BibleChapterFind.swift`.
+        .bibleChapterFind(viewModel: viewModel, model: findModel)
         // `.navigationTitle`/`.toolbar`는 `.inspector`/`.sheet`보다 뒤(가장 바깥 레이어)에 둔다 — 안쪽에 두면
         // `.inspector`가 만드는 중간 레이어에 타이틀/툴바 프리퍼런스가 갇혀 바깥 NavigationStack에 전달되지 않을 가능성이 있다.
         .navigationTitle("성경 조회")
+        .macSerifTitle("성경 조회")
         // 이 화면만 자체 상단 바(`.safeAreaInset(edge: .top)`)가 하나 더 있어, 큰 제목(large title)이면 헤더가 비정상적으로 커진다
         // — inline 모드로 강제한다. macOS에는 이 모디파이어가 없어 `#if os(iOS)`로 감싼다.
         #if os(iOS)
         .navigationBarTitleDisplayMode(.inline)
         #endif
+        // macOS는 트레일링 아이콘이 본문 왼쪽 레일(`BibleToolRail`)로 옮겨져 툴바 항목이 없다(2026-10-02).
+        #if os(iOS)
         .toolbar { toolbarContent }
+        #endif
         // 시스템 내비게이션 바 배경을 테마에 맞춘다(`ThemedNavigationBarBackgroundModifier` 참고).
         .modifier(ThemedNavigationBarBackgroundModifier(color: settings.bibleBackgroundColor))
         #if os(iOS)
@@ -710,7 +742,8 @@ private struct BibleReadingContentView: View {
             viewModel.loadAvailableTranslations()
         }
         .onChange(of: BibleVerseNavigationRequest.shared.pendingTarget) { _, newValue in
-            guard let newValue, let book = BooksProvider.shared.book(id: newValue.bookId) else { return }
+            // 메인 창만 소비한다 — 보조 창(`isPrimaryWindow == false`)이 가져가면 이동·강조가 새 창에서 일어난다.
+            guard isPrimaryWindow, let newValue, let book = BooksProvider.shared.book(id: newValue.bookId) else { return }
             viewModel.selectBook(book, chapter: newValue.chapter)
             viewModel.highlightVerseTemporarily(newValue.verse)
             BibleVerseNavigationRequest.shared.clear()
@@ -843,6 +876,27 @@ private struct BibleReadingContentView: View {
         presentWordSummaryEditor(summary)
     }
 
+    #if os(macOS)
+    /// 관련 콘텐츠 떠 있는 도구창을 연다(이미 떠 있으면 앞으로). 패널은 SwiftUI 창 계층 밖이라 `modelContext`와 `openWindow`를 명시적으로
+    /// 넘긴다. 패널이 어떻게 닫히든(닫기 버튼 포함) `onClose`가 "열림" 표시를 내려 툴바 버튼 상태와 어긋나지 않는다.
+    private func presentRelatedContentPanel() {
+        let root = RelatedContentPanelRoot(
+            viewModel: viewModel,
+            onSelectMemo: { memo in memoBeingCreated = memo },
+            onSelectWordSummary: presentWordSummaryEditor,
+            onSelectVerseMention: handleVerseMentionSelected,
+            openWindow: openWindow
+        )
+        .environment(\.modelContext, modelContext)
+        RelatedContentPanelController.shared.present(
+            content: AnyView(root),
+            ownerToken: ObjectIdentifier(viewModel)
+        ) {
+            isRelatedContentPresented = false
+        }
+    }
+    #endif
+
     /// 새로 만들기와 기존 항목 선택이 공유하는 "편집기 열기" 절차 —
     /// 번역본 열 좁히기/왼쪽 사이드바 닫기를 동일하게 적용한다.
     private func presentWordSummaryEditor(_ summary: VerseSummary) {
@@ -973,7 +1027,9 @@ private struct BibleReadingContentView: View {
                         )
                     },
                     // 아이폰은 컬럼마다 별도 페이지라 모든 페이지의 장 끝에 붙인다.
-                    chapterEndActions: chapterEndActions
+                    chapterEndActions: chapterEndActions,
+                    findMatchVerses: findModel.matchedVerses(in: column.id),
+                    currentFindVerse: findModel.currentVerse
                 )
                 .tag(column.id)
             }
@@ -1049,10 +1105,29 @@ private struct BibleReadingContentView: View {
                         )
                     },
                     // 여러 컬럼이면 버튼이 중복되지 않게 첫 컬럼에만 붙인다.
-                    chapterEndActions: index == 0 ? chapterEndActions : nil
+                    chapterEndActions: index == 0 ? chapterEndActions : nil,
+                    findMatchVerses: findModel.matchedVerses(in: column.id),
+                    currentFindVerse: findModel.currentVerse
                 )
                 .frame(maxWidth: .infinity)
             }
+        }
+    }
+
+    /// 찾기 막대의 다음/이전 — 일치 절로 옮기고 모든 컬럼을 그 절로 스크롤한다(검색 결과 이동과 같은 `highlightVerseTemporarily` 경로).
+    private func findNext() {
+        findModel.next()
+        scrollToCurrentFindMatch()
+    }
+
+    private func findPrevious() {
+        findModel.previous()
+        scrollToCurrentFindMatch()
+    }
+
+    private func scrollToCurrentFindMatch() {
+        if let verse = findModel.currentVerse {
+            viewModel.highlightVerseTemporarily(verse)
         }
     }
 
@@ -1229,9 +1304,9 @@ private struct BibleReadingContentView: View {
             }
         }
         // `memoBeingCreated`와 같은 패턴 — `Sermon`이 `id: UUID`를 직접 선언하므로 `.sheet(item:)`에 바로 쓸 수 있다.
-        // 여기는 모든 플랫폼에서 `.sheet`(모달)인데 `SermonEditorView` 내부 "취소" 버튼은 `!isPhoneIdiom`일 때만
-        // 보이므로, 아이폰에서는 이 시트를 감싸는 `NavigationStack` 쪽에서 별도로 "취소" 버튼을 더한다
-        // (아이패드·맥은 내부 버튼과 중복되지 않도록 추가하지 않는다).
+        // 아이패드·맥의 "설교작성"은 새 창("sermon-new")으로 열리므로(`startSermonFromSelectedVerses`) 이 시트는 사실상 아이폰
+        // 전용이다. `SermonEditorView`의 페이지 안 "완료/취소" 줄은 `!isPhoneIdiom`일 때만 보이므로, 아이폰에서는 이 시트를
+        // 감싸는 `NavigationStack` 쪽에서 별도로 "취소" 버튼을 더한다.
         .sheet(item: $pendingSermonFromVerses) { sermon in
             NavigationStack {
                 SermonEditorView(
@@ -1462,6 +1537,16 @@ private struct BibleReadingContentView: View {
             "\(bookName) \(chapter):\(verse.verse) \(verse.content)"
         }
 
+        // 아이패드·맥은 새 창("sermon-new")으로 연다 — 선택한 절 본문/위치를 창에 실어 보내고 창이 같은 내용으로 새 설교를 만든다
+        // (내 설교의 "새 설교"와 같은 창·같은 완료/취소 위치). 아이폰은 다중 씬을 지원하지 않아 아래 시트 경로를 그대로 쓴다.
+        if !isPhone {
+            let seeds = zip(selectedBibleVerses, paragraphTexts).map { verse, text in
+                SermonNewTarget.VerseSeed(bookId: verse.bookId, chapter: verse.chapter, verse: verse.verse, text: text)
+            }
+            openWindow(id: "sermon-new", value: SermonNewTarget(verseSeeds: seeds))
+            viewModel.clearVerseSelection()
+            return
+        }
         let settings = UserSettingsStore.shared
         let (rtf, plain, styles) = SermonParagraphStyleCodec.buildVerseQuoteDocument(verseTexts: paragraphTexts, settings: settings)
         let sermon = Sermon(title: "", contentHtml: rtf, contentText: plain, paragraphStyles: styles)
@@ -1476,6 +1561,7 @@ private struct BibleReadingContentView: View {
         viewModel.clearVerseSelection()
     }
 
+    #if os(iOS)
     @ToolbarContentBuilder
     private var toolbarContent: some ToolbarContent {
         // `chapterNavigationControls`는 좁은 화면(아이패드 등)에서 통째로 사라지는 문제가 있어
@@ -1579,6 +1665,11 @@ private struct BibleReadingContentView: View {
                         Label("조회 이력", systemImage: "clock")
                     }
                     .help("최근 조회한 책/장 이력 보기")
+                    .popover(isPresented: $isHistoryPresented) {
+                        BibleReadingHistorySheet(viewModel: viewModel) {
+                            isHistoryPresented = false
+                        }
+                    }
                 }
             }
             // 관련 콘텐츠 패널(개요/메모/연구문서) 토글. 항상 활성화한다.
@@ -1614,7 +1705,8 @@ private struct BibleReadingContentView: View {
                 .help("성경 조회 새 창으로 열기")
             }
         }
-        if viewModel.availableTranslations.count > viewModel.maxColumns && !hidesToolbarIconsWhileEditingSummary {
+        // 활성 번역본이 둘 이상이면 창마다 1~`maxColumns`개를 고를 수 있게 보인다(`BibleToolRail.showTranslationPicker`와 같은 규칙).
+        if viewModel.availableTranslations.count > 1 && !hidesToolbarIconsWhileEditingSummary {
             ToolbarItem(placement: trailingIconPlacement) {
                 Button {
                     isTranslationPickerPresented = true
@@ -1637,6 +1729,7 @@ private struct BibleReadingContentView: View {
             }
         }
     }
+    #endif
 
     /// iOS(아이폰/아이패드)는 `compactChapterNavigationBar`, macOS는 `chapterNavigationControlsStandard`를 쓴다.
     @ViewBuilder

@@ -100,8 +100,11 @@ struct TranslationColumnView: View {
         )
     }
     /// 장 끝(마지막 절 아래)에 붙일 이전 장/다음 장 이동 + 장 개인 묵상 버튼. nil이면 붙이지 않는다.
-    /// 여러 컬럼을 나란히 볼 때는 호출부가 첫 컬럼에만 넘긴다. ⚠️ 마지막에 선언해야 호출부 인자 순서와 맞는다.
+    /// 여러 컬럼을 나란히 볼 때는 호출부가 첫 컬럼에만 넘긴다. ⚠️ 이 아래 두 값과 함께 마지막에 선언해야 호출부 인자 순서와 맞는다.
     var chapterEndActions: ChapterEndActions? = nil
+    /// "본문에서 찾기"(⌘F)에서 이 컬럼에 일치한 절 번호와, 지금 보고 있는 일치 절. 비어 있으면 기존 모습 그대로다.
+    var findMatchVerses: Set<Int> = []
+    var currentFindVerse: Int? = nil
 
     /// 지금 뷰포트 중앙(anchor: .center)에 있는 절 번호 — `.scrollPosition(id:)`가 스크롤에 맞춰
     /// 읽어 주고(리더), 값을 대입하면 그 절이 중앙에 오도록 스크롤한다(팔로워).
@@ -121,6 +124,8 @@ struct TranslationColumnView: View {
     /// `forceCenterAnchorTemporarily()`가 예약한 플래그 해제 작업을 취소·재예약하기 위해 보관한다.
     /// `guardReleaseWorkItem`(팔로워 반복 응답 방지)과는 별개 목적이라 독립적으로 관리한다.
     @State private var centerAnchorReleaseWorkItem: DispatchWorkItem?
+    /// `scrollToHighlightedVerseAfterLayout`의 지연 재시도를 최신 요청 하나만 유효하게 만드는 토큰.
+    @State private var highlightScrollToken = 0
 
     /// 가드/플래그 해제 시각을 애니메이션 지속 시간과 맞추기 위한 상수. `respondToSyncEvent`의
     /// `withAnimation` duration과 반드시 같은 값을 써야 한다.
@@ -218,6 +223,7 @@ struct TranslationColumnView: View {
     /// macOS/아이패드 전용. 리더/팔로워 실시간 스크롤 동기화가 필요한 유일한 경로라
     /// `.scrollPosition(id:anchor:)` 기반이다. 행 구성은 `verseRowView(for:)`를 아이폰 쪽과 공유한다.
     private var columnScrollViewSyncTracking: some View {
+        ScrollViewReader { proxy in
         ScrollView {
             LazyVStack(alignment: .leading, spacing: CGFloat(settings.bibleVerseSpacing)) {
                 ForEach(verses, id: \.verse) { verse in
@@ -243,8 +249,9 @@ struct TranslationColumnView: View {
         // `.onAppear`에서 애니메이션 없이 맞춘다.
         .onAppear {
             if let highlightedVerse {
-                forceCenterAnchorTemporarily()
-                centerVerseID = highlightedVerse
+                // ⚠️ 이 시점엔 LazyVStack이 아직 배치되기 전이라 `centerVerseID` 대입만으로는 macOS에서
+                // 스크롤이 일어나지 않는다. 배치 이후 `proxy.scrollTo`를 지연 재시도한다.
+                scrollToHighlightedVerseAfterLayout(highlightedVerse, proxy: proxy, animated: false)
             }
         }
         .onChange(of: centerVerseID) { _, newValue in
@@ -269,10 +276,7 @@ struct TranslationColumnView: View {
         // `VerseRow.isHighlighted`, 자동 해제 타이머는 `BibleReadingViewModel.highlightVerseTemporarily`가 맡는다.
         .onChange(of: highlightedVerse) { _, newValue in
             guard let newValue else { return }
-            forceCenterAnchorTemporarily()
-            withAnimation(.easeInOut(duration: Self.scrollAnimationDuration)) {
-                centerVerseID = newValue
-            }
+            scrollToHighlightedVerseAfterLayout(newValue, proxy: proxy, animated: true)
         }
         // 책/장이 바뀌면 이전 장의 중앙 절 id를 그대로 들고 있지 않도록 리셋한다. 안 그러면 새 장에 같은
         // 절 번호가 있을 때 `.scrollPosition(id:)`가 그 번호로 다시 스크롤해 새 장을 맨 위부터 보여주는
@@ -280,6 +284,7 @@ struct TranslationColumnView: View {
         .onChange(of: localizedBookChapterLabel) { _, _ in
             resetForChapterChange()
         }
+        } // ScrollViewReader
     }
 
     /// 아이폰 전용. `.scrollPosition`/`.scrollTargetLayout()` 없이 `ScrollViewReader.scrollTo`(호출 시점
@@ -339,6 +344,8 @@ struct TranslationColumnView: View {
         let row = VerseRow(
             verse: verse,
             isHighlighted: verse.verse == highlightedVerse,
+            isFindMatch: findMatchVerses.contains(verse.verse),
+            isCurrentFindMatch: verse.verse == currentFindVerse && findMatchVerses.contains(verse.verse),
             isSelected: selectedVerses.contains(verse.verse),
             isBookmarked: isBookmarkedProvider(verse.verse),
             highlights: highlightsProvider(verse.verse),
@@ -472,6 +479,30 @@ struct TranslationColumnView: View {
         DispatchQueue.main.asyncAfter(deadline: .now() + Self.scrollAnimationDuration, execute: releaseWorkItem)
     }
 
+    /// macOS/아이패드 전용. 검색 결과 이동 등으로 `highlightedVerse`가 채워질 때 그 절을 화면 중앙으로 스크롤한다.
+    /// 장이 바뀌거나 화면이 새로 만들어진 직후에는 LazyVStack 배치가 끝나기 전이라 `.scrollPosition(id:)` 대입만으로는
+    /// 스크롤이 무시되므로, (1) 즉시 대입 + (2) 배치 이후 `ScrollViewProxy.scrollTo`를 짧은 간격으로 재시도한다.
+    /// `highlightScrollToken`으로 더 새로운 요청이 오면 이전 재시도를 무효화한다(`@State`는 참조 저장이라 클로저에서도 최신값).
+    private func scrollToHighlightedVerseAfterLayout(_ verse: Int, proxy: ScrollViewProxy, animated: Bool) {
+        highlightScrollToken += 1
+        let token = highlightScrollToken
+        forceCenterAnchorTemporarily()
+        if animated {
+            withAnimation(.easeInOut(duration: Self.scrollAnimationDuration)) {
+                centerVerseID = verse
+            }
+        } else {
+            centerVerseID = verse
+        }
+        for delay in [0.08, 0.3, 0.7] as [TimeInterval] {
+            DispatchQueue.main.asyncAfter(deadline: .now() + delay) {
+                guard highlightScrollToken == token else { return }
+                forceCenterAnchorTemporarily()
+                proxy.scrollTo(verse, anchor: .center)
+            }
+        }
+    }
+
     private func resetForChapterChange() {
         guardReleaseWorkItem?.cancel()
         // 장이 바뀌는 순간 이전 장의 디바운스된 보고가 뒤늦게 나가 새 장의 첫 스크롤 위치를 흔들지
@@ -590,6 +621,9 @@ private struct MarginalNoteFootnoteList: View {
 private struct VerseRow: View {
     let verse: BibleVerse
     let isHighlighted: Bool
+    /// "본문에서 찾기" 일치 절 여부 / 그중 지금 보고 있는 절 — `isHighlighted`(이동 대상 임시 강조)와 별개다.
+    var isFindMatch: Bool = false
+    var isCurrentFindMatch: Bool = false
     /// 클립보드 복사용으로 선택된 절인지 — `isHighlighted`(검색 결과 이동 대상 표시)와는
     /// 별개 개념이다.
     let isSelected: Bool
@@ -753,6 +787,12 @@ private struct VerseRow: View {
         // 줄인다(스크롤 성능). ⚠️ `.clipShape`는 내용까지 잘라냈지만 이 카드의 내용은 위
         // `.padding`으로 이미 안쪽에 있어 시각적으로 동일해야 한다.
         .background(backgroundColor, in: RoundedRectangle(cornerRadius: 6))
+        .overlay {
+            // 지금 보고 있는 찾기 일치 절은 배경만으로는 여러 일치 사이에서 구분되기 어려워 테두리를 더한다.
+            if isCurrentFindMatch {
+                RoundedRectangle(cornerRadius: 6).stroke(Color.orange.opacity(0.9), lineWidth: 1.5)
+            }
+        }
         .overlay(alignment: .leading) {
             // 배경 틴트만으로는 라이트 모드에서 눈에 잘 안 띌 수 있어, 선택된
             // 절에는 왼쪽에 강조색 세로선을 하나 더 그어 명확히 한다.
@@ -1035,6 +1075,9 @@ private struct VerseRow: View {
     /// 사용자가 직접 고른 상태라, 놓치면 엉뚱한 절이 복사될 수 있다.
     private var backgroundColor: Color {
         if isSelected { return Color("AccentColor").opacity(0.28) }
+        // 찾기 일치는 절 전체 배경으로만 알린다(글자 단위 강조는 하지 않음 — `BibleChapterFind.swift` 참고).
+        if isCurrentFindMatch { return Color.yellow.opacity(0.34) }
+        if isFindMatch { return Color.yellow.opacity(0.18) }
         if isHighlighted { return Color("AccentColor").opacity(0.15) }
         return Color.clear
     }

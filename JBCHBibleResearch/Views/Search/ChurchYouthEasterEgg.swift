@@ -185,7 +185,7 @@ struct ChurchYouthEasterEggView: View {
                 .foregroundStyle(.white.opacity(0.9))
                 .frame(maxWidth: 460)
 
-            // 화면 가운데에 5장씩 2줄 — 어떤 사진인지 정도만 보이게 한다.
+            // 한 줄 4장, 마지막 줄은 가운데 정렬(10장이면 4/4/2) — 사진은 크게 보여 준다.
             if !EasterEggPhotos.availableNames.isEmpty {
                 EasterEggPhotoStrip(names: EasterEggPhotos.availableNames)
             }
@@ -299,40 +299,90 @@ private enum EasterEggPhotos {
     }
 }
 
-/// 정사각 썸네일 격자(한 줄 5장, 2줄). 사진 속 인물이 너무 또렷하게 드러나지 않도록 한 장을 크지 않게(최대 88pt) 보여주고,
-/// 화면이 좁으면 칸이 같은 비율로 줄어든다(5칸 × 88 + 간격 4 × 6 = 464pt 미만이면 축소).
+/// 정사각 썸네일 격자(한 줄 4장, 마지막 줄은 남는 장수만큼 가운데 정렬 — 10장이면 4/4/2).
+/// 한 장은 최대 150pt이고, 화면이 좁으면 4칸이 같은 비율로 줄어든다(4칸 × 150 + 간격 3 × 10 = 630pt 미만이면 축소).
+/// 좁은 화면(아이폰)에서도 사진이 커 보이도록 호출부가 인사말의 좌우 여백 일부를 사진 줄에서만 덜어 낸다.
 /// 탭해서 확대하거나 넘기는 동작은 없다. 사진은 가운데 기준으로 정사각형에 맞게 잘린다(`scaledToFill`).
 private struct EasterEggPhotoStrip: View {
     let names: [String]
 
-    private static let columnCount = 5
-    private static let maxSide: CGFloat = 88
-    private static let spacing: CGFloat = 6
+    static let columnCount = 4
+    static let maxSide: CGFloat = 150
+    static let spacing: CGFloat = 10
 
     var body: some View {
-        LazyVGrid(
-            columns: Array(repeating: GridItem(.flexible(maximum: Self.maxSide), spacing: Self.spacing), count: Self.columnCount),
-            spacing: Self.spacing
-        ) {
+        CenteredPhotoGridLayout(columns: Self.columnCount, maxSide: Self.maxSide, spacing: Self.spacing) {
             ForEach(names, id: \.self) { name in
                 Color.clear
-                    .aspectRatio(1, contentMode: .fit)
                     .overlay {
                         Image(name)
                             .resizable()
                             .scaledToFill()
                     }
-                    .clipShape(RoundedRectangle(cornerRadius: 12, style: .continuous))
+                    .clipShape(RoundedRectangle(cornerRadius: 14, style: .continuous))
                     .overlay {
-                        RoundedRectangle(cornerRadius: 12, style: .continuous)
+                        RoundedRectangle(cornerRadius: 14, style: .continuous)
                             .strokeBorder(EasterEggPalette.gold.opacity(0.45), lineWidth: 1)
                     }
             }
         }
-        .frame(maxWidth: CGFloat(Self.columnCount) * Self.maxSide + CGFloat(Self.columnCount - 1) * Self.spacing)
         .frame(maxWidth: .infinity)
+        // 인사말은 좌우 28pt 여백을 쓰는데 사진 줄만 16pt씩 덜어 내(실제 여백 12pt) 좁은 화면에서도 사진을 크게 보여 준다.
+        .padding(.horizontal, -16)
         .accessibilityElement(children: .ignore)
         .accessibilityLabel("청년회 사진 \(names.count)장")
+    }
+}
+
+/// 한 줄에 `columns`장씩 정사각형으로 배치하고, 각 줄(특히 장수가 모자란 마지막 줄)을 가운데 정렬하는 레이아웃.
+/// 한 변은 제안된 너비에서 계산한다(`min(maxSide, (너비 - 간격 × (columns-1)) / columns)`) — 모든 줄이 같은 크기를 쓴다.
+private struct CenteredPhotoGridLayout: Layout {
+    let columns: Int
+    let maxSide: CGFloat
+    let spacing: CGFloat
+
+    private func side(forWidth width: CGFloat) -> CGFloat {
+        let available = (width - spacing * CGFloat(columns - 1)) / CGFloat(columns)
+        return max(1, min(maxSide, available))
+    }
+
+    /// 줄별 장수. 기본은 `columns`장씩이고, 마지막 줄에 1장만 남으면(예: 4열에서 9장 → 4/4/1) 혼자 남지 않도록
+    /// 바로 윗줄에서 1장을 내려 마지막 줄을 2장으로 맞춘다(예: 4열에서 9장 4/4/1 → 4/3/2). 10장은 4/4/2 그대로다.
+    private func rowCounts(for total: Int) -> [Int] {
+        var counts = Array(repeating: columns, count: total / columns)
+        let remainder = total % columns
+        if remainder > 0 { counts.append(remainder) }
+        if remainder == 1, counts.count >= 2 {
+            counts[counts.count - 2] -= 1
+            counts[counts.count - 1] += 1
+        }
+        return counts
+    }
+
+    func sizeThatFits(proposal: ProposedViewSize, subviews: Subviews, cache: inout ()) -> CGSize {
+        guard !subviews.isEmpty else { return .zero }
+        let width = proposal.width ?? (maxSide * CGFloat(columns) + spacing * CGFloat(columns - 1))
+        let side = side(forWidth: width)
+        let rows = rowCounts(for: subviews.count).count
+        return CGSize(width: width, height: CGFloat(rows) * side + CGFloat(rows - 1) * spacing)
+    }
+
+    func placeSubviews(in bounds: CGRect, proposal: ProposedViewSize, subviews: Subviews, cache: inout ()) {
+        guard !subviews.isEmpty else { return }
+        let side = side(forWidth: bounds.width)
+        var index = 0
+        for (row, countInRow) in rowCounts(for: subviews.count).enumerated() {
+            let rowWidth = CGFloat(countInRow) * side + CGFloat(countInRow - 1) * spacing
+            let startX = bounds.minX + (bounds.width - rowWidth) / 2
+            for column in 0..<countInRow {
+                subviews[index].place(
+                    at: CGPoint(x: startX + CGFloat(column) * (side + spacing), y: bounds.minY + CGFloat(row) * (side + spacing)),
+                    anchor: .topLeading,
+                    proposal: ProposedViewSize(width: side, height: side)
+                )
+                index += 1
+            }
+        }
     }
 }
 
@@ -678,22 +728,13 @@ private struct YouthRunnerGameView: View {
     @State private var isNewRecord = false
 
     var body: some View {
-        GeometryReader { proxy in
-            TimelineView(.animation) { timeline in
-                Canvas { context, canvasSize in
-                    draw(&context, size: canvasSize, topInset: proxy.safeAreaInsets.top, now: timeline.date)
-                }
-                .onChange(of: timeline.date) { _, newDate in
-                    game.step(now: newDate)
-                }
-            }
-            .onChange(of: proxy.size, initial: true) { _, newSize in
-                game.size = newSize
-            }
+        // 점수는 Canvas 안 글자가 아니라 실제 SwiftUI 뷰로 그린다 — `displayScore`(@Observable)가 바뀔 때마다 즉시 갱신되고
+        // 안전 영역(노치/상태 표시줄) 안쪽에 놓인다. 게임 화면은 안전 영역까지 채우므로(`gameLayer`) 겹쳐 둔다.
+        ZStack(alignment: .topLeading) {
+            gameLayer
+            scoreHUD
+                .allowsHitTesting(false)
         }
-        .ignoresSafeArea()
-        .contentShape(Rectangle())
-        .onTapGesture { game.handleInput() }
         .onKeyPress(keys: [.space, .upArrow], phases: .down) { _ in
             game.handleInput()
             return .handled
@@ -712,6 +753,42 @@ private struct YouthRunnerGameView: View {
         .accessibilityLabel("점프 게임. 두 번 탭하면 점프합니다.")
         .accessibilityAddTraits(.isButton)
         .accessibilityAction { game.handleInput() }
+    }
+
+    /// 실시간 점수/최고 점수 — 달리는 동안 계속 보인다(닫기 버튼은 오른쪽 위라 겹치지 않는다).
+    private var scoreHUD: some View {
+        VStack(alignment: .leading, spacing: 2) {
+            Text("점수 \(game.displayScore)")
+                .font(.system(.title2, design: .rounded).weight(.bold))
+                .monospacedDigit()
+                .foregroundStyle(.white)
+            Text("최고 \(max(bestScore, game.displayScore))")
+                .font(.system(.footnote, design: .rounded).weight(.semibold))
+                .monospacedDigit()
+                .foregroundStyle(.white.opacity(0.7))
+        }
+        .padding(.leading, 20)
+        .padding(.top, 16)
+        .accessibilityElement(children: .combine)
+    }
+
+    private var gameLayer: some View {
+        GeometryReader { proxy in
+            TimelineView(.animation) { timeline in
+                Canvas { context, canvasSize in
+                    draw(&context, size: canvasSize, topInset: proxy.safeAreaInsets.top, now: timeline.date)
+                }
+                .onChange(of: timeline.date) { _, newDate in
+                    game.step(now: newDate)
+                }
+            }
+            .onChange(of: proxy.size, initial: true) { _, newSize in
+                game.size = newSize
+            }
+        }
+        .ignoresSafeArea()
+        .contentShape(Rectangle())
+        .onTapGesture { game.handleInput() }
     }
 
     // MARK: 오버레이 문구
@@ -757,6 +834,72 @@ private struct YouthRunnerGameView: View {
         .padding(.vertical, 20)
         .background(.black.opacity(0.35), in: RoundedRectangle(cornerRadius: 20))
         .padding(.horizontal, 24)
+    }
+
+    // MARK: 달리는 사람
+
+    /// 선으로 그린 달리는 사람(머리·몸통·두 팔·두 다리, 관절 2개씩). 이미지 한 장을 움직이는 대신 걸음 위상(`phase`)으로 사지를 매 프레임
+    /// 다시 계산해 팔다리가 번갈아 휘두르는 달리기 애니메이션이 된다. 점프 중(`airborne`)엔 다리를 접고 팔을 들어 올린다.
+    /// 각도는 "똑바로 아래"가 0이고 앞(+x)으로 갈수록 커진다. 엉덩이 높이는 두 다리 중 더 긴 쪽이 땅(`footY`)에 닿도록 매 프레임 맞춘다.
+    private func drawRunner(_ context: inout GraphicsContext, centerX: CGFloat, footY: CGFloat, phase: CGFloat, airborne: Bool) {
+        let color = EasterEggPalette.gold
+        let style = StrokeStyle(lineWidth: 4.5, lineCap: .round, lineJoin: .round)
+        let thigh: CGFloat = 10, shin: CGFloat = 10, torso: CGFloat = 14, upperArm: CGFloat = 7, foreArm: CGFloat = 7
+        let lean: CGFloat = 0.22   // 달릴 때 몸을 앞으로 숙이는 정도(rad)
+
+        struct Pose { var thigh: CGFloat; var knee: CGFloat; var arm: CGFloat; var elbow: CGFloat }
+        func pose(offset: CGFloat, isNear: Bool) -> Pose {
+            if airborne {
+                return isNear
+                    ? Pose(thigh: 0.9, knee: 0.9, arm: 2.3, elbow: 0.3)
+                    : Pose(thigh: -0.55, knee: 0.5, arm: -0.9, elbow: 1.0)
+            }
+            let angle = phase + offset
+            return Pose(
+                thigh: 0.85 * sin(angle),
+                knee: 0.5 + 0.8 * max(0, cos(angle)),   // 다리가 앞으로 나올 때 무릎을 더 접는다
+                arm: -0.9 * sin(angle),                  // 팔은 같은 쪽 다리와 반대로 휘두른다
+                elbow: 1.2
+            )
+        }
+        let near = pose(offset: 0, isNear: true)
+        let far = pose(offset: .pi, isNear: false)
+
+        func reach(_ p: Pose) -> CGFloat { thigh * cos(p.thigh) + shin * cos(p.thigh - p.knee) }
+        let hip = CGPoint(x: centerX - 2, y: footY - max(reach(near), reach(far)))
+        let shoulder = CGPoint(x: hip.x + sin(lean) * torso, y: hip.y - cos(lean) * torso)
+        let head = CGPoint(x: shoulder.x + sin(lean) * 8, y: shoulder.y - cos(lean) * 8)
+
+        func point(_ origin: CGPoint, _ angle: CGFloat, _ length: CGFloat) -> CGPoint {
+            CGPoint(x: origin.x + sin(angle) * length, y: origin.y + cos(angle) * length)
+        }
+        func limb(_ origin: CGPoint, _ first: CGFloat, _ firstLength: CGFloat, _ second: CGFloat, _ secondLength: CGFloat) -> Path {
+            let joint = point(origin, first, firstLength)
+            var path = Path()
+            path.move(to: origin)
+            path.addLine(to: joint)
+            path.addLine(to: point(joint, second, secondLength))
+            return path
+        }
+        func leg(_ p: Pose) -> Path { limb(hip, p.thigh, thigh, p.thigh - p.knee, shin) }
+        func arm(_ p: Pose) -> Path { limb(shoulder, p.arm, upperArm, p.arm + p.elbow, foreArm) }
+
+        // 먼 쪽 팔다리는 조금 흐리게 먼저 그려 입체감을 준다.
+        let farColor = color.opacity(0.55)
+        context.stroke(leg(far), with: .color(farColor), style: style)
+        context.stroke(arm(far), with: .color(farColor), style: style)
+
+        var body = Path()
+        body.move(to: hip)
+        body.addLine(to: shoulder)
+        context.stroke(body, with: .color(color), style: style)
+        context.fill(
+            Path(ellipseIn: CGRect(x: head.x - 5.5, y: head.y - 5.5, width: 11, height: 11)),
+            with: .color(color)
+        )
+
+        context.stroke(leg(near), with: .color(color), style: style)
+        context.stroke(arm(near), with: .color(color), style: style)
     }
 
     // MARK: 그리기
@@ -937,31 +1080,22 @@ private struct YouthRunnerGameView: View {
                 with: .color(.black.opacity(0.3))
             )
         }
-        let bob: CGFloat = (game.phase == .playing && lift == 0) ? sin(game.distance / 14) * 2 : 0
-        var runner = context.resolve(Image(systemName: "figure.run").renderingMode(.template))
-        runner.shading = .color(EasterEggPalette.gold)
+        // 달리는 걸음 위상 — 달리는 동안은 달린 거리에 비례(빨라질수록 걸음도 빨라진다), 대기 중엔 제자리 조깅, 넘어진 뒤엔 멈춘 자세.
+        let stridePhase: CGFloat
+        switch game.phase {
+        case .playing: stridePhase = game.distance / 40
+        case .ready: stridePhase = CGFloat(now.timeIntervalSinceReferenceDate) * 7
+        case .over: stridePhase = 0.5
+        }
         // 골짜기에 빠지는 동안은 아래로 내려가며 어둠 속으로 사라진다.
         context.opacity = max(0, 1 - fall / YouthRunnerGame.fallFadeDepth)
-        context.draw(
-            runner,
-            in: CGRect(x: playerX, y: groundY - lift - playerSize + bob + fall, width: playerSize, height: playerSize)
+        drawRunner(
+            &context, centerX: playerX + playerSize / 2, footY: groundY - lift + fall,
+            phase: stridePhase, airborne: lift > 0
         )
         context.opacity = 1
 
-        // 점수/최고 점수/응원 문구
-        let hudTop = topInset + 18
-        context.draw(
-            Text("점수 \(game.displayScore)")
-                .font(.system(.title3, design: .rounded).weight(.bold))
-                .foregroundStyle(.white),
-            at: CGPoint(x: 20, y: hudTop), anchor: .topLeading
-        )
-        context.draw(
-            Text("최고 \(max(bestScore, game.displayScore))")
-                .font(.system(.footnote, design: .rounded).weight(.semibold))
-                .foregroundStyle(.white.opacity(0.7)),
-            at: CGPoint(x: 20, y: hudTop + 28), anchor: .topLeading
-        )
+        // 응원 문구(점수/최고 점수는 `scoreHUD`가 실제 뷰로 그린다)
         if let message = game.milestoneText, now < game.milestoneExpires {
             context.draw(
                 Text(message)

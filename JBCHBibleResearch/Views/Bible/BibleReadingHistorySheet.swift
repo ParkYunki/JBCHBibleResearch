@@ -2,33 +2,36 @@
 //  BibleReadingHistorySheet.swift
 //  JBCHBibleResearch
 //
-//  S1 툴바에서 시트로 띄우는 성경 조회 이력 화면. 항목을 탭하면 그 책/장으로 이동한 뒤
-//  시트를 닫는다(다시 조회한 것이므로 그 이동도 새 이력으로 기록된다 —
+//  성경 조회 이력 레이어. 2026-10-02부터 책갈피 목록(`BookmarkListPopover`)과 같은 방식 — 레일/툴바 아이콘에 붙는
+//  팝오버(아이폰은 시트로 자동 전환) — 으로 띄우며, 머리·구분선·행·빈 상태도 같은 공통 부품
+//  (`BibleListLayerParts.swift`)을 쓴다. 타입 이름의 "Sheet"는 예전 표시 방식의 흔적이라 이름은 바꾸지 않았다.
+//  항목을 탭하면 그 책/장으로 이동한 뒤 레이어를 닫는다(다시 조회한 것이므로 그 이동도 새 이력으로 기록된다 —
 //  `BibleReadingViewModel.jumpToHistoryEntry` 참고).
 //
 //  최근 1개월 이력(`BibleReadingViewModel.fetchHistory()`가 필터링)을 오늘/어제/그저께/
 //  이번주/지난주/이번달로 그룹핑해 보여준다. 그룹 판정은 `Calendar.current`의 day 기준
 //  판정을 한 곳에 모아 항목 하나가 정확히 한 버킷에만 들어가게 한다
-//  (`SidebarNavigationView.quickItemDateBucket(for:)`와 같은 원칙).
+//  (`SidebarNavigationView.quickItemDateBucket(for:)`와 같은 원칙). 그룹핑은 열 때 한 번만 계산해
+//  `@State`에 담는다(계산 프로퍼티로 두면 화면이 다시 그려질 때마다 항목 수 × 버킷 수만큼 날짜 판정을 반복한다).
 //
 //  시각 표기는 버킷에 맞춘다 — 오늘/어제/그저께는 섹션 헤더가 날짜를 알려주므로 시분초만,
 //  이번주/지난주/이번달은 여러 날이 섞이므로 날짜+시분을 보여 한 줄에 들어가게 한다.
-//
-//  헤더는 시스템 내비게이션 바 대신 `BookmarkListPopover.header`/
-//  `TranslationPickerPopover.header`와 같은 커스텀 헤더(제목 + 개수 배지 + 원형 닫기 버튼)를
-//  쓴다 — 시스템 내비게이션 바는 실제 배경이 아니라 앱 전체 라이트/다크 모드만 보고 타이틀
-//  색을 정해 테마 배경과 어긋나기 때문이다.
-//
 
 import SwiftUI
 import BibleResearchModels
+#if os(iOS)
+import UIKit
+#endif
 
 struct BibleReadingHistorySheet: View {
     private var settings: UserSettingsStore { .shared }
     let viewModel: BibleReadingViewModel
     var onDismiss: () -> Void
 
-    @State private var entries: [BibleReadingHistoryEntry] = []
+    /// 버킷별로 나눈 이력(최신순 유지). 열 때 한 번 계산한다.
+    @State private var sections: [HistorySection] = []
+    /// 머리 배지에 보일 전체 개수.
+    @State private var totalCount = 0
 
     /// 오늘/어제/그저께 행처럼 섹션 헤더가 이미 날짜를 알려주는 경우, 시분초만 보여준다.
     private static let timeOnlyFormatter: DateFormatter = {
@@ -63,6 +66,12 @@ struct BibleReadingHistorySheet: View {
         }
     }
 
+    private struct HistorySection: Identifiable {
+        let bucket: HistoryDateBucket
+        let entries: [BibleReadingHistoryEntry]
+        var id: HistoryDateBucket { bucket }
+    }
+
     private func bucket(for date: Date) -> HistoryDateBucket {
         let calendar = Calendar.current
         if calendar.isDateInToday(date) { return .today }
@@ -81,159 +90,92 @@ struct BibleReadingHistorySheet: View {
         return .thisMonth
     }
 
-    /// `entries`(이미 최신순 + 최근 1개월로 정리된 값)를 버킷별로 나눈다 — 각 버킷 내부에서도
-    /// 최신순 정렬이 유지된다.
-    private var groupedEntries: [(bucket: HistoryDateBucket, entries: [BibleReadingHistoryEntry])] {
-        HistoryDateBucket.allCases.compactMap { bucket in
-            let items = entries.filter { self.bucket(for: $0.viewedAt) == bucket }
-            return items.isEmpty ? nil : (bucket, items)
+    /// `entries`(이미 최신순 + 최근 1개월로 정리된 값)를 버킷별로 나눈다 — 항목마다 한 번만 판정하고,
+    /// 각 버킷 내부의 최신순 정렬은 입력 순서 그대로 유지된다.
+    private func makeSections(from entries: [BibleReadingHistoryEntry]) -> [HistorySection] {
+        var byBucket: [HistoryDateBucket: [BibleReadingHistoryEntry]] = [:]
+        for entry in entries {
+            byBucket[bucket(for: entry.viewedAt), default: []].append(entry)
+        }
+        return HistoryDateBucket.allCases.compactMap { bucket in
+            byBucket[bucket].map { HistorySection(bucket: bucket, entries: $0) }
         }
     }
 
     var body: some View {
         VStack(alignment: .leading, spacing: 0) {
-            header
-            historyContentOrnamentalDivider
-            Group {
-                if entries.isEmpty {
-                    ContentUnavailableView("조회 이력이 없습니다", systemImage: "clock")
-                } else {
-                    List {
-                        ForEach(groupedEntries, id: \.bucket) { group in
-                            Section {
-                                ForEach(group.entries) { entry in
-                                    row(for: entry, bucket: group.bucket)
-                                }
-                            } header: {
-                                sectionHeader(group.bucket.title)
-                            }
-                        }
-                    }
-                    // `.listStyle`을 지정하지 않으면 Section 헤더가 있는 List가 `.insetGrouped`에
-                    // 가깝게 렌더링돼 행 여백이 넓어진다 — 다른 목록 화면과 같이 `.plain`을 명시한다.
-                    .listStyle(.plain)
-                    .scrollContentBackground(.hidden)
-                    .background(settings.bibleBackgroundColor ?? Color.clear)
-                    // 임의의 테마 배경 위에서도 행 구분선이 배경과 대비되도록 한다.
-                    .listRowSeparatorTint(JBCHCategoryPalette.wood.opacity(0.15))
-                }
+            BibleListLayerHeader(title: "조회 이력", count: totalCount, topInset: headerTopInset, onDismiss: onDismiss)
+            BibleListLayerDivider()
+            if sections.isEmpty {
+                BibleListLayerEmptyState(
+                    systemImage: "clock",
+                    title: "조회 이력이 없습니다",
+                    message: "책과 장을 열면 여기에 쌓입니다."
+                )
+            } else {
+                list
             }
         }
         .background(settings.bibleBackgroundColor ?? Color.clear)
+        // 아이폰은 `.popover`가 시트로 바뀌므로 폭·높이를 시트에 맡긴다(이전 `.sheet`와 같은 크기).
+        .frame(
+            width: isPhone ? nil : BibleListLayerMetrics.historyWidth,
+            height: isPhone ? nil : popoverHeight
+        )
         .onAppear {
-            // 시트를 열 때마다 새로 불러온다 — 다른 창에서 쌓인 이력까지 반영하기
-            // 위해 캐싱하지 않는다.
-            entries = viewModel.fetchHistory()
+            // 레이어를 열 때마다 새로 불러온다 — 다른 창에서 쌓인 이력까지 반영하기 위해 캐싱하지 않는다.
+            let fetched = viewModel.fetchHistory()
+            totalCount = fetched.count
+            sections = makeSections(from: fetched)
         }
     }
 
-    /// `BookmarkListPopover.header`와 같은 구조(제목 + 개수 배지 + 원형 닫기). 개수 배지는
-    /// 비어 있을 때 숨긴다 — 그 자리는 `ContentUnavailableView`가 대신 설명한다.
-    private var header: some View {
-        HStack(spacing: 6) {
-            Text("조회 이력")
-                .font(.headline)
-                .foregroundStyle(settings.bibleTextColor ?? .primary)
-            if !entries.isEmpty {
-                Text("\(entries.count)")
-                    .font(.caption)
-                    .foregroundStyle(settings.bibleTextColor?.opacity(0.6) ?? Color.secondary)
-                    .padding(.horizontal, 6)
-                    .padding(.vertical, 2)
-                    .background(settings.bibleTextColor?.opacity(0.12) ?? Color.secondary.opacity(0.15), in: Capsule())
+    private var list: some View {
+        List {
+            ForEach(sections) { section in
+                BibleListLayerSectionHeader(title: section.bucket.title, count: section.entries.count)
+                    .bibleListLayerRowChrome()
+                    .listRowSeparator(.hidden)
+                ForEach(section.entries) { entry in
+                    BibleListLayerRow(
+                        title: bookChapterLabel(for: entry),
+                        meta: timeLabel(for: entry, bucket: section.bucket),
+                        onSelect: {
+                            viewModel.jumpToHistoryEntry(entry)
+                            onDismiss()
+                        }
+                    )
+                    .bibleListLayerRowChrome()
+                }
             }
-            Spacer()
-            Button {
-                onDismiss()
-            } label: {
-                Image(systemName: "xmark.circle.fill")
-                    .font(.system(size: 18))
-                    .foregroundStyle(settings.bibleTextColor?.opacity(0.6) ?? Color.secondary)
-            }
-            .buttonStyle(.plain)
-            .accessibilityLabel("닫기")
         }
-        .padding(.horizontal, 16)
-        // 이 헤더는 시트 맨 위에 붙어 상태바 여유가 없으므로 위쪽만 더 띄운다
-        // (아래는 이어지는 구분선이 자체 세로 패딩을 갖는다).
-        .padding(.top, 18)
-        .padding(.bottom, 10)
+        .bibleListLayerListStyle()
     }
 
-    /// 가로선-`sparkle`-가로선(wood 톤) 장식 구분선. `SearchView.menuContentOrnamentalDivider`와
-    /// 같은 모양이지만 그쪽이 `private`라 이 파일에 따로 둔다.
-    private var historyContentOrnamentalDivider: some View {
-        HStack(spacing: 10) {
-            Rectangle()
-                .fill(JBCHCategoryPalette.wood.opacity(0.3))
-                .frame(height: 1)
-            Image(systemName: "sparkle")
-                .font(.system(size: 11))
-                .foregroundStyle(settings.bibleTextColor?.opacity(0.45) ?? Color.secondary)
-            Rectangle()
-                .fill(JBCHCategoryPalette.wood.opacity(0.3))
-                .frame(height: 1)
-        }
-        .padding(.horizontal, 16)
-        .padding(.vertical, 4)
+    private var isPhone: Bool {
+        #if os(iOS)
+        UIDevice.current.userInterfaceIdiom == .phone
+        #else
+        false
+        #endif
     }
 
-    /// 시계 아이콘 + 제목 + 가로선 형태의 섹션 헤더. 가로선 색은 `List`의
-    /// `.listRowSeparatorTint`와 같은 wood 계열이다.
-    private func sectionHeader(_ title: String) -> some View {
-        HStack(spacing: 6) {
-            Image(systemName: "clock")
-                .font(.caption2)
-                .foregroundStyle(Color("AccentColor"))
-            Text(title)
-                .font(.title3.weight(.semibold))
-                .foregroundStyle(settings.bibleTextColor ?? .primary)
-            Rectangle()
-                .fill(JBCHCategoryPalette.wood.opacity(0.3))
-                .frame(maxWidth: .infinity, minHeight: 1, maxHeight: 1)
-        }
-        .textCase(nil)
-    }
+    /// 머리 위 여백 — 팝오버 14, 아이폰 시트는 18(`BookmarkListPopover`와 같은 값).
+    private var headerTopInset: CGFloat { isPhone ? 18 : 14 }
 
-    /// `BookmarkListPopover.row(for:)`와 같은 원칙 — 제목은 왼쪽에, 시각은 오른쪽 끝으로 보내
-    /// 한 줄에 담는다. 성경 구절은 `Color("AccentColor")`로 강조하고, 탭하면 이동한다는 것을
-    /// `chevron.right`로 알린다.
-    private func row(for entry: BibleReadingHistoryEntry, bucket: HistoryDateBucket) -> some View {
-        Button {
-            viewModel.jumpToHistoryEntry(entry)
-            onDismiss()
-        } label: {
-            HStack(spacing: 8) {
-                Text(bookChapterLabel(for: entry))
-                    .font(.body.weight(.bold))
-                    .foregroundStyle(Color("AccentColor"))
-                    .lineLimit(1)
-                Spacer(minLength: 8)
-                Text(timeLabel(for: entry, bucket: bucket))
-                    .font(.caption)
-                    .foregroundStyle(settings.bibleTextColor?.opacity(0.6) ?? Color.secondary)
-                    .lineLimit(1)
-                    .layoutPriority(1)
-                Image(systemName: "chevron.right")
-                    .font(.caption2)
-                    .foregroundStyle(settings.bibleTextColor?.opacity(0.4) ?? Color.secondary.opacity(0.6))
-            }
-            .padding(.vertical, 11)
-            .padding(.leading, 10)
-            // `DocumentRowView.documentRowLabel`의 "책등" 강조선 패턴. 색은 같은 행의 구절
-            // 텍스트가 쓰는 `Color("AccentColor")`로 통일한다.
-            .overlay(alignment: .leading) {
-                RoundedRectangle(cornerRadius: 1.5)
-                    .fill(Color("AccentColor"))
-                    .frame(width: 3)
-                    .padding(.vertical, 3)
-            }
-            .contentShape(Rectangle())
+    /// 팝오버 높이. `List`는 내용 높이를 스스로 알리지 않아 행/섹션 수로 근사하고 상한(500)으로 자른다 —
+    /// 근사가 모자라면 목록 안에서 스크롤되고, 남으면 여백이 생길 뿐 잘리지는 않는다.
+    private var popoverHeight: CGFloat {
+        let chrome = BibleListLayerMetrics.headerHeight(topInset: headerTopInset) + BibleListLayerMetrics.dividerHeight
+        let content: CGFloat
+        if sections.isEmpty {
+            content = BibleListLayerMetrics.emptyStateHeight
+        } else {
+            let rows = CGFloat(totalCount) * BibleListLayerMetrics.rowHeight
+            let headers = CGFloat(sections.count) * BibleListLayerMetrics.sectionHeaderHeight
+            content = rows + headers + BibleListLayerMetrics.listVerticalPadding
         }
-        .buttonStyle(.plain)
-        // `body`의 `.background(bibleBackgroundColor)`는 List 컨테이너 배경만 바꾸고 각 행
-        // 셀 배경은 투명하게 만들지 않는다.
-        .listRowBackground(Color.clear)
+        return min(chrome + content, BibleListLayerMetrics.historyMaxHeight)
     }
 
     /// 오늘/어제/그저께는 시분초만, 이번주/지난주/이번달은 날짜+시분을 보여준다.

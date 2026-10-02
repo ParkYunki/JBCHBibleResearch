@@ -630,18 +630,21 @@ final class UserSettingsStore {
         self.hasSeededSermonGatherings = defaults.object(forKey: Key.hasSeededSermonGatherings) as? Bool ?? false
         self.hanjaDisplayMode = (defaults.string(forKey: Key.hanjaDisplayMode)).flatMap(HanjaDisplayMode.init) ?? .off
         self.hanjaFontName = defaults.string(forKey: Key.hanjaFontName) ?? SpecialPurposeFonts.hanja
+        // 설교 문단 스타일 기본 글자 크기(2026-10-01: 화면에 비해 커서 줄임 — 최종 대주제 25/중주제 20/소주제 17/말씀구절 15/인용 15/본문 15, 이전 34/24/16/20/17/19).
+        // 이 값을 바꾸는 설정 UI가 없어 저장된 값이 없으므로 기본값 변경만으로 기존 기기에도 적용된다. 이미 저장된 설교 본문은
+        // `styleFontSnapshot`이 옛 크기와 같은 글자를 "수동 지정이 아님"으로 보고 불러올 때 새 크기로 다시 입힌다.
         self.sermonMainThemeFontName = defaults.string(forKey: Key.sermonMainThemeFontName) ?? "Paperlogy-8ExtraBold"
-        self.sermonMainThemeFontSize = defaults.object(forKey: Key.sermonMainThemeFontSize) as? Double ?? 34
+        self.sermonMainThemeFontSize = defaults.object(forKey: Key.sermonMainThemeFontSize) as? Double ?? 25
         self.sermonMidThemeFontName = defaults.string(forKey: Key.sermonMidThemeFontName) ?? "Paperlogy-6SemiBold"
-        self.sermonMidThemeFontSize = defaults.object(forKey: Key.sermonMidThemeFontSize) as? Double ?? 24
+        self.sermonMidThemeFontSize = defaults.object(forKey: Key.sermonMidThemeFontSize) as? Double ?? 20
         self.sermonSubThemeFontName = defaults.string(forKey: Key.sermonSubThemeFontName) ?? "Paperlogy-5Medium"
-        self.sermonSubThemeFontSize = defaults.object(forKey: Key.sermonSubThemeFontSize) as? Double ?? 16
+        self.sermonSubThemeFontSize = defaults.object(forKey: Key.sermonSubThemeFontSize) as? Double ?? 17
         self.sermonVerseQuoteFontName = defaults.string(forKey: Key.sermonVerseQuoteFontName) ?? SpecialPurposeFonts.hanja
-        self.sermonVerseQuoteFontSize = defaults.object(forKey: Key.sermonVerseQuoteFontSize) as? Double ?? 20
+        self.sermonVerseQuoteFontSize = defaults.object(forKey: Key.sermonVerseQuoteFontSize) as? Double ?? 15
         self.sermonCitationFontName = defaults.string(forKey: Key.sermonCitationFontName) ?? "AppleGothic"
-        self.sermonCitationFontSize = defaults.object(forKey: Key.sermonCitationFontSize) as? Double ?? 17
+        self.sermonCitationFontSize = defaults.object(forKey: Key.sermonCitationFontSize) as? Double ?? 15
         self.sermonBodyFontName = defaults.string(forKey: Key.sermonBodyFontName) ?? "GowunBatang-Regular"
-        self.sermonBodyFontSize = defaults.object(forKey: Key.sermonBodyFontSize) as? Double ?? 19
+        self.sermonBodyFontSize = defaults.object(forKey: Key.sermonBodyFontSize) as? Double ?? 15
         // 글자색 기본값(목업 Editor.dc.html의 STYLE_DEFS 기반): 대주제/본문/말씀구절은 어두운
         // 무채색(#2B211D), 중주제는 와인색(#7A3B42), 소주제는 웜그레이(#6B5D52), 인용은 초록
         // 계열 지정에 맞춘 차분한 세이지 그린(#3F7355)이다. 정확한 톤이 지정된 값이 아니라

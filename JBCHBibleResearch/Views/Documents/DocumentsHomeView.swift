@@ -176,6 +176,7 @@ struct DocumentsHomeView: View {
             }
         }
         .navigationTitle("연구 문서")
+        .macSerifTitle("연구 문서")
         // 타이틀을 인라인으로 표시해 툴바 아이콘 좌측 공간 낭비를 막는다.
         #if os(iOS)
         .navigationBarTitleDisplayMode(.inline)
@@ -187,12 +188,6 @@ struct DocumentsHomeView: View {
         .navigationDestination(for: PersistentIdentifier.self) { documentID in
             DocumentViewerWindowContent(documentID: documentID)
         }
-        #if os(macOS)
-        // 툴바 "카테고리 관리" 버튼으로 여닫는 토글형 3번째 열(Inspector).
-        .inspector(isPresented: $isCategoryManagerPresented) {
-            categoryManagerPanel
-        }
-        #endif
         .toolbar {
             #if os(iOS)
             // 아이폰 전용 — 카테고리 필터가 "전체"가 아닐 때(문서함 카드에서 들어온 상태) 카드 홈으로 돌아가는
@@ -215,14 +210,19 @@ struct DocumentsHomeView: View {
             }
             #endif
             #if os(macOS)
-            // `.inspector`를 여닫는 토글 버튼(표준 inspector 심벌).
-            ToolbarItem(placement: .automatic) {
+            // 카테고리 관리 팝오버 버튼. 예전 `.inspector`(3번째 열)는 열면 본문 폭이 줄어 NavigationSplitView 사이드바가
+            // 자동으로 접혔다 펴져(창 폭 약 1215pt 이하) 팝오버로 바꿨다 — 본문/사이드바 폭에 영향이 없다.
+            // `.primaryAction`이라 업로드 버튼과 함께 툴바 오른쪽 끝에 놓인다.
+            ToolbarItem(placement: .primaryAction) {
                 Button {
                     isCategoryManagerPresented.toggle()
                 } label: {
-                    Label("카테고리 관리", systemImage: "sidebar.trailing")
+                    Label("카테고리 관리", systemImage: "folder.badge.gearshape")
                 }
-                .help("카테고리 생성 · 이름 변경")
+                .help("카테고리 생성 · 이름 변경 · 삭제 · 순서")
+                .popover(isPresented: $isCategoryManagerPresented, arrowEdge: .bottom) {
+                    categoryManagerPanel
+                }
             }
             #endif
             ToolbarItem(placement: .primaryAction) {
@@ -618,39 +618,136 @@ struct DocumentsHomeView: View {
     }
 
     #if os(macOS)
-    /// 맥OS 전용 3번째 열(Inspector) "카테고리 관리" — 툴바 토글 버튼으로 여닫는다.
-    /// 현재는 생성·이름 변경만 지원하고, 삭제는 소속 문서 처리 방침이 정해지지 않아 제외했다.
+    /// 맥OS 전용 "카테고리 관리" 팝오버 — 툴바 버튼으로 연다. 생성 · 이름 변경 · 삭제 · 수동 순서를 지원한다.
+    /// 삭제해도 소속 문서는 지워지지 않고 "분류 없음"으로 옮겨진다(`ImageCategory.sourceDocuments` deleteRule = nullify).
+    ///
+    /// 디자인은 이 화면의 문서함 카드(`folderCard`)·검색 영역과 같은 언어를 쓴다 — 테마 배경/글자색, 성곡 세리프 제목,
+    /// 글자색 5% 채움의 둥근 카드 + 왼쪽 책등 막대(`folderGroups`와 같은 순서·색 배정), wood 톤 구분선.
     private var categoryManagerPanel: some View {
-        VStack(alignment: .leading, spacing: 0) {
-            Text("카테고리 관리")
-                .font(.headline)
-                .padding()
-            Divider()
+        let textColor = settings.bibleTextColor ?? Color.primary
+        let secondaryTextColor = settings.bibleTextColor?.opacity(0.6) ?? Color.secondary
+        return VStack(alignment: .leading, spacing: 0) {
+            VStack(alignment: .leading, spacing: 4) {
+                Text("카테고리 관리")
+                    .font(.custom(SpecialPurposeFonts.titleSerif, size: 20, relativeTo: .title3))
+                    .fontWeight(.semibold)
+                    .foregroundStyle(textColor)
+                Text("이름 변경 · 삭제 · 드래그로 순서 바꾸기")
+                    .font(.caption)
+                    .foregroundStyle(secondaryTextColor)
+            }
+            .frame(maxWidth: .infinity, alignment: .leading)
+            .padding(.horizontal, 16)
+            .padding(.top, 14)
+            .padding(.bottom, 6)
+
+            searchContentOrnamentalDivider
+
             if let viewModel {
-                List {
-                    ForEach(viewModel.categories) { category in
-                        CategoryManagerRow(category: category, viewModel: viewModel)
+                let onDark = isDarkBibleBackground
+                let spineColors = onDark ? Self.shelfSpineColorsOnDark : Self.shelfSpineColors
+                if viewModel.categories.isEmpty {
+                    Text("아직 카테고리가 없습니다.\n아래에서 첫 카테고리를 만들어 보세요.")
+                        .font(.callout)
+                        .multilineTextAlignment(.center)
+                        .foregroundStyle(secondaryTextColor)
+                        .frame(maxWidth: .infinity, maxHeight: .infinity)
+                        .padding(.vertical, 32)
+                } else {
+                    // 드래그 정렬(`onMove`)이 필요해 ScrollView+LazyVStack 대신 List를 쓴다.
+                    List {
+                        ForEach(Array(viewModel.categories.enumerated()), id: \.element.id) { index, category in
+                            CategoryManagerRow(
+                                category: category,
+                                viewModel: viewModel,
+                                spineColor: spineColors[index % spineColors.count],
+                                onDelete: { deleteCategory(category, viewModel: viewModel) }
+                            )
+                            .listRowSeparator(.hidden)
+                            .listRowBackground(Color.clear)
+                            .listRowInsets(EdgeInsets(top: 5, leading: 12, bottom: 5, trailing: 12))
+                            // 드래그가 어려울 때를 위한 보조 수단(정확한 한 칸 이동).
+                            .contextMenu {
+                                Button("위로 이동") {
+                                    viewModel.moveCategories(from: IndexSet(integer: index), to: index - 1)
+                                }
+                                .disabled(index == 0)
+                                Button("아래로 이동") {
+                                    viewModel.moveCategories(from: IndexSet(integer: index), to: index + 2)
+                                }
+                                .disabled(index == viewModel.categories.count - 1)
+                            }
+                        }
+                        .onMove { source, destination in
+                            viewModel.moveCategories(from: source, to: destination)
+                        }
                     }
+                    .listStyle(.plain)
+                    .scrollContentBackground(.hidden)
                 }
-                .listStyle(.plain)
-                Divider()
-                HStack {
-                    TextField("새 카테고리", text: $newCategoryName)
-                        .textFieldStyle(.plain)
-                    Button("추가") {
-                        let trimmed = newCategoryName.trimmingCharacters(in: .whitespaces)
-                        guard !trimmed.isEmpty else { return }
-                        _ = viewModel.createCategory(named: trimmed)
-                        newCategoryName = ""
+
+                Rectangle()
+                    .fill(JBCHCategoryPalette.wood.opacity(0.3))
+                    .frame(height: 1)
+
+                HStack(spacing: 8) {
+                    TextField(
+                        "새 카테고리",
+                        text: $newCategoryName,
+                        prompt: Text("새 카테고리").foregroundStyle(textColor.opacity(0.4))
+                    )
+                    .textFieldStyle(.plain)
+                    .foregroundStyle(textColor)
+                    .onSubmit { addCategory(viewModel: viewModel) }
+                    .padding(.vertical, 8)
+                    .padding(.horizontal, 12)
+                    .background(
+                        RoundedRectangle(cornerRadius: 10)
+                            .fill(settings.bibleTextColor?.opacity(0.05) ?? Color.secondary.opacity(0.06))
+                    )
+
+                    Button {
+                        addCategory(viewModel: viewModel)
+                    } label: {
+                        Image(systemName: "plus")
+                            .font(.caption.weight(.bold))
+                            .foregroundStyle(.white)
+                            .frame(width: 30, height: 30)
+                            .background(JBCHCategoryPalette.gold, in: Circle())
                     }
+                    .buttonStyle(.plain)
                     .disabled(newCategoryName.trimmingCharacters(in: .whitespaces).isEmpty)
+                    .opacity(newCategoryName.trimmingCharacters(in: .whitespaces).isEmpty ? 0.4 : 1)
+                    .help("카테고리 추가")
                 }
-                .padding()
+                .padding(.horizontal, 16)
+                .padding(.vertical, 12)
             } else {
                 Spacer()
             }
         }
-        .inspectorColumnWidth(min: 240, ideal: 280, max: 360)
+        .frame(width: 340, height: 480)
+        .foregroundStyle(textColor)
+        // 테마 배경을 칠한다. 테마를 고르지 않았으면 팝오버 기본 배경을 그대로 둔다.
+        .background {
+            if let background = settings.bibleBackgroundColor {
+                background.ignoresSafeArea()
+            }
+        }
+    }
+
+    private func addCategory(viewModel: DocumentsViewModel) {
+        let trimmed = newCategoryName.trimmingCharacters(in: .whitespaces)
+        guard !trimmed.isEmpty else { return }
+        _ = viewModel.createCategory(named: trimmed)
+        newCategoryName = ""
+    }
+
+    /// 카테고리 삭제. 지금 이 카테고리로 필터링 중이면 필터를 "전체"로 되돌린다(사라진 카테고리를 가리키지 않게).
+    private func deleteCategory(_ category: ImageCategory, viewModel: DocumentsViewModel) {
+        let deletedID = category.id
+        if categoryFilter == .custom(deletedID) { categoryFilter = .all }
+        viewModel.deleteCategory(category)
     }
     #endif
 
@@ -1077,23 +1174,100 @@ struct DocumentsHomeView: View {
 }
 
 #if os(macOS)
-/// `categoryManagerPanel`(macOS 전용 Inspector)의 목록 행 — 이름 변경 전용 인라인 편집.
-/// 포커스를 잃거나 Return을 누르면 즉시 저장한다.
+/// `categoryManagerPanel`(macOS 팝오버)의 목록 행 — 이름 인라인 편집 + 삭제 + 드래그 핸들.
+/// 이름은 포커스를 잃거나 Return을 누르면 즉시 저장한다. 모양은 문서함 카드(`DocumentsHomeView.folderCard`)와 같다.
+/// 삭제는 확인 대화상자 대신 행 안에서 한 번 더 묻는다(팝오버 안에서 alert가 팝오버를 닫는 일을 피하려는 것).
 private struct CategoryManagerRow: View {
     let category: ImageCategory
     let viewModel: DocumentsViewModel
+    /// 왼쪽 책등 막대 색 — 문서함 카드와 같은 순서·팔레트.
+    let spineColor: Color
+    /// 삭제 확정 시 부모가 실행한다(필터 초기화 + 모델 삭제).
+    let onDelete: () -> Void
+    @State private var settings = UserSettingsStore.shared
     @State private var name: String = ""
+    @State private var isConfirmingDelete = false
     @FocusState private var isFocused: Bool
 
     var body: some View {
-        TextField("카테고리 이름", text: $name)
-            .textFieldStyle(.plain)
-            .focused($isFocused)
-            .onAppear { name = category.name }
-            .onSubmit { commit() }
-            .onChange(of: isFocused) { _, focused in
-                if !focused { commit() }
+        let textColor = settings.bibleTextColor ?? Color.primary
+        let secondaryTextColor = settings.bibleTextColor?.opacity(0.6) ?? Color.secondary
+        VStack(alignment: .leading, spacing: 6) {
+            HStack(spacing: 8) {
+                TextField("카테고리 이름", text: $name)
+                    .textFieldStyle(.plain)
+                    .focusEffectDisabled()
+                    .font(.custom(SpecialPurposeFonts.titleSerif, size: 17, relativeTo: .body))
+                    .foregroundStyle(textColor)
+                    .focused($isFocused)
+
+                Button {
+                    isFocused = false
+                    isConfirmingDelete = true
+                } label: {
+                    Image(systemName: "trash")
+                        .font(.callout)
+                        .foregroundStyle(secondaryTextColor)
+                }
+                .buttonStyle(.plain)
+                .help("카테고리 삭제")
+
+                // 순서 변경 안내용 핸들(행 어디를 잡아 끌어도 `List.onMove`가 동작한다).
+                Image(systemName: "line.3.horizontal")
+                    .font(.callout)
+                    .foregroundStyle(secondaryTextColor.opacity(0.7))
+                    .help("끌어서 순서 변경")
             }
+
+            if isConfirmingDelete {
+                Text("삭제하면 이 카테고리의 문서는 '분류 없음'으로 옮겨집니다. 문서는 지워지지 않습니다.")
+                    .font(.caption)
+                    .foregroundStyle(secondaryTextColor)
+                    .fixedSize(horizontal: false, vertical: true)
+                HStack(spacing: 8) {
+                    Spacer()
+                    Button("취소") { isConfirmingDelete = false }
+                        .buttonStyle(.plain)
+                        .font(.caption)
+                        .foregroundStyle(secondaryTextColor)
+                    Button("삭제") { onDelete() }
+                        .buttonStyle(.plain)
+                        .font(.caption.weight(.semibold))
+                        .foregroundStyle(JBCHCategoryPalette.wine)
+                }
+            }
+        }
+        .frame(maxWidth: .infinity, alignment: .leading)
+        .padding(.vertical, 12)
+        .padding(.leading, 14)
+        .padding(.trailing, 12)
+        .background(
+            RoundedRectangle(cornerRadius: 12)
+                .fill(isFocused
+                    ? (settings.bibleTextColor?.opacity(0.12) ?? Color.secondary.opacity(0.14))
+                    : (settings.bibleTextColor?.opacity(0.05) ?? Color.secondary.opacity(0.06)))
+        )
+        .overlay(alignment: .leading) {
+            RoundedRectangle(cornerRadius: 2)
+                .fill(spineColor)
+                .frame(width: 4)
+                .padding(.vertical, 6)
+        }
+        // 편집 중임을 금박 테두리로 알린다(시스템 포커스 링은 `focusEffectDisabled`로 껐다).
+        .overlay {
+            RoundedRectangle(cornerRadius: 12)
+                .stroke(JBCHCategoryPalette.gold.opacity(isFocused ? 0.8 : 0), lineWidth: 1)
+        }
+        .contentShape(Rectangle())
+        .onAppear { name = category.name }
+        // 다른 곳(다른 기기 동기화 등)에서 이름이 바뀌면 편집 중이 아닐 때만 반영한다.
+        .onChange(of: category.name) { _, newValue in
+            if !isFocused { name = newValue }
+        }
+        .onSubmit { commit() }
+        .onChange(of: isFocused) { _, focused in
+            if !focused { commit() }
+        }
     }
 
     private func commit() {

@@ -20,11 +20,14 @@ struct AppCommands: Commands {
     @FocusedValue(\.newMemoAction) private var newMemoAction
     @FocusedValue(\.newFolderAction) private var newFolderAction
     @FocusedValue(\.uploadDocumentAction) private var uploadDocumentAction
+    @FocusedValue(\.findInChapterAction) private var findInChapterAction
     @FocusedValue(\.nextChapterAction) private var nextChapterAction
     @FocusedValue(\.previousChapterAction) private var previousChapterAction
     @FocusedValue(\.scrollSyncEnabled) private var scrollSyncEnabled
 
     @Environment(\.openWindow) private var openWindow
+    /// 성경 조회 도구 레일 접힘 상태 — 레일(`BibleToolRail`)의 `@AppStorage`와 같은 키라 메뉴가 바로 토글한다(FocusedValue 불필요).
+    @AppStorage(BibleToolRailDefaults.collapsedKey) private var isBibleToolRailCollapsed = false
 
     var body: some Commands {
         // MARK: File
@@ -89,12 +92,23 @@ struct AppCommands: Commands {
         // ⚠️ `CommandMenu` 자체를 조건부로 숨기는 표준 방법이 없어 메뉴는 항상 보이고,
         // 성경조회 화면이 활성 창이 아닐 때는 아래 두 버튼만 비활성화된다.
         CommandMenu("성경") {
+            // 지금 열린 장의 본문 안에서 찾는다(통합검색과 별개). 성경 조회 창이 키 창이 아니면 비활성화된다.
+            Button("본문에서 찾기…") { findInChapterAction?() }
+                .keyboardShortcut("f", modifiers: .command)
+                .disabled(findInChapterAction == nil)
+            Divider()
             Button("다음 장") { nextChapterAction?() }
                 .keyboardShortcut("]", modifiers: .command)
                 .disabled(nextChapterAction == nil)
             Button("이전 장") { previousChapterAction?() }
                 .keyboardShortcut("[", modifiers: .command)
                 .disabled(previousChapterAction == nil)
+            Divider()
+            // macOS 성경 조회의 왼쪽 도구 레일 접기/펼치기. 모든 성경 조회 창이 같은 값을 공유하므로 포커스와 무관하게 항상 활성화한다.
+            Button(isBibleToolRailCollapsed ? "성경 도구 레일 펼치기" : "성경 도구 레일 접기") {
+                isBibleToolRailCollapsed.toggle()
+            }
+            .keyboardShortcut("r", modifiers: [.command, .option])
         }
     }
 }

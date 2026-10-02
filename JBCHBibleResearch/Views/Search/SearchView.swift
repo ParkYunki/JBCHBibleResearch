@@ -162,6 +162,10 @@ private struct SearchContentView: View {
 
     /// "선택" 버튼(`verseRowActionButtons`)이 채우는 팝오버 대상.
     @State private var partialTextSelectionTarget: PartialTextSelectionTarget?
+    /// 복사 버튼을 눌렀을 때 화면 아래에 잠깐 띄우는 토스트 문구(`BibleReadingView.showToast`와 같은 방식).
+    @State private var toastMessage: String?
+    /// 연달아 복사할 때 먼저 예약된 타이머가 새 토스트를 조기에 지우지 않도록 이전 예약을 취소하기 위한 작업 핸들.
+    @State private var toastDismissWorkItem: DispatchWorkItem?
 
     /// 검색어가 비어 있는 채로 화면이 새로 나타나면 검색창에 자동 포커스를 줘 최근
     /// 검색어(`.searchSuggestions`)가 바로 보이게 한다. macOS/iPadOS 사이드바는 섹션
@@ -330,6 +334,7 @@ private struct SearchContentView: View {
         // push 없이 탭 전환 방식을 쓰므로 등록이 필요 없고, macOS/iPadOS
         // (`SidebarNavigationView`)만 이 화면 자신의 등록을 쓴다.
         .modifier(BibleVerseDestinationRegistration(isEnabled: !isPhoneIdiom))
+        .overlay(alignment: .bottom) { searchToastOverlay }
         .toolbar {
             // 질문형 검색 토글은 배포판을 포함한 모든 빌드에서 노출한다. `viewModel.isQuestionSearchEnabled`는 이 버튼으로만
             // 켤 수 있고 영구 저장하지 않으며 기본은 꺼짐이다.
@@ -1351,22 +1356,14 @@ private struct SearchContentView: View {
         // 암묵적 NavigationLink가 섞이면 탭 대상이 불안정해지는 문제(`OutlineTreeView.swift`
         // 상단 주석)가 있어, 행 전체를 링크로 감싸지 않고 선택/복사 Button과 나란히 둔다.
         HStack(alignment: .firstTextBaseline, spacing: 8) {
-            Button {
-                AppNavigationRequest.shared.request(.bibleReading)
-                BibleVerseNavigationRequest.shared.request(
-                    bookId: result.bookId, chapter: result.chapter, verse: result.verse
-                )
-            } label: {
-                // 접두어와 본문을 별도 `Text`로 나란히 두어 본문이 줄바꿈돼도 접두어 폭만큼
-                // 들여쓰기가 유지된다(`PersonDetailView.verseReferenceRow`와 같은 방식).
-                HStack(alignment: .top, spacing: 0) {
-                    Text(versePrefixAttributedString(result))
-                        .fixedSize()
-                    Text(verseBodyAttributedString(result))
-                }
-                .lineLimit(2)
+            // 접두어와 본문을 별도 `Text`로 나란히 두어 본문이 줄바꿈돼도 접두어 폭만큼
+            // 들여쓰기가 유지된다(`PersonDetailView.verseReferenceRow`와 같은 방식).
+            HStack(alignment: .top, spacing: 0) {
+                Text(versePrefixAttributedString(result))
+                    .fixedSize()
+                Text(verseBodyAttributedString(result))
             }
-            .buttonStyle(.plain)
+            .lineLimit(2)
             if result.isReferenceMatch {
                 badge("참조 일치", color: referenceMatchGreen, systemImage: "checkmark.seal.fill")
             }
@@ -1378,6 +1375,21 @@ private struct SearchContentView: View {
             }
         }
         .padding(.vertical, 5.2)
+        // 본문 글자뿐 아니라 행 어디를 눌러도(빈 공간 포함) 그 절로 이동한다. 안쪽 선택/복사 `Button`은 자기 클릭을 먼저 처리하므로
+        // 이 탭 제스처는 실행되지 않는다. `Button`이 아니라 `contentShape` + `onTapGesture`인 이유: 행 전체를 Button으로 감싸면
+        // 안쪽 버튼들과 중첩돼 macOS에서 클릭 대상이 불안정해진다(위 주석의 같은 문제).
+        .contentShape(Rectangle())
+        .onTapGesture { openVerseInBibleReading(result) }
+        .accessibilityAddTraits(.isButton)
+    }
+
+    /// 절 행 탭 — "성경 조회" 섹션으로 전환하고 목표 절을 넘긴다. 성경 조회 화면이 새로 만들어지면 `.onAppear`, 이미 떠 있으면
+    /// `.onChange`가 그 절로 자동 스크롤하고 잠시 강조한다(`BibleReadingView`/`TranslationColumnView`의 `highlightedVerse` 경로).
+    private func openVerseInBibleReading(_ result: VerseSearchResult) {
+        AppNavigationRequest.shared.request(.bibleReading)
+        BibleVerseNavigationRequest.shared.request(
+            bookId: result.bookId, chapter: result.chapter, verse: result.verse
+        )
     }
 
     /// 절 행 오른쪽의 선택/복사 버튼. 이동은 본문 `Button`이 담당한다.
@@ -1429,6 +1441,37 @@ private struct SearchContentView: View {
         #else
         UIPasteboard.general.string = text
         #endif
+        showToast("복사되었습니다.")
+    }
+
+    /// 토스트를 띄우고 1.6초 뒤 스스로 지운다. 연달아 부르면 이전 예약을 취소하고 새로 예약한다(`BibleReadingView.showToast`와 동일).
+    private func showToast(_ message: String) {
+        toastDismissWorkItem?.cancel()
+        withAnimation {
+            toastMessage = message
+        }
+        let workItem = DispatchWorkItem {
+            withAnimation {
+                toastMessage = nil
+            }
+        }
+        toastDismissWorkItem = workItem
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.6, execute: workItem)
+    }
+
+    @ViewBuilder
+    private var searchToastOverlay: some View {
+        if let toastMessage {
+            Text(toastMessage)
+                .font(.callout)
+                .foregroundStyle(.white)
+                .padding(.horizontal, 16)
+                .padding(.vertical, 10)
+                .background(.black.opacity(0.8), in: Capsule())
+                .padding(.bottom, 24)
+                .transition(.move(edge: .bottom).combined(with: .opacity))
+                .allowsHitTesting(false)
+        }
     }
 
     /// "N절) " 접두어 `AttributedString`(굵게, 테마 글자색). `Text + Text`는 macOS 26에서

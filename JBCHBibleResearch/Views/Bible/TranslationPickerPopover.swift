@@ -2,8 +2,9 @@
 //  TranslationPickerPopover.swift
 //  JBCHBibleResearch
 //
-//  등록된 번역본이 4개 이상일 때, 칩을 토글해 화면에 동시 표시할 번역본을
-//  최대 3개까지 고르는 팝오버. 3개 이하면 BibleReadingView가 버튼을 숨긴다.
+//  활성 번역본이 2개 이상일 때, 칩을 토글해 이 창에 동시 표시할 번역본을
+//  1개 이상 최대 3개까지 고르는 팝오버(1개만 남은 항목은 해제할 수 없다). 1개뿐이면 BibleReadingView가 버튼을 숨긴다.
+//  선택은 이 팝오버를 연 성경 조회 창에만 적용된다(창마다 따로 고른다).
 //  선택 순서를 배열로 보존해(선택 시 맨 뒤 추가, 해제 시 해당 항목만 제거)
 //  그 순서가 그대로 컬럼 표시 순서가 되며, 선택된 행에 순서 번호 배지를 표시한다.
 //  닫기(X)는 onDone을 부르지 않으므로 "적용" 없이 닫으면 선택 변경이 반영되지 않는다.
@@ -63,7 +64,7 @@ struct TranslationPickerPopover: View {
         let listHeight = listOuterPadding + chipCount * chipRowHeight + max(0, chipCount - 1) * chipSpacing
         let footerOuterPadding: CGFloat = 24
         let footerButtonRowHeight: CGFloat = 38
-        let footerWarningHeight: CGFloat = selectedIDs.count >= maxSelection ? 20 : 0
+        let footerWarningHeight: CGFloat = (selectedIDs.count >= maxSelection && available.count > maxSelection) ? 20 : 0
         let footerHeight = footerOuterPadding + footerButtonRowHeight + footerWarningHeight
         return headerHeight + headerDividerHeight + listHeight + footerDividerHeight + footerHeight
     }
@@ -169,10 +170,12 @@ struct TranslationPickerPopover: View {
                 }
                 .buttonStyle(.plain)
                 .contentShape(Rectangle())
+                // 선택이 비면 본문이 빈 화면이 되므로 적용하지 않는다(위 칩 로직이 마지막 하나는 해제하지 못하게 하지만 안전장치).
+                .disabled(selectedIDs.isEmpty)
             }
 
-            // 최대 개수에 도달했을 때만, 나머지 칩이 눌리지 않는 이유를 안내한다.
-            if selectedIDs.count >= maxSelection {
+            // 최대 개수에 도달했고 눌리지 않는 칩이 실제로 있을 때만(후보가 최대 개수 이하면 전부 고른 상태일 뿐이다) 이유를 안내한다.
+            if selectedIDs.count >= maxSelection && available.count > maxSelection {
                 // 같은 푸터의 "N / M 선택됨"과 같은 테마 글자색을 쓴다.
                 Text("다른 번역본을 보려면 먼저 하나를 해제하세요.")
                     .font(.caption2)
@@ -188,8 +191,11 @@ struct TranslationPickerPopover: View {
     private func chip(for registry: TranslationRegistry) -> some View {
         let isSelected = selectedIDs.contains(registry.persistentModelID)
         let canToggleOn = isSelected || selectedIDs.count < maxSelection
+        // 마지막 하나는 해제할 수 없다 — 열이 0개면 본문이 빈 화면이 된다. 다른 번역본을 먼저 고른 뒤 해제하면 교체할 수 있다.
+        let isLastSelected = isSelected && selectedIDs.count == 1
         return Button {
             if isSelected {
+                guard !isLastSelected else { return }
                 // 해당 값만 제거 — 나머지 항목의 상대 순서(=선택 순서)는 유지된다.
                 selectedIDs.removeAll { $0 == registry.persistentModelID }
             } else if canToggleOn {

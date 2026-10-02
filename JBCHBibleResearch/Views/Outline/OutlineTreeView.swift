@@ -278,6 +278,7 @@ private struct OutlineTreeList: View {
         }
         .background(settings.bibleBackgroundColor ?? Color.clear)
         .navigationTitle("개요")
+        .macSerifTitle("개요")
         // 다른 화면과 같이 `.principal` 툴바 타이틀(성곡 세리프체 + 테마 글자색)을 쓴다.
         // `.inline`을 함께 지정하지 않으면 시스템의 큰 왼쪽 정렬 타이틀이 별도 줄로 겹쳐 보인다.
         #if os(iOS)

@@ -44,7 +44,8 @@ final class BibleReadingViewModel {
     /// `TranslationColumnView.highlightedVerse`가 맡고, 이 뷰모델은 강조 대상 절과 자동 해제 타이머만 관리한다.
     private(set) var highlightedVerse: Int?
     private var highlightClearWorkItem: DispatchWorkItem?
-    private static let highlightDuration: TimeInterval = 2.5
+    // 새 화면 생성 + 배치 + 스크롤 재시도(최대 0.7초) 이후에도 강조가 보이도록 3.5초로 둔다.
+    private static let highlightDuration: TimeInterval = 3.5
 
     /// 이 절을 몇 초간만 강조 표시한다. 이미 진행 중인 타이머가 있으면 취소하고 새로 시작한다.
     func highlightVerseTemporarily(_ verse: Int) {

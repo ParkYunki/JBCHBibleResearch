@@ -632,3 +632,52 @@ struct SidebarNavigationView: View {
         }
     }
 }
+
+// MARK: - macOS 세리프 타이틀 수정자
+//
+// macOS 주요 화면(성경 조회·말씀 노트·연구 문서·내 설교·개요)의 상단 타이틀을 아이패드와 같은 성곡 세리프체로 보이게 한다.
+// macOS 윈도우 타이틀은 시스템이 그려 글꼴을 바꿀 수 없어 `.navigationTitle`은 그대로 두고 `.toolbar(removing: .title)`로 시각적
+// 타이틀만 숨긴 뒤 같은 자리에 세리프체 `Text`를 놓는다. 다른 플랫폼은 무동작이다.
+// 글꼴: 국민대학교 성곡 세리프체(`SpecialPurposeFonts.titleSerif`, CC BY-ND — 설정 > 라이센스 탭 고지).
+
+struct MacSerifTitleModifier: ViewModifier {
+    let title: String
+    @State private var settings = UserSettingsStore.shared
+
+    func body(content: Content) -> some View {
+        #if os(macOS)
+        content
+            .toolbar(removing: .title)
+            .toolbar {
+                // 제목은 툴바 맨 왼쪽(`.navigation`)에 둔다(2026-10-01 요청: `.principal`은 제목이 가운데로 간다).
+                // 오른쪽 아이콘 묶음은 각 화면이 `.primaryAction`으로 두어 오른쪽 끝에 놓이게 한다.
+                ToolbarItem(placement: .navigation) {
+                    Text(title)
+                        .font(.custom(SpecialPurposeFonts.titleSerif, size: 20, relativeTo: .title3))
+                        .fontWeight(.semibold)
+                        .foregroundStyle(settings.bibleTextColor ?? .primary)
+                        .lineLimit(1)
+                        // 툴바 폭이 모자라도 제목이 "…"로 잘리지 않게 본래 폭을 요구한다.
+                        .fixedSize(horizontal: true, vertical: false)
+                }
+                .sharedBackgroundVisibility(.hidden)   // macOS 26 유리 캡슐 배경 제거(제목은 버튼이 아니다)
+                // 보이지 않는 빈 `.principal` 항목 — 실기기 확인(2026-10-01): `.principal` 항목이 하나라도 있어야 시스템이 툴바를
+                // [왼쪽 그룹 | 가운데 | 오른쪽 그룹]으로 나눠 배치해 `.primaryAction` 아이콘이 오른쪽 끝으로 간다. 없으면 제목(`.navigation`)
+                // 바로 옆에 붙는다. `ToolbarSpacer`(.navigation/.primaryAction)와 제목 `.frame(maxWidth: .infinity)`는 효과가 없었다.
+                ToolbarItem(placement: .principal) {
+                    Color.clear.frame(width: 1, height: 1)
+                }
+                .sharedBackgroundVisibility(.hidden)
+            }
+        #else
+        content
+        #endif
+    }
+}
+
+extension View {
+    /// macOS에서만 상단 타이틀을 성곡 세리프체로 보여준다(다른 플랫폼은 무동작).
+    func macSerifTitle(_ title: String) -> some View {
+        modifier(MacSerifTitleModifier(title: title))
+    }
+}

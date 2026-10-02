@@ -348,6 +348,8 @@ struct SermonDeliveryCreationSheet: View {
     @State private var selectedGatheringID: PersistentIdentifier?
     @State private var isAddingGathering = false
     @State private var newGatheringName = ""
+    /// 삭제 확인 중인 모임 종류(`.alert`의 대상).
+    @State private var gatheringPendingDelete: SermonGathering?
     @FocusState private var isNameFieldFocused: Bool
 
     private var settings: UserSettingsStore { .shared }
@@ -357,6 +359,19 @@ struct SermonDeliveryCreationSheet: View {
     }
 
     private var textColor: Color { settings.bibleTextColor ?? .primary }
+
+    /// 칩으로 보여 줄 모임 종류 — 같은 이름(공백·대소문자 무시)은 가장 먼저 만든 것 하나만 남긴다. 중복 행은 시작 시/시트가 열릴 때
+    /// `SermonGatheringSeeder.deduplicate`가 지우지만, 동기화가 방금 가져온 중복이 정리되기 전 한 프레임에도 보이지 않게 이중으로 막는다.
+    private var uniqueGatherings: [SermonGathering] {
+        var seen = Set<String>()
+        return allGatherings
+            .sorted { $0.createdAt < $1.createdAt }
+            .filter { gathering in
+                let key = SermonGatheringSeeder.normalizedKey(gathering.name)
+                return key.isEmpty || seen.insert(key).inserted
+            }
+            .sorted { $0.name < $1.name }   // 원래 `@Query(sort: \.name)` 순서 유지
+    }
 
     var body: some View {
         VStack(alignment: .leading, spacing: 16) {
@@ -369,7 +384,7 @@ struct SermonDeliveryCreationSheet: View {
 
                 // 모임 종류는 몇 개 안 되는 짧은 이름이라 칩으로 나열한다. 다시 누르면 선택이 풀려 "모임 미지정"이 된다.
                 FlowLayoutHStack(spacing: 8) {
-                    ForEach(allGatherings) { gathering in
+                    ForEach(uniqueGatherings) { gathering in
                         gatheringChip(gathering)
                     }
                     addChip
@@ -395,6 +410,21 @@ struct SermonDeliveryCreationSheet: View {
         .presentationBackground(settings.bibleBackgroundColor.map { AnyShapeStyle($0) } ?? AnyShapeStyle(BackgroundStyle()))
         .presentationSizing(.fitted)
         .presentationDragIndicator(.visible)
+        // 시트가 열릴 때 같은 이름의 중복 모임 종류를 합친다(시작 이후 동기화로 도착한 중복 포함).
+        .onAppear { SermonGatheringSeeder.deduplicate(in: modelContext) }
+        .alert(
+            "\(gatheringPendingDelete?.name ?? "") 삭제",
+            isPresented: Binding(
+                get: { gatheringPendingDelete != nil },
+                set: { if !$0 { gatheringPendingDelete = nil } }
+            ),
+            presenting: gatheringPendingDelete
+        ) { gathering in
+            Button("삭제", role: .destructive) { deleteGathering(gathering) }
+            Button("취소", role: .cancel) { gatheringPendingDelete = nil }
+        } message: { gathering in
+            Text(deleteMessage(for: gathering))
+        }
     }
 
     private var header: some View {
@@ -430,6 +460,36 @@ struct SermonDeliveryCreationSheet: View {
                 .foregroundStyle(isSelected ? Color.white : textColor)
         }
         .buttonStyle(.plain)
+        // 오른쪽 위 모서리의 삭제(−) 버튼이 칩 밖으로 살짝 나오므로 그만큼 여백을 둔다(FlowLayout 가장자리에서 잘리지 않게).
+        .padding(.top, 7)
+        .padding(.trailing, 7)
+        .overlay(alignment: .topTrailing) {
+            Button {
+                gatheringPendingDelete = gathering
+            } label: {
+                Image(systemName: "minus.circle.fill")
+                    .font(.system(size: 17))
+                    .symbolRenderingMode(.palette)
+                    .foregroundStyle(Color.white, Color(red: 0.69, green: 0.25, blue: 0.25))
+            }
+            .buttonStyle(.plain)
+            .help("모임 종류 삭제")
+        }
+    }
+
+    /// 삭제 확인 알림 문구 — 이 종류로 기록된 모임이 있으면 개수를 알린다(기록은 지워지지 않고 "모임 미지정"이 된다).
+    private func deleteMessage(for gathering: SermonGathering) -> String {
+        let count = gathering.deliveries?.count ?? 0
+        if count == 0 { return "이 모임 종류를 삭제합니다." }
+        return "이 모임 종류로 기록된 \(count)개의 모임은 지워지지 않고 '모임 미지정'으로 바뀝니다."
+    }
+
+    /// 모임 종류 삭제. `SermonGathering.deliveries`의 deleteRule이 `.nullify`라 기록(`SermonDelivery`)은 남고 `gathering`만 비워진다.
+    private func deleteGathering(_ gathering: SermonGathering) {
+        if selectedGatheringID == gathering.persistentModelID { selectedGatheringID = nil }
+        modelContext.delete(gathering)
+        try? modelContext.save()
+        gatheringPendingDelete = nil
     }
 
     private var addChip: some View {
@@ -465,6 +525,14 @@ struct SermonDeliveryCreationSheet: View {
     private func createGathering() {
         let trimmed = newGatheringName.trimmingCharacters(in: .whitespacesAndNewlines)
         guard !trimmed.isEmpty else { return }
+        // 이미 같은 이름이 있으면 새로 만들지 않고 그것을 선택한다(중복 방지).
+        let key = SermonGatheringSeeder.normalizedKey(trimmed)
+        if let existing = uniqueGatherings.first(where: { SermonGatheringSeeder.normalizedKey($0.name) == key }) {
+            selectedGatheringID = existing.persistentModelID
+            newGatheringName = ""
+            isAddingGathering = false
+            return
+        }
         let gathering = SermonGathering(name: trimmed)
         modelContext.insert(gathering)
         try? modelContext.save()

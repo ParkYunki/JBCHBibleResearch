@@ -18,37 +18,6 @@ import UIKit
 #endif
 
 
-/// 다른 뷰 파일들(`DocumentsHomeView` 등)이 각자 두는 것과 같은 구현 — iOS 16+ `Color.resolve`와
-/// WCAG 상대휘도로 내비게이션 바의 다크/라이트 색조를 정한다.
-/// ⚠️ 파일마다 `private`로 중복 선언한다 — 같은 모듈에서 `private`(fileprivate) 선언과 non-private
-/// 동일 이름 선언이 섞이면 "Invalid redeclaration" 충돌이 나므로 공유(internal)로 바꾸면 안 된다.
-private struct ThemedNavigationBarBackgroundModifier: ViewModifier {
-    let color: Color?
-
-    @Environment(\.self) private var environment
-
-    func body(content: Content) -> some View {
-        #if os(iOS)
-        if let color {
-            content
-                .toolbarBackground(color, for: .navigationBar)
-                .toolbarBackground(.visible, for: .navigationBar)
-                .toolbarColorScheme(Self.isDarkBackground(color, in: environment) ? .dark : .light, for: .navigationBar)
-        } else {
-            content
-        }
-        #else
-        content
-        #endif
-    }
-
-    private static func isDarkBackground(_ color: Color, in environment: EnvironmentValues) -> Bool {
-        let resolved = color.resolve(in: environment)
-        let luminance = 0.2126 * Double(resolved.red) + 0.7152 * Double(resolved.green) + 0.0722 * Double(resolved.blue)
-        return luminance < 0.5
-    }
-}
-
 /// `RichTextEditor.swift`의 `toolbarFontSizes`와 같은 목적 — 6종 프리셋 크기(16/17/19/20/24/34)를
 /// 포함한 자주 쓰는 값들.
 private let sermonToolbarFontSizes: [CGFloat] = [12, 13, 14, 15, 16, 17, 19, 20, 22, 24, 28, 32, 34, 40]
@@ -66,8 +35,6 @@ struct SermonEditorView: View {
     @Environment(\.openWindow) private var openWindow
     /// `onRequestClose`가 없는 곳(아이폰 push)에서 마인드맵 "설교문 적용" 후 이 화면을 닫는 대체 수단.
     @Environment(\.dismiss) private var dismiss
-    @Environment(\.colorScheme) private var colorScheme
-    @Environment(\.self) private var environment
     @Environment(\.sermonHasFixedTitle) private var hasFixedTitle
 
     @State private var contentHtml: String = ""
@@ -95,10 +62,9 @@ struct SermonEditorView: View {
 
     private var settings: UserSettingsStore { .shared }
 
-    /// 테마색상 반영 — `SermonHomeView.accent`/`SermonDetailView.accent`와 같은 코드.
-    private var accent: Color {
-        SermonTheme.accent(background: settings.bibleBackgroundColor, environment: environment, fallbackScheme: colorScheme)
-    }
+    /// 에디터는 뷰어와 같은 고정 미색 종이 위에 그려지므로(`SermonViewerPaper`) 강조색도 라이트 값을 쓴다.
+    /// 바깥 환경의 colorScheme/테마색상을 읽으면 다크 모드·어두운 테마에서 밝은 강조색이 되어 미색 위에서 안 보인다.
+    private var accent: Color { SermonTheme.accent(.light) }
 
     private var isPhoneIdiom: Bool {
         #if os(iOS)
@@ -115,8 +81,16 @@ struct SermonEditorView: View {
             || !contentText.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty
     }
 
+    /// 페이지 안 "완료/취소" 줄을 보일지. 창/시트/패널로 열려 `onRequestClose`가 있는 아이패드·맥에서만 보인다.
+    /// 아이폰은 push된 화면이라 시스템 뒤로가기 "<"가 `onDisappear → save()`를 태우므로(시트일 때는 호출부가 자기
+    /// 툴바에 "취소"를 둔다) 이 줄이 필요 없다. `#if os(iOS)`가 아니라 `isPhoneIdiom`으로 판단해야 아이패드에서도 보인다.
+    private var showsCloseBar: Bool { onRequestClose != nil && !isPhoneIdiom }
+
     var body: some View {
         VStack(spacing: 0) {
+            if showsCloseBar {
+                closeBar
+            }
             titleField
             if let parentSermon = subject.parentSermon {
                 referencedMainSermonBanner(parentSermon)
@@ -139,19 +113,11 @@ struct SermonEditorView: View {
         #if os(iOS)
         .navigationBarTitleDisplayMode(.inline)
         #endif
-        .modifier(ThemedNavigationBarBackgroundModifier(color: settings.bibleBackgroundColor))
-        .toolbar {
-            // 아이폰은 push된 화면이라 시스템 뒤로가기 "<"가 이미 `onDisappear → save()`를 태우므로
-            // 이 버튼은 아이패드·맥(뒤로가기 없이 오른쪽 패널에 얹힘)에서만 보인다. `#if os(iOS)`가
-            // 아니라 `isPhoneIdiom`으로 판단해야 아이패드에서도 보인다.
-            if isNewSermon && !isPhoneIdiom {
-                ToolbarItem(placement: .cancellationAction) {
-                    // 저장 동작은 그대로 두고 라벨만 실제 동작에 맞춘다 — 입력이 있으면 "완료"(닫으면
-                    // 저장됨), 제목·본문이 모두 비어 있으면 "취소"(`save()` 가드가 저장을 건너뜀).
-                    Button(hasEnteredContent ? "완료" : "취소") { onRequestClose?() }
-                }
-            }
-        }
+        #if os(iOS)
+        .toolbarBackground(SermonViewerPaper.color, for: .navigationBar)
+        .toolbarBackground(.visible, for: .navigationBar)
+        .toolbarColorScheme(.light, for: .navigationBar)
+        #endif
         .sheet(isPresented: $isVersePickerPresented) {
             SermonVerseReferencePicker { text, bookId, chapter, verseStart, verseEnd in
                 insertVerseQuote(text: text, bookId: bookId, chapter: chapter, verseStart: verseStart, verseEnd: verseEnd)
@@ -172,10 +138,51 @@ struct SermonEditorView: View {
             onFlush: flushForExternalChange,
             onReplaced: closeForExternalChange
         )
-        .background(settings.bibleBackgroundColor ?? Color.clear)
+        // 배경은 설정 테마·다크 모드와 무관하게 뷰어와 같은 미색으로 고정한다(`SermonViewerView` 참고).
+        // 배경이 항상 밝으므로 SwiftUI 요소(글자·메뉴·버튼)도 라이트 외형으로 고정한다.
+        .background(SermonViewerPaper.color.ignoresSafeArea())
+        .environment(\.colorScheme, .light)
         #if os(macOS)
         .frame(minWidth: 720, minHeight: 560)
         #endif
+    }
+
+    // MARK: - 완료/취소 (페이지 안 줄)
+
+    /// 창 제목 줄(툴바)이 아니라 페이지 맨 위에 두는 "완료/취소" 줄 — 새 설교/설교 편집이 별도 창으로 열리면서 툴바 버튼을
+    /// 이 안으로 옮겼다. 동작은 예전 툴바 버튼과 같다: 저장 방식은 그대로 두고 라벨만 실제 동작에 맞춘다 — 새 설교에서
+    /// 제목·본문이 모두 비어 있으면 "취소"(`save()` 가드가 저장을 건너뜀), 그 외에는 "완료"(저장 후 닫기).
+    /// 이미 있는 설교/회차 편집은 항상 "완료"다(제목·태그·구절은 입력 즉시 반영되므로 되돌리는 취소는 없다).
+    private var closeBar: some View {
+        let isCancel = isNewSermon && !hasEnteredContent
+        return VStack(spacing: 0) {
+            HStack(spacing: 10) {
+                Text(closeBarTitle)
+                    .font(.subheadline.weight(.semibold))
+                    .foregroundStyle(Color.secondary)
+                Spacer()
+                Button(isCancel ? "취소" : "완료") {
+                    // 창을 닫을 때 `onDisappear → save()`가 한 번 더 돌지만, 닫힘 시점에 기대지 않고 먼저 저장한다
+                    // (`save()`는 중복 호출돼도 같은 값을 다시 쓸 뿐이며 새 설교의 insert는 한 번만 한다).
+                    if !isCancel { save() }
+                    onRequestClose?()
+                }
+                .buttonStyle(SermonMiniPillButtonStyle(isFilled: !isCancel, tint: accent))
+                .accessibilityLabel(isCancel ? "취소하고 닫기" : "저장하고 닫기")
+            }
+            .padding(.horizontal, 14)
+            .padding(.vertical, 8)
+            .background(SermonViewerPaper.color)
+            Divider()
+        }
+    }
+
+    private var closeBarTitle: String {
+        if isNewSermon { return "새 설교" }
+        switch subject {
+        case .sermon: return "설교 편집"
+        case .delivery: return "모임 설교문 편집"
+        }
     }
 
     // MARK: - 새 설교 제목 (요구사항 — "새 설교 작성 레이어 팝업 제거, 본문
@@ -189,7 +196,7 @@ struct SermonEditorView: View {
                 if isNewSermon {
                     TextField("설교 제목", text: $title)
                         .font(.title3.bold())
-                        .foregroundStyle(settings.bibleTextColor ?? .primary)
+                        .foregroundStyle(Color.primary)
                         .textFieldStyle(.plain)
                         .onSubmit { save() }
                 } else {
@@ -198,14 +205,14 @@ struct SermonEditorView: View {
                         text: Binding(get: { sermon.title }, set: { sermon.title = $0 })
                     )
                     .font(.title3.bold())
-                    .foregroundStyle(settings.bibleTextColor ?? .primary)
+                    .foregroundStyle(Color.primary)
                     .textFieldStyle(.plain)
                     .onSubmit { save() }
                 }
             }
             .padding(.horizontal, 14)
             .padding(.vertical, 10)
-            .background(.bar)
+            .background(SermonViewerPaper.color)
             Divider()
         }
     }
@@ -227,7 +234,7 @@ struct SermonEditorView: View {
         VStack(alignment: .leading, spacing: 8) {
             Text(tagSectionLabel)
                 .font(.caption)
-                .foregroundStyle(settings.bibleTextColor?.opacity(0.6) ?? Color.secondary)
+                .foregroundStyle(Color.secondary)
 
             FlowLayoutHStack {
                 ForEach(tags) { tag in
@@ -271,7 +278,7 @@ struct SermonEditorView: View {
         }
         .padding(.horizontal, 12)
         .padding(.vertical, 10)
-        .background(.bar)
+        .background(SermonViewerPaper.color)
     }
 
     // MARK: - "참조한 메인 설교" 배너 (요구사항 6)
@@ -390,7 +397,7 @@ struct SermonEditorView: View {
         }
         .padding(.horizontal, 12)
         .padding(.vertical, 8)
-        .background(.bar)
+        .background(SermonViewerPaper.color)
     }
 
     /// 문단 정렬·글자 색상·크기·글꼴 지정 툴바(`RichTextEditorToolbarContent`와 같은 구성). 각 메뉴
@@ -509,6 +516,11 @@ struct SermonEditorView: View {
                 let trimmedContent = contentText.trimmingCharacters(in: .whitespacesAndNewlines)
                 guard !trimmedTitle.isEmpty || !trimmedContent.isEmpty else { return }
                 modelContext.insert(sermon)
+                // 성경 조회에서 절을 골라 시작한 새 설교는 구절 참조가 설교에만 달려 있고 아직 insert되지 않았다(`SermonNewWindowContent`).
+                // 이미 insert된 참조(아이폰 시트 경로)에 다시 insert해도 같은 컨텍스트 안에서는 무해하다.
+                for reference in sermon.verseReferences ?? [] {
+                    modelContext.insert(reference)
+                }
                 hasInsertedNewSermon = true
             }
         }

@@ -27,6 +27,20 @@ import UIKit
 import AppKit
 #endif
 
+// MARK: - 뷰어 고정 배경(종이색)
+
+/// 설교 뷰어의 고정 배경 — 설정의 테마 배경색이나 다크 모드와 무관하게 항상 같은 부드러운 미색(#F6F2E9)이다.
+/// 배경이 고정 밝은색이라 글자 기본색(레이블 색)도 항상 어둡게 풀리도록 뷰어의 텍스트뷰는 라이트 외형으로 고정한다
+/// (iOS `overrideUserInterfaceStyle = .light`, macOS `appearance = .aqua`). 문단 스타일에 저장된 hex 글자색은 그대로 쓴다.
+enum SermonViewerPaper {
+    private static let red = 246.0 / 255.0
+    private static let green = 242.0 / 255.0
+    private static let blue = 233.0 / 255.0
+
+    static let platformColor = PlatformColor(red: red, green: green, blue: blue, alpha: 1)
+    static let color = Color(red: red, green: green, blue: blue)
+}
+
 // MARK: - 문서 만들기
 
 @MainActor
@@ -157,8 +171,9 @@ struct SermonViewerScrollText: UIViewRepresentable {
         textView.isSelectable = true
         textView.alwaysBounceVertical = true
         textView.textContainerInset = UIEdgeInsets(top: 16, left: 16, bottom: 32, right: 16)
-        // 편집기(`SermonParagraphEditor`)와 같은 바탕.
-        textView.backgroundColor = .systemBackground
+        // 뷰어 고정 종이색 + 라이트 외형(`SermonViewerPaper` 참고).
+        textView.overrideUserInterfaceStyle = .light
+        textView.backgroundColor = SermonViewerPaper.platformColor
         textView.attributedText = attributed
         context.coordinator.generation = generation
         return textView
@@ -188,13 +203,16 @@ struct SermonViewerScrollText: NSViewRepresentable {
 
     func makeNSView(context: Context) -> NSScrollView {
         let scrollView = NSTextView.scrollableTextView()
+        scrollView.appearance = NSAppearance(named: .aqua)
+        scrollView.drawsBackground = true
+        scrollView.backgroundColor = SermonViewerPaper.platformColor
         if let textView = scrollView.documentView as? NSTextView {
             textView.isEditable = false
             textView.isSelectable = true
             textView.isRichText = true
             textView.textContainerInset = NSSize(width: 16, height: 16)
             textView.drawsBackground = true
-            textView.backgroundColor = .textBackgroundColor
+            textView.backgroundColor = SermonViewerPaper.platformColor
             textView.textStorage?.setAttributedString(attributed)
         }
         context.coordinator.generation = generation
@@ -239,6 +257,7 @@ final class SermonViewerPageController: UIViewController {
         textView.contentInsetAdjustmentBehavior = .never
         textView.textContainerInset = .zero
         textView.backgroundColor = .clear
+        textView.overrideUserInterfaceStyle = .light
     }
 
     @available(*, unavailable)
@@ -247,7 +266,8 @@ final class SermonViewerPageController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // 페이지 컬의 뒷면이 비쳐 보일 때도 종이 색이 같도록 불투명한 바탕을 둔다.
-        view.backgroundColor = .systemBackground
+        overrideUserInterfaceStyle = .light
+        view.backgroundColor = SermonViewerPaper.platformColor
         view.addSubview(textView)
     }
 
@@ -267,7 +287,8 @@ struct SermonViewerPageCurl: UIViewControllerRepresentable {
         pageViewController.isDoubleSided = false
         pageViewController.dataSource = context.coordinator
         pageViewController.delegate = context.coordinator
-        pageViewController.view.backgroundColor = .systemBackground
+        pageViewController.overrideUserInterfaceStyle = .light
+        pageViewController.view.backgroundColor = SermonViewerPaper.platformColor
         context.coordinator.paginator = paginator
         context.coordinator.insets = insets
         context.coordinator.show(index: currentIndex, animated: false, in: pageViewController)
@@ -348,7 +369,9 @@ struct SermonViewerSinglePage: NSViewRepresentable {
     let insets: NSSize
 
     func makeNSView(context: Context) -> NSView {
-        NSView()
+        let view = NSView()
+        view.appearance = NSAppearance(named: .aqua)
+        return view
     }
 
     func updateNSView(_ nsView: NSView, context: Context) {
@@ -368,6 +391,7 @@ struct SermonViewerSinglePage: NSViewRepresentable {
         textView.isSelectable = true
         textView.textContainerInset = .zero
         textView.drawsBackground = false
+        textView.appearance = NSAppearance(named: .aqua)
         nsView.addSubview(textView)
     }
 

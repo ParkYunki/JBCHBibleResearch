@@ -112,11 +112,19 @@ public final class MindMapNode {
     public var borderDashSpacing: Double?
     /// 노드 하단에 표시하는 설명 텍스트. `nil`이면 설명 없음, `""`이면 설명 영역만 만들고 입력 대기 중인 상태다.
     public var descriptionText: String?
+    /// 노드 안 제목 글자 크기(pt). `nil`이면 플랫폼 기본(`.title2`)이다. 설명 글자는 이 값의 약 0.72배로 함께 따라간다.
+    /// 마이그레이션 NULL 대비 Optional — 화면 쪽 `resolvedFontSize`로만 읽는다.
+    public var fontSize: Double?
+    /// 설명이 있는 노드에서 제목(라벨) 영역의 고정 높이(pt). 노드 크기를 키워도 이 값은 그대로이고 설명 영역만 늘어난다.
+    /// `nil`이면(이 필드가 생기기 전에 설명을 붙인 노드) `height / 2` — 예전의 반반 분할과 같다. 설명이 없으면 쓰지 않는다.
+    public var labelHeight: Double?
     /// 부모로 이어지는 선의 경로 종류(베지어/꺾은선).
     public var pathType: MindMapPathType = MindMapPathType.bezier
     public var createdAt: Date = Date.now
     public var updatedAt: Date = Date.now
 
+    /// 설명이 있을 때의 제목 영역 높이 — `labelHeight`가 없으면 노드 높이의 절반.
+    public var resolvedLabelHeight: Double { labelHeight ?? height / 2 }
     /// `borderColor`가 없으면 도형 색을 쓴다(과거 노드의 화면 변화 최소화).
     public var resolvedBorderColor: MindMapNodeColor { borderColor ?? color }
     /// `lineColor`가 없으면 도형 색을 쓴다.

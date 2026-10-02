@@ -770,12 +770,14 @@ struct SermonMindMapView: View {
         }
     }
 
-    /// 설명 추가 — 노드 하단에 설명 영역을 만든다. 제목 영역이 원래 크기를 유지하도록 처음 추가할 때 노드 높이를
-    /// 두 배로 늘린다(중심 좌표는 그대로). `removeDescription`이 높이를 절반으로 되돌린다.
+    /// 설명 추가 — 노드 하단에 설명 영역을 만든다. 제목 영역이 원래 크기를 유지하도록 그 높이를 `labelHeight`로 고정하고
+    /// 노드 높이를 두 배로 늘린다(중심 좌표는 그대로). 이후 크기 조절은 설명 영역만 늘리고 줄인다.
+    /// `removeDescription`이 노드 높이를 `labelHeight`(원래 제목 영역 높이)로 되돌린다.
     /// 설명은 빈 문자열로 시작해 곧바로 편집 모드로 들어간다.
     private func addDescription(to node: MindMapNode) {
         guard node.descriptionText == nil else { return }
         node.descriptionText = ""
+        node.labelHeight = node.height
         node.height = node.height * 2
         node.updatedAt = .now
         selectedNodeIDs = [node.persistentModelID]
@@ -786,7 +788,8 @@ struct SermonMindMapView: View {
     private func removeDescription(from node: MindMapNode) {
         guard node.descriptionText != nil else { return }
         node.descriptionText = nil
-        node.height = max(40, node.height / 2)
+        node.height = max(40, node.resolvedLabelHeight)
+        node.labelHeight = nil
         node.updatedAt = .now
         if editingDescriptionNodeID == node.persistentModelID {
             editingDescriptionNodeID = nil
@@ -1414,6 +1417,8 @@ struct SermonMindMapView: View {
                     Divider()
                     shapeStyleSection(selectedNode)
                     Divider()
+                    fontStyleSection(selectedNode)
+                    Divider()
                     borderStyleSection(selectedNode)
                     Divider()
                     lineStyleSection(selectedNode)
@@ -1528,6 +1533,22 @@ struct SermonMindMapView: View {
                     }
                     .buttonStyle(SermonMiniPillButtonStyle(isFilled: false, tint: accent))
                 }
+            }
+
+            Divider()
+            Text("글자 크기 일괄 적용").font(.caption2.weight(.semibold)).foregroundStyle(.secondary)
+            if let representative {
+                // 대표(첫 번째) 노드의 값을 보여주고, 움직이면 선택 전체에 같은 크기를 적용한다.
+                StyleValueSlider(
+                    title: "제목",
+                    range: 10...40,
+                    step: 1,
+                    fractionDigits: 0,
+                    value: representative.resolvedFontSize
+                ) { newValue in
+                    applyToSelection(selectedNodes) { $0.setFontSize(newValue) }
+                }
+                .id(representative.persistentModelID)
             }
 
             Divider()
@@ -1653,6 +1674,37 @@ struct SermonMindMapView: View {
             .pickerStyle(.segmented)
             .labelsHidden()
             .controlSize(.small)
+        }
+    }
+
+    /// 글자 크기 섹션 — 노드 안 제목 글자 크기(10~40pt). 설명 글자는 제목의 약 0.72배로 따라간다.
+    /// 설명이 있는 노드는 제목 영역 높이도 비율대로 함께 바뀐다(`MindMapNode.setFontSize`).
+    private func fontStyleSection(_ node: MindMapNode) -> some View {
+        VStack(alignment: .leading, spacing: 8) {
+            styleSectionTitle("글자 크기")
+            StyleValueSlider(
+                title: "제목",
+                range: 10...40,
+                step: 1,
+                fractionDigits: 0,
+                value: node.resolvedFontSize
+            ) { newValue in
+                node.setFontSize(newValue)
+            }
+            .id(node.persistentModelID)
+            if node.descriptionText != nil {
+                Text("설명 글자: \(Int(node.descriptionFontSize))pt (제목의 약 72%)")
+                    .font(.caption2)
+                    .foregroundStyle(.secondary)
+            }
+            if node.fontSize != nil {
+                Button {
+                    node.resetFontSize()
+                } label: {
+                    Text("기본 크기로")
+                }
+                .buttonStyle(SermonMiniPillButtonStyle(isFilled: false, tint: accent))
+            }
         }
     }
 
@@ -2259,7 +2311,7 @@ private struct MindMapNodeShapeView: View {
                     // `value.location`은 캔버스 좌표라 노드 위쪽 가장자리 y를 빼 노드 안 좌표로 바꾼다(클릭이라 노드가 움직이지 않았다).
                     let topEdge = (CGFloat(node.positionY) - CGFloat(node.height) / 2) * scale
                     let localY = value.location.y - topEdge
-                    if node.descriptionText != nil, localY > CGFloat(node.height) * scale / 2 {
+                    if node.descriptionText != nil, localY > CGFloat(node.resolvedLabelHeight) * scale {
                         onBeginEditDescription()
                     } else {
                         onBeginEdit()
@@ -2274,9 +2326,11 @@ private struct MindMapNodeShapeView: View {
     @ViewBuilder
     private var contentLayout: some View {
         if let description = node.descriptionText {
+            // 제목(라벨) 영역은 고정 높이(`resolvedLabelHeight`)이고 나머지가 전부 설명 영역이다 — 노드 크기를 키우면 설명만 늘어난다.
             VStack(spacing: 0) {
                 titleView(lineLimit: 2)
-                    .frame(maxWidth: .infinity, maxHeight: .infinity)
+                    .frame(maxWidth: .infinity)
+                    .frame(height: CGFloat(node.resolvedLabelHeight) * scale)
                 Rectangle()
                     .fill(foregroundColor.opacity(0.45))
                     .frame(height: 1)
@@ -2287,6 +2341,23 @@ private struct MindMapNodeShapeView: View {
         } else {
             titleView(lineLimit: 4)
         }
+    }
+
+    /// 제목 글꼴 — 크기를 지정하지 않았으면 예전과 같은 `.title2` 굵게.
+    private var titleFont: Font {
+        node.fontSize.map { Font.system(size: CGFloat($0), weight: .bold) } ?? Font.title2.weight(.bold)
+    }
+
+    /// 설명 글꼴 — 크기를 지정하지 않았으면 예전과 같은 `.callout`, 지정했으면 제목 크기의 0.72배(`MindMapNode.descriptionFontSize`).
+    private var descriptionFont: Font {
+        node.fontSize.map { _ in Font.system(size: CGFloat(node.descriptionFontSize)) } ?? Font.callout
+    }
+
+    /// 설명 영역에 들어가는 줄 수 — 영역이 커지면 더 많은 줄을 보여준다(예전에는 3줄 고정이라 키워도 빈 공간만 늘었다).
+    /// 영역 높이 = 노드 높이 − 제목 영역 − 구분선 1pt, 위아래 여백 12pt, 줄 높이는 글자 크기의 약 1.3배.
+    private var descriptionLineLimit: Int {
+        let area = node.height - node.resolvedLabelHeight - 1 - 12
+        return max(1, Int(area / (node.descriptionFontSize * 1.3)))
     }
 
     /// 노드 제목 — 편집 중이면 TextField, 아니면 Text.
@@ -2303,13 +2374,13 @@ private struct MindMapNodeShapeView: View {
             )
             .textFieldStyle(.plain)
             .multilineTextAlignment(.center)
-            .font(.title2.weight(.bold))
+            .font(titleFont)
             .foregroundStyle(foregroundColor)
             .padding(8)
             .onSubmit { onEndEdit() }
         } else {
             Text(node.text.isEmpty ? "새 노드" : node.text)
-                .font(.title2.weight(.bold))
+                .font(titleFont)
                 .foregroundStyle(foregroundColor)
                 .multilineTextAlignment(.center)
                 .lineLimit(lineLimit)
@@ -2331,16 +2402,16 @@ private struct MindMapNodeShapeView: View {
             )
             .textFieldStyle(.plain)
             .multilineTextAlignment(.center)
-            .font(.callout)
+            .font(descriptionFont)
             .foregroundStyle(foregroundColor)
             .padding(6)
             .onSubmit { onEndEditDescription() }
         } else {
             Text(description.isEmpty ? "설명" : description)
-                .font(.callout)
+                .font(descriptionFont)
                 .foregroundStyle(foregroundColor.opacity(description.isEmpty ? 0.6 : 1))
                 .multilineTextAlignment(.center)
-                .lineLimit(3)
+                .lineLimit(descriptionLineLimit)
                 .padding(6)
         }
     }
@@ -2441,12 +2512,19 @@ private struct MindMapNodeShapeView: View {
                     .onChanged { value in
                         if resizeStartSize == nil {
                             resizeStartSize = CGSize(width: node.width, height: node.height)
+                            // 이 필드가 생기기 전에 설명을 붙인 노드는 제목 영역이 "높이의 절반"이었다 — 크기를 바꾸기 시작하는 순간
+                            // 지금 값으로 고정해 두어야 이후 높이 변화가 제목 영역으로 번지지 않는다.
+                            if node.descriptionText != nil, node.labelHeight == nil {
+                                node.labelHeight = node.height / 2
+                            }
                         }
                         guard let start = resizeStartSize else { return }
                         // 핸들은 배율에 맞춰 커지지 않는 고정 크기 UI라 `.local` 이동량은 화면 픽셀 그대로다.
                         // 배율 1.0 기준 모델 크기 변화량으로 되돌리려면 배율로 나눈다.
                         node.width = max(80, Double(start.width) + Double(value.translation.width / scale))
-                        node.height = max(40, Double(start.height) + Double(value.translation.height / scale))
+                        // 설명이 있으면 제목 영역(고정) + 설명 최소 36pt 아래로는 줄이지 않는다.
+                        let minHeight: Double = node.descriptionText != nil ? node.resolvedLabelHeight + 36 : 40
+                        node.height = max(minHeight, Double(start.height) + Double(value.translation.height / scale))
                     }
                     .onEnded { _ in
                         resizeStartSize = nil
@@ -2553,6 +2631,8 @@ struct MindMapNodeSnapshot: Equatable {
     let lineFadeByDepth: Bool?
     let taperThickness: Double?
     let descriptionText: String?
+    let fontSize: Double?
+    let labelHeight: Double?
     let pathType: MindMapPathType
     let createdAt: Date
     let parentID: UUID?
@@ -2578,6 +2658,8 @@ struct MindMapNodeSnapshot: Equatable {
         lineFadeByDepth = node.lineFadeByDepth
         taperThickness = node.taperThickness
         descriptionText = node.descriptionText
+        fontSize = node.fontSize
+        labelHeight = node.labelHeight
         pathType = node.pathType
         createdAt = node.createdAt
         parentID = node.parent?.id
@@ -2604,6 +2686,8 @@ struct MindMapNodeSnapshot: Equatable {
         node.lineFadeByDepth = lineFadeByDepth
         node.taperThickness = taperThickness
         node.descriptionText = descriptionText
+        node.fontSize = fontSize
+        node.labelHeight = labelHeight
         node.pathType = pathType
         node.createdAt = createdAt
     }
@@ -2755,6 +2839,9 @@ struct MindMapStyleTemplate: Codable, Equatable {
     var arrowShape: MindMapArrowShape = .closedTriangle
     var taperThickness: Double = 12
     var lineFadeByDepth: Bool = true
+    /// 노드 글자 크기. 우클릭 "스타일 복사/붙여넣기"에서만 채워지고(`init(node:)`), 마지막 스타일 기억(`recordChanges`)에는 쓰지 않는다 —
+    /// 새 노드는 항상 기본 크기로 시작한다. 옵셔널이라 예전에 저장된 JSON도 그대로 읽힌다.
+    var fontSize: Double?
 
     private static let defaultsKey = "JBCH.mindMapLastStyleTemplate.v1"
 
@@ -2787,6 +2874,7 @@ struct MindMapStyleTemplate: Codable, Equatable {
         node.arrowShape = arrowShape
         node.taperThickness = taperThickness
         node.lineFadeByDepth = lineFadeByDepth
+        if let fontSize { node.setFontSize(fontSize) }
     }
 
     /// 두 복사본을 비교해, 같은 노드에서 스타일 항목이 바뀐 게 있으면 그 항목만 저장된
@@ -2842,6 +2930,58 @@ extension MindMapStyleTemplate {
         arrowShape = node.resolvedArrowShape
         taperThickness = node.resolvedTaperThickness
         lineFadeByDepth = node.resolvedLineFadeByDepth
+        fontSize = node.resolvedFontSize
+    }
+}
+
+// MARK: - 노드 글자 크기
+
+extension MindMapNode {
+    /// 제목 기본 크기 — 예전 `.title2`와 같은 값(플랫폼마다 다르다: iOS 22, macOS 17).
+    static var defaultFontSize: Double {
+        #if os(macOS)
+        return 17
+        #else
+        return 22
+        #endif
+    }
+
+    /// 화면에 쓰는 제목 크기(pt).
+    var resolvedFontSize: Double { fontSize ?? Self.defaultFontSize }
+
+    /// 글자 크기를 기본값(지정 없음)으로 되돌린다. 설명이 있으면 제목 영역도 기본 크기에 맞게 돌아간다.
+    func resetFontSize() {
+        setFontSize(Self.defaultFontSize)
+        fontSize = nil
+        updatedAt = .now
+    }
+
+    /// 설명 글자 크기 — 지정 크기가 없으면 예전 `.callout`(iOS 16, macOS 12), 있으면 제목의 0.72배(최소 9pt).
+    var descriptionFontSize: Double {
+        guard let fontSize else {
+            #if os(macOS)
+            return 12
+            #else
+            return 16
+            #endif
+        }
+        return max(9, (fontSize * 0.72).rounded())
+    }
+
+    /// 글자 크기를 바꾼다. 설명이 있는 노드는 제목(라벨) 영역도 같은 비율로 키우고 줄여 — 그만큼 노드 높이를 함께 조정해 —
+    /// 설명 영역 크기는 그대로 둔다(제목 영역은 크기를 직접 조절하지 못하므로 글자 크기에 맞춰 따라가야 잘리지 않는다).
+    func setFontSize(_ newSize: Double) {
+        let clamped = min(max(newSize, 9), 60)
+        let oldSize = resolvedFontSize
+        guard abs(clamped - oldSize) > 0.0001 else { return }
+        if descriptionText != nil {
+            let oldLabel = resolvedLabelHeight
+            let newLabel = max(30, oldLabel * clamped / oldSize)
+            height += newLabel - oldLabel
+            labelHeight = newLabel
+        }
+        fontSize = clamped
+        updatedAt = .now
     }
 }
 

@@ -4,7 +4,8 @@
 //
 //  성경조회의 책갈피 이동 팝업 — 책갈피 목록을 보여주고, 항목을 탭하면 해당 위치로 이동한다.
 //  `TranslationPickerPopover`와 같은 `.popover` 패턴이지만 칩 그리드가 아닌 목록형이다.
-//  헤더(개수 배지), 한 줄 행(책/장(:절) + 상대 저장 시각), 스와이프 삭제, 빈 상태 안내를 제공한다.
+//  머리·구분선·행·빈 상태는 조회 이력(`BibleReadingHistorySheet`)과 같은 공통 부품(`BibleListLayerParts.swift`)을 쓴다.
+//  삭제: 스와이프(iOS/트랙패드) · 행에 마우스를 올리면 나타나는 삭제 버튼(macOS) · 우클릭/길게 누르기 메뉴.
 //  항목을 탭해 이동해도 조회 이력은 남지 않는다 — `BibleReadingViewModel.navigateToBookmark` 참고.
 
 import SwiftUI
@@ -33,16 +34,20 @@ struct BookmarkListPopover: View {
     /// 아이패드/macOS 팝오버는 영향이 없다.
     var body: some View {
         VStack(alignment: .leading, spacing: 0) {
-            header
-            Divider()
+            BibleListLayerHeader(title: "책갈피", count: bookmarks.count, topInset: headerTopInset, onDismiss: onDismiss)
+            BibleListLayerDivider()
             if bookmarks.isEmpty {
-                emptyState
+                BibleListLayerEmptyState(
+                    systemImage: "bookmark",
+                    title: "책갈피가 없습니다",
+                    message: "책갈피 아이콘을 눌러 지금 위치를 저장하세요."
+                )
             } else {
                 list
             }
         }
         .background(settings.bibleBackgroundColor ?? Color.clear)
-        .frame(width: isPhone ? nil : 300)
+        .frame(width: isPhone ? nil : BibleListLayerMetrics.bookmarkWidth)
         #if os(iOS)
         .modifier(BookmarkSheetSizingModifier(isPhone: isPhone, sheetHeight: sheetHeight))
         #endif
@@ -62,108 +67,50 @@ struct BookmarkListPopover: View {
         #endif
     }
 
+    /// 머리 위 여백 — 팝오버 14, 아이폰 시트는 드래그 표시 아래 숨 쉴 공간 때문에 18(조회 이력과 같은 값).
+    private var headerTopInset: CGFloat { isPhone ? 18 : 14 }
+
+    /// 목록 영역 높이: 행 높이 기준으로 계산하며 상한은 "전체 상한 − 머리 − 구분선".
+    private var listHeight: CGFloat {
+        let cap = BibleListLayerMetrics.bookmarkMaxHeight
+            - BibleListLayerMetrics.headerHeight(topInset: 14)
+            - BibleListLayerMetrics.dividerHeight
+        return min(CGFloat(bookmarks.count) * BibleListLayerMetrics.rowHeight + BibleListLayerMetrics.listVerticalPadding, cap)
+    }
+
     #if os(iOS)
-    /// 시트 높이: 헤더(약 44) + 구분선(1) + 컨텐츠(빈 상태 180 고정, 목록은 `list`와 같은 계산식으로 최대 360).
+    /// 시트 높이: 머리 + 구분선 + 컨텐츠(빈 상태 고정, 목록은 `listHeight`와 같은 계산식).
     private var sheetHeight: CGFloat {
-        let headerHeight: CGFloat = 44
-        let dividerHeight: CGFloat = 1
-        let contentHeight: CGFloat = bookmarks.isEmpty ? 180 : min(CGFloat(bookmarks.count) * 44 + 8, 360)
-        return headerHeight + dividerHeight + contentHeight
+        let contentHeight = bookmarks.isEmpty ? BibleListLayerMetrics.emptyStateHeight : listHeight
+        return BibleListLayerMetrics.headerHeight(topInset: headerTopInset) + BibleListLayerMetrics.dividerHeight + contentHeight
     }
     #endif
 
-    private var header: some View {
-        HStack(spacing: 6) {
-            Text("책갈피")
-                .font(.headline)
-                .foregroundStyle(settings.bibleTextColor ?? .primary)
-            if !bookmarks.isEmpty {
-                Text("\(bookmarks.count)")
-                    .font(.caption)
-                    .foregroundStyle(settings.bibleTextColor?.opacity(0.6) ?? Color.secondary)
-                    .padding(.horizontal, 6)
-                    .padding(.vertical, 2)
-                    .background(settings.bibleTextColor?.opacity(0.12) ?? Color.secondary.opacity(0.15), in: Capsule())
-            }
-            Spacer()
-            // 팝오버는 바깥 탭으로도 닫히지만, 명시적 닫기 버튼을 같은 줄에 둔다(세로 공간 절약).
-            Button {
-                onDismiss()
-            } label: {
-                Image(systemName: "xmark.circle.fill")
-                    .font(.system(size: 18))
-                    .foregroundStyle(settings.bibleTextColor?.opacity(0.6) ?? Color.secondary)
-            }
-            .buttonStyle(.plain)
-            .accessibilityLabel("닫기")
-        }
-        .padding(.horizontal, 16)
-        .padding(.vertical, 10)
-    }
-
-    private var emptyState: some View {
-        VStack(spacing: 8) {
-            Image(systemName: "bookmark")
-                .font(.system(size: 28))
-                .foregroundStyle(settings.bibleTextColor?.opacity(0.6) ?? Color.secondary)
-            Text("책갈피가 없습니다")
-                .font(.callout)
-                .foregroundStyle(settings.bibleTextColor?.opacity(0.6) ?? Color.secondary)
-            Text("성경 조회 상단의 책갈피 아이콘을 눌러 지금 위치를 저장하세요.")
-                .font(.caption)
-                .foregroundStyle(settings.bibleTextColor?.opacity(0.4) ?? Color.secondary)
-                .multilineTextAlignment(.center)
-        }
-        .padding(.horizontal, 20)
-        .padding(.vertical, 32)
-        .frame(maxWidth: .infinity)
-    }
-
     private var list: some View {
-        // `List`는 자체 배경이 있어 `.background()`만으로는 바뀌지 않는다 —
-        // `.scrollContentBackground(.hidden)`와 `.background()`를 짝으로 쓴다.
         List {
             ForEach(bookmarks) { bookmark in
-                row(for: bookmark)
-                    .listRowInsets(EdgeInsets(top: 0, leading: 16, bottom: 0, trailing: 16))
-                    .swipeActions(edge: .trailing, allowsFullSwipe: true) {
-                        Button(role: .destructive) {
-                            delete(bookmark)
-                        } label: {
-                            Label("삭제", systemImage: "trash")
-                        }
+                BibleListLayerRow(
+                    title: bookChapterLabel(for: bookmark),
+                    meta: Self.relativeTimeFormatter.localizedString(for: bookmark.createdAt, relativeTo: .now),
+                    onSelect: {
+                        viewModel.navigateToBookmark(bookmark)
+                        onDismiss()
+                    },
+                    onDelete: { delete(bookmark) },
+                    deleteLabel: "책갈피 삭제"
+                )
+                .bibleListLayerRowChrome()
+                .swipeActions(edge: .trailing, allowsFullSwipe: true) {
+                    Button(role: .destructive) {
+                        delete(bookmark)
+                    } label: {
+                        Label("삭제", systemImage: "trash")
                     }
+                }
             }
         }
-        .listStyle(.plain)
-        .scrollContentBackground(.hidden)
-        .background(settings.bibleBackgroundColor ?? Color.clear)
-        // 행 높이 44pt(HIG 최소 탭 영역) 기준으로 계산하며 최대 360.
-        .frame(height: min(CGFloat(bookmarks.count) * 44 + 8, 360))
-    }
-
-    private func row(for bookmark: BibleBookmark) -> some View {
-        Button {
-            viewModel.navigateToBookmark(bookmark)
-            onDismiss()
-        } label: {
-            // 제목은 왼쪽, 상대 시각은 오른쪽 끝에 두어 한 줄로 구성한다(세로 공간 절약).
-            HStack(spacing: 8) {
-                Text(bookChapterLabel(for: bookmark))
-                    .font(.body)
-                    .foregroundStyle(settings.bibleTextColor ?? .primary)
-                    .lineLimit(1)
-                Spacer(minLength: 8)
-                Text(Self.relativeTimeFormatter.localizedString(for: bookmark.createdAt, relativeTo: .now))
-                    .font(.caption)
-                    .foregroundStyle(settings.bibleTextColor?.opacity(0.6) ?? Color.secondary)
-                    .lineLimit(1)
-                    .layoutPriority(1)
-            }
-            .padding(.vertical, 11)
-            .contentShape(Rectangle())
-        }
-        .buttonStyle(.plain)
+        .bibleListLayerListStyle()
+        .frame(height: listHeight)
     }
 
     private func delete(_ bookmark: BibleBookmark) {
