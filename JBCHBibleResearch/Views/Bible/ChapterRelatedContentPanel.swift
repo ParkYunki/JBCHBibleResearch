@@ -127,7 +127,8 @@ struct ChapterRelatedContentPanel: View {
             }
             // 테마 배경 적용 — `OutlineTreeView`/`WordNoteHomeView`와 같은 관례.
             .scrollContentBackground(.hidden)
-            .background(settings.bibleBackgroundColor ?? Color.clear)
+            // 아이패드 인스펙터: 본문과 구분되도록 옅은 톤(`IPadPaneSeparation.swift`). 아이폰 시트/맥 패널은 테마색 그대로.
+            .themedPaneBackground(tinted: true)
             // 제목은 "책 한글명 + 장" — BibleReadingView 툴바 타이틀 두 번째 줄과 같은 조합.
             .navigationTitle("\(viewModel.selectedBook.nameKo) \(viewModel.selectedChapter)장")
             #if os(iOS)

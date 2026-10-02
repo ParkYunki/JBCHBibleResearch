@@ -233,7 +233,8 @@ struct SidebarNavigationView: View {
         // `List` 기본 시스템 배경을 `.scrollContentBackground(.hidden)`으로 먼저 꺼야
         // `.background(...)`의 테마 색이 보인다.
         .scrollContentBackground(.hidden)
-        .background(settings.bibleBackgroundColor ?? Color.clear)
+        // 아이패드에서는 본문과 구분되도록 옅은 톤을 얹는다(`IPadPaneSeparation.swift`; 맥/아이폰은 테마색 그대로).
+        .themedPaneBackground(tinted: true)
     }
 
     var body: some View {
@@ -253,7 +254,9 @@ struct SidebarNavigationView: View {
                 sidebarMenuList
             }
             // 검색창 주변 여백까지 테마색으로 채우기 위해 `List` 밖의 `VStack`에도 배경을 준다.
-            .background(settings.bibleBackgroundColor ?? Color.clear)
+            .themedPaneBackground(tinted: true)
+            // 아이패드: 본문과 맞닿는 오른쪽 가장자리에 헤어라인(맥/아이폰은 동작 안 함).
+            .iPadPaneSeparator(.trailing)
             .navigationSplitViewColumnWidth(min: 200, ideal: 240, max: 280)
             // 아이패드에서는 사이드바 위의 큰 인라인 제목으로 보이므로 macOS 전용으로만 둔다
             // (이 뷰는 애초에 아이폰에서 쓰이지 않는다).

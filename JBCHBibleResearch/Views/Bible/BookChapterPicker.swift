@@ -23,6 +23,9 @@ struct BookChapterPicker: View {
     var onSelectVerse: ((Book, Int, Int) -> Void)? = nil
     /// true면 `body`가 `compactBarBody`(이어진 막대)를, false면 `standardBody`를 쓴다. 기본값 false.
     var compactTouchTargets: Bool = false
+    /// true면 `standardBody` 대신 `unifiedBarBody`(성경 조회 맥OS 상단 막대와 같은 32pt 규격, `BibleBarControls.swift`)를 쓴다.
+    /// 다른 화면(교차참조/설교/메모/문서/말씀 요약)의 선택기는 기본값 false라 모양이 그대로다. `compactTouchTargets`가 true면 무시된다.
+    var unifiedBarStyle: Bool = false
     var onSelect: (Book, Int) -> Void
 
     @State private var isGridPresented = false
@@ -37,6 +40,8 @@ struct BookChapterPicker: View {
         Group {
             if compactTouchTargets {
                 compactBarBody
+            } else if unifiedBarStyle {
+                unifiedBarBody
             } else {
                 standardBody
             }
@@ -121,16 +126,18 @@ struct BookChapterPicker: View {
         }
     }
 
-    /// 아이폰/아이패드 공용 "이어진 막대" 레이아웃(책 아이콘·검색창·이동 아이콘).
-    /// `BibleReadingView.JoinedNavBadgeModifier`를 재사용해 상단 막대의 나머지 아이콘과 모양을 맞춘다.
-    private var compactBarBody: some View {
-        HStack(spacing: 4) {
+    /// 성경 조회 맥OS 상단 막대용 — 책 버튼, 검색창, 이동 버튼을 `BibleBarControls.swift`의 32pt 규격으로 그린다.
+    /// 동작(그리드 팝오버, 자유 텍스트 해석, 오류 알림)은 `standardBody`와 같은 상태·함수를 쓴다.
+    private var unifiedBarBody: some View {
+        HStack(spacing: 10) {
             Button {
                 isGridPresented = true
             } label: {
-                Image(systemName: "book")
+                Label("\(selectedBook.abbreviation.first ?? selectedBook.nameKo) \(selectedChapter)장", systemImage: "book")
+                    .font(.system(size: 13, weight: .bold))
             }
-            .modifier(JoinedNavBadgeModifier(isProminent: false))
+            .buttonStyle(BibleBarButtonStyle())
+            .help("책과 장 고르기")
             .popover(isPresented: $isGridPresented) {
                 BookGridPicker(books: books, initialBook: selectedBook) { book, chapter in
                     onSelect(book, chapter)
@@ -138,6 +145,70 @@ struct BookChapterPicker: View {
                 }
                 .frame(minWidth: 360, minHeight: 460)
             }
+
+            if showsFreeTextSearch {
+                let textColor = settings.bibleTextColor ?? Color.primary
+                HStack(spacing: 6) {
+                    Image(systemName: "magnifyingglass")
+                        .font(.system(size: 12, weight: .medium))
+                        .foregroundStyle(textColor.opacity(0.62))
+                    TextField(
+                        "예: 창세기1, 요3:16",
+                        text: $freeText,
+                        prompt: Text("예: 창세기1, 요3:16").foregroundStyle(textColor.opacity(0.62))
+                    )
+                    .font(.system(size: 12.5))
+                    .lineLimit(1)
+                    .textFieldStyle(.plain)
+                    .foregroundStyle(textColor)
+                    .onSubmit(submitFreeText)
+                    .focused($isFreeTextFocused)
+                }
+                .padding(.horizontal, 10)
+                .frame(height: BibleBarMetrics.height)
+                .background(
+                    RoundedRectangle(cornerRadius: BibleBarMetrics.radius, style: .continuous)
+                        .fill(textColor.opacity(0.05))
+                )
+                .overlay(
+                    RoundedRectangle(cornerRadius: BibleBarMetrics.radius, style: .continuous)
+                        .strokeBorder(textColor.opacity(isFreeTextFocused ? 0.5 : BibleBarMetrics.lineOpacity), lineWidth: 1)
+                )
+                .frame(minWidth: 120, maxWidth: 190)
+
+                Button(action: submitFreeText) {
+                    Image(systemName: "arrow.right")
+                        .font(.system(size: 14, weight: .semibold))
+                }
+                .buttonStyle(BibleBarButtonStyle(kind: .primary, isSquare: true))
+                .disabled(freeText.trimmingCharacters(in: .whitespaces).isEmpty)
+                .help("이동")
+                .accessibilityLabel("이동")
+            }
+        }
+    }
+
+    /// 아이폰/아이패드 공용 "이어진 막대" 레이아웃(책 아이콘·검색창·이동 아이콘).
+    /// `BibleReadingView.JoinedNavBadgeModifier`를 재사용해 상단 막대의 나머지 아이콘과 모양을 맞춘다.
+    private var compactBarBody: some View {
+        HStack(spacing: 0) {
+            Button {
+                isGridPresented = true
+            } label: {
+                Image(systemName: "book")
+            }
+            .buttonStyle(BibleCapsuleItemStyle())
+            .accessibilityLabel("책과 장 고르기")
+            .popover(isPresented: $isGridPresented) {
+                BookGridPicker(books: books, initialBook: selectedBook) { book, chapter in
+                    onSelect(book, chapter)
+                    isGridPresented = false
+                }
+                .frame(minWidth: 360, minHeight: 460)
+            }
+
+            // 버튼 사이 구분선(2026-10-02) — 책 | 검색 칸 | 이동.
+            BibleCapsuleDivider()
 
             // 이 검색창은 "현재 위치 표시"와 "직접 검색 입력"을 겸한다. 포커스가 없을 때는
             // `syncFreeTextToCurrentPositionIfNeeded()`가 현재 책/장 약어로 채우고, 타이핑 중에는 건드리지 않는다.
@@ -174,18 +245,21 @@ struct BookChapterPicker: View {
                         .fixedSize()
                 }
             }
-            // 책 아이콘 배지와 텍스트 사이 여백.
-            .padding(.leading, 8)
+            // 구분선과 텍스트 사이 여백.
+            .padding(.horizontal, 8)
             // `maxWidth: .infinity`를 쓰면 이 영역이 바깥 `.frame(maxWidth: .infinity)` 안에서 남는 폭을 모두
             // 흡수해 캡슐 전체가 화면 폭만큼 늘어난다. 고정 상한(90)은 최대 6자 안팎의 약어("삼상18", "요3:16")가
             // `.title3` + `tracking(2)`에서도 잘리지 않는 값이다.
             .frame(minWidth: 50, maxWidth: 90, minHeight: 44)
 
-            // `isProminent: true`로 다른 아이콘과 모양은 통일하되 채움 강도로 "주된 실행 동작"임을 구분한다.
+            BibleCapsuleDivider()
+
+            // 강조 채움 원으로 "주된 실행 동작"임을 구분한다(밝은 테마 금갈색, 어두운 테마 밝은 금색).
             Button(action: submitFreeText) {
                 Image(systemName: "arrow.right")
             }
-            .modifier(JoinedNavBadgeModifier(isProminent: true))
+            .buttonStyle(BibleCapsuleGoStyle())
+            .accessibilityLabel("이동")
             .disabled(freeText.trimmingCharacters(in: .whitespaces).isEmpty)
         }
         .onAppear {

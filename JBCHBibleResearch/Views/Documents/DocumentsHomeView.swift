@@ -113,11 +113,14 @@ struct DocumentsHomeView: View {
     @State private var searchText: String = ""
     /// 카테고리 필터(성경 장/커스텀 카테고리) — `categoryFilterMenu` 참고.
     @State private var categoryFilter: DocumentCategoryFilter = .all
-    #if os(macOS)
-    /// 맥OS 3번째 열(Inspector, "카테고리 관리") 표시 여부.
+    /// "카테고리 관리" 팝오버 표시 여부(맥OS·아이패드 공통 — 아이폰은 툴바 자리가 좁아 제외).
     @State private var isCategoryManagerPresented = false
     /// `categoryManagerPanel`의 "새 카테고리" 입력창.
     @State private var newCategoryName = ""
+    #if os(iOS)
+    /// 아이패드 순서 변경 모드 — 켜면 행마다 위/아래 버튼이 나타난다. 팝오버가 닫히면 `.onDisappear`에서 끈다.
+    /// (드래그 `List.onMove`는 아이패드에서 UIKit 배치 갱신 예외(`attempt to move both item…`)로 앱이 종료돼 쓰지 않는다.)
+    @State private var isReorderingCategories = false
     #endif
     /// 테마 배경/글자색 읽기용 접근.
     private var settings: UserSettingsStore { .shared }
@@ -209,22 +212,22 @@ struct DocumentsHomeView: View {
                     .foregroundStyle(settings.bibleTextColor ?? .primary)
             }
             #endif
-            #if os(macOS)
-            // 카테고리 관리 팝오버 버튼. 예전 `.inspector`(3번째 열)는 열면 본문 폭이 줄어 NavigationSplitView 사이드바가
+            // 카테고리 관리 팝오버 버튼(맥OS·아이패드; 아이폰은 툴바가 좁아 제외). 예전 `.inspector`(3번째 열)는 열면 본문 폭이 줄어 NavigationSplitView 사이드바가
             // 자동으로 접혔다 펴져(창 폭 약 1215pt 이하) 팝오버로 바꿨다 — 본문/사이드바 폭에 영향이 없다.
             // `.primaryAction`이라 업로드 버튼과 함께 툴바 오른쪽 끝에 놓인다.
-            ToolbarItem(placement: .primaryAction) {
-                Button {
-                    isCategoryManagerPresented.toggle()
-                } label: {
-                    Label("카테고리 관리", systemImage: "folder.badge.gearshape")
-                }
-                .help("카테고리 생성 · 이름 변경 · 삭제 · 순서")
-                .popover(isPresented: $isCategoryManagerPresented, arrowEdge: .bottom) {
-                    categoryManagerPanel
+            if !isPhone {
+                ToolbarItem(placement: .primaryAction) {
+                    Button {
+                        isCategoryManagerPresented.toggle()
+                    } label: {
+                        Label("카테고리 관리", systemImage: "folder.badge.gearshape")
+                    }
+                    .help("카테고리 생성 · 이름 변경 · 삭제 · 순서")
+                    .popover(isPresented: $isCategoryManagerPresented, arrowEdge: .bottom) {
+                        categoryManagerPanel
+                    }
                 }
             }
-            #endif
             ToolbarItem(placement: .primaryAction) {
                 // 진입점 1: 툴바 업로드 버튼. iOS/iPadOS는 파일/사진 보관함 선택 메뉴, macOS는 파일 선택기만(`PhotosPicker` 없음).
                 #if os(iOS)
@@ -617,8 +620,7 @@ struct DocumentsHomeView: View {
         .listRowSeparatorTint(JBCHCategoryPalette.wood.opacity(0.3))
     }
 
-    #if os(macOS)
-    /// 맥OS 전용 "카테고리 관리" 팝오버 — 툴바 버튼으로 연다. 생성 · 이름 변경 · 삭제 · 수동 순서를 지원한다.
+    /// "카테고리 관리" 팝오버(맥OS·아이패드) — 툴바 버튼으로 연다. 생성 · 이름 변경 · 삭제 · 수동 순서를 지원한다.
     /// 삭제해도 소속 문서는 지워지지 않고 "분류 없음"으로 옮겨진다(`ImageCategory.sourceDocuments` deleteRule = nullify).
     ///
     /// 디자인은 이 화면의 문서함 카드(`folderCard`)·검색 영역과 같은 언어를 쓴다 — 테마 배경/글자색, 성곡 세리프 제목,
@@ -628,11 +630,24 @@ struct DocumentsHomeView: View {
         let secondaryTextColor = settings.bibleTextColor?.opacity(0.6) ?? Color.secondary
         return VStack(alignment: .leading, spacing: 0) {
             VStack(alignment: .leading, spacing: 4) {
-                Text("카테고리 관리")
-                    .font(.custom(SpecialPurposeFonts.titleSerif, size: 20, relativeTo: .title3))
-                    .fontWeight(.semibold)
-                    .foregroundStyle(textColor)
-                Text("이름 변경 · 삭제 · 드래그로 순서 바꾸기")
+                // 제목과 같은 줄에 "순서 변경/완료"(아이패드)를 두고 첫 줄 기준선을 맞춘다 — 제목 아래 설명 문구와 겹치지 않는다.
+                HStack(alignment: .firstTextBaseline, spacing: 8) {
+                    Text("카테고리 관리")
+                        .font(.custom(SpecialPurposeFonts.titleSerif, size: 20, relativeTo: .title3))
+                        .fontWeight(.semibold)
+                        .foregroundStyle(textColor)
+                    #if os(iOS)
+                    Spacer(minLength: 8)
+                    if !(viewModel?.categories.isEmpty ?? true) {
+                        Button(isReorderingCategories ? "완료" : "순서 변경") {
+                            isReorderingCategories.toggle()
+                        }
+                        .font(.callout.weight(.semibold))
+                        .foregroundStyle(JBCHCategoryPalette.gold)
+                    }
+                    #endif
+                }
+                Text(panelSubtitle)
                     .font(.caption)
                     .foregroundStyle(secondaryTextColor)
             }
@@ -661,7 +676,12 @@ struct DocumentsHomeView: View {
                                 category: category,
                                 viewModel: viewModel,
                                 spineColor: spineColors[index % spineColors.count],
-                                onDelete: { deleteCategory(category, viewModel: viewModel) }
+                                onDelete: { deleteCategory(category, viewModel: viewModel) },
+                                isReordering: isReorderingCategoriesActive,
+                                canMoveUp: index > 0,
+                                canMoveDown: index < viewModel.categories.count - 1,
+                                onMoveUp: { viewModel.moveCategories(from: IndexSet(integer: index), to: index - 1) },
+                                onMoveDown: { viewModel.moveCategories(from: IndexSet(integer: index), to: index + 2) }
                             )
                             .listRowSeparator(.hidden)
                             .listRowBackground(Color.clear)
@@ -678,9 +698,12 @@ struct DocumentsHomeView: View {
                                 .disabled(index == viewModel.categories.count - 1)
                             }
                         }
+                        // 드래그 정렬은 맥OS만 — 아이패드는 위/아래 버튼(`isReordering`)을 쓴다.
+                        #if os(macOS)
                         .onMove { source, destination in
                             viewModel.moveCategories(from: source, to: destination)
                         }
+                        #endif
                     }
                     .listStyle(.plain)
                     .scrollContentBackground(.hidden)
@@ -728,6 +751,9 @@ struct DocumentsHomeView: View {
         }
         .frame(width: 340, height: 480)
         .foregroundStyle(textColor)
+        #if os(iOS)
+        .onDisappear { isReorderingCategories = false }
+        #endif
         // 테마 배경을 칠한다. 테마를 고르지 않았으면 팝오버 기본 배경을 그대로 둔다.
         .background {
             if let background = settings.bibleBackgroundColor {
@@ -749,7 +775,24 @@ struct DocumentsHomeView: View {
         if categoryFilter == .custom(deletedID) { categoryFilter = .all }
         viewModel.deleteCategory(category)
     }
-    #endif
+
+    /// 순서 변경 모드 여부(맥OS는 항상 false — 드래그로 바로 옮긴다).
+    private var isReorderingCategoriesActive: Bool {
+        #if os(iOS)
+        isReorderingCategories
+        #else
+        false
+        #endif
+    }
+
+    /// 패널 머리 안내 문구 — 순서 변경 방법이 플랫폼마다 달라 따로 둔다.
+    private var panelSubtitle: String {
+        #if os(iOS)
+        "이름 변경 · 삭제 · 순서는 오른쪽 위 \"순서 변경\"으로"
+        #else
+        "이름 변경 · 삭제 · 드래그로 순서 바꾸기"
+        #endif
+    }
 
     // MARK: - 검색 + 카테고리 필터 (2026-08-16 신설)
 
@@ -1173,8 +1216,7 @@ struct DocumentsHomeView: View {
     }
 }
 
-#if os(macOS)
-/// `categoryManagerPanel`(macOS 팝오버)의 목록 행 — 이름 인라인 편집 + 삭제 + 드래그 핸들.
+/// `categoryManagerPanel`(맥OS·아이패드 팝오버)의 목록 행 — 이름 인라인 편집 + 삭제 + 드래그 핸들.
 /// 이름은 포커스를 잃거나 Return을 누르면 즉시 저장한다. 모양은 문서함 카드(`DocumentsHomeView.folderCard`)와 같다.
 /// 삭제는 확인 대화상자 대신 행 안에서 한 번 더 묻는다(팝오버 안에서 alert가 팝오버를 닫는 일을 피하려는 것).
 private struct CategoryManagerRow: View {
@@ -1184,6 +1226,12 @@ private struct CategoryManagerRow: View {
     let spineColor: Color
     /// 삭제 확정 시 부모가 실행한다(필터 초기화 + 모델 삭제).
     let onDelete: () -> Void
+    /// 순서 변경 모드(아이패드): 켜면 이름 편집/삭제 대신 위/아래 버튼을 보인다.
+    var isReordering = false
+    var canMoveUp = false
+    var canMoveDown = false
+    var onMoveUp: (() -> Void)? = nil
+    var onMoveDown: (() -> Void)? = nil
     @State private var settings = UserSettingsStore.shared
     @State private var name: String = ""
     @State private var isConfirmingDelete = false
@@ -1200,26 +1248,54 @@ private struct CategoryManagerRow: View {
                     .font(.custom(SpecialPurposeFonts.titleSerif, size: 17, relativeTo: .body))
                     .foregroundStyle(textColor)
                     .focused($isFocused)
+                    .disabled(isReordering)
 
-                Button {
-                    isFocused = false
-                    isConfirmingDelete = true
-                } label: {
-                    Image(systemName: "trash")
-                        .font(.callout)
-                        .foregroundStyle(secondaryTextColor)
+                if isReordering {
+                    // 위/아래 한 칸 이동 — 탭 영역을 넓게 잡는다(44pt 권장).
+                    Button { onMoveUp?() } label: {
+                        Image(systemName: "chevron.up")
+                            .font(.callout.weight(.semibold))
+                            .frame(width: 36, height: 36)
+                            .contentShape(Rectangle())
+                    }
+                    .buttonStyle(.plain)
+                    .foregroundStyle(JBCHCategoryPalette.gold.opacity(canMoveUp ? 1 : 0.3))
+                    .disabled(!canMoveUp)
+                    .accessibilityLabel("위로 이동")
+                    Button { onMoveDown?() } label: {
+                        Image(systemName: "chevron.down")
+                            .font(.callout.weight(.semibold))
+                            .frame(width: 36, height: 36)
+                            .contentShape(Rectangle())
+                    }
+                    .buttonStyle(.plain)
+                    .foregroundStyle(JBCHCategoryPalette.gold.opacity(canMoveDown ? 1 : 0.3))
+                    .disabled(!canMoveDown)
+                    .accessibilityLabel("아래로 이동")
+                } else {
+                    Button {
+                        isFocused = false
+                        isConfirmingDelete = true
+                    } label: {
+                        Image(systemName: "trash")
+                            .font(.callout)
+                            .foregroundStyle(secondaryTextColor)
+                    }
+                    .buttonStyle(.plain)
+                    .help("카테고리 삭제")
                 }
-                .buttonStyle(.plain)
-                .help("카테고리 삭제")
 
-                // 순서 변경 안내용 핸들(행 어디를 잡아 끌어도 `List.onMove`가 동작한다).
+                // 순서 변경 안내용 핸들(행 어디를 잡아 끌어도 `List.onMove`가 동작한다). 아이패드는 편집 모드에서
+                // 시스템이 자체 핸들을 그리므로 중복을 피해 맥OS에서만 보인다.
+                #if os(macOS)
                 Image(systemName: "line.3.horizontal")
                     .font(.callout)
                     .foregroundStyle(secondaryTextColor.opacity(0.7))
                     .help("끌어서 순서 변경")
+                #endif
             }
 
-            if isConfirmingDelete {
+            if isConfirmingDelete && !isReordering {
                 Text("삭제하면 이 카테고리의 문서는 '분류 없음'으로 옮겨집니다. 문서는 지워지지 않습니다.")
                     .font(.caption)
                     .foregroundStyle(secondaryTextColor)
@@ -1274,7 +1350,6 @@ private struct CategoryManagerRow: View {
         viewModel.renameCategory(category, to: name)
     }
 }
-#endif
 
 /// 업로드 확인 시트 — 관련 성경 장을 묻는다(선택 사항이라 "건너뛰기" 가능). 카테고리는 입력이
 /// 강제되어, 두 경로(건너뛰기/이 장으로 업로드) 모두 카테고리를 고르기 전에는 버튼이 비활성화된다.

@@ -278,14 +278,17 @@ struct VerseZoomView: View {
                 // macOS `.sheet`의 `.confirmationAction`/`.cancellationAction` 자리는 버튼 하나만 그려져, 두 번째 버튼을 얹으면
                 // (`ToolbarItem`/`ToolbarItemGroup` 모두) 조용히 사라진다(실측). 그래서 macOS만 하단 버튼줄(닫기/원문 정보/펜·눈동자)을
                 // 본문에 직접 그린다. iOS/iPadOS 내비게이션 바는 이 제약이 없어 아래 `.toolbar`를 그대로 쓴다.
+                // 버튼 규격은 성경 조회 막대와 같은 `BibleBarButtonStyle`(32pt), 줄 바탕·위쪽 선은 `VerseSheetFooter`(VerseSheetChrome.swift).
+                // 펜/눈동자 토글은 선택 모드가 켜지면(눈동자) 강조 채움으로 바뀌어 현재 상태가 보인다.
                 #if os(macOS)
-                Divider()
-                HStack {
+                VerseSheetFooter {
                     Button("닫기") { dismiss() }
-                    Spacer()
+                        .buttonStyle(BibleBarButtonStyle())
+                    Spacer(minLength: 0)
                     Button(action: onSwitchToOriginalTextInfo) {
                         Label("원문 정보", systemImage: "character.book.closed")
                     }
+                    .buttonStyle(BibleBarButtonStyle())
                     .help("원문 정보로 전환")
                     Button {
                         isSelecting.toggle()
@@ -293,8 +296,9 @@ struct VerseZoomView: View {
                     } label: {
                         Image(systemName: isSelecting ? "eye" : "pencil")
                     }
+                    .buttonStyle(BibleBarButtonStyle(kind: isSelecting ? .primary : .secondary, isSquare: true))
+                    .help(isSelecting ? "글자 선택 끝내기(표시 모드)" : "글자 선택 모드")
                 }
-                .padding()
                 #endif
             }
             // 읽기 테마 배경(테마가 없으면 시스템 기본 배경).
@@ -450,17 +454,102 @@ struct VerseZoomView: View {
     // 선택 모드 전용이 된다(원래는 드래그 선택과 무관하게 절 전체에 걸 수 있던 기능).
     // 수동 밑줄 버튼(`.mark`)은 없앴다 — 그 주황 밑줄은 관주가 걸린 표현에 자동으로 붙는다(`VerseAnnotationRenderer.buildLines`의 `hasCrossReference`).
     // `VerseHighlightStyle.mark` 케이스와 렌더링 분기는 기존 레거시 데이터 표시용으로 남겼고 새로 만드는 진입점은 없다.
+    #if os(macOS)
+    /// macOS 하단 도구 줄 — 형광펜 색 점 상자 + 메모/개인 묵상/관주 72×56 타일(목업 결정, `VerseSheetChrome.swift`).
+    /// 선택 모드가 꺼지면 모든 도구를 38%로 흐리게 하고 누를 수 없게 둔다(예전 35%와 같은 의도).
+    private var actionBar: some View {
+        let textColor: Color = settings.bibleTextColor ?? Color.primary
+        return HStack(spacing: 8) {
+            VStack(spacing: 5) {
+                HStack(spacing: 7) {
+                    ForEach(HighlightColorTag.allCases) { tag in
+                        Button {
+                            handleHighlightTap(tag)
+                        } label: {
+                            Circle()
+                                .fill(tag.swiftUIColor)
+                                .frame(width: 20, height: 20)
+                                .overlay(Circle().strokeBorder(textColor.opacity(0.3), lineWidth: 1))
+                        }
+                        .buttonStyle(.plain)
+                        .contentShape(Circle())
+                    }
+                }
+                Text("형광펜")
+                    .font(.system(size: 11.5, weight: .medium))
+                    .foregroundStyle(textColor)
+            }
+            .padding(.horizontal, 12)
+            .modifier(VerseToolBoxChrome())
+            .opacity(isSelecting ? 1 : BibleBarMetrics.disabledOpacity)
+
+            Rectangle()
+                .fill(textColor.opacity(0.22))
+                .frame(width: 1, height: 32)
+
+            toolTile(title: "메모", systemImage: "text.bubble") {
+                beginPhraseNoteFromSelection()
+            }
+            toolTile(title: "개인 묵상", systemImage: "note.text") {
+                beginComposingPersonalNote()
+            }
+            // 관주 버튼은 항상 새로 만들기 시트(`CrossReferenceTargetPicker`)를 열고, 겹치는 기존 관주는 `existingReferences`로
+            // 시트에 넘겨 그 안에서 보여준다(아래 `.sheet` 참고).
+            toolTile(title: "관주", systemImage: "link") {
+                isCrossReferencePickerPresented = true
+            }
+        }
+        .frame(maxWidth: .infinity)
+        .padding(.horizontal, 14)
+        .padding(.vertical, 12)
+        .disabled(!isSelecting)
+    }
+
+    private func toolTile(title: String, systemImage: String, action: @escaping () -> Void) -> some View {
+        Button(action: action) {
+            VStack(spacing: 4) {
+                Image(systemName: systemImage).font(.system(size: 19))
+                Text(title)
+            }
+        }
+        .buttonStyle(VerseToolTileStyle())
+    }
+    #endif
+
+    /// 형광펜 색 점을 눌렀을 때 — 선택 범위가 있으면 그 색으로 칠하고, 없으면 선택 모드로 들어간다(기존 동작 그대로).
+    private func handleHighlightTap(_ tag: HighlightColorTag) {
+        if hasSelection {
+            applyHighlight(colorTag: tag)
+        } else {
+            isSelecting = true
+        }
+    }
+
+    /// 메모 버튼 동작(기존 클로저 본문을 그대로 옮김). 선택 범위와 겹치는 기존 메모가 있으면(`existingPhraseNote(overlapping:)`) 중복 등록하지 않고
+    /// 그 메모를 편집 모드로 연다. 팝오버를 열기로 결정하는 이 순간 `selectedRange`/`anchorText`를 `editingAnchorRange`/`editingAnchorText`에
+    /// 스냅샷으로 떠 둔다(상태 선언부 주석 참고). 앞뒤 공백은 `trimmedRange`로 뺀다.
+    private func beginPhraseNoteFromSelection() {
+        let trimmed = trimmedRange(selectedRange, in: verseText)
+        guard trimmed.length > 0 else {
+            isSelecting = true
+            return
+        }
+        let trimmedText = (verseText as NSString).substring(with: trimmed)
+        let existing = existingPhraseNote(overlapping: trimmed)
+        editingPhraseNote = existing
+        editingAnchorRange = trimmed
+        editingAnchorText = trimmedText
+        presentPhraseNoteEditor()
+    }
+
+    #if os(iOS)
     private var actionBar: some View {
         HStack(spacing: 20) {
             VStack(spacing: 4) {
                 HStack(spacing: 6) {
                     ForEach(HighlightColorTag.allCases) { tag in
                         Button {
-                            if hasSelection {
-                                applyHighlight(colorTag: tag)
-                            } else {
-                                isSelecting = true
-                            }
+                            handleHighlightTap(tag)
                         } label: {
                             Circle().fill(tag.swiftUIColor).frame(width: 20, height: 20)
                         }
@@ -476,17 +565,7 @@ struct VerseZoomView: View {
             // 팝오버를 열기로 결정하는 이 순간 `selectedRange`/`anchorText`를 `editingAnchorRange`/`editingAnchorText`에 스냅샷으로 떠 둔다
             // (상태 선언부 주석 참고). 앞뒤 공백은 `trimmedRange`로 뺀다.
             actionButton(title: "메모", systemImage: "text.bubble") {
-                let trimmed = trimmedRange(selectedRange, in: verseText)
-                guard trimmed.length > 0 else {
-                    isSelecting = true
-                    return
-                }
-                let trimmedText = (verseText as NSString).substring(with: trimmed)
-                let existing = existingPhraseNote(overlapping: trimmed)
-                editingPhraseNote = existing
-                editingAnchorRange = trimmed
-                editingAnchorText = trimmedText
-                presentPhraseNoteEditor()
+                beginPhraseNoteFromSelection()
             }
 
             actionButton(title: "개인 묵상", systemImage: "note.text") {
@@ -504,6 +583,7 @@ struct VerseZoomView: View {
         .disabled(!isSelecting)
         .opacity(isSelecting ? 1 : 0.35)
     }
+    #endif
 
     private func actionButton(title: String, systemImage: String, action: @escaping () -> Void) -> some View {
         Button(action: action) {

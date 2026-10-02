@@ -113,6 +113,11 @@ struct SermonMindMapView: View {
     @State private var edgeDrag: EdgeDragState?
     /// 현재 캔버스 드래그의 시작 위치 — 드래그가 "선 잡기"인지 "러버밴드 선택"인지를 시작 순간 한 번 정하기 위해 기억한다.
     @State private var canvasDragStart: CGPoint?
+    /// 맥OS: 빈 캔버스를 그냥 끌면 화면 이동(⇧을 누르고 끌면 선택 사각형). 현재 드래그가 화면 이동이면 true.
+    /// 아이패드/아이폰은 항상 false — 거기서는 한 손가락이 선택, 두 손가락이 화면 이동(`ScrollViewTwoFingerPan`).
+    @State private var isCanvasPanning = false
+    /// 화면 이동 드래그를 시작한 순간의 스크롤 위치(콘텐츠 좌표). 드래그가 끝나면 nil.
+    @State private var panStartOrigin: CGPoint?
     /// 노드 위·아래 중앙 버튼을 끄는 동안의 상태(어느 노드의 어느 버튼, 현재 포인터 위치 — 캔버스 좌표). `nil`이면 드래그 중이 아니다.
     @State private var linkDrag: LinkDragState?
     /// 우클릭 "스타일 복사"로 담아 둔 스타일 — 같은 창 안에서만 유지된다.
@@ -387,6 +392,10 @@ struct SermonMindMapView: View {
             }
             .coordinateSpace(name: Self.canvasSpace)
             .contentShape(Rectangle())
+            // 아이패드/아이폰: 스크롤을 두 손가락 드래그로 바꿔 한 손가락 드래그(선택/노드 이동)와 겹치지 않게 한다.
+            #if os(iOS)
+            .background(ScrollViewTwoFingerPan())
+            #endif
             .onTapGesture {
                 selectedNodeIDs.removeAll()
                 editingNodeID = nil
@@ -408,6 +417,16 @@ struct SermonMindMapView: View {
         }
         // 뷰포트 읽기는 `scrollVisibleRect`, 복원(쓰기)은 `scrollPosition`으로 한다.
         .scrollPosition($scrollPosition)
+        // 맥OS: 빈 캔버스 드래그로 화면 이동. 이동량은 스크롤과 함께 움직이지 않는 `ScrollView` 자신의 좌표계에서 재야
+        // (콘텐츠 좌표로 재면 스크롤할수록 이동량이 줄어드는 되먹임이 생긴다) 되먹임 없이 따라간다.
+        // 어떤 드래그가 화면 이동인지는 캔버스 제스처(`handleCanvasDragChanged`)가 시작 순간에 정해 `isCanvasPanning`에 둔다.
+        #if os(macOS)
+        .simultaneousGesture(
+            DragGesture(minimumDistance: 4, coordinateSpace: .local)
+                .onChanged { value in handleCanvasPanChanged(translation: value.translation) }
+                .onEnded { _ in panStartOrigin = nil }
+        )
+        #endif
         // 핀치 줌 — 돋보기 버튼과 같은 `zoomScale`을 바꾸므로 배율 표시·미니맵·저장 뷰포트가 함께 갱신된다.
         // `simultaneousGesture`라 노드 드래그·러버밴드·스크롤 제스처와 서로 막지 않는다.
         .simultaneousGesture(
@@ -1145,9 +1164,19 @@ struct SermonMindMapView: View {
             } else {
                 edgeDrag = nil
             }
+            // 맥OS: 선 위에서 시작한 드래그가 아니고 ⇧를 누르지 않았으면 화면 이동. 그 밖(⇧ 선택, 아이패드/아이폰)은 선택 사각형.
+            #if os(macOS)
+            isCanvasPanning = edgeDrag == nil && !NSEvent.modifierFlags.contains(.shift)
+            #else
+            isCanvasPanning = false
+            #endif
+            panStartOrigin = nil
         }
         if edgeDrag != nil {
             edgeDrag?.location = value.location
+        } else if isCanvasPanning {
+            // 화면 이동은 `handleCanvasPanChanged`가 처리한다 — 선택 사각형은 그리지 않는다.
+            selectionRect = nil
         } else {
             selectionRect = CGRect(
                 x: min(value.startLocation.x, value.location.x),
@@ -1175,6 +1204,22 @@ struct SermonMindMapView: View {
         selectionRect = nil
         edgeDrag = nil
         canvasDragStart = nil
+        isCanvasPanning = false
+        panStartOrigin = nil
+    }
+
+    /// 맥OS 화면 이동 — 드래그 시작 때의 스크롤 위치에서 손가락(커서) 이동량만큼 반대로 스크롤한다(콘텐츠를 잡아 끄는 느낌).
+    /// 캔버스 가장자리를 넘지 않도록 0...(콘텐츠 − 가시 영역)으로 자른다.
+    private func handleCanvasPanChanged(translation: CGSize) {
+        guard isCanvasPanning else { return }
+        if panStartOrigin == nil { panStartOrigin = scrollVisibleRect.origin }
+        guard let start = panStartOrigin else { return }
+        let maxX = max(0, Self.canvasSize.width * zoomScale - scrollVisibleRect.width)
+        let maxY = max(0, Self.canvasSize.height * zoomScale - scrollVisibleRect.height)
+        scrollPosition.scrollTo(point: CGPoint(
+            x: min(max(0, start.x - translation.width), maxX),
+            y: min(max(0, start.y - translation.height), maxY)
+        ))
     }
 
     /// `point`(캔버스 콘텐츠 좌표) 근처(`edgeHitTolerance` 이내)의 선 중 가장 가까운 것의 자식 노드. 없으면 `nil`.

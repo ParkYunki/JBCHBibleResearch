@@ -55,82 +55,113 @@ struct OriginalTextInfoView: View {
         return "\(name) \(chapter):\(verseNumber) 원문 정보"
     }
 
-    var body: some View {
-        NavigationStack {
-            ScrollView {
-                VStack(alignment: .leading, spacing: 16) {
-                    // biblehub 인터리니어 링크(시스템 기본 브라우저로 열림). 슬러그를 못 찾거나 URL이 안 만들어지면
-                    // 깨진 링크를 보여주는 대신 숨긴다.
-                    if let interlinearURL = bibleHubInterlinearURL {
-                        Link(destination: interlinearURL) {
-                            Label("영문-원어성경", systemImage: "safari")
-                                .font(.system(size: 13, weight: .medium))
-                        }
-                        .foregroundStyle(.blue)
+    /// 시트 본문(스크롤 영역). macOS/iOS 모두 같은 내용을 쓴다.
+    private var mainScroll: some View {
+        ScrollView {
+            VStack(alignment: .leading, spacing: 16) {
+                // biblehub 인터리니어 링크(시스템 기본 브라우저로 열림). 슬러그를 못 찾거나 URL이 안 만들어지면
+                // 깨진 링크를 보여주는 대신 숨긴다.
+                if let interlinearURL = bibleHubInterlinearURL {
+                    Link(destination: interlinearURL) {
+                        Label("영문-원어성경", systemImage: "safari")
+                            .font(.system(size: 13, weight: .medium))
                     }
-                    // 원어 데이터가 없는 절에서도 KRV 본문은 보이도록 `words.isEmpty` 분기 밖에 둔다.
-                    if !krvVerseText.isEmpty {
-                        // 메인 본문 목록(TranslationColumnView)과 같은 폰트/줄간격/글자색을 써서 "모양" 설정을 따른다.
-                        Text(krvVerseText)
-                            .font(UserSettingsStore.shared.bibleBodyFont)
-                            .foregroundStyle(UserSettingsStore.shared.bibleTextColor ?? Color.primary)
-                            .lineSpacing(UserSettingsStore.shared.bibleLineSpacing)
-                            .multilineTextAlignment(.center)
-                            .fixedSize(horizontal: false, vertical: true)
-                            .frame(maxWidth: .infinity, alignment: .center)
-                            .padding(.horizontal, 18)
-                            .padding(.vertical, 16)
-                            .background(
-                                RoundedRectangle(cornerRadius: 16, style: .continuous)
-                                    .fill(cardBackground)
-                            )
-                            .overlay(
-                                RoundedRectangle(cornerRadius: 16, style: .continuous)
-                                    .stroke(cardBorderColor, lineWidth: 1)
-                            )
-                    }
-                    // 직역과 번역 차이 카드 — 성경 구절 아래, 원어 카드 위. 다른 카드들과 같은 스타일로 통일한다.
-                    if let literalInfo {
-                        literalTranslationCard(literalInfo)
-                    }
-                    if words.isEmpty {
-                        ContentUnavailableView(
-                            "원문 정보 없음",
-                            systemImage: "character.book.closed",
-                            description: Text("이 절에 대한 원문 데이터를 찾을 수 없습니다.")
+                    .foregroundStyle(.blue)
+                }
+                // 원어 데이터가 없는 절에서도 KRV 본문은 보이도록 `words.isEmpty` 분기 밖에 둔다.
+                if !krvVerseText.isEmpty {
+                    // 메인 본문 목록(TranslationColumnView)과 같은 폰트/줄간격/글자색을 써서 "모양" 설정을 따른다.
+                    Text(krvVerseText)
+                        .font(UserSettingsStore.shared.bibleBodyFont)
+                        .foregroundStyle(UserSettingsStore.shared.bibleTextColor ?? Color.primary)
+                        .lineSpacing(UserSettingsStore.shared.bibleLineSpacing)
+                        .multilineTextAlignment(.center)
+                        .fixedSize(horizontal: false, vertical: true)
+                        .frame(maxWidth: .infinity, alignment: .center)
+                        .padding(.horizontal, 18)
+                        .padding(.vertical, 16)
+                        .background(
+                            RoundedRectangle(cornerRadius: 16, style: .continuous)
+                                .fill(cardBackground)
                         )
-                        .frame(maxWidth: .infinity)
-                        .padding(.top, 24)
-                    } else {
-                        // 화면 너비에 맞춰 여러 열로 자동 배치한다.
-                        LazyVGrid(columns: gridColumns, spacing: 12) {
-                            ForEach(words) { word in
-                                wordCard(word)
-                            }
+                        .overlay(
+                            RoundedRectangle(cornerRadius: 16, style: .continuous)
+                                .stroke(cardBorderColor, lineWidth: 1)
+                        )
+                }
+                // 직역과 번역 차이 카드 — 성경 구절 아래, 원어 카드 위. 다른 카드들과 같은 스타일로 통일한다.
+                if let literalInfo {
+                    literalTranslationCard(literalInfo)
+                }
+                if words.isEmpty {
+                    ContentUnavailableView(
+                        "원문 정보 없음",
+                        systemImage: "character.book.closed",
+                        description: Text("이 절에 대한 원문 데이터를 찾을 수 없습니다.")
+                    )
+                    .frame(maxWidth: .infinity)
+                    .padding(.top, 24)
+                } else {
+                    // 화면 너비에 맞춰 여러 열로 자동 배치한다.
+                    LazyVGrid(columns: gridColumns, spacing: 12) {
+                        ForEach(words) { word in
+                            wordCard(word)
                         }
                     }
                 }
-                .padding(16)
             }
-            .background(settings.bibleBackgroundColor ?? Color.clear)
-            .navigationTitle(displayTitle)
-            #if os(iOS)
-            .navigationBarTitleDisplayMode(.inline)
-            #endif
-            .toolbar {
-                ToolbarItem(placement: .cancellationAction) {
-                    Button("닫기") { dismiss() }
-                }
-                // `.primaryAction`/`.topBarTrailing`은 이 자리에 그려지지 않아 `.confirmationAction`을 쓴다.
+            .padding(16)
+        }
+        .background(settings.bibleBackgroundColor ?? Color.clear)
+    }
+
+    /// 시트 껍데기. macOS는 시스템 도구 모음이 제목 줄·버튼 줄을 시스템 회색으로 그려 본문의 테마 배경과 색이 끊겼으므로,
+    /// 내비게이션 스택을 쓰지 않고 시트 안에 제목 줄(`VerseSheetHeader`)과 하단 버튼 줄(`VerseSheetFooter`)을 직접 그린다
+    /// (확대보기 `VerseZoomView`와 같은 바탕·선·그림자 — 2026-10-02 목업 결정). iOS/iPadOS는 기존 내비게이션 바 툴바를 그대로 쓴다.
+    @ViewBuilder
+    private var sheetRoot: some View {
+        #if os(macOS)
+        VStack(spacing: 0) {
+            VerseSheetHeader(title: displayTitle)
+            mainScroll
+            VerseSheetFooter {
+                // 내비게이션 툴바의 `.cancellationAction`이 주던 Esc 닫기를 `.cancelAction` 단축키로 유지한다.
+                Button("닫기") { dismiss() }
+                    .buttonStyle(BibleBarButtonStyle())
+                    .keyboardShortcut(.cancelAction)
+                Spacer(minLength: 0)
                 // 아이콘은 앱 전체에서 "메모"를 가리키는 `text.bubble`로 통일해, 누르면 메모하기로 간다는 걸 알 수 있게 한다.
-                ToolbarItem(placement: .confirmationAction) {
-                    Button(action: onSwitchToMemo) {
-                        Label("메모하기", systemImage: "text.bubble")
-                    }
-                    .help("메모하기로 전환")
+                Button(action: onSwitchToMemo) {
+                    Label("메모하기", systemImage: "text.bubble")
                 }
+                .buttonStyle(BibleBarButtonStyle())
+                .help("메모하기로 전환")
             }
         }
+        #else
+        NavigationStack {
+            mainScroll
+                .navigationTitle(displayTitle)
+                .navigationBarTitleDisplayMode(.inline)
+                .toolbar {
+                    ToolbarItem(placement: .cancellationAction) {
+                        Button("닫기") { dismiss() }
+                    }
+                    // `.primaryAction`/`.topBarTrailing`은 이 자리에 그려지지 않아 `.confirmationAction`을 쓴다.
+                    // 아이콘은 앱 전체에서 "메모"를 가리키는 `text.bubble`로 통일해, 누르면 메모하기로 간다는 걸 알 수 있게 한다.
+                    ToolbarItem(placement: .confirmationAction) {
+                        Button(action: onSwitchToMemo) {
+                            Label("메모하기", systemImage: "text.bubble")
+                        }
+                        .help("메모하기로 전환")
+                    }
+                }
+        }
+        #endif
+    }
+
+    var body: some View {
+        sheetRoot
         #if os(macOS)
         .frame(minWidth: 420, minHeight: 420)
         #endif

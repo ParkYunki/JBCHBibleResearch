@@ -135,16 +135,12 @@ struct JoinedNavBadgeModifier: ViewModifier {
     }
 }
 
-/// 콘텐츠 가장자리 안쪽에 반투명 원형 이전/다음 구절 화살표를 겹쳐(overlay) 표시한다(전 플랫폼 공통).
-/// frame/background는 라벨(Image) 안쪽에, `.buttonStyle(.plain)`+`.contentShape`는 Button 바깥에
-/// 붙인다(`circularChapterNavButton`과 같은 원칙 — macOS 히트 영역 문제 회피).
+/// 콘텐츠 가장자리 안쪽에 사각 이전/다음 구절 화살표를 겹쳐(overlay) 표시한다(전 플랫폼 공통, `BibleBarButtonStyle`).
 struct VerseNavArrowsModifier: ViewModifier {
     let canGoPrevious: Bool
     let canGoNext: Bool
     let onPrevious: () -> Void
     let onNext: () -> Void
-
-    private static let diameter: CGFloat = 34
 
     func body(content: Content) -> some View {
         content
@@ -158,18 +154,31 @@ struct VerseNavArrowsModifier: ViewModifier {
             }
     }
 
+    /// 전 플랫폼 공통 — 성경 조회 막대와 같은 사각 버튼(`BibleBarButtonStyle`, 2026-10-02 목업 결정). 본문 글자 위에 겹쳐도 읽히도록
+    /// 버튼 뒤에 테마 배경색 92% 바탕을 깔고, 비활성(첫/마지막 구절)은 스타일의 38% 흐림을 따른다.
+    /// 크기는 macOS 32pt/모서리 8, 터치 기기(iOS/iPadOS)는 탭 영역 확보를 위해 40pt/모서리 10(모양·농도는 동일).
     @ViewBuilder
     private func arrowButton(systemImage: String, enabled: Bool, action: @escaping () -> Void) -> some View {
+        #if os(macOS)
+        let size = BibleBarMetrics.height
+        let radius = BibleBarMetrics.radius
+        let iconSize: CGFloat = 13
+        let fallbackBackground = Color(nsColor: .windowBackgroundColor)
+        #else
+        let size: CGFloat = 40
+        let radius: CGFloat = 10
+        let iconSize: CGFloat = 15
+        let fallbackBackground = Color(uiColor: .systemBackground)
+        #endif
         Button(action: action) {
             Image(systemName: systemImage)
-                .font(.system(size: 14, weight: .semibold))
-                .frame(width: Self.diameter, height: Self.diameter)
-                .background(Circle().fill(Color("AccentColor").opacity(0.85)))
-                .foregroundStyle(Color.white)
+                .font(.system(size: iconSize, weight: .semibold))
         }
-        .buttonStyle(.plain)
-        .contentShape(Circle())
-        .opacity(enabled ? 1 : 0.35)
+        .buttonStyle(BibleBarButtonStyle(kind: .secondary, isSquare: true, height: size, cornerRadius: radius, fontSize: iconSize))
+        .background(
+            RoundedRectangle(cornerRadius: radius, style: .continuous)
+                .fill((UserSettingsStore.shared.bibleBackgroundColor ?? fallbackBackground).opacity(0.92))
+        )
         .disabled(!enabled)
         .help(systemImage == "chevron.left" ? "이전 구절" : "다음 구절")
     }
@@ -204,28 +213,24 @@ private struct BottomBarLabelStyleModifier: ViewModifier {
 private struct ActionBarCircularIconModifier: ViewModifier {
     let isNarrow: Bool
     let isProminent: Bool
+    /// 선택 해제처럼 배경 없는 윤곽선으로 낮출 버튼.
+    var isGhost = false
+    /// 아이콘 전용일 때 길게 누르면 뜨는 이름 풍선에 쓴다(`BibleBarIconOnlyModifier`).
+    var title = ""
+    var systemImage = ""
+
+    private var kind: BibleBarButtonStyle.Kind { isProminent ? .primary : (isGhost ? .ghost : .secondary) }
+
     func body(content: Content) -> some View {
         if isNarrow {
-            content
-                .buttonStyle(.plain)
-                .frame(maxWidth: .infinity, minHeight: CircularNavButtonModifier.diameter, maxHeight: CircularNavButtonModifier.diameter)
-                .background(
-                    RoundedRectangle(cornerRadius: 12, style: .continuous)
-                        .fill(isProminent ? Color("AccentColor") : Color("AccentColor").opacity(0.12))
-                )
-                .foregroundStyle(isProminent ? Color.white : Color("AccentColor"))
-                .contentShape(RoundedRectangle(cornerRadius: 12, style: .continuous))
-        } else if isProminent {
-            // narrow가 아닐 때(가로보기/아이패드 등)는 `.borderedProminent`를 이 분기가 직접 낸다 — 호출부에서 `.buttonStyle`을
-            // 중복 지정해 SwiftUI의 우선순위에 기대지 않기 위해서다.
-            content
-                .buttonStyle(.borderedProminent)
-                // `.tint`를 지정하지 않으면 기본 시스템 파란색으로 채워지므로, narrow일 때의 원형 배지와 같은 `AccentColor`를 명시해 두
-                // 레이아웃의 색을 맞춘다.
-                .tint(Color("AccentColor"))
+            // 좁은 화면(아이폰 세로/아이패드 세로, 키보드 표시 중): 아이콘 전용 44pt 둥근 사각형.
+            // 폭은 남는 폭을 균등 분할하고(`maxWidth: .infinity`) 높이는 HIG 최소 탭 영역 44pt로 고정해, 절 1개 선택 시 최대 7개 버튼이
+            // 좁은 화면에서도 한 줄에 잘리지 않고 들어가게 한다.
+            content.modifier(BibleBarIconOnlyModifier(kind: kind, title: title, systemImage: systemImage))
         } else {
-            // 강조가 아닌 버튼도 narrow일 때와 같은 `AccentColor`로 글자/아이콘 색을 맞춘다(옅은 원형 배경은 없음).
-            content.foregroundStyle(Color("AccentColor"))
+            // 넓은 화면(아이패드 가로 등): 맥OS와 같은 배경·테두리·강조 규격을 터치용 크기(40pt/모서리 10/글자 15pt)로 쓴다.
+            // 이전에는 비강조 버튼이 배경 없는 금색 글자뿐이고 복사만 `.borderedProminent`(흰 글자 on 금색 ≈3.2:1)였다.
+            content.buttonStyle(BibleBarButtonStyle(kind: kind, height: 40, cornerRadius: 10, fontSize: 15))
         }
     }
 }
@@ -678,6 +683,8 @@ private struct BibleReadingContentView: View {
                     )
                 }
             }
+            // 아이패드: 본문과 맞닿는 왼쪽 가장자리에 헤어라인(`IPadPaneSeparation.swift`; 아이폰은 시트라 동작 안 함).
+            .iPadPaneSeparator(.leading)
             // 화면 폭에서 유도하는 계산 대신 고정 pt 상수(`Self.wordSummaryInspectorFixedWidth`)를 쓴다. min/ideal/max에
             // 같은 값을 넣어 고정폭처럼 동작시킨다(세 값 사이에서 고르게 두면 크기가 흔들릴 수 있다). 관련 내용 패널은 기존 폭 그대로다.
             .inspectorColumnWidth(
@@ -1196,10 +1203,7 @@ private struct BibleReadingContentView: View {
         // 두고, 버튼 간격은 16pt, 세로 여백은 줄인다. narrow가 아니면 한 줄 배치를 그대로 쓴다.
         VStack(alignment: .leading, spacing: isNarrowBottomBarLayout ? 6 : 0) {
             if isNarrowBottomBarLayout {
-                Text("\(viewModel.selectedVerses.count)개 절 선택됨")
-                    .font(.caption)
-                    // 하단 바 배경이 테마색일 수 있어 `.secondary` 대신 테마 글자색을 우선 쓴다.
-                    .foregroundStyle(settings.bibleTextColor ?? .secondary)
+                BibleBarCountChip(text: "\(viewModel.selectedVerses.count)개 절 선택됨")
             }
             verseSelectionActionButtonsRow
         }
@@ -1326,13 +1330,51 @@ private struct BibleReadingContentView: View {
         }
     }
 
+    /// 라벨 버튼 줄(맥OS, 아이패드 가로): 창이 좁아 한 줄에 다 안 들어가면 라벨을 줄여 아이콘만 남긴다(툴팁은 맥OS `.help`).
+    /// `ViewThatFits`가 "라벨+아이콘" 줄이 들어가면 그것을, 아니면 "아이콘만" 줄을 고른다.
+    /// iOS에서 이미 아이콘 전용으로 강제된 상태(좁은 화면/키보드 표시)는 바깥 `BottomBarLabelStyleModifier`가 정하므로 여기서 건드리지 않는다
+    /// (안쪽 `.labelStyle`이 바깥 것을 덮어쓰기 때문).
+    @ViewBuilder
     private var verseSelectionActionButtonsRow: some View {
-        HStack(spacing: isNarrowBottomBarLayout ? 4 : nil) {
+        if allowsActionRowCollapse {
+            ViewThatFits(in: .horizontal) {
+                verseSelectionActionButtonsRowContent.labelStyle(.titleAndIcon)
+                verseSelectionActionButtonsRowContent.labelStyle(.iconOnly)
+            }
+        } else {
+            verseSelectionActionButtonsRowContent
+        }
+    }
+
+    private var allowsActionRowCollapse: Bool {
+        #if os(macOS)
+        return true
+        #else
+        return !(isNarrowBottomBarLayout || isKeyboardVisible)
+        #endif
+    }
+
+    /// 버튼 묶음 사이 구분선 — 라벨 버튼 줄(맥OS, 아이패드 가로)에서만. 아이콘 전용 줄은 폭이 빠듯해 두지 않는다.
+    private var showsActionGroupDividers: Bool {
+        #if os(macOS)
+        return true
+        #else
+        return !(isNarrowBottomBarLayout || isKeyboardVisible)
+        #endif
+    }
+
+    private var actionRowSpacing: CGFloat? {
+        #if os(macOS)
+        return 6
+        #else
+        return (isNarrowBottomBarLayout || isKeyboardVisible) ? 4 : 6
+        #endif
+    }
+
+    private var verseSelectionActionButtonsRowContent: some View {
+        HStack(spacing: actionRowSpacing) {
             if !isNarrowBottomBarLayout {
-                Text("\(viewModel.selectedVerses.count)개 절 선택됨")
-                    .font(.caption)
-                    // 하단 바 배경이 테마색일 수 있어 `.secondary` 대신 테마 글자색을 우선 쓴다.
-                    .foregroundStyle(settings.bibleTextColor ?? .secondary)
+                BibleBarCountChip(text: "\(viewModel.selectedVerses.count)개 절 선택됨")
             }
             if !isNarrowBottomBarLayout {
                 Spacer()
@@ -1349,7 +1391,9 @@ private struct BibleReadingContentView: View {
                         Label("메모하기", systemImage: "text.bubble")
                     }
                     #if os(iOS)
-                    .modifier(ActionBarCircularIconModifier(isNarrow: isNarrowBottomBarLayout, isProminent: false))
+                    .modifier(ActionBarCircularIconModifier(isNarrow: isNarrowBottomBarLayout, isProminent: false, title: "메모하기", systemImage: "text.bubble"))
+                    #else
+                    .modifier(BibleBarActionModifier(kind: .secondary, help: "메모하기"))
                     #endif
                     // `openPersonalNoteDirectly()` — 확대보기를 열고 안쪽 개인 묵상 입력칸(카드)을 자동으로 연다.
                     Button {
@@ -1358,7 +1402,9 @@ private struct BibleReadingContentView: View {
                         Label("개인 묵상", systemImage: "note.text")
                     }
                     #if os(iOS)
-                    .modifier(ActionBarCircularIconModifier(isNarrow: isNarrowBottomBarLayout, isProminent: false))
+                    .modifier(ActionBarCircularIconModifier(isNarrow: isNarrowBottomBarLayout, isProminent: false, title: "개인 묵상", systemImage: "note.text"))
+                    #else
+                    .modifier(BibleBarActionModifier(kind: .secondary, help: "개인 묵상"))
                     #endif
                     Button {
                         isOriginalTextInfoPresented = true
@@ -1366,18 +1412,21 @@ private struct BibleReadingContentView: View {
                         Label("원문 정보", systemImage: "character.book.closed")
                     }
                     #if os(iOS)
-                    .modifier(ActionBarCircularIconModifier(isNarrow: isNarrowBottomBarLayout, isProminent: false))
+                    .modifier(ActionBarCircularIconModifier(isNarrow: isNarrowBottomBarLayout, isProminent: false, title: "원문 정보", systemImage: "character.book.closed"))
+                    #else
+                    .modifier(BibleBarActionModifier(kind: .secondary, help: "원문 정보"))
                     #endif
                 }
+                if showsActionGroupDividers && viewModel.selectedVerses.count == 1 { BibleBarGroupDivider() }
                 Button {
                     copySelectedVersesIntoWordSummary()
                 } label: {
                     Label("말씀 복사", systemImage: "text.insert")
                 }
                 #if os(iOS)
-                .modifier(ActionBarCircularIconModifier(isNarrow: isNarrowBottomBarLayout, isProminent: true))
+                .modifier(ActionBarCircularIconModifier(isNarrow: isNarrowBottomBarLayout, isProminent: true, title: "말씀 복사", systemImage: "text.insert"))
                 #else
-                .buttonStyle(.borderedProminent)
+                .modifier(BibleBarActionModifier(kind: .primary, help: "말씀 복사"))
                 #endif
                 // 바깥쪽 `.safeAreaInset`이 이미 `hasVerseSelection`(1개 이상)일 때만 이 바를 그리므로
                 // 여기선 추가 조건이 필요 없다.
@@ -1391,7 +1440,9 @@ private struct BibleReadingContentView: View {
                         Label("메모하기", systemImage: "text.bubble")
                     }
                     #if os(iOS)
-                    .modifier(ActionBarCircularIconModifier(isNarrow: isNarrowBottomBarLayout, isProminent: false))
+                    .modifier(ActionBarCircularIconModifier(isNarrow: isNarrowBottomBarLayout, isProminent: false, title: "메모하기", systemImage: "text.bubble"))
+                    #else
+                    .modifier(BibleBarActionModifier(kind: .secondary, help: "메모하기"))
                     #endif
                     // `openPersonalNoteDirectly()` — 확대보기를 열고 안쪽 개인 묵상 입력칸(카드)을 자동으로 연다.
                     Button {
@@ -1400,7 +1451,9 @@ private struct BibleReadingContentView: View {
                         Label("개인 묵상", systemImage: "note.text")
                     }
                     #if os(iOS)
-                    .modifier(ActionBarCircularIconModifier(isNarrow: isNarrowBottomBarLayout, isProminent: false))
+                    .modifier(ActionBarCircularIconModifier(isNarrow: isNarrowBottomBarLayout, isProminent: false, title: "개인 묵상", systemImage: "note.text"))
+                    #else
+                    .modifier(BibleBarActionModifier(kind: .secondary, help: "개인 묵상"))
                     #endif
                     Button {
                         isOriginalTextInfoPresented = true
@@ -1408,9 +1461,13 @@ private struct BibleReadingContentView: View {
                         Label("원문 정보", systemImage: "character.book.closed")
                     }
                     #if os(iOS)
-                    .modifier(ActionBarCircularIconModifier(isNarrow: isNarrowBottomBarLayout, isProminent: false))
+                    .modifier(ActionBarCircularIconModifier(isNarrow: isNarrowBottomBarLayout, isProminent: false, title: "원문 정보", systemImage: "character.book.closed"))
+                    #else
+                    .modifier(BibleBarActionModifier(kind: .secondary, help: "원문 정보"))
                     #endif
                 }
+                // 맥OS: 단일 절 작업 묶음과 요약·설교 묶음 사이 구분선.
+                if showsActionGroupDividers && viewModel.selectedVerses.count == 1 { BibleBarGroupDivider() }
                 // 말씀 요약은 여러 절을 한 번에 요약해도 자연스러우므로 1개 이상이면 노출한다.
                 if !viewModel.selectedVerses.isEmpty {
                     Button {
@@ -1419,7 +1476,9 @@ private struct BibleReadingContentView: View {
                         Label("말씀 요약", systemImage: "text.quote")
                     }
                     #if os(iOS)
-                    .modifier(ActionBarCircularIconModifier(isNarrow: isNarrowBottomBarLayout, isProminent: false))
+                    .modifier(ActionBarCircularIconModifier(isNarrow: isNarrowBottomBarLayout, isProminent: false, title: "말씀 요약", systemImage: "text.quote"))
+                    #else
+                    .modifier(BibleBarActionModifier(kind: .secondary, help: "말씀 요약"))
                     #endif
                     // 말씀 요약과 같은 노출 조건(1개 이상).
                     Button {
@@ -1428,9 +1487,12 @@ private struct BibleReadingContentView: View {
                         Label("설교작성", systemImage: "text.book.closed")
                     }
                     #if os(iOS)
-                    .modifier(ActionBarCircularIconModifier(isNarrow: isNarrowBottomBarLayout, isProminent: false))
+                    .modifier(ActionBarCircularIconModifier(isNarrow: isNarrowBottomBarLayout, isProminent: false, title: "설교작성", systemImage: "text.book.closed"))
+                    #else
+                    .modifier(BibleBarActionModifier(kind: .secondary, help: "설교작성"))
                     #endif
                 }
+                if showsActionGroupDividers { BibleBarGroupDivider() }
                 Button {
                     viewModel.clearVerseSelection()
                 } label: {
@@ -1438,7 +1500,9 @@ private struct BibleReadingContentView: View {
                     Label("선택 해제", systemImage: "xmark.circle")
                 }
                 #if os(iOS)
-                .modifier(ActionBarCircularIconModifier(isNarrow: isNarrowBottomBarLayout, isProminent: false))
+                .modifier(ActionBarCircularIconModifier(isNarrow: isNarrowBottomBarLayout, isProminent: false, isGhost: true, title: "선택 해제", systemImage: "xmark.circle"))
+                #else
+                .modifier(BibleBarActionModifier(kind: .ghost, help: "선택 해제"))
                 #endif
                 Button {
                     copySelectedVerses()
@@ -1446,9 +1510,9 @@ private struct BibleReadingContentView: View {
                     Label("복사", systemImage: "doc.on.doc")
                 }
                 #if os(iOS)
-                .modifier(ActionBarCircularIconModifier(isNarrow: isNarrowBottomBarLayout, isProminent: true))
+                .modifier(ActionBarCircularIconModifier(isNarrow: isNarrowBottomBarLayout, isProminent: true, title: "복사", systemImage: "doc.on.doc"))
                 #else
-                .buttonStyle(.borderedProminent)
+                .modifier(BibleBarActionModifier(kind: .primary, help: "복사"))
                 #endif
             }
         }
@@ -1772,23 +1836,26 @@ private struct BibleReadingContentView: View {
     }
 
     private var chapterNavigationControlsStandard: some View {
-        HStack(spacing: 8) {
-            // 이전/다음 장(`chevron`)은 항상 ±1장 이동이고, 히스토리 버튼(`arrow.uturn.*`)은 임의의 이전 위치로
-            // 되짚어간다. `canGoBackInHistory`가 false면 갈 곳이 없으므로 비활성화한다.
-            // iOS/macOS 모두 같은 원형 버튼 스타일을 쓰며, 클릭 히트 영역 문제로 `circularChapterNavButton`을 사용한다.
-            circularChapterNavButton(
-                systemImage: "arrow.uturn.backward",
-                help: "이전에 보던 위치로 돌아가기",
-                disabled: !viewModel.canGoBackInHistory,
-                action: { viewModel.goBackInHistory() }
-            )
-
-            circularChapterNavButton(
-                systemImage: "chevron.left",
-                help: "이전 장",
-                disabled: viewModel.selectedChapter <= 1 && BooksProvider.shared.book(before: viewModel.selectedBook) == nil,
-                action: { viewModel.previousChapter() }
-            )
+        // 2026-10-02: 맥OS 상단 막대를 `BibleBarControls.swift` 규격(높이 32pt, 모서리 8pt, 글자색 10% 배경 + 24% 테두리)으로 통일.
+        // 이전 쪽(히스토리 이전·이전 장)과 다음 쪽(다음 장·히스토리 이후)을 각각 한 묶음으로 두어 좌우 대칭으로 보이게 한다.
+        // 이전/다음 장(`chevron`)은 항상 ±1장 이동이고, 히스토리 버튼(`arrow.uturn.*`)은 임의의 이전 위치로 되짚어간다.
+        // 각 버튼은 갈 곳이 없으면(`canGo…`/첫·마지막 장) 비활성화된다.
+        HStack(spacing: 10) {
+            BibleBarSegmentGroup {
+                barIconButton(
+                    systemImage: "arrow.uturn.backward",
+                    help: "이전에 보던 위치로 돌아가기",
+                    disabled: !viewModel.canGoBackInHistory,
+                    action: { viewModel.goBackInHistory() }
+                )
+                BibleBarSegmentDivider()
+                barIconButton(
+                    systemImage: "chevron.left",
+                    help: "이전 장",
+                    disabled: viewModel.selectedChapter <= 1 && BooksProvider.shared.book(before: viewModel.selectedBook) == nil,
+                    action: { viewModel.previousChapter() }
+                )
+            }
 
             BookChapterPicker(
                 books: BooksProvider.shared.books,
@@ -1798,44 +1865,64 @@ private struct BibleReadingContentView: View {
                 onSelectVerse: { book, chapter, verse in
                     viewModel.selectBook(book, chapter: chapter)
                     viewModel.highlightVerseTemporarily(verse)
-                }
+                },
+                unifiedBarStyle: true
             ) { book, chapter in
                 viewModel.selectBook(book, chapter: chapter)
             }
 
-            circularChapterNavButton(
-                systemImage: "chevron.right",
-                help: "다음 장",
-                disabled: viewModel.selectedChapter >= viewModel.selectedBook.chapterCount
-                    && BooksProvider.shared.book(after: viewModel.selectedBook) == nil,
-                action: { viewModel.nextChapter() }
-            )
-
-            // 히스토리 앞으로 가기 — 위 뒤로가기 버튼과 대칭.
-            circularChapterNavButton(
-                systemImage: "arrow.uturn.forward",
-                help: "뒤로가기 이전 위치로 다시 가기",
-                disabled: !viewModel.canGoForwardInHistory,
-                action: { viewModel.goForwardInHistory() }
-            )
+            BibleBarSegmentGroup {
+                barIconButton(
+                    systemImage: "chevron.right",
+                    help: "다음 장",
+                    disabled: viewModel.selectedChapter >= viewModel.selectedBook.chapterCount
+                        && BooksProvider.shared.book(after: viewModel.selectedBook) == nil,
+                    action: { viewModel.nextChapter() }
+                )
+                BibleBarSegmentDivider()
+                // 히스토리 앞으로 가기 — 위 뒤로가기 버튼과 대칭.
+                barIconButton(
+                    systemImage: "arrow.uturn.forward",
+                    help: "뒤로가기 이전 위치로 다시 가기",
+                    disabled: !viewModel.canGoForwardInHistory,
+                    action: { viewModel.goForwardInHistory() }
+                )
+            }
         }
         // 툴바 principal 대신 상단 세이프에어리어 인셋(전체 너비)에 놓이므로 가운데 정렬을 유지하려고 필요하다.
         .frame(maxWidth: .infinity)
+    }
+
+    /// 상단 막대의 아이콘 버튼 한 칸(`BibleBarSegmentGroup` 안에서 쓴다). 스타일(32×32, 올림/눌림 색)은 묶음이 입힌다.
+    private func barIconButton(
+        systemImage: String, help: String, disabled: Bool, action: @escaping () -> Void
+    ) -> some View {
+        Button(action: action) {
+            Image(systemName: systemImage)
+                .font(.system(size: 14, weight: .semibold))
+        }
+        .disabled(disabled)
+        .help(help)
+        .accessibilityLabel(help)
     }
 
     #if os(iOS)
     /// iOS 장 이동 막대: 히스토리 이전·이전장·`BookChapterPicker`(현재장/검색/이동)·다음장·히스토리 다음을
     /// 하나의 캡슐 배경에 담는다. 각 버튼은 `JoinedNavBadgeModifier`(40×44 탭 영역 안의 34pt 원 배지)로 통일한다.
     private var compactChapterNavigationBar: some View {
-        HStack(spacing: 4) {
+        // 2026-10-02: 원 배지를 없애고 캡슐(글자색 10% 채움 + 24% 테두리) 안에 글자색 아이콘을 두며, 모든 버튼 사이에 구분선을 넣었다
+        // (`BibleBarControls.swift`의 `BibleCapsule*`). 탭 영역 40×44는 그대로라 폭 예산은 이전보다 오히려 줄었다.
+        HStack(spacing: 0) {
             Button {
                 viewModel.goBackInHistory()
             } label: {
                 Image(systemName: "arrow.uturn.backward")
             }
             .disabled(!viewModel.canGoBackInHistory)
-            .help("이전에 보던 위치로 돌아가기")
-            .modifier(JoinedNavBadgeModifier(isProminent: false))
+            .buttonStyle(BibleCapsuleItemStyle())
+            .accessibilityLabel("이전에 보던 위치로 돌아가기")
+
+            BibleCapsuleDivider()
 
             Button {
                 viewModel.previousChapter()
@@ -1843,8 +1930,10 @@ private struct BibleReadingContentView: View {
                 Image(systemName: "chevron.left")
             }
             .disabled(viewModel.selectedChapter <= 1 && BooksProvider.shared.book(before: viewModel.selectedBook) == nil)
-            .help("이전 장")
-            .modifier(JoinedNavBadgeModifier(isProminent: false))
+            .buttonStyle(BibleCapsuleItemStyle())
+            .accessibilityLabel("이전 장")
+
+            BibleCapsuleDivider()
 
             BookChapterPicker(
                 books: BooksProvider.shared.books,
@@ -1859,6 +1948,8 @@ private struct BibleReadingContentView: View {
                 viewModel.selectBook(book, chapter: chapter)
             }
 
+            BibleCapsuleDivider()
+
             Button {
                 viewModel.nextChapter()
             } label: {
@@ -1868,8 +1959,10 @@ private struct BibleReadingContentView: View {
                 viewModel.selectedChapter >= viewModel.selectedBook.chapterCount
                     && BooksProvider.shared.book(after: viewModel.selectedBook) == nil
             )
-            .help("다음 장")
-            .modifier(JoinedNavBadgeModifier(isProminent: false))
+            .buttonStyle(BibleCapsuleItemStyle())
+            .accessibilityLabel("다음 장")
+
+            BibleCapsuleDivider()
 
             Button {
                 viewModel.goForwardInHistory()
@@ -1877,12 +1970,12 @@ private struct BibleReadingContentView: View {
                 Image(systemName: "arrow.uturn.forward")
             }
             .disabled(!viewModel.canGoForwardInHistory)
-            .help("뒤로가기 이전 위치로 다시 가기")
-            .modifier(JoinedNavBadgeModifier(isProminent: false))
+            .buttonStyle(BibleCapsuleItemStyle())
+            .accessibilityLabel("뒤로가기 이전 위치로 다시 가기")
         }
-        .padding(.horizontal, 6)
+        .padding(.horizontal, 4)
         .frame(height: 44)
-        .background(Capsule().fill(Color("AccentColor").opacity(0.12)))
+        .modifier(BibleCapsuleChrome())
         .frame(maxWidth: .infinity)
     }
     #endif
