@@ -263,10 +263,11 @@ enum SermonTextKit1 {
     }
 
     #if os(iOS)
-    static func makeTextView() -> UITextView {
+    /// `makeTextView`에 하위 클래스 생성 클로저를 넘길 수 있다(기본값은 일반 `UITextView` — 뷰어 호출부는 그대로).
+    static func makeTextView(_ make: (NSTextContainer) -> UITextView = { UITextView(frame: .zero, textContainer: $0) }) -> UITextView {
         let (storage, container) = makeContainer(size: CGSize(width: 0, height: CGFloat.greatestFiniteMagnitude))
         container.widthTracksTextView = true
-        let textView = UITextView(frame: .zero, textContainer: container)
+        let textView = make(container)
         keepStorageAlive(textView, storage: storage)
         return textView
     }

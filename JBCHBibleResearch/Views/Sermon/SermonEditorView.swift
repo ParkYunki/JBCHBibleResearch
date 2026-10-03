@@ -350,7 +350,9 @@ struct SermonEditorView: View {
             HStack(spacing: 10) {
                 ScrollView(.horizontal, showsIndicators: false) {
                     HStack(spacing: 6) {
-                        ForEach(SermonParagraphStyle.allCases, id: \.self) { style in
+                        // 단축키: F1~F6(텍스트뷰 `SermonEditor*TextView`가 처리) 및 ⌃1~6(한글 방식) = 대주제·중주제·소주제·말씀구절·인용·본문(pill 순서와 동일).
+                        // ⌘1~⌘5는 AppCommands(화면 전환)가 쓰고 있어 ⌘ 대신 Control을 쓴다.
+                        ForEach(Array(SermonParagraphStyle.allCases.enumerated()), id: \.element) { index, style in
                             Button {
                                 proxy.applyParagraphStyle(style, settings: .shared)
                                 proxy.activeStyle = style
@@ -364,6 +366,8 @@ struct SermonEditorView: View {
                                     .clipShape(Capsule())
                             }
                             .buttonStyle(.plain)
+                            .keyboardShortcut(KeyEquivalent(Character("\(index + 1)")), modifiers: .control)
+                            .help("\(styleDisplayName(style)) (F\(index + 1) · ⌃\(index + 1))")
                         }
                     }
                 }

@@ -296,6 +296,38 @@ enum SermonParagraphStyleCodec {
 
 #if os(iOS)
 
+// MARK: - 편집기 전용 텍스트뷰 (F1~F6 문단 스타일 단축키)
+
+/// 설교 편집기 전용 `UITextView` — 외장 키보드 F1~F6을 문단 스타일(`allCases` 순서: 대주제·중주제·소주제·말씀구절·인용·본문)에 매핑한다.
+/// 뷰어는 일반 `UITextView`를 그대로 쓰므로 영향이 없고, 읽기 전용이면 키 명령을 노출하지 않는다.
+final class SermonEditorUITextView: UITextView {
+    var onStyleShortcut: ((SermonParagraphStyle) -> Void)?
+
+    private static let functionInputs: [String] = [
+        UIKeyCommand.inputF1, UIKeyCommand.inputF2, UIKeyCommand.inputF3,
+        UIKeyCommand.inputF4, UIKeyCommand.inputF5, UIKeyCommand.inputF6,
+    ]
+
+    override var keyCommands: [UIKeyCommand]? {
+        let base = super.keyCommands ?? []
+        guard isEditable else { return base }
+        let commands = Self.functionInputs.map { input -> UIKeyCommand in
+            let command = UIKeyCommand(input: input, modifierFlags: [], action: #selector(handleStyleKey(_:)))
+            command.wantsPriorityOverSystemBehavior = true
+            return command
+        }
+        return base + commands
+    }
+
+    @objc private func handleStyleKey(_ command: UIKeyCommand) {
+        let styles = SermonParagraphStyle.allCases
+        guard isEditable, let input = command.input,
+              let index = Self.functionInputs.firstIndex(of: input),
+              index < styles.count else { return }
+        onStyleShortcut?(styles[index])
+    }
+}
+
 // MARK: - iOS
 
 /// 툴바가 "지금 포커스된 `UITextView`"에 문단 스타일/인라인 서식을 적용하기 위한 다리
@@ -566,7 +598,14 @@ struct SermonParagraphEditorRepresentable: UIViewRepresentable {
 
     func makeUIView(context: Context) -> UITextView {
         // TextKit 1 + `SermonLayoutManager` — 말씀구절 박스/세로 바와 강조2 형광펜을 뷰어와 같은 코드로 그린다.
-        let textView = SermonTextKit1.makeTextView()
+        let textView = SermonTextKit1.makeTextView { SermonEditorUITextView(frame: .zero, textContainer: $0) }
+        // F1~F6 문단 스타일 단축키 — 툴바 pill과 같은 경로(`applyParagraphStyle` + `activeStyle`).
+        if let editorTextView = textView as? SermonEditorUITextView {
+            editorTextView.onStyleShortcut = { [proxy, settings] style in
+                proxy.applyParagraphStyle(style, settings: settings)
+                proxy.activeStyle = style
+            }
+        }
         textView.delegate = context.coordinator
         // 편집 배경이 뷰어와 같은 고정 미색이므로 캐럿·선택·메뉴도 라이트 외형으로 고정한다(`SermonViewerPaper`).
         if isEditable { textView.overrideUserInterfaceStyle = .light }
@@ -673,6 +712,34 @@ struct SermonParagraphEditorRepresentable: UIViewRepresentable {
 }
 
 #elseif os(macOS)
+
+// MARK: - 편집기 전용 텍스트뷰 (F1~F6 문단 스타일 단축키)
+
+/// 설교 편집기 전용 `NSTextView` — F1~F6을 문단 스타일(`allCases` 순서)에 매핑한다.
+/// 수정키 없이 누른 F키만 가로채고 나머지는 `super`로 넘긴다. 뷰어는 일반 `NSTextView`를 쓰므로 영향 없음.
+/// ⚠️ macOS는 기본 설정에서 F1~F6을 밝기/Mission Control 등 시스템 기능으로 쓰므로, Fn과 함께 누르거나
+/// 시스템 설정의 "F1, F2 등의 키를 표준 기능 키로 사용"을 켜야 앱에 전달된다.
+final class SermonEditorNSTextView: NSTextView {
+    var onStyleShortcut: ((SermonParagraphStyle) -> Void)?
+
+    private static let functionKeys: [Int] = [
+        NSF1FunctionKey, NSF2FunctionKey, NSF3FunctionKey,
+        NSF4FunctionKey, NSF5FunctionKey, NSF6FunctionKey,
+    ]
+
+    override func keyDown(with event: NSEvent) {
+        let styles = SermonParagraphStyle.allCases
+        if isEditable,
+           event.modifierFlags.intersection([.shift, .control, .option, .command]).isEmpty,
+           let scalar = event.charactersIgnoringModifiers?.unicodeScalars.first,
+           let index = Self.functionKeys.firstIndex(of: Int(scalar.value)),
+           index < styles.count {
+            onStyleShortcut?(styles[index])
+            return
+        }
+        super.keyDown(with: event)
+    }
+}
 
 // MARK: - macOS
 
@@ -929,7 +996,14 @@ struct SermonParagraphEditorRepresentable: NSViewRepresentable {
         // 말씀구절 박스/세로 바와 강조2 형광펜을 뷰어와 같은 코드로 그리기 위해서다. 네이티브 서식 팝업(`usesInspectorBar`)이
         // 올바른 위치/폭 기준으로 뜨도록 폭 추적·세로 리사이즈 설정은 `scrollableTextView()`와 같게 맞췄다.
         let (scrollView, textView) = SermonTextKit1.makeScrollView { container, frame in
-            NSTextView(frame: frame, textContainer: container)
+            SermonEditorNSTextView(frame: frame, textContainer: container)
+        }
+        // F1~F6 문단 스타일 단축키 — 툴바 pill과 같은 경로(`applyParagraphStyle` + `activeStyle`).
+        if let editorTextView = textView as? SermonEditorNSTextView {
+            editorTextView.onStyleShortcut = { [proxy, settings] style in
+                proxy.applyParagraphStyle(style, settings: settings)
+                proxy.activeStyle = style
+            }
         }
         textView.delegate = context.coordinator
         textView.isEditable = isEditable
