@@ -299,32 +299,35 @@ enum SermonParagraphStyleCodec {
 // MARK: - 편집기 전용 텍스트뷰 (F1~F6 문단 스타일 단축키)
 
 /// 설교 편집기 전용 `UITextView` — 외장 키보드 F1~F6을 문단 스타일(`allCases` 순서: 대주제·중주제·소주제·말씀구절·인용·본문)에 매핑한다.
-/// 뷰어는 일반 `UITextView`를 그대로 쓰므로 영향이 없고, 읽기 전용이면 키 명령을 노출하지 않는다.
+/// `UIKeyCommand`의 F키 입력 상수는 쓰지 않고(Swift 심볼 이름 불확실) 하드웨어 키 코드(`UIKeyboardHIDUsage`)로 직접 판별한다.
+/// 수정키 없는 F1~F6만 가로채고 나머지 키는 `super`로 넘긴다. 뷰어는 일반 `UITextView`를 쓰므로 영향 없음.
 final class SermonEditorUITextView: UITextView {
     var onStyleShortcut: ((SermonParagraphStyle) -> Void)?
 
-    private static let functionInputs: [String] = [
-        UIKeyCommand.inputF1, UIKeyCommand.inputF2, UIKeyCommand.inputF3,
-        UIKeyCommand.inputF4, UIKeyCommand.inputF5, UIKeyCommand.inputF6,
+    private static let functionKeyCodes: [UIKeyboardHIDUsage] = [
+        .keyboardF1, .keyboardF2, .keyboardF3,
+        .keyboardF4, .keyboardF5, .keyboardF6,
     ]
 
-    override var keyCommands: [UIKeyCommand]? {
-        let base = super.keyCommands ?? []
-        guard isEditable else { return base }
-        let commands = Self.functionInputs.map { input -> UIKeyCommand in
-            let command = UIKeyCommand(input: input, modifierFlags: [], action: #selector(handleStyleKey(_:)))
-            command.wantsPriorityOverSystemBehavior = true
-            return command
-        }
-        return base + commands
-    }
-
-    @objc private func handleStyleKey(_ command: UIKeyCommand) {
+    override func pressesBegan(_ presses: Set<UIPress>, with event: UIPressesEvent?) {
         let styles = SermonParagraphStyle.allCases
-        guard isEditable, let input = command.input,
-              let index = Self.functionInputs.firstIndex(of: input),
-              index < styles.count else { return }
-        onStyleShortcut?(styles[index])
+        if isEditable {
+            var handled = false
+            for press in presses {
+                guard let key = press.key,
+                      key.modifierFlags.intersection([.shift, .control, .alternate, .command]).isEmpty,
+                      let index = Self.functionKeyCodes.firstIndex(of: key.keyCode),
+                      index < styles.count else { continue }
+                onStyleShortcut?(styles[index])
+                handled = true
+            }
+            // 이 이벤트가 F키뿐이면 텍스트 입력 경로로 보내지 않는다.
+            if handled && presses.allSatisfy({ press in
+                guard let code = press.key?.keyCode else { return false }
+                return Self.functionKeyCodes.contains(code)
+            }) { return }
+        }
+        super.pressesBegan(presses, with: event)
     }
 }
 
