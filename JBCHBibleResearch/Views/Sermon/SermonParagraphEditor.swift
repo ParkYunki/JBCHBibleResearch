@@ -306,6 +306,14 @@ final class SermonParagraphEditingProxy {
     @ObservationIgnored weak var textView: UITextView?
     /// 선택 영역(드래그한 글자)이 있는지 — 강조 1·2·3 버튼 활성 상태에 쓴다(에디터 코디네이터가 갱신).
     var hasSelection = false
+    /// 커서(선택 시작)가 있는 문단의 최종 지정 스타일 — 툴바의 스타일 pill 강조에 쓴다(커서 이동·편집·스타일 적용 때 갱신).
+    var activeStyle: SermonParagraphStyle = .body
+
+    /// `currentParagraphStyle()`을 읽어 `activeStyle`에 반영한다(값이 같으면 건드리지 않아 불필요한 뷰 갱신을 피한다).
+    func refreshActiveStyle() {
+        let style = currentParagraphStyle()
+        if activeStyle != style { activeStyle = style }
+    }
 
     func toggleBold() { toggleTrait(.traitBold) }
     func toggleItalic() { toggleTrait(.traitItalic) }
@@ -321,12 +329,20 @@ final class SermonParagraphEditingProxy {
         storage.endEditing()
     }
 
-    /// 커서가 있는 문단의 현재 스타일(툴바 드롭다운 표시용).
+    /// 커서(선택 시작)가 있는 문단의 최종 지정 스타일. 문단 전체에 같은 값이 칠해져 있으므로 문단 첫 글자의 값을 읽는다.
+    /// 글자가 없는 문단(문서 맨 끝의 빈 줄 등)은 다음에 입력될 글자의 타이핑 속성을 따른다.
     func currentParagraphStyle() -> SermonParagraphStyle {
-        guard let textView, let storage = textView.textStorage as NSTextStorage?, storage.length > 0 else { return .body }
-        let location = min(textView.selectedRange.location, storage.length - 1)
-        guard location >= 0 else { return .body }
-        let raw = storage.attribute(.sermonParagraphStyle, at: location, effectiveRange: nil) as? String
+        guard let textView else { return .body }
+        let storage = textView.textStorage
+        let text = storage.string as NSString
+        let location = min(textView.selectedRange.location, text.length)
+        let paragraph = text.paragraphRange(for: NSRange(location: location, length: 0))
+        let raw: String?
+        if paragraph.length > 0, paragraph.location < storage.length {
+            raw = storage.attribute(.sermonParagraphStyle, at: paragraph.location, effectiveRange: nil) as? String
+        } else {
+            raw = textView.typingAttributes[.sermonParagraphStyle] as? String
+        }
         return raw.flatMap(SermonParagraphStyle.init(rawValue:)) ?? .body
     }
 
@@ -630,6 +646,7 @@ struct SermonParagraphEditorRepresentable: UIViewRepresentable {
             let proxy = parent.proxy
             DispatchQueue.main.async {
                 if proxy.hasSelection != hasSelection { proxy.hasSelection = hasSelection }
+                proxy.refreshActiveStyle()
             }
         }
 
@@ -649,6 +666,7 @@ struct SermonParagraphEditorRepresentable: UIViewRepresentable {
                 self.parent.plainText = plain
                 self.parent.paragraphStyles = styles
                 self.isProcessing = false
+                self.parent.proxy.refreshActiveStyle()
             }
         }
     }
@@ -664,6 +682,14 @@ final class SermonParagraphEditingProxy {
     @ObservationIgnored weak var textView: NSTextView?
     /// 선택 영역(드래그한 글자)이 있는지 — 강조 1·2·3 버튼 활성 상태에 쓴다(에디터 코디네이터가 갱신).
     var hasSelection = false
+    /// 커서(선택 시작)가 있는 문단의 최종 지정 스타일 — 툴바의 스타일 pill 강조에 쓴다(커서 이동·편집·스타일 적용 때 갱신).
+    var activeStyle: SermonParagraphStyle = .body
+
+    /// `currentParagraphStyle()`을 읽어 `activeStyle`에 반영한다(값이 같으면 건드리지 않아 불필요한 뷰 갱신을 피한다).
+    func refreshActiveStyle() {
+        let style = currentParagraphStyle()
+        if activeStyle != style { activeStyle = style }
+    }
 
     func toggleBold() { toggleTrait(.bold) }
     func toggleItalic() { toggleTrait(.italic) }
@@ -678,11 +704,18 @@ final class SermonParagraphEditingProxy {
         storage.endEditing()
     }
 
+    /// iOS `currentParagraphStyle()`과 같은 규칙.
     func currentParagraphStyle() -> SermonParagraphStyle {
-        guard let textView, let storage = textView.textStorage, storage.length > 0 else { return .body }
-        let location = min(textView.selectedRange().location, storage.length - 1)
-        guard location >= 0 else { return .body }
-        let raw = storage.attribute(.sermonParagraphStyle, at: location, effectiveRange: nil) as? String
+        guard let textView, let storage = textView.textStorage else { return .body }
+        let text = storage.string as NSString
+        let location = min(textView.selectedRange().location, text.length)
+        let paragraph = text.paragraphRange(for: NSRange(location: location, length: 0))
+        let raw: String?
+        if paragraph.length > 0, paragraph.location < storage.length {
+            raw = storage.attribute(.sermonParagraphStyle, at: paragraph.location, effectiveRange: nil) as? String
+        } else {
+            raw = textView.typingAttributes[.sermonParagraphStyle] as? String
+        }
         return raw.flatMap(SermonParagraphStyle.init(rawValue:)) ?? .body
     }
 
@@ -996,6 +1029,7 @@ struct SermonParagraphEditorRepresentable: NSViewRepresentable {
             let proxy = parent.proxy
             DispatchQueue.main.async {
                 if proxy.hasSelection != hasSelection { proxy.hasSelection = hasSelection }
+                proxy.refreshActiveStyle()
             }
         }
 
@@ -1017,6 +1051,7 @@ struct SermonParagraphEditorRepresentable: NSViewRepresentable {
                 self.parent.plainText = plain
                 self.parent.paragraphStyles = styles
                 self.isProcessing = false
+                self.parent.proxy.refreshActiveStyle()
             }
         }
     }

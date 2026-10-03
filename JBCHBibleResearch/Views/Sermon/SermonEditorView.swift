@@ -40,7 +40,6 @@ struct SermonEditorView: View {
     @State private var contentHtml: String = ""
     @State private var contentText: String = ""
     @State private var paragraphStyles: String = ""
-    @State private var currentStyle: SermonParagraphStyle = .body
     @State private var isVersePickerPresented = false
     @State private var hasLoaded = false
     /// 새 설교 제목 입력 상태 — `isNewSermon`일 때만 쓰인다.
@@ -350,15 +349,15 @@ struct SermonEditorView: View {
                     HStack(spacing: 6) {
                         ForEach(SermonParagraphStyle.allCases, id: \.self) { style in
                             Button {
-                                currentStyle = style
                                 proxy.applyParagraphStyle(style, settings: .shared)
+                                proxy.activeStyle = style
                             } label: {
                                 Text(styleDisplayName(style))
                                     .font(.caption.weight(.bold))
                                     .padding(.horizontal, 13)
                                     .padding(.vertical, 7)
-                                    .background(style == currentStyle ? accent : Color.secondary.opacity(0.12))
-                                    .foregroundStyle(style == currentStyle ? Color.white : Color.primary)
+                                    .background(style == proxy.activeStyle ? accent : Color.secondary.opacity(0.12))
+                                    .foregroundStyle(style == proxy.activeStyle ? Color.white : Color.primary)
                                     .clipShape(Capsule())
                             }
                             .buttonStyle(.plain)
@@ -659,7 +658,7 @@ struct SermonEditorView: View {
     /// 그 문단 순번과 함께 `SermonVerseReference`를 저장한다(좌표가 구조적으로 정확).
     private func insertVerseQuote(text: String, bookId: Int, chapter: Int, verseStart: Int, verseEnd: Int?) {
         let paragraphIndex = proxy.insertVerseQuoteParagraph(text: text, settings: .shared)
-        currentStyle = .verseQuote
+        proxy.activeStyle = .verseQuote
         let reference = subject.makeVerseReference(
             bookId: bookId, chapter: chapter, verseStart: verseStart, verseEnd: verseEnd,
             paragraphIndex: paragraphIndex
