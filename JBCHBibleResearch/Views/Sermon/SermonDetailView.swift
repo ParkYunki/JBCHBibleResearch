@@ -170,7 +170,8 @@ struct SermonDetailView: View {
             .buttonStyle(SermonPillButtonStyle(isFilled: false, tint: accent))
         } else {
             Button {
-                openWindow(id: "sermon-editor", value: SermonContentTarget.sermon(sermon))
+                sceneDiagNote("편집 버튼 탭(설교 상세) → openWindow(sermon-editor)")
+                openWindow(id: "sermon-editor", value: SermonEditorTarget.sermon(sermon))
             } label: {
                 Label("편집", systemImage: "square.and.pencil")
             }
@@ -189,6 +190,7 @@ struct SermonDetailView: View {
             .buttonStyle(SermonPillButtonStyle(isFilled: true, tint: accent))
         } else {
             Button {
+                sceneDiagNote("뷰어 버튼 탭(설교 상세) → openWindow(sermon-viewer)")
                 openWindow(id: "sermon-viewer", value: SermonViewerTarget.sermon(sermon))
             } label: {
                 Label("뷰어", systemImage: "eyeglasses")
@@ -315,7 +317,8 @@ struct SermonDetailView: View {
             .buttonStyle(SermonMiniPillButtonStyle(isFilled: false, tint: accent))
         } else {
             Button {
-                openWindow(id: "sermon-editor", value: SermonContentTarget.delivery(delivery))
+                sceneDiagNote("편집 버튼 탭(회차) → openWindow(sermon-editor)")
+                openWindow(id: "sermon-editor", value: SermonEditorTarget.delivery(delivery))
             } label: {
                 Text("편집")
             }
@@ -334,6 +337,7 @@ struct SermonDetailView: View {
             .buttonStyle(SermonMiniPillButtonStyle(isFilled: true, tint: accent))
         } else {
             Button {
+                sceneDiagNote("뷰어 버튼 탭(회차) → openWindow(sermon-viewer)")
                 openWindow(id: "sermon-viewer", value: SermonViewerTarget.delivery(delivery))
             } label: {
                 Text("뷰어")

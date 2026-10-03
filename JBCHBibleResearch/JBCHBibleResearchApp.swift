@@ -29,6 +29,11 @@ struct JBCHBibleResearchApp: App {
         // (BundledFontRegistrar.swift 참고 — 등록에 실패해도 앱은 계속 켜진다).
         BundledFontRegistrar.registerBundledFontsIfNeeded()
 
+        // [임시 진단] 설교 뷰어 먹통 추적용 씬 로그(DEBUG+iOS 전용, `SceneDiagnostics.swift` 참고).
+        #if DEBUG && os(iOS)
+        SceneDiag.start()
+        #endif
+
         // macOS 안전망(2026-10-01) — 성경 조회에서 인스펙터를 연 채 툴바 ">>"(넘침 메뉴)를 누르면 `NSGenericException: The window has
         // been marked as needing another Update Constraints in Window pass, but it has already had more ... passes than there are
         // views`로 앱이 종료됐다. 스택에 앱 코드는 없고 `SplitViewChildController.hostingView(_:didUpdateMinSize:maxSize:)`가
@@ -183,8 +188,10 @@ struct JBCHBibleResearchApp: App {
         // 설교 작성(S-SER2)/뷰어(S-SER3) 창 — `SermonContentWindowContent`
         // (Views/Sermon/SermonSupport.swift)가 `mode`에 따라 에디터/뷰어로 분기한다.
         // `SermonContentTarget`이 Sermon(메인)/SermonDelivery(회차 사본) 중 어느 쪽을 열지 함께 싣는다.
-        WindowGroup(id: "sermon-editor", for: SermonContentTarget.self) { $target in
-            SermonContentWindowContent(mode: .editor, target: target)
+        // 값은 `SermonEditorTarget`(대상 + 열 때마다 바뀌는 토큰) — 같은 값이 "이미 열림"으로 남아 `openWindow`가 버려지는 먹통을 피한다
+        // (`SermonViewerTarget` 주석 참고).
+        WindowGroup(id: "sermon-editor", for: SermonEditorTarget.self) { $wrapped in
+            SermonContentWindowContent(mode: .editor, target: wrapped?.target, windowToken: wrapped?.token)
                 .modifier(AppColorSchemeModifier())
                 #if os(macOS)
                 .frame(minWidth: 960, minHeight: 680)
@@ -207,7 +214,7 @@ struct JBCHBibleResearchApp: App {
         // 열리지 않는 문제가 있어(iPad), 내용은 같고 타입만 다른 `SermonViewerTarget`
         // 래퍼(SermonSupport.swift)를 쓴다 — 원인 분석은 그 타입 선언부 주석 참고.
         WindowGroup(id: "sermon-viewer", for: SermonViewerTarget.self) { $wrapped in
-            SermonContentWindowContent(mode: .viewer, target: wrapped?.target)
+            SermonContentWindowContent(mode: .viewer, target: wrapped?.target, windowToken: wrapped?.token)
                 #if os(macOS)
                 .frame(minWidth: 1000, minHeight: 700)
                 #endif

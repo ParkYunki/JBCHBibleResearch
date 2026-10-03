@@ -14,6 +14,9 @@ import Foundation
 import SwiftData
 import SwiftUI
 import BibleResearchModels
+#if os(iOS)
+import UIKit
+#endif
 
 /// "내 설교" 오른쪽 패널(아이패드·맥)에 얹힌 상세/에디터가 자기 제목(선택한 설교 제목 등)을 내비게이션 바에 올리지
 /// 않도록 `SermonHomeView`가 켜는 환경값. 켜져 있으면 두 화면은 `SermonFixedTitle.navigationText`를 제목으로 쓴다.
@@ -67,19 +70,128 @@ struct SermonContentTarget: Codable, Hashable, Sendable {
 ///
 /// ⚠️ 이 원인이 실제 iPadOS 동작과 일치하는지는 확정되지 않았다. 타입 분리는 부작용 없는
 /// 구조적 개선이다.
+///
+/// `token`(2026-10-03): 아이패드에서 뷰어를 정상적으로 닫은 뒤(씬이 `didDisconnect`로 사라진 뒤)에도 같은 설교의 뷰어 버튼을 누르면
+/// `openWindow`가 아무 씬 이벤트 없이 버려지는 먹통이 났다(`SceneDiag` 로그: 탭 줄만 있고 `willConnect`/`didActivate` 없음).
+/// `WindowGroup(for:)`가 같은 값의 창을 "이미 열림"으로 기억한 채 남는 것으로 보인다. 그래서 창을 열 때마다 새 값이 되도록 토큰을 붙인다
+/// (`SermonNewTarget`/`OutlineQuickViewRequest`와 같은 방식). 같은 대상의 창이 실제로 떠 있는 동안에는 `SermonWindowTokenStore`가
+/// 그 창의 토큰을 다시 돌려줘 기존 창이 앞으로 오고, 닫힌 뒤에는 새 토큰이라 항상 새 창이 뜬다.
 struct SermonViewerTarget: Codable, Hashable, Sendable {
     let target: SermonContentTarget
+    let token: UUID
 
-    init(_ target: SermonContentTarget) {
+    init(_ target: SermonContentTarget, token: UUID = UUID()) {
         self.target = target
+        self.token = token
     }
 
+    @MainActor
     static func sermon(_ sermon: Sermon) -> SermonViewerTarget {
-        SermonViewerTarget(.sermon(sermon))
+        make(.sermon(sermon))
     }
 
+    @MainActor
     static func delivery(_ delivery: SermonDelivery) -> SermonViewerTarget {
-        SermonViewerTarget(.delivery(delivery))
+        make(.delivery(delivery))
+    }
+
+    @MainActor
+    private static func make(_ target: SermonContentTarget) -> SermonViewerTarget {
+        SermonViewerTarget(target, token: SermonWindowTokenStore.shared.token(for: target, kind: .viewer))
+    }
+}
+
+/// 편집기 창 전용 값 타입 — `SermonViewerTarget`과 같은 이유와 구조(토큰으로 "열 때마다 새 값").
+/// 같은 설교의 편집 창이 실제로 떠 있는 동안에는 같은 토큰을 돌려줘 창이 둘로 늘지 않는다(저장 충돌 방지).
+struct SermonEditorTarget: Codable, Hashable, Sendable {
+    let target: SermonContentTarget
+    let token: UUID
+
+    init(_ target: SermonContentTarget, token: UUID = UUID()) {
+        self.target = target
+        self.token = token
+    }
+
+    @MainActor
+    static func sermon(_ sermon: Sermon) -> SermonEditorTarget {
+        make(.sermon(sermon))
+    }
+
+    @MainActor
+    static func delivery(_ delivery: SermonDelivery) -> SermonEditorTarget {
+        make(.delivery(delivery))
+    }
+
+    @MainActor
+    private static func make(_ target: SermonContentTarget) -> SermonEditorTarget {
+        SermonEditorTarget(target, token: SermonWindowTokenStore.shared.token(for: target, kind: .editor))
+    }
+}
+
+/// 열려 있는(또는 방금 열기를 요청한) 뷰어/편집기 창의 토큰 기록.
+///
+/// - `token(for:kind:)`: 열기 요청에 쓸 토큰. 같은 대상·종류의 창이 **떠 있거나**(`windowDidAppear` 이후) **방금 요청 중**(3초 이내)이면
+///   그 토큰을 다시 돌려준다(= 기존 창을 앞으로, 중복 창 방지). 그렇지 않으면 새 토큰이다.
+/// - 창 콘텐츠가 나타나면 `windowDidAppear`, 사라지면 `windowDidDisappear`가 기록을 갱신한다(`SermonContentWindowContent`).
+/// - 요청 직후 3초가 지나도 창이 안 나타났다면(요청이 버려진 경우) 다음 누름은 새 토큰으로 다시 시도한다.
+@MainActor
+final class SermonWindowTokenStore {
+    static let shared = SermonWindowTokenStore()
+
+    enum Kind: String {
+        case editor, viewer
+    }
+
+    /// 사전(Dictionary)을 쓰지 않는다 — `PersistentIdentifier`가 들어 있는 `SermonContentTarget`을 키로 쓰면, 모델에서 얻은 값과
+    /// 창 값에서 복원된 값의 해시가 달라 "Duplicate keys of type 'Key' were found in a Dictionary"로 앱이 종료됐다(2026-10-03).
+    /// 그래서 배열을 선형 탐색한다(항목은 열린 창 수만큼이라 매우 적다). 대상 비교는 `==`, 창 알림은 토큰(UUID)으로만 찾는다.
+    private struct Entry {
+        let kind: Kind
+        let target: SermonContentTarget
+        let token: UUID
+        var requestedAt: Date
+        var isShown: Bool
+    }
+
+    /// 요청 후 창이 나타나기를 기다려 주는 시간(이 안의 재요청은 같은 토큰).
+    private static let pendingGrace: TimeInterval = 3
+
+    private var entries: [Entry] = []
+
+    private init() {}
+
+    func token(for target: SermonContentTarget, kind: Kind) -> UUID {
+        #if os(iOS)
+        // 앱 전환기에서 창을 위로 밀어 닫는 등 `onDisappear` 없이 씬이 사라진 경우의 안전망 — 열린 세션이 메인 하나뿐이면
+        // 보조 창이 하나도 없으므로 "떠 있음" 기록은 모두 낡은 것이다.
+        if UIApplication.shared.openSessions.count <= 1 {
+            entries.removeAll { $0.isShown }
+        }
+        #endif
+        let now = Date()
+        // 오래 기다려도 안 뜬 요청 기록은 정리한다.
+        entries.removeAll { !$0.isShown && now.timeIntervalSince($0.requestedAt) >= Self.pendingGrace }
+        if let entry = entries.first(where: { $0.kind == kind && $0.target == target }) {
+            sceneDiagNote("창 토큰 재사용 \(kind.rawValue) \(entry.token.uuidString.prefix(4)) (열림 \(entry.isShown))")
+            return entry.token
+        }
+        let token = UUID()
+        entries.append(Entry(kind: kind, target: target, token: token, requestedAt: now, isShown: false))
+        sceneDiagNote("창 토큰 새로 발급 \(kind.rawValue) \(token.uuidString.prefix(4))")
+        return token
+    }
+
+    func windowDidAppear(target: SermonContentTarget, kind: Kind, token: UUID) {
+        if let index = entries.firstIndex(where: { $0.token == token }) {
+            entries[index].isShown = true
+            entries[index].requestedAt = Date()
+        } else {
+            entries.append(Entry(kind: kind, target: target, token: token, requestedAt: Date(), isShown: true))
+        }
+    }
+
+    func windowDidDisappear(target: SermonContentTarget, kind: Kind, token: UUID) {
+        entries.removeAll { $0.token == token }
     }
 }
 
@@ -364,11 +476,30 @@ struct SermonContentWindowContent: View {
     @Query private var deliveries: [SermonDelivery]
     let mode: SermonComingSoonView.Mode
     let target: SermonContentTarget?
+    /// 이 창을 연 값의 토큰(`SermonViewerTarget`/`SermonEditorTarget`). 창이 나타나고 사라질 때 `SermonWindowTokenStore`에 알린다.
+    var windowToken: UUID? = nil
     /// 진짜 `WindowGroup` 창에서는 `@Environment(\.dismiss)`가 기댈 프레젠테이션이 없어
     /// 아무 효과가 없으므로, `onRequestClose`에 `dismissWindow()`를 연결해 창을 닫는다.
     @Environment(\.dismissWindow) private var dismissWindow
 
+    private var windowKind: SermonWindowTokenStore.Kind { mode == .viewer ? .viewer : .editor }
+
     var body: some View {
+        windowBody
+            .onAppear {
+                if let target, let windowToken {
+                    SermonWindowTokenStore.shared.windowDidAppear(target: target, kind: windowKind, token: windowToken)
+                }
+            }
+            .onDisappear {
+                if let target, let windowToken {
+                    SermonWindowTokenStore.shared.windowDidDisappear(target: target, kind: windowKind, token: windowToken)
+                }
+            }
+    }
+
+    @ViewBuilder
+    private var windowBody: some View {
         if let target {
             switch target.kind {
             case .sermon:
@@ -397,7 +528,12 @@ struct SermonContentWindowContent: View {
         case .editor:
             SermonEditorView(subject: subject, onRequestClose: { dismissWindow() })
         case .viewer:
-            SermonViewerView(subject: subject, onRequestClose: { dismissWindow() })
+            SermonViewerView(subject: subject, onRequestClose: {
+                #if DEBUG && os(iOS)
+                SceneDiag.note("뷰어 X → dismissWindow() 호출")
+                #endif
+                dismissWindow()
+            })
         }
     }
 

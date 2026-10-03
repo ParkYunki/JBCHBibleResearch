@@ -120,6 +120,11 @@ struct SermonViewerView: View {
         .background(SermonViewerPaper.color.ignoresSafeArea())
         .environment(\.colorScheme, .light)
         .navigationTitle("설교 뷰어")
+        #if DEBUG && os(iOS)
+        // [임시 진단] 뷰어 화면이 나타나고 사라지는 시점 — `SceneDiagnostics.swift` 참고.
+        .onAppear { SceneDiag.note("뷰어 onAppear") }
+        .onDisappear { SceneDiag.note("뷰어 onDisappear") }
+        #endif
         #if os(iOS)
         .navigationBarTitleDisplayMode(.inline)
         .toolbarBackground(SermonViewerPaper.color, for: .navigationBar)

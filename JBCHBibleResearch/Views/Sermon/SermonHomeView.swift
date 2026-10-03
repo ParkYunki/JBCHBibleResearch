@@ -924,9 +924,11 @@ struct SermonHomeView: View {
             rowActionButton(systemImage: "square.and.pencil", title: "편집", tint: editButtonTint) {
                 // 편집은 별도 창에서 한다(`SermonDetailView.editorButton`과 같은 창). 같은 설교는 창이 하나만 뜬다.
                 selectedSermonID = sermon.persistentModelID
-                openWindow(id: "sermon-editor", value: SermonContentTarget.sermon(sermon))
+                sceneDiagNote("편집 버튼 탭(목록 행) → openWindow(sermon-editor)")
+                openWindow(id: "sermon-editor", value: SermonEditorTarget.sermon(sermon))
             }
             rowActionButton(systemImage: "eyeglasses", title: "뷰어", tint: accent) {
+                sceneDiagNote("뷰어 버튼 탭(목록 행) → openWindow(sermon-viewer)")
                 openWindow(id: "sermon-viewer", value: SermonViewerTarget.sermon(sermon))
             }
         }

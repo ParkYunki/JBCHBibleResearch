@@ -123,10 +123,12 @@ struct SermonEditorView: View {
             }
         }
         .onAppear {
+            sceneDiagNote("편집기 onAppear")
             loadIfNeeded()
             loadTagsIfNeeded()
         }
         .onDisappear {
+            sceneDiagNote("편집기 onDisappear")
             // 마인드맵이 본문을 바꾼 뒤 닫히는 경우엔 저장하지 않는다(옛 사본이 새 본문을 덮어씀) —
             // 직전에 `onFlush`에서 이미 저장했다.
             if !skipSaveOnDisappear { save() }
@@ -164,6 +166,7 @@ struct SermonEditorView: View {
                     // 창을 닫을 때 `onDisappear → save()`가 한 번 더 돌지만, 닫힘 시점에 기대지 않고 먼저 저장한다
                     // (`save()`는 중복 호출돼도 같은 값을 다시 쓸 뿐이며 새 설교의 insert는 한 번만 한다).
                     if !isCancel { save() }
+                    sceneDiagNote("편집기 \(isCancel ? "취소" : "완료") → onRequestClose(dismissWindow) 호출")
                     onRequestClose?()
                 }
                 .buttonStyle(SermonMiniPillButtonStyle(isFilled: !isCancel, tint: accent))

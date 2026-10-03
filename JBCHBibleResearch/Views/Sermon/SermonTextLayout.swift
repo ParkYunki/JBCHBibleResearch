@@ -115,8 +115,12 @@ final class SermonLayoutManager: NSLayoutManager {
     }
 
     override func drawBackground(forGlyphRange glyphsToShow: NSRange, at origin: CGPoint) {
-        super.drawBackground(forGlyphRange: glyphsToShow, at: origin)
-        guard let storage = textStorage, glyphsToShow.length > 0 else { return }
+        // 말씀구절 박스/글자 배경을 먼저 칠하고 그 위에 `super`(선택 영역 하이라이트 등)를 칠한다 —
+        // 순서가 반대면 불투명한 박스가 macOS의 드래그 선택 색을 덮어 선택이 보이지 않는다.
+        guard let storage = textStorage, glyphsToShow.length > 0 else {
+            super.drawBackground(forGlyphRange: glyphsToShow, at: origin)
+            return
+        }
         let charRange = characterRange(forGlyphRange: glyphsToShow, actualGlyphRange: nil)
         // 박스의 위·아래 안여백은 줄 영역 바깥(문단 간격 안)에 그려지므로, 스크롤 중 새로 드러나는 띠에 안여백만 걸리고
         // 줄은 없는 경우를 위해 앞뒤 문단까지 확인한다. 단, 같은 컨테이너(페이지) 안의 글리프로만 제한한다.
@@ -135,6 +139,7 @@ final class SermonLayoutManager: NSLayoutManager {
         }
         drawVerseBoxes(storage: storage, charRange: verseScan, glyphsToShow: drawableGlyphs, origin: origin)
         drawTextBackgrounds(storage: storage, charRange: charRange, origin: origin)
+        super.drawBackground(forGlyphRange: glyphsToShow, at: origin)
     }
 
     // MARK: 말씀구절 박스
