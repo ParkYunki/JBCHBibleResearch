@@ -57,8 +57,8 @@ enum SermonViewerDocument {
         return scaled(storage, by: CGFloat(scale))
     }
 
-    /// 글자 크기와 줄/문단 간격에 같은 배율을 곱한다. 원본을 순회하면서 사본에 쓰므로 순회 중 변경이 없다.
-    /// 들여쓰기(말씀구절/인용의 고정 10~14pt)는 스타일의 모양이라 배율을 곱하지 않는다.
+    /// 글자 크기와 줄/문단 간격·들여쓰기에 같은 배율을 곱한다(본문 첫 줄 1글자 들여쓰기가 글자 크기를 따라가도록). 원본을 순회하면서
+    /// 사본에 쓰므로 순회 중 변경이 없다. 말씀구절 박스 안여백은 글자 크기에 비례해 그려지므로 따로 곱하지 않는다.
     private static func scaled(_ attributed: NSAttributedString, by factor: CGFloat) -> NSAttributedString {
         guard attributed.length > 0, abs(factor - 1) > 0.001 else { return attributed }
         let result = NSMutableAttributedString(attributedString: attributed)
@@ -79,6 +79,9 @@ enum SermonViewerDocument {
             copy.lineSpacing *= factor
             copy.paragraphSpacing *= factor
             copy.paragraphSpacingBefore *= factor
+            copy.headIndent *= factor
+            copy.firstLineHeadIndent *= factor
+            copy.tailIndent *= factor
             result.addAttribute(.paragraphStyle, value: copy, range: range)
         }
         return result
@@ -86,68 +89,6 @@ enum SermonViewerDocument {
 }
 
 // MARK: - 페이지 나누기
-
-/// 페이지 모드 전용 글자 배경 표시용 커스텀 attribute 이름.
-/// 페이지 모드는 TextKit 1(`NSLayoutManager`)이라 표준 `.backgroundColor`를 줄 높이(줄 간격 포함) 전체로 칠해
-/// 줄 사이가 이어진 큰 덩어리가 되고 들여쓰기 영역까지 번진다. 스크롤 모드(TextKit 2 `UITextView`/`NSTextView`)와 편집기는
-/// 글자 상자만 줄마다 따로 칠한다. 모양을 맞추려고 페이지 모드의 저장소에서는 `.backgroundColor`를 이 attribute로 옮기고
-/// `SermonViewerLayoutManager`가 직접 칠한다(2026-10-03).
-extension NSAttributedString.Key {
-    static let sermonViewerBackground = NSAttributedString.Key("sermonViewerBackground")
-}
-
-/// 글자 배경을 줄마다 "글자 상자(ascender~descender) × 실제 글자 폭"으로 칠하는 레이아웃 매니저.
-/// 줄 간격·문단 간격·들여쓰기 영역은 칠하지 않는다. 좌표는 `drawBackground(forGlyphRange:at:)`의 `origin`
-/// (텍스트 컨테이너 원점의 뷰 좌표)만큼 옮겨 그린다.
-final class SermonViewerLayoutManager: NSLayoutManager {
-    override func drawBackground(forGlyphRange glyphsToShow: NSRange, at origin: CGPoint) {
-        super.drawBackground(forGlyphRange: glyphsToShow, at: origin)
-        guard let storage = textStorage, glyphsToShow.length > 0 else { return }
-        let charRange = characterRange(forGlyphRange: glyphsToShow, actualGlyphRange: nil)
-        storage.enumerateAttribute(.sermonViewerBackground, in: charRange, options: []) { value, attributeRange, _ in
-            guard let color = value as? PlatformColor else { return }
-            let glyphRange = self.glyphRange(forCharacterRange: attributeRange, actualCharacterRange: nil)
-            self.enumerateLineFragments(forGlyphRange: glyphRange) { lineRect, _, container, lineGlyphRange, _ in
-                let runGlyphs = NSIntersectionRange(lineGlyphRange, glyphRange)
-                guard runGlyphs.length > 0 else { return }
-                // 줄 끝의 문단 구분 문자(\n, \r, U+2028/2029)는 칠하지 않는다 — 이 글리프의 영역은 줄 오른쪽 끝까지 이어져
-                // 그대로 두면 배경이 컨테이너 폭 전체로 번지고, 글자 없는 빈 문단에도 띠가 생긴다(2026-10-03 실기기 확인).
-                // 글자가 하나도 안 남으면(빈 문단) 건너뛴다.
-                var runChars = self.characterRange(forGlyphRange: runGlyphs, actualGlyphRange: nil)
-                let text = storage.string as NSString
-                while runChars.length > 0 {
-                    let last = text.character(at: NSMaxRange(runChars) - 1)
-                    if last == 0x0A || last == 0x0D || last == 0x2028 || last == 0x2029 {
-                        runChars.length -= 1
-                    } else {
-                        break
-                    }
-                }
-                guard runChars.length > 0 else { return }
-                let paintGlyphs = self.glyphRange(forCharacterRange: runChars, actualCharacterRange: nil)
-                let bounds = self.boundingRect(forGlyphRange: paintGlyphs, in: container)
-                guard bounds.width > 0.5 else { return }
-                let charIndex = runChars.location
-                let font = (storage.attribute(.font, at: charIndex, effectiveRange: nil) as? PlatformFont)
-                    ?? PlatformFont.systemFont(ofSize: 17)
-                // 기준선은 줄 상자 맨 위에서 `location.y` 아래다. 글자 상자 = 기준선 위 ascender ~ 아래 |descender|.
-                let baselineY = lineRect.minY + self.location(forGlyphAt: paintGlyphs.location).y
-                let box = CGRect(
-                    x: bounds.minX + origin.x,
-                    y: baselineY - font.ascender + origin.y,
-                    width: bounds.width,
-                    height: font.ascender - font.descender
-                )
-                color.setFill()
-                #if os(iOS)
-                UIRectFill(box)
-                #elseif os(macOS)
-                NSBezierPath(rect: box).fill()
-                #endif
-            }
-        }
-    }
-}
 
 /// 문서를 같은 크기의 페이지(텍스트 컨테이너) 여러 개로 나눈다. 글자는 컨테이너를 차례로 채우며 흘러가므로
 /// 한 문단이 페이지보다 길어도 잘리지 않고 다음 페이지로 이어진다.
@@ -159,24 +100,21 @@ final class SermonViewerPaginator {
     /// 페이지 수 상한 — 비정상 입력(높이가 거의 0인 컨테이너 등)에서 무한히 컨테이너를 만들지 않게 하는 안전장치.
     private static let maxPages = 3000
 
+    /// 페이지 텍스트뷰를 컨테이너(글자 영역)보다 위·아래로 이만큼 키운다 — 첫 줄 위/마지막 줄 아래로 삐져나오는
+    /// 말씀구절 박스의 안여백이 텍스트뷰 경계에서 잘리지 않게 하는 그리기 여유 공간이다(글자 위치는 그대로).
+    static let drawBleed: CGFloat = 40
+
     let containerSize: CGSize
     private let storage: NSTextStorage
-    private let layoutManager = SermonViewerLayoutManager()
+    /// 에디터·스크롤 뷰어와 같은 레이아웃 매니저 — 말씀구절 박스/세로 바와 글자 배경을 같은 코드로 그린다(`SermonTextLayout.swift`).
+    private let layoutManager = SermonLayoutManager()
     private(set) var containers: [NSTextContainer] = []
 
     var pageCount: Int { max(containers.count, 1) }
 
     init(attributed: NSAttributedString, containerSize: CGSize) {
         self.containerSize = containerSize
-        // 표준 `.backgroundColor`는 커스텀 attribute로 옮긴다(`NSAttributedString.Key.sermonViewerBackground` 주석 참고).
-        // 글자 수/속성 범위는 그대로라 `characterLocation`/`pageIndex` 계산에는 영향이 없다.
-        let converted = NSMutableAttributedString(attributedString: attributed)
-        converted.enumerateAttribute(.backgroundColor, in: NSRange(location: 0, length: converted.length), options: []) { value, range, _ in
-            guard let color = value as? PlatformColor else { return }
-            converted.removeAttribute(.backgroundColor, range: range)
-            converted.addAttribute(.sermonViewerBackground, value: color, range: range)
-        }
-        self.storage = NSTextStorage(attributedString: converted)
+        self.storage = NSTextStorage(attributedString: attributed)
         storage.addLayoutManager(layoutManager)
         paginate()
     }
@@ -280,7 +218,8 @@ struct SermonViewerScrollText: UIViewRepresentable {
     }
 
     func makeUIView(context: Context) -> UITextView {
-        let textView = UITextView()
+        // TextKit 1 + `SermonLayoutManager` — 에디터·페이지 뷰어와 같은 코드로 말씀구절 박스/세로 바·글자 배경을 그린다.
+        let textView = SermonTextKit1.makeTextView()
         textView.isEditable = false
         textView.isSelectable = true
         textView.alwaysBounceVertical = true
@@ -288,7 +227,7 @@ struct SermonViewerScrollText: UIViewRepresentable {
         // 뷰어 고정 종이색 + 라이트 외형(`SermonViewerPaper` 참고).
         textView.overrideUserInterfaceStyle = .light
         textView.backgroundColor = SermonViewerPaper.platformColor
-        textView.attributedText = attributed
+        textView.textStorage.setAttributedString(attributed)
         // 탭은 텍스트뷰의 선택 동작과 함께 인식하고(막지 않음), 선택이 있던 상태의 탭은 선택 해제로만 쓴다.
         let tap = UITapGestureRecognizer(target: context.coordinator, action: #selector(Coordinator.handleTap(_:)))
         tap.delegate = context.coordinator
@@ -307,7 +246,7 @@ struct SermonViewerScrollText: UIViewRepresentable {
         guard context.coordinator.generation != generation else { return }
         context.coordinator.generation = generation
         let offset = textView.contentOffset
-        textView.attributedText = attributed
+        textView.textStorage.setAttributedString(attributed)
         // 글꼴 배율만 바뀐 경우 읽던 자리 근처에 머물게 한다(범위를 벗어나면 UIKit이 보정한다).
         textView.setContentOffset(offset, animated: false)
     }
@@ -353,24 +292,14 @@ struct SermonViewerScrollText: NSViewRepresentable {
     let onToggleChrome: () -> Void
 
     func makeNSView(context: Context) -> NSScrollView {
-        // `NSTextView.scrollableTextView()`와 같은 구성 — 클릭 처리를 위해 하위 클래스 텍스트뷰를 직접 조립한다.
-        let scrollView = NSScrollView()
+        // `NSTextView.scrollableTextView()`와 같은 구성에 TextKit 1 + `SermonLayoutManager`를 끼우고, 클릭 처리를 위해 하위 클래스 텍스트뷰를 쓴다.
+        let (scrollView, textView) = SermonTextKit1.makeScrollView { container, frame in
+            SermonViewerNSTextView(frame: frame, textContainer: container)
+        }
         scrollView.appearance = NSAppearance(named: .aqua)
-        scrollView.hasVerticalScroller = true
-        scrollView.hasHorizontalScroller = false
-        scrollView.autohidesScrollers = true
         scrollView.drawsBackground = true
         scrollView.backgroundColor = SermonViewerPaper.platformColor
 
-        let textView = SermonViewerNSTextView(frame: NSRect(x: 0, y: 0, width: 400, height: 400))
-        textView.minSize = NSSize(width: 0, height: 0)
-        textView.maxSize = NSSize(width: CGFloat.greatestFiniteMagnitude, height: CGFloat.greatestFiniteMagnitude)
-        textView.isVerticallyResizable = true
-        textView.isHorizontallyResizable = false
-        textView.autoresizingMask = [.width]
-        textView.textContainer?.widthTracksTextView = true
-        textView.textContainer?.heightTracksTextView = false
-        textView.textContainer?.containerSize = NSSize(width: 400, height: CGFloat.greatestFiniteMagnitude)
         textView.isEditable = false
         textView.isSelectable = true
         textView.isRichText = true
@@ -379,11 +308,11 @@ struct SermonViewerScrollText: NSViewRepresentable {
         textView.backgroundColor = SermonViewerPaper.platformColor
         textView.textStorage?.setAttributedString(attributed)
         // 스크롤 모드: 가운데 클릭만 바 숨김/표시. 가로 쓸기는 쓰지 않는다.
-        textView.tapReferenceView = scrollView
-        textView.clicks.onZone = { [weak coordinator = context.coordinator] zone in
+        guard let clickTextView = textView as? SermonViewerNSTextView else { return scrollView }
+        clickTextView.tapReferenceView = scrollView
+        clickTextView.clicks.onZone = { [weak coordinator = context.coordinator] zone in
             if zone == .center { coordinator?.onToggleChrome?() }
         }
-        scrollView.documentView = textView
 
         context.coordinator.onToggleChrome = onToggleChrome
         context.coordinator.generation = generation
@@ -451,7 +380,10 @@ final class SermonViewerPageController: UIViewController {
 
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        textView.frame = view.bounds.inset(by: insets)
+        // 위·아래로 `drawBleed`만큼 키우고 같은 양을 컨테이너 inset으로 되돌려, 글자 위치는 그대로 두고 박스 안여백을 그릴 자리를 만든다.
+        let bleed = SermonViewerPaginator.drawBleed
+        textView.textContainerInset = UIEdgeInsets(top: bleed, left: 0, bottom: bleed, right: 0)
+        textView.frame = view.bounds.inset(by: insets).insetBy(dx: 0, dy: -bleed)
     }
 }
 
@@ -668,6 +600,9 @@ final class SermonViewerPageNSView: NSView {
     let clicks = SermonViewerClickDispatcher()
     let swipe = SermonViewerSwipeTracker()
 
+    /// 위쪽이 원점 — 텍스트뷰의 y 위치를 "위 여백"으로 줄 수 있게 한다(위·아래 여백이 달라도 같은 값으로 위치가 정해진다).
+    override var isFlipped: Bool { true }
+
     override func mouseDown(with event: NSEvent) {
         guard bounds.width > 1 else { return }
         let fraction = convert(event.locationInWindow, from: nil).x / bounds.width
@@ -706,14 +641,18 @@ struct SermonViewerSinglePage: NSViewRepresentable {
         coordinator.insets = insets
         nsView.subviews.forEach { $0.removeFromSuperview() }
         guard paginator.containers.indices.contains(index) else { return }
+        // 위·아래로 `drawBleed`만큼 키우고 같은 양을 컨테이너 inset으로 되돌려, 글자 위치는 그대로 두고 박스 안여백을 그릴 자리를 만든다.
+        let bleed = SermonViewerPaginator.drawBleed
         let frame = NSRect(
-            x: insets.width, y: insets.height,
-            width: paginator.containerSize.width, height: paginator.containerSize.height
+            x: insets.width, y: insets.height - bleed,
+            width: paginator.containerSize.width, height: paginator.containerSize.height + bleed * 2
         )
         let textView = SermonViewerNSTextView(frame: frame, textContainer: paginator.containers[index])
         textView.isEditable = false
         textView.isSelectable = true
-        textView.textContainerInset = .zero
+        textView.isVerticallyResizable = false
+        textView.isHorizontallyResizable = false
+        textView.textContainerInset = NSSize(width: 0, height: bleed)
         textView.drawsBackground = false
         textView.appearance = NSAppearance(named: .aqua)
         textView.tapReferenceView = nsView

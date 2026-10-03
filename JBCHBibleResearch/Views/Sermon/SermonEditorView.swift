@@ -449,11 +449,69 @@ struct SermonEditorView: View {
                 Button { proxy.applyAlignment(.center) } label: { Image(systemName: "text.aligncenter") }
                 Button { proxy.applyAlignment(.right) } label: { Image(systemName: "text.alignright") }
                 Button { proxy.applyAlignment(.natural) } label: { Image(systemName: "arrow.uturn.backward") }
+
+                Divider().frame(height: 16)
+
+                emphasisButtons
             }
             .buttonStyle(.plain)
             .font(.system(size: 15))
         }
         .tint(accent)
+    }
+
+    /// 강조 1·2·3 + 해제 — 드래그해 선택한 글자에만 적용한다(선택이 없으면 흐리게 비활성).
+    /// 같은 강조를 다시 누르면 해제, 다른 강조를 누르면 교체된다. 문단 스타일과 별개의 글자 단위 서식이다.
+    private var emphasisButtons: some View {
+        let enabled = proxy.hasSelection
+        return HStack(spacing: 8) {
+            Text("강조")
+                .font(.caption2.weight(.bold))
+                .foregroundStyle(.secondary)
+            ForEach(SermonEmphasis.allCases, id: \.self) { kind in
+                Button {
+                    proxy.applyEmphasis(kind, settings: settings)
+                } label: {
+                    emphasisLabel(kind)
+                }
+                .accessibilityLabel(kind.displayName)
+            }
+            Button {
+                proxy.applyEmphasis(nil, settings: settings)
+            } label: {
+                Image(systemName: "xmark.circle")
+                    .font(.system(size: 14))
+                    .foregroundStyle(.secondary)
+            }
+            .accessibilityLabel("강조 해제")
+        }
+        .disabled(!enabled)
+        .opacity(enabled ? 1 : 0.38)
+    }
+
+    @ViewBuilder
+    private func emphasisLabel(_ kind: SermonEmphasis) -> some View {
+        switch kind {
+        case .one:
+            Text("강조1")
+                .font(.caption.weight(.heavy))
+                .foregroundStyle(Color(hex: "#753B44") ?? .red)
+                .padding(.horizontal, 8).padding(.vertical, 4)
+                .background(Color.secondary.opacity(0.12), in: RoundedRectangle(cornerRadius: 6, style: .continuous))
+        case .two:
+            Text("강조2")
+                .font(.caption.weight(.semibold))
+                .foregroundStyle(Color.black.opacity(0.85))
+                .padding(.horizontal, 8).padding(.vertical, 4)
+                .background(Color(hex: "#FFE08A") ?? .yellow, in: RoundedRectangle(cornerRadius: 6, style: .continuous))
+        case .three:
+            Text("강조3")
+                .font(.caption.weight(.semibold))
+                .underline()
+                .foregroundStyle(Color(hex: "#1F5F8B") ?? .blue)
+                .padding(.horizontal, 8).padding(.vertical, 4)
+                .background(Color.secondary.opacity(0.12), in: RoundedRectangle(cornerRadius: 6, style: .continuous))
+        }
     }
 
     private func styleDisplayName(_ style: SermonParagraphStyle) -> String {

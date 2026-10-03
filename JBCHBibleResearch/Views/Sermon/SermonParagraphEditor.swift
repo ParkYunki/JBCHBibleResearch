@@ -7,9 +7,11 @@
 //
 //  ⚠️ 저장 포맷: `contentHtml`은 실제로는 RTF이고 커스텀 attribute는 RTF에 남지 않는다.
 //  그래서 문단 스타일(`SermonParagraphStyle`)은 `paragraphStyles` 필드에 별도로 병행 저장한다.
-//  ⚠️ 렌더링: 스타일의 폰트/크기/줄간격은 저장하지 않고 열 때마다 `UserSettingsStore` 현재값으로
-//  다시 계산한다(열려 있는 에디터에 설정 변경을 실시간 반영하지는 않는다). 굵게/기울임은
+//  ⚠️ 렌더링: 스타일의 폰트/크기/줄간격/문단 간격/들여쓰기는 저장하지 않고 열 때마다 `UserSettingsStore` 현재값과
+//  `SermonStyleMetrics`로 다시 계산한다(열려 있는 에디터에 설정 변경을 실시간 반영하지는 않는다). 굵게/기울임은
 //  `fontPreservingBoldItalic`이 글자 단위로 보존한다.
+//  ⚠️ 텍스트뷰는 TextKit 1 + `SermonLayoutManager`(SermonTextLayout.swift)다. 말씀구절 박스/세로 바와 강조2 형광펜을
+//  뷰어(스크롤·페이지)와 똑같이 그리기 위해서다.
 
 import SwiftUI
 import BibleResearchModels
@@ -122,17 +124,10 @@ enum SermonParagraphStyleCodec {
 
         textStorage.enumerateAttribute(.font, in: paragraphRange, options: []) { value, subrange, _ in
             let originalFont = (value as? PlatformFont) ?? baseFont
-            let isManualFont: Bool = {
-                guard let previous else { return false }
-                return originalFont.fontName != previous.fontName
-                    || abs(Double(originalFont.pointSize) - previous.fontSize) > 0.01
-            }()
-            guard !isManualFont else { return }
-            var resolvedFont = fontPreservingBoldItalic(from: originalFont, applying: baseFont)
-            if style == .citation {
-                // 인용은 "항상 이탤릭"이 스타일 고정 속성이므로, 보존한 굵게 비트는 두고 기울임만 강제한다.
-                resolvedFont = italicVariant(of: resolvedFont)
-            }
+            guard !isManualFont(originalFont, previous: previous) else { return }
+            // 인용은 예전엔 "항상 이탤릭"이었다(한글 가짜 기울임). 2026-10-03 스타일 재설계로 기울임을 없앴으므로
+            // 저장돼 있던 이탤릭 비트도 떼고 다시 입힌다. 굵게는 보존한다.
+            let resolvedFont = fontPreservingBoldItalic(from: originalFont, applying: baseFont, dropItalic: style == .citation)
             textStorage.addAttribute(.font, value: resolvedFont, range: subrange)
         }
 
@@ -147,37 +142,69 @@ enum SermonParagraphStyleCodec {
         }
 
         textStorage.enumerateAttribute(.paragraphStyle, in: paragraphRange, options: []) { value, subrange, _ in
+            // 정렬은 프리셋이 값을 지정하지 않으므로(`.natural`) natural이 아니면 수동 지정으로 보고 유지한다.
             let existingAlignment = (value as? NSParagraphStyle)?.alignment
-            let paragraphStyle = NSMutableParagraphStyle()
-            paragraphStyle.lineSpacing = baseFont.typographicLineHeight * max(0, settings.sermonLineHeightMultiple(for: style) - 1)
-            if let existingAlignment, existingAlignment != .natural {
-                paragraphStyle.alignment = existingAlignment
-            }
-            if style == .verseQuote {
-                // 왼쪽 세로 바는 표준 attribute로 표현할 수 없어(커스텀 `NSLayoutManager` 필요)
-                // 에디터에서는 안쪽 여백과 배경색 박스까지만 구현한다.
-                paragraphStyle.headIndent = 14
-                paragraphStyle.firstLineHeadIndent = 14
-                paragraphStyle.paragraphSpacingBefore = 6
-                paragraphStyle.paragraphSpacing = 6
-            }
-            if style == .citation {
-                // 오른쪽 여백은 `tailIndent`를 음수로 주면 trailing margin 기준 거리가 된다.
-                //
-                // ⚠️ 문단 위아래 점선(구분선)은 표준 attribute로 표현할 수 없어(커스텀
-                // `NSLayoutManager` 필요) 에디터에는 없다. 뷰어(`SermonViewerText.swift`)도 편집 화면과
-                // 똑같이 보이도록 이 파일의 서식만 그대로 그리므로 점선을 그리지 않는다.
-                paragraphStyle.headIndent = 10
-                paragraphStyle.firstLineHeadIndent = 10
-                paragraphStyle.tailIndent = -10
-            }
+            let paragraphStyle = makeParagraphStyle(for: style, baseFont: baseFont, settings: settings, alignment: existingAlignment)
             textStorage.addAttribute(.paragraphStyle, value: paragraphStyle, range: subrange)
         }
 
+        // 말씀구절: 박스/왼쪽 세로 바는 표준 attribute로 표현할 수 없어 `SermonLayoutManager`가 문단 스타일을 보고 직접 그린다.
+        // 그 색을 attribute로 심어 두고, 다른 스타일이면 지운다.
         if style == .verseQuote {
-            textStorage.addAttribute(.backgroundColor, value: settings.sermonVerseQuoteBackgroundPlatformColor, range: paragraphRange)
+            textStorage.addAttribute(.sermonVerseBoxFill, value: settings.sermonVerseQuoteBackgroundPlatformColor, range: paragraphRange)
+            textStorage.addAttribute(.sermonVerseBoxBar, value: PlatformColor(settings.sermonVerseQuoteBarColor), range: paragraphRange)
         } else {
-            textStorage.removeAttribute(.backgroundColor, range: paragraphRange)
+            textStorage.removeAttribute(.sermonVerseBoxFill, range: paragraphRange)
+            textStorage.removeAttribute(.sermonVerseBoxBar, range: paragraphRange)
+        }
+        // 예전 말씀구절은 박스를 `.backgroundColor`로 저장했다 — 그 색의 배경만 걷어낸다(강조2 등 다른 배경은 유지).
+        removeLegacyVerseBackground(in: paragraphRange, textStorage: textStorage, settings: settings)
+    }
+
+    /// 사용자가 글꼴을 직접 바꾼 글자인지. 마지막 저장 때의 프리셋(스냅샷)과 크기가 다르거나 글꼴 계열이 다르면 수동 지정이다.
+    /// 같은 계열에서 굵게/기울임만 다른 경우(굵게·기울임 버튼, 강조1)는 수동 지정으로 보지 않는다 — 그래야 프리셋 크기가
+    /// 바뀌어도 굵은 글자가 옛 크기로 남지 않는다.
+    private static func isManualFont(_ originalFont: PlatformFont, previous: StyleSnapshot?) -> Bool {
+        guard let previous else { return false }
+        if abs(Double(originalFont.pointSize) - previous.fontSize) > 0.01 { return true }
+        if originalFont.fontName == previous.fontName { return false }
+        guard let previousFont = PlatformFont(name: previous.fontName, size: CGFloat(previous.fontSize)) else { return true }
+        return previousFont.familyName != originalFont.familyName
+    }
+
+    /// 문단 스타일 하나의 `NSParagraphStyle` — 줄간격(줄높이 배수) + 문단 위·아래 간격 + 들여쓰기(`SermonStyleMetrics`).
+    /// 불러오기·스타일 적용·타이핑 속성이 모두 이 함수를 써서 같은 모양이 된다.
+    static func makeParagraphStyle(
+        for style: SermonParagraphStyle, baseFont: PlatformFont, settings: UserSettingsStore, alignment: NSTextAlignment? = nil
+    ) -> NSMutableParagraphStyle {
+        let metrics = SermonStyleMetrics.metrics(for: style, fontSize: baseFont.pointSize)
+        let paragraphStyle = NSMutableParagraphStyle()
+        // 줄 높이 = 글자 크기 × 배수(CSS `line-height`와 같은 해석). 글꼴 자체의 기본 줄 높이(한글 글꼴은 대개 1.4~1.5배)를 넘는 만큼만
+        // `lineSpacing`(줄 아래 추가 간격)으로 준다 — 기본 줄 높이에 배수를 또 곱하면 간격이 두 배 가까이 벌어진다.
+        let targetLineHeight = baseFont.pointSize * settings.sermonLineHeightMultiple(for: style)
+        paragraphStyle.lineSpacing = max(0, targetLineHeight - baseFont.typographicLineHeight)
+        paragraphStyle.paragraphSpacingBefore = metrics.spacingBefore
+        paragraphStyle.paragraphSpacing = metrics.spacingAfter
+        paragraphStyle.headIndent = metrics.leftIndent
+        paragraphStyle.firstLineHeadIndent = metrics.leftIndent + metrics.firstLineIndent
+        // 오른쪽 여백은 `tailIndent`를 음수로 주면 trailing margin 기준 거리가 된다(0이면 여백 없음).
+        paragraphStyle.tailIndent = metrics.rightIndent > 0 ? -metrics.rightIndent : 0
+        if let alignment, alignment != .natural {
+            paragraphStyle.alignment = alignment
+        }
+        return paragraphStyle
+    }
+
+    /// 말씀구절 박스 색과 같은 `.backgroundColor`를 지운다(현재 설정값과, 예전/이전 기본값 두 가지).
+    private static func removeLegacyVerseBackground(in range: NSRange, textStorage: NSTextStorage, settings: UserSettingsStore) {
+        let legacyColors: [PlatformColor] = [
+            settings.sermonVerseQuoteBackgroundPlatformColor,
+            PlatformColor(Color(hex: "#F3E4E1") ?? .clear),
+            PlatformColor(Color(hex: "#F1E1DC") ?? .clear),
+        ]
+        textStorage.enumerateAttribute(.backgroundColor, in: range, options: []) { value, subrange, _ in
+            guard let color = value as? PlatformColor, legacyColors.contains(where: { color.sermonIsClose(to: $0) }) else { return }
+            textStorage.removeAttribute(.backgroundColor, range: subrange)
         }
     }
 
@@ -243,9 +270,11 @@ enum SermonParagraphStyleCodec {
     /// `originalFont`의 굵게/기울임 비트만 골라 `applying`(현재 설정의 패밀리+크기)에 다시 입힌다.
     /// 분류 비트(세리프 등)까지 복사하면 새 패밀리가 그 조합을 지원하지 않아
     /// `withSymbolicTraits`가 실패할 수 있어 두 비트만 옮기며, 실패하면 `baseFont`를 반환한다.
-    static func fontPreservingBoldItalic(from originalFont: PlatformFont, applying baseFont: PlatformFont) -> PlatformFont {
+    /// `dropItalic`이 true면 기울임 비트는 옮기지 않는다(인용 스타일).
+    static func fontPreservingBoldItalic(from originalFont: PlatformFont, applying baseFont: PlatformFont, dropItalic: Bool = false) -> PlatformFont {
         #if os(iOS)
-        let mask: UIFontDescriptor.SymbolicTraits = [.traitBold, .traitItalic]
+        var mask: UIFontDescriptor.SymbolicTraits = [.traitBold, .traitItalic]
+        if dropItalic { mask.remove(.traitItalic) }
         let originalBoldItalic = originalFont.fontDescriptor.symbolicTraits.intersection(mask)
         guard !originalBoldItalic.isEmpty else { return baseFont }
         var newTraits = baseFont.fontDescriptor.symbolicTraits
@@ -253,7 +282,8 @@ enum SermonParagraphStyleCodec {
         guard let descriptor = baseFont.fontDescriptor.withSymbolicTraits(newTraits) else { return baseFont }
         return UIFont(descriptor: descriptor, size: baseFont.pointSize)
         #elseif os(macOS)
-        let mask: NSFontDescriptor.SymbolicTraits = [.bold, .italic]
+        var mask: NSFontDescriptor.SymbolicTraits = [.bold, .italic]
+        if dropItalic { mask.remove(.italic) }
         let originalBoldItalic = originalFont.fontDescriptor.symbolicTraits.intersection(mask)
         guard !originalBoldItalic.isEmpty else { return baseFont }
         var newTraits = baseFont.fontDescriptor.symbolicTraits
@@ -271,11 +301,25 @@ enum SermonParagraphStyleCodec {
 /// 툴바가 "지금 포커스된 `UITextView`"에 문단 스타일/인라인 서식을 적용하기 위한 다리
 /// (`RichTextEditingProxy`와 같은 역할).
 @MainActor
+@Observable
 final class SermonParagraphEditingProxy {
-    weak var textView: UITextView?
+    @ObservationIgnored weak var textView: UITextView?
+    /// 선택 영역(드래그한 글자)이 있는지 — 강조 1·2·3 버튼 활성 상태에 쓴다(에디터 코디네이터가 갱신).
+    var hasSelection = false
 
     func toggleBold() { toggleTrait(.traitBold) }
     func toggleItalic() { toggleTrait(.traitItalic) }
+
+    /// 선택한 글자에만 강조를 적용한다(같은 강조를 다시 누르면 해제, 다른 강조는 교체). `kind`가 nil이면 해제.
+    func applyEmphasis(_ kind: SermonEmphasis?, settings: UserSettingsStore) {
+        guard let textView else { return }
+        let range = textView.selectedRange
+        guard range.length > 0 else { return }
+        let storage = textView.textStorage
+        storage.beginEditing()
+        SermonEmphasisEditor.apply(kind, range: range, in: storage, settings: settings)
+        storage.endEditing()
+    }
 
     /// 커서가 있는 문단의 현재 스타일(툴바 드롭다운 표시용).
     func currentParagraphStyle() -> SermonParagraphStyle {
@@ -437,12 +481,12 @@ final class SermonParagraphEditingProxy {
 
     private func applyTypingAttributes(for style: SermonParagraphStyle, settings: UserSettingsStore, to textView: UITextView) {
         let baseFont = settings.sermonPlatformFont(for: style)
-        let paragraphStyle = NSMutableParagraphStyle()
-        paragraphStyle.lineSpacing = baseFont.typographicLineHeight * max(0, settings.sermonLineHeightMultiple(for: style) - 1)
         var attrs = textView.typingAttributes
         attrs[.font] = baseFont
-        attrs[.paragraphStyle] = paragraphStyle
+        attrs[.paragraphStyle] = SermonParagraphStyleCodec.makeParagraphStyle(for: style, baseFont: baseFont, settings: settings)
         attrs[.sermonParagraphStyle] = style.rawValue
+        attrs[.sermonVerseBoxFill] = style == .verseQuote ? settings.sermonVerseQuoteBackgroundPlatformColor : nil
+        attrs[.sermonVerseBoxBar] = style == .verseQuote ? PlatformColor(settings.sermonVerseQuoteBarColor) : nil
         textView.typingAttributes = attrs
     }
 
@@ -505,7 +549,9 @@ struct SermonParagraphEditorRepresentable: UIViewRepresentable {
     var readOnlyBackgroundColor: UIColor? = nil
 
     func makeUIView(context: Context) -> UITextView {
-        let textView = UITextView()
+        // TextKit 1 + `SermonLayoutManager` — 말씀구절 박스/세로 바와 강조2 형광펜을 뷰어와 같은 코드로 그린다.
+        let textView = SermonTextKit1.makeTextView()
+        textView.delegate = context.coordinator
         // 편집 배경이 뷰어와 같은 고정 미색이므로 캐럿·선택·메뉴도 라이트 외형으로 고정한다(`SermonViewerPaper`).
         if isEditable { textView.overrideUserInterfaceStyle = .light }
         textView.isEditable = isEditable
@@ -555,11 +601,9 @@ struct SermonParagraphEditorRepresentable: UIViewRepresentable {
     private func applyBodyTypingAttributesIfEmpty(to textView: UITextView) {
         guard textView.textStorage.length == 0 else { return }
         let baseFont = settings.sermonPlatformFont(for: .body)
-        let paragraphStyle = NSMutableParagraphStyle()
-        paragraphStyle.lineSpacing = baseFont.typographicLineHeight * max(0, settings.sermonLineHeightMultiple(for: .body) - 1)
         textView.typingAttributes = [
             .font: baseFont,
-            .paragraphStyle: paragraphStyle,
+            .paragraphStyle: SermonParagraphStyleCodec.makeParagraphStyle(for: .body, baseFont: baseFont, settings: settings),
             .sermonParagraphStyle: SermonParagraphStyle.body.rawValue
         ]
     }
@@ -571,7 +615,7 @@ struct SermonParagraphEditorRepresentable: UIViewRepresentable {
 
     func makeCoordinator() -> Coordinator { Coordinator(self) }
 
-    final class Coordinator: NSObject, NSTextStorageDelegate {
+    final class Coordinator: NSObject, NSTextStorageDelegate, UITextViewDelegate {
         var parent: SermonParagraphEditorRepresentable
         var lastExportedRTF: String = ""
         var isProcessing = false
@@ -579,6 +623,15 @@ struct SermonParagraphEditorRepresentable: UIViewRepresentable {
         weak var textView: UITextView?
 
         init(_ parent: SermonParagraphEditorRepresentable) { self.parent = parent }
+
+        /// 선택 영역 유무를 프록시에 알린다(강조 버튼 활성/비활성). 뷰 갱신 중 상태 변경을 피하려고 다음 턴에 반영한다.
+        func textViewDidChangeSelection(_ textView: UITextView) {
+            let hasSelection = textView.selectedRange.length > 0
+            let proxy = parent.proxy
+            DispatchQueue.main.async {
+                if proxy.hasSelection != hasSelection { proxy.hasSelection = hasSelection }
+            }
+        }
 
         func textStorage(
             _ textStorage: NSTextStorage, didProcessEditing editedMask: NSTextStorage.EditActions,
@@ -606,11 +659,24 @@ struct SermonParagraphEditorRepresentable: UIViewRepresentable {
 // MARK: - macOS
 
 @MainActor
+@Observable
 final class SermonParagraphEditingProxy {
-    weak var textView: NSTextView?
+    @ObservationIgnored weak var textView: NSTextView?
+    /// 선택 영역(드래그한 글자)이 있는지 — 강조 1·2·3 버튼 활성 상태에 쓴다(에디터 코디네이터가 갱신).
+    var hasSelection = false
 
     func toggleBold() { toggleTrait(.bold) }
     func toggleItalic() { toggleTrait(.italic) }
+
+    /// iOS `applyEmphasis(_:settings:)`와 같은 구조.
+    func applyEmphasis(_ kind: SermonEmphasis?, settings: UserSettingsStore) {
+        guard let textView, let storage = textView.textStorage else { return }
+        let range = textView.selectedRange()
+        guard range.length > 0 else { return }
+        storage.beginEditing()
+        SermonEmphasisEditor.apply(kind, range: range, in: storage, settings: settings)
+        storage.endEditing()
+    }
 
     func currentParagraphStyle() -> SermonParagraphStyle {
         guard let textView, let storage = textView.textStorage, storage.length > 0 else { return .body }
@@ -673,12 +739,12 @@ final class SermonParagraphEditingProxy {
 
     private func applyTypingAttributes(for style: SermonParagraphStyle, settings: UserSettingsStore, to textView: NSTextView) {
         let baseFont = settings.sermonPlatformFont(for: style)
-        let paragraphStyle = NSMutableParagraphStyle()
-        paragraphStyle.lineSpacing = baseFont.typographicLineHeight * max(0, settings.sermonLineHeightMultiple(for: style) - 1)
         var attrs = textView.typingAttributes
         attrs[.font] = baseFont
-        attrs[.paragraphStyle] = paragraphStyle
+        attrs[.paragraphStyle] = SermonParagraphStyleCodec.makeParagraphStyle(for: style, baseFont: baseFont, settings: settings)
         attrs[.sermonParagraphStyle] = style.rawValue
+        attrs[.sermonVerseBoxFill] = style == .verseQuote ? settings.sermonVerseQuoteBackgroundPlatformColor : nil
+        attrs[.sermonVerseBoxBar] = style == .verseQuote ? PlatformColor(settings.sermonVerseQuoteBarColor) : nil
         textView.typingAttributes = attrs
     }
 
@@ -826,10 +892,13 @@ struct SermonParagraphEditorRepresentable: NSViewRepresentable {
     var readOnlyBackgroundColor: NSColor? = nil
 
     func makeNSView(context: Context) -> NSScrollView {
-        // `RichTextEditor`(말씀 요약/메모/개요)와 같은 방식으로 `scrollableTextView()`를 쓴다. 폭 추적·세로 리사이즈가 이미 맞게 설정된
-        // 텍스트뷰라, 네이티브 서식 팝업(`usesInspectorBar`)이 올바른 위치/폭 기준으로 뜬다.
-        let scrollView = NSTextView.scrollableTextView()
-        guard let textView = scrollView.documentView as? NSTextView else { return scrollView }
+        // `scrollableTextView()`와 같은 구성(폭 추적·세로 리사이즈)을 직접 조립하되 TextKit 1 + `SermonLayoutManager`를 끼운다 —
+        // 말씀구절 박스/세로 바와 강조2 형광펜을 뷰어와 같은 코드로 그리기 위해서다. 네이티브 서식 팝업(`usesInspectorBar`)이
+        // 올바른 위치/폭 기준으로 뜨도록 폭 추적·세로 리사이즈 설정은 `scrollableTextView()`와 같게 맞췄다.
+        let (scrollView, textView) = SermonTextKit1.makeScrollView { container, frame in
+            NSTextView(frame: frame, textContainer: container)
+        }
+        textView.delegate = context.coordinator
         textView.isEditable = isEditable
         textView.isSelectable = true
         textView.isRichText = true
@@ -886,11 +955,9 @@ struct SermonParagraphEditorRepresentable: NSViewRepresentable {
     private func applyBodyTypingAttributesIfEmpty(to textView: NSTextView, textStorage: NSTextStorage) {
         guard textStorage.length == 0 else { return }
         let baseFont = settings.sermonPlatformFont(for: .body)
-        let paragraphStyle = NSMutableParagraphStyle()
-        paragraphStyle.lineSpacing = baseFont.typographicLineHeight * max(0, settings.sermonLineHeightMultiple(for: .body) - 1)
         textView.typingAttributes = [
             .font: baseFont,
-            .paragraphStyle: paragraphStyle,
+            .paragraphStyle: SermonParagraphStyleCodec.makeParagraphStyle(for: .body, baseFont: baseFont, settings: settings),
             .sermonParagraphStyle: SermonParagraphStyle.body.rawValue
         ]
     }
@@ -913,7 +980,7 @@ struct SermonParagraphEditorRepresentable: NSViewRepresentable {
 
     func makeCoordinator() -> Coordinator { Coordinator(self) }
 
-    final class Coordinator: NSObject, NSTextStorageDelegate {
+    final class Coordinator: NSObject, NSTextStorageDelegate, NSTextViewDelegate {
         var parent: SermonParagraphEditorRepresentable
         var lastExportedRTF: String = ""
         var isProcessing = false
@@ -921,6 +988,16 @@ struct SermonParagraphEditorRepresentable: NSViewRepresentable {
         weak var textView: NSTextView?
 
         init(_ parent: SermonParagraphEditorRepresentable) { self.parent = parent }
+
+        /// 선택 영역 유무를 프록시에 알린다(강조 버튼 활성/비활성). 뷰 갱신 중 상태 변경을 피하려고 다음 턴에 반영한다.
+        func textViewDidChangeSelection(_ notification: Notification) {
+            guard let textView = notification.object as? NSTextView else { return }
+            let hasSelection = textView.selectedRange().length > 0
+            let proxy = parent.proxy
+            DispatchQueue.main.async {
+                if proxy.hasSelection != hasSelection { proxy.hasSelection = hasSelection }
+            }
+        }
 
         // macOS `NSTextStorageDelegate`는 iOS와 달리 중첩 타입이 아니라 전역 typealias
         // `NSTextStorageEditActions`를 쓴다(`RichTextEditor.swift`와 같은 이유).

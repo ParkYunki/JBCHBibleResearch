@@ -496,10 +496,8 @@ final class UserSettingsStore {
     // 소주제=Paperlogy-5Medium/16pt, 말씀구절=ChosunGs/20pt, 본문=GowunBatang-Regular/19pt,
     // 인용=AppleGothic/17pt)은 설계 문서 3.3의 확정값이다.
     //
-    // ⚠️ `sermonCitationFontName`의 기본값 "AppleGothic"은 번들 폰트가 아닌 시스템 폰트다.
-    // macOS에는 내장돼 있으나 iOS/iPadOS에 같은 PostScript 이름이 있는지는 검증하지 못했다.
-    // 없으면 `Font.custom`이 시스템 기본 폰트로 대체하므로 크래시는 없지만, "인용" 문단이
-    // 의도와 다른 폰트로 보일 수 있다.
+    // (2026-10-03 재설계로 기본값이 바뀌었다: 대주제 28 / 중주제 Bold 22 / 소주제 SemiBold 18 / 말씀구절 고운바탕 16.5 /
+    //  인용 Paperlogy Regular 14.5(기울임 없음) / 본문 17. 인용의 시스템 폰트 AppleGothic 의존은 없어졌다.)
     var sermonMainThemeFontName: String {
         didSet { defaults.set(sermonMainThemeFontName, forKey: Key.sermonMainThemeFontName) }
     }
@@ -640,30 +638,31 @@ final class UserSettingsStore {
         // 이 값을 바꾸는 설정 UI가 없어 저장된 값이 없으므로 기본값 변경만으로 기존 기기에도 적용된다. 이미 저장된 설교 본문은
         // `styleFontSnapshot`이 옛 크기와 같은 글자를 "수동 지정이 아님"으로 보고 불러올 때 새 크기로 다시 입힌다.
         self.sermonMainThemeFontName = defaults.string(forKey: Key.sermonMainThemeFontName) ?? "Paperlogy-8ExtraBold"
-        self.sermonMainThemeFontSize = defaults.object(forKey: Key.sermonMainThemeFontSize) as? Double ?? 25
-        self.sermonMidThemeFontName = defaults.string(forKey: Key.sermonMidThemeFontName) ?? "Paperlogy-6SemiBold"
-        self.sermonMidThemeFontSize = defaults.object(forKey: Key.sermonMidThemeFontSize) as? Double ?? 20
-        self.sermonSubThemeFontName = defaults.string(forKey: Key.sermonSubThemeFontName) ?? "Paperlogy-5Medium"
-        self.sermonSubThemeFontSize = defaults.object(forKey: Key.sermonSubThemeFontSize) as? Double ?? 17
-        self.sermonVerseQuoteFontName = defaults.string(forKey: Key.sermonVerseQuoteFontName) ?? SpecialPurposeFonts.hanja
-        self.sermonVerseQuoteFontSize = defaults.object(forKey: Key.sermonVerseQuoteFontSize) as? Double ?? 15
-        self.sermonCitationFontName = defaults.string(forKey: Key.sermonCitationFontName) ?? "AppleGothic"
-        self.sermonCitationFontSize = defaults.object(forKey: Key.sermonCitationFontSize) as? Double ?? 15
+        // 2026-10-03 스타일 재설계 기본값 — 설정에서 직접 바꿔 저장된 값이 있으면 그 값이 우선이라 그대로 유지된다.
+        self.sermonMainThemeFontSize = defaults.object(forKey: Key.sermonMainThemeFontSize) as? Double ?? 28
+        self.sermonMidThemeFontName = defaults.string(forKey: Key.sermonMidThemeFontName) ?? "Paperlogy-7Bold"
+        self.sermonMidThemeFontSize = defaults.object(forKey: Key.sermonMidThemeFontSize) as? Double ?? 22
+        self.sermonSubThemeFontName = defaults.string(forKey: Key.sermonSubThemeFontName) ?? "Paperlogy-6SemiBold"
+        self.sermonSubThemeFontSize = defaults.object(forKey: Key.sermonSubThemeFontSize) as? Double ?? 18
+        self.sermonVerseQuoteFontName = defaults.string(forKey: Key.sermonVerseQuoteFontName) ?? "GowunBatang-Regular"
+        self.sermonVerseQuoteFontSize = defaults.object(forKey: Key.sermonVerseQuoteFontSize) as? Double ?? 16.5
+        self.sermonCitationFontName = defaults.string(forKey: Key.sermonCitationFontName) ?? "Paperlogy-4Regular"
+        self.sermonCitationFontSize = defaults.object(forKey: Key.sermonCitationFontSize) as? Double ?? 14.5
         self.sermonBodyFontName = defaults.string(forKey: Key.sermonBodyFontName) ?? "GowunBatang-Regular"
-        self.sermonBodyFontSize = defaults.object(forKey: Key.sermonBodyFontSize) as? Double ?? 15
+        self.sermonBodyFontSize = defaults.object(forKey: Key.sermonBodyFontSize) as? Double ?? 17
         // 글자색 기본값(목업 Editor.dc.html의 STYLE_DEFS 기반): 대주제/본문/말씀구절은 어두운
         // 무채색(#2B211D), 중주제는 와인색(#7A3B42), 소주제는 웜그레이(#6B5D52), 인용은 초록
         // 계열 지정에 맞춘 차분한 세이지 그린(#3F7355)이다. 정확한 톤이 지정된 값이 아니라
         // 제안 기본값이며, 설정에서 바꿀 수 있다.
         self.sermonMainThemeFontColorHex = defaults.string(forKey: Key.sermonMainThemeFontColorHex) ?? "#2B211D"
-        self.sermonMidThemeFontColorHex = defaults.string(forKey: Key.sermonMidThemeFontColorHex) ?? "#7A3B42"
-        self.sermonSubThemeFontColorHex = defaults.string(forKey: Key.sermonSubThemeFontColorHex) ?? "#6B5D52"
-        self.sermonVerseQuoteFontColorHex = defaults.string(forKey: Key.sermonVerseQuoteFontColorHex) ?? "#2B211D"
-        self.sermonCitationFontColorHex = defaults.string(forKey: Key.sermonCitationFontColorHex) ?? "#3F7355"
-        self.sermonBodyFontColorHex = defaults.string(forKey: Key.sermonBodyFontColorHex) ?? "#2B211D"
-        // 말씀구절 박스 배경색 기본값(목업의 --accent-soft).
-        self.sermonVerseQuoteBackgroundColorHex = defaults.string(forKey: Key.sermonVerseQuoteBackgroundColorHex) ?? "#F3E4E1"
-        self.sermonVerseQuoteBarColorHex = defaults.string(forKey: Key.sermonVerseQuoteBarColorHex) ?? "#7A3B42"
+        self.sermonMidThemeFontColorHex = defaults.string(forKey: Key.sermonMidThemeFontColorHex) ?? "#753B44"
+        self.sermonSubThemeFontColorHex = defaults.string(forKey: Key.sermonSubThemeFontColorHex) ?? "#5B4B40"
+        self.sermonVerseQuoteFontColorHex = defaults.string(forKey: Key.sermonVerseQuoteFontColorHex) ?? "#3A2420"
+        self.sermonCitationFontColorHex = defaults.string(forKey: Key.sermonCitationFontColorHex) ?? "#4A6A62"
+        self.sermonBodyFontColorHex = defaults.string(forKey: Key.sermonBodyFontColorHex) ?? "#33281F"
+        // 말씀구절 박스 배경색 / 왼쪽 세로 바 색 기본값(스타일 재설계안).
+        self.sermonVerseQuoteBackgroundColorHex = defaults.string(forKey: Key.sermonVerseQuoteBackgroundColorHex) ?? "#F1E1DC"
+        self.sermonVerseQuoteBarColorHex = defaults.string(forKey: Key.sermonVerseQuoteBarColorHex) ?? "#753B44"
         self.sermonViewerFontScale = defaults.object(forKey: Key.sermonViewerFontScale) as? Double ?? 1.0
         self.sermonViewerUsesPageMode = defaults.object(forKey: Key.sermonViewerUsesPageMode) as? Bool ?? false
         self.sermonViewerChromeHidden = defaults.object(forKey: Key.sermonViewerChromeHidden) as? Bool ?? false
@@ -798,7 +797,7 @@ extension UserSettingsStore {
     /// 말씀구절 박스 배경색 — `SermonParagraphStyleCodec.applyStyle`이
     /// `.verseQuote` 문단에만 `.backgroundColor` attribute로 적용한다(6-2번 항목).
     var sermonVerseQuoteBackgroundColor: Color {
-        Color(hex: sermonVerseQuoteBackgroundColorHex) ?? Color(hex: "#F3E4E1")!
+        Color(hex: sermonVerseQuoteBackgroundColorHex) ?? Color(hex: "#F1E1DC")!
     }
 
     var sermonVerseQuoteBackgroundPlatformColor: PlatformColor {
@@ -807,21 +806,21 @@ extension UserSettingsStore {
 
     /// 말씀구절 박스 왼쪽 세로 바 색 설정값(뷰어가 편집기와 같은 서식을 그리게 되면서 현재는 화면에서 쓰지 않는다).
     var sermonVerseQuoteBarColor: Color {
-        Color(hex: sermonVerseQuoteBarColorHex) ?? Color(hex: "#7A3B42")!
+        Color(hex: sermonVerseQuoteBarColorHex) ?? Color(hex: "#753B44")!
     }
 
-    /// 문단 스타일별 줄간격 배수 — `RichTextEditor.lineHeightMultiple`과 같은 해석(1.0 = 추가
-    /// 줄간격 없음). 대주제/중주제/소주제=1.4, 말씀구절/인용=1.7, 본문=1.6. 목업 STYLE_DEFS의
-    /// line-height 기반이며, 목업이 말씀구절 값을 따로 명시하지 않아 같은 박스형 문단인
-    /// 인용구 값(1.7)을 재사용했다.
+    /// 문단 스타일별 줄 높이 배수 — **글자 크기 대비**(CSS `line-height`와 같은 해석. 1.8 = 글자 크기 17pt면 줄 높이 30.6pt).
+    /// `RichTextEditor.lineHeightMultiple`(글꼴 기본 줄 높이 대비)과 다르다. 글꼴 기본 줄 높이가 이 값보다 크면 추가 간격은 0.
+    /// 2026-10-03 스타일 재설계: 대주제=1.3, 중주제=1.35, 소주제=1.4, 말씀구절/인용=1.75, 본문=1.8.
+    /// 문단 위·아래 간격과 들여쓰기는 `SermonStyleMetrics`(SermonTextLayout.swift)가 정한다.
     func sermonLineHeightMultiple(for style: SermonParagraphStyle) -> CGFloat {
         switch style {
-        case .mainTheme: return 1.4
-        case .midTheme: return 1.4
+        case .mainTheme: return 1.3
+        case .midTheme: return 1.35
         case .subTheme: return 1.4
-        case .verseQuote: return 1.7
-        case .citation: return 1.7
-        case .body: return 1.6
+        case .verseQuote: return 1.75
+        case .citation: return 1.75
+        case .body: return 1.8
         }
     }
 }

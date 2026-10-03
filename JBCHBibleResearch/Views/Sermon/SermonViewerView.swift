@@ -58,8 +58,10 @@ struct SermonViewerView: View {
     private static let wideHorizontalInset: CGFloat = 64
     private static let compactHorizontalInset: CGFloat = 28
     private static let compactWidthThreshold: CGFloat = 600
-    /// 글자 영역 위/아래 여백 — 상단·하단 바가 본문 위에 겹쳐 뜨므로 바 높이만큼 항상 비워 둔다.
-    private static let verticalInset: CGFloat = 64
+    /// 글자 영역 위/아래 여백 — 상단·하단 바가 본문 위에 겹쳐 뜨므로 "바 높이 + 숨 쉴 여백"만큼 항상 비워 둔다.
+    /// 상단 바 ≈ 51pt(세로 패딩 10×2 + 버튼 30 + 구분선), 하단 바 ≈ 55pt(패딩 10×2 + 버튼 34 + 구분선).
+    private static let topInset: CGFloat = 96
+    private static let bottomInset: CGFloat = 88
     /// macOS에서 바가 숨은 동안 마우스가 닿으면 바를 보여 주는 위/아래 영역 높이.
     private static let hoverRegionHeight: CGFloat = 64
 
@@ -143,7 +145,7 @@ struct SermonViewerView: View {
             } else {
                 SermonViewerScrollText(
                     attributed: attributed, generation: generation,
-                    horizontalInset: horizontalInset, topInset: Self.verticalInset,
+                    horizontalInset: horizontalInset, topInset: Self.topInset,
                     onToggleChrome: { toggleChrome() }
                 )
             }
@@ -159,8 +161,8 @@ struct SermonViewerView: View {
             SermonViewerPageCurl(
                 paginator: paginator,
                 insets: UIEdgeInsets(
-                    top: Self.verticalInset, left: horizontalInset,
-                    bottom: Self.verticalInset, right: horizontalInset
+                    top: Self.topInset, left: horizontalInset,
+                    bottom: Self.bottomInset, right: horizontalInset
                 ),
                 currentIndex: $pageIndex,
                 onCenterTap: { toggleChrome() }
@@ -168,7 +170,7 @@ struct SermonViewerView: View {
             #elseif os(macOS)
             SermonViewerSinglePage(
                 paginator: paginator, index: pageIndex,
-                insets: NSSize(width: horizontalInset, height: Self.verticalInset),
+                insets: NSSize(width: horizontalInset, height: Self.topInset),
                 onCommand: { perform($0) }
             )
             .background(SermonViewerPaper.color)
@@ -206,7 +208,7 @@ struct SermonViewerView: View {
         let horizontalInset = Self.horizontalInset(forWidth: size.width)
         let containerSize = CGSize(
             width: max(1, size.width - horizontalInset * 2),
-            height: max(1, size.height - Self.verticalInset * 2)
+            height: max(1, size.height - Self.topInset - Self.bottomInset)
         )
         #if DEBUG
         let start = CFAbsoluteTimeGetCurrent()
