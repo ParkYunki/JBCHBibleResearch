@@ -201,9 +201,42 @@ struct VerseZoomView: View {
         viewModel.verseMentions(verse: verseNumber)
     }
 
+    /// 레이어 머리 제목 — "책이름 장번호장 절번호절"(`navigationTitle`과 같은 계산식).
+    private var layerTitle: String {
+        "\(currentColumn?.localizedBookChapterLabel ?? "")장 \(verseNumber)절"
+    }
+
     var body: some View {
         NavigationStack {
             VStack(spacing: 0) {
+                // 아이패드·아이폰: 시스템 내비게이션 바 대신 시트 안에 직접 그린 머리(닫기 · 세리프 제목) + 조작줄(‹ n절 › · 원문 정보 · 펜/눈)
+                // — 2026-10-02 "구절 레이어 통일안". 맥은 아래 하단 버튼줄(`VerseSheetFooter`)을 그대로 쓴다.
+                #if os(iOS)
+                VerseLayerHeader(title: layerTitle) {
+                    Button("닫기") { dismiss() }
+                        .buttonStyle(BibleBarButtonStyle(height: 40, cornerRadius: 10, fontSize: 15))
+                }
+                VerseLayerStrip(
+                    verseLabel: "\(verseNumber)절",
+                    canGoPrevious: canGoToPreviousVerse, canGoNext: canGoToNextVerse,
+                    onPrevious: onNavigateToPreviousVerse, onNext: onNavigateToNextVerse
+                ) {
+                    Button(action: onSwitchToOriginalTextInfo) {
+                        Label("원문 정보", systemImage: "character.book.closed")
+                    }
+                    .buttonStyle(BibleBarButtonStyle(kind: .primary, height: 40, cornerRadius: 10, fontSize: 15))
+                    .accessibilityLabel("원문 정보로 전환")
+                    // 펜/눈동자 토글 — 표시 모드에선 펜(선택 모드 진입), 선택 모드에선 눈동자(표시 모드 복귀 + 선택 해제).
+                    Button {
+                        isSelecting.toggle()
+                        selectedRange = NSRange(location: 0, length: 0)
+                    } label: {
+                        Image(systemName: isSelecting ? "eye" : "pencil")
+                    }
+                    .buttonStyle(BibleBarButtonStyle(kind: isSelecting ? .primary : .secondary, isSquare: true, height: 40, cornerRadius: 10, fontSize: 15))
+                    .accessibilityLabel(isSelecting ? "글자 선택 끝내기" : "글자 선택 모드")
+                }
+                #endif
                 if columns.count > 1 {
                     translationSwitcher
                     Divider()
@@ -272,7 +305,9 @@ struct VerseZoomView: View {
                     }
                 }
 
+                #if os(macOS)
                 Divider()
+                #endif
                 actionBar
 
                 // macOS `.sheet`의 `.confirmationAction`/`.cancellationAction` 자리는 버튼 하나만 그려져, 두 번째 버튼을 얹으면
@@ -306,39 +341,9 @@ struct VerseZoomView: View {
             // "장"을 직접 붙여 "책이름 장번호장 절번호절"로 표시한다(`localizedBookChapterLabel`은 "책이름 장번호"까지만 담는다 —
             // `BibleReadingViewModel.reloadVerses` 참고).
             .navigationTitle("\(currentColumn?.localizedBookChapterLabel ?? "")장 \(verseNumber)절")
+            // 아이패드·아이폰은 머리를 본문 안에 직접 그리므로(위 `VerseLayerHeader`) 시스템 내비게이션 바는 숨긴다.
             #if os(iOS)
-            .navigationBarTitleDisplayMode(.inline)
-            #endif
-            // iOS/iPadOS 전용 — macOS는 `.confirmationAction`에 두 번째 버튼이 그려지지 않아 위 `#if os(macOS)` 커스텀 버튼줄로 옮겼다.
-            #if os(iOS)
-            .toolbar {
-                // 다른 화면들과 같은 성곡 세리프 타이틀 패턴(문자열은 위 `.navigationTitle`과 같은 계산식).
-                ToolbarItem(placement: .principal) {
-                    Text("\(currentColumn?.localizedBookChapterLabel ?? "")장 \(verseNumber)절")
-                        .font(.custom(SpecialPurposeFonts.titleSerif, size: 20, relativeTo: .title3))
-                        .fontWeight(.semibold)
-                        .foregroundStyle(settings.bibleTextColor ?? .primary)
-                }
-                ToolbarItem(placement: .cancellationAction) {
-                    Button("닫기") { dismiss() }
-                }
-                // 펜/눈동자 토글 — 표시 모드에선 펜(선택 모드 진입), 선택 모드에선 눈동자(표시 모드 복귀 + 선택 해제).
-                ToolbarItemGroup(placement: .confirmationAction) {
-                    Button {
-                        isSelecting.toggle()
-                        selectedRange = NSRange(location: 0, length: 0)
-                    } label: {
-                        Image(systemName: isSelecting ? "eye" : "pencil")
-                    }
-
-                    // 성경 조회 하단 액션바와 같은 `Label("원문 정보", systemImage: "character.book.closed")`(`BibleReadingView.swift` 참고)로
-                    // 아이콘+이름을 함께 보여준다.
-                    Button(action: onSwitchToOriginalTextInfo) {
-                        Label("원문 정보", systemImage: "character.book.closed")
-                    }
-                    .help("원문 정보로 전환")
-                }
-            }
+            .toolbar(.hidden, for: .navigationBar)
             #endif
             .onChange(of: selectedColumnID) { _, _ in
                 selectedRange = NSRange(location: 0, length: 0)
@@ -406,13 +411,16 @@ struct VerseZoomView: View {
         // 본문 글자·목표 줄폭에 맞춰 잡은 창 최소 폭(`bibleFont`/`targetCharsPerLine` 참고).
         .frame(minWidth: 525, minHeight: 420)
         #endif
-        // 이전/다음 구절 이동 화살표 — `VerseNavArrowsModifier` 선언부 주석 참고.
+        // 이전/다음 구절 이동 화살표 — `VerseNavArrowsModifier` 선언부 주석 참고. 맥만 본문 양옆에 띄우고,
+        // 아이패드·아이폰은 본문을 가리지 않도록 위쪽 조작줄의 [‹ n절 ›] 묶음으로 옮겼다(2026-10-02).
+        #if os(macOS)
         .modifier(VerseNavArrowsModifier(
             canGoPrevious: canGoToPreviousVerse,
             canGoNext: canGoToNextVerse,
             onPrevious: onNavigateToPreviousVerse,
             onNext: onNavigateToNextVerse
         ))
+        #endif
     }
 
     // 앱의 다른 곳(`TranslationPickerPopover.chip(for:)`, `BookChapterPicker`)과 같은 "강조색 배경 15% + 테두리 획" 캡슐 스타일을
@@ -469,7 +477,7 @@ struct VerseZoomView: View {
                             Circle()
                                 .fill(tag.swiftUIColor)
                                 .frame(width: 20, height: 20)
-                                .overlay(Circle().strokeBorder(textColor.opacity(0.3), lineWidth: 1))
+                                .overlay(Circle().strokeBorder(textColor.opacity(0.38), lineWidth: 1.5))
                         }
                         .buttonStyle(.plain)
                         .contentShape(Circle())
@@ -543,45 +551,69 @@ struct VerseZoomView: View {
     }
 
     #if os(iOS)
+    /// 아이패드·아이폰 하단 도구 줄 — 형광펜 색 점 상자 + 메모/개인 묵상/관주 44pt 상자, 이름은 상자 바깥 아래(2026-10-02 목업).
+    /// 색 점마다 글자색 38% 외곽선을 둬 연한 색이 배경에 묻히지 않게 한다. 선택 모드가 꺼지면 전체를 흐리게(45%) 하고 누를 수 없게 둔다.
     private var actionBar: some View {
-        HStack(spacing: 20) {
-            VStack(spacing: 4) {
-                HStack(spacing: 6) {
+        let textColor: Color = settings.bibleTextColor ?? Color.primary
+        let isPhone = UIDevice.current.userInterfaceIdiom == .phone
+        let dotSize: CGFloat = isPhone ? 21 : 24
+        return VerseLayerFooter {
+            VerseLayerToolCaption(title: "형광펜") {
+                HStack(spacing: isPhone ? 6 : 8) {
                     ForEach(HighlightColorTag.allCases) { tag in
                         Button {
                             handleHighlightTap(tag)
                         } label: {
-                            Circle().fill(tag.swiftUIColor).frame(width: 20, height: 20)
+                            Circle()
+                                .fill(tag.swiftUIColor)
+                                .frame(width: dotSize, height: dotSize)
+                                .overlay(Circle().strokeBorder(textColor.opacity(0.38), lineWidth: 1.5))
                         }
                         .buttonStyle(.plain)
                         .contentShape(Rectangle())
                     }
                 }
-                // "형광펜" 라벨도 `actionButton`과 같은 테마 폴백을 쓴다.
-                Text("형광펜").font(.caption2).foregroundStyle(settings.bibleTextColor ?? .primary)
+                .padding(.horizontal, isPhone ? 8 : 10)
+                .verseLayerBox()
             }
 
             // 선택 범위와 겹치는 기존 메모가 있으면(`existingPhraseNote(overlapping:)`) 중복 등록하지 않고 그 메모를 편집 모드로 연다.
             // 팝오버를 열기로 결정하는 이 순간 `selectedRange`/`anchorText`를 `editingAnchorRange`/`editingAnchorText`에 스냅샷으로 떠 둔다
             // (상태 선언부 주석 참고). 앞뒤 공백은 `trimmedRange`로 뺀다.
-            actionButton(title: "메모", systemImage: "text.bubble") {
-                beginPhraseNoteFromSelection()
+            VerseLayerToolCaption(title: "메모") {
+                Button {
+                    beginPhraseNoteFromSelection()
+                } label: {
+                    Image(systemName: "text.bubble")
+                }
+                .buttonStyle(VerseLayerToolButtonStyle())
+                .accessibilityLabel("메모")
             }
 
-            actionButton(title: "개인 묵상", systemImage: "note.text") {
-                beginComposingPersonalNote()
+            VerseLayerToolCaption(title: "개인 묵상") {
+                Button {
+                    beginComposingPersonalNote()
+                } label: {
+                    Image(systemName: "note.text")
+                }
+                .buttonStyle(VerseLayerToolButtonStyle())
+                .accessibilityLabel("개인 묵상")
             }
 
             // 관주 버튼은 항상 새로 만들기 시트(`CrossReferenceTargetPicker`)를 열고, 겹치는 기존 관주는 `existingReferences`로
             // 시트에 넘겨 그 안에서 보여준다(아래 `.sheet` 참고).
-            actionButton(title: "관주", systemImage: "link") {
-                isCrossReferencePickerPresented = true
+            VerseLayerToolCaption(title: "관주") {
+                Button {
+                    isCrossReferencePickerPresented = true
+                } label: {
+                    Image(systemName: "link")
+                }
+                .buttonStyle(VerseLayerToolButtonStyle())
+                .accessibilityLabel("관주")
             }
         }
-        .frame(maxWidth: .infinity)
-        .padding()
         .disabled(!isSelecting)
-        .opacity(isSelecting ? 1 : 0.35)
+        .opacity(isSelecting ? 1 : 0.45)
     }
     #endif
 
@@ -841,14 +873,13 @@ struct VerseZoomView: View {
                                 }
                                 dismiss()
                             } label: {
-                                // 옅은 파란 배경 + 파란 글씨 + 밑줄의 칩 모양.
+                                // 칩 모양 — 모든 플랫폼 테마 강조색 칩(`VerseLinkChipModifier`), 맥만 밑줄 유지.
                                 Text(segment.label)
                                     .font(.body)
+                                    #if os(macOS)
                                     .underline()
-                                    .foregroundStyle(Color.blue)
-                                    .padding(.horizontal, 6)
-                                    .padding(.vertical, 2)
-                                    .background(Color.blue.opacity(0.12), in: RoundedRectangle(cornerRadius: 6))
+                                    #endif
+                                    .modifier(VerseLinkChipModifier())
                             }
                             .buttonStyle(.plain)
                             .contentShape(Rectangle())
@@ -926,12 +957,7 @@ struct VerseZoomView: View {
                         }
                         .buttonStyle(.plain)
                     }
-                    .padding(8)
-                    .background(Color.yellow.opacity(0.15), in: RoundedRectangle(cornerRadius: 8))
-                    .overlay(
-                        RoundedRectangle(cornerRadius: 8)
-                            .stroke(Color.yellow.opacity(0.6), lineWidth: 1)
-                    )
+                    .modifier(VerseNoteCardModifier())
                 }
             }
         }
@@ -984,12 +1010,7 @@ struct VerseZoomView: View {
                 .disabled(newPersonalNoteText.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty)
             }
         }
-        .padding(8)
-        .background(Color.yellow.opacity(0.15), in: RoundedRectangle(cornerRadius: 8))
-        .overlay(
-            RoundedRectangle(cornerRadius: 8)
-                .stroke(Color.yellow.opacity(0.6), lineWidth: 1)
-        )
+        .modifier(VerseNoteCardModifier())
         .onAppear {
             // 새로 뜬 입력칸에 바로 타이핑할 수 있도록 포커스를 준다.
             isNewPersonalNoteFieldFocused = true

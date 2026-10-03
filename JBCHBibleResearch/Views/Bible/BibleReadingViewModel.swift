@@ -606,29 +606,18 @@ final class BibleReadingViewModel {
     /// 화면 진입 때뿐 아니라 설정에서 번역본을 켜고 끄거나 다른 기기의 변경이 CloudKit으로 도착할 때도 호출된다
     /// (`BibleReadingContentView`가 `TranslationRegistry` 변화를 감지해 부른다).
     ///
-    /// 후보는 항상 "활성(`isEnabled`)" 번역본뿐이다. 예전에는 최초 선택·정리 단계가 비활성 번역본까지 포함한 전체(`all`)를
-    /// 기준으로 해서, 한 기기에서 끈 번역본이 다른 기기에서 계속 열로 뜨고 — 그 기기에 파일이 아직 없으면
+    /// 후보는 항상 "사용 중"(이 기기의 목록, `ActiveTranslationResolver`) 번역본뿐이다. 예전에는 최초 선택·정리 단계가 꺼진 번역본까지
+    /// 포함한 전체(`all`)를 기준으로 해서, 끈 번역본이 다른 기기에서 계속 열로 뜨고 — 그 기기에 파일이 아직 없으면
     /// "이 번역본의 파일이 아직 이 기기에 없습니다" 오류 열만 남아 빈 화면이 됐다.
     func loadAvailableTranslations() {
         let descriptor = FetchDescriptor<TranslationRegistry>(sortBy: [SortDescriptor(\.addedAt, order: .forward)])
         do {
             let all = try modelContext.fetch(descriptor)
-            let enabled = all.filter(\.isEnabled)
-            // 팝오버(`TranslationPickerPopover`)의 후보 전체다(`TranslationRegistry.isEnabled` 참고).
+            // 후보는 "사용 중"(설정 > 번역본에서 스위치를 켠, 이 기기의 목록 순서) 번역본뿐이다. `ActiveTranslationResolver` 참고.
+            // 예전에는 `isEnabled`(동기화됨)를 후보로, 별도 목록(`defaultDisplayedTranslationCodes`)을 기본 표시로 따로 썼다.
+            let enabled = ActiveTranslationResolver.resolve(from: all)
+            // 팝오버(`TranslationPickerPopover`)의 후보 전체다.
             availableTranslations = enabled
-
-            // "성경 조회 기본 표시" 목록(`defaultDisplayedTranslationCodes`)은 UserDefaults라 기기별이다. 다른 기기에서 끈
-            // 번역본의 코드가 이 기기 목록에 남아 있으면, 같은 기기에서 끌 때(`SettingsView.setEnabled`)와 똑같이 뺀다.
-            // 아직 동기화로 도착하지 않은 번역본(레코드 자체가 없음)은 건드리지 않는다. 다시 켜도 자동으로 되돌리지 않는다.
-            let disabledCodes = Set(all.filter { !$0.isEnabled }.map(\.code))
-            let enabledCodes = Set(enabled.map(\.code))
-            let staleCodes = disabledCodes.subtracting(enabledCodes)   // 같은 code의 활성 행이 있으면(중복 행) 유지한다.
-            if !staleCodes.isEmpty {
-                let pruned = UserSettingsStore.shared.defaultDisplayedTranslationCodes.filter { !staleCodes.contains($0) }
-                if pruned != UserSettingsStore.shared.defaultDisplayedTranslationCodes {
-                    UserSettingsStore.shared.defaultDisplayedTranslationCodes = pruned
-                }
-            }
 
             // 모두 꺼져 있으면 열이 하나도 없는 빈 화면이 되므로, 이때만 번들 번역본을 표시용으로 쓴다(목록/팝오버는 그대로 비어 있다).
             let candidates = enabled.isEmpty ? all.filter(\.isBundled) : enabled

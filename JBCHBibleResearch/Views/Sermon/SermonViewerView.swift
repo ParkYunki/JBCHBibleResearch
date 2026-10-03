@@ -10,7 +10,11 @@
 //    TextKit으로 그린다(`SermonViewerText.swift`). 굵게/기울임/색/문단 여백이 편집 화면과 같다.
 //  - 스크롤 모드: 읽기 전용 텍스트뷰 하나(iOS `UITextView`, macOS `NSTextView`). 필요한 만큼만 레이아웃한다.
 //  - 페이지 모드: 글자가 여러 페이지 컨테이너로 흘러가는 TextKit 페이지 나누기. iOS는 도서 앱과 같은
-//    `UIPageViewController` 페이지 컬, macOS는 한 페이지씩 그리고 버튼/스와이프로 넘긴다.
+//    `UIPageViewController` 페이지 컬, macOS는 한 페이지씩 그리고 키보드/가장자리 클릭/트랙패드 쓸기/하단 슬라이더로 넘긴다.
+//  - 상단 바(글꼴 배율·스크롤/페이지·닫기)와 하단 바(이전·쪽 슬라이더·쪽 번호·다음)는 본문 위에 겹쳐 뜬다.
+//    본문 영역 크기가 바뀌지 않으므로 바를 숨기거나 보여도 글자가 다시 흐르지 않는다.
+//    본문 가운데를 누르면(또는 macOS H 키) 두 바를 함께 숨기고/보이며, 상태는 설정에 저장된다.
+//  - 글자 영역 좌우 여백은 넓은 화면에서 64pt(좁은 화면은 28pt). 텍스트 드래그 선택이 클릭 동작보다 우선한다.
 //  - 글꼴 배율: `sermonViewerFontScale`(0.8~2.0)이 글자 크기와 줄/문단 간격에 함께 곱해진다.
 //  - 화면 크기나 배율이 바뀌면 페이지를 다시 나누되, 읽던 글자 위치가 든 페이지로 돌아온다.
 //  - 뷰어는 저장된 값을 보여준다. 편집기에서 아직 저장(자동 저장 포함)되지 않은 입력은 반영되지 않는다.
@@ -27,6 +31,7 @@ struct SermonViewerView: View {
 
     @Environment(\.dismiss) private var dismiss
     @Environment(\.colorScheme) private var colorScheme
+    @Environment(\.accessibilityReduceMotion) private var reduceMotion
     @State private var settings = UserSettingsStore.shared
 
     /// 편집기와 같은 서식의 본문. nil이면 아직 만드는 중(스피너).
@@ -38,16 +43,42 @@ struct SermonViewerView: View {
     @State private var pageIndex = 0
     /// 읽던 자리(글자 위치) — 페이지를 다시 나눌 때 같은 자리의 페이지로 돌아오는 데 쓴다.
     @State private var readingLocation = 0
+    /// 하단 슬라이더를 끄는 동안의 쪽(놓을 때 `pageIndex`에 반영) / 끄는 중인지.
+    @State private var scrubIndex: Int?
+    @State private var isScrubbing = false
+    /// macOS에서 바가 숨은 상태로 마우스가 맨 위/아래에 있을 때 그 바만 잠깐 보여 주는 표시.
+    @State private var peekTop = false
+    @State private var peekBottom = false
+    @State private var toast: String?
+    @State private var toastTask: Task<Void, Never>?
 
     /// "Aa" 스테퍼가 오가는 단계(80~200%).
     private static let scaleSteps: [Double] = [0.8, 0.9, 1.0, 1.1, 1.25, 1.5, 1.75, 2.0]
-    /// 페이지 모드에서 종이 가장자리와 글자 사이 여백.
-    private static let pageHorizontalInset: CGFloat = 28
-    private static let pageVerticalInset: CGFloat = 24
+    /// 글자 영역 좌우 여백 — 넓은 화면은 64pt, 좁은 화면(iPhone 세로 등)은 28pt.
+    private static let wideHorizontalInset: CGFloat = 64
+    private static let compactHorizontalInset: CGFloat = 28
+    private static let compactWidthThreshold: CGFloat = 600
+    /// 글자 영역 위/아래 여백 — 상단·하단 바가 본문 위에 겹쳐 뜨므로 바 높이만큼 항상 비워 둔다.
+    private static let verticalInset: CGFloat = 64
+    /// macOS에서 바가 숨은 동안 마우스가 닿으면 바를 보여 주는 위/아래 영역 높이.
+    private static let hoverRegionHeight: CGFloat = 64
 
     // 뷰어는 라이트 외형으로 고정이라(`SermonViewerPaper`) 강조색도 라이트 값을 쓴다. 바깥 환경의 colorScheme을 읽으면 다크 모드에서 밝은 강조색이 된다.
     private var accent: Color { SermonTheme.accent(.light) }
     private var isPageMode: Bool { settings.sermonViewerUsesPageMode }
+
+    private static func horizontalInset(forWidth width: CGFloat) -> CGFloat {
+        width < compactWidthThreshold ? compactHorizontalInset : wideHorizontalInset
+    }
+
+    /// 본문이 준비되기 전이나 비어 있을 때는 바를 항상 보인다(숨긴 채로 갇히지 않도록).
+    private var canHideChrome: Bool { attributed != nil && !isEmptyDocument }
+    private var isChromeHidden: Bool { settings.sermonViewerChromeHidden && canHideChrome }
+    private var isTopBarVisible: Bool { !isChromeHidden || peekTop }
+    private var isBottomBarVisible: Bool { !isChromeHidden || peekBottom }
+    /// 하단 바/쪽 번호는 페이지 모드에서만 있다.
+    private var showsPageControls: Bool { isPageMode && canHideChrome }
+    private var barAnimation: Animation? { reduceMotion ? nil : .easeInOut(duration: 0.22) }
 
     /// 페이지 나누기를 다시 해야 하는 조건 — 크기/본문/모드 중 하나라도 바뀌면 값이 달라진다.
     private struct PaginationKey: Hashable {
@@ -58,12 +89,10 @@ struct SermonViewerView: View {
     }
 
     var body: some View {
-        VStack(spacing: 0) {
-            header
-            Divider()
-
+        ZStack {
+            // 본문 영역은 바와 무관하게 항상 전체 크기 — 바를 숨기거나 보여도 쪽 나누기를 다시 하지 않는다.
             GeometryReader { proxy in
-                content
+                content(horizontalInset: Self.horizontalInset(forWidth: proxy.size.width))
                     .frame(maxWidth: .infinity, maxHeight: .infinity)
                     .onChange(
                         of: PaginationKey(
@@ -76,10 +105,7 @@ struct SermonViewerView: View {
                     }
             }
 
-            if isPageMode, attributed != nil, !isEmptyDocument {
-                Divider()
-                pageFooter
-            }
+            chromeOverlay
         }
         // 첫 프레임(스피너)을 먼저 그린 뒤 본문을 만든다. 배율이 바뀔 때도 다시 만든다.
         .task(id: settings.sermonViewerFontScale) { await rebuildDocument() }
@@ -97,23 +123,29 @@ struct SermonViewerView: View {
         .toolbarBackground(SermonViewerPaper.color, for: .navigationBar)
         .toolbarBackground(.visible, for: .navigationBar)
         .toolbarColorScheme(.light, for: .navigationBar)
+        .background { keyboardShortcuts }
         #endif
         #if os(macOS)
         .frame(minWidth: 760, minHeight: 600)
+        .background(SermonViewerKeyCatcher { handleKeyCommand($0) })
         #endif
     }
 
     // MARK: - 본문 영역
 
     @ViewBuilder
-    private var content: some View {
+    private func content(horizontalInset: CGFloat) -> some View {
         if isEmptyDocument {
             emptyState
         } else if let attributed {
             if isPageMode {
-                pagedBody
+                pagedBody(horizontalInset: horizontalInset)
             } else {
-                SermonViewerScrollText(attributed: attributed, generation: generation)
+                SermonViewerScrollText(
+                    attributed: attributed, generation: generation,
+                    horizontalInset: horizontalInset, topInset: Self.verticalInset,
+                    onToggleChrome: { toggleChrome() }
+                )
             }
         } else {
             ProgressView()
@@ -121,34 +153,25 @@ struct SermonViewerView: View {
     }
 
     @ViewBuilder
-    private var pagedBody: some View {
+    private func pagedBody(horizontalInset: CGFloat) -> some View {
         if let paginator {
             #if os(iOS)
             SermonViewerPageCurl(
                 paginator: paginator,
                 insets: UIEdgeInsets(
-                    top: Self.pageVerticalInset, left: Self.pageHorizontalInset,
-                    bottom: Self.pageVerticalInset, right: Self.pageHorizontalInset
+                    top: Self.verticalInset, left: horizontalInset,
+                    bottom: Self.verticalInset, right: horizontalInset
                 ),
-                currentIndex: $pageIndex
+                currentIndex: $pageIndex,
+                onCenterTap: { toggleChrome() }
             )
             #elseif os(macOS)
             SermonViewerSinglePage(
                 paginator: paginator, index: pageIndex,
-                insets: NSSize(width: Self.pageHorizontalInset, height: Self.pageVerticalInset)
+                insets: NSSize(width: horizontalInset, height: Self.verticalInset),
+                onCommand: { perform($0) }
             )
             .background(SermonViewerPaper.color)
-            .contentShape(Rectangle())
-            .gesture(
-                DragGesture(minimumDistance: 24)
-                    .onEnded { value in
-                        if value.translation.width < -60 {
-                            goToNextPage()
-                        } else if value.translation.width > 60 {
-                            goToPreviousPage()
-                        }
-                    }
-            )
             #endif
         } else {
             ProgressView()
@@ -180,9 +203,10 @@ struct SermonViewerView: View {
             return
         }
         guard let attributed, !isEmptyDocument, size.width > 1, size.height > 1 else { return }
+        let horizontalInset = Self.horizontalInset(forWidth: size.width)
         let containerSize = CGSize(
-            width: max(1, size.width - Self.pageHorizontalInset * 2),
-            height: max(1, size.height - Self.pageVerticalInset * 2)
+            width: max(1, size.width - horizontalInset * 2),
+            height: max(1, size.height - Self.verticalInset * 2)
         )
         #if DEBUG
         let start = CFAbsoluteTimeGetCurrent()
@@ -195,9 +219,112 @@ struct SermonViewerView: View {
         pageIndex = newPaginator.pageIndex(containingCharacter: readingLocation)
     }
 
+    // MARK: - 바 오버레이 (상단 / 하단 / 숨김 시 쪽 표시 / 안내 토스트)
+
+    private var chromeOverlay: some View {
+        ZStack {
+            VStack(spacing: 0) {
+                topChrome
+                Spacer(minLength: 0)
+            }
+            if showsPageControls {
+                VStack(spacing: 0) {
+                    Spacer(minLength: 0)
+                    bottomChrome
+                }
+                pageMiniIndicator
+            }
+            if let toast {
+                Text(toast)
+                    .font(.caption.weight(.medium))
+                    .foregroundStyle(.white)
+                    .padding(.horizontal, 14)
+                    .padding(.vertical, 7)
+                    .background(Color.black.opacity(0.78), in: Capsule())
+                    .padding(.top, 76)
+                    .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
+                    .transition(.opacity)
+                    .allowsHitTesting(false)
+            }
+        }
+    }
+
+    private var topChrome: some View {
+        ZStack(alignment: .top) {
+            #if os(macOS)
+            // 바가 숨은 동안에도 이 영역에 마우스가 닿으면 바를 잠깐 보여 준다.
+            Color.clear
+                .frame(height: Self.hoverRegionHeight)
+                .contentShape(Rectangle())
+            #endif
+            topBar
+                .opacity(isTopBarVisible ? 1 : 0)
+                .offset(y: isTopBarVisible ? 0 : -24)
+                .allowsHitTesting(isTopBarVisible)
+        }
+        .animation(barAnimation, value: isTopBarVisible)
+        #if os(macOS)
+        .onHover { peekTop = $0 }
+        #endif
+    }
+
+    private var bottomChrome: some View {
+        ZStack(alignment: .bottom) {
+            #if os(macOS)
+            Color.clear
+                .frame(height: Self.hoverRegionHeight)
+                .contentShape(Rectangle())
+            #endif
+            pageFooter
+                .opacity(isBottomBarVisible ? 1 : 0)
+                .offset(y: isBottomBarVisible ? 0 : 24)
+                .allowsHitTesting(isBottomBarVisible)
+        }
+        .animation(barAnimation, value: isBottomBarVisible)
+        #if os(macOS)
+        .onHover { peekBottom = $0 }
+        #endif
+    }
+
+    /// 바가 숨었을 때 맨 아래에 남는 "n / N"과 가는 진행 막대.
+    private var pageMiniIndicator: some View {
+        let count = max(paginator?.pageCount ?? 1, 1)
+        let current = min(pageIndex, count - 1)
+        let isShown = isChromeHidden && !peekBottom
+        return ZStack(alignment: .bottom) {
+            Text(paginator == nil ? "–" : "\(current + 1) / \(count)")
+                .font(.caption2.weight(.semibold))
+                .foregroundStyle(.secondary)
+                .monospacedDigit()
+                .padding(.trailing, 16)
+                .padding(.bottom, 14)
+                .frame(maxWidth: .infinity, alignment: .trailing)
+            GeometryReader { proxy in
+                Rectangle()
+                    .fill(accent)
+                    .frame(width: proxy.size.width * CGFloat(current + 1) / CGFloat(count), height: 3)
+                    .frame(maxHeight: .infinity, alignment: .bottom)
+            }
+        }
+        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .bottom)
+        .opacity(isShown ? 1 : 0)
+        .animation(barAnimation, value: isShown)
+        .allowsHitTesting(false)
+    }
+
+    private func showToast(_ text: String) {
+        toastTask?.cancel()
+        withAnimation(barAnimation) { toast = text }
+        toastTask = Task {
+            try? await Task.sleep(for: .seconds(1.2))
+            guard !Task.isCancelled else { return }
+            withAnimation(barAnimation) { toast = nil }
+        }
+    }
+
     // MARK: - 상단 바 (글꼴 배율 스테퍼 / 스크롤·페이지 토글 / 닫기)
 
-    private var header: some View {
+    private var topBar: some View {
         HStack(spacing: 14) {
             Spacer()
             fontScaleStepper
@@ -220,6 +347,7 @@ struct SermonViewerView: View {
         .padding(.horizontal, 16)
         .padding(.vertical, 10)
         .background(SermonViewerPaper.color)
+        .overlay(alignment: .bottom) { Divider() }
     }
 
     /// "A-  100%  A+" 알약 스테퍼 — `scaleSteps`를 한 단계씩 넘긴다.
@@ -271,12 +399,13 @@ struct SermonViewerView: View {
         )
     }
 
-    // MARK: - 페이지 하단 바
+    // MARK: - 페이지 하단 바 (이전 / 쪽 슬라이더 / n·N / 다음)
 
     private var pageFooter: some View {
-        let pageCount = paginator?.pageCount ?? 1
-        let currentIndex = min(pageIndex, max(pageCount - 1, 0))
-        return HStack {
+        let pageCount = max(paginator?.pageCount ?? 1, 1)
+        let currentIndex = min(pageIndex, pageCount - 1)
+        let shownIndex = min(scrubIndex ?? currentIndex, pageCount - 1)
+        return HStack(spacing: 14) {
             Button {
                 goToPreviousPage()
             } label: {
@@ -288,14 +417,33 @@ struct SermonViewerView: View {
             .disabled(currentIndex <= 0)
             .opacity(currentIndex <= 0 ? 0.4 : 1)
 
-            Spacer()
+            Slider(
+                value: Binding(
+                    get: { Double(shownIndex) },
+                    set: { newValue in
+                        let target = min(max(Int(newValue.rounded()), 0), pageCount - 1)
+                        // 끄는 동안은 표시만 바꾸고, 손을 떼면 한 번에 이동한다(페이지 컬이 매 쪽 애니메이션하지 않게).
+                        if isScrubbing { scrubIndex = target } else { pageIndex = target }
+                    }
+                ),
+                in: 0...Double(max(pageCount - 1, 1)),
+                step: 1,
+                onEditingChanged: { editing in
+                    isScrubbing = editing
+                    if !editing {
+                        if let scrubIndex { pageIndex = scrubIndex }
+                        scrubIndex = nil
+                    }
+                }
+            )
+            .tint(accent)
+            .disabled(pageCount <= 1)
 
-            Text(paginator == nil ? "–" : "\(currentIndex + 1) / \(pageCount)")
+            Text(paginator == nil ? "–" : "\(shownIndex + 1) / \(pageCount)")
                 .font(.caption.weight(.semibold))
                 .foregroundStyle(.secondary)
                 .monospacedDigit()
-
-            Spacer()
+                .frame(minWidth: 54)
 
             Button {
                 goToNextPage()
@@ -311,17 +459,96 @@ struct SermonViewerView: View {
         .padding(.horizontal, 20)
         .padding(.vertical, 10)
         .background(SermonViewerPaper.color)
+        .overlay(alignment: .top) { Divider() }
     }
 
+    // MARK: - 이동 / 바 숨김 명령
+
+    private func perform(_ command: SermonViewerCommand) {
+        switch command {
+        case .previousPage: goToPreviousPage()
+        case .nextPage: goToNextPage()
+        case .firstPage: if paginator != nil { pageIndex = 0 }
+        case .lastPage: if let paginator { pageIndex = max(paginator.pageCount - 1, 0) }
+        case .toggleChrome: toggleChrome()
+        }
+    }
+
+    #if os(macOS)
+    /// 키보드 명령. 처리했으면 true(키를 소비). 스크롤 모드에서는 H만 처리하고 방향키·Space는 텍스트뷰 기본 스크롤에 맡긴다.
+    private func handleKeyCommand(_ command: SermonViewerCommand) -> Bool {
+        switch command {
+        case .toggleChrome:
+            guard canHideChrome else { return false }
+            toggleChrome()
+            return true
+        default:
+            guard isPageMode, paginator != nil else { return false }
+            perform(command)
+            return true
+        }
+    }
+    #endif
+
     private func goToNextPage() {
-        guard let paginator, pageIndex < paginator.pageCount - 1 else { return }
-        pageIndex += 1
+        guard let paginator else { return }
+        if pageIndex < paginator.pageCount - 1 {
+            pageIndex += 1
+        } else {
+            showToast("마지막 쪽입니다")
+        }
     }
 
     private func goToPreviousPage() {
-        guard pageIndex > 0 else { return }
-        pageIndex -= 1
+        if pageIndex > 0 {
+            pageIndex -= 1
+        } else {
+            showToast("첫 쪽입니다")
+        }
     }
+
+    private func toggleChrome() {
+        guard canHideChrome else { return }
+        settings.sermonViewerChromeHidden.toggle()
+        peekTop = false
+        peekBottom = false
+        showToast(settings.sermonViewerChromeHidden ? "바를 숨겼습니다 — 가운데를 누르면 다시 보입니다" : "바를 보입니다")
+    }
+
+    #if os(iOS)
+    /// 외부 키보드(iPad) 단축키 — 보이지 않는 버튼에 단축키만 연결한다. 페이지 이동은 페이지 모드에서만 켠다.
+    private var keyboardShortcuts: some View {
+        let pageKeysEnabled = isPageMode && paginator != nil
+        return ZStack {
+            Button("이전 쪽") { perform(.previousPage) }
+                .keyboardShortcut(.leftArrow, modifiers: [])
+            Button("다음 쪽") { perform(.nextPage) }
+                .keyboardShortcut(.rightArrow, modifiers: [])
+            Button("이전 쪽") { perform(.previousPage) }
+                .keyboardShortcut(.pageUp, modifiers: [])
+            Button("다음 쪽") { perform(.nextPage) }
+                .keyboardShortcut(.pageDown, modifiers: [])
+            Button("다음 쪽") { perform(.nextPage) }
+                .keyboardShortcut(.space, modifiers: [])
+            Button("이전 쪽") { perform(.previousPage) }
+                .keyboardShortcut(.space, modifiers: .shift)
+            Button("첫 쪽") { perform(.firstPage) }
+                .keyboardShortcut(.home, modifiers: [])
+            Button("마지막 쪽") { perform(.lastPage) }
+                .keyboardShortcut(.end, modifiers: [])
+        }
+        .disabled(!pageKeysEnabled)
+        .opacity(0)
+        .frame(width: 0, height: 0)
+        .overlay {
+            Button("바 숨김/표시") { toggleChrome() }
+                .keyboardShortcut("h", modifiers: [])
+                .disabled(!canHideChrome)
+                .opacity(0)
+        }
+        .accessibilityHidden(true)
+    }
+    #endif
 
     private var emptyState: some View {
         VStack(spacing: 12) {

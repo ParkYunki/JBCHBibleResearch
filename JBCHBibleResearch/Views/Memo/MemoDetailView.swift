@@ -15,6 +15,9 @@
 import SwiftUI
 import SwiftData
 import BibleResearchModels
+#if os(iOS)
+import UIKit
+#endif
 
 /// 메모 상세 화면이 열리는 맥락 — 성경 좌표 선택 UI 노출 여부가 달라진다.
 enum MemoPresentationContext {
@@ -29,13 +32,86 @@ enum MemoPresentationContext {
     case wordNoteList
 }
 
+/// 말씀 노트 상세(개인 묵상·말씀 요약) 공용 구절 줄 — 책 아이콘 + "창세기 2장 1절" + [성경에서 보기 ›].
+/// 버튼은 앱 공용 크로스탭 이동(`AppNavigationRequest` + `BibleVerseNavigationRequest`)으로 성경 조회의 그 절로 보낸다
+/// (`PersonDetailView.handleBibleReferenceLink`와 같은 방식). 절이 없으면 1절로 보낸다(`BibleVerseNavigationTarget.verse`가 Int).
+/// 새 파일을 만들지 않고 이 파일에 둔다(새 파일이 Xcode 대상에 잡히지 않아 빌드가 깨진 전례, `SidebarNavigationView.swift` 하단 주석 참고).
+struct WordNoteVerseBar: View {
+    let label: String
+    let bookId: Int
+    let chapter: Int
+    let verse: Int?
+
+    private var settings: UserSettingsStore { .shared }
+    private var gold: Color { JBCHCategoryPalette.gold }
+
+    private var buttonTitle: String {
+        #if os(iOS)
+        UIDevice.current.userInterfaceIdiom == .phone ? "성경 보기" : "성경에서 보기"
+        #else
+        "성경에서 보기"
+        #endif
+    }
+
+    var body: some View {
+        HStack(spacing: 10) {
+            Image(systemName: "book")
+                .font(.body.weight(.semibold))
+                .foregroundStyle(gold)
+                .frame(width: 34, height: 34)
+                .background(gold.opacity(0.14), in: RoundedRectangle(cornerRadius: 9, style: .continuous))
+            Text(label)
+                .font(.custom(SpecialPurposeFonts.titleSerif, size: 16, relativeTo: .headline))
+                .fontWeight(.semibold)
+                .foregroundStyle(settings.bibleTextColor ?? .primary)
+                .lineLimit(1)
+            Spacer(minLength: 8)
+            Button {
+                AppNavigationRequest.shared.request(.bibleReading)
+                BibleVerseNavigationRequest.shared.request(bookId: bookId, chapter: chapter, verse: verse ?? 1)
+            } label: {
+                HStack(spacing: 4) {
+                    Text(buttonTitle)
+                    Image(systemName: "chevron.right").font(.caption.weight(.bold))
+                }
+                .font(.callout.weight(.semibold))
+                .foregroundStyle(gold)
+                .padding(.horizontal, 11)
+                .padding(.vertical, 6)
+                .overlay(Capsule().stroke(gold, lineWidth: 1))
+                .contentShape(Capsule())
+            }
+            .buttonStyle(.plain)
+            .help("이 구절을 성경 조회에서 열기")
+            .accessibilityLabel("\(label) 성경에서 보기")
+        }
+        .padding(.horizontal, 12)
+        .padding(.vertical, 9)
+        .background(
+            RoundedRectangle(cornerRadius: 12, style: .continuous)
+                .fill((settings.bibleTextColor ?? Color.primary).opacity(0.05))
+        )
+        .overlay(
+            RoundedRectangle(cornerRadius: 12, style: .continuous)
+                .stroke((settings.bibleTextColor ?? Color.primary).opacity(0.15), lineWidth: 1)
+        )
+    }
+}
+
 struct MemoDetailView: View {
     @Environment(\.modelContext) private var modelContext
+    @Environment(\.self) private var environment
     @Bindable var memo: UserMemo
     var presentationContext: MemoPresentationContext = .standalone
 
+    /// 말씀 노트 목록에서 연 화면(`.wordNoteList`)인지 — 조회/편집 모드·구절 줄·테마 배경이 이 경우에만 달라진다.
+    private var isWordNote: Bool { presentationContext == .wordNoteList }
+    private var settings: UserSettingsStore { .shared }
+
     @State private var autosave: AutosaveController?
-    @State private var isEditable = true
+    /// 말씀 노트 목록에서 연 기존 묵상은 조회 모드로 시작하고(2026-10-03), 새로 만든 빈 묵상만 바로 편집 모드로 연다.
+    /// 다른 맥락(`.standalone`/`.contextual`)은 기존처럼 편집으로 시작한다. `init`에서 정한다.
+    @State private var isEditable: Bool
     @State private var hasLoadedMetadata = false
     @State private var memoTags: [Tag] = []
     @State private var tagInput: String = ""
@@ -47,6 +123,12 @@ struct MemoDetailView: View {
     /// 탭하면 채워진다.
     @State private var drilldownTag: Tag?
 
+    init(memo: UserMemo, presentationContext: MemoPresentationContext = .standalone) {
+        self._memo = Bindable(memo)
+        self.presentationContext = presentationContext
+        self._isEditable = State(initialValue: presentationContext != .wordNoteList || memo.contentText.isEmpty)
+    }
+
     // 폴더 선택은 헤더 아래 한 줄로 압축하고, 에디터가 남은 세로 공간을 모두 차지한다.
     // 태그 영역은 에디터 아래 고정 높이로 둔다.
     var body: some View {
@@ -54,14 +136,29 @@ struct MemoDetailView: View {
             header
             Divider()
 
-            folderSection
-                .padding(.horizontal)
-                .padding(.vertical, 6)
-            Divider()
+            // 말씀 노트: 폴더는 아래 태그 영역 위로 옮긴다(개인 묵상 화면 목업, 2026-10-03).
+            if !isWordNote {
+                folderSection
+                    .padding(.horizontal)
+                    .padding(.vertical, 6)
+                Divider()
+            }
 
             // 순수 `TextEditor` + 글자수 제한(`MemoTextLimit`) — `PhraseNoteEditorPopover`와 같은 패턴.
             // 전체 화면 분할 뷰라 `.frame(maxHeight: .infinity)`로 남은 공간을 채운다.
             VStack(alignment: .trailing, spacing: 4) {
+                if isWordNote && !isEditable {
+                    // 말씀 노트 조회 모드: 비활성 `TextEditor`는 글자가 흐려지므로 읽기 전용 `Text`로 그린다(선택·복사 가능).
+                    ScrollView {
+                        Text(memo.contentText)
+                            .font(.system(size: 17))
+                            .lineSpacing(5)
+                            .foregroundStyle(settings.bibleTextColor ?? Color.primary)
+                            .textSelection(.enabled)
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                            .padding(10)
+                    }
+                } else {
                 TextEditor(text: Binding(
                     get: { memo.contentText },
                     set: { newValue in
@@ -79,12 +176,21 @@ struct MemoDetailView: View {
                         autosave?.scheduleSave()
                     }
                 ))
-                .font(.body)
+                // 말씀 노트 조회 모드는 읽기 좋게 17pt + 줄 간격, 편집 모드는 종이색 카드 + 금박 테두리(목업). 다른 맥락은 그대로.
+                .font(isWordNote && !isEditable ? .system(size: 17) : .body)
+                .lineSpacing(isWordNote && !isEditable ? 5 : 0)
+                .scrollContentBackground(isWordNote ? .hidden : .automatic)
+                .padding(isWordNote ? 10 : 0)
+                .background(editorSurface)
                 .disabled(!isEditable)
+                }
 
-                Text("\(memo.contentText.count)/\(MemoTextLimit.maxCharacters)")
-                    .font(.caption2)
-                    .foregroundStyle(.secondary)
+                // 조회 모드(말씀 노트)에서는 글자 수를 숨긴다.
+                if !(isWordNote && !isEditable) {
+                    Text("\(memo.contentText.count)/\(MemoTextLimit.maxCharacters)")
+                        .font(.caption2)
+                        .foregroundStyle(.secondary)
+                }
             }
             .padding()
             .frame(maxHeight: .infinity)
@@ -94,14 +200,22 @@ struct MemoDetailView: View {
             tagSection
                 .padding()
         }
+        // 말씀 노트 화면만 테마 배경을 칠한다(`WordSummaryEditorView`와 같은 처리). 다른 맥락은 기존 그대로(투명).
+        .background(isWordNote ? (settings.bibleBackgroundColor ?? Color.clear) : Color.clear)
         .toolbar {
             ToolbarItem(placement: .primaryAction) {
                 Button {
+                    // 말씀 노트에서 "완료"를 누르면 디바운스 중인 저장을 바로 끝낸다.
+                    if isWordNote && isEditable { autosave?.saveImmediately() }
                     isEditable.toggle()
                 } label: {
-                    Image(systemName: isEditable ? "eye" : "pencil")
+                    if isWordNote {
+                        Text(isEditable ? "완료" : "편집").fontWeight(.semibold)
+                    } else {
+                        Image(systemName: isEditable ? "eye" : "pencil")
+                    }
                 }
-                .help(isEditable ? "읽기 전용으로 보기" : "편집하기")
+                .help(isEditable ? (isWordNote ? "편집 끝내고 조회로" : "읽기 전용으로 보기") : "편집하기")
             }
             // 표준 공유 시트(`ShareLink`, AirDrop 포함). 파일 인코딩/쓰기는 실제 공유 시점에만
             // 일어나도록 미뤄(`TransferableSharedMemo`의 `FileRepresentation` 클로저) 항상 최신 내용이 담긴다.
@@ -162,7 +276,10 @@ struct MemoDetailView: View {
             }
             .padding()
 
-        case .contextual, .wordNoteList:
+        case .wordNoteList:
+            wordNoteHeader
+
+        case .contextual:
             // 이미 절이 정해진 채로 열리므로 좌표 변경 UI 없이 읽기전용 텍스트로만 보여준다.
             HStack {
                 Text(contextualCoordinateLabel)
@@ -172,6 +289,81 @@ struct MemoDetailView: View {
                 syncStatusLabel
             }
             .padding()
+        }
+    }
+
+    /// 말씀 노트 헤더 — 종류 배지·날짜·동기화 상태, 구절 줄(+성경에서 보기), 조회 모드에서는 저장된 구절 본문 인용.
+    private var wordNoteHeader: some View {
+        VStack(alignment: .leading, spacing: 12) {
+            HStack(spacing: 8) {
+                let badgeColor = WordNoteCategory.personalMemo.spineColor(onDark: isDarkSurface)
+                Text(WordNoteCategory.personalMemo.rawValue)
+                    .font(.caption2.bold())
+                    .padding(.horizontal, 8)
+                    .padding(.vertical, 3)
+                    .background(badgeColor.opacity(0.15), in: Capsule())
+                    .foregroundStyle(badgeColor)
+                Text(isEditable ? "편집 중 · 자동 저장" : "\(WordNoteItem.memo(memo).dateLabel ?? "") 수정")
+                    .font(.caption)
+                    .foregroundStyle(settings.bibleTextColor?.opacity(0.65) ?? Color.secondary)
+                Spacer()
+                syncStatusLabel
+            }
+            WordNoteVerseBar(label: contextualCoordinateLabel, bookId: memo.bookId, chapter: memo.chapter, verse: memo.verse)
+            if !isEditable, let anchor = memo.anchorText, !anchor.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
+                // 묵상을 쓸 때 저장해 둔 구절 본문(번역본은 `annotationTranslationCode`).
+                HStack(alignment: .top, spacing: 12) {
+                    Rectangle().fill(JBCHCategoryPalette.gold).frame(width: 3)
+                    Text(anchor)
+                        .font(.custom(SpecialPurposeFonts.titleSerif, size: 15, relativeTo: .body))
+                        .foregroundStyle(settings.bibleTextColor?.opacity(0.7) ?? Color.secondary)
+                        .lineSpacing(4)
+                        .fixedSize(horizontal: false, vertical: true)
+                }
+                .fixedSize(horizontal: false, vertical: true)
+            }
+        }
+        .padding(.horizontal)
+        .padding(.top, 14)
+        .padding(.bottom, 12)
+    }
+
+    /// 어두운 테마 배경이면 종류 배지 색을 밝은 변형으로 바꾼다(`WordNoteRowView.isDarkSurface`와 같은 공식).
+    private var isDarkSurface: Bool {
+        guard let background = settings.bibleBackgroundColor else { return false }
+        let resolved = background.resolve(in: environment)
+        return 0.2126 * Double(resolved.red) + 0.7152 * Double(resolved.green) + 0.0722 * Double(resolved.blue) < 0.5
+    }
+
+    /// 말씀 노트 편집기 바탕 — 편집 중이면 종이색 카드 + 금박 테두리, 조회 중이면 없음. 다른 맥락은 항상 없음.
+    @ViewBuilder
+    private var editorSurface: some View {
+        if isWordNote && isEditable {
+            RoundedRectangle(cornerRadius: 12, style: .continuous)
+                .fill((settings.bibleTextColor ?? Color.primary).opacity(0.05))
+                .overlay(
+                    RoundedRectangle(cornerRadius: 12, style: .continuous)
+                        .stroke(JBCHCategoryPalette.gold, lineWidth: 1.5)
+                )
+        } else {
+            Color.clear
+        }
+    }
+
+    /// 말씀 노트 조회 모드의 폴더 표시(칩). 편집 모드는 기존 `folderSection`(메뉴)을 쓴다.
+    @ViewBuilder
+    private var wordNoteFolderRow: some View {
+        if isEditable {
+            folderSection
+        } else {
+            HStack(spacing: 8) {
+                Text("폴더").font(.caption).foregroundStyle(.secondary)
+                Label(memo.folder?.name ?? "미분류", systemImage: "folder")
+                    .font(.caption)
+                    .padding(.horizontal, 10)
+                    .padding(.vertical, 4)
+                    .background(JBCHCategoryPalette.wood.opacity(0.10), in: Capsule())
+            }
         }
     }
 
@@ -234,6 +426,9 @@ struct MemoDetailView: View {
 
     private var tagSection: some View {
         VStack(alignment: .leading, spacing: 8) {
+            if isWordNote {
+                wordNoteFolderRow
+            }
             Text("태그").font(.caption).foregroundStyle(.secondary)
 
             FlowLayoutHStack {

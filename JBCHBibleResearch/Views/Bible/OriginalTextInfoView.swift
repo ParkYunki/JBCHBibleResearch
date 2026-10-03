@@ -50,6 +50,9 @@ struct OriginalTextInfoView: View {
     @State private var editingWord: OriginalWordInfo?
     @State private var editingText: String = ""
 
+    /// 링크 색 — 시스템 파랑 대신 테마 포인트색(AccentColor). 맥·아이패드·아이폰 공통(2026-10-02).
+    private var linkTint: Color { Color.accentColor }
+
     private var displayTitle: String {
         let name = BooksProvider.shared.book(id: bookId)?.nameKo ?? "책 \(bookId)"
         return "\(name) \(chapter):\(verseNumber) 원문 정보"
@@ -66,7 +69,7 @@ struct OriginalTextInfoView: View {
                         Label("영문-원어성경", systemImage: "safari")
                             .font(.system(size: 13, weight: .medium))
                     }
-                    .foregroundStyle(.blue)
+                    .foregroundStyle(linkTint)
                 }
                 // 원어 데이터가 없는 절에서도 KRV 본문은 보이도록 `words.isEmpty` 분기 밖에 둔다.
                 if !krvVerseText.isEmpty {
@@ -81,11 +84,11 @@ struct OriginalTextInfoView: View {
                         .padding(.horizontal, 18)
                         .padding(.vertical, 16)
                         .background(
-                            RoundedRectangle(cornerRadius: 16, style: .continuous)
+                            RoundedRectangle(cornerRadius: 12, style: .continuous)
                                 .fill(cardBackground)
                         )
                         .overlay(
-                            RoundedRectangle(cornerRadius: 16, style: .continuous)
+                            RoundedRectangle(cornerRadius: 12, style: .continuous)
                                 .stroke(cardBorderColor, lineWidth: 1)
                         )
                 }
@@ -139,23 +142,30 @@ struct OriginalTextInfoView: View {
             }
         }
         #else
+        // 아이패드·아이폰: 시스템 내비게이션 바 대신 시트 안에 직접 그린 머리(닫기 · 세리프 제목) + 조작줄(‹ n절 › · 메모하기)
+        // — `VerseZoomView`와 같은 부품(`VerseLayerHeader`/`VerseLayerStrip`). 2026-10-02 "구절 레이어 통일안".
         NavigationStack {
-            mainScroll
-                .navigationTitle(displayTitle)
-                .navigationBarTitleDisplayMode(.inline)
-                .toolbar {
-                    ToolbarItem(placement: .cancellationAction) {
-                        Button("닫기") { dismiss() }
-                    }
-                    // `.primaryAction`/`.topBarTrailing`은 이 자리에 그려지지 않아 `.confirmationAction`을 쓴다.
-                    // 아이콘은 앱 전체에서 "메모"를 가리키는 `text.bubble`로 통일해, 누르면 메모하기로 간다는 걸 알 수 있게 한다.
-                    ToolbarItem(placement: .confirmationAction) {
-                        Button(action: onSwitchToMemo) {
-                            Label("메모하기", systemImage: "text.bubble")
-                        }
-                        .help("메모하기로 전환")
-                    }
+            VStack(spacing: 0) {
+                VerseLayerHeader(title: displayTitle) {
+                    Button("닫기") { dismiss() }
+                        .buttonStyle(BibleBarButtonStyle(height: 40, cornerRadius: 10, fontSize: 15))
                 }
+                VerseLayerStrip(
+                    verseLabel: "\(verseNumber)절",
+                    canGoPrevious: canGoToPreviousVerse, canGoNext: canGoToNextVerse,
+                    onPrevious: onNavigateToPreviousVerse, onNext: onNavigateToNextVerse
+                ) {
+                    // 아이콘은 앱 전체에서 "메모"를 가리키는 `text.bubble`로 통일(원문 정보 ↔ 메모하기 전환 버튼 한 쌍).
+                    Button(action: onSwitchToMemo) {
+                        Label("메모하기", systemImage: "text.bubble")
+                    }
+                    .buttonStyle(BibleBarButtonStyle(kind: .primary, height: 40, cornerRadius: 10, fontSize: 15))
+                    .accessibilityLabel("메모하기로 전환")
+                }
+                mainScroll
+            }
+            .background(UserSettingsStore.shared.bibleBackgroundColor ?? Color.clear)
+            .toolbar(.hidden, for: .navigationBar)
         }
         #endif
     }
@@ -165,12 +175,15 @@ struct OriginalTextInfoView: View {
         #if os(macOS)
         .frame(minWidth: 420, minHeight: 420)
         #endif
+        // iOS는 조작줄(`VerseLayerStrip`)에 ‹ › 버튼이 있어 모서리 화살표를 쓰지 않는다.
+        #if os(macOS)
         .modifier(VerseNavArrowsModifier(
             canGoPrevious: canGoToPreviousVerse,
             canGoNext: canGoToNextVerse,
             onPrevious: onNavigateToPreviousVerse,
             onNext: onNavigateToNextVerse
         ))
+        #endif
         // `.task(id:)`로 절/장/권이 바뀔 때마다 다시 로드한다 — 시트가 열린 채 이전/다음 절로 이동해도
         // 원어 정보가 첫 절 데이터로 멈춰 있지 않도록 하기 위해서다.
         .task(id: "\(bookId)-\(chapter)-\(verseNumber)") { loadWords() }
@@ -230,11 +243,11 @@ struct OriginalTextInfoView: View {
         .padding(.horizontal, 18)
         .padding(.vertical, 16)
         .background(
-            RoundedRectangle(cornerRadius: 16, style: .continuous)
+            RoundedRectangle(cornerRadius: 12, style: .continuous)
                 .fill(cardBackground)
         )
         .overlay(
-            RoundedRectangle(cornerRadius: 16, style: .continuous)
+            RoundedRectangle(cornerRadius: 12, style: .continuous)
                 .stroke(cardBorderColor, lineWidth: 1)
         )
     }
@@ -288,7 +301,7 @@ struct OriginalTextInfoView: View {
                     Link(destination: strongURL) {
                         Image(systemName: "safari")
                             .font(.system(size: 13))
-                            .foregroundStyle(.blue)
+                            .foregroundStyle(linkTint)
                     }
                     .help("biblehub.com에서 찾기")
                 }
@@ -320,14 +333,13 @@ struct OriginalTextInfoView: View {
         .padding(.horizontal, 14)
         .padding(.vertical, 18)
         .background(
-            RoundedRectangle(cornerRadius: 18, style: .continuous)
+            RoundedRectangle(cornerRadius: 12, style: .continuous)
                 .fill(cardBackground)
         )
         .overlay(
-            RoundedRectangle(cornerRadius: 18, style: .continuous)
+            RoundedRectangle(cornerRadius: 12, style: .continuous)
                 .stroke(cardBorderColor, lineWidth: 1)
         )
-        .shadow(color: .black.opacity(0.05), radius: 6, x: 0, y: 2)
     }
 
     /// 테마 글자색이 지정돼 있으면 그 색을 쓰고(전용 서체로 한글 헤드라인과 이미 구분됨),

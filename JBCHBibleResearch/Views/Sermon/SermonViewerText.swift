@@ -87,6 +87,68 @@ enum SermonViewerDocument {
 
 // MARK: - 페이지 나누기
 
+/// 페이지 모드 전용 글자 배경 표시용 커스텀 attribute 이름.
+/// 페이지 모드는 TextKit 1(`NSLayoutManager`)이라 표준 `.backgroundColor`를 줄 높이(줄 간격 포함) 전체로 칠해
+/// 줄 사이가 이어진 큰 덩어리가 되고 들여쓰기 영역까지 번진다. 스크롤 모드(TextKit 2 `UITextView`/`NSTextView`)와 편집기는
+/// 글자 상자만 줄마다 따로 칠한다. 모양을 맞추려고 페이지 모드의 저장소에서는 `.backgroundColor`를 이 attribute로 옮기고
+/// `SermonViewerLayoutManager`가 직접 칠한다(2026-10-03).
+extension NSAttributedString.Key {
+    static let sermonViewerBackground = NSAttributedString.Key("sermonViewerBackground")
+}
+
+/// 글자 배경을 줄마다 "글자 상자(ascender~descender) × 실제 글자 폭"으로 칠하는 레이아웃 매니저.
+/// 줄 간격·문단 간격·들여쓰기 영역은 칠하지 않는다. 좌표는 `drawBackground(forGlyphRange:at:)`의 `origin`
+/// (텍스트 컨테이너 원점의 뷰 좌표)만큼 옮겨 그린다.
+final class SermonViewerLayoutManager: NSLayoutManager {
+    override func drawBackground(forGlyphRange glyphsToShow: NSRange, at origin: CGPoint) {
+        super.drawBackground(forGlyphRange: glyphsToShow, at: origin)
+        guard let storage = textStorage, glyphsToShow.length > 0 else { return }
+        let charRange = characterRange(forGlyphRange: glyphsToShow, actualGlyphRange: nil)
+        storage.enumerateAttribute(.sermonViewerBackground, in: charRange, options: []) { value, attributeRange, _ in
+            guard let color = value as? PlatformColor else { return }
+            let glyphRange = self.glyphRange(forCharacterRange: attributeRange, actualCharacterRange: nil)
+            self.enumerateLineFragments(forGlyphRange: glyphRange) { lineRect, _, container, lineGlyphRange, _ in
+                let runGlyphs = NSIntersectionRange(lineGlyphRange, glyphRange)
+                guard runGlyphs.length > 0 else { return }
+                // 줄 끝의 문단 구분 문자(\n, \r, U+2028/2029)는 칠하지 않는다 — 이 글리프의 영역은 줄 오른쪽 끝까지 이어져
+                // 그대로 두면 배경이 컨테이너 폭 전체로 번지고, 글자 없는 빈 문단에도 띠가 생긴다(2026-10-03 실기기 확인).
+                // 글자가 하나도 안 남으면(빈 문단) 건너뛴다.
+                var runChars = self.characterRange(forGlyphRange: runGlyphs, actualGlyphRange: nil)
+                let text = storage.string as NSString
+                while runChars.length > 0 {
+                    let last = text.character(at: NSMaxRange(runChars) - 1)
+                    if last == 0x0A || last == 0x0D || last == 0x2028 || last == 0x2029 {
+                        runChars.length -= 1
+                    } else {
+                        break
+                    }
+                }
+                guard runChars.length > 0 else { return }
+                let paintGlyphs = self.glyphRange(forCharacterRange: runChars, actualCharacterRange: nil)
+                let bounds = self.boundingRect(forGlyphRange: paintGlyphs, in: container)
+                guard bounds.width > 0.5 else { return }
+                let charIndex = runChars.location
+                let font = (storage.attribute(.font, at: charIndex, effectiveRange: nil) as? PlatformFont)
+                    ?? PlatformFont.systemFont(ofSize: 17)
+                // 기준선은 줄 상자 맨 위에서 `location.y` 아래다. 글자 상자 = 기준선 위 ascender ~ 아래 |descender|.
+                let baselineY = lineRect.minY + self.location(forGlyphAt: paintGlyphs.location).y
+                let box = CGRect(
+                    x: bounds.minX + origin.x,
+                    y: baselineY - font.ascender + origin.y,
+                    width: bounds.width,
+                    height: font.ascender - font.descender
+                )
+                color.setFill()
+                #if os(iOS)
+                UIRectFill(box)
+                #elseif os(macOS)
+                NSBezierPath(rect: box).fill()
+                #endif
+            }
+        }
+    }
+}
+
 /// 문서를 같은 크기의 페이지(텍스트 컨테이너) 여러 개로 나눈다. 글자는 컨테이너를 차례로 채우며 흘러가므로
 /// 한 문단이 페이지보다 길어도 잘리지 않고 다음 페이지로 이어진다.
 ///
@@ -99,14 +161,22 @@ final class SermonViewerPaginator {
 
     let containerSize: CGSize
     private let storage: NSTextStorage
-    private let layoutManager = NSLayoutManager()
+    private let layoutManager = SermonViewerLayoutManager()
     private(set) var containers: [NSTextContainer] = []
 
     var pageCount: Int { max(containers.count, 1) }
 
     init(attributed: NSAttributedString, containerSize: CGSize) {
         self.containerSize = containerSize
-        self.storage = NSTextStorage(attributedString: attributed)
+        // 표준 `.backgroundColor`는 커스텀 attribute로 옮긴다(`NSAttributedString.Key.sermonViewerBackground` 주석 참고).
+        // 글자 수/속성 범위는 그대로라 `characterLocation`/`pageIndex` 계산에는 영향이 없다.
+        let converted = NSMutableAttributedString(attributedString: attributed)
+        converted.enumerateAttribute(.backgroundColor, in: NSRange(location: 0, length: converted.length), options: []) { value, range, _ in
+            guard let color = value as? PlatformColor else { return }
+            converted.removeAttribute(.backgroundColor, range: range)
+            converted.addAttribute(.sermonViewerBackground, value: color, range: range)
+        }
+        self.storage = NSTextStorage(attributedString: converted)
         storage.addLayoutManager(layoutManager)
         paginate()
     }
@@ -156,6 +226,40 @@ final class SermonViewerPaginator {
     }
 }
 
+// MARK: - 입력 공통 정의 (탭 영역 / 명령)
+
+/// 뷰어 화면을 가로 위치로 나눈 클릭(탭) 영역 — 왼쪽 22% 이전 쪽, 오른쪽 22% 다음 쪽, 가운데는 상·하단 바 숨김/표시.
+/// 스크롤 모드에서는 가운데만 쓰고 양 가장자리는 아무 동작도 하지 않는다.
+enum SermonViewerTapZone {
+    case previous, center, next
+
+    /// 가장자리 영역 폭(뷰 폭 대비).
+    static let edgeFraction: CGFloat = 0.22
+
+    init(horizontalFraction x: CGFloat) {
+        if x < Self.edgeFraction {
+            self = .previous
+        } else if x > 1 - Self.edgeFraction {
+            self = .next
+        } else {
+            self = .center
+        }
+    }
+}
+
+/// AppKit/UIKit 쪽 입력(클릭·키보드·쓸기)이 SwiftUI 뷰어로 올려보내는 명령.
+enum SermonViewerCommand {
+    case previousPage, nextPage, firstPage, lastPage, toggleChrome
+
+    init(zone: SermonViewerTapZone) {
+        switch zone {
+        case .previous: self = .previousPage
+        case .next: self = .nextPage
+        case .center: self = .toggleChrome
+        }
+    }
+}
+
 // MARK: - 세로 스크롤 읽기 전용 텍스트
 
 #if os(iOS)
@@ -164,22 +268,42 @@ struct SermonViewerScrollText: UIViewRepresentable {
     let attributed: NSAttributedString
     /// 본문이 새로 만들어질 때마다 바뀌는 값 — 같은 값이면 텍스트를 다시 넣지 않아 스크롤 위치가 유지된다.
     let generation: Int
+    /// 글자 영역 좌우 여백.
+    let horizontalInset: CGFloat
+    /// 글자 영역 위 여백 — 상단 바가 본문 위에 겹쳐 뜨므로 첫 줄이 바 아래에서 시작하도록 확보한다.
+    let topInset: CGFloat
+    /// 본문 가운데를 한 번 탭했을 때(상·하단 바 숨김/표시).
+    let onToggleChrome: () -> Void
+
+    private var insets: UIEdgeInsets {
+        UIEdgeInsets(top: topInset, left: horizontalInset, bottom: 48, right: horizontalInset)
+    }
 
     func makeUIView(context: Context) -> UITextView {
         let textView = UITextView()
         textView.isEditable = false
         textView.isSelectable = true
         textView.alwaysBounceVertical = true
-        textView.textContainerInset = UIEdgeInsets(top: 16, left: 16, bottom: 32, right: 16)
+        textView.textContainerInset = insets
         // 뷰어 고정 종이색 + 라이트 외형(`SermonViewerPaper` 참고).
         textView.overrideUserInterfaceStyle = .light
         textView.backgroundColor = SermonViewerPaper.platformColor
         textView.attributedText = attributed
+        // 탭은 텍스트뷰의 선택 동작과 함께 인식하고(막지 않음), 선택이 있던 상태의 탭은 선택 해제로만 쓴다.
+        let tap = UITapGestureRecognizer(target: context.coordinator, action: #selector(Coordinator.handleTap(_:)))
+        tap.delegate = context.coordinator
+        tap.cancelsTouchesInView = false
+        textView.addGestureRecognizer(tap)
+        context.coordinator.onToggleChrome = onToggleChrome
         context.coordinator.generation = generation
         return textView
     }
 
     func updateUIView(_ textView: UITextView, context: Context) {
+        context.coordinator.onToggleChrome = onToggleChrome
+        if textView.textContainerInset != insets {
+            textView.textContainerInset = insets
+        }
         guard context.coordinator.generation != generation else { return }
         context.coordinator.generation = generation
         let offset = textView.contentOffset
@@ -190,8 +314,32 @@ struct SermonViewerScrollText: UIViewRepresentable {
 
     func makeCoordinator() -> Coordinator { Coordinator() }
 
-    final class Coordinator {
+    @MainActor
+    final class Coordinator: NSObject, UIGestureRecognizerDelegate {
         var generation = -1
+        var onToggleChrome: (() -> Void)?
+        /// 탭이 시작될 때 선택 영역이 있었는지 — 있었다면 이 탭은 선택 해제로만 쓰고 바를 건드리지 않는다("선택 우선").
+        private var hadSelection = false
+
+        func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
+            if let textView = gestureRecognizer.view as? UITextView {
+                hadSelection = textView.selectedRange.length > 0
+            }
+            return true
+        }
+
+        func gestureRecognizer(
+            _ gestureRecognizer: UIGestureRecognizer,
+            shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer
+        ) -> Bool { true }
+
+        @objc func handleTap(_ recognizer: UITapGestureRecognizer) {
+            guard recognizer.state == .ended, !hadSelection, let view = recognizer.view, view.bounds.width > 1 else { return }
+            let fraction = recognizer.location(in: view).x / view.bounds.width
+            if SermonViewerTapZone(horizontalFraction: fraction) == .center {
+                onToggleChrome?()
+            }
+        }
     }
 }
 
@@ -200,36 +348,66 @@ struct SermonViewerScrollText: UIViewRepresentable {
 struct SermonViewerScrollText: NSViewRepresentable {
     let attributed: NSAttributedString
     let generation: Int
+    let horizontalInset: CGFloat
+    let topInset: CGFloat
+    let onToggleChrome: () -> Void
 
     func makeNSView(context: Context) -> NSScrollView {
-        let scrollView = NSTextView.scrollableTextView()
+        // `NSTextView.scrollableTextView()`와 같은 구성 — 클릭 처리를 위해 하위 클래스 텍스트뷰를 직접 조립한다.
+        let scrollView = NSScrollView()
         scrollView.appearance = NSAppearance(named: .aqua)
+        scrollView.hasVerticalScroller = true
+        scrollView.hasHorizontalScroller = false
+        scrollView.autohidesScrollers = true
         scrollView.drawsBackground = true
         scrollView.backgroundColor = SermonViewerPaper.platformColor
-        if let textView = scrollView.documentView as? NSTextView {
-            textView.isEditable = false
-            textView.isSelectable = true
-            textView.isRichText = true
-            textView.textContainerInset = NSSize(width: 16, height: 16)
-            textView.drawsBackground = true
-            textView.backgroundColor = SermonViewerPaper.platformColor
-            textView.textStorage?.setAttributedString(attributed)
+
+        let textView = SermonViewerNSTextView(frame: NSRect(x: 0, y: 0, width: 400, height: 400))
+        textView.minSize = NSSize(width: 0, height: 0)
+        textView.maxSize = NSSize(width: CGFloat.greatestFiniteMagnitude, height: CGFloat.greatestFiniteMagnitude)
+        textView.isVerticallyResizable = true
+        textView.isHorizontallyResizable = false
+        textView.autoresizingMask = [.width]
+        textView.textContainer?.widthTracksTextView = true
+        textView.textContainer?.heightTracksTextView = false
+        textView.textContainer?.containerSize = NSSize(width: 400, height: CGFloat.greatestFiniteMagnitude)
+        textView.isEditable = false
+        textView.isSelectable = true
+        textView.isRichText = true
+        textView.textContainerInset = NSSize(width: horizontalInset, height: topInset)
+        textView.drawsBackground = true
+        textView.backgroundColor = SermonViewerPaper.platformColor
+        textView.textStorage?.setAttributedString(attributed)
+        // 스크롤 모드: 가운데 클릭만 바 숨김/표시. 가로 쓸기는 쓰지 않는다.
+        textView.tapReferenceView = scrollView
+        textView.clicks.onZone = { [weak coordinator = context.coordinator] zone in
+            if zone == .center { coordinator?.onToggleChrome?() }
         }
+        scrollView.documentView = textView
+
+        context.coordinator.onToggleChrome = onToggleChrome
         context.coordinator.generation = generation
         return scrollView
     }
 
     func updateNSView(_ scrollView: NSScrollView, context: Context) {
-        guard context.coordinator.generation != generation,
-              let textView = scrollView.documentView as? NSTextView else { return }
+        context.coordinator.onToggleChrome = onToggleChrome
+        guard let textView = scrollView.documentView as? NSTextView else { return }
+        let inset = NSSize(width: horizontalInset, height: topInset)
+        if textView.textContainerInset != inset {
+            textView.textContainerInset = inset
+        }
+        guard context.coordinator.generation != generation else { return }
         context.coordinator.generation = generation
         textView.textStorage?.setAttributedString(attributed)
     }
 
     func makeCoordinator() -> Coordinator { Coordinator() }
 
+    @MainActor
     final class Coordinator {
         var generation = -1
+        var onToggleChrome: (() -> Void)?
     }
 }
 
@@ -281,6 +459,8 @@ struct SermonViewerPageCurl: UIViewControllerRepresentable {
     let paginator: SermonViewerPaginator
     let insets: UIEdgeInsets
     @Binding var currentIndex: Int
+    /// 본문 가운데를 한 번 탭했을 때(상·하단 바 숨김/표시). 양 가장자리 탭은 페이지 컬이 직접 처리한다.
+    let onCenterTap: () -> Void
 
     func makeUIViewController(context: Context) -> UIPageViewController {
         let pageViewController = UIPageViewController(transitionStyle: .pageCurl, navigationOrientation: .horizontal)
@@ -289,6 +469,11 @@ struct SermonViewerPageCurl: UIViewControllerRepresentable {
         pageViewController.delegate = context.coordinator
         pageViewController.overrideUserInterfaceStyle = .light
         pageViewController.view.backgroundColor = SermonViewerPaper.platformColor
+        // 페이지 컬 자체의 탭/팬 인식을 막지 않고 가운데 탭만 따로 받는다.
+        let tap = UITapGestureRecognizer(target: context.coordinator, action: #selector(Coordinator.handleTap(_:)))
+        tap.delegate = context.coordinator
+        tap.cancelsTouchesInView = false
+        pageViewController.view.addGestureRecognizer(tap)
         context.coordinator.paginator = paginator
         context.coordinator.insets = insets
         context.coordinator.show(index: currentIndex, animated: false, in: pageViewController)
@@ -311,7 +496,7 @@ struct SermonViewerPageCurl: UIViewControllerRepresentable {
 
     func makeCoordinator() -> Coordinator { Coordinator(self) }
 
-    final class Coordinator: NSObject, UIPageViewControllerDataSource, UIPageViewControllerDelegate {
+    final class Coordinator: NSObject, UIPageViewControllerDataSource, UIPageViewControllerDelegate, UIGestureRecognizerDelegate {
         var parent: SermonViewerPageCurl
         var paginator: SermonViewerPaginator?
         var insets: UIEdgeInsets = .zero
@@ -357,49 +542,269 @@ struct SermonViewerPageCurl: UIViewControllerRepresentable {
                 parent.currentIndex = visible.index
             }
         }
+
+        // MARK: 가운데 탭
+
+        func gestureRecognizer(
+            _ gestureRecognizer: UIGestureRecognizer,
+            shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer
+        ) -> Bool { true }
+
+        @objc func handleTap(_ recognizer: UITapGestureRecognizer) {
+            guard recognizer.state == .ended, let view = recognizer.view, view.bounds.width > 1 else { return }
+            let fraction = recognizer.location(in: view).x / view.bounds.width
+            if SermonViewerTapZone(horizontalFraction: fraction) == .center {
+                parent.onCenterTap()
+            }
+        }
     }
 }
 
 #elseif os(macOS)
 
-/// 현재 페이지 하나를 그리는 읽기 전용 텍스트뷰. 페이지 이동은 SwiftUI 쪽(버튼/스와이프)이 `index`를 바꿔 처리한다.
+// MARK: - 페이지 모드 — macOS: 한 페이지씩
+
+/// 클릭 한 번을 이동/바 숨김 명령으로 바꿔 전달한다. 글자 위에서 시작한 클릭은 더블클릭(단어 선택)일 수 있어
+/// 시스템 더블클릭 간격만큼 기다렸다가, 두 번째 클릭이나 드래그 선택이 없을 때만 실행한다("선택 우선").
+@MainActor
+final class SermonViewerClickDispatcher {
+    var onZone: ((SermonViewerTapZone) -> Void)?
+    private var pending: Task<Void, Never>?
+
+    func cancelPending() {
+        pending?.cancel()
+        pending = nil
+    }
+
+    func fire(_ zone: SermonViewerTapZone, deferred: Bool) {
+        cancelPending()
+        guard deferred else {
+            onZone?(zone)
+            return
+        }
+        let delay = NSEvent.doubleClickInterval
+        pending = Task { [weak self] in
+            try? await Task.sleep(for: .seconds(delay))
+            guard !Task.isCancelled, let self else { return }
+            self.pending = nil
+            self.onZone?(zone)
+        }
+    }
+}
+
+/// 트랙패드 두 손가락 가로 쓸기 → 이전/다음 쪽. 한 번의 쓸기(관성 포함)에 한 번만 넘긴다.
+@MainActor
+final class SermonViewerSwipeTracker {
+    var onCommand: ((SermonViewerCommand) -> Void)?
+    private var accumulated: CGFloat = 0
+    private var didFire = false
+
+    /// 가로가 우세한 트랙패드 쓸기를 처리했으면 true(이벤트를 소비).
+    func handle(_ event: NSEvent) -> Bool {
+        guard onCommand != nil, event.hasPreciseScrollingDeltas else { return false }
+        if event.phase.contains(.began) || event.phase.contains(.mayBegin) {
+            accumulated = 0
+            didFire = false
+        }
+        let deltaX = event.scrollingDeltaX
+        let deltaY = event.scrollingDeltaY
+        guard abs(deltaX) > abs(deltaY) else { return false }
+        // 관성 구간은 무시한다.
+        if event.momentumPhase.isEmpty {
+            accumulated += deltaX
+            if !didFire, abs(accumulated) > 60 {
+                didFire = true
+                // 콘텐츠가 왼쪽으로 밀리는 방향(음수)이 다음 쪽.
+                onCommand?(accumulated < 0 ? .nextPage : .previousPage)
+            }
+        }
+        if event.phase.contains(.ended) || event.phase.contains(.cancelled) {
+            accumulated = 0
+            didFire = false
+        }
+        return true
+    }
+}
+
+/// 읽기 전용 텍스트뷰 — 드래그 선택은 AppKit 기본 동작을 그대로 두고(선택 우선),
+/// 이동 없는 한 번 클릭만 영역별 명령으로 올려보낸다.
+final class SermonViewerNSTextView: NSTextView {
+    let clicks = SermonViewerClickDispatcher()
+    let swipe = SermonViewerSwipeTracker()
+    /// 클릭 가로 위치의 기준 뷰(페이지 모드: 페이지 전체 뷰, 스크롤 모드: 스크롤 뷰). nil이면 superview.
+    weak var tapReferenceView: NSView?
+
+    override func mouseDown(with event: NSEvent) {
+        // 더블/트리플 클릭은 단어·문단 선택 — 대기 중이던 첫 클릭 동작도 취소한다.
+        if event.clickCount > 1 {
+            clicks.cancelPending()
+            super.mouseDown(with: event)
+            return
+        }
+        let hadSelection = selectedRange().length > 0
+        let startPoint = event.locationInWindow
+        super.mouseDown(with: event) // 드래그 선택이 끝날 때까지 돌아오지 않는다
+        // 선택이 있었거나(이번 클릭은 선택 해제) 드래그로 선택이 생겼다면 명령을 내지 않는다.
+        guard !hadSelection, selectedRange().length == 0 else {
+            clicks.cancelPending()
+            return
+        }
+        let endPoint = window?.mouseLocationOutsideOfEventStream ?? startPoint
+        guard hypot(endPoint.x - startPoint.x, endPoint.y - startPoint.y) < 4 else { return }
+        guard let reference = tapReferenceView ?? superview, reference.bounds.width > 1 else { return }
+        let fraction = reference.convert(startPoint, from: nil).x / reference.bounds.width
+        clicks.fire(SermonViewerTapZone(horizontalFraction: fraction), deferred: true)
+    }
+
+    override func scrollWheel(with event: NSEvent) {
+        if !swipe.handle(event) {
+            super.scrollWheel(with: event)
+        }
+    }
+}
+
+/// 페이지 모드의 바탕 뷰 — 글자 영역 바깥(좌우·위아래 여백)의 클릭을 받는다. 여백에는 글자가 없어 바로 실행한다.
+final class SermonViewerPageNSView: NSView {
+    let clicks = SermonViewerClickDispatcher()
+    let swipe = SermonViewerSwipeTracker()
+
+    override func mouseDown(with event: NSEvent) {
+        guard bounds.width > 1 else { return }
+        let fraction = convert(event.locationInWindow, from: nil).x / bounds.width
+        clicks.fire(SermonViewerTapZone(horizontalFraction: fraction), deferred: false)
+    }
+
+    override func scrollWheel(with event: NSEvent) {
+        if !swipe.handle(event) {
+            super.scrollWheel(with: event)
+        }
+    }
+}
+
+/// 현재 페이지 하나를 그리는 읽기 전용 텍스트뷰. 페이지 이동은 SwiftUI 쪽이 `index`를 바꿔 처리하고,
+/// 클릭 영역·트랙패드 쓸기는 `onCommand`로 올려보낸다.
 struct SermonViewerSinglePage: NSViewRepresentable {
     let paginator: SermonViewerPaginator
     let index: Int
     let insets: NSSize
+    let onCommand: (SermonViewerCommand) -> Void
 
-    func makeNSView(context: Context) -> NSView {
-        let view = NSView()
+    func makeNSView(context: Context) -> SermonViewerPageNSView {
+        let view = SermonViewerPageNSView()
         view.appearance = NSAppearance(named: .aqua)
+        wire(view.clicks, view.swipe, coordinator: context.coordinator)
         return view
     }
 
-    func updateNSView(_ nsView: NSView, context: Context) {
+    func updateNSView(_ nsView: SermonViewerPageNSView, context: Context) {
         let coordinator = context.coordinator
+        coordinator.onCommand = onCommand
         // SwiftUI가 다른 이유로 이 뷰를 갱신할 때 텍스트뷰를 매번 다시 만들지 않는다.
-        guard coordinator.paginator !== paginator || coordinator.index != index else { return }
+        guard coordinator.paginator !== paginator || coordinator.index != index || coordinator.insets != insets else { return }
         coordinator.paginator = paginator
         coordinator.index = index
+        coordinator.insets = insets
         nsView.subviews.forEach { $0.removeFromSuperview() }
         guard paginator.containers.indices.contains(index) else { return }
         let frame = NSRect(
             x: insets.width, y: insets.height,
             width: paginator.containerSize.width, height: paginator.containerSize.height
         )
-        let textView = NSTextView(frame: frame, textContainer: paginator.containers[index])
+        let textView = SermonViewerNSTextView(frame: frame, textContainer: paginator.containers[index])
         textView.isEditable = false
         textView.isSelectable = true
         textView.textContainerInset = .zero
         textView.drawsBackground = false
         textView.appearance = NSAppearance(named: .aqua)
+        textView.tapReferenceView = nsView
+        wire(textView.clicks, textView.swipe, coordinator: coordinator)
         nsView.addSubview(textView)
+    }
+
+    private func wire(_ clicks: SermonViewerClickDispatcher, _ swipe: SermonViewerSwipeTracker, coordinator: Coordinator) {
+        coordinator.onCommand = onCommand
+        clicks.onZone = { [weak coordinator] zone in
+            coordinator?.onCommand(SermonViewerCommand(zone: zone))
+        }
+        swipe.onCommand = { [weak coordinator] command in
+            coordinator?.onCommand(command)
+        }
     }
 
     func makeCoordinator() -> Coordinator { Coordinator() }
 
+    @MainActor
     final class Coordinator {
         var paginator: SermonViewerPaginator?
         var index = -1
+        var insets = NSSize.zero
+        var onCommand: (SermonViewerCommand) -> Void = { _ in }
+    }
+}
+
+// MARK: - macOS 키보드
+
+/// 뷰어 창이 키 입력을 받는 동안 ←/→, PageUp/PageDown, Space(Shift+Space는 이전), Home/End, H를 명령으로 바꿔 전달한다.
+/// 텍스트뷰가 포커스를 가져가도 동작하도록 `NSEvent` 로컬 모니터로 받는다. 처리한 키(`handler`가 true)만 소비한다.
+struct SermonViewerKeyCatcher: NSViewRepresentable {
+    let handler: (SermonViewerCommand) -> Bool
+
+    func makeNSView(context: Context) -> SermonViewerKeyCatcherView {
+        let view = SermonViewerKeyCatcherView()
+        view.handler = handler
+        return view
+    }
+
+    func updateNSView(_ nsView: SermonViewerKeyCatcherView, context: Context) {
+        nsView.handler = handler
+    }
+}
+
+final class SermonViewerKeyCatcherView: NSView {
+    var handler: ((SermonViewerCommand) -> Bool)?
+    private var monitor: Any?
+
+    // 마우스 클릭을 가로채지 않는다.
+    override func hitTest(_ point: NSPoint) -> NSView? { nil }
+
+    override func viewDidMoveToWindow() {
+        super.viewDidMoveToWindow()
+        removeMonitor()
+        guard window != nil else { return }
+        monitor = NSEvent.addLocalMonitorForEvents(matching: .keyDown) { [weak self] event in
+            guard let self, event.window === self.window, let command = Self.command(for: event) else { return event }
+            // 편집 가능한 입력이나 슬라이더가 키를 쓰는 중이면 그쪽을 우선한다.
+            if let responder = self.window?.firstResponder {
+                if (responder as? NSTextView)?.isEditable == true { return event }
+                if responder is NSSlider, [123, 124, 115, 119].contains(event.keyCode) { return event }
+            }
+            return (self.handler?(command) ?? false) ? nil : event
+        }
+    }
+
+    private func removeMonitor() {
+        if let monitor { NSEvent.removeMonitor(monitor) }
+        monitor = nil
+    }
+
+    deinit {
+        if let monitor { NSEvent.removeMonitor(monitor) }
+    }
+
+    private static func command(for event: NSEvent) -> SermonViewerCommand? {
+        let flags = event.modifierFlags
+        guard flags.intersection([.command, .control, .option]).isEmpty else { return nil }
+        let shift = flags.contains(.shift)
+        switch event.keyCode {
+        case 49: return shift ? .previousPage : .nextPage // Space
+        case 123 where !shift, 116 where !shift: return .previousPage // ←, PageUp
+        case 124 where !shift, 121 where !shift: return .nextPage // →, PageDown
+        case 115: return .firstPage // Home
+        case 119: return .lastPage // End
+        default: break
+        }
+        if !shift, event.charactersIgnoringModifiers?.lowercased() == "h" { return .toggleChrome }
+        return nil
     }
 }
 

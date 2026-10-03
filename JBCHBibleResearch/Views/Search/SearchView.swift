@@ -734,7 +734,7 @@ private struct SearchContentView: View {
         rowLabel(
             icon: "person.2.fill", iconColor: settings.bibleTextColor ?? .primary,
             title: PersonRelationLabeling.sentence(for: item.relation),
-            excerptText: item.relation.rawSentence
+            excerptText: PersonRelationLabeling.displayRawSentence(item.relation.rawSentence)
         )
     }
 
@@ -909,16 +909,11 @@ private struct SearchContentView: View {
             }
             return activeVerseTranslations.first?.code
         }()
-        // `verseResults`(더보기 페이지네이션 적용분)를 필터링하므로 번역본에 따라 아직 화면에 로드되지 않은 결과가 있을
-        // 수 있다(`SearchViewModel.groupedVerseResults(translationCode:)` 참고) —
-        // 번역본별 독립 페이지네이션이 아니라 공유 "더보기" 버튼 하나를 쓰는 절충이다.
-        let verseGroups = selectedVerseTranslation
-            .map { viewModel.groupedVerseResults(translationCode: $0) }
-            ?? viewModel.groupedVerseResults
-        // "더보기" 잔여 개수 표시에 쓸, 선택된 번역본 기준의 전체/로드됨 개수.
-        let selectedVerseTranslationTotalCount = selectedVerseTranslation
-            .map { code in viewModel.allVerseResults.filter { $0.translationCode == code }.count }
-        let selectedVerseTranslationLoadedCount = verseGroups.reduce(0) { $0 + $1.verses.count }
+        // 성경구절 결과는 책 단위 접이식 목록으로 보여준다(2026-10-02 목업 채택). 책 묶음·정렬·펼침·더보기 상태는 모두
+        // `SearchViewModel`(`verseBookGroups` 등)이 갖고, 랭킹(`searchVerses`: 매칭 단어 수 → 성경순)은 건드리지 않는다.
+        // 번역본 하위 탭이 선택돼 있으면 그 번역본 결과만 묶고, 더보기·펼친 절 수는 번역본별로 독립이다.
+        let verseBookGroups = viewModel.verseBookGroups(translationCode: selectedVerseTranslation)
+        let verseTranslationKey = selectedVerseTranslation ?? "all"
 
         // 하위 탭임이 디자인에서 드러나도록 왼쪽에 `arrow.turn.down.right` 아이콘을 두고
         // `.padding(.leading, 16)`으로 들여쓴다.
@@ -944,53 +939,15 @@ private struct SearchContentView: View {
             .listRowBackground(Color.clear)
         }
 
+        if !verseBookGroups.isEmpty {
+            verseBookControlsRow(bookIds: verseBookGroups.map(\.bookId))
+        }
+
         Section {
-            if verseGroups.isEmpty { emptyRow() }
-            // 결과를 장 단위(정경순 고정)로 그룹핑해 표시한다. 랭킹/더보기 페이지네이션은 여전히 `verseResults`
-            // 기준이고, `SearchViewModel.groupedVerseResults`는 표시용 그룹만 만든다. 번역본 하위
-            // 탭이 선택돼 있으면 위에서 걸러낸 `verseGroups`를 쓴다.
-            ForEach(verseGroups) { group in
-                groupCardBorder {
-                    VStack(alignment: .leading, spacing: 0) {
-                        verseChapterGroupHeader(group)
-                            .padding(.bottom, 6)
-                        ForEach(Array(group.verses.enumerated()), id: \.offset) { index, result in
-                            if index > 0 {
-                                // List 구분선/카드 테두리(`groupCardBorder`)와 같은 wood
-                                // 톤으로 통일한다.
-                                Rectangle()
-                                    .fill(JBCHCategoryPalette.wood.opacity(0.3))
-                                    .frame(height: 0.5)
-                            }
-                            groupedVerseRow(result)
-                        }
-                    }
-                }
-            }
-            // `SearchViewModel.searchVerses`가 매칭된 절 전체를 성경순으로 메모리에 갖고 있다가 화면엔
-            // 50개씩만 보여준다(`SearchViewModel.verseResultPageSize`). 이 버튼은 DB를 다시
-            // 조회하지 않고 다음 50개를 더 보여준다. 개수는 번역본별로 나뉘지 않은 전체 기준이다(위 설계 근거 참고).
-            if viewModel.hasMoreVerseResults {
-                // 라벨의 잔여 개수는 선택된 번역본 탭 기준(그 번역본의 전체 매칭 수 - 이 탭에 로드된 수)으로 계산한다.
-                // 페이지네이션(`visibleVerseResultCount`)은 여전히 전체가 한 번에 늘어난다.
-                let remainingCount = selectedVerseTranslationTotalCount
-                    .map { max(0, $0 - selectedVerseTranslationLoadedCount) }
-                    ?? (viewModel.allVerseResults.count - viewModel.verseResults.count)
-                Button {
-                    viewModel.loadMoreVerseResults()
-                } label: {
-                    HStack {
-                        Spacer()
-                        Label("더보기 (\(remainingCount)개 남음)", systemImage: "chevron.down.circle")
-                            .font(.body.weight(.medium))
-                        Spacer()
-                    }
-                }
-                .buttonStyle(.plain)
-                // 아이콘/글자 색은 테마 글자색 — `JBCHCategoryPalette.navy`는 "밤빛 서재" 테마
-                // 배경과 같은 색이라 그 테마에서 거의 안 보인다.
-                .foregroundStyle(settings.bibleTextColor ?? .primary)
-                .padding(.vertical, 6)
+            if verseBookGroups.isEmpty {
+                emptyRow()
+            } else {
+                verseBookRows(verseBookGroups, translationKey: verseTranslationKey)
             }
         }
         .listRowBackground(Color.clear)
@@ -1008,7 +965,7 @@ private struct SearchContentView: View {
                             .padding(.bottom, 6)
                         ForEach(Array(group.items.enumerated()), id: \.offset) { index, result in
                             if index > 0 {
-                                // 위 verseGroups 구분선과 같은 이유.
+                                // 위 `verseChapterCard` 구분선과 같은 이유.
                                 Rectangle()
                                     .fill(JBCHCategoryPalette.wood.opacity(0.3))
                                     .frame(height: 0.5)
@@ -1329,6 +1286,213 @@ private struct SearchContentView: View {
             // 간격을 위 padding 하나가 전담하게 한다. 좌우는 List 기본값(16)을 유지한다.
             .listRowInsets(EdgeInsets(top: 0, leading: 16, bottom: 0, trailing: 16))
             .listRowSeparator(.hidden)
+    }
+
+    // MARK: - 성경구절: 책 단위 접기
+
+    /// 정렬 선택 캡슐 + 모두 펼치기/접기. 번역본 하위 탭 줄과 같은 들여쓰기·캡슐 규칙을 쓴다.
+    private func verseBookControlsRow(bookIds: [Int]) -> some View {
+        let anyExpanded = !viewModel.expandedVerseBookIds.isEmpty
+        return HStack(spacing: 6) {
+            Image(systemName: "arrow.turn.down.right")
+                .font(.caption.weight(.semibold))
+                .foregroundStyle(settings.bibleTextColor?.opacity(0.5) ?? Color.secondary)
+            Text("정렬")
+                .font(.footnote.weight(.semibold))
+                .foregroundStyle(settings.bibleTextColor?.opacity(0.8) ?? Color.secondary)
+                .fixedSize()
+            ForEach(viewModel.availableVerseBookSorts) { sort in
+                bookCapsuleButton(title: sort.title, isSelected: sort == viewModel.verseBookSort) {
+                    viewModel.setVerseBookSort(sort)
+                }
+            }
+            Spacer(minLength: 4)
+            Button(anyExpanded ? "모두 접기" : "모두 펼치기") {
+                if anyExpanded {
+                    viewModel.collapseAllVerseBooks()
+                } else {
+                    viewModel.expandAllVerseBooks(bookIds)
+                }
+            }
+            .buttonStyle(.plain)
+            .font(.caption.weight(.medium))
+            .foregroundStyle(settings.bibleTextColor?.opacity(0.75) ?? Color.secondary)
+        }
+        .padding(.leading, 16)
+        .listRowSeparator(.hidden)
+        .listRowBackground(Color.clear)
+    }
+
+    /// `translationCapsuleButton`과 같은 모양의 범용 캡슐(정렬 선택용).
+    private func bookCapsuleButton(title: String, isSelected: Bool, action: @escaping () -> Void) -> some View {
+        let textColor: Color = isSelected ? Color("AccentColor") : (settings.bibleTextColor?.opacity(0.55) ?? Color.secondary)
+        let fillColor: Color = isSelected ? Color("AccentColor").opacity(0.12) : Color.clear
+        let borderColor: Color = isSelected ? Color("AccentColor") : (settings.bibleTextColor?.opacity(0.35) ?? Color.secondary.opacity(0.35))
+        return Button(action: action) {
+            Text(title)
+                .font(.caption.weight(isSelected ? .semibold : .regular))
+                .lineLimit(1)
+                .padding(.horizontal, 10)
+                .padding(.vertical, 5)
+                .foregroundStyle(textColor)
+                .background(Capsule().fill(fillColor))
+                .overlay(Capsule().strokeBorder(borderColor, lineWidth: 1.2))
+        }
+        .buttonStyle(.plain)
+        .contentShape(Rectangle())
+        .accessibilityAddTraits(isSelected ? [.isSelected] : [])
+    }
+
+    /// 정렬에 따른 책 목록. 성경순은 구약/신약 머리줄로 나누고(각각 접기·더보기 독립), 관련도순·많은 순은 한 줄 목록이다 —
+    /// 관련도순에 구약/신약 구획을 두면 신약의 높은 매칭 수 결과가 구약 아래로 밀려 정렬 규칙이 깨지므로 구획을 쓰지 않는다.
+    @ViewBuilder
+    private func verseBookRows(_ groups: [SearchViewModel.VerseBookGroup], translationKey: String) -> some View {
+        switch viewModel.verseBookSort {
+        case .canon:
+            verseTestamentRows(title: "구약", key: "old", groups: groups.filter(\.isOldTestament), translationKey: translationKey)
+            verseTestamentRows(title: "신약", key: "new", groups: groups.filter { !$0.isOldTestament }, translationKey: translationKey)
+        case .relevance, .count:
+            verseBookList(groups, limitKey: "\(translationKey)|flat", translationKey: translationKey)
+        }
+    }
+
+    @ViewBuilder
+    private func verseTestamentRows(title: String, key: String, groups: [SearchViewModel.VerseBookGroup], translationKey: String) -> some View {
+        if !groups.isEmpty {
+            let collapsed = viewModel.isTestamentCollapsed(key)
+            let total = groups.reduce(0) { $0 + $1.verses.count }
+            Button {
+                viewModel.toggleTestament(key)
+            } label: {
+                HStack(spacing: 8) {
+                    Image(systemName: collapsed ? "chevron.right" : "chevron.down")
+                        .font(.caption.weight(.semibold))
+                        .frame(width: 14)
+                    Text(title)
+                        .font(.title3.weight(.bold))
+                    Text("\(groups.count)권 · \(total)개 절")
+                        .font(.footnote)
+                        .foregroundStyle(settings.bibleTextColor?.opacity(0.6) ?? Color.secondary)
+                    Spacer()
+                }
+                .foregroundStyle(settings.bibleTextColor ?? .primary)
+                .padding(.vertical, 6)
+                .contentShape(Rectangle())
+            }
+            .buttonStyle(.plain)
+            .listRowSeparator(.hidden)
+            .listRowBackground(Color.clear)
+            .accessibilityValue(collapsed ? "접힘" : "펼침")
+
+            if !collapsed {
+                verseBookList(groups, limitKey: "\(translationKey)|\(key)", translationKey: translationKey)
+            }
+        }
+    }
+
+    @ViewBuilder
+    private func verseBookList(_ groups: [SearchViewModel.VerseBookGroup], limitKey: String, translationKey: String) -> some View {
+        let visibleCount = viewModel.visibleBookCount(limitKey: limitKey)
+        ForEach(groups.prefix(visibleCount)) { group in
+            verseBookBlock(group, translationKey: translationKey)
+        }
+        if groups.count > visibleCount {
+            let remaining = groups.count - visibleCount
+            HStack(spacing: 12) {
+                Spacer()
+                Button {
+                    viewModel.requestMoreBooks(limitKey: limitKey, remainingBooks: remaining, showAll: false)
+                } label: {
+                    Label("책 더보기 (\(remaining)권 남음)", systemImage: "chevron.down.circle")
+                        .font(.body.weight(.medium))
+                }
+                .buttonStyle(.plain)
+                Button("모두 펼치기") {
+                    viewModel.requestMoreBooks(limitKey: limitKey, remainingBooks: remaining, showAll: true)
+                }
+                .buttonStyle(.plain)
+                .font(.callout)
+                .foregroundStyle(settings.bibleTextColor?.opacity(0.75) ?? Color.secondary)
+                Spacer()
+            }
+            // 아이콘/글자 색은 테마 글자색 — `JBCHCategoryPalette.navy`는 "밤빛 서재" 테마 배경과 같은 색이라 그 테마에서 거의 안 보인다.
+            .foregroundStyle(settings.bibleTextColor ?? .primary)
+            .padding(.vertical, 6)
+            .listRowSeparator(.hidden)
+            .listRowBackground(Color.clear)
+        }
+    }
+
+    /// 책 머리줄 한 행 + (펼쳤을 때) 장 카드 행들 + "이 책 더보기".
+    @ViewBuilder
+    private func verseBookBlock(_ group: SearchViewModel.VerseBookGroup, translationKey: String) -> some View {
+        let expanded = viewModel.isVerseBookExpanded(group.bookId)
+        groupCardBorder {
+            Button {
+                viewModel.toggleVerseBook(group.bookId)
+            } label: {
+                HStack(spacing: 8) {
+                    Image(systemName: expanded ? "chevron.down" : "chevron.right")
+                        .font(.caption.weight(.semibold))
+                        .frame(width: 14)
+                    Text(group.bookNameKo)
+                        .font(.headline)
+                        .lineLimit(1)
+                    Spacer()
+                    Text("\(group.verses.count)개 절")
+                        .font(.footnote.weight(.medium))
+                        .foregroundStyle(.tertiary)
+                }
+                .foregroundStyle(settings.bibleTextColor ?? .primary)
+                .padding(.vertical, 4)
+                .contentShape(Rectangle())
+            }
+            .buttonStyle(.plain)
+            .accessibilityValue(expanded ? "펼침" : "접힘")
+        }
+        if expanded {
+            let page = viewModel.visibleChapterGroups(for: group, translationKey: translationKey)
+            ForEach(page.groups) { chapterGroup in
+                verseChapterCard(chapterGroup)
+                    .padding(.leading, 14)
+            }
+            if page.remainingVerses > 0 {
+                HStack {
+                    Spacer()
+                    Button {
+                        viewModel.loadMoreVersesInBook(bookId: group.bookId, translationKey: translationKey)
+                    } label: {
+                        Label("\(group.bookNameKo) 더보기 (\(page.remainingVerses)개 남음)", systemImage: "chevron.down.circle")
+                            .font(.callout.weight(.medium))
+                    }
+                    .buttonStyle(.plain)
+                    .foregroundStyle(settings.bibleTextColor ?? .primary)
+                    Spacer()
+                }
+                .padding(.vertical, 4)
+                .listRowSeparator(.hidden)
+                .listRowBackground(Color.clear)
+            }
+        }
+    }
+
+    /// 장 단위 카드(기존 장 그룹 카드 그대로 — 헤더 + 절 행들).
+    private func verseChapterCard(_ group: SearchViewModel.VerseSearchResultGroup) -> some View {
+        groupCardBorder {
+            VStack(alignment: .leading, spacing: 0) {
+                verseChapterGroupHeader(group)
+                    .padding(.bottom, 6)
+                ForEach(Array(group.verses.enumerated()), id: \.offset) { index, result in
+                    if index > 0 {
+                        // List 구분선/카드 테두리(`groupCardBorder`)와 같은 wood 톤으로 통일한다.
+                        Rectangle()
+                            .fill(JBCHCategoryPalette.wood.opacity(0.3))
+                            .frame(height: 0.5)
+                    }
+                    groupedVerseRow(result)
+                }
+            }
+        }
     }
 
     /// 성경구절 결과의 장 단위 그룹 헤더(책 + 장, 절 개수).

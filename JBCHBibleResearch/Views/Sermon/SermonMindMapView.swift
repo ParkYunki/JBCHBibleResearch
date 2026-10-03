@@ -91,6 +91,14 @@ struct SermonMindMapView: View {
     /// 핀치 시작 시점의 배율·스크롤 원점·손가락(커서) 위치.
     /// `scrollVisibleRect`는 갱신이 한 박자 늦을 수 있어, 시작 시점 값을 기준으로 매번 계산해 확대 중 화면이 밀리지 않게 한다.
     @State private var pinchStart: (scale: CGFloat, origin: CGPoint, anchor: CGPoint)?
+    /// 핀치로 인정된 순간의 `magnification` — 이 값 대비 비율로 배율을 계산한다(`handlePinch` 참고).
+    @State private var pinchBaseMagnification: CGFloat = 1
+    /// 핀치 확대/축소가 진행 중인지. 진행 중에는 두 손가락 이동 보조 인식기가 직접 스크롤하지 않는다(`scrollTo`와 다투므로).
+    @State private var isPinchZooming = false
+    /// 두 손가락 사이 거리가 처음 닿은 때보다 이 값(pt) 넘게 변해야 핀치로 본다(아이패드 터치). 값을 키우면 이동 오인식이 줄고 확대 반응이 둔해진다.
+    private static let pinchActivationDistance: CGFloat = 24
+    /// 두 손가락 거리 변화(pt) 측정용 공유 객체 — iOS의 `ScrollViewTwoFingerPan`이 채운다.
+    @State private var spreadTracker = TwoFingerSpreadTracker()
     /// 캔버스 `ScrollView`의 현재 가시 영역(배율이 적용된 콘텐츠 좌표계). `onScrollGeometryChange`로 갱신하며
     /// 미니맵의 뷰포트 사각형과 뷰포트 저장에 쓴다.
     @State private var scrollVisibleRect: CGRect = .zero
@@ -116,6 +124,16 @@ struct SermonMindMapView: View {
     /// 맥OS: 빈 캔버스를 그냥 끌면 화면 이동(⇧을 누르고 끌면 선택 사각형). 현재 드래그가 화면 이동이면 true.
     /// 아이패드/아이폰은 항상 false — 거기서는 한 손가락이 선택, 두 손가락이 화면 이동(`ScrollViewTwoFingerPan`).
     @State private var isCanvasPanning = false
+    /// 아이패드/아이폰 "이동/선택" 모드. true(이동)면 한 손가락 드래그가 화면 이동이고 캔버스·노드의 드래그 제스처(선택 사각형·노드 이동)는 꺼진다.
+    /// false(선택, 기본)면 한 손가락은 선택/노드 이동, 두 손가락이 화면 이동. 맥OS는 쓰지 않는다(빈 캔버스 드래그가 이미 화면 이동).
+    @State private var isPanMode = false
+    /// (아이폰·아이패드) 노드 속성 패널을 보이는지. 기본은 숨김 — 툴바 버튼으로 연다. 가로면 오른쪽, 세로면 아래쪽에 나온다.
+    /// 맥은 항상 오른쪽에 보이므로 쓰지 않는다(2026-10-03: 아이패드도 아이폰과 같은 토글 방식으로 통일).
+    @State private var isPanelVisible = false
+    /// 두 손가락 화면 이동이 진행 중인지(`ScrollViewTwoFingerPan`이 알려 준다). 진행 중에는 캔버스 드래그 제스처를 무시한다.
+    @State private var isTwoFingerPanning = false
+    /// 미니맵을 드래그하는 동안, 잡은 지점과 뷰포트 사각형 중심의 차이(미니맵 좌표). nil이면 드래그 중이 아니다.
+    @State private var minimapGrabOffset: CGSize?
     /// 화면 이동 드래그를 시작한 순간의 스크롤 위치(콘텐츠 좌표). 드래그가 끝나면 nil.
     @State private var panStartOrigin: CGPoint?
     /// 노드 위·아래 중앙 버튼을 끄는 동안의 상태(어느 노드의 어느 버튼, 현재 포인터 위치 — 캔버스 좌표). `nil`이면 드래그 중이 아니다.
@@ -201,6 +219,31 @@ struct SermonMindMapView: View {
             #if os(iOS)
             .navigationBarTitleDisplayMode(.inline)
             #endif
+            // 닫기 버튼 — 별도 창(`onRequestClose`가 있는 아이패드·맥)에만 둔다. 아이패드 창에는 닫을 시스템 버튼이 없고,
+            // 아이폰은 push 화면이라 내비게이션 뒤로가기가 있다. 내용(노드·뷰포트)은 편집 즉시/`onDisappear`에서 저장되므로 따로 저장하지 않는다.
+            .toolbar {
+                ToolbarItem(placement: .cancellationAction) {
+                    if let onRequestClose {
+                        Button("닫기") { onRequestClose() }
+                            .accessibilityLabel("마인드맵 닫기")
+                    }
+                }
+                #if os(iOS)
+                // 아이폰·아이패드: 노드 속성 패널 열기/닫기. 노드가 없으면(빈 화면) 보여 줄 패널이 없어 숨긴다.
+                ToolbarItem(placement: .topBarTrailing) {
+                    if !nodes.isEmpty {
+                        Button {
+                            isPanelVisible.toggle()
+                        } label: {
+                            Image(systemName: "slider.horizontal.3")
+                                .symbolVariant(isPanelVisible ? .fill : .none)
+                        }
+                        .accessibilityLabel("노드 속성 패널")
+                        .accessibilityValue(isPanelVisible ? "열림" : "닫힘")
+                    }
+                }
+                #endif
+            }
             .background(settings.bibleBackgroundColor ?? Color.clear)
     }
 
@@ -215,20 +258,68 @@ struct SermonMindMapView: View {
         if nodes.isEmpty {
             emptyState
         } else {
-            HStack(spacing: 0) {
-                canvasArea
-                    .focusable()
-                    .focused($canvasFocused)
-                    .focusEffectDisabled()
-                    .onKeyPress(keys: [.delete, .deleteForward]) { _ in
-                        handleDeleteKey()
-                    }
-                Divider()
-                sidePanel
-                    .frame(width: Self.sidePanelWidth)
-            }
+            // iOS(아이폰·아이패드)는 토글 패널(`togglePanelMainContent`), 맥은 항상 오른쪽 고정 패널.
+            #if os(iOS)
+            togglePanelMainContent
+            #else
+            regularMainContent
+            #endif
         }
     }
+
+    /// 캔버스 + 키보드 포커스/삭제 키 — 기기별 본문 배치가 같은 캔버스를 쓴다.
+    private var focusableCanvas: some View {
+        canvasArea
+            .focusable()
+            .focused($canvasFocused)
+            .focusEffectDisabled()
+            .onKeyPress(keys: [.delete, .deleteForward]) { _ in
+                handleDeleteKey()
+            }
+    }
+
+    /// 맥: 캔버스 + 오른쪽 고정 폭 속성 패널(항상 표시).
+    private var regularMainContent: some View {
+        HStack(spacing: 0) {
+            focusableCanvas
+            Divider()
+            sidePanel(contentWidth: Self.sidePanelWidth - 32)
+                .frame(width: Self.sidePanelWidth)
+        }
+    }
+
+    #if os(iOS)
+    private var isPhoneIdiom: Bool { UIDevice.current.userInterfaceIdiom == .phone }
+
+    /// 아이폰·아이패드: 속성 패널은 기본 숨김. 툴바 버튼으로 열면 가로 화면은 오른쪽, 세로 화면은 아래쪽에 나온다.
+    /// `AnyLayout`으로 가로/세로 전환 시에도 캔버스 뷰의 정체성(스크롤·확대 상태)을 유지한다.
+    private var togglePanelMainContent: some View {
+        GeometryReader { proxy in
+            let isLandscape = proxy.size.width > proxy.size.height
+            let layout = isLandscape ? AnyLayout(HStackLayout(spacing: 0)) : AnyLayout(VStackLayout(spacing: 0))
+            layout {
+                focusableCanvas
+                if isPanelVisible {
+                    // `Divider`는 AnyLayout 안에서 방향을 못 맞추므로 직접 그린다.
+                    Rectangle()
+                        .fill(Color.secondary.opacity(0.3))
+                        .frame(width: isLandscape ? 1 : nil, height: isLandscape ? nil : 1)
+                    if isLandscape {
+                        // 좁은 가로 화면에서 캔버스가 너무 작아지지 않게 폭을 화면의 45%로 제한한다.
+                        let panelWidth = min(Self.sidePanelWidth, proxy.size.width * 0.45)
+                        sidePanel(contentWidth: panelWidth - 32)
+                            .frame(width: panelWidth)
+                    } else {
+                        // 세로: 화면 높이의 절반(최대 420pt)을 패널에 준다. 내용이 길면 패널 안에서 스크롤한다.
+                        sidePanel(contentWidth: proxy.size.width - 32)
+                            .frame(height: min(420, proxy.size.height * 0.5))
+                    }
+                }
+            }
+        }
+        .animation(.easeInOut(duration: 0.2), value: isPanelVisible)
+    }
+    #endif
 
     /// 화면 본체 + 알림 + 변경 추적(실행취소/최근 스타일 기록)/포커스. `body`의 수식
     /// 길이를 줄이려고 층을 나눴다.
@@ -394,7 +485,12 @@ struct SermonMindMapView: View {
             .contentShape(Rectangle())
             // 아이패드/아이폰: 스크롤을 두 손가락 드래그로 바꿔 한 손가락 드래그(선택/노드 이동)와 겹치지 않게 한다.
             #if os(iOS)
-            .background(ScrollViewTwoFingerPan())
+            .background(ScrollViewTwoFingerPan(
+                isOneFingerPan: isPanMode,
+                onTwoFingerPanActive: { isTwoFingerPanning = $0 },
+                allowsDirectPan: { !isPinchZooming },
+                spreadTracker: spreadTracker
+            ))
             #endif
             .onTapGesture {
                 selectedNodeIDs.removeAll()
@@ -403,11 +499,20 @@ struct SermonMindMapView: View {
             }
             // 빈 캔버스 드래그로 사각형을 그려 프레임이 겹치는 노드를 전부 선택한다. 노드 위에서 시작한 드래그는
             // 노드 자신의 제스처(`MindMapNodeShapeView`의 `.gesture`)가 먼저 받는다(ZStack에서 나중에 그려진 뷰가 히트테스트 우선).
+            // 이동 모드에서는 `.subviews`로 이 제스처만 꺼서 한 손가락 드래그가 `ScrollView` 스크롤로 간다.
             .gesture(
                 DragGesture(minimumDistance: 4, coordinateSpace: .named(Self.canvasSpace))
                     .onChanged { value in handleCanvasDragChanged(value) }
-                    .onEnded { value in handleCanvasDragEnded(value) }
+                    .onEnded { value in handleCanvasDragEnded(value) },
+                including: isPanMode ? .subviews : .all
             )
+            // 두 손가락 이동이 시작되면, 그 직전 한 손가락으로 이미 그리기 시작한 선택 사각형/선 드래그를 버린다.
+            .onChange(of: isTwoFingerPanning) { _, active in
+                if active {
+                    selectionRect = nil
+                    edgeDrag = nil
+                }
+            }
         }
         // 미니맵 뷰포트 사각형용 가시 영역. `ScrollView` 자신에 붙여야 배율이 반영된 콘텐츠 좌표계의 `visibleRect`를 받는다.
         .onScrollGeometryChange(for: CGRect.self) { geometry in
@@ -432,7 +537,11 @@ struct SermonMindMapView: View {
         .simultaneousGesture(
             MagnifyGesture()
                 .onChanged { value in handlePinch(value) }
-                .onEnded { _ in pinchStart = nil }
+                .onEnded { _ in
+                    pinchStart = nil
+                    pinchBaseMagnification = 1
+                    isPinchZooming = false
+                }
         )
         // `ScrollView`의 첫 레이아웃 전에 `scrollPosition.scrollTo`를 호출하면 반영되지 않을 수 있어
         // 짧게 기다린 뒤 복원/중앙 정렬한다(지연 시간은 필요 시 조정).
@@ -445,7 +554,14 @@ struct SermonMindMapView: View {
             saveViewport()
         }
         .background(canvasBackgroundColor)
-        .overlay(alignment: .bottomLeading) { zoomControls }
+        .overlay(alignment: .bottomLeading) {
+            VStack(alignment: .leading, spacing: 0) {
+                #if os(iOS)
+                panModeToggle
+                #endif
+                zoomControls
+            }
+        }
         .overlay(alignment: .bottomTrailing) { minimapView }
     }
 
@@ -567,10 +683,20 @@ struct SermonMindMapView: View {
     /// 배율에 곱하면 누적 오차로 튄다 — 드래그 이동과 같은 원칙).
     private func handlePinch(_ value: MagnifyGesture.Value) {
         if pinchStart == nil {
+            // 아이패드: 두 손가락 "화면 이동"도 두 손가락 사이 거리가 조금씩 변해 핀치로 인식된다. 그때마다 아래 `scrollTo`가
+            // 스크롤 위치를 되돌려 화면이 안 움직이고 배율만 출렁였다(2026-10-02 보고). 손가락을 오므리고 이동하면 기준 거리가 작아
+            // 비율(%)로는 쉽게 넘으므로, UIKit 터치로 잰 절대 거리 변화(pt, `spreadTracker`)가 `pinchActivationDistance`를 넘어야 핀치로 본다.
+            // 터치 측정이 없는 입력(트랙패드 핀치 등, `isTwoTouchActive == false`)은 바로 핀치로 인정한다.
+            // 넘긴 순간의 배율을 기준(`pinchBaseMagnification`)으로 삼아 활성화 순간 배율이 튀지 않게 한다.
+            if spreadTracker.isTwoTouchActive {
+                guard abs(spreadTracker.delta) > Self.pinchActivationDistance else { return }
+            }
             pinchStart = (zoomScale, scrollVisibleRect.origin, value.startLocation)
+            pinchBaseMagnification = value.magnification
+            isPinchZooming = true
         }
         guard let start = pinchStart else { return }
-        let target = clampedZoom(start.scale * value.magnification)
+        let target = clampedZoom(start.scale * value.magnification / max(pinchBaseMagnification, 0.01))
         let modelX = (start.origin.x + start.anchor.x) / start.scale
         let modelY = (start.origin.y + start.anchor.y) / start.scale
         zoomScale = target
@@ -579,6 +705,32 @@ struct SermonMindMapView: View {
             y: max(0, modelY * target - start.anchor.y)
         ))
     }
+
+    #if os(iOS)
+    /// 아이패드/아이폰 "이동/선택" 모드 전환 버튼 — 현재 모드를 글자와 아이콘으로 보여 준다. 이동 모드는 강조색 채움.
+    private var panModeToggle: some View {
+        Button {
+            isPanMode.toggle()
+            // 모드를 바꾸면 진행 중이던 선택 사각형/선 드래그 잔상을 지운다.
+            selectionRect = nil
+            edgeDrag = nil
+        } label: {
+            Label(isPanMode ? "이동" : "선택", systemImage: isPanMode ? "hand.draw" : "cursorarrow.rays")
+                .font(.callout.weight(.semibold))
+                .foregroundStyle(isPanMode ? Color.white : Color.primary)
+                .padding(.horizontal, 12)
+                .padding(.vertical, 8)
+                .background(Capsule().fill(isPanMode ? AnyShapeStyle(accent) : AnyShapeStyle(Material.ultraThin)))
+                .overlay(Capsule().stroke(Color.secondary.opacity(0.3), lineWidth: 1))
+        }
+        .buttonStyle(.plain)
+        .padding(.horizontal, 10)
+        .padding(.top, 10)
+        .accessibilityLabel("화면 조작 모드")
+        .accessibilityValue(isPanMode ? "이동" : "선택")
+        .accessibilityHint("이동은 한 손가락으로 화면을 움직이고, 선택은 한 손가락으로 선택하거나 노드를 움직이며 두 손가락으로 화면을 움직입니다.")
+    }
+    #endif
 
     /// 확대/축소 버튼. `overlay`가 `ScrollView` 자신에 붙어 있어 스크롤해도 뷰포트(캔버스 왼쪽 아래)에 고정된다.
     private var zoomControls: some View {
@@ -615,13 +767,13 @@ struct SermonMindMapView: View {
         .padding(10)
     }
 
-    /// 미니맵 자체의 화면 크기 — `minimapView`(그리기)와 `handleMinimapTap`
+    /// 미니맵 자체의 화면 크기 — `minimapView`(그리기)와 `handleMinimapDrag`
     /// (탭 → 좌표 역변환)이 같은 값을 써야 어긋나지 않아 공용 상수로 뺐다.
     private static let minimapSize = CGSize(width: 150, height: 110)
 
     /// 캔버스 전체(모든 노드)를 축소해 보여주는 미니맵. 노드는 `Self.canvasSize`(모델 좌표계) 기준 고정 비율로 그려
     /// 배율과 무관하게 제자리에 있고, 뷰포트 사각형(`scrollVisibleRect`)만 배율에 따라 커지고 작아진다.
-    /// 탭 위치는 `SpatialTapGesture`로 얻어 `handleMinimapTap(at:)`으로 넘긴다.
+    /// 터치/드래그 위치는 `DragGesture`(이동 거리 0)로 얻어 `handleMinimapDrag(at:)`으로 넘긴다.
     private var minimapView: some View {
         let mapSize = Self.minimapSize
         let scaleX = mapSize.width / Self.canvasSize.width
@@ -656,32 +808,50 @@ struct SermonMindMapView: View {
         .background(RoundedRectangle(cornerRadius: 8, style: .continuous).fill(.ultraThinMaterial))
         .overlay(RoundedRectangle(cornerRadius: 8, style: .continuous).stroke(Color.secondary.opacity(0.3), lineWidth: 1))
         .contentShape(Rectangle())
+        // 탭(이동 거리 0)은 그 지점이 화면 가운데로 오게 하고, 드래그는 뷰포트 사각형이 손가락을 따라가게 한다(`handleMinimapDrag`).
         .gesture(
-            SpatialTapGesture()
-                .onEnded { value in
-                    handleMinimapTap(at: value.location)
-                }
+            DragGesture(minimumDistance: 0, coordinateSpace: .local)
+                .onChanged { value in handleMinimapDrag(at: value.location) }
+                .onEnded { _ in minimapGrabOffset = nil }
         )
         .padding(10)
     }
 
-    /// 미니맵의 탭 위치(미니맵 자신의 로컬 좌표, 0~150×0~110)를 캔버스
-    /// 모델 좌표로 역변환한 뒤, 그 지점이 뷰포트 가운데 오도록 실제 캔버스를
-    /// 이동시킨다 — 위 `minimapView`의 그리기 변환(`scaleX`/`scaleY`)과
-    /// 정확히 반대 방향 계산이다.
-    private func handleMinimapTap(at location: CGPoint) {
+    /// 미니맵 터치/드래그 — 위치(미니맵 로컬 좌표, 0~150×0~110)를 캔버스 모델 좌표로 역변환해, 뷰포트 사각형 중심이 그 지점에 오도록
+    /// 실제 캔버스를 이동시킨다(위 `minimapView`의 그리기 변환과 반대 방향 계산).
+    /// 시작 지점이 현재 뷰포트 사각형 안이면 사각형을 잡은 것으로 보고 잡은 자리 차이를 유지해 사각형이 튀지 않게 하고,
+    /// 밖이면 그 지점이 곧바로 중심이 되게 한다(탭 이동과 같은 결과). 손가락이 미니맵 밖으로 나가도 가장자리로 자른다.
+    private func handleMinimapDrag(at rawLocation: CGPoint) {
         let mapSize = Self.minimapSize
         let scaleX = mapSize.width / Self.canvasSize.width
         let scaleY = mapSize.height / Self.canvasSize.height
-        guard scaleX > 0, scaleY > 0 else { return }
-        let modelX = location.x / scaleX
-        let modelY = location.y / scaleY
-        let targetContentX = modelX * zoomScale
-        let targetContentY = modelY * zoomScale
+        guard scaleX > 0, scaleY > 0, zoomScale > 0 else { return }
+        let location = CGPoint(
+            x: min(max(rawLocation.x, 0), mapSize.width),
+            y: min(max(rawLocation.y, 0), mapSize.height)
+        )
         let viewportWidth = scrollVisibleRect.width > 0 ? scrollVisibleRect.width : 700
         let viewportHeight = scrollVisibleRect.height > 0 ? scrollVisibleRect.height : 500
-        let offsetX = max(0, targetContentX - viewportWidth / 2)
-        let offsetY = max(0, targetContentY - viewportHeight / 2)
+
+        if minimapGrabOffset == nil {
+            // 현재 뷰포트 사각형(미니맵 좌표). `scrollVisibleRect`는 배율 반영 콘텐츠 좌표라 배율로 나눠 모델 좌표로 바꾼 뒤 미니맵 비율을 곱한다.
+            let rect = CGRect(
+                x: scrollVisibleRect.origin.x / zoomScale * scaleX,
+                y: scrollVisibleRect.origin.y / zoomScale * scaleY,
+                width: viewportWidth / zoomScale * scaleX,
+                height: viewportHeight / zoomScale * scaleY
+            )
+            if scrollVisibleRect != .zero, rect.contains(location) {
+                minimapGrabOffset = CGSize(width: location.x - rect.midX, height: location.y - rect.midY)
+            } else {
+                minimapGrabOffset = .zero
+            }
+        }
+        let grab = minimapGrabOffset ?? .zero
+        let centerModelX = (location.x - grab.width) / scaleX
+        let centerModelY = (location.y - grab.height) / scaleY
+        let offsetX = max(0, centerModelX * zoomScale - viewportWidth / 2)
+        let offsetY = max(0, centerModelY * zoomScale - viewportHeight / 2)
         scrollPosition.scrollTo(point: CGPoint(x: offsetX, y: offsetY))
     }
 
@@ -727,6 +897,7 @@ struct SermonMindMapView: View {
             onDragBegin: { beginBulkDrag(anchor: node) },
             onDragChanged: { deltaX, deltaY in applyBulkDrag(deltaX: deltaX, deltaY: deltaY) },
             onDragEnded: { endBulkDrag() },
+            isPanMode: isPanMode,
             showsLinkHandles: selectedNodeIDs.count == 1
                 && selectedNodeIDs.contains(node.persistentModelID)
                 && editingNodeID != node.persistentModelID
@@ -1151,6 +1322,12 @@ struct SermonMindMapView: View {
     /// 캔버스 배경 드래그의 시작/진행 — 시작 순간 한 번 선을 잡았는지 판정해, 잡았으면 선 드래그(부모 변경/연결 해제), 아니면 러버밴드 선택.
     /// 노드 위에서 시작된 드래그는 노드 자신의 제스처가 먼저 가로채므로 여기에 오지 않는다.
     private func handleCanvasDragChanged(_ value: DragGesture.Value) {
+        // 두 손가락 화면 이동 중에는 선택 사각형/선 드래그를 그리지 않는다(같은 터치를 SwiftUI 드래그가 함께 받기 때문).
+        guard !isTwoFingerPanning else {
+            selectionRect = nil
+            edgeDrag = nil
+            return
+        }
         if canvasDragStart != value.startLocation {
             // 새 드래그의 첫 이벤트 — 비정상 종료로 남았을 수 있는 `edgeDrag`/`selectionRect` 상태를 정리하고 모드를 정한다.
             canvasDragStart = value.startLocation
@@ -1449,7 +1626,7 @@ struct SermonMindMapView: View {
 
     // MARK: - 사이드 패널
 
-    private var sidePanel: some View {
+    private func sidePanel(contentWidth: CGFloat) -> some View {
         ScrollView {
             VStack(alignment: .leading, spacing: 20) {
                 sermonStructureSection
@@ -1470,8 +1647,8 @@ struct SermonMindMapView: View {
                 }
             }
             // 콘텐츠 폭을 패널 폭 − 좌우 패딩(16×2)으로 고정 — 위
-            // `sidePanelWidth` 주석 참고.
-            .frame(width: Self.sidePanelWidth - 32, alignment: .leading)
+            // `sidePanelWidth` 주석 참고. 아이폰 세로(아래 패널)는 화면 폭에서 같은 값을 뺀 폭을 넘긴다.
+            .frame(width: contentWidth, alignment: .leading)
             .padding(16)
         }
         .background(settings.bibleBackgroundColor ?? Color.clear)
@@ -2261,6 +2438,8 @@ private struct MindMapNodeShapeView: View {
     let onDragBegin: () -> Void
     let onDragChanged: (Double, Double) -> Void
     let onDragEnded: () -> Void
+    /// 이동 모드(아이패드/아이폰) — 노드 자신의 드래그/탭 제스처를 꺼서 노드 위에서 시작한 한 손가락 드래그도 화면 이동이 되게 한다.
+    let isPanMode: Bool
     /// 연결 버튼 표시 여부(부모가 "이 노드 하나만 선택됨 + 편집 중 아님"일 때만 true)와 버튼 드래그 중
     /// 위치 보고(캔버스 좌표). 부모/자식 결정과 연결 허용 여부는 부모 뷰의 몫.
     let showsLinkHandles: Bool
@@ -2320,7 +2499,7 @@ private struct MindMapNodeShapeView: View {
         // (3) 움직임 없이 떼면 클릭으로 보고 직전 클릭과의 간격으로 더블클릭을 직접 판정한다.
         // 제스처를 겹쳐 붙이면 안쪽(자식) 제스처가 우선해 이동이 인식되지 않고, `onTapGesture(count: 2)`는 클릭 지연을 만든다.
         // 편집 중에는 `.subviews` 마스크로 꺼서 TextField의 커서 이동·글자 선택이 가로채이지 않게 한다.
-        .gesture(nodeGesture, including: (isEditing || isEditingDescription) ? .subviews : .all)
+        .gesture(nodeGesture, including: (isEditing || isEditingDescription || isPanMode) ? .subviews : .all)
     }
 
     private var nodeGesture: some Gesture {

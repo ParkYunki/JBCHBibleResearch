@@ -33,6 +33,8 @@ struct BookChapterPicker: View {
     @State private var parseErrorMessage: String?
     // 키보드 액세서리의 "완료" 버튼과 `submitFreeText()` 성공 시 키보드를 내리는 데 쓴다.
     @FocusState private var isFreeTextFocused: Bool
+    /// `unifiedBarBody`의 크기(맥 32pt / 아이패드 40pt) — 부모가 `\.bibleBarSizing`으로 정한다.
+    @Environment(\.bibleBarSizing) private var sizing
     /// 테마 글자색 읽기 전용 접근 — 투명 배경 검색창이 상단 바 테마색에 맞춰야 한다.
     private var settings: UserSettingsStore { .shared }
 
@@ -66,11 +68,11 @@ struct BookChapterPicker: View {
             }
             .popover(isPresented: $isGridPresented) {
                 // 현재 책의 장 그리드로 바로 시작한다. "책 목록" 버튼(ChapterGrid.onBack)으로 다른 책 선택도 가능.
-                BookGridPicker(books: books, initialBook: selectedBook) { book, chapter in
+                BookGridPicker(books: books, initialBook: selectedBook, currentBook: selectedBook, currentChapter: selectedChapter) { book, chapter in
                     onSelect(book, chapter)
                     isGridPresented = false
                 }
-                .frame(minWidth: 360, minHeight: 460)
+                .modifier(PickerPopoverSizing())
             }
 
             if showsFreeTextSearch {
@@ -134,16 +136,16 @@ struct BookChapterPicker: View {
                 isGridPresented = true
             } label: {
                 Label("\(selectedBook.abbreviation.first ?? selectedBook.nameKo) \(selectedChapter)장", systemImage: "book")
-                    .font(.system(size: 13, weight: .bold))
+                    .font(.system(size: sizing.fontSize, weight: .bold))
             }
-            .buttonStyle(BibleBarButtonStyle())
+            .buttonStyle(BibleBarButtonStyle(height: sizing.height, cornerRadius: sizing.radius, fontSize: sizing.fontSize))
             .help("책과 장 고르기")
             .popover(isPresented: $isGridPresented) {
-                BookGridPicker(books: books, initialBook: selectedBook) { book, chapter in
+                BookGridPicker(books: books, initialBook: selectedBook, currentBook: selectedBook, currentChapter: selectedChapter) { book, chapter in
                     onSelect(book, chapter)
                     isGridPresented = false
                 }
-                .frame(minWidth: 360, minHeight: 460)
+                .modifier(PickerPopoverSizing())
             }
 
             if showsFreeTextSearch {
@@ -157,30 +159,41 @@ struct BookChapterPicker: View {
                         text: $freeText,
                         prompt: Text("예: 창세기1, 요3:16").foregroundStyle(textColor.opacity(0.62))
                     )
-                    .font(.system(size: 12.5))
+                    .font(.system(size: sizing.fieldFontSize))
                     .lineLimit(1)
                     .textFieldStyle(.plain)
                     .foregroundStyle(textColor)
                     .onSubmit(submitFreeText)
                     .focused($isFreeTextFocused)
+                    // 아이패드 화상 키보드 위 "완료" 줄 — 다른 입력창(`standardBody`/`compactBarBody`)과 같다. `.keyboard` 배치는 iOS 전용.
+                    #if os(iOS)
+                    .toolbar {
+                        ToolbarItemGroup(placement: .keyboard) {
+                            Spacer()
+                            Button("완료") {
+                                isFreeTextFocused = false
+                            }
+                        }
+                    }
+                    #endif
                 }
                 .padding(.horizontal, 10)
-                .frame(height: BibleBarMetrics.height)
+                .frame(height: sizing.height)
                 .background(
-                    RoundedRectangle(cornerRadius: BibleBarMetrics.radius, style: .continuous)
+                    RoundedRectangle(cornerRadius: sizing.radius, style: .continuous)
                         .fill(textColor.opacity(0.05))
                 )
                 .overlay(
-                    RoundedRectangle(cornerRadius: BibleBarMetrics.radius, style: .continuous)
+                    RoundedRectangle(cornerRadius: sizing.radius, style: .continuous)
                         .strokeBorder(textColor.opacity(isFreeTextFocused ? 0.5 : BibleBarMetrics.lineOpacity), lineWidth: 1)
                 )
                 .frame(minWidth: 120, maxWidth: 190)
 
                 Button(action: submitFreeText) {
                     Image(systemName: "arrow.right")
-                        .font(.system(size: 14, weight: .semibold))
+                        .font(.system(size: sizing.iconSize, weight: .semibold))
                 }
-                .buttonStyle(BibleBarButtonStyle(kind: .primary, isSquare: true))
+                .buttonStyle(BibleBarButtonStyle(kind: .primary, isSquare: true, height: sizing.height, cornerRadius: sizing.radius, fontSize: sizing.fontSize))
                 .disabled(freeText.trimmingCharacters(in: .whitespaces).isEmpty)
                 .help("이동")
                 .accessibilityLabel("이동")
@@ -200,11 +213,11 @@ struct BookChapterPicker: View {
             .buttonStyle(BibleCapsuleItemStyle())
             .accessibilityLabel("책과 장 고르기")
             .popover(isPresented: $isGridPresented) {
-                BookGridPicker(books: books, initialBook: selectedBook) { book, chapter in
+                BookGridPicker(books: books, initialBook: selectedBook, currentBook: selectedBook, currentChapter: selectedChapter) { book, chapter in
                     onSelect(book, chapter)
                     isGridPresented = false
                 }
-                .frame(minWidth: 360, minHeight: 460)
+                .modifier(PickerPopoverSizing())
             }
 
             // 버튼 사이 구분선(2026-10-02) — 책 | 검색 칸 | 이동.
@@ -214,11 +227,11 @@ struct BookChapterPicker: View {
             // `syncFreeTextToCurrentPositionIfNeeded()`가 현재 책/장 약어로 채우고, 타이핑 중에는 건드리지 않는다.
             // "장"은 `freeText`에 넣지 않고 옆의 고정 `Text("장")`으로 분리했다. 포커스 중에는
             // "요3:16" 같은 입력도 있어 이 라벨을 숨긴다.
-            HStack(spacing: 2) {
-                // 짧은 약어 입력이 성글게 보이도록 자간 2pt.
+            HStack(spacing: 0) {
+                // 자간(예전 2pt)을 없애고 가운데 정렬한다(2026-10-02). "장" 라벨은 입력칸 바로 오른쪽에 붙는다.
                 TextField("예:창세기1, 요3, 요3:16", text: $freeText)
                     .font(.title3)
-                    .tracking(2)
+                    .multilineTextAlignment(.center)
                     .lineLimit(1)
                     .textFieldStyle(.plain)
                     // `.plain` 스타일은 배경이 없어 상단 바 배경(테마색일 수 있음)이 비친다 — 글자색도 테마색 우선.
@@ -245,11 +258,11 @@ struct BookChapterPicker: View {
                         .fixedSize()
                 }
             }
-            // 구분선과 텍스트 사이 여백.
-            .padding(.horizontal, 8)
+            // 구분선과 텍스트 사이 여백(예전 8pt → 4pt).
+            .padding(.horizontal, 4)
             // `maxWidth: .infinity`를 쓰면 이 영역이 바깥 `.frame(maxWidth: .infinity)` 안에서 남는 폭을 모두
             // 흡수해 캡슐 전체가 화면 폭만큼 늘어난다. 고정 상한(90)은 최대 6자 안팎의 약어("삼상18", "요3:16")가
-            // `.title3` + `tracking(2)`에서도 잘리지 않는 값이다.
+            // `.title3`에서도 잘리지 않는 값이다(자간 2pt를 뺐고 좌우 여백도 줄어 이전보다 여유가 있다).
             .frame(minWidth: 50, maxWidth: 90, minHeight: 44)
 
             BibleCapsuleDivider()
@@ -336,6 +349,77 @@ struct BookChapterPicker: View {
 }
 
 
+/// 책/장 선택 팝오버 크기. 맥·아이패드는 최소 360×460을 보장한다(3열 이상 격자와 장 그리드가 잘리지 않도록).
+/// 아이폰은 팝오버가 화면 크기의 시트로 바뀌므로 고정 최소 높이를 주지 않는다 — 가로 모드(화면 높이 약 390pt)에서
+/// 최소 높이 460이 시트보다 커져 위쪽이 잘리고 스크롤도 안 되던 문제(2026-10-02)를 막기 위해서다.
+private struct PickerPopoverSizing: ViewModifier {
+    @ViewBuilder
+    func body(content: Content) -> some View {
+        #if os(iOS)
+        if UIDevice.current.userInterfaceIdiom == .phone {
+            content
+        } else {
+            content.frame(minWidth: 360, minHeight: 460)
+        }
+        #else
+        content.frame(minWidth: 360, minHeight: 460)
+        #endif
+    }
+}
+
+/// 책/장 선택 팝오버 글자 크기. 맥은 기본 텍스트 스타일이 작아(callout 12 / body 13) 두 단계씩 키운 고정 pt(15)를 쓰고
+/// (2026-10-02 요청), 아이패드·아이폰은 기존 텍스트 스타일을 그대로 쓴다.
+private enum PickerFonts {
+    /// 책/장 버튼 라벨 — 굵게.
+    static var cell: Font {
+        #if os(macOS)
+        return .system(size: 15, weight: .semibold)
+        #else
+        return .callout.weight(.semibold)
+        #endif
+    }
+    /// 검색 입력창.
+    static var field: Font {
+        #if os(macOS)
+        return .system(size: 15)
+        #else
+        return .body
+        #endif
+    }
+    /// 구약/신약/"장 선택" 구역 라벨.
+    static var section: Font {
+        #if os(macOS)
+        return .system(size: 15, weight: .semibold)
+        #else
+        return .system(size: 13, weight: .semibold)
+        #endif
+    }
+    /// 머리 제목(세리프) 크기.
+    static var title: CGFloat {
+        #if os(macOS)
+        return 20
+        #else
+        return 20
+        #endif
+    }
+    /// 머리 버튼(닫기/‹ 책 목록) 글자 크기.
+    static var headerButton: CGFloat {
+        #if os(macOS)
+        return 15
+        #else
+        return 15
+        #endif
+    }
+    /// 맥 검색란 높이(글자가 커져 34 → 38).
+    static var fieldHeight: CGFloat {
+        #if os(macOS)
+        return 38
+        #else
+        return 40
+        #endif
+    }
+}
+
 /// 책/장 선택 팝오버 공용 헤더(제목 + 닫기 버튼). `onBack`을 넘기면(장 그리드 단계) 뒤로가기 셰브런도 보인다.
 private struct PickerHeaderBar: View {
     let title: String
@@ -344,46 +428,41 @@ private struct PickerHeaderBar: View {
     @Environment(\.dismiss) private var dismiss
 
     var body: some View {
-        HStack(spacing: 8) {
+        headerBody
+    }
+
+    /// 플랫폼별 규격 — 맥은 성경 조회 막대 규격(32pt), 아이패드·아이폰은 터치용(40pt). 제목·버튼 글자는 `PickerFonts` 참고.
+    private var headerButtonStyle: BibleBarButtonStyle {
+        #if os(iOS)
+        return BibleBarButtonStyle(height: 40, cornerRadius: 10, fontSize: 15)
+        #else
+        return BibleBarButtonStyle(fontSize: PickerFonts.headerButton)
+        #endif
+    }
+
+    private static var titleSize: CGFloat { PickerFonts.title }
+
+    /// 구절 레이어(`VerseZoomView`/`OriginalTextInfoView`)와 같은 머리 부품을 쓴다(2026-10-02 구절 레이어 통일안).
+    /// 책 선택 단계는 [닫기], 장 선택 단계는 [‹ 책 목록]이 왼쪽 버튼이다. 아래에 글자색 14% 선.
+    private var headerBody: some View {
+        let textColor = UserSettingsStore.shared.bibleTextColor ?? Color.primary
+        return VerseLayerHeader(title: title, titleSize: Self.titleSize) {
             if let onBack {
-                // 아이콘 크기는 그대로 두고 보이는 클릭 영역을 키운다(macOS는 조준해서 클릭하므로 투명
-                // 탭 영역만으론 부족). `bookCircleButton`/`chapterButton`과 같은 강조색 12% 배경 + 35% 테두리,
-                // 탭 영역은 HIG 최소치 44×44pt.
                 Button(action: onBack) {
-                    Image(systemName: "chevron.left")
-                        .font(.body.weight(.semibold))
-                        .foregroundStyle(Color("AccentColor"))
-                        .frame(width: 32, height: 32)
-                        .background(Circle().fill(Color("AccentColor").opacity(0.12)))
-                        .overlay(Circle().stroke(Color("AccentColor").opacity(0.35), lineWidth: 1))
+                    Label("책 목록", systemImage: "chevron.left")
                 }
-                .buttonStyle(.plain)
-                .frame(width: 44, height: 44)
-                .contentShape(Rectangle())
-                .accessibilityLabel("뒤로")
+                .buttonStyle(headerButtonStyle)
+                .accessibilityLabel("책 목록으로 돌아가기")
+            } else {
+                Button("닫기") { dismiss() }
+                    .buttonStyle(headerButtonStyle)
+                    .keyboardShortcut(.cancelAction)
             }
-            Text(title)
-                .font(.headline)
-                .lineLimit(1)
-            Spacer()
-            // 탭 영역만 44×44pt로 넓힌다(뒤로가기 버튼과 동일).
-            Button {
-                dismiss()
-            } label: {
-                Image(systemName: "xmark.circle.fill")
-                    .font(.title3)
-                    .symbolRenderingMode(.hierarchical)
-                    .foregroundStyle(.secondary)
-            }
-            .buttonStyle(.plain)
-            .frame(width: 44, height: 44)
-            .contentShape(Rectangle())
-            .accessibilityLabel("닫기")
         }
-        .padding(.horizontal, 10)
-        // 위쪽 여백을 더 준다(아래는 `Divider()`가 바로 이어짐). 좌우는 44pt 탭 영역만큼 버튼이 안쪽으로 들어와 보이지 않게 10.
-        .padding(.top, 16)
-        .padding(.bottom, 10)
+        .padding(.bottom, 4)
+        .overlay(alignment: .bottom) {
+            Rectangle().fill(textColor.opacity(0.14)).frame(height: 1)
+        }
     }
 }
 
@@ -396,10 +475,17 @@ private struct BookGridPicker: View {
 
     @State private var pendingBook: Book?
     @State private var searchText: String = ""
+    private static var searchFieldHeight: CGFloat { PickerFonts.fieldHeight }
+    /// 지금 화면에 켜 둔 책/장 — 책·장 버튼 중 현재 위치를 강조색으로 채워 보여 준다.
+    private let currentBook: Book?
+    private let currentChapter: Int?
 
     /// `initialBook`을 넘기면 책 목록을 건너뛰고 그 책의 장 그리드로 바로 시작한다. nil이면 책 목록부터.
-    init(books: [Book], initialBook: Book? = nil, onSelect: @escaping (Book, Int) -> Void) {
+    init(books: [Book], initialBook: Book? = nil, currentBook: Book? = nil, currentChapter: Int? = nil,
+         onSelect: @escaping (Book, Int) -> Void) {
         self.books = books
+        self.currentBook = currentBook
+        self.currentChapter = currentChapter
         self.onSelect = onSelect
         _pendingBook = State(initialValue: initialBook)
     }
@@ -425,7 +511,10 @@ private struct BookGridPicker: View {
         // (배경을 지정하지 않으면 시스템 기본 배경이 드러난다).
         Group {
             if let pendingBook {
-                ChapterGrid(book: pendingBook) { chapter in
+                ChapterGrid(
+                    book: pendingBook,
+                    currentChapter: pendingBook.id == currentBook?.id ? currentChapter : nil
+                ) { chapter in
                     onSelect(pendingBook, chapter)
                 } onBack: {
                     self.pendingBook = nil
@@ -433,7 +522,6 @@ private struct BookGridPicker: View {
             } else {
                 VStack(alignment: .leading, spacing: 0) {
                 PickerHeaderBar(title: "책 선택")
-                Divider()
                 VStack(spacing: 8) {
                     // 연구문서 검색란(`DocumentsHomeView.searchAndFilterBar`)과 같은 모양(돋보기 + `.plain` TextField + 지우기 버튼 + 옅은 채움/테두리).
                     HStack(spacing: 6) {
@@ -441,7 +529,7 @@ private struct BookGridPicker: View {
                             .foregroundStyle(.secondary)
                         TextField("책 이름 검색 (예: 요한, ㅇㅎ)", text: $searchText)
                             .textFieldStyle(.plain)
-                            .font(.body)
+                            .font(PickerFonts.field)
                         if !searchText.isEmpty {
                             Button {
                                 searchText = ""
@@ -452,11 +540,13 @@ private struct BookGridPicker: View {
                             .buttonStyle(.plain)
                         }
                     }
-                    .padding(8)
-                    .background(RoundedRectangle(cornerRadius: 8).fill(Color.secondary.opacity(0.08)))
-                    .overlay(RoundedRectangle(cornerRadius: 8).stroke(Color.secondary.opacity(0.2), lineWidth: 1))
+                    // 입력창: 높이 iOS 40 / 맥 34, 모서리 10, 글자색 5% 채움 + 24% 테두리(구절 레이어 통일안, 맥 포함).
+                    .padding(.horizontal, 12)
+                    .frame(height: Self.searchFieldHeight)
+                    .background(RoundedRectangle(cornerRadius: 10).fill((settings.bibleTextColor ?? Color.primary).opacity(0.05)))
+                    .overlay(RoundedRectangle(cornerRadius: 10).stroke((settings.bibleTextColor ?? Color.primary).opacity(0.24), lineWidth: 1))
                     .padding(.horizontal)
-                    .padding(.top, 8)
+                    .padding(.top, 12)
 
                     ScrollView {
                         VStack(alignment: .leading, spacing: 20) {
@@ -480,8 +570,7 @@ private struct BookGridPicker: View {
         // 통째로 숨긴다 — 빈 헤더만 남아 있으면 오히려 혼란스럽다.
         if !books.isEmpty {
             VStack(alignment: .leading, spacing: 10) {
-                Text(title)
-                    .font(.headline)
+                PickerSectionLabel(title: title)
                 LazyVGrid(columns: Self.columns, spacing: 10) {
                     ForEach(books) { book in
                         bookCircleButton(book)
@@ -491,29 +580,75 @@ private struct BookGridPicker: View {
         }
     }
 
-    /// 약어 원형 버튼. 텍스트는 강조색 굵게로 원 배경/테두리와 한 벌로 보이게 한다(`ChapterGrid.chapterButton`도 동일).
+    /// 약어 버튼. 맥은 강조색 원형(기존 그대로), iOS는 52×44 라운드 사각형 — 글자색 라벨, 현재 책은 강조색으로 채운다.
+    /// (`ChapterGrid.chapterButton`도 같은 색 언어.)
+    @ViewBuilder
     private func bookCircleButton(_ book: Book) -> some View {
+        let isCurrent = book.id == currentBook?.id
         Button {
             pendingBook = book
         } label: {
-            // 2글자 약어도 `minimumScaleFactor`로 원(52pt) 안에 들어간다.
+            // 2글자 약어도 `minimumScaleFactor`로 52pt 안에 들어간다.
             Text(book.abbreviation.first ?? book.nameKo)
-                .font(.title3.weight(.bold))
-                .foregroundStyle(Color("AccentColor"))
+                .font(PickerFonts.cell)
                 .lineLimit(1)
                 .minimumScaleFactor(0.5)
-                .padding(4)
-                .frame(width: 52, height: 52)
-                .background(Circle().fill(Color("AccentColor").opacity(0.12)))
-                .overlay(Circle().stroke(Color("AccentColor").opacity(0.35), lineWidth: 1))
+                .padding(.horizontal, 4)
+                .frame(width: 52, height: 44)
+                .modifier(PickerCellStyle(isCurrent: isCurrent))
         }
         .buttonStyle(.plain)
         .contentShape(Rectangle())
+        .accessibilityLabel("\(book.nameKo)\(isCurrent ? ", 현재 책" : "")")
+    }
+}
+
+/// 책/장 버튼 공통 모양. 일반: 글자색 라벨 + 글자색 5% 채움 + 24% 테두리 / 현재: 강조색 채움 + 배경색 라벨.
+private struct PickerCellStyle: ViewModifier {
+    let isCurrent: Bool
+
+    /// 테마 배경이 없을 때 현재 항목 라벨(강조색 위 글자)에 쓸 시스템 배경색.
+    private static var fallbackBackground: Color {
+        #if os(iOS)
+        return Color(uiColor: .systemBackground)
+        #else
+        return Color(nsColor: .windowBackgroundColor)
+        #endif
+    }
+
+    func body(content: Content) -> some View {
+        let settings = UserSettingsStore.shared
+        let textColor = settings.bibleTextColor ?? Color.primary
+        let onAccent = settings.bibleBackgroundColor ?? Self.fallbackBackground
+        content
+            .foregroundStyle(isCurrent ? onAccent : textColor)
+            .background(
+                RoundedRectangle(cornerRadius: 10)
+                    .fill(isCurrent ? Color("AccentColor") : textColor.opacity(0.05))
+            )
+            .overlay(
+                RoundedRectangle(cornerRadius: 10)
+                    .stroke(isCurrent ? Color("AccentColor") : textColor.opacity(0.24), lineWidth: 1)
+            )
+    }
+}
+
+/// 구약/신약/장 선택 같은 구역 라벨— 글자색 60%의 작은 굵은 글씨.
+private struct PickerSectionLabel: View {
+    let title: String
+
+    var body: some View {
+        Text(title)
+            .font(PickerFonts.section)
+            .foregroundStyle((UserSettingsStore.shared.bibleTextColor ?? Color.primary).opacity(0.6))
+            .accessibilityAddTraits(.isHeader)
     }
 }
 
 private struct ChapterGrid: View {
     let book: Book
+    /// 현재 보고 있는 장(같은 책일 때만 전달). 강조색으로 채워 보여 준다.
+    var currentChapter: Int? = nil
     var onSelect: (Int) -> Void
     var onBack: () -> Void
 
@@ -524,10 +659,15 @@ private struct ChapterGrid: View {
     /// 팝오버 높이 추정치. 장이 많은 책(창세기 50장 등)은 호출부의 고정 minHeight 460으로 부족해
     /// 5열 기준 필요 높이를 계산해 `.frame(minHeight:)`로 얹는다(상한 560, 그 이상은 스크롤). 460과는 큰 쪽이 적용된다.
     private var estimatedGridHeight: CGFloat {
-        let headerHeight: CGFloat = 54
+        // 아이폰은 시트 높이를 따르므로(가로 모드에서 화면보다 커지면 잘림) 최소 높이를 주지 않는다. 장이 많으면 `ScrollView`가 맡는다.
+        #if os(iOS)
+        if UIDevice.current.userInterfaceIdiom == .phone { return 0 }
+        #endif
+        // 머리(14 + 40 + 8 + 4) + 선 1 + 구역 라벨 줄(약 28).
+        let headerHeight: CGFloat = 66
         let dividerHeight: CGFloat = 1
         let rowHeight: CGFloat = 54
-        let outerPadding: CGFloat = 32
+        let outerPadding: CGFloat = 32 + 28
         // 열 개수는 팝오버 최소 폭 360 기준(`BookGridPicker.columns`와 같은 계산)으로 5열 추정. 더 넓게 뜨면
         // 실제 줄 수는 줄어 추정치가 여유 쪽으로만 어긋난다.
         let columnsEstimate = 5
@@ -538,8 +678,8 @@ private struct ChapterGrid: View {
 
     var body: some View {
         VStack(alignment: .leading, spacing: 0) {
-            PickerHeaderBar(title: "\(book.abbreviation.first ?? book.nameKo) — 장 선택", onBack: onBack)
-            Divider()
+            // iOS: 제목은 책 이름, "장 선택"은 아래 구역 라벨로 나눈다(구절 레이어 통일안). 머리 자체가 아래 선을 그린다.
+            PickerHeaderBar(title: book.nameKo, onBack: onBack)
 
             if book.chapterCount < 1 {
                 Text("\(book.nameKo)의 장 정보가 없습니다.")
@@ -547,9 +687,12 @@ private struct ChapterGrid: View {
                     .padding()
             } else {
                 ScrollView {
-                    LazyVGrid(columns: Self.columns, spacing: 10) {
-                        ForEach(1...book.chapterCount, id: \.self) { chapter in
-                            chapterButton(chapter)
+                    VStack(alignment: .leading, spacing: 10) {
+                        PickerSectionLabel(title: "장 선택")
+                        LazyVGrid(columns: Self.columns, spacing: 10) {
+                            ForEach(1...book.chapterCount, id: \.self) { chapter in
+                                chapterButton(chapter)
+                            }
                         }
                     }
                     .padding()
@@ -559,22 +702,24 @@ private struct ChapterGrid: View {
         .frame(minHeight: estimatedGridHeight)
     }
 
-    /// 고정 크기 라운드 사각형 버튼. `bookCircleButton`과 같은 색 언어(강조색 12% 배경 + 35% 테두리).
+    /// 고정 크기 라운드 사각형 버튼. 맥은 강조색 12% 배경 + 35% 테두리(기존 그대로),
+    /// iOS는 글자색 라벨 + 현재 장 강조색 채움(`PickerCellStyle`).
+    @ViewBuilder
     private func chapterButton(_ chapter: Int) -> some View {
+        let isCurrent = chapter == currentChapter
         Button {
             onSelect(chapter)
         } label: {
             Text("\(chapter)")
-                .font(.callout.weight(.semibold))
+                .font(PickerFonts.cell)
                 .monospacedDigit()
-                .foregroundStyle(Color("AccentColor"))
                 .lineLimit(1)
                 .minimumScaleFactor(0.7)
                 .frame(width: 52, height: 44)
-                .background(RoundedRectangle(cornerRadius: 10).fill(Color("AccentColor").opacity(0.12)))
-                .overlay(RoundedRectangle(cornerRadius: 10).stroke(Color("AccentColor").opacity(0.35), lineWidth: 1))
+                .modifier(PickerCellStyle(isCurrent: isCurrent))
         }
         .buttonStyle(.plain)
         .contentShape(Rectangle())
+        .accessibilityLabel("\(chapter)장\(isCurrent ? ", 현재 장" : "")")
     }
 }

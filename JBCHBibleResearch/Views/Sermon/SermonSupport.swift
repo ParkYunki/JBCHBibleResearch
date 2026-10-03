@@ -530,6 +530,8 @@ struct SermonSegmentedPill<Tag: Hashable>: View {
     let items: [Item]
     @Binding var selection: Tag
     var accent: Color
+    /// 글자 크기 — 기본은 기존 값(`SermonViewerView` 등 다른 화면 그대로). 내 설교 목록은 한 단계 크게 넘긴다.
+    var font: Font = .caption.weight(.bold)
 
     var body: some View {
         HStack(spacing: 2) {
@@ -543,13 +545,15 @@ struct SermonSegmentedPill<Tag: Hashable>: View {
                         }
                         Text(item.label)
                     }
-                    .font(.caption.weight(.bold))
+                    .font(font)
                     .padding(.horizontal, 12)
                     .padding(.vertical, 6)
                     .frame(maxWidth: .infinity)
                     .background(selection == item.tag ? accent : Color.clear)
                     .foregroundStyle(selection == item.tag ? Color.white : Color.primary)
                     .clipShape(Capsule())
+                    // 선택 안 된 세그먼트는 배경이 `Color.clear`라 .plain 버튼에서 글자 위만 눌린다 — 알약 전체를 누름 영역으로 둔다.
+                    .contentShape(Capsule())
                 }
                 .buttonStyle(.plain)
             }

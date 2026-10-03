@@ -39,6 +39,8 @@ struct SettingsView: View {
                 .tabItem { Label("개발자", systemImage: "hammer") }
             #endif
         }
+        // 상단 툴바(맥)/내비 바(iOS)를 테마 배경에 맞춘다. 맥 `Settings` Scene의 시스템 탭 막대가 이 설정을 따르는지는 빌드로 확인이 필요하다.
+        .settingsThemedBar()
         #if os(macOS)
         .frame(width: 560, height: 480)
         #endif
@@ -65,14 +67,10 @@ private struct GeneralSettingsGroup: View {
 
     var body: some View {
         VStack(spacing: 0) {
-            Picker("", selection: $selection) {
-                ForEach(Tab.allCases) { tab in
-                    Text(tab.title).tag(tab)
-                }
-            }
-            .pickerStyle(.segmented)
-            .labelsHidden()
-            .padding([.horizontal, .top])
+            // 시스템 세그먼트는 테마색을 못 입혀 성경 조회 막대와 같은 캡슐 탭(`SettingsCapsuleTabs`)으로 바꿨다.
+            SettingsCapsuleTabs(options: Tab.allCases.map { (value: $0, title: $0.title) }, selection: $selection)
+                .padding([.horizontal, .top])
+                .padding(.bottom, 4)
 
             Group {
                 switch selection {
@@ -85,6 +83,7 @@ private struct GeneralSettingsGroup: View {
                 }
             }
         }
+        .settingsThemedBackdrop()
     }
 }
 
@@ -107,19 +106,15 @@ private struct BibleSettingsGroup: View {
 
     var body: some View {
         VStack(spacing: 0) {
-            Picker("", selection: $selection) {
-                ForEach(Tab.allCases) { tab in
-                    Text(tab.title).tag(tab)
-                }
-            }
-            .pickerStyle(.segmented)
-            .labelsHidden()
-            .padding([.horizontal, .top])
+            // 시스템 세그먼트는 테마색을 못 입혀 성경 조회 막대와 같은 캡슐 탭(`SettingsCapsuleTabs`)으로 바꿨다.
+            SettingsCapsuleTabs(options: Tab.allCases.map { (value: $0, title: $0.title) }, selection: $selection)
+                .padding([.horizontal, .top])
+                .padding(.bottom, 4)
 
             Group {
                 switch selection {
                 case .translations:
-                    TranslationsSettingsTab()
+                    TranslationsSettingsView()
                 case .appearance:
                     AppearanceSettingsTab()
                 case .copyFormat:
@@ -128,6 +123,7 @@ private struct BibleSettingsGroup: View {
                 }
             }
         }
+        .settingsThemedBackdrop()
     }
 }
 
@@ -142,7 +138,7 @@ struct SettingsHostView: View {
     var body: some View {
         NavigationStack {
             SettingsView()
-                .navigationTitle("설정")
+                .settingsNavigationPage("설정")
                 .toolbar {
                     ToolbarItem(placement: .cancellationAction) {
                         Button("닫기") { dismiss() }
@@ -166,19 +162,13 @@ struct SettingsHomeView: View {
             Section {
                 NavigationLink {
                     GeneralSettingsTab()
-                        .navigationTitle("기본")
-                        #if os(iOS)
-                        .navigationBarTitleDisplayMode(.inline)
-                        #endif
+                        .settingsNavigationPage("기본")
                 } label: {
                     SettingsCategoryRow(title: "기본", systemImage: "gearshape.fill", tint: JBCHCategoryPalette.wood)
                 }
                 NavigationLink {
                     LicenseSettingsTab()
-                        .navigationTitle("라이센스")
-                        #if os(iOS)
-                        .navigationBarTitleDisplayMode(.inline)
-                        #endif
+                        .settingsNavigationPage("라이센스")
                 } label: {
                     SettingsCategoryRow(title: "라이센스", systemImage: "checkmark.seal.fill", tint: JBCHCategoryPalette.shelfSlate)
                 }
@@ -191,32 +181,24 @@ struct SettingsHomeView: View {
                     .font(.title3.bold())
                     .foregroundStyle(.secondary)
             }
+            .settingsRowBackground()
 
             Section {
                 NavigationLink {
-                    TranslationsManagementTab()
-                        .navigationTitle("번역본")
-                        #if os(iOS)
-                        .navigationBarTitleDisplayMode(.inline)
-                        #endif
+                    TranslationsSettingsView()
+                        .settingsNavigationPage("번역본")
                 } label: {
                     SettingsCategoryRow(title: "번역본", systemImage: "books.vertical.fill", tint: JBCHCategoryPalette.navy)
                 }
                 NavigationLink {
                     AppearanceSettingsTab()
-                        .navigationTitle("모양")
-                        #if os(iOS)
-                        .navigationBarTitleDisplayMode(.inline)
-                        #endif
+                        .settingsNavigationPage("모양")
                 } label: {
                     SettingsCategoryRow(title: "모양", systemImage: "paintpalette.fill", tint: JBCHCategoryPalette.gold)
                 }
                 NavigationLink {
                     BibleCopyFormatSettingsTab()
-                        .navigationTitle("복사 형식")
-                        #if os(iOS)
-                        .navigationBarTitleDisplayMode(.inline)
-                        #endif
+                        .settingsNavigationPage("복사 형식")
                 } label: {
                     SettingsCategoryRow(title: "복사 형식", systemImage: "doc.on.doc.fill", tint: JBCHCategoryPalette.wine)
                 }
@@ -226,27 +208,23 @@ struct SettingsHomeView: View {
                     .font(.title3.bold())
                     .foregroundStyle(.secondary)
             }
+            .settingsRowBackground()
 
             #if DEBUG
             Section {
                 NavigationLink {
                     DeveloperSettingsTab()
-                        .navigationTitle("개발자")
-                        #if os(iOS)
-                        .navigationBarTitleDisplayMode(.inline)
-                        #endif
+                        .settingsNavigationPage("개발자")
                 } label: {
                     SettingsCategoryRow(title: "개발자", systemImage: "hammer.fill", tint: Color(white: 0.35))
                 }
             }
+            .settingsRowBackground()
             #endif
         }
-        .navigationTitle("설정")
-        // 기본 표시 모드는 뒤로가기 버튼 아래에 큰 제목을 별도 줄로 그려 버튼 옆 공간이
-        // 낭비되므로 `.inline`으로 한 줄에 합친다(macOS엔 이 모디파이어가 없어 `#if os(iOS)`).
-        #if os(iOS)
-        .navigationBarTitleDisplayMode(.inline)
-        #endif
+        .settingsThemedForm()
+        // 제목은 인라인(기본 큰 제목은 뒤로가기 버튼 아래 별도 줄을 차지해 공간이 낭비된다)이며 성곡 세리프로 그린다 — `settingsNavigationPage` 참고.
+        .settingsNavigationPage("설정")
         // `SettingsHostView`와 같은 이유 — NavigationLink push로 열리므로 시스템 기본 글꼴로 되돌린다.
         .font(.body)
     }
@@ -298,20 +276,22 @@ private struct GeneralSettingsTab: View {
             } header: {
                 Label("앱 정보", systemImage: "info.circle")
             }
+            .settingsRowBackground()
 
             Section {
                 Toggle("시작 시 마지막으로 보던 화면 열기", isOn: $settings.openLastScreenOnLaunch)
             } header: {
                 Label("시작 옵션", systemImage: "power")
             }
+            .settingsRowBackground()
 
-            // "기본 성경 번역본" 피커는 두지 않는다 — 성경 조회 기본값은 `TranslationsSettingsTab`의
-            // "성경 조회 기본 표시" 목록(순서 포함)이 전담한다. `UserSettingsStore.defaultTranslationCode`와
-            // 그 값을 읽는 폴백 경로(`BibleReadingViewModel.loadAvailableTranslations`/
-            // `TranslationsSettingsTab.seedDefaultDisplayedCodesIfNeeded`)는 표시 목록이 아직 비어 있는
-            // 경우를 위한 안전한 폴백으로 남겨 뒀다.
+            // "기본 성경 번역본" 피커는 두지 않는다 — 성경 조회 기본값은 `TranslationsSettingsView`의
+            // 통합 번역본 목록(사용 중 + 순서)이 전담한다. `UserSettingsStore.defaultTranslationCode`와
+            // 그 값을 읽는 폴백 경로(`ActiveTranslationResolver`/`TranslationsSettingsView.seedActiveTranslationsIfNeeded`)는
+            // 사용 중 목록이 아직 비어 있는 경우를 위한 안전한 폴백으로 남겨 뒀다.
         }
         .formStyle(.grouped)
+        .settingsThemedForm()
     }
 
     private var versionString: String {
@@ -325,62 +305,87 @@ private struct GeneralSettingsTab: View {
 
 // MARK: - 번역본
 
-private struct TranslationsSettingsTab: View {
+/// 설정 > 번역본 — "설치된 번역본"(`isEnabled` 스위치)과 "성경 조회 기본 표시"(눈 아이콘 + 순서)를 한 목록으로 통합했다 (2026-10-02 목업 채택).
+///
+/// - 스위치 하나가 "사용"이다. 켜면 목록 맨 아래 순번으로 들어가고 꺼면 "꺼짐" 구역으로 내려간다. 사용 중인 번역본에만 순번 배지와
+///   위/아래 버튼이 있고 1번이 기본값이다. 이 순서가 성경 조회 열 순서다. 최대 3개(`ActiveTranslationResolver.maxCount`).
+/// - 스위치는 "이미 추가된 번역본을 이 기기에서 보이게 할지"만 정한다(`UserSettingsStore.defaultDisplayedTranslationCodes`, 기기별).
+///   번역본 추가·삭제와 파일 동기화(CloudKit)에는 관여하지 않으므로, 다른 기기에서 추가한 번역본도 자동으로 도착해 여기 "꺼짐"에 나타난다.
+///   `TranslationRegistry.isEnabled`는 쓰지 않는다(동기화되는 값이라 기기마다 사용 목록이 다를 때 서로를 꺼 버리기 때문). 다만 예전에 꺼 둔
+///   번역본을 다시 켤 때는 값을 맞춰 두려고 true로 되돌린다.
+/// - "자세히"(⋯)에서 표시 이름과 책이름표 언어를 고친다(macOS·iPad·iPhone 공통). 라이선스·동기화 상태 줄은 표시하지 않는다.
+/// - 이름·책이름표는 SwiftData `@Model`이 자동 관찰되므로 타이핑마다 `reload()`를 부르지 않는다.
+private struct TranslationsSettingsView: View {
     @Environment(\.modelContext) private var modelContext
     @State private var translations: [TranslationRegistry] = []
     @State private var settings = UserSettingsStore.shared
-
     @State private var isImportSheetPresented = false
+    /// "자세히"를 펼친 번역본.
+    @State private var expandedID: UUID?
+    /// 최대 3개 초과/마지막 하나 끄기 같은 거절 사유 안내(다음 조작 때 지운다).
+    @State private var notice: String?
+    @Environment(\.self) private var environment
+    @Environment(\.colorScheme) private var colorScheme
+
+    /// 강조색(순번·기본 배지) — 금색 AccentColor는 밝은 배경에서 대비가 낮아 성경 조회 막대의 강조색을 쓴다.
+    private var palette: BibleBarPalette { BibleBarPalette(environment: environment, colorScheme: colorScheme) }
+    /// 삭제 아이콘·안내문 색(와인).
+    private var destructiveColor: Color {
+        SettingsThemeColors.destructive(isDarkBackground: SettingsThemeColors.isDarkBackground(environment: environment, colorScheme: colorScheme))
+    }
+
+    /// 사용 중인 번역본(저장된 목록의 순서). 아직 동기화로 도착하지 않아 레코드가 없는 코드는 건너뛰고(목록에서 지우지는 않는다)
+    /// 중복 코드는 한 번만 센다. 판정 규칙은 `ActiveTranslationResolver`와 같다(폴백 제외).
+    private var activeTranslations: [TranslationRegistry] {
+        let byCode = Dictionary(translations.map { ($0.code, $0) }, uniquingKeysWith: { first, _ in first })
+        var seen = Set<String>()
+        var result: [TranslationRegistry] = []
+        for code in settings.defaultDisplayedTranslationCodes where seen.insert(code).inserted {
+            if let registry = byCode[code] { result.append(registry) }
+        }
+        return Array(result.prefix(ActiveTranslationResolver.maxCount))
+    }
+
+    private var inactiveTranslations: [TranslationRegistry] {
+        let activeIDs = Set(activeTranslations.map(\.id))
+        return translations.filter { !activeIDs.contains($0.id) }
+    }
 
     var body: some View {
+        let active = activeTranslations
+        let inactive = inactiveTranslations
         Form {
             Section {
-                ForEach(translations, id: \.id) { translation in
-                    HStack {
-                        VStack(alignment: .leading) {
-                            Text(translation.displayName)
-                            Text(statusText(for: translation))
-                                .font(.caption2)
-                                .foregroundStyle(.secondary)
-                        }
-                        Spacer()
-                        // 활성화 토글 — 꺼진 번역본은 검색과 성경 조회 표시에서 제외된다. 삭제와 달리 번들
-                        // 번역본도 끌 수 있다. 끄면 `setEnabled(_:for:)`가 "성경 조회 기본 표시" 목록에서도 뺀다.
-                        Toggle("", isOn: Binding(
-                            get: { translation.isEnabled },
-                            set: { setEnabled($0, for: translation) }
-                        ))
-                        .labelsHidden()
-                        .toggleStyle(.switch)
-                        if !translation.isBundled {
-                            Button(role: .destructive) {
-                                delete(translation)
-                            } label: {
-                                Image(systemName: "trash")
-                            }
-                            .buttonStyle(.borderless)
-                        }
+                ForEach(active, id: \.id) { translation in
+                    translationRow(translation, activeIndex: active.firstIndex { $0.id == translation.id }, activeCount: active.count)
+                }
+                if let notice {
+                    Text(notice)
+                        .font(.caption)
+                        .foregroundStyle(destructiveColor)
+                }
+            } header: {
+                HStack {
+                    Label("번역본", systemImage: "text.book.closed")
+                    Spacer()
+                    Text("\(active.count)/\(ActiveTranslationResolver.maxCount) 사용 중")
+                        .font(.caption)
+                        .foregroundStyle(.secondary)
+                }
+            } footer: {
+                Text("켜면 성경 조회와 검색에 쓰입니다. 최대 3개까지 사용할 수 있고, 위에서부터 열 순서이며 맨 위가 기본값입니다. 번역본 추가·삭제는 모든 기기에 자동으로 동기화되고, 켜고 끄는 것은 이 기기에서만 적용됩니다.")
+            }
+            .settingsRowBackground()
+
+            if !inactive.isEmpty {
+                Section {
+                    ForEach(inactive, id: \.id) { translation in
+                        translationRow(translation, activeIndex: nil, activeCount: active.count)
                     }
+                } header: {
+                    Text("꺼짐")
                 }
-            } header: {
-                Label("설치된 번역본", systemImage: "text.book.closed")
-            }
-
-            // "성경 조회 기본 표시" — `UserSettingsStore.defaultDisplayedTranslationCodes`에 최대 3개를
-            // 순서대로 저장하며, 맨 위가 기본값이다. 이 배열 순서가 그대로 성경 조회 컬럼 순서가 된다
-            // (`BibleReadingViewModel.loadAvailableTranslations()`가 배열 순서를 따른다).
-            // 토글이 켜져 있음 = 실제로 표시됨이 되도록 최초 진입 시 `seedDefaultDisplayedCodesIfNeeded()`가
-            // 목록을 미리 채운다.
-            // `Form` 안에서는 `.onMove`/`.onDelete`의 드래그·스와이프 UI가 나타나지 않으므로(특히 macOS
-            // `.formStyle(.grouped)`), 버튼 탭으로 표시/숨김·순서 변경을 구현했다.
-            Section {
-                ForEach(allTranslationsOrderedForDisplaySettings, id: \.id) { translation in
-                    translationDisplayRow(translation)
-                }
-            } header: {
-                Label("성경 조회 기본 표시", systemImage: "eye")
-            } footer: {
-                Text("최대 3개까지 표시할 수 있습니다. 맨 위가 기본값입니다. 눈 아이콘으로 표시 여부를, 위/아래 화살표로 순서를 바꿀 수 있습니다.")
+                .settingsRowBackground()
             }
 
             Section {
@@ -389,271 +394,133 @@ private struct TranslationsSettingsTab: View {
                 } label: {
                     Label("번역본 추가...", systemImage: "plus.circle")
                 }
-            } footer: {
-
-                Text("sqlite, bdb 파일을 업로드할 수 있습니다.\n\n이 앱은 성경 번역본을 제공하거나 배포하지 않습니다. 사용자가 적법하게 보유하거나 사용할 권한이 있는 파일만 가져와주십시오. 가져온 데이터는 이 기기에만 저장되며, 다른 사용자와 공유되지 않습니다.")
-            }
-        }
-        .formStyle(.grouped)
-        .onAppear {
-            reload()
-            seedDefaultDisplayedCodesIfNeeded()
-        }
-        .sheet(isPresented: $isImportSheetPresented) {
-            TranslationImportSheet { _ in reload() }
-        }
-    }
-
-    /// 표시 목록이 비어 있는 최초 진입 시, `BibleReadingViewModel`의 폴백 규칙(등록 순 +
-    /// `defaultTranslationCode` 맨 앞, 최대 3개)과 같은 순서로 목록을 미리 저장해
-    /// 토글 상태와 실제 표시 상태가 일치하게 한다.
-    private func seedDefaultDisplayedCodesIfNeeded() {
-        guard settings.defaultDisplayedTranslationCodes.isEmpty, !translations.isEmpty else { return }
-        var ordered = translations
-        if let preferredCode = settings.defaultTranslationCode,
-           let index = ordered.firstIndex(where: { $0.code == preferredCode }) {
-            let preferred = ordered.remove(at: index)
-            ordered.insert(preferred, at: 0)
-        }
-        settings.defaultDisplayedTranslationCodes = Array(ordered.prefix(3).map(\.code))
-    }
-
-    private func statusText(for translation: TranslationRegistry) -> String {
-        var parts = [translation.isBundled ? "번들" : "사용자 추가", translation.licenseType ?? "라이선스 미상"]
-        if !translation.isBundled {
-            parts.append(TranslationFileMaterializer.syncStatus(for: translation).label)
-        }
-        return parts.joined(separator: " · ")
-    }
-
-    /// 활성화된 번역본만 표시 후보로 삼는다 — 꺼둔 번역본은 먼저 다시 켜야 고를 수 있다.
-    /// (아래 `orderedDisplayedTranslations`는 저장된 코드 순서대로 매핑하며, 삭제돼 없는 코드는
-    /// `compactMap`이 건너뛴다.)
-    private var enabledTranslations: [TranslationRegistry] {
-        translations.filter(\.isEnabled)
-    }
-
-    private var orderedDisplayedTranslations: [TranslationRegistry] {
-        let byCode = Dictionary(uniqueKeysWithValues: enabledTranslations.map { ($0.code, $0) })
-        return settings.defaultDisplayedTranslationCodes.compactMap { byCode[$0] }
-    }
-
-    /// 아직 표시 목록에 없는 번역본 — 아래 통합 목록의 뒤쪽 절반에 쓴다.
-    private var notYetDisplayedTranslations: [TranslationRegistry] {
-        let shown = Set(settings.defaultDisplayedTranslationCodes)
-        return enabledTranslations.filter { !shown.contains($0.code) }
-    }
-
-    /// 표시 중인 번역본(저장된 순서대로) 뒤에 표시하지 않는 번역본을 이어 붙인 통합 목록.
-    private var allTranslationsOrderedForDisplaySettings: [TranslationRegistry] {
-        orderedDisplayedTranslations + notYetDisplayedTranslations
-    }
-
-    /// 표시 중인 번역본은 순서 배지("기본")와 위/아래 화살표(인접 항목 `swapAt`)를,
-    /// 표시하지 않는 번역본은 "표시" 눈 아이콘 버튼만 보여준다.
-    @ViewBuilder
-    private func translationDisplayRow(_ translation: TranslationRegistry) -> some View {
-        let displayedIndex = settings.defaultDisplayedTranslationCodes.firstIndex(of: translation.code)
-        HStack {
-            Text(translation.displayName)
-            if displayedIndex == 0 {
-                // 맨 위 항목이 기본값임을 나타내는 배지.
-                Text("기본")
-                    .font(.caption2)
-                    .padding(.horizontal, 6)
-                    .padding(.vertical, 2)
-                    .background(Capsule().fill(Color("AccentColor").opacity(0.15)))
-                    .foregroundStyle(Color("AccentColor"))
-            }
-            Spacer()
-            if let index = displayedIndex {
-                Button {
-                    moveDisplayedTranslation(from: index, to: index - 1)
-                } label: {
-                    Image(systemName: "chevron.up")
-                }
-                .buttonStyle(.borderless)
-                .disabled(index == 0)
-
-                Button {
-                    moveDisplayedTranslation(from: index, to: index + 1)
-                } label: {
-                    Image(systemName: "chevron.down")
-                }
-                .buttonStyle(.borderless)
-                .disabled(index == settings.defaultDisplayedTranslationCodes.count - 1)
-
-                Button {
-                    removeDisplayedTranslation(code: translation.code)
-                } label: {
-                    Image(systemName: "eye.slash")
-                }
-                .buttonStyle(.borderless)
-            } else {
-                Button {
-                    addDisplayedTranslation(translation)
-                } label: {
-                    Image(systemName: "eye")
-                }
-                .buttonStyle(.borderless)
-                // 저장 배열에는 삭제된 번역본 코드가 남아 있을 수 있어, 배열 길이 대신 실제로 유효한
-                // `orderedDisplayedTranslations.count`로 3개 제한을 판정한다.
-                .disabled(orderedDisplayedTranslations.count >= 3)
-            }
-        }
-    }
-
-    /// 표시 중인 두 인접 항목을 맞바꾼다. 인덱스가 범위를 벗어나면 아무것도 하지 않는다.
-    private func moveDisplayedTranslation(from index: Int, to newIndex: Int) {
-        var codes = settings.defaultDisplayedTranslationCodes
-        guard codes.indices.contains(index), codes.indices.contains(newIndex) else { return }
-        codes.swapAt(index, newIndex)
-        settings.defaultDisplayedTranslationCodes = codes
-    }
-
-    private func removeDisplayedTranslation(code: String) {
-        settings.defaultDisplayedTranslationCodes.removeAll { $0 == code }
-    }
-
-    /// 최대 3개까지만 추가한다(호출부 `.disabled`와 별개로 방어적으로 다시 확인).
-    private func addDisplayedTranslation(_ translation: TranslationRegistry) {
-        guard settings.defaultDisplayedTranslationCodes.count < 3,
-              !settings.defaultDisplayedTranslationCodes.contains(translation.code) else { return }
-        settings.defaultDisplayedTranslationCodes.append(translation.code)
-    }
-
-    private func reload() {
-        translations = (try? modelContext.fetch(FetchDescriptor<TranslationRegistry>(sortBy: [SortDescriptor(\.addedAt)]))) ?? []
-    }
-
-    /// "설치된 번역본" 토글의 구현. 끌 때 "성경 조회 기본 표시" 목록에서도 함께 빼며,
-    /// 다시 켤 때 표시 목록에 자동으로 되돌리지는 않는다(사용자가 눈 아이콘으로 직접 고른다).
-    private func setEnabled(_ isEnabled: Bool, for translation: TranslationRegistry) {
-        translation.isEnabled = isEnabled
-        if !isEnabled {
-            removeDisplayedTranslation(code: translation.code)
-        }
-        try? modelContext.save()
-    }
-
-    private func delete(_ translation: TranslationRegistry) {
-        // 로컬 캐시 파일도 함께 정리한다(best-effort). `TranslationsManagementTab.delete(_:)`와
-        // 삭제 경로를 같게 유지해야 한쪽만 정리돼 디스크에 고아 파일이 남지 않는다.
-        TranslationFileMaterializer.removeLocalCopy(for: translation)
-        // 삭제된 번역본 코드가 "성경 조회 기본 표시" 목록에 남으면 "3개가 찼다"는 판정이
-        // 계속되므로 함께 뺀다(이미 없는 코드여도 `removeAll`은 무동작).
-        removeDisplayedTranslation(code: translation.code)
-        modelContext.delete(translation)
-        try? modelContext.save()
-        reload()
-    }
-}
-
-/// "더보기 > 설정 > 성경 > 번역본" 화면 — "성경 조회 기본 표시"(순서/노출), "번역본 추가...",
-/// 표시 이름·라이선스 인라인 편집, 책이름표 언어 피커, 삭제를 한 화면에 통합했다.
-/// `updateDisplayName`/`updateLicenseType`은 SwiftData `@Model`이 자동 관찰되므로
-/// 타이핑마다 `reload()`를 부르지 않는다.
-///
-/// 삭제는 스와이프 대신, 번들이 아닌 행마다 항상 보이는 휴지통 버튼을 쓴다.
-///
-/// 동기화 상태는 부작용 없는 `TranslationFileMaterializer.syncStatus(for:)`만 표시한다
-/// (화면을 열 때마다 `ensureMaterialized`로 파일 쓰기를 시도하지 않는다).
-///
-/// macOS `Settings` Scene/iPadOS `.sheet`는 편집 기능이 없는 `TranslationsSettingsTab`을 그대로 쓴다.
-private struct TranslationsManagementTab: View {
-    @Environment(\.modelContext) private var modelContext
-    @State private var translations: [TranslationRegistry] = []
-    @State private var settings = UserSettingsStore.shared
-    @State private var isImportSheetPresented = false
-
-    var body: some View {
-        Form {
-            Section {
-                ForEach(allTranslationsOrderedForDisplaySettings, id: \.id) { translation in
-                    translationDisplayRow(translation)
-                }
-            } header: {
-                Label("성경 조회 기본 표시", systemImage: "eye")
-            } footer: {
-                Text("최대 3개까지 표시할 수 있습니다. 맨 위가 기본값입니다. 눈 아이콘으로 표시 여부를, 위/아래 화살표로 순서를 바꿀 수 있습니다.")
-            }
-
-            Section {
-                ForEach(translations, id: \.id) { translation in
-                    translationEditRow(translation)
-                }
-            } header: {
-                Label("설치된 번역본", systemImage: "text.book.closed")
-            }
-
-            Section {
-                Button {
-                    isImportSheetPresented = true
-                } label: {
-                    Label("번역본 추가...", systemImage: "plus.circle")
-                }
+                .buttonStyle(BibleBarButtonStyle())
             } footer: {
                 Text("sqlite, bdb 파일을 업로드할 수 있습니다.\n\n이 앱은 성경 번역본을 제공하거나 배포하지 않습니다. 사용자가 적법하게 보유하거나 사용할 권한이 있는 파일만 가져와주십시오. 가져온 데이터는 이 기기에만 저장되며, 다른 사용자와 공유되지 않습니다.")
             }
+            .settingsRowBackground()
         }
         .formStyle(.grouped)
+        .settingsThemedForm()
         .onAppear {
             reload()
-            seedDefaultDisplayedCodesIfNeeded()
+            seedActiveTranslationsIfNeeded()
         }
         .sheet(isPresented: $isImportSheetPresented) {
-            TranslationImportSheet { _ in reload() }
+            TranslationImportSheet { imported in
+                reload()
+                // 방금 직접 추가한 번역본은 빈자리가 있으면 바로 사용 중으로 둔다. 3개가 차 있으면 꺼진 채로 추가하고 이유를 알린다.
+                if activeTranslations.count < ActiveTranslationResolver.maxCount {
+                    appendActive(imported)
+                } else {
+                    notice = "3개가 모두 사용 중이라 \(imported.displayName)은(는) 꺼진 상태로 추가되었습니다. 켜려면 먼저 다른 번역본을 꺼 주세요."
+                }
+            }
         }
     }
 
-    /// 표시 이름/라이선스 인라인 편집 + 책이름표 언어 피커 + (번들이 아니면) 삭제 버튼.
-    @ViewBuilder
-    private func translationEditRow(_ translation: TranslationRegistry) -> some View {
-        VStack(alignment: .leading, spacing: 6) {
-            HStack {
-                TextField("표시 이름", text: Binding(
-                    get: { translation.displayName },
-                    set: { updateDisplayName($0, for: translation) }
-                ))
-                .font(.headline)
-                #if os(iOS)
-                .textFieldStyle(.roundedBorder)
-                #else
-                .textFieldStyle(.plain)
-                #endif
+    // MARK: 행
 
-                // 활성화 토글 — `TranslationsSettingsTab`의 토글과 동일하게 동작한다(진입 경로가 달라 양쪽에 둔다).
+    @ViewBuilder
+    private func translationRow(_ translation: TranslationRegistry, activeIndex: Int?, activeCount: Int) -> some View {
+        let isExpanded = expandedID == translation.id
+        VStack(alignment: .leading, spacing: 8) {
+            HStack(spacing: 10) {
+                orderBadge(activeIndex)
+                Text(translation.displayName.isEmpty ? translation.code : translation.displayName)
+                if activeIndex == 0 {
+                    // 맨 위 항목이 기본값임을 나타내는 배지.
+                    Text("기본")
+                        .font(.caption2)
+                        .padding(.horizontal, 6)
+                        .padding(.vertical, 2)
+                        .foregroundStyle(palette.strongForeground)
+                        .background(Capsule().fill(palette.strong))
+                }
+                Spacer()
+                if let index = activeIndex {
+                    Button {
+                        move(translation, by: -1)
+                    } label: {
+                        Image(systemName: "chevron.up")
+                    }
+                    .buttonStyle(.borderless)
+                    .disabled(index == 0)
+                    .accessibilityLabel("위로")
+
+                    Button {
+                        move(translation, by: 1)
+                    } label: {
+                        Image(systemName: "chevron.down")
+                    }
+                    .buttonStyle(.borderless)
+                    .disabled(index == activeCount - 1)
+                    .accessibilityLabel("아래로")
+                }
+                Button {
+                    expandedID = isExpanded ? nil : translation.id
+                } label: {
+                    Image(systemName: isExpanded ? "chevron.up.circle" : "ellipsis.circle")
+                }
+                .buttonStyle(.borderless)
+                .accessibilityLabel("자세히")
+
                 Toggle("", isOn: Binding(
-                    get: { translation.isEnabled },
-                    set: { setEnabled($0, for: translation) }
+                    get: { activeIndex != nil },
+                    set: { setActive($0, for: translation) }
                 ))
                 .labelsHidden()
                 .toggleStyle(.switch)
+                .accessibilityLabel("\(translation.displayName) 사용")
 
                 if !translation.isBundled {
+                    // 삭제는 스위치와 달리 이 번역본을 모든 기기에서 없앤다(번들 번역본은 삭제할 수 없다).
                     Button(role: .destructive) {
                         delete(translation)
                     } label: {
                         Image(systemName: "trash")
+                            .foregroundStyle(destructiveColor)
                     }
                     .buttonStyle(.borderless)
+                    .accessibilityLabel("삭제")
                 }
             }
+            if isExpanded {
+                editFields(translation)
+            }
+        }
+        .padding(.vertical, 2)
+    }
 
-            Text(statusText(for: translation))
-                .font(.caption2)
-                .foregroundStyle(.secondary)
+    private func orderBadge(_ index: Int?) -> some View {
+        Group {
+            if let index {
+                Text("\(index + 1)")
+                    .font(.caption.weight(.bold))
+                    .foregroundStyle(palette.strongForeground)
+                    .frame(width: 22, height: 22)
+                    .background(Circle().fill(palette.strong))
+            } else {
+                Text("–")
+                    .font(.caption)
+                    .foregroundStyle(.secondary)
+                    .frame(width: 22, height: 22)
+                    .overlay(Circle().strokeBorder(Color.secondary.opacity(0.5), style: StrokeStyle(lineWidth: 1, dash: [2, 2])))
+            }
+        }
+        .accessibilityHidden(true)
+    }
 
-            TextField("라이선스(선택)", text: Binding(
-                get: { translation.licenseType ?? "" },
-                set: { updateLicenseType($0, for: translation) }
+    /// 표시 이름 + 책이름표 언어(번들 번역본도 책이름표 지정을 막지 않는다 — "번들은 항상 nil"이라는 규칙이 사용자 변경을 금지하는 근거는 아니다).
+    @ViewBuilder
+    private func editFields(_ translation: TranslationRegistry) -> some View {
+        VStack(alignment: .leading, spacing: 6) {
+            TextField("표시 이름", text: Binding(
+                get: { translation.displayName },
+                set: { updateDisplayName($0, for: translation) }
             ))
-            .font(.caption)
-            #if os(iOS)
+            .font(.body)
             .textFieldStyle(.roundedBorder)
-            #else
-            .textFieldStyle(.plain)
-            #endif
 
             Picker("책이름표 언어", selection: Binding(
                 get: { translation.bookNameTableID },
@@ -666,156 +533,92 @@ private struct TranslationsManagementTab: View {
             }
             .font(.caption)
         }
-        .padding(.vertical, 4)
+        .padding(.leading, 32)
     }
 
-    /// 타이핑마다 `reload()`를 부르지 않는다 — `registry`가 SwiftData `@Model`이라
-    /// 값만 바꿔도 화면이 갱신된다.
+    // MARK: 동작
+
+    /// 스위치. 켤 때 3개가 차 있으면, 끌 때 마지막 하나면 거절하고 이유를 보인다(스위치는 상태(`activeIndex`)를 다시 읽어 제자리로 돌아간다).
+    /// 마지막 하나를 끌 수 없게 한 이유: 사용 중인 번역본이 0개면 성경 조회가 예전 폴백 규칙으로 임의의 번역본을 열어 설정 화면과 어긋난다.
+    private func setActive(_ isOn: Bool, for translation: TranslationRegistry) {
+        notice = nil
+        if isOn {
+            guard activeTranslations.count < ActiveTranslationResolver.maxCount else {
+                notice = "3개가 모두 사용 중입니다. 먼저 하나를 꺼 주세요."
+                return
+            }
+            appendActive(translation)
+        } else {
+            let isOnlyActive = activeTranslations.count == 1 && activeTranslations.first?.id == translation.id
+            guard !isOnlyActive else {
+                notice = "최소 1개는 사용해야 합니다."
+                return
+            }
+            settings.defaultDisplayedTranslationCodes.removeAll { $0 == translation.code }
+        }
+    }
+
+    /// 사용 중 목록 맨 아래에 추가한다. 이미 있으면 맨 아래로 옮기지 않고 그대로 둔다(중복 방지).
+    private func appendActive(_ translation: TranslationRegistry) {
+        var codes = settings.defaultDisplayedTranslationCodes
+        if !codes.contains(translation.code) { codes.append(translation.code) }
+        settings.defaultDisplayedTranslationCodes = codes
+        if !translation.isEnabled {
+            translation.isEnabled = true
+            try? modelContext.save()
+        }
+    }
+
+    /// 사용 중인 두 인접 항목을 맞바꾼다. 저장 목록에 레코드 없는 코드가 섞여 있어도 보이는 순서(`activeTranslations`) 기준으로 맞바꾼다.
+    private func move(_ translation: TranslationRegistry, by delta: Int) {
+        let active = activeTranslations
+        guard let position = active.firstIndex(where: { $0.id == translation.id }),
+              active.indices.contains(position + delta) else { return }
+        var codes = settings.defaultDisplayedTranslationCodes
+        guard let first = codes.firstIndex(of: active[position].code),
+              let second = codes.firstIndex(of: active[position + delta].code) else { return }
+        codes.swapAt(first, second)
+        settings.defaultDisplayedTranslationCodes = codes
+    }
+
+    /// 사용 중인 번역본이 하나도 없는 최초 진입(목록이 비어 있음)이면, 성경 조회가 쓰는 폴백 규칙(`ActiveTranslationResolver`)의 결과를 목록에 미리
+    /// 채워 설정 화면과 실제 표시가 일치하게 한다. 기존 항목(아직 도착하지 않은 번역본의 코드 등)은 지우지 않는다.
+    private func seedActiveTranslationsIfNeeded() {
+        guard !translations.isEmpty, activeTranslations.isEmpty else { return }
+        var codes = settings.defaultDisplayedTranslationCodes
+        for registry in ActiveTranslationResolver.resolve(from: translations) where !codes.contains(registry.code) {
+            codes.append(registry.code)
+        }
+        settings.defaultDisplayedTranslationCodes = codes
+    }
+
+    /// 타이핑마다 `reload()`를 부르지 않는다 — `registry`가 SwiftData `@Model`이라 값만 바꿔도 화면이 갱신된다.
     private func updateDisplayName(_ name: String, for registry: TranslationRegistry) {
         registry.displayName = name
         try? modelContext.save()
     }
 
-    /// `reload()` 없이 즉시 반영. 빈 문자열은 nil로 정규화해 "라이선스 미상"으로 표시한다.
-    private func updateLicenseType(_ license: String, for registry: TranslationRegistry) {
-        let trimmed = license.trimmingCharacters(in: .whitespacesAndNewlines)
-        registry.licenseType = trimmed.isEmpty ? nil : trimmed
-        try? modelContext.save()
-    }
-
-    /// 번들 번역본도 책이름표 지정을 막지 않는다 — "번들은 항상 nil"이라는 규칙이
-    /// 사용자 변경을 금지하는 근거는 아니다.
     private func setBookNameTable(_ tableID: String?, for registry: TranslationRegistry) {
         registry.bookNameTableID = tableID
         try? modelContext.save()
         reload()
     }
 
-    private func statusText(for translation: TranslationRegistry) -> String {
-        var parts = [translation.code, translation.isBundled ? "번들" : "사용자 추가"]
-        if !translation.isBundled {
-            parts.append(TranslationFileMaterializer.syncStatus(for: translation).label)
-        }
-        return parts.joined(separator: " · ")
-    }
-
-    /// 비활성 번역본은 "성경 조회 기본 표시" 후보에서 뺀다(아래 두 프로퍼티도 동일).
-    private var enabledTranslations: [TranslationRegistry] {
-        translations.filter(\.isEnabled)
-    }
-
-    private var orderedDisplayedTranslations: [TranslationRegistry] {
-        let byCode = Dictionary(uniqueKeysWithValues: enabledTranslations.map { ($0.code, $0) })
-        return settings.defaultDisplayedTranslationCodes.compactMap { byCode[$0] }
-    }
-
-    private var notYetDisplayedTranslations: [TranslationRegistry] {
-        let shown = Set(settings.defaultDisplayedTranslationCodes)
-        return enabledTranslations.filter { !shown.contains($0.code) }
-    }
-
-    private var allTranslationsOrderedForDisplaySettings: [TranslationRegistry] {
-        orderedDisplayedTranslations + notYetDisplayedTranslations
-    }
-
-    @ViewBuilder
-    private func translationDisplayRow(_ translation: TranslationRegistry) -> some View {
-        let displayedIndex = settings.defaultDisplayedTranslationCodes.firstIndex(of: translation.code)
-        HStack {
-            Text(translation.displayName)
-            if displayedIndex == 0 {
-                Text("기본")
-                    .font(.caption2)
-                    .padding(.horizontal, 6)
-                    .padding(.vertical, 2)
-                    .background(Capsule().fill(Color("AccentColor").opacity(0.15)))
-                    .foregroundStyle(Color("AccentColor"))
-            }
-            Spacer()
-            if let index = displayedIndex {
-                Button {
-                    moveDisplayedTranslation(from: index, to: index - 1)
-                } label: {
-                    Image(systemName: "chevron.up")
-                }
-                .buttonStyle(.borderless)
-                .disabled(index == 0)
-
-                Button {
-                    moveDisplayedTranslation(from: index, to: index + 1)
-                } label: {
-                    Image(systemName: "chevron.down")
-                }
-                .buttonStyle(.borderless)
-                .disabled(index == settings.defaultDisplayedTranslationCodes.count - 1)
-
-                Button {
-                    removeDisplayedTranslation(code: translation.code)
-                } label: {
-                    Image(systemName: "eye.slash")
-                }
-                .buttonStyle(.borderless)
-            } else {
-                Button {
-                    addDisplayedTranslation(translation)
-                } label: {
-                    Image(systemName: "eye")
-                }
-                .buttonStyle(.borderless)
-                .disabled(orderedDisplayedTranslations.count >= 3)
-            }
-        }
-    }
-
-    private func moveDisplayedTranslation(from index: Int, to newIndex: Int) {
-        var codes = settings.defaultDisplayedTranslationCodes
-        guard codes.indices.contains(index), codes.indices.contains(newIndex) else { return }
-        codes.swapAt(index, newIndex)
-        settings.defaultDisplayedTranslationCodes = codes
-    }
-
-    private func removeDisplayedTranslation(code: String) {
-        settings.defaultDisplayedTranslationCodes.removeAll { $0 == code }
-    }
-
-    private func addDisplayedTranslation(_ translation: TranslationRegistry) {
-        guard settings.defaultDisplayedTranslationCodes.count < 3,
-              !settings.defaultDisplayedTranslationCodes.contains(translation.code) else { return }
-        settings.defaultDisplayedTranslationCodes.append(translation.code)
-    }
-
-    private func seedDefaultDisplayedCodesIfNeeded() {
-        guard settings.defaultDisplayedTranslationCodes.isEmpty, !translations.isEmpty else { return }
-        var ordered = translations
-        if let preferredCode = settings.defaultTranslationCode,
-           let index = ordered.firstIndex(where: { $0.code == preferredCode }) {
-            let preferred = ordered.remove(at: index)
-            ordered.insert(preferred, at: 0)
-        }
-        settings.defaultDisplayedTranslationCodes = Array(ordered.prefix(3).map(\.code))
-    }
-
     private func reload() {
         translations = (try? modelContext.fetch(FetchDescriptor<TranslationRegistry>(sortBy: [SortDescriptor(\.addedAt)]))) ?? []
-    }
-
-    /// 끌 때 "성경 조회 기본 표시" 목록에서도 함께 뺀다.
-    private func setEnabled(_ isEnabled: Bool, for translation: TranslationRegistry) {
-        translation.isEnabled = isEnabled
-        if !isEnabled {
-            removeDisplayedTranslation(code: translation.code)
-        }
-        try? modelContext.save()
     }
 
     /// 번들 번역본은 삭제 대상이 아니다 — UI에서도 삭제 버튼을 숨기지만 여기서도 방어적으로 막는다.
     private func delete(_ translation: TranslationRegistry) {
         guard !translation.isBundled else { return }
+        // 로컬 캐시 파일도 함께 정리한다(best-effort).
         TranslationFileMaterializer.removeLocalCopy(for: translation)
-        removeDisplayedTranslation(code: translation.code)
+        // 삭제된 번역본 코드가 사용 중 목록에 남으면 "3개가 찼다"는 판정이 계속되므로 함께 뺀다.
+        settings.defaultDisplayedTranslationCodes.removeAll { $0 == translation.code }
         modelContext.delete(translation)
         try? modelContext.save()
         reload()
+        seedActiveTranslationsIfNeeded()
     }
 }
 
@@ -843,43 +646,34 @@ private struct AppearanceSettingsTab: View {
         Form {
             Section {
                 // 고를 때마다 테마 색상 쪽도 함께 정리해야 해서(`selectColorScheme(_:)`) 커스텀 Binding을 쓴다.
-                Picker(
-                    "화면 모드",
+                SettingsCapsuleTabs(
+                    options: UserSettingsStore.ColorSchemePreference.allCases.map { (value: $0, title: $0.displayName) },
                     selection: Binding(
                         get: { settings.colorSchemePreference },
                         set: { settings.selectColorScheme($0) }
-                    )
-                ) {
-                    ForEach(UserSettingsStore.ColorSchemePreference.allCases) { preference in
-                        Text(preference.displayName).tag(preference)
-                    }
-                }
-                .pickerStyle(.segmented)
+                    ),
+                    fillsWidth: true
+                )
             } header: {
                 Label("화면 모드", systemImage: "circle.lefthalf.filled")
             }
+            .settingsRowBackground()
 
             // 화면 모드를 고르면 테마 색상이 풀리고(`selectColorScheme`), 테마 색상을 고르면
             // 화면 모드가 맞춰지므로(`applyThemeMode`) 연동 관계가 보이도록 화면 모드 바로 아래 둔다.
             Section {
-                Picker(
-                    "테마 색상",
+                // 직접 색을 골라 커스텀이 되면(`bibleThemeModePreference == nil`) 어떤 항목도 선택되지 않은 채로 둔다(이전 세그먼트와 같은 동작).
+                SettingsCapsuleTabs(
+                    options: UserSettingsStore.BibleThemeModePreference.allCases.map { (value: Optional($0), title: $0.displayName) },
                     selection: Binding(
                         get: { settings.bibleThemeModePreference },
                         set: { newMode in
                             guard let newMode else { return }
                             settings.applyThemeMode(newMode, systemColorScheme: environment.colorScheme)
                         }
-                    )
-                ) {
-                    ForEach(UserSettingsStore.BibleThemeModePreference.allCases) { mode in
-                        Text(mode.displayName).tag(Optional(mode))
-                    }
-                }
-                .pickerStyle(.segmented)
-                // 라벨을 숨긴다 — macOS는 세그먼트 옆에 라벨을 그대로 보여줘 Section 헤더("테마 색상")와
-                // 겹치기 때문(접근성 라벨은 유지된다).
-                .labelsHidden()
+                    ),
+                    fillsWidth: true
+                )
 
                 ColorPicker(
                     "배경색 직접 선택",
@@ -909,6 +703,7 @@ private struct AppearanceSettingsTab: View {
             } header: {
                 Label("테마 색상", systemImage: "paintpalette")
             }
+            .settingsRowBackground()
 
             // 아이폰에서만 미리보기를 표시 설정 위에 둔다. 맥OS/아이패드는 기존 순서(표시 설정 → 미리보기).
             #if os(iOS)
@@ -925,6 +720,7 @@ private struct AppearanceSettingsTab: View {
             #endif
         }
         .formStyle(.grouped)
+        .settingsThemedForm()
     }
 
     /// "성경 조회 표시" Section. 아이폰에서만 미리보기와 순서를 바꿀 수 있도록
@@ -1000,6 +796,7 @@ private struct AppearanceSettingsTab: View {
         } header: {
             Label("성경 조회 표시", systemImage: "textformat")
         }
+        .settingsRowBackground()
     }
 
     /// "미리보기" Section.
@@ -1010,6 +807,7 @@ private struct AppearanceSettingsTab: View {
         } header: {
             Label("미리보기", systemImage: "eye")
         }
+        .settingsRowBackground()
     }
 
     private var previewRow: some View {
@@ -1038,6 +836,11 @@ private struct AppearanceSettingsTab: View {
         .padding(8)
         .background(settings.bibleBackgroundColor ?? Color.clear)
         .clipShape(RoundedRectangle(cornerRadius: 6))
+        // 미리보기 배경이 페이지 배경과 같은 색이어도 경계가 보이도록 글자색 22% 테두리를 둔다.
+        .overlay(
+            RoundedRectangle(cornerRadius: 6)
+                .strokeBorder((settings.bibleTextColor ?? Color.primary).opacity(0.22), lineWidth: 1)
+        )
     }
 
     /// macOS/iPadOS용 3열 배치.
@@ -1098,8 +901,8 @@ private struct AppearanceSettingsTab: View {
 
 private struct BibleCopyFormatSettingsTab: View {
     @Environment(\.modelContext) private var modelContext
-    // `quotePreviewAccent`가 라이트/다크에 따라 변형을 고르는 데 필요. 이 화면은 성경 조회 테마를
-    // 입지 않으므로 시스템 모드만 본다.
+    // `quotePreviewAccent`가 라이트/다크에 따라 변형을 고르는 데 필요. 미리보기 강조색은 테마 배경이 아니라
+    // 화면 모드(테마 선택이 화면 모드를 함께 맞춘다)만 본다.
     @Environment(\.colorScheme) private var colorScheme
     @State private var settings = UserSettingsStore.shared
     /// 등록된 번역본 총 개수 — 복사 시 실제 개수가 아니라 이 설정이 의미 있을 가능성을 등록 수로 판단한다.
@@ -1147,6 +950,7 @@ private struct BibleCopyFormatSettingsTab: View {
                         : "예: [NKJV][창세기 1:1]")
                 }
             }
+            .settingsRowBackground()
 
             Section {
                 Toggle("절마다 줄바꿈 하기", isOn: $settings.copyNewlineBetweenVerses)
@@ -1184,6 +988,7 @@ private struct BibleCopyFormatSettingsTab: View {
             } header: {
                 Label("상세 출력 형식", systemImage: "list.bullet.rectangle")
             }
+            .settingsRowBackground()
 
             Section {
                 // 실제로 복사/공유될 성경 본문 서식을 보여주는 자리라 밤빛 남색을 배정한다. 배경은 8%로 옅게 깔아
@@ -1205,8 +1010,10 @@ private struct BibleCopyFormatSettingsTab: View {
             } header: {
                 Label("미리보기", systemImage: "text.quote")
             }
+            .settingsRowBackground()
         }
         .formStyle(.grouped)
+        .settingsThemedForm()
         .onAppear(perform: loadTranslationCount)
     }
 
@@ -1258,7 +1065,7 @@ private struct ShortcutsSettingsTab: View {
                             .font(.system(.caption, design: .monospaced))
                             .padding(.horizontal, 8)
                             .padding(.vertical, 3)
-                            .background(.quaternary, in: RoundedRectangle(cornerRadius: 5))
+                            .background((UserSettingsStore.shared.bibleBackgroundColor == nil ? Color.primary : (UserSettingsStore.shared.bibleTextColor ?? Color.primary)).opacity(0.11), in: RoundedRectangle(cornerRadius: 5))
                     }
                 }
             } header: {
@@ -1266,8 +1073,10 @@ private struct ShortcutsSettingsTab: View {
             } footer: {
                 Text("현재는 재지정할 수 없고, 위 고정된 단축키만 지원합니다(사용자 재지정은 다음 단계 후보).")
             }
+            .settingsRowBackground()
         }
         .formStyle(.grouped)
+        .settingsThemedForm()
     }
 }
 
@@ -1289,6 +1098,7 @@ private struct LicenseSettingsTab: View {
             } footer: {
                 Text("성경전서 개역한글판(1961)과 관주성경전서 개역한글판(1962)은 저작재산권 보호기간이 만료되어 (재)대한성서공회의 허가 없이 무료로 사용할 수 있습니다. 다만 본문을 임의로 변경·수정하지 않고 그대로 사용해야 하며(동일성유지권), 저작권이 (재)대한성서공회에 있다는 표시(성명표시권)를 해야 합니다 — (재)대한성서공회 저작권부 회신(2026-08-19) 기준.")
             }
+            .settingsRowBackground()
 
             // STEPBible-Data(CC BY 4.0)는 "STEP Bible"을 www.STEPBible.org에 링크해 표시하면 된다.
             // hwp 뷰어는 hwp-swift(네이티브, LGPL-2.1 — 수정 없이 SPM 의존성으로만 쓰면 소스 공개 의무는
@@ -1347,6 +1157,7 @@ private struct LicenseSettingsTab: View {
             } footer: {
                 Text("원문 정보 화면의 한글 뜻풀이는 위 STEPBible 영어 뜻풀이를 기기 내(Apple Translation 프레임워크) 자동 번역한 것이며, 사용자가 직접 수정할 수 있습니다. 신학 용어의 표준 역어와 다를 수 있습니다.")
             }
+            .settingsRowBackground()
 
             // 폰트 저작권/라이선스 고지는 배포 페이지(80.kookmin.ac.kr/vision/font)에 명시된 조건과
             // 폰트 파일 name 테이블의 고지를 그대로 옮긴 것이다(페이지에 표시 문구 예시·앱 임베딩 조항은 없음).
@@ -1367,8 +1178,10 @@ private struct LicenseSettingsTab: View {
             } footer: {
                 Text("배포 페이지에 저작권 표시 문구의 구체적 예시나 앱 내 임베딩에 대한 별도 조항은 없어, 위 문구는 페이지에 명시된 라이선스 조건과 폰트 파일에 내장된 저작권 고지를 그대로 옮긴 것입니다.")
             }
+            .settingsRowBackground()
         }
         .formStyle(.grouped)
+        .settingsThemedForm()
     }
 }
 
@@ -1429,6 +1242,7 @@ private struct DeveloperSettingsTab: View {
             } footer: {
                 Text("내보낸 파일을 Resources/OutlineSeed.json에 덮어쓰고 Xcode Copy Bundle Resources에 등록하면(최초 1회만 필요) 신규 사용자 DB에 기본값으로 채워집니다. 이 탭 자체는 배포 빌드에서 빠집니다.")
             }
+            .settingsRowBackground()
 
             // 온보딩 시트 재표시용. 신호만 AppOnboardingReplayRequest에 보내고 실제 표시는 관찰자
             // AppOnboardingPresenter가 맡는다. dismiss() 직후 바로 요청하면 macOS에서 시트 닫힘
@@ -1447,6 +1261,7 @@ private struct DeveloperSettingsTab: View {
             } footer: {
                 Text("완료 플래그(hasCompletedOnboarding)와 마지막 확인 버전(lastSeenAppVersion)은 건드리지 않습니다 — 내용만 미리 봅니다. 이 화면이 시트로 떠 있는 경우(아이패드) 먼저 닫힌 뒤 온보딩이 뜹니다.")
             }
+            .settingsRowBackground()
 
             // "새로워진 점" 시트 재표시용 — 온보딩 버튼과 같은 패턴(WhatsNewReplayRequest 신호 →
             // WhatsNewPresenter가 표시)이며, 같은 이유로 요청을 지연시킨다.
@@ -1464,6 +1279,7 @@ private struct DeveloperSettingsTab: View {
             } footer: {
                 Text("마지막 확인 버전(lastSeenAppVersion)은 건드리지 않습니다 — 내용만 미리 봅니다. 현재 버전(\(Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? "?"))에 등록된 WhatsNewContent 항목이 없으면 아무 일도 일어나지 않습니다. 이 화면이 시트로 떠 있는 경우(아이패드) 먼저 닫힌 뒤 뜹니다.")
             }
+            .settingsRowBackground()
 
             Section {
                 if let counts = testDataCounts {
@@ -1487,6 +1303,7 @@ private struct DeveloperSettingsTab: View {
             } footer: {
                 Text("이 기기(및 iCloud로 동기된 다른 기기)의 형광펜·관주·구절별 메모를 전부 지웁니다 — 되돌릴 수 없습니다. 개인 묵상/말씀요약(말씀 노트)은 지우지 않습니다.")
             }
+            .settingsRowBackground()
 
             Section {
                 if let counts = documentDataCounts {
@@ -1510,8 +1327,10 @@ private struct DeveloperSettingsTab: View {
             } footer: {
                 Text("사이드바 \"연구 문서\"에 등록된 모든 문서(원본 파일 참조·OCR 결과·변환본·본문 텍스트)와 거기서 파생된 성경구절 언급을 전부 지웁니다 — 되돌릴 수 없습니다. 사용자 저장공간의 원본 파일 자체는 지우지 않고, 이 앱의 등록 정보만 지웁니다. \"연구 문서\" 기능/화면은 그대로 남아 있어 다시 업로드할 수 있습니다.")
             }
+            .settingsRowBackground()
         }
         .formStyle(.grouped)
+        .settingsThemedForm()
         .onAppear {
             refreshCounts()
             refreshDocumentCounts()

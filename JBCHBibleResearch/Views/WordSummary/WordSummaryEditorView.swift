@@ -32,6 +32,7 @@ enum WordSummaryPresentationContext {
 
 struct WordSummaryEditorView: View {
     @Environment(\.modelContext) private var modelContext
+    @Environment(\.self) private var environment
     /// 화면 배경/보조 텍스트 색(테마)에 쓴다. `RichTextEditor` 자체 배경/글자색(`EditorDefaultStyle`)에는 쓰지 않는다.
     private var settings: UserSettingsStore { .shared }
     @Bindable var summary: VerseSummary
@@ -44,7 +45,9 @@ struct WordSummaryEditorView: View {
     var onRequestClose: (() -> Void)? = nil
 
     @State private var autosave: AutosaveController?
-    @State private var isEditable = true
+    /// 말씀 노트 목록에서 연 기존 요약(`.wordNoteList`)은 조회 모드로 시작하고(2026-10-03), 새로 만든 빈 요약만 바로 편집 모드로 연다.
+    /// 다른 맥락은 기존처럼 편집으로 시작한다. `init`에서 정한다.
+    @State private var isEditable: Bool
     @State private var hasLoadedMetadata = false
 
     /// 태그 상태(`MemoDetailView`와 동일). `SummaryTag`(이 화면 전용 조인)로 연결한다.
@@ -52,6 +55,19 @@ struct WordSummaryEditorView: View {
     @State private var tagInput: String = ""
     @State private var tagSuggestions: [Tag] = []
     @State private var drilldownTag: Tag?
+
+    init(
+        summary: VerseSummary,
+        presentationContext: WordSummaryPresentationContext = .standalone,
+        externalProxy: RichTextEditingProxy? = nil,
+        onRequestClose: (() -> Void)? = nil
+    ) {
+        self._summary = Bindable(summary)
+        self.presentationContext = presentationContext
+        self.externalProxy = externalProxy
+        self.onRequestClose = onRequestClose
+        self._isEditable = State(initialValue: presentationContext != .wordNoteList || summary.contentText.isEmpty)
+    }
 
     var body: some View {
         VStack(alignment: .leading, spacing: 0) {
@@ -104,9 +120,15 @@ struct WordSummaryEditorView: View {
             if presentationContext == .standalone || presentationContext == .wordNoteList {
                 ToolbarItem(placement: .primaryAction) {
                     Button {
+                        // 말씀 노트에서 "완료"를 누르면 디바운스 중인 저장을 바로 끝낸다.
+                        if presentationContext == .wordNoteList && isEditable { autosave?.saveImmediately() }
                         isEditable.toggle()
                     } label: {
-                        Image(systemName: isEditable ? "eye" : "pencil")
+                        if presentationContext == .wordNoteList {
+                            Text(isEditable ? "완료" : "편집").fontWeight(.semibold)
+                        } else {
+                            Image(systemName: isEditable ? "eye" : "pencil")
+                        }
                     }
                     .help(isEditable ? "읽기 전용으로 보기" : "편집하기")
                 }
@@ -157,8 +179,11 @@ struct WordSummaryEditorView: View {
             }
             .padding()
 
-case .contextual, .wordNoteList:
-            // 읽기전용 좌표 표시(`.wordNoteList` 포함).
+case .wordNoteList:
+            wordNoteHeader
+
+        case .contextual:
+            // 읽기전용 좌표 표시.
             HStack {
                 Text(contextualCoordinateLabel)
                     .font(.callout.bold())
@@ -184,6 +209,37 @@ case .contextual, .wordNoteList:
             }
             .padding()
         }
+    }
+
+    /// 말씀 노트 헤더 — 종류 배지·날짜·동기화 상태 + 구절 줄(성경에서 보기). 개인 묵상 헤더(`MemoDetailView.wordNoteHeader`)와 같은 모양.
+    private var wordNoteHeader: some View {
+        VStack(alignment: .leading, spacing: 12) {
+            HStack(spacing: 8) {
+                let badgeColor = WordNoteCategory.verseSummary.spineColor(onDark: isDarkSurface)
+                Text(WordNoteCategory.verseSummary.rawValue)
+                    .font(.caption2.bold())
+                    .padding(.horizontal, 8)
+                    .padding(.vertical, 3)
+                    .background(badgeColor.opacity(0.15), in: Capsule())
+                    .foregroundStyle(badgeColor)
+                Text(isEditable ? "편집 중 · 자동 저장" : (WordNoteItem.summary(summary).dateLabel ?? ""))
+                    .font(.caption)
+                    .foregroundStyle(settings.bibleTextColor?.opacity(0.65) ?? Color.secondary)
+                Spacer()
+                syncStatusLabel
+            }
+            WordNoteVerseBar(label: contextualCoordinateLabel, bookId: summary.bookId, chapter: summary.chapter, verse: summary.verse)
+        }
+        .padding(.horizontal)
+        .padding(.top, 14)
+        .padding(.bottom, 12)
+    }
+
+    /// 어두운 테마 배경이면 종류 배지 색을 밝은 변형으로 바꾼다(`WordNoteRowView.isDarkSurface`와 같은 공식).
+    private var isDarkSurface: Bool {
+        guard let background = settings.bibleBackgroundColor else { return false }
+        let resolved = background.resolve(in: environment)
+        return 0.2126 * Double(resolved.red) + 0.7152 * Double(resolved.green) + 0.0722 * Double(resolved.blue) < 0.5
     }
 
     private var contextualCoordinateLabel: String {

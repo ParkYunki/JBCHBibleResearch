@@ -284,6 +284,177 @@ final class SearchViewModel {
         Self.groupByChapter(verseResults.filter { $0.translationCode == translationCode })
     }
 
+    // MARK: - 책 단위 접기 보기 (2026-10-02 목업 채택)
+
+    /// 성경구절 결과를 책 단위로 접어 보여줄 때의 정렬.
+    /// - `relevance`: 책 안 최대 `matchCount`(중복 제거된 매칭 검색어 수) 내림차순, 같으면 정경순 — 기존 장 그룹 정렬(`groupByChapter`)과
+    ///   같은 규칙을 책 단위로 올린 것이라 "두 단어 이상 검색은 매칭 수 순, 동률은 성경순"이 그대로 유지된다.
+    /// - `canon`: 정경순(구약/신약 머리줄 포함). - `count`: 이 번역본 탭 결과가 많은 책부터.
+    enum VerseBookSort: String, CaseIterable, Identifiable {
+        case relevance, canon, count
+        var id: String { rawValue }
+        var title: String {
+            switch self {
+            case .relevance: return "관련도순"
+            case .canon: return "성경순"
+            case .count: return "많은 순"
+            }
+        }
+    }
+
+    /// 한 책에 속한 (선택된 번역본의) 검색 결과 묶음. 화면에 접이식 머리줄 하나로 그려진다.
+    struct VerseBookGroup: Identifiable {
+        let bookId: Int
+        let bookNameKo: String
+        let orderIndex: Int
+        let isOldTestament: Bool
+        let verses: [VerseSearchResult]
+        /// 책 안 결과의 최대 `matchCount`(참조 매치는 0) — `relevance` 정렬 키.
+        let bestMatchCount: Int
+        var id: Int { bookId }
+    }
+
+    /// 현재 정렬. 매칭 수가 서로 다른 결과가 있을 때만 `relevance`가 기본이고, 모두 같으면(한 단어 검색 등) 정경순과 똑같아
+    /// 의미가 없어 선택지에서 뺀다(`availableVerseBookSorts`). 새 결과를 채울 때마다(`setVerseResults`) 기본값으로 되돌린다.
+    private(set) var verseBookSort: VerseBookSort = .canon
+    private(set) var hasRelevanceVariation = false
+    /// 펼쳐진 책(번역본 탭 공통). 새 검색마다 가장 위 책 하나만 펼친 상태로 시작한다.
+    private(set) var expandedVerseBookIds: Set<Int> = []
+    /// 접힌 구약/신약 머리줄(`"old"`/`"new"`). 성경순에서만 쓴다.
+    private(set) var collapsedTestamentKeys: Set<String> = []
+    /// 번역본·섹션별로 지금 보여줄 책 수. 키는 `"<번역본코드 또는 all>|<flat/old/new>"`.
+    private var visibleBookCounts: [String: Int] = [:]
+    /// 책 하나 안에서 지금 보여줄 절 수. 키는 `"<번역본코드 또는 all>|<bookId>"`.
+    private var visibleVerseCountsInBook: [String: Int] = [:]
+    private static let bookPageSize = 8
+    private static let bookVersePageSize = 5
+
+    /// "추가 검색결과 안내" 확인창 뒤에 이어서 해야 할 "책 더보기".
+    private struct PendingBookLoad {
+        let limitKey: String
+        let showAll: Bool
+    }
+    // 확인창 "확인" 버튼이 `confirmMoreResultsNotice()`를 부르기 전에 바인딩 setter(`dismissMoreResultsNotice`)가 먼저 돌 수 있어,
+    // 거기서는 이 값을 지우지 않는다. 확인창은 검색 1회에 한 번만 뜨므로 남은 값이 엉뚱하게 쓰일 일은 없다.
+    private var pendingBookLoad: PendingBookLoad?
+
+    var availableVerseBookSorts: [VerseBookSort] {
+        hasRelevanceVariation ? [.relevance, .canon, .count] : [.canon, .count]
+    }
+
+    func setVerseBookSort(_ sort: VerseBookSort) {
+        guard availableVerseBookSorts.contains(sort) else { return }
+        verseBookSort = sort
+    }
+
+    /// 선택된 번역본(`nil`이면 전체)의 결과를 책 단위로 묶어 현재 정렬대로 돌려준다. DB를 다시 조회하지 않고 메모리의
+    /// `allVerseResults`만 쓴다. 랭킹(`searchVerses`)과 `allVerseResults` 순서는 건드리지 않는 순수 표시용 재배열이다.
+    func verseBookGroups(translationCode: String?) -> [VerseBookGroup] {
+        var versesByBook: [Int: [VerseSearchResult]] = [:]
+        for result in allVerseResults where translationCode == nil || result.translationCode == translationCode {
+            versesByBook[result.bookId, default: []].append(result)
+        }
+        let groups = versesByBook.map { bookId, verses -> VerseBookGroup in
+            let book = booksProvider.book(id: bookId)
+            let orderIndex = book?.orderIndex ?? bookId
+            return VerseBookGroup(
+                bookId: bookId,
+                bookNameKo: book?.nameKo ?? verses.first?.bookNameKo ?? "\(bookId)권",
+                orderIndex: orderIndex,
+                isOldTestament: book.map { $0.testament == .old } ?? (bookId <= 39),
+                verses: verses,
+                bestMatchCount: verses.map(\.matchCount).max() ?? 0
+            )
+        }
+        switch verseBookSort {
+        case .relevance:
+            return groups.sorted { lhs, rhs in
+                if lhs.bestMatchCount != rhs.bestMatchCount { return lhs.bestMatchCount > rhs.bestMatchCount }
+                return lhs.orderIndex < rhs.orderIndex
+            }
+        case .canon:
+            return groups.sorted { $0.orderIndex < $1.orderIndex }
+        case .count:
+            return groups.sorted { lhs, rhs in
+                if lhs.verses.count != rhs.verses.count { return lhs.verses.count > rhs.verses.count }
+                return lhs.orderIndex < rhs.orderIndex
+            }
+        }
+    }
+
+    // MARK: 펼침/접힘
+
+    func isVerseBookExpanded(_ bookId: Int) -> Bool { expandedVerseBookIds.contains(bookId) }
+
+    func toggleVerseBook(_ bookId: Int) {
+        if expandedVerseBookIds.contains(bookId) {
+            expandedVerseBookIds.remove(bookId)
+        } else {
+            expandedVerseBookIds.insert(bookId)
+        }
+    }
+
+    func expandAllVerseBooks(_ bookIds: [Int]) { expandedVerseBookIds.formUnion(bookIds) }
+    func collapseAllVerseBooks() { expandedVerseBookIds.removeAll() }
+
+    func isTestamentCollapsed(_ key: String) -> Bool { collapsedTestamentKeys.contains(key) }
+
+    func toggleTestament(_ key: String) {
+        if collapsedTestamentKeys.contains(key) {
+            collapsedTestamentKeys.remove(key)
+        } else {
+            collapsedTestamentKeys.insert(key)
+        }
+    }
+
+    // MARK: 더보기 (번역본·섹션별 독립)
+
+    func visibleBookCount(limitKey: String) -> Int { visibleBookCounts[limitKey] ?? Self.bookPageSize }
+
+    /// "책 더보기"/"모두 펼치기". 두 단어 이상이 실제로 매칭된 검색이면 검색 1회당 처음 한 번 "추가 검색결과 안내"를 먼저 띄우고,
+    /// 사용자가 확인하면(`confirmMoreResultsNotice`) 이어서 늘린다(기존 더보기와 같은 규칙).
+    func requestMoreBooks(limitKey: String, remainingBooks: Int, showAll: Bool) {
+        if !hasShownMoreResultsNotice, effectiveMatchedWordCount() >= 2 {
+            hasShownMoreResultsNotice = true
+            pendingBookLoad = PendingBookLoad(limitKey: limitKey, showAll: showAll)
+            pendingMoreResultsNotice = MoreResultsNotice(additionalBookCount: remainingBooks)
+            return
+        }
+        applyBookLoad(limitKey: limitKey, showAll: showAll)
+    }
+
+    private func applyBookLoad(limitKey: String, showAll: Bool) {
+        if showAll {
+            visibleBookCounts[limitKey] = Int.max
+        } else {
+            visibleBookCounts[limitKey] = visibleBookCount(limitKey: limitKey) + Self.bookPageSize
+        }
+    }
+
+    /// 한 책을 펼쳤을 때 보여줄 장 카드들. 절 수가 한도(처음 5개, "이 책 더보기"마다 2배)에 닿을 때까지 장 카드를 통째로 담고
+    /// (카드를 쪼개지 않는다), 남은 절 수를 함께 돌려준다. 장 카드 순서는 `relevance`면 기존 규칙(매칭 수 → 정경순),
+    /// 그 외에는 장 번호순이다.
+    func visibleChapterGroups(for book: VerseBookGroup, translationKey: String) -> (groups: [VerseSearchResultGroup], remainingVerses: Int) {
+        let limit = visibleVerseCountsInBook["\(translationKey)|\(book.bookId)"] ?? Self.bookVersePageSize
+        var chapters = Self.groupByChapter(book.verses)
+        if verseBookSort != .relevance {
+            chapters.sort { $0.chapter < $1.chapter }
+        }
+        var shown: [VerseSearchResultGroup] = []
+        var shownVerseCount = 0
+        for chapter in chapters {
+            if shownVerseCount >= limit { break }
+            shown.append(chapter)
+            shownVerseCount += chapter.verses.count
+        }
+        return (shown, max(0, book.verses.count - shownVerseCount))
+    }
+
+    func loadMoreVersesInBook(bookId: Int, translationKey: String) {
+        let key = "\(translationKey)|\(bookId)"
+        visibleVerseCountsInBook[key] = (visibleVerseCountsInBook[key] ?? Self.bookVersePageSize) * 2
+    }
+
     /// "현재 활성화된 번역본" —
     /// `BibleReadingViewModel.displayedTranslationIDs`(해당 뷰모델의 런타임
     /// 상태)에 접근할 수 없어, `loadAvailableTranslations()`가 처음 표시 번역본을 정할
@@ -385,6 +556,11 @@ final class SearchViewModel {
     /// `loadMoreVerseResults()`가 하려던 페이지 증가를 이어서 한다.
     func confirmMoreResultsNotice() {
         pendingMoreResultsNotice = nil
+        if let pending = pendingBookLoad {
+            pendingBookLoad = nil
+            applyBookLoad(limitKey: pending.limitKey, showAll: pending.showAll)
+            return
+        }
         visibleVerseResultCount += Self.verseResultPageSize
     }
 
@@ -424,6 +600,17 @@ final class SearchViewModel {
         visibleVerseResultCount = Self.verseResultPageSize
         hasShownMoreResultsNotice = false
         pendingMoreResultsNotice = nil
+        // 책 단위 접기 보기 상태도 새 결과에 맞춰 초기화한다.
+        pendingBookLoad = nil
+        hasRelevanceVariation = Set(results.map(\.matchCount)).count > 1
+        verseBookSort = hasRelevanceVariation ? .relevance : .canon
+        collapsedTestamentKeys = []
+        visibleBookCounts = [:]
+        visibleVerseCountsInBook = [:]
+        expandedVerseBookIds = []
+        if let firstBook = verseBookGroups(translationCode: nil).first {
+            expandedVerseBookIds = [firstBook.bookId]
+        }
     }
 
     private(set) var memoResults: [MemoSearchResult] = []
@@ -738,9 +925,9 @@ final class SearchViewModel {
     /// 본문에 "1:3"이라는 글자가 없어도 창1:3은 창세기 1:3이 나와야 하기 때문. 그 외엔 각 단어를
     /// `BibleReferenceStore.searchVerses`(본문 텍스트 검색)로 OR 조회한다.
     private func searchVerses(query: String, words: [String], queryMatches: [BibleReferenceExtractor.Match]) -> [VerseSearchResult] {
-        // 비활성 번역본은 조회 대상에서 빠지므로 검색 결과·번역본 하위 탭 어디에도 나타나지 않는다.
+        // 꺼진 번역본(설정 > 번역본에서 사용 중이 아닌 것)은 조회 대상에서 빠지므로 검색 결과·번역본 하위 탭 어디에도 나타나지 않는다.
         guard let allRegistries = try? modelContext.fetch(FetchDescriptor<TranslationRegistry>()) else { return [] }
-        let registries = allRegistries.filter(\.isEnabled)
+        let registries = ActiveTranslationResolver.resolve(from: allRegistries)
         // 활성 번역본 목록은 검색 1회당 한 번만 계산해 캐싱한다 — 연산 프로퍼티로 두면 SwiftUI
         // 렌더링마다 SwiftData 재조회가 생긴다(`resolveActiveTranslations` 참고).
         activeTranslations = resolveActiveTranslations(from: registries)

@@ -27,7 +27,7 @@ struct RelationDetailView: View {
             .listRowSeparator(.hidden)
 
             Section("원문") {
-                Text(item.relation.rawSentence).font(.body)
+                Text(PersonRelationLabeling.displayRawSentence(item.relation.rawSentence)).font(.body)
             }
 
             if !item.verseRefs.isEmpty {

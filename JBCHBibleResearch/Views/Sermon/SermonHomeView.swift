@@ -33,8 +33,78 @@ import UIKit
 #endif
 
 private enum SermonListViewMode: String, CaseIterable {
-    case bySermon = "말씀 단위 묶음"
+    case bySermon = "설교별"
+    case byGathering = "모임별"
     case byDate = "날짜별"
+}
+
+/// 목록 정렬 기준 — 세 보기(설교별/모임별/날짜별) 모두 같은 기준을 쓴다. 항상 최신이 위.
+/// 설교별·모임별은 `Sermon`의 `updatedAt`/`createdAt`, 날짜별은 각 사용 이력(`SermonDelivery`)의 `updatedAt`/`createdAt`.
+private enum SermonListSort: String, CaseIterable {
+    case recentlyEdited = "최근 수정"
+    case recentlyCreated = "최근 등록"
+}
+
+/// 내 설교 목록 글자. 아이폰·아이패드는 텍스트 스타일(동적 글자 크기를 따름)을 쓰고,
+/// 맥은 같은 텍스트 스타일이 훨씬 작아(footnote 10pt, callout 12pt) 읽기 어려워 고정 pt로 키운다.
+private enum ListFonts {
+    #if os(macOS)
+    static let rowTitle = Font.system(size: 15, weight: .bold)
+    static let rowTitleMedium = Font.system(size: 15, weight: .semibold)
+    static let meta = Font.system(size: 13)
+    static let metaBold = Font.system(size: 13, weight: .bold)
+    static let control = Font.system(size: 13, weight: .semibold)
+    static let pill = Font.system(size: 13, weight: .bold)
+    static let sectionTitle = Font.system(size: 17, weight: .semibold)
+    static let small = Font.system(size: 12)
+    static let empty = Font.system(size: 14)
+    static func chip(isSelected: Bool) -> Font { .system(size: 13, weight: isSelected ? .bold : .regular) }
+    #else
+    static let rowTitle = Font.callout.weight(.bold)
+    static let rowTitleMedium = Font.callout.weight(.semibold)
+    static let meta = Font.footnote
+    static let metaBold = Font.footnote.weight(.bold)
+    static let control = Font.footnote.weight(.semibold)
+    static let pill = Font.footnote.weight(.bold)
+    static let sectionTitle = Font.title3.weight(.semibold)
+    static let small = Font.caption
+    static let empty = Font.body
+    static func chip(isSelected: Bool) -> Font { .footnote.weight(isSelected ? .bold : .regular) }
+    #endif
+}
+
+/// 모임 필터 칩이 가리키는 대상. 모임은 이름 비교 키(`SermonGatheringSeeder.normalizedKey`)로 구분한다 —
+/// 기기끼리 동기화로 같은 이름의 모임 행이 둘 생겨도(`deduplicate`가 정리하기 전) 한 칩으로 합쳐 센다.
+private enum GatheringFilter: Hashable {
+    case all
+    case gathering(String)
+    /// 모임이 지정되지 않은 사용 이력이 있는 설교.
+    case unassigned
+    /// 사용 이력이 하나도 없는 설교(설교별 보기에서만).
+    case unused
+}
+
+private struct GatheringChip: Identifiable {
+    let filter: GatheringFilter
+    let label: String
+    let count: Int
+    var id: GatheringFilter { filter }
+}
+
+private struct GatheringSection: Identifiable {
+    let id: String
+    let title: String
+    let filter: GatheringFilter
+    let sermons: [Sermon]
+    /// 이 모임에서 쓴 총 횟수(같은 설교를 여러 번 쓴 것 포함).
+    let totalCount: Int
+}
+
+/// 행 오른쪽 아이콘 버튼 — 눌림 때 살짝 흐려지는 것 외에는 꾸밈이 없다.
+private struct SermonRowIconButtonStyle: ButtonStyle {
+    func makeBody(configuration: Configuration) -> some View {
+        configuration.label.opacity(configuration.isPressed ? 0.7 : 1)
+    }
 }
 
 
@@ -103,6 +173,19 @@ struct SermonHomeView: View {
     @State private var selectedSermonID: PersistentIdentifier?
     /// "새 모임" 시트 대상. `.sheet(item:)`이라 nil이 아니면 그 설교에 대해 시트가 열린다.
     @State private var sermonPendingNewDelivery: Sermon?
+    /// 모임 필터 칩에서 고른 대상. 보기 방식을 바꿔도 유지하되, "미사용"은 설교별 보기에만 있어 다른 보기로 가면 "전체"로 되돌린다.
+    @State private var gatheringFilter: GatheringFilter = .all
+    /// 정렬 기준 — 기기별로 기억한다. 처음엔 기존 순서(최근 수정)와 같다.
+    @AppStorage("sermon.listSort") private var listSort: SermonListSort = .recentlyEdited
+    @Query private var gatherings: [SermonGathering]
+    /// (아이패드·맥) 왼쪽 목록 폭 — 사용자가 분할선을 끌어 바꾸고 기기별로 기억한다.
+    @AppStorage("sermon.listPaneWidth") private var listPaneWidth: Double = 600
+    @State private var listWidthDragStart: Double?
+    private static let listWidthRange: ClosedRange<Double> = 380...900
+    /// 오른쪽 상세 패널이 최소한 이 폭은 갖도록 목록 폭 상한을 창 폭에 맞춰 줄인다.
+    private static let detailMinWidth: Double = 320
+    /// 이 폭 이상일 때만 모든 행에 아이콘 4개를 둔다(미만이면 선택한 행에서만).
+    private static let rowActionsMinListWidth: Double = 440
 
     private var settings: UserSettingsStore { .shared }
 
@@ -137,7 +220,13 @@ struct SermonHomeView: View {
         #endif
     }
 
-    private var filteredSermons: [Sermon] {
+    private var subtleText: Color { settings.bibleTextColor?.opacity(0.6) ?? Color.secondary }
+
+    /// 강조색 위의 글자/아이콘색 — 어두운 배경에서는 강조색이 밝아 어두운 글자를 쓴다.
+    private var onAccent: Color { isDarkSurface ? Color(white: 0.08) : Color.white }
+
+    /// 검색어만 적용한 설교(모임 필터 전).
+    private var searchFilteredSermons: [Sermon] {
         guard !searchText.isEmpty else { return sermons }
         return sermons.filter {
             $0.title.localizedCaseInsensitiveContains(searchText)
@@ -145,12 +234,150 @@ struct SermonHomeView: View {
         }
     }
 
-    private var filteredDeliveries: [SermonDelivery] {
-        guard !searchText.isEmpty else { return deliveries }
-        return deliveries.filter { delivery in
-            (delivery.sermon?.title.localizedCaseInsensitiveContains(searchText) ?? false)
-                || delivery.contentText.localizedCaseInsensitiveContains(searchText)
+    /// 정렬 기준에 따른 설교의 기준 시각.
+    private func sortDate(_ sermon: Sermon) -> Date {
+        listSort == .recentlyEdited ? sermon.updatedAt : sermon.createdAt
+    }
+
+    /// 정렬 기준에 따른 사용 이력의 기준 시각.
+    private func sortDate(_ delivery: SermonDelivery) -> Date {
+        listSort == .recentlyEdited ? delivery.updatedAt : delivery.createdAt
+    }
+
+    /// 선택한 정렬 기준(최근 수정/최근 등록, 최신이 위)으로 설교를 정렬한다.
+    private func sortedSermons(_ items: [Sermon]) -> [Sermon] {
+        items.sorted { sortDate($0) > sortDate($1) }
+    }
+
+    /// 검색어 + 모임 필터 + 정렬. 모임을 골라도 순서는 선택한 정렬 기준을 따른다(그 모임에 쓴 설교만 남긴다).
+    private var filteredSermons: [Sermon] {
+        let base = searchFilteredSermons
+        let filtered: [Sermon]
+        switch gatheringFilter {
+        case .all:
+            filtered = base
+        case .unused:
+            filtered = base.filter { ($0.deliveries ?? []).isEmpty }
+        case .gathering, .unassigned:
+            filtered = base.filter { !sermonDeliveries($0, in: gatheringFilter).isEmpty }
         }
+        return sortedSermons(filtered)
+    }
+
+    private var filteredDeliveries: [SermonDelivery] {
+        let base: [SermonDelivery]
+        if searchText.isEmpty {
+            base = deliveries
+        } else {
+            base = deliveries.filter { delivery in
+                (delivery.sermon?.title.localizedCaseInsensitiveContains(searchText) ?? false)
+                    || delivery.contentText.localizedCaseInsensitiveContains(searchText)
+            }
+        }
+        let filtered: [SermonDelivery]
+        switch gatheringFilter {
+        case .all, .unused: filtered = base
+        case .gathering(let key): filtered = base.filter { gatheringKey(of: $0) == key }
+        case .unassigned: filtered = base.filter { gatheringKey(of: $0) == nil }
+        }
+        return filtered.sorted { sortDate($0) > sortDate($1) }
+    }
+
+    // MARK: 모임 필터 계산
+
+    /// 이 사용 이력의 모임 키. 모임이 없거나 이름이 비면 nil(= 모임 미지정).
+    private func gatheringKey(of delivery: SermonDelivery) -> String? {
+        guard let name = delivery.gathering?.name else { return nil }
+        let key = SermonGatheringSeeder.normalizedKey(name)
+        return key.isEmpty ? nil : key
+    }
+
+    /// 설교의 사용 이력(최근 순)을 필터 대상에 맞게 거른다. `.unused`는 사용 이력이 없는 설교를 뜻하므로 빈 배열이다.
+    private func sermonDeliveries(_ sermon: Sermon, in filter: GatheringFilter) -> [SermonDelivery] {
+        let all = (sermon.deliveries ?? []).sorted { $0.deliveredAt > $1.deliveredAt }
+        switch filter {
+        case .all: return all
+        case .gathering(let key): return all.filter { gatheringKey(of: $0) == key }
+        case .unassigned: return all.filter { gatheringKey(of: $0) == nil }
+        case .unused: return []
+        }
+    }
+
+    /// 칩으로 보일 모임 — 같은 이름은 하나로 합치고, 시드 순서(주일설교·청년회 말씀·구역모임·조모임) 다음 만든 순서로 둔다.
+    private var gatheringOptions: [(key: String, name: String)] {
+        let order = SermonGatheringSeeder.defaultNames
+        let sorted = gatherings.sorted { lhs, rhs in
+            let left = order.firstIndex(of: lhs.name) ?? Int.max
+            let right = order.firstIndex(of: rhs.name) ?? Int.max
+            return left != right ? left < right : lhs.createdAt < rhs.createdAt
+        }
+        var seen = Set<String>()
+        var result: [(key: String, name: String)] = []
+        for gathering in sorted {
+            let key = SermonGatheringSeeder.normalizedKey(gathering.name)
+            guard !key.isEmpty, seen.insert(key).inserted else { continue }
+            result.append((key, gathering.name))
+        }
+        return result
+    }
+
+    /// 칩 옆 숫자 — 설교별/모임별 보기는 해당 모임을 쓴 설교 수, 날짜별 보기는 사용 이력 수.
+    private func chipCount(for filter: GatheringFilter) -> Int {
+        if viewMode == .byDate {
+            switch filter {
+            case .all, .unused: return deliveries.count
+            case .gathering(let key): return deliveries.filter { gatheringKey(of: $0) == key }.count
+            case .unassigned: return deliveries.filter { gatheringKey(of: $0) == nil }.count
+            }
+        }
+        switch filter {
+        case .all: return sermons.count
+        case .unused: return sermons.filter { ($0.deliveries ?? []).isEmpty }.count
+        case .gathering, .unassigned: return sermons.filter { !sermonDeliveries($0, in: filter).isEmpty }.count
+        }
+    }
+
+    private var gatheringChips: [GatheringChip] {
+        var chips = [GatheringChip(filter: .all, label: "전체", count: chipCount(for: .all))]
+        for option in gatheringOptions {
+            let filter = GatheringFilter.gathering(option.key)
+            chips.append(GatheringChip(filter: filter, label: option.name, count: chipCount(for: filter)))
+        }
+        // 모임이 지정되지 않은 사용 이력이 있을 때만 보인다(숨은 데이터가 없도록).
+        let unassignedCount = chipCount(for: .unassigned)
+        if unassignedCount > 0 {
+            chips.append(GatheringChip(filter: .unassigned, label: "모임 미지정", count: unassignedCount))
+        }
+        if viewMode == .bySermon {
+            chips.append(GatheringChip(filter: .unused, label: "미사용", count: chipCount(for: .unused)))
+        }
+        return chips
+    }
+
+    /// 모임별 보기의 구역 — 모임마다 그 모임에서 쓴 설교를 선택한 정렬 기준으로. 고른 모임 칩이 있으면 그 모임만.
+    private var gatheringSections: [GatheringSection] {
+        var targets: [(id: String, title: String, filter: GatheringFilter)] = gatheringOptions.map {
+            (id: $0.key, title: $0.name, filter: GatheringFilter.gathering($0.key))
+        }
+        targets.append((id: "unassigned", title: "모임 미지정", filter: GatheringFilter.unassigned))
+        var sections: [GatheringSection] = []
+        for target in targets {
+            if gatheringFilter != .all, gatheringFilter != target.filter { continue }
+            let entries: [(sermon: Sermon, latest: Date, count: Int)] = searchFilteredSermons.compactMap { sermon in
+                let list = sermonDeliveries(sermon, in: target.filter)
+                guard let latest = list.first else { return nil }
+                return (sermon, latest.deliveredAt, list.count)
+            }
+            guard !entries.isEmpty else { continue }
+            sections.append(GatheringSection(
+                id: target.id,
+                title: target.title,
+                filter: target.filter,
+                sermons: sortedSermons(entries.map { $0.sermon }),
+                totalCount: entries.reduce(0) { $0 + $1.count }
+            ))
+        }
+        return sections
     }
 
     private var selectedSermon: Sermon? {
@@ -181,6 +408,10 @@ struct SermonHomeView: View {
         .navigationBarTitleDisplayMode(.inline)
         #endif
         .modifier(ThemedNavigationBarBackgroundModifier(color: settings.bibleBackgroundColor))
+        .onChange(of: viewMode) { _, newMode in
+            // "미사용" 칩은 설교별 보기에만 있다.
+            if newMode != .bySermon, gatheringFilter == .unused { gatheringFilter = .all }
+        }
         .toolbar {
             #if os(iOS)
             // iOS 26(Liquid Glass)부터 툴바 항목은 자동으로 유리 캡슐 배경이 깔려 글자만 있는 제목도 버튼처럼 보인다.
@@ -209,38 +440,173 @@ struct SermonHomeView: View {
         }
     }
 
-    // MARK: - 아이폰 본문 (기존 그대로 — 말씀단위묶음/날짜별 토글 + 단일 목록)
+    // MARK: - 목록 공통 — 보기 방식 3종 / 모임 필터 칩 / 컴팩트 행 (2026-10-02 목업 채택)
+    //
+    // 아이폰·아이패드·맥이 같은 머리(보기 방식 + 모임 칩 + 건수)와 같은 컴팩트 행을 쓴다. 차이는 행을 눌렀을 때뿐이다:
+    // 아이폰은 상세로 push, 아이패드·맥은 오른쪽 상세 패널에서 고른다(행 오른쪽 아이콘 4개는 아이패드·맥 전용).
+    // 데이터는 그대로다 — 모임은 `SermonDelivery.gathering`, 날짜는 `deliveredAt`을 읽을 뿐 스키마 변경이 없다.
+
+    /// 목록 머리 — [설교별 / 모임별 / 날짜별] + 모임 필터 칩 + 건수 안내.
+    private var listHeader: some View {
+        VStack(alignment: .leading, spacing: 8) {
+            SermonSegmentedPill(
+                items: [
+                    .init(tag: SermonListViewMode.bySermon, label: SermonListViewMode.bySermon.rawValue),
+                    .init(tag: SermonListViewMode.byGathering, label: SermonListViewMode.byGathering.rawValue),
+                    .init(tag: SermonListViewMode.byDate, label: SermonListViewMode.byDate.rawValue),
+                ],
+                selection: $viewMode,
+                accent: accent,
+                font: ListFonts.pill
+            )
+            FlowLayoutHStack(spacing: 6) {
+                ForEach(gatheringChips) { chip in
+                    gatheringChipButton(chip)
+                }
+            }
+            HStack(spacing: 8) {
+                Text(listSummaryText)
+                    .font(ListFonts.meta)
+                    .foregroundStyle(subtleText)
+                Spacer(minLength: 8)
+                sortMenu
+            }
+        }
+    }
+
+    /// 정렬 메뉴 — "최근 수정 / 최근 등록" 두 가지. 세 보기 모두에 적용된다.
+    private var sortMenu: some View {
+        Menu {
+            // Picker를 Menu 안에 넣으면 아이패드·맥에서 "정렬 ▸" 하위 메뉴로 한 단계 더 들어가게 되어, 버튼으로 바로 펼친다.
+            ForEach(SermonListSort.allCases, id: \.self) { option in
+                Button {
+                    listSort = option
+                } label: {
+                    if listSort == option {
+                        Label(option.rawValue, systemImage: "checkmark")
+                    } else {
+                        Text(option.rawValue)
+                    }
+                }
+            }
+        } label: {
+            HStack(spacing: 4) {
+                Text("정렬: \(listSort.rawValue)")
+                Image(systemName: "chevron.up.chevron.down")
+                    .font(.system(size: 10, weight: .semibold))
+            }
+            .font(ListFonts.control)
+            .foregroundStyle(settings.bibleTextColor ?? Color.primary)
+            .padding(.horizontal, 8)
+            .frame(minHeight: 30)
+            .overlay(Capsule().strokeBorder((settings.bibleTextColor ?? Color.primary).opacity(0.24), lineWidth: 1))
+            .contentShape(Capsule())
+        }
+        .menuIndicator(.hidden)
+        .fixedSize()
+        .accessibilityLabel("정렬 기준")
+        .accessibilityValue(listSort.rawValue)
+    }
+
+    private var listSummaryText: String {
+        switch viewMode {
+        case .bySermon:
+            return "설교 \(filteredSermons.count)개" + (gatheringFilter == .all ? "" : " · 필터 적용")
+        case .byGathering:
+            let sections = gatheringSections
+            let sermonCount = Set(sections.flatMap { $0.sermons.map(\.persistentModelID) }).count
+            return "모임 \(sections.count)곳 · 설교 \(sermonCount)개"
+        case .byDate:
+            return "사용 이력 \(filteredDeliveries.count)건"
+        }
+    }
+
+    private func gatheringChipButton(_ chip: GatheringChip) -> some View {
+        let isSelected = gatheringFilter == chip.filter
+        let textColor = settings.bibleTextColor ?? Color.primary
+        #if os(iOS)
+        let height: CGFloat = 34
+        #else
+        let height: CGFloat = 32
+        #endif
+        return Button {
+            gatheringFilter = chip.filter
+        } label: {
+            HStack(spacing: 4) {
+                Text(chip.label)
+                Text("\(chip.count)")
+                    .foregroundStyle(isSelected ? onAccent.opacity(0.85) : subtleText)
+            }
+            .font(ListFonts.chip(isSelected: isSelected))
+            .lineLimit(1)
+            .padding(.horizontal, 10)
+            .frame(height: height)
+            .foregroundStyle(isSelected ? onAccent : textColor)
+            .background(Capsule().fill(isSelected ? accent : Color.clear))
+            .overlay(Capsule().strokeBorder(isSelected ? accent : textColor.opacity(0.24), lineWidth: 1))
+            // 선택 안 된 칩은 배경이 투명이라 .plain 버튼에서 글자 위만 눌린다 — 칩 전체를 누름 영역으로 둔다.
+            .contentShape(Capsule())
+        }
+        .buttonStyle(.plain)
+        .accessibilityAddTraits(isSelected ? .isSelected : [])
+    }
+
+    /// 보기 방식에 맞는 목록 본문. `isSplit`이면 아이패드·맥(행 선택 = 오른쪽 상세), 아니면 아이폰(행 = push).
+    @ViewBuilder
+    private func listRows(isSplit: Bool, showsRowActions: Bool) -> some View {
+        switch viewMode {
+        case .bySermon:
+            let items = filteredSermons
+            if items.isEmpty {
+                emptyState(text: emptyListMessage)
+            } else {
+                ForEach(items) { sermon in
+                    sermonEntry(sermon, scope: gatheringFilter, showsDates: false, isSplit: isSplit, showsRowActions: showsRowActions)
+                }
+            }
+        case .byGathering:
+            let sections = gatheringSections
+            if sections.isEmpty {
+                emptyState(text: emptyListMessage)
+            } else {
+                ForEach(sections) { section in
+                    gatheringHeader(section)
+                    ForEach(section.sermons) { sermon in
+                        sermonEntry(sermon, scope: section.filter, showsDates: true, isSplit: isSplit, showsRowActions: showsRowActions)
+                    }
+                }
+            }
+        case .byDate:
+            let items = filteredDeliveries
+            if items.isEmpty {
+                emptyState(text: emptyListMessage)
+            } else {
+                ForEach(items) { delivery in
+                    if isSplit {
+                        splitDeliveryRow(delivery)
+                    } else {
+                        deliveryRow(delivery)
+                    }
+                }
+            }
+        }
+    }
+
+    private var emptyListMessage: String {
+        if viewMode == .byDate {
+            return deliveries.isEmpty ? "아직 사용 이력이 없습니다." : "조건에 맞는 사용 이력이 없습니다."
+        }
+        return sermons.isEmpty ? "아직 등록한 설교가 없습니다." : "조건에 맞는 설교가 없습니다."
+    }
+
+    // MARK: - 아이폰 본문 — 보기 3종 + 모임 칩 + 컴팩트 행(눌러서 상세로 push)
 
     private var phoneContent: some View {
         ScrollView {
-            LazyVStack(alignment: .leading, spacing: 14) {
-                SermonSegmentedPill(
-                    items: [
-                        .init(tag: SermonListViewMode.bySermon, label: SermonListViewMode.bySermon.rawValue),
-                        .init(tag: SermonListViewMode.byDate, label: SermonListViewMode.byDate.rawValue),
-                    ],
-                    selection: $viewMode,
-                    accent: accent
-                )
-
-                switch viewMode {
-                case .bySermon:
-                    if filteredSermons.isEmpty {
-                        emptyState(text: "아직 등록한 설교가 없습니다.")
-                    } else {
-                        ForEach(filteredSermons) { sermon in
-                            sermonRow(sermon)
-                        }
-                    }
-                case .byDate:
-                    if filteredDeliveries.isEmpty {
-                        emptyState(text: "아직 사용 이력이 없습니다.")
-                    } else {
-                        ForEach(filteredDeliveries) { delivery in
-                            deliveryRow(delivery)
-                        }
-                    }
-                }
+            LazyVStack(alignment: .leading, spacing: 8) {
+                listHeader
+                    .padding(.bottom, 4)
+                listRows(isSplit: false, showsRowActions: false)
             }
             .padding(16)
         }
@@ -248,22 +614,25 @@ struct SermonHomeView: View {
         .background(settings.bibleBackgroundColor ?? Color.clear)
     }
 
-    // MARK: - 아이패드·맥 본문 — 왼쪽 설교함(말씀단위 목록) / 오른쪽 상세리스트
-    // 왼쪽 설교함과 오른쪽 상세를 나란히 놓는 구성(`DocumentsHomeView.splitMainContent`와 같은 패턴).
+    // MARK: - 아이패드·맥 본문 — 왼쪽 설교 목록(폭 조절) / 오른쪽 상세
+    // 에디터가 새 창으로 옮겨 가 오른쪽 패널에 에디터가 없으므로 목록을 넓게 쓴다(기본 460pt, 320~640pt에서 분할선을 끌어 조절).
+
     private var splitContent: some View {
         VStack(spacing: 0) {
-            HStack(spacing: 0) {
-                sermonSidebar
-                    // 행 버튼 4개가 폭을 나눠 갖기 때문에 버튼 텍스트가 잘리지 않을 만큼의 폭이 필요하다.
-                    .frame(minWidth: 150, idealWidth: 180, maxWidth: 230)
+            GeometryReader { proxy in
+                let listWidth = effectiveListWidth(totalWidth: proxy.size.width)
+                HStack(spacing: 0) {
+                    sermonSidebar(listWidth: listWidth)
+                        .frame(width: listWidth)
 
-                Divider()
+                    listResizeHandle(currentWidth: listWidth, totalWidth: proxy.size.width)
 
-                // 새 설교 작성/설교 편집은 오른쪽 패널이 아니라 별도 창에서 한다(아래 `startNewSermon`, 행의 "편집" 버튼).
-                if let selectedSermon {
-                    SermonDetailView(sermon: selectedSermon)
-                } else {
-                    emptySelectionPane
+                    // 새 설교 작성/설교 편집은 오른쪽 패널이 아니라 별도 창에서 한다(아래 `startNewSermon`, 행의 편집 아이콘).
+                    if let selectedSermon {
+                        SermonDetailView(sermon: selectedSermon, highlightedGatheringKey: detailHighlightKey)
+                    } else {
+                        emptySelectionPane
+                    }
                 }
             }
         }
@@ -281,77 +650,67 @@ struct SermonHomeView: View {
         }
     }
 
-    /// 왼쪽 "설교함" — 늘 말씀단위 목록만 보여준다(토글 없음). 고르면 `selectedSermonID`만 바뀌고
-    /// 오른쪽 `SermonDetailView`가 그 값을 읽어 다시 그린다.
-    private var sermonSidebar: some View {
-        ScrollView {
-            LazyVStack(alignment: .leading, spacing: 10) {
-                if filteredSermons.isEmpty {
-                    emptyState(text: "아직 등록한 설교가 없습니다.")
-                } else {
-                    ForEach(filteredSermons) { sermon in
-                        VStack(alignment: .leading, spacing: 0) {
-                            Button {
-                                selectedSermonID = sermon.persistentModelID
-                            } label: {
-                                sermonRowLabel(sermon)
-                                    .overlay(alignment: .leading) {
-                                        if sermon.persistentModelID == selectedSermonID {
-                                            RoundedRectangle(cornerRadius: 2)
-                                                .fill(accent)
-                                                .frame(width: 3)
-                                        }
-                                    }
-                            }
-                            .buttonStyle(.plain)
+    /// 저장된 목록 폭을 창 폭에 맞춰 자른다 — 오른쪽 상세가 `detailMinWidth`보다 좁아지지 않게(창이 좁으면 목록이 줄어든다).
+    private func effectiveListWidth(totalWidth: CGFloat) -> CGFloat {
+        let range = Self.listWidthRange
+        let upper = max(range.lowerBound, Double(totalWidth) - Self.detailMinWidth)
+        return CGFloat(min(max(listPaneWidth, range.lowerBound), min(range.upperBound, upper)))
+    }
 
-                            // 고르지 않고도 곧장 쓸 수 있도록 행 아래에 모임/Map/편집/뷰어 버튼을 둔다.
-                            HStack(spacing: 4) {
-
-                                Button {
-                                    sermonPendingNewDelivery = sermon
-                                } label: {
-                                    sermonRowActionLabel(title: "모임", systemImage: "plus.circle")
-                                }
-                                .buttonStyle(SermonMiniPillButtonStyle(isFilled: true, tint: joinButtonTint))
-                                // 아이콘은 SF Symbols 4(iOS 16+/macOS 13+)의 트리 형태에 가까운 심벌이다. 바꾸려면 이 한 곳만 수정한다.
-                                Button {
-                                    openWindow(id: "sermon-mindmap", value: SermonMindMapTarget.sermon(sermon))
-                                } label: {
-                                    sermonRowActionLabel(title: "Map", systemImage: "point.3.connected.trianglepath.dotted")
-                                }
-                                .buttonStyle(SermonMiniPillButtonStyle(isFilled: true, tint: mapButtonTint))
-                                Button {
-                                    // 편집은 별도 창에서 한다(`SermonDetailView.editorButton`과 같은 창). 같은 설교는 창이 하나만 뜬다.
-                                    selectedSermonID = sermon.persistentModelID
-                                    openWindow(id: "sermon-editor", value: SermonContentTarget.sermon(sermon))
-                                } label: {
-                                    sermonRowActionLabel(title: "편집", systemImage: "square.and.pencil")
-                                }
-                                .buttonStyle(SermonMiniPillButtonStyle(isFilled: true, tint: editButtonTint))
-                                Button {
-                                    openWindow(id: "sermon-viewer", value: SermonViewerTarget.sermon(sermon))
-                                } label: {
-                                    sermonRowActionLabel(title: "뷰어", systemImage: "eyeglasses")
-                                }
-                                .buttonStyle(SermonMiniPillButtonStyle(isFilled: true, tint: accent))
-                            }
-                            .padding(.horizontal, 4)
-                            .padding(.top, 4)
-                        }
-                        // `sermonRowLabel`이 이미 자기 카드 배경을 갖고 있어 VStack 전체를 또 카드로 감싸지 않는다
-                        // (이중 배경 방지). 버튼 줄은 그 카드 바로 아래에 붙는다.
-                        .contextMenu {
-                            Button(role: .destructive) {
-                                sermonPendingDelete = sermon
-                            } label: {
-                                Label("삭제", systemImage: "trash")
-                            }
-                        }
+    /// 목록과 상세 사이 분할선 — 끌어서 목록 폭을 바꾼다(기기별로 기억). 시작 폭은 첫 변화 때 한 번만 잡아 누적 오차를 막는다.
+    private func listResizeHandle(currentWidth: CGFloat, totalWidth: CGFloat) -> some View {
+        let range = Self.listWidthRange
+        let upper = max(range.lowerBound, min(range.upperBound, Double(totalWidth) - Self.detailMinWidth))
+        return Rectangle()
+            .fill(Color.clear)
+            .frame(width: 12)
+            .overlay(Rectangle().fill(Color.secondary.opacity(0.35)).frame(width: 1))
+            .contentShape(Rectangle())
+            .gesture(
+                DragGesture(minimumDistance: 1, coordinateSpace: .global)
+                    .onChanged { value in
+                        let start = listWidthDragStart ?? Double(currentWidth)
+                        listWidthDragStart = start
+                        listPaneWidth = min(max(start + Double(value.translation.width), range.lowerBound), upper)
                     }
+                    .onEnded { _ in listWidthDragStart = nil }
+            )
+            .help("끌어서 목록 폭 조절")
+            .accessibilityLabel("목록 폭 조절")
+            .accessibilityValue("\(Int(currentWidth))")
+            .accessibilityAdjustableAction { direction in
+                switch direction {
+                case .increment: listPaneWidth = min(Double(currentWidth) + 20, upper)
+                case .decrement: listPaneWidth = max(Double(currentWidth) - 20, range.lowerBound)
+                @unknown default: break
                 }
             }
-            .padding(16)
+    }
+
+    /// 왼쪽 목록 — 머리(보기 방식·모임 칩·건수)는 고정하고 행만 스크롤한다. 선택은 `selectedSermonID`만 바꾸고 오른쪽 `SermonDetailView`가 그 값을 읽는다.
+    private func sermonSidebar(listWidth: CGFloat) -> some View {
+        let showsActions = Double(listWidth) >= Self.rowActionsMinListWidth
+        return VStack(spacing: 0) {
+            listHeader
+                .padding(.horizontal, 12)
+                .padding(.top, 10)
+                .padding(.bottom, 6)
+            ScrollView {
+                LazyVStack(alignment: .leading, spacing: 6) {
+                    listRows(isSplit: true, showsRowActions: showsActions)
+                }
+                .padding(.horizontal, 12)
+                .padding(.vertical, 8)
+            }
+        }
+    }
+
+    /// 오른쪽 상세에서 강조할 모임(고른 모임 칩의 이력 행). 모임 미지정은 빈 문자열.
+    private var detailHighlightKey: String? {
+        switch gatheringFilter {
+        case .gathering(let key): return key
+        case .unassigned: return ""
+        case .all, .unused: return nil
         }
     }
 
@@ -399,108 +758,206 @@ struct SermonHomeView: View {
 
     private func emptyState(text: String) -> some View {
         Text(text)
-            .font(.callout)
+            .font(ListFonts.empty)
             .foregroundStyle(settings.bibleTextColor?.opacity(0.6) ?? Color.secondary)
             .frame(maxWidth: .infinity)
             .padding(.top, 24)
     }
 
-    // MARK: - 말씀 단위 묶음 행 (아이폰 전용 — push로 상세 화면 이동)
+    // MARK: - 설교 행 (컴팩트)
+
+    private static let shortDateFormatter: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.locale = Locale(identifier: "ko_KR")
+        formatter.dateFormat = "M/d"
+        return formatter
+    }()
+
+    private static let shortDateWithYearFormatter: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.locale = Locale(identifier: "ko_KR")
+        formatter.dateFormat = "yy. M/d"
+        return formatter
+    }()
+
+    /// 올해는 "9/21", 다른 해는 "25. 9/21". 12/24시간제와 무관하게 고정 포맷을 쓴다.
+    private func shortDate(_ date: Date) -> String {
+        let sameYear = Calendar.current.isDate(date, equalTo: .now, toGranularity: .year)
+        return (sameYear ? Self.shortDateFormatter : Self.shortDateWithYearFormatter).string(from: date)
+    }
 
     @ViewBuilder
-    private func sermonRow(_ sermon: Sermon) -> some View {
-        NavigationLink {
-            SermonDetailView(sermon: sermon)
-        } label: {
-            sermonRowLabel(sermon)
-        }
-        .buttonStyle(.plain)
-        // 파급력이 큰 삭제라 바로 지우지 않고 `sermonPendingDelete`를 거쳐 확인 대화상자를 띄운다.
-        .contextMenu {
-            Button(role: .destructive) {
-                sermonPendingDelete = sermon
+    private func sermonEntry(_ sermon: Sermon, scope: GatheringFilter, showsDates: Bool, isSplit: Bool, showsRowActions: Bool) -> some View {
+        if isSplit {
+            splitSermonRow(sermon, scope: scope, showsDates: showsDates, showsRowActions: showsRowActions)
+        } else {
+            NavigationLink {
+                SermonDetailView(sermon: sermon)
             } label: {
-                Label("삭제", systemImage: "trash")
+                sermonCompactContent(sermon, scope: scope, showsDates: showsDates)
+                    .padding(.horizontal, 12)
+                    .padding(.vertical, 9)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .background(RoundedRectangle(cornerRadius: 10, style: .continuous).fill(SermonTheme.cardFill))
+            }
+            .buttonStyle(.plain)
+            // 파급력이 큰 삭제라 바로 지우지 않고 `sermonPendingDelete`를 거쳐 확인 대화상자를 띄운다.
+            .contextMenu { sermonDeleteMenu(sermon) }
+        }
+    }
+
+    /// 아이패드·맥 행 — 글자 영역을 누르면 선택(오른쪽 상세), 오른쪽 아이콘 4개(모임/Map/편집/뷰어)는 선택 없이 바로 쓴다.
+    /// 목록이 좁으면(`rowActionsMinListWidth` 미만) 선택한 행에서만 아이콘을 보인다.
+    private func splitSermonRow(_ sermon: Sermon, scope: GatheringFilter, showsDates: Bool, showsRowActions: Bool) -> some View {
+        let isSelected = sermon.persistentModelID == selectedSermonID
+        return HStack(spacing: 8) {
+            sermonCompactContent(sermon, scope: scope, showsDates: showsDates)
+                .contentShape(Rectangle())
+                .onTapGesture { selectedSermonID = sermon.persistentModelID }
+                .accessibilityAddTraits(.isButton)
+            if showsRowActions || isSelected {
+                rowActionIcons(sermon)
             }
         }
-    }
-
-    /// 기기의 12/24시간제 설정과 무관하게 항상 24시간제(HH)로 표시하려고, 로케일 종속인
-    /// `Date.FormatStyle` 대신 고정 포맷의 `DateFormatter`를 쓴다.
-    private static let gatheringDateFormatter: DateFormatter = {
-        let formatter = DateFormatter()
-        formatter.locale = Locale(identifier: "ko_KR")
-        formatter.dateFormat = "yyyy. M. d (E)"
-        return formatter
-    }()
-
-    private static let updatedAtFormatter: DateFormatter = {
-        let formatter = DateFormatter()
-        formatter.locale = Locale(identifier: "ko_KR")
-        formatter.dateFormat = "yyyy. M. d (E) HH:mm"
-        return formatter
-    }()
-
-    /// 행 하단 버튼(모임/Map/편집/뷰어) 라벨. 아이콘(위)/텍스트(아래) 두 줄이며, 좁은 폭에서
-    /// 한글이 음절 단위로 줄바꿈되지 않도록 `.lineLimit(1)`을 건다. 크기는 버튼 바깥이 아니라
-    /// 라벨 안에 걸어야 한다 — `SermonMiniPillButtonStyle`이 라벨 크기에 맞춰 알약 배경을 그리므로
-    /// 바깥 프레임으로는 4개 버튼의 폭·높이가 통일되지 않는다.
-    private func sermonRowActionLabel(title: String, systemImage: String) -> some View {
-        VStack(spacing: 2) {
-            Image(systemName: systemImage)
-                .font(.callout)
-            Text(title)
-                .font(.caption2.weight(.semibold))
-                .lineLimit(1)
+        .padding(.horizontal, 12)
+        .padding(.vertical, 9)
+        .background(RoundedRectangle(cornerRadius: 10, style: .continuous).fill(SermonTheme.cardFill))
+        .overlay {
+            if isSelected {
+                RoundedRectangle(cornerRadius: 10, style: .continuous).strokeBorder(accent, lineWidth: 2)
+            }
         }
-        .frame(maxWidth: .infinity)
-        .frame(height: 38)
+        .contextMenu { sermonDeleteMenu(sermon) }
     }
 
-    private func sermonRowLabel(_ sermon: Sermon) -> some View {
-        let sortedDeliveries = (sermon.deliveries ?? []).sorted { $0.deliveredAt > $1.deliveredAt }
-        let tags = (sermon.sermonTags ?? []).compactMap(\.tag).filter { !$0.isMerged }
-        return VStack(alignment: .leading, spacing: 10) {
-            Text(sermon.title.isEmpty ? "제목 없음" : sermon.title)
-                .font(.headline)
-                .foregroundStyle(settings.bibleTextColor ?? .primary)
-                .multilineTextAlignment(.leading)
+    @ViewBuilder
+    private func sermonDeleteMenu(_ sermon: Sermon) -> some View {
+        Button(role: .destructive) {
+            sermonPendingDelete = sermon
+        } label: {
+            Label("삭제", systemImage: "trash")
+        }
+    }
 
-            if !tags.isEmpty {
-                FlowLayoutHStack {
-                    ForEach(tags) { tag in
-                        SermonBadge(text: "#\(tag.name)", color: accent)
+    /// 컴팩트 행 내용 — 위 줄: 제목(한 줄), 아래 줄: 태그(2개) · 최근 모임 · 수정일(좁으면 먼저 잘림), 오른쪽: 사용 횟수.
+    /// `scope`가 특정 모임이면 횟수·최근 모임이 그 모임 기준이다. `showsDates`(모임별 보기)는 최근 모임 대신 그 모임에서 쓴 날짜들을 보인다.
+    private func sermonCompactContent(_ sermon: Sermon, scope: GatheringFilter, showsDates: Bool) -> some View {
+        let all = sermonDeliveries(sermon, in: .all)
+        let scoped = (scope == .all || scope == .unused) ? all : sermonDeliveries(sermon, in: scope)
+        let tags = (sermon.sermonTags ?? []).compactMap(\.tag).filter { !$0.isMerged }
+        return HStack(spacing: 10) {
+            VStack(alignment: .leading, spacing: 2) {
+                Text(sermon.title.isEmpty ? "제목 없음" : sermon.title)
+                    .font(ListFonts.rowTitle)
+                    .foregroundStyle(settings.bibleTextColor ?? .primary)
+                    .lineLimit(1)
+                HStack(spacing: 8) {
+                    if showsDates {
+                        // 모임별 보기: 그 모임에서 쓴 날짜(최근 4개 + 나머지 개수).
+                        ForEach(Array(scoped.prefix(4).enumerated()), id: \.offset) { _, delivery in
+                            Text(shortDate(delivery.deliveredAt))
+                                .padding(.horizontal, 6)
+                                .background(Capsule().fill(Color.secondary.opacity(0.15)))
+                                .foregroundStyle(subtleText)
+                        }
+                        if scoped.count > 4 {
+                            Text("+\(scoped.count - 4)")
+                                .foregroundStyle(subtleText)
+                        }
+                    } else {
+                        if !tags.isEmpty {
+                            Text(tags.prefix(2).map { "#\($0.name)" }.joined(separator: " "))
+                                .foregroundStyle(accent)
+                                .lineLimit(1)
+                        }
+                        if let latest = scoped.first {
+                            Text("최근 \(shortDate(latest.deliveredAt)) \(latest.gathering?.name ?? "모임 미지정")")
+                                .foregroundStyle(SermonTheme.success)
+                                .fontWeight(.semibold)
+                                .lineLimit(1)
+                        } else {
+                            Text("사용 이력 없음")
+                                .foregroundStyle(subtleText)
+                                .lineLimit(1)
+                        }
+                        Text("\(listSort == .recentlyEdited ? "수정" : "등록") \(shortDate(sortDate(sermon)))")
+                            .foregroundStyle(subtleText)
+                            .lineLimit(1)
+                            .layoutPriority(-1)
                     }
                 }
+                .font(ListFonts.meta)
             }
-
-            if !sortedDeliveries.isEmpty {
-                Divider()
-            }
-
-            // 사용 횟수 / 최근 모임 / 수정일을 한 세로 블록으로 둔다. 수정일 줄만 회색이고 나머지는
-            // 사용 이력 유무에 따라 `SermonTheme.success`(초록) 또는 secondary 색이다.
-            VStack(alignment: .leading, spacing: 4) {
-                if let latest = sortedDeliveries.first {
-                    Text("\(sortedDeliveries.count)회 사용")
-                        .font(.caption.weight(.semibold))
-                        .foregroundStyle(SermonTheme.success)
-                    Text("최근 : \(Self.gatheringDateFormatter.string(from: latest.deliveredAt)) \(latest.gathering?.name ?? "모임 미지정")")
-                        .font(.caption)
-                        .foregroundStyle(SermonTheme.success)
-                } else {
-                    Text("사용 이력 없음")
-                        .font(.caption)
-                        .foregroundStyle(settings.bibleTextColor?.opacity(0.6) ?? Color.secondary)
-                }
-                Text("수정 : \(Self.updatedAtFormatter.string(from: sermon.updatedAt))")
-                    .font(.caption)
-                    .foregroundStyle(settings.bibleTextColor?.opacity(0.6) ?? Color.secondary)
+            Spacer(minLength: 0)
+            if scoped.isEmpty {
+                Text("미사용")
+                    .font(ListFonts.meta)
+                    .foregroundStyle(subtleText)
+            } else {
+                Text("\(scoped.count)회")
+                    .font(ListFonts.metaBold)
+                    .foregroundStyle(SermonTheme.success)
+                    .padding(.horizontal, 8)
+                    .padding(.vertical, 2)
+                    .background(Capsule().fill(SermonTheme.success.opacity(0.15)))
             }
         }
-        .padding(16)
-        .frame(maxWidth: .infinity, alignment: .leading)
-        .background(RoundedRectangle(cornerRadius: SermonTheme.cardCornerRadius, style: .continuous).fill(SermonTheme.cardFill))
+    }
+
+    // MARK: 행 오른쪽 아이콘 4개 (아이패드·맥)
+
+    #if os(iOS)
+    private var rowActionSide: CGFloat { 36 }
+    #else
+    private var rowActionSide: CGFloat { 32 }
+    #endif
+
+    private func rowActionIcons(_ sermon: Sermon) -> some View {
+        HStack(spacing: 4) {
+            rowActionButton(systemImage: "plus", title: "새 모임에서 사용", tint: joinButtonTint) {
+                sermonPendingNewDelivery = sermon
+            }
+            // 아이콘은 SF Symbols 4(iOS 16+/macOS 13+)의 트리 형태에 가까운 심벌이다. 바꾸려면 이 한 곳만 수정한다.
+            rowActionButton(systemImage: "point.3.connected.trianglepath.dotted", title: "마인드맵", tint: mapButtonTint) {
+                openWindow(id: "sermon-mindmap", value: SermonMindMapTarget.sermon(sermon))
+            }
+            rowActionButton(systemImage: "square.and.pencil", title: "편집", tint: editButtonTint) {
+                // 편집은 별도 창에서 한다(`SermonDetailView.editorButton`과 같은 창). 같은 설교는 창이 하나만 뜬다.
+                selectedSermonID = sermon.persistentModelID
+                openWindow(id: "sermon-editor", value: SermonContentTarget.sermon(sermon))
+            }
+            rowActionButton(systemImage: "eyeglasses", title: "뷰어", tint: accent) {
+                openWindow(id: "sermon-viewer", value: SermonViewerTarget.sermon(sermon))
+            }
+        }
+    }
+
+    private func rowActionButton(systemImage: String, title: String, tint: Color, action: @escaping () -> Void) -> some View {
+        Button(action: action) {
+            Image(systemName: systemImage)
+                .font(.system(size: 15, weight: .semibold))
+                .foregroundStyle(onAccent)
+                .frame(width: rowActionSide, height: rowActionSide)
+                .background(tint, in: RoundedRectangle(cornerRadius: 7, style: .continuous))
+        }
+        .buttonStyle(SermonRowIconButtonStyle())
+        .help(title)
+        .accessibilityLabel(title)
+    }
+
+    /// 모임별 보기의 모임 제목 줄.
+    private func gatheringHeader(_ section: GatheringSection) -> some View {
+        HStack(alignment: .firstTextBaseline, spacing: 8) {
+            Text(section.title)
+                .font(ListFonts.sectionTitle)
+                .foregroundStyle(settings.bibleTextColor ?? .primary)
+            Text("설교 \(section.sermons.count)개 · \(section.totalCount)회")
+                .font(ListFonts.meta)
+                .foregroundStyle(subtleText)
+        }
+        .padding(.top, 8)
+        .padding(.horizontal, 4)
+        .accessibilityAddTraits(.isHeader)
     }
 
     // MARK: - 날짜별 행 (아이폰 전용 — 아이패드·맥은 splitContent가 대체)
@@ -528,26 +985,53 @@ struct SermonHomeView: View {
         let isModified = (delivery.sermon?.contentText).map { $0 != delivery.contentText } ?? false
         return HStack(spacing: 12) {
             Text(delivery.deliveredAt.formatted(date: .abbreviated, time: .omitted))
-                .font(.caption.weight(.semibold))
+                .font(ListFonts.control)
                 .foregroundStyle(accent)
-                .frame(width: 90, alignment: .leading)
+                .frame(width: 104, alignment: .leading)
             VStack(alignment: .leading, spacing: 2) {
                 Text(delivery.gathering?.name ?? "모임 미지정")
-                    .font(.subheadline.weight(.semibold))
+                    .font(ListFonts.rowTitleMedium)
                     .foregroundStyle(settings.bibleTextColor ?? .primary)
                 Text(delivery.sermon?.title.isEmpty == false ? delivery.sermon!.title : "제목 없음")
-                    .font(.caption)
+                    .font(ListFonts.meta)
                     .foregroundStyle(settings.bibleTextColor?.opacity(0.6) ?? Color.secondary)
             }
             Spacer()
-            if isModified {
-                SermonBadge(text: "수정됨", color: SermonTheme.warning)
-            } else {
-                SermonBadge(text: "메인과 동일", color: SermonTheme.success)
+            VStack(alignment: .trailing, spacing: 4) {
+                if isModified {
+                    SermonBadge(text: "수정됨", color: SermonTheme.warning)
+                } else {
+                    SermonBadge(text: "메인과 동일", color: SermonTheme.success)
+                }
+                // 정렬 기준이 되는 날짜 — 사용일과 다른 순서로 정렬돼도 왜 그 자리인지 보이게 한다.
+                Text("\(listSort == .recentlyEdited ? "수정" : "등록") \(shortDate(sortDate(delivery)))")
+                    .font(ListFonts.small)
+                    .foregroundStyle(settings.bibleTextColor?.opacity(0.6) ?? Color.secondary)
             }
         }
         .padding(14)
         .background(RoundedRectangle(cornerRadius: SermonTheme.cardCornerRadius, style: .continuous).fill(SermonTheme.cardFill))
+    }
+
+    /// 아이패드·맥 날짜별 행 — 누르면 그 설교를 오른쪽 상세에서 보인다(그 회차의 편집/뷰어는 상세의 이력 행에 있다).
+    private func splitDeliveryRow(_ delivery: SermonDelivery) -> some View {
+        let isSelected = delivery.sermon != nil && delivery.sermon?.persistentModelID == selectedSermonID
+        return deliveryRowLabel(delivery)
+            .contentShape(Rectangle())
+            .onTapGesture { selectedSermonID = delivery.sermon?.persistentModelID }
+            .accessibilityAddTraits(.isButton)
+            .overlay {
+                if isSelected {
+                    RoundedRectangle(cornerRadius: SermonTheme.cardCornerRadius, style: .continuous).strokeBorder(accent, lineWidth: 2)
+                }
+            }
+            .contextMenu {
+                Button(role: .destructive) {
+                    deleteDelivery(delivery)
+                } label: {
+                    Label("삭제", systemImage: "trash")
+                }
+            }
     }
 
     // MARK: - 삭제

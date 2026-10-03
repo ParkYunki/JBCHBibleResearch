@@ -235,6 +235,8 @@ struct JBCHBibleResearchApp: App {
         #if os(macOS)
         Settings {
             SettingsView()
+                // 설정 창도 앱의 화면 모드(라이트/다크/시스템)를 따르게 한다 — 이전엔 메인 창에서만 걸려 있어 OS가 다크면 설정 창만 다크였다.
+                .modifier(AppColorSchemeModifier())
                 .modelContainer(modelContainer)
         }
         // macOS 표준 Settings 창 패턴 — 고정 크기, 리사이즈 불가.

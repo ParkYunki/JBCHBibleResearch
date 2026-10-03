@@ -258,6 +258,11 @@ struct SidebarNavigationView: View {
             // 아이패드: 본문과 맞닿는 오른쪽 가장자리에 헤어라인(맥/아이폰은 동작 안 함).
             .iPadPaneSeparator(.trailing)
             .navigationSplitViewColumnWidth(min: 200, ideal: 240, max: 280)
+            // macOS: 사이드바 상단(신호등 버튼 줄)도 본문 컬럼의 창 툴바와 같은 테마색으로 맞춘다(2026-10-03).
+            // 테마를 고르지 않았으면(nil) 아무것도 바꾸지 않는다.
+            #if os(macOS)
+            .sidebarWindowToolbarThemed(settings.bibleBackgroundColor)
+            #endif
             // 아이패드에서는 사이드바 위의 큰 인라인 제목으로 보이므로 macOS 전용으로만 둔다
             // (이 뷰는 애초에 아이폰에서 쓰이지 않는다).
             #if os(macOS)
@@ -684,3 +689,19 @@ extension View {
         modifier(MacSerifTitleModifier(title: title))
     }
 }
+
+#if os(macOS)
+extension View {
+    /// 사이드바 컬럼의 창 툴바 배경을 테마색으로 칠한다(테마 미선택이면 무동작).
+    @ViewBuilder
+    func sidebarWindowToolbarThemed(_ color: Color?) -> some View {
+        if let color {
+            self
+                .toolbarBackground(color, for: .windowToolbar)
+                .toolbarBackground(.visible, for: .windowToolbar)
+        } else {
+            self
+        }
+    }
+}
+#endif

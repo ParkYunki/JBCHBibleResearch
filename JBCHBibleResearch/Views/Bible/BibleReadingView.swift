@@ -221,12 +221,35 @@ private struct ActionBarCircularIconModifier: ViewModifier {
 
     private var kind: BibleBarButtonStyle.Kind { isProminent ? .primary : (isGhost ? .ghost : .secondary) }
 
+    @Environment(\.self) private var environment
+    @Environment(\.colorScheme) private var colorScheme
+
+    /// 아이패드(세로)는 폭이 넉넉해 아이콘 아래에 기능 이름을 보인다. 아이폰은 폭이 빠듯해 지금처럼 아이콘만.
+    private var showsCaption: Bool {
+        !title.isEmpty && UIDevice.current.userInterfaceIdiom != .phone
+    }
+
+    @ViewBuilder
     func body(content: Content) -> some View {
         if isNarrow {
             // 좁은 화면(아이폰 세로/아이패드 세로, 키보드 표시 중): 아이콘 전용 44pt 둥근 사각형.
             // 폭은 남는 폭을 균등 분할하고(`maxWidth: .infinity`) 높이는 HIG 최소 탭 영역 44pt로 고정해, 절 1개 선택 시 최대 7개 버튼이
             // 좁은 화면에서도 한 줄에 잘리지 않고 들어가게 한다.
-            content.modifier(BibleBarIconOnlyModifier(kind: kind, title: title, systemImage: systemImage))
+            if showsCaption {
+                // 아이패드 세로: 버튼(44pt) 바깥 아래에 기능 이름을 둔다(버튼 안이 아님). 이름은 누르는 대상이 아니라 글자일 뿐이다.
+                VStack(spacing: 4) {
+                    content.modifier(BibleBarIconOnlyModifier(kind: kind, title: title, systemImage: systemImage))
+                    Text(title)
+                        .font(.caption)
+                        .foregroundStyle(BibleBarPalette(environment: environment, colorScheme: colorScheme).text)
+                        .lineLimit(1)
+                        .minimumScaleFactor(0.8)
+                        .accessibilityHidden(true)
+                }
+                .frame(maxWidth: .infinity)
+            } else {
+                content.modifier(BibleBarIconOnlyModifier(kind: kind, title: title, systemImage: systemImage))
+            }
         } else {
             // 넓은 화면(아이패드 가로 등): 맥OS와 같은 배경·테두리·강조 규격을 터치용 크기(40pt/모서리 10/글자 15pt)로 쓴다.
             // 이전에는 비강조 버튼이 배경 없는 금색 글자뿐이고 복사만 `.borderedProminent`(흰 글자 on 금색 ≈3.2:1)였다.
@@ -741,6 +764,10 @@ private struct BibleReadingContentView: View {
         // 이미 성경 조회를 보고 있는 채로 사이드바 "최근" 이력 항목을 다시 탭한 경우 — 화면이 다시 만들어지지 않아 `BibleReadingView`의
         // `.onAppear`가 실행되지 않으므로 `.onChange`로 처리한다.
         .onChange(of: translationRegistries.map { TranslationRegistryState(id: $0.persistentModelID, code: $0.code, isEnabled: $0.isEnabled) }) { _, _ in
+            viewModel.loadAvailableTranslations()
+        }
+        // 설정 > 번역본에서 사용 중인 번역본을 켜고 끄거나 순서를 바꾼 경우(이 기기의 목록 `defaultDisplayedTranslationCodes`).
+        .onChange(of: UserSettingsStore.shared.defaultDisplayedTranslationCodes) { _, _ in
             viewModel.loadAvailableTranslations()
         }
         // 동기화 대기 때문에 번역본 열이 오류로 남아 있다가(파일 도착 전) 앱이 다시 활성화되면 한 번 다시 시도한다.
@@ -1795,13 +1822,29 @@ private struct BibleReadingContentView: View {
     }
     #endif
 
-    /// iOS(아이폰/아이패드)는 `compactChapterNavigationBar`, macOS는 `chapterNavigationControlsStandard`를 쓴다.
+    /// iOS(아이폰/아이패드)는 `ViewThatFits`로 표준 막대 → 캡슐 막대 순서로 고르고, macOS는 `chapterNavigationControlsStandard`를 쓴다.
     @ViewBuilder
     private var chapterNavigationControls: some View {
         #if os(iOS)
-        compactChapterNavigationBar
+        // 아이패드·아이폰 공통(2026-10-02): 맥OS와 같은 막대(묶음 2개 + 책 버튼 + 검색창 + 이동, 터치용 40pt)를 쓰고,
+        // 폭이 모자라 한 줄에 다 안 들어가면(아이폰 세로, 아이패드 분할 보기) 캡슐 막대(`compactChapterNavigationBar`)로 대신한다.
+        // 표준 막대는 약 534pt가 필요해 아이폰 가로(약 700pt)에서는 표준, 세로(358pt)에서는 캡슐이 선택된다.
+        // 캡슐 막대의 자연 폭은 최대 약 344pt(버튼 6×40 + 구분선 6 + 검색 칸 최대 90 + 좌우 4×2)라 358pt 안에 들어간다.
+        ViewThatFits(in: .horizontal) {
+            chapterNavigationControlsStandard
+            compactChapterNavigationBar
+        }
         #else
         chapterNavigationControlsStandard
+        #endif
+    }
+
+    /// 상단 이동 막대 크기 — 맥은 포인터용 32pt, 아이패드는 터치용 40pt.
+    private var barSizing: BibleBarSizing {
+        #if os(macOS)
+        return .regular
+        #else
+        return .touch
         #endif
     }
 
@@ -1889,6 +1932,7 @@ private struct BibleReadingContentView: View {
                 )
             }
         }
+        .environment(\.bibleBarSizing, barSizing)
         // 툴바 principal 대신 상단 세이프에어리어 인셋(전체 너비)에 놓이므로 가운데 정렬을 유지하려고 필요하다.
         .frame(maxWidth: .infinity)
     }
@@ -1899,7 +1943,7 @@ private struct BibleReadingContentView: View {
     ) -> some View {
         Button(action: action) {
             Image(systemName: systemImage)
-                .font(.system(size: 14, weight: .semibold))
+                .font(.system(size: barSizing.iconSize, weight: .semibold))
         }
         .disabled(disabled)
         .help(help)

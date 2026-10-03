@@ -109,7 +109,48 @@ public enum QueryIntentClassifier {
 
     private static func isRelationQuery(_ query: String) -> Bool {
         if RelationSynonyms.allWords.contains(where: { query.contains($0) }) { return true }
+        if containsElderBrotherWord(query) { return true }
         return baselineRelationWords.contains(where: { query.contains($0) })
+    }
+
+    /// 친족어 "형"(손위 형제)이 단어로 쓰였는지 — "라흐미의 형", "라흐미의형은?", "형이 누구".
+    ///
+    /// "형"은 한 글자라 `query.contains("형")`으로 판정하면 "형통"/"형벌"/"모형"/"형상"/"형제" 같은 말에 전부 걸려
+    /// 관계 질의로 오분류된다(그래서 `RelationSynonyms`에 넣지 못했다). 그래서 앞뒤 글자로 단어 경계를 본다:
+    ///  - 앞: 문장 처음/공백, 또는 관형격 "의"(공백 허용). "대형", "정형"처럼 한글 글자가 바로 붙은 경우는 제외.
+    ///  - 뒤: 문장 끝, 한글이 아닌 글자(공백·물음표 등), 또는 조사(은/는/이/가/을/를/도/과/와/의) 뒤에 다시 한글이 이어지지 않는 경우.
+    ///    "형제", "형통", "형이상학"(형+이+상학)은 제외.
+    /// 순수 함수 — `QueryIntentHandler`의 형/동생 분기도 이 함수를 쓴다.
+    public static func containsElderBrotherWord(_ query: String) -> Bool {
+        let chars = Array(query)
+        func isHangul(_ c: Character) -> Bool {
+            guard let v = c.unicodeScalars.first?.value else { return false }
+            return (0xAC00...0xD7A3).contains(v)
+        }
+        let particles: Set<Character> = ["은", "는", "이", "가", "을", "를", "도", "과", "와", "의"]
+        for i in chars.indices where chars[i] == "형" {
+            // 앞 경계
+            let prevOK: Bool
+            if i == 0 {
+                prevOK = true
+            } else if chars[i - 1] == "의" {
+                prevOK = true
+            } else if chars[i - 1].isWhitespace {
+                prevOK = true
+            } else {
+                prevOK = !isHangul(chars[i - 1])
+            }
+            guard prevOK else { continue }
+            // 뒤 경계
+            let next = i + 1
+            if next >= chars.count { return true }
+            if !isHangul(chars[next]) { return true }
+            if particles.contains(chars[next]) {
+                let after = next + 1
+                if after >= chars.count || !isHangul(chars[after]) { return true }
+            }
+        }
+        return false
     }
 
     // MARK: - 2) 인물 프로필 (PERSON_PROFILE) — [2026-09-15 이동]

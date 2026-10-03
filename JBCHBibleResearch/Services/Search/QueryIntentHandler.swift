@@ -297,6 +297,12 @@ enum QueryIntentHandler {
         let personEntities = entities.filter { $0.kind == .person }
         let reverseRows = (try? store.personRelations(targetWordMentionedIn: query)) ?? []
 
+        // "OO의 형/동생/아우" — 방향과 손위·손아래를 구분해야 해서 아래 일반 흐름과 따로 처리한다(`handleSibling` 참고).
+        // 다른 관계 어휘(아들/아버지 등)가 함께 있으면 기존 흐름에 맡긴다.
+        if detectRelationSubQuery(query) == nil, let role = detectSiblingRole(query) {
+            return handleSibling(query, role: role, targetRows: reverseRows, store: store)
+        }
+
         if let subQuery = detectRelationSubQuery(query), !personEntities.isEmpty {
             for entity in personEntities {
                 switch subQuery {
@@ -347,6 +353,101 @@ enum QueryIntentHandler {
             ))
         }
         return QueryIntentCard(intent: .relation, status: .found(.relation(combined)))
+    }
+
+    // MARK: - 형제(형/동생/아우) 질의 (2026-10-02)
+    //
+    // 증상: "골리앗의 동생/아우"와 "라흐미의 형"은 결과가 없었고, "라흐미의 동생"은 질의와 반대 방향 행
+    // ("골리앗은 라흐미의 형")이 답처럼 나왔다. 원인 셋:
+    //  1) 분류기가 "형"을 관계어로 인식하지 못함(`QueryIntentClassifier.containsElderBrotherWord`로 해결).
+    //  2) 이름 조회를 `personsAndPlaces`(Persons/Places 등록 이름)로만 해서, PersonSeed에 "골리앗#0"처럼 미상으로만 적힌
+    //     이름(골리앗)은 질의에 있어도 관계 조회가 시작되지 않음(`personRelations(sourceWordMentionedIn:)` 신설로 해결).
+    //  3) 형/동생에 대한 하위 질의가 없어 "관계 타입 미지정 폴백"이 해당 인물의 모든 행을 방향 무시하고 보여줌.
+    // 관계 행은 "source가 target의 ROLE"(예: 골리앗 older_brother_of 라흐미 = 골리앗은 라흐미의 형)이므로, 같은 사실이
+    // 반대 어휘로도 질의된다: "골리앗의 동생" → 저장된 (골리앗 older_brother_of 라흐미)를 뒤집어 (라흐미 younger_brother_of 골리앗)로 답한다.
+
+    private enum SiblingRole {
+        case younger  // 동생/아우/남동생
+        case older    // 형
+
+        /// 질의가 찾는 역할(`source가 target의 ROLE`의 ROLE)과 그 반대 역할의 relation_type.
+        var role: String { self == .younger ? "younger_brother_of" : "older_brother_of" }
+        var inverse: String { self == .younger ? "older_brother_of" : "younger_brother_of" }
+    }
+
+    /// 손위/손아래 형제 질의인지 감지한다. "여동생"은 자매(`sister_of`)라 제외하고, 형과 동생이 함께 있으면(모호) nil.
+    private static func detectSiblingRole(_ query: String) -> SiblingRole? {
+        let withoutSister = query.replacingOccurrences(of: "여동생", with: "")
+        let younger = withoutSister.contains("동생") || withoutSister.contains("아우")
+        let older = QueryIntentClassifier.containsElderBrotherWord(withoutSister)
+        if younger == older { return nil }  // 둘 다 true(모호) 또는 둘 다 false
+        return younger ? .younger : .older
+    }
+
+    /// "OO의 형/동생"(OO=소유자, 기본)과 "OO가 형/동생인 사람"(OO=역할 보유자, 이름 뒤 "이/가") 모두 처리한다.
+    /// 저장 행은 항상 `RelationDisplayItem`에 "역할 보유자 → 소유자" 방향으로 정리해, 화면 문장이 "A는 B의 형/아우"로 읽히게 한다.
+    /// 일치하는 행이 없으면 다른 관계로 폴백하지 않는다 — 폴백이 질의와 반대되는 사실을 답처럼 보여줬기 때문이다.
+    private static func handleSibling(
+        _ query: String, role: SiblingRole, targetRows: [PersonRelationRecord], store: ReferenceDataStore
+    ) -> QueryIntentCard {
+        let sourceRows = (try? store.personRelations(sourceWordMentionedIn: query)) ?? []
+
+        var items: [RelationDisplayItem] = []
+        var seen = Set<String>()
+        /// `holder`가 `owner`의 ROLE인 사실 하나를 추가한다. 답은 질의에 없는 쪽(`answer`)이고 그 인물의 구절을 붙인다.
+        func append(holder: String, owner: String, answer: String, template: PersonRelationRecord) {
+            let key = "\(holder)|\(role.role)|\(owner)"
+            guard seen.insert(key).inserted else { return }
+            // 뒤집은 행의 `targetKind`는 알 수 없어 nil(원래 방향이면 원래 값). `PersonRelationRecord.targetKind` 주석 참고.
+            let flipped = holder != template.sourceWord
+            let record = PersonRelationRecord(
+                sourceWord: holder, relationType: role.role, targetWord: owner,
+                targetKind: flipped ? nil : template.targetKind,
+                rawSentence: template.rawSentence,
+                targetIdx: flipped ? "" : template.targetIdx,
+                sourceIdx: flipped ? template.targetIdx : template.sourceIdx
+            )
+            // 답 인물이 Persons에 없으면(예: 골리앗) 질의에 쓴 인물(소유자)의 구절로 대신한다.
+            let ownerWord = answer == holder ? owner : holder
+            let verses = (try? store.personOrPlace(exactWord: answer))?.verseRefs
+                ?? (try? store.personOrPlace(exactWord: ownerWord))?.verseRefs ?? []
+            items.append(RelationDisplayItem(relation: record, verseRefs: verses))
+        }
+
+        // 질의 속 이름이 target인 행(저장 방향: source가 target의 ROLE)
+        for row in targetRows {
+            let nameIsHolder = subjectDirection(for: row.targetWord, in: query) == true
+            if !nameIsHolder {
+                // "OO(=target)의 ROLE" — 같은 역할로 저장된 행이면 source가 답.
+                if row.relationType == role.role {
+                    append(holder: row.sourceWord, owner: row.targetWord, answer: row.sourceWord, template: row)
+                }
+            } else if row.relationType == role.inverse {
+                // "OO(=target)가 ROLE인 사람" — 반대 역할로 저장된 행(source가 OO의 반대 역할)을 뒤집어 OO가 보유자.
+                append(holder: row.targetWord, owner: row.sourceWord, answer: row.sourceWord, template: row)
+            }
+        }
+        // 질의 속 이름이 source인 행
+        for row in sourceRows {
+            let nameIsHolder = subjectDirection(for: row.sourceWord, in: query) == true
+            if !nameIsHolder {
+                // "OO(=source)의 ROLE" — OO가 반대 역할로 저장된 행(예: 골리앗 older_brother_of 라흐미)을 뒤집어 target이 답.
+                if row.relationType == role.inverse {
+                    append(holder: row.targetWord, owner: row.sourceWord, answer: row.targetWord, template: row)
+                }
+            } else if row.relationType == role.role {
+                // "OO(=source)가 ROLE인 사람" — 같은 역할로 저장된 행이면 target이 답.
+                append(holder: row.sourceWord, owner: row.targetWord, answer: row.targetWord, template: row)
+            }
+        }
+
+        guard !items.isEmpty else {
+            let label = role == .younger ? "동생/아우" : "형"
+            return QueryIntentCard(intent: .relation, status: .notReady(
+                message: "질의한 \(label) 관계가 등록돼 있지 않습니다. 아래 검색 결과를 확인해 보세요."
+            ))
+        }
+        return QueryIntentCard(intent: .relation, status: .found(.relation(items)))
     }
 
     /// `handleRelation` 전용 — 질의에서 구체적인 관계 타입을 감지한다.
@@ -501,6 +602,12 @@ enum PersonRelationLabeling {
 
     private static func gwaWa(after text: String) -> String {
         (hasBatchim(text) ?? false) ? "과" : "와"
+    }
+
+    /// 관계 행의 "원문" 표시용 — PersonSeed 기타관계 원문("골리앗#0(형)")에 붙은 `#idx` 태그(`#0`=미상 포함)는
+    /// 빌드용 식별자라 사용자에게 보이지 않게 지운다(→ "골리앗(형)"). 태그가 없는 문장은 그대로다.
+    static func displayRawSentence(_ raw: String) -> String {
+        raw.replacingOccurrences(of: "#[0-9]+", with: "", options: .regularExpression)
     }
 
     static func sentence(for relation: PersonRelationRecord) -> String {

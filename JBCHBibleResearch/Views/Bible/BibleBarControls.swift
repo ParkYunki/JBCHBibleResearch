@@ -24,6 +24,34 @@ enum BibleBarMetrics {
     static let disabledOpacity: Double = 0.38
 }
 
+/// 상단 이동 막대(묶음·구분선·책 버튼·검색창·이동 버튼)의 크기 한 벌. 모양·농도는 같고 크기만 다르다 —
+/// 맥은 포인터용 32pt, 아이패드는 터치용 40pt(`BibleBarButtonStyle` 주석의 40/10/15 규격과 같다).
+/// 환경값(`\.bibleBarSizing`)으로 내려 보내 묶음/구분선/책 선택기가 같은 크기를 쓰게 한다. 기본값은 맥 규격.
+struct BibleBarSizing {
+    var height: CGFloat
+    var radius: CGFloat
+    /// 글자 버튼(책 버튼) 글자 크기.
+    var fontSize: CGFloat
+    /// 아이콘 버튼(화살표·이동) 아이콘 크기.
+    var iconSize: CGFloat
+    /// 검색창 입력 글자 크기.
+    var fieldFontSize: CGFloat
+
+    static let regular = BibleBarSizing(height: BibleBarMetrics.height, radius: BibleBarMetrics.radius, fontSize: 13, iconSize: 14, fieldFontSize: 12.5)
+    static let touch = BibleBarSizing(height: 40, radius: 10, fontSize: 15, iconSize: 16, fieldFontSize: 15)
+}
+
+private struct BibleBarSizingKey: EnvironmentKey {
+    static let defaultValue = BibleBarSizing.regular
+}
+
+extension EnvironmentValues {
+    var bibleBarSizing: BibleBarSizing {
+        get { self[BibleBarSizingKey.self] }
+        set { self[BibleBarSizingKey.self] = newValue }
+    }
+}
+
 /// 테마에서 파생한 막대 버튼 색. 배경 테마가 없으면 시스템 라이트/다크를 따른다.
 struct BibleBarPalette {
     let text: Color
@@ -118,13 +146,14 @@ struct BibleBarSegmentGroup<Content: View>: View {
 
     @Environment(\.self) private var environment
     @Environment(\.colorScheme) private var colorScheme
+    @Environment(\.bibleBarSizing) private var sizing
 
     var body: some View {
         let palette = BibleBarPalette(environment: environment, colorScheme: colorScheme)
-        let shape = RoundedRectangle(cornerRadius: BibleBarMetrics.radius, style: .continuous)
+        let shape = RoundedRectangle(cornerRadius: sizing.radius, style: .continuous)
         HStack(spacing: 0) { content }
             .buttonStyle(BibleBarSegmentItemStyle())
-            .frame(height: BibleBarMetrics.height)
+            .frame(height: sizing.height)
             .background(shape.fill(palette.text.opacity(BibleBarMetrics.fillOpacity)))
             .clipShape(shape)
             .overlay(shape.strokeBorder(palette.text.opacity(BibleBarMetrics.lineOpacity), lineWidth: 1))
@@ -134,11 +163,12 @@ struct BibleBarSegmentGroup<Content: View>: View {
 struct BibleBarSegmentDivider: View {
     @Environment(\.self) private var environment
     @Environment(\.colorScheme) private var colorScheme
+    @Environment(\.bibleBarSizing) private var sizing
 
     var body: some View {
         Rectangle()
             .fill(BibleBarPalette(environment: environment, colorScheme: colorScheme).text.opacity(BibleBarMetrics.lineOpacity))
-            .frame(width: 1, height: BibleBarMetrics.height)
+            .frame(width: 1, height: sizing.height)
     }
 }
 
@@ -154,6 +184,7 @@ private struct BibleBarSegmentItemBody: View {
     @Environment(\.isEnabled) private var isEnabled
     @Environment(\.self) private var environment
     @Environment(\.colorScheme) private var colorScheme
+    @Environment(\.bibleBarSizing) private var sizing
     @State private var isHovering = false
 
     var body: some View {
@@ -162,7 +193,7 @@ private struct BibleBarSegmentItemBody: View {
             : (isHovering && isEnabled ? BibleBarMetrics.fillOpacity - 0.03 : 0)
         configuration.label
             .foregroundStyle(palette.text)
-            .frame(width: BibleBarMetrics.height, height: BibleBarMetrics.height)
+            .frame(width: sizing.height, height: sizing.height)
             .background(palette.text.opacity(overlayOpacity))
             .contentShape(Rectangle())
             .opacity(isEnabled ? 1 : BibleBarMetrics.disabledOpacity)
@@ -222,6 +253,8 @@ struct BibleBarActionModifier: ViewModifier {
 // MARK: - iOS 상단 이동 막대(캡슐) 부품
 
 /// 캡슐 배경: 글자색 10% 채움 + 24% 테두리 (맥OS 막대와 같은 농도).
+/// 2026-10-02: 양끝 타원(`Capsule`) 대신 모서리 10pt 라운드 사각형으로 바꿔 다른 버튼·입력창(모서리 10pt)과 모양을 맞췄다.
+/// 이름은 "캡슐"이지만 모양은 라운드 사각형이다(호출부 이름 유지).
 struct BibleCapsuleChrome: ViewModifier {
     @Environment(\.self) private var environment
     @Environment(\.colorScheme) private var colorScheme
@@ -229,8 +262,8 @@ struct BibleCapsuleChrome: ViewModifier {
     func body(content: Content) -> some View {
         let palette = BibleBarPalette(environment: environment, colorScheme: colorScheme)
         content
-            .background(Capsule().fill(palette.text.opacity(BibleBarMetrics.fillOpacity)))
-            .overlay(Capsule().strokeBorder(palette.text.opacity(BibleBarMetrics.lineOpacity), lineWidth: 1))
+            .background(RoundedRectangle(cornerRadius: 10, style: .continuous).fill(palette.text.opacity(BibleBarMetrics.fillOpacity)))
+            .overlay(RoundedRectangle(cornerRadius: 10, style: .continuous).strokeBorder(palette.text.opacity(BibleBarMetrics.lineOpacity), lineWidth: 1))
     }
 }
 
@@ -254,7 +287,8 @@ private struct BibleCapsuleItemBody: View {
             .foregroundStyle(palette.text)
             .frame(width: 40, height: 44)
             .background(
-                RoundedRectangle(cornerRadius: 12, style: .continuous)
+                // 눌림 배경 모서리 8pt — 바깥 라운드 사각형(10pt)과 겹쳐 보이도록 안쪽으로 한 단계 작게.
+                RoundedRectangle(cornerRadius: 8, style: .continuous)
                     .fill(palette.text.opacity(configuration.isPressed ? 0.16 : 0))
                     .padding(.vertical, 4)
             )
@@ -263,7 +297,7 @@ private struct BibleCapsuleItemBody: View {
     }
 }
 
-/// 캡슐 안 "이동" 버튼 — 36pt 강조 원(탭 영역은 40×44).
+/// 캡슐 안 "이동" 버튼 — 36×36pt 강조 라운드 사각형(모서리 8pt, 탭 영역은 40×44). 2026-10-02: 원 → 라운드 사각형.
 struct BibleCapsuleGoStyle: ButtonStyle {
     func makeBody(configuration: Configuration) -> some View {
         BibleCapsuleGoBody(configuration: configuration)
@@ -282,7 +316,7 @@ private struct BibleCapsuleGoBody: View {
             .font(.system(size: 15, weight: .semibold))
             .foregroundStyle(palette.strongForeground)
             .frame(width: 36, height: 36)
-            .background(Circle().fill(palette.strong.opacity(configuration.isPressed ? 0.78 : 1)))
+            .background(RoundedRectangle(cornerRadius: 8, style: .continuous).fill(palette.strong.opacity(configuration.isPressed ? 0.78 : 1)))
             .frame(width: 40, height: 44)
             .contentShape(Rectangle())
             .opacity(isEnabled ? 1 : BibleBarMetrics.disabledOpacity)

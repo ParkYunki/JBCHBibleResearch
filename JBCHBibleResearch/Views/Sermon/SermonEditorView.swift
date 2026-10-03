@@ -336,14 +336,14 @@ struct SermonEditorView: View {
         .padding(.top, 10)
     }
 
-    // MARK: - 툴바 (문단 스타일 pill 한 줄 + B/I + 말씀구절 추가)
+    // MARK: - 툴바 (문단 스타일 pill + B/I + 말씀구절 추가 한 줄, 그 아래 서식 도구)
 
     /// 목업 Editor.dc.html의 "[대주제][중주제][소주제][말씀구절][인용][본문]"
     /// pill 한 줄 — 항상 6종이 다 보이고, 현재 문단의 스타일이 액센트로
     /// 채워진다. 가로 스크롤로 감싸 아이폰 폭에서도 잘리지 않게 한다.
     private var styleToolbar: some View {
         VStack(alignment: .leading, spacing: 8) {
-            // 스타일 pill은 가로 스크롤 안에 둬 아이폰 폭에서도 6종이 잘리지 않게 하고, 굵게/기울임은
+            // 스타일 pill은 가로 스크롤 안에 둬 아이폰 폭에서도 6종이 잘리지 않게 하고, 굵게/기울임/말씀구절 추가는
             // 스크롤 밖 같은 `HStack`에 고정해 한 줄로 보이게 한다.
             HStack(spacing: 10) {
                 ScrollView(.horizontal, showsIndicators: false) {
@@ -378,18 +378,15 @@ struct SermonEditorView: View {
                 } label: {
                     Image(systemName: "italic")
                 }
-            }
-            .tint(accent)
 
-            HStack {
-                Spacer()
-
+                // 굵게/기울임 오른쪽에 붙여 별도 행을 없앤다. 좁은 폭에서는 pill 스크롤 영역이 줄어든다.
                 Button {
                     isVersePickerPresented = true
                 } label: {
                     Label("말씀구절 추가", systemImage: "plus")
                         .font(.caption.weight(.semibold))
                 }
+                .fixedSize()
             }
             .tint(accent)
 

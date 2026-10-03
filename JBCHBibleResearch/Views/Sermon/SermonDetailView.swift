@@ -87,6 +87,8 @@ private struct ThemedNavigationBarBackgroundModifier: ViewModifier {
 
 struct SermonDetailView: View {
     @Bindable var sermon: Sermon
+    /// 목록에서 모임 칩을 골랐을 때 그 모임의 이력 행을 강조한다(모임 이름 비교 키, 모임 미지정은 빈 문자열). nil이면 강조 없음.
+    var highlightedGatheringKey: String? = nil
     @Environment(\.modelContext) private var modelContext
     @Environment(\.openWindow) private var openWindow
     @Environment(\.colorScheme) private var colorScheme
@@ -243,23 +245,44 @@ struct SermonDetailView: View {
         }
     }
 
+    private func isHighlighted(_ delivery: SermonDelivery) -> Bool {
+        guard let key = highlightedGatheringKey else { return false }
+        let deliveryKey = delivery.gathering.map { SermonGatheringSeeder.normalizedKey($0.name) } ?? ""
+        return deliveryKey == key
+    }
+
     private func deliveryRow(_ delivery: SermonDelivery) -> some View {
-        HStack {
+        HStack(alignment: .center, spacing: 8) {
+            // 왼쪽 글자는 남는 폭만 쓰고 모자라면 한 줄에서 잘린다 — 상세 영역이 좁을 때(아이패드 세로 등) 오른쪽 묶음을 밀어내지 않게 한다.
             VStack(alignment: .leading, spacing: 3) {
                 Text(delivery.gathering?.name ?? "모임 미지정")
                     .font(.callout.weight(.semibold))
                     .foregroundStyle(settings.bibleTextColor ?? .primary)
+                    .lineLimit(1)
                 Text(delivery.deliveredAt.formatted(date: .abbreviated, time: .omitted))
                     .font(.caption)
                     .foregroundStyle(settings.bibleTextColor?.opacity(0.6) ?? Color.secondary)
+                    .lineLimit(1)
             }
-            Spacer()
-            statusBadge(for: delivery)
-            deliveryEditorLink(delivery)
-            deliveryViewerLink(delivery)
+            .frame(maxWidth: .infinity, alignment: .leading)
+            // 오른쪽 묶음: 위에 상태(메인과 동일/내용 수정됨), 아래에 [편집][뷰어] — 가로로 늘어놓던 때보다 폭을 적게 쓴다.
+            VStack(alignment: .trailing, spacing: 6) {
+                statusBadge(for: delivery)
+                    .lineLimit(1)
+                HStack(spacing: 6) {
+                    deliveryEditorLink(delivery)
+                    deliveryViewerLink(delivery)
+                }
+            }
+            .fixedSize(horizontal: true, vertical: false)
         }
         .padding(12)
         .background(RoundedRectangle(cornerRadius: SermonTheme.cardCornerRadius, style: .continuous).fill(SermonTheme.cardFill))
+        .overlay {
+            if isHighlighted(delivery) {
+                RoundedRectangle(cornerRadius: SermonTheme.cardCornerRadius, style: .continuous).strokeBorder(accent, lineWidth: 2)
+            }
+        }
         // `SermonDelivery` 삭제는 다른 레코드를 캐스케이드로 지우지 않는다(`verseReferences`만 함께
         // 지워지는 부속 데이터) — 확인 대화상자 없이 컨텍스트 메뉴로 삭제하는 Document/WordNote 관례를 따른다.
         .contextMenu {

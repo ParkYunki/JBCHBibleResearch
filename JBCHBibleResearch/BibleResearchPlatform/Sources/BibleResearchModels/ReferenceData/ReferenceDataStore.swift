@@ -521,6 +521,43 @@ public final class ReferenceDataStore {
         return results
     }
 
+    /// `personRelations(targetWordMentionedIn:)`의 대칭 — `source_word` 쪽이 질의 문자열에 부분 문자열로 들어 있는 행.
+    ///
+    /// source_word가 Persons/Places에 없어도(예: "골리앗" — PersonSeed 기타관계 "골리앗#0(형)"처럼 `#0`(미상)으로만 적힌 이름)
+    /// 매칭된다. `personsAndPlaces(mentionedIn:)`만 쓰면 이런 이름이 질의에 있어도 관계 조회가 시작되지 않는다(2026-10-02 수정).
+    public func personRelations(sourceWordMentionedIn query: String) throws -> [PersonRelationRecord] {
+        let sql = """
+            SELECT source_word, source_idx, relation_type, target_word, target_kind, raw_sentence, target_idx
+            FROM PersonRelations WHERE length(source_word) >= 2 AND instr(?, source_word) > 0
+            """
+        var statement: OpaquePointer?
+        defer { sqlite3_finalize(statement) }
+        guard sqlite3_prepare_v2(handle, sql, -1, &statement, nil) == SQLITE_OK else {
+            throw BibleReferenceError.statementPrepareFailed(code: sqlite3_errcode(handle))
+        }
+        sqlite3_bind_text(statement, 1, query, -1, SQLITE_TRANSIENT)
+
+        var results: [PersonRelationRecord] = []
+        while true {
+            let step = sqlite3_step(statement)
+            if step == SQLITE_DONE { break }
+            guard step == SQLITE_ROW else { throw BibleReferenceError.stepFailed(code: step) }
+            let sourceWord = sqlite3_column_text(statement, 0).map { String(cString: $0) } ?? ""
+            let sourceIdx = sqlite3_column_text(statement, 1).map { String(cString: $0) } ?? ""
+            let relationType = sqlite3_column_text(statement, 2).map { String(cString: $0) } ?? ""
+            let targetWord = sqlite3_column_text(statement, 3).map { String(cString: $0) } ?? ""
+            let targetKindRaw = sqlite3_column_text(statement, 4).map { String(cString: $0) }
+            let rawSentence = sqlite3_column_text(statement, 5).map { String(cString: $0) } ?? ""
+            let targetIdx = sqlite3_column_text(statement, 6).map { String(cString: $0) } ?? ""
+            results.append(PersonRelationRecord(
+                sourceWord: sourceWord, relationType: relationType, targetWord: targetWord,
+                targetKind: targetKindRaw == "place" ? .place : (targetKindRaw == "person" ? .person : nil),
+                rawSentence: rawSentence, targetIdx: targetIdx, sourceIdx: sourceIdx
+            ))
+        }
+        return results
+    }
+
     // MARK: - 키워드·카테고리 조회 / 인물 프로필 (2026-09-15 신설)
     //
     // `KeywordCategoryIndex`(인물/주제 표제어)로 카테고리만 먼저 확인하고, 콘텐츠는 카테고리에 맞는

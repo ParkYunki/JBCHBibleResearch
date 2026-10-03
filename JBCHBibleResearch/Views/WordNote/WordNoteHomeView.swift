@@ -186,7 +186,7 @@ private struct ThemedNavigationBarBackgroundModifier: ViewModifier {
     @Environment(\.self) private var environment
 
     func body(content: Content) -> some View {
-        // `ToolbarPlacement.navigationBar`는 macOS에 없어 iOS에서만 적용하고, macOS는 항상 그대로 통과시킨다.
+        // `ToolbarPlacement.navigationBar`는 macOS에 없어 iOS 전용이고, macOS는 아래 `.windowToolbar` 분기에서 처리한다.
         #if os(iOS)
         if let color {
             content
@@ -196,6 +196,18 @@ private struct ThemedNavigationBarBackgroundModifier: ViewModifier {
                 // 바 아이템 색을 정해, 어두운 테마 배경 위에 어두운 아이템이 남아 안 보일 수 있다.
                 // 휘도가 낮으면 `.dark`(밝은 아이템), 높으면 `.light`(어두운 아이템).
                 .toolbarColorScheme(Self.isDarkBackground(color, in: environment) ? .dark : .light, for: .navigationBar)
+        } else {
+            content
+        }
+        #elseif os(macOS)
+        // macOS 창 통합 툴바(`.windowToolbar`) 배경을 테마색에 맞춘다 — 연구 문서/내 설교/성경 조회와 같은 처리(2026-10-03).
+        // 이전에는 이 화면만 macOS를 그대로 통과시켜, 타이틀 띠가 시스템 재질(본문보다 밝고 마우스 오버 시 색이 변함)로
+        // 그려져 본문·사이드바 상단과 색이 달랐다.
+        if let color {
+            content
+                .toolbarBackground(color, for: .windowToolbar)
+                .toolbarBackground(.visible, for: .windowToolbar)
+                .toolbarColorScheme(Self.isDarkBackground(color, in: environment) ? .dark : .light, for: .windowToolbar)
         } else {
             content
         }

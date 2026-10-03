@@ -109,6 +109,8 @@ final class UserSettingsStore {
         // 전체 배율 하나뿐이며 상대 크기 비율은 유지된다.
         static let sermonViewerFontScale = "settings.sermon.viewer.fontScale"
         static let sermonViewerUsesPageMode = "settings.sermon.viewer.usesPageMode"
+        // 설교 뷰어 상단/하단 바 숨김 상태 — 본문 가운데를 눌러 바꾸고 다음 실행에도 유지한다.
+        static let sermonViewerChromeHidden = "settings.sermon.viewer.chromeHidden"
     }
 
     // MARK: - S1 표시 폰트
@@ -569,6 +571,10 @@ final class UserSettingsStore {
     var sermonViewerUsesPageMode: Bool {
         didSet { defaults.set(sermonViewerUsesPageMode, forKey: Key.sermonViewerUsesPageMode) }
     }
+    /// 뷰어의 상단/하단 바를 숨긴 상태(true). 스크롤/페이지 모드가 함께 쓴다. 기본값은 바 표시(false).
+    var sermonViewerChromeHidden: Bool {
+        didSet { defaults.set(sermonViewerChromeHidden, forKey: Key.sermonViewerChromeHidden) }
+    }
 
     init(defaults: UserDefaults = .standard) {
         self.defaults = defaults
@@ -660,6 +666,7 @@ final class UserSettingsStore {
         self.sermonVerseQuoteBarColorHex = defaults.string(forKey: Key.sermonVerseQuoteBarColorHex) ?? "#7A3B42"
         self.sermonViewerFontScale = defaults.object(forKey: Key.sermonViewerFontScale) as? Double ?? 1.0
         self.sermonViewerUsesPageMode = defaults.object(forKey: Key.sermonViewerUsesPageMode) as? Bool ?? false
+        self.sermonViewerChromeHidden = defaults.object(forKey: Key.sermonViewerChromeHidden) as? Bool ?? false
 
         // 구약을 펼친 채로 시작한다(39권이라 신약보다 자주 참조됨).
         self.outlineExpandedTestaments = defaults.stringArray(forKey: Key.outlineExpandedTestaments) ?? ["old"]
