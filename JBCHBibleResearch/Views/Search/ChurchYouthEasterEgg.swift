@@ -488,16 +488,16 @@ private final class YouthRunnerGame {
 
     static let playerSize: CGFloat = 46
     static let playerXRatio: CGFloat = 0.18
-    private static let baseSpeed: CGFloat = 300
+    private static let baseSpeed: CGFloat = 340
     /// 속도 상한의 절대값. 실제 상한은 화면 너비에 맞춰 더 낮아질 수 있다(`currentMaxSpeed`).
-    private static let maxSpeedCeiling: CGFloat = 780
-    /// 가속도(px/s²)는 시작 8에서 시간이 지날수록 커진다: 8 + 0.24 × 경과초 (약 38초에 17).
-    private static let baseAcceleration: CGFloat = 8
-    private static let accelerationGrowth: CGFloat = 0.24
+    private static let maxSpeedCeiling: CGFloat = 900
+    /// 가속도(px/s²)는 시작 10에서 시간이 지날수록 커진다: 10 + 0.36 × 경과초 (약 28초에 20).
+    private static let baseAcceleration: CGFloat = 10
+    private static let accelerationGrowth: CGFloat = 0.36
     /// 난이도(0→1)가 최대가 되는 경과 시간(초).
-    private static let rampDuration: CGFloat = 70
+    private static let rampDuration: CGFloat = 45
     /// 골짜기는 시작 후 이 시간(초)이 지나야 나온다 — 처음에는 점프 하나만 익히게 한다.
-    private static let valleyStartTime: CGFloat = 12
+    private static let valleyStartTime: CGFloat = 10
     /// 골짜기 낙하 연출 속도(px/s)와 최대 깊이(px).
     private static let fallSpeed: CGFloat = 340
     private static let fallMaxDepth: CGFloat = 90
@@ -567,7 +567,7 @@ private final class YouthRunnerGame {
 
     private func advance(dt: CGFloat, now: Date) {
         elapsed += dt
-        // 시간이 지날수록 가속도 자체가 커진다. 상한은 장애물이 나타나서 부딪히기까지 최소 0.45초가 남도록 화면 너비로 제한한다.
+        // 시간이 지날수록 가속도 자체가 커진다. 상한은 장애물이 나타나서 부딪히기까지 최소 0.40초가 남도록 화면 너비로 제한한다.
         let acceleration = Self.baseAcceleration + Self.accelerationGrowth * elapsed
         speed = min(currentMaxSpeed, speed + acceleration * dt)
         distance += speed * dt
@@ -601,14 +601,14 @@ private final class YouthRunnerGame {
         if let hit = hitObstacle() { endGame(hitting: hit) }
     }
 
-    /// 화면 너비 기준 속도 상한 — 오른쪽 끝에서 나타난 장애물이 플레이어에게 닿기까지 최소 0.45초를 보장한다.
+    /// 화면 너비 기준 속도 상한 — 오른쪽 끝에서 나타난 장애물이 플레이어에게 닿기까지 최소 0.40초를 보장한다.
     private var currentMaxSpeed: CGFloat {
         guard size.width > 1 else { return Self.baseSpeed + 60 }
-        let reactable = size.width * (1 - Self.playerXRatio) / 0.45
+        let reactable = size.width * (1 - Self.playerXRatio) / 0.40
         return min(Self.maxSpeedCeiling, max(Self.baseSpeed + 60, reactable))
     }
 
-    /// 0(처음) → 1(70초 이후). 장애물 간격과 연속 배치 확률에 쓴다.
+    /// 0(처음) → 1(45초 이후). 장애물 간격과 연속 배치 확률에 쓴다.
     private var difficulty: CGFloat { min(1, elapsed / Self.rampDuration) }
 
     private func makeObstacle(x: CGFloat) -> RunnerObstacle {
@@ -635,30 +635,30 @@ private final class YouthRunnerGame {
     }
 
     /// 땅이 끊긴 골짜기. 폭은 현재 속도에 비례해 정한다: 판정은 플레이어 중심이 (폭 − 8) 구간을 지나는 동안 공중에 떠 있는지로 하므로,
-    /// 건너는 데 필요한 시간 (폭 − 8) / 속도 = 0.20~0.34초이다. 점프 체공은 약 0.68초(2 × 820 / 2400)라 타이밍 여유가 최소 0.34초 남는다.
+    /// 건너는 데 필요한 시간 (폭 − 8) / 속도 = 0.26~0.44초이다. 점프 체공은 약 0.68초(2 × 820 / 2400, 공중 6px 이상 구간 약 0.67초)라 타이밍 여유가 최소 0.23초 남는다.
     /// (속도는 생성 후 도착까지 몇 % 더 오르지만 위 여유 안에 들어간다.) 높이는 쓰지 않아 0이다.
     private func makeValley(x: CGFloat) -> RunnerObstacle {
-        let width = 8 + speed * CGFloat.random(in: 0.20...0.34)
+        let width = 8 + speed * CGFloat.random(in: 0.26...0.44)
         obstacleCounter += 1
         return RunnerObstacle(id: obstacleCounter, x: x, width: width, height: 0, kind: .valley)
     }
 
     /// 장애물 한 덩어리(1~3개)를 오른쪽 화면 밖에 배치한다.
     /// 덩어리 안의 장애물은 한 번의 점프로 모두 넘을 수 있을 때만 붙인다:
-    /// 점프로 가장 큰 장애물(54) 위에 머무는 시간은 약 0.55초이므로, (덩어리 폭 + 플레이어 폭 24) ≤ 속도 × 0.42 로 여유 시간 0.13초를 남긴다.
+    /// 점프로 가장 큰 장애물(54) 위에 머무는 시간은 약 0.55초이므로, (덩어리 폭 + 플레이어 폭 24) ≤ 속도 × 0.44 로 여유 시간 0.11초를 남긴다.
     private func spawnObstacle() {
         let startX = size.width + 24
 
         // 골짜기: 일정 시간 뒤부터, 직전에 골짜기가 나오지 않았을 때만, 단독으로 배치한다.
         // 앞 장애물을 넘고 착지한 뒤 다시 뛸 시간을 위해 시작 위치를 속도 × 0.12초만큼 더 뒤로 민다.
         if elapsed > Self.valleyStartTime, !lastSpawnWasValley,
-           Double.random(in: 0..<1) < 0.16 + 0.12 * Double(difficulty) {
+           Double.random(in: 0..<1) < 0.20 + 0.16 * Double(difficulty) {
             let shift = speed * 0.12
             let valley = makeValley(x: startX + shift)
             obstacles.append(valley)
             lastSpawnWasValley = true
             let d = difficulty
-            nextSpawnDistance = distance + shift + valley.width + speed * CGFloat.random(in: (0.95 - 0.43 * d)...(1.7 - 0.72 * d))
+            nextSpawnDistance = distance + shift + valley.width + speed * CGFloat.random(in: (0.85 - 0.47 * d)...(1.5 - 0.72 * d))
             return
         }
         lastSpawnWasValley = false
@@ -667,16 +667,16 @@ private final class YouthRunnerGame {
         var cluster = [first]
         var extent = first.width      // 덩어리 전체의 가로 길이(첫 장애물 왼쪽 ~ 마지막 오른쪽)
 
-        // 시간이 지날수록 연속 배치 확률이 올라간다. 처음 8초는 한 개씩만 나온다.
-        if elapsed > 8 {
-            let chance = 0.15 + 0.55 * Double(difficulty)
+        // 시간이 지날수록 연속 배치 확률이 올라간다. 처음 6초는 한 개씩만 나온다.
+        if elapsed > 6 {
+            let chance = 0.20 + 0.60 * Double(difficulty)
             var probability = chance
             while cluster.count < 3, Double.random(in: 0..<1) < probability {
                 let gap = CGFloat.random(in: 12...26)
                 let candidate = makeObstacle(x: startX + extent + gap)
                 let candidateExtent = extent + gap + candidate.width
                 // 충돌 판정은 장애물 좌우 4px씩 안쪽이므로 8을 뺀다.
-                guard candidateExtent - 8 + 24 <= speed * 0.42 else { break }
+                guard candidateExtent - 8 + 24 <= speed * 0.44 else { break }
                 cluster.append(candidate)
                 extent = candidateExtent
                 probability *= 0.6
@@ -684,11 +684,13 @@ private final class YouthRunnerGame {
         }
         obstacles.append(contentsOf: cluster)
 
-        // 덩어리 끝에서 다음 덩어리 시작까지의 시간 간격: 처음 0.95~1.7초 → 70초 뒤 0.52~0.98초.
-        // (점프 체공 약 0.68초 + 재점프 반응 여유를 남기는 하한. 도착할 때쯤 속도가 약간 더 빨라지는 것까지 감안해 0.52로 둔다.)
+        // 덩어리 끝에서 다음 덩어리 시작까지의 시간 간격: 처음 0.85~1.5초 → 45초 뒤 0.38~0.78초.
+        // 하한 근거: 연속 점프가 물리적으로 가능하려면 (앞 장애물 판정 끝 → 다음 장애물 판정 시작) 시간이 가장 큰 장애물(54) 기준
+        // 2 × 0.068 = 0.136초 이상이어야 한다(점프 후 54px에 닿는 데 0.068초). 판정 간격은 이 값에서 플레이어 폭 보정(16px/속도 ≈ 0.02초)을
+        // 뺀 (간격 − 0.02)초이므로 0.38이면 이론상 여유가 약 0.22초이고, 입력 지연·속도 상승분을 감안해도 사람이 넘을 수 있다.
         let d = difficulty
-        let low = 0.95 - 0.43 * d
-        let high = 1.7 - 0.72 * d
+        let low = 0.85 - 0.47 * d
+        let high = 1.5 - 0.72 * d
         nextSpawnDistance = distance + extent + speed * CGFloat.random(in: low...high)
     }
 

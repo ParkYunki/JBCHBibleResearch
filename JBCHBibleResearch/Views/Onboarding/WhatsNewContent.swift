@@ -23,9 +23,11 @@ struct WhatsNewEntry: Identifiable {
 enum WhatsNewContent {
     static let entries: [WhatsNewEntry] = [
         WhatsNewEntry(version: "1.2.7", items: [
-            "디자인 통일화",
-            "검색결과 보정",
-            "내 설교 기능 고도화",
+            "디자인 통일 및 보정",
+            "말씀 노트 레이아웃 정리 및 폴더 관리기능 추가",
+            "통합검색 성경구절 묶음단위 표시",
+            "의미검색 결과 교정",
+            "내 설교 기능 고도화(마인드 맵, 에디터, 뷰어)",
             "기타 버그 수정"
         ]),
         WhatsNewEntry(version: "1.2.5", items: [
