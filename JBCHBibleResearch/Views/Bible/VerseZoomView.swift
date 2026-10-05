@@ -349,6 +349,11 @@ struct VerseZoomView: View {
                 selectedRange = NSRange(location: 0, length: 0)
                 isSelecting = false
             }
+            // 메모하기 레이어가 열린 동안에도 부분 메모·개인 묵상·형광펜을 다시 조회한다.
+            // 입력 중인 초안과 선택 범위는 유지한다.
+            .onChange(of: CloudSyncMonitor.shared.remoteImportRevision) { _, _ in
+                viewModel.refreshAfterRemoteImport()
+            }
             .sheet(isPresented: $isCrossReferencePickerPresented) {
                 // `CrossReferenceTargetPicker.onSave`는 절 목록(DB 저장용)과 항목별 라벨/개수(표시용, 정제된 문구)를 함께 넘기고,
                 // 시트의 "등록된 관주" 섹션(`existingDisplayEntries`)이 그 라벨을 그대로 보여준다.

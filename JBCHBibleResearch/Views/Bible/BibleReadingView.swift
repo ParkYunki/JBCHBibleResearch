@@ -770,6 +770,9 @@ private struct BibleReadingContentView: View {
         .onChange(of: UserSettingsStore.shared.defaultDisplayedTranslationCodes) { _, _ in
             viewModel.loadAvailableTranslations()
         }
+        .onChange(of: CloudSyncMonitor.shared.remoteImportRevision) { _, _ in
+            viewModel.refreshAfterRemoteImport()
+        }
         // 동기화 대기 때문에 번역본 열이 오류로 남아 있다가(파일 도착 전) 앱이 다시 활성화되면 한 번 다시 시도한다.
         .onChange(of: scenePhase) { _, newPhase in
             guard newPhase == .active, viewModel.columns.contains(where: { $0.errorDescription != nil }) else { return }

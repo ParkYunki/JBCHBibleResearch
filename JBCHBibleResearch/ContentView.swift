@@ -28,6 +28,19 @@ struct ContentView: View {
 
     var body: some View {
         RootView()
+            .safeAreaInset(edge: .bottom) {
+                if let message = CloudSyncMonitor.shared.errorMessage {
+                    VStack(alignment: .leading, spacing: 4) {
+                        Label("iCloud 동기화 실패", systemImage: "exclamationmark.icloud")
+                            .font(.callout.bold())
+                        Text(message)
+                            .font(.caption)
+                    }
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .padding()
+                    .background(.regularMaterial)
+                }
+            }
             // `colorSchemePreference`를 `RootView`가 아니라 여기서 읽어야 한다. 값을 읽는 뷰가
             // `TabView`를 직접 만들면, 값이 바뀔 때마다 body가 다시 실행되어 `TabView`가 통째로
             // 재생성되고 선택된 탭/내비게이션 스택이 초기화된다(화면모드를 바꾸면 "성경" 탭으로 이동).

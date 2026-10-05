@@ -255,15 +255,15 @@ case .wordNoteList:
     private var syncStatusLabel: some View {
         switch autosave?.status {
         case .saved, .none:
-            Label("동기화됨", systemImage: "checkmark.icloud")
+            Label("기기에 저장됨", systemImage: "checkmark.circle")
                 .font(.caption)
                 .foregroundStyle(settings.bibleTextColor?.opacity(0.6) ?? Color.secondary)
         case .pending:
-            Label("대기 중", systemImage: "icloud")
+            Label("저장 대기 중", systemImage: "clock")
                 .font(.caption)
                 .foregroundStyle(settings.bibleTextColor?.opacity(0.6) ?? Color.secondary)
         case .saving:
-            Label("동기화 중", systemImage: "arrow.triangle.2.circlepath.icloud")
+            Label("저장 중", systemImage: "arrow.triangle.2.circlepath")
                 .font(.caption)
                 .foregroundStyle(settings.bibleTextColor?.opacity(0.6) ?? Color.secondary)
         }

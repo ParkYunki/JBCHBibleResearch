@@ -26,6 +26,7 @@
 //
 
 import SwiftUI
+import Combine
 import SwiftData
 import BibleResearchModels
 #if os(iOS)
@@ -156,8 +157,8 @@ struct SermonHomeView: View {
     /// 왼쪽 설교함 행의 Map/뷰어 버튼이 별도 창을 여는 데 쓴다.
     @Environment(\.openWindow) private var openWindow
 
-    @Query(sort: \Sermon.updatedAt, order: .reverse) private var sermons: [Sermon]
-    @Query(sort: \SermonDelivery.deliveredAt, order: .reverse) private var deliveries: [SermonDelivery]
+    @State private var sermons: [Sermon] = []
+    @State private var deliveries: [SermonDelivery] = []
 
     @State private var viewMode: SermonListViewMode = .bySermon
     @State private var searchText = ""
@@ -177,7 +178,7 @@ struct SermonHomeView: View {
     @State private var gatheringFilter: GatheringFilter = .all
     /// 정렬 기준 — 기기별로 기억한다. 처음엔 기존 순서(최근 수정)와 같다.
     @AppStorage("sermon.listSort") private var listSort: SermonListSort = .recentlyEdited
-    @Query private var gatherings: [SermonGathering]
+    @State private var gatherings: [SermonGathering] = []
     /// (아이패드·맥) 왼쪽 목록 폭 — 사용자가 분할선을 끌어 바꾸고 기기별로 기억한다.
     @AppStorage("sermon.listPaneWidth") private var listPaneWidth: Double = 600
     @State private var listWidthDragStart: Double?
@@ -408,6 +409,14 @@ struct SermonHomeView: View {
         .navigationBarTitleDisplayMode(.inline)
         #endif
         .modifier(ThemedNavigationBarBackgroundModifier(color: settings.bibleBackgroundColor))
+        .onAppear { reloadLists() }
+        .onChange(of: CloudSyncMonitor.shared.remoteImportRevision) { _, _ in
+            reloadLists()
+        }
+        // 원격 완료 외에도 새 창/에디터에서 이 기기에 저장한 추가・삭제를 계속 반영한다.
+        .onReceive(NotificationCenter.default.publisher(for: ModelContext.didSave).receive(on: RunLoop.main)) { _ in
+            reloadLists()
+        }
         .onChange(of: viewMode) { _, newMode in
             // "미사용" 칩은 설교별 보기에만 있다.
             if newMode != .bySermon, gatheringFilter == .unused { gatheringFilter = .all }
@@ -437,6 +446,24 @@ struct SermonHomeView: View {
             Text(count > 0
                 ? "이 설교와 활용 이력 \(count)건이 모두 삭제됩니다. 되돌릴 수 없습니다."
                 : "이 설교가 삭제됩니다. 되돌릴 수 없습니다.")
+        }
+    }
+
+    /// 목록만 다시 읽는다. 선택/필터를 유지하며 설교 상세의 편집 상태를 초기화하지 않는다.
+    private func reloadLists() {
+        do {
+            let loadedSermons = try modelContext.fetch(
+                FetchDescriptor<Sermon>(sortBy: [SortDescriptor(\.updatedAt, order: .reverse)])
+            )
+            let loadedDeliveries = try modelContext.fetch(
+                FetchDescriptor<SermonDelivery>(sortBy: [SortDescriptor(\.deliveredAt, order: .reverse)])
+            )
+            let loadedGatherings = try modelContext.fetch(FetchDescriptor<SermonGathering>())
+            sermons = loadedSermons
+            deliveries = loadedDeliveries
+            gatherings = loadedGatherings
+        } catch {
+            print("[SermonHomeView] 목록 로드 실패: \(error)")
         }
     }
 

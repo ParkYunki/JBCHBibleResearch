@@ -408,15 +408,15 @@ struct MemoDetailView: View {
         // 로컬 저장 상태의 근사치일 뿐 실제 CloudKit 업로드 완료 추적은 아니다(MemoAutosaveController 참고).
         switch autosave?.status {
         case .saved, .none:
-            Label("동기화됨", systemImage: "checkmark.icloud")
+            Label("기기에 저장됨", systemImage: "checkmark.circle")
                 .font(.caption)
                 .foregroundStyle(.secondary)
         case .pending:
-            Label("대기 중", systemImage: "icloud")
+            Label("저장 대기 중", systemImage: "clock")
                 .font(.caption)
                 .foregroundStyle(.secondary)
         case .saving:
-            Label("동기화 중", systemImage: "arrow.triangle.2.circlepath.icloud")
+            Label("저장 중", systemImage: "arrow.triangle.2.circlepath")
                 .font(.caption)
                 .foregroundStyle(.secondary)
         }

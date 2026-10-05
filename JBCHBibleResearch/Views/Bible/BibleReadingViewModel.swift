@@ -362,6 +362,7 @@ final class BibleReadingViewModel {
         note.noteText = noteText
         note.updatedAt = .now
         try? modelContext.save()
+        invalidateInlineAnnotationCache(translationCode: note.translationCode, verse: note.verse)
         // 수정 시에도 즉시 FTS 보조 인덱스를 최신화한다.
         UserContentSearchIndexLocation.upsert(
             category: .phraseNote, sourceId: note.id.uuidString, content: note.noteText
@@ -913,6 +914,13 @@ final class BibleReadingViewModel {
     }
 
     // MARK: - 이 장의 관련 콘텐츠 새로고침 (2026-08-08 추가)
+
+    /// 다른 기기의 추가・수정・삭제를 반영한다. 원격 변경은 현재 장 밖에도 있을 수 있어
+    /// 세션 동안 보관한 모든 장의 표시 캐시를 비운다. 책/장과 스크롤 위치는 바꾸지 않는다.
+    func refreshAfterRemoteImport() {
+        inlineAnnotationCache.removeAll()
+        refreshRelatedContent()
+    }
 
     /// 현재 책/장 기준으로 책 개요/장 개요/메모/연구문서 등 관련 콘텐츠를 다시 읽어온다.
     /// `selectBook`/`goToChapter`/`onAppear`가 자동 호출하지만, 화면 밖에서 편집한 변경을 반영해야 할 때

@@ -11,7 +11,7 @@
 //  iCloud(CloudKit) 동기화가 실제로 켜지려면 Xcode의 Signing & Capabilities에서 iCloud
 //  capability와 CloudKit 서비스를 켜고 Containers 목록에 컨테이너를 최소 1개 추가해야 한다
 //  (빈 목록이면 컨테이너 생성이 실패해 아래 로컬 폴백 경로로 넘어간다). cloudKitDatabase는
-//  .automatic이라 특정 컨테이너 식별자를 하드코딩하지 않는다.
+//  BibleResearchSchema의 명시적 private 컨테이너를 사용한다.
 //
 
 import SwiftUI
@@ -25,6 +25,8 @@ struct JBCHBibleResearchApp: App {
     private let modelContainer: ModelContainer
 
     init() {
+        // 서버 스키마 오류는 컨테이너 생성 성공 후에도 발생하므로 먼저 알림을 구독한다.
+        CloudSyncMonitor.shared.start()
         // 모델 컨테이너 준비와 무관하므로 먼저 실행해도 된다
         // (BundledFontRegistrar.swift 참고 — 등록에 실패해도 앱은 계속 켜진다).
         BundledFontRegistrar.registerBundledFontsIfNeeded()
@@ -69,6 +71,7 @@ struct JBCHBibleResearchApp: App {
             print("[JBCHBibleResearchApp] 디스크 로컬 전용(CloudKit 비활성) 컨테이너로 재시도합니다 — 기존에 저장된 데이터는 그대로 남아 있어야 합니다.")
             do {
                 modelContainer = try BibleResearchSchema.makeSharedModelContainer(enableCloudKit: false)
+                CloudSyncMonitor.shared.disable(reason: "iCloud 연결에 실패해 이 기기에만 저장하고 있습니다. \(cloudKitError.localizedDescription)")
                 print("[JBCHBibleResearchApp] 디스크 로컬 전용 컨테이너 생성 성공 — CloudKit 동기화만 비활성 상태입니다. 위 첫 번째 에러 메시지를 확인해 원인을 해결한 뒤 다시 켜 주세요.")
             } catch let diskError {
                 // CloudKit과 무관하게 디스크 스토어 자체(또는 스키마) 문제라는 뜻이다.
@@ -78,6 +81,7 @@ struct JBCHBibleResearchApp: App {
                 print("[JBCHBibleResearchApp] 디스크 로컬 전용 컨테이너도 실패: \(diskError)")
                 print("[JBCHBibleResearchApp] ⚠️ 마지막 수단으로 in-memory 컨테이너로 폴백합니다 — 이 세션에서는 기존 데이터가 보이지 않고 새 데이터도 저장되지 않습니다. 위 두 에러 메시지를 반드시 확인해 주세요.")
                 modelContainer = try! BibleResearchSchema.makeSharedModelContainer(isStoredInMemoryOnly: true)
+                CloudSyncMonitor.shared.disable(reason: "저장소를 열지 못했습니다. 현재 변경 내용은 앱을 종료하면 사라집니다. \(diskError.localizedDescription)")
             }
         }
     }

@@ -301,6 +301,9 @@ private struct WordNoteSplitContent: View {
         #endif
         // 처음 뜰 때와 선택 해제로 빈 상태가 다시 보일 때마다 최근 항목을 새로 조회한다(macOS·iOS 공통).
         .onAppear { reloadMostRecent() }
+        .onChange(of: CloudSyncMonitor.shared.remoteImportRevision) { _, _ in
+            reloadMostRecent()
+        }
         .onChange(of: selectedItem?.id) { _, newValue in
             if newValue == nil { reloadMostRecent() }
         }
@@ -819,6 +822,9 @@ private struct WordNoteListContent: View {
             applyPendingSelectionRequest()
         }
         // 이미 떠 있는 상태에서 사이드바가 다른 항목을 요청한 경우용(첫 진입은 위 `.onAppear`가 처리).
+        .onChange(of: CloudSyncMonitor.shared.remoteImportRevision) { _, _ in
+            reload()
+        }
         .onChange(of: WordNoteSelectionRequest.shared.requestedTarget) { _, _ in
             applyPendingSelectionRequest()
         }

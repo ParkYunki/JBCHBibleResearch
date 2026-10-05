@@ -330,10 +330,46 @@ enum QueryIntentHandler {
                     let forwardRows = (try? store.personRelations(forWord: entity.word)) ?? []
                     add(forwardRows.filter { ["son_of", "daughter_of"].contains($0.relationType) },
                         answerWord: { $0.targetWord })
+                case .spouse(let answerIsWife):
+                    // 질의의 인물 성별이 질의와 모순이면(예: "미갈의 아내" — 미갈은 여성) 건너뛴다. 성별을 모르면('') 시도한다.
+                    let ownerGender = (try? store.person(idx: entity.idx))?.gender ?? ""
+                    if ownerGender == (answerIsWife ? "여" : "남") { continue }
+
+                    // 배우자 후보: entity가 source인 행(`forWord`)과 target인 행(`reverseRows`)을 모두 본다(일부는 한쪽만 저장돼 있다).
+                    var partners: [(word: String, idx: String)] = []
+                    func addPartner(_ word: String, _ idx: String) {
+                        guard word != entity.word, !partners.contains(where: { $0.word == word }) else { return }
+                        partners.append((word, idx))
+                    }
+                    for row in (try? store.personRelations(forWord: entity.word)) ?? [] where row.relationType == "married_to" {
+                        addPartner(row.targetWord, row.targetIdx)
+                    }
+                    for row in reverseRows where row.relationType == "married_to" && row.targetWord == entity.word {
+                        addPartner(row.sourceWord, "")
+                    }
+                    // 화면 문장이 "A는 B의 아내/남편"으로 읽히도록 항상 (배우자 → 질의 인물) 방향의 wife_of/husband_of 행으로 정리한다.
+                    for partner in partners {
+                        let record = PersonRelationRecord(
+                            sourceWord: partner.word, relationType: answerIsWife ? "wife_of" : "husband_of",
+                            targetWord: entity.word, targetKind: .person, rawSentence: "",
+                            targetIdx: entity.idx, sourceIdx: partner.idx
+                        )
+                        let key = "\(record.sourceWord)|\(record.relationType)|\(record.targetWord)"
+                        guard seen.insert(key).inserted else { continue }
+                        let verses = (try? store.personOrPlace(exactWord: partner.word))?.verseRefs ?? []
+                        combined.append(RelationDisplayItem(relation: record, verseRefs: verses))
+                    }
                 }
             }
             if !combined.isEmpty {
                 return QueryIntentCard(intent: .relation, status: .found(.relation(combined)))
+            }
+            // 아내/남편 질의는 결과가 없을 때 다른 관계 전체로 폴백하지 않는다 — 질의와 무관한 관계(아들·신하·대적 등)를 답처럼 나열하게 된다.
+            if case .spouse(let answerIsWife) = subQuery {
+                let label = answerIsWife ? "아내" : "남편"
+                return QueryIntentCard(intent: .relation, status: .notReady(
+                    message: "질의한 \(label) 관계가 등록돼 있지 않습니다. 아래 검색 결과를 확인해 보세요."
+                ))
             }
             // 타입 필터링 결과가 비면(해당 관계 데이터 없음) 아래 폴백으로 넘어가 다른 관계라도
             // 보여준다.
@@ -459,6 +495,11 @@ enum QueryIntentHandler {
         case reverseByType([String])
         /// "OO의 부모는?" 전용 — father_of/mother_of(역방향)와 son_of/daughter_of(정방향)를 합친다.
         case parents
+        /// "OO의 아내/남편은?" 전용. `PersonRelations`에는 `wife_of`/`husband_of` 행이 한 건도 없고 성별 중립인
+        /// `married_to`(PersonSeed 배우자 목록에서 만든 행, 대부분 양방향으로 저장)만 있다. 그래서 `reverseByType(["wife_of"])`로는
+        /// 항상 0건이 되어 "관계 타입 미지정 폴백"(그 인물의 아들·신하·대적 등 모든 관계 나열)으로 떨어졌다.
+        /// `answerIsWife`가 true면 질의의 인물이 남편, 답이 아내다.
+        case spouse(answerIsWife: Bool)
     }
 
     /// `entityWord` 바로 뒤 글자가 주격 조사("이"/"가")면 true(entity=source), 관형격
@@ -485,8 +526,8 @@ enum QueryIntentHandler {
         // "아내" 동의어 중 "처"는 한 글자라 "처음"/"처녀"/"출처" 등에 오탐되어 제외했다.
         // Layer 1(`QueryIntentClassifier.isRelationQuery`)이 넓게 잡으므로 여기서 좁게 잡아도
         // 최악의 경우 아래 폴백으로 떨어질 뿐이다.
-        if query.contains("아내") || query.contains("부인") { return .reverseByType(["wife_of"]) }
-        if query.contains("남편") { return .reverseByType(["husband_of"]) }
+        if query.contains("아내") || query.contains("부인") { return .spouse(answerIsWife: true) }
+        if query.contains("남편") { return .spouse(answerIsWife: false) }
         return nil
     }
 
