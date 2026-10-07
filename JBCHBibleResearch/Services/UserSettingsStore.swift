@@ -8,7 +8,9 @@
 //
 //  ⚠️ SwiftData/CloudKit 대신 UserDefaults를 쓴 이유: 이 값들은 "이 기기에서의 앱 사용
 //  방식" 설정이지 기기 간 동기화가 필요한 연구 데이터가 아니다.
-//  `NSUbiquitousKeyValueStore`를 통한 기기 간 동기화는 적용하지 않았다.
+//  `NSUbiquitousKeyValueStore`를 통한 기기 간 동기화는 적용하지 않았다 — 단, 설교 스타일 글꼴 설정(스타일 6종의 글꼴/크기/색 +
+//  말씀구절 박스 색, `syncedSermonStringSettings`/`syncedSermonDoubleSettings`)만 iPad·맥에서 같은 모양이 되도록
+//  iCloud 키-값 저장소로 미러링한다(아래 "설교 스타일 설정 iCloud 동기화" 참고).
 //
 
 import Foundation
@@ -22,6 +24,10 @@ final class UserSettingsStore {
     static let shared = UserSettingsStore()
 
     private let defaults: UserDefaults
+    /// 설교 스타일 설정 iCloud 동기화 상태(아래 "설교 스타일 설정 iCloud 동기화"). 화면 갱신과 무관한 내부 상태다.
+    @ObservationIgnored fileprivate var isSermonStyleCloudSyncActive = false
+    @ObservationIgnored fileprivate var isApplyingCloudSermonSettings = false
+    @ObservationIgnored fileprivate var cloudChangeObserver: NSObjectProtocol?
 
     private enum Key {
         static let openLastScreenOnLaunch = "settings.openLastScreenOnLaunch"
@@ -499,64 +505,64 @@ final class UserSettingsStore {
     // (2026-10-03 재설계로 기본값이 바뀌었다: 대주제 28 / 중주제 Bold 22 / 소주제 SemiBold 18 / 말씀구절 고운바탕 16.5 /
     //  인용 Paperlogy Regular 14.5(기울임 없음) / 본문 17. 인용의 시스템 폰트 AppleGothic 의존은 없어졌다.)
     var sermonMainThemeFontName: String {
-        didSet { defaults.set(sermonMainThemeFontName, forKey: Key.sermonMainThemeFontName) }
+        didSet { persistSyncedSermonSetting(sermonMainThemeFontName, forKey: Key.sermonMainThemeFontName) }
     }
     var sermonMainThemeFontSize: Double {
-        didSet { defaults.set(sermonMainThemeFontSize, forKey: Key.sermonMainThemeFontSize) }
+        didSet { persistSyncedSermonSetting(sermonMainThemeFontSize, forKey: Key.sermonMainThemeFontSize) }
     }
     var sermonMidThemeFontName: String {
-        didSet { defaults.set(sermonMidThemeFontName, forKey: Key.sermonMidThemeFontName) }
+        didSet { persistSyncedSermonSetting(sermonMidThemeFontName, forKey: Key.sermonMidThemeFontName) }
     }
     var sermonMidThemeFontSize: Double {
-        didSet { defaults.set(sermonMidThemeFontSize, forKey: Key.sermonMidThemeFontSize) }
+        didSet { persistSyncedSermonSetting(sermonMidThemeFontSize, forKey: Key.sermonMidThemeFontSize) }
     }
     var sermonSubThemeFontName: String {
-        didSet { defaults.set(sermonSubThemeFontName, forKey: Key.sermonSubThemeFontName) }
+        didSet { persistSyncedSermonSetting(sermonSubThemeFontName, forKey: Key.sermonSubThemeFontName) }
     }
     var sermonSubThemeFontSize: Double {
-        didSet { defaults.set(sermonSubThemeFontSize, forKey: Key.sermonSubThemeFontSize) }
+        didSet { persistSyncedSermonSetting(sermonSubThemeFontSize, forKey: Key.sermonSubThemeFontSize) }
     }
     var sermonVerseQuoteFontName: String {
-        didSet { defaults.set(sermonVerseQuoteFontName, forKey: Key.sermonVerseQuoteFontName) }
+        didSet { persistSyncedSermonSetting(sermonVerseQuoteFontName, forKey: Key.sermonVerseQuoteFontName) }
     }
     var sermonVerseQuoteFontSize: Double {
-        didSet { defaults.set(sermonVerseQuoteFontSize, forKey: Key.sermonVerseQuoteFontSize) }
+        didSet { persistSyncedSermonSetting(sermonVerseQuoteFontSize, forKey: Key.sermonVerseQuoteFontSize) }
     }
     var sermonCitationFontName: String {
-        didSet { defaults.set(sermonCitationFontName, forKey: Key.sermonCitationFontName) }
+        didSet { persistSyncedSermonSetting(sermonCitationFontName, forKey: Key.sermonCitationFontName) }
     }
     var sermonCitationFontSize: Double {
-        didSet { defaults.set(sermonCitationFontSize, forKey: Key.sermonCitationFontSize) }
+        didSet { persistSyncedSermonSetting(sermonCitationFontSize, forKey: Key.sermonCitationFontSize) }
     }
     var sermonBodyFontName: String {
-        didSet { defaults.set(sermonBodyFontName, forKey: Key.sermonBodyFontName) }
+        didSet { persistSyncedSermonSetting(sermonBodyFontName, forKey: Key.sermonBodyFontName) }
     }
     var sermonBodyFontSize: Double {
-        didSet { defaults.set(sermonBodyFontSize, forKey: Key.sermonBodyFontSize) }
+        didSet { persistSyncedSermonSetting(sermonBodyFontSize, forKey: Key.sermonBodyFontSize) }
     }
     var sermonMainThemeFontColorHex: String {
-        didSet { defaults.set(sermonMainThemeFontColorHex, forKey: Key.sermonMainThemeFontColorHex) }
+        didSet { persistSyncedSermonSetting(sermonMainThemeFontColorHex, forKey: Key.sermonMainThemeFontColorHex) }
     }
     var sermonMidThemeFontColorHex: String {
-        didSet { defaults.set(sermonMidThemeFontColorHex, forKey: Key.sermonMidThemeFontColorHex) }
+        didSet { persistSyncedSermonSetting(sermonMidThemeFontColorHex, forKey: Key.sermonMidThemeFontColorHex) }
     }
     var sermonSubThemeFontColorHex: String {
-        didSet { defaults.set(sermonSubThemeFontColorHex, forKey: Key.sermonSubThemeFontColorHex) }
+        didSet { persistSyncedSermonSetting(sermonSubThemeFontColorHex, forKey: Key.sermonSubThemeFontColorHex) }
     }
     var sermonVerseQuoteFontColorHex: String {
-        didSet { defaults.set(sermonVerseQuoteFontColorHex, forKey: Key.sermonVerseQuoteFontColorHex) }
+        didSet { persistSyncedSermonSetting(sermonVerseQuoteFontColorHex, forKey: Key.sermonVerseQuoteFontColorHex) }
     }
     var sermonCitationFontColorHex: String {
-        didSet { defaults.set(sermonCitationFontColorHex, forKey: Key.sermonCitationFontColorHex) }
+        didSet { persistSyncedSermonSetting(sermonCitationFontColorHex, forKey: Key.sermonCitationFontColorHex) }
     }
     var sermonBodyFontColorHex: String {
-        didSet { defaults.set(sermonBodyFontColorHex, forKey: Key.sermonBodyFontColorHex) }
+        didSet { persistSyncedSermonSetting(sermonBodyFontColorHex, forKey: Key.sermonBodyFontColorHex) }
     }
     var sermonVerseQuoteBackgroundColorHex: String {
-        didSet { defaults.set(sermonVerseQuoteBackgroundColorHex, forKey: Key.sermonVerseQuoteBackgroundColorHex) }
+        didSet { persistSyncedSermonSetting(sermonVerseQuoteBackgroundColorHex, forKey: Key.sermonVerseQuoteBackgroundColorHex) }
     }
     var sermonVerseQuoteBarColorHex: String {
-        didSet { defaults.set(sermonVerseQuoteBarColorHex, forKey: Key.sermonVerseQuoteBarColorHex) }
+        didSet { persistSyncedSermonSetting(sermonVerseQuoteBarColorHex, forKey: Key.sermonVerseQuoteBarColorHex) }
     }
 
     /// 뷰어 "Aa" 컨트롤이 조절하는 전체 배율(0.8~2.0, 기본 1.0). 스타일별 크기에 곱해져
@@ -670,6 +676,88 @@ final class UserSettingsStore {
         // 구약을 펼친 채로 시작한다(39권이라 신약보다 자주 참조됨).
         self.outlineExpandedTestaments = defaults.stringArray(forKey: Key.outlineExpandedTestaments) ?? ["old"]
         self.outlineExpandedBookIds = defaults.array(forKey: Key.outlineExpandedBookIds) as? [Int] ?? []
+
+        // 앱 기본 저장소(`.standard`)일 때만 iCloud와 맞춘다(테스트용으로 다른 `UserDefaults`를 넘기면 건드리지 않는다).
+        if defaults === UserDefaults.standard {
+            startSermonStyleCloudSync()
+        }
+    }
+}
+
+// MARK: - 설교 스타일 설정 iCloud 동기화
+
+extension UserSettingsStore {
+    /// 동기화 대상 — 문자열 설정(글꼴 이름, 글자색 hex, 말씀구절 박스 배경/세로 바 색).
+    fileprivate static let syncedSermonStringSettings: [(key: String, path: ReferenceWritableKeyPath<UserSettingsStore, String>)] = [
+        (Key.sermonMainThemeFontName, \.sermonMainThemeFontName),
+        (Key.sermonMidThemeFontName, \.sermonMidThemeFontName),
+        (Key.sermonSubThemeFontName, \.sermonSubThemeFontName),
+        (Key.sermonVerseQuoteFontName, \.sermonVerseQuoteFontName),
+        (Key.sermonCitationFontName, \.sermonCitationFontName),
+        (Key.sermonBodyFontName, \.sermonBodyFontName),
+        (Key.sermonMainThemeFontColorHex, \.sermonMainThemeFontColorHex),
+        (Key.sermonMidThemeFontColorHex, \.sermonMidThemeFontColorHex),
+        (Key.sermonSubThemeFontColorHex, \.sermonSubThemeFontColorHex),
+        (Key.sermonVerseQuoteFontColorHex, \.sermonVerseQuoteFontColorHex),
+        (Key.sermonCitationFontColorHex, \.sermonCitationFontColorHex),
+        (Key.sermonBodyFontColorHex, \.sermonBodyFontColorHex),
+        (Key.sermonVerseQuoteBackgroundColorHex, \.sermonVerseQuoteBackgroundColorHex),
+        (Key.sermonVerseQuoteBarColorHex, \.sermonVerseQuoteBarColorHex),
+    ]
+
+    /// 동기화 대상 — 숫자 설정(스타일 6종의 글자 크기).
+    fileprivate static let syncedSermonDoubleSettings: [(key: String, path: ReferenceWritableKeyPath<UserSettingsStore, Double>)] = [
+        (Key.sermonMainThemeFontSize, \.sermonMainThemeFontSize),
+        (Key.sermonMidThemeFontSize, \.sermonMidThemeFontSize),
+        (Key.sermonSubThemeFontSize, \.sermonSubThemeFontSize),
+        (Key.sermonVerseQuoteFontSize, \.sermonVerseQuoteFontSize),
+        (Key.sermonCitationFontSize, \.sermonCitationFontSize),
+        (Key.sermonBodyFontSize, \.sermonBodyFontSize),
+    ]
+
+    /// 설정 변경을 기기(`UserDefaults`)에 저장하고, iCloud 동기화가 켜져 있으면 키-값 저장소에도 올린다.
+    /// iCloud 값을 이 기기에 적용하는 중(`isApplyingCloudSermonSettings`)에는 되올리지 않는다.
+    fileprivate func persistSyncedSermonSetting(_ value: Any, forKey key: String) {
+        defaults.set(value, forKey: key)
+        guard isSermonStyleCloudSyncActive, !isApplyingCloudSermonSettings else { return }
+        NSUbiquitousKeyValueStore.default.set(value, forKey: key)
+    }
+
+    /// 시작 시 한 번: iCloud에 값이 있으면 이 기기에 적용하고, 없는 항목은 이 기기 값을 올린다(첫 기기가 기준이 된다).
+    /// 이후 다른 기기에서 바뀌면 알림으로 다시 적용한다. iCloud 키-값 저장소 권한(엔타이틀먼트)이 없는 빌드에서는
+    /// 저장소가 그냥 동작하지 않을 뿐 오류 없이 기기 설정만 쓰는 이전 동작 그대로다.
+    fileprivate func startSermonStyleCloudSync() {
+        let cloud = NSUbiquitousKeyValueStore.default
+        isSermonStyleCloudSyncActive = true
+        applyCloudSermonSettings(pushMissingLocalValues: true)
+        cloudChangeObserver = NotificationCenter.default.addObserver(
+            forName: NSUbiquitousKeyValueStore.didChangeExternallyNotification, object: cloud, queue: .main
+        ) { [weak self] _ in
+            MainActor.assumeIsolated {
+                self?.applyCloudSermonSettings(pushMissingLocalValues: false)
+            }
+        }
+        cloud.synchronize()
+    }
+
+    fileprivate func applyCloudSermonSettings(pushMissingLocalValues: Bool) {
+        let cloud = NSUbiquitousKeyValueStore.default
+        isApplyingCloudSermonSettings = true
+        defer { isApplyingCloudSermonSettings = false }
+        for setting in Self.syncedSermonStringSettings {
+            if let value = cloud.object(forKey: setting.key) as? String {
+                if self[keyPath: setting.path] != value { self[keyPath: setting.path] = value }
+            } else if pushMissingLocalValues {
+                cloud.set(self[keyPath: setting.path], forKey: setting.key)
+            }
+        }
+        for setting in Self.syncedSermonDoubleSettings {
+            if let value = cloud.object(forKey: setting.key) as? Double {
+                if self[keyPath: setting.path] != value { self[keyPath: setting.path] = value }
+            } else if pushMissingLocalValues {
+                cloud.set(self[keyPath: setting.path], forKey: setting.key)
+            }
+        }
     }
 }
 

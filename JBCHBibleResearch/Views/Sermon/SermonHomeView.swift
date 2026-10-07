@@ -101,6 +101,177 @@ private struct GatheringSection: Identifiable {
     let totalCount: Int
 }
 
+/// "모임 전체" 시트의 한 행.
+private struct GatheringPickerRow: Identifiable {
+    let filter: GatheringFilter
+    let name: String
+    let count: Int
+    /// 이름 변경이 가능한 실제 모임이면 그 이름 비교 키. "전체"/"모임 미지정"은 nil(이름 변경 없음).
+    let renameKey: String?
+    var id: GatheringFilter { filter }
+}
+
+/// 모임이 많을 때 쓰는 "모임 전체" 시트 — 검색, 선택, 이름 변경. 선택하면 목록 필터가 바뀌고 시트가 닫힌다.
+/// 이름 변경 시 같은 이름의 다른 모임이 이미 있으면 합쳐지므로 합치기 전에 한 번 더 확인한다.
+private struct GatheringPickerSheet: View {
+    let rows: [GatheringPickerRow]
+    let selected: GatheringFilter
+    let accent: Color
+    let onSelect: (GatheringFilter) -> Void
+    /// (이름 비교 키, 새 이름) → 같은 이름의 다른 모임이 이미 있는지.
+    let hasConflict: (String, String) -> Bool
+    /// (이름 비교 키, 새 이름, 합치기 허용).
+    let onRename: (String, String, Bool) -> Void
+
+    @Environment(\.dismiss) private var dismiss
+    @State private var query = ""
+    @State private var renameTarget: GatheringPickerRow?
+    @State private var renameText = ""
+    @State private var isRenameAlertPresented = false
+    @State private var mergeNewName = ""
+    @State private var isMergeAlertPresented = false
+
+    private var filteredRows: [GatheringPickerRow] {
+        let trimmed = query.trimmingCharacters(in: .whitespacesAndNewlines)
+        guard !trimmed.isEmpty else { return rows }
+        return rows.filter { $0.name.localizedCaseInsensitiveContains(trimmed) }
+    }
+
+    private var gatheringTotal: Int { rows.filter { $0.renameKey != nil }.count }
+
+    var body: some View {
+        VStack(spacing: 0) {
+            HStack {
+                Text("모임 선택 (\(gatheringTotal))")
+                    .font(.headline)
+                Spacer()
+                Button("닫기") { dismiss() }
+                    .keyboardShortcut(.cancelAction)
+            }
+            .padding(.horizontal, 16)
+            .padding(.top, 16)
+            .padding(.bottom, 8)
+
+            HStack(spacing: 6) {
+                Image(systemName: "magnifyingglass").foregroundStyle(.secondary)
+                TextField("모임 이름 검색", text: $query)
+                    .textFieldStyle(.plain)
+                    .autocorrectionDisabled()
+                if !query.isEmpty {
+                    Button { query = "" } label: { Image(systemName: "xmark.circle.fill").foregroundStyle(.secondary) }
+                        .buttonStyle(.plain)
+                        .accessibilityLabel("검색어 지우기")
+                }
+            }
+            .padding(.horizontal, 10)
+            .padding(.vertical, 8)
+            .background(Color.secondary.opacity(0.12), in: RoundedRectangle(cornerRadius: 8, style: .continuous))
+            .padding(.horizontal, 16)
+            .padding(.bottom, 8)
+
+            List {
+                ForEach(filteredRows) { row in
+                    rowView(row)
+                }
+                if filteredRows.isEmpty {
+                    Text("이름이 맞는 모임이 없습니다.")
+                        .font(.footnote)
+                        .foregroundStyle(.secondary)
+                }
+            }
+            .listStyle(.plain)
+            .alert("모임 이름 변경", isPresented: $isRenameAlertPresented) {
+                TextField("모임 이름", text: $renameText)
+                Button("저장") { commitRename() }
+                Button("취소", role: .cancel) {}
+            } message: {
+                Text("이 모임의 기존 설교 기록은 그대로 따라옵니다.")
+            }
+        }
+        .alert("이미 있는 모임입니다", isPresented: $isMergeAlertPresented) {
+            Button("합치기", role: .destructive) {
+                if let key = renameTarget?.renameKey { onRename(key, mergeNewName, true) }
+            }
+            Button("다른 이름", role: .cancel) {
+                renameText = mergeNewName
+                isRenameAlertPresented = true
+            }
+        } message: {
+            Text("“\(mergeNewName)” 모임이 이미 있습니다. 합치면 이 모임의 설교 기록이 모두 그 모임으로 옮겨지고 이 모임은 사라집니다. 합치시겠어요?")
+        }
+        #if os(macOS)
+        .frame(minWidth: 380, minHeight: 480)
+        #else
+        .presentationDetents([.medium, .large])
+        #endif
+    }
+
+    private func rowView(_ row: GatheringPickerRow) -> some View {
+        HStack(spacing: 10) {
+            Button {
+                onSelect(row.filter)
+                dismiss()
+            } label: {
+                HStack(spacing: 8) {
+                    Image(systemName: "checkmark")
+                        .font(.system(size: 12, weight: .bold))
+                        .foregroundStyle(accent)
+                        .opacity(row.filter == selected ? 1 : 0)
+                        .frame(width: 16)
+                    Text(row.name)
+                        .foregroundStyle(.primary)
+                        .lineLimit(1)
+                    Spacer(minLength: 8)
+                    Text("\(row.count)")
+                        .font(.footnote)
+                        .foregroundStyle(.secondary)
+                }
+                .contentShape(Rectangle())
+            }
+            .buttonStyle(.plain)
+            .accessibilityAddTraits(row.filter == selected ? .isSelected : [])
+
+            if row.renameKey != nil {
+                Button {
+                    beginRename(row)
+                } label: {
+                    Text("이름 변경")
+                        .font(.footnote.weight(.semibold))
+                        .foregroundStyle(accent)
+                }
+                .buttonStyle(.plain)
+                .accessibilityLabel("\(row.name) 이름 변경")
+            }
+        }
+        .padding(.vertical, 4)
+        .contextMenu {
+            if row.renameKey != nil {
+                Button("이름 변경") { beginRename(row) }
+            }
+        }
+    }
+
+    private func beginRename(_ row: GatheringPickerRow) {
+        renameTarget = row
+        renameText = row.name
+        isRenameAlertPresented = true
+    }
+
+    private func commitRename() {
+        guard let row = renameTarget, let key = row.renameKey else { return }
+        let name = renameText.trimmingCharacters(in: .whitespacesAndNewlines)
+        // 빈 이름은 저장하지 않고, 바뀐 것이 없으면 그냥 닫는다.
+        guard !name.isEmpty, name != row.name else { return }
+        if hasConflict(key, name) {
+            mergeNewName = name
+            // 같은 턴에 두 번째 알림을 띄우면 첫 알림 해제와 겹쳐 무시될 수 있어 다음 턴으로 미룬다.
+            DispatchQueue.main.async { isMergeAlertPresented = true }
+        } else {
+            onRename(key, name, false)
+        }
+    }
+}
+
 /// 행 오른쪽 아이콘 버튼 — 눌림 때 살짝 흐려지는 것 외에는 꾸밈이 없다.
 private struct SermonRowIconButtonStyle: ButtonStyle {
     func makeBody(configuration: Configuration) -> some View {
@@ -179,6 +350,12 @@ struct SermonHomeView: View {
     /// 정렬 기준 — 기기별로 기억한다. 처음엔 기존 순서(최근 수정)와 같다.
     @AppStorage("sermon.listSort") private var listSort: SermonListSort = .recentlyEdited
     @State private var gatherings: [SermonGathering] = []
+    /// "모임 전체" 시트 표시 여부 — 모임이 많을 때(`inlineGatheringLimit` 초과) 칩 줄 끝 버튼으로 연다.
+    @State private var isGatheringPickerPresented = false
+    /// 모임 칩을 줄바꿈으로 전부 보여 줄 수 있는 최대 개수. 이보다 많으면 한 줄 가로 스크롤 + "모임 전체" 시트로 바꾼다.
+    private static let inlineGatheringLimit = 10
+    /// 모임이 많을 때 칩 줄에 보이는 모임 칩 수(사용 많은 순 상위 + 지금 고른 모임).
+    private static let visibleGatheringChipCount = 8
     /// (아이패드·맥) 왼쪽 목록 폭 — 사용자가 분할선을 끌어 바꾸고 기기별로 기억한다.
     @AppStorage("sermon.listPaneWidth") private var listPaneWidth: Double = 600
     @State private var listWidthDragStart: Double?
@@ -430,6 +607,18 @@ struct SermonHomeView: View {
             #endif
             ToolbarItem(placement: .primaryAction) { composeButton }
         }
+        .sheet(isPresented: $isGatheringPickerPresented) {
+            GatheringPickerSheet(
+                rows: gatheringPickerRows,
+                selected: gatheringFilter,
+                accent: accent,
+                onSelect: { gatheringFilter = $0 },
+                hasConflict: { key, name in
+                    SermonGatheringSeeder.hasNameConflict(sourceKey: key, newName: name, in: gatherings)
+                },
+                onRename: { key, name, merge in renameGathering(sourceKey: key, to: name, merge: merge) }
+            )
+        }
         .confirmationDialog(
             "이 설교를 삭제할까요?",
             isPresented: Binding(
@@ -486,11 +675,7 @@ struct SermonHomeView: View {
                 accent: accent,
                 font: ListFonts.pill
             )
-            FlowLayoutHStack(spacing: 6) {
-                ForEach(gatheringChips) { chip in
-                    gatheringChipButton(chip)
-                }
-            }
+            gatheringChipRow
             HStack(spacing: 8) {
                 Text(listSummaryText)
                     .font(ListFonts.meta)
@@ -546,6 +731,115 @@ struct SermonHomeView: View {
         case .byDate:
             return "사용 이력 \(filteredDeliveries.count)건"
         }
+    }
+
+    /// 모임 칩 줄. 모임이 적으면(`inlineGatheringLimit` 이하) 예전처럼 줄바꿈으로 전부 보여 주고, 많으면 한 줄 가로 스크롤로 바꿔
+    /// 목록이 아래로 밀리지 않게 한다 — 이때 보이는 칩은 "전체" + 지금 고른 모임 + 사용 많은 순 상위 모임이고, 나머지는 줄 끝의
+    /// "모임 전체" 버튼으로 연 시트에서 검색·선택·이름 변경한다.
+    @ViewBuilder
+    private var gatheringChipRow: some View {
+        if gatheringOptions.count <= Self.inlineGatheringLimit {
+            FlowLayoutHStack(spacing: 6) {
+                ForEach(gatheringChips) { chip in
+                    gatheringChipButton(chip)
+                }
+            }
+        } else {
+            HStack(spacing: 6) {
+                ScrollView(.horizontal, showsIndicators: false) {
+                    HStack(spacing: 6) {
+                        ForEach(visibleGatheringChips) { chip in
+                            gatheringChipButton(chip)
+                        }
+                    }
+                    // 칩 테두리가 스크롤 영역 경계에서 잘리지 않게 위아래 1pt 여유.
+                    .padding(.vertical, 1)
+                }
+                .fixedSize(horizontal: false, vertical: true)
+                allGatheringsButton
+            }
+        }
+    }
+
+    /// 사용 많은 순(같으면 기존 순서) 모임 칩. "전체"는 맨 앞, "모임 미지정/미사용"은 맨 뒤에 둔다.
+    private func chipsOrderedByUsage(_ chips: [GatheringChip]) -> [GatheringChip] {
+        let gatheringChips = chips.enumerated().filter {
+            if case .gathering = $0.element.filter { return true } else { return false }
+        }
+        let sorted = gatheringChips.sorted { lhs, rhs in
+            lhs.element.count != rhs.element.count ? lhs.element.count > rhs.element.count : lhs.offset < rhs.offset
+        }.map { $0.element }
+        let head = chips.filter { $0.filter == .all }
+        let tail = chips.filter {
+            switch $0.filter {
+            case .unassigned, .unused: return true
+            default: return false
+            }
+        }
+        return head + sorted + tail
+    }
+
+    private var visibleGatheringChips: [GatheringChip] {
+        let ordered = chipsOrderedByUsage(gatheringChips)
+        var picked: [GatheringChip] = []
+        var gatheringCount = 0
+        for chip in ordered {
+            if case .gathering = chip.filter {
+                // 지금 고른 모임은 순위와 무관하게 보이게 하되 아래에서 따로 넣는다.
+                if chip.filter == gatheringFilter { continue }
+                guard gatheringCount < Self.visibleGatheringChipCount else { continue }
+                gatheringCount += 1
+            }
+            picked.append(chip)
+        }
+        if case .gathering = gatheringFilter, let selected = ordered.first(where: { $0.filter == gatheringFilter }) {
+            // "전체" 바로 뒤에 고정한다.
+            let insertAt = picked.first?.filter == .all ? 1 : 0
+            picked.insert(selected, at: insertAt)
+        }
+        return picked
+    }
+
+    private var allGatheringsButton: some View {
+        Button {
+            isGatheringPickerPresented = true
+        } label: {
+            HStack(spacing: 4) {
+                Image(systemName: "chevron.down")
+                    .font(.system(size: 10, weight: .bold))
+                Text("모임 전체")
+                Text("\(gatheringOptions.count)")
+            }
+            .font(ListFonts.chip(isSelected: true))
+            .lineLimit(1)
+            .padding(.horizontal, 10)
+            .frame(minHeight: 32)
+            .foregroundStyle(accent)
+            .overlay(Capsule().strokeBorder(accent, lineWidth: 1))
+            .contentShape(Capsule())
+        }
+        .buttonStyle(.plain)
+        .fixedSize()
+        .accessibilityLabel("모임 전체 목록 열기")
+    }
+
+    /// 시트에 보일 행 — 사용 많은 순. 이름 변경은 실제 모임 행에만 있다.
+    private var gatheringPickerRows: [GatheringPickerRow] {
+        chipsOrderedByUsage(gatheringChips).filter { $0.filter != .unused }.map { chip in
+            var renameKey: String?
+            if case .gathering(let key) = chip.filter { renameKey = key }
+            return GatheringPickerRow(filter: chip.filter, name: chip.label, count: chip.count, renameKey: renameKey)
+        }
+    }
+
+    private func renameGathering(sourceKey: String, to newName: String, merge: Bool) {
+        let outcome = SermonGatheringSeeder.rename(sourceKey: sourceKey, to: newName, mergeIfExists: merge, in: modelContext)
+        guard outcome == .renamed || outcome == .merged else { return }
+        // 고른 모임이 바뀐 이름을 따라가게 한다(비교 키가 이름에서 만들어지므로 그대로 두면 필터가 빈 칩을 가리킨다).
+        if gatheringFilter == .gathering(sourceKey) {
+            gatheringFilter = .gathering(SermonGatheringSeeder.normalizedKey(newName))
+        }
+        reloadLists()
     }
 
     private func gatheringChipButton(_ chip: GatheringChip) -> some View {

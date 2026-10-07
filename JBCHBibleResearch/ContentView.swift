@@ -93,6 +93,9 @@ struct ContentView: View {
                     SermonGatheringSeeder.deduplicate(in: modelContext)
                     // 기기마다 만들어져 생긴 같은 이름의 개인 묵상 폴더를 하나로 합친다(`MemoFolderMaintenance`).
                     MemoFolderMaintenance.deduplicate(in: modelContext)
+                    // 동기화 중 같은 id로 따로 생긴 말씀 요약 중복 중, 내용이 완전히 같은 것만 삭제한다(태그는 남길 쪽으로 옮김).
+                    let removedSummaries = VerseSummaryDeduplication.deduplicate(in: modelContext)
+                    if removedSummaries > 0 { print("[ContentView] 중복 말씀 요약 \(removedSummaries)건 정리") }
                     // 관주/난외주/한자주석/한자사전은 사용자가 편집하지 않는 정적 참조 데이터라
                     // CloudKit 동기화 대상이 아니며, 번들 `Resources/ReferenceData.sqlite`(읽기 전용)에서
                     // 직접 읽는다(`ReferenceDataProvider`/`ReferenceDataStore`). 예전에 SwiftData로

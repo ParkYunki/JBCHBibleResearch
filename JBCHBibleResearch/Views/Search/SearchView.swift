@@ -461,7 +461,15 @@ private struct SearchContentView: View {
     @ViewBuilder
     private func inlineCardDetail(_ kind: InlineCardKind, index: Int) -> some View {
         switch kind {
-        case .relation(let items): RelationDetailView(item: items[index])
+        case .relation(let items):
+            // 관계 행은 그 행의 "답 인물"(예: "갓은 야곱의 아들" → 갓)의 인물 상세를 연다. 인물로 특정되지 않으면
+            // (Persons에 없는 이름, 동명이인, 장소 등) 기존처럼 관계 상세로 폴백한다.
+            if !items[index].answerWord.isEmpty,
+               let person = PersonDetailView.resolvePerson(named: items[index].answerWord, idx: items[index].answerIdx) {
+                PersonDetailView(person: person)
+            } else {
+                RelationDetailView(item: items[index])
+            }
         case .person(let items): PersonDetailView(person: items[index])
         case .entity(let items):
             switch items[index] {
@@ -728,8 +736,8 @@ private struct SearchContentView: View {
     // MARK: - 관계 행
 
     /// 관계 행. 탭하면 push하지 않고 `viewModel.aiCardSelectedIndex`로 이 화면 안에서
-    /// `RelationDetailView`(문장 + 관련 성경구절 칩)로
-    /// 전환한다(`intentCardSection`/`inlineCardRow` 참고).
+    /// 행의 답 인물 상세(`PersonDetailView`)로 전환한다. 인물로 특정되지 않으면 `RelationDetailView`
+    /// (문장 + 관련 성경구절 칩)로 폴백한다(`inlineCardDetail` 참고).
     private func relationLabel(_ item: RelationDisplayItem) -> some View {
         rowLabel(
             icon: "person.2.fill", iconColor: settings.bibleTextColor ?? .primary,

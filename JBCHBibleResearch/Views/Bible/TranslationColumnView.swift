@@ -7,9 +7,11 @@
 //  컬럼이 리더일 때 좌표를 받아 자신을 그 절로 스크롤)을 동시에 수행한다.
 //
 //  스크롤 동기화 정의: 모든 컬럼의 뷰포트 정중앙에 항상 같은 절 번호가 오도록 맞춘다.
-//  `centerVerseID`(anchor: .center)가 이 "가운데 기준선" 역할이다.
-//  구현은 `ScrollView.scrollPosition(id:anchor:)`(iOS17/macOS14+)이며, id를 매기는
-//  LazyVStack에 `.scrollTargetLayout()`을 반드시 붙여야 바인딩이 갱신된다.
+//  리더의 "중앙 절"은 각 절 행의 프레임(PreferenceKey, 스크롤 내용 좌표)과 뷰포트 중앙선
+//  (`onScrollGeometryChange`의 `visibleRect.midY`)으로 구한다(`handleScrollCenterChange`).
+//  팔로워는 `ScrollView.scrollPosition(id:anchor:)`(iOS17/macOS14+)에 그 절 번호를 대입하고 anchor를 잠깐
+//  `.center`로 켜서 중앙에 맞춘다. 평소 anchor nil일 때 `centerVerseID`가 읽어 주는 값은 맨 위쪽 절이다.
+//  id를 매기는 LazyVStack에 `.scrollTargetLayout()`을 붙여야 바인딩이 동작한다.
 //
 
 import SwiftUI
@@ -69,12 +71,12 @@ struct TranslationColumnView: View {
     var phraseMemosProvider: (Int) -> [UserMemo] = { _ in [] }
     /// 드래그 표현 부연설명 "메모" — `phraseMemosProvider`와 같은 원칙.
     var phraseNotesProvider: (Int) -> [VersePhraseNote] = { _ in [] }
-    /// 난외주(단어 뜻풀이/구약 인용 출처) — 관주와 같은 자리에 아이콘으로 노출한다.
+    /// 난외주(단어 뜻풀이/구약 인용 출처) — 본문 위첨자와 선택 시 하단 목록으로만 보인다(아이콘 없음).
     var marginalNotesProvider: (Int) -> [VerseMarginalNote] = { _ in [] }
     /// 절 단위 한자 주석. 표시 방식(끄기/탭하면 보기/항상 보기)은 전역 설정이라
     /// `VerseRow`가 `UserSettingsStore.hanjaDisplayMode`를 직접 읽는다.
     var hanjaWordsProvider: (Int) -> [HanjaWordAnnotation] = { _ in [] }
-    /// "관련 내용" — 이 절을 언급하는 메모/연구문서가 있으면 절 번호 아래에 세 번째 아이콘으로 노출한다.
+    /// "관련 내용" — 이 절을 언급하는 메모/연구문서/설교/말씀 요약. 절 번호 위 색 점 스택으로 노출한다.
     var verseMentionsProvider: (Int) -> [VerseMention] = { _ in [] }
     /// 절 단위 책갈피 여부. 실제 구현은 `BibleReadingViewModel.isVerseBookmarked(_:)`.
     var isBookmarkedProvider: (Int) -> Bool = { _ in false }
@@ -83,6 +85,8 @@ struct TranslationColumnView: View {
     var isChapterBookmarked: Bool = false
     /// 관주 팝오버에서 대상 구절을 탭했을 때 — 그 책/장으로 이동한다(정확한 절 위치 스크롤은 범위 밖).
     var onSelectCrossReferenceTarget: (BibleVerseRef) -> Void = { _ in }
+    /// 관주 미리보기 글 — 이 컬럼 번역본의 대상 절 본문(없으면 nil). 통합 페이지의 관주 행이 두 줄까지 보여 준다.
+    var crossReferencePreviewProvider: (BibleVerseRef) -> String? = { _ in nil }
     /// 구간 메모 아이콘에서 메모를 골랐을 때 — 기존 "메모 작성" 시트를 그대로 연다.
     var onSelectPhraseMemo: (UserMemo) -> Void = { _ in }
     /// "관련 내용" 목록에서 항목을 골랐을 때 — 메모는 편집기 시트, 연구문서는 PDF 검색+이동 창으로
@@ -106,9 +110,13 @@ struct TranslationColumnView: View {
     var findMatchVerses: Set<Int> = []
     var currentFindVerse: Int? = nil
 
-    /// 지금 뷰포트 중앙(anchor: .center)에 있는 절 번호 — `.scrollPosition(id:)`가 스크롤에 맞춰
-    /// 읽어 주고(리더), 값을 대입하면 그 절이 중앙에 오도록 스크롤한다(팔로워).
+    /// 프로그램적 스크롤 대상 지정용 — 값을 대입하면 그 절로 스크롤한다(팔로워/검색 이동/장 리셋).
+    /// ⚠️ 평소(anchor nil)에 `.scrollPosition(id:)`가 읽어 주는 값은 "화면 중앙의 절"이 아니라 뷰포트 맨 위쪽 절이다.
+    /// 중앙 절은 `rowFrameStore`(절 행 프레임 + 스크롤 중앙선)로 따로 계산한다 — 리더 보고와 팔로워 판정은 그 값을 쓴다.
     @State private var centerVerseID: Int?
+    /// 절 행들의 스크롤 내용 좌표계 프레임과 지금 뷰포트 중앙선에 걸린 절. 값이 바뀌어도 화면을 다시 그릴 필요가 없어
+    /// 관찰되지 않는 참조 타입에 담는다(스크롤마다 body가 재계산되는 것을 막는다).
+    @State private var rowFrameStore = VerseRowFrameStore()
     /// 이 컬럼 자신이 팔로워로서 프로그램적으로 스크롤하는 중인지 — 그 사이에는
     /// `centerVerseID` 변경을 리더 보고로 착각해 되돌려 보고하지 않는다(안 그러면
     /// 팔로워가 스스로를 리더로 착각해 무한 루프에 빠질 수 있다).
@@ -130,6 +138,8 @@ struct TranslationColumnView: View {
     /// 가드/플래그 해제 시각을 애니메이션 지속 시간과 맞추기 위한 상수. `respondToSyncEvent`의
     /// `withAnimation` duration과 반드시 같은 값을 써야 한다.
     private static let scrollAnimationDuration: TimeInterval = 0.25
+    /// 스크롤 내용 좌표계 이름 — 절 행 프레임 보고(`VerseRowFrameReporter`)와 중앙선 계산이 같은 좌표를 쓴다.
+    private static let rowFrameSpaceName = "TranslationColumnView.rowFrameSpace"
 
     /// 절 목록 맨 아래의 추가 스크롤 여백(pt). 절을 선택하면 화면 하단에 뜨는 액션바가 마지막 절을 가리므로, 장 끝까지
     /// 스크롤했을 때 마지막 절을 액션바 위로 올려 볼 수 있게 한다. 선택 여부와 무관한 고정값이라 절을 선택/해제해도
@@ -239,6 +249,16 @@ struct TranslationColumnView: View {
             .scrollTargetLayout()
             .padding()
             .padding(.bottom, Self.bottomBufferPadding)
+            // 패딩까지 포함한 스크롤 내용 전체를 좌표계로 삼는다 — 절 행 프레임이 스크롤해도 변하지 않는 "내용 좌표"가 되어,
+            // 아래 `onScrollGeometryChange`의 뷰포트 중앙선(`visibleRect.midY`, 같은 내용 좌표)과 바로 비교할 수 있다.
+            .coordinateSpace(.named(Self.rowFrameSpaceName))
+        }
+        .onPreferenceChange(VerseRowFramePreferenceKey.self) { rowFrameStore.frames = $0 }
+        // 리더 역할: 이 컬럼 뷰포트의 세로 중앙선이 지나는 절을 구해 보고한다(스크롤마다).
+        .onScrollGeometryChange(for: CGFloat.self) { geometry in
+            geometry.visibleRect.midY
+        } action: { _, centerY in
+            handleScrollCenterChange(centerY)
         }
         // anchor는 `forceCenterAnchorForProgrammaticScroll`이 켜진 짧은 순간에만 `.center`, 그 외엔 nil이다.
         // 절 선택/해제 시 강제 재중앙정렬로 화면이 튀는 것을 막으면서, 프로그램적 스크롤은 정중앙까지
@@ -253,9 +273,6 @@ struct TranslationColumnView: View {
                 // 스크롤이 일어나지 않는다. 배치 이후 `proxy.scrollTo`를 지연 재시도한다.
                 scrollToHighlightedVerseAfterLayout(highlightedVerse, proxy: proxy, animated: false)
             }
-        }
-        .onChange(of: centerVerseID) { _, newValue in
-            reportCenterVerseIfNeeded(newValue)
         }
         // 아이폰(`respondsToSyncEvents == false`)에서는 이 구독 자체를 붙이지 않는다.
         // `coordinator.latestEvent`는 다른 컬럼이 리더일 때도 바뀌므로, 안에서 return만 해도 화면에 안 보이는
@@ -356,11 +373,14 @@ struct TranslationColumnView: View {
             hanjaWords: hanjaWordsProvider(verse.verse),
             verseMentions: verseMentionsProvider(verse.verse),
             onSelectCrossReferenceTarget: onSelectCrossReferenceTarget,
+            crossReferencePreviewProvider: crossReferencePreviewProvider,
             onSelectPhraseMemo: onSelectPhraseMemo,
             onSelectVerseMention: onSelectVerseMention,
             inlineAnnotatedContentProvider: inlineAnnotatedContentProvider
         )
             .id(verse.verse)
+            // 중앙 절 계산용 프레임 보고 — 스크롤 동기화를 쓰는 macOS/아이패드에서만(아이폰은 실시간 추적을 하지 않는다).
+            .modifier(VerseRowFrameReporter(verse: verse.verse, isEnabled: respondsToSyncEvents, spaceName: Self.rowFrameSpaceName))
             // macOS 탭 동작: 일반 클릭 = 선택 교체, Shift/Cmd 클릭 = 범위 선택, Option 클릭 = 개별 토글.
             // Control 클릭은 macOS가 컨텍스트 메뉴(아래 `.contextMenu`)로 먼저 가로챌 수 있어 쓰지 않는다.
             // 수식키는 `NSEvent.modifierFlags`를 읽기만 하므로 손쉬운 사용(접근성) 권한이 필요 없다.
@@ -418,8 +438,33 @@ struct TranslationColumnView: View {
         }
     }
 
+    /// 스크롤할 때마다 뷰포트 세로 중앙선(`centerY`, 스크롤 내용 좌표)이 지나는 절을 구해 리더로서 보고한다.
+    /// 중앙선이 절 사이 간격에 놓이면 가장 가까운 절을 쓴다. 보이는(배치된) 절의 프레임만 알고 있어도 중앙 절은 항상 그 안에 있다.
+    private func handleScrollCenterChange(_ centerY: CGFloat) {
+        var bestVerse: Int?
+        var bestDistance = CGFloat.greatestFiniteMagnitude
+        for (verse, frame) in rowFrameStore.frames {
+            let distance: CGFloat
+            if centerY < frame.minY {
+                distance = frame.minY - centerY
+            } else if centerY > frame.maxY {
+                distance = centerY - frame.maxY
+            } else {
+                distance = 0
+            }
+            // 거리가 같으면(경계에서 맞닿은 경우 등) 작은 절 번호로 정해 결과가 흔들리지 않게 한다.
+            if distance < bestDistance || (distance == bestDistance && verse < (bestVerse ?? Int.max)) {
+                bestDistance = distance
+                bestVerse = verse
+            }
+        }
+        guard let bestVerse else { return }
+        rowFrameStore.centerVerse = bestVerse
+        reportCenterVerseIfNeeded(bestVerse)
+    }
+
     /// 리더 역할 — 지금 중앙 절을 코디네이터에 보고한다. 프로그램적(팔로워) 스크롤 중에는 건너뛴다.
-    /// macOS/아이패드는 `.onChange(of: centerVerseID)`에서, 아이폰은 각 절 등장 시(`onRowAppear`)
+    /// macOS/아이패드는 `handleScrollCenterChange`(스크롤 중앙선)에서, 아이폰은 각 절 등장 시(`onRowAppear`)
     /// 그 절 번호로 직접 호출한다.
     private func reportCenterVerseIfNeeded(_ verse: Int?) {
         guard !isProgrammaticScroll, let verse else { return }
@@ -443,7 +488,8 @@ struct TranslationColumnView: View {
         guard let event, event.sourceColumnID != columnID else { return }
         let available = verses.map(\.verse)
         guard let target = coordinator.resolveTargetVerse(for: event.verse, availableVerses: available) else { return }
-        guard target != centerVerseID else { return }
+        // 이 컬럼의 중앙선에 이미 그 절이 걸려 있으면 건드리지 않는다(`centerVerseID`는 중앙이 아니라 맨 위쪽 절이라 쓰지 않는다).
+        guard target != rowFrameStore.centerVerse else { return }
 
         // 이전에 예약한 가드 해제 작업이 아직 실행 전이면 취소하고 재예약한다. 동기화 이벤트가 애니메이션
         // 지속 시간보다 짧은 간격으로 연달아 오면(빠른 스크롤 등) 먼저 예약된 타이머가 진행 중인 애니메이션
@@ -576,6 +622,43 @@ private struct ChapterBookmarkRibbonShape: Shape {
     }
 }
 
+/// 절 행 프레임(스크롤 내용 좌표)과 지금 중앙선에 걸린 절을 담는 참조 타입 — 값이 바뀌어도 SwiftUI 갱신을 일으키지 않는다.
+private final class VerseRowFrameStore {
+    var frames: [Int: CGRect] = [:]
+    var centerVerse: Int?
+}
+
+/// 절 번호 → 그 절 행의 프레임. 같은 절 번호는 한 번만 오지만 합칠 때는 나중 값을 쓴다.
+private struct VerseRowFramePreferenceKey: PreferenceKey {
+    static let defaultValue: [Int: CGRect] = [:]
+    static func reduce(value: inout [Int: CGRect], nextValue: () -> [Int: CGRect]) {
+        value.merge(nextValue()) { _, new in new }
+    }
+}
+
+/// 절 행 뒤에 투명 `GeometryReader`를 깔아 프레임을 보고한다. 스크롤해도 내용 좌표는 변하지 않으므로 레이아웃(배치/높이)이
+/// 바뀔 때만 값이 갱신된다. `isEnabled`가 false면 아무것도 붙이지 않는다.
+private struct VerseRowFrameReporter: ViewModifier {
+    let verse: Int
+    let isEnabled: Bool
+    let spaceName: String
+
+    func body(content: Content) -> some View {
+        if isEnabled {
+            content.background {
+                GeometryReader { proxy in
+                    Color.clear.preference(
+                        key: VerseRowFramePreferenceKey.self,
+                        value: [verse: proxy.frame(in: .named(spaceName))]
+                    )
+                }
+            }
+        } else {
+            content
+        }
+    }
+}
+
 /// `isEnabled`가 false(아이폰)면 `.onChange(of:)`를 붙이지 않아
 /// `coordinator.latestEvent`가 바뀔 때마다 body가 재계산되는 것을 막는다.
 /// true(macOS/iPadOS)면 매번 구독해 `onEvent`를 호출한다.
@@ -642,6 +725,8 @@ private struct VerseRow: View {
     /// "관련 내용" — 관주/메모와 같은 원칙.
     var verseMentions: [VerseMention] = []
     var onSelectCrossReferenceTarget: (BibleVerseRef) -> Void = { _ in }
+    /// 관주 미리보기 글 — 이 컬럼 번역본의 대상 절 본문(없으면 nil). 통합 페이지의 관주 행이 두 줄까지 보여 준다.
+    var crossReferencePreviewProvider: (BibleVerseRef) -> String? = { _ in nil }
     var onSelectPhraseMemo: (UserMemo) -> Void = { _ in }
     var onSelectVerseMention: (VerseMention) -> Void = { _ in }
     /// 캐시되는 인라인 주석 조립 클로저 — `verseContentText`가 사용한다.
@@ -655,9 +740,10 @@ private struct VerseRow: View {
         )
     }
 
-    @State private var isCrossReferencePopoverPresented = false
-    @State private var isMarginalNotePopoverPresented = false
-    @State private var isVerseMentionPopoverPresented = false
+    /// 절 번호 위 색 점(`VerseRelatedIconStack`)을 눌러 여는 "절 관련 내용" 통합 페이지.
+    @State private var isRelatedPresented = false
+    /// 누른 점의 종류 — 그 종류 칩이 먼저 선택된 채 열린다(nil이면 "전체").
+    @State private var relatedInitialKind: VerseRelatedKind?
 
     // 환경설정 "모양" 탭의 본문 크기/색상/절 번호 크기/줄간격/글꼴을 반영한다.
     // `@Observable`이라 설정이 바뀌면 이 행도 다시 그려진다.
@@ -693,6 +779,30 @@ private struct VerseRow: View {
                         settings.bibleTextColor ?? JBCHCategoryPalette.navy,
                         in: RoundedRectangle(cornerRadius: 5, style: .continuous)
                     )
+                    // 절 번호를 누르면 색 점을 눌렀을 때와 같은 "절 관련 내용" 통합 페이지가 "전체" 칩으로 열린다(2026-10-07).
+                    // 관련 내용이 없는 절은 `.subviews` 마스크로 이 제스처를 꺼서, 행 전체의 탭(절 선택/해제)이 그대로 동작한다.
+                    // 있는 절은 번호 칸 탭이 이 제스처가 받아 절 선택은 되지 않는다(본문·빈 곳을 탭하면 선택).
+                    .contentShape(RoundedRectangle(cornerRadius: 5, style: .continuous))
+                    .gesture(
+                        TapGesture().onEnded {
+                            relatedInitialKind = nil
+                            isRelatedPresented = true
+                        },
+                        including: relatedKinds.isEmpty ? .subviews : .all
+                    )
+                    // 색 점 스택 — `.overlay`라 행 높이/베이스라인 정렬에 영향을 주지 않는다.
+                    .overlay(alignment: .topLeading) {
+                        if !relatedKinds.isEmpty {
+                            VerseRelatedIconStack(kinds: relatedKinds) { kind in
+                                relatedInitialKind = kind
+                                isRelatedPresented = true
+                            }
+                            .offset(x: -2, y: -17)
+                            .popover(isPresented: $isRelatedPresented) {
+                                relatedPopoverContent
+                            }
+                        }
+                    }
 
                 // 책갈피 아이콘 — 위 HStack 주석 참고. 절 번호 뱃지에 살짝 겹치도록 음수 top 패딩으로
                 // 끌어올린다.
@@ -703,73 +813,17 @@ private struct VerseRow: View {
                         .padding(.top, -4)
                 }
 
-                // 관주 마커 — `Text(AttributedString)`은 구간별 탭 제스처를 따로 걸 수 없어
-                // 본문 글자 사이에 끼울 수 없다. 대신 절 번호 아래 아이콘으로 연결 구절 확인/이동을 제공한다.
-                if !crossReferences.isEmpty {
-                    Button {
-                        isCrossReferencePopoverPresented = true
-                    } label: {
-                        Image(systemName: "link.circle.fill")
-                            .font(.caption2)
-                            .foregroundStyle(settings.bibleTextColor ?? .secondary)
-                    }
-                    .buttonStyle(.plain)
-                    .popover(isPresented: $isCrossReferencePopoverPresented) {
-                        crossReferencePopoverContent
-                    }
-                }
-
-                // 난외주 마커 — 관주 아이콘과 같은 이유로 같은 자리에 아이콘을 둔다.
-                if !marginalNotes.isEmpty {
-                    Button {
-                        isMarginalNotePopoverPresented = true
-                    } label: {
-                        Image(systemName: "asterisk.circle")
-                            .font(.caption2)
-                            .foregroundStyle(settings.bibleTextColor ?? .secondary)
-                    }
-                    .buttonStyle(.plain)
-                    .popover(isPresented: $isMarginalNotePopoverPresented) {
-                        marginalNotePopoverContent
-                    }
-                }
-
-                if !phraseMemos.isEmpty {
-                    Menu {
-                        ForEach(phraseMemos) { memo in
-                            Button(phraseMemoLabel(memo)) { onSelectPhraseMemo(memo) }
-                        }
-                    } label: {
-                        Image(systemName: "note.text")
-                            .font(.caption2)
-                            .foregroundStyle(settings.bibleTextColor ?? .secondary)
-                    }
-                    .buttonStyle(.plain)
-                }
+                // 관주/연구문서/내 설교/말씀 요약/구절 메모 아이콘은 절 번호 뱃지 위쪽의 색 점 스택
+                // (`VerseRelatedIconStack`, 뱃지 `.overlay`)으로 모았고, 어느 점을 눌러도 같은 통합 페이지가 열린다.
+                // 난외주 별표 아이콘은 본문에 이미 자주색 표시가 있어 뺐다(`MarginalNoteFootnoteList`는 그대로).
 
                 // 한자 주석은 이 칸의 아이콘이 아니라 절 선택 상태(`isSelected`)로
                 // 제어한다(`shouldShowInlineHanja`/`verseContentText` 참고). 한자
                 // 뜻(훈음)은 확대보기(`VerseZoomView`)의 "한자 뜻풀이" 영역에서 본다.
-
-                // "관련 내용" 아이콘 — 관주/메모 아이콘 아래에 쌓는다.
-                if !verseMentions.isEmpty {
-                    Button {
-                        isVerseMentionPopoverPresented = true
-                    } label: {
-                        Image(systemName: "doc.text.magnifyingglass")
-                            .font(.caption2)
-                            .foregroundStyle(settings.bibleTextColor ?? .secondary)
-                    }
-                    .buttonStyle(.plain)
-                    .popover(isPresented: $isVerseMentionPopoverPresented) {
-                        VerseMentionListView(mentions: verseMentions) { mention in
-                            isVerseMentionPopoverPresented = false
-                            onSelectVerseMention(mention)
-                        }
-                    }
-                }
             }
             .frame(minWidth: 20)
+            // 색 점 스택이 위쪽으로 튀어나오므로 관련 내용이 있는 절은 그만큼 위 여백을 둬 윗절/스크롤 가장자리와 겹치지 않게 한다.
+            .padding(.top, relatedKinds.isEmpty ? 0 : 12)
 
             verseContentText
                 .lineSpacing(settings.bibleLineSpacing)
@@ -899,177 +953,34 @@ private struct VerseRow: View {
         #endif
     }
 
-    // 관주 팝업 —
-    // `BibleReadingHistorySheet.header`/`BookmarkListPopover.header`와
-    // 같은 "제목 + 개수 배지 + 원형 닫기" 헤더, 강조색 책 이름 + 옅은 장:절 + chevron
-    // 행으로 그 화면들과 같은 시각 언어를 쓴다. 위쪽 여백, 장식 구분선, 행 왼쪽 색상바도 같은
-    // 방식이다.
-    //
-    // 아이폰에서 `.popover`가 시트로 바뀔 때 카드 위아래에 테마색이 아닌 여백이 남는 문제를
-    // `TranslationPickerPopover`와 같은 두 겹 처리(근사
-    // `.presentationDetents` + `.frame(maxHeight:
-    // .infinity)`)로 막는다. 난외주
-    // 팝오버(`marginalNotePopoverContent`)에는 아직 적용하지 않았다.
-    private var crossReferencePopoverContent: some View {
-        let targets = crossReferences.flatMap(\.targets)
-        return VStack(alignment: .leading, spacing: 0) {
-            crossReferenceHeader(count: targets.count)
-            crossReferenceContentOrnamentalDivider
-            List(targets, id: \.self) { target in
-                crossReferenceRow(for: target)
-            }
-            .listStyle(.plain)
-            .scrollContentBackground(.hidden)
-            .background(settings.bibleBackgroundColor ?? Color.clear)
-            .listRowSeparatorTint(JBCHCategoryPalette.wood.opacity(0.15))
-            .frame(minWidth: 220, minHeight: 160)
-        }
-        // 아이폰(시트)에서만 이 VStack을 시트 전체 높이까지 늘려(`alignment: .top`으로
-        // 내용은 위쪽에 유지) 아래 `.background()`가 시트 전체를 칠하게 한다 —
-        // `sheetHeight` 근사치가 어긋나도 남는 여백이 항상 테마색이다. 아이패드/macOS(진짜
-        // popover)는 `nil`이라 내용 크기에 맞춰진다.
-        .frame(maxHeight: isPhone ? .infinity : nil, alignment: .top)
-        .background(settings.bibleBackgroundColor ?? Color.clear)
-        #if os(iOS)
-        .modifier(CrossReferenceSheetSizingModifier(isPhone: isPhone, sheetHeight: crossReferenceSheetHeight(count: targets.count)))
-        #endif
+    // MARK: - 절 관련 내용 통합 페이지
+
+    /// 이 절에 걸린 종류들(0건은 빠짐) — 아이콘 스택과 통합 페이지가 같은 값을 쓴다.
+    private var relatedContent: VerseRelatedContent {
+        VerseRelatedContent(
+            crossReferenceTargets: crossReferences.flatMap { $0.targets },
+            phraseMemos: phraseMemos,
+            mentions: verseMentions
+        )
     }
 
-    /// `BibleReadingHistorySheet.header`/`BookmarkListPopover.header`와
-    /// 같은 구조의 헤더.
-    private func crossReferenceHeader(count: Int) -> some View {
-        HStack(spacing: 6) {
-            Text("관주")
-                .font(.headline)
-                .foregroundStyle(settings.bibleTextColor ?? .primary)
-            Text("\(count)")
-                .font(.caption)
-                .foregroundStyle(settings.bibleTextColor?.opacity(0.6) ?? Color.secondary)
-                .padding(.horizontal, 6)
-                .padding(.vertical, 2)
-                .background(settings.bibleTextColor?.opacity(0.12) ?? Color.secondary.opacity(0.15), in: Capsule())
-            Spacer()
-            Button {
-                isCrossReferencePopoverPresented = false
-            } label: {
-                Image(systemName: "xmark.circle.fill")
-                    .font(.system(size: 18))
-                    .foregroundStyle(settings.bibleTextColor?.opacity(0.6) ?? Color.secondary)
-            }
-            .buttonStyle(.plain)
-            .accessibilityLabel("닫기")
-        }
-        .padding(.horizontal, 16)
-        .padding(.top, 18)
-        .padding(.bottom, 10)
+    private var relatedKinds: [VerseRelatedKind] {
+        relatedContent.availableKinds
     }
 
-    /// `BibleReadingHistorySheet`/`SearchView`의 장식
-    /// 구분선(가로선-`sparkle`-가로선, wood 톤)과 같은 모양 — 그쪽이 `private`라 이
-    /// 파일에 옮겨 적었다.
-    private var crossReferenceContentOrnamentalDivider: some View {
-        HStack(spacing: 10) {
-            Rectangle()
-                .fill(JBCHCategoryPalette.wood.opacity(0.3))
-                .frame(height: 1)
-            Image(systemName: "sparkle")
-                .font(.system(size: 11))
-                .foregroundStyle(settings.bibleTextColor?.opacity(0.45) ?? Color.secondary)
-            Rectangle()
-                .fill(JBCHCategoryPalette.wood.opacity(0.3))
-                .frame(height: 1)
-        }
-        .padding(.horizontal, 16)
-        .padding(.vertical, 4)
+    private var relatedPopoverContent: some View {
+        VerseRelatedSheet(
+            reference: "\(BooksProvider.shared.book(id: verse.bookId)?.nameKo ?? "책 \(verse.bookId)") \(verse.chapter):\(verse.verse)",
+            content: relatedContent,
+            initialKind: relatedInitialKind,
+            onClose: { isRelatedPresented = false },
+            onSelectTarget: onSelectCrossReferenceTarget,
+            previewProvider: crossReferencePreviewProvider,
+            onSelectMemo: onSelectPhraseMemo,
+            onSelectMention: onSelectVerseMention
+        )
     }
 
-    /// 책 이름은 `Color("AccentColor")` 굵게, 장:절은 옅게 두고, 이미
-    /// `Button`인 행이 탭 가능함을 `chevron.right`로 드러낸다.
-    private func crossReferenceRow(for target: BibleVerseRef) -> some View {
-        Button {
-            isCrossReferencePopoverPresented = false
-            onSelectCrossReferenceTarget(target)
-        } label: {
-            HStack(spacing: 8) {
-                Text(crossReferenceBookName(target))
-                    .font(.body.weight(.bold))
-                    .foregroundStyle(Color("AccentColor"))
-                Text(crossReferenceVerseLabel(target))
-                    .font(.body.weight(.semibold))
-                    .foregroundStyle(settings.bibleTextColor?.opacity(0.7) ?? Color.secondary)
-                Spacer(minLength: 8)
-                Image(systemName: "chevron.right")
-                    .font(.caption2)
-                    .foregroundStyle(settings.bibleTextColor?.opacity(0.4) ?? Color.secondary.opacity(0.6))
-            }
-            .padding(.leading, 10)
-            // 행 왼쪽 강조선(`DocumentRowView.documentRowLabel`의 "책등" 패턴) —
-            // 색은 책 이름과 같은 `AccentColor`.
-            .overlay(alignment: .leading) {
-                RoundedRectangle(cornerRadius: 1.5)
-                    .fill(Color("AccentColor"))
-                    .frame(width: 3)
-                    .padding(.vertical, 3)
-            }
-            .contentShape(Rectangle())
-        }
-        .buttonStyle(.plain)
-        .listRowBackground(Color.clear)
-        // 책 이름/장:절이 별도 `Text`라 VoiceOver가 따로 읽으므로, 접근성 레이블은 합친
-        // 문장("창세기 4:22")으로 제공한다.
-        .accessibilityLabel(crossReferenceTargetLabel(target))
-    }
-
-    private func crossReferenceBookName(_ target: BibleVerseRef) -> String {
-        BooksProvider.shared.book(id: target.bookId)?.nameKo ?? "책 \(target.bookId)"
-    }
-
-    private func crossReferenceVerseLabel(_ target: BibleVerseRef) -> String {
-        "\(target.chapter):\(target.verse)"
-    }
-
-    private func crossReferenceTargetLabel(_ target: BibleVerseRef) -> String {
-        "\(crossReferenceBookName(target)) \(crossReferenceVerseLabel(target))"
-    }
-
-    /// `TranslationPickerPopover.isPhone`과 같은 판정(그쪽이 `private`라
-    /// 로직만 옮겨 적었다).
-    private var isPhone: Bool {
-        #if os(iOS)
-        UIDevice.current.userInterfaceIdiom == .phone
-        #else
-        false
-        #endif
-    }
-
-    #if os(iOS)
-    /// `TranslationPickerPopover.sheetHeight`와 같은 계산 — 헤더 + 구분선
-    /// + 행당 44(HIG 최소 탭 영역). `max(count, 1)`은 시트 높이가 0이 되는 것을
-    /// 막는 안전장치다(이 팝오버는 `!crossReferences.isEmpty`일 때만 열린다).
-    private func crossReferenceSheetHeight(count: Int) -> CGFloat {
-        // 헤더/장식 구분선 높이는 근사치다 — 어긋나도
-        // `crossReferencePopoverContent`의 `.frame(maxHeight:
-        // .infinity)`가 남는 여백을 테마색으로 채운다.
-        let headerHeight: CGFloat = 52
-        let dividerHeight: CGFloat = 20
-        let rowHeight: CGFloat = 44
-        return headerHeight + dividerHeight + CGFloat(max(count, 1)) * rowHeight
-    }
-    #endif
-
-    /// 난외주 팝오버 — 탭할 대상이 없어 `Button` 없이 `Text`만 나열한다.
-    private var marginalNotePopoverContent: some View {
-        List(marginalNotes) { note in
-            Text(note.noteText)
-        }
-        .frame(minWidth: 220, minHeight: 120)
-    }
-
-
-    private func phraseMemoLabel(_ memo: UserMemo) -> String {
-        let trimmed = memo.contentText.trimmingCharacters(in: .whitespacesAndNewlines)
-        return trimmed.isEmpty ? "(내용 없음)" : trimmed
-    }
 
     /// 선택(복사 대상)은 검색 하이라이트보다 더 뚜렷해야 한다 — 하이라이트는 일시적 안내지만 선택은
     /// 사용자가 직접 고른 상태라, 놓치면 엉뚱한 절이 복사될 수 있다.
@@ -1083,24 +994,6 @@ private struct VerseRow: View {
     }
 }
 
-#if os(iOS)
-/// `VerseRow.crossReferencePopoverContent` 전용 시트 크기 모디파이어 —
-/// 아이폰(시트)에서만 높이를 컨텐츠에 맞추고, 아이패드/macOS(팝오버)에서는 아무것도 하지 않는다.
-/// 같은 구조가 다른 파일에 `private`로 있어 이 파일에 따로 둔다.
-private struct CrossReferenceSheetSizingModifier: ViewModifier {
-    let isPhone: Bool
-    let sheetHeight: CGFloat
-    func body(content: Content) -> some View {
-        if isPhone {
-            content
-                .presentationDetents([.height(sheetHeight)])
-                .presentationDragIndicator(.visible)
-        } else {
-            content
-        }
-    }
-}
-#endif
 
 /// `ContentUnavailableView`(macOS 14+/iOS 17+) 대신 텍스트만 보여주는
 /// 경량 대체 뷰 — 아이콘/버튼 파라미터가 필요 없어서다.

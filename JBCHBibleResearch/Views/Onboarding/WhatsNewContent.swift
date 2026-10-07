@@ -22,6 +22,14 @@ struct WhatsNewEntry: Identifiable {
 
 enum WhatsNewContent {
     static let entries: [WhatsNewEntry] = [
+        WhatsNewEntry(version: "1.3", items: [
+            "연구문서 - 다중 이미지 문서유형 추가",
+            "연구문서 - 단일 이미지에 '이미지 추가' 기능",
+            "성경 조회 - 메모하기 레이아웃 변경",
+            "의미검색(인물)교정",
+            "기타 레이아웃 수정",
+            "기타 버그 수정"
+        ]),
         WhatsNewEntry(version: "1.2.7", items: [
             "디자인 통일 및 보정",
             "말씀 노트 레이아웃 정리 및 폴더 관리기능 추가",

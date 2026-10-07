@@ -1343,9 +1343,10 @@ private struct WordNoteListContent: View {
             allMemos = try modelContext.fetch(
                 FetchDescriptor<UserMemo>(sortBy: [SortDescriptor(\.updatedAt, order: .reverse)])
             )
-            allSummaries = try modelContext.fetch(
+            // 같은 id의 말씀 요약이 둘 이상이면(동기화 중복) 목록 id(`summary-<id>`)가 겹쳐 SwiftUI가 undefined 동작을 하므로 하나만 남긴다.
+            allSummaries = VerseSummaryDeduplication.uniqueById(try modelContext.fetch(
                 FetchDescriptor<VerseSummary>(sortBy: [SortDescriptor(\.createdAt, order: .reverse)])
-            )
+            ))
             folders = try modelContext.fetch(
                 FetchDescriptor<MemoFolder>(sortBy: [SortDescriptor(\.name)])
             )

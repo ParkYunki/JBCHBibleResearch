@@ -301,6 +301,11 @@ struct PersonDetailView: View {
     /// 직접 조회하고, 없으면 동명이인(예: "야고보")이 있을 때 잘못된 인물로 이동하지 않도록 nil.
     /// `persons(mentionedIn:)`은 "아브라함/라함" 오탐 방지 필터가 적용된 함수라 짧은 이름 조회에도 안전하다.
     private func resolvedRelationPerson(named name: String, idx: String = "") -> PersonEntity? {
+        Self.resolvePerson(named: name, idx: idx)
+    }
+
+    /// `resolvedRelationPerson`의 본체. 통합검색의 관계 행(`SearchView`)이 "답 인물" 상세를 열 때도 같은 규칙을 쓰도록 static으로 둔다.
+    static func resolvePerson(named name: String, idx: String = "") -> PersonEntity? {
         guard let store = ReferenceDataProvider.shared.store else { return nil }
         if !idx.isEmpty, let exact = try? store.person(idx: idx) {
             return exact

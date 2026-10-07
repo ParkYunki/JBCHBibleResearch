@@ -182,6 +182,8 @@ struct AnnotatedVerseFlowView: View {
         // 글자색 우선순위: 메모(파랑) > 한자 단어(갈색) > 기존 본문 색.
         let baseColor = baseTextColor(hasNote: hasNote, hasHanja: segment.hasHanja)
         let notesHere = phraseNotes.filter { segment.noteIDs.contains($0.id) }
+        // 한자 단어는 굵게 — 메모(파랑)가 글자색을 덮어도 한자임이 보이게 한다(2026-10-07 B안, `VerseAnnotationRenderer.boldVariant`).
+        let segmentFont: PlatformFont = segment.hasHanja ? VerseAnnotationRenderer.boldVariant(of: font) : font
 
         // 레거시 `.mark` 데이터와 관주가 걸린 조각 모두 같은 밑줄(주황 실선)을 켠다.
         // 분기별로 각각 걸면 바깥에서 다시 걸 때 `false`가 앞선 `true`를 덮어쓸 수 있어,
@@ -192,12 +194,12 @@ struct AnnotatedVerseFlowView: View {
             case .highlight:
                 let tag = HighlightColorTag(rawValue: segment.highlight?.colorTag ?? "") ?? .yellow
                 Text(segment.text)
-                    .font(Font(font))
+                    .font(Font(segmentFont))
                     .foregroundStyle(baseColor)
                     .background(tag.swiftUIColor.opacity(tag.backgroundOpacity))
             case .mark, nil:
                 Text(segment.text)
-                    .font(Font(font))
+                    .font(Font(segmentFont))
                     .foregroundStyle(baseColor)
             }
         }

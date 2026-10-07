@@ -154,6 +154,12 @@ public final class SourceDocument {
     @Relationship(deleteRule: .cascade, inverse: \DocumentMarkdown.sourceDocument)
     public var markdownRevisions: [DocumentMarkdown]? = []
 
+    /// 이미지 문서의 쪽 목록(여러 장을 한 문서로 묶은 경우). 비어 있으면 원본 파일 1장짜리 문서다 —
+    /// 기존 이미지 문서는 변환 없이 그대로 열리고, 처음 장을 더하는 순간에만 행이 만들어진다
+    /// (`DocumentImagePageService` 참고). 이미지가 아닌 형식에서는 항상 비어 있다.
+    @Relationship(deleteRule: .cascade, inverse: \DocumentImagePage.sourceDocument)
+    public var imagePages: [DocumentImagePage]? = []
+
     /// `UserMemo.memoTags`와 같이 이 쪽에는 `@Relationship`을 붙이지 않는다 — 반대편
     /// (`DocumentTag.document`, Tags.swift)이 이미 `inverse:`로 가리키고 있어, 양쪽에
     /// 붙이면 SwiftData가 같은 관계를 두 개로 오인할 수 있다(inverse는 한쪽에만 선언).
@@ -250,6 +256,42 @@ public final class DocumentText {
         self.lineIndex = lineIndex
         self.lineText = lineText
         self.ocrBoundingBox = ocrBoundingBox
+        self.sourceDocument = sourceDocument
+        self.createdAt = createdAt
+    }
+}
+
+/// 이미지 문서의 한 쪽(여러 장을 한 문서로 묶은 "이미지 모음"의 장 1개). `pageNumber`는 0부터이며
+/// OCR 줄(`DocumentText.pageNumber`)·앵커(`DocumentAnchor.pageNumber`)와 같은 값을 쓴다(PDF와 같은 규칙).
+///
+/// 파일 바이트는 앱 DB/CloudKit에 두지 않고 `SourceDocument`와 같은 방식(iCloud 컨테이너의 "OCR 이미지"
+/// 폴더 + 위치만 저장)으로 보관한다. 새 @Model이라 기존 저장소에는 추가형(경량 마이그레이션)이다.
+@Model
+public final class DocumentImagePage {
+    public var id: UUID = UUID()
+    public var pageNumber: Int = 0
+    /// 이 앱 iCloud 컨테이너 "Documents/" 아래의 상대 경로(예: "OCR 이미지/설교노트 3.jpg").
+    /// `SourceDocument.originalFilePath`와 같은 규칙이다. iCloud 저장을 못 해 원본 위치를 참조하는
+    /// 폴백일 때는 빈 문자열이고 `fileBookmark`로 연다.
+    public var imageFilePath: String = ""
+    /// `imageFilePath`가 비었거나 컨테이너를 쓸 수 없을 때의 폴백(security-scoped bookmark, 기기 간 이식 미보장).
+    public var fileBookmark: Data?
+    public var createdAt: Date = Date.now
+
+    public var sourceDocument: SourceDocument?
+
+    public init(
+        id: UUID = UUID(),
+        pageNumber: Int,
+        imageFilePath: String = "",
+        fileBookmark: Data? = nil,
+        sourceDocument: SourceDocument? = nil,
+        createdAt: Date = .now
+    ) {
+        self.id = id
+        self.pageNumber = pageNumber
+        self.imageFilePath = imageFilePath
+        self.fileBookmark = fileBookmark
         self.sourceDocument = sourceDocument
         self.createdAt = createdAt
     }

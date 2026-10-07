@@ -195,27 +195,19 @@ struct VerseLayerStrip<Trailing: View>: View {
     }
 }
 
-/// 시트 아래쪽 도구 줄 바탕 — 맥 `VerseSheetFooter`와 같은 톤(테마 배경 + 강조색 6% + 위쪽 선 + 옅은 그림자).
+/// 시트 도구 줄 바탕 — 2026-10-07: 화면 맨 아래 고정 바에서 "말씀구절 아래" 본문 흐름 안으로 옮겨(목업 결정) 스크롤 내용의 일부가 되었다.
+/// 그래서 하단 고정 바용 배경(테마 배경 + 강조색 6% + 그림자 + 아래 안전영역 확장)은 없애고, 구절과 구분하는 위쪽 선만 둔다.
 struct VerseLayerFooter<Content: View>: View {
     @ViewBuilder var content: Content
 
     var body: some View {
         let settings = UserSettingsStore.shared
-        let base: Color = settings.bibleBackgroundColor ?? Color(uiColor: .systemBackground)
         let textColor: Color = settings.bibleTextColor ?? Color.primary
         let isPhone = UIDevice.current.userInterfaceIdiom == .phone
         HStack(alignment: .top, spacing: isPhone ? 10 : 16) { content }
             .padding(.horizontal, 10)
             .padding(.vertical, 10)
             .frame(maxWidth: .infinity)
-            .background {
-                ZStack {
-                    base
-                    Color("AccentColor").opacity(0.06)
-                }
-                .shadow(color: Color.black.opacity(0.07), radius: 3, x: 0, y: -2)
-                .ignoresSafeArea(edges: .bottom)
-            }
             .overlay(alignment: .top) {
                 Rectangle().fill(textColor.opacity(0.25)).frame(height: 1)
             }

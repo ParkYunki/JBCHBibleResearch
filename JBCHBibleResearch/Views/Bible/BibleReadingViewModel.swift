@@ -226,6 +226,18 @@ final class BibleReadingViewModel {
         chapterMarginalNotesIndex["\(translationCode)|\(verse)"] ?? []
     }
 
+    /// 절 관련 내용 통합 페이지의 관주 미리보기 글 — 이 컬럼(번역본)의 해당 절 본문. 못 찾으면(번역본에 그 절이
+    /// 없거나 파일을 못 열면) nil이라 미리보기 없이 "책 장:절"만 보인다. 이미 열어 둔 `storeCache`를 쓰므로 가볍다.
+    func versePreviewText(registry: TranslationRegistry, ref: BibleVerseRef) -> String? {
+        guard let store = try? store(for: registry) else { return nil }
+        let versionCode = store.hasVersionCodeColumn ? registry.code : nil
+        guard let verse = try? store.verse(bookId: ref.bookId, chapter: ref.chapter, verse: ref.verse, versionCode: versionCode) else {
+            return nil
+        }
+        let text = verse.content.trimmingCharacters(in: .whitespacesAndNewlines)
+        return text.isEmpty ? nil : text
+    }
+
     /// `TranslationColumnView.VerseRow`가 호출 — 이 번역본·이 절의 한자 주석
     /// 단어 목록. 개역한글(`TranslationBootstrap.bundledTranslationCode`) 외의
     /// 번역본은 애초에 이 코드로 저장된 레코드가 없어 항상 빈 배열이 나온다 —

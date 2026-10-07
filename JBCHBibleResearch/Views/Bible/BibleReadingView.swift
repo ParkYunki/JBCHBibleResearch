@@ -1052,6 +1052,7 @@ private struct BibleReadingContentView: View {
                     isBookmarkedProvider: { verse in viewModel.isVerseBookmarked(translationCode: column.registry.code, verse: verse) },
                     isChapterBookmarked: viewModel.isChapterBookmarked(translationCode: column.registry.code),
                     onSelectCrossReferenceTarget: jumpToCrossReferenceTarget,
+                    crossReferencePreviewProvider: { ref in viewModel.versePreviewText(registry: column.registry, ref: ref) },
                     onSelectPhraseMemo: { memo in memoBeingCreated = memo },
                     onSelectVerseMention: handleVerseMentionSelected,
                     // 다른 provider들과 같이 `column.registry.code`를 붙잡아 넘긴다 — 실제 캐시는
@@ -1130,6 +1131,7 @@ private struct BibleReadingContentView: View {
                     isBookmarkedProvider: { verse in viewModel.isVerseBookmarked(translationCode: column.registry.code, verse: verse) },
                     isChapterBookmarked: viewModel.isChapterBookmarked(translationCode: column.registry.code),
                     onSelectCrossReferenceTarget: jumpToCrossReferenceTarget,
+                    crossReferencePreviewProvider: { ref in viewModel.versePreviewText(registry: column.registry, ref: ref) },
                     onSelectPhraseMemo: { memo in memoBeingCreated = memo },
                     onSelectVerseMention: handleVerseMentionSelected,
                     // 다른 provider들과 같이 `column.registry.code`를 붙잡아 넘긴다 — 실제 캐시는

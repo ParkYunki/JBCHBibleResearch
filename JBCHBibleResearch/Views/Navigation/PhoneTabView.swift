@@ -73,7 +73,28 @@ struct PhoneTabView: View {
     /// ⚠️ 한계: 복원되는 것은 탭뿐이다. "더보기" 안에서 푸시한 `NavigationStack` 경로는
     /// 값 없는 단순 `NavigationStack { ... }`이라 뷰가 다시 만들어지면 비워진다. 경로까지
     /// 보존하려면 내비게이션을 값 기반(`NavigationPath`)으로 바꾸고 별도로 영속화해야 한다.
-    @SceneStorage("PhoneTabView.selectedTab") private var selectedTab: AppSection = .bibleReading
+    ///
+    /// [2026-10-07 버그 수정] 예전엔 `selectedTab`이 `AppSection`이었고 "더보기" 탭에는 `.tag`가 없었다. 태그 없는 탭을 눌러도
+    /// `selection`은 직전에 선택한 태그 탭(예: 성경)에 그대로 남아 있었고, `TabView`가 body 재평가 때 그 값으로 선택을 되돌렸다 —
+    /// 더보기 > 설정 > 번역본 이름바꾸기 입력란을 누르는 순간(SwiftData 저장·키보드로 body가 다시 계산됨) 성경 탭으로 튀고,
+    /// 더보기 탭을 다시 눌러도 선택이 바뀌지 않아 돌아갈 수 없었다. "더보기"를 `PhoneTab.more`로 명시 태그해 선택이 실제로 유지되게 한다.
+    /// 저장 키는 그대로 두며 옛 값("wordNote" 등)은 새 enum에도 같은 raw value로 있어 복원된다.
+    @SceneStorage("PhoneTabView.selectedTab") private var selectedTab: PhoneTab = .bibleReading
+
+    /// 아이폰 탭바 항목. `AppSection`에 "더보기"를 추가하면 사이드바 목록·모든 switch에 영향이 가므로 이 파일 안에 따로 둔다.
+    enum PhoneTab: String {
+        case wordNote, bibleReading, documents, search, more
+
+        init?(section: AppSection) {
+            switch section {
+            case .wordNote: self = .wordNote
+            case .bibleReading: self = .bibleReading
+            case .documents: self = .documents
+            case .search: self = .search
+            case .sermons, .outline, .tagRelations: return nil
+            }
+        }
+    }
 
     /// 개요(`OutlineTreeView`) 전체화면 모달 표시 여부. "더보기" 화면 안에 로컬로 두지 않고
     /// 여기에 두는 이유: "개요 화면 열기"는 다른 탭을 보고 있을 때도 호출되는데, 선택되지 않은
@@ -85,22 +106,23 @@ struct PhoneTabView: View {
         TabView(selection: $selectedTab) {
             NavigationStack { WordNoteHomeView() }
                 .tabItem { Label("말씀 노트", systemImage: "note.text") }
-                .tag(AppSection.wordNote)
+                .tag(PhoneTab.wordNote)
 
             NavigationStack { BibleReadingView() }
                 .tabItem { Label("성경", systemImage: "book") }
-                .tag(AppSection.bibleReading)
+                .tag(PhoneTab.bibleReading)
 
             NavigationStack { DocumentsHomeView() }
                 .tabItem { Label("연구 문서", systemImage: "doc.text.viewfinder") }
-                .tag(AppSection.documents)
+                .tag(PhoneTab.documents)
 
             NavigationStack { SearchView() }
                 .tabItem { Label("통합 검색", systemImage: "magnifyingglass") }
-                .tag(AppSection.search)
+                .tag(PhoneTab.search)
 
             NavigationStack { MorePlaceholderView(isOutlinePresented: $isOutlinePresented) }
                 .tabItem { Label("더보기", systemImage: "ellipsis.circle") }
+                .tag(PhoneTab.more)
         }
         // 탭바 외형 재적용(`applyThemedTabBarAppearance`)의 `.onAppear`/`.onChange`는 여기서
         // `settings.bibleBackgroundColor`를 읽으면 값이 바뀔 때마다 이 body가 다시 실행되어
@@ -112,8 +134,8 @@ struct PhoneTabView: View {
             if newValue == .outline {
                 isOutlinePresented = true
                 AppNavigationRequest.shared.clear()
-            } else if AppSection.phoneTabBarSections.contains(newValue) {
-                selectedTab = newValue
+            } else if AppSection.phoneTabBarSections.contains(newValue), let tab = PhoneTab(section: newValue) {
+                selectedTab = tab
                 AppNavigationRequest.shared.clear()
             }
         }

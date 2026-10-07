@@ -21,6 +21,9 @@ import UIKit
 /// `RichTextEditor.swift`의 `toolbarFontSizes`와 같은 목적 — 6종 프리셋 크기(16/17/19/20/24/34)를
 /// 포함한 자주 쓰는 값들.
 private let sermonToolbarFontSizes: [CGFloat] = [12, 13, 14, 15, 16, 17, 19, 20, 22, 24, 28, 32, 34, 40]
+/// 줄간격 메뉴의 줄 높이 배수(글자 크기 대비). 글꼴 자체의 기본 줄 높이(한글 글꼴은 대개 1.4~1.5배)보다 좁게는 만들 수 없어
+/// (`SermonParagraphStyleCodec.makeParagraphStyle`은 그 초과분만 `lineSpacing`으로 준다) 1.5부터 둔다.
+private let sermonToolbarLineHeights: [Double] = [1.5, 1.8, 2.0, 2.2, 2.5]
 
 struct SermonEditorView: View {
     let subject: SermonEditingSubject
@@ -87,10 +90,7 @@ struct SermonEditorView: View {
 
     var body: some View {
         VStack(spacing: 0) {
-            if showsCloseBar {
-                closeBar
-            }
-            titleField
+            headerRow
             if let parentSermon = subject.parentSermon {
                 referencedMainSermonBanner(parentSermon)
             }
@@ -148,42 +148,43 @@ struct SermonEditorView: View {
         #endif
     }
 
-    // MARK: - 완료/취소 (페이지 안 줄)
+    // MARK: - 완료/취소 (제목 줄 맨 오른쪽)
 
-    /// 창 제목 줄(툴바)이 아니라 페이지 맨 위에 두는 "완료/취소" 줄 — 새 설교/설교 편집이 별도 창으로 열리면서 툴바 버튼을
-    /// 이 안으로 옮겼다. 동작은 예전 툴바 버튼과 같다: 저장 방식은 그대로 두고 라벨만 실제 동작에 맞춘다 — 새 설교에서
-    /// 제목·본문이 모두 비어 있으면 "취소"(`save()` 가드가 저장을 건너뜀), 그 외에는 "완료"(저장 후 닫기).
-    /// 이미 있는 설교/회차 편집은 항상 "완료"다(제목·태그·구절은 입력 즉시 반영되므로 되돌리는 취소는 없다).
-    private var closeBar: some View {
+    /// "새 설교/설교 편집" 안내 줄을 없애고, "완료/취소" 버튼을 제목 줄 맨 오른쪽(`headerRow`)으로 옮겼다. 동작은 예전과
+    /// 같다: 저장 방식은 그대로 두고 라벨만 실제 동작에 맞춘다 — 새 설교에서 제목·본문이 모두 비어 있으면 "취소"(`save()`
+    /// 가드가 저장을 건너뜀), 그 외에는 "완료"(저장 후 닫기). 이미 있는 설교/회차 편집은 항상 "완료"다(제목·태그·구절은
+    /// 입력 즉시 반영되므로 되돌리는 취소는 없다).
+    private var closeButton: some View {
         let isCancel = isNewSermon && !hasEnteredContent
-        return VStack(spacing: 0) {
-            HStack(spacing: 10) {
-                Text(closeBarTitle)
-                    .font(.subheadline.weight(.semibold))
-                    .foregroundStyle(Color.secondary)
-                Spacer()
-                Button(isCancel ? "취소" : "완료") {
-                    // 창을 닫을 때 `onDisappear → save()`가 한 번 더 돌지만, 닫힘 시점에 기대지 않고 먼저 저장한다
-                    // (`save()`는 중복 호출돼도 같은 값을 다시 쓸 뿐이며 새 설교의 insert는 한 번만 한다).
-                    if !isCancel { save() }
-                    sceneDiagNote("편집기 \(isCancel ? "취소" : "완료") → onRequestClose(dismissWindow) 호출")
-                    onRequestClose?()
-                }
-                .buttonStyle(SermonMiniPillButtonStyle(isFilled: !isCancel, tint: accent))
-                .accessibilityLabel(isCancel ? "취소하고 닫기" : "저장하고 닫기")
-            }
-            .padding(.horizontal, 14)
-            .padding(.vertical, 8)
-            .background(SermonViewerPaper.color)
-            Divider()
+        return Button(isCancel ? "취소" : "완료") {
+            // 창을 닫을 때 `onDisappear → save()`가 한 번 더 돌지만, 닫힘 시점에 기대지 않고 먼저 저장한다
+            // (`save()`는 중복 호출돼도 같은 값을 다시 쓸 뿐이며 새 설교의 insert는 한 번만 한다).
+            if !isCancel { save() }
+            sceneDiagNote("편집기 \(isCancel ? "취소" : "완료") → onRequestClose(dismissWindow) 호출")
+            onRequestClose?()
         }
+        .buttonStyle(SermonMiniPillButtonStyle(isFilled: !isCancel, tint: accent))
+        .accessibilityLabel(isCancel ? "취소하고 닫기" : "저장하고 닫기")
     }
 
-    private var closeBarTitle: String {
-        if isNewSermon { return "새 설교" }
+    /// 맨 위 한 줄 — `.sermon`은 [제목 입력 ……… 완료], 제목이 없는 `.delivery`(모임 설교문)는 완료 버튼만 오른쪽에 둔다.
+    /// 창/시트로 열리지 않아 `showsCloseBar`가 false인 경우(아이폰 push 화면)는 버튼 없이 제목만 보인다.
+    @ViewBuilder
+    private var headerRow: some View {
         switch subject {
-        case .sermon: return "설교 편집"
-        case .delivery: return "모임 설교문 편집"
+        case .sermon:
+            titleField
+        case .delivery:
+            if showsCloseBar {
+                HStack(spacing: 10) {
+                    Spacer()
+                    closeButton
+                }
+                .padding(.horizontal, 14)
+                .padding(.vertical, 8)
+                .background(SermonViewerPaper.color)
+                Divider()
+            }
         }
     }
 
@@ -194,7 +195,7 @@ struct SermonEditorView: View {
     @ViewBuilder
     private var titleField: some View {
         if case .sermon(let sermon) = subject {
-            VStack(alignment: .leading, spacing: 4) {
+            HStack(alignment: .center, spacing: 12) {
                 if isNewSermon {
                     TextField("설교 제목", text: $title)
                         .font(.title3.bold())
@@ -210,6 +211,9 @@ struct SermonEditorView: View {
                     .foregroundStyle(Color.primary)
                     .textFieldStyle(.plain)
                     .onSubmit { save() }
+                }
+                if showsCloseBar {
+                    closeButton
                 }
             }
             .padding(.horizontal, 14)
@@ -455,6 +459,39 @@ struct SermonEditorView: View {
                 Button { proxy.applyAlignment(.center) } label: { Image(systemName: "text.aligncenter") }
                 Button { proxy.applyAlignment(.right) } label: { Image(systemName: "text.alignright") }
                 Button { proxy.applyAlignment(.natural) } label: { Image(systemName: "arrow.uturn.backward") }
+
+                // 줄간격·목록 — 선택한 문단(들)에 적용하고 문단별로 저장한다. 뷰어도 같은 코드로 그린다.
+                Menu {
+                    Picker("줄간격", selection: Binding<Double?>(
+                        get: { proxy.activeExtras.lineHeight },
+                        set: { proxy.applyLineHeight($0, settings: settings) }
+                    )) {
+                        Text("스타일 기본값").tag(Double?.none)
+                        ForEach(sermonToolbarLineHeights, id: \.self) { multiple in
+                            Text(String(format: "%.1f", multiple)).tag(Double?.some(multiple))
+                        }
+                    }
+                    .pickerStyle(.inline)
+                } label: {
+                    Image(systemName: "arrow.up.and.down.text.horizontal")
+                }
+                .accessibilityLabel("줄간격")
+
+                Menu {
+                    Picker("목록", selection: Binding<SermonListKind?>(
+                        get: { proxy.activeExtras.list },
+                        set: { proxy.applyList($0, settings: settings) }
+                    )) {
+                        Text("없음").tag(SermonListKind?.none)
+                        ForEach(SermonListKind.allCases, id: \.self) { kind in
+                            Text(kind.displayName).tag(SermonListKind?.some(kind))
+                        }
+                    }
+                    .pickerStyle(.inline)
+                } label: {
+                    Image(systemName: "list.bullet")
+                }
+                .accessibilityLabel("목록")
 
                 Divider().frame(height: 16)
 

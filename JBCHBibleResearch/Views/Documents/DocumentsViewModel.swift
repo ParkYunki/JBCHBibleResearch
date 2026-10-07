@@ -56,6 +56,8 @@ final class DocumentsViewModel {
     /// 분리하려고 옵셔널로 둔다.
     func upload(urls: [URL], relatedChapter: BibleChapterRef? = nil, category: ImageCategory? = nil) {
         let now = Date.now
+        // 중복 업로드 방어를 먼저 적용해 이번에 실제로 올릴 URL만 남긴다.
+        var accepted: [URL] = []
         for url in urls {
             let path = url.path
             if let lastUploaded = recentlyUploadedPaths[path],
@@ -63,28 +65,76 @@ final class DocumentsViewModel {
                 continue
             }
             recentlyUploadedPaths[path] = now
+            accepted.append(url)
+        }
 
-            do {
-                let document = try DocumentUploadService.createSourceDocument(
-                    from: url, context: modelContext, relatedChapterRef: relatedChapter, category: category
-                )
-                documents.insert(document, at: 0)
-                // iCloud Drive 복사 실패 시 원본 위치를 참조하는 폴백으로 업로드는 성공하므로,
-                // 동기화 폴더에 복사되지 않았다는 사실과 이유를 알림으로 보여준다.
-                if document.storageLocationKind != .icloudDrive {
-                    let reason = DocumentUploadService.lastICloudCopyFailureReason ?? "알 수 없는 이유"
-                    lastErrorDescription = "\(url.lastPathComponent)을(를) iCloud Drive 동기화 폴더에 복사하지 못해 원래 위치를 그대로 참조합니다 (\(reason)). 원본 파일을 옮기거나 지우면 이 문서를 열지 못할 수 있습니다."
-                }
-                Task {
-                    // `generateConvertedPDF`가 텍스트 추출보다 먼저 끝나야 세 번째 폴백(`extractHWPFromConvertedPDF`)이
-                    // `ConvertedPDF` 레코드를 쓸 수 있다. hwp/hwpx가 아니면 즉시 반환하므로 다른 형식에도 안전하다.
-                    await DocumentUploadService.generateConvertedPDF(for: document, context: modelContext)
-                    await DocumentTextExtractionService.extract(for: document, context: modelContext)
-                    loadDocuments()
-                }
-            } catch {
-                lastErrorDescription = "\(url.lastPathComponent) 업로드 실패: \(error.localizedDescription)"
+        // 이미지가 2장 이상이면 한 문서(이미지 모음)로 묶고, 나머지(PDF/hwp/이미지 1장)는 지금처럼 파일마다 한 문서다.
+        let imageURLs = accepted.filter { Self.imageExtensions.contains($0.pathExtension.lowercased()) }
+        let groupsImages = imageURLs.count >= 2
+        if groupsImages {
+            uploadImageGroup(orderedImageURLs(imageURLs), relatedChapter: relatedChapter, category: category)
+        }
+        for url in accepted where !(groupsImages && Self.imageExtensions.contains(url.pathExtension.lowercased())) {
+            uploadSingle(url: url, relatedChapter: relatedChapter, category: category)
+        }
+    }
+
+    private static let imageExtensions: Set<String> = ["jpg", "jpeg", "png", "heic", "heif"]
+
+    /// 이미지 묶음의 쪽 순서 — 파일 이름순이 기본이다. 단, 전부 앱 임시 폴더의 파일(사진 앱에서 고른 항목,
+    /// 파일명이 무작위 UUID)이면 이름순이 의미 없으므로 고른 순서를 그대로 둔다.
+    private func orderedImageURLs(_ urls: [URL]) -> [URL] {
+        let tempPath = FileManager.default.temporaryDirectory.standardizedFileURL.path
+        let allFromTemp = urls.allSatisfy { $0.standardizedFileURL.path.hasPrefix(tempPath) }
+        if allFromTemp { return urls }
+        return urls.sorted { $0.lastPathComponent.localizedStandardCompare($1.lastPathComponent) == .orderedAscending }
+    }
+
+    /// 파일 하나 = 문서 하나(기존 동작 그대로).
+    private func uploadSingle(url: URL, relatedChapter: BibleChapterRef?, category: ImageCategory?) {
+        do {
+            let document = try DocumentUploadService.createSourceDocument(
+                from: url, context: modelContext, relatedChapterRef: relatedChapter, category: category
+            )
+            documents.insert(document, at: 0)
+            // iCloud Drive 복사 실패 시 원본 위치를 참조하는 폴백으로 업로드는 성공하므로,
+            // 동기화 폴더에 복사되지 않았다는 사실과 이유를 알림으로 보여준다.
+            if document.storageLocationKind != .icloudDrive {
+                let reason = DocumentUploadService.lastICloudCopyFailureReason ?? "알 수 없는 이유"
+                lastErrorDescription = "\(url.lastPathComponent)을(를) iCloud Drive 동기화 폴더에 복사하지 못해 원래 위치를 그대로 참조합니다 (\(reason)). 원본 파일을 옮기거나 지우면 이 문서를 열지 못할 수 있습니다."
             }
+            Task {
+                // `generateConvertedPDF`가 텍스트 추출보다 먼저 끝나야 세 번째 폴백(`extractHWPFromConvertedPDF`)이
+                // `ConvertedPDF` 레코드를 쓸 수 있다. hwp/hwpx가 아니면 즉시 반환하므로 다른 형식에도 안전하다.
+                await DocumentUploadService.generateConvertedPDF(for: document, context: modelContext)
+                await DocumentTextExtractionService.extract(for: document, context: modelContext)
+                loadDocuments()
+            }
+        } catch {
+            lastErrorDescription = "\(url.lastPathComponent) 업로드 실패: \(error.localizedDescription)"
+        }
+    }
+
+    /// 이미지 여러 장 = 문서 하나(쪽 N개). 쪽별 OCR은 `extract(for:)`가 모든 쪽을 처리한다.
+    private func uploadImageGroup(_ urls: [URL], relatedChapter: BibleChapterRef?, category: ImageCategory?) {
+        do {
+            let created = try DocumentUploadService.createImageDocument(
+                from: urls, context: modelContext, relatedChapterRef: relatedChapter, category: category
+            )
+            let document = created.document
+            documents.insert(document, at: 0)
+            if !created.failedFilenames.isEmpty {
+                lastErrorDescription = "\(created.failedFilenames.joined(separator: ", "))을(를) 이미지 모음에 더하지 못했습니다 (\(DocumentUploadService.lastICloudCopyFailureReason ?? "파일을 복사하지 못함")). 나머지 이미지로 문서를 만들었습니다."
+            } else if document.storageLocationKind != .icloudDrive {
+                let reason = DocumentUploadService.lastICloudCopyFailureReason ?? "알 수 없는 이유"
+                lastErrorDescription = "\(document.originalFilename)을(를) iCloud Drive 동기화 폴더에 복사하지 못해 원래 위치를 그대로 참조합니다 (\(reason)). 원본 파일을 옮기거나 지우면 이 문서를 열지 못할 수 있습니다."
+            }
+            Task {
+                await DocumentTextExtractionService.extract(for: document, context: modelContext)
+                loadDocuments()
+            }
+        } catch {
+            lastErrorDescription = "이미지 \(urls.count)장 업로드 실패: \(error.localizedDescription)"
         }
     }
 
@@ -118,6 +168,8 @@ final class DocumentsViewModel {
         DocumentUploadService.deleteStoredFile(for: document)
         // hwp 업로드 시 미리 만들어 둔 PDF도 함께 지운다.
         DocumentUploadService.deleteConvertedPDFFiles(for: document)
+        // 이미지 모음의 쪽 파일도 함께 지운다(문서 원본 = 첫 쪽은 위 `deleteStoredFile`이 이미 지움).
+        DocumentUploadService.deleteImagePageFiles(for: document)
         modelContext.delete(document)
         try? modelContext.save()
         loadDocuments()

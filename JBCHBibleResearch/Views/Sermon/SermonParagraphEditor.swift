@@ -82,9 +82,129 @@ enum SermonParagraphStyleCodec {
         ) { _, paragraphRange, _, _ in
             let style = (textStorage.attribute(.sermonParagraphStyle, at: paragraphRange.location, effectiveRange: nil) as? String)
                 ?? SermonParagraphStyle.body.rawValue
-            styles.append(style)
+            styles.append(encodeItem(style: style, extras: extras(in: textStorage, at: paragraphRange.location)))
         }
         return styles.joined(separator: delimiter)
+    }
+
+    // MARK: 문단별 추가 서식(줄간격·목록) 저장 형식
+    //
+    // 저장 항목 하나 = `스타일rawValue` 또는 `스타일rawValue|lh=1.5|ls=bullet` (줄간격 `lh`, 목록 `ls`). 추가 서식이 없는 문단은
+    // 예전과 똑같이 rawValue만 저장되므로 기존 데이터는 그대로 읽힌다. 이 필드를 직접 쪼개 읽는 코드는
+    // `decodeItem`을 써야 한다(`SermonParagraphStyle(rawValue:)`에 항목 전체를 넣으면 추가 서식이 있는 문단이 `nil`이 된다).
+    // ⚠️ 이전 버전 앱이 추가 서식이 있는 항목을 읽으면 그 문단만 `.body`로 취급한다(CloudKit으로 두 버전이 섞일 때).
+
+    static let itemSeparator = "|"
+
+    static func encodeItem(style: String, extras: SermonParagraphExtras) -> String {
+        var item = style
+        if let lineHeight = extras.lineHeight { item += "\(itemSeparator)lh=\(lineHeight)" }
+        if let list = extras.list { item += "\(itemSeparator)ls=\(list.rawValue)" }
+        return item
+    }
+
+    /// 저장 항목 하나를 스타일과 추가 서식으로 푼다. 알 수 없는 키/값은 무시한다(앞으로 키가 늘어도 안전).
+    static func decodeItem(_ item: String) -> (style: SermonParagraphStyle?, extras: SermonParagraphExtras) {
+        let parts = item.components(separatedBy: itemSeparator)
+        var extras = SermonParagraphExtras.none
+        for part in parts.dropFirst() {
+            let pair = part.split(separator: "=", maxSplits: 1).map(String.init)
+            guard pair.count == 2 else { continue }
+            switch pair[0] {
+            case "lh":
+                if let value = Double(pair[1]), value >= 0.8, value <= 4 { extras.lineHeight = value }
+            case "ls":
+                extras.list = SermonListKind(rawValue: pair[1])
+            default:
+                break
+            }
+        }
+        return (SermonParagraphStyle(rawValue: parts.first ?? ""), extras)
+    }
+
+    /// 문단 첫 글자의 줄간격/목록 attribute.
+    static func extras(in storage: NSTextStorage, at location: Int) -> SermonParagraphExtras {
+        guard location >= 0, location < storage.length else { return .none }
+        let lineHeight = (storage.attribute(.sermonLineHeight, at: location, effectiveRange: nil) as? NSNumber)?.doubleValue
+        let list = (storage.attribute(.sermonListKind, at: location, effectiveRange: nil) as? String).flatMap(SermonListKind.init(rawValue:))
+        return SermonParagraphExtras(lineHeight: lineHeight, list: list)
+    }
+
+    /// 문단 범위에 추가 서식 attribute를 심는다(nil이면 지운다).
+    static func writeExtras(_ extras: SermonParagraphExtras, to range: NSRange, in storage: NSTextStorage) {
+        guard range.length > 0 else { return }
+        if let lineHeight = extras.lineHeight {
+            storage.addAttribute(.sermonLineHeight, value: NSNumber(value: lineHeight), range: range)
+        } else {
+            storage.removeAttribute(.sermonLineHeight, range: range)
+        }
+        if let list = extras.list {
+            storage.addAttribute(.sermonListKind, value: list.rawValue, range: range)
+        } else {
+            storage.removeAttribute(.sermonListKind, range: range)
+        }
+    }
+
+    /// 선택 범위가 걸친 모든 문단의 한 항목(줄간격 또는 목록)을 같은 값으로 바꾸고 문단 모양을 다시 만든다.
+    /// 글꼴·글자색·정렬은 건드리지 않는다(`applyStyle`과 달리 문단 모양만 다시 계산).
+    /// 반환값은 선택 시작 문단의 (스타일, 바뀐 추가 서식) — 호출부가 타이핑 속성을 맞추는 데 쓴다.
+    @discardableResult
+    static func setExtra<Value>(
+        _ keyPath: WritableKeyPath<SermonParagraphExtras, Value>, to value: Value,
+        selection: NSRange, in storage: NSTextStorage, settings: UserSettingsStore
+    ) -> (style: SermonParagraphStyle, extras: SermonParagraphExtras)? {
+        let text = storage.string as NSString
+        guard text.length > 0 else { return nil }
+        let start = min(selection.location, text.length)
+        let scope = text.paragraphRange(for: NSRange(location: start, length: min(selection.length, text.length - start)))
+        var first: (style: SermonParagraphStyle, extras: SermonParagraphExtras)?
+        var cursor = scope.location
+        storage.beginEditing()
+        while cursor < NSMaxRange(scope) {
+            let paragraph = text.paragraphRange(for: NSRange(location: cursor, length: 0))
+            guard paragraph.length > 0 else { break }
+            let style = (storage.attribute(.sermonParagraphStyle, at: paragraph.location, effectiveRange: nil) as? String)
+                .flatMap(SermonParagraphStyle.init(rawValue:)) ?? .body
+            var updated = extras(in: storage, at: paragraph.location)
+            updated[keyPath: keyPath] = value
+            writeExtras(updated, to: paragraph, in: storage)
+            reapplyParagraphStyle(style, in: paragraph, storage: storage, settings: settings, extras: updated)
+            if first == nil { first = (style, updated) }
+            cursor = NSMaxRange(paragraph)
+        }
+        storage.endEditing()
+        return first
+    }
+
+    /// 타이핑 속성(다음에 입력될 글자의 모양)을 문단 스타일 + 추가 서식에 맞춘다. 정렬은 기존 값을 유지한다.
+    static func typingAttributes(
+        from existing: [NSAttributedString.Key: Any], style: SermonParagraphStyle, extras: SermonParagraphExtras, settings: UserSettingsStore
+    ) -> [NSAttributedString.Key: Any] {
+        var attrs = existing
+        let alignment = (existing[.paragraphStyle] as? NSParagraphStyle)?.alignment
+        attrs[.paragraphStyle] = makeParagraphStyle(
+            for: style, baseFont: settings.sermonPlatformFont(for: style), settings: settings, alignment: alignment,
+            lineHeightMultiple: extras.lineHeight.map { CGFloat($0) }, list: extras.list
+        )
+        attrs[.sermonLineHeight] = extras.lineHeight.map { NSNumber(value: $0) }
+        attrs[.sermonListKind] = extras.list?.rawValue
+        return attrs
+    }
+
+    /// 문단 범위의 `NSParagraphStyle`만 현재 스타일·설정·추가 서식으로 다시 만든다(정렬은 유지).
+    static func reapplyParagraphStyle(
+        _ style: SermonParagraphStyle, in range: NSRange, storage: NSTextStorage, settings: UserSettingsStore, extras: SermonParagraphExtras
+    ) {
+        let baseFont = settings.sermonPlatformFont(for: style)
+        storage.enumerateAttribute(.paragraphStyle, in: range, options: []) { value, subrange, _ in
+            // 정렬은 프리셋이 값을 지정하지 않으므로(`.natural`) natural이 아니면 수동 지정으로 보고 유지한다.
+            let existingAlignment = (value as? NSParagraphStyle)?.alignment
+            let paragraphStyle = makeParagraphStyle(
+                for: style, baseFont: baseFont, settings: settings, alignment: existingAlignment,
+                lineHeightMultiple: extras.lineHeight.map { CGFloat($0) }, list: extras.list
+            )
+            storage.addAttribute(.paragraphStyle, value: paragraphStyle, range: subrange)
+        }
     }
 
     /// 저장된 문자열을 텍스트 스토리지에 되돌려 문단별 스타일 attribute와 현재 설정값을 적용한다.
@@ -101,7 +221,11 @@ enum SermonParagraphStyleCodec {
         ) { _, paragraphRange, _, _ in
             defer { index += 1 }
             guard paragraphRange.length > 0 else { return }
-            let style = (index < raw.count ? SermonParagraphStyle(rawValue: raw[index]) : nil) ?? .body
+            let decoded: (style: SermonParagraphStyle?, extras: SermonParagraphExtras) =
+                index < raw.count ? decodeItem(raw[index]) : (nil, .none)
+            let style = decoded.style ?? .body
+            // 줄간격/목록은 `applyStyle`이 문단 모양을 만들 때 읽으므로 먼저 심는다.
+            writeExtras(decoded.extras, to: paragraphRange, in: textStorage)
             applyStyle(style, to: paragraphRange, in: textStorage, settings: settings, previousSnapshot: snapshot)
         }
         textStorage.endEditing()
@@ -141,12 +265,11 @@ enum SermonParagraphStyleCodec {
             textStorage.addAttribute(.foregroundColor, value: baseColor, range: subrange)
         }
 
-        textStorage.enumerateAttribute(.paragraphStyle, in: paragraphRange, options: []) { value, subrange, _ in
-            // 정렬은 프리셋이 값을 지정하지 않으므로(`.natural`) natural이 아니면 수동 지정으로 보고 유지한다.
-            let existingAlignment = (value as? NSParagraphStyle)?.alignment
-            let paragraphStyle = makeParagraphStyle(for: style, baseFont: baseFont, settings: settings, alignment: existingAlignment)
-            textStorage.addAttribute(.paragraphStyle, value: paragraphStyle, range: subrange)
-        }
+        // 줄간격·목록은 문단 스타일을 바꿔도 유지한다(문단 첫 글자의 attribute를 읽는다 — 없으면 스타일 기본값).
+        reapplyParagraphStyle(
+            style, in: paragraphRange, storage: textStorage, settings: settings,
+            extras: extras(in: textStorage, at: paragraphRange.location)
+        )
 
         // 말씀구절: 박스/왼쪽 세로 바는 표준 attribute로 표현할 수 없어 `SermonLayoutManager`가 문단 스타일을 보고 직접 그린다.
         // 그 색을 attribute로 심어 두고, 다른 스타일이면 지운다.
@@ -175,18 +298,27 @@ enum SermonParagraphStyleCodec {
     /// 문단 스타일 하나의 `NSParagraphStyle` — 줄간격(줄높이 배수) + 문단 위·아래 간격 + 들여쓰기(`SermonStyleMetrics`).
     /// 불러오기·스타일 적용·타이핑 속성이 모두 이 함수를 써서 같은 모양이 된다.
     static func makeParagraphStyle(
-        for style: SermonParagraphStyle, baseFont: PlatformFont, settings: UserSettingsStore, alignment: NSTextAlignment? = nil
+        for style: SermonParagraphStyle, baseFont: PlatformFont, settings: UserSettingsStore, alignment: NSTextAlignment? = nil,
+        lineHeightMultiple: CGFloat? = nil, list: SermonListKind? = nil
     ) -> NSMutableParagraphStyle {
         let metrics = SermonStyleMetrics.metrics(for: style, fontSize: baseFont.pointSize)
         let paragraphStyle = NSMutableParagraphStyle()
         // 줄 높이 = 글자 크기 × 배수(CSS `line-height`와 같은 해석). 글꼴 자체의 기본 줄 높이(한글 글꼴은 대개 1.4~1.5배)를 넘는 만큼만
         // `lineSpacing`(줄 아래 추가 간격)으로 준다 — 기본 줄 높이에 배수를 또 곱하면 간격이 두 배 가까이 벌어진다.
-        let targetLineHeight = baseFont.pointSize * settings.sermonLineHeightMultiple(for: style)
+        // `lineHeightMultiple`은 문단별 줄간격 지정(툴바 줄간격 메뉴) — nil이면 스타일 기본 배수.
+        let targetLineHeight = baseFont.pointSize * (lineHeightMultiple ?? settings.sermonLineHeightMultiple(for: style))
         paragraphStyle.lineSpacing = max(0, targetLineHeight - baseFont.typographicLineHeight)
         paragraphStyle.paragraphSpacingBefore = metrics.spacingBefore
         paragraphStyle.paragraphSpacing = metrics.spacingAfter
         paragraphStyle.headIndent = metrics.leftIndent
         paragraphStyle.firstLineHeadIndent = metrics.leftIndent + metrics.firstLineIndent
+        if list != nil {
+            // 목록 문단: 기호가 첫 줄 시작 위치에 오고, 모든 줄의 글자는 기호 칸 너비만큼 오른쪽에서 시작한다(걸친 들여쓰기).
+            // 기호 자체는 `SermonLayoutManager.drawListMarkers`가 그린다.
+            let textStart = metrics.leftIndent + metrics.firstLineIndent + baseFont.pointSize * SermonListKind.markerWidthRatio
+            paragraphStyle.headIndent = textStart
+            paragraphStyle.firstLineHeadIndent = textStart
+        }
         // 오른쪽 여백은 `tailIndent`를 음수로 주면 trailing margin 기준 거리가 된다(0이면 여백 없음).
         paragraphStyle.tailIndent = metrics.rightIndent > 0 ? -metrics.rightIndent : 0
         if let alignment, alignment != .natural {
@@ -240,7 +372,7 @@ enum SermonParagraphStyleCodec {
             in: NSRange(location: 0, length: fullText.length), options: .byParagraphs
         ) { substring, _, _, _ in
             defer { index += 1 }
-            let style = (index < raw.count ? SermonParagraphStyle(rawValue: raw[index]) : nil) ?? .body
+            let style = (index < raw.count ? decodeItem(raw[index]).style : nil) ?? .body
             result.append((text: substring ?? "", style: style))
         }
         return result
@@ -343,11 +475,15 @@ final class SermonParagraphEditingProxy {
     var hasSelection = false
     /// 커서(선택 시작)가 있는 문단의 최종 지정 스타일 — 툴바의 스타일 pill 강조에 쓴다(커서 이동·편집·스타일 적용 때 갱신).
     var activeStyle: SermonParagraphStyle = .body
+    /// 커서 문단의 줄간격/목록 지정 — 툴바 줄간격·목록 메뉴의 체크 표시에 쓴다(`activeStyle`과 같은 시점에 갱신).
+    var activeExtras = SermonParagraphExtras.none
 
     /// `currentParagraphStyle()`을 읽어 `activeStyle`에 반영한다(값이 같으면 건드리지 않아 불필요한 뷰 갱신을 피한다).
     func refreshActiveStyle() {
         let style = currentParagraphStyle()
         if activeStyle != style { activeStyle = style }
+        let extras = currentExtras()
+        if activeExtras != extras { activeExtras = extras }
     }
 
     func toggleBold() { toggleTrait(.traitBold) }
@@ -395,6 +531,49 @@ final class SermonParagraphEditingProxy {
         SermonParagraphStyleCodec.applyStyle(style, to: paragraphRange, in: storage, settings: settings)
         storage.endEditing()
         applyTypingAttributes(for: style, settings: settings, to: textView)
+    }
+
+    /// 커서 문단의 줄간격/목록 지정. 글자가 없는 문단(문서 끝의 빈 줄 등)은 타이핑 속성을 따른다.
+    func currentExtras() -> SermonParagraphExtras {
+        guard let textView else { return .none }
+        let storage = textView.textStorage
+        let text = storage.string as NSString
+        let location = min(textView.selectedRange.location, text.length)
+        let paragraph = text.paragraphRange(for: NSRange(location: location, length: 0))
+        if paragraph.length > 0, paragraph.location < storage.length {
+            return SermonParagraphStyleCodec.extras(in: storage, at: paragraph.location)
+        }
+        let attrs = textView.typingAttributes
+        return SermonParagraphExtras(
+            lineHeight: (attrs[.sermonLineHeight] as? NSNumber)?.doubleValue,
+            list: (attrs[.sermonListKind] as? String).flatMap(SermonListKind.init(rawValue:))
+        )
+    }
+
+    /// 선택한 문단(들)의 줄간격 배수를 바꾼다. `nil`이면 스타일 기본값으로 되돌린다.
+    func applyLineHeight(_ multiple: Double?, settings: UserSettingsStore) {
+        updateExtra(\.lineHeight, to: multiple, settings: settings)
+    }
+
+    /// 선택한 문단(들)의 목록 종류를 바꾼다. `nil`이면 목록을 해제한다.
+    func applyList(_ kind: SermonListKind?, settings: UserSettingsStore) {
+        updateExtra(\.list, to: kind, settings: settings)
+    }
+
+    private func updateExtra<Value>(
+        _ keyPath: WritableKeyPath<SermonParagraphExtras, Value>, to value: Value, settings: UserSettingsStore
+    ) {
+        guard let textView else { return }
+        SermonParagraphStyleCodec.setExtra(
+            keyPath, to: value, selection: textView.selectedRange, in: textView.textStorage, settings: settings
+        )
+        // 글자가 없는 문단은 위에서 바뀐 것이 없으므로 타이핑 속성으로 다음 입력에 반영한다.
+        var extras = currentExtras()
+        extras[keyPath: keyPath] = value
+        textView.typingAttributes = SermonParagraphStyleCodec.typingAttributes(
+            from: textView.typingAttributes, style: currentParagraphStyle(), extras: extras, settings: settings
+        )
+        refreshActiveStyle()
     }
 
     /// "말씀구절 + 추가" — 커서 문단 다음에 새 `.verseQuote` 문단을 만들어 구절 텍스트를 넣는다.
@@ -534,7 +713,14 @@ final class SermonParagraphEditingProxy {
         let baseFont = settings.sermonPlatformFont(for: style)
         var attrs = textView.typingAttributes
         attrs[.font] = baseFont
-        attrs[.paragraphStyle] = SermonParagraphStyleCodec.makeParagraphStyle(for: style, baseFont: baseFont, settings: settings)
+        // 문단 스타일만 바꿔도 그 문단의 줄간격/목록 지정은 유지되므로(`applyStyle`) 타이핑 속성에도 같이 싣는다.
+        let extras = currentExtras()
+        attrs[.paragraphStyle] = SermonParagraphStyleCodec.makeParagraphStyle(
+            for: style, baseFont: baseFont, settings: settings,
+            lineHeightMultiple: extras.lineHeight.map { CGFloat($0) }, list: extras.list
+        )
+        attrs[.sermonLineHeight] = extras.lineHeight.map { NSNumber(value: $0) }
+        attrs[.sermonListKind] = extras.list?.rawValue
         attrs[.sermonParagraphStyle] = style.rawValue
         attrs[.sermonVerseBoxFill] = style == .verseQuote ? settings.sermonVerseQuoteBackgroundPlatformColor : nil
         attrs[.sermonVerseBoxBar] = style == .verseQuote ? PlatformColor(settings.sermonVerseQuoteBarColor) : nil
@@ -754,11 +940,15 @@ final class SermonParagraphEditingProxy {
     var hasSelection = false
     /// 커서(선택 시작)가 있는 문단의 최종 지정 스타일 — 툴바의 스타일 pill 강조에 쓴다(커서 이동·편집·스타일 적용 때 갱신).
     var activeStyle: SermonParagraphStyle = .body
+    /// 커서 문단의 줄간격/목록 지정 — 툴바 줄간격·목록 메뉴의 체크 표시에 쓴다(`activeStyle`과 같은 시점에 갱신).
+    var activeExtras = SermonParagraphExtras.none
 
     /// `currentParagraphStyle()`을 읽어 `activeStyle`에 반영한다(값이 같으면 건드리지 않아 불필요한 뷰 갱신을 피한다).
     func refreshActiveStyle() {
         let style = currentParagraphStyle()
         if activeStyle != style { activeStyle = style }
+        let extras = currentExtras()
+        if activeExtras != extras { activeExtras = extras }
     }
 
     func toggleBold() { toggleTrait(.bold) }
@@ -803,6 +993,45 @@ final class SermonParagraphEditingProxy {
         applyTypingAttributes(for: style, settings: settings, to: textView)
     }
 
+    /// iOS `currentExtras()`와 같은 규칙.
+    func currentExtras() -> SermonParagraphExtras {
+        guard let textView, let storage = textView.textStorage else { return .none }
+        let text = storage.string as NSString
+        let location = min(textView.selectedRange().location, text.length)
+        let paragraph = text.paragraphRange(for: NSRange(location: location, length: 0))
+        if paragraph.length > 0, paragraph.location < storage.length {
+            return SermonParagraphStyleCodec.extras(in: storage, at: paragraph.location)
+        }
+        let attrs = textView.typingAttributes
+        return SermonParagraphExtras(
+            lineHeight: (attrs[.sermonLineHeight] as? NSNumber)?.doubleValue,
+            list: (attrs[.sermonListKind] as? String).flatMap(SermonListKind.init(rawValue:))
+        )
+    }
+
+    func applyLineHeight(_ multiple: Double?, settings: UserSettingsStore) {
+        updateExtra(\.lineHeight, to: multiple, settings: settings)
+    }
+
+    func applyList(_ kind: SermonListKind?, settings: UserSettingsStore) {
+        updateExtra(\.list, to: kind, settings: settings)
+    }
+
+    private func updateExtra<Value>(
+        _ keyPath: WritableKeyPath<SermonParagraphExtras, Value>, to value: Value, settings: UserSettingsStore
+    ) {
+        guard let textView, let storage = textView.textStorage else { return }
+        SermonParagraphStyleCodec.setExtra(
+            keyPath, to: value, selection: textView.selectedRange(), in: storage, settings: settings
+        )
+        var extras = currentExtras()
+        extras[keyPath: keyPath] = value
+        textView.typingAttributes = SermonParagraphStyleCodec.typingAttributes(
+            from: textView.typingAttributes, style: currentParagraphStyle(), extras: extras, settings: settings
+        )
+        refreshActiveStyle()
+    }
+
     @discardableResult
     func insertVerseQuoteParagraph(text: String, settings: UserSettingsStore) -> Int {
         guard let textView, let storage = textView.textStorage else { return 0 }
@@ -844,7 +1073,14 @@ final class SermonParagraphEditingProxy {
         let baseFont = settings.sermonPlatformFont(for: style)
         var attrs = textView.typingAttributes
         attrs[.font] = baseFont
-        attrs[.paragraphStyle] = SermonParagraphStyleCodec.makeParagraphStyle(for: style, baseFont: baseFont, settings: settings)
+        // 문단 스타일만 바꿔도 그 문단의 줄간격/목록 지정은 유지되므로(`applyStyle`) 타이핑 속성에도 같이 싣는다.
+        let extras = currentExtras()
+        attrs[.paragraphStyle] = SermonParagraphStyleCodec.makeParagraphStyle(
+            for: style, baseFont: baseFont, settings: settings,
+            lineHeightMultiple: extras.lineHeight.map { CGFloat($0) }, list: extras.list
+        )
+        attrs[.sermonLineHeight] = extras.lineHeight.map { NSNumber(value: $0) }
+        attrs[.sermonListKind] = extras.list?.rawValue
         attrs[.sermonParagraphStyle] = style.rawValue
         attrs[.sermonVerseBoxFill] = style == .verseQuote ? settings.sermonVerseQuoteBackgroundPlatformColor : nil
         attrs[.sermonVerseBoxBar] = style == .verseQuote ? PlatformColor(settings.sermonVerseQuoteBarColor) : nil
@@ -1072,12 +1308,13 @@ struct SermonParagraphEditorRepresentable: NSViewRepresentable {
         ]
     }
 
-    /// 말씀 요약 에디터(`RichTextEditor`, `showsToolbarOnMac == false`)와 같은 macOS 네이티브 서식 도구를 편집 가능할 때만 켠다:
-    /// 서식 팝업(`usesInspectorBar` — 굵게/기울임/밑줄/글꼴/크기/글자색/정렬/목록), 글꼴 패널(⌘T), 눈금자.
-    /// 여기서 바꾼 글꼴·색·정렬은 글자 단위 서식으로 남고, 문단 스타일의 프리셋 재적용 때 "수동 지정"으로 보존된다
+    /// macOS 네이티브 서식 도구 중 글꼴 패널(⌘T)과 눈금자만 편집 가능할 때 켠다. 창 상단의 네이티브 서식 팝업 줄
+    /// (`usesInspectorBar`)은 설교 에디터 자체 서식 도구줄(`SermonEditorView.styleToolbar`)과 중복되어 끈다 — 줄간격/목록도
+    /// 그쪽 메뉴가 문단 스타일(`paragraphStyles`)로 저장해 에디터·뷰어가 같은 모양으로 그린다.
+    /// 글꼴 패널에서 바꾼 글꼴·색은 글자 단위 서식으로 남고, 문단 스타일의 프리셋 재적용 때 "수동 지정"으로 보존된다
     /// (`SermonParagraphStyleCodec.applyStyle`의 스냅샷 비교).
     private func applyStyleToolsVisibility(to textView: NSTextView) {
-        textView.usesInspectorBar = isEditable
+        textView.usesInspectorBar = false
         textView.usesFontPanel = isEditable
         textView.usesRuler = isEditable
     }

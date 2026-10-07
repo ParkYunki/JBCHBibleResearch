@@ -227,13 +227,14 @@ struct VerseZoomView: View {
                     .buttonStyle(BibleBarButtonStyle(kind: .primary, height: 40, cornerRadius: 10, fontSize: 15))
                     .accessibilityLabel("원문 정보로 전환")
                     // 펜/눈동자 토글 — 표시 모드에선 펜(선택 모드 진입), 선택 모드에선 눈동자(표시 모드 복귀 + 선택 해제).
+                    // 2026-10-07: 아이콘만이던 토글에 글자를 더했다 — 펜 "편집"(선택 모드 진입) ↔ 눈 "뷰어"(표시 모드 복귀). 글자는 누르면 가는 쪽 모드 이름.
                     Button {
                         isSelecting.toggle()
                         selectedRange = NSRange(location: 0, length: 0)
                     } label: {
-                        Image(systemName: isSelecting ? "eye" : "pencil")
+                        Label(isSelecting ? "뷰어" : "편집", systemImage: isSelecting ? "eye" : "pencil")
                     }
-                    .buttonStyle(BibleBarButtonStyle(kind: isSelecting ? .primary : .secondary, isSquare: true, height: 40, cornerRadius: 10, fontSize: 15))
+                    .buttonStyle(BibleBarButtonStyle(kind: isSelecting ? .primary : .secondary, height: 40, cornerRadius: 10, fontSize: 15))
                     .accessibilityLabel(isSelecting ? "글자 선택 끝내기" : "글자 선택 모드")
                 }
                 #endif
@@ -242,73 +243,78 @@ struct VerseZoomView: View {
                     Divider()
                 }
 
+                // 말씀구절 + 한자 뜻풀이 + 관주/메모 줄을 하나의 ScrollView 안에 둔다(2026-10-07 아이패드 수정).
+                // 예전에는 구절 ScrollView만 늘고 줄어 하단 고정 영역(한자 뜻풀이 등)이 커지면 구절이 한 줄만 남고 구절 안에서만 스크롤됐다.
+                // 이제 시트 전체가 함께 스크롤된다. 도구줄(`actionBar`)도 이 안(구절 바로 아래)에 있어 함께 스크롤된다(2026-10-07 목업).
                 ScrollView {
-                    Group {
-                        if isSelecting {
-                            // 선택 모드 — 새 구간을 드래그로 고르는 동안만 표시. 표시 모드와 같은 `highlights`/`phraseNotes`를 넘겨
-                            // 어느 표현에 무엇이 붙어 있는지는 보이게 한다(메모 박스/화살표는 그리지 않음).
-                            // `UITextView`/`NSTextView`는 폭 기준 자동 줄바꿈을 하므로 `.frame(width:)`로 좁혀도 잘리지 않는다.
-                            // 표시 모드와 같은 `effectiveTextWidth`를 `containerWidth`로 넘겨야 두 모드의 줄 경계가 일치한다.
-                            SelectableVerseTextView(
-                                text: verseText, font: bibleFont, textColor: effectiveTextColor,
-                                containerWidth: effectiveTextWidth, targetCharsPerLine: targetCharsPerLine,
-                                highlights: highlights, phraseNotes: phraseNotes, crossReferences: crossReferences,
-                                hanjaWords: hanjaWords,
-                                selectedRange: $selectedRange
-                            )
-                            .frame(width: effectiveTextWidth, alignment: .leading)
-                        } else {
-                            // 표시 모드(평소) — 순수 SwiftUI 렌더링. 형광펜 취소/메모 수정·삭제는 이 뷰의 `.contextMenu`(길게 누르기/우클릭)로 처리된다.
-                            // ⚠️ `.frame(width:)`를 씌우지 않는다 — `containerWidth`는 줄 나눔의 "목표"일 뿐이고 한글 절은 글자 수 기준이라
-                            // 실제 폭이 이보다 넓거나 좁을 수 있다. 각 줄은 자체 줄바꿈하지 않는 `HStack(spacing: 0)`이라 좁은 frame을 씌우면 잘려 보인다.
-                            AnnotatedVerseFlowView(
-                                text: verseText, highlights: highlights, phraseNotes: phraseNotes,
-                                crossReferences: crossReferences, hanjaWords: hanjaWords,
-                                font: bibleFont, textColor: effectiveTextColor, containerWidth: effectiveTextWidth,
-                                availableWidth: availableContentWidth, targetCharsPerLine: targetCharsPerLine,
-                                onRequestRemoveHighlight: { highlight in
-                                    viewModel.deleteHighlight(highlight)
-                                },
-                                onRequestEditPhraseNote: { note in
-                                    editingPhraseNote = note
-                                    presentPhraseNoteEditor()
-                                },
-                                onRequestDeletePhraseNote: { note in
-                                    viewModel.deletePhraseNote(note)
+                    VStack(spacing: 0) {
+                        Group {
+                            if isSelecting {
+                                // 선택 모드 — 새 구간을 드래그로 고르는 동안만 표시. 표시 모드와 같은 `highlights`/`phraseNotes`를 넘겨
+                                // 어느 표현에 무엇이 붙어 있는지는 보이게 한다(메모 박스/화살표는 그리지 않음).
+                                // `UITextView`/`NSTextView`는 폭 기준 자동 줄바꿈을 하므로 `.frame(width:)`로 좁혀도 잘리지 않는다.
+                                // 표시 모드와 같은 `effectiveTextWidth`를 `containerWidth`로 넘겨야 두 모드의 줄 경계가 일치한다.
+                                SelectableVerseTextView(
+                                    text: verseText, font: bibleFont, textColor: effectiveTextColor,
+                                    containerWidth: effectiveTextWidth, targetCharsPerLine: targetCharsPerLine,
+                                    highlights: highlights, phraseNotes: phraseNotes, crossReferences: crossReferences,
+                                    hanjaWords: hanjaWords,
+                                    selectedRange: $selectedRange
+                                )
+                                .frame(width: effectiveTextWidth, alignment: .leading)
+                            } else {
+                                // 표시 모드(평소) — 순수 SwiftUI 렌더링. 형광펜 취소/메모 수정·삭제는 이 뷰의 `.contextMenu`(길게 누르기/우클릭)로 처리된다.
+                                // ⚠️ `.frame(width:)`를 씌우지 않는다 — `containerWidth`는 줄 나눔의 "목표"일 뿐이고 한글 절은 글자 수 기준이라
+                                // 실제 폭이 이보다 넓거나 좁을 수 있다. 각 줄은 자체 줄바꿈하지 않는 `HStack(spacing: 0)`이라 좁은 frame을 씌우면 잘려 보인다.
+                                AnnotatedVerseFlowView(
+                                    text: verseText, highlights: highlights, phraseNotes: phraseNotes,
+                                    crossReferences: crossReferences, hanjaWords: hanjaWords,
+                                    font: bibleFont, textColor: effectiveTextColor, containerWidth: effectiveTextWidth,
+                                    availableWidth: availableContentWidth, targetCharsPerLine: targetCharsPerLine,
+                                    onRequestRemoveHighlight: { highlight in
+                                        viewModel.deleteHighlight(highlight)
+                                    },
+                                    onRequestEditPhraseNote: { note in
+                                        editingPhraseNote = note
+                                        presentPhraseNoteEditor()
+                                    },
+                                    onRequestDeletePhraseNote: { note in
+                                        viewModel.deletePhraseNote(note)
+                                    }
+                                )
+                            }
+                        }
+                        .padding()
+                        // 화면이 `effectiveTextWidth`보다 넓으면 남는 공간은 오른쪽에 두고 텍스트 블록은 왼쪽에 붙인다.
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                        // 도구줄(형광펜·메모·개인 묵상·관주) — 2026-10-07 목업 결정: 말씀구절 → 도구줄 → 한자 뜻풀이 → 관주 칩 순서.
+                        // 예전에는 시트 맨 아래에 고정이었으나 구절에서 멀어, 구절 바로 아래로 올려 시트와 함께 스크롤되게 했다(모든 기기).
+                        #if os(macOS)
+                        Divider()
+                        #endif
+                        actionBar
+                        // 평소 읽기 화면(`TranslationColumnView.VerseRow`)과 같은 아이콘 + 팝오버/메뉴 조합을 재사용한다(탭 동작도 동일).
+                        // 한자 뜻풀이가 있으면 관주/메모 상태줄보다 위에 먼저 그린다.
+                        // 개인 묵상/한자/관주/관련 내용이 하나도 없어도 입력칸이 열려 있으면(`isComposingPersonalNote`) 그 입력칸을 보여줄
+                        // 섹션이 그려져야 하므로 아래 조건들에 모두 포함한다.
+                        if !hanjaWords.isEmpty || !crossReferences.isEmpty || !phraseMemos.isEmpty || !verseMentions.isEmpty || isComposingPersonalNote {
+                            Divider()
+                            if !hanjaWords.isEmpty {
+                                hanjaGlossSection
+                                if !crossReferences.isEmpty || !phraseMemos.isEmpty || !verseMentions.isEmpty || isComposingPersonalNote {
+                                    Divider()
                                 }
-                            )
+                            }
+                            if !crossReferences.isEmpty || !phraseMemos.isEmpty || !verseMentions.isEmpty || isComposingPersonalNote {
+                                annotationStatusBar
+                            }
                         }
                     }
-                    .padding()
-                    // 화면이 `effectiveTextWidth`보다 넓으면 남는 공간은 오른쪽에 두고 텍스트 블록은 왼쪽에 붙인다.
-                    .frame(maxWidth: .infinity, alignment: .leading)
                 }
                 .onGeometryChange(for: CGSize.self, of: { $0.size }) { newSize in
                     scrollWidth = newSize.width
                     scrollHeight = newSize.height
                 }
-
-                // 평소 읽기 화면(`TranslationColumnView.VerseRow`)과 같은 아이콘 + 팝오버/메뉴 조합을 재사용한다(탭 동작도 동일).
-                // 한자 뜻풀이가 있으면 관주/메모 상태줄보다 위에 먼저 그린다.
-                // 개인 묵상/한자/관주/관련 내용이 하나도 없어도 입력칸이 열려 있으면(`isComposingPersonalNote`) 그 입력칸을 보여줄
-                // 섹션이 그려져야 하므로 아래 조건들에 모두 포함한다.
-                if !hanjaWords.isEmpty || !crossReferences.isEmpty || !phraseMemos.isEmpty || !verseMentions.isEmpty || isComposingPersonalNote {
-                    Divider()
-                    if !hanjaWords.isEmpty {
-                        hanjaGlossSection
-                        if !crossReferences.isEmpty || !phraseMemos.isEmpty || !verseMentions.isEmpty || isComposingPersonalNote {
-                            Divider()
-                        }
-                    }
-                    if !crossReferences.isEmpty || !phraseMemos.isEmpty || !verseMentions.isEmpty || isComposingPersonalNote {
-                        annotationStatusBar
-                    }
-                }
-
-                #if os(macOS)
-                Divider()
-                #endif
-                actionBar
 
                 // macOS `.sheet`의 `.confirmationAction`/`.cancellationAction` 자리는 버튼 하나만 그려져, 두 번째 버튼을 얹으면
                 // (`ToolbarItem`/`ToolbarItemGroup` 모두) 조용히 사라진다(실측). 그래서 macOS만 하단 버튼줄(닫기/원문 정보/펜·눈동자)을
@@ -329,9 +335,9 @@ struct VerseZoomView: View {
                         isSelecting.toggle()
                         selectedRange = NSRange(location: 0, length: 0)
                     } label: {
-                        Image(systemName: isSelecting ? "eye" : "pencil")
+                        Label(isSelecting ? "뷰어" : "편집", systemImage: isSelecting ? "eye" : "pencil")
                     }
-                    .buttonStyle(BibleBarButtonStyle(kind: isSelecting ? .primary : .secondary, isSquare: true))
+                    .buttonStyle(BibleBarButtonStyle(kind: isSelecting ? .primary : .secondary))
                     .help(isSelecting ? "글자 선택 끝내기(표시 모드)" : "글자 선택 모드")
                 }
                 #endif

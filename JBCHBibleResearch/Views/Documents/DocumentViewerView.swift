@@ -13,6 +13,10 @@
 import SwiftUI
 import SwiftData
 import PDFKit
+import UniformTypeIdentifiers
+#if os(iOS)
+import PhotosUI
+#endif
 import HwpKit
 import HwpKitCore
 import BibleResearchModels
@@ -104,6 +108,20 @@ struct DocumentViewerView: View {
     /// `.docx` 전용 뷰어 선택 상태(`DocxViewerMode`). 초기값은 "미리보기"이고, PDF 변환본이 있으면
     /// `docxContent`가 "PDF 변환"으로 올린다.
     @State private var docxViewerMode: DocxViewerMode = .preview
+
+    /// 이미지 모음 전용 — 이미지 추가(파일 선택기/사진 보관함)와 쪽 삭제 확인 상태.
+    @State private var isAddImageImporterPresented = false
+    @State private var isDeleteImagePageDialogPresented = false
+    /// 이미지 모음 화면 안 검색 상태(2026-10-07). 검색결과에서 열렸으면 `setUpIfNeeded`가 그 검색어로 미리 채운다.
+    /// 일치 항목은 모든 쪽의 OCR 줄을 쪽 순서 → 줄 순서로 늘어놓은 목록이고, `imageCurrentMatchIndex`가 그중 지금 항목이다.
+    @State private var imageSearchQuery = ""
+    @State private var imageCurrentMatchIndex = 0
+    /// 상단 돋보기 버튼 → `ZoomableImageView` 전달용 일회성 명령(받은 뷰가 처리 후 nil로 되돌린다).
+    @State private var imageZoomCommand: ImageZoomCommand?
+    #if os(iOS)
+    @State private var isAddImagePhotosPickerPresented = false
+    @State private var pickedImagePhotoItems: [PhotosPickerItem] = []
+    #endif
 
     /// 문서 태그 입력 상태. `MemoDetailView.tagSection`과 같은 패턴이며(`documentTagSection` 참고),
     /// 형식별 중복을 피하려고 `mainContent` 최하단에 한 번만 둔다.
@@ -326,6 +344,13 @@ struct DocumentViewerView: View {
 
     // MARK: - 원본 보기
 
+    /// 상단 돋보기 버튼(확대/축소/원본 크기)이 `ZoomableImageView`에 보내는 명령. `token`이 매번 달라 같은 명령을 연달아 보내도 변경으로 감지된다.
+    private struct ImageZoomCommand: Equatable {
+        enum Kind { case zoomIn, zoomOut, reset }
+        let kind: Kind
+        let token = UUID()
+    }
+
     /// 이미지 뷰어(아래 `ZoomableImageView`)는 scale to fit으로 시작해 핀치로 확대/축소하고,
     /// 확대 상태에서는 드래그로 이동하며 더블탭으로 원래 크기로 되돌린다. 최소 배율은 1로 제한한다.
     ///
@@ -355,6 +380,10 @@ struct DocumentViewerView: View {
         var ocrLines: [OCRLineOverlayItem] = []
         /// 검색결과에서 진입했을 때의 검색어 — 일치하는 줄만 강조 박스를 얹는다.
         var searchText: String? = nil
+        /// 지금 가리키는 일치 항목(검색 막대의 ︿ ﹀ 위치) — 다른 일치 줄보다 진한 주황으로 강조한다.
+        var activeLineID: UUID? = nil
+        /// 상단 돋보기 버튼 명령(확대/축소/원본 크기). 처리하면 nil로 되돌린다.
+        @Binding var zoomCommand: ImageZoomCommand?
 
         @State private var scale: CGFloat = 1
         @State private var lastScale: CGFloat = 1
@@ -436,7 +465,7 @@ struct DocumentViewerView: View {
                         ZStack {
                             if matched {
                                 RoundedRectangle(cornerRadius: 2)
-                                    .fill(Color.yellow.opacity(0.35))
+                                    .fill(line.id == activeLineID ? Color.orange.opacity(0.5) : Color.yellow.opacity(0.35))
                             }
                             // 항상 투명 — 글자 모양은 밑의 이미지가 보여주고, 일치 여부는 위 노란
                             // 박스로만 표시한다.
@@ -500,15 +529,39 @@ struct DocumentViewerView: View {
                 }
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity)
+            .onChange(of: zoomCommand) { _, command in
+                guard let command else { return }
+                applyZoomCommand(command.kind)
+                zoomCommand = nil
+            }
+        }
+
+        /// 돋보기 버튼 동작 — 핀치와 같은 배율 범위(1~5배)를 지킨다. 한 번에 1.25배씩, 1배로 돌아오면 이동 위치도 함께 되돌린다.
+        private func applyZoomCommand(_ kind: ImageZoomCommand.Kind) {
+            withAnimation(.spring(response: 0.3, dampingFraction: 0.85)) {
+                switch kind {
+                case .zoomIn:
+                    scale = min(scale * 1.25, maxScale)
+                case .zoomOut:
+                    scale = max(scale / 1.25, minScale)
+                case .reset:
+                    scale = minScale
+                }
+                lastScale = scale
+                if scale <= minScale {
+                    offset = .zero
+                    lastOffset = .zero
+                }
+            }
         }
     }
 
-    /// 이미지 문서의 OCR 줄 중 위치 정보(`ocrBoundingBox`)가 있는 것만 `lineIndex` 순으로 돌려준다.
+    /// 이미지 문서의 `pageNumber`쪽 OCR 줄 중 위치 정보(`ocrBoundingBox`)가 있는 것만 `lineIndex` 순으로 돌려준다.
     /// 위치 정보가 없는 옛 OCR 문서는 위치를 추측하지 않고 빈 배열이 되어 오버레이 없이 동작한다.
-    private var ocrOverlayLines: [OCRLineOverlayItem] {
+    private func ocrOverlayLines(forPage pageNumber: Int) -> [OCRLineOverlayItem] {
         guard document.originalFormat == .image else { return [] }
         let lines = (document.documentTexts ?? [])
-            .filter { $0.pageNumber == 0 && $0.ocrBoundingBox != nil }
+            .filter { $0.pageNumber == pageNumber && $0.ocrBoundingBox != nil }
             .sorted { $0.lineIndex < $1.lineIndex }
         return lines.compactMap { line in
             guard let box = OCRLineOverlayItem.decodeBoundingBox(line.ocrBoundingBox) else { return nil }
@@ -532,20 +585,8 @@ struct DocumentViewerView: View {
                 fileContentUnavailableView(status: viewModel.downloadStatus, fallbackMessage: "PDF를 열 수 없습니다.")
             }
         case .image:
-            // 파일을 여기서 직접 읽지 않고 `viewModel.loadedImage`(보안 스코프를 열고 닫아 읽어 온
-            // 값)만 본다(`DocumentViewerViewModel.loadedImage` 참고). 렌더링은 `ZoomableImageView`
-            // (scale to fit + 핀치 줌).
-            if case .ready = viewModel.downloadStatus {
-                if let image = viewModel.loadedImage {
-                    // `ocrOverlayLines`와 검색어를 함께 넘겨 OCR 텍스트 레이어를 겹친다.
-                    ZoomableImageView(image: image, ocrLines: ocrOverlayLines, searchText: initialSearchText)
-                } else {
-                    ProgressView("이미지를 불러오는 중…")
-                        .frame(maxWidth: .infinity, maxHeight: .infinity)
-                }
-            } else {
-                fileContentUnavailableView(status: viewModel.downloadStatus, fallbackMessage: "이미지를 열 수 없습니다.")
-            }
+            // 쪽 넘김 + 썸네일 줄 + 이미지 추가/쪽 삭제(`imagePane`). 1장짜리 기존 문서도 같은 화면이다.
+            imagePane(viewModel: viewModel)
         case .hwp, .hwpx:
             if let hwpFileData = viewModel.hwpFileData {
                 VStack(spacing: 0) {
@@ -596,6 +637,385 @@ struct DocumentViewerView: View {
             unavailableMessage("이 형식은 원본 미리보기를 지원하지 않습니다. 추출된 텍스트를 대신 보여드립니다.")
         }
     }
+
+    // MARK: - 이미지 모음(여러 장 = 한 문서)
+
+    /// 이미지 문서 뷰어 — 위쪽 검색·돋보기 막대(검색칸 · 일치 항목 이동 · 확대/축소/원본 크기 · ⋯ 메뉴[이미지 추가 · 이 페이지 삭제]),
+    /// 가운데 확대 가능한 이미지(+ OCR 글자 레이어, 좌우 가장자리 쪽 이동 버튼, 아래 가운데 쪽 번호),
+    /// 아래쪽 썸네일 줄(2장 이상일 때). 파일은 `viewModel.openImagePage`가 쪽 단위로 내려받아 `loadedImage`에 담는다.
+    @ViewBuilder
+    private func imagePane(viewModel: DocumentViewerViewModel) -> some View {
+        VStack(spacing: 0) {
+            imageToolBar(viewModel: viewModel)
+            Divider()
+            if case .ready = viewModel.downloadStatus {
+                if let image = viewModel.loadedImage {
+                    // `ocrOverlayLines`와 검색어를 함께 넘겨 OCR 텍스트 레이어를 겹친다(지금 보는 쪽의 글자만).
+                    // `.id`로 쪽이 바뀔 때 확대/이동 상태를 초기화한다.
+                    ZoomableImageView(
+                        image: image,
+                        ocrLines: ocrOverlayLines(forPage: viewModel.currentImagePageNumber),
+                        searchText: imageSearchQuery,
+                        activeLineID: activeImageMatchLineID(viewModel: viewModel),
+                        zoomCommand: $imageZoomCommand
+                    )
+                    .id(viewModel.currentImagePageNumber)
+                    // 쪽 이동(2026-10-07 목업 A안) — 위쪽 막대에서 옮겨 이미지 좌우 가장자리 세로 중앙의 원형 버튼과
+                    // 아래 가운데 쪽 번호 알약으로 둔다. 이미지 위 오버레이라 확대·이동 제스처 영역을 줄이지 않는다.
+                    .overlay { imagePageEdgeButtons(viewModel: viewModel) }
+                    .overlay(alignment: .bottom) { imagePageIndicator(viewModel: viewModel) }
+                } else {
+                    ProgressView("이미지를 불러오는 중…")
+                        .frame(maxWidth: .infinity, maxHeight: .infinity)
+                }
+            } else {
+                fileContentUnavailableView(status: viewModel.downloadStatus, fallbackMessage: "이미지를 열 수 없습니다.")
+            }
+            if viewModel.imagePageCount > 1 {
+                Divider()
+                imageThumbnailStrip(viewModel: viewModel)
+            }
+        }
+        // 검색어가 바뀌면 첫 일치 항목으로 돌아가 그 쪽을 연다.
+        .onChange(of: imageSearchQuery) { _, _ in
+            imageCurrentMatchIndex = 0
+            showCurrentImageMatchPage(viewModel: viewModel)
+        }
+        .fileImporter(
+            isPresented: $isAddImageImporterPresented,
+            allowedContentTypes: [.jpeg, .png, .heic],
+            allowsMultipleSelection: true
+        ) { result in
+            if case .success(let urls) = result {
+                viewModel.appendImages(urls: urls)
+            }
+        }
+        #if os(iOS)
+        .photosPicker(isPresented: $isAddImagePhotosPickerPresented, selection: $pickedImagePhotoItems, matching: .images)
+        .onChange(of: pickedImagePhotoItems) { _, items in
+            guard !items.isEmpty else { return }
+            let itemsToLoad = items
+            pickedImagePhotoItems = []
+            Task { @MainActor in
+                await appendPickedPhotos(itemsToLoad, viewModel: viewModel)
+            }
+        }
+        #endif
+        .confirmationDialog(
+            "\(viewModel.currentImagePageIndex + 1)쪽을 삭제할까요?",
+            isPresented: $isDeleteImagePageDialogPresented,
+            titleVisibility: .visible
+        ) {
+            Button("삭제", role: .destructive) { viewModel.deleteCurrentImagePage() }
+            Button("취소", role: .cancel) {}
+        } message: {
+            Text("이미지와 인식된 글자가 함께 삭제됩니다.")
+        }
+        .alert("이미지 모음", isPresented: Binding(
+            get: { viewModel.imagePageMessage != nil },
+            set: { if !$0 { viewModel.imagePageMessage = nil } }
+        )) {
+            Button("확인", role: .cancel) {}
+        } message: {
+            Text(viewModel.imagePageMessage ?? "")
+        }
+    }
+
+    // MARK: 이미지 모음 — 검색·돋보기 막대와 쪽 이동 (2026-10-07)
+
+    /// 검색어가 들어간 OCR 줄 전부 — 쪽 순서(`imagePageNumbers`) → 줄 순서(`lineIndex`). 검색어가 비면 빈 배열.
+    /// `imageMatchCounts`(썸네일 점)와 같은 일치 규칙(대소문자·발음 기호 무시 부분 문자열)을 쓴다.
+    private func imageSearchMatches(viewModel: DocumentViewerViewModel) -> [DocumentText] {
+        let trimmed = imageSearchQuery.trimmingCharacters(in: .whitespacesAndNewlines)
+        guard !trimmed.isEmpty else { return [] }
+        var pageOrder: [Int: Int] = [:]
+        for (index, pageNumber) in viewModel.imagePageNumbers.enumerated() where pageOrder[pageNumber] == nil {
+            pageOrder[pageNumber] = index
+        }
+        let matched = viewModel.textLines.filter { line in
+            pageOrder[line.pageNumber] != nil
+                && line.lineText.range(of: trimmed, options: [.caseInsensitive, .diacriticInsensitive]) != nil
+        }
+        return matched.sorted { (lhs: DocumentText, rhs: DocumentText) -> Bool in
+            let lhsOrder = pageOrder[lhs.pageNumber] ?? 0
+            let rhsOrder = pageOrder[rhs.pageNumber] ?? 0
+            return lhsOrder != rhsOrder ? lhsOrder < rhsOrder : lhs.lineIndex < rhs.lineIndex
+        }
+    }
+
+    /// 지금 가리키는 일치 줄의 id(없으면 nil). 목록이 줄어 인덱스가 넘치면 마지막 항목으로 맞춘다.
+    private func activeImageMatchLineID(viewModel: DocumentViewerViewModel) -> UUID? {
+        let matches = imageSearchMatches(viewModel: viewModel)
+        guard !matches.isEmpty else { return nil }
+        return matches[min(imageCurrentMatchIndex, matches.count - 1)].id
+    }
+
+    /// ︿ ﹀ / 엔터 — 일치 항목을 앞뒤로 옮긴다(처음↔끝은 이어진다). 다른 쪽에 있으면 그 쪽을 연다.
+    private func moveImageMatch(by delta: Int, viewModel: DocumentViewerViewModel) {
+        let matches = imageSearchMatches(viewModel: viewModel)
+        guard !matches.isEmpty else { return }
+        let current = min(imageCurrentMatchIndex, matches.count - 1)
+        imageCurrentMatchIndex = ((current + delta) % matches.count + matches.count) % matches.count
+        showCurrentImageMatchPage(viewModel: viewModel)
+    }
+
+    /// 지금 일치 항목이 있는 쪽을 연다. 이미 그 쪽이면 아무것도 하지 않는다(확대 상태 유지).
+    private func showCurrentImageMatchPage(viewModel: DocumentViewerViewModel) {
+        let matches = imageSearchMatches(viewModel: viewModel)
+        guard !matches.isEmpty else { return }
+        let match = matches[min(imageCurrentMatchIndex, matches.count - 1)]
+        guard let index = viewModel.imagePageNumbers.firstIndex(of: match.pageNumber),
+              index != viewModel.currentImagePageIndex else { return }
+        viewModel.openImagePage(at: index)
+    }
+
+    /// 위쪽 막대 — PDF 뷰어(`pdfSearchBar`)와 같은 구성: 검색칸 · 일치 항목 이동 · 돋보기 3버튼(강조색 12% 원형, 28pt) + ⋯ 메뉴.
+    private func imageToolBar(viewModel: DocumentViewerViewModel) -> some View {
+        let trimmedQuery = imageSearchQuery.trimmingCharacters(in: .whitespacesAndNewlines)
+        let matchCount = imageSearchMatches(viewModel: viewModel).count
+        return HStack(spacing: 8) {
+            HStack(spacing: 6) {
+                Image(systemName: "magnifyingglass")
+                    .foregroundStyle(.secondary)
+                TextField("검색", text: $imageSearchQuery)
+                    .textFieldStyle(.plain)
+                    .font(.body)
+                    .onSubmit { moveImageMatch(by: 1, viewModel: viewModel) }
+                if !trimmedQuery.isEmpty {
+                    Text(matchCount == 0 ? "0건" : "\(min(imageCurrentMatchIndex, matchCount - 1) + 1)/\(matchCount)")
+                        .font(.caption)
+                        .foregroundStyle(.secondary)
+                        .monospacedDigit()
+                    Button {
+                        moveImageMatch(by: -1, viewModel: viewModel)
+                    } label: {
+                        Image(systemName: "chevron.up")
+                            .foregroundStyle(Color("AccentColor"))
+                    }
+                    .buttonStyle(.plain)
+                    .disabled(matchCount == 0)
+                    .help("이전 일치 항목")
+                    Button {
+                        moveImageMatch(by: 1, viewModel: viewModel)
+                    } label: {
+                        Image(systemName: "chevron.down")
+                            .foregroundStyle(Color("AccentColor"))
+                    }
+                    .buttonStyle(.plain)
+                    .disabled(matchCount == 0)
+                    .help("다음 일치 항목")
+                }
+            }
+            .padding(.horizontal, 10)
+            .frame(height: 34)
+            .background(RoundedRectangle(cornerRadius: 10).fill(Color.secondary.opacity(0.12)))
+            .overlay(RoundedRectangle(cornerRadius: 10).stroke(Color.secondary.opacity(0.3), lineWidth: 1))
+
+            imageToolCircleButton(systemImage: "plus.magnifyingglass", help: "확대") {
+                imageZoomCommand = ImageZoomCommand(kind: .zoomIn)
+            }
+            imageToolCircleButton(systemImage: "minus.magnifyingglass", help: "축소") {
+                imageZoomCommand = ImageZoomCommand(kind: .zoomOut)
+            }
+            imageToolCircleButton(systemImage: "arrow.up.left.and.down.right.magnifyingglass", help: "원본 크기") {
+                imageZoomCommand = ImageZoomCommand(kind: .reset)
+            }
+
+            if viewModel.isModifyingImagePages {
+                ProgressView().controlSize(.small)
+            }
+            Menu {
+                Button("파일에서 이미지 추가…") { isAddImageImporterPresented = true }
+                #if os(iOS)
+                Button("사진 보관함에서 추가…") { isAddImagePhotosPickerPresented = true }
+                #endif
+                if viewModel.imagePageCount > 1 {
+                    Divider()
+                    Button(role: .destructive) {
+                        isDeleteImagePageDialogPresented = true
+                    } label: {
+                        Label("이 페이지 삭제", systemImage: "trash")
+                    }
+                }
+            } label: {
+                imageToolCircleLabel(systemImage: "ellipsis")
+            }
+            .menuIndicator(.hidden)
+            .fixedSize()
+            .accessibilityLabel("이미지 추가·삭제")
+        }
+        .disabled(viewModel.isModifyingImagePages)
+        .padding(.vertical, 8)
+        .padding(.leading, 12)
+        // iOS는 오른쪽 위에 `closeWindowButton`이 떠 있어 `pdfSearchBar`와 같은 이유로 오른쪽 여백을 더 둔다.
+        #if os(iOS)
+        .padding(.trailing, 44)
+        #else
+        .padding(.trailing, 12)
+        #endif
+    }
+
+    private func imageToolCircleLabel(systemImage: String) -> some View {
+        Image(systemName: systemImage)
+            .font(.system(size: 14, weight: .semibold))
+            .foregroundStyle(Color("AccentColor"))
+            .frame(width: 28, height: 28)
+            .background(Circle().fill(Color("AccentColor").opacity(0.12)))
+            .overlay(Circle().stroke(Color("AccentColor").opacity(0.35), lineWidth: 1))
+            .contentShape(Circle())
+    }
+
+    private func imageToolCircleButton(systemImage: String, help: String, action: @escaping () -> Void) -> some View {
+        Button(action: action) {
+            imageToolCircleLabel(systemImage: systemImage)
+        }
+        .buttonStyle(.plain)
+        .help(help)
+        .accessibilityLabel(help)
+    }
+
+    /// 이미지 좌우 가장자리 세로 중앙의 쪽 이동 원형 버튼(48pt, 탭 영역 44pt 이상). 쪽이 2장 이상일 때만 보이고,
+    /// 첫 쪽의 이전/끝 쪽의 다음은 흐려지며 눌리지 않는다.
+    @ViewBuilder
+    private func imagePageEdgeButtons(viewModel: DocumentViewerViewModel) -> some View {
+        if viewModel.imagePageCount > 1 {
+            HStack {
+                imageEdgeButton(
+                    systemImage: "chevron.left", label: "이전 쪽",
+                    isEnabled: viewModel.currentImagePageIndex > 0 && !viewModel.isModifyingImagePages
+                ) { viewModel.showPreviousImagePage() }
+                Spacer()
+                imageEdgeButton(
+                    systemImage: "chevron.right", label: "다음 쪽",
+                    isEnabled: viewModel.currentImagePageIndex < viewModel.imagePageCount - 1 && !viewModel.isModifyingImagePages
+                ) { viewModel.showNextImagePage() }
+            }
+            .padding(.horizontal, 10)
+        }
+    }
+
+    private func imageEdgeButton(systemImage: String, label: String, isEnabled: Bool, action: @escaping () -> Void) -> some View {
+        Button(action: action) {
+            Image(systemName: systemImage)
+                .font(.system(size: 20, weight: .semibold))
+                .foregroundStyle(Color.primary)
+                .frame(width: 48, height: 48)
+                .background(.regularMaterial, in: Circle())
+                .overlay(Circle().stroke(Color.secondary.opacity(0.35), lineWidth: 1))
+                .shadow(color: Color.black.opacity(0.18), radius: 4, y: 1)
+                .contentShape(Circle())
+        }
+        .buttonStyle(.plain)
+        .disabled(!isEnabled)
+        .opacity(isEnabled ? 1 : 0.28)
+        .accessibilityLabel(label)
+    }
+
+    /// 아래 가운데 쪽 번호 알약 — "3 / 7". 누르는 대상이 아니라 표시일 뿐이라 터치는 아래 이미지로 통과시킨다.
+    @ViewBuilder
+    private func imagePageIndicator(viewModel: DocumentViewerViewModel) -> some View {
+        if viewModel.imagePageCount > 1 {
+            Text("\(viewModel.currentImagePageIndex + 1) / \(viewModel.imagePageCount)")
+                .font(.footnote.monospacedDigit())
+                .foregroundStyle(Color.white)
+                .padding(.horizontal, 12)
+                .padding(.vertical, 4)
+                .background(Color.black.opacity(0.7), in: Capsule())
+                .padding(.bottom, 10)
+                .allowsHitTesting(false)
+        }
+    }
+
+    /// 쪽 썸네일 줄 — 누르면 그 쪽으로 이동, 지금 쪽은 테두리, 검색어와 일치하는 글자가 있는 쪽은 노란 점(일치 줄 수)이 붙는다.
+    private func imageThumbnailStrip(viewModel: DocumentViewerViewModel) -> some View {
+        let matchCounts = viewModel.imageMatchCounts(for: imageSearchQuery)
+        return ScrollViewReader { proxy in
+            ScrollView(.horizontal, showsIndicators: false) {
+                HStack(spacing: 8) {
+                    ForEach(Array(viewModel.imagePageNumbers.enumerated()), id: \.element) { index, pageNumber in
+                        imageThumbnailCell(
+                            viewModel: viewModel, index: index, pageNumber: pageNumber,
+                            matchCount: matchCounts[pageNumber] ?? 0
+                        )
+                        .id(pageNumber)
+                    }
+                }
+                .padding(.horizontal, 12)
+                .padding(.vertical, 8)
+            }
+            .onChange(of: viewModel.currentImagePageIndex) { _, _ in
+                withAnimation { proxy.scrollTo(viewModel.currentImagePageNumber, anchor: .center) }
+            }
+        }
+        .frame(height: 90)
+    }
+
+    private func imageThumbnailCell(
+        viewModel: DocumentViewerViewModel, index: Int, pageNumber: Int, matchCount: Int
+    ) -> some View {
+        let isCurrent = index == viewModel.currentImagePageIndex
+        return Button {
+            viewModel.openImagePage(at: index)
+        } label: {
+            ZStack(alignment: .topTrailing) {
+                Group {
+                    if let thumbnail = viewModel.imageThumbnails[pageNumber] {
+                        #if os(macOS)
+                        Image(nsImage: thumbnail).resizable().aspectRatio(contentMode: .fill)
+                        #else
+                        Image(uiImage: thumbnail).resizable().aspectRatio(contentMode: .fill)
+                        #endif
+                    } else {
+                        Rectangle().fill(Color.secondary.opacity(0.15))
+                    }
+                }
+                .frame(width: 54, height: 70)
+                .clipShape(RoundedRectangle(cornerRadius: 6))
+                .overlay(alignment: .bottomLeading) {
+                    Text("\(index + 1)")
+                        .font(.caption2.weight(.bold))
+                        .padding(.horizontal, 4)
+                        .background(.thinMaterial, in: RoundedRectangle(cornerRadius: 3))
+                        .padding(3)
+                }
+                .overlay(
+                    RoundedRectangle(cornerRadius: 6)
+                        .stroke(isCurrent ? Color("AccentColor") : Color.secondary.opacity(0.3), lineWidth: isCurrent ? 2.5 : 1)
+                )
+                if matchCount > 0 {
+                    Text("\(matchCount)")
+                        .font(.system(size: 9, weight: .bold))
+                        .foregroundStyle(.black)
+                        .padding(.horizontal, 4)
+                        .padding(.vertical, 1)
+                        .background(Color.yellow, in: Capsule())
+                        .offset(x: 4, y: -4)
+                }
+            }
+        }
+        .buttonStyle(.plain)
+        .accessibilityLabel("\(index + 1)쪽")
+    }
+
+    #if os(iOS)
+    /// 사진 보관함에서 고른 항목을 임시 파일로 내려받아 이 문서 맨 끝에 더한다(`DocumentsHomeView.handlePickedPhotos`와 같은 방식).
+    @MainActor
+    private func appendPickedPhotos(_ items: [PhotosPickerItem], viewModel: DocumentViewerViewModel) async {
+        var savedURLs: [URL] = []
+        for item in items {
+            guard let data = try? await item.loadTransferable(type: Data.self) else { continue }
+            let ext = item.supportedContentTypes.first?.preferredFilenameExtension ?? "jpg"
+            let tempURL = FileManager.default.temporaryDirectory
+                .appendingPathComponent(UUID().uuidString)
+                .appendingPathExtension(ext)
+            if (try? data.write(to: tempURL)) != nil {
+                savedURLs.append(tempURL)
+            }
+        }
+        guard !savedURLs.isEmpty else { return }
+        viewModel.appendImages(urls: savedURLs)
+    }
+    #endif
 
     // MARK: - hwp 뷰어 전환(네이티브 hwp-swift ↔ rhwp 웹 뷰어)
 
@@ -974,7 +1394,7 @@ struct DocumentViewerView: View {
     private func setUpIfNeeded() {
         guard viewModel == nil else { return }
         let vm = DocumentViewerViewModel(document: document, modelContext: modelContext)
-        vm.onAppear()
+        vm.onAppear(initialSearchText: initialSearchText)
         viewModel = vm
         // PDFKit 검색 컨트롤러 둘(`.pdf` 원본, `.docx` PDF 변환)은 같은 `document`를 대상으로 하므로
         // 같은 리졸버를 연결한다. `HWPToPDFPane`은 `document`에 접근할 수 없어 `originalPane`에서
@@ -984,6 +1404,10 @@ struct DocumentViewerView: View {
         // 초기 검색어는 새 검색창(`pdfSearchController.query`)으로 전달한다.
         if let initialSearchText, document.originalFormat == .pdf {
             pdfSearchController.query = initialSearchText
+        }
+        // 이미지 모음도 같은 방식 — 검색결과에서 열렸으면 화면 안 검색칸을 그 검색어로 채운다.
+        if let initialSearchText, document.originalFormat == .image {
+            imageSearchQuery = initialSearchText
         }
         // `.docx`의 변환 PDF는 iCloud 다운로드 완료 후 늦게 채워질 수 있어, 그 검색어 연결은
         // 여기서 한 번만 하지 않고 `docxContent`의 `syncDocxViewerModeIfConvertedPDFReady`에서 처리한다.

@@ -234,7 +234,7 @@ final class SearchViewModel {
     /// `VerseSearchResult.matchCount` 참고) 내림차순이 1순위, 같은 값끼리만
     /// 정경순(책ID/장 오름차순).
     struct VerseSearchResultGroup: Identifiable {
-        let bookId: Int
+        let bookId: Int 
         let chapter: Int
         let bookNameKo: String
         let verses: [VerseSearchResult]
@@ -469,7 +469,7 @@ final class SearchViewModel {
         let ordered = registries.sorted { $0.addedAt < $1.addedAt }
         let preferredCodes = UserSettingsStore.shared.defaultDisplayedTranslationCodes
         if !preferredCodes.isEmpty {
-            let byCode = Dictionary(uniqueKeysWithValues: ordered.map { ($0.code, $0) })
+            let byCode = Dictionary(ordered.map { ($0.code, $0) }, uniquingKeysWith: { first, _ in first })
             let chosen = preferredCodes.compactMap { byCode[$0] }
             if !chosen.isEmpty {
                 return Array(chosen.prefix(maxCount))
@@ -1073,11 +1073,11 @@ final class SearchViewModel {
         // `extraTerms`는 넘기지 않는다.
         let outlineContentCandidates = contentCandidateSourceIds(
             category: .outline, words: words,
-            liveContentById: Dictionary(uniqueKeysWithValues: bookOutlines.map { ($0.id.uuidString, $0.contentText) })
+            liveContentById: Dictionary(bookOutlines.map { ($0.id.uuidString, $0.contentText) }, uniquingKeysWith: { first, _ in first })
         )
         let chapterSummaryContentCandidates = contentCandidateSourceIds(
             category: .chapterSummary, words: words,
-            liveContentById: Dictionary(uniqueKeysWithValues: chapterSummaries.map { ($0.id.uuidString, $0.contentText) })
+            liveContentById: Dictionary(chapterSummaries.map { ($0.id.uuidString, $0.contentText) }, uniquingKeysWith: { first, _ in first })
         )
 
         var results: [(result: OutlineSearchResult, wordCount: Int, bonus: Int)] = []
@@ -1123,7 +1123,7 @@ final class SearchViewModel {
         // FTS 후보 좁히기(`contentCandidateSourceIds` 참고).
         let phraseNoteContentCandidates = contentCandidateSourceIds(
             category: .phraseNote, words: words,
-            liveContentById: Dictionary(uniqueKeysWithValues: notes.map { ($0.id.uuidString, $0.noteText) })
+            liveContentById: Dictionary(notes.map { ($0.id.uuidString, $0.noteText) }, uniquingKeysWith: { first, _ in first })
         )
         var results: [(result: PhraseNoteSearchResult, wordCount: Int, bonus: Int)] = []
         for note in notes {
@@ -1157,7 +1157,7 @@ final class SearchViewModel {
         let memoContentCandidates = contentCandidateSourceIds(
             category: .memo, words: words,
             extraTerms: categoryWideVerseSearchTexts(mentions: mentions, sourceType: .memo, queryMatches: queryMatches),
-            liveContentById: Dictionary(uniqueKeysWithValues: memos.map { ($0.id.uuidString, $0.contentText) })
+            liveContentById: Dictionary(memos.map { ($0.id.uuidString, $0.contentText) }, uniquingKeysWith: { first, _ in first })
         )
         var results: [(result: MemoSearchResult, wordCount: Int, bonus: Int)] = []
         for memo in memos {
@@ -1185,15 +1185,18 @@ final class SearchViewModel {
     // MARK: - 키워드 검색: 말씀 요약(VerseSummary)
 
     private func searchSummaries(words: [String], queryMatches: [BibleReferenceExtractor.Match]) -> [SummarySearchResult] {
-        let summaries = (try? modelContext.fetch(
+        let fetchedSummaries = (try? modelContext.fetch(
             FetchDescriptor<VerseSummary>(sortBy: [SortDescriptor(\.createdAt, order: .reverse)])
         )) ?? []
+        // 같은 id의 레코드가 둘 이상이면(CloudKit 동기화 등으로 생길 수 있다) 결과에 같은 요약이 두 번 나오므로
+        // id당 하나만 남긴다(태그가 붙은 쪽 → 더 최근 수정된 쪽 우선, 기존 정렬 순서 유지). 레코드는 삭제하지 않는다.
+        let summaries = VerseSummaryDeduplication.uniqueById(fetchedSummaries)
         let mentions = queryMatches.isEmpty ? [] : ((try? modelContext.fetch(FetchDescriptor<VerseMention>())) ?? [])
         // `searchMemos`와 같은 이유.
         let summaryContentCandidates = contentCandidateSourceIds(
             category: .wordSummary, words: words,
             extraTerms: categoryWideVerseSearchTexts(mentions: mentions, sourceType: .wordSummary, queryMatches: queryMatches),
-            liveContentById: Dictionary(uniqueKeysWithValues: summaries.map { ($0.id.uuidString, $0.contentText) })
+            liveContentById: Dictionary(summaries.map { ($0.id.uuidString, $0.contentText) }, uniquingKeysWith: { first, _ in first })
         )
         var results: [(result: SummarySearchResult, wordCount: Int, bonus: Int)] = []
         for summary in summaries {
@@ -1244,7 +1247,7 @@ final class SearchViewModel {
         let documentContentCandidates = contentCandidateSourceIds(
             category: .document, words: words,
             extraTerms: categoryWideVerseSearchTexts(mentions: mentions, sourceType: .document, queryMatches: queryMatches),
-            liveContentById: Dictionary(uniqueKeysWithValues: documents.map { ($0.id.uuidString, $0.cachedCombinedText) })
+            liveContentById: Dictionary(documents.map { ($0.id.uuidString, $0.cachedCombinedText) }, uniquingKeysWith: { first, _ in first })
         )
 
         var results: [(result: DocumentSearchResult, wordCount: Int, bonus: Int)] = []
@@ -1294,7 +1297,7 @@ final class SearchViewModel {
         let sermonContentCandidates = contentCandidateSourceIds(
             category: .sermon, words: words,
             extraTerms: categoryWideVerseSearchTexts(mentions: mentions, sourceType: .sermon, queryMatches: queryMatches),
-            liveContentById: Dictionary(uniqueKeysWithValues: sermons.map { ($0.id.uuidString, $0.contentText) })
+            liveContentById: Dictionary(sermons.map { ($0.id.uuidString, $0.contentText) }, uniquingKeysWith: { first, _ in first })
         )
 
         var results: [(result: SermonSearchResult, wordCount: Int, bonus: Int)] = []

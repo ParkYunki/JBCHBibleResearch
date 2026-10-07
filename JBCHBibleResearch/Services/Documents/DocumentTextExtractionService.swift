@@ -110,26 +110,122 @@ enum DocumentTextExtractionService {
     // `indexStatus = .indexed`로 만든다. `OCRResult`는 인식 결과 기록(재-OCR 비교/디버깅 근거)으로
     // 남기되 `status`는 처음부터 `.userReviewed`로 저장한다.
 
+    /// OCR 한 줄 — Vision 결과를 `Task.detached` 경계 너머로 넘기기 위한 값 타입(`boundingBox`는 정규화 좌표, 좌하단 원점).
+    private nonisolated struct RecognizedImageLine: Sendable {
+        let text: String
+        let confidence: Double
+        let boundingBox: CGRect
+    }
+
+    /// 이미지 문서 전체 OCR — 쪽 행(`DocumentImagePage`)이 있으면 모든 쪽을, 없으면 원본 1장을 0쪽으로 처리한다.
+    /// 한 장이라도 읽히면 성공으로 보고(읽지 못한 쪽은 건너뜀), 전부 실패했을 때만 "실패, 수동 필요"로 둔다.
     private static func extractImageOCR(_ document: SourceDocument, context: ModelContext) async {
         document.indexStatus = .indexing
         try? context.save()
 
-        guard let url = try? DocumentUploadService.resolveOriginalFileURL(for: document, context: context) else {
+        var recognizedPages: [(pageNumber: Int, lines: [RecognizedImageLine])] = []
+        for pageNumber in DocumentImagePageService.pageNumbers(for: document) {
+            guard let url = try? DocumentImagePageService.resolveURL(pageNumber: pageNumber, for: document, context: context),
+                  let lines = await recognizeImageLines(at: url) else {
+                print("[DocumentTextExtractionService] 이미지 \(pageNumber + 1)쪽 OCR 실패(\(document.originalFilename))")
+                continue
+            }
+            recognizedPages.append((pageNumber, lines))
+        }
+
+        guard !recognizedPages.isEmpty else {
             document.conversionStatus = .failedNeedsManual
             document.indexStatus = .notIndexed
             try? context.save()
             return
         }
 
+        let allLines = recognizedPages.flatMap(\.lines)
+        let rawText = recognizedPages.map { $0.lines.map(\.text).joined(separator: "\n") }.joined(separator: "\n\n")
+        let averageConfidence = allLines.isEmpty ? 0 : allLines.map(\.confidence).reduce(0, +) / Double(allLines.count)
+
+        let result = OCRResult(
+            rawText: rawText,
+            engine: "Vision(VNRecognizeTextRequest)",
+            confidence: averageConfidence,
+            status: .userReviewed,
+            sourceDocument: document
+        )
+        context.insert(result)
+
+        // 재시도(`retry()`)로 이 함수가 다시 호출될 수 있으므로 이전 시도가 남긴 레코드를 먼저
+        // 지운다(`extractHWP`와 같은 원칙).
+        clearDocumentTexts(for: document, context: context)
+        var anyLineInserted = false
+        for page in recognizedPages {
+            anyLineInserted = insertImageLines(page.lines, pageNumber: page.pageNumber, document: document, context: context) || anyLineInserted
+        }
+
+        document.conversionStatus = .converted
+        document.indexStatus = anyLineInserted ? .indexed : .notIndexed
+        try? context.save()
+        // 추출 직후 성경구절 인덱싱(PDF 분기와 같은 이유).
+        BibleReferenceIndexingService.reindexDocument(document, context: context)
+    }
+
+    /// 쪽을 더한 뒤 새 쪽만 OCR한다(기존 쪽의 글자는 그대로). `extract(for:)`가 하는 캐시/FTS 갱신까지 여기서 마친다.
+    static func extractImagePages(_ pageNumbers: [Int], for document: SourceDocument, context: ModelContext) async {
+        var anyLineInserted = false
+        for pageNumber in pageNumbers {
+            guard let url = try? DocumentImagePageService.resolveURL(pageNumber: pageNumber, for: document, context: context),
+                  let lines = await recognizeImageLines(at: url) else {
+                print("[DocumentTextExtractionService] 이미지 \(pageNumber + 1)쪽 OCR 실패(\(document.originalFilename))")
+                continue
+            }
+            anyLineInserted = insertImageLines(lines, pageNumber: pageNumber, document: document, context: context) || anyLineInserted
+        }
+        if anyLineInserted {
+            document.conversionStatus = .converted
+            document.indexStatus = .indexed
+        }
+        try? context.save()
+        document.rebuildCachedCombinedText()
+        UserContentSearchIndexLocation.upsert(
+            category: .document, sourceId: document.id.uuidString, content: document.cachedCombinedText
+        )
+        try? context.save()
+        BibleReferenceIndexingService.reindexDocument(document, context: context)
+    }
+
+    /// OCR 줄을 `DocumentText`로 저장한다. 하나라도 저장했으면 true.
+    private static func insertImageLines(
+        _ lines: [RecognizedImageLine], pageNumber: Int, document: SourceDocument, context: ModelContext
+    ) -> Bool {
+        var anyLineInserted = false
+        for (index, line) in lines.enumerated() {
+            let trimmed = sanitizeLineText(line.text)
+            guard !trimmed.trimmingCharacters(in: .whitespaces).isEmpty else { continue }
+            let record = DocumentText(
+                pageNumber: pageNumber,
+                lineIndex: index,
+                lineText: trimmed,
+                ocrBoundingBox: encodeOCRBoundingBox(line.boundingBox),
+                sourceDocument: document
+            )
+            context.insert(record)
+            anyLineInserted = true
+        }
+        return anyLineInserted
+    }
+
+    /// 이미지 한 장의 OCR. 파일을 못 읽거나 인식 요청이 실패하면 nil(인식된 글자가 없는 것은 빈 배열).
+    /// 디스크 읽기와 Vision 수행이 무거워 메인 액터 밖(`Task.detached`)에서 돌린다 — 쪽이 여러 장일 때 화면이 멈추지 않게 한다.
+    private static func recognizeImageLines(at url: URL) async -> [RecognizedImageLine]? {
+        await Task.detached(priority: .userInitiated) {
+            performImageOCR(at: url)
+        }.value
+    }
+
+    private nonisolated static func performImageOCR(at url: URL) -> [RecognizedImageLine]? {
         let didStartAccessing = url.startAccessingSecurityScopedResource()
         defer { if didStartAccessing { url.stopAccessingSecurityScopedResource() } }
 
-        guard let cgImage = loadCGImage(from: url) else {
-            document.conversionStatus = .failedNeedsManual
-            document.indexStatus = .notIndexed
-            try? context.save()
-            return
-        }
+        guard let cgImage = loadCGImage(from: url) else { return nil }
 
         let request = VNRecognizeTextRequest()
         request.recognitionLevel = .accurate
@@ -140,53 +236,15 @@ enum DocumentTextExtractionService {
         let handler = VNImageRequestHandler(cgImage: cgImage, options: [:])
         do {
             try handler.perform([request])
-            let observations = request.results ?? []
-            // 각 관측치의 `boundingBox`(Vision 정규화 좌표, 좌하단 원점)도 함께 챙긴다 — request 결과는
-            // 이 함수를 벗어나면 사라진다. `DocumentText.ocrBoundingBox` 선언부 참고.
-            let recognizedLines: [(text: String, confidence: Double, boundingBox: CGRect)] = observations.compactMap { observation in
-                guard let candidate = observation.topCandidates(1).first else { return nil }
-                return (candidate.string, Double(candidate.confidence), observation.boundingBox)
-            }
-            let rawText = recognizedLines.map(\.text).joined(separator: "\n")
-            let averageConfidence = recognizedLines.isEmpty ? 0 : recognizedLines.map(\.confidence).reduce(0, +) / Double(recognizedLines.count)
-
-            let result = OCRResult(
-                rawText: rawText,
-                engine: "Vision(VNRecognizeTextRequest)",
-                confidence: averageConfidence,
-                status: .userReviewed,
-                sourceDocument: document
-            )
-            context.insert(result)
-
-            // 재시도(`retry()`)로 이 함수가 다시 호출될 수 있으므로 이전 시도가 남긴 레코드를 먼저
-            // 지운다(`extractHWP`와 같은 원칙).
-            clearDocumentTexts(for: document, context: context)
-            var anyLineInserted = false
-            for (index, line) in recognizedLines.enumerated() {
-                let trimmed = sanitizeLineText(line.text)
-                guard !trimmed.trimmingCharacters(in: .whitespaces).isEmpty else { continue }
-                let record = DocumentText(
-                    pageNumber: 0,
-                    lineIndex: index,
-                    lineText: trimmed,
-                    ocrBoundingBox: encodeOCRBoundingBox(line.boundingBox),
-                    sourceDocument: document
-                )
-                context.insert(record)
-                anyLineInserted = true
-            }
-
-            document.conversionStatus = .converted
-            document.indexStatus = anyLineInserted ? .indexed : .notIndexed
-            try? context.save()
         } catch {
-            document.conversionStatus = .failedNeedsManual
-            document.indexStatus = .notIndexed
-            try? context.save()
+            return nil
         }
-        // 추출 직후 성경구절 인덱싱(PDF 분기와 같은 이유).
-        BibleReferenceIndexingService.reindexDocument(document, context: context)
+        // 각 관측치의 `boundingBox`(Vision 정규화 좌표, 좌하단 원점)도 함께 챙긴다 — request 결과는
+        // 이 함수를 벗어나면 사라진다. `DocumentText.ocrBoundingBox` 선언부 참고.
+        return (request.results ?? []).compactMap { observation in
+            guard let candidate = observation.topCandidates(1).first else { return nil }
+            return RecognizedImageLine(text: candidate.string, confidence: Double(candidate.confidence), boundingBox: observation.boundingBox)
+        }
     }
 
     /// `DocumentText.ocrBoundingBox`용 "x,y,width,height" 콤마 구분 문자열. Vision 정규화 좌표
@@ -195,7 +253,7 @@ enum DocumentTextExtractionService {
         String(format: "%.6f,%.6f,%.6f,%.6f", box.origin.x, box.origin.y, box.width, box.height)
     }
 
-    private static func loadCGImage(from url: URL) -> CGImage? {
+    private nonisolated static func loadCGImage(from url: URL) -> CGImage? {
         guard let source = CGImageSourceCreateWithURL(url as CFURL, nil) else { return nil }
         return CGImageSourceCreateImageAtIndex(source, 0, nil)
     }

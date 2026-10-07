@@ -107,6 +107,19 @@ enum VerseAnnotationRenderer {
     /// — 이 상수만 바꾸면 된다.
     static let hanjaWordTextColor = Color.brown
 
+    /// 한자 단어를 "굵게" 표시하기 위한 굵은 글꼴(2026-10-07, 메모+한자 구분 목업 B안).
+    /// 규칙: 파랑 글자 = 메모가 있음, 굵게 = 한자 단어 — 서로 다른 수단이라 메모(파랑)가 한자 색(황갈)을 덮어도
+    /// 굵기로 한자 단어임이 남는다. 글꼴에 굵은 변형이 없으면(트레이트 변환 실패) 원래 글꼴을 그대로 돌려줘 모양이 변하지 않는다.
+    static func boldVariant(of font: PlatformFont) -> PlatformFont {
+        #if os(iOS)
+        let traits = font.fontDescriptor.symbolicTraits.union(.traitBold)
+        guard let descriptor = font.fontDescriptor.withSymbolicTraits(traits) else { return font }
+        return UIFont(descriptor: descriptor, size: font.pointSize)
+        #else
+        return NSFontManager.shared.convert(font, toHaveTrait: .boldFontMask)
+        #endif
+    }
+
     /// 선택 모드(`SelectableVerseTextView`)는 `NSAttributedString`을 직접 쓰는
     /// `UITextView`/`NSTextView`라 SwiftUI `Color`가 아니라 `PlatformColor`가 필요하다.
     static var phraseNoteTextPlatformColor: PlatformColor { PlatformColor(phraseNoteTextColor) }
@@ -347,6 +360,8 @@ enum VerseAnnotationRenderer {
                 // 메모 글자색(아래)이 우선하도록 먼저 적용한다(`AnnotatedVerseFlowView.segmentView`와 같은 우선순위: 메모 > 한자).
                 if segment.hasHanja {
                     result.addAttribute(.foregroundColor, value: PlatformColor(hanjaWordTextColor), range: range)
+                    // 메모 색(아래)이 이 글자색을 덮어도 굵기로 한자 단어임이 남는다(`boldVariant` 참고).
+                    result.addAttribute(.font, value: boldVariant(of: font), range: range)
                 }
                 if !segment.noteIDs.isEmpty {
                     result.addAttribute(.foregroundColor, value: phraseNoteTextPlatformColor, range: range)

@@ -356,6 +356,104 @@ enum DocumentUploadService {
         }
     }
 
+    // MARK: - 이미지 문서 쪽 (여러 장 = 한 문서)
+
+    /// 이미지 파일 한 장을 "OCR 이미지" 폴더로 복사하고 쪽 행(`DocumentImagePage`)에 담을 위치를 돌려준다.
+    /// iCloud 복사에 실패하면 `createSourceDocument`와 같은 원칙으로 원본 위치 참조(bookmark)로 폴백하며,
+    /// 이때 `relativePath`는 빈 문자열이다.
+    static func storeImagePageFile(from url: URL) throws -> (relativePath: String, bookmark: Data?) {
+        do {
+            let storedURL = try copyIntoICloudDocuments(sourceURL: url, subfolder: "OCR 이미지")
+            lastICloudCopyFailureReason = nil
+            return ("OCR 이미지/\(storedURL.lastPathComponent)", try? makeSecurityScopedBookmark(for: storedURL))
+        } catch {
+            lastICloudCopyFailureReason = describe(error)
+            return ("", try makeSecurityScopedBookmark(for: url))
+        }
+    }
+
+    /// 이미지 여러 장을 한 `SourceDocument`(이미지 모음)로 만든다. 첫 장이 문서의 원본 파일이 되고
+    /// (`createSourceDocument`), 모든 장(첫 장 포함)에 쪽 행이 만들어진다. 첫 장 처리에 실패하면 던지고,
+    /// 둘째 장부터 실패한 파일은 건너뛴 채 이름을 `failedFilenames`로 돌려준다(호출부가 사용자에게 알린다).
+    /// `urls`는 이미지 확장자 파일만, 1장 이상이어야 한다. 텍스트 추출(쪽별 OCR)은 호출부 책임이다.
+    static func createImageDocument(
+        from urls: [URL], context: ModelContext, relatedChapterRef: BibleChapterRef? = nil, category: ImageCategory? = nil
+    ) throws -> (document: SourceDocument, failedFilenames: [String]) {
+        guard let first = urls.first else { throw DocumentUploadError.unsupportedFormat("") }
+        let document = try createSourceDocument(
+            from: first, context: context, relatedChapterRef: relatedChapterRef, category: category
+        )
+        // 첫 장은 문서 원본과 같은 파일이라 위치 정보를 그대로 가져온다.
+        context.insert(DocumentImagePage(
+            pageNumber: 0,
+            imageFilePath: document.originalFilePath ?? "",
+            fileBookmark: document.fileBookmark,
+            sourceDocument: document
+        ))
+
+        var failedFilenames: [String] = []
+        var nextPageNumber = 1
+        for url in urls.dropFirst() {
+            do {
+                let stored = try storeImagePageFile(from: url)
+                context.insert(DocumentImagePage(
+                    pageNumber: nextPageNumber,
+                    imageFilePath: stored.relativePath,
+                    fileBookmark: stored.bookmark,
+                    sourceDocument: document
+                ))
+                nextPageNumber += 1
+            } catch {
+                failedFilenames.append(url.lastPathComponent)
+            }
+        }
+
+        // 실제로 장이 더해졌을 때만 "첫 파일명 외 N장"으로 이름을 바꾼다(확장자는 유지).
+        if nextPageNumber > 1 {
+            let base = (first.lastPathComponent as NSString).deletingPathExtension
+            let ext = (first.lastPathComponent as NSString).pathExtension
+            let suffix = " 외 \(nextPageNumber - 1)장"
+            document.originalFilename = ext.isEmpty ? base + suffix : base + suffix + "." + ext
+        }
+        try context.save()
+        return (document, failedFilenames)
+    }
+
+    /// 이미지 문서의 모든 쪽 파일을 지운다(문서 삭제 시). `deleteStoredFile`이 문서 원본(= 현재 첫 쪽)을
+    /// 지우므로 그 파일은 겹쳐 지워질 수 있으나, 이미 없는 파일은 조용히 넘어가 문제 없다.
+    /// iCloud 컨테이너에 복사한 파일만 지운다(경로가 비어 있는 폴백 쪽은 사용자 원본이라 건드리지 않는다).
+    static func deleteImagePageFiles(for document: SourceDocument) {
+        for page in document.imagePages ?? [] {
+            deleteContainerFile(relativePath: page.imageFilePath)
+        }
+    }
+
+    /// 컨테이너 "Documents/" 기준 상대 경로의 파일 하나를 지운다. 빈 경로/컨테이너 없음/이미 없는 파일은 조용히 넘어간다.
+    static func deleteContainerFile(relativePath: String) {
+        guard !relativePath.isEmpty,
+              let containerURL = FileManager.default.url(
+                  forUbiquityContainerIdentifier: BibleResearchSchema.defaultCloudKitContainerIdentifier
+              ) else { return }
+        let fileURL = containerURL
+            .appendingPathComponent("Documents", isDirectory: true)
+            .appendingPathComponent(relativePath, isDirectory: false)
+        var coordinatorError: NSError?
+        NSFileCoordinator().coordinate(
+            writingItemAt: fileURL, options: .forDeleting, error: &coordinatorError
+        ) { writeURL in
+            do {
+                try FileManager.default.removeItem(at: writeURL)
+            } catch let removeError as NSError where removeError.code == NSFileNoSuchFileError {
+                // 이미 없는 파일 — 문제 아님.
+            } catch {
+                print("[DocumentUploadService] 이미지 쪽 파일 삭제 실패(\(relativePath)): \(error.localizedDescription)")
+            }
+        }
+        if let coordinatorError {
+            print("[DocumentUploadService] 이미지 쪽 파일 삭제 조정 실패(\(relativePath)): \(coordinatorError.localizedDescription)")
+        }
+    }
+
     // MARK: - Security-scoped bookmark
 
     private static func makeSecurityScopedBookmark(for url: URL) throws -> Data {

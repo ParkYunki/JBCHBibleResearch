@@ -38,6 +38,8 @@ public enum BibleResearchSchema {
         // 문서 파이프라인 (Documents.swift)
         ImageCategory.self, SourceDocument.self, DocumentText.self, ConvertedPDF.self,
         OCRResult.self, DocumentMarkdown.self, DocumentAnchor.self,
+        // 이미지 문서의 쪽 (Documents.swift) — 한 문서에 여러 장
+        DocumentImagePage.self,
         // 구조 인덱스 (ReferenceIndex.swift)
         ThemeIndex.self, ThemeLink.self, KeywordOccurrence.self, PersonIndex.self,
         PlaceIndex.self, TimelineEvent.self,

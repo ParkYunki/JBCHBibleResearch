@@ -346,24 +346,46 @@ struct BibleBarIconOnlyModifier: ViewModifier {
     let title: String
     let systemImage: String
 
+    // 2026-10-07: 예전에는 `.buttonStyle(.plain)` 뒤에 `.frame/.background/.contentShape`를 버튼 "바깥"에 붙였다.
+    // 그러면 보이는 상자는 44pt 전체인데 터치는 아이콘 글리프 위에서만 먹혔다(실기기 확인). 상자 모양·`contentShape`를
+    // 버튼 스타일(`BibleBarIconOnlyButtonStyle`) 안으로 옮겨 상자 어디를 눌러도 동작하게 한다.
+    func body(content: Content) -> some View {
+        content
+            .buttonStyle(BibleBarIconOnlyButtonStyle(kind: kind))
+            .accessibilityLabel(title)
+            .contextMenu {
+                Label(title, systemImage: systemImage)
+            }
+    }
+}
+
+/// `BibleBarIconOnlyModifier`의 외형 + 탭 영역. `contentShape`가 라벨(상자) 안쪽에 있어야 투명한 여백까지 터치를 받는다.
+private struct BibleBarIconOnlyButtonStyle: ButtonStyle {
+    let kind: BibleBarButtonStyle.Kind
+
+    func makeBody(configuration: Configuration) -> some View {
+        BibleBarIconOnlyButtonBody(configuration: configuration, kind: kind)
+    }
+}
+
+private struct BibleBarIconOnlyButtonBody: View {
+    let configuration: ButtonStyleConfiguration
+    let kind: BibleBarButtonStyle.Kind
+
     @Environment(\.self) private var environment
     @Environment(\.colorScheme) private var colorScheme
     @Environment(\.isEnabled) private var isEnabled
 
-    func body(content: Content) -> some View {
+    var body: some View {
         let palette = BibleBarPalette(environment: environment, colorScheme: colorScheme)
         let shape = RoundedRectangle(cornerRadius: 12, style: .continuous)
-        content
-            .buttonStyle(.plain)
+        configuration.label
             .foregroundStyle(kind == .primary ? palette.strongForeground : palette.text)
             .frame(maxWidth: .infinity, minHeight: 44, maxHeight: 44)
             .background(shape.fill(kind == .primary ? palette.strong : (kind == .ghost ? Color.clear : palette.text.opacity(BibleBarMetrics.fillOpacity))))
             .overlay(shape.strokeBorder(kind == .primary ? palette.strong : palette.text.opacity(BibleBarMetrics.lineOpacity), lineWidth: 1))
             .contentShape(shape)
-            .opacity(isEnabled ? 1 : BibleBarMetrics.disabledOpacity)
-            .accessibilityLabel(title)
-            .contextMenu {
-                Label(title, systemImage: systemImage)
-            }
+            // `.plain`이 주던 눌림 반응(살짝 옅어짐)을 유지한다.
+            .opacity(isEnabled ? (configuration.isPressed ? 0.6 : 1) : BibleBarMetrics.disabledOpacity)
     }
 }

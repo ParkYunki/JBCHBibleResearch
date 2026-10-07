@@ -25,6 +25,10 @@ struct RelationDisplayItem {
     /// 조회 실패(Persons/Places에 없는 이름)면 빈 배열 — `SearchView`는 이 경우
     /// 내비게이션 없이 텍스트만 보여준다.
     let verseRefs: [BibleVerseRef]
+    /// 이 행에서 "새로 알게 된 쪽"(예: "갓은 야곱의 아들"에서 갓) 이름과 그 `Persons.idx`(확정 안 됐으면 빈 문자열).
+    /// 행을 눌렀을 때 관계 상세 대신 이 인물의 상세를 열기 위한 값이다. 비어 있으면 호출부는 관계 상세로 폴백한다.
+    var answerWord: String = ""
+    var answerIdx: String = ""
 }
 
 /// `QueryIntentCard.Content.entityProfile`의 항목 하나 — 인물 또는 장소.
@@ -270,6 +274,13 @@ enum QueryIntentHandler {
         return QueryIntentCard(intent: .personProfile, status: .found(.personProfile(members)))
     }
 
+    /// 관계 행에서 `answer`(source 또는 target 이름)에 해당하는 쪽의 `Persons.idx`. 어느 쪽도 아니면 빈 문자열.
+    private static func answerIdx(of answer: String, in relation: PersonRelationRecord) -> String {
+        if answer == relation.sourceWord { return relation.sourceIdx }
+        if answer == relation.targetWord { return relation.targetIdx }
+        return ""
+    }
+
     // MARK: - 관계
 
     /// 정방향(질의의 이름이
@@ -288,8 +299,12 @@ enum QueryIntentHandler {
             for relation in relations {
                 let key = "\(relation.sourceWord)|\(relation.relationType)|\(relation.targetWord)"
                 guard seen.insert(key).inserted else { continue }
-                let verses = (try? store.personOrPlace(exactWord: answerWord(relation)))?.verseRefs ?? []
-                combined.append(RelationDisplayItem(relation: relation, verseRefs: verses))
+                let answer = answerWord(relation)
+                let verses = (try? store.personOrPlace(exactWord: answer))?.verseRefs ?? []
+                combined.append(RelationDisplayItem(
+                    relation: relation, verseRefs: verses,
+                    answerWord: answer, answerIdx: Self.answerIdx(of: answer, in: relation)
+                ))
             }
         }
 
@@ -357,7 +372,9 @@ enum QueryIntentHandler {
                         let key = "\(record.sourceWord)|\(record.relationType)|\(record.targetWord)"
                         guard seen.insert(key).inserted else { continue }
                         let verses = (try? store.personOrPlace(exactWord: partner.word))?.verseRefs ?? []
-                        combined.append(RelationDisplayItem(relation: record, verseRefs: verses))
+                        combined.append(RelationDisplayItem(
+                            relation: record, verseRefs: verses, answerWord: partner.word, answerIdx: partner.idx
+                        ))
                     }
                 }
             }
@@ -447,7 +464,10 @@ enum QueryIntentHandler {
             let ownerWord = answer == holder ? owner : holder
             let verses = (try? store.personOrPlace(exactWord: answer))?.verseRefs
                 ?? (try? store.personOrPlace(exactWord: ownerWord))?.verseRefs ?? []
-            items.append(RelationDisplayItem(relation: record, verseRefs: verses))
+            items.append(RelationDisplayItem(
+                relation: record, verseRefs: verses,
+                answerWord: answer, answerIdx: Self.answerIdx(of: answer, in: record)
+            ))
         }
 
         // 질의 속 이름이 target인 행(저장 방향: source가 target의 ROLE)

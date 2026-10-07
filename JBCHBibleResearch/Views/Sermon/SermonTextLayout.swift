@@ -29,6 +29,62 @@ extension NSAttributedString.Key {
     static let sermonVerseBoxFill = NSAttributedString.Key("com.jbch.sermon.verseBoxFill")
     /// 말씀구절 문단 왼쪽 세로 바 색(`PlatformColor`).
     static let sermonVerseBoxBar = NSAttributedString.Key("com.jbch.sermon.verseBoxBar")
+    /// 문단 줄간격(글자 크기 대비 줄 높이 배수, `Double`). 없으면 그 문단 스타일의 기본 배수를 쓴다.
+    /// RTF에 남지 않아 `paragraphStyles`에 문단별로 병행 저장한다(`SermonParagraphStyleCodec`).
+    static let sermonLineHeight = NSAttributedString.Key("com.jbch.sermon.lineHeight")
+    /// 문단 목록 종류(`SermonListKind.rawValue`). 없으면 목록이 아니다. 저장 방식은 `sermonLineHeight`와 같다.
+    static let sermonListKind = NSAttributedString.Key("com.jbch.sermon.listKind")
+}
+
+// MARK: - 문단 목록 / 줄간격 (문단별 추가 서식)
+
+/// 문단 목록 종류. 기호는 글자로 섞이지 않고 `SermonLayoutManager`가 문단 왼쪽 여백에 따로 그린다
+/// (그래서 복사·검색·`contentText`에는 기호가 들어가지 않는다).
+enum SermonListKind: String, CaseIterable {
+    case bullet   // 구분점 •
+    case number   // 숫자 1. 2. 3.
+    case hangul   // 가. 나. 다.
+    case diamond  // 도형 ◆
+    case square   // 도형 ■
+    case check    // 도형 ✓
+
+    var displayName: String {
+        switch self {
+        case .bullet: return "구분점"
+        case .number: return "숫자 (1. 2. 3.)"
+        case .hangul: return "한글 (가. 나. 다.)"
+        case .diamond: return "도형 ◆"
+        case .square: return "도형 ■"
+        case .check: return "체크 ✓"
+        }
+    }
+
+    /// 연속된 같은 종류 문단 안에서의 순번(0부터)에 해당하는 기호. 숫자/한글만 순번을 쓴다.
+    func marker(at index: Int) -> String {
+        switch self {
+        case .bullet: return "\u{2022}"
+        case .diamond: return "\u{25C6}"
+        case .square: return "\u{25A0}"
+        case .check: return "\u{2713}"
+        case .number: return "\(index + 1)."
+        case .hangul:
+            let letters = Array("가나다라마바사아자차카타파하")
+            return index < letters.count ? "\(letters[index])." : "\(index + 1)."
+        }
+    }
+
+    var usesNumbering: Bool { self == .number || self == .hangul }
+
+    /// 기호 칸 너비 = 글자 크기 × 이 비율. 목록 문단의 글자는 이만큼 오른쪽에서 시작한다.
+    static let markerWidthRatio: CGFloat = 1.6
+}
+
+/// 문단 스타일(대주제~본문) 위에 문단마다 더 얹는 서식 — 줄간격 배수와 목록. 둘 다 nil이면 스타일 기본값이다.
+struct SermonParagraphExtras: Equatable {
+    var lineHeight: Double?
+    var list: SermonListKind?
+
+    static let none = SermonParagraphExtras(lineHeight: nil, list: nil)
 }
 
 // MARK: - 색 비교 도우미
@@ -139,6 +195,7 @@ final class SermonLayoutManager: NSLayoutManager {
         }
         drawVerseBoxes(storage: storage, charRange: verseScan, glyphsToShow: drawableGlyphs, origin: origin)
         drawTextBackgrounds(storage: storage, charRange: charRange, origin: origin)
+        drawListMarkers(storage: storage, charRange: charRange, glyphsToShow: glyphsToShow, origin: origin)
         super.drawBackground(forGlyphRange: glyphsToShow, at: origin)
     }
 
@@ -224,6 +281,57 @@ final class SermonLayoutManager: NSLayoutManager {
                 self.fillRect(box, color: color)
             }
         }
+    }
+
+    // MARK: 목록 기호
+
+    /// 목록 문단의 첫 줄 왼쪽 여백(들여쓰기 안쪽)에 기호를 그린다. 글자 시작 위치는 문단 스타일의 `firstLineHeadIndent`이고
+    /// 기호 칸 너비만큼 그 왼쪽이 기호 자리다(`SermonParagraphStyleCodec.makeParagraphStyle`이 그만큼 들여 둔다).
+    /// 문단의 첫 줄이 지금 그리는 구간(`glyphsToShow`)에 있을 때만 그린다 — 여러 줄 문단의 둘째 줄 이후나 다른 페이지에 걸친 줄은 건너뛴다.
+    private func drawListMarkers(storage: NSTextStorage, charRange: NSRange, glyphsToShow: NSRange, origin: CGPoint) {
+        let text = storage.string as NSString
+        guard text.length > 0 else { return }
+        var cursor = charRange.location
+        let end = min(NSMaxRange(charRange), text.length)
+        while cursor < end {
+            let paragraph = text.paragraphRange(for: NSRange(location: cursor, length: 0))
+            let next = NSMaxRange(paragraph)
+            cursor = next > cursor ? next : cursor + 1
+            guard paragraph.length > 0,
+                  let raw = storage.attribute(.sermonListKind, at: paragraph.location, effectiveRange: nil) as? String,
+                  let kind = SermonListKind(rawValue: raw) else { continue }
+            let firstGlyph = glyphIndexForCharacter(at: paragraph.location)
+            guard NSLocationInRange(firstGlyph, glyphsToShow) else { continue }
+            let lineRect = lineFragmentRect(forGlyphAt: firstGlyph, effectiveRange: nil)
+            let font = (storage.attribute(.font, at: paragraph.location, effectiveRange: nil) as? PlatformFont) ?? PlatformFont.systemFont(ofSize: 17)
+            let color = (storage.attribute(.foregroundColor, at: paragraph.location, effectiveRange: nil) as? PlatformColor) ?? PlatformColor.black
+            let paragraphStyle = storage.attribute(.paragraphStyle, at: paragraph.location, effectiveRange: nil) as? NSParagraphStyle
+            let markerWidth = font.pointSize * SermonListKind.markerWidthRatio
+            let textStart = paragraphStyle?.firstLineHeadIndent ?? markerWidth
+            let markerX = lineRect.minX + max(0, textStart - markerWidth) + origin.x
+            let baselineY = lineRect.minY + location(forGlyphAt: firstGlyph).y + origin.y
+            let marker = kind.marker(at: kind.usesNumbering ? listIndex(in: storage, paragraph: paragraph, kind: kind) : 0)
+            (marker as NSString).draw(
+                at: CGPoint(x: markerX, y: baselineY - font.ascender),
+                withAttributes: [.font: font, .foregroundColor: color]
+            )
+        }
+    }
+
+    /// 같은 종류의 목록 문단이 바로 위에서 몇 개 이어졌는지(= 이 문단의 0부터 시작하는 순번).
+    /// 빈 문단이나 다른 종류/목록 아닌 문단을 만나면 끊긴다.
+    private func listIndex(in storage: NSTextStorage, paragraph: NSRange, kind: SermonListKind) -> Int {
+        let text = storage.string as NSString
+        var index = 0
+        var location = paragraph.location
+        while location > 0 {
+            let previous = text.paragraphRange(for: NSRange(location: location - 1, length: 0))
+            guard previous.length > 0, previous.location < location,
+                  (storage.attribute(.sermonListKind, at: previous.location, effectiveRange: nil) as? String) == kind.rawValue else { break }
+            index += 1
+            location = previous.location
+        }
+        return index
     }
 
     private func fillRect(_ rect: CGRect, color: PlatformColor) {
