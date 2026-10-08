@@ -988,7 +988,7 @@ struct DocumentsHomeView: View {
             words.contains { name.localizedCaseInsensitiveContains($0) } && seenTagNames.insert(name).inserted
         }
 
-        var titleFields = [document.originalFilename]
+        var titleFields = [document.displayTitle, document.originalFilename]
         if let category = document.category { titleFields.append(category.name) }
         if let ref = document.relatedChapterRef { titleFields.append(chapterLabel(for: ref)) }
         let filenameCount = words.filter { word in
@@ -1531,6 +1531,10 @@ private struct DocumentRowView: View {
     }
     @State private var isCategoryInputPresented = false
     @State private var categoryInput = ""
+    /// 제목 변경 알림창 — 행(컨텍스트 메뉴)과 문서 정보 팝오버가 각자 호스트에 붙인다(`DocumentTitleAlert` 참고).
+    @State private var isTitleInputPresented = false
+    @State private var isPopoverTitleInputPresented = false
+    @State private var titleInput = ""
     /// 문서 정보 팝오버(`documentInfoPopover`) 표시 여부 — `.contextMenu`의 "문서 정보"에서 켠다.
     @State private var isInfoPopoverPresented = false
     /// 관련 성경 장 편집 시트 상태. `chapterLinkBook`은 시트를 열 때 `document.relatedChapterRef`(있으면)
@@ -1605,6 +1609,7 @@ private struct DocumentRowView: View {
             }
         }
         .buttonStyle(.plain)
+        .modifier(DocumentTitleAlert(isPresented: $isTitleInputPresented, text: $titleInput, document: document, viewModel: viewModel))
         .contextMenu {
             // 길게 프레스(아이패드)/마우스 오른쪽 버튼(맥)으로 문서 정보 팝오버를 연다 — `.contextMenu`가
             // 두 제스처를 이미 제공하므로 별도 제스처 인식기가 필요 없다.
@@ -1612,6 +1617,13 @@ private struct DocumentRowView: View {
                 isInfoPopoverPresented = true
             } label: {
                 Label("문서 정보", systemImage: "info.circle")
+            }
+            // 파일명 대신 화면에 보일 제목을 직접 정한다(비우면 파일명으로 복귀).
+            Button {
+                titleInput = document.customTitle
+                isTitleInputPresented = true
+            } label: {
+                Label("제목 변경…", systemImage: "pencil")
             }
             Divider()
             if document.conversionStatus == .failedNeedsManual {
@@ -1674,7 +1686,7 @@ private struct DocumentRowView: View {
 
                 VStack(alignment: .leading, spacing: 2) {
                     // 검색 중이 아니면(highlightKeywords 비어 있음) 일반 Text와 같다.
-                    highlightedText(document.originalFilename, keywords: highlightKeywords)
+                    highlightedText(document.displayTitle, keywords: highlightKeywords)
                     HStack(spacing: 4) {
                         Text(document.originalFormat.rawValue.uppercased())
                         // 관련 성경 장이 설정돼 있으면 목록에서 바로 보이게 한다.
@@ -1854,12 +1866,26 @@ private struct DocumentRowView: View {
         ScrollView {
             VStack(alignment: .leading, spacing: 14) {
                 VStack(alignment: .leading, spacing: 4) {
-                    Text(document.originalFilename)
+                    Text(document.displayTitle)
                         .font(.headline)
                         .lineLimit(2)
+                    // 제목을 따로 정한 문서만 원본 파일명을 작게 함께 보인다.
+                    if document.displayTitle != document.originalFilename {
+                        Text("원본 파일명: \(document.originalFilename)")
+                            .font(.caption)
+                            .foregroundStyle(settings.bibleTextColor?.opacity(0.6) ?? Color.secondary)
+                            .lineLimit(2)
+                    }
                     Text(document.originalFormat.rawValue.uppercased())
                         .font(.caption)
                         .foregroundStyle(settings.bibleTextColor?.opacity(0.6) ?? Color.secondary)
+                    Button("제목 변경") {
+                        titleInput = document.customTitle
+                        isPopoverTitleInputPresented = true
+                    }
+                    .buttonStyle(.bordered)
+                    .controlSize(.small)
+                    .padding(.top, 4)
                 }
                 Divider()
                 LabeledContent("상태") {
@@ -1890,6 +1916,8 @@ private struct DocumentRowView: View {
         // 팝오버 배경도 테마(`settings`)를 적용한다 — 없으면 시스템 기본(라이트: 흰색) 배경이 드러난다.
         .background(settings.bibleBackgroundColor ?? Color.clear)
         .foregroundStyle(settings.bibleTextColor ?? Color.primary)
+        // 팝오버가 떠 있는 동안에는 팝오버 안에서 알림창을 띄운다(아래 `categoryMenu`의 "새 분류" 알림창과 같은 이유).
+        .modifier(DocumentTitleAlert(isPresented: $isPopoverTitleInputPresented, text: $titleInput, document: document, viewModel: viewModel))
     }
 
     /// 태그 이름 목록(읽기전용).
@@ -1905,6 +1933,25 @@ private struct DocumentRowView: View {
         case .convertingNative: return "추출 중"
         case .converted: return document.indexStatus == .indexed ? "완료" : "추출 중"
         case .failedNeedsManual: return "실패"
+        }
+    }
+}
+
+/// 문서 제목 변경 알림창. 컨텍스트 메뉴(행)와 문서 정보 팝오버가 같은 입력 상태(`text`)를 공유하며 각자 호스트에 붙여 쓴다.
+/// 비워서 저장하면 파일명 표시로 돌아간다(`DocumentsViewModel.setCustomTitle`).
+private struct DocumentTitleAlert: ViewModifier {
+    @Binding var isPresented: Bool
+    @Binding var text: String
+    let document: SourceDocument
+    let viewModel: DocumentsViewModel
+
+    func body(content: Content) -> some View {
+        content.alert("문서 제목", isPresented: $isPresented) {
+            TextField("제목", text: $text)
+            Button("취소", role: .cancel) {}
+            Button("저장") { viewModel.setCustomTitle(text, for: document) }
+        } message: {
+            Text("비워 두면 파일명 \"\(document.originalFilename)\"을(를) 씁니다.")
         }
     }
 }

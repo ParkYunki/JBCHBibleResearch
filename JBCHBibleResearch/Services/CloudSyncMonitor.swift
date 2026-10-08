@@ -13,10 +13,18 @@ final class CloudSyncMonitor {
     private(set) var remoteImportRevision = 0
 
     private var failures: [Int: String] = [:]
+    /// 설정 화면에서 원인을 볼 수 있도록 단계별 오류 원문(도메인/코드/하위 오류)을 보관한다. 화면의 짧은 안내문
+    /// (`errorMessage`)은 시스템의 일반 문구("작업을 완료할 수 없습니다")만 담는 경우가 많아 원인을 알 수 없다.
+    private var failureDetails: [Int: String] = [:]
     @ObservationIgnored private var observer: NSObjectProtocol?
 
     var errorMessage: String? {
         failures.keys.sorted().first.flatMap { failures[$0] }
+    }
+
+    /// `errorMessage`와 같은 단계의 오류 원문. 설정 > 기본 > iCloud 동기화에 표시한다.
+    var errorDetail: String? {
+        failures.keys.sorted().first.flatMap { failureDetails[$0] }
     }
 
     private init() {}
@@ -46,6 +54,7 @@ final class CloudSyncMonitor {
         if event.succeeded {
             // import 성공으로 export 실패를 숨기지 않는다. 같은 단계가 성공해야 해제한다.
             failures.removeValue(forKey: phase)
+            failureDetails.removeValue(forKey: phase)
             if event.type == .import {
                 // SwiftData가 mainContext에 변경을 반영할 기회를 준 뒤 화면에 알린다.
                 DispatchQueue.main.async {
@@ -57,6 +66,8 @@ final class CloudSyncMonitor {
 
         let details = event.error.map { Self.errorDetails($0 as NSError) } ?? "알 수 없는 오류"
         print("[CloudSyncMonitor] \(event.type) 실패: \(details)")
+        // 원문이 매우 길 수 있어(userInfo 전체 덤프) 화면용으로는 앞부분만 둔다. 전체는 위 콘솔 로그에 남는다.
+        failureDetails[phase] = "\(event.type) 단계 오류\n" + String(details.prefix(1500))
         if details.contains("production schema") {
             failures[phase] = "서버의 운영 스키마가 앱의 데이터 모델과 일치하지 않습니다. 개발자가 CloudKit 스키마를 운영 환경에 배포해야 합니다."
         } else {

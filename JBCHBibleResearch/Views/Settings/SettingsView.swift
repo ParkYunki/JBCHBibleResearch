@@ -285,6 +285,28 @@ private struct GeneralSettingsTab: View {
             }
             .settingsRowBackground()
 
+            // 동기화 실패 알림(`ContentView`)은 한 번만 뜨므로, 현재 상태와 오류 원문은 여기서 다시 볼 수 있다.
+            Section {
+                if let message = CloudSyncMonitor.shared.errorMessage {
+                    Label("동기화 실패", systemImage: "exclamationmark.icloud")
+                        .foregroundStyle(.orange)
+                    Text(message)
+                        .font(.caption)
+                    if let detail = CloudSyncMonitor.shared.errorDetail {
+                        Text(detail)
+                            .font(.caption2)
+                            .foregroundStyle(.secondary)
+                            .textSelection(.enabled)
+                    }
+                } else {
+                    Label("이번 실행에서 확인된 동기화 오류 없음", systemImage: "checkmark.icloud")
+                        .foregroundStyle(.secondary)
+                }
+            } header: {
+                Label("iCloud 동기화", systemImage: "icloud")
+            }
+            .settingsRowBackground()
+
             // "기본 성경 번역본" 피커는 두지 않는다 — 성경 조회 기본값은 `TranslationsSettingsView`의
             // 통합 번역본 목록(사용 중 + 순서)이 전담한다. `UserSettingsStore.defaultTranslationCode`와
             // 그 값을 읽는 폴백 경로(`ActiveTranslationResolver`/`TranslationsSettingsView.seedActiveTranslationsIfNeeded`)는

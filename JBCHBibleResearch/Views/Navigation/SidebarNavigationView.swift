@@ -406,7 +406,7 @@ struct SidebarNavigationView: View {
         }
         var title: String {
             switch kind {
-            case .document(let document): return document.originalFilename
+            case .document(let document): return document.displayTitle
             case .memo(let memo):
                 let bookName = BooksProvider.shared.book(id: memo.bookId)?.nameKo ?? "성경"
                 // 절 단위 메모(`UserMemo.verse`)는 아래 다른 케이스와 같은 "장:절" 표기를 쓴다.

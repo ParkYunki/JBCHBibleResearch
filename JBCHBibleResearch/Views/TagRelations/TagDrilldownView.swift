@@ -58,13 +58,13 @@ struct TagDrilldownView: View {
                             NavigationLink {
                                 DocumentViewerWindowContent(documentID: item.document.persistentModelID)
                             } label: {
-                                Text("\(item.document.originalFilename) — p.\(item.anchor.pageNumber + 1)")
+                                Text("\(item.document.displayTitle) — p.\(item.anchor.pageNumber + 1)")
                             }
                         } else {
                             Button {
                                 openWindow(id: "document-viewer", value: item.document.persistentModelID)
                             } label: {
-                                Text("\(item.document.originalFilename) — p.\(item.anchor.pageNumber + 1)")
+                                Text("\(item.document.displayTitle) — p.\(item.anchor.pageNumber + 1)")
                             }
                             .buttonStyle(.plain)
                         }
@@ -82,13 +82,13 @@ struct TagDrilldownView: View {
                             NavigationLink {
                                 DocumentViewerWindowContent(documentID: item.document.persistentModelID)
                             } label: {
-                                Text(item.document.originalFilename)
+                                Text(item.document.displayTitle)
                             }
                         } else {
                             Button {
                                 openWindow(id: "document-viewer", value: item.document.persistentModelID)
                             } label: {
-                                Text(item.document.originalFilename)
+                                Text(item.document.displayTitle)
                             }
                             .buttonStyle(.plain)
                         }

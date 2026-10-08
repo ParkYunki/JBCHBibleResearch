@@ -156,7 +156,7 @@ struct DocumentViewerView: View {
             Divider()
             documentTagSection
         }
-        .navigationTitle(document.originalFilename)
+        .navigationTitle(document.displayTitle)
         .onAppear(perform: setUpIfNeeded)
         .sheet(item: $drilldownTag) { tag in
             TagDrilldownView(tag: tag)

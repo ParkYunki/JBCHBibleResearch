@@ -1259,7 +1259,7 @@ final class SearchViewModel {
                 words.contains { name.localizedCaseInsensitiveContains($0) } && seenTagNames.insert(name).inserted
             }
 
-            var titleFields = [document.originalFilename]
+            var titleFields = [document.displayTitle, document.originalFilename]
             if let category = document.category { titleFields.append(category.name) }
             let titleCount = words.filter { word in titleFields.contains { $0.localizedCaseInsensitiveContains(word) } }.count
 

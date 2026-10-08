@@ -1881,9 +1881,9 @@ private struct SearchContentView: View {
 
     private func documentTitle(_ result: DocumentSearchResult) -> String {
         if let page = result.pageNumber {
-            return "\(result.document.originalFilename) p.\(page + 1)"
+            return "\(result.document.displayTitle) p.\(page + 1)"
         }
-        return result.document.originalFilename
+        return result.document.displayTitle
     }
 
     // MARK: - 내 설교(Sermon)

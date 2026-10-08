@@ -102,6 +102,18 @@ public enum ConverterUsed: String, Codable, Sendable, CaseIterable {
 public final class SourceDocument {
     public var id: UUID = UUID()
     public var originalFilename: String = ""
+
+    /// 사용자가 직접 정한 표시용 제목. 빈 문자열이면 `originalFilename`을 쓴다(`displayTitle`).
+    /// ⚠️ `originalFilename`은 변환 PDF 이름·오류 로그 등에 쓰이므로 바꾸지 않고 별도 필드로 둔다.
+    /// CloudKit 호환을 위해 기본값이 있는 비옵셔널 문자열이다(기존 문서는 빈 문자열).
+    public var customTitle: String = ""
+
+    /// 화면에 보일 제목 — 사용자 지정 제목이 있으면 그것, 없으면 파일명.
+    public var displayTitle: String {
+        let trimmed = customTitle.trimmingCharacters(in: .whitespacesAndNewlines)
+        return trimmed.isEmpty ? originalFilename : trimmed
+    }
+
     public var originalFormat: OriginalFormat = OriginalFormat.pdf
 
     /// security-scoped bookmark 원시 데이터. ⚠️ 이 북마크는 생성한 기기에서만 안정적으로

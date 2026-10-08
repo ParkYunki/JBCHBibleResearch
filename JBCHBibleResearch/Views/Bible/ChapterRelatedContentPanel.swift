@@ -527,7 +527,7 @@ struct ChapterRelatedContentPanel: View {
     private func documentRowLabel(_ document: SourceDocument) -> some View {
         VStack(alignment: .leading, spacing: 6) {
             originBadge("이 장에 연결됨", systemImage: "paperclip")
-            Label(document.originalFilename, systemImage: "doc.text")
+            Label(document.displayTitle, systemImage: "doc.text")
                 .font(.callout)
                 .foregroundStyle(settings.bibleTextColor ?? .primary)
                 .lineLimit(2)

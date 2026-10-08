@@ -182,6 +182,15 @@ final class DocumentsViewModel {
         try? modelContext.save()
     }
 
+    /// 사용자 지정 제목 저장. 앞뒤 공백을 지우고, 비어 있으면 빈 문자열(= 파일명 표시)로 되돌린다.
+    /// 파일명(`originalFilename`)은 바꾸지 않는다. 이산적 액션이라 `setCategory`와 같은 원칙(즉시 저장).
+    func setCustomTitle(_ title: String, for document: SourceDocument) {
+        let trimmed = title.trimmingCharacters(in: .whitespacesAndNewlines)
+        guard document.customTitle != trimmed else { return }
+        document.customTitle = trimmed
+        try? modelContext.save()
+    }
+
     /// 문서 고정 토글. 이산적 액션이라 `setCategory`와 같은 원칙(즉시 저장).
     func togglePin(_ document: SourceDocument) {
         document.isPinned.toggle()

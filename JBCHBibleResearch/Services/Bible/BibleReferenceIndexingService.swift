@@ -109,6 +109,83 @@ enum BibleReferenceIndexingService {
         "\(bookId)#\(chapter)#\(verse ?? -1)#\(searchText)"
     }
 
+    // MARK: - 미리보기(snippet) 형식 변경 시 1회 갱신 — 2026-10-08 추가
+
+    /// 미리보기 형식 버전 — `BibleReferenceExtractor.snippet` 형식을 바꾸면 올린다(기기별 UserDefaults에 기록).
+    static let snippetFormatVersion = 2
+    private static let snippetFormatVersionKey = "verseMentionSnippetFormatVersion"
+
+    /// 앱 시작 시 호출 — 이 기기에서 아직 현재 형식으로 갱신한 적이 없으면 한 번만 `refreshSnippets`를 돌린다.
+    /// 저장에 실패하면 버전을 기록하지 않아 다음 실행에 다시 시도한다.
+    static func migrateSnippetsIfNeeded(context: ModelContext) {
+        let defaults = UserDefaults.standard
+        guard defaults.integer(forKey: snippetFormatVersionKey) < snippetFormatVersion else { return }
+        let updated = refreshSnippets(context: context)
+        guard updated >= 0 else { return }
+        defaults.set(snippetFormatVersion, forKey: snippetFormatVersionKey)
+        if updated > 0 { print("[BibleReferenceIndexing] 미리보기 \(updated)건 갱신") }
+    }
+
+    /// 기존 `VerseMention`의 snippet만 현재 형식으로 다시 만든다. 레코드를 지우고 다시 넣지 않고 같은 레코드의 snippet만
+    /// 바꾼다(CloudKit 동기화로 다른 기기에 중복 레코드가 생기지 않게). 소스 본문에서 같은 표기를
+    /// (책·장·절·표기 문자열이 같은 것끼리 순서대로) 찾아 짝지으며, 본문이 그 뒤 바뀌어 짝이 없는 레코드는 건드리지 않는다.
+    /// - Returns: 바뀐 레코드 수. 저장에 실패하면 -1.
+    @discardableResult
+    static func refreshSnippets(context: ModelContext) -> Int {
+        guard let allMentions = try? context.fetch(FetchDescriptor<VerseMention>()), !allMentions.isEmpty else { return 0 }
+        let bySource = Dictionary(grouping: allMentions) { "\($0.sourceTypeRaw)|\($0.sourceId)" }
+
+        // 소스별 본문 — 인덱스가 있는 종류만 필요한 만큼 읽는다.
+        var textBySource: [String: String] = [:]
+        let neededTypes = Set(allMentions.map(\.sourceType))
+        if neededTypes.contains(.memo), let memos = try? context.fetch(FetchDescriptor<UserMemo>()) {
+            for memo in memos { textBySource["\(VerseMentionSourceType.memo.rawValue)|\(memo.id.uuidString)"] = memo.contentText }
+        }
+        if neededTypes.contains(.wordSummary), let summaries = try? context.fetch(FetchDescriptor<VerseSummary>()) {
+            for summary in summaries { textBySource["\(VerseMentionSourceType.wordSummary.rawValue)|\(summary.id.uuidString)"] = summary.contentText }
+        }
+        if neededTypes.contains(.sermon), let sermons = try? context.fetch(FetchDescriptor<Sermon>()) {
+            for sermon in sermons { textBySource["\(VerseMentionSourceType.sermon.rawValue)|\(sermon.id.uuidString)"] = sermon.contentText }
+        }
+        if neededTypes.contains(.document), let documents = try? context.fetch(FetchDescriptor<SourceDocument>()) {
+            for document in documents where document.indexStatus == .indexed {
+                let lines = (document.documentTexts ?? []).sorted {
+                    $0.pageNumber != $1.pageNumber ? $0.pageNumber < $1.pageNumber : $0.lineIndex < $1.lineIndex
+                }
+                textBySource["\(VerseMentionSourceType.document.rawValue)|\(document.id.uuidString)"] = lines.map(\.lineText).joined(separator: "\n")
+            }
+        }
+
+        var changed = 0
+        for (sourceKey, mentions) in bySource {
+            guard let text = textBySource[sourceKey], !text.isEmpty else { continue }
+            var snippetsByFingerprint: [String: [String]] = [:]
+            for match in BibleReferenceExtractor.extract(from: text) {
+                let key = fingerprint(bookId: match.bookId, chapter: match.chapter, verse: match.verse, searchText: match.searchText)
+                snippetsByFingerprint[key, default: []].append(BibleReferenceExtractor.snippet(for: match, in: text))
+            }
+            var cursorByFingerprint: [String: Int] = [:]
+            for mention in mentions.sorted(by: { $0.createdAt < $1.createdAt }) {
+                let key = fingerprint(bookId: mention.bookId, chapter: mention.chapter, verse: mention.verse, searchText: mention.searchText)
+                guard let candidates = snippetsByFingerprint[key] else { continue }
+                let cursor = cursorByFingerprint[key, default: 0]
+                guard cursor < candidates.count else { continue }
+                cursorByFingerprint[key] = cursor + 1
+                if mention.snippet != candidates[cursor] {
+                    mention.snippet = candidates[cursor]
+                    changed += 1
+                }
+            }
+        }
+        guard changed > 0 else { return 0 }
+        do {
+            try context.save()
+        } catch {
+            return -1
+        }
+        return changed
+    }
+
     // MARK: - 이벤트 기반 재계산(소스 하나) — 2026-08-11 추가
 
     /// 메모 하나를 저장한 직후 호출. 그 메모의 기존 인덱스를 지우고 지금

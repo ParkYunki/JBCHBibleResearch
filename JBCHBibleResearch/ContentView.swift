@@ -18,6 +18,9 @@ struct ContentView: View {
     // "테마 색상"의 "자동" 모드가 유효한 라이트/다크 상태를 따라가는 데 필요.
     @Environment(\.colorScheme) private var systemColorScheme
     @State private var bootstrapErrorDescription: String?
+    /// 사용자가 이미 확인한(닫은) 동기화 실패 문구. 같은 문구는 다시 알림을 띄우지 않는다.
+    /// 실패가 해소돼 문구가 nil이 되면 비워, 나중에 같은 실패가 다시 생기면 알림을 다시 띄운다.
+    @State private var dismissedSyncMessage: String?
 
     /// 화면 모드가 라이트/다크를 강제하고 있으면 그 값을, "시스템 따름"이면
     /// 실제 시스템 값(`systemColorScheme`)을 돌려준다 — "테마 색상 자동"이 따라야 할 건
@@ -28,18 +31,24 @@ struct ContentView: View {
 
     var body: some View {
         RootView()
-            .safeAreaInset(edge: .bottom) {
-                if let message = CloudSyncMonitor.shared.errorMessage {
-                    VStack(alignment: .leading, spacing: 4) {
-                        Label("iCloud 동기화 실패", systemImage: "exclamationmark.icloud")
-                            .font(.callout.bold())
-                        Text(message)
-                            .font(.caption)
-                    }
-                    .frame(maxWidth: .infinity, alignment: .leading)
-                    .padding()
-                    .background(.regularMaterial)
+            // 동기화 실패는 화면 아래에 고정 문구로 띄우지 않고 닫을 수 있는 알림으로 한 번만 알린다. 예전 하단 고정 문구
+            // (`safeAreaInset(edge: .bottom)`)는 아이폰 하단 탭바를 가리고 닫을 수 없어 탭 이동을 막았다.
+            // 상태·오류 원문은 설정 > 기본 > iCloud 동기화에서 확인한다.
+            .alert("iCloud 동기화 실패", isPresented: Binding(
+                get: {
+                    guard let message = CloudSyncMonitor.shared.errorMessage else { return false }
+                    return message != dismissedSyncMessage
+                },
+                set: { isPresented in
+                    if !isPresented { dismissedSyncMessage = CloudSyncMonitor.shared.errorMessage }
                 }
+            )) {
+                Button("확인", role: .cancel) {}
+            } message: {
+                Text("\(CloudSyncMonitor.shared.errorMessage ?? "")\n\n자세한 상태는 설정 > 기본 > iCloud 동기화에서 확인할 수 있습니다.")
+            }
+            .onChange(of: CloudSyncMonitor.shared.errorMessage) { _, newValue in
+                if newValue == nil { dismissedSyncMessage = nil }
             }
             // `colorSchemePreference`를 `RootView`가 아니라 여기서 읽어야 한다. 값을 읽는 뷰가
             // `TabView`를 직접 만들면, 값이 바뀔 때마다 body가 다시 실행되어 `TabView`가 통째로
@@ -96,6 +105,8 @@ struct ContentView: View {
                     // 동기화 중 같은 id로 따로 생긴 말씀 요약 중복 중, 내용이 완전히 같은 것만 삭제한다(태그는 남길 쪽으로 옮김).
                     let removedSummaries = VerseSummaryDeduplication.deduplicate(in: modelContext)
                     if removedSummaries > 0 { print("[ContentView] 중복 말씀 요약 \(removedSummaries)건 정리") }
+                    // 관련 내용 미리보기를 "구절 표기 앞뒤 글자" 형식으로 바꾼 뒤 이 기기에서 처음 실행할 때 기존 미리보기를 한 번 갱신한다.
+                    BibleReferenceIndexingService.migrateSnippetsIfNeeded(context: modelContext)
                     // 관주/난외주/한자주석/한자사전은 사용자가 편집하지 않는 정적 참조 데이터라
                     // CloudKit 동기화 대상이 아니며, 번들 `Resources/ReferenceData.sqlite`(읽기 전용)에서
                     // 직접 읽는다(`ReferenceDataProvider`/`ReferenceDataStore`). 예전에 SwiftData로

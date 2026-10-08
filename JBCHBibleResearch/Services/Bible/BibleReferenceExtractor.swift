@@ -269,25 +269,24 @@ enum BibleReferenceExtractor {
         return results
     }
 
-    /// 사이드바/팝오버 미리보기용 — 매치 위치를 포함한 줄과 앞뒤 한 줄씩(최대 3줄)을
-    /// 잘라 돌려준다.
+    /// 미리보기에서 구절 표기 앞/뒤로 남기는 글자 수(Character 기준).
+    /// ⚠️ 연구문서(HWP 등)는 한 "줄"이 페이지 한 장 분량(1,000자 이상)일 수 있어 줄 단위로 자르면 표기가 화면 밖으로 밀린다.
+    /// 앞은 짧게(화면 첫 줄 안에 표기가 보이게), 뒤는 넉넉히 둔다. 값을 바꾸면 `BibleReferenceIndexingService.snippetFormatVersion`도 올려
+    /// 기존 미리보기가 한 번 다시 만들어지게 한다.
+    static let snippetLeadingCharacters = 30
+    static let snippetTrailingCharacters = 120
+
+    /// 사이드바/팝오버 미리보기용 — 매치된 표기 앞 `snippetLeadingCharacters`자, 뒤 `snippetTrailingCharacters`자를 잘라
+    /// 돌려준다. 연속 공백/줄바꿈은 공백 하나로 합치고, 앞뒤가 잘렸으면 "…"를 붙인다.
+    /// `match.range`는 `text`의 인덱스라 그대로 쓸 수 있다.
     static func snippet(for match: Match, in text: String) -> String {
-        let lines = text.components(separatedBy: .newlines)
-        guard !lines.isEmpty else { return match.searchText }
-        let offset = text.distance(from: text.startIndex, to: match.range.lowerBound)
-        var runningLength = 0
-        var lineIndex = 0
-        for (index, line) in lines.enumerated() {
-            let lineLength = line.count + 1 // 개행 포함
-            if offset < runningLength + lineLength {
-                lineIndex = index
-                break
-            }
-            runningLength += lineLength
-        }
-        let start = max(0, lineIndex - 1)
-        let end = min(lines.count - 1, lineIndex + 1)
-        let snippet = lines[start...end].joined(separator: " ").trimmingCharacters(in: .whitespacesAndNewlines)
-        return snippet.isEmpty ? match.searchText : snippet
+        let lower = text.index(match.range.lowerBound, offsetBy: -snippetLeadingCharacters, limitedBy: text.startIndex) ?? text.startIndex
+        let upper = text.index(match.range.upperBound, offsetBy: snippetTrailingCharacters, limitedBy: text.endIndex) ?? text.endIndex
+        let collapsed = String(text[lower..<upper])
+            .components(separatedBy: .whitespacesAndNewlines)
+            .filter { !$0.isEmpty }
+            .joined(separator: " ")
+        guard !collapsed.isEmpty else { return match.searchText }
+        return (lower > text.startIndex ? "…" : "") + collapsed + (upper < text.endIndex ? "…" : "")
     }
 }
