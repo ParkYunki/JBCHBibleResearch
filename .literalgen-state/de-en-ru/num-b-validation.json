@@ -1,0 +1,32 @@
+{
+  "files_checked": {
+    "de": 20,
+    "en": 13,
+    "ru": 20
+  },
+  "rows_checked": {
+    "de": 412,
+    "en": 252,
+    "ru": 412
+  },
+  "qa_rows": 66,
+  "qa_by_language": {
+    "de": 21,
+    "ru": 42,
+    "en": 3
+  },
+  "errors": [],
+  "literal_quotes": {
+    "de": {
+      "open": 111,
+      "close": 111
+    },
+    "ru": {
+      "open": 112,
+      "close": 112
+    }
+  },
+  "nested_quote_errors": [],
+  "scope": "de/ru NUM012–024; en NUM012–019",
+  "outputs_directly_modified": false
+}

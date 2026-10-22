@@ -1,0 +1,434 @@
+[
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/06_JOS/JOS_017.tsv",
+    "verse": 2,
+    "old_row": "2\tUnd es fiel den übrigen Söhnen Manasses nach ihren Sippen zu: den Söhnen Abiesers und den Söhnen Heleks und den Söhnen Asriels und den Söhnen Sichems und den Söhnen Hephers und den Söhnen Semidas. Dies sind die männlichen Söhne Manasses, des Sohnes Josephs, nach ihren Sippen.\tBewahrt die wiederholten Söhne und die übrigen.",
+    "new_row": "2\tUnd es fiel den übrigen Söhnen Manasses nach ihren Sippen zu: den Söhnen Abiesers und den Söhnen Heleks und den Söhnen Asriels und den Söhnen Sichems und den Söhnen Hephers und den Söhnen Semidas. Dies sind die männlichen Söhne Manasses, des Sohnes Josephs, nach ihren Sippen.\tNah am Hebräischen."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/06_JOS/JOS_017.tsv",
+    "verse": 2,
+    "old_row": "2\tИ он был остальным сынам Манассии по их родам: сынам Авиезера и сынам Хелека и сынам Асриила и сынам Шехема и сынам Хефера и сынам Шемиды. Это сыновья Манассии, сына Иосифа, мужского пола, по их родам.\tПовторяет сыновей.",
+    "new_row": "2\tИ он был остальным сынам Манассии по их родам: сынам Авиезера и сынам Хелека и сынам Асриила и сынам Шехема и сынам Хефера и сынам Шемиды. Это сыновья Манассии, сына Иосифа, мужского пола, по их родам.\tБлизко к еврейскому."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/06_JOS/JOS_017.tsv",
+    "verse": 11,
+    "old_row": "11\tUnd Manasse gehörten in Isaschar und in Asser Beth-Sean und seine Töchter und Jibleam und seine Töchter und die Bewohner von Dor und seine Töchter und die Bewohner von Endor und seine Töchter und die Bewohner von Thaanach und seine Töchter und die Bewohner von Megiddo und seine Töchter, die drei Höhenzüge.\tBewahrt die Töchter der Städte und die Einwohner.",
+    "new_row": "11\tUnd Manasse gehörten in Isaschar und in Asser Beth-Sean und seine Töchter und Jibleam und seine Töchter und die Bewohner von Dor und seine Töchter und die Bewohner von Endor und seine Töchter und die Bewohner von Thaanach und seine Töchter und die Bewohner von Megiddo und seine Töchter, die drei Höhenzüge.\tDie Städte haben bildlich „Töchter“; am Ende stehen „drei Höhenzüge“, nicht „der dritte Teil Nepheths“."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/06_JOS/JOS_017.tsv",
+    "verse": 11,
+    "old_row": "11\tИ Манассии принадлежали в Иссахаре и в Асире Беф-Сан и его дочери и Ивлеам и его дочери и жители Дора и его дочери и жители Ен-Дора и его дочери и жители Фаанаха и его дочери и жители Мегиддона и его дочери, три возвышенности.\tСохраняет дочерей городов.",
+    "new_row": "11\tИ Манассии принадлежали в Иссахаре и в Асире Беф-Сан и его дочери и Ивлеам и его дочери и жители Дора и его дочери и жители Ен-Дора и его дочери и жители Фаанаха и его дочери и жители Мегиддона и его дочери, три возвышенности.\tЗависимые поселения названы «дочерьми» городов; в конце названы три возвышенности, а не «третья часть Нафефа с сёлами»."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/06_JOS/JOS_017.tsv",
+    "verse": 15,
+    "old_row": "15\tUnd Josua sagte zu ihnen: „Wenn du ein zahlreiches Volk bist, steige für dich in den Wald hinauf und rode dir dort im Land des Pheresiters und der Rephaiter, wenn das Gebirge Ephraim dir zu eng ist.“\tBewahrt die Bedingung und den Pheresiter im Singular.",
+    "new_row": "15\tUnd Josua sagte zu ihnen: „Wenn du ein zahlreiches Volk bist, steige für dich in den Wald hinauf und rode dir dort im Land des Pheresiters und der Rephaiter, wenn das Gebirge Ephraim dir zu eng ist.“\tDer Wald soll im Land des Pheresiters gerodet werden; die Vorlage verbindet das Umhauen mit den Pheresitern und Riesen. Pheresiter steht im kollektiven Singular."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/en/06_JOS/JOS_017.tsv",
+    "verse": 18,
+    "old_row": "18\t=\tRetains the collective singular Canaanite and his outgoings.",
+    "new_row": "18\t=\tThe Hebrew uses the collective singular Canaanite and describes the mountain’s limits as its “outgoings”; BSB uses plural “Canaanites” and “farthest limits”."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/06_JOS/JOS_018.tsv",
+    "verse": 28,
+    "old_row": "28\tи Цела, Елеф и иевусеянин, это Иерусалим, Гивеаф, Кириаф, четырнадцать городов и их села. Это наследие сынов Вениамина по их родам.\tБлизко к еврейскому.",
+    "new_row": "28\tи Цела, Елеф и иевусеянин, это Иерусалим, Гивеаф, Кириаф, четырнадцать городов и их села. Это наследие сынов Вениамина по их родам.\tИевусеянин назван собирательно в единственном числе; перевод имеет название «Иевус»."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/06_JOS/JOS_020.tsv",
+    "verse": 5,
+    "old_row": "5\tUnd wenn der Bluträcher ihm nachjagt, sollen sie den Totschläger nicht in seine Hand ausliefern; denn ohne Wissen hat er seinen Nächsten erschlagen, und er hat ihn nicht seit gestern und vorgestern gehasst.\t„Hand“ steht im Singular. Die frühere Feindschaft wird wörtlich mit „gestern und vorgestern“ bezeichnet.",
+    "new_row": "5\tUnd wenn der Bluträcher ihm nachjagt, sollen sie den Totschläger nicht in seine Hand ausliefern; denn ohne Wissen hat er seinen Nächsten erschlagen, und er hat ihn nicht schon gestern und vorgestern gehasst.\t„Hand“ steht im Singular. Die frühere Feindschaft wird wörtlich mit „gestern und vorgestern“ bezeichnet."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/06_JOS/JOS_020.tsv",
+    "verse": 5,
+    "old_row": "5\tИ если мститель за кровь погонится за ним, то они не выдадут убийцу в его руку, ибо он без знания поразил своего ближнего и не ненавидел его со вчерашнего и третьего дня.\t«Рука» стоит в единственном числе; перевод употребляет множественное «руки».",
+    "new_row": "5\tИ если мститель за кровь погонится за ним, то они не выдадут убийцу в его руку, ибо он без знания поразил своего ближнего и не ненавидел его ни вчера, ни третьего дня.\t«Рука» стоит в единственном числе; перевод употребляет множественное «руки»."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/06_JOS/JOS_021_1.tsv",
+    "verse": 11,
+    "old_row": "11\tUnd sie gaben ihnen Kirjath-Arba, des Vaters Enaks, das ist Hebron, auf dem Gebirge Juda, und seine Weideplätze rings darum.\tNah am Hebräischen.",
+    "new_row": "11\tUnd sie gaben ihnen Kirjath-Arba – Arba war der Vater Enaks –, das ist Hebron, auf dem Gebirge Juda, und sein Weideland rings darum.\tDie Flächen bei den Städten sind Weideplätze, nicht städtische „Vorstädte“."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/06_JOS/JOS_021_1.tsv",
+    "verse": 14,
+    "old_row": "14\tund Jatthir und seine Weideplätze und Esthemoa und seine Weideplätze\tNah am Hebräischen.",
+    "new_row": "14\tund Jatthir und sein Weideland und Esthemoa und sein Weideland\tDie Flächen bei den Städten sind Weideplätze, nicht städtische „Vorstädte“."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/06_JOS/JOS_021_1.tsv",
+    "verse": 15,
+    "old_row": "15\tund Holon und seine Weideplätze und Debir und seine Weideplätze\tNah am Hebräischen.",
+    "new_row": "15\tund Holon und sein Weideland und Debir und sein Weideland\tDie Flächen bei den Städten sind Weideplätze, nicht städtische „Vorstädte“."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/06_JOS/JOS_021_1.tsv",
+    "verse": 16,
+    "old_row": "16\tund Ain und seine Weideplätze und Jutta und seine Weideplätze, Beth-Semes und seine Weideplätze: neun Städte von diesen beiden Stämmen.\tNah am Hebräischen.",
+    "new_row": "16\tund Ain und sein Weideland und Jutta und sein Weideland, Beth-Semes und sein Weideland: neun Städte von diesen beiden Stämmen.\tDie Flächen bei den Städten sind Weideplätze, nicht städtische „Vorstädte“."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/06_JOS/JOS_021_1.tsv",
+    "verse": 19,
+    "old_row": "19\tAlle Städte der Söhne Aarons, der Priester, waren dreizehn Städte und ihre Weideplätze.\tNah am Hebräischen.",
+    "new_row": "19\tAlle Städte der Söhne Aarons, der Priester, waren dreizehn Städte und ihre Weideplätze.\tDie Flächen bei den Städten sind Weideplätze, nicht städtische „Vorstädte“."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/06_JOS/JOS_021_1.tsv",
+    "verse": 21,
+    "old_row": "21\tUnd sie gaben ihnen die Zufluchtsstadt des Totschlägers, Sichem und seine Weideplätze auf dem Gebirge Ephraim, und Geser und seine Weideplätze\tNah am Hebräischen.",
+    "new_row": "21\tUnd sie gaben ihnen die Zufluchtsstadt des Totschlägers, Sichem und sein Weideland auf dem Gebirge Ephraim, und Geser und sein Weideland\tDie Flächen bei den Städten sind Weideplätze, nicht städtische „Vorstädte“."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/06_JOS/JOS_021_1.tsv",
+    "verse": 25,
+    "old_row": "25\tUnd von der Hälfte des Stammes Manasse Thaanach und seine Weideplätze und Gath-Rimmon und seine Weideplätze: zwei Städte.\tNah am Hebräischen.",
+    "new_row": "25\tUnd von der Hälfte des Stammes Manasse Thaanach und sein Weideland und Gath-Rimmon und sein Weideland: zwei Städte.\tDie Flächen bei den Städten sind Weideplätze, nicht städtische „Vorstädte“."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/06_JOS/JOS_021_1.tsv",
+    "verse": 26,
+    "old_row": "26\tAlle Städte waren zehn und ihre Weideplätze für die Sippen der übrigen Söhne Kahaths.\tNah am Hebräischen.",
+    "new_row": "26\tDie Gesamtzahl der Städte war zehn, dazu ihre Weideplätze, für die Sippen der übrigen Söhne Kahaths.\tDie Flächen bei den Städten sind Weideplätze, nicht städtische „Vorstädte“."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/06_JOS/JOS_021_1.tsv",
+    "verse": 27,
+    "old_row": "27\tUnd den Söhnen Gersons aus den Sippen der Leviten gab man vom halben Stamm Manasse die Zufluchtsstadt des Totschlägers, Golan in Basan und seine Weideplätze, und Beesthra und seine Weideplätze: zwei Städte.\tNah am Hebräischen.",
+    "new_row": "27\tUnd den Söhnen Gersons aus den Sippen der Leviten gab man vom halben Stamm Manasse die Zufluchtsstadt des Totschlägers, Golan in Basan und sein Weideland, und Beesthra und sein Weideland: zwei Städte.\tDie Flächen bei den Städten sind Weideplätze, nicht städtische „Vorstädte“."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/06_JOS/JOS_021_2.tsv",
+    "verse": 32,
+    "old_row": "32\tUnd vom Stamm Naphthali die Zufluchtsstadt des Totschlägers, Kedes in Galiläa und seine Weideplätze, und Hammoth-Dor und seine Weideplätze und Karthan und seine Weideplätze: drei Städte.\tNah am Hebräischen.",
+    "new_row": "32\tUnd vom Stamm Naphthali die Zufluchtsstadt des Totschlägers, Kedes in Galiläa und sein Weideland, und Hammoth-Dor und sein Weideland und Karthan und sein Weideland: drei Städte.\tDie Flächen bei den Städten sind Weideplätze, nicht städtische „Vorstädte“."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/06_JOS/JOS_021_2.tsv",
+    "verse": 41,
+    "old_row": "41\tAlle Städte der Leviten mitten im Besitz der Söhne Israels waren achtundvierzig Städte und ihre Weideplätze.\tNah am Hebräischen.",
+    "new_row": "41\tAlle Städte der Leviten mitten im Besitz der Söhne Israels waren achtundvierzig Städte und ihre Weideplätze.\tDie Flächen bei den Städten sind Weideplätze, nicht städtische „Vorstädte“."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/06_JOS/JOS_021_1.tsv",
+    "verse": 11,
+    "old_row": "11\tИ дали им Кириаф-Арбы, отца Енакова, это Хеврон на горе Иудиной, и его пастбища вокруг него.\tБлизко к еврейскому.",
+    "new_row": "11\tИ дали им Кириаф-Арбы — Арба был отцом Енака, — это Хеврон на горе Иудиной, и его пастбище вокруг него.\tУчастки при городах названы пастбищами, а не городскими «предместьями»."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/06_JOS/JOS_021_1.tsv",
+    "verse": 13,
+    "old_row": "13\tИ сынам Аарона священника дали город убежища для убийцы, Хеврон и его пастбища, и Ливну и её пастбища,\tБлизко к еврейскому.",
+    "new_row": "13\tИ сынам Аарона священника дали город убежища для убийцы, Хеврон и его пастбище, и Ливну и её пастбище,\tУчастки при городах названы пастбищами, а не городскими «предместьями»."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/06_JOS/JOS_021_1.tsv",
+    "verse": 14,
+    "old_row": "14\tи Иаттир и его пастбища, и Ештемо и его пастбища,\tБлизко к еврейскому.",
+    "new_row": "14\tи Иаттир и его пастбище, и Ештемо и его пастбище,\tУчастки при городах названы пастбищами, а не городскими «предместьями»."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/06_JOS/JOS_021_1.tsv",
+    "verse": 15,
+    "old_row": "15\tи Холон и его пастбища, и Давир и его пастбища,\tБлизко к еврейскому.",
+    "new_row": "15\tи Холон и его пастбище, и Давир и его пастбище,\tУчастки при городах названы пастбищами, а не городскими «предместьями»."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/06_JOS/JOS_021_1.tsv",
+    "verse": 16,
+    "old_row": "16\tи Аин и его пастбища, и Ютту и её пастбища, Беф-Шемеш и его пастбища: девять городов от этих двух колен.\tБлизко к еврейскому.",
+    "new_row": "16\tи Аин и его пастбище, и Ютту и её пастбище, Беф-Шемеш и его пастбище: девять городов от этих двух колен.\tУчастки при городах названы пастбищами, а не городскими «предместьями»."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/06_JOS/JOS_021_1.tsv",
+    "verse": 17,
+    "old_row": "17\tИ от колена Вениаминова Гаваон и его пастбища, Геву и её пастбища,\tБлизко к еврейскому.",
+    "new_row": "17\tИ от колена Вениаминова Гаваон и его пастбище, Геву и её пастбище,\tУчастки при городах названы пастбищами, а не городскими «предместьями»."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/06_JOS/JOS_021_1.tsv",
+    "verse": 18,
+    "old_row": "18\tАнафоф и его пастбища, и Алмон и его пастбища: четыре города.\tБлизко к еврейскому.",
+    "new_row": "18\tАнафоф и его пастбище, и Алмон и его пастбище: четыре города.\tУчастки при городах названы пастбищами, а не городскими «предместьями»."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/06_JOS/JOS_021_1.tsv",
+    "verse": 19,
+    "old_row": "19\tВсе города сынов Аарона, священников, — тринадцать городов и их пастбища.\tБлизко к еврейскому.",
+    "new_row": "19\tВсе города сынов Аарона, священников, — тринадцать городов и их пастбища.\tУчастки при городах названы пастбищами, а не городскими «предместьями»."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/06_JOS/JOS_021_1.tsv",
+    "verse": 21,
+    "old_row": "21\tИ дали им город убежища для убийцы, Сихем и его пастбища на горе Ефремовой, и Гезер и его пастбища,\tБлизко к еврейскому.",
+    "new_row": "21\tИ дали им город убежища для убийцы, Сихем и его пастбище на горе Ефремовой, и Гезер и его пастбище,\tУчастки при городах названы пастбищами, а не городскими «предместьями»."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/06_JOS/JOS_021_1.tsv",
+    "verse": 22,
+    "old_row": "22\tи Кивцаим и его пастбища, и Беф-Орон и его пастбища: четыре города.\tБлизко к еврейскому.",
+    "new_row": "22\tи Кивцаим и его пастбище, и Беф-Орон и его пастбище: четыре города.\tУчастки при городах названы пастбищами, а не городскими «предместьями»."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/06_JOS/JOS_021_1.tsv",
+    "verse": 23,
+    "old_row": "23\tИ от колена Данова Елфеке и его пастбища, Гиввефон и его пастбища,\tБлизко к еврейскому.",
+    "new_row": "23\tИ от колена Данова Елфеке и его пастбище, Гиввефон и его пастбище,\tУчастки при городах названы пастбищами, а не городскими «предместьями»."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/06_JOS/JOS_021_1.tsv",
+    "verse": 24,
+    "old_row": "24\tАиалон и его пастбища, Гаф-Риммон и его пастбища: четыре города.\tБлизко к еврейскому.",
+    "new_row": "24\tАиалон и его пастбище, Гаф-Риммон и его пастбище: четыре города.\tУчастки при городах названы пастбищами, а не городскими «предместьями»."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/06_JOS/JOS_021_1.tsv",
+    "verse": 25,
+    "old_row": "25\tИ от половины колена Манассиина Фаанах и его пастбища, и Гаф-Риммон и его пастбища: два города.\tБлизко к еврейскому.",
+    "new_row": "25\tИ от половины колена Манассиина Фаанах и его пастбище, и Гаф-Риммон и его пастбище: два города.\tУчастки при городах названы пастбищами, а не городскими «предместьями»."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/06_JOS/JOS_021_1.tsv",
+    "verse": 26,
+    "old_row": "26\tВсех городов — десять и их пастбища, для семейств остальных сынов Каафовых.\tБлизко к еврейскому.",
+    "new_row": "26\tВсех городов — десять и их пастбища, для семейств остальных сынов Каафовых.\tУчастки при городах названы пастбищами, а не городскими «предместьями»."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/06_JOS/JOS_021_1.tsv",
+    "verse": 27,
+    "old_row": "27\tИ сынам Гирсоновым из семейств левитов от половины колена Манассиина город убежища для убийцы, Голан в Васане и его пастбища, и Беештеру и её пастбища: два города.\tБлизко к еврейскому.",
+    "new_row": "27\tИ сынам Гирсоновым из семейств левитов от половины колена Манассиина город убежища для убийцы, Голан в Васане и его пастбище, и Беештеру и её пастбище: два города.\tУчастки при городах названы пастбищами, а не городскими «предместьями»."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/06_JOS/JOS_021_1.tsv",
+    "verse": 28,
+    "old_row": "28\tИ от колена Иссахарова Кишион и его пастбища, Давраф и его пастбища,\tБлизко к еврейскому.",
+    "new_row": "28\tИ от колена Иссахарова Кишион и его пастбище, Давраф и его пастбище,\tУчастки при городах названы пастбищами, а не городскими «предместьями»."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/06_JOS/JOS_021_1.tsv",
+    "verse": 29,
+    "old_row": "29\tИармуф и его пастбища, Ен-Ганним и его пастбища: четыре города.\tБлизко к еврейскому.",
+    "new_row": "29\tИармуф и его пастбище, Ен-Ганним и его пастбище: четыре города.\tУчастки при городах названы пастбищами, а не городскими «предместьями»."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/06_JOS/JOS_021_1.tsv",
+    "verse": 30,
+    "old_row": "30\tИ от колена Асирова Мишал и его пастбища, Авдон и его пастбища,\tБлизко к еврейскому.",
+    "new_row": "30\tИ от колена Асирова Мишал и его пастбище, Авдон и его пастбище,\tУчастки при городах названы пастбищами, а не городскими «предместьями»."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/06_JOS/JOS_021_2.tsv",
+    "verse": 31,
+    "old_row": "31\tХелкаф и его пастбища, и Рехов и его пастбища: четыре города.\tБлизко к еврейскому.",
+    "new_row": "31\tХелкаф и его пастбище, и Рехов и его пастбище: четыре города.\tУчастки при городах названы пастбищами, а не городскими «предместьями»."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/06_JOS/JOS_021_2.tsv",
+    "verse": 32,
+    "old_row": "32\tИ от колена Неффалимова город убежища для убийцы, Кедес в Галилее и его пастбища, и Хамоф-Дор и его пастбища, и Карфан и его пастбища: три города.\tБлизко к еврейскому.",
+    "new_row": "32\tИ от колена Неффалимова город убежища для убийцы, Кедес в Галилее и его пастбище, и Хамоф-Дор и его пастбище, и Карфан и его пастбище: три города.\tУчастки при городах названы пастбищами, а не городскими «предместьями»."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/06_JOS/JOS_021_2.tsv",
+    "verse": 34,
+    "old_row": "34\tИ семействам сынов Мерариных, остальных левитов, от колена Завулонова Иокнеам и его пастбища, Карфу и её пастбища,\tБлизко к еврейскому.",
+    "new_row": "34\tИ семействам сынов Мерариных, остальных левитов, от колена Завулонова Иокнеам и его пастбище, Карфу и её пастбище,\tУчастки при городах названы пастбищами, а не городскими «предместьями»."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/06_JOS/JOS_021_2.tsv",
+    "verse": 35,
+    "old_row": "35\tДимну и её пастбища, Нагалал и его пастбища: четыре города.\tБлизко к еврейскому.",
+    "new_row": "35\tДимну и её пастбище, Нагалал и его пастбище: четыре города.\tУчастки при городах названы пастбищами, а не городскими «предместьями»."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/06_JOS/JOS_021_2.tsv",
+    "verse": 37,
+    "old_row": "37\tКедемоф и его пастбища, и Мефааф и его пастбища: четыре города.\tБлизко к еврейскому.",
+    "new_row": "37\tКедемоф и его пастбище, и Мефааф и его пастбище: четыре города.\tУчастки при городах названы пастбищами, а не городскими «предместьями»."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/06_JOS/JOS_021_2.tsv",
+    "verse": 39,
+    "old_row": "39\tЕсевон и его пастбища, Иазер и его пастбища: всего четыре города.\tБлизко к еврейскому.",
+    "new_row": "39\tЕсевон и его пастбище, Иазер и его пастбище: всего четыре города.\tУчастки при городах названы пастбищами, а не городскими «предместьями»."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/06_JOS/JOS_021_2.tsv",
+    "verse": 41,
+    "old_row": "41\tВсе города левитов посреди владения сынов Израилевых — сорок восемь городов и их пастбища.\tБлизко к еврейскому.",
+    "new_row": "41\tВсе города левитов посреди владения сынов Израилевых — сорок восемь городов и их пастбища.\tУчастки при городах названы пастбищами, а не городскими «предместьями»."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/06_JOS/JOS_021_1.tsv",
+    "verse": 9,
+    "old_row": "9\tUnd sie gaben vom Stamm der Söhne Judas und vom Stamm der Söhne Simeons diese Städte, die man mit Namen nennt.\tDer Hebräische verwendet eine unbestimmte Einzahl beim Nennen der Namen; die Vorlage hat „sie ... nannten“.",
+    "new_row": "9\tUnd sie gaben vom Stamm der Söhne Judas und vom Stamm der Söhne Simeons diese Städte, die man mit Namen nennt.\tDer hebräische Text verwendet eine unbestimmte Einzahl beim Nennen der Namen; die Vorlage hat „sie ... nannten“."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/06_JOS/JOS_021_2.tsv",
+    "verse": 33,
+    "old_row": "33\tAlle Städte des Gersoniters nach ihren Sippen waren dreizehn Städte und ihre Weideplätze.\tDer Gersoniter ist kollektiv im Singular genannt, seine Sippen im Plural; die Vorlage spricht vom einzelnen „Geschlecht“. Die Flächen sind Weideplätze.",
+    "new_row": "33\tAlle Städte des Gersoniters nach ihren Sippen: dreizehn Städte und ihre Weideplätze.\tDer Gersoniter ist kollektiv im Singular genannt, seine Sippen im Plural; die Vorlage spricht vom einzelnen „Geschlecht“. Die Flächen sind Weideplätze."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/06_JOS/JOS_021_2.tsv",
+    "verse": 40,
+    "old_row": "40\tВсе города сынов Мерариных по их семействам, оставшихся из семейств левитов, — и было их жребием двенадцать городов.\tБлизко к еврейскому.",
+    "new_row": "40\tВсе города сынов Мерариных по их семействам, оставшихся из семейств левитов: их жребием были двенадцать городов.\tБлизко к еврейскому."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/06_JOS/JOS_022_1.tsv",
+    "verse": 16,
+    "old_row": "16\t„So sagt die ganze Gemeinde des HERRN: Was ist diese Untreue, die ihr gegen den Gott Israels begangen habt, dass ihr euch heute davon abwendet, dem HERRN zu folgen, indem ihr euch einen Altar baut, um euch heute gegen den HERRN aufzulehnen?\t„Untreue“ und „untreu handeln“ greifen denselben Wortstamm auf; „heute“ steht zweimal, in der Vorlage einmal.",
+    "new_row": "16\t„So sagt die ganze Gemeinde des HERRN: Was ist diese Untreue, mit der ihr dem Gott Israels untreu geworden seid, dass ihr euch heute davon abwendet, dem HERRN zu folgen, indem ihr euch einen Altar baut, um euch heute gegen den HERRN aufzulehnen?\t„Untreue“ und „untreu handeln“ greifen denselben Wortstamm auf; „heute“ steht zweimal, in der Vorlage einmal."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/06_JOS/JOS_022_1.tsv",
+    "verse": 22,
+    "old_row": "22\t„Gott, Gott, der HERR, Gott, Gott, der HERR! Er weiß es, und Israel soll es wissen! Wenn es in Auflehnung und wenn es in Untreue gegen den HERRN geschah, rette uns an diesem Tag nicht!\tDie dreifache Gottesbezeichnung wird vollständig wiederholt. „Rette uns nicht“ ist eine direkte Anrede, nicht „so helfe er uns nicht“.",
+    "new_row": "22\t„Gott, der Gott, der HERR, Gott, der Gott, der HERR! Er weiß es, und Israel soll es wissen! Wenn es in Auflehnung und wenn es in Untreue gegen den HERRN geschah, rette uns an diesem Tag nicht!\tDie dreifache Gottesbezeichnung wird vollständig wiederholt. „Rette uns nicht“ ist eine direkte Anrede, nicht „so helfe er uns nicht“."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/06_JOS/JOS_023.tsv",
+    "verse": 4,
+    "old_row": "4\tSeht, ich habe euch diese übrig gebliebenen Völker als Erbteil für eure Stämme zufallen lassen, vom Jordan an, und alle Völker, die ich ausgerottet habe, und das große Meer zum Sonnenuntergang hin.\tNah am Hebräischen.",
+    "new_row": "4\tSeht, ich habe euch diese übrig gebliebenen Völker als Erbteil für eure Stämme zufallen lassen, vom Jordan an, und alle Völker, die ich ausgerottet habe, bis zum großen Meer zum Sonnenuntergang hin.\tNah am Hebräischen."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/06_JOS/JOS_023.tsv",
+    "verse": 4,
+    "old_row": "4\tСмотрите, я отдал вам по жребию эти оставшиеся народы в удел вашим коленам, от Иордана, и все народы, которые я истребил, и великое море к заходу солнца.\tБлизко к еврейскому.",
+    "new_row": "4\tСмотрите, я отдал вам по жребию эти оставшиеся народы в удел вашим коленам, от Иордана, и все народы, которые я истребил, до великого моря к заходу солнца.\tБлизко к еврейскому."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/06_JOS/JOS_023.tsv",
+    "verse": 11,
+    "old_row": "11\tUnd hütet euch sehr um eurer Seelen willen, den HERRN, euren Gott, zu lieben.\tNah am Hebräischen.",
+    "new_row": "11\tUnd achtet sehr auf eure Seelen, dass ihr den HERRN, euren Gott, liebt.\tNah am Hebräischen."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/06_JOS/JOS_024_1.tsv",
+    "verse": 10,
+    "old_row": "10\tUnd ich wollte nicht auf Bileam hören; und er musste euch gewiss segnen, und ich rettete euch aus seiner Hand.\tBileam wird ausdrücklich genannt. Das Segnen ist durch Wiederholung des Verbstamms betont; „Hand“ steht im Singular.",
+    "new_row": "10\tUnd ich wollte nicht auf Bileam hören; und er segnete euch gewiss, und ich rettete euch aus seiner Hand.\tBileam wird ausdrücklich genannt. Das Segnen ist durch Wiederholung des Verbstamms betont; „Hand“ steht im Singular."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/06_JOS/JOS_021_1.tsv",
+    "verse": 13,
+    "old_row": "13\tUnd den Söhnen Aarons, des Priesters, gaben sie die Zufluchtsstadt des Totschlägers, Hebron und seine Weideplätze, und Libna und seine Weideplätze\tDer Totschläger steht im Singular; die Flächen bei den Städten sind Weideplätze.",
+    "new_row": "13\tUnd den Söhnen Aarons, des Priesters, gaben sie die Zufluchtsstadt des Totschlägers, Hebron und sein Weideland, und Libna und sein Weideland\tDer Totschläger steht im Singular; die Flächen bei den Städten sind Weideplätze."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/06_JOS/JOS_021_1.tsv",
+    "verse": 17,
+    "old_row": "17\tUnd vom Stamm Benjamin Gibeon und seine Weideplätze, Geba und seine Weideplätze,\tDie Zahl „vier Städte“ steht erst am Ende des folgenden Verses; die Flächen sind Weideplätze.",
+    "new_row": "17\tUnd vom Stamm Benjamin Gibeon und sein Weideland, Geba und sein Weideland,\tDie Zahl „vier Städte“ steht erst am Ende des folgenden Verses; die Flächen sind Weideplätze."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/06_JOS/JOS_021_1.tsv",
+    "verse": 18,
+    "old_row": "18\tAnathoth und seine Weideplätze und Almon und seine Weideplätze: vier Städte.\tHier steht ausdrücklich die Zahl „vier Städte“, die die Vorlage im vorigen Vers nennt; die Flächen sind Weideplätze.",
+    "new_row": "18\tAnathoth und sein Weideland und Almon und sein Weideland: vier Städte.\tHier steht ausdrücklich die Zahl „vier Städte“, die die Vorlage im vorigen Vers nennt; die Flächen sind Weideplätze."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/06_JOS/JOS_021_1.tsv",
+    "verse": 22,
+    "old_row": "22\tund Kibzaim und seine Weideplätze und Beth-Horon und seine Weideplätze: vier Städte.\tHier steht die Zahl „vier Städte“, die die Vorlage schon in Vers 20 nennt; die Flächen sind Weideplätze.",
+    "new_row": "22\tund Kibzaim und sein Weideland und Beth-Horon und sein Weideland: vier Städte.\tHier steht die Zahl „vier Städte“, die die Vorlage schon in Vers 20 nennt; die Flächen sind Weideplätze."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/06_JOS/JOS_021_1.tsv",
+    "verse": 23,
+    "old_row": "23\tUnd vom Stamm Dan Eltheke und seine Weideplätze, Gibbethon und seine Weideplätze,\tDie Zahl „vier Städte“ steht erst im folgenden Vers; die Flächen sind Weideplätze.",
+    "new_row": "23\tUnd vom Stamm Dan Eltheke und sein Weideland, Gibbethon und sein Weideland,\tDie Zahl „vier Städte“ steht erst im folgenden Vers; die Flächen sind Weideplätze."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/06_JOS/JOS_021_1.tsv",
+    "verse": 24,
+    "old_row": "24\tAjalon und seine Weideplätze, Gath-Rimmon und seine Weideplätze: vier Städte.\tHier steht die Zahl „vier Städte“, die die Vorlage im vorigen Vers nennt; die Flächen sind Weideplätze.",
+    "new_row": "24\tAjalon und sein Weideland, Gath-Rimmon und sein Weideland: vier Städte.\tHier steht die Zahl „vier Städte“, die die Vorlage im vorigen Vers nennt; die Flächen sind Weideplätze."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/06_JOS/JOS_021_1.tsv",
+    "verse": 28,
+    "old_row": "28\tUnd vom Stamm Isaschar Kisjon und seine Weideplätze, Dabrath und seine Weideplätze,\tDie Zahl „vier Städte“ steht erst im folgenden Vers; die Flächen sind Weideplätze.",
+    "new_row": "28\tUnd vom Stamm Isaschar Kisjon und sein Weideland, Dabrath und sein Weideland,\tDie Zahl „vier Städte“ steht erst im folgenden Vers; die Flächen sind Weideplätze."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/06_JOS/JOS_021_1.tsv",
+    "verse": 29,
+    "old_row": "29\tJarmuth und seine Weideplätze, En-Gannim und seine Weideplätze: vier Städte.\tHier steht die Zahl „vier Städte“, die die Vorlage im vorigen Vers nennt; die Flächen sind Weideplätze.",
+    "new_row": "29\tJarmuth und sein Weideland, En-Gannim und sein Weideland: vier Städte.\tHier steht die Zahl „vier Städte“, die die Vorlage im vorigen Vers nennt; die Flächen sind Weideplätze."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/06_JOS/JOS_021_1.tsv",
+    "verse": 30,
+    "old_row": "30\tUnd vom Stamm Asser Miseal und seine Weideplätze, Abdon und seine Weideplätze,\tDie Zahl „vier Städte“ steht erst im folgenden Vers; die Flächen sind Weideplätze.",
+    "new_row": "30\tUnd vom Stamm Asser Miseal und sein Weideland, Abdon und sein Weideland,\tDie Zahl „vier Städte“ steht erst im folgenden Vers; die Flächen sind Weideplätze."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/06_JOS/JOS_021_2.tsv",
+    "verse": 31,
+    "old_row": "31\tHelkath und seine Weideplätze und Rehob und seine Weideplätze: vier Städte.\tHier steht die Zahl „vier Städte“, die die Vorlage im vorigen Vers nennt; die Flächen sind Weideplätze.",
+    "new_row": "31\tHelkath und sein Weideland und Rehob und sein Weideland: vier Städte.\tHier steht die Zahl „vier Städte“, die die Vorlage im vorigen Vers nennt; die Flächen sind Weideplätze."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/06_JOS/JOS_021_2.tsv",
+    "verse": 34,
+    "old_row": "34\tUnd für die Sippen der Söhne Meraris, der übrigen Leviten, vom Stamm Sebulon Jokneam und seine Weideplätze, Kartha und seine Weideplätze,\tDie Zahl „vier Städte“ steht erst im folgenden Vers; die Flächen sind Weideplätze.",
+    "new_row": "34\tUnd für die Sippen der Söhne Meraris, der übrigen Leviten, vom Stamm Sebulon Jokneam und sein Weideland, Kartha und sein Weideland,\tDie Zahl „vier Städte“ steht erst im folgenden Vers; die Flächen sind Weideplätze."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/06_JOS/JOS_021_2.tsv",
+    "verse": 35,
+    "old_row": "35\tDimna und seine Weideplätze, Nahalal und seine Weideplätze: vier Städte.\tHier steht die Zahl „vier Städte“, die die Vorlage im vorigen Vers nennt; die Flächen sind Weideplätze.",
+    "new_row": "35\tDimna und sein Weideland, Nahalal und sein Weideland: vier Städte.\tHier steht die Zahl „vier Städte“, die die Vorlage im vorigen Vers nennt; die Flächen sind Weideplätze."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/06_JOS/JOS_021_2.tsv",
+    "verse": 36,
+    "old_row": "36\tUnd vom Stamm Ruben Bezer und seine Weideplätze und Jahza und seine Weideplätze,\tDie Zahl „vier Städte“ steht erst im folgenden Vers; die Flächen sind Weideplätze.",
+    "new_row": "36\tUnd vom Stamm Ruben Bezer und sein Weideland und Jahza und sein Weideland,\tDie Zahl „vier Städte“ steht erst im folgenden Vers; die Flächen sind Weideplätze."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/06_JOS/JOS_021_2.tsv",
+    "verse": 37,
+    "old_row": "37\tKedemoth und seine Weideplätze und Mephaath und seine Weideplätze: vier Städte.\tHier steht die Zahl „vier Städte“, die die Vorlage im vorigen Vers nennt; die Flächen sind Weideplätze.",
+    "new_row": "37\tKedemoth und sein Weideland und Mephaath und sein Weideland: vier Städte.\tHier steht die Zahl „vier Städte“, die die Vorlage im vorigen Vers nennt; die Flächen sind Weideplätze."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/06_JOS/JOS_021_2.tsv",
+    "verse": 38,
+    "old_row": "38\tUnd vom Stamm Gad die Zufluchtsstadt des Totschlägers, Ramoth in Gilead und seine Weideplätze, und Mahanaim und seine Weideplätze,\tHier stehen auch Mahanaim und seine Weideplätze; die Vorlage stellt sie in den nächsten Vers und zieht dessen Zahl „vier“ vor.",
+    "new_row": "38\tUnd vom Stamm Gad die Zufluchtsstadt des Totschlägers, Ramoth in Gilead und sein Weideland, und Mahanaim und sein Weideland,\tHier stehen auch Mahanaim und seine Weideplätze; die Vorlage stellt sie in den nächsten Vers und zieht dessen Zahl „vier“ vor."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/06_JOS/JOS_021_2.tsv",
+    "verse": 39,
+    "old_row": "39\tHesbon und seine Weideplätze, Jaser und seine Weideplätze: alle Städte waren vier.\tMahanaim steht im vorigen Vers, hier dagegen die Gesamtzahl vier; die Vorlage verschiebt beides. Die Flächen sind Weideplätze.",
+    "new_row": "39\tHesbon und sein Weideland, Jaser und sein Weideland: alle Städte waren vier.\tMahanaim steht im vorigen Vers, hier dagegen die Gesamtzahl vier; die Vorlage verschiebt beides. Die Flächen sind Weideplätze."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/06_JOS/JOS_021_2.tsv",
+    "verse": 36,
+    "old_row": "36\tИ от колена Рувимова Бецер и его пастбища, и Иаацу и её пастбища,\tВ данном стихе нет вступительных указаний об Иордане, Иерихоне, городе убежища и пустыне Мисор; перечислены Бецер и Иааца с их пастбищами.",
+    "new_row": "36\tИ от колена Рувимова Бецер и его пастбище, и Иаацу и её пастбище,\tВ данном стихе нет вступительных указаний об Иордане, Иерихоне, городе убежища и пустыне Мисор; перечислены Бецер и Иааца с их пастбищами."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/06_JOS/JOS_021_2.tsv",
+    "verse": 38,
+    "old_row": "38\tИ от колена Гадова город убежища для убийцы, Рамоф в Галааде и его пастбища, и Маханаим и его пастбища,\tНазван один «город убежища», в единственном числе; участки названы пастбищами.",
+    "new_row": "38\tИ от колена Гадова город убежища для убийцы, Рамоф в Галааде и его пастбище, и Маханаим и его пастбище,\tНазван один «город убежища», в единственном числе; участки названы пастбищами."
+  }
+]

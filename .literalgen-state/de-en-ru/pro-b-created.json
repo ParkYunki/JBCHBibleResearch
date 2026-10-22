@@ -1,0 +1,212 @@
+[
+  {
+    "path": "Tools/LiteralGen/outputs/de/20_PRO/PRO_011_1.tsv",
+    "rows": 30,
+    "sha256": "7798925e1f7e7ba6a45c65bfc9dd2d5fe8a484655a2050c64de41f13174c9f8d"
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/20_PRO/PRO_011_1.tsv",
+    "rows": 30,
+    "sha256": "01027ef50f496a12c0767d7254fa1c11a0626ff69b49e3219be9a5adca343d18"
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/en/20_PRO/PRO_011_1.tsv",
+    "rows": 30,
+    "sha256": "fa698f79f2f7c9c8ec2785d70a48b13ee6ec7df773f3c3ccebd46a414e9f4e2f"
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/20_PRO/PRO_011_2.tsv",
+    "rows": 1,
+    "sha256": "a2e1e723a0039724286d8f6a9b3d93e321bc78b9a6543478c4e3eab4389d6725"
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/20_PRO/PRO_011_2.tsv",
+    "rows": 1,
+    "sha256": "2d08eddc457c2178217fbaa1524be8a9a0baa9cf7be00ecee2d2b415e7c49463"
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/en/20_PRO/PRO_011_2.tsv",
+    "rows": 1,
+    "sha256": "59498e2eb5266ac502df2b31fa67eef633222d1436715ea57e522b7b27646b8c"
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/20_PRO/PRO_012.tsv",
+    "rows": 28,
+    "sha256": "96fb258dd2ebc8c166c9f770f6d4680ca9be0ce9d2e0e8fb9b6f1546128c4671"
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/20_PRO/PRO_012.tsv",
+    "rows": 28,
+    "sha256": "8baff3575f893e631cfcd553ac786d8585d0acb9c063816b2c1cbe599efabdb9"
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/en/20_PRO/PRO_012.tsv",
+    "rows": 28,
+    "sha256": "fab283794023edba367d86c6fa2e2f9671465531fea942675e67a504490f5238"
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/20_PRO/PRO_013.tsv",
+    "rows": 25,
+    "sha256": "c84d1c3daf0787aafcc35e9ae5ae9b61fd508a5a1761339b08245c56b14399f4"
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/20_PRO/PRO_013.tsv",
+    "rows": 25,
+    "sha256": "fe523f084295af94ac0458805cd5561e92c14953a1311e214ac1535d5cecc8eb"
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/en/20_PRO/PRO_013.tsv",
+    "rows": 25,
+    "sha256": "aed185d638194ea576909a4b536cd6f49ec4acbb0b2b4f2d12e0f65248b75130"
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/20_PRO/PRO_014_1.tsv",
+    "rows": 30,
+    "sha256": "2d3f670bbe77c151e8aca91e5ba9333192c024aa437ce41d6afa78fb7dc5eba0"
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/20_PRO/PRO_014_1.tsv",
+    "rows": 30,
+    "sha256": "cda0e0c4f78d999bfbf25ccd274c46abbaac3a0c768deb04ff480c5298793d84"
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/en/20_PRO/PRO_014_1.tsv",
+    "rows": 30,
+    "sha256": "a02dbbfc8f3fdab374eb24440e3444a6e286218759915603bbbc678898d0dfff"
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/20_PRO/PRO_014_2.tsv",
+    "rows": 5,
+    "sha256": "c0138143d078c29c71fa0bc252c6dd2269ec8a23a58faeb20ecc736d84d0327d"
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/20_PRO/PRO_014_2.tsv",
+    "rows": 5,
+    "sha256": "f8dccf04e053e00434da1ed190f8cff5c2f4611bc45e73cc661df102197fed3a"
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/en/20_PRO/PRO_014_2.tsv",
+    "rows": 5,
+    "sha256": "f5a46521774d8d9cf3f1b660f9312223337048d8e0cf8253434f9ac96dce50d2"
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/20_PRO/PRO_015_1.tsv",
+    "rows": 30,
+    "sha256": "b9c2c9bce1b127aeb14ef603125bfd1ca980cabc77abea18f7c1d470fcf36cab"
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/20_PRO/PRO_015_1.tsv",
+    "rows": 30,
+    "sha256": "55eb92483b61274c295c7f6d580a9a53bbee2f828b31f987586f4ce01107a3d8"
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/en/20_PRO/PRO_015_1.tsv",
+    "rows": 30,
+    "sha256": "f3302319c9fc27e554ae475697f32db1a34c09c90e4014359561ab5920b9231c"
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/20_PRO/PRO_015_2.tsv",
+    "rows": 3,
+    "sha256": "22f990f3f1a1115728c29c41cc71faa8bbf06cb693d898bb94be6b16c5f4f395"
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/20_PRO/PRO_015_2.tsv",
+    "rows": 3,
+    "sha256": "b6870f1233a3f4bd3f7ae2804197faf10bff205561ca6763906e0719015293d2"
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/en/20_PRO/PRO_015_2.tsv",
+    "rows": 3,
+    "sha256": "0e0c14e7114b1d8312c6697357f1a96337f02378f665d5b45eb300abd54b2ca9"
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/20_PRO/PRO_016_1.tsv",
+    "rows": 30,
+    "sha256": "9e475762788e2ab0ed5fb3bf619fdcb041a0003462c766571cecc1672bbfa65a"
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/20_PRO/PRO_016_1.tsv",
+    "rows": 30,
+    "sha256": "8e5a067f03ab8d2b99d1d01096e82feefb418e5f09f49d0c1279416016b005e6"
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/en/20_PRO/PRO_016_1.tsv",
+    "rows": 30,
+    "sha256": "21880712215dae1fff7aaa22f7a711b3c245d0dc098f4fb47102e6bffc26c8b2"
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/20_PRO/PRO_016_2.tsv",
+    "rows": 3,
+    "sha256": "24ecba5a8f7ec4ffaf12b3b6669cdace599fd65311553cf6e420050ee92e360c"
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/20_PRO/PRO_016_2.tsv",
+    "rows": 3,
+    "sha256": "0dbf67e6db120eff268257f10bc10ce4ec5db06a584bf17f214e89b170469039"
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/en/20_PRO/PRO_016_2.tsv",
+    "rows": 3,
+    "sha256": "7aaea2ca12595931ca52941f95a22246f4cc0f67732535ff1f86941735e5c172"
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/20_PRO/PRO_017.tsv",
+    "rows": 28,
+    "sha256": "007c0104236fed751e4278fe7e214247308a86e771c2f11d5156320cf6a2b754"
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/20_PRO/PRO_017.tsv",
+    "rows": 28,
+    "sha256": "8a0d01919ddb695205ed5072c9c04fcc3c3e19c0656a78333e2c28129784ae0f"
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/en/20_PRO/PRO_017.tsv",
+    "rows": 28,
+    "sha256": "1ec4a92c4ed482ffda2ff67880647ea1f6d65e18b3e525dcee3ef25a410b4717"
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/20_PRO/PRO_018.tsv",
+    "rows": 24,
+    "sha256": "a3d1fca4bbd454e7f7f2fc89f33171227ab0df3323b985f506b4032fb1f1437c"
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/20_PRO/PRO_018.tsv",
+    "rows": 24,
+    "sha256": "26702109707aa0380a1efc3bf569f792c7ac357f52f75ae39c936f08f876740b"
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/en/20_PRO/PRO_018.tsv",
+    "rows": 24,
+    "sha256": "81a27a00fbc9a46cc91c7bb5f7a97449e32d49d54ade10dc91ce7880dc473a1a"
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/20_PRO/PRO_019.tsv",
+    "rows": 29,
+    "sha256": "2d52c7c5f5d28cdeaeed359ccbf98592b493769c11c698bd7e27664c21767601"
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/20_PRO/PRO_019.tsv",
+    "rows": 29,
+    "sha256": "d6281a9f83c70bf99c3a4fda4f2ae719a6312482bc80f805af46268f3d49fe21"
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/en/20_PRO/PRO_019.tsv",
+    "rows": 29,
+    "sha256": "424d828b9bdbb4f8e23062d68b20e3605e48c63b2191ac8ffebffdae4b899369"
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/20_PRO/PRO_020.tsv",
+    "rows": 30,
+    "sha256": "e784404c30af510abd9a830cfab3df44e1065501259632adb74ef3ab761f32ac"
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/20_PRO/PRO_020.tsv",
+    "rows": 30,
+    "sha256": "4c6716c65ae8dd11cf2beed2e9e9748a94c0e5953da48521d6361aa1da1ca6fc"
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/en/20_PRO/PRO_020.tsv",
+    "rows": 30,
+    "sha256": "b15cb4fb562b1fea7a6f129814fbd91debcb594d7ed5ba7eb4da73a1bf955980"
+  }
+]

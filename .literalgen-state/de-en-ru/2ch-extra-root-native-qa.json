@@ -1,0 +1,47 @@
+[
+  {
+    "path": "Tools/LiteralGen/outputs/de/14_2CH/2CH_023.tsv",
+    "old_row": "18\tUnd Jojada legte die Aufsicht über das Haus des HERRN in die Hand der levitischen Priester, die David über das Haus des HERRN eingeteilt hatte, um dem HERRN Brandopfer darzubringen, wie im Gesetz Moses geschrieben steht, mit Freude und Gesang durch die Hand Davids.\tDas Hebräische sagt „durch die Hand Davids“, ohne ausdrücklich zu sagen, dass David die Lieder dichtete, wie Luther es formuliert.",
+    "new_row": "18\tUnd Jojada legte die Aufsicht über das Haus des HERRN in die Hand der levitischen Priester, die David über das Haus des HERRN eingeteilt hatte, um dem HERRN Brandopfer darzubringen, wie im Gesetz Moses geschrieben steht, mit Freude und Gesang durch die Hände Davids.\tDas Hebräische sagt „durch die Hände Davids“, ohne ausdrücklich zu sagen, dass David die Lieder dichtete, wie Luther es formuliert."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/14_2CH/2CH_023.tsv",
+    "old_row": "18\tИ поручил Иодай надзор за домом Господа руке священников-левитов, которых Давид распределил над домом Господа, чтобы возносить всесожжения Господу, как написано в законе Моисея, с радостью и пением через руку Давида.\tВ еврейской формулировке нет отдельного сообщения о восстановлении дневных черед, присутствующего в Синодальном переводе. Она сохраняет образ руки Давида.",
+    "new_row": "18\tИ поручил Иодай надзор за домом Господа руке священников-левитов, которых Давид распределил над домом Господа, чтобы возносить всесожжения Господу, как написано в законе Моисея, с радостью и пением через руки Давида.\tВ еврейской формулировке нет отдельного сообщения о восстановлении дневных черед, присутствующего в Синодальном переводе. Она сохраняет образ рук Давида."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/14_2CH/2CH_024.tsv",
+    "old_row": "9\tИ провели они возглашение в Иуде и в Иерусалиме, чтобы приносили Господу подать Моисея, раба Бога, на Израиль в пустыне.\tБлизко к еврейскому.",
+    "new_row": "9\tИ провели они возглашение в Иуде и в Иерусалиме, чтобы приносили Господу подать Моисея, раба Бога, возложенную на Израиль в пустыне.\tБлизко к еврейскому."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/14_2CH/2CH_024.tsv",
+    "old_row": "14\tUnd als sie fertig waren, brachten sie den Rest des Silbers vor den König und Jojada, und sie machten daraus Geräte für das Haus des HERRN, Geräte zum Dienst und zum Darbringen und Schalen und goldene und silberne Geräte. Und sie brachten im Haus des HERRN beständig Brandopfer dar alle Tage Jojadas.\tDas Hebräische sagt „im Haus“, Luther „bei dem Hause“. Es nennt Jojadas Tage ausdrücklich, wo Luther „solange Jojada lebte“ sagt.",
+    "new_row": "14\tUnd als sie fertig waren, brachten sie den Rest des Silbers vor den König und Jojada, und er machte daraus Geräte für das Haus des HERRN, Geräte zum Dienst und zum Darbringen und Schalen und goldene und silberne Geräte. Und sie brachten im Haus des HERRN beständig Brandopfer dar alle Tage Jojadas.\tDas Machen der Geräte hat im Hebräischen ein einzelnes Subjekt. Das Hebräische sagt „im Haus“, Luther „bei dem Hause“, und nennt Jojadas Tage ausdrücklich."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/14_2CH/2CH_024.tsv",
+    "old_row": "14\tИ когда они закончили, принесли перед царём и Иодаем остаток серебра, и сделали из него сосуды для дома Господа, сосуды для службы и возношения, и чаши, и сосуды золотые и серебряные. И возносили всесожжения в доме Господа постоянно все дни Иодая.\tБлизко к еврейскому.",
+    "new_row": "14\tИ когда они закончили, принесли перед царём и Иодаем остаток серебра, и сделал он из него сосуды для дома Господа, сосуды для службы и возношения, и чаши, и сосуды золотые и серебряные. И возносили всесожжения в доме Господа постоянно все дни Иодая.\tИзготовление сосудов имеет подлежащее в единственном числе; Синодальный перевод передает его множественным."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/14_2CH/2CH_036.tsv",
+    "old_row": "7\tUnd von den Geräten des Hauses des HERRN brachte Nebukadnezar nach Babel und legte sie in seinen Palast in Babel.\tDas Hebräische Wort bezeichnet einen Palast oder Tempel; Luther legt es als „Tempel“ fest.",
+    "new_row": "7\tUnd einige von den Geräten des Hauses des HERRN brachte Nebukadnezar nach Babel und legte sie in seinen Palast in Babel.\tDas Hebräische Wort bezeichnet einen Palast oder Tempel; Luther legt es als „Tempel“ fest."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/14_2CH/2CH_036.tsv",
+    "old_row": "7\tИ из сосудов дома Господа принёс Навуходоносор в Вавилон и поместил их в своём дворце в Вавилоне.\tЕврейское слово допускает значение дворца или храма; Синодальный перевод определяет место как капище.",
+    "new_row": "7\tИ некоторые из сосудов дома Господа принес Навуходоносор в Вавилон и поместил их в своем дворце в Вавилоне.\tЕврейское слово допускает значение дворца или храма; Синодальный перевод определяет место как капище."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/14_2CH/2CH_036.tsv",
+    "old_row": "13\tИ также против царя Навуходоносора восстал он, который заставил его поклясться Богом. И сделал он жёсткой свою шею и укрепил своё сердце, чтобы не возвращаться к Господу, Богу Израиля.\tЕврейский текст употребляет образ укрепления сердца; Синодальный перевод передаёт его как ожесточение.",
+    "new_row": "13\tИ он восстал также против царя Навуходоносора, который заставил его поклясться Богом. И сделал он жесткой свою шею и укрепил свое сердце, чтобы не возвращаться к Господу, Богу Израиля.\tЕврейский текст употребляет образ укрепления сердца; Синодальный перевод передаёт его как ожесточение."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/14_2CH/2CH_036.tsv",
+    "old_row": "16\tИ они насмехались над посланниками Бога и презирали Его слова, и издевались над Его пророками, пока не поднялся гнев Господа на Его народ, пока не стало исцеления.\tЕврейский текст говорит о поднявшемся гневе и отсутствии исцеления; Синодальный перевод — о сошедшем гневе и отсутствии спасения.",
+    "new_row": "16\tИ они насмехались над посланниками Бога и презирали Его слова, и издевались над Его пророками, пока не поднялся гнев Господа на Его народ, пока больше не осталось исцеления.\tЕврейский текст говорит о поднявшемся гневе и отсутствии исцеления; Синодальный перевод — о сошедшем гневе и отсутствии спасения."
+  }
+]

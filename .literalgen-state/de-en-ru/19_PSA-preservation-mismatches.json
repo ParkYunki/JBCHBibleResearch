@@ -1,0 +1,8 @@
+[
+  {
+    "path": "Tools/LiteralGen/outputs/zh/14_2CH/2CH_006_2.tsv",
+    "expected_sha256": "392e97b2cade162163721c609c90c8848e6b03b5fc3b8b279409797271e1b441",
+    "actual_sha256": "053eb78dbad7a74687f11a1f576ea80e2ab5ffe160fe3cf36784886aef3ea92b",
+    "exists": true
+  }
+]

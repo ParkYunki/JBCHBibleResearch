@@ -55,7 +55,7 @@ struct OutlineBookBulkEditView: View {
         // 화면 바깥쪽 배경만 읽기 테마를 따른다(에디터 자체 배경은 고정).
         .background(settings.bibleBackgroundColor ?? Color.clear)
         // 장 선택 시 "책이름 N장", 책 개요만 볼 때는 책 이름을 타이틀로 쓴다.
-        .navigationTitle(focusedChapter.map { "\(book.nameKo) \($0)장" } ?? book.nameKo)
+        .navigationTitle(focusedChapter.map { String(localized: "\(book.displayName) \($0)장") } ?? book.displayName)
         // 다른 화면과 같이 `.principal` 툴바 아이템 + `.inline` 타이틀 모드로 성곡 세리프
         // 20pt 타이틀을 중앙에 표시한다. 위 `.navigationTitle`은 시스템 내부용으로 두고
         // 같은 문자열 계산식을 재사용한다.
@@ -65,8 +65,9 @@ struct OutlineBookBulkEditView: View {
         .toolbar {
             #if os(iOS)
             ToolbarItem(placement: .principal) {
-                Text(focusedChapter.map { "\(book.nameKo) \($0)장" } ?? book.nameKo)
-                    .font(.custom(SpecialPurposeFonts.titleSerif, size: 20, relativeTo: .title3))
+                let titleText = focusedChapter.map { String(localized: "\(book.displayName) \($0)장") } ?? book.displayName
+                Text(titleText)
+                    .font(.titleSerif(titleText, size: 20, relativeTo: .title3))
                     .fontWeight(.semibold)
                     .foregroundStyle(settings.bibleTextColor ?? .primary)
             }
@@ -77,7 +78,7 @@ struct OutlineBookBulkEditView: View {
                 } label: {
                     Image(systemName: isEditable ? "eye" : "pencil")
                 }
-                .help(isEditable ? "읽기 전용으로 보기" : "편집하기")
+                .help(isEditable ? String(localized: "읽기 전용으로 보기") : String(localized: "편집하기"))
             }
         }
         .onAppear {

@@ -1,0 +1,96 @@
+{
+  "assigned": [
+    {
+      "chapter": 11,
+      "packets": [
+        "PRO_011_1.txt",
+        "PRO_011_2.txt"
+      ],
+      "verses": 31
+    },
+    {
+      "chapter": 12,
+      "packets": [
+        "PRO_012.txt"
+      ],
+      "verses": 28
+    },
+    {
+      "chapter": 13,
+      "packets": [
+        "PRO_013.txt"
+      ],
+      "verses": 25
+    },
+    {
+      "chapter": 14,
+      "packets": [
+        "PRO_014_1.txt",
+        "PRO_014_2.txt"
+      ],
+      "verses": 35
+    },
+    {
+      "chapter": 15,
+      "packets": [
+        "PRO_015_1.txt",
+        "PRO_015_2.txt"
+      ],
+      "verses": 33
+    },
+    {
+      "chapter": 16,
+      "packets": [
+        "PRO_016_1.txt",
+        "PRO_016_2.txt"
+      ],
+      "verses": 33
+    },
+    {
+      "chapter": 17,
+      "packets": [
+        "PRO_017.txt"
+      ],
+      "verses": 28
+    },
+    {
+      "chapter": 18,
+      "packets": [
+        "PRO_018.txt"
+      ],
+      "verses": 24
+    },
+    {
+      "chapter": 19,
+      "packets": [
+        "PRO_019.txt"
+      ],
+      "verses": 29
+    },
+    {
+      "chapter": 20,
+      "packets": [
+        "PRO_020.txt"
+      ],
+      "verses": 30
+    }
+  ],
+  "completed": [
+    11,
+    12,
+    13,
+    14,
+    15,
+    16,
+    17,
+    18,
+    19,
+    20
+  ],
+  "pending": "root official check and queued redo",
+  "native_en_complete": true,
+  "selfqa_complete": true,
+  "files": 42,
+  "rows": 888,
+  "qa_candidates": 7
+}

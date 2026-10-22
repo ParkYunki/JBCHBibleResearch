@@ -32,13 +32,13 @@ enum DocumentUploadError: Error, CustomStringConvertible {
     var description: String {
         switch self {
         case .unsupportedFormat(let ext):
-            return "지원하지 않는 파일 형식입니다(.\(ext))."
+            return String(localized: "지원하지 않는 파일 형식입니다(.\(ext)).")
         case .securityScopedAccessFailed:
-            return "파일에 접근할 권한을 얻지 못했습니다."
+            return String(localized: "파일에 접근할 권한을 얻지 못했습니다.")
         case .bookmarkCreationFailed(let message):
-            return "파일 위치를 저장하지 못했습니다: \(message)"
+            return String(localized: "파일 위치를 저장하지 못했습니다: \(message)")
         case .iCloudContainerUnavailable:
-            return "iCloud Drive를 사용할 수 없습니다 — iCloud 로그인 상태와 저장공간을 확인해주세요."
+            return String(localized: "iCloud Drive를 사용할 수 없습니다 — iCloud 로그인 상태와 저장공간을 확인해주세요.")
         }
     }
 }
@@ -412,7 +412,7 @@ enum DocumentUploadService {
         if nextPageNumber > 1 {
             let base = (first.lastPathComponent as NSString).deletingPathExtension
             let ext = (first.lastPathComponent as NSString).pathExtension
-            let suffix = " 외 \(nextPageNumber - 1)장"
+            let suffix = String(localized: " 외 \(nextPageNumber - 1)장")
             document.originalFilename = ext.isEmpty ? base + suffix : base + suffix + "." + ext
         }
         try context.save()

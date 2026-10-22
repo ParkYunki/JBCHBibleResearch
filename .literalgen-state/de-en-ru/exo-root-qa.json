@@ -1,0 +1,9 @@
+[
+  {
+    "path": "Tools/LiteralGen/outputs/en/02_EXO/EXO_012_2.tsv",
+    "verse": 42,
+    "old_row": "42\t=\t“A night of watchings for the LORD” does not explicitly make the LORD the subject of keeping a vigil.",
+    "new_row": "42\t=\t“A night of vigils for the LORD” does not explicitly make the LORD the subject of keeping a vigil.",
+    "reason": "Use natural English for the plural vigil noun without changing the source comparison."
+  }
+]

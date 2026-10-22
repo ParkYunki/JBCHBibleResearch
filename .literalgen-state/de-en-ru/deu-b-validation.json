@@ -1,0 +1,31 @@
+{
+  "files_checked": {
+    "de": 13,
+    "en": 8,
+    "ru": 13
+  },
+  "rows_checked": {
+    "de": 285,
+    "en": 166,
+    "ru": 285
+  },
+  "qa_rows": 63,
+  "qa_by_language": {
+    "de": 13,
+    "ru": 48,
+    "en": 2
+  },
+  "errors": [],
+  "literal_quotes": {
+    "de": {
+      "open": 14,
+      "close": 14
+    },
+    "ru": {
+      "open": 14,
+      "close": 14
+    }
+  },
+  "nested_quote_errors": [],
+  "original_outputs_unchanged": true
+}

@@ -1,0 +1,42 @@
+{
+  "status": "complete",
+  "files": 51,
+  "rows": 1156,
+  "chapters": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11
+  ],
+  "languages": {
+    "de": {
+      "chapters": "001–011",
+      "rows": 455
+    },
+    "ru": {
+      "chapters": "001–011",
+      "rows": 455
+    },
+    "en": {
+      "chapters": "001–006",
+      "rows": 246
+    }
+  },
+  "root_en_chapters": [
+    7,
+    8,
+    9,
+    10,
+    11
+  ],
+  "qa_entries": 33,
+  "checks": "All checks passed on proposed QA overlay; original outputs preserved. QA old rows verified exact; unique path+verse verified.",
+  "errors": []
+}

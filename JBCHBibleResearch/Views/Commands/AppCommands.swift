@@ -105,7 +105,7 @@ struct AppCommands: Commands {
                 .disabled(previousChapterAction == nil)
             Divider()
             // macOS 성경 조회의 왼쪽 도구 레일 접기/펼치기. 모든 성경 조회 창이 같은 값을 공유하므로 포커스와 무관하게 항상 활성화한다.
-            Button(isBibleToolRailCollapsed ? "성경 도구 레일 펼치기" : "성경 도구 레일 접기") {
+            Button(isBibleToolRailCollapsed ? String(localized: "성경 도구 레일 펼치기") : String(localized: "성경 도구 레일 접기")) {
                 isBibleToolRailCollapsed.toggle()
             }
             .keyboardShortcut("r", modifiers: [.command, .option])

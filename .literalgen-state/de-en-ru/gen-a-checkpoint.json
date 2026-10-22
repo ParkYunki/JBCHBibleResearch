@@ -1,0 +1,32 @@
+{
+  "scope": "GEN001–019 de/en/ru",
+  "generation": "complete",
+  "qa": "complete",
+  "reviewed_chapters": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    16,
+    17,
+    18,
+    19
+  ],
+  "rows_checked": 1488,
+  "proposals": 74,
+  "proposal_file": ".literalgen-state/de-en-ru/gen-a-qa.json",
+  "structural_issues": [],
+  "quote_balance_issues": [],
+  "existing_outputs_modified": false
+}

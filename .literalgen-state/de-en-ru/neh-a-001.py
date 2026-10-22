@@ -1,0 +1,24 @@
+from pathlib import Path
+exec(Path('.literalgen-state/de-en-ru/neh-a-write.py').read_text())
+write(1,'de','''Worte Nehemias, des Sohnes Hachaljas. Und es geschah im Monat Chislev, im zwanzigsten Jahr, und ich war in Susan, der Burg.
+Und Hanani kam, einer meiner Brüder, er und Männer aus Juda; und ich fragte sie nach den Juden, den Entronnenen, die von der Gefangenschaft übrig geblieben waren, und nach Jerusalem.
+Und sie sagten zu mir: „Die Übriggebliebenen, die von der Gefangenschaft übrig geblieben sind, sind dort in der Provinz in großem Unglück und in Schmach; und die Mauer Jerusalems ist eingerissen, und ihre Tore sind mit Feuer verbrannt.“
+Und es geschah, als ich diese Worte hörte, da setzte ich mich und weinte und trauerte tagelang; und ich fastete und betete vor dem Gott der Himmel.
+Und ich sagte: „Ach, HERR, Gott der Himmel, du großer und furchtgebietender Gott, der den Bund und die Güte denen bewahrt, die ihn lieben und seine Gebote bewahren:
+Lass doch dein Ohr aufmerksam und deine Augen offen sein, um auf das Gebet deines Knechtes zu hören, das ich heute vor dir bete, Tag und Nacht, für die Söhne Israels, deine Knechte; und ich bekenne die Sünden der Söhne Israels, die wir gegen dich gesündigt haben; auch ich und das Haus meines Vaters haben gesündigt.
+Wir haben sehr verderbt gegen dich gehandelt und die Gebote und die Satzungen und die Rechte nicht bewahrt, die du Mose, deinem Knecht, geboten hast.
+Gedenke doch des Wortes, das du Mose, deinem Knecht, geboten hast, indem du sagtest: ‚Ihr werdet treulos handeln; ich werde euch unter die Völker zerstreuen.
+Und ihr werdet zu mir zurückkehren und meine Gebote bewahren und sie tun; wenn euer Vertriebener am Ende der Himmel ist, werde ich sie von dort sammeln und sie an den Ort bringen, den ich erwählt habe, um meinen Namen dort wohnen zu lassen.‘
+Und sie sind deine Knechte und dein Volk, die du durch deine große Kraft und durch deine starke Hand erlöst hast.
+Ach, Herr, lass doch dein Ohr auf das Gebet deines Knechtes und auf das Gebet deiner Knechte aufmerksam sein, die Gefallen daran haben, deinen Namen zu fürchten; und lass es doch deinem Knecht heute gelingen und gib ihn dem Erbarmen vor diesem Mann hin.“ Und ich war Mundschenk des Königs.''',{1:'Es sind Worte, nicht eigens Geschichten.',3:'Die Mauer steht im Singular.',6:'Das Ohr steht im Singular; heute wird ausdrücklich genannt.',7:'Das verderbte Handeln wird verstärkt ausgedrückt.',8:'Treuloses Handeln wird genannt; ein eigenes Wenn steht hier nicht.',9:'Euer Vertriebener steht zunächst im Singular, das Sammeln danach im Plural.',11:'Das Ohr steht im Singular; am Schluss steht und statt denn.'})
+write(1,'ru','''Слова Неемии, сына Ахалии. И было в месяце Кислеве, в двадцатом году, и я был в Сузах, крепости.
+И пришёл Ханани, один из моих братьев, он и мужи из Иуды; и я спросил их об иудеях, спасшемся остатке, которые остались от плена, и об Иерусалиме.
+И сказали они мне: «Оставшиеся, которые остались от плена, там, в области, в великом бедствии и в позоре; и стена Иерусалима проломлена, и ворота его сожжены огнём».
+И было, когда я услышал эти слова, я сел и заплакал, и скорбел днями; и я постился и молился пред Богом небес.
+И сказал я: «Молю, Господь, Бог небес, Бог великий и страшный, хранящий завет и милость к любящим Его и хранящим Его заповеди:
+Да будет ухо Твоё внимательно и глаза Твои открыты, чтобы слышать молитву Твоего раба, которой я молюсь пред Тобой сегодня, днём и ночью, о сынах Израиля, Твоих рабах; и исповедую грехи сынов Израиля, которыми мы согрешили против Тебя; и я и дом моего отца согрешили.
+Мы весьма развращённо поступили против Тебя и не хранили заповедей, и уставов, и судов, которые Ты заповедал Моисею, Твоему рабу.
+Вспомни же слово, которое Ты заповедал Моисею, Твоему рабу, говоря: „Вы поступите вероломно; Я рассею вас среди народов.
+И вы возвратитесь ко Мне, и будете хранить Мои заповеди, и исполните их; если изгнанный ваш будет на краю небес, оттуда соберу их и приведу их к месту, которое Я избрал, чтобы поселить там Моё имя“.
+И они Твои рабы и Твой народ, которых Ты искупил Твоей великой силой и Твоей сильной рукой.
+Молю, Господи, да будет ухо Твоё внимательно к молитве Твоего раба и к молитве Твоих рабов, которым угодно бояться Твоего имени; и дай же Твоему рабу успех сегодня, и отдай его состраданию пред этим человеком». И я был виночерпием царя.''',{1:'Сузы названы крепостью, не престольным городом.',3:'Своя страна отдельно не названа.',4:'Дни названы без отдельного слова несколько.',5:'Любящие и хранящие описаны в третьем лице.',6:'Ухо стоит в единственном числе; сегодня названо прямо.',7:'Развращённое действие выражено усиленно.',8:'Названо вероломство; отдельного если здесь нет.',9:'Изгнанный сначала назван в единственном числе, затем соберу их во множественном.',11:'Назван именно сегодняшний день.'})

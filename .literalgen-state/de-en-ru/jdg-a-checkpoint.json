@@ -1,0 +1,124 @@
+{
+  "created": [
+    "Tools/LiteralGen/outputs/de/07_JDG/JDG_001_1.tsv",
+    "Tools/LiteralGen/outputs/de/07_JDG/JDG_001_2.tsv",
+    "Tools/LiteralGen/outputs/ru/07_JDG/JDG_001_1.tsv",
+    "Tools/LiteralGen/outputs/ru/07_JDG/JDG_001_2.tsv",
+    "Tools/LiteralGen/outputs/en/07_JDG/JDG_001_1.tsv",
+    "Tools/LiteralGen/outputs/en/07_JDG/JDG_001_2.tsv",
+    "Tools/LiteralGen/outputs/de/07_JDG/JDG_002.tsv",
+    "Tools/LiteralGen/outputs/ru/07_JDG/JDG_002.tsv",
+    "Tools/LiteralGen/outputs/en/07_JDG/JDG_002.tsv",
+    "Tools/LiteralGen/outputs/de/07_JDG/JDG_003_1.tsv",
+    "Tools/LiteralGen/outputs/de/07_JDG/JDG_003_2.tsv",
+    "Tools/LiteralGen/outputs/ru/07_JDG/JDG_003_1.tsv",
+    "Tools/LiteralGen/outputs/ru/07_JDG/JDG_003_2.tsv",
+    "Tools/LiteralGen/outputs/en/07_JDG/JDG_003_1.tsv",
+    "Tools/LiteralGen/outputs/en/07_JDG/JDG_003_2.tsv",
+    "Tools/LiteralGen/outputs/de/07_JDG/JDG_004.tsv",
+    "Tools/LiteralGen/outputs/ru/07_JDG/JDG_004.tsv",
+    "Tools/LiteralGen/outputs/de/07_JDG/JDG_005_1.tsv",
+    "Tools/LiteralGen/outputs/de/07_JDG/JDG_005_2.tsv",
+    "Tools/LiteralGen/outputs/ru/07_JDG/JDG_005_1.tsv",
+    "Tools/LiteralGen/outputs/ru/07_JDG/JDG_005_2.tsv",
+    "Tools/LiteralGen/outputs/de/07_JDG/JDG_006_1.tsv",
+    "Tools/LiteralGen/outputs/de/07_JDG/JDG_006_2.tsv",
+    "Tools/LiteralGen/outputs/ru/07_JDG/JDG_006_1.tsv",
+    "Tools/LiteralGen/outputs/ru/07_JDG/JDG_006_2.tsv",
+    "Tools/LiteralGen/outputs/de/07_JDG/JDG_007.tsv",
+    "Tools/LiteralGen/outputs/ru/07_JDG/JDG_007.tsv"
+  ],
+  "chapters_complete": [
+    [
+      1,
+      "de"
+    ],
+    [
+      1,
+      "ru"
+    ],
+    [
+      1,
+      "en"
+    ],
+    [
+      2,
+      "de"
+    ],
+    [
+      2,
+      "ru"
+    ],
+    [
+      2,
+      "en"
+    ],
+    [
+      3,
+      "de"
+    ],
+    [
+      3,
+      "ru"
+    ],
+    [
+      3,
+      "en"
+    ],
+    [
+      4,
+      "de"
+    ],
+    [
+      4,
+      "ru"
+    ],
+    [
+      5,
+      "de"
+    ],
+    [
+      5,
+      "ru"
+    ],
+    [
+      6,
+      "de"
+    ],
+    [
+      6,
+      "ru"
+    ],
+    [
+      7,
+      "de"
+    ],
+    [
+      7,
+      "ru"
+    ]
+  ],
+  "generation_complete": true,
+  "qa_complete": true,
+  "qa_file": ".literalgen-state/de-en-ru/jdg-a-qa.json",
+  "qa_candidates": 8,
+  "root_english_independent_review": {
+    "chapters": [
+      4,
+      5,
+      6,
+      7
+    ],
+    "rows": 120,
+    "qa_file": ".literalgen-state/de-en-ru/jdg-a-root-en-qa.json",
+    "qa_candidates": 2
+  },
+  "validation": {
+    "files": 27,
+    "rows": 510,
+    "format_errors": 0,
+    "quote_imbalances": [],
+    "protected_files": 7282,
+    "protected_mismatches": 0
+  }
+}

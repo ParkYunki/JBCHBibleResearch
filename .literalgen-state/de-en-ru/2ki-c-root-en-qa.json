@@ -1,0 +1,30 @@
+[
+  {
+    "path": "Tools/LiteralGen/outputs/en/12_2KI/2KI_022.tsv",
+    "verse": 15,
+    "old_row": "15\t=\tClose to the Hebrew.",
+    "new_row": "15\t=\tThe Hebrew says the man sent them “to me”; BSB leaves the destination unstated.",
+    "reason": "Restore a definite omitted phrase difference."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/en/12_2KI/2KI_023_2.tsv",
+    "verse": 35,
+    "old_row": "35\t=\tThe Hebrew says each man paid according to his assessment; BSB expresses this as according to his wealth.",
+    "new_row": "35\t=\tThe Hebrew describes each person’s assessment; BSB expresses it as his wealth.",
+    "reason": "The original DIFF incorrectly made each man the subject of paying; O makes Jehoiakim the subject of exacting."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/en/12_2KI/2KI_025.tsv",
+    "verse": 21,
+    "old_row": "21\t=\tClose to the Hebrew.",
+    "new_row": "21\t=\tJudah is the subject of going into exile in Hebrew; BSB expresses the exile passively.",
+    "reason": "Definite voice difference."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/en/12_2KI/2KI_025.tsv",
+    "verse": 28,
+    "old_row": "28\t=\tClose to the Hebrew.",
+    "new_row": "28\t=\tThe Hebrew uses the singular “throne” of the kings; BSB uses the plural “thrones”.",
+    "reason": "Definite singular/plural difference."
+  }
+]

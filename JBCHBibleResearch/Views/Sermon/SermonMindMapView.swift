@@ -239,7 +239,7 @@ struct SermonMindMapView: View {
                                 .symbolVariant(isPanelVisible ? .fill : .none)
                         }
                         .accessibilityLabel("노드 속성 패널")
-                        .accessibilityValue(isPanelVisible ? "열림" : "닫힘")
+                        .accessibilityValue(isPanelVisible ? String(localized: "열림") : String(localized: "닫힘"))
                     }
                 }
                 #endif
@@ -249,8 +249,8 @@ struct SermonMindMapView: View {
 
     /// 내비게이션 제목. `body`를 `mainContent`/`exportAlertsHost`/`navigationTitleText`로 나눠 수식을 짧게 유지한다(타입 추론 시간 초과 방지).
     private var navigationTitleText: String {
-        let name = sermon.title.isEmpty ? "제목 없음" : sermon.title
-        return "\(name) — 마인드맵"
+        let name = sermon.title.isEmpty ? String(localized: "제목 없음") : sermon.title
+        return String(localized: "\(name) — 마인드맵")
     }
 
     @ViewBuilder
@@ -715,7 +715,7 @@ struct SermonMindMapView: View {
             selectionRect = nil
             edgeDrag = nil
         } label: {
-            Label(isPanMode ? "이동" : "선택", systemImage: isPanMode ? "hand.draw" : "cursorarrow.rays")
+            Label(isPanMode ? String(localized: "mindmap.mode.pan", defaultValue: "이동", comment: "마인드맵 화면 조작 모드 — 화면 이동(책·장 이동의 '이동'과 구분)") : String(localized: "선택"), systemImage: isPanMode ? "hand.draw" : "cursorarrow.rays")
                 .font(.callout.weight(.semibold))
                 .foregroundStyle(isPanMode ? Color.white : Color.primary)
                 .padding(.horizontal, 12)
@@ -727,7 +727,7 @@ struct SermonMindMapView: View {
         .padding(.horizontal, 10)
         .padding(.top, 10)
         .accessibilityLabel("화면 조작 모드")
-        .accessibilityValue(isPanMode ? "이동" : "선택")
+        .accessibilityValue(isPanMode ? String(localized: "mindmap.mode.pan", defaultValue: "이동", comment: "마인드맵 화면 조작 모드 — 화면 이동(책·장 이동의 '이동'과 구분)") : String(localized: "선택"))
         .accessibilityHint("이동은 한 손가락으로 화면을 움직이고, 선택은 한 손가락으로 선택하거나 노드를 움직이며 두 손가락으로 화면을 움직입니다.")
     }
     #endif
@@ -1663,10 +1663,10 @@ struct SermonMindMapView: View {
                 .font(.caption2)
                 .foregroundStyle(.secondary)
             VStack(alignment: .leading, spacing: 8) {
-                structureRow("설교 제목", "루트(중심) 노드")
-                structureRow("문단 구성", "하위 노드 단계별 전개\n(대주제 → 중주제 → 소주제 → 본문)")
-                structureRow("전개 순서", "같은 단계는 왼쪽에서 오른쪽 순")
-                structureRow("적용 위치", "기존 본문 하단에 이어 붙이기")
+                structureRow(String(localized: "설교 제목"), String(localized: "루트(중심) 노드"))
+                structureRow(String(localized: "문단 구성"), String(localized: "하위 노드 단계별 전개\n(대주제 → 중주제 → 소주제 → 본문)"))
+                structureRow(String(localized: "전개 순서"), String(localized: "같은 단계는 왼쪽에서 오른쪽 순"))
+                structureRow(String(localized: "적용 위치"), String(localized: "기존 본문 하단에 이어 붙이기"))
             }
             Button("설교문 적용") { requestExport() }
                 .buttonStyle(SermonPillButtonStyle(isFilled: true, tint: accent))
@@ -1762,7 +1762,7 @@ struct SermonMindMapView: View {
             if let representative {
                 // 대표(첫 번째) 노드의 값을 보여주고, 움직이면 선택 전체에 같은 크기를 적용한다.
                 StyleValueSlider(
-                    title: "제목",
+                    title: String(localized: "제목"),
                     range: 10...40,
                     step: 1,
                     fractionDigits: 0,
@@ -1830,7 +1830,7 @@ struct SermonMindMapView: View {
     /// 마인드맵 전체에 적용되는 경로 종류 설정. 저장은 노드별 `pathType`에 하되 항상 같은 값으로 맞춘다.
     private var pathTypeControl: some View {
         VStack(alignment: .leading, spacing: 6) {
-            styleFieldLabel("경로 종류").padding(.top, 6)
+            styleFieldLabel(String(localized: "경로 종류")).padding(.top, 6)
             Picker("경로 종류", selection: Binding(
                 get: { currentPathType },
                 set: { newValue in setAllPathTypes(newValue) }
@@ -1875,13 +1875,13 @@ struct SermonMindMapView: View {
     /// `LazyVGrid` 안에 `ForEach`를 중첩하면 셀이 일부만 렌더링되어, 단일 레벨 `ForEach` 패턴(`colorSwatchRow`)을 쓴다.
     private func shapeStyleSection(_ node: MindMapNode) -> some View {
         VStack(alignment: .leading, spacing: 8) {
-            styleSectionTitle("도형 스타일")
-            styleFieldLabel("색상")
+            styleSectionTitle(String(localized: "도형 스타일"))
+            styleFieldLabel(String(localized: "색상"))
             colorSwatchRow(selected: node.color) { color in
                 node.color = color
                 node.updatedAt = .now
             }
-            styleFieldLabel("모양").padding(.top, 2)
+            styleFieldLabel(String(localized: "모양")).padding(.top, 2)
             Picker("도형 모양", selection: Binding(
                 get: { node.shape },
                 set: { newValue in
@@ -1903,9 +1903,9 @@ struct SermonMindMapView: View {
     /// 설명이 있는 노드는 제목 영역 높이도 비율대로 함께 바뀐다(`MindMapNode.setFontSize`).
     private func fontStyleSection(_ node: MindMapNode) -> some View {
         VStack(alignment: .leading, spacing: 8) {
-            styleSectionTitle("글자 크기")
+            styleSectionTitle(String(localized: "글자 크기"))
             StyleValueSlider(
-                title: "제목",
+                title: String(localized: "제목"),
                 range: 10...40,
                 step: 1,
                 fractionDigits: 0,
@@ -1947,15 +1947,15 @@ struct SermonMindMapView: View {
     private func borderStyleSection(_ node: MindMapNode) -> some View {
         let hasBorder = node.borderStyle != .solid
         return VStack(alignment: .leading, spacing: 8) {
-            styleSectionTitle("테두리 스타일")
-            styleFieldLabel("색상")
+            styleSectionTitle(String(localized: "테두리 스타일"))
+            styleFieldLabel(String(localized: "색상"))
             colorSwatchRow(selected: node.resolvedBorderColor) { color in
                 node.borderColor = color
                 node.updatedAt = .now
             }
             .disabled(!hasBorder)
             .opacity(hasBorder ? 1 : 0.4)
-            styleFieldLabel("모양").padding(.top, 2)
+            styleFieldLabel(String(localized: "모양")).padding(.top, 2)
             Picker("테두리 모양", selection: Binding(
                 get: { node.borderStyle },
                 set: { newValue in
@@ -1976,7 +1976,7 @@ struct SermonMindMapView: View {
             switch node.borderStyle {
             case .outline:
                 StyleValueSlider(
-                    title: "두께",
+                    title: String(localized: "두께"),
                     range: 1...6,
                     step: 0.5,
                     fractionDigits: 1,
@@ -1989,7 +1989,7 @@ struct SermonMindMapView: View {
                 .padding(.top, 4)
             case .dashed:
                 StyleValueSlider(
-                    title: "점 간격",
+                    title: String(localized: "점 간격"),
                     range: 2...20,
                     step: 1,
                     fractionDigits: 0,
@@ -2030,19 +2030,19 @@ struct SermonMindMapView: View {
     /// 테두리(`borderStyleSection`)와는 서로 참조하지 않는 별개 축이다.
     private func lineStyleSection(_ node: MindMapNode) -> some View {
         VStack(alignment: .leading, spacing: 8) {
-            styleSectionTitle("선 스타일")
+            styleSectionTitle(String(localized: "선 스타일"))
             if node.parent == nil {
                 Text("부모로 이어지는 선이 없는 노드입니다(루트 노드이거나 연결이 끊긴 노드).")
                     .font(.caption2)
                     .foregroundStyle(.secondary)
             } else {
-                styleFieldLabel("색상")
+                styleFieldLabel(String(localized: "색상"))
                 colorSwatchRow(selected: node.resolvedLineColor) { color in
                     node.lineColor = color
                     node.updatedAt = .now
                 }
 
-                styleFieldLabel("모양").padding(.top, 2)
+                styleFieldLabel(String(localized: "모양")).padding(.top, 2)
                 Picker("선 모양", selection: Binding(
                     get: { node.resolvedLineStyle },
                     set: { newValue in
@@ -2063,7 +2063,7 @@ struct SermonMindMapView: View {
                 switch node.resolvedLineStyle {
                 case .solid:
                     StyleValueSlider(
-                        title: "두께",
+                        title: String(localized: "두께"),
                         range: 1...6,
                         step: 0.5,
                         fractionDigits: 1,
@@ -2076,7 +2076,7 @@ struct SermonMindMapView: View {
                     .padding(.top, 4)
                 case .dashed:
                     StyleValueSlider(
-                        title: "점 간격",
+                        title: String(localized: "점 간격"),
                         range: 2...20,
                         step: 1,
                         fractionDigits: 0,
@@ -2115,7 +2115,7 @@ struct SermonMindMapView: View {
                         } else {
                             // 실선의 `lineThickness`(1~6pt)와 범위가 달라 별도 값(`taperThickness`, 6~20pt)을 쓴다.
                             StyleValueSlider(
-                                title: "시작 두께",
+                                title: String(localized: "시작 두께"),
                                 range: 6...20,
                                 step: 1,
                                 fractionDigits: 0,
@@ -2136,7 +2136,7 @@ struct SermonMindMapView: View {
                 pathTypeControl
 
                 // 모든 선 스타일에서 켜고 끌 수 있다.
-                styleFieldLabel("깊이별 옅어짐").padding(.top, 6)
+                styleFieldLabel(String(localized: "깊이별 옅어짐")).padding(.top, 6)
                 Toggle("하위로 갈수록 점점 옅게", isOn: Binding(
                     get: { node.resolvedLineFadeByDepth },
                     set: { newValue in
@@ -2158,7 +2158,7 @@ struct SermonMindMapView: View {
 
     private func addRootNode() {
         let node = MindMapNode(
-            text: "메인주제",
+            text: String(localized: "메인주제"),
             positionX: Double(Self.canvasSize.width / 2),
             positionY: Double(Self.canvasSize.height / 2),
             width: Self.defaultNodeWidth,
@@ -2184,7 +2184,7 @@ struct SermonMindMapView: View {
     private func addChild(to parent: MindMapNode) {
         let siblingIndex = (parent.children ?? []).count
         let node = MindMapNode(
-            text: "새 노드",
+            text: String(localized: "새 노드"),
             positionX: parent.positionX + 220,
             positionY: parent.positionY + Double(siblingIndex) * 90,
             width: Self.defaultNodeWidth,
@@ -2288,7 +2288,7 @@ struct SermonMindMapView: View {
     private func requestExport() {
         let plan = SermonMindMapExporter.makePlan(from: nodes)
         guard plan.title != nil || !plan.paragraphs.isEmpty else {
-            exportResultMessage = "설교문으로 옮길 내용이 없습니다. 노드에 텍스트를 입력해 주세요."
+            exportResultMessage = String(localized: "설교문으로 옮길 내용이 없습니다. 노드에 텍스트를 입력해 주세요.")
             showExportResult = true
             return
         }
@@ -2312,11 +2312,11 @@ struct SermonMindMapView: View {
     private func exportConfirmMessage(_ plan: SermonMindMapExporter.Plan) -> String {
         var lines: [String] = []
         if let title = plan.title {
-            lines.append("설교 제목을 “\(title)”(으)로 설정하고,")
+            lines.append(String(localized: "설교 제목을 “\(title)”(으)로 설정하고,"))
         }
-        lines.append("\(plan.paragraphs.count)개 문단을 설교문 본문 끝에 추가합니다.")
-        lines.append("다시 적용하면 또 추가됩니다.")
-        lines.append("이 설교의 편집 화면이 열려 있으면 입력한 내용을 저장한 뒤 자동으로 닫히고, 내 설교 목록에서 이 설교가 선택됩니다.")
+        lines.append(String(localized: "\(plan.paragraphs.count)개 문단을 설교문 본문 끝에 추가합니다."))
+        lines.append(String(localized: "다시 적용하면 또 추가됩니다."))
+        lines.append(String(localized: "이 설교의 편집 화면이 열려 있으면 입력한 내용을 저장한 뒤 자동으로 닫히고, 내 설교 목록에서 이 설교가 선택됩니다."))
         return lines.joined(separator: "\n")
     }
 
@@ -2334,7 +2334,7 @@ struct SermonMindMapView: View {
         // `SermonEditorView.save()`와 같은 검색/성경구절 재인덱싱.
         BibleReferenceIndexingService.reindexSermon(sermon, context: modelContext)
         SermonExternalContentChange.post(.sermonContentReplacedExternally, sermonID: sermonID)
-        exportResultMessage = "설교문에 \(plan.paragraphs.count)개 문단을 추가했습니다."
+        exportResultMessage = String(localized: "설교문에 \(plan.paragraphs.count)개 문단을 추가했습니다.")
         showExportResult = true
     }
 
@@ -2368,37 +2368,37 @@ struct SermonMindMapView: View {
     /// 도형 모양의 표시 이름 — `shapeStyleSection` 참고.
     private func shapeName(_ shape: MindMapNodeShape) -> String {
         switch shape {
-        case .rounded: return "라운드"
-        case .rect: return "사각형"
+        case .rounded: return String(localized: "라운드")
+        case .rect: return String(localized: "사각형")
         }
     }
 
     private func borderStyleName(_ style: MindMapBorderStyle) -> String {
         switch style {
         // `solid`는 별도 테두리 선을 그리지 않으므로 "없음"으로 표시한다.
-        case .solid: return "없음"
-        case .dashed: return "점선"
-        case .outline: return "실선"
-        case .bottomAccent: return "하단 강조"
+        case .solid: return String(localized: "없음")
+        case .dashed: return String(localized: "점선")
+        case .outline: return String(localized: "실선")
+        case .bottomAccent: return String(localized: "하단 강조")
         }
     }
 
     private func arrowShapeName(_ shape: MindMapArrowShape) -> String {
         switch shape {
-        case .open: return "열린 화살표"
-        case .closedTriangle: return "닫힌 삼각형"
-        case .diamond: return "다이아몬드"
-        case .circle: return "원"
+        case .open: return String(localized: "열린 화살표")
+        case .closedTriangle: return String(localized: "닫힌 삼각형")
+        case .diamond: return String(localized: "다이아몬드")
+        case .circle: return String(localized: "원")
         }
     }
 
     /// `bulkActionsSection`의 선 스타일 버튼 라벨 — `lineStyleSection` Picker 안의 문자열과 같은 이름.
     private func lineStyleShortName(_ style: MindMapLineStyle) -> String {
         switch style {
-        case .solid: return "실선"
-        case .dashed: return "점선"
-        case .arrow: return "화살표"
-        case .taper: return "점점 얇게"
+        case .solid: return String(localized: "실선")
+        case .dashed: return String(localized: "점선")
+        case .arrow: return String(localized: "화살표")
+        case .taper: return String(localized: "점점 얇게")
         }
     }
 }
@@ -2603,7 +2603,7 @@ private struct MindMapNodeShapeView: View {
             .padding(8)
             .onSubmit { onEndEdit() }
         } else {
-            Text(node.text.isEmpty ? "새 노드" : node.text)
+            Text(node.text.isEmpty ? String(localized: "새 노드") : node.text)
                 .font(titleFont)
                 .foregroundStyle(foregroundColor)
                 .multilineTextAlignment(.center)
@@ -2631,7 +2631,7 @@ private struct MindMapNodeShapeView: View {
             .padding(6)
             .onSubmit { onEndEditDescription() }
         } else {
-            Text(description.isEmpty ? "설명" : description)
+            Text(description.isEmpty ? String(localized: "설명") : description)
                 .font(descriptionFont)
                 .foregroundStyle(foregroundColor.opacity(description.isEmpty ? 0.6 : 1))
                 .multilineTextAlignment(.center)
@@ -2716,7 +2716,7 @@ private struct MindMapNodeShapeView: View {
             .background(Circle().fill(accent))
             .overlay(Circle().stroke(Color.white.opacity(0.9), lineWidth: 1))
             .contentShape(Circle())
-            .help(handle == .top ? "끌어서 다른 노드 위에 놓으면 그 노드가 이 노드의 부모가 됩니다" : "끌어서 다른 노드 위에 놓으면 그 노드가 이 노드의 자식이 됩니다")
+            .help(handle == .top ? String(localized: "끌어서 다른 노드 위에 놓으면 그 노드가 이 노드의 부모가 됩니다") : String(localized: "끌어서 다른 노드 위에 놓으면 그 노드가 이 노드의 자식이 됩니다"))
             .gesture(
                 DragGesture(minimumDistance: 2, coordinateSpace: .named(canvasSpace))
                     .onChanged { value in onLinkDragChanged(handle, value.location) }
@@ -2992,7 +2992,7 @@ final class MindMapUndoCoordinator {
                 target.undoStep(to: snapshot)
             }
         }
-        undoManager.setActionName("마인드맵 편집")
+        undoManager.setActionName(String(localized: "마인드맵 편집"))
     }
 
     /// 실행취소/다시 실행 한 걸음 — `snapshot` 상태로 되돌리고, 되돌리기 직전 상태를
@@ -3386,7 +3386,7 @@ enum SermonMindMapExporter {
     @MainActor
     static func apply(_ plan: Plan, to sermon: Sermon, settings: UserSettingsStore) {
         if let title = plan.title {
-            let isUntouchedDefault = title == defaultRootText
+            let isUntouchedDefault = title == defaultRootText || title == String(localized: "메인주제")
             if !(isUntouchedDefault && !sermon.title.trimmingCharacters(in: .whitespaces).isEmpty) {
                 sermon.title = title
             }

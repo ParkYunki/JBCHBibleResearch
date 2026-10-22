@@ -129,8 +129,8 @@ final class UserSettingsStore {
         var id: String { rawValue }
         var displayName: String {
             switch self {
-            case .beforeBody: return "본문 앞"
-            case .afterBody: return "본문 뒤"
+            case .beforeBody: return String(localized: "본문 앞")
+            case .afterBody: return String(localized: "본문 뒤")
             }
         }
     }
@@ -175,9 +175,9 @@ final class UserSettingsStore {
         var id: String { rawValue }
         var displayName: String {
             switch self {
-            case .off: return "끄기"
-            case .tapToReveal: return "탭하면 보기"
-            case .alwaysInline: return "항상 보기(국한문식)"
+            case .off: return String(localized: "끄기")
+            case .tapToReveal: return String(localized: "탭하면 보기")
+            case .alwaysInline: return String(localized: "항상 보기(국한문식)")
             }
         }
     }
@@ -198,9 +198,9 @@ final class UserSettingsStore {
         var id: String { rawValue }
         var displayName: String {
             switch self {
-            case .system: return "시스템 따름"
-            case .light: return "라이트"
-            case .dark: return "다크"
+            case .system: return String(localized: "시스템 따름")
+            case .light: return String(localized: "라이트")
+            case .dark: return String(localized: "다크")
             }
         }
         /// `.preferredColorScheme(_:)`에 넘길 값. `.system`은 nil(강제하지 않음).
@@ -320,9 +320,9 @@ final class UserSettingsStore {
         var id: String { rawValue }
         var displayName: String {
             switch self {
-            case .auto: return "자동 변경"
-            case .light: return "연한 금박"
-            case .dark: return "밤빛 남색"
+            case .auto: return String(localized: "자동 변경")
+            case .light: return String(localized: "연한 금박")
+            case .dark: return String(localized: "밤빛 남색")
             }
         }
     }
@@ -504,6 +504,11 @@ final class UserSettingsStore {
     //
     // (2026-10-03 재설계로 기본값이 바뀌었다: 대주제 28 / 중주제 Bold 22 / 소주제 SemiBold 18 / 말씀구절 고운바탕 16.5 /
     //  인용 Paperlogy Regular 14.5(기울임 없음) / 본문 17. 인용의 시스템 폰트 AppleGothic 의존은 없어졌다.)
+    //
+    // (2026-10-12 다국어: 태국어·러시아어·베트남어 화면에서는 Paperlogy/고운바탕에 없는 글자가 생기므로 기본 글꼴 이름만
+    //  `BundledFonts.languageAdjustedDefaultFontName`으로 같은 굵기의 다국어 글꼴로 바꾼다. 크기·색은 그대로. 저장된 값(사용자가
+    //  고른 글꼴, iCloud로 동기화된 값)이 있으면 그 값을 쓴다. 기기마다 언어가 달라도 `SermonParagraphStyleCodec`의 스냅샷
+    //  비교가 "수동 지정이 아님"으로 판단해 각 기기의 기본값으로 다시 그린다.)
     var sermonMainThemeFontName: String {
         didSet { persistSyncedSermonSetting(sermonMainThemeFontName, forKey: Key.sermonMainThemeFontName) }
     }
@@ -643,18 +648,18 @@ final class UserSettingsStore {
         // 설교 문단 스타일 기본 글자 크기(2026-10-01: 화면에 비해 커서 줄임 — 최종 대주제 25/중주제 20/소주제 17/말씀구절 15/인용 15/본문 15, 이전 34/24/16/20/17/19).
         // 이 값을 바꾸는 설정 UI가 없어 저장된 값이 없으므로 기본값 변경만으로 기존 기기에도 적용된다. 이미 저장된 설교 본문은
         // `styleFontSnapshot`이 옛 크기와 같은 글자를 "수동 지정이 아님"으로 보고 불러올 때 새 크기로 다시 입힌다.
-        self.sermonMainThemeFontName = defaults.string(forKey: Key.sermonMainThemeFontName) ?? "Paperlogy-8ExtraBold"
+        self.sermonMainThemeFontName = defaults.string(forKey: Key.sermonMainThemeFontName) ?? BundledFonts.languageAdjustedDefaultFontName("Paperlogy-8ExtraBold")
         // 2026-10-03 스타일 재설계 기본값 — 설정에서 직접 바꿔 저장된 값이 있으면 그 값이 우선이라 그대로 유지된다.
         self.sermonMainThemeFontSize = defaults.object(forKey: Key.sermonMainThemeFontSize) as? Double ?? 28
-        self.sermonMidThemeFontName = defaults.string(forKey: Key.sermonMidThemeFontName) ?? "Paperlogy-7Bold"
+        self.sermonMidThemeFontName = defaults.string(forKey: Key.sermonMidThemeFontName) ?? BundledFonts.languageAdjustedDefaultFontName("Paperlogy-7Bold")
         self.sermonMidThemeFontSize = defaults.object(forKey: Key.sermonMidThemeFontSize) as? Double ?? 22
-        self.sermonSubThemeFontName = defaults.string(forKey: Key.sermonSubThemeFontName) ?? "Paperlogy-6SemiBold"
+        self.sermonSubThemeFontName = defaults.string(forKey: Key.sermonSubThemeFontName) ?? BundledFonts.languageAdjustedDefaultFontName("Paperlogy-6SemiBold")
         self.sermonSubThemeFontSize = defaults.object(forKey: Key.sermonSubThemeFontSize) as? Double ?? 18
-        self.sermonVerseQuoteFontName = defaults.string(forKey: Key.sermonVerseQuoteFontName) ?? "GowunBatang-Regular"
+        self.sermonVerseQuoteFontName = defaults.string(forKey: Key.sermonVerseQuoteFontName) ?? BundledFonts.languageAdjustedDefaultFontName("GowunBatang-Regular")
         self.sermonVerseQuoteFontSize = defaults.object(forKey: Key.sermonVerseQuoteFontSize) as? Double ?? 16.5
-        self.sermonCitationFontName = defaults.string(forKey: Key.sermonCitationFontName) ?? "Paperlogy-4Regular"
+        self.sermonCitationFontName = defaults.string(forKey: Key.sermonCitationFontName) ?? BundledFonts.languageAdjustedDefaultFontName("Paperlogy-4Regular")
         self.sermonCitationFontSize = defaults.object(forKey: Key.sermonCitationFontSize) as? Double ?? 14.5
-        self.sermonBodyFontName = defaults.string(forKey: Key.sermonBodyFontName) ?? "GowunBatang-Regular"
+        self.sermonBodyFontName = defaults.string(forKey: Key.sermonBodyFontName) ?? BundledFonts.languageAdjustedDefaultFontName("GowunBatang-Regular")
         self.sermonBodyFontSize = defaults.object(forKey: Key.sermonBodyFontSize) as? Double ?? 17
         // 글자색 기본값(목업 Editor.dc.html의 STYLE_DEFS 기반): 대주제/본문/말씀구절은 어두운
         // 무채색(#2B211D), 중주제는 와인색(#7A3B42), 소주제는 웜그레이(#6B5D52), 인용은 초록

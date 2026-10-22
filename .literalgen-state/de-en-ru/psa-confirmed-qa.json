@@ -1,0 +1,330 @@
+[
+  {
+    "path": "Tools/LiteralGen/outputs/de/19_PSA/PSA_004.tsv",
+    "verse": "2",
+    "old_row": "2\tSöhne eines Mannes, bis wann wird meine Ehre zur Schande? Ihr liebt Nichtiges, sucht Lüge. Sela.\tDie Angeredeten heißen Söhne eines Mannes; Nichtiges wird gesucht und geliebt.",
+    "new_row": "2\tSöhne eines Mannes, bis wann wird meine Ehre zur Schande? Ihr liebt Nichtiges, sucht Lüge. Sela.\tDie Angeredeten heißen Söhne eines Mannes; die Schande betrifft die Ehre.",
+    "reason": "Remove inaccurate note implying vanity is both loved and sought; the sought object is falsehood."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/19_PSA/PSA_004.tsv",
+    "verse": "8",
+    "old_row": "8\tВ мире вместе лягу и усну, ибо Ты, Господи, один даёшь мне жить безопасно.\tЛягу и усну выражены будущим временем.",
+    "new_row": "8\tВ мире я и лягу, и усну одновременно, ибо Ты, Господи, один даёшь мне жить безопасно.\tЛягу и усну выражены будущим временем.",
+    "reason": "Clarify that together joins lying and sleeping, not an unnamed companion."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/19_PSA/PSA_008.tsv",
+    "verse": "2",
+    "old_row": "2\tИз уст младенцев и грудных детей Ты основал силу ради Твоих врагов, чтобы прекратить врага и мстителя.\tНазвана сила, не хвала.",
+    "new_row": "2\tИз уст младенцев и грудных детей Ты основал силу ради Твоих врагов, чтобы остановить врага и мстителя.\tНазвана сила, не хвала.",
+    "reason": "Russian прекратить cannot naturally take a personal enemy as its object; остановить preserves causing the enemy to cease."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/19_PSA/PSA_009.tsv",
+    "verse": "16",
+    "old_row": "16\tDer HERR hat sich bekannt gemacht, hat Gericht getan; im Werk seiner Handflächen ist der Frevler verstrickt. Higgajon. Sela.\tDer Frevler und seine Handflächen sind ausdrücklich genannt.",
+    "new_row": "16\tDer HERR ist bekannt geworden, hat Gericht getan; im Werk seiner Handflächen ist der Frevler verstrickt. Higgajon. Sela.\tDer Frevler und seine Handflächen sind ausdrücklich genannt.",
+    "reason": "Preserve passive/inchoative Nifal נודע rather than reflexive self-disclosure."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/19_PSA/PSA_010.tsv",
+    "verse": "17",
+    "old_row": "17\tDas Begehren der Elenden hast du gehört, HERR; du festigst ihr Herz, schenkst deinem Ohr Aufmerksamkeit,\tGott festigt ihr Herz aktiv; das Hören ist vergangen.",
+    "new_row": "17\tDas Begehren der Elenden hast du gehört, HERR; du festigst ihr Herz, neigst dein Ohr,\tGott festigt ihr Herz aktiv; das Hören ist vergangen.",
+    "reason": "Inclining the ear is attention to the prayer, not attention paid to His own ear."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/19_PSA/PSA_012.tsv",
+    "verse": "1",
+    "old_row": "1\tDem Leiter. Nach der Achten. Ein Psalm Davids. Rette, HERR, denn ein Getreuer ist zu Ende, denn Treue sind unter den Menschenkindern verschwunden.\tDer Getreue steht zunächst im Singular; das Verschwinden ist vollendet.",
+    "new_row": "1\tDem Leiter. Nach der Achten. Ein Psalm Davids. Rette, HERR, denn ein Getreuer ist dahin, denn Treue sind unter den Menschenkindern verschwunden.\tDer Getreue steht zunächst im Singular; das Verschwinden ist vollendet.",
+    "reason": "Correct German idiom for the faithful person having ceased; zu Ende suggests being exhausted."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/19_PSA/PSA_013.tsv",
+    "verse": "4",
+    "old_row": "4\tdamit mein Feind nicht sage: „Ich habe ihn überwältigt“, meine Bedränger jubeln, wenn ich wanke.\tWanken steht statt Niederliegen.",
+    "new_row": "4\tdamit mein Feind nicht sage: „Ich habe ihn überwältigt“, meine Bedränger nicht jubeln, wenn ich wanke.\tWanken steht statt Niederliegen.",
+    "reason": "Carry the negative purpose introduced by lest into the parallel clause about enemies rejoicing."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/19_PSA/PSA_013.tsv",
+    "verse": "4",
+    "old_row": "4\tчтобы мой враг не сказал: «Я одолел его»; мои враги возликуют, если я поколеблюсь.\tБлизко к еврейскому.",
+    "new_row": "4\tчтобы мой враг не сказал: «Я одолел его»; да не возликуют мои враги, если я поколеблюсь.\tБлизко к еврейскому.",
+    "reason": "Carry the negative purpose introduced by lest into the parallel clause about enemies rejoicing."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/19_PSA/PSA_062.tsv",
+    "verse": "1",
+    "old_row": "1\tDem Leiter. Nach Jeduthun. Ein Psalm Davids. Nur zu Gott ist Stille meine Seele; von ihm ist meine Rettung.\tDie Rettung kommt von ihm; die Stille ist ausgesagt.",
+    "new_row": "1\tDem Leiter. Nach Jeduthun. Ein Psalm Davids. Nur zu Gott ist meine Seele still; von ihm ist meine Rettung.\tDie Rettung kommt von ihm; die Stille ist ausgesagt.",
+    "reason": "Correct German predicate word order and use the adjective required by native grammar."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/19_PSA/PSA_062.tsv",
+    "verse": "11",
+    "old_row": "11\tОдно говорил Бог, два этих я услышал: что сила принадлежит Богу,\tОдно и два названы прямо.",
+    "new_row": "11\tОдно говорил Бог, эти два я услышал: что сила принадлежит Богу,\tОдно и два названы прямо.",
+    "reason": "Correct Russian demonstrative/numeral order while retaining the two things wording."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/19_PSA/PSA_065.tsv",
+    "verse": "8",
+    "old_row": "8\tИ убоялись живущие на краях Твоих знамений; выходы утра и вечера Ты заставляешь ликовать.\tВыходы утра и вечера названы прямо.",
+    "new_row": "8\tИ живущие на краях убоялись Твоих знамений; выходы утра и вечера Ты заставляешь ликовать.\tВыходы утра и вечера названы прямо.",
+    "reason": "Prevent misreading the ends as belonging to the signs; the signs are the object of fearing."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/19_PSA/PSA_067.tsv",
+    "verse": "1",
+    "old_row": "1\tНачальнику. На струнных. Псалом. Песня. Да помилует нас Бог и благословит нас, да осветит Своё лицо с нами. Села.\tБог назван в третьем лице; Села сохранено.",
+    "new_row": "1\tНачальнику. На струнных. Псалом. Песня. Да помилует нас Бог и благословит нас, да даст Своему лицу сиять с нами. Села.\tБог назван в третьем лице; Села сохранено.",
+    "reason": "Avoid suggesting He shines light on His own face; His face is to shine with us."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/19_PSA/PSA_076.tsv",
+    "verse": "2",
+    "old_row": "2\tUnd in Salem wurde seine Hütte und seine Wohnung in Zion.\tDas Entstehen der Hütte ist vergangen.",
+    "new_row": "2\tUnd in Salem war seine Hütte und seine Wohnung in Zion.\tDas Sein der Hütte wird vergangen beschrieben.",
+    "reason": "Sein statt unvollständigem Werden ohne Prädikat."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/19_PSA/PSA_078_2.tsv",
+    "verse": "42",
+    "old_row": "42\tSie erinnerten sich nicht an seine Hand, an den Tag, da er sie aus der Hand des Bedrängers erlöste,\tEin Bedränger steht in der Einzahl.",
+    "new_row": "42\tSie erinnerten sich nicht an seine Hand, an den Tag, da er sie vom Bedränger erlöste,\tEin Bedränger steht in der Einzahl.",
+    "reason": "מני צר nennt keine zusätzliche Hand."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/19_PSA/PSA_022_1.tsv",
+    "old_row": "30\tEin Same wird ihm dienen; dem Herrn wird von der Generation erzählt werden.\tEin Same steht als Subjekt; das Erzählen ist passiv.",
+    "new_row": "30\tEin Same wird ihm dienen; vom Herrn wird der Generation erzählt werden.\tEin Same steht als Subjekt; das Erzählen ist passiv."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/19_PSA/PSA_086.tsv",
+    "old_row": "2\tBewahre meine Seele, denn ich bin getreu; rette deinen Knecht, du, mein Gott, der auf dich vertraut!\tGetreu und Retten sind ausdrücklich.",
+    "new_row": "2\tBewahre meine Seele, denn ich bin getreu; rette, du, mein Gott, deinen Knecht, der auf dich vertraut!\tGetreu und Retten sind ausdrücklich."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/19_PSA/PSA_084.tsv",
+    "old_row": "9\tНаш щит посмотри, Боже, и взгляни на лицо Твоего помазанника!\tЩит назван прямо.",
+    "new_row": "9\tНа наш щит посмотри, Боже, и взгляни на лицо Твоего помазанника!\tЩит назван прямо."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/19_PSA/PSA_083.tsv",
+    "old_row": "1\tПеснь. Псалом Асафа. Боже, да не будет Тебе молчания; не безмолвствуй и не покойся, Бог!\tПервое молчание дано существительным.",
+    "new_row": "1\tПеснь. Псалом Асафа. Боже, да не будет Тебе молчания; не безмолвствуй и не покойся, Боже!\tПервое молчание дано существительным."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/19_PSA/PSA_098.tsv",
+    "old_row": "1\tПсалом. Пойте Господу новую песню, ибо Он сделал чудеса; Его десница и Его святая мышца спасли Ему.\tДавид в заглавии не добавлен.",
+    "new_row": "1\tПсалом. Пойте Господу новую песню, ибо Он сделал чудеса; Его десница и Его святая мышца доставили Ему спасение.\tДавид в заглавии не добавлен."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/19_PSA/PSA_094.tsv",
+    "old_row": "1\tБог отмщений, Господи, Бог отмщений, воссияй!\tЗаглавие о Давиде не добавлено; сияние названо прямо.",
+    "new_row": "1\tБоже отмщений, Господи, Боже отмщений, воссияй!\tЗаглавие о Давиде не добавлено; сияние названо прямо."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/19_PSA/PSA_095.tsv",
+    "old_row": "11\tden ich in meinem Zorn geschworen habe: ‚Sie werden nicht in meine Ruhe eingehen!‘“\tDas Eingehen ist ausdrücklich.",
+    "new_row": "11\tdenen ich in meinem Zorn geschworen habe: ‚Sie werden nicht in meine Ruhe eingehen!‘“\tDas Eingehen ist ausdrücklich."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/19_PSA/PSA_139.tsv",
+    "old_row": "22\tMit vollkommener Feindschaft habe ich sie gehasst; sie sind mir zu Feinden geworden.\tDer Wortstamm des Hasses wird wiederholt; der Hass ist als geschehen formuliert.",
+    "new_row": "22\tMit vollkommenem Hass habe ich sie gehasst; sie sind mir zu Feinden geworden.\tDer Wortstamm des Hasses wird wiederholt; der Hass ist als geschehen formuliert."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/19_PSA/PSA_138.tsv",
+    "old_row": "2\tПоклонюсь к Твоему святому храму и буду благодарить Твоё имя за Твою милость и за Твою истину, ибо Ты возвеличил Твоё слово над всем Твоим именем.\tНаправление поклонения — «к храму», а не «пред храмом».",
+    "new_row": "2\tПоклонюсь в сторону Твоего святого храма и буду благодарить Твоё имя за Твою милость и за Твою истину, ибо Ты возвеличил Твоё слово над всем Твоим именем.\tНаправление поклонения — «к храму», а не «пред храмом»."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/19_PSA/PSA_140.tsv",
+    "old_row": "4\tBewahre mich, HERR, vor den Händen des Frevlers; vor einem Mann der Gewalttaten behüte mich, die erdacht haben, meine Schritte umzustoßen.\tHände und Schritte stehen im Plural, Frevler und Mann im Singular.",
+    "new_row": "4\tBewahre mich, HERR, vor den Händen des Frevlers; vor einem Mann der Gewalttaten behüte mich; sie haben erdacht, meine Schritte umzustoßen.\tHände und Schritte stehen im Plural, Frevler und Mann im Singular."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/19_PSA/PSA_140.tsv",
+    "old_row": "4\tОхрани меня, Господи, от рук нечестивого; от человека насилий сохрани меня, которые замыслили опрокинуть мои шаги.\t«Человек» стоит в единственном числе вместо множественного «притеснителей».",
+    "new_row": "4\tОхрани меня, Господи, от рук нечестивого; от человека насилий сохрани меня; они замыслили опрокинуть мои шаги.\t«Человек» стоит в единственном числе вместо множественного «притеснителей»."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/19_PSA/PSA_140.tsv",
+    "old_row": "3\tОни заострили свой язык, как змея; яд аспида под их губами. Села.\tШлифование языка представлено как совершённое; в конце сохранено «Села».",
+    "new_row": "3\tОни заострили свой язык, как змея; яд аспида под их губами. Села.\tЗаострение языка представлено как совершённое; в конце сохранено «Села»."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/19_PSA/PSA_042.tsv",
+    "old_row": "5\tWarum beugst du dich nieder, meine Seele, und tobst über mir? Harre auf Gott, denn ich werde ihm noch danken, den Rettungen seines Angesichts.\tRettungen seines Angesichts sind als Hauptwortgruppe genannt.",
+    "new_row": "5\tWarum beugst du dich nieder, meine Seele, und tobst über mir? Harre auf Gott, denn ich werde ihm noch für die Rettungen seines Angesichts danken.\tRettungen seines Angesichts sind als Hauptwortgruppe genannt."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/19_PSA/PSA_042.tsv",
+    "old_row": "5\tПочему поникаешь, душа моя, и волнуешься на мне? Жди Бога, ибо я ещё буду благодарить Его, спасения лица Его.\tНазваны спасения Его лица, без отдельного Бога моего в этом стихе.",
+    "new_row": "5\tПочему поникаешь, душа моя, и волнуешься на мне? Жди Бога, ибо я ещё буду благодарить Его за спасения лица Его.\tНазваны спасения Его лица, без отдельного Бога моего в этом стихе."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/19_PSA/PSA_042.tsv",
+    "old_row": "11\tWarum beugst du dich nieder, meine Seele, und warum tobst du über mir? Harre auf Gott, denn ich werde ihm noch danken, den Rettungen meines Angesichts und meinem Gott.\tRettungen stehen in der Mehrzahl.",
+    "new_row": "11\tWarum beugst du dich nieder, meine Seele, und warum tobst du über mir? Harre auf Gott, denn ich werde ihm, meinem Gott, noch für die Rettungen meines Angesichts danken.\tRettungen stehen in der Mehrzahl."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/19_PSA/PSA_042.tsv",
+    "old_row": "11\tПочему поникаешь, душа моя, и почему волнуешься на мне? Жди Бога, ибо я ещё буду благодарить Его, спасения лица моего и Бога моего.\tСпасения лица моего стоят во множественном числе.",
+    "new_row": "11\tПочему поникаешь, душа моя, и почему волнуешься на мне? Жди Бога, ибо я ещё буду благодарить Его, Бога моего, за спасения лица моего.\tСпасения лица моего стоят во множественном числе."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/19_PSA/PSA_043.tsv",
+    "old_row": "5\tWarum beugst du dich nieder, meine Seele, und warum tobst du über mir? Harre auf Gott, denn ich werde ihm noch danken, den Rettungen meines Angesichts und meinem Gott.\tRettungen stehen im Plural.",
+    "new_row": "5\tWarum beugst du dich nieder, meine Seele, und warum tobst du über mir? Harre auf Gott, denn ich werde ihm, meinem Gott, noch für die Rettungen meines Angesichts danken.\tRettungen stehen im Plural."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/19_PSA/PSA_043.tsv",
+    "old_row": "5\tПочему поникаешь, душа моя, и почему волнуешься на мне? Жди Бога, ибо я ещё буду благодарить Его, спасения лица моего и Бога моего.\tНазваны спасения лица моего.",
+    "new_row": "5\tПочему поникаешь, душа моя, и почему волнуешься на мне? Жди Бога, ибо я ещё буду благодарить Его, Бога моего, за спасения лица моего.\tНазваны спасения лица моего."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/19_PSA/PSA_044.tsv",
+    "old_row": "8\tБогом мы хвалились весь день и имя Твоё будем благодарить вечно. Села.\tХвальба представлена совершённой; сохранено села.",
+    "new_row": "8\tБогом мы хвалились весь день и имени Твоему будем воздавать благодарение вечно. Села.\tХвальба представлена совершённой; сохранено села."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/19_PSA/PSA_045.tsv",
+    "old_row": "10\tСлушай, дочь, и смотри, и приклони ухо твоё, и забудь народ твой и дом отца твоего!\tНичего дополнительного к повелениям нет.",
+    "new_row": "10\tСлушай, дочь, и смотри, и приклони ухо твоё, и забудь народ твой и дом отца твоего!\tБлизко к еврейскому."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/19_PSA/PSA_046.tsv",
+    "old_row": "5\tБог посреди неё, она не поколеблется, Бог поможет ей при наступлении утра.\tБлизко к еврейскому.",
+    "new_row": "5\tБог посреди него, он не поколеблется, Бог поможет ему при наступлении утра.\tБлизко к еврейскому."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/19_PSA/PSA_048.tsv",
+    "old_row": "3\tБог в чертогах её стал известен как твердыня.\tНазваны чертоги и твердыня.",
+    "new_row": "3\tБог в чертогах его стал известен как твердыня.\tНазваны чертоги и твердыня."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/19_PSA/PSA_049.tsv",
+    "old_row": "3\tMein Mund wird Weisheiten reden, und das Sinnen meines Herzens ist Einsichten.\tWeisheiten und Einsichten stehen im Plural; genannt ist das Sinnen des Herzens.",
+    "new_row": "3\tMein Mund wird Weisheiten reden, und das Sinnen meines Herzens ist voller Einsichten.\tWeisheiten und Einsichten stehen im Plural; genannt ist das Sinnen des Herzens."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/19_PSA/PSA_050.tsv",
+    "old_row": "3\tДа придёт Бог наш и не молчит, огонь пред Ним пожирает, и вокруг Него весьма бурно.\tПриход и немолчание выражены пожеланием.",
+    "new_row": "3\tДа придёт Бог наш и да не молчит, огонь пред Ним пожирает, и вокруг Него весьма бурно.\tПриход и немолчание выражены пожеланием."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/19_PSA/PSA_055.tsv",
+    "old_row": "10\tДнём и ночью они обходят её по стенам её, и беззаконие и бедствие посреди неё.\tГород обозначен местоимением женского рода.",
+    "new_row": "10\tДнём и ночью они обходят его по стенам его, и беззаконие и бедствие посреди него.\tБлизко к еврейскому."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/19_PSA/PSA_055.tsv",
+    "old_row": "11\tПогибель посреди неё, и угнетение и обман не отходят от площади её.\tНазваны угнетение и одна площадь.",
+    "new_row": "11\tПогибель посреди него, и угнетение и обман не отходят от площади его.\tНазваны угнетение и одна площадь."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/19_PSA/PSA_055.tsv",
+    "old_row": "23\tDu aber, Gott, wirst sie in den Brunnen der Grube hinabführen; Männer des Blutes und Trugs werden ihre Tage nicht halbieren; ich aber werde auf dich vertrauen.\tGenannt sind Brunnen der Grube und Tage.",
+    "new_row": "23\tDu aber, Gott, wirst sie in den Brunnen der Grube hinabführen; Männer des Blutes und Trugs werden ihre Tage nicht zur Hälfte bringen; ich aber werde auf dich vertrauen.\tGenannt sind Brunnen der Grube und Tage."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/19_PSA/PSA_056.tsv",
+    "old_row": "3\tВ день, когда я страшусь, на Тебя буду доверять.\tПрямо назван день.",
+    "new_row": "3\tВ день, когда я страшусь, буду доверять Тебе.\tПрямо назван день."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/19_PSA/PSA_058.tsv",
+    "old_row": "5\tdie der Stimme von Beschwörern nicht hört, eines Kundigen, der Zaubersprüche bindet.\tBeschwörer stehen zunächst im Plural.",
+    "new_row": "5\tdie die Stimme von Beschwörern nicht hört, eines Kundigen, der Zaubersprüche bindet.\tBeschwörer stehen zunächst im Plural."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/19_PSA/PSA_108.tsv",
+    "old_row": "1\tПеснь. Псалом Давида. Твердо сердце моё, Боже, буду петь и играть, также слава моя.\tFestigkeit des Herzens wird nur einmal genannt; auch seine Ehre ist genannt.",
+    "new_row": "1\tПеснь. Псалом Давида. Твердо сердце моё, Боже, буду петь и играть, также слава моя.\tТвёрдость сердца названа один раз; также названа слава моя."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/19_PSA/PSA_110.tsv",
+    "old_row": "6\tEr wird unter den Völkern richten, voll Leichen; er hat ein Haupt über weitem Land zerschmettert.\tLeichen sind ausdrücklich genannt.",
+    "new_row": "6\tEr wird unter den Völkern richten, mit Leichen füllen; er hat ein Haupt über weitem Land zerschmettert.\tLeichen sind ausdrücklich genannt."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/19_PSA/PSA_110.tsv",
+    "old_row": "6\tОн будет судить среди народов, полон трупов, сокрушил голову над обширной землёй.\tЗемля как наполняемый предмет отдельно не названа; сокрушение головы представлено совершённым.",
+    "new_row": "6\tОн будет судить среди народов, наполнит трупами, сокрушил голову над обширной землёй.\tЗемля как наполняемый предмет отдельно не названа; сокрушение головы представлено совершённым."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/19_PSA/PSA_109_1.tsv",
+    "old_row": "21\tА Ты, Господи, Господь, сотвори со мною ради имени Твоего, ибо блага милость Твоя, избавь меня!\tИмена Господа различены как имя и титул.",
+    "new_row": "21\tА Ты, Господи, Господи, сотвори со мною ради имени Твоего, ибо блага милость Твоя, избавь меня!\tБлизко к еврейскому."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/19_PSA/PSA_106_2.tsv",
+    "old_row": "47\tСпаси нас, Господи, Боже наш, и собери нас из народов, чтобы благодарить имя святости Твоей, хвалиться хвалою Твоею!\tНазвано благодарение имени и хвала.",
+    "new_row": "47\tСпаси нас, Господи, Боже наш, и собери нас из народов, чтобы воздавать благодарение имени святости Твоей, хвалиться хвалою Твоею!\tНазвано благодарение имени и хвала."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/19_PSA/PSA_106_1.tsv",
+    "old_row": "3\tGlücklich die das Recht bewahren, wer zu jeder Zeit Gerechtigkeit tut!\tGenannt ist Recht statt Gebot; der Tätige steht zuletzt im Singular.",
+    "new_row": "3\tGlücklich sind die, die das Recht bewahren; glücklich, wer zu jeder Zeit Gerechtigkeit tut!\tGenannt ist Recht statt Gebot; der Tätige steht zuletzt im Singular."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/19_PSA/PSA_106_1.tsv",
+    "old_row": "3\tБлаженны хранящие суд, творящий правду во всякое время!\tТворящий правду стоит в единственном числе.",
+    "new_row": "3\tБлаженны хранящие суд; блажен творящий правду во всякое время!\tТворящий правду стоит в единственном числе."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/19_PSA/PSA_119_4.tsv",
+    "old_row": "103\tWie süß sind deinem Spruch nach meine Gaumenempfindungen geworden: süßer als Honig meinem Mund!\tGaumen und Mund werden beide genannt.",
+    "new_row": "103\tWie süß ist dein Spruch meinem Gaumen, süßer als Honig meinem Mund!\tGaumen und Mund werden beide genannt."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/19_PSA/PSA_119_4.tsv",
+    "old_row": "91\tNach deinen Gerichten stehen sie heute, denn alles sind deine Knechte.\tSie stehen nach deinen Gerichten; ausdrücklich sind alle deine Knechte.",
+    "new_row": "91\tNach deinen Gerichten stehen sie heute, denn alle sind deine Knechte.\tSie stehen nach deinen Gerichten; ausdrücklich sind alle deine Knechte."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/en/19_PSA/PSA_126.tsv",
+    "verse": "2",
+    "old_row": "2\t=\tMouth and tongue are singular; the nations actively speak rather than the report being passive.",
+    "new_row": "2\t=\tMouth and tongue are singular. The Hebrew describes people saying this among the nations, without naming the nations as the speakers.",
+    "reason": "The plural verb has an indefinite subject; among the nations does not identify the nations as agents."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/19_PSA/PSA_132.tsv",
+    "verse": "11",
+    "old_row": "11\tDer HERR hat David Wahrheit geschworen, davon wird er nicht zurückkehren: „Von der Frucht deines Leibes werde ich auf deinen Thron setzen.\tDie Frucht seines Leibes wird mit „von“ eingeführt.",
+    "new_row": "11\tDer HERR hat David Wahrheit geschworen, davon wird er nicht zurückkehren: „Von der Frucht deines Leibes werde ich einen auf deinen Thron setzen.\tDie Frucht seines Leibes wird mit „von“ eingeführt.",
+    "reason": "Das transitive setzen braucht in diesem deutschen Satz ein Akkusativobjekt; einen ergänzt das im Hebräischen elliptisch gelassene Glied minimal."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/19_PSA/PSA_145.tsv",
+    "verse": "12",
+    "old_row": "12\tчтобы дать знать сынам человеческим могучие деяния Его и славу великолепия царства Его.\tМестоимения здесь переходят к третьему лицу: Его деяния и Его царство.",
+    "new_row": "12\tчтобы сделать известными сынам человеческим могучие деяния Его и славу великолепия царства Его.\tМестоимения здесь переходят к третьему лицу: Его деяния и Его царство.",
+    "reason": "Дать знать требует о перед предметом сообщения; сделать известными сохраняет прямые дополнения и устраняет нарушение управления."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/en/19_PSA/PSA_150.tsv",
+    "verse": "3",
+    "old_row": "3\t=\tThe horn is specifically a ram’s horn; the stringed instruments are named in the reverse order.",
+    "new_row": "3\t=\tThe horn is specifically a ram’s horn.",
+    "reason": "The source names nevel followed by kinnor, corresponding to harp followed by lyre as BSB already does. The assertion that the strings are reversed is unsupported."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/19_PSA/PSA_147.tsv",
+    "old_row": "3\tEr heilt die zerbrochenen Herzens sind und verbindet ihre Wunden.\tDas Verbinden gilt ihren Wunden.",
+    "new_row": "3\tEr heilt die, die zerbrochenen Herzens sind, und verbindet ihre Wunden.\tDas Verbinden gilt ihren Wunden.",
+    "reason": "Supply the relative clause antecedent and punctuation."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/19_PSA/PSA_132.tsv",
+    "old_row": "11\tГосподь поклялся Давиду истиной, не отступит от неё: «От плода чрева твоего посажу на престоле твоём.\tБлизко к еврейскому.",
+    "new_row": "11\tГосподь поклялся Давиду истиной, не отступит от неё: «Одного от плода чрева твоего посажу на престоле твоём.\tБлизко к еврейскому.",
+    "reason": "Supply the minimal object required by the verb, matching the source partitive phrase."
+  }
+]

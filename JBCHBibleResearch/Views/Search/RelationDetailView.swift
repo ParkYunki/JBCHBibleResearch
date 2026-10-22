@@ -40,8 +40,9 @@ struct RelationDetailView: View {
     }
 
     private var header: some View {
-        Text(PersonRelationLabeling.sentence(for: item.relation))
-            .font(.custom(SpecialPurposeFonts.titleSerif, size: 22, relativeTo: .title2))
+        let sentence = PersonRelationLabeling.sentence(for: item.relation)
+        return Text(sentence)
+            .font(.titleSerif(sentence, size: 22, relativeTo: .title2))
             .fontWeight(.bold)
             .foregroundStyle(settings.bibleTextColor ?? .primary)
             .padding(.vertical, 6)

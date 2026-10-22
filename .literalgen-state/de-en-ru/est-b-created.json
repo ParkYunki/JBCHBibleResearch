@@ -1,0 +1,42 @@
+[
+  {
+    "path": "Tools/LiteralGen/outputs/de/17_EST/EST_004.tsv",
+    "rows": 17,
+    "sha256": "9e85cdf65c1cce26710d435be2251267eb1da5c175f5bf3f7a4b6dc21e1c8cb5"
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/17_EST/EST_004.tsv",
+    "rows": 17,
+    "sha256": "52f59985d580afb251bf8a79dfef4f8d5f4a52e4fce2f9a91f379e68b4283f47"
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/17_EST/EST_005.tsv",
+    "rows": 14,
+    "sha256": "44d518a15f1faa098a7cc4c345ad2aec8fb55908c82ca716379813c5fa79808a"
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/17_EST/EST_005.tsv",
+    "rows": 14,
+    "sha256": "c8e6b8a7a7e967e75225ef39f3dfa4d736691c3d74503d3ff1ae7ad772b889d2"
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/17_EST/EST_006.tsv",
+    "rows": 14,
+    "sha256": "c68ba5631d586319acd0ac2ba91732f5fac67e3c1baf15d39f75bd4830cba28e"
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/17_EST/EST_006.tsv",
+    "rows": 14,
+    "sha256": "a79c9f330dd2685bd3f533430d311bc562f0cc6ed3aaed475c7502cf1a6df414"
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/17_EST/EST_007.tsv",
+    "rows": 10,
+    "sha256": "d26fbdc09c0ad4bf2053afb0f9988d878d4c6b47ebb07ab88605fd9a2ed1fd69"
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/17_EST/EST_007.tsv",
+    "rows": 10,
+    "sha256": "a65f1bbc290e9a84db98151b1cefa94defcf4910f6a27781bb4aed35284c028f"
+  }
+]

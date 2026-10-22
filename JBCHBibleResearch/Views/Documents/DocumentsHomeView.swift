@@ -179,7 +179,7 @@ struct DocumentsHomeView: View {
             }
         }
         .navigationTitle("연구 문서")
-        .macSerifTitle("연구 문서")
+        .macSerifTitle(String(localized: "연구 문서"))
         // 타이틀을 인라인으로 표시해 툴바 아이콘 좌측 공간 낭비를 막는다.
         #if os(iOS)
         .navigationBarTitleDisplayMode(.inline)
@@ -207,7 +207,7 @@ struct DocumentsHomeView: View {
             ToolbarItem(placement: .principal) {
                 // 타이틀은 세리프체(`SpecialPurposeFonts.titleSerif`)로 표시한다.
                 Text("연구 문서")
-                    .font(.custom(SpecialPurposeFonts.titleSerif, size: 20, relativeTo: .title3))
+                    .font(.titleSerif(size: 20, relativeTo: .title3))
                     .fontWeight(.semibold)
                     .foregroundStyle(settings.bibleTextColor ?? .primary)
             }
@@ -365,7 +365,7 @@ struct DocumentsHomeView: View {
         if !uncategorized.isEmpty {
             groups.append(DocumentFolderGroup(
                 id: Self.uncategorizedGroupID,
-                name: "분류 없음",
+                name: String(localized: "분류 없음"),
                 documents: uncategorized,
                 filter: .uncategorized,
                 spineColor: onDark ? JBCHCategoryPalette.shelfSlateOnDark : JBCHCategoryPalette.shelfSlate
@@ -440,7 +440,7 @@ struct DocumentsHomeView: View {
             HStack(spacing: 10) {
                 VStack(alignment: .leading, spacing: 4) {
                     Text(group.name)
-                        .font(.custom(SpecialPurposeFonts.titleSerif, size: 17, relativeTo: .body))
+                        .font(.titleSerif(group.name, size: 17, relativeTo: .body))
                         .foregroundStyle(settings.bibleTextColor ?? .primary)
                         .lineLimit(1)
                     Text("\(group.documents.count)개 문서")
@@ -571,7 +571,7 @@ struct DocumentsHomeView: View {
             HStack(spacing: 10) {
                 VStack(alignment: .leading, spacing: 4) {
                     Text("전체 문서")
-                        .font(.custom(SpecialPurposeFonts.titleSerif, size: 17, relativeTo: .body))
+                        .font(.titleSerif(size: 17, relativeTo: .body))
                         .foregroundStyle(settings.bibleTextColor ?? .primary)
                         .lineLimit(1)
                     Text("\(queriedDocuments.count)개 문서")
@@ -633,13 +633,13 @@ struct DocumentsHomeView: View {
                 // 제목과 같은 줄에 "순서 변경/완료"(아이패드)를 두고 첫 줄 기준선을 맞춘다 — 제목 아래 설명 문구와 겹치지 않는다.
                 HStack(alignment: .firstTextBaseline, spacing: 8) {
                     Text("카테고리 관리")
-                        .font(.custom(SpecialPurposeFonts.titleSerif, size: 20, relativeTo: .title3))
+                        .font(.titleSerif(size: 20, relativeTo: .title3))
                         .fontWeight(.semibold)
                         .foregroundStyle(textColor)
                     #if os(iOS)
                     Spacer(minLength: 8)
                     if !(viewModel?.categories.isEmpty ?? true) {
-                        Button(isReorderingCategories ? "완료" : "순서 변경") {
+                        Button(isReorderingCategories ? String(localized: "완료") : String(localized: "순서 변경")) {
                             isReorderingCategories.toggle()
                         }
                         .font(.callout.weight(.semibold))
@@ -788,9 +788,9 @@ struct DocumentsHomeView: View {
     /// 패널 머리 안내 문구 — 순서 변경 방법이 플랫폼마다 달라 따로 둔다.
     private var panelSubtitle: String {
         #if os(iOS)
-        "이름 변경 · 삭제 · 순서는 오른쪽 위 \"순서 변경\"으로"
+        String(localized: "이름 변경 · 삭제 · 순서는 오른쪽 위 \"순서 변경\"으로")
         #else
-        "이름 변경 · 삭제 · 드래그로 순서 바꾸기"
+        String(localized: "이름 변경 · 삭제 · 드래그로 순서 바꾸기")
         #endif
     }
 
@@ -897,17 +897,17 @@ struct DocumentsHomeView: View {
     }
 
     private func chapterLabel(for ref: BibleChapterRef) -> String {
-        guard let book = BooksProvider.shared.book(id: ref.bookId) else { return "\(ref.chapter)장" }
-        return "\(book.nameKo) \(ref.chapter)장"
+        guard let book = BooksProvider.shared.book(id: ref.bookId) else { return String(localized: "\(ref.chapter)장") }
+        return String(localized: "\(book.displayName) \(ref.chapter)장")
     }
 
     private func categoryFilterLabel(viewModel: DocumentsViewModel) -> String {
         switch categoryFilter {
-        case .all: return "전체"
-        case .uncategorized: return "미분류"
+        case .all: return String(localized: "전체")
+        case .uncategorized: return String(localized: "미분류")
         case .chapter(let ref): return chapterLabel(for: ref)
         case .custom(let id):
-            return viewModel.categories.first(where: { $0.id == id })?.name ?? "분류"
+            return viewModel.categories.first(where: { $0.id == id })?.name ?? String(localized: "분류")
         }
     }
 
@@ -1123,12 +1123,12 @@ struct DocumentsHomeView: View {
                 .font(.system(size: 18))
                 .foregroundStyle(settings.bibleTextColor?.opacity(0.7) ?? Color.secondary)
             // 진입점 3: 드롭존 클릭 — 같은 fileImporter를 그대로 연다.
-            Text(allowsDragAndDrop ? "드래그해서 파일을 놓거나 클릭해서 업로드" : "탭해서 업로드")
+            Text(allowsDragAndDrop ? String(localized: "드래그해서 파일을 놓거나 클릭해서 업로드") : String(localized: "탭해서 업로드"))
                 .font(.callout)
                 .foregroundStyle(settings.bibleTextColor?.opacity(0.85) ?? Color.secondary)
             // `.doc`/`.docx` 업로드는 막혀 있으므로(`DocumentUploadService.supportedContentTypes(allowHWP:)`
             // 참고) 안내 문구에서도 뺀다(두 분기 공통).
-            Text(allowsHWP ? "hwp · hwpx · pdf · 이미지" : "pdf · 이미지 (아이폰은 hwp 업로드 미지원)")
+            Text(allowsHWP ? String(localized: "hwp · hwpx · pdf · 이미지") : String(localized: "pdf · 이미지 (아이폰은 hwp 업로드 미지원)"))
                 .font(.caption2)
                 .foregroundStyle(settings.bibleTextColor.map { AnyShapeStyle($0.opacity(0.55)) } ?? AnyShapeStyle(.tertiary))
         }
@@ -1245,7 +1245,7 @@ private struct CategoryManagerRow: View {
                 TextField("카테고리 이름", text: $name)
                     .textFieldStyle(.plain)
                     .focusEffectDisabled()
-                    .font(.custom(SpecialPurposeFonts.titleSerif, size: 17, relativeTo: .body))
+                    .font(.titleSerif(name, size: 17, relativeTo: .body))
                     .foregroundStyle(textColor)
                     .focused($isFocused)
                     .disabled(isReordering)
@@ -1385,7 +1385,7 @@ private struct UploadChapterLinkSheet: View {
                         Button("새 분류…") { isNewCategoryInputPresented = true }
                     } label: {
                         HStack {
-                            Text(selectedCategory?.name ?? "카테고리를 선택하세요")
+                            Text(selectedCategory?.name ?? String(localized: "카테고리를 선택하세요"))
                                 .foregroundStyle(selectedCategory == nil ? .secondary : .primary)
                             Spacer()
                             Image(systemName: "chevron.up.chevron.down")
@@ -1638,7 +1638,7 @@ private struct DocumentRowView: View {
                 presentChapterLinkEditor()
             } label: {
                 Label(
-                    document.relatedChapterRef == nil ? "관련 성경 장 설정…" : "관련 성경 장 변경…",
+                    document.relatedChapterRef == nil ? String(localized: "관련 성경 장 설정…") : String(localized: "관련 성경 장 변경…"),
                     systemImage: "book.closed"
                 )
             }
@@ -1653,7 +1653,7 @@ private struct DocumentRowView: View {
             Button {
                 viewModel.togglePin(document)
             } label: {
-                Label(document.isPinned ? "고정 해제" : "고정", systemImage: document.isPinned ? "pin.slash" : "pin")
+                Label(document.isPinned ? String(localized: "고정 해제") : String(localized: "고정"), systemImage: document.isPinned ? "pin.slash" : "pin")
             }
             Button(role: .destructive) {
                 viewModel.delete(document)
@@ -1744,7 +1744,7 @@ private struct DocumentRowView: View {
 
     private var relatedChapterLabel: String? {
         guard let ref = document.relatedChapterRef, let book = BooksProvider.shared.book(id: ref.bookId) else { return nil }
-        return "\(book.nameKo) \(ref.chapter)장"
+        return String(localized: "\(book.displayName) \(ref.chapter)장")
     }
 
     /// `keywords` 중 하나라도 대소문자 구분 없이 나타나는 모든 구간에 노란 배경(형광펜)을 입힌다.
@@ -1793,18 +1793,18 @@ private struct DocumentRowView: View {
     private var statusBadge: some View {
         switch document.conversionStatus {
         case .pending:
-            badge("대기", color: Self.statusAmber)
+            badge(String(localized: "대기"), color: Self.statusAmber)
         case .convertingNative:
-            badge("추출 중", color: Self.statusAmber)
+            badge(String(localized: "추출 중"), color: Self.statusAmber)
         case .converted:
             // 완료(정상) 상태는 뱃지를 그리지 않고, 아직 인덱싱되지 않은 예외 상황만 보여준다.
             if document.indexStatus == .indexed {
                 EmptyView()
             } else {
-                badge("추출 중", color: Self.statusAmber)
+                badge(String(localized: "추출 중"), color: Self.statusAmber)
             }
         case .failedNeedsManual:
-            badge("실패", color: Self.statusRed)
+            badge(String(localized: "실패"), color: Self.statusRed)
         }
     }
 
@@ -1895,7 +1895,7 @@ private struct DocumentRowView: View {
                     categoryMenu
                 }
                 LabeledContent("관련 성경 장") {
-                    Button(relatedChapterLabel ?? "설정 안 됨") {
+                    Button(relatedChapterLabel ?? String(localized: "설정 안 됨")) {
                         presentChapterLinkEditor()
                     }
                     .buttonStyle(.plain)
@@ -1929,10 +1929,10 @@ private struct DocumentRowView: View {
     /// 기준 — 다만 팝오버는 배지 스타일 없이 텍스트 한 줄로만 보여준다.
     private var infoStatusText: String {
         switch document.conversionStatus {
-        case .pending: return "대기"
-        case .convertingNative: return "추출 중"
-        case .converted: return document.indexStatus == .indexed ? "완료" : "추출 중"
-        case .failedNeedsManual: return "실패"
+        case .pending: return String(localized: "대기")
+        case .convertingNative: return String(localized: "추출 중")
+        case .converted: return document.indexStatus == .indexed ? String(localized: "완료") : String(localized: "추출 중")
+        case .failedNeedsManual: return String(localized: "실패")
         }
     }
 }

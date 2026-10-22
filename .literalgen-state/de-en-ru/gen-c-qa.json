@@ -1,0 +1,289 @@
+[
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/01_GEN/GEN_035.tsv",
+    "verse": 27,
+    "old_row": "27\tUnd Jakob kam zu Isaak, seinem Vater, nach Mamre, Kirjat-Arba, das ist Hebron, wo Abraham und Isaak als Fremde gewohnt hatten.\t- ",
+    "new_row": "27\tUnd Jakob kam zu Isaak, seinem Vater, nach Mamre, Kirjat-Arba, das ist Hebron, wo Abraham und Isaak als Fremde gewohnt hatten.\tNah am Hebräischen.",
+    "reason": "Expand a leftover temporary close marker to the required localized sentence."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/en/01_GEN/GEN_035.tsv",
+    "verse": 9,
+    "old_row": "9\t=\t- ",
+    "new_row": "9\t=\tClose to the Hebrew.",
+    "reason": "Expand a leftover temporary close marker to the required localized sentence."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/en/01_GEN/GEN_035.tsv",
+    "verse": 16,
+    "old_row": "16\t=\t- ",
+    "new_row": "16\t=\tClose to the Hebrew.",
+    "reason": "Expand a leftover temporary close marker to the required localized sentence."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/en/01_GEN/GEN_035.tsv",
+    "verse": 22,
+    "old_row": "22\t=\t- ",
+    "new_row": "22\t=\tClose to the Hebrew.",
+    "reason": "Expand a leftover temporary close marker to the required localized sentence."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/en/01_GEN/GEN_035.tsv",
+    "verse": 26,
+    "old_row": "26\t=\t- ",
+    "new_row": "26\t=\tClose to the Hebrew.",
+    "reason": "Expand a leftover temporary close marker to the required localized sentence."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/01_GEN/GEN_039.tsv",
+    "verse": 23,
+    "old_row": "23\tНачальник темницы не смотрел ни за чем в его руке, потому что Господь был с ним; и чему он делал, Господь давал успех.\tСохраняет руку в единственном числе.",
+    "new_row": "23\tНачальник темницы не смотрел ни за чем в его руке, потому что Господь был с ним; и во всем, что он делал, Господь давал успех.\tСохраняет руку в единственном числе.",
+    "reason": "Use grammatical native syntax for the relative or manner expression."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/01_GEN/GEN_039.tsv",
+    "verse": 19,
+    "old_row": "19\tИ было, когда его господин услышал слова своей жены, которые она говорила ему: «По этим вещам поступил со мной твой раб», воспылал его гнев.\tБлизко к еврейскому.",
+    "new_row": "19\tИ было, когда его господин услышал слова своей жены, которые она говорила ему: «Так поступил со мной твой раб», воспылал его гнев.\tБлизко к еврейскому.",
+    "reason": "Use grammatical native syntax for the relative or manner expression."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/01_GEN/GEN_039.tsv",
+    "verse": 19,
+    "old_row": "19\tUnd es geschah, als sein Herr die Worte seiner Frau hörte, die sie zu ihm geredet hatte: „Nach diesen Dingen hat dein Knecht mir getan“, da entbrannte sein Zorn.\tBewahrt das Entbrennen des Zorns.",
+    "new_row": "19\tUnd es geschah, als sein Herr die Worte seiner Frau hörte, die sie zu ihm geredet hatte: „Solches hat dein Knecht mir getan“, da entbrannte sein Zorn.\tBewahrt das Entbrennen des Zorns.",
+    "reason": "Use grammatical native syntax for the relative or manner expression."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/01_GEN/GEN_041_1.tsv",
+    "verse": 24,
+    "old_row": "24\tUnd die dünnen Ähren verschlangen die sieben guten Ähren; und ich sagte es den Wahrsagern, und keiner erklärte es mir.\tBewahrt gut statt dick.",
+    "new_row": "24\tUnd die dünnen Ähren verschlangen die sieben guten Ähren; und ich sagte es den Wahrsagern, und keiner erklärte es mir.“\tBewahrt gut statt dick.",
+    "reason": "Close Pharaoh’s dream report before Joseph begins his reply."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/01_GEN/GEN_041_1.tsv",
+    "verse": 24,
+    "old_row": "24\tИ поглотили тощие колосья семь хороших колосьев; и я рассказал волхвам, и никто не объяснил мне.\tБлизко к еврейскому.",
+    "new_row": "24\tИ поглотили тощие колосья семь хороших колосьев; и я рассказал волхвам, и никто не объяснил мне.»\tБлизко к еврейскому.",
+    "reason": "Close Pharaoh’s dream report before Joseph begins his reply."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/01_GEN/GEN_043_1.tsv",
+    "verse": 16,
+    "old_row": "16\tИ увидел Иосиф Вениамина с ними и сказал тому, кто был над его домом: «Введи мужчин в дом, и заколи жертву, и приготовь, ибо мужчины будут есть со мной в полдень».\tНе добавляет брата и сына матери в этом стихе.",
+    "new_row": "16\tИ увидел Иосиф Вениамина с ними и сказал тому, кто был над его домом: «Введи мужчин в дом, и заколи животное, и приготовь, ибо мужчины будут есть со мной в полдень».\tНе добавляет брата и сына матери в этом стихе.",
+    "reason": "Ordinary slaughter does not imply a sacrifice."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/01_GEN/GEN_043_2.tsv",
+    "verse": 34,
+    "old_row": "34\tUnd man trug ihnen Portionen von seinem Angesicht her zu; und Benjamins Portion war fünf Anteile größer als die Portionen von ihnen allen; und sie tranken und wurden mit ihm betrunken.\tBewahrt die Trunkenheit statt bloßer Fröhlichkeit.",
+    "new_row": "34\tUnd man trug ihnen Portionen von seinem Angesicht her zu; und Benjamins Portion war fünfmal so groß wie die Portionen von ihnen allen; und sie tranken und wurden mit ihm betrunken.\tBewahrt die Trunkenheit statt bloßer Fröhlichkeit.",
+    "reason": "Express the fivefold ratio rather than an additive difference of five portions."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/01_GEN/GEN_043_2.tsv",
+    "verse": 34,
+    "old_row": "34\tИ поднесли им доли от его лица; и доля Вениамина была на пять долей больше долей всех их; и они пили и опьянели с ним.\tСохраняет опьянение.",
+    "new_row": "34\tИ поднесли им доли от его лица; и доля Вениамина была впятеро больше долей всех их; и они пили и опьянели с ним.\tСохраняет опьянение.",
+    "reason": "Express the fivefold ratio rather than an additive difference of five portions."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/01_GEN/GEN_048.tsv",
+    "verse": 2,
+    "old_row": "2\tUnd man berichtete Jakob und sprach: „Siehe, dein Sohn Joseph ist zu dir gekommen.“ Und Israel stärkte sich und setzte sich auf das Bett.\tBewahrt das gekommene Kommen.",
+    "new_row": "2\tUnd man berichtete Jakob und sprach: „Siehe, dein Sohn Joseph ist zu dir gekommen.“ Und Israel stärkte sich und setzte sich auf das Bett.\tBewahrt das bereits vollendete Kommen.",
+    "reason": "Replace an unidiomatic German difference sentence."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/01_GEN/GEN_049_1.tsv",
+    "verse": 10,
+    "old_row": "10\tНе отойдет скипетр от Иуды и жезл правителя из-под его ног, пока не придет Шило; и ему покорность народов.\tСохраняет Шило и жезл правителя между ногами.",
+    "new_row": "10\tНе отойдет скипетр от Иуды и жезл правителя из пространства между его ногами, пока не придет Шило; и ему покорность народов.\tСохраняет Шило и жезл правителя между ногами.",
+    "reason": "מִבֵּין means from between, not from underneath."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/01_GEN/GEN_049_1.tsv",
+    "verse": 20,
+    "old_row": "20\tVon Asser ist sein Brot fett, und er wird königliche Leckerbissen geben.\tBewahrt einen König als Bezug der Leckerbissen.",
+    "new_row": "20\tVon Asser ist sein Brot fett, und er wird königliche Leckerbissen geben.\tNah am Hebräischen.",
+    "reason": "The output does not express a singular king, so its existing difference claim is unsupported."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/01_GEN/GEN_049_1.tsv",
+    "verse": 26,
+    "old_row": "26\tБлагословения твоего отца превысили благословения моих родителей до желанного вечных холмов; да будут они на голове Иосифа и на темени отделенного среди своих братьев.\tСохраняет родителей вместо гор древних и отделенного среди братьев.",
+    "new_row": "26\tБлагословения твоего отца превысили благословения моих родителей до желанных благ вечных холмов; да будут они на голове Иосифа и на темени отделенного среди своих братьев.\tСохраняет родителей вместо гор древних и отделенного среди братьев.",
+    "reason": "Supply the minimal noun required for natural Russian nominal syntax."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/01_GEN/GEN_049_1.tsv",
+    "verse": 24,
+    "old_row": "24\tИ остался его лук твердым, и мышцы его рук стали подвижными от рук Могучего Иакова, оттуда Пастырь, Камень Израиля,\tНе добавляет Бога как существительное и сохраняет подвижность мышц и Камень.",
+    "new_row": "24\tИ остался его лук твердым, и мышцы его рук стали подвижными от рук Могучего Иаковлева, оттуда Пастырь, Камень Израиля,\tНе добавляет Бога как существительное и сохраняет подвижность мышц и Камень.",
+    "reason": "Keep the divine title as the Mighty One belonging to Jacob, rather than potentially describing Jacob himself."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/01_GEN/GEN_049_1.tsv",
+    "verse": 29,
+    "old_row": "29\tИ заповедал он им и сказал им: «Я собираюсь к моим народам; погребите меня с моими отцами в пещере, которая на поле Ефрона Хеттеянина,\tСохраняет народы во множественном числе.",
+    "new_row": "29\tИ заповедал он им и сказал им: «Я буду собран к моему народу; погребите меня с моими отцами в пещере, которая на поле Ефрона Хеттеянина,\tБлизко к еврейскому.",
+    "reason": "Preserve passive gathering and the singular people in עַמִּי; remove the false plural difference claim."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/01_GEN/GEN_049_1.tsv",
+    "verse": 29,
+    "old_row": "29\tUnd er gebot ihnen und sprach zu ihnen: „Ich werde zu meinen Völkern versammelt; begrabt mich bei meinen Vätern in der Höhle auf dem Feld Ephrons, des Hethiters,\tBewahrt Völker im Plural.",
+    "new_row": "29\tUnd er gebot ihnen und sprach zu ihnen: „Ich werde zu meinem Volk versammelt; begrabt mich bei meinen Vätern in der Höhle auf dem Feld Ephrons, des Hethiters,\tNah am Hebräischen.",
+    "reason": "The actual עַמִּי is singular my people, unlike the plural in verse 33."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/01_GEN/GEN_049_1.tsv",
+    "verse": 10,
+    "old_row": "10\tDas Zepter wird nicht von Juda weichen noch der Herrscherstab zwischen seinen Füßen, bis Schilo kommt; und ihm gehört der Gehorsam der Völker.\tBewahrt Schilo und den Gehorsam.",
+    "new_row": "10\tDas Zepter wird nicht von Juda weichen noch der Herrscherstab aus dem Raum zwischen seinen Füßen, bis Schilo kommt; und ihm gehört der Gehorsam der Völker.\tBewahrt Schilo und den Gehorsam.",
+    "reason": "Retain both from and between in מִבֵּין using the minimal German complement."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/01_GEN/GEN_047_1.tsv",
+    "verse": 19,
+    "old_row": "19\tWarum sollen wir vor deinen Augen sterben, sowohl wir als auch unser Boden? Kaufe uns und unseren Boden für Brot, und wir und unser Boden werden dem Pharao Knechte sein; und gib Samen, damit wir leben und nicht sterben und der Boden nicht verödet.\tBewahrt die Augen und fügt kein Sterbenlassen hinzu.",
+    "new_row": "19\tWarum sollen wir vor deinen Augen sterben, sowohl wir als auch unser Boden? Kaufe uns und unseren Boden für Brot, und wir und unser Boden werden dem Pharao Knechte sein; und gib Samen, damit wir leben und nicht sterben und der Boden nicht verödet.“\tBewahrt die Augen und fügt kein Sterbenlassen hinzu.",
+    "reason": "Close the Egyptian petition beginning in verse 18 before the narrative resumes."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/01_GEN/GEN_046_1.tsv",
+    "verse": 25,
+    "old_row": "25\tDies sind die Söhne Bilhas, die Laban seiner Tochter Rahel gab; und sie gebar Jakob diese, alle Seelen sieben.\tBewahrt die Söhne.",
+    "new_row": "25\tDies sind die Söhne Bilhas, die Laban seiner Tochter Rahel gab; und sie gebar Jakob diese, alle Seelen waren sieben.\tBewahrt die Söhne.",
+    "reason": "Supply the copula required by German numeral syntax."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/01_GEN/GEN_046_1.tsv",
+    "verse": 30,
+    "old_row": "30\tUnd Israel sprach zu Joseph: „Nun will ich sterben, nachdem ich dein Angesicht gesehen habe, dass du noch lebst.“\tFügt kein „gerne“ hinzu.",
+    "new_row": "30\tUnd Israel sprach zu Joseph: „Nun will ich sterben, nachdem ich dein Angesicht gesehen habe, denn du lebst noch.“\tFügt kein „gerne“ hinzu.",
+    "reason": "Render the final causal clause with native German syntax."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/01_GEN/GEN_046_1.tsv",
+    "verse": 30,
+    "old_row": "30\tИ сказал Израиль Иосифу: «Теперь умру, после того как я увидел твое лицо, что ты еще жив».\tБлизко к еврейскому.",
+    "new_row": "30\tИ сказал Израиль Иосифу: «Теперь умру, после того как я увидел твое лицо, ибо ты еще жив».\tБлизко к еврейскому.",
+    "reason": "Render the final causal clause with native Russian syntax."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/01_GEN/GEN_040.tsv",
+    "verse": 10,
+    "old_row": "10\tИ на лозе три ветви, и когда она распускалась, появился ее цвет, ее гроздья созрели ягодами.\tСохраняет гроздья.",
+    "new_row": "10\tИ на лозе три ветви, и когда она распускалась, появился ее цвет, ее виноградные гроздья созрели.\tСохраняет гроздья.",
+    "reason": "Replace an ungrammatical instrumental with a native expression retaining the ripe grape clusters."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/01_GEN/GEN_042_1.tsv",
+    "verse": 21,
+    "old_row": "21\tИ сказали они каждый своему брату: «Точно, мы виновны против нашего брата, которого страдание души мы видели, когда он умолял нас, и не послушали; потому пришло к нам это бедствие».\tСохраняет виновность вместо явного наказания.",
+    "new_row": "21\tИ сказали они каждый своему брату: «Точно, мы виновны против нашего брата, страдание души которого мы видели, когда он умолял нас, и не послушали; потому пришло к нам это бедствие».\tСохраняет виновность вместо явного наказания.",
+    "reason": "Use native order for the genitive relative pronoun."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/01_GEN/GEN_042_1.tsv",
+    "verse": 25,
+    "old_row": "25\tИ приказал Иосиф, и наполнили их сосуды зерном, и возвратить их серебро каждому в его мешок, и дать им припасы на дорогу; и сделали им так.\tСохраняет сосуды.",
+    "new_row": "25\tИ приказал Иосиф, и наполнили их сосуды зерном, и велел возвратить их серебро каждому в его мешок, и дать им припасы на дорогу; и сделали им так.\tСохраняет сосуды.",
+    "reason": "Supply the governing verb for the dangling infinitives while retaining the separate filling action."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/01_GEN/GEN_044_1.tsv",
+    "verse": 30,
+    "old_row": "30\tUnd nun, wenn ich zu deinem Knecht, meinem Vater, komme und der Junge nicht bei uns ist, und seine Seele ist an dessen Seele gebunden,\tBewahrt die gebundene Seele.",
+    "new_row": "30\tUnd nun, wenn ich zu deinem Knecht, meinem Vater, komme und der Junge nicht bei uns ist — seine Seele ist an dessen Seele gebunden —,\tBewahrt die gebundene Seele.",
+    "reason": "Separate the parenthetical statement from the conditional clause so German verb order is grammatical."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/01_GEN/GEN_035.tsv",
+    "verse": 11,
+    "old_row": "11\tUnd Gott sprach zu ihm: „Ich bin Gott, der Allmächtige. Sei fruchtbar und mehre dich; ein Volk und eine Versammlung von Völkern wird aus dir sein, und Könige werden aus deinen Lenden hervorgehen.\tBewahrt ein Volk im Singular und die Versammlung von Völkern.",
+    "new_row": "11\tUnd Gott sprach zu ihm: „Ich bin Gott, der Allmächtige. Sei fruchtbar und mehre dich; ein Volk und eine Versammlung von Völkern werden aus dir sein, und Könige werden aus deinen Lenden hervorgehen.\tBewahrt ein Volk im Singular und die Versammlung von Völkern.",
+    "reason": "Use plural agreement required by coordinated German subjects."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/01_GEN/GEN_035.tsv",
+    "verse": 11,
+    "old_row": "11\tИ сказал ему Бог: «Я Бог Всемогущий; плодись и умножайся; народ и собрание народов будет от тебя, и цари выйдут из твоих чресл.\tСохраняет собрание народов.",
+    "new_row": "11\tИ сказал ему Бог: «Я Бог Всемогущий; плодись и умножайся; народ и собрание народов будут от тебя, и цари выйдут из твоих чресл.\tСохраняет собрание народов.",
+    "reason": "Use plural agreement for the coordinated Russian subjects."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/01_GEN/GEN_044_2.tsv",
+    "verse": 31,
+    "old_row": "31\tdann wird es geschehen, wenn er sieht, dass der Junge nicht da ist, wird er sterben; und deine Knechte werden das graue Haar deines Knechtes, unseres Vaters, in Kummer in den Scheol hinabbringen.\tBewahrt Scheol.",
+    "new_row": "31\tdann wird es geschehen: Wenn er sieht, dass der Junge nicht da ist, wird er sterben; und deine Knechte werden das graue Haar deines Knechtes, unseres Vaters, in Kummer in den Scheol hinabbringen.\tBewahrt Scheol.",
+    "reason": "Use a colon before the following independent conditional construction."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/01_GEN/GEN_044_2.tsv",
+    "verse": 31,
+    "old_row": "31\tто будет, когда он увидит, что мальчика нет, он умрет; и сведут твои рабы седину твоего раба, нашего отца, в печали в шеол.\tСохраняет шеол.",
+    "new_row": "31\tто будет так: когда он увидит, что мальчика нет, он умрет; и сведут твои рабы седину твоего раба, нашего отца, в печали в шеол.\tСохраняет шеол.",
+    "reason": "Supply the minimal correlate to introduce the following conditional statement in native Russian."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/en/01_GEN/GEN_035.tsv",
+    "verse": 10,
+    "old_row": "10\t=\tRetains the direct statement of his name without adding “Though.”.",
+    "new_row": "10\t=\tRetains the direct statement of his name without adding “Though”.",
+    "reason": "Remove duplicate full stops around a quoted snippet."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/en/01_GEN/GEN_035.tsv",
+    "verse": 17,
+    "old_row": "17\t=\tRetains “this also is a son for you.”.",
+    "new_row": "17\t=\tRetains “this also is a son for you”.",
+    "reason": "Remove duplicate full stops around a quoted snippet."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/en/01_GEN/GEN_035.tsv",
+    "verse": 21,
+    "old_row": "21\t=\tDoes not add “again.”.",
+    "new_row": "21\t=\tDoes not add “again”.",
+    "reason": "Remove duplicate full stops around a quoted snippet."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/en/01_GEN/GEN_036_1.tsv",
+    "verse": 6,
+    "old_row": "6\t=\tRetains the face of Jacob without adding “far away.”.",
+    "new_row": "6\t=\tRetains the face of Jacob without adding “far away”.",
+    "reason": "Remove duplicate full stops around a quoted snippet."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/en/01_GEN/GEN_037_1.tsv",
+    "verse": 6,
+    "old_row": "6\t=\tRetains the request particle, “please.”.",
+    "new_row": "6\t=\tRetains the request particle, “please”.",
+    "reason": "Remove duplicate full stops around a quoted snippet."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/en/01_GEN/GEN_037_1.tsv",
+    "verse": 11,
+    "old_row": "11\t=\tRetains the matter and the conjunction “and.”.",
+    "new_row": "11\t=\tRetains the matter and the conjunction “and”.",
+    "reason": "Remove duplicate full stops around a quoted snippet."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/en/01_GEN/GEN_037_1.tsv",
+    "verse": 12,
+    "old_row": "12\t=\tDoes not add “Some time later.”.",
+    "new_row": "12\t=\tDoes not add “Some time later”.",
+    "reason": "Remove duplicate full stops around a quoted snippet."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/en/01_GEN/GEN_037_1.tsv",
+    "verse": 13,
+    "old_row": "13\t=\tRetains come and “Here I am.”.",
+    "new_row": "13\t=\tRetains come and “Here I am”.",
+    "reason": "Remove duplicate full stops around a quoted snippet."
+  }
+]

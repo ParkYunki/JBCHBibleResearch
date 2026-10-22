@@ -109,11 +109,11 @@ struct TagDrilldownView: View {
 
     /// 메모에 제목 개념이 없어(content_text만 있음) 본문 앞 20자를 발췌해 라벨로 쓴다.
     private func memoLabel(_ memo: UserMemo) -> String {
-        let bookName = BooksProvider.shared.book(id: memo.bookId)?.nameKo ?? "성경"
+        let bookName = BooksProvider.shared.book(id: memo.bookId)?.displayName ?? String(localized: "성경")
         let excerpt = memo.contentText.trimmingCharacters(in: .whitespacesAndNewlines).prefix(20)
         if excerpt.isEmpty {
-            return "\(bookName) \(memo.chapter)장 메모"
+            return String(localized: "\(bookName) \(memo.chapter)장 메모")
         }
-        return "\(excerpt) — \(bookName) \(memo.chapter)장"
+        return String(localized: "\(String(excerpt)) — \(bookName) \(memo.chapter)장")
     }
 }

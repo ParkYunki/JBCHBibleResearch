@@ -1,0 +1,32 @@
+{
+  "files": 42,
+  "rows": 874,
+  "counts": {
+    "de": 331,
+    "ru": 331,
+    "en": 212
+  },
+  "quote_counts": {
+    "de": {
+      "„": 17,
+      "“": 17,
+      "‚": 0,
+      "‘": 0
+    },
+    "en": {
+      "“": 0,
+      "”": 0
+    },
+    "ru": {
+      "«": 17,
+      "»": 17,
+      "„": 0,
+      "“": 0
+    }
+  },
+  "qa_candidates": 17,
+  "ids_match": true,
+  "three_fields": true,
+  "diff_limit": true,
+  "english_equals": true
+}

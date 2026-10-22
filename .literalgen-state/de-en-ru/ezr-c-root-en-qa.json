@@ -1,0 +1,17 @@
+[
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/en/15_EZR/EZR_008_1.tsv",
+    "old_row": "26\t=\tClose to the Hebrew.",
+    "new_row": "26\t=\tThe Hebrew describes entrusting the valuables with their hand in the singular; BSB uses hands in the plural."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/en/15_EZR/EZR_009.tsv",
+    "old_row": "2\t=\tThe Hebrew pictures the leaders’ and officials’ leading role as their hand being first in this unfaithfulness; BSB says they took the lead.",
+    "new_row": "2\t=\tThe Hebrew pictures the leaders’ and officials’ leading role as their hand being first in this unfaithfulness. The holy seed mingles itself actively; BSB uses a passive mixing."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/en/15_EZR/EZR_010_1.tsv",
+    "old_row": "3\t=\tThe Hebrew says all wives and what was born from them without explicitly repeating “foreign”; BSB says all the foreign wives and their children.",
+    "new_row": "3\t=\tThe Hebrew says all wives and what was born from them without explicitly repeating foreign. It names the Lord’s counsel; BSB says my lord. The command is singular in Hebrew."
+  }
+]

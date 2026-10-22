@@ -74,6 +74,9 @@ struct ChapterRelatedContentPanel: View {
     /// "관련 내용"(자동 추출) 항목을 골랐을 때 — 메모는 편집기 시트, 연구문서는
     /// PDF 검색+이동 창으로 연다(호출부 책임).
     var onSelectVerseMention: (VerseMention) -> Void = { _ in }
+    /// 아이패드 전용(2026-10-13): 개요를 별도 창 대신 성경 조회 화면 안의 슬라이드 패널로 열 때 호출부가 넘긴다.
+    /// nil(맥, 도구창 경로 등)이면 기존처럼 별도 창(`openOutlineQuickViewWindow`)을 연다.
+    var onOpenOutlineInApp: ((OutlineQuickViewRequest) -> Void)? = nil
 
     /// 책 개요/장 개요를 독립적으로 접고 펼치는 상태(기본 펼침).
     @State private var isBookOutlineExpanded = true
@@ -130,7 +133,7 @@ struct ChapterRelatedContentPanel: View {
             // 아이패드 인스펙터: 본문과 구분되도록 옅은 톤(`IPadPaneSeparation.swift`). 아이폰 시트/맥 패널은 테마색 그대로.
             .themedPaneBackground(tinted: true)
             // 제목은 "책 한글명 + 장" — BibleReadingView 툴바 타이틀 두 번째 줄과 같은 조합.
-            .navigationTitle("\(viewModel.selectedBook.nameKo) \(viewModel.selectedChapter)장")
+            .navigationTitle("\(viewModel.selectedBook.displayName) \(viewModel.selectedChapter)장")
             #if os(iOS)
             .navigationBarTitleDisplayMode(.inline)
             // 이 값은 반드시 `NavigationStack` 콘텐츠 안쪽에 둔다. 스택 바깥(아이폰에서 시트로 열린
@@ -182,15 +185,15 @@ struct ChapterRelatedContentPanel: View {
 
     private var outlineSection: some View {
         Section {
-            sectionTitleRow("개요", systemImage: "list.bullet.clipboard", tint: .teal)
+            sectionTitleRow(String(localized: "개요"), systemImage: "list.bullet.clipboard", tint: .teal)
             if viewModel.relatedBookOutlineRTF == nil && viewModel.relatedChapterSummaryRTF == nil {
-                emptyRow("아직 작성된 개요가 없습니다.")
+                emptyRow(String(localized: "아직 작성된 개요가 없습니다."))
             }
             if let rtf = viewModel.relatedBookOutlineRTF {
-                outlineRow(title: "책 개요", rtfText: rtf, isExpanded: $isBookOutlineExpanded)
+                outlineRow(title: String(localized: "책 개요"), rtfText: rtf, isExpanded: $isBookOutlineExpanded)
             }
             if let rtf = viewModel.relatedChapterSummaryRTF {
-                outlineRow(title: "장 개요", rtfText: rtf, isExpanded: $isChapterSummaryExpanded)
+                outlineRow(title: String(localized: "장 개요"), rtfText: rtf, isExpanded: $isChapterSummaryExpanded)
             }
             Button {
                 jumpToOutlineEditor()
@@ -212,7 +215,7 @@ struct ChapterRelatedContentPanel: View {
                         .foregroundStyle(settings.bibleTextColor?.opacity(0.6) ?? Color.secondary)
                 }
                 .buttonStyle(.plain)
-                .help(isExpanded.wrappedValue ? "접기" : "펼치기")
+                .help(isExpanded.wrappedValue ? String(localized: "접기") : String(localized: "펼치기"))
 
                 Text(title)
                     .font(.body)
@@ -226,12 +229,19 @@ struct ChapterRelatedContentPanel: View {
                     Button {
                         openOutlineQuickViewWindow()
                     } label: {
-                        Label("새창으로 보기", systemImage: "macwindow")
-                            .font(.body)
-                            .foregroundStyle(settings.bibleTextColor?.opacity(0.6) ?? Color.secondary)
+                        // 앱 안 패널로 여는 경우(아이패드)에는 "창"이 아니므로 이름과 아이콘을 바꾼다.
+                        if onOpenOutlineInApp != nil {
+                            Label("크게 보기", systemImage: "arrow.up.left.and.arrow.down.right")
+                                .font(.body)
+                                .foregroundStyle(settings.bibleTextColor?.opacity(0.6) ?? Color.secondary)
+                        } else {
+                            Label("새창으로 보기", systemImage: "macwindow")
+                                .font(.body)
+                                .foregroundStyle(settings.bibleTextColor?.opacity(0.6) ?? Color.secondary)
+                        }
                     }
                     .buttonStyle(.plain)
-                    .help("별도 창에서 보기")
+                    .help(onOpenOutlineInApp != nil ? String(localized: "개요를 크게 보기") : String(localized: "별도 창에서 보기"))
                 }
             }
 
@@ -265,10 +275,13 @@ struct ChapterRelatedContentPanel: View {
     /// "별도 창에서 보기" — 항상 새 창을 연다(`requestID`가 매번 새 `UUID`라, 같은 값이면
     /// 기존 창을 재사용하는 SwiftUI 기본 동작을 우회한다).
     private func openOutlineQuickViewWindow() {
-        openAppWindow(
-            id: "outline-quick-view",
-            value: OutlineQuickViewRequest(bookId: viewModel.selectedBook.bookId, chapter: viewModel.selectedChapter)
-        )
+        let request = OutlineQuickViewRequest(bookId: viewModel.selectedBook.bookId, chapter: viewModel.selectedChapter)
+        // 아이패드: 호출부가 앱 안 슬라이드 패널을 준비해 두었으면 창 대신 그것을 연다(`OutlineSlideOverlay.swift`).
+        if let onOpenOutlineInApp {
+            onOpenOutlineInApp(request)
+        } else {
+            openAppWindow(id: "outline-quick-view", value: request)
+        }
     }
 
     /// "개요 화면 열기" — 메인 내비게이션을 개요 섹션으로 전환하고, 현재 책/장을 미리 선택해
@@ -282,22 +295,22 @@ struct ChapterRelatedContentPanel: View {
 
     @ViewBuilder
     private func memoSection(verse: Int) -> some View {
-        let coordinateMemos = viewModel.relatedChapterMemos.filter { $0.verse == verse }
+        let coordinateMemos = viewModel.relatedChapterMemos.filter { $0.coversVerse(verse) }
         let mentionedMemos = viewModel.verseMentions(verse: verse).filter { $0.sourceType == .memo }
         Section {
             sectionTitleRow(
-                "\(verse)절 관련 개인 묵상 (\(coordinateMemos.count + mentionedMemos.count))",
+                String(localized: "\(verse)절 관련 개인 묵상 (\(coordinateMemos.count + mentionedMemos.count))"),
                 systemImage: "note.text", tint: .blue
             )
             if coordinateMemos.isEmpty && mentionedMemos.isEmpty {
-                emptyRow("이 절에 달렸거나 이 절을 언급하는 개인 묵상이 없습니다.")
+                emptyRow(String(localized: "이 절에 달렸거나 이 절을 언급하는 개인 묵상이 없습니다."))
             } else {
                 ForEach(coordinateMemos) { memo in
                     Button {
                         onSelectMemo(memo)
                     } label: {
                         VStack(alignment: .leading, spacing: 6) {
-                            originBadge("이 절에 작성됨", systemImage: "square.and.pencil")
+                            originBadge(writtenOnTitle(verse: memo.verse, verseEnd: memo.verseEnd), systemImage: "square.and.pencil")
                             Text(memoPreview(memo))
                                 .font(.callout)
                                 .foregroundStyle(settings.bibleTextColor ?? .primary)
@@ -314,7 +327,7 @@ struct ChapterRelatedContentPanel: View {
                         onSelectVerseMention(mention)
                     } label: {
                         VStack(alignment: .leading, spacing: 6) {
-                            originBadge("본문에서 언급됨", systemImage: "text.magnifyingglass")
+                            originBadge(String(localized: "본문에서 언급됨"), systemImage: "text.magnifyingglass")
                             Text(mention.snippet.isEmpty ? mention.searchText : mention.snippet)
                                 .font(.callout)
                                 .foregroundStyle(settings.bibleTextColor ?? .primary)
@@ -332,7 +345,7 @@ struct ChapterRelatedContentPanel: View {
 
     private func memoPreview(_ memo: UserMemo) -> String {
         let trimmed = memo.contentText.trimmingCharacters(in: .whitespacesAndNewlines)
-        return trimmed.isEmpty ? "(내용 없음)" : trimmed
+        return trimmed.isEmpty ? String(localized: "(내용 없음)") : trimmed
     }
 
     // MARK: - 말씀 요약(구절 선택 시에만) — [2026-08-12 신설]
@@ -341,16 +354,16 @@ struct ChapterRelatedContentPanel: View {
 
     @ViewBuilder
     private func wordSummarySection(verse: Int) -> some View {
-        let coordinateSummaries = viewModel.relatedChapterWordSummaries.filter { $0.verse == verse }
+        let coordinateSummaries = viewModel.relatedChapterWordSummaries.filter { $0.coversVerse(verse) }
         let mentionedSummaries = viewModel.verseMentions(verse: verse).filter { $0.sourceType == .wordSummary }
         Section {
             sectionTitleRow(
-                "\(verse)절 관련 말씀 요약 (\(coordinateSummaries.count + mentionedSummaries.count))",
+                String(localized: "\(verse)절 관련 말씀 요약 (\(coordinateSummaries.count + mentionedSummaries.count))"),
                 // `text.quote`는 `BibleReadingView.verseSelectionActionBar`의 "말씀 요약" 버튼과 같은 아이콘이다(번역본 선택의 `text.book.closed`와는 구분).
                 systemImage: "text.quote", tint: .purple
             )
             if coordinateSummaries.isEmpty && mentionedSummaries.isEmpty {
-                emptyRow("이 절에 작성됐거나 이 절을 언급하는 말씀 요약이 없습니다.")
+                emptyRow(String(localized: "이 절에 작성됐거나 이 절을 언급하는 말씀 요약이 없습니다."))
             } else {
                 // `WordSummaryEditorView`가 새 요약의 첫 줄을 "yyyy.MM.dd 말씀"으로 미리 채우므로 첫 줄이
                 // 사실상 제목이다 — 제목은 굵게, 나머지 본문 일부는 보조 색으로 보여준다.
@@ -359,7 +372,7 @@ struct ChapterRelatedContentPanel: View {
                         onSelectWordSummary(summary)
                     } label: {
                         VStack(alignment: .leading, spacing: 6) {
-                            originBadge("이 절에 작성됨 · \(wordSummaryDateLabel(summary))", systemImage: "square.and.pencil")
+                            originBadge(summaryWrittenOnTitle(summary), systemImage: "square.and.pencil")
                             Text(wordSummaryTitleLine(summary))
                                 .font(.callout.bold())
                                 .foregroundStyle(settings.bibleTextColor ?? .primary)
@@ -383,7 +396,7 @@ struct ChapterRelatedContentPanel: View {
                         onSelectVerseMention(mention)
                     } label: {
                         VStack(alignment: .leading, spacing: 6) {
-                            originBadge("본문에서 언급됨", systemImage: "text.magnifyingglass")
+                            originBadge(String(localized: "본문에서 언급됨"), systemImage: "text.magnifyingglass")
                             Text(mention.snippet.isEmpty ? mention.searchText : mention.snippet)
                                 .font(.callout)
                                 .foregroundStyle(settings.bibleTextColor ?? .primary)
@@ -402,7 +415,7 @@ struct ChapterRelatedContentPanel: View {
     /// 요약 본문의 첫 줄(제목 역할). 줄바꿈 없이 한 줄만 쓴 레거시 요약은 트리밍한 전체 텍스트를 쓴다.
     private func wordSummaryTitleLine(_ summary: VerseSummary) -> String {
         let trimmed = summary.contentText.trimmingCharacters(in: .whitespacesAndNewlines)
-        guard !trimmed.isEmpty else { return "(내용 없음)" }
+        guard !trimmed.isEmpty else { return String(localized: "(내용 없음)") }
         let firstLine = trimmed.components(separatedBy: .newlines).first ?? trimmed
         let cleaned = firstLine.trimmingCharacters(in: .whitespaces)
         return cleaned.isEmpty ? trimmed : cleaned
@@ -417,6 +430,23 @@ struct ChapterRelatedContentPanel: View {
         return lines.dropFirst()
             .joined(separator: " ")
             .trimmingCharacters(in: .whitespacesAndNewlines)
+    }
+
+    /// 개인 묵상 배지 — 절 범위(예: 3-5절)로 연결된 것이면 범위를 밝히고, 한 절이면 기존 문구 그대로다.
+    private func writtenOnTitle(verse: Int?, verseEnd: Int?) -> String {
+        if let verse, let verseEnd, verseEnd > verse {
+            return String(localized: "\(verse)-\(verseEnd)절 범위에 작성됨")
+        }
+        return String(localized: "이 절에 작성됨")
+    }
+
+    /// 말씀 요약 배지 — `writtenOnTitle`과 같은 규칙에 작성일을 덧붙인다.
+    private func summaryWrittenOnTitle(_ summary: VerseSummary) -> String {
+        let dateLabel = wordSummaryDateLabel(summary)
+        if let verse = summary.verse, let verseEnd = summary.verseEnd, verseEnd > verse {
+            return String(localized: "\(verse)-\(verseEnd)절 범위에 작성됨 · \(dateLabel)")
+        }
+        return String(localized: "이 절에 작성됨 · \(dateLabel)")
     }
 
     private func wordSummaryDateLabel(_ summary: VerseSummary) -> String {
@@ -441,11 +471,11 @@ struct ChapterRelatedContentPanel: View {
         let groupedMentionedDocuments = groupedByDisplayText(mentionedDocuments)
         Section {
             sectionTitleRow(
-                "\(verse)절 관련 연구문서 (\(taggedDocuments.count + groupedMentionedDocuments.count))",
+                String(localized: "\(verse)절 관련 연구문서 (\(taggedDocuments.count + groupedMentionedDocuments.count))"),
                 systemImage: "doc.text.magnifyingglass", tint: .orange
             )
             if taggedDocuments.isEmpty && mentionedDocuments.isEmpty {
-                emptyRow("이 장에 연결됐거나 이 절을 언급하는 연구문서가 없습니다.")
+                emptyRow(String(localized: "이 장에 연결됐거나 이 절을 언급하는 연구문서가 없습니다."))
             } else {
                 ForEach(taggedDocuments) { document in
                     // 아이폰만 NavigationLink 푸시(다중 씬 미지원, isPhoneIdiom 참고).
@@ -477,7 +507,7 @@ struct ChapterRelatedContentPanel: View {
                     } label: {
                         VStack(alignment: .leading, spacing: 6) {
                             HStack(spacing: 6) {
-                                originBadge("본문에서 언급됨", systemImage: "text.magnifyingglass")
+                                originBadge(String(localized: "본문에서 언급됨"), systemImage: "text.magnifyingglass")
                                 if group.count > 1 {
                                     Text("\(group.count)곳에서 언급됨")
                                         .font(.caption2)
@@ -526,7 +556,7 @@ struct ChapterRelatedContentPanel: View {
     /// 위 `taggedDocuments` 행 — "이 장에 연결됨" 배지 + 파일명(`mentionedDocuments` 행과 같은 구조).
     private func documentRowLabel(_ document: SourceDocument) -> some View {
         VStack(alignment: .leading, spacing: 6) {
-            originBadge("이 장에 연결됨", systemImage: "paperclip")
+            originBadge(String(localized: "이 장에 연결됨"), systemImage: "paperclip")
             Label(document.displayTitle, systemImage: "doc.text")
                 .font(.callout)
                 .foregroundStyle(settings.bibleTextColor ?? .primary)
@@ -547,11 +577,11 @@ struct ChapterRelatedContentPanel: View {
         let groupedMentionedSermons = groupedByDisplayText(mentionedSermons)
         Section {
             sectionTitleRow(
-                "\(verse)절 관련 설교문 (\(taggedReferences.count + groupedMentionedSermons.count))",
+                String(localized: "\(verse)절 관련 설교문 (\(taggedReferences.count + groupedMentionedSermons.count))"),
                 systemImage: "mic.fill", tint: .purple
             )
             if taggedReferences.isEmpty && mentionedSermons.isEmpty {
-                emptyRow("이 절에 연결됐거나 이 절을 언급하는 설교문이 없습니다.")
+                emptyRow(String(localized: "이 절에 연결됐거나 이 절을 언급하는 설교문이 없습니다."))
             } else {
                 ForEach(taggedReferences) { reference in
                     sermonReferenceRow(reference)
@@ -562,7 +592,7 @@ struct ChapterRelatedContentPanel: View {
                     } label: {
                         VStack(alignment: .leading, spacing: 6) {
                             HStack(spacing: 6) {
-                                originBadge("본문에서 언급됨", systemImage: "text.magnifyingglass")
+                                originBadge(String(localized: "본문에서 언급됨"), systemImage: "text.magnifyingglass")
                                 if group.count > 1 {
                                     Text("\(group.count)곳에서 언급됨")
                                         .font(.caption2)
@@ -594,13 +624,13 @@ struct ChapterRelatedContentPanel: View {
                     NavigationLink {
                         SermonViewerView(subject: .sermon(sermon))
                     } label: {
-                        sermonReferenceRowLabel(title: sermon.title.isEmpty ? "제목 없음" : sermon.title)
+                        sermonReferenceRowLabel(title: sermon.title.isEmpty ? String(localized: "제목 없음") : sermon.title)
                     }
                 } else {
                     Button {
                         openAppWindow(id: "sermon-viewer", value: SermonViewerTarget.sermon(sermon))
                     } label: {
-                        sermonReferenceRowLabel(title: sermon.title.isEmpty ? "제목 없음" : sermon.title)
+                        sermonReferenceRowLabel(title: sermon.title.isEmpty ? String(localized: "제목 없음") : sermon.title)
                     }
                     .buttonStyle(.plain)
                 }
@@ -609,7 +639,7 @@ struct ChapterRelatedContentPanel: View {
             .listRowBackground(Color.clear)
         } else if let delivery = reference.delivery {
             // 회차 사본(SermonDelivery) — 소속 모임 이름 + 날짜로 표시한다.
-            let gatheringName = delivery.gathering?.name ?? "모임 미지정"
+            let gatheringName = delivery.gathering?.name ?? String(localized: "모임 미지정")
             let dateText = delivery.deliveredAt.formatted(date: .abbreviated, time: .omitted)
             Group {
                 if isPhoneIdiom {
@@ -635,7 +665,7 @@ struct ChapterRelatedContentPanel: View {
 
     private func sermonReferenceRowLabel(title: String) -> some View {
         VStack(alignment: .leading, spacing: 6) {
-            originBadge("말씀구절로 연결됨", systemImage: "text.book.closed")
+            originBadge(String(localized: "말씀구절로 연결됨"), systemImage: "text.book.closed")
             Label(title, systemImage: "mic.fill")
                 .font(.callout)
                 .foregroundStyle(settings.bibleTextColor ?? .primary)

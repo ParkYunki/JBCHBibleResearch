@@ -1,0 +1,9 @@
+[
+  {
+    "path": "Tools/LiteralGen/outputs/en/05_DEU/DEU_033.tsv",
+    "verse": 5,
+    "old_row": "5\t=\tThe Hebrew does not explicitly name the king’s subject here; BSB supplies “the LORD.”",
+    "new_row": "5\t=\tThe Hebrew does not explicitly name who became king here; BSB supplies “the LORD.”",
+    "reason": "Avoid the misleading phrase “the king’s subject.”"
+  }
+]

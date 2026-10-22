@@ -22,7 +22,42 @@ public final class ReferenceDataStore {
     private var handle: OpaquePointer?
     public let filePath: String
 
-    public init(filePath: String) throws {
+    // MARK: 번역 표시층 (2026-10-22 신설)
+    //
+    // 비한국어 앱에서만 쓰는 "화면에 보일 글자" 층(`build_reference_data.py`의 `build_reference_i18n`). 한국어 표와
+    // 한국어 판정 로직(관계·동명이인·검색·조사)은 그대로이고, 아래 값으로 표시 문자열만 바꾼다.
+    // 아래 사전·목록은 init에서 한 번 읽어 `let`으로 둔다 — 이 타입은 스레드 안전하지 않다고 명시돼 있어(상단 주석)
+    // 지연 캐시(`lazy var`)는 동시 접근 시 데이터 경쟁이 생길 수 있지만, 읽기 전용 `let`은 그렇지 않다.
+
+    /// 번역 표시 언어("en"/"zh"/"es"). nil이면 한국어 — 이때 아래 사전은 모두 비어 있고, 모든 `display*`/
+    /// `localized` 값이 한국어 원본과 같다(추가 쿼리 0회). 번역 표가 없는 예전 DB면 인자와 무관하게 nil이다.
+    public let contentLanguage: String?
+    /// `PersonsI18n.word`(비어 있지 않은 것만) — 관계·그룹·참고 정보에 나오는 이름을 idx로 번역할 때 쓴다.
+    private let personNameByIdx: [String: String]
+    /// 한국어 이름이 `Persons`에서 정확히 한 명인 인물만: 한국어 `word` → 번역 이름. idx가 실리지 않은 관계 행
+    /// (`personRelations(targetWordMentionedIn:)` 등)의 문장 표시 전용이다(`displayPersonName(word:idx:)`).
+    private let personNameByUniqueKoreanWord: [String: String]
+    /// `RelationLabelsI18n` — 참고 정보 라벨, 가족관계 괄호 설명, 관계 원문 괄호 라벨(한국어 → 번역).
+    private let relationLabelByKo: [String: String]
+    /// `PersonGroupsI18n` — group_id(원문 라벨) → 번역 그룹 이름.
+    private let groupNameById: [String: String]
+    /// `NameSearchI18n`(이 언어만, rowid 순서) — 번역 이름 검색 후보. 접은 값은 DB의 name_folded가 아니라 앱이
+    /// `foldForNameSearch`로 직접 만든다(질의와 같은 함수로 접어야 Python/Swift 접기 규칙 차이가 생기지 않는다).
+    private let translatedNames: [TranslatedNameEntry]
+
+    private struct TranslatedNameEntry {
+        let kind: ReferenceEntity.Kind
+        let idx: String
+        let name: String
+        /// `foldForNameSearch(name)`의 문자 배열(en/es 단어 경계 비교용 — 공백 하나 유지).
+        let foldedCharacters: [Character]
+        /// 위에서 공백을 모두 뺀 문자 배열(zh 부분 문자열 비교용).
+        let compactCharacters: [Character]
+    }
+
+    /// - Parameter contentLanguage: 번역 표시 언어("en"/"zh"/"es"), 한국어면 nil(기본값 — 기존 호출부·테스트는 그대로
+    ///   한국어로 동작한다). 이 값의 해석(앱 언어 → 데이터 언어)은 앱 레이어 책임이다(`AppLanguage.referenceDataLanguage`).
+    public init(filePath: String, contentLanguage: String? = nil) throws {
         self.filePath = filePath
         var db: OpaquePointer?
         let openResult = sqlite3_open_v2(filePath, &db, SQLITE_OPEN_READONLY, nil)
@@ -31,10 +66,365 @@ public final class ReferenceDataStore {
             throw BibleReferenceError.databaseOpenFailed(path: filePath, code: openResult)
         }
         self.handle = db
+        // 아래 정적 도우미는 `Self.`가 아니라 타입 이름으로 부른다 — 모든 저장 프로퍼티가 초기화되기 전이라 `self`를 쓸 수 없다.
+
+        // 번역 표가 없는 예전 DB면 한국어로 내려앉는다(throw하지 않는다 — 번역이 없어도 한국어 데이터는 열려야 한다).
+        let language: String?
+        if let requested = contentLanguage, !requested.isEmpty,
+           ReferenceDataStore.tableExists("PersonsI18n", in: db), ReferenceDataStore.tableExists("PlacesI18n", in: db) {
+            language = requested
+        } else {
+            language = nil
+        }
+        self.contentLanguage = language
+        if let language {
+            self.personNameByIdx = ReferenceDataStore.loadStringMap(
+                "SELECT idx, word FROM PersonsI18n WHERE lang = ?1 AND word IS NOT NULL AND word <> ''",
+                language: language, in: db
+            )
+            // `isUniquePersonName`과 같은 기준(이름이 Persons에서 한 명) — 동명이인이 있는 이름은 넣지 않는다(추측 금지).
+            self.personNameByUniqueKoreanWord = ReferenceDataStore.loadStringMap(
+                """
+                SELECT p.word, i.word FROM Persons p
+                JOIN PersonsI18n i ON i.lang = ?1 AND i.idx = p.idx
+                WHERE i.word IS NOT NULL AND i.word <> ''
+                  AND p.word IN (SELECT word FROM Persons GROUP BY word HAVING COUNT(*) = 1)
+                """,
+                language: language, in: db
+            )
+            self.relationLabelByKo = ReferenceDataStore.tableExists("RelationLabelsI18n", in: db)
+                ? ReferenceDataStore.loadStringMap(
+                    "SELECT label_ko, label FROM RelationLabelsI18n WHERE lang = ?1 AND label <> ''",
+                    language: language, in: db
+                )
+                : [:]
+            self.groupNameById = ReferenceDataStore.tableExists("PersonGroupsI18n", in: db)
+                ? ReferenceDataStore.loadStringMap(
+                    "SELECT group_id, group_name FROM PersonGroupsI18n WHERE lang = ?1 AND group_name <> ''",
+                    language: language, in: db
+                )
+                : [:]
+            self.translatedNames = ReferenceDataStore.tableExists("NameSearchI18n", in: db)
+                ? ReferenceDataStore.loadTranslatedNames(language: language, in: db)
+                : []
+        } else {
+            self.personNameByIdx = [:]
+            self.personNameByUniqueKoreanWord = [:]
+            self.relationLabelByKo = [:]
+            self.groupNameById = [:]
+            self.translatedNames = []
+        }
+    }
+
+    /// `sqlite_master`에 그 이름의 표가 있는지. 실패하면 false(= 번역 층 없음으로 취급).
+    private static func tableExists(_ name: String, in db: OpaquePointer) -> Bool {
+        var statement: OpaquePointer?
+        defer { sqlite3_finalize(statement) }
+        guard sqlite3_prepare_v2(db, "SELECT 1 FROM sqlite_master WHERE type = 'table' AND name = ?1", -1, &statement, nil) == SQLITE_OK else {
+            return false
+        }
+        sqlite3_bind_text(statement, 1, name, -1, SQLITE_TRANSIENT)
+        return sqlite3_step(statement) == SQLITE_ROW
+    }
+
+    /// 두 열(키, 값) SELECT를 사전으로 읽는다(`?1` = 언어). 키가 겹치면 첫 값을 유지한다(세 표 모두 키가 PRIMARY KEY라
+    /// 실제로는 겹치지 않는다). 준비·실행이 실패하면 그때까지 읽은 값(또는 빈 사전) — 번역이 없어도 한국어로 보이면 된다.
+    private static func loadStringMap(_ sql: String, language: String, in db: OpaquePointer) -> [String: String] {
+        var statement: OpaquePointer?
+        defer { sqlite3_finalize(statement) }
+        guard sqlite3_prepare_v2(db, sql, -1, &statement, nil) == SQLITE_OK else { return [:] }
+        sqlite3_bind_text(statement, 1, language, -1, SQLITE_TRANSIENT)
+        var result: [String: String] = [:]
+        while sqlite3_step(statement) == SQLITE_ROW {
+            guard let keyPointer = sqlite3_column_text(statement, 0),
+                  let valuePointer = sqlite3_column_text(statement, 1) else { continue }
+            let key = String(cString: keyPointer)
+            if result[key] == nil {
+                result[key] = String(cString: valuePointer)
+            }
+        }
+        return result
+    }
+
+    private static func loadTranslatedNames(language: String, in db: OpaquePointer) -> [TranslatedNameEntry] {
+        var statement: OpaquePointer?
+        defer { sqlite3_finalize(statement) }
+        let sql = "SELECT kind, idx, name FROM NameSearchI18n WHERE lang = ?1 ORDER BY rowid"
+        guard sqlite3_prepare_v2(db, sql, -1, &statement, nil) == SQLITE_OK else { return [] }
+        sqlite3_bind_text(statement, 1, language, -1, SQLITE_TRANSIENT)
+        var result: [TranslatedNameEntry] = []
+        while sqlite3_step(statement) == SQLITE_ROW {
+            guard let kindPointer = sqlite3_column_text(statement, 0),
+                  let idxPointer = sqlite3_column_text(statement, 1),
+                  let namePointer = sqlite3_column_text(statement, 2) else { continue }
+            let kindRaw = String(cString: kindPointer)
+            let kind: ReferenceEntity.Kind
+            switch kindRaw {
+            case "person": kind = .person
+            case "place": kind = .place
+            default: continue
+            }
+            let name = String(cString: namePointer)
+            let folded = foldForNameSearch(name)
+            guard !folded.isEmpty else { continue }
+            result.append(TranslatedNameEntry(
+                kind: kind, idx: String(cString: idxPointer), name: name,
+                foldedCharacters: Array(folded), compactCharacters: Array(folded.filter { !$0.isWhitespace })
+            ))
+        }
+        return result
     }
 
     deinit {
         sqlite3_close(handle)
+    }
+
+    // MARK: - 번역 표시 도우미 (2026-10-22 신설)
+    //
+    // 한국어 모드(`contentLanguage == nil`)에서는 사전이 비어 있어 항상 입력값을 그대로 돌려준다.
+
+    /// `Persons.idx`가 확정된 이름의 표시용 번역. idx가 비었거나(`#0`/태그 없음) 번역이 없으면 `fallback`(한국어 원문).
+    public func displayPersonName(idx: String, fallback: String) -> String {
+        guard !idx.isEmpty, let name = personNameByIdx[idx] else { return fallback }
+        return name
+    }
+
+    /// 링크 없이 글자만 보여 주는 곳(관계 문장) 전용 — idx가 있으면 idx로만 번역하고(없으면 `word`), idx가 비어 있으면
+    /// 그 한국어 이름의 인물이 `Persons`에 정확히 한 명일 때만 그 사람의 번역 이름, 아니면 `word`(한국어) 그대로.
+    /// ⚠️ 이 결과를 이름 검색·링크 키로 쓰지 말 것(번역 이름으로는 한국어 조회가 되지 않는다).
+    public func displayPersonName(word: String, idx: String) -> String {
+        if !idx.isEmpty { return personNameByIdx[idx] ?? word }
+        return personNameByUniqueKoreanWord[word] ?? word
+    }
+
+    /// 관계·참고 정보 라벨(예: "숙부", "총독", "사도")의 표시용 번역. 없으면 원문.
+    public func displayRelationLabel(_ label: String) -> String {
+        relationLabelByKo[label] ?? label
+    }
+
+    /// 그룹 id(= 원문 그룹 이름, 예: "열두 제자")의 표시용 번역. 없으면 원문.
+    public func displayGroupName(_ groupId: String) -> String {
+        groupNameById[groupId] ?? groupId
+    }
+
+    /// `*_I18n` 텍스트 칸 읽기 — NULL이면 nil(= 번역 없음, 폴백). 기존 `col()` 도우미는 NULL을 ""로 바꿔
+    /// "번역 없음"과 "한국어도 빈 값"을 구분하지 못해 쓰지 않는다.
+    private static func optionalText(_ statement: OpaquePointer?, _ index: Int32) -> String? {
+        guard sqlite3_column_type(statement, index) != SQLITE_NULL,
+              let pointer = sqlite3_column_text(statement, index) else { return nil }
+        return String(cString: pointer)
+    }
+
+    /// JSON 배열 칸(`word2_json`/`occupation_json`). NULL이거나 형식이 깨졌으면 nil(그 칸 전체 한국어 폴백).
+    private static func optionalStringList(_ statement: OpaquePointer?, _ index: Int32) -> [String]? {
+        guard let raw = optionalText(statement, index), let data = raw.data(using: .utf8) else { return nil }
+        return try? JSONDecoder().decode([String].self, from: data)
+    }
+
+    /// `PersonsI18n` 한 행. 한국어 모드·행 없음·쿼리 실패는 모두 nil(throw하지 않는다 — 번역이 없어도 한국어는 보여야 한다).
+    private func personLocalization(idx: String) -> PersonLocalizedText? {
+        guard let language = contentLanguage, !idx.isEmpty else { return nil }
+        let sql = """
+            SELECT word, word2_json, remark, call_title, meaning, introduce, lifetime, event, character,
+                   origin, nation, tribe, gender, occupation_json, seed_memo
+            FROM PersonsI18n WHERE lang = ?1 AND idx = ?2
+            """
+        var statement: OpaquePointer?
+        defer { sqlite3_finalize(statement) }
+        guard sqlite3_prepare_v2(handle, sql, -1, &statement, nil) == SQLITE_OK else { return nil }
+        sqlite3_bind_text(statement, 1, language, -1, SQLITE_TRANSIENT)
+        sqlite3_bind_text(statement, 2, idx, -1, SQLITE_TRANSIENT)
+        guard sqlite3_step(statement) == SQLITE_ROW else { return nil }
+        // SELECT 열 순서: 0=word 1=word2_json 2=remark 3=call_title 4=meaning 5=introduce 6=lifetime 7=event
+        // 8=character 9=origin 10=nation 11=tribe 12=gender 13=occupation_json 14=seed_memo — 위 SELECT와 정확히 일치해야 한다.
+        return PersonLocalizedText(
+            word: Self.optionalText(statement, 0), aliases: Self.optionalStringList(statement, 1),
+            remark: Self.optionalText(statement, 2), callTitle: Self.optionalText(statement, 3),
+            meaning: Self.optionalText(statement, 4), introduce: Self.optionalText(statement, 5),
+            lifetime: Self.optionalText(statement, 6), event: Self.optionalText(statement, 7),
+            character: Self.optionalText(statement, 8), origin: Self.optionalText(statement, 9),
+            nation: Self.optionalText(statement, 10), tribe: Self.optionalText(statement, 11),
+            gender: Self.optionalText(statement, 12), occupation: Self.optionalStringList(statement, 13),
+            seedMemo: Self.optionalText(statement, 14)
+        )
+    }
+
+    /// `PlacesI18n` 한 행. 규칙은 `personLocalization(idx:)`와 같다.
+    private func placeLocalization(idx: String) -> PlaceLocalizedText? {
+        guard let language = contentLanguage, !idx.isEmpty else { return nil }
+        let sql = """
+            SELECT word, remark, introduce, biblecontents, geography, history
+            FROM PlacesI18n WHERE lang = ?1 AND idx = ?2
+            """
+        var statement: OpaquePointer?
+        defer { sqlite3_finalize(statement) }
+        guard sqlite3_prepare_v2(handle, sql, -1, &statement, nil) == SQLITE_OK else { return nil }
+        sqlite3_bind_text(statement, 1, language, -1, SQLITE_TRANSIENT)
+        sqlite3_bind_text(statement, 2, idx, -1, SQLITE_TRANSIENT)
+        guard sqlite3_step(statement) == SQLITE_ROW else { return nil }
+        return PlaceLocalizedText(
+            word: Self.optionalText(statement, 0), remark: Self.optionalText(statement, 1),
+            introduce: Self.optionalText(statement, 2), bibleContents: Self.optionalText(statement, 3),
+            geography: Self.optionalText(statement, 4), history: Self.optionalText(statement, 5)
+        )
+    }
+
+    /// 한국어 필드는 그대로 두고 `localized`만 채운 사본. 한국어 모드면 쿼리 없이 원본을 그대로 돌려준다.
+    private func localizing(_ place: PlaceEntity) -> PlaceEntity {
+        guard contentLanguage != nil, let localized = placeLocalization(idx: place.idx) else { return place }
+        return PlaceEntity(
+            idx: place.idx, word: place.word, remark: place.remark, verseRefs: place.verseRefs,
+            introduce: place.introduce, bibleContents: place.bibleContents, geography: place.geography,
+            history: place.history, localized: localized
+        )
+    }
+
+    // MARK: - 번역 이름 검색 (2026-10-22 신설, 비한국어 화면 전용)
+    //
+    // 한국어 검색(`persons(mentionedIn:)`/`places(mentionedIn:)` 등)과 완전히 별개 경로다 — 한국어 표·쿼리는 건드리지 않는다.
+    // 규칙(사용자 확정 2026-10-22):
+    //  - 비교 전에 질의와 이름을 모두 `foldForNameSearch`로 접는다(대소문자·발음 구별 기호·전각/반각 무시 — RV1909 "Châm" 등).
+    //  - en/es: 단어 경계 일치("Dan"이 "Daniel"·"abandon"에 걸리지 않게). 공백을 뺀 글자가 2자 이하인 이름("On", "Ai", "No")은
+    //    흔한 낱말과 겹쳐 질의 전체가 그 이름일 때만 일치로 본다(한국어 검색의 "2글자 미만 제외"와 같은 취지).
+    //  - zh: 공백을 뺀 부분 문자열 일치. 한 글자 이름("但", "艾" 등)은 질의 전체가 그 이름일 때만.
+    //  - 최장 일치 우선: 걸린 이름이 더 긴 다른 걸린 이름 안에 (en/es는 단어 단위로) 완전히 들어가면 뺀다
+    //    (`filterSwallowedNameMatches`와 같은 원칙, 인물·지명 사이에도 적용 — `QueryIntentHandler.handlePlaceLookup`과 같음).
+
+    /// 번역 이름 비교용 접기 — 대소문자·발음 구별 기호·전각/반각을 무시하고 공백을 하나로 모은다.
+    public static func foldForNameSearch(_ text: String) -> String {
+        text.folding(options: [.caseInsensitive, .diacriticInsensitive, .widthInsensitive], locale: nil)
+            .split(whereSeparator: { $0.isWhitespace })
+            .joined(separator: " ")
+    }
+
+    private static func isWordCharacter(_ character: Character) -> Bool {
+        character.isLetter || character.isNumber
+    }
+
+    /// `needle`이 `haystack` 안에 나오는 모든 위치(문자 배열 인덱스). `wholeWords`면 앞뒤가 글자·숫자가 아닌 곳만.
+    private static func occurrences(of needle: [Character], in haystack: [Character], wholeWords: Bool) -> [Range<Int>] {
+        guard !needle.isEmpty, needle.count <= haystack.count else { return [] }
+        var result: [Range<Int>] = []
+        var start = 0
+        while start + needle.count <= haystack.count {
+            let end = start + needle.count
+            if haystack[start..<end].elementsEqual(needle) {
+                let boundaryBefore = start == 0 || !isWordCharacter(haystack[start - 1])
+                let boundaryAfter = end == haystack.count || !isWordCharacter(haystack[end])
+                if !wholeWords || (boundaryBefore && boundaryAfter) {
+                    result.append(start..<end)
+                }
+            }
+            start += 1
+        }
+        return result
+    }
+
+    /// 질의 안에 번역 이름(대표 이름·별칭)이 든 인물/지명을 찾는다. 한국어 모드이거나 번역 이름 표가 없으면 빈 결과.
+    ///
+    /// - Returns: `matches` — (kind, idx)별 한 건, `NameSearchI18n` 순서(인물 → 지명, idx 오름차순).
+    ///   `coverage` — 살아남은 이름들이 질의 글자(공백 제외)를 덮는 비율(0...1). 문장 속에 이름과 같은 낱말이 우연히
+    ///   있을 뿐인 질의를 호출부가 걸러내는 데 쓴다(`QueryIntentHandler.handlePlaceLookup`의 비율 판정과 같은 취지).
+    public func translatedNameMatches(in query: String) -> (matches: [TranslatedNameMatch], coverage: Double) {
+        guard let language = contentLanguage, !translatedNames.isEmpty else { return ([], 0) }
+        let usesWordBoundary = language != "zh"
+        let foldedQuery = Self.foldForNameSearch(query)
+        // zh는 공백을 무시한다(한국어 `places(mentionedIn:)`처럼). en/es는 단어 경계를 보려고 공백 하나로 모은 질의를 쓴다.
+        let queryCharacters: [Character] = usesWordBoundary ? Array(foldedQuery) : Array(foldedQuery.filter { !$0.isWhitespace })
+        guard !queryCharacters.isEmpty else { return ([], 0) }
+
+        struct Hit {
+            let entry: TranslatedNameEntry
+            let key: [Character]
+            let ranges: [Range<Int>]
+        }
+        var hits: [Hit] = []
+        for entry in translatedNames {
+            let key = usesWordBoundary ? entry.foldedCharacters : entry.compactCharacters
+            let letterCount = entry.compactCharacters.count
+            guard letterCount > 0 else { continue }
+            let shortNameLimit = usesWordBoundary ? 2 : 1
+            let ranges: [Range<Int>]
+            if letterCount <= shortNameLimit {
+                ranges = key == queryCharacters ? [0..<queryCharacters.count] : []
+            } else {
+                ranges = Self.occurrences(of: key, in: queryCharacters, wholeWords: usesWordBoundary)
+            }
+            guard !ranges.isEmpty else { continue }
+            hits.append(Hit(entry: entry, key: key, ranges: ranges))
+        }
+        guard !hits.isEmpty else { return ([], 0) }
+
+        // 최장 일치 우선 — 다른 걸린 이름(더 긴) 안에 완전히 들어가는 이름은 뺀다.
+        let kept = hits.filter { hit in
+            !hits.contains { other in
+                other.key.count > hit.key.count
+                    && !Self.occurrences(of: hit.key, in: other.key, wholeWords: usesWordBoundary).isEmpty
+            }
+        }
+
+        var covered = [Bool](repeating: false, count: queryCharacters.count)
+        for hit in kept {
+            for range in hit.ranges {
+                for position in range { covered[position] = true }
+            }
+        }
+        var coveredCount = 0
+        var totalCount = 0
+        for (position, character) in queryCharacters.enumerated() where !character.isWhitespace {
+            totalCount += 1
+            if covered[position] { coveredCount += 1 }
+        }
+        let coverage = totalCount > 0 ? Double(coveredCount) / Double(totalCount) : 0
+
+        // (kind, idx)별 한 건. 대표 이름으로 한 번이라도 걸렸으면 matchedAlias = nil, 별칭으로만 걸렸으면 처음 걸린 별칭.
+        struct Pending {
+            let kind: ReferenceEntity.Kind
+            let idx: String
+            var matchedAlias: String?
+        }
+        var pending: [Pending] = []
+        var pendingIndexByKey: [String: Int] = [:]
+        for hit in kept {
+            let entry = hit.entry
+            let key = "\(entry.kind == .person ? "person" : "place")#\(entry.idx)"
+            let isPrimaryName = entry.kind == .place || personNameByIdx[entry.idx] == entry.name
+            if let index = pendingIndexByKey[key] {
+                if isPrimaryName { pending[index].matchedAlias = nil }
+                continue
+            }
+            pendingIndexByKey[key] = pending.count
+            pending.append(Pending(kind: entry.kind, idx: entry.idx, matchedAlias: isPrimaryName ? nil : entry.name))
+        }
+        let matches = pending.map { TranslatedNameMatch(kind: $0.kind, idx: $0.idx, matchedAlias: $0.matchedAlias) }
+        return (matches, coverage)
+    }
+
+    /// [2026-10-22 2차] 번역 이름 하나(`name` 전체)와 정확히 같은 인물의 idx — 비한국어 관계 질의("sons of Ham",
+    /// "hijos de Noé", "挪亚的儿子")의 X를 한국어 인물로 되돌리는 데 쓴다. 부분 일치·단어 경계 판정은 하지 않는다(슬롯 전체가 이름).
+    /// 비교는 `translatedNameMatches(in:)`와 같은 접기(`foldForNameSearch`)로 하고, zh는 공백을 무시한다.
+    ///
+    /// - Returns: `primary` — 대표 번역 이름(`PersonsI18n.word`)으로 일치한 idx, `alias` — 번역 별칭으로만 일치한 idx
+    ///   (`primary`에 있는 idx는 빼고). 둘 다 `NameSearchI18n` 순서(idx 오름차순), 중복 없음. 한국어 모드·번역 표 없음이면 둘 다 빈 배열.
+    public func translatedPersonIdxs(exactName name: String) -> (primary: [String], alias: [String]) {
+        guard let language = contentLanguage, !translatedNames.isEmpty else { return ([], []) }
+        let usesWordBoundary = language != "zh"
+        let folded = Self.foldForNameSearch(name)
+        let key: [Character] = usesWordBoundary ? Array(folded) : Array(folded.filter { !$0.isWhitespace })
+        guard !key.isEmpty else { return ([], []) }
+        var primary: [String] = []
+        var alias: [String] = []
+        for entry in translatedNames where entry.kind == .person {
+            let entryKey = usesWordBoundary ? entry.foldedCharacters : entry.compactCharacters
+            guard entryKey == key else { continue }
+            if personNameByIdx[entry.idx] == entry.name {
+                if !primary.contains(entry.idx) { primary.append(entry.idx) }
+            } else if !alias.contains(entry.idx) {
+                alias.append(entry.idx)
+            }
+        }
+        alias.removeAll { primary.contains($0) }
+        return (primary, alias)
     }
 
     /// "이름#idx"(구분자 "#") 태그를 가족관계(`rel_*` 콤마 목록)에서 분리한다. 태그가 없으면 이름 전체가 그대로 온다.
@@ -191,13 +581,18 @@ public final class ReferenceDataStore {
     /// 검색이라 인덱스를 타지 않지만, Persons+Places 합쳐 982건뿐이라
     /// 전체 스캔 비용이 무시할 만하다). 한 글자짜리 word는 오탐이 너무
     /// 많아(예: "그", "이") 제외한다.
-    public func personsAndPlaces(mentionedIn query: String) throws -> [ReferenceEntity] {
+    ///
+    /// - Parameter shortNamesExactMatch: [2026-10-22 2차] 한 글자 이름("함", "셈", "단")은 부분 문자열로는 받지 않고, 이 목록에
+    ///   정확히 같은 값이 있을 때만 추가로 포함한다. 호출부(`QueryIntentHandler.handleRelation`)가 질의가 "X의 <관계어>" 꼴일 때 X 중
+    ///   한 글자인 이름만 넘긴다. 빈 배열(기본값)이면 SQL에 조건이 붙지 않아 기존과 똑같다(2글자 이상만, 부분 문자열).
+    public func personsAndPlaces(mentionedIn query: String, shortNamesExactMatch: [String] = []) throws -> [ReferenceEntity] {
+        let shortClause = Self.shortNameExactClause(column: "word", count: shortNamesExactMatch.count)
         let sql = """
             SELECT idx, word, remark, verses, 'person' FROM Persons
-                WHERE length(word) >= 2 AND instr(?, word) > 0
+                WHERE (length(word) >= 2 AND instr(?1, word) > 0)\(shortClause)
             UNION ALL
             SELECT idx, word, remark, verses, 'place' FROM Places
-                WHERE length(word) >= 2 AND instr(?, word) > 0
+                WHERE (length(word) >= 2 AND instr(?1, word) > 0)\(shortClause)
             """
         var statement: OpaquePointer?
         defer { sqlite3_finalize(statement) }
@@ -205,7 +600,7 @@ public final class ReferenceDataStore {
             throw BibleReferenceError.statementPrepareFailed(code: sqlite3_errcode(handle))
         }
         sqlite3_bind_text(statement, 1, query, -1, SQLITE_TRANSIENT)
-        sqlite3_bind_text(statement, 2, query, -1, SQLITE_TRANSIENT)
+        Self.bindShortNames(shortNamesExactMatch, to: statement)
 
         var results: [ReferenceEntity] = []
         while true {
@@ -237,6 +632,22 @@ public final class ReferenceDataStore {
         sqlite3_bind_text(statement, 2, word, -1, SQLITE_TRANSIENT)
         guard sqlite3_step(statement) == SQLITE_ROW else { return nil }
         return Self.makeReferenceEntity(statement: statement)
+    }
+
+    /// [2026-10-22 2차] 한 글자 이름 정확 일치 조건 — `count`가 0이면 빈 문자열(기존 SQL 그대로), 아니면
+    /// " OR (length(col) = 1 AND col IN (?2, ?3, …))". 값은 SQL에 끼워 넣지 않고 `bindShortNames`로 ?2부터 바인딩한다
+    /// (`column`은 호출부가 넘기는 고정 열 이름뿐이다).
+    private static func shortNameExactClause(column: String, count: Int) -> String {
+        guard count > 0 else { return "" }
+        let placeholders = (0..<count).map { "?\($0 + 2)" }.joined(separator: ", ")
+        return " OR (length(\(column)) = 1 AND \(column) IN (\(placeholders)))"
+    }
+
+    /// `shortNameExactClause`의 자리표시자(?2부터)에 값을 바인딩한다. SQLite `=`/`IN`은 바이트 비교라 NFC로 맞춘다.
+    private static func bindShortNames(_ names: [String], to statement: OpaquePointer?) {
+        for (offset, name) in names.enumerated() {
+            sqlite3_bind_text(statement, Int32(offset + 2), name.precomposedStringWithCanonicalMapping, -1, SQLITE_TRANSIENT)
+        }
     }
 
     /// SELECT 컬럼 인덱스: idx=0, word=1, remark=2, verses=3, kind=4.
@@ -392,6 +803,9 @@ public final class ReferenceDataStore {
     /// 질의에 이름이 들어 있는 지명 전부. 공백은 양쪽 모두 뺀 뒤 비교한다("가드 림몬"이 "가드림몬" 질의에 걸리게).
     /// 2글자 미만 이름은 제외하고, 더 긴 매칭 이름 안에 완전히 포함되는 짧은 이름은 뺀다("가나안" 질의에서 "가나"가
     /// 같이 걸리는 것을 막는 `filterSwallowedNameMatches`와 같은 원칙). 같은 이름의 지명은 모두 돌려주며 idx 오름차순이다.
+    ///
+    /// [2026-10-22 3차] 한 글자 지명("단", "함", "길", "돌")은 부분 문자열로는 받지 않고(오탐: "판단", "길이") 질의 전체(공백 제외)가
+    /// 그 이름일 때만 받는다 — `persons(mentionedIn:)`의 한 글자 이름 규칙과 같다. 2글자 이상 이름의 규칙은 그대로다.
     public func places(mentionedIn query: String) throws -> [PlaceEntity] {
         let compactQuery = query.filter { !$0.isWhitespace }
         guard !compactQuery.isEmpty else { return [] }
@@ -408,7 +822,10 @@ public final class ReferenceDataStore {
             guard step == SQLITE_ROW else { throw BibleReferenceError.stepFailed(code: step) }
             let place = Self.makePlace(from: statement)
             let compactName = place.word.filter { !$0.isWhitespace }
-            guard compactName.count >= 2, compactQuery.contains(compactName) else { continue }
+            let isMentioned = compactName.count >= 2
+                ? compactQuery.contains(compactName)
+                : (compactName.count == 1 && compactName == compactQuery)
+            guard isMentioned else { continue }
             matched.append((place, compactName))
         }
         let names = matched.map(\.compactName)
@@ -418,6 +835,8 @@ public final class ReferenceDataStore {
             }
             .map(\.place)
             .sorted { (Int($0.idx) ?? 0) < (Int($1.idx) ?? 0) }
+            // [2026-10-22] 번역 표시층은 걸러진 결과에만 붙인다(1,061행 전체에 쿼리하지 않도록). 매칭은 위에서 한국어로 끝났다.
+            .map { localizing($0) }
     }
 
     /// `idx`(유일 식별자)로 지명 하나를 짚는다. 없으면 nil.
@@ -433,7 +852,7 @@ public final class ReferenceDataStore {
         let step = sqlite3_step(statement)
         if step == SQLITE_DONE { return nil }
         guard step == SQLITE_ROW else { throw BibleReferenceError.stepFailed(code: step) }
-        return Self.makePlace(from: statement)
+        return localizing(Self.makePlace(from: statement))
     }
 
     /// 이름이 같은 다른 지명들(동명이인) — `excludingIdx` 자신은 뺀다. 이름 비교는 정확 일치이며 idx 오름차순이다.
@@ -453,7 +872,8 @@ public final class ReferenceDataStore {
             guard step == SQLITE_ROW else { throw BibleReferenceError.stepFailed(code: step) }
             results.append(Self.makePlace(from: statement))
         }
-        return results
+        // [2026-10-22] 이름 비교(`word = ?1`)는 위에서 한국어로 끝났다 — 표시용 번역만 붙인다(동명 묶음은 그대로).
+        return results.map { localizing($0) }
     }
 
     /// 그룹(예: "열두 제자")의 멤버 전원을 `PersonGroupMemberships`의 등록 순서대로 돌려준다.
@@ -490,10 +910,18 @@ public final class ReferenceDataStore {
     ///
     /// target_word가 Persons/Places에 없어도(예: "골리앗") 매칭되므로
     /// `personOrPlace(exactWord:)`로는 대체할 수 없다.
-    public func personRelations(targetWordMentionedIn query: String) throws -> [PersonRelationRecord] {
+    ///
+    /// 2026-10-21: `source_idx`/`target_idx`도 함께 읽는다. 예전에는 두 값을 읽지 않아 "세베대의 아들"처럼 답이 source인 질의의
+    /// 행이 idx 없이 나왔고, 동명이인이 있는 이름(야고보·요한)은 `PersonDetailView.resolvePerson`이 이름만으로 특정하지 못해
+    /// 인물 상세 대신 관계 상세가 열렸다. `personRelations(sourceWordMentionedIn:)`와 같은 방식이다.
+    ///
+    /// - Parameter shortNamesExactMatch: [2026-10-22 2차] `personsAndPlaces(mentionedIn:shortNamesExactMatch:)`와 같은 뜻 —
+    ///   한 글자 `target_word`는 이 목록에 있을 때만 포함한다. 빈 배열(기본값)이면 기존과 똑같다.
+    public func personRelations(targetWordMentionedIn query: String, shortNamesExactMatch: [String] = []) throws -> [PersonRelationRecord] {
         let sql = """
-            SELECT source_word, relation_type, target_word, target_kind, raw_sentence
-            FROM PersonRelations WHERE length(target_word) >= 2 AND instr(?, target_word) > 0
+            SELECT source_word, relation_type, target_word, target_kind, raw_sentence, source_idx, target_idx
+            FROM PersonRelations
+            WHERE (length(target_word) >= 2 AND instr(?1, target_word) > 0)\(Self.shortNameExactClause(column: "target_word", count: shortNamesExactMatch.count))
             """
         var statement: OpaquePointer?
         defer { sqlite3_finalize(statement) }
@@ -501,6 +929,7 @@ public final class ReferenceDataStore {
             throw BibleReferenceError.statementPrepareFailed(code: sqlite3_errcode(handle))
         }
         sqlite3_bind_text(statement, 1, query, -1, SQLITE_TRANSIENT)
+        Self.bindShortNames(shortNamesExactMatch, to: statement)
 
         var results: [PersonRelationRecord] = []
         while true {
@@ -512,10 +941,12 @@ public final class ReferenceDataStore {
             let targetWord = sqlite3_column_text(statement, 2).map { String(cString: $0) } ?? ""
             let targetKindRaw = sqlite3_column_text(statement, 3).map { String(cString: $0) }
             let rawSentence = sqlite3_column_text(statement, 4).map { String(cString: $0) } ?? ""
+            let sourceIdx = sqlite3_column_text(statement, 5).map { String(cString: $0) } ?? ""
+            let targetIdx = sqlite3_column_text(statement, 6).map { String(cString: $0) } ?? ""
             results.append(PersonRelationRecord(
                 sourceWord: sourceWord, relationType: relationType, targetWord: targetWord,
                 targetKind: targetKindRaw == "place" ? .place : (targetKindRaw == "person" ? .person : nil),
-                rawSentence: rawSentence
+                rawSentence: rawSentence, targetIdx: targetIdx, sourceIdx: sourceIdx
             ))
         }
         return results
@@ -525,10 +956,13 @@ public final class ReferenceDataStore {
     ///
     /// source_word가 Persons/Places에 없어도(예: "골리앗" — PersonSeed 기타관계 "골리앗#0(형)"처럼 `#0`(미상)으로만 적힌 이름)
     /// 매칭된다. `personsAndPlaces(mentionedIn:)`만 쓰면 이런 이름이 질의에 있어도 관계 조회가 시작되지 않는다(2026-10-02 수정).
-    public func personRelations(sourceWordMentionedIn query: String) throws -> [PersonRelationRecord] {
+    ///
+    /// - Parameter shortNamesExactMatch: [2026-10-22 2차] `personsAndPlaces(mentionedIn:shortNamesExactMatch:)`와 같은 뜻.
+    public func personRelations(sourceWordMentionedIn query: String, shortNamesExactMatch: [String] = []) throws -> [PersonRelationRecord] {
         let sql = """
             SELECT source_word, source_idx, relation_type, target_word, target_kind, raw_sentence, target_idx
-            FROM PersonRelations WHERE length(source_word) >= 2 AND instr(?, source_word) > 0
+            FROM PersonRelations
+            WHERE (length(source_word) >= 2 AND instr(?1, source_word) > 0)\(Self.shortNameExactClause(column: "source_word", count: shortNamesExactMatch.count))
             """
         var statement: OpaquePointer?
         defer { sqlite3_finalize(statement) }
@@ -536,6 +970,7 @@ public final class ReferenceDataStore {
             throw BibleReferenceError.statementPrepareFailed(code: sqlite3_errcode(handle))
         }
         sqlite3_bind_text(statement, 1, query, -1, SQLITE_TRANSIENT)
+        Self.bindShortNames(shortNamesExactMatch, to: statement)
 
         var results: [PersonRelationRecord] = []
         while true {
@@ -568,10 +1003,15 @@ public final class ReferenceDataStore {
     ///
     /// `status = 'active'`만 조회한다 — `'pending'`은 AI 폴백으로 유입됐지만 아직 hit_count 승격 게이트를
     /// 못 넘은 항목이라 노출하지 않는다.
+    ///
+    /// [2026-10-22 2차] 한 글자 '인물' 표제어("함", "셈", "단")는 질의 전체(앞뒤 공백 제외)가 그 표제어일 때만 걸린다 —
+    /// 부분 문자열로 받으면 "함께"/"판단" 같은 낱말에 걸린다. 한 글자 '주제' 표제어("죄", "의")는 지금처럼 제외한다(사용자 확인 전).
     public func keywordCategories(mentionedIn query: String) throws -> Set<String> {
         let sql = """
             SELECT DISTINCT category FROM KeywordCategoryIndex
-            WHERE status = 'active' AND length(keyword) >= 2 AND instr(?, keyword) > 0
+            WHERE status = 'active'
+              AND ((length(keyword) >= 2 AND instr(?1, keyword) > 0)
+                   OR (category = '인물' AND length(keyword) = 1 AND keyword = ?2))
             """
         var statement: OpaquePointer?
         defer { sqlite3_finalize(statement) }
@@ -579,6 +1019,9 @@ public final class ReferenceDataStore {
             throw BibleReferenceError.statementPrepareFailed(code: sqlite3_errcode(handle))
         }
         sqlite3_bind_text(statement, 1, query, -1, SQLITE_TRANSIENT)
+        // SQLite `=`는 바이트 비교라 NFC로 맞춘다(DB의 이름은 모두 NFC — 2026-10-22 실측).
+        let exactQuery = query.trimmingCharacters(in: .whitespacesAndNewlines).precomposedStringWithCanonicalMapping
+        sqlite3_bind_text(statement, 2, exactQuery, -1, SQLITE_TRANSIENT)
 
         var results: Set<String> = []
         while true {
@@ -616,6 +1059,9 @@ public final class ReferenceDataStore {
             throw BibleReferenceError.statementPrepareFailed(code: sqlite3_errcode(handle))
         }
 
+        // [2026-10-22 2차] 한 글자 이름("함", "셈", "단")은 부분 문자열로는 받지 않고(오탐: "함께", "판단") 질의 전체(앞뒤 공백 제외)가
+        // 그 이름일 때만 받는다. 2글자 이상 이름의 규칙(부분 문자열)은 그대로다.
+        let exactQuery = query.trimmingCharacters(in: .whitespacesAndNewlines)
         var results: [PersonEntity] = []
         while true {
             let step = sqlite3_step(statement)
@@ -628,14 +1074,18 @@ public final class ReferenceDataStore {
                     .map { Self.parseFamilyMember($0.trimmingCharacters(in: .whitespaces)) }
                     .filter { !$0.name.isEmpty }
             }
-
             let word = col(1)
-            guard word.count >= 2 else { continue }
+            guard !word.isEmpty else { continue }
+            // 한 글자 대표 이름은 예전처럼 별칭 경로를 타지 않는다(예전에는 행 전체를 건너뛰었다) — 질의 전체가 그 이름일 때만 받는다.
+            if word.count < 2, word != exactQuery { continue }
 
             let aliasCandidates = col(4).split(separator: ",").map { $0.trimmingCharacters(in: .whitespaces) }
             var matchedAlias: String?
             if !query.contains(word) {
-                guard let hit = aliasCandidates.first(where: { $0.count >= 2 && query.contains($0) }) else { continue }
+                // 한 글자 별칭(예: 야숩의 "욥", 십배의 "삽")도 질의 전체가 그 별칭일 때만 받는다.
+                guard let hit = aliasCandidates.first(where: {
+                    ($0.count >= 2 && query.contains($0)) || ($0.count == 1 && $0 == exactQuery)
+                }) else { continue }
                 matchedAlias = hit
             }
 
@@ -663,7 +1113,9 @@ public final class ReferenceDataStore {
                 event: col(9), character: col(10), origin: col(11), nation: col(12),
                 tribe: col(13), gender: col(14), occupation: occupation, seedMemo: col(16),
                 relations: relations, familyRelations: familyRelations, contextNotes: contextNotes,
-                groupMemberships: groupMemberships
+                groupMemberships: groupMemberships,
+                // [2026-10-22] 번역 표시층 — 매칭된 행만 따로 조회한다(위 SELECT 열 순서는 그대로). 한국어 모드면 쿼리 없이 nil.
+                localized: personLocalization(idx: idx)
             ))
         }
         return Self.filterSwallowedNameMatches(results)
@@ -722,7 +1174,8 @@ public final class ReferenceDataStore {
             event: col(9), character: col(10), origin: col(11), nation: col(12),
             tribe: col(13), gender: col(14), occupation: occupation, seedMemo: col(16),
             relations: relations, familyRelations: familyRelations, contextNotes: contextNotes,
-            groupMemberships: groupMemberships
+            groupMemberships: groupMemberships,
+            localized: personLocalization(idx: idx)
         )
     }
 

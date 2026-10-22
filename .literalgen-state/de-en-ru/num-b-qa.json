@@ -1,0 +1,398 @@
+[
+  {
+    "path": "Tools/LiteralGen/outputs/de/04_NUM/NUM_012.tsv",
+    "verse": 1,
+    "old_row": "1\tUnd Mirjam und Aaron redeten gegen Mose wegen der kuschitischen Frau, die er genommen hatte, denn eine kuschitische Frau hatte er genommen.\tDie Frau ist als Kuschitin bezeichnet; die Aussage über ihr Nehmen ist wiederholt.",
+    "new_row": "1\tUnd Mirjam und Aaron redeten gegen Mose wegen der kuschitischen Frau, die er genommen hatte, denn eine kuschitische Frau hatte er genommen.\tDie Frau ist als Kuschitin bezeichnet."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/04_NUM/NUM_014_1.tsv",
+    "verse": 4,
+    "old_row": "4\tИ сказали друг другу: «Поставим голову и вернёмся в Египет!»\tСохранён образ главы, буквально головы.",
+    "new_row": "4\tИ сказали друг другу: «Поставим главу и вернёмся в Египет!»\tНачальник обозначен как глава."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/04_NUM/NUM_014_1.tsv",
+    "verse": 1,
+    "old_row": "1\tUnd die ganze Gemeinde erhob sich, und sie ließen ihre Stimme erschallen; und das Volk weinte in jener Nacht.\tDie Stimme steht in der Einzahl.",
+    "new_row": "1\tUnd die ganze Gemeinde erhob ihre Stimme, und sie ließen ihre Stimme erschallen; und das Volk weinte in jener Nacht.\tDie Stimme steht in der Einzahl; die Aussage über das Erheben und Erklingen der Stimme ist entfaltet."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/04_NUM/NUM_014_1.tsv",
+    "verse": 13,
+    "old_row": "13\tUnd Mose sagte zum HERRN: „Dann werden die Ägypter es hören, denn mit deiner Kraft hast du dieses Volk aus seiner Mitte heraufgeführt.\tDas Heraufführen ist ausdrücklich wiedergegeben.",
+    "new_row": "13\tUnd Mose sagte zum HERRN: „Dann werden die Ägypter es hören, denn mit deiner Kraft hast du dieses Volk aus ihrer Mitte heraufgeführt.\tDas Heraufführen ist ausdrücklich wiedergegeben."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/en/04_NUM/NUM_014_1.tsv",
+    "verse": 21,
+    "old_row": "21\t=\tThe Hebrew describes the LORD’s glory filling the whole earth.",
+    "new_row": "21\t=\tClose to the Hebrew."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/04_NUM/NUM_014_1.tsv",
+    "verse": 27,
+    "old_row": "27\t„Wie lange noch diese böse Gemeinde, die gegen mich murrt? Das Murren der Söhne Israels, mit dem sie gegen mich murren, habe ich gehört.\tDas Murren wird als gegenwärtig beschrieben; ein zusätzliches „denn“ steht nicht.",
+    "new_row": "27\t„Wie lange wird diese böse Gemeinde noch gegen mich murren? Das Murren der Söhne Israels, mit dem sie gegen mich murren, habe ich gehört.\tEin zusätzliches „denn“ steht im hebräischen Text nicht."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/04_NUM/NUM_015_1.tsv",
+    "verse": 16,
+    "old_row": "16\tОдин закон и одно судебное постановление будет для вас и для пришельца, живущего с вами».\tСудебное постановление стоит в единственном числе.",
+    "new_row": "16\tОдин закон и одно судебное постановление будут для вас и для пришельца, живущего с вами».\tСудебное постановление стоит в единственном числе."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/04_NUM/NUM_015_1.tsv",
+    "verse": 16,
+    "old_row": "16\tEine Weisung und ein Recht soll euch und dem Fremdling gelten, der bei euch weilt.“\tNah am Hebräischen.",
+    "new_row": "16\tEine Weisung und ein Recht sollen euch und dem Fremdling gelten, der bei euch weilt.“\tNah am Hebräischen."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/04_NUM/NUM_015_1.tsv",
+    "verse": 24,
+    "old_row": "24\tund wenn es ohne Wissen der Gemeinde aus Versehen getan worden ist, soll die ganze Gemeinde einen jungen Stier zum Brandopfer als beruhigenden Duft für den HERRN darbringen, mit seinem Speisopfer und seinem Trankopfer nach der Vorschrift, und einen Ziegenbock zum Sündopfer.\tDas Trankopfer ist ausdrücklich genannt.",
+    "new_row": "24\tund wenn es den Augen der Gemeinde verborgen aus Versehen getan worden ist, soll die ganze Gemeinde einen jungen Stier zum Brandopfer als beruhigenden Duft für den HERRN darbringen, mit seinem Speisopfer und seinem Trankopfer nach der Vorschrift, und einen Ziegenbock zum Sündopfer.\tDas Trankopfer und das Bild der Augen der Gemeinde sind ausdrücklich genannt."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/04_NUM/NUM_015_1.tsv",
+    "verse": 24,
+    "old_row": "24\tи если по недосмотру общины это было сделано по ошибке, вся община принесёт одного молодого быка во всесожжение, в успокаивающее благоухание Господу, и его хлебное приношение и его возлияние по уставу и одного козла в жертву за грех.\tБык не назван здесь отдельно беспорочным.",
+    "new_row": "24\tи если это было сделано по ошибке, скрыто от глаз общины, вся община принесёт одного молодого быка во всесожжение, в успокаивающее благоухание Господу, и его хлебное приношение и его возлияние по уставу и одного козла в жертву за грех.\tБык не назван здесь отдельно беспорочным; сохранён образ глаз общины."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/04_NUM/NUM_015_2.tsv",
+    "verse": 40,
+    "old_row": "40\tчтобы вы помнили и исполняли все Мои заповеди и были святы вашему Богу.\t«Вашему Богу» стоит вместо «пред Богом вашим».",
+    "new_row": "40\tчтобы вы помнили и исполняли все Мои заповеди и были святы для вашего Бога.\tСвятость относится к их Богу; отдельного предлога «пред» здесь нет."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/04_NUM/NUM_016_1.tsv",
+    "verse": 2,
+    "old_row": "2\tund sie erhoben sich vor Mose mit Männern von den Söhnen Israels, zweihundertfünfzig Fürsten der Gemeinde, Berufenen der Versammlung, Männern von Namen.\tDas Erheben vor Mose und die Männer von Namen bleiben als Bilder erhalten.",
+    "new_row": "2\tund sie erhoben sich vor Mose mit Männern von den Söhnen Israels, zweihundertfünfzig Fürsten der Gemeinde, Berufenen der Versammlung, namhaften Männern.\tDas Erheben vor Mose steht statt bloßer Empörung gegen ihn."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/04_NUM/NUM_016_1.tsv",
+    "verse": 2,
+    "old_row": "2\tи они восстали пред Моисеем, и с ними двести пятьдесят мужей из сынов Израиля, вожди общины, призванные на собрание, люди имени.\tСохранено расположение «пред» Моисеем и образ людей имени.",
+    "new_row": "2\tи они восстали пред Моисеем, и с ними двести пятьдесят мужей из сынов Израиля, вожди общины, призванные на собрание, именитые люди.\tСохранено расположение «пред» Моисеем."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/04_NUM/NUM_016_1.tsv",
+    "verse": 9,
+    "old_row": "9\tIst es euch zu wenig, dass der Gott Israels euch aus der Gemeinde Israels abgesondert hat, um euch zu sich herantreten zu lassen, den Dienst der Wohnung des HERRN zu verrichten und vor der Gemeinde zu stehen, um ihnen zu dienen?\tDas Herantretenlassen ist ausdrücklich Gottes Handeln.",
+    "new_row": "9\tIst es euch zu wenig, dass der Gott Israels euch aus der Gemeinde Israels abgesondert hat, um euch zu sich herantreten zu lassen, damit ihr den Dienst der Wohnung des HERRN verrichtet und vor der Gemeinde steht, um ihnen zu dienen?\tDas Herantretenlassen ist ausdrücklich Gottes Handeln."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/04_NUM/NUM_016_1.tsv",
+    "verse": 9,
+    "old_row": "9\tМало ли вам, что Бог Израиля отделил вас от общины Израиля, чтобы приблизить вас к Себе, исполнять службу жилища Господа и стоять пред общиной, служа им?\tПриближение выражено как цель отделения; община здесь не названа отдельно Господней.",
+    "new_row": "9\tМало ли вам, что Бог Израиля отделил вас от общины Израиля, чтобы приблизить вас к Себе, чтобы вы исполняли службу жилища Господа и стояли пред общиной, служа им?\tПриближение выражено как цель отделения; община здесь не названа отдельно Господней."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/04_NUM/NUM_016_1.tsv",
+    "verse": 17,
+    "old_row": "17\tИ возьмите каждый свою кадильницу и положите на них курение и принесите пред Господом каждый свою кадильницу, двести пятьдесят кадильниц, и ты и Аарон, каждый свою кадильницу!»\tБлизко к еврейскому.",
+    "new_row": "17\tИ возьмите каждый свою кадильницу и положите на них курение и принесите пред Господа каждый свою кадильницу, двести пятьдесят кадильниц, и ты и Аарон, каждый свою кадильницу!»\tБлизко к еврейскому."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/04_NUM/NUM_016_1.tsv",
+    "verse": 29,
+    "old_row": "29\tесли эти умрут смертью всех людей и посещение всех людей посетит их, не Господь послал меня.\tСохранён образ посещения вместо одного наказания.",
+    "new_row": "29\tесли эти умрут смертью всех людей и будут посещены, как посещаются все люди, не Господь послал меня.\tСохранён образ посещения вместо одного наказания; посещение выражено пассивно."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/04_NUM/NUM_016_2.tsv",
+    "verse": 38,
+    "old_row": "38\tКадильницы этих согрешивших против своих душ пусть они сделают коваными листами для покрытия жертвенника, ибо они принесли их пред Господом и они освящены; и будут знамением для сынов Израиля».\tНазвано согрешение против своих душ, вместо освящения смертью.",
+    "new_row": "38\tИз кадильниц этих согрешивших против своих душ пусть они сделают кованые листы для покрытия жертвенника, ибо они принесли их пред Господа и они освящены; и будут знамением для сынов Израиля».\tНазвано согрешение против своих душ, вместо освящения смертью."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/04_NUM/NUM_018_1.tsv",
+    "verse": 10,
+    "old_row": "10\tAls Hochheiliges sollst du es essen; jeder Männliche soll es essen; heilig soll es dir sein.\tDer Text nennt das Hochheilige, während TARGET einen heiligen Ort nennt.",
+    "new_row": "10\tAls Hochheiliges sollst du es essen; jeder Männliche soll es essen; heilig soll es dir sein.\tWörtlich steht „Heiliges der Heiligen“; die Zielübersetzung sagt „an einem heiligen Ort“."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/04_NUM/NUM_018_1.tsv",
+    "verse": 29,
+    "old_row": "29\tИз всех ваших даров возносите всякое возношение Господу, из всего его тука — его освящённую часть из него“;\tЛучшее обозначено образом тука; освящённая часть названа отдельно.",
+    "new_row": "29\tИз всех ваших даров возносите всякое возношение Господу, из всего их тука — освящённую часть каждого“;\tЛучшее обозначено образом тука; освящённая часть названа отдельно."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/04_NUM/NUM_019.tsv",
+    "verse": 12,
+    "old_row": "12\tEr soll sich damit am dritten Tag entsündigen, und am siebten Tag wird er rein sein; und wenn er sich am dritten Tag nicht entsündigt, wird er am siebten Tag nicht rein sein.\tDie Entsündigung ist hier mit dem dritten Tag verknüpft, das Reinwerden mit dem siebten.",
+    "new_row": "12\tEr soll sich damit am dritten Tag entsündigen, und am siebten Tag wird er rein sein; und wenn er sich am dritten Tag nicht entsündigt, wird er am siebten Tag nicht rein sein.\tNah am Hebräischen."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/en/04_NUM/NUM_019.tsv",
+    "verse": 12,
+    "old_row": "12\t=\tThe Hebrew links purifying himself here with the third day and becoming clean with the seventh day.",
+    "new_row": "12\t=\tClose to the Hebrew."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/04_NUM/NUM_019.tsv",
+    "verse": 12,
+    "old_row": "12\tОн пусть очистит себя ею в третий день, и в седьмой день будет чист; а если он не очистит себя в третий день, то в седьмой день не будет чист.\tОчищение себя здесь связано с третьим днём, а наступление чистоты — с седьмым.",
+    "new_row": "12\tОн пусть очистит себя ею в третий день, и в седьмой день будет чист; а если он не очистит себя в третий день, то в седьмой день не будет чист.\tБлизко к еврейскому."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/04_NUM/NUM_023.tsv",
+    "verse": 20,
+    "old_row": "20\tВот, благословлять я получил; и Он благословил, и я не обращу этого назад.\tГоворящий получил благословение, а не начал благословлять.",
+    "new_row": "20\tВот, я получил повеление благословлять; и Он благословил, и я не обращу этого назад.\tГоворящий получил повеление благословлять, а не начал благословлять."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/04_NUM/NUM_024.tsv",
+    "verse": 18,
+    "old_row": "18\tUnd Edom wird zum Besitz werden, und Seir wird zum Besitz werden, seine Feinde; und Israel wird kraftvoll handeln.\tEdom und Seir werden beide als Besitz bezeichnet; Israel handelt kraftvoll.",
+    "new_row": "18\tUnd Edom wird zum Besitz werden, und Seir wird zum Besitz werden — sie sind seine Feinde; und Israel wird kraftvoll handeln.\tEdom und Seir werden beide als Besitz bezeichnet; Israel handelt kraftvoll."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/04_NUM/NUM_017.tsv",
+    "verse": 3,
+    "old_row": "3\tИ имя Аарона напиши на жезле Левия, ибо один жезл — для главы их отчего дома.\tВ тексте не добавлено „должны они дать“.",
+    "new_row": "3\tИ имя Аарона напиши на жезле Левия, ибо один жезл — для главы их отчего дома.\tВ тексте не добавлено «должны они дать»."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/04_NUM/NUM_017.tsv",
+    "verse": 4,
+    "old_row": "4\tИ положи их в шатре встречи перед свидетельством, где Я буду встречаться с вами.\tВ тексте сказано „перед свидетельством“ без добавления ковчега; Господь будет встречаться с ними.",
+    "new_row": "4\tИ положи их в шатре встречи перед свидетельством, где Я буду встречаться с вами.\tВ тексте сказано «перед свидетельством» без добавления ковчега; Господь будет встречаться с ними."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/04_NUM/NUM_017.tsv",
+    "verse": 6,
+    "old_row": "6\tИ говорил Моисей сынам Израиля, и дали ему все их начальники по жезлу на начальника, по жезлу на начальника, по их отчим домам, двенадцать жезлов; и жезл Аарона был среди их жезлов.\tПовторено „по жезлу на начальника“; названы отчие дома.",
+    "new_row": "6\tИ говорил Моисей сынам Израиля, и дали ему все их начальники по жезлу на начальника, по жезлу на начальника, по их отчим домам, двенадцать жезлов; и жезл Аарона был среди их жезлов.\tПовторено «по жезлу на начальника»; названы отчие дома."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/04_NUM/NUM_018_1.tsv",
+    "verse": 8,
+    "old_row": "8\tИ говорил Господь Аарону: «А Я, вот, дал тебе стражу Моих возношений; из всех святынь сынов Израиля Я дал их тебе как долю и твоим сынам по вечному установлению.\tВ тексте нет добавления „ради священства вашего“.",
+    "new_row": "8\tИ говорил Господь Аарону: «А Я, вот, дал тебе стражу Моих возношений; из всех святынь сынов Израиля Я дал их тебе как долю и твоим сынам по вечному установлению.\tВ тексте нет добавления «ради священства вашего»."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/04_NUM/NUM_018_1.tsv",
+    "verse": 10,
+    "old_row": "10\tКак святое святых ешь это; всякий мужского пола пусть ест это; святыней будет это для тебя.\tОбращение „ешь“ стоит в единственном числе; слова „ты и сыны твои“ здесь не добавлены.",
+    "new_row": "10\tКак святое святых ешь это; всякий мужского пола пусть ест это; святыней будет это для тебя.\tОбращение «ешь» стоит в единственном числе; слова «ты и сыны твои» здесь не добавлены."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/04_NUM/NUM_018_1.tsv",
+    "verse": 14,
+    "old_row": "14\tВсё заклятое в Израиле будет твоим.\tТекст говорит „в Израиле“, не добавляя слова о земле.",
+    "new_row": "14\tВсё заклятое в Израиле будет твоим.\tТекст говорит «в Израиле», не добавляя слова о земле."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/04_NUM/NUM_018_1.tsv",
+    "verse": 17,
+    "old_row": "17\tНо первенца вола, или первенца овцы, или первенца козы не выкупай; они святы. Их кровь кропи на жертвенник, а их тук воскуряй как огненную жертву в успокоительное благоухание Господу.\tМежду видами скота повторено „или“; заповедь говорит не выкупать.",
+    "new_row": "17\tНо первенца вола, или первенца овцы, или первенца козы не выкупай; они святы. Их кровь кропи на жертвенник, а их тук воскуряй как огненную жертву в успокоительное благоухание Господу.\tМежду видами скота повторено «или»; заповедь говорит не выкупать."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/04_NUM/NUM_018_1.tsv",
+    "verse": 27,
+    "old_row": "27\tИ будет вменено вам ваше возношение как зерно с гумна и как полнота из точила.\tСодержимое точила обозначено словом „полнота“.",
+    "new_row": "27\tИ будет вменено вам ваше возношение как зерно с гумна и как полнота из точила.\tСодержимое точила обозначено словом «полнота»."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/04_NUM/NUM_019.tsv",
+    "verse": 13,
+    "old_row": "13\tВсякий прикасающийся к мёртвому, к телу человека, который умрёт, и не очищающий себя осквернил жилище Господа; и будет истреблена та душа из Израиля, ибо вода очищения не была покроплена на него; он будет нечист, ещё его нечистота в нём.\tОсквернение выражено как совершившееся; нечистота ещё „в нём“.",
+    "new_row": "13\tВсякий прикасающийся к мёртвому, к телу человека, который умрёт, и не очищающий себя осквернил жилище Господа; и будет истреблена та душа из Израиля, ибо вода очищения не была покроплена на него; он будет нечист, ещё его нечистота в нём.\tОсквернение выражено как совершившееся; нечистота ещё «в нём»."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/04_NUM/NUM_020.tsv",
+    "verse": 4,
+    "old_row": "4\tИ зачем вы привели собрание Господа в эту пустыню, чтобы умереть там нам и нашему скоту?\tВ тексте сказано „там“, а не „здесь“.",
+    "new_row": "4\tИ зачем вы привели собрание Господа в эту пустыню, чтобы умереть там нам и нашему скоту?\tВ тексте сказано «там», а не «здесь»."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/04_NUM/NUM_020.tsv",
+    "verse": 17,
+    "old_row": "17\tДай нам, пожалуйста, пройти через твою землю; мы не пройдём через поле и виноградник и не будем пить колодезную воду; царской дорогой пойдём, не свернём направо и налево, пока не пройдём твою границу“».\tКолодцы названы без добавления „твоих“.",
+    "new_row": "17\tДай нам, пожалуйста, пройти через твою землю; мы не пройдём через поле и виноградник и не будем пить колодезную воду; царской дорогой пойдём, не свернём направо и налево, пока не пройдём твою границу“».\tКолодцы названы без добавления «твоих»."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/04_NUM/NUM_021_1.tsv",
+    "verse": 2,
+    "old_row": "2\tИ дал Израиль обет Господу и сказал: «Если Ты непременно отдашь этот народ в мою руку, то я предам заклятию их города».\tВ обете названы их города; отдельного добавления „на них“ нет.",
+    "new_row": "2\tИ дал Израиль обет Господу и сказал: «Если Ты непременно отдашь этот народ в мою руку, то я предам заклятию их города».\tВ обете названы их города; отдельного добавления «на них» нет."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/04_NUM/NUM_021_1.tsv",
+    "verse": 3,
+    "old_row": "3\tИ услышал Господь голос Израиля, и отдал хананеянина; и предал Израиль заклятию их и их города и назвал имя месту Хорма.\tВ тексте нет добавления „в руки ему“.",
+    "new_row": "3\tИ услышал Господь голос Израиля, и отдал хананеянина; и предал Израиль заклятию их и их города и назвал имя месту Хорма.\tВ тексте нет добавления «в руки ему»."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/04_NUM/NUM_021_1.tsv",
+    "verse": 22,
+    "old_row": "22\t«Дай мне пройти через твою землю; мы не свернём в поле и виноградник, не будем пить колодезную воду; царской дорогой пойдём, пока не пройдём твою границу».\tКолодцы названы без добавления „твоих“; отдельного начального обещания идти дорогой нет.",
+    "new_row": "22\t«Дай мне пройти через твою землю; мы не свернём в поле и виноградник, не будем пить колодезную воду; царской дорогой пойдём, пока не пройдём твою границу».\tКолодцы названы без добавления «твоих»; отдельного начального обещания идти дорогой нет."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/04_NUM/NUM_022_1.tsv",
+    "verse": 6,
+    "old_row": "6\tИ теперь приди же, прокляни мне этот народ, ибо он сильнее меня; может быть, я смогу, и мы поразим его, и я изгоню его из земли. Ибо я знаю: кого ты благословишь, тот благословен, а кого проклянёшь, тот будет проклят».\tПри поражении сказано „мы“, а при изгнании — „я“.",
+    "new_row": "6\tИ теперь приди же, прокляни мне этот народ, ибо он сильнее меня; может быть, я смогу, и мы поразим его, и я изгоню его из земли. Ибо я знаю: кого ты благословишь, тот благословен, а кого проклянёшь, тот будет проклят».\tПри поражении сказано «мы», а при изгнании — «я»."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/04_NUM/NUM_022_1.tsv",
+    "verse": 10,
+    "old_row": "10\tИ сказал Валаам Богу: «Валак, сын Сепфора, царь Моава, послал ко мне:\tМестоимение „их“ здесь не добавлено.",
+    "new_row": "10\tИ сказал Валаам Богу: «Валак, сын Сепфора, царь Моава, послал ко мне:\tМестоимение «их» здесь не добавлено."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/04_NUM/NUM_022_1.tsv",
+    "verse": 18,
+    "old_row": "18\tИ ответил Валаам и сказал рабам Валака: «Если бы Валак дал мне полный свой дом серебра и золота, я не мог бы преступить уста Господа, моего Бога, чтобы сделать малое или великое.\tПовеление обозначено образом уст; слова „по своему произволу“ не добавлены.",
+    "new_row": "18\tИ ответил Валаам и сказал рабам Валака: «Если бы Валак дал мне полный свой дом серебра и золота, я не мог бы преступить уста Господа, моего Бога, чтобы сделать малое или великое.\tПовеление обозначено образом уст; слова «по своему произволу» не добавлены."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/04_NUM/NUM_022_2.tsv",
+    "verse": 32,
+    "old_row": "32\tИ сказал ему ангел Господа: «За что ты ударил свою ослицу эти три раза? Вот, Я вышел противником, ибо путь неправ предо Мной.\tАнгел назван противником; „вот“ выражено прямо.",
+    "new_row": "32\tИ сказал ему ангел Господа: «За что ты ударил свою ослицу эти три раза? Вот, Я вышел противником, ибо путь неправ предо Мной.\tАнгел назван противником; «вот» выражено прямо."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/04_NUM/NUM_022_2.tsv",
+    "verse": 34,
+    "old_row": "34\tИ сказал Валаам ангелу Господа: «Я согрешил, ибо не знал, что Ты стоишь мне навстречу на дороге; и теперь, если это зло в Твоих глазах, я возвращусь».\tСказано „зло в Твоих глазах“.",
+    "new_row": "34\tИ сказал Валаам ангелу Господа: «Я согрешил, ибо не знал, что Ты стоишь мне навстречу на дороге; и теперь, если это зло в Твоих глазах, я возвращусь».\tСказано «зло в Твоих глазах»."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/04_NUM/NUM_022_2.tsv",
+    "verse": 38,
+    "old_row": "38\tИ сказал Валаам Валаку: «Вот, я пришёл к тебе; теперь разве могу я вообще что-нибудь говорить? Слово, которое вложит Бог в мои уста, его буду говорить».\tВопрос не содержит отдельного добавления „от себя“.",
+    "new_row": "38\tИ сказал Валаам Валаку: «Вот, я пришёл к тебе; теперь разве могу я вообще что-нибудь говорить? Слово, которое вложит Бог в мои уста, его буду говорить».\tВопрос не содержит отдельного добавления «от себя»."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/04_NUM/NUM_023.tsv",
+    "verse": 1,
+    "old_row": "1\tИ сказал Валаам Валаку: «Построй мне здесь семь жертвенников и приготовь мне здесь семь тельцов и семь овнов».\tСлово „здесь“ повторено.",
+    "new_row": "1\tИ сказал Валаам Валаку: «Построй мне здесь семь жертвенников и приготовь мне здесь семь тельцов и семь овнов».\tСлово «здесь» повторено."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/04_NUM/NUM_023.tsv",
+    "verse": 17,
+    "old_row": "17\tИ пришёл он к нему, и вот, он стоит у своего всесожжения, и князья Моава с ним; и сказал ему Валак: «Что говорил Господь?»\tСлово „все“ при князьях здесь не добавлено.",
+    "new_row": "17\tИ пришёл он к нему, и вот, он стоит у своего всесожжения, и князья Моава с ним; и сказал ему Валак: «Что говорил Господь?»\tСлово «все» при князьях здесь не добавлено."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/04_NUM/NUM_024.tsv",
+    "verse": 18,
+    "old_row": "18\tИ будет Едом владением, и будет Сеир владением, его враги; а Израиль будет действовать с силой.\tЕдом и Сеир оба названы владением; выражение о врагах не содержит местоимения „своих“.",
+    "new_row": "18\tИ Едом станет владением, и Сеир станет владением — они его враги; а Израиль будет действовать с силой.\tЕдом и Сеир оба названы владением; выражение о врагах не содержит местоимения «своих»."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/04_NUM/NUM_024.tsv",
+    "verse": 23,
+    "old_row": "23\tИ поднял он свою притчу и сказал: «Горе! Кто будет жить, когда Бог это установит?\tВ этой строке не добавлено видение Ога; „горе“ названо один раз.",
+    "new_row": "23\tИ поднял он свою притчу и сказал: «Горе! Кто будет жить, когда Бог это установит?\tВ этой строке не добавлено видение Ога; «горе» названо один раз."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/en/04_NUM/NUM_017.tsv",
+    "verse": 10,
+    "old_row": "10\t=\tThe Hebrew calls them “sons of rebellion” and explicitly tells Moses to put an end to their grumbling.",
+    "new_row": "10\t=\tThe Hebrew calls them “sons of rebellion”."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/04_NUM/NUM_017.tsv",
+    "verse": 2,
+    "old_row": "2\t„Rede zu den Söhnen Israels und nimm von ihnen je einen Stab für ein Vaterhaus, von all ihren Fürsten nach ihren Vaterhäusern zwölf Stäbe; den Namen jedes Mannes sollst du auf seinen Stab schreiben.\tDer hebräische Text bezeichnet die Einheiten als Vaterhäuser und wiederholt die Verteilung je eines Stabes.",
+    "new_row": "2\t„Rede zu den Söhnen Israels und nimm von ihnen je einen Stab für ein Vaterhaus, von all ihren Fürsten nach ihren Vaterhäusern zwölf Stäbe; den Namen jedes Mannes sollst du auf seinen Stab schreiben.\tDie Verteilung je eines Stabes ist im hebräischen Text wiederholt."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/04_NUM/NUM_017.tsv",
+    "verse": 6,
+    "old_row": "6\tUnd Mose redete zu den Söhnen Israels, und alle ihre Fürsten gaben ihm einen Stab für jeden Fürsten, einen Stab für jeden Fürsten, nach ihren Vaterhäusern, zwölf Stäbe; und Aarons Stab war unter ihren Stäben.\tDie Wendung „einen Stab für jeden Fürsten“ ist wiederholt; die Gliederung erfolgt nach Vaterhäusern.",
+    "new_row": "6\tUnd Mose redete zu den Söhnen Israels, und alle ihre Fürsten gaben ihm einen Stab für jeden Fürsten, einen Stab für jeden Fürsten, nach ihren Vaterhäusern, zwölf Stäbe; und Aarons Stab war unter ihren Stäben.\tDie Wendung „einen Stab für jeden Fürsten“ ist wiederholt."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/04_NUM/NUM_017.tsv",
+    "verse": 5,
+    "old_row": "5\tИ будет: человек, которого Я изберу, — его жезл расцветёт; и Я прекращу от Себя ропот сынов Израиля, которым они ропщут против вас».\tРопот прекращается от Господа; это отношение выражено прямо.",
+    "new_row": "5\tИ будет: человек, которого Я изберу, — его жезл расцветёт; и Я избавлю Себя от ропота сынов Израиля, которым они ропщут против вас».\tГосподь избавляет Себя от ропота; это отношение выражено прямо."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/04_NUM/NUM_017.tsv",
+    "verse": 10,
+    "old_row": "10\tИ сказал Господь Моисею: «Возврати жезл Аарона перед свидетельство на хранение, как знак для сынов мятежа; и прекрати их ропот от Меня, чтобы они не умерли».\tМоисею прямо поручено прекратить ропот. Ковчег в этой строке не назван.",
+    "new_row": "10\tИ сказал Господь Моисею: «Возврати жезл Аарона на хранение перед свидетельством, как знак для сынов мятежа; и прекрати их ропот против Меня, чтобы они не умерли».\tМоисею прямо поручено прекратить ропот. Ковчег в этой строке не назван."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/04_NUM/NUM_018_1.tsv",
+    "verse": 7,
+    "old_row": "7\tDu aber und deine Söhne mit dir sollt euer Priestertum bewahren für jede Sache des Altars und für das Innere des Vorhangs, und ihr sollt dienen; als geschenkten Dienst gebe ich euer Priestertum, und der Fremde, der herantritt, soll getötet werden.“\tDer Herantretende soll getötet werden; das Verb steht im Passiv.",
+    "new_row": "7\tDu aber und deine Söhne mit dir sollt euer Priestertum bewahren für jede Sache des Altars und für das Innere hinter dem Vorhang, und ihr sollt dienen; als geschenkten Dienst gebe ich euer Priestertum, und der Fremde, der herantritt, soll getötet werden.“\tDer Herantretende soll getötet werden; das Verb steht im Passiv."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/04_NUM/NUM_018_1.tsv",
+    "verse": 23,
+    "old_row": "23\tUnd der Levit selbst soll den Dienst am Zelt der Begegnung verrichten, und sie sollen ihre Schuld tragen; eine ewige Satzung für eure Generationen. Und inmitten der Söhne Israels sollen sie kein Erbe erben.\tDer Text sagt „ihre Schuld“, während TARGET „jener Missetat“ sagt. Der Levit ist zunächst in der Einzahl genannt.",
+    "new_row": "23\tUnd der Levit selbst soll den Dienst am Zelt der Begegnung verrichten, und sie sollen ihre Schuld tragen; eine ewige Satzung für eure Generationen. Und inmitten der Söhne Israels sollen sie kein Erbe erben.\tDer Text sagt „ihre Schuld“, während die Zielübersetzung „jener Missetat“ sagt. Der Levit ist zunächst in der Einzahl genannt."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/04_NUM/NUM_021_1.tsv",
+    "verse": 14,
+    "old_row": "14\tDarum heißt es im Buch der Kriege des HERRN: „Waheb in Supha und die Bachtäler des Arnon\tNah am Hebräischen.",
+    "new_row": "14\tDarum heißt es im Buch der Kriege des HERRN: „Vaheb in Supha und die Bachtäler des Arnon\tNah am Hebräischen."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/04_NUM/NUM_021_2.tsv",
+    "verse": 32,
+    "old_row": "32\tUnd Mose sandte aus, um Jaser auszukundschaften; und sie nahmen ihre Töchter ein, und er vertrieb den Amoriter, der dort war.\tDie zugehörigen Orte sind als Töchter bezeichnet; der Amoriter wird vertrieben.",
+    "new_row": "32\tUnd Mose sandte aus, um Jaser auszukundschaften; und sie nahmen seine Töchter ein, und er vertrieb den Amoriter, der dort war.\tDie zugehörigen Orte sind als Töchter bezeichnet; der Amoriter wird vertrieben."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/04_NUM/NUM_023.tsv",
+    "verse": 3,
+    "old_row": "3\tUnd Bileam sprach zu Balak: „Stell dich zu deinem Brandopfer, und ich will gehen; vielleicht begegnet mir der HERR, und was er mir zeigt, werde ich dir mitteilen.“ Und er ging auf eine kahle Höhe.\tEr geht auf eine kahle Höhe; der Text beschreibt hier nicht ausdrücklich seine Eile.",
+    "new_row": "3\tUnd Bileam sprach zu Balak: „Stell dich zu deinem Brandopfer, und ich will gehen; vielleicht begegnet mir der HERR, und was er mir zeigt, werde ich dir mitteilen.“ Und er ging auf eine kahle Höhe.\tNah am Hebräischen."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/04_NUM/NUM_023.tsv",
+    "verse": 22,
+    "old_row": "22\tGott führt sie aus Ägypten heraus; wie die Kraft eines Wildochsen ist es ihm.\tDas Herausführen ist als laufender Vorgang ausgedrückt; das Vergleichstier ist ein Wildochse.",
+    "new_row": "22\tGott führt sie aus Ägypten heraus; Kraft wie die eines Wildochsen hat er.\tDas Herausführen ist als laufender Vorgang ausgedrückt; das Vergleichstier ist ein Wildochse."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/04_NUM/NUM_023.tsv",
+    "verse": 22,
+    "old_row": "22\tБог выводит их из Египта; словно сила дикого быка у него.\tВыведение описано как происходящее; назван дикий бык.",
+    "new_row": "22\tБог выводит их из Египта; у него сила, словно у дикого быка.\tВыведение описано как происходящее; назван дикий бык."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/04_NUM/NUM_024.tsv",
+    "verse": 8,
+    "old_row": "8\tGott führt ihn aus Ägypten heraus; wie die Kraft eines Wildochsen ist es ihm. Er wird Nationen, seine Bedränger, verzehren und ihre Knochen zermalmen und mit seinen Pfeilen zerschmettern.\tDas Herausführen ist als laufender Vorgang ausgedrückt; das Vergleichstier ist ein Wildochse.",
+    "new_row": "8\tGott führt ihn aus Ägypten heraus; Kraft wie die eines Wildochsen hat er. Er wird Nationen, seine Bedränger, verzehren und ihre Knochen zermalmen und mit seinen Pfeilen zerschmettern.\tDas Herausführen ist als laufender Vorgang ausgedrückt; das Vergleichstier ist ein Wildochse."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/04_NUM/NUM_024.tsv",
+    "verse": 8,
+    "old_row": "8\tБог выводит его из Египта; словно сила дикого быка у него. Он будет пожирать народы, своих противников, и кости их раздробит, и своими стрелами поразит.\tВыведение описано как происходящее; назван дикий бык. В конце не добавлено слово „врага“.",
+    "new_row": "8\tБог выводит его из Египта; у него сила, словно у дикого быка. Он будет пожирать народы, своих противников, и кости их раздробит, и своими стрелами поразит.\tВыведение описано как происходящее; назван дикий бык. В конце не добавлено слово «врага»."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/04_NUM/NUM_017.tsv",
+    "verse": 8,
+    "old_row": "8\tUnd es geschah am folgenden Tag: Mose kam in das Zelt des Zeugnisses, und siehe, der Stab Aarons für das Haus Levi hatte geblüht; er hatte Blüten hervorgebracht und Blumen getrieben und Mandeln reifen lassen.\tDer Text nennt den folgenden Tag und beschreibt Blühen und Reifen der Mandeln.",
+    "new_row": "8\tUnd es geschah am folgenden Tag: Mose kam in das Zelt des Zeugnisses, und siehe, der Stab Aarons für das Haus Levi hatte geblüht; er hatte eine Blüte hervorgebracht und Blüten getrieben und Mandeln reifen lassen.\tDer Text nennt den folgenden Tag und beschreibt Blühen und Reifen der Mandeln."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/04_NUM/NUM_018_1.tsv",
+    "verse": 28,
+    "old_row": "28\tТак возносите и вы возношение Господу из всех ваших десятин, которые вы будете брать у сынов Израиля, и давайте из неё возношение Господу Аарону, священнику.\tБлизко к еврейскому.",
+    "new_row": "28\tТак возносите и вы возношение Господу из всех ваших десятин, которые вы будете брать у сынов Израиля, и давайте из этого возношение Господу Аарону, священнику.\tБлизко к еврейскому."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/04_NUM/NUM_021_1.tsv",
+    "verse": 30,
+    "old_row": "30\tИ мы обстреляли их; погиб Есевон до Дивона, и мы опустошили до Нофы, которая до Медевы».\tБлизко к еврейскому.",
+    "new_row": "30\tИ мы обстреляли их; погиб Есевон до Дивона, и мы опустошили до Нофы, которая простирается до Медевы».\tБлизко к еврейскому."
+  }
+]

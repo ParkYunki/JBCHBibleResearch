@@ -1,0 +1,17 @@
+[
+  {
+    "path": "Tools/LiteralGen/outputs/en/12_2KI/2KI_009_2.tsv",
+    "old_row": "31\t=\tThe Hebrew explicitly repeats Jehu as the entrant; BSB uses his name but frames the brief peace question as coming in peace.",
+    "new_row": "31\t=\tThe Hebrew asks briefly whether there is peace; BSB expands this to asking whether Jehu has come in peace."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/en/12_2KI/2KI_012.tsv",
+    "old_row": "21\t=\tThe Hebrew uses separate striking and dying verbs and active plural burial agents.",
+    "new_row": "21\t=\tClose to the Hebrew."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/en/12_2KI/2KI_004_1.tsv",
+    "old_row": "15\t=\tThe Hebrew leaves both male speakers unnamed; BSB names Elisha and Gehazi.",
+    "new_row": "15\t=\tThe Hebrew leaves both male actors unnamed; BSB identifies the speaker as Elisha and the one calling the woman as Gehazi."
+  }
+]

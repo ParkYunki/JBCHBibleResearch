@@ -239,7 +239,7 @@ final class RhwpViewerController {
 
     private func composedFailureMessage(_ base: String) -> String {
         guard !debugLog.isEmpty else { return base }
-        return base + "\n\n[디버그 로그]\n" + debugLog.joined(separator: "\n")
+        return base + String(localized: "\n\n[디버그 로그]\n") + debugLog.joined(separator: "\n")
     }
 
     /// `Coordinator.webView(_:didFinish:)`가 로컬 HTML 로딩이 끝난 시점에 호출.
@@ -411,7 +411,7 @@ final class RhwpViewerController {
     func handleWebContentProcessCrash() {
         appendDebugMessage("WebContent 프로세스가 종료됨(크래시) — RunningBoard/XPC 관련 시스템 로그는 Xcode 콘솔 참고")
         guard let webView else {
-            state = .failed(composedFailureMessage("뷰어 프로세스가 종료됐습니다."))
+            state = .failed(composedFailureMessage(String(localized: "뷰어 프로세스가 종료됐습니다.")))
             return
         }
         if crashRetryCount < Self.maxCrashRetries {
@@ -419,7 +419,7 @@ final class RhwpViewerController {
             state = .loadingViewer
             webView.load(URLRequest(url: HWPViewerBundle.indexURL))
         } else {
-            state = .failed(composedFailureMessage("뷰어 프로세스가 반복해서 종료됐습니다. '다시 시도'를 눌러 다시 시도해 주세요."))
+            state = .failed(composedFailureMessage(String(localized: "뷰어 프로세스가 반복해서 종료됐습니다. '다시 시도'를 눌러 다시 시도해 주세요.")))
         }
     }
 
@@ -471,7 +471,7 @@ final class RhwpViewerController {
             if let pageCount = (dict?["pageCount"] as? NSNumber)?.intValue {
                 state = .ready(pageCount: pageCount)
             } else {
-                state = .failed(composedFailureMessage("문서를 읽었지만 페이지 수를 확인할 수 없습니다."))
+                state = .failed(composedFailureMessage(String(localized: "문서를 읽었지만 페이지 수를 확인할 수 없습니다.")))
             }
         case .failure(let error):
             state = .failed(composedFailureMessage(hwpJavaScriptErrorDescription(error)))
@@ -534,11 +534,11 @@ final class RhwpViewerCoordinator: NSObject, WKNavigationDelegate {
     }
 
     func webView(_ webView: WKWebView, didFail navigation: WKNavigation!, withError error: Error) {
-        controller.markViewerLoadFailed("뷰어 페이지 로딩 실패: \(hwpJavaScriptErrorDescription(error))")
+        controller.markViewerLoadFailed(String(localized: "뷰어 페이지 로딩 실패: \(hwpJavaScriptErrorDescription(error))"))
     }
 
     func webView(_ webView: WKWebView, didFailProvisionalNavigation navigation: WKNavigation!, withError error: Error) {
-        controller.markViewerLoadFailed("뷰어 페이지 로딩 실패: \(hwpJavaScriptErrorDescription(error))")
+        controller.markViewerLoadFailed(String(localized: "뷰어 페이지 로딩 실패: \(hwpJavaScriptErrorDescription(error))"))
     }
 
     /// WebContent 렌더러 프로세스가 죽으면 호출된다 — `RhwpViewerController.handleWebContentProcessCrash()` 참고.

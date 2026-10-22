@@ -1,0 +1,62 @@
+[
+  {
+    "path": "Tools/LiteralGen/outputs/de/14_2CH/2CH_022.tsv",
+    "old_row": "6\tUnd er kehrte um, um in Jesreel von den Schlägen geheilt zu werden, mit denen sie ihn in Rama geschlagen hatten, als er gegen Hasael, den König von Syrien, kämpfte. Und Ahasja, der Sohn Jorams, der König Judas, zog hinab, um Joram, den Sohn Ahabs, in Jesreel zu sehen, denn er war krank.\tDie Schläge sind aktiv ausgedrückt; genannt ist das Sehen.",
+    "new_row": "6\tUnd er kehrte um, um in Jesreel von den Schlägen geheilt zu werden, mit denen sie ihn in Rama geschlagen hatten, als er gegen Hasael, den König von Syrien, kämpfte. Und Asarja, der Sohn Jorams, der König Judas, zog hinab, um Joram, den Sohn Ahabs, in Jesreel zu sehen, denn er war krank.\tGenannt ist Asarja statt Ahasja; die Schläge sind aktiv ausgedrückt, und genannt ist das Sehen."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/14_2CH/2CH_022.tsv",
+    "old_row": "6\tИ он возвратился исцелиться в Изрееле от ударов, которыми они поразили его в Раме, когда он сражался с Азаилом, царём Сирии. И Охозия, сын Иорама, царь Иуды, сошёл увидеть Иорама, сына Ахава, в Изрееле, ибо тот болен.\tСохранены удары и схождение.",
+    "new_row": "6\tИ он возвратился исцелиться в Изрееле от ударов, которыми они поразили его в Раме, когда он сражался с Азаилом, царём Сирии. И Азария, сын Иорама, царь Иуды, сошёл увидеть Иорама, сына Ахава, в Изрееле, ибо тот болен.\tНазван Азария вместо Охозии; сохранены удары и схождение."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/14_2CH/2CH_022.tsv",
+    "old_row": "11\tUnd Josabeath, die Tochter des Königs, nahm Joas, den Sohn Ahasjas, und stahl ihn aus der Mitte der Söhne des Königs, die getötet wurden, und setzte ihn und seine Amme in die Bettenkammer. Und Josabeath, die Tochter des Königs Joram, die Frau des Priesters Jojada, verbarg ihn, denn sie war die Schwester Ahasjas, vor Athalja; und sie tötete ihn nicht.\tDie Söhne und das Bettenzimmer bleiben erhalten; Athalja ist handelndes Subjekt des Nichttötens.",
+    "new_row": "11\tUnd Josabeath, die Tochter des Königs, nahm Joas, den Sohn Ahasjas, und stahl ihn aus der Mitte der Söhne des Königs, die getötet wurden, und setzte ihn und seine Amme in die Bettenkammer. Und Josabeath, die Tochter des Königs Joram, die Frau des Priesters Jojada, verbarg ihn vor Athalja, denn sie war die Schwester Ahasjas; und sie tötete ihn nicht.\tDie Söhne und das Bettenzimmer bleiben erhalten; Athalja ist handelndes Subjekt des Nichttötens."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/14_2CH/2CH_022.tsv",
+    "old_row": "11\tИ Иосавеф, дочь царя, взяла Иоаса, сына Охозии, и украла его из среды сынов царя, которых умерщвляли, и поместила его и его кормилицу в комнату кроватей. И Иосавеф, дочь царя Иорама, жена священника Иодая, скрыла его, ибо она была сестрой Охозии, от Гофолии; и та не умертвила его.\tСохранено местоимение его вместо повторённого имени Иоаса.",
+    "new_row": "11\tИ Иосавеф, дочь царя, взяла Иоаса, сына Охозии, и украла его из среды сынов царя, которых умерщвляли, и поместила его и его кормилицу в комнату кроватей. И Иосавеф, дочь царя Иорама, жена священника Иодая, скрыла его от Гофолии, ибо она была сестрой Охозии; и та не умертвила его.\tСохранено местоимение его вместо повторённого имени Иоаса."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/14_2CH/2CH_015.tsv",
+    "old_row": "2\tUnd er ging Asa entgegen und sagte zu ihm: „Hört mich, Asa und ganz Juda und Benjamin! Der HERR ist mit euch, wenn ihr mit ihm seid; und wenn ihr ihn sucht, wird er euch gefunden werden; und wenn ihr ihn verlasst, wird er euch verlassen.\tWenn steht statt weil; gefunden werden ist passiv.",
+    "new_row": "2\tUnd er ging Asa entgegen und sagte zu ihm: „Hört mich, Asa und ganz Juda und Benjamin! Der HERR ist mit euch, wenn ihr mit ihm seid; und wenn ihr ihn sucht, wird er von euch gefunden werden; und wenn ihr ihn verlasst, wird er euch verlassen.\tWenn steht statt weil; gefunden werden ist passiv."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/14_2CH/2CH_015.tsv",
+    "old_row": "4\tUnd in seiner Bedrängnis kehrte es zum HERRN, dem Gott Israels, um; und sie suchten ihn, und er wurde ihnen gefunden.\tDie Umkehr steht als geschehen; das Suchen wechselt zum Plural.",
+    "new_row": "4\tUnd in seiner Bedrängnis kehrte es zum HERRN, dem Gott Israels, um; und sie suchten ihn, und er wurde von ihnen gefunden.\tDie Umkehr steht als geschehen; das Suchen wechselt zum Plural."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/14_2CH/2CH_015.tsv",
+    "old_row": "15\tUnd ganz Juda freute sich über den Eid, denn sie hatten mit ihrem ganzen Herzen geschworen und mit ihrem ganzen Willen ihn gesucht; und er wurde ihnen gefunden, und der HERR verschaffte ihnen ringsum Ruhe.\tDas Finden ist passiv ausgedrückt.",
+    "new_row": "15\tUnd ganz Juda freute sich über den Eid, denn sie hatten mit ihrem ganzen Herzen geschworen und mit ihrem ganzen Willen ihn gesucht; und er wurde von ihnen gefunden, und der HERR verschaffte ihnen ringsum Ruhe.\tDas Finden ist passiv ausgedrückt."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/14_2CH/2CH_016.tsv",
+    "old_row": "9\tИбо Господь: Его глаза странствуют по всей земле, чтобы показать силу с теми, чьё сердце цело к Нему. В этом ты поступил глупо; ибо отныне с тобой войны».\tСохранены странствование и явление силы; в этом стоит вместо теперь.",
+    "new_row": "9\tИбо Господь: Его глаза странствуют по всей земле, чтобы показать силу с теми, чьё сердце всецело обращено к Нему. В этом ты поступил глупо; ибо отныне с тобой войны».\tСохранены странствование и явление силы; в этом стоит вместо теперь."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/14_2CH/2CH_020_2.tsv",
+    "old_row": "34\tUnd der Rest der Begebenheiten Josaphats, die ersten und die letzten, siehe, sie sind in den Begebenheiten Jehus, des Sohnes Hananis, geschrieben, der in das Buch der Könige Israels aufgenommen wurde.\tAufgenommen wurde steht im Singular.",
+    "new_row": "34\tUnd der Rest der Begebenheiten Josaphats, die ersten und die letzten, siehe, sie sind in den Begebenheiten Jehus, des Sohnes Hananis, geschrieben, der in das Buch der Könige Israels aufgenommen wurde.\tNah am Hebräischen."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/14_2CH/2CH_020_2.tsv",
+    "old_row": "34\tИ остальные дела Иосафата, первые и последние, вот, они записаны в делах Ииуя, сына Анании, который был внесён в книгу царей Израиля.\tВнесён стоит в единственном числе.",
+    "new_row": "34\tИ остальные дела Иосафата, первые и последние, вот, они записаны в делах Ииуя, сына Анании, который был внесён в книгу царей Израиля.\tБлизко к еврейскому."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/14_2CH/2CH_016.tsv",
+    "old_row": "14\tUnd sie begruben ihn in seinen Gräbern, die er sich in der Stadt Davids gegraben hatte; und sie legten ihn auf das Lager, das man mit Gewürzen und Arten von kunstvoll gemischter Salbenmischung gefüllt hatte. Und sie verbrannten ihm einen sehr großen Brand.\tDie Gräber stehen im Plural; der Brand wird mit demselben Wortstamm wiederholt.",
+    "new_row": "14\tUnd sie begruben ihn in seinen Gräbern, die er sich in der Stadt Davids gegraben hatte; und sie legten ihn auf das Lager, das man mit Gewürzen und Arten von kunstvoll gemischter Salbenmischung gefüllt hatte. Und sie brannten für ihn einen sehr großen Brand.\tDie Gräber stehen im Plural; der Brand wird mit demselben Wortstamm wiederholt."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/14_2CH/2CH_013.tsv",
+    "old_row": "11\tИ они воскуряют Господу всесожжения утро за утром и вечер за вечером, и курение благовоний, и расположение хлеба на чистом столе, и золотой светильник и его лампады, чтобы гореть вечер за вечером; ибо мы храним стражу Господа, нашего Бога, а вы оставили Его.\tСохранены повторения утра и вечера и стража.",
+    "new_row": "11\tИ они воскуряют Господу всесожжения утро за утром и вечер за вечером и курение благовоний; и расположение хлеба — на чистом столе, и золотой светильник и его лампады — чтобы гореть вечер за вечером; ибо мы храним стражу Господа, нашего Бога, а вы оставили Его.\tСохранены повторения утра и вечера и стража."
+  }
+]

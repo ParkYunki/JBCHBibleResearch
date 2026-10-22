@@ -113,6 +113,82 @@ public enum QueryIntentClassifier {
         return baselineRelationWords.contains(where: { query.contains($0) })
     }
 
+    // MARK: - 1-1) "X의 <관계어>" 꼴 판정 (2026-10-22 2차)
+
+    /// `isRelationQuery`가 관계 질의로 보는 관계어 전부(`RelationSynonyms.allWords` + "형" + `baselineRelationWords`),
+    /// 긴 말부터 — "할아버지"를 "아버지"보다 먼저 본다.
+    private static let relationShapeWords: [String] = {
+        var words: [String] = []
+        for word in RelationSynonyms.allWords + ["형"] + baselineRelationWords where !words.contains(word) {
+            words.append(word)
+        }
+        return words.sorted { $0.count > $1.count }
+    }()
+
+    /// 검색어 끝의 물음표·마침표("?", "？", ".", "。")를 떼고 앞뒤 공백을 지운다. 그 밖은 그대로다.
+    static func trimmingTrailingQueryPunctuation(_ query: String) -> String {
+        var text = query.trimmingCharacters(in: .whitespacesAndNewlines)
+        let marks: Set<Character> = ["?", "？", ".", "。"]
+        while let last = text.last, marks.contains(last) {
+            text.removeLast()
+            text = text.trimmingCharacters(in: .whitespacesAndNewlines)
+        }
+        return text
+    }
+
+    /// 이름 목록 구분 문자(공백 외) — "X의 <관계어>"의 X가 여러 이름일 때("후르, 훌의 아들").
+    private static let relationShapeNameSeparators: Set<Character> = [",", "，", "、"]
+
+    /// 질의 전체가 "X의 <관계어>"(관계어 뒤 "들" 허용, 공백 무시, 끝의 "?"/"." 무시) 꼴이면 X를 쉼표로 나눈 이름 목록(NFC, 빈 항목 제외)을
+    /// 돌려준다. 아니면 nil.
+    /// 예: "함의 아들" → ["함"], "셈의 아들들" → ["셈"], "노아의 아버지?" → ["노아"], "후르, 훌의 아들" → ["후르", "훌"].
+    /// "함의 아들은 누구인가", "노아가 아버지인 사람" → nil.
+    ///
+    /// 쓰는 곳: 한 글자 이름("함", "셈", "단")을 관계 질의에서 받을지 판정(`QueryIntentHandler.handleRelation`) — 그 밖의 한국어 관계
+    /// 질의 판정은 예전 그대로 `isRelationQuery`(부분 문자열)다. 비한국어 관계 질의도 이 꼴의 한국어 질의로 옮겨 같은 경로를 탄다.
+    /// [2026-10-22 3차] `QueryIntentHandler.handleWithKoreanData`는 관계로 분류된 질의 중 이 함수가 nil이 아닌 것만 관계 카드로 처리한다
+    /// (한국어 문장형 질의 금지 — "다윗의 아들은 누구인가", "다윗 아내", "유다 지파" → 카드 없음).
+    static func koreanRelationShapeNames(_ query: String) -> [String]? {
+        let compact = trimmingTrailingQueryPunctuation(query).filter { !$0.isWhitespace }
+        for word in relationShapeWords {
+            for suffix in ["의" + word + "들", "의" + word] where compact.hasSuffix(suffix) {
+                let head = compact.dropLast(suffix.count)
+                let names = head.split(whereSeparator: { relationShapeNameSeparators.contains($0) })
+                    .map { String($0).precomposedStringWithCanonicalMapping }
+                if !names.isEmpty { return names }
+            }
+        }
+        return nil
+    }
+
+    // MARK: - 1-2) 질의 전체가 트리거 낱말인지 (2026-10-22 3차)
+
+    /// 질의 전체(끝의 "?"/"." 무시, 공백 무시)가 그 카테고리의 트리거 낱말 하나와 같으면 true.
+    /// 한국어 의미 검색은 문장형 질의에 안내 카드를 띄우지 않는다(사용자 확정) — `QueryIntentHandler`가 예언/주제/서사 안내 카드를
+    /// 이 조건일 때만 낸다. 예: "메시아", "메시아?", "팔복", "여정" → true. "메시아에 대한 예언", "믿음의 중요성" → false.
+    ///  - 예언: `prophecyTriggerWords` + `prophecyTopicNouns`
+    ///  - 주제: `namedPassages`만 — 꼬리표("에 대한 말씀")와 "(주제)의 (추상명사)" 구조는 낱말이 아니라 문형이라 넣지 않는다.
+    ///  - 서사: `narrativeTriggers`
+    ///  - 그 밖의 카테고리: false
+    /// 분류(`classify`) 자체는 바꾸지 않는다.
+    static func isWholeQueryTriggerTerm(_ query: String, for intent: Intent) -> Bool {
+        let compact = compactForWholeQueryMatch(query)
+        guard !compact.isEmpty else { return false }
+        let terms: [String]
+        switch intent {
+        case .prophecy: terms = prophecyTriggerWords + prophecyTopicNouns
+        case .themeOrAttribute: terms = namedPassages
+        case .narrative: terms = narrativeTriggers
+        case .relation, .personProfile, .placeProfile, .general: return false
+        }
+        return terms.contains { compactForWholeQueryMatch($0) == compact }
+    }
+
+    /// 끝의 "?"/"."를 떼고(NFC) 공백을 모두 뺀 문자열 — "마지막 때"와 "마지막때"를 같게 본다.
+    private static func compactForWholeQueryMatch(_ text: String) -> String {
+        trimmingTrailingQueryPunctuation(text).precomposedStringWithCanonicalMapping.filter { !$0.isWhitespace }
+    }
+
     /// 친족어 "형"(손위 형제)이 단어로 쓰였는지 — "라흐미의 형", "라흐미의형은?", "형이 누구".
     ///
     /// "형"은 한 글자라 `query.contains("형")`으로 판정하면 "형통"/"형벌"/"모형"/"형상"/"형제" 같은 말에 전부 걸려

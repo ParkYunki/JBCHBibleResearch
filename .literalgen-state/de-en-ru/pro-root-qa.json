@@ -1,0 +1,32 @@
+[
+  {
+    "path": "Tools/LiteralGen/outputs/de/20_PRO/PRO_001_1.tsv",
+    "old_row": "19\tSo sind die Pfade jedes Räubers von Gewinn; er nimmt seinen Besitzern die Seele.\tPfade und Seele sind ausdrücklich genannt.",
+    "new_row": "19\tSo sind die Pfade eines jeden, der sich unrechtmäßigen Gewinn verschafft; der Gewinn nimmt seinen Besitzern die Seele.\tUnrechtmäßiger Gewinn ist ausdrücklich genannt; er nimmt seinen Besitzern die Seele.",
+    "reason": "Replace ambiguous and unnatural Räubers von Gewinn with the explicit unjust-gain action and its referent."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/20_PRO/PRO_022.tsv",
+    "old_row": "14\tEine tiefe Grube ist der Mund fremder Frauen; wem der HERR zürnt, wird dort hineinfallen.\tGenannt sind fremde Frauen.",
+    "new_row": "14\tEine tiefe Grube ist der Mund fremder Frauen; wem der HERR zürnt, der wird dort hineinfallen.\tGenannt sind fremde Frauen.",
+    "reason": "Native grammar: restore main-clause subject or correct predicate/case construction."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/20_PRO/PRO_022.tsv",
+    "old_row": "14\tГлубокая яма — уста чужих женщин; на кого негодует Господь, упадет туда.\tНазваны чужие женщины.",
+    "new_row": "14\tГлубокая яма — уста чужих женщин; тот, на кого негодует Господь, упадет туда.\tНазваны чужие женщины.",
+    "reason": "Native grammar: restore main-clause subject or correct predicate/case construction."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/20_PRO/PRO_022.tsv",
+    "old_row": "7\tБогатый будет властвовать над бедными, и раб заемщик человеку дающему взаймы.\tБедные стоят во множественном числе.",
+    "new_row": "7\tБогатый будет властвовать над бедными, и заемщик — раб человека, дающего взаймы.\tБедные стоят во множественном числе.",
+    "reason": "Native grammar: restore main-clause subject or correct predicate/case construction."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/20_PRO/PRO_022.tsv",
+    "old_row": "27\tЕсли у тебя нет чем платить, зачем ему брать постель твою из-под тебя?\tБерущий постель обозначен единственным числом.",
+    "new_row": "27\tЕсли тебе нечем платить, зачем ему брать постель твою из-под тебя?\tБерущий постель обозначен единственным числом.",
+    "reason": "Native grammar: restore main-clause subject or correct predicate/case construction."
+  }
+]

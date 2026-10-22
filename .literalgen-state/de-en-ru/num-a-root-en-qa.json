@@ -1,0 +1,16 @@
+[
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/en/04_NUM/NUM_008.tsv",
+    "verse": 4,
+    "old_row": "4\t=\tThe Hebrew has singular “its flower” and ends with an unnamed “he made”; BSB uses plural “blossoms” and the passive “was fashioned.”",
+    "new_row": "4\t=\tThe Hebrew has singular “its flower” and ends with an unnamed “he made”; BSB uses plural “blossoms” and the passive construction “fashioned according to the pattern.”",
+    "reason": "Quote the actual BSB phrase; the words “was fashioned” do not occur in the supplied TARGET."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/en/04_NUM/NUM_008.tsv",
+    "verse": 24,
+    "old_row": "24\t=\tThe Hebrew speaks of an individual entering service in the singular; BSB uses plural “men” and “they.”",
+    "new_row": "24\t=\tThe Hebrew speaks of an individual entering service in the singular; BSB uses plural “Men.”",
+    "reason": "Remove the claim that BSB uses “they” in verse 24; that pronoun is absent in its TARGET."
+  }
+]

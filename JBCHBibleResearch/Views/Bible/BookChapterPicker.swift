@@ -64,7 +64,7 @@ struct BookChapterPicker: View {
                 isGridPresented = true
             } label: {
                 // 약어 표시(`abbreviation.first`는 공식 약어). 없으면 전체 이름으로 폴백.
-                Label("\(selectedBook.abbreviation.first ?? selectedBook.nameKo) \(selectedChapter)장", systemImage: "book")
+                Label("\(selectedBook.displayShortName) \(selectedChapter)장", systemImage: "book")
             }
             .popover(isPresented: $isGridPresented) {
                 // 현재 책의 장 그리드로 바로 시작한다. "책 목록" 버튼(ChapterGrid.onBack)으로 다른 책 선택도 가능.
@@ -135,7 +135,7 @@ struct BookChapterPicker: View {
             Button {
                 isGridPresented = true
             } label: {
-                Label("\(selectedBook.abbreviation.first ?? selectedBook.nameKo) \(selectedChapter)장", systemImage: "book")
+                Label("\(selectedBook.displayShortName) \(selectedChapter)장", systemImage: "book")
                     .font(.system(size: sizing.fontSize, weight: .bold))
             }
             .buttonStyle(BibleBarButtonStyle(height: sizing.height, cornerRadius: sizing.radius, fontSize: sizing.fontSize))
@@ -303,7 +303,7 @@ struct BookChapterPicker: View {
         let trimmed = freeText.trimmingCharacters(in: .whitespaces)
         guard !trimmed.isEmpty else { return }
         guard let match = BooksProvider.shared.matchBookPrefix(in: trimmed) else {
-            parseErrorMessage = "\"\(trimmed)\"에서 책 이름을 찾지 못했습니다."
+            parseErrorMessage = String(localized: "\"\(trimmed)\"에서 책 이름을 찾지 못했습니다.")
             return
         }
         let remainder = match.remainder.trimmingCharacters(in: .whitespaces)
@@ -521,7 +521,7 @@ private struct BookGridPicker: View {
                 }
             } else {
                 VStack(alignment: .leading, spacing: 0) {
-                PickerHeaderBar(title: "책 선택")
+                PickerHeaderBar(title: String(localized: "책 선택"))
                 VStack(spacing: 8) {
                     // 연구문서 검색란(`DocumentsHomeView.searchAndFilterBar`)과 같은 모양(돋보기 + `.plain` TextField + 지우기 버튼 + 옅은 채움/테두리).
                     HStack(spacing: 6) {
@@ -550,8 +550,8 @@ private struct BookGridPicker: View {
 
                     ScrollView {
                         VStack(alignment: .leading, spacing: 20) {
-                            testamentSection(title: "구약", books: oldTestamentBooks)
-                            testamentSection(title: "신약", books: newTestamentBooks)
+                            testamentSection(title: String(localized: "구약"), books: oldTestamentBooks)
+                            testamentSection(title: String(localized: "신약"), books: newTestamentBooks)
                         }
                         .padding()
                     }
@@ -589,7 +589,7 @@ private struct BookGridPicker: View {
             pendingBook = book
         } label: {
             // 2글자 약어도 `minimumScaleFactor`로 52pt 안에 들어간다.
-            Text(book.abbreviation.first ?? book.nameKo)
+            Text(book.displayShortName)
                 .font(PickerFonts.cell)
                 .lineLimit(1)
                 .minimumScaleFactor(0.5)
@@ -599,7 +599,7 @@ private struct BookGridPicker: View {
         }
         .buttonStyle(.plain)
         .contentShape(Rectangle())
-        .accessibilityLabel("\(book.nameKo)\(isCurrent ? ", 현재 책" : "")")
+        .accessibilityLabel(isCurrent ? String(localized: "\(book.displayName), 현재 책") : book.displayName)
     }
 }
 
@@ -679,16 +679,16 @@ private struct ChapterGrid: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 0) {
             // iOS: 제목은 책 이름, "장 선택"은 아래 구역 라벨로 나눈다(구절 레이어 통일안). 머리 자체가 아래 선을 그린다.
-            PickerHeaderBar(title: book.nameKo, onBack: onBack)
+            PickerHeaderBar(title: book.displayName, onBack: onBack)
 
             if book.chapterCount < 1 {
-                Text("\(book.nameKo)의 장 정보가 없습니다.")
+                Text("\(book.displayName)의 장 정보가 없습니다.")
                     .foregroundStyle(.secondary)
                     .padding()
             } else {
                 ScrollView {
                     VStack(alignment: .leading, spacing: 10) {
-                        PickerSectionLabel(title: "장 선택")
+                        PickerSectionLabel(title: String(localized: "장 선택"))
                         LazyVGrid(columns: Self.columns, spacing: 10) {
                             ForEach(1...book.chapterCount, id: \.self) { chapter in
                                 chapterButton(chapter)
@@ -720,6 +720,21 @@ private struct ChapterGrid: View {
         }
         .buttonStyle(.plain)
         .contentShape(Rectangle())
-        .accessibilityLabel("\(chapter)장\(isCurrent ? ", 현재 장" : "")")
+        .accessibilityLabel(isCurrent ? String(localized: "\(chapter)장, 현재 장") : String(localized: "\(chapter)장"))
+    }
+}
+
+/// 성경 조회 상단바(`BibleTopBar`)의 제목 탭이 여는 책/장 그리드 팝오버 내용 (2026-10-21).
+/// `BookGridPicker`/`PickerPopoverSizing`이 이 파일 전용(private)이라 같은 파일에서 얇게 감싸 내보낸다.
+/// 현재 책의 장 그리드로 바로 시작하고 "책 목록"으로 다른 책을 고를 수 있다 — 장 이동 막대의 책 버튼 팝오버와 같은 내용.
+struct BookChapterGridPopover: View {
+    let books: [Book]
+    let selectedBook: Book
+    let selectedChapter: Int
+    var onSelect: (Book, Int) -> Void
+
+    var body: some View {
+        BookGridPicker(books: books, initialBook: selectedBook, currentBook: selectedBook, currentChapter: selectedChapter, onSelect: onSelect)
+            .modifier(PickerPopoverSizing())
     }
 }

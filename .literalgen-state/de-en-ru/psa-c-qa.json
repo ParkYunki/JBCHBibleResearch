@@ -1,0 +1,132 @@
+[
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/19_PSA/PSA_042.tsv",
+    "old_row": "5\tWarum beugst du dich nieder, meine Seele, und tobst über mir? Harre auf Gott, denn ich werde ihm noch danken, den Rettungen seines Angesichts.\tRettungen seines Angesichts sind als Hauptwortgruppe genannt.",
+    "new_row": "5\tWarum beugst du dich nieder, meine Seele, und tobst über mir? Harre auf Gott, denn ich werde ihm noch für die Rettungen seines Angesichts danken.\tRettungen seines Angesichts sind als Hauptwortgruppe genannt."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/19_PSA/PSA_042.tsv",
+    "old_row": "5\tПочему поникаешь, душа моя, и волнуешься на мне? Жди Бога, ибо я ещё буду благодарить Его, спасения лица Его.\tНазваны спасения Его лица, без отдельного Бога моего в этом стихе.",
+    "new_row": "5\tПочему поникаешь, душа моя, и волнуешься на мне? Жди Бога, ибо я ещё буду благодарить Его за спасения лица Его.\tНазваны спасения Его лица, без отдельного Бога моего в этом стихе."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/19_PSA/PSA_042.tsv",
+    "old_row": "11\tWarum beugst du dich nieder, meine Seele, und warum tobst du über mir? Harre auf Gott, denn ich werde ihm noch danken, den Rettungen meines Angesichts und meinem Gott.\tRettungen stehen in der Mehrzahl.",
+    "new_row": "11\tWarum beugst du dich nieder, meine Seele, und warum tobst du über mir? Harre auf Gott, denn ich werde ihm, meinem Gott, noch für die Rettungen meines Angesichts danken.\tRettungen stehen in der Mehrzahl."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/19_PSA/PSA_042.tsv",
+    "old_row": "11\tПочему поникаешь, душа моя, и почему волнуешься на мне? Жди Бога, ибо я ещё буду благодарить Его, спасения лица моего и Бога моего.\tСпасения лица моего стоят во множественном числе.",
+    "new_row": "11\tПочему поникаешь, душа моя, и почему волнуешься на мне? Жди Бога, ибо я ещё буду благодарить Его, Бога моего, за спасения лица моего.\tСпасения лица моего стоят во множественном числе."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/19_PSA/PSA_043.tsv",
+    "old_row": "5\tWarum beugst du dich nieder, meine Seele, und warum tobst du über mir? Harre auf Gott, denn ich werde ihm noch danken, den Rettungen meines Angesichts und meinem Gott.\tRettungen stehen im Plural.",
+    "new_row": "5\tWarum beugst du dich nieder, meine Seele, und warum tobst du über mir? Harre auf Gott, denn ich werde ihm, meinem Gott, noch für die Rettungen meines Angesichts danken.\tRettungen stehen im Plural."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/19_PSA/PSA_043.tsv",
+    "old_row": "5\tПочему поникаешь, душа моя, и почему волнуешься на мне? Жди Бога, ибо я ещё буду благодарить Его, спасения лица моего и Бога моего.\tНазваны спасения лица моего.",
+    "new_row": "5\tПочему поникаешь, душа моя, и почему волнуешься на мне? Жди Бога, ибо я ещё буду благодарить Его, Бога моего, за спасения лица моего.\tНазваны спасения лица моего."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/19_PSA/PSA_044.tsv",
+    "old_row": "8\tБогом мы хвалились весь день и имя Твоё будем благодарить вечно. Села.\tХвальба представлена совершённой; сохранено села.",
+    "new_row": "8\tБогом мы хвалились весь день и имени Твоему будем воздавать благодарение вечно. Села.\tХвальба представлена совершённой; сохранено села."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/19_PSA/PSA_045.tsv",
+    "old_row": "10\tСлушай, дочь, и смотри, и приклони ухо твоё, и забудь народ твой и дом отца твоего!\tНичего дополнительного к повелениям нет.",
+    "new_row": "10\tСлушай, дочь, и смотри, и приклони ухо твоё, и забудь народ твой и дом отца твоего!\tБлизко к еврейскому."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/19_PSA/PSA_046.tsv",
+    "old_row": "5\tБог посреди неё, она не поколеблется, Бог поможет ей при наступлении утра.\tБлизко к еврейскому.",
+    "new_row": "5\tБог посреди него, он не поколеблется, Бог поможет ему при наступлении утра.\tБлизко к еврейскому."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/19_PSA/PSA_048.tsv",
+    "old_row": "3\tБог в чертогах её стал известен как твердыня.\tНазваны чертоги и твердыня.",
+    "new_row": "3\tБог в чертогах его стал известен как твердыня.\tНазваны чертоги и твердыня."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/19_PSA/PSA_049.tsv",
+    "old_row": "3\tMein Mund wird Weisheiten reden, und das Sinnen meines Herzens ist Einsichten.\tWeisheiten und Einsichten stehen im Plural; genannt ist das Sinnen des Herzens.",
+    "new_row": "3\tMein Mund wird Weisheiten reden, und das Sinnen meines Herzens ist voller Einsichten.\tWeisheiten und Einsichten stehen im Plural; genannt ist das Sinnen des Herzens."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/19_PSA/PSA_050.tsv",
+    "old_row": "3\tДа придёт Бог наш и не молчит, огонь пред Ним пожирает, и вокруг Него весьма бурно.\tПриход и немолчание выражены пожеланием.",
+    "new_row": "3\tДа придёт Бог наш и да не молчит, огонь пред Ним пожирает, и вокруг Него весьма бурно.\tПриход и немолчание выражены пожеланием."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/19_PSA/PSA_055.tsv",
+    "old_row": "10\tДнём и ночью они обходят её по стенам её, и беззаконие и бедствие посреди неё.\tГород обозначен местоимением женского рода.",
+    "new_row": "10\tДнём и ночью они обходят его по стенам его, и беззаконие и бедствие посреди него.\tБлизко к еврейскому."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/19_PSA/PSA_055.tsv",
+    "old_row": "11\tПогибель посреди неё, и угнетение и обман не отходят от площади её.\tНазваны угнетение и одна площадь.",
+    "new_row": "11\tПогибель посреди него, и угнетение и обман не отходят от площади его.\tНазваны угнетение и одна площадь."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/19_PSA/PSA_055.tsv",
+    "old_row": "23\tDu aber, Gott, wirst sie in den Brunnen der Grube hinabführen; Männer des Blutes und Trugs werden ihre Tage nicht halbieren; ich aber werde auf dich vertrauen.\tGenannt sind Brunnen der Grube und Tage.",
+    "new_row": "23\tDu aber, Gott, wirst sie in den Brunnen der Grube hinabführen; Männer des Blutes und Trugs werden ihre Tage nicht zur Hälfte bringen; ich aber werde auf dich vertrauen.\tGenannt sind Brunnen der Grube und Tage."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/19_PSA/PSA_056.tsv",
+    "old_row": "3\tВ день, когда я страшусь, на Тебя буду доверять.\tПрямо назван день.",
+    "new_row": "3\tВ день, когда я страшусь, буду доверять Тебе.\tПрямо назван день."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/19_PSA/PSA_058.tsv",
+    "old_row": "5\tdie der Stimme von Beschwörern nicht hört, eines Kundigen, der Zaubersprüche bindet.\tBeschwörer stehen zunächst im Plural.",
+    "new_row": "5\tdie die Stimme von Beschwörern nicht hört, eines Kundigen, der Zaubersprüche bindet.\tBeschwörer stehen zunächst im Plural."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/19_PSA/PSA_108.tsv",
+    "old_row": "1\tПеснь. Псалом Давида. Твердо сердце моё, Боже, буду петь и играть, также слава моя.\tFestigkeit des Herzens wird nur einmal genannt; auch seine Ehre ist genannt.",
+    "new_row": "1\tПеснь. Псалом Давида. Твердо сердце моё, Боже, буду петь и играть, также слава моя.\tТвёрдость сердца названа один раз; также названа слава моя."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/19_PSA/PSA_110.tsv",
+    "old_row": "6\tEr wird unter den Völkern richten, voll Leichen; er hat ein Haupt über weitem Land zerschmettert.\tLeichen sind ausdrücklich genannt.",
+    "new_row": "6\tEr wird unter den Völkern richten, mit Leichen füllen; er hat ein Haupt über weitem Land zerschmettert.\tLeichen sind ausdrücklich genannt."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/19_PSA/PSA_110.tsv",
+    "old_row": "6\tОн будет судить среди народов, полон трупов, сокрушил голову над обширной землёй.\tЗемля как наполняемый предмет отдельно не названа; сокрушение головы представлено совершённым.",
+    "new_row": "6\tОн будет судить среди народов, наполнит трупами, сокрушил голову над обширной землёй.\tЗемля как наполняемый предмет отдельно не названа; сокрушение головы представлено совершённым."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/19_PSA/PSA_109_1.tsv",
+    "old_row": "21\tА Ты, Господи, Господь, сотвори со мною ради имени Твоего, ибо блага милость Твоя, избавь меня!\tИмена Господа различены как имя и титул.",
+    "new_row": "21\tА Ты, Господи, Господи, сотвори со мною ради имени Твоего, ибо блага милость Твоя, избавь меня!\tБлизко к еврейскому."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/19_PSA/PSA_106_2.tsv",
+    "old_row": "47\tСпаси нас, Господи, Боже наш, и собери нас из народов, чтобы благодарить имя святости Твоей, хвалиться хвалою Твоею!\tНазвано благодарение имени и хвала.",
+    "new_row": "47\tСпаси нас, Господи, Боже наш, и собери нас из народов, чтобы воздавать благодарение имени святости Твоей, хвалиться хвалою Твоею!\tНазвано благодарение имени и хвала."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/19_PSA/PSA_106_1.tsv",
+    "old_row": "3\tGlücklich die das Recht bewahren, wer zu jeder Zeit Gerechtigkeit tut!\tGenannt ist Recht statt Gebot; der Tätige steht zuletzt im Singular.",
+    "new_row": "3\tGlücklich sind die, die das Recht bewahren; glücklich, wer zu jeder Zeit Gerechtigkeit tut!\tGenannt ist Recht statt Gebot; der Tätige steht zuletzt im Singular."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/19_PSA/PSA_106_1.tsv",
+    "old_row": "3\tБлаженны хранящие суд, творящий правду во всякое время!\tТворящий правду стоит в единственном числе.",
+    "new_row": "3\tБлаженны хранящие суд; блажен творящий правду во всякое время!\tТворящий правду стоит в единственном числе."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/19_PSA/PSA_119_4.tsv",
+    "old_row": "103\tWie süß sind deinem Spruch nach meine Gaumenempfindungen geworden: süßer als Honig meinem Mund!\tGaumen und Mund werden beide genannt.",
+    "new_row": "103\tWie süß ist dein Spruch meinem Gaumen, süßer als Honig meinem Mund!\tGaumen und Mund werden beide genannt."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/19_PSA/PSA_119_4.tsv",
+    "old_row": "91\tNach deinen Gerichten stehen sie heute, denn alles sind deine Knechte.\tSie stehen nach deinen Gerichten; ausdrücklich sind alle deine Knechte.",
+    "new_row": "91\tNach deinen Gerichten stehen sie heute, denn alle sind deine Knechte.\tSie stehen nach deinen Gerichten; ausdrücklich sind alle deine Knechte."
+  }
+]

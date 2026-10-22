@@ -1,0 +1,14 @@
+[
+  {
+    "source": "2ch-a-qa.json",
+    "path": "Tools/LiteralGen/outputs/de/14_2CH/2CH_006_2.tsv",
+    "verse": "38",
+    "reason": "Original wording already valid; retain confirmed difference."
+  },
+  {
+    "source": "2ch-final-extra-qa.json",
+    "path": "Tools/LiteralGen/outputs/en/14_2CH/2CH_033.tsv",
+    "verse": "14",
+    "reason": "Original wording already valid; retain confirmed difference."
+  }
+]

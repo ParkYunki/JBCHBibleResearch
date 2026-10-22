@@ -99,7 +99,7 @@ final class RelatedContentPanelController: NSObject, NSWindowDelegate {
             backing: .buffered,
             defer: false
         )
-        newPanel.title = "관련 콘텐츠"
+        newPanel.title = String(localized: "관련 콘텐츠")
         // 항상 일반 창 위에 뜨게 하고, 앱이 비활성화돼도 사라지지 않게 한다(`WordSummaryPanelController`와 같은 설정).
         newPanel.isFloatingPanel = true
         newPanel.level = .floating

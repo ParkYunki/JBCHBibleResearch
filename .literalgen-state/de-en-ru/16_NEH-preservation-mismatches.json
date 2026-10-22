@@ -1,0 +1,952 @@
+[
+  {
+    "path": "Tools/LiteralGen/outputs/fil/01_GEN/GEN_007.tsv",
+    "old": "e07794dd6e0baec906d5d6cdd87844250efdd003b038cbee04c8a08e011169f5",
+    "current": "b273d979ccb7daa11522231016b50a2875938c98d01125bf743366b93ff0f8e4"
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/fil/01_GEN/GEN_016.tsv",
+    "old": "0236045afbe838a72fe5a24e3c539a4c420f97b16a301d3826b170ba04352f1c",
+    "current": "a7b6c5f373c95df0cd69d20f243a53e717b12dcdf94cf8856b15b7b16bc64534"
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/fil/01_GEN/GEN_020.tsv",
+    "old": "e972bf7ac037e17bab5ff6d9864d1853ac4948f19a00f3ef395a5400584c9e25",
+    "current": "93aaa3db75ebac8b5d64aedbe0f8590fcdec2aa4622508a87e914ea733bd2722"
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/fil/01_GEN/GEN_034_1.tsv",
+    "old": "04979c0c098f01f9d9e17a46fde66d66f9f511889b6b46847000f52d253dc7d8",
+    "current": "09fc3cc776e158cc2d0ae0e2dbfb248ac72e683f18daf6b330e4265d202b6e52"
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/fil/01_GEN/GEN_048.tsv",
+    "old": "6ba8e7a614234f5ce1b9be67779ed5944828ca04a514cb78382b56215f91c3d8",
+    "current": "8890a83647803e1420f92be274632b0c998e7f93af435ba36187e53bbbd2c2a2"
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/fil/01_GEN/GEN_049_1.tsv",
+    "old": "d90f8c6553ebb9a9c295db73931bd0610d23e87bc5623639ab58c5f9a33e0d9c",
+    "current": "edf8f6f70d64700b3e10749758117ee7b39015ff296d5ad685f6dd835e5c098e"
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/fil/02_EXO/EXO_016_1.tsv",
+    "old": "2911bc3a2cfb60a4b0928a7ffeeb90004f9afd8635e0f3ec6a8dc91290e14204",
+    "current": "0c7b1601c1b08a10c0f611d596a45fc3ff74a6e36d6de85fd36bc84caa3266be"
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/fil/02_EXO/EXO_034_1.tsv",
+    "old": "37b1e61835fcfd2ad072aa15362634a2f245c3ce118f94c0331bd7e4cf9a3d95",
+    "current": "f8cffdc68f7c1ea90956d4627f856efdd7c0a76ee1d6aac3251f3ce42670d6f9"
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/fil/02_EXO/EXO_035_1.tsv",
+    "old": "255880024bca8f6f6abf0b52128e8dabdb43c9c4f686045cc91855ff3e57f1e5",
+    "current": "05cad7b165d5afc7b4dae6832203d7b5c5994aa00d329afc79e56230b5764b36"
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/fil/05_DEU/DEU_032_1.tsv",
+    "old": "5ad5807f750647a430f331d78c633ee6832598f063f3c730f56caaadd8f0793a",
+    "current": "d7d09e66e3873845ed4843936140d0efe616d3c2ad38c68d82320372d2d0f4a7"
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/fil/05_DEU/DEU_033.tsv",
+    "old": "411891bad15fa0dee289f71d2ad2a1357fbe45caf2ae252692fae045dc3309e0",
+    "current": "bfb86aad80fb924411d48d50455fb4e58dc60c4bce80eff4a5cc1ffbadb053e8"
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/fil/07_JDG/JDG_003_1.tsv",
+    "old": "ebe138ceb1e843d8703e772972012a6380c7a7bc0cafeee4361852c00fcfa076",
+    "current": "342c4ad6b03e96734462188cb30d54dfc46fc20709ecb52b0c904cdbc23dee85"
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/fil/07_JDG/JDG_019.tsv",
+    "old": "edd2d27d2c55dbd9c6ce21111331b2223e1eaafca549b5ea982534d4de9bf76a",
+    "current": "bc7516faeb539445877cd32b613a08d518883600724e99330639de3a613b8e7e"
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/fil/09_1SA/1SA_006.tsv",
+    "old": "bc3fff13044056342dc2649ce5f7af1eddc80dcd21292d482309643b55d70d86",
+    "current": "2fe381008fa08c7e82a573cbcb3648b73cc700497bf7bd79cabcd7f3e3e1fd0b"
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/fil/09_1SA/1SA_015_2.tsv",
+    "old": "527984363991ca0a3d0eb77fd54bf05cced6985cb0d50d1e046c3b79e4e2952b",
+    "current": "bf4543d65ddd1b63732d1e572b54254275197fcc9696d399513f57859fb7ecb2"
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/fil/09_1SA/1SA_021.tsv",
+    "old": "32bd0548e7de1eef19b730b66280f437c7eaf76295a3e1470a2ed9092fb62259",
+    "current": "f8e10899dc0a794800d361f41dbcecf69dfad03a239e81c28296391d251d25fd"
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/fil/10_2SA/2SA_001.tsv",
+    "old": "065ffd1e4c74c007f33ef7d39a6f4b1ffac2f4b81f3c8857de6dda57b00773b9",
+    "current": "7ae8d602ca32d56e127bf0f04337efe5521e87444e8b5c5705ea10f7644febdf"
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/fil/10_2SA/2SA_013_2.tsv",
+    "old": "e91787ed3b6443e46cf360356826c2b081c58b0dba46039aa3d4e6dd3ba26be5",
+    "current": "1283be7bbfce2e49762966982b7951fadb9ea8063ab28870568e7dc946fcd484"
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/fil/10_2SA/2SA_021.tsv",
+    "old": "f42274c4afce4bbf2bac705ba75a2ea12b95ae3bb5148d0885ec06dd8f22fac0",
+    "current": "d5e845c6f39398335b157dabe91b0eecbd2fae6da329ce550ba7d2971406c9a3"
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/fil/11_1KI/1KI_006_1.tsv",
+    "old": "f7b189f43df3146a9af5fa82aceb61ed442ace1e4bed3a59d869e4c5d9c89928",
+    "current": "c9f1c853a84e357dd3896d1814f795d1db4b169b30b14a72d81442b21cbcc203"
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/fil/11_1KI/1KI_010.tsv",
+    "old": "63eb336b92cf8062c87492c6ecc5a09d67ecc8d9b92f38750a293e6da0e34251",
+    "current": "593d660cf3bbd17538c2ff1324cd2adcc381a6a2763699b66ebf9bf09081e1c3"
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/fil/12_2KI/2KI_007.tsv",
+    "old": "99c90ec4d955cb7253515d1dbd358166cb7e35608fade033d85f3b4029551f0a",
+    "current": "e991c78c9262c19d48e568c39b1c47d449835b5a3075dcd231766ffe96691896"
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/fil/12_2KI/2KI_011.tsv",
+    "old": "fa369464bf302aee06d8edd0838266d5df1ef1c79c97ec47681c6cb0c5cffca3",
+    "current": "ece2a192231dc4099ed67a7734fe0eba04e4e4f383c8b2a5e1c224486b34c7ed"
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/fil/12_2KI/2KI_017_1.tsv",
+    "old": "9a22fb6b9488af46f813e87ed1e48a69c784743891757b070d6e8c73c61124d0",
+    "current": "444f7007178a1c3b3912a5d5dfd80719aeec92ec6ce32304402ad5b3dfe31678"
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/fil/12_2KI/2KI_023_1.tsv",
+    "old": "4e383dfa990ee5f4c9d675da8d0e045f17f0d3ab4f03dd37ce0009f94ac64394",
+    "current": "d2bc0090a0105f2d6d4b9d40824e0b67e966690d93daa2fc07e96691e0e27aba"
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/fil/14_2CH/2CH_009_1.tsv",
+    "old": "2d48b995f1a5a1e1fad6196ca0e869c552f7db3d62525c3ef7a37e94eaaa66f8",
+    "current": "883d8fec133eb71c2446512ca2b20cf447195c539cb2b1aa4451778613189c5b"
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/fil/14_2CH/2CH_012.tsv",
+    "old": "07f1921e391ca80ce423a62c64aaf0b1d834c70cb023f0723595cecf148a7f5d",
+    "current": "10db451183932fe48ca5cc700ff64763bdbe244a29e38247307237a59dbe9dda"
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/fil/14_2CH/2CH_030.tsv",
+    "old": "911661d04c7742116ea22f057871c56f6ddb8c6154000c14ab3127485a33c62c",
+    "current": "6bbcc065de378cda6beda6629bd41fcaffa6fdaad82d2768ba659679608096ba"
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/fil/14_2CH/2CH_032_1.tsv",
+    "old": "cce26d6c60784eb7004cd23fb70196ff8c114fc4ab8f260654a05647eb72e2d9",
+    "current": "f70e95346c0987dbb42dffd67aadae65a512d4eb53539d7912fecfa18c096533"
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/fil/14_2CH/2CH_034_1.tsv",
+    "old": "88415452526a0fb2248bd77c73176b5945c447ca8bd0502da2372392a6efe2f6",
+    "current": "74fe41a68da92bbebe50d64cd1c02e315c34ba1cb56c04210cc6927cdc1c58d6"
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/fil/15_EZR/EZR_005.tsv",
+    "old": "4011f2b7252d812baeaa0cb53f1af544235c926d44d421a46bbe55af744adf81",
+    "current": "b527d87191fdff39d6baea38b3e5934a5a63d1df2c4ca74c51efb6372b805d1b"
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/fil/15_EZR/EZR_006.tsv",
+    "old": "cab908df5389adee709837e931e9b19f010e15a9cfac6421d0f9785645c59228",
+    "current": "104cbe0bb9a3f1edc0e4d405876c188f346adce7511f0e59dcddcd503b90880d"
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/fil/17_EST/EST_001.tsv",
+    "old": "9cae96da29092b41622c1cc25bc9d64cd20d67ee3b5555f0241e18c0bfd85d92",
+    "current": "35a474e86348b93f5940ccb5ccbd015cfe78ae140c361382297fde757d62c9fe"
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/fil/17_EST/EST_002.tsv",
+    "old": "4223c29574c3d56338a033c0aa2264df63b6c512649700cf72185b7edaa1525f",
+    "current": "889aff18cb0990187a99e39eeaaee80cd6f81855eca67bb4c793d0edf04e7aef"
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/fil/18_JOB/JOB_024.tsv",
+    "old": "80491958ab6c90b9cbb16f141f75ad5b32fe783322dde23eae31ef7605314585",
+    "current": "54d2d988851f954c239c4ae44d986e6250e87b2f2708ab265e8aa9a46e52866c"
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/fil/18_JOB/JOB_038_2.tsv",
+    "old": "287ddb837184644a4cf672d4981d3c0696592032140869affb531dbcad7cbb6c",
+    "current": "ef37842f64ef570fb5c8042fd602de7369b42b37c4b93fceb5b8118c1d900db4"
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/fil/19_PSA/PSA_010.tsv",
+    "old": "f17e8b911f205bd95d9f4a4bc6d93db8de7770bb3e858d6f608245d45067f628",
+    "current": "2ce98670b6dd97cfb4e0abfbacfcf509db62a8f0039b66b6e362c016d7eb1103"
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/fil/19_PSA/PSA_077.tsv",
+    "old": "d2898d668cd5dcb031d0cfa01720cb9579468eb8c04f107f632fca0abea5f0e0",
+    "current": "42dfb3f23cbec09ae4e07a3937cef4b2bd922e419dde376321d57e41b3836874"
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/fil/19_PSA/PSA_139.tsv",
+    "old": "4daa84875e2a73ac866f013565ea223c878104414204c1a75a2b0e6818ff05f1",
+    "current": "cb8f593b315dc3f1a409748691c0f186ef1d3d6d8727985be67a6e3d5138272c"
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/fil/20_PRO/PRO_019.tsv",
+    "old": "092c5190af3d5f64e33fc7fcae7d20e06412040cd88a6793882ecc17ba65fe7f",
+    "current": "9376e6b696d8982302ebf5df71117e6f1b0f6a8f980fbba3874f4c3872998afc"
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/fil/20_PRO/PRO_021_1.tsv",
+    "old": "af28e8d98185feec206050709ff6c843e923ca6480ad1e0130404cc485141732",
+    "current": "9bc9db0ad5140faa93e258146185cf3cb0ea91310864cf84efe695b01bb721ff"
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/fil/24_JER/JER_006.tsv",
+    "old": "238f90de6ba6644e7429bbf54abb9a8c6f069e36e903d24931e9ada81fac39da",
+    "current": "85a9f99d889041bfab1de47326b2f7dccf1fae9d273f2f047934a6d51278a774"
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/fil/24_JER/JER_051_1.tsv",
+    "old": "e013cb0b0cb07d7fd268aff0460cdfb4f5f33df3f07e74d38216e5dde85b5740",
+    "current": "923e79dd07dad3120e5c58532ef948144c58fc447460fddf984413a83519c8c4"
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/fil/25_LAM/LAM_002.tsv",
+    "old": "2ddb9e88a8c663182e9ee22f594766078dd7b1e37bf2270f6835f16dc8844316",
+    "current": "d324f45ee47adb5a7ead07c23d602cebedf557080cf672d23c3a3a9dd90572a2"
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/fil/25_LAM/LAM_003_1.tsv",
+    "old": "b881eb8721fa5113fec3b82fd4aaa8d21783c93c07507a4f0d7f76b67e555c74",
+    "current": "1e42e271bf32cc35995ed4b279311997784e6864ab38de5d6acebfca2d491c48"
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/fil/25_LAM/LAM_004.tsv",
+    "old": "bcb7f1299734b63daa80627106c93cf9a25b68be97435d019c0c513c394815f2",
+    "current": "22368b0d9ae71c734ed3b5d3d9aff8d771c326ac4f5c89f5b347c4c71010e72a"
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/fil/26_EZK/EZK_007.tsv",
+    "old": "da9d3241a3c81f930e448f1a9e8bf11f6fa2cb11515e6db4fc3f699865736511",
+    "current": "ef8439592a43110da16d85d4ce8be35da943a296df888216cb86070352149c74"
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/fil/26_EZK/EZK_011.tsv",
+    "old": "2e14a57cd00aa10529893f6a59088ff36c6b52c4fd787dc72a41ed4b0b645ca3",
+    "current": "c1ffee32abcc4be288d125b9904c7bbd43bda4f5f505513423c744afba124625"
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/fil/26_EZK/EZK_040_1.tsv",
+    "old": "a70557d43bdc291d7d9083bf84f7d0fafeaab18c500779b193f39228fdbed73f",
+    "current": "3fdfd8bc320995df1d45c621ad1b26e3c2b84d3f53f86e0ee2a57c456a852c3a"
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/fil/26_EZK/EZK_041.tsv",
+    "old": "ef5857e053e9d386dc94d5a80c73c173978e37272b3ec6caa84ffc290081ebe6",
+    "current": "6bd556527627d5d241189ae5ae3f068330b33d8fd683b5e59e25f59bf806336d"
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/fil/29_JOL/JOL_001.tsv",
+    "old": "b865505d1d75d9a8b8ce3073e31dab2ecadf5ff2580bb7eab39a20e58fb300b8",
+    "current": "f5e682ef8a8b5b0404fb4737dec7eadad06f7ea7762864152b621f6e3e778752"
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/fil/30_AMO/AMO_007.tsv",
+    "old": "36581be2aba87eefa6b7ce5d271ce5b0a5b5fb724e851f40a69db4e16c85e240",
+    "current": "0665e7dc4a4c83d64d08a64721274f83c7e3fc8c2e9add4b7fb46b6c012e38b9"
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/fil/34_NAM/NAM_002.tsv",
+    "old": "afebcd31201658e7fec80c9decf548eb8538bc2c4db6f7206828630f3ea37379",
+    "current": "0b3005e6bf6e0b72031bbc730e2783ff923e7aabdc4065f5bca47bdd0b0a1396"
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/fil/37_HAG/HAG_002.tsv",
+    "old": "0ef9380c3593033f00d88029bb2573eaa3e3160f72e881cfaeebd02b8f66eb82",
+    "current": "ea88ed9cbb53730546da1c589d8621fff563222330b977d592f8d520a4aacfa5"
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/fil/38_ZEC/ZEC_006.tsv",
+    "old": "906afb3fdea1469cd21b120da859dffe85078d8772494a1747e408212065d427",
+    "current": "8966398df53bc841897b5d344a79a85b8e233adbef36a8ede77a4b33aeaa40c0"
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/fil/45_ROM/ROM_009_1.tsv",
+    "old": "ae659729b661d90fa5ced2249ed7bba23deaeeac4e3a951a174b3dbfc00da610",
+    "current": "084bb28c4a81baa9ec9a47599906ed811e479f9c600ab899b5df8ac75fe5a315"
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/fil/65_JUD/JUD_001.tsv",
+    "old": "4ad58282a76bf119037fac1718bb01cb6e8e1e873e9fa24fbcb516b4e983464d",
+    "current": "381dc2a202dc7b765d01e7bb07b738d60d85fbe7134cead91fdf365a8425eaa7"
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/id/01_GEN/GEN_016.tsv",
+    "old": "ac04079d572f0ed4901dbc710c675da7096767cbe80f24536a01ec1b0634aa6e",
+    "current": "7bf3c53a84852bd2b9faeb5d445f1b4bb0f34b1e20aecb928c89b6232865e1cd"
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/id/01_GEN/GEN_020.tsv",
+    "old": "d94370040a5d1b257b902e30d89cda8d8c1c8f0e2c95f85dc901e995a3b165d6",
+    "current": "c3eecabd53de8139517902d4f815393a0d03d3602096369b0255134820f5e63b"
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/id/01_GEN/GEN_046_1.tsv",
+    "old": "b428339e73168e12965c39450a87c20974c2b775e4553cac73b296fce7307a9a",
+    "current": "f9e6e5ce538ce2b31f780617b6c03bf46c672450abe41d454cf255de0bbddbb9"
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/id/01_GEN/GEN_048.tsv",
+    "old": "9609f4c1fc03dee75d1e4142877028c214d5e94d074618bc1dfdc584819ec235",
+    "current": "eec848cd86075263688e8f1a94591e688585982a349b0f86288bc25ea6ab6d21"
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/id/01_GEN/GEN_049_1.tsv",
+    "old": "7b3960ca6b7c6241266e2c20e9006135c6946f3fd855ffd20a798e63c270c6c9",
+    "current": "fe05ceec3765892a03a60defb45914c48ca957e56ebd346e01bb79ebd16e2bb2"
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/id/02_EXO/EXO_003.tsv",
+    "old": "ecede2b462de6a946f7e9af9cf74e18c06ddd1deaf2a097cff159df5952ceef8",
+    "current": "e58c701a9ea4f3bdc8528fa8fa4a939f724018e5aa36421c9ba18fe23506028a"
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/id/02_EXO/EXO_014_1.tsv",
+    "old": "12b8ff20b547ca2e324ea5f7be37596b36e5c30f8f785d53dbac20839a253f8e",
+    "current": "b05802b46ed133afd5ed6233c5217e0fd295e8207bdb5275485529f2fcb64e10"
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/id/02_EXO/EXO_016_1.tsv",
+    "old": "c053b661c4a1c52b8c2d6907651a15853f93bcb51b3956113df17da626a09962",
+    "current": "4ab03017f7d987032f47c46db9a0d96f9fba372f805ced21103177f390528ec9"
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/id/02_EXO/EXO_018.tsv",
+    "old": "e6da8cc4329d9ba915f7c28d4d5ac364300ff67f7efb10a0f7815b2a6309cf95",
+    "current": "f84f325301be4538aff241d2e9cdc7932952309b32932e90d8dce3f28d632a42"
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/id/02_EXO/EXO_032_1.tsv",
+    "old": "054b02f577a7907677f1af5e4342df73fb2b473af214d8fd4065e560bb1a306e",
+    "current": "4e0275ce9fb5999e7779ba418042b4f0c245361e73630638e36ea23e3952f4d3"
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/id/02_EXO/EXO_034_1.tsv",
+    "old": "02797f767afd22d7a053a0fb7fff4ab4677b45a6c8d34fa6beb8efca8f9d66f0",
+    "current": "5eae717249d01440a4dcca2c3a9f521abc6fbd31384199b617756599a6a22685"
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/id/02_EXO/EXO_035_1.tsv",
+    "old": "9818a0b8201ebdaeddb650adfa33d057966bb167c8a707b59df453af8baaf183",
+    "current": "6ce18e5a3c92369d2186cb14f949e38020402a08e633a3ac263d24e1cd8c7d7f"
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/id/03_LEV/LEV_021.tsv",
+    "old": "16a5584dd84220d37f80d7b0adbfaf66a1af886171e47b04fe3b6c4fbe41bf7e",
+    "current": "d32176d048ddb969797e35a3571fc63eed8e9cd0615f55ba3d29ebb57a6f6484"
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/id/05_DEU/DEU_032_1.tsv",
+    "old": "077ece1187d343f60c855938b1ee583fe09df043fab158d5ee992bce0da6d609",
+    "current": "87840bdf285c28387ec85484055d32b189c17745aa2e9151ce77cf0a1feed4be"
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/id/05_DEU/DEU_033.tsv",
+    "old": "57dc1e01005a320a2a5e91d5ddb4fe928b972f05078e466b9f1b75ba6c35af0a",
+    "current": "d4d175597a7e960b24cf4ab3fe3ab72ead727233c07c95f72d13785e8aafa4d5"
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/id/07_JDG/JDG_003_1.tsv",
+    "old": "39d385b01a3c5e8f5027ec56a92cc574543fe5358af8e0ab5def8efa1cf60cd4",
+    "current": "b9f40326f7603b2c110f5d4d02f67b41b94f1334b84bb0bab3f7484c3d6a93d7"
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/id/07_JDG/JDG_019.tsv",
+    "old": "6b1862096479e43ecb020bfe625e43dc83f7e3dc5938ee1e39210e2b7a391ec1",
+    "current": "a93b7ea9807b58fc4b462799e421cf4cb4384c971fdfabbd07d16438318c38e6"
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/id/09_1SA/1SA_006.tsv",
+    "old": "63c730005c9c426cb1aeb48dd62d9bc32d53cd926239efc1e2a840da91ed6614",
+    "current": "3895358d3a69ed3f7e1cf114cff443f3d25bdbe52b05cc5a601bb9fc983e1028"
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/id/09_1SA/1SA_021.tsv",
+    "old": "7bd6fdfe9c1aad17cd13a9283967b3f20b96ac5e862a1b974f4f957a979e09ad",
+    "current": "e9a0c6a52d7534a8e0f0c99ee67660dd5953dcee2f64778c281f73cb6f2459a1"
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/id/10_2SA/2SA_001.tsv",
+    "old": "21e628c973802af238c7b56941eb81eddd1f378b74cf614d5610ecab641300e7",
+    "current": "21db57a126ed5aca0f4ad853c1c9aa96e65f340c0eab7a1852db09a11cca2166"
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/id/10_2SA/2SA_013_2.tsv",
+    "old": "ef52f5a4d67d74559a43f35ccde8c6460a67c8d9c6fe998a28ccef8316267af9",
+    "current": "08489c9d4c6a5904df5d35b64967dcc7709ece6079652db37f513b9ce5dd93f9"
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/id/11_1KI/1KI_006_1.tsv",
+    "old": "2aeb4c86448f547b5d7a34bc3385df9bb36fc78b30b6509eae6b156d169ce933",
+    "current": "9906cf77c015cef02633b4773270a96c61b910a03a6bca27d8805abc06348830"
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/id/12_2KI/2KI_007.tsv",
+    "old": "4d7d07b0af4ba077faec7674fa6baf7e9bc813140457a68f6ba215083ace51bb",
+    "current": "f13cd8a89881d184988c798f99497590c9d9d5b38ca04f21630e6afaa2ca8b67"
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/id/12_2KI/2KI_011.tsv",
+    "old": "06b7c7b8a5391c554815f9d52fca108695af24ac23ea5356e1c05ef72bbb6faa",
+    "current": "c62c86698e396a5fbd8649a6ce290c572973b51034488d0556de6e218b01c94f"
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/id/12_2KI/2KI_017_1.tsv",
+    "old": "24bdb51d0aef9c8dd6cec75b9cc19a86336fed5e3a69cc8abf64e92e3be28bbf",
+    "current": "7b42578c9ec3ebc8ac278cebd3e79ef3eb47f5cafdad52ac61b9f87206c68250"
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/id/12_2KI/2KI_023_1.tsv",
+    "old": "0c6d09be2de7feea574a3c6c8150f588e01b41bf834d8a9a33c1a1268e4751bb",
+    "current": "7937fc506e7dd7a7aa970442674a659c561478adc7d063aa20182cca963f0f43"
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/id/14_2CH/2CH_012.tsv",
+    "old": "8a4b27f8ee384834be914097b15a7dd257ed89a11ce13f46ea93a43c297ffe6c",
+    "current": "affc6abd40da210d8f4455b7229f2a683ba655a6e0b0fd96df79042cab7d1c06"
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/id/14_2CH/2CH_023.tsv",
+    "old": "70e2a6a245cd0a69dd38287fb4c31a76a90ae5b1bcfc4d2eaba3eccaf657f3bf",
+    "current": "fe0d74789e47beab0d412d88dd540afcf70da22743d2f3f53901ccb68b12c2f9"
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/id/14_2CH/2CH_030.tsv",
+    "old": "a77b791900e5760231c4ef3fb20368acaa2544ec39ce4b6ebbdbef40dd9caade",
+    "current": "a9bcb5f14c85a672024dfce6240b8557888c6cdf2598b6e7f1c960b1f622c229"
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/id/14_2CH/2CH_032_1.tsv",
+    "old": "6f4dc8ad712c06e687a1a3a6765e6f74026d9d334e1b87676cc8aa710275ff81",
+    "current": "929458783e6fa681affa85b91834fee9a0c9cc6838346cda63c389a984125d8d"
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/id/15_EZR/EZR_005.tsv",
+    "old": "2d161fd717a3f9e529a9bd354dd9ac4523cb7e564e2a6f314f578ecf68133b03",
+    "current": "4da6ed8f3968e064e8768fceb99f495b41645c4e28414510f55140efb358e33f"
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/id/15_EZR/EZR_006.tsv",
+    "old": "619641284809b247f4eb70e3f5988a74af783c1c3c14c6859f9df606d7e25edc",
+    "current": "d51fb1281b0fa17321bc805ecc8056c600118c9f5325b83488ec9cf19d47f7b6"
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/id/17_EST/EST_001.tsv",
+    "old": "169ad21c1fc2a0ef4859cd564358635ff79455c55763879bbadab5a8707ba1fc",
+    "current": "dd51992f2ae93d01479d15d51e6f850d2dae421be72d59dfa9d4d734f532eb09"
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/id/18_JOB/JOB_015_1.tsv",
+    "old": "0b145f2f06824d33c32d503e9914cfcddb6ed17b1351a04f9144ef784b5a8cba",
+    "current": "ed9afb6bb95a129ad0d91b3bae4cef9ceeeaf8ac25d916938412e920a7368e88"
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/id/18_JOB/JOB_024.tsv",
+    "old": "7427ca4610cb32aac5904cbd516bbe3e8151d3e298bd8ff3afbad6656eaa9761",
+    "current": "c91bee03a8cae485ee5f8985f0c1eda2cc587f21e5a86d62f98270c80e599514"
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/id/18_JOB/JOB_038_2.tsv",
+    "old": "ffeaac029a2ce81a351c54f066c101109f9ee39a5ada072689737f457bd24815",
+    "current": "0004e3e546d2a0c74be46bea35a6e723fffbe8bb9e97fbd1970acbfe49c3b5e9"
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/id/19_PSA/PSA_010.tsv",
+    "old": "31974222a6c1a2ce8337db3f89376788b139244650e01da84185761532bee586",
+    "current": "b653cc9eb098925f0d692695f00b1ccfcae217d19a4e9f3b5411a0c8b6083a25"
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/id/19_PSA/PSA_077.tsv",
+    "old": "cd7a1dcc016c5e620ac9d13e6f3463650401edecfb5873230a61bfb69ba7728b",
+    "current": "1d9514f931ec0a7967564c94c2b2cab90a5df5e05fcd0afb9657a951e771602b"
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/id/19_PSA/PSA_090.tsv",
+    "old": "7b85bd99ea36e20890a211994f595962ba0359bc86d2717fdebc6d9ccf7da3df",
+    "current": "baeb0481289550c01cc9721175f24c4434fd6ecc521cee8cbdeea8d5fbc1a353"
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/id/19_PSA/PSA_139.tsv",
+    "old": "89fee5bb2a64d0ad3eb2df7f96f6f6b8a42fb931d39d62f625de4ffbf79ac384",
+    "current": "68ca37a6dae25c273c308ccf2cdfb64109e5f0efcc6355719b1b5d01ffa3300f"
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/id/20_PRO/PRO_012.tsv",
+    "old": "4fe407ee6305577f35ba66655b30aed35c8c8eca3dca2d1d3aa6a2f0e3f2d134",
+    "current": "104d3f773580f7142d25d9e60b05c7e98596dac9848b4106016defe08b6f8de1"
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/id/20_PRO/PRO_019.tsv",
+    "old": "7ba73882e25f9fc872b603e64c05db5466305f74cdb66aa41b9c1006e34103ed",
+    "current": "ccb8c5ca571e9361e05d0289be7250239be82901e6dfa398196f3b948f56fe1a"
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/id/20_PRO/PRO_021_1.tsv",
+    "old": "1f213e94bb0fe8b42a461b60df87582dc807b08ffa8a327272cdd11f9553583d",
+    "current": "93ff4dbb4a2c5650c5fbae22115c3a0463d88dfcf6ac2cf8c9452cee51d83887"
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/id/23_ISA/ISA_001_1.tsv",
+    "old": "b7d345317a2e810a4badf28a1be72cde4892f789660c8ef37a4c6099af1fd5d1",
+    "current": "e8ff36eb846cef18d14df2ec5a048a61f146346fe472476fd8a89bfe42dbc02b"
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/id/23_ISA/ISA_005.tsv",
+    "old": "c80652e434b3d922852562455287531c71dca339e034126a8db2f21bfc995850",
+    "current": "213bbefa07672b1bd89c920cd146a260c06cc96bdd0919ef9a1aa12c77b91b05"
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/id/23_ISA/ISA_010_1.tsv",
+    "old": "6ea1046c8a01197ede5c4894ab0e1efadaa5e9d8429b766fb95bda96724eeb1d",
+    "current": "d02a31bd246bc2f5f864ae9c8dd247abc5b882141bb2580a0e2a22a649aebaa6"
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/id/23_ISA/ISA_012.tsv",
+    "old": "7b12aa47bd9d9a56766a21d205e1324d58ad4af8ba1d0e56907e5a35d06dbb28",
+    "current": "346f6a2812313daec12cfd8c1e5edfb3128cc1d497712087533fa10b2e3cc7b8"
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/id/23_ISA/ISA_017.tsv",
+    "old": "03a3783a863ba60adaa29bf89b163ec7ee479a689f69a56b78080879075251e2",
+    "current": "c97a1d7ec4301fcf3108ce49374a76432b32baf32bd82e63e7590d56b806e22e"
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/id/23_ISA/ISA_029.tsv",
+    "old": "d2c966acb5fb0dcd5379272f8a90dd4a811aba2f36af96052626f30f1ff1e683",
+    "current": "a4b347f2e8859e0a94fe21d6cbee9c71627e7edc7295e822c122793c0746b5d9"
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/id/23_ISA/ISA_030_1.tsv",
+    "old": "f8ec9701bf95762df835e9899e301d8d74e6346b23e6632ac14265b54791087b",
+    "current": "06449647cf1048be9fcb2fa63f7b4b43bf5d22e93db9711ebb762c632cc43381"
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/id/23_ISA/ISA_031.tsv",
+    "old": "0308bd030d6e063e0b75b3b903977ed799d5d345fddae49883808f7213f21681",
+    "current": "2124c57a42cd6f9301e1418831d1dd0f4b4fdaeca2cb9e23ac2948978df56e2e"
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/id/23_ISA/ISA_037_1.tsv",
+    "old": "3e3ad3a88476547a7ff700b0c6b8737ae44788541175743841a95314ee53dd2d",
+    "current": "df120f2c753e3b40a5f537d4bd5493ddfbbb69ebe97d71e8fe45518fa6f6408b"
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/id/23_ISA/ISA_041.tsv",
+    "old": "83f2118b0634adfb61f36d71124ff3cf7c44a02268779de0158783dc797b7012",
+    "current": "8636941bc8c1ce3d35bb7b5fe3f5b49a1b52175721f6329fcb7a816eed2749bc"
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/id/23_ISA/ISA_043.tsv",
+    "old": "19278078204c502072799b31765bd1e44111d03a2767fb4d477ff34534ddbd30",
+    "current": "76cf3556781db256c2b241116698e694cb3a1250eb7177befd3192bf1a7b77c4"
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/id/23_ISA/ISA_045.tsv",
+    "old": "e11b81ab8a5fa980ae425cb4651a76508d5b169190f223936f696778e22a08b6",
+    "current": "8d045677086fdd86eef9b1d6518699f2635cd0f7112feac01d66bb28368a32ce"
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/id/23_ISA/ISA_047.tsv",
+    "old": "32b7f5c9abf37e341dc4a009616675b03396967f7de304775cac788baf7954a6",
+    "current": "d749f2e4fe2fc469369318a1b348291e51f7004976898432367153b3016f0c6e"
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/id/23_ISA/ISA_048.tsv",
+    "old": "86aef142f0763c2413c67fa57adc6b0d33cce7079491d56cabc885529cad1c4f",
+    "current": "a679f11ece95da27350d5e91acbc02596581fc5b65f53eaec809ae92a2199114"
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/id/23_ISA/ISA_049.tsv",
+    "old": "52ea01e0460841777a4a37887cf50be44ede3dafa01193f3a504b4edf91ec61e",
+    "current": "62e88bcce7879fc749108fd8d2d6a3f88c5c1775b81bad6a2939e124b3194685"
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/id/23_ISA/ISA_054.tsv",
+    "old": "0fd7f1ef994c28dc68ed138dd623f0097669c4aea3f5fd84e74b3d72fd4a7ad7",
+    "current": "81a6f00592c15cbcff1b911388e41dd671fccd1d5761f171422ac4d474628dfc"
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/id/23_ISA/ISA_055.tsv",
+    "old": "a9d43d6f7b3170e5ef50de3f86baa1cb1303e0a8e5c0fa99225319c02191b812",
+    "current": "85beb63dd66ed3808117b63ef02c43b943fc2a72bb7b850f88b9302af301786a"
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/id/23_ISA/ISA_060.tsv",
+    "old": "77a37edc4a94927cca0f655021388ec04d7eab2c9286ddc8df336f7d11b7dc52",
+    "current": "fd10deec5e45fbd5b55ebcefb01e6dde6cad85d6aea5bdd7203e5e9b65b7f4cd"
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/id/23_ISA/ISA_066.tsv",
+    "old": "d35bd6551758d54ee04cf13e8deaa88587a7b00bb04b8e15197bad73f385e97b",
+    "current": "83524b12923f88d20b73a1b2ec1c8d2f681feee7e168f3a08da5fcf6bc672f73"
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/id/24_JER/JER_006.tsv",
+    "old": "813908be5f445b7dfa580849a5080b5d80a19a0d911feb5a477cdeaeef08afc9",
+    "current": "bf1a82da8112bbb757d81dc839cb1c9faa91351bfd7bd12cadffc8367111bb50"
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/id/24_JER/JER_010.tsv",
+    "old": "5f1b31d029455143586a338cd824a8e121f8a1ecb9f1091173fcba8226dc8db5",
+    "current": "9cf924aa2ac558fb3891e35319c93f622e10429dd3977024cc7b82c52270e149"
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/id/24_JER/JER_041.tsv",
+    "old": "7b133268b0c2d873b67f34cf37031337998a83602d460d324323af61339d0aaa",
+    "current": "5ab99174d1e1d6c11c8ed2f3bce838d13bae8f92c1ddb62776dcf82e2ccf8432"
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/id/24_JER/JER_051_1.tsv",
+    "old": "f63495da3618045fbe96ddcb7d93979eebdf05c977a5cfda0bf664326e64fd9d",
+    "current": "95988aa3a8e00aba9121657eded5bca6b0826943b3ff0abc0c9f0ce6ddc22135"
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/id/25_LAM/LAM_002.tsv",
+    "old": "95e615e475f3ffb3369d9d9f28fb74bb0b8c607ab7ed6def609a2e3376340f83",
+    "current": "78db0fe52090d7c41c3fbbd484f5c1543902a002536b902a6472e944b1a1b320"
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/id/25_LAM/LAM_003_1.tsv",
+    "old": "4edeca0efce922c50cc35052e484e2a7c0232d854bfa3d55844d97313313852b",
+    "current": "8492c3709b36b66e5361c59d737dc9b2e71d53b8bb58c53d7a161a40dc0eb8cd"
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/id/25_LAM/LAM_004.tsv",
+    "old": "fb089698f0e9621db36662e150508e9cf0b6080c9ec387abc26edd8c8211d31d",
+    "current": "f0c2d41cdb071a4ff0e0882d4438de27d12a86bd684193d0db6c3eabc3fb66e1"
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/id/26_EZK/EZK_007.tsv",
+    "old": "0e3873d90a3c0ec3dcef5f7d3605815f98474388d43d0661ade93ee9a423eaa2",
+    "current": "17d36033448a6179e7afd2649d12746aa1e312f7bdd301178d2e57d9783a3994"
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/id/26_EZK/EZK_035.tsv",
+    "old": "548e7e78e2aec51fc108bdf4f04eaf2f1949acd7b0e2fd40e6244b7b6f5772d4",
+    "current": "431c5d6868dd94d6e302481817e715afec553e51ac51294151a227e04f9449a1"
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/id/26_EZK/EZK_040_1.tsv",
+    "old": "0f8b8350157322d58e9e876383be08b96cc2f8731873691b664e5c90a3701296",
+    "current": "f1b795ba4512f07333233f44c7bf66ff0bd9edc114a5f3c16c15a5e3d44f0f5e"
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/id/29_JOL/JOL_001.tsv",
+    "old": "4f468a2bdb182b61fd89511377a85f6c8359c5e8a41df6b1377114b36ad3b7b3",
+    "current": "593cdadc68c8edaab7559b9718e233ea25ea60631546dfd24ee19b4c31524a61"
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/id/30_AMO/AMO_007.tsv",
+    "old": "8aa5fc2165ea4a6f55e34d72568286ff79fc5ee02d86037fb206457dffdf1300",
+    "current": "25acf3c7a64040a2c4cd352a0a91d6fc1caf2fd6c245cec22ec92370cda8aca0"
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/id/34_NAM/NAM_002.tsv",
+    "old": "80d59d93b1e2658a85f4898b6c66570fb302796ddf17d4eaf5f87002f9486547",
+    "current": "fcd32d7db0882b1e4a4b5ee83cb22df7011597bd10fef9bf2a941f887401a9e1"
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/id/37_HAG/HAG_002.tsv",
+    "old": "64103235737f66f92a913ea947d4e7381bc56febe5edfba47868497c26b4921c",
+    "current": "45828b61bb57424990d819d20066548330c5a2f6ca2e4721093ea3d13066465f"
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/id/38_ZEC/ZEC_006.tsv",
+    "old": "c31ed9f027854bcc740436d6dfab134cae26ac9dae9f764368b8b2c600e5c6b4",
+    "current": "43dba7f9147a5b5270bc9566e0b3d38bfeec6970a1cadd6c0a6dec9a67c451fa"
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/id/45_ROM/ROM_009_1.tsv",
+    "old": "d599f2ce7b7a6ad50643e68d6c3a64049fa9bc5e9a5cf8d859e2c7a5532060c4",
+    "current": "d4e04d0a49a7341b1ff42243a374f374c3c3b32012a4298f54dd3fd506f4e09c"
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/id/65_JUD/JUD_001.tsv",
+    "old": "ec626af01d88706d0003a3c7b26a90a3e80334b6c00f39d8e50abc8d59cf64ff",
+    "current": "7ad2c83ba209c1704c47fc23b0084bbe1073879a62bf64b6caef97b779a17fcc"
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/vi/01_GEN/GEN_016.tsv",
+    "old": "ae29dc8d5f3631e9530882484395e3d0abd7fbdbe7dc34bc1afcbbb258e9d99d",
+    "current": "81f0f235542a540c8272082b57ba7f8bf46aeda94a1c9259c72df9307043396c"
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/vi/01_GEN/GEN_020.tsv",
+    "old": "80b3aa24adbd6f466cdd1eec3cdab08bb53c082260ce909113a7b0d157a34ffd",
+    "current": "25c09b8252324ba41517273e80ddded45ac78c9f9ac1043514de1585fd67472c"
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/vi/01_GEN/GEN_049_1.tsv",
+    "old": "44e86d699a5abfe412cc9cc9f706558bfea32c819ff0c43bd85ce0ff7b1c1c6b",
+    "current": "5a5b69e9d8c2b2a9922841e278a6b30edef5882cb8532d476b33a5d47b0c7e07"
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/vi/02_EXO/EXO_016_1.tsv",
+    "old": "6d3a0dba43aad070f233ded8f9c0e0c7273869f76f57a9a94591ee3ddefc8028",
+    "current": "76681fbb1bc5f63225d9c8e5ab088651897b5d02d2915e74010bb52c47054df6"
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/vi/02_EXO/EXO_018.tsv",
+    "old": "1735bec0be951e6d1a6f352065e25c17b7b763c211b3a6df5c330e124d858cd9",
+    "current": "73656ee3d54ca601a70d61825b0161a75d5e97947425dbf1e4a30d91b26f812c"
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/vi/02_EXO/EXO_025_1.tsv",
+    "old": "8f309354f38459f896ef24198be46ab915958e12d5edeaa8054e3467d5e138dc",
+    "current": "399fe280d0a6c358c05957d7870b3186e7088cfc06d20692c53816689847840e"
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/vi/02_EXO/EXO_034_1.tsv",
+    "old": "3382fd422b5a117ae3128cec109a3d568ee87415252ef21fc7469843208bde34",
+    "current": "c94d03316cc07afe950f9321ad8fb29db21c9e1a6397fa95c13d606b1416d75a"
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/vi/02_EXO/EXO_035_1.tsv",
+    "old": "127b083c136cac8cde8e9fa059ecd2acaca051cd6b4333e492f0f18379c9dc99",
+    "current": "ced9f606f24853d43f32178cee8f0178908fb26f32c526d06a276bff2f5f612b"
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/vi/03_LEV/LEV_011_1.tsv",
+    "old": "667b6874ab3f2399f1812597188008c08684306709546ccb57b02881866febe6",
+    "current": "4a375a2be18df34872a7e5309161c2e077d5ee03b2924ba9407a57042bde503d"
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/vi/05_DEU/DEU_032_1.tsv",
+    "old": "bed75fd3df80194654005c889c7b2a34b6058a1743f555eae4e41e8391a998a7",
+    "current": "ed0ec3665aef33b7d03cd2ea2b437f8b415a33d931626d74e5efc923e4f7d037"
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/vi/05_DEU/DEU_033.tsv",
+    "old": "7d987b84fc078d3fa8de4550f812f6314f3cfb0f0709a8ba5580cf0f5fb6dc4b",
+    "current": "0c03f6bae72a608ca16b40af2d2ddad93d723e5ad61a1eb7c5e9dc39a5e62c65"
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/vi/07_JDG/JDG_003_1.tsv",
+    "old": "f51dd5e15c277d9fded27f2ce092a78cbb0d96d258f1856a026095b49f76b1e2",
+    "current": "85626ddb1d96e9dfe65324c751c6886ecddd2b8c67f14b7c409d734512a2918f"
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/vi/07_JDG/JDG_019.tsv",
+    "old": "fdbc4f82528a84e7908ce18e245d880a137b5f49a6771a3c8c968a4d15f299da",
+    "current": "dfaf85788c72f09f6005b64d3cf1ca81e95f8d4c5e900cadf254da070ed22c2b"
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/vi/09_1SA/1SA_006.tsv",
+    "old": "57292e1273557c702641616cd5dd5a635a492c443396517c35fb7f06d01a8468",
+    "current": "07685311718daae5caad0227c8f92e8af34fb7b0b9d45da49c04be52a63d1e8f"
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/vi/09_1SA/1SA_021.tsv",
+    "old": "0eb579023f662abc8db1fa1d512c2cd647fe8946178711ce7b0cb379d091680d",
+    "current": "5dcd5653ba773146990ed8f2838b62b66a4c22b5c8c29779046ead9506f6213d"
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/vi/10_2SA/2SA_001.tsv",
+    "old": "3ba271233d7cf54bc8cec8a00f985074ddd748d962b5a66eb383425333df6868",
+    "current": "ec532a281bd2af752294edf43287f571e1dbad16e4030d57ab473a9350fa1262"
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/vi/11_1KI/1KI_006_1.tsv",
+    "old": "346a408a065432b9ad7e32fea25d21a17ffe33a5cba5f7d84b54877402315f09",
+    "current": "4c3c4e5faf66c37bce2bb31ecc795d6f1e3545a08b2a6adf05402ff0886d41ca"
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/vi/12_2KI/2KI_011.tsv",
+    "old": "534f962d11cc3635933b4dbc4263df5b0fab5a1bfdfbcf949a30ae45adf90381",
+    "current": "4e32583ec970aa38471857b4c24022f53f8ae8babea37957068855502a12a2e2"
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/vi/12_2KI/2KI_017_1.tsv",
+    "old": "d8057788368323ebb9010ebad28a31250fa030490b981bd75668574923b103e5",
+    "current": "b69f2d344ca4625829536509bf2ffbc37db17852d051e2bc0826bbd947b3586d"
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/vi/12_2KI/2KI_023_1.tsv",
+    "old": "8bf69360543e1a426805ca339599cb613cec0f9e3e0e7e33c2468f9f6ae06be3",
+    "current": "4c9c5b1f019c70219dfe8f2dbf6fcd2cfa625b0fa0a4d61e715d080e4a4cd3a3"
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/vi/14_2CH/2CH_012.tsv",
+    "old": "67a6dfc3d3ceabdefc585f7ec93c8ad76d1419d530b5cb900812f04fd6510943",
+    "current": "a5241989a6d5a3a6c41724f6c47a5908d9a5b4494a210e78e88d368a3a575ecd"
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/vi/14_2CH/2CH_030.tsv",
+    "old": "d69f14951e0cf595c49a2cb0204675876afe2ffc7414bab29b74572b1ee3c527",
+    "current": "5c404034d5c50da4bcdc65b96f501e60822a89e28c729937fb96696d94d55185"
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/vi/15_EZR/EZR_005.tsv",
+    "old": "e8faccd6f645165973c91584b457226f655840c236ec84c81ec7533bb569317f",
+    "current": "f9631956fb1e4a945234aba0b5ce1d29bcdd2e4787b39e0395339c4939cb5e5b"
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/vi/15_EZR/EZR_006.tsv",
+    "old": "f4c3774a954ed9f8c23a36c6cf80362f973972f1c07bde740281094e1e80fe9a",
+    "current": "676c45e7aa831e94de2b81f4a078c3251f79181d97c2a3f5684acca26697c450"
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/vi/15_EZR/EZR_007.tsv",
+    "old": "8eb955e219f57fafb412d87584164d6284dcd57a98efdaf00303dbb8923483ae",
+    "current": "d6f529ef0a590e2a10e407c78e39f33df5df99ced3b15c9de2973d89c1722d1b"
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/vi/17_EST/EST_001.tsv",
+    "old": "4a2deedd1fc03437d5a4c0abb36abf91adddfece201bc0acea14c94d7f9b96e0",
+    "current": "c799d73fd96ddac07331fc2c89e27dccf3466f1e9609e13edc9fcd60f3a88acb"
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/vi/18_JOB/JOB_015_1.tsv",
+    "old": "0d19ed3c8dee1edaf1fe9e99707d2370a0517f10b28bb32e83682f347e2da0e2",
+    "current": "6217d1fe6ad9537f5067c08768480f037e51032bd1f43ebf702041921a6be5a1"
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/vi/18_JOB/JOB_024.tsv",
+    "old": "817b0376fa7948dbdd9a7231308e8e8553a46806b165f2b831e6b3d3b3ac9ec2",
+    "current": "c34080b7d59c5a9c73948a52b92f9d514e98984f8112243e478c9e8212e09e0d"
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/vi/18_JOB/JOB_038_2.tsv",
+    "old": "f4637c5a61d394fbf796b7fee7b36876d6b504d2e4732555a07eb686ab5ae9fc",
+    "current": "a628719d1f4fef6963c7b36dc0fa26a288da5ca1c397fe3b00e4036a3c51244f"
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/vi/19_PSA/PSA_010.tsv",
+    "old": "0f6a79e4db7af04ca50518db97454f05ec234e08b6425ab821bcd26769824678",
+    "current": "142a74431b58e51a11e2b5c56408bc66c306c8110ccbae2deb81c17af2c17262"
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/vi/19_PSA/PSA_049.tsv",
+    "old": "22aa1a98f25029c2ef33e75b032231172ae68542519e3cd28024cbf962bb5db4",
+    "current": "56e9845725897192b84c5190d5d46b3fb524fec5a37fbddf4d80e93dbf4a16bb"
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/vi/19_PSA/PSA_077.tsv",
+    "old": "96cba9fe51d6441d8b76a6520da6f31f437d547c285020c7f1e4485de7c35d17",
+    "current": "a090c0c79c9c45fd44496387e2aa51417ac314e5aab227e121cf7e1aa28cf371"
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/vi/19_PSA/PSA_139.tsv",
+    "old": "c78a36b2c36223e4159d12ab163263247f7c6240358683cc2d2d332a2bf8d22b",
+    "current": "ca7e98b9ed26716d8397cbd0be5e9b514c6b490965467f4b2991b159631c9a87"
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/vi/20_PRO/PRO_019.tsv",
+    "old": "cb39a133f2d9971ca42d8f1f4ab29a5b851de2f609d5d48b5d74ed7c2d2b801f",
+    "current": "2873267ca0e526d3a019e83f9cd82c68956bad671abfc9efc9a5cda70250e322"
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/vi/20_PRO/PRO_021_1.tsv",
+    "old": "6d0077603dd76d22b609e3dc5e6e7a46af643f04db7003996c9606c571961840",
+    "current": "798edf829e1b68f4ef191f4c6e59af43704dbb258faad07366fe92029cd7b5b2"
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/vi/22_SNG/SNG_006.tsv",
+    "old": "d3ecc5bd717a2ae9b3264e5140f045daeac2d9423e5a132b93f6ff5086a9cf52",
+    "current": "2b2fe470ae6a5d9c6e0cb3af16711dfb9bd1b728ba5c2a715dd56ffc0647f28f"
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/vi/23_ISA/ISA_023.tsv",
+    "old": "3440675e22b5f6bcbaf0b83aabb0902cd5935fad68d49c9949fe2516c2300c50",
+    "current": "212b37225591320fd42a6612377b48d18f39a775939cb767cdaa42c01e6e6285"
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/vi/24_JER/JER_006.tsv",
+    "old": "3ab97eb98d2ff0078b753e2a935f7cb5818425cf9a68ae5e75ce39c19e33aed7",
+    "current": "7b2cb006f983f456f8e0554ebd55eca6bd22733e2bd7ea72ed7a5af903f27ccd"
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/vi/24_JER/JER_014.tsv",
+    "old": "f8a556017492dedeb619aa7e2ecb137342957d2963a9a24804ace544baa05600",
+    "current": "be76699d6018ff3d1bc6e91b5d662691fb69cc048e93e99e5d12eea8aef8e187"
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/vi/24_JER/JER_034.tsv",
+    "old": "6d07a3ec78ca92a4e17ef794600de35bf1f056015e27a76b02b23f460b1ffe33",
+    "current": "6440daa7fc8b5c6dcc722d229a63e188683b79146397a465e0e8d58fa82bae6c"
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/vi/24_JER/JER_051_1.tsv",
+    "old": "39004ad67abd5eb6b2532a22e0deeee9e1b96ab36e1d59a8a0789032dffc5a15",
+    "current": "29bf1ac9b10aab3420e03b2ff9437b5a01f96e25c06dbaee35139dea26422568"
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/vi/25_LAM/LAM_003_1.tsv",
+    "old": "402cebee09e056f05606c1476f8d0260a84b5f749e50598143bd353895d81db3",
+    "current": "391d02f10567ea40f9244125849d7403302a9b62982e9f6264aa511b50cddd1b"
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/vi/26_EZK/EZK_001.tsv",
+    "old": "ba0c6636f482e6de14bec94de824461a6c0d211cf947f4962e54216f984ffd55",
+    "current": "cf7317730c4a15eb1d3707319795af2a44efcd5f1e3a8dde8bd60c6ca2b5aafc"
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/vi/26_EZK/EZK_007.tsv",
+    "old": "0380b99a2a748353e10fb01259d9e3bf447bea44b8b74cbfbff2b8aaf168d471",
+    "current": "1716f301d04bfdba117429b09247dc51212ca91fc738a87dfbb43619bda0acff"
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/vi/26_EZK/EZK_011.tsv",
+    "old": "4a47ebbe5c0854ee7a139942cd5d8448f03e5ffe7c9d2b03044f54176b490b67",
+    "current": "8eedfafc61ba43f59fbfb6e8314db97ea1fd5a92e8a851bf780f1527afac5180"
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/vi/26_EZK/EZK_013.tsv",
+    "old": "276a0e7ceec8aead3c74ef9c5110b558d38a8522ba779cf5b3197ba41e57ead4",
+    "current": "783a2589710f7a551d5cdb08b12e9999392a35dc5084a405d69b0393b4ce3535"
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/vi/26_EZK/EZK_040_1.tsv",
+    "old": "e6fcc4e3ac4d0c106cd148ad565186bc7b7f106911e471cbf2f034dc27d8e8aa",
+    "current": "3c6c0b52bf7be9e5c8bc2bdbed1a3722561f25bd4567b74a20decdb45c625528"
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/vi/29_JOL/JOL_001.tsv",
+    "old": "c021e1ba10598cb31ed77b8638a1f7ec40d5a793632596255912b8d8bea8bd07",
+    "current": "f2809a920fe5be160640009d292c41f3bbe07dd13ff0af744a5ee0443cc29c9f"
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/vi/30_AMO/AMO_007.tsv",
+    "old": "769cecceaada8cd37de4d98159d47d202763fae056dd6aa0998a386c6b6b06f2",
+    "current": "6e20b25b94f2a0ba027fdf5e522547ad20fa5770ec1f01583c69fc1ea1a14467"
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/vi/33_MIC/MIC_002.tsv",
+    "old": "7d1b77dc44c0ec43d4b797b51e8a5cb87bb3ca478a7e9c8699c060cad869fbbd",
+    "current": "146931b766b88140eb6f6a1bef35485713cdb7d391d867c1735743c6025b7b9e"
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/vi/37_HAG/HAG_002.tsv",
+    "old": "ea3f9bc16553f19295e2b2334f10973e8b8fad5687319c9901a63ebadde401e1",
+    "current": "6b30e3a54dede98ce849be9faaf7552d8ebde33414db375176d8c79d51e671d2"
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/vi/38_ZEC/ZEC_006.tsv",
+    "old": "b3113ffda7e3001de2ff9378747a6f0b4ffecbcc231be1cde838b935e30f04f1",
+    "current": "f3d89aa57af0bb08429a464b5913b5936b9a618783d2e8dfa9ae76ec3389e2fb"
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/vi/45_ROM/ROM_009_1.tsv",
+    "old": "3de15efd8936e11a29f813654f291cdd291d3c481f10d826105bfca56e0dc584",
+    "current": "1c8cf6c4c663efa072a906274491158d74351686f315a8468e395d9dd86ad4fc"
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/vi/65_JUD/JUD_001.tsv",
+    "old": "aec9f1ffc406b92124106efdd29c120af6f2aef5f0931192826acf797060e8eb",
+    "current": "da430aecf555d77710402363d2b495690117d0a8e17445a92648eff034916f46"
+  }
+]

@@ -1,0 +1,32 @@
+[
+  {
+    "path": "Tools/LiteralGen/outputs/ru/09_1SA/1SA_019.tsv",
+    "verse": 9,
+    "old_row": "9\tИ злой дух Господа был на Сауле, а он сидел в своём доме, и его копьё в его руке, а Давид играл рукой.\tНазван Господь, а не общее Бог; струны здесь отдельно не названы.",
+    "new_row": "9\tИ злой дух Господа был на Сауле, а он сидел в своём доме, и его копьё в его руке, а Давид играл рукой.\tНазван Господь, а не Бог; струны здесь отдельно не названы."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/09_1SA/1SA_019.tsv",
+    "verse": 10,
+    "old_row": "10\tИ Саул искал поразить Давида копьём к стене; и тот ускользнул от Саула, и Саул ударил копьём в стену. Давид же убежал и спасся в ту ночь.\tУдар копьём в стену описан как действие человека, а не самого копья.",
+    "new_row": "10\tИ Саул искал пригвоздить Давида копьём к стене; и тот ускользнул от Саула, и Саул ударил копьём в стену. Давид же убежал и спасся в ту ночь.\tУдар копьём в стену описан как действие человека, а не самого копья."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/09_1SA/1SA_019.tsv",
+    "verse": 19,
+    "old_row": "19\tИ было сообщено Саулу, говоря: «Вот, Давид в Навафе в Раме».\tСообщение передано пассивно, без названных сообщающих.",
+    "new_row": "19\tИ Саулу было сообщено: «Вот, Давид в Навафе в Раме».\tСообщение передано пассивно, без названных сообщающих."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/09_1SA/1SA_019.tsv",
+    "verse": 20,
+    "old_row": "20\tUnd Saul sandte Boten, David zu holen; und man sah die Schar der Propheten weissagen, und Samuel stand als Aufgestellter über ihnen. Und der Geist Gottes war auf den Boten Sauls, und auch sie weissagten.\tDas Sehen steht im Hebräischen in der Einzahl; Samuel wird als stehend beschrieben.",
+    "new_row": "20\tUnd Saul sandte Boten, David zu holen; und man sah die Schar der Propheten weissagen, und Samuel stand als Vorsteher über ihnen. Und der Geist Gottes war auf den Boten Sauls, und auch sie weissagten.\tDas Sehen steht im Hebräischen in der Einzahl; Samuel wird als stehend beschrieben."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/09_1SA/1SA_019.tsv",
+    "verse": 20,
+    "old_row": "20\tИ Саул послал вестников взять Давида; и увидел некто сонм пророков пророчествующих, и Самуил стоял, поставленный над ними. И Дух Божий был на вестниках Саула, и они также пророчествовали.\tГлагол видения стоит в единственном числе; Самуил прямо описан как стоящий над пророками.",
+    "new_row": "20\tИ Саул послал вестников взять Давида; и некто увидел сонм пророчествующих пророков, а Самуил стоял, поставленный над ними. И Дух Божий был на вестниках Саула, и они также пророчествовали.\tГлагол видения стоит в единственном числе; Самуил прямо описан как стоящий над пророками."
+  }
+]

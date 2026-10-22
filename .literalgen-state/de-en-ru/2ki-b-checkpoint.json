@@ -1,0 +1,70 @@
+{
+  "book": "12_2KI",
+  "status": "generation_and_qa_complete",
+  "created": [
+    "Tools/LiteralGen/outputs/de/12_2KI/2KI_009_1.tsv",
+    "Tools/LiteralGen/outputs/de/12_2KI/2KI_009_2.tsv",
+    "Tools/LiteralGen/outputs/ru/12_2KI/2KI_009_1.tsv",
+    "Tools/LiteralGen/outputs/ru/12_2KI/2KI_009_2.tsv",
+    "Tools/LiteralGen/outputs/en/12_2KI/2KI_009_1.tsv",
+    "Tools/LiteralGen/outputs/en/12_2KI/2KI_009_2.tsv",
+    "Tools/LiteralGen/outputs/de/12_2KI/2KI_010_1.tsv",
+    "Tools/LiteralGen/outputs/de/12_2KI/2KI_010_2.tsv",
+    "Tools/LiteralGen/outputs/ru/12_2KI/2KI_010_1.tsv",
+    "Tools/LiteralGen/outputs/ru/12_2KI/2KI_010_2.tsv",
+    "Tools/LiteralGen/outputs/en/12_2KI/2KI_010_1.tsv",
+    "Tools/LiteralGen/outputs/en/12_2KI/2KI_010_2.tsv",
+    "Tools/LiteralGen/outputs/de/12_2KI/2KI_011.tsv",
+    "Tools/LiteralGen/outputs/ru/12_2KI/2KI_011.tsv",
+    "Tools/LiteralGen/outputs/en/12_2KI/2KI_011.tsv",
+    "Tools/LiteralGen/outputs/de/12_2KI/2KI_012.tsv",
+    "Tools/LiteralGen/outputs/ru/12_2KI/2KI_012.tsv",
+    "Tools/LiteralGen/outputs/en/12_2KI/2KI_012.tsv",
+    "Tools/LiteralGen/outputs/de/12_2KI/2KI_013.tsv",
+    "Tools/LiteralGen/outputs/ru/12_2KI/2KI_013.tsv",
+    "Tools/LiteralGen/outputs/de/12_2KI/2KI_014.tsv",
+    "Tools/LiteralGen/outputs/ru/12_2KI/2KI_014.tsv",
+    "Tools/LiteralGen/outputs/de/12_2KI/2KI_015_1.tsv",
+    "Tools/LiteralGen/outputs/de/12_2KI/2KI_015_2.tsv",
+    "Tools/LiteralGen/outputs/ru/12_2KI/2KI_015_1.tsv",
+    "Tools/LiteralGen/outputs/ru/12_2KI/2KI_015_2.tsv",
+    "Tools/LiteralGen/outputs/de/12_2KI/2KI_016.tsv",
+    "Tools/LiteralGen/outputs/ru/12_2KI/2KI_016.tsv"
+  ],
+  "generation_completed": [
+    "de009-016",
+    "ru009-016",
+    "en009-012"
+  ],
+  "independent_qa_completed": [
+    "rootEN013-016"
+  ],
+  "generation_remaining": [],
+  "qa_remaining": [],
+  "validation": {
+    "book": "12_2KI",
+    "created_files": 28,
+    "created_rows": 569,
+    "rows_by_language": {
+      "de": 227,
+      "ru": 227,
+      "en": 115
+    },
+    "qa": [
+      {
+        "file": "2ki-b-qa.json",
+        "candidates": 50
+      },
+      {
+        "file": "2ki-b-root-en-qa.json",
+        "candidates": 8
+      }
+    ],
+    "format": "pass",
+    "exact_qa": "pass",
+    "protected_files": 10324,
+    "protected_mismatches": [],
+    "direct_tsv_edits": false
+  },
+  "awaiting": "root official check and redo application"
+}

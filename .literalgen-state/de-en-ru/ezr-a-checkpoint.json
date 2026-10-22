@@ -1,0 +1,40 @@
+{
+  "created": [
+    "Tools/LiteralGen/outputs/de/15_EZR/EZR_001.tsv",
+    "Tools/LiteralGen/outputs/ru/15_EZR/EZR_001.tsv",
+    "Tools/LiteralGen/outputs/de/15_EZR/EZR_002_1.tsv",
+    "Tools/LiteralGen/outputs/de/15_EZR/EZR_002_2.tsv",
+    "Tools/LiteralGen/outputs/de/15_EZR/EZR_002_3.tsv",
+    "Tools/LiteralGen/outputs/ru/15_EZR/EZR_002_1.tsv",
+    "Tools/LiteralGen/outputs/ru/15_EZR/EZR_002_2.tsv",
+    "Tools/LiteralGen/outputs/ru/15_EZR/EZR_002_3.tsv",
+    "Tools/LiteralGen/outputs/de/15_EZR/EZR_003.tsv",
+    "Tools/LiteralGen/outputs/ru/15_EZR/EZR_003.tsv"
+  ],
+  "chapters_complete": [
+    [
+      1,
+      "de"
+    ],
+    [
+      1,
+      "ru"
+    ],
+    [
+      2,
+      "de"
+    ],
+    [
+      2,
+      "ru"
+    ],
+    [
+      3,
+      "de"
+    ],
+    [
+      3,
+      "ru"
+    ]
+  ]
+}

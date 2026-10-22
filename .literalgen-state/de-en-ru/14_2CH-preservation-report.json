@@ -1,0 +1,43 @@
+{
+  "book": "14_2CH",
+  "task_language_protected_unchanged": 1617,
+  "all_baseline_files": 12286,
+  "all_unchanged": 12283,
+  "external_language_hash_mismatches": [
+    {
+      "path": "Tools/LiteralGen/outputs/id/66_REV/REV_014.tsv",
+      "original_hash": "cd6aca15d032a581c91da7ab36411b425e86449c41821bb133d6c23f9f9b7c0f",
+      "current_hash": "77f1a413a8d74e1f33263f3211472883b2373c2e71fd8d07561f27f5b4338992"
+    },
+    {
+      "path": "Tools/LiteralGen/outputs/vi/06_JOS/JOS_015_1.tsv",
+      "original_hash": "8056a62939781009413a5bedca379b03e1ecf7213f2bafeafc26991a9bba63bb",
+      "current_hash": "516ea491b2ca3c441a19047a79f6d39fdb3ef0f978b856fc39434b93d5741d69"
+    },
+    {
+      "path": "Tools/LiteralGen/outputs/vi/07_JDG/JDG_006_1.tsv",
+      "original_hash": "e8a56a822670dc7a8144df28923cc67e43d8fa1e310368e1398fd39a8e2e62f5",
+      "current_hash": "6eb2f7d29b50fefd8cfe2a47903af0fecb4e12ed4841ab67c43a3908bb21bc37"
+    }
+  ],
+  "task_writes": "Only exclusively created de/en/ru14_2CH files;64 queued newly created files rewritten",
+  "restored_or_overwritten_external_files": false,
+  "official_check": {
+    "de": [
+      582,
+      12042,
+      0
+    ],
+    "en": [
+      582,
+      12042,
+      0
+    ],
+    "ru": [
+      582,
+      12042,
+      0
+    ]
+  },
+  "redo": 0
+}

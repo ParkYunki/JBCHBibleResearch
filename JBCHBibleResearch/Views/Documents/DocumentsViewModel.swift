@@ -36,7 +36,7 @@ final class DocumentsViewModel {
         do {
             documents = try modelContext.fetch(FetchDescriptor<SourceDocument>(sortBy: [SortDescriptor(\.uploadedAt, order: .reverse)]))
         } catch {
-            lastErrorDescription = "문서 목록을 불러오지 못했습니다: \(error.localizedDescription)"
+            lastErrorDescription = String(localized: "문서 목록을 불러오지 못했습니다: \(error.localizedDescription)")
         }
     }
 
@@ -100,8 +100,8 @@ final class DocumentsViewModel {
             // iCloud Drive 복사 실패 시 원본 위치를 참조하는 폴백으로 업로드는 성공하므로,
             // 동기화 폴더에 복사되지 않았다는 사실과 이유를 알림으로 보여준다.
             if document.storageLocationKind != .icloudDrive {
-                let reason = DocumentUploadService.lastICloudCopyFailureReason ?? "알 수 없는 이유"
-                lastErrorDescription = "\(url.lastPathComponent)을(를) iCloud Drive 동기화 폴더에 복사하지 못해 원래 위치를 그대로 참조합니다 (\(reason)). 원본 파일을 옮기거나 지우면 이 문서를 열지 못할 수 있습니다."
+                let reason = DocumentUploadService.lastICloudCopyFailureReason ?? String(localized: "알 수 없는 이유")
+                lastErrorDescription = String(localized: "\(url.lastPathComponent)을(를) iCloud Drive 동기화 폴더에 복사하지 못해 원래 위치를 그대로 참조합니다 (\(reason)). 원본 파일을 옮기거나 지우면 이 문서를 열지 못할 수 있습니다.")
             }
             Task {
                 // `generateConvertedPDF`가 텍스트 추출보다 먼저 끝나야 세 번째 폴백(`extractHWPFromConvertedPDF`)이
@@ -111,7 +111,7 @@ final class DocumentsViewModel {
                 loadDocuments()
             }
         } catch {
-            lastErrorDescription = "\(url.lastPathComponent) 업로드 실패: \(error.localizedDescription)"
+            lastErrorDescription = String(localized: "\(url.lastPathComponent) 업로드 실패: \(error.localizedDescription)")
         }
     }
 
@@ -124,17 +124,19 @@ final class DocumentsViewModel {
             let document = created.document
             documents.insert(document, at: 0)
             if !created.failedFilenames.isEmpty {
-                lastErrorDescription = "\(created.failedFilenames.joined(separator: ", "))을(를) 이미지 모음에 더하지 못했습니다 (\(DocumentUploadService.lastICloudCopyFailureReason ?? "파일을 복사하지 못함")). 나머지 이미지로 문서를 만들었습니다."
+                let failedNames = created.failedFilenames.joined(separator: ", ")
+                let reason = DocumentUploadService.lastICloudCopyFailureReason ?? String(localized: "파일을 복사하지 못함")
+                lastErrorDescription = String(localized: "\(failedNames)을(를) 이미지 모음에 더하지 못했습니다 (\(reason)). 나머지 이미지로 문서를 만들었습니다.")
             } else if document.storageLocationKind != .icloudDrive {
-                let reason = DocumentUploadService.lastICloudCopyFailureReason ?? "알 수 없는 이유"
-                lastErrorDescription = "\(document.originalFilename)을(를) iCloud Drive 동기화 폴더에 복사하지 못해 원래 위치를 그대로 참조합니다 (\(reason)). 원본 파일을 옮기거나 지우면 이 문서를 열지 못할 수 있습니다."
+                let reason = DocumentUploadService.lastICloudCopyFailureReason ?? String(localized: "알 수 없는 이유")
+                lastErrorDescription = String(localized: "\(document.originalFilename)을(를) iCloud Drive 동기화 폴더에 복사하지 못해 원래 위치를 그대로 참조합니다 (\(reason)). 원본 파일을 옮기거나 지우면 이 문서를 열지 못할 수 있습니다.")
             }
             Task {
                 await DocumentTextExtractionService.extract(for: document, context: modelContext)
                 loadDocuments()
             }
         } catch {
-            lastErrorDescription = "이미지 \(urls.count)장 업로드 실패: \(error.localizedDescription)"
+            lastErrorDescription = String(localized: "이미지 \(urls.count)장 업로드 실패: \(error.localizedDescription)")
         }
     }
 

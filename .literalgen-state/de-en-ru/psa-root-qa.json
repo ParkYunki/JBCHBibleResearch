@@ -1,0 +1,14 @@
+[
+  {
+    "path": "Tools/LiteralGen/outputs/de/19_PSA/PSA_147.tsv",
+    "old_row": "3\tEr heilt die zerbrochenen Herzens sind und verbindet ihre Wunden.\tDas Verbinden gilt ihren Wunden.",
+    "new_row": "3\tEr heilt die, die zerbrochenen Herzens sind, und verbindet ihre Wunden.\tDas Verbinden gilt ihren Wunden.",
+    "reason": "Supply the relative clause antecedent and punctuation."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/19_PSA/PSA_132.tsv",
+    "old_row": "11\tГосподь поклялся Давиду истиной, не отступит от неё: «От плода чрева твоего посажу на престоле твоём.\tБлизко к еврейскому.",
+    "new_row": "11\tГосподь поклялся Давиду истиной, не отступит от неё: «Одного от плода чрева твоего посажу на престоле твоём.\tБлизко к еврейскому.",
+    "reason": "Supply the minimal object required by the verb, matching the source partitive phrase."
+  }
+]

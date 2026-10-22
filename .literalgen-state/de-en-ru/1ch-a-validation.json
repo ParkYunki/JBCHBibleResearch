@@ -1,0 +1,143 @@
+{
+  "files": [
+    {
+      "path": "Tools/LiteralGen/outputs/de/13_1CH/1CH_001_1.tsv",
+      "rows": 30,
+      "sha256": "c81ec258eb065ebd2091a849a1793818ee301d12b9a7e490526c54f4bbe36bb5"
+    },
+    {
+      "path": "Tools/LiteralGen/outputs/de/13_1CH/1CH_001_2.tsv",
+      "rows": 24,
+      "sha256": "a63b3e996053d360089d7257cfa35f1f61b5f0f8ad14374e6c8f4e0ca93c1945"
+    },
+    {
+      "path": "Tools/LiteralGen/outputs/ru/13_1CH/1CH_001_1.tsv",
+      "rows": 30,
+      "sha256": "32a3f0f3e0410ba2282298e1f2a7b1661dd44138b1dfd77d72754bef636f6e65"
+    },
+    {
+      "path": "Tools/LiteralGen/outputs/ru/13_1CH/1CH_001_2.tsv",
+      "rows": 24,
+      "sha256": "647f92083bbd23ae5d4f3f4bf66b5acb6470182a35f340ae1c4170af0575d3c2"
+    },
+    {
+      "path": "Tools/LiteralGen/outputs/en/13_1CH/1CH_001_1.tsv",
+      "rows": 30,
+      "sha256": "0eb2ec9a498128cce49ae1b9e56955495f1f9961cac9bf7771e653404f142976"
+    },
+    {
+      "path": "Tools/LiteralGen/outputs/en/13_1CH/1CH_001_2.tsv",
+      "rows": 24,
+      "sha256": "dd5b41a24295f9169d8a6861fe9377f234283e000df4d611852545fc1d93a5a1"
+    },
+    {
+      "path": "Tools/LiteralGen/outputs/de/13_1CH/1CH_002_1.tsv",
+      "rows": 30,
+      "sha256": "fa2d72a463cbfac14efb5fb3b10ddb0f24ddb2b43fad4b13ead2bc11a1694929"
+    },
+    {
+      "path": "Tools/LiteralGen/outputs/de/13_1CH/1CH_002_2.tsv",
+      "rows": 25,
+      "sha256": "a7c8030f346b30ac6c9e83cfd1e2196c740ec0a3a79516271f686721ec3c87ac"
+    },
+    {
+      "path": "Tools/LiteralGen/outputs/ru/13_1CH/1CH_002_1.tsv",
+      "rows": 30,
+      "sha256": "b0fd44641cdcdb85c06561d68df79427b8bc1775a3a07601a8bc9d80a90c3d27"
+    },
+    {
+      "path": "Tools/LiteralGen/outputs/ru/13_1CH/1CH_002_2.tsv",
+      "rows": 25,
+      "sha256": "d2bbb7508edd43cede2bb871d0737e076a0feb6578ae848e7d3aa1daf07aba95"
+    },
+    {
+      "path": "Tools/LiteralGen/outputs/en/13_1CH/1CH_002_1.tsv",
+      "rows": 30,
+      "sha256": "0667de4fcc4ccb2b910572b5bd416cdc545bae195d8564d38ed9d11200c6cc7d"
+    },
+    {
+      "path": "Tools/LiteralGen/outputs/en/13_1CH/1CH_002_2.tsv",
+      "rows": 25,
+      "sha256": "700d10db5bbd94ca7cb436c785fe53aad6d227fc067b9f817ae5b991345b67f2"
+    },
+    {
+      "path": "Tools/LiteralGen/outputs/de/13_1CH/1CH_003.tsv",
+      "rows": 24,
+      "sha256": "00856fd5f02f0ff3d79dbebd507a909a0ec0d95434d5be029088dacb7b71bbaa"
+    },
+    {
+      "path": "Tools/LiteralGen/outputs/ru/13_1CH/1CH_003.tsv",
+      "rows": 24,
+      "sha256": "04fa14a23ea88ee9328cd2c38242657f7860688113a556e1c3300dbaa189d833"
+    },
+    {
+      "path": "Tools/LiteralGen/outputs/en/13_1CH/1CH_003.tsv",
+      "rows": 24,
+      "sha256": "1aeaac3a3e935ab9d2a0dcd6ba7b1bf85d855b2bbd56729a8a7d92a384264153"
+    },
+    {
+      "path": "Tools/LiteralGen/outputs/de/13_1CH/1CH_004_1.tsv",
+      "rows": 30,
+      "sha256": "d3636b0b4bea31e13b3adea12a8be2fe6fe30b3c34af9fc6bd8674673c2f6b31"
+    },
+    {
+      "path": "Tools/LiteralGen/outputs/de/13_1CH/1CH_004_2.tsv",
+      "rows": 13,
+      "sha256": "82d0b365311353c6bf52a9e70d8f299ee939c6688b937b272defc1cdb376a63b"
+    },
+    {
+      "path": "Tools/LiteralGen/outputs/ru/13_1CH/1CH_004_1.tsv",
+      "rows": 30,
+      "sha256": "1e5e7d52b6a093749d8bba746b22610b286c5b9e1dffaad604b4c1f4f0a6808f"
+    },
+    {
+      "path": "Tools/LiteralGen/outputs/ru/13_1CH/1CH_004_2.tsv",
+      "rows": 13,
+      "sha256": "3cbfa60b3f9231966283746d65736f0f3d10be549604afaa27d6df3cee6b4b17"
+    },
+    {
+      "path": "Tools/LiteralGen/outputs/de/13_1CH/1CH_005.tsv",
+      "rows": 26,
+      "sha256": "ca5310dc3edf22bbcec6a16f7fd35013c9cd83b3c54a388af2fcd0fc3d43f2d5"
+    },
+    {
+      "path": "Tools/LiteralGen/outputs/ru/13_1CH/1CH_005.tsv",
+      "rows": 26,
+      "sha256": "20c8f2e26241db22bbf9ec8665dff6da74b6f4f88a6f45621820491cf25495d5"
+    },
+    {
+      "path": "Tools/LiteralGen/outputs/de/13_1CH/1CH_006_1.tsv",
+      "rows": 30,
+      "sha256": "41b7e5048d876e6565b55c650841065f1a836c6ecb9e7b4040c955bd6d3d6b52"
+    },
+    {
+      "path": "Tools/LiteralGen/outputs/de/13_1CH/1CH_006_2.tsv",
+      "rows": 30,
+      "sha256": "1cfe576fe1fcc6ec08125c6244a207de2a95135b32a8f03e4ff80d84d7954a3f"
+    },
+    {
+      "path": "Tools/LiteralGen/outputs/de/13_1CH/1CH_006_3.tsv",
+      "rows": 21,
+      "sha256": "c6149ea8cd64b182ec48e6212b657bc08989097194cb7456cb46cb05cbbf474c"
+    },
+    {
+      "path": "Tools/LiteralGen/outputs/ru/13_1CH/1CH_006_1.tsv",
+      "rows": 30,
+      "sha256": "227e67234a9e38c68873f9dd0f247474bd3573df260cc71d36e6681ecfa87c63"
+    },
+    {
+      "path": "Tools/LiteralGen/outputs/ru/13_1CH/1CH_006_2.tsv",
+      "rows": 30,
+      "sha256": "1c7adb44bdbd711032cf1fbb372cb1c6923b608c69cf797e12b91c1a88eea6a7"
+    },
+    {
+      "path": "Tools/LiteralGen/outputs/ru/13_1CH/1CH_006_3.tsv",
+      "rows": 21,
+      "sha256": "f28ef81fafd2d59be62249cb6002b6f768b236569d54154498867f5416e17d56"
+    }
+  ],
+  "rows": 699,
+  "own_qa": 25,
+  "root_en_reviewed_rows": 150,
+  "root_en_qa": 12
+}

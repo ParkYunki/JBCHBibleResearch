@@ -1,0 +1,18 @@
+{
+  "files": [
+    "Tools/LiteralGen/outputs/de/16_NEH/NEH_007_1.tsv",
+    "Tools/LiteralGen/outputs/de/16_NEH/NEH_007_2.tsv",
+    "Tools/LiteralGen/outputs/de/16_NEH/NEH_007_3.tsv",
+    "Tools/LiteralGen/outputs/de/16_NEH/NEH_008.tsv",
+    "Tools/LiteralGen/outputs/de/16_NEH/NEH_009_1.tsv",
+    "Tools/LiteralGen/outputs/de/16_NEH/NEH_009_2.tsv",
+    "Tools/LiteralGen/outputs/ru/16_NEH/NEH_007_1.tsv",
+    "Tools/LiteralGen/outputs/ru/16_NEH/NEH_007_2.tsv",
+    "Tools/LiteralGen/outputs/ru/16_NEH/NEH_007_3.tsv",
+    "Tools/LiteralGen/outputs/ru/16_NEH/NEH_008.tsv",
+    "Tools/LiteralGen/outputs/ru/16_NEH/NEH_009_1.tsv",
+    "Tools/LiteralGen/outputs/ru/16_NEH/NEH_009_2.tsv"
+  ],
+  "rows": 258,
+  "structure_passed": true
+}

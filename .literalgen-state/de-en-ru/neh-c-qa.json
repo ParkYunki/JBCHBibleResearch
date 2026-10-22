@@ -1,0 +1,32 @@
+[
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/16_NEH/NEH_011_1.tsv",
+    "old_row": "25\tUnd bei den Dörfern mit ihren Feldern wohnten von den Söhnen Judas in Kirjath-Arba und seinen Töchtern und in Dibon und seinen Töchtern und in Kabzeel und seinen Dörfern,\tDie abhängigen Orte werden Töchter genannt; Kabzeel hat Dörfer.",
+    "new_row": "25\tUnd bei den Dörfern mit ihren Feldern wohnten einige von den Söhnen Judas in Kirjath-Arba und seinen Töchtern und in Dibon und seinen Töchtern und in Kabzeel und seinen Dörfern,\tDie abhängigen Orte werden Töchter genannt; Kabzeel hat Dörfer."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/16_NEH/NEH_011_1.tsv",
+    "old_row": "25\tИ в селениях с полями их жили из сынов Иуды в Кириаф-Арбе и дочерях её, и в Дивоне и дочерях его, и в Иекавцеиле и сёлах его,\tЗависимые города названы дочерьми.",
+    "new_row": "25\tИ в селениях с полями их некоторые из сынов Иуды жили в Кириаф-Арбе и дочерях её, и в Дивоне и дочерях его, и в Иекавцеиле и сёлах его,\tЗависимые города названы дочерьми."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/16_NEH/NEH_012_1.tsv",
+    "old_row": "28\tИ собрались сыны певцов из округа вокруг Иерусалима и из селений Нетофафян,\tНазваны сыны певцов.",
+    "new_row": "28\tИ собрались сыны певцов из округа вокруг Иерусалима и из селений Нетофафян,\tБлизко к еврейскому."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/16_NEH/NEH_012_2.tsv",
+    "old_row": "42\tи Маасея, и Шемаия, и Елеазар, и Уззий, и Иоханан, и Малхия, и Елам, и Езер; и дали слышать себя певцы, и Израхия — надзиратель.\tПение выражено причинением слышания.",
+    "new_row": "42\tи Маасея, и Шемаия, и Елеазар, и Уззий, и Иоханан, и Малхия, и Елам, и Езер; и раздались голоса певцов, а Израхия — надзиратель.\tПевцы дают услышать свои голоса; Израхия отдельно назван надзирателем."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/16_NEH/NEH_012_2.tsv",
+    "old_row": "45\tUnd sie bewahrten den Dienst ihres Gottes und den Dienst der Reinigung, und die Sänger und die Torhüter nach dem Gebot Davids und seines Sohnes Salomo.\tEin eigenes Stehen der Sänger und Torhüter ist nicht genannt.",
+    "new_row": "45\tUnd sie bewahrten den Dienst ihres Gottes und den Dienst der Reinigung; ebenso die Sänger und die Torhüter nach dem Gebot Davids und seines Sohnes Salomo.\tEin eigenes Stehen der Sänger und Torhüter ist nicht genannt."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/16_NEH/NEH_012_2.tsv",
+    "old_row": "45\tИ хранили службу Бога своего и службу очищения, и певцы и привратники по заповеди Давида и Соломона, сына его.\tПевцы и привратники названы отдельной группой.",
+    "new_row": "45\tИ хранили они службу Бога своего и службу очищения; также певцы и привратники по заповеди Давида и Соломона, сына его.\tПевцы и привратники названы отдельной группой."
+  }
+]

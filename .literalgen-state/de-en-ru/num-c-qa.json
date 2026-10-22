@@ -1,0 +1,296 @@
+[
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/04_NUM/NUM_026_3.tsv",
+    "verse": 62,
+    "old_row": "62\tUnd ihre Gemusterten waren dreiundzwanzigtausend, alles Männliche von einem Monat an aufwärts; denn sie ließen sich nicht inmitten der Söhne Israels mustern, denn ihnen war kein Erbteil inmitten der Söhne Israels gegeben worden.\tBewahrt das Sichmusternlassen und das passive Gegebenwerden des Erbteils.",
+    "new_row": "62\tUnd ihre Gemusterten waren dreiundzwanzigtausend, alles Männliche von einem Monat an aufwärts; denn sie wurden nicht inmitten der Söhne Israels gemustert, denn ihnen war kein Erbteil inmitten der Söhne Israels gegeben worden.\tNah am Hebräischen.",
+    "reason": "The enrollment form is mediopassive here, not refusal to allow enrollment; TARGET already expresses passive enrollment and inheritance."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/04_NUM/NUM_027.tsv",
+    "verse": 14,
+    "old_row": "14\tweil ihr meinem Mund in der Wüste Zin beim Streit der Gemeinde widerspenstig wart, mich am Wasser vor ihren Augen zu heiligen.“ Das sind die Wasser von Meribath-Kades in der Wüste Zin.\tBewahrt das Bild meines Mundes.",
+    "new_row": "14\tweil ihr meinem Mund in der Wüste Zin beim Streit der Gemeinde widerspenstig wart, als ihr mich am Wasser vor ihren Augen heiligen solltet.“ Das sind die Wasser von Meribath-Kades in der Wüste Zin.\tBewahrt das Bild meines Mundes.",
+    "reason": "Make the intended duty to sanctify explicit grammatically, avoiding a purpose clause that makes sanctification the purpose of rebellion."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/04_NUM/NUM_027.tsv",
+    "verse": 20,
+    "old_row": "20\tUnd du sollst von deiner Hoheit auf ihn legen, damit die ganze Gemeinde der Söhne Israels hört.\tFügt beim Hören kein Objekt hinzu.",
+    "new_row": "20\tUnd du sollst etwas von deiner Hoheit auf ihn legen, damit die ganze Gemeinde der Söhne Israels hört.\tFügt beim Hören kein Objekt hinzu.",
+    "reason": "Native grammar and precise agreement with the Hebrew source and TARGET."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/04_NUM/NUM_028_2.tsv",
+    "verse": 31,
+    "old_row": "31\tAußer dem beständigen Brandopfer und seinem Speisopfer sollt ihr sie darbringen; makellos sollen sie euch sein, und ihre Trankopfer.“\tBewahrt die Mehrzahl bei makellos.",
+    "new_row": "31\tAußer dem beständigen Brandopfer und seinem Speisopfer sollt ihr sie und ihre Trankopfer darbringen; makellos sollen sie euch sein.“\tBewahrt die Mehrzahl bei makellos.",
+    "reason": "Attach the final drink offerings to the offering verb rather than leaving a dangling phrase after the unblemished clause."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/04_NUM/NUM_029_2.tsv",
+    "verse": 34,
+    "old_row": "34\tUnd einen Ziegenbock als Sündopfer, außer dem beständigen Brandopfer, seinem Speisopfer und seinem Trankopfer.\tBewahrt sein Trankopfer im Singular.",
+    "new_row": "34\tUnd einen Ziegenbock als Sündopfer, außer dem beständigen Brandopfer, seinem Speisopfer und seinem Trankopfer.\tNah am Hebräischen.",
+    "reason": "TARGET already has the drink offering in the singular, so the note is not an actual difference."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/04_NUM/NUM_029_2.tsv",
+    "verse": 38,
+    "old_row": "38\tUnd einen Bock als Sündopfer, außer dem beständigen Brandopfer und seinem Speisopfer und seinem Trankopfer.\tBewahrt sein Trankopfer im Singular.",
+    "new_row": "38\tUnd einen Bock als Sündopfer, außer dem beständigen Brandopfer und seinem Speisopfer und seinem Trankopfer.\tNah am Hebräischen.",
+    "reason": "TARGET already has the drink offering in the singular, so the note is not an actual difference."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/04_NUM/NUM_031_1.tsv",
+    "verse": 18,
+    "old_row": "18\tUnd alle kleinen Kinder unter den Frauen, die den Beischlaf eines männlichen Menschen nicht erkannt haben, lasst euch am Leben.\tNah am Hebräischen.",
+    "new_row": "18\tUnd alle kleinen Kinder unter den Frauen, die den Beischlaf eines männlichen Menschen nicht erkannt haben, sollt ihr für euch am Leben lassen.\tNah am Hebräischen.",
+    "reason": "Preserve the feminine children as the object and for yourselves as beneficiary, avoiding the reading keep yourselves alive."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/04_NUM/NUM_034.tsv",
+    "verse": 18,
+    "old_row": "18\tUnd einen Fürsten, einen Fürsten aus dem Stamm, sollt ihr nehmen, um das Land als Erbe zuzuteilen.\tWiederholt einen Fürsten.",
+    "new_row": "18\tUnd einen Fürsten, je einen Fürsten aus dem Stamm, sollt ihr nehmen, um das Land als Erbe zuzuteilen.\tWiederholt einen Fürsten.",
+    "reason": "Make the repeated one chief distributive in native German."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/en/04_NUM/NUM_025.tsv",
+    "verse": 4,
+    "old_row": "4\t=\tRetains hanging them before the sun and repeats the anger of the LORD.",
+    "new_row": "4\t=\tThe Hebrew says “before the sun” and explicitly names the LORD in “the burning anger of the LORD”; BSB says “in broad daylight” and “His fierce anger.”",
+    "reason": "Limit the note to certain wording differences without asserting the debated manner of execution."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/en/04_NUM/NUM_026_3.tsv",
+    "verse": 62,
+    "old_row": "62\t=\tRetains the reflexive form of enrolling.",
+    "new_row": "62\t=\tClose to the Hebrew.",
+    "reason": "The Hebrew enrollment form in this context does not establish a reflexive wording difference from TARGET."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/en/04_NUM/NUM_027.tsv",
+    "verse": 18,
+    "old_row": "18\t=\tRetains for yourself, a spirit without the definite article, and your hand in the singular.",
+    "new_row": "18\t=\tRetains for yourself and your hand in the singular.",
+    "reason": "Limit the note to clear wording differences instead of inferring an English article distinction with Spirit."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/en/04_NUM/NUM_029_1.tsv",
+    "verse": 18,
+    "old_row": "18\t=\tRetains their grain offering in the singular and their drink offerings in the plural.",
+    "new_row": "18\t=\tRetains their grain offering in the singular.",
+    "reason": "TARGET already has plural drink offerings; retain only the actual grain-offering number difference."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/en/04_NUM/NUM_029_1.tsv",
+    "verse": 21,
+    "old_row": "21\t=\tRetains their grain offering in the singular and their drink offerings in the plural.",
+    "new_row": "21\t=\tRetains their grain offering in the singular.",
+    "reason": "TARGET already has plural drink offerings; retain only the actual grain-offering number difference."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/en/04_NUM/NUM_029_1.tsv",
+    "verse": 24,
+    "old_row": "24\t=\tRetains their grain offering in the singular and their drink offerings in the plural.",
+    "new_row": "24\t=\tRetains their grain offering in the singular.",
+    "reason": "TARGET already has plural drink offerings; retain only the actual grain-offering number difference."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/en/04_NUM/NUM_029_1.tsv",
+    "verse": 27,
+    "old_row": "27\t=\tRetains their grain offering in the singular and their drink offerings in the plural.",
+    "new_row": "27\t=\tRetains their grain offering in the singular.",
+    "reason": "TARGET already has plural drink offerings; retain only the actual grain-offering number difference."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/en/04_NUM/NUM_029_1.tsv",
+    "verse": 30,
+    "old_row": "30\t=\tRetains their grain offering in the singular and their drink offerings in the plural.",
+    "new_row": "30\t=\tRetains their grain offering in the singular.",
+    "reason": "TARGET already has plural drink offerings; retain only the actual grain-offering number difference."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/04_NUM/NUM_026_3.tsv",
+    "verse": 62,
+    "old_row": "62\tИ их исчисленных было двадцать три тысячи, всякий мужского пола от месяца и выше; ибо они не дали исчислить себя среди сынов Израилевых, ибо им не было дано наследия среди сынов Израилевых.\tСохраняет возвратную форму исчисления.",
+    "new_row": "62\tИ их исчисленных было двадцать три тысячи, всякий мужского пола от месяца и выше; ибо они не были исчислены среди сынов Израилевых, ибо им не было дано наследия среди сынов Израилевых.\tБлизко к еврейскому.",
+    "reason": "The enrollment form is mediopassive here and does not add volitional refusal; TARGET likewise uses passive enrollment."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/04_NUM/NUM_026_3.tsv",
+    "verse": 65,
+    "old_row": "65\tИбо Господь сказал о них: «Они непременно умрут в пустыне»; и не осталось из них человека, кроме Халева, сына Иефоннии, и Иисуса, сына Навина.\tБлизко к еврейскому.",
+    "new_row": "65\tИбо Господь сказал о них: «Они непременно умрут в пустыне»; и не осталось из них человека, кроме Халева, сына Иефонниина, и Иисуса, сына Навина.\tБлизко к еврейскому.",
+    "reason": "Use the customary TARGET form of Jephunneh with the required Russian case."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/04_NUM/NUM_027.tsv",
+    "verse": 14,
+    "old_row": "14\tпотому что вы восстали против Моих уст в пустыне Син, при распре общества, чтобы освятить Меня при водах перед их глазами». Это воды Мериват-Кадеса в пустыне Син.\tСохраняет образ Моих уст.",
+    "new_row": "14\tпотому что вы восстали против Моих уст в пустыне Син, при распре общества, когда должны были освятить Меня при водах перед их глазами». Это воды Мериват-Кадеса в пустыне Син.\tСохраняет образ Моих уст.",
+    "reason": "Make the intended duty to sanctify explicit grammatically, avoiding a purpose clause that makes sanctification the purpose of rebellion."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/04_NUM/NUM_027.tsv",
+    "verse": 18,
+    "old_row": "18\tИ Господь сказал Моисею: «Возьми себе Иисуса, сына Навина, человека, в котором есть дух, и возложи свою руку на него.\tСохраняет дух без определенного артикля.",
+    "new_row": "18\tИ Господь сказал Моисею: «Возьми себе Иисуса, сына Навина, человека, в котором есть дух, и возложи свою руку на него.\tБлизко к еврейскому.",
+    "reason": "Russian has no definite article and TARGET wording does not support the claimed article difference."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/04_NUM/NUM_027.tsv",
+    "verse": 19,
+    "old_row": "19\tИ поставь его перед Елеазаром, священником, и перед всем обществом и поручи ему перед их глазами.\tБлизко к еврейскому.",
+    "new_row": "19\tИ поставь его перед Елеазаром, священником, и перед всем обществом и дай ему поручение перед их глазами.\tБлизко к еврейскому.",
+    "reason": "Native grammar and precise agreement with the Hebrew source and TARGET."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/04_NUM/NUM_027.tsv",
+    "verse": 20,
+    "old_row": "20\tИ положи от твоего величия на него, чтобы все общество сынов Израилевых слушало.\tНе добавляет «его» при слушании.",
+    "new_row": "20\tИ положи на него часть твоего величия, чтобы все общество сынов Израилевых слушало.\tНе добавляет «его» при слушании.",
+    "reason": "Native grammar and precise agreement with the Hebrew source and TARGET."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/04_NUM/NUM_027.tsv",
+    "verse": 23,
+    "old_row": "23\tИ он возложил свои руки на него и поручил ему, как Господь говорил рукой Моисея.\tСохраняет руку Моисея.",
+    "new_row": "23\tИ он возложил свои руки на него и дал ему поручение, как Господь говорил рукой Моисея.\tСохраняет руку Моисея.",
+    "reason": "Native grammar and precise agreement with the Hebrew source and TARGET."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/04_NUM/NUM_028_1.tsv",
+    "verse": 2,
+    "old_row": "2\t«Повели сынам Израилевым и скажи им: Мой дар, Мой хлеб для Моих огненных жертв, запах Моего успокоения, соблюдайте, чтобы приносить Мне в его назначенное время.\tСохраняет Мои огненные жертвы.",
+    "new_row": "2\t«Повели сынам Израилевым и скажи им: заботьтесь о том, чтобы приносить Мне Мой дар, Мой хлеб для Моих огненных жертв, запах Моего успокоения, в его назначенное время.\tСохраняет Мои огненные жертвы.",
+    "reason": "Use native Russian for the instruction to take care to bring the offerings; preserve the objects and appointed time."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/04_NUM/NUM_028_2.tsv",
+    "verse": 31,
+    "old_row": "31\tПомимо постоянного всесожжения и его хлебного приношения приносите их; непорочными они будут у вас, и их возлияния».\tНе добавляет «Мне».",
+    "new_row": "31\tПомимо постоянного всесожжения и его хлебного приношения приносите их и их возлияния; непорочными они будут у вас».\tНе добавляет «Мне».",
+    "reason": "Attach the final drink offerings to the offering verb rather than leaving a dangling phrase after the unblemished clause."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/04_NUM/NUM_030.tsv",
+    "verse": 4,
+    "old_row": "4\tи ее отец услышит ее обет и ее зарок, который она связала на своей душе, и ее отец промолчит ей, все ее обеты устоят и всякий зарок, который она связала на своей душе, устоит.\tБлизко к еврейскому.",
+    "new_row": "4\tи ее отец услышит ее обет и ее зарок, который она связала на своей душе, и ее отец промолчит ей в ответ, все ее обеты устоят и всякий зарок, который она связала на своей душе, устоит.\tБлизко к еврейскому.",
+    "reason": "Use a native Russian complement for remaining silent to her, preserving the explicit recipient."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/04_NUM/NUM_030.tsv",
+    "verse": 7,
+    "old_row": "7\tи ее муж услышит и в день, когда услышит, промолчит ей, ее обеты устоят и ее зароки, которые она связала на своей душе, устоят.\tСохраняет день слышания.",
+    "new_row": "7\tи ее муж услышит и в день, когда услышит, промолчит ей в ответ, ее обеты устоят и ее зароки, которые она связала на своей душе, устоят.\tСохраняет день слышания.",
+    "reason": "Use a native Russian complement for remaining silent to her, preserving the explicit recipient."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/04_NUM/NUM_030.tsv",
+    "verse": 11,
+    "old_row": "11\tи ее муж услышит и промолчит ей, не запретит ей, все ее обеты устоят и всякий зарок, который она связала на своей душе, устоит.\tБлизко к еврейскому.",
+    "new_row": "11\tи ее муж услышит и промолчит ей в ответ, не запретит ей, все ее обеты устоят и всякий зарок, который она связала на своей душе, устоит.\tБлизко к еврейскому.",
+    "reason": "Use a native Russian complement for remaining silent to her, preserving the explicit recipient."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/04_NUM/NUM_030.tsv",
+    "verse": 14,
+    "old_row": "14\tИ если ее муж действительно промолчит ей день за днем, он утвердит все ее обеты или все ее зароки, которые на ней; он утвердил их, ибо промолчал ей в день, когда услышал.\tСохраняет «или» между обетами и зароками.",
+    "new_row": "14\tИ если ее муж действительно промолчит ей в ответ день за днем, он утвердит все ее обеты или все ее зароки, которые на ней; он утвердил их, ибо промолчал ей в ответ в день, когда услышал.\tСохраняет «или» между обетами и зароками.",
+    "reason": "Use a native Russian complement for remaining silent to her, preserving the explicit recipient."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/04_NUM/NUM_031_1.tsv",
+    "verse": 23,
+    "old_row": "23\tвсякую вещь, которая может пройти в огонь, проведите через огонь, и она будет чистой; только пусть очистится водой очищения. И все, что не может пройти в огонь, проведите через воду.\tБлизко к еврейскому.",
+    "new_row": "23\tвсякую вещь, которая может пройти через огонь, проведите через огонь, и она будет чистой; только пусть очистится водой очищения. И все, что не может пройти через огонь, проведите через воду.\tБлизко к еврейскому.",
+    "reason": "Use the native preposition for passing through fire."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/04_NUM/NUM_031_2.tsv",
+    "verse": 49,
+    "old_row": "49\tИ они сказали Моисею: «Твои рабы подняли голову воинов, которые в нашей руке, и ни одного человека из нас не недостает.\tСохраняет поднятую голову, нашу руку и человека из нас.",
+    "new_row": "49\tИ они сказали Моисею: «Твои рабы подняли голову воинов, которые в нашей руке, и ни один человек из нас не пропал.\tСохраняет поднятую голову, нашу руку и человека из нас.",
+    "reason": "Use native Russian for no man missing, without an awkward negative double construction."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/04_NUM/NUM_032_1.tsv",
+    "verse": 11,
+    "old_row": "11\t„Мужчины, вышедшие из Египта, от двадцати лет и выше, непременно не увидят почвы, о которой Я клялся Аврааму, Исааку и Иакову, ибо они не следовали за Мною вполне,\tНе добавляет знание добра и зла; сохраняет полное следование.",
+    "new_row": "11\t„Мужчины, вышедшие из Египта, от двадцати лет и выше, непременно не увидят земли, о которой Я клялся Аврааму, Исааку и Иакову, ибо они не следовали за Мною вполне,\tНе добавляет знание добра и зла; сохраняет полное следование.",
+    "reason": "Use native Russian land for the promised territory while retaining the emphatic negative."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/04_NUM/NUM_032_1.tsv",
+    "verse": 12,
+    "old_row": "12\tкроме Халева, сына Иефоннии, кенезеянина, и Иисуса, сына Навина, ибо они вполне следовали Господу“.\tСохраняет полное следование.",
+    "new_row": "12\tкроме Халева, сына Иефонниина, кенезеянина, и Иисуса, сына Навина, ибо они вполне следовали Господу“.\tСохраняет полное следование.",
+    "reason": "Use the customary TARGET form of Jephunneh with the required Russian case."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/04_NUM/NUM_034.tsv",
+    "verse": 12,
+    "old_row": "12\tИ граница спустится к Иордану, и ее выходы будут Соленым морем; это будет вам земля по ее границам вокруг».\tБлизко к еврейскому.",
+    "new_row": "12\tИ граница спустится к Иордану, и ее выходы будут у Соленого моря; это будет вам земля по ее границам вокруг».\tБлизко к еврейскому.",
+    "reason": "Add the native locative preposition for the boundary ending at the sea."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/04_NUM/NUM_034.tsv",
+    "verse": 18,
+    "old_row": "18\tИ одного начальника, одного начальника из колена, возьмите, чтобы дать землю в наследие.\tПовторяет одного начальника.",
+    "new_row": "18\tИ одного начальника, по одному начальнику из колена, возьмите, чтобы дать землю в наследие.\tПовторяет одного начальника.",
+    "reason": "Make the repeated one chief distributive in native Russian."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/04_NUM/NUM_034.tsv",
+    "verse": 19,
+    "old_row": "19\tИ вот имена мужчин: для колена Иуды Халев, сын Иефоннии;\tБлизко к еврейскому.",
+    "new_row": "19\tИ вот имена мужчин: для колена Иуды Халев, сын Иефонниин;\tБлизко к еврейскому.",
+    "reason": "Use the customary TARGET form of Jephunneh with the required Russian case."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/04_NUM/NUM_035_1.tsv",
+    "verse": 3,
+    "old_row": "3\tИ города будут им для жительства, и их пастбища будут для их скота и для их имущества и для всех их животных.\tСохраняет всех их животных.",
+    "new_row": "3\tИ города будут им для жительства, и их пастбища будут для их скота и для их имущества и для всех их животных.\tБлизко к еврейскому.",
+    "reason": "Avoid asserting a rare-word lexical distinction as a certain TARGET difference."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/04_NUM/NUM_035_1.tsv",
+    "verse": 7,
+    "old_row": "7\tВсе города, которые дадите левитам, будут сорок восемь городов, они и их пастбища.\tБлизко к еврейскому.",
+    "new_row": "7\tВсе города, которые дадите левитам, — сорок восемь городов, они и их пастбища.\tБлизко к еврейскому.",
+    "reason": "Use a native nominal predicate for the total of forty-eight cities."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/04_NUM/NUM_035_1.tsv",
+    "verse": 8,
+    "old_row": "8\tИ города, которые дадите из владения сынов Израилевых: из многочисленного увеличьте, а из малочисленного уменьшите; каждый сообразно своему наследию, которое они наследуют, даст из своих городов левитам».\tНе добавляет колено; сохраняет наследие, которое они наследуют.",
+    "new_row": "8\tИ города, которые дадите из владения сынов Израилевых: от многочисленного увеличьте число городов, а от малочисленного уменьшите; каждый сообразно своему наследию, которое они наследуют, даст из своих городов левитам».\tНе добавляет колено; сохраняет наследие, которое они наследуют.",
+    "reason": "Supply the implied object of increasing or decreasing in native Russian while preserving the verbs and distributive sense."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/04_NUM/NUM_035_1.tsv",
+    "verse": 23,
+    "old_row": "23\tили каким-либо камнем, от которого можно умереть, не видя, уронил на него, и тот умер, а он не был его врагом и не искал его зла,\tБлизко к еврейскому.",
+    "new_row": "23\tили какой-либо камень, от которого можно умереть, не видя, уронил на него, и тот умер, а он не был его врагом и не искал его зла,\tБлизко к еврейскому.",
+    "reason": "Use accusative for the stone as the object of dropping, not instrumental."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/04_NUM/NUM_035_1.tsv",
+    "verse": 30,
+    "old_row": "30\tВсякий убивший душу: по устам свидетелей убьют убийцу; и один свидетель не должен свидетельствовать против души для смерти.\tСохраняет уста свидетелей и запрет одному свидетелю свидетельствовать против души на смерть.",
+    "new_row": "30\tВсякий убивший душу: по устам свидетелей убьют убийцу; и один свидетель не должен свидетельствовать против души, чтобы она умерла.\tСохраняет уста свидетелей и запрет одному свидетелю свидетельствовать против души на смерть.",
+    "reason": "Express the purpose of dying in a native Russian clause while retaining the soul as the object of testimony."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/04_NUM/NUM_036.tsv",
+    "verse": 5,
+    "old_row": "5\tИ Моисей повелел сынам Израилевым по устам Господа, говоря: «Правильно говорят сыны колена Иосифа.\tСохраняет уста Господа и множественное число говорящих.",
+    "new_row": "5\tИ Моисей повелел сынам Израилевым по устам Господа, говоря: «Правильно говорят те из колена сынов Иосифа.\tСохраняет уста Господа и множественное число говорящих.",
+    "reason": "Retain the tribe of the sons of Joseph and the plural speakers, with the minimal implied subject needed in Russian."
+  }
+]

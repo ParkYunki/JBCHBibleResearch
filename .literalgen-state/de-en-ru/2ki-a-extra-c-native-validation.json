@@ -1,0 +1,48 @@
+{
+  "reviewed_files": {
+    "Tools/LiteralGen/outputs/de/12_2KI/2KI_021.tsv": {
+      "rows": 26,
+      "sha256": "574c2485f4c2b50ebd095fdf78586a7f42f19ba63a71cd7cd0197a8abcf2d1ba"
+    },
+    "Tools/LiteralGen/outputs/de/12_2KI/2KI_022.tsv": {
+      "rows": 20,
+      "sha256": "ca1fc1443ac42ef89901ff895ab4fa7b02ccd34766f06ff71a07f4ade86c38a1"
+    },
+    "Tools/LiteralGen/outputs/de/12_2KI/2KI_023_1.tsv": {
+      "rows": 30,
+      "sha256": "ce8375d627708f358b588d7e3996bd961d71a885d88e3aebb88e673c5c458411"
+    },
+    "Tools/LiteralGen/outputs/de/12_2KI/2KI_023_2.tsv": {
+      "rows": 7,
+      "sha256": "65430dfd19f24424d22e18939f653850d1045f56579e9cbe655f62006b4a4b4c"
+    },
+    "Tools/LiteralGen/outputs/de/12_2KI/2KI_024.tsv": {
+      "rows": 20,
+      "sha256": "f03f9fa4cf5fdece3b8a1665521e54c62a274399835f879ddb1ad482ba70686b"
+    },
+    "Tools/LiteralGen/outputs/ru/12_2KI/2KI_021.tsv": {
+      "rows": 26,
+      "sha256": "6e1eac53f52bb9e5a62bc3ad40e3ec62927390b09cb8bbac860921015ec08ddf"
+    },
+    "Tools/LiteralGen/outputs/ru/12_2KI/2KI_022.tsv": {
+      "rows": 20,
+      "sha256": "ba94acca26edd9dab742a65eb1932eba57250f27de8cd0ac3056bf245fb1f9d7"
+    },
+    "Tools/LiteralGen/outputs/ru/12_2KI/2KI_023_1.tsv": {
+      "rows": 30,
+      "sha256": "21d3827fddf81512d6863c5dd9dca03e9da978213ed3c636f9e06047f283ed93"
+    },
+    "Tools/LiteralGen/outputs/ru/12_2KI/2KI_023_2.tsv": {
+      "rows": 7,
+      "sha256": "25656e12da0f3528d589ed1dbcd459dec6364ba15a6785d7aff5fb8b1cff14da"
+    },
+    "Tools/LiteralGen/outputs/ru/12_2KI/2KI_024.tsv": {
+      "rows": 20,
+      "sha256": "c43ffc7d065ac27ce554ca71395962f647dbc306c653017dc9c4c2a1ecf4bb1b"
+    }
+  },
+  "reviewed_rows": 206,
+  "candidates": 5,
+  "source": "assigned 12_2KI packets O and de/ru TARGET only",
+  "tsv_direct_changes": false
+}

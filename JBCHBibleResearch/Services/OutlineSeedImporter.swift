@@ -28,10 +28,22 @@
 //  ⚠️ `importIfNeeded`는 기기당 한 번만 실행된다(`UserSettingsStore.hasImportedOutlineSeed` 플래그).
 //  JSON을 고친 뒤 다시 테스트하려면 앱을 지우고 재설치해 플래그를 초기화해야 한다.
 //
+//  [2026-10-22] 번역 개요 — 비한국어 앱(`AppLanguage.referenceDataLanguage`)이면 `Resources/OutlineSeed_<en|zh|es>.json`을
+//  대신 가져온다(없으면 기존 한국어 `OutlineSeed.json`). 번역본은 평문이라, 가져올 때 한 번 "설교 본문 글자 크기"
+//  (`UserSettingsStore.sermonBodyFontSize`, 설정 "내 설교 – 본문")의 단일 서식 RTF로 감싸 저장한다 — 그 뒤 설정을 바꿔도
+//  이미 가져온 개요는 따라가지 않는다(사용자 확정). 가져오기 플래그는 언어와 무관한 기존 1회 플래그 그대로라, 가져온 뒤
+//  앱 언어를 바꿔도 다시 가져오지 않는다. 책 이름("book")은 번역본도 한글 `nameKo` 그대로다.
+//  ⚠️ 번역 JSON 3개도 Copy Bundle Resources(타깃 멤버십)에 포함돼야 한다.
+//
 
 import Foundation
 import SwiftData
 import BibleResearchModels
+#if os(iOS)
+import UIKit
+#elseif os(macOS)
+import AppKit
+#endif
 
 @MainActor
 enum OutlineSeedImporter {
@@ -44,10 +56,11 @@ enum OutlineSeedImporter {
         guard !UserSettingsStore.shared.hasImportedOutlineSeed else { return }
         defer { UserSettingsStore.shared.hasImportedOutlineSeed = true }
 
-        guard let url = Bundle.main.url(forResource: "OutlineSeed", withExtension: "json") else {
+        guard let seed = seedResource() else {
             // 아직 번들에 시드 파일이 없다 — 정상 상황이므로 에러로 취급하지 않는다.
             return
         }
+        let url = seed.url
 
         do {
             let data = try Data(contentsOf: url)
@@ -90,15 +103,17 @@ enum OutlineSeedImporter {
                             bookId: book.bookId, chapter: chapter, context: context
                         )
                         guard target.contentText.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty else { continue }
-                        target.contentHtml = text
-                        target.contentText = text
+                        let stored = storedContent(for: text, isTranslatedPlainText: seed.isTranslatedPlainText)
+                        target.contentHtml = stored.html
+                        target.contentText = stored.text
                         target.updatedAt = .now
                         filledChapterCount += 1
                     } else {
                         let target = try BookOutlineDeduplication.findOrCreateBookOutline(bookId: book.bookId, context: context)
                         guard target.contentText.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty else { continue }
-                        target.contentHtml = text
-                        target.contentText = text
+                        let stored = storedContent(for: text, isTranslatedPlainText: seed.isTranslatedPlainText)
+                        target.contentHtml = stored.html
+                        target.contentText = stored.text
                         target.updatedAt = .now
                         filledBookCount += 1
                     }
@@ -109,10 +124,59 @@ enum OutlineSeedImporter {
             }
 
             try context.save()
-            print("[OutlineSeedImporter] 기본 개요 가져오기 완료 — 책 \(filledBookCount)권 / 장 \(filledChapterCount)개 적용, \(skippedCount)개 건너뜀.")
+            print("[OutlineSeedImporter] 기본 개요 가져오기 완료(\(url.lastPathComponent)) — 책 \(filledBookCount)권 / 장 \(filledChapterCount)개 적용, \(skippedCount)개 건너뜀.")
         } catch {
-            print("[OutlineSeedImporter] OutlineSeed.json 읽기 실패: \(error)")
+            print("[OutlineSeedImporter] \(url.lastPathComponent) 읽기 실패: \(error)")
         }
+    }
+
+    // MARK: - 번역 개요 (2026-10-22)
+
+    private struct SeedResource {
+        let url: URL
+        /// 번역 시드(평문) — 저장 전에 설교 본문 크기 RTF로 감싼다. 한국어 시드는 false(기존 대입 그대로).
+        let isTranslatedPlainText: Bool
+    }
+
+    /// 비한국어 앱이면 `OutlineSeed_<lang>.json`, 그 파일이 번들에 없거나 한국어 앱이면 기존 `OutlineSeed.json`.
+    private static func seedResource() -> SeedResource? {
+        if let language = AppLanguage.referenceDataLanguage,
+           let url = Bundle.main.url(forResource: "OutlineSeed_\(language)", withExtension: "json") {
+            return SeedResource(url: url, isTranslatedPlainText: true)
+        }
+        guard let url = Bundle.main.url(forResource: "OutlineSeed", withExtension: "json") else { return nil }
+        return SeedResource(url: url, isTranslatedPlainText: false)
+    }
+
+    /// 저장할 (contentHtml, contentText). 한국어 시드이거나 번역 항목이 이미 RTF면 기존과 똑같이 원문을 두 칸에 넣는다.
+    /// 번역 평문이면 RTF로 감싸 contentHtml에, 평문을 contentText(검색·미리보기용 계약)에 넣는다. RTF 인코딩이 실패하면
+    /// `RichTextCodec.encode`가 평문을 두 값 모두로 돌려주므로 최악에도 내용은 보존된다(화면 기본 글꼴로 보일 뿐).
+    private static func storedContent(for text: String, isTranslatedPlainText: Bool) -> (html: String, text: String) {
+        guard isTranslatedPlainText, !text.hasPrefix("{\\rtf1") else { return (text, text) }
+        let encoded = plainTextAsSermonBodyRTF(text)
+        return (encoded.rtf, encoded.plainText)
+    }
+
+    /// 번역 평문 → 편집기 기본 글꼴 계열(`EditorDefaultStyle.typingFont`) + "내 설교 – 본문" 글자 크기의 단일 서식 RTF.
+    /// 줄간격·글자색은 개요 편집기(`OutlineBookBulkEditView`가 넘기는 `RichTextEditor` 기본 서식)와 같은 공식·값이다.
+    /// 설정값이 0 이하(비정상)면 편집기 기본 크기를 쓴다.
+    private static func plainTextAsSermonBodyRTF(_ plain: String) -> (rtf: String, plainText: String) {
+        let base = EditorDefaultStyle.typingFont
+        let requestedSize = CGFloat(UserSettingsStore.shared.sermonBodyFontSize)
+        let pointSize = requestedSize > 0 ? requestedSize : base.pointSize
+        #if os(iOS)
+        let font = base.withSize(pointSize)
+        #elseif os(macOS)
+        let font = NSFont(descriptor: base.fontDescriptor, size: pointSize) ?? base
+        #endif
+        let paragraph = NSMutableParagraphStyle()
+        paragraph.lineSpacing = font.typographicLineHeight * max(0, EditorDefaultStyle.lineHeightMultiple - 1)
+        let attributes: [NSAttributedString.Key: Any] = [
+            .font: font,
+            .paragraphStyle: paragraph,
+            .foregroundColor: EditorDefaultStyle.textColor,
+        ]
+        return RichTextCodec.encode(NSAttributedString(string: plain, attributes: attributes))
     }
 
     /// `book` 문자열을 `Book`으로 해석한다 — 정확한 한글 이름(`nameKo`) 우선,

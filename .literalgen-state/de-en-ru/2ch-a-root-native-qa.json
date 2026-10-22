@@ -1,0 +1,22 @@
+[
+  {
+    "path": "Tools/LiteralGen/outputs/de/14_2CH/2CH_010.tsv",
+    "old_row": "16\tUnd ganz Israel — weil der König nicht auf sie gehört hatte, antwortete das Volk dem König mit den Worten: „Welchen Anteil haben wir an David? Und kein Erbe am Sohn Isais! Jeder zu deinen Zelten, Israel! Nun sieh nach deinem Haus, David!“ Und ganz Israel ging zu seinen Zelten.\tLuther ergänzt ausdrücklich das Sehen Israels. Das Hebräische verneint das Erbe ausdrücklich und spricht von Zelten statt Hütten.",
+    "new_row": "16\tUnd weil der König nicht auf ganz Israel gehört hatte, antwortete das Volk dem König mit den Worten: „Welchen Anteil haben wir an David? Und kein Erbe am Sohn Isais! Jeder zu deinen Zelten, Israel! Nun sieh nach deinem Haus, David!“ Und ganz Israel ging zu seinen Zelten.\tLuther ergänzt ausdrücklich das Sehen Israels. Das Hebräische verneint das Erbe ausdrücklich und spricht von Zelten statt Hütten."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/14_2CH/2CH_010.tsv",
+    "old_row": "16\tИ весь Израиль — потому что царь не послушал их, ответил народ царю так: «Какая нам часть в Давиде? И нет наследия в сыне Иессея! Каждый к твоим шатрам, Израиль! Теперь смотри за твоим домом, Давид!» И ушёл весь Израиль к своим шатрам.\tСинодальный перевод явно добавляет, что Израиль «увидел» это; в еврейской формулировке глагола видения нет.",
+    "new_row": "16\tИ потому что царь не послушал всего Израиля, народ ответил царю так: «Какая нам часть в Давиде? И нет наследия в сыне Иессея! Каждый к твоим шатрам, Израиль! Теперь смотри за твоим домом, Давид!» И ушел весь Израиль к своим шатрам.\tСинодальный перевод явно добавляет, что Израиль «увидел» это; в еврейской формулировке глагола видения нет."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/14_2CH/2CH_011.tsv",
+    "old_row": "14\tПотому что левиты оставили свои пастбища и свои владения и пошли в Иудею и в Иерусалим, потому что Иеровоам и его сыновья отвергли их от священства Господу.\tЕврейский текст называет пастбища; Синодальный перевод говорит о городских предместьях.",
+    "new_row": "14\tПотому что левиты оставили свои пастбища и свои владения и пошли в Иудею и в Иерусалим, потому что Иеровоам и его сыновья отстранили их от священнического служения Господу.\tЕврейский текст называет пастбища; Синодальный перевод говорит о городских предместьях."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/14_2CH/2CH_012.tsv",
+    "old_row": "7\tUnd als der HERR sah, dass sie sich gedemütigt hatten, geschah das Wort des HERRN zu Semaja mit den Worten: „Sie haben sich gedemütigt. Ich werde sie nicht vernichten und werde ihnen in Kürze Rettung geben, und mein Zorn wird sich nicht durch die Hand Sisaks auf Jerusalem ergießen.\tDas Hebräische kann die bevorstehende Rettung zeitlich als „in Kürze“ ausdrücken; Luther sagt „ein wenig Errettung“. Es nennt ausdrücklich Sisaks Hand.",
+    "new_row": "7\tUnd als der HERR sah, dass sie sich gedemütigt hatten, geschah das Wort des HERRN zu Semaja mit den Worten: „Sie haben sich gedemütigt. Ich werde sie nicht vernichten und werde ihnen in Kürze Rettung geben, und mein Zorn wird sich nicht durch die Hand Sisaks auf Jerusalem ergießen.\tDas Hebräische nennt ausdrücklich Sisaks Hand als ausführendes Mittel; Luther sagt nur „durch Sisak“."
+  }
+]

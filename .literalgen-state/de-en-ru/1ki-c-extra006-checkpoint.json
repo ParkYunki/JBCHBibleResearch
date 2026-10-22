@@ -1,0 +1,28 @@
+{
+  "status": "generation_and_full_qa_complete",
+  "completed_chapters": [
+    6
+  ],
+  "remaining_chapters": [],
+  "new_files": [
+    {
+      "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/11_1KI/1KI_006_1.tsv",
+      "rows": 30
+    },
+    {
+      "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/11_1KI/1KI_006_2.tsv",
+      "rows": 8
+    },
+    {
+      "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/11_1KI/1KI_006_1.tsv",
+      "rows": 30
+    },
+    {
+      "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/11_1KI/1KI_006_2.tsv",
+      "rows": 8
+    }
+  ],
+  "generated_file_count": 4,
+  "generated_rows": 76,
+  "own_qa_rows": 3
+}

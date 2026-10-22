@@ -22,11 +22,11 @@ struct ImportedMemoPreviewSheet: View {
     @State private var saveErrorMessage: String?
 
     private var coordinateLabel: String {
-        let bookName = BooksProvider.shared.book(id: payload.bookId)?.nameKo ?? "알 수 없는 책(\(payload.bookId))"
+        let bookName = BooksProvider.shared.book(id: payload.bookId)?.displayName ?? String(localized: "알 수 없는 책(\(payload.bookId))")
         if let verse = payload.verse {
-            return "\(bookName) \(payload.chapter)장 \(verse)절"
+            return String(localized: "\(bookName) \(payload.chapter)장 \(verse)절")
         }
-        return "\(bookName) \(payload.chapter)장"
+        return String(localized: "\(bookName) \(payload.chapter)장")
     }
 
     var body: some View {

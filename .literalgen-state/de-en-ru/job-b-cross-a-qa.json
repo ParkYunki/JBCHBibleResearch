@@ -1,0 +1,27 @@
+[
+  {
+    "path": "Tools/LiteralGen/outputs/de/18_JOB/JOB_014.tsv",
+    "old_row": "13\tWürdest du mich doch in der Totenwelt bergen, mich verbergen, bis dein Zorn zurückkehrt, mir eine Frist setzen und meiner gedenken!\tDie Totenwelt und eine Frist werden genannt.",
+    "new_row": "13\tWürdest du mich doch in der Totenwelt bergen, mich verbergen, bis dein Zorn zurückweicht, mir eine Frist setzen und meiner gedenken!\tDie Totenwelt und eine Frist werden genannt."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/18_JOB/JOB_012.tsv",
+    "old_row": "25\tОни ощупью идут во тьме и без света, и Он заставляет их шататься как пьяного».\tБог вызывает шатание; пьяный стоит в единственном числе.",
+    "new_row": "25\tОни ощупью идут во тьме и без света, и Он заставляет их шататься, как шатается пьяный».\tБог вызывает шатание; пьяный стоит в единственном числе."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/18_JOB/JOB_013.tsv",
+    "old_row": "20\tТолько двух не делай со мной; тогда не скроюсь от Твоего лица:\tБлизко к еврейскому.",
+    "new_row": "20\tТолько двух вещей не делай со мной; тогда не скроюсь от Твоего лица:\tБлизко к еврейскому."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/18_JOB/JOB_013.tsv",
+    "old_row": "13\tSchweigt von mir ab, und ich will reden, und es gehe über mich, was da will.\tNah am Hebräischen.",
+    "new_row": "13\tSchweigt mir gegenüber, und ich will reden, und es gehe über mich, was da will.\tNah am Hebräischen."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/18_JOB/JOB_013.tsv",
+    "old_row": "13\tУмолкните от меня, и я буду говорить, и пусть пройдёт надо мной что угодно.\tБлизко к еврейскому.",
+    "new_row": "13\tУмолкните передо мной, и я буду говорить, и пусть пройдёт надо мной что угодно.\tБлизко к еврейскому."
+  }
+]

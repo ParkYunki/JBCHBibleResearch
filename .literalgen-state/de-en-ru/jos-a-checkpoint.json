@@ -1,0 +1,153 @@
+{
+  "created": [
+    "Tools/LiteralGen/outputs/de/06_JOS/JOS_001.tsv",
+    "Tools/LiteralGen/outputs/ru/06_JOS/JOS_001.tsv",
+    "Tools/LiteralGen/outputs/en/06_JOS/JOS_001.tsv",
+    "Tools/LiteralGen/outputs/de/06_JOS/JOS_002.tsv",
+    "Tools/LiteralGen/outputs/ru/06_JOS/JOS_002.tsv",
+    "Tools/LiteralGen/outputs/en/06_JOS/JOS_002.tsv",
+    "Tools/LiteralGen/outputs/de/06_JOS/JOS_003.tsv",
+    "Tools/LiteralGen/outputs/ru/06_JOS/JOS_003.tsv",
+    "Tools/LiteralGen/outputs/en/06_JOS/JOS_003.tsv",
+    "Tools/LiteralGen/outputs/de/06_JOS/JOS_004.tsv",
+    "Tools/LiteralGen/outputs/ru/06_JOS/JOS_004.tsv",
+    "Tools/LiteralGen/outputs/en/06_JOS/JOS_004.tsv",
+    "Tools/LiteralGen/outputs/de/06_JOS/JOS_005.tsv",
+    "Tools/LiteralGen/outputs/ru/06_JOS/JOS_005.tsv",
+    "Tools/LiteralGen/outputs/en/06_JOS/JOS_005.tsv",
+    "Tools/LiteralGen/outputs/de/06_JOS/JOS_006.tsv",
+    "Tools/LiteralGen/outputs/ru/06_JOS/JOS_006.tsv",
+    "Tools/LiteralGen/outputs/de/06_JOS/JOS_007.tsv",
+    "Tools/LiteralGen/outputs/ru/06_JOS/JOS_007.tsv",
+    "Tools/LiteralGen/outputs/de/06_JOS/JOS_008_1.tsv",
+    "Tools/LiteralGen/outputs/de/06_JOS/JOS_008_2.tsv",
+    "Tools/LiteralGen/outputs/ru/06_JOS/JOS_008_1.tsv",
+    "Tools/LiteralGen/outputs/ru/06_JOS/JOS_008_2.tsv",
+    "Tools/LiteralGen/outputs/de/06_JOS/JOS_009.tsv",
+    "Tools/LiteralGen/outputs/ru/06_JOS/JOS_009.tsv"
+  ],
+  "chapters_complete": [
+    [
+      1,
+      "de"
+    ],
+    [
+      1,
+      "ru"
+    ],
+    [
+      1,
+      "en"
+    ],
+    [
+      2,
+      "de"
+    ],
+    [
+      2,
+      "ru"
+    ],
+    [
+      2,
+      "en"
+    ],
+    [
+      3,
+      "de"
+    ],
+    [
+      3,
+      "ru"
+    ],
+    [
+      3,
+      "en"
+    ],
+    [
+      4,
+      "de"
+    ],
+    [
+      4,
+      "ru"
+    ],
+    [
+      4,
+      "en"
+    ],
+    [
+      5,
+      "de"
+    ],
+    [
+      5,
+      "ru"
+    ],
+    [
+      5,
+      "en"
+    ],
+    [
+      6,
+      "de"
+    ],
+    [
+      6,
+      "ru"
+    ],
+    [
+      7,
+      "de"
+    ],
+    [
+      7,
+      "ru"
+    ],
+    [
+      8,
+      "de"
+    ],
+    [
+      8,
+      "ru"
+    ],
+    [
+      9,
+      "de"
+    ],
+    [
+      9,
+      "ru"
+    ]
+  ],
+  "generation_complete": true,
+  "qa_file": ".literalgen-state/de-en-ru/jos-a-qa.json",
+  "validation": {
+    "created_files": 25,
+    "rows": 524,
+    "format_errors": 0,
+    "quote_imbalances": [
+      [
+        "de",
+        8,
+        "„",
+        3,
+        2
+      ]
+    ],
+    "quote_imbalances_after_queued_qa": []
+  },
+  "qa_complete": true,
+  "qa_candidates": 8,
+  "root_english_independent_review": {
+    "chapters": [
+      6,
+      7,
+      8,
+      9
+    ],
+    "rows": 115,
+    "qa_candidates": 0,
+    "qa_file": ".literalgen-state/de-en-ru/jos-a-root-en-qa.json"
+  }
+}

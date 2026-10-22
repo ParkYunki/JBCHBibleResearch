@@ -1,0 +1,26 @@
+[
+  {
+    "path": "Tools/LiteralGen/outputs/en/12_2KI/2KI_005.tsv",
+    "verse": 13,
+    "old_row": "13\t=\tThe Hebrew leaves the servants master unnamed; BSB supplies Naaman.",
+    "new_row": "13\t=\tThe Hebrew leaves the servants’ master unnamed; BSB supplies Naaman."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/en/12_2KI/2KI_006_1.tsv",
+    "verse": 10,
+    "old_row": "10\t=\tThe Hebrew says not once and not twice and leaves the warning subject unnamed; BSB says Time and again and names Elisha.",
+    "new_row": "10\t=\tThe Hebrew says “not once and not twice” and identifies the warning source as the man of God; BSB says “Time and again” and names Elisha."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/en/12_2KI/2KI_008.tsv",
+    "verse": 21,
+    "old_row": "21\t=\tThe Hebrew says the people fled to their tents; BSB says his troops fled to their homes.",
+    "new_row": "21\t=\tThe Hebrew includes the chariot commanders among those he struck; BSB includes them among those surrounded. It says the people fled to their tents, where BSB says his troops fled to their homes."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/en/12_2KI/2KI_008.tsv",
+    "verse": 27,
+    "old_row": "27\t=\tThe Hebrew leaves the man unnamed, uses singular way, and repeats the house of Ahab three times; BSB supplies Ahaziah, uses plural ways, and replaces the last house with a pronoun.",
+    "new_row": "27\t=\tThe Hebrew leaves the man unnamed and uses singular “way”; BSB supplies Ahaziah and uses plural “ways.”"
+  }
+]

@@ -1,0 +1,21 @@
+{
+  "book": "21_ECC",
+  "created_files": 8,
+  "created": [
+    "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/21_ECC/ECC_001.tsv",
+    "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/21_ECC/ECC_001.tsv",
+    "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/21_ECC/ECC_002.tsv",
+    "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/21_ECC/ECC_002.tsv",
+    "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/21_ECC/ECC_003.tsv",
+    "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/21_ECC/ECC_003.tsv",
+    "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/21_ECC/ECC_004.tsv",
+    "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/21_ECC/ECC_004.tsv"
+  ],
+  "chapters_done": [
+    1,
+    2,
+    3,
+    4
+  ],
+  "status": "working"
+}

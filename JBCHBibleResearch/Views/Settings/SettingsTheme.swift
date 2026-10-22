@@ -120,7 +120,7 @@ private struct SettingsNavigationPageModifier: ViewModifier {
             .toolbar {
                 ToolbarItem(placement: .principal) {
                     Text(title)
-                        .font(.custom(SpecialPurposeFonts.titleSerif, size: 17, relativeTo: .title3))
+                        .font(.titleSerif(title, size: 17, relativeTo: .title3))
                         .foregroundStyle(UserSettingsStore.shared.bibleTextColor ?? Color.primary)
                         .lineLimit(1)
                         .accessibilityAddTraits(.isHeader)

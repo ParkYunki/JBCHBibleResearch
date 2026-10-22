@@ -206,7 +206,7 @@ struct AnnotatedVerseFlowView: View {
         .underline(underlineActive, pattern: .solid, color: .orange)
         .contextMenu {
             if let highlight = segment.highlight {
-                Button(highlight.style == .highlight ? "형광펜 취소" : "표시 취소", role: .destructive) {
+                Button(highlight.style == .highlight ? String(localized: "형광펜 취소") : String(localized: "표시 취소"), role: .destructive) {
                     onRequestRemoveHighlight(highlight)
                 }
             }

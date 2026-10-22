@@ -1,0 +1,27 @@
+{
+  "scope": "RUT002 de/ru",
+  "status": "generation_and_all_verse_qa_complete_pending_root_redo",
+  "files": 2,
+  "rows": 46,
+  "qa_entries": 10,
+  "qa_file": "rut-b-qa.json",
+  "validation_file": "rut-b-validation.json",
+  "created_file": "rut-b-created.json",
+  "unfinished_review_scope": [],
+  "root_en_review": {
+    "chapter": 2,
+    "rows": 23,
+    "source_target_review_complete": true,
+    "confirmed_errors": 0,
+    "qa_file": "rut-b-root-en-qa.json"
+  },
+  "existing_output_overwrites": false,
+  "direct_tsv_corrections": false,
+  "protected_baseline_file": "08_RUT-protected.json",
+  "protected_preservation": {
+    "files": 7375,
+    "unchanged": true,
+    "missing": 0,
+    "changed": 0
+  }
+}

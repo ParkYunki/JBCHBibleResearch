@@ -1,0 +1,23 @@
+[
+  {
+    "path": "Tools/LiteralGen/outputs/en/03_LEV/LEV_010.tsv",
+    "verse": 12,
+    "old_row": "12\t=\tThe Hebrew repeats the remaining language for the sons and the grain offering, and calls the offering “holiness of holinesses”; BSB says “most holy.”",
+    "new_row": "12\t=\tThe Hebrew calls the offering “holiness of holinesses”; BSB says “most holy.”",
+    "reason": "Remove a repetition observation that is also present in BSB."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/en/03_LEV/LEV_027_1.tsv",
+    "verse": 26,
+    "old_row": "26\t=\tThe Hebrew repeats the firstborn root in “a firstborn which is born first”; BSB states “a firstborn” and then repeats its belonging to the LORD.",
+    "new_row": "26\t=\tThe Hebrew uses a birth verb in “a firstborn which is born first to the LORD”; BSB explains the restriction with “because a firstborn belongs to the LORD.”",
+    "reason": "Make the verbal wording difference precise; BSB also repeats the firstborn noun."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/en/03_LEV/LEV_027_1.tsv",
+    "verse": 8,
+    "old_row": "8\t=\tThe Hebrew describes affordability as what the vower’s “hand can reach” and repeats “the priest” twice; BSB says “can afford” and names the priest once.",
+    "new_row": "8\t=\tThe Hebrew describes affordability as what the vower’s “hand can reach” and names “the priest” three times; BSB says “can afford” and names the priest once.",
+    "reason": "State the exact number of occurrences unambiguously."
+  }
+]

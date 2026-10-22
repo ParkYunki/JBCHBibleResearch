@@ -1,0 +1,384 @@
+{
+  "assigned": [
+    {
+      "chapter": 21,
+      "packets": [
+        "PSA_021.txt"
+      ],
+      "verses": 13
+    },
+    {
+      "chapter": 22,
+      "packets": [
+        "PSA_022_1.txt",
+        "PSA_022_2.txt"
+      ],
+      "verses": 31
+    },
+    {
+      "chapter": 23,
+      "packets": [
+        "PSA_023.txt"
+      ],
+      "verses": 6
+    },
+    {
+      "chapter": 24,
+      "packets": [
+        "PSA_024.txt"
+      ],
+      "verses": 10
+    },
+    {
+      "chapter": 25,
+      "packets": [
+        "PSA_025.txt"
+      ],
+      "verses": 22
+    },
+    {
+      "chapter": 26,
+      "packets": [
+        "PSA_026.txt"
+      ],
+      "verses": 12
+    },
+    {
+      "chapter": 27,
+      "packets": [
+        "PSA_027.txt"
+      ],
+      "verses": 14
+    },
+    {
+      "chapter": 28,
+      "packets": [
+        "PSA_028.txt"
+      ],
+      "verses": 9
+    },
+    {
+      "chapter": 29,
+      "packets": [
+        "PSA_029.txt"
+      ],
+      "verses": 11
+    },
+    {
+      "chapter": 30,
+      "packets": [
+        "PSA_030.txt"
+      ],
+      "verses": 12
+    },
+    {
+      "chapter": 31,
+      "packets": [
+        "PSA_031.txt"
+      ],
+      "verses": 24
+    },
+    {
+      "chapter": 32,
+      "packets": [
+        "PSA_032.txt"
+      ],
+      "verses": 11
+    },
+    {
+      "chapter": 33,
+      "packets": [
+        "PSA_033.txt"
+      ],
+      "verses": 22
+    },
+    {
+      "chapter": 34,
+      "packets": [
+        "PSA_034.txt"
+      ],
+      "verses": 22
+    },
+    {
+      "chapter": 35,
+      "packets": [
+        "PSA_035.txt"
+      ],
+      "verses": 28
+    },
+    {
+      "chapter": 36,
+      "packets": [
+        "PSA_036.txt"
+      ],
+      "verses": 12
+    },
+    {
+      "chapter": 37,
+      "packets": [
+        "PSA_037_1.txt",
+        "PSA_037_2.txt"
+      ],
+      "verses": 40
+    },
+    {
+      "chapter": 38,
+      "packets": [
+        "PSA_038.txt"
+      ],
+      "verses": 22
+    },
+    {
+      "chapter": 39,
+      "packets": [
+        "PSA_039.txt"
+      ],
+      "verses": 13
+    },
+    {
+      "chapter": 40,
+      "packets": [
+        "PSA_040.txt"
+      ],
+      "verses": 17
+    },
+    {
+      "chapter": 81,
+      "packets": [
+        "PSA_081.txt"
+      ],
+      "verses": 16
+    },
+    {
+      "chapter": 82,
+      "packets": [
+        "PSA_082.txt"
+      ],
+      "verses": 8
+    },
+    {
+      "chapter": 83,
+      "packets": [
+        "PSA_083.txt"
+      ],
+      "verses": 18
+    },
+    {
+      "chapter": 84,
+      "packets": [
+        "PSA_084.txt"
+      ],
+      "verses": 12
+    },
+    {
+      "chapter": 85,
+      "packets": [
+        "PSA_085.txt"
+      ],
+      "verses": 13
+    },
+    {
+      "chapter": 86,
+      "packets": [
+        "PSA_086.txt"
+      ],
+      "verses": 17
+    },
+    {
+      "chapter": 87,
+      "packets": [
+        "PSA_087.txt"
+      ],
+      "verses": 7
+    },
+    {
+      "chapter": 88,
+      "packets": [
+        "PSA_088.txt"
+      ],
+      "verses": 18
+    },
+    {
+      "chapter": 89,
+      "packets": [
+        "PSA_089_1.txt",
+        "PSA_089_2.txt"
+      ],
+      "verses": 52
+    },
+    {
+      "chapter": 90,
+      "packets": [
+        "PSA_090.txt"
+      ],
+      "verses": 17
+    },
+    {
+      "chapter": 91,
+      "packets": [
+        "PSA_091.txt"
+      ],
+      "verses": 16
+    },
+    {
+      "chapter": 92,
+      "packets": [
+        "PSA_092.txt"
+      ],
+      "verses": 15
+    },
+    {
+      "chapter": 93,
+      "packets": [
+        "PSA_093.txt"
+      ],
+      "verses": 5
+    },
+    {
+      "chapter": 94,
+      "packets": [
+        "PSA_094.txt"
+      ],
+      "verses": 23
+    },
+    {
+      "chapter": 95,
+      "packets": [
+        "PSA_095.txt"
+      ],
+      "verses": 11
+    },
+    {
+      "chapter": 96,
+      "packets": [
+        "PSA_096.txt"
+      ],
+      "verses": 13
+    },
+    {
+      "chapter": 97,
+      "packets": [
+        "PSA_097.txt"
+      ],
+      "verses": 12
+    },
+    {
+      "chapter": 98,
+      "packets": [
+        "PSA_098.txt"
+      ],
+      "verses": 9
+    },
+    {
+      "chapter": 99,
+      "packets": [
+        "PSA_099.txt"
+      ],
+      "verses": 9
+    },
+    {
+      "chapter": 100,
+      "packets": [
+        "PSA_100.txt"
+      ],
+      "verses": 5
+    },
+    {
+      "chapter": 136,
+      "packets": [
+        "PSA_136.txt"
+      ],
+      "verses": 26
+    },
+    {
+      "chapter": 137,
+      "packets": [
+        "PSA_137.txt"
+      ],
+      "verses": 9
+    },
+    {
+      "chapter": 138,
+      "packets": [
+        "PSA_138.txt"
+      ],
+      "verses": 8
+    },
+    {
+      "chapter": 139,
+      "packets": [
+        "PSA_139.txt"
+      ],
+      "verses": 24
+    },
+    {
+      "chapter": 140,
+      "packets": [
+        "PSA_140.txt"
+      ],
+      "verses": 13
+    }
+  ],
+  "completed": [
+    21,
+    22,
+    23,
+    24,
+    25,
+    26,
+    27,
+    28,
+    29,
+    30,
+    31,
+    32,
+    33,
+    34,
+    35,
+    36,
+    37,
+    38,
+    39,
+    40,
+    81,
+    82,
+    83,
+    84,
+    85,
+    86,
+    87,
+    88,
+    89,
+    90,
+    91,
+    92,
+    93,
+    94,
+    95,
+    96,
+    97,
+    98,
+    99,
+    100,
+    136,
+    137,
+    138,
+    139,
+    140
+  ],
+  "pending": "root official check after all Psalms and queued redo",
+  "native_en_complete": true,
+  "selfqa_complete": true,
+  "files": 144,
+  "rows": 2181,
+  "qa_candidates": 12,
+  "latest_batch": {
+    "chapters": [
+      136,
+      140
+    ],
+    "files": 15,
+    "rows": 240,
+    "missing": []
+  }
+}

@@ -1,0 +1,74 @@
+[
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/07_JDG/JDG_015.tsv",
+    "verse": 13,
+    "old_row": "13\tИ сказали ему, говоря: «Нет, но мы непременно свяжем тебя и отдадим тебя в их руку, а умертвить тебя ни в коем случае не умертвим». И связали его двумя новыми верёвками, и подняли его со скалы.\tБинтование выражено усиленным «непременно свяжем», и «рука» стоит в единственном числе. Его подняли «со скалы», а не просто повели из ущелья.",
+    "new_row": "13\tИ сказали ему, говоря: «Нет, но мы непременно свяжем тебя и отдадим тебя в их руку, а умертвить тебя ни в коем случае не умертвим». И связали его двумя новыми верёвками, и подняли его со скалы.\tСвязывание выражено усиленным «непременно свяжем», и «рука» стоит в единственном числе. Его подняли «со скалы», а не просто повели из ущелья."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/07_JDG/JDG_016_1.tsv",
+    "verse": 12,
+    "old_row": "12\tUnd Delila nahm neue Stricke und band ihn damit und sagte zu ihm: „Die Philister über dir, Simson!“ Und der Lauernde saß in der Kammer; und er riss sie von seinen Armen wie einen Faden.\tDer Vergleichsfaden steht im Singular.",
+    "new_row": "12\tUnd Delila nahm neue Stricke und band ihn damit und sagte zu ihm: „Die Philister über dir, Simson!“ Und der Lauernde saß in der Kammer; und er riss sie von seinen Armen wie einen Faden.\tNah am Hebräischen."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/07_JDG/JDG_016_1.tsv",
+    "verse": 28,
+    "old_row": "28\tИ воззвал Самсон к Господу, и сказал: «Господин, Господь, вспомни меня, прошу, и укрепи меня, прошу, лишь в этот раз, Боже, чтобы мне отомстить одной местью филистимлянам за мои два глаза».\tПросительная частица повторена дважды, а обращение к Богу состоит из двух отдельных титулов и затем «Боже».",
+    "new_row": "28\tИ воззвал Самсон к Господу, и сказал: «Владыка, Господи, вспомни меня, прошу, и укрепи меня, прошу, лишь в этот раз, Боже, чтобы мне отомстить одной местью филистимлянам за мои два глаза».\tПросительная частица повторена дважды, а обращение к Богу состоит из двух отдельных титулов и затем «Боже»."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/07_JDG/JDG_018_1.tsv",
+    "verse": 16,
+    "old_row": "16\tИ шестьсот человек, опоясанных своим орудием войны, стояли у входа ворот, те, кто из сынов Дановых.\tОни стоят у «входа ворот», а не просто у ворот.",
+    "new_row": "16\tИ шестьсот человек, опоясанных своими орудиями войны, стояли у входа ворот, те, кто из сынов Дановых.\tОни стоят у «входа ворот», а не просто у ворот."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/07_JDG/JDG_019.tsv",
+    "verse": 24,
+    "old_row": "24\tВот, моя дочь, девственница, и его наложница; выведу же я их, и унизьте их, и делайте им доброе в ваших глазах. А этому человеку не делайте этого бесчестного дела».\tПредпочтение выражено как «доброе в ваших глазах».",
+    "new_row": "24\tВот, моя дочь, девственница, и его наложница; выведу же я их, и унизьте их, и делайте им то, что добро в ваших глазах. А этому человеку не делайте этого бесчестного дела».\tПредпочтение выражено как «доброе в ваших глазах»."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/07_JDG/JDG_020_1.tsv",
+    "verse": 13,
+    "old_row": "13\tUnd nun gebt die Männer heraus, die nichtswürdigen Männer in Gibea, damit wir sie töten und das Böse aus Israel wegschaffen.“ Aber die Söhne Benjamins wollten nicht auf die Stimme ihrer Brüder, der Söhne Israels, hören.\tNah am Hebräischen.",
+    "new_row": "13\tUnd nun gebt die Männer heraus, die Männer, Söhne der Nichtswürdigkeit, in Gibea, damit wir sie töten und das Böse aus Israel wegschaffen.“ Aber die Söhne Benjamins wollten nicht auf die Stimme ihrer Brüder, der Söhne Israels, hören.\tDie Übeltäter heißen wörtlich „Söhne der Nichtswürdigkeit“; die Vorlage hat „böse Buben“."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/07_JDG/JDG_020_1.tsv",
+    "verse": 13,
+    "old_row": "13\tИ теперь выдайте негодных людей, которые в Гиве, и мы умертвим их и удалим зло из Израиля». И не хотели сыны Вениаминовы слушать голоса своих братьев, сынов Израилевых.\tБлизко к еврейскому.",
+    "new_row": "13\tИ теперь выдайте людей, сынов негодности, которые в Гиве, и мы умертвим их и удалим зло из Израиля». И не хотели сыны Вениаминовы слушать голоса своих братьев, сынов Израилевых.\tНегодность описана образом «сынов негодности», а не только развращённых людей."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/07_JDG/JDG_020_2.tsv",
+    "verse": 31,
+    "old_row": "31\tUnd die Söhne Benjamins zogen dem Volk entgegen und wurden von der Stadt weggezogen; und sie begannen wie Mal um Mal, vom Volk auf den Straßen Erschlagene niederzustrecken, von denen eine nach Beth-El hinaufgeht und eine nach Gibea im Feld: etwa dreißig Mann in Israel.\tDie Wiederholung lautet „Mal um Mal“, ohne ausdrückliche Zahl zwei. Die Getroffenen sind Erschlagene, nicht nur Verwundete.",
+    "new_row": "31\tUnd die Söhne Benjamins zogen dem Volk entgegen und wurden von der Stadt weggezogen; und sie begannen wie Mal um Mal, vom Volk auf den Straßen Menschen tödlich zu schlagen, von denen eine nach Beth-El hinaufgeht und eine nach Gibea im Feld: etwa dreißig Mann in Israel.\tDie Wiederholung lautet „Mal um Mal“, ohne ausdrückliche Zahl zwei. Die Getroffenen sind Erschlagene, nicht nur Verwundete."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/07_JDG/JDG_020_2.tsv",
+    "verse": 31,
+    "old_row": "31\tИ вышли сыны Вениаминовы навстречу народу, были оттянуты от города, и начали, как раз за разом, поражать убитых из народа на дорогах, из которых одна поднимается к Вефилю, а одна к Гиве в поле: около тридцати человек в Израиле.\tОни были оттянуты от города, пассивно; число приблизительное «около тридцати», а не «до тридцати».",
+    "new_row": "31\tИ вышли сыны Вениаминовы навстречу народу, были оттянуты от города, и начали, как раз за разом, поражать людей из народа насмерть на дорогах, из которых одна поднимается к Вефилю, а одна к Гиве в поле: около тридцати человек в Израиле.\tОни были оттянуты от города, пассивно; число приблизительное «около тридцати», а не «до тридцати»."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/07_JDG/JDG_020_2.tsv",
+    "verse": 39,
+    "old_row": "39\tИ повернули мужи Израилевы в сражении; а Вениамин начал поражать убитых среди мужей Израилевых, около тридцати человек, ибо говорили: «Он непременно поражён перед нами, как в первом сражении».\tЧисло — около тридцати; сравнение — с первым сражением, в единственном числе. Неназванное «он» и корень поражения подчёркнуты повтором.",
+    "new_row": "39\tИ повернули мужи Израилевы в сражении; а Вениамин начал поражать насмерть среди мужей Израилевых около тридцати человек, ибо говорили: «Он непременно поражён перед нами, как в первом сражении».\tЧисло — около тридцати; сравнение — с первым сражением, в единственном числе. Неназванное «он» и корень поражения подчёркнуты повтором."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/07_JDG/JDG_021.tsv",
+    "verse": 6,
+    "old_row": "6\tUnd die Söhne Israels hatten Mitleid mit Benjamin, seinem Bruder, und sagten: „Heute ist ein Stamm von Israel abgehauen.\tDer Bruder steht im Singular mit einem Einzahlbesitzer; die Vorlage hat „ihre Brüder“.",
+    "new_row": "6\tUnd die Söhne Israels hatten Mitleid mit Benjamin, seinem Bruder, und sagten: „Heute ist ein Stamm von Israel abgehauen.\tBenjamin wird als einzelner „Bruder“ bezeichnet, nicht als „ihre Brüder“."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/07_JDG/JDG_021.tsv",
+    "verse": 6,
+    "old_row": "6\tИ сжалились сыны Израилевы над Вениамином, его братом, и сказали: «Сегодня отсечено одно колено от Израиля.\tПри брате стоит притяжательное местоимение единственного числа, а не «своим» при множественном субъекте.",
+    "new_row": "6\tИ сжалились сыны Израилевы над Вениамином, его братом, и сказали: «Сегодня отсечено одно колено от Израиля.\tВениамин назван одним братом; притяжательное местоимение также стоит в единственном числе."
+  }
+]

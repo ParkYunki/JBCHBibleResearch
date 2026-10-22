@@ -2,7 +2,7 @@
 //  BookNameTable.swift
 //  JBCHBibleResearch
 //
-//  내장 9개 언어 책 이름표(`BookNameTable`). 사용자 추가 번역본 SQLite는 대부분 책 이름 없이
+//  내장 15개 언어 책 이름표(`BookNameTable`). 사용자 추가 번역본 SQLite는 대부분 책 이름 없이
 //  book_id(정수)만 있어 어느 언어로 이름을 보여줄지 알 수 없는데, 이 이름표가 그 문제를
 //  해결한다. `TranslationRegistry.bookNameTableID`가 사용할 이름표를 가리킨다.
 //
@@ -36,14 +36,20 @@ nonisolated struct BookNameTable: Codable, Identifiable, Hashable, Sendable {
         static let german = "lang.de"
         static let italian = "lang.it"
         static let japanese = "lang.ja"
+        static let french = "lang.fr"
+        static let chineseSimplified = "lang.zh-Hans"
+        static let chineseTraditional = "lang.zh-Hant"
+        static let portuguese = "lang.pt"
+        static let russian = "lang.ru"
+        static let vietnamese = "lang.vi"
     }
 
-    /// 내장 이름표 9종.
+    /// 내장 이름표 15종(2026-10-11 i18n으로 프랑스어·중국어 간체/번체·포르투갈어·러시아어·베트남어 추가).
     static func builtInBookNameTables() -> [BookNameTable] {
         [
             // 영어 — 전 세계 공통 표준 표기 (확신 높음, 별도 출처 확인 불필요)
             BookNameTable(
-                id: BuiltInBookNameTable.english, displayName: "영어", isBuiltIn: true,
+                id: BuiltInBookNameTable.english, displayName: String(localized: "영어"), isBuiltIn: true,
                 fullNames: [
                     "Genesis","Exodus","Leviticus","Numbers","Deuteronomy","Joshua","Judges","Ruth",
                     "1 Samuel","2 Samuel","1 Kings","2 Kings","1 Chronicles","2 Chronicles","Ezra","Nehemiah",
@@ -67,7 +73,7 @@ nonisolated struct BookNameTable: Codable, Identifiable, Hashable, Sendable {
             // 태국어 — 출처: bible.eu (Thai New Contemporary Bible) 66권 목록 확인.
             // ⚠️ 단일 출처이며, 공식 약어 체계를 확인하지 못해 shortNames는 비워둔다.
             BookNameTable(
-                id: BuiltInBookNameTable.thai, displayName: "태국어", isBuiltIn: true,
+                id: BuiltInBookNameTable.thai, displayName: String(localized: "태국어"), isBuiltIn: true,
                 fullNames: [
                     "ปฐมกาล","อพยพ","เลวีนิติ","กันดารวิถี","เฉลยธรรมบัญญัติ","โยชูวา","ผู้วินิจฉัย","นางรูธ",
                     "1 ซามูเอล","2 ซามูเอล","1 พงศ์กษัตริย์","2 พงศ์กษัตริย์","1 พงศาวดาร","2 พงศาวดาร","เอสรา","เนหะมีย์",
@@ -83,7 +89,7 @@ nonisolated struct BookNameTable: Codable, Identifiable, Hashable, Sendable {
             // 몽골어 — 출처: mongol.bible (Ariun Nom, AB2013 번역본) 66권 목록 확인.
             // ⚠️ 단일 출처이며, 공식 약어 체계를 확인하지 못해 shortNames는 비워둔다.
             BookNameTable(
-                id: BuiltInBookNameTable.mongolian, displayName: "몽골어", isBuiltIn: true,
+                id: BuiltInBookNameTable.mongolian, displayName: String(localized: "몽골어"), isBuiltIn: true,
                 fullNames: [
                     "Эхлэл","Гэтлэл","Леви","Тооллого","Дэд хууль","Иошуа","Шүүгчид","Рут",
                     "1 Самуел","2 Самуел","1 Хаад","2 Хаад","1 Шастир","2 Шастир","Езра","Нехемиа",
@@ -98,7 +104,7 @@ nonisolated struct BookNameTable: Codable, Identifiable, Hashable, Sendable {
             ),
             // 네팔어·타갈로그·스페인어·독일어·이탈리아어·일본어는 66권 전체를 검증한 데이터다.
             BookNameTable(
-                id: BuiltInBookNameTable.nepali, displayName: "네팔어", isBuiltIn: true,
+                id: BuiltInBookNameTable.nepali, displayName: String(localized: "네팔어"), isBuiltIn: true,
                 fullNames: [
                     "उत्पत्तिको पुस्तक", "प्रस्थानको पुस्तक", "लेवीहरूको पुस्तक", "गन्तीको पुस्तक", "व्यवस्था", "यहोशू", "न्यायकर्ताहरू",
                     "रूत", "१ शमूएल", "२ शमूएल", "१ राजाहरू", "२ राजाहरू", "१ इतिहास", "२ इतिहास", "एज्रा", "नहेम्याह",
@@ -110,7 +116,7 @@ nonisolated struct BookNameTable: Codable, Identifiable, Hashable, Sendable {
                 ],
                 shortNames: Array(repeating: "", count: 66)),
             BookNameTable(
-                id: BuiltInBookNameTable.tagalog, displayName: "필리핀어(타갈로그)", isBuiltIn: true,
+                id: BuiltInBookNameTable.tagalog, displayName: String(localized: "필리핀어(타갈로그)"), isBuiltIn: true,
                 fullNames: [
                      "Genesis", "Exodo", "Levitico", "Mga Bilang", "Deuteronomio", "Josue", "Mga Hukom", "Ruth",
                      "1 Samuel", "2 Samuel", "1 Mga Hari", "2 Mga Hari", "1 Mga Cronica", "2 Mga Cronica", "Ezra",
@@ -125,7 +131,7 @@ nonisolated struct BookNameTable: Codable, Identifiable, Hashable, Sendable {
                 ],
                 shortNames: Array(repeating: "", count: 66)),
             BookNameTable(
-                id: BuiltInBookNameTable.spanish, displayName: "스페인어", isBuiltIn: true,
+                id: BuiltInBookNameTable.spanish, displayName: String(localized: "스페인어"), isBuiltIn: true,
                 fullNames: [
                     "Génesis", "Éxodo", "Levítico", "Números", "Deuteronomio", "Josué", "Jueces", "Rut",
                     "1 Samuel", "2 Samuel", "1 Reyes", "2 Reyes", "1 Crónicas", "2 Crónicas", "Esdras",
@@ -146,7 +152,7 @@ nonisolated struct BookNameTable: Codable, Identifiable, Hashable, Sendable {
                     "1 Jn", "2 Jn", "3 Jn", "Jud", "Ap"
                 ]),
             BookNameTable(
-                id: BuiltInBookNameTable.german, displayName: "독일어", isBuiltIn: true,
+                id: BuiltInBookNameTable.german, displayName: String(localized: "독일어"), isBuiltIn: true,
                 fullNames: [
                     "Genesis", "Exodus", "Levitikus", "Numeri", "Deuteronomium", "Josua", "Richter", "Rut",
                     "1 Samuel", "2 Samuel", "1 Könige", "2 Könige", "1 Chronik", "2 Chronik", "Esra", "Nehemia",
@@ -167,7 +173,7 @@ nonisolated struct BookNameTable: Codable, Identifiable, Hashable, Sendable {
                     "Tit", "Phlm", "Hebr", "Jak", "1 Petr", "2 Petr", "1 Joh", "2 Joh", "3 Joh", "Jud", "Offb"
                 ]),
             BookNameTable(
-                id: BuiltInBookNameTable.italian, displayName: "이탈리아어", isBuiltIn: true,
+                id: BuiltInBookNameTable.italian, displayName: String(localized: "이탈리아어"), isBuiltIn: true,
                 fullNames: [
                     "Genesi", "Esodo", "Levitico", "Numeri", "Deuteronomio", "Giosuè", "Giudici", "Rut",
                     "1 Samuele", "2 Samuele", "1 Re", "2 Re", "1 Cronache", "2 Cronache", "Esdra", "Neemia",
@@ -189,7 +195,7 @@ nonisolated struct BookNameTable: Codable, Identifiable, Hashable, Sendable {
                     "Gd", "Ap"
                 ]),
             BookNameTable(
-                id: BuiltInBookNameTable.japanese, displayName: "일본어", isBuiltIn: true,
+                id: BuiltInBookNameTable.japanese, displayName: String(localized: "일본어"), isBuiltIn: true,
                 fullNames: [
                     "創世記", "出エジプト記", "レビ記", "民数記", "申命記", "ヨシュア記", "士師記", "ルツ記", "サムエル記 第一",
                     "サムエル記 第二", "列王記 第一", "列王記 第二", "歴代誌 第一", "歴代誌 第二", "エズラ記", "ネヘミヤ記", "エステル記",
@@ -208,6 +214,95 @@ nonisolated struct BookNameTable: Codable, Identifiable, Hashable, Sendable {
                     "ルカ", "ヨハ", "使", "ロマ", "Ⅰコリ", "Ⅱコリ", "ガラ", "エペ", "ピリ", "コロ", "Ⅰテサ", "Ⅱテサ",
                     "Ⅰテモ", "Ⅱテモ", "テト", "ピレ", "ヘブ", "ヤコ", "Ⅰペテ", "Ⅱペテ", "Ⅰヨハ", "Ⅱヨハ", "Ⅲヨハ", "ユダ", "黙"
                 ]),
+            // [2026-10-11 i18n] 출처: getbible v2 darby (French Darby, Public Domain). 스크립트로 원본 파일에서 추출(수기 입력 아님).
+            // 공식 약어 체계를 확인하지 않아 shortNames는 비워 둔다(표시는 fullNames로 폴백).
+            BookNameTable(
+                id: BuiltInBookNameTable.french, displayName: String(localized: "프랑스어"), isBuiltIn: true,
+                fullNames: [
+                    "Genèse", "Exode", "Lévitique", "Nombres", "Deutéronome", "Josué", "Juges", "Ruth", "1 Samuel",
+                    "2 Samuel", "1 Rois", "2 Rois", "1 Chroniques", "2 Chroniques", "Esdras", "Néhémie", "Esther",
+                    "Job", "Psaumes", "Proverbes", "Ecclésiaste", "Cantique des Cantiques", "Ésaïe", "Jérémie",
+                    "Lamentations", "Ézéchiel", "Daniel", "Osée", "Joël", "Amos", "Abdias", "Jonas", "Michée", "Nahum",
+                    "Habacuc", "Sophonie", "Aggée", "Zacharie", "Malachie", "Matthieu", "Marc", "Luc", "Jean",
+                    "Actes des Apôtres", "Romains", "1 Corinthiens", "2 Corinthiens", "Galates", "Éphésiens",
+                    "Philippiens", "Colossiens", "1 Thessaloniciens", "2 Thessaloniciens", "1 Timothée", "2 Timothée",
+                    "Tite", "Philémon", "Hébreux", "Jacques", "1 Pierre", "2 Pierre", "1 Jean", "2 Jean", "3 Jean",
+                    "Jude", "Apocalypse"
+                ],
+                shortNames: Array(repeating: "", count: 66)),
+            // [2026-10-11 i18n] 출처: open-bibles chi-cuv-simp (Chinese Union Version, Public Domain). 스크립트로 원본 파일에서 추출(수기 입력 아님).
+            // 공식 약어 체계를 확인하지 않아 shortNames는 비워 둔다(표시는 fullNames로 폴백).
+            BookNameTable(
+                id: BuiltInBookNameTable.chineseSimplified, displayName: String(localized: "중국어(간체)"), isBuiltIn: true,
+                fullNames: [
+                    "创世纪", "出埃及记", "利未记", "民数记", "申命记", "约书亚记", "士师记", "路得记", "撒母耳记上", "撒母耳记下", "列王纪上", "列王纪下", "历代志上",
+                    "历代志下", "以斯拉记", "尼希米记", "以斯帖记", "约伯记", "诗篇", "箴言", "传道书", "雅歌", "以赛亚书", "耶利米书", "耶利米哀歌", "以西结书",
+                    "但以理书", "何西阿书", "约珥书", "阿摩司书", "俄巴底亚书", "约拿书", "弥迦书", "那鸿书", "哈巴谷书", "西番雅书", "哈该书", "撒迦利亚书",
+                    "玛拉基书", "马太福音", "马可福音", "路加福音", "约翰福音", "使徒行传", "罗马书", "哥林多前书", "哥林多后书", "加拉太书", "以弗所书", "腓利比书",
+                    "歌罗西书", "帖撒罗尼迦前书", "帖撒罗尼迦后书", "提摩太前书", "提摩太后书", "提多书", "腓利门书", "希伯来书", "雅各书", "彼得前书", "彼得后书",
+                    "约翰壹书", "约翰贰书", "约翰参书", "犹大书", "启示录"
+                ],
+                shortNames: Array(repeating: "", count: 66)),
+            // [2026-10-11 i18n] 출처: open-bibles chi-cuv (Chinese Union Version, Public Domain). 스크립트로 원본 파일에서 추출(수기 입력 아님).
+            // 공식 약어 체계를 확인하지 않아 shortNames는 비워 둔다(표시는 fullNames로 폴백).
+            BookNameTable(
+                id: BuiltInBookNameTable.chineseTraditional, displayName: String(localized: "중국어(번체)"), isBuiltIn: true,
+                fullNames: [
+                    "創世紀", "出埃及記", "利未記", "民數記", "申命記", "約書亞記", "士師記", "路得記", "撒母耳記上", "撒母耳記下", "列王紀上", "列王紀下", "歷代志上",
+                    "歷代志下", "以斯拉記", "尼希米記", "以斯帖記", "約伯記", "詩篇", "箴言", "傳道書", "雅歌", "以賽亞書", "耶利米書", "耶利米哀歌", "以西結書",
+                    "但以理書", "何西阿書", "約珥書", "阿摩司書", "俄巴底亞書", "約拿書", "彌迦書", "那鴻書", "哈巴谷書", "西番雅書", "哈該書", "撒迦利亞書",
+                    "瑪拉基書", "馬太福音", "馬可福音", "路加福音", "約翰福音", "使徒行傳", "羅馬書", "哥林多前書", "哥林多後書", "加拉太書", "以弗所書", "腓利比書",
+                    "歌羅西書", "帖撒羅尼迦前書", "帖撒羅尼迦後書", "提摩太前書", "提摩太後書", "提多書", "腓利門書", "希伯來書", "雅各書", "彼得前書", "彼得後書",
+                    "約翰壹書", "約翰貳書", "約翰參書", "猶大書", "啟示錄"
+                ],
+                shortNames: Array(repeating: "", count: 66)),
+            // [2026-10-11 i18n] 출처: open-bibles por-almeida (João Ferreira de Almeida, Public Domain). 스크립트로 원본 파일에서 추출(수기 입력 아님).
+            // 공식 약어 체계를 확인하지 않아 shortNames는 비워 둔다(표시는 fullNames로 폴백).
+            BookNameTable(
+                id: BuiltInBookNameTable.portuguese, displayName: String(localized: "포르투갈어"), isBuiltIn: true,
+                fullNames: [
+                    "Gênesis", "Êxodo", "Levítico", "Números", "Deuteronômio", "Josué", "Juízes", "Rute", "1 Samuel",
+                    "2 Samuel", "1 Reis", "2 Reis", "1 Crônicas", "2 Crônicas", "Esdras", "Neemias", "Ester", "Jó",
+                    "Salmos", "Provérbios", "Eclesiastes", "Cânticos", "Isaías", "Jeremias", "Lamentações", "Ezequiel",
+                    "Daniel", "Oséias", "Joel", "Amós", "Obadias", "Jonas", "Miquéias", "Naum", "Habacuque",
+                    "Sofonias", "Ageu", "Zacarias", "Malaquias", "Mateus", "Marcos", "Lucas", "João", "Atos",
+                    "Romanos", "1 Coríntios", "2 Coríntios", "Gálatas", "Efésios", "Filipenses", "Colossenses",
+                    "1 Tessalonicenses", "2 Tessalonicenses", "1 Timóteo", "2 Timóteo", "Tito", "Filemom", "Hebreus",
+                    "Tiago", "1 Pedro", "2 Pedro", "1 João", "2 João", "3 João", "Judas", "Apocalipse"
+                ],
+                shortNames: Array(repeating: "", count: 66)),
+            // [2026-10-11 i18n] 출처: open-bibles rus-synodal (Russian Synodal Translation, Public Domain). 스크립트로 원본 파일에서 추출(수기 입력 아님).
+            // 공식 약어 체계를 확인하지 않아 shortNames는 비워 둔다(표시는 fullNames로 폴백).
+            BookNameTable(
+                id: BuiltInBookNameTable.russian, displayName: String(localized: "러시아어"), isBuiltIn: true,
+                fullNames: [
+                    "Бытие", "Исход", "Левит", "Числа", "Второзаконие", "Иисус Навин", "Судьи", "Руфь", "1-я Царств",
+                    "2-я Царств", "3-я Царств", "4-я Царств", "1-я Паралипоменон", "2-я Паралипоменон", "Ездра",
+                    "Неемия", "Есфирь", "Иов", "Псалтирь", "Притчи", "Екклесиаст", "Песнь Песней", "Исаия", "Иеремия",
+                    "Плач Иеремии", "Иезекииль", "Даниил", "Осия", "Иоиль", "Амос", "Авдий", "Иона", "Михей", "Наум",
+                    "Аввакум", "Софония", "Аггей", "Захария", "Малахия", "От Матфея", "От Марка", "От Луки",
+                    "От Иоанна", "Деяния", "К Римлянам", "1-е Коринфянам", "2-е Коринфянам", "К Галатам", "К Ефесянам",
+                    "К Филиппийцам", "К Колоссянам", "1-е Фессалоникийцам", "2-е Фессалоникийцам", "1-е Тимофею",
+                    "2-е Тимофею", "К Титу", "К Филимону", "К Евреям", "Иакова", "1-е Петра", "2-е Петра",
+                    "1-е Иоанна", "2-е Иоанна", "3-е Иоанна", "Иуды", "Откровение"
+                ],
+                shortNames: Array(repeating: "", count: 66)),
+            // [2026-10-11 i18n] 출처: getbible v2 vietnamese (Vietnamese 1934, Public Domain). 스크립트로 원본 파일에서 추출(수기 입력 아님).
+            // 공식 약어 체계를 확인하지 않아 shortNames는 비워 둔다(표시는 fullNames로 폴백).
+            BookNameTable(
+                id: BuiltInBookNameTable.vietnamese, displayName: String(localized: "베트남어"), isBuiltIn: true,
+                fullNames: [
+                    "Sáng Thế Ký", "Xuất Hành Ký", "Lê-vi Ký", "Số Đếm Ký", "Phục Truyền Luật Lệ Ký", "Giô-suê",
+                    "Các Thủ Lãnh", "Ru-tơ", "1 Sa-mu-ên", "2 Sa-mu-ên", "1 Các Vua", "2 Các Vua", "1 Sử Ký",
+                    "2 Sử Ký", "Ê-xơ-ra", "Nê-hê-mi", "Ê-xơ-tê", "Gióp", "Thi-thiên", "Châm Ngôn", "Truyền Đạo",
+                    "Nhã Ca", "Ê-sai", "Giê-rê-mi", "Ai Ca", "Ê-xê-chi-ên", "Đa-ni-ên", "Hô-sêa", "Giô-ên", "A-mốt",
+                    "Áp-đi-a", "Giô-na", "Mi-chê", "Na-hum", "Ha-ba-cúc", "Sô-phô-ni", "A-gê", "Xa-cha-ri",
+                    "Ma-la-chi", "Ma-thi-ơ", "Mác", "Lu-ca", "Giăng", "Công Vụ Các Sứ Đồ", "Rô-ma", "1 Cô-rinh-tô",
+                    "2 Cô-rinh-tô", "Ga-la-ti", "Ê-phê-sô", "Phi-líp", "Cô-lô-se", "1 Tê-sa-lô-ni-ca",
+                    "2 Tê-sa-lô-ni-ca", "1 Ti-mô-thê", "2 Ti-mô-thê", "Tít", "Phi-lê-môn", "Hê-bơ-rơ", "Gia-cơ",
+                    "1 Phi-rơ", "2 Phi-rơ", "1 Giăng", "2 Giăng", "3 Giăng", "Giu-đe", "Khải Huyền"
+                ],
+                shortNames: Array(repeating: "", count: 66)),
         ]
     }
 }
@@ -230,17 +325,17 @@ enum TranslationImportError: LocalizedError, Sendable {
     var errorDescription: String? {
         switch self {
         case .fileNotReadable(let msg):
-            return "파일을 열 수 없습니다: \(msg)"
+            return String(localized: "파일을 열 수 없습니다: \(msg)")
         case .invalidSchema(let msg):
-            return "예상한 성경 데이터베이스 형식이 아닙니다: \(msg)"
+            return String(localized: "예상한 성경 데이터베이스 형식이 아닙니다: \(msg)")
         case .bookNumberingMismatch(let book, let expected, let found):
-            return "책 번호 \(book)의 장 수(\(found)장)가 표준 성경 구조(\(expected)장)와 다릅니다.\n이 파일의 책 번호 체계가 앱이 가정하는 정경 순서와 다를 수 있습니다."
+            return String(localized: "책 번호 \(book)의 장 수(\(found)장)가 표준 성경 구조(\(expected)장)와 다릅니다.\n이 파일의 책 번호 체계가 앱이 가정하는 정경 순서와 다를 수 있습니다.")
         case .migrationFailed(let msg):
-            return "번역본 가져오기 중 오류가 발생했습니다: \(msg)"
+            return String(localized: "번역본 가져오기 중 오류가 발생했습니다: \(msg)")
         case .duplicateCode(let code):
-            return "이미 등록된 번역본 코드입니다: \(code)"
+            return String(localized: "이미 등록된 번역본 코드입니다: \(code)")
         case .missingRequiredField(let field):
-            return "\(field)을(를) 입력해 주세요."
+            return String(localized: "\(field)을(를) 입력해 주세요.")
         }
     }
 }

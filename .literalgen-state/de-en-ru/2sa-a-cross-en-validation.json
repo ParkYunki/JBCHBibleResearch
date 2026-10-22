@@ -1,0 +1,8 @@
+{
+  "chapters": "017–020",
+  "files": 6,
+  "rows": 131,
+  "candidates": 3,
+  "scope": "Clear false DIFF statements only; no expansion of omitted differences.",
+  "tsv_direct_edits": false
+}

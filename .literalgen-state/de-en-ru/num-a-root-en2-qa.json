@@ -1,0 +1,9 @@
+[
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/en/04_NUM/NUM_010_1.tsv",
+    "verse": 21,
+    "old_row": "21\t=\tThe Hebrew uses active plural “they shall set up the tabernacle”; BSB uses passive “the tabernacle was to be set up.”",
+    "new_row": "21\t=\tThe Hebrew uses an active plural verb for setting up the tabernacle; BSB uses passive “the tabernacle was to be set up.”",
+    "reason": "Keep the certain active/plural versus passive contrast without incorrectly quoting the narrative Hebrew clause as future “they shall set up.”"
+  }
+]

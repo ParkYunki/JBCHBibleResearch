@@ -1,0 +1,16 @@
+{
+  "book": "17_EST",
+  "chapters": [
+    4,
+    5,
+    6,
+    7
+  ],
+  "native_complete": true,
+  "files": 8,
+  "rows": 110,
+  "pending": "root official check and redo",
+  "root_en_qa_complete": true,
+  "native_qa_candidates": 0,
+  "en_qa_candidates": 1
+}

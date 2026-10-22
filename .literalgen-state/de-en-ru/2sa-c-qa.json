@@ -1,0 +1,116 @@
+[
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/10_2SA/2SA_017.tsv",
+    "verse": 9,
+    "old_row": "9\tВот, теперь он скрывается в одной из ям или в одном из мест; и когда вначале падут среди них, услышит слышащий и скажет: „Произошло поражение среди народа, идущего за Авессаломом“.\tБлизко к еврейскому.",
+    "new_row": "9\tВот, теперь он скрывается в одной из ям или в одном из мест; и когда вначале некоторые падут среди них, услышит слышащий и скажет: „Произошло поражение среди народа, идущего за Авессаломом“.\tБлизко к еврейскому."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/10_2SA/2SA_017.tsv",
+    "verse": 22,
+    "old_row": "22\tИ встал Давид и весь народ, который с ним, и перешли Иордан; до утреннего света не недоставало ни одного, кто не перешёл Иордана.\tБлизко к еврейскому.",
+    "new_row": "22\tИ встал Давид и весь народ, который с ним, и перешли Иордан; до утреннего света не оказалось ни одного, кто не перешёл Иордана.\tБлизко к еврейскому."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/en/10_2SA/2SA_017.tsv",
+    "verse": 19,
+    "old_row": "19\t=\tThe Hebrew calls her “the woman” and leaves taking the covering implicit; BSB specifies “the man’s wife”.",
+    "new_row": "19\t=\tThe Hebrew calls her “the woman”; BSB specifies “the man’s wife”."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/10_2SA/2SA_018_1.tsv",
+    "verse": 18,
+    "old_row": "18\tUnd Absalom hatte zu seinen Lebzeiten die Säule genommen und sich aufgerichtet, die im Königstal ist, denn er sagte: „Ich habe keinen Sohn, um meinen Namen in Erinnerung zu halten.“ Und er nannte die Säule nach seinem Namen; und man nennt sie Absaloms Hand bis auf diesen Tag.\tDer Name des Denkmals enthält wörtlich „Hand“.",
+    "new_row": "18\tUnd Absalom hatte zu seinen Lebzeiten die Säule genommen und für sich aufgerichtet, die im Königstal ist, denn er sagte: „Ich habe keinen Sohn, um meinen Namen in Erinnerung zu halten.“ Und er nannte die Säule nach seinem Namen; und man nennt sie Absaloms Hand bis auf diesen Tag.\tDer Name des Denkmals enthält wörtlich „Hand“."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/en/10_2SA/2SA_018_1.tsv",
+    "verse": 16,
+    "old_row": "16\t=\tThe Hebrew repeats Joab as the restrainer; BSB uses “Joab” once.",
+    "new_row": "16\t=\tThe Hebrew repeats “the people” for the returning group and those restrained; BSB has “the troops” and then “them”."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/en/10_2SA/2SA_018_2.tsv",
+    "verse": 31,
+    "old_row": "31\t=\tThe Hebrew repeats “the Cushite” and names the hand of the attackers; BSB leaves both repetitions implicit.",
+    "new_row": "31\t=\tThe Hebrew repeats “the Cushite” and names the hand of the attackers; BSB leaves the second mention and the hand image implicit."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/10_2SA/2SA_019_1.tsv",
+    "verse": 19,
+    "old_row": "19\tUnd er sagte zum König: „Mein Herr rechne mir keine Schuld an; und gedenke nicht dessen, worin dein Knecht sich verging an dem Tag, als mein Herr, der König, aus Jerusalem zog, dass der König es sich zu Herzen nähme.\tNah am Hebräischen.",
+    "new_row": "19\tUnd er sagte zum König: „Mein Herr rechne mir keine Schuld an; und gedenke nicht dessen, worin dein Knecht sich verging an dem Tag, als mein Herr, der König, aus Jerusalem zog, und der König nehme es sich nicht zu Herzen.\tNah am Hebräischen."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/10_2SA/2SA_019_1.tsv",
+    "verse": 19,
+    "old_row": "19\tИ сказал царю: «Пусть мой господин не вменит мне вину, и не вспоминай того, в чём твой раб провинился в день, когда мой господин, царь, вышел из Иерусалима, чтобы царь принял это к своему сердцу.\tБлизко к еврейскому.",
+    "new_row": "19\tИ сказал царю: «Пусть мой господин не вменит мне вину, и не вспоминай того, в чём твой раб провинился в день, когда мой господин, царь, вышел из Иерусалима, и пусть царь не примет этого к своему сердцу.\tБлизко к еврейскому."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/10_2SA/2SA_019_2.tsv",
+    "verse": 35,
+    "old_row": "35\tМне сегодня восемьдесят лет. Узнаю ли между добром и злом? Вкусит ли твой раб то, что я ем, и то, что я пью? Услышу ли я ещё голос певцов и певиц? И зачем твоему рабу быть ещё бременем моему господину, царю?\tБлизко к еврейскому.",
+    "new_row": "35\tМне сегодня восемьдесят лет. Смогу ли я различать добро и зло? Вкусит ли твой раб то, что я ем, и то, что я пью? Услышу ли я ещё голос певцов и певиц? И зачем твоему рабу быть ещё бременем моему господину, царю?\tБлизко к еврейскому."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/en/10_2SA/2SA_020.tsv",
+    "verse": 17,
+    "old_row": "17\t=\tThe Hebrew leaves the approaching man unnamed; BSB uses a pronoun.",
+    "new_row": "17\t=\tClose to the Hebrew."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/10_2SA/2SA_022_2.tsv",
+    "verse": 41,
+    "old_row": "41\tИ моих врагов Ты дал мне затылком; ненавидящих меня я истребил.\tВраги даны затылком.",
+    "new_row": "41\tИ моих врагов Ты отдал мне повёрнутыми затылком; ненавидящих меня я истребил.\tВраги даны затылком."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/10_2SA/2SA_022_2.tsv",
+    "verse": 42,
+    "old_row": "42\tОни смотрели, и не было спасителя, — ко Господу, но Он не ответил им.\tВзгляд, а не отдельный зов, выражен глаголом.",
+    "new_row": "42\tОни смотрели, и не было спасителя; на Господа смотрели, но Он не ответил им.\tВзгляд, а не отдельный зов, выражен глаголом."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/10_2SA/2SA_023_1.tsv",
+    "verse": 3,
+    "old_row": "3\tDer Gott Israels hat gesagt, zu mir hat der Fels Israels geredet: ‚Wer über die Menschen herrscht, sei gerecht, herrschend in Gottesfurcht,\tDas Sagen des Gottes Israels und das Reden des Felsens sind getrennt erzählt.",
+    "new_row": "3\tDer Gott Israels hat gesagt, zu mir hat der Fels Israels geredet: ‚Ein Herrscher über die Menschen ist gerecht, ein Herrscher in Gottesfurcht,\tDas Sagen des Gottes Israels und das Reden des Felsens sind getrennt erzählt."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/10_2SA/2SA_023_1.tsv",
+    "verse": 3,
+    "old_row": "3\tСказал Бог Израиля, ко мне говорил скала Израиля: „Владычествующий над людьми — праведен, владычествующий в страхе Божием,\tРечь обращена к нему, не о нём.",
+    "new_row": "3\tСказал Бог Израиля; скала Израиля говорила ко мне: „Владычествующий над людьми — праведен, владычествующий в страхе Божием,\tРечь обращена к нему, не о нём."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/10_2SA/2SA_023_1.tsv",
+    "verse": 18,
+    "old_row": "18\tИ Авесса, брат Иоава, сын Саруи, был главой троих; и он поднял свой копьё над тремястами убитыми, и у него было имя среди троих.\tКопьё поднято; слава выражена наличием имени.",
+    "new_row": "18\tИ Авесса, брат Иоава, сын Саруи, был главой троих; и он поднял своё копьё над тремястами убитыми, и у него было имя среди троих.\tКопьё поднято; слава выражена наличием имени."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/10_2SA/2SA_023_1.tsv",
+    "verse": 20,
+    "old_row": "20\tИ Ванея, сын Иодая, сын храброго мужа, многодеятельного, из Кавцеила, поразил двух львиных воинов Моава; и он спустился и поразил льва посреди колодца в день снега.\tБлизко к еврейскому.",
+    "new_row": "20\tИ Ванея, сын Иодая, сын храброго мужа, богатый делами, из Кавцеила, поразил двух львиных воинов Моава; и он спустился и поразил льва посреди колодца в день снега.\tБлизко к еврейскому."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/10_2SA/2SA_023_1.tsv",
+    "verse": 20,
+    "old_row": "20\tUnd Benaja, der Sohn Jojadas, der Sohn eines tapferen Mannes, reich an Taten, aus Kabzeel, schlug zwei Löwenhelden Moabs; und er ging hinab und schlug den Löwen mitten im Brunnen am Tag des Schnees.\tNah am Hebräischen.",
+    "new_row": "20\tUnd Benaja, der Sohn Jojadas, der Sohn eines tapferen Mannes, selbst reich an Taten, aus Kabzeel, schlug zwei Löwenhelden Moabs; und er ging hinab und schlug den Löwen mitten im Brunnen am Tag des Schnees.\tNah am Hebräischen."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/10_2SA/2SA_022_2.tsv",
+    "verse": 46,
+    "old_row": "46\tSöhne der Fremde welken und kommen bebend aus ihren Verschlüssen.\tNah am Hebräischen.",
+    "new_row": "46\tSöhne der Fremde welken und kommen bebend aus ihren Festungen.\tNah am Hebräischen."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/10_2SA/2SA_022_2.tsv",
+    "verse": 46,
+    "old_row": "46\tСыны чужбины вянут и выходят, трепеща, из своих затворов.\tОни выходят из затворов, а не трепещут внутри укреплений.",
+    "new_row": "46\tСыны чужбины вянут и выходят, трепеща, из своих укреплений.\tОни выходят из укреплений, а не трепещут внутри укреплений."
+  }
+]

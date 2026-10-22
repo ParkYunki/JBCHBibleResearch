@@ -1,0 +1,27 @@
+[
+  {
+    "path": "Tools/LiteralGen/outputs/en/14_2CH/2CH_021.tsv",
+    "old_row": "15\t=\tThe Hebrew speaks of many or severe illnesses and repeats the bowels; BSB consolidates this into a severe illness of the bowels.",
+    "new_row": "15\t=\tThe Hebrew speaks of many or severe illnesses; BSB uses a severe illness."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/en/14_2CH/2CH_020_1.tsv",
+    "old_row": "21\t=\tThe Hebrew leaves the subject unnamed here; BSB names Jehoshaphat.",
+    "new_row": "21\t=\tThe Hebrew leaves the subject unnamed and says splendor of holiness without a possessive expression; BSB names Jehoshaphat and adds His."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/en/14_2CH/2CH_024.tsv",
+    "old_row": "15\t=\tClose to the Hebrew.",
+    "new_row": "15\t=\tThe Hebrew says he was satisfied with days; BSB uses full of years."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/en/14_2CH/2CH_024.tsv",
+    "old_row": "11\t=\tClose to the Hebrew.",
+    "new_row": "11\t=\tThe Hebrew repeats day in day by day; BSB says daily."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/en/14_2CH/2CH_020_1.tsv",
+    "old_row": "28\t=\tClose to the Hebrew.",
+    "new_row": "28\t=\tThe Hebrew says they came to the house of the LORD; BSB explicitly describes going into it."
+  }
+]

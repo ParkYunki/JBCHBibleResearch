@@ -1,0 +1,17 @@
+[
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/15_EZR/EZR_009.tsv",
+    "old_row": "13\tUnd nach allem, was wegen unserer bösen Taten und unserer großen Schuld über uns gekommen ist, denn du, unser Gott, hast weniger zurückgehalten, als unsere Vergehen verdienten, und uns Entronnene wie diese gegeben,\tDie bösen Taten und große Schuld stehen nebeneinander; die zurückgehaltene Strafe ist geringer als die Vergehen.",
+    "new_row": "13\tUnd nach allem, was wegen unserer bösen Taten und unserer großen Schuld über uns gekommen ist, denn du, unser Gott, hast die Strafe geringer gehalten als unsere Vergehen und uns Entronnene wie diese gegeben,\tDie bösen Taten und große Schuld stehen nebeneinander; die zurückgehaltene Strafe ist geringer als die Vergehen."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/15_EZR/EZR_010_1.tsv",
+    "old_row": "19\tUnd sie gaben ihre Hand, ihre Frauen hinauszutun, und als Schuldige einen Widder vom Kleinvieh für ihre Schuld.\tDie Schuldigen und der Widder stehen ohne ausdrücklich wiederholtes Verb des Gebens.",
+    "new_row": "19\tUnd sie gaben ihre Hand, ihre Frauen hinauszutun, und gaben als Schuldige einen Widder vom Kleinvieh für ihre Schuld.\tDie Schuldigen und der Widder stehen ohne ausdrücklich wiederholtes Verb des Gebens; dieses ist grammatisch ergänzt."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/15_EZR/EZR_010_1.tsv",
+    "old_row": "19\tИ дали руку свою, чтобы выслать жён своих, и, будучи виновны, овна из стада за вину свою.\tРука в единственном числе; вторая часть называет виновных и овна без отдельного глагола принесения.",
+    "new_row": "19\tИ дали руку свою, чтобы выслать жён своих, и, будучи виновны, дали овна из стада за вину свою.\tРука в единственном числе; во второй части глагол даяния грамматически восполнен."
+  }
+]

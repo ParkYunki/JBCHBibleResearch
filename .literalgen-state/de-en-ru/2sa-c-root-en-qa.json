@@ -1,0 +1,32 @@
+[
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/en/10_2SA/2SA_021.tsv",
+    "verse": 9,
+    "old_row": "9\t=\tClose to the Hebrew.",
+    "new_row": "9\t=\tThe Hebrew uses singular “the hand of the Gibeonites”; BSB has plural “the hands”."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/en/10_2SA/2SA_022_1.tsv",
+    "verse": 24,
+    "old_row": "24\t=\tClose to the Hebrew.",
+    "new_row": "24\t=\tThe Hebrew calls the iniquity “my iniquity”; BSB leaves that possessive implicit."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/en/10_2SA/2SA_022_2.tsv",
+    "verse": 48,
+    "old_row": "48\t=\tThe Hebrew says “peoples”; BSB uses “nations.”",
+    "new_row": "48\t=\tClose to the Hebrew."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/en/10_2SA/2SA_024.tsv",
+    "verse": 14,
+    "old_row": "14\t=\tClose to the Hebrew.",
+    "new_row": "14\t=\tThe Hebrew uses singular “hand” for both the LORD and man; BSB shifts to plural “hands of men” in the second phrase."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/en/10_2SA/2SA_024.tsv",
+    "verse": 22,
+    "old_row": "22\t=\tClose to the Hebrew.",
+    "new_row": "22\t=\tThe Hebrew calls the chosen offering what is good “in his eyes”; BSB has “whatever seems good”."
+  }
+]

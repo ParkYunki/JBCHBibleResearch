@@ -1,0 +1,11 @@
+{
+  "files": 32,
+  "rows": 640,
+  "packet_verse_sequences": true,
+  "three_columns": true,
+  "all_english_literal_equals": true,
+  "difference_word_limit": 60,
+  "issues": [],
+  "review": "All own O/TARGET rows and root English022–025/native025 checked. Exact candidates only; no TSV edits.",
+  "qa_rows": 17
+}

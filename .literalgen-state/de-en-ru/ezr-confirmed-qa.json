@@ -1,0 +1,192 @@
+[
+  {
+    "path": "Tools/LiteralGen/outputs/de/15_EZR/EZR_001.tsv",
+    "old_row": "3\tWer unter euch aus seinem ganzen Volk ist, mit dem sei sein Gott; und er ziehe hinauf nach Jerusalem, das in Juda ist, und baue das Haus des HERRN, des Gottes Israels; er ist der Gott, der in Jerusalem ist.\tSein Gott wird ausdrücklich mit ihm gewünscht; der Aufstieg wird genannt.",
+    "new_row": "3\tWer unter euch aus seinem ganzen Volk ist, mit dem sei sein Gott; und er ziehe hinauf nach Jerusalem, das in Juda ist, und baue das Haus des HERRN, des Gottes Israels; er ist der Gott, der in Jerusalem ist.\tSein Gott soll mit ihm sein; im Zieltext fehlt hier das Possessivpronomen."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/15_EZR/EZR_001.tsv",
+    "old_row": "6\tUnd alle um sie her stärkten ihre Hände mit silbernen Gefäßen, mit Gold, mit Besitz und Vieh und Kostbarkeiten, außer allem, was freiwillig gegeben wurde.\tNah am Hebräischen.",
+    "new_row": "6\tUnd alle um sie her stärkten ihre Hände mit silbernen Gefäßen, mit Gold, mit Besitz und Vieh und Kostbarkeiten, außer allem, was freiwillig gegeben wurde.\tSilberne Gefäße und Gold werden getrennt genannt, nicht silberne und goldene Geräte."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/15_EZR/EZR_001.tsv",
+    "old_row": "8\tUnd Kores, der König von Persien, brachte sie durch die Hand Mithredaths, des Schatzmeisters, heraus; und er zählte sie Sesbazar, dem Fürsten von Juda, zu.\tDie Vermittlung wird durch eine Hand ausgedrückt.",
+    "new_row": "8\tUnd Kores, der König von Persien, brachte sie durch die Hand Mithredaths, des Schatzmeisters, heraus; und er zählte sie Sesbazar, dem Fürsten von Juda, zu.\tNah am Hebräischen."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/15_EZR/EZR_001.tsv",
+    "old_row": "2\t«Так говорит Кир, царь Персии: все царства земли дал мне Господь, Бог небес, и Он возложил на меня построить Ему дом в Иерусалиме, который в Иудее.\tБлизко к еврейскому.",
+    "new_row": "2\t«Так говорит Кир, царь Персии: все царства земли дал мне Господь, Бог небес, и Он возложил на меня обязанность построить Ему дом в Иерусалиме, который в Иудее.\tБлизко к еврейскому."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/15_EZR/EZR_002_1.tsv",
+    "old_row": "2\tdie mit Serubabel kamen: Jesua, Nehemia, Seraja, Reelaja, Mardochai, Bilsa, Mispar, Bigevai, Rehum, Baana. Die Zahl der Männer des Volkes Israel:\tNah am Hebräischen.",
+    "new_row": "2\tdie mit Serubabel, Jesua, Nehemia, Seraja, Reelaja, Mardochai, Bilsa, Mispar, Bigevai, Rehum und Baana kamen. Die Zahl der Männer des Volkes Israel:\tNah am Hebräischen."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/15_EZR/EZR_002_1.tsv",
+    "old_row": "2\tкоторые пришли с Зоровавелем: Иисус, Неемия, Сараий, Реелай, Мардохей, Билшан, Мисфар, Бигвай, Рехум, Ваан. Число мужей народа Израиля:\tСосчитаны мужи народа.",
+    "new_row": "2\tкоторые пришли с Зоровавелем, Иисусом, Неемиею, Сараием, Реелаем, Мардохеем, Билшаном, Мисфаром, Бигваем, Рехумом и Вааном. Число мужей народа Израиля:\tСосчитаны мужи народа."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/15_EZR/EZR_003.tsv",
+    "old_row": "9\tUnd Jesua trat hin, seine Söhne und seine Brüder, Kadmiel und seine Söhne, die Söhne Judas, als einer, um über die Arbeiter am Haus Gottes Aufsicht zu führen, und die Söhne Henadads, ihre Söhne und ihre Brüder, die Leviten.\tNah am Hebräischen.",
+    "new_row": "9\tUnd Jesua trat hin, und seine Söhne und seine Brüder, Kadmiel und seine Söhne, die Söhne Judas, als einer, um über die Arbeiter am Haus Gottes Aufsicht zu führen, und die Söhne Henadads, ihre Söhne und ihre Brüder, die Leviten.\tNah am Hebräischen."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/en/15_EZR/EZR_001.tsv",
+    "old_row": "7\t=\tThe Hebrew says “the house of his god”; BSB says “the temple of his gods.”",
+    "new_row": "7\t=\tThe Hebrew says “the house”; BSB says “the temple.”"
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/en/15_EZR/EZR_002_3.tsv",
+    "old_row": "64\t=\tClose to the Hebrew.",
+    "new_row": "64\t=\tThe Hebrew describes the whole assembly “as one”; BSB gives the assembly’s total without that comparison."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/en/15_EZR/EZR_003.tsv",
+    "old_row": "3\t=\tThe Hebrew introduces their fear with “because”; BSB introduces it with “even though.”",
+    "new_row": "3\t=\tThe Hebrew introduces their fear with “because”; BSB introduces it with “even though.” The altar’s bases are plural in Hebrew; BSB says “its foundation.”"
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/en/15_EZR/EZR_003.tsv",
+    "old_row": "11\t=\tClose to the Hebrew.",
+    "new_row": "11\t=\tThe Hebrew says the house of the LORD was founded; BSB says the foundation of the house of the LORD had been laid."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/15_EZR/EZR_007.tsv",
+    "old_row": "2\tсына Шаллума, сына Садока, сына Ахитува,\tПовторённая родословная сохраняет родительный падеж.",
+    "new_row": "2\tсына Шаллума, сына Садока, сына Ахитува,\tБлизко к еврейскому."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/15_EZR/EZR_007.tsv",
+    "old_row": "3\tсына Амарии, сына Азарии, сына Марайофа,\tПовторённая родословная сохраняет родительный падеж.",
+    "new_row": "3\tсына Амарии, сына Азарии, сына Марайофа,\tБлизко к еврейскому."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/15_EZR/EZR_007.tsv",
+    "old_row": "4\tсына Захарии, сына Уззия, сына Буккия,\tПовторённая родословная сохраняет родительный падеж.",
+    "new_row": "4\tсына Захарии, сына Уззия, сына Буккия,\tБлизко к еврейскому."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/15_EZR/EZR_007.tsv",
+    "old_row": "5\tсына Авишуя, сына Финееса, сына Елеазара, сына Аарона, главного священника:\tПовторённая родословная сохраняет родительный падеж.",
+    "new_row": "5\tсына Авишуя, сына Финееса, сына Елеазара, сына Аарона, главного священника:\tБлизко к еврейскому."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/15_EZR/EZR_005.tsv",
+    "old_row": "10\tUnd auch ihre Namen fragten wir sie, um dir mitzuteilen, damit wir den Namen der Männer aufschrieben, die an ihrer Spitze waren.\tDer Name steht im Singular.",
+    "new_row": "10\tUnd auch ihre Namen fragten wir sie, um dir Mitteilung zu machen, damit wir den Namen der Männer aufschrieben, die an ihrer Spitze waren.\tDer Name steht im Singular."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/15_EZR/EZR_006.tsv",
+    "old_row": "5\tUnd auch die Geräte des Hauses Gottes aus Gold und Silber, die Nebukadnezar aus dem Tempel in Jerusalem herausgebracht und nach Babel gebracht hat, sollen sie zurückgeben; und es komme zum Tempel in Jerusalem an seinen Ort, und du sollst es im Haus Gottes niederlegen.“\tDie Verben wechseln zum Singular und zur direkten Anrede.",
+    "new_row": "5\tUnd auch die Geräte des Hauses Gottes aus Gold und Silber, die Nebukadnezar aus dem Tempel in Jerusalem herausgebracht und nach Babel gebracht hat, sollen sie zurückgeben; und jedes komme zum Tempel in Jerusalem an seinen Ort, und du sollst es im Haus Gottes niederlegen.“\tDie Verben wechseln zum Singular und zur direkten Anrede."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/15_EZR/EZR_006.tsv",
+    "old_row": "5\tИ также сосуды дома Бога из золота и серебра, которые Навуходоносор вынес из храма в Иерусалиме и принёс в Вавилон, пусть возвратят; и пусть придёт в храм в Иерусалиме на своё место, и ты положи в доме Бога».\tВозвращение имеет действующих лиц; сохранены единственное число и обращение ты.",
+    "new_row": "5\tИ также сосуды дома Бога из золота и серебра, которые Навуходоносор вынес из храма в Иерусалиме и принёс в Вавилон, пусть возвратят; и пусть каждый придёт в храм в Иерусалиме на своё место, и ты положи их в доме Бога».\tВозвращение имеет действующих лиц; сохранены единственное число и обращение ты."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/en/15_EZR/EZR_005.tsv",
+    "old_row": "10\t=\tThe Aramaic says “the men who are at their heads”; BSB says “their leaders.”",
+    "new_row": "10\t=\tThe Aramaic says the name of the men at their heads, with name singular; BSB uses names of their leaders."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/en/15_EZR/EZR_007.tsv",
+    "old_row": "12\t=\tClose to the Hebrew.",
+    "new_row": "12\t=\tThe Aramaic includes a word of completeness before the closing formula; BSB condenses the closing to Greetings."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/en/15_EZR/EZR_004.tsv",
+    "old_row": "9\t=\tThe Aramaic lists the Susa people, Dahites, and Elamites separately; BSB combines the final groups as Elamites of Susa.",
+    "new_row": "9\t=\tThe Aramaic lists the Susa people, Dahites, and Elamites separately; BSB combines the final groups as Elamites of Susa. Earlier group names are rendered as judges and officials in BSB."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/15_EZR/EZR_009.tsv",
+    "old_row": "13\tUnd nach allem, was wegen unserer bösen Taten und unserer großen Schuld über uns gekommen ist, denn du, unser Gott, hast weniger zurückgehalten, als unsere Vergehen verdienten, und uns Entronnene wie diese gegeben,\tDie bösen Taten und große Schuld stehen nebeneinander; die zurückgehaltene Strafe ist geringer als die Vergehen.",
+    "new_row": "13\tUnd nach allem, was wegen unserer bösen Taten und unserer großen Schuld über uns gekommen ist, denn du, unser Gott, hast die Strafe geringer gehalten als unsere Vergehen und uns Entronnene wie diese gegeben,\tDie bösen Taten und große Schuld stehen nebeneinander; die zurückgehaltene Strafe ist geringer als die Vergehen."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/15_EZR/EZR_010_1.tsv",
+    "old_row": "19\tUnd sie gaben ihre Hand, ihre Frauen hinauszutun, und als Schuldige einen Widder vom Kleinvieh für ihre Schuld.\tDie Schuldigen und der Widder stehen ohne ausdrücklich wiederholtes Verb des Gebens.",
+    "new_row": "19\tUnd sie gaben ihre Hand, ihre Frauen hinauszutun, und gaben als Schuldige einen Widder vom Kleinvieh für ihre Schuld.\tDie Schuldigen und der Widder stehen ohne ausdrücklich wiederholtes Verb des Gebens; dieses ist grammatisch ergänzt."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/15_EZR/EZR_010_1.tsv",
+    "old_row": "19\tИ дали руку свою, чтобы выслать жён своих, и, будучи виновны, овна из стада за вину свою.\tРука в единственном числе; вторая часть называет виновных и овна без отдельного глагола принесения.",
+    "new_row": "19\tИ дали руку свою, чтобы выслать жён своих, и, будучи виновны, дали овна из стада за вину свою.\tРука в единственном числе; во второй части глагол даяния грамматически восполнен."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/en/15_EZR/EZR_008_1.tsv",
+    "old_row": "26\t=\tClose to the Hebrew.",
+    "new_row": "26\t=\tThe Hebrew describes entrusting the valuables with their hand in the singular; BSB uses hands in the plural."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/en/15_EZR/EZR_009.tsv",
+    "old_row": "2\t=\tThe Hebrew pictures the leaders’ and officials’ leading role as their hand being first in this unfaithfulness; BSB says they took the lead.",
+    "new_row": "2\t=\tThe Hebrew pictures the leaders’ and officials’ leading role as their hand being first in this unfaithfulness. The holy seed mingles itself actively; BSB uses a passive mixing."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/en/15_EZR/EZR_010_1.tsv",
+    "old_row": "3\t=\tThe Hebrew says all wives and what was born from them without explicitly repeating “foreign”; BSB says all the foreign wives and their children.",
+    "new_row": "3\t=\tThe Hebrew says all wives and what was born from them without explicitly repeating foreign. It names the Lord’s counsel; BSB says my lord. The command is singular in Hebrew."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/15_EZR/EZR_005.tsv",
+    "old_row": "5\tИ око их Бога было на старейшинах иудеев; и они не останавливали их, пока дело не пошло бы к Дарию и затем не возвратили бы письмо об этом.\tНазвано возвращение письма.",
+    "new_row": "5\tИ око их Бога было на старейшинах иудеев; и они не останавливали их, пока дело не придёт к Дарию и затем не пришлют обратно письмо об этом.\tНазвано возвращение письма."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/15_EZR/EZR_006.tsv",
+    "old_row": "8\tИ от меня дано повеление о том, что вы должны делать с этими старейшинами иудеев для строительства этого дома Бога: из имущества царя, из подати заречья, пусть тщательно выдаётся расход этим мужам, чтобы не остановилось.\tРасход выражен пассивно; тщательно сохранено.",
+    "new_row": "8\tИ от меня дано повеление о том, что вы должны делать с этими старейшинами иудеев для строительства этого дома Бога: из имущества царя, из подати заречья, пусть тщательно выдаётся расход этим мужам, чтобы не останавливать работу.\tРасход выражен пассивно; тщательно сохранено."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/15_EZR/EZR_007.tsv",
+    "old_row": "20\tИ остальные нужды дома твоего Бога, которые выпадет тебе дать, дай из дома сокровищ царя.\tСохранена необходимость дать.",
+    "new_row": "20\tИ остальные необходимые вещи для дома твоего Бога, которые выпадет тебе дать, дай из дома сокровищ царя.\tСохранена необходимость дать."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/15_EZR/EZR_007.tsv",
+    "old_row": "25\tUnd du, Esra, setze nach der Weisheit deines Gottes in deiner Hand Richter und Rechtsprecher ein, die das ganze Volk jenseits des Flusses richten sollen, alle, die die Gesetze deines Gottes kennen; und wer nicht kennt, den sollt ihr unterweisen.\tGesetze stehen im Plural.",
+    "new_row": "25\tUnd du, Esra, setze nach der Weisheit deines Gottes in deiner Hand Richter und Rechtsprecher ein, die das ganze Volk jenseits des Flusses richten sollen, alle, die die Gesetze deines Gottes kennen; und wer sie nicht kennt, den sollt ihr unterweisen.\tGesetze stehen im Plural."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/15_EZR/EZR_007.tsv",
+    "old_row": "25\tИ ты, Ездра, по мудрости твоего Бога, которая в твоей руке, назначь правителей и судей, чтобы они судили весь народ за рекой, всех знающих законы твоего Бога; и кто не знает, тех учите.\tБлизко к еврейскому.",
+    "new_row": "25\tИ ты, Ездра, по мудрости твоего Бога, которая в твоей руке, назначь правителей и судей, чтобы они судили весь народ за рекой, всех знающих законы твоего Бога; и кто не знает, того учите.\tБлизко к еврейскому."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/15_EZR/EZR_008_1.tsv",
+    "old_row": "14\tUnd von den Söhnen Bigevais Uthai und Sabbud, und mit ihm siebzig Männliche.\tDas begleitende Pronomen steht im Singular.",
+    "new_row": "14\tUnd von den Söhnen Bigevais Uthai und Sakkur, und mit ihm siebzig Männliche.\tDas Hebräische nennt Sakkur statt Sabbud; das begleitende Pronomen steht im Singular."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/15_EZR/EZR_008_1.tsv",
+    "old_row": "14\tИ из сынов Бигвая Уфай и Заббуд, и с ним семьдесят мужчин.\tМестоимение стоит в единственном числе.",
+    "new_row": "14\tИ из сынов Бигвая Уфай и Заккур, и с ним семьдесят мужчин.\tЕврейский текст называет Заккура вместо Заббуда; местоимение стоит в единственном числе."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/15_EZR/EZR_010_1.tsv",
+    "old_row": "29\tUnd von den Söhnen Banis Mesullam, Malluch und Adaja, Jasub und Seal und Jeremoth.\tNah am Hebräischen.",
+    "new_row": "29\tUnd von den Söhnen Banis Mesullam, Malluch und Adaja, Jasub und Seal und Ramoth.\tDas Hebräische nennt zuletzt Ramoth; Luther nennt Jeremoth."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/15_EZR/EZR_010_1.tsv",
+    "old_row": "29\tИ из сынов Вания Мешуллам, Маллух и Адая, Иашув, и Шеал, и Иерамоф.\tБлизко к еврейскому.",
+    "new_row": "29\tИ из сынов Вания Мешуллам, Маллух и Адая, Иашув, и Шеал, и Рамоф.\tЕврейский текст в конце называет Рамофа; Синодальный перевод — Иерамофа."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/15_EZR/EZR_009.tsv",
+    "old_row": "3\tUnd als ich diese Sache hörte, zerriss ich mein Kleid und meinen Mantel und raufte vom Haar meines Hauptes und meines Bartes aus und saß entsetzt.\tEin Teil des Haars wird ausgerauft.",
+    "new_row": "3\tUnd als ich diese Sache hörte, zerriss ich mein Kleid und meinen Mantel und raufte einen Teil des Haars meines Hauptes und meines Bartes aus und saß entsetzt.\tEin Teil des Haars wird ausgerauft."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/15_EZR/EZR_009.tsv",
+    "old_row": "3\tИ когда я услышал это дело, разорвал одежду мою и плащ мой, и вырвал из волос головы моей и бороды моей, и сел в ужасе.\tВырвана часть волос; сидение выражает ужас.",
+    "new_row": "3\tИ когда я услышал это дело, разорвал одежду мою и плащ мой, и вырвал часть волос с моей головы и бороды, и сел в ужасе.\tВырвана часть волос; сидение выражает ужас."
+  }
+]

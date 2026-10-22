@@ -1,0 +1,92 @@
+[
+  {
+    "path": "Tools/LiteralGen/outputs/ru/14_2CH/2CH_025.tsv",
+    "old_row": "9\tИ сказал Амасия человеку Бога: «А что делать со ста талантами, которые я дал отряду Израиля?» И сказал человек Бога: «У Господа есть дать тебе гораздо больше этого».\tДаётся гораздо больше, а не просто больше.",
+    "new_row": "9\tИ сказал Амасия человеку Бога: «А что делать со ста талантами, которые я дал отряду Израиля?» И сказал человек Бога: «У Господа есть возможность дать тебе гораздо больше этого».\tДаётся гораздо больше, а не просто больше."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/14_2CH/2CH_026.tsv",
+    "old_row": "13\tUnd unter ihrer Hand war eine Heeresmacht von dreihundertsiebentausendfünfhundert, die mit tüchtiger Kraft Krieg führten, um dem König gegen den Feind zu helfen.\tDer Feind steht im Singular.",
+    "new_row": "13\tUnd unter ihrer Hand war eine Heeresmacht von dreihundertsiebentausendfünfhundert Männern, die mit tüchtiger Kraft Krieg führten, um dem König gegen den Feind zu helfen.\tDer Feind steht im Singular."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/14_2CH/2CH_027.tsv",
+    "old_row": "5\tUnd er kämpfte mit dem König der Söhne Ammons und wurde stärker als sie; und die Söhne Ammons gaben ihm in jenem Jahr hundert Talente Silber und zehntausend Kor Weizen und zehntausend Gerste. Dies brachten ihm die Söhne Ammons auch im zweiten und dritten Jahr.\tDie Gewichtseinheit ist das Talent; bei der Gerste wird Kor nicht wiederholt.",
+    "new_row": "5\tUnd er kämpfte mit dem König der Söhne Ammons und wurde stärker als sie; und die Söhne Ammons gaben ihm in jenem Jahr hundert Talente Silber und zehntausend Kor Weizen und zehntausend Maß Gerste. Dies brachten ihm die Söhne Ammons auch im zweiten und dritten Jahr.\tDie Gewichtseinheit ist das Talent; bei der Gerste wird Kor nicht wiederholt."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/14_2CH/2CH_027.tsv",
+    "old_row": "5\tИ воевал он с царём сынов Аммона, и стал сильнее их; и дали ему сыны Аммона в тот год сто талантов серебра, и десять тысяч коров пшеницы, и десять тысяч ячменя. Это приносили ему сыны Аммона и во второй год, и в третий.\tАммонитяне трижды названы сынами Аммона.",
+    "new_row": "5\tИ воевал он с царём сынов Аммона, и стал сильнее их; и дали ему сыны Аммона в тот год сто талантов серебра, и десять тысяч коров пшеницы, и десять тысяч мер ячменя. Это приносили ему сыны Аммона и во второй год, и в третий.\tАммонитяне трижды названы сынами Аммона."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/14_2CH/2CH_028.tsv",
+    "old_row": "23\tUnd er schlachtopferte den Göttern von Damaskus, die ihn geschlagen hatten, und sagte: „Denn die Götter der Könige Syriens helfen ihnen; ihnen werde ich schlachtopfern, und sie werden mir helfen.“ Und sie wurden ihm zum Straucheln und ganz Israel.\tGenannt werden die Könige Syriens, nicht Assyriens.",
+    "new_row": "23\tUnd er schlachtopferte den Göttern von Damaskus, die ihn geschlagen hatten, und sagte: „Denn die Götter der Könige Syriens helfen ihnen; ihnen werde ich schlachtopfern, und sie werden mir helfen.“ Und sie wurden ihm und ganz Israel zum Straucheln.\tGenannt werden die Könige Syriens, nicht Assyriens."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/14_2CH/2CH_029_1.tsv",
+    "old_row": "18\tИ пришли внутрь к Езекии, царю, и сказали: «Мы очистили весь дом Господа, жертвенник всесожжения и все сосуды его, и стол разложения и все сосуды его.\tДом очищен весь; последний стол назван по разложению.",
+    "new_row": "18\tИ пришли внутрь к Езекии, царю, и сказали: «Мы очистили весь дом Господа, жертвенник всесожжения и все сосуды его, и стол для раскладывания и все сосуды его.\tДом очищен весь; стол назван по раскладыванию, без отдельного упоминания хлебов."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/14_2CH/2CH_030.tsv",
+    "old_row": "19\tjeden, der sein Herz darauf gerichtet hat, Gott zu suchen, den HERRN, den Gott seiner Väter, und nicht nach der Reinigung des Heiligtums.“\tDie Reinigung wird dem Heiligtum zugeordnet.",
+    "new_row": "19\tjeden, der sein Herz darauf gerichtet hat, Gott zu suchen, den HERRN, den Gott seiner Väter, auch wenn er nicht nach der Reinigung des Heiligtums gereinigt ist.“\tDie Reinigung wird dem Heiligtum zugeordnet."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/14_2CH/2CH_032_2.tsv",
+    "old_row": "31\tUnd so ließ Gott ihn bei den Gesandten der Fürsten Babels, die zu ihm sandten, um nach dem Zeichen zu fragen, das im Land geschehen war, um ihn zu prüfen, um alles in seinem Herzen zu erkennen.\tDas Erkennen ist als Zweck mit ungenanntem Subjekt formuliert, nicht als unpersönliches Kundwerden.",
+    "new_row": "31\tUnd so verließ Gott ihn bei den Gesandten der Fürsten Babels, die zu ihm sandten, um nach dem Zeichen zu fragen, das im Land geschehen war, um ihn zu prüfen, um alles in seinem Herzen zu erkennen.\tDas Erkennen ist als Zweck mit ungenanntem Subjekt formuliert, nicht als unpersönliches Kundwerden."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/14_2CH/2CH_034_1.tsv",
+    "old_row": "10\tИ дали в руку работников, поставленных в доме Господа; и дали его работникам, которые работали в доме Господа, чтобы исправить и укрепить дом.\tВторая раздача рассказана как действие, а не цель.",
+    "new_row": "10\tИ дали его в руку работников, поставленных в доме Господа; и дали его работникам, которые работали в доме Господа, чтобы исправить и укрепить дом.\tВторая раздача рассказана как действие, а не цель."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/14_2CH/2CH_035.tsv",
+    "old_row": "6\tUnd schlachtet das Passah und heiligt euch und bereitet für eure Brüder vor, um nach dem Wort des HERRN durch die Hand Moses zu tun.“\tMoses Vermittlung wird mit einer Hand ausgedrückt.",
+    "new_row": "6\tUnd schlachtet das Passah und heiligt euch und trefft Vorbereitungen für eure Brüder, um nach dem Wort des HERRN durch die Hand Moses zu tun.“\tMoses Vermittlung wird mit einer Hand ausgedrückt."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/14_2CH/2CH_035.tsv",
+    "old_row": "6\tИ заколите Пасху, и освятитесь, и приготовьте для братьев ваших, чтобы делать по слову Господа рукою Моисея».\tАгнец отдельно не назван; посредничество Моисея выражено рукой.",
+    "new_row": "6\tИ заколите Пасху, и освятитесь, и сделайте приготовления для братьев ваших, чтобы делать по слову Господа рукою Моисея».\tАгнец отдельно не назван; посредничество Моисея выражено рукой."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/14_2CH/2CH_035.tsv",
+    "old_row": "21\tUnd er sandte Boten zu ihm und sagte: „Was ist mir und dir, König Judas? Nicht gegen dich komme ich heute, sondern gegen das Haus meines Kampfes, und Gott hat gesagt, mich zu beeilen. Lass ab von Gott, der mit mir ist, damit er dich nicht vernichte!“\tDer heutige Tag wird genannt.",
+    "new_row": "21\tUnd er sandte Boten zu ihm und sagte: „Was ist mir und dir, König Judas? Nicht gegen dich komme ich heute, sondern gegen das Haus meines Kampfes, und Gott hat gesagt, dass ich mich beeilen soll. Lass ab von Gott, der mit mir ist, damit er dich nicht vernichte!“\tDer heutige Tag wird genannt."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/en/14_2CH/2CH_030.tsv",
+    "old_row": "3\t=\tClose to the Hebrew.",
+    "new_row": "3\t=\tThe Hebrew says “at that time”; BSB says “at the regular time.”"
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/en/14_2CH/2CH_031.tsv",
+    "old_row": "4\t=\tClose to the Hebrew.",
+    "new_row": "4\t=\tThe Hebrew says that they may be strong in the Law of the LORD; BSB says that they could devote themselves to it."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/en/14_2CH/2CH_032_1.tsv",
+    "old_row": "20\t=\tClose to the Hebrew.",
+    "new_row": "20\t=\tThe Hebrew separately says that they prayed and cried out to heaven; BSB combines these as “cried out to heaven in prayer.”"
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/en/14_2CH/2CH_033.tsv",
+    "old_row": "14\t=\tThe Hebrew says “built” and leaves the subject unnamed; BSB says “rebuilt” and names Manasseh.",
+    "new_row": "14\t=\tThe Hebrew leaves the subject unnamed here; BSB names Manasseh."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/en/14_2CH/2CH_034_1.tsv",
+    "old_row": "23\t=\tThe Hebrew leaves the speaker unnamed here; BSB names Huldah.",
+    "new_row": "23\t=\tThe Hebrew leaves the speaker unnamed here and says “who sent you to me”; BSB names Huldah and omits “to me.”"
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/en/14_2CH/2CH_036.tsv",
+    "old_row": "22\t=\tClose to the Hebrew.",
+    "new_row": "22\t=\tThe Hebrew says “by the mouth of Jeremiah”; BSB says “spoken through Jeremiah.” It narrates the proclamation as a separate action; BSB connects it with “to send.”"
+  }
+]

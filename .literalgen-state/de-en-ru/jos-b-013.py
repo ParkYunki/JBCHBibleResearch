@@ -1,0 +1,68 @@
+exec(open('.literalgen-state/de-en-ru/jos-b-write.py').read())
+write(13,'de','''Und Josua war alt, an Tagen vorgerückt; und der HERR sagte zu ihm: „Du bist alt geworden, an Tagen vorgerückt, und sehr viel vom Land bleibt noch in Besitz zu nehmen.
+Dies ist das Land, das übrig bleibt: alle Bezirke der Philister und der ganze Gessuriter,
+vom Sihor, der vor Ägypten liegt, bis zur Grenze Ekrons nach Norden – es wird dem Kanaaniter zugerechnet –, die fünf Fürsten der Philister: der Gaziter und der Asdoditer, der Askaloniter, der Gathiter und der Ekroniter und die Avviter;
+vom Süden her das ganze Land des Kanaaniters und Meara, das den Sidoniern gehört, bis nach Aphek, bis zur Grenze des Amoriters;
+und das Land des Gebaliters und der ganze Libanon gegen Sonnenaufgang, von Baal-Gad unter dem Berg Hermon bis zum Eingang nach Hamath.
+Alle Bewohner des Gebirges vom Libanon bis Misrephoth-Majim, alle Sidonier – ich werde sie vor den Söhnen Israels vertreiben; nur lass es Israel als Erbe zufallen, wie ich dir geboten habe.
+Und nun teile dieses Land als Erbe den neun Stämmen und dem halben Stamm Manasse zu.“
+Mit ihm hatten der Rubeniter und der Gaditer ihr Erbe empfangen, das Mose ihnen jenseits des Jordans nach Osten gegeben hatte, wie Mose, der Knecht des HERRN, es ihnen gegeben hatte:
+von Aroer, das am Ufer des Baches Arnon liegt, und der Stadt, die mitten im Bach liegt, und der ganzen Ebene von Medeba bis Dibon
+und allen Städten Sihons, des Königs des Amoriters, der in Hesbon regierte, bis zur Grenze der Söhne Ammons,
+und Gilead und dem Gebiet des Gessuriters und des Maachathiters und dem ganzen Berg Hermon und ganz Basan bis Salcha,
+dem ganzen Königreich Ogs in Basan, der in Astharoth und in Edrei regierte; er war vom Rest der Rephaim übrig geblieben. Und Mose schlug sie und vertrieb sie.
+Und die Söhne Israels vertrieben den Gessuriter und den Maachathiter nicht; und Gessur und Maacha wohnten mitten in Israel bis auf diesen Tag.
+Nur dem Stamm Levi gab er kein Erbe; die Feueropfer des HERRN, des Gottes Israels, sind sein Erbe, wie er zu ihm gesprochen hatte.
+Und Mose gab dem Stamm der Söhne Rubens nach ihren Sippen.
+Und ihnen gehörte das Gebiet von Aroer, das am Ufer des Baches Arnon liegt, und der Stadt, die mitten im Bach liegt, und der ganzen Ebene bei Medeba:
+Hesbon und alle seine Städte, die in der Ebene liegen, Dibon und Bamoth-Baal und Beth-Baal-Meon
+und Jahza und Kedemoth und Mephaath
+und Kirjathaim und Sibma und Zereth-Sahar auf dem Berg des Tals
+und Beth-Peor und die Abhänge des Pisga und Beth-Jesimoth
+und alle Städte der Ebene und das ganze Königreich Sihons, des Königs des Amoriters, der in Hesbon regierte, den Mose schlug, ihn und die Fürsten Midians, Evi und Rekem und Zur und Hur und Reba, die Fürsten Sihons, Bewohner des Landes.
+Und Bileam, den Sohn Beors, den Wahrsager, töteten die Söhne Israels mit dem Schwert zu ihren Erschlagenen hinzu.
+Und die Grenze der Söhne Rubens war der Jordan und sein Grenzgebiet. Dies ist das Erbe der Söhne Rubens nach ihren Sippen: die Städte und ihre Dörfer.
+Und Mose gab dem Stamm Gad, den Söhnen Gads, nach ihren Sippen.
+Und ihnen gehörte als Gebiet Jaser und alle Städte Gileads und das halbe Land der Söhne Ammons bis Aroer, das vor Rabba liegt,
+und von Hesbon bis Ramath-Mizpe und Betonim und von Mahanaim bis zur Grenze Debirs
+und im Tal Beth-Haran und Beth-Nimra und Sukkoth und Zaphon, der Rest des Königreichs Sihons, des Königs von Hesbon, der Jordan und sein Grenzgebiet bis zum Ende des Meeres Kinnereth, jenseits des Jordans nach Osten.
+Dies ist das Erbe der Söhne Gads nach ihren Sippen: die Städte und ihre Dörfer.
+Und Mose gab dem halben Stamm Manasse; und es gehörte dem halben Stamm der Söhne Manasses nach ihren Sippen.
+Und ihr Gebiet war von Mahanaim an ganz Basan, das ganze Königreich Ogs, des Königs von Basan, und alle Dörfer Jairs, die in Basan liegen: sechzig Städte.
+Und das halbe Gilead und Astharoth und Edrei, die Städte des Königreichs Ogs in Basan, gehörten den Söhnen Machirs, des Sohnes Manasses, der Hälfte der Söhne Machirs nach ihren Sippen.
+Dies ist, was Mose in den Ebenen Moabs jenseits des Jordans bei Jericho nach Osten als Erbe gab.
+Und dem Stamm Levi gab Mose kein Erbe; der HERR, der Gott Israels, ist ihr Erbe, wie er zu ihnen gesprochen hatte.''', {1:'Die Wendung „an Tagen vorgerückt“ wird zweimal wiederholt; TARGET gibt sie mit „wohl betagt“ wieder.',2:'Der Text wiederholt „das Land, das übrig bleibt“. „Der Gessuriter“ steht im kollektiven Singular.',3:'Der Text sagt nur, dass der Sihor vor Ägypten liegt; das Verb „fließt“ wird ergänzt.',4:'„Der Kanaaniter“ und „der Amoriter“ stehen im kollektiven Singular, nicht im Plural.',5:'„Der Gebaliter“ steht im kollektiven Singular.',6:'Der Ortsname Misrephoth-Majim wird in TARGET mit „die warmen Wasser“ wiedergegeben. Das Bild des Zufallens wird im hebräischen Verb bewahrt.',8:'Der Text beginnt mit „mit ihm“ und nennt den Rubeniter und den Gaditer im kollektiven Singular; TARGET ergänzt ausdrücklich den anderen halben Manasse.',9:'Die Stadt liegt wörtlich mitten im Bach; TARGET sagt „mitten im Tal“.',10:'Der Text sagt „regierte“, nicht „saß“, und verwendet „der Amoriter“ im kollektiven Singular.',11:'Der Text nennt den Gessuriter und den Maachathiter im kollektiven Singular.',12:'Der Gruppenname „Rephaim“ wird in TARGET mit „Riesen“ übersetzt; das Verb bedeutet „regierte“, nicht „saß“.',13:'Die beiden Volksbezeichnungen stehen im kollektiven Singular; der Text sagt „mitten in Israel“, nicht „unter den Kindern Israel“.',14:'Der Text nennt ausdrücklich Feueropfer im Plural und bezieht das Erbe und das Sprechen auf den Stamm im Singular.',16:'Die Stadt liegt wörtlich mitten im Bach. Die Ebene liegt bei Medeba; TARGET sagt „bis gen Medeba“.',18:'Die Ortsnamen sind ausdrücklich mit „und“ verbunden.',21:'Der Text sagt „regierte“ und nennt Sihon als König des Amoriters im kollektiven Singular.',22:'Das Verb bedeutet „töteten“; „erwürgten“ beschreibt eine besondere Tötungsweise, die hier nicht genannt wird.',23:'Nach „Jordan“ steht nochmals „und Grenzgebiet“; TARGET lässt diese Wendung aus.',24:'„Gad“ wird ausdrücklich als Stamm und nochmals als „Söhne Gads“ genannt.',29:'Der halbe Stamm Manasse wird in zwei aufeinanderfolgenden Aussagen genannt; TARGET zieht sie zu einer Aussage zusammen.',30:'Der Text nennt ausdrücklich „sechzig Städte“; in TARGET fehlt „sechzig“.',31:'Der hebräische Satz nennt keinen Handelnden des Gebens; TARGET ergänzt „gab er“.',33:'Das verbindende „und“ wird in TARGET zu „aber“, und „denn“ wird ergänzt.'})
+write(13,'ru','''И Иисус состарился, вошёл в лета; и Господь сказал ему: «Ты состарился, вошёл в лета, а земли остаётся ещё очень много, чтобы овладеть ею.
+Вот земля, которая остаётся: все округи Филистимлян и весь Гессурянин,
+от Сихора, который перед Египтом, до границы Екрона к северу — она считается принадлежащей Хананею, — пять владык Филистимских: Газский и Азотский, Аскалонский, Гефский и Екронский, и Аввеи;
+с юга вся земля Хананея и Меара, которая принадлежит Сидонянам, до Афека, до границы Аморрея;
+и земля Гевлянина и весь Ливан к восходу солнца, от Ваал-Гада под горой Ермоном до входа в Емаф.
+Всех жителей нагорья, от Ливана до Мисрефоф-Маима, всех Сидонян, Я изгоню от лица сынов Израиля; только пусть она выпадет Израилю в наследие, как Я повелел тебе.
+И теперь раздели эту землю в наследие девяти коленам и половине колена Манассиина».
+С ним Рувимлянин и Гадитянин получили своё наследие, которое Моисей дал им по ту сторону Иордана, к востоку, как дал им Моисей, раб Господа:
+от Ароера, который на берегу потока Арнона, и города, который посреди потока, и всей равнины Медевы до Дивона
+и всех городов Сигона, царя Аморрея, который царствовал в Есевоне, до границы сынов Аммона,
+и Галаада, и области Гессурянина и Маахянина, и всей горы Ермона, и всего Васана до Салхи,
+всего царства Ога в Васане, который царствовал в Астарофе и в Едреи; он остался из остатка Рефаимов. И Моисей поразил их и изгнал их.
+И сыны Израиля не изгнали Гессурянина и Маахянина; и Гессур и Мааха жили среди Израиля до этого дня.
+Только колену Левия он не дал наследия; огненные жертвы Господа, Бога Израиля, — его наследие, как Он сказал ему.
+И Моисей дал колену сынов Рувима по их семействам.
+И принадлежала им область от Ароера, который на берегу потока Арнона, и города, который посреди потока, и всей равнины при Медеве:
+Есевон и все его города, которые на равнине, Дивон и Вамоф-Ваал и Беф-Ваал-Меон,
+и Иааца и Кедемоф и Мефааф,
+и Кириафаим и Сивма и Цереф-Шахар на горе долины,
+и Беф-Фегор и склоны Фасги и Беф-Иешимоф,
+и все города равнины и всё царство Сигона, царя Аморрея, который царствовал в Есевоне, которого Моисей поразил, его и вождей Мадиама, Евия и Рекема и Цура и Хура и Реву, князей Сигона, жителей земли.
+И Валаама, сына Веора, прорицателя, сыны Израиля убили мечом в числе убитых ими.
+И границей сынов Рувима были Иордан и его пограничье. Это наследие сынов Рувима по их семействам: города и их селения.
+И Моисей дал колену Гада, сынам Гада, по их семействам.
+И принадлежали им как область Иазер и все города Галаада и половина земли сынов Аммона до Ароера, который перед Раввою,
+и от Есевона до Рамаф-Мицфы и Ветонима и от Маханаима до границы Давира,
+и в долине Беф-Гарам и Беф-Нимра и Сокхоф и Цафон, остаток царства Сигона, царя Есевона, Иордан и его пограничье до края моря Хиннерефского, по ту сторону Иордана, к востоку.
+Это наследие сынов Гада по их семействам: города и их селения.
+И Моисей дал половине колена Манассиина; и принадлежало оно половине колена сынов Манассии по их семействам.
+И была их область от Маханаима: весь Васан, всё царство Ога, царя Васанского, и все селения Иаира, которые в Васане, шестьдесят городов.
+И половина Галаада и Астароф и Едрея, города царства Ога в Васане, принадлежали сынам Махира, сына Манассии, половине сынов Махира по их семействам.
+Это то, что Моисей дал в наследие на равнинах Моава, по ту сторону Иордана у Иерихона, к востоку.
+И колену Левия Моисей не дал наследия; Господь, Бог Израиля, — их наследие, как Он сказал им.''',{2:'Текст не добавляет здесь Хананейскую землю. Название «Гессурянин» стоит в собирательном единственном числе.',3:'К Хананею причисляется земля; далее отдельно перечислены пять владык и Аввеи, а не шесть владельцев как единая группа.',4:'Меара присоединена союзом «и» как принадлежащая Сидонянам; TARGET начинает от неё протяжение земли.',5:'Определения «Филистимская» нет. Текст говорит о земле Гевлянина и о месте под горой Ермоном.',6:'Глагол передачи наследия сохраняет образ выпадения доли; TARGET просто говорит «раздели».',7:'После половины колена Манассиина предложение заканчивается; слов об Иордане, великом море и западном пределе здесь нет.',8:'Начальные слова означают «с ним»; название другой половины колена Манассиина в TARGET раскрывает местоимение.',10:'«Аморрей» стоит в собирательном единственном числе, а Аммонитяне названы «сынами Аммона».',11:'Названия Гессурянина и Маахянина стоят в собирательном единственном числе; TARGET использует прилагательные.',12:'Ог назван оставшимся «из остатка Рефаимов», без слова «один». О действиях Моисея далее говорится отдельным предложением.',13:'Хананеи не упомянуты. Текст называет Гессурянина и Маахянина в собирательном единственном числе.',14:'Жертвы названы огненными. После слов о сказанном колену здесь нет добавленного в TARGET описания разделения земли на равнинах Моава.',19:'«Долина» — обычное существительное, а не имя «Емек».',20:'Текст прямо называет склоны Фасги.',21:'Глагол означает «поразил», не обязательно «убил». «Аморрей» стоит в собирательном единственном числе.',23:'После Иордана стоит ещё «и пограничье», отсутствующее в TARGET.',27:'Указан край моря, и после Иордана ещё раз сказано «и пограничье».',31:'Текст не содержит пассивного «даны», а лишь называет получателей этих земель.'})
+write(13,'en',{}, {1:'The Hebrew repeats the image “advanced in days”; BSB expresses this idiom as “well along in years”.',2:'The Hebrew uses the collective singular “the Geshurite”; BSB uses the plural.',3:'The Hebrew says the Shihor is “before Egypt”; BSB specifies “east of Egypt”.',4:'The Hebrew joins Mearah with “and”; BSB introduces it with “from”. “The Canaanite” and “the Amorite” are collective singulars.',5:'The Hebrew uses the collective singular “the Gebalite” and says “toward the rising of the sun”; BSB uses a plural and “to the east”.',8:'The Hebrew begins “with it/him” and explicitly names the Reubenite and Gadite in collective singulars. BSB supplies “the other half of Manasseh” and uses plurals.',10:'The Hebrew uses the collective singular “the Amorite” and calls the Ammonites “the sons of Ammon”.',11:'The Hebrew uses collective singulars for the Geshurite and Maacathite; BSB uses plurals.',13:'The two peoples are collective singulars joined with “and”; BSB uses plurals joined with “or” under the negation.',14:'The Hebrew leaves the subject of “gave” implicit; BSB explicitly names Moses.',16:'The Hebrew places the plateau “at Medeba”; BSB says “beyond Medeba”.',21:'The Hebrew uses “struck” rather than “killed” and calls Sihon king of “the Amorite”, a collective singular.',23:'The Hebrew says “the Jordan and its border”; BSB condenses this to “the bank of the Jordan”.',24:'The Hebrew names both “the tribe of Gad” and “the sons of Gad”; BSB condenses these.',25:'The Hebrew calls the Ammonites “the sons of Ammon” and places Aroer “before Rabbah”; BSB says “near Rabbah”.',27:'The Hebrew explicitly names “the Jordan and its border”; BSB incorporates this into its parenthetical description of territory.',29:'The Hebrew has two clauses, “Moses gave” and “it belonged”; BSB recasts the second as “that is”.'})

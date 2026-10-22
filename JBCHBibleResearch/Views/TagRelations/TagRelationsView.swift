@@ -86,13 +86,13 @@ struct TagRelationsView: View {
     /// 삭제 확인 알림 문구. 노드를 못 찾으면 태그 이름 없는 일반 문구로 대체한다.
     private var edgeDeletionMessage: String {
         guard let edge = edgePendingDeletion, let viewModel else {
-            return "이 연결을 삭제할까요?"
+            return String(localized: "이 연결을 삭제할까요?")
         }
         let nameByID = Dictionary(uniqueKeysWithValues: viewModel.nodes.map { ($0.id, $0.tag.name) })
         guard let nameA = nameByID[edge.tagAID], let nameB = nameByID[edge.tagBID] else {
-            return "이 연결을 삭제할까요?"
+            return String(localized: "이 연결을 삭제할까요?")
         }
-        return "\"\(nameA)\" ↔ \"\(nameB)\" 연결을 삭제할까요? 태그 자체는 지워지지 않습니다."
+        return String(localized: "\"\(nameA)\" ↔ \"\(nameB)\" 연결을 삭제할까요? 태그 자체는 지워지지 않습니다.")
     }
 
     /// 탭 위치와 가장 가까운 수동 엣지(실선)를 찾아 삭제 확인을 띄운다.

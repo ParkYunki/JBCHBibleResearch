@@ -198,8 +198,8 @@ struct CrossReferenceTargetPicker: View {
 
     /// `anchorText`가 있으면(구간 선택) 원문을 인용해 타이틀에 보이고, 없으면 "관주 연결"만 보인다.
     private var navigationTitleText: String {
-        guard let anchorText, !anchorText.isEmpty else { return "관주 연결" }
-        return "“\(anchorText)” 관주 연결"
+        guard let anchorText, !anchorText.isEmpty else { return String(localized: "관주 연결") }
+        return String(localized: "“\(anchorText)” 관주 연결")
     }
 
     /// `existingReferences`를 (라벨, 절목록, 원본 레코드) 쌍으로 정제한다. 저장된 `entryLabels`/
@@ -211,7 +211,7 @@ struct CrossReferenceTargetPicker: View {
                 return grouped.map { (label: $0.label, verses: $0.verses, reference: reference) }
             }
             return reference.targets.map { target in
-                let name = BooksProvider.shared.book(id: target.bookId)?.nameKo ?? "책 \(target.bookId)"
+                let name = BooksProvider.shared.book(id: target.bookId)?.displayName ?? String(localized: "책 \(target.bookId)")
                 return (label: "\(name) \(target.chapter):\(target.verse)", verses: [target], reference: reference)
             }
         }

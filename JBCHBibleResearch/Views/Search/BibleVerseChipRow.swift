@@ -38,7 +38,7 @@ struct BibleVerseChipRow: View {
 
     /// `TranslationColumnView.crossReferenceTargetLabel`과 같은 "책이름 장:절" 표기.
     private func refLabel(_ ref: BibleVerseRef) -> String {
-        let bookName = BooksProvider.shared.book(id: ref.bookId)?.nameKo ?? "책 \(ref.bookId)"
+        let bookName = BooksProvider.shared.book(id: ref.bookId)?.displayName ?? String(localized: "책 \(ref.bookId)")
         return "\(bookName) \(ref.chapter):\(ref.verse)"
     }
 

@@ -1,0 +1,32 @@
+[
+  {
+    "path": "Tools/LiteralGen/outputs/de/15_EZR/EZR_008_1.tsv",
+    "old_row": "14\tUnd von den Söhnen Bigevais Uthai und Sabbud, und mit ihm siebzig Männliche.\tDas begleitende Pronomen steht im Singular.",
+    "new_row": "14\tUnd von den Söhnen Bigevais Uthai und Sakkur, und mit ihm siebzig Männliche.\tDas Hebräische nennt Sakkur statt Sabbud; das begleitende Pronomen steht im Singular."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/15_EZR/EZR_008_1.tsv",
+    "old_row": "14\tИ из сынов Бигвая Уфай и Заббуд, и с ним семьдесят мужчин.\tМестоимение стоит в единственном числе.",
+    "new_row": "14\tИ из сынов Бигвая Уфай и Заккур, и с ним семьдесят мужчин.\tЕврейский текст называет Заккура вместо Заббуда; местоимение стоит в единственном числе."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/15_EZR/EZR_010_1.tsv",
+    "old_row": "29\tUnd von den Söhnen Banis Mesullam, Malluch und Adaja, Jasub und Seal und Jeremoth.\tNah am Hebräischen.",
+    "new_row": "29\tUnd von den Söhnen Banis Mesullam, Malluch und Adaja, Jasub und Seal und Ramoth.\tDas Hebräische nennt zuletzt Ramoth; Luther nennt Jeremoth."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/15_EZR/EZR_010_1.tsv",
+    "old_row": "29\tИ из сынов Вания Мешуллам, Маллух и Адая, Иашув, и Шеал, и Иерамоф.\tБлизко к еврейскому.",
+    "new_row": "29\tИ из сынов Вания Мешуллам, Маллух и Адая, Иашув, и Шеал, и Рамоф.\tЕврейский текст в конце называет Рамофа; Синодальный перевод — Иерамофа."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/15_EZR/EZR_009.tsv",
+    "old_row": "3\tUnd als ich diese Sache hörte, zerriss ich mein Kleid und meinen Mantel und raufte vom Haar meines Hauptes und meines Bartes aus und saß entsetzt.\tEin Teil des Haars wird ausgerauft.",
+    "new_row": "3\tUnd als ich diese Sache hörte, zerriss ich mein Kleid und meinen Mantel und raufte einen Teil des Haars meines Hauptes und meines Bartes aus und saß entsetzt.\tEin Teil des Haars wird ausgerauft."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/15_EZR/EZR_009.tsv",
+    "old_row": "3\tИ когда я услышал это дело, разорвал одежду мою и плащ мой, и вырвал из волос головы моей и бороды моей, и сел в ужасе.\tВырвана часть волос; сидение выражает ужас.",
+    "new_row": "3\tИ когда я услышал это дело, разорвал одежду мою и плащ мой, и вырвал часть волос с моей головы и бороды, и сел в ужасе.\tВырвана часть волос; сидение выражает ужас."
+  }
+]

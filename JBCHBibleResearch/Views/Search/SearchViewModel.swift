@@ -295,9 +295,9 @@ final class SearchViewModel {
         var id: String { rawValue }
         var title: String {
             switch self {
-            case .relevance: return "관련도순"
-            case .canon: return "성경순"
-            case .count: return "많은 순"
+            case .relevance: return String(localized: "관련도순")
+            case .canon: return String(localized: "성경순")
+            case .count: return String(localized: "많은 순")
             }
         }
     }
@@ -359,7 +359,7 @@ final class SearchViewModel {
             let orderIndex = book?.orderIndex ?? bookId
             return VerseBookGroup(
                 bookId: bookId,
-                bookNameKo: book?.nameKo ?? verses.first?.bookNameKo ?? "\(bookId)권",
+                bookNameKo: book?.displayName ?? verses.first?.bookNameKo ?? String(localized: "\(bookId)권"),
                 orderIndex: orderIndex,
                 isOldTestament: book.map { $0.testament == .old } ?? (bookId <= 39),
                 verses: verses,
@@ -513,7 +513,7 @@ final class SearchViewModel {
                     .sorted { ($0.chapter ?? -1) < ($1.chapter ?? -1) }
                 return OutlineSearchResultGroup(
                     bookId: bookId,
-                    bookNameKo: booksProvider.book(id: bookId)?.nameKo ?? "\(bookId)권",
+                    bookNameKo: booksProvider.book(id: bookId)?.displayName ?? String(localized: "\(bookId)권"),
                     items: items
                 )
             }
@@ -954,7 +954,7 @@ final class SearchViewModel {
                     results.append(VerseSearchResult(
                         bookId: verse.bookId, chapter: verse.chapter, verse: verse.verse,
                         content: verse.content,
-                        bookNameKo: booksProvider.book(id: verse.bookId)?.nameKo ?? "\(verse.bookId)권",
+                        bookNameKo: booksProvider.book(id: verse.bookId)?.displayName ?? String(localized: "\(verse.bookId)권"),
                         translationCode: registry.code, translationDisplayName: registry.displayName,
                         isReferenceMatch: true
                     ))
@@ -995,7 +995,7 @@ final class SearchViewModel {
                     guard !seen.contains(key), wordCandidates[key] == nil else { continue }
                     wordCandidates[key] = (
                         BibleVerse(uid: 0, versionCode: versionCode, bookId: match.bookId, chapter: match.chapter, verse: match.verse, content: match.content, paragraph: nil),
-                        booksProvider.book(id: match.bookId)?.nameKo ?? "\(match.bookId)권",
+                        booksProvider.book(id: match.bookId)?.displayName ?? String(localized: "\(match.bookId)권"),
                         registry.code, registry.displayName
                     )
                 }
@@ -1018,7 +1018,7 @@ final class SearchViewModel {
                             // 번역본별 결과 유지(위와 같은 이유).
                             let key = "\(verse.bookId)-\(verse.chapter)-\(verse.verse)-\(registry.code)"
                             guard !seen.contains(key), wordCandidates[key] == nil else { continue }
-                            wordCandidates[key] = (verse, booksProvider.book(id: verse.bookId)?.nameKo ?? "\(verse.bookId)권", registry.code, registry.displayName)
+                            wordCandidates[key] = (verse, booksProvider.book(id: verse.bookId)?.displayName ?? String(localized: "\(verse.bookId)권"), registry.code, registry.displayName)
                         }
                     }
                 }
@@ -1346,16 +1346,18 @@ final class SearchViewModel {
     /// 바꾼다. 키워드 검색과 같은 근거로 30개에서 자른다 — 관계가 많은 인물일 때 목록이 무한정
     /// 길어지지 않게.
     private func resolveVerseResults(_ refs: [BibleVerseRef]) -> [VerseSearchResult] {
-        guard let store = try? BibleReferenceStore(filePath: TranslationBootstrap.resolvedBundledDatabaseURL().path) else { return [] }
+        // 앱 언어의 기본 번들 성경으로 보여준다(2026-10-12, `BundledTranslationCatalog.current`).
+        let bundled = BundledTranslationCatalog.current
+        guard let store = try? BibleReferenceStore(filePath: TranslationBootstrap.resolvedCurrentLanguageBundledDatabaseURL().path) else { return [] }
         var results: [VerseSearchResult] = []
         for ref in refs {
             guard let verse = try? store.verse(bookId: ref.bookId, chapter: ref.chapter, verse: ref.verse) else { continue }
             results.append(VerseSearchResult(
                 bookId: verse.bookId, chapter: verse.chapter, verse: verse.verse,
                 content: verse.content,
-                bookNameKo: booksProvider.book(id: verse.bookId)?.nameKo ?? "\(verse.bookId)권",
-                translationCode: TranslationBootstrap.bundledTranslationCode,
-                translationDisplayName: TranslationBootstrap.bundledDisplayName
+                bookNameKo: booksProvider.book(id: verse.bookId)?.displayName ?? String(localized: "\(verse.bookId)권"),
+                translationCode: bundled.code,
+                translationDisplayName: bundled.displayName
             ))
             if results.count >= 30 { break }
         }

@@ -189,10 +189,14 @@ public struct PlaceEntity: Hashable {
     public let bibleContents: String
     public let geography: String
     public let history: String
+    /// [2026-10-22] 화면 표시용 번역(`PlacesI18n`). 한국어 앱·번역 없음이면 nil — 위 한국어 필드는 언제나 그대로이며
+    /// 동명 지명 묶기(`placesSharingName(word:)`) 같은 판정은 계속 한국어 `word`로 한다. 화면은 `display*`를 쓴다.
+    public let localized: PlaceLocalizedText?
 
     public init(
         idx: String, word: String, remark: String, verseRefs: [BibleVerseRef],
-        introduce: String, bibleContents: String, geography: String, history: String
+        introduce: String, bibleContents: String, geography: String, history: String,
+        localized: PlaceLocalizedText? = nil
     ) {
         self.idx = idx
         self.word = word
@@ -202,7 +206,106 @@ public struct PlaceEntity: Hashable {
         self.bibleContents = bibleContents
         self.geography = geography
         self.history = history
+        self.localized = localized
     }
+}
+
+// MARK: - 번역 표시층 (2026-10-22 신설)
+//
+// `ReferenceData.sqlite`의 `PersonsI18n`/`PlacesI18n`(build_reference_data.py `build_reference_i18n`) 한 행.
+// 필드가 nil이면 "그 칸 번역 없음 → 한국어 폴백", 빈 문자열이면 "한국어도 비어 있음(카드 숨김)", "-"는 한국어와 같은
+// "기록 없음" 표시다. 엔티티의 한국어 필드는 바꾸지 않고(관계·동명이인·성별 판정이 한국어 값을 쓰므로) 화면만
+// `display*` 접근자로 이 값을 읽는다.
+
+/// `PersonsI18n` 한 행 — `PersonEntity.localized`.
+public struct PersonLocalizedText: Hashable {
+    public let word: String?
+    public let aliases: [String]?
+    public let remark: String?
+    public let callTitle: String?
+    public let meaning: String?
+    public let introduce: String?
+    public let lifetime: String?
+    public let event: String?
+    public let character: String?
+    public let origin: String?
+    public let nation: String?
+    public let tribe: String?
+    public let gender: String?
+    public let occupation: [String]?
+    public let seedMemo: String?
+
+    public init(
+        word: String?, aliases: [String]?, remark: String?, callTitle: String?, meaning: String?,
+        introduce: String?, lifetime: String?, event: String?, character: String?, origin: String?,
+        nation: String?, tribe: String?, gender: String?, occupation: [String]?, seedMemo: String?
+    ) {
+        self.word = word
+        self.aliases = aliases
+        self.remark = remark
+        self.callTitle = callTitle
+        self.meaning = meaning
+        self.introduce = introduce
+        self.lifetime = lifetime
+        self.event = event
+        self.character = character
+        self.origin = origin
+        self.nation = nation
+        self.tribe = tribe
+        self.gender = gender
+        self.occupation = occupation
+        self.seedMemo = seedMemo
+    }
+}
+
+/// `PlacesI18n` 한 행 — `PlaceEntity.localized`.
+public struct PlaceLocalizedText: Hashable {
+    public let word: String?
+    public let remark: String?
+    public let introduce: String?
+    public let bibleContents: String?
+    public let geography: String?
+    public let history: String?
+
+    public init(
+        word: String?, remark: String?, introduce: String?, bibleContents: String?,
+        geography: String?, history: String?
+    ) {
+        self.word = word
+        self.remark = remark
+        self.introduce = introduce
+        self.bibleContents = bibleContents
+        self.geography = geography
+        self.history = history
+    }
+}
+
+/// `ReferenceDataStore.translatedNameMatches(in:)`의 결과 한 건 — 번역 이름(비한국어 화면 전용)으로 찾은 인물/지명.
+/// 같은 (kind, idx)는 한 번만 나온다.
+public struct TranslatedNameMatch: Hashable {
+    public let kind: ReferenceEntity.Kind
+    public let idx: String
+    /// 번역 별칭으로만 걸렸으면 그 별칭(번역 문자열), 대표 이름으로 걸렸으면 nil(`PersonEntity.matchedAlias`와 같은 뜻).
+    public let matchedAlias: String?
+
+    public init(kind: ReferenceEntity.Kind, idx: String, matchedAlias: String?) {
+        self.kind = kind
+        self.idx = idx
+        self.matchedAlias = matchedAlias
+    }
+}
+
+public extension PlaceEntity {
+    /// 번역 이름. 번역이 없거나 비어 있으면 한국어 `word`(제목이 비지 않도록 빈 문자열도 폴백).
+    var displayWord: String {
+        guard let value = localized?.word, !value.isEmpty else { return word }
+        return value
+    }
+    var displayRemark: String { localized?.remark ?? remark }
+    var displayIntroduce: String { localized?.introduce ?? introduce }
+    var displayBibleContents: String { localized?.bibleContents ?? bibleContents }
+    var displayGeography: String { localized?.geography ?? geography }
+    var displayHistory: String { localized?.history ?? history }
 }
 
 /// `Persons` 테이블 조회 결과(전체 컬럼) — 인물 프로필 카드 전용.
@@ -242,6 +345,9 @@ public struct PersonEntity: Hashable {
     public let contextNotes: [PersonContextNoteRecord]
     /// 이 인물이 속한 각 그룹의 "다른" 멤버들(자기 자신 제외) — `PersonGroupMembershipRow` 참고.
     public let groupMemberships: [PersonGroupMembershipRow]
+    /// [2026-10-22] 화면 표시용 번역(`PersonsI18n`). 한국어 앱·번역 없음이면 nil. 위 한국어 필드(특히 `word`/`gender`)는
+    /// 동명이인·관계 방향·성별 판정에 계속 쓰이므로 바꾸지 않는다 — 화면은 `display*`를 쓴다.
+    public let localized: PersonLocalizedText?
 
     public init(
         idx: String, word: String, aliases: [String], entityRemark: String,
@@ -250,7 +356,8 @@ public struct PersonEntity: Hashable {
         nation: String, tribe: String, gender: String, occupation: [String], seedMemo: String,
         relations: [PersonRelationRecord], familyRelations: PersonFamilyRelations,
         contextNotes: [PersonContextNoteRecord] = [],
-        groupMemberships: [PersonGroupMembershipRow] = []
+        groupMemberships: [PersonGroupMembershipRow] = [],
+        localized: PersonLocalizedText? = nil
     ) {
         self.idx = idx
         self.word = word
@@ -274,6 +381,42 @@ public struct PersonEntity: Hashable {
         self.familyRelations = familyRelations
         self.contextNotes = contextNotes
         self.groupMemberships = groupMemberships
+        self.localized = localized
+    }
+}
+
+public extension PersonEntity {
+    /// 번역 이름. 번역이 없거나 비어 있으면 한국어 `word`(제목이 비지 않도록 빈 문자열도 폴백).
+    var displayWord: String {
+        guard let value = localized?.word, !value.isEmpty else { return word }
+        return value
+    }
+    var displayAliases: [String] { localized?.aliases ?? aliases }
+    var displayRemark: String { localized?.remark ?? entityRemark }
+    var displayCallTitle: String { localized?.callTitle ?? callTitle }
+    var displayMeaning: String { localized?.meaning ?? meaning }
+    var displayIntroduce: String { localized?.introduce ?? introduce }
+    var displayLifetime: String { localized?.lifetime ?? lifetime }
+    var displayEvent: String { localized?.event ?? event }
+    var displayCharacter: String { localized?.character ?? character }
+    var displayOrigin: String { localized?.origin ?? origin }
+    var displayNation: String { localized?.nation ?? nation }
+    var displayTribe: String { localized?.tribe ?? tribe }
+    /// 표시 전용. 성별 판정(`QueryIntentHandler`의 "여"/"남" 비교)은 계속 한국어 `gender`를 쓴다.
+    var displayGender: String { localized?.gender ?? gender }
+    var displayOccupation: [String] { localized?.occupation ?? occupation }
+    var displaySeedMemo: String { localized?.seedMemo ?? seedMemo }
+
+    /// `matchedAlias`만 바꾼 사본 — 번역 이름 검색에서 번역 별칭으로 찾은 경우 화면 배지("별칭 “…”로 검색됨")에 쓴다.
+    func replacingMatchedAlias(_ alias: String?) -> PersonEntity {
+        PersonEntity(
+            idx: idx, word: word, aliases: aliases, entityRemark: entityRemark, verseRefs: verseRefs,
+            matchedAlias: alias, callTitle: callTitle, meaning: meaning, introduce: introduce,
+            lifetime: lifetime, event: event, character: character, origin: origin, nation: nation,
+            tribe: tribe, gender: gender, occupation: occupation, seedMemo: seedMemo,
+            relations: relations, familyRelations: familyRelations, contextNotes: contextNotes,
+            groupMemberships: groupMemberships, localized: localized
+        )
     }
 }
 

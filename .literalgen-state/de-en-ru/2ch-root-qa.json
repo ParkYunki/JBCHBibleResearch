@@ -1,0 +1,82 @@
+[
+  {
+    "path": "Tools/LiteralGen/outputs/de/14_2CH/2CH_025.tsv",
+    "old_row": "5\tUnd Amazja versammelte Juda und stellte sie nach Vaterhäusern unter Oberste über Tausend und Oberste über Hundert für ganz Juda und Benjamin; und er musterte sie von zwanzig Jahren an und darüber und fand sie dreihunderttausend Auserlesene, die ins Heer auszogen, Speer und Schild führend.\tNah am Hebräischen.",
+    "new_row": "5\tUnd Amazja versammelte Juda und stellte sie nach Vaterhäusern unter Oberste über Tausend und Oberste über Hundert für ganz Juda und Benjamin; und er musterte sie von zwanzig Jahren an und darüber und fand unter ihnen dreihunderttausend Auserlesene, die ins Heer auszogen, Speer und Schild führend.\tNah am Hebräischen."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/14_2CH/2CH_025.tsv",
+    "old_row": "5\tИ собрал Амасия Иуду, и поставил их по домам отцов под начальников тысяч и начальников сотен, всего Иуду и Вениамина; и исчислил их от двадцати лет и выше, и нашёл их триста тысяч отборных, выходящих в войско, держащих копьё и щит.\tНазваны дома отцов.",
+    "new_row": "5\tИ собрал Амасия Иуду, и поставил их по домам отцов под начальников тысяч и начальников сотен, для всего Иуды и Вениамина; и исчислил их от двадцати лет и выше, и нашёл их триста тысяч отборных, выходящих в войско, держащих копьё и щит.\tНазваны дома отцов."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/14_2CH/2CH_032_1.tsv",
+    "old_row": "18\tUnd sie riefen mit lauter Stimme auf Judäisch zum Volk Jerusalems, das auf der Mauer war, um sie zu fürchten und zu erschrecken, damit sie die Stadt eroberten.\tDie Sprachbezeichnung ist Judäisch.",
+    "new_row": "18\tUnd sie riefen mit lauter Stimme auf Judäisch zum Volk Jerusalems, das auf der Mauer war, um ihnen Furcht einzujagen und sie zu erschrecken, damit sie die Stadt eroberten.\tDie Sprachbezeichnung ist Judäisch."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/14_2CH/2CH_031.tsv",
+    "old_row": "19\tИ для сынов Аарона, священников, на полях пастбищ их городов в каждом городе были мужи, обозначенные по именам, чтобы давать доли всякому мужскому полу среди священников и всем записанным по родословию среди левитов.\tДоли, а не земельные участки.",
+    "new_row": "19\tИ для сынов Аарона, священников, на полях пастбищ их городов в каждом городе были мужи, обозначенные по именам, чтобы давать доли каждому мужчине среди священников и всем записанным по родословию среди левитов.\tДоли, а не земельные участки."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/14_2CH/2CH_032_1.tsv",
+    "old_row": "9\tDanach sandte Sanherib, der König Assyriens, seine Knechte nach Jerusalem, während er gegen Lachis stand und seine ganze Macht mit ihm, zu Hiskia, dem König Judas, und zu ganz Juda, das in Jerusalem war, und sagte:\tNah am Hebräischen.",
+    "new_row": "9\tDanach sandte Sanherib, der König Assyriens, seine Knechte nach Jerusalem, während er gegen Lachis stand und seine ganze Macht mit ihm war, zu Hiskia, dem König Judas, und zu ganz Juda, das in Jerusalem war, und sagte:\tNah am Hebräischen."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/14_2CH/2CH_029_1.tsv",
+    "old_row": "27\tUnd Hiskia sagte, das Brandopfer zum Altar aufsteigen zu lassen; und zur Zeit, als das Brandopfer begann, begann der Gesang des HERRN und die Trompeten und dazu die Geräte Davids, des Königs Israels.\tNah am Hebräischen.",
+    "new_row": "27\tUnd Hiskia sagte, das Brandopfer zum Altar aufsteigen zu lassen; und zur Zeit, als das Brandopfer begann, begannen der Gesang des HERRN und die Trompeten und dazu die Geräte Davids, des Königs Israels.\tNah am Hebräischen."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/en/14_2CH/2CH_025.tsv",
+    "old_row": "18\t=\tThe Hebrew repeats in Lebanon for the thistle, cedar, and wild animal.",
+    "new_row": "18\t=\tClose to the Hebrew."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/en/14_2CH/2CH_026.tsv",
+    "old_row": "10\t=\tThe Hebrew explicitly pictures love of the ground.",
+    "new_row": "10\t=\tClose to the Hebrew."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/en/14_2CH/2CH_029_1.tsv",
+    "old_row": "2\t=\tThe Hebrew calls David his father; BSB uses his father David.",
+    "new_row": "2\t=\tClose to the Hebrew."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/en/14_2CH/2CH_029_1.tsv",
+    "old_row": "3\t=\tClose to the Hebrew.",
+    "new_row": "3\t=\tThe Hebrew leaves the subject unnamed here; BSB names Hezekiah."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/en/14_2CH/2CH_029_1.tsv",
+    "old_row": "4\t=\tThe Hebrew says he brought the priests and Levites and gathered them, expressing both actions.",
+    "new_row": "4\t=\tClose to the Hebrew."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/en/14_2CH/2CH_024.tsv",
+    "old_row": "14\t=\tThe Hebrew uses an active plural for regularly offering burnt offerings; BSB uses the passive.",
+    "new_row": "14\t=\tThe Hebrew uses a singular subject for making the articles, where BSB presents their making as a purpose. The Hebrew uses an active plural for regularly offering burnt offerings; BSB uses the passive."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/en/14_2CH/2CH_033.tsv",
+    "old_row": "19\t=\tClose to the Hebrew.",
+    "new_row": "19\t=\tThe Hebrew names Hosai at the end; BSB refers to the Seers."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/14_2CH/2CH_029_1.tsv",
+    "old_row": "28\tUnd die ganze Versammlung warf sich nieder, und der Gesang wurde gesungen und die Trompeten geblasen, alles bis zum Vollenden des Brandopfers.\tNah am Hebräischen.",
+    "new_row": "28\tUnd die ganze Versammlung warf sich nieder, und der Gesang sang und die Trompeten trompeteten, alles bis zum Vollenden des Brandopfers.\tNah am Hebräischen."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/14_2CH/2CH_029_1.tsv",
+    "old_row": "28\tИ всё собрание поклонялось, и песнь пелась, и трубы трубили, всё до окончания всесожжения.\tУказано поклонение; сама песнь названа поющейся.",
+    "new_row": "28\tИ всё собрание поклонялось, и песнь пела, и трубы трубили, всё до окончания всесожжения.\tУказано поклонение; сама песнь представлена поющей."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/en/14_2CH/2CH_029_1.tsv",
+    "old_row": "28\t=\tThe Hebrew describes the song as being sung and the trumpets as trumpeting; BSB names singers and trumpeters.",
+    "new_row": "28\t=\tThe Hebrew makes the song and the trumpets the subjects of singing and trumpeting; BSB names singers and trumpeters."
+  }
+]

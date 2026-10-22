@@ -1,0 +1,17 @@
+[
+  {
+    "path": "Tools/LiteralGen/outputs/en/13_1CH/1CH_011_2.tsv",
+    "old_row": "42\t=\tThe Hebrew places the thirty upon him; BSB describes them as with him.",
+    "new_row": "42\t=\tClose to the Hebrew."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/en/13_1CH/1CH_016_2.tsv",
+    "old_row": "36\t=\tThe Hebrew reports the people saying Amen and praising the LORD; BSB presents Praise the LORD as additional quoted speech.",
+    "new_row": "36\t=\tClose to the Hebrew."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/en/13_1CH/1CH_016_1.tsv",
+    "old_row": "29\t=\tClose to the Hebrew.",
+    "new_row": "29\t=\tThe Hebrew says the splendor of holiness without a possessive expression; BSB adds His."
+  }
+]

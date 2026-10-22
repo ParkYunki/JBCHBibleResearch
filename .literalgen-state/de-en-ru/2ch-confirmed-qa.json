@@ -1,0 +1,442 @@
+[
+  {
+    "path": "Tools/LiteralGen/outputs/de/14_2CH/2CH_001.tsv",
+    "old_row": "6\tUnd Salomo ging dort zum bronzenen Altar hinauf, vor den HERRN, der beim Zelt der Begegnung war; und er brachte auf ihm tausend Brandopfer dar.\tDas Hinaufgehen und das Darbringen sind getrennte Handlungen.",
+    "new_row": "6\tUnd Salomo ging dort zum bronzenen Altar hinauf, der beim Zelt der Begegnung vor dem HERRN war; und er brachte auf ihm tausend Brandopfer dar.\tDas Hinaufgehen und das Darbringen sind getrennte Handlungen."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/14_2CH/2CH_001.tsv",
+    "old_row": "6\tИ Соломон поднялся там к бронзовому жертвеннику перед Господом, который был при шатре встречи, и вознес на нем тысячу всесожжений.\tОтдельно названы восхождение и вознесение жертв.",
+    "new_row": "6\tИ Соломон поднялся там к бронзовому жертвеннику, который был при шатре встречи перед Господом, и вознес на нем тысячу всесожжений.\tОтдельно названы восхождение и вознесение жертв."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/en/14_2CH/2CH_001.tsv",
+    "old_row": "13\t=\tThe Hebrew uses a preposition to the high place before naming Jerusalem; BSB makes the movement from the high place explicit.",
+    "new_row": "13\t=\tThe Hebrew explicitly says from before the Tent of Meeting; BSB says before the Tent of Meeting."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/14_2CH/2CH_002.tsv",
+    "old_row": "13\tИ ныне я послал мудрого человека, знающего понимание: Хирам-Авия,\tСлово «послал» сохраняет завершенную форму.",
+    "new_row": "13\tИ ныне я послал мудрого человека, знающего понимание: Хирама-Авия,\tСлово «послал» сохраняет завершенную форму."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/14_2CH/2CH_003.tsv",
+    "old_row": "10\tИ он сделал в доме Святого Святых двух херувимов, изваянную работу; и их покрыли золотом.\tПокрытие золотом имеет подлежащее во множественном числе.",
+    "new_row": "10\tИ он сделал в доме Святого Святых двух херувимов как изваянную работу; и их покрыли золотом.\tПокрытие золотом имеет подлежащее во множественном числе."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/14_2CH/2CH_004.tsv",
+    "old_row": "4\tОно стояло на двенадцати волах: трое обращены к северу и трое обращены к западу, и трое обращены к югу, и трое обращены к востоку; и море было на них сверху, и все их задние части — внутрь.\tБлизко к еврейскому.",
+    "new_row": "4\tОно стояло на двенадцати волах: три обращены к северу и три обращены к западу, и три обращены к югу, и три обращены к востоку; и море было на них сверху, и все их задние части — внутрь.\tБлизко к еврейскому."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/14_2CH/2CH_005.tsv",
+    "old_row": "13\tUnd die Trompeter und die Sänger waren wie einer, um eine Stimme ertönen zu lassen, dem HERRN zu loben und zu danken; und als sie die Stimme mit Trompeten und mit Zimbeln und mit Musikinstrumenten erhoben und den HERRN lobten: „Denn er ist gut, denn auf ewig währt seine Güte“, da war das Haus voll einer Wolke, das Haus des HERRN.\tDie beiden Begründungen mit denn bleiben erhalten; das Haus wird zweimal genannt.",
+    "new_row": "13\tUnd die Trompeter und die Sänger waren wie einer, um eine Stimme ertönen zu lassen, den HERRN zu loben und ihm zu danken; und als sie die Stimme mit Trompeten und mit Zimbeln und mit Musikinstrumenten erhoben und den HERRN lobten: „Denn er ist gut, denn auf ewig währt seine Güte“, da war das Haus voll einer Wolke, das Haus des HERRN.\tDie beiden Begründungen mit denn bleiben erhalten; das Haus wird zweimal genannt."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/14_2CH/2CH_006_1.tsv",
+    "old_row": "19\tИ обратись к молитве Твоего раба и к его молению, Господи, мой Бог, чтобы слышать воззвание и молитву, которой Твой раб молится перед Тобой,\tБуквально «обратись»; слушание связано с этим как цель.",
+    "new_row": "19\tИ обратись к молитве Твоего раба и к его молению, Господи, Боже мой, чтобы слышать воззвание и молитву, которой Твой раб молится перед Тобой,\tБуквально «обратись»; слушание связано с этим как цель."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/14_2CH/2CH_006_2.tsv",
+    "old_row": "32\tUnd auch den Fremden, der nicht von deinem Volk Israel ist und aus fernem Land um deines großen Namens und deiner starken Hand und deines ausgestreckten Arms willen kommt — und sie kommen und beten zu diesem Haus hin —,\tNach dem einzelnen Fremden wechseln die Verben zu kommen und beten ins Pluralische.",
+    "new_row": "32\tUnd auch wenn der Fremde, der nicht von deinem Volk Israel ist, aus fernem Land um deines großen Namens und deiner starken Hand und deines ausgestreckten Arms willen kommt — und sie kommen und beten zu diesem Haus hin —,\tNach dem einzelnen Fremden wechseln die Verben zu kommen und beten ins Pluralische."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/14_2CH/2CH_006_2.tsv",
+    "old_row": "32\tИ также иноплеменника, который не из Твоего народа Израиля и придет из далекой земли ради Твоего великого имени и Твоей крепкой руки, и Твоей простертой мышцы, — и они придут и будут молиться в направлении этого дома, —\tПосле единственного иноплеменника приход и молитва выражены во множественном числе.",
+    "new_row": "32\tИ также если иноплеменник, который не из Твоего народа Израиля, придет из далекой земли ради Твоего великого имени и Твоей крепкой руки, и Твоей простертой мышцы, — и они придут и будут молиться в направлении этого дома, —\tПосле единственного иноплеменника приход и молитва выражены во множественном числе."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/14_2CH/2CH_007.tsv",
+    "old_row": "1\tUnd als Salomo zu beten beendet hatte, kam das Feuer von den Himmeln herab und verzehrte das Brandopfer und die Schlachtopfer; und die Herrlichkeit des HERRN erfüllte das Haus.\tDie Himmel stehen im Plural; Schlachtopfer sind genauer benannt.",
+    "new_row": "1\tUnd als Salomo das Beten beendet hatte, kam das Feuer von den Himmeln herab und verzehrte das Brandopfer und die Schlachtopfer; und die Herrlichkeit des HERRN erfüllte das Haus.\tDie Himmel stehen im Plural; Schlachtopfer sind genauer benannt."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/14_2CH/2CH_007.tsv",
+    "old_row": "10\tИ в двадцать третий день седьмого месяца он отпустил народ к своим шатрам, радующихся и благих сердцем о благе, которое Господь сделал Давиду и Соломону, и Израилю, Своему народу.\tОтдельного слова царь нет; местоимение относится к нему без повторения.",
+    "new_row": "10\tИ в двадцать третий день седьмого месяца он отпустил людей к своим шатрам, радующихся и благих сердцем о благе, которое Господь сделал Давиду и Соломону, и Израилю, Своему народу.\tОтдельного слова царь нет; местоимение относится к нему без повторения."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/14_2CH/2CH_008.tsv",
+    "old_row": "9\tUnd von den Söhnen Israels machte Salomo keine Sklaven für seine Arbeit; denn sie waren Kriegsmänner und Oberste seiner Offiziere und Oberste seiner Wagen und seiner Reiter.\tDie Kriegsmänner leiten die Offiziere; sie sind nicht selbst unmittelbar als Ritter bezeichnet.",
+    "new_row": "9\tUnd von den Söhnen Israels machte Salomo keine Sklaven für seine Arbeit; denn sie waren Kriegsmänner und Oberste seiner Offiziere und Oberste seiner Wagen und seiner Reiter.\tNah am Hebräischen."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/14_2CH/2CH_009_1.tsv",
+    "old_row": "1\tИ царица Савская услышала молву о Соломоне и пришла в Иерусалим испытать Соломона загадками, с весьма большим войском и верблюдами, несущими благовония и золото во множестве и драгоценный камень; и пришла к Соломону и говорила с ним обо всем, что было в ее сердце.\tСопровождение обозначено как большая сила или войско, а не только богатство.",
+    "new_row": "1\tИ царица Савская услышала молву о Соломоне и пришла в Иерусалим испытать Соломона загадками, с весьма большим сопровождением и верблюдами, несущими благовония и золото во множестве и драгоценный камень; и пришла к Соломону и говорила с ним обо всем, что было в ее сердце.\tСопровождение обозначено как многочисленная сила, а не только богатство."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/14_2CH/2CH_009_1.tsv",
+    "old_row": "15\tИ царь Соломон сделал двести больших щитов из кованого золота; шестьсот кованого золота он наносил на каждый щит;\tВесовая единица прямо не названа; нанесение золота имеет активного деятеля.",
+    "new_row": "15\tИ царь Соломон сделал двести больших щитов из кованого золота; шестьсот весовых единиц кованого золота он наносил на каждый щит;\tВесовая единица прямо не названа; нанесение золота имеет активного деятеля."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/14_2CH/2CH_009_1.tsv",
+    "old_row": "16\tи триста малых щитов из кованого золота; триста золота он наносил на каждый щит; и царь поставил их в доме леса Ливана.\tВесовая единица прямо не названа; дом назван домом леса Ливана.",
+    "new_row": "16\tи триста малых щитов из кованого золота; триста весовых единиц золота он наносил на каждый щит; и царь поставил их в доме леса Ливана.\tВесовая единица прямо не названа; дом назван домом леса Ливана."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/en/14_2CH/2CH_008.tsv",
+    "old_row": "6\t=\tClose to the Hebrew.",
+    "new_row": "6\t=\tThe Hebrew separately names cities for horsemen and repeats desire and desired; BSB uses cities for horses and whatever he desired."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/en/14_2CH/2CH_008.tsv",
+    "old_row": "16\t=\tClose to the Hebrew.",
+    "new_row": "16\t=\tThe Hebrew begins with until the day the foundation was laid and then until completion; BSB begins from that day."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/en/14_2CH/2CH_009_1.tsv",
+    "old_row": "18\t=\tClose to the Hebrew.",
+    "new_row": "18\t=\tThe Hebrew speaks of two lions beside the armrests; BSB distributes one lion beside each armrest."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/en/14_2CH/2CH_009_1.tsv",
+    "old_row": "23\t=\tClose to the Hebrew.",
+    "new_row": "23\t=\tThe Hebrew pictures seeking Solomon’s face; BSB expresses seeking an audience with him."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/en/14_2CH/2CH_010.tsv",
+    "old_row": "6\t=\tClose to the Hebrew.",
+    "new_row": "6\t=\tThe Hebrew describes the elders as standing before Solomon; BSB interprets this as serving him."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/en/14_2CH/2CH_010.tsv",
+    "old_row": "16\t=\tThe Hebrew does not explicitly say that Israel “saw” this, as BSB does. It states that there is no inheritance in Jesse’s son and says “to your tents,” where BSB asks a question and says “go home.”",
+    "new_row": "16\t=\tThe Hebrew does not explicitly say Israel saw this. It states there is no inheritance in Jesse’s son, where BSB asks a question. The final movement is to their tents; BSB says they went home."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/en/14_2CH/2CH_011.tsv",
+    "old_row": "18\t=\tClose to the Hebrew.",
+    "new_row": "18\t=\tThe Hebrew places Abihail after the lineage through Jerimoth without a joining word; BSB supplies and of to identify Mahalath’s maternal line."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/en/14_2CH/2CH_011.tsv",
+    "old_row": "21\t=\tClose to the Hebrew.",
+    "new_row": "21\t=\tThe Hebrew says he took eighteen wives and uses an active fathering verb for his children; BSB says he had wives and was the father of the children."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/en/14_2CH/2CH_012.tsv",
+    "old_row": "7\t=\tClose to the Hebrew.",
+    "new_row": "7\t=\tThe Hebrew explicitly mentions Shishak’s hand as the means; BSB says through Shishak."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/14_2CH/2CH_010.tsv",
+    "old_row": "16\tUnd ganz Israel — weil der König nicht auf sie gehört hatte, antwortete das Volk dem König mit den Worten: „Welchen Anteil haben wir an David? Und kein Erbe am Sohn Isais! Jeder zu deinen Zelten, Israel! Nun sieh nach deinem Haus, David!“ Und ganz Israel ging zu seinen Zelten.\tLuther ergänzt ausdrücklich das Sehen Israels. Das Hebräische verneint das Erbe ausdrücklich und spricht von Zelten statt Hütten.",
+    "new_row": "16\tUnd weil der König nicht auf ganz Israel gehört hatte, antwortete das Volk dem König mit den Worten: „Welchen Anteil haben wir an David? Und kein Erbe am Sohn Isais! Jeder zu deinen Zelten, Israel! Nun sieh nach deinem Haus, David!“ Und ganz Israel ging zu seinen Zelten.\tLuther ergänzt ausdrücklich das Sehen Israels. Das Hebräische verneint das Erbe ausdrücklich und spricht von Zelten statt Hütten."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/14_2CH/2CH_010.tsv",
+    "old_row": "16\tИ весь Израиль — потому что царь не послушал их, ответил народ царю так: «Какая нам часть в Давиде? И нет наследия в сыне Иессея! Каждый к твоим шатрам, Израиль! Теперь смотри за твоим домом, Давид!» И ушёл весь Израиль к своим шатрам.\tСинодальный перевод явно добавляет, что Израиль «увидел» это; в еврейской формулировке глагола видения нет.",
+    "new_row": "16\tИ потому что царь не послушал всего Израиля, народ ответил царю так: «Какая нам часть в Давиде? И нет наследия в сыне Иессея! Каждый к твоим шатрам, Израиль! Теперь смотри за твоим домом, Давид!» И ушел весь Израиль к своим шатрам.\tСинодальный перевод явно добавляет, что Израиль «увидел» это; в еврейской формулировке глагола видения нет."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/14_2CH/2CH_011.tsv",
+    "old_row": "14\tПотому что левиты оставили свои пастбища и свои владения и пошли в Иудею и в Иерусалим, потому что Иеровоам и его сыновья отвергли их от священства Господу.\tЕврейский текст называет пастбища; Синодальный перевод говорит о городских предместьях.",
+    "new_row": "14\tПотому что левиты оставили свои пастбища и свои владения и пошли в Иудею и в Иерусалим, потому что Иеровоам и его сыновья отстранили их от священнического служения Господу.\tЕврейский текст называет пастбища; Синодальный перевод говорит о городских предместьях."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/14_2CH/2CH_012.tsv",
+    "old_row": "7\tUnd als der HERR sah, dass sie sich gedemütigt hatten, geschah das Wort des HERRN zu Semaja mit den Worten: „Sie haben sich gedemütigt. Ich werde sie nicht vernichten und werde ihnen in Kürze Rettung geben, und mein Zorn wird sich nicht durch die Hand Sisaks auf Jerusalem ergießen.\tDas Hebräische kann die bevorstehende Rettung zeitlich als „in Kürze“ ausdrücken; Luther sagt „ein wenig Errettung“. Es nennt ausdrücklich Sisaks Hand.",
+    "new_row": "7\tUnd als der HERR sah, dass sie sich gedemütigt hatten, geschah das Wort des HERRN zu Semaja mit den Worten: „Sie haben sich gedemütigt. Ich werde sie nicht vernichten und werde ihnen in Kürze Rettung geben, und mein Zorn wird sich nicht durch die Hand Sisaks auf Jerusalem ergießen.\tDas Hebräische nennt ausdrücklich Sisaks Hand als ausführendes Mittel; Luther sagt nur „durch Sisak“."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/14_2CH/2CH_022.tsv",
+    "old_row": "6\tUnd er kehrte um, um in Jesreel von den Schlägen geheilt zu werden, mit denen sie ihn in Rama geschlagen hatten, als er gegen Hasael, den König von Syrien, kämpfte. Und Ahasja, der Sohn Jorams, der König Judas, zog hinab, um Joram, den Sohn Ahabs, in Jesreel zu sehen, denn er war krank.\tDie Schläge sind aktiv ausgedrückt; genannt ist das Sehen.",
+    "new_row": "6\tUnd er kehrte um, um in Jesreel von den Schlägen geheilt zu werden, mit denen sie ihn in Rama geschlagen hatten, als er gegen Hasael, den König von Syrien, kämpfte. Und Asarja, der Sohn Jorams, der König Judas, zog hinab, um Joram, den Sohn Ahabs, in Jesreel zu sehen, denn er war krank.\tGenannt ist Asarja statt Ahasja; die Schläge sind aktiv ausgedrückt, und genannt ist das Sehen."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/14_2CH/2CH_022.tsv",
+    "old_row": "6\tИ он возвратился исцелиться в Изрееле от ударов, которыми они поразили его в Раме, когда он сражался с Азаилом, царём Сирии. И Охозия, сын Иорама, царь Иуды, сошёл увидеть Иорама, сына Ахава, в Изрееле, ибо тот болен.\tСохранены удары и схождение.",
+    "new_row": "6\tИ он возвратился исцелиться в Изрееле от ударов, которыми они поразили его в Раме, когда он сражался с Азаилом, царём Сирии. И Азария, сын Иорама, царь Иуды, сошёл увидеть Иорама, сына Ахава, в Изрееле, ибо тот болен.\tНазван Азария вместо Охозии; сохранены удары и схождение."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/14_2CH/2CH_022.tsv",
+    "old_row": "11\tUnd Josabeath, die Tochter des Königs, nahm Joas, den Sohn Ahasjas, und stahl ihn aus der Mitte der Söhne des Königs, die getötet wurden, und setzte ihn und seine Amme in die Bettenkammer. Und Josabeath, die Tochter des Königs Joram, die Frau des Priesters Jojada, verbarg ihn, denn sie war die Schwester Ahasjas, vor Athalja; und sie tötete ihn nicht.\tDie Söhne und das Bettenzimmer bleiben erhalten; Athalja ist handelndes Subjekt des Nichttötens.",
+    "new_row": "11\tUnd Josabeath, die Tochter des Königs, nahm Joas, den Sohn Ahasjas, und stahl ihn aus der Mitte der Söhne des Königs, die getötet wurden, und setzte ihn und seine Amme in die Bettenkammer. Und Josabeath, die Tochter des Königs Joram, die Frau des Priesters Jojada, verbarg ihn vor Athalja, denn sie war die Schwester Ahasjas; und sie tötete ihn nicht.\tDie Söhne und das Bettenzimmer bleiben erhalten; Athalja ist handelndes Subjekt des Nichttötens."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/14_2CH/2CH_022.tsv",
+    "old_row": "11\tИ Иосавеф, дочь царя, взяла Иоаса, сына Охозии, и украла его из среды сынов царя, которых умерщвляли, и поместила его и его кормилицу в комнату кроватей. И Иосавеф, дочь царя Иорама, жена священника Иодая, скрыла его, ибо она была сестрой Охозии, от Гофолии; и та не умертвила его.\tСохранено местоимение его вместо повторённого имени Иоаса.",
+    "new_row": "11\tИ Иосавеф, дочь царя, взяла Иоаса, сына Охозии, и украла его из среды сынов царя, которых умерщвляли, и поместила его и его кормилицу в комнату кроватей. И Иосавеф, дочь царя Иорама, жена священника Иодая, скрыла его от Гофолии, ибо она была сестрой Охозии; и та не умертвила его.\tСохранено местоимение его вместо повторённого имени Иоаса."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/14_2CH/2CH_015.tsv",
+    "old_row": "2\tUnd er ging Asa entgegen und sagte zu ihm: „Hört mich, Asa und ganz Juda und Benjamin! Der HERR ist mit euch, wenn ihr mit ihm seid; und wenn ihr ihn sucht, wird er euch gefunden werden; und wenn ihr ihn verlasst, wird er euch verlassen.\tWenn steht statt weil; gefunden werden ist passiv.",
+    "new_row": "2\tUnd er ging Asa entgegen und sagte zu ihm: „Hört mich, Asa und ganz Juda und Benjamin! Der HERR ist mit euch, wenn ihr mit ihm seid; und wenn ihr ihn sucht, wird er von euch gefunden werden; und wenn ihr ihn verlasst, wird er euch verlassen.\tWenn steht statt weil; gefunden werden ist passiv."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/14_2CH/2CH_015.tsv",
+    "old_row": "4\tUnd in seiner Bedrängnis kehrte es zum HERRN, dem Gott Israels, um; und sie suchten ihn, und er wurde ihnen gefunden.\tDie Umkehr steht als geschehen; das Suchen wechselt zum Plural.",
+    "new_row": "4\tUnd in seiner Bedrängnis kehrte es zum HERRN, dem Gott Israels, um; und sie suchten ihn, und er wurde von ihnen gefunden.\tDie Umkehr steht als geschehen; das Suchen wechselt zum Plural."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/14_2CH/2CH_015.tsv",
+    "old_row": "15\tUnd ganz Juda freute sich über den Eid, denn sie hatten mit ihrem ganzen Herzen geschworen und mit ihrem ganzen Willen ihn gesucht; und er wurde ihnen gefunden, und der HERR verschaffte ihnen ringsum Ruhe.\tDas Finden ist passiv ausgedrückt.",
+    "new_row": "15\tUnd ganz Juda freute sich über den Eid, denn sie hatten mit ihrem ganzen Herzen geschworen und mit ihrem ganzen Willen ihn gesucht; und er wurde von ihnen gefunden, und der HERR verschaffte ihnen ringsum Ruhe.\tDas Finden ist passiv ausgedrückt."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/14_2CH/2CH_016.tsv",
+    "old_row": "9\tИбо Господь: Его глаза странствуют по всей земле, чтобы показать силу с теми, чьё сердце цело к Нему. В этом ты поступил глупо; ибо отныне с тобой войны».\tСохранены странствование и явление силы; в этом стоит вместо теперь.",
+    "new_row": "9\tИбо Господь: Его глаза странствуют по всей земле, чтобы показать силу с теми, чьё сердце всецело обращено к Нему. В этом ты поступил глупо; ибо отныне с тобой войны».\tСохранены странствование и явление силы; в этом стоит вместо теперь."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/14_2CH/2CH_020_2.tsv",
+    "old_row": "34\tUnd der Rest der Begebenheiten Josaphats, die ersten und die letzten, siehe, sie sind in den Begebenheiten Jehus, des Sohnes Hananis, geschrieben, der in das Buch der Könige Israels aufgenommen wurde.\tAufgenommen wurde steht im Singular.",
+    "new_row": "34\tUnd der Rest der Begebenheiten Josaphats, die ersten und die letzten, siehe, sie sind in den Begebenheiten Jehus, des Sohnes Hananis, geschrieben, der in das Buch der Könige Israels aufgenommen wurde.\tNah am Hebräischen."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/14_2CH/2CH_020_2.tsv",
+    "old_row": "34\tИ остальные дела Иосафата, первые и последние, вот, они записаны в делах Ииуя, сына Анании, который был внесён в книгу царей Израиля.\tВнесён стоит в единственном числе.",
+    "new_row": "34\tИ остальные дела Иосафата, первые и последние, вот, они записаны в делах Ииуя, сына Анании, который был внесён в книгу царей Израиля.\tБлизко к еврейскому."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/14_2CH/2CH_016.tsv",
+    "old_row": "14\tUnd sie begruben ihn in seinen Gräbern, die er sich in der Stadt Davids gegraben hatte; und sie legten ihn auf das Lager, das man mit Gewürzen und Arten von kunstvoll gemischter Salbenmischung gefüllt hatte. Und sie verbrannten ihm einen sehr großen Brand.\tDie Gräber stehen im Plural; der Brand wird mit demselben Wortstamm wiederholt.",
+    "new_row": "14\tUnd sie begruben ihn in seinen Gräbern, die er sich in der Stadt Davids gegraben hatte; und sie legten ihn auf das Lager, das man mit Gewürzen und Arten von kunstvoll gemischter Salbenmischung gefüllt hatte. Und sie brannten für ihn einen sehr großen Brand.\tDie Gräber stehen im Plural; der Brand wird mit demselben Wortstamm wiederholt."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/14_2CH/2CH_013.tsv",
+    "old_row": "11\tИ они воскуряют Господу всесожжения утро за утром и вечер за вечером, и курение благовоний, и расположение хлеба на чистом столе, и золотой светильник и его лампады, чтобы гореть вечер за вечером; ибо мы храним стражу Господа, нашего Бога, а вы оставили Его.\tСохранены повторения утра и вечера и стража.",
+    "new_row": "11\tИ они воскуряют Господу всесожжения утро за утром и вечер за вечером и курение благовоний; и расположение хлеба — на чистом столе, и золотой светильник и его лампады — чтобы гореть вечер за вечером; ибо мы храним стражу Господа, нашего Бога, а вы оставили Его.\tСохранены повторения утра и вечера и стража."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/en/14_2CH/2CH_021.tsv",
+    "old_row": "15\t=\tThe Hebrew speaks of many or severe illnesses and repeats the bowels; BSB consolidates this into a severe illness of the bowels.",
+    "new_row": "15\t=\tThe Hebrew speaks of many or severe illnesses; BSB uses a severe illness."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/en/14_2CH/2CH_020_1.tsv",
+    "old_row": "21\t=\tThe Hebrew leaves the subject unnamed here; BSB names Jehoshaphat.",
+    "new_row": "21\t=\tThe Hebrew leaves the subject unnamed and says splendor of holiness without a possessive expression; BSB names Jehoshaphat and adds His."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/en/14_2CH/2CH_024.tsv",
+    "old_row": "15\t=\tClose to the Hebrew.",
+    "new_row": "15\t=\tThe Hebrew says he was satisfied with days; BSB uses full of years."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/en/14_2CH/2CH_024.tsv",
+    "old_row": "11\t=\tClose to the Hebrew.",
+    "new_row": "11\t=\tThe Hebrew repeats day in day by day; BSB says daily."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/en/14_2CH/2CH_020_1.tsv",
+    "old_row": "28\t=\tClose to the Hebrew.",
+    "new_row": "28\t=\tThe Hebrew says they came to the house of the LORD; BSB explicitly describes going into it."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/14_2CH/2CH_023.tsv",
+    "old_row": "18\tUnd Jojada legte die Aufsicht über das Haus des HERRN in die Hand der levitischen Priester, die David über das Haus des HERRN eingeteilt hatte, um dem HERRN Brandopfer darzubringen, wie im Gesetz Moses geschrieben steht, mit Freude und Gesang durch die Hand Davids.\tDas Hebräische sagt „durch die Hand Davids“, ohne ausdrücklich zu sagen, dass David die Lieder dichtete, wie Luther es formuliert.",
+    "new_row": "18\tUnd Jojada legte die Aufsicht über das Haus des HERRN in die Hand der levitischen Priester, die David über das Haus des HERRN eingeteilt hatte, um dem HERRN Brandopfer darzubringen, wie im Gesetz Moses geschrieben steht, mit Freude und Gesang durch die Hände Davids.\tDas Hebräische sagt „durch die Hände Davids“, ohne ausdrücklich zu sagen, dass David die Lieder dichtete, wie Luther es formuliert."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/14_2CH/2CH_023.tsv",
+    "old_row": "18\tИ поручил Иодай надзор за домом Господа руке священников-левитов, которых Давид распределил над домом Господа, чтобы возносить всесожжения Господу, как написано в законе Моисея, с радостью и пением через руку Давида.\tВ еврейской формулировке нет отдельного сообщения о восстановлении дневных черед, присутствующего в Синодальном переводе. Она сохраняет образ руки Давида.",
+    "new_row": "18\tИ поручил Иодай надзор за домом Господа руке священников-левитов, которых Давид распределил над домом Господа, чтобы возносить всесожжения Господу, как написано в законе Моисея, с радостью и пением через руки Давида.\tВ еврейской формулировке нет отдельного сообщения о восстановлении дневных черед, присутствующего в Синодальном переводе. Она сохраняет образ рук Давида."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/14_2CH/2CH_024.tsv",
+    "old_row": "9\tИ провели они возглашение в Иуде и в Иерусалиме, чтобы приносили Господу подать Моисея, раба Бога, на Израиль в пустыне.\tБлизко к еврейскому.",
+    "new_row": "9\tИ провели они возглашение в Иуде и в Иерусалиме, чтобы приносили Господу подать Моисея, раба Бога, возложенную на Израиль в пустыне.\tБлизко к еврейскому."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/14_2CH/2CH_024.tsv",
+    "old_row": "14\tUnd als sie fertig waren, brachten sie den Rest des Silbers vor den König und Jojada, und sie machten daraus Geräte für das Haus des HERRN, Geräte zum Dienst und zum Darbringen und Schalen und goldene und silberne Geräte. Und sie brachten im Haus des HERRN beständig Brandopfer dar alle Tage Jojadas.\tDas Hebräische sagt „im Haus“, Luther „bei dem Hause“. Es nennt Jojadas Tage ausdrücklich, wo Luther „solange Jojada lebte“ sagt.",
+    "new_row": "14\tUnd als sie fertig waren, brachten sie den Rest des Silbers vor den König und Jojada, und er machte daraus Geräte für das Haus des HERRN, Geräte zum Dienst und zum Darbringen und Schalen und goldene und silberne Geräte. Und sie brachten im Haus des HERRN beständig Brandopfer dar alle Tage Jojadas.\tDas Machen der Geräte hat im Hebräischen ein einzelnes Subjekt. Das Hebräische sagt „im Haus“, Luther „bei dem Hause“, und nennt Jojadas Tage ausdrücklich."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/14_2CH/2CH_024.tsv",
+    "old_row": "14\tИ когда они закончили, принесли перед царём и Иодаем остаток серебра, и сделали из него сосуды для дома Господа, сосуды для службы и возношения, и чаши, и сосуды золотые и серебряные. И возносили всесожжения в доме Господа постоянно все дни Иодая.\tБлизко к еврейскому.",
+    "new_row": "14\tИ когда они закончили, принесли перед царём и Иодаем остаток серебра, и сделал он из него сосуды для дома Господа, сосуды для службы и возношения, и чаши, и сосуды золотые и серебряные. И возносили всесожжения в доме Господа постоянно все дни Иодая.\tИзготовление сосудов имеет подлежащее в единственном числе; Синодальный перевод передает его множественным."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/14_2CH/2CH_036.tsv",
+    "old_row": "7\tUnd von den Geräten des Hauses des HERRN brachte Nebukadnezar nach Babel und legte sie in seinen Palast in Babel.\tDas Hebräische Wort bezeichnet einen Palast oder Tempel; Luther legt es als „Tempel“ fest.",
+    "new_row": "7\tUnd einige von den Geräten des Hauses des HERRN brachte Nebukadnezar nach Babel und legte sie in seinen Palast in Babel.\tDas Hebräische Wort bezeichnet einen Palast oder Tempel; Luther legt es als „Tempel“ fest."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/14_2CH/2CH_036.tsv",
+    "old_row": "7\tИ из сосудов дома Господа принёс Навуходоносор в Вавилон и поместил их в своём дворце в Вавилоне.\tЕврейское слово допускает значение дворца или храма; Синодальный перевод определяет место как капище.",
+    "new_row": "7\tИ некоторые из сосудов дома Господа принес Навуходоносор в Вавилон и поместил их в своем дворце в Вавилоне.\tЕврейское слово допускает значение дворца или храма; Синодальный перевод определяет место как капище."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/14_2CH/2CH_036.tsv",
+    "old_row": "13\tИ также против царя Навуходоносора восстал он, который заставил его поклясться Богом. И сделал он жёсткой свою шею и укрепил своё сердце, чтобы не возвращаться к Господу, Богу Израиля.\tЕврейский текст употребляет образ укрепления сердца; Синодальный перевод передаёт его как ожесточение.",
+    "new_row": "13\tИ он восстал также против царя Навуходоносора, который заставил его поклясться Богом. И сделал он жесткой свою шею и укрепил свое сердце, чтобы не возвращаться к Господу, Богу Израиля.\tЕврейский текст употребляет образ укрепления сердца; Синодальный перевод передаёт его как ожесточение."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/14_2CH/2CH_036.tsv",
+    "old_row": "16\tИ они насмехались над посланниками Бога и презирали Его слова, и издевались над Его пророками, пока не поднялся гнев Господа на Его народ, пока не стало исцеления.\tЕврейский текст говорит о поднявшемся гневе и отсутствии исцеления; Синодальный перевод — о сошедшем гневе и отсутствии спасения.",
+    "new_row": "16\tИ они насмехались над посланниками Бога и презирали Его слова, и издевались над Его пророками, пока не поднялся гнев Господа на Его народ, пока больше не осталось исцеления.\tЕврейский текст говорит о поднявшемся гневе и отсутствии исцеления; Синодальный перевод — о сошедшем гневе и отсутствии спасения."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/14_2CH/2CH_025.tsv",
+    "old_row": "5\tUnd Amazja versammelte Juda und stellte sie nach Vaterhäusern unter Oberste über Tausend und Oberste über Hundert für ganz Juda und Benjamin; und er musterte sie von zwanzig Jahren an und darüber und fand sie dreihunderttausend Auserlesene, die ins Heer auszogen, Speer und Schild führend.\tNah am Hebräischen.",
+    "new_row": "5\tUnd Amazja versammelte Juda und stellte sie nach Vaterhäusern unter Oberste über Tausend und Oberste über Hundert für ganz Juda und Benjamin; und er musterte sie von zwanzig Jahren an und darüber und fand unter ihnen dreihunderttausend Auserlesene, die ins Heer auszogen, Speer und Schild führend.\tNah am Hebräischen."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/14_2CH/2CH_025.tsv",
+    "old_row": "5\tИ собрал Амасия Иуду, и поставил их по домам отцов под начальников тысяч и начальников сотен, всего Иуду и Вениамина; и исчислил их от двадцати лет и выше, и нашёл их триста тысяч отборных, выходящих в войско, держащих копьё и щит.\tНазваны дома отцов.",
+    "new_row": "5\tИ собрал Амасия Иуду, и поставил их по домам отцов под начальников тысяч и начальников сотен, для всего Иуды и Вениамина; и исчислил их от двадцати лет и выше, и нашёл их триста тысяч отборных, выходящих в войско, держащих копьё и щит.\tНазваны дома отцов."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/14_2CH/2CH_032_1.tsv",
+    "old_row": "18\tUnd sie riefen mit lauter Stimme auf Judäisch zum Volk Jerusalems, das auf der Mauer war, um sie zu fürchten und zu erschrecken, damit sie die Stadt eroberten.\tDie Sprachbezeichnung ist Judäisch.",
+    "new_row": "18\tUnd sie riefen mit lauter Stimme auf Judäisch zum Volk Jerusalems, das auf der Mauer war, um ihnen Furcht einzujagen und sie zu erschrecken, damit sie die Stadt eroberten.\tDie Sprachbezeichnung ist Judäisch."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/14_2CH/2CH_031.tsv",
+    "old_row": "19\tИ для сынов Аарона, священников, на полях пастбищ их городов в каждом городе были мужи, обозначенные по именам, чтобы давать доли всякому мужскому полу среди священников и всем записанным по родословию среди левитов.\tДоли, а не земельные участки.",
+    "new_row": "19\tИ для сынов Аарона, священников, на полях пастбищ их городов в каждом городе были мужи, обозначенные по именам, чтобы давать доли каждому мужчине среди священников и всем записанным по родословию среди левитов.\tДоли, а не земельные участки."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/14_2CH/2CH_032_1.tsv",
+    "old_row": "9\tDanach sandte Sanherib, der König Assyriens, seine Knechte nach Jerusalem, während er gegen Lachis stand und seine ganze Macht mit ihm, zu Hiskia, dem König Judas, und zu ganz Juda, das in Jerusalem war, und sagte:\tNah am Hebräischen.",
+    "new_row": "9\tDanach sandte Sanherib, der König Assyriens, seine Knechte nach Jerusalem, während er gegen Lachis stand und seine ganze Macht mit ihm war, zu Hiskia, dem König Judas, und zu ganz Juda, das in Jerusalem war, und sagte:\tNah am Hebräischen."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/14_2CH/2CH_029_1.tsv",
+    "old_row": "27\tUnd Hiskia sagte, das Brandopfer zum Altar aufsteigen zu lassen; und zur Zeit, als das Brandopfer begann, begann der Gesang des HERRN und die Trompeten und dazu die Geräte Davids, des Königs Israels.\tNah am Hebräischen.",
+    "new_row": "27\tUnd Hiskia sagte, das Brandopfer zum Altar aufsteigen zu lassen; und zur Zeit, als das Brandopfer begann, begannen der Gesang des HERRN und die Trompeten und dazu die Geräte Davids, des Königs Israels.\tNah am Hebräischen."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/en/14_2CH/2CH_025.tsv",
+    "old_row": "18\t=\tThe Hebrew repeats in Lebanon for the thistle, cedar, and wild animal.",
+    "new_row": "18\t=\tClose to the Hebrew."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/en/14_2CH/2CH_026.tsv",
+    "old_row": "10\t=\tThe Hebrew explicitly pictures love of the ground.",
+    "new_row": "10\t=\tClose to the Hebrew."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/en/14_2CH/2CH_029_1.tsv",
+    "old_row": "2\t=\tThe Hebrew calls David his father; BSB uses his father David.",
+    "new_row": "2\t=\tClose to the Hebrew."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/en/14_2CH/2CH_029_1.tsv",
+    "old_row": "3\t=\tClose to the Hebrew.",
+    "new_row": "3\t=\tThe Hebrew leaves the subject unnamed here; BSB names Hezekiah."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/en/14_2CH/2CH_029_1.tsv",
+    "old_row": "4\t=\tThe Hebrew says he brought the priests and Levites and gathered them, expressing both actions.",
+    "new_row": "4\t=\tClose to the Hebrew."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/en/14_2CH/2CH_024.tsv",
+    "old_row": "14\t=\tThe Hebrew uses an active plural for regularly offering burnt offerings; BSB uses the passive.",
+    "new_row": "14\t=\tThe Hebrew uses a singular subject for making the articles, where BSB presents their making as a purpose. The Hebrew uses an active plural for regularly offering burnt offerings; BSB uses the passive."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/en/14_2CH/2CH_033.tsv",
+    "old_row": "19\t=\tClose to the Hebrew.",
+    "new_row": "19\t=\tThe Hebrew names Hosai at the end; BSB refers to the Seers."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/14_2CH/2CH_029_1.tsv",
+    "old_row": "28\tUnd die ganze Versammlung warf sich nieder, und der Gesang wurde gesungen und die Trompeten geblasen, alles bis zum Vollenden des Brandopfers.\tNah am Hebräischen.",
+    "new_row": "28\tUnd die ganze Versammlung warf sich nieder, und der Gesang sang und die Trompeten trompeteten, alles bis zum Vollenden des Brandopfers.\tNah am Hebräischen."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/14_2CH/2CH_029_1.tsv",
+    "old_row": "28\tИ всё собрание поклонялось, и песнь пелась, и трубы трубили, всё до окончания всесожжения.\tУказано поклонение; сама песнь названа поющейся.",
+    "new_row": "28\tИ всё собрание поклонялось, и песнь пела, и трубы трубили, всё до окончания всесожжения.\tУказано поклонение; сама песнь представлена поющей."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/en/14_2CH/2CH_029_1.tsv",
+    "old_row": "28\t=\tThe Hebrew describes the song as being sung and the trumpets as trumpeting; BSB names singers and trumpeters.",
+    "new_row": "28\t=\tThe Hebrew makes the song and the trumpets the subjects of singing and trumpeting; BSB names singers and trumpeters."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/14_2CH/2CH_025.tsv",
+    "old_row": "9\tИ сказал Амасия человеку Бога: «А что делать со ста талантами, которые я дал отряду Израиля?» И сказал человек Бога: «У Господа есть дать тебе гораздо больше этого».\tДаётся гораздо больше, а не просто больше.",
+    "new_row": "9\tИ сказал Амасия человеку Бога: «А что делать со ста талантами, которые я дал отряду Израиля?» И сказал человек Бога: «У Господа есть возможность дать тебе гораздо больше этого».\tДаётся гораздо больше, а не просто больше."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/14_2CH/2CH_026.tsv",
+    "old_row": "13\tUnd unter ihrer Hand war eine Heeresmacht von dreihundertsiebentausendfünfhundert, die mit tüchtiger Kraft Krieg führten, um dem König gegen den Feind zu helfen.\tDer Feind steht im Singular.",
+    "new_row": "13\tUnd unter ihrer Hand war eine Heeresmacht von dreihundertsiebentausendfünfhundert Männern, die mit tüchtiger Kraft Krieg führten, um dem König gegen den Feind zu helfen.\tDer Feind steht im Singular."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/14_2CH/2CH_027.tsv",
+    "old_row": "5\tUnd er kämpfte mit dem König der Söhne Ammons und wurde stärker als sie; und die Söhne Ammons gaben ihm in jenem Jahr hundert Talente Silber und zehntausend Kor Weizen und zehntausend Gerste. Dies brachten ihm die Söhne Ammons auch im zweiten und dritten Jahr.\tDie Gewichtseinheit ist das Talent; bei der Gerste wird Kor nicht wiederholt.",
+    "new_row": "5\tUnd er kämpfte mit dem König der Söhne Ammons und wurde stärker als sie; und die Söhne Ammons gaben ihm in jenem Jahr hundert Talente Silber und zehntausend Kor Weizen und zehntausend Maß Gerste. Dies brachten ihm die Söhne Ammons auch im zweiten und dritten Jahr.\tDie Gewichtseinheit ist das Talent; bei der Gerste wird Kor nicht wiederholt."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/14_2CH/2CH_027.tsv",
+    "old_row": "5\tИ воевал он с царём сынов Аммона, и стал сильнее их; и дали ему сыны Аммона в тот год сто талантов серебра, и десять тысяч коров пшеницы, и десять тысяч ячменя. Это приносили ему сыны Аммона и во второй год, и в третий.\tАммонитяне трижды названы сынами Аммона.",
+    "new_row": "5\tИ воевал он с царём сынов Аммона, и стал сильнее их; и дали ему сыны Аммона в тот год сто талантов серебра, и десять тысяч коров пшеницы, и десять тысяч мер ячменя. Это приносили ему сыны Аммона и во второй год, и в третий.\tАммонитяне трижды названы сынами Аммона."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/14_2CH/2CH_028.tsv",
+    "old_row": "23\tUnd er schlachtopferte den Göttern von Damaskus, die ihn geschlagen hatten, und sagte: „Denn die Götter der Könige Syriens helfen ihnen; ihnen werde ich schlachtopfern, und sie werden mir helfen.“ Und sie wurden ihm zum Straucheln und ganz Israel.\tGenannt werden die Könige Syriens, nicht Assyriens.",
+    "new_row": "23\tUnd er schlachtopferte den Göttern von Damaskus, die ihn geschlagen hatten, und sagte: „Denn die Götter der Könige Syriens helfen ihnen; ihnen werde ich schlachtopfern, und sie werden mir helfen.“ Und sie wurden ihm und ganz Israel zum Straucheln.\tGenannt werden die Könige Syriens, nicht Assyriens."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/14_2CH/2CH_029_1.tsv",
+    "old_row": "18\tИ пришли внутрь к Езекии, царю, и сказали: «Мы очистили весь дом Господа, жертвенник всесожжения и все сосуды его, и стол разложения и все сосуды его.\tДом очищен весь; последний стол назван по разложению.",
+    "new_row": "18\tИ пришли внутрь к Езекии, царю, и сказали: «Мы очистили весь дом Господа, жертвенник всесожжения и все сосуды его, и стол для раскладывания и все сосуды его.\tДом очищен весь; стол назван по раскладыванию, без отдельного упоминания хлебов."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/14_2CH/2CH_030.tsv",
+    "old_row": "19\tjeden, der sein Herz darauf gerichtet hat, Gott zu suchen, den HERRN, den Gott seiner Väter, und nicht nach der Reinigung des Heiligtums.“\tDie Reinigung wird dem Heiligtum zugeordnet.",
+    "new_row": "19\tjeden, der sein Herz darauf gerichtet hat, Gott zu suchen, den HERRN, den Gott seiner Väter, auch wenn er nicht nach der Reinigung des Heiligtums gereinigt ist.“\tDie Reinigung wird dem Heiligtum zugeordnet."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/14_2CH/2CH_032_2.tsv",
+    "old_row": "31\tUnd so ließ Gott ihn bei den Gesandten der Fürsten Babels, die zu ihm sandten, um nach dem Zeichen zu fragen, das im Land geschehen war, um ihn zu prüfen, um alles in seinem Herzen zu erkennen.\tDas Erkennen ist als Zweck mit ungenanntem Subjekt formuliert, nicht als unpersönliches Kundwerden.",
+    "new_row": "31\tUnd so verließ Gott ihn bei den Gesandten der Fürsten Babels, die zu ihm sandten, um nach dem Zeichen zu fragen, das im Land geschehen war, um ihn zu prüfen, um alles in seinem Herzen zu erkennen.\tDas Erkennen ist als Zweck mit ungenanntem Subjekt formuliert, nicht als unpersönliches Kundwerden."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/14_2CH/2CH_034_1.tsv",
+    "old_row": "10\tИ дали в руку работников, поставленных в доме Господа; и дали его работникам, которые работали в доме Господа, чтобы исправить и укрепить дом.\tВторая раздача рассказана как действие, а не цель.",
+    "new_row": "10\tИ дали его в руку работников, поставленных в доме Господа; и дали его работникам, которые работали в доме Господа, чтобы исправить и укрепить дом.\tВторая раздача рассказана как действие, а не цель."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/14_2CH/2CH_035.tsv",
+    "old_row": "6\tUnd schlachtet das Passah und heiligt euch und bereitet für eure Brüder vor, um nach dem Wort des HERRN durch die Hand Moses zu tun.“\tMoses Vermittlung wird mit einer Hand ausgedrückt.",
+    "new_row": "6\tUnd schlachtet das Passah und heiligt euch und trefft Vorbereitungen für eure Brüder, um nach dem Wort des HERRN durch die Hand Moses zu tun.“\tMoses Vermittlung wird mit einer Hand ausgedrückt."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/14_2CH/2CH_035.tsv",
+    "old_row": "6\tИ заколите Пасху, и освятитесь, и приготовьте для братьев ваших, чтобы делать по слову Господа рукою Моисея».\tАгнец отдельно не назван; посредничество Моисея выражено рукой.",
+    "new_row": "6\tИ заколите Пасху, и освятитесь, и сделайте приготовления для братьев ваших, чтобы делать по слову Господа рукою Моисея».\tАгнец отдельно не назван; посредничество Моисея выражено рукой."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/14_2CH/2CH_035.tsv",
+    "old_row": "21\tUnd er sandte Boten zu ihm und sagte: „Was ist mir und dir, König Judas? Nicht gegen dich komme ich heute, sondern gegen das Haus meines Kampfes, und Gott hat gesagt, mich zu beeilen. Lass ab von Gott, der mit mir ist, damit er dich nicht vernichte!“\tDer heutige Tag wird genannt.",
+    "new_row": "21\tUnd er sandte Boten zu ihm und sagte: „Was ist mir und dir, König Judas? Nicht gegen dich komme ich heute, sondern gegen das Haus meines Kampfes, und Gott hat gesagt, dass ich mich beeilen soll. Lass ab von Gott, der mit mir ist, damit er dich nicht vernichte!“\tDer heutige Tag wird genannt."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/en/14_2CH/2CH_030.tsv",
+    "old_row": "3\t=\tClose to the Hebrew.",
+    "new_row": "3\t=\tThe Hebrew says “at that time”; BSB says “at the regular time.”"
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/en/14_2CH/2CH_031.tsv",
+    "old_row": "4\t=\tClose to the Hebrew.",
+    "new_row": "4\t=\tThe Hebrew says that they may be strong in the Law of the LORD; BSB says that they could devote themselves to it."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/en/14_2CH/2CH_032_1.tsv",
+    "old_row": "20\t=\tClose to the Hebrew.",
+    "new_row": "20\t=\tThe Hebrew separately says that they prayed and cried out to heaven; BSB combines these as “cried out to heaven in prayer.”"
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/en/14_2CH/2CH_034_1.tsv",
+    "old_row": "23\t=\tThe Hebrew leaves the speaker unnamed here; BSB names Huldah.",
+    "new_row": "23\t=\tThe Hebrew leaves the speaker unnamed here and says “who sent you to me”; BSB names Huldah and omits “to me.”"
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/en/14_2CH/2CH_036.tsv",
+    "old_row": "22\t=\tClose to the Hebrew.",
+    "new_row": "22\t=\tThe Hebrew says “by the mouth of Jeremiah”; BSB says “spoken through Jeremiah.” It narrates the proclamation as a separate action; BSB connects it with “to send.”"
+  }
+]

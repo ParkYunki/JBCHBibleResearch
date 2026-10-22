@@ -53,34 +53,34 @@ private let onboardingPages: [OnboardingPage] = [
     OnboardingPage(
         icon: "book.closed.fill",
         gradientColors: [.blue, .cyan],
-        title: "엠마오 성경 연구에 오신 것을 환영합니다",
-        description: "성경 본문, 연구자료, 개인 묵상을 한곳에서 관리하는 앱입니다. 주요 기능을 간단히 소개합니다."
+        title: String(localized: "엠마오 성경 연구에 오신 것을 환영합니다"),
+        description: String(localized: "성경 본문, 연구자료, 개인 묵상을 한곳에서 관리하는 앱입니다. 주요 기능을 간단히 소개합니다.")
     ),
     OnboardingPage(
         icon: "book",
         gradientColors: [.indigo, .blue],
-        title: "성경 조회",
-        description: "여러 번역본을 나란히 놓고 비교하며 읽고, 구절을 탭해 메모·말씀 요약으로 이어갈 수 있습니다."
+        title: String(localized: "성경 조회"),
+        description: String(localized: "여러 번역본을 나란히 놓고 비교하며 읽고, 구절을 탭해 메모·말씀 요약으로 이어갈 수 있습니다.")
     ),
     // 인물/지명/예언 카드는 뒷단 데이터셋이 아직 다 채워지지 않아 소개하지 않는다.
     // 안정적으로 동작하는 성경구절/메모/연구문서 검색만 소개한다.
     OnboardingPage(
         icon: "magnifyingglass",
         gradientColors: [.purple, .pink],
-        title: "통합 검색",
-        description: "성경구절·메모·연구문서를 한 번에 검색합니다."
+        title: String(localized: "통합 검색"),
+        description: String(localized: "성경구절·메모·연구문서를 한 번에 검색합니다.")
     ),
     OnboardingPage(
         icon: "doc.text.magnifyingglass",
         gradientColors: [.orange, .yellow],
-        title: "연구 문서 관리",
-        description: "hwp·pdf 연구자료를 업로드하면 자동으로 텍스트를 추출하고 성경 장절과 연결해 줍니다."
+        title: String(localized: "연구 문서 관리"),
+        description: String(localized: "hwp·pdf 연구자료를 업로드하면 자동으로 텍스트를 추출하고 성경 장절과 연결해 줍니다.")
     ),
     OnboardingPage(
         icon: "bookmark.fill",
         gradientColors: [.teal, .green],
-        title: "말씀 노트 · 책갈피",
-        description: "개인 묵상을 기록하고, 자주 보는 장·절은 책갈피로 저장해 언제든 빠르게 돌아올 수 있습니다."
+        title: String(localized: "말씀 노트 · 책갈피"),
+        description: String(localized: "개인 묵상을 기록하고, 자주 보는 장·절은 책갈피로 저장해 언제든 빠르게 돌아올 수 있습니다.")
     ),
 ]
 
@@ -187,7 +187,7 @@ private struct AppOnboardingSheet: View {
                         Button("이전") { pageIndex -= 1 }
                             .buttonStyle(.bordered)
                     }
-                    Button(isLastPage ? "시작하기" : "다음") {
+                    Button(isLastPage ? String(localized: "시작하기") : String(localized: "다음")) {
                         if isLastPage {
                             onFinish()
                         } else {

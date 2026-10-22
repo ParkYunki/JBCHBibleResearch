@@ -7,7 +7,8 @@
 //  실제 조회는 `BibleResearchModels.OriginalTextStore`가 담당한다.
 //
 //  ⚠️ 출처/라이선스: OriginalText.sqlite는 STEPBible-Data(CC BY 4.0)의 TAHOT(히브리어 구약)·TAGNT(그리스어 신약)를
-//  변환한 것이다. 크레딧은 설정 "정보" 탭의 "오픈소스 라이선스 고지" 섹션에 표기돼 있다.
+//  변환한 것이다(단어 뜻·문맥 번역). [2026-10-12] `LiteralEnglish`는 Literal Standard Version(© 2020 Covenant Press,
+//  CC BY-SA 4.0)이다. 크레딧은 설정 "정보" 탭의 "오픈소스 라이선스 고지" 섹션에 표기돼 있다.
 //
 
 import Foundation
@@ -19,7 +20,7 @@ enum OriginalTextLookupError: Error, LocalizedError {
     var errorDescription: String? {
         switch self {
         case .bundledDatabaseNotFound:
-            return "앱 번들에서 OriginalText.sqlite를 찾을 수 없습니다. Xcode 타겟의 Copy Bundle Resources에 Resources/OriginalText.sqlite가 포함돼 있는지 확인하세요."
+            return String(localized: "앱 번들에서 OriginalText.sqlite를 찾을 수 없습니다. Xcode 타겟의 Copy Bundle Resources에 Resources/OriginalText.sqlite가 포함돼 있는지 확인하세요.")
         }
     }
 }
@@ -74,6 +75,17 @@ final class OriginalTextLookupService {
             return try store.literalTranslation(bookId: bookId, chapter: chapter, verse: verse)
         } catch {
             print("[OriginalTextLookupService] 직역 조회 실패: \(error)")
+            return nil
+        }
+    }
+
+    /// [2026-10-12] 절 단위 영어 직역(LSV, 공통). 데이터가 없으면 nil.
+    func literalEnglish(bookId: Int, chapter: Int, verse: Int) -> LiteralEnglishInfo? {
+        guard let store = resolvedStore() else { return nil }
+        do {
+            return try store.literalEnglish(bookId: bookId, chapter: chapter, verse: verse)
+        } catch {
+            print("[OriginalTextLookupService] 영어 직역 조회 실패: \(error)")
             return nil
         }
     }

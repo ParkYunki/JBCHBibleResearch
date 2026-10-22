@@ -1,0 +1,34 @@
+{
+  "book": "17_EST",
+  "chapters": [
+    1,
+    2,
+    3
+  ],
+  "status": "complete",
+  "files": [
+    "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/17_EST/EST_001.tsv",
+    "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/17_EST/EST_001.tsv",
+    "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/17_EST/EST_002.tsv",
+    "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/17_EST/EST_002.tsv",
+    "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/17_EST/EST_003.tsv",
+    "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/17_EST/EST_003.tsv"
+  ],
+  "native_rows": 120,
+  "rows_by_lang": {
+    "de": 60,
+    "ru": 60
+  },
+  "quote_balance": {
+    "de": [
+      6,
+      6
+    ],
+    "ru": [
+      6,
+      6
+    ]
+  },
+  "own_qa_candidates": 1,
+  "root_en_candidates": 1
+}

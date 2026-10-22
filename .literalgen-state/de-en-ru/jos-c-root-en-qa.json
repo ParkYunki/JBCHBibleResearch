@@ -1,0 +1,14 @@
+[
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/en/06_JOS/JOS_022_2.tsv",
+    "verse": 33,
+    "old_row": "33\t=\tThe Hebrew repeats “the sons of Israel” three times and says the report was “good in their eyes”; BSB names “the Israelites” once and says they were satisfied.",
+    "new_row": "33\t=\tThe Hebrew names “the sons of Israel” twice and says the report was “good in their eyes”; BSB names “the Israelites” once and says they were satisfied."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/en/06_JOS/JOS_024_1.tsv",
+    "verse": 13,
+    "old_row": "13\t=\tClose to the Hebrew.",
+    "new_row": "13\t=\tThe Hebrew shifts to singular “you” for laboring on the land, then back to plural “you” for building and planting; BSB uses the same English pronoun throughout."
+  }
+]

@@ -80,7 +80,7 @@ struct PlaceDetailView: View {
     private func abbreviatedCitationLabel(_ matchedText: String, bookId: Int) -> String {
         guard let firstDigitIndex = matchedText.firstIndex(where: { $0.isNumber }) else { return matchedText }
         let book = BooksProvider.shared.book(id: bookId)
-        let abbreviation = book?.abbreviation.first ?? book?.nameKo
+        let abbreviation = book?.displayShortName
             ?? matchedText[..<firstDigitIndex].trimmingCharacters(in: .whitespaces)
         return "\(abbreviation) \(matchedText[firstDigitIndex...])"
     }
@@ -135,7 +135,8 @@ struct PlaceDetailView: View {
 
     /// `place.verseRefs`를 절 본문과 함께 책/장 단위로 묶는다(정경순). 다른 화면과 같은 이유로 30개에서 자른다.
     private var groupedVerseReferences: [VerseReferenceGroup] {
-        guard let store = try? BibleReferenceStore(filePath: TranslationBootstrap.resolvedBundledDatabaseURL().path) else {
+        // 앱 언어의 기본 번들 성경으로 보여준다(2026-10-12, `BundledTranslationCatalog.current`).
+        guard let store = try? BibleReferenceStore(filePath: TranslationBootstrap.resolvedCurrentLanguageBundledDatabaseURL().path) else {
             return []
         }
         var versesByChapter: [String: (bookId: Int, chapter: Int, bookNameKo: String, verses: [(Int, String)])] = [:]
@@ -144,7 +145,7 @@ struct PlaceDetailView: View {
             guard let verse = try? store.verse(bookId: ref.bookId, chapter: ref.chapter, verse: ref.verse) else { continue }
             let key = "\(ref.bookId)-\(ref.chapter)"
             if versesByChapter[key] == nil {
-                let bookName = BooksProvider.shared.book(id: ref.bookId)?.nameKo ?? "책 \(ref.bookId)"
+                let bookName = BooksProvider.shared.book(id: ref.bookId)?.displayName ?? String(localized: "책 \(ref.bookId)")
                 versesByChapter[key] = (ref.bookId, ref.chapter, bookName, [])
                 orderedKeys.append(key)
             }
@@ -302,19 +303,20 @@ struct PlaceDetailView: View {
             .listRowBackground(Color.clear)
             .listRowSeparator(.hidden)
 
-            textCard("개요", icon: "doc.text.fill", text: place.introduce)
-            textCard("성경 속 이야기", icon: "book.fill", text: place.bibleContents)
-            textCard("지리", icon: "map.fill", text: place.geography)
-            textCard("역사", icon: "clock.fill", text: place.history)
+            textCard(String(localized: "detail.overview", defaultValue: "개요", comment: "인물·지명 상세 카드 — 소개(성경 개요 화면과 구분)"), icon: "doc.text.fill", text: place.displayIntroduce)
+            textCard(String(localized: "성경 속 이야기"), icon: "book.fill", text: place.displayBibleContents)
+            textCard(String(localized: "지리"), icon: "map.fill", text: place.displayGeography)
+            textCard(String(localized: "역사"), icon: "clock.fill", text: place.displayHistory)
 
             if !sameName.isEmpty {
-                cardSection("같은 이름의 다른 지명", icon: "mappin.and.ellipse") {
+                cardSection(String(localized: "같은 이름의 다른 지명"), icon: "mappin.and.ellipse") {
                     ForEach(Array(sameName.enumerated()), id: \.element.idx) { index, other in
                         Button {
                             switchedPlaces.append(other)
                         } label: {
                             HStack(alignment: .firstTextBaseline, spacing: 8) {
-                                Text(other.remark.isEmpty ? other.word : other.remark)
+                                // 표시만 번역(`display*`). 묶음(`sameNamePlaces`)은 한국어 `word` 기준 그대로다.
+                                Text(other.displayRemark.isEmpty ? other.displayWord : other.displayRemark)
                                     .font(.body.weight(.semibold))
                                     .foregroundStyle(JBCHCategoryPalette.slateTeal)
                                     .multilineTextAlignment(.leading)
@@ -368,8 +370,9 @@ struct PlaceDetailView: View {
                 Image(systemName: "mappin.circle.fill")
                     .font(.title2)
                     .foregroundStyle(JBCHCategoryPalette.wood)
-                Text(place.word)
-                    .font(.custom(SpecialPurposeFonts.titleSerif, size: 28, relativeTo: .largeTitle))
+                // [2026-10-22] 제목·한 줄 설명은 번역 표시(한국어 앱이면 원본 그대로). 글꼴은 실제로 그리는 문자열로 고른다.
+                Text(place.displayWord)
+                    .font(.titleSerif(place.displayWord, size: 28, relativeTo: .largeTitle))
                     .fontWeight(.bold)
                     .foregroundStyle(settings.bibleTextColor ?? .primary)
                 Spacer(minLength: 0)
@@ -383,8 +386,8 @@ struct PlaceDetailView: View {
                     .background(JBCHCategoryPalette.wood.opacity(0.15), in: Capsule())
                     .foregroundStyle(JBCHCategoryPalette.wood)
             }
-            if !place.remark.isEmpty {
-                Text(place.remark)
+            if !place.displayRemark.isEmpty {
+                Text(place.displayRemark)
                     .font(.subheadline)
                     .foregroundStyle(.secondary)
             }

@@ -1,0 +1,32 @@
+[
+  {
+    "path": "Tools/LiteralGen/outputs/de/21_ECC/ECC_005.tsv",
+    "rows": 20,
+    "sha256": "532ab83a56ee4bac7e601bff22e8ad79cc9d2a87b7d7b343ff86613b5d386a07"
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/21_ECC/ECC_005.tsv",
+    "rows": 20,
+    "sha256": "4b5ebd919a851b8bca83313136412319741235487362ffd9846b3912861950eb"
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/21_ECC/ECC_006.tsv",
+    "rows": 12,
+    "sha256": "90b30afcdcc48facceb4b122457d89a2dc1cf6e46fa86f9f1c336eb0b37a7fd6"
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/21_ECC/ECC_006.tsv",
+    "rows": 12,
+    "sha256": "96895f11ab84122d270089b216369a96e084c00874c304fab266430c8023e19f"
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/21_ECC/ECC_007.tsv",
+    "rows": 29,
+    "sha256": "5f8d7b920d772787195bbacc96f8624f99bce4bd88c6fc54d8c4880a68eae2df"
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/21_ECC/ECC_007.tsv",
+    "rows": 29,
+    "sha256": "f8dabd6a56b097700f34345bd364cf63cdf524ffbd798b1930216d6e5d43bba2"
+  }
+]

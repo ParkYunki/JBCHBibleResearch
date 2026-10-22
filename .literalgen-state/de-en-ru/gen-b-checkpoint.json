@@ -1,0 +1,95 @@
+{
+  "scope": "GEN020–034",
+  "chapters": {
+    "31": {
+      "missing_outputs_created": true,
+      "qa": "source_and_target_compared",
+      "all_verses_reviewed": true
+    },
+    "32": {
+      "missing_outputs_created": true,
+      "qa": "source_and_target_compared",
+      "all_verses_reviewed": true
+    },
+    "33": {
+      "missing_outputs_created": true,
+      "qa": "source_and_target_compared",
+      "all_verses_reviewed": true
+    },
+    "34": {
+      "missing_outputs_created": true,
+      "qa": "source_and_target_compared",
+      "all_verses_reviewed": true
+    },
+    "20": {
+      "missing_outputs_created": true,
+      "qa": "source_and_target_compared",
+      "all_verses_reviewed": true
+    },
+    "21": {
+      "missing_outputs_created": true,
+      "qa": "source_and_target_compared",
+      "all_verses_reviewed": true
+    },
+    "22": {
+      "missing_outputs_created": true,
+      "qa": "source_and_target_compared",
+      "all_verses_reviewed": true
+    },
+    "23": {
+      "missing_outputs_created": true,
+      "qa": "source_and_target_compared",
+      "all_verses_reviewed": true
+    },
+    "24": {
+      "missing_outputs_created": true,
+      "qa": "source_and_target_compared",
+      "all_verses_reviewed": true
+    },
+    "25": {
+      "missing_outputs_created": true,
+      "qa": "source_and_target_compared",
+      "all_verses_reviewed": true
+    },
+    "26": {
+      "missing_outputs_created": true,
+      "qa": "source_and_target_compared",
+      "all_verses_reviewed": true
+    },
+    "27": {
+      "missing_outputs_created": true,
+      "qa": "source_and_target_compared",
+      "all_verses_reviewed": true
+    },
+    "28": {
+      "missing_outputs_created": true,
+      "qa": "source_and_target_compared",
+      "all_verses_reviewed": true
+    },
+    "29": {
+      "missing_outputs_created": true,
+      "qa": "source_and_target_compared",
+      "all_verses_reviewed": true
+    },
+    "30": {
+      "missing_outputs_created": true,
+      "qa": "source_and_target_compared",
+      "all_verses_reviewed": true
+    }
+  },
+  "status": "complete",
+  "qa_manifest": ".literalgen-state/de-en-ru/gen-b-qa.json",
+  "qa_correction_count": 68,
+  "validation": {
+    "chapters": 15,
+    "files": 78,
+    "verses_per_language": 516,
+    "total_rows": 1548,
+    "verse_order": "pass",
+    "three_fields": "pass",
+    "en_literal_equals": "pass",
+    "difference_words_max_60": "pass",
+    "unique_original_row_specs": "pass",
+    "planned_divine_name_consistency": "pass"
+  }
+}

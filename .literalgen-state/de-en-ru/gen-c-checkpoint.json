@@ -1,0 +1,163 @@
+{
+  "completed_chapters": [
+    35,
+    36,
+    37,
+    38,
+    39,
+    40,
+    41,
+    42,
+    43,
+    44,
+    45,
+    46,
+    47,
+    48,
+    49,
+    50
+  ],
+  "root_completed_en": [
+    48,
+    49,
+    50
+  ],
+  "new_files": [
+    {
+      "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/01_GEN/GEN_045.tsv",
+      "rows": 28
+    },
+    {
+      "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/en/01_GEN/GEN_045.tsv",
+      "rows": 28
+    },
+    {
+      "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/01_GEN/GEN_045.tsv",
+      "rows": 28
+    },
+    {
+      "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/01_GEN/GEN_046_1.tsv",
+      "rows": 30
+    },
+    {
+      "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/en/01_GEN/GEN_046_1.tsv",
+      "rows": 30
+    },
+    {
+      "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/01_GEN/GEN_046_1.tsv",
+      "rows": 30
+    },
+    {
+      "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/01_GEN/GEN_046_2.tsv",
+      "rows": 4
+    },
+    {
+      "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/en/01_GEN/GEN_046_2.tsv",
+      "rows": 4
+    },
+    {
+      "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/01_GEN/GEN_046_2.tsv",
+      "rows": 4
+    },
+    {
+      "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/01_GEN/GEN_047_1.tsv",
+      "rows": 30
+    },
+    {
+      "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/en/01_GEN/GEN_047_1.tsv",
+      "rows": 30
+    },
+    {
+      "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/01_GEN/GEN_047_1.tsv",
+      "rows": 30
+    },
+    {
+      "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/01_GEN/GEN_047_2.tsv",
+      "rows": 1
+    },
+    {
+      "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/en/01_GEN/GEN_047_2.tsv",
+      "rows": 1
+    },
+    {
+      "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/01_GEN/GEN_047_2.tsv",
+      "rows": 1
+    },
+    {
+      "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/01_GEN/GEN_048.tsv",
+      "rows": 22
+    },
+    {
+      "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/01_GEN/GEN_048.tsv",
+      "rows": 22
+    },
+    {
+      "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/01_GEN/GEN_049_1.tsv",
+      "rows": 30
+    },
+    {
+      "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/01_GEN/GEN_049_1.tsv",
+      "rows": 30
+    },
+    {
+      "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/01_GEN/GEN_049_2.tsv",
+      "rows": 3
+    },
+    {
+      "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/01_GEN/GEN_049_2.tsv",
+      "rows": 3
+    },
+    {
+      "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/01_GEN/GEN_050.tsv",
+      "rows": 26
+    },
+    {
+      "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/01_GEN/GEN_050.tsv",
+      "rows": 26
+    }
+  ],
+  "remaining_chapters": [],
+  "status": "completed_pending_root_redo",
+  "reviewed_chapters": [
+    35,
+    36,
+    37,
+    38,
+    39,
+    40,
+    41,
+    42,
+    43,
+    44,
+    45,
+    46,
+    47,
+    48,
+    49,
+    50
+  ],
+  "reviewed_root_en": [
+    48,
+    49,
+    50
+  ],
+  "qa_file": "/Users/arkuni/Developer/JBCHBibleResearch/.literalgen-state/de-en-ru/gen-c-qa.json",
+  "qa_count": 41,
+  "qa_by_language": {
+    "de": 14,
+    "en": 12,
+    "ru": 15
+  },
+  "validation": {
+    "files": 75,
+    "rows": 1563,
+    "expected_verse_order": true,
+    "three_fields": true,
+    "en_literal_equals": true,
+    "difference_word_limit": 60,
+    "maximum_difference_words": 33,
+    "projected_chapter_quotes_balanced": true,
+    "all_original_rows_match": true,
+    "output_direct_edits": false
+  }
+}

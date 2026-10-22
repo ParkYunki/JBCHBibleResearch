@@ -1,0 +1,410 @@
+[
+  {
+    "path": "Tools/LiteralGen/outputs/ru/01_GEN/GEN_020.tsv",
+    "verse": 3,
+    "old_row": "3\tИ пришёл Бог к Авимелеху в ночном сне и сказал ему: «Вот, ты умрёшь из-за женщины, которую ты взял, а она замужем за мужем».\tБлизко к еврейскому.",
+    "new_row": "3\tИ пришёл Бог к Авимелеху в ночном сне и сказал ему: «Вот, ты умрёшь из-за женщины, которую ты взял, а она замужем».\tБлизко к еврейскому."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/01_GEN/GEN_020.tsv",
+    "verse": 16,
+    "old_row": "16\tИ Сарре он сказал: «Вот, я дал твоему брату тысячу серебра; вот, это тебе покрывало глаз перед всеми, кто с тобой, и перед всеми ты оправдана».\tБлизко к еврейскому.",
+    "new_row": "16\tИ Сарре он сказал: «Вот, я дал твоему брату тысячу серебряных монет; вот, это тебе покрывало глаз перед всеми, кто с тобой, и перед всеми ты оправдана».\tБлизко к еврейскому."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/01_GEN/GEN_021_1.tsv",
+    "verse": 23,
+    "old_row": "23\tUnd nun schwöre mir hier bei Gott, dass du weder mir noch meinen Kindern noch meinen Enkeln falsch handeln wirst. Nach der Güte, die ich dir erwiesen habe, wirst du an mir handeln und an dem Land, in dem du als Fremdling gewohnt hast.“\tNah am Hebräischen.",
+    "new_row": "23\tUnd nun schwöre mir hier bei Gott, dass du weder an mir noch an meinen Kindern noch an meinen Enkeln falsch handeln wirst. Nach der Güte, die ich dir erwiesen habe, wirst du an mir handeln und an dem Land, in dem du als Fremdling gewohnt hast.“\tNah am Hebräischen."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/01_GEN/GEN_021_1.tsv",
+    "verse": 28,
+    "old_row": "28\tUnd Abraham stellte sieben weibliche Lämmer der Herde für sich allein.\tBewahrt die weiblichen Lämmer und die Herde.",
+    "new_row": "28\tUnd Abraham stellte sieben weibliche Lämmer der Herde gesondert auf.\tBewahrt die weiblichen Lämmer und die Herde."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/01_GEN/GEN_021_1.tsv",
+    "verse": 3,
+    "old_row": "3\tИ нарёк Авраам имя своего сына, родившегося у него, которого родила ему Сарра, Исаак.\tБлизко к еврейскому.",
+    "new_row": "3\tИ назвал Авраам своего сына, родившегося у него, которого родила ему Сарра, Исааком.\tБлизко к еврейскому."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/01_GEN/GEN_021_2.tsv",
+    "verse": 31,
+    "old_row": "31\tПотому он назвал то место Вирсавия, ибо там они оба поклялись.\tБлизко к еврейскому.",
+    "new_row": "31\tПотому он назвал то место Вирсавией, ибо там они оба поклялись.\tБлизко к еврейскому."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/01_GEN/GEN_021_2.tsv",
+    "verse": 32,
+    "old_row": "32\tИ заключили они союз в Вирсавии. И встал Авимелех и Фихол, начальник его войска, и возвратились в землю филистимлян.\tБлизко к еврейскому.",
+    "new_row": "32\tИ заключили они союз в Вирсавии. И встали Авимелех и Фихол, начальник его войска, и возвратились в землю филистимлян.\tБлизко к еврейскому."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/01_GEN/GEN_021_1.tsv",
+    "verse": 19,
+    "old_row": "19\tИ открыл Бог её глаза, и она увидела колодец воды, и пошла, и наполнила мех водой, и напоила отрока.\tНе добавлено определение «живою» к воде.",
+    "new_row": "19\tИ открыл Бог её глаза, и она увидела колодец с водой, и пошла, и наполнила мех водой, и напоила отрока.\tНе добавлено определение «живою» к воде."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/01_GEN/GEN_021_1.tsv",
+    "verse": 25,
+    "old_row": "25\tИ упрекнул Авраам Авимелеха за колодец воды, который захватили рабы Авимелеха.\tБлизко к еврейскому.",
+    "new_row": "25\tИ упрекнул Авраам Авимелеха за колодец с водой, который захватили рабы Авимелеха.\tБлизко к еврейскому."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/01_GEN/GEN_022.tsv",
+    "verse": 23,
+    "old_row": "23\tИ Вафуил родил Ревекку. Этих восьмерых родила Милка Нахору, брату Авраама.\tБлизко к еврейскому.",
+    "new_row": "23\tИ Вафуил стал отцом Ревекки. Этих восьмерых родила Милка Нахору, брату Авраама.\tБлизко к еврейскому."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/01_GEN/GEN_023.tsv",
+    "verse": 6,
+    "old_row": "6\t«Послушай нас, господин мой! Ты князь Божий среди нас. В лучшем из наших гробниц похорони твою умершую. Никто из нас не откажет тебе в своей гробнице для погребения твоей умершей».\tБлизко к еврейскому.",
+    "new_row": "6\t«Послушай нас, господин мой! Ты князь Божий среди нас. В лучшей из наших гробниц похорони твою умершую. Никто из нас не откажет тебе в своей гробнице для погребения твоей умершей».\tБлизко к еврейскому."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/01_GEN/GEN_023.tsv",
+    "verse": 9,
+    "old_row": "9\tчтобы он дал мне пещеру Махпела, которая у него, которая на краю его поля; за полную цену серебром пусть отдаст её мне среди вас во владение для погребения».\tБлизко к еврейскому.",
+    "new_row": "9\tчтобы он дал мне пещеру Махпелу, которая у него, которая на краю его поля; за полную цену серебром пусть отдаст её мне среди вас во владение для погребения».\tБлизко к еврейскому."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/01_GEN/GEN_023.tsv",
+    "verse": 19,
+    "old_row": "19\tИ после этого Авраам похоронил Сарру, свою жену, в пещере поля Махпела перед Мамре, то есть Хевроном, в земле Ханаана.\tНе добавлено «ныне» к названию Хеврона.",
+    "new_row": "19\tИ после этого Авраам похоронил Сарру, свою жену, в пещере поля в Махпеле перед Мамре, то есть Хевроном, в земле Ханаана.\tНе добавлено «ныне» к названию Хеврона."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/01_GEN/GEN_024_1.tsv",
+    "verse": 9,
+    "old_row": "9\tUnd der Knecht legte seine Hand unter den Oberschenkel Abrahams, seines Herrn, und schwor ihm über diese Sache.\tNah am Hebräischen.",
+    "new_row": "9\tUnd der Knecht legte seine Hand unter den Oberschenkel Abrahams, seines Herrn, und schwor ihm in dieser Sache.\tNah am Hebräischen."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/01_GEN/GEN_024_1.tsv",
+    "verse": 15,
+    "old_row": "15\tUnd es geschah, noch ehe er zu reden beendet hatte, siehe, da kam Rebekka heraus, die Bethuel geboren worden war, dem Sohn Milkas, der Frau Nahors, des Bruders Abrahams, und ihr Krug war auf ihrer Schulter.\tNah am Hebräischen.",
+    "new_row": "15\tUnd es geschah, noch ehe er sein Reden beendet hatte, siehe, da kam Rebekka heraus, die Bethuel geboren worden war, dem Sohn Milkas, der Frau Nahors, des Bruders Abrahams, und ihr Krug war auf ihrer Schulter.\tNah am Hebräischen."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/01_GEN/GEN_024_1.tsv",
+    "verse": 11,
+    "old_row": "11\tИ заставил он верблюдов опуститься на колени вне города у колодца воды к вечеру, ко времени выхода женщин, черпающих воду.\tСохранено опускание верблюдов на колени, а не только остановка.",
+    "new_row": "11\tИ заставил он верблюдов опуститься на колени вне города у колодца с водой к вечеру, ко времени выхода женщин, черпающих воду.\tСохранено опускание верблюдов на колени, а не только остановка."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/01_GEN/GEN_024_1.tsv",
+    "verse": 12,
+    "old_row": "12\tИ сказал: «ГОСПОДИ, Боже моего господина Авраама, дай же сегодня встретиться передо мной и окажи милость моему господину Аврааму!\tБлизко к еврейскому.",
+    "new_row": "12\tИ сказал: «ГОСПОДИ, Боже моего господина Авраама, пошли же мне сегодня удачную встречу и окажи милость моему господину Аврааму!\tБлизко к еврейскому."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/01_GEN/GEN_024_1.tsv",
+    "verse": 20,
+    "old_row": "20\tИ поспешила, и вылила свой кувшин в поило, и побежала снова к колодцу черпать, и начерпала для всех его верблюдов.\tБлизко к еврейскому.",
+    "new_row": "20\tИ поспешила, и опорожнила свой кувшин в поило, и побежала снова к колодцу черпать, и начерпала для всех его верблюдов.\tБлизко к еврейскому."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/01_GEN/GEN_024_1.tsv",
+    "verse": 22,
+    "old_row": "22\tUnd es geschah, als die Kamele zu trinken aufgehört hatten, da nahm der Mann einen goldenen Ring, dessen Gewicht ein Beka war, und zwei Armreifen für ihre Hände, deren Gewicht zehn Goldstücke war.\tBewahrt Beka als Gewicht und nennt beim zweiten Gewicht keine Einheit Lot.",
+    "new_row": "22\tUnd es geschah, als die Kamele zu trinken aufgehört hatten, da nahm der Mann einen goldenen Ring, dessen Gewicht ein Beka war, und zwei Armreifen für ihre Hände, deren Gewicht zehn Einheiten Gold betrug.\tBewahrt Beka als Gewicht und nennt beim zweiten Gewicht keine Einheit Lot."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/01_GEN/GEN_024_2.tsv",
+    "verse": 45,
+    "old_row": "45\tIch hatte noch nicht zu meinem Herzen ausgeredet, und siehe, Rebekka kam heraus mit ihrem Krug auf ihrer Schulter, und sie ging zur Quelle hinab und schöpfte. Und ich sagte zu ihr: ‚Gib mir doch zu trinken!‘\tNah am Hebräischen.",
+    "new_row": "45\tIch war noch nicht damit fertig, zu meinem Herzen zu reden, und siehe, Rebekka kam heraus mit ihrem Krug auf ihrer Schulter, und sie ging zur Quelle hinab und schöpfte. Und ich sagte zu ihr: ‚Gib mir doch zu trinken!‘\tNah am Hebräischen."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/01_GEN/GEN_024_2.tsv",
+    "verse": 45,
+    "old_row": "45\tЕщё не кончил я говорить к моему сердцу, и вот, Ревекка вышла, и кувшин её на плече её; и она сошла к источнику, и начерпала. И я сказал ей: “Напои же меня!”\tБлизко к еврейскому.",
+    "new_row": "45\tЕщё не кончил я говорить в моём сердце, и вот, Ревекка вышла, и кувшин её на плече её; и она сошла к источнику, и начерпала. И я сказал ей: “Напои же меня!”\tБлизко к еврейскому."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/01_GEN/GEN_024_3.tsv",
+    "verse": 67,
+    "old_row": "67\tUnd Isaak brachte sie ins Zelt Saras, seiner Mutter, und nahm Rebekka, und sie wurde ihm zur Frau, und er liebte sie, und Isaak wurde nach seiner Mutter getröstet.\tNah am Hebräischen.",
+    "new_row": "67\tUnd Isaak brachte sie ins Zelt Saras, seiner Mutter, und nahm Rebekka, und sie wurde ihm zur Frau, und er liebte sie, und Isaak wurde nach dem Tod seiner Mutter getröstet.\tNah am Hebräischen."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/01_GEN/GEN_024_3.tsv",
+    "verse": 67,
+    "old_row": "67\tИ ввёл её Исаак в шатёр Сарры, своей матери, и взял Ревекку, и она стала ему женой, и он полюбил её, и утешился Исаак после своей матери.\tНе добавлены «в печали» и повторное имя Сарры в конце стиха.",
+    "new_row": "67\tИ ввёл её Исаак в шатёр Сарры, своей матери, и взял Ревекку, и она стала ему женой, и он полюбил её, и утешился Исаак после смерти своей матери.\tНе добавлены «в печали» и повторное имя Сарры в конце стиха."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/01_GEN/GEN_025_1.tsv",
+    "verse": 3,
+    "old_row": "3\tИ Иокшан родил Шеву и Дедана, и сыны Дедана были Ашурим, и Летушим, и Леюмим.\tНе добавлены Феман, Рагуил и Навдеил.",
+    "new_row": "3\tИ Иокшан стал отцом Шевы и Дедана, и сыны Дедана были Ашурим, и Летушим, и Леюмим.\tНе добавлены Феман, Рагуил и Навдеил."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/01_GEN/GEN_025_1.tsv",
+    "verse": 9,
+    "old_row": "9\tИ похоронили его Исаак и Измаил, его сыновья, в пещере Махпела, на поле Ефрона, сына Цохара, хеттеянина, которое перед Мамре,\tБлизко к еврейскому.",
+    "new_row": "9\tИ похоронили его Исаак и Измаил, его сыновья, в пещере Махпеле, на поле Ефрона, сына Цохара, хеттеянина, которое перед Мамре,\tБлизко к еврейскому."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/01_GEN/GEN_025_1.tsv",
+    "verse": 19,
+    "old_row": "19\tИ вот родословие Исаака, сына Авраама: Авраам родил Исаака.\tБлизко к еврейскому.",
+    "new_row": "19\tИ вот родословие Исаака, сына Авраама: Авраам стал отцом Исаака.\tБлизко к еврейскому."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/01_GEN/GEN_025_1.tsv",
+    "verse": 24,
+    "old_row": "24\tИ исполнились её дни родить, и вот, близнецы в её чреве.\tБлизко к еврейскому.",
+    "new_row": "24\tИ исполнились её дни до родов, и вот, близнецы в её чреве.\tБлизко к еврейскому."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/01_GEN/GEN_025_1.tsv",
+    "verse": 26,
+    "old_row": "26\tИ после этого вышел его брат, и его рука держалась за пяту Исава, и назвали его имя Иаков. И Исааку было шестьдесят лет при их рождении.\tБлизко к еврейскому.",
+    "new_row": "26\tИ после этого вышел его брат, и его рука держалась за пяту Исава, и назвали его Иаковом. И Исааку было шестьдесят лет при их рождении.\tБлизко к еврейскому."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/01_GEN/GEN_025_1.tsv",
+    "verse": 30,
+    "old_row": "30\tИ сказал Исав Иакову: «Дай же мне проглотить красного, этого красного, ибо я устал!» Потому назвали его имя Едом.\tБлизко к еврейскому.",
+    "new_row": "30\tИ сказал Исав Иакову: «Дай же мне проглотить красного, этого красного, ибо я устал!» Потому назвали его Едомом.\tБлизко к еврейскому."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/01_GEN/GEN_026_1.tsv",
+    "verse": 9,
+    "old_row": "9\tUnd Abimelech rief Isaak und sagte: „Siehe, sie ist doch deine Frau! Und wie hast du gesagt: Sie ist meine Schwester?“ Und Isaak sagte zu ihm: „Weil ich sagte: Damit ich nicht ihretwegen sterbe.“\tNah am Hebräischen.",
+    "new_row": "9\tUnd Abimelech rief Isaak und sagte: „Siehe, sie ist doch deine Frau! Und wie hast du gesagt: Sie ist meine Schwester?“ Und Isaak sagte zu ihm: „Weil ich dachte: Ich könnte ihretwegen sterben.“\tNah am Hebräischen."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/01_GEN/GEN_026_1.tsv",
+    "verse": 26,
+    "old_row": "26\tUnd Abimelech kam von Gerar zu ihm und Ahussat, sein Freund, und Phichol, der Oberste seines Heeres.\tNah am Hebräischen.",
+    "new_row": "26\tUnd Abimelech und Ahussat, sein Freund, und Phichol, der Oberste seines Heeres, kamen von Gerar zu ihm.\tNah am Hebräischen."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/01_GEN/GEN_026_1.tsv",
+    "verse": 10,
+    "old_row": "10\tИ сказал Авимелех: «Что это ты сделал нам? Едва один из народа не лёг с твоей женой, и ты навёл бы на нас вину».\tБлизко к еврейскому.",
+    "new_row": "10\tИ сказал Авимелех: «Что это ты сделал нам? Чуть было один из народа не лёг с твоей женой, и ты навёл бы на нас вину».\tБлизко к еврейскому."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/01_GEN/GEN_026_1.tsv",
+    "verse": 12,
+    "old_row": "12\tИ посеял Исаак в той земле, и получил в тот год стократно, и благословил его ГОСПОДЬ.\tНе добавлен ячмень.",
+    "new_row": "12\tИ посеял Исаак в той земле, и получил в тот год стократный урожай, и благословил его ГОСПОДЬ.\tНе добавлен ячмень."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/01_GEN/GEN_026_1.tsv",
+    "verse": 18,
+    "old_row": "18\tИ снова выкопал Исаак колодцы воды, которые выкопали во дни Авраама, его отца, и которые филистимляне завалили после смерти Авраама. И назвал их именами, как те имена, которыми назвал их его отец.\tБлизко к еврейскому.",
+    "new_row": "18\tИ снова выкопал Исаак колодцы с водой, которые выкопали во дни Авраама, его отца, и которые филистимляне завалили после смерти Авраама. И назвал их теми же именами, которыми назвал их его отец.\tБлизко к еврейскому."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/01_GEN/GEN_026_1.tsv",
+    "verse": 21,
+    "old_row": "21\tИ выкопали другой колодец, и спорили также о нём, и он назвал его имя Ситна.\tНе добавлено отдельное сообщение о передвижении Исаака.",
+    "new_row": "21\tИ выкопали другой колодец, и спорили также о нём, и он назвал его Ситной.\tНе добавлено отдельное сообщение о передвижении Исаака."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/01_GEN/GEN_026_1.tsv",
+    "verse": 22,
+    "old_row": "22\tИ он двинулся оттуда, и выкопал другой колодец, и о нём не спорили. И он назвал его имя Реховоф, и сказал: «Ибо теперь ГОСПОДЬ дал нам простор, и мы будем плодиться в земле».\tБлизко к еврейскому.",
+    "new_row": "22\tИ он двинулся оттуда, и выкопал другой колодец, и о нём не спорили. И он назвал его Реховофом, и сказал: «Ибо теперь ГОСПОДЬ дал нам простор, и мы будем плодиться в земле».\tБлизко к еврейскому."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/01_GEN/GEN_026_2.tsv",
+    "verse": 33,
+    "old_row": "33\tИ назвал он его Шива; потому имя города Беэршива до этого дня.\tБлизко к еврейскому.",
+    "new_row": "33\tИ назвал он его Шивой; потому имя города — Беэршива до этого дня.\tБлизко к еврейскому."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/01_GEN/GEN_027_2.tsv",
+    "verse": 36,
+    "old_row": "36\tИ он сказал: «Не потому ли назвали его имя Иаков, что он вытеснил меня эти два раза? Моё первородство он взял, и вот, теперь взял моё благословение». И он сказал: «Разве ты не оставил мне благословения?»\tБлизко к еврейскому.",
+    "new_row": "36\tИ он сказал: «Не потому ли назвали его Иаковом, что он вытеснил меня эти два раза? Моё первородство он взял, и вот, теперь взял моё благословение». И он сказал: «Разве ты не оставил мне благословения?»\tБлизко к еврейскому."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/01_GEN/GEN_027_2.tsv",
+    "verse": 42,
+    "old_row": "42\tИ сообщили Ревекке слова Исава, её старшего сына, и она послала, и позвала Иакова, своего младшего сына, и сказала ему: «Вот, Исав, твой брат, утешает себя о тебе тем, чтобы убить тебя.\tСохранено утешение мыслью об убийстве, а не только угроза.",
+    "new_row": "42\tИ сообщили Ревекке слова Исава, её старшего сына, и она послала, и позвала Иакова, своего младшего сына, и сказала ему: «Вот, Исав, твой брат, утешает себя мыслью о том, чтобы убить тебя.\tСохранено утешение мыслью об убийстве, а не только угроза."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/en/01_GEN/GEN_027_2.tsv",
+    "verse": 33,
+    "old_row": "33\t=\tClose to the Hebrew.",
+    "new_row": "33\t=\tThe Hebrew says “I ate from everything,” rather than “I ate it all.”"
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/01_GEN/GEN_028.tsv",
+    "verse": 9,
+    "old_row": "9\tUnd Esau ging zu Ismael und nahm Mahalath, die Tochter Ismaels, des Sohnes Abrahams, die Schwester Nebajoths, zu seinen Frauen hinzu sich zur Frau.\tNah am Hebräischen.",
+    "new_row": "9\tUnd Esau ging zu Ismael und nahm sich Mahalath, die Tochter Ismaels, des Sohnes Abrahams, die Schwester Nebajoths, zusätzlich zu seinen Frauen zur Frau.\tNah am Hebräischen."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/01_GEN/GEN_028.tsv",
+    "verse": 13,
+    "old_row": "13\tИ вот, ГОСПОДЬ стоит на ней и говорит: «Я ГОСПОДЬ, Бог Авраама, твоего отца, и Бог Исаака. Землю, на которой ты лежишь, Я дам тебе и твоему семени.\tНе добавлено «не бойся».",
+    "new_row": "13\tИ вот, ГОСПОДЬ стоял на ней и сказал: «Я ГОСПОДЬ, Бог Авраама, твоего отца, и Бог Исаака. Землю, на которой ты лежишь, Я дам тебе и твоему семени.\tНе добавлено «не бойся»."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/01_GEN/GEN_029_1.tsv",
+    "verse": 3,
+    "old_row": "3\tИ собирались туда все стада, и отваливали камень от устья колодца, и поили овец, и возвращали камень над устьем колодца на его место.\tБлизко к еврейскому.",
+    "new_row": "3\tИ собирались туда все стада, и отваливали камень от устья колодца, и поили овец, и возвращали камень на его место над устьем колодца.\tБлизко к еврейскому."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/01_GEN/GEN_029_1.tsv",
+    "verse": 14,
+    "old_row": "14\tUnd Laban sagte zu ihm: „Wahrlich, du bist mein Gebein und mein Fleisch.“ Und er blieb einen Monat von Tagen bei ihm.\tNah am Hebräischen.",
+    "new_row": "14\tUnd Laban sagte zu ihm: „Wahrlich, du bist mein Gebein und mein Fleisch.“ Und er blieb einen vollen Monat bei ihm.\tNah am Hebräischen."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/01_GEN/GEN_029_1.tsv",
+    "verse": 14,
+    "old_row": "14\tИ сказал ему Лаван: «Воистину ты моя кость и моя плоть». И он жил у него месяц дней.\tБлизко к еврейскому.",
+    "new_row": "14\tИ сказал ему Лаван: «Воистину ты моя кость и моя плоть». И он жил у него полный месяц.\tБлизко к еврейскому."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/01_GEN/GEN_029_1.tsv",
+    "verse": 27,
+    "old_row": "27\tVollende die Woche dieser, und wir werden dir auch diese geben für den Dienst, den du bei mir noch weitere sieben Jahre dienen wirst.“\tBewahrt „wir werden geben“ statt „ich will geben“.",
+    "new_row": "27\tVollende die Woche dieser Frau, und wir werden dir auch diese geben für den Dienst, den du bei mir noch weitere sieben Jahre dienen wirst.“\tBewahrt „wir werden geben“ statt „ich will geben“."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/01_GEN/GEN_029_1.tsv",
+    "verse": 28,
+    "old_row": "28\tUnd Jakob tat so und vollendete die Woche dieser, und er gab ihm Rahel, seine Tochter, ihm zur Frau.\tNah am Hebräischen.",
+    "new_row": "28\tUnd Jakob tat so und vollendete die Woche dieser Frau, und er gab ihm Rahel, seine Tochter, ihm zur Frau.\tNah am Hebräischen."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/01_GEN/GEN_029_1.tsv",
+    "verse": 27,
+    "old_row": "27\tОкончи неделю этой, и мы дадим тебе также эту за службу, которую ты будешь служить у меня ещё семь других лет».\tБлизко к еврейскому.",
+    "new_row": "27\tОкончи неделю этой женщины, и мы дадим тебе также эту за службу, которую ты будешь служить у меня ещё семь других лет».\tБлизко к еврейскому."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/01_GEN/GEN_029_1.tsv",
+    "verse": 28,
+    "old_row": "28\tИ сделал Иаков так, и окончил неделю этой, и он дал ему Рахиль, свою дочь, ему в жену.\tБлизко к еврейскому.",
+    "new_row": "28\tИ сделал Иаков так, и окончил неделю этой женщины, и он дал ему Рахиль, свою дочь, ему в жёны.\tБлизко к еврейскому."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/01_GEN/GEN_029_2.tsv",
+    "verse": 34,
+    "old_row": "34\tИ она снова зачала, и родила сына, и сказала: «Теперь, на этот раз мой муж присоединится ко мне, ибо я родила ему трёх сыновей». Потому назвали его имя Левий.\tБлизко к еврейскому.",
+    "new_row": "34\tИ она снова зачала, и родила сына, и сказала: «Теперь, на этот раз мой муж присоединится ко мне, ибо я родила ему трёх сыновей». Потому назвали его Левием.\tБлизко к еврейскому."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/01_GEN/GEN_029_2.tsv",
+    "verse": 35,
+    "old_row": "35\tИ она снова зачала, и родила сына, и сказала: «На этот раз я восхвалю ГОСПОДА». Потому назвала его имя Иуда, и перестала рождать.\tБлизко к еврейскому.",
+    "new_row": "35\tИ она снова зачала, и родила сына, и сказала: «На этот раз я восхвалю ГОСПОДА». Потому назвала его Иудой, и перестала рождать.\tБлизко к еврейскому."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/01_GEN/GEN_030_1.tsv",
+    "verse": 1,
+    "old_row": "1\tUnd Rahel sah, dass sie Jakob nicht geboren hatte, und Rahel beneidete ihre Schwester und sagte zu Jakob: „Gib mir Kinder; und wenn nicht, sterbe ich!“\tNah am Hebräischen.",
+    "new_row": "1\tUnd Rahel sah, dass sie Jakob keine Kinder geboren hatte, und Rahel beneidete ihre Schwester und sagte zu Jakob: „Gib mir Kinder; und wenn nicht, sterbe ich!“\tNah am Hebräischen."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/01_GEN/GEN_030_1.tsv",
+    "verse": 1,
+    "old_row": "1\tИ увидела Рахиль, что не родила Иакову, и Рахиль позавидовала своей сестре, и сказала Иакову: «Дай мне детей, а если нет, я умираю!»\tБлизко к еврейскому.",
+    "new_row": "1\tИ увидела Рахиль, что не родила Иакову детей, и Рахиль позавидовала своей сестре, и сказала Иакову: «Дай мне детей, а если нет, я умираю!»\tБлизко к еврейскому."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/01_GEN/GEN_030_1.tsv",
+    "verse": 28,
+    "old_row": "28\tИ он сказал: «Назначь твою плату на мне, и я дам».\tБлизко к еврейскому.",
+    "new_row": "28\tИ он сказал: «Определи твою плату с меня, и я дам».\tБлизко к еврейскому."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/01_GEN/GEN_030_2.tsv",
+    "verse": 33,
+    "old_row": "33\tUnd meine Gerechtigkeit wird morgen für mich zeugen, wenn du vor dir meinen Lohn prüfst. Alles, was nicht gesprenkelt und gefleckt unter den Ziegen und dunkel unter den Schafen ist, ist bei mir gestohlen.“\tBewahrt das Prüfen durch den Angesprochenen und das dunkle Fell.",
+    "new_row": "33\tUnd meine Gerechtigkeit wird morgen für mich zeugen, wenn du vor dir meinen Lohn prüfst. Alles unter den Ziegen, was nicht gesprenkelt und gefleckt ist, und alles unter den Schafen, was nicht dunkel ist, ist bei mir gestohlen.“\tBewahrt das Prüfen durch den Angesprochenen und das dunkle Fell."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/01_GEN/GEN_030_2.tsv",
+    "verse": 33,
+    "old_row": "33\tИ будет свидетельствовать за меня моя праведность завтра, когда ты придёшь к моей плате перед тобой. Всё, что не с крапинами и с пятнами среди коз и не тёмное среди овец, — краденое это у меня».\tБлизко к еврейскому.",
+    "new_row": "33\tИ будет свидетельствовать за меня моя праведность завтра, когда ты придёшь проверить мою плату перед тобой. Всё среди коз, что не крапчатое и не пятнистое, и всё среди овец, что не тёмное, — краденое у меня».\tБлизко к еврейскому."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/01_GEN/GEN_030_2.tsv",
+    "verse": 42,
+    "old_row": "42\tА когда скот был слабым, он не ставил; и слабые были Лавану, а крепкие Иакову.\tБлизко к еврейскому.",
+    "new_row": "42\tА когда скот был слабым, он не ставил; и слабые доставались Лавану, а крепкие Иакову.\tБлизко к еврейскому."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/01_GEN/GEN_031_1.tsv",
+    "verse": 3,
+    "old_row": "3\tUnd Jahwe sagte zu Jakob: „Kehre zurück in das Land deiner Väter und zu deiner Verwandtschaft, und ich werde mit dir sein.“\tNah am Hebräischen.",
+    "new_row": "3\tUnd der HERR sagte zu Jakob: „Kehre zurück in das Land deiner Väter und zu deiner Verwandtschaft, und ich werde mit dir sein.“\tNah am Hebräischen."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/01_GEN/GEN_031_2.tsv",
+    "verse": 49,
+    "old_row": "49\tUnd Mizpa, weil er sagte: „Jahwe möge zwischen mir und dir wachen, wenn wir voreinander verborgen sind.\tBewahrt den Namen Mizpa und das gegenseitige Verborgensein.",
+    "new_row": "49\tUnd Mizpa, weil er sagte: „Der HERR möge zwischen mir und dir wachen, wenn wir voreinander verborgen sind.\tBewahrt den Namen Mizpa und das gegenseitige Verborgensein."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/01_GEN/GEN_031_1.tsv",
+    "verse": 3,
+    "old_row": "3\tИ сказал Яхве Иакову: «Возвратись в землю твоих отцов и к твоей родне, и Я буду с тобой».\tСохранена родня вместо «родины».",
+    "new_row": "3\tИ сказал Господь Иакову: «Возвратись в землю твоих отцов и к твоей родне, и Я буду с тобой».\tСохранена родня вместо «родины»."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/01_GEN/GEN_031_2.tsv",
+    "verse": 49,
+    "old_row": "49\tИ Мицпа, потому что он сказал: «Пусть Яхве надзирает между мной и тобой, когда мы скроемся друг от друга.\tСохранено «между мной и тобой» вместо «надо мною и над тобою».",
+    "new_row": "49\tИ Мицпа, потому что он сказал: «Пусть Господь надзирает между мной и тобой, когда мы скроемся друг от друга.\tСохранено «между мной и тобой» вместо «надо мною и над тобою»."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/01_GEN/GEN_032_1.tsv",
+    "verse": 9,
+    "old_row": "9\tUnd Jakob sagte: „Gott meines Vaters Abraham und Gott meines Vaters Isaak, Jahwe, der du zu mir gesagt hast: Kehre zurück in dein Land und zu deiner Verwandtschaft, und ich werde dir Gutes tun!\tNah am Hebräischen.",
+    "new_row": "9\tUnd Jakob sagte: „Gott meines Vaters Abraham und Gott meines Vaters Isaak, HERR, der du zu mir gesagt hast: Kehre zurück in dein Land und zu deiner Verwandtschaft, und ich werde dir Gutes tun!\tNah am Hebräischen."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/01_GEN/GEN_032_1.tsv",
+    "verse": 9,
+    "old_row": "9\tИ сказал Иаков: «Бог моего отца Авраама и Бог моего отца Исаака, Яхве, сказавший мне: Возвратись в твою землю и к твоей родне, и Я буду делать тебе добро!\tСохранена родня вместо «родины»; после имени Яхве нет отдельного «Боже».",
+    "new_row": "9\tИ сказал Иаков: «Бог моего отца Авраама и Бог моего отца Исаака, Господи, сказавший мне: Возвратись в твою землю и к твоей родне, и Я буду делать тебе добро!\tСохранена родня вместо «родины»; после «Господи» нет отдельного «Боже»."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/01_GEN/GEN_031_2.tsv",
+    "verse": 35,
+    "old_row": "35\tUnd sie sagte zu ihrem Vater: „Es möge meinem Herrn nicht in den Augen entbrennen, dass ich vor dir nicht aufstehen kann, denn die Weise der Frauen ist bei mir.“ Und er suchte und fand die Terafim nicht.\tBewahrt die Augen und die Reihenfolge: Er suchte und fand nicht.",
+    "new_row": "35\tUnd sie sagte zu ihrem Vater: „Es möge kein Zorn in den Augen meines Herrn entbrennen, weil ich vor dir nicht aufstehen kann, denn die Weise der Frauen ist bei mir.“ Und er suchte und fand die Terafim nicht.\tBewahrt die Augen und die Reihenfolge: Er suchte und fand nicht."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/01_GEN/GEN_031_2.tsv",
+    "verse": 39,
+    "old_row": "39\tРастерзанного я не приносил тебе; я сам нёс его убыток. С моей руки ты взыскивал его, украденное днём и украденное ночью.\tСохранено именно украденное вместо общего «пропадало» и образ взыскания с руки.",
+    "new_row": "39\tРастерзанного я не приносил тебе; я сам нёс убыток за него. С моей руки ты взыскивал его, украденное днём и украденное ночью.\tСохранено именно украденное вместо общего «пропадало» и образ взыскания с руки."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/01_GEN/GEN_033.tsv",
+    "verse": 8,
+    "old_row": "8\tUnd er sagte: „Was ist dir dieses ganze Lager, dem ich begegnet bin?“ Und er sagte: „Um Gunst in den Augen meines Herrn zu finden.“\tBewahrt „Lager“ und die Augen.",
+    "new_row": "8\tUnd er sagte: „Was bedeutet dir dieses ganze Lager, dem ich begegnet bin?“ Und er sagte: „Um Gunst in den Augen meines Herrn zu finden.“\tBewahrt „Lager“ und die Augen."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/01_GEN/GEN_034_1.tsv",
+    "verse": 25,
+    "old_row": "25\tUnd es geschah am dritten Tag, als sie Schmerzen hatten: Zwei von Jakobs Söhnen, Simeon und Levi, die Brüder Dinas, nahmen jeder sein Schwert und kamen sicher gegen die Stadt und töteten alles Männliche.\tBewahrt die allgemeine Tötung statt des besonderen „erwürgten“.",
+    "new_row": "25\tUnd es geschah am dritten Tag, als sie Schmerzen hatten: Zwei von Jakobs Söhnen, Simeon und Levi, die Brüder Dinas, nahmen jeder sein Schwert und gingen unbesorgt gegen die Stadt vor und töteten alles Männliche.\tBewahrt die allgemeine Tötung statt des besonderen „erwürgten“."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/01_GEN/GEN_034_1.tsv",
+    "verse": 25,
+    "old_row": "25\tИ было на третий день, когда они испытывали боль: два сына Иакова, Симеон и Левий, братья Дины, взяли каждый свой меч и пришли на город без опасения, и убили всякого мужчину.\tБлизко к еврейскому.",
+    "new_row": "25\tИ было на третий день, когда они испытывали боль: два сына Иакова, Симеон и Левий, братья Дины, взяли каждый свой меч и напали на город без опасения, и убили всякого мужчину.\tБлизко к еврейскому."
+  }
+]

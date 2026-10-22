@@ -1,0 +1,122 @@
+[
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/18_JOB/JOB_029.tsv",
+    "old_row": "2\t„Wer gäbe mir die Monate von einst, die Tage, da Gott mich bewahrte,\tNah am Hebräischen.",
+    "new_row": "2\t„O dass ich wäre wie in den Monaten von einst, wie in den Tagen, da Gott mich bewahrte,\tNah am Hebräischen."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/18_JOB/JOB_029.tsv",
+    "old_row": "2\t«Кто дал бы мне месяцы прежние, дни, когда Бог хранил меня,\tБлизко к еврейскому.",
+    "new_row": "2\t«О, если бы я был, как в прежние месяцы, как в те дни, когда Бог хранил меня,\tБлизко к еврейскому."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/18_JOB/JOB_029.tsv",
+    "old_row": "21\tMir hörten sie zu und warteten und schwiegen auf meinen Rat.\tNah am Hebräischen.",
+    "new_row": "21\tMir hörten sie zu und warteten und schwiegen, um meinen Rat zu hören.\tNah am Hebräischen."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/18_JOB/JOB_029.tsv",
+    "old_row": "22\tNach meinem Wort wiederholten sie nicht, und auf sie träufelte meine Rede.\tNah am Hebräischen.",
+    "new_row": "22\tNach meinem Wort wiederholten sie nicht, und auf sie träufelte meine Rede.\tGenannt ist ein Nichtwiederholen nach seinem Wort statt eines Nichtweiterredens."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/18_JOB/JOB_029.tsv",
+    "old_row": "22\tПосле слова моего не повторяли, и на них капала речь моя.\tБлизко к еврейскому.",
+    "new_row": "22\tПосле слова моего не повторяли, и на них капала речь моя.\tНазвано неповторение после его слова вместо дальнейшего рассуждения."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/en/18_JOB/JOB_029.tsv",
+    "old_row": "10\t=\tClose to the Hebrew.",
+    "new_row": "10\t=\tThe Hebrew has a singular voice and tongue; BSB has plural voices and tongues."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/en/18_JOB/JOB_029.tsv",
+    "old_row": "17\t=\tClose to the Hebrew.",
+    "new_row": "17\t=\tThe Hebrew names jaws and casting prey from his teeth; BSB names fangs and snatching the prey."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/18_JOB/JOB_031_1.tsv",
+    "old_row": "20\twenn seine Lenden mich nicht segneten und er sich nicht von der Schur meiner Lämmer wärmte,\tGenannt ist die Schur statt der Felle.",
+    "new_row": "20\twenn seine Lenden mich nicht segneten und er sich von der Schur meiner Lämmer wärmte,\tGenannt ist die Schur statt der Felle."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/18_JOB/JOB_031_1.tsv",
+    "old_row": "20\tесли чресла его не благословляли меня и он не согревался от стрижки ягнят моих,\tНазвана стрижка ягнят.",
+    "new_row": "20\tесли чресла его не благословляли меня и он согревался от стрижки ягнят моих,\tНазвана стрижка ягнят."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/18_JOB/JOB_034_1.tsv",
+    "old_row": "11\tDenn das Werk eines Menschen vergilt er ihm, und nach dem Weg eines Mannes lässt er ihn finden.\tNah am Hebräischen.",
+    "new_row": "11\tDenn das Werk eines Menschen vergilt er ihm, und nach dem Weg eines Mannes lässt er es ihn treffen.\tNah am Hebräischen."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/18_JOB/JOB_034_1.tsv",
+    "old_row": "11\tИбо дело человека воздаёт Он ему и по пути мужа даёт ему встретить.\tБлизко к еврейскому.",
+    "new_row": "11\tИбо дело человека воздаёт Он ему и по пути мужа даёт этому постигнуть его.\tБлизко к еврейскому."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/18_JOB/JOB_037.tsv",
+    "old_row": "23\tDen Allmächtigen haben wir nicht gefunden, erhaben an Kraft; und Recht und Fülle der Gerechtigkeit bedrückt er nicht.\tGenannt ist Fülle der Gerechtigkeit.",
+    "new_row": "23\tDen Allmächtigen haben wir nicht gefunden, erhaben an Kraft und Recht und Fülle der Gerechtigkeit; er bedrückt nicht.\tGenannt ist Fülle der Gerechtigkeit; das Nichtbedrücken steht ohne ausdrückliches Objekt."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/18_JOB/JOB_037.tsv",
+    "old_row": "23\tВседержителя мы не нашли, возвышенного силой; и суда и полноты правды Он не угнетает.\tНазвано ненахождение; суд и полнота правды присоединены без отдельного никого.",
+    "new_row": "23\tВседержителя мы не нашли, возвышенного силой, судом и полнотой правды; Он не угнетает.\tСказано, что мы не нашли Его; отдельное никого при не угнетает не названо."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/18_JOB/JOB_038_1.tsv",
+    "old_row": "10\tund ihm meine Grenze einbrach und Riegel und Türen setzte\tGenannt ist seine Grenze statt eines Damms.",
+    "new_row": "10\tund ihm meine Grenze einbrach und Riegel und Türen setzte\tGenannt ist meine Grenze statt eines Damms."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/18_JOB/JOB_038_1.tsv",
+    "old_row": "16\tBist du zu den Quellen des Meeres gekommen und hast du in der Erforschung der Tiefe gewandelt?\tGenannt sind Quellen und Erforschung statt Grund und Fußtapfen.",
+    "new_row": "16\tBist du zu den Quellen des Meeres gekommen und bist du in der Erforschung der Tiefe gewandelt?\tGenannt sind Quellen und Erforschung statt Grund und Fußtapfen."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/en/18_JOB/JOB_038_1.tsv",
+    "old_row": "13\t=\tThe Hebrew says to seize the earth’s wings or corners; BSB describes spreading to its ends.",
+    "new_row": "13\t=\tThe Hebrew says to seize the earth’s wings or corners and has the wicked passively shaken from it; BSB describes dawn spreading to the ends and actively shaking them out."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/18_JOB/JOB_039.tsv",
+    "old_row": "14\tDenn sie lässt ihre Eier auf der Erde liegen und wärmt sie auf Staub\tSie selbst wärmt die Eier auf Staub.",
+    "new_row": "14\tDenn die Straußenhenne lässt ihre Eier auf der Erde liegen und wärmt sie auf Staub\tSie selbst wärmt die Eier auf Staub."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/18_JOB/JOB_039.tsv",
+    "old_row": "14\tИбо она оставляет яйца свои на земле и на прахе согревает их,\tНазван прах вместо песка.",
+    "new_row": "14\tИбо страусиха оставляет яйца свои на земле и на прахе согревает их,\tНазван прах вместо песка."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/18_JOB/JOB_041_1.tsv",
+    "old_row": "17\tJeder an seinen Bruder sind sie geklebt, greifen ineinander und werden nicht getrennt.\tDie Verbindung heißt bildlich jeder an seinen Bruder.",
+    "new_row": "17\tSie sind geklebt, jeder an seinen Bruder, greifen ineinander und werden nicht getrennt.\tDie Verbindung heißt bildlich jeder an seinen Bruder."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/18_JOB/JOB_041_1.tsv",
+    "old_row": "17\tКаждый к брату своему прилеплены, сцепляются и не разделяются.\tСоединяемые уподоблены братьям.",
+    "new_row": "17\tОни прилеплены, каждый к брату своему, сцепляются и не разделяются.\tСоединяемые уподоблены братьям."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/en/18_JOB/JOB_041_1.tsv",
+    "old_row": "20\t=\tThe Hebrew names an fanned pot and reeds without an explicit burning; BSB describes a boiling pot over burning reeds.",
+    "new_row": "20\t=\tThe Hebrew names a fanned pot and reeds without an explicit burning; BSB describes a boiling pot over burning reeds."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/en/18_JOB/JOB_041_1.tsv",
+    "old_row": "29\t=\tThe Hebrew has plural forms for regarding clubs and describes shaking the javelin; BSB has a club and the sound of the lance.",
+    "new_row": "29\t=\tThe Hebrew uses a plural passive verb with club and describes shaking the javelin; BSB uses a singular passive clause and names the sound of the lance."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/18_JOB/JOB_041_1.tsv",
+    "old_row": "29\tWie Stoppeln werden Keulen geachtet, und er lacht über das Schwingen des Wurfspießes.\tDie Keulen werden passiv geachtet.",
+    "new_row": "29\tDie Keule wird wie Stoppeln geachtet, und er lacht über das Schwingen des Wurfspießes.\tDas Achten ist passiv ausgedrückt."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/18_JOB/JOB_041_1.tsv",
+    "old_row": "29\tЗа солому считаются палицы, и он смеётся взмахам дротика.\tПалицы стоят во множественном числе; назван взмах дротика вместо свиста.",
+    "new_row": "29\tПалица считается соломой, и он смеётся взмахам дротика.\tНазван взмах дротика вместо свиста."
+  }
+]

@@ -1,0 +1,40 @@
+{
+  "assigned": [
+    {
+      "chapter": 5,
+      "packets": [
+        "ECC_005.txt"
+      ],
+      "verses": 20
+    },
+    {
+      "chapter": 6,
+      "packets": [
+        "ECC_006.txt"
+      ],
+      "verses": 12
+    },
+    {
+      "chapter": 7,
+      "packets": [
+        "ECC_007.txt"
+      ],
+      "verses": 29
+    },
+    {
+      "chapter": 8,
+      "packets": [
+        "ECC_008.txt"
+      ],
+      "verses": 17
+    }
+  ],
+  "completed": [
+    5,
+    6,
+    7
+  ],
+  "pending": [
+    8
+  ]
+}

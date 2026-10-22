@@ -1,0 +1,17 @@
+[
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/en/13_1CH/1CH_028.tsv",
+    "old_row": "8\t=\tThe Hebrew says in the ears of our God and calls the inheritors your sons after you; BSB uses in His hearing and your descendants.",
+    "new_row": "8\t=\tThe Hebrew says in the ears of our God and calls the inheritors your sons after you; BSB expresses hearing and uses your descendants."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/en/13_1CH/1CH_028.tsv",
+    "old_row": "18\t=\tClose to the Hebrew.",
+    "new_row": "18\t=\tThe Hebrew describes the cherubim spreading out and covering the ark without an explicit wings noun; BSB supplies their wings."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/en/13_1CH/1CH_029.tsv",
+    "old_row": "11\t=\tClose to the Hebrew.",
+    "new_row": "11\t=\tThe Hebrew names victory and describes God reflexively as raising Himself to be head over all; BSB uses splendor and the passive You are exalted."
+  }
+]

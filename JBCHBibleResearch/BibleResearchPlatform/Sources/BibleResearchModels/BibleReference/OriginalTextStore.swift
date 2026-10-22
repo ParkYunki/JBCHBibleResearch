@@ -11,8 +11,11 @@ import SQLite3
 //   CREATE TABLE original_words (
 //     book_id INTEGER, chapter INTEGER, verse INTEGER, word_order INTEGER,
 //     original_text TEXT, transliteration TEXT, strong_code TEXT,
-//     morph_code TEXT, gloss_en TEXT
+//     morph_code TEXT, gloss_en TEXT,
+//     translation_en TEXT NOT NULL DEFAULT ''   -- [2026-10-12] STEPBible 문맥 번역
 //   )
+//   CREATE TABLE LiteralEnglish (book_id, chapter, verse, text, source,
+//     PRIMARY KEY(book_id, chapter, verse)) WITHOUT ROWID   -- [2026-10-12] 절 단위 영어 직역(LSV)
 //   CREATE INDEX idx_original_words_verse ON original_words(book_id, chapter, verse, word_order)
 
 public final class OriginalTextStore {
@@ -38,7 +41,7 @@ public final class OriginalTextStore {
     /// 데이터가 없는 절이면 빈 배열(에러 아님 — "원문 정보 없음"은 정상 상태).
     public func words(bookId: Int, chapter: Int, verse: Int) throws -> [OriginalWordInfo] {
         let sql = """
-            SELECT word_order, original_text, transliteration, strong_code, morph_code, gloss_en
+            SELECT word_order, original_text, transliteration, strong_code, morph_code, gloss_en, translation_en
             FROM original_words
             WHERE book_id = ? AND chapter = ? AND verse = ?
             ORDER BY word_order ASC
@@ -65,10 +68,12 @@ public final class OriginalTextStore {
             let strongCode = String(cString: sqlite3_column_text(statement, 3))
             let morphCode = String(cString: sqlite3_column_text(statement, 4))
             let glossEn = String(cString: sqlite3_column_text(statement, 5))
+            let translationEn = String(cString: sqlite3_column_text(statement, 6))
             results.append(OriginalWordInfo(
                 bookId: bookId, chapter: chapter, verse: verse, wordOrder: wordOrder,
                 originalText: originalText, transliteration: transliteration,
-                strongCode: strongCode, morphCode: morphCode, glossEn: glossEn
+                strongCode: strongCode, morphCode: morphCode, glossEn: glossEn,
+                translationEn: translationEn
             ))
         }
         return results
@@ -108,6 +113,35 @@ public final class OriginalTextStore {
         return LiteralTranslationInfo(
             bookId: bookId, chapter: chapter, verse: verse,
             literalTranslation: literal, difference: difference
+        )
+    }
+
+    /// [2026-10-12] 절 단위 영어 직역(`LiteralEnglish`). 데이터가 없으면 nil(정상 상태).
+    public func literalEnglish(bookId: Int, chapter: Int, verse: Int) throws -> LiteralEnglishInfo? {
+        let sql = """
+            SELECT text, source
+            FROM LiteralEnglish
+            WHERE book_id = ? AND chapter = ? AND verse = ?
+            LIMIT 1
+            """
+        var statement: OpaquePointer?
+        defer { sqlite3_finalize(statement) }
+        guard sqlite3_prepare_v2(handle, sql, -1, &statement, nil) == SQLITE_OK else {
+            throw BibleReferenceError.statementPrepareFailed(code: sqlite3_errcode(handle))
+        }
+        sqlite3_bind_int(statement, 1, Int32(bookId))
+        sqlite3_bind_int(statement, 2, Int32(chapter))
+        sqlite3_bind_int(statement, 3, Int32(verse))
+
+        let step = sqlite3_step(statement)
+        if step == SQLITE_DONE { return nil }
+        guard step == SQLITE_ROW else {
+            throw BibleReferenceError.stepFailed(code: step)
+        }
+        return LiteralEnglishInfo(
+            bookId: bookId, chapter: chapter, verse: verse,
+            text: String(cString: sqlite3_column_text(statement, 0)),
+            source: String(cString: sqlite3_column_text(statement, 1))
         )
     }
 }

@@ -112,7 +112,7 @@ struct BibleToolRail: View {
             Spacer(minLength: 0)
 
             RailButton(
-                systemImage: "chevron.left.2", label: "도구 레일 접기", help: "도구 레일 접기",
+                systemImage: "chevron.left.2", label: String(localized: "도구 레일 접기"), help: String(localized: "도구 레일 접기"),
                 iconColor: iconColor, activeFill: activeFill, activeForeground: activeForeground
             ) {
                 isCollapsed = true
@@ -158,7 +158,7 @@ struct BibleToolRail: View {
     private var navigationGroup: some View {
         VStack(spacing: 2) {
             RailButton(
-                systemImage: "list.star", label: "책갈피 이동", help: "책갈피로 이동",
+                systemImage: "list.star", label: String(localized: "책갈피 이동"), help: String(localized: "책갈피로 이동"),
                 iconColor: iconColor, activeFill: activeFill, activeForeground: activeForeground
             ) {
                 isBookmarkListPresented = true
@@ -173,8 +173,8 @@ struct BibleToolRail: View {
             let isMarked = code.map { viewModel.isCurrentPositionBookmarked(translationCode: $0) } ?? false
             RailButton(
                 systemImage: isMarked ? "bookmark.fill" : "bookmark",
-                label: isMarked ? "책갈피 해제" : "책갈피 설정",
-                help: isMarked ? "이 위치 책갈피 해제" : "이 위치 책갈피로 설정",
+                label: isMarked ? String(localized: "책갈피 해제") : String(localized: "책갈피 설정"),
+                help: isMarked ? String(localized: "이 위치 책갈피 해제") : String(localized: "이 위치 책갈피로 설정"),
                 // 책갈피는 예전 툴바처럼 와인 색 하나로 칠한다.
                 iconColor: JBCHCategoryPalette.wine, activeFill: activeFill, activeForeground: activeForeground,
                 isDisabled: code == nil
@@ -185,7 +185,7 @@ struct BibleToolRail: View {
             }
 
             RailButton(
-                systemImage: "clock", label: "조회 이력", help: "최근 조회한 책/장 이력 보기",
+                systemImage: "clock", label: String(localized: "조회 이력"), help: String(localized: "최근 조회한 책/장 이력 보기"),
                 iconColor: iconColor, activeFill: activeFill, activeForeground: activeForeground
             ) {
                 isHistoryPresented = true
@@ -203,8 +203,8 @@ struct BibleToolRail: View {
     private var relatedGroup: some View {
         RailButton(
             systemImage: isWordSummaryEditing ? "xmark.circle" : "sidebar.trailing",
-            label: isWordSummaryEditing ? "말씀 요약 닫기" : "관련 콘텐츠",
-            help: isWordSummaryEditing ? "말씀 요약 편집 마치기" : "이 장의 개요·메모·연구문서 보기",
+            label: isWordSummaryEditing ? String(localized: "말씀 요약 닫기") : String(localized: "관련 콘텐츠"),
+            help: isWordSummaryEditing ? String(localized: "말씀 요약 편집 마치기") : String(localized: "이 장의 개요·메모·연구문서 보기"),
             iconColor: iconColor, activeFill: activeFill, activeForeground: activeForeground,
             isOn: isRelatedContentPresented && !isWordSummaryEditing
         ) {
@@ -221,7 +221,7 @@ struct BibleToolRail: View {
         VStack(spacing: 2) {
             if showTranslationPicker {
                 RailButton(
-                    systemImage: "text.book.closed", label: "번역본 선택", help: "번역본 선택",
+                    systemImage: "text.book.closed", label: String(localized: "번역본 선택"), help: String(localized: "번역본 선택"),
                     iconColor: iconColor, activeFill: activeFill, activeForeground: activeForeground
                 ) {
                     isTranslationPickerPresented = true
@@ -240,7 +240,7 @@ struct BibleToolRail: View {
             }
             if showNewWindow {
                 RailButton(
-                    systemImage: "macwindow.badge.plus", label: "성경 조회 새 창", help: "성경 조회 새 창으로 열기",
+                    systemImage: "macwindow.badge.plus", label: String(localized: "성경 조회 새 창"), help: String(localized: "성경 조회 새 창으로 열기"),
                     iconColor: iconColor, activeFill: activeFill, activeForeground: activeForeground
                 ) {
                     openWindow(id: "bible-reading")

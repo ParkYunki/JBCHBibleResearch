@@ -1,0 +1,215 @@
+[
+  {
+    "path": "Tools/LiteralGen/outputs/ru/20_PRO/PRO_002.tsv",
+    "verse": "2",
+    "old_row": "2\tчтобы обратить ухо твоё к мудрости, наклонишь сердце твоё к разумению,\tБлизко к еврейскому.",
+    "new_row": "2\tтак что сделаешь ухо твоё внимательным к мудрости, наклонишь сердце твоё к разумению,\tБлизко к еврейскому.",
+    "reason": "Согласование двух зависимых действий без смешения инфинитива и личного глагола."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/20_PRO/PRO_002.tsv",
+    "verse": "7",
+    "old_row": "7\tEr verwahrt den Aufrichtigen tüchtige Weisheit, einen Schild für die, die in Lauterkeit gehen,\tWeisheit und Schild sind ausdrücklich genannt.",
+    "new_row": "7\tEr verwahrt den Aufrichtigen tüchtige Weisheit; ein Schild ist er für die, die in Lauterkeit gehen,\tWeisheit und Schild sind ausdrücklich genannt.",
+    "reason": "Schild ist eine eigene prädikative Bezeichnung, kein zweites Objekt des Verwahrens."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/20_PRO/PRO_002.tsv",
+    "verse": "7",
+    "old_row": "7\tОн сберегает для прямодушных здравую мудрость, щит для ходящих в непорочности,\tСказано мудрость, а не спасение.",
+    "new_row": "7\tОн сберегает для прямодушных здравую мудрость; Он — щит для ходящих в непорочности,\tСказано мудрость, а не спасение.",
+    "reason": "Щит относится к Нему как сказуемое, а не к сохраняемым предметам."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/20_PRO/PRO_006_1.tsv",
+    "verse": "16",
+    "old_row": "16\tШесть этих ненавидел Господь, и семь — мерзость душе Его:\tНенависть выражена как совершившаяся.",
+    "new_row": "16\tШесть этих вещей ненавидел Господь, и семь — мерзость душе Его:\tНенависть выражена как совершившаяся.",
+    "reason": "Минимальное восполнение существительного после шесть этих для естественной русской грамматики."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/20_PRO/PRO_009.tsv",
+    "verse": "7",
+    "old_row": "7\tWer einen Spötter züchtigt, nimmt sich Schande, und wer einen Gottlosen zurechtweist, dessen Makel.\tMakel ist ausdrücklich statt Gehöhntwerden genannt.",
+    "new_row": "7\tWer einen Spötter züchtigt, nimmt sich Schande, und wer einen Gottlosen zurechtweist, zieht sich einen Makel zu.\tMakel ist ausdrücklich statt Gehöhntwerden genannt.",
+    "reason": "Der bisherige zweite Satzteil dessen Makel bleibt syntaktisch unverbunden; minimale verbale Ergänzung."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/20_PRO/PRO_009.tsv",
+    "verse": "2",
+    "old_row": "2\tЗаколола закланное своё, смешала вино своё, также устроила стол свой.\tЖертва отдельно не названа; стол принадлежит ей.",
+    "new_row": "2\tЗаколола скот свой, смешала вино своё, также устроила стол свой.\tЖертва отдельно не названа; стол принадлежит ей.",
+    "reason": "Закланное своё bezeichnet schon getötetes Fleisch; скот свой macht die Schlachthandlung natürlich und erhält das Besitzwort."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/20_PRO/PRO_010_1.tsv",
+    "verse": "22",
+    "old_row": "22\tБлагословение Господа — оно обогащает, и Он не прибавляет печали с ним.\tПоследний глагол имеет мужское лицо, а не благословение своим подлежащим.",
+    "new_row": "22\tБлагословение Господа — оно обогащает, и Он не прибавляет печали с ним.\tПоследний глагол стоит в мужском роде и относится к Нему, а не к благословению.",
+    "reason": "Род исправлен вместо неправильного термина мужское лицо."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/20_PRO/PRO_011_2.tsv",
+    "old_row": "31\tSiehe, ein Gerechter wird auf Erden vergolten, wie viel mehr ein Frevler und Sünder!\tVergeltung statt ausdrücklich notwendigem Leiden; Beginn mit „siehe“.",
+    "new_row": "31\tSiehe, einem Gerechten wird auf Erden vergolten, wie viel mehr einem Frevler und Sünder!\tVergeltung statt ausdrücklich notwendigem Leiden; Beginn mit „siehe“."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/20_PRO/PRO_012.tsv",
+    "old_row": "27\tEin Träger brät sein Wild nicht, aber der Besitz eines fleißigen Menschen ist kostbar.\tDas Braten des Wilds ist ausdrücklich genannt; der Besitz wird als kostbar bezeichnet.",
+    "new_row": "27\tEin träger Mensch brät sein Wild nicht, aber der Besitz eines fleißigen Menschen ist kostbar.\tDas Braten des Wilds ist ausdrücklich genannt; der Besitz wird als kostbar bezeichnet."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/20_PRO/PRO_013.tsv",
+    "old_row": "13\tWer ein Wort verachtet, wird dadurch geschädigt, aber wer ein Gebot fürchtet, der wird vergolten.\tNah am Hebräischen.",
+    "new_row": "13\tWer ein Wort verachtet, wird dadurch geschädigt, aber wer ein Gebot fürchtet, dem wird vergolten.\tNah am Hebräischen."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/20_PRO/PRO_017.tsv",
+    "old_row": "12\tEher einem Bären, der seiner Jungen beraubt ist, bei einem Mann begegnen als einem Toren in seiner Torheit.\tNah am Hebräischen.",
+    "new_row": "12\tEinem Mann begegne eher ein Bär, der seiner Jungen beraubt ist, als ein Tor in seiner Torheit.\tNah am Hebräischen."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/20_PRO/PRO_017.tsv",
+    "old_row": "20\tEin Verkehrter des Herzens findet kein Gutes, und wer sich mit seiner Zunge verkehrt, fällt ins Unglück.\tEine Person mit verkehrtem Herzen ist Subjekt.",
+    "new_row": "20\tEin Verkehrter des Herzens findet kein Gutes, und wer verkehrter Zunge ist, fällt ins Unglück.\tEine Person mit verkehrtem Herzen ist Subjekt."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/20_PRO/PRO_017.tsv",
+    "old_row": "20\tИзвращённый сердцем не найдёт добра, а извращающийся своим языком упадёт в беду.\tВо второй строке действует человек с таким языком, не сам язык.",
+    "new_row": "20\tИзвращённый сердцем не найдёт добра, а извращённый языком упадёт в беду.\tВо второй строке действует человек с таким языком, не сам язык."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/20_PRO/PRO_018.tsv",
+    "old_row": "16\tDas Geschenk eines Menschen macht ihm weit und führt ihn vor Große.\tNah am Hebräischen.",
+    "new_row": "16\tDas Geschenk eines Menschen macht ihm Raum und führt ihn vor Große.\tNah am Hebräischen."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/20_PRO/PRO_023_1.tsv",
+    "old_row": "15\tMein Sohn, wenn dein Herz weise geworden ist, wird mein Herz sich freuen, auch ich.\tAuch ich wird zusätzlich genannt.",
+    "new_row": "15\tMein Sohn, wenn dein Herz weise geworden ist, wird mein Herz sich freuen, auch ich werde mich freuen.\tAuch ich wird zusätzlich genannt."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/20_PRO/PRO_023_1.tsv",
+    "old_row": "15\tСын мой, если сердце твое стало мудрым, возрадуется сердце мое, и я.\tДобавлено отдельное и я.",
+    "new_row": "15\tСын мой, если сердце твое стало мудрым, возрадуется сердце мое, и я возрадуюсь.\tДобавлено отдельное и я."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/20_PRO/PRO_025.tsv",
+    "old_row": "15\tDurch Länge des Zorns wird ein Anführer überredet, und eine weiche Zunge wird einen Knochen zerbrechen.\tGenannt sind Überreden und ein Knochen.",
+    "new_row": "15\tDurch Langsamkeit zum Zorn wird ein Anführer überredet, und eine weiche Zunge wird einen Knochen zerbrechen.\tGenannt sind Überreden und ein Knochen."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/20_PRO/PRO_025.tsv",
+    "old_row": "20\tEin Kleid ablegend am kalten Tag, Essig auf Natron, und Lieder singend über einem bösen Herzen.\tGenannt sind Natron und ein böses Herz.",
+    "new_row": "20\tEiner, der am kalten Tag ein Kleid ablegt, Essig auf Natron und einer, der Lieder über einem bösen Herzen singt.\tGenannt sind Natron und ein böses Herz."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/20_PRO/PRO_025.tsv",
+    "old_row": "23\tNordwind gebiert Regen, und zürnende Gesichter eine verborgene Zunge.\tGenannt sind Regen und zürnende Gesichter.",
+    "new_row": "23\tNordwind gebiert Regen, und eine verborgene Zunge zürnende Gesichter.\tGenannt sind Regen und zürnende Gesichter."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/20_PRO/PRO_025.tsv",
+    "old_row": "23\tСеверный ветер рождает дождь, и негодующие лица — тайный язык.\tБлизко к еврейскому.",
+    "new_row": "23\tСеверный ветер рождает дождь, и тайный язык — негодующие лица.\tБлизко к еврейскому."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/20_PRO/PRO_026.tsv",
+    "old_row": "6\tFüße abschneidend, Gewalttat trinkend ist, wer Worte durch die Hand eines Toren sendet.\tGenannt sind Abschneiden der Füße und Trinken von Gewalt.",
+    "new_row": "6\tFüße schneidet ab und Gewalttat trinkt, wer Worte durch die Hand eines Toren sendet.\tGenannt sind Abschneiden der Füße und Trinken von Gewalt."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/20_PRO/PRO_026.tsv",
+    "old_row": "8\tWie einen Stein in eine Schleuder binden, so ist, wer einem Toren Ehre gibt.\tEin Stein wird in eine Schleuder gebunden.",
+    "new_row": "8\tWie einer, der einen Stein in eine Schleuder bindet, so ist, wer einem Toren Ehre gibt.\tEin Stein wird in eine Schleuder gebunden."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/20_PRO/PRO_028.tsv",
+    "old_row": "13\tWer seine Vergehen bedeckt, wird keinen Erfolg haben; wer bekennt und verlässt, wird erbarmt werden.\tGenannt ist das Bedecken von Vergehen im Plural.",
+    "new_row": "13\tWer seine Vergehen bedeckt, wird keinen Erfolg haben; wer bekennt und verlässt, dem wird Erbarmen zuteilwerden.\tGenannt ist das Bedecken von Vergehen im Plural."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/20_PRO/PRO_029.tsv",
+    "old_row": "11\tSeinen ganzen Geist lässt ein Tor heraus, aber ein Weiser stillt ihn zurück.\tDer Weise stillt den Geist zurück.",
+    "new_row": "11\tSeinen ganzen Geist lässt ein Tor heraus, aber ein Weiser hält ihn beruhigend zurück.\tDer Weise stillt den Geist zurück."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/20_PRO/PRO_029.tsv",
+    "old_row": "11\tВесь дух свой выпускает глупый, а мудрый сдерживает его назад.\tНазван весь дух вместо всего гнева; сохранено назад.",
+    "new_row": "11\tВесь дух свой выпускает глупый, а мудрый унимает его, удерживая назад.\tНазван весь дух вместо всего гнева; сохранено назад."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/20_PRO/PRO_029.tsv",
+    "old_row": "18\tWo kein Gesicht ist, wird ein Volk zügellos, aber wer das Gesetz bewahrt, glücklich ist er!\tGenannt ist ein Gesicht.",
+    "new_row": "18\tWo keine Schau ist, wird ein Volk zügellos, aber wer das Gesetz bewahrt, glücklich ist er!\tGenannt ist eine Schau."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/20_PRO/PRO_030_1.tsv",
+    "old_row": "3\tUnd ich habe Weisheit nicht gelernt, aber Erkenntnis der Heiligen werde ich erkennen.\tDer zweite Satz sagt positiv, dass ich Erkenntnis der Heiligen erkenne; Heilige steht im Plural.",
+    "new_row": "3\tUnd ich habe Weisheit nicht gelernt, und Erkenntnis der Heiligen kenne ich.\tDer zweite Satz sagt positiv, dass ich Erkenntnis der Heiligen kenne; Heilige steht im Plural."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/20_PRO/PRO_030_1.tsv",
+    "old_row": "3\tИ я не учился мудрости, но знание святых узнаю.\tВторое высказывание положительное: знание святых узнаю.",
+    "new_row": "3\tИ я не учился мудрости, и знание святых я знаю.\tВторое высказывание положительное: знание святых я знаю."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/20_PRO/PRO_031_1.tsv",
+    "old_row": "4\tNicht den Königen, Lamuel, nicht den Königen ist Wein zu trinken, und den Fürsten: „Wo ist Rauschtrank?“\tDer letzte Ausdruck fragt wo ist Rauschtrank.",
+    "new_row": "4\tNicht für Könige, Lamuel, nicht für Könige ist es, Wein zu trinken, und für Fürsten: „Wo ist Rauschtrank?“\tDer letzte Ausdruck fragt wo ist Rauschtrank."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/20_PRO/PRO_031_1.tsv",
+    "old_row": "8\tÖffne deinen Mund für den Stummen, für das Recht aller Söhne des Vergehens!\tDer Stumme steht im Singular; Söhne des Vergehens bleibt als Bild erhalten.",
+    "new_row": "8\tÖffne deinen Mund für den Stummen, für das Recht aller Söhne des Dahinschwindens!\tDer Stumme steht im Singular; Söhne des Dahinschwindens bleibt als Bild erhalten."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/20_PRO/PRO_031_1.tsv",
+    "old_row": "8\tОткрой уста твои для немого, для суда всех сынов проходящего!\tСохранён образ сынов проходящего вместо сирот.",
+    "new_row": "8\tОткрой уста твои для немого, для суда всех сынов исчезновения!\tСохранён образ сынов исчезновения вместо сирот."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/en/20_PRO/PRO_008_1.tsv",
+    "verse": "2",
+    "old_row": "2\t=\tThe heights are at the head of the way, and standing is expressed as completed.",
+    "new_row": "2\t=\tShe has taken her stand at the top of the heights beside the road; standing is expressed as completed.",
+    "reason": "The head belongs to the heights, not to the way; the previous DIFF reverses the attachment."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/en/20_PRO/PRO_010_1.tsv",
+    "verse": "14",
+    "old_row": "14\t=\tThe fool’s mouth is near destruction, without a separate verb invites.",
+    "new_row": "14\t=\tThe fool’s mouth itself is described as imminent destruction; BSB adds the verb invites.",
+    "reason": "The predicate is nearby destruction, rather than saying the mouth is merely near destruction."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/20_PRO/PRO_001_1.tsv",
+    "old_row": "19\tSo sind die Pfade jedes Räubers von Gewinn; er nimmt seinen Besitzern die Seele.\tPfade und Seele sind ausdrücklich genannt.",
+    "new_row": "19\tSo sind die Pfade eines jeden, der sich unrechtmäßigen Gewinn verschafft; der Gewinn nimmt seinen Besitzern die Seele.\tUnrechtmäßiger Gewinn ist ausdrücklich genannt; er nimmt seinen Besitzern die Seele.",
+    "reason": "Replace ambiguous and unnatural Räubers von Gewinn with the explicit unjust-gain action and its referent."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/20_PRO/PRO_022.tsv",
+    "old_row": "14\tEine tiefe Grube ist der Mund fremder Frauen; wem der HERR zürnt, wird dort hineinfallen.\tGenannt sind fremde Frauen.",
+    "new_row": "14\tEine tiefe Grube ist der Mund fremder Frauen; wem der HERR zürnt, der wird dort hineinfallen.\tGenannt sind fremde Frauen.",
+    "reason": "Native grammar: restore main-clause subject or correct predicate/case construction."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/20_PRO/PRO_022.tsv",
+    "old_row": "14\tГлубокая яма — уста чужих женщин; на кого негодует Господь, упадет туда.\tНазваны чужие женщины.",
+    "new_row": "14\tГлубокая яма — уста чужих женщин; тот, на кого негодует Господь, упадет туда.\tНазваны чужие женщины.",
+    "reason": "Native grammar: restore main-clause subject or correct predicate/case construction."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/20_PRO/PRO_022.tsv",
+    "old_row": "7\tБогатый будет властвовать над бедными, и раб заемщик человеку дающему взаймы.\tБедные стоят во множественном числе.",
+    "new_row": "7\tБогатый будет властвовать над бедными, и заемщик — раб человека, дающего взаймы.\tБедные стоят во множественном числе.",
+    "reason": "Native grammar: restore main-clause subject or correct predicate/case construction."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/20_PRO/PRO_022.tsv",
+    "old_row": "27\tЕсли у тебя нет чем платить, зачем ему брать постель твою из-под тебя?\tБерущий постель обозначен единственным числом.",
+    "new_row": "27\tЕсли тебе нечем платить, зачем ему брать постель твою из-под тебя?\tБерущий постель обозначен единственным числом.",
+    "reason": "Native grammar: restore main-clause subject or correct predicate/case construction."
+  }
+]

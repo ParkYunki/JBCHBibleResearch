@@ -1,0 +1,80 @@
+{
+  "book": "20_PRO",
+  "created_files": 39,
+  "created": [
+    "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/20_PRO/PRO_001_1.tsv",
+    "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/20_PRO/PRO_001_1.tsv",
+    "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/en/20_PRO/PRO_001_1.tsv",
+    "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/20_PRO/PRO_001_2.tsv",
+    "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/20_PRO/PRO_001_2.tsv",
+    "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/en/20_PRO/PRO_001_2.tsv",
+    "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/20_PRO/PRO_002.tsv",
+    "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/20_PRO/PRO_002.tsv",
+    "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/en/20_PRO/PRO_002.tsv",
+    "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/20_PRO/PRO_003_1.tsv",
+    "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/20_PRO/PRO_003_1.tsv",
+    "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/en/20_PRO/PRO_003_1.tsv",
+    "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/20_PRO/PRO_003_2.tsv",
+    "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/20_PRO/PRO_003_2.tsv",
+    "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/en/20_PRO/PRO_003_2.tsv",
+    "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/20_PRO/PRO_004.tsv",
+    "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/20_PRO/PRO_004.tsv",
+    "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/en/20_PRO/PRO_004.tsv",
+    "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/20_PRO/PRO_005.tsv",
+    "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/20_PRO/PRO_005.tsv",
+    "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/en/20_PRO/PRO_005.tsv",
+    "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/20_PRO/PRO_006_1.tsv",
+    "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/20_PRO/PRO_006_1.tsv",
+    "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/en/20_PRO/PRO_006_1.tsv",
+    "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/20_PRO/PRO_006_2.tsv",
+    "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/20_PRO/PRO_006_2.tsv",
+    "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/en/20_PRO/PRO_006_2.tsv",
+    "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/20_PRO/PRO_007.tsv",
+    "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/20_PRO/PRO_007.tsv",
+    "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/20_PRO/PRO_008_1.tsv",
+    "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/20_PRO/PRO_008_1.tsv",
+    "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/20_PRO/PRO_008_2.tsv",
+    "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/20_PRO/PRO_008_2.tsv",
+    "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/20_PRO/PRO_009.tsv",
+    "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/20_PRO/PRO_009.tsv",
+    "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/20_PRO/PRO_010_1.tsv",
+    "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/20_PRO/PRO_010_1.tsv",
+    "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/20_PRO/PRO_010_2.tsv",
+    "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/20_PRO/PRO_010_2.tsv"
+  ],
+  "chapters_done": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10
+  ],
+  "status": "assigned_ranges_complete",
+  "scope": [
+    "1–10 de/ru",
+    "1–6 en"
+  ],
+  "created_rows": 751,
+  "per_language": {
+    "de": {
+      "files": 15,
+      "rows": 288
+    },
+    "ru": {
+      "files": 15,
+      "rows": 288
+    },
+    "en": {
+      "files": 9,
+      "rows": 175
+    }
+  },
+  "qa_candidates": 7,
+  "cross_root_en7_10_candidates": 2,
+  "official_check": "root after book completion"
+}

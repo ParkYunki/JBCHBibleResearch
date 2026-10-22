@@ -94,8 +94,8 @@ enum TranslationImportService {
     ) throws -> TranslationRegistry {
         let trimmedCode = code.trimmingCharacters(in: .whitespacesAndNewlines)
         let trimmedName = displayName.trimmingCharacters(in: .whitespacesAndNewlines)
-        guard !trimmedCode.isEmpty else { throw TranslationImportError.missingRequiredField("번역본 코드") }
-        guard !trimmedName.isEmpty else { throw TranslationImportError.missingRequiredField("표시 이름") }
+        guard !trimmedCode.isEmpty else { throw TranslationImportError.missingRequiredField(String(localized: "번역본 코드")) }
+        guard !trimmedName.isEmpty else { throw TranslationImportError.missingRequiredField(String(localized: "표시 이름")) }
 
         // CloudKit이 @Attribute(.unique)를 지원하지 않아 DB 레벨 중복 방지가 불가능하므로 저장 전에 직접 검사한다
         // (`TranslationBootstrap.ensureBundledTranslationRegistered`와 같은 패턴).

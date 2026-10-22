@@ -1,0 +1,42 @@
+{
+  "generated_through": 14,
+  "qa": "complete",
+  "reviewed_chapters": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14
+  ],
+  "owned_en_chapters": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11
+  ],
+  "root_owned_en_chapters": [
+    12,
+    13,
+    14
+  ],
+  "qa_rows": 27,
+  "qa_path": ".literalgen-state/de-en-ru/exo-a-qa.json",
+  "structural_path": ".literalgen-state/de-en-ru/exo-a-structural.json",
+  "output_files_modified": false
+}

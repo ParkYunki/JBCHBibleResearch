@@ -1,0 +1,14 @@
+[
+  {
+    "path": "Tools/LiteralGen/outputs/de/06_JOS/JOS_024_1.tsv",
+    "verse": 13,
+    "old_row": "13\tUnd ich gab euch ein Land, an dem du nicht gearbeitet hattest, und Städte, die ihr nicht gebaut hattet, und ihr wohnt darin; Weinberge und Ölbäume, die ihr nicht gepflanzt hattet, von ihnen esst ihr.‘\tBeim Bearbeiten des Landes steht „du“, danach beim Städtebau „ihr“; die Vorlage glättet alles zur Mehrzahl.",
+    "new_row": "13\tUnd ich gab euch ein Land, an dem du nicht gearbeitet hattest, und Städte, die ihr nicht gebaut hattet, und ihr wohntet darin; Weinberge und Ölbäume, die ihr nicht gepflanzt hattet, von ihnen esst ihr.‘\tBeim Bearbeiten des Landes steht „du“, danach beim Städtebau „ihr“; die Vorlage glättet alles zur Mehrzahl."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/06_JOS/JOS_024_1.tsv",
+    "verse": 13,
+    "old_row": "13\tИ дал Я вам землю, над которой ты не трудился, и города, которых вы не строили, и вы живёте в них; виноградники и маслины, которых вы не насаждали, — из них вы едите“.\tНазваны виноградники и маслины, а существительное «плоды» подразумевается, но не написано.",
+    "new_row": "13\tИ дал Я вам землю, над которой ты не трудился, и города, которых вы не строили, и вы жили в них; виноградники и маслины, которых вы не насаждали, — из них вы едите“.\tНазваны виноградники и маслины, а существительное «плоды» подразумевается, но не написано."
+  }
+]

@@ -1,0 +1,149 @@
+[
+  {
+    "path": "Tools/LiteralGen/outputs/ru/09_1SA/1SA_012.tsv",
+    "verse": 3,
+    "old_row": "3\tВот я! Свидетельствуйте против меня перед Господом и перед Его помазанником: чей вол я взял, и чей осёл я взял, и кого я угнетал, кого сокрушал? И из чьей руки я взял выкуп и прикрыл им свои глаза? И я возвращу вам».\tСохраняется образ руки; глагол взятия повторён при воле и осле.",
+    "new_row": "3\tВот я! Свидетельствуйте против меня перед Господом и перед Его помазанником: чьего вола я взял, и чьего осла я взял, и кого я угнетал, кого сокрушал? И из чьей руки я взял выкуп и прикрыл им свои глаза? И я возвращу вам».\tСохраняется образ руки; глагол взятия повторён при воле и осле.",
+    "reason": "Native grammar or definite wording correction"
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/09_1SA/1SA_012.tsv",
+    "verse": 21,
+    "old_row": "21\tUnd weicht nicht ab, um dem Nichtigen nachzufolgen, das nicht nützt und nicht rettet, denn nichtig sind sie.\tDie Verben für Nützen und Retten sowie das letzte Pronomen stehen im Plural.",
+    "new_row": "21\tUnd weicht nicht ab, um den Nichtigkeiten nachzufolgen, die nicht nützen und nicht retten, denn nichtig sind sie.\tDie Verben für Nützen und Retten sowie das letzte Pronomen stehen im Plural.",
+    "reason": "Use native plural antecedent to preserve the explicit plural verbs and pronoun."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/09_1SA/1SA_012.tsv",
+    "verse": 21,
+    "old_row": "21\tИ не уклоняйтесь вслед за пустотой, которая не приносит пользы и не избавляет, ибо они пустота.\tСуществительного «боги» нет; пустота названа дважды.",
+    "new_row": "21\tИ не уклоняйтесь вслед за пустыми вещами, которые не приносят пользы и не избавляют, ибо они пустота.\tСуществительного «боги» нет; пустота названа дважды.",
+    "reason": "Native grammatical supplement preserves the plural verbs and pronoun."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/09_1SA/1SA_012.tsv",
+    "verse": 25,
+    "old_row": "25\tА если вы непременно будете делать зло, то и вы и ваш царь будете сметены».\tБöзлодействие усилено повтором глагольного корня; конец выражен страдательной формой.",
+    "new_row": "25\tА если вы непременно будете делать зло, то и вы и ваш царь будете сметены».\tДелание зла усилено повтором глагольного корня; конец выражен страдательной формой.",
+    "reason": "Native grammar or definite wording correction"
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/09_1SA/1SA_013.tsv",
+    "verse": 17,
+    "old_row": "17\tUnd die Streifschar zog aus dem Lager der Philister in drei Abteilungen hinaus; eine Abteilung wandte sich auf den Weg nach Ophra ins Land Sual.\tDie verhe erende Schar ist als Subjekt genannt, die drei Abteilungen beschreiben ihre Gliederung.",
+    "new_row": "17\tUnd die Streifschar zog aus dem Lager der Philister in drei Abteilungen hinaus; eine Abteilung wandte sich auf den Weg nach Ophra ins Land Sual.\tDie verheerende Schar ist als Subjekt genannt, die drei Abteilungen beschreiben ihre Gliederung.",
+    "reason": "Native grammar or definite wording correction"
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/09_1SA/1SA_014_1.tsv",
+    "verse": 24,
+    "old_row": "24\tИ мужи Израиля были угнетены в тот день; и Саул заклял народ: «Проклят муж, который поест хлеба до вечера, пока я не отомщу моим врагам!» И весь народ не вкусил хлеба.\tБрот назван дважды; состояние людей выражено страдательным глаголом угнетения.",
+    "new_row": "24\tИ мужи Израиля были угнетены в тот день; и Саул заклял народ: «Проклят муж, который поест хлеба до вечера, пока я не отомщу моим врагам!» И весь народ не вкусил хлеба.\tХлеб назван дважды; состояние людей выражено страдательным глаголом угнетения.",
+    "reason": "Native grammar or definite wording correction"
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/09_1SA/1SA_014_2.tsv",
+    "verse": 47,
+    "old_row": "47\tИ Саул овладел царской властью над Израилем и воевал кругом со всеми своими врагами, с Моавом и с сынами Аммона и с Едомом и с царями Совы и с Филистимлянами; и везде, куда ни обращался, налагал осуждение.\tВефор не назван; властью овладели. Моав и Едом сохранены как имена.",
+    "new_row": "47\tИ Саул овладел царской властью над Израилем и воевал кругом со всеми своими врагами, с Моавом и с сынами Аммона и с Едомом и с царями Совы и с Филистимлянами; и везде, куда ни обращался, выносил осуждение.\tВефор не назван; Саул овладел царством. Моав и Едом сохранены как имена.",
+    "reason": "Native grammar or definite wording correction"
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/09_1SA/1SA_015_1.tsv",
+    "verse": 29,
+    "old_row": "29\tUnd auch der Ruhm Israels wird nicht lügen und sich nicht gereuen lassen, denn er ist kein Mensch, dass er sich gereuen ließe.“\tNah am Hebräischen.",
+    "new_row": "29\tUnd auch der Ruhm Israels wird nicht lügen und nicht bereuen, denn er ist kein Mensch, dass er bereute.“\tNah am Hebräischen.",
+    "reason": "Native grammar or definite wording correction"
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/09_1SA/1SA_015_1.tsv",
+    "verse": 23,
+    "old_row": "23\tИбо непокорность — грех гадания, а упорство — беззаконие и терафимы. За то, что ты отверг слово Господа, Он отверг тебя быть царём».\tТерафимы названы конкретно; слова над Израилем в конце отсутствуют.",
+    "new_row": "23\tИбо непокорность — грех гадания, а упорство — беззаконие и терафимы. За то, что ты отверг слово Господа, Он отверг тебя как царя».\tТерафимы названы конкретно; слова над Израилем в конце отсутствуют.",
+    "reason": "Native grammar or definite wording correction"
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/09_1SA/1SA_015_1.tsv",
+    "verse": 26,
+    "old_row": "26\tИ Самуил сказал Саулу: «Я не вернусь с тобой, ибо ты отверг слово Господа, и Господь отверг тебя от того, чтобы быть царём над Израилем».\tБлизко к еврейскому.",
+    "new_row": "26\tИ Самуил сказал Саулу: «Я не вернусь с тобой, ибо ты отверг слово Господа, и Господь отверг тебя, чтобы ты не был царём над Израилем».\tБлизко к еврейскому.",
+    "reason": "Native grammar or definite wording correction"
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/en/09_1SA/1SA_015_1.tsv",
+    "verse": 27,
+    "old_row": "27\t=\tThe Hebrew leaves the person grabbing unnamed and uses a passive tearing; BSB explicitly names Saul.",
+    "new_row": "27\t=\tThe Hebrew leaves the person grabbing unnamed; BSB explicitly names Saul.",
+    "reason": "Native grammar or definite wording correction"
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/en/09_1SA/1SA_015_1.tsv",
+    "verse": 28,
+    "old_row": "28\t=\tThe Hebrew explicitly repeats Samuel’s name; BSB does likewise, with the same central wording.",
+    "new_row": "28\t=\tClose to the Hebrew.",
+    "reason": "Native grammar or definite wording correction"
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/09_1SA/1SA_017_2.tsv",
+    "verse": 34,
+    "old_row": "34\tUnd David sprach zu Saul: „Dein Knecht war für seinen Vater Hirte beim Kleinvieh. Und wenn der Löwe und der Bär kamen und ein Schaf aus der Herde wegtrugen,\tNah am Hebräischen.",
+    "new_row": "34\tUnd David sprach zu Saul: „Dein Knecht war für seinen Vater Hirte beim Kleinvieh. Und es kam der Löwe, auch der Bär, und trug ein Schaf aus der Herde weg,\tNah am Hebräischen.",
+    "reason": "Preserve singular coming and carrying verbs while keeping an additive mention of the bear."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/09_1SA/1SA_017_2.tsv",
+    "verse": 34,
+    "old_row": "34\tИ сказал Давид Саулу: «Твой раб был у своего отца пастухом при мелком скоте. И когда приходили лев и медведь и уносили овцу из стада,\tБлизко к еврейскому.",
+    "new_row": "34\tИ сказал Давид Саулу: «Твой раб был у своего отца пастухом при мелком скоте. И приходил лев, а также медведь, и уносил овцу из стада,\tБлизко к еврейскому.",
+    "reason": "Preserve singular narrative verbs with a native additive construction."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/09_1SA/1SA_017_2.tsv",
+    "verse": 39,
+    "old_row": "39\tИ опоясал Давид его мечом поверх своих одежд и попробовал ходить, ибо не испытал этого. И сказал Давид Саулу: «Не могу я ходить в этом, ибо я этого не испытал». И снял Давид это с себя.\tБлизко к еврейскому.",
+    "new_row": "39\tИ опоясался Давид его мечом поверх своих одежд и попробовал ходить, ибо не испытал этого. И сказал Давид Саулу: «Не могу я ходить в этом, ибо я этого не испытал». И снял Давид это с себя.\tБлизко к еврейскому.",
+    "reason": "Native grammar or definite wording correction"
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/09_1SA/1SA_017_2.tsv",
+    "verse": 40,
+    "old_row": "40\tUnd er nahm seinen Stab in seine Hand und wählte sich fünf glatte Steine aus dem Bach und legte sie in das Hirtengerät, das er hatte, und zwar in den Beutel; und seine Schleuder war in seiner Hand. Und er näherte sich dem Philister.\tDas Spielen der Schleuder wird nicht erzählt; sie ist in seiner Hand.",
+    "new_row": "40\tUnd er nahm seinen Stab in seine Hand und wählte sich fünf glatte Steine aus dem Bach und legte sie in seine Hirtentasche, und zwar in den Beutel; und seine Schleuder war in seiner Hand. Und er näherte sich dem Philister.\tNah am Hebräischen.",
+    "reason": "The contextual container is a native bag; remove an incorrect difference about playing a sling."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/09_1SA/1SA_017_2.tsv",
+    "verse": 40,
+    "old_row": "40\tИ взял свой посох в свою руку, и выбрал себе пять гладких камней из ручья, и положил их в свой пастушеский сосуд, то есть в сумку; и праща его была в его руке. И он подошёл к Филистимлянину.\tСумка названа местом, куда положены камни; праща находится в руке.",
+    "new_row": "40\tИ взял свой посох в свою руку, и выбрал себе пять гладких камней из ручья, и положил их в свою пастушескую сумку, в котомку; и праща его была в его руке. И он подошёл к Филистимлянину.\tСумка названа местом, куда положены камни; праща находится в руке.",
+    "reason": "Use a native contextual container noun rather than an unintended hard vessel."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/09_1SA/1SA_017_2.tsv",
+    "verse": 49,
+    "old_row": "49\tUnd David streckte seine Hand in das Gerät und nahm einen Stein daraus und schleuderte und traf den Philister an seiner Stirn; und der Stein sank in seine Stirn ein, und er fiel auf sein Gesicht zur Erde.\tNah am Hebräischen.",
+    "new_row": "49\tUnd David streckte seine Hand in die Tasche und nahm einen Stein daraus und schleuderte und traf den Philister an seiner Stirn; und der Stein sank in seine Stirn ein, und er fiel auf sein Gesicht zur Erde.\tNah am Hebräischen.",
+    "reason": "Native grammar or definite wording correction"
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/09_1SA/1SA_017_2.tsv",
+    "verse": 49,
+    "old_row": "49\tИ простёр Давид свою руку в сосуд, и взял оттуда камень, и метнул из пращи, и поразил Филистимлянина в лоб. И камень погрузился в его лоб, и он упал лицом на землю.\tБлизко к еврейскому.",
+    "new_row": "49\tИ простёр Давид свою руку в сумку, и взял оттуда камень, и метнул из пращи, и поразил Филистимлянина в лоб. И камень погрузился в его лоб, и он упал лицом на землю.\tБлизко к еврейскому.",
+    "reason": "Native grammar or definite wording correction"
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/09_1SA/1SA_018.tsv",
+    "verse": 2,
+    "old_row": "2\tИ взял его Саул в тот день и не позволил ему возвратиться в дом своего отца.\tБлизко к еврейскому.",
+    "new_row": "2\tИ взял его Саул в тот день и не позволил ему возвратиться в дом его отца.\tБлизко к еврейскому.",
+    "reason": "Avoid a reflexive father reference attaching to Saul, the governing subject."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/en/09_1SA/1SA_012.tsv",
+    "verse": 6,
+    "old_row": "6\t=\tThe Hebrew uses the verb “made” for Moses and Aaron; BSB renders it “appointed”.",
+    "new_row": "6\t=\tClose to the Hebrew.",
+    "reason": "The Hebrew making verb also permits appointment in this context; avoid an uncertain lexical contrast."
+  }
+]

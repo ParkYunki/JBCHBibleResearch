@@ -1,0 +1,27 @@
+[
+  {
+    "path": "Tools/LiteralGen/outputs/ru/15_EZR/EZR_005.tsv",
+    "old_row": "5\tИ око их Бога было на старейшинах иудеев; и они не останавливали их, пока дело не пошло бы к Дарию и затем не возвратили бы письмо об этом.\tНазвано возвращение письма.",
+    "new_row": "5\tИ око их Бога было на старейшинах иудеев; и они не останавливали их, пока дело не придёт к Дарию и затем не пришлют обратно письмо об этом.\tНазвано возвращение письма."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/15_EZR/EZR_006.tsv",
+    "old_row": "8\tИ от меня дано повеление о том, что вы должны делать с этими старейшинами иудеев для строительства этого дома Бога: из имущества царя, из подати заречья, пусть тщательно выдаётся расход этим мужам, чтобы не остановилось.\tРасход выражен пассивно; тщательно сохранено.",
+    "new_row": "8\tИ от меня дано повеление о том, что вы должны делать с этими старейшинами иудеев для строительства этого дома Бога: из имущества царя, из подати заречья, пусть тщательно выдаётся расход этим мужам, чтобы не останавливать работу.\tРасход выражен пассивно; тщательно сохранено."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/15_EZR/EZR_007.tsv",
+    "old_row": "20\tИ остальные нужды дома твоего Бога, которые выпадет тебе дать, дай из дома сокровищ царя.\tСохранена необходимость дать.",
+    "new_row": "20\tИ остальные необходимые вещи для дома твоего Бога, которые выпадет тебе дать, дай из дома сокровищ царя.\tСохранена необходимость дать."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/15_EZR/EZR_007.tsv",
+    "old_row": "25\tUnd du, Esra, setze nach der Weisheit deines Gottes in deiner Hand Richter und Rechtsprecher ein, die das ganze Volk jenseits des Flusses richten sollen, alle, die die Gesetze deines Gottes kennen; und wer nicht kennt, den sollt ihr unterweisen.\tGesetze stehen im Plural.",
+    "new_row": "25\tUnd du, Esra, setze nach der Weisheit deines Gottes in deiner Hand Richter und Rechtsprecher ein, die das ganze Volk jenseits des Flusses richten sollen, alle, die die Gesetze deines Gottes kennen; und wer sie nicht kennt, den sollt ihr unterweisen.\tGesetze stehen im Plural."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/15_EZR/EZR_007.tsv",
+    "old_row": "25\tИ ты, Ездра, по мудрости твоего Бога, которая в твоей руке, назначь правителей и судей, чтобы они судили весь народ за рекой, всех знающих законы твоего Бога; и кто не знает, тех учите.\tБлизко к еврейскому.",
+    "new_row": "25\tИ ты, Ездра, по мудрости твоего Бога, которая в твоей руке, назначь правителей и судей, чтобы они судили весь народ за рекой, всех знающих законы твоего Бога; и кто не знает, того учите.\tБлизко к еврейскому."
+  }
+]

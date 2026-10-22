@@ -1,0 +1,37 @@
+{
+  "created": [
+    "Tools/LiteralGen/outputs/de/08_RUT/RUT_001.tsv",
+    "Tools/LiteralGen/outputs/ru/08_RUT/RUT_001.tsv"
+  ],
+  "chapters_complete": [
+    [
+      1,
+      "de"
+    ],
+    [
+      1,
+      "ru"
+    ]
+  ],
+  "generation_complete": true,
+  "native_qa_complete": true,
+  "qa_file": ".literalgen-state/de-en-ru/rut-a-qa.json",
+  "qa_candidates": 1,
+  "validation": {
+    "files": 2,
+    "rows": 44,
+    "format_errors": 0,
+    "quote_imbalances": 0,
+    "protected_files": 7375,
+    "protected_mismatches": 0
+  },
+  "root_english_independent_review": {
+    "chapters": [
+      1
+    ],
+    "rows": 22,
+    "qa_file": ".literalgen-state/de-en-ru/rut-a-root-en-qa.json",
+    "qa_candidates": 0
+  },
+  "qa_complete": true
+}

@@ -1,0 +1,37 @@
+[
+  {
+    "path": "Tools/LiteralGen/outputs/de/20_PRO/PRO_011_2.tsv",
+    "old_row": "31\tSiehe, ein Gerechter wird auf Erden vergolten, wie viel mehr ein Frevler und Sünder!\tVergeltung statt ausdrücklich notwendigem Leiden; Beginn mit „siehe“.",
+    "new_row": "31\tSiehe, einem Gerechten wird auf Erden vergolten, wie viel mehr einem Frevler und Sünder!\tVergeltung statt ausdrücklich notwendigem Leiden; Beginn mit „siehe“."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/20_PRO/PRO_012.tsv",
+    "old_row": "27\tEin Träger brät sein Wild nicht, aber der Besitz eines fleißigen Menschen ist kostbar.\tDas Braten des Wilds ist ausdrücklich genannt; der Besitz wird als kostbar bezeichnet.",
+    "new_row": "27\tEin träger Mensch brät sein Wild nicht, aber der Besitz eines fleißigen Menschen ist kostbar.\tDas Braten des Wilds ist ausdrücklich genannt; der Besitz wird als kostbar bezeichnet."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/20_PRO/PRO_013.tsv",
+    "old_row": "13\tWer ein Wort verachtet, wird dadurch geschädigt, aber wer ein Gebot fürchtet, der wird vergolten.\tNah am Hebräischen.",
+    "new_row": "13\tWer ein Wort verachtet, wird dadurch geschädigt, aber wer ein Gebot fürchtet, dem wird vergolten.\tNah am Hebräischen."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/20_PRO/PRO_017.tsv",
+    "old_row": "12\tEher einem Bären, der seiner Jungen beraubt ist, bei einem Mann begegnen als einem Toren in seiner Torheit.\tNah am Hebräischen.",
+    "new_row": "12\tEinem Mann begegne eher ein Bär, der seiner Jungen beraubt ist, als ein Tor in seiner Torheit.\tNah am Hebräischen."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/20_PRO/PRO_017.tsv",
+    "old_row": "20\tEin Verkehrter des Herzens findet kein Gutes, und wer sich mit seiner Zunge verkehrt, fällt ins Unglück.\tEine Person mit verkehrtem Herzen ist Subjekt.",
+    "new_row": "20\tEin Verkehrter des Herzens findet kein Gutes, und wer verkehrter Zunge ist, fällt ins Unglück.\tEine Person mit verkehrtem Herzen ist Subjekt."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/20_PRO/PRO_017.tsv",
+    "old_row": "20\tИзвращённый сердцем не найдёт добра, а извращающийся своим языком упадёт в беду.\tВо второй строке действует человек с таким языком, не сам язык.",
+    "new_row": "20\tИзвращённый сердцем не найдёт добра, а извращённый языком упадёт в беду.\tВо второй строке действует человек с таким языком, не сам язык."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/20_PRO/PRO_018.tsv",
+    "old_row": "16\tDas Geschenk eines Menschen macht ihm weit und führt ihn vor Große.\tNah am Hebräischen.",
+    "new_row": "16\tDas Geschenk eines Menschen macht ihm Raum und führt ihn vor Große.\tNah am Hebräischen."
+  }
+]

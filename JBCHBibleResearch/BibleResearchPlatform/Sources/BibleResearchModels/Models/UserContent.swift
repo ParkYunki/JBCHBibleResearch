@@ -43,6 +43,20 @@ public final class UserMemo {
     public var chapter: Int = 1
     public var verse: Int?
 
+    /// 절 범위의 끝 절(같은 장 안). nil이면 `verse` 한 절(`verse`도 nil이면 장 전체)이다. 기본값이 있는 옵셔널 저장 프로퍼티 추가라
+    /// SwiftData 가벼운 마이그레이션으로 처리되며 기존 데이터는 nil이다(2026-10-13, 말씀 노트의 "관련 말씀 절 범위").
+    /// ⚠️ `UserMemo.rangeStart/rangeEnd`는 절 안 글자 오프셋(표현 메모용)이라 이 값과 무관하다.
+    public var verseEnd: Int?
+
+    /// 이 항목이 가리키는 마지막 절 — 범위가 아니면 `verse`와 같다. `verse`가 nil이면 nil.
+    public var lastVerse: Int? { verse.map { max($0, verseEnd ?? $0) } }
+
+    /// `number`절이 이 항목의 절(범위)에 들어가는지. 장 전체(`verse == nil`)는 어떤 절도 덮지 않는다(기존 `verse == n` 필터와 같은 의미).
+    public func coversVerse(_ number: Int) -> Bool {
+        guard let verse else { return false }
+        return number >= verse && number <= max(verse, verseEnd ?? verse)
+    }
+
     // 절 안 특정 표현에 대한 메모용 앵커(전부 옵셔널). nil이면 "절 전체" 메모, 채워지면 "그 표현" 메모다.
     // 앵커 규칙(오프셋 단위, 자가 치유용 스냅샷)은 `VerseAnnotations.swift` 상단 주석과 동일하다.
     public var rangeStart: Int?
@@ -74,6 +88,7 @@ public final class UserMemo {
         bookId: Int,
         chapter: Int,
         verse: Int? = nil,
+        verseEnd: Int? = nil,
         rangeStart: Int? = nil,
         rangeEnd: Int? = nil,
         annotationTranslationCode: String? = nil,
@@ -90,6 +105,7 @@ public final class UserMemo {
         self.bookId = bookId
         self.chapter = chapter
         self.verse = verse
+        self.verseEnd = verseEnd
         self.rangeStart = rangeStart
         self.rangeEnd = rangeEnd
         self.annotationTranslationCode = annotationTranslationCode
@@ -114,6 +130,20 @@ public final class VerseSummary {
     public var chapter: Int = 1
     public var verse: Int?
 
+    /// 절 범위의 끝 절(같은 장 안). nil이면 `verse` 한 절(`verse`도 nil이면 장 전체)이다. 기본값이 있는 옵셔널 저장 프로퍼티 추가라
+    /// SwiftData 가벼운 마이그레이션으로 처리되며 기존 데이터는 nil이다(2026-10-13, 말씀 노트의 "관련 말씀 절 범위").
+    /// ⚠️ `UserMemo.rangeStart/rangeEnd`는 절 안 글자 오프셋(표현 메모용)이라 이 값과 무관하다.
+    public var verseEnd: Int?
+
+    /// 이 항목이 가리키는 마지막 절 — 범위가 아니면 `verse`와 같다. `verse`가 nil이면 nil.
+    public var lastVerse: Int? { verse.map { max($0, verseEnd ?? $0) } }
+
+    /// `number`절이 이 항목의 절(범위)에 들어가는지. 장 전체(`verse == nil`)는 어떤 절도 덮지 않는다(기존 `verse == n` 필터와 같은 의미).
+    public func coversVerse(_ number: Int) -> Bool {
+        guard let verse else { return false }
+        return number >= verse && number <= max(verse, verseEnd ?? verse)
+    }
+
     public var contentHtml: String = ""
     public var contentText: String = ""
 
@@ -135,6 +165,7 @@ public final class VerseSummary {
         bookId: Int,
         chapter: Int,
         verse: Int? = nil,
+        verseEnd: Int? = nil,
         contentHtml: String = "",
         contentText: String = "",
         pendingIndexRefresh: Bool = false,
@@ -146,6 +177,7 @@ public final class VerseSummary {
         self.bookId = bookId
         self.chapter = chapter
         self.verse = verse
+        self.verseEnd = verseEnd
         self.contentHtml = contentHtml
         self.contentText = contentText
         self.pendingIndexRefresh = pendingIndexRefresh

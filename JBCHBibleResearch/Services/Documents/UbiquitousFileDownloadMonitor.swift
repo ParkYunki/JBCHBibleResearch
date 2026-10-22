@@ -84,7 +84,7 @@ final class UbiquitousFileDownloadMonitor {
         do {
             try FileManager.default.startDownloadingUbiquitousItem(at: url)
         } catch {
-            onUpdate(.failed("다운로드를 시작할 수 없습니다: \(error.localizedDescription)"))
+            onUpdate(.failed(String(localized: "다운로드를 시작할 수 없습니다: \(error.localizedDescription)")))
             return
         }
 

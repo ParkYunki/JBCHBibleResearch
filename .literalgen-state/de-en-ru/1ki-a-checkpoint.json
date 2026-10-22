@@ -1,0 +1,102 @@
+{
+  "created": [
+    "Tools/LiteralGen/outputs/de/11_1KI/1KI_001_1.tsv",
+    "Tools/LiteralGen/outputs/de/11_1KI/1KI_001_2.tsv",
+    "Tools/LiteralGen/outputs/ru/11_1KI/1KI_001_1.tsv",
+    "Tools/LiteralGen/outputs/ru/11_1KI/1KI_001_2.tsv",
+    "Tools/LiteralGen/outputs/en/11_1KI/1KI_001_1.tsv",
+    "Tools/LiteralGen/outputs/en/11_1KI/1KI_001_2.tsv",
+    "Tools/LiteralGen/outputs/de/11_1KI/1KI_002_1.tsv",
+    "Tools/LiteralGen/outputs/de/11_1KI/1KI_002_2.tsv",
+    "Tools/LiteralGen/outputs/ru/11_1KI/1KI_002_1.tsv",
+    "Tools/LiteralGen/outputs/ru/11_1KI/1KI_002_2.tsv",
+    "Tools/LiteralGen/outputs/en/11_1KI/1KI_002_1.tsv",
+    "Tools/LiteralGen/outputs/en/11_1KI/1KI_002_2.tsv",
+    "Tools/LiteralGen/outputs/de/11_1KI/1KI_003.tsv",
+    "Tools/LiteralGen/outputs/ru/11_1KI/1KI_003.tsv",
+    "Tools/LiteralGen/outputs/en/11_1KI/1KI_003.tsv",
+    "Tools/LiteralGen/outputs/de/11_1KI/1KI_004_1.tsv",
+    "Tools/LiteralGen/outputs/de/11_1KI/1KI_004_2.tsv",
+    "Tools/LiteralGen/outputs/ru/11_1KI/1KI_004_1.tsv",
+    "Tools/LiteralGen/outputs/ru/11_1KI/1KI_004_2.tsv",
+    "Tools/LiteralGen/outputs/de/11_1KI/1KI_005.tsv",
+    "Tools/LiteralGen/outputs/ru/11_1KI/1KI_005.tsv"
+  ],
+  "chapters_complete": [
+    [
+      1,
+      "de"
+    ],
+    [
+      1,
+      "ru"
+    ],
+    [
+      1,
+      "en"
+    ],
+    [
+      2,
+      "de"
+    ],
+    [
+      2,
+      "ru"
+    ],
+    [
+      2,
+      "en"
+    ],
+    [
+      3,
+      "de"
+    ],
+    [
+      3,
+      "ru"
+    ],
+    [
+      3,
+      "en"
+    ],
+    [
+      4,
+      "de"
+    ],
+    [
+      4,
+      "ru"
+    ],
+    [
+      5,
+      "de"
+    ],
+    [
+      5,
+      "ru"
+    ]
+  ],
+  "status": "complete",
+  "validation": {
+    "own_files": 21,
+    "own_rows": 485,
+    "own_full_qa": true,
+    "own_qa_candidates": 13,
+    "root_en_files": 7,
+    "root_en_rows": 141,
+    "root_en_full_qa": true,
+    "root_en_candidates": 1,
+    "root_native_files": 4,
+    "root_native_rows": 102,
+    "root_native_full_qa": true,
+    "root_native_candidates": 0,
+    "protected_files": 7603,
+    "protected_unchanged": true,
+    "tsv_direct_changes": false
+  },
+  "qa_files": [
+    "1ki-a-qa.json",
+    "1ki-a-root-en-qa.json",
+    "1ki-a-root-native-qa.json"
+  ]
+}

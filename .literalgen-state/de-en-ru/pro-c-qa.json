@@ -1,0 +1,87 @@
+[
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/20_PRO/PRO_023_1.tsv",
+    "old_row": "15\tMein Sohn, wenn dein Herz weise geworden ist, wird mein Herz sich freuen, auch ich.\tAuch ich wird zusätzlich genannt.",
+    "new_row": "15\tMein Sohn, wenn dein Herz weise geworden ist, wird mein Herz sich freuen, auch ich werde mich freuen.\tAuch ich wird zusätzlich genannt."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/20_PRO/PRO_023_1.tsv",
+    "old_row": "15\tСын мой, если сердце твое стало мудрым, возрадуется сердце мое, и я.\tДобавлено отдельное и я.",
+    "new_row": "15\tСын мой, если сердце твое стало мудрым, возрадуется сердце мое, и я возрадуюсь.\tДобавлено отдельное и я."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/20_PRO/PRO_025.tsv",
+    "old_row": "15\tDurch Länge des Zorns wird ein Anführer überredet, und eine weiche Zunge wird einen Knochen zerbrechen.\tGenannt sind Überreden und ein Knochen.",
+    "new_row": "15\tDurch Langsamkeit zum Zorn wird ein Anführer überredet, und eine weiche Zunge wird einen Knochen zerbrechen.\tGenannt sind Überreden und ein Knochen."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/20_PRO/PRO_025.tsv",
+    "old_row": "20\tEin Kleid ablegend am kalten Tag, Essig auf Natron, und Lieder singend über einem bösen Herzen.\tGenannt sind Natron und ein böses Herz.",
+    "new_row": "20\tEiner, der am kalten Tag ein Kleid ablegt, Essig auf Natron und einer, der Lieder über einem bösen Herzen singt.\tGenannt sind Natron und ein böses Herz."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/20_PRO/PRO_025.tsv",
+    "old_row": "23\tNordwind gebiert Regen, und zürnende Gesichter eine verborgene Zunge.\tGenannt sind Regen und zürnende Gesichter.",
+    "new_row": "23\tNordwind gebiert Regen, und eine verborgene Zunge zürnende Gesichter.\tGenannt sind Regen und zürnende Gesichter."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/20_PRO/PRO_025.tsv",
+    "old_row": "23\tСеверный ветер рождает дождь, и негодующие лица — тайный язык.\tБлизко к еврейскому.",
+    "new_row": "23\tСеверный ветер рождает дождь, и тайный язык — негодующие лица.\tБлизко к еврейскому."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/20_PRO/PRO_026.tsv",
+    "old_row": "6\tFüße abschneidend, Gewalttat trinkend ist, wer Worte durch die Hand eines Toren sendet.\tGenannt sind Abschneiden der Füße und Trinken von Gewalt.",
+    "new_row": "6\tFüße schneidet ab und Gewalttat trinkt, wer Worte durch die Hand eines Toren sendet.\tGenannt sind Abschneiden der Füße und Trinken von Gewalt."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/20_PRO/PRO_026.tsv",
+    "old_row": "8\tWie einen Stein in eine Schleuder binden, so ist, wer einem Toren Ehre gibt.\tEin Stein wird in eine Schleuder gebunden.",
+    "new_row": "8\tWie einer, der einen Stein in eine Schleuder bindet, so ist, wer einem Toren Ehre gibt.\tEin Stein wird in eine Schleuder gebunden."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/20_PRO/PRO_028.tsv",
+    "old_row": "13\tWer seine Vergehen bedeckt, wird keinen Erfolg haben; wer bekennt und verlässt, wird erbarmt werden.\tGenannt ist das Bedecken von Vergehen im Plural.",
+    "new_row": "13\tWer seine Vergehen bedeckt, wird keinen Erfolg haben; wer bekennt und verlässt, dem wird Erbarmen zuteilwerden.\tGenannt ist das Bedecken von Vergehen im Plural."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/20_PRO/PRO_029.tsv",
+    "old_row": "11\tSeinen ganzen Geist lässt ein Tor heraus, aber ein Weiser stillt ihn zurück.\tDer Weise stillt den Geist zurück.",
+    "new_row": "11\tSeinen ganzen Geist lässt ein Tor heraus, aber ein Weiser hält ihn beruhigend zurück.\tDer Weise stillt den Geist zurück."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/20_PRO/PRO_029.tsv",
+    "old_row": "11\tВесь дух свой выпускает глупый, а мудрый сдерживает его назад.\tНазван весь дух вместо всего гнева; сохранено назад.",
+    "new_row": "11\tВесь дух свой выпускает глупый, а мудрый унимает его, удерживая назад.\tНазван весь дух вместо всего гнева; сохранено назад."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/20_PRO/PRO_029.tsv",
+    "old_row": "18\tWo kein Gesicht ist, wird ein Volk zügellos, aber wer das Gesetz bewahrt, glücklich ist er!\tGenannt ist ein Gesicht.",
+    "new_row": "18\tWo keine Schau ist, wird ein Volk zügellos, aber wer das Gesetz bewahrt, glücklich ist er!\tGenannt ist eine Schau."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/20_PRO/PRO_030_1.tsv",
+    "old_row": "3\tUnd ich habe Weisheit nicht gelernt, aber Erkenntnis der Heiligen werde ich erkennen.\tDer zweite Satz sagt positiv, dass ich Erkenntnis der Heiligen erkenne; Heilige steht im Plural.",
+    "new_row": "3\tUnd ich habe Weisheit nicht gelernt, und Erkenntnis der Heiligen kenne ich.\tDer zweite Satz sagt positiv, dass ich Erkenntnis der Heiligen kenne; Heilige steht im Plural."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/20_PRO/PRO_030_1.tsv",
+    "old_row": "3\tИ я не учился мудрости, но знание святых узнаю.\tВторое высказывание положительное: знание святых узнаю.",
+    "new_row": "3\tИ я не учился мудрости, и знание святых я знаю.\tВторое высказывание положительное: знание святых я знаю."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/20_PRO/PRO_031_1.tsv",
+    "old_row": "4\tNicht den Königen, Lamuel, nicht den Königen ist Wein zu trinken, und den Fürsten: „Wo ist Rauschtrank?“\tDer letzte Ausdruck fragt wo ist Rauschtrank.",
+    "new_row": "4\tNicht für Könige, Lamuel, nicht für Könige ist es, Wein zu trinken, und für Fürsten: „Wo ist Rauschtrank?“\tDer letzte Ausdruck fragt wo ist Rauschtrank."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/20_PRO/PRO_031_1.tsv",
+    "old_row": "8\tÖffne deinen Mund für den Stummen, für das Recht aller Söhne des Vergehens!\tDer Stumme steht im Singular; Söhne des Vergehens bleibt als Bild erhalten.",
+    "new_row": "8\tÖffne deinen Mund für den Stummen, für das Recht aller Söhne des Dahinschwindens!\tDer Stumme steht im Singular; Söhne des Dahinschwindens bleibt als Bild erhalten."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/20_PRO/PRO_031_1.tsv",
+    "old_row": "8\tОткрой уста твои для немого, для суда всех сынов проходящего!\tСохранён образ сынов проходящего вместо сирот.",
+    "new_row": "8\tОткрой уста твои для немого, для суда всех сынов исчезновения!\tСохранён образ сынов исчезновения вместо сирот."
+  }
+]

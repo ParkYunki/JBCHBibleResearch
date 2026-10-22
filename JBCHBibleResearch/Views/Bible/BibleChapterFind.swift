@@ -190,8 +190,8 @@ struct BibleChapterFindBar: View {
 
     private var statusText: String {
         if model.trimmedQuery.isEmpty { return "" }
-        if model.matchedVerses.isEmpty { return "일치 없음" }
-        return "\(model.currentIndex + 1)/\(model.matchedVerses.count)절"
+        if model.matchedVerses.isEmpty { return String(localized: "일치 없음") }
+        return String(localized: "\(model.currentIndex + 1)/\(model.matchedVerses.count)절")
     }
 }
 

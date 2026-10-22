@@ -19,7 +19,9 @@ import AppKit
 #endif
 
 enum EditorDefaultStyle {
-    static let fontName = "Paperlogy-3Light"
+    /// 페이퍼로지 3라이트. 태국어·러시아어·베트남어 화면에서는 같은 굵기의 다국어 글꼴(2026-10-12,
+    /// `BundledFonts.languageAdjustedDefaultFontName`) — 앱 언어는 실행 중 바뀌지 않으므로 한 번만 정한다.
+    static let fontName = BundledFonts.languageAdjustedDefaultFontName("Paperlogy-3Light")
     static let fontSize: CGFloat = 14
     static let textColorHex = "#2B2B2F"
     static let backgroundColorHex = "#F5F1E8"

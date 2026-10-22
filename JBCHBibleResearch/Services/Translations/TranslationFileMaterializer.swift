@@ -21,7 +21,7 @@ enum TranslationMaterializationError: Error, LocalizedError, CustomStringConvert
     var description: String {
         switch self {
         case .noLocalCopyAvailable:
-            return "이 번역본의 파일이 아직 이 기기에 없습니다(동기화 대기 중일 수 있습니다)."
+            return String(localized: "이 번역본의 파일이 아직 이 기기에 없습니다(동기화 대기 중일 수 있습니다).")
         }
     }
 
@@ -118,10 +118,10 @@ enum TranslationFileMaterializer {
 
         var label: String {
             switch self {
-            case .bundled: return "번들"
-            case .available: return "동기화됨"
-            case .pendingMaterialization: return "동기화 중…"
-            case .notYetSynced: return "동기화 대기 중"
+            case .bundled: return String(localized: "번들")
+            case .available: return String(localized: "동기화됨")
+            case .pendingMaterialization: return String(localized: "동기화 중…")
+            case .notYetSynced: return String(localized: "동기화 대기 중")
             }
         }
     }

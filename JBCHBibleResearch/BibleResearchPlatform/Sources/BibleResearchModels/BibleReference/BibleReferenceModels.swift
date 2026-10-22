@@ -106,21 +106,21 @@ public enum BibleReferenceError: Error, LocalizedError, CustomStringConvertible 
     public var description: String {
         switch self {
         case .resourceNotFound(let name):
-            return "번들 리소스를 찾을 수 없습니다: \(name)"
+            return String(localized: "번들 리소스를 찾을 수 없습니다: \(name)", bundle: .main)
         case .databaseOpenFailed(let path, let code):
-            return "SQLite 파일을 열지 못했습니다(code \(code)): \(path)"
+            return String(localized: "SQLite 파일을 열지 못했습니다(code \(Int(code))): \(path)", bundle: .main)
         case .statementPrepareFailed(let code):
-            return "SQLite 쿼리 준비에 실패했습니다(code \(code))"
+            return String(localized: "SQLite 쿼리 준비에 실패했습니다(code \(Int(code)))", bundle: .main)
         case .stepFailed(let code):
-            return "SQLite 쿼리 실행에 실패했습니다(code \(code))"
+            return String(localized: "SQLite 쿼리 실행에 실패했습니다(code \(Int(code)))", bundle: .main)
         case .versionCodeRequired:
-            return "이 파일은 여러 번역본을 포함하고 있어 versionCode를 반드시 지정해야 합니다."
+            return String(localized: "이 파일은 여러 번역본을 포함하고 있어 versionCode를 반드시 지정해야 합니다.", bundle: .main)
         case .unrecognizedSchema(let path):
-            return "알 수 없는 성경 데이터베이스 형식입니다(BibleVerses/Bible 테이블을 찾을 수 없음): \(path)"
+            return String(localized: "알 수 없는 성경 데이터베이스 형식입니다(BibleVerses/Bible 테이블을 찾을 수 없음): \(path)", bundle: .main)
         case .indexOpenFailed(let path, let code):
-            return "전문 검색 보조 인덱스를 열지 못했습니다(code \(code)): \(path)"
+            return String(localized: "전문 검색 보조 인덱스를 열지 못했습니다(code \(Int(code))): \(path)", bundle: .main)
         case .indexBuildFailed(let reason):
-            return "전문 검색 보조 인덱스 생성에 실패했습니다: \(reason)"
+            return String(localized: "전문 검색 보조 인덱스 생성에 실패했습니다: \(reason)", bundle: .main)
         }
     }
 

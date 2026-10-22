@@ -24,7 +24,7 @@ struct BookmarkListPopover: View {
 
     private static let relativeTimeFormatter: RelativeDateTimeFormatter = {
         let formatter = RelativeDateTimeFormatter()
-        formatter.locale = Locale(identifier: "ko_KR")
+        formatter.locale = .current
         formatter.unitsStyle = .short
         return formatter
     }()
@@ -34,13 +34,13 @@ struct BookmarkListPopover: View {
     /// 아이패드/macOS 팝오버는 영향이 없다.
     var body: some View {
         VStack(alignment: .leading, spacing: 0) {
-            BibleListLayerHeader(title: "책갈피", count: bookmarks.count, topInset: headerTopInset, onDismiss: onDismiss)
+            BibleListLayerHeader(title: String(localized: "책갈피"), count: bookmarks.count, topInset: headerTopInset, onDismiss: onDismiss)
             BibleListLayerDivider()
             if bookmarks.isEmpty {
                 BibleListLayerEmptyState(
                     systemImage: "bookmark",
-                    title: "책갈피가 없습니다",
-                    message: "책갈피 아이콘을 눌러 지금 위치를 저장하세요."
+                    title: String(localized: "책갈피가 없습니다"),
+                    message: String(localized: "책갈피 아이콘을 눌러 지금 위치를 저장하세요.")
                 )
             } else {
                 list
@@ -97,7 +97,7 @@ struct BookmarkListPopover: View {
                         onDismiss()
                     },
                     onDelete: { delete(bookmark) },
-                    deleteLabel: "책갈피 삭제"
+                    deleteLabel: String(localized: "책갈피 삭제")
                 )
                 .bibleListLayerRowChrome()
                 .swipeActions(edge: .trailing, allowsFullSwipe: true) {
@@ -124,15 +124,15 @@ struct BookmarkListPopover: View {
         let base: String
         if let book = BooksProvider.shared.book(id: bookmark.bookId) {
             if let verse = bookmark.verse {
-                base = "\(book.nameKo) \(bookmark.chapter):\(verse)"
+                base = "\(book.displayName) \(bookmark.chapter):\(verse)"
             } else {
-                base = "\(book.nameKo) \(bookmark.chapter)장"
+                base = String(localized: "\(book.displayName) \(bookmark.chapter)장")
             }
         } else {
             if let verse = bookmark.verse {
-                base = "책 \(bookmark.bookId) \(bookmark.chapter):\(verse)"
+                base = String(localized: "책 \(bookmark.bookId) \(bookmark.chapter):\(verse)")
             } else {
-                base = "책 \(bookmark.bookId) \(bookmark.chapter)장"
+                base = String(localized: "책 \(bookmark.bookId) \(bookmark.chapter)장")
             }
         }
         guard viewModel.availableTranslations.count > 1 else { return base }

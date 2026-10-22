@@ -2066,6 +2066,463 @@ def build_person_groups(cur):
             print(f"     - {label!r} ({count}건)")
 
 
+# === 번역 참고자료(인물·지명) 표시용 테이블 (2026-10-22 신설) ===
+# 설계: claude/seed-i18n-integration-plan-2026-10-22.md(INTEGRATION_PLAN) 1절.
+# 한국어 테이블(Persons/Places/PersonRelations/PersonContextNotes/PersonGroups/KeywordCategoryIndex)은
+# 단 한 칸도 바꾸지 않는다 — 관계 추출·동명이인·검색·조사 판정은 계속 한국어 값으로 한다. 아래 표는 화면에
+# 보여줄 글자만 담는 별도 층이며, 앱(ReferenceDataStore)은 행이 없거나 칸이 NULL이면 한국어로 폴백한다.
+#  - NULL: 번역 없음(앱이 그 칸만 한국어로 폴백). 경고로 집계한다.
+#  - "":   한국어 칸도 비어 있음(앱이 카드를 숨기는 현재 동작과 같게).
+#  - "-":  한국어 칸이 "기록 없음"(normalize_no_record)이라 한국어 쪽도 "-"로 보이는 칸. 언어마다 카드 노출이
+#          달라지지 않도록 한국어 기준으로 정한다.
+#  - 목록(별칭·직업/직위)은 JSON 배열로 저장한다. 번역 직업명에 쉼표가 들어 있는 경우가 있어(예: "giant warrior,
+#    brother of Goliath") 기존 Persons.occupation처럼 쉼표로 이어 저장하면 칩이 쪼개진다.
+#  - verses/rel_*/관계 원문은 번역 표에 넣지 않는다. 구절 좌표는 한국어 Persons/Places.verses, 관계에 나오는 이름은
+#    idx로 PersonsI18n.word를, 괄호 설명·참고 라벨은 RelationLabelsI18n을 쓴다.
+# TribeSeed.json(번역본 포함)은 앱이 쓰지 않아 표를 만들지 않는다(사용자 확정 2026-10-22).
+I18N_DIR = os.path.join(SCRIPT_DIR, "i18n")
+I18N_LANGS = ("en", "zh", "es")
+RELATION_LABEL_VOCAB_PATH = os.path.join(I18N_DIR, "RelationLabelVocab.tsv")
+# RelationLabelVocab.tsv 열: 분류 \t 한국어 \t en \t zh \t es ('관계설명' 행만 쓴다).
+VOCAB_LANG_COLUMN = {"en": 2, "zh": 3, "es": 4}
+
+# PersonGroups.group_id(= GROUP_LABEL_DEFS의 원문 라벨)별 번역 그룹 이름 — 사용자 확정(2026-10-22).
+# GROUP_LABEL_DEFS와 키 집합이 다르면 경고하고, 없는 그룹은 행을 만들지 않는다(앱이 한국어로 폴백).
+# description은 번역을 받지 않았고 앱이 PersonGroups.description을 표시하지 않아 빈 문자열로 둔다.
+GROUP_LABEL_I18N = {
+    "열두 제자": {"en": "The Twelve Disciples", "zh": "十二门徒", "es": "Los doce discípulos"},
+    "다윗의 30용사": {"en": "David's Thirty Mighty Men", "zh": "大卫的三十勇士", "es": "Los treinta valientes de David"},
+    "다윗의 3대용사": {"en": "David's Three Mighty Men", "zh": "大卫的三个勇士", "es": "Los tres valientes de David"},
+}
+
+I18N_PERSON_TEXT_FIELDS = ("word", "remark", "call_title", "meaning", "introduce", "lifetime", "event",
+                           "character", "origin", "nation", "tribe", "gender", "seed_memo")
+I18N_PLACE_TEXT_FIELDS = ("word", "remark", "introduce", "biblecontents", "geography", "history")
+
+
+def create_i18n_tables(cur):
+    """번역 표시용 표 5개를 만든다. 기존 표와 이름이 겹치지 않으며 기존 표를 참조(외래 키)하지도 않는다.
+
+    PersonsI18n/PlacesI18n은 행이 커서(긴 본문) 일반(rowid) 표로 둔다 — WITHOUT ROWID로 만들었을 때 실측
+    (2026-10-22) 본문 약 12MB가 약 30MB를 차지했다(SQLite 문서: WITHOUT ROWID는 행이 페이지 크기의 1/20보다
+    작을 때 유리). 라벨/그룹 표는 행이 작아 WITHOUT ROWID로 둔다."""
+    cur.executescript("""
+    CREATE TABLE PersonsI18n (
+        lang TEXT NOT NULL,
+        idx TEXT NOT NULL,
+        word TEXT, word2_json TEXT, remark TEXT, call_title TEXT, meaning TEXT,
+        introduce TEXT, lifetime TEXT, event TEXT, character TEXT,
+        origin TEXT, nation TEXT, tribe TEXT, gender TEXT,
+        occupation_json TEXT,
+        seed_memo TEXT,
+        PRIMARY KEY (lang, idx)
+    );
+
+    CREATE TABLE PlacesI18n (
+        lang TEXT NOT NULL,
+        idx TEXT NOT NULL,
+        word TEXT, remark TEXT, introduce TEXT, biblecontents TEXT, geography TEXT, history TEXT,
+        PRIMARY KEY (lang, idx)
+    );
+
+    -- PersonContextNotes.label, 가족관계 괄호 설명(PersonFamilyMember.note), 기타관계 원문 라벨의 번역.
+    CREATE TABLE RelationLabelsI18n (
+        lang TEXT NOT NULL,
+        label_ko TEXT NOT NULL,
+        label TEXT NOT NULL,
+        PRIMARY KEY (lang, label_ko)
+    ) WITHOUT ROWID;
+
+    CREATE TABLE PersonGroupsI18n (
+        lang TEXT NOT NULL,
+        group_id TEXT NOT NULL,
+        group_name TEXT NOT NULL,
+        description TEXT NOT NULL DEFAULT '',
+        PRIMARY KEY (lang, group_id)
+    ) WITHOUT ROWID;
+
+    -- 번역 이름 검색(비한국어 화면 전용). kind: 'person' | 'place'. name은 PersonsI18n.word/word2_json,
+    -- PlacesI18n.word 원문 그대로, name_folded는 대소문자·발음 구별 기호·전각/반각을 접은 값(진단용 —
+    -- 앱은 name을 읽어 같은 규칙으로 직접 접어 질의와 같은 함수로 비교한다).
+    -- 삽입 순서(rowid) = 종류(인물→지명) 안에서 idx 숫자 오름차순. 앱은 이 순서를 결과 순서로 쓴다.
+    CREATE TABLE NameSearchI18n (
+        lang TEXT NOT NULL,
+        kind TEXT NOT NULL,
+        idx TEXT NOT NULL,
+        name TEXT NOT NULL,
+        name_folded TEXT NOT NULL,
+        UNIQUE(lang, kind, idx, name)   -- lang이 맨 앞이라 이 UNIQUE 인덱스가 "WHERE lang = ?" 조회도 맡는다
+    );
+    """)
+
+
+def _load_i18n_entries(lang, filename):
+    """i18n/<lang>/<filename>을 idx 사전으로 읽는다. 파일이 없으면 None(그 언어는 해당 표 0건 → 앱은 한국어 폴백).
+    idx가 중복이면 어느 쪽이 맞는지 알 수 없어 중단한다(추측 금지)."""
+    path = os.path.join(I18N_DIR, lang, filename)
+    if not os.path.exists(path):
+        print(f"(i18n {lang}/{filename} 없음 — 이 언어는 해당 표 0건, 앱은 한국어로 폴백)")
+        return None
+    with open(path, encoding="utf-8") as f:
+        entries = json.load(f)
+    by_idx = {}
+    for e in entries:
+        idx = str(e.get("idx", ""))
+        if idx in by_idx:
+            print(f"i18n {lang}/{filename}에 중복 idx {idx} — 중단")
+            raise SystemExit(1)
+        by_idx[idx] = e
+    return by_idx
+
+
+def _i18n_value(ko_raw, tr_raw, normalize=False):
+    """Persons 규칙. 한국어 칸이 비면 ""(카드 숨김 — 현재 동작), normalize=True이고 한국어가 '기록 없음'이면 "-",
+    그 밖에는 번역(비어 있으면 None = 앱이 한국어로 폴백)."""
+    if not (ko_raw or "").strip():
+        return ""
+    if normalize and normalize_no_record(ko_raw) == "-":
+        return "-"
+    tr = (tr_raw or "").strip() if isinstance(tr_raw, str) else ""
+    return tr or None
+
+
+def _i18n_place_value(ko_raw, tr_raw):
+    """Places 본문 규칙: 한국어는 빈 값도 '-'로 저장된다(build_places_from_place_seed의 normalize_no_record)."""
+    if normalize_no_record(ko_raw) == "-":
+        return "-"
+    tr = (tr_raw or "").strip() if isinstance(tr_raw, str) else ""
+    return tr or None
+
+
+def _as_str_list(v):
+    items = v if isinstance(v, list) else ([v] if v else [])
+    return [str(x).strip() for x in items if x and str(x).strip()]
+
+
+def _i18n_list(ko_v, tr_v):
+    """목록 칸(별칭·직업/직위). 한국어가 비면 "[]". 개수가 다르면 원소 대응을 추측하지 않고 None(칸 전체 한국어 폴백)."""
+    ko_items, tr_items = _as_str_list(ko_v), _as_str_list(tr_v)
+    if not ko_items:
+        return "[]"
+    if len(ko_items) != len(tr_items):
+        return None
+    return json.dumps(tr_items, ensure_ascii=False)
+
+
+def fold_name_for_search(name):
+    """NameSearchI18n.name_folded — NFKD 분해 후 결합 부호 제거, casefold, 공백 하나로. (진단용 값이며 앱은 Swift
+    `folding(options: [.caseInsensitive, .diacriticInsensitive, .widthInsensitive])`로 같은 목적의 값을 직접 만든다.)"""
+    import unicodedata
+    decomposed = unicodedata.normalize("NFKD", name or "")
+    stripped = "".join(c for c in decomposed if not unicodedata.combining(c))
+    return re.sub(r"\s+", " ", stripped.casefold()).strip()
+
+
+def _report_i18n_counts(title, counter):
+    if not counter:
+        print(f"  {title}: 0건")
+        return
+    detail = ", ".join(f"{k} {v}" for k, v in sorted(counter.items()))
+    print(f"  ⚠️ {title}: {sum(counter.values())}건 ({detail})")
+
+
+def build_persons_i18n(cur, lang, ko_entries, known_person_idx):
+    """한국어 PersonSeed.json 순서대로, 같은 idx의 번역 항목으로 PersonsI18n 행을 만든다. 행 수를 돌려준다."""
+    tr_by_idx = _load_i18n_entries(lang, "PersonSeed.json")
+    if tr_by_idx is None:
+        return 0
+    rows = []
+    missing_idx = []
+    verses_mismatch = []
+    list_mismatch = collections.Counter()
+    empty_translation = collections.Counter()
+    dash_disagreement = collections.Counter()
+    for e in ko_entries:
+        idx = str(e["idx"])
+        tr = tr_by_idx.get(idx)
+        if tr is None:
+            missing_idx.append(idx)
+            continue
+        if (e.get("verses") or []) != (tr.get("verses") or []):
+            verses_mismatch.append(idx)
+        ko_desc = e.get("description") or {}
+        tr_desc = tr.get("description") or {}
+        if not isinstance(tr_desc, dict):
+            tr_desc = {}
+        # remark: 한국어 Persons.remark와 같은 출처를 고른다(build_persons_from_person_seed: remark or introduce).
+        if e.get("remark"):
+            ko_remark, tr_remark = e.get("remark"), tr.get("remark")
+        else:
+            ko_remark, tr_remark = e.get("introduce"), tr.get("introduce")
+        values = {
+            "word": _i18n_value(e.get("word"), tr.get("word")),
+            "remark": _i18n_value(ko_remark, tr_remark),
+            "call_title": _i18n_value(e.get("call"), tr.get("call")),
+            "meaning": _i18n_value(e.get("meaning"), tr.get("meaning")),
+            "introduce": _i18n_value(e.get("introduce"), tr.get("introduce"), normalize=True),
+            "lifetime": _i18n_value(e.get("lifetime"), tr.get("lifetime"), normalize=True),
+            "event": _i18n_value(e.get("event"), tr.get("event"), normalize=True),
+            "character": _i18n_value(e.get("character"), tr.get("character"), normalize=True),
+            "origin": _i18n_value(ko_desc.get("출신"), tr_desc.get("출신")),
+            "nation": _i18n_value(ko_desc.get("민족"), tr_desc.get("민족")),
+            "tribe": _i18n_value(ko_desc.get("지파"), tr_desc.get("지파")),
+            "gender": _i18n_value(ko_desc.get("성별"), tr_desc.get("성별")),
+            "seed_memo": _i18n_value(e.get("memo"), tr.get("memo")),
+        }
+        word2_json = _i18n_list(e.get("word2"), tr.get("word2"))
+        occupation_json = _i18n_list(ko_desc.get("직업/직위"), tr_desc.get("직업/직위"))
+        if word2_json is None:
+            list_mismatch["word2"] += 1
+        if occupation_json is None:
+            list_mismatch["직업/직위"] += 1
+        for field in I18N_PERSON_TEXT_FIELDS:
+            if values[field] is None:
+                empty_translation[field] += 1
+        for field, ko_key in (("introduce", "introduce"), ("lifetime", "lifetime"), ("event", "event"),
+                              ("character", "character")):
+            ko_text = e.get(ko_key) or ""
+            if ko_text.strip() and normalize_no_record(ko_text) != "-" and values[field] == "-":
+                dash_disagreement[field] += 1
+        rows.append((
+            lang, idx, values["word"], word2_json, values["remark"], values["call_title"], values["meaning"],
+            values["introduce"], values["lifetime"], values["event"], values["character"],
+            values["origin"], values["nation"], values["tribe"], values["gender"],
+            occupation_json, values["seed_memo"],
+        ))
+    extra_idx = sorted(set(tr_by_idx) - {str(e["idx"]) for e in ko_entries})
+    not_in_db = [r[1] for r in rows if r[1] not in known_person_idx]
+    cur.executemany(
+        "INSERT INTO PersonsI18n (lang, idx, word, word2_json, remark, call_title, meaning, introduce, lifetime, "
+        "event, character, origin, nation, tribe, gender, occupation_json, seed_memo) "
+        "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
+        rows,
+    )
+    print(f"PersonsI18n[{lang}] 삽입: {len(rows)}건 (한국어 {len(ko_entries)}건)")
+    print(f"  번역에 없는 idx(한국어 폴백) {len(missing_idx)}건{(' — 처음 10건: ' + ', '.join(missing_idx[:10])) if missing_idx else ''}")
+    print(f"  번역에만 있는 idx(무시) {len(extra_idx)}건{(' — 처음 10건: ' + ', '.join(extra_idx[:10])) if extra_idx else ''}")
+    print(f"  Persons 표에 없는 idx {len(not_in_db)}건")
+    print(f"  verses가 한국어와 다른 항목(경고만 — 앱은 한국어 verses 사용) {len(verses_mismatch)}건")
+    _report_i18n_counts("목록 개수 불일치(칸 전체 한국어 폴백)", list_mismatch)
+    _report_i18n_counts("한국어는 정보가 있는데 번역은 '-'인 칸", dash_disagreement)
+    _report_i18n_counts("한국어는 있는데 번역이 빈 칸(NULL, 그 칸만 한국어 폴백)", empty_translation)
+    return len(rows)
+
+
+def build_places_i18n(cur, lang, ko_entries, known_place_idx):
+    """한국어 PlaceSeed.json 순서대로 PlacesI18n 행을 만든다. 행 수를 돌려준다."""
+    tr_by_idx = _load_i18n_entries(lang, "PlaceSeed.json")
+    if tr_by_idx is None:
+        return 0
+    rows = []
+    missing_idx = []
+    verses_mismatch = []
+    empty_translation = collections.Counter()
+    dash_disagreement = collections.Counter()
+    for e in ko_entries:
+        idx = str(e["idx"])
+        tr = tr_by_idx.get(idx)
+        if tr is None:
+            missing_idx.append(idx)
+            continue
+        if (e.get("verses") or []) != (tr.get("verses") or []):
+            verses_mismatch.append(idx)
+        values = {
+            "word": _i18n_value(e.get("word"), tr.get("word")),
+            "remark": _i18n_value(e.get("remark"), tr.get("remark")),
+        }
+        for field in ("introduce", "biblecontents", "geography", "history"):
+            values[field] = _i18n_place_value(e.get(field), tr.get(field))
+            # 한국어는 정보가 있는데("-" 아님) 번역만 "-"인 칸 — 정보 손실 가능성(경고만, 번역값 그대로 둔다).
+            if normalize_no_record(e.get(field)) != "-" and values[field] == "-":
+                dash_disagreement[field] += 1
+        for field in I18N_PLACE_TEXT_FIELDS:
+            if values[field] is None:
+                empty_translation[field] += 1
+        rows.append((
+            lang, idx, values["word"], values["remark"], values["introduce"], values["biblecontents"],
+            values["geography"], values["history"],
+        ))
+    extra_idx = sorted(set(tr_by_idx) - {str(e["idx"]) for e in ko_entries})
+    not_in_db = [r[1] for r in rows if r[1] not in known_place_idx]
+    cur.executemany(
+        "INSERT INTO PlacesI18n (lang, idx, word, remark, introduce, biblecontents, geography, history) "
+        "VALUES (?, ?, ?, ?, ?, ?, ?, ?)",
+        rows,
+    )
+    print(f"PlacesI18n[{lang}] 삽입: {len(rows)}건 (한국어 {len(ko_entries)}건)")
+    print(f"  번역에 없는 idx(한국어 폴백) {len(missing_idx)}건{(' — 처음 10건: ' + ', '.join(missing_idx[:10])) if missing_idx else ''}")
+    print(f"  번역에만 있는 idx(무시) {len(extra_idx)}건{(' — 처음 10건: ' + ', '.join(extra_idx[:10])) if extra_idx else ''}")
+    print(f"  Places 표에 없는 idx {len(not_in_db)}건")
+    print(f"  verses가 한국어와 다른 항목(경고만 — 앱은 한국어 verses 사용) {len(verses_mismatch)}건")
+    _report_i18n_counts("한국어는 정보가 있는데 번역은 '-'인 칸", dash_disagreement)
+    _report_i18n_counts("한국어는 있는데 번역이 빈 칸(NULL, 그 칸만 한국어 폴백)", empty_translation)
+    return len(rows)
+
+
+def build_relation_labels_i18n(cur):
+    """RelationLabelVocab.tsv의 '관계설명' 행 → RelationLabelsI18n. 같은 (언어, 한국어 라벨)에 서로 다른 번역이 있으면
+    첫 번째를 유지하고 경고한다(마지막 값이 조용히 이기게 하지 않는다). 언어별 행 수 사전을 돌려준다."""
+    counts = {lang: 0 for lang in I18N_LANGS}
+    if not os.path.exists(RELATION_LABEL_VOCAB_PATH):
+        print(f"({RELATION_LABEL_VOCAB_PATH} 없음 — RelationLabelsI18n 0건, 라벨·괄호 설명은 한국어로 표시)")
+        return counts
+    chosen = {}       # (lang, label_ko) -> label
+    conflicts = []
+    malformed = 0
+    with open(RELATION_LABEL_VOCAB_PATH, encoding="utf-8") as f:
+        for line_no, raw_line in enumerate(f, start=1):
+            line = raw_line.rstrip("\r\n")
+            if not line.strip():
+                continue
+            cols = line.split("\t")
+            if cols[0].strip() != "관계설명":
+                continue  # 머리글 행이나 다른 분류는 쓰지 않는다
+            if len(cols) < 5 or not cols[1].strip():
+                malformed += 1
+                continue
+            label_ko = cols[1].strip()
+            for lang in I18N_LANGS:
+                label = cols[VOCAB_LANG_COLUMN[lang]].strip()
+                if not label:
+                    continue
+                key = (lang, label_ko)
+                if key in chosen:
+                    if chosen[key] != label:
+                        conflicts.append((lang, label_ko, chosen[key], label, line_no))
+                    continue
+                chosen[key] = label
+    rows = [(lang, label_ko, label) for (lang, label_ko), label in chosen.items()]
+    cur.executemany("INSERT INTO RelationLabelsI18n (lang, label_ko, label) VALUES (?, ?, ?)", rows)
+    for lang, _, _ in rows:
+        counts[lang] += 1
+    print(f"RelationLabelsI18n 삽입: {len(rows)}건 ({', '.join(f'{lang} {counts[lang]}' for lang in I18N_LANGS)})"
+          f" — 형식 오류 행 {malformed}건")
+    if conflicts:
+        print(f"  ⚠️ 같은 한국어 라벨에 서로 다른 번역 {len(conflicts)}건 — 첫 번째 값을 유지(확인 필요):")
+        for lang, label_ko, kept, other, line_no in conflicts[:20]:
+            print(f"     - [{lang}] {label_ko!r}: 유지 {kept!r} / 무시 {other!r} (줄 {line_no})")
+    return counts
+
+
+def report_relation_label_coverage(cur):
+    """화면에 실제로 나오는 한국어 라벨(참고 정보 라벨, 가족관계 괄호 설명, 기타관계 원문 괄호 라벨)이 번역 사전에
+    얼마나 들어 있는지 출력한다(검증용 — 표 내용은 바꾸지 않는다)."""
+    context_labels = {r[0] for r in cur.execute("SELECT DISTINCT label FROM PersonContextNotes").fetchall() if r[0]}
+    family_notes = set()
+    family_cols = ("rel_grandfather", "rel_grandmother", "rel_father", "rel_mother", "rel_spouse", "rel_sons",
+                   "rel_daughters", "rel_grandsons", "rel_granddaughters")
+    note_re = re.compile(r"#\d+\(([^()]*)\)$")
+    for row in cur.execute(f"SELECT {', '.join(family_cols)} FROM Persons").fetchall():
+        for value in row:
+            for item in (value or "").split(","):
+                m = note_re.search(item.strip())
+                if m and m.group(1).strip():
+                    family_notes.add(m.group(1))
+    raw_labels = set()
+    raw_re = re.compile(r"\(([^()]*)\)$")
+    for (raw,) in cur.execute("SELECT DISTINCT raw_sentence FROM PersonRelations WHERE raw_sentence <> ''").fetchall():
+        m = raw_re.search(raw.strip())
+        if m and m.group(1).strip():
+            raw_labels.add(m.group(1).strip())
+    for lang in I18N_LANGS:
+        have = {r[0] for r in cur.execute("SELECT label_ko FROM RelationLabelsI18n WHERE lang = ?", (lang,)).fetchall()}
+        for title, labels in (("참고 정보 라벨", context_labels), ("가족관계 괄호 설명", family_notes),
+                              ("관계 원문 괄호 라벨", raw_labels)):
+            missing = sorted(labels - have)
+            tail = f" — 미번역: {', '.join(missing[:15])}{' …' if len(missing) > 15 else ''}" if missing else ""
+            print(f"  RelationLabelsI18n[{lang}] {title}: {len(labels) - len(missing)}/{len(labels)}종{tail}")
+
+
+def build_person_groups_i18n(cur):
+    """GROUP_LABEL_I18N → PersonGroupsI18n. GROUP_LABEL_DEFS(실제 그룹)와 키가 다르면 경고한다."""
+    defined = set(GROUP_LABEL_DEFS)
+    translated = set(GROUP_LABEL_I18N)
+    if defined != translated:
+        print(f"  ⚠️ GROUP_LABEL_I18N 키가 GROUP_LABEL_DEFS와 다름 — 번역 없음 {sorted(defined - translated)}, "
+              f"정의 없는 번역(무시) {sorted(translated - defined)}")
+    rows = []
+    for group_id in GROUP_LABEL_DEFS:
+        names = GROUP_LABEL_I18N.get(group_id) or {}
+        for lang in I18N_LANGS:
+            name = (names.get(lang) or "").strip()
+            if name:
+                rows.append((lang, group_id, name, ""))
+    cur.executemany(
+        "INSERT INTO PersonGroupsI18n (lang, group_id, group_name, description) VALUES (?, ?, ?, ?)", rows
+    )
+    print(f"PersonGroupsI18n 삽입: {len(rows)}건 (그룹 {len(GROUP_LABEL_DEFS)}개 × 언어 {len(I18N_LANGS)}개 기대)")
+    return len(rows)
+
+
+def build_name_search_i18n(cur):
+    """PersonsI18n.word + word2_json(별칭), PlacesI18n.word → NameSearchI18n. 이미 채운 번역 표에서만 뽑는다(JSON을
+    다시 파싱하지 않음 — 단일 출처). 빈 값·"-"는 넣지 않는다. 언어별·종류별 행 수를 출력한다."""
+    rows = []
+    seen = set()
+
+    def add(lang, kind, idx, name):
+        name = (name or "").strip()
+        if not name or name == "-":
+            return
+        key = (lang, kind, idx, name)
+        if key in seen:
+            return
+        seen.add(key)
+        rows.append((lang, kind, idx, name, fold_name_for_search(name)))
+
+    for lang, idx, word, word2_json in cur.execute(
+        "SELECT lang, idx, word, word2_json FROM PersonsI18n ORDER BY lang, CAST(idx AS INTEGER), idx"
+    ).fetchall():
+        add(lang, "person", idx, word)
+        if word2_json:
+            try:
+                aliases = json.loads(word2_json)
+            except ValueError:
+                aliases = []
+            for alias in aliases if isinstance(aliases, list) else []:
+                if isinstance(alias, str):
+                    add(lang, "person", idx, alias)
+    for lang, idx, word in cur.execute("SELECT lang, idx, word FROM PlacesI18n ORDER BY lang, CAST(idx AS INTEGER), idx").fetchall():
+        add(lang, "place", idx, word)
+    cur.executemany(
+        "INSERT INTO NameSearchI18n (lang, kind, idx, name, name_folded) VALUES (?, ?, ?, ?, ?)", rows
+    )
+    per = collections.Counter((r[0], r[1]) for r in rows)
+    summary = ", ".join(f"{lang}/{kind} {per[(lang, kind)]}" for lang in I18N_LANGS for kind in ("person", "place"))
+    print(f"NameSearchI18n 삽입: {len(rows)}건 ({summary})")
+    for lang in I18N_LANGS:
+        if lang == "zh":
+            short = [r[3] for r in rows if r[0] == lang and len(r[4].replace(" ", "")) == 1]
+            note = "한 글자 이름(질의 전체가 그 이름일 때만 매칭)"
+        else:
+            short = [r[3] for r in rows if r[0] == lang and len(r[4].replace(" ", "")) <= 2]
+            note = "두 글자 이하 이름(질의 전체가 그 이름일 때만 매칭)"
+        sample = ", ".join(sorted(set(short))[:20])
+        print(f"  NameSearchI18n[{lang}] {note}: {len(short)}건{(' — ' + sample) if sample else ''}")
+    return len(rows)
+
+
+def build_reference_i18n(cur):
+    """번역 표 5개를 만들고 채운다. Persons/Places/PersonContextNotes/PersonRelations/PersonGroups가 채워진 뒤
+    호출해야 idx와 라벨 대조가 정확하다. 한국어 표는 읽기만 한다."""
+    create_i18n_tables(cur)
+    with open(PERSON_SEED_PATH, encoding="utf-8") as f:
+        ko_persons = json.load(f)
+    with open(PLACE_SEED_PATH, encoding="utf-8") as f:
+        ko_places = json.load(f)
+    known_person_idx = {r[0] for r in cur.execute("SELECT idx FROM Persons").fetchall()}
+    known_place_idx = {r[0] for r in cur.execute("SELECT idx FROM Places").fetchall()}
+    if not os.path.isdir(I18N_DIR):
+        print(f"({I18N_DIR} 없음 — 번역 표는 비어 있음, 앱은 모든 언어에서 한국어로 표시)")
+    for lang in I18N_LANGS:
+        build_persons_i18n(cur, lang, ko_persons, known_person_idx)
+        build_places_i18n(cur, lang, ko_places, known_place_idx)
+    build_relation_labels_i18n(cur)
+    report_relation_label_coverage(cur)
+    build_person_groups_i18n(cur)
+    build_name_search_i18n(cur)
+
+
 # === theme01.json -> Themes (2026-09-15 신설) ===
 # load_topic_seed_files()(주제별 말씀*.txt)와 별개로, book/chapter/start/end
 # 숫자 형식인 theme01.json을 위한 전용 로더. idx는 지정하지 않고 SQLite
@@ -2535,6 +2992,9 @@ def main():
     # build_person_place_tables(cur, abbr_index)
     build_structured_person_relations(cur)
     build_person_groups(cur)
+    # [2026-10-22 신설] 번역 표시용 표(PersonsI18n/PlacesI18n/RelationLabelsI18n/PersonGroupsI18n/NameSearchI18n).
+    # 위 한국어 표를 읽기만 하고 바꾸지 않는다 — build_reference_i18n 상단 주석 참고.
+    build_reference_i18n(cur)
 
     # 6) VerseSearchIndex(FTS5 unicode61) [2026-08-19 신설, 같은 날 재확장]
     build_verse_search_index(cur)

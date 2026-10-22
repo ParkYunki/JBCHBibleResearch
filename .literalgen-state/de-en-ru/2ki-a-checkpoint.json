@@ -1,0 +1,125 @@
+{
+  "created": [
+    "Tools/LiteralGen/outputs/de/12_2KI/2KI_001.tsv",
+    "Tools/LiteralGen/outputs/ru/12_2KI/2KI_001.tsv",
+    "Tools/LiteralGen/outputs/en/12_2KI/2KI_001.tsv",
+    "Tools/LiteralGen/outputs/de/12_2KI/2KI_002.tsv",
+    "Tools/LiteralGen/outputs/ru/12_2KI/2KI_002.tsv",
+    "Tools/LiteralGen/outputs/en/12_2KI/2KI_002.tsv",
+    "Tools/LiteralGen/outputs/de/12_2KI/2KI_003.tsv",
+    "Tools/LiteralGen/outputs/ru/12_2KI/2KI_003.tsv",
+    "Tools/LiteralGen/outputs/en/12_2KI/2KI_003.tsv",
+    "Tools/LiteralGen/outputs/de/12_2KI/2KI_004_1.tsv",
+    "Tools/LiteralGen/outputs/de/12_2KI/2KI_004_2.tsv",
+    "Tools/LiteralGen/outputs/ru/12_2KI/2KI_004_1.tsv",
+    "Tools/LiteralGen/outputs/ru/12_2KI/2KI_004_2.tsv",
+    "Tools/LiteralGen/outputs/en/12_2KI/2KI_004_1.tsv",
+    "Tools/LiteralGen/outputs/en/12_2KI/2KI_004_2.tsv",
+    "Tools/LiteralGen/outputs/de/12_2KI/2KI_005.tsv",
+    "Tools/LiteralGen/outputs/ru/12_2KI/2KI_005.tsv",
+    "Tools/LiteralGen/outputs/de/12_2KI/2KI_006_1.tsv",
+    "Tools/LiteralGen/outputs/de/12_2KI/2KI_006_2.tsv",
+    "Tools/LiteralGen/outputs/ru/12_2KI/2KI_006_1.tsv",
+    "Tools/LiteralGen/outputs/ru/12_2KI/2KI_006_2.tsv",
+    "Tools/LiteralGen/outputs/de/12_2KI/2KI_007.tsv",
+    "Tools/LiteralGen/outputs/ru/12_2KI/2KI_007.tsv",
+    "Tools/LiteralGen/outputs/de/12_2KI/2KI_008.tsv",
+    "Tools/LiteralGen/outputs/ru/12_2KI/2KI_008.tsv"
+  ],
+  "chapters_complete": [
+    [
+      1,
+      "de"
+    ],
+    [
+      1,
+      "ru"
+    ],
+    [
+      1,
+      "en"
+    ],
+    [
+      2,
+      "de"
+    ],
+    [
+      2,
+      "ru"
+    ],
+    [
+      2,
+      "en"
+    ],
+    [
+      3,
+      "de"
+    ],
+    [
+      3,
+      "ru"
+    ],
+    [
+      3,
+      "en"
+    ],
+    [
+      4,
+      "de"
+    ],
+    [
+      4,
+      "ru"
+    ],
+    [
+      4,
+      "en"
+    ],
+    [
+      5,
+      "de"
+    ],
+    [
+      5,
+      "ru"
+    ],
+    [
+      6,
+      "de"
+    ],
+    [
+      6,
+      "ru"
+    ],
+    [
+      7,
+      "de"
+    ],
+    [
+      7,
+      "ru"
+    ],
+    [
+      8,
+      "de"
+    ],
+    [
+      8,
+      "ru"
+    ]
+  ],
+  "status": "complete",
+  "validation": {
+    "created_files": 25,
+    "created_rows": 560,
+    "own_full_qa": true,
+    "own_candidates": 10,
+    "root_en_files": 5,
+    "root_en_rows": 109,
+    "root_en_full_qa": true,
+    "root_en_candidates": 4,
+    "protected_files": 10324,
+    "protected_unchanged": true,
+    "tsv_direct_changes": false
+  }
+}

@@ -1,0 +1,1013 @@
+[
+  {
+    "book": "01_GEN",
+    "packets": 76,
+    "missing": {
+      "de": [],
+      "en": [],
+      "ru": []
+    }
+  },
+  {
+    "book": "02_EXO",
+    "packets": 61,
+    "missing": {
+      "de": [],
+      "en": [],
+      "ru": []
+    }
+  },
+  {
+    "book": "03_LEV",
+    "packets": 41,
+    "missing": {
+      "de": [],
+      "en": [],
+      "ru": []
+    }
+  },
+  {
+    "book": "04_NUM",
+    "packets": 60,
+    "missing": {
+      "de": [],
+      "en": [],
+      "ru": []
+    }
+  },
+  {
+    "book": "05_DEU",
+    "packets": 43,
+    "missing": {
+      "de": [],
+      "en": [],
+      "ru": []
+    }
+  },
+  {
+    "book": "06_JOS",
+    "packets": 33,
+    "missing": {
+      "de": [],
+      "en": [],
+      "ru": []
+    }
+  },
+  {
+    "book": "07_JDG",
+    "packets": 31,
+    "missing": {
+      "de": [],
+      "en": [],
+      "ru": []
+    }
+  },
+  {
+    "book": "08_RUT",
+    "packets": 4,
+    "missing": {
+      "de": [],
+      "en": [],
+      "ru": []
+    }
+  },
+  {
+    "book": "09_1SA",
+    "packets": 38,
+    "missing": {
+      "de": [],
+      "en": [],
+      "ru": []
+    }
+  },
+  {
+    "book": "10_2SA",
+    "packets": 34,
+    "missing": {
+      "de": [],
+      "en": [],
+      "ru": []
+    }
+  },
+  {
+    "book": "11_1KI",
+    "packets": 38,
+    "missing": {
+      "de": [],
+      "en": [],
+      "ru": []
+    }
+  },
+  {
+    "book": "12_2KI",
+    "packets": 34,
+    "missing": {
+      "de": [],
+      "en": [],
+      "ru": []
+    }
+  },
+  {
+    "book": "13_1CH",
+    "packets": 45,
+    "missing": {
+      "de": [],
+      "en": [],
+      "ru": []
+    }
+  },
+  {
+    "book": "14_2CH",
+    "packets": 43,
+    "missing": {
+      "de": [],
+      "en": [],
+      "ru": []
+    }
+  },
+  {
+    "book": "15_EZR",
+    "packets": 14,
+    "missing": {
+      "de": [],
+      "en": [],
+      "ru": []
+    }
+  },
+  {
+    "book": "16_NEH",
+    "packets": 21,
+    "missing": {
+      "de": [],
+      "en": [],
+      "ru": []
+    }
+  },
+  {
+    "book": "17_EST",
+    "packets": 11,
+    "missing": {
+      "de": [],
+      "en": [],
+      "ru": []
+    }
+  },
+  {
+    "book": "18_JOB",
+    "packets": 52,
+    "missing": {
+      "de": [],
+      "en": [],
+      "ru": []
+    }
+  },
+  {
+    "book": "19_PSA",
+    "packets": 168,
+    "missing": {
+      "de": [],
+      "en": [],
+      "ru": []
+    }
+  },
+  {
+    "book": "20_PRO",
+    "packets": 45,
+    "missing": {
+      "de": [
+        "PRO_001_1",
+        "PRO_001_2",
+        "PRO_002",
+        "PRO_003_1",
+        "PRO_003_2",
+        "PRO_004",
+        "PRO_005",
+        "PRO_006_1",
+        "PRO_006_2",
+        "PRO_007",
+        "PRO_008_1",
+        "PRO_008_2",
+        "PRO_009",
+        "PRO_010_1",
+        "PRO_010_2",
+        "PRO_011_1",
+        "PRO_011_2",
+        "PRO_012",
+        "PRO_013",
+        "PRO_014_1",
+        "PRO_014_2",
+        "PRO_015_1",
+        "PRO_015_2",
+        "PRO_016_1",
+        "PRO_016_2",
+        "PRO_017",
+        "PRO_018",
+        "PRO_019",
+        "PRO_020",
+        "PRO_021_1",
+        "PRO_021_2",
+        "PRO_022",
+        "PRO_023_1",
+        "PRO_023_2",
+        "PRO_024_1",
+        "PRO_024_2",
+        "PRO_025",
+        "PRO_026",
+        "PRO_027",
+        "PRO_028",
+        "PRO_029",
+        "PRO_030_1",
+        "PRO_030_2",
+        "PRO_031_1",
+        "PRO_031_2"
+      ],
+      "en": [
+        "PRO_001_1",
+        "PRO_001_2",
+        "PRO_002",
+        "PRO_003_1",
+        "PRO_003_2",
+        "PRO_004",
+        "PRO_005",
+        "PRO_006_1",
+        "PRO_006_2",
+        "PRO_007",
+        "PRO_008_1",
+        "PRO_008_2",
+        "PRO_009",
+        "PRO_010_1",
+        "PRO_010_2",
+        "PRO_011_1",
+        "PRO_011_2",
+        "PRO_012",
+        "PRO_013",
+        "PRO_014_1",
+        "PRO_014_2",
+        "PRO_015_1",
+        "PRO_015_2",
+        "PRO_016_1",
+        "PRO_016_2",
+        "PRO_017",
+        "PRO_018",
+        "PRO_019",
+        "PRO_020",
+        "PRO_021_1",
+        "PRO_021_2",
+        "PRO_022",
+        "PRO_023_1",
+        "PRO_023_2",
+        "PRO_024_1",
+        "PRO_024_2",
+        "PRO_025",
+        "PRO_026",
+        "PRO_027",
+        "PRO_028",
+        "PRO_029",
+        "PRO_030_1",
+        "PRO_030_2",
+        "PRO_031_1",
+        "PRO_031_2"
+      ],
+      "ru": [
+        "PRO_001_1",
+        "PRO_001_2",
+        "PRO_002",
+        "PRO_003_1",
+        "PRO_003_2",
+        "PRO_004",
+        "PRO_005",
+        "PRO_006_1",
+        "PRO_006_2",
+        "PRO_007",
+        "PRO_008_1",
+        "PRO_008_2",
+        "PRO_009",
+        "PRO_010_1",
+        "PRO_010_2",
+        "PRO_011_1",
+        "PRO_011_2",
+        "PRO_012",
+        "PRO_013",
+        "PRO_014_1",
+        "PRO_014_2",
+        "PRO_015_1",
+        "PRO_015_2",
+        "PRO_016_1",
+        "PRO_016_2",
+        "PRO_017",
+        "PRO_018",
+        "PRO_019",
+        "PRO_020",
+        "PRO_021_1",
+        "PRO_021_2",
+        "PRO_022",
+        "PRO_023_1",
+        "PRO_023_2",
+        "PRO_024_1",
+        "PRO_024_2",
+        "PRO_025",
+        "PRO_026",
+        "PRO_027",
+        "PRO_028",
+        "PRO_029",
+        "PRO_030_1",
+        "PRO_030_2",
+        "PRO_031_1",
+        "PRO_031_2"
+      ]
+    }
+  },
+  {
+    "book": "21_ECC",
+    "packets": 12,
+    "missing": {
+      "de": [
+        "ECC_001",
+        "ECC_002",
+        "ECC_003",
+        "ECC_004",
+        "ECC_005",
+        "ECC_006",
+        "ECC_007",
+        "ECC_008",
+        "ECC_009",
+        "ECC_010",
+        "ECC_011",
+        "ECC_012"
+      ],
+      "en": [
+        "ECC_001",
+        "ECC_002",
+        "ECC_003",
+        "ECC_004",
+        "ECC_005",
+        "ECC_006",
+        "ECC_007",
+        "ECC_008",
+        "ECC_009",
+        "ECC_010",
+        "ECC_011",
+        "ECC_012"
+      ],
+      "ru": [
+        "ECC_001",
+        "ECC_002",
+        "ECC_003",
+        "ECC_004",
+        "ECC_005",
+        "ECC_006",
+        "ECC_007",
+        "ECC_008",
+        "ECC_009",
+        "ECC_010",
+        "ECC_011",
+        "ECC_012"
+      ]
+    }
+  },
+  {
+    "book": "22_SNG",
+    "packets": 8,
+    "missing": {
+      "de": [],
+      "en": [],
+      "ru": []
+    }
+  },
+  {
+    "book": "23_ISA",
+    "packets": 72,
+    "missing": {
+      "de": [],
+      "en": [],
+      "ru": []
+    }
+  },
+  {
+    "book": "24_JER",
+    "packets": 68,
+    "missing": {
+      "de": [],
+      "en": [],
+      "ru": []
+    }
+  },
+  {
+    "book": "25_LAM",
+    "packets": 7,
+    "missing": {
+      "de": [],
+      "en": [],
+      "ru": []
+    }
+  },
+  {
+    "book": "26_EZK",
+    "packets": 63,
+    "missing": {
+      "de": [],
+      "en": [],
+      "ru": []
+    }
+  },
+  {
+    "book": "27_DAN",
+    "packets": 16,
+    "missing": {
+      "de": [],
+      "en": [],
+      "ru": []
+    }
+  },
+  {
+    "book": "28_HOS",
+    "packets": 14,
+    "missing": {
+      "de": [],
+      "en": [],
+      "ru": []
+    }
+  },
+  {
+    "book": "29_JOL",
+    "packets": 4,
+    "missing": {
+      "de": [],
+      "en": [],
+      "ru": []
+    }
+  },
+  {
+    "book": "30_AMO",
+    "packets": 9,
+    "missing": {
+      "de": [],
+      "en": [],
+      "ru": []
+    }
+  },
+  {
+    "book": "31_OBA",
+    "packets": 1,
+    "missing": {
+      "de": [],
+      "en": [],
+      "ru": []
+    }
+  },
+  {
+    "book": "32_JON",
+    "packets": 4,
+    "missing": {
+      "de": [],
+      "en": [],
+      "ru": []
+    }
+  },
+  {
+    "book": "33_MIC",
+    "packets": 7,
+    "missing": {
+      "de": [],
+      "en": [],
+      "ru": []
+    }
+  },
+  {
+    "book": "34_NAM",
+    "packets": 3,
+    "missing": {
+      "de": [],
+      "en": [],
+      "ru": []
+    }
+  },
+  {
+    "book": "35_HAB",
+    "packets": 3,
+    "missing": {
+      "de": [],
+      "en": [],
+      "ru": []
+    }
+  },
+  {
+    "book": "36_ZEP",
+    "packets": 3,
+    "missing": {
+      "de": [],
+      "en": [],
+      "ru": []
+    }
+  },
+  {
+    "book": "37_HAG",
+    "packets": 2,
+    "missing": {
+      "de": [],
+      "en": [],
+      "ru": []
+    }
+  },
+  {
+    "book": "38_ZEC",
+    "packets": 14,
+    "missing": {
+      "de": [],
+      "en": [],
+      "ru": []
+    }
+  },
+  {
+    "book": "39_MAL",
+    "packets": 4,
+    "missing": {
+      "de": [],
+      "en": [],
+      "ru": []
+    }
+  },
+  {
+    "book": "40_MAT",
+    "packets": 48,
+    "missing": {
+      "de": [],
+      "en": [],
+      "ru": []
+    }
+  },
+  {
+    "book": "41_MRK",
+    "packets": 31,
+    "missing": {
+      "de": [],
+      "en": [],
+      "ru": []
+    }
+  },
+  {
+    "book": "42_LUK",
+    "packets": 51,
+    "missing": {
+      "de": [],
+      "en": [],
+      "ru": []
+    }
+  },
+  {
+    "book": "43_JHN",
+    "packets": 39,
+    "missing": {
+      "de": [],
+      "en": [],
+      "ru": []
+    }
+  },
+  {
+    "book": "44_ACT",
+    "packets": 46,
+    "missing": {
+      "de": [],
+      "en": [],
+      "ru": []
+    }
+  },
+  {
+    "book": "45_ROM",
+    "packets": 22,
+    "missing": {
+      "de": [],
+      "en": [],
+      "ru": []
+    }
+  },
+  {
+    "book": "46_1CO",
+    "packets": 23,
+    "missing": {
+      "de": [],
+      "en": [],
+      "ru": []
+    }
+  },
+  {
+    "book": "47_2CO",
+    "packets": 14,
+    "missing": {
+      "de": [],
+      "en": [],
+      "ru": []
+    }
+  },
+  {
+    "book": "48_GAL",
+    "packets": 7,
+    "missing": {
+      "de": [],
+      "en": [],
+      "ru": []
+    }
+  },
+  {
+    "book": "49_EPH",
+    "packets": 8,
+    "missing": {
+      "de": [],
+      "en": [],
+      "ru": []
+    }
+  },
+  {
+    "book": "50_PHP",
+    "packets": 4,
+    "missing": {
+      "de": [],
+      "en": [],
+      "ru": []
+    }
+  },
+  {
+    "book": "51_COL",
+    "packets": 4,
+    "missing": {
+      "de": [],
+      "en": [],
+      "ru": []
+    }
+  },
+  {
+    "book": "52_1TH",
+    "packets": 5,
+    "missing": {
+      "de": [],
+      "en": [],
+      "ru": []
+    }
+  },
+  {
+    "book": "53_2TH",
+    "packets": 3,
+    "missing": {
+      "de": [],
+      "en": [],
+      "ru": []
+    }
+  },
+  {
+    "book": "54_1TI",
+    "packets": 6,
+    "missing": {
+      "de": [
+        "1TI_001",
+        "1TI_002",
+        "1TI_003",
+        "1TI_004",
+        "1TI_005",
+        "1TI_006"
+      ],
+      "en": [
+        "1TI_001",
+        "1TI_002",
+        "1TI_003",
+        "1TI_004",
+        "1TI_005",
+        "1TI_006"
+      ],
+      "ru": [
+        "1TI_001",
+        "1TI_002",
+        "1TI_003",
+        "1TI_004",
+        "1TI_005",
+        "1TI_006"
+      ]
+    }
+  },
+  {
+    "book": "55_2TI",
+    "packets": 4,
+    "missing": {
+      "de": [
+        "2TI_001",
+        "2TI_002",
+        "2TI_003",
+        "2TI_004"
+      ],
+      "en": [
+        "2TI_001",
+        "2TI_002",
+        "2TI_003",
+        "2TI_004"
+      ],
+      "ru": [
+        "2TI_001",
+        "2TI_002",
+        "2TI_003",
+        "2TI_004"
+      ]
+    }
+  },
+  {
+    "book": "56_TIT",
+    "packets": 3,
+    "missing": {
+      "de": [
+        "TIT_001",
+        "TIT_002",
+        "TIT_003"
+      ],
+      "en": [
+        "TIT_001",
+        "TIT_002",
+        "TIT_003"
+      ],
+      "ru": [
+        "TIT_001",
+        "TIT_002",
+        "TIT_003"
+      ]
+    }
+  },
+  {
+    "book": "58_HEB",
+    "packets": 15,
+    "missing": {
+      "de": [
+        "HEB_001",
+        "HEB_002",
+        "HEB_003",
+        "HEB_004",
+        "HEB_005",
+        "HEB_006",
+        "HEB_007",
+        "HEB_008",
+        "HEB_009",
+        "HEB_010_1",
+        "HEB_010_2",
+        "HEB_011_1",
+        "HEB_011_2",
+        "HEB_012",
+        "HEB_013"
+      ],
+      "en": [
+        "HEB_001",
+        "HEB_002",
+        "HEB_003",
+        "HEB_004",
+        "HEB_005",
+        "HEB_006",
+        "HEB_007",
+        "HEB_008",
+        "HEB_009",
+        "HEB_010_1",
+        "HEB_010_2",
+        "HEB_011_1",
+        "HEB_011_2",
+        "HEB_012",
+        "HEB_013"
+      ],
+      "ru": [
+        "HEB_001",
+        "HEB_002",
+        "HEB_003",
+        "HEB_004",
+        "HEB_005",
+        "HEB_006",
+        "HEB_007",
+        "HEB_008",
+        "HEB_009",
+        "HEB_010_1",
+        "HEB_010_2",
+        "HEB_011_1",
+        "HEB_011_2",
+        "HEB_012",
+        "HEB_013"
+      ]
+    }
+  },
+  {
+    "book": "59_JAS",
+    "packets": 5,
+    "missing": {
+      "de": [
+        "JAS_001",
+        "JAS_002",
+        "JAS_003",
+        "JAS_004",
+        "JAS_005"
+      ],
+      "en": [
+        "JAS_001",
+        "JAS_002",
+        "JAS_003",
+        "JAS_004",
+        "JAS_005"
+      ],
+      "ru": [
+        "JAS_001",
+        "JAS_002",
+        "JAS_003",
+        "JAS_004",
+        "JAS_005"
+      ]
+    }
+  },
+  {
+    "book": "60_1PE",
+    "packets": 5,
+    "missing": {
+      "de": [
+        "1PE_001",
+        "1PE_002",
+        "1PE_003",
+        "1PE_004",
+        "1PE_005"
+      ],
+      "en": [
+        "1PE_001",
+        "1PE_002",
+        "1PE_003",
+        "1PE_004",
+        "1PE_005"
+      ],
+      "ru": [
+        "1PE_001",
+        "1PE_002",
+        "1PE_003",
+        "1PE_004",
+        "1PE_005"
+      ]
+    }
+  },
+  {
+    "book": "61_2PE",
+    "packets": 3,
+    "missing": {
+      "de": [
+        "2PE_001",
+        "2PE_002",
+        "2PE_003"
+      ],
+      "en": [
+        "2PE_001",
+        "2PE_002",
+        "2PE_003"
+      ],
+      "ru": [
+        "2PE_001",
+        "2PE_002",
+        "2PE_003"
+      ]
+    }
+  },
+  {
+    "book": "62_1JN",
+    "packets": 5,
+    "missing": {
+      "de": [
+        "1JN_001",
+        "1JN_002",
+        "1JN_003",
+        "1JN_004",
+        "1JN_005"
+      ],
+      "en": [
+        "1JN_001",
+        "1JN_002",
+        "1JN_003",
+        "1JN_004",
+        "1JN_005"
+      ],
+      "ru": [
+        "1JN_001",
+        "1JN_002",
+        "1JN_003",
+        "1JN_004",
+        "1JN_005"
+      ]
+    }
+  },
+  {
+    "book": "63_2JN",
+    "packets": 1,
+    "missing": {
+      "de": [
+        "2JN_001"
+      ],
+      "en": [
+        "2JN_001"
+      ],
+      "ru": [
+        "2JN_001"
+      ]
+    }
+  },
+  {
+    "book": "64_3JN",
+    "packets": 1,
+    "missing": {
+      "de": [
+        "3JN_001"
+      ],
+      "en": [
+        "3JN_001"
+      ],
+      "ru": [
+        "3JN_001"
+      ]
+    }
+  },
+  {
+    "book": "65_JUD",
+    "packets": 1,
+    "missing": {
+      "de": [
+        "JUD_001"
+      ],
+      "en": [
+        "JUD_001"
+      ],
+      "ru": [
+        "JUD_001"
+      ]
+    }
+  },
+  {
+    "book": "66_REV",
+    "packets": 22,
+    "missing": {
+      "de": [
+        "REV_001",
+        "REV_002",
+        "REV_003",
+        "REV_004",
+        "REV_005",
+        "REV_006",
+        "REV_007",
+        "REV_008",
+        "REV_009",
+        "REV_010",
+        "REV_011",
+        "REV_012",
+        "REV_013",
+        "REV_014",
+        "REV_015",
+        "REV_016",
+        "REV_017",
+        "REV_018",
+        "REV_019",
+        "REV_020",
+        "REV_021",
+        "REV_022"
+      ],
+      "en": [
+        "REV_001",
+        "REV_002",
+        "REV_003",
+        "REV_004",
+        "REV_005",
+        "REV_006",
+        "REV_007",
+        "REV_008",
+        "REV_009",
+        "REV_010",
+        "REV_011",
+        "REV_012",
+        "REV_013",
+        "REV_014",
+        "REV_015",
+        "REV_016",
+        "REV_017",
+        "REV_018",
+        "REV_019",
+        "REV_020",
+        "REV_021",
+        "REV_022"
+      ],
+      "ru": [
+        "REV_001",
+        "REV_002",
+        "REV_003",
+        "REV_004",
+        "REV_005",
+        "REV_006",
+        "REV_007",
+        "REV_008",
+        "REV_009",
+        "REV_010",
+        "REV_011",
+        "REV_012",
+        "REV_013",
+        "REV_014",
+        "REV_015",
+        "REV_016",
+        "REV_017",
+        "REV_018",
+        "REV_019",
+        "REV_020",
+        "REV_021",
+        "REV_022"
+      ]
+    }
+  }
+]

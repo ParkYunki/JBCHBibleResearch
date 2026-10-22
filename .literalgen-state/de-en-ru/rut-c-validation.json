@@ -1,0 +1,32 @@
+{
+  "status": "passed",
+  "files": [
+    {
+      "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/08_RUT/RUT_003.tsv",
+      "rows": 18,
+      "sha256": "7dcc78a2010980e6e890d9ab6a94c94baa00a9b41c725291cf54af45bedc556e"
+    },
+    {
+      "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/08_RUT/RUT_004.tsv",
+      "rows": 22,
+      "sha256": "56754a6807b3081d378bd03d85f0c8b4ecb83ee392da87fb839b5edb0a3eab0a"
+    },
+    {
+      "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/08_RUT/RUT_003.tsv",
+      "rows": 18,
+      "sha256": "3b47b4a42bdf43b5cc8b7232f1e891df2c1ed04a1542ff3cdc4a514bdf5722fb"
+    },
+    {
+      "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/08_RUT/RUT_004.tsv",
+      "rows": 22,
+      "sha256": "7c92123c7a410f049a9ed97842d27cfe0161c3606949037a080281d925518eb0"
+    }
+  ],
+  "file_count": 4,
+  "rows": 80,
+  "all_assigned_verses_reviewed": true,
+  "qa_candidates": 3,
+  "root_en_independent_rows": 40,
+  "root_en_qa_candidates": 3,
+  "existing_outputs_modified": false
+}

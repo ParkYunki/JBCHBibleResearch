@@ -1,0 +1,13 @@
+{
+  "created_files": 25,
+  "created_rows": 560,
+  "own_full_qa": true,
+  "own_candidates": 10,
+  "root_en_files": 5,
+  "root_en_rows": 109,
+  "root_en_full_qa": true,
+  "root_en_candidates": 4,
+  "protected_files": 10324,
+  "protected_unchanged": true,
+  "tsv_direct_changes": false
+}

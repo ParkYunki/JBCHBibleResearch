@@ -48,7 +48,7 @@ final class PendingMemoImportRequest {
         } catch {
             print("[PendingMemoImportRequest] 받은 묵상 파일 열기 실패: \(error)")
             pending = nil
-            lastImportError = "받은 파일을 열 수 없습니다. 이 앱에서 공유한 개인 묵상 파일(.\(SharedMemoFile.fileExtension))이 맞는지 확인해 주세요."
+            lastImportError = String(localized: "받은 파일을 열 수 없습니다. 이 앱에서 공유한 개인 묵상 파일(.\(SharedMemoFile.fileExtension))이 맞는지 확인해 주세요.")
         }
     }
 

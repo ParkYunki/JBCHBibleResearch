@@ -395,8 +395,8 @@ struct SermonViewerView: View {
     private var viewModeToggle: some View {
         SermonSegmentedPill(
             items: [
-                .init(tag: false, label: "스크롤", systemImage: "text.alignleft"),
-                .init(tag: true, label: "페이지", systemImage: "book"),
+                .init(tag: false, label: String(localized: "스크롤"), systemImage: "text.alignleft"),
+                .init(tag: true, label: String(localized: "페이지"), systemImage: "book"),
             ],
             selection: Binding(
                 get: { settings.sermonViewerUsesPageMode },
@@ -502,7 +502,7 @@ struct SermonViewerView: View {
         if pageIndex < paginator.pageCount - 1 {
             pageIndex += 1
         } else {
-            showToast("마지막 쪽입니다")
+            showToast(String(localized: "마지막 쪽입니다"))
         }
     }
 
@@ -510,7 +510,7 @@ struct SermonViewerView: View {
         if pageIndex > 0 {
             pageIndex -= 1
         } else {
-            showToast("첫 쪽입니다")
+            showToast(String(localized: "첫 쪽입니다"))
         }
     }
 
@@ -519,7 +519,7 @@ struct SermonViewerView: View {
         settings.sermonViewerChromeHidden.toggle()
         peekTop = false
         peekBottom = false
-        showToast(settings.sermonViewerChromeHidden ? "바를 숨겼습니다 — 가운데를 누르면 다시 보입니다" : "바를 보입니다")
+        showToast(settings.sermonViewerChromeHidden ? String(localized: "바를 숨겼습니다 — 가운데를 누르면 다시 보입니다") : String(localized: "바를 보입니다"))
     }
 
     #if os(iOS)

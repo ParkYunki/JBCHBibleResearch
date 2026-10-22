@@ -2,7 +2,7 @@
 //  BundledFontRegistrar.swift
 //  JBCHBibleResearch
 //
-//  앱에 내장한 Paperlogy(9종)·고운바탕 등 번들 글꼴을 앱 실행 시 한 번 CoreText에
+//  앱에 내장한 Paperlogy(9종)·고운바탕·다국어 글꼴(태국어/키릴/베트남어, 2026-10-12) 등 번들 글꼴을 앱 실행 시 한 번 CoreText에
 //  등록해, SwiftUI `Font.custom(_:size:)`와 설정 화면 글꼴 목록에서 바로 쓰게 한다.
 //
 //  프로세스 단위(.process)로만 등록한다 — `.persistent`는 앱 삭제 후에도 흔적이 남을 수
@@ -48,8 +48,8 @@ enum BundledFonts {
 
     /// 내장 고운바탕(OFL-1.1) 2종. Paperlogy와 같이 PostScript 이름으로 등록·선택한다.
     static let gowunBatangEntries: [Entry] = [
-        Entry(postScriptName: "GowunBatang-Regular", displayName: "고운바탕 Regular"),
-        Entry(postScriptName: "GowunBatang-Bold", displayName: "고운바탕 Bold"),
+        Entry(postScriptName: "GowunBatang-Regular", displayName: String(localized: "고운바탕 Regular")),
+        Entry(postScriptName: "GowunBatang-Bold", displayName: String(localized: "고운바탕 Bold")),
     ]
 
     /// 설정 화면 "내장 기본 글꼴" 섹션에 나열하는 전체 목록(Paperlogy 9종 + 고운바탕 2종).
@@ -57,6 +57,133 @@ enum BundledFonts {
 
     /// 앱 기본 글꼴의 PostScript 이름.
     static let defaultPostScriptName = "Paperlogy-4Regular"
+
+    // MARK: 다국어 글꼴 (2026-10-12 추가)
+    //
+    // Paperlogy·고운바탕·KMU80에 없는 문자(태국어, 러시아어 키릴, 베트남어 성조 글자)를 같은 글꼴로
+    // 일관되게 그리기 위해 번들한 SIL OFL 1.1 글꼴. 출처·라이선스는 `Fonts/OFL-*.txt`와 설정 > 라이센스 탭.
+    //  - IBM Plex Sans Thai: google/fonts `ofl/ibmplexsansthai` (태국어 + 기본 라틴. 키릴·베트남어 없음)
+    //  - Noto Serif Thai: notofonts.github.io `fonts/NotoSerifThai/hinted/ttf` (태국어만 — 라틴·숫자 없음,
+    //    숫자/영문은 시스템 글꼴로 대체된다)
+    //  - Inter: rsms/inter v4.1 `extras/ttf` (라틴·키릴·베트남어)
+    //  - Be Vietnam Pro: google/fonts `ofl/bevietnampro` (라틴·베트남어. 키릴 없음)
+    // 굵기마다 family 이름이 따로라(name 테이블 확인) Paperlogy처럼 PostScript 이름으로 쓴다.
+    // ⚠️ 이 글꼴들에는 한글이 없다. 한글이 섞이면 그 글자만 시스템 글꼴로 대체된다.
+
+    /// 글꼴 메뉴의 서브메뉴 하나(family 이름 + 굵기별 항목). `languageCode`는 이 글꼴을 메뉴에 보여줄
+    /// 앱 언어(`AppLanguage.baseCode`) — 지역 전용 글꼴이다(아래 `visibleMultilingualFamilies`).
+    struct Family: Identifiable, Hashable {
+        let name: String
+        let entries: [Entry]
+        let languageCode: String
+        var id: String { name }
+    }
+
+    static let ibmPlexSansThaiEntries: [Entry] = [
+        Entry(postScriptName: "IBMPlexSansThai-Light", displayName: "IBM Plex Sans Thai Light"),
+        Entry(postScriptName: "IBMPlexSansThai-Regular", displayName: "IBM Plex Sans Thai Regular"),
+        Entry(postScriptName: "IBMPlexSansThai-Medium", displayName: "IBM Plex Sans Thai Medium"),
+        Entry(postScriptName: "IBMPlexSansThai-SemiBold", displayName: "IBM Plex Sans Thai SemiBold"),
+        Entry(postScriptName: "IBMPlexSansThai-Bold", displayName: "IBM Plex Sans Thai Bold"),
+    ]
+
+    static let notoSerifThaiEntries: [Entry] = [
+        Entry(postScriptName: "NotoSerifThai-Regular", displayName: "Noto Serif Thai Regular"),
+        Entry(postScriptName: "NotoSerifThai-Bold", displayName: "Noto Serif Thai Bold"),
+    ]
+
+    static let interEntries: [Entry] = [
+        Entry(postScriptName: "Inter-Light", displayName: "Inter Light"),
+        Entry(postScriptName: "Inter-Regular", displayName: "Inter Regular"),
+        Entry(postScriptName: "Inter-Medium", displayName: "Inter Medium"),
+        Entry(postScriptName: "Inter-SemiBold", displayName: "Inter SemiBold"),
+        Entry(postScriptName: "Inter-Bold", displayName: "Inter Bold"),
+        Entry(postScriptName: "Inter-ExtraBold", displayName: "Inter ExtraBold"),
+    ]
+
+    static let beVietnamProEntries: [Entry] = [
+        Entry(postScriptName: "BeVietnamPro-Light", displayName: "Be Vietnam Pro Light"),
+        Entry(postScriptName: "BeVietnamPro-Regular", displayName: "Be Vietnam Pro Regular"),
+        Entry(postScriptName: "BeVietnamPro-Medium", displayName: "Be Vietnam Pro Medium"),
+        Entry(postScriptName: "BeVietnamPro-SemiBold", displayName: "Be Vietnam Pro SemiBold"),
+        Entry(postScriptName: "BeVietnamPro-Bold", displayName: "Be Vietnam Pro Bold"),
+        Entry(postScriptName: "BeVietnamPro-ExtraBold", displayName: "Be Vietnam Pro ExtraBold"),
+    ]
+
+    /// 글꼴 메뉴(메모 에디터·설교 에디터)와 설정 > 성경 조회 글꼴 목록에 보여줄 다국어 글꼴 묶음.
+    static let multilingualFamilies: [Family] = [
+        Family(name: "IBM Plex Sans Thai", entries: ibmPlexSansThaiEntries, languageCode: "th"),
+        Family(name: "Noto Serif Thai", entries: notoSerifThaiEntries, languageCode: "th"),
+        Family(name: "Inter", entries: interEntries, languageCode: "ru"),
+        Family(name: "Be Vietnam Pro", entries: beVietnamProEntries, languageCode: "vi"),
+    ]
+
+    // MARK: 공통 글꼴 / 지역 전용 글꼴 (2026-10-12, 사용자 결정: 앱 언어 기준)
+    //
+    // - 공통(모든 언어의 메뉴에 표시): Paperlogy, 고운바탕
+    // - 지역 전용(그 앱 언어에서만 메뉴에 표시): IBM Plex Sans Thai·Noto Serif Thai(th), Inter(ru),
+    //   Be Vietnam Pro(vi), 조선궁서체(ko — 한자 주석용 한국어 전용 글꼴)
+    // 숨김은 "고르는 메뉴"에만 적용한다. 글꼴 파일은 모든 기기에 번들돼 있으므로 다른 언어 기기에서 만든
+    // 문서·이미 저장된 설정은 그대로 그려진다. 설정 화면 Picker처럼 현재 선택값을 보여줘야 하는 곳은
+    // 현재 선택된 글꼴이면 숨기지 않는다(그래야 빈칸으로 보이지 않는다). 타이틀 대체 서체(`TitleFont`)는
+    // 자동 선택이라 이 구분과 무관하다.
+
+    /// 지금 앱 언어의 메뉴에 보여줄 지역 전용 다국어 글꼴.
+    static var visibleMultilingualFamilies: [Family] {
+        multilingualFamilies.filter { $0.languageCode == AppLanguage.baseCode }
+    }
+
+    /// 한국어 전용 글꼴(조선궁서체)을 메뉴에 보여줄지.
+    static var isKoreanOnlyFontVisible: Bool { AppLanguage.isKorean }
+
+    /// 시스템 글꼴 목록(설정 화면)에서 번들 글꼴이 중복으로 보이지 않게 걸러낼 family 이름 접두어.
+    /// 등록된 번들 글꼴도 `UIFont.familyNames`/`NSFontManager.availableFontFamilies`에 나타난다.
+    static let bundledFamilyNamePrefixes: [String] = ["Paperlogy", "IBM Plex Sans Thai", "Noto Serif Thai", "Inter", "Be Vietnam Pro"]
+
+    /// 등록 확인 로그에 쓰는 번들 글꼴 총 개수(목록에서 고르는 글꼴만, 특수 목적 폰트 제외).
+    static var selectableFontCount: Int {
+        entries.count + multilingualFamilies.reduce(0) { $0 + $1.entries.count }
+    }
+
+    /// 기본 스타일 값(에디터 기본 글꼴, 설교 문단 스타일 기본 글꼴)을 앱 언어에 맞게 바꾼다.
+    /// Paperlogy/고운바탕에 그 언어 글자가 없으면 같은 굵기의 다국어 글꼴로 바꾸고, 그 밖은 그대로 둔다.
+    ///  - th: Paperlogy → IBM Plex Sans Thai(ExtraBold 이상은 Bold — 번들 최대 굵기), 고운바탕 → Noto Serif Thai
+    ///  - ru: Paperlogy → Inter, 고운바탕 → Gentium(이미 번들, 키릴 지원)
+    ///  - vi: Paperlogy → Be Vietnam Pro(Paperlogy는 베트남어 성조 글자 일부만 있어 한 단어 안에서 글꼴이 섞인다),
+    ///        고운바탕은 베트남어를 모두 지원하므로 그대로
+    /// ⚠️ "기본값"에만 쓴다. 사용자가 직접 고른 글꼴(저장된 값)과 이미 저장된 문서의 글꼴은 바꾸지 않는다.
+    nonisolated static func languageAdjustedDefaultFontName(_ postScriptName: String) -> String {
+        let language = AppLanguage.baseCode
+        guard language == "th" || language == "ru" || language == "vi" else { return postScriptName }
+
+        if postScriptName.hasPrefix("Paperlogy-") {
+            let weight: String
+            switch postScriptName {
+            case "Paperlogy-1Thin", "Paperlogy-2ExtraLight", "Paperlogy-3Light": weight = "Light"
+            case "Paperlogy-4Regular": weight = "Regular"
+            case "Paperlogy-5Medium": weight = "Medium"
+            case "Paperlogy-6SemiBold": weight = "SemiBold"
+            case "Paperlogy-7Bold": weight = "Bold"
+            case "Paperlogy-8ExtraBold", "Paperlogy-9Black": weight = language == "th" ? "Bold" : "ExtraBold"
+            default: return postScriptName
+            }
+            switch language {
+            case "th": return "IBMPlexSansThai-\(weight)"
+            case "ru": return "Inter-\(weight)"
+            default: return "BeVietnamPro-\(weight)"
+            }
+        }
+
+        if postScriptName.hasPrefix("GowunBatang-") {
+            let isBold = postScriptName == "GowunBatang-Bold"
+            switch language {
+            case "th": return isBold ? "NotoSerifThai-Bold" : "NotoSerifThai-Regular"
+            case "ru": return isBold ? "Gentium-Bold" : "Gentium-Regular"
+            default: return postScriptName
+            }
+        }
+        return postScriptName
+    }
 }
 
 /// 목록에서 고르는 범용 글꼴(`BundledFonts`)과 달리, 특정 언어 글자를 항상 이 글꼴로만
@@ -81,6 +208,12 @@ enum SpecialPurposeFonts {
     /// 화면 "라이센스" 탭에 있다. Regular 하나뿐이라 굵게 표시할 곳은 SwiftUI가 화면에서만
     /// 합성 볼드를 적용하며 폰트 파일 자체는 변경하지 않는다.
     static let titleSerif = "KMU-SungkokSerif"
+
+    /// 타이틀 대체 서체(2026-10-12) — KMU80에 없는 라틴 악센트·키릴·베트남어 글자가 들어간 타이틀에
+    /// 쓴다(`TitleFont` 참고). 이미 번들된 SIL Gentium(라틴·키릴·베트남어·그리스어 지원)을 재사용한다.
+    static let titleSerifLatinFallback = "Gentium-Regular"
+    /// 태국어 타이틀 서체 — Noto Serif Thai(태국어 글자만 있음, 숫자·영문은 시스템 글꼴로 대체).
+    static let titleSerifThai = "NotoSerifThai-Regular"
 }
 
 enum BundledFontRegistrar {
@@ -110,7 +243,8 @@ enum BundledFontRegistrar {
                 print("[BundledFontRegistrar] \(url.lastPathComponent) 등록 실패: \(description)")
             }
         }
-        let expectedCount = BundledFonts.entries.count + 5 // 한자 1 + 히브리어 1 + 그리스어 2 + 타이틀 세리프 1
+        // 한자 1 + 히브리어 1 + Gentium 5(그리스어/타이틀 대체 서체 — 번들 굵기 전체) + 타이틀 세리프 1
+        let expectedCount = BundledFonts.selectableFontCount + 8
         print("[BundledFontRegistrar] 번들 폰트 \(registeredPostScriptNames.count)/\(expectedCount)개 등록 완료: \(registeredPostScriptNames)")
     }
 
@@ -164,7 +298,10 @@ enum BundledFontRegistrar {
         let dedupedSubdirectory = Array(Set(subdirectoryURLs))
         if !dedupedSubdirectory.isEmpty { return dedupedSubdirectory }
 
-        let knownPrefixes = ["Paperlogy", "GowunBatang", "ChosunGs", "SILEOT", "Gentium", "KMU80SungkokSerif"]
+        let knownPrefixes = [
+            "Paperlogy", "GowunBatang", "ChosunGs", "SILEOT", "Gentium", "KMU80SungkokSerif",
+            "IBMPlexSansThai", "NotoSerifThai", "Inter-", "BeVietnamPro",
+        ]
         let rootURLs = (
             (Bundle.main.urls(forResourcesWithExtension: "ttf", subdirectory: nil) ?? [])
                 + (Bundle.main.urls(forResourcesWithExtension: "TTF", subdirectory: nil) ?? [])

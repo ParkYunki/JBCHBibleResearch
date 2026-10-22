@@ -1,0 +1,62 @@
+[
+  {
+    "path": "Tools/LiteralGen/outputs/de/19_PSA/PSA_022_1.tsv",
+    "old_row": "30\tEin Same wird ihm dienen; dem Herrn wird von der Generation erzählt werden.\tEin Same steht als Subjekt; das Erzählen ist passiv.",
+    "new_row": "30\tEin Same wird ihm dienen; vom Herrn wird der Generation erzählt werden.\tEin Same steht als Subjekt; das Erzählen ist passiv."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/19_PSA/PSA_086.tsv",
+    "old_row": "2\tBewahre meine Seele, denn ich bin getreu; rette deinen Knecht, du, mein Gott, der auf dich vertraut!\tGetreu und Retten sind ausdrücklich.",
+    "new_row": "2\tBewahre meine Seele, denn ich bin getreu; rette, du, mein Gott, deinen Knecht, der auf dich vertraut!\tGetreu und Retten sind ausdrücklich."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/19_PSA/PSA_084.tsv",
+    "old_row": "9\tНаш щит посмотри, Боже, и взгляни на лицо Твоего помазанника!\tЩит назван прямо.",
+    "new_row": "9\tНа наш щит посмотри, Боже, и взгляни на лицо Твоего помазанника!\tЩит назван прямо."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/19_PSA/PSA_083.tsv",
+    "old_row": "1\tПеснь. Псалом Асафа. Боже, да не будет Тебе молчания; не безмолвствуй и не покойся, Бог!\tПервое молчание дано существительным.",
+    "new_row": "1\tПеснь. Псалом Асафа. Боже, да не будет Тебе молчания; не безмолвствуй и не покойся, Боже!\tПервое молчание дано существительным."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/19_PSA/PSA_098.tsv",
+    "old_row": "1\tПсалом. Пойте Господу новую песню, ибо Он сделал чудеса; Его десница и Его святая мышца спасли Ему.\tДавид в заглавии не добавлен.",
+    "new_row": "1\tПсалом. Пойте Господу новую песню, ибо Он сделал чудеса; Его десница и Его святая мышца доставили Ему спасение.\tДавид в заглавии не добавлен."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/19_PSA/PSA_094.tsv",
+    "old_row": "1\tБог отмщений, Господи, Бог отмщений, воссияй!\tЗаглавие о Давиде не добавлено; сияние названо прямо.",
+    "new_row": "1\tБоже отмщений, Господи, Боже отмщений, воссияй!\tЗаглавие о Давиде не добавлено; сияние названо прямо."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/19_PSA/PSA_095.tsv",
+    "old_row": "11\tden ich in meinem Zorn geschworen habe: ‚Sie werden nicht in meine Ruhe eingehen!‘“\tDas Eingehen ist ausdrücklich.",
+    "new_row": "11\tdenen ich in meinem Zorn geschworen habe: ‚Sie werden nicht in meine Ruhe eingehen!‘“\tDas Eingehen ist ausdrücklich."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/19_PSA/PSA_139.tsv",
+    "old_row": "22\tMit vollkommener Feindschaft habe ich sie gehasst; sie sind mir zu Feinden geworden.\tDer Wortstamm des Hasses wird wiederholt; der Hass ist als geschehen formuliert.",
+    "new_row": "22\tMit vollkommenem Hass habe ich sie gehasst; sie sind mir zu Feinden geworden.\tDer Wortstamm des Hasses wird wiederholt; der Hass ist als geschehen formuliert."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/19_PSA/PSA_138.tsv",
+    "old_row": "2\tПоклонюсь к Твоему святому храму и буду благодарить Твоё имя за Твою милость и за Твою истину, ибо Ты возвеличил Твоё слово над всем Твоим именем.\tНаправление поклонения — «к храму», а не «пред храмом».",
+    "new_row": "2\tПоклонюсь в сторону Твоего святого храма и буду благодарить Твоё имя за Твою милость и за Твою истину, ибо Ты возвеличил Твоё слово над всем Твоим именем.\tНаправление поклонения — «к храму», а не «пред храмом»."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/19_PSA/PSA_140.tsv",
+    "old_row": "4\tBewahre mich, HERR, vor den Händen des Frevlers; vor einem Mann der Gewalttaten behüte mich, die erdacht haben, meine Schritte umzustoßen.\tHände und Schritte stehen im Plural, Frevler und Mann im Singular.",
+    "new_row": "4\tBewahre mich, HERR, vor den Händen des Frevlers; vor einem Mann der Gewalttaten behüte mich; sie haben erdacht, meine Schritte umzustoßen.\tHände und Schritte stehen im Plural, Frevler und Mann im Singular."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/19_PSA/PSA_140.tsv",
+    "old_row": "4\tОхрани меня, Господи, от рук нечестивого; от человека насилий сохрани меня, которые замыслили опрокинуть мои шаги.\t«Человек» стоит в единственном числе вместо множественного «притеснителей».",
+    "new_row": "4\tОхрани меня, Господи, от рук нечестивого; от человека насилий сохрани меня; они замыслили опрокинуть мои шаги.\t«Человек» стоит в единственном числе вместо множественного «притеснителей»."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/19_PSA/PSA_140.tsv",
+    "old_row": "3\tОни заострили свой язык, как змея; яд аспида под их губами. Села.\tШлифование языка представлено как совершённое; в конце сохранено «Села».",
+    "new_row": "3\tОни заострили свой язык, как змея; яд аспида под их губами. Села.\tЗаострение языка представлено как совершённое; в конце сохранено «Села»."
+  }
+]

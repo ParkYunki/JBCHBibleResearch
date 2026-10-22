@@ -1,0 +1,233 @@
+[
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/04_NUM/NUM_006.tsv",
+    "verse": 27,
+    "old_row": "27\tUnd sie sollen meinen Namen auf die Söhne Israels legen, und ich werde sie segnen.“\t„Sie sollen“ bewahrt die dritte Person statt „ihr sollt“; die Segnung folgt als eigener Hauptsatz. نام",
+    "new_row": "27\tUnd sie sollen meinen Namen auf die Söhne Israels legen, und ich werde sie segnen.“\t„Sie sollen“ bewahrt die dritte Person statt „ihr sollt“; die Segnung folgt als eigener Hauptsatz.",
+    "reason": "Remove accidental non-German word from the difference field."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/04_NUM/NUM_005_1.tsv",
+    "verse": 13,
+    "old_row": "13\tund ein Mann mit Samenerguss bei ihr liegt und es vor den Augen ihres Mannes verborgen bleibt und sie unentdeckt ist, obwohl sie sich verunreinigt hat, und kein Zeuge gegen sie da ist und sie nicht ertappt wurde,\tNah am Hebräischen.",
+    "new_row": "13\tund ein Mann mit Samenerguss bei ihr liegt und es vor den Augen ihres Mannes verborgen bleibt und sie unentdeckt ist, obwohl sie sich verunreinigt hat, und kein Zeuge gegen sie da ist und sie nicht ertappt wurde,\t„Unentdeckt“ bewahrt das Verborgensein statt „würde entdeckt“; es ist ausdrücklich kein Zeuge vorhanden.",
+    "reason": "Record the clear concealment-versus-discovery contrast in TARGET."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/04_NUM/NUM_001_1.tsv",
+    "verse": 4,
+    "old_row": "4\tUnd bei euch sollen Mann für Mann für jeden Stamm sein, ein Mann, der Haupt seines Vaterhauses ist.\tDie Männer sollen bei ihnen sein; ein ausdrückliches Zu-sich-Nehmen steht hier nicht.",
+    "new_row": "4\tUnd bei euch soll je ein Mann für jeden Stamm sein, ein Mann, der Haupt seines Vaterhauses ist.\tDie Männer sollen bei ihnen sein; ein ausdrückliches Zu-sich-Nehmen steht hier nicht.",
+    "reason": "Use natural German agreement for the distributive singular."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/04_NUM/NUM_001_1.tsv",
+    "verse": 21,
+    "old_row": "21\tИх исчисленных для колена Рувима: сорок шесть тысяч пятьсот.\tБлизко к еврейскому.",
+    "new_row": "21\tИх исчисленные для колена Рувима: сорок шесть тысяч пятьсот.\tБлизко к еврейскому.",
+    "reason": "Use nominative counted persons as the subject of the numerical nominal clause."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/04_NUM/NUM_001_1.tsv",
+    "verse": 23,
+    "old_row": "23\tИх исчисленных для колена Симеона: пятьдесят девять тысяч триста.\tБлизко к еврейскому.",
+    "new_row": "23\tИх исчисленные для колена Симеона: пятьдесят девять тысяч триста.\tБлизко к еврейскому.",
+    "reason": "Use nominative counted persons as the subject of the numerical nominal clause."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/04_NUM/NUM_001_1.tsv",
+    "verse": 25,
+    "old_row": "25\tИх исчисленных для колена Гада: сорок пять тысяч шестьсот пятьдесят.\tБлизко к еврейскому.",
+    "new_row": "25\tИх исчисленные для колена Гада: сорок пять тысяч шестьсот пятьдесят.\tБлизко к еврейскому.",
+    "reason": "Use nominative counted persons as the subject of the numerical nominal clause."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/04_NUM/NUM_001_1.tsv",
+    "verse": 27,
+    "old_row": "27\tИх исчисленных для колена Иуды: семьдесят четыре тысячи шестьсот.\tБлизко к еврейскому.",
+    "new_row": "27\tИх исчисленные для колена Иуды: семьдесят четыре тысячи шестьсот.\tБлизко к еврейскому.",
+    "reason": "Use nominative counted persons as the subject of the numerical nominal clause."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/04_NUM/NUM_001_1.tsv",
+    "verse": 29,
+    "old_row": "29\tИх исчисленных для колена Иссахара: пятьдесят четыре тысячи четыреста.\tБлизко к еврейскому.",
+    "new_row": "29\tИх исчисленные для колена Иссахара: пятьдесят четыре тысячи четыреста.\tБлизко к еврейскому.",
+    "reason": "Use nominative counted persons as the subject of the numerical nominal clause."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/04_NUM/NUM_001_2.tsv",
+    "verse": 31,
+    "old_row": "31\tИх исчисленных для колена Завулона: пятьдесят семь тысяч четыреста.\tБлизко к еврейскому.",
+    "new_row": "31\tИх исчисленные для колена Завулона: пятьдесят семь тысяч четыреста.\tБлизко к еврейскому.",
+    "reason": "Use nominative counted persons as the subject of the numerical nominal clause."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/04_NUM/NUM_001_2.tsv",
+    "verse": 33,
+    "old_row": "33\tИх исчисленных для колена Ефрема: сорок тысяч пятьсот.\tБлизко к еврейскому.",
+    "new_row": "33\tИх исчисленные для колена Ефрема: сорок тысяч пятьсот.\tБлизко к еврейскому.",
+    "reason": "Use nominative counted persons as the subject of the numerical nominal clause."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/04_NUM/NUM_001_2.tsv",
+    "verse": 35,
+    "old_row": "35\tИх исчисленных для колена Манассии: тридцать две тысячи двести.\tБлизко к еврейскому.",
+    "new_row": "35\tИх исчисленные для колена Манассии: тридцать две тысячи двести.\tБлизко к еврейскому.",
+    "reason": "Use nominative counted persons as the subject of the numerical nominal clause."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/04_NUM/NUM_001_2.tsv",
+    "verse": 37,
+    "old_row": "37\tИх исчисленных для колена Вениамина: тридцать пять тысяч четыреста.\tБлизко к еврейскому.",
+    "new_row": "37\tИх исчисленные для колена Вениамина: тридцать пять тысяч четыреста.\tБлизко к еврейскому.",
+    "reason": "Use nominative counted persons as the subject of the numerical nominal clause."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/04_NUM/NUM_001_2.tsv",
+    "verse": 39,
+    "old_row": "39\tИх исчисленных для колена Дана: шестьдесят две тысячи семьсот.\tБлизко к еврейскому.",
+    "new_row": "39\tИх исчисленные для колена Дана: шестьдесят две тысячи семьсот.\tБлизко к еврейскому.",
+    "reason": "Use nominative counted persons as the subject of the numerical nominal clause."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/04_NUM/NUM_001_2.tsv",
+    "verse": 41,
+    "old_row": "41\tИх исчисленных для колена Асира: сорок одна тысяча пятьсот.\tБлизко к еврейскому.",
+    "new_row": "41\tИх исчисленные для колена Асира: сорок одна тысяча пятьсот.\tБлизко к еврейскому.",
+    "reason": "Use nominative counted persons as the subject of the numerical nominal clause."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/04_NUM/NUM_001_2.tsv",
+    "verse": 43,
+    "old_row": "43\tИх исчисленных для колена Неффалима: пятьдесят три тысячи четыреста.\tБлизко к еврейскому.",
+    "new_row": "43\tИх исчисленные для колена Неффалима: пятьдесят три тысячи четыреста.\tБлизко к еврейскому.",
+    "reason": "Use nominative counted persons as the subject of the numerical nominal clause."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/04_NUM/NUM_003_2.tsv",
+    "verse": 38,
+    "old_row": "38\tUnd die vor der Wohnung nach Osten, vor dem Zelt der Begegnung zum Sonnenaufgang hin Lagerten, waren Mose und Aaron und seine Söhne, die den Dienst des Heiligtums als Dienst für die Söhne Israels bewahrten; und der Fremde, der herantritt, soll getötet werden.\tDie Ost-Richtung und die beiden Zeltbezeichnungen werden getrennt genannt; das Töten des Fremden steht passiv.",
+    "new_row": "38\tUnd die vor der Wohnung nach Osten, vor dem Zelt der Begegnung zum Sonnenaufgang hin lagerten, waren Mose und Aaron und seine Söhne, die den Dienst des Heiligtums als Dienst für die Söhne Israels bewahrten; und der Fremde, der herantritt, soll getötet werden.\tDie Ost-Richtung und die beiden Zeltbezeichnungen werden getrennt genannt; das Töten des Fremden steht passiv.",
+    "reason": "Lowercase the finite verb in the relative clause."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/04_NUM/NUM_003_1.tsv",
+    "verse": 16,
+    "old_row": "16\tИ Моисей исчислил их по устам Господа, как ему было повелено.\tСохранён образ уст Господа.",
+    "new_row": "16\tИ Моисей исчислил их по устам Господа, как ему было повелено.\tИсчисляет Моисей; Аарон в этом стихе не назван. Сохранён образ уст Господа.",
+    "reason": "Record the certain additional subject in the Russian target."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/04_NUM/NUM_009.tsv",
+    "verse": 17,
+    "old_row": "17\tИ когда облако поднималось над шатром, после того отправлялись сыны Израиля; и на месте, где облако поселялись, там становились станом сыны Израиля.\tБлизко к еврейскому.",
+    "new_row": "17\tИ когда облако поднималось над шатром, после того отправлялись сыны Израиля; и на месте, где облако поселялось, там становились станом сыны Израиля.\tБлизко к еврейскому.",
+    "reason": "Match the singular cloud with its singular verb."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/04_NUM/NUM_004_1.tsv",
+    "verse": 16,
+    "old_row": "16\tИ надзору Елеазара, сына Аарона, священника, принадлежат масло освещения и благовонное курение и постоянное хлебное приношение и масло помазания; надзор всей скинии и всего, что в ней, святилища и принадлежностей его».\tБлизко к еврейскому.",
+    "new_row": "16\tИ под надзором Елеазара, сына Аарона, священника, находятся масло освещения и благовонное курение и постоянное хлебное приношение и масло помазания; под его надзором вся скиния и всё, что в ней, святилище и принадлежности его».\tБлизко к еврейскому.",
+    "reason": "Use idiomatic Russian government of the oversight expression."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/04_NUM/NUM_005_1.tsv",
+    "verse": 28,
+    "old_row": "28\tUnd wenn die Frau sich nicht verunreinigt hat und rein ist, soll sie frei bleiben und mit Samen empfangen.\tNah am Hebräischen.",
+    "new_row": "28\tUnd wenn die Frau sich nicht verunreinigt hat und rein ist, soll sie frei bleiben und mit Samen besät werden.\t„Mit Samen besät werden“ bewahrt das passive Samenbild statt nur „schwanger werden“.",
+    "reason": "Preserve the passive seed image in grammatical German."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/04_NUM/NUM_006.tsv",
+    "verse": 25,
+    "old_row": "25\tДа осветит Господь лице Своё к тебе и помилует тебя!\tБлизко к еврейскому.",
+    "new_row": "25\tДа даст Господь лицу Своему сиять над тобой и помилует тебя!\tСохранено причинение сияния лица, а не только взгляд светлым лицом.",
+    "reason": "Express the causative shining in native Russian grammar."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/04_NUM/NUM_007_1.tsv",
+    "verse": 13,
+    "old_row": "13\tИ приношение его: одно серебряное блюдо, вес его сто тридцать сиклей, одна серебряная чаша в семьдесят сиклей по сиклю святилища, оба полные тонкой муки, смешанной с маслом, для хлебного приношения.\tБлизко к еврейскому.",
+    "new_row": "13\tИ приношение его: одно серебряное блюдо, вес его сто тридцать сиклей, одна серебряная чаша в семьдесят сиклей по сиклю святилища, оба полны тонкой муки, смешанной с маслом, для хлебного приношения.\tБлизко к еврейскому.",
+    "reason": "Use the short predicative adjective for the two full vessels."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/04_NUM/NUM_007_1.tsv",
+    "verse": 19,
+    "old_row": "19\tОн принёс приношение своё: одно серебряное блюдо, вес его сто тридцать сиклей, одна серебряная чаша в семьдесят сиклей по сиклю святилища, оба полные тонкой муки, смешанной с маслом, для хлебного приношения.\tБлизко к еврейскому.",
+    "new_row": "19\tОн принёс приношение своё: одно серебряное блюдо, вес его сто тридцать сиклей, одна серебряная чаша в семьдесят сиклей по сиклю святилища, оба полны тонкой муки, смешанной с маслом, для хлебного приношения.\tБлизко к еврейскому.",
+    "reason": "Use the short predicative adjective for the two full vessels."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/04_NUM/NUM_007_1.tsv",
+    "verse": 25,
+    "old_row": "25\tПриношение его: одно серебряное блюдо, вес его сто тридцать сиклей, одна серебряная чаша в семьдесят сиклей по сиклю святилища, оба полные тонкой муки, смешанной с маслом, для хлебного приношения.\tБлизко к еврейскому.",
+    "new_row": "25\tПриношение его: одно серебряное блюдо, вес его сто тридцать сиклей, одна серебряная чаша в семьдесят сиклей по сиклю святилища, оба полны тонкой муки, смешанной с маслом, для хлебного приношения.\tБлизко к еврейскому.",
+    "reason": "Use the short predicative adjective for the two full vessels."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/04_NUM/NUM_007_2.tsv",
+    "verse": 31,
+    "old_row": "31\tПриношение его: одно серебряное блюдо, вес его сто тридцать сиклей, одна серебряная чаша в семьдесят сиклей по сиклю святилища, оба полные тонкой муки, смешанной с маслом, для хлебного приношения.\tБлизко к еврейскому.",
+    "new_row": "31\tПриношение его: одно серебряное блюдо, вес его сто тридцать сиклей, одна серебряная чаша в семьдесят сиклей по сиклю святилища, оба полны тонкой муки, смешанной с маслом, для хлебного приношения.\tБлизко к еврейскому.",
+    "reason": "Use the short predicative adjective for the two full vessels."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/04_NUM/NUM_007_2.tsv",
+    "verse": 37,
+    "old_row": "37\tПриношение его: одно серебряное блюдо, вес его сто тридцать сиклей, одна серебряная чаша в семьдесят сиклей по сиклю святилища, оба полные тонкой муки, смешанной с маслом, для хлебного приношения.\tБлизко к еврейскому.",
+    "new_row": "37\tПриношение его: одно серебряное блюдо, вес его сто тридцать сиклей, одна серебряная чаша в семьдесят сиклей по сиклю святилища, оба полны тонкой муки, смешанной с маслом, для хлебного приношения.\tБлизко к еврейскому.",
+    "reason": "Use the short predicative adjective for the two full vessels."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/04_NUM/NUM_007_2.tsv",
+    "verse": 43,
+    "old_row": "43\tПриношение его: одно серебряное блюдо, вес его сто тридцать сиклей, одна серебряная чаша в семьдесят сиклей по сиклю святилища, оба полные тонкой муки, смешанной с маслом, для хлебного приношения.\tБлизко к еврейскому.",
+    "new_row": "43\tПриношение его: одно серебряное блюдо, вес его сто тридцать сиклей, одна серебряная чаша в семьдесят сиклей по сиклю святилища, оба полны тонкой муки, смешанной с маслом, для хлебного приношения.\tБлизко к еврейскому.",
+    "reason": "Use the short predicative adjective for the two full vessels."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/04_NUM/NUM_007_2.tsv",
+    "verse": 49,
+    "old_row": "49\tПриношение его: одно серебряное блюдо, вес его сто тридцать сиклей, одна серебряная чаша в семьдесят сиклей по сиклю святилища, оба полные тонкой муки, смешанной с маслом, для хлебного приношения.\tБлизко к еврейскому.",
+    "new_row": "49\tПриношение его: одно серебряное блюдо, вес его сто тридцать сиклей, одна серебряная чаша в семьдесят сиклей по сиклю святилища, оба полны тонкой муки, смешанной с маслом, для хлебного приношения.\tБлизко к еврейскому.",
+    "reason": "Use the short predicative adjective for the two full vessels."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/04_NUM/NUM_007_2.tsv",
+    "verse": 55,
+    "old_row": "55\tПриношение его: одно серебряное блюдо, вес его сто тридцать сиклей, одна серебряная чаша в семьдесят сиклей по сиклю святилища, оба полные тонкой муки, смешанной с маслом, для хлебного приношения.\tБлизко к еврейскому.",
+    "new_row": "55\tПриношение его: одно серебряное блюдо, вес его сто тридцать сиклей, одна серебряная чаша в семьдесят сиклей по сиклю святилища, оба полны тонкой муки, смешанной с маслом, для хлебного приношения.\tБлизко к еврейскому.",
+    "reason": "Use the short predicative adjective for the two full vessels."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/04_NUM/NUM_007_3.tsv",
+    "verse": 61,
+    "old_row": "61\tПриношение его: одно серебряное блюдо, вес его сто тридцать сиклей, одна серебряная чаша в семьдесят сиклей по сиклю святилища, оба полные тонкой муки, смешанной с маслом, для хлебного приношения.\tБлизко к еврейскому.",
+    "new_row": "61\tПриношение его: одно серебряное блюдо, вес его сто тридцать сиклей, одна серебряная чаша в семьдесят сиклей по сиклю святилища, оба полны тонкой муки, смешанной с маслом, для хлебного приношения.\tБлизко к еврейскому.",
+    "reason": "Use the short predicative adjective for the two full vessels."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/04_NUM/NUM_007_3.tsv",
+    "verse": 67,
+    "old_row": "67\tПриношение его: одно серебряное блюдо, вес его сто тридцать сиклей, одна серебряная чаша в семьдесят сиклей по сиклю святилища, оба полные тонкой муки, смешанной с маслом, для хлебного приношения.\tБлизко к еврейскому.",
+    "new_row": "67\tПриношение его: одно серебряное блюдо, вес его сто тридцать сиклей, одна серебряная чаша в семьдесят сиклей по сиклю святилища, оба полны тонкой муки, смешанной с маслом, для хлебного приношения.\tБлизко к еврейскому.",
+    "reason": "Use the short predicative adjective for the two full vessels."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/04_NUM/NUM_007_3.tsv",
+    "verse": 73,
+    "old_row": "73\tПриношение его: одно серебряное блюдо, вес его сто тридцать сиклей, одна серебряная чаша в семьдесят сиклей по сиклю святилища, оба полные тонкой муки, смешанной с маслом, для хлебного приношения.\tБлизко к еврейскому.",
+    "new_row": "73\tПриношение его: одно серебряное блюдо, вес его сто тридцать сиклей, одна серебряная чаша в семьдесят сиклей по сиклю святилища, оба полны тонкой муки, смешанной с маслом, для хлебного приношения.\tБлизко к еврейскому.",
+    "reason": "Use the short predicative adjective for the two full vessels."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/04_NUM/NUM_007_3.tsv",
+    "verse": 79,
+    "old_row": "79\tПриношение его: одно серебряное блюдо, вес его сто тридцать сиклей, одна серебряная чаша в семьдесят сиклей по сиклю святилища, оба полные тонкой муки, смешанной с маслом, для хлебного приношения.\tБлизко к еврейскому.",
+    "new_row": "79\tПриношение его: одно серебряное блюдо, вес его сто тридцать сиклей, одна серебряная чаша в семьдесят сиклей по сиклю святилища, оба полны тонкой муки, смешанной с маслом, для хлебного приношения.\tБлизко к еврейскому.",
+    "reason": "Use the short predicative adjective for the two full vessels."
+  }
+]

@@ -246,7 +246,7 @@ struct DocumentViewerView: View {
                 } else {
                     fileContentUnavailableView(
                         status: viewModel.downloadStatus,
-                        fallbackMessage: "docx 원본 파일을 열 수 없습니다."
+                        fallbackMessage: String(localized: "docx 원본 파일을 열 수 없습니다.")
                     )
                 }
             case .pdfConverted:
@@ -259,7 +259,7 @@ struct DocumentViewerView: View {
                 } else {
                     fileContentUnavailableView(
                         status: viewModel.convertedPDFDownloadStatus,
-                        fallbackMessage: "PDF로 변환된 파일이 없습니다."
+                        fallbackMessage: String(localized: "PDF로 변환된 파일이 없습니다.")
                     )
                 }
             }
@@ -316,7 +316,7 @@ struct DocumentViewerView: View {
                 } else {
                     fileContentUnavailableView(
                         status: viewModel.downloadStatus,
-                        fallbackMessage: "pages 원본 파일을 열 수 없습니다."
+                        fallbackMessage: String(localized: "pages 원본 파일을 열 수 없습니다.")
                     )
                 }
             case .extractedText:
@@ -374,6 +374,11 @@ struct DocumentViewerView: View {
         }
     }
 
+    /// 확대/이동 가능한 이미지 뷰.
+    /// 2026-10-21 부드러움 개선: (1) 핀치·드래그는 시작 시점의 기준값(`pinchBase`/`dragBase`)에서 `scale`/`offset` 하나만 갱신한다,
+    /// (2) 무거운 이미지+OCR 글자 레이어(`ImageOCRLayer`)를 `Equatable`로 분리해 제스처 프레임마다 다시 그리지 않고 변환(scale/offset)만 바꾼다,
+    /// (3) 핀치 시작 위치를 기준으로 확대한다(예전에는 항상 화면 중앙 기준이라 손가락 아래 내용이 미끄러졌다),
+    /// (4) 이동은 보이는 이미지 가장자리까지만 허용한다(이미지가 화면 밖으로 끌려 나가거나, 화면보다 작은 방향으로 움직이지 않는다).
     private struct ZoomableImageView: View {
         let image: PlatformImage
         /// 위치 정보가 있는 OCR 줄들(없으면 빈 배열 — 오버레이 없이 이미지만).
@@ -385,10 +390,15 @@ struct DocumentViewerView: View {
         /// 상단 돋보기 버튼 명령(확대/축소/원본 크기). 처리하면 nil로 되돌린다.
         @Binding var zoomCommand: ImageZoomCommand?
 
+        /// 확정된 배율과 이동. 보는 사각형의 중심을 기준으로 `scaleEffect` 뒤에 `offset`을 적용한다(화면 좌표 pt).
         @State private var scale: CGFloat = 1
-        @State private var lastScale: CGFloat = 1
         @State private var offset: CGSize = .zero
-        @State private var lastOffset: CGSize = .zero
+
+        /// 제스처가 시작될 때의 배율·이동(진행 중에만 값이 있다). 핀치/드래그 도중에는 `scale`/`offset` 하나만 매 프레임 갱신하고,
+        /// 이 기준값에서 새 값을 계산한다. (`@GestureState`로 따로 들고 있다가 끝날 때 합치면, 끝나는 순간 두 값이 서로 다른 속도로 보간되어
+        /// 화면이 잠깐 더 커졌다 줄어드는 현상이 생겼다 — macOS 트랙패드 핀치에서 확인됨, 2026-10-21.)
+        @State private var pinchBase: (scale: CGFloat, offset: CGSize)?
+        @State private var dragBase: CGSize?
 
         private let minScale: CGFloat = 1
         private let maxScale: CGFloat = 5
@@ -428,6 +438,178 @@ struct DocumentViewerView: View {
             }
         }
 
+        // MARK: 변환 계산
+
+        /// 확정 범위(1~5배). 핀치가 끝날 때와 버튼 명령에 쓴다.
+        private func hardClamp(_ value: CGFloat) -> CGFloat {
+            min(max(value, minScale), maxScale)
+        }
+
+        /// 핀치 도중에는 범위를 조금 넘는 것을 허용해(끝나면 spring으로 돌아온다) 손가락을 따라 끊김 없이 움직이게 한다.
+        private func softClamp(_ value: CGFloat) -> CGFloat {
+            min(max(value, minScale * 0.7), maxScale * 1.2)
+        }
+
+        /// 이동 허용 범위로 자른다 — 확대된 이미지의 가장자리가 뷰 가장자리에 닿는 지점까지만. 한 방향에서 이미지가 뷰보다 작으면 그 방향은 0(가운데 고정).
+        private func clampedOffset(_ proposed: CGSize, scale: CGFloat, viewSize: CGSize, fit: CGRect) -> CGSize {
+            let maxX = max(0, (fit.width * scale - viewSize.width) / 2)
+            let maxY = max(0, (fit.height * scale - viewSize.height) / 2)
+            return CGSize(
+                width: min(max(proposed.width, -maxX), maxX),
+                height: min(max(proposed.height, -maxY), maxY)
+            )
+        }
+
+        /// 핀치 시작 위치(`startAnchor`, 뷰 크기 기준 0~1)를 뷰 중심 기준 화면 좌표(pt)로 바꾼다.
+        private func anchorPoint(_ value: MagnifyGesture.Value, viewSize: CGSize) -> CGSize {
+            CGSize(
+                width: (value.startAnchor.x - 0.5) * viewSize.width,
+                height: (value.startAnchor.y - 0.5) * viewSize.height
+            )
+        }
+
+        /// 기준 배율 `base.scale`에서 `newScale`로 바꿀 때, 기준점 `a`(중심 기준 화면 좌표) 아래의 내용이 제자리에 있으려면
+        /// 새 이동 = a·(1−r) + 기준 이동·r (r = newScale / base.scale) 이다.
+        private func anchoredOffset(base: (scale: CGFloat, offset: CGSize), newScale: CGFloat, anchor: CGSize) -> CGSize {
+            let r = newScale / base.scale
+            return CGSize(
+                width: anchor.width * (1 - r) + base.offset.width * r,
+                height: anchor.height * (1 - r) + base.offset.height * r
+            )
+        }
+
+        // MARK: 제스처
+
+        private func magnifyGesture(viewSize: CGSize, fit: CGRect) -> some Gesture {
+            MagnifyGesture()
+                .onChanged { value in
+                    let base = pinchBase ?? (scale: scale, offset: offset)
+                    if pinchBase == nil { pinchBase = base }
+                    let newScale = softClamp(base.scale * value.magnification)
+                    let proposed = anchoredOffset(base: base, newScale: newScale, anchor: anchorPoint(value, viewSize: viewSize))
+                    scale = newScale
+                    offset = clampedOffset(proposed, scale: newScale, viewSize: viewSize, fit: fit)
+                }
+                .onEnded { value in
+                    let base = pinchBase ?? (scale: scale, offset: offset)
+                    pinchBase = nil
+                    let newScale = hardClamp(base.scale * value.magnification)
+                    let proposed = anchoredOffset(base: base, newScale: newScale, anchor: anchorPoint(value, viewSize: viewSize))
+                    // 범위를 벗어난 만큼만 spring으로 되돌아온다(범위 안이면 값이 같아 움직임이 없다).
+                    withAnimation(.spring(response: 0.3, dampingFraction: 0.85)) {
+                        scale = newScale
+                        offset = clampedOffset(proposed, scale: newScale, viewSize: viewSize, fit: fit)
+                    }
+                }
+        }
+
+        private func dragGesture(viewSize: CGSize, fit: CGRect) -> some Gesture {
+            DragGesture()
+                .onChanged { value in
+                    // 핀치 중에는 이동을 받지 않는다(두 제스처가 같은 `offset`을 동시에 쓰지 않게).
+                    guard pinchBase == nil else { return }
+                    let base = dragBase ?? offset
+                    if dragBase == nil { dragBase = base }
+                    offset = clampedOffset(
+                        CGSize(width: base.width + value.translation.width, height: base.height + value.translation.height),
+                        scale: scale, viewSize: viewSize, fit: fit
+                    )
+                }
+                .onEnded { value in
+                    let base = dragBase
+                    dragBase = nil
+                    guard pinchBase == nil, let base else { return }
+                    offset = clampedOffset(
+                        CGSize(width: base.width + value.translation.width, height: base.height + value.translation.height),
+                        scale: scale, viewSize: viewSize, fit: fit
+                    )
+                }
+        }
+
+        var body: some View {
+            GeometryReader { geometry in
+                let fit = fitRect(imageSize: imagePixelSize, in: geometry.size)
+                ImageOCRLayer(
+                    image: image,
+                    ocrLines: ocrLines,
+                    searchText: trimmedSearchText,
+                    activeLineID: activeLineID,
+                    size: geometry.size,
+                    contentRect: fit
+                )
+                .equatable()
+                .scaleEffect(scale)
+                .offset(offset)
+                .frame(width: geometry.size.width, height: geometry.size.height)
+                // 확대된 이미지가 위쪽 막대·아래 썸네일 줄 영역으로 번져 그려지지 않게 자른다.
+                .clipped()
+                .contentShape(Rectangle())
+                .gesture(magnifyGesture(viewSize: geometry.size, fit: fit))
+                .simultaneousGesture(dragGesture(viewSize: geometry.size, fit: fit))
+                .onTapGesture(count: 2) {
+                    withAnimation(.spring(response: 0.3, dampingFraction: 0.85)) {
+                        if scale > minScale {
+                            scale = minScale
+                            offset = .zero
+                        } else {
+                            scale = 2
+                        }
+                    }
+                }
+                .onChange(of: zoomCommand) { _, command in
+                    guard let command else { return }
+                    applyZoomCommand(command.kind, viewSize: geometry.size, fit: fit)
+                    zoomCommand = nil
+                }
+            }
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
+        }
+
+        /// 돋보기 버튼 동작 — 핀치와 같은 배율 범위(1~5배)를 지킨다. 한 번에 1.25배씩, 화면 중심 기준으로 확대/축소하고 1배로 돌아오면 이동 위치도 되돌린다.
+        private func applyZoomCommand(_ kind: ImageZoomCommand.Kind, viewSize: CGSize, fit: CGRect) {
+            let target: CGFloat
+            switch kind {
+            case .zoomIn: target = hardClamp(scale * 1.25)
+            case .zoomOut: target = hardClamp(scale / 1.25)
+            case .reset: target = minScale
+            }
+            let r = target / scale
+            withAnimation(.spring(response: 0.3, dampingFraction: 0.85)) {
+                if target <= minScale {
+                    offset = .zero
+                } else {
+                    offset = clampedOffset(
+                        CGSize(width: offset.width * r, height: offset.height * r),
+                        scale: target, viewSize: viewSize, fit: fit
+                    )
+                }
+                scale = target
+            }
+        }
+    }
+
+    /// 이미지 + OCR 글자 레이어. 줄이 수백 개일 수 있어 핀치·드래그 중 매 프레임 다시 계산되지 않도록 `Equatable`로 분리했다 —
+    /// 입력(이미지·줄·검색어·크기)이 그대로면 SwiftUI가 이 뷰의 body를 건너뛰고 부모가 거는 확대/이동 변환만 바꾼다.
+    private struct ImageOCRLayer: View, Equatable {
+        let image: PlatformImage
+        let ocrLines: [OCRLineOverlayItem]
+        /// 공백을 지운 검색어(없으면 빈 문자열).
+        let searchText: String
+        let activeLineID: UUID?
+        let size: CGSize
+        /// 이미지가 레터박스를 뺀 실제로 그려지는 사각형(`ZoomableImageView.fitRect`).
+        let contentRect: CGRect
+
+        static func == (lhs: ImageOCRLayer, rhs: ImageOCRLayer) -> Bool {
+            lhs.image === rhs.image
+                && lhs.size == rhs.size
+                && lhs.contentRect == rhs.contentRect
+                && lhs.searchText == rhs.searchText
+                && lhs.activeLineID == rhs.activeLineID
+                && lhs.ocrLines.count == rhs.ocrLines.count
+                && zip(lhs.ocrLines, rhs.ocrLines).allSatisfy { $0.id == $1.id }
+        }
+
         /// Vision의 정규화 좌표(좌하단 원점)를 `rect`(화면 좌표, 좌상단 원점)
         /// 기준의 실제 화면 사각형으로 바꾼다 — Vision → UIKit/SwiftUI 좌표계
         /// 변환의 표준 공식(y축 반전)이다.
@@ -438,8 +620,8 @@ struct DocumentViewerView: View {
         }
 
         private func isSearchMatch(_ text: String) -> Bool {
-            guard !trimmedSearchText.isEmpty else { return false }
-            return text.range(of: trimmedSearchText, options: [.caseInsensitive, .diacriticInsensitive]) != nil
+            guard !searchText.isEmpty else { return false }
+            return text.range(of: searchText, options: [.caseInsensitive, .diacriticInsensitive]) != nil
         }
 
         var body: some View {
@@ -448,111 +630,37 @@ struct DocumentViewerView: View {
             #else
             let baseImage = Image(uiImage: image)
             #endif
-            GeometryReader { geometry in
-                let contentRect = fitRect(imageSize: imagePixelSize, in: geometry.size)
-                ZStack(alignment: .topLeading) {
-                    baseImage
-                        .resizable()
-                        .aspectRatio(contentMode: .fit)
-                        .frame(width: geometry.size.width, height: geometry.size.height)
+            ZStack(alignment: .topLeading) {
+                baseImage
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+                    .frame(width: size.width, height: size.height)
 
-                    // OCR 텍스트 레이어 — 인식된 줄마다 Vision이 준 위치에 겹친다. 글자는 투명하게
-                    // 그려 화면엔 원본 이미지만 보이되 길게 눌러 선택·복사할 수 있고(`.textSelection`),
-                    // 검색어와 일치하는 줄만 반투명 강조 박스를 더한다.
-                    ForEach(ocrLines) { line in
-                        let box = screenRect(for: line.boundingBox, in: contentRect)
-                        let matched = isSearchMatch(line.text)
-                        ZStack {
-                            if matched {
-                                RoundedRectangle(cornerRadius: 2)
-                                    .fill(line.id == activeLineID ? Color.orange.opacity(0.5) : Color.yellow.opacity(0.35))
-                            }
-                            // 항상 투명 — 글자 모양은 밑의 이미지가 보여주고, 일치 여부는 위 노란
-                            // 박스로만 표시한다.
-                            Text(line.text)
-                                .font(.system(size: max(box.height * 0.75, 1)))
-                                .foregroundStyle(Color.clear)
-                                .lineLimit(1)
-                                .minimumScaleFactor(0.1)
-                                .textSelection(.enabled)
+                // OCR 텍스트 레이어 — 인식된 줄마다 Vision이 준 위치에 겹친다. 글자는 투명하게
+                // 그려 화면엔 원본 이미지만 보이되 길게 눌러 선택·복사할 수 있고(`.textSelection`),
+                // 검색어와 일치하는 줄만 반투명 강조 박스를 더한다.
+                ForEach(ocrLines) { line in
+                    let box = screenRect(for: line.boundingBox, in: contentRect)
+                    let matched = isSearchMatch(line.text)
+                    ZStack {
+                        if matched {
+                            RoundedRectangle(cornerRadius: 2)
+                                .fill(line.id == activeLineID ? Color.orange.opacity(0.5) : Color.yellow.opacity(0.35))
                         }
-                        .frame(width: box.width, height: box.height)
-                        .position(x: box.midX, y: box.midY)
+                        // 항상 투명 — 글자 모양은 밑의 이미지가 보여주고, 일치 여부는 위 노란
+                        // 박스로만 표시한다.
+                        Text(line.text)
+                            .font(.system(size: max(box.height * 0.75, 1)))
+                            .foregroundStyle(Color.clear)
+                            .lineLimit(1)
+                            .minimumScaleFactor(0.1)
+                            .textSelection(.enabled)
                     }
-                }
-                .scaleEffect(scale)
-                .offset(offset)
-                .frame(width: geometry.size.width, height: geometry.size.height)
-                .contentShape(Rectangle())
-                .gesture(
-                    MagnificationGesture()
-                        .onChanged { value in
-                            scale = min(max(lastScale * value, minScale), maxScale)
-                        }
-                        .onEnded { _ in
-                            lastScale = scale
-                            if scale <= minScale {
-                                withAnimation(.spring(response: 0.3, dampingFraction: 0.85)) {
-                                    scale = minScale
-                                    lastScale = minScale
-                                    offset = .zero
-                                    lastOffset = .zero
-                                }
-                            }
-                        }
-                )
-                .simultaneousGesture(
-                    DragGesture()
-                        .onChanged { value in
-                            guard scale > minScale else { return }
-                            offset = CGSize(
-                                width: lastOffset.width + value.translation.width,
-                                height: lastOffset.height + value.translation.height
-                            )
-                        }
-                        .onEnded { _ in
-                            lastOffset = offset
-                        }
-                )
-                .onTapGesture(count: 2) {
-                    withAnimation(.spring(response: 0.3, dampingFraction: 0.85)) {
-                        if scale > minScale {
-                            scale = minScale
-                            lastScale = minScale
-                            offset = .zero
-                            lastOffset = .zero
-                        } else {
-                            scale = 2
-                            lastScale = 2
-                        }
-                    }
+                    .frame(width: box.width, height: box.height)
+                    .position(x: box.midX, y: box.midY)
                 }
             }
-            .frame(maxWidth: .infinity, maxHeight: .infinity)
-            .onChange(of: zoomCommand) { _, command in
-                guard let command else { return }
-                applyZoomCommand(command.kind)
-                zoomCommand = nil
-            }
-        }
-
-        /// 돋보기 버튼 동작 — 핀치와 같은 배율 범위(1~5배)를 지킨다. 한 번에 1.25배씩, 1배로 돌아오면 이동 위치도 함께 되돌린다.
-        private func applyZoomCommand(_ kind: ImageZoomCommand.Kind) {
-            withAnimation(.spring(response: 0.3, dampingFraction: 0.85)) {
-                switch kind {
-                case .zoomIn:
-                    scale = min(scale * 1.25, maxScale)
-                case .zoomOut:
-                    scale = max(scale / 1.25, minScale)
-                case .reset:
-                    scale = minScale
-                }
-                lastScale = scale
-                if scale <= minScale {
-                    offset = .zero
-                    lastOffset = .zero
-                }
-            }
+            .frame(width: size.width, height: size.height)
         }
     }
 
@@ -582,7 +690,7 @@ struct DocumentViewerView: View {
                     PDFKitRepresentable(document: pdf, searchController: pdfSearchController)
                 }
             } else {
-                fileContentUnavailableView(status: viewModel.downloadStatus, fallbackMessage: "PDF를 열 수 없습니다.")
+                fileContentUnavailableView(status: viewModel.downloadStatus, fallbackMessage: String(localized: "PDF를 열 수 없습니다."))
             }
         case .image:
             // 쪽 넘김 + 썸네일 줄 + 이미지 추가/쪽 삭제(`imagePane`). 1장짜리 기존 문서도 같은 화면이다.
@@ -628,13 +736,13 @@ struct DocumentViewerView: View {
                     }
                 }
             } else {
-                fileContentUnavailableView(status: viewModel.downloadStatus, fallbackMessage: "hwp 원본 파일을 열 수 없습니다.")
+                fileContentUnavailableView(status: viewModel.downloadStatus, fallbackMessage: String(localized: "hwp 원본 파일을 열 수 없습니다."))
             }
         case .doc, .docx, .pages:
             // `.doc`는 `supportsNativePreview == false`라 `shouldShowExtractedText`가 항상 true이고,
             // `.docx`/`.pages`는 `content(viewModel:)`이 먼저 가로채므로 이 분기는 실제로 그려지지
             // 않는다. switch exhaustive 요구 때문에 남겨 둔 자리다.
-            unavailableMessage("이 형식은 원본 미리보기를 지원하지 않습니다. 추출된 텍스트를 대신 보여드립니다.")
+            unavailableMessage(String(localized: "이 형식은 원본 미리보기를 지원하지 않습니다. 추출된 텍스트를 대신 보여드립니다."))
         }
     }
 
@@ -669,7 +777,7 @@ struct DocumentViewerView: View {
                         .frame(maxWidth: .infinity, maxHeight: .infinity)
                 }
             } else {
-                fileContentUnavailableView(status: viewModel.downloadStatus, fallbackMessage: "이미지를 열 수 없습니다.")
+                fileContentUnavailableView(status: viewModel.downloadStatus, fallbackMessage: String(localized: "이미지를 열 수 없습니다."))
             }
             if viewModel.imagePageCount > 1 {
                 Divider()
@@ -782,7 +890,7 @@ struct DocumentViewerView: View {
                     .font(.body)
                     .onSubmit { moveImageMatch(by: 1, viewModel: viewModel) }
                 if !trimmedQuery.isEmpty {
-                    Text(matchCount == 0 ? "0건" : "\(min(imageCurrentMatchIndex, matchCount - 1) + 1)/\(matchCount)")
+                    Text(matchCount == 0 ? String(localized: "0건") : "\(min(imageCurrentMatchIndex, matchCount - 1) + 1)/\(matchCount)")
                         .font(.caption)
                         .foregroundStyle(.secondary)
                         .monospacedDigit()
@@ -811,13 +919,13 @@ struct DocumentViewerView: View {
             .background(RoundedRectangle(cornerRadius: 10).fill(Color.secondary.opacity(0.12)))
             .overlay(RoundedRectangle(cornerRadius: 10).stroke(Color.secondary.opacity(0.3), lineWidth: 1))
 
-            imageToolCircleButton(systemImage: "plus.magnifyingglass", help: "확대") {
+            imageToolCircleButton(systemImage: "plus.magnifyingglass", help: String(localized: "확대")) {
                 imageZoomCommand = ImageZoomCommand(kind: .zoomIn)
             }
-            imageToolCircleButton(systemImage: "minus.magnifyingglass", help: "축소") {
+            imageToolCircleButton(systemImage: "minus.magnifyingglass", help: String(localized: "축소")) {
                 imageZoomCommand = ImageZoomCommand(kind: .zoomOut)
             }
-            imageToolCircleButton(systemImage: "arrow.up.left.and.down.right.magnifyingglass", help: "원본 크기") {
+            imageToolCircleButton(systemImage: "arrow.up.left.and.down.right.magnifyingglass", help: String(localized: "원본 크기")) {
                 imageZoomCommand = ImageZoomCommand(kind: .reset)
             }
 
@@ -881,12 +989,12 @@ struct DocumentViewerView: View {
         if viewModel.imagePageCount > 1 {
             HStack {
                 imageEdgeButton(
-                    systemImage: "chevron.left", label: "이전 쪽",
+                    systemImage: "chevron.left", label: String(localized: "이전 쪽"),
                     isEnabled: viewModel.currentImagePageIndex > 0 && !viewModel.isModifyingImagePages
                 ) { viewModel.showPreviousImagePage() }
                 Spacer()
                 imageEdgeButton(
-                    systemImage: "chevron.right", label: "다음 쪽",
+                    systemImage: "chevron.right", label: String(localized: "다음 쪽"),
                     isEnabled: viewModel.currentImagePageIndex < viewModel.imagePageCount - 1 && !viewModel.isModifyingImagePages
                 ) { viewModel.showNextImagePage() }
             }
@@ -1243,8 +1351,8 @@ struct DocumentViewerView: View {
             if viewModel.textLines.isEmpty {
                 unavailableMessage(
                     document.conversionStatus == .failedNeedsManual
-                        ? "이 문서는 자동 추출에 실패했습니다. 원본은 열람할 수 있지만 텍스트 검색은 지원되지 않습니다."
-                        : "추출된 텍스트가 없습니다."
+                        ? String(localized: "이 문서는 자동 추출에 실패했습니다. 원본은 열람할 수 있지만 텍스트 검색은 지원되지 않습니다.")
+                        : String(localized: "추출된 텍스트가 없습니다.")
                 )
             } else {
                 VStack(spacing: 0) {
@@ -1373,7 +1481,7 @@ struct DocumentViewerView: View {
         case .downloading(let progress):
             downloadingMessage(progress: progress)
         case .failed(let reason):
-            unavailableMessage("iCloud에서 파일을 다운로드하지 못했습니다.\n\(reason)")
+            unavailableMessage(String(localized: "iCloud에서 파일을 다운로드하지 못했습니다.\n\(reason)"))
         case .ready:
             unavailableMessage(fallbackMessage)
         }
@@ -1749,9 +1857,9 @@ private enum HWPViewerMode: String, CaseIterable, Identifiable {
 
     var label: String {
         switch self {
-        case .hwpSwiftNative: return "hwp-swift (네이티브)"
-        case .rhwpWeb: return "rhwp (웹)"
-        case .pdfConverted: return "PDF 변환"
+        case .hwpSwiftNative: return String(localized: "hwp-swift (네이티브)")
+        case .rhwpWeb: return String(localized: "rhwp (웹)")
+        case .pdfConverted: return String(localized: "PDF 변환")
         }
     }
 }
@@ -1767,8 +1875,8 @@ private enum PagesViewerMode: String, CaseIterable, Identifiable {
 
     var label: String {
         switch self {
-        case .quickLook: return "원본(Quick Look)"
-        case .extractedText: return "텍스트(검색)"
+        case .quickLook: return String(localized: "원본(Quick Look)")
+        case .extractedText: return String(localized: "텍스트(검색)")
         }
     }
 }
@@ -1783,8 +1891,8 @@ private enum DocxViewerMode: String, CaseIterable, Identifiable {
 
     var label: String {
         switch self {
-        case .preview: return "미리보기"
-        case .pdfConverted: return "PDF 변환"
+        case .preview: return String(localized: "미리보기")
+        case .pdfConverted: return String(localized: "PDF 변환")
         }
     }
 }
@@ -2131,7 +2239,7 @@ private struct HWPToPDFPane: View {
                 conversionProgress = (pageIndex, pageCount)
             }
             guard let pdf = PDFDocument(data: data) else {
-                errorMessage = "PDF 데이터를 만들었지만 열 수 없습니다."
+                errorMessage = String(localized: "PDF 데이터를 만들었지만 열 수 없습니다.")
                 onAvailabilityChange?(false)
                 return
             }

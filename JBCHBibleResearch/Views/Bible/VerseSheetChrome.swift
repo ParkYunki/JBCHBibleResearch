@@ -20,7 +20,7 @@ struct VerseSheetHeader: View {
     var body: some View {
         let textColor = UserSettingsStore.shared.bibleTextColor ?? Color.primary
         Text(title)
-            .font(.custom(SpecialPurposeFonts.titleSerif, size: 17, relativeTo: .title3))
+            .font(.titleSerif(title, size: 17, relativeTo: .title3))
             .fontWeight(.semibold)
             .foregroundStyle(textColor)
             .lineLimit(1)
@@ -129,7 +129,7 @@ struct VerseLayerHeader<Leading: View>: View {
         let textColor = UserSettingsStore.shared.bibleTextColor ?? Color.primary
         ZStack {
             Text(title)
-                .font(.custom(SpecialPurposeFonts.titleSerif, size: titleSize, relativeTo: .title3))
+                .font(.titleSerif(title, size: titleSize, relativeTo: .title3))
                 .fontWeight(.semibold)
                 .foregroundStyle(textColor)
                 .lineLimit(1)

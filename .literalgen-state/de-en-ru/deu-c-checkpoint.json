@@ -1,0 +1,237 @@
+{
+  "completed_chapters": [
+    24,
+    25,
+    26,
+    27,
+    28,
+    29,
+    30,
+    31,
+    32,
+    33,
+    34
+  ],
+  "new_files": [
+    {
+      "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/05_DEU/DEU_024.tsv",
+      "rows": 22
+    },
+    {
+      "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/05_DEU/DEU_024.tsv",
+      "rows": 22
+    },
+    {
+      "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/en/05_DEU/DEU_024.tsv",
+      "rows": 22
+    },
+    {
+      "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/05_DEU/DEU_025.tsv",
+      "rows": 19
+    },
+    {
+      "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/05_DEU/DEU_025.tsv",
+      "rows": 19
+    },
+    {
+      "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/en/05_DEU/DEU_025.tsv",
+      "rows": 19
+    },
+    {
+      "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/05_DEU/DEU_026.tsv",
+      "rows": 19
+    },
+    {
+      "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/05_DEU/DEU_026.tsv",
+      "rows": 19
+    },
+    {
+      "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/en/05_DEU/DEU_026.tsv",
+      "rows": 19
+    },
+    {
+      "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/05_DEU/DEU_027.tsv",
+      "rows": 26
+    },
+    {
+      "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/05_DEU/DEU_027.tsv",
+      "rows": 26
+    },
+    {
+      "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/en/05_DEU/DEU_027.tsv",
+      "rows": 26
+    },
+    {
+      "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/05_DEU/DEU_028_1.tsv",
+      "rows": 30
+    },
+    {
+      "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/05_DEU/DEU_028_1.tsv",
+      "rows": 30
+    },
+    {
+      "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/en/05_DEU/DEU_028_1.tsv",
+      "rows": 30
+    },
+    {
+      "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/05_DEU/DEU_028_2.tsv",
+      "rows": 30
+    },
+    {
+      "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/05_DEU/DEU_028_2.tsv",
+      "rows": 30
+    },
+    {
+      "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/en/05_DEU/DEU_028_2.tsv",
+      "rows": 30
+    },
+    {
+      "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/05_DEU/DEU_028_3.tsv",
+      "rows": 8
+    },
+    {
+      "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/05_DEU/DEU_028_3.tsv",
+      "rows": 8
+    },
+    {
+      "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/en/05_DEU/DEU_028_3.tsv",
+      "rows": 8
+    },
+    {
+      "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/05_DEU/DEU_029.tsv",
+      "rows": 29
+    },
+    {
+      "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/05_DEU/DEU_029.tsv",
+      "rows": 29
+    },
+    {
+      "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/en/05_DEU/DEU_029.tsv",
+      "rows": 29
+    },
+    {
+      "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/05_DEU/DEU_030.tsv",
+      "rows": 20
+    },
+    {
+      "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/05_DEU/DEU_030.tsv",
+      "rows": 20
+    },
+    {
+      "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/05_DEU/DEU_031.tsv",
+      "rows": 30
+    },
+    {
+      "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/05_DEU/DEU_031.tsv",
+      "rows": 30
+    },
+    {
+      "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/05_DEU/DEU_032_1.tsv",
+      "rows": 30
+    },
+    {
+      "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/05_DEU/DEU_032_1.tsv",
+      "rows": 30
+    },
+    {
+      "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/05_DEU/DEU_032_2.tsv",
+      "rows": 22
+    },
+    {
+      "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/05_DEU/DEU_032_2.tsv",
+      "rows": 22
+    },
+    {
+      "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/05_DEU/DEU_033.tsv",
+      "rows": 29
+    },
+    {
+      "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/05_DEU/DEU_033.tsv",
+      "rows": 29
+    },
+    {
+      "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/05_DEU/DEU_034.tsv",
+      "rows": 12
+    },
+    {
+      "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/05_DEU/DEU_034.tsv",
+      "rows": 12
+    }
+  ],
+  "status": "generation_and_semantic_qa_complete",
+  "remaining_chapters": [],
+  "validated_files": 36,
+  "validated_rows": {
+    "de": 326,
+    "ru": 326,
+    "en": 183
+  },
+  "files_by_language": {
+    "de": 14,
+    "ru": 14,
+    "en": 8
+  },
+  "qa_path": "/Users/arkuni/Developer/JBCHBibleResearch/.literalgen-state/de-en-ru/deu-c-qa.json",
+  "qa_count": 38,
+  "qa_by_language": {
+    "de": 16,
+    "en": 3,
+    "ru": 19
+  },
+  "output_sha256": {
+    "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/05_DEU/DEU_024.tsv": "65f920b0c84051d7a5d2fcef0dde487809ded1197d7644a4eecc088d6ef101e1",
+    "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/05_DEU/DEU_024.tsv": "e80c13680b715d9f9c7f3adfa4bd7fd59a20e3524e499f59bb27936e265b0345",
+    "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/en/05_DEU/DEU_024.tsv": "3aeb254cfc2a40aad27c83469436fb7b5a1bded132544f5c27034c36533e8990",
+    "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/05_DEU/DEU_025.tsv": "cd82106279f230d66b05fd9f6bd3fefc776f888f6be0bf9389ce6a8414532584",
+    "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/05_DEU/DEU_025.tsv": "c5667bada3d30b3ee619b62e5e614728cb17db8eb67b5caff8eb9a2eb67c6a1e",
+    "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/en/05_DEU/DEU_025.tsv": "9ba3b760209eabe326cd5a34172f39c1cd2143000b77639408fd862e7c4883f5",
+    "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/05_DEU/DEU_026.tsv": "1cda1e5e4488f0b4850acfc0298615515e867dd1788bdb22e76883945d4f714f",
+    "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/05_DEU/DEU_026.tsv": "ea8b037bb5e57717bb284a7342e7f731905e1bc173b526c98487739bd0cfce65",
+    "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/en/05_DEU/DEU_026.tsv": "b7b1fa41d903992af16a1b90a3fb1e0c78add242de0f7fea1cb0045103b29387",
+    "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/05_DEU/DEU_027.tsv": "4d1a75e6492fa66746609c32053f4544407c920a4a79fc8d1134327af538465a",
+    "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/05_DEU/DEU_027.tsv": "7af9b663e177827f52d89ab474a79671e75b29282d8519ef2ce79fdba9b11b42",
+    "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/en/05_DEU/DEU_027.tsv": "240a121a715fce06fb22ce26d03b74353bbfc4bab7823fdee64281aa548941ad",
+    "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/05_DEU/DEU_028_1.tsv": "402b133ab48981e83188a6b36d7ddfc8e9038d45c249c69d20458d8b4efb3138",
+    "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/05_DEU/DEU_028_1.tsv": "8ce40fd1ed554a263f3e994427761b7a5100076a5212983179e2ed787213f462",
+    "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/en/05_DEU/DEU_028_1.tsv": "fb91b858ec3885e27835f58ee32fc17f5bed416c5f2965c639f2a3550684a881",
+    "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/05_DEU/DEU_028_2.tsv": "16b533f914ec45bd39b6cb7ab6dad15ac7e7e22dc5362589e3d82624d7e66f86",
+    "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/05_DEU/DEU_028_2.tsv": "16400409dbf7c9bd6d52d95bdbdf3b42f2e9b7f84e711445ef4c88d2e4f3c6b7",
+    "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/en/05_DEU/DEU_028_2.tsv": "0ba3306fb1aa4e2e2ef32d96fc4dabb59b48d3e46eab353a32b59f58ad2483ab",
+    "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/05_DEU/DEU_028_3.tsv": "2301127540491c93658a734f3c44b043129d2d79a419ceca6bf103d5d530e8b9",
+    "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/05_DEU/DEU_028_3.tsv": "34adfaecdf9c54ee2dd7f2fd1a5a4277371ab8b4468daf074526b1f51b5a18cb",
+    "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/en/05_DEU/DEU_028_3.tsv": "58ebcd43540d0d014ed28bd4a337e61a0bd66d6f6bc7358f49a1ceb8559ed222",
+    "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/05_DEU/DEU_029.tsv": "dc95c8c255d6e493e49dc72b6284a21c3aa27dfd5fa96299cbd1584c932eba6a",
+    "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/05_DEU/DEU_029.tsv": "f6fd5df724e3d72d7b928894b2f599bbf17aa20442bfc69fb22121d20dd31333",
+    "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/en/05_DEU/DEU_029.tsv": "9d29da1e812e08a2584e477e27eec54f68f9a7ad277e3d71242c6ad05a821c8d",
+    "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/05_DEU/DEU_030.tsv": "3fbdaa00640be2de4a37c27dc154dfd5439cb5c34d1c8d0356bf8cfa08b792af",
+    "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/05_DEU/DEU_030.tsv": "c8d9a5e42694aeef75678c40dc2ecc393647ba3ef7356b2dea8708f0b95e0cdd",
+    "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/05_DEU/DEU_031.tsv": "a394dcaa3bb3adc0a3ffa363be2cc7559d9123870f9588fb1b37375c791650de",
+    "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/05_DEU/DEU_031.tsv": "4ed0f97426f1b054122811858153bf0e86e602362e6902378663a24b5d91be47",
+    "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/05_DEU/DEU_032_1.tsv": "edb1e07fd891f92d7fef2398b0e4ce22be0ff7d2bb0650d54e6a12d564ae0e5e",
+    "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/05_DEU/DEU_032_1.tsv": "c7242d3ad2e0e2ab23413eb10dd9087238e748aed7846825099a13f4ef351cbc",
+    "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/05_DEU/DEU_032_2.tsv": "5c9ed8f6ddeaec96128a9ef3a1b40a6bd58d04632713b9ec0e51fef1fc54e17f",
+    "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/05_DEU/DEU_032_2.tsv": "8171b46ff6a16aa397aef73d52b6896eb649f61459ab09ff89d55fff59cc4211",
+    "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/05_DEU/DEU_033.tsv": "d36ad5ed953190277ed2d7f00c315ab6eaac94be231974c9de71545838778228",
+    "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/05_DEU/DEU_033.tsv": "8593e8edd136cdbd07f86ad112f49c7bb6225ee4e45743094de6dd60d9cf057e",
+    "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/05_DEU/DEU_034.tsv": "8ed4899b73bf1946fbbb71d7271a2c6ce52602921116baf651885094eae7f456",
+    "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/05_DEU/DEU_034.tsv": "f205466a1c154d6b4a9b33b69a54d8e5081dbf68d5d1b1473650f3bc80c9f8fa"
+  },
+  "validation": "Assigned source verses reviewed against O and TARGET. Order, 3 fields, nonempty data, DIFFERENCE word limits, native sequential quotation balance, English equals, placeholders and exact QA old-row integrity passed. No TSV edited. DEU030:16 LXX addition excluded.",
+  "root_en_independent_review": {
+    "chapters": [
+      30,
+      31,
+      32,
+      33,
+      34
+    ],
+    "files": 6,
+    "rows": 143,
+    "qa_path": "/Users/arkuni/Developer/JBCHBibleResearch/.literalgen-state/de-en-ru/deu-c-root-en-qa.json",
+    "qa_count": 3,
+    "excluded_existing_qa": [
+      "DEU033:5"
+    ],
+    "source": "Assigned packets only; all English root rows compared; no TSV modified."
+  }
+}

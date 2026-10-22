@@ -1,0 +1,50 @@
+[
+  {
+    "path": "Tools/LiteralGen/outputs/ru/07_JDG/JDG_003_1.tsv",
+    "verse": 16,
+    "old_row": "16\tИ Аод сделал себе меч, и у него было два уста, локоть была его длина; и он припоясал его под своими одеждами к своему правому бедру.\tКрая меча образно названы двумя устами; одежды стоят во множественном числе.",
+    "new_row": "16\tИ Аод сделал себе меч, и у него было двое уст, его длина составляла локоть; и он припоясал его под своими одеждами к своему правому бедру.\tКрая меча образно названы двумя устами; одежды стоят во множественном числе."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/07_JDG/JDG_004.tsv",
+    "verse": 11,
+    "old_row": "11\tUnd Heber, der Keniter, hatte sich von Kain getrennt, von den Söhnen Hobabs, des Schwiegervaters Moses, und sein Zelt bis zur Eiche in Zaanannim aufgeschlagen, die bei Kedes liegt.\tHobab ist als Schwiegervater Moses bezeichnet; die Eiche steht in der Einzahl, die Unterkunft ist ein Zelt.",
+    "new_row": "11\tUnd Heber, der Keniter, hatte sich von dem Keniter getrennt, von den Söhnen Hobabs, des Schwiegervaters Moses, und sein Zelt bis zur Eiche in Zaanannim aufgeschlagen, die bei Kedes liegt.\tHobab ist als Schwiegervater Moses bezeichnet; die Eiche steht in der Einzahl, die Unterkunft ist ein Zelt."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/07_JDG/JDG_004.tsv",
+    "verse": 11,
+    "old_row": "11\tИ Хевер, кенеянин, отделился от Каина, от сынов Ховава, тестя Моисея, и раскинул свой шатёр до дуба в Цаанниме возле Кедеса.\tХовав назван тестем Моисея; дерево стоит в единственном числе.",
+    "new_row": "11\tИ Хевер, кенеянин, отделился от кенеянина, от сынов Ховава, тестя Моисея, и раскинул свой шатёр до дуба в Цаанниме возле Кедеса.\tХовав назван тестем Моисея; дерево стоит в единственном числе."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/07_JDG/JDG_004.tsv",
+    "verse": 9,
+    "old_row": "9\tИ она сказала: «Непременно пойду с тобой; только не будет тебе славы на пути, которым ты идёшь, ибо Господь продаст Сисару в руку женщины». И Девора встала и пошла с Вараком в Кедес.\tВ еврейском тексте нет отдельного «знай»; Господь продаст Сисару в одну руку женщины.",
+    "new_row": "9\tИ она сказала: «Непременно пойду с тобой; только не будет тебе славы на пути, которым ты идёшь, ибо Господь продаст Сисару в руку женщины». И Девора встала и пошла с Вараком в Кедес.\tВ еврейском тексте нет отдельного «знай»; Господь продаст Сисару. Рука женщины стоит в единственном числе."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/07_JDG/JDG_005_1.tsv",
+    "verse": 7,
+    "old_row": "7\tDie Landbewohner hörten auf in Israel, sie hörten auf, bis ich, Debora, aufstand, bis ich aufstand, eine Mutter in Israel.\tDie aufhörende Gruppe sind die Landbewohner; das Aufhören wird wiederholt.",
+    "new_row": "7\tDie Landbewohner blieben aus in Israel, sie blieben aus, bis ich, Debora, aufstand, bis ich aufstand, eine Mutter in Israel.\tDie aufhörende Gruppe sind die Landbewohner; das Aufhören wird wiederholt."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/07_JDG/JDG_005_1.tsv",
+    "verse": 7,
+    "old_row": "7\tСельские жители прекратились в Израиле, прекратились, пока не встала я, Девора, пока не встала я, мать в Израиле.\tБлизко к еврейскому.",
+    "new_row": "7\tНе стало сельских жителей в Израиле, не стало, пока не встала я, Девора, пока не встала я, мать в Израиле.\tБлизко к еврейскому."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/07_JDG/JDG_005_1.tsv",
+    "verse": 13,
+    "old_row": "13\tDamals zog der Überrest zu den Edlen hinab, das Volk; der HERR zog für mich unter den Helden hinab.\tNah am Hebräischen.",
+    "new_row": "13\tDamals zog das übriggebliebene Volk zu den Edlen hinab; der HERR zog für mich unter den Helden hinab.\tNah am Hebräischen."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/07_JDG/JDG_005_1.tsv",
+    "verse": 13,
+    "old_row": "13\tТогда остаток спустился к знатным, народ; Господь спустился для меня среди могучих.\tБлизко к еврейскому.",
+    "new_row": "13\tТогда остаток народа спустился к знатным; Господь спустился для меня среди могучих.\tБлизко к еврейскому."
+  }
+]

@@ -139,32 +139,64 @@ enum QueryIntentHandler {
     static func handle(_ query: String, intent: QueryIntentClassifier.Intent) -> QueryIntentCard? {
         guard let store = ReferenceDataProvider.shared.store else { return nil }
 
+        // [2026-10-22 2차] 비한국어 앱의 한글 없는 질의는 번역 경로만 탄다 — 받는 꼴은 "이름 그대로"와 "관계 꼴"(sons of X 등)
+        // 두 가지뿐이고, 그 밖(문장형 질문 등)은 nil(카드 없음 → 일반 검색). 1차(같은 날)에는 한국어 데이터 경로를 먼저 돌리고
+        // 못 찾으면 번역 경로를 붙였는데, 한글 없는 질의는 한국어 데이터 경로에서 걸리는 것이 없다(Persons/Places/
+        // KeywordCategoryIndex/PersonRelations 이름과 분류기 트리거가 모두 한글 — 2026-10-22 DB 실측). 그래서 그 결과를 버려도
+        // 지금 데이터로는 달라지는 질의가 없고, 엄격한 꼴 제한을 한 곳에서 판정할 수 있다.
+        // 한국어 앱, 그리고 비한국어 앱의 한글 질의는 예전처럼 한국어 데이터 경로다(사용자 확정: "한국어 검색 동작은 모든 언어에서 그대로").
+        if !AppLanguage.isKorean, !containsHangul(query) {
+            return handleTranslatedQuery(query, store: store)
+        }
+        return handleWithKoreanData(query, intent: intent, store: store)
+    }
+
+    /// 기존 `handle` 본문 그대로(한국어 데이터 기준 조회) — 2026-10-22 번역 이름 검색을 덧붙이려고 함수로만 분리했다.
+    private static func handleWithKoreanData(
+        _ query: String, intent: QueryIntentClassifier.Intent, store: ReferenceDataStore
+    ) -> QueryIntentCard? {
         // "예수님의 (열두) 제자(들)" — 일반 인물 조회보다 먼저 확인한다. 안 그러면 질의 속 "예수"만 걸려 예수 한 사람의
         // 카드가 나온다. 관계/키워드 분류와 무관하게 질의 문구만으로 판정한다.
         if let card = handleGroupLookup(query, store: store) {
             return card
         }
 
-        // 지명 질의 — 질의가 지명 이름 중심일 때만(`handlePlaceLookup` 참고). 관계/예언/주제 등으로 분류된 질의는
+        // [2026-10-22 3차] 관계로 분류됐지만 "X의 <관계어>[들]" 꼴이 아닌 질의. 관계 카드는 내지 않고(아래 switch), 이름 그대로인
+        // 질의만 아래 지명·인물 조회로 받는다 — 이름에 관계어가 든 인물/지명("벤아비나답"의 "아비", "빈누이"의 "누이",
+        // "롯의 큰 딸")이 이름 질의로 카드를 받게. 두 조회 모두 질의 전체가 이름일 때만 카드를 내므로 "다윗 아내"/"유다 지파"는 nil이다.
+        let isUnshapedRelationQuery = intent == .relation && QueryIntentClassifier.koreanRelationShapeNames(query) == nil
+
+        // 지명 질의 — 질의 전체가 지명(·인물) 이름일 때만(`handlePlaceLookup` 참고). 관계(꼴 맞음)/예언/주제 등으로 분류된 질의는
         // 건드리지 않아, "…에 대한 말씀" 같은 질의가 지명 카드에 가려지지 않는다.
-        if intent == .general, let card = handlePlaceLookup(query, store: store) {
+        if intent == .general || isUnshapedRelationQuery, let card = handlePlaceLookup(query, store: store) {
             return card
         }
 
         // `QueryIntentClassifier` 우선순위상 관계 다음 자리. DB 접근이 필요해 classify()(순수
         // 함수)가 아니라 여기서 수행한다. `.relation`으로 확정된 경우는 아래 switch가 처리하므로
-        // 건너뛰고, `.general`이어도 시도한다 — "다윗"처럼 트리거 문구 없는 표제어 질의도
-        // 등록된 인물/주제 키워드는 잡아야 한다.
-        if intent != .relation, let card = handleKeywordCategoryLookup(query, store: store) {
+        // 건너뛰고(꼴이 맞지 않는 관계 질의는 위 주석대로 시도한다), `.general`이어도 시도한다 — "다윗"처럼 트리거 문구 없는
+        // 표제어 질의도 등록된 인물/주제 키워드는 잡아야 한다.
+        if intent != .relation || isUnshapedRelationQuery, let card = handleKeywordCategoryLookup(query, store: store) {
             return card
         }
 
         guard intent != .general else { return nil }
+        // [2026-10-22 3차] 한국어 문장형 질의 금지(사용자 확정) — 관계 카드는 질의 전체가 "X의 <관계어>[들]" 꼴일 때만,
+        // 예언/주제/서사 안내 카드는 질의 전체가 트리거 낱말일 때만 낸다. 그 밖은 nil(카드 없음 → `SearchViewModel`이 키워드 검색).
+        // 분류(`classify`) 자체는 그대로라 "다윗 아내"/"유다 지파"/"처음 사랑"은 여전히 관계로 분류되지만 여기서 nil이 된다.
         switch intent {
-        case .relation: return handleRelation(query, store: store)
-        case .prophecy: return handleProphecy(query, store: store)
-        case .themeOrAttribute: return handleTheme(query, store: store)
-        case .narrative: return handleNarrative(query, store: store)
+        case .relation:
+            guard !isUnshapedRelationQuery else { return nil }
+            return handleRelation(query, store: store)
+        case .prophecy:
+            guard QueryIntentClassifier.isWholeQueryTriggerTerm(query, for: .prophecy) else { return nil }
+            return handleProphecy(query, store: store)
+        case .themeOrAttribute:
+            guard QueryIntentClassifier.isWholeQueryTriggerTerm(query, for: .themeOrAttribute) else { return nil }
+            return handleTheme(query, store: store)
+        case .narrative:
+            guard QueryIntentClassifier.isWholeQueryTriggerTerm(query, for: .narrative) else { return nil }
+            return handleNarrative(query, store: store)
         // switch가 exhaustive해야 해서 `.personProfile`을 다룬다. classify()는 더 이상 이 값을
         // 반환하지 않고 인물 조회는 위 handleKeywordCategoryLookup이 먼저 시도하므로, 여기
         // 도달하면 `.general`과 같이 nil로 처리한다.
@@ -174,39 +206,185 @@ enum QueryIntentHandler {
         }
     }
 
-    // MARK: - 장소 (PlaceSeed.json)
+    // MARK: - 번역 이름 검색 (2026-10-22, 비한국어 앱 전용)
 
-    /// 질의에서 이름 말고 남는 "조회 말" — 이런 말만 덧붙은 질의("가나 위치", "가나는 어디?")도 지명 질의로 본다.
-    private static let placeLookupFillers = [
-        "어디에있어", "어디있어", "어디에", "어디", "위치", "지리", "역사", "소개", "정보", "에대해서", "에대해", "에대하여",
-        "알려줘", "알려주세요", "설명해줘", "설명", "이란", "란", "은", "는", "이", "가", "의", "?", "？", "."
-    ]
-
-    /// 이름 중심의 지명 질의면 카드를 돌려준다. 판정:
-    ///  1) `places(mentionedIn:)`로 질의에 이름이 든 지명을 찾는다(동명이인은 모두).
-    ///  2) 조회 말(위 목록)을 뺀 질의에서 가장 긴 지명 이름이 차지하는 비율이 절반 이상이어야 한다 — 질의 속에 우연히
-    ///     지명과 같은 글자가 있을 뿐인 문장("광야 40년의 의미")이 일반 검색 결과를 가리지 않도록.
-    ///  3) 같은 이름의 인물이 함께 걸리면 한 카드에 같이 보여준다(예: "가나안" — 인물과 땅). 더 긴 이름 안에 포함돼
-    ///     삼켜지는 쪽은 뺀다.
-    /// 지명이 하나도 남지 않으면 nil(일반 흐름 계속 — 인물 조회는 이후 단계가 맡는다).
-    private static func handlePlaceLookup(_ query: String, store: ReferenceDataStore) -> QueryIntentCard? {
-        let places = (try? store.places(mentionedIn: query)) ?? []
-        guard !places.isEmpty else { return nil }
-
-        var residual = query.filter { !$0.isWhitespace }
-        for filler in placeLookupFillers.sorted(by: { $0.count > $1.count }) {
-            residual = residual.replacingOccurrences(of: filler, with: "")
+    /// 한글(음절·자모)이 하나라도 있으면 true — 이런 질의는 한국어 데이터 경로만 탄다(`TitleFont.isHangul`과 같은 범위).
+    private static func containsHangul(_ text: String) -> Bool {
+        text.unicodeScalars.contains { scalar in
+            switch scalar.value {
+            case 0x1100...0x11FF, 0x3130...0x318F, 0xA960...0xA97F, 0xAC00...0xD7AF, 0xD7B0...0xD7FF:
+                return true
+            default:
+                return false
+            }
         }
-        // 위에서 조회 말로 이름 일부가 지워졌을 수 있어(예: "이스라엘"의 "이") 비율 계산은 지우기 전 길이가 아니라
-        // 조회 말을 뺀 질의 길이로 하되, 이름이 질의에 그대로 들어 있는지는 이미 `places(mentionedIn:)`가 확인했다.
-        let compactQuery = query.filter { !$0.isWhitespace }
-        let longestName = places.map { $0.word.filter { !$0.isWhitespace }.count }.max() ?? 0
-        let denominator = max(residual.count, longestName)
-        guard denominator > 0, Double(longestName) / Double(denominator) >= 0.5, longestName <= compactQuery.count else {
+    }
+
+    /// 비한국어 앱의 한글 없는 질의 처리(2026-10-22 2차). 순서는 한국어 경로와 같게 관계 꼴 → 이름 그대로다
+    /// (한국어도 "롯의 아내"처럼 관계어가 든 질의는 분류기가 관계로 먼저 확정한다).
+    ///  1) 관계 꼴(`translatedRelationQuery`)이고 X가 번역 인물 이름과 정확히 같으면 → 같은 뜻의 한국어 질의 "X의 <관계어>"로
+    ///     한국어 경로를 그대로 탄다(`handleTranslatedRelation`). X를 못 찾으면 2)로 넘어간다(예: "Daughter of Putiel"은 그 자체가 인물 이름).
+    ///  2) 질의 전체가 번역 이름(여럿이면 공백·쉼표로만 구분)이면 → 인물/지명 카드(`handleTranslatedNameLookup`).
+    ///  3) 그 밖은 nil — 카드 없이 일반 검색만 한다("Where is Cana?", "Tell me about David" 등).
+    private static func handleTranslatedQuery(_ query: String, store: ReferenceDataStore) -> QueryIntentCard? {
+        guard let language = store.contentLanguage else { return nil }
+        let trimmed = QueryIntentClassifier.trimmingTrailingQueryPunctuation(query)
+        guard !trimmed.isEmpty else { return nil }
+        if let relation = translatedRelationQuery(trimmed, language: language),
+           let card = handleTranslatedRelation(name: relation.name, koreanRelationWord: relation.koreanRelationWord, store: store) {
+            return card
+        }
+        return handleTranslatedNameLookup(trimmed, store: store)
+    }
+
+    // MARK: 비한국어 관계 꼴 (2026-10-22 2차)
+
+    /// (번역 관계어, 같은 뜻의 한국어 관계어). 한국어 쪽은 한국어 관계 처리(`detectRelationSubQuery`/`handleSibling`/폴백)가
+    /// 이미 받는 말만 쓴다 — 결과·관계 판정을 한국어와 똑같이 하기 위해서다. 목록은 사용자 지정 그대로다.
+    private static let englishRelationWords: [(word: String, korean: String)] = [
+        ("son", "아들"), ("sons", "아들"), ("daughter", "딸"), ("daughters", "딸"),
+        ("father", "아버지"), ("mother", "어머니"), ("wife", "아내"), ("husband", "남편"),
+        ("brother", "형제"), ("brothers", "형제"), ("sister", "자매"), ("sisters", "자매"),
+        ("grandson", "손자"), ("grandsons", "손자"), ("granddaughter", "손녀"), ("granddaughters", "손녀"),
+        ("grandfather", "할아버지"), ("grandmother", "할머니"),
+    ]
+    private static let spanishRelationWords: [(word: String, korean: String)] = [
+        ("hijo", "아들"), ("hijos", "아들"), ("hija", "딸"), ("hijas", "딸"),
+        ("padre", "아버지"), ("madre", "어머니"), ("esposa", "아내"), ("mujer", "아내"),
+        ("esposo", "남편"), ("marido", "남편"),
+        ("hermano", "형제"), ("hermanos", "형제"), ("hermana", "자매"), ("hermanas", "자매"),
+        ("nieto", "손자"), ("nietos", "손자"), ("nieta", "손녀"), ("nietas", "손녀"),
+        ("abuelo", "할아버지"), ("abuela", "할머니"),
+    ]
+    private static let chineseRelationWords: [(word: String, korean: String)] = [
+        ("儿子", "아들"), ("女儿", "딸"), ("父亲", "아버지"), ("母亲", "어머니"), ("妻子", "아내"), ("丈夫", "남편"),
+        ("兄弟", "형제"), ("姐妹", "자매"), ("孙子", "손자"), ("孙女", "손녀"), ("祖父", "할아버지"), ("祖母", "할머니"),
+    ]
+    /// 영어 소유격 꼬리 — iOS 기본 키보드는 "스마트 구두점"으로 '를 ’로 바꿔 넣으므로 둘 다 받는다. "'s"를 "'"보다 먼저 본다.
+    private static let englishPossessiveSuffixes = ["'s", "’s", "'", "’"]
+
+    /// 질의 전체가 지원하는 관계 꼴이면 (X, 한국어 관계어). 비교는 `ReferenceDataStore.foldForNameSearch`로 접은 질의로 한다
+    /// (대소문자·발음 구별 기호 무시, 공백 하나로). 받는 꼴(그 밖은 nil):
+    ///  - en: "<rel> of X", "X's <rel>", "X' <rel>"
+    ///  - es: "<rel> de X"
+    ///  - zh: "X的<rel>"(공백 무시)
+    private static func translatedRelationQuery(_ query: String, language: String) -> (name: String, koreanRelationWord: String)? {
+        let folded = ReferenceDataStore.foldForNameSearch(query)
+        func nonEmpty(_ text: Substring) -> String? {
+            let name = text.trimmingCharacters(in: .whitespaces)
+            return name.isEmpty ? nil : name
+        }
+        switch language {
+        case "zh":
+            let compact = folded.filter { !$0.isWhitespace }
+            for relation in chineseRelationWords where compact.hasSuffix("的" + relation.word) {
+                if let name = nonEmpty(compact.dropLast(relation.word.count + 1)) { return (name, relation.korean) }
+            }
+            return nil
+        case "es":
+            for relation in spanishRelationWords where folded.hasPrefix(relation.word + " de ") {
+                if let name = nonEmpty(folded.dropFirst(relation.word.count + 4)) { return (name, relation.korean) }
+            }
+            return nil
+        default:
+            for relation in englishRelationWords {
+                if folded.hasPrefix(relation.word + " of ") {
+                    if let name = nonEmpty(folded.dropFirst(relation.word.count + 4)) { return (name, relation.korean) }
+                }
+                if folded.hasSuffix(" " + relation.word) {
+                    let head = folded.dropLast(relation.word.count + 1)
+                    for suffix in englishPossessiveSuffixes where head.hasSuffix(suffix) {
+                        if let name = nonEmpty(head.dropLast(suffix.count)) { return (name, relation.korean) }
+                        break
+                    }
+                }
+            }
             return nil
         }
+    }
 
-        let persons = (try? store.persons(mentionedIn: query)) ?? []
+    /// 비한국어 관계 질의 — X(번역 이름)를 인물 idx → 한국어 이름(`Persons.word`)으로 되돌린 뒤 한국어 질의
+    /// "<한국어 이름>의 <한국어 관계어>"를 만들어 한국어 경로(`handleWithKoreanData`)를 그대로 탄다. 그래서 관계 판정·방향·성별 검사·
+    /// 폴백·안내 문구가 한국어 질의와 똑같고, 화면 문장은 기존 표시층(`PersonRelationLabeling.localizedSentence`)이 번역한다.
+    ///  - X는 대표 번역 이름으로 일치한 인물을 먼저 쓰고, 없을 때만 번역 별칭으로 일치한 인물을 쓴다(예: en "Saul"은 사울만 — 바울의 별칭 Saul은 쓰지 않는다).
+    ///  - 한국어 이름이 여러 개면(예: en "Zechariah" → 사가랴/스가리야/스가랴) 쉼표로 이어 한 질의("사가랴, 스가리야, 스가랴의 아들")로
+    ///    만든다. 한국어 경로가 여러 인물이 든 질의를 다루는 방식 그대로 — 관계 타입이 맞는 행을 모든 이름에서 먼저 모으고, 하나도 없을 때만
+    ///    "관계 타입 미지정 폴백"으로 간다. 이름마다 따로 돌려 합치면 한 이름의 폴백 행(예: 스가리야의 신하 관계)이 다른 이름의 아들 행과 섞인다.
+    ///  - X에 해당하는 인물이 없으면 nil(호출부가 이름 그대로 판정으로 넘어간다).
+    private static func handleTranslatedRelation(
+        name: String, koreanRelationWord: String, store: ReferenceDataStore
+    ) -> QueryIntentCard? {
+        let resolved = store.translatedPersonIdxs(exactName: name)
+        let idxs = resolved.primary.isEmpty ? resolved.alias : resolved.primary
+        var koreanWords: [String] = []
+        for idx in idxs {
+            guard let person = try? store.person(idx: idx), !person.word.isEmpty, !koreanWords.contains(person.word) else { continue }
+            koreanWords.append(person.word)
+        }
+        guard !koreanWords.isEmpty else { return nil }
+        // 이 질의는 항상 "X의 <관계어>" 꼴이라 분류기가 관계로 확정하고, 한 글자 이름도 `handleRelation`이 정확 일치로 받는다.
+        let koreanQuery = "\(koreanWords.joined(separator: ", "))의 \(koreanRelationWord)"
+        return handleWithKoreanData(koreanQuery, intent: QueryIntentClassifier.classify(koreanQuery), store: store)
+    }
+
+    // MARK: 이름 그대로 (비한국어·한국어 공용 규칙)
+
+    /// "이름 그대로" 질의에서 이름 사이에 허용하는 구분 문자(공백 외). 한국어 인물 판정(`isKoreanNameOnlyQuery`)도 같은 목록을 쓴다.
+    private static let nameSeparators: Set<Character> = [",", "，", "、"]
+
+    /// 번역 이름(대표 이름·별칭, `NameSearchI18n`)으로 인물/지명을 찾아 카드로 만든다. 일치 규칙은
+    /// `ReferenceDataStore.translatedNameMatches(in:)` 참고. 카드 모양은 한국어 경로와 같다 — 지명이 있으면
+    /// `.entityProfile`(인물 먼저, `handlePlaceLookup`과 같은 순서), 인물만이면 `.personProfile`. 못 찾으면 nil.
+    ///
+    /// [2026-10-22 2차] 질의 전체가 이름이어야 한다 — 걸린 이름들이 질의 글자(공백 제외)를 **모두** 덮을 때만 카드를 낸다.
+    /// 이름 사이 구분은 공백과 쉼표(",", "，", "、")만 허용한다(쉼표는 공백으로 바꾼 뒤 판정). 1차의 "절반 이상 덮음(0.5)" 판정은
+    /// 이 조건에 포함되므로(전부 ⊂ 절반 이상) 지웠다 — 그 판정이 막으려던 "the sin of pride"/"amor sin fin"은 이제 덮지 못한
+    /// 글자가 있어 그대로 걸러진다.
+    private static func handleTranslatedNameLookup(_ query: String, store: ReferenceDataStore) -> QueryIntentCard? {
+        let separatorsAsSpaces = String(query.map { nameSeparators.contains($0) ? Character(" ") : $0 })
+        let result = store.translatedNameMatches(in: separatorsAsSpaces)
+        // coverage는 (덮은 글자 수)/(전체 글자 수)라 전부 덮였을 때만 정확히 1.0이다(같은 정수끼리 나눈 IEEE 754 값).
+        guard !result.matches.isEmpty, result.coverage >= 1.0 else { return nil }
+
+        var persons: [PersonEntity] = []
+        var places: [PlaceEntity] = []
+        for match in result.matches {
+            switch match.kind {
+            case .person:
+                // idx로 확정해 부른다 — 이름으로 다시 찾지 않으므로 동명이인이 섞이지 않는다.
+                guard let person = try? store.person(idx: match.idx) else { continue }
+                persons.append(match.matchedAlias.map { person.replacingMatchedAlias($0) } ?? person)
+            case .place:
+                guard let place = try? store.place(idx: match.idx) else { continue }
+                places.append(place)
+            }
+        }
+        if !places.isEmpty {
+            let items = persons.map(ProfileItem.person) + places.map(ProfileItem.place)
+            return QueryIntentCard(intent: .placeProfile, status: .found(.entityProfile(items)))
+        }
+        guard !persons.isEmpty else { return nil }
+        return QueryIntentCard(intent: .personProfile, status: .found(.personProfile(persons)))
+    }
+
+    // MARK: - 장소 (PlaceSeed.json)
+
+    /// 질의 전체가 지명(·인물) 이름이면 카드를 돌려준다. 판정:
+    ///  1) `places(mentionedIn:)`로 질의에 이름이 든 지명을 찾는다(동명이인은 모두). 한 글자 지명("단", "함", "길")은 질의 전체가
+    ///     그 이름일 때만 걸린다(같은 함수 참고 — "판단", "길이"에는 안 걸린다).
+    ///  2) 같은 이름의 인물이 함께 걸리면 한 카드에 같이 보여준다(예: "가나안" — 인물과 땅, "단" — 인물 단과 지명 단). 더 긴 이름 안에
+    ///     포함돼 삼켜지는 쪽은 뺀다.
+    ///  3) [2026-10-22 3차] 남은 지명·인물 이름을 질의에서 지웠을 때 남는 글자가 없어야 한다(`isKoreanNameOnlyQuery` — 공백·쉼표·끝의
+    ///     "?"/"." 무시). 2차까지의 "조회 말(위치/어디/알려줘 …)을 빼고 이름이 절반 이상" 판정은 지웠다 — "가나 위치", "가나는 어디?",
+    ///     "가나에 대해 알려줘"는 이제 카드 없음(한국어 문장형 질의 금지, 사용자 확정).
+    /// 해당하지 않으면 nil(일반 흐름 계속 — 인물 조회는 이후 단계가 맡는다).
+    private static func handlePlaceLookup(_ query: String, store: ReferenceDataStore) -> QueryIntentCard? {
+        // 끝의 "?"/"."를 뗀 질의로 찾는다 — "단?"도 한 글자 지명 정확 일치에 걸리게.
+        let trimmed = QueryIntentClassifier.trimmingTrailingQueryPunctuation(query)
+        let places = (try? store.places(mentionedIn: trimmed)) ?? []
+        guard !places.isEmpty else { return nil }
+
+        let persons = (try? store.persons(mentionedIn: trimmed)) ?? []
         func compact(_ text: String) -> String { text.filter { !$0.isWhitespace } }
         let placeNames = places.map { compact($0.word) }
         let personNames = persons.map { compact($0.matchedAlias ?? $0.word) }
@@ -219,6 +397,8 @@ enum QueryIntentHandler {
             return !personNames.contains { $0.count > name.count && $0.contains(name) }
         }
         guard !keptPlaces.isEmpty else { return nil }
+        let keptNames = keptPlaces.map { $0.word } + keptPersons.map { $0.matchedAlias ?? $0.word }
+        guard isKoreanNameOnlyQuery(trimmed, names: keptNames) else { return nil }
 
         let items = keptPersons.map(ProfileItem.person) + keptPlaces.map(ProfileItem.place)
         return QueryIntentCard(intent: .placeProfile, status: .found(.entityProfile(items)))
@@ -264,9 +444,42 @@ enum QueryIntentHandler {
         return true
     }
 
+    /// [2026-10-22 3차] 열두 제자 질의로 받는 명사구 — 끝의 "?"/"."와 공백을 무시한 질의 전체가 아래 꼴일 때만 true
+    /// (한국어 문장형 질의 금지, 사용자 확정):
+    ///  - "열두 제자(들)", "12제자(들)", "십이제자(들)"
+    ///  - "<주인>의 [열두|12|십이] 제자(들)" — 주인은 `twelveDisciplesOwners` 중 하나와 정확히 같아야 하고, 수사가 없으면 주인에
+    ///    "예수"/"그리스도"가 들어 있어야 한다(`isTwelveDisciplesQuery`의 기존 조건과 같다 — "주님의 제자"는 예전에도 아니었다).
+    /// 예: "예수님의 열두 제자", "예수 그리스도의 열두 제자들", "예수님의 제자" → true.
+    /// "예수님의 열두 제자는 누구인가요?", "열두 제자의 이름", "제자" → false.
+    static func isTwelveDisciplesNounPhrase(_ query: String) -> Bool {
+        var body = QueryIntentClassifier.trimmingTrailingQueryPunctuation(query)
+            .precomposedStringWithCanonicalMapping
+            .filter { !$0.isWhitespace }
+        if body.hasSuffix("들") { body.removeLast() }
+        guard body.hasSuffix("제자") else { return false }
+        body.removeLast(2)
+        var mentionsTwelve = false
+        for numeral in ["열두", "12", "십이"] where body.hasSuffix(numeral) {
+            body.removeLast(numeral.count)
+            mentionsTwelve = true
+            break
+        }
+        if body.isEmpty { return mentionsTwelve }
+        guard body.hasSuffix("의") else { return false }
+        body.removeLast()
+        guard twelveDisciplesOwners.contains(body) else { return false }
+        return mentionsTwelve || body.contains("예수") || body.contains("그리스도")
+    }
+
+    /// `isTwelveDisciplesNounPhrase`가 받는 "<주인>의 …제자"의 주인(공백 뺀 꼴). `isTwelveDisciplesQuery`의 주인 목록 + "예수그리스도".
+    private static let twelveDisciplesOwners: Set<String> = ["예수", "예수님", "그리스도", "그리스도님", "주님", "예수그리스도"]
+
     /// 열두 제자 그룹 카드 — 멤버 12명을 `person(idx:)`로 확정해 인물 카드 목록(`.personProfile`)으로 보여준다.
     /// 그룹 데이터가 없거나 질의가 해당하지 않으면 nil(일반 흐름으로 계속).
+    /// [2026-10-22 3차] 명사구 꼴(`isTwelveDisciplesNounPhrase`)을 먼저 본다 — 아니면 DB를 읽지 않고 nil. 기존 판정
+    /// (`isTwelveDisciplesQuery`)은 그대로 이어서 적용한다.
     private static func handleGroupLookup(_ query: String, store: ReferenceDataStore) -> QueryIntentCard? {
+        guard isTwelveDisciplesNounPhrase(query) else { return nil }
         let members = (try? store.personGroupMembers(groupId: twelveDisciplesGroupId)) ?? []
         guard !members.isEmpty else { return nil }
         let names = members.flatMap { [$0.word] + $0.aliases }
@@ -275,6 +488,15 @@ enum QueryIntentHandler {
     }
 
     /// 관계 행에서 `answer`(source 또는 target 이름)에 해당하는 쪽의 `Persons.idx`. 어느 쪽도 아니면 빈 문자열.
+    /// 답 인물의 성경 좌표. `idx`가 확정돼 있으면 그 인물 것만 쓴다 — 이름만으로 `personOrPlace(exactWord:)`를 부르면
+    /// 동명이인(야고보·요한 등) 중 임의의 한 명(`LIMIT 1`)의 구절이 붙는다(2026-10-21). idx가 없거나 못 찾으면 기존 방식 그대로다.
+    private static func answerVerseRefs(word: String, idx: String, store: ReferenceDataStore) -> [BibleVerseRef] {
+        if !idx.isEmpty, let person = try? store.person(idx: idx) {
+            return person.verseRefs
+        }
+        return (try? store.personOrPlace(exactWord: word))?.verseRefs ?? []
+    }
+
     private static func answerIdx(of answer: String, in relation: PersonRelationRecord) -> String {
         if answer == relation.sourceWord { return relation.sourceIdx }
         if answer == relation.targetWord { return relation.targetIdx }
@@ -300,22 +522,26 @@ enum QueryIntentHandler {
                 let key = "\(relation.sourceWord)|\(relation.relationType)|\(relation.targetWord)"
                 guard seen.insert(key).inserted else { continue }
                 let answer = answerWord(relation)
-                let verses = (try? store.personOrPlace(exactWord: answer))?.verseRefs ?? []
+                let answerIdx = Self.answerIdx(of: answer, in: relation)
+                let verses = Self.answerVerseRefs(word: answer, idx: answerIdx, store: store)
                 combined.append(RelationDisplayItem(
                     relation: relation, verseRefs: verses,
-                    answerWord: answer, answerIdx: Self.answerIdx(of: answer, in: relation)
+                    answerWord: answer, answerIdx: answerIdx
                 ))
             }
         }
 
-        let entities = (try? store.personsAndPlaces(mentionedIn: query)) ?? []
+        // [2026-10-22 2차] 한 글자 이름("함", "셈", "단")은 부분 문자열 조회(2글자 이상)에서 빠지므로, 질의 전체가 "X의 <관계어>" 꼴일 때
+        // X 중 한 글자인 이름만 정확 일치로 더한다("함께"/"판단" 같은 낱말 속 글자에는 걸리지 않는다). 그 밖의 질의는 빈 배열이라 예전과 같다.
+        let shortNames = (QueryIntentClassifier.koreanRelationShapeNames(query) ?? []).filter { $0.count == 1 }
+        let entities = (try? store.personsAndPlaces(mentionedIn: query, shortNamesExactMatch: shortNames)) ?? []
         let personEntities = entities.filter { $0.kind == .person }
-        let reverseRows = (try? store.personRelations(targetWordMentionedIn: query)) ?? []
+        let reverseRows = (try? store.personRelations(targetWordMentionedIn: query, shortNamesExactMatch: shortNames)) ?? []
 
         // "OO의 형/동생/아우" — 방향과 손위·손아래를 구분해야 해서 아래 일반 흐름과 따로 처리한다(`handleSibling` 참고).
         // 다른 관계 어휘(아들/아버지 등)가 함께 있으면 기존 흐름에 맡긴다.
         if detectRelationSubQuery(query) == nil, let role = detectSiblingRole(query) {
-            return handleSibling(query, role: role, targetRows: reverseRows, store: store)
+            return handleSibling(query, role: role, targetRows: reverseRows, shortNames: shortNames, store: store)
         }
 
         if let subQuery = detectRelationSubQuery(query), !personEntities.isEmpty {
@@ -371,7 +597,7 @@ enum QueryIntentHandler {
                         )
                         let key = "\(record.sourceWord)|\(record.relationType)|\(record.targetWord)"
                         guard seen.insert(key).inserted else { continue }
-                        let verses = (try? store.personOrPlace(exactWord: partner.word))?.verseRefs ?? []
+                        let verses = Self.answerVerseRefs(word: partner.word, idx: partner.idx, store: store)
                         combined.append(RelationDisplayItem(
                             relation: record, verseRefs: verses, answerWord: partner.word, answerIdx: partner.idx
                         ))
@@ -383,9 +609,9 @@ enum QueryIntentHandler {
             }
             // 아내/남편 질의는 결과가 없을 때 다른 관계 전체로 폴백하지 않는다 — 질의와 무관한 관계(아들·신하·대적 등)를 답처럼 나열하게 된다.
             if case .spouse(let answerIsWife) = subQuery {
-                let label = answerIsWife ? "아내" : "남편"
+                let label = answerIsWife ? String(localized: "아내") : String(localized: "남편")
                 return QueryIntentCard(intent: .relation, status: .notReady(
-                    message: "질의한 \(label) 관계가 등록돼 있지 않습니다. 아래 검색 결과를 확인해 보세요."
+                    message: String(localized: "질의한 \(label) 관계가 등록돼 있지 않습니다. 아래 검색 결과를 확인해 보세요.")
                 ))
             }
             // 타입 필터링 결과가 비면(해당 관계 데이터 없음) 아래 폴백으로 넘어가 다른 관계라도
@@ -402,7 +628,7 @@ enum QueryIntentHandler {
 
         guard !combined.isEmpty else {
             return QueryIntentCard(intent: .relation, status: .notReady(
-                message: "이 질의에서 등록된 인물 관계를 찾지 못했습니다. 아래 검색 결과를 확인해 보세요."
+                message: String(localized: "이 질의에서 등록된 인물 관계를 찾지 못했습니다. 아래 검색 결과를 확인해 보세요.")
             ))
         }
         return QueryIntentCard(intent: .relation, status: .found(.relation(combined)))
@@ -441,9 +667,9 @@ enum QueryIntentHandler {
     /// 저장 행은 항상 `RelationDisplayItem`에 "역할 보유자 → 소유자" 방향으로 정리해, 화면 문장이 "A는 B의 형/아우"로 읽히게 한다.
     /// 일치하는 행이 없으면 다른 관계로 폴백하지 않는다 — 폴백이 질의와 반대되는 사실을 답처럼 보여줬기 때문이다.
     private static func handleSibling(
-        _ query: String, role: SiblingRole, targetRows: [PersonRelationRecord], store: ReferenceDataStore
+        _ query: String, role: SiblingRole, targetRows: [PersonRelationRecord], shortNames: [String], store: ReferenceDataStore
     ) -> QueryIntentCard {
-        let sourceRows = (try? store.personRelations(sourceWordMentionedIn: query)) ?? []
+        let sourceRows = (try? store.personRelations(sourceWordMentionedIn: query, shortNamesExactMatch: shortNames)) ?? []
 
         var items: [RelationDisplayItem] = []
         var seen = Set<String>()
@@ -498,17 +724,16 @@ enum QueryIntentHandler {
         }
 
         guard !items.isEmpty else {
-            let label = role == .younger ? "동생/아우" : "형"
+            let label = role == .younger ? String(localized: "동생/아우") : String(localized: "형")
             return QueryIntentCard(intent: .relation, status: .notReady(
-                message: "질의한 \(label) 관계가 등록돼 있지 않습니다. 아래 검색 결과를 확인해 보세요."
+                message: String(localized: "질의한 \(label) 관계가 등록돼 있지 않습니다. 아래 검색 결과를 확인해 보세요.")
             ))
         }
         return QueryIntentCard(intent: .relation, status: .found(.relation(items)))
     }
 
     /// `handleRelation` 전용 — 질의에서 구체적인 관계 타입을 감지한다.
-    /// 검사 순서 주의: 현재 키워드끼리는 부분 문자열 관계가 없지만, 나중에 추가할 때
-    /// (예: "할아버지"는 "아버지"를 포함) 더 구체적인 키워드를 먼저 검사해야 한다.
+    /// 검사 순서 주의: 더 구체적인 키워드를 먼저 검사해야 한다(예: "외할아버지" ⊃ "할아버지" ⊃ "아버지" — 2026-10-22 3차에 조부모 추가).
     private enum RelationSubQuery {
         /// "OO의 <역할>은?" — target == OO이고 relationType이 목록에 속하는 행의 source를
         /// 답으로 보여준다.
@@ -541,6 +766,14 @@ enum QueryIntentHandler {
         // "손자"/"손녀"는 "아들"/"딸"과 부분 문자열 관계가 없어 검사 순서와 무관하다.
         if query.contains("손자") { return .reverseByType(["grandson_of"]) }
         if query.contains("손녀") { return .reverseByType(["granddaughter_of"]) }
+        // [2026-10-22 3차] 조부모는 "아버지"/"어머니"보다 먼저 본다 — "할아버지"가 "아버지"를 포함해 father_of(아버지)를 답으로
+        // 보여 주던 버그. 외조부모를 조부모보다 먼저 본다("외할아버지" ⊃ "할아버지"). 방향은 father_of와 같다 — 행은
+        // "source가 target의 할아버지"(예: (라멕, grandfather_of, 셈))라 "셈의 할아버지"는 target=셈 행의 source(라멕)가 답이다.
+        // "외할머니/외조모"(maternal_grandmother_of)는 사용자 목록 밖이지만 넣지 않으면 "할머니"에 걸려 grandmother_of로 답하므로 함께 둔다.
+        if query.contains("외할아버지") || query.contains("외조부") { return .reverseByType(["maternal_grandfather_of"]) }
+        if query.contains("외할머니") || query.contains("외조모") { return .reverseByType(["maternal_grandmother_of"]) }
+        if query.contains("할아버지") || query.contains("조부") { return .reverseByType(["grandfather_of"]) }
+        if query.contains("할머니") || query.contains("조모") { return .reverseByType(["grandmother_of"]) }
         if query.contains("아버지") || query.contains("부친") { return .reverseByType(["father_of"]) }
         if query.contains("어머니") || query.contains("모친") { return .reverseByType(["mother_of"]) }
         // "아내" 동의어 중 "처"는 한 글자라 "처음"/"처녀"/"출처" 등에 오탐되어 제외했다.
@@ -559,29 +792,68 @@ enum QueryIntentHandler {
     /// 있어(Places 콘텐츠 미준비) 반환하지 않는다.
     /// 문서 확정) 이 메서드가 장소를 반환할 일이 구조적으로 없다.
     private static func handleKeywordCategoryLookup(_ query: String, store: ReferenceDataStore) -> QueryIntentCard? {
-        let categories = (try? store.keywordCategories(mentionedIn: query)) ?? []
+        // [2026-10-22 3차] 끝의 "?"/"."를 뗀 질의로 조회한다 — 한 글자 이름 정확 일치(`keywordCategories`/`persons(mentionedIn:)`의
+        // "질의 전체 = 이름")가 "함?"에서도 걸리게. 부분 문자열 판정은 끝 문장부호와 무관해 결과가 같다.
+        let trimmed = QueryIntentClassifier.trimmingTrailingQueryPunctuation(query)
+        let categories = (try? store.keywordCategories(mentionedIn: trimmed)) ?? []
 
+        // [2026-10-22 2차] 인물 카드는 "이름 그대로" 질의(`isKoreanNameOnlyQuery`)일 때만 낸다 — "다윗은 누구인가"처럼 이름이 든
+        // 문장형 질문은 카드 없이 일반 검색으로 보낸다(사용자 요구). 이렇게 걸러진 분류는 없던 것으로 친다(아래 안내 카드 판정).
+        var categoriesRejectedByShape: Set<String> = []
         if categories.contains("인물") {
-            let persons = (try? store.persons(mentionedIn: query)) ?? []
+            let persons = (try? store.persons(mentionedIn: trimmed)) ?? []
             if !persons.isEmpty {
-                return QueryIntentCard(intent: .personProfile, status: .found(.personProfile(persons)))
+                if isKoreanNameOnlyQuery(trimmed, names: persons.map { $0.matchedAlias ?? $0.word }) {
+                    return QueryIntentCard(intent: .personProfile, status: .found(.personProfile(persons)))
+                }
+                categoriesRejectedByShape.insert("인물")
             }
         }
+        // [2026-10-22 3차] 주제 카드도 같은 규칙 — 질의 전체가 걸린 주제의 표제어(제목·검색어)여야 한다. "기도" → 카드,
+        // "함께 기도하라"/"기도의 방법" → 카드 없음(한국어 문장형 질의 금지, 사용자 확정).
         if categories.contains("주제") {
-            let themes = (try? store.themes(matching: query)) ?? []
+            let themes = (try? store.themes(matching: trimmed)) ?? []
             if !themes.isEmpty {
-                return QueryIntentCard(intent: .themeOrAttribute, status: .found(.theme(themes)))
+                if isKoreanNameOnlyQuery(trimmed, names: themes.flatMap { themeMatchTerms($0) }) {
+                    return QueryIntentCard(intent: .themeOrAttribute, status: .found(.theme(themes)))
+                }
+                categoriesRejectedByShape.insert("주제")
             }
         }
-        if !categories.isEmpty {
+        let remainingCategories = categories.subtracting(categoriesRejectedByShape)
+        if !remainingCategories.isEmpty {
             // 인덱스엔 걸렸지만 콘텐츠 조회가 빈 배열인 드문 불일치(예: 대응 행이 그 사이 지워짐) —
             // 카테고리는 이미 알아냈으므로 추가 보완 없이 준비중 카드로 안내한다.
             return QueryIntentCard(intent: .personProfile, status: .notReady(
-                message: "이 표제어는 등록돼 있으나 상세 콘텐츠를 찾지 못했습니다. 아래 검색 결과를 확인해 보세요."
+                message: String(localized: "이 표제어는 등록돼 있으나 상세 콘텐츠를 찾지 못했습니다. 아래 검색 결과를 확인해 보세요.")
             ))
         }
 
         return nil
+    }
+
+    /// 질의가 걸린 인물 이름(대표 이름 또는 걸린 별칭)만으로 이뤄졌는지 — 공백·쉼표(`nameSeparators`)와 끝의 "?"/"."는 무시한다.
+    /// 예: "다윗", "다윗 솔로몬", "다윗, 솔로몬", "아브라함"(삼켜진 "라함"은 `persons(mentionedIn:)`가 이미 뺐다) → true.
+    /// "다윗은 누구인가", "다윗은", "다윗과 솔로몬", "다윗 왕" → false(이름이 아닌 글자가 남는다).
+    /// 긴 이름부터 지워 짧은 이름이 긴 이름의 일부만 지우는 일을 막는다.
+    /// [2026-10-22 3차] 지명 카드(`handlePlaceLookup` — 지명·인물 이름)와 주제 카드(`themeMatchTerms`)도 같은 함수로 판정한다.
+    private static func isKoreanNameOnlyQuery(_ query: String, names: [String]) -> Bool {
+        var residual = QueryIntentClassifier.trimmingTrailingQueryPunctuation(query)
+            .filter { !$0.isWhitespace && !nameSeparators.contains($0) }
+        guard !residual.isEmpty else { return false }
+        let compactNames = names.map { $0.filter { !$0.isWhitespace } }.filter { !$0.isEmpty }
+        for name in compactNames.sorted(by: { $0.count > $1.count }) {
+            residual = residual.replacingOccurrences(of: name, with: "")
+        }
+        return residual.isEmpty
+    }
+
+    /// [2026-10-22 3차] 주제 하나가 질의에 걸릴 수 있는 말 — 제목과 검색어(콤마 구분) 중 2글자 이상인 것.
+    /// `ReferenceDataStore.themes(matching:)`의 일치 규칙(`matchesQuery`: 2글자 이상, 부분 문자열)과 같은 말만 돌려준다 —
+    /// `isKoreanNameOnlyQuery`가 이 말들을 질의에서 지워 "질의 전체가 주제 표제어인지"를 본다(질의에 없는 말은 지워도 그대로다).
+    private static func themeMatchTerms(_ theme: ThemeRecord) -> [String] {
+        let keywords = (theme.searchKeywords ?? "").split(separator: ",").map { $0.trimmingCharacters(in: .whitespaces) }
+        return ([theme.title] + keywords).filter { $0.count >= 2 }
     }
 
     // MARK: - 예언
@@ -590,7 +862,7 @@ enum QueryIntentHandler {
         let matches = (try? store.prophecies(matching: query)) ?? []
         guard !matches.isEmpty else {
             return QueryIntentCard(intent: .prophecy, status: .notReady(
-                message: "예언 데이터가 아직 준비되지 않았거나, 이 질의와 일치하는 항목이 없습니다. 아래 검색 결과를 확인해 보세요."
+                message: String(localized: "예언 데이터가 아직 준비되지 않았거나, 이 질의와 일치하는 항목이 없습니다. 아래 검색 결과를 확인해 보세요.")
             ))
         }
         return QueryIntentCard(intent: .prophecy, status: .found(.prophecy(matches)))
@@ -602,7 +874,7 @@ enum QueryIntentHandler {
         let matches = (try? store.themes(matching: query)) ?? []
         guard !matches.isEmpty else {
             return QueryIntentCard(intent: .themeOrAttribute, status: .notReady(
-                message: "주제·속성 데이터가 아직 준비되지 않았거나, 이 질의와 일치하는 항목이 없습니다. 아래 검색 결과를 확인해 보세요."
+                message: String(localized: "주제·속성 데이터가 아직 준비되지 않았거나, 이 질의와 일치하는 항목이 없습니다. 아래 검색 결과를 확인해 보세요.")
             ))
         }
         return QueryIntentCard(intent: .themeOrAttribute, status: .found(.theme(matches)))
@@ -614,7 +886,7 @@ enum QueryIntentHandler {
         let events = (try? store.timelineEvents(narrativeMentionedIn: query)) ?? []
         guard !events.isEmpty else {
             return QueryIntentCard(intent: .narrative, status: .notReady(
-                message: "서사·흐름 데이터가 아직 준비되지 않았거나, 이 질의와 일치하는 항목이 없습니다. 아래 검색 결과를 확인해 보세요."
+                message: String(localized: "서사·흐름 데이터가 아직 준비되지 않았거나, 이 질의와 일치하는 항목이 없습니다. 아래 검색 결과를 확인해 보세요.")
             ))
         }
         return QueryIntentCard(intent: .narrative, status: .found(.narrative(groupByNarrative(events))))
@@ -668,10 +940,59 @@ enum PersonRelationLabeling {
     /// 관계 행의 "원문" 표시용 — PersonSeed 기타관계 원문("골리앗#0(형)")에 붙은 `#idx` 태그(`#0`=미상 포함)는
     /// 빌드용 식별자라 사용자에게 보이지 않게 지운다(→ "골리앗(형)"). 태그가 없는 문장은 그대로다.
     static func displayRawSentence(_ raw: String) -> String {
-        raw.replacingOccurrences(of: "#[0-9]+", with: "", options: .regularExpression)
+        let withoutTags = raw.replacingOccurrences(of: "#[0-9]+", with: "", options: .regularExpression)
+        // [2026-10-22] 비한국어 화면에서는 "이름#idx(라벨)"의 이름(idx → 번역 이름)과 라벨(번역 사전)을 번역한다.
+        // 형식이 맞지 않으면 위 기존 결과(태그만 지움) 그대로다. 한국어 화면은 이 분기를 타지 않는다.
+        guard !AppLanguage.isKorean, !raw.isEmpty, let store = ReferenceDataProvider.shared.store,
+              let translated = translatedRawSentence(raw, store: store) else {
+            return withoutTags
+        }
+        return translated
+    }
+
+    /// PersonSeed 기타관계 원문 한 항목("셈#4649(숙부)", "골리앗#0(형)", "요나단#123", "아무개")을 이름·idx·라벨로 나눠 번역한다.
+    /// `build_reference_data.py`가 받아들이는 형식(괄호는 0개 또는 끝에 1개, "#" 뒤는 숫자)만 다루고, 그 밖이면 nil(호출부 폴백).
+    /// idx가 없거나 `#0`(미상)이면 이름은 원문 그대로, 번역이 없는 라벨도 원문 그대로다.
+    private static func translatedRawSentence(_ raw: String, store: ReferenceDataStore) -> String? {
+        let trimmed = raw.trimmingCharacters(in: .whitespaces)
+        var namePart = Substring(trimmed)
+        var label = ""
+        let openCount = trimmed.filter { $0 == "(" }.count
+        let closeCount = trimmed.filter { $0 == ")" }.count
+        if openCount == 0 && closeCount == 0 {
+            // 라벨 없음
+        } else if openCount == 1, closeCount == 1, trimmed.hasSuffix(")"), let open = trimmed.firstIndex(of: "(") {
+            label = String(trimmed[trimmed.index(after: open)..<trimmed.index(before: trimmed.endIndex)])
+                .trimmingCharacters(in: .whitespaces)
+            namePart = trimmed[..<open]
+        } else {
+            return nil
+        }
+        var name = String(namePart).trimmingCharacters(in: .whitespaces)
+        var idx = ""
+        if let hash = name.lastIndex(of: "#") {
+            let digits = name[name.index(after: hash)...]
+            guard !digits.isEmpty, digits.allSatisfy({ $0.isASCII && $0.isNumber }) else { return nil }
+            idx = String(digits)
+            name = String(name[..<hash]).trimmingCharacters(in: .whitespaces)
+        }
+        guard !name.isEmpty else { return nil }
+        let shownName = (idx.isEmpty || idx == "0") ? name : store.displayPersonName(idx: idx, fallback: name)
+        guard !label.isEmpty else { return shownName }
+        return "\(shownName)(\(store.displayRelationLabel(label)))"
+    }
+
+    /// 관계 문장에 넣을 이름(글자만, 링크 없음) — idx가 있으면 그 사람의 번역 이름, idx가 없으면 한국어 이름이 유일한
+    /// 인물일 때만 번역 이름, 그 밖은 데이터(한국어) 그대로(`ReferenceDataStore.displayPersonName(word:idx:)`).
+    /// idx 없는 행이 많다 — `personRelations(targetWordMentionedIn:)`는 idx 열을 읽지 않는다(한국어 로직 보존을 위해 그대로 둠).
+    /// 한국어 화면에서는 쓰지 않는다.
+    private static func displayName(word: String, idx: String) -> String {
+        ReferenceDataProvider.shared.store?.displayPersonName(word: word, idx: idx) ?? word
     }
 
     static func sentence(for relation: PersonRelationRecord) -> String {
+        // 한국어 화면은 아래 기존 문장(조사 자동 선택)을 그대로 쓴다.
+        guard AppLanguage.isKorean else { return localizedSentence(for: relation) }
         let source = relation.sourceWord
         let target = relation.targetWord
         let sourceEunNeun = eunNeun(after: source)
@@ -714,6 +1035,55 @@ enum PersonRelationLabeling {
         case "affiliated_with_place": return "\(source)\(sourceEunNeun) \(target) 사람(출신)"
         default:
             // 방어적 폴백 — 새 relation_type이 매핑에 없어도 값을 숨기지 않고 밑줄→공백만 적용해 보여준다.
+            let cleaned = relation.relationType.replacingOccurrences(of: "_", with: " ")
+            return "\(source) - \(cleaned) - \(target)"
+        }
+    }
+
+    /// 한국어가 아닌 화면용 관계 문장. 한국어 문장은 조사(은/는, 와/과)를 이름의 받침으로 고르지만,
+    /// 다른 언어는 조사가 없어 언어별 문장 템플릿(String Catalog)을 그대로 쓴다.
+    /// [2026-10-22] 인물 이름은 번역 이름(`PersonsI18n.word`)으로 — idx가 없으면 한국어 이름이 유일한 인물일 때만(`displayName`).
+    private static func localizedSentence(for relation: PersonRelationRecord) -> String {
+        let source = displayName(word: relation.sourceWord, idx: relation.sourceIdx)
+        // 대상이 지명이면 인물 사전으로 번역하지 않는다(우연히 같은 한국어 인물 이름이 있어도 섞이지 않게).
+        let target = relation.targetKind == .place ? relation.targetWord : displayName(word: relation.targetWord, idx: relation.targetIdx)
+        switch relation.relationType {
+        case "son_of": return String(localized: "\(source)은(는) \(target)의 아들", comment: "인물 관계 문장 — 첫 번째 값: 인물, 두 번째 값: 관계 대상 인물")
+        case "daughter_of": return String(localized: "\(source)은(는) \(target)의 딸", comment: "인물 관계 문장 — 첫 번째 값: 인물, 두 번째 값: 관계 대상 인물")
+        case "grandson_of": return String(localized: "\(source)은(는) \(target)의 손자", comment: "인물 관계 문장 — 첫 번째 값: 인물, 두 번째 값: 관계 대상 인물")
+        case "granddaughter_of": return String(localized: "\(source)은(는) \(target)의 손녀", comment: "인물 관계 문장 — 첫 번째 값: 인물, 두 번째 값: 관계 대상 인물")
+        case "grandfather_of": return String(localized: "\(source)은(는) \(target)의 할아버지", comment: "인물 관계 문장 — 첫 번째 값: 인물, 두 번째 값: 관계 대상 인물")
+        case "grandmother_of": return String(localized: "\(source)은(는) \(target)의 할머니", comment: "인물 관계 문장 — 첫 번째 값: 인물, 두 번째 값: 관계 대상 인물")
+        case "maternal_grandfather_of": return String(localized: "\(source)은(는) \(target)의 외할아버지", comment: "인물 관계 문장 — 첫 번째 값: 인물, 두 번째 값: 관계 대상 인물")
+        case "maternal_grandmother_of": return String(localized: "\(source)은(는) \(target)의 외할머니", comment: "인물 관계 문장 — 첫 번째 값: 인물, 두 번째 값: 관계 대상 인물")
+        case "co_worker_of": return String(localized: "\(source)은(는) \(target)의 동역자", comment: "인물 관계 문장 — 첫 번째 값: 인물, 두 번째 값: 관계 대상 인물")
+        case "father_of": return String(localized: "\(source)은(는) \(target)의 아버지", comment: "인물 관계 문장 — 첫 번째 값: 인물, 두 번째 값: 관계 대상 인물")
+        case "mother_of": return String(localized: "\(source)은(는) \(target)의 어머니", comment: "인물 관계 문장 — 첫 번째 값: 인물, 두 번째 값: 관계 대상 인물")
+        case "wife_of": return String(localized: "\(source)은(는) \(target)의 아내", comment: "인물 관계 문장 — 첫 번째 값: 인물, 두 번째 값: 관계 대상 인물")
+        case "husband_of": return String(localized: "\(source)은(는) \(target)의 남편", comment: "인물 관계 문장 — 첫 번째 값: 인물, 두 번째 값: 관계 대상 인물")
+        case "daughter_in_law_of": return String(localized: "\(source)은(는) \(target)의 며느리", comment: "인물 관계 문장 — 첫 번째 값: 인물, 두 번째 값: 관계 대상 인물")
+        case "father_in_law_of": return String(localized: "\(source)은(는) \(target)의 장인", comment: "인물 관계 문장 — 첫 번째 값: 인물, 두 번째 값: 관계 대상 인물")
+        case "son_in_law_of": return String(localized: "\(source)은(는) \(target)의 사위", comment: "인물 관계 문장 — 첫 번째 값: 인물, 두 번째 값: 관계 대상 인물")
+        case "great_grandfather_of": return String(localized: "\(source)은(는) \(target)의 증조부", comment: "인물 관계 문장 — 첫 번째 값: 인물, 두 번째 값: 관계 대상 인물")
+        case "adversary_of": return String(localized: "\(source)은(는) \(target)의 대적", comment: "인물 관계 문장 — 첫 번째 값: 인물, 두 번째 값: 관계 대상 인물")
+        case "ally_of": return String(localized: "\(source)은(는) \(target)의 동맹", comment: "인물 관계 문장 — 첫 번째 값: 인물, 두 번째 값: 관계 대상 인물")
+        case "related_to": return String(localized: "\(source)은(는) \(target)와(과) 관련 있음", comment: "인물 관계 문장 — 첫 번째 값: 인물, 두 번째 값: 관계 대상 인물")
+        case "brother_of": return String(localized: "\(source)은(는) \(target)의 형제", comment: "인물 관계 문장 — 첫 번째 값: 인물, 두 번째 값: 관계 대상 인물")
+        case "younger_brother_of": return String(localized: "\(source)은(는) \(target)의 아우", comment: "인물 관계 문장 — 첫 번째 값: 인물, 두 번째 값: 관계 대상 인물")
+        case "older_brother_of": return String(localized: "\(source)은(는) \(target)의 형", comment: "인물 관계 문장 — 첫 번째 값: 인물, 두 번째 값: 관계 대상 인물")
+        case "sister_of": return String(localized: "\(source)은(는) \(target)의 자매", comment: "인물 관계 문장 — 첫 번째 값: 인물, 두 번째 값: 관계 대상 인물")
+        case "uncle_of": return String(localized: "\(source)은(는) \(target)의 삼촌", comment: "인물 관계 문장 — 첫 번째 값: 인물, 두 번째 값: 관계 대상 인물")
+        case "cousin_of": return String(localized: "\(source)은(는) \(target)의 사촌", comment: "인물 관계 문장 — 첫 번째 값: 인물, 두 번째 값: 관계 대상 인물")
+        case "descendant_of": return String(localized: "\(source)은(는) \(target)의 후손", comment: "인물 관계 문장 — 첫 번째 값: 인물, 두 번째 값: 관계 대상 인물")
+        case "ancestor_of": return String(localized: "\(source)은(는) \(target)의 조상", comment: "인물 관계 문장 — 첫 번째 값: 인물, 두 번째 값: 관계 대상 인물")
+        case "teacher_of": return String(localized: "\(source)은(는) \(target)의 스승", comment: "인물 관계 문장 — 첫 번째 값: 인물, 두 번째 값: 관계 대상 인물")
+        case "king_of": return String(localized: "\(source)은(는) \(target)의 왕", comment: "인물 관계 문장 — 첫 번째 값: 인물, 두 번째 값: 관계 대상 인물")
+        case "married_to": return String(localized: "\(source)은(는) \(target)와(과) 결혼한 사이", comment: "인물 관계 문장 — 첫 번째 값: 인물, 두 번째 값: 관계 대상 인물")
+        case "friend_of": return String(localized: "\(source)은(는) \(target)의 친구", comment: "인물 관계 문장 — 첫 번째 값: 인물, 두 번째 값: 관계 대상 인물")
+        case "tribe_of": return String(localized: "\(source)은(는) \(target) 지파 소속", comment: "인물 관계 문장 — 첫 번째 값: 인물, 두 번째 값: 관계 대상 인물")
+        case "people_of": return String(localized: "\(source)은(는) \(target) 족속 소속", comment: "인물 관계 문장 — 첫 번째 값: 인물, 두 번째 값: 관계 대상 인물")
+        case "affiliated_with_place": return String(localized: "\(source)은(는) \(target) 사람(출신)", comment: "인물 관계 문장 — 첫 번째 값: 인물, 두 번째 값: 관계 대상 인물")
+        default:
             let cleaned = relation.relationType.replacingOccurrences(of: "_", with: " ")
             return "\(source) - \(cleaned) - \(target)"
         }

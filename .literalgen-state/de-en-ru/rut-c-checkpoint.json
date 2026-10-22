@@ -1,0 +1,29 @@
+{
+  "status": "generation_and_full_qa_complete",
+  "completed_chapters": [
+    3,
+    4
+  ],
+  "remaining_chapters": [],
+  "new_files": [
+    {
+      "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/08_RUT/RUT_003.tsv",
+      "rows": 18
+    },
+    {
+      "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/08_RUT/RUT_003.tsv",
+      "rows": 18
+    },
+    {
+      "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/08_RUT/RUT_004.tsv",
+      "rows": 22
+    },
+    {
+      "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/08_RUT/RUT_004.tsv",
+      "rows": 22
+    }
+  ],
+  "qa_candidates": 3,
+  "root_en_independent_rows": 40,
+  "root_en_qa_candidates": 3
+}

@@ -1,0 +1,37 @@
+[
+  {
+    "path": "Tools/LiteralGen/outputs/de/16_NEH/NEH_008.tsv",
+    "old_row": "10\tUnd er sagte ihnen: „Geht, esst Fettigkeiten und trinkt Süßigkeiten und sendet Anteile dem, dem nichts bereitet ist, denn der Tag ist unserem Herrn heilig; und seid nicht bekümmert, denn die Freude des HERRN ist eure Zuflucht.“\tUnser Herr ist vom HERRN unterschieden; genannt ist die Zuflucht.",
+    "new_row": "10\tUnd er sagte ihnen: „Geht, esst Fettes und trinkt Süßes und sendet Anteile dem, dem nichts bereitet ist, denn der Tag ist unserem Herrn heilig; und seid nicht bekümmert, denn die Freude des HERRN ist eure Zuflucht.“\tUnser Herr ist vom HERRN unterschieden; genannt ist die Zuflucht."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/16_NEH/NEH_009_1.tsv",
+    "old_row": "19\thast du sie in deinen großen Erbarmungen nicht in der Wüste verlassen. Die Wolkensäule wich bei Tag nicht von ihnen, um sie auf dem Weg zu führen, und die Feuersäule bei Nacht, um ihnen zu leuchten und den Weg, auf dem sie gehen sollten.\tNah am Hebräischen.",
+    "new_row": "19\thast du sie in deinen großen Erbarmungen nicht in der Wüste verlassen. Die Wolkensäule wich bei Tag nicht von ihnen, um sie auf dem Weg zu führen, und die Feuersäule bei Nacht, um ihnen und dem Weg zu leuchten, auf dem sie gehen sollten.\tNah am Hebräischen."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/16_NEH/NEH_009_1.tsv",
+    "old_row": "25\tUnd sie nahmen befestigte Städte und fetten Boden ein und nahmen Häuser voller alles Guten, ausgehauene Zisternen, Weinberge und Ölbäume und Speisebäume in Menge in Besitz; und sie aßen und wurden satt und fett und schwelgten in deiner großen Güte.\tDie Zisternen und Ölbäume sind ausdrücklich.",
+    "new_row": "25\tUnd sie nahmen befestigte Städte und fetten Boden ein und nahmen Häuser voll alles Guten, ausgehauene Zisternen, Weinberge und Ölbäume und Speisebäume in Menge in Besitz; und sie aßen und wurden satt und fett und schwelgten in deiner großen Güte.\tDie Zisternen und Ölbäume sind ausdrücklich."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/16_NEH/NEH_008.tsv",
+    "old_row": "5\tИ Ездра открыл книгу перед глазами всего народа, ибо он был выше всего народа; и при его открытии весь народ встал.\tВсё население повторено.",
+    "new_row": "5\tИ Ездра открыл книгу перед глазами всего народа, ибо он был выше всего народа; и когда он открыл её, весь народ встал.\tБлизко к еврейскому."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/16_NEH/NEH_009_1.tsv",
+    "old_row": "19\tТы в Твоих великих состраданиях не оставил их в пустыне. Облачный столп не отходил от них днём, чтобы вести их на пути, и огненный столп ночью, чтобы светить им и на путь, которым они должны идти.\tБлизко к еврейскому.",
+    "new_row": "19\tТы в Твоих великих состраданиях не оставил их в пустыне. Облачный столп не отходил от них днём, чтобы вести их на пути, и огненный столп ночью, чтобы светить им и пути, которым они должны идти.\tБлизко к еврейскому."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/en/16_NEH/NEH_007_1.tsv",
+    "old_row": "7\t=\tThe Hebrew describes those coming with the named leaders; BSB says “accompanied by” them.",
+    "new_row": "7\t=\tClose to the Hebrew."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/en/16_NEH/NEH_009_1.tsv",
+    "old_row": "19\t=\tClose to the Hebrew.",
+    "new_row": "19\t=\tThe Hebrew says the cloud pillar did not depart from above them; BSB describes it as never turning away from guiding them."
+  }
+]

@@ -1,0 +1,72 @@
+[
+  {
+    "book": "20_PRO",
+    "packets": 45,
+    "missing_files": 135
+  },
+  {
+    "book": "21_ECC",
+    "packets": 12,
+    "missing_files": 36
+  },
+  {
+    "book": "54_1TI",
+    "packets": 6,
+    "missing_files": 18
+  },
+  {
+    "book": "55_2TI",
+    "packets": 4,
+    "missing_files": 12
+  },
+  {
+    "book": "56_TIT",
+    "packets": 3,
+    "missing_files": 9
+  },
+  {
+    "book": "58_HEB",
+    "packets": 15,
+    "missing_files": 45
+  },
+  {
+    "book": "59_JAS",
+    "packets": 5,
+    "missing_files": 15
+  },
+  {
+    "book": "60_1PE",
+    "packets": 5,
+    "missing_files": 15
+  },
+  {
+    "book": "61_2PE",
+    "packets": 3,
+    "missing_files": 9
+  },
+  {
+    "book": "62_1JN",
+    "packets": 5,
+    "missing_files": 15
+  },
+  {
+    "book": "63_2JN",
+    "packets": 1,
+    "missing_files": 3
+  },
+  {
+    "book": "64_3JN",
+    "packets": 1,
+    "missing_files": 3
+  },
+  {
+    "book": "65_JUD",
+    "packets": 1,
+    "missing_files": 3
+  },
+  {
+    "book": "66_REV",
+    "packets": 22,
+    "missing_files": 66
+  }
+]

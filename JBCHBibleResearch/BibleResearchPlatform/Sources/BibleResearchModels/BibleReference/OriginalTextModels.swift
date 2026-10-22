@@ -25,6 +25,10 @@ public struct OriginalWordInfo: Sendable, Hashable, Identifiable {
     /// STEPBible 원문 사전에서 뽑은 영어 뜻풀이. 관사/전치사 등 일부 기능어는
     /// 빈 문자열일 수 있다(원본 데이터에 뜻풀이가 없는 경우 — UI에서 빈 값으로 처리).
     public let glossEn: String
+    /// [2026-10-12] 이 절 문맥에서의 영어 번역(STEPBible TAHOT `Translation` / TAGNT `English translation` 열).
+    /// `glossEn`(사전형 뜻, 예: "origin")과 달리 문맥형이다(예: "of [the] genealogy"). 형태소 경계 표시 "/"는
+    /// 변환 시 지웠고, "<obj.>"(목적격 표지)·"[ ]"(원문에 없는 보충어)는 원본 표기 그대로다. 매칭되지 않은 단어는 빈 문자열.
+    public let translationEn: String
 
     /// 히브리어("H")/그리스어("G") 구분 — `strongCode`의 첫 글자로 판단한다.
     public var isHebrew: Bool { strongCode.hasPrefix("H") }
@@ -32,7 +36,8 @@ public struct OriginalWordInfo: Sendable, Hashable, Identifiable {
     public init(
         bookId: Int, chapter: Int, verse: Int, wordOrder: Int,
         originalText: String, transliteration: String,
-        strongCode: String, morphCode: String, glossEn: String
+        strongCode: String, morphCode: String, glossEn: String,
+        translationEn: String = ""
     ) {
         self.bookId = bookId
         self.chapter = chapter
@@ -43,6 +48,28 @@ public struct OriginalWordInfo: Sendable, Hashable, Identifiable {
         self.strongCode = strongCode
         self.morphCode = morphCode
         self.glossEn = glossEn
+        self.translationEn = translationEn
+    }
+}
+
+/// [2026-10-12] 절 단위 영어 직역(공통 — 앱 언어와 무관). 현재 출처는 Literal Standard Version
+/// (© 2020 Covenant Press, CC BY-SA 4.0, eBible.org `englsv`). 시가서의 " || "는 원본의 시행 구분 표기다.
+public struct LiteralEnglishInfo: Sendable, Hashable, Identifiable {
+    public var id: String { "\(bookId).\(chapter).\(verse)" }
+
+    public let bookId: Int
+    public let chapter: Int
+    public let verse: Int
+    public let text: String
+    /// 출처 코드(현재 "LSV").
+    public let source: String
+
+    public init(bookId: Int, chapter: Int, verse: Int, text: String, source: String) {
+        self.bookId = bookId
+        self.chapter = chapter
+        self.verse = verse
+        self.text = text
+        self.source = source
     }
 }
 

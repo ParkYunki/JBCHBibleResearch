@@ -1,0 +1,20 @@
+[
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/en/08_RUT/RUT_003.tsv",
+    "verse": 17,
+    "old_row": "17\t=\tClose to the Hebrew.",
+    "new_row": "17\t=\tThe Hebrew names six of barley without specifying the measure and says not to return “empty”; BSB supplies “measures” and expands this to “empty-handed”."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/en/08_RUT/RUT_004.tsv",
+    "verse": 3,
+    "old_row": "3\t=\tThe Hebrew says Naomi “has sold” the portion of the field; BSB has “is selling.” Moab’s territory is called “fields,” rendered “land” in BSB.",
+    "new_row": "3\t=\tThe Hebrew says Naomi “has sold” the portion of the field; BSB has “is selling”."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/en/08_RUT/RUT_004.tsv",
+    "verse": 16,
+    "old_row": "16\t=\tClose to the Hebrew.",
+    "new_row": "16\t=\tThe child is placed at her bosom; BSB says “on her lap”."
+  }
+]

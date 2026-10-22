@@ -1,0 +1,44 @@
+[
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/16_NEH/NEH_001.tsv",
+    "verse": "5",
+    "old_row": "5\tИ сказал я: «Молю, Господь, Бог небес, Бог великий и страшный, хранящий завет и милость к любящим Его и хранящим Его заповеди:\tЛюбящие и хранящие описаны в третьем лице.",
+    "new_row": "5\tИ сказал я: «Молю, Господи, Боже небес, Боже великий и страшный, хранящий завет и милость к любящим Его и хранящим Его заповеди:\tЛюбящие и хранящие описаны в третьем лице.",
+    "reason": "Russian prayer address requires vocatives; divine name convention Господи."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/16_NEH/NEH_001.tsv",
+    "verse": "2",
+    "old_row": "2\tИ пришёл Ханани, один из моих братьев, он и мужи из Иуды; и я спросил их об иудеях, спасшемся остатке, которые остались от плена, и об Иерусалиме.\tБлизко к еврейскому.",
+    "new_row": "2\tИ пришёл Ханани, один из моих братьев, он и мужи из Иуды; и я спросил их об иудеях, уцелевших, которые остались от плена, и об Иерусалиме.\tБлизко к еврейскому.",
+    "reason": "Correct appositional agreement while preserving plural remaining Jews."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/16_NEH/NEH_006.tsv",
+    "verse": "6",
+    "old_row": "6\tDarin war geschrieben: „Unter den Nationen ist gehört worden, und Gasmu sagt: Du und die Juden planen, sich zu empören; deshalb baust du die Mauer, und du wirst ihnen zum König werden, nach diesen Worten.\tDer Name lautet hier Gasmu; das Königwerden wird als Aussage wiedergegeben.",
+    "new_row": "6\tDarin war geschrieben: „Unter den Nationen ist gehört worden, und Gasmu sagt: Du und die Juden plant, euch zu empören; deshalb baust du die Mauer, und du wirst ihnen zum König werden, nach diesen Worten.\tDer Name lautet hier Gasmu; das Königwerden wird als Aussage wiedergegeben.",
+    "reason": "Second-person plural agreement with du und die Juden."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/16_NEH/NEH_006.tsv",
+    "verse": "7",
+    "old_row": "7\tUnd auch Propheten hast du aufgestellt, um über dich in Jerusalem auszurufen: ‚Ein König ist in Juda.‘ Und nun wird der König nach diesen Worten hören; und nun komm, und lasst uns zusammen beraten.“\tAusgerufen wird ein König in Juda, nicht ausdrücklich er ist der König.",
+    "new_row": "7\tUnd auch Propheten hast du aufgestellt, um über dich in Jerusalem auszurufen: ‚Ein König ist in Juda.‘ Und nun werden diese Worte dem König zu Ohren kommen; und nun komm, und lasst uns zusammen beraten.“\tAusgerufen wird ein König in Juda, nicht ausdrücklich er ist der König.",
+    "reason": "Preserve the passive report reaching the king rather than making him an active hearer."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/16_NEH/NEH_006.tsv",
+    "verse": "16",
+    "old_row": "16\tUnd es geschah, als alle unsere Feinde es hörten und alle Nationen um uns her sich fürchteten, da fielen sie sehr in ihren eigenen Augen; und sie erkannten, dass diese Arbeit von unserem Gott getan worden war.\tDas Fallen in ihren Augen wird als Bild bewahrt; es heißt unser Gott.",
+    "new_row": "16\tUnd es geschah, als alle unsere Feinde es hörten und alle Nationen um uns her es sahen, da fielen sie sehr in ihren eigenen Augen; und sie erkannten, dass diese Arbeit von unserem Gott getan worden war.\tDie Nationen sahen; ihr Fallen in den eigenen Augen wird als Bild bewahrt. Es heißt unser Gott.",
+    "reason": "O וַיִּרְאוּ is saw, not feared; TARGET has feared."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/16_NEH/NEH_006.tsv",
+    "verse": "16",
+    "old_row": "16\tИ было, когда все наши враги услышали и все народы вокруг нас испугались, они весьма упали в собственных глазах; и узнали, что эта работа была сделана нашим Богом.\tНароды испугались, не увидели.",
+    "new_row": "16\tИ было, когда все наши враги услышали и все народы вокруг нас увидели это, они весьма упали в собственных глазах; и узнали, что эта работа была сделана нашим Богом.\tБлизко к еврейскому.",
+    "reason": "O וַיִּרְאוּ is saw; Russian TARGET correctly says увидели."
+  }
+]

@@ -81,7 +81,7 @@ final class WordSummaryPanelController: NSObject, NSWindowDelegate {
             backing: .buffered,
             defer: false
         )
-        newPanel.title = "말씀 요약"
+        newPanel.title = String(localized: "말씀 요약")
         // 항상 일반 창 위에 뜨게 하고, 앱이 비활성화돼도 편집 중인 패널이 사라지지 않게 한다.
         newPanel.isFloatingPanel = true
         newPanel.level = .floating

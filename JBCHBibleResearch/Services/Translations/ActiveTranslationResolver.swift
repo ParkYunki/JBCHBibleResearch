@@ -25,7 +25,9 @@ enum ActiveTranslationResolver {
     /// - 저장된 목록의 코드 순서를 따르고, 중복 코드는 한 번만, 아직 동기화로 도착하지 않아 레코드가 없는 코드는 건너뛴다(목록에서 지우지는 않는다).
     /// - 목록이 비었거나 하나도 매칭되지 않으면(최초 진입) 예전 규칙으로 대신한다: 활성(`isEnabled`) 번역본을 등록 순으로, `defaultTranslationCode`를 맨 앞으로.
     /// - 그래도 비면 번들 번역본을 쓴다(열이 하나도 없는 빈 화면을 막는다).
-    static func resolve(from all: [TranslationRegistry]) -> [TranslationRegistry] {
+    static func resolve(from allRegistries: [TranslationRegistry]) -> [TranslationRegistry] {
+        // 다른 앱 언어의 번들 성경(동기화로 도착한 레코드)은 이 기기에서 보이지 않는다(`BundledTranslationCatalog`).
+        let all = BundledTranslationCatalog.visible(allRegistries)
         let settings = UserSettingsStore.shared
         // 중복 code 행이 있어도 죽지 않게 첫 행을 쓴다.
         let byCode = Dictionary(all.map { ($0.code, $0) }, uniquingKeysWith: { first, _ in first })

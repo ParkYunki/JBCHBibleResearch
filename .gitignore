@@ -30,3 +30,8 @@ native/docxide-pdf-ffi/target/
 # Python (ReferenceDataSource 빌드 스크립트)
 __pycache__/
 *.pyc
+
+# 사용자 소지 번역본(저작권 본문 — 저장소에 올리지 않음). [2026-10-20]
+# 원본 .bdb와 차이 설명 작업용 변환본(BibleSources/ext/)
+BibleSources/*.bdb
+BibleSources/ext/

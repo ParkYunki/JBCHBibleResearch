@@ -1,0 +1,22 @@
+[
+  {
+    "path": "Tools/LiteralGen/outputs/en/15_EZR/EZR_001.tsv",
+    "old_row": "7\t=\tThe Hebrew says “the house of his god”; BSB says “the temple of his gods.”",
+    "new_row": "7\t=\tThe Hebrew says “the house”; BSB says “the temple.”"
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/en/15_EZR/EZR_002_3.tsv",
+    "old_row": "64\t=\tClose to the Hebrew.",
+    "new_row": "64\t=\tThe Hebrew describes the whole assembly “as one”; BSB gives the assembly’s total without that comparison."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/en/15_EZR/EZR_003.tsv",
+    "old_row": "3\t=\tThe Hebrew introduces their fear with “because”; BSB introduces it with “even though.”",
+    "new_row": "3\t=\tThe Hebrew introduces their fear with “because”; BSB introduces it with “even though.” The altar’s bases are plural in Hebrew; BSB says “its foundation.”"
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/en/15_EZR/EZR_003.tsv",
+    "old_row": "11\t=\tClose to the Hebrew.",
+    "new_row": "11\t=\tThe Hebrew says the house of the LORD was founded; BSB says the foundation of the house of the LORD had been laid."
+  }
+]

@@ -64,14 +64,14 @@ final class CloudSyncMonitor {
             return
         }
 
-        let details = event.error.map { Self.errorDetails($0 as NSError) } ?? "알 수 없는 오류"
+        let details = event.error.map { Self.errorDetails($0 as NSError) } ?? String(localized: "알 수 없는 오류")
         print("[CloudSyncMonitor] \(event.type) 실패: \(details)")
         // 원문이 매우 길 수 있어(userInfo 전체 덤프) 화면용으로는 앞부분만 둔다. 전체는 위 콘솔 로그에 남는다.
-        failureDetails[phase] = "\(event.type) 단계 오류\n" + String(details.prefix(1500))
+        failureDetails[phase] = String(localized: "\(String(describing: event.type)) 단계 오류\n") + String(details.prefix(1500))
         if details.contains("production schema") {
-            failures[phase] = "서버의 운영 스키마가 앱의 데이터 모델과 일치하지 않습니다. 개발자가 CloudKit 스키마를 운영 환경에 배포해야 합니다."
+            failures[phase] = String(localized: "서버의 운영 스키마가 앱의 데이터 모델과 일치하지 않습니다. 개발자가 CloudKit 스키마를 운영 환경에 배포해야 합니다.")
         } else {
-            failures[phase] = "기기 간 데이터 동기화에 실패했습니다. \(event.error?.localizedDescription ?? details)"
+            failures[phase] = String(localized: "기기 간 데이터 동기화에 실패했습니다. \(event.error?.localizedDescription ?? details)")
         }
     }
 

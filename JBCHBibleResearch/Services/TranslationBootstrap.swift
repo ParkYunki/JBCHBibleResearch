@@ -21,9 +21,9 @@ enum TranslationBootstrapError: Error, CustomStringConvertible {
     var description: String {
         switch self {
         case .bundledDatabaseNotFound:
-            return "앱 번들에서 BibleDB.sqlite를 찾을 수 없습니다. Xcode 타겟의 Copy Bundle Resources에 Resources/BibleDB.sqlite가 포함돼 있는지 확인하세요."
+            return String(localized: "앱 번들에서 BibleDB.sqlite를 찾을 수 없습니다. Xcode 타겟의 Copy Bundle Resources에 Resources/BibleDB.sqlite가 포함돼 있는지 확인하세요.")
         case .unknownBundledTranslationCode(let code):
-            return "알 수 없는 번들 번역본 코드입니다: \(code)"
+            return String(localized: "알 수 없는 번들 번역본 코드입니다: \(code)")
         }
     }
 }
@@ -58,8 +58,62 @@ enum TranslationBootstrap {
     static func resolvedBundledDatabaseURL(for code: String) throws -> URL {
         switch code {
         case bundledTranslationCode: return try resolvedBundledDatabaseURL()
-        default: throw TranslationBootstrapError.unknownBundledTranslationCode(code)
+        default:
+            // 언어별 번들 성경(2026-10-12, `BundledTranslationCatalog`). 다른 언어 기기에서 동기화로 도착한 번들 레코드라도
+            // 파일은 모든 기기에 들어 있으므로 열 수 있다(목록에서는 `BundledTranslationCatalog.visible`로 숨긴다).
+            guard let bundled = BundledTranslationCatalog.translation(forCode: code),
+                  let url = Bundle.main.url(forResource: bundled.resourceName, withExtension: "sqlite") else {
+                throw TranslationBootstrapError.unknownBundledTranslationCode(code)
+            }
+            return url
         }
+    }
+
+    /// 앱 언어의 기본 번들 성경 파일(`BundledTranslationCatalog.current`) — 인물·지명·주제의 구절 본문, 질문형 검색 카드의 구절,
+    /// 설교 말씀구절 삽입처럼 "화면 언어로 구절을 보여주는" 곳이 쓴다. 한국어 본문이 전제인 기능은 인자 없는
+    /// `resolvedBundledDatabaseURL()`(KRV)을 그대로 쓴다.
+    static func resolvedCurrentLanguageBundledDatabaseURL() throws -> URL {
+        try resolvedBundledDatabaseURL(for: BundledTranslationCatalog.current.code)
+    }
+
+    /// 앱 언어의 번들 성경(KRV가 아닐 때)을 `TranslationRegistry`에 등록한다. 앱 시작 시 `ensureBundledTranslationRegistered` 다음에
+    /// 한 번 호출하며 멱등이다. 이 기기 언어의 번들만 등록한다 — 다른 언어의 번들은 이 기기에서 보이지 않으므로 등록하지 않는다.
+    ///
+    /// ⚠️ 같은 code로 사용자가 직접 가져온 번역본(`isUserAdded`)이 이미 있으면 등록하지 않는다. 등록하면
+    /// `deduplicateRegistries`가 번들을 남기고 사용자 레코드와 그 로컬 파일을 지우기 때문이다(사용자 데이터 보존이 우선).
+    static func ensureLanguageBundledTranslationRegistered(in context: ModelContext) throws {
+        let bundled = BundledTranslationCatalog.current
+        guard bundled.code != bundledTranslationCode else { return }
+        let code = bundled.code
+        var descriptor = FetchDescriptor<TranslationRegistry>(predicate: #Predicate { $0.code == code })
+        descriptor.fetchLimit = 1
+        if let existing = try context.fetch(descriptor).first {
+            guard existing.isBundled else {
+                print("[TranslationBootstrap] 같은 코드(\(code))의 사용자 추가 번역본이 있어 번들 등록을 건너뜁니다.")
+                return
+            }
+            if existing.displayName != bundled.displayName || existing.bookNameTableID != bundled.bookNameTableID
+                || existing.licenseType != bundled.licenseType {
+                existing.displayName = bundled.displayName
+                existing.bookNameTableID = bundled.bookNameTableID
+                existing.licenseType = bundled.licenseType
+                try context.save()
+            }
+            return
+        }
+        let url = try resolvedBundledDatabaseURL(for: code)
+        let registry = TranslationRegistry(
+            code: code,
+            displayName: bundled.displayName,
+            isBundled: true,
+            isUserAdded: false,
+            licenseType: bundled.licenseType,
+            sqliteFileReference: url.path,
+            sqliteData: nil,
+            bookNameTableID: bundled.bookNameTableID
+        )
+        context.insert(registry)
+        try context.save()
     }
 
     /// TranslationRegistry에 번들 번역본 레코드가 없으면 만든다. 앱 시작 시 한 번 호출하며, 이미 있으면 아무 것도 하지 않는다(멱등).

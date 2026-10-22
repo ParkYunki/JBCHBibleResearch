@@ -99,7 +99,8 @@ enum BibleReferenceExtractor {
 
     /// 특정 책의 특정 장이 실제로 몇 절까지 있는지(번들 번역본 기준). 조회에
     /// 실패하면 nil — 호출부(`expandRange`)가 추측 없이 안전하게 처리한다.
-    private static func maxVerse(bookId: Int, chapter: Int) -> Int? {
+    /// 2026-10-13: 말씀 노트의 관련 말씀 선택 시트(`WordNoteVersePickerSheet`)도 절 수 조회에 쓰도록 `private`을 풀었다.
+    static func maxVerse(bookId: Int, chapter: Int) -> Int? {
         guard let store = store() else { return nil }
         guard let verses = try? store.verses(bookId: bookId, chapter: chapter), !verses.isEmpty else { return nil }
         return verses.map(\.verse).max()

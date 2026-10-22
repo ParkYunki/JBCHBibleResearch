@@ -101,7 +101,7 @@ struct SearchView: View {
         .toolbar {
             ToolbarItem(placement: .principal) {
                 Text("통합 검색")
-                    .font(.custom(SpecialPurposeFonts.titleSerif, size: 20, relativeTo: .title3))
+                    .font(.titleSerif(size: 20, relativeTo: .title3))
                     .fontWeight(.semibold)
                     .foregroundStyle(settings.bibleTextColor ?? .primary)
             }
@@ -184,11 +184,11 @@ private struct SearchContentView: View {
         var id: Self { self }
         var title: String {
             switch self {
-            case .verse: return "성경구절"
-            case .outline: return "개요"
-            case .notes: return "메모/말씀노트"
-            case .document: return "연구 문서"
-            case .sermon: return "내 설교"
+            case .verse: return String(localized: "성경구절")
+            case .outline: return String(localized: "개요")
+            case .notes: return String(localized: "메모/말씀노트")
+            case .document: return String(localized: "연구 문서")
+            case .sermon: return String(localized: "내 설교")
             }
         }
 
@@ -703,12 +703,12 @@ private struct SearchContentView: View {
     private func intentSectionMeta(_ intent: QueryIntentClassifier.Intent) -> (title: String, icon: String, color: Color) {
         let themeColor = settings.bibleTextColor ?? .primary
         switch intent {
-        case .relation: return ("관계 정보", "person.2.fill", themeColor)
-        case .personProfile: return ("인물 정보", "person.crop.circle.fill", themeColor)  // [2026-09-15] personOrPlaceInfo 대체, 장소 미포함
-        case .placeProfile: return ("인물·장소 정보", "mappin.and.ellipse", themeColor)  // [2026-10-01] 장소(PlaceSeed.json) 신설
-        case .prophecy: return ("예언", "scroll.fill", themeColor)
-        case .themeOrAttribute: return ("주제·속성", "lightbulb.fill", themeColor)
-        case .narrative: return ("서사·흐름", "list.number", themeColor)
+        case .relation: return (String(localized: "관계 정보"), "person.2.fill", themeColor)
+        case .personProfile: return (String(localized: "인물 정보"), "person.crop.circle.fill", themeColor)  // [2026-09-15] personOrPlaceInfo 대체, 장소 미포함
+        case .placeProfile: return (String(localized: "인물·장소 정보"), "mappin.and.ellipse", themeColor)  // [2026-10-01] 장소(PlaceSeed.json) 신설
+        case .prophecy: return (String(localized: "예언"), "scroll.fill", themeColor)
+        case .themeOrAttribute: return (String(localized: "주제·속성"), "lightbulb.fill", themeColor)
+        case .narrative: return (String(localized: "서사·흐름"), "list.number", themeColor)
         case .general: return ("", "questionmark", themeColor)  // QueryIntentHandler.handle이 .general이면 nil을 돌려줘서 실제로는 안 쓰인다.
         }
     }
@@ -756,8 +756,9 @@ private struct SearchContentView: View {
         rowLabel(
             icon: "person.crop.circle.fill",
             iconColor: settings.bibleTextColor ?? .primary,
-            title: entity.word,
-            excerptText: entity.entityRemark
+            // [2026-10-22] 표시만 번역(`display*` — 한국어 앱이면 원본 그대로).
+            title: entity.displayWord,
+            excerptText: entity.displayRemark
         )
     }
 
@@ -769,12 +770,12 @@ private struct SearchContentView: View {
         case .person(let person):
             return rowLabel(
                 icon: "person.crop.circle.fill", iconColor: settings.bibleTextColor ?? .primary,
-                title: person.word, excerptText: person.entityRemark
+                title: person.displayWord, excerptText: person.displayRemark
             )
         case .place(let place):
             return rowLabel(
                 icon: "mappin.circle.fill", iconColor: settings.bibleTextColor ?? .primary,
-                title: place.word, excerptText: place.remark
+                title: place.displayWord, excerptText: place.displayRemark
             )
         }
     }
@@ -993,7 +994,7 @@ private struct SearchContentView: View {
                 phraseNoteRow(result)
             }
         } header: {
-            sectionHeader("메모", icon: "note.text", color: settings.bibleTextColor ?? .primary, count: viewModel.phraseNoteResults.count)
+            sectionHeader(String(localized: "메모"), icon: "note.text", color: settings.bibleTextColor ?? .primary, count: viewModel.phraseNoteResults.count)
         }
         .listRowBackground(Color.clear)
 
@@ -1003,7 +1004,7 @@ private struct SearchContentView: View {
                 memoRow(result)
             }
         } header: {
-            sectionHeader("개인 묵상", icon: "heart.text.square.fill", color: settings.bibleTextColor ?? .primary, count: viewModel.memoResults.count)
+            sectionHeader(String(localized: "개인 묵상"), icon: "heart.text.square.fill", color: settings.bibleTextColor ?? .primary, count: viewModel.memoResults.count)
         }
         .listRowBackground(Color.clear)
 
@@ -1013,7 +1014,7 @@ private struct SearchContentView: View {
                 summaryRow(result)
             }
         } header: {
-            sectionHeader("말씀 요약", icon: "text.quote", color: settings.bibleTextColor ?? .primary, count: viewModel.summaryResults.count)
+            sectionHeader(String(localized: "말씀 요약"), icon: "text.quote", color: settings.bibleTextColor ?? .primary, count: viewModel.summaryResults.count)
         }
         .listRowBackground(Color.clear)
 
@@ -1153,7 +1154,7 @@ private struct SearchContentView: View {
         .contentShape(Rectangle())
     }
 
-    private func emptyRow(_ text: String = "결과 없음") -> some View {
+    private func emptyRow(_ text: String = String(localized: "결과 없음")) -> some View {
         HStack(spacing: 6) {
             Image(systemName: "tray")
                 .foregroundStyle(.tertiary)
@@ -1187,7 +1188,7 @@ private struct SearchContentView: View {
                         .font(.title3.weight(.semibold))
                         .lineLimit(1)
                     if isReferenceMatch {
-                        badge("참조 일치", color: referenceMatchGreen, systemImage: "checkmark.seal.fill")
+                        badge(String(localized: "참조 일치"), color: referenceMatchGreen, systemImage: "checkmark.seal.fill")
                     }
                     Spacer(minLength: 4)
                 }
@@ -1240,7 +1241,7 @@ private struct SearchContentView: View {
                     .font(.headline)
                     .lineLimit(1)
                 if isReferenceMatch {
-                    badge("참조 일치", color: referenceMatchGreen, systemImage: "checkmark.seal.fill")
+                    badge(String(localized: "참조 일치"), color: referenceMatchGreen, systemImage: "checkmark.seal.fill")
                 }
                 Spacer(minLength: 4)
             }
@@ -1315,7 +1316,7 @@ private struct SearchContentView: View {
                 }
             }
             Spacer(minLength: 4)
-            Button(anyExpanded ? "모두 접기" : "모두 펼치기") {
+            Button(anyExpanded ? String(localized: "모두 접기") : String(localized: "모두 펼치기")) {
                 if anyExpanded {
                     viewModel.collapseAllVerseBooks()
                 } else {
@@ -1357,8 +1358,8 @@ private struct SearchContentView: View {
     private func verseBookRows(_ groups: [SearchViewModel.VerseBookGroup], translationKey: String) -> some View {
         switch viewModel.verseBookSort {
         case .canon:
-            verseTestamentRows(title: "구약", key: "old", groups: groups.filter(\.isOldTestament), translationKey: translationKey)
-            verseTestamentRows(title: "신약", key: "new", groups: groups.filter { !$0.isOldTestament }, translationKey: translationKey)
+            verseTestamentRows(title: String(localized: "구약"), key: "old", groups: groups.filter(\.isOldTestament), translationKey: translationKey)
+            verseTestamentRows(title: String(localized: "신약"), key: "new", groups: groups.filter { !$0.isOldTestament }, translationKey: translationKey)
         case .relevance, .count:
             verseBookList(groups, limitKey: "\(translationKey)|flat", translationKey: translationKey)
         }
@@ -1390,7 +1391,7 @@ private struct SearchContentView: View {
             .buttonStyle(.plain)
             .listRowSeparator(.hidden)
             .listRowBackground(Color.clear)
-            .accessibilityValue(collapsed ? "접힘" : "펼침")
+            .accessibilityValue(collapsed ? String(localized: "접힘") : String(localized: "펼침"))
 
             if !collapsed {
                 verseBookList(groups, limitKey: "\(translationKey)|\(key)", translationKey: translationKey)
@@ -1456,7 +1457,7 @@ private struct SearchContentView: View {
                 .contentShape(Rectangle())
             }
             .buttonStyle(.plain)
-            .accessibilityValue(expanded ? "펼침" : "접힘")
+            .accessibilityValue(expanded ? String(localized: "펼침") : String(localized: "접힘"))
         }
         if expanded {
             let page = viewModel.visibleChapterGroups(for: group, translationKey: translationKey)
@@ -1537,7 +1538,7 @@ private struct SearchContentView: View {
             }
             .lineLimit(2)
             if result.isReferenceMatch {
-                badge("참조 일치", color: referenceMatchGreen, systemImage: "checkmark.seal.fill")
+                badge(String(localized: "참조 일치"), color: referenceMatchGreen, systemImage: "checkmark.seal.fill")
             }
             Spacer(minLength: 8)
             verseRowActionButtons(result)
@@ -1613,7 +1614,7 @@ private struct SearchContentView: View {
         #else
         UIPasteboard.general.string = text
         #endif
-        showToast("복사되었습니다.")
+        showToast(String(localized: "복사되었습니다."))
     }
 
     /// 토스트를 띄우고 1.6초 뒤 스스로 지운다. 연달아 부르면 이전 예약을 취소하고 새로 예약한다(`BibleReadingView.showToast`와 동일).
@@ -1649,7 +1650,7 @@ private struct SearchContentView: View {
     /// "N절) " 접두어 `AttributedString`(굵게, 테마 글자색). `Text + Text`는 macOS 26에서
     /// deprecated라 `AttributedString`을 쓴다.
     private func versePrefixAttributedString(_ result: VerseSearchResult) -> AttributedString {
-        var prefix = AttributedString("\(result.verse)절) ")
+        var prefix = AttributedString(String(localized: "\(result.verse)절) "))
         prefix.font = .system(size: 15, weight: .semibold)
         // `AttributedString`에 직접 지정한 `.primary`/`.secondary`는 조상의
         // `.foregroundStyle(bibleTextColor)`보다 우선해 다크 모드에서 밝은 테마 배경 위에도
@@ -1724,7 +1725,7 @@ private struct SearchContentView: View {
                 Text(outlineExcerptAttributedString(result))
                     .lineLimit(2)
                 if result.isReferenceMatch {
-                    badge("참조 일치", color: referenceMatchGreen, systemImage: "checkmark.seal.fill")
+                    badge(String(localized: "참조 일치"), color: referenceMatchGreen, systemImage: "checkmark.seal.fill")
                 }
                 Spacer(minLength: 8)
                 // 본문 매칭이 없는 참조 일치(`matchedWordCount == 0`)는 배지를 숨긴다.
@@ -1744,7 +1745,7 @@ private struct SearchContentView: View {
     /// "N장)"/"개요)" 접두어(굵게, 테마 글자색)와 하이라이트된 발췌 본문을 하나의
     /// `AttributedString`으로 이어 붙인다. 책 전체 개요는 장 번호가 없어 "개요)"를 쓴다.
     private func outlineExcerptAttributedString(_ result: OutlineSearchResult) -> AttributedString {
-        let prefixText = result.chapter.map { "\($0)장) " } ?? "개요) "
+        let prefixText = result.chapter.map { String(localized: "\($0)장) ") } ?? String(localized: "개요) ")
         var prefix = AttributedString(prefixText)
         prefix.font = .system(size: 15, weight: .semibold)
         // 접두어 색을 테마 글자색으로 명시하는 이유는 `versePrefixAttributedString`과 같다.
@@ -1774,8 +1775,8 @@ private struct SearchContentView: View {
     }
 
     private func phraseNoteTitle(_ note: VersePhraseNote) -> String {
-        let bookName = BooksProvider.shared.book(id: note.bookId)?.nameKo ?? "성경"
-        return "\(bookName) \(note.chapter):\(note.verse) 메모"
+        let bookName = BooksProvider.shared.book(id: note.bookId)?.displayName ?? String(localized: "성경")
+        return String(localized: "\(bookName) \(note.chapter):\(note.verse) 메모")
     }
 
     // MARK: - 개인 묵상(UserMemo)
@@ -1797,8 +1798,8 @@ private struct SearchContentView: View {
     }
 
     private func memoTitle(_ memo: UserMemo) -> String {
-        let bookName = BooksProvider.shared.book(id: memo.bookId)?.nameKo ?? "성경"
-        return "\(bookName) \(memo.chapter)장 메모"
+        let bookName = BooksProvider.shared.book(id: memo.bookId)?.displayName ?? String(localized: "성경")
+        return String(localized: "\(bookName) \(memo.chapter)장 메모")
     }
 
     // MARK: - 말씀 요약(VerseSummary)
@@ -1822,8 +1823,8 @@ private struct SearchContentView: View {
     }
 
     private func summaryTitle(_ summary: VerseSummary) -> String {
-        let bookName = BooksProvider.shared.book(id: summary.bookId)?.nameKo ?? "성경"
-        return "\(bookName) \(summary.chapter)장 말씀 요약"
+        let bookName = BooksProvider.shared.book(id: summary.bookId)?.displayName ?? String(localized: "성경")
+        return String(localized: "\(bookName) \(summary.chapter)장 말씀 요약")
     }
 
     // MARK: - 연구문서(SourceDocument)
@@ -1927,7 +1928,7 @@ private struct SearchContentView: View {
     }
 
     private func sermonTitle(_ result: SermonSearchResult) -> String {
-        result.sermon.title.isEmpty ? "제목 없음" : result.sermon.title
+        result.sermon.title.isEmpty ? String(localized: "제목 없음") : result.sermon.title
     }
 
     // MARK: - 형광펜 강조 / 태그 뱃지 (DocumentsHomeView.DocumentRowView와 같은 원리)

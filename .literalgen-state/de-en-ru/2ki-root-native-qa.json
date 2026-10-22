@@ -1,0 +1,82 @@
+[
+  {
+    "path": "Tools/LiteralGen/outputs/de/12_2KI/2KI_001.tsv",
+    "old_row": "2\tUnd Ahasja fiel durch das Gitter in seinem Obergemach in Samaria und wurde krank; und er sandte Boten und sagte zu ihnen: „Geht, befragt Baal-Sebub, den Gott Ekrons, ob ich von dieser Krankheit leben werde!“\tNah am Hebräischen.",
+    "new_row": "2\tUnd Ahasja fiel durch das Gitter in seinem Obergemach in Samaria und wurde krank; und er sandte Boten und sagte zu ihnen: „Geht, befragt Baal-Sebub, den Gott Ekrons, ob ich nach dieser Krankheit leben werde!“\tNah am Hebräischen."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/12_2KI/2KI_002.tsv",
+    "old_row": "3\tUnd die Söhne der Propheten in Beth-El kamen zu Elisa heraus und sagten zu ihm: „Weißt du, dass der HERR heute deinen Herrn von über deinem Kopf wegnimmt?“ Und er sagte: „Auch ich weiß es; schweigt!“\tDie Propheten werden als Väter von Söhnen bezeichnet; Kopf steht in der Einzahl.",
+    "new_row": "3\tUnd die Söhne der Propheten in Beth-El kamen zu Elisa heraus und sagten zu ihm: „Weißt du, dass der HERR heute deinen Herrn von über deinem Kopf wegnimmt?“ Und er sagte: „Auch ich weiß es; schweigt!“\tDie Bezeichnung „Söhne der Propheten“ bleibt wörtlich erhalten; Kopf steht im Hebräischen in der Einzahl."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/12_2KI/2KI_003.tsv",
+    "old_row": "3\tNur an den Sünden Jerobeams, des Sohnes Nebats, der Israel sündigen gemacht hatte, hing er; er wich nicht davon ab.\tNah am Hebräischen.",
+    "new_row": "3\tNur an den Sünden Jerobeams, des Sohnes Nebats, der Israel zum Sündigen gebracht hatte, hing er; er wich nicht davon ab.\tNah am Hebräischen."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/12_2KI/2KI_004_2.tsv",
+    "old_row": "40\tИ они налили мужчинам есть; и было, когда они ели похлёбку, они закричали и сказали: «Смерть в котле, человек Бога!» И они не могли есть.\tБлизко к еврейскому.",
+    "new_row": "40\tИ они налили мужчинам похлёбки для еды; и было, когда они ели похлёбку, они закричали и сказали: «Смерть в котле, человек Бога!» И они не могли есть.\tБлизко к еврейскому."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/12_2KI/2KI_002.tsv",
+    "old_row": "21\tUnd er ging zur Quelle des Wassers hinaus und warf Salz hinein und sagte: „So spricht der HERR: Ich habe dieses Wasser geheilt; von dort wird nicht mehr Tod und Fehlgeburt kommen.“\tNeben dem Tod wird das Verursachen von Fehlgeburten genannt.",
+    "new_row": "21\tUnd er ging zur Quelle des Wassers hinaus und warf Salz hinein und sagte: „So spricht der HERR: Ich habe dieses Wasser geheilt; von dort werden nicht mehr Tod und Fehlgeburt kommen.“\tNeben dem Tod wird das Verursachen von Fehlgeburten genannt."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/12_2KI/2KI_004_1.tsv",
+    "old_row": "16\tUnd er sagte: „Zu dieser bestimmten Zeit, wenn die Zeit wieder auflebt, wirst du einen Sohn umarmen.“ Und sie sagte: „Nein, mein Herr, Mann Gottes, belüge deine Magd nicht!“\tDie Zeitangabe enthält das Bild wiederauflebender Zeit, ohne eigenes Wort für Jahr.",
+    "new_row": "16\tUnd er sagte: „Zu dieser bestimmten Zeit, wenn diese Zeit wiederkehrt, wirst du einen Sohn umarmen.“ Und sie sagte: „Nein, mein Herr, Mann Gottes, belüge deine Magd nicht!“\tDie hebräische Zeitangabe wird ohne ein ausdrücklich genanntes Jahr wiedergegeben; Luther nennt das Jahr."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/12_2KI/2KI_004_1.tsv",
+    "old_row": "16\tИ он сказал: «В этот срок, когда оживёт время, ты будешь обнимать сына». И она сказала: «Нет, мой господин, человек Бога, не лги твоей рабе!»\tВремя выражено образом оживающего времени, без отдельного слова год.",
+    "new_row": "16\tИ он сказал: «В этот срок, когда это время вновь наступит, ты будешь обнимать сына». И она сказала: «Нет, мой господин, человек Бога, не лги твоей рабе!»\tЕврейское указание времени передано без отдельного слова «год»; Синодальный перевод прямо называет год."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/12_2KI/2KI_004_1.tsv",
+    "old_row": "17\tUnd die Frau wurde schwanger und gebar einen Sohn zu dieser bestimmten Zeit, wenn die Zeit wieder auflebte, wie Elisa zu ihr geredet hatte.\tDie Zeitangabe enthält das Bild wiederauflebender Zeit.",
+    "new_row": "17\tUnd die Frau wurde schwanger und gebar einen Sohn zu dieser bestimmten Zeit, als diese Zeit wiederkehrte, wie Elisa zu ihr geredet hatte.\tDie hebräische Zeitangabe wird ohne ein ausdrücklich genanntes Jahr wiedergegeben; Luther nennt das Jahr."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/12_2KI/2KI_004_1.tsv",
+    "old_row": "17\tИ женщина зачала и родила сына в этот срок, когда ожило время, как Елисей говорил ей.\tСохранён образ оживающего времени.",
+    "new_row": "17\tИ женщина зачала и родила сына в этот срок, когда это время вновь наступило, как Елисей говорил ей.\tЕврейское указание времени передано без отдельного слова «год»; Синодальный перевод прямо называет год."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/12_2KI/2KI_018_1.tsv",
+    "old_row": "21\tNun siehe, du vertraust auf diesen Stab aus geknicktem Rohr, auf Ägypten; wenn ein Mann sich darauf stützt, dringt er ihm in die Handfläche und durchbohrt sie. So ist Pharao, der König von Ägypten, für alle, die auf ihn vertrauen.\tNah am Hebräischen.",
+    "new_row": "21\tNun siehe, du vertraust auf diesen Stab aus geknicktem Rohr, auf Ägypten; wenn ein Mann sich darauf stützt, dringt er ihm in die Handfläche ein und durchbohrt sie. So ist Pharao, der König von Ägypten, für alle, die auf ihn vertrauen.\tNah am Hebräischen."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/12_2KI/2KI_017_1.tsv",
+    "old_row": "23\tbis der HERR Israel von seinem Angesicht entfernte, wie er durch die Hand aller seiner Knechte, der Propheten, geredet hatte. Und Israel wurde von seinem Boden nach Assyrien weggeführt bis auf diesen Tag.\tNah am Hebräischen.",
+    "new_row": "23\tbis der HERR Israel von seinem Angesicht entfernte, wie er durch die Hand aller seiner Knechte, der Propheten, geredet hatte. Und Israel ging von seinem Boden weg nach Assyrien in die Verbannung bis auf diesen Tag.\tNah am Hebräischen."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/12_2KI/2KI_017_1.tsv",
+    "old_row": "23\tпока Господь не удалил Израиля от лица Своего, как говорил через руку всех рабов Своих, пророков. И был выселен Израиль со своей земли в Ассирию до сего дня.\tБлизко к еврейскому.",
+    "new_row": "23\tпока Господь не удалил Израиля от лица Своего, как говорил через руку всех рабов Своих, пророков. И ушёл Израиль со своей земли в изгнание в Ассирию до сего дня.\tБлизко к еврейскому."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/12_2KI/2KI_009_1.tsv",
+    "old_row": "2\tИ приди туда, и посмотри там Ииуя, сына Иосафата, сына Намессия; и приди, и подними его из среды его братьев, и введи его в комнату внутри комнаты.\tБлизко к еврейскому.",
+    "new_row": "2\tИ приди туда, и поищи там Ииуя, сына Иосафата, сына Намессия; и приди, и подними его из среды его братьев, и введи его в комнату внутри комнаты.\tБлизко к еврейскому."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/12_2KI/2KI_010_1.tsv",
+    "old_row": "3\tпосмотрите доброго и прямого из сыновей вашего господина, и поставьте его на престол его отца, и сражайтесь за дом вашего господина!»\tСохранены доброе и прямое.",
+    "new_row": "3\tвыберите доброго и прямого из сыновей вашего господина, и поставьте его на престол его отца, и сражайтесь за дом вашего господина!»\tСохранены доброе и прямое."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/12_2KI/2KI_010_1.tsv",
+    "old_row": "26\tИ они вынесли столбы дома Ваала и сожгли их.\tСтолбы, не статуи, названы во множественном числе.",
+    "new_row": "26\tИ они вынесли столбы дома Ваала и сожгли её.\tСтолбы, не статуи, названы во множественном числе."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/12_2KI/2KI_012.tsv",
+    "old_row": "19\tUnd die übrigen Angelegenheiten Joas und alles, was er tat, sind sie nicht im Buch der Tagesereignisse der Könige Judas geschrieben?\tDer Schluss hat die Form einer negativen Frage.",
+    "new_row": "19\tUnd die übrigen Angelegenheiten des Joas und alles, was er tat, sind sie nicht im Buch der Tagesereignisse der Könige Judas geschrieben?\tDer Schluss hat die Form einer negativen Frage."
+  }
+]

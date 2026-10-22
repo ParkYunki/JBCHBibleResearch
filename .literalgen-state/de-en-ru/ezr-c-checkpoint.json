@@ -1,0 +1,58 @@
+{
+  "book": "15_EZR",
+  "assigned": {
+    "de": [
+      8,
+      10
+    ],
+    "ru": [
+      8,
+      10
+    ]
+  },
+  "new_files": [
+    {
+      "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/15_EZR/EZR_008_1.tsv",
+      "rows": 30
+    },
+    {
+      "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/15_EZR/EZR_008_2.tsv",
+      "rows": 6
+    },
+    {
+      "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/15_EZR/EZR_008_1.tsv",
+      "rows": 30
+    },
+    {
+      "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/15_EZR/EZR_008_2.tsv",
+      "rows": 6
+    },
+    {
+      "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/15_EZR/EZR_009.tsv",
+      "rows": 15
+    },
+    {
+      "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/15_EZR/EZR_009.tsv",
+      "rows": 15
+    },
+    {
+      "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/15_EZR/EZR_010_1.tsv",
+      "rows": 30
+    },
+    {
+      "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/15_EZR/EZR_010_2.tsv",
+      "rows": 14
+    },
+    {
+      "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/15_EZR/EZR_010_1.tsv",
+      "rows": 30
+    },
+    {
+      "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/15_EZR/EZR_010_2.tsv",
+      "rows": 14
+    }
+  ],
+  "status": "generated_and_reviewed",
+  "qa_rows": 3,
+  "root_en_reviewed_rows": 95
+}

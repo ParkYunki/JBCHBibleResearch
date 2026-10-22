@@ -1,0 +1,16 @@
+{
+  "files": 24,
+  "rows": 484,
+  "native_chapters": "001–007",
+  "english_chapters": "001–004",
+  "own_full_verse_qa": true,
+  "own_qa_candidates": 12,
+  "root_en_reviewed_rows": 95,
+  "root_en_qa_candidates": 2,
+  "root_native_reviewed_rows": 36,
+  "root_native_qa_candidates": 4,
+  "protected_files": 7501,
+  "protected_changed": [],
+  "errors": [],
+  "tsv_direct_edits": false
+}

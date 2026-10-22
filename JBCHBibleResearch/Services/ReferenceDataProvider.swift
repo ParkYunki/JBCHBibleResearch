@@ -27,7 +27,9 @@ final class ReferenceDataProvider {
             return
         }
         do {
-            store = try ReferenceDataStore(filePath: url.path)
+            // [2026-10-22] 비한국어 앱이면 번역 표시층 언어("en"/"zh"/"es")를 넘긴다. 한국어면 nil → 기존 동작 그대로.
+            // DB에 번역 표가 없으면(예전 빌드) store가 스스로 nil로 내려앉는다(`ReferenceDataStore.contentLanguage`).
+            store = try ReferenceDataStore(filePath: url.path, contentLanguage: AppLanguage.referenceDataLanguage)
         } catch {
             print("[ReferenceDataProvider] ReferenceData.sqlite 열기 실패: \(error)")
             store = nil

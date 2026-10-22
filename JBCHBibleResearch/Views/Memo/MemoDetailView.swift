@@ -41,19 +41,14 @@ struct WordNoteVerseBar: View {
     let bookId: Int
     let chapter: Int
     let verse: Int?
+    /// 설정되면 구절 줄(아이콘 + 라벨)이 누를 수 있는 버튼이 되어 "관련 말씀"을 바꿀 수 있다(2026-10-13).
+    /// nil이면 이전처럼 읽기 전용 — 조회 모드나 표현(구 단위) 메모처럼 좌표를 바꾸면 안 되는 경우다.
+    var onEdit: (() -> Void)? = nil
 
     private var settings: UserSettingsStore { .shared }
     private var gold: Color { JBCHCategoryPalette.gold }
 
-    private var buttonTitle: String {
-        #if os(iOS)
-        UIDevice.current.userInterfaceIdiom == .phone ? "성경 보기" : "성경에서 보기"
-        #else
-        "성경에서 보기"
-        #endif
-    }
-
-    var body: some View {
+    private var coordinateContent: some View {
         HStack(spacing: 10) {
             Image(systemName: "book")
                 .font(.body.weight(.semibold))
@@ -61,10 +56,39 @@ struct WordNoteVerseBar: View {
                 .frame(width: 34, height: 34)
                 .background(gold.opacity(0.14), in: RoundedRectangle(cornerRadius: 9, style: .continuous))
             Text(label)
-                .font(.custom(SpecialPurposeFonts.titleSerif, size: 16, relativeTo: .headline))
+                .font(.titleSerif(label, size: 16, relativeTo: .headline))
                 .fontWeight(.semibold)
                 .foregroundStyle(settings.bibleTextColor ?? .primary)
                 .lineLimit(1)
+            if onEdit != nil {
+                Image(systemName: "pencil")
+                    .font(.caption.weight(.semibold))
+                    .foregroundStyle(gold)
+            }
+        }
+    }
+
+    private var buttonTitle: String {
+        #if os(iOS)
+        UIDevice.current.userInterfaceIdiom == .phone ? String(localized: "성경 보기") : String(localized: "성경에서 보기")
+        #else
+        String(localized: "성경에서 보기")
+        #endif
+    }
+
+    var body: some View {
+        HStack(spacing: 10) {
+            if let onEdit {
+                Button(action: onEdit) {
+                    coordinateContent
+                        .contentShape(Rectangle())
+                }
+                .buttonStyle(.plain)
+                .help("관련 말씀 바꾸기")
+                .accessibilityLabel(String(localized: "\(label) 관련 말씀 바꾸기"))
+            } else {
+                coordinateContent
+            }
             Spacer(minLength: 8)
             Button {
                 AppNavigationRequest.shared.request(.bibleReading)
@@ -118,6 +142,10 @@ struct MemoDetailView: View {
     @State private var tagSuggestions: [Tag] = []
 
     @State private var allFolders: [MemoFolder] = []
+
+    /// 관련 말씀 선택 시트(2026-10-13). 새 묵상을 만든 직후 자동으로 열릴 때는 취소 버튼이 "나중에"로 바뀐다.
+    @State private var isVersePickerPresented = false
+    @State private var versePickerCancelTitle = String(localized: "취소")
 
     /// S10 드릴다운 시트(TagRelationsView와 공유하는 컴포넌트) — 태그 이름을
     /// 탭하면 채워진다.
@@ -210,12 +238,12 @@ struct MemoDetailView: View {
                     isEditable.toggle()
                 } label: {
                     if isWordNote {
-                        Text(isEditable ? "완료" : "편집").fontWeight(.semibold)
+                        Text(isEditable ? String(localized: "완료") : String(localized: "편집")).fontWeight(.semibold)
                     } else {
                         Image(systemName: isEditable ? "eye" : "pencil")
                     }
                 }
-                .help(isEditable ? (isWordNote ? "편집 끝내고 조회로" : "읽기 전용으로 보기") : "편집하기")
+                .help(isEditable ? (isWordNote ? String(localized: "편집 끝내고 조회로") : String(localized: "읽기 전용으로 보기")) : String(localized: "편집하기"))
             }
             // 표준 공유 시트(`ShareLink`, AirDrop 포함). 파일 인코딩/쓰기는 실제 공유 시점에만
             // 일어나도록 미뤄(`TransferableSharedMemo`의 `FileRepresentation` 클로저) 항상 최신 내용이 담긴다.
@@ -235,6 +263,31 @@ struct MemoDetailView: View {
         .sheet(item: $drilldownTag) { tag in
             TagDrilldownView(tag: tag)
         }
+        .sheet(isPresented: $isVersePickerPresented) {
+            WordNoteVersePickerSheet(
+                initial: WordNoteVerseSelection(bookId: memo.bookId, chapter: memo.chapter, verse: memo.verse, verseEnd: memo.verseEnd),
+                cancelTitle: versePickerCancelTitle,
+                onConfirm: applyVerseSelection
+            )
+        }
+    }
+
+    /// 구절 줄을 눌러 관련 말씀을 바꿀 수 있는 조건 — 말씀 노트 편집 중이고 표현(구 단위) 메모가 아닐 때만.
+    /// 표현 메모(`rangeStart != nil`)의 좌표는 선택한 표현 위치에 묶여 있어 여기서 바꾸지 않는다.
+    private var verseEditAction: (() -> Void)? {
+        guard isEditable, memo.rangeStart == nil else { return nil }
+        return {
+            versePickerCancelTitle = String(localized: "취소")
+            isVersePickerPresented = true
+        }
+    }
+
+    private func applyVerseSelection(_ selection: WordNoteVerseSelection) {
+        memo.bookId = selection.bookId
+        memo.chapter = selection.chapter
+        memo.verse = selection.verse
+        memo.verseEnd = selection.verseEnd
+        autosave?.saveImmediately()
     }
 
     // MARK: - 상단 성경 좌표 + 동기화 상태
@@ -260,10 +313,12 @@ struct MemoDetailView: View {
                     get: { memo.verse ?? 0 },
                     set: { newValue in
                         memo.verse = newValue == 0 ? nil : newValue
+                        // 시작 절을 직접 바꾸면 이전 범위 끝은 의미가 없어지므로 한 절로 되돌린다.
+                        memo.verseEnd = nil
                         autosave?.saveImmediately()
                     }
                 ), in: 0...176) {
-                    Text(memo.verse.map { "\($0)절" } ?? "절 없음")
+                    Text(memo.verse.map { String(localized: "\($0)절") } ?? String(localized: "절 없음"))
                         .font(.body)
                         .foregroundStyle(.secondary)
                 }
@@ -297,25 +352,25 @@ struct MemoDetailView: View {
         VStack(alignment: .leading, spacing: 12) {
             HStack(spacing: 8) {
                 let badgeColor = WordNoteCategory.personalMemo.spineColor(onDark: isDarkSurface)
-                Text(WordNoteCategory.personalMemo.rawValue)
+                Text(WordNoteCategory.personalMemo.title)
                     .font(.caption2.bold())
                     .padding(.horizontal, 8)
                     .padding(.vertical, 3)
                     .background(badgeColor.opacity(0.15), in: Capsule())
                     .foregroundStyle(badgeColor)
-                Text(isEditable ? "편집 중 · 자동 저장" : "\(WordNoteItem.memo(memo).dateLabel ?? "") 수정")
+                Text(isEditable ? String(localized: "편집 중 · 자동 저장") : String(localized: "\(WordNoteItem.memo(memo).dateLabel ?? "") 수정"))
                     .font(.caption)
                     .foregroundStyle(settings.bibleTextColor?.opacity(0.65) ?? Color.secondary)
                 Spacer()
                 syncStatusLabel
             }
-            WordNoteVerseBar(label: contextualCoordinateLabel, bookId: memo.bookId, chapter: memo.chapter, verse: memo.verse)
+            WordNoteVerseBar(label: contextualCoordinateLabel, bookId: memo.bookId, chapter: memo.chapter, verse: memo.verse, onEdit: verseEditAction)
             if !isEditable, let anchor = memo.anchorText, !anchor.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
                 // 묵상을 쓸 때 저장해 둔 구절 본문(번역본은 `annotationTranslationCode`).
                 HStack(alignment: .top, spacing: 12) {
                     Rectangle().fill(JBCHCategoryPalette.gold).frame(width: 3)
                     Text(anchor)
-                        .font(.custom(SpecialPurposeFonts.titleSerif, size: 15, relativeTo: .body))
+                        .font(.titleSerif(anchor, size: 15, relativeTo: .body))
                         .foregroundStyle(settings.bibleTextColor?.opacity(0.7) ?? Color.secondary)
                         .lineSpacing(4)
                         .fixedSize(horizontal: false, vertical: true)
@@ -358,7 +413,7 @@ struct MemoDetailView: View {
         } else {
             HStack(spacing: 8) {
                 Text("폴더").font(.caption).foregroundStyle(.secondary)
-                Label(memo.folder?.name ?? "미분류", systemImage: "folder")
+                Label(memo.folder?.name ?? String(localized: "미분류"), systemImage: "folder")
                     .font(.caption)
                     .padding(.horizontal, 10)
                     .padding(.vertical, 4)
@@ -368,21 +423,18 @@ struct MemoDetailView: View {
     }
 
     private var contextualCoordinateLabel: String {
-        let bookName = BooksProvider.shared.book(id: memo.bookId)?.nameKo ?? ""
-        if let verse = memo.verse {
-            return "\(bookName) \(memo.chapter)장 \(verse)절"
-        }
-        return "\(bookName) \(memo.chapter)장"
+        let bookName = BooksProvider.shared.book(id: memo.bookId)?.displayName ?? ""
+        return WordNoteVerseLabel.text(bookName: bookName, chapter: memo.chapter, verse: memo.verse, verseEnd: memo.verseEnd)
     }
 
     /// 공유 파일 이름/미리보기용 좌표 라벨. `contextualCoordinateLabel`과 달리 책을 못 찾으면
     /// "성경"으로 폴백한다.
     private var shareDisplayName: String {
-        let bookName = BooksProvider.shared.book(id: memo.bookId)?.nameKo ?? "성경"
+        let bookName = BooksProvider.shared.book(id: memo.bookId)?.displayName ?? String(localized: "성경")
         if let verse = memo.verse {
-            return "\(bookName)\(memo.chapter)장\(verse)절"
+            return String(localized: "\(bookName)\(memo.chapter)장\(verse)절")
         }
-        return "\(bookName)\(memo.chapter)장"
+        return String(localized: "\(bookName)\(memo.chapter)장")
     }
 
     /// 현재 `memo`/`memoTags`로 매번 새로 만드는 전송용 스냅샷. 값만 계산하고,
@@ -492,7 +544,7 @@ struct MemoDetailView: View {
                     }
                 }
             } label: {
-                Text(memo.folder?.name ?? "미분류")
+                Text(memo.folder?.name ?? String(localized: "미분류"))
             }
             .disabled(!isEditable)
         }
@@ -512,6 +564,13 @@ struct MemoDetailView: View {
         // (트레이드오프는 `WordSummaryEditorView.loadIfNeeded()` 주석 참고).
         autosave = AutosaveController(modelContext: modelContext)
         hasLoadedMetadata = true
+        // 말씀 노트에서 방금 만든 새 묵상이면 관련 말씀 선택 시트를 자동으로 연다. 화면이 밀려 들어오는 전환과 겹치지 않게 잠깐 늦춘다.
+        if isWordNote, WordNoteVersePickerRequest.shared.consume(id: memo.id) {
+            versePickerCancelTitle = String(localized: "나중에")
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                isVersePickerPresented = true
+            }
+        }
     }
 
     private func handleDisappear() {

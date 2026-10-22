@@ -27,6 +27,9 @@ struct OutlineQuickViewWindowContent: View {
     @Environment(\.dismissWindow) private var dismissWindow
     #endif
     let request: OutlineQuickViewRequest?
+    /// 앱 안에 끼워 쓸 때(아이패드 슬라이드 패널, `OutlineSlideOverlay`) true — 이 뷰가 자체 ✕ 버튼과 내비게이션 제목을
+    /// 만들지 않는다(바깥 화면의 제목 선호값을 덮어쓰지 않도록). 별도 창으로 열 때는 기본값 false 그대로다.
+    var isEmbedded: Bool = false
 
     /// 책 개요/장 개요를 줄바꿈 기준으로 쪼갠 문단들 — 검색 이동이 스크롤할 단위.
     /// 로드 시 한 번만 만든다(확대/축소·검색은 렌더링 시점에만 영향을 준다).
@@ -109,11 +112,13 @@ struct OutlineQuickViewWindowContent: View {
                 scrollToCurrentMatch(scrollProxy: scrollProxy)
             }
         }
-        .navigationTitle("\(book.nameKo) \(request.chapter)장 개요")
+        .modifier(OutlineWindowTitleModifier(title: "\(book.displayName) \(request.chapter)장 개요", isEmbedded: isEmbedded))
         .onAppear { loadIfNeeded(bookId: request.bookId, chapter: request.chapter) }
         #if os(iOS)
         .overlay(alignment: .topTrailing) {
-            closeWindowButton
+            if !isEmbedded {
+                closeWindowButton
+            }
         }
         #endif
     }
@@ -323,8 +328,8 @@ struct OutlineQuickViewWindowContent: View {
                 nextID += 1
             }
         }
-        appendBlock(title: "책 개요", rtfText: bookOutlineRTF)
-        appendBlock(title: "장 개요 (\(chapter)장)", rtfText: chapterSummaryRTF)
+        appendBlock(title: String(localized: "책 개요"), rtfText: bookOutlineRTF)
+        appendBlock(title: String(localized: "장 개요 (\(chapter)장)"), rtfText: chapterSummaryRTF)
         paragraphs = result
     }
 
@@ -378,4 +383,20 @@ private struct OutlineParagraph: Identifiable {
     /// 한 번만 그리기 위한 표시.
     let isFirstInBlock: Bool
     let rawAttributed: NSAttributedString
+}
+
+/// 별도 창일 때만 `.navigationTitle`을 건다. 앱 안에 끼운 경우(`isEmbedded`)에는 이 선호값이 바깥 `NavigationStack`의
+/// 제목("성경 조회")을 덮어쓸 수 있어 달지 않는다.
+private struct OutlineWindowTitleModifier: ViewModifier {
+    let title: String
+    let isEmbedded: Bool
+
+    @ViewBuilder
+    func body(content: Content) -> some View {
+        if isEmbedded {
+            content
+        } else {
+            content.navigationTitle(title)
+        }
+    }
 }

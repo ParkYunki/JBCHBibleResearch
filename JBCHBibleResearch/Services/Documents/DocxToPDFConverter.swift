@@ -26,9 +26,9 @@ enum DocxToPDFConverter {
         var errorDescription: String? {
             switch self {
             case .invalidInput:
-                return "docx → PDF 변환 실패: 입력 데이터가 비어 있습니다."
+                return String(localized: "docx → PDF 변환 실패: 입력 데이터가 비어 있습니다.")
             case .underlying(let message):
-                return "docx → PDF 변환 실패: \(message)"
+                return String(localized: "docx → PDF 변환 실패: \(message)")
             }
         }
     }
@@ -59,7 +59,7 @@ enum DocxToPDFConverter {
                 message = String(cString: errorPointer)
                 docxide_pdf_free_string(errorPointer)
             } else {
-                message = "알 수 없는 오류"
+                message = String(localized: "알 수 없는 오류")
             }
             throw ConversionError.underlying(message)
         }

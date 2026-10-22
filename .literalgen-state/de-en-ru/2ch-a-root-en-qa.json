@@ -1,0 +1,47 @@
+[
+  {
+    "path": "Tools/LiteralGen/outputs/en/14_2CH/2CH_008.tsv",
+    "old_row": "6\t=\tClose to the Hebrew.",
+    "new_row": "6\t=\tThe Hebrew separately names cities for horsemen and repeats desire and desired; BSB uses cities for horses and whatever he desired."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/en/14_2CH/2CH_008.tsv",
+    "old_row": "16\t=\tClose to the Hebrew.",
+    "new_row": "16\t=\tThe Hebrew begins with until the day the foundation was laid and then until completion; BSB begins from that day."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/en/14_2CH/2CH_009_1.tsv",
+    "old_row": "18\t=\tClose to the Hebrew.",
+    "new_row": "18\t=\tThe Hebrew speaks of two lions beside the armrests; BSB distributes one lion beside each armrest."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/en/14_2CH/2CH_009_1.tsv",
+    "old_row": "23\t=\tClose to the Hebrew.",
+    "new_row": "23\t=\tThe Hebrew pictures seeking Solomon’s face; BSB expresses seeking an audience with him."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/en/14_2CH/2CH_010.tsv",
+    "old_row": "6\t=\tClose to the Hebrew.",
+    "new_row": "6\t=\tThe Hebrew describes the elders as standing before Solomon; BSB interprets this as serving him."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/en/14_2CH/2CH_010.tsv",
+    "old_row": "16\t=\tThe Hebrew does not explicitly say that Israel “saw” this, as BSB does. It states that there is no inheritance in Jesse’s son and says “to your tents,” where BSB asks a question and says “go home.”",
+    "new_row": "16\t=\tThe Hebrew does not explicitly say Israel saw this. It states there is no inheritance in Jesse’s son, where BSB asks a question. The final movement is to their tents; BSB says they went home."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/en/14_2CH/2CH_011.tsv",
+    "old_row": "18\t=\tClose to the Hebrew.",
+    "new_row": "18\t=\tThe Hebrew places Abihail after the lineage through Jerimoth without a joining word; BSB supplies and of to identify Mahalath’s maternal line."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/en/14_2CH/2CH_011.tsv",
+    "old_row": "21\t=\tClose to the Hebrew.",
+    "new_row": "21\t=\tThe Hebrew says he took eighteen wives and uses an active fathering verb for his children; BSB says he had wives and was the father of the children."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/en/14_2CH/2CH_012.tsv",
+    "old_row": "7\t=\tClose to the Hebrew.",
+    "new_row": "7\t=\tThe Hebrew explicitly mentions Shishak’s hand as the means; BSB says through Shishak."
+  }
+]

@@ -56,9 +56,9 @@ private struct GeneralSettingsGroup: View {
         var id: Self { self }
         var title: String {
             switch self {
-            case .basic: return "기본"
-            case .license: return "라이센스"
-            case .shortcuts: return "단축키"
+            case .basic: return String(localized: "기본")
+            case .license: return String(localized: "라이센스")
+            case .shortcuts: return String(localized: "단축키")
             }
         }
     }
@@ -95,9 +95,9 @@ private struct BibleSettingsGroup: View {
         var id: Self { self }
         var title: String {
             switch self {
-            case .translations: return "번역본"
-            case .appearance: return "모양"
-            case .copyFormat: return "복사 형식"
+            case .translations: return String(localized: "번역본")
+            case .appearance: return String(localized: "settings.appearance", defaultValue: "모양", comment: "설정 — 성경 표시 모양 탭(마인드맵 도형 '모양'과 구분)")
+            case .copyFormat: return String(localized: "복사 형식")
             }
         }
     }
@@ -138,7 +138,7 @@ struct SettingsHostView: View {
     var body: some View {
         NavigationStack {
             SettingsView()
-                .settingsNavigationPage("설정")
+                .settingsNavigationPage(String(localized: "설정"))
                 .toolbar {
                     ToolbarItem(placement: .cancellationAction) {
                         Button("닫기") { dismiss() }
@@ -162,15 +162,15 @@ struct SettingsHomeView: View {
             Section {
                 NavigationLink {
                     GeneralSettingsTab()
-                        .settingsNavigationPage("기본")
+                        .settingsNavigationPage(String(localized: "기본"))
                 } label: {
-                    SettingsCategoryRow(title: "기본", systemImage: "gearshape.fill", tint: JBCHCategoryPalette.wood)
+                    SettingsCategoryRow(title: String(localized: "기본"), systemImage: "gearshape.fill", tint: JBCHCategoryPalette.wood)
                 }
                 NavigationLink {
                     LicenseSettingsTab()
-                        .settingsNavigationPage("라이센스")
+                        .settingsNavigationPage(String(localized: "라이센스"))
                 } label: {
-                    SettingsCategoryRow(title: "라이센스", systemImage: "checkmark.seal.fill", tint: JBCHCategoryPalette.shelfSlate)
+                    SettingsCategoryRow(title: String(localized: "라이센스"), systemImage: "checkmark.seal.fill", tint: JBCHCategoryPalette.shelfSlate)
                 }
                 // 단축키(하드웨어 키보드 단축키)는 아이폰에 해당하지 않아 이 목록에서만 뺐다.
                 // macOS/iPadOS의 `GeneralSettingsGroup`에는 "단축키" 세그먼트가 남아 있다.
@@ -186,21 +186,21 @@ struct SettingsHomeView: View {
             Section {
                 NavigationLink {
                     TranslationsSettingsView()
-                        .settingsNavigationPage("번역본")
+                        .settingsNavigationPage(String(localized: "번역본"))
                 } label: {
-                    SettingsCategoryRow(title: "번역본", systemImage: "books.vertical.fill", tint: JBCHCategoryPalette.navy)
+                    SettingsCategoryRow(title: String(localized: "번역본"), systemImage: "books.vertical.fill", tint: JBCHCategoryPalette.navy)
                 }
                 NavigationLink {
                     AppearanceSettingsTab()
-                        .settingsNavigationPage("모양")
+                        .settingsNavigationPage(String(localized: "settings.appearance", defaultValue: "모양", comment: "설정 — 성경 표시 모양 탭(마인드맵 도형 '모양'과 구분)"))
                 } label: {
-                    SettingsCategoryRow(title: "모양", systemImage: "paintpalette.fill", tint: JBCHCategoryPalette.gold)
+                    SettingsCategoryRow(title: String(localized: "settings.appearance", defaultValue: "모양", comment: "설정 — 성경 표시 모양 탭(마인드맵 도형 '모양'과 구분)"), systemImage: "paintpalette.fill", tint: JBCHCategoryPalette.gold)
                 }
                 NavigationLink {
                     BibleCopyFormatSettingsTab()
-                        .settingsNavigationPage("복사 형식")
+                        .settingsNavigationPage(String(localized: "복사 형식"))
                 } label: {
-                    SettingsCategoryRow(title: "복사 형식", systemImage: "doc.on.doc.fill", tint: JBCHCategoryPalette.wine)
+                    SettingsCategoryRow(title: String(localized: "복사 형식"), systemImage: "doc.on.doc.fill", tint: JBCHCategoryPalette.wine)
                 }
             } header: {
                 // 위 "일반" 섹션 헤더와 같은 이유·같은 스타일.
@@ -224,7 +224,7 @@ struct SettingsHomeView: View {
         }
         .settingsThemedForm()
         // 제목은 인라인(기본 큰 제목은 뒤로가기 버튼 아래 별도 줄을 차지해 공간이 낭비된다)이며 성곡 세리프로 그린다 — `settingsNavigationPage` 참고.
-        .settingsNavigationPage("설정")
+        .settingsNavigationPage(String(localized: "설정"))
         // `SettingsHostView`와 같은 이유 — NavigationLink push로 열리므로 시스템 기본 글꼴로 되돌린다.
         .font(.body)
     }
@@ -435,7 +435,7 @@ private struct TranslationsSettingsView: View {
                 if activeTranslations.count < ActiveTranslationResolver.maxCount {
                     appendActive(imported)
                 } else {
-                    notice = "3개가 모두 사용 중이라 \(imported.displayName)은(는) 꺼진 상태로 추가되었습니다. 켜려면 먼저 다른 번역본을 꺼 주세요."
+                    notice = String(localized: "3개가 모두 사용 중이라 \(imported.displayName)은(는) 꺼진 상태로 추가되었습니다. 켜려면 먼저 다른 번역본을 꺼 주세요.")
                 }
             }
         }
@@ -566,14 +566,14 @@ private struct TranslationsSettingsView: View {
         notice = nil
         if isOn {
             guard activeTranslations.count < ActiveTranslationResolver.maxCount else {
-                notice = "3개가 모두 사용 중입니다. 먼저 하나를 꺼 주세요."
+                notice = String(localized: "3개가 모두 사용 중입니다. 먼저 하나를 꺼 주세요.")
                 return
             }
             appendActive(translation)
         } else {
             let isOnlyActive = activeTranslations.count == 1 && activeTranslations.first?.id == translation.id
             guard !isOnlyActive else {
-                notice = "최소 1개는 사용해야 합니다."
+                notice = String(localized: "최소 1개는 사용해야 합니다.")
                 return
             }
             settings.defaultDisplayedTranslationCodes.removeAll { $0 == translation.code }
@@ -627,7 +627,10 @@ private struct TranslationsSettingsView: View {
     }
 
     private func reload() {
-        translations = (try? modelContext.fetch(FetchDescriptor<TranslationRegistry>(sortBy: [SortDescriptor(\.addedAt)]))) ?? []
+        // 다른 앱 언어의 번들 성경(동기화로 도착한 레코드)은 목록에 보이지 않는다(`BundledTranslationCatalog`).
+        translations = BundledTranslationCatalog.visible(
+            (try? modelContext.fetch(FetchDescriptor<TranslationRegistry>(sortBy: [SortDescriptor(\.addedAt)]))) ?? []
+        )
     }
 
     /// 번들 번역본은 삭제 대상이 아니다 — UI에서도 삭제 버튼을 숨기지만 여기서도 방어적으로 막는다.
@@ -651,14 +654,18 @@ private struct AppearanceSettingsTab: View {
     // hex 추출용 `EnvironmentValues` — 배경색/글자색 `ColorPicker` 저장에 쓴다.
     @Environment(\.self) private var environment
 
-    /// 플랫폼별 API(`NSFontManager`/`UIFont`)로 구한 시스템 글꼴 목록. 내장 Paperlogy는
-    /// `BundledFonts.entries`로 맨 위에 따로 보여주므로 중복을 피하려고 "Paperlogy"로
-    /// 시작하는 항목은 걸러낸다.
+    /// 플랫폼별 API(`NSFontManager`/`UIFont`)로 구한 시스템 글꼴 목록. 내장 Paperlogy와 다국어 글꼴
+    /// (2026-10-12)은 `BundledFonts`로 맨 위에 따로 보여주므로 중복을 피하려고 그 family는 걸러낸다
+    /// (`BundledFonts.bundledFamilyNamePrefixes`).
+    private static func isNotBundledFamily(_ family: String) -> Bool {
+        !BundledFonts.bundledFamilyNamePrefixes.contains { family.hasPrefix($0) }
+    }
+
     private static let fontFamilies: [String] = {
         #if os(macOS)
-        return NSFontManager.shared.availableFontFamilies.sorted().filter { !$0.hasPrefix("Paperlogy") }
+        return NSFontManager.shared.availableFontFamilies.sorted().filter(isNotBundledFamily)
         #elseif os(iOS)
-        return UIFont.familyNames.sorted().filter { !$0.hasPrefix("Paperlogy") }
+        return UIFont.familyNames.sorted().filter(isNotBundledFamily)
         #else
         return []
         #endif
@@ -758,8 +765,18 @@ private struct AppearanceSettingsTab: View {
                     ForEach(BundledFonts.entries) { entry in
                         Text(entry.displayName).tag(entry.postScriptName)
                     }
+                    // 지역 전용 글꼴(2026-10-12) — 그 앱 언어에서만 보이되, 지금 선택된 값이면 빈칸이 되지 않게 남긴다
+                    // (`BundledFonts.visibleMultilingualFamilies` 주석 참고).
+                    ForEach(BundledFonts.multilingualFamilies.flatMap(\.entries).filter { entry in
+                        BundledFonts.visibleMultilingualFamilies.contains { $0.entries.contains(entry) }
+                            || entry.postScriptName == settings.bibleFontName
+                    }) { entry in
+                        Text(entry.displayName).tag(entry.postScriptName)
+                    }
                     // `bibleFontName`은 `hanjaFontName`(한자 주석 폰트)과 별개 설정이라 한자 주석 표시에 영향이 없다.
-                    Text("조선궁서체").tag(SpecialPurposeFonts.hanja)
+                    if BundledFonts.isKoreanOnlyFontVisible || settings.bibleFontName == SpecialPurposeFonts.hanja {
+                        Text("조선궁서체").tag(SpecialPurposeFonts.hanja)
+                    }
                 }
                 Section("시스템") {
                     Text("시스템 기본").tag("System")
@@ -774,9 +791,9 @@ private struct AppearanceSettingsTab: View {
             // 그 외(맥OS/아이패드)는 3열 가로 배치.
             #if os(iOS)
             if UIDevice.current.userInterfaceIdiom == .phone {
-                fullWidthSizeControl(title: "본문 크기", value: $settings.bibleBodyFontSize, range: 12...32)
-                fullWidthSizeControl(title: "절 번호 크기", value: $settings.bibleVerseNumberFontSize, range: 8...24)
-                fullWidthSizeControl(title: "줄간격", value: $settings.bibleLineSpacing, range: 0...16)
+                fullWidthSizeControl(title: String(localized: "본문 크기"), value: $settings.bibleBodyFontSize, range: 12...32)
+                fullWidthSizeControl(title: String(localized: "절 번호 크기"), value: $settings.bibleVerseNumberFontSize, range: 8...24)
+                fullWidthSizeControl(title: String(localized: "줄간격"), value: $settings.bibleLineSpacing, range: 0...16)
             } else {
                 compactSizeControlRow
             }
@@ -811,7 +828,10 @@ private struct AppearanceSettingsTab: View {
             // 지금은 번들 폰트(조선궁서체) 하나뿐이라 시스템 기본과의 선택 — 폰트가 추가되면 항목만 늘리면 된다.
             // 한자 주석 표시가 꺼져 있으면 의미가 없으므로 비활성화한다.
             Picker("한자 폰트", selection: $settings.hanjaFontName) {
-                Text("조선궁서체 (기본)").tag(SpecialPurposeFonts.hanja)
+                // 한국어 전용 글꼴 — 다른 언어에서는 지금 선택된 값일 때만 보인다(기본값이라 대개 보인다).
+                if BundledFonts.isKoreanOnlyFontVisible || settings.hanjaFontName == SpecialPurposeFonts.hanja {
+                    Text("조선궁서체 (기본)").tag(SpecialPurposeFonts.hanja)
+                }
                 Text("시스템 기본").tag("System")
             }
             .disabled(settings.hanjaDisplayMode == .off)
@@ -870,17 +890,17 @@ private struct AppearanceSettingsTab: View {
     private var compactSizeControlRow: some View {
         HStack(alignment: .top, spacing: 20) {
             compactSizeControl(
-                title: "본문 크기",
+                title: String(localized: "본문 크기"),
                 value: $settings.bibleBodyFontSize,
                 range: 12...32
             )
             compactSizeControl(
-                title: "절 번호 크기",
+                title: String(localized: "절 번호 크기"),
                 value: $settings.bibleVerseNumberFontSize,
                 range: 8...24
             )
             compactSizeControl(
-                title: "줄간격",
+                title: String(localized: "줄간격"),
                 value: $settings.bibleLineSpacing,
                 range: 0...16
             )
@@ -968,8 +988,8 @@ private struct BibleCopyFormatSettingsTab: View {
                     Text("등록된 번역본이 1개뿐이라 번역본 이름 위치는 지금 적용되지 않습니다.")
                 } else if settings.copyReferencePosition == settings.copyTranslationLabelPosition {
                     Text(settings.copyCombineReferenceAndTranslationLabel
-                        ? "예: [NKJV 창세기 1:1]"
-                        : "예: [NKJV][창세기 1:1]")
+                        ? String(localized: "예: [NKJV 창세기 1:1]")
+                        : String(localized: "예: [NKJV][창세기 1:1]"))
                 }
             }
             .settingsRowBackground()
@@ -1040,7 +1060,9 @@ private struct BibleCopyFormatSettingsTab: View {
     }
 
     private func loadTranslationCount() {
-        registeredTranslationCount = (try? modelContext.fetch(FetchDescriptor<TranslationRegistry>()))?.count ?? 0
+        registeredTranslationCount = BundledTranslationCatalog.visible(
+            (try? modelContext.fetch(FetchDescriptor<TranslationRegistry>())) ?? []
+        ).count
     }
 
     /// 미리보기 카드 강조색 — 시스템이 다크 모드면 밝게 섞은 `navyOnDark`, 아니면 `navy`.
@@ -1056,9 +1078,9 @@ private struct BibleCopyFormatSettingsTab: View {
             BibleVerse(uid: 1, versionCode: nil, bookId: 1, chapter: 1, verse: 1, content: "태초에 하나님이 천지를 창조하시니라", paragraph: nil),
             BibleVerse(uid: 2, versionCode: nil, bookId: 1, chapter: 1, verse: 2, content: "땅이 혼돈하고 공허하며 흑암이 깊음 위에 있고", paragraph: nil),
         ]
-        var translations = [BibleVerseCopyFormatter.TranslationSnapshot(displayName: "번역본 A", verses: verses)]
+        var translations = [BibleVerseCopyFormatter.TranslationSnapshot(displayName: String(localized: "번역본 A"), verses: verses)]
         if registeredTranslationCount > 1 {
-            translations.append(BibleVerseCopyFormatter.TranslationSnapshot(displayName: "번역본 B", verses: verses))
+            translations.append(BibleVerseCopyFormatter.TranslationSnapshot(displayName: String(localized: "번역본 B"), verses: verses))
         }
         return BibleVerseCopyFormatter.format(
             book: sampleBook, chapter: 1, selectedVerses: [1, 2],
@@ -1071,11 +1093,11 @@ private struct BibleCopyFormatSettingsTab: View {
 
 private struct ShortcutsSettingsTab: View {
     private let shortcuts: [(String, String)] = [
-        ("새 메모", "⌘N"), ("새 폴더", "⇧⌘N"), ("연구 문서 업로드", "⌘O"),
-        ("사이드바 토글", "⌥⌘S"), ("성경조회로 이동", "⌘1"), ("개인 묵상으로 이동", "⌘2"),
-        ("연구 문서로 이동", "⌘3"), ("개요로 이동", "⌘4"), ("통합검색으로 이동", "⌘5"),
-        ("말씀 요약으로 이동", "⌘6"),
-        ("태그 관계 보기", "⇧⌘T"), ("다음 장", "⌘]"), ("이전 장", "⌘["),
+        (String(localized: "새 메모"), "⌘N"), (String(localized: "새 폴더"), "⇧⌘N"), (String(localized: "연구 문서 업로드"), "⌘O"),
+        (String(localized: "사이드바 토글"), "⌥⌘S"), (String(localized: "성경조회로 이동"), "⌘1"), (String(localized: "개인 묵상으로 이동"), "⌘2"),
+        (String(localized: "연구 문서로 이동"), "⌘3"), (String(localized: "개요로 이동"), "⌘4"), (String(localized: "통합검색으로 이동"), "⌘5"),
+        (String(localized: "말씀 요약으로 이동"), "⌘6"),
+        (String(localized: "태그 관계 보기"), "⇧⌘T"), (String(localized: "다음 장"), "⌘]"), (String(localized: "이전 장"), "⌘["),
     ]
 
     var body: some View {
@@ -1105,6 +1127,20 @@ private struct ShortcutsSettingsTab: View {
 // MARK: - 라이센스
 // 라이선스·저작권 고지.
 private struct LicenseSettingsTab: View {
+    /// 다국어 글꼴 배포 저장소(2026-10-12). 이름은 고유명사라 번역하지 않는다.
+    private struct FontRepositoryLink: Identifiable {
+        let name: String
+        let url: URL
+        var id: String { name }
+    }
+
+    private static let multilingualFontLinks: [FontRepositoryLink] = [
+        FontRepositoryLink(name: "IBM Plex", url: URL(string: "https://github.com/IBM/plex")!),
+        FontRepositoryLink(name: "Noto Serif Thai", url: URL(string: "https://github.com/notofonts/thai")!),
+        FontRepositoryLink(name: "Inter", url: URL(string: "https://github.com/rsms/inter")!),
+        FontRepositoryLink(name: "Be Vietnam Pro", url: URL(string: "https://github.com/bettergui/BeVietnamPro")!),
+    ]
+
     var body: some View {
         Form {
             // (재)대한성서공회 저작권부 회신 기준 — 개역한글판(1961)/관주성경전서 개역한글판(1962)은
@@ -1150,6 +1186,12 @@ private struct LicenseSettingsTab: View {
 
                 Link("STEPBible-Data 저장소 보기", destination: URL(string: "https://github.com/STEPBible/STEPBible-Data")!)
 
+                // [2026-10-12] 원문 정보 화면의 영어 직역 — eBible.org `englsv` copr.htm 기준(© 2020 Covenant Press, CC BY-SA 4.0).
+                // 변경 사항(시행 구분 "||"를 줄바꿈으로 표시)을 함께 밝힌다(CC BY-SA 조건).
+                Text("원문 정보 화면의 영어 직역은 Literal Standard Version(LSV, © 2020 Covenant Press)을 사용하며, Creative Commons Attribution-ShareAlike 4.0(CC BY-SA 4.0) 라이선스를 따릅니다. 시행 구분 표기(||)만 줄바꿈으로 바꿔 표시합니다.")
+
+                Link("LSV 저작권 페이지 보기", destination: URL(string: "https://ebible.org/englsv/copyright.htm")!)
+
                 // 출처는 (재)대한성서공회 회신으로 확정됐다 — 위 "성경 본문 저작권" 섹션 참고.
                 Text("관주(구절 연결) 정보는 (재)대한성서공회의 관주성경전서 개역한글판(1962)을 따릅니다. 저작재산권 보호기간이 만료되어 무료로 사용하되, 위 '성경 본문 저작권' 섹션과 같은 조건(동일성유지권·성명표시권)을 지킵니다.")
 
@@ -1174,12 +1216,42 @@ private struct LicenseSettingsTab: View {
                 Text("앱 내장 기본 글꼴 중 고운바탕(Gowun Batang)은 The Gowun Batang Project Authors가 배포하는 오픈소스 폰트로, SIL Open Font License(OFL) 1.1을 따릅니다.")
 
                 Link("Gowun Batang 저장소 보기", destination: URL(string: "https://github.com/yangheeryu/Gowun-Batang")!)
+
+                // 다국어 글꼴(2026-10-12) — 각 배포본 OFL.txt(번들 `Fonts/OFL-*.txt`)의 저작권 줄 기준. 파일은 수정하지
+                // 않았으므로 IBM Plex의 예약 글꼴 이름("Plex") 조항에 걸리지 않는다. Gentium은 위 항목의 같은 파일을
+                // 타이틀 대체 서체로도 쓴다(`TitleFont`).
+                Text("태국어·러시아어·베트남어 표시용 글꼴 IBM Plex Sans Thai(Copyright © 2017 IBM Corp.), Noto Serif Thai(Copyright 2022 The Noto Project Authors), Inter(Copyright © 2016 The Inter Project Authors), Be Vietnam Pro(Copyright 2021 The Be Vietnam Pro Project Authors)는 SIL Open Font License(OFL) 1.1을 따르며 수정 없이 포함했습니다. 라틴 악센트·키릴·베트남어 글자가 들어간 화면 타이틀에는 위 Gentium 폰트를 함께 사용합니다.")
+
+                ForEach(Self.multilingualFontLinks) { link in
+                    Link(String(localized: "\(link.name) 저장소 보기"), destination: link.url)
+                }
             } header: {
                 Label("오픈소스 라이선스 고지", systemImage: "doc.plaintext")
             } footer: {
                 Text("원문 정보 화면의 한글 뜻풀이는 위 STEPBible 영어 뜻풀이를 기기 내(Apple Translation 프레임워크) 자동 번역한 것이며, 사용자가 직접 수정할 수 있습니다. 신학 용어의 표준 역어와 다를 수 있습니다.")
             }
             .settingsRowBackground()
+
+            // 언어별 번들 성경(2026-10-12, `BundledTranslationCatalog`) 저작권·라이선스 고지. 앱 언어와 관계없이 앱에 들어 있는
+            // 번들을 모두 고지한다(파일은 모든 기기에 배포되므로). 고지 문구는 원문 표기 그대로이며 번역하지 않는다.
+            if !BundledTranslationCatalog.noticeEntries.isEmpty {
+                Section {
+                    ForEach(BundledTranslationCatalog.noticeEntries, id: \.code) { translation in
+                        VStack(alignment: .leading, spacing: 2) {
+                            Text(verbatim: translation.displayName)
+                                .font(.subheadline.weight(.semibold))
+                            Text(verbatim: translation.attribution)
+                                .font(.footnote)
+                                .foregroundStyle(.secondary)
+                        }
+                    }
+                } header: {
+                    Label("번들 성경 저작권", systemImage: "book.closed")
+                } footer: {
+                    Text("앱 언어마다 그 언어의 기본 성경 하나만 표시됩니다. 퍼블릭 도메인이 아닌 번역본은 표시된 라이선스에 따라 본문을 바꾸지 않고 포함했습니다.")
+                }
+                .settingsRowBackground()
+            }
 
             // 폰트 저작권/라이선스 고지는 배포 페이지(80.kookmin.ac.kr/vision/font)에 명시된 조건과
             // 폰트 파일 name 테이블의 고지를 그대로 옮긴 것이다(페이지에 표시 문구 예시·앱 임베딩 조항은 없음).

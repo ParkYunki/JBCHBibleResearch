@@ -1,0 +1,19 @@
+{
+  "book": "20_PRO",
+  "reviewed_root_english_chapters": [
+    7,
+    8,
+    9,
+    10,
+    28,
+    29,
+    30,
+    31
+  ],
+  "latest_review_files": 6,
+  "latest_review_rows": 119,
+  "latest_candidates": 0,
+  "cumulative_candidates": 2,
+  "status": "complete",
+  "outputs_modified": false
+}

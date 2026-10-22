@@ -1,0 +1,35 @@
+{
+  "scope": "root en DEU019–023",
+  "source_and_target_reviewed": true,
+  "files_checked": 5,
+  "rows_checked": 119,
+  "confirmed_corrections": 0,
+  "errors": [],
+  "files": [
+    {
+      "path": "Tools/LiteralGen/outputs/en/05_DEU/DEU_019.tsv",
+      "rows": 21,
+      "sha256": "907ee707234104463a606be307d2037f32d33d165d7dc3f63adf2cea2dd687f5"
+    },
+    {
+      "path": "Tools/LiteralGen/outputs/en/05_DEU/DEU_020.tsv",
+      "rows": 20,
+      "sha256": "2b127a1c6c92669ed8b14bb9fd5fc1cd885a26a68b981cc68a280dd0e0654c52"
+    },
+    {
+      "path": "Tools/LiteralGen/outputs/en/05_DEU/DEU_021.tsv",
+      "rows": 23,
+      "sha256": "9a0e4ee737409f29ae050baa3619b92897df4b3210ad55cf0967b7c03d5d6fe2"
+    },
+    {
+      "path": "Tools/LiteralGen/outputs/en/05_DEU/DEU_022.tsv",
+      "rows": 30,
+      "sha256": "2be89e047a5dae52a4306c8f10c2c606b0e28c06c87c8f9d2cdd368fe5782084"
+    },
+    {
+      "path": "Tools/LiteralGen/outputs/en/05_DEU/DEU_023.tsv",
+      "rows": 25,
+      "sha256": "2278aff3c1a5e92a994e402bf48127a8bedaa2a1045f2c2719af57b9251aab7a"
+    }
+  ]
+}

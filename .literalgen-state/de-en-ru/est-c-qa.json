@@ -1,0 +1,12 @@
+[
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/17_EST/EST_008.tsv",
+    "old_row": "6\tDenn wie werde ich es vermögen und das Unheil ansehen, das mein Volk treffen wird? Und wie werde ich es vermögen und die Vernichtung meiner Verwandtschaft ansehen?“\tDas Vermögen wird in beiden Fragen ausdrücklich wiederholt.",
+    "new_row": "6\tDenn wie werde ich es vermögen, das Unheil anzusehen, das mein Volk treffen wird? Und wie werde ich es vermögen, die Vernichtung meiner Verwandtschaft anzusehen?“\tDas Vermögen wird in beiden Fragen ausdrücklich wiederholt."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/17_EST/EST_008.tsv",
+    "old_row": "6\tИбо как смогу я и увижу зло, которое постигнет народ мой? И как смогу я и увижу гибель родни моей?»\tВ обоих вопросах сохранено отдельное смогу.",
+    "new_row": "6\tИбо как смогу я увидеть зло, которое постигнет народ мой? И как смогу я увидеть гибель родни моей?»\tВ обоих вопросах сохранено отдельное смогу."
+  }
+]

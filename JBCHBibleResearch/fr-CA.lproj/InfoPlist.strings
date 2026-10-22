@@ -1,0 +1,10 @@
+/*
+  InfoPlist.strings (fr-CA)
+
+  [2026-10-11 i18n 2차] 앱 이름과 문서 형식 이름의 French (Canada) 표시. 문서 형식은 Info.plist의
+  CFBundleTypeName/UTTypeDescription 값("JBCH 개인 묵상")을 키로 쓴다.
+  ⚠️ 번역 초안 — 원어민/브랜딩 검토 필요.
+*/
+"CFBundleDisplayName" = "Recherche biblique Emmaüs";
+"CFBundleName" = "Recherche biblique Emmaüs";
+"JBCH 개인 묵상" = "Méditation personnelle JBCH";

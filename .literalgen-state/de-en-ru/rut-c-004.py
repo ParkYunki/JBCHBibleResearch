@@ -1,0 +1,45 @@
+exec(open('.literalgen-state/de-en-ru/rut-c-write.py').read())
+write(4,'de','''Und Boas ging zum Tor hinauf und setzte sich dort; und siehe, der Löser ging vorüber, von dem Boas geredet hatte. Und er sagte: „Biege ab, setz dich hierher, du Soundso.“ Und er bog ab und setzte sich.
+Und er nahm zehn Männer von den Ältesten der Stadt und sagte: „Setzt euch hierher.“ Und sie setzten sich.
+Und er sagte zum Löser: „Das Stück des Feldes, das unserem Bruder Elimelech gehörte, hat Naemi verkauft, die aus dem Gebiet Moab zurückgekehrt ist.
+Und ich sagte: Ich will dein Ohr aufdecken und sagen: Kaufe es vor den Sitzenden und vor den Ältesten meines Volkes. Wenn du lösen willst, löse; und wenn er nicht löst, sag es mir, damit ich es weiß; denn außer dir gibt es niemanden zum Lösen, und ich bin nach dir.“ Und er sagte: „Ich werde lösen.“
+Und Boas sagte: „An dem Tag, da du das Feld aus der Hand Naemis kaufst, hast du es auch von Ruth, der Moabitin, der Frau des Toten, erworben, um den Namen des Toten über seinem Erbteil aufzurichten.“
+Und der Löser sagte: „Ich kann es nicht für mich lösen, damit ich mein Erbteil nicht verderbe. Löse du für dich mein Lösungsrecht, denn ich kann nicht lösen.“
+Und dies galt früher in Israel beim Lösen und beim Tauschen, um jede Sache zu bestätigen: Ein Mann zog seinen Schuh aus und gab ihn seinem Nächsten; und dies war die Bezeugung in Israel.
+Und der Löser sagte zu Boas: „Kaufe es dir.“ Und er zog seinen Schuh aus.
+Und Boas sagte zu den Ältesten und zum ganzen Volk: „Ihr seid heute Zeugen, dass ich aus der Hand Naemis alles erworben habe, was Elimelech gehörte, und alles, was Chiljon und Mahlon gehörte.
+Und auch Ruth, die Moabitin, die Frau Mahlons, habe ich mir zur Frau erworben, um den Namen des Toten über seinem Erbteil aufzurichten, und der Name des Toten soll nicht unter seinen Brüdern und vom Tor seines Ortes ausgerottet werden. Ihr seid heute Zeugen.“
+Und das ganze Volk am Tor und die Ältesten sagten: „Zeugen! Der HERR mache die Frau, die in dein Haus kommt, wie Rahel und wie Leah, die beide das Haus Israel gebaut haben. Und schaffe dir Vermögen in Ephratha und rufe einen Namen aus in Bethlehem.
+Und dein Haus werde wie das Haus des Perez, den Thamar dem Juda gebar, durch den Samen, den der HERR dir von dieser jungen Frau geben wird.“
+Und Boas nahm Ruth, und sie wurde ihm zur Frau; und er ging zu ihr hinein, und der HERR gab ihr Empfängnis, und sie gebar einen Sohn.
+Und die Frauen sagten zu Naemi: „Gesegnet sei der HERR, der dir heute keinen Löser hat fehlen lassen; und sein Name werde in Israel ausgerufen.
+Und er werde dir zum Zurückbringer der Seele und zum Versorger deines grauen Alters, denn deine Schwiegertochter, die dich liebt, hat ihn geboren, sie, die dir besser ist als sieben Söhne.“
+Und Naemi nahm das Kind und legte es an ihre Brust und wurde ihm zur Pflegerin.
+Und die Nachbarinnen gaben ihm einen Namen und sagten: „Naemi ist ein Sohn geboren.“ Und sie nannten seinen Namen Obed; er ist der Vater Isais, des Vaters Davids.
+Und dies sind die Geschlechter des Perez: Perez zeugte Hezron.
+Und Hezron zeugte Ram, und Ram zeugte Amminadab.
+Und Amminadab zeugte Nahesson, und Nahesson zeugte Salma.
+Und Salma zeugte Boas, und Boas zeugte Obed.
+Und Obed zeugte Isai, und Isai zeugte David.''',{1:'Die Rolle ist Löser, nicht Erbe; der Angesprochene wird mit einer Umschreibung für einen ungenannten Namen angeredet.',3:'Naemi hat das Feld verkauft; die Vorlage hat „bietet feil“. Der Rolle des Lösers entspricht nicht einfach ein Erbe.',4:'Wörtlich soll das Ohr aufgedeckt werden; die Anwesenden sind Sitzende, nicht ausdrücklich Bürger. Das Lösen wird wiederholt, statt als Beerben bezeichnet.',5:'Das Erwerben wird auch „von Ruth“ ausgesagt; die Vorlage formuliert stattdessen, dass Ruth genommen werden müsse. „Der Tote“ wird beim Namen und beim Erbteil ausdrücklich wiederholt.',6:'Das Lösen und das Lösungsrecht werden ausdrücklich genannt; die Vorlage gibt dies als Beerben wieder.',7:'Die Beschreibung betrifft Lösen und Tauschen im Allgemeinen; die Vorlage fügt ein Nichtwollen des Beerbens oder Erkaufens als Bedingung ein.',8:'Der Mann ist Löser, nicht bloß Erbe.',10:'„Der Name des Toten“ wird ausdrücklich wiederholt, statt beim zweiten Mal als „sein Name“ bezeichnet.',11:'Die Antwort ist knapp „Zeugen“; Vermögen wird aktiv erworben, und ein Name aktiv ausgerufen, statt bloßem Wachsen und passivem Gepriesenwerden.',13:'Der HERR gibt ausdrücklich Empfängnis.',14:'Die Rolle ist Löser, nicht Erbe; sein Name soll „ausgerufen“ werden, nicht nur bleiben. Der Zeitpunkt heißt „heute“.',15:'Die Seele und das graue Alter werden ausdrücklich als Bilder genannt; die Liebe der Schwiegertochter ist gegenwärtig, nicht nur vergangen.',16:'Das Kind wird an ihre Brust gelegt; die Vorlage hat „auf ihren Schoß“.',17:'Geboren wird ein Sohn, nicht nur ein Kind.',18:'Die Geschlechter stehen im Plural, statt eines einzelnen Geschlechts.'})
+write(4,'ru','''И поднялся Вооз к воротам, и сел там; и вот, проходит выкупщик, о котором говорил Вооз. И сказал: «Сверни, сядь здесь, такой-то». И тот свернул, и сел.
+И взял он десять человек из старейшин города, и сказал: «Сядьте здесь». И они сели.
+И сказал выкупщику: «Участок поля, который принадлежал нашему брату Елимелеху, продала Ноеминь, возвратившаяся из области Моава.
+И я сказал: открою твоё ухо, говоря: купи перед сидящими и перед старейшинами моего народа. Если выкупишь, выкупай, а если он не выкупит, скажи мне, и я узнаю; ибо кроме тебя некому выкупить, а я после тебя». И сказал тот: «Я выкуплю».
+И сказал Вооз: «В день, когда ты покупаешь поле из руки Ноемини, ты приобретаешь его также у Руфи Моавитянки, жены умершего, чтобы восставить имя умершего над его уделом».
+И сказал выкупщик: «Не могу выкупить для себя, чтобы не погубить мой удел. Выкупи ты для себя моё право выкупа, ибо я не могу выкупить».
+И было это прежде в Израиле при выкупе и при обмене, для подтверждения всякого дела: человек снимал свою сандалию и давал своему ближнему; и это было свидетельством в Израиле.
+И сказал выкупщик Воозу: «Купи себе». И снял свою сандалию.
+И сказал Вооз старейшинам и всему народу: «Вы сегодня свидетели, что я приобрёл всё Елимелехово и всё Хилеоново и Махлоново из руки Ноемини.
+И также Руфь Моавитянку, жену Махлона, я приобрёл себе в жёны, чтобы восставить имя умершего над его уделом, и чтобы имя умершего не было отсечено от его братьев и от ворот его места. Вы сегодня свидетели».
+И сказали весь народ у ворот и старейшины: «Свидетели! Пусть Господь сделает женщину, входящую в твой дом, как Рахиль и как Лию, которые обе построили дом Израиля; и создавай достаток в Ефрафе, и возглашай имя в Вифлееме.
+И пусть твой дом будет как дом Фареса, которого родила Фамарь Иуде, от семени, которое Господь даст тебе от этой молодой женщины».
+И взял Вооз Руфь, и стала она ему женой; и вошёл он к ней, и дал Господь ей зачатие, и родила она сына.
+И сказали женщины Ноемини: «Благословен Господь, Который не оставил тебя сегодня без выкупщика; и пусть его имя будет возглашено в Израиле.
+И будет он тебе возвращающим душу и поддерживающим твою седину, ибо твоя невестка, которая любит тебя, родила его, она, которая тебе лучше семи сыновей».
+И взяла Ноеминь ребёнка, и положила его к своей груди, и стала ему воспитательницей.
+И нарекли ему соседки имя, говоря: «У Ноемини родился сын». И нарекли его имя Овид; он отец Иессея, отца Давида.
+И вот родословия Фареса: Фарес породил Есрома.
+И Есром породил Арама, и Арам породил Аминадава.
+И Аминадав породил Наассона, и Наассон породил Салмона.
+И Салмон породил Вооза, и Вооз породил Овида.
+И Овид породил Иессея, и Иессей породил Давида.''',{1:'Движение направлено вверх; человек назван выкупщиком и получает обращение с условным неназванным именем.',2:'Имя Вооза здесь не повторяется; стоит неназванное «он».',3:'Поле уже «продала» Ноеминь; территория Моава названа в единственном числе.',4:'Буквально говорится об открытии уха, не только о доведении до ушей.',5:'При покупке названа «рука Ноемини»; отдельной фразы о взятии женщины в замужество в данном стихе нет.',6:'Повторяется выкуп имущества и прямо названо право выкупа; перевод заменяет это принятием женщины.',7:'В обоих местах назван Израиль; обувь — сандалия, не сапог.',8:'Заключительного «и дал ему» в данном еврейском стихе нет; обувь — сандалия.',9:'Покупка описана как совершённое приобретение из руки Ноемини; день назван «сегодня».',10:'Повторяется «имя умершего»; его сохраняют, восставляя, а не просто оставляя. Уничтожение имени изображено как отсечение.',11:'Ответ — просто «свидетели»; дом «построили», а имя человек должен возгласить активно, вместо пассивного прославления.',13:'Дано зачатие, не уже беременность.',14:'Роль — выкупщик, не просто наследник; имя должно быть возглашено.',15:'Буквально он возвращает душу и поддерживает седину; перевод передаёт это как отраду и питание в старости.',16:'Она положила ребёнка к груди, не просто носила в объятиях; затем стала ему воспитательницей.',18:'Родословия стоят во множественном числе, а не как один род.'})

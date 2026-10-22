@@ -1,0 +1,36 @@
+{
+  "scope": "EXO001–014 de/ru and EXO001–011 en; en012–014 root-owned",
+  "counts": {
+    "de_files": 19,
+    "de_rows": 388,
+    "ru_files": 19,
+    "ru_rows": 388,
+    "en_files": 14,
+    "en_rows": 284
+  },
+  "qa_rows": 27,
+  "issues": [],
+  "checks": [
+    "packet range and verse order",
+    "three nonempty fields",
+    "en literal exactly =",
+    "difference <=60 words",
+    "no placeholders",
+    "original QA rows preserved and unique",
+    "localized quotes and divine names",
+    "full O/TARGET meaning, native grammar and DIFF review"
+  ],
+  "quote_counts": {
+    "de„": 126,
+    "de“": 126,
+    "de‚": 3,
+    "de‘": 3,
+    "ru«": 126,
+    "ru»": 126,
+    "ru„": 3,
+    "ru“": 3,
+    "en“": 0,
+    "en”": 0
+  },
+  "output_files_modified": false
+}

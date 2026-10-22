@@ -1,0 +1,41 @@
+{
+  "scope": "JOS010–016; en010–013",
+  "chapters": {
+    "10": {
+      "outputs_created": true,
+      "qa": "all verses source and target compared; native wording and morphology reviewed; exact corrections queued only"
+    },
+    "11": {
+      "outputs_created": true,
+      "qa": "all verses source and target compared; native wording and morphology reviewed; exact corrections queued only"
+    },
+    "12": {
+      "outputs_created": true,
+      "qa": "all verses source and target compared; native wording and morphology reviewed; exact corrections queued only"
+    },
+    "13": {
+      "outputs_created": true,
+      "qa": "all verses source and target compared; native wording and morphology reviewed; exact corrections queued only"
+    },
+    "14": {
+      "outputs_created": true,
+      "qa": "all verses source and target compared; native wording and morphology reviewed; exact corrections queued only"
+    },
+    "15": {
+      "outputs_created": true,
+      "qa": "all verses source and target compared; native wording and morphology reviewed; exact corrections queued only"
+    },
+    "16": {
+      "outputs_created": true,
+      "qa": "all verses source and target compared; native wording and morphology reviewed; exact corrections queued only"
+    }
+  },
+  "status": "complete_pending_root_official_check_and_redo",
+  "files": 28,
+  "rows": 545,
+  "qa_file": "jos-b-qa.json",
+  "qa_entries": 113,
+  "root_en_independent_qa": "jos-b-root-en-qa.json",
+  "root_en_scope": "JOS014–016 all 88 rows reviewed; one definite wording candidate",
+  "existing_outputs_overwritten": false
+}

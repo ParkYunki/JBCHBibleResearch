@@ -48,19 +48,19 @@ final class RhwpPDFExportService: NSObject {
         var errorDescription: String? {
             switch self {
             case .documentLoadFailed(let message):
-                return "문서를 열지 못했습니다: \(message)"
+                return String(localized: "문서를 열지 못했습니다: \(message)")
             case .missingPageDimensions(let page):
-                return "\(page + 1)쪽의 크기 정보를 가져오지 못했습니다."
+                return String(localized: "\(page + 1)쪽의 크기 정보를 가져오지 못했습니다.")
             case .pageSvgFailed(let page, let message):
-                return "\(page + 1)쪽을 SVG로 만들지 못했습니다: \(message)"
+                return String(localized: "\(page + 1)쪽을 SVG로 만들지 못했습니다: \(message)")
             case .invalidPDFPageData(let page):
-                return "\(page + 1)쪽 PDF 데이터가 올바르지 않습니다."
+                return String(localized: "\(page + 1)쪽 PDF 데이터가 올바르지 않습니다.")
             case .mergeFailed:
-                return "각 쪽을 하나의 PDF로 합치지 못했습니다."
+                return String(localized: "각 쪽을 하나의 PDF로 합치지 못했습니다.")
             case .timedOut:
-                return "PDF 변환용 뷰어 준비가 시간 내에 끝나지 않았습니다."
+                return String(localized: "PDF 변환용 뷰어 준비가 시간 내에 끝나지 않았습니다.")
             case .textExtractionFailed(let page, let message):
-                return "\(page + 1)쪽 텍스트를 가져오지 못했습니다: \(message)"
+                return String(localized: "\(page + 1)쪽 텍스트를 가져오지 못했습니다: \(message)")
             }
         }
     }
@@ -117,7 +117,7 @@ final class RhwpPDFExportService: NSObject {
                 webView: view
             )
             guard let dict = result as? [String: Any] else {
-                throw ExportError.textExtractionFailed(pageIndex, "응답을 해석하지 못했습니다.")
+                throw ExportError.textExtractionFailed(pageIndex, String(localized: "응답을 해석하지 못했습니다."))
             }
             if let errorMessage = dict["error"] as? String {
                 throw ExportError.textExtractionFailed(pageIndex, errorMessage)
@@ -137,13 +137,13 @@ final class RhwpPDFExportService: NSObject {
             webView: webView
         )
         guard let loadDict = loadResult as? [String: Any] else {
-            throw ExportError.documentLoadFailed("문서 로딩 응답을 해석하지 못했습니다.")
+            throw ExportError.documentLoadFailed(String(localized: "문서 로딩 응답을 해석하지 못했습니다."))
         }
         if let errorMessage = loadDict["error"] as? String {
             throw ExportError.documentLoadFailed(errorMessage)
         }
         guard let pageCount = (loadDict["pageCount"] as? NSNumber)?.intValue, pageCount > 0 else {
-            throw ExportError.documentLoadFailed("페이지 수를 확인할 수 없습니다.")
+            throw ExportError.documentLoadFailed(String(localized: "페이지 수를 확인할 수 없습니다."))
         }
         return pageCount
     }

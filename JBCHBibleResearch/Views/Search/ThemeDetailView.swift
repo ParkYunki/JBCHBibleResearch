@@ -30,10 +30,10 @@ struct ThemeDetailView: View {
 
     private var categoryLabel: String {
         switch theme.category {
-        case "doctrine": return "교리"
-        case "practice": return "실천"
-        case "topic": return "주제"
-        case "named_passage": return "지정 본문"
+        case "doctrine": return String(localized: "교리")
+        case "practice": return String(localized: "실천")
+        case "topic": return String(localized: "주제")
+        case "named_passage": return String(localized: "지정 본문")
         default: return theme.category
         }
     }
@@ -63,17 +63,17 @@ struct ThemeDetailView: View {
             .listRowSeparator(.hidden)
 
             if let description = theme.themeDescription, !description.isEmpty {
-                cardSection("설명", icon: "doc.text.fill") {
+                cardSection(String(localized: "설명"), icon: "doc.text.fill") {
                     Text(description).font(.body)
                 }
             }
             if !keywordList.isEmpty {
-                cardSection("관련 키워드", icon: "tag.fill") {
+                cardSection(String(localized: "관련 키워드"), icon: "tag.fill") {
                     chipRow(keywordList, tint: JBCHCategoryPalette.wood)
                 }
             }
             if !tagList.isEmpty {
-                cardSection("태그", icon: "number") {
+                cardSection(String(localized: "태그"), icon: "number") {
                     chipRow(tagList, tint: JBCHCategoryPalette.shelfSlate)
                 }
             }
@@ -101,7 +101,7 @@ struct ThemeDetailView: View {
         VStack(alignment: .leading, spacing: 8) {
             HStack(alignment: .firstTextBaseline, spacing: 8) {
                 Text(theme.title)
-                    .font(.custom(SpecialPurposeFonts.titleSerif, size: 28, relativeTo: .largeTitle))
+                    .font(.titleSerif(theme.title, size: 28, relativeTo: .largeTitle))
                     .fontWeight(.bold)
                     .foregroundStyle(settings.bibleTextColor ?? .primary)
                 Spacer(minLength: 0)
@@ -178,7 +178,8 @@ struct ThemeDetailView: View {
     }
 
     private var groupedVerseReferences: [VerseReferenceGroup] {
-        guard let store = try? BibleReferenceStore(filePath: TranslationBootstrap.resolvedBundledDatabaseURL().path) else {
+        // 앱 언어의 기본 번들 성경으로 보여준다(2026-10-12, `BundledTranslationCatalog.current`).
+        guard let store = try? BibleReferenceStore(filePath: TranslationBootstrap.resolvedCurrentLanguageBundledDatabaseURL().path) else {
             return []
         }
         var versesByChapter: [String: (bookId: Int, chapter: Int, bookNameKo: String, verses: [(Int, String)])] = [:]
@@ -187,7 +188,7 @@ struct ThemeDetailView: View {
             guard let verse = try? store.verse(bookId: ref.bookId, chapter: ref.chapter, verse: ref.verse) else { continue }
             let key = "\(ref.bookId)-\(ref.chapter)"
             if versesByChapter[key] == nil {
-                let bookName = BooksProvider.shared.book(id: ref.bookId)?.nameKo ?? "책 \(ref.bookId)"
+                let bookName = BooksProvider.shared.book(id: ref.bookId)?.displayName ?? String(localized: "책 \(ref.bookId)")
                 versesByChapter[key] = (ref.bookId, ref.chapter, bookName, [])
                 orderedKeys.append(key)
             }

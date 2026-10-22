@@ -56,6 +56,10 @@ struct WordSummaryEditorView: View {
     @State private var tagSuggestions: [Tag] = []
     @State private var drilldownTag: Tag?
 
+    /// 관련 말씀 선택 시트(2026-10-13). 새 요약을 만든 직후 자동으로 열릴 때는 취소 버튼이 "나중에"로 바뀐다.
+    @State private var isVersePickerPresented = false
+    @State private var versePickerCancelTitle = String(localized: "취소")
+
     init(
         summary: VerseSummary,
         presentationContext: WordSummaryPresentationContext = .standalone,
@@ -115,6 +119,13 @@ struct WordSummaryEditorView: View {
         .sheet(item: $drilldownTag) { tag in
             TagDrilldownView(tag: tag)
         }
+        .sheet(isPresented: $isVersePickerPresented) {
+            WordNoteVersePickerSheet(
+                initial: WordNoteVerseSelection(bookId: summary.bookId, chapter: summary.chapter, verse: summary.verse, verseEnd: summary.verseEnd),
+                cancelTitle: versePickerCancelTitle,
+                onConfirm: applyVerseSelection
+            )
+        }
         .toolbar {
             // 읽기전용 토글은 새 항목을 바로 편집하는 `.contextual`에서는 의미가 적어 뺀다.
             if presentationContext == .standalone || presentationContext == .wordNoteList {
@@ -125,12 +136,12 @@ struct WordSummaryEditorView: View {
                         isEditable.toggle()
                     } label: {
                         if presentationContext == .wordNoteList {
-                            Text(isEditable ? "완료" : "편집").fontWeight(.semibold)
+                            Text(isEditable ? String(localized: "완료") : String(localized: "편집")).fontWeight(.semibold)
                         } else {
                             Image(systemName: isEditable ? "eye" : "pencil")
                         }
                     }
-                    .help(isEditable ? "읽기 전용으로 보기" : "편집하기")
+                    .help(isEditable ? String(localized: "읽기 전용으로 보기") : String(localized: "편집하기"))
                 }
             }
             // 닫기 버튼은 여기 `ToolbarItem`이 아니라 `header`에 둔다: 아이폰에서 `.inspector`가 시트로 열리면
@@ -163,10 +174,12 @@ struct WordSummaryEditorView: View {
                     get: { summary.verse ?? 0 },
                     set: { newValue in
                         summary.verse = newValue == 0 ? nil : newValue
+                        // 시작 절을 직접 바꾸면 이전 범위 끝은 의미가 없어지므로 한 절로 되돌린다.
+                        summary.verseEnd = nil
                         autosave?.saveImmediately()
                     }
                 ), in: 0...176) {
-                    Text(summary.verse.map { "\($0)절" } ?? "절 없음")
+                    Text(summary.verse.map { String(localized: "\($0)절") } ?? String(localized: "절 없음"))
                         .font(.body)
                         .foregroundStyle(settings.bibleTextColor?.opacity(0.6) ?? Color.secondary)
                 }
@@ -216,23 +229,40 @@ case .wordNoteList:
         VStack(alignment: .leading, spacing: 12) {
             HStack(spacing: 8) {
                 let badgeColor = WordNoteCategory.verseSummary.spineColor(onDark: isDarkSurface)
-                Text(WordNoteCategory.verseSummary.rawValue)
+                Text(WordNoteCategory.verseSummary.title)
                     .font(.caption2.bold())
                     .padding(.horizontal, 8)
                     .padding(.vertical, 3)
                     .background(badgeColor.opacity(0.15), in: Capsule())
                     .foregroundStyle(badgeColor)
-                Text(isEditable ? "편집 중 · 자동 저장" : (WordNoteItem.summary(summary).dateLabel ?? ""))
+                Text(isEditable ? String(localized: "편집 중 · 자동 저장") : (WordNoteItem.summary(summary).dateLabel ?? ""))
                     .font(.caption)
                     .foregroundStyle(settings.bibleTextColor?.opacity(0.65) ?? Color.secondary)
                 Spacer()
                 syncStatusLabel
             }
-            WordNoteVerseBar(label: contextualCoordinateLabel, bookId: summary.bookId, chapter: summary.chapter, verse: summary.verse)
+            WordNoteVerseBar(label: contextualCoordinateLabel, bookId: summary.bookId, chapter: summary.chapter, verse: summary.verse, onEdit: verseEditAction)
         }
         .padding(.horizontal)
         .padding(.top, 14)
         .padding(.bottom, 12)
+    }
+
+    /// 구절 줄을 눌러 관련 말씀을 바꿀 수 있는 조건 — 편집 중일 때만(조회 모드에서는 읽기 전용).
+    private var verseEditAction: (() -> Void)? {
+        guard isEditable else { return nil }
+        return {
+            versePickerCancelTitle = String(localized: "취소")
+            isVersePickerPresented = true
+        }
+    }
+
+    private func applyVerseSelection(_ selection: WordNoteVerseSelection) {
+        summary.bookId = selection.bookId
+        summary.chapter = selection.chapter
+        summary.verse = selection.verse
+        summary.verseEnd = selection.verseEnd
+        autosave?.saveImmediately()
     }
 
     /// 어두운 테마 배경이면 종류 배지 색을 밝은 변형으로 바꾼다(`WordNoteRowView.isDarkSurface`와 같은 공식).
@@ -243,11 +273,8 @@ case .wordNoteList:
     }
 
     private var contextualCoordinateLabel: String {
-        let bookName = BooksProvider.shared.book(id: summary.bookId)?.nameKo ?? ""
-        if let verse = summary.verse {
-            return "\(bookName) \(summary.chapter)장 \(verse)절"
-        }
-        return "\(bookName) \(summary.chapter)장"
+        let bookName = BooksProvider.shared.book(id: summary.bookId)?.displayName ?? ""
+        return WordNoteVerseLabel.text(bookName: bookName, chapter: summary.chapter, verse: summary.verse, verseEnd: summary.verseEnd)
     }
 
 
@@ -399,6 +426,13 @@ case .wordNoteList:
         // 저장 시에는 `pendingIndexRefresh = true`만 함께 저장된다.
         autosave = AutosaveController(modelContext: modelContext)
         hasLoadedMetadata = true
+        // 말씀 노트에서 방금 만든 새 요약이면 관련 말씀 선택 시트를 자동으로 연다. 화면이 밀려 들어오는 전환과 겹치지 않게 잠깐 늦춘다.
+        if presentationContext == .wordNoteList, WordNoteVersePickerRequest.shared.consume(id: summary.id) {
+            versePickerCancelTitle = String(localized: "나중에")
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                isVersePickerPresented = true
+            }
+        }
     }
 
     private func handleDisappear() {
@@ -406,7 +440,7 @@ case .wordNoteList:
         // `.contextual` 레코드는 본문이 자동 채운 날짜 문구(`WordSummaryDefaultSeed`)와 정확히 같으면 사용자가 아무것도 안 쓴 것으로 본다.
         // `createdAt`으로 재계산해 비교하므로 뷰 재생성에 영향받는 스냅샷이 없다.
         let isUntouchedContextualSeed = presentationContext == .contextual
-            && summary.contentText == WordSummaryDefaultSeed.text(for: summary.createdAt)
+            && WordSummaryDefaultSeed.isSeedText(summary.contentText, for: summary.createdAt)
         // 본문이 비어도 태그가 붙어 있으면 지우지 않는다(`MemoDetailView`와 동일).
         let isEmpty = (summary.contentText.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty
             || isUntouchedContextualSeed)

@@ -1,0 +1,14 @@
+[
+  {
+    "path": "Tools/LiteralGen/outputs/en/07_JDG/JDG_005_1.tsv",
+    "verse": 8,
+    "old_row": "8\t=\tThe Hebrew uses a singular choosing verb and singular “gate”; BSB has plural “they” and “their gates.”",
+    "new_row": "8\t=\tThe Hebrew uses a singular choosing verb with an unnamed subject; BSB has plural “they.”"
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/en/07_JDG/JDG_006_1.tsv",
+    "verse": 8,
+    "old_row": "8\t=\tThe Hebrew explicitly names the LORD as sender and separately says He brought them up and brought them out; BSB begins with “He” and combines the two actions into one “brought ... out.”",
+    "new_row": "8\t=\tThe Hebrew explicitly names the LORD as sender and separately says He brought them up and brought them out; BSB begins with “He” and combines the two actions into “brought you up out.”"
+  }
+]

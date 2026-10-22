@@ -87,6 +87,8 @@ struct ContentView: View {
                 defer { AppBootstrapProgress.shared.markFinished() }
                 do {
                     try TranslationBootstrap.ensureBundledTranslationRegistered(in: modelContext)
+                    // 앱 언어의 번들 성경(한국어가 아닐 때, `BundledTranslationCatalog`)을 등록한다.
+                    try TranslationBootstrap.ensureLanguageBundledTranslationRegistered(in: modelContext)
                     // 예전에 등록됐던 국한문혼용 번들 번역본을 이미 등록된 기기에서 정리한다.
                     try TranslationBootstrap.removeHanjaTranslationIfPresent(in: modelContext)
                     // CloudKit 다중 기기 초기 부트스트랩 경합으로 생길 수 있는 code 중복

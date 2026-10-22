@@ -1,0 +1,22 @@
+[
+  {
+    "path": "Tools/LiteralGen/outputs/de/08_RUT/RUT_001.tsv",
+    "old_row": "13\twolltet ihr auf sie warten, bis sie groß würden? Wolltet ihr euch ihretwegen zurückhalten, um keinem Mann zu gehören? Nein, meine Töchter, denn mir ist es sehr bitter, mehr als euch, denn die Hand des HERRN ist gegen mich ausgegangen.“\tDas Hebräische nennt die Bitterkeit für Naemi im Vergleich zu den Frauen, nicht allein ihr Mitleid mit ihnen.",
+    "new_row": "13\twolltet ihr auf sie warten, bis sie groß würden? Wolltet ihr euch ihretwegen zurückhalten, um keinem Mann zu gehören? Nein, meine Töchter, denn mir ist es sehr bitter, mehr als euch, denn die Hand des HERRN ist gegen mich ausgegangen.“\tDas Hebräische bezeichnet ihre Lage ausdrücklich als sehr bitter; die Vorlage sagt „mich jammert euer sehr“. Die Hand des HERRN geht im hebräischen Bild gegen sie aus."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/08_RUT/RUT_001.tsv",
+    "old_row": "13\tстали бы вы ждать их, пока они вырастут? Стали бы вы ради них удерживаться от того, чтобы принадлежать мужу? Нет, мои дочери, ибо мне очень горько, больше, чем вам, ибо рука Господа вышла против меня».\tЕврейский текст описывает горечь Ноемини в сравнении со снохами; рука Господа вышла против неё.",
+    "new_row": "13\tстали бы вы ждать их, пока они вырастут? Стали бы вы ради них удерживаться от того, чтобы принадлежать мужу? Нет, мои дочери, ибо мне очень горько, больше, чем вам, ибо рука Господа вышла против меня».\tЕврейский текст прямо называет её состояние очень горьким; перевод говорит «я весьма сокрушаюсь о вас». Рука Господа в еврейском образе вышла против неё."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/08_RUT/RUT_004.tsv",
+    "old_row": "5\tUnd Boas sagte: „An dem Tag, da du das Feld aus der Hand Naemis kaufst, hast du es auch von Ruth, der Moabitin, der Frau des Toten, erworben, um den Namen des Toten über seinem Erbteil aufzurichten.“\tDas Erwerben wird auch „von Ruth“ ausgesagt; die Vorlage formuliert stattdessen, dass Ruth genommen werden müsse. „Der Tote“ wird beim Namen und beim Erbteil ausdrücklich wiederholt.",
+    "new_row": "5\tUnd Boas sagte: „An dem Tag, da du das Feld aus der Hand Naemis kaufst, hast du es auch von Ruth, der Moabitin, der Frau des Toten, erworben, um den Namen des Toten über seinem Erbteil aufzurichten.“\tDas Erwerben wird auch „von Ruth“ ausgesagt; die Vorlage formuliert stattdessen, dass Ruth genommen werden müsse."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/08_RUT/RUT_004.tsv",
+    "old_row": "13\tИ взял Вооз Руфь, и стала она ему женой; и вошёл он к ней, и дал Господь ей зачатие, и родила она сына.\tДано зачатие, не уже беременность.",
+    "new_row": "13\tИ взял Вооз Руфь, и стала она ему женой; и вошёл он к ней, и дал Господь ей зачатие, и родила она сына.\tБлизко к еврейскому."
+  }
+]

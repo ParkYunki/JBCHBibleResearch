@@ -1,0 +1,660 @@
+[
+  {
+    "path": "Tools/LiteralGen/outputs/ru/12_2KI/2KI_001.tsv",
+    "verse": 9,
+    "old_row": "9\tИ он послал к нему начальника пятидесяти и его пятьдесят. И тот поднялся к нему, и вот, он сидит на вершине горы; и он говорил ему: «Человек Бога, царь сказал: Сойди!»\tЧисло пятьдесят выражено прямо; имя Илии здесь не повторено.",
+    "new_row": "9\tИ он послал к нему начальника пятидесяти и его пятьдесят человек. И тот поднялся к нему, и вот, он сидит на вершине горы; и он говорил ему: «Человек Бога, царь сказал: Сойди!»\tЧисло пятьдесят выражено прямо; имя Илии здесь не повторено."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/12_2KI/2KI_001.tsv",
+    "verse": 10,
+    "old_row": "10\tИ Илия ответил и говорил начальнику пятидесяти: «И если я человек Бога, пусть сойдёт огонь с неба и пожрёт тебя и твоих пятьдесят!» И сошёл огонь с неба и пожрал его и его пятьдесят.\tБлизко к еврейскому.",
+    "new_row": "10\tИ Илия ответил и говорил начальнику пятидесяти: «И если я человек Бога, пусть сойдёт огонь с неба и пожрёт тебя и твоих пятьдесят человек!» И сошёл огонь с неба и пожрал его и его пятьдесят человек.\tБлизко к еврейскому."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/12_2KI/2KI_001.tsv",
+    "verse": 11,
+    "old_row": "11\tИ он снова послал к нему другого начальника пятидесяти и его пятьдесят. И тот ответил и говорил ему: «Человек Бога, так говорит царь: Быстро сойди!»\tНет отдельного слова царь как подлежащего; ответ назван прямо.",
+    "new_row": "11\tИ он снова послал к нему другого начальника пятидесяти и его пятьдесят человек. И тот ответил и говорил ему: «Человек Бога, так говорит царь: Быстро сойди!»\tНет отдельного слова царь как подлежащего; ответ назван прямо."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/12_2KI/2KI_001.tsv",
+    "verse": 12,
+    "old_row": "12\tИ Илия ответил и говорил им: «Если я человек Бога, пусть сойдёт огонь с неба и пожрёт тебя и твоих пятьдесят!» И огонь Бога сошёл с неба и пожрал его и его пятьдесят.\tИлия говорит им, во множественном числе.",
+    "new_row": "12\tИ Илия ответил и говорил им: «Если я человек Бога, пусть сойдёт огонь с неба и пожрёт тебя и твоих пятьдесят человек!» И огонь Бога сошёл с неба и пожрал его и его пятьдесят человек.\tИлия говорит им, во множественном числе."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/12_2KI/2KI_001.tsv",
+    "verse": 13,
+    "old_row": "13\tИ он снова послал третьего начальника пятидесяти и его пятьдесят. И третий начальник пятидесяти поднялся и пришёл, и преклонил свои колени перед Илиёй, и умолял его, и говорил ему: «Человек Бога, пусть, пожалуйста, моя душа и душа этих твоих рабов, пятидесяти, будет драгоценна в твоих глазах!\tПросьба выражена положительно: душа должна быть драгоценна в его глазах, а не не презрена.",
+    "new_row": "13\tИ он снова послал третьего начальника пятидесяти и его пятьдесят человек. И третий начальник пятидесяти поднялся и пришёл, и преклонил свои колени перед Илиёй, и умолял его, и говорил ему: «Человек Бога, пусть, пожалуйста, моя душа и душа этих твоих рабов, пятидесяти человек, будут драгоценны в твоих глазах!\tПросьба выражена положительно: душа должна быть драгоценна в его глазах, а не не презрена."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/12_2KI/2KI_001.tsv",
+    "verse": 14,
+    "old_row": "14\tВот, огонь сошёл с неба и пожрал первых двух начальников пятидесяти и их пятьдесят; и теперь пусть моя душа будет драгоценна в твоих глазах!»\tДуша должна быть драгоценна в его глазах.",
+    "new_row": "14\tВот, огонь сошёл с неба и пожрал первых двух начальников пятидесяти и их пятьдесят человек; и теперь пусть моя душа будет драгоценна в твоих глазах!»\tДуша должна быть драгоценна в его глазах."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/12_2KI/2KI_003.tsv",
+    "verse": 23,
+    "old_row": "23\tUnd sie sagten: „Das ist Blut! Die Könige haben einander gewiss vernichtet, und sie haben einer den anderen geschlagen; und nun zur Beute, Moab!“\tDas Vernichten ist verstärkt; ein Schwert wird hier nicht eigens genannt.",
+    "new_row": "23\tUnd sie sagten: „Das ist Blut! Die Könige sind gewiss vernichtet worden, und sie haben einer den anderen geschlagen; und nun zur Beute, Moab!“\tDas Vernichten ist verstärkt; ein Schwert wird hier nicht eigens genannt."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/12_2KI/2KI_003.tsv",
+    "verse": 23,
+    "old_row": "23\tИ они сказали: «Это кровь! Цари непременно истребили друг друга и поразили каждый своего ближнего; и теперь на добычу, Моав!»\tИстребление усилено повтором глагола.",
+    "new_row": "23\tИ они сказали: «Это кровь! Цари непременно истреблены и поразили каждый своего ближнего; и теперь на добычу, Моав!»\tИстребление усилено повтором глагола."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/en/12_2KI/2KI_003.tsv",
+    "verse": 23,
+    "old_row": "23\t=\tClose to the Hebrew.",
+    "new_row": "23\t=\tThe Hebrew describes the kings as destroyed, using a passive verb, and then says each struck his neighbor; BSB describes clashing swords and slaughtering one another."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/12_2KI/2KI_009_1.tsv",
+    "verse": 8,
+    "old_row": "8\tUnd das ganze Haus Ahab wird umkommen; und ich werde von Ahab jeden, der an die Wand uriniert, abschneiden, den Eingeschlossenen und den Verlassenen in Israel.\tDas Bild des an die Wand Urinierenden bleibt erhalten.",
+    "new_row": "8\tUnd das ganze Haus Ahabs wird umkommen; und ich werde von Ahab jeden, der an die Wand uriniert, abschneiden, den Eingeschlossenen und den Verlassenen in Israel.\tDas Bild des an die Wand Urinierenden bleibt erhalten."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/12_2KI/2KI_009_1.tsv",
+    "verse": 9,
+    "old_row": "9\tUnd ich werde das Haus Ahab wie das Haus Jerobeams, des Sohnes Nebats, und wie das Haus Baesas, des Sohnes Ahias, machen.\tNah am Hebräischen.",
+    "new_row": "9\tUnd ich werde das Haus Ahabs wie das Haus Jerobeams, des Sohnes Nebats, und wie das Haus Baesas, des Sohnes Ahias, machen.\tNah am Hebräischen."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/12_2KI/2KI_010_1.tsv",
+    "verse": 10,
+    "old_row": "10\tErkennt also, dass nichts vom Wort des HERRN zur Erde fallen wird, das der HERR gegen das Haus Ahab geredet hat; und der HERR hat getan, was er durch die Hand seines Knechtes Elia geredet hat.“\tDas Nichtfallen ist zukünftig; die Hand Elias bleibt erhalten.",
+    "new_row": "10\tErkennt also, dass nichts vom Wort des HERRN zur Erde fallen wird, das der HERR gegen das Haus Ahabs geredet hat; und der HERR hat getan, was er durch die Hand seines Knechtes Elia geredet hat.“\tDas Nichtfallen ist zukünftig; die Hand Elias bleibt erhalten."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/12_2KI/2KI_010_1.tsv",
+    "verse": 11,
+    "old_row": "11\tUnd Jehu schlug alle, die vom Haus Ahab in Jesreel übrig waren, und alle seine Großen und seine Bekannten und seine Priester, bis er ihm keinen Entronnenen übrig ließ.\tNah am Hebräischen.",
+    "new_row": "11\tUnd Jehu schlug alle, die vom Haus Ahabs in Jesreel übrig waren, und alle seine Großen und seine Bekannten und seine Priester, bis er ihm keinen Entronnenen übrig ließ.\tNah am Hebräischen."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/12_2KI/2KI_010_1.tsv",
+    "verse": 30,
+    "old_row": "30\tUnd der HERR sprach zu Jehu: „Weil du gut daran getan hast, das Rechte in meinen Augen zu tun, und nach allem, was in meinem Herzen war, am Haus Ahab gehandelt hast, werden Söhne bis zur vierten Generation dir auf dem Thron Israels sitzen.“\tDas gute Tun, nicht nur der Wille, ist ausdrücklich genannt.",
+    "new_row": "30\tUnd der HERR sprach zu Jehu: „Weil du gut daran getan hast, das Rechte in meinen Augen zu tun, und nach allem, was in meinem Herzen war, am Haus Ahabs gehandelt hast, werden dir Söhne bis zur vierten Generation auf dem Thron Israels sitzen.“\tDas gute Tun, nicht nur der Wille, ist ausdrücklich genannt."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/12_2KI/2KI_013.tsv",
+    "verse": 1,
+    "old_row": "1\tIm dreiundzwanzigsten Jahr Joas, des Sohnes Ahasjas, des Königs Judas, wurde Joahas, der Sohn Jehus, König über Israel in Samaria, siebzehn Jahre.\tNah am Hebräischen.",
+    "new_row": "1\tIm dreiundzwanzigsten Jahr des Joas, des Sohnes Ahasjas, des Königs Judas, wurde Joahas, der Sohn Jehus, König über Israel in Samaria, siebzehn Jahre.\tNah am Hebräischen."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/12_2KI/2KI_013.tsv",
+    "verse": 8,
+    "old_row": "8\tUnd die übrigen Angelegenheiten Joahas und alles, was er tat, und seine Stärke, sind sie nicht im Buch der Tagesereignisse der Könige Israels geschrieben?\tDer Schluss ist eine negative Frage.",
+    "new_row": "8\tUnd die übrigen Angelegenheiten des Joahas und alles, was er tat, und seine Stärke, sind sie nicht im Buch der Tagesereignisse der Könige Israels geschrieben?\tDer Schluss ist eine negative Frage."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/12_2KI/2KI_013.tsv",
+    "verse": 10,
+    "old_row": "10\tIm siebenunddreißigsten Jahr Joas, des Königs Judas, wurde Joas, der Sohn Joahas, König über Israel in Samaria, sechzehn Jahre.\tNah am Hebräischen.",
+    "new_row": "10\tIm siebenunddreißigsten Jahr des Joas, des Königs Judas, wurde Joas, der Sohn des Joahas, König über Israel in Samaria, sechzehn Jahre.\tNah am Hebräischen."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/12_2KI/2KI_013.tsv",
+    "verse": 12,
+    "old_row": "12\tUnd die übrigen Angelegenheiten Joas und alles, was er tat, und seine Stärke, wie er gegen Amazja, den König Judas, kämpfte, sind sie nicht im Buch der Tagesereignisse der Könige Israels geschrieben?\tDer Schluss ist eine negative Frage.",
+    "new_row": "12\tUnd die übrigen Angelegenheiten des Joas und alles, was er tat, und seine Stärke, wie er gegen Amazja, den König Judas, kämpfte, sind sie nicht im Buch der Tagesereignisse der Könige Israels geschrieben?\tDer Schluss ist eine negative Frage."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/12_2KI/2KI_013.tsv",
+    "verse": 22,
+    "old_row": "22\tUnd Hasael, der König Arams, bedrängte Israel alle Tage Joahas.\tGenannt sind alle Tage Joahas, ohne eigenes Verb leben.",
+    "new_row": "22\tUnd Hasael, der König Arams, bedrängte Israel alle Tage des Joahas.\tGenannt sind alle Tage des Joahas, ohne eigenes Verb leben."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/12_2KI/2KI_013.tsv",
+    "verse": 25,
+    "old_row": "25\tUnd Joas, der Sohn Joahas, kehrte zurück und nahm die Städte aus der Hand Benhadads, des Sohnes Hasaels, die er im Krieg aus der Hand seines Vaters Joahas genommen hatte. Dreimal schlug ihn Joas und brachte die Städte Israels zurück.\tDer Sohn Joahas ist ausdrücklich genannt.",
+    "new_row": "25\tUnd Joas, der Sohn des Joahas, kehrte zurück und nahm die Städte aus der Hand Benhadads, des Sohnes Hasaels, die er im Krieg aus der Hand seines Vaters Joahas genommen hatte. Dreimal schlug ihn Joas und brachte die Städte Israels zurück.\tDer Sohn des Joahas ist ausdrücklich genannt."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/12_2KI/2KI_014.tsv",
+    "verse": 1,
+    "old_row": "1\tIm zweiten Jahr Joas, des Sohnes Joahas, des Königs Israels, wurde Amazja, der Sohn Joas, König von Juda.\tNah am Hebräischen.",
+    "new_row": "1\tIm zweiten Jahr des Joas, des Sohnes des Joahas, des Königs Israels, wurde Amazja, der Sohn des Joas, König von Juda.\tNah am Hebräischen."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/12_2KI/2KI_014.tsv",
+    "verse": 8,
+    "old_row": "8\tDamals sandte Amazja Boten zu Joas, dem Sohn Joahas, des Sohnes Jehus, dem König Israels, und ließ sagen: „Komm, wir wollen einander ins Gesicht sehen!“\tDas Gesicht bleibt ausdrücklich erhalten.",
+    "new_row": "8\tDamals sandte Amazja Boten zu Joas, dem Sohn des Joahas, des Sohnes Jehus, dem König Israels, und ließ sagen: „Komm, wir wollen einander ins Gesicht sehen!“\tDas Gesicht bleibt ausdrücklich erhalten."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/12_2KI/2KI_014.tsv",
+    "verse": 13,
+    "old_row": "13\tUnd Amazja, den König Judas, den Sohn Joas, des Sohnes Ahasjas, ergriff Joas, der König Israels, in Beth-Semes; und er kam nach Jerusalem und brach in die Mauer Jerusalems eine Bresche vom Ephraimtor bis zum Ecktor, vierhundert Ellen.\tNah am Hebräischen.",
+    "new_row": "13\tUnd Amazja, den König Judas, den Sohn des Joas, des Sohnes Ahasjas, ergriff Joas, der König Israels, in Beth-Semes; und er kam nach Jerusalem und brach in die Mauer Jerusalems eine Bresche vom Ephraimtor bis zum Ecktor, vierhundert Ellen.\tNah am Hebräischen."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/12_2KI/2KI_014.tsv",
+    "verse": 15,
+    "old_row": "15\tUnd die übrigen Angelegenheiten Joas, die er tat, und seine Stärke und wie er gegen Amazja, den König Judas, kämpfte, sind sie nicht im Buch der Tagesereignisse der Könige Israels geschrieben?\tDer Schluss ist eine negative Frage.",
+    "new_row": "15\tUnd die übrigen Angelegenheiten des Joas, die er tat, und seine Stärke und wie er gegen Amazja, den König Judas, kämpfte, sind sie nicht im Buch der Tagesereignisse der Könige Israels geschrieben?\tDer Schluss ist eine negative Frage."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/12_2KI/2KI_014.tsv",
+    "verse": 17,
+    "old_row": "17\tUnd Amazja, der Sohn Joas, der König Judas, lebte nach dem Tod Joas, des Sohnes Joahas, des Königs Israels, fünfzehn Jahre.\tNah am Hebräischen.",
+    "new_row": "17\tUnd Amazja, der Sohn des Joas, der König Judas, lebte nach dem Tod des Joas, des Sohnes des Joahas, des Königs Israels, fünfzehn Jahre.\tNah am Hebräischen."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/12_2KI/2KI_014.tsv",
+    "verse": 23,
+    "old_row": "23\tIm fünfzehnten Jahr Amazjas, des Sohnes Joas, des Königs Judas, wurde Jerobeam, der Sohn Joas, der König Israels, König in Samaria, einundvierzig Jahre.\tNah am Hebräischen.",
+    "new_row": "23\tIm fünfzehnten Jahr Amazjas, des Sohnes des Joas, des Königs Judas, wurde Jerobeam, der Sohn des Joas, der König Israels, König in Samaria, einundvierzig Jahre.\tNah am Hebräischen."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/12_2KI/2KI_014.tsv",
+    "verse": 27,
+    "old_row": "27\tUnd der HERR hatte nicht davon geredet, den Namen Israels unter dem Himmel auszulöschen; und er rettete sie durch die Hand Jerobeams, des Sohnes Joas.\tDie Hand bleibt ausdrücklich erhalten.",
+    "new_row": "27\tUnd der HERR hatte nicht davon geredet, den Namen Israels unter dem Himmel auszulöschen; und er rettete sie durch die Hand Jerobeams, des Sohnes des Joas.\tDie Hand bleibt ausdrücklich erhalten."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/12_2KI/2KI_009_1.tsv",
+    "verse": 3,
+    "old_row": "3\tUnd nimm den Ölkrug und gieße ihn auf seinen Kopf und sage: ‚So spricht der HERR: Ich habe dich zum König über Israel gesalbt.‘ Und öffne die Tür und flieh und warte nicht!“\tNah am Hebräischen.",
+    "new_row": "3\tUnd nimm den Ölkrug und gieße Öl auf seinen Kopf und sage: ‚So spricht der HERR: Ich habe dich zum König über Israel gesalbt.‘ Und öffne die Tür und flieh und warte nicht!“\tNah am Hebräischen."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/12_2KI/2KI_009_1.tsv",
+    "verse": 3,
+    "old_row": "3\tИ возьми сосуд масла, и вылей на его голову, и скажи: „Так говорит Господь: Я помазал тебя царём над Израилем“. И открой дверь, и беги, и не жди!»\tПомазание выражено совершённым действием.",
+    "new_row": "3\tИ возьми сосуд масла, и вылей масло на его голову, и скажи: „Так говорит Господь: Я помазал тебя царём над Израилем“. И открой дверь, и беги, и не жди!»\tПомазание выражено совершённым действием."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/12_2KI/2KI_009_2.tsv",
+    "verse": 31,
+    "old_row": "31\tUnd Jehu kam ins Tor, und sie sprach: „Ist Friede, Simri, der seinen Herrn getötet hat?“\tSimri ist direkt angeredet; das Töten benennt keine besondere Weise des Würgens.",
+    "new_row": "31\tUnd Jehu kam ins Tor, und sie sprach: „Ist Friede, Simri, du Mörder deines Herrn?“\tSimri ist direkt angeredet."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/12_2KI/2KI_009_2.tsv",
+    "verse": 34,
+    "old_row": "34\tИ он вошёл, и ел, и пил, и сказал: «Посмотрите же за этой проклятой и похороните её, ибо она дочь царя!»\tИмя Ииуя не повторено.",
+    "new_row": "34\tИ он вошёл, и ел, и пил, и сказал: «Позаботьтесь же об этой проклятой и похороните её, ибо она дочь царя!»\tИмя Ииуя не повторено."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/12_2KI/2KI_010_1.tsv",
+    "verse": 9,
+    "old_row": "9\tИ было утром: он вышел, и стал, и сказал всему народу: «Вы праведны! Вот, я составил заговор против моего господина и убил его; а кто поразил всех этих?\tСказано праведны, а не только невиновны; в конце стоит глагол поражения.",
+    "new_row": "9\tИ было утром: он вышел, и стал, и сказал всему народу: «Вы праведны! Вот, я составил заговор против моего господина и убил его; а кто поразил всех этих?\tВ конце стоит глагол поражения."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/12_2KI/2KI_010_1.tsv",
+    "verse": 23,
+    "old_row": "23\tИ вошли Ииуй и Ионадав, сын Рихава, в дом Ваала; и он сказал служителям Ваала: «Поищите и посмотрите, нет ли здесь с вами кого из рабов Господа, а только служители Ваала!»\tДва приказа поиска и наблюдения названы отдельно.",
+    "new_row": "23\tИ вошли Ииуй и Ионадав, сын Рихава, в дом Ваала; и он сказал служителям Ваала: «Поищите и посмотрите, чтобы здесь с вами не было никого из рабов Господа, а были только служители Ваала!»\tДва приказа поиска и наблюдения названы отдельно."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/12_2KI/2KI_011.tsv",
+    "verse": 2,
+    "old_row": "2\tUnd Joseba, die Tochter des Königs Joram, Ahasjas Schwester, nahm Joas, Ahasjas Sohn, und stahl ihn aus der Mitte der Königssöhne, die getötet wurden, ihn und seine Amme in die Bettenkammer; und sie verbargen ihn vor Athalja, und er wurde nicht getötet.\tDie Söhne sind ausdrücklich männlich bezeichnet.",
+    "new_row": "2\tUnd Joseba, die Tochter des Königs Joram, Ahasjas Schwester, nahm Joas, Ahasjas Sohn, und stahl ihn aus der Mitte der Königssöhne, die getötet wurden, und verbarg ihn und seine Amme in der Bettenkammer; und sie verbargen ihn vor Athalja, und er wurde nicht getötet.\tDie Söhne sind ausdrücklich männlich bezeichnet."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/12_2KI/2KI_011.tsv",
+    "verse": 2,
+    "old_row": "2\tИ взяла Иосавеф, дочь царя Иорама, сестра Охозии, Иоаса, сына Охозии, и украла его из среды умерщвляемых сыновей царя, его и его кормилицу в комнату постелей; и они скрыли его от лица Гофолии, и он не был умерщвлён.\tСохранены кража и лицо Гофолии.",
+    "new_row": "2\tИ взяла Иосавеф, дочь царя Иорама, сестра Охозии, Иоаса, сына Охозии, и украла его из среды умерщвляемых сыновей царя и скрыла его и его кормилицу в спальне; и они скрыли его от лица Гофолии, и он не был умерщвлён.\tСохранены кража и лицо Гофолии."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/12_2KI/2KI_011.tsv",
+    "verse": 6,
+    "old_row": "6\tund das Drittel am Tor Sur und das Drittel am Tor hinter den Läufern; und ihr sollt die Wache am Haus zur Abwehr halten.\tMassah ist hier als Zweck der Abwehr wiedergegeben.",
+    "new_row": "6\tund das Drittel am Tor Sur und das Drittel am Tor hinter den Läufern; und ihr sollt die Wache am Haus zur Abwehr halten.\tDie Läufer sind ausdrücklich genannt."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/12_2KI/2KI_011.tsv",
+    "verse": 12,
+    "old_row": "12\tUnd er brachte den Königssohn heraus und gab die Krone und das Zeugnis auf ihn; und sie machten ihn zum König und salbten ihn und schlugen die Handflächen zusammen und sprachen: „Es lebe der König!“\tKrone und Zeugnis haben denselben Verbanschluss; die Königsweihe hat ein pluralisches Subjekt. Der Zuruf wünscht Leben.",
+    "new_row": "12\tUnd er brachte den Königssohn heraus und legte ihm die Krone und das Zeugnis auf; und sie machten ihn zum König und salbten ihn und schlugen die Handflächen zusammen und sprachen: „Es lebe der König!“\tKrone und Zeugnis haben denselben Verbanschluss; die Königsweihe hat ein pluralisches Subjekt. Der Zuruf wünscht Leben."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/12_2KI/2KI_012.tsv",
+    "verse": 5,
+    "old_row": "5\tпусть берут себе священники, каждый от своего знакомого; и они пусть укрепят повреждение дома во всём, где найдётся там повреждение».\tПовреждение дома повторено.",
+    "new_row": "5\tпусть берут себе священники, каждый от своего знакомого; и они пусть устранят повреждение дома во всём, где найдётся там повреждение».\tПовреждение дома повторено."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/12_2KI/2KI_012.tsv",
+    "verse": 6,
+    "old_row": "6\tИ было в двадцать третий год царя Иоаса: священники не укрепили повреждение дома.\tРечь о двадцать третьем годе без отдельного до.",
+    "new_row": "6\tИ было в двадцать третий год царя Иоаса: священники не устранили повреждение дома.\tРечь о двадцать третьем годе без отдельного до."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/12_2KI/2KI_012.tsv",
+    "verse": 7,
+    "old_row": "7\tИ позвал царь Иоас священника Иодая и священников и сказал им: «Почему вы не укрепляете повреждение дома? И теперь не берите серебра от ваших знакомых, а отдайте его на повреждение дома!»\tБлизко к еврейскому.",
+    "new_row": "7\tИ позвал царь Иоас священника Иодая и священников и сказал им: «Почему вы не устраняете повреждение дома? И теперь не берите серебра от ваших знакомых, а отдайте его на устранение повреждения дома!»\tБлизко к еврейскому."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/12_2KI/2KI_012.tsv",
+    "verse": 8,
+    "old_row": "8\tИ согласились священники не брать серебра от народа и не укреплять повреждение дома.\tОтрицание относится и к работе над повреждением.",
+    "new_row": "8\tИ согласились священники не брать серебра от народа и не устранять повреждение дома.\tОтрицание относится и к работе над повреждением."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/12_2KI/2KI_012.tsv",
+    "verse": 10,
+    "old_row": "10\tИ было, когда они видели, что много серебра в ящике: поднимались писец царя и великий священник, и завязывали, и считали серебро, найденное в доме Господа.\tМешки прямо не названы; завязывание предшествует счёту.",
+    "new_row": "10\tИ было, когда они видели, что много серебра в ящике: поднимались писец царя и первосвященник, и завязывали, и считали серебро, найденное в доме Господа.\tМешки прямо не названы; завязывание предшествует счёту."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/12_2KI/2KI_012.tsv",
+    "verse": 12,
+    "old_row": "12\tи делателям стен, и рубящим камень, и на покупку дерева и добытых камней, чтобы укрепить повреждение дома Господа, и на всё, что выходило на дом, для его укрепления.\tСохранён выход расходов на дом.",
+    "new_row": "12\tи делателям стен, и рубящим камень, и на покупку дерева и добытых камней, чтобы устранить повреждение дома Господа, и на всё, что выходило на дом, для его укрепления.\tСохранён выход расходов на дом."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/12_2KI/2KI_012.tsv",
+    "verse": 15,
+    "old_row": "15\tИ не считались с людьми, на чью руку давали серебро, чтобы давать делающим работу, ибо они действовали в верности.\tСохранена рука и действие без расчёта.",
+    "new_row": "15\tИ не требовали отчёта от людей, на чью руку давали серебро, чтобы давать делающим работу, ибо они действовали в верности.\tСохранены рука и отсутствие требования отчёта."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/12_2KI/2KI_012.tsv",
+    "verse": 16,
+    "old_row": "16\tСеребро вины и серебро грехов не приносилось в дом Господа; священникам они принадлежали.\tПри вине и грехах нет отдельного слова жертва; серебро повторено.",
+    "new_row": "16\tСеребро за вину и серебро за грехи не приносилось в дом Господа; священникам они принадлежали.\tПри вине и грехах нет отдельного слова жертва; серебро повторено."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/12_2KI/2KI_012.tsv",
+    "verse": 20,
+    "old_row": "20\tUnd seine Knechte standen auf und verschworen eine Verschwörung und schlugen Joas im Haus Millo, wo es nach Silla hinabgeht.\tJoas ist ausdrücklich genannt; die Verschwörung hat einen wiederholten Wortstamm.",
+    "new_row": "20\tUnd seine Knechte standen auf und schmiedeten eine Verschwörung und schlugen Joas im Haus Millo, wo es nach Silla hinabgeht.\tJoas ist ausdrücklich genannt."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/12_2KI/2KI_014.tsv",
+    "verse": 26,
+    "old_row": "26\tИбо видел Господь бедствие Израиля, весьма горькое, и не было ни заключённого, ни отпущенного, и не было помощника Израилю.\tНазван отпущенный, без отдельного оставшегося.",
+    "new_row": "26\tИбо видел Господь бедствие Израиля, весьма горькое, и не было ни заключённого, ни отпущенного, и не было помощника Израилю.\tБедствие названо весьма горьким; дважды прямо выражено отсутствие людей."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/12_2KI/2KI_015_1.tsv",
+    "verse": 7,
+    "old_row": "7\tИ лёг Азария с отцами своими, и похоронили его с отцами своими в городе Давида; и воцарился его сын Иофам вместо него.\tСохранён образ лежания.",
+    "new_row": "7\tИ лёг Азария с отцами своими, и похоронили его с его отцами в городе Давида; и воцарился его сын Иофам вместо него.\tСохранён образ лежания."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/12_2KI/2KI_015_1.tsv",
+    "verse": 12,
+    "old_row": "12\tЭто слово Господа, которое Он изрёк Ииую: «Сыновья до четвёртого поколения будут сидеть тебе на престоле Израиля». И было так.\tСохранено тебе; в конце отдельно сказано и было так.",
+    "new_row": "12\tЭто слово Господа, которое Он изрёк Ииую: «Сыновья до четвёртого поколения будут сидеть для тебя на престоле Израиля». И было так.\tСохранено тебе; в конце отдельно сказано и было так."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/12_2KI/2KI_015_1.tsv",
+    "verse": 13,
+    "old_row": "13\tСеллум, сын Иависа, воцарился в тридцать девятый год Азарии, царя Иуды, и царствовал месяц дней в Самарии.\tСохранено выражение месяц дней.",
+    "new_row": "13\tСеллум, сын Иависа, воцарился в тридцать девятый год Азарии, царя Иуды, и царствовал полный месяц в Самарии.\tБлизко к еврейскому."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/12_2KI/2KI_010_2.tsv",
+    "verse": 32,
+    "old_row": "32\tIn jenen Tagen begann der HERR, an Israel abzuschneiden; und Hasael schlug sie im ganzen Gebiet Israels,\tDer Anschluss ist und, nicht denn.",
+    "new_row": "32\tIn jenen Tagen begann der HERR, Teile von Israel abzuschneiden; und Hasael schlug sie im ganzen Gebiet Israels,\tDer Anschluss ist und, nicht denn."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/12_2KI/2KI_010_2.tsv",
+    "verse": 32,
+    "old_row": "32\tВ те дни Господь начал отсекать у Израиля; и поразил их Азаил во всём пределе Израиля,\tБлизко к еврейскому.",
+    "new_row": "32\tВ те дни Господь начал отсекать части от Израиля; и поразил их Азаил во всём пределе Израиля,\tБлизко к еврейскому."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/12_2KI/2KI_011.tsv",
+    "verse": 3,
+    "old_row": "3\tИ был он с нею в доме Господа скрывающимся шесть лет; а Гофолия царствовала над землёй.\tОн скрывается; причастие не является страдательным.",
+    "new_row": "3\tИ скрывался он с нею в доме Господа шесть лет; а Гофолия царствовала над землёй.\tОн скрывается; причастие не является страдательным."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/12_2KI/2KI_011.tsv",
+    "verse": 5,
+    "old_row": "5\tИ он приказал им: «Вот дело, которое вы сделаете: треть из вас, приходящих в субботу, будет хранить стражу царского дома,\tБлизко к еврейскому.",
+    "new_row": "5\tИ он приказал им: «Вот дело, которое вы сделаете: треть из вас, приходящих в субботу, будет нести стражу царского дома,\tБлизко к еврейскому."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/12_2KI/2KI_011.tsv",
+    "verse": 6,
+    "old_row": "6\tи треть у ворот Сур, и треть у ворот позади бегунов; и храните стражу дома для отвращения нападения.\tПрямо названы бегуны.",
+    "new_row": "6\tи треть у ворот Сур, и треть у ворот позади бегунов; и несите стражу дома для охраны.\tПрямо названы бегуны."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/12_2KI/2KI_011.tsv",
+    "verse": 7,
+    "old_row": "7\tА две части из вас, все уходящие в субботу, пусть хранят стражу дома Господа при царе.\tБлизко к еврейскому.",
+    "new_row": "7\tА две части из вас, все уходящие в субботу, пусть несут стражу дома Господа при царе.\tБлизко к еврейскому."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/12_2KI/2KI_011.tsv",
+    "verse": 17,
+    "old_row": "17\tИ заключил Иодай завет между Господом, и царём, и народом, чтобы быть народом Господа, и между царём и народом.\tБлизко к еврейскому.",
+    "new_row": "17\tИ заключил Иодай завет между Господом, и царём, и народом, чтобы они были народом Господа, и между царём и народом.\tБлизко к еврейскому."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/12_2KI/2KI_016.tsv",
+    "verse": 19,
+    "old_row": "19\tUnd die übrigen Angelegenheiten Ahas, die er tat, sind sie nicht im Buch der Tagesereignisse der Könige Judas geschrieben?\tDer Schluss ist eine negative Frage.",
+    "new_row": "19\tUnd die übrigen Angelegenheiten des Ahas, die er tat, sind sie nicht im Buch der Tagesereignisse der Könige Judas geschrieben?\tDer Schluss ist eine negative Frage."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/12_2KI/2KI_016.tsv",
+    "verse": 15,
+    "old_row": "15\tИ приказал царь Ахаз священнику Урии: «На большом жертвеннике воскуряй утреннее всесожжение, и вечернее хлебное приношение, и всесожжение царя, и его хлебное приношение, и всесожжение всего народа земли, и их хлебное приношение, и их возлияния; и всю кровь всесожжения, и всю кровь жертвы кропи на него. А медный жертвенник будет мне для исследования».\tВозлияния имеют множественное число; в конце названо исследование.",
+    "new_row": "15\tИ приказал царь Ахаз священнику Урии: «На большом жертвеннике воскуряй утреннее всесожжение, и вечернее хлебное приношение, и всесожжение царя, и его хлебное приношение, и всесожжение всего народа земли, и их хлебное приношение, и их возлияния; и всей кровью всесожжения, и всей кровью жертвы окропляй его. А медный жертвенник будет мне для исследования».\tВозлияния имеют множественное число."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/12_2KI/2KI_017_1.tsv",
+    "verse": 1,
+    "old_row": "1\tВ двенадцатый год Ахаза, царя Иудейского, воцарился Осия, сын Илы, в Самарии над Израилем на девять лет.\tБлизко к еврейскому.",
+    "new_row": "1\tВ двенадцатый год Ахаза, царя Иудейского, воцарился Осия, сын Илы, в Самарии над Израилем и царствовал девять лет.\tБлизко к еврейскому.",
+    "reason": "Avoid implying an advance fixed term of appointment; express duration idiomatically."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/12_2KI/2KI_017_1.tsv",
+    "verse": 16,
+    "old_row": "16\tUnd sie verließen alle Gebote des HERRN, ihres Gottes, und machten sich ein Gussbild, zwei Kälber, und machten ein Ascherabild und warfen sich vor dem ganzen Heer des Himmels nieder und dienten Baal.\tNah am Hebräischen.",
+    "new_row": "16\tUnd sie verließen alle Gebote des HERRN, ihres Gottes, und machten sich ein Gussbild, zwei Kälber, und machten ein Ascherabild und warfen sich vor dem ganzen Heer des Himmels nieder und dienten Baal.\tEin Gussbild wird im Singular genannt, dann zwei Kälber; das Anfertigen wird vor dem Ascherabild wiederholt.",
+    "reason": "Definite singular/plural and repeated verb contrast."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/12_2KI/2KI_017_1.tsv",
+    "verse": 25,
+    "old_row": "25\tUnd es geschah zu Beginn ihres Wohnens dort: Sie fürchteten den HERRN nicht. Da sandte der HERR die Löwen unter sie, und diese töteten unter ihnen.\tNah am Hebräischen.",
+    "new_row": "25\tUnd es geschah zu Beginn ihres Wohnens dort: Sie fürchteten den HERRN nicht. Da sandte der HERR die Löwen unter sie, und diese töteten einige von ihnen.\tNah am Hebräischen.",
+    "reason": "Minimal object supplement makes German transitive killing clause grammatical."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/12_2KI/2KI_017_1.tsv",
+    "verse": 25,
+    "old_row": "25\tИ было в начале их поселения там: они не боялись Господа. И послал Господь к ним львов, и те убивали среди них.\tБлизко к еврейскому.",
+    "new_row": "25\tИ было в начале их поселения там: они не боялись Господа. И послал Господь к ним львов, и те убивали некоторых из них.\tБлизко к еврейскому.",
+    "reason": "Minimal object supplement makes the killing clause idiomatic."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/12_2KI/2KI_017_2.tsv",
+    "verse": 31,
+    "old_row": "31\tUnd die von Avva machten Nibehas und Tharthak, und die von Sepharvaim verbrannten ihre Söhne im Feuer für Adrammelech und Anammelech, die Götter von Sepharvaim.\tNah am Hebräischen.",
+    "new_row": "31\tUnd die von Avva machten Nibehas und Tharthak, und die von Sepharvaim verbrannten ihre Söhne im Feuer für Adrammelech und Anammelech, die Götter von Sepharvaim.\tDas Verbrennen wird ausdrücklich mit dem Feuer verbunden.",
+    "reason": "Target omits explicit fire."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/12_2KI/2KI_017_2.tsv",
+    "verse": 34,
+    "old_row": "34\tДо сего дня они поступают по прежним обычаям. Они не боятся Господа и не поступают по своим уставам и по своему праву, и по закону, и по заповеди, которую Господь заповедал сынам Иакова, которому дал имя Израиля.\tБлизко к еврейскому.",
+    "new_row": "34\tДо сего дня они поступают по прежним обычаям. Они не боятся Господа и не поступают по своим уставам и по своему праву, и по закону, и по заповеди, которую Господь заповедал сынам Иакова, которому дал имя Израиля.\tЗакон и заповедь стоят в единственном числе.",
+    "reason": "Target has plural commandments."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/12_2KI/2KI_019_1.tsv",
+    "verse": 21,
+    "old_row": "21\tDies ist das Wort, das der HERR über ihn geredet hat: Dich verachtet, dich verspottet die Jungfrau, die Tochter Zion; hinter dir schüttelt den Kopf die Tochter Jerusalem.\tNah am Hebräischen.",
+    "new_row": "21\tDies ist das Wort, das der HERR über ihn geredet hat: Dich hat die Jungfrau, die Tochter Zion, verachtet und verspottet; hinter dir hat die Tochter Jerusalem den Kopf geschüttelt.\tDas Verachten, Verspotten und Kopfschütteln stehen in vollendeten Verbformen.",
+    "reason": "Preserve completed Hebrew forms as already retained in Russian."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/12_2KI/2KI_020.tsv",
+    "verse": 18,
+    "old_row": "18\tИ из сыновей твоих, которые произойдут от тебя, которых ты родишь, возьмут, и будут они евнухами во дворце царя Вавилонского».\tБлизко к еврейскому.",
+    "new_row": "18\tИ из сыновей твоих, которые произойдут от тебя, которых ты породишь, возьмут, и будут они евнухами во дворце царя Вавилонского».\tБлизко к еврейскому.",
+    "reason": "Male father begets rather than gives birth."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/12_2KI/2KI_021.tsv",
+    "verse": 6,
+    "old_row": "6\tИ провёл сына своего через огонь, и гадал, и волхвовал, и занимался вызыванием мёртвых и волшебниками. Много делал зла в очах Господа, чтобы прогневать Его.\tБлизко к еврейскому.",
+    "new_row": "6\tИ провёл сына своего через огонь, и гадал, и волхвовал, и прибегал к вызыванию мёртвых и к волшебникам. Много делал зла в очах Господа, чтобы прогневать Его.\tБлизко к еврейскому.",
+    "reason": "Use a natural government for both coordinated terms."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/12_2KI/2KI_023_1.tsv",
+    "verse": 13,
+    "old_row": "13\tUnd die Höhen vor Jerusalem, rechts vom Berg des Verderbens, die Salomo, der König von Israel, für Asthoreth, den Scheusal der Sidonier, und für Kamos, den Scheusal Moabs, und für Milkom, den Gräuel der Söhne Ammons, gebaut hatte, verunreinigte der König.\tNah am Hebräischen.",
+    "new_row": "13\tUnd die Höhen vor Jerusalem, rechts vom Berg des Verderbens, die Salomo, der König von Israel, für Asthoreth, das Scheusal der Sidonier, und für Kamos, das Scheusal Moabs, und für Milkom, den Gräuel der Söhne Ammons, gebaut hatte, verunreinigte der König.\tNah am Hebräischen.",
+    "reason": "Scheusal is neuter."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/12_2KI/2KI_023_1.tsv",
+    "verse": 19,
+    "old_row": "19\tUnd auch alle Häuser der Höhen in den Städten Samarias, die die Könige von Israel gemacht hatten, um zu erzürnen, entfernte Josia; und er tat ihnen nach all den Taten, die er in Beth-El getan hatte.\tNah am Hebräischen.",
+    "new_row": "19\tUnd auch alle Häuser der Höhen in den Städten Samarias, die die Könige von Israel gemacht hatten, um Zorn zu erregen, entfernte Josia; und er tat ihnen nach all den Taten, die er in Beth-El getan hatte.\tNah am Hebräischen.",
+    "reason": "Natural German expression without inserting an explicit object absent from O."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/12_2KI/2KI_023_1.tsv",
+    "verse": 19,
+    "old_row": "19\tИ также все дома высот в городах Самарии, которые цари Израильские сделали, чтобы прогневать, удалил Иосия; и сделал с ними согласно всем делам, которые сделал в Вефиле.\tГосподь как объект гнева прямо не назван; удаление не выражено как разрушение.",
+    "new_row": "19\tИ также все дома высот в городах Самарии, которые цари Израильские сделали, чтобы вызвать гнев, удалил Иосия; и сделал с ними согласно всем делам, которые сделал в Вефиле.\tГосподь как объект гнева прямо не назван; удаление не выражено как разрушение.",
+    "reason": "Natural Russian without an omitted required object."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/12_2KI/2KI_024.tsv",
+    "verse": 1,
+    "old_row": "1\tВ его дни поднялся Навуходоносор, царь Вавилонский, и был Иоаким его рабом три года; потом повернул и восстал против него.\tСлужение названо рабством; поворот и восстание выражены отдельно.",
+    "new_row": "1\tВ его дни поднялся Навуходоносор, царь Вавилонский, и был Иоаким его рабом три года; потом повернулся и восстал против него.\tСлужение названо рабством; поворот и восстание выражены отдельно.",
+    "reason": "Intransitive turn requires reflexive Russian form."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/12_2KI/2KI_001.tsv",
+    "old_row": "2\tUnd Ahasja fiel durch das Gitter in seinem Obergemach in Samaria und wurde krank; und er sandte Boten und sagte zu ihnen: „Geht, befragt Baal-Sebub, den Gott Ekrons, ob ich von dieser Krankheit leben werde!“\tNah am Hebräischen.",
+    "new_row": "2\tUnd Ahasja fiel durch das Gitter in seinem Obergemach in Samaria und wurde krank; und er sandte Boten und sagte zu ihnen: „Geht, befragt Baal-Sebub, den Gott Ekrons, ob ich nach dieser Krankheit leben werde!“\tNah am Hebräischen."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/12_2KI/2KI_002.tsv",
+    "old_row": "3\tUnd die Söhne der Propheten in Beth-El kamen zu Elisa heraus und sagten zu ihm: „Weißt du, dass der HERR heute deinen Herrn von über deinem Kopf wegnimmt?“ Und er sagte: „Auch ich weiß es; schweigt!“\tDie Propheten werden als Väter von Söhnen bezeichnet; Kopf steht in der Einzahl.",
+    "new_row": "3\tUnd die Söhne der Propheten in Beth-El kamen zu Elisa heraus und sagten zu ihm: „Weißt du, dass der HERR heute deinen Herrn von über deinem Kopf wegnimmt?“ Und er sagte: „Auch ich weiß es; schweigt!“\tDie Bezeichnung „Söhne der Propheten“ bleibt wörtlich erhalten; Kopf steht im Hebräischen in der Einzahl."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/12_2KI/2KI_003.tsv",
+    "old_row": "3\tNur an den Sünden Jerobeams, des Sohnes Nebats, der Israel sündigen gemacht hatte, hing er; er wich nicht davon ab.\tNah am Hebräischen.",
+    "new_row": "3\tNur an den Sünden Jerobeams, des Sohnes Nebats, der Israel zum Sündigen gebracht hatte, hing er; er wich nicht davon ab.\tNah am Hebräischen."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/12_2KI/2KI_004_2.tsv",
+    "old_row": "40\tИ они налили мужчинам есть; и было, когда они ели похлёбку, они закричали и сказали: «Смерть в котле, человек Бога!» И они не могли есть.\tБлизко к еврейскому.",
+    "new_row": "40\tИ они налили мужчинам похлёбки для еды; и было, когда они ели похлёбку, они закричали и сказали: «Смерть в котле, человек Бога!» И они не могли есть.\tБлизко к еврейскому."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/12_2KI/2KI_002.tsv",
+    "old_row": "21\tUnd er ging zur Quelle des Wassers hinaus und warf Salz hinein und sagte: „So spricht der HERR: Ich habe dieses Wasser geheilt; von dort wird nicht mehr Tod und Fehlgeburt kommen.“\tNeben dem Tod wird das Verursachen von Fehlgeburten genannt.",
+    "new_row": "21\tUnd er ging zur Quelle des Wassers hinaus und warf Salz hinein und sagte: „So spricht der HERR: Ich habe dieses Wasser geheilt; von dort werden nicht mehr Tod und Fehlgeburt kommen.“\tNeben dem Tod wird das Verursachen von Fehlgeburten genannt."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/12_2KI/2KI_004_1.tsv",
+    "old_row": "16\tUnd er sagte: „Zu dieser bestimmten Zeit, wenn die Zeit wieder auflebt, wirst du einen Sohn umarmen.“ Und sie sagte: „Nein, mein Herr, Mann Gottes, belüge deine Magd nicht!“\tDie Zeitangabe enthält das Bild wiederauflebender Zeit, ohne eigenes Wort für Jahr.",
+    "new_row": "16\tUnd er sagte: „Zu dieser bestimmten Zeit, wenn diese Zeit wiederkehrt, wirst du einen Sohn umarmen.“ Und sie sagte: „Nein, mein Herr, Mann Gottes, belüge deine Magd nicht!“\tDie hebräische Zeitangabe wird ohne ein ausdrücklich genanntes Jahr wiedergegeben; Luther nennt das Jahr."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/12_2KI/2KI_004_1.tsv",
+    "old_row": "16\tИ он сказал: «В этот срок, когда оживёт время, ты будешь обнимать сына». И она сказала: «Нет, мой господин, человек Бога, не лги твоей рабе!»\tВремя выражено образом оживающего времени, без отдельного слова год.",
+    "new_row": "16\tИ он сказал: «В этот срок, когда это время вновь наступит, ты будешь обнимать сына». И она сказала: «Нет, мой господин, человек Бога, не лги твоей рабе!»\tЕврейское указание времени передано без отдельного слова «год»; Синодальный перевод прямо называет год."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/12_2KI/2KI_004_1.tsv",
+    "old_row": "17\tUnd die Frau wurde schwanger und gebar einen Sohn zu dieser bestimmten Zeit, wenn die Zeit wieder auflebte, wie Elisa zu ihr geredet hatte.\tDie Zeitangabe enthält das Bild wiederauflebender Zeit.",
+    "new_row": "17\tUnd die Frau wurde schwanger und gebar einen Sohn zu dieser bestimmten Zeit, als diese Zeit wiederkehrte, wie Elisa zu ihr geredet hatte.\tDie hebräische Zeitangabe wird ohne ein ausdrücklich genanntes Jahr wiedergegeben; Luther nennt das Jahr."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/12_2KI/2KI_004_1.tsv",
+    "old_row": "17\tИ женщина зачала и родила сына в этот срок, когда ожило время, как Елисей говорил ей.\tСохранён образ оживающего времени.",
+    "new_row": "17\tИ женщина зачала и родила сына в этот срок, когда это время вновь наступило, как Елисей говорил ей.\tЕврейское указание времени передано без отдельного слова «год»; Синодальный перевод прямо называет год."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/12_2KI/2KI_018_1.tsv",
+    "old_row": "21\tNun siehe, du vertraust auf diesen Stab aus geknicktem Rohr, auf Ägypten; wenn ein Mann sich darauf stützt, dringt er ihm in die Handfläche und durchbohrt sie. So ist Pharao, der König von Ägypten, für alle, die auf ihn vertrauen.\tNah am Hebräischen.",
+    "new_row": "21\tNun siehe, du vertraust auf diesen Stab aus geknicktem Rohr, auf Ägypten; wenn ein Mann sich darauf stützt, dringt er ihm in die Handfläche ein und durchbohrt sie. So ist Pharao, der König von Ägypten, für alle, die auf ihn vertrauen.\tNah am Hebräischen."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/12_2KI/2KI_017_1.tsv",
+    "old_row": "23\tbis der HERR Israel von seinem Angesicht entfernte, wie er durch die Hand aller seiner Knechte, der Propheten, geredet hatte. Und Israel wurde von seinem Boden nach Assyrien weggeführt bis auf diesen Tag.\tNah am Hebräischen.",
+    "new_row": "23\tbis der HERR Israel von seinem Angesicht entfernte, wie er durch die Hand aller seiner Knechte, der Propheten, geredet hatte. Und Israel ging von seinem Boden weg nach Assyrien in die Verbannung bis auf diesen Tag.\tNah am Hebräischen."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/12_2KI/2KI_017_1.tsv",
+    "old_row": "23\tпока Господь не удалил Израиля от лица Своего, как говорил через руку всех рабов Своих, пророков. И был выселен Израиль со своей земли в Ассирию до сего дня.\tБлизко к еврейскому.",
+    "new_row": "23\tпока Господь не удалил Израиля от лица Своего, как говорил через руку всех рабов Своих, пророков. И ушёл Израиль со своей земли в изгнание в Ассирию до сего дня.\tБлизко к еврейскому."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/12_2KI/2KI_009_1.tsv",
+    "old_row": "2\tИ приди туда, и посмотри там Ииуя, сына Иосафата, сына Намессия; и приди, и подними его из среды его братьев, и введи его в комнату внутри комнаты.\tБлизко к еврейскому.",
+    "new_row": "2\tИ приди туда, и поищи там Ииуя, сына Иосафата, сына Намессия; и приди, и подними его из среды его братьев, и введи его в комнату внутри комнаты.\tБлизко к еврейскому."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/12_2KI/2KI_010_1.tsv",
+    "old_row": "3\tпосмотрите доброго и прямого из сыновей вашего господина, и поставьте его на престол его отца, и сражайтесь за дом вашего господина!»\tСохранены доброе и прямое.",
+    "new_row": "3\tвыберите доброго и прямого из сыновей вашего господина, и поставьте его на престол его отца, и сражайтесь за дом вашего господина!»\tСохранены доброе и прямое."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/12_2KI/2KI_010_1.tsv",
+    "old_row": "26\tИ они вынесли столбы дома Ваала и сожгли их.\tСтолбы, не статуи, названы во множественном числе.",
+    "new_row": "26\tИ они вынесли столбы дома Ваала и сожгли её.\tСтолбы, не статуи, названы во множественном числе."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/12_2KI/2KI_012.tsv",
+    "old_row": "19\tUnd die übrigen Angelegenheiten Joas und alles, was er tat, sind sie nicht im Buch der Tagesereignisse der Könige Judas geschrieben?\tDer Schluss hat die Form einer negativen Frage.",
+    "new_row": "19\tUnd die übrigen Angelegenheiten des Joas und alles, was er tat, sind sie nicht im Buch der Tagesereignisse der Könige Judas geschrieben?\tDer Schluss hat die Form einer negativen Frage."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/en/12_2KI/2KI_009_2.tsv",
+    "old_row": "31\t=\tThe Hebrew explicitly repeats Jehu as the entrant; BSB uses his name but frames the brief peace question as coming in peace.",
+    "new_row": "31\t=\tThe Hebrew asks briefly whether there is peace; BSB expands this to asking whether Jehu has come in peace."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/en/12_2KI/2KI_012.tsv",
+    "old_row": "21\t=\tThe Hebrew uses separate striking and dying verbs and active plural burial agents.",
+    "new_row": "21\t=\tClose to the Hebrew."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/en/12_2KI/2KI_004_1.tsv",
+    "old_row": "15\t=\tThe Hebrew leaves both male speakers unnamed; BSB names Elisha and Gehazi.",
+    "new_row": "15\t=\tThe Hebrew leaves both male actors unnamed; BSB identifies the speaker as Elisha and the one calling the woman as Gehazi."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/en/12_2KI/2KI_005.tsv",
+    "verse": 13,
+    "old_row": "13\t=\tThe Hebrew leaves the servants master unnamed; BSB supplies Naaman.",
+    "new_row": "13\t=\tThe Hebrew leaves the servants’ master unnamed; BSB supplies Naaman."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/en/12_2KI/2KI_006_1.tsv",
+    "verse": 10,
+    "old_row": "10\t=\tThe Hebrew says not once and not twice and leaves the warning subject unnamed; BSB says Time and again and names Elisha.",
+    "new_row": "10\t=\tThe Hebrew says “not once and not twice” and identifies the warning source as the man of God; BSB says “Time and again” and names Elisha."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/en/12_2KI/2KI_008.tsv",
+    "verse": 21,
+    "old_row": "21\t=\tThe Hebrew says the people fled to their tents; BSB says his troops fled to their homes.",
+    "new_row": "21\t=\tThe Hebrew includes the chariot commanders among those he struck; BSB includes them among those surrounded. It says the people fled to their tents, where BSB says his troops fled to their homes."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/en/12_2KI/2KI_008.tsv",
+    "verse": 27,
+    "old_row": "27\t=\tThe Hebrew leaves the man unnamed, uses singular way, and repeats the house of Ahab three times; BSB supplies Ahaziah, uses plural ways, and replaces the last house with a pronoun.",
+    "new_row": "27\t=\tThe Hebrew leaves the man unnamed and uses singular “way”; BSB supplies Ahaziah and uses plural “ways.”"
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/en/12_2KI/2KI_013.tsv",
+    "verse": 23,
+    "old_row": "23\t=\tThe Hebrew first uses a pronoun for those favored and later leaves the unwilling subject implicit; BSB supplies Israel and repeats the LORD.",
+    "new_row": "23\t=\tThe Hebrew says He was unwilling to destroy them and separately states He had not cast them from His face. BSB places both destroying and casting under His unwillingness."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/en/12_2KI/2KI_014.tsv",
+    "verse": 26,
+    "old_row": "26\t=\tThe Hebrew explicitly says there was none restrained and none abandoned; BSB describes both slave and free as afflicted.",
+    "new_row": "26\t=\tThe Hebrew explicitly says there was no one in each of the two groups; BSB describes both groups as afflicted."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/en/12_2KI/2KI_015_1.tsv",
+    "verse": 4,
+    "old_row": "4\t=\tClose to the Hebrew.",
+    "new_row": "4\t=\tThe Hebrew repeats the high places as the location of sacrifice and burning incense; BSB uses there."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/en/12_2KI/2KI_015_1.tsv",
+    "verse": 14,
+    "old_row": "14\t=\tClose to the Hebrew.",
+    "new_row": "14\t=\tThe Hebrew separately states going up and coming and repeats Samaria as the place of the attack; BSB condenses the movement and names Samaria once."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/en/12_2KI/2KI_016.tsv",
+    "verse": 9,
+    "old_row": "9\t=\tClose to the Hebrew.",
+    "new_row": "9\t=\tThe Hebrew repeats the king of Assyria and makes Damascus itself the object of deportation; BSB uses he and explicitly supplies its people."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/en/12_2KI/2KI_016.tsv",
+    "verse": 11,
+    "old_row": "11\t=\tClose to the Hebrew.",
+    "new_row": "11\t=\tThe Hebrew repeats Uriah the priest and Damascus; BSB uses he for the second Uriah reference and leaves the return location implicit."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/en/12_2KI/2KI_016.tsv",
+    "verse": 12,
+    "old_row": "12\t=\tThe Hebrew says the king approached the altar and went up upon it; BSB interprets the latter action as presenting offerings on it.",
+    "new_row": "12\t=\tThe Hebrew names the king three times and the altar twice; BSB uses pronouns after their first mention."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/en/12_2KI/2KI_016.tsv",
+    "verse": 18,
+    "old_row": "18\t=\tThe Hebrew uses one verb for changing or turning the Sabbath structure and the outer royal entrance; BSB specifies removing the canopy and closing the entrance.",
+    "new_row": "18\t=\tThe Hebrew uses one verb for both the Sabbath structure and the outer royal entrance; BSB uses separate removing and closing verbs."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/en/12_2KI/2KI_022.tsv",
+    "verse": 15,
+    "old_row": "15\t=\tClose to the Hebrew.",
+    "new_row": "15\t=\tThe Hebrew says the man sent them “to me”; BSB leaves the destination unstated.",
+    "reason": "Restore a definite omitted phrase difference."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/en/12_2KI/2KI_023_2.tsv",
+    "verse": 35,
+    "old_row": "35\t=\tThe Hebrew says each man paid according to his assessment; BSB expresses this as according to his wealth.",
+    "new_row": "35\t=\tThe Hebrew describes each person’s assessment; BSB expresses it as his wealth.",
+    "reason": "The original DIFF incorrectly made each man the subject of paying; O makes Jehoiakim the subject of exacting."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/en/12_2KI/2KI_025.tsv",
+    "verse": 21,
+    "old_row": "21\t=\tClose to the Hebrew.",
+    "new_row": "21\t=\tJudah is the subject of going into exile in Hebrew; BSB expresses the exile passively.",
+    "reason": "Definite voice difference."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/en/12_2KI/2KI_025.tsv",
+    "verse": 28,
+    "old_row": "28\t=\tClose to the Hebrew.",
+    "new_row": "28\t=\tThe Hebrew uses the singular “throne” of the kings; BSB uses the plural “thrones”.",
+    "reason": "Definite singular/plural difference."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/12_2KI/2KI_022.tsv",
+    "verse": 7,
+    "old_row": "7\tТолько не следует рассчитываться с ними за серебро, отданное в руку их, ибо они действуют верно».\tБлизко к еврейскому.",
+    "new_row": "7\tТолько не следует требовать у них отчёта о серебре, отданном в руку их, ибо они действуют верно».\tБлизко к еврейскому."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/12_2KI/2KI_023_1.tsv",
+    "verse": 3,
+    "old_row": "3\tИ стал царь у столпа, и заключил пред Господом завет — ходить вслед Господа и соблюдать заповеди Его, и свидетельства Его, и уставы Его всем сердцем и всей душой, чтобы утвердить слова этого завета, написанные в этой книге. И весь народ стоял в завете.\tНазван столп; народ стоит в завете.",
+    "new_row": "3\tИ стал царь у столпа, и заключил пред Господом завет — ходить вслед за Господом и соблюдать заповеди Его, и свидетельства Его, и уставы Его всем сердцем и всей душой, чтобы утвердить слова этого завета, написанные в этой книге. И весь народ стоял в завете.\tНазван столп; народ стоит в завете."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/12_2KI/2KI_016.tsv",
+    "verse": 13,
+    "old_row": "13\tИ обратил в дым своё всесожжение и своё хлебное приношение, и вылил своё возлияние, и покропил на жертвенник кровь своих мирных жертв.\tСвои относится к мирным жертвам, не к жертвеннику.",
+    "new_row": "13\tИ обратил в дым своё всесожжение и своё хлебное приношение, и вылил своё возлияние, и побрызгал на жертвенник кровью своих мирных жертв.\tСвои относится к мирным жертвам, не к жертвеннику."
+  }
+]

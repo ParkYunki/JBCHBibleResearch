@@ -1,0 +1,20 @@
+[
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/11_1KI/1KI_006_1.tsv",
+    "verse": 10,
+    "old_row": "10\tИ построил он пристройку ко всему дому, высотой пять локтей; и скрепил дом кедровыми деревьями.\tОн сам скрепляет дом; действие активно.",
+    "new_row": "10\tИ построил он пристройку ко всему дому, высотой пять локтей; и скрепил дом кедровыми брёвнами.\tОн сам скрепляет дом; действие активно."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/11_1KI/1KI_006_1.tsv",
+    "verse": 18,
+    "old_row": "18\tUnd innen am Haus war Zedernholz, Schnitzwerk von Koloquinten und aufbrechenden Blüten; alles war Zeder, kein Stein wurde gesehen.\tDie geschnitzten Formen sind Koloquinten und aufbrechende Blüten.",
+    "new_row": "18\tUnd innen am Haus war Zedernholz, Schnitzwerk von Kürbisformen und aufbrechenden Blüten; alles war Zeder, kein Stein wurde gesehen.\tNah am Hebräischen."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/11_1KI/1KI_006_1.tsv",
+    "verse": 27,
+    "old_row": "27\tИ поставил он херувимов посреди внутреннего дома; и распростёрли крылья херувимов, и крыло одного коснулось стены, а крыло второго херувима касалось второй стены; а их крылья к середине дома касались крылом крыла.\tРаспростёрли выражено активным множественным глаголом; крыло касается крыла.",
+    "new_row": "27\tИ поставил он херувимов посреди внутреннего дома; и распростёрли крылья херувимов, и крыло одного коснулось стены, а крыло второго херувима касалось второй стены; а их крылья, обращённые к середине дома, касались друг друга, крыло к крылу.\tРаспростёрли выражено активным множественным глаголом; крыло касается крыла."
+  }
+]

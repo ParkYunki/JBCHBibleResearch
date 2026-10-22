@@ -1,0 +1,26 @@
+[
+  {
+    "path": "Tools/LiteralGen/outputs/de/10_2SA/2SA_008.tsv",
+    "verse": 5,
+    "old_row": "5\tUnd Syrien von Damaskus kam, um Hadadeser, dem König von Zoba, zu helfen; und David schlug unter Syrien zweiundzwanzigtausend Mann.\tSyrien wird im Hebräischen als kollektiver Name gebraucht.",
+    "new_row": "5\tUnd Syrien von Damaskus kam, um Hadadeser, dem König von Zoba, zu helfen; und David schlug unter den Syrern zweiundzwanzigtausend Mann.\tSyrien wird im Hebräischen als kollektiver Name gebraucht."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/10_2SA/2SA_008.tsv",
+    "verse": 5,
+    "old_row": "5\tИ пришла Сирия Дамасская на помощь Адраазару, царю Сувы, и Давид поразил среди Сирии двадцать две тысячи человек.\tСирия названа собирательно.",
+    "new_row": "5\tИ пришла Сирия Дамасская на помощь Адраазару, царю Сувы, и Давид поразил среди сирийцев двадцать две тысячи человек.\tСирия названа собирательно."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/10_2SA/2SA_008.tsv",
+    "verse": 13,
+    "old_row": "13\tUnd David machte sich einen Namen, als er vom Schlagen Syriens im Salztal zurückkehrte, achtzehntausend.\tDas Schlagen gehört im Hebräischen zur Rückkehrbeschreibung; die Zahl steht danach ohne eigenes Wort für Mann.",
+    "new_row": "13\tUnd David machte sich einen Namen, als er vom Schlagen Syriens im Salztal zurückkehrte, achtzehntausend Mann.\tDas Schlagen gehört im Hebräischen zur Rückkehrbeschreibung; die Zahl steht danach ohne eigenes Wort für Mann."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/10_2SA/2SA_008.tsv",
+    "verse": 13,
+    "old_row": "13\tИ Давид сделал себе имя, возвращаясь от поражения Сирии в долине Соли, восемнадцати тысяч.\tСирия названа собирательно.",
+    "new_row": "13\tИ Давид сделал себе имя, возвращаясь от поражения Сирии в долине Соли — восемнадцати тысяч человек.\tСирия названа собирательно."
+  }
+]

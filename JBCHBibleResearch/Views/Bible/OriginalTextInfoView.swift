@@ -12,11 +12,30 @@
 //  `Translation` 프레임워크로 번역하고, `StrongGlossTranslation`(SwiftData)에 Strong 번호
 //  단위로 캐싱해 두 번째부터는 재번역 없이 캐시를 읽는다. 기계번역 수준이라 신학적 표준
 //  역어와 다를 수 있다.
+//
+//  [2026-10-12] 다국어 개편(목업 승인):
+//  - 구절 카드: 성경 조회에 켜 둔 열의 번역본 본문(`verseSources`). 차이 설명이 있는 번역본이 둘 이상이면 칩으로 전환.
+//    열 정보가 없으면 예전처럼 KRV.
+//  - 직역 카드: 앱 언어 직역(AI) → 원어 어순(STEPBible 문맥 번역) → 영어 직역 LSV(항상 접힌 상태로 시작) →
+//    번역과의 차이(고른 번역본 이름 표시). 데이터 출처는 `LiteralCommentaryService`.
+//  - 단어 카드: 뜻풀이를 앱 언어로(한국어는 기존 캐시·수정 기능 그대로, 다른 언어는 기기 번역 결과를 실행 중에만
+//    메모리에 보관하고 수정 기능 없음, 영어는 원문 뜻 그대로) + "문맥" 줄(`translationEn`).
 
 import SwiftUI
 import Translation
 import SwiftData
 import BibleResearchModels
+
+/// [2026-10-12] 원문 정보 화면 구절 카드에 보여줄 번역본 한 줄 — 성경 조회 화면에 켜 둔 열(왼쪽부터)의 이 절 본문.
+/// 차이 설명 데이터가 있는 번역본이 둘 이상이면 칩으로 바꿔 볼 수 있다.
+struct OriginalTextVerseSource: Hashable, Identifiable {
+    var id: String { code }
+    /// `TranslationRegistry.code`.
+    let code: String
+    let displayName: String
+    /// 이 절 본문. 그 번역본에 이 절이 없으면 빈 문자열.
+    let text: String
+}
 
 struct OriginalTextInfoView: View {
     /// 화면 배경과 본문 보조 텍스트 색을 테마에 맞추는 데 쓴다.
@@ -32,14 +51,28 @@ struct OriginalTextInfoView: View {
     var onNavigateToNextVerse: () -> Void = {}
     var canGoToPreviousVerse: Bool = false
     var canGoToNextVerse: Bool = false
+    /// 성경 조회 화면에 켜 둔 열(왼쪽부터)의 이 절 본문. 비어 있으면 KRV 본문을 직접 읽는다.
+    var verseSources: [OriginalTextVerseSource] = []
 
     @Environment(\.dismiss) private var dismiss
     @Environment(\.modelContext) private var modelContext
     /// 원어 색을 라이트/다크에 맞춰 고르기 위해 필요하다.
     @Environment(\.colorScheme) private var colorScheme
     @State private var words: [OriginalWordInfo] = []
-    /// 직역/번역 차이 카드 데이터(`LiteralTranslation` 조회 결과). 데이터가 없는 절이면 nil이고 카드를 숨긴다.
-    @State private var literalInfo: LiteralTranslationInfo?
+    /// 앱 언어 직역(`LiteralCommentaryService`). 없으면 직역 문장 줄을 숨긴다.
+    @State private var appLiteral: String?
+    /// 공통 영어 직역(LSV). 없으면 접기 줄을 숨긴다.
+    @State private var literalEnglish: LiteralEnglishInfo?
+    /// LSV 펼침 상태 — 절을 옮길 때마다 접힌 상태로 돌아간다(사용자 결정: 모든 언어에서 접어서 표시).
+    @State private var isLiteralEnglishExpanded = false
+    /// 번역본 코드 → 차이 설명. `verseSources` 중 데이터가 있는 번역본만 들어 있다.
+    @State private var differences: [String: String] = [:]
+    /// 구절 카드·차이 설명에 지금 보여주는 번역본 코드.
+    @State private var selectedSourceCode: String?
+    /// 한국어가 아닌 앱 언어의 단어 뜻(영어 뜻 → 기기 번역). 키는 영어 뜻 문자열.
+    @State private var foreignGlosses: [String: String] = [:]
+    /// 실행 중 번역 결과 보관(시트를 다시 열어도 재번역하지 않도록). 키 "언어|영어 뜻".
+    private static var foreignGlossCache: [String: String] = [:]
     /// 번들 기본 번역본(KRV 개역한글)에서 읽은 절 본문. 원문 정보는 절에만 종속되므로
     /// 화면에 켜 둔 번역본과 무관하게 항상 KRV로 고정한다.
     @State private var krvVerseText: String = ""
@@ -54,8 +87,8 @@ struct OriginalTextInfoView: View {
     private var linkTint: Color { Color.accentColor }
 
     private var displayTitle: String {
-        let name = BooksProvider.shared.book(id: bookId)?.nameKo ?? "책 \(bookId)"
-        return "\(name) \(chapter):\(verseNumber) 원문 정보"
+        let name = BooksProvider.shared.book(id: bookId)?.displayName ?? String(localized: "책 \(bookId)")
+        return String(localized: "\(name) \(chapter):\(verseNumber) 원문 정보")
     }
 
     /// 시트 본문(스크롤 영역). macOS/iOS 모두 같은 내용을 쓴다.
@@ -71,30 +104,11 @@ struct OriginalTextInfoView: View {
                     }
                     .foregroundStyle(linkTint)
                 }
-                // 원어 데이터가 없는 절에서도 KRV 본문은 보이도록 `words.isEmpty` 분기 밖에 둔다.
-                if !krvVerseText.isEmpty {
-                    // 메인 본문 목록(TranslationColumnView)과 같은 폰트/줄간격/글자색을 써서 "모양" 설정을 따른다.
-                    Text(krvVerseText)
-                        .font(UserSettingsStore.shared.bibleBodyFont)
-                        .foregroundStyle(UserSettingsStore.shared.bibleTextColor ?? Color.primary)
-                        .lineSpacing(UserSettingsStore.shared.bibleLineSpacing)
-                        .multilineTextAlignment(.center)
-                        .fixedSize(horizontal: false, vertical: true)
-                        .frame(maxWidth: .infinity, alignment: .center)
-                        .padding(.horizontal, 18)
-                        .padding(.vertical, 16)
-                        .background(
-                            RoundedRectangle(cornerRadius: 12, style: .continuous)
-                                .fill(cardBackground)
-                        )
-                        .overlay(
-                            RoundedRectangle(cornerRadius: 12, style: .continuous)
-                                .stroke(cardBorderColor, lineWidth: 1)
-                        )
-                }
-                // 직역과 번역 차이 카드 — 성경 구절 아래, 원어 카드 위. 다른 카드들과 같은 스타일로 통일한다.
-                if let literalInfo {
-                    literalTranslationCard(literalInfo)
+                // 원어 데이터가 없는 절에서도 구절 본문은 보이도록 `words.isEmpty` 분기 밖에 둔다.
+                verseCard
+                // 직역 카드 — 구절 아래, 원어 카드 위. 보여줄 내용이 하나도 없으면 숨긴다.
+                if hasLiteralCardContent {
+                    literalCard
                 }
                 if words.isEmpty {
                     ContentUnavailableView(
@@ -107,7 +121,8 @@ struct OriginalTextInfoView: View {
                 } else {
                     // 화면 너비에 맞춰 여러 열로 자동 배치한다.
                     LazyVGrid(columns: gridColumns, spacing: 12) {
-                        ForEach(words) { word in
+                        // 원본 DB에 같은 절·같은 word_order가 겹치는 행(17쌍)이 있어 `word.id` 대신 위치로 구분한다.
+                        ForEach(Array(words.enumerated()), id: \.offset) { _, word in
                             wordCard(word)
                         }
                     }
@@ -151,7 +166,7 @@ struct OriginalTextInfoView: View {
                         .buttonStyle(BibleBarButtonStyle(height: 40, cornerRadius: 10, fontSize: 15))
                 }
                 VerseLayerStrip(
-                    verseLabel: "\(verseNumber)절",
+                    verseLabel: String(localized: "\(verseNumber)절"),
                     canGoPrevious: canGoToPreviousVerse, canGoNext: canGoToNextVerse,
                     onPrevious: onNavigateToPreviousVerse, onNext: onNavigateToNextVerse
                 ) {
@@ -186,7 +201,8 @@ struct OriginalTextInfoView: View {
         #endif
         // `.task(id:)`로 절/장/권이 바뀔 때마다 다시 로드한다 — 시트가 열린 채 이전/다음 절로 이동해도
         // 원어 정보가 첫 절 데이터로 멈춰 있지 않도록 하기 위해서다.
-        .task(id: "\(bookId)-\(chapter)-\(verseNumber)") { loadWords() }
+        // 켜 둔 번역본 목록이 바뀌어도(차이 설명 대상이 달라지므로) 다시 읽는다.
+        .task(id: "\(bookId)-\(chapter)-\(verseNumber)|\(verseSources.map(\.code).joined(separator: ","))") { loadWords() }
         .translationTask(translationConfiguration) { session in
             await translateMissingGlosses(session: session)
         }
@@ -209,30 +225,205 @@ struct OriginalTextInfoView: View {
         }
     }
 
-    /// 직역과 "번역과의 차이" 설명 카드. 스타일은 `cardBackground`/`cardBorderColor`를 따른다.
-    private func literalTranslationCard(_ info: LiteralTranslationInfo) -> some View {
+    // MARK: - 구절 카드
+
+    /// 지금 고른 번역본(없으면 첫 열).
+    private var currentSource: OriginalTextVerseSource? {
+        verseSources.first { $0.code == selectedSourceCode } ?? verseSources.first
+    }
+
+    /// 칩으로 바꿔 볼 수 있는 번역본 — 차이 설명 데이터가 있는 열만(사용자 결정).
+    private var sourcesWithDifference: [OriginalTextVerseSource] {
+        verseSources.filter { differences[$0.code] != nil }
+    }
+
+    private var currentVerseText: String {
+        if let source = currentSource { return source.text }
+        return krvVerseText
+    }
+
+    @ViewBuilder
+    private var verseCard: some View {
+        let text = currentVerseText
+        if !text.isEmpty || currentSource != nil {
+            VStack(spacing: 10) {
+                let chipSources = sourcesWithDifference
+                if chipSources.count >= 2 {
+                    // 차이 설명이 있는 번역본이 둘 이상일 때만 칩. 고르면 구절 본문과 아래 차이 설명이 함께 바뀐다.
+                    FlowLayoutHStack(spacing: 6) {
+                        ForEach(chipSources) { source in
+                            sourceChip(source)
+                        }
+                    }
+                    .frame(maxWidth: .infinity, alignment: .center)
+                } else if let source = currentSource {
+                    Text(verbatim: source.displayName)
+                        .font(.system(size: 12, weight: .bold))
+                        .foregroundStyle(settings.bibleTextColor?.opacity(0.6) ?? Color.secondary)
+                }
+                // 메인 본문 목록(TranslationColumnView)과 같은 폰트/줄간격/글자색을 써서 "모양" 설정을 따른다.
+                Text(verbatim: text.isEmpty ? "—" : text)
+                    .font(UserSettingsStore.shared.bibleBodyFont)
+                    .foregroundStyle(UserSettingsStore.shared.bibleTextColor ?? Color.primary)
+                    .lineSpacing(UserSettingsStore.shared.bibleLineSpacing)
+                    .multilineTextAlignment(.center)
+                    .fixedSize(horizontal: false, vertical: true)
+                    .frame(maxWidth: .infinity, alignment: .center)
+            }
+            .padding(.horizontal, 18)
+            .padding(.vertical, 16)
+            .background(
+                RoundedRectangle(cornerRadius: 12, style: .continuous)
+                    .fill(cardBackground)
+            )
+            .overlay(
+                RoundedRectangle(cornerRadius: 12, style: .continuous)
+                    .stroke(cardBorderColor, lineWidth: 1)
+            )
+        }
+    }
+
+    private func sourceChip(_ source: OriginalTextVerseSource) -> some View {
+        let isSelected = source.code == currentSource?.code
+        return Button {
+            selectedSourceCode = source.code
+        } label: {
+            Text(verbatim: source.displayName)
+                .font(.system(size: 12, weight: isSelected ? .bold : .medium))
+                .lineLimit(1)
+                .padding(.horizontal, 10)
+                .padding(.vertical, 5)
+                .foregroundStyle(isSelected ? Color.white : (settings.bibleTextColor ?? Color.primary))
+                .background(
+                    Capsule().fill(isSelected ? linkTint : cardBackground)
+                )
+                .overlay(
+                    Capsule().stroke(isSelected ? linkTint : cardBorderColor, lineWidth: 1)
+                )
+                .contentShape(Capsule())
+        }
+        .buttonStyle(.plain)
+        .accessibilityAddTraits(isSelected ? .isSelected : [])
+    }
+
+    // MARK: - 직역 카드
+
+    /// 원어 어순 줄 — STEPBible 문맥 번역을 원문 순서대로(빈 값 제외).
+    private var wordOrderGlosses: [String] {
+        words.map(\.translationEn).filter { !$0.isEmpty }
+    }
+
+    private var currentDifference: String? {
+        guard let code = currentSource?.code else { return nil }
+        return differences[code]
+    }
+
+    private var hasLiteralCardContent: Bool {
+        appLiteral != nil || !wordOrderGlosses.isEmpty || literalEnglish != nil || currentDifference != nil
+    }
+
+    /// AI 생성 표시 배지(직역·차이 설명). 고유 표기라 번역하지 않는다.
+    private var aiBadge: some View {
+        Text(verbatim: "AI")
+            .font(.system(size: 9.5, weight: .bold))
+            .foregroundStyle(linkTint)
+            .padding(.horizontal, 4)
+            .padding(.vertical, 1)
+            .overlay(RoundedRectangle(cornerRadius: 4).stroke(linkTint, lineWidth: 1))
+    }
+
+    private var sectionLabelColor: Color {
+        settings.bibleTextColor?.opacity(0.6) ?? Color.secondary
+    }
+
+    private var literalCard: some View {
         VStack(alignment: .leading, spacing: 10) {
-            Label("직역 (원어 그대로)", systemImage: "text.alignleft")
-                .font(.system(size: 13, weight: .bold))
-                .foregroundStyle(settings.bibleTextColor?.opacity(0.75) ?? Color.secondary)
+            if let appLiteral {
+                HStack(spacing: 6) {
+                    Label("직역 (원어 그대로)", systemImage: "text.alignleft")
+                        .font(.system(size: 13, weight: .bold))
+                        .foregroundStyle(settings.bibleTextColor?.opacity(0.75) ?? Color.secondary)
+                    aiBadge
+                }
 
-            Text(info.literalTranslation)
-                .font(UserSettingsStore.shared.bibleBodyFont.italic())
-                .foregroundStyle(settings.bibleTextColor ?? Color.primary)
-                .multilineTextAlignment(.center)
-                .fixedSize(horizontal: false, vertical: true)
+                Text(verbatim: appLiteral)
+                    .font(UserSettingsStore.shared.bibleBodyFont.italic())
+                    .foregroundStyle(settings.bibleTextColor ?? Color.primary)
+                    .multilineTextAlignment(.center)
+                    .fixedSize(horizontal: false, vertical: true)
+                    .frame(maxWidth: .infinity, alignment: .center)
+            }
+
+            let glosses = wordOrderGlosses
+            if !glosses.isEmpty {
+                // 원어 어순(사용자 결정: 직역 카드 안). STEPBible 문맥 번역이라 영어 그대로 보여준다.
+                Text("원어 어순")
+                    .font(.system(size: 12, weight: .bold))
+                    .foregroundStyle(sectionLabelColor)
+                    .frame(maxWidth: .infinity, alignment: .center)
+                FlowLayoutHStack(spacing: 5) {
+                    ForEach(Array(glosses.enumerated()), id: \.offset) { _, gloss in
+                        Text(verbatim: gloss)
+                            .font(.system(size: 12))
+                            .foregroundStyle(settings.bibleTextColor ?? Color.primary)
+                            .padding(.horizontal, 7)
+                            .padding(.vertical, 3)
+                            .background(
+                                RoundedRectangle(cornerRadius: 6, style: .continuous)
+                                    .fill(linkTint.opacity(0.14))
+                            )
+                    }
+                }
                 .frame(maxWidth: .infinity, alignment: .center)
+            }
 
-            if let difference = info.difference, !difference.isEmpty {
+            // 영어 화면은 직역이 곧 LSV(`Literal_en`의 basis = LSV)라 같은 문장을 접기 줄로 또 보여주지 않는다.
+            if let literalEnglish, literalEnglish.text != appLiteral {
+                Rectangle()
+                    .fill(cardBorderColor)
+                    .frame(height: 1)
+                DisclosureGroup(isExpanded: $isLiteralEnglishExpanded) {
+                    VStack(spacing: 6) {
+                        // 원본의 시행 구분 표기 " || "는 줄바꿈으로 보여준다.
+                        Text(verbatim: literalEnglish.text.replacingOccurrences(of: " || ", with: "\n"))
+                            .font(.system(size: 14.5, design: .serif))
+                            .foregroundStyle(settings.bibleTextColor ?? Color.primary)
+                            .multilineTextAlignment(.center)
+                            .fixedSize(horizontal: false, vertical: true)
+                            .frame(maxWidth: .infinity, alignment: .center)
+                        // CC BY-SA 4.0 출처 표기(원문 표기 그대로).
+                        Text(verbatim: "Literal Standard Version © 2020 Covenant Press · CC BY-SA 4.0")
+                            .font(.system(size: 10.5))
+                            .foregroundStyle(settings.bibleTextColor?.opacity(0.45) ?? Color.secondary)
+                            .multilineTextAlignment(.center)
+                            .frame(maxWidth: .infinity, alignment: .center)
+                    }
+                    .padding(.top, 6)
+                } label: {
+                    Text("영어 직역 (LSV)")
+                        .font(.system(size: 12, weight: .bold))
+                        .foregroundStyle(sectionLabelColor)
+                }
+                .tint(sectionLabelColor)
+            }
+
+            if let difference = currentDifference, let source = currentSource {
                 Rectangle()
                     .fill(cardBorderColor)
                     .frame(height: 1)
 
-                Label("번역과의 차이", systemImage: "arrow.left.arrow.right")
-                    .font(.system(size: 12, weight: .bold))
-                    .foregroundStyle(settings.bibleTextColor?.opacity(0.6) ?? Color.secondary)
+                HStack(spacing: 6) {
+                    Label("번역과의 차이", systemImage: "arrow.left.arrow.right")
+                        .font(.system(size: 12, weight: .bold))
+                        .foregroundStyle(sectionLabelColor)
+                    Text(verbatim: "· \(source.displayName)")
+                        .font(.system(size: 12, weight: .bold))
+                        .foregroundStyle(settings.bibleTextColor ?? Color.primary)
+                        .lineLimit(1)
+                    aiBadge
+                }
 
-                Text(difference)
+                Text(verbatim: difference)
                     .font(.system(size: 13.5))
                     .foregroundStyle(settings.bibleTextColor?.opacity(0.75) ?? Color.secondary)
                     .lineSpacing(3)
@@ -257,12 +448,12 @@ struct OriginalTextInfoView: View {
             // 편집용 연필 아이콘은 한글 뜻 헤드라인 오른쪽에 둔다.
             HStack(spacing: 6) {
                 Group {
-                    if let korean = koreanGlosses[word.strongCode] {
-                        Text(korean)
+                    if let headline = headlineGloss(for: word) {
+                        Text(verbatim: headline)
                     } else if isTranslating && !word.glossEn.isEmpty {
                         Text("번역 중…")
                     } else {
-                        Text("-")
+                        Text(verbatim: "-")
                     }
                 }
                 .font(.system(size: 16, weight: .bold))
@@ -271,14 +462,17 @@ struct OriginalTextInfoView: View {
                 .lineLimit(2)
                 .fixedSize(horizontal: false, vertical: true)
 
-                Button {
-                    beginEditingKorean(for: word)
-                } label: {
-                    Image(systemName: "pencil.circle")
-                        .font(.system(size: 14))
-                        .foregroundStyle(settings.bibleTextColor?.opacity(0.6) ?? Color.secondary)
+                // 직접 수정은 한국어 뜻(`StrongGlossTranslation` 캐시)만 지원한다.
+                if AppLanguage.isKorean {
+                    Button {
+                        beginEditingKorean(for: word)
+                    } label: {
+                        Image(systemName: "pencil.circle")
+                            .font(.system(size: 14))
+                            .foregroundStyle(settings.bibleTextColor?.opacity(0.6) ?? Color.secondary)
+                    }
+                    .buttonStyle(.plain)
                 }
-                .buttonStyle(.plain)
             }
 
             HStack(spacing: 5) {
@@ -312,6 +506,26 @@ struct OriginalTextInfoView: View {
                 Text("[\(word.transliteration)]")
                     .font(.system(size: 14, weight: .medium))
                     .foregroundStyle(settings.bibleTextColor?.opacity(0.6) ?? Color.secondary)
+            }
+
+            // [2026-10-12] 이 절 문맥의 영어 번역(STEPBible). 사전형 뜻과 다르게 문맥에 맞춘 형태다.
+            if !word.translationEn.isEmpty {
+                HStack(spacing: 4) {
+                    Text("문맥")
+                        .font(.system(size: 10.5, weight: .medium))
+                        .foregroundStyle(settings.bibleTextColor?.opacity(0.5) ?? Color.secondary)
+                    Text(verbatim: word.translationEn)
+                        .font(.system(size: 12))
+                        .foregroundStyle(settings.bibleTextColor ?? Color.primary)
+                        .multilineTextAlignment(.center)
+                        .fixedSize(horizontal: false, vertical: true)
+                }
+                .padding(.horizontal, 7)
+                .padding(.vertical, 2)
+                .background(
+                    RoundedRectangle(cornerRadius: 6, style: .continuous)
+                        .fill(linkTint.opacity(0.14))
+                )
             }
 
             let morphOrFallback = morphOrFallbackText(word)
@@ -375,8 +589,24 @@ struct OriginalTextInfoView: View {
     /// 뜻풀이를 대신 보여준다 — 카드 맨 아래 보조 설명줄이 항상 비어 보이지
     /// 않도록.
     private func morphOrFallbackText(_ word: OriginalWordInfo) -> String {
-        let morph = word.morphDescriptionKo
-        return morph.isEmpty ? word.glossEn : morph
+        if AppLanguage.isKorean {
+            let morph = word.morphDescriptionKo
+            return morph.isEmpty ? word.glossEn : morph
+        }
+        // [2026-10-12] 형태 설명은 한국어 전용이라 다른 언어는 영어 사전 뜻을 보여준다. 제목이 이미 영어 뜻이면
+        // (영어 화면, 번역 실패) 같은 글자를 두 번 쓰지 않도록 형태 코드를 보여준다.
+        if word.glossEn.isEmpty || headlineGloss(for: word) == word.glossEn {
+            return word.morphCode
+        }
+        return word.glossEn
+    }
+
+    /// 단어 카드 제목(앱 언어 뜻). 한국어는 기존 캐시, 영어는 원문 뜻, 그 밖은 기기 번역 결과. 아직 없으면 nil.
+    private func headlineGloss(for word: OriginalWordInfo) -> String? {
+        if AppLanguage.isKorean { return koreanGlosses[word.strongCode] }
+        guard !word.glossEn.isEmpty else { return nil }
+        if AppLanguage.baseCode == "en" { return word.glossEn }
+        return foreignGlosses[word.glossEn]
     }
 
     // biblehub은 REST API가 없어 URL에 영문 책 이름 슬러그가 필요하다(`1_kings`처럼 숫자+밑줄, 아가서만 `songs`).
@@ -462,9 +692,30 @@ struct OriginalTextInfoView: View {
 
     private func loadWords() {
         words = OriginalTextLookupService.shared.words(bookId: bookId, chapter: chapter, verse: verseNumber)
-        literalInfo = OriginalTextLookupService.shared.literalTranslation(bookId: bookId, chapter: chapter, verse: verseNumber)
+        let commentary = LiteralCommentaryService.shared
+        appLiteral = commentary.appLanguageLiteral(bookId: bookId, chapter: chapter, verse: verseNumber)
+        literalEnglish = OriginalTextLookupService.shared.literalEnglish(bookId: bookId, chapter: chapter, verse: verseNumber)
+        isLiteralEnglishExpanded = false
+
+        var found: [String: String] = [:]
+        for source in verseSources {
+            if let text = commentary.difference(translationCode: source.code, verseText: source.text, bookId: bookId, chapter: chapter, verse: verseNumber) {
+                found[source.code] = text
+            }
+        }
+        differences = found
+        // 고른 번역본을 유지하되, 이 절에 그 번역본 데이터가 없어지면 데이터가 있는 첫 열(없으면 첫 열)로 옮긴다.
+        let keepSelection = selectedSourceCode.map { code in
+            verseSources.contains { $0.code == code } && (found[code] != nil || found.isEmpty)
+        } ?? false
+        if !keepSelection {
+            selectedSourceCode = verseSources.first { found[$0.code] != nil }?.code ?? verseSources.first?.code
+        }
+
         loadCachedGlosses()
-        loadKRVVerseText()
+        if verseSources.isEmpty {
+            loadKRVVerseText()
+        }
     }
 
     /// 번들 KRV DB에서 이 절 텍스트를 읽는다. 시트가 열릴 때 한 번만 조회하므로 커넥션을 캐싱하지 않는다.
@@ -484,6 +735,10 @@ struct OriginalTextInfoView: View {
     /// `sourceEnglishGloss`가 지금 원문 데이터의 영어 뜻풀이와 다르면(원문 데이터가
     /// 나중에 갱신된 경우) 오래된 캐시로 취급해 다시 번역 대상에 포함시킨다.
     private func loadCachedGlosses() {
+        guard AppLanguage.isKorean else {
+            loadForeignGlosses()
+            return
+        }
         // `#Predicate`의 `contains`는 `Set`보다 `Array` 캡처가 안정적이라 배열로 넘긴다.
         let codes = Array(Set(words.map(\.strongCode)))
         guard !codes.isEmpty else { return }
@@ -514,9 +769,45 @@ struct OriginalTextInfoView: View {
 
         if !missing.isEmpty {
             pendingTranslationRequests = missing
+            requestTranslation(target: "ko")
+        }
+    }
+
+    /// [2026-10-12] 한국어가 아닌 앱 언어의 단어 뜻. 실행 중 캐시에 없는 영어 뜻만 기기 번역에 넘긴다.
+    /// 영어 화면은 번역하지 않는다(`headlineGloss`가 원문 뜻을 바로 쓴다).
+    private func loadForeignGlosses() {
+        let language = AppLanguage.code
+        let glosses = Array(Set(words.map(\.glossEn).filter { !$0.isEmpty }))
+        guard AppLanguage.baseCode != "en", !glosses.isEmpty else {
+            foreignGlosses = [:]
+            return
+        }
+        var found: [String: String] = [:]
+        var missing: [String] = []
+        for gloss in glosses {
+            if let cached = Self.foreignGlossCache["\(language)|\(gloss)"] {
+                found[gloss] = cached
+            } else {
+                missing.append(gloss)
+            }
+        }
+        foreignGlosses = found
+        if !missing.isEmpty {
+            pendingForeignGlosses = missing
+            requestTranslation(target: language)
+        }
+    }
+
+    /// 같은 언어 설정이 이미 있으면 `invalidate()`로 `translationTask`를 다시 돌리고, 없으면 새로 만든다
+    /// (같은 값을 다시 대입하면 작업이 다시 실행되지 않을 수 있다).
+    private func requestTranslation(target: String) {
+        let targetLanguage = Locale.Language(identifier: target)
+        if translationConfiguration?.target == targetLanguage {
+            translationConfiguration?.invalidate()
+        } else {
             translationConfiguration = TranslationSession.Configuration(
                 source: Locale.Language(identifier: "en"),
-                target: Locale.Language(identifier: "ko")
+                target: targetLanguage
             )
         }
     }
@@ -525,8 +816,14 @@ struct OriginalTextInfoView: View {
     /// 목록 — `translationTask`의 클로저는 `translationConfiguration`이 바뀔 때만
     /// 다시 불리므로, 매개변수로 직접 못 넘기고 상태로 들고 있다가 여기서 읽는다.
     @State private var pendingTranslationRequests: [(strongCode: String, glossEn: String)] = []
+    /// 한국어가 아닌 앱 언어에서 이번에 번역할 영어 뜻 목록.
+    @State private var pendingForeignGlosses: [String] = []
 
     private func translateMissingGlosses(session: TranslationSession) async {
+        guard AppLanguage.isKorean else {
+            await translateForeignGlosses(session: session)
+            return
+        }
         let requests = pendingTranslationRequests
         guard !requests.isEmpty else { return }
         isTranslating = true
@@ -549,6 +846,36 @@ struct OriginalTextInfoView: View {
             print("[OriginalTextInfoView] 번역 실패: \(error)")
         }
         pendingTranslationRequests = []
+    }
+
+    /// 한국어가 아닌 앱 언어의 단어 뜻 번역. 실패하면(기기 번역이 그 언어를 지원하지 않거나 언어 자료 내려받기를
+    /// 거절한 경우 등) 영어 뜻을 그대로 보여준다. 결과는 메모리에만 두고 저장하지 않는다.
+    private func translateForeignGlosses(session: TranslationSession) async {
+        let requests = pendingForeignGlosses
+        guard !requests.isEmpty else { return }
+        isTranslating = true
+        defer { isTranslating = false }
+        let language = AppLanguage.code
+
+        do {
+            let sessionRequests = requests.enumerated().map { index, gloss in
+                TranslationSession.Request(sourceText: gloss, clientIdentifier: String(index))
+            }
+            let responses = try await session.translations(from: sessionRequests)
+            for response in responses {
+                guard let identifier = response.clientIdentifier, let index = Int(identifier),
+                      requests.indices.contains(index) else { continue }
+                let gloss = requests[index]
+                foreignGlosses[gloss] = response.targetText
+                Self.foreignGlossCache["\(language)|\(gloss)"] = response.targetText
+            }
+        } catch {
+            print("[OriginalTextInfoView] 번역 실패(\(language)): \(error)")
+        }
+        for gloss in requests where foreignGlosses[gloss] == nil {
+            foreignGlosses[gloss] = gloss
+        }
+        pendingForeignGlosses = []
     }
 
     /// 편집창 초기값을 현재 값(없으면 빈 문자열)으로 채운다.

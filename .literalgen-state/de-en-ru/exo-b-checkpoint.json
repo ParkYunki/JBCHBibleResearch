@@ -1,0 +1,105 @@
+{
+  "scope": "EXO015–028",
+  "chapters": {
+    "15": {
+      "missing_outputs_created": true,
+      "qa": "source_and_target_compared",
+      "all_verses_reviewed": true
+    },
+    "16": {
+      "missing_outputs_created": true,
+      "qa": "source_and_target_compared",
+      "all_verses_reviewed": true
+    },
+    "17": {
+      "missing_outputs_created": true,
+      "qa": "source_and_target_compared",
+      "all_verses_reviewed": true
+    },
+    "18": {
+      "missing_outputs_created": true,
+      "qa": "source_and_target_compared",
+      "all_verses_reviewed": true
+    },
+    "19": {
+      "missing_outputs_created": true,
+      "qa": "source_and_target_compared",
+      "all_verses_reviewed": true
+    },
+    "20": {
+      "missing_outputs_created": true,
+      "qa": "source_and_target_compared",
+      "all_verses_reviewed": true
+    },
+    "21": {
+      "missing_outputs_created": true,
+      "qa": "source_and_target_compared",
+      "all_verses_reviewed": true
+    },
+    "22": {
+      "missing_outputs_created": true,
+      "qa": "source_and_target_compared",
+      "all_verses_reviewed": true
+    },
+    "23": {
+      "missing_outputs_created": true,
+      "qa": "source_and_target_compared",
+      "all_verses_reviewed": true
+    },
+    "24": {
+      "missing_outputs_created": true,
+      "qa": "source_and_target_compared",
+      "all_verses_reviewed": true
+    },
+    "25": {
+      "missing_outputs_created": true,
+      "qa": "source_and_target_compared",
+      "all_verses_reviewed": true
+    },
+    "26": {
+      "missing_outputs_created": true,
+      "qa": "source_and_target_compared",
+      "all_verses_reviewed": true
+    },
+    "27": {
+      "missing_outputs_created": true,
+      "qa": "source_and_target_compared",
+      "all_verses_reviewed": true
+    },
+    "28": {
+      "missing_outputs_created": true,
+      "qa": "source_and_target_compared",
+      "all_verses_reviewed": true
+    }
+  },
+  "status": "complete",
+  "scope_ownership": {
+    "de": "EXO015–028",
+    "en": "EXO015–026",
+    "ru": "EXO015–028"
+  },
+  "files_created": 60,
+  "verse_rows": {
+    "de": 416,
+    "en": 352,
+    "ru": 416
+  },
+  "qa_manifest": ".literalgen-state/de-en-ru/exo-b-qa.json",
+  "qa_rows": 51,
+  "validation": {
+    "all_verses_source_target_reviewed": true,
+    "verse_order": true,
+    "three_fields": true,
+    "english_literal_equals": true,
+    "difference_max_60_words": true,
+    "difference_max_3_sentences": true,
+    "quote_style": true,
+    "qa_old_rows_match_original": true,
+    "unique_path_verse": true,
+    "outputs_directly_modified": false,
+    "ru_entire_book_quote_balance_after_qa": {
+      "open": 462,
+      "close": 462
+    }
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "files": 63,
+  "rows": 1221,
+  "expected_verse_ids": true,
+  "three_fields": true,
+  "en_literal_equals": true,
+  "diff_word_limit": true,
+  "qa_candidates": 24
+}

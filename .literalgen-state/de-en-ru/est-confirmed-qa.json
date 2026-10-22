@@ -1,0 +1,46 @@
+[
+  {
+    "path": "Tools/LiteralGen/outputs/en/17_EST/EST_003.tsv",
+    "old_row": "6\t=\tThe Hebrew says they told him Mordecai’s people and he sought to stretch out a hand against Mordecai alone; BSB omits the informants and uses hands in the plural.",
+    "new_row": "6\t=\tThe Hebrew says they told him Mordecai’s people and uses a singular hand in describing the action he scorned; BSB omits the informants and uses hands in the plural."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/en/17_EST/EST_007.tsv",
+    "old_row": "4\t=\tThe Hebrew explicitly names the adversary and the king’s loss in its final clause; BSB renders this in terms of distress and burdening the king.",
+    "new_row": "4\t=\tThe Hebrew names the king’s loss in the final clause; BSB describes burdening the king."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/17_EST/EST_002.tsv",
+    "verse": "7",
+    "old_row": "7\tИ он воспитывал Гадассу, она же Есфирь, дочь своего дяди, ибо не было у неё отца и матери; и девушка была прекрасна станом и хороша видом; и при смерти её отца и её матери Мардохей взял её себе в дочери.\tБлизко к еврейскому.",
+    "new_row": "7\tИ он воспитывал Гадассу, она же Есфирь, дочь своего дяди, ибо не было у неё отца и матери; и девушка была прекрасна станом и хороша видом; и по смерти её отца и её матери Мардохей взял её себе в дочери.\tБлизко к еврейскому.",
+    "reason": "Russian при смерти means near death; O describes the parents dying, requiring по смерти."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/en/17_EST/EST_003.tsv",
+    "verse": "1",
+    "old_row": "1\t=\tThe Hebrew says the king placed Haman’s throne above those of all the princes; BSB describes elevation to a position above them.",
+    "new_row": "1\t=\tThe Hebrew says the king placed Haman’s throne above all the princes; BSB describes elevation to a position above them.",
+    "reason": "O says his throne above all princes, without explicitly adding their thrones."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/en/17_EST/EST_004.tsv",
+    "old_row": "16\t=\tThe Hebrew repeats the verb perish in describing her resolve; BSB frames the repetition as a conditional statement.",
+    "new_row": "16\t=\tThe Hebrew introduces going to the king with “and so”; BSB says “After that.”"
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/17_EST/EST_008.tsv",
+    "old_row": "6\tDenn wie werde ich es vermögen und das Unheil ansehen, das mein Volk treffen wird? Und wie werde ich es vermögen und die Vernichtung meiner Verwandtschaft ansehen?“\tDas Vermögen wird in beiden Fragen ausdrücklich wiederholt.",
+    "new_row": "6\tDenn wie werde ich es vermögen, das Unheil anzusehen, das mein Volk treffen wird? Und wie werde ich es vermögen, die Vernichtung meiner Verwandtschaft anzusehen?“\tDas Vermögen wird in beiden Fragen ausdrücklich wiederholt."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/17_EST/EST_008.tsv",
+    "old_row": "6\tИбо как смогу я и увижу зло, которое постигнет народ мой? И как смогу я и увижу гибель родни моей?»\tВ обоих вопросах сохранено отдельное смогу.",
+    "new_row": "6\tИбо как смогу я увидеть зло, которое постигнет народ мой? И как смогу я увидеть гибель родни моей?»\tВ обоих вопросах сохранено отдельное смогу."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/en/17_EST/EST_009_1.tsv",
+    "old_row": "25\t=\tThe Hebrew narrates that they hanged him and his sons; BSB includes their hanging within the command.",
+    "new_row": "25\t=\tThe Hebrew refers to wood or a tree; BSB specifies gallows."
+  }
+]

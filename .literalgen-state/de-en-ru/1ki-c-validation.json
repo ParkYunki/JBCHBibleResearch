@@ -1,0 +1,169 @@
+{
+  "files": 29,
+  "rows": 600,
+  "all_assigned_verses_reviewed": true,
+  "independent_root_en_reviewed_rows": 146,
+  "independent_root_native_reviewed_rows": 106,
+  "own_qa_rows": 15,
+  "root_en_qa_rows": 1,
+  "root_native_qa_rows": 10,
+  "literal_quote_counts": {
+    "de": {
+      "open": 102,
+      "close": 102
+    },
+    "ru": {
+      "open": 102,
+      "close": 102
+    }
+  },
+  "problems": [],
+  "tsv_modified_during_qa": false,
+  "files_detail": [
+    {
+      "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/11_1KI/1KI_015_1.tsv",
+      "rows": 30,
+      "sha256": "26b0e1e1fbf15c1321d96bbb673e03d4f077d944871c204f40cb765feacd1304"
+    },
+    {
+      "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/11_1KI/1KI_015_2.tsv",
+      "rows": 4,
+      "sha256": "c4f2f088619d2fa6f0d809f5a39d8586c458e37144ed047077203958e3b53cfe"
+    },
+    {
+      "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/11_1KI/1KI_015_1.tsv",
+      "rows": 30,
+      "sha256": "e29926bc88062e4d59e8657a5e358147248cf023a6180cad2264bd2fed30a50e"
+    },
+    {
+      "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/11_1KI/1KI_015_2.tsv",
+      "rows": 4,
+      "sha256": "41e5094d4460d758f1ba5d1ac0d6f01231ca2151725cf0223742e44f5c661ac9"
+    },
+    {
+      "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/en/11_1KI/1KI_015_1.tsv",
+      "rows": 30,
+      "sha256": "effcc17a0d812a754cc5bff581fe6b7b5b697faba1de27e25a6b6d3f009cf3e4"
+    },
+    {
+      "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/en/11_1KI/1KI_015_2.tsv",
+      "rows": 4,
+      "sha256": "7e5f5b9b93eadac61c5f37b62bc220ec6a958b2da513559feef94189fbf741dd"
+    },
+    {
+      "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/11_1KI/1KI_016_1.tsv",
+      "rows": 30,
+      "sha256": "dfc501a4fcc842a4b5c1dc7cd5c959e172a14ada8331bd8edd0e6653dfc24f58"
+    },
+    {
+      "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/11_1KI/1KI_016_2.tsv",
+      "rows": 4,
+      "sha256": "ce153892d8f4e55ae0b1f2671a5188822035d67ca3d6ab995a0c5528da05609a"
+    },
+    {
+      "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/11_1KI/1KI_016_1.tsv",
+      "rows": 30,
+      "sha256": "cad40e297fadf72e6ff12d326c82d6000a5c3cdeea11a266a32b97b697d2bc07"
+    },
+    {
+      "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/11_1KI/1KI_016_2.tsv",
+      "rows": 4,
+      "sha256": "3f49c12d10dd53395f17dcf49be4056d97c4ab0a401910b884382e045bbdec11"
+    },
+    {
+      "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/en/11_1KI/1KI_016_1.tsv",
+      "rows": 30,
+      "sha256": "34e032b0a56b0be1d09683493241deec58efa0dcb1dd9a91dbff8e3f502e8d76"
+    },
+    {
+      "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/en/11_1KI/1KI_016_2.tsv",
+      "rows": 4,
+      "sha256": "dfa1379dc3561833cf586cd93502bb1f3bc307586a44c62bde2ee5589b0a265b"
+    },
+    {
+      "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/11_1KI/1KI_017.tsv",
+      "rows": 24,
+      "sha256": "cb994225ea0a923bb16f13400e186a93799547adc222b63565068b9a7d133ad0"
+    },
+    {
+      "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/11_1KI/1KI_017.tsv",
+      "rows": 24,
+      "sha256": "a6670297792a92638fe8c5f1e331638a8ccc34059a720b944343993be264ea24"
+    },
+    {
+      "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/en/11_1KI/1KI_017.tsv",
+      "rows": 24,
+      "sha256": "7b397fcfd1960ae2729025742906c54cf318b3a3fb13ec6e9fbdf25a4cc08a3d"
+    },
+    {
+      "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/11_1KI/1KI_018_1.tsv",
+      "rows": 30,
+      "sha256": "665c2b7069e1053612c08d49e912725c6d5696f41d0ce5cc3e50d3fe56aa531d"
+    },
+    {
+      "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/11_1KI/1KI_018_2.tsv",
+      "rows": 16,
+      "sha256": "1f1b14032fdd83a9b5e7be9f8cd51f796b57bca71da8df977022c782d650a87f"
+    },
+    {
+      "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/11_1KI/1KI_018_1.tsv",
+      "rows": 30,
+      "sha256": "746dfe6805390450f8cbe5c443534fddc4e076630d6a78d7b6c588f33bc4cc4c"
+    },
+    {
+      "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/11_1KI/1KI_018_2.tsv",
+      "rows": 16,
+      "sha256": "bfd16caf992c3c7f62cb022b0758f64df684c46640b8881da4ec368bef598866"
+    },
+    {
+      "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/en/11_1KI/1KI_018_1.tsv",
+      "rows": 30,
+      "sha256": "2ef18211de2f22250ee3427d30b07d117a486634f806656dce165e9840e87f0c"
+    },
+    {
+      "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/en/11_1KI/1KI_018_2.tsv",
+      "rows": 16,
+      "sha256": "fd8c5a484d38618b62fab42e70f7515451b4932f65006d3835c31d574388ebf7"
+    },
+    {
+      "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/11_1KI/1KI_019.tsv",
+      "rows": 21,
+      "sha256": "d88f163b54a66af70666119987df23b0d414dd8a9bb942b2eac6521e143d7842"
+    },
+    {
+      "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/11_1KI/1KI_019.tsv",
+      "rows": 21,
+      "sha256": "f9169d93dcb57c99b25d3512850628b1a771507ffec760c11b3006bc85de505b"
+    },
+    {
+      "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/11_1KI/1KI_020_1.tsv",
+      "rows": 30,
+      "sha256": "6bd8d39eec5b9264629b7add359de3e3cba486b42533770481318aa78b4aabd2"
+    },
+    {
+      "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/11_1KI/1KI_020_2.tsv",
+      "rows": 13,
+      "sha256": "1689949258c68b6e2ec7755479fcbc1573358c185429f99022c7767118685246"
+    },
+    {
+      "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/11_1KI/1KI_020_1.tsv",
+      "rows": 30,
+      "sha256": "ba167287f31ce199cb33da94a877d7ba2abcc4128dc63ce7c159632050fbbbfa"
+    },
+    {
+      "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/11_1KI/1KI_020_2.tsv",
+      "rows": 13,
+      "sha256": "2b6c0da420cd802dfdb3aab97d907f66e759c94bd999bbc728aef2e902ad6bf7"
+    },
+    {
+      "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/11_1KI/1KI_021.tsv",
+      "rows": 29,
+      "sha256": "c94c76793f8a5596acaae7ef795517f32131badf2c27817c7f3b0361f4e5aa1a"
+    },
+    {
+      "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/11_1KI/1KI_021.tsv",
+      "rows": 29,
+      "sha256": "4615a25bd6e52a9588b542f23661e90caa5cc85b1d69361192619c29d77ee51e"
+    }
+  ]
+}

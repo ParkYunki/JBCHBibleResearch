@@ -1,0 +1,14 @@
+{
+  "chapters": [
+    136,
+    140
+  ],
+  "files": 15,
+  "rows": 240,
+  "verse_ids_fields_diff_length_en_equals_quotes": true,
+  "refrain_136_both_native_26": true,
+  "created_hashes_match": true,
+  "qa_candidates": 12,
+  "cumulative_files": 144,
+  "cumulative_rows": 2181
+}

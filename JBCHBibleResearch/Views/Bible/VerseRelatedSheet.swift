@@ -27,11 +27,11 @@ enum VerseRelatedKind: Int, CaseIterable, Identifiable, Hashable {
 
     var title: String {
         switch self {
-        case .crossReference: return "관주"
-        case .document: return "연구문서"
-        case .sermon: return "내 설교"
-        case .wordSummary: return "말씀 요약"
-        case .memo: return "구절 메모"
+        case .crossReference: return String(localized: "관주")
+        case .document: return String(localized: "연구문서")
+        case .sermon: return String(localized: "내 설교")
+        case .wordSummary: return String(localized: "말씀 요약")
+        case .memo: return String(localized: "구절 메모")
         }
     }
 
@@ -126,71 +126,65 @@ struct VerseRelatedItem: Identifiable {
 
 // MARK: - 아이콘 스택 (절 번호 위)
 
-/// 절 번호 뱃지 위쪽에 겹쳐 그리는 색 점 스택 — 종류당 점 하나, 3개까지 겹쳐 보이고 나머지는 "+N".
-/// 점마다 버튼이라 누른 점의 종류 칩이 먼저 선택된 채 열린다("+N"은 전체).
-/// `.overlay`로 얹어 쓰므로 행 높이에는 영향을 주지 않는다.
+/// 절 번호 뱃지 위쪽에 그리는 관련 내용 칩 줄 — 종류마다 자리가 고정된 5칸(왼쪽부터 `VerseRelatedKind` 선언 순서:
+/// 관주·연구문서·내 설교·말씀 요약·구절 메모). 있는 종류는 그 색으로 채우고, 없는 자리는 옅은 윤곽만 둔다.
+/// 칩 하나의 가로는 절 번호 뱃지 폭의 1/4, 세로는 그 2배(1:2)이며 칸 사이는 `gap`만큼 띄운다(겹치지 않고 나열).
+/// 줄 전체(5칸)가 하나의 중앙 정렬 버튼이다 — 칩 하나가 5pt 안팎이라 칩별로 따로 누르게 할 수 없다.
+/// 어느 종류를 보든 같은 통합 페이지가 "전체" 칩으로 열린다(종류 선택은 페이지 안의 칩에서 한다).
+/// `.overlay`로 얹어 쓰므로 행 높이에는 영향을 주지 않는다. 호출부(`TranslationColumnView`)가 뱃지 폭을 넘긴다.
 struct VerseRelatedIconStack: View {
     let kinds: [VerseRelatedKind]
-    /// nil이면 "전체" 칩으로 연다.
+    /// 아래에 놓인 절 번호 뱃지의 실제 폭 — 칩 크기와 줄 폭의 기준이다.
+    let badgeWidth: CGFloat
+    /// nil이면 "전체" 칩으로 연다(이 줄은 항상 nil을 넘긴다).
     let onOpen: (VerseRelatedKind?) -> Void
 
-    private static let maxVisibleDots = 3
-    private let dotSize: CGFloat = 13
-    /// 점 하나의 좌우 탭 영역 여백(아래 `.padding(.horizontal, 2)`와 같은 값).
-    private let hitPadding: CGFloat = 2
-    /// 목업대로 이웃한 점이 지름의 50%만큼 겹치게 하는 HStack 간격(음수의 크기).
-    /// 점마다 좌우 `hitPadding`이 레이아웃 폭에 포함되므로 그만큼을 더해야 눈에 보이는 원끼리 정확히 절반 겹친다
-    /// (예전 `overlap = 5`는 이 여백 4를 빼면 실제로 1pt밖에 안 겹쳤다). 원 중심 간격 = dotSize + 2×hitPadding − overlap = dotSize/2.
-    private var overlap: CGFloat { dotSize / 2 + hitPadding * 2 }
+    /// 칸 사이 간격(pt).
+    private let gap: CGFloat = 0.5
+    /// 버튼 탭 영역을 칩 둘레로 넓히는 여백 — 가로는 좌우, 세로는 위/아래. 아래쪽 여백이 뱃지와의 시각적 간격을 겸한다.
+    private let hitPaddingH: CGFloat = 4
+    private let hitPaddingTop: CGFloat = 3
+    private let hitPaddingBottom: CGFloat = 2
 
     private var settings: UserSettingsStore { .shared }
 
-    /// 점 사이를 가르는 테두리색 — 본문 배경색(사용자 지정)을 우선하고, 없으면 시스템 배경.
-    private var ringColor: Color {
-        if let background = settings.bibleBackgroundColor { return background }
-        #if os(iOS)
-        return Color(UIColor.systemBackground)
-        #else
-        return Color(NSColor.textBackgroundColor)
-        #endif
-    }
+    /// 칩 하나의 가로 = 뱃지 폭 ÷ 4. 세로는 그 2배.
+    private var chipWidth: CGFloat { max(badgeWidth, 1) / 4 }
+    private var chipHeight: CGFloat { chipWidth * 2 }
+    /// 5칸 전체 폭 — 뱃지보다 넓어(1.25배 + 간격) 양쪽으로 같은 길이씩 튀어나온다.
+    var stripWidth: CGFloat { chipWidth * CGFloat(VerseRelatedKind.allCases.count) + gap * CGFloat(VerseRelatedKind.allCases.count - 1) }
+    /// 탭 영역까지 포함한 전체 높이 — 호출부가 이 값만큼 뱃지 위로 올려 놓는다.
+    var totalHeight: CGFloat { hitPaddingTop + chipHeight + hitPaddingBottom }
+    /// 탭 영역까지 포함한 전체 폭.
+    var totalWidth: CGFloat { stripWidth + hitPaddingH * 2 }
 
     var body: some View {
-        let visible = Array(kinds.prefix(Self.maxVisibleDots))
-        let extra = kinds.count - visible.count
-        HStack(spacing: -overlap) {
-            ForEach(visible) { kind in
-                Button {
-                    onOpen(kind)
-                } label: {
-                    Circle()
-                        .fill(kind.color)
-                        .frame(width: dotSize, height: dotSize)
-                        .overlay(Circle().strokeBorder(ringColor, lineWidth: 1.5))
-                        // 눈에 보이는 점은 작아도 탭 영역은 넉넉히 둔다.
-                        .padding(.horizontal, hitPadding)
-                        .padding(.vertical, 5)
-                        .contentShape(Rectangle())
+        Button {
+            onOpen(nil)
+        } label: {
+            HStack(spacing: gap) {
+                ForEach(VerseRelatedKind.allCases) { kind in
+                    if kinds.contains(kind) {
+                        RoundedRectangle(cornerRadius: 1.5, style: .continuous)
+                            .fill(kind.color)
+                            .frame(width: chipWidth, height: chipHeight)
+                    } else {
+                        // 없는 자리: 자리를 알아볼 만큼만 옅게.
+                        RoundedRectangle(cornerRadius: 1.5, style: .continuous)
+                            .strokeBorder((settings.bibleTextColor ?? Color.secondary).opacity(0.22), lineWidth: 0.5)
+                            .frame(width: chipWidth, height: chipHeight)
+                    }
                 }
-                .buttonStyle(.plain)
-                .accessibilityLabel(kind.title)
             }
-            if extra > 0 {
-                Button {
-                    onOpen(nil)
-                } label: {
-                    Text("+\(extra)")
-                        .font(.system(size: 9, weight: .semibold))
-                        .foregroundStyle(settings.bibleTextColor?.opacity(0.7) ?? Color.secondary)
-                        .padding(.leading, overlap + 3)
-                        .padding(.vertical, 5)
-                        .contentShape(Rectangle())
-                }
-                .buttonStyle(.plain)
-                .accessibilityLabel("관련 내용 전체")
-            }
+            .padding(.horizontal, hitPaddingH)
+            .padding(.top, hitPaddingTop)
+            .padding(.bottom, hitPaddingBottom)
+            .contentShape(Rectangle())
         }
+        .buttonStyle(.plain)
         .fixedSize()
+        .accessibilityLabel(String(localized: "관련 내용 전체"))
+        .accessibilityValue(kinds.map(\.title).joined(separator: ", "))
     }
 }
 
@@ -327,7 +321,7 @@ struct VerseRelatedSheet: View {
     private var chipRow: some View {
         ScrollView(.horizontal, showsIndicators: false) {
             HStack(spacing: 6) {
-                chip(title: "전체", count: content.totalCount, dot: nil, isOn: selection == .all) {
+                chip(title: String(localized: "전체"), count: content.totalCount, dot: nil, isOn: selection == .all) {
                     selection = .all
                 }
                 ForEach(content.availableKinds) { kind in
@@ -481,12 +475,12 @@ struct VerseRelatedSheet: View {
     }
 
     private func bookName(_ target: BibleVerseRef) -> String {
-        BooksProvider.shared.book(id: target.bookId)?.nameKo ?? "책 \(target.bookId)"
+        BooksProvider.shared.book(id: target.bookId)?.displayName ?? String(localized: "책 \(target.bookId)")
     }
 
     private func memoLabel(_ memo: UserMemo) -> String {
         let trimmed = memo.contentText.trimmingCharacters(in: .whitespacesAndNewlines)
-        return trimmed.isEmpty ? "(내용 없음)" : trimmed
+        return trimmed.isEmpty ? String(localized: "(내용 없음)") : trimmed
     }
 
     private func accessibilityText(for item: VerseRelatedItem) -> String {

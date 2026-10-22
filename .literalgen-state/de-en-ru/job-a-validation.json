@@ -1,0 +1,67 @@
+{
+  "files": 45,
+  "rows": {
+    "de": 334,
+    "ru": 334,
+    "en": 334
+  },
+  "total_rows": 1002,
+  "quotes_before_queued_correction": {
+    "de": {
+      "opening": 30,
+      "closing": 29
+    },
+    "ru": {
+      "opening": 30,
+      "closing": 30
+    }
+  },
+  "qa_candidates": 9,
+  "baseline_file_hashes": {
+    "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/18_JOB/JOB_001.tsv": "32bc1bbc2fcef7a63e0f886d674fb152b1cef43821df4f8ab214c661876e3025",
+    "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/18_JOB/JOB_001.tsv": "0b8c8837f1c929b71c083799f24021961466a089c305cbbb13724f8e66590efb",
+    "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/en/18_JOB/JOB_001.tsv": "b82e91a12228267f5784dbc75204bc52a342765c50156b92fa51422e37b2a0d7",
+    "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/18_JOB/JOB_002.tsv": "8ededded615934685bfb1244c8ec575b6df27a894b8c0b1046aa4194627e51ac",
+    "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/18_JOB/JOB_002.tsv": "16b5e74998ea24ab90de74e2560aff51b77b2d0a736fdea3c1e9956e90a5726f",
+    "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/en/18_JOB/JOB_002.tsv": "807500e38899cd608ce8ebcfbeb931fd607648431abd22be877455ed49512fc3",
+    "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/18_JOB/JOB_003.tsv": "b540eebe1c57fd2069e3c621a4ab22c2ca08de735bc342f2b02ace9fcfb02acb",
+    "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/18_JOB/JOB_003.tsv": "af415b1d8441fc576cfde1c3a0fc953742842f5b84535e060ec195eaca700739",
+    "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/en/18_JOB/JOB_003.tsv": "49ae813e8ee614f1f653766aafe3aaa9f1c72318169bf7e6fa4f154ae5c9f06c",
+    "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/18_JOB/JOB_004.tsv": "0bc0049161c2dc7660a9bb392357b208c84151b8be704888d20572736cf7b1b9",
+    "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/18_JOB/JOB_004.tsv": "8a569d46cc0c71d6b256eeb6b514363cfd94734dfd0ec7ec83cffd67f43f28a4",
+    "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/en/18_JOB/JOB_004.tsv": "d991d4ecbc5fa3ad205c94ea9e78cbc4491592d99d17f0c47ea8bce9bc3ec6aa",
+    "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/18_JOB/JOB_005.tsv": "3e9a9de3c17ecc4d87d5e2e45051ab81551849246978068a0e2dd3686df0b9cd",
+    "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/18_JOB/JOB_005.tsv": "1ccd79d6120d0bcc719f490bc5b68bde9eb06686d16a4ad24ab8115473389955",
+    "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/en/18_JOB/JOB_005.tsv": "a3897ba9c7df4b78bd8346bb86a25ee392027d38d7f97dc3ef927735a247e1bc",
+    "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/18_JOB/JOB_006.tsv": "cfaba69c77c1822b2c82a289b6b62d187163b419087e2b184b8b6c8cb355da98",
+    "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/18_JOB/JOB_006.tsv": "e5020875aa999bcd569d2989c345a5166ab9d8478e9831a0ae2a8d2ee4e6ea31",
+    "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/en/18_JOB/JOB_006.tsv": "2080731f5c8527a4c3d684cb497352d70452d539d062ae1760b6a5e68e33b027",
+    "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/18_JOB/JOB_007.tsv": "a5da861181436a1d24fee8e4883480ee6d64d9cc1854b8cf5147a6e95084a394",
+    "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/18_JOB/JOB_007.tsv": "71e6ae6682fb4b524a9736b3df36fdc5214fa14cfa3c83e11475fcf5e2842d00",
+    "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/en/18_JOB/JOB_007.tsv": "0517ef54b73e8b328337b84b83c3750b1db5be0e8235439bc313eff027aee7f7",
+    "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/18_JOB/JOB_008.tsv": "02b67539bb27f540255730abec0656fc42849fd4fd4288b131bc6e8cd813cf33",
+    "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/18_JOB/JOB_008.tsv": "049df5a1d1e821d4dcd149950abedc1a60a66a697da43cb5b6f74fddb93652ae",
+    "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/en/18_JOB/JOB_008.tsv": "cd32587ab0cf1d733ad1e2b443ebac9870055f7f71b29548e61cd00d055b550e",
+    "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/18_JOB/JOB_009_1.tsv": "1f3a15410884d11ca972ff31908db6d85560112882eaccbc601e1b6df2051224",
+    "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/18_JOB/JOB_009_1.tsv": "cbe6466bef227dc3e9dd4acabfd26296693f66897ec5ef63d715de6dafcb48b8",
+    "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/en/18_JOB/JOB_009_1.tsv": "e3dffdc2e20b60dd97e140542cc7578f733b295f4ff727d82e010f77e27ccd29",
+    "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/18_JOB/JOB_009_2.tsv": "f7b3b5b310189b4fbca2d77121f66cd18c45f7f31bcca3e0f37d3803005069cc",
+    "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/18_JOB/JOB_009_2.tsv": "af4470ae282eea8a879a1384fb7fcabf86ae0b07c3b7934cc55cda0d3881a918",
+    "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/en/18_JOB/JOB_009_2.tsv": "851d0db72f7a6f2d6c146f8b4c3f6f35450d9636b832b89178344276a04fcd73",
+    "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/18_JOB/JOB_010.tsv": "6367e9b1cae6d223b2df158a2e4086654adf46875e0dfa508803c32593fa82c4",
+    "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/18_JOB/JOB_010.tsv": "0b99a381603f054dd200efb6b9072e5c7b3f5aa7008be31805813dbc49075aff",
+    "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/en/18_JOB/JOB_010.tsv": "55103ebbf1825d091f4c90122975572ebc2c2e554d573f352b85bdf6bc12d1ff",
+    "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/18_JOB/JOB_011.tsv": "ef1aeaab764a01cf4bd66c307f7fd6817ac3d814a7fe30142e28a72fca685703",
+    "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/18_JOB/JOB_011.tsv": "4a90b6d7d503e2b4ef15b855390adab90ccc249f2a7acda80406bb7da9989820",
+    "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/en/18_JOB/JOB_011.tsv": "10173775168673540e86a35d4b01a65055611c419b2dd6b8f9b5d6e936920215",
+    "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/18_JOB/JOB_012.tsv": "faddca5dd40a93b14bf9c3f6768827b4c6d13e212b714e3772269021ddacd721",
+    "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/18_JOB/JOB_012.tsv": "27cd524267e217dc8595b936245bd1886ac3685b195cb29ce845d479b2d0c4e1",
+    "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/en/18_JOB/JOB_012.tsv": "e7942500653c24de21e52482b007f00c57b7f905a3942e7877ed24c09b0bd44b",
+    "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/18_JOB/JOB_013.tsv": "5fa3d833ac6c62dee7c7bdccf61c4727f6991cb7253ad6d865ff545a175ff543",
+    "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/18_JOB/JOB_013.tsv": "fd7287922d864baef90e5e1a16ae724f51d2394a317b366324f32a2a88551abb",
+    "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/en/18_JOB/JOB_013.tsv": "bc4646b66dfeeb425102703678e5fb09133ebee730b175391f35a19299b2260f",
+    "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/18_JOB/JOB_014.tsv": "d8f3ffb00b3aad920682b3c4d282b5e454ff74f3f35770d1a0890316f42b71a5",
+    "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/18_JOB/JOB_014.tsv": "6807bd65f354abd8b0adb73235aeba85c5d799957018daa72b3a5e574c77da75",
+    "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/en/18_JOB/JOB_014.tsv": "91b8d6908ea8a76a58eb977e28099b221ac0313a392f2062c89e6a0194611194"
+  }
+}

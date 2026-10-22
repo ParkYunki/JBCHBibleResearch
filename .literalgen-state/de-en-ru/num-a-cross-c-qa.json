@@ -1,0 +1,16 @@
+[
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/04_NUM/NUM_033_2.tsv",
+    "verse": 54,
+    "old_row": "54\tUnd ihr sollt das Land durch Los nach euren Sippen erben; dem Zahlreichen sollt ihr sein Erbteil mehren und dem Wenigen sein Erbteil mindern; wohin ihm das Los herauskommt, dort soll es ihm gehören; nach den Stämmen eurer Väter sollt ihr erben.\tBewahrt das Erben statt des Austeilens.",
+    "new_row": "54\tUnd ihr sollt das Land durch Los nach euren Sippen erben; dem Zahlreichen sollt ihr sein Erbteil mehren und dem Wenigen sollst du sein Erbteil mindern; wohin ihm das Los herauskommt, dort soll es ihm gehören; nach den Stämmen eurer Väter sollt ihr erben.\tBewahrt das Erben statt des Austeilens.",
+    "reason": "Hebrew תַּמְעִיט is second-person masculine singular, unlike the plural תַּרְבּוּ in the preceding clause. Preserve this number switch; the Russian DIFFERENCE currently incorrectly claims that the plural is preserved."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/04_NUM/NUM_033_2.tsv",
+    "verse": 54,
+    "old_row": "54\tИ унаследуйте землю по жребию по вашим родам; многочисленному увеличьте его наследие, а малочисленному уменьшите его наследие; куда выйдет ему жребий, там ему будет; по коленам ваших отцов наследуйте.\tСохраняет множественное число в повелении малочисленному.",
+    "new_row": "54\tИ унаследуйте землю по жребию по вашим родам; многочисленному увеличьте его наследие, а малочисленному уменьши его наследие; куда выйдет ему жребий, там ему будет; по коленам ваших отцов наследуйте.\t«Уменьши» сохраняет единственное число повеления для малочисленного; наследование повторено.",
+    "reason": "Hebrew תַּמְעִיט is second-person masculine singular, unlike the plural תַּרְבּוּ in the preceding clause. Preserve this number switch; the Russian DIFFERENCE currently incorrectly claims that the plural is preserved."
+  }
+]

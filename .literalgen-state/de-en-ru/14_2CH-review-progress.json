@@ -1,0 +1,8 @@
+{
+  "generation_complete": true,
+  "first_check": "passed de/en/ru 582 files 12042 rows each;0fail",
+  "saved_qa_rows": 72,
+  "pending": "A final EN030–036 independent review and C native grammar",
+  "protected_baseline": "14_2CH-protected.json",
+  "no_existing_outputs_rewritten": true
+}

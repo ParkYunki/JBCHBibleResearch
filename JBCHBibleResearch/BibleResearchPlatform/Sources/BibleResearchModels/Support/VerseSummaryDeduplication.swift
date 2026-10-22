@@ -45,7 +45,7 @@ public enum VerseSummaryDeduplication {
                 let ordered = group.sorted { isBetter($0, than: $1) }
                 guard let keeper = ordered.first else { continue }
                 for other in ordered.dropFirst() {
-                    guard other.bookId == keeper.bookId, other.chapter == keeper.chapter, other.verse == keeper.verse,
+                    guard other.bookId == keeper.bookId, other.chapter == keeper.chapter, other.verse == keeper.verse, other.verseEnd == keeper.verseEnd,
                           other.contentHtml == keeper.contentHtml, other.contentText == keeper.contentText else {
                         continue
                     }

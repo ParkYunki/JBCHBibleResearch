@@ -30,7 +30,7 @@ final class BookNameTableProvider {
     /// 등록되지 않은 id거나, 해당 이름이 비어 있으면(예: shortNames 미확보) 한글 기본 이름
     /// (BooksProvider)으로 폴백한다.
     func displayName(forBookId bookId: Int, bookNameTableID: String?, preferShort: Bool = false) -> String {
-        let fallback = BooksProvider.shared.book(id: bookId)?.nameKo ?? "\(bookId)권"
+        let fallback = BooksProvider.shared.book(id: bookId)?.nameKo ?? String(localized: "\(bookId)권")
 
         guard let bookNameTableID, let table = table(id: bookNameTableID) else { return fallback }
         let index = bookId - 1

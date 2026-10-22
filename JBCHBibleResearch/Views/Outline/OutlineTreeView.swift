@@ -202,6 +202,7 @@ private struct OutlineTreeList: View {
         guard !query.isEmpty else { return [] }
         return BooksProvider.shared.books.filter { book in
             book.nameKo.localizedCaseInsensitiveContains(query)
+                || book.displayName.localizedCaseInsensitiveContains(query)
                 || book.nameOriginal.localizedCaseInsensitiveContains(query)
                 || book.abbreviation.contains { $0.localizedCaseInsensitiveContains(query) }
         }
@@ -278,7 +279,7 @@ private struct OutlineTreeList: View {
         }
         .background(settings.bibleBackgroundColor ?? Color.clear)
         .navigationTitle("개요")
-        .macSerifTitle("개요")
+        .macSerifTitle(String(localized: "개요"))
         // 다른 화면과 같이 `.principal` 툴바 타이틀(성곡 세리프체 + 테마 글자색)을 쓴다.
         // `.inline`을 함께 지정하지 않으면 시스템의 큰 왼쪽 정렬 타이틀이 별도 줄로 겹쳐 보인다.
         #if os(iOS)
@@ -288,7 +289,7 @@ private struct OutlineTreeList: View {
             #if os(iOS)
             ToolbarItem(placement: .principal) {
                 Text("개요")
-                    .font(.custom(SpecialPurposeFonts.titleSerif, size: 20, relativeTo: .title3))
+                    .font(.titleSerif(size: 20, relativeTo: .title3))
                     .fontWeight(.semibold)
                     .foregroundStyle(settings.bibleTextColor ?? .primary)
             }
@@ -344,8 +345,8 @@ private struct OutlineTreeList: View {
                     .frame(width: 14)
                 // 성곡 세리프체는 Regular뿐이라 `.fontWeight(.semibold)`로 합성 볼드를 주고,
                 // Dynamic Type 배율 유지를 위해 `relativeTo: .headline`을 쓴다.
-                Text(testament == .old ? "구약" : "신약")
-                    .font(.custom(SpecialPurposeFonts.titleSerif, size: 17, relativeTo: .headline))
+                Text(testament == .old ? String(localized: "구약") : String(localized: "신약"))
+                    .font(.titleSerif(size: 17, relativeTo: .headline))
                     .fontWeight(.semibold)
                 Spacer()
                 // 해당 성경의 책 권수 배지.
@@ -455,12 +456,12 @@ private struct OutlineTreeList: View {
             // 이 행도 같은 `List` 행 안에 펼침 토글 버튼과 함께 있어 값 기반 `NavigationLink(value:)`를 쓴다.
             // 성곡 세리프체 17pt(`.body`)는 Regular라 굵기 보정이 필요 없다.
             NavigationLink(value: OutlineTreeSelection.book(book.bookId)) {
-                Text(book.nameKo)
-                    .font(.custom(SpecialPurposeFonts.titleSerif, size: 17, relativeTo: .body))
+                Text(book.displayName)
+                    .font(.titleSerif(book.displayName, size: 17, relativeTo: .body))
             }
         } else {
-            Text(book.nameKo)
-                .font(.custom(SpecialPurposeFonts.titleSerif, size: 17, relativeTo: .body))
+            Text(book.displayName)
+                .font(.titleSerif(book.displayName, size: 17, relativeTo: .body))
                 .contentShape(Rectangle())
                 .onTapGesture { selection?.wrappedValue = .book(book.bookId) }
         }

@@ -23,9 +23,9 @@ enum DocumentImagePageError: Error, LocalizedError {
 
     var errorDescription: String? {
         switch self {
-        case .notImageDocument: return "이미지 문서가 아닙니다."
-        case .lastPage: return "마지막 한 장은 삭제할 수 없습니다. 문서를 삭제해 주세요."
-        case .pageNotFound: return "해당 쪽을 찾을 수 없습니다."
+        case .notImageDocument: return String(localized: "이미지 문서가 아닙니다.")
+        case .lastPage: return String(localized: "마지막 한 장은 삭제할 수 없습니다. 문서를 삭제해 주세요.")
+        case .pageNotFound: return String(localized: "해당 쪽을 찾을 수 없습니다.")
         }
     }
 }

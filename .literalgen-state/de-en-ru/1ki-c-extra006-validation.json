@@ -1,0 +1,40 @@
+{
+  "files": 4,
+  "rows": 76,
+  "all_assigned_verses_reviewed": true,
+  "own_qa_rows": 3,
+  "literal_quote_counts": {
+    "de": {
+      "open": 1,
+      "close": 1
+    },
+    "ru": {
+      "open": 1,
+      "close": 1
+    }
+  },
+  "problems": [],
+  "tsv_modified_during_qa": false,
+  "files_detail": [
+    {
+      "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/11_1KI/1KI_006_1.tsv",
+      "rows": 30,
+      "sha256": "51eb6898803a5edbc39105b8a4125890bfd4841932da02c916021882e924dd4a"
+    },
+    {
+      "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/11_1KI/1KI_006_2.tsv",
+      "rows": 8,
+      "sha256": "28ff4a89a32e29d8c0e87152ff5067599712b9522f9651ef39e01367f1ea9db3"
+    },
+    {
+      "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/11_1KI/1KI_006_1.tsv",
+      "rows": 30,
+      "sha256": "1051b2f0ed926f1edc63a9f44718dafedcddb655052ccbfdbfbba3225d6d7ece"
+    },
+    {
+      "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/11_1KI/1KI_006_2.tsv",
+      "rows": 8,
+      "sha256": "965b1faf99c7ae76a5c24e8cd00d0a96f955cbef306ef44e6f7fa534590684b5"
+    }
+  ]
+}

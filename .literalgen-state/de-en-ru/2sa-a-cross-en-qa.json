@@ -1,0 +1,20 @@
+[
+  {
+    "path": "Tools/LiteralGen/outputs/en/10_2SA/2SA_017.tsv",
+    "verse": 19,
+    "old_row": "19\t=\tThe Hebrew calls her “the woman” and leaves taking the covering implicit; BSB specifies “the man’s wife”.",
+    "new_row": "19\t=\tThe Hebrew calls her “the woman”; BSB specifies “the man’s wife.”"
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/en/10_2SA/2SA_018_1.tsv",
+    "verse": 16,
+    "old_row": "16\t=\tThe Hebrew repeats Joab as the restrainer; BSB uses “Joab” once.",
+    "new_row": "16\t=\tClose to the Hebrew."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/en/10_2SA/2SA_018_2.tsv",
+    "verse": 31,
+    "old_row": "31\t=\tThe Hebrew repeats “the Cushite” and names the hand of the attackers; BSB leaves both repetitions implicit.",
+    "new_row": "31\t=\tThe Hebrew names “the Cushite” twice and explicitly mentions the attackers’ hand; BSB names him once and leaves the hand image implicit."
+  }
+]

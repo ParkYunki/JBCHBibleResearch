@@ -1,0 +1,26 @@
+[
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/en/09_1SA/1SA_025_1.tsv",
+    "verse": 2,
+    "old_row": "2\t=\tClose to the Hebrew.",
+    "new_row": "2\t=\tThe Hebrew lists three thousand sheep before a thousand goats; BSB reverses their order."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/en/09_1SA/1SA_025_1.tsv",
+    "verse": 16,
+    "old_row": "16\t=\tClose to the Hebrew.",
+    "new_row": "16\t=\tThe Hebrew gives the time pair as “night and day”; BSB has “day and night”."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/en/09_1SA/1SA_025_1.tsv",
+    "verse": 23,
+    "old_row": "23\t=\tClose to the Hebrew.",
+    "new_row": "23\t=\tThe Hebrew names David twice; BSB uses “him” for the second occurrence."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/en/09_1SA/1SA_025_2.tsv",
+    "verse": 37,
+    "old_row": "37\t=\tThe Hebrew describes sobriety as the wine going out of Nabal and says his heart died within him. BSB has “Nabal was sober” and “his heart failed.”",
+    "new_row": "37\t=\tThe Hebrew describes sobriety as the wine going out of Nabal and says his heart died within him. BSB has “Nabal was sober” and “his heart failed.” It says he became a stone; BSB has “like a stone”."
+  }
+]

@@ -127,7 +127,7 @@ struct BibleListLayerRow: View {
     let meta: String
     var onSelect: () -> Void
     var onDelete: (() -> Void)? = nil
-    var deleteLabel: String = "삭제"
+    var deleteLabel: String = String(localized: "삭제")
 
     private var settings: UserSettingsStore { .shared }
 

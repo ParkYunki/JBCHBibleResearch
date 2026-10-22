@@ -1,0 +1,55 @@
+{
+  "scope": "LEV001–011 de/ru; LEV001–008 en (en009–011 root-owned)",
+  "counts": {
+    "de_files": 15,
+    "de_rows": 299,
+    "ru_files": 15,
+    "ru_rows": 299,
+    "en_files": 11,
+    "en_rows": 208
+  },
+  "qa_rows": 46,
+  "qa_counts": {
+    "de": 19,
+    "ru": 26,
+    "en": 1
+  },
+  "issues_after_proposed_qa": [],
+  "quote_counts_after_proposed_qa": {
+    "de„": 27,
+    "de“": 27,
+    "de‚": 3,
+    "de‘": 3,
+    "ru«": 27,
+    "ru»": 27,
+    "ru„": 3,
+    "ru“": 3,
+    "en“": 0,
+    "en”": 0
+  },
+  "raw_quote_counts": {
+    "de„": 27,
+    "de“": 26,
+    "de‚": 3,
+    "de‘": 3,
+    "ru«": 27,
+    "ru»": 26,
+    "ru„": 3,
+    "ru“": 3,
+    "en“": 0,
+    "en”": 0
+  },
+  "checks": [
+    "all O/TARGET verses reviewed",
+    "native grammar and DIFF reviewed",
+    "packet verse order",
+    "three nonempty TSV fields",
+    "en literal exactly =",
+    "DIFF 1–3 sentences and <=60 words",
+    "no placeholders",
+    "divine name forms",
+    "localized primary/nested quotes",
+    "unique QA path+verse and exact original full rows"
+  ],
+  "output_files_directly_modified": false
+}

@@ -25,13 +25,13 @@ enum AppSection: String, CaseIterable, Identifiable, Hashable {
 
     var title: String {
         switch self {
-        case .bibleReading: return "성경 조회"
-        case .wordNote: return "말씀 노트"
-        case .documents: return "연구 문서"
-        case .sermons: return "내 설교"
-        case .outline: return "개요"
-        case .tagRelations: return "태그 관계"
-        case .search: return "통합 검색"
+        case .bibleReading: return String(localized: "성경 조회")
+        case .wordNote: return String(localized: "말씀 노트")
+        case .documents: return String(localized: "연구 문서")
+        case .sermons: return String(localized: "내 설교")
+        case .outline: return String(localized: "개요")
+        case .tagRelations: return String(localized: "태그 관계")
+        case .search: return String(localized: "통합 검색")
         }
     }
 

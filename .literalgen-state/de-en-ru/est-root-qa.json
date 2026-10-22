@@ -1,0 +1,12 @@
+[
+  {
+    "path": "Tools/LiteralGen/outputs/en/17_EST/EST_003.tsv",
+    "old_row": "6\t=\tThe Hebrew says they told him Mordecai’s people and he sought to stretch out a hand against Mordecai alone; BSB omits the informants and uses hands in the plural.",
+    "new_row": "6\t=\tThe Hebrew says they told him Mordecai’s people and uses a singular hand in describing the action he scorned; BSB omits the informants and uses hands in the plural."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/en/17_EST/EST_007.tsv",
+    "old_row": "4\t=\tThe Hebrew explicitly names the adversary and the king’s loss in its final clause; BSB renders this in terms of distress and burdening the king.",
+    "new_row": "4\t=\tThe Hebrew names the king’s loss in the final clause; BSB describes burdening the king."
+  }
+]

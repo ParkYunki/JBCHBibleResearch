@@ -127,7 +127,7 @@ struct SermonDetailView: View {
             }
             .padding(20)
         }
-        .navigationTitle(hasFixedTitle ? SermonFixedTitle.navigationText : (sermon.title.isEmpty ? "새 설교" : sermon.title))
+        .navigationTitle(hasFixedTitle ? SermonFixedTitle.navigationText : (sermon.title.isEmpty ? String(localized: "새 설교") : sermon.title))
         #if os(iOS)
         .navigationBarTitleDisplayMode(.inline)
         #endif
@@ -140,7 +140,7 @@ struct SermonDetailView: View {
 
     /// 읽기 전용 표시 — 제목 수정은 `SermonEditorView.titleField` 한 곳으로 모았다.
     private var titleSection: some View {
-        Text(sermon.title.isEmpty ? "제목 없음" : sermon.title)
+        Text(sermon.title.isEmpty ? String(localized: "제목 없음") : sermon.title)
             .font(.title2.bold())
             .foregroundStyle(settings.bibleTextColor ?? .primary)
     }
@@ -257,7 +257,7 @@ struct SermonDetailView: View {
         HStack(alignment: .center, spacing: 8) {
             // 왼쪽 글자는 남는 폭만 쓰고 모자라면 한 줄에서 잘린다 — 상세 영역이 좁을 때(아이패드 세로 등) 오른쪽 묶음을 밀어내지 않게 한다.
             VStack(alignment: .leading, spacing: 3) {
-                Text(delivery.gathering?.name ?? "모임 미지정")
+                Text(delivery.gathering?.name ?? String(localized: "모임 미지정"))
                     .font(.callout.weight(.semibold))
                     .foregroundStyle(settings.bibleTextColor ?? .primary)
                     .lineLimit(1)
@@ -301,7 +301,7 @@ struct SermonDetailView: View {
     /// 부담을 피하기 위함).
     private func statusBadge(for delivery: SermonDelivery) -> some View {
         let isSame = delivery.contentText == sermon.contentText
-        return SermonBadge(text: isSame ? "메인과 동일" : "내용 수정됨", color: isSame ? SermonTheme.success : SermonTheme.warning)
+        return SermonBadge(text: isSame ? String(localized: "메인과 동일") : String(localized: "내용 수정됨"), color: isSame ? SermonTheme.success : SermonTheme.warning)
     }
 
     // MARK: - 에디터/뷰어 진입 (3·4단계 완료 — 에디터는 SermonEditorView, 뷰어는 SermonViewerView)
@@ -465,7 +465,7 @@ struct SermonDeliveryCreationSheet: View {
                 Text("새 모임에서 사용")
                     .font(.headline)
                     .foregroundStyle(textColor)
-                Text(sermon.title.isEmpty ? "제목 없음" : sermon.title)
+                Text(sermon.title.isEmpty ? String(localized: "제목 없음") : sermon.title)
                     .font(.caption)
                     .foregroundStyle(textColor.opacity(0.6))
                     .lineLimit(1)
@@ -507,8 +507,8 @@ struct SermonDeliveryCreationSheet: View {
     /// 삭제 확인 알림 문구 — 이 종류로 기록된 모임이 있으면 개수를 알린다(기록은 지워지지 않고 "모임 미지정"이 된다).
     private func deleteMessage(for gathering: SermonGathering) -> String {
         let count = gathering.deliveries?.count ?? 0
-        if count == 0 { return "이 모임 종류를 삭제합니다." }
-        return "이 모임 종류로 기록된 \(count)개의 모임은 지워지지 않고 '모임 미지정'으로 바뀝니다."
+        if count == 0 { return String(localized: "이 모임 종류를 삭제합니다.") }
+        return String(localized: "이 모임 종류로 기록된 \(count)개의 모임은 지워지지 않고 '모임 미지정'으로 바뀝니다.")
     }
 
     /// 모임 종류 삭제. `SermonGathering.deliveries`의 deleteRule이 `.nullify`라 기록(`SermonDelivery`)은 남고 `gathering`만 비워진다.

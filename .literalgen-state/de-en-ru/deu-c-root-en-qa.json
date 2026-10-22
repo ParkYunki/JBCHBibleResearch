@@ -1,0 +1,23 @@
+[
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/en/05_DEU/DEU_033.tsv",
+    "verse": 10,
+    "old_row": "10\t=\tThe Hebrew uses plural verbs for teaching and setting incense, places incense in God’s nostrils, and has singular “whole offering”; BSB uses “He,” “before You,” and plural “whole burnt offerings.”",
+    "new_row": "10\t=\tThe Hebrew uses plural verbs for teaching and setting incense, places incense in God’s nose, and has singular “whole offering”; BSB uses “He,” “before You,” and plural “whole burnt offerings.”",
+    "reason": "The actual Hebrew באפך is singular nose; do not introduce plural nostrils in a note about preserved Hebrew wording."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/en/05_DEU/DEU_033.tsv",
+    "verse": 15,
+    "old_row": "15\t=\tThe Hebrew names the “head” or summit of the ancient mountains; BSB says “the best” of them.",
+    "new_row": "15\t=\tClose to the Hebrew.",
+    "reason": "The poetic head/best expression does not establish an unequivocal contrast; use the required close formula instead of asserting a disputed concrete interpretation."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/en/05_DEU/DEU_033.tsv",
+    "verse": 17,
+    "old_row": "17\t=\tThe Hebrew gives the bull and wild-ox horns as direct nominal descriptions; BSB marks both comparisons with “like.”",
+    "new_row": "17\t=\tThe Hebrew directly calls his horns “horns of a wild ox”; BSB marks the comparison with “like.”",
+    "reason": "Restrict the note to the clear nominal horns comparison; the firstborn bull clause is grammatically less transparent."
+  }
+]

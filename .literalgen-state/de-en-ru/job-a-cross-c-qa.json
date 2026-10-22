@@ -1,0 +1,23 @@
+[
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/18_JOB/JOB_034_1.tsv",
+    "verse": "23",
+    "old_row": "23\tDenn er setzt einem Menschen nicht noch einmal an, vor Gott ins Gericht zu gehen.\tGenannt ist nicht noch einmal statt nicht lange.",
+    "new_row": "23\tDenn er bestimmt nicht, dass ein Mensch noch einmal vor Gott ins Gericht geht.\tGenannt ist nicht noch einmal statt nicht lange.",
+    "reason": "Correct German appointment construction; setzt einem Menschen an lacks the required object and preposition."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/18_JOB/JOB_036_1.tsv",
+    "verse": "2",
+    "old_row": "2\t„Warte mir ein wenig, und ich werde dir zeigen, dass noch Worte für Gott da sind.\tNah am Hebräischen.",
+    "new_row": "2\t„Warte auf mich ein wenig, und ich werde dir zeigen, dass noch Worte für Gott da sind.\tNah am Hebräischen.",
+    "reason": "Correct German warten government: warten auf, not warten with a dative person."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/18_JOB/JOB_036_1.tsv",
+    "verse": "19",
+    "old_row": "19\tWird dein Reichtum dich aus der Bedrängnis bringen und alle Anstrengungen der Kraft?\tDie Frage gilt Reichtum und Kraftanstrengungen gegen Bedrängnis.",
+    "new_row": "19\tWerden dein Reichtum und alle Anstrengungen der Kraft dich aus der Bedrängnis bringen?\tDie Frage gilt Reichtum und Kraftanstrengungen gegen Bedrängnis.",
+    "reason": "Make coordinated subjects agree with plural verb and avoid reading the final noun phrase as a second object."
+  }
+]

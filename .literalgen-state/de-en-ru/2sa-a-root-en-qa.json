@@ -1,0 +1,14 @@
+[
+  {
+    "path": "Tools/LiteralGen/outputs/en/10_2SA/2SA_005.tsv",
+    "verse": 12,
+    "old_row": "12\t=\tThe Hebrew says that his kingdom was exalted; BSB makes the LORD the explicit subject who exalted it.",
+    "new_row": "12\t=\tClose to the Hebrew."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/en/10_2SA/2SA_007.tsv",
+    "verse": 7,
+    "old_row": "7\t=\tThe Hebrew says “tribes of Israel”; BSB uses “leaders of Israel.”",
+    "new_row": "7\t=\tThe Hebrew says “tribes of Israel”; BSB uses “leaders.”"
+  }
+]

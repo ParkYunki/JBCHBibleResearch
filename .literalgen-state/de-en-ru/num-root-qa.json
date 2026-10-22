@@ -1,0 +1,9 @@
+[
+  {
+    "path": "Tools/LiteralGen/outputs/en/04_NUM/NUM_010_1.tsv",
+    "verse": 6,
+    "old_row": "6\t=\tThe Hebrew names a singular alarm blast for each sounding and changes from “you shall blow” to “they shall blow”; BSB uses plural “short blasts” and then a passive description.",
+    "new_row": "6\t=\tThe Hebrew names a singular alarm blast for each sounding and changes from “you shall blow” to “they shall blow”; BSB uses plural “short blasts” and then makes the blasts the subject signaling departure.",
+    "reason": "The BSB final clause is not grammatically passive."
+  }
+]

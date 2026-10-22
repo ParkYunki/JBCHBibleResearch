@@ -1,0 +1,60 @@
+{
+  "files": 10,
+  "rows": 188,
+  "files_validated": [
+    {
+      "path": "Tools/LiteralGen/outputs/de/15_EZR/EZR_001.tsv",
+      "rows": 11,
+      "valid": true
+    },
+    {
+      "path": "Tools/LiteralGen/outputs/ru/15_EZR/EZR_001.tsv",
+      "rows": 11,
+      "valid": true
+    },
+    {
+      "path": "Tools/LiteralGen/outputs/de/15_EZR/EZR_002_1.tsv",
+      "rows": 30,
+      "valid": true
+    },
+    {
+      "path": "Tools/LiteralGen/outputs/de/15_EZR/EZR_002_2.tsv",
+      "rows": 30,
+      "valid": true
+    },
+    {
+      "path": "Tools/LiteralGen/outputs/de/15_EZR/EZR_002_3.tsv",
+      "rows": 10,
+      "valid": true
+    },
+    {
+      "path": "Tools/LiteralGen/outputs/ru/15_EZR/EZR_002_1.tsv",
+      "rows": 30,
+      "valid": true
+    },
+    {
+      "path": "Tools/LiteralGen/outputs/ru/15_EZR/EZR_002_2.tsv",
+      "rows": 30,
+      "valid": true
+    },
+    {
+      "path": "Tools/LiteralGen/outputs/ru/15_EZR/EZR_002_3.tsv",
+      "rows": 10,
+      "valid": true
+    },
+    {
+      "path": "Tools/LiteralGen/outputs/de/15_EZR/EZR_003.tsv",
+      "rows": 13,
+      "valid": true
+    },
+    {
+      "path": "Tools/LiteralGen/outputs/ru/15_EZR/EZR_003.tsv",
+      "rows": 13,
+      "valid": true
+    }
+  ],
+  "own_qa_rows": 188,
+  "en_cross_qa_rows": 94,
+  "own_candidates": 7,
+  "en_candidates": 4
+}

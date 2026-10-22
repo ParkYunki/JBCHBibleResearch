@@ -115,7 +115,7 @@ struct WordNoteRowView: View {
 
     /// 리스트 항목 앞에 표시하는 카테고리 배지.
     private var categoryBadge: some View {
-        Text(item.category.rawValue)
+        Text(item.category.title)
             .font(Self.badgeFont)
             .padding(.horizontal, Self.badgeHorizontalPadding)
             .padding(.vertical, Self.badgeVerticalPadding)

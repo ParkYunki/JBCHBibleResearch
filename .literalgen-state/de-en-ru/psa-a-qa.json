@@ -1,0 +1,100 @@
+[
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/19_PSA/PSA_004.tsv",
+    "verse": "2",
+    "old_row": "2\tSöhne eines Mannes, bis wann wird meine Ehre zur Schande? Ihr liebt Nichtiges, sucht Lüge. Sela.\tDie Angeredeten heißen Söhne eines Mannes; Nichtiges wird gesucht und geliebt.",
+    "new_row": "2\tSöhne eines Mannes, bis wann wird meine Ehre zur Schande? Ihr liebt Nichtiges, sucht Lüge. Sela.\tDie Angeredeten heißen Söhne eines Mannes; die Schande betrifft die Ehre.",
+    "reason": "Remove inaccurate note implying vanity is both loved and sought; the sought object is falsehood."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/19_PSA/PSA_004.tsv",
+    "verse": "8",
+    "old_row": "8\tВ мире вместе лягу и усну, ибо Ты, Господи, один даёшь мне жить безопасно.\tЛягу и усну выражены будущим временем.",
+    "new_row": "8\tВ мире я и лягу, и усну одновременно, ибо Ты, Господи, один даёшь мне жить безопасно.\tЛягу и усну выражены будущим временем.",
+    "reason": "Clarify that together joins lying and sleeping, not an unnamed companion."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/19_PSA/PSA_008.tsv",
+    "verse": "2",
+    "old_row": "2\tИз уст младенцев и грудных детей Ты основал силу ради Твоих врагов, чтобы прекратить врага и мстителя.\tНазвана сила, не хвала.",
+    "new_row": "2\tИз уст младенцев и грудных детей Ты основал силу ради Твоих врагов, чтобы остановить врага и мстителя.\tНазвана сила, не хвала.",
+    "reason": "Russian прекратить cannot naturally take a personal enemy as its object; остановить preserves causing the enemy to cease."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/19_PSA/PSA_009.tsv",
+    "verse": "16",
+    "old_row": "16\tDer HERR hat sich bekannt gemacht, hat Gericht getan; im Werk seiner Handflächen ist der Frevler verstrickt. Higgajon. Sela.\tDer Frevler und seine Handflächen sind ausdrücklich genannt.",
+    "new_row": "16\tDer HERR ist bekannt geworden, hat Gericht getan; im Werk seiner Handflächen ist der Frevler verstrickt. Higgajon. Sela.\tDer Frevler und seine Handflächen sind ausdrücklich genannt.",
+    "reason": "Preserve passive/inchoative Nifal נודע rather than reflexive self-disclosure."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/19_PSA/PSA_010.tsv",
+    "verse": "17",
+    "old_row": "17\tDas Begehren der Elenden hast du gehört, HERR; du festigst ihr Herz, schenkst deinem Ohr Aufmerksamkeit,\tGott festigt ihr Herz aktiv; das Hören ist vergangen.",
+    "new_row": "17\tDas Begehren der Elenden hast du gehört, HERR; du festigst ihr Herz, neigst dein Ohr,\tGott festigt ihr Herz aktiv; das Hören ist vergangen.",
+    "reason": "Inclining the ear is attention to the prayer, not attention paid to His own ear."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/19_PSA/PSA_012.tsv",
+    "verse": "1",
+    "old_row": "1\tDem Leiter. Nach der Achten. Ein Psalm Davids. Rette, HERR, denn ein Getreuer ist zu Ende, denn Treue sind unter den Menschenkindern verschwunden.\tDer Getreue steht zunächst im Singular; das Verschwinden ist vollendet.",
+    "new_row": "1\tDem Leiter. Nach der Achten. Ein Psalm Davids. Rette, HERR, denn ein Getreuer ist dahin, denn Treue sind unter den Menschenkindern verschwunden.\tDer Getreue steht zunächst im Singular; das Verschwinden ist vollendet.",
+    "reason": "Correct German idiom for the faithful person having ceased; zu Ende suggests being exhausted."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/19_PSA/PSA_013.tsv",
+    "verse": "4",
+    "old_row": "4\tdamit mein Feind nicht sage: „Ich habe ihn überwältigt“, meine Bedränger jubeln, wenn ich wanke.\tWanken steht statt Niederliegen.",
+    "new_row": "4\tdamit mein Feind nicht sage: „Ich habe ihn überwältigt“, meine Bedränger nicht jubeln, wenn ich wanke.\tWanken steht statt Niederliegen.",
+    "reason": "Carry the negative purpose introduced by lest into the parallel clause about enemies rejoicing."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/19_PSA/PSA_013.tsv",
+    "verse": "4",
+    "old_row": "4\tчтобы мой враг не сказал: «Я одолел его»; мои враги возликуют, если я поколеблюсь.\tБлизко к еврейскому.",
+    "new_row": "4\tчтобы мой враг не сказал: «Я одолел его»; да не возликуют мои враги, если я поколеблюсь.\tБлизко к еврейскому.",
+    "reason": "Carry the negative purpose introduced by lest into the parallel clause about enemies rejoicing."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/19_PSA/PSA_062.tsv",
+    "verse": "1",
+    "old_row": "1\tDem Leiter. Nach Jeduthun. Ein Psalm Davids. Nur zu Gott ist Stille meine Seele; von ihm ist meine Rettung.\tDie Rettung kommt von ihm; die Stille ist ausgesagt.",
+    "new_row": "1\tDem Leiter. Nach Jeduthun. Ein Psalm Davids. Nur zu Gott ist meine Seele still; von ihm ist meine Rettung.\tDie Rettung kommt von ihm; die Stille ist ausgesagt.",
+    "reason": "Correct German predicate word order and use the adjective required by native grammar."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/19_PSA/PSA_062.tsv",
+    "verse": "11",
+    "old_row": "11\tОдно говорил Бог, два этих я услышал: что сила принадлежит Богу,\tОдно и два названы прямо.",
+    "new_row": "11\tОдно говорил Бог, эти два я услышал: что сила принадлежит Богу,\tОдно и два названы прямо.",
+    "reason": "Correct Russian demonstrative/numeral order while retaining the two things wording."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/19_PSA/PSA_065.tsv",
+    "verse": "8",
+    "old_row": "8\tИ убоялись живущие на краях Твоих знамений; выходы утра и вечера Ты заставляешь ликовать.\tВыходы утра и вечера названы прямо.",
+    "new_row": "8\tИ живущие на краях убоялись Твоих знамений; выходы утра и вечера Ты заставляешь ликовать.\tВыходы утра и вечера названы прямо.",
+    "reason": "Prevent misreading the ends as belonging to the signs; the signs are the object of fearing."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/19_PSA/PSA_067.tsv",
+    "verse": "1",
+    "old_row": "1\tНачальнику. На струнных. Псалом. Песня. Да помилует нас Бог и благословит нас, да осветит Своё лицо с нами. Села.\tБог назван в третьем лице; Села сохранено.",
+    "new_row": "1\tНачальнику. На струнных. Псалом. Песня. Да помилует нас Бог и благословит нас, да даст Своему лицу сиять с нами. Села.\tБог назван в третьем лице; Села сохранено.",
+    "reason": "Avoid suggesting He shines light on His own face; His face is to shine with us."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/19_PSA/PSA_076.tsv",
+    "verse": "2",
+    "old_row": "2\tUnd in Salem wurde seine Hütte und seine Wohnung in Zion.\tDas Entstehen der Hütte ist vergangen.",
+    "new_row": "2\tUnd in Salem war seine Hütte und seine Wohnung in Zion.\tDas Sein der Hütte wird vergangen beschrieben.",
+    "reason": "Sein statt unvollständigem Werden ohne Prädikat."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/19_PSA/PSA_078_2.tsv",
+    "verse": "42",
+    "old_row": "42\tSie erinnerten sich nicht an seine Hand, an den Tag, da er sie aus der Hand des Bedrängers erlöste,\tEin Bedränger steht in der Einzahl.",
+    "new_row": "42\tSie erinnerten sich nicht an seine Hand, an den Tag, da er sie vom Bedränger erlöste,\tEin Bedränger steht in der Einzahl.",
+    "reason": "מני צר nennt keine zusätzliche Hand."
+  }
+]

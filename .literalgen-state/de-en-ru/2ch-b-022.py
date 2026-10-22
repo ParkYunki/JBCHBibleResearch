@@ -1,0 +1,27 @@
+exec(open('.literalgen-state/de-en-ru/2ch-b-write.py').read())
+de='''Und die Bewohner Jerusalems machten Ahasja, seinen jüngsten Sohn, zum König an seiner Stelle, denn alle früheren hatte die Streifschar getötet, die mit den Arabern ins Lager gekommen war. Und Ahasja, der Sohn Jorams, wurde König über Juda.
+Zweiundvierzig Jahre alt war Ahasja, als er König wurde; und ein Jahr regierte er in Jerusalem. Und der Name seiner Mutter war Athalja, die Tochter Omris.
+Auch er ging auf den Wegen des Hauses Ahab, denn seine Mutter war seine Ratgeberin zum gottlosen Handeln.
+Und er tat das Böse in den Augen des HERRN wie das Haus Ahab, denn sie waren ihm nach dem Tod seines Vaters Ratgeber zu seinem Verderben.
+Auch ging er nach ihrem Rat; und er ging mit Joram, dem Sohn Ahabs, dem König Israels, zum Kampf gegen Hasael, den König von Syrien, in Ramoth in Gilead; und die Syrer schlugen Joram.
+Und er kehrte um, um in Jesreel von den Schlägen geheilt zu werden, mit denen sie ihn in Rama geschlagen hatten, als er gegen Hasael, den König von Syrien, kämpfte. Und Ahasja, der Sohn Jorams, der König Judas, zog hinab, um Joram, den Sohn Ahabs, in Jesreel zu sehen, denn er war krank.
+Und von Gott war es Ahasjas Untergang, zu Joram zu kommen; und als er kam, zog er mit Joram hinaus zu Jehu, dem Sohn Nimsis, den der HERR gesalbt hatte, das Haus Ahab auszurotten.
+Und es geschah, als Jehu am Haus Ahab Gericht übte: Er fand die Obersten Judas und die Söhne der Brüder Ahasjas, die Ahasja dienten, und tötete sie.
+Und er suchte Ahasja; und sie nahmen ihn gefangen, während er sich in Samaria versteckte, und brachten ihn zu Jehu und töteten ihn und begruben ihn, denn sie sagten: „Er ist Josaphats Sohn, der den HERRN mit seinem ganzen Herzen gesucht hat.“ Und im Haus Ahasjas war keiner, der Kraft für das Königtum behielt.
+Und Athalja, die Mutter Ahasjas, sah, dass ihr Sohn tot war; und sie stand auf und vernichtete den ganzen Samen des Königtums im Haus Juda.
+Und Josabeath, die Tochter des Königs, nahm Joas, den Sohn Ahasjas, und stahl ihn aus der Mitte der Söhne des Königs, die getötet wurden, und setzte ihn und seine Amme in die Bettenkammer. Und Josabeath, die Tochter des Königs Joram, die Frau des Priesters Jojada, verbarg ihn, denn sie war die Schwester Ahasjas, vor Athalja; und sie tötete ihn nicht.
+Und er war bei ihnen im Haus Gottes sechs Jahre versteckt; und Athalja regierte über das Land.'''
+ru='''И жители Иерусалима воцарили Охозию, его младшего сына, вместо него, ибо всех прежних убил отряд, пришедший с аравитянами в стан. И Охозия, сын Иорама, воцарился над Иудой.
+Сорока двух лет был Охозия, когда воцарился; и один год царствовал в Иерусалиме. И имя его матери Гофолия, дочь Амврия.
+Также он ходил путями дома Ахава, ибо его мать была его советницей к нечестивому действию.
+И он делал злое в глазах Господа, как дом Ахава, ибо они были ему советниками после смерти его отца к его погибели.
+Также он ходил по их совету; и пошёл с Иорамом, сыном Ахава, царём Израиля, на войну против Азаила, царя Сирии, в Рамофе Галаадском; и сирийцы поразили Иорама.
+И он возвратился исцелиться в Изрееле от ударов, которыми они поразили его в Раме, когда он сражался с Азаилом, царём Сирии. И Охозия, сын Иорама, царь Иуды, сошёл увидеть Иорама, сына Ахава, в Изрееле, ибо тот болен.
+И от Бога была погибель Охозии в том, чтобы прийти к Иораму; и когда он пришёл, вышел с Иорамом к Ииую, сыну Намессия, которого Господь помазал истребить дом Ахава.
+И было, когда Ииуй судился с домом Ахава: он нашёл начальников Иуды и сыновей братьев Охозии, служащих Охозии, и убил их.
+И он искал Охозию; и они захватили его, когда он скрывался в Самарии, и привели его к Ииую, и умертвили его, и похоронили его, ибо сказали: «Он сын Иосафата, который искал Господа всем своим сердцем». И не было у дома Охозии силы удержать царство.
+И Гофолия, мать Охозии, увидела, что её сын умер; и встала и уничтожила всё семя царства в доме Иуды.
+И Иосавеф, дочь царя, взяла Иоаса, сына Охозии, и украла его из среды сынов царя, которых умерщвляли, и поместила его и его кормилицу в комнату кроватей. И Иосавеф, дочь царя Иорама, жена священника Иодая, скрыла его, ибо она была сестрой Охозии, от Гофолии; и та не умертвила его.
+И он был с ними в доме Бога скрывающимся шесть лет; и Гофолия царствовала над землёй.'''
+write(22,'de',de,{1:'Das Töten benennt keine besondere Weise; Juda ist das direkte Reich Ahasjas.',2:'Zweiundvierzig steht statt zweiundzwanzig.',3:'Die Ratgeberin ist ausdrücklich genannt.',4:'Das Böse und die Augen bleiben erhalten.',6:'Die Schläge sind aktiv ausgedrückt; genannt ist das Sehen.',7:'Zu Jehu steht statt wider Jehu.',8:'Die Söhne sind ausdrücklich; das Töten benennt keine besondere Weise.',9:'Das Bringen und Töten haben ein pluralisches Subjekt.',10:'Das Bild des Samens bleibt erhalten.',11:'Die Söhne und das Bettenzimmer bleiben erhalten; Athalja ist handelndes Subjekt des Nichttötens.',12:'Die Verbindung bleibt und statt solange.'})
+write(22,'ru',ru,{1:'Иуда назван прямым царством Охозии.',2:'Сорок два стоят вместо двадцати двух.',3:'Выражено нечестивое действие.',4:'Советники стоят во множественном числе.',5:'Сохранено повторение хождения; названо поражение.',6:'Сохранены удары и схождение.',7:'К Ииую выражено вместо против Ииуя.',8:'Выражено судебное действие.',9:'Поиск выражен прямо без отдельного повеления; сохранена сила царства.',10:'Сохранён образ семени; ибо отдельно не названо.',11:'Сохранено местоимение его вместо повторённого имени Иоаса.',12:'Скрывание выражено возвратным глаголом.'})

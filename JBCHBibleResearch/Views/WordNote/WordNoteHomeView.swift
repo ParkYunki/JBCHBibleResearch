@@ -21,10 +21,18 @@ import BibleResearchModels
 import UIKit
 #endif
 
-/// 통합 목록의 카테고리. rawValue가 화면에 표시되는 라벨이다.
+/// 통합 목록의 카테고리. 화면에는 `title`(앱 언어로 지역화)을 표시하고, rawValue는 저장·검색 인덱스 키로만 쓴다.
 enum WordNoteCategory: String, CaseIterable, Identifiable {
     case personalMemo = "개인 묵상"
     case verseSummary = "말씀 요약"
+
+    /// 화면 표시용 이름. rawValue는 검색 인덱스 카테고리 키(`UserContentSearchIndex`)로도 쓰이므로 바꾸면 안 된다.
+    var title: String {
+        switch self {
+        case .personalMemo: return String(localized: "개인 묵상")
+        case .verseSummary: return String(localized: "말씀 요약")
+        }
+    }
 
     var id: String { rawValue }
 
@@ -116,6 +124,14 @@ enum WordNoteItem: Identifiable {
         }
     }
 
+    /// 절 범위의 끝 절(같은 장 안). 범위가 아니면 nil.
+    var verseEnd: Int? {
+        switch self {
+        case .memo(let memo): return memo.verseEnd
+        case .summary(let summary): return summary.verseEnd
+        }
+    }
+
     /// 개인 묵상이 속한 폴더 id. 말씀 요약은 폴더가 없어 항상 nil.
     var folderID: UUID? {
         if case .memo(let memo) = self { return memo.folder?.id }
@@ -137,7 +153,7 @@ enum WordNoteItem: Identifiable {
     /// 목록 행(`WordNoteRowView`)과 최근 노트 카드(`WordNoteRecentEmptyState`)가 같은 로직·값을 쓰도록 여기 모아 둔 프로퍼티들(`previewTitle` 등).
     var previewTitle: String {
         let trimmed = contentText.trimmingCharacters(in: .whitespacesAndNewlines)
-        let emptyLabel = category == .personalMemo ? "새 메모" : "새 말씀 요약"
+        let emptyLabel = category == .personalMemo ? String(localized: "새 메모") : String(localized: "새 말씀 요약")
         guard !trimmed.isEmpty else { return emptyLabel }
         let firstLine = trimmed.split(separator: "\n", maxSplits: 1).first.map(String.init) ?? trimmed
         return String(firstLine.prefix(40))
@@ -155,12 +171,8 @@ enum WordNoteItem: Identifiable {
     }
 
     var coordinateLabel: String {
-        let bookName = BooksProvider.shared.book(id: bookId)?.nameKo ?? "\(bookId)권"
-        var label = "\(bookName) \(chapter)장"
-        if let verse {
-            label += " \(verse)절"
-        }
-        return label
+        let bookName = BooksProvider.shared.book(id: bookId)?.displayName ?? String(localized: "\(bookId)권")
+        return WordNoteVerseLabel.text(bookName: bookName, chapter: chapter, verse: verse, verseEnd: verseEnd)
     }
 
     /// 말씀 요약은 쓴 날짜(`createdAt`), 개인 묵상은 마지막 수정일(`updatedAt`) — `sortDate`와 같은 기준.
@@ -486,11 +498,11 @@ private struct WordNoteListContent: View {
     /// 목록 헤더용 — 지금 선택된 분류의 제목.
     private var filterTitle: String {
         switch categoryFilter {
-        case .all: return "전체"
-        case .category(let category): return category.rawValue
-        case .book(let bookId): return BooksProvider.shared.book(id: bookId)?.nameKo ?? "\(bookId)권"
-        case .folder(let folderID): return folders.first(where: { $0.id == folderID })?.name ?? "폴더"
-        case .unfiled: return "미분류"
+        case .all: return String(localized: "전체")
+        case .category(let category): return category.title
+        case .book(let bookId): return BooksProvider.shared.book(id: bookId)?.displayName ?? String(localized: "\(bookId)권")
+        case .folder(let folderID): return folders.first(where: { $0.id == folderID })?.name ?? String(localized: "폴더")
+        case .unfiled: return String(localized: "미분류")
         }
     }
 
@@ -608,10 +620,10 @@ private struct WordNoteListContent: View {
                     .padding(.top, 12)
                     .padding(.bottom, 2)
 
-                treeRow(.all, title: "전체", systemImage: "list.bullet", count: count(for: .all))
+                treeRow(.all, title: String(localized: "전체"), systemImage: "list.bullet", count: count(for: .all))
                 ForEach(WordNoteCategory.allCases) { category in
                     treeRow(
-                        .category(category), title: category.rawValue,
+                        .category(category), title: category.title,
                         systemImage: category == .personalMemo ? "note.text" : "doc.text",
                         count: count(for: .category(category)), spine: category.spineColor(onDark: isDarkTheme)
                     )
@@ -628,8 +640,8 @@ private struct WordNoteListContent: View {
                         .foregroundStyle(settings.bibleTextColor?.opacity(0.55) ?? .secondary)
                         .padding(.horizontal, 14)
                         .padding(.bottom, 2)
-                    testamentDisclosure(title: "구약", testament: .old, books: oldTestamentBooks)
-                    testamentDisclosure(title: "신약", testament: .new, books: newTestamentBooks)
+                    testamentDisclosure(title: String(localized: "구약"), testament: .old, books: oldTestamentBooks)
+                    testamentDisclosure(title: String(localized: "신약"), testament: .new, books: newTestamentBooks)
                 }
             }
             .padding(.bottom, 16)
@@ -691,7 +703,7 @@ private struct WordNoteListContent: View {
             )) {
                 VStack(alignment: .leading, spacing: 2) {
                     ForEach(books) { book in
-                        treeRow(.book(bookId: book.bookId), title: book.nameKo, systemImage: "book.closed", count: count(for: .book(bookId: book.bookId)))
+                        treeRow(.book(bookId: book.bookId), title: book.displayName, systemImage: "book.closed", count: count(for: .book(bookId: book.bookId)))
                     }
                 }
                 .padding(.leading, 10)
@@ -752,9 +764,9 @@ private struct WordNoteListContent: View {
     private var phoneContent: some View {
         VStack(spacing: 0) {
             HStack(spacing: 4) {
-                categoryCapsuleButton(.all, title: "전체")
+                categoryCapsuleButton(.all, title: String(localized: "전체"))
                 ForEach(WordNoteCategory.allCases) { category in
-                    categoryCapsuleButton(.category(category), title: category.rawValue)
+                    categoryCapsuleButton(.category(category), title: category.title)
                 }
             }
             .padding(4)
@@ -805,7 +817,7 @@ private struct WordNoteListContent: View {
         // 검색창+필터 줄은 `List` 바깥이라 `List`의 `.background()`가 닿지 않아, 전체에도 테마 배경을 칠한다.
         .background(settings.bibleBackgroundColor ?? Color.clear)
         .navigationTitle("말씀 노트")
-        .macSerifTitle("말씀 노트")
+        .macSerifTitle(String(localized: "말씀 노트"))
         // 탭 최상위 화면이라 뒤로가기가 없어, automatic이면 큰 제목이 별도 줄로 그려져 툴바 아이콘 왼쪽이 낭비된다.
         // inline으로 제목과 아이콘을 한 줄에 합친다(macOS엔 이 모디파이어가 없어 iOS로 제한).
         #if os(iOS)
@@ -836,7 +848,7 @@ private struct WordNoteListContent: View {
                 // 성곡 세리프체(CC BY-ND, 설정 > 라이센스 고지 참고). Regular 한 굵기뿐이라 `.semibold`는 화면에서만
                 // 합성 볼드로 그려지며 폰트 파일 자체는 변경하지 않는다.
                 Text("말씀 노트")
-                    .font(.custom(SpecialPurposeFonts.titleSerif, size: 20, relativeTo: .title3))
+                    .font(.titleSerif(size: 20, relativeTo: .title3))
                     .fontWeight(.semibold)
                     .foregroundStyle(settings.bibleTextColor ?? .primary)
             }
@@ -864,7 +876,7 @@ private struct WordNoteListContent: View {
             }
             Button("만들기") { createFolder() }
         } message: {
-            Text(pendingMoveMemoIDs.isEmpty ? "개인 묵상을 묶어 둘 폴더 이름을 입력하세요." : "폴더를 만들고 선택한 묵상을 옮깁니다.")
+            Text(pendingMoveMemoIDs.isEmpty ? String(localized: "개인 묵상을 묶어 둘 폴더 이름을 입력하세요.") : String(localized: "폴더를 만들고 선택한 묵상을 옮깁니다."))
         }
         .alert("폴더 이름 변경", isPresented: $isRenameFolderPresented) {
             TextField("폴더 이름", text: $renameFolderName)
@@ -929,7 +941,7 @@ private struct WordNoteListContent: View {
         Button {
             togglePin(item)
         } label: {
-            Label(item.isPinned ? "고정 해제" : "고정", systemImage: item.isPinned ? "pin.slash" : "pin")
+            Label(item.isPinned ? String(localized: "고정 해제") : String(localized: "고정"), systemImage: item.isPinned ? "pin.slash" : "pin")
         }
         if case .memo(let memo) = item {
             Menu {
@@ -1033,7 +1045,7 @@ private struct WordNoteListContent: View {
                 )
             }
             memoDropTarget(
-                treeRow(.unfiled, title: "미분류", systemImage: "tray", count: count(for: .unfiled), spine: unfiledSpineColor),
+                treeRow(.unfiled, title: String(localized: "미분류"), systemImage: "tray", count: count(for: .unfiled), spine: unfiledSpineColor),
                 filter: .unfiled, folder: nil
             )
             if folders.isEmpty {
@@ -1080,14 +1092,14 @@ private struct WordNoteListContent: View {
     /// 아이폰 — 캡슐 아래 한 줄: 폴더 필터/관리 메뉴 + 선택 모드 토글.
     private var phoneFolderBar: some View {
         var isActive = false
-        var title = "폴더"
+        var title = String(localized: "폴더")
         switch categoryFilter {
         case .folder(let folderID):
             isActive = true
-            title = folders.first(where: { $0.id == folderID })?.name ?? "폴더"
+            title = folders.first(where: { $0.id == folderID })?.name ?? String(localized: "폴더")
         case .unfiled:
             isActive = true
-            title = "미분류"
+            title = String(localized: "미분류")
         default:
             break
         }
@@ -1191,7 +1203,7 @@ private struct WordNoteListContent: View {
             isSelecting.toggle()
             if !isSelecting { selectedMemoIDs = [] }
         } label: {
-            Text(isSelecting ? "완료" : "선택")
+            Text(isSelecting ? String(localized: "완료") : String(localized: "선택"))
                 .font(.caption.weight(.semibold))
                 .foregroundStyle(textColor)
                 .padding(.horizontal, 10)
@@ -1215,7 +1227,7 @@ private struct WordNoteListContent: View {
         return VStack(spacing: 0) {
             Divider()
             HStack {
-                Text(ids.isEmpty ? "묵상을 선택하세요" : "\(ids.count)개 선택")
+                Text(ids.isEmpty ? String(localized: "묵상을 선택하세요") : String(localized: "\(ids.count)개 선택"))
                     .font(.subheadline)
                     .foregroundStyle(settings.bibleTextColor ?? .primary)
                 Spacer()
@@ -1299,7 +1311,7 @@ private struct WordNoteListContent: View {
         guard !trimmed.isEmpty, trimmed != folder.name else { return }
         let key = MemoFolderMaintenance.normalizedKey(trimmed)
         if folders.contains(where: { $0.id != folder.id && MemoFolderMaintenance.normalizedKey($0.name) == key }) {
-            folderErrorMessage = "같은 이름의 폴더가 이미 있습니다."
+            folderErrorMessage = String(localized: "같은 이름의 폴더가 이미 있습니다.")
             return
         }
         folder.name = trimmed
@@ -1381,6 +1393,8 @@ private struct WordNoteListContent: View {
         try? modelContext.save()
         BibleReferenceIndexingService.reindexMemo(memo, context: modelContext)
         reload()
+        // 새 묵상의 편집 화면이 열리면 관련 말씀 선택 시트를 자동으로 띄운다(`WordNoteVersePickerRequest`).
+        WordNoteVersePickerRequest.shared.request(id: memo.id)
         selectedItem?.wrappedValue = .memo(memo)
     }
 
@@ -1394,6 +1408,8 @@ private struct WordNoteListContent: View {
         try? modelContext.save()
         BibleReferenceIndexingService.reindexWordSummary(summary, context: modelContext)
         reload()
+        // 새 요약의 편집 화면이 열리면 관련 말씀 선택 시트를 자동으로 띄운다(`WordNoteVersePickerRequest`).
+        WordNoteVersePickerRequest.shared.request(id: summary.id)
         selectedItem?.wrappedValue = .summary(summary)
     }
 

@@ -1,0 +1,120 @@
+{
+  "created": [
+    "Tools/LiteralGen/outputs/de/10_2SA/2SA_001.tsv",
+    "Tools/LiteralGen/outputs/ru/10_2SA/2SA_001.tsv",
+    "Tools/LiteralGen/outputs/en/10_2SA/2SA_001.tsv",
+    "Tools/LiteralGen/outputs/de/10_2SA/2SA_002_1.tsv",
+    "Tools/LiteralGen/outputs/de/10_2SA/2SA_002_2.tsv",
+    "Tools/LiteralGen/outputs/ru/10_2SA/2SA_002_1.tsv",
+    "Tools/LiteralGen/outputs/ru/10_2SA/2SA_002_2.tsv",
+    "Tools/LiteralGen/outputs/en/10_2SA/2SA_002_1.tsv",
+    "Tools/LiteralGen/outputs/en/10_2SA/2SA_002_2.tsv",
+    "Tools/LiteralGen/outputs/de/10_2SA/2SA_003_1.tsv",
+    "Tools/LiteralGen/outputs/de/10_2SA/2SA_003_2.tsv",
+    "Tools/LiteralGen/outputs/ru/10_2SA/2SA_003_1.tsv",
+    "Tools/LiteralGen/outputs/ru/10_2SA/2SA_003_2.tsv",
+    "Tools/LiteralGen/outputs/en/10_2SA/2SA_003_1.tsv",
+    "Tools/LiteralGen/outputs/en/10_2SA/2SA_003_2.tsv",
+    "Tools/LiteralGen/outputs/de/10_2SA/2SA_004.tsv",
+    "Tools/LiteralGen/outputs/ru/10_2SA/2SA_004.tsv",
+    "Tools/LiteralGen/outputs/en/10_2SA/2SA_004.tsv",
+    "Tools/LiteralGen/outputs/de/10_2SA/2SA_005.tsv",
+    "Tools/LiteralGen/outputs/ru/10_2SA/2SA_005.tsv",
+    "Tools/LiteralGen/outputs/de/10_2SA/2SA_006.tsv",
+    "Tools/LiteralGen/outputs/ru/10_2SA/2SA_006.tsv",
+    "Tools/LiteralGen/outputs/de/10_2SA/2SA_007.tsv",
+    "Tools/LiteralGen/outputs/ru/10_2SA/2SA_007.tsv"
+  ],
+  "chapters_complete": [
+    [
+      1,
+      "de"
+    ],
+    [
+      1,
+      "ru"
+    ],
+    [
+      1,
+      "en"
+    ],
+    [
+      2,
+      "de"
+    ],
+    [
+      2,
+      "ru"
+    ],
+    [
+      2,
+      "en"
+    ],
+    [
+      3,
+      "de"
+    ],
+    [
+      3,
+      "ru"
+    ],
+    [
+      3,
+      "en"
+    ],
+    [
+      4,
+      "de"
+    ],
+    [
+      4,
+      "ru"
+    ],
+    [
+      4,
+      "en"
+    ],
+    [
+      5,
+      "de"
+    ],
+    [
+      5,
+      "ru"
+    ],
+    [
+      6,
+      "de"
+    ],
+    [
+      6,
+      "ru"
+    ],
+    [
+      7,
+      "de"
+    ],
+    [
+      7,
+      "ru"
+    ]
+  ],
+  "status": "generation_and_QA_complete",
+  "native_scope": "001–007 (008 transferred to root)",
+  "validation": {
+    "files": 24,
+    "rows": 484,
+    "native_chapters": "001–007",
+    "english_chapters": "001–004",
+    "own_full_verse_qa": true,
+    "own_qa_candidates": 12,
+    "root_en_reviewed_rows": 95,
+    "root_en_qa_candidates": 2,
+    "root_native_reviewed_rows": 36,
+    "root_native_qa_candidates": 4,
+    "protected_files": 7501,
+    "protected_changed": [],
+    "errors": [],
+    "tsv_direct_edits": false
+  }
+}

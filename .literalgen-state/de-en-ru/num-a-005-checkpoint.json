@@ -1,0 +1,53 @@
+{
+  "chapter": 5,
+  "status": "complete",
+  "semantic_grammar_review": "All assigned verses compared with packet Hebrew and their corresponding TARGET; corrections proposed only in QA JSON.",
+  "files": [
+    {
+      "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/04_NUM/NUM_005_1.tsv",
+      "rows": 30,
+      "sha256": "6f653718d5952e240610f9f7704826dfceabec196e951cb9691df71bdbe93333",
+      "checks": "verse order, three nonempty fields, en equals, DIFF <=60 words, placeholders passed on QA overlay"
+    },
+    {
+      "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/04_NUM/NUM_005_2.tsv",
+      "rows": 1,
+      "sha256": "4f3ca04b151bf3ca49f3e17f559245eccd3b32811f42636d2de25db1c3b1d59a",
+      "checks": "verse order, three nonempty fields, en equals, DIFF <=60 words, placeholders passed on QA overlay"
+    },
+    {
+      "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/04_NUM/NUM_005_1.tsv",
+      "rows": 30,
+      "sha256": "dc101f7302fcdd31e427fc5ac070c93bde45354654b20fa1b4fb528304cf851d",
+      "checks": "verse order, three nonempty fields, en equals, DIFF <=60 words, placeholders passed on QA overlay"
+    },
+    {
+      "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/04_NUM/NUM_005_2.tsv",
+      "rows": 1,
+      "sha256": "771fba3d44568d6dee505b09a335f1ada2c0cee3f524f2e4f3915fe155544d3f",
+      "checks": "verse order, three nonempty fields, en equals, DIFF <=60 words, placeholders passed on QA overlay"
+    },
+    {
+      "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/en/04_NUM/NUM_005_1.tsv",
+      "rows": 30,
+      "sha256": "a4e20c6cc7c077552bbd161f6a0c96fc1e3ccc682e7fcebaa98cc295c869ab72",
+      "checks": "verse order, three nonempty fields, en equals, DIFF <=60 words, placeholders passed on QA overlay"
+    },
+    {
+      "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/en/04_NUM/NUM_005_2.tsv",
+      "rows": 1,
+      "sha256": "fbdf12ca4b5863a406bdaa6729c893132b1abfb60e46737c0bdd4e0056f13c10",
+      "checks": "verse order, three nonempty fields, en equals, DIFF <=60 words, placeholders passed on QA overlay"
+    }
+  ],
+  "root_owned_en": false,
+  "checks": {
+    "verse_order": "passed",
+    "fields": "passed",
+    "difference_word_limit": "passed",
+    "quote_balance": "passed across complete chapter on QA overlay",
+    "placeholder": "passed",
+    "semantic_grammar": "reviewed",
+    "qa_entries": 2
+  }
+}

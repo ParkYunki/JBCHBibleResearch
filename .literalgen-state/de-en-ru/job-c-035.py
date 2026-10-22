@@ -1,0 +1,18 @@
+from importlib.machinery import SourceFileLoader
+w=SourceFileLoader('w','.literalgen-state/de-en-ru/job-c-write.py').load_module()
+w.write(35,'''Und Elihu antwortete und sprach:|И ответил Елиуй и сказал:
+„Hältst du dies für Recht? Du hast gesagt: ‚Meine Gerechtigkeit ist größer als Gottes.‘|«Это ли ты счёл судом? Ты сказал: „Моя праведность больше Божией“.
+Denn du sagst: ‚Was nützt es dir? Was gewinne ich mehr als durch meine Sünde?‘|Ибо ты говоришь: „Какая польза тебе? Что приобрету я больше, чем от греха моего?“
+Ich werde dir mit Worten antworten und deinen Freunden mit dir.|Я отвечу тебе словами и друзьям твоим с тобою.
+Blicke zum Himmel und sieh, und schaue die Wolken, höher als du!|Взгляни на небеса и смотри, и воззри на облака, они выше тебя!
+Wenn du gesündigt hast, was tust du ihm? Und wenn deine Übertretungen zahlreich sind, was richtest du ihm an?|Если ты согрешил, что делаешь Ему? И если многочисленны преступления твои, что причиняешь Ему?
+Wenn du gerecht bist, was gibst du ihm, oder was empfängt er aus deiner Hand?|Если ты праведен, что даёшь Ему? Или что Он получает из руки твоей?
+Einem Mann wie dir gilt deine Bosheit und einem Menschenkind deine Gerechtigkeit.|Мужу, подобному тебе, нечестие твоё и сыну человеческому праведность твоя.
+Wegen vieler Bedrückungen schreien sie, rufen um Hilfe wegen des Arms der Großen.|От множества притеснений кричат, вопиют о помощи от руки могучих.
+Und keiner sagt: ‚Wo ist Gott, mein Schöpfer, der Lieder in der Nacht gibt,|И никто не сказал: „Где Бог, Создатель мой, дающий песни в ночи,
+der uns mehr lehrt als die Tiere der Erde und uns weiser macht als die Vögel des Himmels?‘|учащий нас больше животных земли и умудряющий нас больше птиц небесных?“
+Dort schreien sie, und er antwortet nicht wegen des Hochmuts der Bösen.|Там они кричат, и Он не отвечает из-за гордости злых.
+Gewiss, Nichtiges hört Gott nicht, und der Allmächtige beachtet es nicht.|Конечно, пустоты не слышит Бог, и Вседержитель не взирает на неё.
+Auch wenn du sagst, du schaust ihn nicht, ist die Rechtssache vor ihm; und warte auf ihn!|Даже если говоришь, что не видишь Его, суд пред Ним; и жди Его!
+Und jetzt, weil sein Zorn nicht heimgesucht hat und er den Übermut nicht sehr beachtet,|И теперь, потому что гнев Его не посетил и Он не весьма замечает дерзость,
+sperrt Hiob seinen Mund in Nichtigkeit auf, mehrt Worte ohne Wissen.“|Иов тщетно открывает рот свой, без знания умножает слова».''',{'de':{3:'Die erste Frage richtet sich an ein du; die zweite vergleicht mit seiner Sünde.',4:'Worte stehen im Plural.',6:'Die erste Frage nennt keine eigene Schadensbezeichnung.',7:'Hand steht im Singular.',10:'Genannt sind Lieder ohne zusätzliche Bezeichnung als Lobgesänge.',11:'Das erste Verb bezeichnet Lehren.',12:'Der Hochmut der Bösen begründet das Nichtantworten.',16:'Genannt ist das Mehren von Worten ohne eigene Bezeichnung als stolzes Gerede.'},'ru':{3:'В первой части стоит тебе, затем мне; грех обозначен как мой.',9:'Названы притеснения, а не притеснители.',13:'Пустота является тем, чего Бог не слышит; слова не отрицают истинность Божьего слышания.',15:'Незамечаемым названа дерзость, а не незнание Бога во всей строгости.',16:'Названо умножение слов без знания.'},'en':{2:'The Hebrew names his righteousness in a noun phrase; BSB turns it into I am more righteous.',3:'The Hebrew first has a second-person you, then a first-person I; BSB uses first person in both questions.',4:'The Hebrew explicitly names answering with words; BSB says reply.',8:'The Hebrew has no separate word for only; BSB adds only to both clauses.',10:'The Hebrew says He gives songs without explicitly naming us as recipients; BSB adds us.',13:'The Hebrew names emptiness without an explicit word for pleas; BSB supplies pleas.'}})

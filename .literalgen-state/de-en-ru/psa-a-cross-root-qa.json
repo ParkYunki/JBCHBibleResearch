@@ -1,0 +1,30 @@
+[
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/en/19_PSA/PSA_126.tsv",
+    "verse": "2",
+    "old_row": "2\t=\tMouth and tongue are singular; the nations actively speak rather than the report being passive.",
+    "new_row": "2\t=\tMouth and tongue are singular. The Hebrew describes people saying this among the nations, without naming the nations as the speakers.",
+    "reason": "The plural verb has an indefinite subject; among the nations does not identify the nations as agents."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/19_PSA/PSA_132.tsv",
+    "verse": "11",
+    "old_row": "11\tDer HERR hat David Wahrheit geschworen, davon wird er nicht zurückkehren: „Von der Frucht deines Leibes werde ich auf deinen Thron setzen.\tDie Frucht seines Leibes wird mit „von“ eingeführt.",
+    "new_row": "11\tDer HERR hat David Wahrheit geschworen, davon wird er nicht zurückkehren: „Von der Frucht deines Leibes werde ich einen auf deinen Thron setzen.\tDie Frucht seines Leibes wird mit „von“ eingeführt.",
+    "reason": "Das transitive setzen braucht in diesem deutschen Satz ein Akkusativobjekt; einen ergänzt das im Hebräischen elliptisch gelassene Glied minimal."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/19_PSA/PSA_145.tsv",
+    "verse": "12",
+    "old_row": "12\tчтобы дать знать сынам человеческим могучие деяния Его и славу великолепия царства Его.\tМестоимения здесь переходят к третьему лицу: Его деяния и Его царство.",
+    "new_row": "12\tчтобы сделать известными сынам человеческим могучие деяния Его и славу великолепия царства Его.\tМестоимения здесь переходят к третьему лицу: Его деяния и Его царство.",
+    "reason": "Дать знать требует о перед предметом сообщения; сделать известными сохраняет прямые дополнения и устраняет нарушение управления."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/en/19_PSA/PSA_150.tsv",
+    "verse": "3",
+    "old_row": "3\t=\tThe horn is specifically a ram’s horn; the stringed instruments are named in the reverse order.",
+    "new_row": "3\t=\tThe horn is specifically a ram’s horn.",
+    "reason": "The source names nevel followed by kinnor, corresponding to harp followed by lyre as BSB already does. The assertion that the strings are reversed is unsupported."
+  }
+]

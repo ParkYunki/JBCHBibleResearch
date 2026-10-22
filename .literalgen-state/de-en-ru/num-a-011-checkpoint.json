@@ -1,0 +1,41 @@
+{
+  "chapter": 11,
+  "status": "complete",
+  "semantic_grammar_review": "All assigned verses compared with packet Hebrew and their corresponding TARGET; corrections proposed only in QA JSON.",
+  "files": [
+    {
+      "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/04_NUM/NUM_011_1.tsv",
+      "rows": 30,
+      "sha256": "b405cfa63bb67fa0c2bc45eda96680c870fa2286d29c11c6366b884da1f098be",
+      "checks": "verse order, three nonempty fields, en equals, DIFF <=60 words, placeholders passed on QA overlay"
+    },
+    {
+      "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/04_NUM/NUM_011_2.tsv",
+      "rows": 5,
+      "sha256": "892f09b6cdb0833035f3fce3e4cc7f5a3bb01dad5595a350db9bbb1849c2df13",
+      "checks": "verse order, three nonempty fields, en equals, DIFF <=60 words, placeholders passed on QA overlay"
+    },
+    {
+      "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/04_NUM/NUM_011_1.tsv",
+      "rows": 30,
+      "sha256": "cd487aa122629a2199e320b77f4a8a99cb64862f2ddf367b0040e2f0940391e9",
+      "checks": "verse order, three nonempty fields, en equals, DIFF <=60 words, placeholders passed on QA overlay"
+    },
+    {
+      "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/04_NUM/NUM_011_2.tsv",
+      "rows": 5,
+      "sha256": "bb08e3cf891cc70f7efe21854839bf2be8f53de76ae706359ab94bd2d67db10c",
+      "checks": "verse order, three nonempty fields, en equals, DIFF <=60 words, placeholders passed on QA overlay"
+    }
+  ],
+  "root_owned_en": true,
+  "checks": {
+    "verse_order": "passed",
+    "fields": "passed",
+    "difference_word_limit": "passed",
+    "quote_balance": "passed across complete chapter on QA overlay",
+    "placeholder": "passed",
+    "semantic_grammar": "reviewed",
+    "qa_entries": 0
+  }
+}

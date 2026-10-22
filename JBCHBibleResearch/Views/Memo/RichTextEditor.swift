@@ -119,7 +119,7 @@ struct RichTextEditor: View {
     @Binding var rtfText: String
     @Binding var plainText: String
     var isEditable: Bool
-    var placeholder: String = "내용을 입력하세요"
+    var placeholder: String = String(localized: "내용을 입력하세요")
 
     /// 새로 입력하는 글자의 기본 폰트. 이미 서식이 있는 기존 내용은 바꾸지 않는다.
     var typingFont: PlatformFont = .systemFont(ofSize: 15)
@@ -231,7 +231,18 @@ private struct RichTextEditorToolbarContent: View {
                         Button(entry.displayName) { proxy.applyFontFamily(entry.postScriptName) }
                     }
                 }
-                Button("조선궁서체") { proxy.applyFontFamily(SpecialPurposeFonts.hanja) }
+                // 지역 전용 다국어 글꼴(태국어/키릴/베트남어, 2026-10-12) — 그 앱 언어에서만 보인다.
+                // family 이름은 고유명사라 번역하지 않는다.
+                ForEach(BundledFonts.visibleMultilingualFamilies) { family in
+                    Menu(family.name) {
+                        ForEach(family.entries) { entry in
+                            Button(entry.displayName) { proxy.applyFontFamily(entry.postScriptName) }
+                        }
+                    }
+                }
+                if BundledFonts.isKoreanOnlyFontVisible {
+                    Button("조선궁서체") { proxy.applyFontFamily(SpecialPurposeFonts.hanja) }
+                }
                 Divider()
                 ForEach(systemToolbarFontNames, id: \.self) { name in
                     Button(name) { proxy.applyFontFamily(name) }
@@ -479,7 +490,7 @@ struct RichTextEditorRepresentable: UIViewRepresentable {
         toolbar.sizeToFit()
         let flexibleSpace = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
         let doneButton = UIBarButtonItem(
-            title: "완료",
+            title: String(localized: "완료"),
             primaryAction: UIAction { [weak textView] _ in
                 textView?.resignFirstResponder()
             }

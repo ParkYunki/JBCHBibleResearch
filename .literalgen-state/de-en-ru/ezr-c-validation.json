@@ -1,0 +1,57 @@
+{
+  "files": 10,
+  "rows": 190,
+  "checks": "verse_order, three_fields, DIFF_length, full_packet_source_review",
+  "details": [
+    {
+      "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/15_EZR/EZR_008_1.tsv",
+      "rows": 30,
+      "sha256": "9fa539f41e60e404d901844d320b63be546d80b068696567232c10aafcd6e4b8"
+    },
+    {
+      "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/15_EZR/EZR_008_2.tsv",
+      "rows": 6,
+      "sha256": "3b9af93f5c85c6635a3294720476f19c70058feebe59f449c746ec80b3254ff8"
+    },
+    {
+      "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/15_EZR/EZR_009.tsv",
+      "rows": 15,
+      "sha256": "18eb318cbcee6aea69ee00b52a86c49dc5770f2b56675d02f4e288ccc8097daf"
+    },
+    {
+      "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/15_EZR/EZR_010_1.tsv",
+      "rows": 30,
+      "sha256": "2d482a8058001954329b1b1232c209268d25b12e013f474debebbf54d2978025"
+    },
+    {
+      "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/15_EZR/EZR_010_2.tsv",
+      "rows": 14,
+      "sha256": "f89f10121f58783b3d334792dc0500e2884f16beb2559c65abeaac22858f3a85"
+    },
+    {
+      "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/15_EZR/EZR_008_1.tsv",
+      "rows": 30,
+      "sha256": "7607cafdb34bf96cb503db78da2bd5820b18ba4bcda088976ce9d55be7c2f508"
+    },
+    {
+      "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/15_EZR/EZR_008_2.tsv",
+      "rows": 6,
+      "sha256": "cc17fe24f3553447c1cf485b6015a5c26ab77375cd577e2a72781df2dfd8b034"
+    },
+    {
+      "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/15_EZR/EZR_009.tsv",
+      "rows": 15,
+      "sha256": "c4b89740713ee79ed4e314873a768e6f87366ad723fd01d5d872e7bb54bd4b88"
+    },
+    {
+      "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/15_EZR/EZR_010_1.tsv",
+      "rows": 30,
+      "sha256": "030bf014b8859483c8d0031bf911c38c9f7647643fc06b4770cf3a6bf0829cb1"
+    },
+    {
+      "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/15_EZR/EZR_010_2.tsv",
+      "rows": 14,
+      "sha256": "51f03a2f9ceabec610197e03e4f1c426c339e8c4b7a414746cae8bb9b43971c7"
+    }
+  ]
+}

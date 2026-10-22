@@ -1,0 +1,37 @@
+[
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/13_1CH/1CH_017.tsv",
+    "old_row": "7\tUnd nun sollst du so zu meinem Knecht David sagen: So spricht der HERR Zebaoth: Ich habe dich von der Weide genommen, von hinter der Herde, um Fürst über mein Volk Israel zu sein.\tNah am Hebräischen.",
+    "new_row": "7\tUnd nun sollst du so zu meinem Knecht David sagen: So spricht der HERR Zebaoth: Ich habe dich von der Weide genommen, von hinter der Herde, damit du Fürst über mein Volk Israel seist.\tNah am Hebräischen."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/13_1CH/1CH_017.tsv",
+    "old_row": "7\tИ теперь так скажи рабу Моему Давиду: так говорит Господь Саваоф: Я взял тебя с пастбища, от следования за стадом, чтобы быть правителем над народом Моим Израилем.\tПастбище и следование за стадом названы отдельно.",
+    "new_row": "7\tИ теперь так скажи рабу Моему Давиду: так говорит Господь Саваоф: Я взял тебя с пастбища, от следования за стадом, чтобы ты был правителем над народом Моим Израилем.\tПастбище и следование за стадом названы отдельно."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/13_1CH/1CH_019.tsv",
+    "old_row": "14\tИ приблизился Иоав и народ, который с ним, пред Сириян к битве; и они побежали от него.\tБлизко к еврейскому.",
+    "new_row": "14\tИ приблизился Иоав и народ, который с ним, к Сириянам для битвы; и они побежали от него.\tБлизко к еврейскому."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/13_1CH/1CH_022.tsv",
+    "old_row": "12\tNur gebe dir der HERR Einsicht und Verständnis und bestelle dich über Israel, und dass du das Gesetz des HERRN, deines Gottes, bewahrst.\tDie Gabe von Einsicht wird erbeten, nicht nur vorausgesagt.",
+    "new_row": "12\tNur gebe dir der HERR Einsicht und Verständnis und bestelle dich über Israel, damit du das Gesetz des HERRN, deines Gottes, bewahrst.\tDie Gabe von Einsicht wird erbeten, nicht nur vorausgesagt."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/13_1CH/1CH_022.tsv",
+    "old_row": "12\tТолько пусть даст тебе Господь рассудительность и разумение, и поставит тебя над Израилем, и чтобы ты соблюдал закон Господа, Бога твоего.\tСоблюдение закона выражено как цель, а не отдельное повеление.",
+    "new_row": "12\tТолько пусть даст тебе Господь рассудительность и разумение и поставит тебя над Израилем, чтобы ты соблюдал закон Господа, Бога твоего.\tСоблюдение закона выражено как цель, а не отдельное повеление."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/13_1CH/1CH_023_1.tsv",
+    "old_row": "13\tDie Söhne Amrams: Aaron und Mose. Und Aaron wurde abgesondert, um das Hochheilige zu heiligen, er und seine Söhne auf ewig, um vor dem HERRN zu räuchern, ihm zu dienen und in seinem Namen zu segnen auf ewig.\tAaron soll das Hochheilige heiligen; die Handlung ist aktiv formuliert.",
+    "new_row": "13\tDie Söhne Amrams: Aaron und Mose. Und Aaron wurde abgesondert, um ihn zum Hochheiligen zu heiligen, ihn und seine Söhne auf ewig, um vor dem HERRN zu räuchern, ihm zu dienen und in seinem Namen zu segnen auf ewig.\tAaron wird als Hochheiliger geheiligt; seine Söhne werden ebenfalls genannt."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/13_1CH/1CH_023_1.tsv",
+    "old_row": "13\tСыновья Амрама: Аарон и Моисей. И отделён был Аарон, чтобы освящать святое святых, он и сыновья его навеки, чтобы воскурять пред Господом, служить Ему и благословлять именем Его навеки.\tОсвящение выражено действием Аарона; отдельного слова «лице» нет.",
+    "new_row": "13\tСыновья Амрама: Аарон и Моисей. И отделён был Аарон, чтобы освятить его как святого святых, его и сыновей его навеки, чтобы воскурять пред Господом, служить Ему и благословлять именем Его навеки.\tАарон освящается как святой святых; отдельного слова «лице» нет."
+  }
+]

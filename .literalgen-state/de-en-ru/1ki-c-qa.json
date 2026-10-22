@@ -1,0 +1,92 @@
+[
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/11_1KI/1KI_016_1.tsv",
+    "verse": 3,
+    "old_row": "3\tsiehe, so werde ich hinter Baesa und hinter seinem Haus ausfegen und dein Haus wie das Haus Jerobeams, des Sohnes Nebats, machen.\tDas Entfernen ist als Ausfegen nach Baesa und seinem Haus beschrieben.",
+    "new_row": "3\tsiehe, so werde ich wegfegen, was von Baesa und seinem Haus übrig ist, und dein Haus wie das Haus Jerobeams, des Sohnes Nebats, machen.\tDas Entfernen ist als Ausfegen nach Baesa und seinem Haus beschrieben."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/11_1KI/1KI_016_1.tsv",
+    "verse": 3,
+    "old_row": "3\tвот, Я вымету остаток после Ваасы и после его дома и сделаю твой дом как дом Иеровоама, сына Навата.\tУдаление выражено выметанием остатка после Ваасы и его дома.",
+    "new_row": "3\tвот, Я вымету всё, что останется от Ваасы и его дома, и сделаю твой дом как дом Иеровоама, сына Навата.\tУдаление выражено выметанием остатка Ваасы и его дома."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/11_1KI/1KI_017.tsv",
+    "verse": 15,
+    "old_row": "15\tUnd sie ging und tat nach dem Wort Elias; und sie aß, sie und er und ihr Haus, viele Tage.\tZuerst stehen sie, dann er und ihr Haus beim Essen.",
+    "new_row": "15\tUnd sie ging und tat nach dem Wort Elias; und sie aßen, sie und er und ihr Haus, viele Tage.\tZuerst stehen sie, dann er und ihr Haus beim Essen."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/11_1KI/1KI_018_1.tsv",
+    "verse": 26,
+    "old_row": "26\tИ взяли они тельца, которого им дали, и приготовили, и призывали имя Ваала от утра до полудня, говоря: «Ваал, ответь нам!» И не было голоса и не было отвечающего; и хромали они вокруг жертвенника, который был сделан.\tУчастники хромают; изготовление алтаря имеет единственное подлежащее.",
+    "new_row": "26\tИ взяли они тельца, которого им дали, и приготовили, и призывали имя Ваала от утра до полудня, говоря: «Ваал, ответь нам!» И не было голоса и не было отвечающего; и хромали они вокруг жертвенника, который он сделал.\tУчастники хромают; изготовление алтаря имеет единственное подлежащее."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/11_1KI/1KI_018_2.tsv",
+    "verse": 34,
+    "old_row": "34\tИ сказал: «Повторите!» И они повторили. И сказал: «Сделайте втрое!» И они сделали втрое.\tЭтот стих сразу начинается с повеления повторить.",
+    "new_row": "34\tИ сказал: «Повторите!» И они повторили. И сказал: «Сделайте в третий раз!» И они сделали в третий раз.\tЭтот стих сразу начинается с повеления повторить."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/11_1KI/1KI_018_1.tsv",
+    "verse": 28,
+    "old_row": "28\tUnd sie riefen mit lauter Stimme und schnitten sich nach ihrem Brauch mit Schwertern und Lanzen, bis Blut auf sie ausgegossen wurde.\tDie Schneidewerkzeuge sind Schwerter und Lanzen.",
+    "new_row": "28\tUnd sie riefen mit lauter Stimme und schnitten sich nach ihrem Brauch mit Schwertern und Lanzen, bis Blut über sie strömte.\tDie Schneidewerkzeuge sind Schwerter und Lanzen."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/11_1KI/1KI_018_2.tsv",
+    "verse": 39,
+    "old_row": "39\tUnd alles Volk sah es und fiel auf seine Gesichter und sagte: „Der HERR, er ist Gott! Der HERR, er ist Gott!“\tDie Gesichter stehen im Plural.",
+    "new_row": "39\tUnd alles Volk sah es, und sie fielen auf ihre Gesichter und sagten: „Der HERR, er ist Gott! Der HERR, er ist Gott!“\tDie Gesichter stehen im Plural."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/11_1KI/1KI_018_2.tsv",
+    "verse": 39,
+    "old_row": "39\tИ весь народ увидел, и пали на свои лица, и сказали: «Господь, Он — Бог! Господь, Он — Бог!»\tБлизко к еврейскому.",
+    "new_row": "39\tИ весь народ увидел, и они пали на свои лица, и сказали: «Господь, Он — Бог! Господь, Он — Бог!»\tБлизко к еврейскому."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/11_1KI/1KI_019.tsv",
+    "verse": 4,
+    "old_row": "4\tUnd er selbst ging eine Tagesreise in die Wüste und kam und setzte sich unter einen Ginsterstrauch; und er bat für seine Seele, zu sterben, und sagte: „Genug jetzt, HERR! Nimm meine Seele, denn ich bin nicht besser als meine Väter.“\tNah am Hebräischen.",
+    "new_row": "4\tUnd er selbst ging eine Tagesreise in die Wüste und kam und setzte sich unter einen Ginsterstrauch; und er erbat für seine Seele den Tod, und sagte: „Genug jetzt, HERR! Nimm meine Seele, denn ich bin nicht besser als meine Väter.“\tNah am Hebräischen."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/11_1KI/1KI_020_1.tsv",
+    "verse": 10,
+    "old_row": "10\tUnd Benhadad sandte zu ihm und sagte: „So mögen mir die Götter tun und so mögen sie hinzufügen, wenn der Staub Samarias zu Handvoll für alles Volk reicht, das zu meinen Füßen ist!“\tDas Volk ist bildlich zu seinen Füßen; das Hinzufügen ist Teil des Eides.",
+    "new_row": "10\tUnd Benhadad sandte zu ihm und sagte: „So mögen mir die Götter tun und so mögen sie hinzufügen, wenn der Staub Samarias zu einer Handvoll für jeden aus dem ganzen Volk reicht, das zu meinen Füßen ist!“\tDas Volk ist bildlich zu seinen Füßen; das Hinzufügen ist Teil des Eides."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/11_1KI/1KI_020_2.tsv",
+    "verse": 38,
+    "old_row": "38\tUnd der Prophet ging und stellte sich für den König an den Weg und verkleidete sich mit einer Binde über seinen Augen.\tDie Binde liegt über den Augen.",
+    "new_row": "38\tUnd der Prophet ging und stellte sich an den Weg, um auf den König zu warten, und verkleidete sich mit einer Binde über seinen Augen.\tDie Binde liegt über den Augen."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/11_1KI/1KI_020_2.tsv",
+    "verse": 38,
+    "old_row": "38\tИ пошёл пророк, и стал для царя у дороги, и замаскировался повязкой над своими глазами.\tОн маскируется повязкой.",
+    "new_row": "38\tИ пошёл пророк, и стал у дороги, ожидая царя, и замаскировался повязкой над своими глазами.\tОн маскируется повязкой."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/11_1KI/1KI_021.tsv",
+    "verse": 22,
+    "old_row": "22\tUnd ich werde dein Haus wie das Haus Jerobeams, des Sohnes Nebats, machen und wie das Haus Baesas, des Sohnes Ahias, wegen der Kränkung, mit der du gekränkt und Israel sündigen gemacht hast.\tEin eigenes mich ist beim Kränken nicht geschrieben.",
+    "new_row": "22\tUnd ich werde dein Haus wie das Haus Jerobeams, des Sohnes Nebats, machen und wie das Haus Baesas, des Sohnes Ahias, wegen des Ärgers, den du erregt hast, und weil du Israel sündigen gemacht hast.\tEin eigenes mich ist beim Kränken nicht geschrieben."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/11_1KI/1KI_021.tsv",
+    "verse": 22,
+    "old_row": "22\tИ сделаю твой дом как дом Иеровоама, сына Навата, и как дом Ваасы, сына Ахии, за раздражение, которым ты раздражил и ввёл Израиль в грех.\tПри раздражении нет отдельного Меня.",
+    "new_row": "22\tИ сделаю твой дом как дом Иеровоама, сына Навата, и как дом Ваасы, сына Ахии, за раздражение, которое ты вызвал, и за то, что ввёл Израиль в грех.\tПри раздражении нет отдельного Меня."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/11_1KI/1KI_021.tsv",
+    "verse": 19,
+    "old_row": "19\tИ скажи ему: „Так сказал Господь: Ты убил и также вступил во владение?“ И скажи ему: „Так сказал Господь: На месте, где псы лизали кровь Навуфея, псы будут лизать твою кровь, и твою“».\tСвою кровь в конце повторно отнесено к нему.",
+    "new_row": "19\tИ скажи ему: „Так сказал Господь: Ты убил и также вступил во владение?“ И скажи ему: „Так сказал Господь: На месте, где псы лизали кровь Навуфея, псы будут лизать твою кровь, да, твою“».\tВ конце повторно подчёркнуто, что речь о его собственной крови."
+  }
+]

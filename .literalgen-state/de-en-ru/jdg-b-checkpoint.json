@@ -1,0 +1,48 @@
+{
+  "scope": "de/ru JDG008–014; en JDG008–011",
+  "status": "complete_pending_root_redo_and_final_check",
+  "chapters": {
+    "8": {
+      "outputs_created": true,
+      "all_verses_source_target_and_native_qa_completed": true
+    },
+    "9": {
+      "outputs_created": true,
+      "all_verses_source_target_and_native_qa_completed": true
+    },
+    "10": {
+      "outputs_created": true,
+      "all_verses_source_target_and_native_qa_completed": true
+    },
+    "11": {
+      "outputs_created": true,
+      "all_verses_source_target_and_native_qa_completed": true
+    },
+    "12": {
+      "outputs_created": true,
+      "all_verses_source_target_and_native_qa_completed": true
+    },
+    "13": {
+      "outputs_created": true,
+      "all_verses_source_target_and_native_qa_completed": true
+    },
+    "14": {
+      "outputs_created": true,
+      "all_verses_source_target_and_native_qa_completed": true
+    }
+  },
+  "files": 27,
+  "rows": 570,
+  "qa_file": "jdg-b-qa.json",
+  "qa_entries": 27,
+  "independent_root_en_qa": {
+    "scope": "JDG012–014",
+    "rows": 60,
+    "all_verses_reviewed": true,
+    "candidates": 0,
+    "file": "jdg-b-root-en-qa.json"
+  },
+  "unfinished_review_scope": [],
+  "direct_output_corrections": false,
+  "parent_requested_adjustments": "9:17 soul retained; 9:48 trees plural retained; 9:6 original literals retained and definite ru location difference only; 14:16 woman-specific past/future comparison"
+}

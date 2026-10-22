@@ -167,7 +167,7 @@ final class HWPReadyMessageHandler: NSObject, WKScriptMessageHandler {
 func hwpJavaScriptErrorDescription(_ error: Error) -> String {
     let nsError = error as NSError
     if let jsMessage = nsError.userInfo["WKJavaScriptExceptionMessage"] as? String, !jsMessage.isEmpty {
-        var detail = "JS 예외: \(jsMessage)"
+        var detail = String(localized: "JS 예외: \(jsMessage)")
         if let line = nsError.userInfo["WKJavaScriptExceptionLineNumber"] {
             detail += " (line \(line))"
         }

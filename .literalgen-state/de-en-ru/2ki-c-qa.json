@@ -1,0 +1,93 @@
+[
+  {
+    "path": "Tools/LiteralGen/outputs/ru/12_2KI/2KI_017_1.tsv",
+    "verse": 1,
+    "old_row": "1\tВ двенадцатый год Ахаза, царя Иудейского, воцарился Осия, сын Илы, в Самарии над Израилем на девять лет.\tБлизко к еврейскому.",
+    "new_row": "1\tВ двенадцатый год Ахаза, царя Иудейского, воцарился Осия, сын Илы, в Самарии над Израилем и царствовал девять лет.\tБлизко к еврейскому.",
+    "reason": "Avoid implying an advance fixed term of appointment; express duration idiomatically."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/12_2KI/2KI_017_1.tsv",
+    "verse": 16,
+    "old_row": "16\tUnd sie verließen alle Gebote des HERRN, ihres Gottes, und machten sich ein Gussbild, zwei Kälber, und machten ein Ascherabild und warfen sich vor dem ganzen Heer des Himmels nieder und dienten Baal.\tNah am Hebräischen.",
+    "new_row": "16\tUnd sie verließen alle Gebote des HERRN, ihres Gottes, und machten sich ein Gussbild, zwei Kälber, und machten ein Ascherabild und warfen sich vor dem ganzen Heer des Himmels nieder und dienten Baal.\tEin Gussbild wird im Singular genannt, dann zwei Kälber; das Anfertigen wird vor dem Ascherabild wiederholt.",
+    "reason": "Definite singular/plural and repeated verb contrast."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/12_2KI/2KI_017_1.tsv",
+    "verse": 25,
+    "old_row": "25\tUnd es geschah zu Beginn ihres Wohnens dort: Sie fürchteten den HERRN nicht. Da sandte der HERR die Löwen unter sie, und diese töteten unter ihnen.\tNah am Hebräischen.",
+    "new_row": "25\tUnd es geschah zu Beginn ihres Wohnens dort: Sie fürchteten den HERRN nicht. Da sandte der HERR die Löwen unter sie, und diese töteten einige von ihnen.\tNah am Hebräischen.",
+    "reason": "Minimal object supplement makes German transitive killing clause grammatical."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/12_2KI/2KI_017_1.tsv",
+    "verse": 25,
+    "old_row": "25\tИ было в начале их поселения там: они не боялись Господа. И послал Господь к ним львов, и те убивали среди них.\tБлизко к еврейскому.",
+    "new_row": "25\tИ было в начале их поселения там: они не боялись Господа. И послал Господь к ним львов, и те убивали некоторых из них.\tБлизко к еврейскому.",
+    "reason": "Minimal object supplement makes the killing clause idiomatic."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/12_2KI/2KI_017_2.tsv",
+    "verse": 31,
+    "old_row": "31\tUnd die von Avva machten Nibehas und Tharthak, und die von Sepharvaim verbrannten ihre Söhne im Feuer für Adrammelech und Anammelech, die Götter von Sepharvaim.\tNah am Hebräischen.",
+    "new_row": "31\tUnd die von Avva machten Nibehas und Tharthak, und die von Sepharvaim verbrannten ihre Söhne im Feuer für Adrammelech und Anammelech, die Götter von Sepharvaim.\tDas Verbrennen wird ausdrücklich mit dem Feuer verbunden.",
+    "reason": "Target omits explicit fire."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/12_2KI/2KI_017_2.tsv",
+    "verse": 34,
+    "old_row": "34\tДо сего дня они поступают по прежним обычаям. Они не боятся Господа и не поступают по своим уставам и по своему праву, и по закону, и по заповеди, которую Господь заповедал сынам Иакова, которому дал имя Израиля.\tБлизко к еврейскому.",
+    "new_row": "34\tДо сего дня они поступают по прежним обычаям. Они не боятся Господа и не поступают по своим уставам и по своему праву, и по закону, и по заповеди, которую Господь заповедал сынам Иакова, которому дал имя Израиля.\tЗакон и заповедь стоят в единственном числе.",
+    "reason": "Target has plural commandments."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/12_2KI/2KI_019_1.tsv",
+    "verse": 21,
+    "old_row": "21\tDies ist das Wort, das der HERR über ihn geredet hat: Dich verachtet, dich verspottet die Jungfrau, die Tochter Zion; hinter dir schüttelt den Kopf die Tochter Jerusalem.\tNah am Hebräischen.",
+    "new_row": "21\tDies ist das Wort, das der HERR über ihn geredet hat: Dich hat die Jungfrau, die Tochter Zion, verachtet und verspottet; hinter dir hat die Tochter Jerusalem den Kopf geschüttelt.\tDas Verachten, Verspotten und Kopfschütteln stehen in vollendeten Verbformen.",
+    "reason": "Preserve completed Hebrew forms as already retained in Russian."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/12_2KI/2KI_020.tsv",
+    "verse": 18,
+    "old_row": "18\tИ из сыновей твоих, которые произойдут от тебя, которых ты родишь, возьмут, и будут они евнухами во дворце царя Вавилонского».\tБлизко к еврейскому.",
+    "new_row": "18\tИ из сыновей твоих, которые произойдут от тебя, которых ты породишь, возьмут, и будут они евнухами во дворце царя Вавилонского».\tБлизко к еврейскому.",
+    "reason": "Male father begets rather than gives birth."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/12_2KI/2KI_021.tsv",
+    "verse": 6,
+    "old_row": "6\tИ провёл сына своего через огонь, и гадал, и волхвовал, и занимался вызыванием мёртвых и волшебниками. Много делал зла в очах Господа, чтобы прогневать Его.\tБлизко к еврейскому.",
+    "new_row": "6\tИ провёл сына своего через огонь, и гадал, и волхвовал, и прибегал к вызыванию мёртвых и к волшебникам. Много делал зла в очах Господа, чтобы прогневать Его.\tБлизко к еврейскому.",
+    "reason": "Use a natural government for both coordinated terms."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/12_2KI/2KI_023_1.tsv",
+    "verse": 13,
+    "old_row": "13\tUnd die Höhen vor Jerusalem, rechts vom Berg des Verderbens, die Salomo, der König von Israel, für Asthoreth, den Scheusal der Sidonier, und für Kamos, den Scheusal Moabs, und für Milkom, den Gräuel der Söhne Ammons, gebaut hatte, verunreinigte der König.\tNah am Hebräischen.",
+    "new_row": "13\tUnd die Höhen vor Jerusalem, rechts vom Berg des Verderbens, die Salomo, der König von Israel, für Asthoreth, das Scheusal der Sidonier, und für Kamos, das Scheusal Moabs, und für Milkom, den Gräuel der Söhne Ammons, gebaut hatte, verunreinigte der König.\tNah am Hebräischen.",
+    "reason": "Scheusal is neuter."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/12_2KI/2KI_023_1.tsv",
+    "verse": 19,
+    "old_row": "19\tUnd auch alle Häuser der Höhen in den Städten Samarias, die die Könige von Israel gemacht hatten, um zu erzürnen, entfernte Josia; und er tat ihnen nach all den Taten, die er in Beth-El getan hatte.\tNah am Hebräischen.",
+    "new_row": "19\tUnd auch alle Häuser der Höhen in den Städten Samarias, die die Könige von Israel gemacht hatten, um Zorn zu erregen, entfernte Josia; und er tat ihnen nach all den Taten, die er in Beth-El getan hatte.\tNah am Hebräischen.",
+    "reason": "Natural German expression without inserting an explicit object absent from O."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/12_2KI/2KI_023_1.tsv",
+    "verse": 19,
+    "old_row": "19\tИ также все дома высот в городах Самарии, которые цари Израильские сделали, чтобы прогневать, удалил Иосия; и сделал с ними согласно всем делам, которые сделал в Вефиле.\tГосподь как объект гнева прямо не назван; удаление не выражено как разрушение.",
+    "new_row": "19\tИ также все дома высот в городах Самарии, которые цари Израильские сделали, чтобы вызвать гнев, удалил Иосия; и сделал с ними согласно всем делам, которые сделал в Вефиле.\tГосподь как объект гнева прямо не назван; удаление не выражено как разрушение.",
+    "reason": "Natural Russian without an omitted required object."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/12_2KI/2KI_024.tsv",
+    "verse": 1,
+    "old_row": "1\tВ его дни поднялся Навуходоносор, царь Вавилонский, и был Иоаким его рабом три года; потом повернул и восстал против него.\tСлужение названо рабством; поворот и восстание выражены отдельно.",
+    "new_row": "1\tВ его дни поднялся Навуходоносор, царь Вавилонский, и был Иоаким его рабом три года; потом повернулся и восстал против него.\tСлужение названо рабством; поворот и восстание выражены отдельно.",
+    "reason": "Intransitive turn requires reflexive Russian form."
+  }
+]

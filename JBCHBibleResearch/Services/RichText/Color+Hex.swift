@@ -42,11 +42,11 @@ extension Color {
     /// 인라인 색상 서식용 소수 팔레트. 메모마다 색이 중구난방이 되지 않도록 미리 정한 몇 가지로 제한한다.
     /// ⚠️ 구체적인 팔레트가 원문서에 없어 임의로 고른 기본값이다.
     static let memoTextPalette: [(name: String, hex: String)] = [
-        ("검정", "#1A1A1A"),
-        ("빨강", "#D32F2F"),
-        ("주황", "#F57C00"),
-        ("초록", "#388E3C"),
-        ("파랑", "#1976D2"),
-        ("보라", "#7B1FA2"),
+        (String(localized: "검정"), "#1A1A1A"),
+        (String(localized: "빨강"), "#D32F2F"),
+        (String(localized: "주황"), "#F57C00"),
+        (String(localized: "초록"), "#388E3C"),
+        (String(localized: "파랑"), "#1976D2"),
+        (String(localized: "보라"), "#7B1FA2"),
     ]
 }

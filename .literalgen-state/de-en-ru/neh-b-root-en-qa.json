@@ -1,0 +1,12 @@
+[
+  {
+    "path": "Tools/LiteralGen/outputs/en/16_NEH/NEH_007_1.tsv",
+    "old_row": "7\t=\tThe Hebrew describes those coming with the named leaders; BSB says “accompanied by” them.",
+    "new_row": "7\t=\tClose to the Hebrew."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/en/16_NEH/NEH_009_1.tsv",
+    "old_row": "19\t=\tClose to the Hebrew.",
+    "new_row": "19\t=\tThe Hebrew says the cloud pillar did not depart from above them; BSB describes it as never turning away from guiding them."
+  }
+]

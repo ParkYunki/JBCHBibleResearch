@@ -50,12 +50,12 @@ enum SermonListKind: String, CaseIterable {
 
     var displayName: String {
         switch self {
-        case .bullet: return "구분점"
-        case .number: return "숫자 (1. 2. 3.)"
-        case .hangul: return "한글 (가. 나. 다.)"
-        case .diamond: return "도형 ◆"
-        case .square: return "도형 ■"
-        case .check: return "체크 ✓"
+        case .bullet: return String(localized: "구분점")
+        case .number: return String(localized: "숫자 (1. 2. 3.)")
+        case .hangul: return String(localized: "한글 (가. 나. 다.)")
+        case .diamond: return String(localized: "도형 ◆")
+        case .square: return String(localized: "도형 ■")
+        case .check: return String(localized: "체크 ✓")
         }
     }
 
@@ -412,7 +412,7 @@ enum SermonEmphasis: Int, CaseIterable {
     case two = 2   // 노란 형광펜
     case three = 3 // 파란 밑줄
 
-    var displayName: String { "강조\(rawValue)" }
+    var displayName: String { String(localized: "강조\(rawValue)") }
 
     static var oneColor: PlatformColor { PlatformColor(Color(hex: "#753B44") ?? .red) }
     static var twoColor: PlatformColor { PlatformColor(Color(hex: "#FFE08A") ?? .yellow) }

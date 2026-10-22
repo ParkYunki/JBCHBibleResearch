@@ -1,0 +1,380 @@
+[
+  {
+    "path": "Tools/LiteralGen/outputs/de/05_DEU/DEU_012_1.tsv",
+    "verse": 17,
+    "old_row": "17\tDu darfst in deinen Toren nicht den Zehnten deines Getreides und deines Mosts und deines Öls essen und die Erstgeburten deines Großviehs und deines Kleinviehs und alle deine Gelübde, die du geloben wirst, und deine freiwilligen Gaben und die Hebegabe deiner Hand;\tDas Geloben ist als künftig ausgedrückt; Kleinvieh steht statt nur Schafen.",
+    "new_row": "17\tDu darfst in deinen Toren nicht den Zehnten deines Getreides und deines Mosts und deines Öls und die Erstgeburten deines Großviehs und deines Kleinviehs und alle deine Gelübde, die du geloben wirst, und deine freiwilligen Gaben und die Hebegabe deiner Hand essen;\tDas Geloben ist als künftig ausgedrückt; Kleinvieh steht statt nur Schafen."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/05_DEU/DEU_013.tsv",
+    "verse": 8,
+    "old_row": "8\tsollst du ihm nicht willfahren und nicht auf ihn hören, und dein Auge soll ihn nicht bemitleiden, und du sollst ihn nicht schonen und nicht über ihn decken,\tDas Zustimmen ist unmittelbar auf ihn bezogen.",
+    "new_row": "8\tsollst du ihm nicht willfahren und nicht auf ihn hören, und dein Auge soll ihn nicht bemitleiden, und du sollst ihn nicht schonen und ihn nicht decken,\tDas Zustimmen ist unmittelbar auf ihn bezogen."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/05_DEU/DEU_013.tsv",
+    "verse": 13,
+    "old_row": "13\t‚Männer, Söhne der Nichtswürdigkeit, sind aus deiner Mitte ausgezogen und haben die Bewohner ihrer Stadt verleitet, indem sie sagten: Lasst uns gehen und anderen Göttern dienen, die ihr nicht gekannt habt‘,\tDie Männer sind als Söhne der Nichtswürdigkeit bezeichnet.",
+    "new_row": "13\t‚Männer, Söhne der Nichtswürdigkeit, sind aus deiner Mitte ausgezogen und haben die Bewohner ihrer Stadt verleitet, indem sie sagten: „Lasst uns gehen und anderen Göttern dienen, die ihr nicht gekannt habt.“‘,\tDie Männer sind als Söhne der Nichtswürdigkeit bezeichnet."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/05_DEU/DEU_016.tsv",
+    "verse": 19,
+    "old_row": "19\tНе искривляй суда, не признавай лиц и не бери взятки, ибо взятка ослепляет глаза мудрых и извращает слова праведных.\tНазваны слова праведных; дар определён как взятка.",
+    "new_row": "19\tНе искривляй суда, не взирай на лица и не бери взятки, ибо взятка ослепляет глаза мудрых и извращает слова праведных.\tНазваны слова праведных; дар определён как взятка."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/05_DEU/DEU_017.tsv",
+    "verse": 16,
+    "old_row": "16\tТолько пусть он не умножает себе коней и не возвращает народ в Египет, чтобы умножить коня; а Господь сказал вам: „Не возвращайтесь этим путём ещё раз“.\tВ цели слово „конь“ стоит в единственном числе; отдельного „себе“ при нём нет.",
+    "new_row": "16\tТолько пусть он не умножает себе коней и не возвращает народ в Египет, чтобы умножить коней; а Господь сказал вам: „Не возвращайтесь этим путём ещё раз“.\tПри цели умножения коней не повторено отдельное «себе»."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/05_DEU/DEU_018.tsv",
+    "verse": 11,
+    "old_row": "11\toder Beschwörer oder einer, der einen Totengeist und einen Wahrsagegeist befragt, oder einer, der die Toten aufsucht.\tDas Befragen von Geistern ist ausdrücklich genannt.",
+    "new_row": "11\toder Beschwörer oder einer, der einen Totengeist befragt, oder Wahrsager oder einer, der die Toten aufsucht.\tNah am Hebräischen."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/05_DEU/DEU_018.tsv",
+    "verse": 11,
+    "old_row": "11\tи заклинатель, и вопрошающий духа мёртвого и духа предсказания, и ищущий мёртвых.\tПрямо названы вопросы к духам и поиск мёртвых.",
+    "new_row": "11\tи заклинатель, и вопрошающий духа мёртвого, и волшебник, и ищущий мёртвых.\tБлизко к еврейскому."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/05_DEU/DEU_018.tsv",
+    "verse": 20,
+    "old_row": "20\tТолько пророк, который дерзнёт говорить слово во имя Моё, которого Я не повелел ему говорить, или который будет говорить во имя иных богов, — умрёт тот пророк“.\tПророк умрёт; отдельного повеления людям предать его смерти нет.",
+    "new_row": "20\tТолько пророк, который дерзнёт говорить слово во имя Моё, которое Я не повелел ему говорить, или который будет говорить во имя иных богов, — умрёт тот пророк“.\tПророк умрёт; отдельного повеления людям предать его смерти нет."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/en/05_DEU/DEU_018.tsv",
+    "verse": 2,
+    "old_row": "2\t=\tThe Hebrew uses singular pronouns for the Levite and his brothers and inheritance.",
+    "new_row": "2\t=\tThe Hebrew uses singular “him” and “his” where BSB uses plural “they,” “their,” and “them.”"
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/en/05_DEU/DEU_018.tsv",
+    "verse": 8,
+    "old_row": "8\t=\tThe Hebrew does not explicitly repeat money or identify the father as singular.",
+    "new_row": "8\t=\tThe Hebrew does not explicitly name money or identify the father as singular."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/05_DEU/DEU_019.tsv",
+    "verse": 6,
+    "old_row": "6\tdamit der Bluträcher dem Totschläger nicht nachjagt, weil sein Herz heiß ist, und ihn einholt, weil der Weg weit ist, und ihn am Leben trifft, obwohl ihm kein Todesurteil gebührt, denn er hat ihn zuvor nicht gehasst.\tGenannt ist das Todesurteil, nicht nur allgemeine Todesschuld.",
+    "new_row": "6\tdamit der Bluträcher dem Totschläger nicht nachjagt, weil sein Herz heiß ist, und ihn einholt, weil der Weg weit ist, und ihn tödlich schlägt, obwohl ihm kein Todesurteil gebührt, denn er hat ihn zuvor nicht gehasst.\tGenannt ist das Todesurteil, nicht nur allgemeine Todesschuld."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/05_DEU/DEU_019.tsv",
+    "verse": 11,
+    "old_row": "11\tWenn aber ein Mann seinen Nächsten hasst und ihm auflauert und gegen ihn aufsteht und ihn am Leben trifft und er stirbt und er in eine dieser Städte flieht,\tDas Sterben steht als eigene Aussage.",
+    "new_row": "11\tWenn aber ein Mann seinen Nächsten hasst und ihm auflauert und gegen ihn aufsteht und ihn tödlich schlägt und er stirbt und er in eine dieser Städte flieht,\tDas Sterben steht als eigene Aussage."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/05_DEU/DEU_020.tsv",
+    "verse": 19,
+    "old_row": "19\tWenn du eine Stadt viele Tage belagerst, um gegen sie zu kämpfen und sie einzunehmen, sollst du ihre Bäume nicht verderben, indem du die Axt gegen sie schwingst, denn du darfst davon essen, und du sollst sie nicht fällen. Ist denn der Baum des Feldes ein Mensch, der vor dir in die Belagerung gehen sollte?\tDer Baum wird mit einer Frage dem Menschen gegenübergestellt; die Axt steht in der Einzahl.",
+    "new_row": "19\tWenn du eine Stadt viele Tage belagerst, um gegen sie zu kämpfen und sie einzunehmen, sollst du ihre Bäume nicht verderben, indem du die Axt gegen sie schwingst, denn du darfst davon essen, und du sollst sie nicht fällen. Ist denn der Baum des Feldes ein Mensch, der vor dir in die Belagerung geraten sollte?\tDer Baum wird mit einer Frage dem Menschen gegenübergestellt; die Axt steht in der Einzahl."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/05_DEU/DEU_020.tsv",
+    "verse": 19,
+    "old_row": "19\tКогда будешь осаждать город многие дни, чтобы сражаться против него и взять его, не губи его деревьев, занося на них топор, ибо ты можешь есть от них, и не руби их. Разве дерево поля — человек, чтобы войти от тебя в осаду?\tТопор назван прямо; отдельного разорения окрестностей нет. Последнее сравнение выражено вопросом.",
+    "new_row": "19\tКогда будешь осаждать город многие дни, чтобы сражаться против него и взять его, не губи его деревьев, занося на них топор, ибо ты можешь есть от них, и не руби их. Разве дерево поля — человек, чтобы оказаться перед тобой в осаде?\tТопор назван прямо; отдельного разорения окрестностей нет. Последнее сравнение выражено вопросом."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/05_DEU/DEU_021.tsv",
+    "verse": 8,
+    "old_row": "8\tСовершай искупление за Твой народ Израиль, который Ты выкупил, Господи, и не возлагай невинную кровь среди Твоего народа Израиля“. И будет искуплена им кровь.\tИсход из Египта здесь не добавлен; искупление крови выражено страдательно.",
+    "new_row": "8\tСоверши искупление за Твой народ Израиль, который Ты выкупил, Господи, и не возлагай невинную кровь среди Твоего народа Израиля“. И будет искуплена им кровь.\tИсход из Египта здесь не добавлен; искупление крови выражено страдательно."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/05_DEU/DEU_022.tsv",
+    "verse": 26,
+    "old_row": "26\tDem Mädchen aber sollst du nichts tun; das Mädchen hat keine Todessünde, denn wie ein Mann gegen seinen Nächsten aufsteht und ihn am Leben mordet, so ist diese Sache;\tDas Mädchen wird wiederholt; die Tat ist als Mord bezeichnet.",
+    "new_row": "26\tDem Mädchen aber sollst du nichts tun; das Mädchen hat keine Todessünde, denn wie ein Mann gegen seinen Nächsten aufsteht und ihn ermordet, so ist diese Sache;\tDas Mädchen wird wiederholt; die Tat ist als Mord bezeichnet."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/05_DEU/DEU_022.tsv",
+    "verse": 1,
+    "old_row": "1\t«Не смотри на вола твоего брата или на его животное мелкого скота, отбившихся, скрываясь от них; непременно возврати их твоему брату.\tСохранён образ скрывания от них; возвращение усилено.",
+    "new_row": "1\t«Если увидишь вола твоего брата или его животное мелкого скота, отбившихся, не скрывайся от них; непременно возврати их твоему брату.\tСохранён образ скрывания от них; возвращение усилено."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/05_DEU/DEU_022.tsv",
+    "verse": 4,
+    "old_row": "4\tНе смотри на осла твоего брата или на его вола, упавших на дороге, скрываясь от них; непременно подними их вместе с ним.\tПоднятие усилено; сохранён образ скрывания.",
+    "new_row": "4\tЕсли увидишь осла твоего брата или его вола, упавших на дороге, не скрывайся от них; непременно подними их вместе с ним.\tПоднятие усилено; сохранён образ скрывания."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/05_DEU/DEU_022.tsv",
+    "verse": 20,
+    "old_row": "20\tА если это дело истинно, не были найдены признаки девства девушки,\tНахождение признаков выражено страдательной формой.",
+    "new_row": "20\tА если это дело истинно: у девушки не были найдены признаки девства,\tНахождение признаков выражено страдательной формой."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/05_DEU/DEU_023.tsv",
+    "verse": 1,
+    "old_row": "1\t«Раздавленный в яичках и с отрезанным членом пусть не входит в собрание Господа.\tБлизко к еврейскому.",
+    "new_row": "1\t«Ни человек с раздавленными яичками, ни человек с отрезанным членом пусть не входит в собрание Господа.\tБлизко к еврейскому."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/05_DEU/DEU_012_1.tsv",
+    "verse": 8,
+    "old_row": "8\tНе делайте так, как всё, что мы делаем здесь сегодня, каждый — всё, что право в его глазах.\tВ начале не добавлено „там“; сохранён образ собственных глаз.",
+    "new_row": "8\tНе делайте так, как всё, что мы делаем здесь сегодня, каждый — всё, что право в его глазах.\tВ начале не добавлено «там»; сохранён образ собственных глаз."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/05_DEU/DEU_012_1.tsv",
+    "verse": 11,
+    "old_row": "11\tИ будет: на место, которое изберёт Господь, ваш Бог, чтобы поселить там Своё имя, туда приносите всё, что я повелеваю вам: ваши всесожжения и ваши жертвы заклания, ваши десятины и возношение вашей руки и всё избранное ваших обетов, которые вы дадите Господу.\tНе добавлены „сегодня“ и „Богу вашему“ в конце; рука названа в единственном числе.",
+    "new_row": "11\tИ будет: на место, которое изберёт Господь, ваш Бог, чтобы поселить там Своё имя, туда приносите всё, что я повелеваю вам: ваши всесожжения и ваши жертвы заклания, ваши десятины и возношение вашей руки и всё избранное ваших обетов, которые вы дадите Господу.\tНе добавлены «сегодня» и «Богу вашему» в конце; рука названа в единственном числе."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/05_DEU/DEU_012_1.tsv",
+    "verse": 14,
+    "old_row": "14\tно на месте, которое изберёт Господь в одном из твоих колен, там возноси твои всесожжения и там делай всё, что я повелеваю тебе.\tНе добавлены „Бог твой“ и „сегодня“; „там“ повторено.",
+    "new_row": "14\tно на месте, которое изберёт Господь в одном из твоих колен, там возноси твои всесожжения и там делай всё, что я повелеваю тебе.\tНе добавлены «Бог твой» и «сегодня»; «там» повторено."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/05_DEU/DEU_012_1.tsv",
+    "verse": 21,
+    "old_row": "21\tЕсли далеко от тебя будет место, которое изберёт Господь, твой Бог, чтобы положить там Своё имя, то заколай из твоего крупного и мелкого скота, который дал тебе Господь, как я повелел тебе, и ешь в твоих воротах по всему желанию твоей души.\tПри даровании скота не добавлено „Бог твой“; место еды обозначено воротами.",
+    "new_row": "21\tЕсли далеко от тебя будет место, которое изберёт Господь, твой Бог, чтобы положить там Своё имя, то заколай из твоего крупного и мелкого скота, который дал тебе Господь, как я повелел тебе, и ешь в твоих воротах по всему желанию твоей души.\tПри даровании скота не добавлено «Бог твой»; место еды обозначено воротами."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/05_DEU/DEU_012_1.tsv",
+    "verse": 22,
+    "old_row": "22\tТолько как едят газель и оленя, так ешь его; нечистый и чистый вместе могут есть его.\tВыражено совместное участие; „у тебя“ отдельно не добавлено.",
+    "new_row": "22\tТолько как едят газель и оленя, так ешь его; нечистый и чистый вместе могут есть его.\tВыражено совместное участие; «у тебя» отдельно не добавлено."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/05_DEU/DEU_012_1.tsv",
+    "verse": 25,
+    "old_row": "25\tНе ешь её, чтобы хорошо было тебе и твоим сынам после тебя, когда ты делаешь правое в глазах Господа.\tНе добавлены „вовеки“, отдельное „доброе“ и „Бога твоего“; названы сыны.",
+    "new_row": "25\tНе ешь её, чтобы хорошо было тебе и твоим сынам после тебя, когда ты делаешь правое в глазах Господа.\tНе добавлены «вовеки», отдельное «доброе» и «Бога твоего»; названы сыны."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/05_DEU/DEU_012_1.tsv",
+    "verse": 26,
+    "old_row": "26\tТолько твои святыни, которые будут у тебя, и твои обеты подними и приди на место, которое изберёт Господь.\tНе добавлены „Бог твой“ и цель призывания Его имени.",
+    "new_row": "26\tТолько твои святыни, которые будут у тебя, и твои обеты подними и приди на место, которое изберёт Господь.\tНе добавлены «Бог твой» и цель призывания Его имени."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/05_DEU/DEU_012_1.tsv",
+    "verse": 27,
+    "old_row": "27\tИ совершай твои всесожжения, мясо и кровь, на жертвеннике Господа, твоего Бога; и кровь твоих жертв заклания будет пролита на жертвенник Господа, твоего Бога, а мясо ешь.\tКровь проливают на жертвенник; отдельного слова „других“ нет.",
+    "new_row": "27\tИ совершай твои всесожжения, мясо и кровь, на жертвеннике Господа, твоего Бога; и кровь твоих жертв заклания будет пролита на жертвенник Господа, твоего Бога, а мясо ешь.\tКровь проливают на жертвенник; отдельного слова «других» нет."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/05_DEU/DEU_013.tsv",
+    "verse": 2,
+    "old_row": "2\tи придёт знамение и чудо, о котором он говорил тебе, сказав: „Пойдём вслед иных богов, которых ты не знал, и будем служить им“,\tЗнамение и чудо соединены союзом „и“.",
+    "new_row": "2\tи придёт знамение и чудо, о котором он говорил тебе, сказав: „Пойдём вслед иных богов, которых ты не знал, и будем служить им“,\tЗнамение и чудо соединены союзом «и»."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/05_DEU/DEU_013.tsv",
+    "verse": 3,
+    "old_row": "3\tне слушай слов того пророка или того сновидца, ибо Господь, ваш Бог, испытывает вас, чтобы узнать, любите ли вы Господа, вашего Бога, всем вашим сердцем и всей вашей душой.\tОтдельного добавления „чрез сие“ нет.",
+    "new_row": "3\tне слушай слов того пророка или того сновидца, ибо Господь, ваш Бог, испытывает вас, чтобы узнать, любите ли вы Господа, вашего Бога, всем вашим сердцем и всей вашей душой.\tОтдельного добавления «чрез сие» нет."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/05_DEU/DEU_013.tsv",
+    "verse": 13,
+    "old_row": "13\t„Вышли из твоей среды люди, сыны негодности, и совратили жителей своего города, говоря: Пойдём и будем служить иным богам, которых вы не знали“,\tЛюди названы сынами негодности; отдельного „в нём“ нет.",
+    "new_row": "13\t„Вышли из твоей среды люди, сыны негодности, и совратили жителей своего города, говоря: «Пойдём и будем служить иным богам, которых вы не знали»“,\tЛюди названы сынами негодности; отдельного «в нём» нет."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/05_DEU/DEU_013.tsv",
+    "verse": 14,
+    "old_row": "14\tразыщи и исследуй и хорошо расспроси; и вот, если это правда, дело установлено, эта мерзость была сделана среди тебя,\tЗло выражено как сделанное страдательным действием; „вот“ названо прямо.",
+    "new_row": "14\tразыщи и исследуй и хорошо расспроси; и вот, если это правда, дело установлено, эта мерзость была сделана среди тебя,\tЗло выражено как сделанное страдательным действием; «вот» названо прямо."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/05_DEU/DEU_013.tsv",
+    "verse": 17,
+    "old_row": "17\tИ ничто из заклятого пусть не прилипнет к твоей руке, чтобы Господь отвратился от пыла Своего гнева и дал тебе милость, и помиловал тебя, и умножил тебя, как Он клялся твоим отцам,\tГосподь Сам отвратится от гнева; отдельного „как Он говорил тебе“ нет.",
+    "new_row": "17\tИ ничто из заклятого пусть не прилипнет к твоей руке, чтобы Господь отвратился от пыла Своего гнева и дал тебе милость, и помиловал тебя, и умножил тебя, как Он клялся твоим отцам,\tГосподь Сам отвратится от гнева; отдельного «как Он говорил тебе» нет."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/05_DEU/DEU_014.tsv",
+    "verse": 23,
+    "old_row": "23\tИ ешь перед Господом, твоим Богом, на месте, которое Он изберёт, чтобы поселить там Своё имя, десятину твоего зерна, твоего молодого вина и твоего масла и первенцев твоего крупного и мелкого скота, чтобы научиться бояться Господа, твоего Бога, во все дни.\tДесятина прямо названа предметом еды; отдельного повеления „приноси“ нет.",
+    "new_row": "23\tИ ешь перед Господом, твоим Богом, на месте, которое Он изберёт, чтобы поселить там Своё имя, десятину твоего зерна, твоего молодого вина и твоего масла и первенцев твоего крупного и мелкого скота, чтобы научиться бояться Господа, твоего Бога, во все дни.\tДесятина прямо названа предметом еды; отдельного повеления «приноси» нет."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/05_DEU/DEU_015.tsv",
+    "verse": 2,
+    "old_row": "2\tИ вот дело отпущения: всякий заимодавец пусть отпустит заём своей руки, который он дал своему ближнему; пусть не взыскивает со своего ближнего и со своего брата, ибо провозглашено отпущение Господу.\tЗаём связан с рукой; „Бога твоего“ не добавлено.",
+    "new_row": "2\tИ вот дело отпущения: всякий заимодавец пусть отпустит заём своей руки, который он дал своему ближнему; пусть не взыскивает со своего ближнего и со своего брата, ибо провозглашено отпущение Господу.\tЗаём связан с рукой; «Бога твоего» не добавлено."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/05_DEU/DEU_015.tsv",
+    "verse": 9,
+    "old_row": "9\tБерегись, чтобы не было при твоём сердце негодного слова: „Близок седьмой год, год отпущения“, и твой глаз станет злым к твоему нищему брату, и ты не дашь ему; и он воззовёт против тебя к Господу, и будет в тебе грех.\tНазван грех в тебе без отдельного слова „великий“; сохранено злое око.",
+    "new_row": "9\tБерегись, чтобы не было при твоём сердце негодного слова: „Близок седьмой год, год отпущения“, и твой глаз станет злым к твоему нищему брату, и ты не дашь ему; и он воззовёт против тебя к Господу, и будет в тебе грех.\tНазван грех в тебе без отдельного слова «великий»; сохранено злое око."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/05_DEU/DEU_015.tsv",
+    "verse": 20,
+    "old_row": "20\tПеред Господом, твоим Богом, ешь его год за годом, на месте, которое изберёт Господь, ты и твой дом.\tПри выборе места не добавлено „Бог твой“.",
+    "new_row": "20\tПеред Господом, твоим Богом, ешь его год за годом, на месте, которое изберёт Господь, ты и твой дом.\tПри выборе места не добавлено «Бог твой»."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/05_DEU/DEU_016.tsv",
+    "verse": 15,
+    "old_row": "15\tСемь дней празднуй Господу, твоему Богу, на месте, которое изберёт Господь, ибо благословит тебя Господь, твой Бог, во всём твоём урожае и во всяком деле твоих рук, и будешь только радоваться.\tПри выборе места не добавлены „Бог твой“ и слова о призывании имени.",
+    "new_row": "15\tСемь дней празднуй Господу, твоему Богу, на месте, которое изберёт Господь, ибо благословит тебя Господь, твой Бог, во всём твоём урожае и во всяком деле твоих рук, и будешь только радоваться.\tПри выборе места не добавлены «Бог твой» и слова о призывании имени."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/05_DEU/DEU_017.tsv",
+    "verse": 3,
+    "old_row": "3\tи пойдёт и станет служить иным богам, и поклонится им и солнцу или луне или всему воинству небес, чего я не повелевал,\tПервое соединение с солнцем выражено союзом „и“.",
+    "new_row": "3\tи пойдёт и станет служить иным богам, и поклонится им и солнцу или луне или всему воинству небес, чего я не повелевал,\tПервое соединение с солнцем выражено союзом «и»."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/05_DEU/DEU_017.tsv",
+    "verse": 4,
+    "old_row": "4\tи будет сообщено тебе, и ты услышишь, то хорошо разыщи; и вот, если это правда, дело установлено, эта мерзость была сделана в Израиле,\t„Вот“ выражено прямо; дело названо установленным.",
+    "new_row": "4\tи будет сообщено тебе, и ты услышишь, то хорошо разыщи; и вот, если это правда, дело установлено, эта мерзость была сделана в Израиле,\t«Вот» выражено прямо; дело названо установленным."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/05_DEU/DEU_017.tsv",
+    "verse": 10,
+    "old_row": "10\tИ поступи по слову, которое они сообщат тебе с того места, которое изберёт Господь, и соблюдай, чтобы делать всё, чему они научат тебя.\tНе добавлены „Бог твой“ и слова о призывании имени; сообщение идёт с того места.",
+    "new_row": "10\tИ поступи по слову, которое они сообщат тебе с того места, которое изберёт Господь, и соблюдай, чтобы делать всё, чему они научат тебя.\tНе добавлены «Бог твой» и слова о призывании имени; сообщение идёт с того места."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/05_DEU/DEU_017.tsv",
+    "verse": 12,
+    "old_row": "12\tА человек, который поступит дерзко, не слушая священника, стоящего там, чтобы служить Господу, твоему Богу, или судьи, — умрёт тот человек; и истреби зло из Израиля.\tПри судье не добавлено „который будет в те дни“; тот человек назван вновь.",
+    "new_row": "12\tА человек, который поступит дерзко, не слушая священника, стоящего там, чтобы служить Господу, твоему Богу, или судьи, — умрёт тот человек; и истреби зло из Израиля.\tПри судье не добавлено «который будет в те дни»; тот человек назван вновь."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/05_DEU/DEU_018.tsv",
+    "verse": 10,
+    "old_row": "10\tПусть не будет найден среди тебя проводящий своего сына и свою дочь через огонь, гадающий гадания, предсказатель и ворожея и чародей,\tСын и дочь соединены союзом „и“; повтор гадания сохранён.",
+    "new_row": "10\tПусть не будет найден среди тебя проводящий своего сына и свою дочь через огонь, гадающий гадания, предсказатель и ворожея и чародей,\tСын и дочь соединены союзом «и»; повтор гадания сохранён."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/05_DEU/DEU_018.tsv",
+    "verse": 13,
+    "old_row": "13\tБудь непорочен с Господом, твоим Богом.\tСказано „с Господом“, а не „пред Господом“.",
+    "new_row": "13\tБудь непорочен с Господом, твоим Богом.\tСказано «с Господом», а не «пред Господом»."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/05_DEU/DEU_018.tsv",
+    "verse": 17,
+    "old_row": "17\tИ сказал мне Господь: „Хорошо то, что они говорили.\tСлово „тебе“ в конце не добавлено.",
+    "new_row": "17\tИ сказал мне Господь: „Хорошо то, что они говорили.\tСлово «тебе» в конце не добавлено."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/05_DEU/DEU_019.tsv",
+    "verse": 8,
+    "old_row": "8\tИ если расширит Господь, твой Бог, твою границу, как Он клялся твоим отцам, и даст тебе всю землю, которую обещал дать твоим отцам,\tУсловие введено словом „если“; граница названа в единственном числе.",
+    "new_row": "8\tИ если расширит Господь, твой Бог, твою границу, как Он клялся твоим отцам, и даст тебе всю землю, которую обещал дать твоим отцам,\tУсловие введено словом «если»; граница названа в единственном числе."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/05_DEU/DEU_019.tsv",
+    "verse": 18,
+    "old_row": "18\tИ пусть судьи хорошо разыщут; и вот, если свидетель — ложный свидетель, ложно свидетельствовал против своего брата,\t„Вот“ выражено прямо.",
+    "new_row": "18\tИ пусть судьи хорошо разыщут; и вот, если свидетель — ложный свидетель, ложно свидетельствовал против своего брата,\t«Вот» выражено прямо."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/05_DEU/DEU_019.tsv",
+    "verse": 21,
+    "old_row": "21\tИ пусть твой глаз не щадит: душа за душу, глаз за глаз, зуб за зуб, рука за руку, нога за ногу».\tЗаключительное предложение о вреде ближнему в этой строке не добавлено; „его“ при пощаде не повторено.",
+    "new_row": "21\tИ пусть твой глаз не щадит: душа за душу, глаз за глаз, зуб за зуб, рука за руку, нога за ногу».\tЗаключительное предложение о вреде ближнему в этой строке не добавлено; «его» при пощаде не повторено."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/05_DEU/DEU_021.tsv",
+    "verse": 9,
+    "old_row": "9\tИ ты истреби невинную кровь из твоей среды, когда делаешь правое в глазах Господа.\tНе добавлены желание, отдельное доброе и „Бога твоего“; удаление крови не описано смыванием.",
+    "new_row": "9\tИ ты истреби невинную кровь из твоей среды, когда делаешь правое в глазах Господа.\tНе добавлены желание, отдельное доброе и «Бога твоего»; удаление крови не описано смыванием."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/05_DEU/DEU_022.tsv",
+    "verse": 2,
+    "old_row": "2\tИ если твой брат не близко к тебе и ты его не знаешь, собери это внутрь твоего дома, и пусть будет с тобой, пока твой брат не станет искать это; тогда возврати ему.\tУсловия соединены союзом „и“; потерянное названо в единственном числе.",
+    "new_row": "2\tИ если твой брат не близко к тебе и ты его не знаешь, собери это внутрь твоего дома, и пусть будет с тобой, пока твой брат не станет искать это; тогда возврати ему.\tУсловия соединены союзом «и»; потерянное названо в единственном числе."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/05_DEU/DEU_022.tsv",
+    "verse": 16,
+    "old_row": "16\tИ отец девушки пусть скажет старейшинам: „Мою дочь я отдал этому мужчине в жёны, и он возненавидел её;\tОтдельное „ныне“ не добавлено.",
+    "new_row": "16\tИ отец девушки пусть скажет старейшинам: „Мою дочь я отдал этому мужчине в жёны, и он возненавидел её;\tОтдельное «ныне» не добавлено."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/05_DEU/DEU_023.tsv",
+    "verse": 11,
+    "old_row": "11\tИ при наступлении вечера пусть омоется водой, а при заходе солнца войдёт внутрь стана.\tСлово „тело“ отдельно не добавлено.",
+    "new_row": "11\tИ при наступлении вечера пусть омоется водой, а при заходе солнца войдёт внутрь стана.\tСлово «тело» отдельно не добавлено."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/05_DEU/DEU_023.tsv",
+    "verse": 13,
+    "old_row": "13\tи пусть будет у тебя колышек при твоём снаряжении; и когда сядешь снаружи, выкопай им и повернись и покрой твоё испражнение.\tПредмет связан со снаряжением; отдельное слово „яма“ не добавлено.",
+    "new_row": "13\tи пусть будет у тебя колышек при твоём снаряжении; и когда сядешь снаружи, выкопай им и повернись и покрой твоё испражнение.\tПредмет связан со снаряжением; отдельное слово «яма» не добавлено."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/05_DEU/DEU_012_2.tsv",
+    "verse": 31,
+    "old_row": "31\tНе делай так Господу, твоему Богу, ибо всякую мерзость Господа, которую Он ненавидит, они делали своим богам; ибо даже своих сыновей и своих дочерей сжигают огнём своим богам.\tДействия по отношению к богам выражены как совершавшиеся.",
+    "new_row": "31\tНе делай так Господу, твоему Богу, ибо всё мерзкое Господу, что Он ненавидит, они делали своим богам; ибо даже своих сыновей и своих дочерей сжигают огнём своим богам.\tДействия по отношению к богам выражены как совершавшиеся."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/05_DEU/DEU_015.tsv",
+    "verse": 18,
+    "old_row": "18\tEs soll nicht schwer sein in deinen Augen, wenn du ihn frei von dir entlässt, denn für das Doppelte des Lohns eines Tagelöhners hat er dir sechs Jahre gedient; und der HERR, dein Gott, wird dich in allem segnen, was du tust.\tDas Schwere wird auf die Augen bezogen; genannt ist der doppelte Lohn.",
+    "new_row": "18\tEs soll nicht schwer sein in deinen Augen, wenn du ihn frei von dir entlässt, denn sein sechsjähriger Dienst für dich entsprach dem doppelten Lohn eines Tagelöhners; und der HERR, dein Gott, wird dich in allem segnen, was du tust.\tDas Schwere wird auf die Augen bezogen; genannt ist der doppelte Lohn."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/05_DEU/DEU_015.tsv",
+    "verse": 18,
+    "old_row": "18\tПусть не будет тяжело в твоих глазах, когда ты отпускаешь его от себя свободным, ибо за двойную плату наёмника он служил тебе шесть лет; и Господь, твой Бог, благословит тебя во всём, что ты делаешь.\tТяжесть связана с глазами; названа служба за двойную плату.",
+    "new_row": "18\tПусть не будет тяжело в твоих глазах, когда ты отпускаешь его от себя свободным, ибо его служба тебе в течение шести лет была равноценна двойной плате наёмника; и Господь, твой Бог, благословит тебя во всём, что ты делаешь.\tТяжесть связана с глазами; названа стоимость шестилетней службы в двойную плату наёмника."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/05_DEU/DEU_019.tsv",
+    "verse": 16,
+    "old_row": "16\tWenn ein gewalttätiger Zeuge gegen einen Mann auftritt, um gegen ihn Abfall zu bezeugen,\tDer Zeuge ist als gewalttätig bezeichnet.",
+    "new_row": "16\tWenn ein gewalttätiger Zeuge gegen einen Mann auftritt, um gegen ihn eine Verfehlung zu bezeugen,\tDer Zeuge ist als gewalttätig bezeichnet."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/05_DEU/DEU_019.tsv",
+    "verse": 16,
+    "old_row": "16\tЕсли встанет против человека свидетель насилия, чтобы свидетельствовать против него об отступлении,\tСвидетель определён через насилие.",
+    "new_row": "16\tЕсли встанет против человека свидетель насилия, чтобы свидетельствовать против него о преступлении,\tСвидетель определён через насилие."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/05_DEU/DEU_022.tsv",
+    "verse": 1,
+    "old_row": "1\t„Du sollst das Rind deines Bruders oder sein Tier vom Kleinvieh nicht umherirren sehen und dich vor ihnen verbergen; du sollst sie deinem Bruder gewiss zurückbringen.\tDas Zurückbringen ist bekräftigt; Kleinvieh steht statt nur Schafen.",
+    "new_row": "1\t„Wenn du das Rind deines Bruders oder sein Tier vom Kleinvieh umherirren siehst, sollst du dich nicht vor ihnen verbergen; du sollst sie deinem Bruder gewiss zurückbringen.\tDas Zurückbringen ist bekräftigt; Kleinvieh steht statt nur Schafen."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/05_DEU/DEU_022.tsv",
+    "verse": 4,
+    "old_row": "4\tDu sollst den Esel deines Bruders oder sein Rind nicht auf dem Weg fallen sehen und dich vor ihnen verbergen; du sollst sie gewiss mit ihm aufrichten.\tDas Aufrichten geschieht mit dem Bruder zusammen und ist bekräftigt.",
+    "new_row": "4\tWenn du den Esel deines Bruders oder sein Rind auf dem Weg fallen siehst, sollst du dich nicht vor ihnen verbergen; du sollst sie gewiss mit ihm aufrichten.\tDas Aufrichten geschieht mit dem Bruder zusammen und ist bekräftigt."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/05_DEU/DEU_023.tsv",
+    "verse": 14,
+    "old_row": "14\tDenn der HERR, dein Gott, geht in der Mitte deines Lagers umher, um dich zu retten und deine Feinde vor dir hinzugeben; und dein Lager soll heilig sein, damit er nichts Entblößtes bei dir sieht und sich von dir abwendet.\tDer HERR ist selbst das Subjekt des Sehens; genannt ist die Mitte des Lagers.",
+    "new_row": "14\tDenn der HERR, dein Gott, geht in der Mitte deines Lagers umher, um dich zu retten und deine Feinde vor dir hinzugeben; und dein Lager soll heilig sein, damit er keine Blöße bei dir sieht und sich nicht von dir abwendet.\tDer HERR ist selbst das Subjekt des Sehens; genannt ist die Mitte des Lagers."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/05_DEU/DEU_023.tsv",
+    "verse": 5,
+    "old_row": "5\tНо Господь, твой Бог, не захотел слушать Валаама, и Господь, твой Бог, обратил для тебя проклятие в благословение, ибо Господь, твой Бог, любил тебя.\tМестоимение „его“ при проклятии не добавлено; любовь выражена совершившимся действием.",
+    "new_row": "5\tНо Господь, твой Бог, не захотел слушать Валаама, и Господь, твой Бог, обратил для тебя проклятие в благословение, ибо Господь, твой Бог, любит тебя.\tМестоимение «его» при проклятии не добавлено."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/05_DEU/DEU_023.tsv",
+    "verse": 14,
+    "old_row": "14\tИбо Господь, твой Бог, ходит посреди твоего стана, чтобы спасать тебя и отдавать твоих врагов перед тобой; и пусть твой стан будет свят, чтобы Он не увидел у тебя наготы какого-либо дела и не отвернулся от тебя.\tВрагов отдают перед ним, без добавления рук; срамное выражено образом наготы.",
+    "new_row": "14\tИбо Господь, твой Бог, ходит посреди твоего стана, чтобы спасать тебя и отдавать твоих врагов перед тобой; и пусть твой стан будет свят, чтобы Он не увидел никакой наготы у тебя и не отвернулся от тебя.\tВрагов отдают перед ним, без добавления рук; срамное выражено образом наготы."
+  }
+]

@@ -1,0 +1,12 @@
+{
+  "chapters": [
+    11,
+    20
+  ],
+  "files": 42,
+  "rows": 888,
+  "verses_per_language": 296,
+  "verse_ids_fields_diff_length_en_equals_quotes": true,
+  "created_hashes_match": true,
+  "qa_candidates": 7
+}

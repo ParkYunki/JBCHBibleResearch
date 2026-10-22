@@ -1,0 +1,77 @@
+[
+  {
+    "path": "Tools/LiteralGen/outputs/de/07_JDG/JDG_018_1.tsv",
+    "old_row": "17\tUnd die fünf Männer, die ausgezogen waren, das Land auszukundschaften, gingen hinauf, kamen dorthin und nahmen das Schnitzbild und den Ephod und die Teraphim und das Gussbild. Und der Priester stand am Eingang des Tores und die sechshundert Mann, umgürtet mit Kriegsgerät.\tDas „Kriegsgerät“ wird zweimal genannt; die Gegenstände sind ausdrücklich Schnitzbild, Ephod, Teraphim und Gussbild.",
+    "new_row": "17\tUnd die fünf Männer, die ausgezogen waren, das Land auszukundschaften, gingen hinauf, kamen dorthin und nahmen das Schnitzbild und den Ephod und die Teraphim und das Gussbild. Und der Priester stand am Eingang des Tores und die sechshundert Mann, umgürtet mit Kriegsgerät.\tDas Schnitzbild, der Ephod, die Teraphim und das Gussbild werden ausdrücklich benannt. Der Priester steht am Eingang des Tores."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/07_JDG/JDG_018_1.tsv",
+    "old_row": "25\tUnd die Söhne Dans sagten zu ihm: „Lass deine Stimme nicht bei uns hören, damit nicht Männer mit bitterer Seele über euch herfallen und du deine Seele und die Seele deines Hauses einbüßt.“\tDie Angreifer sind „bitter an Seele“; die letzte Handlung hat „du“ als Subjekt, statt passivem Hingerafftwerden.",
+    "new_row": "25\tUnd die Söhne Dans sagten zu ihm: „Lass deine Stimme nicht bei uns hören, damit keine Männer mit bitterer Seele über euch herfallen und du deine Seele und die Seele deines Hauses nicht einbüßt.“\tDie Angreifer sind „bitter an Seele“; die letzte Handlung hat „du“ als Subjekt, statt passivem Hingerafftwerden."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/07_JDG/JDG_018_1.tsv",
+    "old_row": "29\tИ назвали имя города Дан, по имени Дана, своего отца, который родился у Израиля; но Лаис было имя города прежде.\tДан назван тем, кто «родился у Израиля», в пассивной форме.",
+    "new_row": "29\tИ назвали имя города Дан, по имени Дана, своего отца, который родился у Израиля; но Лаис было имя города прежде.\tДан назван тем, кто родился у Израиля; перевод называет его сыном Израиля."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/07_JDG/JDG_019.tsv",
+    "old_row": "22\tSie machten ihr Herz froh, und siehe, die Männer der Stadt, nichtswürdige Männer, umringten das Haus und schlugen heftig gegen die Tür. Und sie sagten zu dem alten Mann, dem Herrn des Hauses: „Bring den Mann heraus, der in dein Haus gekommen ist, damit wir ihn erkennen.“\tDie Tür wird heftig geschlagen, nicht nur angepocht; das schlechte Wesen wird als Nichtswürdigkeit ausgedrückt.",
+    "new_row": "22\tSie machten ihr Herz froh, und siehe, die Männer der Stadt, Männer, Söhne der Nichtswürdigkeit, umringten das Haus und schlugen heftig gegen die Tür. Und sie sagten zu dem alten Mann, dem Herrn des Hauses: „Bring den Mann heraus, der in dein Haus gekommen ist, damit wir ihn erkennen.“\tDie Tür wird heftig geschlagen, nicht nur angepocht; das schlechte Wesen wird als Nichtswürdigkeit ausgedrückt."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/07_JDG/JDG_019.tsv",
+    "old_row": "22\tОни веселили своё сердце, и вот, люди города, негодные люди, окружили дом, сильно стуча в дверь. И сказали старому человеку, хозяину дома, говоря: «Выведи человека, который пришёл в твой дом, и мы познаем его».\tСердце и дверь стоят в единственном числе; стук выражен усиленно.",
+    "new_row": "22\tОни веселили своё сердце, и вот, люди города, люди, сыны негодности, окружили дом, сильно стуча в дверь. И сказали старому человеку, хозяину дома, говоря: «Выведи человека, который пришёл в твой дом, и мы познаем его».\tСердце и дверь стоят в единственном числе; стук выражен усиленно."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/07_JDG/JDG_005_1.tsv",
+    "old_row": "22\tDamals stampften die Fersen der Pferde vom Galoppieren, vom Galoppieren seiner Mächtigen.\tDas Hebräische wiederholt das Galoppieren und nennt Fersen.",
+    "new_row": "22\tDamals stampften die Fersen des Pferdes vom Galoppieren, vom Galoppieren seiner Mächtigen.\tDas Hebräische wiederholt das Galoppieren und nennt Fersen."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/07_JDG/JDG_005_1.tsv",
+    "old_row": "22\tТогда стучали пятки коней от скачки, от скачки его могучих.\tЕврейский текст называет пятки коней и действие ударов.",
+    "new_row": "22\tТогда стучали пятки коня от скачки, от скачки его могучих.\tЕврейский текст называет пятки коня: конь стоит в единственном числе. Слово скачки повторено."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/07_JDG/JDG_005_1.tsv",
+    "old_row": "26\tIhre Hand streckte sie zum Pflock aus und ihre Rechte zum Hammer der Arbeiter; und sie hämmerte Sisera, zerschmetterte seinen Kopf, zerschlug und durchbohrte seine Schläfe.\tDer Hammer ist der Arbeiter; das Schlagen Siseras und das Zerschmettern seines Kopfes werden einzeln genannt.",
+    "new_row": "26\tIhre Hand streckte sie zum Pflock aus und ihre Rechte zum Hammer der Arbeiter; und sie hämmerte Sisera, zerschmetterte seinen Kopf, zerschlug und durchbohrte seine Schläfe.\tDer Hammer gehört den Arbeitern; das Schlagen Siseras und das Zerschmettern seines Kopfes werden einzeln genannt."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/07_JDG/JDG_007.tsv",
+    "old_row": "22\tUnd sie bliesen die dreihundert Hörner, und der HERR richtete das Schwert jedes Mannes gegen seinen Gefährten und gegen das ganze Lager; und das Lager floh bis Beth-Sitta nach Zereda hin, bis zum Rand von Abel-Mehola bei Tabbath.\tDie dreihundert bezeichnen im Hebräischen die Hörner; das Blasen ist aktiv erzählt.",
+    "new_row": "22\tUnd sie bliesen die dreihundert Hörner, und der HERR richtete das Schwert jedes Mannes gegen seinen Gefährten, und zwar im ganzen Lager; und das Lager floh bis Beth-Sitta nach Zereda hin, bis zum Rand von Abel-Mehola bei Tabbath.\tDie dreihundert bezeichnen im Hebräischen die Hörner; das Blasen ist aktiv erzählt."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/07_JDG/JDG_007.tsv",
+    "old_row": "22\tИ они затрубили в триста рогов; и Господь обратил меч каждого против его товарища и против всего стана; и стан бежал до Бефшитты к Царере, до края Авелмехолы у Табафы.\tТриста в еврейском тексте определяет рога, а не прямо мужчин.",
+    "new_row": "22\tИ они затрубили в триста рогов; и Господь обратил меч каждого против его товарища во всём стане; и стан бежал до Бефшитты к Царере, до края Авелмехолы у Табафы.\tТриста в еврейском тексте определяет рога, а не прямо мужчин."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/07_JDG/JDG_007.tsv",
+    "old_row": "4\tUnd der HERR sagte zu Gideon: „Noch ist das Volk zu zahlreich. Führe sie zum Wasser hinab, und ich werde es dir dort prüfen; und von wem ich dir sage: ‚Dieser soll mit dir gehen‘, der soll mit dir gehen, und jeder, von dem ich dir sage: ‚Dieser soll nicht mit dir gehen‘, der soll nicht gehen.“\tDas hebräische Objekt des Prüfens bezieht sich in der Einzahl auf das Volk.",
+    "new_row": "4\tUnd der HERR sagte zu Gideon: „Noch ist das Volk zu zahlreich. Führe sie zum Wasser hinab, und ich werde es dort für dich prüfen; und von wem ich dir sage: ‚Dieser soll mit dir gehen‘, der soll mit dir gehen, und jeder, von dem ich dir sage: ‚Dieser soll nicht mit dir gehen‘, der soll nicht gehen.“\tDas hebräische Objekt des Prüfens bezieht sich in der Einzahl auf das Volk."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/07_JDG/JDG_007.tsv",
+    "old_row": "4\tИ Господь сказал Гедеону: «Народ ещё многочислен. Сведи их к воде, и Я испытаю его тебе там; и о ком Я скажу тебе: „Этот пойдёт с тобой“, он пойдёт с тобой; а всякий, о ком Я скажу тебе: „Этот не пойдёт с тобой“, он не пойдёт».\tЕврейский текст говорит об испытании, а не просто выборе; объект относится к народу в единственном числе. Назван спуск к воде.",
+    "new_row": "4\tИ Господь сказал Гедеону: «Народ ещё многочислен. Сведи их к воде, и Я испытаю его там для тебя; и о ком Я скажу тебе: „Этот пойдёт с тобой“, он пойдёт с тобой; а всякий, о ком Я скажу тебе: „Этот не пойдёт с тобой“, он не пойдёт».\tЕврейский текст говорит об испытании, а не просто выборе; объект относится к народу в единственном числе. Назван спуск к воде."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/07_JDG/JDG_021.tsv",
+    "old_row": "3\tИ сказали: «Почему, Господь, Бог Израилев, это произошло в Израиле, чтобы сегодня недоставало в Израиле одного колена?»\tУказано именно «сегодня», не общее «теперь».",
+    "new_row": "3\tИ сказали: «Почему, Господи, Боже Израилев, это произошло в Израиле, чтобы сегодня недоставало в Израиле одного колена?»\tУказано именно «сегодня», не общее «теперь»."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/07_JDG/JDG_021.tsv",
+    "old_row": "5\tUnd die Söhne Israels sagten: „Wer aus allen Stämmen Israels ist nicht in der Versammlung zum HERRN hinaufgekommen?“ Denn ein großer Eid galt dem, der nicht zum HERRN nach Mizpa hinaufgekommen war, und sprach: „Er soll gewiss getötet werden.“\tDas Sterben steht als passives Getötetwerden und ist durch Wiederholung des Verbstamms bekräftigt.",
+    "new_row": "5\tUnd die Söhne Israels sagten: „Wer aus allen Stämmen Israels ist nicht in der Versammlung zum HERRN hinaufgekommen?“ Denn ein großer Eid galt dem, der nicht zum HERRN nach Mizpa hinaufgekommen war, mit den Worten: „Er soll gewiss getötet werden.“\tDas Sterben steht als passives Getötetwerden und ist durch Wiederholung des Verbstamms bekräftigt."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/07_JDG/JDG_021.tsv",
+    "old_row": "5\tИ сказали сыны Израилевы: «Кто из всех колен Израилевых не поднялся в собрании к Господу?» Ибо великая клятва была о том, кто не поднялся к Господу в Массифу, говоря: «Он непременно будет умерщвлён».\tНазвана клятва, не проклятие; убитый дан в единственном числе, а умерщвление усилено повтором корня.",
+    "new_row": "5\tИ сказали сыны Израилевы: «Кто из всех колен Израилевых не поднялся в собрании к Господу?» Ибо великая клятва была о том, кто не поднялся к Господу в Массифу, с такими словами: «Он непременно будет умерщвлён».\tНазвана клятва, не проклятие; убитый дан в единственном числе, а умерщвление усилено повтором корня."
+  }
+]

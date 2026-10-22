@@ -1,0 +1,134 @@
+[
+  {
+    "path": "Tools/LiteralGen/outputs/ru/09_1SA/1SA_001.tsv",
+    "verse": 7,
+    "old_row": "7\tИ так он делал год за годом; всякий раз, когда она поднималась в дом Господа, та так раздражала её, и она плакала и не ела.\tПервое действие в еврейском тексте имеет мужской субъект; отдельного «сетовалa» нет.",
+    "new_row": "7\tИ так он делал год за годом; всякий раз, когда она поднималась в дом Господа, та так раздражала её, и она плакала и не ела.\tПервое действие в еврейском тексте имеет мужской субъект; отдельного «сетовала» нет."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/09_1SA/1SA_001.tsv",
+    "verse": 16,
+    "old_row": "16\tНе считай Твою рабу дочерью негодности, ибо от обилия моей жалобы и моего раздражения я говорила до сих пор».\tЕврейский текст сохраняет образ дочери негодности.",
+    "new_row": "16\tНе считай твою рабу дочерью негодности, ибо от обилия моей жалобы и моего раздражения я говорила до сих пор».\tЕврейский текст сохраняет образ дочери негодности."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/09_1SA/1SA_001.tsv",
+    "verse": 18,
+    "old_row": "18\tИ она сказала: «Пусть Твоя раба найдёт милость в твоих глазах!» И женщина пошла своим путём и поела, и её лицо больше не было прежним.\tЕврейский текст не называет прямо печаль лица и не добавляет сравнение «как прежде».",
+    "new_row": "18\tИ она сказала: «Пусть твоя раба найдёт милость в твоих глазах!» И женщина пошла своим путём и поела, и её лицо больше не было прежним.\tЕврейский текст не называет прямо печаль лица и не добавляет сравнение «как прежде»."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/09_1SA/1SA_001.tsv",
+    "verse": 24,
+    "old_row": "24\tИ она поднялась с ним, когда отняла его от груди, с тремя быками, и одной ефой муки, и мехом вина; и привела его в дом Господа в Силом, и мальчик был ещё мальчиком.\tВ еврейском тексте нет хлебов и отдельного «отрок с ними»; говорится, что мальчик ещё был мальчиком.",
+    "new_row": "24\tИ она привела его с собой наверх, когда отняла его от груди, с тремя быками, и одной ефой муки, и мехом вина; и привела его в дом Господа в Силом, и мальчик был ещё мальчиком.\tВ еврейском тексте нет хлебов и отдельного «отрок с ними»; говорится, что мальчик ещё был мальчиком."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/09_1SA/1SA_002_1.tsv",
+    "verse": 4,
+    "old_row": "4\tDer Bogen der Helden ist zerbrochen, und die Strauchelnden haben sich mit Stärke umgürtet.\tDas Hebräische nennt Strauchelnde und ein aktives Sich-Um gürten.",
+    "new_row": "4\tDer Bogen der Helden ist zerbrochen, und die Strauchelnden haben sich mit Stärke umgürtet.\tDas Hebräische nennt Strauchelnde und ein aktives Sich-Umgürten."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/09_1SA/1SA_002_1.tsv",
+    "verse": 8,
+    "old_row": "8\tОн поднимает бедного из праха, из кучи пепла возвышает нуждающегося, чтобы посадить с знатными и дать им в наследие престол чести. Ибо Господу принадлежат столпы земли, и Он положил на них мир.\tЕврейский текст называет кучу пепла и столпы земли.",
+    "new_row": "8\tОн поднимает бедного из праха, из кучи пепла возвышает нуждающегося, чтобы посадить со знатными и дать им в наследие престол чести. Ибо Господу принадлежат столпы земли, и Он положил на них мир.\tЕврейский текст называет кучу пепла и столпы земли."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/09_1SA/1SA_002_1.tsv",
+    "verse": 29,
+    "old_row": "29\tWarum tretet ihr gegen mein Schlachtopfer und meine Gabe, die ich für die Wohnung geboten habe, und ehrst deine Söhne mehr als mich, um euch vom Besten aller Gaben Israels, meines Volkes, zu mästen?\tNah am Hebräischen.",
+    "new_row": "29\tWarum tretet ihr gegen mein Schlachtopfer und meine Gabe, die ich für die Wohnung geboten habe? Und warum ehrst du deine Söhne mehr als mich, um euch vom Besten aller Gaben Israels, meines Volkes, zu mästen?\tDas Hebräische wechselt vom Treten in der Mehrzahl zum Ehren in der Einzahl und kehrt beim Mästen zur Mehrzahl zurück."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/09_1SA/1SA_002_1.tsv",
+    "verse": 29,
+    "old_row": "29\tПочему вы пинаете Мою жертву и Моё приношение, которые Я повелел для жилища, и ты чтишь твоих сыновей больше Меня, чтобы утучнять себя начатком всех приношений Израиля, Моего народа?\tУтучнение в еврейском тексте относится к множественным лицам.",
+    "new_row": "29\tПочему вы пинаете Мою жертву и Моё приношение, которые Я повелел для жилища? И почему ты чтишь твоих сыновей больше Меня, чтобы вам утучнять себя начатком всех приношений Израиля, Моего народа?\tОбращение меняется с множественного числа при пинании на единственное при почитании, а утучнение снова относится к нескольким лицам."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/09_1SA/1SA_007.tsv",
+    "verse": 8,
+    "old_row": "8\tUnd die Söhne Israels sagten zu Samuel: „Schweige nicht für uns, vom Schreien zum HERRN, unserem Gott, abzulassen, damit er uns aus der Hand der Philister rette!“\tDie Söhne Israels werden ausdrücklich genannt; das Schweigen ist als Bild bewahrt.",
+    "new_row": "8\tUnd die Söhne Israels sagten zu Samuel: „Verstumme für uns nicht im Schreien zum HERRN, unserem Gott, damit er uns aus der Hand der Philister rette!“\tDie Söhne Israels werden ausdrücklich genannt; das Schweigen ist als Bild bewahrt."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/09_1SA/1SA_007.tsv",
+    "verse": 12,
+    "old_row": "12\tИ Самуил взял один камень и поставил его между Массифой и Сеном, и назвал его имя Авен-Езер; и сказал: «До сих пор Господь помог нам».\tЕврейское выражение буквально допускает значение «до сих пор».",
+    "new_row": "12\tИ Самуил взял один камень и поставил его между Массифой и Сеном, и назвал его имя Авен-Езер; и сказал: «До сих пор Господь помог нам».\tБлизко к еврейскому."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/09_1SA/1SA_008.tsv",
+    "verse": 12,
+    "old_row": "12\tUnd er wird sich Oberste über Tausende und Oberste über Fünfzig einsetzen, und um sein Pflugland zu pflügen und seine Ernte zu ernten und seine Kriegsgeräte und die Geräte seines Wagens zu machen.\tDas Hebräische bewahrt die Verbindungen von Pflugland und Pflügen sowie Ernte und Ernten.",
+    "new_row": "12\tUnd er wird sich Oberste über Tausende und Oberste über Fünfzig einsetzen und sie sein Pflugland pflügen und seine Ernte ernten und seine Kriegsgeräte und die Geräte seines Wagens machen lassen.\tDas Hebräische bewahrt die Verbindungen von Pflugland und Pflügen sowie Ernte und Ernten."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/09_1SA/1SA_008.tsv",
+    "verse": 12,
+    "old_row": "12\tИ чтобы поставить себе начальников тысяч и начальников пятидесяти, и пахать его пахоту и жать его жатву, и делать орудия его войны и принадлежности его колесницы.\tЕврейский текст сохраняет повторы пахоты с паханием и жатвы с жатвой.",
+    "new_row": "12\tИ он поставит себе начальников тысяч и начальников пятидесяти; они будут пахать его пахоту и жать его жатву, и делать орудия его войны и принадлежности его колесницы.\tЕврейский текст сохраняет повторы пахоты с паханием и жатвы с жатвой."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/09_1SA/1SA_009.tsv",
+    "verse": 3,
+    "old_row": "3\tUnd die Eselinnen des Kis, des Vaters Sauls, waren verloren gegangen. Und Kis sagte zu Saul, seinem Sohn: „Nimm doch einen von den jungen Männern mit dir und mach dich auf, geh und suche die Eselinnen!“\tDas Hebräische nennt ausdrücklich Eselinnen.",
+    "new_row": "3\tUnd die Eselinnen des Kis, des Vaters Sauls, waren verloren gegangen. Und Kis sagte zu Saul, seinem Sohn: „Nimm doch einen von den jungen Männern mit dir und mach dich auf, geh und suche die Eselinnen!“\tDas Hebräische wiederholt Kis und Saul ausdrücklich und enthält eine Bitte."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/09_1SA/1SA_009.tsv",
+    "verse": 4,
+    "old_row": "4\tИ он прошёл гору Ефремову и прошёл землю Шалиша, и они не нашли их; и они прошли землю Шаалим, и их не было там; и он прошёл землю Вениамина, и они не нашли их.\tЕврейский текст чередует одного и обоих ищущих.",
+    "new_row": "4\tИ он прошёл гору Ефремову и прошёл землю Шалиша, и они не нашли их; и они прошли землю Шаалим, и их не было там; и он прошёл землю Вениамина, и они не нашли их.\tБлизко к еврейскому."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/09_1SA/1SA_009.tsv",
+    "verse": 7,
+    "old_row": "7\tИ Саул сказал своему юноше: «Но вот, мы пойдём; что принесём этому человеку? Ибо хлеб иссяк в наших сосудах, и подарка нет, чтобы принести человеку Божию. Что есть у нас?»\tЕврейский текст называет сосуды и подарки, без добавленного определения.",
+    "new_row": "7\tИ Саул сказал своему юноше: «Но вот, мы пойдём; что принесём этому человеку? Ибо хлеб иссяк в наших сосудах, и подарка нет, чтобы принести человеку Божию. Что есть у нас?»\tЕврейский текст называет сосуды, а не сумы."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/09_1SA/1SA_009.tsv",
+    "verse": 16,
+    "old_row": "16\t„Morgen um diese Zeit werde ich einen Mann aus dem Land Benjamin zu dir senden, und du sollst ihn zum Fürsten über mein Volk Israel salben; und er wird mein Volk aus der Hand der Philister retten, denn ich habe mein Volk angesehen, denn sein Schreien ist zu mir gekommen.“\tDas Hebräische wiederholt dreimal „mein Volk“.",
+    "new_row": "16\t„Morgen um diese Zeit werde ich einen Mann aus dem Land Benjamin zu dir senden, und du sollst ihn zum Fürsten über mein Volk Israel salben; und er wird mein Volk aus der Hand der Philister retten, denn ich habe mein Volk angesehen, denn sein Schreien ist zu mir gekommen.“\tNah am Hebräischen."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/09_1SA/1SA_009.tsv",
+    "verse": 19,
+    "old_row": "19\tUnd Samuel antwortete Saul und sagte: „Ich bin der Seher. Geh vor mir zur Höhe hinauf, und ihr sollt heute mit mir essen; und ich werde dich am Morgen entlassen und dir alles mitteilen, was in deinem Herzen ist.\tDas Hebräische wechselt zwischen der Anrede an Saul allein und der an beide Männer.",
+    "new_row": "19\tUnd Samuel antwortete Saul und sagte: „Ich bin der Seher. Geh vor mir zur Höhe hinauf, und ihr sollt heute mit mir essen; und ich werde dich am Morgen entlassen und dir alles mitteilen, was in deinem Herzen ist.\tNah am Hebräischen."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/09_1SA/1SA_009.tsv",
+    "verse": 19,
+    "old_row": "19\tИ Самуил ответил Саулу и сказал: «Я прозорливец. Поднимись передо мной на высоту, и вы будете есть со мной сегодня; и утром я отпущу тебя и всё, что в твоём сердце, объявлю тебе.\tЕврейский текст чередует обращение к одному Саулу и к обоим мужчинам.",
+    "new_row": "19\tИ Самуил ответил Саулу и сказал: «Я прозорливец. Поднимись передо мной на высоту, и вы будете есть со мной сегодня; и утром я отпущу тебя и всё, что в твоём сердце, объявлю тебе.\tБлизко к еврейскому."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/09_1SA/1SA_009.tsv",
+    "verse": 26,
+    "old_row": "26\tUnd sie standen früh auf; und es geschah, als die Morgenröte aufstieg, da rief Samuel Saul zum Dach und sagte: „Steh auf, und ich werde dich entlassen!“ Und Saul stand auf, und die beiden gingen hinaus, er und Samuel.\tDas Hebräische nennt die aufsteigende Morgenröte.",
+    "new_row": "26\tUnd sie standen früh auf; und es geschah, als die Morgenröte aufstieg, da rief Samuel Saul zum Dach und sagte: „Steh auf, und ich werde dich entlassen!“ Und Saul stand auf, und die beiden gingen hinaus, er und Samuel.\tNah am Hebräischen."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/09_1SA/1SA_003.tsv",
+    "verse": 11,
+    "old_row": "11\tИ Господь сказал Самуилу: «Вот, Я делаю дело в Израиле, о котором всякий услышит, и зазвенят оба его уха.\tБлизко к еврейскому.",
+    "new_row": "11\tИ Господь сказал Самуилу: «Вот, Я делаю дело в Израиле, при котором у всякого, кто услышит о нём, зазвенят оба уха.\tБлизко к еврейскому."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/09_1SA/1SA_009.tsv",
+    "verse": 7,
+    "old_row": "7\tUnd Saul sagte zu seinem jungen Mann: „Aber siehe, wir gehen; was bringen wir dem Mann? Denn das Brot ist aus unseren Gefäßen aufgebraucht, und ein Geschenk ist nicht da, um es dem Mann Gottes zu bringen. Was haben wir bei uns?“\tDas Hebräische nennt Gefäße statt eines Vorrats.",
+    "new_row": "7\tUnd Saul sagte zu seinem jungen Mann: „Aber siehe, wir gehen; was bringen wir dem Mann? Denn das Brot ist aus unseren Gefäßen aufgebraucht, und ein Geschenk ist nicht da, um es dem Mann Gottes zu bringen. Was haben wir bei uns?“\tDas Hebräische nennt Gefäße in der Mehrzahl statt eines Sacks."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/09_1SA/1SA_009.tsv",
+    "verse": 22,
+    "old_row": "22\tUnd Samuel nahm Saul und seinen jungen Mann und brachte sie in die Kammer und gab ihnen einen Platz am Kopf der Geladenen; und sie waren etwa dreißig Mann.\tDas Hebräische nennt einen Platz am Kopf der Geladenen.",
+    "new_row": "22\tUnd Samuel nahm Saul und seinen jungen Mann und brachte sie in die Kammer und gab ihnen einen Platz an der Spitze der Geladenen; und sie waren etwa dreißig Mann.\tDas Hebräische nennt einen Platz an der Spitze der Geladenen."
+  }
+]

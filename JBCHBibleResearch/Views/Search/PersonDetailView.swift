@@ -44,14 +44,26 @@ struct PersonDetailView: View {
     }
 
     /// "인물 정보" 절에 보여줄 항목 — 빈 값은 목록에서 뺀다.
+    /// [2026-10-22] 값은 번역 표시(`display*` — 한국어 앱이면 원본 그대로). 성별 판정 등 로직은 한국어 원본 필드를 쓴다.
     private var infoFacts: [(label: String, value: String)] {
         var facts: [(String, String)] = []
-        if !person.origin.isEmpty { facts.append(("출신", person.origin)) }
-        if !person.gender.isEmpty { facts.append(("성별", person.gender)) }
-        if !person.tribe.isEmpty { facts.append(("지파", person.tribe)) }
-        if !person.nation.isEmpty { facts.append(("민족", person.nation)) }
-        if !person.aliases.isEmpty { facts.append(("별칭", person.aliases.joined(separator: " · "))) }
+        if !person.displayOrigin.isEmpty { facts.append((String(localized: "출신"), person.displayOrigin)) }
+        if !person.displayGender.isEmpty { facts.append((String(localized: "성별"), person.displayGender)) }
+        if !person.displayTribe.isEmpty { facts.append((String(localized: "지파"), person.displayTribe)) }
+        if !person.displayNation.isEmpty { facts.append((String(localized: "민족"), person.displayNation)) }
+        if !person.displayAliases.isEmpty { facts.append((String(localized: "별칭"), person.displayAliases.joined(separator: " · "))) }
         return facts
+    }
+
+    /// [2026-10-22] 관계·소속 그룹·기타 정보 행의 이름을 표시용 번역으로 바꾼다(idx가 확정된 이름만 — `displayPersonName`).
+    /// 반드시 `uniqueOrdered` **뒤에** 부른다: 먼저 번역하면 idx 없는 한국어 이름과 idx 있는 번역 이름이 같은 사람인데도
+    /// 합쳐지지 않는다. idx는 그대로라 링크(`relationRow`의 `resolvedRelationPerson`)는 idx로 확정된다.
+    /// 한국어 앱이면(`contentLanguage == nil`) 입력 그대로.
+    private func localizedNames(_ items: [(name: String, idx: String)]) -> [(name: String, idx: String)] {
+        guard let store = ReferenceDataProvider.shared.store, store.contentLanguage != nil else { return items }
+        return items.map { item in
+            (name: store.displayPersonName(idx: item.idx, fallback: item.name), idx: item.idx)
+        }
     }
 
     /// `BibleVerseChipRow.isPhoneIdiom`과 같은 판정 — 아이폰은 조상 `NavigationStack`에
@@ -73,22 +85,27 @@ struct PersonDetailView: View {
         // `PersonFamilyMember.idx`("이름#idx" 태그)가 있으면 그대로 쓰고, 없으면 ""(이름 기준
         // 동명이인 검사로 폴백). 괄호 설명(note)은 `(name, idx)` 타입을 유지하려고 "이름(설명)"으로
         // 이어붙인다.
+        // [2026-10-22] 이름은 idx로(`displayPersonName`), 괄호 설명은 번역 사전으로(`displayRelationLabel`) 표시만 번역한다.
+        // 한국어 앱이면 두 사전이 비어 있어 결과가 이전과 같다.
+        let store = ReferenceDataProvider.shared.store
         func wrap(_ members: [PersonFamilyMember]) -> [(name: String, idx: String)] {
             members.map { member in
-                let displayName = member.note.isEmpty ? member.name : "\(member.name)(\(member.note))"
+                let name = store?.displayPersonName(idx: member.idx, fallback: member.name) ?? member.name
+                let note = member.note.isEmpty ? "" : (store?.displayRelationLabel(member.note) ?? member.note)
+                let displayName = note.isEmpty ? name : "\(name)(\(note))"
                 return (name: displayName, idx: member.idx)
             }
         }
         var rows: [(String, [(name: String, idx: String)])] = []
-        if !f.grandfathers.isEmpty { rows.append(("할아버지", wrap(f.grandfathers))) }
-        if !f.grandmothers.isEmpty { rows.append(("할머니", wrap(f.grandmothers))) }
-        if !f.fathers.isEmpty { rows.append(("아버지", wrap(f.fathers))) }
-        if !f.mothers.isEmpty { rows.append(("어머니", wrap(f.mothers))) }
-        if !f.spouses.isEmpty { rows.append(("배우자", wrap(f.spouses))) }
-        if !f.sons.isEmpty { rows.append(("아들", wrap(f.sons))) }
-        if !f.daughters.isEmpty { rows.append(("딸", wrap(f.daughters))) }
-        if !f.grandsons.isEmpty { rows.append(("손자", wrap(f.grandsons))) }
-        if !f.granddaughters.isEmpty { rows.append(("손녀", wrap(f.granddaughters))) }
+        if !f.grandfathers.isEmpty { rows.append((String(localized: "할아버지"), wrap(f.grandfathers))) }
+        if !f.grandmothers.isEmpty { rows.append((String(localized: "할머니"), wrap(f.grandmothers))) }
+        if !f.fathers.isEmpty { rows.append((String(localized: "아버지"), wrap(f.fathers))) }
+        if !f.mothers.isEmpty { rows.append((String(localized: "어머니"), wrap(f.mothers))) }
+        if !f.spouses.isEmpty { rows.append((String(localized: "배우자"), wrap(f.spouses))) }
+        if !f.sons.isEmpty { rows.append((String(localized: "아들"), wrap(f.sons))) }
+        if !f.daughters.isEmpty { rows.append((String(localized: "딸"), wrap(f.daughters))) }
+        if !f.grandsons.isEmpty { rows.append((String(localized: "손자"), wrap(f.grandsons))) }
+        if !f.granddaughters.isEmpty { rows.append((String(localized: "손녀"), wrap(f.granddaughters))) }
         return rows
     }
 
@@ -247,29 +264,30 @@ struct PersonDetailView: View {
         let uniqueAdversaries = uniqueOrdered(adversaries)
         let uniqueAllies = uniqueOrdered(allies)
         let uniqueRelatedPeople = uniqueOrdered(relatedPeople)
-        if !uniqueDisciples.isEmpty { rows.append(("제자", uniqueDisciples)) }
-        if !uniqueCoWorkers.isEmpty { rows.append(("동역자", uniqueCoWorkers)) }
-        if !uniqueFriends.isEmpty { rows.append(("친구", uniqueFriends)) }
-        if !uniqueLords.isEmpty { rows.append(("주군", uniqueLords)) }
-        if !uniqueServants.isEmpty { rows.append(("신하", uniqueServants)) }
-        if !uniqueSiblings.isEmpty { rows.append(("형제", uniqueSiblings)) }
-        if !uniqueYoungerBrothers.isEmpty { rows.append(("아우", uniqueYoungerBrothers)) }
-        if !uniqueOlderBrothers.isEmpty { rows.append(("형", uniqueOlderBrothers)) }
-        if !uniqueSisters.isEmpty { rows.append(("누이", uniqueSisters)) }
-        if !uniqueUncles.isEmpty { rows.append(("숙부", uniqueUncles)) }
-        if !uniqueNephews.isEmpty { rows.append(("조카", uniqueNephews)) }
-        if !uniqueAncestors.isEmpty { rows.append(("선조", uniqueAncestors)) }
-        if !uniqueDaughtersInLaw.isEmpty { rows.append(("자부", uniqueDaughtersInLaw)) }
-        if !uniqueMaternalGrandfathers.isEmpty { rows.append(("외조부", uniqueMaternalGrandfathers)) }
-        if !uniqueFathersInLaw.isEmpty { rows.append(("장인", uniqueFathersInLaw)) }
-        if !uniqueSonsInLaw.isEmpty { rows.append(("사위", uniqueSonsInLaw)) }
-        if !uniqueGrandchildrenViaDaughter.isEmpty { rows.append(("외손자", uniqueGrandchildrenViaDaughter)) }
-        if !uniqueGreatGrandfathers.isEmpty { rows.append(("증조부", uniqueGreatGrandfathers)) }
-        if !uniqueMaternalGrandmothers.isEmpty { rows.append(("외조모", uniqueMaternalGrandmothers)) }
-        if !uniqueAdversaries.isEmpty { rows.append(("대적", uniqueAdversaries)) }
-        if !uniqueAllies.isEmpty { rows.append(("동맹", uniqueAllies)) }
-        if !uniqueRelatedPeople.isEmpty { rows.append(("관련 인물", uniqueRelatedPeople)) }
-        return rows
+        if !uniqueDisciples.isEmpty { rows.append((String(localized: "제자"), uniqueDisciples)) }
+        if !uniqueCoWorkers.isEmpty { rows.append((String(localized: "동역자"), uniqueCoWorkers)) }
+        if !uniqueFriends.isEmpty { rows.append((String(localized: "친구"), uniqueFriends)) }
+        if !uniqueLords.isEmpty { rows.append((String(localized: "주군"), uniqueLords)) }
+        if !uniqueServants.isEmpty { rows.append((String(localized: "신하"), uniqueServants)) }
+        if !uniqueSiblings.isEmpty { rows.append((String(localized: "형제"), uniqueSiblings)) }
+        if !uniqueYoungerBrothers.isEmpty { rows.append((String(localized: "아우"), uniqueYoungerBrothers)) }
+        if !uniqueOlderBrothers.isEmpty { rows.append((String(localized: "형"), uniqueOlderBrothers)) }
+        if !uniqueSisters.isEmpty { rows.append((String(localized: "누이"), uniqueSisters)) }
+        if !uniqueUncles.isEmpty { rows.append((String(localized: "숙부"), uniqueUncles)) }
+        if !uniqueNephews.isEmpty { rows.append((String(localized: "조카"), uniqueNephews)) }
+        if !uniqueAncestors.isEmpty { rows.append((String(localized: "선조"), uniqueAncestors)) }
+        if !uniqueDaughtersInLaw.isEmpty { rows.append((String(localized: "자부"), uniqueDaughtersInLaw)) }
+        if !uniqueMaternalGrandfathers.isEmpty { rows.append((String(localized: "외조부"), uniqueMaternalGrandfathers)) }
+        if !uniqueFathersInLaw.isEmpty { rows.append((String(localized: "장인"), uniqueFathersInLaw)) }
+        if !uniqueSonsInLaw.isEmpty { rows.append((String(localized: "사위"), uniqueSonsInLaw)) }
+        if !uniqueGrandchildrenViaDaughter.isEmpty { rows.append((String(localized: "외손자"), uniqueGrandchildrenViaDaughter)) }
+        if !uniqueGreatGrandfathers.isEmpty { rows.append((String(localized: "증조부"), uniqueGreatGrandfathers)) }
+        if !uniqueMaternalGrandmothers.isEmpty { rows.append((String(localized: "외조모"), uniqueMaternalGrandmothers)) }
+        if !uniqueAdversaries.isEmpty { rows.append((String(localized: "대적"), uniqueAdversaries)) }
+        if !uniqueAllies.isEmpty { rows.append((String(localized: "동맹"), uniqueAllies)) }
+        if !uniqueRelatedPeople.isEmpty { rows.append((String(localized: "관련 인물"), uniqueRelatedPeople)) }
+        // 이름 번역은 중복 제거(`uniqueOrdered`)가 끝난 뒤에 한다(`localizedNames` 주석 참고).
+        return rows.map { row in (label: row.0, names: localizedNames(row.1)) }
     }
 
     /// `person.contextNotes`(`PersonContextNotes` 테이블 — 왕/총독/선지자 등 직함·역할성 참고
@@ -282,7 +300,11 @@ struct PersonDetailView: View {
             if byLabel[note.label] == nil { order.append(note.label) }
             byLabel[note.label, default: []].append((name: note.targetWord, idx: note.targetIdx))
         }
-        return order.map { label in (label: label, names: uniqueOrdered(byLabel[label] ?? [])) }
+        // 묶는 키(`order`/`byLabel`)는 한국어 라벨 그대로, 화면 라벨만 번역한다.
+        let store = ReferenceDataProvider.shared.store
+        return order.map { label in
+            (label: store?.displayRelationLabel(label) ?? label, names: localizedNames(uniqueOrdered(byLabel[label] ?? [])))
+        }
     }
 
     /// `person.groupMemberships`("열두 제자"/"다윗의 30용사" 등 소속 집단)를 그룹별로 묶는다.
@@ -294,7 +316,11 @@ struct PersonDetailView: View {
             if byLabel[membership.groupId] == nil { order.append(membership.groupId) }
             byLabel[membership.groupId, default: []].append((name: membership.otherMemberWord, idx: membership.otherMemberIdx))
         }
-        return order.map { label in (label: label, names: uniqueOrdered(byLabel[label] ?? [])) }
+        // 묶는 키는 group_id(원문 라벨) 그대로, 화면 그룹 이름만 번역한다(`PersonGroupsI18n`).
+        let store = ReferenceDataProvider.shared.store
+        return order.map { groupId in
+            (label: store?.displayGroupName(groupId) ?? groupId, names: localizedNames(uniqueOrdered(byLabel[groupId] ?? [])))
+        }
     }
 
     /// 이름이 `Persons`에서 정확히 하나로 특정될 때만 링크 대상을 돌려준다. idx가 있으면 그것으로
@@ -371,7 +397,8 @@ struct PersonDetailView: View {
     /// 같은 방식으로 `BibleReferenceStore`를 열어 조회하며(그쪽은 `private`이라 재사용 불가) 같은
     /// 이유로 30개에서 자른다. 관련성 지표가 없어 정경순(책ID/장 오름차순)으로 정렬한다.
     private var groupedVerseReferences: [VerseReferenceGroup] {
-        guard let store = try? BibleReferenceStore(filePath: TranslationBootstrap.resolvedBundledDatabaseURL().path) else {
+        // 앱 언어의 기본 번들 성경으로 보여준다(2026-10-12, `BundledTranslationCatalog.current`).
+        guard let store = try? BibleReferenceStore(filePath: TranslationBootstrap.resolvedCurrentLanguageBundledDatabaseURL().path) else {
             return []
         }
         var versesByChapter: [String: (bookId: Int, chapter: Int, bookNameKo: String, verses: [(Int, String)])] = [:]
@@ -380,7 +407,7 @@ struct PersonDetailView: View {
             guard let verse = try? store.verse(bookId: ref.bookId, chapter: ref.chapter, verse: ref.verse) else { continue }
             let key = "\(ref.bookId)-\(ref.chapter)"
             if versesByChapter[key] == nil {
-                let bookName = BooksProvider.shared.book(id: ref.bookId)?.nameKo ?? "책 \(ref.bookId)"
+                let bookName = BooksProvider.shared.book(id: ref.bookId)?.displayName ?? String(localized: "책 \(ref.bookId)")
                 versesByChapter[key] = (ref.bookId, ref.chapter, bookName, [])
                 orderedKeys.append(key)
             }
@@ -494,7 +521,7 @@ struct PersonDetailView: View {
     private func abbreviatedCitationLabel(_ matchedText: String, bookId: Int) -> String {
         guard let firstDigitIndex = matchedText.firstIndex(where: { $0.isNumber }) else { return matchedText }
         let book = BooksProvider.shared.book(id: bookId)
-        let abbreviation = book?.abbreviation.first ?? book?.nameKo
+        let abbreviation = book?.displayShortName
             ?? matchedText[..<firstDigitIndex].trimmingCharacters(in: .whitespaces)
         let rest = matchedText[firstDigitIndex...]
         return "\(abbreviation) \(rest)"
@@ -623,28 +650,29 @@ struct PersonDetailView: View {
             .listRowBackground(Color.clear)
             .listRowSeparator(.hidden)
 
-            if !person.introduce.isEmpty {
-                cardSection("개요", icon: "doc.text.fill") {
-                    bibleReferenceLinkedText(person.introduce).font(.body)
+            // [2026-10-22] 본문 카드는 번역 표시(`display*`). 노출 여부는 한국어와 같다(빌드가 한국어 칸 기준으로 ""/"-"를 맞춘다).
+            if !person.displayIntroduce.isEmpty {
+                cardSection(String(localized: "detail.overview", defaultValue: "개요", comment: "인물·지명 상세 카드 — 소개(성경 개요 화면과 구분)"), icon: "doc.text.fill") {
+                    bibleReferenceLinkedText(person.displayIntroduce).font(.body)
                 }
             }
-            if !person.lifetime.isEmpty {
-                cardSection("주요 생애", icon: "calendar") {
-                    bibleReferenceLinkedText(person.lifetime).font(.body)
+            if !person.displayLifetime.isEmpty {
+                cardSection(String(localized: "주요 생애"), icon: "calendar") {
+                    bibleReferenceLinkedText(person.displayLifetime).font(.body)
                 }
             }
-            if !person.event.isEmpty {
-                cardSection("업적과 사건", icon: "flag.fill") {
-                    bibleReferenceLinkedText(person.event).font(.body)
+            if !person.displayEvent.isEmpty {
+                cardSection(String(localized: "업적과 사건"), icon: "flag.fill") {
+                    bibleReferenceLinkedText(person.displayEvent).font(.body)
                 }
             }
-            if !person.character.isEmpty {
-                cardSection("성품과 특징", icon: "sparkles") {
-                    bibleReferenceLinkedText(person.character).font(.body)
+            if !person.displayCharacter.isEmpty {
+                cardSection(String(localized: "성품과 특징"), icon: "sparkles") {
+                    bibleReferenceLinkedText(person.displayCharacter).font(.body)
                 }
             }
             if !infoFacts.isEmpty {
-                cardSection("인물 정보", icon: "info.circle.fill") {
+                cardSection(String(localized: "인물 정보"), icon: "info.circle.fill") {
                     ForEach(Array(infoFacts.enumerated()), id: \.offset) { index, fact in
                         LabeledContent(fact.label, value: fact.value)
                         if index < infoFacts.count - 1 {
@@ -656,7 +684,7 @@ struct PersonDetailView: View {
             if !familyRelationRows.isEmpty || !otherRelationRows.isEmpty {
                 // 가족 그룹과 기타관계 그룹을 하나의 목록으로 이어 붙여 두 그룹의 경계에도 구분선을 넣는다.
                 let allRelationRows = familyRelationRows + otherRelationRows
-                cardSection("관계", icon: "person.2.fill") {
+                cardSection(String(localized: "관계"), icon: "person.2.fill") {
                     ForEach(Array(allRelationRows.enumerated()), id: \.offset) { index, row in
                         relationRow(row)
                         if index < allRelationRows.count - 1 {
@@ -668,7 +696,7 @@ struct PersonDetailView: View {
             if !groupMembershipRows.isEmpty {
                 // "열두 제자"/"다윗의 30·3대용사"처럼 소속 라벨이 정확히 붙은 경우만 — "관계" 카드의
                 // "관련 인물"(라벨 없음/"기타")·"기타 정보" 카드(직함)와는 별도 자리.
-                cardSection("소속 그룹", icon: "person.3.fill") {
+                cardSection(String(localized: "소속 그룹"), icon: "person.3.fill") {
                     ForEach(Array(groupMembershipRows.enumerated()), id: \.offset) { index, row in
                         relationRow(row)
                         if index < groupMembershipRows.count - 1 {
@@ -679,7 +707,7 @@ struct PersonDetailView: View {
             }
             if !contextNoteRows.isEmpty {
                 // 왕/총독/선지자 등은 인물관계 그래프에 넣지 않기로 한 결정에 맞춰 "관계" 카드와 분리한다.
-                cardSection("기타 정보", icon: "info.circle.fill") {
+                cardSection(String(localized: "기타 정보"), icon: "info.circle.fill") {
                     ForEach(Array(contextNoteRows.enumerated()), id: \.offset) { index, row in
                         relationRow(row)
                         if index < contextNoteRows.count - 1 {
@@ -721,8 +749,9 @@ struct PersonDetailView: View {
     private var header: some View {
         VStack(alignment: .leading, spacing: 8) {
             HStack(alignment: .firstTextBaseline, spacing: 8) {
-                Text(person.word)
-                    .font(.custom(SpecialPurposeFonts.titleSerif, size: 28, relativeTo: .largeTitle))
+                // [2026-10-22] 제목은 번역 표시(한국어 앱이면 원본). 글꼴은 실제로 그리는 문자열로 고른다(`TitleFont`).
+                Text(person.displayWord)
+                    .font(.titleSerif(person.displayWord, size: 28, relativeTo: .largeTitle))
                     .fontWeight(.bold)
                     .foregroundStyle(settings.bibleTextColor ?? .primary)
                 Spacer(minLength: 0)
@@ -736,16 +765,16 @@ struct PersonDetailView: View {
                     .background(Color.orange.opacity(0.15), in: Capsule())
                     .foregroundStyle(.orange)
             }
-            if !person.callTitle.isEmpty {
-                Text(person.callTitle)
+            if !person.displayCallTitle.isEmpty {
+                Text(person.displayCallTitle)
                     .font(.subheadline)
                     .foregroundStyle(.secondary)
             }
-            if !person.occupation.isEmpty {
+            if !person.displayOccupation.isEmpty {
                 // [주의] `HStack`은 줄바꿈하지 않아 좁은 아이폰에서 직업이 많으면 넘칠 수 있다. 범용 줄바꿈
                 // 레이아웃이 아직 없어 새로 만들지 않았다 — 직업이 3개 이상인 인물로 실기기 확인이 필요하다.
                 HStack(spacing: 6) {
-                    ForEach(person.occupation, id: \.self) { role in
+                    ForEach(person.displayOccupation, id: \.self) { role in
                         // 색은 카드 테두리와 같은 `wood`, 크기/굵기/패딩은 말씀노트 카테고리 배지
                         // (`WordNoteRowView.categoryBadge`)와 맞춘다.
                         Text(role)
@@ -757,8 +786,8 @@ struct PersonDetailView: View {
                     }
                 }
             }
-            if !person.meaning.isEmpty {
-                Text("\u{201C}\(person.meaning)\u{201D}")
+            if !person.displayMeaning.isEmpty {
+                Text("\u{201C}\(person.displayMeaning)\u{201D}")
                     .font(.callout.italic())
                     .foregroundStyle(.secondary)
             }

@@ -15,7 +15,9 @@ import BibleResearchModels
 
 @MainActor
 enum SermonGatheringSeeder {
-    static let defaultNames = ["주일설교", "청년회 말씀", "구역모임", "조모임"]
+    static var defaultNames: [String] {
+        [String(localized: "주일설교"), String(localized: "청년회 말씀"), String(localized: "구역모임"), String(localized: "조모임")]
+    }
 
     static func seedIfNeeded(into context: ModelContext) {
         guard !UserSettingsStore.shared.hasSeededSermonGatherings else { return }

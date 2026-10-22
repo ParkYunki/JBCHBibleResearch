@@ -1,0 +1,305 @@
+[
+  {
+    "path": "Tools/LiteralGen/outputs/de/02_EXO/EXO_016_1.tsv",
+    "verse": 8,
+    "old_row": "8\tUnd Mose sagte: „Wenn der HERR euch am Abend Fleisch zu essen und am Morgen Brot zur Sättigung gibt, weil der HERR euer Murren hört, mit dem ihr gegen ihn murrt — und was sind wir? Euer Murren richtet sich nicht gegen uns, sondern gegen den HERRN.“\tBewahrt das gegenwärtige Murren statt „gemurrt habt“.",
+    "new_row": "8\tUnd Mose sagte: „Der HERR wird euch am Abend Fleisch zu essen und am Morgen Brot zur Sättigung geben, weil der HERR euer Murren hört, mit dem ihr gegen ihn murrt. Und was sind wir? Euer Murren richtet sich nicht gegen uns, sondern gegen den HERRN.“\tBewahrt das gegenwärtige Murren statt „gemurrt habt“."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/02_EXO/EXO_018.tsv",
+    "verse": 5,
+    "old_row": "5\tUnd Jethro, Moses Schwiegervater, und dessen Söhne und Frau kamen zu Mose in die Wüste, wo er lagerte, am Berg Gottes.\tNah am Hebräischen.",
+    "new_row": "5\tUnd Jethro, Moses Schwiegervater, kam mit Moses Söhnen und Frau zu Mose in die Wüste, wo er lagerte, am Berg Gottes.\tNah am Hebräischen."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/02_EXO/EXO_018.tsv",
+    "verse": 11,
+    "old_row": "11\tNun weiß ich, dass der HERR größer ist als alle Götter, denn gerade in der Sache, in der sie vermessen gegen sie handelten, hat er sich gezeigt.“\tDie abschließenden Worte ergänzen den im Hebräischen knappen Satz für die deutsche Grammatik.",
+    "new_row": "11\tNun weiß ich, dass der HERR größer ist als alle Götter, denn gerade in der Sache, in der sie vermessen gegen sie handelten, hat er sich gezeigt.“\tNah am Hebräischen."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/02_EXO/EXO_021_1.tsv",
+    "verse": 8,
+    "old_row": "8\tWenn sie in den Augen ihres Herrn, der sie für sich bestimmt hat, schlecht ist, soll er sie loskaufen lassen; an ein fremdes Volk zu verkaufen, hat er keine Macht, weil er treulos an ihr gehandelt hat.\tBewahrt das Bestimmen für sich statt dessen Verneinung und die Treulosigkeit statt bloßen Verschmähens.",
+    "new_row": "8\tWenn sie in den Augen ihres Herrn, der sie für sich bestimmt hat, schlecht ist, soll er sie loskaufen lassen; sie an ein fremdes Volk zu verkaufen, hat er keine Macht, weil er treulos an ihr gehandelt hat.\tBewahrt das Bestimmen für sich statt dessen Verneinung und die Treulosigkeit statt bloßen Verschmähens."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/02_EXO/EXO_021_1.tsv",
+    "verse": 16,
+    "old_row": "16\tUnd wer einen Menschen stiehlt und ihn verkauft oder er in seiner Hand gefunden wird, soll gewiss getötet werden.\tBewahrt das Bild der Hand.",
+    "new_row": "16\tUnd wer einen Menschen stiehlt, ob er ihn verkauft oder dieser in seiner Hand gefunden wird, soll gewiss getötet werden.\tBewahrt das Bild der Hand."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/02_EXO/EXO_021_2.tsv",
+    "verse": 34,
+    "old_row": "34\tsoll der Besitzer der Grube Ersatz leisten; Silber soll er ihrem Besitzer zurückgeben, und das tote Tier soll ihm gehören.\tNah am Hebräischen.",
+    "new_row": "34\tsoll der Besitzer der Grube Ersatz leisten; Silber soll er dem Besitzer des Tieres zurückgeben, und das tote Tier soll ihm gehören.\tNah am Hebräischen."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/02_EXO/EXO_022_1.tsv",
+    "verse": 23,
+    "old_row": "23\tWenn du ihn tatsächlich bedrückst, wird er gewiss zu mir schreien, und ich werde sein Schreien gewiss hören.\tBewahrt die Einzahl beim Bedrückten und die Verstärkung des Hörens.",
+    "new_row": "23\tWenn du ihn tatsächlich bedrückst — wenn er auch nur zu mir schreit, werde ich sein Schreien gewiss hören.\tBewahrt die Einzahl beim Bedrückten und die Verstärkung des Hörens."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/02_EXO/EXO_025_1.tsv",
+    "verse": 22,
+    "old_row": "22\tUnd ich werde dir dort begegnen und mit dir von oberhalb des Sühndeckels reden, von zwischen den beiden Cherubim, die auf der Lade des Zeugnisses sind, alles, was ich dir für die Söhne Israels gebieten werde.\tBewahrt die Begegnung statt bloßen Bezeugens.",
+    "new_row": "22\tUnd ich werde dir dort begegnen und von oberhalb des Sühndeckels, aus der Mitte der beiden Cherubim, die auf der Lade des Zeugnisses sind, mit dir über alles reden, was ich dir für die Söhne Israels gebieten werde.\tBewahrt die Begegnung statt bloßen Bezeugens."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/02_EXO/EXO_026_1.tsv",
+    "verse": 13,
+    "old_row": "13\tUnd die Elle auf dieser Seite und die Elle auf jener Seite, der Längenüberschuss der Zeltbahnen, soll an den Seiten der Wohnung auf dieser und jener Seite überhängen, um sie zu bedecken.\tBewahrt den Bezug auf die Länge der Zeltbahnen und die wiederholten Seitenangaben.",
+    "new_row": "13\tUnd der Längenüberschuss der Zeltbahnen, die Elle auf dieser Seite und die Elle auf jener Seite, soll an den Seiten der Wohnung auf dieser und jener Seite überhängen, um sie zu bedecken.\tBewahrt den Bezug auf die Länge der Zeltbahnen und die wiederholten Seitenangaben."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/02_EXO/EXO_027.tsv",
+    "verse": 8,
+    "old_row": "8\tHohl, aus Brettern, sollst du ihn machen; wie er dir auf dem Berg gezeigt hat, so sollen sie ihn machen.\tBewahrt den Wechsel von „du“ zu „sie“ beim Machen.",
+    "new_row": "8\tHohl, aus Brettern, sollst du ihn machen; wie er es dir auf dem Berg gezeigt hat, so sollen sie ihn machen.\tBewahrt den Wechsel von „du“ zu „sie“ beim Machen."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/02_EXO/EXO_028_1.tsv",
+    "verse": 1,
+    "old_row": "1\tUnd du, lass deinen Bruder Aaron und seine Söhne mit ihm aus der Mitte der Söhne Israels zu dir herantreten, damit er mir als Priester dient: Aaron, Nadab und Abihu, Eleasar und Itamar, die Söhne Aarons.\t„Damit er mir als Priester dient“ steht in der Einzahl; der deutsche Text sagt „dass sie meine Priester seien“.",
+    "new_row": "1\tUnd du, lass deinen Bruder Aaron und seine Söhne mit ihm aus der Mitte der Söhne Israels zu dir herantreten, damit er mir als Priester dient: Aaron, Nadab und Abihu, Eleasar und Ithamar, die Söhne Aarons.\t„Mit ihm“ und „aus der Mitte“ sind ausdrücklich wiedergegeben."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/02_EXO/EXO_028_1.tsv",
+    "verse": 3,
+    "old_row": "3\tUnd du sollst zu allen Weisen von Herzen reden, die ich mit dem Geist der Weisheit erfüllt habe; sie sollen Aarons Kleider machen, um ihn zu heiligen, damit er mir als Priester dient.\t„Geist der Weisheit“ steht statt „Geist des Verstandes“; das Dienen als Priester ist ausdrücklich genannt.",
+    "new_row": "3\tUnd du sollst zu allen Weisen von Herzen reden, die ich mit dem Geist der Weisheit erfüllt habe; sie sollen Aarons Kleider machen, um ihn zu heiligen, damit er mir als Priester dient.\tNah am Hebräischen."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/02_EXO/EXO_028_1.tsv",
+    "verse": 4,
+    "old_row": "4\tUnd dies sind die Kleider, die sie machen sollen: eine Brusttasche, ein Efod, ein Obergewand, ein gewürfelter Leibrock, ein Turban und ein Gürtel. Und sie sollen deinem Bruder Aaron und seinen Söhnen heilige Kleider machen, damit er mir als Priester dient.\t„Gewürfelter Leibrock“ und „Turban“ stehen statt „enger Rock“ und „Hut“; der letzte Zweck steht in der Einzahl.",
+    "new_row": "4\tUnd dies sind die Kleider, die sie machen sollen: eine Brusttasche, ein Efod, ein Obergewand, ein gewürfelter Leibrock, ein Turban und ein Gürtel. Und sie sollen deinem Bruder Aaron und seinen Söhnen heilige Kleider machen, damit er mir als Priester dient.\t„Gewürfelter Leibrock“ und „Turban“ stehen statt „enger Rock“ und „Hut“."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/02_EXO/EXO_028_1.tsv",
+    "verse": 11,
+    "old_row": "11\tAls Arbeit eines Steinschneiders, wie Siegelgravuren, sollst du die beiden Steine nach den Namen der Söhne Israels eingraben; mit goldenen Einfassungen umgeben sollst du sie machen.\tNah am Hebräischen.",
+    "new_row": "11\tAls Arbeit eines Steinschneiders, wie Siegelgravuren, sollst du die beiden Steine mit den Namen der Söhne Israels gravieren; mit goldenen Einfassungen umgeben sollst du sie machen.\tNah am Hebräischen."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/02_EXO/EXO_028_1.tsv",
+    "verse": 16,
+    "old_row": "16\tViereckig soll sie sein, doppelt gelegt, eine Spanne ihre Länge und eine Spanne ihre Breite.\tNah am Hebräischen.",
+    "new_row": "16\tQuadratisch soll sie sein, doppelt gelegt, eine Spanne ihre Länge und eine Spanne ihre Breite.\t„Quadratisch“ gibt die Form genauer wieder als das allgemeinere „viereckig“."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/02_EXO/EXO_028_1.tsv",
+    "verse": 30,
+    "old_row": "30\tUnd du sollst die Urim und die Tummim in die Brusttasche des Rechts legen; und sie sollen auf Aarons Herzen sein, wenn er vor den HERRN hineingeht. Und Aaron soll das Recht der Söhne Israels beständig auf seinem Herzen vor dem HERRN tragen.\tDie Bezeichnungen „Urim und Tummim“ bleiben erhalten, statt als „Licht und Recht“ übersetzt zu werden. „In“ die Brusttasche steht statt „in das Amtschild“ ohne Änderung der räumlichen Beziehung.",
+    "new_row": "30\tUnd du sollst die Urim und die Tummim in die Brusttasche des Rechts legen; und sie sollen auf Aarons Herzen sein, wenn er vor den HERRN hineingeht. Und Aaron soll das Recht der Söhne Israels beständig auf seinem Herzen vor dem HERRN tragen.\tDie Bezeichnungen „Urim und Tummim“ bleiben erhalten, statt als „Licht und Recht“ übersetzt zu werden. „Das Recht der Söhne Israels“ steht statt „das Amt der Kinder Israel“."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/en/02_EXO/EXO_024.tsv",
+    "verse": 18,
+    "old_row": "18\t=\tThe Hebrew presents entering the cloud and ascending the mountain as successive actions joined by “and.”",
+    "new_row": "18\t=\tThe Hebrew joins entering the cloud and ascending the mountain with “and,” rather than “as.”"
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/en/02_EXO/EXO_025_2.tsv",
+    "verse": 40,
+    "old_row": "40\t=\tThe Hebrew describes the pattern as being shown to Moses on the mountain.",
+    "new_row": "40\t=\tClose to the Hebrew."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/02_EXO/EXO_016_1.tsv",
+    "verse": 8,
+    "old_row": "8\tИ сказал Моисей: «Когда Господь даст вам вечером мясо в пищу и утром хлеб досыта, потому что Господь слышит ваш ропот, которым вы ропщете на Него, — а мы что? Ваш ропот не на нас, а на Господа».\tВ еврейском тексте нет отдельного «узнаете» в начале этой речи.",
+    "new_row": "8\tИ сказал Моисей: «Господь даст вам вечером мясо в пищу и утром хлеб досыта, потому что Господь слышит ваш ропот, которым вы ропщете на Него. А мы что? Ваш ропот не на нас, а на Господа».\tВ еврейском тексте нет отдельного «узнаете» в начале этой речи."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/02_EXO/EXO_016_1.tsv",
+    "verse": 16,
+    "old_row": "16\tВот слово, которое повелел Господь: Собирайте от него каждый по своей потребности в еде, по гомору на голову, по числу ваших душ; каждый берите для тех, кто в его шатре».\tСохранено обозначение головы при норме гомора.",
+    "new_row": "16\tВот слово, которое повелел Господь: Собирайте от него каждый по своей потребности в еде, по гомору на голову, по числу ваших душ; берите каждый для тех, кто в его шатре».\tСохранено обозначение головы при норме гомора."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/02_EXO/EXO_016_2.tsv",
+    "verse": 31,
+    "old_row": "31\tИ назвал дом Израиля его манной; и она была как кориандровое семя, белая, а её вкус — как лепёшка с мёдом.\tБлизко к еврейскому.",
+    "new_row": "31\tИ назвал дом Израиля это манной; и она была как кориандровое семя, белая, а её вкус — как лепёшка с мёдом.\tБлизко к еврейскому."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/02_EXO/EXO_018.tsv",
+    "verse": 11,
+    "old_row": "11\tТеперь я знаю, что Господь больше всех богов, ибо именно в том деле, в котором они поступали надменно против них, Он явил Себя».\tЗаключительные слова восполняют краткую еврейскую конструкцию для русской грамматики.",
+    "new_row": "11\tТеперь я знаю, что Господь больше всех богов, ибо именно в том деле, в котором они поступали надменно против них, Он явил Себя».\tСохранено местоимение «них» вместо явного «Израильтянами»."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/02_EXO/EXO_018.tsv",
+    "verse": 18,
+    "old_row": "18\tТы непременно изнуришься, и ты, и этот народ, который с тобой; ибо дело слишком тяжело для тебя, ты не можешь делать его один.\tБлизко к еврейскому.",
+    "new_row": "18\tТы непременно изнуришься, и также этот народ, который с тобой; ибо дело слишком тяжело для тебя, ты не можешь делать его один.\tБлизко к еврейскому."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/02_EXO/EXO_019.tsv",
+    "verse": 24,
+    "old_row": "24\tИ сказал ему Господь: «Пойди, сойди; потом поднимись ты и Аарон с тобой. А священники и народ пусть не прорываются подняться к Господу, чтобы Он не прорвался против них».\tСохранён образ прорыва вместо общего поражения.",
+    "new_row": "24\tИ сказал ему Господь: «Пойди, сойди; потом поднимись ты и Аарон с тобой. А священники и народ пусть не прорываются, чтобы подняться к Господу, чтобы Он не прорвался против них».\tСохранён образ прорыва вместо общего поражения."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/02_EXO/EXO_020.tsv",
+    "verse": 7,
+    "old_row": "7\tНе возноси имени Господа, твоего Бога, к пустому, ибо Господь не оставит без наказания того, кто возносит Его имя к пустому.\tСохранён образ вознесения имени к пустому вместо простого произнесения.",
+    "new_row": "7\tНе возноси имени Господа, твоего Бога, напрасно, ибо Господь не оставит без наказания того, кто возносит Его имя напрасно.\tСохранён образ вознесения имени вместо простого произнесения."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/02_EXO/EXO_020.tsv",
+    "verse": 13,
+    "old_row": "13\tНе совершай убийства.\tПередан запрет убийства человека.",
+    "new_row": "13\tНе совершай убийства.\tБлизко к еврейскому."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/02_EXO/EXO_020.tsv",
+    "verse": 24,
+    "old_row": "24\tЖертвенник из земли сделай Мне и приноси на нём твои всесожжения и твои мирные жертвы, твой мелкий и твой крупный скот. На всяком месте, где Я дам помнить Моё имя, Я приду к тебе и благословлю тебя.\tСохранён мелкий скот вместо одних овец.",
+    "new_row": "24\tЖертвенник из земли сделай Мне и приноси на нём твои всесожжения и твои мирные жертвы, твой мелкий и твой крупный скот. На всяком месте, где Я установлю память Моего имени, Я приду к тебе и благословлю тебя.\tСохранён мелкий скот вместо одних овец."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/02_EXO/EXO_021_1.tsv",
+    "verse": 20,
+    "old_row": "20\tИ если человек ударит своего раба или свою рабыню палкой и тот умрёт под его рукой, он непременно будет отмщён.\tСохранена месть за пострадавшего вместо общего наказания ударившего.",
+    "new_row": "20\tИ если человек ударит своего раба или свою рабыню палкой и тот умрёт под его рукой, за него непременно будет отмщено.\tСохранена месть за пострадавшего вместо общего наказания ударившего.",
+    "root_review": "Preserve the Hebrew passive with natural impersonal passive Russian."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/02_EXO/EXO_021_1.tsv",
+    "verse": 21,
+    "old_row": "21\tНо если он продержится день или два дня, он не будет отмщён, ибо он — его серебро.\tСохранено отсутствие мести за пострадавшего.",
+    "new_row": "21\tНо если он продержится день или два дня, за него не будет отмщено, ибо он — его серебро.\tСохранено отсутствие мести за пострадавшего.",
+    "root_review": "Preserve the Hebrew passive."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/02_EXO/EXO_022_1.tsv",
+    "verse": 14,
+    "old_row": "14\tИ если человек займёт у своего ближнего и оно будет повреждено или умрёт, а его хозяина не будет с ним, он непременно возместит.\tБлизко к еврейскому.",
+    "new_row": "14\tИ если человек займёт у своего ближнего животное и оно будет повреждено или умрёт, а его хозяина не будет с ним, он непременно возместит.\tБлизко к еврейскому."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/02_EXO/EXO_022_1.tsv",
+    "verse": 23,
+    "old_row": "23\tЕсли ты действительно притеснишь его, то он непременно возопиет ко Мне, и Я непременно услышу его вопль.\tСохранено единственное число и усиление слышания.",
+    "new_row": "23\tЕсли ты действительно притеснишь его, то, если он возопиет ко Мне, Я непременно услышу его вопль.\tСохранено единственное число и усиление слышания."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/02_EXO/EXO_023_1.tsv",
+    "verse": 26,
+    "old_row": "26\tВ твоей земле не будет выкидывающей и бесплодной; число твоих дней Я сделаю полным.\tСохранена утрата беременности вместо одних преждевременных родов.",
+    "new_row": "26\tВ твоей земле не будет ни женщины, теряющей беременность, ни бесплодной; число твоих дней Я сделаю полным.\tСохранена утрата беременности вместо одних преждевременных родов."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/02_EXO/EXO_023_2.tsv",
+    "verse": 33,
+    "old_row": "33\tОни не должны жить в твоей земле, чтобы не заставили тебя грешить против Меня; ибо если ты будешь служить их богам, то это будет тебе западнёй».\tБлизко к еврейскому.",
+    "new_row": "33\tОни не должны жить в твоей земле, чтобы не заставили тебя грешить против Меня; ибо если ты будешь служить их богам, то это будет тебе западнёй.\tБлизко к еврейскому."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/02_EXO/EXO_024.tsv",
+    "verse": 14,
+    "old_row": "14\tА старейшинам он сказал: «Оставайтесь здесь для нас, пока мы не вернёмся к вам; и вот, Аарон и Ор с вами. У кого есть дело, пусть подойдёт к ним».\tСохранено ожидание «для нас».",
+    "new_row": "14\tА старейшинам он сказал: «Ждите нас здесь, пока мы не вернёмся к вам; и вот, Аарон и Ор с вами. У кого есть дело, пусть подойдёт к ним».\tСохранено ожидание «нас»."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/02_EXO/EXO_025_1.tsv",
+    "verse": 28,
+    "old_row": "28\tИ сделай шесты из древесины акации и обложи их золотом, и стол будет носим ими.\tВ еврейском тексте здесь не добавлено «чистым».",
+    "new_row": "28\tИ сделай шесты из древесины акации и обложи их золотом, и стол будет переноситься с их помощью.\tВ еврейском тексте здесь не добавлено «чистым»."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/02_EXO/EXO_026_1.tsv",
+    "verse": 13,
+    "old_row": "13\tИ локоть с этой стороны и локоть с той стороны в излишке длины покрывал шатра пусть свисает над боками скинии с этой и с той стороны, чтобы покрыть её.\tСохранено различие шатра и скинии.",
+    "new_row": "13\tИ излишек длины покрывал шатра, локоть с этой стороны и локоть с той стороны, пусть свисает над боками скинии с этой и с той стороны, чтобы покрыть её.\tСохранено различие шатра и скинии."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/02_EXO/EXO_026_1.tsv",
+    "verse": 24,
+    "old_row": "24\tИ пусть они будут спарены внизу и вместе соединены наверху к одному кольцу; так будет с ними обоими, для двух углов они будут.\tБлизко к еврейскому.",
+    "new_row": "24\tИ пусть они будут спарены внизу и вместе будут цельными наверху до одного кольца; так будет с ними обоими, для двух углов они будут.\tБлизко к еврейскому.",
+    "root_review": "Preserve complete and the preposition to, not an instrumental ring."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/02_EXO/EXO_027.tsv",
+    "verse": 21,
+    "old_row": "21\tВ шатре встречи, снаружи завесы, которая перед свидетельством, Аарон и его сыновья будут устраивать её от вечера до утра перед Господом; вечный устав для их поколений от сынов Израиля.\tВ еврейском тексте здесь нет отдельного слова «ковчег»; названо свидетельство.",
+    "new_row": "21\tВ шатре встречи, снаружи завесы, которая перед свидетельством, Аарон и его сыновья будут поддерживать её горение от вечера до утра перед Господом; вечный устав для их поколений от сынов Израиля.\tВ еврейском тексте здесь нет отдельного слова «ковчег»; названо свидетельство."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/02_EXO/EXO_028_1.tsv",
+    "verse": 1,
+    "old_row": "1\tИ ты приблизь к себе Аарона, брата твоего, и сыновей его с ним из среды сынов Израиля, чтобы он служил Мне священником: Аарона, Надава и Авиуда, Елеазара и Ифамара, сыновей Аарона.\t«Чтобы он служил Мне священником» стоит в единственном числе, тогда как русский текст говорит «чтоб он был священником Мне».",
+    "new_row": "1\tИ ты приблизь к себе Аарона, брата твоего, и сыновей его с ним из среды сынов Израиля, чтобы он служил Мне священником: Аарона, Надава и Авиуда, Елеазара и Ифамара, сыновей Аарона.\tБлизко к еврейскому."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/02_EXO/EXO_028_1.tsv",
+    "verse": 3,
+    "old_row": "3\tИ ты скажи всем мудрым сердцем, которых Я исполнил духом мудрости, чтобы они сделали одежды Аарона для его освящения, чтобы он служил Мне священником.\tНазван «дух мудрости» без добавления «и смысла»; одежды в этом стихе не названы отдельно священными.",
+    "new_row": "3\tИ ты скажи всем мудрым сердцем, которых Я исполнил духом мудрости, чтобы они сделали одежды Аарона для его освящения, чтобы он служил Мне священником.\tНазван «дух мудрости» без добавления «и смышления»; одежды в этом стихе не названы отдельно священными."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/02_EXO/EXO_028_1.tsv",
+    "verse": 4,
+    "old_row": "4\tИ вот одежды, которые они сделают: наперсник, ефод, верхняя риза, клетчатый хитон, тюрбан и пояс. И сделают они священные одежды Аарону, брату твоему, и сыновьям его, чтобы он служил Мне священником.\tХитон описан как клетчатый, а не «стяжной»; заключительное служение священником выражено в единственном числе.",
+    "new_row": "4\tИ вот одежды, которые они сделают: наперсник, ефод, верхняя риза, клетчатый хитон, тюрбан и пояс. И сделают они священные одежды Аарону, брату твоему, и сыновьям его, чтобы он служил Мне священником.\tХитон описан как клетчатый, а не «стяжной»."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/02_EXO/EXO_028_1.tsv",
+    "verse": 9,
+    "old_row": "9\tИ возьми два камня оникса и вырежи на них имена сынов Израиля.\tБлизко к еврейскому.",
+    "new_row": "9\tИ возьми два камня оникса и вырежь на них имена сынов Израиля.\tБлизко к еврейскому."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/02_EXO/EXO_028_1.tsv",
+    "verse": 11,
+    "old_row": "11\tРаботой резчика по камню, резьбой печати вырежи на двух камнях имена сынов Израиля; сделай их окружёнными золотыми оправами.\tБлизко к еврейскому.",
+    "new_row": "11\tРаботой резчика по камню, резьбой печати вырежь на двух камнях имена сынов Израиля; сделай их окружёнными золотыми оправами.\tБлизко к еврейскому."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/02_EXO/EXO_028_1.tsv",
+    "verse": 14,
+    "old_row": "14\tИ две цепочки из чистого золота сделай витыми, работой шнура; и прикрепи цепочки-шнуры к оправам.\tЗдесь нет добавленного указания «на нарамниках их спереди».",
+    "new_row": "14\tИ две цепочки из чистого золота сделай витыми, шнурового плетения; и прикрепи витые цепочки к оправам.\tЗдесь нет добавленного указания «на нарамниках их спереди»."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/02_EXO/EXO_028_1.tsv",
+    "verse": 15,
+    "old_row": "15\tИ сделай наперсник суда искусной работы; как работа ефода, сделай его: из золота, голубой и пурпурной и червлёной нити и кручёного виссона сделай его.\tШерсть отдельно не названа; сохранено повторение «сделай его».",
+    "new_row": "15\tИ сделай наперсник суда искусной работы; по образцу работы ефода сделай его: из золота, голубой и пурпурной и червлёной нити и кручёного виссона сделай его.\tШерсть отдельно не названа."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/02_EXO/EXO_028_1.tsv",
+    "verse": 17,
+    "old_row": "17\tИ вставь в него каменное наполнение, четыре ряда камней: ряд из рубина, топаза и изумруда — первый ряд.\tБлизко к еврейскому.",
+    "new_row": "17\tИ заполни его камнями, четырьмя рядами камней: ряд из рубина, топаза и изумруда — первый ряд.\tБлизко к еврейскому."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/02_EXO/EXO_028_1.tsv",
+    "verse": 22,
+    "old_row": "22\tИ сделай на наперснике витые цепочки, работой шнура, из чистого золота.\tБлизко к еврейскому.",
+    "new_row": "22\tИ сделай на наперснике витые цепочки шнурового плетения из чистого золота.\tБлизко к еврейскому."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/02_EXO/EXO_028_1.tsv",
+    "verse": 30,
+    "old_row": "30\tИ положи в наперсник суда урим и туммим; и будут они на сердце Аарона, когда он входит пред Господа. И будет Аарон носить суд сынов Израиля на своём сердце пред Господом постоянно.\tСказано «в наперсник», а не «на наперсник»; место входа «во святилище» здесь отдельно не названо.",
+    "new_row": "30\tИ положи в наперсник суда урим и туммим; и будут они на сердце Аарона, когда он входит пред Господом. И будет Аарон носить суд сынов Израиля на своём сердце пред Господом постоянно.\tСказано «в наперсник», а не «на наперсник»; место входа «во святилище» здесь отдельно не названо."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/02_EXO/EXO_028_2.tsv",
+    "verse": 35,
+    "old_row": "35\tИ будет она на Аароне для служения, и будет слышен её звук, когда он входит во святилище пред Господа и когда выходит, и он не умрёт.\tСказано о звуке одежды — «её звук», тогда как русский текст говорит «от него звук».",
+    "new_row": "35\tИ будет она на Аароне для служения, и будет слышен её звук, когда он входит во святилище пред Господом и когда выходит, и он не умрёт.\tСказано о звуке одежды — «её звук», тогда как русский текст говорит «от него звук»."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/02_EXO/EXO_028_2.tsv",
+    "verse": 36,
+    "old_row": "36\tИ сделай дощечку из чистого золота, и вырежи на ней резьбой печати: «Святыня Господу».\tДощечка не названа отдельно полированной; посвящение выражено «Господу».",
+    "new_row": "36\tИ сделай дощечку из чистого золота, и вырежь на ней резьбой печати: «Святыня Господу».\tДощечка не названа отдельно полированной; посвящение выражено «Господу»."
+  }
+]

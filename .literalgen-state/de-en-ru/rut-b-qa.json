@@ -1,0 +1,62 @@
+[
+  {
+    "path": "Tools/LiteralGen/outputs/de/08_RUT/RUT_002.tsv",
+    "verse": 6,
+    "old_row": "6\tUnd der junge Mann, der über die Schnitter gestellt war, antwortete und sagte: „Sie ist eine junge Moabitin, die mit Naemi aus dem Land Moab zurückgekehrt ist.\tNah am Hebräischen.",
+    "new_row": "6\tUnd der junge Mann, der über die Schnitter gestellt war, antwortete und sagte: „Sie ist eine junge Moabitin, die mit Naemi vom Feld Moabs zurückgekehrt ist.\tNah am Hebräischen."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/08_RUT/RUT_002.tsv",
+    "verse": 6,
+    "old_row": "6\tИ юноша, поставленный над жнецами, ответил и сказал: «Она молодая Моавитянка, возвратившаяся с Ноеминью из земли Моава.\tЖенщина названа возвратившейся, не просто пришедшей; Моав передан как имя земли.",
+    "new_row": "6\tИ юноша, поставленный над жнецами, ответил и сказал: «Она молодая Моавитянка, возвратившаяся с Ноеминью с поля Моава.\tЖенщина названа возвратившейся, не просто пришедшей; поле Моава стоит в единственном числе."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/08_RUT/RUT_002.tsv",
+    "verse": 8,
+    "old_row": "8\tUnd Boas sagte zu Ruth: „Hast du nicht gehört, meine Tochter? Geh nicht auf einem anderen Feld auflesen, und geh auch nicht von hier fort; und hier halte dich an meine jungen Frauen.\tDie erste Frage ist negativ formuliert: „Hast du nicht gehört?“",
+    "new_row": "8\tUnd Boas sagte zu Ruth: „Hast du nicht gehört, meine Tochter? Geh nicht auf einem anderen Feld auflesen, und geh auch nicht von hier fort; und hier halte dich an meine jungen Mägde.\tDie erste Frage ist negativ formuliert: „Hast du nicht gehört?“"
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/08_RUT/RUT_002.tsv",
+    "verse": 22,
+    "old_row": "22\tUnd Naemi sagte zu Ruth, ihrer Schwiegertochter: „Es ist gut, meine Tochter, dass du mit seinen jungen Frauen ausgehst, und dass man dir auf einem anderen Feld nicht zu nahe kommt.“\tNah am Hebräischen.",
+    "new_row": "22\tUnd Naemi sagte zu Ruth, ihrer Schwiegertochter: „Es ist gut, meine Tochter, dass du mit seinen jungen Mägden ausgehst, und dass man dir auf einem anderen Feld nicht zu nahe kommt.“\tNah am Hebräischen."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/08_RUT/RUT_002.tsv",
+    "verse": 23,
+    "old_row": "23\tUnd sie hielt sich an die jungen Frauen des Boas, um aufzulesen, bis die Gerstenernte und die Weizenernte vollendet waren; und sie wohnte bei ihrer Schwiegermutter.\tDas letzte Verb bezeichnet ihr Wohnen bei der Schwiegermutter, nicht ein Wiederkommen.",
+    "new_row": "23\tUnd sie hielt sich an die jungen Mägde des Boas, um aufzulesen, bis die Gerstenernte und die Weizenernte vollendet waren; und sie wohnte bei ihrer Schwiegermutter.\tDas letzte Verb bezeichnet ihr Wohnen bei der Schwiegermutter, nicht ein Wiederkommen."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/08_RUT/RUT_002.tsv",
+    "verse": 8,
+    "old_row": "8\tИ Вооз сказал Руфи: «Разве ты не слышала, моя дочь? Не ходи подбирать на другом поле и также не уходи отсюда; и здесь держись моих молодых женщин.\tНачало сформулировано как отрицательный вопрос, не как приказ послушать.",
+    "new_row": "8\tИ Вооз сказал Руфи: «Разве ты не слышала, моя дочь? Не ходи подбирать на другом поле и также не уходи отсюда; и здесь держись моих молодых служанок.\tНачало сформулировано как отрицательный вопрос, не как приказ послушать."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/08_RUT/RUT_002.tsv",
+    "verse": 22,
+    "old_row": "22\tИ Ноеминь сказала Руфи, своей невестке: «Хорошо, моя дочь, что ты будешь выходить с его молодыми женщинами, и на другом поле тебя не потревожат».\tПоследнее действие дано с неназванными действующими лицами, которым она не должна подвергнуться.",
+    "new_row": "22\tИ Ноеминь сказала Руфи, своей невестке: «Хорошо, моя дочь, что ты будешь выходить с его молодыми служанками, и на другом поле тебя не потревожат».\tДействие в другом поле выражено активным глаголом с неназванными действующими лицами."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/08_RUT/RUT_002.tsv",
+    "verse": 23,
+    "old_row": "23\tИ она держалась молодых женщин Вооза, чтобы подбирать, пока не закончились жатва ячменя и жатва пшеницы; и она жила со своей свекровью.\tЗанятие выражено как её держание рядом с молодыми женщинами для подбора.",
+    "new_row": "23\tИ она держалась молодых служанок Вооза, чтобы подбирать, пока не закончились жатва ячменя и жатва пшеницы; и она жила со своей свекровью.\tСовместность выражена глаголом «держалась»; подбор указан как цель."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/08_RUT/RUT_002.tsv",
+    "verse": 11,
+    "old_row": "11\tИ Вооз ответил и сказал ей: «Мне непременно было рассказано всё, что ты сделала для своей свекрови после смерти своего мужа; и ты оставила своего отца и свою мать и землю своего рождения и пошла к народу, которого ты не знала вчера и третьего дня.\tГлагол сообщения усилен повтором корня.",
+    "new_row": "11\tИ Вооз ответил и сказал ей: «Мне действительно было рассказано всё, что ты сделала для своей свекрови после смерти своего мужа; и ты оставила своего отца и свою мать и землю своего рождения и пошла к народу, которого ты не знала вчера и третьего дня.\tГлагол сообщения усилен повтором корня."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/08_RUT/RUT_002.tsv",
+    "verse": 18,
+    "old_row": "18\tИ она подняла это и пришла в город, и её свекровь увидела то, что она подобрала. И она вынула и дала ей то, что оставила после своего насыщения.\tИмя Руфи и слова «из пазухи своей» не добавлены.",
+    "new_row": "18\tИ она подняла это и пришла в город, и её свекровь увидела то, что она подобрала. И она вынула и дала ей то, что оставила после своего насыщения.\tИмя Руфи и слова «из пазухи своей» в тексте отсутствуют."
+  }
+]

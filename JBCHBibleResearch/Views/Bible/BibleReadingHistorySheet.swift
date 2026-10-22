@@ -45,8 +45,9 @@ struct BibleReadingHistorySheet: View {
     /// (한 줄에 들어가야 하는 폭 제약으로 초 단위는 생략).
     private static let dateTimeFormatter: DateFormatter = {
         let formatter = DateFormatter()
-        formatter.dateFormat = "M월 d일 HH:mm"
-        formatter.locale = Locale(identifier: "ko_KR")
+        // 앱 언어에 맞춘 "월 일 시:분" 표기(ko: "8월 24일 14:05"). 템플릿은 설정 시점의 locale을 쓰므로 locale을 먼저 정한다.
+        formatter.locale = .current
+        formatter.setLocalizedDateFormatFromTemplate("MMMdHHmm")
         return formatter
     }()
 
@@ -56,12 +57,12 @@ struct BibleReadingHistorySheet: View {
 
         var title: String {
             switch self {
-            case .today: return "오늘"
-            case .yesterday: return "어제"
-            case .dayBeforeYesterday: return "그저께"
-            case .thisWeek: return "이번 주"
-            case .lastWeek: return "지난 주"
-            case .thisMonth: return "이번 달"
+            case .today: return String(localized: "오늘")
+            case .yesterday: return String(localized: "어제")
+            case .dayBeforeYesterday: return String(localized: "그저께")
+            case .thisWeek: return String(localized: "이번 주")
+            case .lastWeek: return String(localized: "지난 주")
+            case .thisMonth: return String(localized: "이번 달")
             }
         }
     }
@@ -104,13 +105,13 @@ struct BibleReadingHistorySheet: View {
 
     var body: some View {
         VStack(alignment: .leading, spacing: 0) {
-            BibleListLayerHeader(title: "조회 이력", count: totalCount, topInset: headerTopInset, onDismiss: onDismiss)
+            BibleListLayerHeader(title: String(localized: "조회 이력"), count: totalCount, topInset: headerTopInset, onDismiss: onDismiss)
             BibleListLayerDivider()
             if sections.isEmpty {
                 BibleListLayerEmptyState(
                     systemImage: "clock",
-                    title: "조회 이력이 없습니다",
-                    message: "책과 장을 열면 여기에 쌓입니다."
+                    title: String(localized: "조회 이력이 없습니다"),
+                    message: String(localized: "책과 장을 열면 여기에 쌓입니다.")
                 )
             } else {
                 list
@@ -193,13 +194,13 @@ struct BibleReadingHistorySheet: View {
     private func bookChapterLabel(for entry: BibleReadingHistoryEntry) -> String {
         guard let book = BooksProvider.shared.book(id: entry.bookId) else {
             if let verse = entry.verse {
-                return "책 \(entry.bookId) \(entry.chapter):\(verse)"
+                return String(localized: "책 \(entry.bookId) \(entry.chapter):\(verse)")
             }
-            return "책 \(entry.bookId) \(entry.chapter)장"
+            return String(localized: "책 \(entry.bookId) \(entry.chapter)장")
         }
         if let verse = entry.verse {
-            return "\(book.nameKo) \(entry.chapter):\(verse)"
+            return "\(book.displayName) \(entry.chapter):\(verse)"
         }
-        return "\(book.nameKo) \(entry.chapter)장"
+        return String(localized: "\(book.displayName) \(entry.chapter)장")
     }
 }

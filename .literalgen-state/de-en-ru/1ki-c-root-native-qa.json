@@ -1,0 +1,62 @@
+[
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/11_1KI/1KI_022_1.tsv",
+    "verse": 3,
+    "old_row": "3\tUnd der König von Israel sagte zu seinen Knechten: „Wisst ihr, dass Ramoth in Gilead uns gehört? Und wir schweigen, statt es aus der Hand des Königs von Syrien zu nehmen!“\tNah am Hebräischen.",
+    "new_row": "3\tUnd der König von Israel sagte zu seinen Knechten: „Wisst ihr, dass Ramoth in Gilead uns gehört? Und wir schweigen, statt es aus der Hand des Königs von Syrien zu nehmen!“\tDie Frage enthält kein eigenes Nicht; das Zögern wird als Schweigen beschrieben."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/11_1KI/1KI_022_1.tsv",
+    "verse": 6,
+    "old_row": "6\tUnd der König von Israel versammelte die Propheten, etwa vierhundert Mann, und sagte zu ihnen: „Soll ich gegen Ramoth in Gilead in den Krieg ziehen oder es unterlassen?“ Und sie sagten: „Zieh hinauf, und der Herr wird es in die Hand des Königs geben!“\tDas Hinaufziehen ist im Hebräischen ausdrücklich genannt.",
+    "new_row": "6\tUnd der König von Israel versammelte die Propheten, etwa vierhundert Mann, und sagte zu ihnen: „Soll ich gegen Ramoth in Gilead in den Krieg ziehen oder es unterlassen?“ Und sie sagten: „Zieh hinauf, und der Herr wird es in die Hand des Königs geben!“\tNah am Hebräischen."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/11_1KI/1KI_022_1.tsv",
+    "verse": 16,
+    "old_row": "16\tUnd der König sagte zu ihm: „Bis wie viele Male muss ich dich beschwören, dass du zu mir nichts als Wahrheit im Namen des HERRN redest?“\tDas Hebräische formuliert eine Frage nach der Anzahl der Beschwörungen.",
+    "new_row": "16\tUnd der König sagte zu ihm: „Wie oft muss ich dich beschwören, dass du zu mir nichts als Wahrheit im Namen des HERRN redest?“\tDas Hebräische formuliert eine Frage nach der Anzahl der Beschwörungen."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/11_1KI/1KI_022_1.tsv",
+    "verse": 16,
+    "old_row": "16\tИ царь сказал ему: «До скольких раз мне заклинать тебя, чтобы ты говорил мне только истину во имя Господа?»\tЕврейский текст задаёт вопрос о числе заклинаний.",
+    "new_row": "16\tИ царь сказал ему: «Сколько раз мне ещё заклинать тебя, чтобы ты говорил мне только истину во имя Господа?»\tЕврейский текст задаёт вопрос о числе заклинаний."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/11_1KI/1KI_022_1.tsv",
+    "verse": 22,
+    "old_row": "22\tUnd der HERR sagte zu ihm: ‚Womit?‘ Und er sagte: ‚Ich werde ausgehen und ein Geist der Lüge im Mund aller seiner Propheten sein.‘ Und er sagte: ‚Du wirst ihn betören und auch vermögen; geh aus und tue so!‘\tDer Vers beginnt im Hebräischen mit der Frage des HERRN; der Mund gehört ausdrücklich allen seinen Propheten.",
+    "new_row": "22\tUnd der HERR sagte zu ihm: ‚Womit?‘ Und er sagte: ‚Ich werde ausgehen und ein Geist der Lüge im Mund aller seiner Propheten sein.‘ Und er sagte: ‚Du wirst ihn betören und es auch vermögen; geh aus und tue so!‘\tDer Vers beginnt im Hebräischen mit der Frage des HERRN; der Mund gehört ausdrücklich allen seinen Propheten."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/11_1KI/1KI_022_1.tsv",
+    "verse": 22,
+    "old_row": "22\tИ Господь сказал ему: „Чем?“ И он сказал: „Я выйду и буду духом лжи в устах всех его пророков“. И Он сказал: „Ты обольстишь и также сможешь; выйди и сделай так!“\tЕврейский стих начинается вопросом Господа; последний говорящий не назван отдельно.",
+    "new_row": "22\tИ Господь сказал ему: „Чем?“ И он сказал: „Я выйду и буду духом лжи в устах всех его пророков“. И Он сказал: „Ты обольстишь, и это тебе удастся; выйди и сделай так!“\tЕврейский стих начинается вопросом Господа; последний говорящий не назван отдельно."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/11_1KI/1KI_022_1.tsv",
+    "verse": 27,
+    "old_row": "27\tUnd sage: ‚So hat der König gesagt: Setzt diesen ins Gefängnis und gebt ihm Brot der Bedrängnis und Wasser der Bedrängnis zu essen, bis ich in Frieden komme!‘“\tBedrängnis wird beim Brot und beim Wasser wiederholt.",
+    "new_row": "27\tUnd sage: ‚So hat der König gesagt: Setzt diesen ins Gefängnis und gebt ihm Brot der Bedrängnis und Wasser der Bedrängnis, bis ich in Frieden komme!‘“\tBedrängnis wird beim Brot und beim Wasser wiederholt."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/11_1KI/1KI_022_1.tsv",
+    "verse": 27,
+    "old_row": "27\tи скажи: „Так сказал царь: Посадите этого в дом заключения и кормите его хлебом тесноты и водою тесноты, пока я не приду в мире!“»\tПервое повеление единственное, следующие множественные; теснота названа при хлебе и при воде.",
+    "new_row": "27\tи скажи: „Так сказал царь: Посадите этого в дом заключения и давайте ему хлеб тесноты и воду тесноты, пока я не приду в мире!“»\tПервое повеление единственное, следующие множественные; теснота названа при хлебе и при воде."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/11_1KI/1KI_022_2.tsv",
+    "verse": 43,
+    "old_row": "43\tUnd er ging auf dem ganzen Weg seines Vaters Asa, wich nicht davon ab, indem er tat, was recht war in den Augen des HERRN; doch die Höhen wichen nicht, noch opferte und räucherte das Volk auf den Höhen.\tDer hebräische Vers enthält auch den Wandel auf Asas Weg und das Rechte in den Augen des HERRN. Die Höhen wichen nicht, ohne ihn als ausdrücklichen Handelnden ihrer Entfernung.",
+    "new_row": "43\tUnd er ging auf dem ganzen Weg seines Vaters Asa, wich nicht davon ab, indem er tat, was recht war in den Augen des HERRN; doch die Höhen wichen nicht; das Volk opferte und räucherte weiterhin auf den Höhen.\tDer hebräische Vers enthält auch den Wandel auf Asas Weg und das Rechte in den Augen des HERRN. Die Höhen wichen nicht, ohne ihn als ausdrücklichen Handelnden ihrer Entfernung."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/11_1KI/1KI_022_2.tsv",
+    "verse": 43,
+    "old_row": "43\tИ он ходил по всему пути своего отца Асы, не уклонялся от него, делая правое в глазах Господа; только высоты не исчезли, ещё народ приносил жертвы и воскурял на высотах.\tВысоты не исчезли, без отдельного действия по их отмене.",
+    "new_row": "43\tИ он ходил по всему пути своего отца Асы, не уклонялся от него, делая правое в глазах Господа; только высоты не исчезли, народ ещё приносил жертвы и воскурял на высотах.\tВысоты не исчезли, без отдельного действия по их отмене."
+  }
+]

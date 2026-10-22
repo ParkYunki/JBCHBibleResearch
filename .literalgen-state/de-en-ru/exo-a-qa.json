@@ -1,0 +1,164 @@
+[
+  {
+    "path": "Tools/LiteralGen/outputs/de/02_EXO/EXO_004_1.tsv",
+    "verse": 8,
+    "old_row": "8\t„Und wenn sie dir nicht glauben und nicht auf die Stimme des ersten Zeichens hören, werden sie auf die Stimme des späteren Zeichens hören.\tDie Stimme gehört jeweils dem Zeichen, nicht ausdrücklich Mose.",
+    "new_row": "8\t„Und wenn sie dir nicht glauben und nicht auf die Stimme des ersten Zeichens hören, werden sie der Stimme des späteren Zeichens glauben.\tDie Stimme gehört jeweils dem Zeichen, nicht ausdrücklich Mose."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/02_EXO/EXO_003.tsv",
+    "verse": 8,
+    "old_row": "8\tUnd ich bin herabgekommen, um es aus der Hand Ägyptens zu retten und aus jenem Land hinaufzuführen in ein gutes und weites Land, in ein Land, das von Milch und Honig fließt, zum Ort des Kanaaniters und des Hethiters und des Amoriters und des Phersiters und des Heviters und des Jebusiters.\tDas Volk bleibt kollektiv im Singular; die Bewegung ist ausdrücklich ein Hinaufführen.",
+    "new_row": "8\tUnd ich bin herabgekommen, um es aus der Hand Ägyptens zu retten und aus jenem Land hinaufzuführen in ein gutes und weites Land, in ein Land, das von Milch und Honig fließt, zum Ort des Kanaaniters und des Hethiters und des Amoriters und des Pheresiters und des Heviters und des Jebusiters.\tDas Volk bleibt kollektiv im Singular; die Bewegung ist ausdrücklich ein Hinaufführen."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/02_EXO/EXO_003.tsv",
+    "verse": 17,
+    "old_row": "17\tUnd ich habe gesagt: Ich werde euch aus der Bedrückung Ägyptens hinaufführen in das Land des Kanaaniters und des Hethiters und des Amoriters und des Phersiters und des Heviters und des Jebusiters, in ein Land, das von Milch und Honig fließt.\tNah am Hebräischen.",
+    "new_row": "17\tUnd ich habe gesagt: Ich werde euch aus der Bedrückung Ägyptens hinaufführen in das Land des Kanaaniters und des Hethiters und des Amoriters und des Pheresiters und des Heviters und des Jebusiters, in ein Land, das von Milch und Honig fließt.\tNah am Hebräischen."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/02_EXO/EXO_003.tsv",
+    "verse": 14,
+    "old_row": "14\tUnd Gott sagte zu Mose: „Ich werde sein, der ich sein werde.“ Und er sagte: „So sollst du den Söhnen Israels sagen: Ich werde sein hat mich zu euch gesandt.“\tNah am Hebräischen.",
+    "new_row": "14\tUnd Gott sagte zu Mose: „Ich werde sein, der ich sein werde.“ Und er sagte: „So sollst du den Söhnen Israels sagen: Der ‚Ich werde sein‘ hat mich zu euch gesandt.“\tNah am Hebräischen."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/02_EXO/EXO_003.tsv",
+    "verse": 14,
+    "old_row": "14\tИ Бог сказал Моисею: «Я буду тем, кем буду». И сказал: «Так скажи сынам Израиля: Я буду послал меня к вам».\tСохранены три формы первого лица глагола «быть» вместо имени «Сущий» и добавленного «Иегова».",
+    "new_row": "14\tИ Бог сказал Моисею: «Я буду тем, кем буду». И сказал: «Так скажи сынам Израиля: „Я буду“ послал меня к вам».\tСохранены три формы первого лица глагола «быть» вместо имени «Сущий» и добавленного «Иегова»."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/02_EXO/EXO_003.tsv",
+    "verse": 16,
+    "old_row": "16\tИди и собери старейшин Израиля, и скажи им: Господь, Бог ваших отцов, явился мне, Бог Авраама, Исаака и Иакова, говоря: Я непременно посетил вас и то, что делается с вами в Египте.\tБлизко к еврейскому.",
+    "new_row": "16\tИди и собери старейшин Израиля, и скажи им: Господь, Бог ваших отцов, явился мне, Бог Авраама, Исаака и Иакова, говоря: Я непременно обратил внимание на вас и на то, что делается с вами в Египте.\tОдин глагол относится и к народу, и к тому, что с ним делают, вместо отдельных «посетил» и «увидел»."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/02_EXO/EXO_002.tsv",
+    "verse": 15,
+    "old_row": "15\tИ фараон услышал об этом деле и искал убить Моисея; и Моисей убежал от лица фараона и поселился в земле Мадиамской, и сел у колодца.\tПриход в землю Мадиамскую не повторён второй раз.",
+    "new_row": "15\tИ фараон услышал об этом деле и искал случая убить Моисея; и Моисей убежал от лица фараона и поселился в земле Мадиамской, и сел у колодца.\tПриход в землю Мадиамскую не повторён второй раз."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/02_EXO/EXO_008_1.tsv",
+    "verse": 13,
+    "old_row": "13\tUnd der HERR tat nach dem Wort des Mose; und die Frösche starben aus den Häusern, aus den Höfen und aus den Feldern weg.\tNah am Hebräischen.",
+    "new_row": "13\tUnd der HERR tat nach dem Wort des Mose; und die Frösche starben aus den Häusern, aus den Höfen und von den Feldern weg.\tNah am Hebräischen."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/02_EXO/EXO_008_1.tsv",
+    "verse": 9,
+    "old_row": "9\tИ Моисей сказал фараону: «Возвеличься надо мной: на когда мне молиться за тебя, и за твоих рабов, и за твой народ, чтобы истребить лягушек у тебя и из твоих домов? Только в реке пусть останутся».\tСохранено начальное «возвеличься надо мной»; народ не повторён как место исчезновения лягушек.",
+    "new_row": "9\tИ Моисей сказал фараону: «Возвеличься надо мной: к какому времени мне молиться за тебя, и за твоих рабов, и за твой народ, чтобы истребить лягушек у тебя и из твоих домов? Только в реке пусть останутся».\tСохранено начальное «возвеличься надо мной»; народ не повторён как место исчезновения лягушек."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/02_EXO/EXO_009_1.tsv",
+    "verse": 24,
+    "old_row": "24\tИ был град, и огонь вспыхивал среди града, весьма тяжёлого, подобного которому не было во всей земле Египта с тех пор, как он стал народом.\tНазвано становление Египта народом вместо его населения.",
+    "new_row": "24\tИ был град, и огонь вспыхивал среди града, весьма тяжёлого, подобного которому не было во всей земле Египта с тех пор, как Египет стал народом.\tНазвано становление Египта народом вместо его населения."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/02_EXO/EXO_010.tsv",
+    "verse": 23,
+    "old_row": "23\tОни не видели каждый своего брата, и никто не вставал со своего места три дня; а у всех сынов Израиля был свет в их жилищах.\t«Брата» сохраняет родственное обозначение.",
+    "new_row": "23\tНи один не видел своего брата, и никто не вставал со своего места три дня; а у всех сынов Израиля был свет в их жилищах.\t«Брата» сохраняет родственное обозначение."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/02_EXO/EXO_010.tsv",
+    "verse": 28,
+    "old_row": "28\tИ фараон сказал ему: «Уйди от меня! Берегись, больше не видеть моего лица, ибо в день, когда ты увидишь моё лицо, ты умрёшь!»\tБлизко к еврейскому.",
+    "new_row": "28\tИ фараон сказал ему: «Уйди от меня! Берегись вновь увидеть моё лицо, ибо в день, когда ты увидишь моё лицо, ты умрёшь!»\tБлизко к еврейскому."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/02_EXO/EXO_011.tsv",
+    "verse": 7,
+    "old_row": "7\tА против всех сынов Израиля ни один пёс не заострит своего языка, от человека до скота, чтобы вы узнали, что Господь различает между Египтом и Израилем.\tСохранён образ заострения языка вместо его шевеления.",
+    "new_row": "7\tА против всех сынов Израиля ни один пёс не заострит своего языка, от человека до скота, чтобы вы узнали, что Господь проводит различие между Египтом и Израилем.\tСохранён образ заострения языка вместо его шевеления."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/02_EXO/EXO_011.tsv",
+    "verse": 4,
+    "old_row": "4\tUnd Mose sagte: „So hat der HERR gesagt: Um Mitternacht werde ich mitten in Ägypten ausgehen.\tDie Zeit ist ungefähr Mitternacht, nicht ein ausdrücklich exakter Zeitpunkt.",
+    "new_row": "4\tUnd Mose sagte: „So hat der HERR gesagt: Etwa um Mitternacht werde ich mitten in Ägypten ausgehen.\tDie Zeit ist ungefähr Mitternacht, nicht ein ausdrücklich exakter Zeitpunkt."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/02_EXO/EXO_012_1.tsv",
+    "verse": 26,
+    "old_row": "26\tUnd wenn eure Söhne zu euch sagen: Was ist euch dieser Dienst?,\tNah am Hebräischen.",
+    "new_row": "26\tUnd wenn eure Söhne zu euch sagen: ‚Was bedeutet euch dieser Dienst?‘,\tNah am Hebräischen."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/02_EXO/EXO_012_1.tsv",
+    "verse": 26,
+    "old_row": "26\tИ когда ваши сыновья скажут вам: Что для вас это служение?,\tСохранено «для вас» в вопросе о служении.",
+    "new_row": "26\tИ когда ваши сыновья скажут вам: „Что для вас это служение?“,\tСохранено «для вас» в вопросе о служении."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/02_EXO/EXO_012_2.tsv",
+    "verse": 40,
+    "old_row": "40\tUnd der Aufenthalt der Söhne Israels, den sie in Ägypten wohnten, war vierhundertdreißig Jahre.\tNah am Hebräischen.",
+    "new_row": "40\tUnd die Aufenthaltszeit der Söhne Israels, während der sie in Ägypten wohnten, betrug vierhundertdreißig Jahre.\tNah am Hebräischen."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/02_EXO/EXO_013.tsv",
+    "verse": 12,
+    "old_row": "12\tsollst du alles, was den Mutterschoß öffnet, dem HERRN übergeben; und alles erstgeborene Junge des Viehs, das dir gehört, die Männlichen, gehören dem HERRN.\tDer Bezug zum eigenen Vieh und die Zugehörigkeit zum HERRN stehen ausdrücklich im Text.",
+    "new_row": "12\tsollst du alles, was den Mutterschoß öffnet, dem HERRN übergeben; und alle männlichen Erstlinge des Viehs, das dir gehört, gehören dem HERRN.\tDer Bezug zum eigenen Vieh und die Zugehörigkeit zum HERRN stehen ausdrücklich im Text."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/02_EXO/EXO_013.tsv",
+    "verse": 14,
+    "old_row": "14\tUnd wenn dein Sohn dich künftig fragt: Was ist dies?, sollst du ihm sagen: Mit Stärke der Hand hat der HERR uns aus Ägypten herausgeführt, aus dem Haus der Knechte.\tDie Zeitangabe ist allgemein künftig, nicht eine ausdrückliche Alternative heute oder morgen.",
+    "new_row": "14\tUnd wenn dein Sohn dich künftig fragt: ‚Was ist dies?‘, sollst du ihm sagen: Mit Stärke der Hand hat der HERR uns aus Ägypten herausgeführt, aus dem Haus der Knechte.\tDie Zeitangabe ist allgemein künftig, nicht eine ausdrückliche Alternative heute oder morgen."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/02_EXO/EXO_013.tsv",
+    "verse": 14,
+    "old_row": "14\tИ когда твой сын впоследствии спросит тебя, говоря: Что это?, ты скажи ему: Силой руки Господь вывел нас из Египта, из дома рабов.\tБлизко к еврейскому.",
+    "new_row": "14\tИ когда твой сын впоследствии спросит тебя, говоря: „Что это?“, ты скажи ему: Силой руки Господь вывел нас из Египта, из дома рабов.\tБлизко к еврейскому."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/02_EXO/EXO_013.tsv",
+    "verse": 18,
+    "old_row": "18\tUnd Gott ließ das Volk den Weg durch die Wüste zum Schilfmeer umgehen; und gerüstet zogen die Söhne Israels aus dem Land Ägypten hinauf.\tNah am Hebräischen.",
+    "new_row": "18\tUnd Gott führte das Volk auf einem Umweg, den Weg durch die Wüste zum Schilfmeer; und gerüstet zogen die Söhne Israels aus dem Land Ägypten hinauf.\tNah am Hebräischen."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/02_EXO/EXO_013.tsv",
+    "verse": 12,
+    "old_row": "12\tпередавай Господу всё открывающее утробу, и всякое первородное потомство скота, которое у тебя будет, — мужского пола принадлежит Господу.\tБлизко к еврейскому.",
+    "new_row": "12\tпередавай Господу всё открывающее утробу; и все первородные самцы скота, который будет у тебя, принадлежат Господу.\tБлизко к еврейскому."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/02_EXO/EXO_013.tsv",
+    "verse": 22,
+    "old_row": "22\tNicht wich die Wolkensäule tagsüber noch die Feuersäule nachts vor dem Volk.\tNah am Hebräischen.",
+    "new_row": "22\tWeder die Wolkensäule tagsüber noch die Feuersäule nachts wich vor dem Volk.\tNah am Hebräischen."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/02_EXO/EXO_014_1.tsv",
+    "verse": 16,
+    "old_row": "16\tА ты подними твой жезл и простри твою руку над морем, и рассеки его, и пусть сыны Израиля войдут посреди моря по суше.\tБлизко к еврейскому.",
+    "new_row": "16\tА ты подними твой жезл и простри твою руку над морем, и рассеки его, и пусть сыны Израиля войдут в середину моря по суше.\tБлизко к еврейскому."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/02_EXO/EXO_014_1.tsv",
+    "verse": 22,
+    "old_row": "22\tИ сыны Израиля вошли посреди моря по суше, и воды были им стеной справа от них и слева от них.\tБлизко к еврейскому.",
+    "new_row": "22\tИ сыны Израиля вошли в середину моря по суше, и воды были им стеной справа от них и слева от них.\tБлизко к еврейскому."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/02_EXO/EXO_014_1.tsv",
+    "verse": 23,
+    "old_row": "23\tИ египтяне погнались и вошли вслед за ними посреди моря, все кони фараона, его колесницы и его всадники.\tБлизко к еврейскому.",
+    "new_row": "23\tИ египтяне погнались и вошли вслед за ними в середину моря, все кони фараона, его колесницы и его всадники.\tБлизко к еврейскому."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/en/02_EXO/EXO_004_1.tsv",
+    "verse": 26,
+    "old_row": "26\t=\t“Circumcisions” is plural; the speaker who withdraws remains unnamed.",
+    "new_row": "26\t=\t“Circumcisions” is plural; the subject who withdraws remains unnamed."
+  }
+]

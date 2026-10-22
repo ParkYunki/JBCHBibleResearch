@@ -1,0 +1,32 @@
+[
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/en/16_NEH/NEH_012_2.tsv",
+    "old_row": "42\t=\tThe Hebrew calls the singers by a participle and describes Jezrahiah as overseer; BSB describes choirs singing under his direction.",
+    "new_row": "42\t=\tThe Hebrew says singers rather than choirs and separately names Jezrahiah as overseer; BSB describes choirs singing under his direction."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/en/16_NEH/NEH_013_1.tsv",
+    "old_row": "14\t=\tThe Hebrew speaks of his acts of kindness; BSB describes faithful deeds.",
+    "new_row": "14\t=\tClose to the Hebrew."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/en/16_NEH/NEH_013_1.tsv",
+    "old_row": "17\t=\tThe Hebrew calls this evil and profaning the Sabbath day; BSB renders it a wicked thing desecrating the Sabbath.",
+    "new_row": "17\t=\tClose to the Hebrew."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/16_NEH/NEH_013_1.tsv",
+    "old_row": "13\tИ я поставил над кладовыми казначеев: Шелемию, священника, и Садока, писца, и Федаию из левитов; а при руке их — Ханана, сына Закхура, сына Матфании, ибо они считались верными, и на них было распределять братьям своим.\tБлизко к еврейскому.",
+    "new_row": "13\tИ я поставил над кладовыми казначеев: Шелемию, священника, и Садока, писца, и Федаию из левитов; а при руке их — Ханана, сына Закхура, сына Матфании, ибо они считались верными, и им надлежало распределять братьям своим.\tБлизко к еврейскому."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/16_NEH/NEH_013_1.tsv",
+    "old_row": "15\tВ те дни я видел в Иудее людей, топтавших точила в субботу, и приносивших кучи, и нагружавших ослов, а также вином, виноградом, смоквами и всякой ношей; и они приносили это в Иерусалим в день субботний. И я предостерёг их в день, когда они продавали пищу.\tНе уточняется, что кучи состояли из хлеба.",
+    "new_row": "15\tВ те дни я видел в Иудее людей, топтавших точила в субботу, и приносивших кучи, и нагружавших ослов также вином, виноградом, смоквами и всякой ношей; и они приносили это в Иерусалим в день субботний. И я предостерёг их в день, когда они продавали пищу.\tНе уточняется, что кучи состояли из хлеба."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/16_NEH/NEH_013_1.tsv",
+    "old_row": "26\tHat nicht Salomo, der König Israels, deswegen gesündigt? Und unter den vielen Völkern war kein König wie er, und er war von seinem Gott geliebt; und Gott machte ihn zum König über ganz Israel. Auch ihn brachten die fremden Frauen zum Sündigen.\tEs heißt Völker; die Liebe gilt Salomo als einzelnem Mann.",
+    "new_row": "26\tHat nicht Salomo, der König Israels, deswegen gesündigt? Und unter den vielen Völkern war kein König wie er, und er war von seinem Gott geliebt; und Gott machte ihn zum König über ganz Israel. Auch ihn brachten die fremden Frauen zum Sündigen.\tEs heißt Völker statt Heiden."
+  }
+]

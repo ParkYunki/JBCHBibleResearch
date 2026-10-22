@@ -1,0 +1,19 @@
+{
+  "book": "21_ECC",
+  "chapters": [
+    9,
+    10
+  ],
+  "created": [
+    "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/21_ECC/ECC_009.tsv",
+    "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/21_ECC/ECC_009.tsv",
+    "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/21_ECC/ECC_010.tsv",
+    "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/21_ECC/ECC_010.tsv"
+  ],
+  "rows": 76,
+  "packet_units": [
+    "ECC_009",
+    "ECC_010"
+  ],
+  "status": "in_progress"
+}

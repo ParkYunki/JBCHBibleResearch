@@ -1,0 +1,898 @@
+[
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/02_EXO/EXO_029_2.tsv",
+    "verse": 34,
+    "old_row": "34\tUnd wenn vom Fleisch der Einsetzung und vom Brot bis zum Morgen übrig bleibt, wirst du das Übrige im Feuer verbrennen; es wird nicht gegessen werden, denn es ist heilig.\tBewahrt das passive Nichtgegessenwerden.",
+    "new_row": "34\tUnd wenn vom Fleisch der Einsetzung und vom Brot bis zum Morgen etwas übrig bleibt, wirst du das Übrige im Feuer verbrennen; es wird nicht gegessen werden, denn es ist heilig.\tBewahrt das passive Nichtgegessenwerden.",
+    "reason": "Improve native grammar while preserving the Hebrew wording."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/02_EXO/EXO_029_2.tsv",
+    "verse": 40,
+    "old_row": "40\tUnd ein Zehntel feines Mehl, mit einem Viertel Hin gestoßenem Öl vermischt, und ein Trankopfer von einem Viertel Hin Wein für das eine Lamm.\tBewahrt feines Mehl.",
+    "new_row": "40\tUnd ein Zehntel feinen Mehls, mit einem Viertel Hin gestoßenen Öls vermischt, und ein Trankopfer von einem Viertel Hin Wein für das eine Lamm.\tBewahrt feines Mehl.",
+    "reason": "Improve native grammar while preserving the Hebrew wording."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/02_EXO/EXO_030_1.tsv",
+    "verse": 8,
+    "old_row": "8\tUnd wenn Aaron die Lampen zwischen den Abenden aufsteigen lässt, wird er es räuchern, als beständiges Räucherwerk vor dem HERRN für eure Generationen.\tBewahrt zwischen den Abenden und das Aufsteigenlassen.",
+    "new_row": "8\tUnd wenn Aaron die Lampen zwischen den Abenden anzündet, wird er es räuchern, als beständiges Räucherwerk vor dem HERRN für eure Generationen.\tBewahrt „zwischen den Abenden“.",
+    "reason": "Render the idiomatic lamp-lighting action accurately. Limit DIFFERENCE to a demonstrable wording difference from TARGET."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/02_EXO/EXO_031.tsv",
+    "verse": 13,
+    "old_row": "13\t„Und du, rede zu den Söhnen Israels und sage: Gewiss, meine Sabbate werdet ihr halten, denn er ist ein Zeichen zwischen mir und euch für eure Generationen, damit ihr erkennt, dass ich der HERR bin, der euch heiligt.\tBewahrt Sabbate im Plural.",
+    "new_row": "13\t„Und du, rede zu den Söhnen Israels und sage: Gewiss, meine Sabbate werdet ihr halten, denn dies ist ein Zeichen zwischen mir und euch für eure Generationen, damit ihr erkennt, dass ich der HERR bin, der euch heiligt.\tBewahrt Sabbate im Plural.",
+    "reason": "Improve native grammar while preserving the Hebrew wording."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/02_EXO/EXO_032_1.tsv",
+    "verse": 29,
+    "old_row": "29\tUnd Mose sprach: „Füllt heute eure Hand für den HERRN, denn jeder ist gegen seinen Sohn und gegen seinen Bruder, und um heute Segen auf euch zu legen.“\tBewahrt Hand im Singular und gegen Sohn und Bruder.",
+    "new_row": "29\tUnd Mose sprach: „Füllt heute eure Hand für den HERRN, denn jeder ist gegen seinen Sohn und gegen seinen Bruder, und dies, um heute Segen auf euch zu legen.“\tBewahrt Hand im Singular und gegen Sohn und Bruder.",
+    "reason": "Improve native grammar while preserving the Hebrew wording."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/02_EXO/EXO_032_2.tsv",
+    "verse": 32,
+    "old_row": "32\tUnd nun, wenn du ihre Sünde vergibst —; und wenn nicht, tilge mich doch aus deinem Buch, das du geschrieben hast.“\tBewahrt den abgebrochenen Bedingungssatz und fügt kein auch hinzu.",
+    "new_row": "32\tUnd nun, wenn du ihre Sünde vergibst — und wenn nicht, tilge mich doch aus deinem Buch, das du geschrieben hast.“\tBewahrt den abgebrochenen Bedingungssatz und fügt kein auch hinzu.",
+    "reason": "Improve native grammar while preserving the Hebrew wording."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/02_EXO/EXO_033.tsv",
+    "verse": 1,
+    "old_row": "1\tUnd der HERR redete zu Mose: Geh, zieh von hier hinauf, du und das Volk, das du aus dem Land Ägypten heraufgeführt hast, in das Land, das ich Abraham, Isaak und Jakob geschworen habe und gesagt: Deinem Samen will ich's geben;\tNah am Hebräischen.",
+    "new_row": "1\tUnd der HERR redete zu Mose: „Geh, zieh von hier hinauf, du und das Volk, das du aus dem Land Ägypten heraufgeführt hast, in das Land, das ich Abraham, Isaak und Jakob zugeschworen habe, indem ich sagte: Deinem Samen werde ich es geben;\tNah am Hebräischen.",
+    "reason": "Improve native grammar while preserving the Hebrew wording. Mark the direct-speech boundary with native quotation marks."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/02_EXO/EXO_033.tsv",
+    "verse": 2,
+    "old_row": "2\tund ich will vor dir einen Engel senden und vertreiben die Kanaaniter, Amoriter, Hethiter, Pheresiter, Heviter und Jebusiter,\tNah am Hebräischen.",
+    "new_row": "2\tund ich werde vor dir einen Engel senden und den Kanaaniter, den Amoriter, den Hethiter, den Pheresiter, den Heviter und den Jebusiter vertreiben,\tBewahrt die Völkernamen im kollektiven Singular.",
+    "reason": "Preserve the Hebrew ethnic collective singulars against TARGET plurals."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/02_EXO/EXO_033.tsv",
+    "verse": 3,
+    "old_row": "3\tin ein Land, das von Milch und Honig fließt; denn ich werde nicht in deiner Mitte hinaufziehen, denn du bist ein Volk mit hartem Nacken, damit ich dich nicht auf dem Weg verzehre.\tNah am Hebräischen.",
+    "new_row": "3\tin ein Land, das von Milch und Honig fließt; denn ich werde nicht in deiner Mitte hinaufziehen, denn du bist ein Volk mit hartem Nacken, damit ich dich nicht auf dem Weg verzehre.“\tNah am Hebräischen.",
+    "reason": "Mark the direct-speech boundary with native quotation marks."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/02_EXO/EXO_033.tsv",
+    "verse": 5,
+    "old_row": "5\tUnd der HERR sprach zu Mose: Sag zu den Söhnen Israels: Ihr seid ein Volk mit hartem Nacken. Wo ich nur einen Augenblick in deiner Mitte hinaufzöge, würde ich dich vertilgen. Und nun nimm deinen Schmuck von dir herab, dass ich wisse, was ich dir tun soll.\tNah am Hebräischen.",
+    "new_row": "5\tUnd der HERR sprach zu Mose: „Sag zu den Söhnen Israels: Ihr seid ein Volk mit hartem Nacken. Wo ich nur einen Augenblick in deiner Mitte hinaufzöge, würde ich dich vertilgen. Und nun nimm deinen Schmuck von dir herab, dass ich wisse, was ich dir tun soll.“\tNah am Hebräischen.",
+    "reason": "Mark the direct-speech boundary with native quotation marks."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/02_EXO/EXO_033.tsv",
+    "verse": 12,
+    "old_row": "12\tUnd Mose sprach zu dem HERRN: Siehe, du sprichst zu mir: Führe dieses Volk hinauf! und lässt mich nicht wissen, wen du mit mir senden willst, und du hast gesagt: Ich kenne dich mit Namen, und du hast Gnade in meinen Augen gefunden.\tNah am Hebräischen.",
+    "new_row": "12\tUnd Mose sprach zu dem HERRN: „Siehe, du sprichst zu mir: Führe dieses Volk hinauf! und lässt mich nicht wissen, wen du mit mir senden willst, und du hast gesagt: Ich kenne dich mit Namen, und du hast Gnade in meinen Augen gefunden.\tNah am Hebräischen.",
+    "reason": "Mark the direct-speech boundary with native quotation marks."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/02_EXO/EXO_033.tsv",
+    "verse": 13,
+    "old_row": "13\tUnd nun, wenn ich bitte Gnade in deinen Augen gefunden habe, so lass mich bitte deinen Weg erkennen, damit ich dich kenne und Gnade in deinen Augen finde. Und siehe doch, dass diese Nation dein Volk ist.\tNah am Hebräischen.",
+    "new_row": "13\tUnd nun, wenn ich doch Gnade in deinen Augen gefunden habe, so lass mich bitte deinen Weg erkennen, damit ich dich kenne und Gnade in deinen Augen finde. Und siehe doch, dass diese Nation dein Volk ist.“\tNah am Hebräischen.",
+    "reason": "Improve native grammar while preserving the Hebrew wording. Mark the direct-speech boundary with native quotation marks."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/02_EXO/EXO_033.tsv",
+    "verse": 14,
+    "old_row": "14\tUnd er sprach: Mein Angesicht wird gehen, und ich werde dir Ruhe geben.\tBewahrt „Ruhe geben“ statt „leiten“.",
+    "new_row": "14\tUnd er sprach: „Mein Angesicht wird gehen, und ich werde dir Ruhe geben.“\tBewahrt „Ruhe geben“ statt „leiten“.",
+    "reason": "Mark the direct-speech boundary with native quotation marks."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/02_EXO/EXO_033.tsv",
+    "verse": 15,
+    "old_row": "15\tUnd er sprach zu ihm: Wenn dein Angesicht nicht geht, so führe uns nicht von hier hinauf.\tNah am Hebräischen.",
+    "new_row": "15\tUnd er sprach zu ihm: „Wenn dein Angesicht nicht geht, so führe uns nicht von hier hinauf.\tNah am Hebräischen.",
+    "reason": "Mark the direct-speech boundary with native quotation marks."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/02_EXO/EXO_033.tsv",
+    "verse": 16,
+    "old_row": "16\tUnd woran wird denn erkannt werden, dass ich Gnade in deinen Augen gefunden habe, ich und dein Volk? Nicht daran, dass du mit uns gehst, und wir abgesondert werden, ich und dein Volk, von jedem Volk, das auf der Fläche des Erdbodens ist?\tBewahrt das Abgesondertwerden statt des Gerühmtwerdens.",
+    "new_row": "16\tUnd woran wird denn erkannt werden, dass ich Gnade in deinen Augen gefunden habe, ich und dein Volk? Nicht daran, dass du mit uns gehst, und wir abgesondert werden, ich und dein Volk, von jedem Volk, das auf der Fläche des Erdbodens ist?“\tBewahrt das Abgesondertwerden statt des Gerühmtwerdens.",
+    "reason": "Mark the direct-speech boundary with native quotation marks."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/02_EXO/EXO_033.tsv",
+    "verse": 17,
+    "old_row": "17\tUnd der HERR sprach zu Mose: Auch diese Sache, die du geredet hast, will ich auch tun; denn du hast Gnade in meinen Augen gefunden, und ich kenne dich mit Namen.\tNah am Hebräischen.",
+    "new_row": "17\tUnd der HERR sprach zu Mose: „Auch diese Sache, die du geredet hast, werde ich tun; denn du hast Gnade in meinen Augen gefunden, und ich kenne dich mit Namen.“\tNah am Hebräischen.",
+    "reason": "Improve native grammar while preserving the Hebrew wording. Mark the direct-speech boundary with native quotation marks."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/02_EXO/EXO_033.tsv",
+    "verse": 18,
+    "old_row": "18\tUnd er sprach: Lass mich bitte deine Herrlichkeit sehen.\tNah am Hebräischen.",
+    "new_row": "18\tUnd er sprach: „Lass mich bitte deine Herrlichkeit sehen.“\tNah am Hebräischen.",
+    "reason": "Mark the direct-speech boundary with native quotation marks."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/02_EXO/EXO_033.tsv",
+    "verse": 19,
+    "old_row": "19\tUnd er sprach: Ich werde alle meine Güte vor deinem Angesicht vorübergehen lassen und werde den Namen des HERRN ausrufen vor dir. Und ich werde dem gnädig sein, dem ich gnädig sein werde, und mich dessen erbarmen, dessen ich mich erbarmen werde.\tNah am Hebräischen.",
+    "new_row": "19\tUnd er sprach: „Ich werde alle meine Güte vor deinem Angesicht vorübergehen lassen und werde den Namen des HERRN ausrufen vor dir. Und ich werde dem gnädig sein, dem ich gnädig sein werde, und mich dessen erbarmen, dessen ich mich erbarmen werde.“\tNah am Hebräischen.",
+    "reason": "Mark the direct-speech boundary with native quotation marks."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/02_EXO/EXO_033.tsv",
+    "verse": 20,
+    "old_row": "20\tUnd er sprach: Du wirst mein Angesicht nicht sehen können, denn kein Mensch wird mich sehen und leben.\tNah am Hebräischen.",
+    "new_row": "20\tUnd er sprach: „Du wirst mein Angesicht nicht sehen können, denn kein Mensch wird mich sehen und leben.“\tNah am Hebräischen.",
+    "reason": "Mark the direct-speech boundary with native quotation marks."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/02_EXO/EXO_033.tsv",
+    "verse": 21,
+    "old_row": "21\tUnd der HERR sprach: Siehe, es ist ein Ort bei mir; da sollst du auf den Felsen stehen.\tNah am Hebräischen.",
+    "new_row": "21\tUnd der HERR sprach: „Siehe, es ist ein Ort bei mir; da sollst du auf dem Felsen stehen.\tNah am Hebräischen.",
+    "reason": "Improve native grammar while preserving the Hebrew wording. Mark the direct-speech boundary with native quotation marks."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/02_EXO/EXO_033.tsv",
+    "verse": 23,
+    "old_row": "23\tUnd ich werde meine Handfläche wegnehmen, und du wirst meine Rückseite sehen; aber mein Angesicht wird nicht gesehen werden.\tNah am Hebräischen.",
+    "new_row": "23\tUnd ich werde meine Handfläche wegnehmen, und du wirst meine Rückseite sehen; aber mein Angesicht wird nicht gesehen werden.“\tNah am Hebräischen.",
+    "reason": "Mark the direct-speech boundary with native quotation marks."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/02_EXO/EXO_034_1.tsv",
+    "verse": 1,
+    "old_row": "1\tUnd der HERR sprach zu Mose: Hau dir zwei steinerne Tafeln, wie die ersten waren, und ich werde auf die Tafeln die Worte schreiben, die auf den ersten Tafeln waren, welche du zerbrochen hast.\tNah am Hebräischen.",
+    "new_row": "1\tUnd der HERR sprach zu Mose: „Hau dir zwei steinerne Tafeln, wie die ersten waren, und ich werde auf die Tafeln die Worte schreiben, die auf den ersten Tafeln waren, welche du zerbrochen hast.\tNah am Hebräischen.",
+    "reason": "Mark the direct-speech boundary with native quotation marks."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/02_EXO/EXO_034_1.tsv",
+    "verse": 3,
+    "old_row": "3\tUnd niemand soll mit dir hinaufsteigen, und auch niemand soll auf dem ganzen Berg gesehen werden; auch das Kleinvieh und die Rinder sollen nicht vor jenem Berg weiden.\tNah am Hebräischen.",
+    "new_row": "3\tUnd niemand soll mit dir hinaufsteigen, und auch niemand soll auf dem ganzen Berg gesehen werden; auch das Kleinvieh und die Rinder sollen nicht vor jenem Berg weiden.“\tNah am Hebräischen.",
+    "reason": "Mark the direct-speech boundary with native quotation marks."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/02_EXO/EXO_034_1.tsv",
+    "verse": 6,
+    "old_row": "6\tUnd der HERR ging vor seinem Angesicht vorüber und rief: HERR, HERR, Gott, barmherzig und gnädig und langsam zum Zorn und von reicher Bundestreue und Treue!\tNah am Hebräischen.",
+    "new_row": "6\tUnd der HERR ging vor seinem Angesicht vorüber und rief: „HERR, HERR, Gott, barmherzig und gnädig und langsam zum Zorn und von reicher Bundestreue und Wahrheit!\tNah am Hebräischen.",
+    "reason": "Keep the distinct Hebrew concepts of covenant loyalty and truth. Mark the direct-speech boundary with native quotation marks."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/02_EXO/EXO_034_1.tsv",
+    "verse": 7,
+    "old_row": "7\tder Bundestreue für Tausende bewahrt, Schuld, Übertretung und Sünde trägt, aber keineswegs ungestraft lässt, der die Schuld der Väter an den Söhnen und an den Söhnen der Söhne heimsucht, an der dritten und an der vierten Generation.\tBewahrt die Tausende und das Tragen von Schuld, statt „niemand unschuldig“.",
+    "new_row": "7\tder Bundestreue für Tausende bewahrt, Schuld, Übertretung und Sünde trägt, aber keineswegs ungestraft lässt, der die Schuld der Väter an den Söhnen und an den Söhnen der Söhne heimsucht, an der dritten und an der vierten Generation.“\tBewahrt die Tausende und das Tragen von Schuld, statt „niemand unschuldig“.",
+    "reason": "Mark the direct-speech boundary with native quotation marks."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/02_EXO/EXO_034_1.tsv",
+    "verse": 9,
+    "old_row": "9\tund sprach: Wenn ich bitte Gnade in deinen Augen gefunden habe, Herr, so gehe bitte der Herr in unserer Mitte, denn es ist ein Volk mit hartem Nacken; und vergib unsere Schuld und unsere Sünde und nimm uns als Erbe in Besitz.\tNah am Hebräischen.",
+    "new_row": "9\tund sprach: „Wenn ich doch Gnade in deinen Augen gefunden habe, Herr, so gehe bitte der Herr in unserer Mitte, denn es ist ein Volk mit hartem Nacken; und vergib unsere Schuld und unsere Sünde und nimm uns als Erbe in Besitz.“\tNah am Hebräischen.",
+    "reason": "Improve native grammar while preserving the Hebrew wording. Mark the direct-speech boundary with native quotation marks."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/02_EXO/EXO_034_1.tsv",
+    "verse": 10,
+    "old_row": "10\tUnd er sprach: Siehe, ich schließe einen Bund; vor deinem ganzen Volk werde ich Wunder tun, dergleichen nicht geschaffen sind in allen Landen und unter allen Völkern, und alles Volk, darunter du bist, soll sehen des HERRN Werk; denn furchterregend ist, was ich mit dir tun werde.\tNah am Hebräischen.",
+    "new_row": "10\tUnd er sprach: „Siehe, ich schließe einen Bund; vor deinem ganzen Volk werde ich Wunder tun, dergleichen nicht geschaffen sind in allen Landen und unter allen Völkern, und alles Volk, darunter du bist, soll sehen des HERRN Werk; denn furchterregend ist, was ich mit dir tun werde.\tNah am Hebräischen.",
+    "reason": "Mark the direct-speech boundary with native quotation marks."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/02_EXO/EXO_034_1.tsv",
+    "verse": 11,
+    "old_row": "11\tBewahre für dich, was ich dir heute gebiete. Siehe, ich will vor dir her vertreiben die Amoriter, Kanaaniter, Hethiter, Pheresiter, Heviter und Jebusiter.\tNah am Hebräischen.",
+    "new_row": "11\tBewahre für dich, was ich dir heute gebiete. Siehe, ich vertreibe vor dir den Amoriter, den Kanaaniter, den Hethiter, den Pheresiter, den Heviter und den Jebusiter.\tBewahrt die Völkernamen im kollektiven Singular und das gegenwärtige Vertreiben.",
+    "reason": "Preserve the Hebrew ethnic collective singulars against TARGET plurals."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/02_EXO/EXO_034_1.tsv",
+    "verse": 12,
+    "old_row": "12\tNimm dich in Acht, dass du nicht einen Bund machest mit den Einwohnern des Landes, da du hineinkommst, damit es nicht zu einer Schlinge in deiner Mitte wird;\tNah am Hebräischen.",
+    "new_row": "12\tNimm dich in Acht, dass du keinen Bund mit dem Bewohner des Landes schließt, in das du hineinkommst, damit er nicht zu einer Schlinge in deiner Mitte wird;\tBewahrt den Bewohner und das folgende Fürwort im Singular.",
+    "reason": "Preserve Hebrew collective singulars against TARGET plurals; keep the masculine singular inhabitant and pronoun in 34:12 without identifying its referent as covenant."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/02_EXO/EXO_034_1.tsv",
+    "verse": 15,
+    "old_row": "15\tDamit du nicht einen Bund mit des Landes Einwohnern machest, und wenn sie hinter ihren Göttern her huren und opfern ihren Göttern, einer dich einlädt und du von ihrem Opfer essest,\tNah am Hebräischen.",
+    "new_row": "15\tdamit du keinen Bund mit den Einwohnern des Landes schließt und sie hinter ihren Göttern her huren und ihren Göttern opfern und einer dich einlädt und du von seinem Opfer isst,\tNah am Hebräischen.",
+    "reason": "Improve native grammar while preserving the Hebrew wording."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/02_EXO/EXO_034_1.tsv",
+    "verse": 24,
+    "old_row": "24\tDenn ich werde Völker vor dir vertreiben und deine Grenze erweitern, und niemand wird deines Landes begehren, während du hinaufgehst dreimal im Jahr, zu erscheinen vor dem HERRN, deinem Gott.\tNah am Hebräischen.",
+    "new_row": "24\tDenn ich werde Völker vor dir vertreiben und deine Grenze erweitern, und niemand wird deines Landes begehren, während du dreimal im Jahr hinaufgehst, um vor dem HERRN, deinem Gott, zu erscheinen.\tNah am Hebräischen.",
+    "reason": "Improve native grammar while preserving the Hebrew wording."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/02_EXO/EXO_034_1.tsv",
+    "verse": 26,
+    "old_row": "26\tDas Erste der Erstlinge deines Ackers sollst du in das Haus des HERRN, deines Gottes, bringen. Du sollst das Böcklein nicht kochen in der Milch seiner Mutter.\tNah am Hebräischen.",
+    "new_row": "26\tDas Erste der Erstlinge deines Ackers sollst du in das Haus des HERRN, deines Gottes, bringen. Du sollst das Böcklein nicht kochen in der Milch seiner Mutter.“\tNah am Hebräischen.",
+    "reason": "Mark the direct-speech boundary with native quotation marks."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/02_EXO/EXO_034_1.tsv",
+    "verse": 27,
+    "old_row": "27\tUnd der HERR sprach zu Mose: Schreib dir diese Worte: denn nach diesen Worten habe ich mit dir und mit Israel einen Bund gemacht.\tNah am Hebräischen.",
+    "new_row": "27\tUnd der HERR sprach zu Mose: „Schreib dir diese Worte: denn nach diesen Worten habe ich mit dir und mit Israel einen Bund gemacht.“\tNah am Hebräischen.",
+    "reason": "Mark the direct-speech boundary with native quotation marks."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/02_EXO/EXO_034_2.tsv",
+    "verse": 32,
+    "old_row": "32\tUnd danach nahten alle Söhne Israels zu ihm. Und er gebot ihnen alles, was der HERR mit ihm geredet hatte auf dem Berg Sinai.\tNah am Hebräischen.",
+    "new_row": "32\tUnd danach nahten ihm alle Söhne Israels. Und er gebot ihnen alles, was der HERR mit ihm geredet hatte auf dem Berg Sinai.\tNah am Hebräischen.",
+    "reason": "Improve native grammar while preserving the Hebrew wording."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/02_EXO/EXO_035_1.tsv",
+    "verse": 1,
+    "old_row": "1\tUnd Mose versammelte die ganze Gemeinde der Söhne Israels und sprach zu ihnen: Dies sind die Worte, die der HERR geboten hat, um sie zu tun:\tNah am Hebräischen.",
+    "new_row": "1\tUnd Mose versammelte die ganze Gemeinde der Söhne Israels und sprach zu ihnen: „Dies sind die Worte, die der HERR geboten hat, um sie zu tun:\tNah am Hebräischen.",
+    "reason": "Mark the direct-speech boundary with native quotation marks."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/02_EXO/EXO_035_1.tsv",
+    "verse": 3,
+    "old_row": "3\tIhr sollt kein Feuer in allen euren Wohnstätten am Sabbattag entzünden.\tNah am Hebräischen.",
+    "new_row": "3\tIhr sollt kein Feuer in allen euren Wohnstätten am Sabbattag entzünden.“\tNah am Hebräischen.",
+    "reason": "Mark the direct-speech boundary with native quotation marks."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/02_EXO/EXO_035_1.tsv",
+    "verse": 4,
+    "old_row": "4\tUnd Mose sprach zu der ganzen Gemeinde der Söhne Israels: Dies ist das Wort, das der HERR geboten hat, indem er sprach:\tNah am Hebräischen.",
+    "new_row": "4\tUnd Mose sprach zu der ganzen Gemeinde der Söhne Israels: „Dies ist das Wort, das der HERR geboten hat, indem er sprach:\tNah am Hebräischen.",
+    "reason": "Mark the direct-speech boundary with native quotation marks."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/02_EXO/EXO_035_1.tsv",
+    "verse": 19,
+    "old_row": "19\tdie gewirkten Kleider zum Dienst im Heiligtum, die heiligen Kleider für Aaron, den Priester, und die Kleider seiner Söhne zum Priesterdienst.\tNah am Hebräischen.",
+    "new_row": "19\tdie gewirkten Kleider zum Dienst im Heiligtum, die heiligen Kleider für Aaron, den Priester, und die Kleider seiner Söhne zum Priesterdienst.“\tNah am Hebräischen.",
+    "reason": "Mark the direct-speech boundary with native quotation marks."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/02_EXO/EXO_035_1.tsv",
+    "verse": 22,
+    "old_row": "22\tUnd die Männer kamen mit den Frauen, alle, die willigen Herzens waren, und brachten Spangen und Ringe und Siegelringe und Geschmeide, allerlei goldenes Gerät, und jeder, der dem HERRN ein Schwingopfer aus Gold darbrachte.\tNah am Hebräischen.",
+    "new_row": "22\tUnd die Männer kamen mit den Frauen; alle, die willigen Herzens waren, und jeder Mann, der dem HERRN ein Schwingopfer aus Gold darbrachte, brachten Spangen und Ringe und Siegelringe und Geschmeide, allerlei goldenes Gerät.\tNah am Hebräischen.",
+    "reason": "Improve native grammar while preserving the Hebrew wording."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/02_EXO/EXO_035_1.tsv",
+    "verse": 30,
+    "old_row": "30\tUnd Mose sprach zu den Söhnen Israels: Seht, der HERR hat Bezaleel, den Sohn Uris, des Sohnes Hurs, vom Stamm Juda mit Namen berufen,\tNah am Hebräischen.",
+    "new_row": "30\tUnd Mose sprach zu den Söhnen Israels: „Seht, der HERR hat Bezaleel, den Sohn Uris, des Sohnes Hurs, vom Stamm Juda mit Namen berufen,\tNah am Hebräischen.",
+    "reason": "Mark the direct-speech boundary with native quotation marks."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/02_EXO/EXO_036_1.tsv",
+    "verse": 1,
+    "old_row": "1\tUnd Bezaleel und Oholiab und jeder Mann weisen Herzens, in den der HERR Weisheit und Verständnis gelegt hat, um jede Arbeit des Dienstes am Heiligtum tun zu können, sollen nach allem handeln, was der HERR geboten hat.\tBewahrt den Auftrag anstelle einer abgeschlossenen Arbeit.",
+    "new_row": "1\tUnd Bezaleel und Oholiab und jeder Mann weisen Herzens, in den der HERR Weisheit und Verständnis gelegt hat, um jede Arbeit des Dienstes am Heiligtum tun zu können, sollen nach allem handeln, was der HERR geboten hat.“\tBewahrt den Auftrag anstelle einer abgeschlossenen Arbeit.",
+    "reason": "Mark the direct-speech boundary with native quotation marks."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/02_EXO/EXO_036_1.tsv",
+    "verse": 5,
+    "old_row": "5\tund sprachen zu Mose: Das Volk bringt zu viel, mehr als für den Dienst an der Arbeit nötig ist, das der HERR zu machen geboten hat.\tNah am Hebräischen.",
+    "new_row": "5\tund sprachen zu Mose: „Das Volk bringt zu viel, mehr als für den Dienst an dem Werk nötig ist, das der HERR zu machen geboten hat.“\tNah am Hebräischen.",
+    "reason": "Improve native grammar while preserving the Hebrew wording. Mark the direct-speech boundary with native quotation marks."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/02_EXO/EXO_036_1.tsv",
+    "verse": 6,
+    "old_row": "6\tUnd Mose gebot, und sie ließen einen Ruf durch das Lager gehen: Kein Mann und keine Frau soll noch Arbeit für die Hebe des Heiligtums machen. Und das Volk wurde vom Bringen zurückgehalten.\tBewahrt den Ruf und das passive Zurückgehaltenwerden.",
+    "new_row": "6\tUnd Mose gebot, und sie ließen einen Ruf durch das Lager gehen: „Kein Mann und keine Frau soll noch Arbeit für die Hebe des Heiligtums machen.“ Und das Volk wurde vom Bringen zurückgehalten.\tBewahrt den Ruf und das passive Zurückgehaltenwerden.",
+    "reason": "Mark the direct quotation and leave the following narrative outside it. Close direct speech before the following narrative."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/02_EXO/EXO_036_2.tsv",
+    "verse": 33,
+    "old_row": "33\tUnd er machte den mittleren Riegel, um mitten durch die Bretter von einem Ende zum anderen zu laufen.\tNah am Hebräischen.",
+    "new_row": "33\tUnd er machte den mittleren Riegel so, dass er mitten durch die Bretter von einem Ende zum anderen lief.\tNah am Hebräischen.",
+    "reason": "Improve native grammar while preserving the Hebrew wording."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/02_EXO/EXO_037.tsv",
+    "verse": 2,
+    "old_row": "2\tund überzog sie mit reinem Gold innen und außen und machte ihr einen goldenen Kranz umher.\tNah am Hebräischen.",
+    "new_row": "2\tUnd überzog sie mit reinem Gold innen und außen und machte ihr einen goldenen Kranz umher.\tNah am Hebräischen.",
+    "reason": "Improve native grammar while preserving the Hebrew wording."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/02_EXO/EXO_037.tsv",
+    "verse": 14,
+    "old_row": "14\tNahe am Rahmen waren die Ringe, Halterungen für die Stangen, um den Tisch zu tragen.\tNah am Hebräischen.",
+    "new_row": "14\tNahe an der Leiste waren die Ringe, Halterungen für die Stangen, um den Tisch zu tragen.\tNah am Hebräischen.",
+    "reason": "Improve native grammar while preserving the Hebrew wording."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/02_EXO/EXO_037.tsv",
+    "verse": 26,
+    "old_row": "26\tund überzog ihn mit reinem Gold, sein Dach und seine Wände ringsumher und seine Hörner, und machte ihm einen Kranz umher von Gold\tNah am Hebräischen.",
+    "new_row": "26\tUnd überzog ihn mit reinem Gold, sein Dach und seine Wände ringsumher und seine Hörner, und machte ihm einen Kranz umher von Gold\tNah am Hebräischen.",
+    "reason": "Improve native grammar while preserving the Hebrew wording."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/02_EXO/EXO_038_1.tsv",
+    "verse": 22,
+    "old_row": "22\tUnd Bezaleel, der Sohn Uris, des Sohnes Hur, vom Stamm Juda, machte alles, was der HERR Mose geboten hatte,\tNah am Hebräischen.",
+    "new_row": "22\tUnd Bezaleel, der Sohn Uris, des Sohnes Hurs, vom Stamm Juda, machte alles, was der HERR Mose geboten hatte,\tNah am Hebräischen.",
+    "reason": "Improve native grammar while preserving the Hebrew wording."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/02_EXO/EXO_039_1.tsv",
+    "verse": 9,
+    "old_row": "9\tQuadratisch war sie; doppelt legten sie die Brusttasche an, eine Spanne ihre Länge und eine Spanne ihre Breite, doppelt.\tNah am Hebräischen.",
+    "new_row": "9\tQuadratisch war sie; doppelt machten sie die Brusttasche, eine Spanne ihre Länge und eine Spanne ihre Breite, doppelt.\tNah am Hebräischen.",
+    "reason": "Preserve the action of making rather than putting on the breastpiece."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/02_EXO/EXO_039_1.tsv",
+    "verse": 30,
+    "old_row": "30\tUnd sie machten das Stirnblatt des heiligen Diadems aus reinem Gold und schrieben darauf eine Schrift wie Siegelgravuren: Heilig dem HERRN.\tNah am Hebräischen.",
+    "new_row": "30\tUnd sie machten das Stirnblatt des heiligen Diadems aus reinem Gold und schrieben darauf eine Schrift wie Siegelgravuren: „Heilig dem HERRN.“\tNah am Hebräischen.",
+    "reason": "Mark the direct-speech boundary with native quotation marks."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/02_EXO/EXO_040_1.tsv",
+    "verse": 2,
+    "old_row": "2\tAm Tag des ersten Monats, am Ersten des Monats, sollst du die Wohnung des Zeltes der Begegnung aufrichten.\tNah am Hebräischen.",
+    "new_row": "2\t„Am Tag des ersten Monats, am Ersten des Monats, sollst du die Wohnung des Zeltes der Begegnung aufrichten.\tNah am Hebräischen.",
+    "reason": "Mark the opening of direct speech following verse 1."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/02_EXO/EXO_040_1.tsv",
+    "verse": 4,
+    "old_row": "4\tUnd du sollst den Tisch hineinbringen und seine Anordnung anordnen und den Leuchter hineinbringen und seine Lampen aufsetzen.\tBewahrt die Wiederholung beim Anordnen und Hineinbringen.",
+    "new_row": "4\tUnd du sollst den Tisch hineinbringen und seine Anordnung anordnen und den Leuchter hineinbringen und seine Lampen anzünden.\tBewahrt die Wiederholung beim Anordnen und Hineinbringen.",
+    "reason": "Render the idiomatic lamp-lighting action accurately."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/02_EXO/EXO_040_1.tsv",
+    "verse": 15,
+    "old_row": "15\tund sie salben, wie du ihren Vater gesalbt hast, und sie sollen mir als Priester dienen; und ihre Salbung soll ihnen zu einem ewigen Priestertum für ihre Generationen werden.\tNah am Hebräischen.",
+    "new_row": "15\tund sie salben, wie du ihren Vater gesalbt hast, und sie sollen mir als Priester dienen; und ihre Salbung soll ihnen zu einem ewigen Priestertum für ihre Generationen werden.“\tNah am Hebräischen.",
+    "reason": "Mark the direct-speech boundary with native quotation marks."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/02_EXO/EXO_040_1.tsv",
+    "verse": 25,
+    "old_row": "25\tund setzte die Lampen vor dem HERRN auf, wie der HERR Mose geboten hatte.\tNah am Hebräischen.",
+    "new_row": "25\tund zündete die Lampen vor dem HERRN an, wie der HERR Mose geboten hatte.\tNah am Hebräischen.",
+    "reason": "Render the idiomatic lamp-lighting action accurately."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/en/02_EXO/EXO_033.tsv",
+    "verse": 2,
+    "old_row": "2\t=\tClose to the Hebrew.",
+    "new_row": "2\t=\tRetains the ethnic collective singulars where BSB uses plural people names.",
+    "reason": "Preserve the Hebrew ethnic collective singulars against TARGET plurals."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/en/02_EXO/EXO_033.tsv",
+    "verse": 19,
+    "old_row": "19\t=\tRetains all My goodness and the name of the LORD.",
+    "new_row": "19\t=\tClose to the Hebrew.",
+    "reason": "Limit DIFFERENCE to a demonstrable wording difference from TARGET."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/en/02_EXO/EXO_034_1.tsv",
+    "verse": 5,
+    "old_row": "5\t=\tRetains the name of the LORD.",
+    "new_row": "5\t=\tClose to the Hebrew.",
+    "reason": "Limit DIFFERENCE to a demonstrable wording difference from TARGET."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/en/02_EXO/EXO_034_1.tsv",
+    "verse": 11,
+    "old_row": "11\t=\tClose to the Hebrew.",
+    "new_row": "11\t=\tRetains the ethnic collective singulars where BSB uses plural people names, and the present participle driving out.",
+    "reason": "Preserve the Hebrew ethnic collective singulars against TARGET plurals."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/en/02_EXO/EXO_034_1.tsv",
+    "verse": 12,
+    "old_row": "12\t=\tClose to the Hebrew.",
+    "new_row": "12\t=\tRetains the collective singular inhabitant and the following masculine singular pronoun, where BSB has inhabitants and they.",
+    "reason": "Preserve Hebrew collective singulars against TARGET plurals; keep the masculine singular inhabitant and pronoun in 34:12 without identifying its referent as covenant."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/en/02_EXO/EXO_037.tsv",
+    "verse": 19,
+    "old_row": "19\t=\tRetains a bud and a blossom in each repeated description.",
+    "new_row": "19\t=\tRetains a singular bud and blossom with each repeated branch.",
+    "reason": "Limit DIFFERENCE to a demonstrable wording difference from TARGET."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/02_EXO/EXO_029_1.tsv",
+    "verse": 2,
+    "old_row": "2\tи пресный хлеб, и пресные лепешки, смешанные с елеем, и пресные тонкие хлебцы, помазанные елеем; из тонкой пшеничной муки ты сделаешь их.\tСохраняет тонкую муку.",
+    "new_row": "2\tи пресный хлеб, и пресные лепешки, смешанные с елеем, и пресные тонкие хлебцы, помазанные елеем; из пшеничной муки тонкого помола ты сделаешь их.\tСохраняет тонкую муку.",
+    "reason": "Improve native grammar while preserving the Hebrew wording."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/02_EXO/EXO_029_2.tsv",
+    "verse": 40,
+    "old_row": "40\tИ десятая часть тонкой муки, смешанной с четвертью гина битого елея, и возлияние из четверти гина вина для одного агнца.\tНе добавляет ефу и пшеницу.",
+    "new_row": "40\tИ десятая часть муки тонкого помола, смешанной с четвертью гина битого елея, и возлияние из четверти гина вина для одного агнца.\tНе добавляет ефу и пшеницу.",
+    "reason": "Improve native grammar while preserving the Hebrew wording."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/02_EXO/EXO_029_2.tsv",
+    "verse": 42,
+    "old_row": "42\tкак постоянное всесожжение в ваши поколения у входа шатра встречи перед Господом, где Я буду встречаться с вами, чтобы говорить с тобой там.\tСохраняет встречу и повтор там.",
+    "new_row": "42\tкак постоянное всесожжение в ваши поколения у входа шатра встречи перед Господом, где Я буду встречаться с вами, чтобы говорить с тобой там.\tСохраняет встречу и смену обращения с множественного числа на единственное.",
+    "reason": "Limit DIFFERENCE to a demonstrable wording difference from TARGET."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/02_EXO/EXO_030_1.tsv",
+    "verse": 8,
+    "old_row": "8\tИ когда Аарон будет поднимать лампады между вечерами, будет воскурять его как постоянное курение перед Господом в ваши поколения.\tСохраняет поднимание лампад и между вечерами.",
+    "new_row": "8\tИ когда Аарон будет зажигать лампады между вечерами, будет воскурять его как постоянное курение перед Господом в ваши поколения.\tСохраняет «между вечерами».",
+    "reason": "Render the idiomatic lamp-lighting action accurately. Limit DIFFERENCE to a demonstrable wording difference from TARGET."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/02_EXO/EXO_030_2.tsv",
+    "verse": 32,
+    "old_row": "32\tНа человеческую плоть оно не будет возлито, и по его составу не делайте подобного ему; это святыня, святыней будет для вас.\tНе добавляет прочих людей и сами себе.",
+    "new_row": "32\tНа человеческую плоть он не будет возлит, и по его составу не делайте подобного ему; это святыня, святыней будет для вас.\tНе добавляет прочих людей и сами себе.",
+    "reason": "Improve native grammar while preserving the Hebrew wording."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/02_EXO/EXO_031.tsv",
+    "verse": 2,
+    "old_row": "2\t«Смотри, Я призвал по имени Веселеила, сына Урия, сына Ора, из колена Иуды.\tСохраняет уже совершенный призыв по имени.",
+    "new_row": "2\t«Смотри, Я призвал по имени Веселеила, сына Урии, сына Ора, из колена Иуды.\tСохраняет уже совершенный призыв по имени.",
+    "reason": "Improve native grammar while preserving the Hebrew wording."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/02_EXO/EXO_031.tsv",
+    "verse": 17,
+    "old_row": "17\tМежду Мною и сынами Израиля это знамение навеки; ибо за шесть дней Господь создал небо и землю, а в седьмой день прекратил работу и освежился».\tСохраняет обновление сил.",
+    "new_row": "17\tМежду Мною и сынами Израиля это знамение навеки; ибо за шесть дней Господь создал небо и землю, а в седьмой день прекратил работу и перевел дух».\tСохраняет обновление сил.",
+    "reason": "Improve native grammar while preserving the Hebrew wording."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/02_EXO/EXO_032_1.tsv",
+    "verse": 3,
+    "old_row": "3\tИ весь народ сорвал с себя золотые кольца, которые были в их ушах, и принесли их к Аарону.\tСохраняет срывание.",
+    "new_row": "3\tИ весь народ сорвал с себя золотые кольца, которые были в их ушах, и они принесли их к Аарону.\tСохраняет срывание.",
+    "reason": "Improve native grammar while preserving the Hebrew wording."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/02_EXO/EXO_032_1.tsv",
+    "verse": 29,
+    "old_row": "29\tИ сказал Моисей: «Наполните сегодня вашу руку Господу, ибо каждый против своего сына и против своего брата, и чтобы сегодня возложить на вас благословение».\tСохраняет наполнение руки и не добавляет Господа как подлежащее дарования благословения.",
+    "new_row": "29\tИ сказал Моисей: «Наполните сегодня вашу руку Господу, ибо каждый против своего сына и против своего брата, и это для того, чтобы сегодня возложить на вас благословение».\tСохраняет наполнение руки и не добавляет Господа как подлежащее дарования благословения.",
+    "reason": "Improve native grammar while preserving the Hebrew wording."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/02_EXO/EXO_032_2.tsv",
+    "verse": 32,
+    "old_row": "32\tИ теперь, если Ты простишь их грех —; а если нет, изгладь меня, прошу, из Твоей книги, которую Ты написал».\tСохраняет условное если и не добавляет и меня.",
+    "new_row": "32\tИ теперь, если Ты простишь их грех — а если нет, изгладь меня, прошу, из Твоей книги, которую Ты написал».\tСохраняет условное если и не добавляет и меня.",
+    "reason": "Improve native grammar while preserving the Hebrew wording."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/02_EXO/EXO_033.tsv",
+    "verse": 1,
+    "old_row": "1\tИ сказал Господь Моисею: пойди, поднимись отсюда ты и народ, который ты поднял из земли Египетской, в землю, о которой Я клялся Аврааму, Исааку и Иакову, говоря: семени твоему дам ее;\tБлизко к еврейскому.",
+    "new_row": "1\tИ сказал Господь Моисею: «пойди, поднимись отсюда ты и народ, который ты поднял из земли Египетской, в землю, о которой Я клялся Аврааму, Исааку и Иакову, говоря: семени твоему дам ее;\tБлизко к еврейскому.",
+    "reason": "Mark the direct-speech boundary with native quotation marks."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/02_EXO/EXO_033.tsv",
+    "verse": 2,
+    "old_row": "2\tи пошлю пред тобою ангела, и прогоню Хананеев, Аморреев, Хеттеев, Ферезеев, Евеев и Иевусеев,\tНе добавляет «Моего» и Гергесеев.",
+    "new_row": "2\tи пошлю пред тобою ангела, и прогоню Хананея, Аморрея, Хеттея, Ферезея, Евея и Иевусея,\tСохраняет собирательное единственное число названий народов. Не добавляет «Моего» и Гергесеев.",
+    "reason": "Preserve the Hebrew ethnic collective singulars against TARGET plurals."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/02_EXO/EXO_033.tsv",
+    "verse": 3,
+    "old_row": "3\tв землю, текущую молоком и медом; ибо Я не поднимусь среди тебя, ибо ты народ с жесткой шеей, чтобы Мне не истребить тебя на пути.\tБлизко к еврейскому.",
+    "new_row": "3\tв землю, текущую молоком и медом; ибо Я не поднимусь среди тебя, ибо ты народ с жесткой шеей, чтобы Мне не истребить тебя на пути».\tБлизко к еврейскому.",
+    "reason": "Mark the direct-speech boundary with native quotation marks."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/02_EXO/EXO_033.tsv",
+    "verse": 5,
+    "old_row": "5\tИ Господь сказал Моисею: скажи сынам Израилевым: вы народ жестоковыйный; на одно мгновение Я поднимусь среди тебя и истреблю тебя; и теперь сними с себя свое украшение, и Я узнаю, что Мне делать с тобой.\tБлизко к еврейскому.",
+    "new_row": "5\tИ Господь сказал Моисею: «скажи сынам Израилевым: вы народ жестоковыйный; на одно мгновение Я поднимусь среди тебя и истреблю тебя; и теперь сними с себя свое украшение, и Я узнаю, что Мне делать с тобой».\tБлизко к еврейскому.",
+    "reason": "Mark the direct-speech boundary with native quotation marks."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/02_EXO/EXO_033.tsv",
+    "verse": 7,
+    "old_row": "7\tИ Моисей брал шатер и ставил его вне стана, вдали от стана, и назвал его шатром встречи; и каждый, ищущий Господа, выходил к шатру встречи, находившуюся вне стана.\tБлизко к еврейскому.",
+    "new_row": "7\tИ Моисей брал шатер и ставил его вне стана, вдали от стана, и назвал его шатром встречи; и каждый, ищущий Господа, выходил к шатру встречи, находившемуся вне стана.\tБлизко к еврейскому.",
+    "reason": "Improve native grammar while preserving the Hebrew wording."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/02_EXO/EXO_033.tsv",
+    "verse": 12,
+    "old_row": "12\tИ Моисей сказал Господу: вот, Ты говоришь мне: подними этот народ, а не открыл мне, кого пошлешь со мною, и Ты сказал: «Я знаю тебя по имени, и ты приобрел благоволение в очах Моих»;\tБлизко к еврейскому.",
+    "new_row": "12\tИ Моисей сказал Господу: «вот, Ты говоришь мне: подними этот народ, а не открыл мне, кого пошлешь со мною, и Ты сказал: Я знаю тебя по имени, и ты приобрел благоволение в очах Моих;\tБлизко к еврейскому.",
+    "reason": "Improve native grammar while preserving the Hebrew wording. Mark the direct-speech boundary with native quotation marks."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/02_EXO/EXO_033.tsv",
+    "verse": 13,
+    "old_row": "13\tитак, если я приобрел благоволение в очах Твоих, то молю: открой мне путь Твой, дабы я познал Тебя, чтобы приобрести благоволение в очах Твоих; и помысли, что эта нация Твой народ.\tБлизко к еврейскому.",
+    "new_row": "13\tитак, если я приобрел благоволение в очах Твоих, то молю: открой мне путь Твой, дабы я познал Тебя, чтобы приобрести благоволение в очах Твоих; и помысли, что эта нация Твой народ».\tБлизко к еврейскому.",
+    "reason": "Mark the direct-speech boundary with native quotation marks."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/02_EXO/EXO_033.tsv",
+    "verse": 14,
+    "old_row": "14\tИ Он сказал: лицо Мое пойдет, и Я дам тебе покой.\tСохраняет образ лица и действие дарования покоя.",
+    "new_row": "14\tИ Он сказал: «лицо Мое пойдет, и Я дам тебе покой».\tСохраняет образ лица и действие дарования покоя.",
+    "reason": "Mark the direct-speech boundary with native quotation marks."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/02_EXO/EXO_033.tsv",
+    "verse": 15,
+    "old_row": "15\tИ он сказал Ему: если лицо Твое не пойдет, не поднимай нас отсюда,\tБлизко к еврейскому.",
+    "new_row": "15\tИ он сказал Ему: «если лицо Твое не пойдет, не поднимай нас отсюда,\tБлизко к еврейскому.",
+    "reason": "Mark the direct-speech boundary with native quotation marks."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/02_EXO/EXO_033.tsv",
+    "verse": 16,
+    "old_row": "16\tи по чему же будет узнано, что я и народ Твой обрели благоволение в очах Твоих? не по тому ли, когда Ты пойдешь с нами? и мы будем отличены, я и народ Твой, от всякого народа, который на лице земли.\tБлизко к еврейскому.",
+    "new_row": "16\tи по чему же будет узнано, что я и народ Твой обрели благоволение в очах Твоих? не по тому ли, когда Ты пойдешь с нами? и мы будем отличены, я и народ Твой, от всякого народа, который на лице земли».\tБлизко к еврейскому.",
+    "reason": "Mark the direct-speech boundary with native quotation marks."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/02_EXO/EXO_033.tsv",
+    "verse": 17,
+    "old_row": "17\tИ сказал Господь Моисею: и это дело, о котором ты говорил, Я сделаю, потому что ты приобрел благоволение в очах Моих, и Я знаю тебя по имени.\tБлизко к еврейскому.",
+    "new_row": "17\tИ сказал Господь Моисею: «и это дело, о котором ты говорил, Я сделаю, потому что ты приобрел благоволение в очах Моих, и Я знаю тебя по имени».\tБлизко к еврейскому.",
+    "reason": "Mark the direct-speech boundary with native quotation marks."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/02_EXO/EXO_033.tsv",
+    "verse": 18,
+    "old_row": "18\tИ он сказал: покажи мне, прошу, славу Твою.\tБлизко к еврейскому.",
+    "new_row": "18\tИ он сказал: «покажи мне, прошу, славу Твою».\tБлизко к еврейскому.",
+    "reason": "Mark the direct-speech boundary with native quotation marks."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/02_EXO/EXO_033.tsv",
+    "verse": 19,
+    "old_row": "19\tИ Он сказал: Я проведу всю Мою благость перед твоим лицом и провозглашу имя Господа пред тобою; и помилую того, кого помилую, и сжалюсь над тем, над кем сжалюсь.\tСохраняет «благость» вместо «славу».",
+    "new_row": "19\tИ Он сказал: «Я проведу всю Мою благость перед твоим лицом и провозглашу имя Господа пред тобою; и помилую того, кого помилую, и сжалюсь над тем, над кем сжалюсь».\tСохраняет «благость» вместо «славу».",
+    "reason": "Mark the direct-speech boundary with native quotation marks."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/02_EXO/EXO_033.tsv",
+    "verse": 20,
+    "old_row": "20\tИ Он сказал: ты не сможешь увидеть Мое лицо, ибо человек не увидит Меня и не останется жив.\tБлизко к еврейскому.",
+    "new_row": "20\tИ Он сказал: «ты не сможешь увидеть Мое лицо, ибо человек не может увидеть Меня и остаться живым».\tБлизко к еврейскому.",
+    "reason": "Improve native grammar while preserving the Hebrew wording. Mark the direct-speech boundary with native quotation marks."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/02_EXO/EXO_033.tsv",
+    "verse": 21,
+    "old_row": "21\tИ сказал Господь: вот место у Меня, и ты станешь на скале;\tБлизко к еврейскому.",
+    "new_row": "21\tИ сказал Господь: «вот место у Меня, и ты станешь на скале;\tБлизко к еврейскому.",
+    "reason": "Mark the direct-speech boundary with native quotation marks."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/02_EXO/EXO_033.tsv",
+    "verse": 23,
+    "old_row": "23\tи Я уберу Мою ладонь, и ты увидишь Меня сзади, а лицо Мое не будет видно.\tБлизко к еврейскому.",
+    "new_row": "23\tи Я уберу Мою ладонь, и ты увидишь Меня сзади, а лицо Мое не будет видно».\tБлизко к еврейскому.",
+    "reason": "Mark the direct-speech boundary with native quotation marks."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/02_EXO/EXO_034_1.tsv",
+    "verse": 1,
+    "old_row": "1\tИ сказал Господь Моисею: вытеши себе две скрижали каменные, подобные прежним, и Я напишу на сих скрижалях слова, какие были на прежних скрижалях, которые ты разбил;\tНе добавляет повеление взойти на гору.",
+    "new_row": "1\tИ сказал Господь Моисею: «вытеши себе две скрижали каменные, подобные прежним, и Я напишу на сих скрижалях слова, какие были на прежних скрижалях, которые ты разбил;\tНе добавляет повеление взойти на гору.",
+    "reason": "Mark the direct-speech boundary with native quotation marks."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/02_EXO/EXO_034_1.tsv",
+    "verse": 3,
+    "old_row": "3\tи никто не должен восходить с тобою, и никто не должен показываться на всей горе; даже скот, мелкий и крупный, не должен пастись перед той горой.\tБлизко к еврейскому.",
+    "new_row": "3\tи никто не должен восходить с тобою, и никто не должен показываться на всей горе; даже скот, мелкий и крупный, не должен пастись перед той горой».\tБлизко к еврейскому.",
+    "reason": "Mark the direct-speech boundary with native quotation marks."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/02_EXO/EXO_034_1.tsv",
+    "verse": 6,
+    "old_row": "6\tИ прошел Господь пред лицом его и возгласил: Господь, Господь, Бог сострадательный и милостивый, долготерпеливый и обильный верностью завету и истиной,\tБлизко к еврейскому.",
+    "new_row": "6\tИ прошел Господь пред лицом его и возгласил: «Господь, Господь, Бог сострадательный и милостивый, долготерпеливый и обильный верностью завету и истиной,\tБлизко к еврейскому.",
+    "reason": "Mark the direct-speech boundary with native quotation marks."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/02_EXO/EXO_034_1.tsv",
+    "verse": 7,
+    "old_row": "7\tсохраняющий верность завету тысячам, несущий вину, преступление и грех, но никак не оставляющий без наказания, посещающий вину отцов в сыновьях и в сыновьях сыновей, до третьего и четвертого поколения.\tНе добавляет «сохраняющий правду».",
+    "new_row": "7\tсохраняющий верность завету тысячам, несущий вину, преступление и грех, но никак не оставляющий без наказания, посещающий вину отцов в сыновьях и в сыновьях сыновей, до третьего и четвертого поколения».\tНе добавляет «сохраняющий правду».",
+    "reason": "Mark the direct-speech boundary with native quotation marks."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/02_EXO/EXO_034_1.tsv",
+    "verse": 9,
+    "old_row": "9\tи сказал: если, прошу, я нашел благоволение в очах Твоих, Владыка, то пусть, прошу, пойдет Владыка посреди нас; ибо народ сей жестоковыен; прости нашу вину и наш грех и сделай нас наследием Твоим.\tБлизко к еврейскому.",
+    "new_row": "9\tи сказал: «если, прошу, я нашел благоволение в очах Твоих, Владыка, то пусть, прошу, пойдет Владыка посреди нас; ибо народ сей жестоковыен; прости нашу вину и наш грех и сделай нас наследием Твоим».\tБлизко к еврейскому.",
+    "reason": "Mark the direct-speech boundary with native quotation marks."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/02_EXO/EXO_034_1.tsv",
+    "verse": 10,
+    "old_row": "10\tИ Он сказал: вот, Я заключаю завет: пред всем народом твоим соделаю чудеса, каких не было сотворено по всей земле и ни у каких народов; и увидит весь народ, среди которого ты находишься, дело Господа; ибо страшно будет то, что Я делаю с тобой;\tБлизко к еврейскому.",
+    "new_row": "10\tИ Он сказал: «вот, Я заключаю завет: пред всем народом твоим соделаю чудеса, каких не было сотворено по всей земле и ни у каких народов; и увидит весь народ, среди которого ты находишься, дело Господа; ибо страшно будет то, что Я делаю с тобой;\tБлизко к еврейскому.",
+    "reason": "Mark the direct-speech boundary with native quotation marks."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/02_EXO/EXO_034_1.tsv",
+    "verse": 11,
+    "old_row": "11\tсохрани то, что повелеваю тебе ныне: вот, Я изгоняю от лица твоего Аморреев, Хананеев, Хеттеев, Ферезеев, Евеев и Иевусеев;\tБлизко к еврейскому.",
+    "new_row": "11\tсохрани для себя то, что Я повелеваю тебе сегодня: вот, Я изгоняю от лица твоего Аморрея, Хананея, Хеттея, Ферезея, Евея и Иевусея;\tСохраняет собирательное единственное число названий народов и «для себя». Не добавляет Гергесеев.",
+    "reason": "Preserve the Hebrew ethnic collective singulars against TARGET plurals."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/02_EXO/EXO_034_1.tsv",
+    "verse": 12,
+    "old_row": "12\tберегись заключить завет с жителями той земли, в которую ты войдешь, дабы они не сделались ловушкой среди тебя.\tБлизко к еврейскому.",
+    "new_row": "12\tберегись, чтобы не заключить завет с жителем той земли, в которую ты войдешь, чтобы он не стал ловушкой среди тебя.\tСохраняет жителя и следующее местоимение в единственном числе, а также обращение «среди тебя».",
+    "reason": "Preserve Hebrew collective singulars against TARGET plurals; keep the masculine singular inhabitant and pronoun in 34:12 without identifying its referent as covenant."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/02_EXO/EXO_034_1.tsv",
+    "verse": 15,
+    "old_row": "15\tЧтобы ты не заключил завет с жителями той земли, чтобы, когда они будут блудодействовать вслед богов своих и приносить жертвы богам своим, один из них пригласит тебя, и ты вкусишь от его жертвы;\tБлизко к еврейскому.",
+    "new_row": "15\tчтобы ты не заключил завет с жителями той земли; иначе они будут блудодействовать вслед своим богам и приносить жертвы своим богам, и один пригласит тебя, и ты вкусишь от его жертвы;\tБлизко к еврейскому.",
+    "reason": "Improve native grammar while preserving the Hebrew wording."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/02_EXO/EXO_034_1.tsv",
+    "verse": 26,
+    "old_row": "26\tПервое из первых плодов земли твоей принеси в дом Господа Бога твоего. Не вари козленка в молоке матери его.\tБлизко к еврейскому.",
+    "new_row": "26\tПервое из первых плодов земли твоей принеси в дом Господа Бога твоего. Не вари козленка в молоке матери его».\tБлизко к еврейскому.",
+    "reason": "Mark the direct-speech boundary with native quotation marks."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/02_EXO/EXO_034_1.tsv",
+    "verse": 27,
+    "old_row": "27\tИ сказал Господь Моисею: напиши себе слова сии, ибо согласно этим словам Я заключил завет с тобою и с Израилем.\tБлизко к еврейскому.",
+    "new_row": "27\tИ сказал Господь Моисею: «напиши себе слова сии, ибо согласно этим словам Я заключил завет с тобою и с Израилем».\tБлизко к еврейскому.",
+    "reason": "Mark the direct-speech boundary with native quotation marks."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/02_EXO/EXO_035_1.tsv",
+    "verse": 1,
+    "old_row": "1\tИ собрал Моисей все общество сынов Израилевых и сказал им: это слова, которые Господь заповедал исполнять:\tБлизко к еврейскому.",
+    "new_row": "1\tИ собрал Моисей все общество сынов Израилевых и сказал им: «это слова, которые Господь заповедал исполнять:\tБлизко к еврейскому.",
+    "reason": "Mark the direct-speech boundary with native quotation marks."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/02_EXO/EXO_035_1.tsv",
+    "verse": 3,
+    "old_row": "3\tне зажигайте огня во всех жилищах ваших в день субботы.\tНе добавляет «Я Господь».",
+    "new_row": "3\tне зажигайте огня во всех жилищах ваших в день субботы».\tНе добавляет «Я Господь».",
+    "reason": "Mark the direct-speech boundary with native quotation marks."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/02_EXO/EXO_035_1.tsv",
+    "verse": 4,
+    "old_row": "4\tИ сказал Моисей всему обществу сынов Израилевых, говоря: вот слово, которое заповедал Господь, говоря:\tБлизко к еврейскому.",
+    "new_row": "4\tИ сказал Моисей всему обществу сынов Израилевых, говоря: «вот слово, которое заповедал Господь, говоря:\tБлизко к еврейскому.",
+    "reason": "Mark the direct-speech boundary with native quotation marks."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/02_EXO/EXO_035_1.tsv",
+    "verse": 14,
+    "old_row": "14\tи светильник для освещения со всеми принадлежностями его, и лампады его и елей для освещения,\tБлизко к еврейскому.",
+    "new_row": "14\tи светильник для освещения с его принадлежностями, и лампады его и елей для освещения,\tБлизко к еврейскому.",
+    "reason": "Improve native grammar while preserving the Hebrew wording."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/02_EXO/EXO_035_1.tsv",
+    "verse": 17,
+    "old_row": "17\tзавесы двора, столбы его и ее подножия, и завесу у входа во двор,\tБлизко к еврейскому.",
+    "new_row": "17\tзавесы двора, его столбы и его подножия, и завесу у входа во двор,\tБлизко к еврейскому.",
+    "reason": "Improve native grammar while preserving the Hebrew wording."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/02_EXO/EXO_035_1.tsv",
+    "verse": 19,
+    "old_row": "19\tтканые одежды для служения во святилище, и священные одежды Аарону священнику и одежды сынам его для священнодействия.\tБлизко к еврейскому.",
+    "new_row": "19\tтканые одежды для служения во святилище, и священные одежды Аарону священнику и одежды сынам его для священнодействия».\tБлизко к еврейскому.",
+    "reason": "Mark the direct-speech boundary with native quotation marks."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/02_EXO/EXO_035_1.tsv",
+    "verse": 22,
+    "old_row": "22\tи приходили мужчины с женщинами, и все по расположению сердца приносили кольца, серьги, перстни и привески, всякие золотые вещи, и каждый, кто возносил золото как возношение Господу;\tБлизко к еврейскому.",
+    "new_row": "22\tи приходили мужчины с женщинами; все с расположенным сердцем и каждый мужчина, возносивший золото как возношение Господу, приносили кольца, серьги, перстни и привески, всякие золотые вещи;\tБлизко к еврейскому.",
+    "reason": "Improve native grammar while preserving the Hebrew wording."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/02_EXO/EXO_035_1.tsv",
+    "verse": 30,
+    "old_row": "30\tИ сказал Моисей сынам Израилевым: смотрите, Господь призвал по имени Веселеила, сына Урии, сына Ора, из колена Иудина,\tБлизко к еврейскому.",
+    "new_row": "30\tИ сказал Моисей сынам Израилевым: «смотрите, Господь призвал по имени Веселеила, сына Урии, сына Ора, из колена Иудина,\tБлизко к еврейскому.",
+    "reason": "Mark the direct-speech boundary with native quotation marks."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/02_EXO/EXO_036_1.tsv",
+    "verse": 1,
+    "old_row": "1\tИ пусть работают Веселеил и Аголиав и все мудрые сердцем, которым Господь дал мудрость и разумение, чтоб уметь сделать всякую работу, потребную для святилища, согласно всему, что повелел Господь.\tСохраняет поручение вместо завершенного действия.",
+    "new_row": "1\tИ пусть работают Веселеил и Аголиав и все мудрые сердцем, которым Господь дал мудрость и разумение, чтоб уметь сделать всякую работу, потребную для святилища, согласно всему, что повелел Господь».\tСохраняет поручение вместо завершенного действия.",
+    "reason": "Mark the direct-speech boundary with native quotation marks."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/02_EXO/EXO_036_1.tsv",
+    "verse": 5,
+    "old_row": "5\tи сказали Моисею, говоря: народ много приносит, больше, чем достаточно для работ, какие повелел Господь сделать.\tБлизко к еврейскому.",
+    "new_row": "5\tи сказали Моисею, говоря: «народ много приносит, больше, чем достаточно для работ, какие повелел Господь сделать».\tБлизко к еврейскому.",
+    "reason": "Mark the direct-speech boundary with native quotation marks."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/02_EXO/EXO_036_1.tsv",
+    "verse": 6,
+    "old_row": "6\tИ приказал Моисей, и они провели возглас по стану, чтобы ни мужчина, ни женщина не делали уже ничего для приношения во святилище; и народ был удержан от приношения.\tСохраняет возглас и страдательное «был удержан».",
+    "new_row": "6\tИ приказал Моисей, и они провели возглас по стану: «Пусть ни мужчина, ни женщина не делают уже ничего для приношения во святилище»; и народ был удержан от приношения.\tСохраняет возглас и страдательное «был удержан».",
+    "reason": "Mark the direct quotation and leave the following narrative outside it. Close direct speech before the following narrative."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/02_EXO/EXO_036_1.tsv",
+    "verse": 8,
+    "old_row": "8\tИ сделали все мудрые сердцем, среди работников, скинию: десять покрывал из крученого виссона и из голубой, пурпуровой и червленой шерсти; и он сделал их с херувимами искусною работою;\tСохраняет переход от «сделали» к «он сделал».",
+    "new_row": "8\tИ сделали все мудрые сердцем, среди работников, скинию: десять покрывал из крученого виссона и из голубой, пурпуровой и червленой ткани; и он сделал их с херувимами искусною работою;\tСохраняет переход от «сделали» к «он сделал».",
+    "reason": "Do not specify wool when Hebrew only names the dyed material."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/02_EXO/EXO_036_1.tsv",
+    "verse": 19,
+    "old_row": "19\tИ сделал для шатра покров из бараньих кож, окрашенных в красное и покрышку сверху из тахашевых кож.\tБлизко к еврейскому.",
+    "new_row": "19\tИ сделал для шатра покров из бараньих кож, окрашенных в красное, и покрышку сверху из тахашевых кож.\tБлизко к еврейскому.",
+    "reason": "Improve native grammar while preserving the Hebrew wording."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/02_EXO/EXO_036_1.tsv",
+    "verse": 29,
+    "old_row": "29\tи были они спарены внизу и вместе завершены вверху к одному кольцу: так сделал он с ними обоими на обоих углах;\tБлизко к еврейскому.",
+    "new_row": "29\tи были они спарены внизу и вместе были цельными до его верха, до одного кольца: так сделал он с ними обоими на обоих углах;\tБлизко к еврейскому.",
+    "reason": "Improve native grammar while preserving the Hebrew wording."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/02_EXO/EXO_037.tsv",
+    "verse": 15,
+    "old_row": "15\tи сделал шесты из дерева ситтим и обложил их золотом чтобы носить стола.\tБлизко к еврейскому.",
+    "new_row": "15\tи сделал шесты из дерева ситтим и обложил их золотом, чтобы носить стол.\tБлизко к еврейскому.",
+    "reason": "Improve native grammar while preserving the Hebrew wording."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/02_EXO/EXO_037.tsv",
+    "verse": 17,
+    "old_row": "17\tИ сделал светильник из золота чистого, чеканный сделал светильник; стебель его, ствол его, чашечки его, бутоны его и цветы его были из него;\tБлизко к еврейскому.",
+    "new_row": "17\tИ сделал светильник из золота чистого, чеканный сделал светильник; основание его, ствол его, чашечки его, бутоны его и цветы его были из него;\tБлизко к еврейскому.",
+    "reason": "Translate the lampstand base distinctly from its shaft."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/02_EXO/EXO_038_1.tsv",
+    "verse": 29,
+    "old_row": "29\tИ меди возношения, было семьдесят талантов и две тысячи четыреста сиклей;\tБлизко к еврейскому.",
+    "new_row": "29\tИ меди возношения было семьдесят талантов и две тысячи четыреста сиклей;\tБлизко к еврейскому.",
+    "reason": "Improve native grammar while preserving the Hebrew wording."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/02_EXO/EXO_039_1.tsv",
+    "verse": 1,
+    "old_row": "1\tИ из голубой, пурпуровой и червленой шерсти сделали они тканые одежды, для служения во святилище; и сделали священные одежды Аарону, как повелел Господь Моисею.\tБлизко к еврейскому.",
+    "new_row": "1\tИ из голубой, пурпуровой и червленой ткани сделали они тканые одежды, для служения во святилище; и сделали священные одежды Аарону, как повелел Господь Моисею.\tБлизко к еврейскому.",
+    "reason": "Do not specify wool when Hebrew only names the dyed material."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/02_EXO/EXO_039_1.tsv",
+    "verse": 5,
+    "old_row": "5\tИ пояс ефода, который поверх его, был из него, одинаковой с ним работы, из золота, из голубой, пурпуровой и червленой шерсти и крученого виссона, как повелел Господь Моисею.\tБлизко к еврейскому.",
+    "new_row": "5\tИ пояс ефода, который поверх его, был из него, одинаковой с ним работы, из золота, из голубой, пурпуровой и червленой ткани и крученого виссона, как повелел Господь Моисею.\tБлизко к еврейскому.",
+    "reason": "Do not specify wool when Hebrew only names the dyed material."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/02_EXO/EXO_039_1.tsv",
+    "verse": 7,
+    "old_row": "7\tи положил он их на нарамники ефода, как камни памяти сынам Израилевых, как повелел Господь Моисею.\tБлизко к еврейскому.",
+    "new_row": "7\tи положил он их на нарамники ефода, как камни памяти сынам Израилевым, как повелел Господь Моисею.\tБлизко к еврейскому.",
+    "reason": "Improve native grammar while preserving the Hebrew wording."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/02_EXO/EXO_039_1.tsv",
+    "verse": 16,
+    "old_row": "16\tи сделали два золотых гнезда и два золотых кольца и поставили два кольца к двум концам наперсника;\tБлизко к еврейскому.",
+    "new_row": "16\tи сделали два золотых гнезда и два золотых кольца и поставили два кольца на двух концах наперсника;\tБлизко к еврейскому.",
+    "reason": "Improve native grammar while preserving the Hebrew wording."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/02_EXO/EXO_039_1.tsv",
+    "verse": 23,
+    "old_row": "23\tи среди верхней ризы отверстие, как отверстие у брони, и вокруг него обшивку, чтобы она не разрывалась;\tБлизко к еврейскому.",
+    "new_row": "23\tи среди верхней ризы отверстие, как отверстие у брони, и вокруг него обшивка, чтобы она не разрывалась;\tБлизко к еврейскому.",
+    "reason": "Improve native grammar while preserving the Hebrew wording."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/02_EXO/EXO_039_1.tsv",
+    "verse": 30,
+    "old_row": "30\tИ сделали пластину святого диадема, из чистого золота, и начертали на ней письмена, как вырезывают на печати: Святыня Господу;\tБлизко к еврейскому.",
+    "new_row": "30\tИ сделали пластину святого диадема, из чистого золота, и начертали на ней письмена, как вырезывают на печати: «Святыня Господу»;\tБлизко к еврейскому.",
+    "reason": "Mark the direct-speech boundary with native quotation marks."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/02_EXO/EXO_039_2.tsv",
+    "verse": 31,
+    "old_row": "31\tи положили к ней шнур из голубой шерсти, чтобы поместить ее к кидару сверху, как повелел Господь Моисею.\tБлизко к еврейскому.",
+    "new_row": "31\tи положили на нее шнур из голубой ткани, чтобы поместить ее на кидаре сверху, как повелел Господь Моисею.\tБлизко к еврейскому.",
+    "reason": "Improve native grammar while preserving the Hebrew wording."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/02_EXO/EXO_039_2.tsv",
+    "verse": 34,
+    "old_row": "34\tпокров из бараньих кож, окрашенных в красное и покров из тахашевых кож и завесу закрывающую,\tБлизко к еврейскому.",
+    "new_row": "34\tпокров из бараньих кож, окрашенных в красное, и покров из тахашевых кож и завесу закрывающую,\tБлизко к еврейскому.",
+    "reason": "Improve native grammar while preserving the Hebrew wording."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/02_EXO/EXO_040_1.tsv",
+    "verse": 2,
+    "old_row": "2\tв первый месяц, в первый день месяца поставь скинию шатра встречи,\tБлизко к еврейскому.",
+    "new_row": "2\t«в первый месяц, в первый день месяца поставь скинию шатра встречи,\tБлизко к еврейскому.",
+    "reason": "Mark the opening of direct speech following verse 1."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/02_EXO/EXO_040_1.tsv",
+    "verse": 4,
+    "old_row": "4\tи внеси стол и расставь на нем его расположение, и внеси светильник и поставь на нем лампады его;\tБлизко к еврейскому.",
+    "new_row": "4\tи внеси стол и разложи на нем положенное, и внеси светильник и зажги его лампады;\tБлизко к еврейскому.",
+    "reason": "Improve native grammar while preserving the Hebrew wording. Render the idiomatic lamp-lighting action accurately."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/02_EXO/EXO_040_1.tsv",
+    "verse": 10,
+    "old_row": "10\tи помажь жертвенник всесожжения и все принадлежности его, и освяти жертвенник, и будет жертвенник святое святых;\tБлизко к еврейскому.",
+    "new_row": "10\tи помажь жертвенник всесожжения и все принадлежности его, и освяти жертвенник, и будет жертвенник святыней святынь;\tБлизко к еврейскому.",
+    "reason": "Improve native grammar while preserving the Hebrew wording."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/02_EXO/EXO_040_1.tsv",
+    "verse": 15,
+    "old_row": "15\tи помажь их, как помазал ты отца их, и они будут священнодействовать Мне, и помазание их будет для них вечным священством в роды их.\tБлизко к еврейскому.",
+    "new_row": "15\tи помажь их, как помазал ты отца их, и они будут священнодействовать Мне, и помазание их будет для них вечным священством в роды их».\tБлизко к еврейскому.",
+    "reason": "Mark the direct-speech boundary with native quotation marks."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/02_EXO/EXO_040_1.tsv",
+    "verse": 29,
+    "old_row": "29\tи жертвенник всесожжение поставил у входа в скинию шатра встречи и принес на нем всесожжение и приношение хлебное, как повелел Господь Моисею.\tСохраняет всесожжение в единственном числе.",
+    "new_row": "29\tи жертвенник всесожжения поставил у входа в скинию шатра встречи и принес на нем всесожжение и приношение хлебное, как повелел Господь Моисею.\tСохраняет всесожжение в единственном числе.",
+    "reason": "Improve native grammar while preserving the Hebrew wording."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/02_EXO/EXO_040_2.tsv",
+    "verse": 32,
+    "old_row": "32\tкогда они входили в шатер встречи и подходили к жертвеннику омывались, как повелел Господь Моисею.\tНе добавляет «служить».",
+    "new_row": "32\tкогда они входили в шатер встречи и подходили к жертвеннику, омывались, как повелел Господь Моисею.\tНе добавляет «служить».",
+    "reason": "Improve native grammar while preserving the Hebrew wording."
+  }
+]

@@ -1,0 +1,32 @@
+[
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/09_1SA/1SA_020_1.tsv",
+    "verse": 27,
+    "old_row": "27\tИ было на следующий день, второй день новомесячия, и места Давида недосчитались; и Саул сказал Ионафану, своему сыну: «Почему сын Иессея не пришёл к хлебу ни вчера, ни сегодня?»\tМестоимение его при имени отца не заменяет прямого имени Иессея; пища названа хлебом.",
+    "new_row": "27\tИ было на следующий день, второй день новомесячия, и места Давида недосчитались; и Саул сказал Ионафану, своему сыну: «Почему сын Иессея не пришёл к хлебу ни вчера, ни сегодня?»\tПища названа хлебом."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/09_1SA/1SA_020_1.tsv",
+    "verse": 25,
+    "old_row": "25\tИ царь сел на своё место, как раз за разом, на место у стены; и Ионафан встал, и Авенир сел возле Саула, и места Давида недосчитались.\tБлизко к еврейскому.",
+    "new_row": "25\tИ царь сел на своё место, как всякий раз, на место у стены; и Ионафан встал, и Авенир сел возле Саула, и места Давида недосчитались.\tБлизко к еврейскому."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/09_1SA/1SA_020_1.tsv",
+    "verse": 25,
+    "old_row": "25\tUnd der König saß auf seinem Sitz wie Mal um Mal, auf dem Sitz an der Wand; und Jonathan stand auf, und Abner saß an Sauls Seite, und Davids Platz wurde vermisst.\tNah am Hebräischen.",
+    "new_row": "25\tUnd der König saß auf seinem Sitz wie jedes Mal, auf dem Sitz an der Wand; und Jonathan stand auf, und Abner saß an Sauls Seite, und Davids Platz wurde vermisst.\tNah am Hebräischen."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/09_1SA/1SA_020_2.tsv",
+    "verse": 31,
+    "old_row": "31\tИбо во все дни, пока сын Иессея живёт на земле, не будешь утверждён ты и твоё царство. И теперь пошли и возьми его ко мне, ибо он сын смерти».\tПредназначение смерти выражено образом сына смерти.",
+    "new_row": "31\tИбо во все дни, пока сын Иессея живёт на земле, не будешь утверждён ты и твоё царство. И теперь пошли и приведи его ко мне, ибо он сын смерти».\tПредназначение смерти выражено образом сына смерти."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/09_1SA/1SA_020_2.tsv",
+    "verse": 35,
+    "old_row": "35\tИ было утром, и Ионафан вышел в поле к условленному времени с Давидом, и малый отрок с ним.\tОтдельного «на другой день» нет; названо условленное время с Давидом.",
+    "new_row": "35\tИ было утром, и Ионафан вышел в поле на встречу с Давидом в условленное время, и малый отрок с ним.\tОтдельного «на другой день» нет; названо условленное время с Давидом."
+  }
+]

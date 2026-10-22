@@ -1,0 +1,65 @@
+{
+  "book": "16_NEH",
+  "assigned": {
+    "de": [
+      10,
+      12
+    ],
+    "ru": [
+      10,
+      12
+    ]
+  },
+  "new_files": [
+    {
+      "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/16_NEH/NEH_010_1.tsv",
+      "rows": 30
+    },
+    {
+      "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/16_NEH/NEH_010_2.tsv",
+      "rows": 9
+    },
+    {
+      "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/16_NEH/NEH_010_1.tsv",
+      "rows": 30
+    },
+    {
+      "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/16_NEH/NEH_010_2.tsv",
+      "rows": 9
+    },
+    {
+      "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/16_NEH/NEH_011_1.tsv",
+      "rows": 30
+    },
+    {
+      "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/16_NEH/NEH_011_2.tsv",
+      "rows": 6
+    },
+    {
+      "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/16_NEH/NEH_011_1.tsv",
+      "rows": 30
+    },
+    {
+      "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/16_NEH/NEH_011_2.tsv",
+      "rows": 6
+    },
+    {
+      "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/16_NEH/NEH_012_1.tsv",
+      "rows": 30
+    },
+    {
+      "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/16_NEH/NEH_012_2.tsv",
+      "rows": 17
+    },
+    {
+      "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/16_NEH/NEH_012_1.tsv",
+      "rows": 30
+    },
+    {
+      "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/16_NEH/NEH_012_2.tsv",
+      "rows": 17
+    }
+  ],
+  "status": "native_generated_and_reviewed_root_QA_pending",
+  "qa_rows": 6
+}

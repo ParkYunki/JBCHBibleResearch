@@ -1,0 +1,80 @@
+[
+  {
+    "path": "Tools/LiteralGen/outputs/de/11_1KI/1KI_001_1.tsv",
+    "verse": 13,
+    "old_row": "13\tGeh und tritt bei König David ein und sage zu ihm: ‚Hast nicht du, mein Herr, der König, deiner Magd geschworen: Mein Sohn Salomo, dein Sohn, wird nach mir König sein, und er wird auf meinem Thron sitzen? Und warum ist Adonia König geworden?‘\tNah am Hebräischen.",
+    "new_row": "13\tGeh und tritt bei König David ein und sage zu ihm: ‚Hast nicht du, mein Herr, der König, deiner Magd geschworen: Dein Sohn Salomo wird nach mir König sein, und er wird auf meinem Thron sitzen? Und warum ist Adonia König geworden?‘\tNah am Hebräischen."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/11_1KI/1KI_001_1.tsv",
+    "verse": 2,
+    "old_row": "2\tИ его рабы сказали ему: «Пусть поищут для моего господина, царя, молодую девушку, девственницу; и она будет стоять перед царём и будет ему ухаживающей, и будет лежать в твоём лоне, и моему господину, царю, будет тепло».\tЕврейский текст прямо называет девственницу и твоё лоно; господин назван «моим», не «нашим».",
+    "new_row": "2\tИ его рабы сказали ему: «Пусть поищут для моего господина, царя, молодую девушку, девственницу; и она будет стоять перед царём и будет ухаживать за ним, и будет лежать в твоём лоне, и моему господину, царю, будет тепло».\tЕврейский текст прямо называет девственницу и твоё лоно; господин назван «моим», не «нашим»."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/11_1KI/1KI_001_1.tsv",
+    "verse": 12,
+    "old_row": "12\tИ теперь иди, дай мне, пожалуйста, посоветовать тебе совет, и спаси твою душу и душу твоего сына Соломона!\tСохранён призыв идти, просьба и повтор совета; жизнь названа душой.",
+    "new_row": "12\tИ теперь иди, позволь мне, пожалуйста, дать тебе совет, и спаси твою душу и душу твоего сына Соломона!\tСохранены призыв идти и просьба; жизнь названа душой."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/11_1KI/1KI_002_2.tsv",
+    "verse": 44,
+    "old_row": "44\tUnd der König sagte zu Simei: „Du weißt all das Böse, dessen dein Herz bewusst ist, das du David, meinem Vater, getan hast; und der HERR wird dein Böses auf deinen Kopf zurückbringen.\tDas Zurückbringen des Bösen wird im Hebräischen als folgendes Geschehen beschrieben.",
+    "new_row": "44\tUnd der König sagte zu Simei: „Du weißt all das Böse, das dein Herz kennt, das du David, meinem Vater, getan hast; und der HERR wird dein Böses auf deinen Kopf zurückbringen.\tDas Zurückbringen des Bösen wird im Hebräischen als folgendes Geschehen beschrieben."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/11_1KI/1KI_002_1.tsv",
+    "verse": 26,
+    "old_row": "26\tА Авиафару, священнику, царь сказал: «Иди в Анафоф на твои поля, ибо ты мужчина смерти; но в этот день я не умерщвлю тебя, ибо ты носил ковчег Владыки Господа перед Давидом, моим отцом, и страдал во всём, в чём страдал мой отец».\tЕврейский текст называет поля во множественном числе и этот день.",
+    "new_row": "26\tА Авиафару, священнику, царь сказал: «Иди в Анафоф на твои поля, ибо ты человек смерти; но в этот день я не умерщвлю тебя, ибо ты носил ковчег Владыки Господа перед Давидом, моим отцом, и страдал во всём, в чём страдал мой отец».\tЕврейский текст называет поля во множественном числе и этот день."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/11_1KI/1KI_002_1.tsv",
+    "verse": 27,
+    "old_row": "27\tИ Соломон изгнал Авиафара от священства Господу, чтобы исполнить слово Господа, которое Он говорил о доме Илия в Силоме.\tЕврейский текст прямо выражает цель исполнения слова.",
+    "new_row": "27\tИ Соломон удалил Авиафара от служения священником Господа, чтобы исполнить слово Господа, которое Он говорил о доме Илия в Силоме.\tЕврейский текст прямо выражает цель исполнения слова."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/11_1KI/1KI_003.tsv",
+    "verse": 9,
+    "old_row": "9\tИ дай Твоему рабу слышащее сердце, чтобы судить Твой народ, чтобы различать между добром и злом; ибо кто сможет судить этот Твой весомый народ?»\tЕврейский текст называет слышащее сердце и дважды говорит о суде.",
+    "new_row": "9\tИ дай Твоему рабу слышащее сердце, чтобы судить Твой народ, чтобы различать между добром и злом; ибо кто сможет судить этот Твой великий народ?»\tЕврейский текст называет слышащее сердце и дважды говорит о суде."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/11_1KI/1KI_003.tsv",
+    "verse": 18,
+    "old_row": "18\tUnd es geschah am dritten Tag nach meiner Geburt, da gebar auch diese Frau; und wir waren beisammen, kein Fremder war bei uns im Haus, außer uns beiden im Haus.\tDas Hebräische nennt den dritten Tag und wiederholt das Haus.",
+    "new_row": "18\tUnd es geschah am dritten Tag nach meiner Entbindung, da gebar auch diese Frau; und wir waren beisammen, kein Fremder war bei uns im Haus, außer uns beiden im Haus.\tDas Hebräische nennt den dritten Tag und wiederholt das Haus."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/11_1KI/1KI_003.tsv",
+    "verse": 26,
+    "old_row": "26\tUnd die Frau, deren Sohn der lebende war, sagte zum König, denn ihr Erbarmen war über ihren Sohn entbrannt: „Bitte, mein Herr, gebt ihr das lebende Kind und tötet es keinesfalls!“ Diese aber sagte: „Weder mir noch dir soll es gehören; schneidet es!“\tDas Hebräische nennt Erbarmen statt eines mütterlichen Herzens; die Verneinung des Tötens ist bekräftigt.",
+    "new_row": "26\tUnd die Frau, deren Sohn der lebende war, sagte zum König, denn ihr Erbarmen war für ihren Sohn entbrannt: „Bitte, mein Herr, gebt ihr das lebende Kind und tötet es keinesfalls!“ Diese aber sagte: „Weder mir noch dir soll es gehören; schneidet es!“\tDas Hebräische nennt Erbarmen statt eines mütterlichen Herzens; die Verneinung des Tötens ist bekräftigt."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/11_1KI/1KI_003.tsv",
+    "verse": 26,
+    "old_row": "26\tИ женщина, чей сын был живым, сказала царю, ибо её сострадание согрелось к её сыну: «Прошу, мой господин, дайте ей живого ребёнка и ни в коем случае не умерщвляйте его!» А эта говорила: «Ни мне, ни тебе пусть не будет; рассеките!»\tЕврейский текст называет согревшееся сострадание и усиливает запрет умерщвления.",
+    "new_row": "26\tИ женщина, чей сын был живым, сказала царю, ибо в ней разгорелось сострадание к её сыну: «Прошу, мой господин, дайте ей живого ребёнка и ни в коем случае не умерщвляйте его!» А эта говорила: «Ни мне, ни тебе пусть не будет; рассеките!»\tЕврейский текст называет согревшееся сострадание и усиливает запрет умерщвления."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/11_1KI/1KI_005.tsv",
+    "verse": 13,
+    "old_row": "13\tИ царь Соломон набрал повинность со всего Израиля, и повинность составила тридцать тысяч мужчин.\tБлизко к еврейскому.",
+    "new_row": "13\tИ царь Соломон набрал со всего Израиля людей на повинность, и повинность составила тридцать тысяч мужчин.\tБлизко к еврейскому."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/en/11_1KI/1KI_002_1.tsv",
+    "verse": 29,
+    "old_row": "29\t=\tThe Hebrew explicitly repeats Solomon as sender; BSB does so too.",
+    "new_row": "29\t=\tClose to the Hebrew."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/en/11_1KI/1KI_001_2.tsv",
+    "verse": 43,
+    "old_row": "43\t=\tThe Hebrew begins with an affirmative “indeed”; BSB has “Not at all.”",
+    "new_row": "43\t=\tClose to the Hebrew."
+  }
+]

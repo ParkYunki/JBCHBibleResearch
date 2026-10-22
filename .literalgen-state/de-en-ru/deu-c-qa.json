@@ -1,0 +1,268 @@
+[
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/05_DEU/DEU_024.tsv",
+    "verse": 1,
+    "old_row": "1\tWenn ein Mann eine Frau nimmt und sie heiratet und es geschieht, dass sie keine Gunst in seinen Augen findet, weil er etwas Blößendes an ihr gefunden hat, und er ihr einen Scheidebrief schreibt und ihn in ihre Hand gibt und sie aus seinem Haus entlässt,\tBewahrt das Nichtfinden von Gunst in seinen Augen.",
+    "new_row": "1\tWenn ein Mann eine Frau nimmt und sie heiratet und es geschieht, dass sie keine Gunst in seinen Augen findet, weil er irgendeine Blöße an ihr gefunden hat, und er ihr einen Scheidebrief schreibt und ihn in ihre Hand gibt und sie aus seinem Haus entlässt,\tBewahrt das Nichtfinden von Gunst in seinen Augen.",
+    "reason": "Use a native German noun for the indecency while retaining the image of nakedness."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/05_DEU/DEU_024.tsv",
+    "verse": 7,
+    "old_row": "7\tWenn ein Mann gefunden wird, der eine Seele von seinen Brüdern, von den Söhnen Israels, stiehlt und sie als Sklaven behandelt und verkauft, dann soll jener Dieb sterben; und du sollst das Böse aus deiner Mitte wegschaffen.\tBewahrt die Verbindung mit und statt oder.",
+    "new_row": "7\tWenn ein Mann gefunden wird, der eine Seele von seinen Brüdern, von den Söhnen Israels, stiehlt und sie versklavt und verkauft, dann soll jener Dieb sterben; und du sollst das Böse aus deiner Mitte wegschaffen.\tBewahrt die Verbindung mit und statt oder.",
+    "reason": "Avoid the mismatched plural slave complement with a singular soul."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/05_DEU/DEU_028_2.tsv",
+    "verse": 54,
+    "old_row": "54\tDer zarte und sehr verwöhnte Mann unter dir wird mit bösem Auge auf seinen Bruder und die Frau an seinem Busen und den Rest seiner Söhne blicken, den er übrig behält,\tBewahrt das böse Auge und die übrigen Söhne im Plural.",
+    "new_row": "54\tDer zarte und sehr verwöhnte Mann in deiner Mitte wird mit bösem Auge auf seinen Bruder und die Frau an seinem Busen und den Rest seiner Söhne blicken, den er übrig behält,\tBewahrt das böse Auge und die übrigen Söhne im Plural.",
+    "reason": "Use native German for among the singular collective addressee."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/05_DEU/DEU_028_2.tsv",
+    "verse": 56,
+    "old_row": "56\tDie zarte und verwöhnte Frau unter dir, die aus Verwöhntheit und Zartheit nicht versucht hat, ihre Fußsohle auf die Erde zu setzen, wird mit bösem Auge auf den Mann an ihrem Busen und ihren Sohn und ihre Tochter blicken\tBewahrt das böse Auge.",
+    "new_row": "56\tDie zarte und verwöhnte Frau in deiner Mitte, die aus Verwöhntheit und Zartheit nicht versucht hat, ihre Fußsohle auf die Erde zu setzen, wird mit bösem Auge auf den Mann an ihrem Busen und ihren Sohn und ihre Tochter blicken\tBewahrt das böse Auge.",
+    "reason": "Use native German for among the singular collective addressee."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/05_DEU/DEU_028_3.tsv",
+    "verse": 62,
+    "old_row": "62\tUnd ihr werdet mit wenigen Männern übrig bleiben, statt dass ihr wie die Sterne des Himmels an Menge wart, weil du nicht auf die Stimme des HERRN, deines Gottes, gehört hast.\tNah am Hebräischen.",
+    "new_row": "62\tUnd ihr werdet als wenige Männer übrig bleiben, obwohl ihr an Menge wie die Sterne des Himmels wart, weil du nicht auf die Stimme des HERRN, deines Gottes, gehört hast.\tNah am Hebräischen.",
+    "reason": "Express the survivors themselves as few men, rather than survivors accompanied by a few men; retain the past comparison and singular/plural shifts."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/05_DEU/DEU_031.tsv",
+    "verse": 9,
+    "old_row": "9\tUnd Mose schrieb dieses Gesetz und gab es den Priestern, den Söhnen Levis, die die Lade des Bundes des HERRN tragen, und allen Ältesten Israels.\tBewahrt die Lade des Bundes des HERRN und das gegenwärtige Tragen.",
+    "new_row": "9\tUnd Mose schrieb dieses Gesetz und gab es den Priestern, den Söhnen Levis, die die Lade des Bundes des HERRN tragen, und allen Ältesten Israels.\tBewahrt die Lade des Bundes des HERRN.",
+    "reason": "A participle describing carriers does not independently establish a present-versus-past difference; retain the definite LORD omission."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/05_DEU/DEU_031.tsv",
+    "verse": 21,
+    "old_row": "21\tUnd es soll geschehen: Wenn viele Übel und Bedrängnisse es treffen, wird dieses Lied vor ihm als Zeuge antworten, denn es wird nicht aus dem Mund seines Samens vergessen werden; denn ich kenne sein Sinnen, das es heute betreibt, ehe ich es in das Land bringe, das ich geschworen habe.“\tBewahrt den Samen im Singular.",
+    "new_row": "21\tUnd es soll geschehen: Wenn viele Übel und Bedrängnisse es treffen, wird dieses Lied vor ihm als Zeuge antworten, denn es wird im Mund seines Samens nicht vergessen werden; denn ich kenne sein Sinnen, das es heute betreibt, ehe ich es in das Land bringe, das ich geschworen habe.“\tBewahrt den Samen im Singular.",
+    "reason": "Use the native locative complement with being forgotten while retaining the mouth and passive voice."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/05_DEU/DEU_032_1.tsv",
+    "verse": 24,
+    "old_row": "24\tAusgezehrt vom Hunger und verzehrt von Glut und bitterer Vernichtung, und den Zahn der Tiere werde ich gegen sie senden mit dem Gift dessen, was im Staub kriecht.\tBewahrt die bitterliche Vernichtung und die im Staub kriechenden Tiere.",
+    "new_row": "24\tSie werden vom Hunger ausgezehrt und von Glut und bitterer Vernichtung verzehrt sein; und den Zahn der Tiere werde ich gegen sie senden mit dem Gift dessen, was im Staub kriecht.\tBewahrt die im Staub kriechenden Tiere.",
+    "reason": "Supply the implied subject and copula for native German; avoid a definite rare-word lexical contrast in the note."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/05_DEU/DEU_032_2.tsv",
+    "verse": 51,
+    "old_row": "51\tweil ihr mir untreu gehandelt habt inmitten der Söhne Israels am Wasser von Meribath-Kades in der Wüste Zin, weil ihr mich nicht geheiligt habt inmitten der Söhne Israels.\tWiederholt weil und inmitten der Söhne Israels.",
+    "new_row": "51\tweil ihr mir untreu gehandelt habt inmitten der Söhne Israels am Wasser von Meribath-Kades in der Wüste Zin, weil ihr mich nicht geheiligt habt inmitten der Söhne Israels.\tNah am Hebräischen.",
+    "reason": "TARGET already repeats the reason and in the midst of the sons of Israel, so the note is not an actual difference."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/05_DEU/DEU_033.tsv",
+    "verse": 13,
+    "old_row": "13\tUnd zu Joseph sagte er: „Gesegnet vom HERRN sei sein Land vom Köstlichen des Himmels, vom Tau und von der Tiefe, die unten lagert,\tNah am Hebräischen.",
+    "new_row": "13\tUnd zu Joseph sagte er: „Gesegnet vom HERRN sei sein Land mit dem Köstlichen des Himmels, mit dem Tau und mit der Tiefe, die unten lagert,\tNah am Hebräischen.",
+    "reason": "Use native instrumental with for the resources blessing the land."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/05_DEU/DEU_033.tsv",
+    "verse": 14,
+    "old_row": "14\tund vom Köstlichen der Erträge der Sonne und vom Köstlichen des Ertrags der Monate\tBewahrt die Monate.",
+    "new_row": "14\tund mit dem Köstlichen der Erträge der Sonne und mit dem Köstlichen des Ertrags der Monate\tBewahrt die Monate.",
+    "reason": "Continue the native instrumental construction for the resources blessing the land."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/05_DEU/DEU_033.tsv",
+    "verse": 15,
+    "old_row": "15\tund vom Besten der uralten Berge und vom Köstlichen der ewigen Hügel\tNah am Hebräischen.",
+    "new_row": "15\tund mit dem Besten der uralten Berge und mit dem Köstlichen der ewigen Hügel\tNah am Hebräischen.",
+    "reason": "Continue the native instrumental construction for the resources blessing the land."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/05_DEU/DEU_033.tsv",
+    "verse": 16,
+    "old_row": "16\tund vom Köstlichen der Erde und ihrer Fülle und vom Wohlgefallen dessen, der im Dornbusch wohnt; es komme auf das Haupt Josephs und auf den Scheitel des Geweihten seiner Brüder.\tBewahrt die Fülle und das gegenwärtige Wohnen.",
+    "new_row": "16\tund mit dem Köstlichen der Erde und ihrer Fülle und mit dem Wohlgefallen dessen, der im Dornbusch wohnt; es komme auf das Haupt Josephs und auf den Scheitel des Geweihten seiner Brüder.\tNah am Hebräischen.",
+    "reason": "Continue the native instrumental construction; the participle dwelling does not establish a present-versus-past difference by itself."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/05_DEU/DEU_033.tsv",
+    "verse": 24,
+    "old_row": "24\tUnd zu Asser sagte er: „Mehr als die Söhne sei Asser gesegnet; er sei seinen Brüdern angenehm und tauche seinen Fuß in Öl.\tBewahrt die Bevorzugung gegenüber den Söhnen und das Wohlgefallen der Brüder.",
+    "new_row": "24\tUnd zu Asser sagte er: „Mehr als die Söhne sei Asser gesegnet; er sei seinen Brüdern angenehm und tauche seinen Fuß in Öl.\tBewahrt das Wohlgefallen der Brüder.",
+    "reason": "Limit the note to the definitely omitted favor among the brothers without fixing an uncertain comparative interpretation."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/05_DEU/DEU_033.tsv",
+    "verse": 25,
+    "old_row": "25\tEisen und Bronze seien deine Riegel, und wie deine Tage sei deine Kraft.“\tBewahrt deine Tage und deine Kraft.",
+    "new_row": "25\tEisen und Bronze seien deine Riegel, und wie deine Tage sei deine Kraft.“\tBewahrt deine Tage.",
+    "reason": "Limit the note to days versus age and youth, without asserting the sense of a rare noun as certain."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/05_DEU/DEU_033.tsv",
+    "verse": 29,
+    "old_row": "29\tWohl dir, Israel! Wer ist wie du, ein Volk, das durch den HERRN gerettet ist, den Schild deiner Hilfe und der das Schwert deiner Hoheit ist! Und deine Feinde werden sich dir schmeichelnd beugen, und du wirst auf ihre Höhen treten.“\tBewahrt die Feinde, die sich beugen.",
+    "new_row": "29\tWohl dir, Israel! Wer ist wie du, ein Volk, das durch den HERRN gerettet ist, den Schild deiner Hilfe und das Schwert deiner Hoheit! Und deine Feinde werden sich dir schmeichelnd beugen, und du wirst auf ihre Höhen treten.“\tBewahrt die Feinde, die sich beugen.",
+    "reason": "Use parallel accusative appositions agreeing with the LORD after durch."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/en/05_DEU/DEU_028_1.tsv",
+    "verse": 1,
+    "old_row": "1\t=\tRetains listening to the voice with emphasis.",
+    "new_row": "1\t=\tClose to the Hebrew.",
+    "reason": "TARGET faithfully obey already conveys the emphasis, so the note does not establish a clear difference."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/en/05_DEU/DEU_029.tsv",
+    "verse": 19,
+    "old_row": "19\t=\tRetains blessing himself in his heart and the resulting sweeping away.",
+    "new_row": "19\t=\tRetains blessing himself in his heart.",
+    "reason": "Limit the note to a definite omission of in his heart without interpreting the poetic result clause."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/en/05_DEU/DEU_029.tsv",
+    "verse": 21,
+    "old_row": "21\t=\tRetains the covenant as written.",
+    "new_row": "21\t=\tClose to the Hebrew.",
+    "reason": "TARGET covenant written permits the same attachment as the Hebrew; no definite wording difference is established."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/05_DEU/DEU_024.tsv",
+    "verse": 7,
+    "old_row": "7\tЕсли будет найден мужчина, который крадет душу из своих братьев, из сынов Израилевых, и обращается с ним как с рабом, и продает его, то тот вор должен умереть; и устрани зло из своей среды.\tСохраняет пассивное обнаружение человека.",
+    "new_row": "7\tЕсли будет найден мужчина, который крадет душу из своих братьев, из сынов Израилевых, и порабощает ее, и продает ее, то тот вор должен умереть; и устрани зло из своей среды.\tСохраняет пассивное обнаружение человека.",
+    "reason": "Keep the soul as the grammatically feminine singular object consistently."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/05_DEU/DEU_028_2.tsv",
+    "verse": 54,
+    "old_row": "54\tНежный и весьма изнеженный мужчина среди тебя будет смотреть злым глазом на своего брата и на жену своего недра и на остаток своих сыновей, которых оставит,\tСохраняет нежность и злой глаз.",
+    "new_row": "54\tНежный и весьма изнеженный мужчина в твоей среде будет смотреть злым глазом на своего брата и на жену своего недра и на остаток своих сыновей, которых оставит,\tСохраняет нежность и злой глаз.",
+    "reason": "Use native Russian for among the singular collective addressee."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/05_DEU/DEU_028_2.tsv",
+    "verse": 56,
+    "old_row": "56\tНежная и изнеженная женщина среди тебя, которая не пыталась поставить подошву своей ноги на землю от изнеженности и нежности, будет смотреть злым глазом на мужа своего недра и на своего сына и на свою дочь\tСохраняет отсутствие попытки поставить подошву ноги и злой глаз.",
+    "new_row": "56\tНежная и изнеженная женщина в твоей среде, которая не пыталась поставить подошву своей ноги на землю от изнеженности и нежности, будет смотреть злым глазом на мужа своего недра и на своего сына и на свою дочь\tСохраняет отсутствие попытки поставить подошву ноги и злой глаз.",
+    "reason": "Use native Russian for among the singular collective addressee."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/05_DEU/DEU_028_3.tsv",
+    "verse": 62,
+    "old_row": "62\tИ вы останетесь с немногими людьми, вместо того чтобы быть множеством, как звезды небес, потому что ты не слушал голоса Господа, твоего Бога.\tБлизко к еврейскому.",
+    "new_row": "62\tИ вы останетесь немногими людьми, тогда как вы были многочисленны, как звезды небес, потому что ты не слушал голоса Господа, твоего Бога.\tБлизко к еврейскому.",
+    "reason": "Express the survivors themselves as few men, rather than survivors accompanied by a few men; retain the past comparison and singular/plural shifts."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/05_DEU/DEU_030.tsv",
+    "verse": 6,
+    "old_row": "6\tИ Господь, твой Бог, обрежет твое сердце и сердце твоего семени, чтобы любить Господа, твоего Бога, всем твоим сердцем и всей твоей душой, ради твоей жизни.\tБлизко к еврейскому.",
+    "new_row": "6\tИ Господь, твой Бог, обрежет твое сердце и сердце твоего семени, чтобы ты любил Господа, твоего Бога, всем твоим сердцем и всей твоей душой, ради твоей жизни.\tБлизко к еврейскому.",
+    "reason": "Make the subject of loving explicit in native Russian so it is not attached to the circumcising subject."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/05_DEU/DEU_031.tsv",
+    "verse": 14,
+    "old_row": "14\tИ Господь сказал Моисею: «Вот, твои дни умереть приблизились; призови Иисуса и станьте в шатре встречи, чтобы Я дал ему поручение». И Моисей и Иисус пошли и стали в шатре встречи.\tНе добавляет входа; сохраняет шатер встречи.",
+    "new_row": "14\tИ Господь сказал Моисею: «Вот, приблизились дни твоей смерти; призови Иисуса и станьте в шатре встречи, чтобы Я дал ему поручение». И Моисей и Иисус пошли и стали в шатре встречи.\tНе добавляет входа; сохраняет шатер встречи.",
+    "reason": "Express days approaching death in native Russian without a bare infinitive after days."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/05_DEU/DEU_031.tsv",
+    "verse": 21,
+    "old_row": "21\tИ будет: когда многие бедствия и тесноты найдут его, эта песня ответит перед ним как свидетель, ибо она не будет забыта из уст его семени; ибо Я знаю его замысел, который он делает сегодня, прежде чем Я приведу его в землю, о которой Я поклялся».\tНе добавляет из уст их, добрую и отцам их; сохраняет будущее введение.",
+    "new_row": "21\tИ будет: когда многие бедствия и тесноты найдут его, эта песня ответит перед ним как свидетель, ибо она не забудется в устах его семени; ибо Я знаю его замысел, который он вынашивает сегодня, прежде чем Я приведу его в землю, о которой Я поклялся».\tНе добавляет из уст их, добрую и отцам их; сохраняет будущее введение.",
+    "reason": "Use native Russian complements for remembering the song in the mouth and forming an intention."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/05_DEU/DEU_032_1.tsv",
+    "verse": 17,
+    "old_row": "17\tОни приносили жертвы бесам, не Богу, богам, которых они не знали, новым, недавно пришедшим, перед которыми ваши отцы не трепетали.\tСохраняет недавнее прибытие.",
+    "new_row": "17\tОни приносили жертвы бесам, не Богу, богам, которых они не знали, новым, недавно пришедшим, перед которыми ваши отцы не трепетали.\tБлизко к еврейскому.",
+    "reason": "Do not assert a temporal-versus-spatial interpretation of from near as an unequivocal lexical difference in poetry."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/05_DEU/DEU_032_1.tsv",
+    "verse": 24,
+    "old_row": "24\tИстощенные голодом и пожранные жаром и горькой погибелью, и зуб зверей Я пошлю на них с ядом ползающих в прахе.\tСохраняет прах.",
+    "new_row": "24\tОни будут истощены голодом и пожраны жаром и горькой погибелью; и зуб зверей Я пошлю на них с ядом ползающих в прахе.\tСохраняет прах.",
+    "reason": "Supply the implied subject and copula rather than leaving an unattached nominative participial phrase."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/05_DEU/DEU_032_2.tsv",
+    "verse": 51,
+    "old_row": "51\tза то, что вы поступили неверно против Меня среди сынов Израилевых при водах Мериват-Кадеса в пустыне Син, за то, что вы не освятили Меня среди сынов Израилевых.\tПовторяет за то, что и среди сынов Израилевых.",
+    "new_row": "51\tза то, что вы поступили неверно против Меня среди сынов Израилевых при водах Мериват-Кадеса в пустыне Син, за то, что вы не освятили Меня среди сынов Израилевых.\tБлизко к еврейскому.",
+    "reason": "TARGET already repeats the reason and in the midst of the sons of Israel, so the note is not an actual difference."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/05_DEU/DEU_033.tsv",
+    "verse": 13,
+    "old_row": "13\tИ об Иосифе он сказал: «Благословенна Господом его земля от драгоценного дара небес, от росы и от бездны, лежащей внизу,\tБлизко к еврейскому.",
+    "new_row": "13\tИ об Иосифе он сказал: «Благословенна Господом его земля драгоценным даром небес, росой и бездной, лежащей внизу,\tБлизко к еврейскому.",
+    "reason": "Use native Russian instrumental for the gifts blessing the land."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/05_DEU/DEU_033.tsv",
+    "verse": 14,
+    "old_row": "14\tи от драгоценного дара урожаев солнца и от драгоценного дара произведения месяцев,\tСохраняет месяцы во множественном числе.",
+    "new_row": "14\tи драгоценным даром урожаев солнца и драгоценным даром произведения месяцев,\tСохраняет месяцы во множественном числе.",
+    "reason": "Continue the native instrumental construction for the gifts blessing the land."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/05_DEU/DEU_033.tsv",
+    "verse": 15,
+    "old_row": "15\tи от лучшего древних гор и от драгоценного дара вечных холмов,\tБлизко к еврейскому.",
+    "new_row": "15\tи лучшим древних гор и драгоценным даром вечных холмов,\tБлизко к еврейскому.",
+    "reason": "Continue the native instrumental construction for the gifts blessing the land."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/05_DEU/DEU_033.tsv",
+    "verse": 16,
+    "old_row": "16\tи от драгоценного дара земли и того, что ее наполняет, и от благоволения Обитающего в кусте; пусть это придет на голову Иосифа и на темя посвященного среди его братьев.\tСохраняет благоволение Обитающего и посвященного.",
+    "new_row": "16\tи драгоценным даром земли и того, что ее наполняет, и благоволением Обитающего в кусте; пусть это придет на голову Иосифа и на темя посвященного среди его братьев.\tСохраняет благоволение Обитающего и посвященного.",
+    "reason": "Continue the native instrumental construction for the gifts blessing the land."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/05_DEU/DEU_033.tsv",
+    "verse": 24,
+    "old_row": "24\tИ об Асире он сказал: «Более сынов благословен Асир; пусть будет угоден своим братьям и окунает свою ногу в масло.\tСохраняет сравнительное благословение.",
+    "new_row": "24\tИ об Асире он сказал: «Более сынов благословен Асир; пусть будет угоден своим братьям и окунает свою ногу в масло.\tБлизко к еврейскому.",
+    "reason": "Do not assert the comparative reading of the preposition as a definite contrast in poetry."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/05_DEU/DEU_033.tsv",
+    "verse": 29,
+    "old_row": "29\tБлажен ты, Израиль! Кто подобен тебе, народ, спасенный Господом, щитом твоей помощи, и Который — меч твоего величия! И твои враги будут лживо покоряться тебе, а ты будешь ступать на их высоты».\tСохраняет спасение и высоты вместо шей.",
+    "new_row": "29\tБлажен ты, Израиль! Кто подобен тебе, народ, спасенный Господом, щитом твоей помощи и мечом твоего величия! И твои враги будут лживо покоряться тебе, а ты будешь ступать на их высоты».\tСохраняет спасение и высоты вместо шей.",
+    "reason": "Use parallel instrumental appositions agreeing with the LORD."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/05_DEU/DEU_034.tsv",
+    "verse": 6,
+    "old_row": "6\tИ Он похоронил его в долине в земле Моава напротив Беф-Фегора, и никто не знает его погребения до этого дня.\tСохраняет активное погребение с невыраженным подлежащим.",
+    "new_row": "6\tИ Он похоронил его в долине в земле Моава напротив Беф-Фегора, и никто не знает места его погребения до этого дня.\tСохраняет активное погребение с невыраженным подлежащим.",
+    "reason": "Express the burial place rather than knowledge of the burial event."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/05_DEU/DEU_034.tsv",
+    "verse": 7,
+    "old_row": "7\tИ Моисей был при своей смерти сыном ста двадцати лет; его глаз не потускнел, и его свежесть не ушла.\tСохраняет образ сына лет, глаз в единственном числе и не ушедшую свежесть.",
+    "new_row": "7\tИ Моисей был при своей смерти сыном ста двадцати лет; его глаз не потускнел, и его свежесть не ушла.\tСохраняет образ сына лет и глаз в единственном числе.",
+    "reason": "Restrict the note to definite grammatical images without asserting a disputed rare-word lexical contrast."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/05_DEU/DEU_034.tsv",
+    "verse": 12,
+    "old_row": "12\tи во всей сильной руке и во всем великом ужасе, который Моисей совершил перед глазами всего Израиля.\tСохраняет великий ужас вместо чудес.",
+    "new_row": "12\tи по всей сильной руке и по всему великому ужасу, который Моисей совершил перед глазами всего Израиля.\tСохраняет великий ужас вместо чудес.",
+    "reason": "Use the native preposition continuing the comparison in respect of his deeds."
+  }
+]

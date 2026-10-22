@@ -1,0 +1,122 @@
+[
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/09_1SA/1SA_022.tsv",
+    "verse": 8,
+    "old_row": "8\tчто вы все сговорились против меня, и никто не открывает моего уха, когда мой сын заключает с сыном Иессея? И никто из вас не болеет обо мне и не открывает моего уха, что мой сын поднял моего раба против меня засадчиком, как в этот день».\tСообщение дважды изображено как открытие уха; отдельного слова «дружба» не написано.",
+    "new_row": "8\tчто вы все сговорились против меня, и никто не открывает моего уха, когда мой сын заключает союз с сыном Иессея? И никто из вас не болеет обо мне и не открывает моего уха, что мой сын поднял моего раба против меня засадчиком, как в этот день».\tСообщение дважды изображено как открытие уха; отдельного слова «дружба» не написано."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/09_1SA/1SA_022.tsv",
+    "verse": 14,
+    "old_row": "14\tUnd Ahimelech antwortete dem König und sagte: „Und wer unter allen deinen Knechten ist wie David, treu und Schwiegersohn des Königs und deiner Leibwache zugetan und geehrt in deinem Haus?\tDie Treue zur Leibwache wird eigens genannt; die Vorlage hat allgemein „geht in deinem Gehorsam“.",
+    "new_row": "14\tUnd Ahimelech antwortete dem König und sagte: „Und wer unter allen deinen Knechten ist wie David, treu und Schwiegersohn des Königs und einer, der deinen Befehlen folgt und in deinem Haus geehrt ist?\tNah am Hebräischen."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/09_1SA/1SA_022.tsv",
+    "verse": 14,
+    "old_row": "14\tИ ответил Ахимелех царю, и сказал: «И кто среди всех твоих рабов как Давид, верный, и зять царя, и следующий твоей страже, и почитаемый в твоём доме?\tСвязь Давида со стражей названа отдельно; перевод имеет «исполнитель повелений».",
+    "new_row": "14\tИ ответил Ахимелех царю, и сказал: «И кто среди всех твоих рабов как Давид, верный, и зять царя, и исполняющий твои повеления, и почитаемый в твоём доме?\tБлизко к еврейскому."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/09_1SA/1SA_024.tsv",
+    "verse": 6,
+    "old_row": "6\tUnd er sagte zu seinen Männern: „Fern sei es von mir vom HERRN her, dass ich meinem Herrn, dem Gesalbten des HERRN, diese Sache antue, meine Hand gegen ihn auszustrecken; denn er ist der Gesalbte des HERRN.“\tNah am Hebräischen.",
+    "new_row": "6\tUnd er sagte zu seinen Männern: „Der HERR verhüte, dass ich meinem Herrn, dem Gesalbten des HERRN, diese Sache antue, meine Hand gegen ihn auszustrecken; denn er ist der Gesalbte des HERRN.“\tNah am Hebräischen."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/09_1SA/1SA_024.tsv",
+    "verse": 6,
+    "old_row": "6\tИ сказал он своим людям: «Да будет далеко от меня от Господа, чтобы сделать это дело моему господину, помазаннику Господа, протянуть мою руку против него, ибо он помазанник Господа».\tБлизко к еврейскому.",
+    "new_row": "6\tИ сказал он своим людям: «Да не допустит Господь, чтобы я сделал это дело моему господину, помазаннику Господа, протянул мою руку против него, ибо он помазанник Господа».\tБлизко к еврейскому."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/09_1SA/1SA_024.tsv",
+    "verse": 11,
+    "old_row": "11\tUnd mein Vater, sieh, ja sieh den Flügel deines Mantels in meiner Hand; denn indem ich den Flügel deines Mantels abschnitt und dich nicht tötete, erkenne und sieh, dass kein Böses und kein Vergehen in meiner Hand ist. Und ich habe nicht gegen dich gesündigt, und du stellst meiner Seele nach, um sie zu nehmen.\tDas Sehen wird ausdrücklich wiederholt; David hat ihn nicht getötet, nicht nur nicht erwürgen wollen. Der Mantel hat einen „Flügel“.",
+    "new_row": "11\tUnd mein Vater, sieh, ja sieh den Flügel deines Mantels in meiner Hand; denn ich habe den Flügel deines Mantels abgeschnitten und dich nicht getötet. Erkenne und sieh, dass kein Böses und kein Vergehen in meiner Hand ist. Und ich habe nicht gegen dich gesündigt, und du stellst meiner Seele nach, um sie zu nehmen.\tDas Sehen wird ausdrücklich wiederholt; David hat ihn nicht getötet, nicht nur nicht erwürgen wollen. Der Mantel hat einen „Flügel“."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/09_1SA/1SA_024.tsv",
+    "verse": 11,
+    "old_row": "11\tИ мой отец, смотри, да смотри крыло твоего плаща в моей руке; ибо, отрезав крыло твоего плаща и не убив тебя, знай и смотри, что нет в моей руке зла и преступления. И я не согрешил против тебя, а ты подстерегаешь мою душу, чтобы взять её.\tГлагол зрения повторён, часть плаща названа крылом; душу не только ищут, а подстерегают.",
+    "new_row": "11\tИ мой отец, смотри, да смотри крыло твоего плаща в моей руке; ибо я отрезал крыло твоего плаща и не убил тебя. Знай и смотри, что нет в моей руке зла и преступления. И я не согрешил против тебя, а ты подстерегаешь мою душу, чтобы взять её.\tГлагол зрения повторён, часть плаща названа крылом; душу не только ищут, а подстерегают."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/en/09_1SA/1SA_024.tsv",
+    "verse": 18,
+    "old_row": "18\t=\tThe Hebrew says he “reported”; BSB says he “shown” how well he acted.",
+    "new_row": "18\t=\tThe Hebrew says “you have reported”; BSB has “you have shown”."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/09_1SA/1SA_025_1.tsv",
+    "verse": 29,
+    "old_row": "29\tИ если восстанет человек преследовать тебя и искать твоей души, то душа моего господина будет связана в связке жизни у Господа, твоего Бога. А душу твоих врагов Он выпращит из чаши пращи.\tНазвана чаша пращи, а действие — без сравнительного «как бы».",
+    "new_row": "29\tИ если восстанет человек преследовать тебя и искать твоей души, то душа моего господина будет связана в связке жизни у Господа, твоего Бога. А душу твоих врагов Он выбросит из чаши пращи.\tНазвана чаша пращи, а действие — без сравнительного «как бы»."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/09_1SA/1SA_025_2.tsv",
+    "verse": 31,
+    "old_row": "31\tто это не будет тебе шатанием и преткновением сердца моего господина — пролить кровь напрасно и спасти себя самому. И когда Господь сделает добро моему господину, вспомни твою рабыню».\tПеречень того, что могло бы стать преткновением, содержит пролитие крови и спасение себя; перевод даёт отрицательное непролитие и воздержание от мести.",
+    "new_row": "31\tто это не будет тебе шатанием и преткновением сердца моего господина из-за напрасно пролитой крови и того, что мой господин спас себя сам. И когда Господь сделает добро моему господину, вспомни твою рабыню».\tПеречень того, что могло бы стать преткновением, содержит пролитие крови и спасение себя; перевод даёт отрицательное непролитие и воздержание от мести."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/09_1SA/1SA_026.tsv",
+    "verse": 8,
+    "old_row": "8\tИ сказал Авесса Давиду: «Бог предал сегодня твоего врага в твою руку; и ныне дай же я поражу его копьём в землю одним разом и не повторю ему».\tРука стоит в единственном числе.",
+    "new_row": "8\tИ сказал Авесса Давиду: «Бог предал сегодня твоего врага в твою руку; и ныне дай же мне поразить его копьём в землю одним разом и не повторю ему».\tРука стоит в единственном числе."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/09_1SA/1SA_026.tsv",
+    "verse": 11,
+    "old_row": "11\tFern sei es von mir vom HERRN her, meine Hand gegen den Gesalbten des HERRN auszustrecken. Und nun nimm doch den Speer zu seinen Häupten und den Wasserkrug, und lass uns gehen.“\tNah am Hebräischen.",
+    "new_row": "11\tDer HERR verhüte, dass ich meine Hand gegen den Gesalbten des HERRN ausstrecke. Und nun nimm doch den Speer zu seinen Häupten und den Wasserkrug, und lass uns gehen.“\tNah am Hebräischen."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/09_1SA/1SA_026.tsv",
+    "verse": 11,
+    "old_row": "11\tДа будет далеко от меня от Господа протянуть мою руку против помазанника Господа. И ныне возьми же копьё, которое у его изголовья, и кувшин воды, и пойдём».\tВ начале этого стиха находится запрет протянуть руку; конечного «к себе» нет.",
+    "new_row": "11\tДа не допустит Господь, чтобы я протянул мою руку против помазанника Господа. И ныне возьми же копьё, которое у его изголовья, и кувшин воды, и пойдём».\tВ начале этого стиха находится запрет протянуть руку; конечного «к себе» нет."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/09_1SA/1SA_026.tsv",
+    "verse": 25,
+    "old_row": "25\tUnd Saul sagte zu David: „Gesegnet seist du, mein Sohn David; du wirst gewiss handeln und gewiss vermögen.“ Und David ging seines Weges, und Saul kehrte an seinen Ort zurück.\tHandeln und Vermögen sind beide durch Wiederholung des Verbstamms verstärkt.",
+    "new_row": "25\tUnd Saul sagte zu David: „Gesegnet seist du, mein Sohn David; du wirst gewiss handeln und es gewiss vermögen.“ Und David ging seines Weges, und Saul kehrte an seinen Ort zurück.\tHandeln und Vermögen sind beide durch Wiederholung des Verbstamms verstärkt."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/09_1SA/1SA_027.tsv",
+    "verse": 7,
+    "old_row": "7\tUnd die Zahl der Tage, die David im Gebiet der Philister wohnte, war Tage und vier Monate.\tNah am Hebräischen.",
+    "new_row": "7\tUnd die Zahl der Tage, die David im Gebiet der Philister wohnte, betrug ein Jahr und vier Monate.\tNah am Hebräischen."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/09_1SA/1SA_027.tsv",
+    "verse": 7,
+    "old_row": "7\tИ число дней, которые Давид жил в области филистимлян, было дни и четыре месяца.\tБлизко к еврейскому.",
+    "new_row": "7\tИ число дней, которые Давид жил в области филистимлян, составило год и четыре месяца.\tБлизко к еврейскому."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/09_1SA/1SA_028.tsv",
+    "verse": 8,
+    "old_row": "8\tИ переоделся Саул, и надел другие одежды, и пошёл, он и два человека с ним; и пришли они к женщине ночью. И сказал: «Погадай же мне посредством духа умершего и подними мне того, кого назову тебе».\tИмя Саула при речи не повторяется; гадание происходит посредством духа умершего.",
+    "new_row": "8\tИ изменил свой облик Саул, и надел другие одежды, и пошёл, он и два человека с ним; и пришли они к женщине ночью. И сказал: «Погадай же мне посредством духа умершего и подними мне того, кого назову тебе».\tИмя Саула при речи не повторяется; гадание происходит посредством духа умершего."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/09_1SA/1SA_029.tsv",
+    "verse": 10,
+    "old_row": "10\tИ ныне встань рано утром, и рабы твоего господина, которые пришли с тобой; и встаньте рано утром, и когда будет вам светло, идите».\tВ данном стихе нет вставки о назначенном месте, дурной мысли на сердце и повторной похвале Давида.",
+    "new_row": "10\tИ ныне встань рано утром, ты и рабы твоего господина, которые пришли с тобой; и встаньте рано утром, и когда будет вам светло, идите».\tВ данном стихе нет вставки о назначенном месте, дурной мысли на сердце и повторной похвале Давида."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/09_1SA/1SA_030_1.tsv",
+    "verse": 18,
+    "old_row": "18\tИ спас Давид всё, что взял Амалик; и две свои жены спас Давид.\tПротивник назван Амаликом в единственном числе.",
+    "new_row": "18\tИ спас Давид всё, что взял Амалик; и двух своих жён спас Давид.\tПротивник назван Амаликом в единственном числе."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/09_1SA/1SA_030_1.tsv",
+    "verse": 19,
+    "old_row": "19\tИ не недоставало им ничего, от малого до большого, и до сыновей и дочерей, и из добычи, и до всего, что взяли у них; всё возвратил Давид.\tИмя Амаликитян в данном стихе не повторено.",
+    "new_row": "19\tИ ничего у них не пропало, от малого до большого, и до сыновей и дочерей, и из добычи, и до всего, что взяли у них; всё возвратил Давид.\tИмя Амаликитян в данном стихе не повторено."
+  }
+]

@@ -1,0 +1,65 @@
+[
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/18_JOB/JOB_001.tsv",
+    "verse": "15",
+    "old_row": "15\tund Saba fiel ein und nahm sie, und die jungen Männer schlugen sie mit dem Mund des Schwertes; und ich bin entkommen, nur ich allein, um es dir mitzuteilen.“\tSaba ist zunächst ein einzelnes Subjekt; die Schwertschneide heißt Mund.",
+    "new_row": "15\tund Saba fiel ein und nahm sie, und sie schlugen die jungen Männer mit dem Mund des Schwertes; und ich bin entkommen, nur ich allein, um es dir mitzuteilen.“\tSaba ist zunächst ein einzelnes Subjekt; die Schwertschneide heißt Mund.",
+    "reason": "Clarify subject/object; Hebrew object marker identifies the young men as victims."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/18_JOB/JOB_001.tsv",
+    "verse": "17",
+    "old_row": "17\tNoch redete dieser, da kam ein anderer und sagte: „Die Chaldäer bildeten drei Köpfe und fielen über die Kamele her und nahmen sie; und die jungen Männer schlugen sie mit dem Mund des Schwertes; und ich bin entkommen, nur ich allein, um es dir mitzuteilen.“\tDie drei Abteilungen werden Köpfe genannt; die Schneide des Schwertes heißt Mund.",
+    "new_row": "17\tNoch redete dieser, da kam ein anderer und sagte: „Die Chaldäer bildeten drei Köpfe und fielen über die Kamele her und nahmen sie; und sie schlugen die jungen Männer mit dem Mund des Schwertes; und ich bin entkommen, nur ich allein, um es dir mitzuteilen.“\tDie drei Abteilungen werden Köpfe genannt; die Schneide des Schwertes heißt Mund.",
+    "reason": "Clarify subject/object; Hebrew object marker identifies the young men as victims."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/18_JOB/JOB_003.tsv",
+    "verse": "25",
+    "old_row": "25\tDenn einen Schrecken fürchtete ich, und er kam zu mir; und was mir graute, kommt zu mir.\tDie Furcht wird mit demselben Wortstamm wiederholt.",
+    "new_row": "25\tDenn einen Schrecken fürchtete ich, und er kam zu mir; und wovor mir graute, kommt zu mir.\tDie Furcht wird mit demselben Wortstamm wiederholt.",
+    "reason": "Correct German verb government."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/18_JOB/JOB_004.tsv",
+    "verse": "21",
+    "old_row": "21\tIst nicht ihre Zeltschnur mit ihnen herausgerissen? Sie sterben, und nicht in Weisheit.‘\tIhre Zeltschnur steht statt ihrer Nachgelassenen; Weisheit statt Unversehens.",
+    "new_row": "21\tIst nicht ihre Zeltschnur mit ihnen herausgerissen? Sie sterben, und nicht in Weisheit.‘“\tIhre Zeltschnur steht statt ihrer Nachgelassenen; Weisheit statt Unversehens.",
+    "reason": "Close outer quotation after inner quotation."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/18_JOB/JOB_008.tsv",
+    "verse": "19",
+    "old_row": "19\tВот, это радость его пути, и из праха вырастут другие.\tПраха названа прямо.",
+    "new_row": "19\tВот, это радость его пути, и из праха вырастут другие.\tПрах назван прямо.",
+    "reason": "Correct grammar in Russian difference note."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/18_JOB/JOB_012.tsv",
+    "verse": "6",
+    "old_row": "6\tDie Zelte der Verwüster sind ruhig, und Sicherheit haben die, die Gott reizen, denen Gott etwas in ihre Hand gebracht hat.\tDer Schlusssatz wird mit Gott als Geber wiedergegeben.",
+    "new_row": "6\tDie Zelte der Verwüster sind ruhig, und Sicherheit haben die, die Gott reizen, denen Gott etwas in ihre Hand gebracht hat.\tHand steht statt Faust; der Schlusssatz ist sprachlich knapp.",
+    "reason": "Avoid asserting one interpretation of the obscure final clause."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/18_JOB/JOB_013.tsv",
+    "verse": "20",
+    "old_row": "20\tТолько двух не делай со мной; тогда не скроюсь от Твоего лица:\tБлизко к еврейскому.",
+    "new_row": "20\tТолько двух вещей не делай со мной; тогда не скроюсь от Твоего лица:\tБлизко к еврейскому.",
+    "reason": "Supply grammatically required noun for two things."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/18_JOB/JOB_014.tsv",
+    "verse": "6",
+    "old_row": "6\tто отведи от него взгляд, и пусть он прекратит, пока как наёмник не насладится своим днём.\tНаслаждение днём названо вместо только его окончания.",
+    "new_row": "6\tто отведи от него взгляд, и пусть он успокоится, пока как наёмник не насладится своим днём.\tНаслаждение днём названо вместо только его окончания.",
+    "reason": "Use an intransitive Russian verb for ceasing/resting rather than transitive verb without an object."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/en/18_JOB/JOB_003.tsv",
+    "verse": "3",
+    "old_row": "3\t=\tThe Hebrew makes the night the speaker; BSB says it was said in the night.",
+    "new_row": "3\t=\tThe Hebrew uses an active verb, said; BSB uses the impersonal passive it was said.",
+    "reason": "The Hebrew active saying verb can have an indefinite speaker; avoid asserting that the night must itself speak."
+  }
+]

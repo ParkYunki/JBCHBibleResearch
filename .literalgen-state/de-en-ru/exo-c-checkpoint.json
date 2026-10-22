@@ -1,0 +1,563 @@
+{
+  "completed_chapters": [
+    29,
+    30,
+    31,
+    32,
+    33,
+    34,
+    35,
+    36,
+    37,
+    38,
+    39,
+    40
+  ],
+  "new_files": [
+    {
+      "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/02_EXO/EXO_029_1.tsv",
+      "rows": 30
+    },
+    {
+      "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/en/02_EXO/EXO_029_1.tsv",
+      "rows": 30
+    },
+    {
+      "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/02_EXO/EXO_029_1.tsv",
+      "rows": 30
+    },
+    {
+      "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/02_EXO/EXO_029_2.tsv",
+      "rows": 16
+    },
+    {
+      "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/en/02_EXO/EXO_029_2.tsv",
+      "rows": 16
+    },
+    {
+      "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/02_EXO/EXO_029_2.tsv",
+      "rows": 16
+    },
+    {
+      "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/02_EXO/EXO_030_1.tsv",
+      "rows": 30
+    },
+    {
+      "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/en/02_EXO/EXO_030_1.tsv",
+      "rows": 30
+    },
+    {
+      "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/02_EXO/EXO_030_1.tsv",
+      "rows": 30
+    },
+    {
+      "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/02_EXO/EXO_030_2.tsv",
+      "rows": 8
+    },
+    {
+      "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/en/02_EXO/EXO_030_2.tsv",
+      "rows": 8
+    },
+    {
+      "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/02_EXO/EXO_030_2.tsv",
+      "rows": 8
+    },
+    {
+      "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/02_EXO/EXO_031.tsv",
+      "rows": 18
+    },
+    {
+      "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/en/02_EXO/EXO_031.tsv",
+      "rows": 18
+    },
+    {
+      "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/02_EXO/EXO_031.tsv",
+      "rows": 18
+    },
+    {
+      "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/02_EXO/EXO_032_1.tsv",
+      "rows": 30
+    },
+    {
+      "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/en/02_EXO/EXO_032_1.tsv",
+      "rows": 30
+    },
+    {
+      "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/02_EXO/EXO_032_1.tsv",
+      "rows": 30
+    },
+    {
+      "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/02_EXO/EXO_032_2.tsv",
+      "rows": 5
+    },
+    {
+      "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/en/02_EXO/EXO_032_2.tsv",
+      "rows": 5
+    },
+    {
+      "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/02_EXO/EXO_032_2.tsv",
+      "rows": 5
+    },
+    {
+      "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/02_EXO/EXO_033.tsv",
+      "rows": 23
+    },
+    {
+      "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/en/02_EXO/EXO_033.tsv",
+      "rows": 23
+    },
+    {
+      "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/02_EXO/EXO_033.tsv",
+      "rows": 23
+    },
+    {
+      "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/02_EXO/EXO_034_1.tsv",
+      "rows": 30
+    },
+    {
+      "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/en/02_EXO/EXO_034_1.tsv",
+      "rows": 30
+    },
+    {
+      "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/02_EXO/EXO_034_1.tsv",
+      "rows": 30
+    },
+    {
+      "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/02_EXO/EXO_034_2.tsv",
+      "rows": 5
+    },
+    {
+      "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/en/02_EXO/EXO_034_2.tsv",
+      "rows": 5
+    },
+    {
+      "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/02_EXO/EXO_034_2.tsv",
+      "rows": 5
+    },
+    {
+      "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/02_EXO/EXO_035_1.tsv",
+      "rows": 30
+    },
+    {
+      "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/en/02_EXO/EXO_035_1.tsv",
+      "rows": 30
+    },
+    {
+      "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/02_EXO/EXO_035_1.tsv",
+      "rows": 30
+    },
+    {
+      "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/02_EXO/EXO_035_2.tsv",
+      "rows": 5
+    },
+    {
+      "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/en/02_EXO/EXO_035_2.tsv",
+      "rows": 5
+    },
+    {
+      "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/02_EXO/EXO_035_2.tsv",
+      "rows": 5
+    },
+    {
+      "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/02_EXO/EXO_036_1.tsv",
+      "rows": 30
+    },
+    {
+      "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/en/02_EXO/EXO_036_1.tsv",
+      "rows": 30
+    },
+    {
+      "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/02_EXO/EXO_036_1.tsv",
+      "rows": 30
+    },
+    {
+      "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/02_EXO/EXO_036_2.tsv",
+      "rows": 8
+    },
+    {
+      "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/en/02_EXO/EXO_036_2.tsv",
+      "rows": 8
+    },
+    {
+      "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/02_EXO/EXO_036_2.tsv",
+      "rows": 8
+    },
+    {
+      "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/02_EXO/EXO_037.tsv",
+      "rows": 29
+    },
+    {
+      "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/en/02_EXO/EXO_037.tsv",
+      "rows": 29
+    },
+    {
+      "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/02_EXO/EXO_037.tsv",
+      "rows": 29
+    },
+    {
+      "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/02_EXO/EXO_038_1.tsv",
+      "rows": 30
+    },
+    {
+      "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/en/02_EXO/EXO_038_1.tsv",
+      "rows": 30
+    },
+    {
+      "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/02_EXO/EXO_038_1.tsv",
+      "rows": 30
+    },
+    {
+      "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/02_EXO/EXO_038_2.tsv",
+      "rows": 1
+    },
+    {
+      "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/en/02_EXO/EXO_038_2.tsv",
+      "rows": 1
+    },
+    {
+      "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/02_EXO/EXO_038_2.tsv",
+      "rows": 1
+    },
+    {
+      "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/02_EXO/EXO_039_1.tsv",
+      "rows": 30
+    },
+    {
+      "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/02_EXO/EXO_039_1.tsv",
+      "rows": 30
+    },
+    {
+      "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/02_EXO/EXO_039_2.tsv",
+      "rows": 13
+    },
+    {
+      "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/02_EXO/EXO_039_2.tsv",
+      "rows": 13
+    },
+    {
+      "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/02_EXO/EXO_040_1.tsv",
+      "rows": 30
+    },
+    {
+      "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/02_EXO/EXO_040_1.tsv",
+      "rows": 30
+    },
+    {
+      "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/02_EXO/EXO_040_2.tsv",
+      "rows": 8
+    },
+    {
+      "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/02_EXO/EXO_040_2.tsv",
+      "rows": 8
+    }
+  ],
+  "remaining_chapters": [],
+  "status": "generation_and_semantic_qa_complete",
+  "qa_path": "/Users/arkuni/Developer/JBCHBibleResearch/.literalgen-state/de-en-ru/exo-c-qa.json",
+  "qa_candidates": 128,
+  "validated_files": 59,
+  "validated_rows": {
+    "de": 409,
+    "en": 328,
+    "ru": 409
+  },
+  "validation": "Exact verse order, three fields, nonempty fields, English =, no placeholder, difference <=60 words; old_row integrity and unique path+verse verified.",
+  "packet_counts": [
+    {
+      "lang": "de",
+      "packet": "EXO_029_1",
+      "rows": 30
+    },
+    {
+      "lang": "en",
+      "packet": "EXO_029_1",
+      "rows": 30
+    },
+    {
+      "lang": "ru",
+      "packet": "EXO_029_1",
+      "rows": 30
+    },
+    {
+      "lang": "de",
+      "packet": "EXO_029_2",
+      "rows": 16
+    },
+    {
+      "lang": "en",
+      "packet": "EXO_029_2",
+      "rows": 16
+    },
+    {
+      "lang": "ru",
+      "packet": "EXO_029_2",
+      "rows": 16
+    },
+    {
+      "lang": "de",
+      "packet": "EXO_030_1",
+      "rows": 30
+    },
+    {
+      "lang": "en",
+      "packet": "EXO_030_1",
+      "rows": 30
+    },
+    {
+      "lang": "ru",
+      "packet": "EXO_030_1",
+      "rows": 30
+    },
+    {
+      "lang": "de",
+      "packet": "EXO_030_2",
+      "rows": 8
+    },
+    {
+      "lang": "en",
+      "packet": "EXO_030_2",
+      "rows": 8
+    },
+    {
+      "lang": "ru",
+      "packet": "EXO_030_2",
+      "rows": 8
+    },
+    {
+      "lang": "de",
+      "packet": "EXO_031",
+      "rows": 18
+    },
+    {
+      "lang": "en",
+      "packet": "EXO_031",
+      "rows": 18
+    },
+    {
+      "lang": "ru",
+      "packet": "EXO_031",
+      "rows": 18
+    },
+    {
+      "lang": "de",
+      "packet": "EXO_032_1",
+      "rows": 30
+    },
+    {
+      "lang": "en",
+      "packet": "EXO_032_1",
+      "rows": 30
+    },
+    {
+      "lang": "ru",
+      "packet": "EXO_032_1",
+      "rows": 30
+    },
+    {
+      "lang": "de",
+      "packet": "EXO_032_2",
+      "rows": 5
+    },
+    {
+      "lang": "en",
+      "packet": "EXO_032_2",
+      "rows": 5
+    },
+    {
+      "lang": "ru",
+      "packet": "EXO_032_2",
+      "rows": 5
+    },
+    {
+      "lang": "de",
+      "packet": "EXO_033",
+      "rows": 23
+    },
+    {
+      "lang": "en",
+      "packet": "EXO_033",
+      "rows": 23
+    },
+    {
+      "lang": "ru",
+      "packet": "EXO_033",
+      "rows": 23
+    },
+    {
+      "lang": "de",
+      "packet": "EXO_034_1",
+      "rows": 30
+    },
+    {
+      "lang": "en",
+      "packet": "EXO_034_1",
+      "rows": 30
+    },
+    {
+      "lang": "ru",
+      "packet": "EXO_034_1",
+      "rows": 30
+    },
+    {
+      "lang": "de",
+      "packet": "EXO_034_2",
+      "rows": 5
+    },
+    {
+      "lang": "en",
+      "packet": "EXO_034_2",
+      "rows": 5
+    },
+    {
+      "lang": "ru",
+      "packet": "EXO_034_2",
+      "rows": 5
+    },
+    {
+      "lang": "de",
+      "packet": "EXO_035_1",
+      "rows": 30
+    },
+    {
+      "lang": "en",
+      "packet": "EXO_035_1",
+      "rows": 30
+    },
+    {
+      "lang": "ru",
+      "packet": "EXO_035_1",
+      "rows": 30
+    },
+    {
+      "lang": "de",
+      "packet": "EXO_035_2",
+      "rows": 5
+    },
+    {
+      "lang": "en",
+      "packet": "EXO_035_2",
+      "rows": 5
+    },
+    {
+      "lang": "ru",
+      "packet": "EXO_035_2",
+      "rows": 5
+    },
+    {
+      "lang": "de",
+      "packet": "EXO_036_1",
+      "rows": 30
+    },
+    {
+      "lang": "en",
+      "packet": "EXO_036_1",
+      "rows": 30
+    },
+    {
+      "lang": "ru",
+      "packet": "EXO_036_1",
+      "rows": 30
+    },
+    {
+      "lang": "de",
+      "packet": "EXO_036_2",
+      "rows": 8
+    },
+    {
+      "lang": "en",
+      "packet": "EXO_036_2",
+      "rows": 8
+    },
+    {
+      "lang": "ru",
+      "packet": "EXO_036_2",
+      "rows": 8
+    },
+    {
+      "lang": "de",
+      "packet": "EXO_037",
+      "rows": 29
+    },
+    {
+      "lang": "en",
+      "packet": "EXO_037",
+      "rows": 29
+    },
+    {
+      "lang": "ru",
+      "packet": "EXO_037",
+      "rows": 29
+    },
+    {
+      "lang": "de",
+      "packet": "EXO_038_1",
+      "rows": 30
+    },
+    {
+      "lang": "en",
+      "packet": "EXO_038_1",
+      "rows": 30
+    },
+    {
+      "lang": "ru",
+      "packet": "EXO_038_1",
+      "rows": 30
+    },
+    {
+      "lang": "de",
+      "packet": "EXO_038_2",
+      "rows": 1
+    },
+    {
+      "lang": "en",
+      "packet": "EXO_038_2",
+      "rows": 1
+    },
+    {
+      "lang": "ru",
+      "packet": "EXO_038_2",
+      "rows": 1
+    },
+    {
+      "lang": "de",
+      "packet": "EXO_039_1",
+      "rows": 30
+    },
+    {
+      "lang": "ru",
+      "packet": "EXO_039_1",
+      "rows": 30
+    },
+    {
+      "lang": "de",
+      "packet": "EXO_039_2",
+      "rows": 13
+    },
+    {
+      "lang": "ru",
+      "packet": "EXO_039_2",
+      "rows": 13
+    },
+    {
+      "lang": "de",
+      "packet": "EXO_040_1",
+      "rows": 30
+    },
+    {
+      "lang": "ru",
+      "packet": "EXO_040_1",
+      "rows": 30
+    },
+    {
+      "lang": "de",
+      "packet": "EXO_040_2",
+      "rows": 8
+    },
+    {
+      "lang": "ru",
+      "packet": "EXO_040_2",
+      "rows": 8
+    }
+  ],
+  "number_review": "033:2 and 034:11 ethnic collective singulars; 034:12 singular inhabitant and masculine singular pronoun preserved; corresponding de/en/ru differences updated."
+}

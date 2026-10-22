@@ -1,0 +1,134 @@
+{
+  "completed_chapters": [
+    17,
+    18,
+    19,
+    20,
+    21,
+    22,
+    23,
+    24
+  ],
+  "new_files": [
+    {
+      "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/06_JOS/JOS_017.tsv",
+      "rows": 18
+    },
+    {
+      "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/06_JOS/JOS_017.tsv",
+      "rows": 18
+    },
+    {
+      "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/en/06_JOS/JOS_017.tsv",
+      "rows": 18
+    },
+    {
+      "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/06_JOS/JOS_018.tsv",
+      "rows": 28
+    },
+    {
+      "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/06_JOS/JOS_018.tsv",
+      "rows": 28
+    },
+    {
+      "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/en/06_JOS/JOS_018.tsv",
+      "rows": 28
+    },
+    {
+      "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/06_JOS/JOS_019_1.tsv",
+      "rows": 30
+    },
+    {
+      "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/06_JOS/JOS_019_2.tsv",
+      "rows": 21
+    },
+    {
+      "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/06_JOS/JOS_019_1.tsv",
+      "rows": 30
+    },
+    {
+      "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/06_JOS/JOS_019_2.tsv",
+      "rows": 21
+    },
+    {
+      "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/en/06_JOS/JOS_019_1.tsv",
+      "rows": 30
+    },
+    {
+      "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/en/06_JOS/JOS_019_2.tsv",
+      "rows": 21
+    },
+    {
+      "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/06_JOS/JOS_020.tsv",
+      "rows": 9
+    },
+    {
+      "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/06_JOS/JOS_020.tsv",
+      "rows": 9
+    },
+    {
+      "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/en/06_JOS/JOS_020.tsv",
+      "rows": 9
+    },
+    {
+      "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/06_JOS/JOS_021_1.tsv",
+      "rows": 30
+    },
+    {
+      "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/06_JOS/JOS_021_2.tsv",
+      "rows": 15
+    },
+    {
+      "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/06_JOS/JOS_021_1.tsv",
+      "rows": 30
+    },
+    {
+      "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/06_JOS/JOS_021_2.tsv",
+      "rows": 15
+    },
+    {
+      "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/06_JOS/JOS_022_1.tsv",
+      "rows": 30
+    },
+    {
+      "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/06_JOS/JOS_022_2.tsv",
+      "rows": 4
+    },
+    {
+      "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/06_JOS/JOS_022_1.tsv",
+      "rows": 30
+    },
+    {
+      "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/06_JOS/JOS_022_2.tsv",
+      "rows": 4
+    },
+    {
+      "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/06_JOS/JOS_023.tsv",
+      "rows": 16
+    },
+    {
+      "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/06_JOS/JOS_023.tsv",
+      "rows": 16
+    },
+    {
+      "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/06_JOS/JOS_024_1.tsv",
+      "rows": 30
+    },
+    {
+      "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/06_JOS/JOS_024_2.tsv",
+      "rows": 3
+    },
+    {
+      "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/06_JOS/JOS_024_1.tsv",
+      "rows": 30
+    },
+    {
+      "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/06_JOS/JOS_024_2.tsv",
+      "rows": 3
+    }
+  ],
+  "status": "generation_complete_qa_complete",
+  "remaining_chapters": [],
+  "qa_path": "/Users/arkuni/Developer/JBCHBibleResearch/.literalgen-state/de-en-ru/jos-c-qa.json",
+  "root_en_qa_path": "/Users/arkuni/Developer/JBCHBibleResearch/.literalgen-state/de-en-ru/jos-c-root-en-qa.json"
+}

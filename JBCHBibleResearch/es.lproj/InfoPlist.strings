@@ -1,0 +1,11 @@
+/*
+  InfoPlist.strings (es)
+
+  [2026-10-11 i18n] 앱 이름과 문서 형식 이름의 스페인어 표시. 문서 형식은 Info.plist의
+  CFBundleTypeName/UTTypeDescription 값("JBCH 개인 묵상")을 키로 쓴다.
+  ⚠️ 번역 초안 — 원어민/브랜딩 검토 필요. CFBundleName은 macOS 메뉴 막대에 쓰이며 Apple 권장은 16자 미만이나,
+  사용자 확정 앱 이름(전체 표기)을 우선한다 — 잘림 여부는 실기기에서 확인.
+*/
+"CFBundleDisplayName" = "Investigación Bíblica Emaús";
+"CFBundleName" = "Investigación Bíblica Emaús";
+"JBCH 개인 묵상" = "Devocional personal JBCH";

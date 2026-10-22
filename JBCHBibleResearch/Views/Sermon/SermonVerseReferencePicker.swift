@@ -7,8 +7,10 @@
 //  책/장 선택은 `CrossReferenceTargetPicker`의 `BookChapterPicker`를 재사용하고,
 //  본문은 `BibleReferenceStore`를 그때그때 열어 가져온다.
 //
-//  ⚠️ 구절 텍스트는 항상 번들 기본 번역본(`TranslationBootstrap.resolvedBundledDatabaseURL()`)
-//  에서만 가져온다 — 사용자 추가 번역본 선택은 지원하지 않는다.
+//  ⚠️ 구절 텍스트는 앱 언어의 기본 번들 성경(`TranslationBootstrap.resolvedCurrentLanguageBundledDatabaseURL()`,
+//  2026-10-12)에서만 가져온다 — 사용자 추가 번역본 선택은 지원하지 않는다. 끝의 참조 표기도 앱 언어의 책 이름
+//  (`Book.displayName`, 한국어에서는 기존과 같은 `nameKo`)이다. 좌표는 `SermonVerseReference`로 따로 저장되므로
+//  한국어가 아닌 표기라 본문 속 참조 인식이 못 찾아도 관련 내용 연결은 유지된다.
 //
 
 import SwiftUI
@@ -50,7 +52,7 @@ struct SermonVerseReferencePicker: View {
             header
 
             VStack(alignment: .leading, spacing: 6) {
-                fieldLabel("책 · 장")
+                fieldLabel(String(localized: "책 · 장"))
                 BookChapterPicker(
                     books: BooksProvider.shared.books,
                     selectedBook: pendingBook,
@@ -66,12 +68,12 @@ struct SermonVerseReferencePicker: View {
             }
 
             HStack(alignment: .bottom, spacing: 10) {
-                verseStepper(title: "시작 절", value: $pendingVerseStart, range: 1...176)
+                verseStepper(title: String(localized: "시작 절"), value: $pendingVerseStart, range: 1...176)
                 Image(systemName: "arrow.right")
                     .font(.caption.weight(.bold))
                     .foregroundStyle(textColor.opacity(0.4))
                     .padding(.bottom, 14)
-                verseStepper(title: "끝 절", value: $pendingVerseEnd, range: pendingVerseStart...176)
+                verseStepper(title: String(localized: "끝 절"), value: $pendingVerseEnd, range: pendingVerseStart...176)
             }
             .onChange(of: pendingVerseStart) { _, newValue in
                 if pendingVerseEnd < newValue { pendingVerseEnd = newValue }
@@ -149,7 +151,7 @@ struct SermonVerseReferencePicker: View {
 
     private func insert() {
         guard let text = fetchVerseText() else {
-            errorMessage = "해당 구절 본문을 찾지 못했습니다 — 번역본 데이터를 확인해 주세요."
+            errorMessage = String(localized: "해당 구절 본문을 찾지 못했습니다 — 번역본 데이터를 확인해 주세요.")
             return
         }
         let verseEnd = pendingVerseEnd > pendingVerseStart ? pendingVerseEnd : nil
@@ -159,7 +161,7 @@ struct SermonVerseReferencePicker: View {
 
     /// 선택한 절 범위의 본문을 이어 붙이고 끝에 "(책이름 장:절)" 참조 표기를 덧붙인다.
     private func fetchVerseText() -> String? {
-        guard let store = try? BibleReferenceStore(filePath: TranslationBootstrap.resolvedBundledDatabaseURL().path) else {
+        guard let store = try? BibleReferenceStore(filePath: TranslationBootstrap.resolvedCurrentLanguageBundledDatabaseURL().path) else {
             return nil
         }
         let start = pendingVerseStart
@@ -172,7 +174,7 @@ struct SermonVerseReferencePicker: View {
             contents.append(verse.content)
         }
         guard !contents.isEmpty else { return nil }
-        let bookLabel = pendingBook.nameKo
+        let bookLabel = pendingBook.displayName
         let referenceLabel = end > start
             ? "\(bookLabel) \(pendingChapter):\(start)-\(end)"
             : "\(bookLabel) \(pendingChapter):\(start)"

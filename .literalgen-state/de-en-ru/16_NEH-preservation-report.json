@@ -1,0 +1,12 @@
+{
+  "baseline": 12871,
+  "unchanged": 12681,
+  "target_languages_protected_unchanged": 1788,
+  "external_language_hash_mismatches": 190,
+  "languages": {
+    "fil": 57,
+    "id": 79,
+    "vi": 54
+  },
+  "note": "No mismatched files were written by this task; not restored or overwritten."
+}

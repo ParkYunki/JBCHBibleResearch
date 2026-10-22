@@ -1,0 +1,122 @@
+[
+  {
+    "path": "Tools/LiteralGen/outputs/de/03_LEV/LEV_015_1.tsv",
+    "verse": 18,
+    "old_row": "18\tUnd eine Frau, bei der ein Mann mit Samenerguss liegt: Sie sollen sich im Wasser baden und bis zum Abend unrein sein.\tBaden und Unreinsein gelten beiden in der Mehrzahl, statt nur der Frau.",
+    "new_row": "18\tUnd wenn ein Mann bei einer Frau mit Samenerguss liegt, sollen sie sich im Wasser baden und bis zum Abend unrein sein.\tBaden und Unreinsein gelten beiden in der Mehrzahl, statt nur der Frau."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/03_LEV/LEV_017.tsv",
+    "verse": 4,
+    "old_row": "4\tund es nicht an den Eingang des Zeltes der Begegnung gebracht hat, um dem HERRN vor der Wohnung des HERRN eine Opfergabe darzubringen, dem Mann soll Blut angerechnet werden; Blut hat er vergossen, und der Mann soll aus der Mitte seines Volkes ausgerottet werden.\tDie Zurechnung des Blutes ist passiv ausgedrückt; das Blutvergießen ist eine eigene Aussage.",
+    "new_row": "4\tund es nicht an den Eingang des Zeltes der Begegnung gebracht hat, um dem HERRN vor der Wohnung des HERRN eine Opfergabe darzubringen, dem Mann soll Blut angerechnet werden; Blut hat er vergossen, und der Mann soll aus der Mitte seines Volkes ausgerottet werden,\tDie Zurechnung des Blutes ist passiv ausgedrückt; das Blutvergießen ist eine eigene Aussage."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/03_LEV/LEV_017.tsv",
+    "verse": 5,
+    "old_row": "5\tDamit die Söhne Israels ihre Schlachtopfer, die sie auf dem freien Feld schlachten, bringen und sie dem HERRN an den Eingang des Zeltes der Begegnung zum Priester bringen und sie als Friedensschlachtopfer dem HERRN schlachten.\tDas tatsächliche Schlachten steht statt eines bloßen Wollens; Friedensopfer stehen statt ausdrücklich Dankopfern.",
+    "new_row": "5\tdamit die Söhne Israels ihre Schlachtopfer, die sie auf dem freien Feld schlachten, bringen und sie dem HERRN an den Eingang des Zeltes der Begegnung zum Priester bringen und sie als Friedensschlachtopfer dem HERRN schlachten.\tDas tatsächliche Schlachten steht statt eines bloßen Wollens; Friedensopfer stehen statt ausdrücklich Dankopfern."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/03_LEV/LEV_018.tsv",
+    "verse": 17,
+    "old_row": "17\tDie Blöße einer Frau und ihrer Tochter sollst du nicht aufdecken. Die Tochter ihres Sohnes und die Tochter ihrer Tochter sollst du nicht nehmen, um ihre Blöße aufzudecken. Sie sind Verwandte; es ist eine Schandtat.\tBewahrt „und“ zwischen den beiden Enkelinnen und fügt kein ausdrückliches „nächste“ hinzu.",
+    "new_row": "17\tDie Blöße einer Frau und ihrer Tochter sollst du nicht aufdecken. Die Tochter ihres Sohnes und die Tochter ihrer Tochter sollst du nicht nehmen, um ihre Blöße aufzudecken. Sie sind ihre Verwandten; es ist eine Schandtat.\tBewahrt „und“ zwischen den beiden Enkelinnen und fügt kein ausdrückliches „nächste“ hinzu."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/03_LEV/LEV_018.tsv",
+    "verse": 20,
+    "old_row": "20\tUnd mit der Frau deines Nächsten sollst du nicht zum Samenerguss liegen, um dich durch sie unrein zu machen.\tDer Same wird ausdrücklich genannt.",
+    "new_row": "20\tUnd bei der Frau deines Nächsten sollst du nicht mit Samenerguss liegen, um dich durch sie unrein zu machen.\tDer Same wird ausdrücklich genannt."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/03_LEV/LEV_018.tsv",
+    "verse": 29,
+    "old_row": "29\tDenn jeder, der eine von all diesen Gräueltaten tut — die Seelen, die sie tun, sollen aus der Mitte ihres Volkes abgeschnitten werden.\tBewahrt den Wechsel vom einleitenden Einzelnen zu den Seelen in der Mehrzahl und „aus der Mitte“.",
+    "new_row": "29\tDenn wenn jemand eine von all diesen Gräueltaten tut, sollen die Seelen, die sie tun, aus der Mitte ihres Volkes abgeschnitten werden.\tBewahrt den Wechsel vom einleitenden Einzelnen zu den Seelen in der Mehrzahl und „aus der Mitte“."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/03_LEV/LEV_018.tsv",
+    "verse": 30,
+    "old_row": "30\tUnd ihr sollt meine Verpflichtung bewahren, damit ihr keine von den gräuelhaften Satzungen tut, die vor euch getan wurden, und euch nicht durch sie unrein macht. Ich bin der HERR, euer Gott.“\tBewahrt die Verpflichtung und das passive Getanwerden der früheren Bräuche.",
+    "new_row": "30\tUnd ihr sollt meine Anordnung befolgen, damit ihr keine von den gräuelhaften Satzungen tut, die vor euch getan wurden, und euch nicht durch sie unrein macht. Ich bin der HERR, euer Gott.“\tDie Anordnung steht in der Einzahl; das frühere Tun der Bräuche ist passiv ausgedrückt."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/03_LEV/LEV_019_1.tsv",
+    "verse": 20,
+    "old_row": "20\tUnd wenn ein Mann mit Samenerguss bei einer Frau liegt und sie eine Sklavin ist, die für einen Mann bestimmt, aber keineswegs losgekauft und der keine Freiheit gegeben worden ist, soll eine Ahndung erfolgen. Sie sollen nicht getötet werden, denn sie ist nicht freigelassen worden.\tDie Frau ist für einen Mann bestimmt statt von ihm verschmäht; bewahrt das passive Getötetwerden und Freigelassenwerden.",
+    "new_row": "20\tUnd wenn ein Mann mit Samenerguss bei einer Frau liegt und sie eine Sklavin ist, die für einen Mann bestimmt, aber keineswegs losgekauft worden ist oder der keine Freiheit gegeben worden ist, soll eine Ahndung erfolgen. Sie sollen nicht getötet werden, denn sie ist nicht freigelassen worden.\tDie Frau ist für einen Mann bestimmt statt von ihm verschmäht; bewahrt das passive Getötetwerden und Freigelassenwerden."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/03_LEV/LEV_012.tsv",
+    "verse": 8,
+    "old_row": "8\tА если её рука не найдёт достаточного для овцы, она возьмёт двух горлиц или двух молодых голубей, одну во всесожжение и одну в жертву за грех; и священник совершит за неё искупление, и она будет чиста».\tСохранён образ руки, не находящей достаточного для овцы, и действие искупления.",
+    "new_row": "8\tА если её рука не найдёт достаточного для овцы, она возьмёт двух горлиц или двух молодых голубей, одну птицу во всесожжение и одну в жертву за грех; и священник совершит за неё искупление, и она будет чиста».\tСохранён образ руки, не находящей достаточного для овцы, и действие искупления."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/03_LEV/LEV_015_1.tsv",
+    "verse": 14,
+    "old_row": "14\tИ в восьмой день возьмёт себе двух горлиц или двух молодых голубей и придёт пред Господом ко входу шатра встречи и отдаст их священнику.\tБлизко к еврейскому.",
+    "new_row": "14\tИ в восьмой день возьмёт себе двух горлиц или двух молодых голубей и придёт пред лицо Господа, ко входу шатра встречи, и отдаст их священнику.\tБлизко к еврейскому."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/03_LEV/LEV_015_1.tsv",
+    "verse": 18,
+    "old_row": "18\tИ женщина, с которой мужчина ляжет с излиянием семени: они омоются водой и будут нечисты до вечера.\tБлизко к еврейскому.",
+    "new_row": "18\tИ если мужчина ляжет с женщиной с излиянием семени, они омоются водой и будут нечисты до вечера.\tБлизко к еврейскому."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/03_LEV/LEV_016_1.tsv",
+    "verse": 1,
+    "old_row": "1\tИ говорил Господь Моисею после смерти двух сыновей Аарона, когда они приблизились пред Господом и умерли.\tЗдесь нет добавления о чуждом огне.",
+    "new_row": "1\tИ говорил Господь Моисею после смерти двух сыновей Аарона, когда они приблизились пред лицо Господа и умерли.\tЗдесь нет добавления о чуждом огне."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/03_LEV/LEV_017.tsv",
+    "verse": 4,
+    "old_row": "4\tи не привёл его ко входу шатра встречи, чтобы представить приношение Господу пред жилищем Господа, тому человеку будет вменена кровь: кровь он пролил, и тот человек будет истреблён из среды своего народа.\tЗдесь нет дополнительного вступления о всесожжении, жертве о спасении и благоухании, повторяющего предписание.",
+    "new_row": "4\tи не привёл его ко входу шатра встречи, чтобы представить приношение Господу пред жилищем Господа, тому человеку будет вменена кровь: кровь он пролил, и тот человек будет истреблён из среды своего народа,\tЗдесь нет дополнительного вступления о всесожжении, жертве о спасении и благоухании, повторяющего предписание."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/03_LEV/LEV_018.tsv",
+    "verse": 6,
+    "old_row": "6\tНикто из вас не приближайтесь ни к какой родне своей плоти, чтобы открыть наготу. Я Господь.\tРодство обозначено через образ плоти.",
+    "new_row": "6\tНикто из вас не должен приближаться ни к какой родне своей плоти, чтобы открыть наготу. Я Господь.\tРодство обозначено через образ плоти."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/03_LEV/LEV_018.tsv",
+    "verse": 10,
+    "old_row": "10\tНаготы дочери твоего сына или дочери твоей дочери не открывай, не открывай их наготы, ибо они — твоя нагота.\tБлизко к еврейскому.",
+    "new_row": "10\tНаготы дочери твоего сына или дочери твоей дочери — их наготы не открывай, ибо они — твоя нагота.\tБлизко к еврейскому."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/03_LEV/LEV_018.tsv",
+    "verse": 29,
+    "old_row": "29\tИбо всякий, кто сделает что-либо из всех этих мерзостей, — души делающих это будут истреблены из среды их народа.\tЗапрет относится к любой из перечисленных мерзостей, а не только ко всем вместе.",
+    "new_row": "29\tИбо если кто-либо сделает что-либо из всех этих мерзостей, то души, делающие это, будут истреблены из среды их народа.\tЗапрет относится к любой из перечисленных мерзостей, а не только ко всем вместе."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/03_LEV/LEV_019_1.tsv",
+    "verse": 5,
+    "old_row": "5\tИ когда будете заколать мирную жертву Господу, заколайте её для вашего принятия.\tБлизко к еврейскому.",
+    "new_row": "5\tИ когда будете заколать мирную жертву Господу, заколайте её, чтобы вы были приняты.\tБлизко к еврейскому."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/03_LEV/LEV_019_1.tsv",
+    "verse": 11,
+    "old_row": "11\tНе крадите и не отрекайтесь от правды и не лгите друг другу.\tБлизко к еврейскому.",
+    "new_row": "11\tНе крадите и не обманывайте и не лгите друг другу.\tБлизко к еврейскому."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/03_LEV/LEV_019_1.tsv",
+    "verse": 20,
+    "old_row": "20\tИ если мужчина ляжет с женщиной с излиянием семени, а она рабыня, обручённая мужчине, и не была выкуплена и свобода не была ей дана, должно быть взыскание; они не будут умерщвлены, ибо она не была освобождена.\tИзлияние семени названо прямо; сохранено пассивное «не будут умерщвлены».",
+    "new_row": "20\tИ если мужчина ляжет с женщиной с излиянием семени, а она рабыня, обручённая мужчине, и не была выкуплена или свобода не была ей дана, должно быть взыскание; они не будут умерщвлены, ибо она не была освобождена.\tИзлияние семени названо прямо; сохранено пассивное «не будут умерщвлены»."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/03_LEV/LEV_019_2.tsv",
+    "verse": 31,
+    "old_row": "31\tНе обращайтесь к вызывающим мёртвых и к знахарям не стремитесь, чтобы не оскверниться ими. Я Господь, ваш Бог.\tПоиск знахарей выражен прямо, вместо одного хождения к ним.",
+    "new_row": "31\tНе обращайтесь к вызывающим мёртвых и к волшебникам; не ищите их, чтобы не оскверниться ими. Я Господь, ваш Бог.\tСохранён отдельный запрет искать их, вместо одного хождения к волшебникам."
+  }
+]

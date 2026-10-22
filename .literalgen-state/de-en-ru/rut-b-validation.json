@@ -1,0 +1,26 @@
+{
+  "scope": "RUT002 de/ru",
+  "files": 2,
+  "rows": 46,
+  "qa_entries": 10,
+  "errors": [],
+  "checks": "Exact old rows; unique path+verse keys; packet verse order; three TSV fields; nonempty; DIFF <=60 words; native labels; prospective quotation balance",
+  "outputs": [
+    {
+      "path": "Tools/LiteralGen/outputs/de/08_RUT/RUT_002.tsv",
+      "rows": 23,
+      "sha256": "a2589630979736fda7b7e539abbb066a1ae5963c423e30444665536f02de6cb2"
+    },
+    {
+      "path": "Tools/LiteralGen/outputs/ru/08_RUT/RUT_002.tsv",
+      "rows": 23,
+      "sha256": "c8f60df3e304c1067e1cc92f71d9a15fd0dfd4955086f31a051a5fa4a381a97b"
+    }
+  ],
+  "protected_preservation": {
+    "files": 7375,
+    "unchanged": true,
+    "missing": 0,
+    "changed": 0
+  }
+}

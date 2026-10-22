@@ -306,7 +306,7 @@ final class TagGraphViewModel {
         let memoTags = (tag.memoTags ?? [])
         for memoTag in memoTags {
             guard let memo = memoTag.memo else { continue }
-            let label = "\(memo.bookId)장 메모" // ⚠️ 책 이름 표시는 BooksProvider가 필요한데
+            let label = String(localized: "\(memo.bookId)장 메모") // ⚠️ 책 이름 표시는 BooksProvider가 필요한데
             // 이 함수는 정적 유틸이라 화면 레이어 서비스에 의존하지 않게 했다 —
             // 호출부(TagDrilldownView)가 BooksProvider로 다시 라벨링한다.
             result.memos.append(.init(id: memo.persistentModelID, memo: memo, label: label))

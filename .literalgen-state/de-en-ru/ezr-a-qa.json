@@ -1,0 +1,37 @@
+[
+  {
+    "path": "Tools/LiteralGen/outputs/de/15_EZR/EZR_001.tsv",
+    "old_row": "3\tWer unter euch aus seinem ganzen Volk ist, mit dem sei sein Gott; und er ziehe hinauf nach Jerusalem, das in Juda ist, und baue das Haus des HERRN, des Gottes Israels; er ist der Gott, der in Jerusalem ist.\tSein Gott wird ausdrücklich mit ihm gewünscht; der Aufstieg wird genannt.",
+    "new_row": "3\tWer unter euch aus seinem ganzen Volk ist, mit dem sei sein Gott; und er ziehe hinauf nach Jerusalem, das in Juda ist, und baue das Haus des HERRN, des Gottes Israels; er ist der Gott, der in Jerusalem ist.\tSein Gott soll mit ihm sein; im Zieltext fehlt hier das Possessivpronomen."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/15_EZR/EZR_001.tsv",
+    "old_row": "6\tUnd alle um sie her stärkten ihre Hände mit silbernen Gefäßen, mit Gold, mit Besitz und Vieh und Kostbarkeiten, außer allem, was freiwillig gegeben wurde.\tNah am Hebräischen.",
+    "new_row": "6\tUnd alle um sie her stärkten ihre Hände mit silbernen Gefäßen, mit Gold, mit Besitz und Vieh und Kostbarkeiten, außer allem, was freiwillig gegeben wurde.\tSilberne Gefäße und Gold werden getrennt genannt, nicht silberne und goldene Geräte."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/15_EZR/EZR_001.tsv",
+    "old_row": "8\tUnd Kores, der König von Persien, brachte sie durch die Hand Mithredaths, des Schatzmeisters, heraus; und er zählte sie Sesbazar, dem Fürsten von Juda, zu.\tDie Vermittlung wird durch eine Hand ausgedrückt.",
+    "new_row": "8\tUnd Kores, der König von Persien, brachte sie durch die Hand Mithredaths, des Schatzmeisters, heraus; und er zählte sie Sesbazar, dem Fürsten von Juda, zu.\tNah am Hebräischen."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/15_EZR/EZR_001.tsv",
+    "old_row": "2\t«Так говорит Кир, царь Персии: все царства земли дал мне Господь, Бог небес, и Он возложил на меня построить Ему дом в Иерусалиме, который в Иудее.\tБлизко к еврейскому.",
+    "new_row": "2\t«Так говорит Кир, царь Персии: все царства земли дал мне Господь, Бог небес, и Он возложил на меня обязанность построить Ему дом в Иерусалиме, который в Иудее.\tБлизко к еврейскому."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/15_EZR/EZR_002_1.tsv",
+    "old_row": "2\tdie mit Serubabel kamen: Jesua, Nehemia, Seraja, Reelaja, Mardochai, Bilsa, Mispar, Bigevai, Rehum, Baana. Die Zahl der Männer des Volkes Israel:\tNah am Hebräischen.",
+    "new_row": "2\tdie mit Serubabel, Jesua, Nehemia, Seraja, Reelaja, Mardochai, Bilsa, Mispar, Bigevai, Rehum und Baana kamen. Die Zahl der Männer des Volkes Israel:\tNah am Hebräischen."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/15_EZR/EZR_002_1.tsv",
+    "old_row": "2\tкоторые пришли с Зоровавелем: Иисус, Неемия, Сараий, Реелай, Мардохей, Билшан, Мисфар, Бигвай, Рехум, Ваан. Число мужей народа Израиля:\tСосчитаны мужи народа.",
+    "new_row": "2\tкоторые пришли с Зоровавелем, Иисусом, Неемиею, Сараием, Реелаем, Мардохеем, Билшаном, Мисфаром, Бигваем, Рехумом и Вааном. Число мужей народа Израиля:\tСосчитаны мужи народа."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/15_EZR/EZR_003.tsv",
+    "old_row": "9\tUnd Jesua trat hin, seine Söhne und seine Brüder, Kadmiel und seine Söhne, die Söhne Judas, als einer, um über die Arbeiter am Haus Gottes Aufsicht zu führen, und die Söhne Henadads, ihre Söhne und ihre Brüder, die Leviten.\tNah am Hebräischen.",
+    "new_row": "9\tUnd Jesua trat hin, und seine Söhne und seine Brüder, Kadmiel und seine Söhne, die Söhne Judas, als einer, um über die Arbeiter am Haus Gottes Aufsicht zu führen, und die Söhne Henadads, ihre Söhne und ihre Brüder, die Leviten.\tNah am Hebräischen."
+  }
+]

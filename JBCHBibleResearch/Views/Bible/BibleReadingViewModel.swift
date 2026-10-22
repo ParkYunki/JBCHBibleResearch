@@ -633,7 +633,8 @@ final class BibleReadingViewModel {
             availableTranslations = enabled
 
             // 모두 꺼져 있으면 열이 하나도 없는 빈 화면이 되므로, 이때만 번들 번역본을 표시용으로 쓴다(목록/팝오버는 그대로 비어 있다).
-            let candidates = enabled.isEmpty ? all.filter(\.isBundled) : enabled
+            // 폴백 번들도 지금 앱 언어의 번들만 쓴다(`BundledTranslationCatalog`).
+            let candidates = enabled.isEmpty ? BundledTranslationCatalog.visible(all).filter(\.isBundled) : enabled
             let validIDs = Set(candidates.map(\.persistentModelID))
             // 사용자가 세션 중 고른 조합은 유지하되, 꺼졌거나 삭제된 번역본은 걸러낸다.
             let previousCount = displayedTranslationIDs.count
@@ -644,7 +645,7 @@ final class BibleReadingViewModel {
             }
             reloadVerses()
         } catch {
-            lastErrorDescription = "등록된 번역본 목록을 불러오지 못했습니다: \(error.localizedDescription)"
+            lastErrorDescription = String(localized: "등록된 번역본 목록을 불러오지 못했습니다: \(error.localizedDescription)")
         }
     }
 

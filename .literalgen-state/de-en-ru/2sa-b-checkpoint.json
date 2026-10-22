@@ -1,0 +1,20 @@
+{
+  "scope": "de/ru009–015; en009–012",
+  "transferred_to_root": "de/ru016",
+  "status": "all generation and verse QA complete; awaiting root official check/redo",
+  "created_files": 27,
+  "created_rows": 488,
+  "own_qa_candidates": 6,
+  "root_qa_candidates": 7,
+  "root_review": "en013–016 and de/ru016 complete",
+  "protected_files": 7501,
+  "protected_unchanged": true,
+  "unreviewed": [],
+  "special_source_notes": [
+    "011:1 actual O messengers",
+    "013:34 LXX marked final report excluded",
+    "015:8 final Hebron explicitly LXX marked, excluded",
+    "015:31 actual O active reporting form",
+    "016:12 actual O my eye, no manuscript claim"
+  ]
+}

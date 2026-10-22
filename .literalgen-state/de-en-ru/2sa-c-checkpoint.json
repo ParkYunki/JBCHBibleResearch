@@ -1,0 +1,137 @@
+{
+  "status": "generation_and_full_qa_complete",
+  "completed_chapters": [
+    17,
+    18,
+    19,
+    20,
+    21,
+    22,
+    23
+  ],
+  "remaining_chapters": [],
+  "new_files": [
+    {
+      "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/10_2SA/2SA_017.tsv",
+      "rows": 29
+    },
+    {
+      "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/10_2SA/2SA_017.tsv",
+      "rows": 29
+    },
+    {
+      "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/en/10_2SA/2SA_017.tsv",
+      "rows": 29
+    },
+    {
+      "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/10_2SA/2SA_018_1.tsv",
+      "rows": 30
+    },
+    {
+      "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/10_2SA/2SA_018_2.tsv",
+      "rows": 3
+    },
+    {
+      "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/10_2SA/2SA_018_1.tsv",
+      "rows": 30
+    },
+    {
+      "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/10_2SA/2SA_018_2.tsv",
+      "rows": 3
+    },
+    {
+      "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/en/10_2SA/2SA_018_1.tsv",
+      "rows": 30
+    },
+    {
+      "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/en/10_2SA/2SA_018_2.tsv",
+      "rows": 3
+    },
+    {
+      "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/10_2SA/2SA_019_1.tsv",
+      "rows": 30
+    },
+    {
+      "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/10_2SA/2SA_019_2.tsv",
+      "rows": 13
+    },
+    {
+      "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/10_2SA/2SA_019_1.tsv",
+      "rows": 30
+    },
+    {
+      "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/10_2SA/2SA_019_2.tsv",
+      "rows": 13
+    },
+    {
+      "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/en/10_2SA/2SA_019_1.tsv",
+      "rows": 30
+    },
+    {
+      "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/en/10_2SA/2SA_019_2.tsv",
+      "rows": 13
+    },
+    {
+      "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/10_2SA/2SA_020.tsv",
+      "rows": 26
+    },
+    {
+      "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/10_2SA/2SA_020.tsv",
+      "rows": 26
+    },
+    {
+      "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/en/10_2SA/2SA_020.tsv",
+      "rows": 26
+    },
+    {
+      "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/10_2SA/2SA_021.tsv",
+      "rows": 22
+    },
+    {
+      "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/10_2SA/2SA_021.tsv",
+      "rows": 22
+    },
+    {
+      "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/10_2SA/2SA_022_1.tsv",
+      "rows": 30
+    },
+    {
+      "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/10_2SA/2SA_022_2.tsv",
+      "rows": 21
+    },
+    {
+      "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/10_2SA/2SA_022_1.tsv",
+      "rows": 30
+    },
+    {
+      "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/10_2SA/2SA_022_2.tsv",
+      "rows": 21
+    },
+    {
+      "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/10_2SA/2SA_023_1.tsv",
+      "rows": 30
+    },
+    {
+      "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/10_2SA/2SA_023_2.tsv",
+      "rows": 9
+    },
+    {
+      "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/10_2SA/2SA_023_1.tsv",
+      "rows": 30
+    },
+    {
+      "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/10_2SA/2SA_023_2.tsv",
+      "rows": 9
+    }
+  ],
+  "transferred_chapters": {
+    "24_de_ru": "root"
+  },
+  "generated_file_count": 28,
+  "generated_rows": 617,
+  "own_qa_rows": 19,
+  "root_en_independent_review_rows": 137,
+  "root_en_qa_rows": 5,
+  "root_native_independent_review_rows": 50,
+  "root_native_qa_rows": 4
+}

@@ -169,7 +169,7 @@ struct ChurchYouthEasterEggView: View {
 
             VStack(spacing: 8) {
                 Text("대구중부교회 청년회")
-                    .font(.custom(SpecialPurposeFonts.titleSerif, size: 32, relativeTo: .largeTitle))
+                    .font(.titleSerif(size: 32, relativeTo: .largeTitle))
                     .fontWeight(.semibold)
                     .multilineTextAlignment(.center)
                     .foregroundStyle(.white)

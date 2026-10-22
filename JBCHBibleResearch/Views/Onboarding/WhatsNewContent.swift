@@ -23,56 +23,56 @@ struct WhatsNewEntry: Identifiable {
 enum WhatsNewContent {
     static let entries: [WhatsNewEntry] = [
         WhatsNewEntry(version: "1.3", items: [
-            "연구문서 - 다중 이미지 문서유형 추가",
-            "연구문서 - 단일 이미지에 '이미지 추가' 기능",
-            "성경 조회 - 메모하기 레이아웃 변경",
-            "의미검색(인물)교정",
-            "기타 레이아웃 수정",
-            "기타 버그 수정"
+            String(localized: "연구문서 - 다중 이미지 문서유형 추가"),
+            String(localized: "연구문서 - 단일 이미지에 '이미지 추가' 기능"),
+            String(localized: "성경 조회 - 메모하기 레이아웃 변경"),
+            String(localized: "의미검색(인물)교정"),
+            String(localized: "기타 레이아웃 수정"),
+            String(localized: "기타 버그 수정")
         ]),
         WhatsNewEntry(version: "1.2.7", items: [
-            "디자인 통일 및 보정",
-            "말씀 노트 레이아웃 정리 및 폴더 관리기능 추가",
-            "통합검색 성경구절 묶음단위 표시",
-            "의미검색 결과 교정",
-            "내 설교 기능 고도화(마인드 맵, 에디터, 뷰어)",
-            "기타 버그 수정"
+            String(localized: "디자인 통일 및 보정"),
+            String(localized: "말씀 노트 레이아웃 정리 및 폴더 관리기능 추가"),
+            String(localized: "통합검색 성경구절 묶음단위 표시"),
+            String(localized: "의미검색 결과 교정"),
+            String(localized: "내 설교 기능 고도화(마인드 맵, 에디터, 뷰어)"),
+            String(localized: "기타 버그 수정")
         ]),
         WhatsNewEntry(version: "1.2.5", items: [
-            "검색(인물, 장소, 주제)고도화",
-            "검색 데이터 최적화",
-            "기타 잘못된 레이아웃 및 버그 수정"
+            String(localized: "검색(인물, 장소, 주제)고도화"),
+            String(localized: "검색 데이터 최적화"),
+            String(localized: "기타 잘못된 레이아웃 및 버그 수정")
         ]),
         WhatsNewEntry(version: "1.2.0", items: [
-            "이름 및 아이콘 변경",
-            "테마검색 추가, 원문조회 시 원어직역 추가",
-            "내 설교 추가(설교관리, 마인드 맵 기능)",
-            "기타 버그 수정"
+            String(localized: "이름 및 아이콘 변경"),
+            String(localized: "테마검색 추가, 원문조회 시 원어직역 추가"),
+            String(localized: "내 설교 추가(설교관리, 마인드 맵 기능)"),
+            String(localized: "기타 버그 수정")
         ]),
         WhatsNewEntry(version: "1.1.0", items: [
-            "연구 문서, 말씀노트 UI 개선",
-            "테마 적용 확대"
+            String(localized: "연구 문서, 말씀노트 UI 개선"),
+            String(localized: "테마 적용 확대")
         ]),
         WhatsNewEntry(version: "1.0.3", items: [
-            "검색 기능 개선"
+            String(localized: "검색 기능 개선")
         ]),
         WhatsNewEntry(version: "1.0.2", items: [
-            "UI 색상 및 기타 레이아웃 수정",
-            "성경 스크롤 버그 수정",
-            "검색 이력 기능 추가"
+            String(localized: "UI 색상 및 기타 레이아웃 수정"),
+            String(localized: "성경 스크롤 버그 수정"),
+            String(localized: "검색 이력 기능 추가")
         ]),
         WhatsNewEntry(version: "1.0.1", items: [
-            "기타 버그 수정",
-            "pdf 검색기능 보정",
-            "성경 배경및 글꼴의 테마색상 추가"
+            String(localized: "기타 버그 수정"),
+            String(localized: "pdf 검색기능 보정"),
+            String(localized: "성경 배경및 글꼴의 테마색상 추가")
         ]),
         WhatsNewEntry(version: "1.0", items: [
-            "성경 조회 화면에 책갈피 기능을 추가했습니다. 자주 보는 장·절을 저장해 두고, 목록에서 골라 바로 이동할 수 있습니다.",
-            "통합 검색 결과에서 성경구절을 탭하면 이제 정확하게 성경 조회 화면의 해당 구절로 이동합니다.",
-            "아이폰 하단 메뉴에 \"통합 검색\" 탭을 새로 추가했습니다. \"개요\"는 \"더보기\" 메뉴 안에서 볼 수 있습니다.",
-            "성경 조회 화면에서 관련 연구문서를 눌렀을 때 반응이 없거나 앱이 종료되던 문제를 고쳤습니다.",
-            "\"번역본 선택\"과 \"말씀 요약\" 아이콘이 서로 구분되도록 바꿨습니다.",
-            "연구 문서 업로드 형식을 hwp·pdf 중심으로 정리했습니다."
+            String(localized: "성경 조회 화면에 책갈피 기능을 추가했습니다. 자주 보는 장·절을 저장해 두고, 목록에서 골라 바로 이동할 수 있습니다."),
+            String(localized: "통합 검색 결과에서 성경구절을 탭하면 이제 정확하게 성경 조회 화면의 해당 구절로 이동합니다."),
+            String(localized: "아이폰 하단 메뉴에 \"통합 검색\" 탭을 새로 추가했습니다. \"개요\"는 \"더보기\" 메뉴 안에서 볼 수 있습니다."),
+            String(localized: "성경 조회 화면에서 관련 연구문서를 눌렀을 때 반응이 없거나 앱이 종료되던 문제를 고쳤습니다."),
+            String(localized: "\"번역본 선택\"과 \"말씀 요약\" 아이콘이 서로 구분되도록 바꿨습니다."),
+            String(localized: "연구 문서 업로드 형식을 hwp·pdf 중심으로 정리했습니다.")
         ])
     ]
 

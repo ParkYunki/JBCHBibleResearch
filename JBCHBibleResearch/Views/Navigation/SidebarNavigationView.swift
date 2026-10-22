@@ -57,6 +57,16 @@ struct SidebarNavigationView: View {
         #endif
     }
 
+    /// 설정 버튼 위치 — 아이패드는 사이드바 상단 맨 왼쪽 끝(2026-10-21 목업 결정, 이전에는 `.automatic`이라 오른쪽 끝).
+    /// `.topBarLeading`은 iOS 전용 심볼이라 macOS는 기존 `.automatic`을 유지한다(macOS는 이 버튼 자체를 만들지 않는다).
+    private var settingsToolbarPlacement: ToolbarItemPlacement {
+        #if os(iOS)
+        .topBarLeading
+        #else
+        .automatic
+        #endif
+    }
+
     /// 사이드바/인스펙터 동시 노출 방지 조율(`IPadSidebarInspectorCoordination.swift`)은
     /// 아이패드 전용이다. 판정 로직은 `showsSettingsToolbarButton`과 같지만 목적이 달라
     /// 별도 프로퍼티로 둔다.
@@ -222,7 +232,7 @@ struct SidebarNavigationView: View {
                         quickItemRow(item)
                     }
                 } header: {
-                    Text("이전").foregroundStyle(settings.bibleTextColor?.opacity(0.6) ?? Color.secondary)
+                    Text(String(localized: "sidebar.section.earlier", defaultValue: "이전", comment: "사이드바 최근 항목 — 그저께보다 이전(온보딩 '이전' 버튼과 구분)")).foregroundStyle(settings.bibleTextColor?.opacity(0.6) ?? Color.secondary)
                 }
             }
         }
@@ -270,7 +280,7 @@ struct SidebarNavigationView: View {
             #endif
             .toolbar {
                 if showsSettingsToolbarButton {
-                    ToolbarItem(placement: .automatic) {
+                    ToolbarItem(placement: settingsToolbarPlacement) {
                         Button {
                             isSettingsPresented = true
                         } label: {
@@ -287,8 +297,8 @@ struct SidebarNavigationView: View {
                 detailView(for: selection ?? .bibleReading)
                     #if os(iOS)
                     .toolbar {
-                        // 성경조회 화면은 전용 "사이드바 열기" 아이콘이 있어(`BibleReadingView.swift`
-                        // `toolbarContent`, `IPadSidebarInspectorCoordination.swift` 참고), 아이패드에서 이
+                        // 성경조회 화면은 전용 "사이드바 열기" 아이콘이 있어(`BibleTopBar.swift`,
+                        // `IPadSidebarInspectorCoordination.swift` 참고), 아이패드에서 이
                         // `.navigation` 아이콘이 트레일링 그룹에 중복으로 붙지 않도록 그 화면에서는 뺀다.
                         // 다른 화면은 대체 아이콘이 없어 이 버튼으로 사이드바를 다시 연다.
                         if columnVisibility == .detailOnly && (selection ?? .bibleReading) != .bibleReading {
@@ -408,24 +418,28 @@ struct SidebarNavigationView: View {
             switch kind {
             case .document(let document): return document.displayTitle
             case .memo(let memo):
-                let bookName = BooksProvider.shared.book(id: memo.bookId)?.nameKo ?? "성경"
+                let bookName = BooksProvider.shared.book(id: memo.bookId)?.displayName ?? String(localized: "성경")
                 // 절 단위 메모(`UserMemo.verse`)는 아래 다른 케이스와 같은 "장:절" 표기를 쓴다.
                 if let verse = memo.verse {
-                    return "\(bookName) \(memo.chapter):\(verse) 메모"
+                    // 절 범위(`verseEnd`)로 연결된 묵상은 "창세기 1:3-5 메모"로 범위를 밝힌다(2026-10-13).
+                    if let verseEnd = memo.verseEnd, verseEnd > verse {
+                        return String(localized: "\(bookName) \(memo.chapter):\(verse)-\(verseEnd) 메모")
+                    }
+                    return String(localized: "\(bookName) \(memo.chapter):\(verse) 메모")
                 }
-                return "\(bookName) \(memo.chapter)장 메모"
+                return String(localized: "\(bookName) \(memo.chapter)장 메모")
             case .summary(let summary):
-                let bookName = BooksProvider.shared.book(id: summary.bookId)?.nameKo ?? "성경"
-                return "\(bookName) \(summary.chapter)장 말씀 요약"
+                let bookName = BooksProvider.shared.book(id: summary.bookId)?.displayName ?? String(localized: "성경")
+                return String(localized: "\(bookName) \(summary.chapter)장 말씀 요약")
             case .highlight(let highlight):
-                let bookName = BooksProvider.shared.book(id: highlight.bookId)?.nameKo ?? "성경"
-                return "\(bookName) \(highlight.chapter):\(highlight.verse) 형광펜"
+                let bookName = BooksProvider.shared.book(id: highlight.bookId)?.displayName ?? String(localized: "성경")
+                return String(localized: "\(bookName) \(highlight.chapter):\(highlight.verse) 형광펜")
             case .phraseNote(let note):
-                let bookName = BooksProvider.shared.book(id: note.bookId)?.nameKo ?? "성경"
-                return "\(bookName) \(note.chapter):\(note.verse) 메모"
+                let bookName = BooksProvider.shared.book(id: note.bookId)?.displayName ?? String(localized: "성경")
+                return String(localized: "\(bookName) \(note.chapter):\(note.verse) 메모")
             case .crossReference(let reference):
-                let bookName = BooksProvider.shared.book(id: reference.bookId)?.nameKo ?? "성경"
-                return "\(bookName) \(reference.chapter):\(reference.verse) 관주"
+                let bookName = BooksProvider.shared.book(id: reference.bookId)?.displayName ?? String(localized: "성경")
+                return String(localized: "\(bookName) \(reference.chapter):\(reference.verse) 관주")
             }
         }
         var systemImage: String {
@@ -535,14 +549,15 @@ struct SidebarNavigationView: View {
     /// "그저께(날짜)" 헤더 문구 — 실제 날짜(예: "8월 24일")를 괄호 안에 보여준다.
     private static let dayBeforeYesterdayDateFormatter: DateFormatter = {
         let formatter = DateFormatter()
-        formatter.dateFormat = "M월 d일"
-        formatter.locale = Locale(identifier: "ko_KR")
+        // 앱 언어에 맞춘 "월 일" 표기(ko: "8월 24일", en: "Aug 24", es: "24 ago"). 템플릿은 설정 시점의 locale을 쓰므로 locale을 먼저 정한다.
+        formatter.locale = .current
+        formatter.setLocalizedDateFormatFromTemplate("MMMd")
         return formatter
     }()
 
     private var dayBeforeYesterdayHeaderLabel: String {
-        guard let date = Calendar.current.date(byAdding: .day, value: -2, to: .now) else { return "그저께" }
-        return "그저께(\(Self.dayBeforeYesterdayDateFormatter.string(from: date)))"
+        guard let date = Calendar.current.date(byAdding: .day, value: -2, to: .now) else { return String(localized: "그저께") }
+        return String(localized: "그저께(\(Self.dayBeforeYesterdayDateFormatter.string(from: date)))")
     }
 
     @ViewBuilder
@@ -566,7 +581,7 @@ struct SidebarNavigationView: View {
                 Button {
                     togglePinQuickItem(item)
                 } label: {
-                    Label(item.isPinned ? "고정 해제" : "고정", systemImage: item.isPinned ? "pin.slash" : "pin")
+                    Label(item.isPinned ? String(localized: "고정 해제") : String(localized: "고정"), systemImage: item.isPinned ? "pin.slash" : "pin")
                 }
             }
         } else {
@@ -661,7 +676,7 @@ struct MacSerifTitleModifier: ViewModifier {
                 // 오른쪽 아이콘 묶음은 각 화면이 `.primaryAction`으로 두어 오른쪽 끝에 놓이게 한다.
                 ToolbarItem(placement: .navigation) {
                     Text(title)
-                        .font(.custom(SpecialPurposeFonts.titleSerif, size: 20, relativeTo: .title3))
+                        .font(.titleSerif(title, size: 20, relativeTo: .title3))
                         .fontWeight(.semibold)
                         .foregroundStyle(settings.bibleTextColor ?? .primary)
                         .lineLimit(1)

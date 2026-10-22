@@ -1,0 +1,17 @@
+{
+  "own_files": 21,
+  "own_rows": 485,
+  "own_full_qa": true,
+  "own_qa_candidates": 13,
+  "root_en_files": 7,
+  "root_en_rows": 141,
+  "root_en_full_qa": true,
+  "root_en_candidates": 1,
+  "root_native_files": 4,
+  "root_native_rows": 102,
+  "root_native_full_qa": true,
+  "root_native_candidates": 0,
+  "protected_files": 7603,
+  "protected_unchanged": true,
+  "tsv_direct_changes": false
+}

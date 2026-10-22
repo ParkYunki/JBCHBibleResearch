@@ -1,0 +1,21 @@
+{
+  "created_files": 27,
+  "created_rows": 488,
+  "own_qa_candidates": 6,
+  "root_qa_candidates": 7,
+  "root_english_reviewed_chapters": [
+    13,
+    14,
+    15,
+    16
+  ],
+  "root_english_reviewed_rows": 132,
+  "root_native_reviewed_rows": 46,
+  "protected_files": 7501,
+  "protected_unchanged": true,
+  "exact_rows": true,
+  "unique_path_verse": true,
+  "format_verse_order_diff_length": true,
+  "native_quote_balance": true,
+  "unreviewed": []
+}

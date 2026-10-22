@@ -1,0 +1,74 @@
+[
+  {
+    "path": "Tools/LiteralGen/outputs/ru/10_2SA/2SA_001.tsv",
+    "verse": 12,
+    "old_row": "12\tИ они оплакивали и плакали и постились до вечера о Сауле и об Ионафане, его сыне, и о народе Господа и о доме Израиля, ибо они пали от меча.\tНазваны оплакивание и плач.",
+    "new_row": "12\tИ они рыдали и плакали и постились до вечера о Сауле и об Ионафане, его сыне, и о народе Господа и о доме Израиля, ибо они пали от меча.\tНазваны рыдание и плач."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/10_2SA/2SA_001.tsv",
+    "verse": 18,
+    "old_row": "18\tUnd er sagte, die Söhne Judas den Bogen zu lehren; siehe, es ist im Buch der Redlichen geschrieben:\tDas Hebräische nennt den Bogen, ohne eigenes Wort für Lied.",
+    "new_row": "18\tUnd er sagte, man solle die Söhne Judas den Bogen lehren; siehe, es ist im Buch der Redlichen geschrieben:\tDas Hebräische nennt den Bogen, ohne eigenes Wort für Lied."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/10_2SA/2SA_001.tsv",
+    "verse": 18,
+    "old_row": "18\tИ он сказал научить сынов Иуды луку; вот, это написано в книге Праведного:\tЕврейский текст сохраняет «вот» перед указанием на книгу.",
+    "new_row": "18\tИ он сказал, чтобы сынов Иуды научили луку; вот, это написано в книге Праведного:\tЕврейский текст сохраняет «вот» перед указанием на книгу."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/10_2SA/2SA_002_1.tsv",
+    "verse": 22,
+    "old_row": "22\tИ Авенир снова сказал Асаилу: «Отстань от меня! Зачем мне поразить тебя на землю? И как мне поднять моё лицо к Иоаву, твоему брату?»\tЕврейский текст задаёт вопрос о поражении и сохраняет образ поднятого лица.",
+    "new_row": "22\tИ Авенир снова сказал Асаилу: «Отстань от меня! Зачем мне повергнуть тебя на землю? И как мне поднять моё лицо к Иоаву, твоему брату?»\tЕврейский текст задаёт вопрос о поражении и сохраняет образ поднятого лица."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/10_2SA/2SA_003_1.tsv",
+    "verse": 28,
+    "old_row": "28\tUnd David hörte es danach und sagte: „Unschuldig sind ich und mein Königtum vor dem HERRN für immer am Blut Abners, des Sohnes Ners.\tNah am Hebräischen.",
+    "new_row": "28\tUnd David hörte es danach und sagte: „Ich und mein Königtum sind vor dem HERRN für immer unschuldig am Blut Abners, des Sohnes Ners.\tNah am Hebräischen."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/10_2SA/2SA_003_1.tsv",
+    "verse": 28,
+    "old_row": "28\tИ Давид услышал после этого и сказал: «Невинен я и моё царство перед Господом навеки в крови Авенира, сына Нира.\tБлизко к еврейскому.",
+    "new_row": "28\tИ Давид услышал после этого и сказал: «Я и моё царство невинны перед Господом навеки в крови Авенира, сына Нира.\tБлизко к еврейскому."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/10_2SA/2SA_005.tsv",
+    "verse": 8,
+    "old_row": "8\tUnd David sagte an jenem Tag: „Wer einen Jebusiter schlägt, soll zum Wasserschacht gelangen und die Lahmen und die Blinden erreichen, die von Davids Seele gehasst werden.“ Darum sagt man: „Ein Blinder und ein Lahmer wird nicht ins Haus kommen.“\tDas Hebräische spricht vom Kommen ins Haus statt einer Aufforderung, jemanden nicht hineinzulassen.",
+    "new_row": "8\tUnd David sagte an jenem Tag: „Wer einen Jebusiter schlägt, soll zum Wasserschacht gelangen und die Lahmen und die Blinden erreichen, die von Davids Seele gehasst werden.“ Darum sagt man: „Ein Blinder und ein Lahmer werden nicht ins Haus kommen.“\tDas Hebräische spricht vom Kommen ins Haus statt einer Aufforderung, jemanden nicht hineinzulassen."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/10_2SA/2SA_005.tsv",
+    "verse": 8,
+    "old_row": "8\tИ Давид сказал в тот день: «Всякий, поражающий иевусея, пусть достигнет водного канала и хромых и слепых, ненавидимых душой Давида». Потому говорят: «Слепой и хромой не войдёт в дом».\tХромые и слепые в еврейском тексте ненавидимы душой Давида, а не ненавидят её; имя Господа при доме не названо.",
+    "new_row": "8\tИ Давид сказал в тот день: «Всякий, поражающий иевусея, пусть достигнет водного канала и хромых и слепых, ненавидимых душой Давида». Потому говорят: «Слепой и хромой не войдут в дом».\tХромые и слепые в еврейском тексте ненавидимы душой Давида, а не ненавидят её; имя Господа при доме не названо."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/10_2SA/2SA_007.tsv",
+    "verse": 8,
+    "old_row": "8\tИ теперь так скажи Моему рабу Давиду: Так говорит Господь воинств: Я взял тебя с пастбища, из-за стада, чтобы быть правителем над Моим народом, над Израилем.\tЕврейский текст называет пастбище и взятие из-за стада.",
+    "new_row": "8\tИ теперь так скажи Моему рабу Давиду: Так говорит Господь воинств: Я взял тебя с пастбища, из-за стада, чтобы ты был правителем над Моим народом, над Израилем.\tЕврейский текст называет пастбище и взятие из-за стада."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/10_2SA/2SA_007.tsv",
+    "verse": 21,
+    "old_row": "21\tРади Твоего слова и по Твоему сердцу Ты сделал всё это великое, чтобы дать узнать Твоему рабу.\tЕврейский текст описывает совершённое дело и цель дать рабу узнать.",
+    "new_row": "21\tРади Твоего слова и по Твоему сердцу Ты сделал всё это великое, чтобы дать Твоему рабу это узнать.\tЕврейский текст описывает совершённое дело и цель дать рабу узнать."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/10_2SA/2SA_006.tsv",
+    "verse": 6,
+    "old_row": "6\tUnd sie kamen bis zur Tenne Nachons, und Usa streckte sich zur Lade Gottes aus und ergriff sie, denn die Rinder waren gestolpert.\tDas Hebräische beschreibt das Stolpern der Rinder.",
+    "new_row": "6\tUnd sie kamen bis zur Tenne Nachons, und Usa streckte seine Hand zur Lade Gottes aus und ergriff sie, denn die Rinder waren gestolpert.\tDas Hebräische beschreibt das Stolpern der Rinder."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/10_2SA/2SA_006.tsv",
+    "verse": 6,
+    "old_row": "6\tИ они пришли до гумна Нахона, и Оза простёрся к ковчегу Бога и схватил его, ибо волы споткнулись.\tЕврейский текст описывает протягивание к ковчегу и схватывание его без отдельного указания цели; волы споткнулись.",
+    "new_row": "6\tИ они пришли до гумна Нахона, и Оза протянул руку к ковчегу Бога и схватил его, ибо волы споткнулись.\tЕврейский текст описывает протягивание к ковчегу и схватывание его без отдельного указания цели; волы споткнулись."
+  }
+]

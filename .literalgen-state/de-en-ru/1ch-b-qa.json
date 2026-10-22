@@ -1,0 +1,57 @@
+[
+  {
+    "path": "Tools/LiteralGen/outputs/de/13_1CH/1CH_011_1.tsv",
+    "old_row": "28\tIra, der Sohn des Ikkes, des Thekoiters; Abieser, der Anathothiter;\tDer Herkunftsname schließt an Ikkes an.",
+    "new_row": "28\tIra, der Sohn Ikkes, der Thekoiter; Abieser, der Anathothiter;\tNah am Hebräischen."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/13_1CH/1CH_011_1.tsv",
+    "old_row": "28\tИра, сын Икеша, фекоитянина; Евиезер, анафофянин;\tОбозначение происхождения относится к Икешу.",
+    "new_row": "28\tИра, сын Икеша, фекоитянин; Евиезер, анафофянин;\tБлизко к еврейскому."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/13_1CH/1CH_011_2.tsv",
+    "old_row": "34\tdie Söhne Hasems, des Gisoniters; Jonathan, der Sohn Sages, des Harariters;\tDer Herkunftsname schließt an Sage an.",
+    "new_row": "34\tdie Söhne Hasems, des Gisoniters; Jonathan, der Sohn Sages, der Harariter;\tNah am Hebräischen."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/13_1CH/1CH_011_2.tsv",
+    "old_row": "34\tсыновья Гашема, гизонитянина; Ионафан, сын Шаге, гараритянина;\tОбозначение происхождения относится к Шаге.",
+    "new_row": "34\tсыновья Гашема, гизонитянина; Ионафан, сын Шаге, гараритянин;\tБлизко к еврейскому."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/13_1CH/1CH_011_2.tsv",
+    "old_row": "35\tAhiam, der Sohn Sachars, des Harariters; Elipal, der Sohn Urs;\tDer Herkunftsname schließt an Sachar an.",
+    "new_row": "35\tAhiam, der Sohn Sachars, der Harariter; Elipal, der Sohn Urs;\tNah am Hebräischen."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/13_1CH/1CH_011_2.tsv",
+    "old_row": "35\tАхиам, сын Сахара, гараритянина; Елифал, сын Уры;\tОбозначение происхождения относится к Сахару.",
+    "new_row": "35\tАхиам, сын Сахара, гараритянин; Елифал, сын Уры;\tБлизко к еврейскому."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/13_1CH/1CH_016_2.tsv",
+    "old_row": "36\tGesegnet sei der HERR, der Gott Israels, von Ewigkeit bis Ewigkeit! Und das ganze Volk sagte: „Amen!“, und lobte den HERRN.\tDas Loben ist als Handlung wiedergegeben.",
+    "new_row": "36\tGesegnet sei der HERR, der Gott Israels, von Ewigkeit bis Ewigkeit! Und das ganze Volk sagte: „Amen!“, und lobte den HERRN.\tNah am Hebräischen."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/13_1CH/1CH_009_1.tsv",
+    "old_row": "22\tAlle für Torhüter an den Schwellen Auserlesenen waren zweihundertzwölf; sie waren nach ihren Dörfern in die Geschlechtsregister eingetragen. Sie hatten David und Samuel, der Seher, in ihr Vertrauensamt eingesetzt.\tEin Vertrauensamt ist ausdrücklich genannt.",
+    "new_row": "22\tAlle für Torhüter an den Schwellen Auserlesenen waren zweihundertzwölf; sie waren nach ihren Dörfern in die Geschlechtsregister eingetragen. David und Samuel, der Seher, hatten sie in ihr Vertrauensamt eingesetzt.\tEin Vertrauensamt ist ausdrücklich genannt."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/13_1CH/1CH_009_1.tsv",
+    "old_row": "5\tИ из шилонян: Асаия, первенец, и его сыновья.\tОтдельного сыновей нет.",
+    "new_row": "5\tИ из шилонян: Асаия, первенец, и его сыновья.\tПеред обозначением шилонян отдельного сыновей нет."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/13_1CH/1CH_012_2.tsv",
+    "old_row": "33\tvon Sebulon, die ins Heer auszogen, zum Kampf gerüstet mit allen Kriegsgeräten: fünfzigtausend, um sich ohne Herz und Herz zu ordnen;\tDas wiederholte Herz bleibt als Bild erhalten.",
+    "new_row": "33\tvon Sebulon, die ins Heer auszogen, zum Kampf gerüstet mit allen Kriegsgeräten: fünfzigtausend, um sich ohne ein Herz und ein anderes Herz zu ordnen;\tDas wiederholte Herz bleibt als Bild erhalten."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/13_1CH/1CH_012_2.tsv",
+    "old_row": "33\tиз Завулона, выходящие в войско, строящиеся к битве со всеми военными орудиями: пятьдесят тысяч, чтобы строиться без сердца и сердца;\tСохранено повторение сердца.",
+    "new_row": "33\tиз Завулона, выходящие в войско, строящиеся к битве со всеми военными орудиями: пятьдесят тысяч, чтобы строиться без одного сердца и другого сердца;\tСохранено повторение сердца."
+  }
+]

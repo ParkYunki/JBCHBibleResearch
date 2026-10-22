@@ -40,10 +40,10 @@ struct VerseMentionListView: View {
     // exhaustive switch — `VerseMentionSourceType`에 케이스가 늘면 컴파일 에러로 여기를 놓치지 않는다.
     private func sourceLabel(_ mention: VerseMention) -> String {
         switch mention.sourceType {
-        case .memo: return "메모"
-        case .document: return "연구 문서"
-        case .wordSummary: return "말씀 요약"
-        case .sermon: return "내 설교"
+        case .memo: return String(localized: "메모")
+        case .document: return String(localized: "연구 문서")
+        case .wordSummary: return String(localized: "말씀 요약")
+        case .sermon: return String(localized: "내 설교")
         }
     }
 

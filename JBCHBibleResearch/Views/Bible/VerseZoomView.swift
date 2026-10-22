@@ -203,7 +203,7 @@ struct VerseZoomView: View {
 
     /// 레이어 머리 제목 — "책이름 장번호장 절번호절"(`navigationTitle`과 같은 계산식).
     private var layerTitle: String {
-        "\(currentColumn?.localizedBookChapterLabel ?? "")장 \(verseNumber)절"
+        String(localized: "\(currentColumn?.localizedBookChapterLabel ?? "")장 \(verseNumber)절")
     }
 
     var body: some View {
@@ -217,7 +217,7 @@ struct VerseZoomView: View {
                         .buttonStyle(BibleBarButtonStyle(height: 40, cornerRadius: 10, fontSize: 15))
                 }
                 VerseLayerStrip(
-                    verseLabel: "\(verseNumber)절",
+                    verseLabel: String(localized: "\(verseNumber)절"),
                     canGoPrevious: canGoToPreviousVerse, canGoNext: canGoToNextVerse,
                     onPrevious: onNavigateToPreviousVerse, onNext: onNavigateToNextVerse
                 ) {
@@ -232,10 +232,10 @@ struct VerseZoomView: View {
                         isSelecting.toggle()
                         selectedRange = NSRange(location: 0, length: 0)
                     } label: {
-                        Label(isSelecting ? "뷰어" : "편집", systemImage: isSelecting ? "eye" : "pencil")
+                        Label(isSelecting ? String(localized: "뷰어") : String(localized: "편집"), systemImage: isSelecting ? "eye" : "pencil")
                     }
                     .buttonStyle(BibleBarButtonStyle(kind: isSelecting ? .primary : .secondary, height: 40, cornerRadius: 10, fontSize: 15))
-                    .accessibilityLabel(isSelecting ? "글자 선택 끝내기" : "글자 선택 모드")
+                    .accessibilityLabel(isSelecting ? String(localized: "글자 선택 끝내기") : String(localized: "글자 선택 모드"))
                 }
                 #endif
                 if columns.count > 1 {
@@ -335,10 +335,10 @@ struct VerseZoomView: View {
                         isSelecting.toggle()
                         selectedRange = NSRange(location: 0, length: 0)
                     } label: {
-                        Label(isSelecting ? "뷰어" : "편집", systemImage: isSelecting ? "eye" : "pencil")
+                        Label(isSelecting ? String(localized: "뷰어") : String(localized: "편집"), systemImage: isSelecting ? "eye" : "pencil")
                     }
                     .buttonStyle(BibleBarButtonStyle(kind: isSelecting ? .primary : .secondary))
-                    .help(isSelecting ? "글자 선택 끝내기(표시 모드)" : "글자 선택 모드")
+                    .help(isSelecting ? String(localized: "글자 선택 끝내기(표시 모드)") : String(localized: "글자 선택 모드"))
                 }
                 #endif
             }
@@ -506,15 +506,15 @@ struct VerseZoomView: View {
                 .fill(textColor.opacity(0.22))
                 .frame(width: 1, height: 32)
 
-            toolTile(title: "메모", systemImage: "text.bubble") {
+            toolTile(title: String(localized: "메모"), systemImage: "text.bubble") {
                 beginPhraseNoteFromSelection()
             }
-            toolTile(title: "개인 묵상", systemImage: "note.text") {
+            toolTile(title: String(localized: "개인 묵상"), systemImage: "note.text") {
                 beginComposingPersonalNote()
             }
             // 관주 버튼은 항상 새로 만들기 시트(`CrossReferenceTargetPicker`)를 열고, 겹치는 기존 관주는 `existingReferences`로
             // 시트에 넘겨 그 안에서 보여준다(아래 `.sheet` 참고).
-            toolTile(title: "관주", systemImage: "link") {
+            toolTile(title: String(localized: "관주"), systemImage: "link") {
                 isCrossReferencePickerPresented = true
             }
         }
@@ -569,7 +569,7 @@ struct VerseZoomView: View {
         let isPhone = UIDevice.current.userInterfaceIdiom == .phone
         let dotSize: CGFloat = isPhone ? 21 : 24
         return VerseLayerFooter {
-            VerseLayerToolCaption(title: "형광펜") {
+            VerseLayerToolCaption(title: String(localized: "형광펜")) {
                 HStack(spacing: isPhone ? 6 : 8) {
                     ForEach(HighlightColorTag.allCases) { tag in
                         Button {
@@ -591,7 +591,7 @@ struct VerseZoomView: View {
             // 선택 범위와 겹치는 기존 메모가 있으면(`existingPhraseNote(overlapping:)`) 중복 등록하지 않고 그 메모를 편집 모드로 연다.
             // 팝오버를 열기로 결정하는 이 순간 `selectedRange`/`anchorText`를 `editingAnchorRange`/`editingAnchorText`에 스냅샷으로 떠 둔다
             // (상태 선언부 주석 참고). 앞뒤 공백은 `trimmedRange`로 뺀다.
-            VerseLayerToolCaption(title: "메모") {
+            VerseLayerToolCaption(title: String(localized: "메모")) {
                 Button {
                     beginPhraseNoteFromSelection()
                 } label: {
@@ -601,7 +601,7 @@ struct VerseZoomView: View {
                 .accessibilityLabel("메모")
             }
 
-            VerseLayerToolCaption(title: "개인 묵상") {
+            VerseLayerToolCaption(title: String(localized: "개인 묵상")) {
                 Button {
                     beginComposingPersonalNote()
                 } label: {
@@ -613,7 +613,7 @@ struct VerseZoomView: View {
 
             // 관주 버튼은 항상 새로 만들기 시트(`CrossReferenceTargetPicker`)를 열고, 겹치는 기존 관주는 `existingReferences`로
             // 시트에 넘겨 그 안에서 보여준다(아래 `.sheet` 참고).
-            VerseLayerToolCaption(title: "관주") {
+            VerseLayerToolCaption(title: String(localized: "관주")) {
                 Button {
                     isCrossReferencePickerPresented = true
                 } label: {
@@ -687,7 +687,7 @@ struct VerseZoomView: View {
     }
 
     private var crossReferenceSourceLabel: String {
-        "\(currentColumn?.localizedBookChapterLabel ?? "")장 \(verseNumber)절"
+        String(localized: "\(currentColumn?.localizedBookChapterLabel ?? "")장 \(verseNumber)절")
     }
 
     private func applyHighlight(colorTag: HighlightColorTag) {
@@ -1075,7 +1075,7 @@ struct VerseZoomView: View {
 
     private func phraseMemoLabel(_ memo: UserMemo) -> String {
         let trimmed = memo.contentText.trimmingCharacters(in: .whitespacesAndNewlines)
-        return trimmed.isEmpty ? "(내용 없음)" : trimmed
+        return trimmed.isEmpty ? String(localized: "(내용 없음)") : trimmed
     }
 }
 

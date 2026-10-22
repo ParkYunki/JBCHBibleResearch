@@ -1,0 +1,44 @@
+[
+  {
+    "path": "Tools/LiteralGen/outputs/ru/10_2SA/2SA_012_1.tsv",
+    "verse": 16,
+    "old_row": "16\tИ искал Давид Бога ради юноши; и постился Давид постом, и вошёл, и провёл ночь, и лежал на земле.\tСохранены искание Бога, повтор поста и вход; уединение прямо не названо.",
+    "new_row": "16\tИ искал Давид Бога ради мальчика; и постился Давид постом, и вошёл, и провёл ночь, и лежал на земле.\tСохранены искание Бога, повтор поста и вход; уединение прямо не названо.",
+    "reason": "Use the contextual child sense of נער without imposing adolescent age."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/10_2SA/2SA_013_1.tsv",
+    "verse": 8,
+    "old_row": "8\tUnd Thamar ging in das Haus ihres Bruders Amnon, und er lag da. Und sie nahm den Teig und knetete ihn und machte vor seinen Augen Kuchen und kochte die Kuchen.\tNah am Hebräischen.",
+    "new_row": "8\tUnd Thamar ging in das Haus ihres Bruders Amnon, und er lag da. Und sie nahm den Teig und knetete ihn und machte vor seinen Augen Kuchen und garte die Kuchen.\tNah am Hebräischen.",
+    "reason": "Use a native general cooking verb rather than implying boiling cakes."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/10_2SA/2SA_013_1.tsv",
+    "verse": 8,
+    "old_row": "8\tИ пошла Фамарь в дом своего брата Амнона, а он лежал. И она взяла тесто, и замесила, и приготовила лепёшки перед его глазами, и сварила лепёшки.\tНазвано тесто, а не мука.",
+    "new_row": "8\tИ пошла Фамарь в дом своего брата Амнона, а он лежал. И она взяла тесто, и замесила, и сделала лепёшки перед его глазами, и приготовила лепёшки.\tНазвано тесто, а не мука.",
+    "reason": "Use general cooking language without imposing boiling as the method."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/10_2SA/2SA_014_1.tsv",
+    "verse": 7,
+    "old_row": "7\tUnd siehe, die ganze Sippe ist gegen deine Magd aufgestanden und hat gesagt: ‚Gib den heraus, der seinen Bruder geschlagen hat, damit wir ihn für die Seele seines Bruders, den er getötet hat, töten und auch den Erben vernichten!‘ Und sie werden meine Glut auslöschen, die übrig geblieben ist, sodass meinem Mann weder Name noch Rest auf der Fläche des Erdbodens bleibt.“\tDas Bild ist eine verbleibende Glut, nicht nur ein Funke; das Töten benennt keine besondere Weise des Würgens.",
+    "new_row": "7\tUnd siehe, die ganze Sippe ist gegen deine Magd aufgestanden und hat gesagt: ‚Gib den heraus, der seinen Bruder geschlagen hat, damit wir ihn für die Seele seines Bruders, den er getötet hat, töten und auch den Erben vernichten!‘ Und sie werden mein Glutstück auslöschen, das übrig geblieben ist, sodass meinem Mann weder Name noch Rest auf der Fläche des Erdbodens bleibt.“\tDas Bild ist ein verbleibendes Glutstück, nicht nur ein Funke; das Töten benennt keine besondere Weise des Würgens.",
+    "reason": "Preserve the singular ember rather than only a mass noun for heat."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/10_2SA/2SA_014_1.tsv",
+    "verse": 26,
+    "old_row": "26\tИ когда он стриг свою голову — и бывало через промежутки дней, что он стриг её, потому что она отягощала его, и он стриг её, — он взвешивал волосы своей головы: двести сиклей по весовому камню царя.\tОн сам взвешивает волосы; сохранён образ весового камня царя.",
+    "new_row": "26\tИ когда он стриг свою голову — и бывало по истечении дней, что он стриг её, потому что она отягощала его, и он стриг её, — он взвешивал волосы своей головы: двести сиклей по весовому камню царя.\tОн сам взвешивает волосы; сохранён образ весового камня царя.",
+    "reason": "Use native wording for the interval ending."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/10_2SA/2SA_015_1.tsv",
+    "verse": 20,
+    "old_row": "20\tGestern bist du gekommen, und heute sollte ich dich umhertreiben, mit uns zu gehen? Ich aber gehe, wohin ich gehe. Kehhre zurück und bringe deine Brüder mit dir zurück! Güte und Treue seien mit dir!“\tDas Gehen ist wiederholt; eine eigene Aussage über Können fehlt.",
+    "new_row": "20\tGestern bist du gekommen, und heute sollte ich dich umhertreiben, mit uns zu gehen? Ich aber gehe, wohin ich gehe. Kehre zurück und bringe deine Brüder mit dir zurück! Güte und Treue seien mit dir!“\tDas Gehen ist wiederholt; eine eigene Aussage über Können fehlt.",
+    "reason": "Spelling correction."
+  }
+]

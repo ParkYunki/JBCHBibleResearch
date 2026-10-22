@@ -38,7 +38,7 @@ enum SermonFixedTitle {
         #if os(iOS)
         return ""
         #else
-        return "내 설교"
+        return String(localized: "내 설교")
         #endif
     }
 }
@@ -436,8 +436,8 @@ struct SermonComingSoonView: View {
 
         var title: String {
             switch self {
-            case .editor: return "설교 작성"
-            case .viewer: return "설교 뷰어"
+            case .editor: return String(localized: "설교 작성")
+            case .viewer: return String(localized: "설교 뷰어")
             }
         }
 

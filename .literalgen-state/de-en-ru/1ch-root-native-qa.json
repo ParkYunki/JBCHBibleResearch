@@ -1,0 +1,17 @@
+[
+  {
+    "path": "Tools/LiteralGen/outputs/ru/13_1CH/1CH_005.tsv",
+    "old_row": "25\tИ они поступили неверно по отношению к Богу отцов своих и блудно пошли вслед богов народов земли, которых Бог уничтожил перед ними.\tЕврейский глагол означает уничтожение, а не только изгнание.",
+    "new_row": "25\tИ они поступили неверно по отношению к Богу отцов своих и блудодействовали, следуя за богами народов земли, которых Бог уничтожил перед ними.\tЕврейский глагол означает уничтожение, а не только изгнание."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/13_1CH/1CH_008_1.tsv",
+    "old_row": "29\tUnd in Gibeon wohnte der Vater Gibeons; und der Name seiner Frau war Maacha.\tNah am Hebräischen.",
+    "new_row": "29\tUnd in Gibeon wohnten sie; und der Name der Frau des Vaters Gibeons war Maacha.\tDas hebräische Verb des Wohnens steht im Plural; Luther verwendet den Singular."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/13_1CH/1CH_008_1.tsv",
+    "old_row": "29\tИ в Гаваоне жил отец Гаваона; и имя его жены Мааха.\tИмя Иеил не названо; Гаваон назван прямо.",
+    "new_row": "29\tИ в Гаваоне жили они; и имя жены отца Гаваона — Мааха.\tИмя Иеил не названо; Гаваон назван прямо."
+  }
+]

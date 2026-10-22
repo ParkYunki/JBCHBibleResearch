@@ -1,0 +1,680 @@
+[
+  {
+    "path": "Tools/LiteralGen/outputs/ru/06_JOS/JOS_010_1.tsv",
+    "verse": 6,
+    "old_row": "6\tИ послали мужчины Гаваона к Иисусу в стан, в Галгал, сказать: «Не ослабляй твоих рук от твоих рабов; поднимись к нам скорее и спаси нас и помоги нам, ибо собрались против нас все цари аморреянина, живущие в горах».\tРуки названы во множественном числе; «Израильский» при стане не добавлено. Прямо назван подъём.",
+    "new_row": "6\tИ послали мужчины Гаваона к Иисусу в стан, в Галгал, сказать: «Не отводи своих рук от своих рабов; поднимись к нам скорее и спаси нас и помоги нам, ибо собрались против нас все цари аморреянина, живущие в горах».\tРуки названы во множественном числе; «Израильский» при стане не добавлено. Прямо назван подъём."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/06_JOS/JOS_010_1.tsv",
+    "verse": 7,
+    "old_row": "7\tИ поднялся Иисус из Галгала, он и весь народ войны с ним и все могучие воины.\tВыражен подъём.",
+    "new_row": "7\tИ поднялся Иисус из Галгала, он и весь военный народ с ним и все могучие воины.\tВыражен подъём."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/06_JOS/JOS_010_1.tsv",
+    "verse": 17,
+    "old_row": "17\tИ было сообщено Иисусу, сказав: «Найдены пять царей, скрывающиеся в пещере в Македе».\tНахождение выражено страдательной формой.",
+    "new_row": "17\tИ Иисусу было сообщено: «Найдены пять царей, скрывающихся в пещере в Македе».\tНахождение выражено страдательной формой."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/06_JOS/JOS_010_1.tsv",
+    "verse": 22,
+    "old_row": "22\tИ сказал Иисус: «Откройте рот пещеры и выведите ко мне этих пять царей из пещеры!»\tОтверстие названо ртом; пещера повторена.",
+    "new_row": "22\tИ сказал Иисус: «Откройте рот пещеры и выведите ко мне этих пятерых царей из пещеры!»\tОтверстие названо ртом; пещера повторена."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/06_JOS/JOS_010_1.tsv",
+    "verse": 23,
+    "old_row": "23\tИ сделали так и вывели к нему этих пять царей из пещеры: царя Иерусалима, царя Хеврона, царя Иармуфа, царя Лахиса, царя Еглона.\tБлизко к еврейскому.",
+    "new_row": "23\tИ сделали так и вывели к нему этих пятерых царей из пещеры: царя Иерусалима, царя Хеврона, царя Иармуфа, царя Лахиса, царя Еглона.\tБлизко к еврейскому."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/06_JOS/JOS_010_1.tsv",
+    "verse": 26,
+    "old_row": "26\tИ поразил их Иисус после этого и умертвил их и повесил их на пяти деревьях; и были они повешены на деревьях до вечера.\tПоследнее состояние выражено как повешенность.",
+    "new_row": "26\tИ поразил их Иисус после этого и умертвил их и повесил их на пяти деревьях; и были они повешены на деревьях до вечера.\tЗаключительная фраза сохраняет страдательную форму: «были повешены»."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/06_JOS/JOS_010_2.tsv",
+    "verse": 33,
+    "old_row": "33\tDamals zog Horam, der König von Geser, hinauf, um Lachis zu helfen; und Josua schlug ihn und sein Volk, bis er ihm keinen Überlebenden übrig ließ.\tJosua ist ausdrücklich derjenige, der keinen Überlebenden übrig lässt.",
+    "new_row": "33\tDamals zog Horam, der König von Geser, hinauf, um Lachis zu helfen; und Josua schlug ihn und sein Volk, ohne ihm einen Überlebenden übrig zu lassen.\tNah am Hebräischen."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/06_JOS/JOS_010_2.tsv",
+    "verse": 33,
+    "old_row": "33\tТогда поднялся Горам, царь Газера, помочь Лахису; и поразил его Иисус и его народ, пока не оставил ему ни одного уцелевшего.\tВыражен подъём; меч и избежавшие отдельно не добавлены.",
+    "new_row": "33\tТогда поднялся Горам, царь Газера, помочь Лахису; и поразил его Иисус и его народ, не оставив ему ни одного уцелевшего.\tВыражен подъём; меч и избежавшие отдельно не добавлены."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/06_JOS/JOS_011.tsv",
+    "verse": 8,
+    "old_row": "8\tUnd der HERR gab sie in die Hand Israels; und sie schlugen sie und verfolgten sie bis Groß-Sidon und bis zu den warmen Wassern und bis in die Ebene von Mizpa im Osten; und sie schlugen sie, bis er ihnen keinen Überlebenden übrig ließ.\tDie Hand steht in der Einzahl; das Übriglassen hat ein Subjekt in der Einzahl.",
+    "new_row": "8\tUnd der HERR gab sie in die Hand Israels; und sie schlugen sie und verfolgten sie bis Groß-Sidon und bis Misrephoth-Majim und bis in die Ebene von Mizpa im Osten; und sie schlugen sie, ohne ihnen einen Überlebenden übrig zu lassen.\tDie Hand steht in der Einzahl. Der Text nennt den Ort Misrephoth-Majim; die Zielübersetzung gibt ihn als „die warmen Wasser“ wieder."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/en/06_JOS/JOS_011.tsv",
+    "verse": 8,
+    "old_row": "8\t=\tThe final expression for leaving no survivor has a singular verb in the Hebrew.",
+    "new_row": "8\t=\tClose to the Hebrew."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/06_JOS/JOS_011.tsv",
+    "verse": 8,
+    "old_row": "8\tИ отдал их Господь в руку Израиля, и поразили их и преследовали их до Сидона великого и до Мисрефоф-Маима и до долины Мицфы к востоку; и поразили их, пока он не оставил им ни одного уцелевшего.\tРука названа в единственном числе; оставление уцелевших имеет единственное подлежащее. Избежавшие отдельно не добавлены.",
+    "new_row": "8\tИ отдал их Господь в руку Израиля, и поразили их и преследовали их до Сидона великого и до Мисрефоф-Маима и до долины Мицфы к востоку; и поразили их, не оставив им ни одного уцелевшего.\tРука названа в единственном числе; Израиль назван собирательно. Избежавшие отдельно не добавлены."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/06_JOS/JOS_011.tsv",
+    "verse": 7,
+    "old_row": "7\tИ пришёл Иисус и весь народ войны с ним на них при водах Мерома внезапно, и напали на них.\tБлизко к еврейскому.",
+    "new_row": "7\tИ пришёл Иисус и весь военный народ с ним внезапно на них при водах Мерома, и напали на них.\tБлизко к еврейскому."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/06_JOS/JOS_011.tsv",
+    "verse": 13,
+    "old_row": "13\tТолько все города, стоящие на своих холмах, Израиль не сжёг, кроме одного Асора, который сжёг Иисус.\tИзраиль назван собирательно; города стоят на своих холмах.",
+    "new_row": "13\tТолько все города, стоящие на своём холме, Израиль не сжёг, кроме одного Асора, который сжёг Иисус.\tИзраиль назван собирательно; о городах сказано, что они стоят на своём холме."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/06_JOS/JOS_011.tsv",
+    "verse": 15,
+    "old_row": "15\tКак повелел Господь Моисею, Своему рабу, так повелел Моисей Иисусу, и так сделал Иисус; не отступил ни от чего из всего, что повелел Господь Моисею.\tПоследнее выражение не ограничено отдельно словом.",
+    "new_row": "15\tКак повелел Господь Моисею, Своему рабу, так повелел Моисей Иисусу, и так сделал Иисус; не отступил ни от чего из всего, что повелел Господь Моисею.\tБлизко к еврейскому."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/06_JOS/JOS_012.tsv",
+    "verse": 6,
+    "old_row": "6\tMose, der Knecht des HERRN, und die Söhne Israels schlugen sie; und Mose, der Knecht des HERRN, gab es dem Rubeniter und dem Gaditer und dem halben Stamm Manasse als Besitz.\tMose wird zweimal als „Knecht des HERRN“ bezeichnet; TARGET lässt die zweite Bezeichnung weg. Das Land wird als Besitz gegeben.",
+    "new_row": "6\tMose, der Knecht des HERRN, und die Söhne Israels schlugen sie; und Mose, der Knecht des HERRN, gab es dem Rubeniter und dem Gaditer und dem halben Stamm Manasse als Besitz.\tDas Land wird als Besitz gegeben; die Zielübersetzung sagt „einzunehmen“. Der Rubeniter und der Gaditer stehen im kollektiven Singular."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/06_JOS/JOS_012.tsv",
+    "verse": 22,
+    "old_row": "22\tцарь Кедеса при Кармиле — один; царь Иокнеама при Кармиле — один;\tБлизко к еврейскому.",
+    "new_row": "22\tцарь Кедеса — один; царь Иокнеама при Кармиле — один;\tБлизко к еврейскому."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/06_JOS/JOS_013_1.tsv",
+    "verse": 15,
+    "old_row": "15\tUnd Mose gab dem Stamm der Söhne Rubens nach ihren Sippen.\tNah am Hebräischen.",
+    "new_row": "15\tUnd Mose gab dem Stamm der Söhne Rubens nach ihren Sippen ein Erbe.\tNah am Hebräischen."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/06_JOS/JOS_013_1.tsv",
+    "verse": 15,
+    "old_row": "15\tИ Моисей дал колену сынов Рувима по их семействам.\tБлизко к еврейскому.",
+    "new_row": "15\tИ Моисей дал наследие колену сынов Рувима по их семействам.\tБлизко к еврейскому."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/06_JOS/JOS_013_1.tsv",
+    "verse": 16,
+    "old_row": "16\tUnd ihnen gehörte das Gebiet von Aroer, das am Ufer des Baches Arnon liegt, und der Stadt, die mitten im Bach liegt, und der ganzen Ebene bei Medeba:\tDie Stadt liegt wörtlich mitten im Bach. Die Ebene liegt bei Medeba; TARGET sagt „bis gen Medeba“.",
+    "new_row": "16\tUnd ihr Gebiet reichte von Aroer, das am Ufer des Baches Arnon liegt, und umfasste die Stadt, die mitten im Bach liegt, und die ganze Ebene bei Medeba:\tDie Stadt liegt wörtlich mitten im Bach. Die Ebene liegt bei Medeba; die Zielübersetzung sagt „bis gen Medeba“."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/06_JOS/JOS_013_1.tsv",
+    "verse": 16,
+    "old_row": "16\tИ принадлежала им область от Ароера, который на берегу потока Арнона, и города, который посреди потока, и всей равнины при Медеве:\tБлизко к еврейскому.",
+    "new_row": "16\tИ их область была от Ароера, который на берегу потока Арнона, и включала город, который посреди потока, и всю равнину при Медеве:\tБлизко к еврейскому."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/06_JOS/JOS_013_1.tsv",
+    "verse": 24,
+    "old_row": "24\tUnd Mose gab dem Stamm Gad, den Söhnen Gads, nach ihren Sippen.\t„Gad“ wird ausdrücklich als Stamm und nochmals als „Söhne Gads“ genannt.",
+    "new_row": "24\tUnd Mose gab dem Stamm Gad, den Söhnen Gads, nach ihren Sippen ein Erbe.\t„Gad“ wird ausdrücklich als Stamm und nochmals als „Söhne Gads“ genannt."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/06_JOS/JOS_013_1.tsv",
+    "verse": 24,
+    "old_row": "24\tИ Моисей дал колену Гада, сынам Гада, по их семействам.\tБлизко к еврейскому.",
+    "new_row": "24\tИ Моисей дал наследие колену Гада, сынам Гада, по их семействам.\tБлизко к еврейскому."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/06_JOS/JOS_013_1.tsv",
+    "verse": 29,
+    "old_row": "29\tUnd Mose gab dem halben Stamm Manasse; und es gehörte dem halben Stamm der Söhne Manasses nach ihren Sippen.\tDer halbe Stamm Manasse wird in zwei aufeinanderfolgenden Aussagen genannt; TARGET zieht sie zu einer Aussage zusammen.",
+    "new_row": "29\tUnd Mose gab dem halben Stamm Manasse ein Erbe; und es gehörte dem halben Stamm der Söhne Manasses nach ihren Sippen.\tDer halbe Stamm Manasse wird in zwei aufeinanderfolgenden Aussagen genannt; die Zielübersetzung zieht sie zu einer Aussage zusammen."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/06_JOS/JOS_013_1.tsv",
+    "verse": 29,
+    "old_row": "29\tИ Моисей дал половине колена Манассиина; и принадлежало оно половине колена сынов Манассии по их семействам.\tБлизко к еврейскому.",
+    "new_row": "29\tИ Моисей дал наследие половине колена Манассиина; и принадлежало оно половине колена сынов Манассии по их семействам.\tБлизко к еврейскому."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/06_JOS/JOS_014.tsv",
+    "verse": 1,
+    "old_row": "1\tИ вот что унаследовали сыны Израиля в земле Ханаанской, что дали им в наследие Елеазар, священник, и Иисус, сын Навин, и главы отцов колен сынов Израиля.\tБлизко к еврейскому.",
+    "new_row": "1\tИ вот что унаследовали сыны Израиля в земле Ханаанской, что дали им в наследие Елеазар, священник, и Иисус, сын Навин, и главы отцовских домов колен сынов Израиля.\tБлизко к еврейскому."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/06_JOS/JOS_015_1.tsv",
+    "verse": 13,
+    "old_row": "13\tUnd Kaleb, dem Sohn Jephunnes, gab er einen Anteil mitten unter den Söhnen Judas, nach dem Mund des HERRN an Josua: Kirjath-Arba, des Vaters Enaks – das ist Hebron.\tDer Text hat ein aktives „er gab“ mit unausgesprochenem Subjekt, nicht „ward gegeben“. Er bewahrt das Bild des Mundes des HERRN und den Ortsnamen Kirjath-Arba.",
+    "new_row": "13\tUnd Kaleb, dem Sohn Jephunnes, gab er einen Anteil mitten unter den Söhnen Judas, nach dem Mund des HERRN an Josua: Kirjath-Arba (Arba war der Vater Enaks), das ist Hebron.\tDer Text hat ein aktives „er gab“ mit unausgesprochenem Subjekt, nicht „ward gegeben“. Er bewahrt das Bild des Mundes des HERRN und den Ortsnamen Kirjath-Arba."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/06_JOS/JOS_015_1.tsv",
+    "verse": 13,
+    "old_row": "13\tИ Халеву, сыну Иефоннии, он дал долю среди сынов Иуды, по устам Господа к Иисусу: Кириаф-Арбы, отца Енака, — это Хеврон.\tСубъект «он дал» не назван прямо; TARGET дважды называет Иисуса. Сохраняется образ уст Господа.",
+    "new_row": "13\tИ Халеву, сыну Иефоннии, он дал долю среди сынов Иуды, по устам Господа к Иисусу: Кириаф-Арбы (Арба — отец Енака), это Хеврон.\tСубъект «он дал» не назван прямо; перевод дважды называет Иисуса. Сохраняется образ уст Господа."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/06_JOS/JOS_016.tsv",
+    "verse": 10,
+    "old_row": "10\tUnd sie vertrieben den Kanaaniter, der in Geser wohnte, nicht; und der Kanaaniter wohnte mitten in Ephraim bis auf diesen Tag und wurde zu dienstbarer Fron.\t„Der Kanaaniter“ steht zweimal im kollektiven Singular. Der letzte Ausdruck bezeichnet arbeitende Fron, nicht nur Zinspflicht.",
+    "new_row": "10\tUnd sie vertrieben den Kanaaniter, der in Geser wohnte, nicht; und der Kanaaniter wohnte mitten in Ephraim bis auf diesen Tag und wurde zum Fronarbeiter.\t„Der Kanaaniter“ steht zweimal im kollektiven Singular. Der letzte Ausdruck bezeichnet arbeitende Fron, nicht nur Zinspflicht."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/06_JOS/JOS_016.tsv",
+    "verse": 10,
+    "old_row": "10\tИ они не изгнали Хананея, жившего в Газере; и Хананей жил среди Ефрема до этого дня и стал работником подневольного труда.\tХананей дважды назван в собирательном единственном числе, а Ефрем остаётся именем. Последний оборот означает подневольный труд, не уплату дани; последующего рассказа о фараоне в стихе нет.",
+    "new_row": "10\tИ они не изгнали Хананея, жившего в Газере; и Хананей жил среди Ефрема до этого дня и стал подневольным работником.\tХананей дважды назван в собирательном единственном числе, а Ефрем остаётся именем. Последний оборот означает подневольный труд, не уплату дани; последующего рассказа о фараоне в стихе нет."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/06_JOS/JOS_012.tsv",
+    "verse": 2,
+    "old_row": "2\tSihon, der König des Amoriters, der in Hesbon wohnte und von Aroer herrschte, das am Ufer des Baches Arnon liegt, und über die Mitte des Baches und das halbe Gilead bis zum Bach Jabbok, der Grenze der Söhne Ammons,\t„Der Amoriter“ steht als kollektiver Singular; TARGET verwendet den Plural.",
+    "new_row": "2\tSihon, der König des Amoriters, der in Hesbon wohnte und von Aroer herrschte, das am Ufer des Baches Arnon liegt, und über die Mitte des Baches und das halbe Gilead bis zum Bach Jabbok, der Grenze der Söhne Ammons,\t„Der Amoriter“ steht als kollektiver Singular; die Zielübersetzung verwendet den Plural."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/06_JOS/JOS_012.tsv",
+    "verse": 4,
+    "old_row": "4\tUnd das Gebiet Ogs, des Königs von Basan, vom Rest der Rephaim, der in Astharoth und in Edrei wohnte\tDer hebräische Gruppenname lautet „Rephaim“; TARGET übersetzt ihn mit „Riesen“.",
+    "new_row": "4\tUnd das Gebiet Ogs, des Königs von Basan, vom Rest der Rephaim, der in Astharoth und in Edrei wohnte\tDer hebräische Gruppenname lautet „Rephaim“; die Zielübersetzung übersetzt ihn mit „Riesen“."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/06_JOS/JOS_012.tsv",
+    "verse": 7,
+    "old_row": "7\tUnd dies sind die Könige des Landes, die Josua und die Söhne Israels jenseits des Jordans nach Westen schlugen, von Baal-Gad im Tal des Libanon bis zum Berg Halak, der nach Seir ansteigt; und Josua gab es den Stämmen Israels als Besitz nach ihren Abteilungen:\tDer Berg wird Halak genannt; TARGET übersetzt den Namen als „kahles Gebirge“. Der Text spricht vom Besitz nach ihren Abteilungen.",
+    "new_row": "7\tUnd dies sind die Könige des Landes, die Josua und die Söhne Israels jenseits des Jordans nach Westen schlugen, von Baal-Gad im Tal des Libanon bis zum Berg Halak, der nach Seir ansteigt; und Josua gab es den Stämmen Israels als Besitz nach ihren Abteilungen:\tDer Berg wird Halak genannt; die Zielübersetzung übersetzt den Namen als „kahles Gebirge“. Der Text spricht vom Besitz nach ihren Abteilungen."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/06_JOS/JOS_012.tsv",
+    "verse": 9,
+    "old_row": "9\tDer König von Jericho: einer; der König von Ai, das neben Beth-el liegt: einer;\tNach jedem König steht ausdrücklich „einer“; TARGET lässt diese Zählung weg.",
+    "new_row": "9\tDer König von Jericho: einer; der König von Ai, das neben Beth-el liegt: einer;\tNach jedem König steht ausdrücklich „einer“; die Zielübersetzung lässt diese Zählung weg."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/06_JOS/JOS_012.tsv",
+    "verse": 10,
+    "old_row": "10\tder König von Jerusalem: einer; der König von Hebron: einer;\tNach jedem König steht ausdrücklich „einer“; TARGET lässt diese Zählung weg.",
+    "new_row": "10\tder König von Jerusalem: einer; der König von Hebron: einer;\tNach jedem König steht ausdrücklich „einer“; die Zielübersetzung lässt diese Zählung weg."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/06_JOS/JOS_012.tsv",
+    "verse": 11,
+    "old_row": "11\tder König von Jarmuth: einer; der König von Lachis: einer;\tNach jedem König steht ausdrücklich „einer“; TARGET lässt diese Zählung weg.",
+    "new_row": "11\tder König von Jarmuth: einer; der König von Lachis: einer;\tNach jedem König steht ausdrücklich „einer“; die Zielübersetzung lässt diese Zählung weg."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/06_JOS/JOS_012.tsv",
+    "verse": 12,
+    "old_row": "12\tder König von Eglon: einer; der König von Geser: einer;\tNach jedem König steht ausdrücklich „einer“; TARGET lässt diese Zählung weg.",
+    "new_row": "12\tder König von Eglon: einer; der König von Geser: einer;\tNach jedem König steht ausdrücklich „einer“; die Zielübersetzung lässt diese Zählung weg."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/06_JOS/JOS_012.tsv",
+    "verse": 13,
+    "old_row": "13\tder König von Debir: einer; der König von Geder: einer;\tNach jedem König steht ausdrücklich „einer“; TARGET lässt diese Zählung weg.",
+    "new_row": "13\tder König von Debir: einer; der König von Geder: einer;\tNach jedem König steht ausdrücklich „einer“; die Zielübersetzung lässt diese Zählung weg."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/06_JOS/JOS_012.tsv",
+    "verse": 14,
+    "old_row": "14\tder König von Horma: einer; der König von Arad: einer;\tNach jedem König steht ausdrücklich „einer“; TARGET lässt diese Zählung weg.",
+    "new_row": "14\tder König von Horma: einer; der König von Arad: einer;\tNach jedem König steht ausdrücklich „einer“; die Zielübersetzung lässt diese Zählung weg."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/06_JOS/JOS_012.tsv",
+    "verse": 15,
+    "old_row": "15\tder König von Libna: einer; der König von Adullam: einer;\tNach jedem König steht ausdrücklich „einer“; TARGET lässt diese Zählung weg.",
+    "new_row": "15\tder König von Libna: einer; der König von Adullam: einer;\tNach jedem König steht ausdrücklich „einer“; die Zielübersetzung lässt diese Zählung weg."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/06_JOS/JOS_012.tsv",
+    "verse": 16,
+    "old_row": "16\tder König von Makkeda: einer; der König von Beth-El: einer;\tNach jedem König steht ausdrücklich „einer“; TARGET lässt diese Zählung weg.",
+    "new_row": "16\tder König von Makkeda: einer; der König von Beth-El: einer;\tNach jedem König steht ausdrücklich „einer“; die Zielübersetzung lässt diese Zählung weg."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/06_JOS/JOS_012.tsv",
+    "verse": 17,
+    "old_row": "17\tder König von Thappuah: einer; der König von Hepher: einer;\tNach jedem König steht ausdrücklich „einer“; TARGET lässt diese Zählung weg.",
+    "new_row": "17\tder König von Thappuah: einer; der König von Hepher: einer;\tNach jedem König steht ausdrücklich „einer“; die Zielübersetzung lässt diese Zählung weg."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/06_JOS/JOS_012.tsv",
+    "verse": 18,
+    "old_row": "18\tder König von Aphek: einer; der König von Lasaron: einer;\tNach jedem König steht ausdrücklich „einer“; TARGET lässt diese Zählung weg.",
+    "new_row": "18\tder König von Aphek: einer; der König von Lasaron: einer;\tNach jedem König steht ausdrücklich „einer“; die Zielübersetzung lässt diese Zählung weg."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/06_JOS/JOS_012.tsv",
+    "verse": 19,
+    "old_row": "19\tder König von Madon: einer; der König von Hazor: einer;\tNach jedem König steht ausdrücklich „einer“; TARGET lässt diese Zählung weg.",
+    "new_row": "19\tder König von Madon: einer; der König von Hazor: einer;\tNach jedem König steht ausdrücklich „einer“; die Zielübersetzung lässt diese Zählung weg."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/06_JOS/JOS_012.tsv",
+    "verse": 20,
+    "old_row": "20\tder König von Simron-Meron: einer; der König von Achsaph: einer;\tNach jedem König steht ausdrücklich „einer“; TARGET lässt diese Zählung weg.",
+    "new_row": "20\tder König von Simron-Meron: einer; der König von Achsaph: einer;\tNach jedem König steht ausdrücklich „einer“; die Zielübersetzung lässt diese Zählung weg."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/06_JOS/JOS_012.tsv",
+    "verse": 21,
+    "old_row": "21\tder König von Thaanach: einer; der König von Megiddo: einer;\tNach jedem König steht ausdrücklich „einer“; TARGET lässt diese Zählung weg.",
+    "new_row": "21\tder König von Thaanach: einer; der König von Megiddo: einer;\tNach jedem König steht ausdrücklich „einer“; die Zielübersetzung lässt diese Zählung weg."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/06_JOS/JOS_012.tsv",
+    "verse": 22,
+    "old_row": "22\tder König von Kedes: einer; der König von Jokneam am Karmel: einer;\tNach jedem König steht ausdrücklich „einer“; TARGET lässt diese Zählung weg.",
+    "new_row": "22\tder König von Kedes: einer; der König von Jokneam am Karmel: einer;\tNach jedem König steht ausdrücklich „einer“; die Zielübersetzung lässt diese Zählung weg."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/06_JOS/JOS_012.tsv",
+    "verse": 23,
+    "old_row": "23\tder König von Dor bei Naphoth-Dor: einer; der König der Nationen zu Gilgal: einer;\tNach jedem König steht ausdrücklich „einer“; TARGET lässt diese Zählung weg.",
+    "new_row": "23\tder König von Dor bei Naphoth-Dor: einer; der König der Nationen zu Gilgal: einer;\tNach jedem König steht ausdrücklich „einer“; die Zielübersetzung lässt diese Zählung weg."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/06_JOS/JOS_013_1.tsv",
+    "verse": 1,
+    "old_row": "1\tUnd Josua war alt, an Tagen vorgerückt; und der HERR sagte zu ihm: „Du bist alt geworden, an Tagen vorgerückt, und sehr viel vom Land bleibt noch in Besitz zu nehmen.\tDie Wendung „an Tagen vorgerückt“ wird zweimal wiederholt; TARGET gibt sie mit „wohl betagt“ wieder.",
+    "new_row": "1\tUnd Josua war alt, an Tagen vorgerückt; und der HERR sagte zu ihm: „Du bist alt geworden, an Tagen vorgerückt, und sehr viel vom Land bleibt noch in Besitz zu nehmen.\tDie Wendung „an Tagen vorgerückt“ wird zweimal wiederholt; die Zielübersetzung gibt sie mit „wohl betagt“ wieder."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/06_JOS/JOS_013_1.tsv",
+    "verse": 6,
+    "old_row": "6\tAlle Bewohner des Gebirges vom Libanon bis Misrephoth-Majim, alle Sidonier – ich werde sie vor den Söhnen Israels vertreiben; nur lass es Israel als Erbe zufallen, wie ich dir geboten habe.\tDer Ortsname Misrephoth-Majim wird in TARGET mit „die warmen Wasser“ wiedergegeben. Das Bild des Zufallens wird im hebräischen Verb bewahrt.",
+    "new_row": "6\tAlle Bewohner des Gebirges vom Libanon bis Misrephoth-Majim, alle Sidonier – ich werde sie vor den Söhnen Israels vertreiben; nur lass es Israel als Erbe zufallen, wie ich dir geboten habe.\tDer Ortsname Misrephoth-Majim wird in der Zielübersetzung mit „die warmen Wasser“ wiedergegeben. Das Bild des Zufallens wird im hebräischen Verb bewahrt."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/06_JOS/JOS_013_1.tsv",
+    "verse": 8,
+    "old_row": "8\tMit ihm hatten der Rubeniter und der Gaditer ihr Erbe empfangen, das Mose ihnen jenseits des Jordans nach Osten gegeben hatte, wie Mose, der Knecht des HERRN, es ihnen gegeben hatte:\tDer Text beginnt mit „mit ihm“ und nennt den Rubeniter und den Gaditer im kollektiven Singular; TARGET ergänzt ausdrücklich den anderen halben Manasse.",
+    "new_row": "8\tMit ihm hatten der Rubeniter und der Gaditer ihr Erbe empfangen, das Mose ihnen jenseits des Jordans nach Osten gegeben hatte, wie Mose, der Knecht des HERRN, es ihnen gegeben hatte:\tDer Text beginnt mit „mit ihm“ und nennt den Rubeniter und den Gaditer im kollektiven Singular; die Zielübersetzung ergänzt ausdrücklich den anderen halben Manasse."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/06_JOS/JOS_013_1.tsv",
+    "verse": 9,
+    "old_row": "9\tvon Aroer, das am Ufer des Baches Arnon liegt, und der Stadt, die mitten im Bach liegt, und der ganzen Ebene von Medeba bis Dibon\tDie Stadt liegt wörtlich mitten im Bach; TARGET sagt „mitten im Tal“.",
+    "new_row": "9\tvon Aroer, das am Ufer des Baches Arnon liegt, und der Stadt, die mitten im Bach liegt, und der ganzen Ebene von Medeba bis Dibon\tDie Stadt liegt wörtlich mitten im Bach; die Zielübersetzung sagt „mitten im Tal“."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/06_JOS/JOS_013_1.tsv",
+    "verse": 12,
+    "old_row": "12\tdem ganzen Königreich Ogs in Basan, der in Astharoth und in Edrei regierte; er war vom Rest der Rephaim übrig geblieben. Und Mose schlug sie und vertrieb sie.\tDer Gruppenname „Rephaim“ wird in TARGET mit „Riesen“ übersetzt; das Verb bedeutet „regierte“, nicht „saß“.",
+    "new_row": "12\tdem ganzen Königreich Ogs in Basan, der in Astharoth und in Edrei regierte; er war vom Rest der Rephaim übrig geblieben. Und Mose schlug sie und vertrieb sie.\tDer Gruppenname „Rephaim“ wird in der Zielübersetzung mit „Riesen“ übersetzt; das Verb bedeutet „regierte“, nicht „saß“."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/06_JOS/JOS_013_1.tsv",
+    "verse": 23,
+    "old_row": "23\tUnd die Grenze der Söhne Rubens war der Jordan und sein Grenzgebiet. Dies ist das Erbe der Söhne Rubens nach ihren Sippen: die Städte und ihre Dörfer.\tNach „Jordan“ steht nochmals „und Grenzgebiet“; TARGET lässt diese Wendung aus.",
+    "new_row": "23\tUnd die Grenze der Söhne Rubens war der Jordan und sein Grenzgebiet. Dies ist das Erbe der Söhne Rubens nach ihren Sippen: die Städte und ihre Dörfer.\tNach „Jordan“ steht nochmals „und Grenzgebiet“; die Zielübersetzung lässt diese Wendung aus."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/06_JOS/JOS_013_1.tsv",
+    "verse": 30,
+    "old_row": "30\tUnd ihr Gebiet war von Mahanaim an ganz Basan, das ganze Königreich Ogs, des Königs von Basan, und alle Dörfer Jairs, die in Basan liegen: sechzig Städte.\tDer Text nennt ausdrücklich „sechzig Städte“; in TARGET fehlt „sechzig“.",
+    "new_row": "30\tUnd ihr Gebiet war von Mahanaim an ganz Basan, das ganze Königreich Ogs, des Königs von Basan, und alle Dörfer Jairs, die in Basan liegen: sechzig Städte.\tDer Text nennt ausdrücklich „sechzig Städte“; in der Zielübersetzung fehlt „sechzig“."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/06_JOS/JOS_013_2.tsv",
+    "verse": 31,
+    "old_row": "31\tUnd das halbe Gilead und Astharoth und Edrei, die Städte des Königreichs Ogs in Basan, gehörten den Söhnen Machirs, des Sohnes Manasses, der Hälfte der Söhne Machirs nach ihren Sippen.\tDer hebräische Satz nennt keinen Handelnden des Gebens; TARGET ergänzt „gab er“.",
+    "new_row": "31\tUnd das halbe Gilead und Astharoth und Edrei, die Städte des Königreichs Ogs in Basan, gehörten den Söhnen Machirs, des Sohnes Manasses, der Hälfte der Söhne Machirs nach ihren Sippen.\tDer hebräische Satz nennt keinen Handelnden des Gebens; die Zielübersetzung ergänzt „gab er“."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/06_JOS/JOS_013_2.tsv",
+    "verse": 33,
+    "old_row": "33\tUnd dem Stamm Levi gab Mose kein Erbe; der HERR, der Gott Israels, ist ihr Erbe, wie er zu ihnen gesprochen hatte.\tDas verbindende „und“ wird in TARGET zu „aber“, und „denn“ wird ergänzt.",
+    "new_row": "33\tUnd dem Stamm Levi gab Mose kein Erbe; der HERR, der Gott Israels, ist ihr Erbe, wie er zu ihnen gesprochen hatte.\tDas verbindende „und“ wird in der Zielübersetzung zu „aber“, und „denn“ wird ergänzt."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/06_JOS/JOS_014.tsv",
+    "verse": 4,
+    "old_row": "4\tDenn die Söhne Josephs waren zwei Stämme: Manasse und Ephraim; und sie gaben den Leviten keinen Anteil im Land außer Städten zum Wohnen und deren Weideflächen für ihr Vieh und für ihren Besitz.\tDas letzte Wort bezeichnet ihren Besitz, und die Flächen um die Städte dienen dem Vieh; TARGET nennt sie „Vorstädte“.",
+    "new_row": "4\tDenn die Söhne Josephs waren zwei Stämme: Manasse und Ephraim; und sie gaben den Leviten keinen Anteil im Land außer Städten zum Wohnen und deren Weideflächen für ihr Vieh und für ihren Besitz.\tDas letzte Wort bezeichnet ihren Besitz, und die Flächen um die Städte dienen dem Vieh; die Zielübersetzung nennt sie „Vorstädte“."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/06_JOS/JOS_014.tsv",
+    "verse": 7,
+    "old_row": "7\tIch war vierzig Jahre alt, als Mose, der Knecht des HERRN, mich von Kades-Barnea sandte, das Land auszukundschaften; und ich brachte ihm ein Wort zurück, wie es in meinem Herzen war.\tDer Text nennt ausdrücklich das Herz; TARGET gibt es mit „Gewissen“ wieder.",
+    "new_row": "7\tIch war vierzig Jahre alt, als Mose, der Knecht des HERRN, mich von Kades-Barnea sandte, das Land auszukundschaften; und ich brachte ihm ein Wort zurück, wie es in meinem Herzen war.\tDer Text nennt ausdrücklich das Herz; die Zielübersetzung gibt es mit „Gewissen“ wieder."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/06_JOS/JOS_014.tsv",
+    "verse": 8,
+    "old_row": "8\tUnd meine Brüder, die mit mir hinaufgezogen waren, ließen das Herz des Volkes schmelzen; ich aber folgte dem HERRN, meinem Gott, völlig.\tDer Text bewahrt das Bild des schmelzenden Herzens; TARGET sagt „verzagt“.",
+    "new_row": "8\tUnd meine Brüder, die mit mir hinaufgezogen waren, ließen das Herz des Volkes schmelzen; ich aber folgte dem HERRN, meinem Gott, völlig.\tDer Text bewahrt das Bild des schmelzenden Herzens; die Zielübersetzung sagt „verzagt“."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/06_JOS/JOS_015_1.tsv",
+    "verse": 8,
+    "old_row": "8\tUnd die Grenze stieg das Tal des Sohnes Hinnoms hinauf zur Südflanke des Jebusiters – das ist Jerusalem –; und die Grenze stieg zum Kopf des Berges hinauf, der westlich vor dem Tal Hinnom liegt, der am nördlichen Ende des Tals Rephaim liegt.\t„Kopf“ und „Flanke“ sind die hebräischen Bilder für Bergspitze und Hang; TARGET gibt sie sachlich wieder.",
+    "new_row": "8\tUnd die Grenze stieg das Tal des Sohnes Hinnoms hinauf zur Südflanke des Jebusiters – das ist Jerusalem –; und die Grenze stieg zum Kopf des Berges hinauf, der westlich vor dem Tal Hinnom liegt, der am nördlichen Ende des Tals Rephaim liegt.\t„Kopf“ und „Flanke“ sind die hebräischen Bilder für Bergspitze und Hang; die Zielübersetzung gibt sie sachlich wieder."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/06_JOS/JOS_015_1.tsv",
+    "verse": 9,
+    "old_row": "9\tUnd die Grenze bog vom Kopf des Berges zur Quelle der Wasser von Nephthoa und ging zu den Städten des Berges Ephron hinaus; und die Grenze bog nach Baala – das ist Kirjath-Jearim.\tDer Text nennt sowohl die Quelle als auch ihre Wasser; TARGET verdichtet dies zu „Wasserbrunnen“.",
+    "new_row": "9\tUnd die Grenze bog vom Kopf des Berges zur Quelle der Wasser von Nephthoa und ging zu den Städten des Berges Ephron hinaus; und die Grenze bog nach Baala – das ist Kirjath-Jearim.\tDer Text nennt sowohl die Quelle als auch ihre Wasser; die Zielübersetzung verdichtet dies zu „Wasserbrunnen“."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/06_JOS/JOS_015_1.tsv",
+    "verse": 12,
+    "old_row": "12\tUnd die Westgrenze war das große Meer und sein Grenzgebiet. Dies ist die Grenze der Söhne Judas ringsum nach ihren Sippen.\tNach dem großen Meer steht nochmals „und Grenzgebiet“; TARGET lässt diese Wendung weg.",
+    "new_row": "12\tUnd die Westgrenze war das große Meer und sein Grenzgebiet. Dies ist die Grenze der Söhne Judas ringsum nach ihren Sippen.\tNach dem großen Meer steht nochmals „und Grenzgebiet“; die Zielübersetzung lässt diese Wendung weg."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/06_JOS/JOS_015_1.tsv",
+    "verse": 19,
+    "old_row": "19\tUnd sie sagte: „Gib mir einen Segen, denn du hast mir Land des Negev gegeben; so gib mir Wasserquellen.“ Und er gab ihr die oberen Quellen und die unteren Quellen.\tDie oberen und die unteren Quellen werden getrennt und mit wiederholtem Hauptwort genannt; TARGET zieht sie zusammen.",
+    "new_row": "19\tUnd sie sagte: „Gib mir einen Segen, denn du hast mir Land des Negev gegeben; so gib mir Wasserquellen.“ Und er gab ihr die oberen Quellen und die unteren Quellen.\tDie oberen und die unteren Quellen werden getrennt und mit wiederholtem Hauptwort genannt; die Zielübersetzung zieht sie zusammen."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/06_JOS/JOS_015_1.tsv",
+    "verse": 22,
+    "old_row": "22\tund Kina und Dimona und Ad-Ada\tDie Ortsnamen sind im Hebräischen ausdrücklich durch „und“ verbunden; TARGET bietet eine kommagetrennte Liste.",
+    "new_row": "22\tund Kina und Dimona und Ad-Ada\tDie Ortsnamen sind im Hebräischen ausdrücklich durch „und“ verbunden; die Zielübersetzung bietet eine kommagetrennte Liste."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/06_JOS/JOS_015_1.tsv",
+    "verse": 23,
+    "old_row": "23\tund Kedes und Hazor und Ithnan,\tDie Ortsnamen sind im Hebräischen ausdrücklich durch „und“ verbunden; TARGET bietet eine kommagetrennte Liste.",
+    "new_row": "23\tund Kedes und Hazor und Ithnan,\tDie Ortsnamen sind im Hebräischen ausdrücklich durch „und“ verbunden; die Zielübersetzung bietet eine kommagetrennte Liste."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/06_JOS/JOS_015_1.tsv",
+    "verse": 24,
+    "old_row": "24\tSiph und Telem und Bealoth\tDie Ortsnamen sind im Hebräischen ausdrücklich durch „und“ verbunden; TARGET bietet eine kommagetrennte Liste.",
+    "new_row": "24\tSiph und Telem und Bealoth\tDie Ortsnamen sind im Hebräischen ausdrücklich durch „und“ verbunden; die Zielübersetzung bietet eine kommagetrennte Liste."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/06_JOS/JOS_015_1.tsv",
+    "verse": 25,
+    "old_row": "25\tund Hazor-Hadatta und Karioth-Hezron – das ist Hazor –,\tDie Ortsnamen sind im Hebräischen ausdrücklich durch „und“ verbunden; TARGET bietet eine kommagetrennte Liste.",
+    "new_row": "25\tund Hazor-Hadatta und Karioth-Hezron – das ist Hazor –,\tDie Ortsnamen sind im Hebräischen ausdrücklich durch „und“ verbunden; die Zielübersetzung bietet eine kommagetrennte Liste."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/06_JOS/JOS_015_1.tsv",
+    "verse": 26,
+    "old_row": "26\tAmam und Sema und Molada\tDie Ortsnamen sind im Hebräischen ausdrücklich durch „und“ verbunden; TARGET bietet eine kommagetrennte Liste.",
+    "new_row": "26\tAmam und Sema und Molada\tDie Ortsnamen sind im Hebräischen ausdrücklich durch „und“ verbunden; die Zielübersetzung bietet eine kommagetrennte Liste."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/06_JOS/JOS_015_1.tsv",
+    "verse": 27,
+    "old_row": "27\tund Hazar-Gadda und Hesmon und Beth-Pelet\tDie Ortsnamen sind im Hebräischen ausdrücklich durch „und“ verbunden; TARGET bietet eine kommagetrennte Liste.",
+    "new_row": "27\tund Hazar-Gadda und Hesmon und Beth-Pelet\tDie Ortsnamen sind im Hebräischen ausdrücklich durch „und“ verbunden; die Zielübersetzung bietet eine kommagetrennte Liste."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/06_JOS/JOS_015_1.tsv",
+    "verse": 28,
+    "old_row": "28\tund Hazar-Sual und Beer-Seba und Bisjothja,\tDie Ortsnamen sind im Hebräischen ausdrücklich durch „und“ verbunden; TARGET bietet eine kommagetrennte Liste.",
+    "new_row": "28\tund Hazar-Sual und Beer-Seba und Bisjothja,\tDie Ortsnamen sind im Hebräischen ausdrücklich durch „und“ verbunden; die Zielübersetzung bietet eine kommagetrennte Liste."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/06_JOS/JOS_015_1.tsv",
+    "verse": 29,
+    "old_row": "29\tBaala und Ijim und Ezem\tDie Ortsnamen sind im Hebräischen ausdrücklich durch „und“ verbunden; TARGET bietet eine kommagetrennte Liste.",
+    "new_row": "29\tBaala und Ijim und Ezem\tDie Ortsnamen sind im Hebräischen ausdrücklich durch „und“ verbunden; die Zielübersetzung bietet eine kommagetrennte Liste."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/06_JOS/JOS_015_1.tsv",
+    "verse": 30,
+    "old_row": "30\tund Eltholad und Chesil und Horma\tDie Ortsnamen sind im Hebräischen ausdrücklich durch „und“ verbunden; TARGET bietet eine kommagetrennte Liste.",
+    "new_row": "30\tund Eltholad und Chesil und Horma\tDie Ortsnamen sind im Hebräischen ausdrücklich durch „und“ verbunden; die Zielübersetzung bietet eine kommagetrennte Liste."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/06_JOS/JOS_015_2.tsv",
+    "verse": 31,
+    "old_row": "31\tund Ziklag und Madmanna und Sansanna\tDie Ortsnamen sind im Hebräischen ausdrücklich durch „und“ verbunden; TARGET bietet eine kommagetrennte Liste.",
+    "new_row": "31\tund Ziklag und Madmanna und Sansanna\tDie Ortsnamen sind im Hebräischen ausdrücklich durch „und“ verbunden; die Zielübersetzung bietet eine kommagetrennte Liste."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/06_JOS/JOS_015_2.tsv",
+    "verse": 33,
+    "old_row": "33\tIn der Niederung: Esthaol und Zora und Asna\tDer Text nennt die Niederung als Landschaft; TARGET sagt „in den Gründen“.",
+    "new_row": "33\tIn der Niederung: Esthaol und Zora und Asna\tDer Text nennt die Niederung als Landschaft; die Zielübersetzung sagt „in den Gründen“."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/06_JOS/JOS_015_2.tsv",
+    "verse": 34,
+    "old_row": "34\tund Sanoah und En-Gannim, Tappuah und Enam,\tDie Ortsnamen sind im Hebräischen ausdrücklich durch „und“ verbunden; TARGET bietet eine kommagetrennte Liste.",
+    "new_row": "34\tund Sanoah und En-Gannim, Tappuah und Enam,\tDie Ortsnamen sind im Hebräischen ausdrücklich durch „und“ verbunden; die Zielübersetzung bietet eine kommagetrennte Liste."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/06_JOS/JOS_015_2.tsv",
+    "verse": 35,
+    "old_row": "35\tJarmuth und Adullam, Socho und Aseka\tDie Ortsnamen sind im Hebräischen ausdrücklich durch „und“ verbunden; TARGET bietet eine kommagetrennte Liste.",
+    "new_row": "35\tJarmuth und Adullam, Socho und Aseka\tDie Ortsnamen sind im Hebräischen ausdrücklich durch „und“ verbunden; die Zielübersetzung bietet eine kommagetrennte Liste."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/06_JOS/JOS_015_2.tsv",
+    "verse": 37,
+    "old_row": "37\tZenan und Hadasa und Migdal-Gad\tDie Ortsnamen sind im Hebräischen ausdrücklich durch „und“ verbunden; TARGET bietet eine kommagetrennte Liste.",
+    "new_row": "37\tZenan und Hadasa und Migdal-Gad\tDie Ortsnamen sind im Hebräischen ausdrücklich durch „und“ verbunden; die Zielübersetzung bietet eine kommagetrennte Liste."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/06_JOS/JOS_015_2.tsv",
+    "verse": 38,
+    "old_row": "38\tund Dilean und Mizpe und Joktheel,\tDie Ortsnamen sind im Hebräischen ausdrücklich durch „und“ verbunden; TARGET bietet eine kommagetrennte Liste.",
+    "new_row": "38\tund Dilean und Mizpe und Joktheel,\tDie Ortsnamen sind im Hebräischen ausdrücklich durch „und“ verbunden; die Zielübersetzung bietet eine kommagetrennte Liste."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/06_JOS/JOS_015_2.tsv",
+    "verse": 39,
+    "old_row": "39\tLachis und Bozkath und Eglon\tDie Ortsnamen sind im Hebräischen ausdrücklich durch „und“ verbunden; TARGET bietet eine kommagetrennte Liste.",
+    "new_row": "39\tLachis und Bozkath und Eglon\tDie Ortsnamen sind im Hebräischen ausdrücklich durch „und“ verbunden; die Zielübersetzung bietet eine kommagetrennte Liste."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/06_JOS/JOS_015_2.tsv",
+    "verse": 40,
+    "old_row": "40\tund Chabbon und Lahmas und Kithlis\tDie Ortsnamen sind im Hebräischen ausdrücklich durch „und“ verbunden; TARGET bietet eine kommagetrennte Liste.",
+    "new_row": "40\tund Chabbon und Lahmas und Kithlis\tDie Ortsnamen sind im Hebräischen ausdrücklich durch „und“ verbunden; die Zielübersetzung bietet eine kommagetrennte Liste."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/06_JOS/JOS_015_2.tsv",
+    "verse": 42,
+    "old_row": "42\tLibna und Ether und Asan\tDie Ortsnamen sind im Hebräischen ausdrücklich durch „und“ verbunden; TARGET bietet eine kommagetrennte Liste.",
+    "new_row": "42\tLibna und Ether und Asan\tDie Ortsnamen sind im Hebräischen ausdrücklich durch „und“ verbunden; die Zielübersetzung bietet eine kommagetrennte Liste."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/06_JOS/JOS_015_2.tsv",
+    "verse": 43,
+    "old_row": "43\tund Jephthah und Asna und Nezib\tDie Ortsnamen sind im Hebräischen ausdrücklich durch „und“ verbunden; TARGET bietet eine kommagetrennte Liste.",
+    "new_row": "43\tund Jephthah und Asna und Nezib\tDie Ortsnamen sind im Hebräischen ausdrücklich durch „und“ verbunden; die Zielübersetzung bietet eine kommagetrennte Liste."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/06_JOS/JOS_015_2.tsv",
+    "verse": 46,
+    "old_row": "46\tvon Ekron nach Westen, alles, was an der Seite Asdods liegt, und ihre Dörfer;\tDie Richtung lautet „nach Westen“; TARGET sagt „ans Meer“. Der Text spricht von der Seite Asdods.",
+    "new_row": "46\tvon Ekron nach Westen, alles, was an der Seite Asdods liegt, und ihre Dörfer;\tDie Richtung lautet „nach Westen“; die Zielübersetzung sagt „ans Meer“. Der Text spricht von der Seite Asdods."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/06_JOS/JOS_015_2.tsv",
+    "verse": 49,
+    "old_row": "49\tund Danna und Kirjath-Sanna – das ist Debir –\tDie Ortsnamen sind im Hebräischen ausdrücklich durch „und“ verbunden; TARGET bietet eine kommagetrennte Liste.",
+    "new_row": "49\tund Danna und Kirjath-Sanna – das ist Debir –\tDie Ortsnamen sind im Hebräischen ausdrücklich durch „und“ verbunden; die Zielübersetzung bietet eine kommagetrennte Liste."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/06_JOS/JOS_015_2.tsv",
+    "verse": 50,
+    "old_row": "50\tund Anab und Esthemo und Anim\tDie Ortsnamen sind im Hebräischen ausdrücklich durch „und“ verbunden; TARGET bietet eine kommagetrennte Liste.",
+    "new_row": "50\tund Anab und Esthemo und Anim\tDie Ortsnamen sind im Hebräischen ausdrücklich durch „und“ verbunden; die Zielübersetzung bietet eine kommagetrennte Liste."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/06_JOS/JOS_015_2.tsv",
+    "verse": 52,
+    "old_row": "52\tArab und Duma und Esean\tDie Ortsnamen sind im Hebräischen ausdrücklich durch „und“ verbunden; TARGET bietet eine kommagetrennte Liste.",
+    "new_row": "52\tArab und Duma und Esean\tDie Ortsnamen sind im Hebräischen ausdrücklich durch „und“ verbunden; die Zielübersetzung bietet eine kommagetrennte Liste."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/06_JOS/JOS_015_2.tsv",
+    "verse": 53,
+    "old_row": "53\tund Janum und Beth-Thappuah und Apheka\tDie Ortsnamen sind im Hebräischen ausdrücklich durch „und“ verbunden; TARGET bietet eine kommagetrennte Liste.",
+    "new_row": "53\tund Janum und Beth-Thappuah und Apheka\tDie Ortsnamen sind im Hebräischen ausdrücklich durch „und“ verbunden; die Zielübersetzung bietet eine kommagetrennte Liste."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/06_JOS/JOS_015_2.tsv",
+    "verse": 55,
+    "old_row": "55\tMaon, Karmel und Siph und Jutta\tDie Ortsnamen sind im Hebräischen ausdrücklich durch „und“ verbunden; TARGET bietet eine kommagetrennte Liste.",
+    "new_row": "55\tMaon, Karmel und Siph und Jutta\tDie Ortsnamen sind im Hebräischen ausdrücklich durch „und“ verbunden; die Zielübersetzung bietet eine kommagetrennte Liste."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/06_JOS/JOS_015_2.tsv",
+    "verse": 56,
+    "old_row": "56\tund Jesreel und Jokdeam und Sanoah,\tDie Ortsnamen sind im Hebräischen ausdrücklich durch „und“ verbunden; TARGET bietet eine kommagetrennte Liste.",
+    "new_row": "56\tund Jesreel und Jokdeam und Sanoah,\tDie Ortsnamen sind im Hebräischen ausdrücklich durch „und“ verbunden; die Zielübersetzung bietet eine kommagetrennte Liste."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/06_JOS/JOS_015_2.tsv",
+    "verse": 58,
+    "old_row": "58\tHalhul, Beth-Zur und Gedor\tDie Ortsnamen sind im Hebräischen ausdrücklich durch „und“ verbunden; TARGET bietet eine kommagetrennte Liste.",
+    "new_row": "58\tHalhul, Beth-Zur und Gedor\tDie Ortsnamen sind im Hebräischen ausdrücklich durch „und“ verbunden; die Zielübersetzung bietet eine kommagetrennte Liste."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/06_JOS/JOS_015_3.tsv",
+    "verse": 63,
+    "old_row": "63\tUnd den Jebusiter, die Bewohner Jerusalems, konnten die Söhne Judas nicht vertreiben; und der Jebusiter wohnte mit den Söhnen Judas in Jerusalem bis auf diesen Tag.\tDie Volksbezeichnung steht zweimal im kollektiven Singular. Jerusalem wird ausdrücklich wiederholt; TARGET hat beim ersten Vorkommen ein eigenes Prädikat „wohnten“.",
+    "new_row": "63\tUnd den Jebusiter, die Bewohner Jerusalems, konnten die Söhne Judas nicht vertreiben; und der Jebusiter wohnte mit den Söhnen Judas in Jerusalem bis auf diesen Tag.\tDie Volksbezeichnung steht zweimal im kollektiven Singular. Jerusalem wird ausdrücklich wiederholt; die Zielübersetzung hat beim ersten Vorkommen ein eigenes Prädikat „wohnten“."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/06_JOS/JOS_016.tsv",
+    "verse": 1,
+    "old_row": "1\tUnd das Los für die Söhne Josephs ging vom Jordan bei Jericho zu den Wassern Jerichos nach Osten aus, zur Wüste, die von Jericho im Gebirge nach Beth-El hinaufsteigt.\tDer Text nennt Jericho dreimal und hat „Wasser“ im Plural; TARGET gibt das mittlere Vorkommen als „bei Jericho“ wieder.",
+    "new_row": "1\tUnd das Los für die Söhne Josephs ging vom Jordan bei Jericho zu den Wassern Jerichos nach Osten aus, zur Wüste, die von Jericho im Gebirge nach Beth-El hinaufsteigt.\tDer Text nennt Jericho dreimal und hat „Wasser“ im Plural; die Zielübersetzung gibt das mittlere Vorkommen als „bei Jericho“ wieder."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/06_JOS/JOS_016.tsv",
+    "verse": 6,
+    "old_row": "6\tUnd die Grenze ging nach Westen hinaus, Michmethath im Norden; und die Grenze bog nach Osten nach Thaanath-Silo um und zog daran vorbei nach Osten nach Janoha.\t„Die Grenze“ wird ausdrücklich wiederholt; TARGET setzt stattdessen ein Pronomen.",
+    "new_row": "6\tUnd die Grenze ging nach Westen hinaus, Michmethath im Norden; und die Grenze bog nach Osten nach Thaanath-Silo um und zog daran vorbei nach Osten nach Janoha.\t„Die Grenze“ wird ausdrücklich wiederholt; die Zielübersetzung setzt stattdessen ein Pronomen."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/06_JOS/JOS_016.tsv",
+    "verse": 9,
+    "old_row": "9\tUnd die für die Söhne Ephraims ausgesonderten Städte lagen mitten im Erbe der Söhne Manasses: alle Städte und ihre Dörfer.\tDie Städte werden ausdrücklich zweimal genannt; TARGET zieht diese Wiederholung zusammen.",
+    "new_row": "9\tUnd die für die Söhne Ephraims ausgesonderten Städte lagen mitten im Erbe der Söhne Manasses: alle Städte und ihre Dörfer.\tDie Städte werden ausdrücklich zweimal genannt; die Zielübersetzung zieht diese Wiederholung zusammen."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/06_JOS/JOS_012.tsv",
+    "verse": 2,
+    "old_row": "2\tСигон, царь Аморрея, живший в Есевоне, правивший от Ароера, который на берегу потока Арнона, и над серединой потока и половиной Галаада, до потока Иавока, границы сынов Аммона,\tНазвание народа «Аморрей» дано в собирательном единственном числе; «сыны Аммона» переведены в TARGET как «Аммонитяне».",
+    "new_row": "2\tСигон, царь Аморрея, живший в Есевоне, правивший от Ароера, который на берегу потока Арнона, и над серединой потока и половиной Галаада, до потока Иавока, границы сынов Аммона,\tНазвание народа «Аморрей» дано в собирательном единственном числе; «сыны Аммона» переведены в переводе как «Аммонитяне»."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/06_JOS/JOS_012.tsv",
+    "verse": 3,
+    "old_row": "3\tи над Аравой до моря Хиннерефского к востоку и до моря Аравы, моря Солёного, к востоку, по дороге к Беф-Иешимофу, и к югу под склонами Фасги.\tТекст называет Араву и склоны Фасги; TARGET говорит о равнине и местах при подошве Фасги.",
+    "new_row": "3\tи над Аравой до моря Хиннерефского к востоку и до моря Аравы, моря Солёного, к востоку, по дороге к Беф-Иешимофу, и к югу под склонами Фасги.\tТекст называет Араву и склоны Фасги; перевод говорит о равнине и местах при подошве Фасги."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/06_JOS/JOS_012.tsv",
+    "verse": 5,
+    "old_row": "5\tи правившего над горой Ермоном и над Салхой и над всем Васаном до границы Гессурянина и Маахянина и над половиной Галаада, границей Сигона, царя Есевона.\tНазвания двух народов стоят в собирательном единственном числе; TARGET использует прилагательные.",
+    "new_row": "5\tи правившего над горой Ермоном и над Салхой и над всем Васаном до границы Гессурянина и Маахянина и над половиной Галаада, границей Сигона, царя Есевона.\tНазвания двух народов стоят в собирательном единственном числе; перевод использует прилагательные."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/06_JOS/JOS_013_1.tsv",
+    "verse": 4,
+    "old_row": "4\tс юга вся земля Хананея и Меара, которая принадлежит Сидонянам, до Афека, до границы Аморрея;\tМеара присоединена союзом «и» как принадлежащая Сидонянам; TARGET начинает от неё протяжение земли.",
+    "new_row": "4\tс юга вся земля Хананея и Меара, которая принадлежит Сидонянам, до Афека, до границы Аморрея;\tМеара присоединена союзом «и» как принадлежащая Сидонянам; перевод начинает от неё протяжение земли."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/06_JOS/JOS_013_1.tsv",
+    "verse": 6,
+    "old_row": "6\tВсех жителей нагорья, от Ливана до Мисрефоф-Маима, всех Сидонян, Я изгоню от лица сынов Израиля; только пусть она выпадет Израилю в наследие, как Я повелел тебе.\tГлагол передачи наследия сохраняет образ выпадения доли; TARGET просто говорит «раздели».",
+    "new_row": "6\tВсех жителей нагорья, от Ливана до Мисрефоф-Маима, всех Сидонян, Я изгоню от лица сынов Израиля; только пусть она выпадет Израилю в наследие, как Я повелел тебе.\tГлагол передачи наследия сохраняет образ выпадения доли; перевод просто говорит «раздели»."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/06_JOS/JOS_013_1.tsv",
+    "verse": 8,
+    "old_row": "8\tС ним Рувимлянин и Гадитянин получили своё наследие, которое Моисей дал им по ту сторону Иордана, к востоку, как дал им Моисей, раб Господа:\tНачальные слова означают «с ним»; название другой половины колена Манассиина в TARGET раскрывает местоимение.",
+    "new_row": "8\tС ним Рувимлянин и Гадитянин получили своё наследие, которое Моисей дал им по ту сторону Иордана, к востоку, как дал им Моисей, раб Господа:\tНачальные слова означают «с ним»; название другой половины колена Манассиина в переводе раскрывает местоимение."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/06_JOS/JOS_013_1.tsv",
+    "verse": 11,
+    "old_row": "11\tи Галаада, и области Гессурянина и Маахянина, и всей горы Ермона, и всего Васана до Салхи,\tНазвания Гессурянина и Маахянина стоят в собирательном единственном числе; TARGET использует прилагательные.",
+    "new_row": "11\tи Галаада, и области Гессурянина и Маахянина, и всей горы Ермона, и всего Васана до Салхи,\tНазвания Гессурянина и Маахянина стоят в собирательном единственном числе; перевод использует прилагательные."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/06_JOS/JOS_013_1.tsv",
+    "verse": 14,
+    "old_row": "14\tТолько колену Левия он не дал наследия; огненные жертвы Господа, Бога Израиля, — его наследие, как Он сказал ему.\tЖертвы названы огненными. После слов о сказанном колену здесь нет добавленного в TARGET описания разделения земли на равнинах Моава.",
+    "new_row": "14\tТолько колену Левия он не дал наследия; огненные жертвы Господа, Бога Израиля, — его наследие, как Он сказал ему.\tЖертвы названы огненными. После слов о сказанном колену здесь нет добавленного в переводе описания разделения земли на равнинах Моава."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/06_JOS/JOS_013_1.tsv",
+    "verse": 23,
+    "old_row": "23\tИ границей сынов Рувима были Иордан и его пограничье. Это наследие сынов Рувима по их семействам: города и их селения.\tПосле Иордана стоит ещё «и пограничье», отсутствующее в TARGET.",
+    "new_row": "23\tИ границей сынов Рувима были Иордан и его пограничье. Это наследие сынов Рувима по их семействам: города и их селения.\tПосле Иордана стоит ещё «и пограничье», отсутствующее в переводе."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/06_JOS/JOS_014.tsv",
+    "verse": 8,
+    "old_row": "8\tИ братья мои, которые поднялись со мной, заставили растаять сердце народа; а я вполне следовал Господу, Богу моему.\tТекст сохраняет образ тающего сердца народа; TARGET передаёт его как робость.",
+    "new_row": "8\tИ братья мои, которые поднялись со мной, заставили растаять сердце народа; а я вполне следовал Господу, Богу моему.\tТекст сохраняет образ тающего сердца народа; перевод передаёт его как робость."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/06_JOS/JOS_015_1.tsv",
+    "verse": 1,
+    "old_row": "1\tИ жребий колену сынов Иуды по их семействам был до границы Едома, к пустыне Цин на юг, на крайнем юге.\tТекст называет Едом и говорит о крайнем юге; TARGET передаёт последнее слово как имя «Феман».",
+    "new_row": "1\tИ жребий колену сынов Иуды по их семействам был до границы Едома, к пустыне Цин на юг, на крайнем юге.\tТекст называет Едом и говорит о крайнем юге; перевод передаёт последнее слово как имя «Феман»."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/06_JOS/JOS_015_1.tsv",
+    "verse": 10,
+    "old_row": "10\tИ граница поворачивала от Ваала к западу, к горе Сеиру, и проходила к северному плечу горы Иеарим — это Кесалон — и спускалась к Вефсамису и проходила к Фимне.\tНаправление — к западу; TARGET говорит «к морю». Сохраняется образ плеча горы.",
+    "new_row": "10\tИ граница поворачивала от Ваала к западу, к горе Сеиру, и проходила к северному плечу горы Иеарим — это Кесалон — и спускалась к Вефсамису и проходила к Фимне.\tНаправление — к западу; перевод говорит «к морю». Сохраняется образ плеча горы."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/06_JOS/JOS_015_1.tsv",
+    "verse": 18,
+    "old_row": "18\tИ было, когда она пришла, она побуждала его просить у её отца поле; и она сошла с осла; и Халев сказал ей: «Что тебе?»\tОна сама побуждала его просить у её отца поле; TARGET говорит, что её научили просить.",
+    "new_row": "18\tИ было, когда она пришла, она побуждала его просить у её отца поле; и она сошла с осла; и Халев сказал ей: «Что тебе?»\tОна сама побуждала его просить у её отца поле; перевод говорит, что её научили просить."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/06_JOS/JOS_015_1.tsv",
+    "verse": 19,
+    "old_row": "19\tИ она сказала: «Дай мне благословение, ибо ты дал мне землю Негева; дай же мне источники воды». И он дал ей верхние источники и нижние источники.\tНазван Негев; TARGET передаёт его как «землю полуденную».",
+    "new_row": "19\tИ она сказала: «Дай мне благословение, ибо ты дал мне землю Негева; дай же мне источники воды». И он дал ей верхние источники и нижние источники.\tНазван Негев; перевод передаёт его как «землю полуденную»."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/06_JOS/JOS_015_1.tsv",
+    "verse": 21,
+    "old_row": "21\tИ города на краю колена сынов Иуды к границе Едома в Негеве были: Кавцеил и Едер и Иагур,\tНазваны Едом и Негев; TARGET говорит об Идумее и юге.",
+    "new_row": "21\tИ города на краю колена сынов Иуды к границе Едома в Негеве были: Кавцеил и Едер и Иагур,\tНазваны Едом и Негев; перевод говорит об Идумее и юге."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/06_JOS/JOS_015_2.tsv",
+    "verse": 46,
+    "old_row": "46\tот Екрона к западу, всё, что у стороны Азота, и их селения;\tНаправление — к западу; TARGET говорит «к морю».",
+    "new_row": "46\tот Екрона к западу, всё, что у стороны Азота, и их селения;\tНаправление — к западу; перевод говорит «к морю»."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/06_JOS/JOS_016.tsv",
+    "verse": 3,
+    "old_row": "3\tИ он спускался к западу, к границе Иафлетянина, до границы нижнего Беф-Орона и до Газера; и выходы его были у моря.\tНаправление дано как «к западу»; TARGET говорит «к морю». Название народа стоит в собирательном единственном числе.",
+    "new_row": "3\tИ он спускался к западу, к границе Иафлетянина, до границы нижнего Беф-Орона и до Газера; и выходы его были у моря.\tНаправление дано как «к западу»; перевод говорит «к морю». Название народа стоит в собирательном единственном числе."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/06_JOS/JOS_016.tsv",
+    "verse": 6,
+    "old_row": "6\tИ граница выходила к западу, Михмефаф на севере; и граница поворачивала к востоку к Фаанаф-Силому и проходила мимо него к востоку к Ианоху.\tУказано направление к западу, и «граница» повторяется; TARGET говорит «к морю».",
+    "new_row": "6\tИ граница выходила к западу, Михмефаф на севере; и граница поворачивала к востоку к Фаанаф-Силому и проходила мимо него к востоку к Ианоху.\tУказано направление к западу, и «граница» повторяется; перевод говорит «к морю»."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/06_JOS/JOS_016.tsv",
+    "verse": 8,
+    "old_row": "8\tОт Таппуаха граница шла к западу к потоку Кане; и выходы её были у моря. Это наследие колена сынов Ефрема по их семействам.\tУказано направление к западу; TARGET говорит «к морю».",
+    "new_row": "8\tОт Таппуаха граница шла к западу к потоку Кане; и выходы её были у моря. Это наследие колена сынов Ефрема по их семействам.\tУказано направление к западу; перевод говорит «к морю»."
+  }
+]

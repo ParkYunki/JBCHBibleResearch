@@ -1,0 +1,150 @@
+{
+  "scope": "de/ru JOS010–016; en JOS010–013",
+  "files": 28,
+  "rows": 545,
+  "qa_entries": 113,
+  "errors": [],
+  "validation": "packet order, three columns, nonempty data, DIFF <=60 words, en literal =, prospective native comparison labels, chapter quote balance",
+  "outputs": [
+    {
+      "path": "Tools/LiteralGen/outputs/de/06_JOS/JOS_010_1.tsv",
+      "rows": 30,
+      "sha256": "674d629e64745b544b7dc8f9031c7d26da6f128b7f9e06bbecba23fa326821ca"
+    },
+    {
+      "path": "Tools/LiteralGen/outputs/ru/06_JOS/JOS_010_1.tsv",
+      "rows": 30,
+      "sha256": "2f31ad8ca447137c58484eb1f515f705fa08fe41a14c51f9c85f80039903a5f0"
+    },
+    {
+      "path": "Tools/LiteralGen/outputs/en/06_JOS/JOS_010_1.tsv",
+      "rows": 30,
+      "sha256": "72fac01e19193be319c91af420f269680ba5879294a6feefa6528110c1c92644"
+    },
+    {
+      "path": "Tools/LiteralGen/outputs/de/06_JOS/JOS_010_2.tsv",
+      "rows": 13,
+      "sha256": "fa96f469e439b59642068919720e905e0611b30d1e512725e307536891b922ee"
+    },
+    {
+      "path": "Tools/LiteralGen/outputs/ru/06_JOS/JOS_010_2.tsv",
+      "rows": 13,
+      "sha256": "88f9ffde132c923ba7303d20575bff0f9821d142d17a0f14c1ffcc989f603193"
+    },
+    {
+      "path": "Tools/LiteralGen/outputs/en/06_JOS/JOS_010_2.tsv",
+      "rows": 13,
+      "sha256": "e0d5989ddb655f2e50c283de309da2b8dceee174fa1c531254e14bcb78fa70cf"
+    },
+    {
+      "path": "Tools/LiteralGen/outputs/de/06_JOS/JOS_011.tsv",
+      "rows": 23,
+      "sha256": "49e92dcb5d5ca105480f6086c4570569ccf2a41a2ebc468ac730cd371200da27"
+    },
+    {
+      "path": "Tools/LiteralGen/outputs/ru/06_JOS/JOS_011.tsv",
+      "rows": 23,
+      "sha256": "3ffa73172df3524ac5604c1be197b0c5a32e856ffbc9217c75d68fab5293a27d"
+    },
+    {
+      "path": "Tools/LiteralGen/outputs/en/06_JOS/JOS_011.tsv",
+      "rows": 23,
+      "sha256": "58f919d7c4b14d69f7c6acf5a588cf6b97229f3c44be2744ee9a145f6257db58"
+    },
+    {
+      "path": "Tools/LiteralGen/outputs/de/06_JOS/JOS_012.tsv",
+      "rows": 24,
+      "sha256": "330472b470bca24386bbc573100c7d4f0d3cf579860ccd5f370ffdd77bffb0cd"
+    },
+    {
+      "path": "Tools/LiteralGen/outputs/ru/06_JOS/JOS_012.tsv",
+      "rows": 24,
+      "sha256": "9b94018ac5bf398c321370e841e4b1f68cc7d839bdcd736fa998149eaddcbe71"
+    },
+    {
+      "path": "Tools/LiteralGen/outputs/en/06_JOS/JOS_012.tsv",
+      "rows": 24,
+      "sha256": "5950c529a8a80b13f064d1e8177b6386492d66a0609c9289b1427388a0ea4cba"
+    },
+    {
+      "path": "Tools/LiteralGen/outputs/de/06_JOS/JOS_013_1.tsv",
+      "rows": 30,
+      "sha256": "0d6481a7428c68afbb16656ab4d7f4b064be7ec0d0cece6c0da35c2ed22b7677"
+    },
+    {
+      "path": "Tools/LiteralGen/outputs/ru/06_JOS/JOS_013_1.tsv",
+      "rows": 30,
+      "sha256": "23f2d599a85c498bc42fb4932f58a73837c92540bc29ef16fbc9905c257c7641"
+    },
+    {
+      "path": "Tools/LiteralGen/outputs/en/06_JOS/JOS_013_1.tsv",
+      "rows": 30,
+      "sha256": "fc475913522f940dc908eb301de41aa31cd662d9fb06f225485a0b9ffb583575"
+    },
+    {
+      "path": "Tools/LiteralGen/outputs/de/06_JOS/JOS_013_2.tsv",
+      "rows": 3,
+      "sha256": "e17e95098a103c86dfa600cb120db89259741b63acd9c44d003b331319ae45f3"
+    },
+    {
+      "path": "Tools/LiteralGen/outputs/ru/06_JOS/JOS_013_2.tsv",
+      "rows": 3,
+      "sha256": "f171368da0c30ea0d133686c2d4ea55fc71913c78dba4e1e596b5e59a7c12690"
+    },
+    {
+      "path": "Tools/LiteralGen/outputs/en/06_JOS/JOS_013_2.tsv",
+      "rows": 3,
+      "sha256": "66867b4aa0613de26f2d4d500c968f53720b25258b8c768b3778fdeb5a64e5a7"
+    },
+    {
+      "path": "Tools/LiteralGen/outputs/de/06_JOS/JOS_014.tsv",
+      "rows": 15,
+      "sha256": "0cdda5d56a31bbd62f8c1a3f163dc496e7c809c009b819b48a92a686c1c493ca"
+    },
+    {
+      "path": "Tools/LiteralGen/outputs/ru/06_JOS/JOS_014.tsv",
+      "rows": 15,
+      "sha256": "78dceacf5d732c4fb32ee2efdcaa281dee8257c852e02851e506cddb0504bf9d"
+    },
+    {
+      "path": "Tools/LiteralGen/outputs/de/06_JOS/JOS_015_1.tsv",
+      "rows": 30,
+      "sha256": "a6ad5e16acab6c5418a97eb686a79aa48ad49e8b735a3f76d9f6da26b03ff43b"
+    },
+    {
+      "path": "Tools/LiteralGen/outputs/ru/06_JOS/JOS_015_1.tsv",
+      "rows": 30,
+      "sha256": "99d04ac8b40168090761f78d6b24bdce25e1ef5e656543e83393720bf9e2ad94"
+    },
+    {
+      "path": "Tools/LiteralGen/outputs/de/06_JOS/JOS_015_2.tsv",
+      "rows": 30,
+      "sha256": "5105a19c84f14edcad5a51c42730bd7857ce5ee85e07da6c3d83d1be1e6beef9"
+    },
+    {
+      "path": "Tools/LiteralGen/outputs/ru/06_JOS/JOS_015_2.tsv",
+      "rows": 30,
+      "sha256": "425300a97de073e1eb1d49f3034a5e43e9e199479303db7c847d7e887d0bc3a0"
+    },
+    {
+      "path": "Tools/LiteralGen/outputs/de/06_JOS/JOS_015_3.tsv",
+      "rows": 3,
+      "sha256": "9261627863c38856ec8acb71f13289aed548f3bd54b2ca4b04527c0aa9a50f07"
+    },
+    {
+      "path": "Tools/LiteralGen/outputs/ru/06_JOS/JOS_015_3.tsv",
+      "rows": 3,
+      "sha256": "510681b675490d713e6418a8dbeff9684136a82573b6c3f617c516b5289fdeda"
+    },
+    {
+      "path": "Tools/LiteralGen/outputs/de/06_JOS/JOS_016.tsv",
+      "rows": 10,
+      "sha256": "9539503e977dce7e100d1c00f1bf87d6ef40208c990953a450258adbb4faa3f4"
+    },
+    {
+      "path": "Tools/LiteralGen/outputs/ru/06_JOS/JOS_016.tsv",
+      "rows": 10,
+      "sha256": "40549ffc1793e4ac0999d2cebae4d5d83ce56e35d4103f6dac2c074fe89d347f"
+    }
+  ]
+}

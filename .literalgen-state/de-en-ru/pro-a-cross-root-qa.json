@@ -1,0 +1,16 @@
+[
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/en/20_PRO/PRO_008_1.tsv",
+    "verse": "2",
+    "old_row": "2\t=\tThe heights are at the head of the way, and standing is expressed as completed.",
+    "new_row": "2\t=\tShe has taken her stand at the top of the heights beside the road; standing is expressed as completed.",
+    "reason": "The head belongs to the heights, not to the way; the previous DIFF reverses the attachment."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/en/20_PRO/PRO_010_1.tsv",
+    "verse": "14",
+    "old_row": "14\t=\tThe fool’s mouth is near destruction, without a separate verb invites.",
+    "new_row": "14\t=\tThe fool’s mouth itself is described as imminent destruction; BSB adds the verb invites.",
+    "reason": "The predicate is nearby destruction, rather than saying the mouth is merely near destruction."
+  }
+]

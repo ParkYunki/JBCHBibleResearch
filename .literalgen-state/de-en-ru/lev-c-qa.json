@@ -1,0 +1,212 @@
+[
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/03_LEV/LEV_021.tsv",
+    "verse": 3,
+    "old_row": "3\tund wegen seiner jungfräulichen Schwester, die ihm nahe ist und keinem Mann angehört hat; wegen ihr darf er sich unrein machen.\tBewahrt das Unreinwerden wegen der Schwester.",
+    "new_row": "3\tund wegen seiner jungfräulichen Schwester, die ihm nahe ist und keinem Mann angehört hat; wegen ihr darf er sich unrein machen.\tNah am Hebräischen.",
+    "reason": "Restrict DIFFERENCE to demonstrable wording differences from TARGET."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/03_LEV/LEV_021.tsv",
+    "verse": 4,
+    "old_row": "4\tAls Ehemann soll er sich unter seinen Volksgenossen nicht unrein machen, um sich zu entweihen.\tNah am Hebräischen.",
+    "new_row": "4\tEin Ehemann soll sich unter seinen Volksgenossen nicht unrein machen, um sich zu entweihen.\tNah am Hebräischen.",
+    "reason": "Correct native grammar while retaining the Hebrew meaning and number."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/03_LEV/LEV_022_1.tsv",
+    "verse": 3,
+    "old_row": "3\tSage zu ihnen: In euren Generationen soll jede Seele aus eurem ganzen Samen, die den heiligen Gaben naht, welche die Söhne Israels dem HERRN heiligen, während ihre Unreinheit auf ihr ist, von meinem Angesicht abgeschnitten werden; ich bin der HERR.\tNah am Hebräischen.",
+    "new_row": "3\tSage zu ihnen: In euren Generationen: Jeder Mann aus eurem ganzen Samen, der den heiligen Gaben naht, welche die Söhne Israels dem HERRN heiligen, während seine Unreinheit auf ihm ist — jene Seele soll von meinem Angesicht abgeschnitten werden; ich bin der HERR.\tNah am Hebräischen.",
+    "reason": "Preserve both the initial man and the subsequent soul, rather than collapsing them into one subject."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/03_LEV/LEV_022_1.tsv",
+    "verse": 9,
+    "old_row": "9\tUnd sie sollen meinen Auftrag bewahren und deswegen keine Sünde tragen und daran sterben, wenn sie es entweihen; ich bin der HERR, der sie heiligt.\tNah am Hebräischen.",
+    "new_row": "9\tUnd sie sollen meinen Auftrag bewahren und nicht deswegen Sünde tragen und daran sterben, wenn sie es entweihen; ich bin der HERR, der sie heiligt.\tNah am Hebräischen.",
+    "reason": "Correct native grammar while retaining the Hebrew meaning and number."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/03_LEV/LEV_023_1.tsv",
+    "verse": 29,
+    "old_row": "29\tDenn jede Seele, die an ebendiesem Tag nicht gedemütigt wird, soll aus ihren Volksgenossen abgeschnitten werden.\tBewahrt das passive Gedemütigtwerden.",
+    "new_row": "29\tDenn jede Seele, die an ebendiesem Tag nicht gedemütigt wird, soll aus dem Kreis ihrer Volksgenossen abgeschnitten werden.\tBewahrt das passive Gedemütigtwerden.",
+    "reason": "Correct native grammar while retaining the Hebrew meaning and number."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/03_LEV/LEV_025_1.tsv",
+    "verse": 3,
+    "old_row": "3\tSechs Jahre sollst du dein Feld besäen und sechs Jahre deinen Weinberg beschneiden und seinen Ertrag einsammeln.\tWiederholt sechs Jahre.",
+    "new_row": "3\tSechs Jahre sollst du dein Feld besäen und sechs Jahre deinen Weinberg beschneiden und seinen Ertrag einsammeln.\tNah am Hebräischen.",
+    "reason": "Restrict DIFFERENCE to demonstrable wording differences from TARGET."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/03_LEV/LEV_025_1.tsv",
+    "verse": 14,
+    "old_row": "14\tUnd wenn ihr eurem Volksgenossen etwas verkauft oder aus der Hand deines Volksgenossen kauft, sollt ihr einander nicht bedrücken, keiner seinen Bruder.\tBewahrt den Wechsel zwischen Mehrzahl und Einzahl und die Hand beim Kauf.",
+    "new_row": "14\tUnd wenn ihr deinem Volksgenossen etwas verkauft oder aus der Hand deines Volksgenossen kauft, sollt ihr einander nicht bedrücken, keiner seinen Bruder.\tBewahrt den Wechsel zwischen Mehrzahl und Einzahl und die Hand beim Kauf.",
+    "reason": "Correct native grammar while retaining the Hebrew meaning and number."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/03_LEV/LEV_025_2.tsv",
+    "verse": 49,
+    "old_row": "49\tOder sein Onkel oder der Sohn seines Onkels soll ihn lösen, oder einer seiner Blutsverwandten aus seiner Sippe soll ihn lösen; oder wenn seine Hand hinreichend erwirbt, soll er gelöst werden.\tBewahrt den Onkel und seinen Sohn und das passive Gelöstwerden.",
+    "new_row": "49\tOder sein Onkel oder der Sohn seines Onkels soll ihn lösen, oder einer seiner Blutsverwandten aus seiner Sippe soll ihn lösen; oder wenn seine Hand hinreichend erwirbt, soll er sich lösen.\tBewahrt den Onkel und den Sohn seines Onkels.",
+    "reason": "Read the Niphal reflexively in the context of obtaining means to redeem oneself, rather than mechanically following E as a passive. Restrict DIFFERENCE to demonstrable wording differences from TARGET."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/03_LEV/LEV_026_1.tsv",
+    "verse": 1,
+    "old_row": "1\t„Ihr sollt euch keine Götzen machen und euch kein geschnitztes Bild und keinen Gedenkstein aufrichten und keinen Bildstein in eurem Land aufstellen, um euch darauf niederzuwerfen, denn ich bin der HERR, euer Gott.\tBewahrt Bild und Gedenkstein im Singular.",
+    "new_row": "1\t„Ihr sollt euch keine Götzen machen und euch kein geschnitztes Bild und keine Säule aufrichten und keinen Bildstein in eurem Land aufstellen, um euch darauf niederzuwerfen, denn ich bin der HERR, euer Gott.\tNah am Hebräischen.",
+    "reason": "Restrict DIFFERENCE to demonstrable wording differences from TARGET. Do not add a commemorative meaning to the standing pillar."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/03_LEV/LEV_026_1.tsv",
+    "verse": 4,
+    "old_row": "4\twerde ich eure Regen zu ihrer Zeit geben, und das Land wird seinen Ertrag geben, und der Baum des Feldes wird seine Frucht geben.\tBewahrt den Baum und seine Frucht im kollektiven Singular.",
+    "new_row": "4\twerde ich eure Regenfälle zu ihrer Zeit geben, und das Land wird seinen Ertrag geben, und der Baum des Feldes wird seine Frucht geben.\tBewahrt den Baum und seine Frucht im kollektiven Singular.",
+    "reason": "Correct native grammar while retaining the Hebrew meaning and number."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/03_LEV/LEV_026_1.tsv",
+    "verse": 22,
+    "old_row": "22\tUnd ich werde das Wildtier des Feldes unter euch senden, und es wird euch der Kinder berauben und euer Vieh abschneiden und euch vermindern; und eure Wege werden veröden.\tBewahrt das Wildtier als Subjekt der folgenden Handlungen.",
+    "new_row": "22\tUnd ich werde das Wildtier des Feldes unter euch senden, und es wird euch der Kinder berauben und euer Vieh abschneiden und euch vermindern; und eure Wege werden veröden.\tBewahrt das Wildtier im kollektiven Singular.",
+    "reason": "Restrict DIFFERENCE to demonstrable wording differences from TARGET."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/03_LEV/LEV_026_1.tsv",
+    "verse": 25,
+    "old_row": "25\tUnd ich werde ein Schwert über euch bringen, das die Rache des Bundes rächt; und ihr werdet euch in eure Städte sammeln, und ich werde Pest in eure Mitte senden, und ihr werdet in die Hand eines Feindes gegeben werden.\tBewahrt die Hand eines Feindes im Singular.",
+    "new_row": "25\tUnd ich werde ein Schwert über euch bringen, das die Rache des Bundes vollzieht; und ihr werdet euch in eure Städte sammeln, und ich werde Pest in eure Mitte senden, und ihr werdet in die Hand eines Feindes gegeben werden.\tBewahrt die Hand eines Feindes im Singular.",
+    "reason": "Correct native grammar while retaining the Hebrew meaning and number."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/03_LEV/LEV_026_2.tsv",
+    "verse": 35,
+    "old_row": "35\tAlle Tage seiner Verwüstung wird es ruhen, was es an euren Sabbaten nicht geruht hat, als ihr darauf wohntet.\tBewahrt „an euren Sabbaten“.",
+    "new_row": "35\tAlle Tage seiner Verwüstung wird es ruhen als Ausgleich dafür, dass es an euren Sabbaten nicht geruht hat, als ihr darauf wohntet.\tBewahrt „an euren Sabbaten“.",
+    "reason": "Correct native grammar while retaining the Hebrew wording."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/03_LEV/LEV_026_2.tsv",
+    "verse": 37,
+    "old_row": "37\tUnd sie werden einer über seinen Bruder stolpern wie vor einem Schwert, während keiner verfolgt; und ihr werdet keinen Bestand vor euren Feinden haben.\tBewahrt das fehlende Standhalten.",
+    "new_row": "37\tUnd sie werden stolpern, einer über seinen Bruder, wie vor einem Schwert, während keiner verfolgt; und ihr werdet keinen Bestand vor euren Feinden haben.\tBewahrt das fehlende Standhalten.",
+    "reason": "Correct native grammar while retaining the Hebrew meaning and number."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/en/03_LEV/LEV_023_1.tsv",
+    "verse": 10,
+    "old_row": "10\t=\tRepeats the harvest in reap its harvest.",
+    "new_row": "10\t=\tClose to the Hebrew.",
+    "reason": "Restrict DIFFERENCE to demonstrable wording differences from TARGET."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/en/03_LEV/LEV_023_1.tsv",
+    "verse": 29,
+    "old_row": "29\t=\tRetains the passive is not humbled.",
+    "new_row": "29\t=\tRetains the passive is not humbled and the feminine her with plural peoples.",
+    "reason": "Restrict DIFFERENCE to demonstrable wording differences from TARGET."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/03_LEV/LEV_020.tsv",
+    "verse": 2,
+    "old_row": "2\t«И сынам Израилевым скажи: каждый человек из сынов Израилевых и из пришельца, живущего в Израиле, который даст из своего семени Молоху, непременно будет предан смерти; народ земли побьет его камнями.\tСохраняет семя и собирательное единственное число пришельца.",
+    "new_row": "2\t«И сынам Израилевым скажи: каждый человек из сынов Израилевых и из пришлого люда, живущего в Израиле, который даст из своего семени Молоху, непременно будет предан смерти; народ земли побьет его камнями.\tСохраняет семя и собирательное единственное число пришельца.",
+    "reason": "Correct native grammar while retaining the Hebrew meaning and number."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/03_LEV/LEV_020.tsv",
+    "verse": 24,
+    "old_row": "24\tИ Я сказал вам: вы овладеете их почвой, и Я дам ее вам, чтобы овладеть ею, землей, текущей молоком и медом. Я Господь, Бог ваш, Который отделил вас от народов.\tБлизко к еврейскому.",
+    "new_row": "24\tИ Я сказал вам: вы овладеете их землей, и Я дам ее вам, чтобы овладеть ею — землей, текущей молоком и медом. Я Господь, Бог ваш, Который отделил вас от народов.\tБлизко к еврейскому.",
+    "reason": "Correct native grammar while retaining the Hebrew meaning and number."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/03_LEV/LEV_021.tsv",
+    "verse": 4,
+    "old_row": "4\tКак муж он не должен осквернять себя среди своих соплеменников, чтобы обесчестить себя.\tБлизко к еврейскому.",
+    "new_row": "4\tМуж не должен осквернять себя среди своих соплеменников, чтобы обесчестить себя.\tБлизко к еврейскому.",
+    "reason": "Correct native grammar while retaining the Hebrew meaning and number."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/03_LEV/LEV_021.tsv",
+    "verse": 10,
+    "old_row": "10\tИ священник, больший своих братьев, на голову которого был возлит елей помазания и чью руку наполнили, чтобы надевать одежды, не должен распускать волос своей головы и не должен раздирать своих одежд.\tСохраняет образ наполнения руки и распущенные волосы.",
+    "new_row": "10\tИ священник, высший из своих братьев, на голову которого был возлит елей помазания и чью руку наполнили, чтобы надевать одежды, не должен распускать волос своей головы и не должен раздирать своих одежд.\tСохраняет образ наполнения руки и распущенные волосы.",
+    "reason": " Use native Russian for the priest’s rank among his brothers."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/03_LEV/LEV_022_1.tsv",
+    "verse": 3,
+    "old_row": "3\tСкажи им: в ваших поколениях всякая душа из всего вашего семени, которая приблизится к святыням, которые сыны Израилевы посвящают Господу, когда ее нечистота на ней, будет отсечена от Моего лица; Я Господь.\tНе добавляет «Бог ваш».",
+    "new_row": "3\tСкажи им: в ваших поколениях каждый человек из всего вашего семени, который приблизится к святыням, которые сыны Израилевы посвящают Господу, когда его нечистота на нем, — та душа будет отсечена от Моего лица; Я Господь.\tНе добавляет «Бог ваш».",
+    "reason": "Preserve both the initial man and the subsequent soul, rather than collapsing them into one subject."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/03_LEV/LEV_022_1.tsv",
+    "verse": 18,
+    "old_row": "18\t«Говори Аарону и его сынам и всем сынам Израилевым и скажи им: каждый человек из дома Израилева и из пришельца в Израиле, который приносит свой дар, по всем их обетам и по всем их добровольным приношениям, которые они приносят Господу во всесожжение:\tСохраняет переход от его дара к их обетам и приношениям.",
+    "new_row": "18\t«Говори Аарону и его сынам и всем сынам Израилевым и скажи им: каждый человек из дома Израилева и из пришлого люда в Израиле, который приносит свой дар, по всем их обетам и по всем их добровольным приношениям, которые они приносят Господу во всесожжение:\tСохраняет переход от его дара к их обетам и приношениям.",
+    "reason": "Correct native grammar while retaining the Hebrew meaning and number."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/03_LEV/LEV_022_1.tsv",
+    "verse": 27,
+    "old_row": "27\t«Когда родится бык или ягненок или коза, он должен быть семь дней под своей матерью; и от восьмого дня и далее будет принят для приношения огненной жертвы Господу.\tСохраняет «под своей матерью» и огненную жертву.",
+    "new_row": "27\t«Когда родится бык или ягненок или коза, животное должно быть семь дней под своей матерью; и от восьмого дня и далее будет принято для приношения огненной жертвы Господу.\tСохраняет «под своей матерью» и огненную жертву.",
+    "reason": "Correct native grammar while retaining the Hebrew meaning and number."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/03_LEV/LEV_023_1.tsv",
+    "verse": 24,
+    "old_row": "24\t«Говори сынам Израилевым, говоря: в седьмой месяц, в первый день месяца, будет у вас покой, памятование громким звуком, священное собрание.\tСохраняет памятование.",
+    "new_row": "24\t«Говори сынам Израилевым, говоря: в седьмой месяц, в первый день месяца, будет у вас покой, памятование с громким звуком, священное собрание.\tСохраняет памятование.",
+    "reason": "Correct native grammar while retaining the Hebrew meaning and number."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/03_LEV/LEV_023_1.tsv",
+    "verse": 29,
+    "old_row": "29\tИбо всякая душа, которая не будет смирена в самый этот день, будет отсечена из своих соплеменников.\tСохраняет страдательное смирение души.",
+    "new_row": "29\tИбо всякая душа, которая не будет смирена в самый этот день, будет отсечена из среды своих соплеменников.\tСохраняет страдательное смирение души.",
+    "reason": "Correct native grammar while retaining the Hebrew meaning and number."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/03_LEV/LEV_024.tsv",
+    "verse": 3,
+    "old_row": "3\tСнаружи завесы свидетельства в шатре встречи Аарон должен устраивать его от вечера до утра перед Господом постоянно; вечное постановление в ваших поколениях.\tНе добавляет ковчег и сынов Аарона.",
+    "new_row": "3\tС внешней стороны завесы свидетельства в шатре встречи Аарон должен устраивать его от вечера до утра перед Господом постоянно; вечное постановление в ваших поколениях.\tНе добавляет ковчег и сынов Аарона.",
+    "reason": "Correct native grammar while retaining the Hebrew meaning and number."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/03_LEV/LEV_025_2.tsv",
+    "verse": 49,
+    "old_row": "49\tИли его дядя или сын его дяди выкупит его, или кто-либо из родни его плоти из его рода выкупит его; или если его рука достигнет достатка, он будет выкуплен.\tСохраняет родню плоти и страдательный залог выкупа.",
+    "new_row": "49\tИли его дядя или сын его дяди выкупит его, или кто-либо из родни его плоти из его рода выкупит его; или если его рука достигнет достатка, он выкупит себя.\tСохраняет образ руки и родню плоти.",
+    "reason": "Read the Niphal reflexively in the context of obtaining means to redeem oneself, rather than mechanically following E as a passive. Restrict DIFFERENCE to demonstrable wording differences from TARGET."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/03_LEV/LEV_026_1.tsv",
+    "verse": 1,
+    "old_row": "1\t«Не делайте себе идолов и не воздвигайте себе изваяния и памятного столба и не ставьте в вашей земле камня с изображением, чтобы поклоняться на нем, ибо Я Господь, Бог ваш.\tСохраняет изваяние, столб и камень в единственном числе.",
+    "new_row": "1\t«Не делайте себе идолов и не воздвигайте себе изваяния и столба и не ставьте в вашей земле камня с изображением, чтобы поклоняться на нем, ибо Я Господь, Бог ваш.\tСохраняет изваяние, столб и камень в единственном числе.",
+    "reason": " Do not add a commemorative meaning to the standing pillar."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/03_LEV/LEV_026_1.tsv",
+    "verse": 6,
+    "old_row": "6\tИ Я дам мир в земле, и вы ляжете, и никто не устрашит; и Я прекращу существование лютого зверя в земле, и меч не пройдет по вашей земле.\tСохраняет зверя в собирательном единственном числе.",
+    "new_row": "6\tИ Я дам мир в земле, и вы ляжете, и никто не устрашит; и Я устраню лютого зверя из земли, и меч не пройдет по вашей земле.\tСохраняет зверя в собирательном единственном числе.",
+    "reason": "Correct native grammar while retaining the Hebrew meaning and number."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/03_LEV/LEV_026_2.tsv",
+    "verse": 39,
+    "old_row": "39\tИ оставшиеся среди вас истлеют в своей вине в землях ваших врагов; и также в винах своих отцов с ними истлеют.\tСохраняет «с ними» и повторение истления.",
+    "new_row": "39\tИ оставшиеся среди вас истлеют в своем беззаконии в землях ваших врагов; и также в беззакониях своих отцов с ними истлеют.\tСохраняет «с ними» и повторение истления.",
+    "reason": "Correct native grammar while retaining the Hebrew meaning and number."
+  }
+]

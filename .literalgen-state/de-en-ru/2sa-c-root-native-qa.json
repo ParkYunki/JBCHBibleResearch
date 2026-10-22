@@ -1,0 +1,26 @@
+[
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/10_2SA/2SA_024.tsv",
+    "verse": 22,
+    "old_row": "22\tUnd Aravna sagte zu David: „Mein Herr, der König, nehme und opfere, was gut ist in seinen Augen! Siehe, die Rinder zum Brandopfer und die Dreschschlitten und das Geschirr der Rinder zum Holz.\tDie Rinder stehen in der Mehrzahl; die Augen sind ausdrücklich genannt.",
+    "new_row": "22\tUnd Aravna sagte zu David: „Mein Herr, der König, nehme und opfere, was gut ist in seinen Augen! Siehe, die Rinder zum Brandopfer und die Dreschschlitten und das Geschirr der Rinder zum Holz.“\tDie Rinder stehen in der Mehrzahl; die Augen sind ausdrücklich genannt."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/10_2SA/2SA_024.tsv",
+    "verse": 23,
+    "old_row": "23\tDies alles gab Aravna, der König, dem König.“ Und Aravna sagte zum König: „Der HERR, dein Gott, möge dich annehmen!“\tNah am Hebräischen.",
+    "new_row": "23\tDies alles gab Aravna, der König, dem König. Und Aravna sagte zum König: „Der HERR, dein Gott, möge dich annehmen!“\tNah am Hebräischen."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/10_2SA/2SA_024.tsv",
+    "verse": 22,
+    "old_row": "22\tИ Орна сказал Давиду: «Пусть мой господин царь возьмёт и вознесёт то, что хорошо в его глазах! Вот волы для всесожжения и молотильные сани и принадлежности волов для дров.\tНазваны молотильные сани, а не повозки; сохранён образ глаз.",
+    "new_row": "22\tИ Орна сказал Давиду: «Пусть мой господин царь возьмёт и вознесёт то, что хорошо в его глазах! Вот волы для всесожжения и молотильные сани и принадлежности волов для дров».\tНазваны молотильные сани, а не повозки; сохранён образ глаз."
+  },
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/10_2SA/2SA_024.tsv",
+    "verse": 23,
+    "old_row": "23\tВсё дал Орна, царь, царю». И Орна сказал царю: «Да примет тебя Господь, твой Бог!»\tОрна назван царём; заключительная просьба говорит о принятии.",
+    "new_row": "23\tВсё дал Орна, царь, царю. И Орна сказал царю: «Да примет тебя Господь, твой Бог!»\tОрна назван царём; заключительная просьба говорит о принятии."
+  }
+]

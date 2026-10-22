@@ -1,0 +1,51 @@
+[
+  {
+    "path": "Tools/LiteralGen/outputs/en/10_2SA/2SA_013_1.tsv",
+    "verse": 6,
+    "old_row": "6\t=\tThe Hebrew says “two cakes”; BSB says “a couple of cakes.”",
+    "new_row": "6\t=\tClose to the Hebrew.",
+    "reason": "Two cakes and a couple of cakes are equivalent wording here."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/en/10_2SA/2SA_015_1.tsv",
+    "verse": 8,
+    "old_row": "8\t=\tClose to the Hebrew.",
+    "new_row": "8\t=\tThe Hebrew repeats the vow and vowing root and does not name Hebron in the quoted promise; BSB adds “in Hebron.”",
+    "reason": "Exclude the explicitly LXX-marked final token; describe only definite wording."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/en/10_2SA/2SA_015_2.tsv",
+    "verse": 31,
+    "old_row": "31\t=\tClose to the Hebrew.",
+    "new_row": "31\t=\tThe Hebrew has an active reporting form with David named, followed by David saying his prayer; BSB makes someone tell David. The Hebrew uses an ordinary saying verb for the prayer.",
+    "reason": "Compare the actual active O form without conjectural source explanation."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/en/10_2SA/2SA_016.tsv",
+    "verse": 12,
+    "old_row": "12\t=\tThe Hebrew repeats “the LORD”; BSB omits the second occurrence.",
+    "new_row": "12\t=\tThe Hebrew names “my eye” and repeats the LORD’s name; BSB has “my affliction” and leaves the second LORD implicit.",
+    "reason": "Compare actual O eye wording without manuscript explanation."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/en/10_2SA/2SA_016.tsv",
+    "verse": 20,
+    "old_row": "20\t=\tThe Hebrew command to give counsel is plural; BSB does not express this distinction.",
+    "new_row": "20\t=\tThe Hebrew command is plural and explicitly says “for yourselves”; BSB says “Give me counsel.”",
+    "reason": "Preserve explicit addressee number and pronominal complement."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/10_2SA/2SA_016.tsv",
+    "verse": 13,
+    "old_row": "13\tUnd David und seine Männer gingen auf dem Weg; und Simei ging an der Seite des Berges ihm gegenüber, ging und fluchte und warf ihm gegenüber mit Steinen und warf Staub mit Staub.\tDas Hebräische nennt Staub, nicht Erdklöße.",
+    "new_row": "13\tUnd David und seine Männer gingen auf dem Weg; und Simei ging an der Seite des Berges ihm gegenüber, ging und fluchte und warf ihm gegenüber mit Steinen und bestäubte ihn mit Staub.\tDas Hebräische nennt Staub, nicht Erdklöße.",
+    "reason": "Native German verb and retained dust image, as flagged by root."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/10_2SA/2SA_016.tsv",
+    "verse": 18,
+    "old_row": "18\tUnd Husai sagte zu Absalom: „Nein, sondern wem der HERR und dieses Volk und alle Männer Israels erwählt haben, dem werde ich gehören, und bei ihm werde ich bleiben.\tNah am Hebräischen.",
+    "new_row": "18\tUnd Husai sagte zu Absalom: „Nein, sondern wen der HERR und dieses Volk und alle Männer Israels erwählt haben, dem werde ich gehören, und bei ihm werde ich bleiben.\tNah am Hebräischen.",
+    "reason": "Accusative object of erwählen, as flagged by root."
+  }
+]

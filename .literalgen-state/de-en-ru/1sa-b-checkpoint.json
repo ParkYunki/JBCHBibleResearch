@@ -1,0 +1,19 @@
+{
+  "scope": "de/ru012–018; en012–015",
+  "transferred_to_root": "de/ru019–020",
+  "status": "generation and all assigned verse QA complete; awaiting root official redo application",
+  "created_files": 26,
+  "created_rows": 627,
+  "qa_candidates": 21,
+  "qa_file": ".literalgen-state/de-en-ru/1sa-b-qa.json",
+  "root_english_review": "016–020, 177 verses, 0 candidates",
+  "root_english_qa_file": ".literalgen-state/de-en-ru/1sa-b-root-en-qa.json",
+  "protected_files": 7387,
+  "protected_unchanged": true,
+  "unreviewed": [],
+  "LXX_tokens_excluded": [
+    "013:1 thirty and forty",
+    "013:15 marked narrative addition",
+    "014:41 marked expanded request"
+  ]
+}

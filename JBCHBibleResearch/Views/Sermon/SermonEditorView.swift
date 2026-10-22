@@ -18,9 +18,10 @@ import UIKit
 #endif
 
 
-/// `RichTextEditor.swift`의 `toolbarFontSizes`와 같은 목적 — 6종 프리셋 크기(16/17/19/20/24/34)를
-/// 포함한 자주 쓰는 값들.
-private let sermonToolbarFontSizes: [CGFloat] = [12, 13, 14, 15, 16, 17, 19, 20, 22, 24, 28, 32, 34, 40]
+/// `RichTextEditor.swift`의 `toolbarFontSizes`와 같은 목적 — 자주 쓰는 크기들. 2026-10-03 재설계 프리셋
+/// 크기(대주제 28 / 중주제 22 / 소주제 18 / 본문 17)를 포함한다. 말씀구절 16.5·인용 14.5처럼 소수인 프리셋은
+/// "프리셋 크기로"로 되돌린다(메뉴 라벨이 정수 표기라 넣지 않는다).
+private let sermonToolbarFontSizes: [CGFloat] = [12, 13, 14, 15, 16, 17, 18, 19, 20, 22, 24, 28, 32, 34, 40]
 /// 줄간격 메뉴의 줄 높이 배수(글자 크기 대비). 글꼴 자체의 기본 줄 높이(한글 글꼴은 대개 1.4~1.5배)보다 좁게는 만들 수 없어
 /// (`SermonParagraphStyleCodec.makeParagraphStyle`은 그 초과분만 `lineSpacing`으로 준다) 1.5부터 둔다.
 private let sermonToolbarLineHeights: [Double] = [1.5, 1.8, 2.0, 2.2, 2.5]
@@ -108,7 +109,7 @@ struct SermonEditorView: View {
             Divider()
             tagSection
         }
-        .navigationTitle(hasFixedTitle ? SermonFixedTitle.navigationText : (isNewSermon ? "새 설교 작성" : "설교 작성"))
+        .navigationTitle(hasFixedTitle ? SermonFixedTitle.navigationText : (isNewSermon ? String(localized: "새 설교 작성") : String(localized: "설교 작성")))
         #if os(iOS)
         .navigationBarTitleDisplayMode(.inline)
         #endif
@@ -156,7 +157,7 @@ struct SermonEditorView: View {
     /// 입력 즉시 반영되므로 되돌리는 취소는 없다).
     private var closeButton: some View {
         let isCancel = isNewSermon && !hasEnteredContent
-        return Button(isCancel ? "취소" : "완료") {
+        return Button(isCancel ? String(localized: "취소") : String(localized: "완료")) {
             // 창을 닫을 때 `onDisappear → save()`가 한 번 더 돌지만, 닫힘 시점에 기대지 않고 먼저 저장한다
             // (`save()`는 중복 호출돼도 같은 값을 다시 쓸 뿐이며 새 설교의 insert는 한 번만 한다).
             if !isCancel { save() }
@@ -164,7 +165,7 @@ struct SermonEditorView: View {
             onRequestClose?()
         }
         .buttonStyle(SermonMiniPillButtonStyle(isFilled: !isCancel, tint: accent))
-        .accessibilityLabel(isCancel ? "취소하고 닫기" : "저장하고 닫기")
+        .accessibilityLabel(isCancel ? String(localized: "취소하고 닫기") : String(localized: "저장하고 닫기"))
     }
 
     /// 맨 위 한 줄 — `.sermon`은 [제목 입력 ……… 완료], 제목이 없는 `.delivery`(모임 설교문)는 완료 버튼만 오른쪽에 둔다.
@@ -231,8 +232,8 @@ struct SermonEditorView: View {
     // 끼워 넣을 수 없기 때문이다.
     private var tagSectionLabel: String {
         switch subject {
-        case .sermon: return "설교 태그"
-        case .delivery: return "이 회차만의 태그 (메인 설교 태그와 별도)"
+        case .sermon: return String(localized: "설교 태그")
+        case .delivery: return String(localized: "이 회차만의 태그 (메인 설교 태그와 별도)")
         }
     }
 
@@ -314,10 +315,10 @@ struct SermonEditorView: View {
     }
 
     private func bannerLabel(_ mainSermon: Sermon) -> String {
-        let gatheringName = subject.gathering?.name ?? "모임 미지정"
+        let gatheringName = subject.gathering?.name ?? String(localized: "모임 미지정")
         let dateText = subject.deliveredAt?.formatted(date: .abbreviated, time: .omitted) ?? ""
-        let title = mainSermon.title.isEmpty ? "제목 없음" : mainSermon.title
-        return "참조한 메인 설교(읽기 전용) · \(gatheringName) \(dateText) — \(title)"
+        let title = mainSermon.title.isEmpty ? String(localized: "제목 없음") : mainSermon.title
+        return String(localized: "참조한 메인 설교(읽기 전용) · \(gatheringName) \(dateText) — \(title)")
     }
 
     private func bannerContent(_ label: String) -> some View {
@@ -436,7 +437,18 @@ struct SermonEditorView: View {
                             Button(entry.displayName) { proxy.applyFontFamily(entry.postScriptName, settings: settings) }
                         }
                     }
-                    Button("조선궁서체") { proxy.applyFontFamily(SpecialPurposeFonts.hanja, settings: settings) }
+                    // 지역 전용 다국어 글꼴(태국어/키릴/베트남어, 2026-10-12) — 그 앱 언어에서만 보인다.
+                    // family 이름은 고유명사라 번역하지 않는다.
+                    ForEach(BundledFonts.visibleMultilingualFamilies) { family in
+                        Menu(family.name) {
+                            ForEach(family.entries) { entry in
+                                Button(entry.displayName) { proxy.applyFontFamily(entry.postScriptName, settings: settings) }
+                            }
+                        }
+                    }
+                    if BundledFonts.isKoreanOnlyFontVisible {
+                        Button("조선궁서체") { proxy.applyFontFamily(SpecialPurposeFonts.hanja, settings: settings) }
+                    }
                     Divider()
                     Button("시스템 기본") { proxy.applyFontFamily("System", settings: settings) }
                 } label: {
@@ -559,12 +571,12 @@ struct SermonEditorView: View {
 
     private func styleDisplayName(_ style: SermonParagraphStyle) -> String {
         switch style {
-        case .mainTheme: return "대주제"
-        case .midTheme: return "중주제"
-        case .subTheme: return "소주제"
-        case .verseQuote: return "말씀구절"
-        case .citation: return "인용"
-        case .body: return "본문"
+        case .mainTheme: return String(localized: "대주제")
+        case .midTheme: return String(localized: "중주제")
+        case .subTheme: return String(localized: "소주제")
+        case .verseQuote: return String(localized: "말씀구절")
+        case .citation: return String(localized: "인용")
+        case .body: return String(localized: "본문")
         }
     }
 

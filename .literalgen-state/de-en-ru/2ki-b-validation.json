@@ -1,0 +1,25 @@
+{
+  "book": "12_2KI",
+  "created_files": 28,
+  "created_rows": 569,
+  "rows_by_language": {
+    "de": 227,
+    "ru": 227,
+    "en": 115
+  },
+  "qa": [
+    {
+      "file": "2ki-b-qa.json",
+      "candidates": 50
+    },
+    {
+      "file": "2ki-b-root-en-qa.json",
+      "candidates": 8
+    }
+  ],
+  "format": "pass",
+  "exact_qa": "pass",
+  "protected_files": 10324,
+  "protected_mismatches": [],
+  "direct_tsv_edits": false
+}

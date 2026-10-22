@@ -76,7 +76,7 @@ struct TranslationColumnView: View {
     /// 절 단위 한자 주석. 표시 방식(끄기/탭하면 보기/항상 보기)은 전역 설정이라
     /// `VerseRow`가 `UserSettingsStore.hanjaDisplayMode`를 직접 읽는다.
     var hanjaWordsProvider: (Int) -> [HanjaWordAnnotation] = { _ in [] }
-    /// "관련 내용" — 이 절을 언급하는 메모/연구문서/설교/말씀 요약. 절 번호 위 색 점 스택으로 노출한다.
+    /// "관련 내용" — 이 절을 언급하는 메모/연구문서/설교/말씀 요약. 절 번호 위 색 칩 줄(`VerseRelatedIconStack`)로 노출한다.
     var verseMentionsProvider: (Int) -> [VerseMention] = { _ in [] }
     /// 절 단위 책갈피 여부. 실제 구현은 `BibleReadingViewModel.isVerseBookmarked(_:)`.
     var isBookmarkedProvider: (Int) -> Bool = { _ in false }
@@ -153,7 +153,7 @@ struct TranslationColumnView: View {
     private static let phoneReportDebounceInterval: TimeInterval = 0.15
     @State private var phoneReportWorkItem: DispatchWorkItem?
 
-    /// 아이폰은 시스템 내비게이션 바(`BibleReadingContentView.toolbarContent`의 `.principal`)가 이미
+    /// 아이폰은 직접 그린 상단바(`BibleTopBar`)가 이미
     /// 번역본/책/장을 보여주므로 컬럼 제목 영역을 숨긴다. 맥/아이패드는 여러 컬럼을 나란히 보여줘
     /// 번역본 구분용으로 필요하다. `BibleReadingContentView.isPhone`과 같은 패턴.
     private var isPhone: Bool {
@@ -182,7 +182,7 @@ struct TranslationColumnView: View {
             if let errorDescription {
                 ContentUnavailableMessage(errorDescription)
             } else if verses.isEmpty {
-                ContentUnavailableMessage("이 장에 표시할 절이 없습니다.")
+                ContentUnavailableMessage(String(localized: "이 장에 표시할 절이 없습니다."))
             } else {
                 columnScrollView
             }
@@ -740,9 +740,9 @@ private struct VerseRow: View {
         )
     }
 
-    /// 절 번호 위 색 점(`VerseRelatedIconStack`)을 눌러 여는 "절 관련 내용" 통합 페이지.
+    /// 절 번호 위 색 칩 줄(`VerseRelatedIconStack`)을 눌러 여는 "절 관련 내용" 통합 페이지.
     @State private var isRelatedPresented = false
-    /// 누른 점의 종류 — 그 종류 칩이 먼저 선택된 채 열린다(nil이면 "전체").
+    /// 열 때 먼저 선택할 종류. 칩 줄 전체가 버튼 하나(2026-10-13)라 지금은 항상 nil("전체")이다.
     @State private var relatedInitialKind: VerseRelatedKind?
 
     // 환경설정 "모양" 탭의 본문 크기/색상/절 번호 크기/줄간격/글꼴을 반영한다.
@@ -790,16 +790,21 @@ private struct VerseRow: View {
                         },
                         including: relatedKinds.isEmpty ? .subviews : .all
                     )
-                    // 색 점 스택 — `.overlay`라 행 높이/베이스라인 정렬에 영향을 주지 않는다.
-                    .overlay(alignment: .topLeading) {
+                    // 관련 내용 칩 줄(종류별 자리 고정 5칸) — `.overlay`라 행 높이/베이스라인 정렬에 영향을 주지 않는다.
+                    // 칩 크기가 뱃지 폭(1/4)에서 나오므로 `GeometryReader`로 폭을 읽고, 줄(뱃지보다 넓음)을 뱃지 중앙에 맞춰
+                    // 뱃지 바로 위에 올린다. 줄 전체가 버튼 하나라 누르면 항상 "전체" 칩으로 열린다.
+                    .overlay(alignment: .top) {
                         if !relatedKinds.isEmpty {
-                            VerseRelatedIconStack(kinds: relatedKinds) { kind in
-                                relatedInitialKind = kind
-                                isRelatedPresented = true
-                            }
-                            .offset(x: -2, y: -17)
-                            .popover(isPresented: $isRelatedPresented) {
-                                relatedPopoverContent
+                            GeometryReader { proxy in
+                                let stack = VerseRelatedIconStack(kinds: relatedKinds, badgeWidth: proxy.size.width) { kind in
+                                    relatedInitialKind = kind
+                                    isRelatedPresented = true
+                                }
+                                stack
+                                    .offset(x: (proxy.size.width - stack.totalWidth) / 2, y: -stack.totalHeight)
+                                    .popover(isPresented: $isRelatedPresented) {
+                                        relatedPopoverContent
+                                    }
                             }
                         }
                     }
@@ -813,8 +818,8 @@ private struct VerseRow: View {
                         .padding(.top, -4)
                 }
 
-                // 관주/연구문서/내 설교/말씀 요약/구절 메모 아이콘은 절 번호 뱃지 위쪽의 색 점 스택
-                // (`VerseRelatedIconStack`, 뱃지 `.overlay`)으로 모았고, 어느 점을 눌러도 같은 통합 페이지가 열린다.
+                // 관주/연구문서/내 설교/말씀 요약/구절 메모 아이콘은 절 번호 뱃지 위쪽의 색 칩 줄
+                // (`VerseRelatedIconStack`, 뱃지 `.overlay`)로 모았고, 줄을 누르면 같은 통합 페이지가 열린다.
                 // 난외주 별표 아이콘은 본문에 이미 자주색 표시가 있어 뺐다(`MarginalNoteFootnoteList`는 그대로).
 
                 // 한자 주석은 이 칸의 아이콘이 아니라 절 선택 상태(`isSelected`)로
@@ -822,7 +827,7 @@ private struct VerseRow: View {
                 // 뜻(훈음)은 확대보기(`VerseZoomView`)의 "한자 뜻풀이" 영역에서 본다.
             }
             .frame(minWidth: 20)
-            // 색 점 스택이 위쪽으로 튀어나오므로 관련 내용이 있는 절은 그만큼 위 여백을 둬 윗절/스크롤 가장자리와 겹치지 않게 한다.
+            // 색 칩 줄이 위쪽으로 튀어나오므로 관련 내용이 있는 절은 그만큼 위 여백을 둬 윗절/스크롤 가장자리와 겹치지 않게 한다.
             .padding(.top, relatedKinds.isEmpty ? 0 : 12)
 
             verseContentText
@@ -970,7 +975,7 @@ private struct VerseRow: View {
 
     private var relatedPopoverContent: some View {
         VerseRelatedSheet(
-            reference: "\(BooksProvider.shared.book(id: verse.bookId)?.nameKo ?? "책 \(verse.bookId)") \(verse.chapter):\(verse.verse)",
+            reference: "\(BooksProvider.shared.book(id: verse.bookId)?.displayName ?? String(localized: "책 \(verse.bookId)")) \(verse.chapter):\(verse.verse)",
             content: relatedContent,
             initialKind: relatedInitialKind,
             onClose: { isRelatedPresented = false },
@@ -1043,8 +1048,8 @@ private struct ChapterEndFooterView: View {
     var body: some View {
         VStack(spacing: 10) {
             HStack(spacing: 10) {
-                navButton(systemImage: "chevron.left", title: "이전 장", subtitle: actions.previousLabel, action: actions.onPrevious)
-                navButton(systemImage: "chevron.right", title: "다음 장", subtitle: actions.nextLabel, action: actions.onNext, trailingIcon: true)
+                navButton(systemImage: "chevron.left", title: String(localized: "이전 장"), subtitle: actions.previousLabel, action: actions.onPrevious)
+                navButton(systemImage: "chevron.right", title: String(localized: "다음 장"), subtitle: actions.nextLabel, action: actions.onNext, trailingIcon: true)
             }
             noteButton
         }
@@ -1109,7 +1114,7 @@ private struct ChapterEndFooterView: View {
     private var noteLabel: some View {
         HStack(spacing: 8) {
             Image(systemName: "note.text")
-            Text(actions.existingNotes.isEmpty ? "이 장에 대한 개인 묵상" : "이 장에 대한 개인 묵상 (\(actions.existingNotes.count))")
+            Text(actions.existingNotes.isEmpty ? String(localized: "이 장에 대한 개인 묵상") : String(localized: "이 장에 대한 개인 묵상 (\(actions.existingNotes.count))"))
                 .font(.subheadline.weight(.semibold))
         }
         .frame(maxWidth: .infinity, minHeight: 48)

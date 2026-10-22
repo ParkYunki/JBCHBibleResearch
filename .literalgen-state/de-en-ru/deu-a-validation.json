@@ -1,0 +1,40 @@
+{
+  "files": 39,
+  "rows": {
+    "de": 348,
+    "ru": 348,
+    "en": 161
+  },
+  "errors": [],
+  "literal_quote_counts": {
+    "de": {
+      "„": 28,
+      "“": 28,
+      "‚": 18,
+      "‘": 18,
+      "«": 0,
+      "»": 0
+    },
+    "ru": {
+      "„": 18,
+      "“": 18,
+      "‚": 0,
+      "‘": 0,
+      "«": 28,
+      "»": 28
+    },
+    "en": {
+      "„": 0,
+      "“": 0,
+      "‚": 0,
+      "‘": 0,
+      "«": 0,
+      "»": 0
+    }
+  },
+  "qa_rows": 16,
+  "exact_old_rows_verified": true,
+  "qa_unique": true,
+  "root_en005_011_rows_reviewed": 187,
+  "root_en005_011_confirmed_errors": 0
+}

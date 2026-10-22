@@ -1,0 +1,62 @@
+[
+  {
+    "path": "Tools/LiteralGen/outputs/de/13_1CH/1CH_010.tsv",
+    "old_row": "1\tUnd die Philister kämpften gegen Israel; und die Männer Israels flohen vor den Philistern und fielen erschlagen auf dem Gebirge Gilboa.\tDie Philister werden wiederholt genannt.",
+    "new_row": "1\tUnd die Philister kämpften gegen Israel; und die Männer Israels flohen vor den Philistern und fielen erschlagen auf dem Gebirge Gilboa.\tNah am Hebräischen."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/13_1CH/1CH_011_1.tsv",
+    "old_row": "1\tUnd ganz Israel versammelte sich bei David in Hebron und sagte: „Siehe, dein Gebein und dein Fleisch sind wir.\tGebein steht im Singular.",
+    "new_row": "1\tUnd ganz Israel versammelte sich bei David in Hebron und sagte: „Siehe, dein Gebein und dein Fleisch sind wir.\tNah am Hebräischen."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/13_1CH/1CH_011_1.tsv",
+    "old_row": "7\tUnd David wohnte in der Festung; deshalb nannten sie sie Stadt Davids.\tDas Nennen ist aktiv ausgedrückt.",
+    "new_row": "7\tUnd David wohnte in der Festung; deshalb nannten sie sie Stadt Davids.\tNah am Hebräischen."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/13_1CH/1CH_011_1.tsv",
+    "old_row": "19\tUnd er sagte: „Fern sei es mir vor meinem Gott, dies zu tun! Sollte ich das Blut dieser Männer trinken um ihr Leben? Denn um ihr Leben haben sie es gebracht.“ Und er wollte es nicht trinken. Dies taten die drei Helden.\tNah am Hebräischen.",
+    "new_row": "19\tUnd er sagte: „Fern sei es mir vor meinem Gott, dies zu tun! Sollte ich das Blut dieser Männer unter Einsatz ihres Lebens trinken? Denn unter Einsatz ihres Lebens haben sie es gebracht.“ Und er wollte es nicht trinken. Dies taten die drei Helden.\tNah am Hebräischen."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/13_1CH/1CH_013.tsv",
+    "old_row": "2\tИ Давид сказал всему собранию Израиля: «Если вам хорошо и это от Господа, нашего Бога, пошлём повсюду к нашим оставшимся братьям во всех землях Израиля и с ними к священникам и левитам в их городах с пастбищами, чтобы они собрались к нам.\tЗемли стоят во множественном числе; названы пастбища.",
+    "new_row": "2\tИ Давид сказал всему собранию Израиля: «Если это угодно вам и это от Господа, нашего Бога, пошлём повсюду к нашим оставшимся братьям во всех землях Израиля и с ними к священникам и левитам в их городах с пастбищами, чтобы они собрались к нам.\tЗемли стоят во множественном числе; названы пастбища."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/13_1CH/1CH_015.tsv",
+    "old_row": "12\tUnd er sagte zu ihnen: „Ihr seid die Häupter der Väter unter den Leviten. Heiligt euch, ihr und eure Brüder, und bringt die Lade des HERRN, des Gottes Israels, dorthin hinauf, wo ich ihr bereitet habe.\tDer Aufruf zur Heiligung gilt euch und euren Brüdern.",
+    "new_row": "12\tUnd er sagte zu ihnen: „Ihr seid die Häupter der Väter unter den Leviten. Heiligt euch, ihr und eure Brüder, und bringt die Lade des HERRN, des Gottes Israels, dorthin hinauf, wo ich ihr einen Platz bereitet habe.\tDer Aufruf zur Heiligung gilt euch und euren Brüdern."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/13_1CH/1CH_015.tsv",
+    "old_row": "12\tИ сказал им: «Вы главы отцов у левитов. Освятитесь, вы и ваши братья, и поднимите ковчег Господа, Бога Израиля, туда, где я приготовил для него.\tСохранены отцы и движение вверх.",
+    "new_row": "12\tИ сказал им: «Вы главы отцов у левитов. Освятитесь, вы и ваши братья, и поднимите ковчег Господа, Бога Израиля, туда, где я приготовил для него место.\tСохранены отцы и движение вверх."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/13_1CH/1CH_016_1.tsv",
+    "old_row": "7\tAn jenem Tag gab David damals zuerst das Danken dem HERRN durch die Hand Asaphs und seiner Brüder auf:\tDie Hand bleibt ausdrücklich genannt.",
+    "new_row": "7\tAn jenem Tag gab David damals zuerst den Auftrag, dem HERRN durch die Hand Asaphs und seiner Brüder zu danken:\tDie Hand bleibt ausdrücklich genannt."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/13_1CH/1CH_016_2.tsv",
+    "old_row": "36\tGesegnet sei der HERR, der Gott Israels, von Ewigkeit bis Ewigkeit! Und das ganze Volk sagte: „Amen!“, und lobte den HERRN.\tDas Loben ist als Handlung wiedergegeben.",
+    "new_row": "36\tGesegnet sei der HERR, der Gott Israels, von Ewigkeit bis Ewigkeit! Und das ganze Volk sagte: „Amen!“ und lobte den HERRN.\tDas Loben ist als Handlung wiedergegeben."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/13_1CH/1CH_016_2.tsv",
+    "old_row": "35\tИ скажите: «Спаси нас, Бог нашего спасения, и собери нас и избавь нас от народов, чтобы благодарить Твоё святое имя, чтобы хвалиться Твоей хвалой!»\tНазваны Бог спасения и благодарение.",
+    "new_row": "35\tИ скажите: «Спаси нас, Боже нашего спасения, и собери нас и избавь нас от народов, чтобы благодарить Твоё святое имя, чтобы хвалиться Твоей хвалой!»\tНазваны Бог спасения и благодарение."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/13_1CH/1CH_016_2.tsv",
+    "old_row": "36\tБлагословен Господь, Бог Израиля, от века до века! И весь народ сказал: «Аминь!», и хвалил Господа.\tХвала выражена как действие.",
+    "new_row": "36\tБлагословен Господь, Бог Израиля, от века до века! И весь народ сказал: «Аминь!» и хвалил Господа.\tХвала выражена как действие."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/13_1CH/1CH_016_2.tsv",
+    "old_row": "40\tum dem HERRN beständig am Morgen und am Abend Brandopfer auf dem Brandopferaltar darzubringen und nach allem, was im Gesetz des HERRN geschrieben ist, das er Israel geboten hat;\tNah am Hebräischen.",
+    "new_row": "40\tum dem HERRN beständig am Morgen und am Abend Brandopfer auf dem Brandopferaltar darzubringen und nach allem zu handeln, was im Gesetz des HERRN geschrieben ist, das er Israel geboten hat;\tNah am Hebräischen."
+  }
+]

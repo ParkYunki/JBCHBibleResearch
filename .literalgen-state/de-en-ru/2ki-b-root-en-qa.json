@@ -1,0 +1,50 @@
+[
+  {
+    "path": "Tools/LiteralGen/outputs/en/12_2KI/2KI_013.tsv",
+    "verse": 23,
+    "old_row": "23\t=\tThe Hebrew first uses a pronoun for those favored and later leaves the unwilling subject implicit; BSB supplies Israel and repeats the LORD.",
+    "new_row": "23\t=\tThe Hebrew says He was unwilling to destroy them and separately states He had not cast them from His face. BSB places both destroying and casting under His unwillingness."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/en/12_2KI/2KI_014.tsv",
+    "verse": 26,
+    "old_row": "26\t=\tThe Hebrew explicitly says there was none restrained and none abandoned; BSB describes both slave and free as afflicted.",
+    "new_row": "26\t=\tThe Hebrew explicitly says there was no one in each of the two groups; BSB describes both groups as afflicted."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/en/12_2KI/2KI_015_1.tsv",
+    "verse": 4,
+    "old_row": "4\t=\tClose to the Hebrew.",
+    "new_row": "4\t=\tThe Hebrew repeats the high places as the location of sacrifice and burning incense; BSB uses there."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/en/12_2KI/2KI_015_1.tsv",
+    "verse": 14,
+    "old_row": "14\t=\tClose to the Hebrew.",
+    "new_row": "14\t=\tThe Hebrew separately states going up and coming and repeats Samaria as the place of the attack; BSB condenses the movement and names Samaria once."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/en/12_2KI/2KI_016.tsv",
+    "verse": 9,
+    "old_row": "9\t=\tClose to the Hebrew.",
+    "new_row": "9\t=\tThe Hebrew repeats the king of Assyria and makes Damascus itself the object of deportation; BSB uses he and explicitly supplies its people."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/en/12_2KI/2KI_016.tsv",
+    "verse": 11,
+    "old_row": "11\t=\tClose to the Hebrew.",
+    "new_row": "11\t=\tThe Hebrew repeats Uriah the priest and Damascus; BSB uses he for the second Uriah reference and leaves the return location implicit."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/en/12_2KI/2KI_016.tsv",
+    "verse": 12,
+    "old_row": "12\t=\tThe Hebrew says the king approached the altar and went up upon it; BSB interprets the latter action as presenting offerings on it.",
+    "new_row": "12\t=\tThe Hebrew names the king three times and the altar twice; BSB uses pronouns after their first mention."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/en/12_2KI/2KI_016.tsv",
+    "verse": 18,
+    "old_row": "18\t=\tThe Hebrew uses one verb for changing or turning the Sabbath structure and the outer royal entrance; BSB specifies removing the canopy and closing the entrance.",
+    "new_row": "18\t=\tThe Hebrew uses one verb for both the Sabbath structure and the outer royal entrance; BSB uses separate removing and closing verbs."
+  }
+]

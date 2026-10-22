@@ -1,0 +1,9 @@
+[
+  {
+    "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/en/17_EST/EST_003.tsv",
+    "verse": "1",
+    "old_row": "1\t=\tThe Hebrew says the king placed Haman’s throne above those of all the princes; BSB describes elevation to a position above them.",
+    "new_row": "1\t=\tThe Hebrew says the king placed Haman’s throne above all the princes; BSB describes elevation to a position above them.",
+    "reason": "O says his throne above all princes, without explicitly adding their thrones."
+  }
+]

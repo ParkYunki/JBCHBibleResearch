@@ -41,7 +41,7 @@ struct TranslationImportSheet: View {
                     Button {
                         isFileImporterPresented = true
                     } label: {
-                        Label(pickedFileURL?.lastPathComponent ?? "SQLite 파일 선택...", systemImage: "doc.badge.plus")
+                        Label(pickedFileURL?.lastPathComponent ?? String(localized: "SQLite 파일 선택..."), systemImage: "doc.badge.plus")
                     }
                     if isValidating {
                         ProgressView("파일 확인 중...")

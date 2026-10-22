@@ -1,0 +1,23 @@
+{
+  "book": "17_EST",
+  "chapters": [
+    8,
+    9,
+    10
+  ],
+  "created": [
+    "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/17_EST/EST_008.tsv",
+    "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/17_EST/EST_008.tsv",
+    "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/17_EST/EST_009_1.tsv",
+    "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/17_EST/EST_009_2.tsv",
+    "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/17_EST/EST_009_1.tsv",
+    "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/17_EST/EST_009_2.tsv",
+    "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/17_EST/EST_010.tsv",
+    "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/17_EST/EST_010.tsv"
+  ],
+  "files": 8,
+  "rows": 104,
+  "status": "native_complete_en_review_complete",
+  "own_qa": 2,
+  "root_en_qa": 1
+}

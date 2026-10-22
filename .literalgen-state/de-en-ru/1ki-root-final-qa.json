@@ -1,0 +1,77 @@
+[
+  {
+    "path": "Tools/LiteralGen/outputs/ru/11_1KI/1KI_012_1.tsv",
+    "old_row": "24\t„Не поднимайтесь и не воюйте с вашими братьями, сынами Израиля! Возвратитесь каждый в свой дом, ибо от Меня было это дело!“» И они послушали слова Господа и возвратились, чтобы идти по слову Господа.\tСохранены подъём, два запрета и два упоминания слова Господа.",
+    "new_row": "24\t„Так сказал Господь: Не поднимайтесь и не воюйте с вашими братьями, сынами Израиля! Возвратитесь каждый в свой дом, ибо от Меня было это дело!“» И они послушали слова Господа и возвратились, чтобы идти по слову Господа.\tСохранены подъём, два запрета и два упоминания слова Господа."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/11_1KI/1KI_012_1.tsv",
+    "old_row": "10\tUnd die Jungen, die mit ihm aufgewachsen waren, redeten zu ihm: „So sollst du zu diesem Volk sagen, das zu dir geredet hat: ‚Dein Vater hat unser Joch schwer gemacht, und du erleichtere es über uns‘; so sollst du zu ihnen reden: ‚Mein Kleiner ist dicker als die Lenden meines Vaters.\tEin Finger ist nicht als eigenes Substantiv genannt; der Vergleich ist eine gegenwärtige Aussage.",
+    "new_row": "10\tUnd die Jungen, die mit ihm aufgewachsen waren, redeten zu ihm: „So sollst du zu diesem Volk sagen, das zu dir geredet hat: ‚Dein Vater hat unser Joch schwer gemacht, und du erleichtere es uns‘; so sollst du zu ihnen reden: ‚Mein Kleiner ist dicker als die Lenden meines Vaters.\tEin Finger ist nicht als eigenes Substantiv genannt; der Vergleich ist eine gegenwärtige Aussage."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/11_1KI/1KI_012_1.tsv",
+    "old_row": "10\tИ говорили ему молодые, которые выросли с ним: «Так скажи этому народу, который говорил тебе: „Твой отец сделал наше иго тяжёлым; а ты облегчи его над нами“; так говори им: „Мой малый толще чресл моего отца.\tНет отдельного существительного «палец»; малая величина названа субстантивированным словом.",
+    "new_row": "10\tИ говорили ему молодые, которые выросли с ним: «Так скажи этому народу, который говорил тебе: „Твой отец сделал наше иго тяжёлым; а ты облегчи его для нас“; так говори им: „Мой малый толще чресл моего отца.\tНет отдельного существительного «палец»; малая величина названа субстантивированным словом."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/11_1KI/1KI_012_1.tsv",
+    "old_row": "21\tИ пришёл Ровоам в Иерусалим и собрал весь дом Иуды и колено Вениамина, сто восемьдесят тысяч отборных, делающих войну, чтобы воевать с домом Израиля, чтобы возвратить царство Ровоаму, сыну Соломона.\tДом Иуды и колено Вениамина собраны непосредственно, без отдельного «из».",
+    "new_row": "21\tИ пришёл Ровоам в Иерусалим и собрал весь дом Иуды и колено Вениамина, сто восемьдесят тысяч отборных воинов, чтобы воевать с домом Израиля, чтобы возвратить царство Ровоаму, сыну Соломона.\tДом Иуды и колено Вениамина собраны непосредственно, без отдельного «из»."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/11_1KI/1KI_012_2.tsv",
+    "old_row": "32\tИ установил Иеровоам праздник в восьмой месяц, в пятнадцатый день месяца, как праздник, который в Иуде, и поднялся на жертвенник. Так он сделал в Вефиле, чтобы приносить жертвы тельцам, которых сделал; и поставил в Вефиле священников высот, которые сделал.\tПрямо назван подъём на жертвенник.",
+    "new_row": "32\tИ установил Иеровоам праздник в восьмой месяц, в пятнадцатый день месяца, как праздник, который в Иуде, и поднялся на жертвенник. Так он сделал в Вефиле, чтобы приносить жертвы тельцам, которых сделал; и поставил в Вефиле священников высот, которых поставил.\tПрямо назван подъём на жертвенник."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/11_1KI/1KI_014_1.tsv",
+    "old_row": "14\tUnd der HERR wird sich einen König über Israel aufrichten, der das Haus Jerobeams ausrotten wird, dies heute; und was? Auch jetzt!\tDas Hebräische nennt diesen Tag und jetzt, ohne eigenes Verb für geschehen.",
+    "new_row": "14\tUnd der HERR wird sich einen König über Israel aufrichten, der das Haus Jerobeams ausrotten wird, an diesem Tag; und was? Auch jetzt!\tDas Hebräische nennt diesen Tag und jetzt, ohne eigenes Verb für geschehen."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/11_1KI/1KI_014_1.tsv",
+    "old_row": "14\tИ Господь поставит Себе царя над Израилем, который отсечёт дом Иеровоама, это сегодня; и что? Также теперь!\tЕврейский текст говорит об этом дне прямо как о сегодня.",
+    "new_row": "14\tИ Господь поставит Себе царя над Израилем, который отсечёт дом Иеровоама, в этот день; и что? Также теперь!\tЕврейский текст называет этот день и теперь, без отдельного глагола происходить."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/11_1KI/1KI_013_2.tsv",
+    "old_row": "34\tИ это дело стало грехом дому Иеровоама, чтобы истребить и уничтожить с лица земли.\tЦели истребления и уничтожения переданы отдельными глаголами.",
+    "new_row": "34\tИ это дело стало грехом дому Иеровоама, чтобы истребить и уничтожить его с лица земли.\tЦели истребления и уничтожения переданы отдельными глаголами."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/en/11_1KI/1KI_014_1.tsv",
+    "old_row": "18\t=\tThe Hebrew repeats “the LORD” and uses “by the hand of His servant”; BSB uses “the word that the LORD had spoken” and “through His servant.”",
+    "new_row": "18\t=\tThe Hebrew says “by the hand of His servant”; BSB uses “through His servant.”"
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/11_1KI/1KI_008_2.tsv",
+    "old_row": "53\tИбо Ты отделил их Себе в наследие из всех народов земли, как говорил рукой Моисея, Твоего раба, когда выводил наших отцов из Египта, Владыка Господи!»\tРука Моисея названа прямо.",
+    "new_row": "53\tИбо Ты отделил их Себе в наследие из всех народов земли, как говорил рукой Моисея, Твоего раба, когда выводил наших отцов из Египта, Владыко Господи!»\tРука Моисея названа прямо."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/11_1KI/1KI_009.tsv",
+    "old_row": "12\tИ вышел Хирам из Тира увидеть города, которые дал ему Соломон; и они были неправы в его глазах.\tСохранён образ глаз.",
+    "new_row": "12\tИ вышел Хирам из Тира увидеть города, которые дал ему Соломон; и они не были хороши в его глазах.\tСохранён образ глаз."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/11_1KI/1KI_009.tsv",
+    "old_row": "26\tИ флот построил царь Соломон в Ецион-Гавере, что при Елафе, на губе Чермного моря, в земле Едома.\tФлот передаёт собирательное название судов; сохранена губа моря.",
+    "new_row": "26\tИ флот построил царь Соломон в Ецион-Гавере, что при Елафе, на берегу Чермного моря, в земле Едома.\tФлот передаёт собирательное название судов; сохранена губа моря."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/11_1KI/1KI_010.tsv",
+    "old_row": "16\tUnd der König Salomo machte zweihundert große Schilde aus geschlagenem Gold; sechshundert an Gold kamen auf den einen großen Schild,\tDas Gold ist als geschlagen bezeichnet, nicht einfach als bestes; eine Gewichtseinheit ist hier nicht ausdrücklich genannt.",
+    "new_row": "16\tUnd der König Salomo machte zweihundert große Schilde aus geschlagenem Gold; sechshundert Gewichtseinheiten Gold kamen auf den einen großen Schild,\tDas Gold ist als geschlagen bezeichnet, nicht einfach als bestes; eine Gewichtseinheit ist hier nicht ausdrücklich genannt."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/11_1KI/1KI_010.tsv",
+    "old_row": "16\tИ сделал царь Соломон двести больших щитов из кованого золота; шестьсот золота шло на один большой щит,\tПри шестистах нет отдельной единицы веса.",
+    "new_row": "16\tИ сделал царь Соломон двести больших щитов из кованого золота; шестьсот весовых единиц золота шло на один большой щит,\tПри шестистах нет отдельной единицы веса."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/11_1KI/1KI_010.tsv",
+    "old_row": "29\tИ поднималась и выходила колесница из Египта за шестьсот серебра, а конь за сто пятьдесят; и так они своей рукой вывозили их для всех царей Хеттеев и для царей Арама.\tЕдиница веса при серебре прямо не названа; рука стоит в единственном числе.",
+    "new_row": "29\tИ поднималась и выходила колесница из Египта за шестьсот весовых единиц серебра, а конь за сто пятьдесят; и так они своей рукой вывозили их для всех царей Хеттеев и для царей Арама.\tЕдиница веса при серебре прямо не названа; рука стоит в единственном числе."
+  }
+]

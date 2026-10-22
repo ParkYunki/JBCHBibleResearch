@@ -1,0 +1,57 @@
+[
+  {
+    "path": "Tools/LiteralGen/outputs/de/18_JOB/JOB_015_1.tsv",
+    "old_row": "8\tHörst du im Rat Gottes zu, und ziehst du die Weisheit auf dich beschränkt an dich?\tDas Hören steht nicht als abgeschlossenes Geschehen.",
+    "new_row": "8\tHörst du im Rat Gottes zu, und beschränkst du die Weisheit auf dich?\tDas Hören steht nicht als abgeschlossenes Geschehen."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/18_JOB/JOB_015_1.tsv",
+    "old_row": "14\twas ist ein Mensch, dass er rein wäre, und dass ein von einer Frau Geborener gerecht wäre?\tNah am Hebräischen.",
+    "new_row": "14\tWas ist ein Mensch, dass er rein wäre, und dass ein von einer Frau Geborener gerecht wäre?\tNah am Hebräischen."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/18_JOB/JOB_015_2.tsv",
+    "old_row": "34\tDenn die Versammlung des Gottlosen ist unfruchtbar, und Feuer verzehrt die Zelte der Bestechung.\tUnfruchtbar steht statt einsam; Zelte der Bestechung sind ausdrücklich.",
+    "new_row": "34\tDenn die Versammlung des Gottlosen ist unfruchtbar, und Feuer hat die Zelte der Bestechung verzehrt.\tUnfruchtbar steht statt einsam; Zelte der Bestechung sind ausdrücklich."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/18_JOB/JOB_015_2.tsv",
+    "old_row": "34\tИбо собрание нечестивого бесплодно, и огонь пожирает шатры взятки.\tСобрание стоит вместо дома.",
+    "new_row": "34\tИбо собрание нечестивого бесплодно, и огонь пожрал шатры взятки.\tСобрание стоит вместо дома."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/en/18_JOB/JOB_015_2.tsv",
+    "old_row": "34\t=\tClose to the Hebrew.",
+    "new_row": "34\t=\tThe Hebrew describes the fire consuming the tents as a completed action; BSB says it will consume them."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/18_JOB/JOB_019.tsv",
+    "old_row": "16\tMeinem Knecht habe ich gerufen, und er antwortet nicht; mit meinem Mund flehe ich ihn an.\tDas Flehen ist gegenwärtig; müssen fehlt.",
+    "new_row": "16\tMeinen Knecht habe ich gerufen, und er antwortet nicht; mit meinem Mund flehe ich ihn an.\tDas Flehen ist gegenwärtig; müssen fehlt."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/18_JOB/JOB_019.tsv",
+    "old_row": "11\tUnd sein Zorn entbrannte gegen mich, und er rechnete mich sich wie seine Bedränger an.\tDie Bedränger stehen im Plural.",
+    "new_row": "11\tUnd sein Zorn entbrannte gegen mich, und er betrachtete mich als seine Bedränger.\tDie Bedränger stehen im Plural."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/18_JOB/JOB_021_1.tsv",
+    "old_row": "6\tUnd wenn ich daran denke, erschrecke ich, und mein Fleisch packt Schauder.\tDas Fleisch ist ausdrücklich.",
+    "new_row": "6\tUnd wenn ich daran denke, erschrecke ich, und Schauder packt mein Fleisch.\tDas Fleisch ist ausdrücklich."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/18_JOB/JOB_022.tsv",
+    "old_row": "6\tDenn du nimmst deine Brüder ohne Grund zum Pfand und streifst den Nackten die Kleider ab.\tBrüder steht im Plural.",
+    "new_row": "6\tDenn du nimmst von deinen Brüdern ohne Grund ein Pfand und streifst den Nackten die Kleider ab.\tBrüder steht im Plural."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/18_JOB/JOB_022.tsv",
+    "old_row": "6\tИбо ты берёшь в залог своих братьев без причины и снимаешь одежды с нагих.\tНагие названы без полу-.",
+    "new_row": "6\tИбо ты берёшь залог у своих братьев без причины и снимаешь одежды с нагих.\tНагие названы без полу-."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/18_JOB/JOB_026.tsv",
+    "old_row": "7\tОн простирает север над пустотой, вешает землю над ничем,\tДействия даны как продолжающиеся.",
+    "new_row": "7\tОн простирает север над пустотой, подвешивает землю ни на чём,\tДействия даны как продолжающиеся."
+  }
+]

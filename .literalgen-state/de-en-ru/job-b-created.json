@@ -1,0 +1,242 @@
+[
+  {
+    "path": "Tools/LiteralGen/outputs/de/18_JOB/JOB_015_1.tsv",
+    "rows": 30,
+    "sha256": "4fd20663f215316db3123a3e81310241c975cdd2c5045860780c25b90bab34a4"
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/18_JOB/JOB_015_1.tsv",
+    "rows": 30,
+    "sha256": "646f888ef25244568fa6cd1d804cfa5653fbc01e5959c8ac3b2500fe34f5f25c"
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/en/18_JOB/JOB_015_1.tsv",
+    "rows": 30,
+    "sha256": "fc3bd07008a633b0648fb97c0a7b0a5d070d38bc9ff34ffa4fea648b9b724214"
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/18_JOB/JOB_015_2.tsv",
+    "rows": 5,
+    "sha256": "0f615091cc17d287b6072d4e94dc4207fd42c40acb59a3fc45ecfca65e5d2efb"
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/18_JOB/JOB_015_2.tsv",
+    "rows": 5,
+    "sha256": "1d3d8b135026aa8f3f866c88eef61f629c8e7ba2913ef4cfb0fc32aeb99f65af"
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/en/18_JOB/JOB_015_2.tsv",
+    "rows": 5,
+    "sha256": "56466244a2b68016833bc852f1202e969e8ba2c0908b692ca101870935d68482"
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/18_JOB/JOB_016.tsv",
+    "rows": 22,
+    "sha256": "83fb72591bf1a2c7d28ac751e11122c6aecf9b227039c1aef2cea2d6592a62c3"
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/18_JOB/JOB_016.tsv",
+    "rows": 22,
+    "sha256": "4dc14c180ed3f28d230297332b11ad2fd2f082df59a3276d1980b09d69ce05f1"
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/en/18_JOB/JOB_016.tsv",
+    "rows": 22,
+    "sha256": "0f57c45d510b7bf986ebf8555ab20d73d9d7f76150d3c6bb091c8492ca151344"
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/18_JOB/JOB_017.tsv",
+    "rows": 16,
+    "sha256": "548d97147f1082eaf63366a1003e82a0b526c9a3e204b024cf7320376148750a"
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/18_JOB/JOB_017.tsv",
+    "rows": 16,
+    "sha256": "e5e97628b60bbcfcbebe974ed43a20346bbb33794a024a54e61ae789f0d0dc3e"
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/en/18_JOB/JOB_017.tsv",
+    "rows": 16,
+    "sha256": "e79a589a6a6ae2d829d7cf1e07fa90ce2b2a42a39e3a98f7a6d485f5c54483e8"
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/18_JOB/JOB_018.tsv",
+    "rows": 21,
+    "sha256": "4db5605f15611423c12a8167d8e7068857e90dfbfc349dbc26107d287ab1f13d"
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/18_JOB/JOB_018.tsv",
+    "rows": 21,
+    "sha256": "546844b451634625050cf833e492fe937d3b14535acb221adc0b194e2426fcb1"
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/en/18_JOB/JOB_018.tsv",
+    "rows": 21,
+    "sha256": "a4bb8ea976362d566d918b997fccf0cc7880be142edd5eff9badf317b692d1c1"
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/18_JOB/JOB_019.tsv",
+    "rows": 29,
+    "sha256": "21e101bfce0913552e2c9b8f5790a882203404cd336130563ef15b0f1b742285"
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/18_JOB/JOB_019.tsv",
+    "rows": 29,
+    "sha256": "3fecaec893bdbb54d6fefed071105ee9df9a4972736e4d32edfd4eb2789c749e"
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/en/18_JOB/JOB_019.tsv",
+    "rows": 29,
+    "sha256": "fccc26232021ba11b2f64ec9b520f7a634df43a5ce3be7c6c1c105f00099d044"
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/18_JOB/JOB_020.tsv",
+    "rows": 29,
+    "sha256": "d03e9946043912a09688ab915534ab25f2b8c3ebebb52c7ce328126533a539fd"
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/18_JOB/JOB_020.tsv",
+    "rows": 29,
+    "sha256": "48dffe045c99132439a9240ba243ee54272127a26bfcc88dac6148d59bbfd755"
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/en/18_JOB/JOB_020.tsv",
+    "rows": 29,
+    "sha256": "98f0e8e80f3daa416654e5d0974d7125e1dfa398b5dfd13775eab4fd42375a35"
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/18_JOB/JOB_021_1.tsv",
+    "rows": 30,
+    "sha256": "ea82046ca000e92de3bcc3e5437bcc7010fe9bca6d653ef69bf3a22433e6bac8"
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/18_JOB/JOB_021_1.tsv",
+    "rows": 30,
+    "sha256": "3a52c0e4acd2391f3edcc2b95be4983a8bab54f77c757ef879a216c952a0db63"
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/en/18_JOB/JOB_021_1.tsv",
+    "rows": 30,
+    "sha256": "abb3475624ad49572e770d7c14049f9d73f3590c840996738fc1932ed163e9b5"
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/18_JOB/JOB_021_2.tsv",
+    "rows": 4,
+    "sha256": "207575049fce9fab765fef54d6efcc81db71398f86af16b4b1a70225ddce55fc"
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/18_JOB/JOB_021_2.tsv",
+    "rows": 4,
+    "sha256": "cd59d7ce785e510a98af580ded1cf888fe35e56d97c9745c645744ab3f43aeae"
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/en/18_JOB/JOB_021_2.tsv",
+    "rows": 4,
+    "sha256": "e193be164343791499eae63f657d8361bd3b0833dc10cbf075723787d980caad"
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/18_JOB/JOB_022.tsv",
+    "rows": 30,
+    "sha256": "f3c931d09e2abfaffeaf9d9cac01dc15813ebe270f30f293d4e66203dbfd04b2"
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/18_JOB/JOB_022.tsv",
+    "rows": 30,
+    "sha256": "0ff881d8617d66bf9bf46b7b7bc147b26e9a81ae27e86106af250efaf10db881"
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/en/18_JOB/JOB_022.tsv",
+    "rows": 30,
+    "sha256": "7c736b66c7f5ef5c80bf8dcb327efb5b185a47658980eaf203c69a0ccc73fcba"
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/18_JOB/JOB_023.tsv",
+    "rows": 17,
+    "sha256": "a7292c5dabbd335756daafefbad98e24d91fccfd77e739428b7d0bc53f224408"
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/18_JOB/JOB_023.tsv",
+    "rows": 17,
+    "sha256": "f54fd4ad9860176f77ccf04d9b69e681cf5a4fcf3fc057bbdb2a3b2e5c1f59fd"
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/en/18_JOB/JOB_023.tsv",
+    "rows": 17,
+    "sha256": "0379454416dfc4b548945a4fa1156efa3e0b2e15ab4913212b1599dcddb24c9f"
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/18_JOB/JOB_024.tsv",
+    "rows": 25,
+    "sha256": "2f8a40b784666011bbddc7d2654f44b54ed593e727ed0081d830ace8a887fbf5"
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/18_JOB/JOB_024.tsv",
+    "rows": 25,
+    "sha256": "a69753e2055062dcb548d4777322e39c6587a72e9f346498c5f020c701111dfa"
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/en/18_JOB/JOB_024.tsv",
+    "rows": 25,
+    "sha256": "537cde88f57cc0ec0909fbd44843ec32b70e3727142f7f6ad23fc651f50b3976"
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/18_JOB/JOB_025.tsv",
+    "rows": 6,
+    "sha256": "bbdb0f91608325d69c86f446f25ddb104edba229b3d02b3ed227ddce396d29ae"
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/18_JOB/JOB_025.tsv",
+    "rows": 6,
+    "sha256": "ecb3512ea953383f397c107b0403664a84f28b6733b8a0228a6c0f228d3750cf"
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/en/18_JOB/JOB_025.tsv",
+    "rows": 6,
+    "sha256": "3d6ba0063887c448c8c1e9b392ac3ae7d1b50dfd3590dac563068a0df7a26fcf"
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/18_JOB/JOB_026.tsv",
+    "rows": 14,
+    "sha256": "e399d22b772afdd7c756eca1a316dc29bd2a38ccf6ff164856e959036e0b3d6e"
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/18_JOB/JOB_026.tsv",
+    "rows": 14,
+    "sha256": "9f73ec067a3a2e05e72176d5b250e25c90862b5a94e64362d297590d1acaf0f9"
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/en/18_JOB/JOB_026.tsv",
+    "rows": 14,
+    "sha256": "cd5086abf12f0e41de30de8395f6c7509fed9ccc29ecbafc2b23eb14b8c1f692"
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/18_JOB/JOB_027.tsv",
+    "rows": 23,
+    "sha256": "2bf564273fa878eae32b247d32b91dc086d11d0fa052e806da159e9af38a7421"
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/18_JOB/JOB_027.tsv",
+    "rows": 23,
+    "sha256": "7fbe87ccb60f6b6b63e41ff1ca157897d715fc5aaf61748afe0fbedbc79153a5"
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/en/18_JOB/JOB_027.tsv",
+    "rows": 23,
+    "sha256": "eb88539ca37bbd0ff7dfbb8e6434a8e006bb6d93df7d490c8a8fc29c93ccdbc2"
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/18_JOB/JOB_028.tsv",
+    "rows": 28,
+    "sha256": "253bc054284f5830bacc4f094e9a06f880ea7a195ca82760dfa1202e839b021e"
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/18_JOB/JOB_028.tsv",
+    "rows": 28,
+    "sha256": "e6491c5b994e4535c9dcfa04b6046b157d8cd003af9f2d9835e2c25e4053ab2d"
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/en/18_JOB/JOB_028.tsv",
+    "rows": 28,
+    "sha256": "bb2793a51b903eba583dbf8760d5fb3404ade4148415626fce07b21b3763b525"
+  }
+]

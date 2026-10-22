@@ -1,0 +1,14 @@
+{
+  "files": [
+    "Tools/LiteralGen/outputs/de/15_EZR/EZR_004.tsv",
+    "Tools/LiteralGen/outputs/de/15_EZR/EZR_005.tsv",
+    "Tools/LiteralGen/outputs/de/15_EZR/EZR_006.tsv",
+    "Tools/LiteralGen/outputs/de/15_EZR/EZR_007.tsv",
+    "Tools/LiteralGen/outputs/ru/15_EZR/EZR_004.tsv",
+    "Tools/LiteralGen/outputs/ru/15_EZR/EZR_005.tsv",
+    "Tools/LiteralGen/outputs/ru/15_EZR/EZR_006.tsv",
+    "Tools/LiteralGen/outputs/ru/15_EZR/EZR_007.tsv"
+  ],
+  "rows": 182,
+  "structure_passed": true
+}

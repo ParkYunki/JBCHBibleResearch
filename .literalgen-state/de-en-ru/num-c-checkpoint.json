@@ -1,0 +1,298 @@
+{
+  "completed_chapters": [
+    25,
+    26,
+    27,
+    28,
+    29,
+    30,
+    31,
+    32,
+    33,
+    34,
+    35,
+    36
+  ],
+  "new_files": [
+    {
+      "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/04_NUM/NUM_025.tsv",
+      "rows": 18
+    },
+    {
+      "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/04_NUM/NUM_025.tsv",
+      "rows": 18
+    },
+    {
+      "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/en/04_NUM/NUM_025.tsv",
+      "rows": 18
+    },
+    {
+      "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/04_NUM/NUM_026_1.tsv",
+      "rows": 30
+    },
+    {
+      "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/04_NUM/NUM_026_1.tsv",
+      "rows": 30
+    },
+    {
+      "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/en/04_NUM/NUM_026_1.tsv",
+      "rows": 30
+    },
+    {
+      "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/04_NUM/NUM_026_2.tsv",
+      "rows": 30
+    },
+    {
+      "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/04_NUM/NUM_026_2.tsv",
+      "rows": 30
+    },
+    {
+      "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/en/04_NUM/NUM_026_2.tsv",
+      "rows": 30
+    },
+    {
+      "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/04_NUM/NUM_026_3.tsv",
+      "rows": 5
+    },
+    {
+      "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/04_NUM/NUM_026_3.tsv",
+      "rows": 5
+    },
+    {
+      "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/en/04_NUM/NUM_026_3.tsv",
+      "rows": 5
+    },
+    {
+      "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/04_NUM/NUM_027.tsv",
+      "rows": 23
+    },
+    {
+      "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/04_NUM/NUM_027.tsv",
+      "rows": 23
+    },
+    {
+      "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/en/04_NUM/NUM_027.tsv",
+      "rows": 23
+    },
+    {
+      "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/04_NUM/NUM_028_1.tsv",
+      "rows": 30
+    },
+    {
+      "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/04_NUM/NUM_028_1.tsv",
+      "rows": 30
+    },
+    {
+      "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/en/04_NUM/NUM_028_1.tsv",
+      "rows": 30
+    },
+    {
+      "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/04_NUM/NUM_028_2.tsv",
+      "rows": 1
+    },
+    {
+      "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/04_NUM/NUM_028_2.tsv",
+      "rows": 1
+    },
+    {
+      "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/en/04_NUM/NUM_028_2.tsv",
+      "rows": 1
+    },
+    {
+      "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/04_NUM/NUM_029_1.tsv",
+      "rows": 30
+    },
+    {
+      "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/04_NUM/NUM_029_1.tsv",
+      "rows": 30
+    },
+    {
+      "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/en/04_NUM/NUM_029_1.tsv",
+      "rows": 30
+    },
+    {
+      "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/04_NUM/NUM_029_2.tsv",
+      "rows": 10
+    },
+    {
+      "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/04_NUM/NUM_029_2.tsv",
+      "rows": 10
+    },
+    {
+      "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/en/04_NUM/NUM_029_2.tsv",
+      "rows": 10
+    },
+    {
+      "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/04_NUM/NUM_030.tsv",
+      "rows": 16
+    },
+    {
+      "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/04_NUM/NUM_030.tsv",
+      "rows": 16
+    },
+    {
+      "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/en/04_NUM/NUM_030.tsv",
+      "rows": 16
+    },
+    {
+      "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/04_NUM/NUM_031_1.tsv",
+      "rows": 30
+    },
+    {
+      "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/04_NUM/NUM_031_1.tsv",
+      "rows": 30
+    },
+    {
+      "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/en/04_NUM/NUM_031_1.tsv",
+      "rows": 30
+    },
+    {
+      "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/04_NUM/NUM_031_2.tsv",
+      "rows": 24
+    },
+    {
+      "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/04_NUM/NUM_031_2.tsv",
+      "rows": 24
+    },
+    {
+      "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/en/04_NUM/NUM_031_2.tsv",
+      "rows": 24
+    },
+    {
+      "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/04_NUM/NUM_032_1.tsv",
+      "rows": 30
+    },
+    {
+      "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/04_NUM/NUM_032_1.tsv",
+      "rows": 30
+    },
+    {
+      "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/04_NUM/NUM_032_2.tsv",
+      "rows": 12
+    },
+    {
+      "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/04_NUM/NUM_032_2.tsv",
+      "rows": 12
+    },
+    {
+      "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/04_NUM/NUM_033_1.tsv",
+      "rows": 30
+    },
+    {
+      "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/04_NUM/NUM_033_1.tsv",
+      "rows": 30
+    },
+    {
+      "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/04_NUM/NUM_033_2.tsv",
+      "rows": 26
+    },
+    {
+      "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/04_NUM/NUM_033_2.tsv",
+      "rows": 26
+    },
+    {
+      "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/04_NUM/NUM_034.tsv",
+      "rows": 29
+    },
+    {
+      "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/04_NUM/NUM_034.tsv",
+      "rows": 29
+    },
+    {
+      "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/04_NUM/NUM_035_1.tsv",
+      "rows": 30
+    },
+    {
+      "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/04_NUM/NUM_035_1.tsv",
+      "rows": 30
+    },
+    {
+      "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/04_NUM/NUM_035_2.tsv",
+      "rows": 4
+    },
+    {
+      "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/04_NUM/NUM_035_2.tsv",
+      "rows": 4
+    },
+    {
+      "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/04_NUM/NUM_036.tsv",
+      "rows": 13
+    },
+    {
+      "path": "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/04_NUM/NUM_036.tsv",
+      "rows": 13
+    }
+  ],
+  "status": "generation_and_semantic_qa_complete",
+  "remaining_chapters": [],
+  "qa_path": "/Users/arkuni/Developer/JBCHBibleResearch/.literalgen-state/de-en-ru/num-c-qa.json",
+  "qa_count": 42,
+  "qa_by_language": {
+    "de": 8,
+    "en": 8,
+    "ru": 26
+  },
+  "validated_files": 52,
+  "validated_rows": {
+    "de": 421,
+    "ru": 421,
+    "en": 247
+  },
+  "cross_qa_path": "/Users/arkuni/Developer/JBCHBibleResearch/.literalgen-state/de-en-ru/num-a-cross-c-qa.json",
+  "cross_qa_count": 2,
+  "validation": "All assigned source verses compared; exact fields/order, word limits, English equals, sequential native quotation balance, placeholders and original QA row integrity passed. No TSV modified.",
+  "output_sha256": {
+    "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/04_NUM/NUM_025.tsv": "6e8569102ad8154b342f4d0ceee44922ecb5c7e3d4837b80a30cba18ba1cfa9a",
+    "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/04_NUM/NUM_025.tsv": "12238fb3c624a9d0f36f45cdb56da385bbd0fa2113d427804e34ba1de1631a1d",
+    "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/en/04_NUM/NUM_025.tsv": "e88455d9231571415d08a0e54bbc8e4b01f163548b7da91d8c33970ab6796dee",
+    "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/04_NUM/NUM_026_1.tsv": "5a4dd82ae63b8c96d45a160a8b2e71ad1558e0e106946c9220d3174577514098",
+    "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/04_NUM/NUM_026_1.tsv": "1f8ed36fb31def61c70afd0573bd08bea2847561aa010063c15a63fd92eebf77",
+    "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/en/04_NUM/NUM_026_1.tsv": "7d8e7ecf7172b92e7b44a0f32deea1b26bb17b2901e0007f6ed03ea20e8d7190",
+    "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/04_NUM/NUM_026_2.tsv": "b6c3d8ce94154347dae6a133828031575d6922e05428791ec18a8e5c0a2d97e6",
+    "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/04_NUM/NUM_026_2.tsv": "ba3764b3eca9845065d347bec53e6cf670f2ed073eea9e25fb27f55111bc3ced",
+    "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/en/04_NUM/NUM_026_2.tsv": "75106e591e110cf72a558094d585ef429e8cafcfc3401b4e4a61b68e20f3d728",
+    "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/04_NUM/NUM_026_3.tsv": "e4be874f6dc15c238eaa985a4938a339ddd4e23f6397eade1e6aca4f4d253a10",
+    "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/04_NUM/NUM_026_3.tsv": "9c93f425b7ea4e86a1fe016a5981e1e58ac6bc67e9b30c69557ba33948f4d2db",
+    "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/en/04_NUM/NUM_026_3.tsv": "ae4b14ec266ff9cfeb53f9cca4c4d9e5471920f48346f7d8356248d89b184c1f",
+    "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/04_NUM/NUM_027.tsv": "b422ba77aba6a1b12921a716c342250c5df93c37a593edae605528bc14fb8801",
+    "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/04_NUM/NUM_027.tsv": "dea0e7cbee15b76259bfb5337736ddd25abee4963f11955e3109f4eb1ea61a9c",
+    "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/en/04_NUM/NUM_027.tsv": "449b9bc66d13af9786775794513ff7891d503e7dabd544a1b91526174f56ba26",
+    "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/04_NUM/NUM_028_1.tsv": "4c425a346f272e320c0e4b46347ce6dfe66b31e6f2b3f8f9d29b3a9bc2523867",
+    "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/04_NUM/NUM_028_1.tsv": "9043d00ec9d834d74cfe7dbfa56ab5e1d39e086398596813b93e384e0e46894d",
+    "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/en/04_NUM/NUM_028_1.tsv": "e74e6901d1809f7d91a22b54fa5b8b4b97e5e18fae19d54d1741cabbfbb58ad1",
+    "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/04_NUM/NUM_028_2.tsv": "aeffa8f56a95aec33de6d5024ade134422fc50c0a58c93273931a7adb75ddd3b",
+    "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/04_NUM/NUM_028_2.tsv": "f77dbddc7684ec0c024c3c36636d77944cb9402569e817b95122ec5a99f73b6c",
+    "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/en/04_NUM/NUM_028_2.tsv": "718ae066a709f2b4e2ce55eb6918df4785f532e27506387a4ff179a8e0943442",
+    "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/04_NUM/NUM_029_1.tsv": "346ab65644d04825017664f5b6909c96fe5f769c40aa190d91dae1e3a6bc12ff",
+    "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/04_NUM/NUM_029_1.tsv": "a33e69ca52fb96a53d77ec67c9c24221af38d2cacc070c12408ebbbdb717e895",
+    "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/en/04_NUM/NUM_029_1.tsv": "52bf85539f3a4209b05999fae57d1d4cfa073740be4713cc4dd0a3246eb4de20",
+    "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/04_NUM/NUM_029_2.tsv": "25cbc6c476f09cf745762c27566d974be60835adca23e4cfeb504a8b0118de46",
+    "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/04_NUM/NUM_029_2.tsv": "546e9418fe4ae9fa62831090ff574099420b0859a61eb15d7307d6078e12b7cd",
+    "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/en/04_NUM/NUM_029_2.tsv": "f8ee550b9967ebf4d866c76862f58f287466640392179632ed144d426176ed97",
+    "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/04_NUM/NUM_030.tsv": "f07c72933cd93ba9988b29b89449c5deed0c44450d5f6711e69cdd1e26b42acb",
+    "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/04_NUM/NUM_030.tsv": "077107b8f0c8164a397554330e2d7aa77f45829f97dbc4edefc855a5e973ab05",
+    "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/en/04_NUM/NUM_030.tsv": "89da711e2835d3f3ae1d960f0b325352f8acf2f8edab159f69e72614a848902b",
+    "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/04_NUM/NUM_031_1.tsv": "d9119513460b4fe25fe07a34db6a7228b8497f268e0621b4a91f68e5184dd272",
+    "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/04_NUM/NUM_031_1.tsv": "66bf0b179300514eed7632559aaf11d3a744aec1e58c0fd3ea89f938b41915dc",
+    "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/en/04_NUM/NUM_031_1.tsv": "34d958022a2ccdefdf90c7084b4deeb9b22b79bd9c0afd613793d44806ef8031",
+    "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/04_NUM/NUM_031_2.tsv": "1558adcfd120084c74589d4876c94f03a357cfc72cc490f38ff1e6dc78c230c5",
+    "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/04_NUM/NUM_031_2.tsv": "0e1dce12e2e316271a2171a4ccea00f58e451026b9b66fed7861339a4c0909d0",
+    "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/en/04_NUM/NUM_031_2.tsv": "349b671a5df7b66670b12eb0bedb3498a33fb2fe72adc8884743ba40fc90737a",
+    "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/04_NUM/NUM_032_1.tsv": "6b53e7c3642618471dcd00864e95b122e5800b85adcf02ae93437c1f832abfc8",
+    "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/04_NUM/NUM_032_1.tsv": "5cfd7d1214c10026ed32a0ab51f2d64c17de13317570ae3ed5880316bc17d678",
+    "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/04_NUM/NUM_032_2.tsv": "80c42247e47a161f7df289dc128f7853deb3f879d65de130e2eb8133ded54e83",
+    "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/04_NUM/NUM_032_2.tsv": "ed51014e39816fcbff63f1174b103ce7b42d2c9b65e2bf5af433db0c11355ba2",
+    "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/04_NUM/NUM_033_1.tsv": "c8ec14f1767803d57b76f3561f2cea0055237dd3b3cd608877a9387a19523c03",
+    "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/04_NUM/NUM_033_1.tsv": "c1157942075ade6b0c96029cbd3384d70d1d017fd24d70cbc40f05fc7ae6d1fa",
+    "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/04_NUM/NUM_033_2.tsv": "64aee3517c1e3af3e8e3069883df1c10b0a77f4a6a1d03b085c66a1e6e6485bd",
+    "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/04_NUM/NUM_033_2.tsv": "875cdf8c396552d6cd11fd4052c26e1bdc0c0a289e67f4bc6fdf0b20cef84ca1",
+    "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/04_NUM/NUM_034.tsv": "df78db98c18ab8428fe0b72d08e94c6faec054aa7d0259adab777ae06e7f7c1a",
+    "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/04_NUM/NUM_034.tsv": "6a465a6461dbce475b9a4e55f544dffacd1f61e835f507454a32e52e3980ba90",
+    "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/04_NUM/NUM_035_1.tsv": "e828982301141e8d6b0e4f696b0d37221bf6944ec4a50886fbf98ccdec0555f3",
+    "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/04_NUM/NUM_035_1.tsv": "8c6c80c1520be9900afc3d01fd56a3532313c60f4a428d64de8214ec567b4501",
+    "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/04_NUM/NUM_035_2.tsv": "acf0656b420acddec773a87d07b4209505d6ee8c88d9146a20a5a9c5cd364c9a",
+    "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/04_NUM/NUM_035_2.tsv": "c2c4134b2de8ddaef2b4e990b7fd2e9ba697ba2ddc983d13f29252a1ac118bcd",
+    "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/de/04_NUM/NUM_036.tsv": "08ca524a4c66be206b3cfda72c06e6b1e55a02b435590abf1e96e9e6a0929c8b",
+    "/Users/arkuni/Developer/JBCHBibleResearch/Tools/LiteralGen/outputs/ru/04_NUM/NUM_036.tsv": "102b06e17879c2c84677c065de8cefafc33c3ff65243d15931ebb93c15faa05a"
+  }
+}

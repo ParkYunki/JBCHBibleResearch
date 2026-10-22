@@ -90,7 +90,7 @@ final class DocumentViewerViewModel {
             resolvedURL = try DocumentUploadService.resolveOriginalFileURL(for: document, context: modelContext)
         } catch {
             resolvedURL = nil
-            let message = "원본 파일 위치를 확인하지 못했습니다: \(error)"
+            let message = String(localized: "원본 파일 위치를 확인하지 못했습니다: \(String(describing: error))")
             downloadStatus = .failed(message)
             // 화면 메시지는 창을 닫으면 사라지므로 상세 오류는 로그 파일에도 남긴다.
             DocumentViewerErrorLog.log(context: document.originalFilename, message: message)
@@ -255,7 +255,7 @@ final class DocumentViewerViewModel {
             downloadMonitor = monitor
             monitor.beginMonitoring(url: url)
         } catch {
-            let message = "이미지 \(pageNumber + 1)쪽 위치를 확인하지 못했습니다: \(error)"
+            let message = String(localized: "이미지 \(pageNumber + 1)쪽 위치를 확인하지 못했습니다: \(String(describing: error))")
             downloadStatus = .failed(message)
             DocumentViewerErrorLog.log(context: document.originalFilename, message: message)
         }
@@ -270,8 +270,16 @@ final class DocumentViewerViewModel {
             let data = await Task.detached(priority: .userInitiated) {
                 try? Self.readSecurityScopedData(from: url)
             }.value
-            guard let self, self.imageLoadToken == token, let data else { return }
-            self.loadedImage = PlatformImage(data: data)
+            guard let self, self.imageLoadToken == token else { return }
+            // 2026-10-21: 읽기·디코딩 실패를 삼키면 `downloadStatus`는 `.ready`인데 `loadedImage`만 nil이라 "이미지를 불러오는 중…"이
+            // 끝없이 돌았다. 실패 사유를 화면과 로그 파일에 남긴다.
+            guard let data, let image = PlatformImage(data: data) else {
+                let message = String(localized: "이미지 파일을 읽지 못했습니다: \(url.lastPathComponent)")
+                self.downloadStatus = .failed(message)
+                DocumentViewerErrorLog.log(context: self.document.originalFilename, message: message)
+                return
+            }
+            self.loadedImage = image
         }
     }
 
@@ -331,10 +339,11 @@ final class DocumentViewerViewModel {
                 }
                 self.loadImageThumbnailsIfNeeded()
                 if !result.failedFilenames.isEmpty {
-                    self.imagePageMessage = "\(result.failedFilenames.joined(separator: ", "))을(를) 더하지 못했습니다."
+                    let failedNames = result.failedFilenames.joined(separator: ", ")
+                    self.imagePageMessage = String(localized: "\(failedNames)을(를) 더하지 못했습니다.")
                 }
             } catch {
-                self.imagePageMessage = "이미지를 추가하지 못했습니다: \(error.localizedDescription)"
+                self.imagePageMessage = String(localized: "이미지를 추가하지 못했습니다: \(error.localizedDescription)")
             }
             self.isModifyingImagePages = false
         }

@@ -1,0 +1,446 @@
+[
+  {
+    "path": "Tools/LiteralGen/outputs/de/01_GEN/GEN_001_1.tsv",
+    "verse": 26,
+    "old_row": "26\tUnd Gott sprach: „Lasst uns Menschen machen in unserem Bild, nach unserer Ähnlichkeit; und sie sollen herrschen über die Fische des Meeres und über die Vögel der Himmel und über das Vieh und über die ganze Erde und über jedes Kriechtier, das auf der Erde kriecht!“\tNah am Hebräischen.",
+    "new_row": "26\tUnd Gott sprach: „Lasst uns den Menschen machen in unserem Bild, nach unserer Ähnlichkeit; und sie sollen herrschen über die Fische des Meeres und über die Vögel der Himmel und über das Vieh und über die ganze Erde und über jedes Kriechtier, das auf der Erde kriecht!“\t„Den Menschen“ bewahrt die kollektive Einzahl; das anschließende „sie“ steht im Plural."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/01_GEN/GEN_001_1.tsv",
+    "verse": 30,
+    "old_row": "30\tUnd jedem Tier der Erde und jedem Vogel der Himmel und allem, was auf der Erde kriecht, worin lebendes Wesen ist, gebe ich alles grüne Kraut zur Speise!“ Und es wurde so.\t„Worin lebendes Wesen ist“ bewahrt die innere Lebensbezeichnung statt nur „das da lebt“.",
+    "new_row": "30\tUnd jedem Tier der Erde und jedem Vogel der Himmel und allem, was auf der Erde kriecht, worin eine lebendige Seele ist, alles grüne Kraut zur Speise!“ Und es wurde so.\t„Worin eine lebendige Seele ist“ bewahrt die innere Lebensbezeichnung statt nur „das da lebt“; die Gabe wird aus dem vorherigen Vers ohne neues ausdrückliches Verb des Gebens fortgesetzt."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/01_GEN/GEN_001_1.tsv",
+    "verse": 30,
+    "old_row": "30\tИ всякому зверю земли и всякой птице небес и всему ползающему по земле, в котором живое существо, даю всю зелень травную в пищу!» И стало так.\tБлизко к еврейскому.",
+    "new_row": "30\tИ всякому зверю земли и всякой птице небес и всему ползающему по земле, в котором живая душа, всю зелень травную в пищу!» И стало так.\tСохраняется «в котором живая душа»; дарение продолжается из предыдущего стиха без нового глагола «даю»."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/01_GEN/GEN_001_1.tsv",
+    "verse": 21,
+    "old_row": "21\tUnd Gott schuf die großen Seeungeheuer und jedes lebende Wesen, das sich regt, von denen die Wasser nach ihren Arten wimmelten, und jeden geflügelten Vogel nach seiner Art. Und Gott sah, dass es gut war.\t„Seeungeheuer“ bewahrt die allgemeinere Bezeichnung statt „Walfische“.",
+    "new_row": "21\tUnd Gott schuf die großen Seeungeheuer und jedes lebende Wesen, das sich regt, wovon die Wasser nach ihren Arten wimmelten, und jeden geflügelten Vogel nach seiner Art. Und Gott sah, dass es gut war.\t„Seeungeheuer“ bewahrt die allgemeinere Bezeichnung statt „Walfische“."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/01_GEN/GEN_001_1.tsv",
+    "verse": 21,
+    "old_row": "21\tИ сотворил Бог великих морских чудовищ и всякое живое существо, которое движется, которыми кишели воды, по родам их, и всякую крылатую птицу по роду её. И увидел Бог, что это хорошо.\t«Морских чудовищ» сохраняет более общее название вместо «рыб больших».",
+    "new_row": "21\tИ сотворил Бог великих морских чудовищ и всякое живое существо, которое движется, которым кишели воды, по родам их, и всякую крылатую птицу по роду её. И увидел Бог, что это хорошо.\t«Морских чудовищ» сохраняет более общее название вместо «рыб больших»."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/01_GEN/GEN_007.tsv",
+    "verse": 8,
+    "old_row": "8\tОт чистого скота и от скота, который нечист, и от птиц и от всего, что ползает по почве,\tБлизко к еврейскому.",
+    "new_row": "8\tОт чистого скота и от скота, который нечист, и от птиц и от всего, что ползает по почве,\tНазваны чистый и нечистый скот, птицы и всё ползающее; отдельные чистые и нечистые птицы и звери здесь не перечислены."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/01_GEN/GEN_017.tsv",
+    "verse": 18,
+    "old_row": "18\tUnd Abraham sagte zu Gott: „Wenn doch Ismael vor dir leben möge!“\tNah am Hebräischen.",
+    "new_row": "18\tUnd Abraham sagte zu Gott: „Möge doch Ismael vor dir leben!“\tNah am Hebräischen."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/01_GEN/GEN_017.tsv",
+    "verse": 11,
+    "old_row": "11\tИ будете обрезаны на плоти вашей крайней плоти, и это будет знаком завета между Мной и вами.\tЕврейский текст явно называет плоть крайней плоти.",
+    "new_row": "11\tИ будет обрезана плоть вашей крайней плоти, и это будет знаком завета между Мной и вами.\tЕврейский текст явно называет плоть крайней плоти."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/01_GEN/GEN_017.tsv",
+    "verse": 24,
+    "old_row": "24\tИ Авраам был девяноста девяти лет, когда он был обрезан на плоти своей крайней плоти.\tВ еврейском тексте явно названо мясо крайней плоти.",
+    "new_row": "24\tИ Авраам был девяноста девяти лет, когда был обрезан по плоти своей крайней плоти.\tВ еврейском тексте явно названа плоть крайней плоти."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/01_GEN/GEN_017.tsv",
+    "verse": 25,
+    "old_row": "25\tИ Измаил, его сын, был тринадцати лет, когда он был обрезан на плоти своей крайней плоти.\tВ еврейском тексте явно названа плоть крайней плоти.",
+    "new_row": "25\tИ Измаил, его сын, был тринадцати лет, когда был обрезан по плоти своей крайней плоти.\tВ еврейском тексте явно названа плоть крайней плоти."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/01_GEN/GEN_018_1.tsv",
+    "verse": 10,
+    "old_row": "10\tUnd er sagte: „Gewiss werde ich zu dir zurückkehren um diese Zeit, wenn sie wieder auflebt; und siehe, Sara, deine Frau, wird einen Sohn haben.“ Und Sara hörte am Eingang des Zeltes zu, der hinter ihm war.\t„Um diese Zeit, wenn sie wieder auflebt“ bewahrt die Zeitformulierung; Sara hört am Zelteingang zu, der hinter ihm liegt.",
+    "new_row": "10\tUnd er sagte: „Gewiss werde ich zu dir zurückkehren um die Zeit des Lebens; und siehe, Sara, deine Frau, wird einen Sohn haben.“ Und Sara hörte am Eingang des Zeltes zu, der hinter ihm war.\t„Um die Zeit des Lebens“ bewahrt die Zeitformulierung; Sara hört am Zelteingang zu, der hinter ihm liegt."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/01_GEN/GEN_018_1.tsv",
+    "verse": 14,
+    "old_row": "14\tIst für Jahwe eine Sache zu wunderbar? Zur festgesetzten Zeit werde ich zu dir zurückkehren, um diese Zeit, wenn sie wieder auflebt, und Sara wird einen Sohn haben.“\tNah am Hebräischen.",
+    "new_row": "14\tIst für den HERRN eine Sache zu wunderbar? Zur festgesetzten Zeit werde ich zu dir zurückkehren, um die Zeit des Lebens, und Sara wird einen Sohn haben.“\t„Zur festgesetzten Zeit“ und „um die Zeit des Lebens“ bewahren beide Zeitangaben."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/01_GEN/GEN_018_1.tsv",
+    "verse": 10,
+    "old_row": "10\tИ Он сказал: «Я непременно возвращусь к тебе в эту пору, когда она оживёт, и вот, у Сарры, твоей жены, будет сын». А Сарра слушала у входа в шатёр, который был позади него.\t«В эту пору, когда она оживёт» сохраняет временное выражение; «один из них» в тексте не назван.",
+    "new_row": "10\tИ Он сказал: «Я непременно возвращусь к тебе в пору жизни, и вот, у Сарры, твоей жены, будет сын». А Сарра слушала у входа в шатёр, который был позади него.\t«В пору жизни» сохраняет временное выражение; «один из них» в тексте не назван."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/01_GEN/GEN_018_1.tsv",
+    "verse": 14,
+    "old_row": "14\tРазве что-либо слишком чудесно для Яхве? В назначенный срок Я возвращусь к тебе, в эту пору, когда она оживёт, и у Сарры будет сын».\tБлизко к еврейскому.",
+    "new_row": "14\tРазве что-либо слишком чудесно для Господа? В назначенный срок Я возвращусь к тебе, в пору жизни, и у Сарры будет сын».\t«В пору жизни» сохраняет второе временное выражение вместо «в следующем году»."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/en/01_GEN/GEN_017.tsv",
+    "verse": 13,
+    "old_row": "13\t=\tClose to the Hebrew.",
+    "new_row": "13\t=\tThe Hebrew explicitly says “purchased with your money”; BSB shortens this to “purchased.”"
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/en/01_GEN/GEN_018_1.tsv",
+    "verse": 12,
+    "old_row": "12\t=\tClose to the Hebrew.",
+    "new_row": "12\t=\tThe Hebrew says Sarah laughed “within herself,” and calls Abraham “my lord” where BSB has “my master.”"
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/01_GEN/GEN_015.tsv",
+    "verse": 1,
+    "old_row": "1\tNach diesen Dingen geschah das Wort Jahwes zu Abram in einer Vision: „Fürchte dich nicht, Abram! Ich bin dir ein Schild; dein Lohn ist sehr groß.“\tDer Lohn steht als eigene Aussage neben dem Schild; Jahwe wird nicht selbst als Lohn bezeichnet.",
+    "new_row": "1\tNach diesen Dingen geschah das Wort des HERRN zu Abram in einer Vision: „Fürchte dich nicht, Abram! Ich bin dir ein Schild; dein Lohn ist sehr groß.“\tDer Lohn steht als eigene Aussage neben dem Schild; der HERR wird nicht selbst als Lohn bezeichnet."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/01_GEN/GEN_015.tsv",
+    "verse": 2,
+    "old_row": "2\tUnd Abram sagte: „Herr Jahwe, was wirst du mir geben? Ich gehe kinderlos dahin, und der Erbe meines Hauses ist Elieser von Damaskus.“\tNah am Hebräischen.",
+    "new_row": "2\tUnd Abram sagte: „Herr HERR, was wirst du mir geben? Ich gehe kinderlos dahin, und der Erbe meines Hauses ist Elieser von Damaskus.“\tNah am Hebräischen."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/01_GEN/GEN_015.tsv",
+    "verse": 4,
+    "old_row": "4\tUnd siehe, das Wort Jahwes erging an ihn: „Dieser wird dich nicht beerben, sondern der aus deinem Inneren hervorgeht, der wird dich beerben.“\tDas Wort Jahwes ist ausdrücklich genannt; „aus deinem Inneren“ bewahrt das Körperbild.",
+    "new_row": "4\tUnd siehe, das Wort des HERRN erging an ihn: „Dieser wird dich nicht beerben, sondern der aus deinem Inneren hervorgeht, der wird dich beerben.“\tDas Wort des HERRN ist ausdrücklich genannt; „aus deinem Inneren“ bewahrt das Körperbild."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/01_GEN/GEN_015.tsv",
+    "verse": 6,
+    "old_row": "6\tUnd er glaubte an Jahwe, und er rechnete es ihm als Gerechtigkeit an.\tNah am Hebräischen.",
+    "new_row": "6\tUnd er glaubte an den HERRN, und er rechnete es ihm als Gerechtigkeit an.\tNah am Hebräischen."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/01_GEN/GEN_015.tsv",
+    "verse": 7,
+    "old_row": "7\tUnd er sagte zu ihm: „Ich bin Jahwe, der dich aus Ur der Chaldäer herausgeführt hat, um dir dieses Land zu geben, es in Besitz zu nehmen.“\tNah am Hebräischen.",
+    "new_row": "7\tUnd er sagte zu ihm: „Ich bin der HERR, der dich aus Ur der Chaldäer herausgeführt hat, um dir dieses Land zu geben, es in Besitz zu nehmen.“\tNah am Hebräischen."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/01_GEN/GEN_015.tsv",
+    "verse": 8,
+    "old_row": "8\tUnd er sagte: „Herr Jahwe, woran werde ich erkennen, dass ich es in Besitz nehmen werde?“\tNah am Hebräischen.",
+    "new_row": "8\tUnd er sagte: „Herr HERR, woran werde ich erkennen, dass ich es in Besitz nehmen werde?“\tNah am Hebräischen."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/01_GEN/GEN_015.tsv",
+    "verse": 18,
+    "old_row": "18\tAn jenem Tag schloss Jahwe mit Abram einen Bund und sagte: „Deinem Samen habe ich dieses Land gegeben, vom Strom Ägyptens bis zum großen Strom, dem Strom Euphrat:\t„Habe ich gegeben“ steht statt „will ich geben“; zweimal steht „Strom“.",
+    "new_row": "18\tAn jenem Tag schloss der HERR mit Abram einen Bund und sagte: „Deinem Samen habe ich dieses Land gegeben, vom Strom Ägyptens bis zum großen Strom, dem Strom Euphrat:\t„Habe ich gegeben“ steht statt „will ich geben“; zweimal steht „Strom“."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/01_GEN/GEN_016.tsv",
+    "verse": 2,
+    "old_row": "2\tUnd Sarai sagte zu Abram: „Siehe doch, Jahwe hat mich vom Gebären zurückgehalten. Geh doch zu meiner Magd ein; vielleicht werde ich durch sie aufgebaut.“ Und Abram hörte auf Sarais Stimme.\tNah am Hebräischen.",
+    "new_row": "2\tUnd Sarai sagte zu Abram: „Siehe doch, der HERR hat mich vom Gebären zurückgehalten. Geh doch zu meiner Magd ein; vielleicht werde ich durch sie aufgebaut.“ Und Abram hörte auf Sarais Stimme.\tNah am Hebräischen."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/01_GEN/GEN_016.tsv",
+    "verse": 5,
+    "old_row": "5\tUnd Sarai sagte zu Abram: „Mein Unrecht komme auf dich! Ich habe meine Magd in deinen Schoß gegeben, und als sie sah, dass sie schwanger war, wurde ich gering in ihren Augen. Jahwe richte zwischen mir und dir!“\t„Mein Unrecht komme auf dich“ steht statt der direkten Aussage „Du tust unrecht an mir“.",
+    "new_row": "5\tUnd Sarai sagte zu Abram: „Mein Unrecht komme auf dich! Ich habe meine Magd in deinen Schoß gegeben, und als sie sah, dass sie schwanger war, wurde ich gering in ihren Augen. Der HERR richte zwischen mir und dir!“\t„Mein Unrecht komme auf dich“ steht statt der direkten Aussage „Du tust unrecht an mir“."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/01_GEN/GEN_016.tsv",
+    "verse": 7,
+    "old_row": "7\tUnd der Bote Jahwes fand sie an der Wasserquelle in der Wüste, an der Quelle auf dem Weg nach Sur.\t„Quelle“ steht statt „Brunnen“; das hebräische Wort für den Engel bedeutet auch Bote.",
+    "new_row": "7\tUnd der Bote des HERRN fand sie an der Wasserquelle in der Wüste, an der Quelle auf dem Weg nach Sur.\t„Quelle“ steht statt „Brunnen“; das hebräische Wort für den Engel bedeutet auch Bote."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/01_GEN/GEN_016.tsv",
+    "verse": 9,
+    "old_row": "9\tUnd der Bote Jahwes sagte zu ihr: „Kehre zu deiner Herrin zurück und demütige dich unter ihre Hände.“\t„Hände“ steht im Plural.",
+    "new_row": "9\tUnd der Bote des HERRN sagte zu ihr: „Kehre zu deiner Herrin zurück und demütige dich unter ihre Hände.“\t„Hände“ steht im Plural."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/01_GEN/GEN_016.tsv",
+    "verse": 10,
+    "old_row": "10\tUnd der Bote Jahwes sagte zu ihr: „Ich werde deinen Samen gewiss mehren, sodass er vor Menge nicht gezählt werden kann.“\tNah am Hebräischen.",
+    "new_row": "10\tUnd der Bote des HERRN sagte zu ihr: „Ich werde deinen Samen gewiss mehren, sodass er vor Menge nicht gezählt werden kann.“\tNah am Hebräischen."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/01_GEN/GEN_016.tsv",
+    "verse": 11,
+    "old_row": "11\tUnd der Bote Jahwes sagte zu ihr: „Siehe, du bist schwanger und wirst einen Sohn gebären; und du sollst seinen Namen Ismael nennen, denn Jahwe hat auf deine Bedrückung gehört.\tNah am Hebräischen.",
+    "new_row": "11\tUnd der Bote des HERRN sagte zu ihr: „Siehe, du bist schwanger und wirst einen Sohn gebären; und du sollst seinen Namen Ismael nennen, denn der HERR hat auf deine Bedrückung gehört.\tNah am Hebräischen."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/01_GEN/GEN_016.tsv",
+    "verse": 13,
+    "old_row": "13\tUnd sie nannte den Namen Jahwes, der zu ihr redete: „Du bist ein Gott des Sehens.“ Denn sie sagte: „Habe ich auch hier hinter dem hergesehen, der mich sieht?“\tDas Hebräische formuliert den zweiten Satz als Frage und verbindet das Sehen mit „hinter … her“.",
+    "new_row": "13\tUnd sie nannte den Namen des HERRN, der zu ihr redete: „Du bist ein Gott des Sehens.“ Denn sie sagte: „Habe ich auch hier hinter dem hergesehen, der mich sieht?“\tDas Hebräische formuliert den zweiten Satz als Frage und verbindet das Sehen mit „hinter … her“."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/01_GEN/GEN_017.tsv",
+    "verse": 1,
+    "old_row": "1\tUnd Abram war neunundneunzig Jahre alt, und Jahwe erschien Abram und sagte zu ihm: „Ich bin Gott, der Allmächtige. Wandle vor mir und sei untadelig.\t„Untadelig“ bezeichnet Unversehrtheit statt des allgemeineren „fromm“.",
+    "new_row": "1\tUnd Abram war neunundneunzig Jahre alt, und der HERR erschien Abram und sagte zu ihm: „Ich bin Gott, der Allmächtige. Wandle vor mir und sei untadelig.\t„Untadelig“ bezeichnet Unversehrtheit statt des allgemeineren „fromm“."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/01_GEN/GEN_018_2.tsv",
+    "verse": 33,
+    "old_row": "33\tUnd Jahwe ging, als er beendet hatte, zu Abraham zu reden; und Abraham kehrte an seinen Ort zurück.\tNah am Hebräischen.",
+    "new_row": "33\tUnd der HERR ging, als er das Reden zu Abraham beendet hatte; und Abraham kehrte an seinen Ort zurück.\tNah am Hebräischen."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/01_GEN/GEN_018_1.tsv",
+    "verse": 1,
+    "old_row": "1\tUnd Jahwe erschien ihm bei den Eichen von Mamre, während er am Eingang des Zeltes saß, bei der Hitze des Tages.\tDas Hebräische nennt Eichen und ein Zelt statt Hain und Hütte.",
+    "new_row": "1\tUnd der HERR erschien ihm bei den Eichen von Mamre, während er am Eingang des Zeltes saß, bei der Hitze des Tages.\tDas Hebräische nennt Eichen und ein Zelt statt Hain und Hütte."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/01_GEN/GEN_018_1.tsv",
+    "verse": 13,
+    "old_row": "13\tUnd Jahwe sagte zu Abraham: „Warum hat Sara gelacht und gesagt: Sollte ich wirklich noch gebären, da ich doch alt geworden bin?\tNah am Hebräischen.",
+    "new_row": "13\tUnd der HERR sagte zu Abraham: „Warum hat Sara gelacht und gesagt: Sollte ich wirklich noch gebären, da ich doch alt geworden bin?\tNah am Hebräischen."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/01_GEN/GEN_018_1.tsv",
+    "verse": 17,
+    "old_row": "17\tUnd Jahwe sagte: „Sollte ich vor Abraham verbergen, was ich tue,\tNah am Hebräischen.",
+    "new_row": "17\tUnd der HERR sagte: „Sollte ich vor Abraham verbergen, was ich tue,\tNah am Hebräischen."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/01_GEN/GEN_018_1.tsv",
+    "verse": 19,
+    "old_row": "19\tDenn ich habe ihn erkannt, damit er seinen Söhnen und seinem Haus nach ihm befehle, und sie den Weg Jahwes bewahren, Gerechtigkeit und Recht zu tun, damit Jahwe über Abraham bringe, was er über ihn geredet hat.“\t„Ich habe ihn erkannt“ steht statt „ich weiß“; ausdrücklich genannt sind Gerechtigkeit und Recht.",
+    "new_row": "19\tDenn ich habe ihn erkannt, damit er seinen Söhnen und seinem Haus nach ihm befehle, und sie den Weg des HERRN bewahren, Gerechtigkeit und Recht zu tun, damit der HERR über Abraham bringe, was er über ihn geredet hat.“\t„Ich habe ihn erkannt“ steht statt „ich weiß“; ausdrücklich genannt sind Gerechtigkeit und Recht."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/01_GEN/GEN_018_1.tsv",
+    "verse": 20,
+    "old_row": "20\tUnd Jahwe sagte: „Das Geschrei von Sodom und Gomorra ist groß, und ihre Sünde ist sehr schwer.\tNah am Hebräischen.",
+    "new_row": "20\tUnd der HERR sagte: „Das Geschrei von Sodom und Gomorra ist groß, und ihre Sünde ist sehr schwer.\tNah am Hebräischen."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/01_GEN/GEN_018_1.tsv",
+    "verse": 22,
+    "old_row": "22\tUnd die Männer wandten sich von dort und gingen nach Sodom; Abraham aber stand noch vor Jahwe.\tNah am Hebräischen.",
+    "new_row": "22\tUnd die Männer wandten sich von dort und gingen nach Sodom; Abraham aber stand noch vor dem HERRN.\tNah am Hebräischen."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/01_GEN/GEN_018_1.tsv",
+    "verse": 26,
+    "old_row": "26\tUnd Jahwe sagte: „Wenn ich in Sodom fünfzig Gerechte mitten in der Stadt finde, werde ich dem ganzen Ort um ihretwillen vergeben.“\tNah am Hebräischen.",
+    "new_row": "26\tUnd der HERR sagte: „Wenn ich in Sodom fünfzig Gerechte mitten in der Stadt finde, werde ich dem ganzen Ort um ihretwillen vergeben.“\tNah am Hebräischen."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/01_GEN/GEN_019_1.tsv",
+    "verse": 13,
+    "old_row": "13\tDenn wir werden diesen Ort vernichten, denn ihr Geschrei ist groß geworden vor Jahwes Angesicht; und Jahwe hat uns gesandt, ihn zu vernichten.“\tNah am Hebräischen.",
+    "new_row": "13\tDenn wir werden diesen Ort vernichten, denn ihr Geschrei ist groß geworden vor dem Angesicht des HERRN; und der HERR hat uns gesandt, ihn zu vernichten.“\tNah am Hebräischen."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/01_GEN/GEN_019_1.tsv",
+    "verse": 14,
+    "old_row": "14\tUnd Lot ging hinaus und redete zu seinen Schwiegersöhnen, die seine Töchter nehmen sollten, und sagte: „Steht auf, geht aus diesem Ort hinaus, denn Jahwe wird die Stadt vernichten!“ Aber er war in den Augen seiner Schwiegersöhne wie einer, der scherzt.\tLot erscheint seinen Schwiegersöhnen wie einer, der scherzt; nicht bloß seine Worte werden lächerlich genannt.",
+    "new_row": "14\tUnd Lot ging hinaus und redete zu seinen Schwiegersöhnen, die seine Töchter nehmen sollten, und sagte: „Steht auf, geht aus diesem Ort hinaus, denn der HERR wird die Stadt vernichten!“ Aber er war in den Augen seiner Schwiegersöhne wie einer, der scherzt.\tLot erscheint seinen Schwiegersöhnen wie einer, der scherzt; nicht bloß seine Worte werden lächerlich genannt."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/01_GEN/GEN_019_1.tsv",
+    "verse": 16,
+    "old_row": "16\tUnd er zögerte, und die Männer ergriffen seine Hand und die Hand seiner Frau und die Hand seiner zwei Töchter, weil Jahwe sich seiner erbarmte; und sie führten ihn hinaus und stellten ihn außerhalb der Stadt hin.\tNah am Hebräischen.",
+    "new_row": "16\tUnd er zögerte, und die Männer ergriffen seine Hand und die Hand seiner Frau und die Hand seiner zwei Töchter, weil der HERR sich seiner erbarmte; und sie führten ihn hinaus und stellten ihn außerhalb der Stadt hin.\tNah am Hebräischen."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/01_GEN/GEN_019_1.tsv",
+    "verse": 24,
+    "old_row": "24\tUnd Jahwe ließ auf Sodom und auf Gomorra Schwefel und Feuer regnen, von Jahwe aus dem Himmel.\tDer Text wiederholt Jahwe ausdrücklich als Herkunft des Schwefels und Feuers.",
+    "new_row": "24\tUnd der HERR ließ auf Sodom und auf Gomorra Schwefel und Feuer regnen, vom HERRN aus dem Himmel.\tDer Text nennt den HERRN ausdrücklich ein zweites Mal als Ursprung des Schwefels und Feuers."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/01_GEN/GEN_019_1.tsv",
+    "verse": 27,
+    "old_row": "27\tUnd Abraham machte sich früh am Morgen auf zu dem Ort, wo er vor Jahwes Angesicht gestanden hatte.\tNah am Hebräischen.",
+    "new_row": "27\tUnd Abraham machte sich früh am Morgen auf zu dem Ort, wo er vor dem Angesicht des HERRN gestanden hatte.\tNah am Hebräischen."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/01_GEN/GEN_015.tsv",
+    "verse": 1,
+    "old_row": "1\tПосле этих событий было слово Яхве к Авраму в видении: «Не бойся, Аврам! Я — щит тебе; награда твоя весьма велика».\tВ еврейском тексте нет слова «ночью».",
+    "new_row": "1\tПосле этих событий было слово Господа к Авраму в видении: «Не бойся, Аврам! Я — щит тебе; награда твоя весьма велика».\tВ еврейском тексте нет слова «ночью»."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/01_GEN/GEN_015.tsv",
+    "verse": 2,
+    "old_row": "2\tИ сказал Аврам: «Владыка Яхве, что Ты дашь мне? Я хожу бездетным, а наследник моего дома — Елиезер из Дамаска».\tБлизко к еврейскому.",
+    "new_row": "2\tИ сказал Аврам: «Владыка Господи, что Ты дашь мне? Я хожу бездетным, а наследник моего дома — Елиезер из Дамаска».\tБлизко к еврейскому."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/01_GEN/GEN_015.tsv",
+    "verse": 4,
+    "old_row": "4\tИ вот, слово Яхве к нему: «Не этот будет наследовать тебе, но тот, кто выйдет из твоих внутренностей, он будет наследовать тебе».\tБлизко к еврейскому.",
+    "new_row": "4\tИ вот, слово Господа к нему: «Не этот будет наследовать тебе, но тот, кто выйдет из твоих внутренностей, он будет наследовать тебе».\tБлизко к еврейскому."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/01_GEN/GEN_015.tsv",
+    "verse": 6,
+    "old_row": "6\tИ он поверил Яхве, и Он вменил ему это в праведность.\tБлизко к еврейскому.",
+    "new_row": "6\tИ он поверил Господу, и Он вменил ему это в праведность.\tБлизко к еврейскому."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/01_GEN/GEN_015.tsv",
+    "verse": 7,
+    "old_row": "7\tИ сказал ему: «Я — Яхве, Который вывел тебя из Ура Халдейского, чтобы дать тебе эту землю во владение».\tБлизко к еврейскому.",
+    "new_row": "7\tИ сказал ему: «Я — Господь, Который вывел тебя из Ура Халдейского, чтобы дать тебе эту землю во владение».\tБлизко к еврейскому."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/01_GEN/GEN_015.tsv",
+    "verse": 8,
+    "old_row": "8\tИ он сказал: «Владыка Яхве, по чему я узнаю, что буду владеть ею?»\tБлизко к еврейскому.",
+    "new_row": "8\tИ он сказал: «Владыка Господи, по чему я узнаю, что буду владеть ею?»\tБлизко к еврейскому."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/01_GEN/GEN_015.tsv",
+    "verse": 18,
+    "old_row": "18\tВ тот день Яхве заключил с Аврамом завет, говоря: «Твоему семени Я дал эту землю, от реки Египетской до великой реки, реки Евфрата:\t«Я дал» передаёт завершённый глагол вместо «даю».",
+    "new_row": "18\tВ тот день Господь заключил с Аврамом завет, говоря: «Твоему семени Я дал эту землю, от реки Египетской до великой реки, реки Евфрата:\t«Я дал» передаёт завершённый глагол вместо «даю»."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/01_GEN/GEN_016.tsv",
+    "verse": 2,
+    "old_row": "2\tИ сказала Сара Авраму: «Вот же, Яхве удержал меня от рождения. Войди же к моей служанке; может быть, я буду устроена через неё». И Аврам послушался голоса Сары.\tЕврейский текст говорит «удержал меня от рождения» без слова «чрево»; далее сохранён образ устроения вместо пояснения «иметь детей».",
+    "new_row": "2\tИ сказала Сара Авраму: «Вот же, Господь удержал меня от деторождения. Войди же к моей служанке; может быть, я буду устроена через неё». И Аврам послушался голоса Сары.\tЕврейский текст говорит «удержал меня от деторождения» без слова «чрево»; далее сохранён образ устроения вместо пояснения «иметь детей»."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/01_GEN/GEN_016.tsv",
+    "verse": 5,
+    "old_row": "5\tИ сказала Сара Авраму: «Моя обида — на тебе! Я отдала мою служанку в твоё лоно; и она увидела, что зачала, и я стала ничтожной в её глазах. Пусть Яхве рассудит между мной и тобой!»\tБуквально «моя обида — на тебе» вместо явного «ты виновен».",
+    "new_row": "5\tИ сказала Сара Авраму: «Моя обида — на тебе! Я отдала мою служанку в твоё лоно; и она увидела, что зачала, и я стала ничтожной в её глазах. Пусть Господь рассудит между мной и тобой!»\tБуквально «моя обида — на тебе» вместо явного «ты виновен»."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/01_GEN/GEN_016.tsv",
+    "verse": 7,
+    "old_row": "7\tИ посланник Яхве нашёл её у источника воды в пустыне, у источника на дороге к Суру.\tБлизко к еврейскому.",
+    "new_row": "7\tИ посланник Господа нашёл её у источника воды в пустыне, у источника на дороге к Суру.\tБлизко к еврейскому."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/01_GEN/GEN_016.tsv",
+    "verse": 9,
+    "old_row": "9\tИ сказал ей посланник Яхве: «Возвратись к твоей госпоже и смирись под её руками».\t«Под её руками» сохраняет образ и множественное число.",
+    "new_row": "9\tИ сказал ей посланник Господа: «Возвратись к твоей госпоже и смирись под её руками».\t«Под её руками» сохраняет образ и множественное число."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/01_GEN/GEN_016.tsv",
+    "verse": 10,
+    "old_row": "10\tИ сказал ей посланник Яхве: «Я непременно умножу твоё семя, и его нельзя будет сосчитать от множества».\tБлизко к еврейскому.",
+    "new_row": "10\tИ сказал ей посланник Господа: «Я непременно умножу твоё семя, и его нельзя будет сосчитать от множества».\tБлизко к еврейскому."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/01_GEN/GEN_016.tsv",
+    "verse": 11,
+    "old_row": "11\tИ сказал ей посланник Яхве: «Вот, ты беременна и родишь сына, и назовёшь его имя Измаил, ибо Яхве услышал твоё страдание.\tБлизко к еврейскому.",
+    "new_row": "11\tИ сказал ей посланник Господа: «Вот, ты беременна и родишь сына, и назовёшь его имя Измаил, ибо Господь услышал твоё страдание.\tБлизко к еврейскому."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/01_GEN/GEN_016.tsv",
+    "verse": 13,
+    "old_row": "13\tИ она назвала имя Яхве, говорившего к ней: «Ты — Бог видения». Ибо она сказала: «Неужели и здесь я смотрела вслед Видящему меня?»\tВторая фраза оформлена как вопрос и сохраняет «вслед».",
+    "new_row": "13\tИ она назвала имя Господа, говорившего к ней: «Ты — Бог видения». Ибо она сказала: «Неужели и здесь я смотрела вслед Видящему меня?»\tВторая фраза оформлена как вопрос и сохраняет «вслед»."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/01_GEN/GEN_017.tsv",
+    "verse": 1,
+    "old_row": "1\tИ Аврам был девяноста девяти лет, и Яхве явился Авраму и сказал ему: «Я — Бог Всемогущий; ходи перед Моим лицом и будь непорочен.\tБлизко к еврейскому.",
+    "new_row": "1\tИ Аврам был девяноста девяти лет, и Господь явился Авраму и сказал ему: «Я — Бог Всемогущий; ходи перед Моим лицом и будь непорочен.\tБлизко к еврейскому."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/01_GEN/GEN_018_2.tsv",
+    "verse": 33,
+    "old_row": "33\tИ Яхве пошёл, когда закончил говорить с Авраамом, а Авраам возвратился на своё место.\tБлизко к еврейскому.",
+    "new_row": "33\tИ Господь пошёл, когда закончил говорить с Авраамом, а Авраам возвратился на своё место.\tБлизко к еврейскому."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/01_GEN/GEN_018_1.tsv",
+    "verse": 1,
+    "old_row": "1\tИ Яхве явился ему у дубов Мамре, а он сидел у входа в шатёр во время дневного зноя.\tБлизко к еврейскому.",
+    "new_row": "1\tИ Господь явился ему у дубов Мамре, а он сидел у входа в шатёр во время дневного зноя.\tБлизко к еврейскому."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/01_GEN/GEN_018_1.tsv",
+    "verse": 13,
+    "old_row": "13\tИ сказал Яхве Аврааму: «Почему это Сарра рассмеялась, говоря: Неужели я действительно рожу, когда я состарилась?\tБлизко к еврейскому.",
+    "new_row": "13\tИ сказал Господь Аврааму: «Почему это Сарра рассмеялась, говоря: Неужели я действительно рожу, когда я состарилась?\tБлизко к еврейскому."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/01_GEN/GEN_018_1.tsv",
+    "verse": 17,
+    "old_row": "17\tИ Яхве сказал: «Скрою ли Я от Авраама то, что Я делаю,\tВ еврейском тексте нет слов «раба Моего».",
+    "new_row": "17\tИ Господь сказал: «Скрою ли Я от Авраама то, что Я делаю,\tВ еврейском тексте нет слов «раба Моего»."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/01_GEN/GEN_018_1.tsv",
+    "verse": 19,
+    "old_row": "19\tИбо Я познал его, чтобы он заповедал своим сыновьям и своему дому после себя, и они хранили путь Яхве, творя праведность и суд, чтобы Яхве принёс на Авраама то, что говорил о нём».\t«Я познал его» стоит вместо «Я избрал его»; цель выражена также и в последней части стиха.",
+    "new_row": "19\tИбо Я познал его, чтобы он заповедал своим сыновьям и своему дому после себя, и они хранили путь Господа, творя праведность и суд, чтобы Господь принёс на Авраама то, что говорил о нём».\t«Я познал его» стоит вместо «Я избрал его»; цель выражена также и в последней части стиха."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/01_GEN/GEN_018_1.tsv",
+    "verse": 20,
+    "old_row": "20\tИ сказал Яхве: «Вопль Содома и Гоморры велик, и их грех весьма тяжёл.\tБлизко к еврейскому.",
+    "new_row": "20\tИ сказал Господь: «Вопль Содома и Гоморры велик, и их грех весьма тяжёл.\tБлизко к еврейскому."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/01_GEN/GEN_018_1.tsv",
+    "verse": 22,
+    "old_row": "22\tИ мужи повернулись оттуда и пошли в Содом, а Авраам ещё стоял перед лицом Яхве.\tБлизко к еврейскому.",
+    "new_row": "22\tИ мужи повернулись оттуда и пошли в Содом, а Авраам ещё стоял перед лицом Господа.\tБлизко к еврейскому."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/01_GEN/GEN_018_1.tsv",
+    "verse": 26,
+    "old_row": "26\tИ сказал Яхве: «Если Я найду в Содоме пятьдесят праведных посреди города, то прощу всему месту ради них».\tЕврейский текст говорит «всему месту», без отдельного «весь город».",
+    "new_row": "26\tИ сказал Господь: «Если Я найду в Содоме пятьдесят праведных посреди города, то прощу всему месту ради них».\tЕврейский текст говорит «всему месту», без отдельного «весь город»."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/01_GEN/GEN_019_1.tsv",
+    "verse": 13,
+    "old_row": "13\tИбо мы погубим это место, потому что их вопль стал велик перед лицом Яхве, и Яхве послал нас погубить его».\tБлизко к еврейскому.",
+    "new_row": "13\tИбо мы погубим это место, потому что их вопль стал велик перед лицом Господа, и Господь послал нас погубить его».\tБлизко к еврейскому."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/01_GEN/GEN_019_1.tsv",
+    "verse": 14,
+    "old_row": "14\tИ Лот вышел и говорил со своими зятьями, бравшими его дочерей, и сказал: «Встаньте, выйдите из этого места, ибо Яхве погубит город!» Но в глазах его зятьёв он был как шутящий.\tБлизко к еврейскому.",
+    "new_row": "14\tИ Лот вышел и говорил со своими зятьями, бравшими его дочерей, и сказал: «Встаньте, выйдите из этого места, ибо Господь погубит город!» Но в глазах его зятьёв он был как шутящий.\tБлизко к еврейскому."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/01_GEN/GEN_019_1.tsv",
+    "verse": 16,
+    "old_row": "16\tИ он медлил, и мужи взяли его за руку, и его жену за руку, и его двух дочерей за руку, по состраданию Яхве к нему; и вывели его, и поставили вне города.\tВ этом стихе названы мужи без добавления «Ангелы».",
+    "new_row": "16\tИ он медлил, и мужи взяли его за руку, и его жену за руку, и его двух дочерей за руку, по состраданию Господа к нему; и вывели его, и поставили вне города.\tВ этом стихе названы мужи без добавления «Ангелы»."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/01_GEN/GEN_019_1.tsv",
+    "verse": 24,
+    "old_row": "24\tИ Яхве пролил на Содом и на Гоморру дождём серу и огонь от Яхве с неба.\tБлизко к еврейскому.",
+    "new_row": "24\tИ Господь пролил на Содом и на Гоморру дождём серу и огонь от Господа с неба.\tБлизко к еврейскому."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/01_GEN/GEN_019_1.tsv",
+    "verse": 27,
+    "old_row": "27\tИ Авраам встал рано утром и пошёл к месту, где стоял перед лицом Яхве.\tБлизко к еврейскому.",
+    "new_row": "27\tИ Авраам встал рано утром и пошёл к месту, где стоял перед лицом Господа.\tБлизко к еврейскому."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/de/01_GEN/GEN_019_1.tsv",
+    "verse": 20,
+    "old_row": "20\tSiehe doch, diese Stadt ist nahe, um dorthin zu fliehen, und sie ist klein; lass mich doch dorthin entkommen — ist sie nicht klein? —, damit meine Seele lebt.“\tNah am Hebräischen.",
+    "new_row": "20\tSiehe doch, diese Stadt ist nahe, um dorthin zu fliehen, und sie ist klein; lass mich doch dorthin entkommen (ist sie nicht klein?), damit meine Seele lebt.“\tNah am Hebräischen."
+  },
+  {
+    "path": "Tools/LiteralGen/outputs/ru/01_GEN/GEN_019_1.tsv",
+    "verse": 8,
+    "old_row": "8\tВот же, у меня две дочери, которые не познали мужа; я выведу же их к вам, и делайте им то, что хорошо в ваших глазах. Только этим мужам ничего не делайте, ибо для того они пришли под тень моей кровли».\t«Под тень моей кровли» сохраняет образ; сравнительного «лучше» в тексте нет.",
+    "new_row": "8\tВот же, у меня две дочери, которые не познали мужа; позвольте же мне вывести их к вам, и делайте им то, что хорошо в ваших глазах. Только этим мужам ничего не делайте, ибо для того они пришли под тень моей кровли».\t«Под тень моей кровли» сохраняет образ; сравнительного «лучше» в тексте нет."
+  }
+]

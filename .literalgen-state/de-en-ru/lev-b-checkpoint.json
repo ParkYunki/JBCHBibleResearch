@@ -1,0 +1,96 @@
+{
+  "scope": "LEV012–019; en012–017",
+  "chapters": {
+    "12": {
+      "missing_outputs_created": true,
+      "qa": "all_owned_verses_source_target_compared",
+      "all_verses_reviewed": true
+    },
+    "13": {
+      "missing_outputs_created": true,
+      "qa": "all_owned_verses_source_target_compared",
+      "all_verses_reviewed": true
+    },
+    "14": {
+      "missing_outputs_created": true,
+      "qa": "all_owned_verses_source_target_compared",
+      "all_verses_reviewed": true
+    },
+    "15": {
+      "missing_outputs_created": true,
+      "qa": "all_owned_verses_source_target_compared",
+      "all_verses_reviewed": true
+    },
+    "16": {
+      "missing_outputs_created": true,
+      "qa": "all_owned_verses_source_target_compared",
+      "all_verses_reviewed": true
+    },
+    "17": {
+      "missing_outputs_created": true,
+      "qa": "all_owned_verses_source_target_compared",
+      "all_verses_reviewed": true
+    },
+    "18": {
+      "missing_outputs_created": true,
+      "qa": "all_owned_verses_source_target_compared",
+      "all_verses_reviewed": true
+    },
+    "19": {
+      "missing_outputs_created": true,
+      "qa": "all_owned_verses_source_target_compared",
+      "all_verses_reviewed": true
+    }
+  },
+  "status": "complete",
+  "scope_ownership": {
+    "de": "LEV012–017",
+    "en": "LEV012–013",
+    "ru": "LEV012–019"
+  },
+  "root_extra_review": "de LEV018–019; 67 verses",
+  "files_created": 26,
+  "verse_rows_created": {
+    "de": 207,
+    "en": 67,
+    "ru": 274
+  },
+  "files_reviewed": 29,
+  "verse_rows_reviewed": {
+    "de": 274,
+    "en": 67,
+    "ru": 274
+  },
+  "qa_manifest": ".literalgen-state/de-en-ru/lev-b-qa.json",
+  "qa_rows": 20,
+  "qa_by_language": {
+    "de": 8,
+    "en": 0,
+    "ru": 12
+  },
+  "root_de_qa_rows": 5,
+  "validation": {
+    "verse_order": true,
+    "three_fields": true,
+    "english_literal_equals": true,
+    "difference_max_60_words": true,
+    "difference_max_3_sentences": true,
+    "quote_style": true,
+    "chapter_quote_balance": true,
+    "qa_old_rows_match_original": true,
+    "unique_path_verse": true,
+    "placeholder_absent": true,
+    "outputs_directly_modified": false,
+    "literal_quote_balance_reviewed_scope": {
+      "de": [
+        9,
+        9
+      ],
+      "ru": [
+        9,
+        9
+      ]
+    },
+    "russian_nested_quotes": "013:45 and 014:35 retain original nested „ “ inside chapter-level « »"
+  }
+}
