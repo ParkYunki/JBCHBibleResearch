@@ -83,7 +83,7 @@ def main():
     md = ['# 개역한글 본문 누락·중복 점검 결과', '',
           '앱의 `BibleDB.sqlite` `BibleVerses` 개역한글 본문을 독립 사본 두 개(국한문 개역 `BibleDB_Hanja.bdb`, 난외주 개역 `02개역난외주.bdb`)와 절마다 대조한 결과입니다. '
           '두 사본이 모두 가진 말이 앱 본문에만 없는 경우를 누락으로 봤습니다. 표기 차이(찌/지, 세째/셋째 등)와 띄어쓰기, 문장부호, 한자 병기, 소제목은 비교하지 않았습니다. '
-          '스크립트: `Tools/KRVTextAudit/audit_krv.py`.', '',
+          '스크립트: `Tools/KRVTextAudit/audit_krv.py`. 찾은 누락·중복을 고친 기록은 `krv_fixes.tsv`(`fix_krv.py`)에 있습니다.', '',
           f'- 누락: {len(omit)}절', f'- 중복(앞 절 본문 반복): {len(dup)}절, 절 안 반복: {len(inner)}절', f'- 절 경계 차이(누락 아님): {len(boundary)}절', f'- 오탈자 의심(글자 바뀜): {len(subs)}곳', '']
 
     def block(title, items, note=''):

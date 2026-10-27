@@ -36,3 +36,4 @@ __pycache__/
 BibleSources/*.bdb
 BibleSources/ext/
 Tools/KRVDiffReview/packets/
+Tools/KRVDiffReview/packets_rereview/
