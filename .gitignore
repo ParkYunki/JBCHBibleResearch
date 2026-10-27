@@ -35,3 +35,5 @@ __pycache__/
 # 원본 .bdb와 차이 설명 작업용 변환본(BibleSources/ext/)
 BibleSources/*.bdb
 BibleSources/ext/
+Tools/KRVDiffReview/packets/
+Tools/KRVDiffReview/packets_rereview/
