@@ -94,6 +94,9 @@ struct ContentView: View {
                     // CloudKit 다중 기기 초기 부트스트랩 경합으로 생길 수 있는 code 중복
                     // TranslationRegistry를 앱이 뜰 때마다 정리한다.
                     try TranslationBootstrap.deduplicateRegistries(in: modelContext)
+                    // 번역본 켜기/끄기는 기기별 목록(`defaultDisplayedTranslationCodes`)만 쓴다. 목록이 아직 없는 기기는 예전 폴백 결과
+                    // (동기화되던 `isEnabled` 포함)를 이 기기 목록으로 한 번 옮겨, 이후 다른 기기의 변경에 따라 바뀌지 않게 한다.
+                    ActiveTranslationResolver.seedDeviceListIfNeeded(in: modelContext)
                     // 번들 기본 개요(OutlineSeed.sqlite, 있으면)를 사용자 DB로 1회 복사한다.
                     // 실패해도 throw하지 않고 내부에서 처리하므로 다른 부트스트랩을 막지 않는다.
                     await OutlineSeedImporter.importIfNeeded(into: modelContext)

@@ -1,0 +1,340 @@
+//
+//  QueryIntentClassifier.swift
+//  JBCHBibleResearch
+//
+//  검색어 하나를 처리하기 전에 "관계를 묻는지 / 인물 정보를 묻는지 / 예언을
+//  묻는지 / 주제·속성·교리·유명 본문을 묻는지 / 내용 추적(서사)을 묻는지"를
+//  먼저 판정한다. 분류는 정밀하게 고정하고, 데이터는 항목 단위로 점진적으로
+//  채우며, 폴백은 항상 유지한다.
+//
+//  [3계층 구조 — 이 파일은 1계층]
+//  1) Classifier(이 파일) — 순수 함수, DB 접근 없음. 테이블에 데이터가 있는지
+//     모른 채 질의 문자열의 패턴만으로 카테고리를 정하므로, 데이터가 채워져도
+//     이 로직은 바꿀 필요가 없다.
+//  2) Handler(`QueryIntentHandler`) — 분류 결과별로 해당 테이블에서 질의에
+//     언급된 항목을 찾는다. 없으면 "아직 준비되지 않음" 안내만 띄운다.
+//  3) 일반 검색 폴백(`SearchViewModel`의 키워드 검색) — 분류
+//     결과와 무관하게 항상 실행한다. 오분류가 나도 기존 검색보다 나빠지지
+//     않는 것이 이 구조의 안전장치다.
+//
+//  [카테고리 우선순위] `classify(_:)`가 위에서부터 순서대로 시도해 처음 걸리는
+//  카테고리로 확정한다(겹치는 질의는 앞쪽이 이긴다). 예: "다윗의 아들은
+//  누구인가"는 관계 어휘가 있으므로 RELATION이다.
+//
+//  [카테고리별 신뢰도]
+//  - RELATION: `RelationSynonyms`(927명분 description 코퍼스로 검증된 어휘,
+//    `BibleKeywordMatching.swift`)를 재사용해 근거가 탄탄하다.
+//  - THEME_OR_ATTRIBUTE: "(주제)+의+(추상명사)" 구조와 "~에 대한/관한 말씀·구절"
+//    꼬리표는 실제 질의 예시로 재현·검증됐다.
+//  - PROPHECY: 트리거 단어와 예언 주제어 목록은 아직 초안이다. 오탐을 줄이려
+//    "환난"은 단독으로 넣지 않고 구체적 형태로만 둔다(아래 3절).
+//  - NARRATIVE: 트리거 어휘는 자리만 잡아 둔 초안이고 설계는 보류 상태다.
+//    "TimelineEvents는 관련성이 아니라 sequence_order 순으로 반환"한다는
+//    요구사항만 `ReferenceDataStore.timelineEvents(narrativeMentionedIn:)`에
+//    구현돼 있다.
+//
+//  [검증된 질의 예시]
+//  - "하나님의 속성을 나타내는 성경구절" -> THEME_OR_ATTRIBUTE ("의 속성")
+//  - "이스라엘의 회복을 예언한 성경구절" -> PROPHECY ("예언한", RELATION/
+//    THEME보다 먼저 걸림)
+//  - "이스라엘 회복에 대한 말씀" -> THEME_OR_ATTRIBUTE ("에 대한 말씀")
+//  - "칠년환난의 모습" -> PROPHECY ("칠년환난"이 예언 주제어라 THEME보다 먼저 걸림)
+//  - "가상칠언의 내용" -> THEME_OR_ATTRIBUTE ("가상칠언"이 이름 붙은 본문)
+//  - "기도의 방법" / "교제의 중요성" -> THEME_OR_ATTRIBUTE ("의 방법"/"의 중요성")
+//  - "다윗의 아들은 누구인가" -> RELATION ("아들")
+//  - "골리앗의 동생" -> RELATION ("동생", `RelationSynonyms` 재사용)
+//  - "이스라엘의 환난이 언제 끝나는가" -> PROPHECY ("이스라엘의 환난"),
+//    "환난 날에 어떻게 해야 하나" -> GENERAL
+//  - "믿음에 대해 알려줘" -> GENERAL (주제-무관 표현은 트리거에서 제외)
+//
+
+import Foundation
+
+/// 검색어 하나를 5개 카테고리 중 하나로 분류하거나, 어디에도 안 걸리면
+/// `.general`(기존 일반 검색 파이프라인)로 넘긴다. 순수 함수 — 이 타입은
+/// 어떤 DB에도 접근하지 않고, 어떤 테이블에 데이터가 있는지도 모른다.
+public enum QueryIntentClassifier {
+    public enum Intent: String, Equatable {
+        /// "OOO의 [관계어]" — `PersonRelations` 테이블이 대상.
+        case relation
+        /// 인물 이름 자체를 묻는 질의 — `Persons` 테이블이 대상. `KeywordCategoryIndex`
+        /// 조회가 필요해 순수 함수 계층의 책임을 벗어나므로, 실제 판정은
+        /// `QueryIntentHandler.handle`이 수행하고(우선순위는 관계 다음) 이 case는
+        /// 그 결과를 담는 태그일 뿐이다. 장소는 콘텐츠가 준비되지 않아 묶지 않는다.
+        case personProfile
+        /// 지명 이름 자체를 묻는 질의 — `Places` 테이블이 대상(PlaceSeed.json). 인물처럼 DB 조회가 필요해
+        /// `classify()`는 반환하지 않고 `QueryIntentHandler.handle`이 결과를 담는 태그로만 쓴다. 같은 이름의
+        /// 인물이 함께 걸리면 한 카드에 인물·장소를 같이 보여준다.
+        case placeProfile
+        /// 예언/성취, 또는 메시아·마지막 때·마지막 전쟁 관련 주제어 —
+        /// `Prophecies` 테이블이 대상.
+        case prophecy
+        /// "(주제)+의+(속성/방법/의미 등 추상명사)" 구조, "~에 대한/관한
+        /// 말씀·구절" 꼬리표, 또는 이름 붙은 본문(가상칠언 등) — `Themes`
+        /// 테이블이 대상. 키워드·카테고리 조회가 주제 키워드를 먼저 잡아내므로
+        /// 사실상 그 폴백 역할이다.
+        case themeOrAttribute
+        /// 서사·시간순 추적 — `TimelineEvents` 테이블이 대상.
+        case narrative
+        /// 위 다섯 카테고리 중 어디에도 안 걸림 — 기존 일반 검색 그대로.
+        case general
+    }
+
+    /// 우선순위: 관계 -> 예언 -> 주제·속성·교리·유명 본문 -> 내용 추적·서사
+    /// -> 일반. 위에서부터 순서대로 시도해 처음 걸리는 카테고리로 확정한다.
+    ///
+    /// 인물 판정(`Intent.personProfile`)은 DB 조회가 필요해 이 함수에 없다 — 그 자리
+    /// (관계 다음, 예언 이전)는 `QueryIntentHandler.handle`이 별도로 채운다.
+    public static func classify(_ rawQuery: String) -> Intent {
+        let query = rawQuery.trimmingCharacters(in: .whitespacesAndNewlines)
+        guard !query.isEmpty else { return .general }
+
+        if isRelationQuery(query) { return .relation }
+        if isProphecyQuery(query) { return .prophecy }
+        if isThemeOrAttributeQuery(query) { return .themeOrAttribute }
+        if isNarrativeQuery(query) { return .narrative }
+        return .general
+    }
+
+    // MARK: - 1) 관계 (RELATION)
+    //
+    // `RelationSynonyms.allWords`(`BibleKeywordMatching.swift`)를 재사용하고, 검색어
+    // 확장용인 그 파일에 없는 기본 친족 명사를 몇 개 더했다(오매칭 여지가 거의 없는
+    // 기초 어휘만, 별도 실측 검증은 안 함).
+
+    /// [2026-10-22 4차] "외삼촌"·"백부"를 더했다 — "X의 외삼촌"/"X의 백부"를 삼촌 질의(`QueryIntentHandler`의 `.uncle`)로 받으려면
+    /// `koreanRelationShapeNames`의 관계어 목록(이 배열 포함)에 있어야 한다("외삼촌"은 "삼촌"을 포함해 분류는 이미 관계였지만
+    /// 꼴 판정은 "의" 바로 뒤 관계어를 보므로 따로 필요하다). "백부"가 든 다른 말("백부장")은 관계로 분류되지만 꼴이 아니라
+    /// 일반 분류와 같은 결과(지명·인물 조회 후 nil)다. `RelationSynonyms`(키워드 검색 확장에도 쓰임)는 바꾸지 않았다.
+    private static let baselineRelationWords: [String] = [
+        "아들", "딸", "부모", "남편", "지파", "조카", "사촌",
+        "며느리", "사위", "장인", "장모", "이모", "고모", "손자", "손녀", "자녀",
+        "외삼촌", "백부",
+        // [2026-10-27 6차] "X의 시아버지" 꼴 — "아버지"를 포함해 분류는 이미 관계였지만 꼴 판정("의" 바로 뒤 관계어)에는 따로 필요하다.
+        "시아버지",
+    ]
+
+    private static func isRelationQuery(_ query: String) -> Bool {
+        if RelationSynonyms.allWords.contains(where: { query.contains($0) }) { return true }
+        if containsElderBrotherWord(query) { return true }
+        return baselineRelationWords.contains(where: { query.contains($0) })
+    }
+
+    // MARK: - 1-1) "X의 <관계어>" 꼴 판정 (2026-10-22 2차)
+
+    /// `isRelationQuery`가 관계 질의로 보는 관계어 전부(`RelationSynonyms.allWords` + "형" + `baselineRelationWords`),
+    /// 긴 말부터 — "할아버지"를 "아버지"보다 먼저 본다.
+    private static let relationShapeWords: [String] = {
+        var words: [String] = []
+        for word in RelationSynonyms.allWords + ["형"] + baselineRelationWords where !words.contains(word) {
+            words.append(word)
+        }
+        return words.sorted { $0.count > $1.count }
+    }()
+
+    /// 검색어 끝의 물음표·마침표("?", "？", ".", "。")를 떼고 앞뒤 공백을 지운다. 그 밖은 그대로다.
+    static func trimmingTrailingQueryPunctuation(_ query: String) -> String {
+        var text = query.trimmingCharacters(in: .whitespacesAndNewlines)
+        let marks: Set<Character> = ["?", "？", ".", "。"]
+        while let last = text.last, marks.contains(last) {
+            text.removeLast()
+            text = text.trimmingCharacters(in: .whitespacesAndNewlines)
+        }
+        return text
+    }
+
+    /// 이름 목록 구분 문자(공백 외) — "X의 <관계어>"의 X가 여러 이름일 때("후르, 훌의 아들").
+    private static let relationShapeNameSeparators: Set<Character> = [",", "，", "、"]
+
+    /// 질의 전체가 "X의 <관계어>"(관계어 뒤 "들" 허용, 공백 무시, 끝의 "?"/"." 무시) 꼴이면 X를 쉼표로 나눈 이름 목록(NFC, 빈 항목 제외)을
+    /// 돌려준다. 아니면 nil.
+    /// 예: "함의 아들" → ["함"], "셈의 아들들" → ["셈"], "노아의 아버지?" → ["노아"], "후르, 훌의 아들" → ["후르", "훌"].
+    /// "함의 아들은 누구인가", "노아가 아버지인 사람" → nil.
+    ///
+    /// 쓰는 곳: 한 글자 이름("함", "셈", "단")을 관계 질의에서 받을지 판정(`QueryIntentHandler.handleRelation`) — 그 밖의 한국어 관계
+    /// 질의 판정은 예전 그대로 `isRelationQuery`(부분 문자열)다. 비한국어 관계 질의도 이 꼴의 한국어 질의로 옮겨 같은 경로를 탄다.
+    /// [2026-10-22 3차] `QueryIntentHandler.handleWithKoreanData`는 관계로 분류된 질의 중 이 함수가 nil이 아닌 것만 관계 카드로 처리한다
+    /// (한국어 문장형 질의 금지 — "다윗의 아들은 누구인가", "다윗 아내", "유다 지파" → 카드 없음).
+    static func koreanRelationShapeNames(_ query: String) -> [String]? {
+        koreanRelationShape(query)?.names
+    }
+
+    /// [2026-10-27 5차] `koreanRelationShapeNames`와 같은 판정이고, 걸린 관계어(`relationShapeWords` 중 하나, 예: "조카", "오라비")도
+    /// 함께 돌려준다. `QueryIntentHandler`가 기존 부분 문자열 판정(`detectRelationSubQuery`)에 없는 관계어를 이 낱말로 관계 타입에 잇는다.
+    static func koreanRelationShape(_ query: String) -> (names: [String], word: String)? {
+        let compact = trimmingTrailingQueryPunctuation(query).filter { !$0.isWhitespace }
+        for word in relationShapeWords {
+            for suffix in ["의" + word + "들", "의" + word] where compact.hasSuffix(suffix) {
+                let head = compact.dropLast(suffix.count)
+                let names = head.split(whereSeparator: { relationShapeNameSeparators.contains($0) })
+                    .map { String($0).precomposedStringWithCanonicalMapping }
+                if !names.isEmpty { return (names, word) }
+            }
+        }
+        return nil
+    }
+
+    // MARK: - 1-2) 질의 전체가 트리거 낱말인지 (2026-10-22 3차)
+
+    /// 질의 전체(끝의 "?"/"." 무시, 공백 무시)가 그 카테고리의 트리거 낱말 하나와 같으면 true.
+    /// 한국어 의미 검색은 문장형 질의에 안내 카드를 띄우지 않는다(사용자 확정) — `QueryIntentHandler`가 예언/주제/서사 안내 카드를
+    /// 이 조건일 때만 낸다. 예: "메시아", "메시아?", "팔복", "여정" → true. "메시아에 대한 예언", "믿음의 중요성" → false.
+    ///  - 예언: `prophecyTriggerWords` + `prophecyTopicNouns`
+    ///  - 주제: `namedPassages`만 — 꼬리표("에 대한 말씀")와 "(주제)의 (추상명사)" 구조는 낱말이 아니라 문형이라 넣지 않는다.
+    ///  - 서사: `narrativeTriggers`
+    ///  - 그 밖의 카테고리: false
+    /// 분류(`classify`) 자체는 바꾸지 않는다.
+    static func isWholeQueryTriggerTerm(_ query: String, for intent: Intent) -> Bool {
+        let compact = compactForWholeQueryMatch(query)
+        guard !compact.isEmpty else { return false }
+        let terms: [String]
+        switch intent {
+        case .prophecy: terms = prophecyTriggerWords + prophecyTopicNouns
+        case .themeOrAttribute: terms = namedPassages
+        case .narrative: terms = narrativeTriggers
+        case .relation, .personProfile, .placeProfile, .general: return false
+        }
+        return terms.contains { compactForWholeQueryMatch($0) == compact }
+    }
+
+    /// 끝의 "?"/"."를 떼고(NFC) 공백을 모두 뺀 문자열 — "마지막 때"와 "마지막때"를 같게 본다.
+    private static func compactForWholeQueryMatch(_ text: String) -> String {
+        trimmingTrailingQueryPunctuation(text).precomposedStringWithCanonicalMapping.filter { !$0.isWhitespace }
+    }
+
+    /// 친족어 "형"(손위 형제)이 단어로 쓰였는지 — "라흐미의 형", "라흐미의형은?", "형이 누구".
+    ///
+    /// "형"은 한 글자라 `query.contains("형")`으로 판정하면 "형통"/"형벌"/"모형"/"형상"/"형제" 같은 말에 전부 걸려
+    /// 관계 질의로 오분류된다(그래서 `RelationSynonyms`에 넣지 못했다). 그래서 앞뒤 글자로 단어 경계를 본다:
+    ///  - 앞: 문장 처음/공백, 또는 관형격 "의"(공백 허용). "대형", "정형"처럼 한글 글자가 바로 붙은 경우는 제외.
+    ///  - 뒤: 문장 끝, 한글이 아닌 글자(공백·물음표 등), 또는 조사(은/는/이/가/을/를/도/과/와/의) 뒤에 다시 한글이 이어지지 않는 경우.
+    ///    "형제", "형통", "형이상학"(형+이+상학)은 제외.
+    /// 순수 함수 — `QueryIntentHandler`의 형/동생 분기도 이 함수를 쓴다.
+    public static func containsElderBrotherWord(_ query: String) -> Bool {
+        let chars = Array(query)
+        func isHangul(_ c: Character) -> Bool {
+            guard let v = c.unicodeScalars.first?.value else { return false }
+            return (0xAC00...0xD7A3).contains(v)
+        }
+        let particles: Set<Character> = ["은", "는", "이", "가", "을", "를", "도", "과", "와", "의"]
+        for i in chars.indices where chars[i] == "형" {
+            // 앞 경계
+            let prevOK: Bool
+            if i == 0 {
+                prevOK = true
+            } else if chars[i - 1] == "의" {
+                prevOK = true
+            } else if chars[i - 1].isWhitespace {
+                prevOK = true
+            } else {
+                prevOK = !isHangul(chars[i - 1])
+            }
+            guard prevOK else { continue }
+            // 뒤 경계
+            let next = i + 1
+            if next >= chars.count { return true }
+            if !isHangul(chars[next]) { return true }
+            if particles.contains(chars[next]) {
+                let after = next + 1
+                if after >= chars.count || !isHangul(chars[after]) { return true }
+            }
+        }
+        return false
+    }
+
+    // MARK: - 2) 인물 프로필 (PERSON_PROFILE) — [2026-09-15 이동]
+    //
+    // 인물 판정은 등록된 이름(`KeywordCategoryIndex`)이 질의에 부분 문자열로 있는지로
+    // 하므로 DB 접근이 필요하다 — 이 파일이 아니라
+    // `QueryIntentHandler.handleKeywordCategoryLookup`과
+    // `ReferenceDataStore.keywordCategories(mentionedIn:)`/`persons(mentionedIn:)`가 맡는다.
+
+    // MARK: - 3) 예언 (PROPHECY)
+    //
+    // 트리거 단어(예언/성취 등)와 "예언 주제어" 목록(메시아/재림/종말/마지막 때/마지막
+    // 전쟁 관련)을 함께 쓴다. "칠년환난의 모습"처럼 추상명사 구조에만 걸리던 질의가
+    // PROPHECY로 먼저 분류되도록 주제어 목록에 직접 넣었다.
+    //
+    // "환난"은 단독으로 넣지 않는다 — "환난 중에도 감사하라는 말씀" 같은 개인적
+    // 시련 질의가 예언으로 오분류되기 때문이다. "이스라엘(의) 환난"/"칠년환난"/
+    // "대환난"처럼 특정 종말론적 사건을 가리키는 형태만 둔다.
+    //
+    // 두 목록 모두 초안이다. 폴백 덕분에 "검색이 안 되는" 사고는 없지만
+    // (Handler가 못 찾으면 일반 검색으로 넘어감) 계속 재검토·보강이 필요하다.
+
+    private static let prophecyTriggerWords: [String] = [
+        "예언", "예언한", "예언된", "성취", "성취된", "이루어진", "이루어질", "응하신",
+    ]
+
+    private static let prophecyTopicNouns: [String] = [
+        "메시아", "재림", "종말", "말세", "마지막 때", "마지막날", "심판", "휴거",
+        "적그리스도", "짐승", "천년왕국", "새 하늘과 새 땅", "아마겟돈", "곡과 마곡",
+        "칠년환난", "대환난", "이스라엘 환난", "이스라엘의 환난",
+        "인봉", "나팔 심판", "대접 심판",
+    ]
+
+    private static func isProphecyQuery(_ query: String) -> Bool {
+        if prophecyTriggerWords.contains(where: { query.contains($0) }) { return true }
+        return prophecyTopicNouns.contains(where: { query.contains($0) })
+    }
+
+    // MARK: - 4) 주제·속성·교리·유명 본문 (THEME_OR_ATTRIBUTE)
+    //
+    // 세 가지 신호 중 하나라도 있으면 이 카테고리다:
+    // (a) 이름 붙은 본문(named_passage)을 직접 언급 — 초안 예시 목록이라 데이터를
+    //     채우면서 보강해야 한다.
+    // (b) "~에 대한/관한 말씀·구절"류 꼬리표.
+    // (c) "(주제)+의+(추상명사)" 구조 — 방법/중요성/의미/이유/목적/역할/모습/내용/
+    //     특징/속성/성품/본질/정의라는 질문 형태를 나타내는 닫힌 명사 집합에 기댄다.
+    //     주제어 목록은 끝이 없어 나열식으로는 회수율 구멍이 생기지만, "주제 + 이
+    //     추상명사" 문형은 주제 수와 상관없이 걸린다.
+
+    private static let namedPassages: [String] = [
+        "가상칠언", "팔복", "주기도문", "십계명", "사도신경",
+    ]
+
+    /// "에 대하여"/"에 관하여"는 `Themes` 시드 데이터 제목이 전부 "OOO에 대하여"
+    /// 형식이라 그 표현과 일치시키기 위해 포함한다.
+    private static let topicSuffixPhrases: [String] = [
+        "이라는 말씀", "라는 말씀", "하는 말씀", "에 대한 말씀", "에 관한 말씀",
+        "이라는 구절", "라는 구절", "하는 구절", "에 대한 구절", "에 관한 구절",
+        "라는 뜻", "이라는 뜻", "에 대하여", "에 관하여",
+    ]
+
+    private static let abstractQuestionNouns: [String] = [
+        "방법", "중요성", "의미", "이유", "목적", "역할", "모습", "내용",
+        "특징", "속성", "성품", "본질", "정의",
+    ]
+
+    private static func isThemeOrAttributeQuery(_ query: String) -> Bool {
+        if namedPassages.contains(where: { query.contains($0) }) { return true }
+        if topicSuffixPhrases.contains(where: { query.contains($0) }) { return true }
+        return containsPossessiveAbstractNoun(query, nouns: abstractQuestionNouns)
+    }
+
+    /// "(주제)의 (명사)" 구조 — 띄어쓴 경우("기도의 방법")와 붙여쓴 경우("기도의방법")를
+    /// 모두 잡는다(검색창 입력에서는 붙여쓰기도 흔하다).
+    private static func containsPossessiveAbstractNoun(_ query: String, nouns: [String]) -> Bool {
+        nouns.contains { noun in
+            query.contains("의 \(noun)") || query.contains("의\(noun)")
+        }
+    }
+
+    // MARK: - 5) 내용 추적·서사 (NARRATIVE)
+    //
+    // ⚠️ 보류된 카테고리다. 핵심 요구사항 — 조회 결과를 관련성 순이 아니라 서사 안
+    // 사건 순서(`sequence_order`)로 반환 — 은 `ReferenceDataStore.timelineEvents
+    // (narrativeMentionedIn:)`에 구현돼 있다(narrative_key로 묶어 sequence_order
+    // ASC 정렬, 일부 행만 매칭돼도 같은 서사의 나머지 행까지 반환).
+    //
+    // 아래 트리거 어휘 목록은 자리만 잡아 둔 초안이고, 다섯 카테고리 중 실제 질의로
+    // 가장 적게 검증됐다.
+
+    private static let narrativeTriggers: [String] = [
+        "여정", "전도여행", "순서대로", "어떤 순서로", "몇 번째", "과정에서", "흐름",
+    ]
+
+    private static func isNarrativeQuery(_ query: String) -> Bool {
+        narrativeTriggers.contains(where: { query.contains($0) })
+    }
+}

@@ -29,6 +29,27 @@ struct RelationDisplayItem {
     /// 행을 눌렀을 때 관계 상세 대신 이 인물의 상세를 열기 위한 값이다. 비어 있으면 호출부는 관계 상세로 폴백한다.
     var answerWord: String = ""
     var answerIdx: String = ""
+    /// [2026-10-28 8차] 이 행의 질의 인물 쪽(X — "갓은 야곱의 아들"에서 야곱) 이름과 `Persons.idx`(행에 적힌 값, 모르면 빈 문자열).
+    /// 행을 만드는 곳마다 답의 반대쪽을 직접 넣는다(이름으로 추측하지 않는다). 답을 X 인물별로 나누는 데만 쓴다(`groupedRelationAnswers`).
+    var ownerWord: String = ""
+    var ownerIdx: String = ""
+    /// [8차] 값이 있으면 이 행은 답이 아니라 묶음 머리 줄이다(`relation`은 자리 채움용 빈 행, `verseRefs`는 빈 배열).
+    var groupHeader: RelationAnswerGroupHeader? = nil
+}
+
+/// [2026-10-28 8차] 관계 카드에서 X에 해당하는 인물이 둘 이상 답을 가질 때 그 인물별 묶음의 머리 줄.
+struct RelationAnswerGroupHeader {
+    /// 묶음 인물의 `Persons.idx`. 빈 문자열이면 "기타" 묶음(어느 인물의 답인지 정할 수 없는 줄) — 눌러도 상세가 없다.
+    let personIdx: String
+    /// 묶음 인물의 대표 이름(`Persons.word`, 한국어). 상세를 열 때 `PersonDetailView.resolvePerson(named:idx:)`에 넘긴다.
+    let personWord: String
+    /// 화면 제목. 인물 묶음은 앱 언어 이름(`PersonEntity.displayWord`)이고, 질의의 X가 그 인물의 대표 이름이 아니면(별칭·칭호 꼴로
+    /// 찾은 경우) 뒤에 " (X)"를 붙인다 — X는 별칭이면 `Persons.word2`에 적힌 표기, 칭호 꼴이면 질의에 입력된 표기(예: "세스바살 (스룹바벨)",
+    /// "예수 (주 예수 그리스도)"). "기타" 묶음이면 번역된 "기타".
+    let title: String
+    /// 화면 부제. 호칭(`PersonEntity.displayCallTitle`). 호칭이 비고 같은 제목의 머리가 둘 이상이면(동명이인) 그 인물의 첫 등장 구절
+    /// ("약칭 장:절", `firstAppearanceReference`), 구절을 얻지 못하면 빈 문자열. "기타" 묶음은 빈 문자열.
+    let subtitle: String
 }
 
 /// `QueryIntentCard.Content.entityProfile`의 항목 하나 — 인물 또는 장소.
@@ -109,7 +130,7 @@ extension QueryIntentCard {
             return 0
         case .found(let content):
             switch content {
-            case .relation(let items): return items.count
+            case .relation(let items): return items.filter { $0.groupHeader == nil }.count  // [8차] 묶음 머리 줄은 세지 않는다
             case .personProfile(let items): return items.count
             case .entityProfile(let items): return items.count
             case .prophecy(let items): return items.count
@@ -187,7 +208,18 @@ enum QueryIntentHandler {
         switch intent {
         case .relation:
             guard !isUnshapedRelationQuery else { return nil }
-            return handleRelation(query, store: store)
+            // [2026-10-22 4차] X가 인물이 아니면("하나님의 아들", "사람의 아들", "믿음의 아들") 관계 카드(안내 카드 포함)를 내지 않는다
+            // (사용자 확정). X가 인물인지는 관계 경로가 찾는 이름과 같은 범위로 본다(`ReferenceDataStore.isRelationPersonName` —
+            // Persons 대표 이름·별칭 + 관계 행 이름). X가 여럿이면 하나라도 인물이면 된다.
+            let owners = QueryIntentClassifier.koreanRelationShapeNames(query) ?? []
+            // [8차] "예수 그리스도"·"예수그리스도"·"주 예수 그리스도"(`relationOwnerTitleIdxs`)도 인물 X로 본다(사용자 확정 — 예수#2641).
+            guard owners.contains(where: { (try? store.isRelationPersonName($0)) == true })
+                    || !relationOwnerTitleIdxs(Set(owners), store: store).isEmpty else { return nil }
+            // [2026-10-27 6차] 답 순서 = 답 인물의 성경 첫 등장 순(사용자 확정). 관계 답을 내는 모든 경로(형/동생·형제·삼촌·조카·
+            // 동역자 포함)가 `handleRelation` 하나를 지나고, 번역 관계 질의도 이 함수를 다시 타므로 여기 한 곳에서 정렬한다.
+            // [7차] 같은 답 인물이 두 줄(부모 쪽 행과 자녀 쪽 행, 이름 행과 idx 행 등)이면 한 줄로 줄인 뒤 정렬한다.
+            // [8차] X에 해당하는 인물이 둘 이상 답을 가지면 그 인물별 묶음으로 나눈다(묶음마다 위 정리·정렬). 하나뿐이면 7차와 같다.
+            return groupedRelationAnswers(handleRelation(query, store: store), ownerNames: Set(owners), query: query, store: store)
         case .prophecy:
             guard QueryIntentClassifier.isWholeQueryTriggerTerm(query, for: .prophecy) else { return nil }
             return handleProphecy(query, store: store)
@@ -247,6 +279,8 @@ enum QueryIntentHandler {
         ("brother", "형제"), ("brothers", "형제"), ("sister", "자매"), ("sisters", "자매"),
         ("grandson", "손자"), ("grandsons", "손자"), ("granddaughter", "손녀"), ("granddaughters", "손녀"),
         ("grandfather", "할아버지"), ("grandmother", "할머니"),
+        // [2026-10-22 4차] 삼촌(한국어 경로의 `.uncle` — 삼촌/숙부/백부/외삼촌을 구분하지 않는다).
+        ("uncle", "삼촌"), ("uncles", "삼촌"),
     ]
     private static let spanishRelationWords: [(word: String, korean: String)] = [
         ("hijo", "아들"), ("hijos", "아들"), ("hija", "딸"), ("hijas", "딸"),
@@ -255,10 +289,14 @@ enum QueryIntentHandler {
         ("hermano", "형제"), ("hermanos", "형제"), ("hermana", "자매"), ("hermanas", "자매"),
         ("nieto", "손자"), ("nietos", "손자"), ("nieta", "손녀"), ("nietas", "손녀"),
         ("abuelo", "할아버지"), ("abuela", "할머니"),
+        // [2026-10-22 4차] "tío(s)" — 비교는 발음 구별 기호를 뗀 질의(`foldForNameSearch`)라 "tio(s)"로 적는다.
+        ("tio", "삼촌"), ("tios", "삼촌"),
     ]
     private static let chineseRelationWords: [(word: String, korean: String)] = [
         ("儿子", "아들"), ("女儿", "딸"), ("父亲", "아버지"), ("母亲", "어머니"), ("妻子", "아내"), ("丈夫", "남편"),
         ("兄弟", "형제"), ("姐妹", "자매"), ("孙子", "손자"), ("孙女", "손녀"), ("祖父", "할아버지"), ("祖母", "할머니"),
+        // [2026-10-22 4차] 叔叔(숙부)·伯父(백부)·舅舅(외삼촌) → 삼촌.
+        ("叔叔", "삼촌"), ("伯父", "삼촌"), ("舅舅", "삼촌"),
     ]
     /// 영어 소유격 꼬리 — iOS 기본 키보드는 "스마트 구두점"으로 '를 ’로 바꿔 넣으므로 둘 다 받는다. "'s"를 "'"보다 먼저 본다.
     private static let englishPossessiveSuffixes = ["'s", "’s", "'", "’"]
@@ -268,6 +306,9 @@ enum QueryIntentHandler {
     ///  - en: "<rel> of X", "X's <rel>", "X' <rel>"
     ///  - es: "<rel> de X"
     ///  - zh: "X的<rel>"(공백 무시)
+    ///  - [2026-10-28 9차] fr/de/ru는 아직 그 언어 관계어 목록이 없어 `default`(en 꼴)를 그대로 탄다 — "sons of Noé"처럼 영어
+    ///    관계어 + 그 언어 이름이면 걸리고, "fils de Noé"·"Söhne Noahs"·"сыновья Ноя"는 관계 꼴로 보지 않는다(이름 그대로 판정으로 넘어감).
+    ///    9차 이전에는 이 언어들이 "en" 데이터를 썼으므로 영어 관계어 꼴은 그때와 같게 받는다.
     private static func translatedRelationQuery(_ query: String, language: String) -> (name: String, koreanRelationWord: String)? {
         let folded = ReferenceDataStore.foldForNameSearch(query)
         func nonEmpty(_ text: Substring) -> String? {
@@ -310,6 +351,7 @@ enum QueryIntentHandler {
     ///  - 한국어 이름이 여러 개면(예: en "Zechariah" → 사가랴/스가리야/스가랴) 쉼표로 이어 한 질의("사가랴, 스가리야, 스가랴의 아들")로
     ///    만든다. 한국어 경로가 여러 인물이 든 질의를 다루는 방식 그대로 — 관계 타입이 맞는 행을 모든 이름에서 먼저 모으고, 하나도 없을 때만
     ///    "관계 타입 미지정 폴백"으로 간다. 이름마다 따로 돌려 합치면 한 이름의 폴백 행(예: 스가리야의 신하 관계)이 다른 이름의 아들 행과 섞인다.
+    ///    ([2026-10-27 5차] 폴백은 없어지고 그 자리는 안내 카드다. 여러 이름을 한 질의로 묶는 방식은 그대로다.)
     ///  - X에 해당하는 인물이 없으면 nil(호출부가 이름 그대로 판정으로 넘어간다).
     private static func handleTranslatedRelation(
         name: String, koreanRelationWord: String, store: ReferenceDataStore
@@ -386,18 +428,20 @@ enum QueryIntentHandler {
 
         let persons = (try? store.persons(mentionedIn: trimmed)) ?? []
         func compact(_ text: String) -> String { text.filter { !$0.isWhitespace } }
-        let placeNames = places.map { compact($0.word) }
+        // [2026-10-28 8차] 지명이 별칭(`Places.word2`)으로 걸렸으면 걸린 별칭으로 판정한다(인물 `matchedAlias`와 같은 방식) —
+        // "아벨므흘라" 질의가 대표 이름 "아벨므홀라"로는 이름만 남는지 판정할 수 없다. 카드 제목은 대표 이름 그대로다.
+        let placeNames = places.map { compact($0.matchedAlias ?? $0.word) }
         let personNames = persons.map { compact($0.matchedAlias ?? $0.word) }
         let keptPersons = persons.filter { person in
             let name = compact(person.matchedAlias ?? person.word)
             return !placeNames.contains { $0.count > name.count && $0.contains(name) }
         }
         let keptPlaces = places.filter { place in
-            let name = compact(place.word)
+            let name = compact(place.matchedAlias ?? place.word)
             return !personNames.contains { $0.count > name.count && $0.contains(name) }
         }
         guard !keptPlaces.isEmpty else { return nil }
-        let keptNames = keptPlaces.map { $0.word } + keptPersons.map { $0.matchedAlias ?? $0.word }
+        let keptNames = keptPlaces.map { $0.matchedAlias ?? $0.word } + keptPersons.map { $0.matchedAlias ?? $0.word }
         guard isKoreanNameOnlyQuery(trimmed, names: keptNames) else { return nil }
 
         let items = keptPersons.map(ProfileItem.person) + keptPlaces.map(ProfileItem.place)
@@ -451,6 +495,8 @@ enum QueryIntentHandler {
     ///    "예수"/"그리스도"가 들어 있어야 한다(`isTwelveDisciplesQuery`의 기존 조건과 같다 — "주님의 제자"는 예전에도 아니었다).
     /// 예: "예수님의 열두 제자", "예수 그리스도의 열두 제자들", "예수님의 제자" → true.
     /// "예수님의 열두 제자는 누구인가요?", "열두 제자의 이름", "제자" → false.
+    /// [2026-10-22 4차] "의"는 없어도 된다("예수님 열두 제자", "주 예수 열두 제자"). 주인 목록에 "주" 붙은 꼴을 더했다
+    /// ("주 예수 그리스도의 열두 제자" 등, `twelveDisciplesOwners`). 문장 꼬리("…는 누구인가요?")는 그대로 false다.
     static func isTwelveDisciplesNounPhrase(_ query: String) -> Bool {
         var body = QueryIntentClassifier.trimmingTrailingQueryPunctuation(query)
             .precomposedStringWithCanonicalMapping
@@ -465,14 +511,17 @@ enum QueryIntentHandler {
             break
         }
         if body.isEmpty { return mentionsTwelve }
-        guard body.hasSuffix("의") else { return false }
-        body.removeLast()
+        if body.hasSuffix("의") { body.removeLast() }
         guard twelveDisciplesOwners.contains(body) else { return false }
         return mentionsTwelve || body.contains("예수") || body.contains("그리스도")
     }
 
-    /// `isTwelveDisciplesNounPhrase`가 받는 "<주인>의 …제자"의 주인(공백 뺀 꼴). `isTwelveDisciplesQuery`의 주인 목록 + "예수그리스도".
-    private static let twelveDisciplesOwners: Set<String> = ["예수", "예수님", "그리스도", "그리스도님", "주님", "예수그리스도"]
+    /// `isTwelveDisciplesNounPhrase`가 받는 "<주인>[의] …제자"의 주인(공백 뺀 꼴). `isTwelveDisciplesQuery`의 주인 목록 + "예수그리스도".
+    /// [2026-10-22 4차] "주" 붙은 꼴: 주예수, 주예수님, 주그리스도, 주예수그리스도("주주님"·"주그리스도님"은 넣지 않았다).
+    private static let twelveDisciplesOwners: Set<String> = [
+        "예수", "예수님", "그리스도", "그리스도님", "주님", "예수그리스도",
+        "주예수", "주예수님", "주그리스도", "주예수그리스도",
+    ]
 
     /// 열두 제자 그룹 카드 — 멤버 12명을 `person(idx:)`로 확정해 인물 카드 목록(`.personProfile`)으로 보여준다.
     /// 그룹 데이터가 없거나 질의가 해당하지 않으면 nil(일반 흐름으로 계속).
@@ -487,7 +536,6 @@ enum QueryIntentHandler {
         return QueryIntentCard(intent: .personProfile, status: .found(.personProfile(members)))
     }
 
-    /// 관계 행에서 `answer`(source 또는 target 이름)에 해당하는 쪽의 `Persons.idx`. 어느 쪽도 아니면 빈 문자열.
     /// 답 인물의 성경 좌표. `idx`가 확정돼 있으면 그 인물 것만 쓴다 — 이름만으로 `personOrPlace(exactWord:)`를 부르면
     /// 동명이인(야고보·요한 등) 중 임의의 한 명(`LIMIT 1`)의 구절이 붙는다(2026-10-21). idx가 없거나 못 찾으면 기존 방식 그대로다.
     private static func answerVerseRefs(word: String, idx: String, store: ReferenceDataStore) -> [BibleVerseRef] {
@@ -497,141 +545,560 @@ enum QueryIntentHandler {
         return (try? store.personOrPlace(exactWord: word))?.verseRefs ?? []
     }
 
-    private static func answerIdx(of answer: String, in relation: PersonRelationRecord) -> String {
-        if answer == relation.sourceWord { return relation.sourceIdx }
-        if answer == relation.targetWord { return relation.targetIdx }
-        return ""
+    /// [2026-10-27 6차] 관계 카드의 답 목록을 답 인물(`answerIdx`, 없으면 `answerWord`가 Persons에서 유일할 때)의 성경 첫 등장 순으로
+    /// 정렬한다(`ReferenceDataStore.sortedByFirstAppearance` — 모르는 답은 뒤, 같으면 원래 순서). 안내 카드 등 답 목록이 아닌 카드는 그대로.
+    /// [8차] 카드 대신 답 목록을 받는다(묶음마다 따로 부르려고). 내용은 7차와 같다 — 답 1개 이하는 그대로.
+    private static func sortedRelationItems(_ items: [RelationDisplayItem], store: ReferenceDataStore) -> [RelationDisplayItem] {
+        guard items.count > 1 else { return items }
+        return store.sortedByFirstAppearance(items, idx: { $0.answerIdx }, word: { $0.answerWord })
+    }
+
+    /// [2026-10-28 8차] "X의 <관계어>" 답을 X 인물(행의 X 쪽 idx)별 묶음으로 나눈다(사용자 확정). 모든 관계어에 같은 규칙이다.
+    ///  - 각 줄의 X 인물: 행에 적힌 `ownerIdx`. 비었으면 X 이름이 Persons에서 한 명뿐일 때만 그 사람(`uniquePersonIdx` — 7차 같은 답
+    ///    정리와 같은 신원 규칙). 동명이인이면 정하지 않는다(추측 금지). Persons에 없는 idx도 머리를 만들 수 없어 정하지 않은 줄로 본다.
+    ///  - X 인물이 정해진 줄의 인물이 둘 미만이면 7차와 똑같이 한 목록(같은 답 정리 → 첫 등장 순, 머리 없음)이다.
+    ///  - 둘 이상이면: 인물이 정해지지 않은 줄은, 같은 답 인물(답 idx, 없으면 답 이름이 Persons에서 유일할 때 그 idx, 그것도 아니면
+    ///    답 이름)을 가진 묶음이 있으면 그 묶음 모두에 넣고(묶음 안 같은 답 정리가 7차 규칙으로 한 줄을 고른다), 없으면 마지막 "기타" 묶음에 둔다.
+    ///  - 묶음 순서: 묶음 인물의 성경 첫 등장 순(`sortedByFirstAppearance` — 모르면 뒤, 같으면 처음 나온 순). "기타"는 맨 뒤.
+    ///  - 묶음 안: 7차 규칙 그대로(`dedupedRelationItems` → `sortedRelationItems`). 같은 답 인물이 두 묶음에 있으면 묶음마다 한 줄씩 남는다
+    ///    (서로 다른 X 인물에 대한 다른 사실이라 합치지 않는다).
+    ///  - 각 묶음 앞에 머리 줄(`RelationDisplayItem.groupHeader`)을 넣는다 — 이름(`displayWord`)과 호칭(`displayCallTitle`).
+    /// DB 조회: 이름·idx마다 한 번(사전). `person(idx:)`는 X 인물이 둘 이상일 때만 그 인물 수만큼 부른다.
+    ///  - [8차 검토 반영] 머리 제목: 질의의 X가 그 인물의 대표 이름이 아니면(별칭·칭호 꼴로 찾은 경우) "대표 이름 (X)"(예: "세스바살 (스룹바벨)").
+    ///    부제는 호칭. 제목이 같고 호칭이 빈 머리가 둘 이상이면(동명이인) 그 머리들의 부제에 첫 등장 구절(예: "창 46:21")을 넣는다.
+    /// - Parameter ownerNames: 질의의 X 이름들(공백 뺀 꼴, `koreanRelationShapeNames`).
+    /// - Parameter query: 원래 질의 — 칭호 꼴 X의 입력 표기(공백 포함)를 머리 제목에 그대로 쓰려고 받는다.
+    private static func groupedRelationAnswers(
+        _ card: QueryIntentCard, ownerNames: Set<String>, query: String, store: ReferenceDataStore
+    ) -> QueryIntentCard {
+        guard case .found(.relation(let items)) = card.status else { return card }
+        func flat(_ rows: [RelationDisplayItem]) -> [RelationDisplayItem] {
+            sortedRelationItems(dedupedRelationItems(rows, store: store), store: store)
+        }
+        let intent = card.intent
+        func makeCard(_ rows: [RelationDisplayItem]) -> QueryIntentCard {
+            QueryIntentCard(intent: intent, status: .found(.relation(rows)))
+        }
+        guard items.count > 1 else { return makeCard(flat(items)) }
+
+        var uniqueIdxByWord: [String: String] = [:]
+        func uniqueIdx(_ word: String) -> String {
+            if let cached = uniqueIdxByWord[word] { return cached }
+            let idx = (try? store.uniquePersonIdx(word: word)) ?? ""
+            uniqueIdxByWord[word] = idx
+            return idx
+        }
+        // 1차: 행 값(없으면 유일한 이름)으로 정한 X 인물. 둘 미만이면 Persons를 더 읽지 않고 7차와 같은 한 목록.
+        let candidateOwners = items.map { $0.ownerIdx.isEmpty ? uniqueIdx($0.ownerWord) : $0.ownerIdx }
+        var distinctCandidates = Set<String>()
+        for owner in candidateOwners where !owner.isEmpty { distinctCandidates.insert(owner) }
+        guard distinctCandidates.count > 1 else { return makeCard(flat(items)) }
+
+        // 2차: 머리를 만들 수 있는(Persons에 있는) 인물만 묶음 인물로 본다.
+        var headerByIdx: [String: RelationAnswerGroupHeader] = [:]
+        func compact(_ text: String) -> String { text.precomposedStringWithCanonicalMapping.filter { !$0.isWhitespace } }
+        let compactOwnerNames = Set(ownerNames.map(compact))
+        for idx in distinctCandidates {
+            guard let person = try? store.person(idx: idx) else { continue }
+            // 질의의 X가 대표 이름이면 그대로, 아니면 이 인물을 가리킨 X(별칭 또는 칭호 꼴 — 질의에 적힌 꼴, 공백 뺀 꼴)를 괄호로 붙인다.
+            var title = person.displayWord
+            if !compactOwnerNames.contains(compact(person.word)) {
+                // 별칭은 `Persons.word2`에 적힌 표기 그대로(앞뒤 공백만 뺀 값), 칭호 꼴은 질의 속 입력 표기(못 찾으면 공백 뺀 꼴).
+                let viaAlias = person.aliases.filter { compactOwnerNames.contains(compact($0)) }
+                let viaTitle = relationOwnerTitleForms
+                    .filter { $0.value.idx == idx && compactOwnerNames.contains($0.key) }
+                    .map { $0.key }
+                    .sorted()
+                    .map { originalSpelling(ofCompact: $0, in: query) ?? $0 }
+                let aliasKeys = Set(viaAlias.map(compact))
+                let names = viaAlias + viaTitle.filter { !aliasKeys.contains(compact($0)) }
+                if !names.isEmpty { title = "\(title) (\(names.joined(separator: ", ")))" }
+            }
+            headerByIdx[idx] = RelationAnswerGroupHeader(
+                personIdx: idx, personWord: person.word, title: title, subtitle: person.displayCallTitle
+            )
+        }
+        // 제목이 같고 호칭이 빈 머리(동명이인)는 부제에 첫 등장 구절을 넣어 구별한다(`firstAppearanceOrder` — 정경 순 첫 절).
+        var headerCountByTitle: [String: Int] = [:]
+        for header in headerByIdx.values where header.subtitle.isEmpty { headerCountByTitle[header.title, default: 0] += 1 }
+        for (idx, header) in headerByIdx where header.subtitle.isEmpty && (headerCountByTitle[header.title] ?? 0) > 1 {
+            guard let reference = firstAppearanceReference(idx: idx, store: store) else { continue }
+            headerByIdx[idx] = RelationAnswerGroupHeader(
+                personIdx: header.personIdx, personWord: header.personWord, title: header.title, subtitle: reference
+            )
+        }
+        let owners = candidateOwners.map { headerByIdx[$0] == nil ? "" : $0 }
+        var groupOrder: [String] = []
+        for owner in owners where !owner.isEmpty && !groupOrder.contains(owner) { groupOrder.append(owner) }
+        guard groupOrder.count > 1 else { return makeCard(flat(items)) }
+
+        func answerKey(_ item: RelationDisplayItem) -> String {
+            let idx = item.answerIdx.isEmpty ? uniqueIdx(item.answerWord) : item.answerIdx
+            return idx.isEmpty ? "w:\(item.answerWord)" : "#\(idx)"
+        }
+        var rowsByOwner: [String: [RelationDisplayItem]] = [:]
+        var answerKeysByOwner: [String: Set<String>] = [:]
+        for (item, owner) in zip(items, owners) where !owner.isEmpty {
+            rowsByOwner[owner, default: []].append(item)
+            answerKeysByOwner[owner, default: []].insert(answerKey(item))
+        }
+        var otherRows: [RelationDisplayItem] = []
+        for (item, owner) in zip(items, owners) where owner.isEmpty {
+            let key = answerKey(item)
+            let matching = item.answerWord.isEmpty ? [] : groupOrder.filter { answerKeysByOwner[$0]?.contains(key) == true }
+            if matching.isEmpty {
+                otherRows.append(item)
+            } else {
+                for target in matching { rowsByOwner[target, default: []].append(item) }
+            }
+        }
+
+        var result: [RelationDisplayItem] = []
+        for owner in store.sortedByFirstAppearance(groupOrder, idx: { $0 }, word: { _ in "" }) {
+            guard let header = headerByIdx[owner] else { continue }
+            result.append(groupHeaderItem(header))
+            result.append(contentsOf: flat(rowsByOwner[owner] ?? []))
+        }
+        if !otherRows.isEmpty {
+            result.append(groupHeaderItem(RelationAnswerGroupHeader(
+                personIdx: "", personWord: "", title: String(localized: "기타"), subtitle: ""
+            )))
+            result.append(contentsOf: flat(otherRows))
+        }
+        return makeCard(result)
+    }
+
+    /// [8차 최종 검토 반영] 질의 안에서 공백을 뺀 꼴이 `compactName`과 같은 첫 구간의 원래 표기(앞뒤 공백 제외). 없으면 nil.
+    /// 예: ("주예수그리스도", "주 예수 그리스도의 어머니") → "주 예수 그리스도". 비교는 NFC. 질의 길이 n에 대해 O(n·m)(m = 이름 길이).
+    private static func originalSpelling(ofCompact compactName: String, in query: String) -> String? {
+        let target = Array(compactName.precomposedStringWithCanonicalMapping)
+        let characters = Array(query.precomposedStringWithCanonicalMapping)
+        guard !target.isEmpty else { return nil }
+        for start in characters.indices where !characters[start].isWhitespace && characters[start] == target[0] {
+            var matched = 0
+            var index = start
+            while index < characters.count, matched < target.count {
+                let character = characters[index]
+                if !character.isWhitespace {
+                    guard character == target[matched] else { break }
+                    matched += 1
+                }
+                index += 1
+            }
+            if matched == target.count {
+                return String(characters[start..<index]).trimmingCharacters(in: .whitespaces)
+            }
+        }
+        return nil
+    }
+
+    /// [8차 검토 반영] 인물의 첫 등장 절(`Persons.first_appearance_order` = ((책*1000+장)*1000+절)*10000+위치)을 "약칭 장:절"로 —
+    /// 책 약칭은 앱 언어(`displayShortName`, 그룹 순서 근거 라벨과 같은 방식). 키가 없거나 책을 못 찾으면 nil.
+    private static func firstAppearanceReference(idx: String, store: ReferenceDataStore) -> String? {
+        guard let key = store.firstAppearanceOrder(idx: idx, word: ""), key > 0 else { return nil }
+        let verseKey = key / 10_000
+        let verse = Int(verseKey % 1_000)
+        let chapter = Int((verseKey / 1_000) % 1_000)
+        let bookId = Int(verseKey / 1_000_000)
+        guard verse > 0, chapter > 0, let book = BooksProvider.shared.book(id: bookId) else { return nil }
+        return "\(book.displayShortName) \(chapter):\(verse)"
+    }
+
+    /// [8차] 묶음 머리 줄. `relation`은 자리 채움용(화면은 `groupHeader`만 본다 — 관계 문장·관계 상세로 쓰이지 않는다).
+    private static func groupHeaderItem(_ header: RelationAnswerGroupHeader) -> RelationDisplayItem {
+        RelationDisplayItem(
+            relation: PersonRelationRecord(
+                sourceWord: header.personWord, relationType: "", targetWord: "", targetKind: nil, rawSentence: "",
+                targetIdx: "", sourceIdx: header.personIdx
+            ),
+            verseRefs: [],
+            groupHeader: header
+        )
+    }
+
+    /// [2026-10-28 7차] 관계 행 중복 키 — 이름과 idx 모두(`이름#idx|타입|이름#idx`). idx가 빈 행은 같은 이름의 빈 idx 행과만 같다.
+    private static func relationRowKey(_ relation: PersonRelationRecord) -> String {
+        "\(relation.sourceWord)#\(relation.sourceIdx)|\(relation.relationType)|\(relation.targetWord)#\(relation.targetIdx)"
+    }
+
+    /// [2026-10-28 7차] 관계 카드에서 같은 답 인물을 한 줄로 줄인다(사용자 확정).
+    /// 같은 인물 판정: 답 `answerIdx`가 있으면 그 idx. 없으면 답 이름이 Persons에서 한 명뿐일 때만 그 사람(`uniquePersonIdx` —
+    /// `personGender`·첫 등장 순과 같은 신원 규칙, 동명이인이면 추측하지 않고 이름 그대로 둔다).
+    /// 남는 줄은 그 인물이 처음 나온 자리에 놓이고, 문장은 아래 순서로 고른다.
+    ///  1) 답 이름이 그 인물의 대표 이름(`Persons.word`)인 줄(예: 세스바살·스룹바벨 = #1586 → 세스바살).
+    ///  2) 행에 답 idx가 적힌 줄(같은 이름의 idx 없는 줄보다 먼저).
+    ///  3) 답이 주어인 줄(답이 행의 source — 이름과 idx 모두 같을 때. 예: "X의 부모"에서 자녀 쪽 "X는 A의 아들"보다 부모 쪽
+    ///     "A는 X의 아버지").
+    ///  4) 그래도 같으면 먼저 나온 줄.
+    /// 답 이름이 빈 줄은 줄이지 않는다. 안내 카드·답 1개는 그대로. DB 조회는 이름·idx마다 한 번(사전에 둠).
+    /// 동명이인 X를 함께 찾은 경우(예: 시므앗이 사밧#3646과 여호사바드#2606의 어머니) 답 인물이 같으면 한 줄이 된다.
+    /// [8차] 카드 대신 답 목록을 받는다(`groupedRelationAnswers`가 묶음마다 부른다). 규칙은 7차와 같다. X 인물이 둘 이상 답을 가져
+    /// 묶음으로 나뉘면 이 정리는 묶음 안에서만 한다 — 위 시므앗 예는 이제 사밧·여호사바드 묶음에 한 줄씩이다.
+    private static func dedupedRelationItems(_ items: [RelationDisplayItem], store: ReferenceDataStore) -> [RelationDisplayItem] {
+        guard items.count > 1 else { return items }
+        var representativeWords: [String: String] = [:]
+        func representativeWord(_ idx: String) -> String {
+            if let cached = representativeWords[idx] { return cached }
+            let word = (try? store.personWord(idx: idx)) ?? ""
+            representativeWords[idx] = word
+            return word
+        }
+        var uniqueIdxByWord: [String: String] = [:]
+        func identityIdx(_ item: RelationDisplayItem) -> String {
+            if !item.answerIdx.isEmpty { return item.answerIdx }
+            if let cached = uniqueIdxByWord[item.answerWord] { return cached }
+            let idx = (try? store.uniquePersonIdx(word: item.answerWord)) ?? ""
+            uniqueIdxByWord[item.answerWord] = idx
+            return idx
+        }
+        func compact(_ text: String) -> String { text.filter { !$0.isWhitespace } }
+        /// (대표 이름, 행에 idx, 답이 주어) — 사전식으로 큰 쪽이 남는다.
+        func rank(_ item: RelationDisplayItem) -> (Int, Int, Int) {
+            let identity = identityIdx(item)
+            let isRepresentative = !identity.isEmpty && compact(item.answerWord) == compact(representativeWord(identity))
+            let isSubject = item.answerWord == item.relation.sourceWord && item.answerIdx == item.relation.sourceIdx
+            return (isRepresentative ? 1 : 0, item.answerIdx.isEmpty ? 0 : 1, isSubject ? 1 : 0)
+        }
+        var result: [RelationDisplayItem] = []
+        var positionByKey: [String: Int] = [:]
+        for item in items {
+            guard !item.answerWord.isEmpty else {
+                result.append(item)
+                continue
+            }
+            let identity = identityIdx(item)
+            let key = identity.isEmpty ? "w:\(item.answerWord)" : "#\(identity)"
+            if let position = positionByKey[key] {
+                if rank(item) > rank(result[position]) { result[position] = item }
+            } else {
+                positionByKey[key] = result.count
+                result.append(item)
+            }
+        }
+        // 줄을 바꾸는 일은 같은 인물이 두 번 나올 때만 생기므로 줄 수가 같으면 결과는 입력 그대로다.
+        return result
     }
 
     // MARK: - 관계
+
+    /// [2026-10-28 8차, 사용자 확정] "X의 <관계어>"의 X(공백 뺀 꼴)가 아래 키와 같으면 그 인물로 확정한다. 키는 두 개다 —
+    /// "예수그리스도"("예수 그리스도"·"예수그리스도")와 "주예수그리스도"("주 예수 그리스도"). 둘 다 예수#2641.
+    /// "예수" 단독은 여기 없다 — 보통 이름 규칙(대표 이름·별칭 정확 일치)으로 동명이인 예수 셋을 모두 X로 본다.
+    /// 이 두 키에만 한정한다(부분 이름 일반 규칙은 그대로). idx의 대표 이름(`Persons.word`)이 값의 `word`("예수")가 아니면(DB가 바뀐
+    /// 경우) 쓰지 않는다.
+    private static let relationOwnerTitleForms: [String: (idx: String, word: String)] = [
+        "예수그리스도": (idx: "2641", word: "예수"),
+        "주예수그리스도": (idx: "2641", word: "예수"),
+    ]
+
+    /// `names`(공백 뺀 X 이름) 중 칭호 꼴이 가리키는 인물 idx. 해당 없으면 빈 집합(DB를 읽지 않는다).
+    private static func relationOwnerTitleIdxs(_ names: Set<String>, store: ReferenceDataStore) -> Set<String> {
+        var result = Set<String>()
+        for name in names {
+            let key = name.precomposedStringWithCanonicalMapping.filter { !$0.isWhitespace }
+            guard let form = relationOwnerTitleForms[key],
+                  (try? store.personWord(idx: form.idx)) == form.word else { continue }
+            result.insert(form.idx)
+        }
+        return result
+    }
 
     /// 정방향(질의의 이름이
     /// source, 예: "다윗의 아들")과 역방향(이름이 target으로만 존재, 예: "골리앗의 동생" —
     /// "골리앗"은 Persons에 행이 없음)을 모두 모은다.
     ///
-    /// `detectRelationSubQuery`가 구체적 관계 타입(자녀/부모/아버지/어머니/손자/아내/남편 등)을
-    /// 감지하면 그 타입으로만 필터링하고, 감지되지 않는 관계어는 엔티티 관련 관계 전체를
-    /// 나열하는 폴백으로 처리한다(틀린 답은 아니지만 특정 관계만 골라 보여주진 않는다).
+    /// `detectRelationSubQuery`(질의 부분 문자열)나 `relationSubQuery(forShapeWord:)`("X의 <관계어>"의 관계어)가 정한 관계 타입으로만
+    /// 답한다. [2026-10-27 5차] 행이 없으면 어떤 관계어든 안내 카드("질의한 <라벨> 관계가 등록돼 있지 않습니다")다 — 4차까지 아버지/아들 등
+    /// 일부 관계어에 남아 있던 "관계 타입 미지정 폴백"(그 인물의 관계 전부 나열)은 지웠다(사용자 확정).
     private static func handleRelation(_ query: String, store: ReferenceDataStore) -> QueryIntentCard {
         var combined: [RelationDisplayItem] = []
         var seen = Set<String>()
-        // `answerWord`가 각 행에서 "새로 알게 된 쪽" 이름을 고르고, 그 이름의 verses를 붙인다.
+        func compact(_ text: String) -> String { text.filter { !$0.isWhitespace } }
+        // `answerFromTarget`이 각 행에서 "새로 알게 된 쪽"(false = source, true = target)을 고르고, 그 인물의 verses를 붙인다.
         // 조회에 실패해도 빈 배열이라 관계 표시 자체는 막히지 않는다.
-        func add(_ relations: [PersonRelationRecord], answerWord: (PersonRelationRecord) -> String) {
+        // [7차] 예전에는 답 이름을 받아 `answerIdx(of:in:)`(이름이 source와 같으면 source idx)로 idx를 골랐다. 두 이름이 같은 행
+        // (예: "요셉 -son_of-> 요셉#4345" — 아들 요셉 항목의 아버지 요셉)에서는 target이 답인데 source idx(빈칸)가 붙어, 같은 답의
+        // 한 줄 정리(`dedupedRelationItems`)가 그 줄을 다른 사람으로 보았다. 그래서 쪽을 직접 받는다(그 밖의 행은 결과가 같다).
+        func add(_ relations: [PersonRelationRecord], answerFromTarget: Bool) {
             for relation in relations {
-                let key = "\(relation.sourceWord)|\(relation.relationType)|\(relation.targetWord)"
-                guard seen.insert(key).inserted else { continue }
-                let answer = answerWord(relation)
-                let answerIdx = Self.answerIdx(of: answer, in: relation)
+                // [7차] 키에 idx를 넣는다 — 이름만 쓰면 X idx가 빈(또는 다른) 행이 정확한 idx를 가진 같은 이름 행을 가렸다.
+                // idx가 빈 행은 같은 이름의 빈 idx 행끼리만 걸러진다. 같은 인물의 최종 한 줄은 `dedupedRelationItems`.
+                guard seen.insert(Self.relationRowKey(relation)).inserted else { continue }
+                let answer = answerFromTarget ? relation.targetWord : relation.sourceWord
+                let answerIdx = answerFromTarget ? relation.targetIdx : relation.sourceIdx
                 let verses = Self.answerVerseRefs(word: answer, idx: answerIdx, store: store)
+                // [8차] X 쪽 = 답의 반대쪽(행에 적힌 이름·idx 그대로).
                 combined.append(RelationDisplayItem(
                     relation: relation, verseRefs: verses,
-                    answerWord: answer, answerIdx: answerIdx
+                    answerWord: answer, answerIdx: answerIdx,
+                    ownerWord: answerFromTarget ? relation.sourceWord : relation.targetWord,
+                    ownerIdx: answerFromTarget ? relation.sourceIdx : relation.targetIdx
                 ))
             }
+        }
+        /// 배우자 한 명을 (배우자 → 질의 인물) 방향의 wife_of/husband_of 행으로 정리해 더한다(화면 문장 "A는 B의 아내/남편").
+        func addSpouse(partnerWord: String, partnerIdx: String, ownerWord: String, ownerIdx: String, answerIsWife: Bool) {
+            let record = PersonRelationRecord(
+                sourceWord: partnerWord, relationType: answerIsWife ? "wife_of" : "husband_of",
+                targetWord: ownerWord, targetKind: .person, rawSentence: "",
+                targetIdx: ownerIdx, sourceIdx: partnerIdx
+            )
+            guard seen.insert(Self.relationRowKey(record)).inserted else { return }
+            let verses = Self.answerVerseRefs(word: partnerWord, idx: partnerIdx, store: store)
+            combined.append(RelationDisplayItem(
+                relation: record, verseRefs: verses, answerWord: partnerWord, answerIdx: partnerIdx,
+                ownerWord: ownerWord, ownerIdx: ownerIdx
+            ))
         }
 
         // [2026-10-22 2차] 한 글자 이름("함", "셈", "단")은 부분 문자열 조회(2글자 이상)에서 빠지므로, 질의 전체가 "X의 <관계어>" 꼴일 때
         // X 중 한 글자인 이름만 정확 일치로 더한다("함께"/"판단" 같은 낱말 속 글자에는 걸리지 않는다). 그 밖의 질의는 빈 배열이라 예전과 같다.
-        let shortNames = (QueryIntentClassifier.koreanRelationShapeNames(query) ?? []).filter { $0.count == 1 }
+        let shape = QueryIntentClassifier.koreanRelationShape(query)
+        let shortNames = (shape?.names ?? []).filter { $0.count == 1 }
+        let ownerNames = Set(shape?.names ?? [])
+        // [2026-10-28 8차, 사용자 확정 "X와 이름이 같은 인물만"] X(공백 무시, `word` 또는 `word2` 별칭이 정확히 같은 Persons — 7차
+        // `personIdxs(matchingName:)`)의 idx — idx 조회와 형/동생(`handleSibling`)의 idx 판정에 쓴다(인물 루프는 아래 주석). 예전에는 질의 부분 문자열로
+        // 걸린 인물을 모두 X로 보아 X 이름 안의 다른 인물의 답이 섞였다(두발가인의 어머니 → 가인의 어머니 하와, 바예수의 어머니 → 마리아).
+        // Persons에 없는 X(예: "골리앗#0" 같은 미상)는 관계 행의 이름이 X와 정확히 같을 때만이다(아래 미등록 X 블록·`handleSibling`).
+        // X를 정하는 규칙(질의 꼴, 한 글자 이름 등)은 그대로다. `shape`가 없으면(이 함수에서는 생기지 않는다) 예전처럼 거르지 않는다.
+        var ownerIdxs: [String] = []
+        for name in ownerNames.sorted() {
+            for idx in (try? store.personIdxs(matchingName: name)) ?? [] where !ownerIdxs.contains(idx) {
+                ownerIdxs.append(idx)
+            }
+        }
+        // 인물 루프는 대표 이름(`Persons.word`, 공백 무시)이 X와 같은 인물만 돈다 — 루프는 이름 행(`target_word == entity.word`)으로 찾으므로,
+        // 별칭으로만 X인 인물(예: "가룟 유다"의 유다#4631)을 넣으면 그 대표 이름("유다")의 동명이인 행까지 끌어온다(8차 최종 점검에서 발견).
+        // 별칭·칭호 꼴 X는 아래 idx 조회가 찾는다(7차 별칭 규칙).
+        // [8차, 사용자 확정] X가 "예수 그리스도"·"예수그리스도"·"주 예수 그리스도"(공백 무시)면 예수#2641로 확정한다 — 별칭 X와 같은 규칙
+        // (idx 조회·형/동생의 idx 판정)에 더해, 형제·자매·삼촌·조카·동역자 경로도 행의 X 쪽 idx가 이 인물이면 받는다. 이 세 꼴에만 해당한다.
+        let titleOwnerIdxs = Self.relationOwnerTitleIdxs(ownerNames, store: store)
+        for idx in titleOwnerIdxs.sorted() where !ownerIdxs.contains(idx) { ownerIdxs.append(idx) }
+        let ownerIdxSet = Set(ownerIdxs)
         let entities = (try? store.personsAndPlaces(mentionedIn: query, shortNamesExactMatch: shortNames)) ?? []
-        let personEntities = entities.filter { $0.kind == .person }
+        let personEntities = entities.filter { $0.kind == .person && (ownerNames.isEmpty || ownerNames.contains(compact($0.word))) }
         let reverseRows = (try? store.personRelations(targetWordMentionedIn: query, shortNamesExactMatch: shortNames)) ?? []
 
+        // [2026-10-27 5차] 관계 종류는 "X의 <관계어>"의 관계어 하나로 정한다(질의 전체 부분 문자열이 아니라) — X 이름 속 관계어
+        // ("롯의 작은 딸의 형제"의 "딸")에 걸리지 않게. 4차까지는 이 경우 엉뚱한 타입으로 조회한 뒤 "관계 전부" 폴백이 가려 줬는데,
+        // 폴백을 지우면 "딸 관계가 등록돼 있지 않습니다"가 된다. 기존 관계어는 같은 `detectRelationSubQuery`로 판정하고, 거기 없는
+        // 관계어(조카·며느리·오라비 등)는 `relationSubQuery(forShapeWord:)`. 이 함수는 꼴이 맞는 질의만 받으므로 `shape`는 늘 있다
+        // (없으면 예전처럼 질의 전체로 판정).
+        let relationWord = shape?.word
+        let detected: RelationSubQuery?
+        if let relationWord = relationWord {
+            detected = detectRelationSubQuery(relationWord) ?? relationSubQuery(forShapeWord: relationWord)
+        } else {
+            detected = detectRelationSubQuery(query)
+        }
+
         // "OO의 형/동생/아우" — 방향과 손위·손아래를 구분해야 해서 아래 일반 흐름과 따로 처리한다(`handleSibling` 참고).
-        // 다른 관계 어휘(아들/아버지 등)가 함께 있으면 기존 흐름에 맡긴다.
-        if detectRelationSubQuery(query) == nil, let role = detectSiblingRole(query) {
-            return handleSibling(query, role: role, targetRows: reverseRows, shortNames: shortNames, store: store)
+        if detected == nil, let role = detectSiblingRole(relationWord ?? query) {
+            return handleSibling(
+                query, role: role, targetRows: reverseRows, shortNames: shortNames,
+                ownerNames: ownerNames, ownerIdxs: ownerIdxSet, store: store
+            )
         }
-
-        if let subQuery = detectRelationSubQuery(query), !personEntities.isEmpty {
-            for entity in personEntities {
-                switch subQuery {
-                case .reverseByType(let types):
-                    // 조사로 방향을 가른다: entity 바로 뒤가 "이/가"(주격)면 entity가 source인 정방향
-                    // ("노아가 아버지인 사람" → 셈/함/야벳), 그 외(기본 "의")는 역방향("노아의 아버지는?" →
-                    // 라멕). 아들/딸/손자/아버지/어머니 등 역할이 방향을 가리키는 유형 전부에 같은 이분법이
-                    // 적용된다.
-                    if subjectDirection(for: entity.word, in: query) == true {
-                        let forwardRows = (try? store.personRelations(forWord: entity.word)) ?? []
-                        add(forwardRows.filter { types.contains($0.relationType) },
-                            answerWord: { $0.targetWord })
-                    } else {
-                        // "OO의 아들/딸/자녀는?" — source가 OO의 자녀이므로 target=OO 쪽에서 찾는다(역방향).
-                        // 답은 source.
-                        add(reverseRows.filter { $0.targetWord == entity.word && types.contains($0.relationType) },
-                            answerWord: { $0.sourceWord })
-                    }
-                case .parents:
-                    // "OO의 부모는?" — 부모 항목이 "OO의 아버지/어머니"로 서술된 경우(역방향, 답=source)와
-                    // OO 항목이 "A와 B 사이의 아들/딸"로 서술된 경우(정방향, 답=target)가 모두 있을 수 있어
-                    // 합친다.
-                    add(reverseRows.filter { $0.targetWord == entity.word && ["father_of", "mother_of"].contains($0.relationType) },
-                        answerWord: { $0.sourceWord })
-                    let forwardRows = (try? store.personRelations(forWord: entity.word)) ?? []
-                    add(forwardRows.filter { ["son_of", "daughter_of"].contains($0.relationType) },
-                        answerWord: { $0.targetWord })
-                case .spouse(let answerIsWife):
-                    // 질의의 인물 성별이 질의와 모순이면(예: "미갈의 아내" — 미갈은 여성) 건너뛴다. 성별을 모르면('') 시도한다.
-                    let ownerGender = (try? store.person(idx: entity.idx))?.gender ?? ""
-                    if ownerGender == (answerIsWife ? "여" : "남") { continue }
-
-                    // 배우자 후보: entity가 source인 행(`forWord`)과 target인 행(`reverseRows`)을 모두 본다(일부는 한쪽만 저장돼 있다).
-                    var partners: [(word: String, idx: String)] = []
-                    func addPartner(_ word: String, _ idx: String) {
-                        guard word != entity.word, !partners.contains(where: { $0.word == word }) else { return }
-                        partners.append((word, idx))
-                    }
-                    for row in (try? store.personRelations(forWord: entity.word)) ?? [] where row.relationType == "married_to" {
-                        addPartner(row.targetWord, row.targetIdx)
-                    }
-                    for row in reverseRows where row.relationType == "married_to" && row.targetWord == entity.word {
-                        addPartner(row.sourceWord, "")
-                    }
-                    // 화면 문장이 "A는 B의 아내/남편"으로 읽히도록 항상 (배우자 → 질의 인물) 방향의 wife_of/husband_of 행으로 정리한다.
-                    for partner in partners {
-                        let record = PersonRelationRecord(
-                            sourceWord: partner.word, relationType: answerIsWife ? "wife_of" : "husband_of",
-                            targetWord: entity.word, targetKind: .person, rawSentence: "",
-                            targetIdx: entity.idx, sourceIdx: partner.idx
-                        )
-                        let key = "\(record.sourceWord)|\(record.relationType)|\(record.targetWord)"
-                        guard seen.insert(key).inserted else { continue }
-                        let verses = Self.answerVerseRefs(word: partner.word, idx: partner.idx, store: store)
-                        combined.append(RelationDisplayItem(
-                            relation: record, verseRefs: verses, answerWord: partner.word, answerIdx: partner.idx
-                        ))
-                    }
-                }
-            }
-            if !combined.isEmpty {
-                return QueryIntentCard(intent: .relation, status: .found(.relation(combined)))
-            }
-            // 아내/남편 질의는 결과가 없을 때 다른 관계 전체로 폴백하지 않는다 — 질의와 무관한 관계(아들·신하·대적 등)를 답처럼 나열하게 된다.
-            if case .spouse(let answerIsWife) = subQuery {
-                let label = answerIsWife ? String(localized: "아내") : String(localized: "남편")
-                return QueryIntentCard(intent: .relation, status: .notReady(
-                    message: String(localized: "질의한 \(label) 관계가 등록돼 있지 않습니다. 아래 검색 결과를 확인해 보세요.")
-                ))
-            }
-            // 타입 필터링 결과가 비면(해당 관계 데이터 없음) 아래 폴백으로 넘어가 다른 관계라도
-            // 보여준다.
-        }
-
-        for entity in personEntities {
-            // 폴백(관계 타입 미지정) — entity가 source인 정방향 행이라 답은 target
-            // (예: (다윗, king_of, 유다) → 유다).
-            add((try? store.personRelations(forWord: entity.word)) ?? [], answerWord: { $0.targetWord })
-        }
-        // 폴백 역방향 행 — entity가 target이라 source가 새 정보.
-        add(reverseRows, answerWord: { $0.sourceWord })
-
-        guard !combined.isEmpty else {
+        // [2026-10-27 5차] 관계 타입을 정하지 못한 관계 꼴(지금 어휘로는 생기지 않는다 — 관계어마다 타입 또는 안내 카드가 있다)도
+        // 관계 전부로 폴백하지 않는다.
+        guard let subQuery = detected else {
             return QueryIntentCard(intent: .relation, status: .notReady(
                 message: String(localized: "이 질의에서 등록된 인물 관계를 찾지 못했습니다. 아래 검색 결과를 확인해 보세요.")
             ))
         }
-        return QueryIntentCard(intent: .relation, status: .found(.relation(combined)))
+
+        // [2026-10-22 4차] 형제·자매·삼촌 — 질의의 X(공백 무시 정확 일치)가 든 행만 고른다(`handleSiblingGroup`/`handleUncle`).
+        // [5차] 오라비·누이(형제·자매와 같은 판정), 조카·후손·증손(정방향), 동역자(양방향), 행 타입이 없는 관계어(안내 카드)도 여기서 끝난다.
+        switch subQuery {
+        case .sibling(let answerIsMale, let label):
+            return handleSiblingGroup(
+                query, answerIsMale: answerIsMale, label: label, ownerNames: ownerNames,
+                titleOwnerIdxs: titleOwnerIdxs, targetRows: reverseRows, shortNames: shortNames, store: store
+            )
+        case .uncle:
+            return handleUncle(ownerNames: ownerNames, titleOwnerIdxs: titleOwnerIdxs, targetRows: reverseRows, store: store)
+        case .forwardByType(let types, let label):
+            return handleOwnerRelationRows(
+                query, types: types, label: label, includeReverse: false, ownerNames: ownerNames,
+                titleOwnerIdxs: titleOwnerIdxs, targetRows: reverseRows, shortNames: shortNames, store: store
+            )
+        case .mutualByType(let types, let label):
+            return handleOwnerRelationRows(
+                query, types: types, label: label, includeReverse: true, ownerNames: ownerNames,
+                titleOwnerIdxs: titleOwnerIdxs, targetRows: reverseRows, shortNames: shortNames, store: store
+            )
+        case .unregistered(let label):
+            return unregisteredRelationCard(label: label)
+        case .reverseByType, .parents, .spouse, .grandparent:
+            break
+        }
+
+        for entity in personEntities {
+            // 조사로 방향을 가른다: entity 바로 뒤가 "이/가"(주격)면 entity가 source인 정방향
+            // ("노아가 아버지인 사람" → 셈/함/야벳), 그 외(기본 "의")는 역방향("노아의 아버지는?" →
+            // 라멕). 아들/딸/손자/아버지/어머니 등 역할이 방향을 가리키는 유형 전부에 같은 이분법이
+            // 적용된다.
+            func addByType(_ types: [String]) {
+                if subjectDirection(for: entity.word, in: query) == true {
+                    let forwardRows = (try? store.personRelations(forWord: entity.word)) ?? []
+                    add(forwardRows.filter { types.contains($0.relationType) },
+                        answerFromTarget: true)
+                } else {
+                    // "OO의 아들/딸/자녀는?" — source가 OO의 자녀이므로 target=OO 쪽에서 찾는다(역방향).
+                    // 답은 source.
+                    add(reverseRows.filter { $0.targetWord == entity.word && types.contains($0.relationType) },
+                        answerFromTarget: false)
+                }
+            }
+            switch subQuery {
+            case .reverseByType(let types, _):
+                addByType(types)
+            case .grandparent(let type):
+                addByType([type])
+            case .sibling, .uncle, .forwardByType, .mutualByType, .unregistered:
+                break  // 위에서 이미 처리했다(여기 오지 않는다).
+            case .parents:
+                // "OO의 부모는?" — 부모 항목이 "OO의 아버지/어머니"로 서술된 경우(역방향, 답=source)와
+                // OO 항목이 "A와 B 사이의 아들/딸"로 서술된 경우(정방향, 답=target)가 모두 있을 수 있어
+                // 합친다.
+                add(reverseRows.filter { $0.targetWord == entity.word && ["father_of", "mother_of"].contains($0.relationType) },
+                    answerFromTarget: false)
+                let forwardRows = (try? store.personRelations(forWord: entity.word)) ?? []
+                add(forwardRows.filter { ["son_of", "daughter_of"].contains($0.relationType) },
+                    answerFromTarget: true)
+            case .spouse(let answerIsWife):
+                // 배우자 후보: entity가 source인 행(`forWord`)과 target인 행(`reverseRows`)을 모두 본다(일부는 한쪽만 저장돼 있다).
+                // [7차] 행의 X 쪽 idx(forWord 행의 source_idx, reverseRows 행의 target_idx)가 있으면 그 사람이 X다 — 이름이 같은
+                // 다른 인물(entity, 예: 갈렙#71)로 바꾸지 않는다(예: 에바#2392 항목의 배우자 "갈렙#243" = 글루배#243). 행에 idx가 없을
+                // 때만 entity를 X로 본다. 성별 검사(X가 질의와 모순이면 — 예: "미갈의 아내", 미갈은 여성 — 건너뜀, 모르면 시도)도
+                // 그 X로 한다. 상대 idx도 행에 적힌 값을 넘긴다(예전에는 reverseRows 쪽을 ""로 넘김).
+                // [8차 검토 반영] 행에 X 쪽 idx가 없으면 문장·묶음의 X idx는 비워 둔다(entity idx를 넣지 않는다 — 동명이인이면 어느 쪽인지
+                // 모르는 행이다). 묶음은 이름만 있는 행 규칙(`groupedRelationAnswers` — 이름이 유일하면 그 사람, 아니면 같은 답 묶음/기타)을 따른다.
+                // 성별 검사는 예전처럼 행 idx, 없으면 entity로 한다.
+                let contradicting = answerIsWife ? "여" : "남"
+                var partners: [(word: String, idx: String, ownerIdx: String)] = []
+                func addPartner(_ word: String, _ idx: String, rowOwnerIdx: String) {
+                    let genderIdx = rowOwnerIdx.isEmpty ? entity.idx : rowOwnerIdx
+                    guard word != entity.word,
+                          !partners.contains(where: { $0.word == word && $0.idx == idx && $0.ownerIdx == rowOwnerIdx }) else { return }
+                    let ownerGender = (try? store.personGender(idx: genderIdx, word: "")) ?? ""
+                    guard ownerGender != contradicting else { return }
+                    partners.append((word, idx, rowOwnerIdx))
+                }
+                for row in (try? store.personRelations(forWord: entity.word)) ?? [] where row.relationType == "married_to" {
+                    addPartner(row.targetWord, row.targetIdx, rowOwnerIdx: row.sourceIdx)
+                }
+                for row in reverseRows where row.relationType == "married_to" && row.targetWord == entity.word {
+                    addPartner(row.sourceWord, row.sourceIdx, rowOwnerIdx: row.targetIdx)
+                }
+                for partner in partners {
+                    addSpouse(partnerWord: partner.word, partnerIdx: partner.idx,
+                              ownerWord: entity.word, ownerIdx: partner.ownerIdx, answerIsWife: answerIsWife)
+                }
+            }
+        }
+        // [2026-10-22 4차 → 5차 일반화] X가 Persons 대표 이름으로 잡히지 않은 경우(관계 행에만 있는 이름·별칭 — 예: "스보", "게난")는
+        // 위 루프가 X를 보지 못한다. 그런 X(공백 뺀 이름)만 골라 관계 행을 이름으로 직접 본다. 4차에는 조부모만 이렇게 했고 나머지는
+        // "관계 전부" 폴백이었다. 대표 이름으로 잡힌 X는 다시 보지 않는다(배우자 성별 검사 등 위 판정을 우회하지 않게).
+        // [7차] 예전에는 위 루프에 답이 있으면 여기서 바로 돌려줬다. 아래 idx 조회를 이어 붙이려고 반환을 맨 끝 한 곳으로 옮겼고,
+        // 이 블록은 예전과 똑같이 "루프에 답이 없을 때만" 돈다(`combined.isEmpty` 조건).
+        let resolvedNames = Set(personEntities.map { compact($0.word) })
+        let unresolvedOwners = ownerNames.subtracting(resolvedNames)
+        if combined.isEmpty, !unresolvedOwners.isEmpty {
+            switch subQuery {
+            case .reverseByType(let types, _):
+                add(reverseRows.filter { types.contains($0.relationType) && unresolvedOwners.contains(compact($0.targetWord)) },
+                    answerFromTarget: false)
+            case .grandparent(let type):
+                add(reverseRows.filter { $0.relationType == type && unresolvedOwners.contains(compact($0.targetWord)) },
+                    answerFromTarget: false)
+            case .parents:
+                add(reverseRows.filter { ["father_of", "mother_of"].contains($0.relationType) && unresolvedOwners.contains(compact($0.targetWord)) },
+                    answerFromTarget: false)
+                let sourceRows = (try? store.personRelations(sourceWordMentionedIn: query, shortNamesExactMatch: shortNames)) ?? []
+                add(sourceRows.filter { ["son_of", "daughter_of"].contains($0.relationType) && unresolvedOwners.contains(compact($0.sourceWord)) },
+                    answerFromTarget: true)
+            case .spouse(let answerIsWife):
+                let contradicting = answerIsWife ? "여" : "남"
+                for row in reverseRows where row.relationType == "married_to" && unresolvedOwners.contains(compact(row.targetWord)) {
+                    let ownerGender = (try? store.personGender(idx: row.targetIdx, word: row.targetWord)) ?? ""
+                    guard ownerGender != contradicting, compact(row.sourceWord) != compact(row.targetWord) else { continue }
+                    addSpouse(partnerWord: row.sourceWord, partnerIdx: row.sourceIdx,
+                              ownerWord: row.targetWord, ownerIdx: row.targetIdx, answerIsWife: answerIsWife)
+                }
+                let sourceRows = (try? store.personRelations(sourceWordMentionedIn: query, shortNamesExactMatch: shortNames)) ?? []
+                for row in sourceRows where row.relationType == "married_to" && unresolvedOwners.contains(compact(row.sourceWord)) {
+                    let ownerGender = (try? store.personGender(idx: row.sourceIdx, word: row.sourceWord)) ?? ""
+                    guard ownerGender != contradicting, compact(row.sourceWord) != compact(row.targetWord) else { continue }
+                    addSpouse(partnerWord: row.targetWord, partnerIdx: row.targetIdx,
+                              ownerWord: row.sourceWord, ownerIdx: row.sourceIdx, answerIsWife: answerIsWife)
+                }
+            case .sibling, .uncle, .forwardByType, .mutualByType, .unregistered:
+                break
+            }
+        }
+
+        // [7차, 2026-10-28] X를 Persons idx로도 찾는다 — 상대 항목이 X를 별칭으로 적으면(예: 자녀 항목 "스룹바벨#1586", 1586의
+        // 대표 이름은 세스바살) 위의 이름 비교(`target_word == X`)로는 그 행을 못 찾는다. X(공백 무시, `word` 또는 `word2` 별칭이
+        // 정확히 같은 Persons 전부 — `isRelationPersonName`의 Persons 판정과 같은 규칙)의 idx 집합을 만들고, 그 idx가
+        // target_idx(역방향, 답=source)/source_idx(부모의 정방향 son_of/daughter_of, 답=target)인 행을 이름 결과에 더한다.
+        // 같은 행은 `add`의 키(source|type|target)로 한 번만 들어가고, 같은 답 인물이 다른 행으로 또 나오면 호출부의
+        // `dedupedRelationItems`가 한 줄로 줄인다. 이 함수는 "X의 <관계어>" 꼴만 받아 X 뒤는 늘 "의"라 역방향만 본다
+        // (루프의 `subjectDirection` 정방향과 같은 경우가 없다).
+        // 배우자: married_to 행 중 X idx가 source/target인 행의 상대가 답. 루프와 같은 규칙 — X(그 idx)의 성별이 질의와 모순이면
+        // ("X의 아내"인데 X가 여) 그 idx는 건너뛰고, 상대가 X 자신이면(같은 idx·같은 이름) 넣지 않는다. 문장은 `addSpouse`
+        // (상대 → X 방향 wife_of/husband_of, X 이름은 그 행에 적힌 대로).
+        let ownerTypes: (reverse: [String], forward: [String])?
+        var spouseAnswerIsWife: Bool?
+        switch subQuery {
+        case .reverseByType(let types, _): ownerTypes = (reverse: types, forward: [])
+        case .grandparent(let type): ownerTypes = (reverse: [type], forward: [])
+        case .parents: ownerTypes = (reverse: ["father_of", "mother_of"], forward: ["son_of", "daughter_of"])
+        case .spouse(let answerIsWife):
+            ownerTypes = (reverse: [], forward: [])
+            spouseAnswerIsWife = answerIsWife
+        case .sibling, .uncle, .forwardByType, .mutualByType, .unregistered: ownerTypes = nil
+        }
+        if let ownerTypes = ownerTypes {
+            // [8차] X idx는 위에서 한 번 구한 값(`ownerIdxs`)을 쓴다(예전에는 여기서 같은 방법으로 구했다).
+            if !ownerIdxs.isEmpty {
+                let idxSet = ownerIdxSet
+                let idxRows = (try? store.personRelations(sourceOrTargetIdxIn: ownerIdxs)) ?? []
+                add(idxRows.filter { ownerTypes.reverse.contains($0.relationType) && idxSet.contains($0.targetIdx) },
+                    answerFromTarget: false)
+                add(idxRows.filter { ownerTypes.forward.contains($0.relationType) && idxSet.contains($0.sourceIdx) },
+                    answerFromTarget: true)
+                if let answerIsWife = spouseAnswerIsWife {
+                    let contradicting = answerIsWife ? "여" : "남"
+                    var allowedOwners = Set<String>()
+                    for idx in ownerIdxs where ((try? store.personGender(idx: idx, word: "")) ?? "") != contradicting {
+                        allowedOwners.insert(idx)
+                    }
+                    for row in idxRows where row.relationType == "married_to" {
+                        // 한 행에 X idx가 양쪽 다 있으면(자기 자신과의 행) 아래 같은 사람 검사에서 걸러진다.
+                        if allowedOwners.contains(row.sourceIdx),
+                           row.targetIdx != row.sourceIdx, compact(row.targetWord) != compact(row.sourceWord) {
+                            addSpouse(partnerWord: row.targetWord, partnerIdx: row.targetIdx,
+                                      ownerWord: row.sourceWord, ownerIdx: row.sourceIdx, answerIsWife: answerIsWife)
+                        }
+                        if allowedOwners.contains(row.targetIdx),
+                           row.targetIdx != row.sourceIdx, compact(row.targetWord) != compact(row.sourceWord) {
+                            addSpouse(partnerWord: row.sourceWord, partnerIdx: row.sourceIdx,
+                                      ownerWord: row.targetWord, ownerIdx: row.targetIdx, answerIsWife: answerIsWife)
+                        }
+                    }
+                }
+            }
+        }
+        if !combined.isEmpty {
+            return QueryIntentCard(intent: .relation, status: .found(.relation(combined)))
+        }
+        // [7차, 2026-10-28] 5차의 "반대 방향 보완"(X 항목에만 적힌 관계를 상대 쪽에서 읽던 조회)은 지웠다. 시드 가족 관계를
+        // 양쪽 항목에 모두 적도록 보완했고, 상대 항목이 X를 별칭으로 적은 경우는 위 idx 조회가 찾는다(사용자 확정).
+        // 이 조회로만 답이 나오던 질의 중 상대가 Persons에 없거나 상대 항목에 반대쪽이 없는 경우(1028d 기준 다하스 2건·율리아·네로·
+        // 프삼티크 2세·벨렉)는 이제 안내 카드다(CHANGES7.md 3절).
+        // 아내/남편(3차), 조부모(4차), [5차] 나머지 관계어 모두 — 결과가 없으면 다른 관계 전체로 폴백하지 않고 안내 카드다.
+        return unregisteredRelationCard(label: unregisteredRelationLabel(for: subQuery))
     }
 
     // MARK: - 형제(형/동생/아우) 질의 (2026-10-02)
@@ -666,60 +1133,83 @@ enum QueryIntentHandler {
     /// "OO의 형/동생"(OO=소유자, 기본)과 "OO가 형/동생인 사람"(OO=역할 보유자, 이름 뒤 "이/가") 모두 처리한다.
     /// 저장 행은 항상 `RelationDisplayItem`에 "역할 보유자 → 소유자" 방향으로 정리해, 화면 문장이 "A는 B의 형/아우"로 읽히게 한다.
     /// 일치하는 행이 없으면 다른 관계로 폴백하지 않는다 — 폴백이 질의와 반대되는 사실을 답처럼 보여줬기 때문이다.
+    /// [2026-10-28 8차] `ownerNames`/`ownerIdxs`: X 이름(공백 뺀 꼴)과 X 인물 idx(`handleRelation` 참고). 질의 속 이름 쪽(아래 두 루프의
+    /// target/source)이 X와 같은 행만 본다 — 행의 그 쪽 이름(공백 무시)이 X와 정확히 같거나, 그 쪽 idx가 X 인물이면. X 이름 안의 다른
+    /// 이름(부분 문자열로 걸린 행)은 뺀다. `ownerNames`가 비면(꼴 없음 — 이 경로에서는 생기지 않는다) 예전처럼 거르지 않는다.
     private static func handleSibling(
-        _ query: String, role: SiblingRole, targetRows: [PersonRelationRecord], shortNames: [String], store: ReferenceDataStore
+        _ query: String, role: SiblingRole, targetRows: [PersonRelationRecord], shortNames: [String],
+        ownerNames: Set<String>, ownerIdxs: Set<String>, store: ReferenceDataStore
     ) -> QueryIntentCard {
+        func isOwner(word: String, idx: String) -> Bool {
+            ownerNames.isEmpty
+                || ownerNames.contains(word.filter { !$0.isWhitespace })
+                || (!idx.isEmpty && ownerIdxs.contains(idx))
+        }
         let sourceRows = (try? store.personRelations(sourceWordMentionedIn: query, shortNamesExactMatch: shortNames)) ?? []
 
         var items: [RelationDisplayItem] = []
         var seen = Set<String>()
-        /// `holder`가 `owner`의 ROLE인 사실 하나를 추가한다. 답은 질의에 없는 쪽(`answer`)이고 그 인물의 구절을 붙인다.
-        func append(holder: String, owner: String, answer: String, template: PersonRelationRecord) {
-            let key = "\(holder)|\(role.role)|\(owner)"
+        /// 저장 행 `template` 하나를 "역할 보유자(holder) → 소유자(owner)" 사실로 더한다. `flipped`면 template의 target이 보유자,
+        /// `answerIsHolder`면 답이 보유자(아니면 소유자)다. 답 인물의 구절을 붙인다.
+        /// [7차] 예전에는 이름으로 뒤집힘(`holder != template.sourceWord`)과 답 idx(`answerIdx(of:in:)`)를 정했고, 뒤집은 행의
+        /// 소유자 idx는 버렸으며(""), 구절은 이름(`personOrPlace(exactWord:)`)으로 찾았다. 이제 쪽을 직접 받아 행에 적힌 idx를
+        /// 그대로 옮기고, 구절은 idx가 있으면 그 인물 것(`answerVerseRefs`와 같은 규칙), 없을 때만 이름으로 찾는다.
+        func append(_ template: PersonRelationRecord, flipped: Bool, answerIsHolder: Bool) {
+            let holder = flipped ? template.targetWord : template.sourceWord
+            let holderIdx = flipped ? template.targetIdx : template.sourceIdx
+            let owner = flipped ? template.sourceWord : template.targetWord
+            let ownerIdx = flipped ? template.sourceIdx : template.targetIdx
+            let key = "\(holder)#\(holderIdx)|\(role.role)|\(owner)#\(ownerIdx)"  // [7차] idx 포함
             guard seen.insert(key).inserted else { return }
             // 뒤집은 행의 `targetKind`는 알 수 없어 nil(원래 방향이면 원래 값). `PersonRelationRecord.targetKind` 주석 참고.
-            let flipped = holder != template.sourceWord
             let record = PersonRelationRecord(
                 sourceWord: holder, relationType: role.role, targetWord: owner,
                 targetKind: flipped ? nil : template.targetKind,
                 rawSentence: template.rawSentence,
-                targetIdx: flipped ? "" : template.targetIdx,
-                sourceIdx: flipped ? template.targetIdx : template.sourceIdx
+                targetIdx: ownerIdx,
+                sourceIdx: holderIdx
             )
+            let answer = answerIsHolder ? holder : owner
+            let answerIdx = answerIsHolder ? holderIdx : ownerIdx
+            let otherWord = answerIsHolder ? owner : holder
+            let otherIdx = answerIsHolder ? ownerIdx : holderIdx
+            func verses(word: String, idx: String) -> [BibleVerseRef]? {
+                if !idx.isEmpty, let person = try? store.person(idx: idx) { return person.verseRefs }
+                return (try? store.personOrPlace(exactWord: word))?.verseRefs
+            }
             // 답 인물이 Persons에 없으면(예: 골리앗) 질의에 쓴 인물(소유자)의 구절로 대신한다.
-            let ownerWord = answer == holder ? owner : holder
-            let verses = (try? store.personOrPlace(exactWord: answer))?.verseRefs
-                ?? (try? store.personOrPlace(exactWord: ownerWord))?.verseRefs ?? []
+            let answerVerses = verses(word: answer, idx: answerIdx) ?? verses(word: otherWord, idx: otherIdx) ?? []
             items.append(RelationDisplayItem(
-                relation: record, verseRefs: verses,
-                answerWord: answer, answerIdx: Self.answerIdx(of: answer, in: record)
+                relation: record, verseRefs: answerVerses,
+                answerWord: answer, answerIdx: answerIdx,
+                ownerWord: otherWord, ownerIdx: otherIdx  // [8차] X 쪽 = 답의 반대쪽
             ))
         }
 
         // 질의 속 이름이 target인 행(저장 방향: source가 target의 ROLE)
-        for row in targetRows {
+        for row in targetRows where isOwner(word: row.targetWord, idx: row.targetIdx) {
             let nameIsHolder = subjectDirection(for: row.targetWord, in: query) == true
             if !nameIsHolder {
                 // "OO(=target)의 ROLE" — 같은 역할로 저장된 행이면 source가 답.
                 if row.relationType == role.role {
-                    append(holder: row.sourceWord, owner: row.targetWord, answer: row.sourceWord, template: row)
+                    append(row, flipped: false, answerIsHolder: true)
                 }
             } else if row.relationType == role.inverse {
                 // "OO(=target)가 ROLE인 사람" — 반대 역할로 저장된 행(source가 OO의 반대 역할)을 뒤집어 OO가 보유자.
-                append(holder: row.targetWord, owner: row.sourceWord, answer: row.sourceWord, template: row)
+                append(row, flipped: true, answerIsHolder: false)
             }
         }
         // 질의 속 이름이 source인 행
-        for row in sourceRows {
+        for row in sourceRows where isOwner(word: row.sourceWord, idx: row.sourceIdx) {
             let nameIsHolder = subjectDirection(for: row.sourceWord, in: query) == true
             if !nameIsHolder {
                 // "OO(=source)의 ROLE" — OO가 반대 역할로 저장된 행(예: 골리앗 older_brother_of 라흐미)을 뒤집어 target이 답.
                 if row.relationType == role.inverse {
-                    append(holder: row.targetWord, owner: row.sourceWord, answer: row.targetWord, template: row)
+                    append(row, flipped: true, answerIsHolder: true)
                 }
             } else if row.relationType == role.role {
                 // "OO(=source)가 ROLE인 사람" — 같은 역할로 저장된 행이면 target이 답.
-                append(holder: row.sourceWord, owner: row.targetWord, answer: row.targetWord, template: row)
+                append(row, flipped: false, answerIsHolder: false)
             }
         }
 
@@ -732,12 +1222,184 @@ enum QueryIntentHandler {
         return QueryIntentCard(intent: .relation, status: .found(.relation(items)))
     }
 
+    // MARK: - 형제·자매·삼촌 질의 (2026-10-22 4차)
+    //
+    // 사용자 확정: "X의 형제/자매/삼촌"은 "관계 타입 미지정 폴백"(그 인물의 관계 전부) 대신 그 관계만 답한다. 행이 없으면 안내 카드.
+    // 근거는 명시된 행(PersonSeed 기타관계 → `PersonRelations`)뿐이다. "같은 아버지의 자녀"나 "아버지의 형제"를 이어 붙여 만들지 않는다 —
+    // 관계 행은 이름으로 이어지므로 동명이인(예: 라멕 둘)의 자녀가 섞이고, 빌드가 표기 없는 상대의 idx를 "동명이인이면 첫 idx"로 채우기
+    // 때문이다(`build_reference_data.py` 기타관계 매핑 주석).
+    //
+    // X는 `koreanRelationShapeNames`가 준 이름(공백 뺀 꼴)과 행의 이름(공백 뺀 꼴)이 정확히 같을 때만 본다.
+
+    /// 형제 관계 행 타입(source가 target의 형제/형/아우/자매). 형제 관계는 서로 같으므로 X가 source든 target이든 상대가 답이다.
+    private static let siblingRelationTypes: Set<String> = ["brother_of", "older_brother_of", "younger_brother_of", "sister_of"]
+
+    /// "X의 형제"(`answerIsMale` true) / "X의 자매"(false), [2026-10-27 5차] "X의 오라비"(true) / "X의 누이"(false) — 같은 규칙, 안내 카드
+    /// 라벨(`label`)만 다르다(오라비·누이를 형제·자매로 묶지 않고 명시된 형제·자매 행에서 같은 성별로 답한다). 답 인물을 남/여로 가르는 규칙:
+    ///  1) 답 인물의 성별(`ReferenceDataStore.personGender` — idx, 없으면 유일한 이름)을 알면 그것으로.
+    ///     예: 미리암(여)은 시드에 "(형제)"로 적힌 행이 있어도 자매 쪽, 롯(남)은 "(자매)"로 적힌 행이 있어도 형제 쪽.
+    ///  2) 모르면 행 타입으로: brother_of/older_brother_of/younger_brother_of → 형제, sister_of → 자매.
+    /// 화면 문장은 항상 "답 → X" 방향으로 정리한다. 원래 방향이고 타입이 갈래와 맞으면 그 타입(형/아우 구분 유지), 뒤집은 행이면
+    /// 형↔아우를 바꾸고, 그 밖은 brother_of/sister_of로 쓴다. 같은 답 인물은 한 번만(먼저 나온 행 — X가 target인 행이 먼저).
+    private static func handleSiblingGroup(
+        _ query: String, answerIsMale: Bool, label: String, ownerNames: Set<String>, titleOwnerIdxs: Set<String>,
+        targetRows: [PersonRelationRecord], shortNames: [String], store: ReferenceDataStore
+    ) -> QueryIntentCard {
+        func compact(_ text: String) -> String { text.filter { !$0.isWhitespace } }
+        /// [8차] X 쪽 이름이 X와 같거나, X가 칭호 꼴("예수 그리스도" 등)이고 X 쪽 idx가 그 인물이면.
+        func isOwner(_ word: String, _ idx: String) -> Bool {
+            ownerNames.contains(compact(word)) || (!idx.isEmpty && titleOwnerIdxs.contains(idx))
+        }
+        let sourceRows = (try? store.personRelations(sourceWordMentionedIn: query, shortNamesExactMatch: shortNames)) ?? []
+
+        var items: [RelationDisplayItem] = []
+        var seen = Set<String>()
+        /// 행 하나를 답으로 더한다. `answerIsSource`면 원래 방향(답 = source), 아니면 뒤집은 방향(답 = target).
+        func consider(_ row: PersonRelationRecord, answerIsSource: Bool) {
+            let answer = answerIsSource ? row.sourceWord : row.targetWord
+            let answerIdx = answerIsSource ? row.sourceIdx : row.targetIdx
+            let owner = answerIsSource ? row.targetWord : row.sourceWord
+            let ownerIdx = answerIsSource ? row.targetIdx : row.sourceIdx
+            guard !answer.isEmpty, compact(answer) != compact(owner) else { return }
+
+            let gender = (try? store.personGender(idx: answerIdx, word: answer)) ?? ""
+            let isMale: Bool
+            if gender == "남" {
+                isMale = true
+            } else if gender == "여" {
+                isMale = false
+            } else {
+                // 행 타입은 source의 성별만 말해 준다. 뒤집은 행(답 = target)이면 답의 성별을 알 수 없으므로 추측하지 않고 건너뛴다.
+                guard answerIsSource else { return }
+                isMale = row.relationType != "sister_of"
+            }
+            guard isMale == answerIsMale else { return }
+            guard seen.insert("\(answer)#\(answerIdx)|\(owner)#\(ownerIdx)").inserted else { return }  // [7차] idx 포함
+
+            let displayType: String
+            if !answerIsMale {
+                displayType = "sister_of"
+            } else if answerIsSource {
+                displayType = row.relationType == "sister_of" ? "brother_of" : row.relationType
+            } else if row.relationType == "older_brother_of" {
+                displayType = "younger_brother_of"  // X가 답의 형 → 답은 X의 아우
+            } else if row.relationType == "younger_brother_of" {
+                displayType = "older_brother_of"    // X가 답의 아우 → 답은 X의 형
+            } else {
+                displayType = "brother_of"
+            }
+            let record = PersonRelationRecord(
+                sourceWord: answer, relationType: displayType, targetWord: owner,
+                targetKind: .person, rawSentence: row.rawSentence,
+                targetIdx: ownerIdx, sourceIdx: answerIdx
+            )
+            let verses = Self.answerVerseRefs(word: answer, idx: answerIdx, store: store)
+            items.append(RelationDisplayItem(
+                relation: record, verseRefs: verses, answerWord: answer, answerIdx: answerIdx,
+                ownerWord: owner, ownerIdx: ownerIdx  // [8차]
+            ))
+        }
+
+        for row in targetRows where siblingRelationTypes.contains(row.relationType) && isOwner(row.targetWord, row.targetIdx) {
+            consider(row, answerIsSource: true)
+        }
+        for row in sourceRows where siblingRelationTypes.contains(row.relationType) && isOwner(row.sourceWord, row.sourceIdx) {
+            consider(row, answerIsSource: false)
+        }
+
+        guard !items.isEmpty else {
+            return unregisteredRelationCard(label: label)
+        }
+        return QueryIntentCard(intent: .relation, status: .found(.relation(items)))
+    }
+
+    /// "X의 삼촌/숙부/백부/외삼촌" — `uncle_of` 행 중 target이 X인 행의 source(삼촌)가 답이다. 시드의 "(숙부)"와 "(조카)"(방향을 뒤집어
+    /// 같은 타입으로 저장)가 모두 여기 든다. "(조카)"는 고모일 수도 있어(빌드 주석 "삼촌/고모") 답 인물이 여성으로 확인되면 뺀다.
+    /// `uncle_of`는 부계·모계를 구분하지 않으므로 "외삼촌" 질의도 같은 답이다. 화면 문장은 저장된 행 그대로("A는 X의 삼촌").
+    private static func handleUncle(
+        ownerNames: Set<String>, titleOwnerIdxs: Set<String>, targetRows: [PersonRelationRecord], store: ReferenceDataStore
+    ) -> QueryIntentCard {
+        func compact(_ text: String) -> String { text.filter { !$0.isWhitespace } }
+        var items: [RelationDisplayItem] = []
+        var seen = Set<String>()
+        for row in targetRows where row.relationType == "uncle_of"
+            && (ownerNames.contains(compact(row.targetWord)) || (!row.targetIdx.isEmpty && titleOwnerIdxs.contains(row.targetIdx))) {
+            guard compact(row.sourceWord) != compact(row.targetWord) else { continue }
+            let gender = (try? store.personGender(idx: row.sourceIdx, word: row.sourceWord)) ?? ""
+            guard gender != "여" else { continue }
+            guard seen.insert("\(row.sourceWord)#\(row.sourceIdx)|\(row.targetWord)#\(row.targetIdx)").inserted else { continue }  // [7차] idx 포함
+            let verses = Self.answerVerseRefs(word: row.sourceWord, idx: row.sourceIdx, store: store)
+            items.append(RelationDisplayItem(
+                relation: row, verseRefs: verses, answerWord: row.sourceWord, answerIdx: row.sourceIdx,
+                ownerWord: row.targetWord, ownerIdx: row.targetIdx  // [8차]
+            ))
+        }
+        guard !items.isEmpty else {
+            return unregisteredRelationCard(label: unregisteredRelationLabel(for: .uncle))
+        }
+        return QueryIntentCard(intent: .relation, status: .found(.relation(items)))
+    }
+
+    /// [5차] "X의 조카/후손/자손/증손"(`includeReverse` false — X가 source인 행의 target이 답) / "X의 동역자"(true — 양방향).
+    /// 행 저장 규칙("source가 target의 ROLE"):
+    ///  - 조카: (삼촌, uncle_of, 조카) → X(삼촌)가 source인 행의 target
+    ///  - 후손·자손: (조상, ancestor_of, 후손) → X가 source인 행의 target. 증손: (증조부, great_grandfather_of, 증손) → 같음
+    ///  - 동역자: (Y, co_worker_of, X) — 서로 같은 관계라 X가 target인 행의 source와 X가 source인 행의 target 모두. 화면 문장은 "답 → X"로 정리
+    /// 정방향(조카 등)의 화면 문장은 저장된 행 그대로다("아브라함은 롯의 삼촌" — 답은 롯; 기존 `.parents` 정방향 행과 같은 방식).
+    /// X는 공백 무시 정확 일치(`handleSiblingGroup`과 같다). 행이 없으면 안내 카드.
+    private static func handleOwnerRelationRows(
+        _ query: String, types: [String], label: String, includeReverse: Bool, ownerNames: Set<String>,
+        titleOwnerIdxs: Set<String>, targetRows: [PersonRelationRecord], shortNames: [String], store: ReferenceDataStore
+    ) -> QueryIntentCard {
+        func compact(_ text: String) -> String { text.filter { !$0.isWhitespace } }
+        /// [8차] `handleSiblingGroup.isOwner`와 같다.
+        func isOwner(_ word: String, _ idx: String) -> Bool {
+            ownerNames.contains(compact(word)) || (!idx.isEmpty && titleOwnerIdxs.contains(idx))
+        }
+        var items: [RelationDisplayItem] = []
+        var seen = Set<String>()
+        func append(_ record: PersonRelationRecord, answer: String, answerIdx: String, owner: String, ownerIdx: String) {
+            // [7차] 키에 idx 포함(답·X 모두 행에 적힌 idx).
+            guard !answer.isEmpty, compact(answer) != compact(owner),
+                  seen.insert("\(answer)#\(answerIdx)|\(owner)#\(ownerIdx)").inserted else { return }
+            let verses = Self.answerVerseRefs(word: answer, idx: answerIdx, store: store)
+            items.append(RelationDisplayItem(
+                relation: record, verseRefs: verses, answerWord: answer, answerIdx: answerIdx,
+                ownerWord: owner, ownerIdx: ownerIdx  // [8차]
+            ))
+        }
+        if includeReverse {
+            for row in targetRows where types.contains(row.relationType) && isOwner(row.targetWord, row.targetIdx) {
+                append(row, answer: row.sourceWord, answerIdx: row.sourceIdx, owner: row.targetWord, ownerIdx: row.targetIdx)
+            }
+        }
+        let sourceRows = (try? store.personRelations(sourceWordMentionedIn: query, shortNamesExactMatch: shortNames)) ?? []
+        for row in sourceRows where types.contains(row.relationType) && isOwner(row.sourceWord, row.sourceIdx) {
+            if includeReverse {
+                // 서로 같은 관계 — 화면 문장이 "답은 X의 동역자"로 읽히게 뒤집는다.
+                let flipped = PersonRelationRecord(
+                    sourceWord: row.targetWord, relationType: row.relationType, targetWord: row.sourceWord,
+                    targetKind: .person, rawSentence: row.rawSentence,
+                    targetIdx: row.sourceIdx, sourceIdx: row.targetIdx
+                )
+                append(flipped, answer: row.targetWord, answerIdx: row.targetIdx, owner: row.sourceWord, ownerIdx: row.sourceIdx)
+            } else {
+                append(row, answer: row.targetWord, answerIdx: row.targetIdx, owner: row.sourceWord, ownerIdx: row.sourceIdx)
+            }
+        }
+        guard !items.isEmpty else {
+            return unregisteredRelationCard(label: label)
+        }
+        return QueryIntentCard(intent: .relation, status: .found(.relation(items)))
+    }
+
     /// `handleRelation` 전용 — 질의에서 구체적인 관계 타입을 감지한다.
     /// 검사 순서 주의: 더 구체적인 키워드를 먼저 검사해야 한다(예: "외할아버지" ⊃ "할아버지" ⊃ "아버지" — 2026-10-22 3차에 조부모 추가).
+    /// [5차] `label`은 행이 없을 때 안내 카드에 넣는 관계 이름(이미 `String(localized:)`로 번역된 값).
     private enum RelationSubQuery {
         /// "OO의 <역할>은?" — target == OO이고 relationType이 목록에 속하는 행의 source를
         /// 답으로 보여준다.
-        case reverseByType([String])
+        case reverseByType([String], label: String)
         /// "OO의 부모는?" 전용 — father_of/mother_of(역방향)와 son_of/daughter_of(정방향)를 합친다.
         case parents
         /// "OO의 아내/남편은?" 전용. `PersonRelations`에는 `wife_of`/`husband_of` 행이 한 건도 없고 성별 중립인
@@ -745,6 +1407,50 @@ enum QueryIntentHandler {
         /// 항상 0건이 되어 "관계 타입 미지정 폴백"(그 인물의 아들·신하·대적 등 모든 관계 나열)으로 떨어졌다.
         /// `answerIsWife`가 true면 질의의 인물이 남편, 답이 아내다.
         case spouse(answerIsWife: Bool)
+        /// [2026-10-22 4차] "OO의 할아버지/할머니/외할아버지/외할머니" — `reverseByType([type])`과 같은 조회이고, 행이 없으면
+        /// 다른 관계 전체로 폴백하지 않고 안내 카드("질의한 할아버지 관계가 등록돼 있지 않습니다")를 낸다(사용자 확정).
+        case grandparent(type: String)
+        /// [2026-10-22 4차] "OO의 형제"(`answerIsMale` true)/"OO의 자매"(false) — `handleSiblingGroup` 참고. 없으면 안내 카드.
+        /// [5차] "OO의 오라비"(true)/"OO의 누이"(false)도 같은 처리 — `label`(안내 카드 관계 이름)만 다르다.
+        case sibling(answerIsMale: Bool, label: String)
+        /// [2026-10-22 4차] "OO의 삼촌/숙부/백부/외삼촌" — `uncle_of` 행(부계·모계 구분 없음). 없으면 안내 카드.
+        case uncle
+        /// [5차] X가 source인 행의 target이 답(조카·후손·자손·증손) — `handleOwnerRelationRows`.
+        case forwardByType([String], label: String)
+        /// [5차] 서로 같은 관계(동역자) — 양방향. `handleOwnerRelationRows`.
+        case mutualByType([String], label: String)
+        /// [5차] 맞는 relation_type이 DB에 없는 관계어(사촌·장모·이모·고모·지파·여동생·고손) — 조회 없이 안내 카드.
+        case unregistered(label: String)
+    }
+
+    /// 행이 없을 때 폴백 대신 띄울 안내 카드의 관계 이름. 문구 키는 아내/남편과 같은
+    /// "질의한 %@ 관계가 등록돼 있지 않습니다. …"이고, 이름도 `String(localized:)` 키로 번역한다.
+    /// [5차] 모든 관계어가 안내 카드를 쓰므로 nil이 없다(4차의 "nil이면 관계 전부 폴백"은 지웠다).
+    private static func unregisteredRelationLabel(for subQuery: RelationSubQuery) -> String {
+        switch subQuery {
+        case .reverseByType(_, let label), .forwardByType(_, let label), .mutualByType(_, let label):
+            return label
+        case .unregistered(let label):
+            return label
+        case .sibling(_, let label):
+            return label
+        case .parents: return String(localized: "부모")
+        case .spouse(let answerIsWife): return answerIsWife ? String(localized: "아내") : String(localized: "남편")
+        case .grandparent(let type):
+            switch type {
+            case "maternal_grandfather_of": return String(localized: "외할아버지")
+            case "maternal_grandmother_of": return String(localized: "외할머니")
+            case "grandmother_of": return String(localized: "할머니")
+            default: return String(localized: "할아버지")
+            }
+        case .uncle: return String(localized: "삼촌")
+        }
+    }
+
+    private static func unregisteredRelationCard(label: String) -> QueryIntentCard {
+        QueryIntentCard(intent: .relation, status: .notReady(
+            message: String(localized: "질의한 \(label) 관계가 등록돼 있지 않습니다. 아래 검색 결과를 확인해 보세요.")
+        ))
     }
 
     /// `entityWord` 바로 뒤 글자가 주격 조사("이"/"가")면 true(entity=source), 관형격
@@ -760,28 +1466,78 @@ enum QueryIntentHandler {
 
     private static func detectRelationSubQuery(_ query: String) -> RelationSubQuery? {
         if query.contains("부모") { return .parents }
-        if query.contains("자녀") || query.contains("자식") { return .reverseByType(["son_of", "daughter_of"]) }
-        if query.contains("아들") { return .reverseByType(["son_of"]) }
-        if query.contains("딸") { return .reverseByType(["daughter_of"]) }
+        if query.contains("자녀") || query.contains("자식") {
+            return .reverseByType(["son_of", "daughter_of"], label: String(localized: "자녀"))
+        }
+        if query.contains("아들") { return .reverseByType(["son_of"], label: String(localized: "아들")) }
+        if query.contains("딸") { return .reverseByType(["daughter_of"], label: String(localized: "딸")) }
         // "손자"/"손녀"는 "아들"/"딸"과 부분 문자열 관계가 없어 검사 순서와 무관하다.
-        if query.contains("손자") { return .reverseByType(["grandson_of"]) }
-        if query.contains("손녀") { return .reverseByType(["granddaughter_of"]) }
+        if query.contains("손자") { return .reverseByType(["grandson_of"], label: String(localized: "손자")) }
+        if query.contains("손녀") { return .reverseByType(["granddaughter_of"], label: String(localized: "손녀")) }
         // [2026-10-22 3차] 조부모는 "아버지"/"어머니"보다 먼저 본다 — "할아버지"가 "아버지"를 포함해 father_of(아버지)를 답으로
         // 보여 주던 버그. 외조부모를 조부모보다 먼저 본다("외할아버지" ⊃ "할아버지"). 방향은 father_of와 같다 — 행은
         // "source가 target의 할아버지"(예: (라멕, grandfather_of, 셈))라 "셈의 할아버지"는 target=셈 행의 source(라멕)가 답이다.
         // "외할머니/외조모"(maternal_grandmother_of)는 사용자 목록 밖이지만 넣지 않으면 "할머니"에 걸려 grandmother_of로 답하므로 함께 둔다.
-        if query.contains("외할아버지") || query.contains("외조부") { return .reverseByType(["maternal_grandfather_of"]) }
-        if query.contains("외할머니") || query.contains("외조모") { return .reverseByType(["maternal_grandmother_of"]) }
-        if query.contains("할아버지") || query.contains("조부") { return .reverseByType(["grandfather_of"]) }
-        if query.contains("할머니") || query.contains("조모") { return .reverseByType(["grandmother_of"]) }
-        if query.contains("아버지") || query.contains("부친") { return .reverseByType(["father_of"]) }
-        if query.contains("어머니") || query.contains("모친") { return .reverseByType(["mother_of"]) }
-        // "아내" 동의어 중 "처"는 한 글자라 "처음"/"처녀"/"출처" 등에 오탐되어 제외했다.
-        // Layer 1(`QueryIntentClassifier.isRelationQuery`)이 넓게 잡으므로 여기서 좁게 잡아도
-        // 최악의 경우 아래 폴백으로 떨어질 뿐이다.
+        // [4차] 조부모는 `.grandparent`(조회는 같고, 행이 없으면 안내 카드).
+        if query.contains("외할아버지") || query.contains("외조부") { return .grandparent(type: "maternal_grandfather_of") }
+        if query.contains("외할머니") || query.contains("외조모") { return .grandparent(type: "maternal_grandmother_of") }
+        if query.contains("할아버지") || query.contains("조부") { return .grandparent(type: "grandfather_of") }
+        if query.contains("할머니") || query.contains("조모") { return .grandparent(type: "grandmother_of") }
+        // [2026-10-27 6차] "시아버지"(남편의 아버지)는 "아버지"를 포함하므로 그보다 먼저 본다 — 빌드가 시드 "Y(시아버지)"를
+        // (Y, husbands_father_of, X)로 따로 저장한다("장인" = father_in_law_of와 분리, 사용자 확정). 역방향: "X의 시아버지" → source.
+        if query.contains("시아버지") { return .reverseByType(["husbands_father_of"], label: String(localized: "시아버지")) }
+        if query.contains("아버지") || query.contains("부친") { return .reverseByType(["father_of"], label: String(localized: "아버지")) }
+        if query.contains("어머니") || query.contains("모친") { return .reverseByType(["mother_of"], label: String(localized: "어머니")) }
+        // [2026-10-22 4차] 형제·자매·삼촌. 앞의 어떤 관계어와도 부분 문자열 관계가 없어 순서와 무관하다.
+        // "형제"가 여기서 잡히므로 `handleRelation`의 형/동생 분기(`detectSiblingRole`, 이 함수가 nil일 때만)는 타지 않는다.
+        if query.contains("형제") { return .sibling(answerIsMale: true, label: String(localized: "형제")) }
+        if query.contains("자매") { return .sibling(answerIsMale: false, label: String(localized: "자매")) }
+        if query.contains("삼촌") || query.contains("숙부") || query.contains("백부") { return .uncle }
+        // "아내" 동의어 중 "처"는 한 글자라 "처음"/"처녀"/"출처" 등에 오탐되어 제외했다([5차] "X의 처" 꼴은 `relationSubQuery(forShapeWord:)`가 받는다).
         if query.contains("아내") || query.contains("부인") { return .spouse(answerIsWife: true) }
         if query.contains("남편") { return .spouse(answerIsWife: false) }
         return nil
+    }
+
+    /// [2026-10-27 5차] `detectRelationSubQuery`(질의 부분 문자열)가 못 정한 관계어를 "X의 <관계어>" 꼴의 관계어(`QueryIntentClassifier.koreanRelationShape`)로
+    /// 정한다. 관계어는 분류기 어휘(`RelationSynonyms` + "형" + `baselineRelationWords`) 중 위 함수에 없는 것 전부다.
+    /// 행 저장 규칙은 "source가 target의 ROLE"(`build_reference_data.py` `OTHER_RELATION_LABEL_MAP`, 기타관계 "Y(라벨)" → (Y, type, X)):
+    ///  - 아비/아빠 → father_of, 어미/엄마 → mother_of (역방향, 아버지/어머니와 같다)
+    ///  - 처 → 아내와 같다
+    ///  - 오라비 → 형제와 같은 명시 행 판정(남), 누이 → 자매와 같은 판정(여) — 안내 카드 라벨만 "오라비"/"누이"(사용자: 묶지 않아도 됨)
+    ///  - 조상·선조 → ancestor_of 역방향(답 = source). 후손·자손 → ancestor_of 정방향(답 = target). 증손 → great_grandfather_of 정방향
+    ///  - 조카 → uncle_of 정방향(답 = target, 시드 "(조카)"/"(숙부)" 모두 (삼촌, uncle_of, 조카)로 저장)
+    ///  - 며느리 → daughter_in_law_of, 사위 → son_in_law_of, 장인 → father_in_law_of (역방향 — 시드 "Y(며느리|자부|사위|장인)")
+    ///    [6차] 시아버지 → husbands_father_of(시드 "Y(시아버지)", `detectRelationSubQuery`가 "아버지"보다 먼저 받는다)
+    ///  - 동역자 → co_worker_of 양방향
+    ///  - 여동생·고손·지파·사촌·장모·이모·고모 → DB에 맞는 relation_type이 없어 안내 카드
+    ///  - 형·동생·아우·남동생·친아우 → nil(`handleSibling`이 받는다)
+    private static func relationSubQuery(forShapeWord word: String) -> RelationSubQuery? {
+        switch word {
+        case "아비", "아빠": return .reverseByType(["father_of"], label: String(localized: "아버지"))
+        case "어미", "엄마": return .reverseByType(["mother_of"], label: String(localized: "어머니"))
+        case "처": return .spouse(answerIsWife: true)
+        case "오라비": return .sibling(answerIsMale: true, label: String(localized: "오라비"))
+        case "누이": return .sibling(answerIsMale: false, label: String(localized: "누이"))
+        case "조상": return .reverseByType(["ancestor_of"], label: String(localized: "조상"))
+        case "선조": return .reverseByType(["ancestor_of"], label: String(localized: "선조"))
+        case "후손": return .forwardByType(["ancestor_of"], label: String(localized: "후손"))
+        case "자손": return .forwardByType(["ancestor_of"], label: String(localized: "자손"))
+        case "증손": return .forwardByType(["great_grandfather_of"], label: String(localized: "증손"))
+        case "조카": return .forwardByType(["uncle_of"], label: String(localized: "조카"))
+        case "며느리": return .reverseByType(["daughter_in_law_of"], label: String(localized: "며느리"))
+        case "사위": return .reverseByType(["son_in_law_of"], label: String(localized: "사위"))
+        case "장인": return .reverseByType(["father_in_law_of"], label: String(localized: "장인"))
+        case "동역자": return .mutualByType(["co_worker_of"], label: String(localized: "동역자"))
+        case "여동생": return .unregistered(label: String(localized: "여동생"))
+        case "고손": return .unregistered(label: String(localized: "고손"))
+        case "지파": return .unregistered(label: String(localized: "지파"))
+        case "사촌": return .unregistered(label: String(localized: "사촌"))
+        case "장모": return .unregistered(label: String(localized: "장모"))
+        case "이모": return .unregistered(label: String(localized: "이모"))
+        case "고모": return .unregistered(label: String(localized: "고모"))
+        default: return nil
+        }
     }
 
     // MARK: - 인물 프로필 / 주제 (키워드·카테고리 조회, personOrPlaceInfo 대체)
@@ -805,6 +1561,18 @@ enum QueryIntentHandler {
             if !persons.isEmpty {
                 if isKoreanNameOnlyQuery(trimmed, names: persons.map { $0.matchedAlias ?? $0.word }) {
                     return QueryIntentCard(intent: .personProfile, status: .found(.personProfile(persons)))
+                }
+                // [2026-10-22 4차] 이름 + 직함 예외(사용자 확정) — 질의 전체가 "예수 그리스도"면 "예수" 인물 카드(base2와 같은 동작).
+                // [2026-10-27 5차] 정확히 "예수 그리스도"/"예수그리스도"만(끝의 "?"/"."는 `trimmed`가 이미 뗐다, 연속 공백은 한 칸으로 본다).
+                // 4차는 공백을 모두 지워 비교해 "예 수그리스도"처럼 띄어 쓴 꼴도 걸렸다. "그리스도 예수", "주 예수 그리스도"는 받지 않는다(사용자 확정).
+                let normalizedQuery = trimmed.precomposedStringWithCanonicalMapping
+                    .split(whereSeparator: { $0.isWhitespace })
+                    .joined(separator: " ")
+                if let exceptionName = personTitleExceptions[normalizedQuery] {
+                    let named = persons.filter { ($0.matchedAlias ?? $0.word) == exceptionName }
+                    if !named.isEmpty {
+                        return QueryIntentCard(intent: .personProfile, status: .found(.personProfile(named)))
+                    }
                 }
                 categoriesRejectedByShape.insert("인물")
             }
@@ -831,6 +1599,10 @@ enum QueryIntentHandler {
 
         return nil
     }
+
+    /// [2026-10-22 4차] "이름 그대로" 규칙의 예외 — (질의 전체 → 카드에 낼 인물 이름). 사용자가 정한 것만 둔다.
+    /// [5차] 키는 공백을 한 칸으로 맞춘 질의 그대로(공백을 지우지 않는다). "그리스도 예수"·"주 예수 그리스도"는 넣지 않는다(사용자 확정).
+    private static let personTitleExceptions: [String: String] = ["예수 그리스도": "예수", "예수그리스도": "예수"]
 
     /// 질의가 걸린 인물 이름(대표 이름 또는 걸린 별칭)만으로 이뤄졌는지 — 공백·쉼표(`nameSeparators`)와 끝의 "?"/"."는 무시한다.
     /// 예: "다윗", "다윗 솔로몬", "다윗, 솔로몬", "아브라함"(삼켜진 "라함"은 `persons(mentionedIn:)`가 이미 뺐다) → true.
@@ -1013,6 +1785,7 @@ enum PersonRelationLabeling {
         case "husband_of": return "\(source)\(sourceEunNeun) \(target)의 남편"
         case "daughter_in_law_of": return "\(source)\(sourceEunNeun) \(target)의 며느리"
         case "father_in_law_of": return "\(source)\(sourceEunNeun) \(target)의 장인"
+        case "husbands_father_of": return "\(source)\(sourceEunNeun) \(target)의 시아버지"
         case "son_in_law_of": return "\(source)\(sourceEunNeun) \(target)의 사위"
         case "great_grandfather_of": return "\(source)\(sourceEunNeun) \(target)의 증조부"
         case "adversary_of": return "\(source)\(sourceEunNeun) \(target)의 대적"
@@ -1063,6 +1836,7 @@ enum PersonRelationLabeling {
         case "husband_of": return String(localized: "\(source)은(는) \(target)의 남편", comment: "인물 관계 문장 — 첫 번째 값: 인물, 두 번째 값: 관계 대상 인물")
         case "daughter_in_law_of": return String(localized: "\(source)은(는) \(target)의 며느리", comment: "인물 관계 문장 — 첫 번째 값: 인물, 두 번째 값: 관계 대상 인물")
         case "father_in_law_of": return String(localized: "\(source)은(는) \(target)의 장인", comment: "인물 관계 문장 — 첫 번째 값: 인물, 두 번째 값: 관계 대상 인물")
+        case "husbands_father_of": return String(localized: "\(source)은(는) \(target)의 시아버지", comment: "인물 관계 문장 — 첫 번째 값: 인물, 두 번째 값: 관계 대상 인물")
         case "son_in_law_of": return String(localized: "\(source)은(는) \(target)의 사위", comment: "인물 관계 문장 — 첫 번째 값: 인물, 두 번째 값: 관계 대상 인물")
         case "great_grandfather_of": return String(localized: "\(source)은(는) \(target)의 증조부", comment: "인물 관계 문장 — 첫 번째 값: 인물, 두 번째 값: 관계 대상 인물")
         case "adversary_of": return String(localized: "\(source)은(는) \(target)의 대적", comment: "인물 관계 문장 — 첫 번째 값: 인물, 두 번째 값: 관계 대상 인물")

@@ -41,11 +41,16 @@ nonisolated enum AppLanguage {
     /// [2026-10-22] 참고자료(인물·지명·개요) 번역 데이터 언어 키. 한국어면 nil(= 기존 한국어 데이터 그대로).
     /// 사용자 확정: 중국어(zh-Hans/zh-Hant 모두) → "zh"(간체 데이터 하나뿐), 스페인어(es, es-MX …) → "es",
     /// 그 밖의 비한국어 → "en". 값은 `ReferenceData.sqlite`의 `*I18n.lang`, `OutlineSeed_<값>.json`과 같다.
+    /// [2026-10-28 9차] 프랑스어(fr, fr-CA …) → "fr", 독일어(de …) → "de", 러시아어(ru …) → "ru" 추가. 지역 변형은
+    /// `baseCode`로 묶는다(`bookNameTableID`와 같은 규칙). 이 목록은 `build_reference_data.py`의 `I18N_LANGS`와 같아야 한다 —
+    /// 여기만 늘리고 DB를 다시 빌드하지 않으면 그 언어는 번역 행이 없어 한국어로 보인다(`ReferenceDataStore` 폴백).
     static var referenceDataLanguage: String? {
         if isKorean { return nil }
         if code.hasPrefix("zh") { return "zh" }
-        if baseCode == "es" { return "es" }
-        return "en"
+        switch baseCode {
+        case "es", "fr", "de", "ru": return baseCode
+        default: return "en"
+        }
     }
 
     /// 앱 언어에 대응하는 내장 책 이름표 id. 한국어면 nil(= 한글 기본 이름).

@@ -1486,8 +1486,157 @@ def build_persons_from_person_seed(cur, abbr_index):
     report_missing_bible_verses("Persons 구절", labeled_targets)
 
 
+# === 인물 "성경 첫 등장" 순서 키 (2026-10-27 6차 신설) ===
+# 사용자 확정(2026-10-27): 관계 답·가족 목록의 기본 순서는 "성경에 처음 나오는 순서"다.
+#  - 첫 등장 절 = 이 인물의 Persons.verses(시드 verses를 expand_verse_list로 푼 값 — 범위는 절마다) 중 정경 순서
+#    (책ID = books.json orderIndex, 장, 절)로 가장 앞선 절. 동명이인은 idx마다 자기 verses가 있어 키도 idx마다 다르다.
+#  - 같은 절에서 처음 나오는 인물끼리는 그 절 개역한글 본문(BibleDB.sqlite)에서 이름이 나오는 글자 위치로 가른다.
+#    이름은 word, word에 없으면 word2 별칭 중 가장 앞선 것. 앞 글자가 한글 음절이 아닌 자리(맨 앞·공백·문장부호 뒤)를
+#    먼저 보고("단"이 "제단" 속 글자에 걸리지 않게), 그런 자리가 없을 때만 부분 문자열 첫 자리로 대신한다.
+#    못 찾으면 위치 9999(같은 절에서 이름을 찾은 사람들 뒤). 위치는 파이썬 str 인덱스(코드 포인트)다 — 앱은 이 값을
+#    다시 계산하지 않고 비교만 하므로 Swift 문자열 인덱스와 맞출 필요가 없다.
+#  - 키 = ((책*1000 + 장)*1000 + 절)*10000 + 위치(0~9998, 못 찾음 9999). 장 ≤ 150, 절 ≤ 176이라 자리가 겹치지 않는다.
+#  - verses가 비거나 풀 수 있는 절이 없으면 NULL — 앱은 NULL을 맨 뒤로 보내고 그 안에서는 원래 순서를 지킨다.
+FIRST_APPEARANCE_POSITION_NOT_FOUND = 9999
+FIRST_APPEARANCE_POSITION_MAX = 9998
+
+
+def first_appearance_key(book_id, chapter, verse, position):
+    return ((book_id * 1000 + chapter) * 1000 + verse) * 10000 + position
+
+
+def _is_hangul_syllable(ch):
+    return "가" <= ch <= "힣"
+
+
+def name_position_in_verse(text, names):
+    """절 본문에서 이름(들)이 처음 나오는 글자 위치와, 그 자리가 낱말 앞(앞 글자가 한글 음절이 아님)인지.
+    낱말 앞 자리를 먼저 찾고, 없으면 부분 문자열 첫 자리. 여러 이름이면 가장 앞선 자리. 못 찾으면 (None, False)."""
+    best_boundary = None
+    best_any = None
+    for name in names:
+        if not name:
+            continue
+        start = 0
+        while True:
+            pos = text.find(name, start)
+            if pos < 0:
+                break
+            if best_any is None or pos < best_any:
+                best_any = pos
+            if pos == 0 or not _is_hangul_syllable(text[pos - 1]):
+                if best_boundary is None or pos < best_boundary:
+                    best_boundary = pos
+                break
+            start = pos + 1
+    if best_boundary is not None:
+        return best_boundary, True
+    if best_any is not None:
+        return best_any, False
+    return None, False
+
+
+def compute_first_appearance_orders(person_rows, verse_text):
+    """person_rows: [(idx, word, word2, verses)] — Persons 표 값 그대로(verses "b:c:v,…", word2 콤마 구분).
+    verse_text(b, c, v): 그 절 본문(없으면 None). 반환: ({idx: 키 또는 None}, 통계, {idx: (b, c, v, 위치, 판정)})."""
+    stats = collections.Counter()
+    result = {}
+    detail = {}
+    for idx, word, word2, verses in person_rows:
+        stats["persons"] += 1
+        refs = []
+        for token in (verses or "").split(","):
+            parts = token.strip().split(":")
+            if len(parts) == 3 and all(p.isdigit() for p in parts):
+                refs.append(tuple(int(p) for p in parts))
+        if not refs:
+            result[idx] = None
+            stats["no_verses"] += 1
+            continue
+        b, c, v = min(refs)
+        text = verse_text(b, c, v)
+        position = None
+        how = "no_bible_text"
+        if text is not None:
+            name = (word or "").strip()
+            position, at_boundary = name_position_in_verse(text, [name]) if name else (None, False)
+            how = "word_found"
+            if position is None:
+                aliases = [a.strip() for a in (word2 or "").split(",") if a.strip()]
+                position, at_boundary = name_position_in_verse(text, aliases)
+                how = "alias_found" if position is not None else "not_found"
+            if position is not None and not at_boundary:
+                stats["inside_word_fallback"] += 1
+        stats[how] += 1
+        position = FIRST_APPEARANCE_POSITION_NOT_FOUND if position is None else min(position, FIRST_APPEARANCE_POSITION_MAX)
+        result[idx] = first_appearance_key(b, c, v, position)
+        detail[idx] = (b, c, v, position, how)
+    return result, stats, detail
+
+
+def build_person_first_appearance_order(cur):
+    """Persons.first_appearance_order를 채운다(build_persons_from_person_seed 뒤에 호출 — Persons.verses를 그대로 읽는다)."""
+    person_rows = cur.execute("SELECT idx, word, word2, verses FROM Persons").fetchall()
+    bible_con = sqlite3.connect(BIBLE_DB_PATH)
+    try:
+        texts = {(b, c, v): t for b, c, v, t in
+                 bible_con.execute("SELECT book_id, chapter, verse, content FROM BibleVerses")}
+    finally:
+        bible_con.close()
+    keys, stats, detail = compute_first_appearance_orders(person_rows, lambda b, c, v: texts.get((b, c, v)))
+    cur.executemany(
+        "UPDATE Persons SET first_appearance_order = ? WHERE idx = ?",
+        [(key, idx) for idx, key in keys.items()],
+    )
+    by_key = collections.Counter(k for k in keys.values() if k is not None)
+    by_verse = collections.Counter(k // 10000 for k in keys.values() if k is not None)
+    tie_broken = sum(n for n in by_verse.values() if n > 1)
+    still_tied = sum(n for n in by_key.values() if n > 1)
+    print(f"Persons.first_appearance_order: {stats['persons']}명 중 키 {stats['persons'] - stats['no_verses']}명 "
+          f"(구절 없음 NULL {stats['no_verses']}) — 첫 절에서 이름 찾음 {stats['word_found']}, 별칭으로 찾음 {stats['alias_found']}, "
+          f"못 찾음 {stats['not_found']}(위치 {FIRST_APPEARANCE_POSITION_NOT_FOUND}), 본문 없음 {stats['no_bible_text']}, "
+          f"낱말 속 자리로 대신 {stats['inside_word_fallback']}; 같은 첫 절을 공유해 위치로 가른 인물 {tie_broken}명, "
+          f"위치까지 같아 원래 순서로 남는 인물 {still_tied}명")
+    not_found = [(idx, detail[idx]) for idx in keys if idx in detail and detail[idx][4] == "not_found"]
+    if not_found:
+        idx_to_word = {r[0]: r[1] for r in person_rows}
+        print(f"  ⚠️ 첫 등장 절 본문에 이름(별칭 포함)이 없는 인물 {len(not_found)}명 — 시드 verses 첫 절 확인 거리(처음 20명):")
+        for idx, (b, c, v, _, _) in not_found[:20]:
+            print(f"     - {idx_to_word.get(idx, '')}#{idx}: {b}:{c}:{v}")
+
+
 # === PlaceSeed.json -> Places (2026-10-01 신설) ===
 PLACE_SEED_PATH = os.path.join(SCRIPT_DIR, "PlaceSeed.json")
+
+
+def place_aliases_from_seed(entry, label):
+    """[2026-10-28 8차] PlaceSeed 항목의 "word2"(문자열 배열, 인물 PersonSeed.word2와 같은 형식) → Places.word2(콤마 구분).
+    칸이 없거나 비면 ''. 인물(build Persons의 `",".join(word2)`)과 같은 표현이며, 그 위에 다음만 정리한다(빌드를 멈추지 않는다):
+    앞뒤 공백 제거, 빈 값·대표 이름(word)과 같은 값·중복 제거. 콤마가 든 값은 콤마 구분을 깨므로 경고하고 뺀다.
+    배열이 아닌 값(문자열 하나 등)도 경고하고 문자열 하나면 그 하나로 받는다 — 문자열을 그대로 join하면 글자마다 갈라진다."""
+    raw = entry.get("word2")
+    if raw is None or raw == "" or raw == []:
+        return ""
+    if isinstance(raw, str):
+        print(f"  ⚠️ {label}: word2가 배열이 아니라 문자열입니다 — 한 개로 받음: {raw!r}")
+        raw = [raw]
+    if not isinstance(raw, list):
+        print(f"  ⚠️ {label}: word2 형식을 읽을 수 없어 건너뜀: {raw!r}")
+        return ""
+    word = (entry.get("word") or "").strip()
+    out = []
+    for value in raw:
+        if not isinstance(value, str):
+            print(f"  ⚠️ {label}: word2 값이 문자열이 아니어서 건너뜀: {value!r}")
+            continue
+        alias = value.strip()
+        if not alias or alias == word or alias in out:
+            continue
+        if "," in alias:
+            print(f"  ⚠️ {label}: word2 값에 콤마가 있어 건너뜀(콤마 구분 저장): {alias!r}")
+            continue
+        out.append(alias)
+    return ",".join(out)
 
 
 def build_places_from_place_seed(cur, abbr_index):
@@ -1513,19 +1662,24 @@ def build_places_from_place_seed(cur, abbr_index):
     verse_warnings = []
     labeled_targets = []
     rows = []
+    alias_count = 0
     for e in entries:
         label = f"장소 {e['idx']} {e['word']}"
         verses = expand_verse_list(e.get("verses"), abbr_index, verse_warnings, label)
         labeled_targets.append((label, verses))
+        word2 = place_aliases_from_seed(e, label)
+        alias_count += 1 if word2 else 0
         rows.append((
             e["idx"], e["word"], e.get("remark") or "", verses,
             normalize_no_record(e.get("introduce")), normalize_no_record(e.get("biblecontents")),
             normalize_no_record(e.get("geography")), normalize_no_record(e.get("history")),
+            word2,
         ))
     cur.executemany(
-        "INSERT INTO Places (idx, word, remark, verses, introduce, biblecontents, geography, history) "
-        "VALUES (?, ?, ?, ?, ?, ?, ?, ?)", rows,
+        "INSERT INTO Places (idx, word, remark, verses, introduce, biblecontents, geography, history, word2) "
+        "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)", rows,
     )
+    print(f"Places 별칭(word2) 있는 지명: {alias_count}건")
     dash = {name: sum(1 for r in rows if r[i] == "-") for name, i in
             (("introduce", 4), ("biblecontents", 5), ("geography", 6), ("history", 7))}
     print(f"Places(PlaceSeed.json) 삽입: {len(rows)}건 — '-' 표시 칸 수 {dash}")
@@ -1546,9 +1700,12 @@ def build_structured_person_relations(cur):
 
     known_person_words = {row[0] for row in cur.execute("SELECT DISTINCT word FROM Persons").fetchall()}
     known_place_words = {row[0] for row in cur.execute("SELECT DISTINCT word FROM Places").fetchall()}
-    person_word_to_idx = {}
+    # [2026-10-28 7차] 이름 → idx는 그 이름의 인물이 한 명뿐일 때만 채운다. 예전에는 동명이인이면 첫 idx를 넣어
+    # (예: 태그 없는 "유다(형제)" → 족장 유다#3237) 다른 사람을 잇는 일이 있었다. 동명이인이면 빈칸(추측 금지).
+    _word_idxs = {}
     for w, i in cur.execute("SELECT word, idx FROM Persons").fetchall():
-        person_word_to_idx.setdefault(w, i)  # 동명이인이면 첫 idx만 사용(기존 관례와 동일)
+        _word_idxs.setdefault(w, set()).add(i)
+    person_word_to_idx = {w: next(iter(s)) for w, s in _word_idxs.items() if len(s) == 1}
     known_idx_set = {row[0] for row in cur.execute("SELECT idx FROM Persons").fetchall()}
     # [2026-09-22 추가] "동생"(성별 무관 라벨) 처리에 필요 — 태그된 idx가
     # 있으면 그 사람의 실제 성별로, 없고 이름이 동명이인 없이 하나뿐이면
@@ -1731,6 +1888,7 @@ def build_structured_person_relations(cur):
             # 생략됨, "조상"=선조)는 새 relation_type 없이 그대로 합류시키고,
             # 정확히 대응하는 게 없는 것만 신설했다:
             #   - "장인"/"시아버지" -> father_in_law_of(신설, "사위"와 대칭)
+            #     [2026-10-27 6차] "시아버지"는 husbands_father_of로 분리(아래 맵 주석 참고)
             #   - "사위" -> son_in_law_of(신설)
             #   - "외손자"/"외손주" -> maternal_grandfather_of를 "외조부"와
             #     반대 방향(X_to_Y)으로 재사용 — "조카"가 uncle_of를 방향만
@@ -1741,11 +1899,14 @@ def build_structured_person_relations(cur):
             #     쪽엔 이미 문장 case가 있었음 — 과거 정규식 파이프라인용으로
             #     선반영돼 있던 것을 이번에 실제로 채움)
             "며느리": ("daughter_in_law_of", "Y_to_X"),
-            "장인": ("father_in_law_of", "Y_to_X"), "시아버지": ("father_in_law_of", "Y_to_X"),
+            # [2026-10-27 6차, 사용자 확정] "시아버지"(남편의 아버지)를 "장인"(아내의 아버지)에서 분리 — 같은 타입이면
+            # "리브가의 장인"이 아브라함(리브가의 시아버지)을 답했다. 방향은 father_in_law_of와 같다:
+            # X 항목의 "Y(시아버지)" → (Y, husbands_father_of, X) = "Y는 X의 시아버지".
+            "장인": ("father_in_law_of", "Y_to_X"), "시아버지": ("husbands_father_of", "Y_to_X"),
             "사위": ("son_in_law_of", "Y_to_X"),
             "외손자": ("maternal_grandfather_of", "X_to_Y"), "외손주": ("maternal_grandfather_of", "X_to_Y"),
-            "이복형제": ("brother_of", "Y_to_X"), "이복오라비": ("brother_of", "Y_to_X"),
-            "자매": ("sister_of", "Y_to_X"), "쌍둥이 형": ("older_brother_of", "Y_to_X"),
+            "이복형제": ("brother_of", "Y_to_X"), "이복오라비": ("brother_of", "Y_to_X"), "이복누이": ("sister_of", "Y_to_X"),  # [7차] 이복누이 추가
+            "자매": ("sister_of", "Y_to_X"), "쌍둥이 형": ("older_brother_of", "Y_to_X"), "맏형": ("older_brother_of", "Y_to_X"),  # [7차] 맏형 추가
             "증조부": ("great_grandfather_of", "Y_to_X"), "외조모": ("maternal_grandmother_of", "Y_to_X"),
             "조상": ("ancestor_of", "Y_to_X"),
             # [2026-09-22 추가] "대적"/"동맹"은 가족관계가 아니라 상호관계
@@ -1876,7 +2037,7 @@ def build_structured_person_relations(cur):
                     row_target_idx = tagged_idx or None
                 if row_source_idx is None:
                     # 목록에 적힌 사람(Y)의 idx를 Persons에서 실제로 조회한다
-                    # (동명이인이면 첫 idx, 못 찾으면 빈 문자열 폴백).
+                    # (그 이름이 한 명뿐일 때만, 동명이인이거나 못 찾으면 빈 문자열).
                     row_source_idx = person_word_to_idx.get(name_part, "")
                 if row_target_idx is None:
                     # "조카" 방향 전용 — source_idx와 같은 폴백을 target 쪽에도
@@ -1966,6 +2127,58 @@ GROUP_LABEL_DEFS = {
 # GROUP_LABEL_DEFS의 어느 것과도 정확히 일치하지 않으면 후보로 모아뒀다가
 # 마지막에 경고로 출력한다(자동 보정은 하지 않음 — 추측 금지).
 GROUP_LABEL_NEAR_MISS_KEYWORDS = ("제자", "용사")
+
+# [2026-10-27 6차 신설, 사용자 확정] 성경 본문이 정한 멤버 순서가 있는 그룹 — 그룹 id → (근거 구절, [(Persons.idx, Persons.word)]).
+# 근거 구절은 "책ID:장:시작절-끝절"(PersonGroups.member_order_basis에 그대로 저장, 앱이 앱 언어의 책 약칭으로 표시).
+# idx는 동명이인(야고보 둘, 시몬 넷, 유다 셋 등)을 가르기 위해 직접 적었고, word는 빌드가 Persons와 대조하는 확인용이다
+# (다르면 경고하고 그 멤버의 순서를 비운다 — 시드 idx가 바뀌었을 때 엉뚱한 사람이 순서를 받지 않게).
+# 여기 없는 그룹(다윗의 30용사·3대용사)은 member_order가 NULL이고 앱이 Persons.first_appearance_order 순으로 보여 준다.
+GROUP_MEMBER_ORDER = {
+    # 마 10:2-4 — 시몬 베드로, 안드레, 세베대의 아들 야고보, 요한, 빌립, 바돌로매, 도마, 세리 마태, 알패오의 아들 야고보,
+    # 다대오, 가나안인 시몬, 가룟 유다. 바돌로매는 Persons에 나다나엘#329(별칭 바돌로매)로 있다.
+    "열두 제자": ("40:10:2-4", [
+        ("1777", "베드로"), ("2190", "안드레"), ("2261", "야고보"), ("4386", "요한"),
+        ("4633", "빌립"), ("329", "나다나엘"), ("528", "도마"), ("840", "마태"),
+        ("4055", "야고보"), ("439", "다대오"), ("4635", "시몬"), ("4631", "유다"),
+    ]),
+}
+
+
+def apply_group_member_order(cur):
+    """GROUP_MEMBER_ORDER를 PersonGroups.member_order_basis / PersonGroupMemberships.member_order에 적는다
+    (build_person_groups가 두 표를 채운 뒤 호출). 확인: 적은 idx가 그 그룹 멤버인지, Persons.word가 적은 이름과 같은지,
+    그룹 멤버 중 순서를 못 받은 사람이 없는지 — 어긋나면 경고만 하고(자동 보정 없음) 그 멤버는 NULL로 둔다."""
+    idx_to_word = dict(cur.execute("SELECT idx, word FROM Persons").fetchall())
+    for group_id, (basis, members) in GROUP_MEMBER_ORDER.items():
+        if cur.execute("SELECT 1 FROM PersonGroups WHERE group_id = ?", (group_id,)).fetchone() is None:
+            print(f"  ⚠️ GROUP_MEMBER_ORDER: 그룹 {group_id!r}가 PersonGroups에 없음 — 순서를 적지 않음")
+            continue
+        cur.execute("UPDATE PersonGroups SET member_order_basis = ? WHERE group_id = ?", (basis, group_id))
+        member_idxs = {r[0] for r in cur.execute(
+            "SELECT person_idx FROM PersonGroupMemberships WHERE group_id = ? AND person_idx <> ''", (group_id,))}
+        ordered = 0
+        problems = []
+        for position, (idx, expected_word) in enumerate(members, start=1):
+            if idx_to_word.get(idx) != expected_word:
+                problems.append(f"#{idx}: Persons.word={idx_to_word.get(idx)!r}, 기대값 {expected_word!r}")
+                continue
+            if idx not in member_idxs:
+                problems.append(f"{expected_word}#{idx}: 그룹 멤버가 아님")
+                continue
+            cur.execute(
+                "UPDATE PersonGroupMemberships SET member_order = ? WHERE group_id = ? AND person_idx = ?",
+                (position, group_id, idx),
+            )
+            ordered += 1
+        unordered = cur.execute(
+            "SELECT person_word, person_idx FROM PersonGroupMemberships WHERE group_id = ? AND member_order IS NULL",
+            (group_id,),
+        ).fetchall()
+        print(f"PersonGroupMemberships.member_order: {group_id} {ordered}명 (근거 {basis})")
+        for problem in problems:
+            print(f"  ⚠️ {group_id} 순서 목록 확인 필요 — {problem}")
+        for word, idx in unordered:
+            print(f"  ⚠️ {group_id} 멤버 {word}#{idx}가 순서 목록에 없음(앱에서 순서 있는 멤버 뒤, 첫 등장 순)")
 
 
 def build_person_groups(cur):
@@ -2081,18 +2294,29 @@ def build_person_groups(cur):
 #    idx로 PersonsI18n.word를, 괄호 설명·참고 라벨은 RelationLabelsI18n을 쓴다.
 # TribeSeed.json(번역본 포함)은 앱이 쓰지 않아 표를 만들지 않는다(사용자 확정 2026-10-22).
 I18N_DIR = os.path.join(SCRIPT_DIR, "i18n")
-I18N_LANGS = ("en", "zh", "es")
+# [2026-10-28 9차] fr/de/ru 추가. 값은 `AppLanguage.referenceDataLanguage`와 같아야 한다(앱이 이 값으로 `*I18n.lang`을 고른다).
+I18N_LANGS = ("en", "zh", "es", "fr", "de", "ru")
 RELATION_LABEL_VOCAB_PATH = os.path.join(I18N_DIR, "RelationLabelVocab.tsv")
-# RelationLabelVocab.tsv 열: 분류 \t 한국어 \t en \t zh \t es ('관계설명' 행만 쓴다).
-VOCAB_LANG_COLUMN = {"en": 2, "zh": 3, "es": 4}
+# RelationLabelVocab.tsv 열: 분류 \t 한국어 \t en \t zh \t es \t fr \t de \t ru ('관계설명' 행만 쓴다).
+# [9차] fr/de/ru는 언어별 파일로 나누지 않고 같은 행 뒤에 열로 붙였다 — 앞 5열(en/zh/es)은 그대로라 예전 스크립트가 새 TSV를
+# 읽어도 결과가 같고, 한국어 키가 한 곳에만 있어 언어 사이에 키가 어긋나지 않는다. 6~8열이 없거나 빈 행은 그 언어만 번역 없음
+# (앱이 한국어로 폴백)으로 둔다. 1~5열 형식 검사(5열 미만이면 형식 오류)는 예전과 같다.
+VOCAB_LANG_COLUMN = {"en": 2, "zh": 3, "es": 4, "fr": 5, "de": 6, "ru": 7}
 
 # PersonGroups.group_id(= GROUP_LABEL_DEFS의 원문 라벨)별 번역 그룹 이름 — 사용자 확정(2026-10-22).
 # GROUP_LABEL_DEFS와 키 집합이 다르면 경고하고, 없는 그룹은 행을 만들지 않는다(앱이 한국어로 폴백).
+# [9차] fr/de/ru — 사용자 확정(2026-10-28). 낱말은 앱 번들 성경(fr LSG1910, de LUT1912, ru SYN) 표기를 따랐다:
+#   열두 제자 — 마 10:1 "ses douze disciples" / "seine zwölf Jünger" / "двенадцать учеников".
+#   3대용사 — 삼하 23:16·17 "les trois vaillants hommes" / "die drei Helden" / "трое (этих) храбрых", 삼하 23:8 "Helden Davids".
+#   30용사 — 삼하 23:13·24 "des trente" / "unter den dreißig" / "из тридцати" + 위의 용사 낱말. 첫 글자만 대문자(es와 같은 꼴).
 # description은 번역을 받지 않았고 앱이 PersonGroups.description을 표시하지 않아 빈 문자열로 둔다.
 GROUP_LABEL_I18N = {
-    "열두 제자": {"en": "The Twelve Disciples", "zh": "十二门徒", "es": "Los doce discípulos"},
-    "다윗의 30용사": {"en": "David's Thirty Mighty Men", "zh": "大卫的三十勇士", "es": "Los treinta valientes de David"},
-    "다윗의 3대용사": {"en": "David's Three Mighty Men", "zh": "大卫的三个勇士", "es": "Los tres valientes de David"},
+    "열두 제자": {"en": "The Twelve Disciples", "zh": "十二门徒", "es": "Los doce discípulos",
+                "fr": "Les douze disciples", "de": "Die zwölf Jünger", "ru": "Двенадцать учеников"},
+    "다윗의 30용사": {"en": "David's Thirty Mighty Men", "zh": "大卫的三十勇士", "es": "Los treinta valientes de David",
+                  "fr": "Les trente vaillants hommes de David", "de": "Die dreißig Helden Davids", "ru": "Тридцать храбрых Давида"},
+    "다윗의 3대용사": {"en": "David's Three Mighty Men", "zh": "大卫的三个勇士", "es": "Los tres valientes de David",
+                   "fr": "Les trois vaillants hommes de David", "de": "Die drei Helden Davids", "ru": "Трое храбрых Давида"},
 }
 
 I18N_PERSON_TEXT_FIELDS = ("word", "remark", "call_title", "meaning", "introduce", "lifetime", "event",
@@ -2382,7 +2606,9 @@ def build_relation_labels_i18n(cur):
                 continue
             label_ko = cols[1].strip()
             for lang in I18N_LANGS:
-                label = cols[VOCAB_LANG_COLUMN[lang]].strip()
+                column = VOCAB_LANG_COLUMN[lang]
+                # [9차] fr/de/ru 열(6~8열)은 없는 행도 받는다 — 그 언어만 번역 없음.
+                label = cols[column].strip() if column < len(cols) else ""
                 if not label:
                     continue
                 key = (lang, label_ko)
@@ -2441,12 +2667,18 @@ def build_person_groups_i18n(cur):
         print(f"  ⚠️ GROUP_LABEL_I18N 키가 GROUP_LABEL_DEFS와 다름 — 번역 없음 {sorted(defined - translated)}, "
               f"정의 없는 번역(무시) {sorted(translated - defined)}")
     rows = []
+    missing_by_lang = collections.defaultdict(list)
     for group_id in GROUP_LABEL_DEFS:
         names = GROUP_LABEL_I18N.get(group_id) or {}
         for lang in I18N_LANGS:
             name = (names.get(lang) or "").strip()
             if name:
                 rows.append((lang, group_id, name, ""))
+            else:
+                missing_by_lang[lang].append(group_id)
+    for lang in I18N_LANGS:
+        if missing_by_lang[lang]:
+            print(f"  ⚠️ PersonGroupsI18n[{lang}] 그룹 이름 번역 없음(한국어 폴백): {', '.join(missing_by_lang[lang])}")
     cur.executemany(
         "INSERT INTO PersonGroupsI18n (lang, group_id, group_name, description) VALUES (?, ?, ?, ?)", rows
     )
@@ -2715,7 +2947,13 @@ def main():
         rel_sons TEXT NOT NULL DEFAULT '',
         rel_daughters TEXT NOT NULL DEFAULT '',
         rel_grandsons TEXT NOT NULL DEFAULT '',
-        rel_granddaughters TEXT NOT NULL DEFAULT ''
+        rel_granddaughters TEXT NOT NULL DEFAULT '',
+        -- [2026-10-27 6차 신설, 사용자 확정 "기본 순서 = 성경 첫 등장 순"] 관계 답·가족 목록 정렬 키. 이 인물의 verses
+        -- (위 verses 칸 — 시드 구절을 expand_verse_list로 푼 값) 중 정경 순서로 가장 앞선 절과, 그 절의 개역한글 본문에서
+        -- 이름(word, 없으면 word2 별칭)이 처음 나오는 글자 위치로 만든 정수((책*1000+장)*1000+절)*10000+위치.
+        -- 이름을 못 찾으면 위치 9999(같은 절에서 찾은 이름 뒤). verses가 비면 NULL(앱은 맨 뒤로 보낸다).
+        -- build_person_first_appearance_order 참고. 칸을 끝에 덧붙이기만 해서 예전 앱(열을 이름으로 SELECT)도 그대로 읽는다.
+        first_appearance_order INTEGER
     );
     CREATE INDEX idx_persons_word ON Persons(word);
 
@@ -2730,7 +2968,12 @@ def main():
         introduce TEXT NOT NULL DEFAULT '-',
         biblecontents TEXT NOT NULL DEFAULT '-',
         geography TEXT NOT NULL DEFAULT '-',
-        history TEXT NOT NULL DEFAULT '-'
+        history TEXT NOT NULL DEFAULT '-',
+        -- [2026-10-28 8차 신설, 사용자 확정 "지명 별칭으로 검색"] PlaceSeed.json "word2"(문자열 배열 — 인물 PersonSeed.word2와 같은 형식)를
+        -- Persons.word2와 같은 콤마 구분 문자열로 담는다. 없으면 ''. 예: 아벨므홀라(2025) — "아벨므흘라"(왕상 19:16 표기).
+        -- 맨 끝 칸이라 열을 이름으로 SELECT하는 예전 앱은 그대로 읽고, 앱은 이 열이 있을 때만 별칭으로 찾는다(columnExists).
+        -- build_places_from_place_seed 참고.
+        word2 TEXT NOT NULL DEFAULT ''
     );
     CREATE INDEX idx_places_word ON Places(word);
 
@@ -2783,7 +3026,10 @@ def main():
     CREATE TABLE PersonGroups (
         group_id TEXT PRIMARY KEY,
         group_name TEXT NOT NULL,
-        description TEXT NOT NULL DEFAULT ''
+        description TEXT NOT NULL DEFAULT '',
+        -- [2026-10-27 6차 신설] 멤버 순서의 성경 근거 "책ID:장:시작절-끝절"(예: 열두 제자 "40:10:2-4" = 마 10:2-4).
+        -- 빈 문자열이면 근거 순서 없음(멤버는 Persons.first_appearance_order 순). GROUP_MEMBER_ORDER 참고.
+        member_order_basis TEXT NOT NULL DEFAULT ''
     );
 
     -- person_idx는 "이름#idx" 태그가 있고 그 idx가 Persons에 실제 존재할
@@ -2800,6 +3046,9 @@ def main():
         person_idx TEXT NOT NULL DEFAULT '',
         role_note TEXT NOT NULL DEFAULT '',
         source_field TEXT NOT NULL DEFAULT '',
+        -- [2026-10-27 6차 신설] 그룹 안 순서(1부터). PersonGroups.member_order_basis가 있는 그룹만 채우고 나머지는 NULL
+        -- (앱이 Persons.first_appearance_order 순으로 보여 준다). apply_group_member_order 참고.
+        member_order INTEGER,
         UNIQUE(group_id, person_word, person_idx)
     );
     CREATE INDEX idx_person_group_memberships_person ON PersonGroupMemberships(person_idx);
@@ -2966,6 +3215,8 @@ def main():
     #    실행해야 관계추출이 최신 Persons를 기준으로 known_person_words를 계산한다
     #    [2026-09-15 순서 변경]
     build_persons_from_person_seed(cur, abbr_index)
+    # [2026-10-27 6차] 관계 답·가족 목록 정렬 키(Persons.verses를 읽으므로 바로 위 함수 뒤).
+    build_person_first_appearance_order(cur)
     # [2026-10-01] 지명은 PlaceSeed.json이 단일 소스다(PersonPlaceSeed.json은 삭제됨). 아래 build_person_place_tables()
     # 호출은 계속 중단 상태로 두며, 그 함수/PERSON_PLACE_SEED_PATH는 삭제된 파일을 가리키는 죽은 코드다.
     build_places_from_place_seed(cur, abbr_index)
@@ -2992,6 +3243,8 @@ def main():
     # build_person_place_tables(cur, abbr_index)
     build_structured_person_relations(cur)
     build_person_groups(cur)
+    # [2026-10-27 6차] 성경 본문 순서가 있는 그룹(열두 제자 = 마 10:2-4)의 멤버 순서.
+    apply_group_member_order(cur)
     # [2026-10-22 신설] 번역 표시용 표(PersonsI18n/PlacesI18n/RelationLabelsI18n/PersonGroupsI18n/NameSearchI18n).
     # 위 한국어 표를 읽기만 하고 바꾸지 않는다 — build_reference_i18n 상단 주석 참고.
     build_reference_i18n(cur)

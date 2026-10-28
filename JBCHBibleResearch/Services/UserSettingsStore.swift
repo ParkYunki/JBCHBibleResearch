@@ -39,6 +39,10 @@ final class UserSettingsStore {
         static let lastSeenAppVersion = "settings.lastSeenAppVersion"
         static let defaultTranslationCode = "settings.defaultTranslationCode"
         static let defaultDisplayedTranslationCodes = "settings.defaultDisplayedTranslationCodes"
+        // 성경 조회(메인 화면)에서 번역본 선택 팝오버로 고른 표시 열(이 기기 전용, iCloud 미러링 없음).
+        static let bibleReadingSelectedTranslationCodes = "settings.bibleReading.selectedTranslationCodes"
+        // 아이폰 성경 조회에서 스와이프로 마지막에 보던 번역본(이 기기 전용).
+        static let bibleReadingPhoneVisibleTranslationCode = "settings.bibleReading.phoneVisibleTranslationCode"
         static let lastManualSyncAt = "settings.lastManualSyncAt"
         // S1(성경 조회) 표시 폰트/크기/간격/색상.
         static let bibleFontName = "settings.bible.fontName"
@@ -256,6 +260,21 @@ final class UserSettingsStore {
     /// 맨 앞" 규칙으로 대체한다.
     var defaultDisplayedTranslationCodes: [String] {
         didSet { defaults.set(defaultDisplayedTranslationCodes, forKey: Key.defaultDisplayedTranslationCodes) }
+    }
+
+    /// 성경 조회 화면(사이드바 "성경 조회"/아이폰 "성경" 탭)에서 번역본 선택 팝오버로 고른 표시 열의 `TranslationRegistry.code`(열 순서 그대로).
+    /// 이 기기에만 저장한다 — SwiftData/CloudKit과 iCloud 키-값 저장소 어느 쪽에도 올리지 않는다.
+    /// 화면을 벗어났다가 돌아오거나 앱을 다시 실행해도 같은 열을 복원하는 데만 쓴다(`BibleReadingViewModel.persistsTranslationSelection`).
+    /// 비어 있으면(아직 고른 적 없음) 사용 중 목록(`defaultDisplayedTranslationCodes`) 순서로 연다. 사용 중이 아니거나 아직 레코드가 없는
+    /// 코드는 복원할 때 건너뛰기만 하고 여기서 지우지는 않는다.
+    var bibleReadingSelectedTranslationCodes: [String] {
+        didSet { defaults.set(bibleReadingSelectedTranslationCodes, forKey: Key.bibleReadingSelectedTranslationCodes) }
+    }
+
+    /// 아이폰 성경 조회에서 스와이프로 마지막에 보던 열의 `TranslationRegistry.code`. 이 기기에만 저장한다(동기화 없음).
+    /// 다시 열 때 그 번역본이 표시 열에 있으면 그 열로, 없으면(꺼짐·삭제·선택에서 빠짐) 첫 열로 연다. 그 경우에도 값은 지우지 않는다.
+    var bibleReadingPhoneVisibleTranslationCode: String? {
+        didSet { defaults.set(bibleReadingPhoneVisibleTranslationCode, forKey: Key.bibleReadingPhoneVisibleTranslationCode) }
     }
 
     /// "마지막 동기화 시각" — `modelContext.save()`가 성공한 시각일 뿐 실제 iCloud 업로드
@@ -594,6 +613,8 @@ final class UserSettingsStore {
         self.lastSeenAppVersion = defaults.string(forKey: Key.lastSeenAppVersion)
         self.defaultTranslationCode = defaults.string(forKey: Key.defaultTranslationCode)
         self.defaultDisplayedTranslationCodes = defaults.stringArray(forKey: Key.defaultDisplayedTranslationCodes) ?? []
+        self.bibleReadingSelectedTranslationCodes = defaults.stringArray(forKey: Key.bibleReadingSelectedTranslationCodes) ?? []
+        self.bibleReadingPhoneVisibleTranslationCode = defaults.string(forKey: Key.bibleReadingPhoneVisibleTranslationCode)
         self.lastManualSyncAt = defaults.object(forKey: Key.lastManualSyncAt) as? Date
 
         self.bibleFontName = defaults.string(forKey: Key.bibleFontName) ?? BundledFonts.defaultPostScriptName

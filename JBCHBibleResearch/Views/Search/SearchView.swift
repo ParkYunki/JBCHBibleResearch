@@ -414,6 +414,15 @@ private struct SearchContentView: View {
             case .theme(let items): return items.count
             }
         }
+
+        /// [2026-10-28 8차] 섹션 헤더 건수 배지 — 관계 답을 인물별 묶음으로 나눈 경우 묶음 머리 줄은 세지 않는다
+        /// (`QueryIntentCard.foundCount`와 같은 값). 목록 줄 수·선택 index에는 `count`를 쓴다.
+        var badgeCount: Int {
+            switch self {
+            case .relation(let items): return items.filter { $0.groupHeader == nil }.count
+            default: return count
+            }
+        }
     }
 
     private func inlineCardKind(for content: QueryIntentCard.Content) -> InlineCardKind? {
@@ -448,7 +457,16 @@ private struct SearchContentView: View {
     private func inlineCardRow(_ kind: InlineCardKind, index: Int, onSelect: @escaping () -> Void) -> some View {
         switch kind {
         case .relation(let items):
-            inlineSelectableRow(onSelect: onSelect) { relationLabel(items[index]) }
+            // [8차] 묶음 머리 줄 — 인물이 정해진 묶음은 눌러서 그 인물 상세, "기타" 묶음은 누를 수 없는 글자 줄.
+            if let header = items[index].groupHeader {
+                if header.personIdx.isEmpty {
+                    relationGroupHeaderLabel(header)
+                } else {
+                    inlineSelectableRow(onSelect: onSelect) { relationGroupHeaderLabel(header) }
+                }
+            } else {
+                inlineSelectableRow(onSelect: onSelect) { relationLabel(items[index]) }
+            }
         case .person(let items):
             inlineSelectableRow(onSelect: onSelect) { personOrPlaceLabel(items[index]) }
         case .entity(let items):
@@ -464,7 +482,13 @@ private struct SearchContentView: View {
         case .relation(let items):
             // 관계 행은 그 행의 "답 인물"(예: "갓은 야곱의 아들" → 갓)의 인물 상세를 연다. 인물로 특정되지 않으면
             // (Persons에 없는 이름, 동명이인, 장소 등) 기존처럼 관계 상세로 폴백한다.
-            if !items[index].answerWord.isEmpty,
+            // [8차] 묶음 머리 줄이면 그 묶음 인물(idx로 확정)의 상세. "기타" 머리는 누를 수 없어 여기 오지 않는다(오면 빈 화면).
+            if let header = items[index].groupHeader {
+                if !header.personIdx.isEmpty,
+                   let person = PersonDetailView.resolvePerson(named: header.personWord, idx: header.personIdx) {
+                    PersonDetailView(person: person)
+                }
+            } else if !items[index].answerWord.isEmpty,
                let person = PersonDetailView.resolvePerson(named: items[index].answerWord, idx: items[index].answerIdx) {
                 PersonDetailView(person: person)
             } else {
@@ -595,7 +619,7 @@ private struct SearchContentView: View {
         let meta = intentSectionMeta(intent)
         HStack(spacing: 0) {
             List {
-                cardSectionWrapper(meta, count: kind.count) {
+                cardSectionWrapper(meta, count: kind.badgeCount) {
                     ForEach(0..<kind.count, id: \.self) { index in
                         inlineCardRow(kind, index: index) {
                             viewModel.aiCardSelectedIndex = index
@@ -682,7 +706,7 @@ private struct SearchContentView: View {
                         inlineCardDetail(kind, index: selected)
                     }
                 } else {
-                    cardSectionWrapper(meta, count: kind.count) {
+                    cardSectionWrapper(meta, count: kind.badgeCount) {
                         ForEach(0..<kind.count, id: \.self) { index in
                             inlineCardRow(kind, index: index) {
                                 viewModel.aiCardSelectedIndex = index
@@ -743,6 +767,17 @@ private struct SearchContentView: View {
             icon: "person.2.fill", iconColor: settings.bibleTextColor ?? .primary,
             title: PersonRelationLabeling.sentence(for: item.relation),
             excerptText: PersonRelationLabeling.displayRawSentence(item.relation.rawSentence)
+        )
+    }
+
+    /// [2026-10-28 8차] 관계 답 묶음 머리 줄 — 묶음 인물의 이름(제목)과 호칭(부제, 없으면 생략). 아이콘으로 답 줄(`person.2.fill`)과
+    /// 구분한다: 인물 묶음은 인물 아이콘, "기타" 묶음은 줄임표 아이콘.
+    private func relationGroupHeaderLabel(_ header: RelationAnswerGroupHeader) -> some View {
+        rowLabel(
+            icon: header.personIdx.isEmpty ? "ellipsis.circle.fill" : "person.crop.circle.fill",
+            iconColor: settings.bibleTextColor ?? .primary,
+            title: header.title,
+            excerptText: header.subtitle.isEmpty ? nil : header.subtitle
         )
     }
 

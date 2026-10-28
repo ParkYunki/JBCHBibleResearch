@@ -545,14 +545,42 @@ final class BibleReadingViewModel {
     private let booksProvider: BooksProvider
     let maxColumns = 3
 
+    /// true면 번역본 선택 팝오버로 고른 열을 이 기기에 저장하고(`UserSettingsStore.bibleReadingSelectedTranslationCodes`), 열을 정할 때
+    /// 이 화면이 처음 만들어질 때 그 값을 따른다(`selectionCodes`). 아이폰에서 스와이프로 보던 번역본도 함께 기억한다. 메인 창의 성경 조회 화면(사이드바 "성경 조회",
+    /// 아이폰 "성경" 탭)이 true다 — 뷰모델은 화면(`BibleReadingView`의 `@State`)과 수명이 같아 다른 섹션으로 갔다가 돌아오면 새로 만들어지므로,
+    /// 저장하지 않으면 선택이 사용 중 목록 순서로 되돌아간다.
+    /// 통합 검색에서 띄운 화면(macOS/iPad)도 true다 — 같은 메인 창 안의 성경 조회이고, 사이드바 섹션이 한 번에 하나만 떠 있어 메인 성경 조회
+    /// 뷰모델과 동시에 살아 있지 않으므로 여기서 고른 선택을 저장해도 다른 화면의 열과 어긋나지 않는다(돌아가면 새 뷰모델이 최신 저장값을 복원한다).
+    /// macOS "성경 조회 새 창"만 false라 예전처럼 창마다 독립이고, 메인 화면의 저장값을 읽지도 덮어쓰지도 않는다.
+    let persistsTranslationSelection: Bool
+    /// 이 화면(뷰모델)이 보여 주려는 번역본 code 목록(열 순서). 선택을 저장하는 화면이면 만들어질 때 이 기기의 저장값으로 시작하고,
+    /// 사용자가 이 화면에서 고르면 바뀐다(동시에 저장값도 갱신). 다른 창이 나중에 저장한 값은 읽지 않는다 — 메인 창이 여러 개여도 서로의 열을
+    /// 바꾸지 않고, 마지막에 고른 값이 다음에 새로 열리는 화면의 기준이 된다. 비어 있으면(저장값 없음, 저장하지 않는 화면) 예전 규칙을 쓴다.
+    ///
+    /// `loadAvailableTranslations()`가 부를 때마다 표시 열을 이 code 목록에서 다시 계산한다(한 번만 복원하지 않는다). 이유:
+    /// - 첫 로드가 앱 시작 정리 작업(`ContentView`의 `.task` — `deduplicateRegistries`/`seedDeviceListIfNeeded`)보다 먼저 실행될 수 있다.
+    ///   그때 고른 레코드가 중복 정리로 지워져도, 다음 호출(`@Query` 변화)에서 같은 code의 남은 레코드로 다시 맞춘다.
+    /// - 일부만 있을 때 나머지가 나중에 동기화로 도착하거나 다시 켜지면 그 열도 이 순서대로 붙는다.
+    private var selectionCodes: [String]
+    /// false인 동안(말씀 요약 편집기처럼 열을 잠깐 바꾼 동안)은 `selectionCodes`로 다시 계산하지 않는다.
+    private var followsSelectionCodes = true
+
     // `booksProvider: BooksProvider = .shared`처럼 기본 인자에서 MainActor 격리 정적 프로퍼티를 참조하면
     // Swift 6 엄격 동시성에서 오류가 난다(기본 인자 표현식은 nonisolated 컨텍스트에서 평가됨).
     // 그래서 옵셔널로 받고 본문(MainActor 컨텍스트)에서 `?? .shared`로 대체한다.
     // `initialBook`이 명시된 호출(검색 결과 탭 등)은 사용자의 명확한 의도이므로 마지막 위치를 무시하고
     // 그대로 연다. nil인 일반 진입만 `LastBiblePositionTracker`(메모리 전용, 앱 재시작 시 사라짐)로
     // 복원하고, 없으면 첫 번째 책 1장을 쓴다.
-    init(modelContext: ModelContext, booksProvider: BooksProvider? = nil, initialBook: Book? = nil, initialChapter: Int? = nil) {
+    init(
+        modelContext: ModelContext,
+        booksProvider: BooksProvider? = nil,
+        initialBook: Book? = nil,
+        initialChapter: Int? = nil,
+        persistsTranslationSelection: Bool = false
+    ) {
         self.modelContext = modelContext
+        self.persistsTranslationSelection = persistsTranslationSelection
+        self.selectionCodes = persistsTranslationSelection ? UserSettingsStore.shared.bibleReadingSelectedTranslationCodes : []
         let resolvedBooksProvider = booksProvider ?? .shared
         self.booksProvider = resolvedBooksProvider
         let fallbackBook = Book(bookId: 1, testament: .old, orderIndex: 1, nameKo: "창세기", nameOriginal: "Genesis", abbreviation: ["창"], chapterCount: 50)
@@ -639,6 +667,12 @@ final class BibleReadingViewModel {
             // 사용자가 세션 중 고른 조합은 유지하되, 꺼졌거나 삭제된 번역본은 걸러낸다.
             let previousCount = displayedTranslationIDs.count
             displayedTranslationIDs = displayedTranslationIDs.filter { validIDs.contains($0) }
+            if followsSelectionCodes {
+                // 이 화면의 code 목록(사용 중이고 레코드가 있는 것만, 목록 순서)으로 맞춘다. 하나도 없으면(목록 없음, 모두 꺼짐·삭제·미도착)
+                // 지금 열을 그대로 두고, 그것도 비면 아래 기본 선택으로 간다.
+                let restored = restoredSelection(from: candidates)
+                if !restored.isEmpty { displayedTranslationIDs = restored }
+            }
             if displayedTranslationIDs.isEmpty {
                 // 최초 진입이거나 표시 중이던 열이 전부 사라진 경우 — 이전 열 개수(없으면 최대 개수)만큼 기본 선택으로 채운다.
                 displayedTranslationIDs = defaultDisplayedSelection(from: candidates, limit: previousCount > 0 ? previousCount : maxColumns)
@@ -647,6 +681,18 @@ final class BibleReadingViewModel {
         } catch {
             lastErrorDescription = String(localized: "등록된 번역본 목록을 불러오지 못했습니다: \(error.localizedDescription)")
         }
+    }
+
+    /// 이 화면의 code 목록(`selectionCodes`)을 후보 중에서 목록 순서대로 복원한다(중복 코드는 한 번만, 최대 `maxColumns`개).
+    /// 후보에 없는 코드(꺼졌거나, 삭제됐거나, 아직 동기화로 도착하지 않음)는 건너뛰고 목록·저장값에서 지우지는 않는다.
+    private func restoredSelection(from candidates: [TranslationRegistry]) -> [PersistentIdentifier] {
+        let byCode = Dictionary(candidates.map { ($0.code, $0) }, uniquingKeysWith: { first, _ in first })
+        var seen = Set<String>()
+        var chosen: [PersistentIdentifier] = []
+        for code in selectionCodes where seen.insert(code).inserted {
+            if let registry = byCode[code] { chosen.append(registry.persistentModelID) }
+        }
+        return Array(chosen.prefix(maxColumns))
     }
 
     /// 기본 표시 번역본 선택 — `defaultDisplayedTranslationCodes`(표시 번역본 체크박스)가 있으면 최우선, 비어 있으면
@@ -1204,8 +1250,26 @@ final class BibleReadingViewModel {
         navigate(toHistory: next)
     }
 
+    /// 아이폰: 지금 스와이프로 보고 있는 열의 번역본 code를 이 기기에 기억한다(선택을 저장하는 화면일 때만). 열을 찾지 못하면(nil 등) 그대로 둔다.
+    func recordPhoneVisibleColumn(_ columnID: UUID?) {
+        guard persistsTranslationSelection, let columnID,
+              let code = columns.first(where: { $0.id == columnID })?.registry.code else { return }
+        if UserSettingsStore.shared.bibleReadingPhoneVisibleTranslationCode != code {
+            UserSettingsStore.shared.bibleReadingPhoneVisibleTranslationCode = code
+        }
+    }
+
+    /// 아이폰: 기억해 둔 "보던 번역본"의 열이 지금 표시 열에 있으면 그 열 id. 없거나(꺼짐·삭제·선택에서 빠짐) 저장값이 없으면 nil(첫 열).
+    func phoneVisibleColumnIDToRestore() -> UUID? {
+        guard persistsTranslationSelection,
+              let code = UserSettingsStore.shared.bibleReadingPhoneVisibleTranslationCode else { return nil }
+        return columns.first(where: { $0.registry.code == code })?.id
+    }
+
     /// 번역본 선택 팝오버에서 호출 — 표시 목록을 교체한다(최대 maxColumns개까지만 유지).
-    func setDisplayedTranslations(_ ids: [PersistentIdentifier]) {
+    /// `persistsSelection`이 true(기본, 사용자가 직접 고름)이고 이 뷰모델이 선택을 저장하는 화면이면 결과 열을 이 기기에 저장한다.
+    /// 말씀 요약 편집기처럼 잠깐 열을 좁혔다가 되돌리는 호출은 false를 넘겨 저장값(사용자가 고른 선택)을 건드리지 않는다.
+    func setDisplayedTranslations(_ ids: [PersistentIdentifier], persistsSelection: Bool = true) {
         // 말씀 요약 편집을 끝낼 때처럼 "예전에 저장해 둔 목록"을 되돌리는 호출이 있어, 그 사이 꺼졌거나 삭제된 번역본이 섞여
         // 있을 수 있다 — 활성 번역본만 남긴다. 전부 사라졌으면(저장해 둔 열이 모두 꺼짐) 기본 선택으로 대체한다.
         let validIDs = Set(availableTranslations.map(\.persistentModelID))
@@ -1215,7 +1279,31 @@ final class BibleReadingViewModel {
         } else {
             displayedTranslationIDs = Array(filtered.prefix(maxColumns))
         }
+        if persistsTranslationSelection {
+            if persistsSelection {
+                let byID = Dictionary(availableTranslations.map { ($0.persistentModelID, $0.code) }, uniquingKeysWith: { first, _ in first })
+                selectionCodes = displayedTranslationIDs.compactMap { byID[$0] }
+                UserSettingsStore.shared.bibleReadingSelectedTranslationCodes = selectionCodes
+                followsSelectionCodes = true
+            } else {
+                // 잠깐 바꾼 열이 다음 `loadAvailableTranslations()`(동기화 도착 등)에서 원래 선택으로 되돌아가지 않게 한다.
+                followsSelectionCodes = false
+            }
+        }
         reloadVerses()
+    }
+
+    /// 말씀 요약 편집기를 닫을 때 — 잠깐 바꾸기 전 열(`ids`)로 되돌린다. 선택을 저장하는 화면이면 다시 이 화면의 code 목록을 따르게 하고,
+    /// 편집하는 동안 도착하거나 지워진 번역본도 반영한다. 저장값은 쓰지 않는다.
+    func endTemporaryTranslationSelection(restoring ids: [PersistentIdentifier]) {
+        setDisplayedTranslations(ids, persistsSelection: false)
+        guard persistsTranslationSelection else { return }
+        followsSelectionCodes = true
+        let restored = restoredSelection(from: availableTranslations)
+        if !restored.isEmpty, restored != displayedTranslationIDs {
+            displayedTranslationIDs = restored
+            reloadVerses()
+        }
     }
 
     // `Book.chapterCount`(books.json 정적 데이터)를 BookChapterPicker가 직접 쓰므로 장 개수는 여기서 조회하지 않는다.

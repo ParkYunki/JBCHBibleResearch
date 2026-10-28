@@ -1,0 +1,356 @@
+관계설명	형제	brother	兄弟	hermano
+관계설명	성경 동시대 관련 인물	contemporary biblical figure	同时代的圣经人物	personaje bíblico contemporáneo
+관계설명	동역자	fellow worker	同工	colaborador
+관계설명	주군	liege lord	主君	señor
+관계설명	대적	adversary	敌人	adversario
+관계설명	열두 제자	one of the Twelve	十二门徒之一	uno de los doce
+관계설명	선교 동역자	missionary co-worker	宣教同工	colaborador misionero
+관계설명	포로 귀환 동역자	fellow returnee from exile	被掳归回的同工	compañero del regreso del cautiverio
+관계설명	신하	court official	臣子	cortesano
+관계설명	통치 군주(왕)	reigning monarch (king)	在位君主（王）	monarca reinante (rey)
+관계설명	선지자	prophet	先知	profeta
+관계설명	동시대 선지자	contemporary prophet	同时代的先知	profeta contemporáneo
+관계설명	다윗의 30용사	one of David's Thirty	大卫的三十勇士之一	uno de los treinta valientes de David
+관계설명	제사장	priest	祭司	sacerdote
+관계설명	외부 관련 인물	related outside figure	相关的外部人物	personaje externo relacionado
+관계설명	유다 지파 친족	kinsman of the tribe of Judah	犹大支派亲属	pariente de la tribu de Judá
+관계설명	숙부	paternal uncle	叔父	tío paterno
+관계설명	제자	disciple	门徒	discípulo
+관계설명	친형제	full brother	亲兄弟	hermano carnal
+관계설명	자매	sister	姐妹	hermana
+관계설명	총독	governor	总督	gobernador
+관계설명	형	older brother	哥哥	hermano mayor
+관계설명	주님	Lord	主	Señor
+관계설명	이복형제	half brother	异母兄弟	medio hermano
+관계설명	사도	apostle	使徒	apóstol
+관계설명	스승	teacher	师傅	maestro
+관계설명	조카	nephew	侄子	sobrino
+관계설명	사위	son-in-law	女婿	yerno
+관계설명	장인	father-in-law	岳父	suegro
+관계설명	제사장 동역자	fellow priest	祭司同工	compañero sacerdote
+관계설명	동생	younger sibling	弟弟／妹妹	hermano menor
+관계설명	친구	friend	朋友	amigo
+관계설명	누이	sister	姐妹	hermana
+관계설명	레위 지파 동역자	fellow worker of the tribe of Levi	利未支派同工	colaborador de la tribu de Leví
+관계설명	지도자	leader	领袖	líder
+관계설명	아우	younger brother	弟弟	hermano menor
+관계설명	오라비	brother	兄弟	hermano
+관계설명	왕	king	王	rey
+관계설명	에브라임 지파 친족	kinsman of the tribe of Ephraim	以法莲支派亲属	pariente de la tribu de Ephraim
+관계설명	베냐민 지파 친족	kinsman of the tribe of Benjamin	便雅悯支派亲属	pariente de la tribu de Benjamín
+관계설명	증조부	great-grandfather	曾祖父	bisabuelo
+관계설명	사역 대상 왕	king he ministered to	所服事的王	rey al que ministró
+관계설명	조력자	helper	帮助者	ayudador
+관계설명	황제	emperor	皇帝	emperador
+관계설명	며느리	daughter-in-law	儿媳	nuera
+관계설명	대제사장	high priest	大祭司	sumo sacerdote
+관계설명	동맹	ally	盟友	aliado
+관계설명	후손	descendant	后裔	descendiente
+관계설명	북이스라엘 왕	king of Israel (northern kingdom)	北国以色列王	rey de Israel (reino del norte)
+관계설명	증손자	great-grandson	曾孙	bisnieto
+관계설명	언니	older sister	姐姐	hermana mayor
+관계설명	바벨론 방백(신하)	Babylonian official (courtier)	巴比伦官长（臣子）	funcionario de Babilonia (cortesano)
+관계설명	다윗의 3대용사	one of David's Three	大卫的三个勇士之一	uno de los tres valientes de David
+관계설명	백부장	centurion	百夫长	centurión
+관계설명	외조부	maternal grandfather	外祖父	abuelo materno
+관계설명	서기관	scribe	文士	escriba
+관계설명	안디옥 동역자	fellow worker at Antioch	安提阿的同工	colaborador de Antioquía
+관계설명	사촌	cousin	堂表兄弟	primo
+관계설명	남유다 왕	king of Judah (southern kingdom)	南国犹大王	rey de Judá (reino del sur)
+관계설명	외손주	grandchild through a daughter	外孙	nieto por parte de hija
+관계설명	관리	official	官员	funcionario
+관계설명	함께 보내어진 방백	fellow official sent along	一同被派的官长	funcionario enviado con él
+관계설명	함께 보냄받은 방백	fellow official sent along	一同奉差的官长	funcionario enviado con él
+관계설명	증손	great-grandchild	曾孙	bisnieto
+관계설명	외손	grandchild through a daughter	外孙	nieto por parte de hija
+관계설명	전남편	former husband	前夫	exmarido
+관계설명	군대장관	army commander	元帅	capitán del ejército
+관계설명	군 지휘관	military commander	军队将领	comandante militar
+관계설명	궁내대신	palace administrator	家宰	mayordomo de palacio
+관계설명	시부모	parents-in-law	公婆	suegros
+관계설명	적대	hostile	敌对	hostil
+관계설명	동향 용사	warrior from the same hometown	同乡勇士	guerrero de la misma tierra
+관계설명	수태고지 대상	recipient of the annunciation	受报喜者	destinataria de la anunciación
+관계설명	양자	adopted son	养子	hijo adoptivo
+관계설명	양부	adoptive father	养父	padre adoptivo
+관계설명	격퇴한 아낙 자손	Anakite he drove out	被他赶出的亚衲族人	descendiente de Anac expulsado por él
+관계설명	처형자	executioner	行刑者	ejecutor
+관계설명	그술 왕	king of Geshur	基述王	rey de Gessur
+관계설명	추방한 로마 유대인	Jews of Rome he expelled	被他驱逐的罗马犹太人	judíos de Roma expulsados por él
+관계설명	타작마당 법궤 사건 인물	figure in the threshing-floor incident with the ark	禾场约柜事件人物	personaje del suceso del arca en la era
+관계설명	베냐민 족장	Benjaminite chief	便雅悯族长	jefe de Benjamín
+관계설명	므낫세 지파 친족	kinsman of the tribe of Manasseh	玛拿西支派亲属	pariente de la tribu de Manasés
+관계설명	수석 악장	chief musician	首席伶长	músico principal
+관계설명	아스훌의 다른 아내	another wife of Ashhur	亚施户的另一个妻子	otra mujer de Asur
+관계설명	이복오라비	half brother	异母兄弟	medio hermano
+관계설명	자부	daughter-in-law	儿媳	nuera
+관계설명	친족	kinsman	亲属	pariente
+관계설명	폐위	king he deposed	被他废黜的王	rey depuesto por él
+관계설명	아람 왕	king of Aram	亚兰王	rey de Siria
+관계설명	미갈 전남편	Michal's former husband	米甲的前夫	exmarido de Michâl
+관계설명	암몬 왕	king of Ammon	亚扪王	rey de Ammón
+관계설명	페르시아 7방백 동료	fellow of the seven princes of Persia	波斯七个大臣的同僚	compañero de los siete príncipes de Persia
+관계설명	페르시아 총독부 동료	colleague in the Persian administration	波斯总督府的同僚	colega de la administración de Persia
+관계설명	바사 관리	Persian official	波斯官员	funcionario de Persia
+관계설명	왕 암살 공모자	accomplice in assassinating the king	谋杀王的同谋	cómplice en el asesinato del rey
+관계설명	시아버지	father-in-law	公公	suegro
+관계설명	수태고지 천사	angel of the annunciation	报喜的天使	ángel de la anunciación
+관계설명	주군(페르시아 왕)	liege lord (king of Persia)	主君（波斯王）	señor (rey de Persia)
+관계설명	모압 왕	king of Moab	摩押王	rey de Moab
+관계설명	추방 명령 로마 황제	Roman emperor who ordered the expulsion	下令驱逐的罗马皇帝	emperador de Roma que ordenó la expulsión
+관계설명	포도원 소유자	vineyard owner	葡萄园主人	dueño de la viña
+관계설명	시므온 지파 친족	kinsman of the tribe of Simeon	西缅支派亲属	pariente de la tribu de Simeón
+관계설명	갓 지파 친족	kinsman of the tribe of Gad	迦得支派亲属	pariente de la tribu de Gad
+관계설명	바벨론 정복 왕	conquering king of Babylon	征服者巴比伦王	rey conquistador de Babilonia
+관계설명	타작마당 소유자	owner of the threshing floor	禾场主人	dueño de la era
+관계설명	시종	attendant	侍从	criado
+관계설명	외손자	grandson through a daughter	外孙	nieto por parte de hija
+관계설명	페르시아 방백(신하)	Persian official (courtier)	波斯官长（臣子）	funcionario de Persia (cortesano)
+관계설명	족장	clan chief	族长	jefe de familia
+관계설명	동료 방백	fellow official	同僚官长	funcionario compañero
+관계설명	형제자매	sibling	兄弟姐妹	hermano o hermana
+관계설명	자손	descendant	子孙	descendiente
+관계설명	외할아버지	maternal grandfather	外祖父	abuelo materno
+관계설명	섬긴 왕	king he served	所事奉的王	rey al que sirvió
+관계설명	함께 명을 받은 자	one commissioned with him	一同受命的人	comisionado junto con él
+관계설명	함께한 므라리 자손 감독	fellow Merarite overseer	一同督工的米拉利子孙	supervisor compañero de los hijos de Merari
+관계설명	주인	master	主人	amo
+관계설명	유다 총독	governor of Judah	犹大省长	gobernador de Judá
+관계설명	계시 전달 선지자	prophet who delivered the revelation	传达启示的先知	profeta que transmitió la revelación
+관계설명	대제사장의 종	servant of the high priest	大祭司的仆人	siervo del sumo sacerdote
+관계설명	사위/아우	son-in-law / younger brother	女婿／弟弟	yerno / hermano menor
+관계설명	피고	defendant	被告	acusado
+관계설명	회당장	synagogue ruler	管会堂的	principal de la sinagoga
+관계설명	호다위야	Hodaviah	何达威雅	Odavia
+관계설명	수바엘	Shubael	书巴业	Subael
+관계설명	선조	forefather	先祖	antepasado
+관계설명	가문	family line	家族	familia
+관계설명	음행 대상	partner in immorality	淫乱的对象	cómplice de fornicación
+관계설명	사사/대적	judge / adversary	士师／敌人	juez / adversario
+관계설명	거짓 선지자	false prophet	假先知	falso profeta
+관계설명	대적(세보임 왕)	adversary (king of Zeboiim)	敌人（洗扁王）	adversario (rey de Zeboim)
+관계설명	대적(아드마 왕)	adversary (king of Admah)	敌人（押玛王）	adversario (rey de Adma)
+관계설명	의붓아들	stepson	继子	hijastro
+관계설명	다윗 왕비	wife of King David	大卫王的妃子	esposa del rey David
+관계설명	전승	tradition	传统	tradición
+관계설명	형수	older brother's wife	嫂子	cuñada
+관계설명	박해자	persecutor	逼迫者	perseguidor
+관계설명	보호자	protector	保护者	protector
+관계설명	이스라엘 초대 왕	first king of Israel	以色列第一位王	primer rey de Israel
+관계설명	왕비	queen	王妃	reina
+관계설명	비유 속 아브라함의 품	Abraham's side in the parable	比喻中亚伯拉罕的怀里	el seno de Abraham en la parábola
+관계설명	누이/아론의 아내	sister / wife of Aaron	妹妹／亚伦的妻子	hermana / mujer de Aarón
+관계설명	처남	brother-in-law (wife's brother)	妻舅	cuñado
+관계설명	또는 벨라	or Bela	或作比拉	o Bela
+관계설명	사령관	commander	统帅	comandante
+관계설명	누이/에스라의 처	sister / wife of Ezrah	姐妹／以斯拉的妻子	hermana / mujer de Ezra
+관계설명	시종장	chief attendant	侍从长	jefe de los criados
+관계설명	누가복음·사도행전 수신자	recipient of Luke and Acts	路加福音和使徒行传的受书人	destinatario de Lucas y Hechos
+관계설명	이스라엘 지도자	leader of Israel	以色列的领袖	líder de Israel
+관계설명	대적/전사시킴	adversary (slain in battle)	敌人（使之阵亡）	adversario (muerto en batalla)
+관계설명	옹립	king he installed	被他拥立的王	rey puesto por él
+관계설명	총독 그다랴 암살자	assassin of Governor Gedaliah	刺杀省长基大利的人	asesino del gobernador Gedalías
+관계설명	여고냐 왕	King Jeconiah	耶哥尼雅王	rey Jechônías
+관계설명	누이/에서의 처	sister / wife of Esau	妹妹／以扫的妻子	hermana / mujer de Esaú
+관계설명	과부	widow	寡妇	viuda
+관계설명	총리	prime minister	宰相	primer ministro
+관계설명	바벨론 관원(포로)	Babylonian official (a captive)	巴比伦官员（被掳者）	funcionario de Babilonia (cautivo)
+관계설명	포로로 잡은 유다 지도자	leader of Judah he took captive	被他掳去的犹大首领	líder de Judá llevado cautivo por él
+관계설명	포로로 잡은 유다 왕	king of Judah he took captive	被他掳去的犹大王	rey de Judá llevado cautivo por él
+관계설명	북이스라엘 제10대 왕	10th king of Israel (northern kingdom)	北国以色列第十代王	décimo rey de Israel (reino del norte)
+관계설명	비교 인물	figure for comparison	对照人物	personaje de comparación
+관계설명	크세르크세스 1세	Xerxes I	薛西斯一世	Jerjes I
+관계설명	시아버지이자 남편	father-in-law and husband	公公兼丈夫	suegro y esposo
+관계설명	돌 지방 관장	governor of the region of Dor	多珥地区的官长	gobernador de la región de Dor
+관계설명	파라오	Pharaoh	法老	Faraón
+관계설명	제부/에돔 왕자	brother-in-law (younger sister's husband) / prince of Edom	妹夫／以东王子	cuñado / príncipe de Edom
+관계설명	유다 왕	king of Judah	犹大王	rey de Judá
+관계설명	이스라엘 왕	king of Israel	以色列王	rey de Israel
+관계설명	장인/선왕	father-in-law / predecessor on the throne	岳父／先王	suegro / rey predecesor
+관계설명	아비가일 전남편	Abigail's former husband	亚比该的前夫	exmarido de Abigail
+관계설명	다윗 결혼 예정자	woman promised to David in marriage	许配给大卫的人	prometida de David
+관계설명	친구의 아들	friend's son	朋友的儿子	hijo de un amigo
+관계설명	반역자 아버지	father of the rebel	叛逆者的父亲	padre del rebelde
+관계설명	블레셋 왕	king of the Philistines	非利士王	rey de los Filisteos
+관계설명	감독관	overseer	督工	supervisor
+관계설명	타작마당	threshing floor	禾场	era
+관계설명	동녀	young virgin	童女	doncella
+관계설명	배신자	betrayer	背叛者	traidor
+관계설명	성전문지기	temple gatekeeper	圣殿守门的	portero del templo
+관계설명	소바 왕	king of Zobah	琐巴王	rey de Soba
+관계설명	증조모	great-grandmother	曾祖母	bisabuela
+관계설명	전령	messenger	传令者	mensajero
+관계설명	모사	counselor	谋士	consejero
+관계설명	메랍 남편	Merab's husband	米拉的丈夫	esposo de Merab
+관계설명	수함	Shuham	书含	Suham
+관계설명	고발 대상(바울)	one he accused (Paul)	被他控告的人（保罗）	acusado por él (Pablo)
+관계설명	재판관(총독)	judge (governor)	审判官（总督）	juez (gobernador)
+관계설명	고용주(대제사장)	employer (high priest)	雇主（大祭司）	patrón (sumo sacerdote)
+관계설명	로마서 대필 서기관	scribe who wrote down Romans	代笔写罗马书的文士	escriba que escribió Romanos
+관계설명	암살 모의 대상(왕)	target of an assassination plot (king)	被谋杀的对象（王）	objeto de un complot de asesinato (rey)
+관계설명	신전 제조 우상 여신	goddess whose shrines he made	他制造神龛所供奉的女神	diosa cuyos templecillos fabricaba
+관계설명	기록자(누가)	recorder (Luke)	记录者（路加）	narrador (Lucas)
+관계설명	요람	Joram	约兰	Joram
+관계설명	소경 거지	blind beggar	瞎眼的乞丐	mendigo ciego
+관계설명	성소 모독자의 모친	mother of the blasphemer	亵渎者的母亲	madre del blasfemo
+관계설명	조카/사위	nephew / son-in-law	侄子／女婿	sobrino / yerno
+관계설명	여선지자 사사	prophetess and judge	女先知兼士师	profetisa y jueza
+관계설명	북이스라엘 제18대 왕	18th king of Israel (northern kingdom)	北国以色列第十八代王	decimoctavo rey de Israel (reino del norte)
+관계설명	서모	father's concubine	庶母	concubina del padre
+관계설명	암몬 여인	Ammonite woman	亚扪女子	mujer Ammonita
+관계설명	사촌/생질	cousin / nephew (sister's son)	堂表兄弟／外甥	primo / sobrino (hijo de la hermana)
+관계설명	사사	judge	士师	juez
+관계설명	분봉 왕	tetrarch	分封的王	tetrarca
+관계설명	주인(대제사장)	master (high priest)	主人（大祭司）	amo (sumo sacerdote)
+관계설명	열두 제자 동료	fellow member of the Twelve	十二门徒的同伴	compañero de los doce
+관계설명	후계자	successor	继承者	sucesor
+관계설명	종	servant	仆人	siervo
+관계설명	발디엘	Paltiel	帕铁	Paltiel
+관계설명	조카/생질	nephew / nephew (sister's son)	侄子／外甥	sobrino / sobrino (hijo de la hermana)
+관계설명	여선지자	prophetess	女先知	profetisa
+관계설명	로마서 구술자(사도)	one who dictated Romans (apostle)	口述罗马书的人（使徒）	quien dictó Romanos (apóstol)
+관계설명	이스라엘 통일 왕국 제2대 왕, 시편 주요 저자, 목동	second king of united Israel, principal author of Psalms, shepherd	统一以色列国第二代王、诗篇主要作者、牧人	segundo rey del Israel unido, autor principal de los Salmos, pastor
+관계설명	지혜자	wise man	智慧人	sabio
+관계설명	대적자	opponent	敌对者	opositor
+관계설명	반역자	rebel	叛逆者	rebelde
+관계설명	유다 지파 총지휘관 족장	chief commander and leader of the tribe of Judah	犹大支派总指挥族长	jefe y comandante de la tribu de Judá
+관계설명	살렘 왕, 지극히 높으신 하나님의 제사장	king of Salem, priest of God Most High	撒冷王、至高上帝的祭司	rey de Salem, sacerdote del Dios alto
+관계설명	거지	beggar	乞丐	mendigo
+관계설명	이복누이	half sister	异母姐妹	media hermana
+관계설명	쌍둥이 형	older twin brother	双胞胎哥哥	hermano gemelo mayor
+관계설명	아람 왕, 선지자, 군 지휘관	king of Aram, prophet, military commander	亚兰王、先知、军队将领	rey de Siria, profeta, comandante militar
+관계설명	애굽 왕	king of Egypt	埃及王	rey de Egipto
+관계설명	손자	grandson	孙子	nieto
+관계설명	법적 부친	legal father	法定父亲	padre legal
+관계설명	장모	mother-in-law	岳母	suegra
+관계설명	페르시아 방백, 관료	Persian official, administrator	波斯官长、官吏	funcionario de Persia, administrador
+관계설명	여룹바알	Jerubbaal	耶路巴力	Jerobaal
+관계설명	시부	father-in-law	公公	suegro
+관계설명	일곱째	seventh	第七	séptimo
+관계설명	여섯째	sixth	第六	sexto
+관계설명	다섯째	fifth	第五	quinto
+관계설명	넷째	fourth	第四	cuarto
+관계설명	둘째	second	第二	segundo
+관계설명	셋째	third	第三	tercero
+관계설명	첫째	first	第一	primero
+관계설명	시돈 왕	king of Sidon	西顿王	rey de Sidón
+관계설명	사촌/양부	cousin / adoptive father	堂表兄／养父	primo / padre adoptivo
+관계설명	요시야 왕의 서기관	King Josiah's scribe	约西亚王的书记	escriba del rey Josías
+관계설명	애굽 제25왕조 바로 겸 구스 왕	Pharaoh of Egypt's 25th dynasty and king of Cush	埃及第二十五王朝法老兼古实王	Faraón de la dinastía XXV de Egipto y rey de Etiopía
+관계설명	아모리 왕	Amorite king	亚摩利王	rey Amorrheo
+관계설명	경고를 무시한 자	one who ignored the warning	无视警告的人	quien desoyó la advertencia
+관계설명	벧엘 제사장	priest of Bethel	伯特利的祭司	sacerdote de Beth-el
+관계설명	바벨론 왕	king of Babylon	巴比伦王	rey de Babilonia
+관계설명	계시 전달 천사	angel who delivered the revelation	传达启示的天使	ángel que transmitió la revelación
+관계설명	애굽 왕비	queen of Egypt	埃及王后	reina de Egipto
+관계설명	엘리사 선지자의 사환	servant of the prophet Elisha	先知以利沙的仆人	criado del profeta Eliseo
+관계설명	사촌 동생/양녀	younger cousin / adopted daughter	堂表妹／养女	prima menor / hija adoptiva
+관계설명	사촌 매제	husband of his younger cousin	堂表妹夫	esposo de su prima menor
+관계설명	왕실 내시	royal eunuch	王室太监	eunuco real
+관계설명	조상	ancestor	祖先	antepasado
+관계설명	아말렉 왕	king of Amalek	亚玛力王	rey de Amalec
+관계설명	외조모	maternal grandmother	外祖母	abuela materna
+관계설명	성전 찬양 동역자	fellow temple musician	圣殿歌颂的同工	compañero cantor del templo
+관계설명	남유다 여왕	reigning queen of Judah (southern kingdom)	南国犹大女王	reina gobernante de Judá (reino del sur)
+관계설명	바벨론 고관	high Babylonian official	巴比伦大臣	alto funcionario de Babilonia
+관계설명	동료 집사	fellow deacon	同工执事	diácono compañero
+관계설명	전도 대상	one he evangelized	传道的对象	persona evangelizada
+관계설명	암미엘	Ammiel	亚米利	Ammiel
+관계설명	삼무아	Shammua	沙母亚	Sammua
+관계설명	맏형	eldest brother	长兄	hermano mayor
+관계설명	소금 기둥	pillar of salt	盐柱	estatua de sal
+관계설명	숙모	aunt (uncle's wife)	婶母	tía
+관계설명	아들	son	儿子	hijo
+관계설명	이모	maternal aunt	姨母	tía materna
+관계설명	이모부	maternal aunt's husband	姨父	esposo de la tía materna
+관계설명	외삼촌	maternal uncle	舅舅	tío materno
+관계설명	처형을 명한 왕	king who ordered the execution	下令处死的王	rey que ordenó la ejecución
+관계설명	사하라임의 다른 아내	another wife of Shaharaim	沙哈连的另一个妻子	otra mujer de Saharaim
+관계설명	형제, 창 46:21의 에히	brother; Ehi in Genesis 46:21	兄弟，创世纪46:21的以希	hermano; Ehi en Génesis 46:21
+관계설명	형제, 창 46:21의 훕빔	brother; Huppim in Genesis 46:21	兄弟，创世纪46:21的户平	hermano; Huppim en Génesis 46:21
+관계설명	후계 왕	succeeding king	继位的王	rey sucesor
+관계설명	함께 아얄론 거민의 족장	fellow head of the inhabitants of Aijalon	一同作亚雅仑居民的族长	compañero jefe de los moradores de Ajalón
+관계설명	함께한 미디안 왕	fellow king of Midian	一同的米甸王	rey de Madián aliado con él
+관계설명	보낸 왕	king who sent him	差遣他的王	rey que lo envió
+관계설명	함께 보냄받은 레위 사람	fellow Levite sent along	一同奉差的利未人	Levita enviado con él
+관계설명	함께한 그핫 자손 감독	fellow Kohathite overseer	一同督工的哥辖子孙	supervisor compañero de los hijos de Coath
+관계설명	당시 왕	king at the time	当时的王	rey de aquel tiempo
+관계설명	방문하여 시험한 왕	king she visited and tested	她来访并试问的王	rey al que visitó y probó
+관계설명	남편의 다른 아내	husband's other wife	丈夫的另一个妻子	otra mujer de su marido
+관계설명	복음을 전하고 침례를 준 사람	one who preached the gospel to him and baptized him	向他传福音并为他施洗的人	quien le anunció el evangelio y lo bautizó
+관계설명	섬기던 에디오피아 여왕	Ethiopian queen he served	他所事奉的埃提阿伯女王	reina de los Etiopes a quien servía
+관계설명	다윗의 용사	one of David's mighty men	大卫的勇士	valiente de David
+관계설명	국고를 맡은 신하	official in charge of the treasury	掌管府库的臣子	funcionario encargado del tesoro
+관계설명	후손, 본문은 요압을 게하라심의 조상이라고 기록	descendant; the text records Joab as the father of those living in Ge-harashim	后裔；经文记约押为革夏纳欣人之祖	descendiente; el texto registra a Joab como padre de los habitantes de Carisim
+관계설명	대상 13:9 병행 기록의 이름	name in the parallel record of 1 Chronicles 13:9	历代志上13:9平行记载中的名字	nombre en el relato paralelo de 1 Crónicas 13:9
+관계설명	형제, 창 10:23 병행 기록상 아버지	brother; father in the parallel record of Genesis 10:23	兄弟；创世纪10:23平行记载中的父亲	hermano; padre en el relato paralelo de Génesis 10:23
+관계설명	창 10:23 병행 기록의 이름	name in the parallel record of Genesis 10:23	创世纪10:23平行记载中的名字	nombre en el relato paralelo de Génesis 10:23
+관계설명	시누이	sister-in-law (husband's sister)	小姑	cuñada (hermana del esposo)
+관계설명	같은 성읍 이름, 느 7:29	same town name, Nehemiah 7:29	同一城邑的名称, 尼希米记7:29	mismo nombre de ciudad, Nehemías 7:29
+관계설명	남편의 조부, 마 1:15-16	husband's grandfather, Matthew 1:15-16	丈夫的祖父, 马太福音1:15-16	abuelo del esposo, Mateo 1:15-16
+관계설명	눅 3:23	Luke 3:23	路加福音3:23	Lucas 3:23
+관계설명	눅 3:24	Luke 3:24	路加福音3:24	Lucas 3:24
+관계설명	느 12:35	Nehemiah 12:35	尼希米记12:35	Nehemías 12:35
+관계설명	대상 6:12	1 Chronicles 6:12	历代志上6:12	1 Crónicas 6:12
+관계설명	대상 7:12	1 Chronicles 7:12	历代志上7:12	1 Crónicas 7:12
+관계설명	대상 8:1, 3	1 Chronicles 8:1, 3	历代志上8:1, 3	1 Crónicas 8:1, 3
+관계설명	대상 8:3	1 Chronicles 8:3	历代志上8:3	1 Crónicas 8:3
+관계설명	대상 8:33	1 Chronicles 8:33	历代志上8:33	1 Crónicas 8:33
+관계설명	대상 9:11	1 Chronicles 9:11	历代志上9:11	1 Crónicas 9:11
+관계설명	대상 9:15	1 Chronicles 9:15	历代志上9:15	1 Crónicas 9:15
+관계설명	대상 9:35-36, 39	1 Chronicles 9:35-36, 39	历代志上9:35-36, 39	1 Crónicas 9:35-36, 39
+관계설명	동일인 추정	presumed same person	推定为同一人	probablemente la misma persona
+관계설명	마 1:15	Matthew 1:15	马太福音1:15	Mateo 1:15
+관계설명	마 1:16	Matthew 1:16	马太福音1:16	Mateo 1:16
+관계설명	삼상 9:1	1 Samuel 9:1	撒母耳记上9:1	1 Samuel 9:1
+관계설명	선조, 대하 31:10	forefather, 2 Chronicles 31:10	先祖, 历代志下31:10	antepasado, 2 Crónicas 31:10
+관계설명	선조, 스 10:18	forefather, Ezra 10:18	先祖, 以斯拉记10:18	antepasado, Esdras 10:18
+관계설명	양부, 역사 기록	adoptive father, historical records	养父, 历史记载	padre adoptivo, registros históricos
+관계설명	양자, 역사 기록	adopted son, historical records	养子, 历史记载	hijo adoptivo, registros históricos
+관계설명	역사 기록	historical records	历史记载	registros históricos
+관계설명	외손녀	granddaughter through a daughter	外孙女	nieta por parte de hija
+관계설명	외손자, 전승	grandson through a daughter, tradition	外孙, 传统	nieto por parte de hija, tradición
+관계설명	외조모, 전승	maternal grandmother, tradition	外祖母, 传统	abuela materna, tradición
+관계설명	이 이름을 딴 지명·족속으로 추정	presumed place or clan named after him	推定为以此名命名的地方或宗族	probable lugar o clan que lleva su nombre
+관계설명	증손자, 대상 7:26-27	great-grandson, 1 Chronicles 7:26-27	曾孙, 历代志上7:26-27	bisnieto, 1 Crónicas 7:26-27
+관계설명	증조부, 대상 7:26-27	great-grandfather, 1 Chronicles 7:26-27	曾祖父, 历代志上7:26-27	bisabuelo, 1 Crónicas 7:26-27
+관계설명	지명의 시조로 추정	presumed founder of the place name	推定为该地名的始祖	probable fundador del lugar que lleva su nombre
+관계설명	창 46:21	Genesis 46:21	创世纪46:21	Génesis 46:21
+관계설명	느 11:17	Nehemiah 11:17	尼希米记11:17	Nehemías 11:17
+관계설명	증손자, 대상 9:15	great-grandson, 1 Chronicles 9:15	曾孙, 历代志上9:15	bisnieto, 1 Crónicas 9:15
+관계설명	증조부, 대상 9:15	great-grandfather, 1 Chronicles 9:15	曾祖父, 历代志上9:15	bisabuelo, 1 Crónicas 9:15
+관계설명	동일인 추정, 느 11:17	presumed same person, Nehemiah 11:17	推定为同一人, 尼希米记11:17	probablemente la misma persona, Nehemías 11:17
+관계설명	동일인 추정, 느 12:35	presumed same person, Nehemiah 12:35	推定为同一人, 尼希米记12:35	probablemente la misma persona, Nehemías 12:35
+관계설명	동일인 추정, 대상 9:15	presumed same person, 1 Chronicles 9:15	推定为同一人, 历代志上9:15	probablemente la misma persona, 1 Crónicas 9:15
+관계설명	동일인 추정, 대상 1:17	presumed same person, 1 Chronicles 1:17	推定为同一人, 历代志上1:17	probablemente la misma persona, 1 Crónicas 1:17
+관계설명	처남(민 10:29) 또는 장인(삿 4:11), 본문 차이	brother-in-law, wife's brother (Numbers 10:29) or father-in-law (Judges 4:11), textual difference	妻舅（民数记10:29）或岳父（士师记4:11），经文记载不同	cuñado, hermano de la esposa (Números 10:29) o suegro (Jueces 4:11), diferencia textual
+관계설명	대상 1:17	1 Chronicles 1:17	历代志上1:17	1 Crónicas 1:17
+관계설명	창 11:12	Genesis 11:12	创世纪11:12	Génesis 11:12
+관계설명	눅 3:36	Luke 3:36	路加福音3:36	Lucas 3:36
+관계설명	눅 3:35-36	Luke 3:35-36	路加福音3:35-36	Lucas 3:35-36
+관계설명	왕상 15:2; 대하 11:20	1 Kings 15:2; 2 Chronicles 11:20	列王纪上15:2; 历代志下11:20	1 Reyes 15:2; 2 Crónicas 11:20
+관계설명	대하 13:2	2 Chronicles 13:2	历代志下13:2	2 Crónicas 13:2
+관계설명	동료 관리	fellow official	同僚官员	funcionario colega
+관계설명	협상 상대	negotiating counterpart	谈判对手	interlocutor en la negociación
+관계설명	대상 23:8	1 Chronicles 23:8	历代志上23:8	1 Crónicas 23:8
+관계설명	동일인 추정, 대상 26:21	presumed same person, 1 Chronicles 26:21	推定为同一人, 历代志上26:21	probablemente la misma persona, 1 Crónicas 26:21
+관계설명	동일인 추정, 대상 23:8	presumed same person, 1 Chronicles 23:8	推定为同一人, 历代志上23:8	probablemente la misma persona, 1 Crónicas 23:8
+관계설명	민 10:29	Numbers 10:29	民数记10:29	Números 10:29
+관계설명	동일인 추정, 대상 7:18	presumed same person, 1 Chronicles 7:18	推定为同一人, 历代志上7:18	probablemente la misma persona, 1 Crónicas 7:18
+관계설명	동일인 전승	same person according to tradition	传统认为是同一人	la misma persona según la tradición
+관계설명	민 26:39	Numbers 26:39	民数记26:39	Números 26:39
+관계설명	창 11:10-12	Genesis 11:10-12	创世纪11:10-12	Génesis 11:10-12
+관계설명	눅 3:35	Luke 3:35	路加福音3:35	Lucas 3:35
+관계설명	창 10:23 병행	parallel to Genesis 10:23	与创世纪10:23平行	paralelo de Génesis 10:23
+관계설명	동일인 추정, 창 10:23	presumed same person, Genesis 10:23	推定为同一人, 创世纪10:23	probablemente la misma persona, Génesis 10:23
+관계설명	대상 6:26	1 Chronicles 6:26	历代志上6:26	1 Crónicas 6:26
+관계설명	대상 25:3의 여섯째로 추정	presumably the sixth in 1 Chronicles 25:3	推定为历代志上25:3中的第六位	probablemente el sexto en 1 Crónicas 25:3
+관계설명	대상 16:38	1 Chronicles 16:38	历代志上16:38	1 Crónicas 16:38
+관계설명	고모	paternal aunt	姑母	tía paterna
+관계설명	동일인 추정, 대상 7:38	presumed same person, 1 Chronicles 7:38	推定为同一人, 历代志上7:38	probablemente la misma persona, 1 Crónicas 7:38
+관계설명	삼하 23:33	2 Samuel 23:33	撒母耳记下23:33	2 Samuel 23:33
+관계설명	대상 11:35	1 Chronicles 11:35	历代志上11:35	1 Crónicas 11:35
+관계설명	매부(민 10:29) 또는 사위(삿 4:11), 본문 차이	brother-in-law, sister's husband (Numbers 10:29) or son-in-law (Judges 4:11), textual difference	姊妹的丈夫（民数记10:29）或女婿（士师记4:11），经文记载不同	cuñado, esposo de la hermana (Números 10:29) o yerno (Jueces 4:11), diferencia textual
+관계설명	동일인 추정, 민 26:30	presumed same person, Numbers 26:30	推定为同一人, 民数记26:30	probablemente la misma persona, Números 26:30
+관계설명	감독	supervisor	监督	supervisor
+관계설명	동일인 추정, 대상 7:37	presumed same person, 1 Chronicles 7:37	推定为同一人, 历代志上7:37	probablemente la misma persona, 1 Crónicas 7:37

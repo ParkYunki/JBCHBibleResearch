@@ -333,8 +333,8 @@ private struct GeneralSettingsTab: View {
 ///   위/아래 버튼이 있고 1번이 기본값이다. 이 순서가 성경 조회 열 순서다. 최대 3개(`ActiveTranslationResolver.maxCount`).
 /// - 스위치는 "이미 추가된 번역본을 이 기기에서 보이게 할지"만 정한다(`UserSettingsStore.defaultDisplayedTranslationCodes`, 기기별).
 ///   번역본 추가·삭제와 파일 동기화(CloudKit)에는 관여하지 않으므로, 다른 기기에서 추가한 번역본도 자동으로 도착해 여기 "꺼짐"에 나타난다.
-///   `TranslationRegistry.isEnabled`는 쓰지 않는다(동기화되는 값이라 기기마다 사용 목록이 다를 때 서로를 꺼 버리기 때문). 다만 예전에 꺼 둔
-///   번역본을 다시 켤 때는 값을 맞춰 두려고 true로 되돌린다.
+///   스위치는 `TranslationRegistry.isEnabled`를 쓰지 않는다(동기화되는 값이라 한 기기의 켜기/끄기가 다른 기기로 번진다. 목록이 빌 때의 폴백만 읽는다). 예전에는 꺼 둔
+///   번역본을 다시 켤 때 true로 되돌려 썼는데, 그 쓰기도 다른 기기의 폴백(`ActiveTranslationResolver`)을 바꾸므로 뺐다(2026-10-28).
 /// - "자세히"(⋯)에서 표시 이름과 책이름표 언어를 고친다(macOS·iPad·iPhone 공통). 라이선스·동기화 상태 줄은 표시하지 않는다.
 /// - 이름·책이름표는 SwiftData `@Model`이 자동 관찰되므로 타이핑마다 `reload()`를 부르지 않는다.
 private struct TranslationsSettingsView: View {
@@ -585,10 +585,6 @@ private struct TranslationsSettingsView: View {
         var codes = settings.defaultDisplayedTranslationCodes
         if !codes.contains(translation.code) { codes.append(translation.code) }
         settings.defaultDisplayedTranslationCodes = codes
-        if !translation.isEnabled {
-            translation.isEnabled = true
-            try? modelContext.save()
-        }
     }
 
     /// 사용 중인 두 인접 항목을 맞바꾼다. 저장 목록에 레코드 없는 코드가 섞여 있어도 보이는 순서(`activeTranslations`) 기준으로 맞바꾼다.

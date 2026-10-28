@@ -102,9 +102,16 @@ public enum QueryIntentClassifier {
     // 확장용인 그 파일에 없는 기본 친족 명사를 몇 개 더했다(오매칭 여지가 거의 없는
     // 기초 어휘만, 별도 실측 검증은 안 함).
 
+    /// [2026-10-22 4차] "외삼촌"·"백부"를 더했다 — "X의 외삼촌"/"X의 백부"를 삼촌 질의(`QueryIntentHandler`의 `.uncle`)로 받으려면
+    /// `koreanRelationShapeNames`의 관계어 목록(이 배열 포함)에 있어야 한다("외삼촌"은 "삼촌"을 포함해 분류는 이미 관계였지만
+    /// 꼴 판정은 "의" 바로 뒤 관계어를 보므로 따로 필요하다). "백부"가 든 다른 말("백부장")은 관계로 분류되지만 꼴이 아니라
+    /// 일반 분류와 같은 결과(지명·인물 조회 후 nil)다. `RelationSynonyms`(키워드 검색 확장에도 쓰임)는 바꾸지 않았다.
     private static let baselineRelationWords: [String] = [
         "아들", "딸", "부모", "남편", "지파", "조카", "사촌",
         "며느리", "사위", "장인", "장모", "이모", "고모", "손자", "손녀", "자녀",
+        "외삼촌", "백부",
+        // [2026-10-27 6차] "X의 시아버지" 꼴 — "아버지"를 포함해 분류는 이미 관계였지만 꼴 판정("의" 바로 뒤 관계어)에는 따로 필요하다.
+        "시아버지",
     ]
 
     private static func isRelationQuery(_ query: String) -> Bool {
@@ -149,13 +156,19 @@ public enum QueryIntentClassifier {
     /// [2026-10-22 3차] `QueryIntentHandler.handleWithKoreanData`는 관계로 분류된 질의 중 이 함수가 nil이 아닌 것만 관계 카드로 처리한다
     /// (한국어 문장형 질의 금지 — "다윗의 아들은 누구인가", "다윗 아내", "유다 지파" → 카드 없음).
     static func koreanRelationShapeNames(_ query: String) -> [String]? {
+        koreanRelationShape(query)?.names
+    }
+
+    /// [2026-10-27 5차] `koreanRelationShapeNames`와 같은 판정이고, 걸린 관계어(`relationShapeWords` 중 하나, 예: "조카", "오라비")도
+    /// 함께 돌려준다. `QueryIntentHandler`가 기존 부분 문자열 판정(`detectRelationSubQuery`)에 없는 관계어를 이 낱말로 관계 타입에 잇는다.
+    static func koreanRelationShape(_ query: String) -> (names: [String], word: String)? {
         let compact = trimmingTrailingQueryPunctuation(query).filter { !$0.isWhitespace }
         for word in relationShapeWords {
             for suffix in ["의" + word + "들", "의" + word] where compact.hasSuffix(suffix) {
                 let head = compact.dropLast(suffix.count)
                 let names = head.split(whereSeparator: { relationShapeNameSeparators.contains($0) })
                     .map { String($0).precomposedStringWithCanonicalMapping }
-                if !names.isEmpty { return names }
+                if !names.isEmpty { return (names, word) }
             }
         }
         return nil

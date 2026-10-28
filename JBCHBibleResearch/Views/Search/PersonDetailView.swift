@@ -88,8 +88,11 @@ struct PersonDetailView: View {
         // [2026-10-22] 이름은 idx로(`displayPersonName`), 괄호 설명은 번역 사전으로(`displayRelationLabel`) 표시만 번역한다.
         // 한국어 앱이면 두 사전이 비어 있어 결과가 이전과 같다.
         let store = ReferenceDataProvider.shared.store
+        // [2026-10-27 6차] 한 라벨 안의 이름은 성경 첫 등장 순(사용자 확정 — 시드에 적힌 순서 대신). 모르는 이름은 뒤, 같으면 시드 순서.
+        // 표시용 "이름(설명)"으로 바꾸기 전에 원래 이름·idx로 정렬한다.
         func wrap(_ members: [PersonFamilyMember]) -> [(name: String, idx: String)] {
-            members.map { member in
+            let ordered = store?.sortedByFirstAppearance(members, idx: { $0.idx }, word: { $0.name }) ?? members
+            return ordered.map { member in
                 let name = store?.displayPersonName(idx: member.idx, fallback: member.name) ?? member.name
                 let note = member.note.isEmpty ? "" : (store?.displayRelationLabel(member.note) ?? member.note)
                 let displayName = note.isEmpty ? name : "\(name)(\(note))"
@@ -176,6 +179,8 @@ struct PersonDetailView: View {
         var maternalGrandfathers: [(name: String, idx: String)] = []
         // 나머지 가족관계성 기타관계 — build_reference_data.py에 매핑된 relation_type과 같은 이름.
         var fathersInLaw: [(name: String, idx: String)] = []
+        // [2026-10-27 6차] "시아버지"(husbands_father_of) — 빌드가 "장인"(father_in_law_of)과 분리해 저장한다.
+        var husbandsFathers: [(name: String, idx: String)] = []
         var sonsInLaw: [(name: String, idx: String)] = []
         var grandchildrenViaDaughter: [(name: String, idx: String)] = []
         var greatGrandfathers: [(name: String, idx: String)] = []
@@ -216,8 +221,10 @@ struct PersonDetailView: View {
             case "daughter_in_law_of":
                 if isTarget(relation) { daughtersInLaw.append((name: relation.sourceWord, idx: relation.sourceIdx)) }
             case "father_in_law_of":
-                // "장인"/"시아버지" 공통 relation_type — "자부"와 같은 이유로 target == person일 때만.
+                // "장인" — "자부"와 같은 이유로 target == person일 때만. [6차] "시아버지"는 아래 husbands_father_of로 분리됐다.
                 if isTarget(relation) { fathersInLaw.append((name: relation.sourceWord, idx: relation.sourceIdx)) }
+            case "husbands_father_of":
+                if isTarget(relation) { husbandsFathers.append((name: relation.sourceWord, idx: relation.sourceIdx)) }
             case "son_in_law_of":
                 if isTarget(relation) { sonsInLaw.append((name: relation.sourceWord, idx: relation.sourceIdx)) }
             case "maternal_grandfather_of":
@@ -257,6 +264,7 @@ struct PersonDetailView: View {
         let uniqueDaughtersInLaw = uniqueOrdered(daughtersInLaw)
         let uniqueMaternalGrandfathers = uniqueOrdered(maternalGrandfathers)
         let uniqueFathersInLaw = uniqueOrdered(fathersInLaw)
+        let uniqueHusbandsFathers = uniqueOrdered(husbandsFathers)
         let uniqueSonsInLaw = uniqueOrdered(sonsInLaw)
         let uniqueGrandchildrenViaDaughter = uniqueOrdered(grandchildrenViaDaughter)
         let uniqueGreatGrandfathers = uniqueOrdered(greatGrandfathers)
@@ -279,6 +287,7 @@ struct PersonDetailView: View {
         if !uniqueDaughtersInLaw.isEmpty { rows.append((String(localized: "자부"), uniqueDaughtersInLaw)) }
         if !uniqueMaternalGrandfathers.isEmpty { rows.append((String(localized: "외조부"), uniqueMaternalGrandfathers)) }
         if !uniqueFathersInLaw.isEmpty { rows.append((String(localized: "장인"), uniqueFathersInLaw)) }
+        if !uniqueHusbandsFathers.isEmpty { rows.append((String(localized: "시아버지"), uniqueHusbandsFathers)) }
         if !uniqueSonsInLaw.isEmpty { rows.append((String(localized: "사위"), uniqueSonsInLaw)) }
         if !uniqueGrandchildrenViaDaughter.isEmpty { rows.append((String(localized: "외손자"), uniqueGrandchildrenViaDaughter)) }
         if !uniqueGreatGrandfathers.isEmpty { rows.append((String(localized: "증조부"), uniqueGreatGrandfathers)) }
@@ -287,7 +296,12 @@ struct PersonDetailView: View {
         if !uniqueAllies.isEmpty { rows.append((String(localized: "동맹"), uniqueAllies)) }
         if !uniqueRelatedPeople.isEmpty { rows.append((String(localized: "관련 인물"), uniqueRelatedPeople)) }
         // 이름 번역은 중복 제거(`uniqueOrdered`)가 끝난 뒤에 한다(`localizedNames` 주석 참고).
-        return rows.map { row in (label: row.0, names: localizedNames(row.1)) }
+        // [2026-10-27 6차] 한 라벨 안의 이름은 성경 첫 등장 순(번역 전 한국어 이름·idx로 정렬, 모르는 이름은 뒤, 같으면 원래 순서).
+        let store = ReferenceDataProvider.shared.store
+        return rows.map { row -> (label: String, names: [(name: String, idx: String)]) in
+            let ordered = store?.sortedByFirstAppearance(row.1, idx: { $0.idx }, word: { $0.name }) ?? row.1
+            return (label: row.0, names: localizedNames(ordered))
+        }
     }
 
     /// `person.contextNotes`(`PersonContextNotes` 테이블 — 왕/총독/선지자 등 직함·역할성 참고
@@ -317,10 +331,26 @@ struct PersonDetailView: View {
             byLabel[membership.groupId, default: []].append((name: membership.otherMemberWord, idx: membership.otherMemberIdx))
         }
         // 묶는 키는 group_id(원문 라벨) 그대로, 화면 그룹 이름만 번역한다(`PersonGroupsI18n`).
+        // [2026-10-27 6차] 멤버 순서는 저장소가 이미 정했다(`personGroupMemberships` — 열두 제자는 마 10:2-4, 그 밖은 첫 등장 순).
+        // 근거 구절이 있는 그룹은 라벨 뒤에 "(마 10:2-4 순)"을 붙인다(줄 모양은 그대로, 라벨 글자만).
         let store = ReferenceDataProvider.shared.store
-        return order.map { groupId in
-            (label: store?.displayGroupName(groupId) ?? groupId, names: localizedNames(uniqueOrdered(byLabel[groupId] ?? [])))
+        return order.map { groupId -> (label: String, names: [(name: String, idx: String)]) in
+            let groupName = store?.displayGroupName(groupId) ?? groupId
+            var label = groupName
+            if let basis = store?.groupMemberOrderBasis(groupId: groupId), let basisLabel = Self.orderBasisLabel(basis) {
+                label = "\(groupName) (\(basisLabel))"
+            }
+            return (label: label, names: localizedNames(uniqueOrdered(byLabel[groupId] ?? [])))
         }
+    }
+
+    /// [6차] 그룹 멤버 순서 근거 표시 — 예: ko "마 10:2-4 순", en "Order as in Matt 10:2-4". 책 약칭은 앱 언어(`displayShortName`).
+    /// 책을 찾지 못하면 nil(라벨을 붙이지 않는다).
+    private static func orderBasisLabel(_ basis: PersonGroupOrderBasis) -> String? {
+        guard let book = BooksProvider.shared.book(id: basis.bookId) else { return nil }
+        let verses = basis.startVerse == basis.endVerse ? "\(basis.startVerse)" : "\(basis.startVerse)-\(basis.endVerse)"
+        let reference = "\(book.displayShortName) \(basis.chapter):\(verses)"
+        return String(localized: "\(reference) 순", comment: "그룹 멤버 순서의 성경 근거(예: 마 10:2-4 순) — 값: 책 약칭 장:절-절")
     }
 
     /// 이름이 `Persons`에서 정확히 하나로 특정될 때만 링크 대상을 돌려준다. idx가 있으면 그것으로

@@ -1,0 +1,15 @@
+key	comment	de	en	en-CA	es	es-MX	fil	fr	fr-CA	id	it	ja	pt-BR	ru	th	vi	zh-Hans	zh-Hant
+부모	관계 안내 카드 라벨(질의한 %@ 관계가 등록돼 있지 않습니다)	Eltern	Parents	Parents	Padres	Padres	Mga Magulang	Parents	Parents	Orang Tua	Genitori	両親	Pais	Родители	พ่อแม่	Cha mẹ	父母	父母
+자녀	관계 안내 카드 라벨(질의한 %@ 관계가 등록돼 있지 않습니다)	Kinder	Children	Children	Hijos	Hijos	Mga Anak	Enfants	Enfants	Anak	Figli	子ども	Filhos	Дети	ลูก	Con cái	子女	子女
+조상	관계 안내 카드 라벨(질의한 %@ 관계가 등록돼 있지 않습니다)	Vorfahr	Ancestor	Ancestor	Antepasado	Antepasado	Ninuno	Ancêtre	Ancêtre	Leluhur	Antenato	先祖	Antepassado	Предок	บรรพบุรุษ	Tổ tiên	祖先	祖先
+자손	관계 안내 카드 라벨(질의한 %@ 관계가 등록돼 있지 않습니다)	Nachkommen	Offspring	Offspring	Descendencia	Descendencia	Supling	Postérité	Postérité	Keturunan	Progenie	子孫	Descendência	Потомство	ลูกหลาน	Dòng dõi	子孙	子孫
+후손	관계 안내 카드 라벨(질의한 %@ 관계가 등록돼 있지 않습니다)	Nachkomme	Descendant	Descendant	Descendiente	Descendiente	Inapo	Descendant	Descendant	Keturunan	Discendente	末裔	Descendente	Потомок	ทายาท	Hậu duệ	后裔	後裔
+증손	관계 안내 카드 라벨(질의한 %@ 관계가 등록돼 있지 않습니다)	Urenkel	Great-grandchild	Great-grandchild	Bisnieto	Bisnieto	Apo sa Tuhod	Arrière-petit-enfant	Arrière-petit-enfant	Cicit	Pronipote	ひ孫	Bisneto	Правнук	เหลน	Chắt	曾孙	曾孫
+고손	관계 안내 카드 라벨(질의한 %@ 관계가 등록돼 있지 않습니다)	Ururenkel	Great-great-grandchild	Great-great-grandchild	Tataranieto	Tataranieto	Apo sa Talampakan	Arrière-arrière-petit-enfant	Arrière-arrière-petit-enfant	Canggah	Trisnipote	玄孫	Trineto	Праправнук	ลื่อ	Chút	玄孙	玄孫
+사촌	관계 안내 카드 라벨(질의한 %@ 관계가 등록돼 있지 않습니다)	Cousin	Cousin	Cousin	Primo	Primo	Pinsan	Cousin	Cousin	Sepupu	Cugino	いとこ	Primo	Двоюродный брат	ลูกพี่ลูกน้อง	Anh chị em họ	堂表亲	堂表親
+며느리	관계 안내 카드 라벨(질의한 %@ 관계가 등록돼 있지 않습니다)	Schwiegertochter	Daughter-in-law	Daughter-in-law	Nuera	Nuera	Manugang na Babae	Belle-fille	Belle-fille	Menantu Perempuan	Nuora	嫁	Nora	Невестка	ลูกสะใภ้	Con dâu	儿媳	兒媳
+장모	관계 안내 카드 라벨(질의한 %@ 관계가 등록돼 있지 않습니다)	Schwiegermutter	Mother-in-law	Mother-in-law	Suegra	Suegra	Biyenang Babae	Belle-mère	Belle-mère	Ibu Mertua	Suocera	義母	Sogra	Тёща	แม่ยาย	Mẹ vợ	岳母	岳母
+이모	관계 안내 카드 라벨(질의한 %@ 관계가 등록돼 있지 않습니다)	Tante mütterlicherseits	Maternal Aunt	Maternal Aunt	Tía materna	Tía materna	Tiya sa Ina	Tante maternelle	Tante maternelle	Bibi dari pihak ibu	Zia materna	母方のおば	Tia materna	Тётя по матери	ป้าหรือน้าฝ่ายแม่	Dì	姨母	姨母
+고모	관계 안내 카드 라벨(질의한 %@ 관계가 등록돼 있지 않습니다)	Tante väterlicherseits	Paternal Aunt	Paternal Aunt	Tía paterna	Tía paterna	Tiya sa Ama	Tante paternelle	Tante paternelle	Bibi dari pihak ayah	Zia paterna	父方のおば	Tia paterna	Тётя по отцу	ป้าหรืออาฝ่ายพ่อ	Cô	姑母	姑母
+오라비	관계 안내 카드 라벨(질의한 %@ 관계가 등록돼 있지 않습니다)	Bruder	Brother	Brother	Hermano	Hermano	Kapatid na Lalaki	Frère	Frère	Saudara Laki-laki	Fratello	兄弟	Irmão	Брат	พี่น้องชาย	Anh em trai	兄弟	兄弟
+여동생	관계 안내 카드 라벨(질의한 %@ 관계가 등록돼 있지 않습니다)	Jüngere Schwester	Younger Sister	Younger Sister	Hermana menor	Hermana menor	Nakababatang Kapatid na Babae	Sœur cadette	Sœur cadette	Adik Perempuan	Sorella minore	妹	Irmã mais nova	Младшая сестра	น้องสาว	Em gái	妹妹	妹妹

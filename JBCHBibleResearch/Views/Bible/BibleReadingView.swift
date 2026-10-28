@@ -42,7 +42,14 @@ struct BibleReadingView: View {
             } else {
                 ProgressView()
                     .onAppear {
-                        let vm = BibleReadingViewModel(modelContext: modelContext, initialBook: initialBook, initialChapter: initialChapter)
+                        let vm = BibleReadingViewModel(
+                            modelContext: modelContext,
+                            initialBook: initialBook,
+                            initialChapter: initialChapter,
+                            // 메인 창의 성경 조회 화면(사이드바 "성경 조회", 아이폰 "성경" 탭, 통합 검색에서 띄운 화면)은 이 기기에 저장된
+                            // 번역본 선택을 함께 쓴다. macOS "성경 조회 새 창"(`isPrimaryWindow == false`)만 예전처럼 창마다 따로다.
+                            persistsTranslationSelection: isPrimaryWindow
+                        )
                         vm.onAppear()
                         // `onAppear()`가 끝나면 이 장의 절 목록은 이미 로드돼 있어(`reloadVerses()`가 동기 호출) 바로 강조를
                         // 걸어도 안전하다.
@@ -359,6 +366,15 @@ private struct BibleReadingContentView: View {
     @State private var isBookmarkListPresented = false
     /// 아이폰 스와이프 정렬용 — `phoneColumns`의 `TabView` 선택 상태. 페이지가 바뀔 때마다 새로 보이는 컬럼을 정렬시킨다.
     @State private var selectedPhoneColumnID: UUID?
+    /// 아이폰: 이 화면에서 저장된 "보던 번역본"(`UserSettingsStore.bibleReadingPhoneVisibleTranslationCode`)을 이미 적용했는지.
+    /// 화면(이 뷰의 `@State`)이 새로 만들어질 때 한 번 적용하고, 열이 아직 없으면 열이 생길 때까지 미룬다.
+    @State private var hasRestoredPhoneVisibleColumn = false
+    /// 아이폰: 이 화면에서 지금 보고 있는 열의 번역본 code(메모리). 보던 열이 표시 열에서 사라지면(중복 정리로 레코드가 바뀜, 선택에서 빠짐)
+    /// 이 code의 열로, 없으면 남은 첫 열로 다시 맞춘다. 말씀 요약 편집 중에는 갱신하지 않아 편집 전에 보던 열을 기억한다.
+    @State private var phoneVisibleTranslationCode: String?
+    /// 아이폰: 코드가 방금 `selectedPhoneColumnID`에 넣은 값(복원·되돌림). 바깥 nil은 "기다리는 값 없음", `.some(nil)`은 "nil을 넣었음"이다.
+    /// 다음 `onChange`의 새 값이 이 값과 같을 때만 코드가 넣은 변화로 보고 저장값에 기록하지 않는다. 다르면(그 사이 사용자가 스와이프) 사용자 변화로 본다.
+    @State private var pendingProgrammaticPhoneColumnID: UUID?? = nil
     /// 방금 페이지가 바뀌어 "이 컬럼을 이 절로 맞춰라"고 명령한
     /// 대상(`phoneColumns`/`TranslationColumnView.pendingCenterAlignment` 참고).
     @State private var phoneAlignmentTarget: PhoneAlignmentTarget?
@@ -962,7 +978,8 @@ private struct BibleReadingContentView: View {
             displayedTranslationIDsBeforeWordSummary = viewModel.displayedTranslationIDs
         }
         if let baseID = viewModel.displayedTranslationIDs.first {
-            viewModel.setDisplayedTranslations([baseID])
+            // 편집 중에만 잠깐 좁히는 것이라 저장된 선택(`bibleReadingSelectedTranslationCodes`)은 바꾸지 않고, 닫을 때까지 저장된 선택을 따르지도 않는다.
+            viewModel.setDisplayedTranslations([baseID], persistsSelection: false)
         }
 
         // 왼쪽 사이드바 닫기 — macOS/iPadOS에서만 의미가 있다.
@@ -994,9 +1011,17 @@ private struct BibleReadingContentView: View {
         // (macOS는 이 값을 읽지 않아 무해하다).
         isWordSummaryInspectorVisible = false
         if let previousIDs = displayedTranslationIDsBeforeWordSummary {
-            viewModel.setDisplayedTranslations(previousIDs)
+            // 좁히기 전 상태로 되돌릴 뿐이라 저장값을 다시 쓰지 않는다(좁힐 때도 저장하지 않았으므로 저장값은 이미 편집 전 선택이다).
+            viewModel.endTemporaryTranslationSelection(restoring: previousIDs)
         }
         displayedTranslationIDsBeforeWordSummary = nil
+        // 아이폰: 편집 전에 보던 열로 되돌린다(없으면 남은 첫 열).
+        if isPhone {
+            let columns = viewModel.columns
+            let targetID = columns.first(where: { $0.registry.code == phoneVisibleTranslationCode })?.id ?? columns.first?.id
+            // 다른 경로와 같이 저장값은 덮어쓰지 않는다 — 보던 번역본이 없어 첫 열로 열어도, 그 번역본을 다시 켜면 다음 실행 때 그 열로 돌아간다.
+            setPhoneColumnProgrammatically(targetID)
+        }
         SidebarVisibilityRequest.shared.requestRestore()
         #if os(macOS)
         // macOS는 인스펙터가 아닌 별도 `NSPanel`을 쓰므로 `wordSummaryBeingEdited`를 즉시 비운다.
@@ -1087,7 +1112,8 @@ private struct BibleReadingContentView: View {
                     findMatchVerses: findModel.matchedVerses(in: column.id),
                     currentFindVerse: findModel.currentVerse
                 )
-                .tag(column.id)
+                // 선택 바인딩(`selectedPhoneColumnID`)이 `UUID?`라 태그 타입도 맞춘다.
+                .tag(Optional(column.id))
             }
         }
         #if os(iOS)
@@ -1101,7 +1127,22 @@ private struct BibleReadingContentView: View {
         // `.page` 스타일 `TabView` 컨테이너 프레임 자체는 배경을 칠한 곳이 없어 기본색 띠가 보일 수 있으므로,
         // 다른 컨테이너처럼 "nil이면 기존 그대로" 폴백으로 배경을 준다.
         .background(settings.bibleBackgroundColor ?? Color.clear)
+        // 다시 열면 지난번에 스와이프로 보던 번역본으로 연다. 첫 진입 때 열이 아직 없으면(최초 실행) 열이 생길 때 적용한다.
+        .onAppear { restorePhoneVisibleColumnIfNeeded() }
+        .onChange(of: viewModel.columns.map(\.id)) { _, _ in restorePhoneVisibleColumnIfNeeded() }
         .onChange(of: selectedPhoneColumnID) { _, newValue in
+            // 스와이프로 보는 번역본을 기억한다 — 메모리(이 화면)는 항상, 이 기기 저장값은 사용자 스와이프일 때만.
+            // 말씀 요약 편집 중(열을 잠깐 1개로 좁힌 상태)의 변화는 둘 다 기억하지 않는다.
+            let isProgrammatic = pendingProgrammaticPhoneColumnID == .some(newValue)
+            pendingProgrammaticPhoneColumnID = nil
+            if displayedTranslationIDsBeforeWordSummary == nil {
+                if let code = viewModel.columns.first(where: { $0.id == newValue })?.registry.code {
+                    phoneVisibleTranslationCode = code
+                }
+                if !isProgrammatic {
+                    viewModel.recordPhoneVisibleColumn(newValue)
+                }
+            }
             // 방금까지 보고 있던(=스크롤 가능했던 유일한) 컬럼이 리더로서 마지막
             // 보고한 중앙 절을 그대로 새로 보이는 컬럼에 넘긴다. 아직 아무도
             // 스크롤한 적이 없으면(latestEvent == nil) 아무 것도 하지 않는다 —
@@ -1109,6 +1150,34 @@ private struct BibleReadingContentView: View {
             guard let newValue, let verse = viewModel.scrollSyncCoordinator.latestEvent?.verse else { return }
             phoneAlignmentTarget = PhoneAlignmentTarget(columnID: newValue, verse: verse)
         }
+    }
+
+    /// 아이폰 "보던 번역본" 맞추기. 선택은 항상 실제 열 id로 둔다(책갈피·원문 정보가 대상으로 삼는 열이 화면과 어긋나지 않게). 열이 없을 때만 nil.
+    /// - 처음: 저장된 code의 열이 표시 열에 있으면 그 열, 없으면(꺼짐·삭제·선택에서 빠짐) 첫 열. 저장값은 지우지 않는다.
+    /// - 그 뒤: 선택한 열이 표시 열에서 사라졌을 때만 이 화면이 보던 code의 열로, 없으면 남은 첫 열로 바꾼다.
+    private func restorePhoneVisibleColumnIfNeeded() {
+        // 말씀 요약 편집 중에는 열이 잠깐 1개로 좁혀진다. 이때는 건드리지 않고, 닫을 때 `closeWordSummaryEditor`가 되돌린다.
+        guard isPhone, displayedTranslationIDsBeforeWordSummary == nil else { return }
+        let columns = viewModel.columns
+        guard let firstColumn = columns.first else {
+            if hasRestoredPhoneVisibleColumn, selectedPhoneColumnID != nil { setPhoneColumnProgrammatically(nil) }
+            return
+        }
+        if !hasRestoredPhoneVisibleColumn {
+            hasRestoredPhoneVisibleColumn = true
+            setPhoneColumnProgrammatically(viewModel.phoneVisibleColumnIDToRestore() ?? firstColumn.id)
+            return
+        }
+        if let current = selectedPhoneColumnID, columns.contains(where: { $0.id == current }) { return }
+        let targetID = columns.first(where: { $0.registry.code == phoneVisibleTranslationCode })?.id ?? firstColumn.id
+        setPhoneColumnProgrammatically(targetID)
+    }
+
+    /// 코드가 아이폰 열 선택을 바꾼다(복원·되돌림). 값이 같으면 아무것도 하지 않는다(그때는 `onChange`가 오지 않아 표시가 남지 않게).
+    private func setPhoneColumnProgrammatically(_ columnID: UUID?) {
+        guard columnID != selectedPhoneColumnID else { return }
+        pendingProgrammaticPhoneColumnID = .some(columnID)
+        selectedPhoneColumnID = columnID
     }
 
     private var sideBySideColumns: some View {

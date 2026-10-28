@@ -28,12 +28,13 @@
 //  ⚠️ `importIfNeeded`는 기기당 한 번만 실행된다(`UserSettingsStore.hasImportedOutlineSeed` 플래그).
 //  JSON을 고친 뒤 다시 테스트하려면 앱을 지우고 재설치해 플래그를 초기화해야 한다.
 //
-//  [2026-10-22] 번역 개요 — 비한국어 앱(`AppLanguage.referenceDataLanguage`)이면 `Resources/OutlineSeed_<en|zh|es>.json`을
+//  [2026-10-22] 번역 개요 — 비한국어 앱(`AppLanguage.referenceDataLanguage`)이면 `Resources/OutlineSeed_<en|zh|es|fr|de|ru>.json`을
 //  대신 가져온다(없으면 기존 한국어 `OutlineSeed.json`). 번역본은 평문이라, 가져올 때 한 번 "설교 본문 글자 크기"
 //  (`UserSettingsStore.sermonBodyFontSize`, 설정 "내 설교 – 본문")의 단일 서식 RTF로 감싸 저장한다 — 그 뒤 설정을 바꿔도
 //  이미 가져온 개요는 따라가지 않는다(사용자 확정). 가져오기 플래그는 언어와 무관한 기존 1회 플래그 그대로라, 가져온 뒤
 //  앱 언어를 바꿔도 다시 가져오지 않는다. 책 이름("book")은 번역본도 한글 `nameKo` 그대로다.
-//  ⚠️ 번역 JSON 3개도 Copy Bundle Resources(타깃 멤버십)에 포함돼야 한다.
+//  ⚠️ 번역 JSON 6개(en/zh/es, [2026-10-28 9차] fr/de/ru)도 Copy Bundle Resources(타깃 멤버십)에 포함돼야 한다. 빠지면 그 언어는
+//  한국어 `OutlineSeed.json`을 가져오고, 1회 플래그 때문에 나중에 파일을 넣어도 그 기기에서는 다시 가져오지 않는다.
 //
 
 import Foundation

@@ -120,6 +120,39 @@ public struct PersonGroupMembershipRow: Hashable {
     }
 }
 
+/// [2026-10-27 6차] 그룹 멤버 순서의 성경 근거 구절(`PersonGroups.member_order_basis` "책ID:장:시작절-끝절"을 푼 값).
+/// 예: 열두 제자 → 마 10:2-4(40, 10, 2, 4). 한 절이면 `startVerse == endVerse`. 화면 표시(책 약칭·언어)는 앱 레이어 책임이다.
+public struct PersonGroupOrderBasis: Hashable {
+    public let bookId: Int
+    public let chapter: Int
+    public let startVerse: Int
+    public let endVerse: Int
+
+    public init(bookId: Int, chapter: Int, startVerse: Int, endVerse: Int) {
+        self.bookId = bookId
+        self.chapter = chapter
+        self.startVerse = startVerse
+        self.endVerse = endVerse
+    }
+
+    /// "40:10:2-4" 또는 "40:10:2" → 값. 형식이 다르거나 0 이하·끝 절 < 시작 절이면 nil(추측하지 않는다).
+    public init?(storedText: String) {
+        let parts = storedText.split(separator: ":", omittingEmptySubsequences: false)
+        guard parts.count == 3, let book = Int(parts[0]), let chapter = Int(parts[1]) else { return nil }
+        let range = parts[2].split(separator: "-", omittingEmptySubsequences: false)
+        guard range.count == 1 || range.count == 2, let start = Int(range[0]) else { return nil }
+        let end: Int
+        if range.count == 2 {
+            guard let parsedEnd = Int(range[1]) else { return nil }
+            end = parsedEnd
+        } else {
+            end = start
+        }
+        guard book > 0, chapter > 0, start > 0, end >= start else { return nil }
+        self.init(bookId: book, chapter: chapter, startVerse: start, endVerse: end)
+    }
+}
+
 /// 친인척 9종(할아버지~손녀, `PersonFamilyRelations`)은 `PersonRelations`가 아니라 `Persons`의
 /// 전용 컬럼(`rel_*`, PersonSeed.json 원본 그대로)에서 읽는다 — `PersonRelationRecord`는 같은 세대
 /// 그룹(아버지/어머니, 아들/딸 등)을 표제어 성별만으로 son_of/daughter_of 등에 뭉뚱그려 저장해
@@ -192,11 +225,15 @@ public struct PlaceEntity: Hashable {
     /// [2026-10-22] 화면 표시용 번역(`PlacesI18n`). 한국어 앱·번역 없음이면 nil — 위 한국어 필드는 언제나 그대로이며
     /// 동명 지명 묶기(`placesSharingName(word:)`) 같은 판정은 계속 한국어 `word`로 한다. 화면은 `display*`를 쓴다.
     public let localized: PlaceLocalizedText?
+    /// [2026-10-28 8차] 질의가 대표 이름이 아니라 별칭(`Places.word2`, 예: 아벨므홀라의 "아벨므흘라")으로 이 지명에 걸렸으면 그 별칭
+    /// (`PersonEntity.matchedAlias`와 같은 뜻). 아니면 nil. `ReferenceDataStore.places(mentionedIn:)`만 채운다.
+    /// 카드 제목은 언제나 `word`(대표 이름)다. 호출부는 "질의 전체가 이름인가" 판정에 `matchedAlias ?? word`를 쓴다.
+    public let matchedAlias: String?
 
     public init(
         idx: String, word: String, remark: String, verseRefs: [BibleVerseRef],
         introduce: String, bibleContents: String, geography: String, history: String,
-        localized: PlaceLocalizedText? = nil
+        localized: PlaceLocalizedText? = nil, matchedAlias: String? = nil
     ) {
         self.idx = idx
         self.word = word
@@ -207,6 +244,7 @@ public struct PlaceEntity: Hashable {
         self.geography = geography
         self.history = history
         self.localized = localized
+        self.matchedAlias = matchedAlias
     }
 }
 

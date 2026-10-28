@@ -29,7 +29,7 @@ public final class ReferenceDataStore {
     // 아래 사전·목록은 init에서 한 번 읽어 `let`으로 둔다 — 이 타입은 스레드 안전하지 않다고 명시돼 있어(상단 주석)
     // 지연 캐시(`lazy var`)는 동시 접근 시 데이터 경쟁이 생길 수 있지만, 읽기 전용 `let`은 그렇지 않다.
 
-    /// 번역 표시 언어("en"/"zh"/"es"). nil이면 한국어 — 이때 아래 사전은 모두 비어 있고, 모든 `display*`/
+    /// 번역 표시 언어("en"/"zh"/"es"/"fr"/"de"/"ru" — [9차] fr/de/ru 추가). nil이면 한국어 — 이때 아래 사전은 모두 비어 있고, 모든 `display*`/
     /// `localized` 값이 한국어 원본과 같다(추가 쿼리 0회). 번역 표가 없는 예전 DB면 인자와 무관하게 nil이다.
     public let contentLanguage: String?
     /// `PersonsI18n.word`(비어 있지 않은 것만) — 관계·그룹·참고 정보에 나오는 이름을 idx로 번역할 때 쓴다.
@@ -45,17 +45,37 @@ public final class ReferenceDataStore {
     /// `foldForNameSearch`로 직접 만든다(질의와 같은 함수로 접어야 Python/Swift 접기 규칙 차이가 생기지 않는다).
     private let translatedNames: [TranslatedNameEntry]
 
+    // MARK: 성경 첫 등장 순서 (2026-10-27 6차 신설)
+    //
+    // `Persons.first_appearance_order`(빌드가 계산한 정렬 키 — `build_person_first_appearance_order` 참고)와 그룹 멤버 순서
+    // (`PersonGroupMemberships.member_order`, `PersonGroups.member_order_basis`). 번역 층과 같은 이유(이 타입은 스레드 안전하지
+    // 않다)로 init에서 한 번 읽어 `let`으로 둔다(인물 약 3천 명 — 정수 사전 하나). 열이 없는 예전 DB면 모두 비어 있고, 정렬
+    // 함수는 입력 순서를 그대로 돌려준다.
+
+    /// idx → 키(NULL이 아닌 것만).
+    private let firstAppearanceOrderByIdx: [String: Int64]
+    /// 열이 있는 DB의 `Persons.idx` 전부 — idx가 Persons에 있으면 키가 NULL이어도 이름으로 다시 찾지 않는다(`personGender`와 같은 규칙).
+    private let personIdxsWithOrderColumn: Set<String>
+    /// 이름이 `Persons`에서 정확히 한 명인 인물만: `word` → 키(`isUniquePersonName`과 같은 기준, 동명이인은 넣지 않는다).
+    private let firstAppearanceOrderByUniqueWord: [String: Int64]
+    /// `PersonGroupMemberships.member_order` 열이 있는지.
+    private let hasGroupMemberOrderColumn: Bool
+    /// `PersonGroups.member_order_basis`(비어 있지 않고 형식이 맞는 것만): group_id → 근거 구절.
+    private let groupOrderBasisById: [String: PersonGroupOrderBasis]
+    /// [2026-10-28 8차] `Places.word2`(지명 별칭) 열이 있는지. 없는 예전 DB면 별칭을 읽지 않는다(예전 동작 그대로).
+    private let hasPlaceAliasColumn: Bool
+
     private struct TranslatedNameEntry {
         let kind: ReferenceEntity.Kind
         let idx: String
         let name: String
-        /// `foldForNameSearch(name)`의 문자 배열(en/es 단어 경계 비교용 — 공백 하나 유지).
+        /// `foldForNameSearch(name)`의 문자 배열(zh 밖 언어의 단어 경계 비교용 — 공백 하나 유지).
         let foldedCharacters: [Character]
         /// 위에서 공백을 모두 뺀 문자 배열(zh 부분 문자열 비교용).
         let compactCharacters: [Character]
     }
 
-    /// - Parameter contentLanguage: 번역 표시 언어("en"/"zh"/"es"), 한국어면 nil(기본값 — 기존 호출부·테스트는 그대로
+    /// - Parameter contentLanguage: 번역 표시 언어("en"/"zh"/"es"/"fr"/"de"/"ru"), 한국어면 nil(기본값 — 기존 호출부·테스트는 그대로
     ///   한국어로 동작한다). 이 값의 해석(앱 언어 → 데이터 언어)은 앱 레이어 책임이다(`AppLanguage.referenceDataLanguage`).
     public init(filePath: String, contentLanguage: String? = nil) throws {
         self.filePath = filePath
@@ -67,6 +87,15 @@ public final class ReferenceDataStore {
         }
         self.handle = db
         // 아래 정적 도우미는 `Self.`가 아니라 타입 이름으로 부른다 — 모든 저장 프로퍼티가 초기화되기 전이라 `self`를 쓸 수 없다.
+
+        // [2026-10-27 6차] 첫 등장 순서·그룹 멤버 순서. 열이 없는 예전 DB면 빈 값(정렬하지 않음 — 예전 순서 그대로).
+        let orders = ReferenceDataStore.loadFirstAppearanceOrders(in: db)
+        self.firstAppearanceOrderByIdx = orders.byIdx
+        self.personIdxsWithOrderColumn = orders.knownIdxs
+        self.firstAppearanceOrderByUniqueWord = orders.byUniqueWord
+        self.hasGroupMemberOrderColumn = ReferenceDataStore.columnExists("member_order", inTable: "PersonGroupMemberships", in: db)
+        self.groupOrderBasisById = ReferenceDataStore.loadGroupOrderBases(in: db)
+        self.hasPlaceAliasColumn = ReferenceDataStore.columnExists("word2", inTable: "Places", in: db)
 
         // 번역 표가 없는 예전 DB면 한국어로 내려앉는다(throw하지 않는다 — 번역이 없어도 한국어 데이터는 열려야 한다).
         let language: String?
@@ -125,6 +154,71 @@ public final class ReferenceDataStore {
         }
         sqlite3_bind_text(statement, 1, name, -1, SQLITE_TRANSIENT)
         return sqlite3_step(statement) == SQLITE_ROW
+    }
+
+    /// [6차] `table`에 `column` 열이 있는지(`PRAGMA table_info`). 표 이름은 이 파일 안의 고정 문자열만 넘긴다(바인딩 불가 자리).
+    /// 실패하면 false(= 열 없음으로 취급 — 예전 DB 동작).
+    private static func columnExists(_ column: String, inTable table: String, in db: OpaquePointer) -> Bool {
+        var statement: OpaquePointer?
+        defer { sqlite3_finalize(statement) }
+        guard sqlite3_prepare_v2(db, "PRAGMA table_info(\(table))", -1, &statement, nil) == SQLITE_OK else { return false }
+        while sqlite3_step(statement) == SQLITE_ROW {
+            // table_info 열 순서: cid, name, type, notnull, dflt_value, pk
+            if let name = sqlite3_column_text(statement, 1).map({ String(cString: $0) }), name == column {
+                return true
+            }
+        }
+        return false
+    }
+
+    /// [6차] `Persons.first_appearance_order`를 읽는다. 열이 없거나 읽기에 실패하면 모두 빈 값.
+    private static func loadFirstAppearanceOrders(
+        in db: OpaquePointer
+    ) -> (byIdx: [String: Int64], knownIdxs: Set<String>, byUniqueWord: [String: Int64]) {
+        guard columnExists("first_appearance_order", inTable: "Persons", in: db) else { return ([:], [], [:]) }
+        var statement: OpaquePointer?
+        defer { sqlite3_finalize(statement) }
+        guard sqlite3_prepare_v2(db, "SELECT idx, word, first_appearance_order FROM Persons", -1, &statement, nil) == SQLITE_OK else {
+            return ([:], [], [:])
+        }
+        var byIdx: [String: Int64] = [:]
+        var knownIdxs = Set<String>()
+        var keyByWord: [String: Int64] = [:]
+        var wordCounts: [String: Int] = [:]
+        while sqlite3_step(statement) == SQLITE_ROW {
+            let idx = sqlite3_column_text(statement, 0).map { String(cString: $0) } ?? ""
+            let word = sqlite3_column_text(statement, 1).map { String(cString: $0) } ?? ""
+            let key: Int64? = sqlite3_column_type(statement, 2) == SQLITE_NULL ? nil : sqlite3_column_int64(statement, 2)
+            if !idx.isEmpty {
+                knownIdxs.insert(idx)
+                if let key { byIdx[idx] = key }
+            }
+            if !word.isEmpty {
+                wordCounts[word, default: 0] += 1
+                if let key { keyByWord[word] = key }
+            }
+        }
+        // 이름이 한 명뿐인 인물만 이름으로 찾게 남긴다(동명이인이면 어느 쪽 키인지 알 수 없다).
+        let byUniqueWord = keyByWord.filter { wordCounts[$0.key] == 1 }
+        return (byIdx, knownIdxs, byUniqueWord)
+    }
+
+    /// [6차] `PersonGroups.member_order_basis`(비어 있지 않고 형식이 맞는 것만). 열이 없으면 빈 사전.
+    private static func loadGroupOrderBases(in db: OpaquePointer) -> [String: PersonGroupOrderBasis] {
+        guard columnExists("member_order_basis", inTable: "PersonGroups", in: db) else { return [:] }
+        var statement: OpaquePointer?
+        defer { sqlite3_finalize(statement) }
+        let sql = "SELECT group_id, member_order_basis FROM PersonGroups WHERE member_order_basis <> ''"
+        guard sqlite3_prepare_v2(db, sql, -1, &statement, nil) == SQLITE_OK else { return [:] }
+        var result: [String: PersonGroupOrderBasis] = [:]
+        while sqlite3_step(statement) == SQLITE_ROW {
+            let groupId = sqlite3_column_text(statement, 0).map { String(cString: $0) } ?? ""
+            let text = sqlite3_column_text(statement, 1).map { String(cString: $0) } ?? ""
+            if !groupId.isEmpty, let basis = PersonGroupOrderBasis(storedText: text) {
+                result[groupId] = basis
+            }
+        }
+        return result
     }
 
     /// 두 열(키, 값) SELECT를 사전으로 읽는다(`?1` = 언어). 키가 겹치면 첫 값을 유지한다(세 표 모두 키가 PRIMARY KEY라
@@ -275,7 +369,7 @@ public final class ReferenceDataStore {
         return PlaceEntity(
             idx: place.idx, word: place.word, remark: place.remark, verseRefs: place.verseRefs,
             introduce: place.introduce, bibleContents: place.bibleContents, geography: place.geography,
-            history: place.history, localized: localized
+            history: place.history, localized: localized, matchedAlias: place.matchedAlias
         )
     }
 
@@ -286,6 +380,9 @@ public final class ReferenceDataStore {
     //  - 비교 전에 질의와 이름을 모두 `foldForNameSearch`로 접는다(대소문자·발음 구별 기호·전각/반각 무시 — RV1909 "Châm" 등).
     //  - en/es: 단어 경계 일치("Dan"이 "Daniel"·"abandon"에 걸리지 않게). 공백을 뺀 글자가 2자 이하인 이름("On", "Ai", "No")은
     //    흔한 낱말과 겹쳐 질의 전체가 그 이름일 때만 일치로 본다(한국어 검색의 "2글자 미만 제외"와 같은 취지).
+    //    [2026-10-28 9차] fr/de/ru도 en/es와 같은 규칙이다(zh만 다르다 — 아래 `usesWordBoundary`). 접기도 같아서 프랑스어 악센트
+    //    ("Moïse"=moise), 독일어 움라우트("Söhne"=sohne), 러시아어 ё/е("Моисей"의 й도 и로 접힌다)는 질의와 이름을 똑같이 접어 비교한다.
+    //    키릴 문자도 `Character.isLetter`라 단어 경계가 en과 같게 동작한다. ru 두 글자 이하 이름("Но", "Ог", "Ир" …)도 질의 전체일 때만.
     //  - zh: 공백을 뺀 부분 문자열 일치. 한 글자 이름("但", "艾" 등)은 질의 전체가 그 이름일 때만.
     //  - 최장 일치 우선: 걸린 이름이 더 긴 다른 걸린 이름 안에 (en/es는 단어 단위로) 완전히 들어가면 뺀다
     //    (`filterSwallowedNameMatches`와 같은 원칙, 인물·지명 사이에도 적용 — `QueryIntentHandler.handlePlaceLookup`과 같음).
@@ -670,9 +767,12 @@ public final class ReferenceDataStore {
     /// `target_kind`가 nil이면 규칙 추출은 됐지만 대상 이름이 이 번들
     /// 데이터셋 안에서 확인되지 않은 경우다(build 스크립트 상단 주석의
     /// "미해결" 항목) — 호출부는 이 경우 verse 연결을 시도하지 않아야 한다.
+    ///
+    /// [2026-10-28 7차] `source_idx`도 읽어 `PersonRelationRecord.sourceIdx`에 담는다(예전에는 빈 문자열). 같은 `source_word`라도
+    /// 행마다 항목 주인(idx)이 다를 수 있어(동명이인·별칭으로 적힌 항목), 호출부가 이름이 아니라 행의 idx로 주인을 정하게 한다.
     public func personRelations(forWord sourceWord: String) throws -> [PersonRelationRecord] {
         let sql = """
-            SELECT relation_type, target_word, target_kind, raw_sentence, target_idx
+            SELECT relation_type, target_word, target_kind, raw_sentence, target_idx, source_idx
             FROM PersonRelations WHERE source_word = ?
             """
         var statement: OpaquePointer?
@@ -692,10 +792,11 @@ public final class ReferenceDataStore {
             let targetKindRaw = sqlite3_column_text(statement, 2).map { String(cString: $0) }
             let rawSentence = sqlite3_column_text(statement, 3).map { String(cString: $0) } ?? ""
             let targetIdx = sqlite3_column_text(statement, 4).map { String(cString: $0) } ?? ""
+            let sourceIdx = sqlite3_column_text(statement, 5).map { String(cString: $0) } ?? ""
             results.append(PersonRelationRecord(
                 sourceWord: sourceWord, relationType: relationType, targetWord: targetWord,
                 targetKind: targetKindRaw == "place" ? .place : (targetKindRaw == "person" ? .person : nil),
-                rawSentence: rawSentence, targetIdx: targetIdx
+                rawSentence: rawSentence, targetIdx: targetIdx, sourceIdx: sourceIdx
             ))
         }
         return results
@@ -754,10 +855,14 @@ public final class ReferenceDataStore {
     /// 이 사람(m1)을 찾는 기준은 이름이 아니라 `person_idx`다. 이름으로 찾으면 "야고보"/"유다"/"시몬"처럼 동명이인이
     /// 있는 이름이 열두 제자가 아닌 사람의 카드에도 열두 제자 그룹을 붙인다. `person_idx`가 빈 행은 이름이
     /// `Persons`에서 유일할 때만 이름으로 이어 붙인다(`isUniquePersonName`).
+    ///
+    /// [2026-10-27 6차] 그룹의 순서(처음 나온 그룹 먼저)는 예전 그대로 두고, 한 그룹 안의 멤버만 `personGroupMembers(groupId:)`와
+    /// 같은 기준(`member_order` → 첫 등장 순 → 원래 순서)으로 정렬한다. 열이 없는 예전 DB면 첫 등장 키만으로(그것도 없으면 그대로).
     public func personGroupMemberships(forIdx idx: String, word: String) throws -> [PersonGroupMembershipRow] {
         let nameIsUnique = try isUniquePersonName(word)
+        let orderColumn = hasGroupMemberOrderColumn ? ", m2.member_order" : ""
         let sql = """
-            SELECT m2.group_id, m2.person_word, m2.person_idx
+            SELECT m2.group_id, m2.person_word, m2.person_idx\(orderColumn)
             FROM PersonGroupMemberships m1
             JOIN PersonGroupMemberships m2 ON m1.group_id = m2.group_id
             WHERE ((m1.person_idx <> '' AND m1.person_idx = ?1)
@@ -774,6 +879,7 @@ public final class ReferenceDataStore {
         sqlite3_bind_int(statement, 3, nameIsUnique ? 1 : 0)
 
         var results: [PersonGroupMembershipRow] = []
+        var memberOrders: [Int64?] = []
         while true {
             let step = sqlite3_step(statement)
             if step == SQLITE_DONE { break }
@@ -781,11 +887,29 @@ public final class ReferenceDataStore {
             let groupId = sqlite3_column_text(statement, 0).map { String(cString: $0) } ?? ""
             let otherWord = sqlite3_column_text(statement, 1).map { String(cString: $0) } ?? ""
             let otherIdx = sqlite3_column_text(statement, 2).map { String(cString: $0) } ?? ""
+            let memberOrder: Int64? = (!hasGroupMemberOrderColumn || sqlite3_column_type(statement, 3) == SQLITE_NULL)
+                ? nil : sqlite3_column_int64(statement, 3)
             results.append(PersonGroupMembershipRow(
                 groupId: groupId, otherMemberWord: otherWord, otherMemberIdx: otherIdx
             ))
+            memberOrders.append(memberOrder)
         }
-        return results
+        guard results.count > 1 else { return results }
+        // 그룹 순위 = 그 그룹이 결과에 처음 나온 위치(예전 그룹 순서 유지). 그룹이 같으면 멤버 순서 기준.
+        var groupRank: [String: Int] = [:]
+        for row in results where groupRank[row.groupId] == nil {
+            groupRank[row.groupId] = groupRank.count
+        }
+        var entries: [(rank: Int, member: GroupMemberSortEntry)] = []
+        entries.reserveCapacity(results.count)
+        for (index, row) in results.enumerated() {
+            let member: GroupMemberSortEntry = (
+                memberOrder: memberOrders[index], idx: row.otherMemberIdx, word: row.otherMemberWord, offset: index
+            )
+            entries.append((rank: groupRank[row.groupId] ?? 0, member: member))
+        }
+        entries.sort { a, b in a.rank != b.rank ? a.rank < b.rank : self.groupMemberPrecedes(a.member, b.member) }
+        return entries.map { results[$0.member.offset] }
     }
 
     // MARK: - Places (2026-10-01 PlaceSeed.json 반영)
@@ -806,10 +930,15 @@ public final class ReferenceDataStore {
     ///
     /// [2026-10-22 3차] 한 글자 지명("단", "함", "길", "돌")은 부분 문자열로는 받지 않고(오탐: "판단", "길이") 질의 전체(공백 제외)가
     /// 그 이름일 때만 받는다 — `persons(mentionedIn:)`의 한 글자 이름 규칙과 같다. 2글자 이상 이름의 규칙은 그대로다.
+    ///
+    /// [2026-10-28 8차, 사용자 확정 "지명 별칭으로 검색"] `Places.word2` 별칭(콤마 구분)도 이름으로 인정한다 — 인물
+    /// `persons(mentionedIn:)`와 같은 규칙: 대표 이름이 걸리지 않을 때만 별칭을 보고(앞에 적힌 별칭부터; 대표 이름이 한 글자면 별칭을 보지 않는다), 2글자 이상 별칭은 부분 문자열,
+    /// 한 글자 별칭은 질의 전체일 때만. 비교는 이 함수의 기존 방식(양쪽 공백 제거)이다. 별칭으로 걸린 지명은 `matchedAlias`에 그 별칭을
+    /// 담고, 삼켜진 이름 제거도 걸린 이름(별칭)으로 한다. 제목은 대표 이름(`word`) 그대로다. 열이 없는 예전 DB면 별칭을 읽지 않는다.
     public func places(mentionedIn query: String) throws -> [PlaceEntity] {
         let compactQuery = query.filter { !$0.isWhitespace }
         guard !compactQuery.isEmpty else { return [] }
-        let sql = "SELECT \(Self.placeColumns) FROM Places"
+        let sql = "SELECT \(Self.placeColumns)\(hasPlaceAliasColumn ? ", word2" : "") FROM Places"
         var statement: OpaquePointer?
         defer { sqlite3_finalize(statement) }
         guard sqlite3_prepare_v2(handle, sql, -1, &statement, nil) == SQLITE_OK else {
@@ -820,13 +949,32 @@ public final class ReferenceDataStore {
             let step = sqlite3_step(statement)
             if step == SQLITE_DONE { break }
             guard step == SQLITE_ROW else { throw BibleReferenceError.stepFailed(code: step) }
-            let place = Self.makePlace(from: statement)
-            let compactName = place.word.filter { !$0.isWhitespace }
-            let isMentioned = compactName.count >= 2
-                ? compactQuery.contains(compactName)
-                : (compactName.count == 1 && compactName == compactQuery)
-            guard isMentioned else { continue }
-            matched.append((place, compactName))
+            let base = Self.makePlace(from: statement)
+            func isMentioned(_ compactName: String) -> Bool {
+                compactName.count >= 2
+                    ? compactQuery.contains(compactName)
+                    : (compactName.count == 1 && compactName == compactQuery)
+            }
+            let wordName = base.word.filter { !$0.isWhitespace }
+            if isMentioned(wordName) {
+                matched.append((base, wordName))
+                continue
+            }
+            // [8차 검토 반영] 인물 규칙과 같게 — 한 글자(또는 빈) 대표 이름의 지명은 별칭 경로를 타지 않는다(질의 전체가 그 이름일 때만, 위에서 처리).
+            guard wordName.count >= 2 else { continue }
+            // [8차] 별칭 — 열 8(word2). 빈 칸이면 별칭 없음.
+            guard hasPlaceAliasColumn else { continue }
+            let aliasText = sqlite3_column_text(statement, 8).map { String(cString: $0) } ?? ""
+            let aliases = aliasText.split(separator: ",")
+                .map { $0.trimmingCharacters(in: .whitespaces) }
+                .filter { !$0.isEmpty }
+            guard let hit = aliases.first(where: { isMentioned($0.filter { !$0.isWhitespace }) }) else { continue }
+            let place = PlaceEntity(
+                idx: base.idx, word: base.word, remark: base.remark, verseRefs: base.verseRefs,
+                introduce: base.introduce, bibleContents: base.bibleContents, geography: base.geography,
+                history: base.history, matchedAlias: hit
+            )
+            matched.append((place, hit.filter { !$0.isWhitespace }))
         }
         let names = matched.map(\.compactName)
         return matched
@@ -882,8 +1030,12 @@ public final class ReferenceDataStore {
     /// 있는 이름이 엉뚱한 사람으로 붙지 않게 하기 위함이다. `person_idx`가 빈 행은 어느 사람인지 알 수 없어(이름만으로
     /// 추측하지 않는다) 건너뛰고, 같은 idx가 중복 등록돼 있어도 한 번만 담는다. 그룹이 없거나 멤버가 하나도 확정되지
     /// 않으면 빈 배열이다.
+    ///
+    /// [2026-10-27 6차] 순서: `member_order`가 있는 멤버(성경 본문 순서 — 열두 제자는 마 10:2-4)가 그 순서로 먼저, 나머지는
+    /// 성경 첫 등장 순(`firstAppearanceOrder`), 그래도 같으면 등록 순서. 열이 없는 예전 DB면 예전과 같은 등록 순서다.
     public func personGroupMembers(groupId: String) throws -> [PersonEntity] {
-        let sql = "SELECT person_idx FROM PersonGroupMemberships WHERE group_id = ? ORDER BY id ASC"
+        let orderColumn = hasGroupMemberOrderColumn ? ", member_order" : ""
+        let sql = "SELECT person_idx\(orderColumn) FROM PersonGroupMemberships WHERE group_id = ? ORDER BY id ASC"
         var statement: OpaquePointer?
         defer { sqlite3_finalize(statement) }
         guard sqlite3_prepare_v2(handle, sql, -1, &statement, nil) == SQLITE_OK else {
@@ -891,15 +1043,20 @@ public final class ReferenceDataStore {
         }
         sqlite3_bind_text(statement, 1, groupId, -1, SQLITE_TRANSIENT)
 
-        var idxs: [String] = []
+        var entries: [GroupMemberSortEntry] = []
         var seen = Set<String>()
         while true {
             let step = sqlite3_step(statement)
             if step == SQLITE_DONE { break }
             guard step == SQLITE_ROW else { throw BibleReferenceError.stepFailed(code: step) }
             let idx = sqlite3_column_text(statement, 0).map { String(cString: $0) } ?? ""
-            if !idx.isEmpty, seen.insert(idx).inserted { idxs.append(idx) }
+            let memberOrder: Int64? = (!hasGroupMemberOrderColumn || sqlite3_column_type(statement, 1) == SQLITE_NULL)
+                ? nil : sqlite3_column_int64(statement, 1)
+            if !idx.isEmpty, seen.insert(idx).inserted {
+                entries.append((memberOrder: memberOrder, idx: idx, word: "", offset: entries.count))
+            }
         }
+        let idxs = entries.sorted { self.groupMemberPrecedes($0, $1) }.map { $0.idx }
         // 위 statement를 다 읽은 뒤에 `person(idx:)`(자체 statement)를 부른다 — 한 커넥션에서 두 statement를 겹쳐 쓰지 않는다.
         return idxs.compactMap { try? person(idx: $0) }
     }
@@ -1244,6 +1401,246 @@ public final class ReferenceDataStore {
             ))
         }
         return results
+    }
+
+    /// [2026-10-22 4차] 관계 질의 "X의 <관계어>"의 X가 인물 이름인지 — 공백을 무시하고(NFC) 아래 중 하나와 정확히 같으면 true:
+    ///  - `Persons.word`(대표 이름), `Persons.word2`(별칭, 콤마 구분)
+    ///  - `PersonRelations.source_word`/`target_word` — Persons에 없는 관계 행 이름(예: "골리앗")도 관계 경로가 찾으므로 포함한다.
+    /// "하나님", "사람", "믿음"처럼 어디에도 없는 말이면 false — 호출부(`QueryIntentHandler`)가 관계 카드를 내지 않는다.
+    /// 행 수가 수천 건이라 전체 스캔이어도 질의 한 번에 한 번만 부르므로 비용이 작다.
+    public func isRelationPersonName(_ name: String) throws -> Bool {
+        let compact = name.precomposedStringWithCanonicalMapping.filter { !$0.isWhitespace }
+        guard !compact.isEmpty else { return false }
+        let sql = """
+            SELECT 1 FROM Persons WHERE replace(word, ' ', '') = ?1
+            UNION ALL
+            SELECT 1 FROM PersonRelations WHERE replace(source_word, ' ', '') = ?1 OR replace(target_word, ' ', '') = ?1
+            LIMIT 1
+            """
+        var statement: OpaquePointer?
+        defer { sqlite3_finalize(statement) }
+        guard sqlite3_prepare_v2(handle, sql, -1, &statement, nil) == SQLITE_OK else {
+            throw BibleReferenceError.statementPrepareFailed(code: sqlite3_errcode(handle))
+        }
+        sqlite3_bind_text(statement, 1, compact, -1, SQLITE_TRANSIENT)
+        let step = sqlite3_step(statement)
+        if step == SQLITE_ROW { return true }
+        guard step == SQLITE_DONE else { throw BibleReferenceError.stepFailed(code: step) }
+
+        // 별칭은 콤마로 여러 개가 한 칸에 들어 있어(`persons(mentionedIn:)` 주석 참고) Swift에서 나눠 비교한다.
+        var aliasStatement: OpaquePointer?
+        defer { sqlite3_finalize(aliasStatement) }
+        guard sqlite3_prepare_v2(handle, "SELECT word2 FROM Persons WHERE word2 <> ''", -1, &aliasStatement, nil) == SQLITE_OK else {
+            throw BibleReferenceError.statementPrepareFailed(code: sqlite3_errcode(handle))
+        }
+        while true {
+            let aliasStep = sqlite3_step(aliasStatement)
+            if aliasStep == SQLITE_DONE { break }
+            guard aliasStep == SQLITE_ROW else { throw BibleReferenceError.stepFailed(code: aliasStep) }
+            let aliases = sqlite3_column_text(aliasStatement, 0).map { String(cString: $0) } ?? ""
+            for alias in aliases.split(separator: ",") where alias.filter({ !$0.isWhitespace }) == compact {
+                return true
+            }
+        }
+        return false
+    }
+
+    /// [2026-10-28 7차] 관계 질의 "X의 <관계어>"의 X에 해당하는 인물 idx 전부 — 공백을 무시하고(NFC) `Persons.word` 또는
+    /// `Persons.word2` 별칭(콤마 구분) 중 하나가 X와 정확히 같은 인물(`isRelationPersonName`의 Persons 판정과 같은 규칙).
+    /// 동명이인은 모두 들어간다(이름 비교 조회와 같은 범위). 순서는 Persons 행 순서, 중복·빈 idx 없음. 약 3천 행 전체 스캔이며
+    /// 질의 한 번에 X마다 한 번 부른다.
+    public func personIdxs(matchingName name: String) throws -> [String] {
+        let compact = name.precomposedStringWithCanonicalMapping.filter { !$0.isWhitespace }
+        guard !compact.isEmpty else { return [] }
+        var statement: OpaquePointer?
+        defer { sqlite3_finalize(statement) }
+        guard sqlite3_prepare_v2(handle, "SELECT idx, word, word2 FROM Persons", -1, &statement, nil) == SQLITE_OK else {
+            throw BibleReferenceError.statementPrepareFailed(code: sqlite3_errcode(handle))
+        }
+        var results: [String] = []
+        var seen = Set<String>()
+        while true {
+            let step = sqlite3_step(statement)
+            if step == SQLITE_DONE { break }
+            guard step == SQLITE_ROW else { throw BibleReferenceError.stepFailed(code: step) }
+            let idx = sqlite3_column_text(statement, 0).map { String(cString: $0) } ?? ""
+            guard !idx.isEmpty, !seen.contains(idx) else { continue }
+            let word = sqlite3_column_text(statement, 1).map { String(cString: $0) } ?? ""
+            let aliases = sqlite3_column_text(statement, 2).map { String(cString: $0) } ?? ""
+            let matches = word.filter({ !$0.isWhitespace }) == compact
+                || aliases.split(separator: ",").contains(where: { $0.filter({ !$0.isWhitespace }) == compact })
+            if matches {
+                seen.insert(idx)
+                results.append(idx)
+            }
+        }
+        return results
+    }
+
+    /// [2026-10-28 7차] 인물의 대표 이름(`Persons.word`). 없는 idx·빈 idx면 nil. 관계 카드에서 같은 인물이 두 이름으로 나올 때
+    /// 대표 이름 줄을 고르는 데 쓴다(중복이 있을 때만 불린다).
+    public func personWord(idx: String) throws -> String? {
+        guard !idx.isEmpty else { return nil }
+        var statement: OpaquePointer?
+        defer { sqlite3_finalize(statement) }
+        guard sqlite3_prepare_v2(handle, "SELECT word FROM Persons WHERE idx = ? LIMIT 1", -1, &statement, nil) == SQLITE_OK else {
+            throw BibleReferenceError.statementPrepareFailed(code: sqlite3_errcode(handle))
+        }
+        sqlite3_bind_text(statement, 1, idx, -1, SQLITE_TRANSIENT)
+        let step = sqlite3_step(statement)
+        if step == SQLITE_DONE { return nil }
+        guard step == SQLITE_ROW else { throw BibleReferenceError.stepFailed(code: step) }
+        return sqlite3_column_text(statement, 0).map { String(cString: $0) } ?? ""
+    }
+
+    /// [2026-10-28 7차] `word`(대표 이름, 정확 일치)인 인물이 Persons에 정확히 한 명이면 그 idx, 아니면(없거나 동명이인) nil.
+    /// idx가 빈 관계 줄을 같은 인물의 idx 있는 줄과 합칠지 정할 때 쓴다(`isUniquePersonName`과 같은 규칙 — 추측 금지).
+    public func uniquePersonIdx(word: String) throws -> String? {
+        guard !word.isEmpty else { return nil }
+        var statement: OpaquePointer?
+        defer { sqlite3_finalize(statement) }
+        guard sqlite3_prepare_v2(handle, "SELECT idx FROM Persons WHERE word = ? LIMIT 2", -1, &statement, nil) == SQLITE_OK else {
+            throw BibleReferenceError.statementPrepareFailed(code: sqlite3_errcode(handle))
+        }
+        sqlite3_bind_text(statement, 1, word, -1, SQLITE_TRANSIENT)
+        var idxs: [String] = []
+        while true {
+            let step = sqlite3_step(statement)
+            if step == SQLITE_DONE { break }
+            guard step == SQLITE_ROW else { throw BibleReferenceError.stepFailed(code: step) }
+            idxs.append(sqlite3_column_text(statement, 0).map { String(cString: $0) } ?? "")
+        }
+        guard idxs.count == 1, !idxs[0].isEmpty else { return nil }
+        return idxs[0]
+    }
+
+    /// [2026-10-28 7차] `source_idx` 또는 `target_idx`가 `idxs` 중 하나인 관계 행(빈 idx는 맞추지 않는다). 상대 항목이 X를 별칭으로
+    /// 적은 행(예: target_word "스룹바벨", target_idx "1586" = Persons "세스바살")을 이름이 아니라 신원으로 찾는 데 쓴다.
+    /// `idxs`가 비면 DB를 읽지 않고 빈 배열. 값은 자리표시자(?1…?n)로 바인딩한다(n은 한 질의의 X 이름에 걸린 인물 수 — 실측 최대
+    /// 동명이인 23명 수준이라 SQLite 변수 한도와 거리가 멀다). source/target 두 IN이 같은 자리표시자를 다시 쓴다.
+    public func personRelations(sourceOrTargetIdxIn idxs: [String]) throws -> [PersonRelationRecord] {
+        guard !idxs.isEmpty else { return [] }
+        let placeholders = (1...idxs.count).map { "?\($0)" }.joined(separator: ", ")
+        let sql = """
+            SELECT source_word, source_idx, relation_type, target_word, target_kind, raw_sentence, target_idx
+            FROM PersonRelations
+            WHERE (source_idx <> '' AND source_idx IN (\(placeholders)))
+               OR (target_idx <> '' AND target_idx IN (\(placeholders)))
+            """
+        var statement: OpaquePointer?
+        defer { sqlite3_finalize(statement) }
+        guard sqlite3_prepare_v2(handle, sql, -1, &statement, nil) == SQLITE_OK else {
+            throw BibleReferenceError.statementPrepareFailed(code: sqlite3_errcode(handle))
+        }
+        for (offset, idx) in idxs.enumerated() {
+            sqlite3_bind_text(statement, Int32(offset + 1), idx, -1, SQLITE_TRANSIENT)
+        }
+
+        var results: [PersonRelationRecord] = []
+        while true {
+            let step = sqlite3_step(statement)
+            if step == SQLITE_DONE { break }
+            guard step == SQLITE_ROW else { throw BibleReferenceError.stepFailed(code: step) }
+            let sourceWord = sqlite3_column_text(statement, 0).map { String(cString: $0) } ?? ""
+            let sourceIdx = sqlite3_column_text(statement, 1).map { String(cString: $0) } ?? ""
+            let relationType = sqlite3_column_text(statement, 2).map { String(cString: $0) } ?? ""
+            let targetWord = sqlite3_column_text(statement, 3).map { String(cString: $0) } ?? ""
+            let targetKindRaw = sqlite3_column_text(statement, 4).map { String(cString: $0) }
+            let rawSentence = sqlite3_column_text(statement, 5).map { String(cString: $0) } ?? ""
+            let targetIdx = sqlite3_column_text(statement, 6).map { String(cString: $0) } ?? ""
+            results.append(PersonRelationRecord(
+                sourceWord: sourceWord, relationType: relationType, targetWord: targetWord,
+                targetKind: targetKindRaw == "place" ? .place : (targetKindRaw == "person" ? .person : nil),
+                rawSentence: rawSentence, targetIdx: targetIdx, sourceIdx: sourceIdx
+            ))
+        }
+        return results
+    }
+
+    /// [2026-10-22 4차] 관계 답 인물의 성별(`Persons.gender`: "남"/"여"/빈 문자열). `idx`가 있으면 그 인물의 값(없는 idx면 이름으로),
+    /// 없으면 이 이름의 인물이 `Persons`에 정확히 한 명일 때만 그 값이다. 동명이인이거나 Persons에 없으면 빈 문자열(모름) —
+    /// 어느 쪽인지 알 수 없을 때 추측하지 않는다(`isUniquePersonName`과 같은 원칙).
+    public func personGender(idx: String, word: String) throws -> String {
+        if !idx.isEmpty {
+            var statement: OpaquePointer?
+            defer { sqlite3_finalize(statement) }
+            guard sqlite3_prepare_v2(handle, "SELECT gender FROM Persons WHERE idx = ?", -1, &statement, nil) == SQLITE_OK else {
+                throw BibleReferenceError.statementPrepareFailed(code: sqlite3_errcode(handle))
+            }
+            sqlite3_bind_text(statement, 1, idx, -1, SQLITE_TRANSIENT)
+            if sqlite3_step(statement) == SQLITE_ROW {
+                return sqlite3_column_text(statement, 0).map { String(cString: $0) } ?? ""
+            }
+        }
+        guard !word.isEmpty else { return "" }
+        var statement: OpaquePointer?
+        defer { sqlite3_finalize(statement) }
+        guard sqlite3_prepare_v2(handle, "SELECT gender FROM Persons WHERE word = ? LIMIT 2", -1, &statement, nil) == SQLITE_OK else {
+            throw BibleReferenceError.statementPrepareFailed(code: sqlite3_errcode(handle))
+        }
+        sqlite3_bind_text(statement, 1, word, -1, SQLITE_TRANSIENT)
+        var genders: [String] = []
+        while sqlite3_step(statement) == SQLITE_ROW {
+            genders.append(sqlite3_column_text(statement, 0).map { String(cString: $0) } ?? "")
+        }
+        return genders.count == 1 ? genders[0] : ""
+    }
+
+    // MARK: - 성경 첫 등장 순서 (2026-10-27 6차)
+
+    /// 인물의 "성경 첫 등장" 정렬 키(`Persons.first_appearance_order` — 작을수록 앞). `personGender`와 같은 신원 규칙:
+    /// `idx`가 Persons에 있으면 그 인물의 키(NULL이면 nil — 이름으로 다시 찾지 않는다), 없으면 이 이름의 인물이 Persons에
+    /// 정확히 한 명일 때만 그 키. 동명이인·Persons에 없는 이름·열이 없는 예전 DB면 nil. DB를 읽지 않는다(init에서 읽은 사전).
+    public func firstAppearanceOrder(idx: String, word: String) -> Int64? {
+        if !idx.isEmpty, personIdxsWithOrderColumn.contains(idx) {
+            return firstAppearanceOrderByIdx[idx]
+        }
+        guard !word.isEmpty else { return nil }
+        return firstAppearanceOrderByUniqueWord[word]
+    }
+
+    /// 키 비교 — nil(모름)은 뒤. 두 키가 같으면(둘 다 nil 포함) nil을 돌려 호출부가 다음 기준으로 넘어가게 한다.
+    private static func compareNilLast(_ a: Int64?, _ b: Int64?) -> Bool? {
+        switch (a, b) {
+        case let (x?, y?): return x == y ? nil : x < y
+        case (.some, .none): return true
+        case (.none, .some): return false
+        case (.none, .none): return nil
+        }
+    }
+
+    /// [6차, 사용자 확정 "기본 순서 = 성경 첫 등장 순"] `items`를 각 항목 인물의 첫 등장 키(`firstAppearanceOrder(idx:word:)`)
+    /// 오름차순으로 정렬한다. 키를 모르는 항목은 뒤로, 키가 같거나 둘 다 모르면 들어온 순서 그대로(안정 정렬 — 원래 위치를
+    /// 마지막 기준으로 비교하므로 표준 정렬의 안정성에 기대지 않는다). 열이 없는 예전 DB면 입력 그대로다.
+    /// 시간 O(n log n), 키 조회는 사전 조회(O(1))뿐이다.
+    public func sortedByFirstAppearance<T>(_ items: [T], idx: (T) -> String, word: (T) -> String) -> [T] {
+        guard items.count > 1, !firstAppearanceOrderByIdx.isEmpty else { return items }
+        var keyed: [(offset: Int, key: Int64?, item: T)] = []
+        keyed.reserveCapacity(items.count)
+        for (offset, item) in items.enumerated() {
+            keyed.append((offset: offset, key: firstAppearanceOrder(idx: idx(item), word: word(item)), item: item))
+        }
+        keyed.sort { a, b in Self.compareNilLast(a.key, b.key) ?? (a.offset < b.offset) }
+        return keyed.map { $0.item }
+    }
+
+    /// [6차] 그룹 멤버 순서의 성경 근거(예: 열두 제자 → 마 10:2-4). 근거가 없는 그룹(멤버는 첫 등장 순)·예전 DB면 nil.
+    public func groupMemberOrderBasis(groupId: String) -> PersonGroupOrderBasis? {
+        groupOrderBasisById[groupId]
+    }
+
+    /// 그룹 멤버 정렬용 값 — `member_order`(없으면 nil), 멤버 idx·이름(첫 등장 키 조회), 원래 위치.
+    private typealias GroupMemberSortEntry = (memberOrder: Int64?, idx: String, word: String, offset: Int)
+
+    /// 그룹 안 멤버 순서 — `member_order`(있는 멤버가 먼저, 오름차순) → 첫 등장 키(모르면 뒤) → 원래 순서.
+    private func groupMemberPrecedes(_ a: GroupMemberSortEntry, _ b: GroupMemberSortEntry) -> Bool {
+        if let byMemberOrder = Self.compareNilLast(a.memberOrder, b.memberOrder) { return byMemberOrder }
+        if let byAppearance = Self.compareNilLast(
+            firstAppearanceOrder(idx: a.idx, word: a.word), firstAppearanceOrder(idx: b.idx, word: b.word)
+        ) {
+            return byAppearance
+        }
+        return a.offset < b.offset
     }
 
     /// 이 이름의 인물이 `Persons`에 정확히 한 명일 때만 true. idx가 빈 관계/그룹/참고 행을 이름으로 이어 붙여도

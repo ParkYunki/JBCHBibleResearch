@@ -4163,6 +4163,113 @@
         }
       }
     },
+    "%@ 순" : {
+      "comment" : "그룹 멤버 순서의 성경 근거(예: 마 10:2-4 순) — 값: 책 약칭 장:절-절",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Reihenfolge nach %@"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Order as in %@"
+          }
+        },
+        "en-CA" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Order as in %@"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Orden según %@"
+          }
+        },
+        "es-MX" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Orden según %@"
+          }
+        },
+        "fil" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Ayon sa pagkakasunod sa %@"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Ordre selon %@"
+          }
+        },
+        "fr-CA" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Ordre selon %@"
+          }
+        },
+        "id" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Urutan menurut %@"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Ordine secondo %@"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "%@の順"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Ordem conforme %@"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Порядок по %@"
+          }
+        },
+        "th" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "ตามลำดับใน %@"
+          }
+        },
+        "vi" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Theo thứ tự trong %@"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "按%@顺序"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "按%@順序"
+          }
+        }
+      }
+    },
     "%@ 어간" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -6953,6 +7060,113 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "%@ 是 %@ 的老師"
+          }
+        }
+      }
+    },
+    "%@은(는) %@의 시아버지" : {
+      "comment" : "인물 관계 문장 — 첫 번째 값: 인물, 두 번째 값: 관계 대상 인물",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "%@ ist der Schwiegervater von %@"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "%@ is the father-in-law of %@"
+          }
+        },
+        "en-CA" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "%@ is the father-in-law of %@"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "%@ es suegro de %@"
+          }
+        },
+        "es-MX" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "%@ es suegro de %@"
+          }
+        },
+        "fil" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Si %@ ang biyenang lalaki ni %@"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "%@ est le beau-père de %@"
+          }
+        },
+        "fr-CA" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "%@ est le beau-père de %@"
+          }
+        },
+        "id" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "%@ adalah ayah mertua %@"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "%@ è il suocero di %@"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "%@ は %@ の舅"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "%@ é o sogro de %@"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "%@ — свёкор %@"
+          }
+        },
+        "th" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "%@ เป็นพ่อสามีของ %@"
+          }
+        },
+        "vi" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "%@ là cha chồng của %@"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "%@是%@的公公"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "%@是%@的公公"
           }
         }
       }
@@ -25624,6 +25838,220 @@
         }
       }
     },
+    "고모" : {
+      "comment" : "관계 안내 카드 라벨(질의한 %@ 관계가 등록돼 있지 않습니다)",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Tante väterlicherseits"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Paternal Aunt"
+          }
+        },
+        "en-CA" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Paternal Aunt"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Tía paterna"
+          }
+        },
+        "es-MX" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Tía paterna"
+          }
+        },
+        "fil" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Tiya sa Ama"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Tante paternelle"
+          }
+        },
+        "fr-CA" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Tante paternelle"
+          }
+        },
+        "id" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Bibi dari pihak ayah"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Zia paterna"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "父方のおば"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Tia paterna"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Тётя по отцу"
+          }
+        },
+        "th" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "ป้าหรืออาฝ่ายพ่อ"
+          }
+        },
+        "vi" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Cô"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "姑母"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "姑母"
+          }
+        }
+      }
+    },
+    "고손" : {
+      "comment" : "관계 안내 카드 라벨(질의한 %@ 관계가 등록돼 있지 않습니다)",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Ururenkel"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Great-great-grandchild"
+          }
+        },
+        "en-CA" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Great-great-grandchild"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Tataranieto"
+          }
+        },
+        "es-MX" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Tataranieto"
+          }
+        },
+        "fil" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Apo sa Talampakan"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Arrière-arrière-petit-enfant"
+          }
+        },
+        "fr-CA" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Arrière-arrière-petit-enfant"
+          }
+        },
+        "id" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Canggah"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Trisnipote"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "玄孫"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Trineto"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Праправнук"
+          }
+        },
+        "th" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "ลื่อ"
+          }
+        },
+        "vi" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Chút"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "玄孙"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "玄孫"
+          }
+        }
+      }
+    },
     "고운바탕" : {
       "localizations" : {
         "de" : {
@@ -32152,6 +32580,113 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "接在現有正文下方"
+          }
+        }
+      }
+    },
+    "기타" : {
+      "comment" : "관계 카드 묶음 머리 — X에 해당하는 인물이 여럿일 때, 어느 인물의 답인지 정할 수 없는 답(이름만 있는 동명이인 행)을 모은 마지막 묶음",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Sonstige"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Other"
+          }
+        },
+        "en-CA" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Other"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Otros"
+          }
+        },
+        "es-MX" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Otros"
+          }
+        },
+        "fil" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Iba pa"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Autres"
+          }
+        },
+        "fr-CA" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Autres"
+          }
+        },
+        "id" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Lainnya"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Altri"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "その他"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Outros"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Прочие"
+          }
+        },
+        "th" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "อื่น ๆ"
+          }
+        },
+        "vi" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Khác"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "其他"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "其他"
           }
         }
       }
@@ -46270,6 +46805,113 @@
         }
       }
     },
+    "며느리" : {
+      "comment" : "관계 안내 카드 라벨(질의한 %@ 관계가 등록돼 있지 않습니다)",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Schwiegertochter"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Daughter-in-law"
+          }
+        },
+        "en-CA" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Daughter-in-law"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Nuera"
+          }
+        },
+        "es-MX" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Nuera"
+          }
+        },
+        "fil" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Manugang na Babae"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Belle-fille"
+          }
+        },
+        "fr-CA" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Belle-fille"
+          }
+        },
+        "id" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Menantu Perempuan"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Nuora"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "嫁"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Nora"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Невестка"
+          }
+        },
+        "th" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "ลูกสะใภ้"
+          }
+        },
+        "vi" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Con dâu"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "儿媳"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "兒媳"
+          }
+        }
+      }
+    },
     "명령법" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -56139,6 +56781,113 @@
         }
       }
     },
+    "부모" : {
+      "comment" : "관계 안내 카드 라벨(질의한 %@ 관계가 등록돼 있지 않습니다)",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Eltern"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Parents"
+          }
+        },
+        "en-CA" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Parents"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Padres"
+          }
+        },
+        "es-MX" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Padres"
+          }
+        },
+        "fil" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Mga Magulang"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Parents"
+          }
+        },
+        "fr-CA" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Parents"
+          }
+        },
+        "id" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Orang Tua"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Genitori"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "両親"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Pais"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Родители"
+          }
+        },
+        "th" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "พ่อแม่"
+          }
+        },
+        "vi" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Cha mẹ"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "父母"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "父母"
+          }
+        }
+      }
+    },
     "부모 선도 '점점 얇게'라서, 부모 선이 끝난 굵기에서 이어 시작합니다." : {
       "localizations" : {
         "de" : {
@@ -59246,6 +59995,113 @@
         }
       }
     },
+    "사촌" : {
+      "comment" : "관계 안내 카드 라벨(질의한 %@ 관계가 등록돼 있지 않습니다)",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Cousin"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Cousin"
+          }
+        },
+        "en-CA" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Cousin"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Primo"
+          }
+        },
+        "es-MX" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Primo"
+          }
+        },
+        "fil" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Pinsan"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Cousin"
+          }
+        },
+        "fr-CA" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Cousin"
+          }
+        },
+        "id" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Sepupu"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Cugino"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "いとこ"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Primo"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Двоюродный брат"
+          }
+        },
+        "th" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "ลูกพี่ลูกน้อง"
+          }
+        },
+        "vi" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Anh chị em họ"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "堂表亲"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "堂表親"
+          }
+        }
+      }
+    },
     "사펠" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -59561,6 +60417,112 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "刪除後，此類別中的文件將移至「無分類」。文件不會被刪除。"
+          }
+        }
+      }
+    },
+    "삼촌" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Onkel"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Uncle"
+          }
+        },
+        "en-CA" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Uncle"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Tío"
+          }
+        },
+        "es-MX" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Tío"
+          }
+        },
+        "fil" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Tiyo"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Oncle"
+          }
+        },
+        "fr-CA" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Oncle"
+          }
+        },
+        "id" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Paman"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Zio"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "おじ"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Tio"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Дядя"
+          }
+        },
+        "th" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "ลุง"
+          }
+        },
+        "vi" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Chú"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "叔叔"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "叔叔"
           }
         }
       }
@@ -71632,6 +72594,113 @@
         }
       }
     },
+    "시아버지" : {
+      "comment" : "관계 안내 카드 라벨(질의한 %@ 관계가 등록돼 있지 않습니다) · 인물 상세 관계 줄 라벨 — 남편의 아버지(장인과 구분)",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Schwiegervater"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Father-in-law"
+          }
+        },
+        "en-CA" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Father-in-law"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Suegro"
+          }
+        },
+        "es-MX" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Suegro"
+          }
+        },
+        "fil" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Biyenang lalaki"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Beau-père"
+          }
+        },
+        "fr-CA" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Beau-père"
+          }
+        },
+        "id" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Ayah mertua"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Suocero"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "舅"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Sogro"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Свёкор"
+          }
+        },
+        "th" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "พ่อสามี"
+          }
+        },
+        "vi" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Cha chồng"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "公公"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "公公"
+          }
+        }
+      }
+    },
     "시작 두께" : {
       "localizations" : {
         "de" : {
@@ -77179,6 +78248,113 @@
         }
       }
     },
+    "여동생" : {
+      "comment" : "관계 안내 카드 라벨(질의한 %@ 관계가 등록돼 있지 않습니다)",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Jüngere Schwester"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Younger Sister"
+          }
+        },
+        "en-CA" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Younger Sister"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Hermana menor"
+          }
+        },
+        "es-MX" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Hermana menor"
+          }
+        },
+        "fil" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Nakababatang Kapatid na Babae"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Sœur cadette"
+          }
+        },
+        "fr-CA" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Sœur cadette"
+          }
+        },
+        "id" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Adik Perempuan"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Sorella minore"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "妹"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Irmã mais nova"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Младшая сестра"
+          }
+        },
+        "th" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "น้องสาว"
+          }
+        },
+        "vi" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Em gái"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "妹妹"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "妹妹"
+          }
+        }
+      }
+    },
     "여러 구절을 콤마(,) 또는 줄바꿈으로 구분해 붙여넣으면 한 번에 추가합니다. 예: 창1:1, 출애굽기1:2~3, 시편112편1,3,5절" : {
       "localizations" : {
         "de" : {
@@ -80679,6 +81855,113 @@
         }
       }
     },
+    "오라비" : {
+      "comment" : "관계 안내 카드 라벨(질의한 %@ 관계가 등록돼 있지 않습니다)",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Bruder"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Brother"
+          }
+        },
+        "en-CA" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Brother"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Hermano"
+          }
+        },
+        "es-MX" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Hermano"
+          }
+        },
+        "fil" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Kapatid na Lalaki"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Frère"
+          }
+        },
+        "fr-CA" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Frère"
+          }
+        },
+        "id" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Saudara Laki-laki"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Fratello"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "兄弟"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Irmão"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Брат"
+          }
+        },
+        "th" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "พี่น้องชาย"
+          }
+        },
+        "vi" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Anh em trai"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "兄弟"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "兄弟"
+          }
+        }
+      }
+    },
     "오류" : {
       "localizations" : {
         "de" : {
@@ -81400,6 +82683,218 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "ตาฝ่ายมารดา"
+          }
+        },
+        "vi" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Ông ngoại"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "外祖父"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "外祖父"
+          }
+        }
+      }
+    },
+    "외할머니" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Großmutter mütterlicherseits"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Maternal Grandmother"
+          }
+        },
+        "en-CA" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Maternal Grandmother"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Abuela materna"
+          }
+        },
+        "es-MX" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Abuela materna"
+          }
+        },
+        "fil" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Lola sa Ina"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Grand-mère maternelle"
+          }
+        },
+        "fr-CA" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Grand-mère maternelle"
+          }
+        },
+        "id" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Nenek dari pihak ibu"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Nonna materna"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "母方の祖母"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Avó materna"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Бабушка по матери"
+          }
+        },
+        "th" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "ยาย"
+          }
+        },
+        "vi" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Bà ngoại"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "外祖母"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "外祖母"
+          }
+        }
+      }
+    },
+    "외할아버지" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Großvater mütterlicherseits"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Maternal Grandfather"
+          }
+        },
+        "en-CA" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Maternal Grandfather"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Abuelo materno"
+          }
+        },
+        "es-MX" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Abuelo materno"
+          }
+        },
+        "fil" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Lolo sa Ina"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Grand-père maternel"
+          }
+        },
+        "fr-CA" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Grand-père maternel"
+          }
+        },
+        "id" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Kakek dari pihak ibu"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Nonno materno"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "母方の祖父"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Avô materno"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Дедушка по матери"
+          }
+        },
+        "th" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "ตา"
           }
         },
         "vi" : {
@@ -89775,6 +91270,113 @@
         }
       }
     },
+    "이모" : {
+      "comment" : "관계 안내 카드 라벨(질의한 %@ 관계가 등록돼 있지 않습니다)",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Tante mütterlicherseits"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Maternal Aunt"
+          }
+        },
+        "en-CA" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Maternal Aunt"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Tía materna"
+          }
+        },
+        "es-MX" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Tía materna"
+          }
+        },
+        "fil" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Tiya sa Ina"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Tante maternelle"
+          }
+        },
+        "fr-CA" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Tante maternelle"
+          }
+        },
+        "id" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Bibi dari pihak ibu"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Zia materna"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "母方のおば"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Tia materna"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Тётя по матери"
+          }
+        },
+        "th" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "ป้าหรือน้าฝ่ายแม่"
+          }
+        },
+        "vi" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Dì"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "姨母"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "姨母"
+          }
+        }
+      }
+    },
     "이미 등록된 번역본 코드입니다: %@" : {
       "localizations" : {
         "de" : {
@@ -94450,6 +96052,113 @@
         }
       }
     },
+    "자녀" : {
+      "comment" : "관계 안내 카드 라벨(질의한 %@ 관계가 등록돼 있지 않습니다)",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Kinder"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Children"
+          }
+        },
+        "en-CA" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Children"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Hijos"
+          }
+        },
+        "es-MX" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Hijos"
+          }
+        },
+        "fil" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Mga Anak"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Enfants"
+          }
+        },
+        "fr-CA" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Enfants"
+          }
+        },
+        "id" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Anak"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Figli"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "子ども"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Filhos"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Дети"
+          }
+        },
+        "th" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "ลูก"
+          }
+        },
+        "vi" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Con cái"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "子女"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "子女"
+          }
+        }
+      }
+    },
     "자동 변경" : {
       "localizations" : {
         "de" : {
@@ -94662,108 +96371,108 @@
         }
       }
     },
-    "장" : {
+    "자매" : {
       "localizations" : {
         "de" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "Kap."
+            "value" : "Schwester"
           }
         },
         "en" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "Ch."
+            "value" : "Sister"
           }
         },
         "en-CA" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "Ch."
+            "value" : "Sister"
           }
         },
         "es" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "Cap."
+            "value" : "Hermana"
           }
         },
         "es-MX" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "Cap."
+            "value" : "Hermana"
           }
         },
         "fil" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "Kab."
+            "value" : "Kapatid na Babae"
           }
         },
         "fr" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "Chap."
+            "value" : "Sœur"
           }
         },
         "fr-CA" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "Chap."
+            "value" : "Sœur"
           }
         },
         "id" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "Psl."
+            "value" : "Saudara Perempuan"
           }
         },
         "it" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "Cap."
+            "value" : "Sorella"
           }
         },
         "ja" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "章"
+            "value" : "姉妹"
           }
         },
         "pt-BR" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "Cap."
+            "value" : "Irmã"
           }
         },
         "ru" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "Гл."
+            "value" : "Сестра"
           }
         },
         "th" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "บท"
+            "value" : "พี่น้องหญิง"
           }
         },
         "vi" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "Ch."
+            "value" : "Chị em gái"
           }
         },
         "zh-Hans" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "章"
+            "value" : "姐妹"
           }
         },
         "zh-Hant" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "章"
+            "value" : "姐妹"
           }
         }
       }
@@ -94874,6 +96583,112 @@
         }
       }
     },
+    "장" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Kap."
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Ch."
+          }
+        },
+        "en-CA" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Ch."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Cap."
+          }
+        },
+        "es-MX" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Cap."
+          }
+        },
+        "fil" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Kab."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Chap."
+          }
+        },
+        "fr-CA" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Chap."
+          }
+        },
+        "id" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Psl."
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Cap."
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "章"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Cap."
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Гл."
+          }
+        },
+        "th" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "บท"
+          }
+        },
+        "vi" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Ch."
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "章"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "章"
+          }
+        }
+      }
+    },
     "자세히" : {
       "localizations" : {
         "de" : {
@@ -94976,6 +96791,113 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "詳細資訊"
+          }
+        }
+      }
+    },
+    "자손" : {
+      "comment" : "관계 안내 카드 라벨(질의한 %@ 관계가 등록돼 있지 않습니다)",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Nachkommen"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Offspring"
+          }
+        },
+        "en-CA" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Offspring"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Descendencia"
+          }
+        },
+        "es-MX" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Descendencia"
+          }
+        },
+        "fil" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Supling"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Postérité"
+          }
+        },
+        "fr-CA" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Postérité"
+          }
+        },
+        "id" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Keturunan"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Progenie"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "子孫"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Descendência"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Потомство"
+          }
+        },
+        "th" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "ลูกหลาน"
+          }
+        },
+        "vi" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Dòng dõi"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "子孙"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "子孫"
           }
         }
       }
@@ -95300,6 +97222,113 @@
     },
     "장 전체" : {
 
+    },
+    "장모" : {
+      "comment" : "관계 안내 카드 라벨(질의한 %@ 관계가 등록돼 있지 않습니다)",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Schwiegermutter"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Mother-in-law"
+          }
+        },
+        "en-CA" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Mother-in-law"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Suegra"
+          }
+        },
+        "es-MX" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Suegra"
+          }
+        },
+        "fil" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Biyenang Babae"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Belle-mère"
+          }
+        },
+        "fr-CA" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Belle-mère"
+          }
+        },
+        "id" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Ibu Mertua"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Suocera"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "義母"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Sogra"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Тёща"
+          }
+        },
+        "th" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "แม่ยาย"
+          }
+        },
+        "vi" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Mẹ vợ"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "岳母"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "岳母"
+          }
+        }
+      }
     },
     "장인" : {
       "localizations" : {
@@ -99877,6 +101906,113 @@
         }
       }
     },
+    "조상" : {
+      "comment" : "관계 안내 카드 라벨(질의한 %@ 관계가 등록돼 있지 않습니다)",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Vorfahr"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Ancestor"
+          }
+        },
+        "en-CA" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Ancestor"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Antepasado"
+          }
+        },
+        "es-MX" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Antepasado"
+          }
+        },
+        "fil" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Ninuno"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Ancêtre"
+          }
+        },
+        "fr-CA" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Ancêtre"
+          }
+        },
+        "id" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Leluhur"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Antenato"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "先祖"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Antepassado"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Предок"
+          }
+        },
+        "th" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "บรรพบุรุษ"
+          }
+        },
+        "vi" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Tổ tiên"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "祖先"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "祖先"
+          }
+        }
+      }
+    },
     "조선궁서체" : {
       "localizations" : {
         "de" : {
@@ -101676,6 +103812,113 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "中主題"
+          }
+        }
+      }
+    },
+    "증손" : {
+      "comment" : "관계 안내 카드 라벨(질의한 %@ 관계가 등록돼 있지 않습니다)",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Urenkel"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Great-grandchild"
+          }
+        },
+        "en-CA" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Great-grandchild"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Bisnieto"
+          }
+        },
+        "es-MX" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Bisnieto"
+          }
+        },
+        "fil" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Apo sa Tuhod"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Arrière-petit-enfant"
+          }
+        },
+        "fr-CA" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Arrière-petit-enfant"
+          }
+        },
+        "id" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Cicit"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Pronipote"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "ひ孫"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Bisneto"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Правнук"
+          }
+        },
+        "th" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "เหลน"
+          }
+        },
+        "vi" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Chắt"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "曾孙"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "曾孫"
           }
         }
       }
@@ -108710,6 +110953,324 @@
         }
       }
     },
+    "카테고리 관리" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Kategorien verwalten"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Manage Categories"
+          }
+        },
+        "en-CA" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Manage Categories"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Gestionar categorías"
+          }
+        },
+        "es-MX" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Gestionar categorías"
+          }
+        },
+        "fil" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Pamahalaan ang Mga Kategorya"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Gérer les catégories"
+          }
+        },
+        "fr-CA" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Gérer les catégories"
+          }
+        },
+        "id" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Kelola Kategori"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Gestisci categorie"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "カテゴリを管理"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Gerenciar categorias"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Управление категориями"
+          }
+        },
+        "th" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "จัดการหมวดหมู่"
+          }
+        },
+        "vi" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Quản lý danh mục"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "管理类别"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "管理類別"
+          }
+        }
+      }
+    },
+    "카테고리 생성 · 이름 변경 · 삭제 · 순서" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Kategorien erstellen · umbenennen · löschen · ordnen"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Create · Rename · Delete · Reorder Categories"
+          }
+        },
+        "en-CA" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Create · Rename · Delete · Reorder Categories"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Crear · Renombrar · Eliminar · Reordenar categorías"
+          }
+        },
+        "es-MX" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Crear · Renombrar · Eliminar · Reordenar categorías"
+          }
+        },
+        "fil" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Gumawa · Palitan ang Pangalan · I-delete · Ayusin ang Mga Kategorya"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Créer · Renommer · Supprimer · Réorganiser les catégories"
+          }
+        },
+        "fr-CA" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Créer · Renommer · Supprimer · Réorganiser les catégories"
+          }
+        },
+        "id" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Buat · Ganti Nama · Hapus · Urutkan Kategori"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Crea · Rinomina · Elimina · Riordina categorie"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "カテゴリの作成 · 名前の変更 · 削除 · 並べ替え"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Criar · Renomear · Excluir · Reordenar categorias"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Создание · Переименование · Удаление · Порядок категорий"
+          }
+        },
+        "th" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "สร้าง · เปลี่ยนชื่อ · ลบ · จัดลำดับหมวดหมู่"
+          }
+        },
+        "vi" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Tạo · Đổi tên · Xóa · Sắp xếp danh mục"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "创建 · 重命名 · 删除 · 排序类别"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "建立 · 重新命名 · 刪除 · 排序類別"
+          }
+        }
+      }
+    },
+    "카테고리 이름" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Kategoriename"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Category Name"
+          }
+        },
+        "en-CA" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Category Name"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Nombre de la categoría"
+          }
+        },
+        "es-MX" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Nombre de la categoría"
+          }
+        },
+        "fil" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Pangalan ng Kategorya"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Nom de la catégorie"
+          }
+        },
+        "fr-CA" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Nom de la catégorie"
+          }
+        },
+        "id" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Nama Kategori"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Nome della categoria"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "カテゴリ名"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Nome da categoria"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Название категории"
+          }
+        },
+        "th" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "ชื่อหมวดหมู่"
+          }
+        },
+        "vi" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Tên danh mục"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "类别名称"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "類別名稱"
+          }
+        }
+      }
+    },
     "칼" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -108923,112 +111484,6 @@
         }
       }
     },
-    "카테고리 관리" : {
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Kategorien verwalten"
-          }
-        },
-        "en" : {
-          "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Manage Categories"
-          }
-        },
-        "en-CA" : {
-          "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Manage Categories"
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Gestionar categorías"
-          }
-        },
-        "es-MX" : {
-          "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Gestionar categorías"
-          }
-        },
-        "fil" : {
-          "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Pamahalaan ang Mga Kategorya"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Gérer les catégories"
-          }
-        },
-        "fr-CA" : {
-          "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Gérer les catégories"
-          }
-        },
-        "id" : {
-          "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Kelola Kategori"
-          }
-        },
-        "it" : {
-          "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Gestisci categorie"
-          }
-        },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "カテゴリを管理"
-          }
-        },
-        "pt-BR" : {
-          "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Gerenciar categorias"
-          }
-        },
-        "ru" : {
-          "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Управление категориями"
-          }
-        },
-        "th" : {
-          "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "จัดการหมวดหมู่"
-          }
-        },
-        "vi" : {
-          "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Quản lý danh mục"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "管理类别"
-          }
-        },
-        "zh-Hant" : {
-          "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "管理類別"
-          }
-        }
-      }
-    },
     "카테고리 삭제" : {
       "localizations" : {
         "de" : {
@@ -109131,218 +111586,6 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "刪除類別"
-          }
-        }
-      }
-    },
-    "카테고리 생성 · 이름 변경 · 삭제 · 순서" : {
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Kategorien erstellen · umbenennen · löschen · ordnen"
-          }
-        },
-        "en" : {
-          "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Create · Rename · Delete · Reorder Categories"
-          }
-        },
-        "en-CA" : {
-          "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Create · Rename · Delete · Reorder Categories"
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Crear · Renombrar · Eliminar · Reordenar categorías"
-          }
-        },
-        "es-MX" : {
-          "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Crear · Renombrar · Eliminar · Reordenar categorías"
-          }
-        },
-        "fil" : {
-          "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Gumawa · Palitan ang Pangalan · I-delete · Ayusin ang Mga Kategorya"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Créer · Renommer · Supprimer · Réorganiser les catégories"
-          }
-        },
-        "fr-CA" : {
-          "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Créer · Renommer · Supprimer · Réorganiser les catégories"
-          }
-        },
-        "id" : {
-          "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Buat · Ganti Nama · Hapus · Urutkan Kategori"
-          }
-        },
-        "it" : {
-          "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Crea · Rinomina · Elimina · Riordina categorie"
-          }
-        },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "カテゴリの作成 · 名前の変更 · 削除 · 並べ替え"
-          }
-        },
-        "pt-BR" : {
-          "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Criar · Renomear · Excluir · Reordenar categorias"
-          }
-        },
-        "ru" : {
-          "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Создание · Переименование · Удаление · Порядок категорий"
-          }
-        },
-        "th" : {
-          "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "สร้าง · เปลี่ยนชื่อ · ลบ · จัดลำดับหมวดหมู่"
-          }
-        },
-        "vi" : {
-          "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Tạo · Đổi tên · Xóa · Sắp xếp danh mục"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "创建 · 重命名 · 删除 · 排序类别"
-          }
-        },
-        "zh-Hant" : {
-          "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "建立 · 重新命名 · 刪除 · 排序類別"
-          }
-        }
-      }
-    },
-    "카테고리 이름" : {
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Kategoriename"
-          }
-        },
-        "en" : {
-          "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Category Name"
-          }
-        },
-        "en-CA" : {
-          "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Category Name"
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Nombre de la categoría"
-          }
-        },
-        "es-MX" : {
-          "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Nombre de la categoría"
-          }
-        },
-        "fil" : {
-          "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Pangalan ng Kategorya"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Nom de la catégorie"
-          }
-        },
-        "fr-CA" : {
-          "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Nom de la catégorie"
-          }
-        },
-        "id" : {
-          "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Nama Kategori"
-          }
-        },
-        "it" : {
-          "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Nome della categoria"
-          }
-        },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "カテゴリ名"
-          }
-        },
-        "pt-BR" : {
-          "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Nome da categoria"
-          }
-        },
-        "ru" : {
-          "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Название категории"
-          }
-        },
-        "th" : {
-          "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "ชื่อหมวดหมู่"
-          }
-        },
-        "vi" : {
-          "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Tên danh mục"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "类别名称"
-          }
-        },
-        "zh-Hant" : {
-          "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "類別名稱"
           }
         }
       }
@@ -114237,112 +116480,6 @@
         }
       }
     },
-    "페이지" : {
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Seite"
-          }
-        },
-        "en" : {
-          "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Page"
-          }
-        },
-        "en-CA" : {
-          "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Page"
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Página"
-          }
-        },
-        "es-MX" : {
-          "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Página"
-          }
-        },
-        "fil" : {
-          "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Pahina"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Page"
-          }
-        },
-        "fr-CA" : {
-          "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Page"
-          }
-        },
-        "id" : {
-          "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Halaman"
-          }
-        },
-        "it" : {
-          "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Pagina"
-          }
-        },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "ページ"
-          }
-        },
-        "pt-BR" : {
-          "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Página"
-          }
-        },
-        "ru" : {
-          "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Страница"
-          }
-        },
-        "th" : {
-          "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "หน้า"
-          }
-        },
-        "vi" : {
-          "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Trang"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "页面"
-          }
-        },
-        "zh-Hant" : {
-          "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "頁面"
-          }
-        }
-      }
-    },
     "페일" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -114446,6 +116583,112 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Peil"
+          }
+        }
+      }
+    },
+    "페이지" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Seite"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Page"
+          }
+        },
+        "en-CA" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Page"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Página"
+          }
+        },
+        "es-MX" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Página"
+          }
+        },
+        "fil" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Pahina"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Page"
+          }
+        },
+        "fr-CA" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Page"
+          }
+        },
+        "id" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Halaman"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Pagina"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "ページ"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Página"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Страница"
+          }
+        },
+        "th" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "หน้า"
+          }
+        },
+        "vi" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Trang"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "页面"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "頁面"
           }
         }
       }
@@ -122208,6 +124451,113 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "變位形 (%@)"
+          }
+        }
+      }
+    },
+    "후손" : {
+      "comment" : "관계 안내 카드 라벨(질의한 %@ 관계가 등록돼 있지 않습니다)",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Nachkomme"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Descendant"
+          }
+        },
+        "en-CA" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Descendant"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Descendiente"
+          }
+        },
+        "es-MX" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Descendiente"
+          }
+        },
+        "fil" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Inapo"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Descendant"
+          }
+        },
+        "fr-CA" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Descendant"
+          }
+        },
+        "id" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Keturunan"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Discendente"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "末裔"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Descendente"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Потомок"
+          }
+        },
+        "th" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "ทายาท"
+          }
+        },
+        "vi" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Hậu duệ"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "后裔"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "後裔"
           }
         }
       }
