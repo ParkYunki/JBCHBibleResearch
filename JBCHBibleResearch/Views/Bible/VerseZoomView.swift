@@ -12,6 +12,7 @@
 //
 
 import SwiftUI
+import CoreText
 import BibleResearchModels
 #if os(iOS)
 import UIKit
@@ -134,10 +135,38 @@ struct VerseZoomView: View {
         return width.isFinite ? max(width, 0) : 0
     }
 
-    /// 본문 글꼴로 잰 한글 "가" 한 글자 폭 — `effectiveTextWidth`와 `lineBreakWidth`의 공통 단위.
+    /// 본문 글꼴로 잰 한글 "가" 한 글자 폭 — `effectiveTextWidth`의 단위. 본문 글꼴에 "가"가 있으면 `lineBreakWidth`의 단위이기도 하다
+    /// (`lineBreakUnitWidth` 참고).
     private var hangulCharWidth: CGFloat {
         let sample = "가" as NSString
         return sample.size(withAttributes: [.font: bibleFont]).width
+    }
+
+    /// [2026-10-29 fontdef1] 한글 이외 절의 줄바꿈 단위(`lineBreakWidth`) — "가" 한 글자 폭.
+    /// 본문 글꼴 자체에 "가"(U+AC00) 글리프가 있으면 `hangulCharWidth`(그 글꼴로 잰 폭) 그대로다.
+    /// 없으면(Literata·Noto Serif Thai·Shippori Mincho·LXGW WenKai TC·시스템 글꼴 등) 같은 크기의 Paperlogy-4Regular로 잰 폭을 쓴다.
+    /// 글리프가 없는 글꼴로 재면 CoreText 대체 글꼴의 "가" 폭이 잡혀, 기기·대체 글꼴에 따라 단위가 달라지고
+    /// 아이폰 세로에서 폭이 `availableContentWidth`에 막혀 오른쪽 여백이 사라질 수 있다.
+    /// 한글 절의 `effectiveTextWidth`는 이 값을 쓰지 않는다(한국어 경로는 예전과 같다).
+    /// Paperlogy를 만들 수 없으면(등록 실패) 예전처럼 `hangulCharWidth`로 물러난다.
+    private var lineBreakUnitWidth: CGFloat {
+        let font = bibleFont
+        guard !Self.hasHangulGlyph(font) else { return hangulCharWidth }
+        BundledFontRegistrar.ensureAvailable(BundledFonts.defaultPostScriptName)
+        guard let reference = PlatformFont(name: BundledFonts.defaultPostScriptName, size: font.pointSize) else {
+            return hangulCharWidth
+        }
+        return ("가" as NSString).size(withAttributes: [.font: reference]).width
+    }
+
+    /// 글꼴 자체(대체 글꼴 제외)의 문자표에 "가"(U+AC00)가 있는지.
+    /// `CTFontGetGlyphsForCharacters`는 대체 글꼴을 찾지 않는 단순 문자→글리프 대응이며, 대응하지 못한 문자가 있으면
+    /// false를 돌려주고 그 자리 글리프를 0으로 둔다(CoreText 헤더 CTFont.h 설명). `CTFont`는 iOS의 `UIFont`, macOS의
+    /// `NSFont`와 toll-free bridged라(Core Text Programming Guide, Overview) `as CTFont`로 넘긴다.
+    private static func hasHangulGlyph(_ font: PlatformFont) -> Bool {
+        var character: UniChar = 0xAC00
+        var glyph: CGGlyph = 0
+        return CTFontGetGlyphsForCharacters(font as CTFont, &character, &glyph, 1) && glyph != 0
     }
 
     private var effectiveTextWidth: CGFloat {
@@ -156,9 +185,10 @@ struct VerseZoomView: View {
     ///   한글 글자 폭 단위로 환산한 값이다. 기본 글꼴(Paperlogy, "가" = 0.88em) 기준 KRV 줄 폭은 중앙값이 "가" 16자(세로 18자 목표)·
     ///   17.5자(20자 목표), 90백분위가 18자·19.25자라, 이 폭으로 채운 다른 언어 줄이 한글 줄과 비슷한 오른쪽 여백을 남긴다.
     ///   예전 23자 폭은 한글 줄보다 약 30% 넓어 여백이 거의 남지 않았다.
+    /// [2026-10-29 fontdef1] 단위는 `lineBreakUnitWidth`다. 본문 글꼴에 "가"가 없으면 Paperlogy로 잰 "가" 폭을 쓴다.
     private var lineBreakWidth: CGFloat {
         guard !VerseAnnotationRenderer.usesKoreanLineBreaking(verseText) else { return effectiveTextWidth }
-        let targetWidth = hangulCharWidth * CGFloat(targetCharsPerLine)
+        let targetWidth = lineBreakUnitWidth * CGFloat(targetCharsPerLine)
         // `targetWidth`가 NaN이면 `> 0`이 거짓이라 예전 폭으로 물러난다.
         guard targetWidth > 0 else { return effectiveTextWidth }
         let width = min(availableContentWidth, targetWidth)

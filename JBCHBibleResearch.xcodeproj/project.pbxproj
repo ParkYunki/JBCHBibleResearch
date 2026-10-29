@@ -320,7 +320,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = JBCHBibleResearch/JBCHBibleResearch.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 15;
+				CURRENT_PROJECT_VERSION = 17;
 				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_TEAM = L59A3358CD;
 				ENABLE_APP_SANDBOX = YES;
@@ -373,7 +373,7 @@
 					"$(PROJECT_DIR)/JBCHBibleResearch/Native",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 26;
-				MARKETING_VERSION = 1.4;
+				MARKETING_VERSION = 1.4.2;
 				"OTHER_LDFLAGS[sdk=macosx*]" = "-ldocxide_pdf_ffi";
 				PRODUCT_BUNDLE_IDENTIFIER = org.jbch.djc.JBCHBibleResearch;
 				PRODUCT_NAME = "엠마오 성경 연구";
@@ -403,7 +403,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = JBCHBibleResearch/JBCHBibleResearch.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 15;
+				CURRENT_PROJECT_VERSION = 17;
 				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_TEAM = L59A3358CD;
 				ENABLE_APP_SANDBOX = YES;
@@ -456,7 +456,7 @@
 					"$(PROJECT_DIR)/JBCHBibleResearch/Native",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 26;
-				MARKETING_VERSION = 1.4;
+				MARKETING_VERSION = 1.4.2;
 				"OTHER_LDFLAGS[sdk=macosx*]" = "-ldocxide_pdf_ffi";
 				PRODUCT_BUNDLE_IDENTIFIER = org.jbch.djc.JBCHBibleResearch;
 				PRODUCT_NAME = "엠마오 성경 연구";

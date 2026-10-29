@@ -1,0 +1,349 @@
+--- a/JBCHBibleResearch/Localizable.xcstrings
++++ b/JBCHBibleResearch/Localizable.xcstrings
+@@ -98046,6 +98046,112 @@
+         }
+       }
+     },
++    "일본어·중국어 성경 본문용 글꼴 Shippori Mincho(Copyright 2021 The Shippori Mincho Project Authors), LXGW WenKai TC(Copyright 2024 The LXGW WenKai Project Authors)는 SIL Open Font License(OFL) 1.1을 따르며 수정 없이 포함했습니다." : {
++      "localizations" : {
++        "de" : {
++          "stringUnit" : {
++            "state" : "needs_review",
++            "value" : "Die Schriften für den japanischen und chinesischen Bibeltext, Shippori Mincho (Copyright 2021 The Shippori Mincho Project Authors) und LXGW WenKai TC (Copyright 2024 The LXGW WenKai Project Authors), stehen unter der SIL Open Font License (OFL) 1.1 und sind unverändert enthalten."
++          }
++        },
++        "en" : {
++          "stringUnit" : {
++            "state" : "needs_review",
++            "value" : "The fonts used for Japanese and Chinese Bible text, Shippori Mincho (Copyright 2021 The Shippori Mincho Project Authors) and LXGW WenKai TC (Copyright 2024 The LXGW WenKai Project Authors), are licensed under the SIL Open Font License (OFL) 1.1 and are included without modification."
++          }
++        },
++        "en-CA" : {
++          "stringUnit" : {
++            "state" : "needs_review",
++            "value" : "The fonts used for Japanese and Chinese Bible text, Shippori Mincho (Copyright 2021 The Shippori Mincho Project Authors) and LXGW WenKai TC (Copyright 2024 The LXGW WenKai Project Authors), are licensed under the SIL Open Font License (OFL) 1.1 and are included without modification."
++          }
++        },
++        "es" : {
++          "stringUnit" : {
++            "state" : "needs_review",
++            "value" : "Las fuentes usadas para el texto bíblico en japonés y chino, Shippori Mincho (Copyright 2021 The Shippori Mincho Project Authors) y LXGW WenKai TC (Copyright 2024 The LXGW WenKai Project Authors), se distribuyen bajo la SIL Open Font License (OFL) 1.1 y se incluyen sin modificaciones."
++          }
++        },
++        "es-MX" : {
++          "stringUnit" : {
++            "state" : "needs_review",
++            "value" : "Las fuentes usadas para el texto bíblico en japonés y chino, Shippori Mincho (Copyright 2021 The Shippori Mincho Project Authors) y LXGW WenKai TC (Copyright 2024 The LXGW WenKai Project Authors), se distribuyen bajo la SIL Open Font License (OFL) 1.1 y se incluyen sin modificaciones."
++          }
++        },
++        "fil" : {
++          "stringUnit" : {
++            "state" : "needs_review",
++            "value" : "Ang mga font na ginagamit sa teksto ng Bibliya sa Japanese at Chinese, ang Shippori Mincho (Copyright 2021 The Shippori Mincho Project Authors) at LXGW WenKai TC (Copyright 2024 The LXGW WenKai Project Authors), ay nasa ilalim ng SIL Open Font License (OFL) 1.1 at isinama nang walang pagbabago."
++          }
++        },
++        "fr" : {
++          "stringUnit" : {
++            "state" : "needs_review",
++            "value" : "Les polices utilisées pour le texte biblique en japonais et en chinois, Shippori Mincho (Copyright 2021 The Shippori Mincho Project Authors) et LXGW WenKai TC (Copyright 2024 The LXGW WenKai Project Authors), sont distribuées sous la SIL Open Font License (OFL) 1.1 et incluses sans modification."
++          }
++        },
++        "fr-CA" : {
++          "stringUnit" : {
++            "state" : "needs_review",
++            "value" : "Les polices utilisées pour le texte biblique en japonais et en chinois, Shippori Mincho (Copyright 2021 The Shippori Mincho Project Authors) et LXGW WenKai TC (Copyright 2024 The LXGW WenKai Project Authors), sont distribuées sous la SIL Open Font License (OFL) 1.1 et incluses sans modification."
++          }
++        },
++        "id" : {
++          "stringUnit" : {
++            "state" : "needs_review",
++            "value" : "Font untuk teks Alkitab bahasa Jepang dan Tionghoa, yaitu Shippori Mincho (Copyright 2021 The Shippori Mincho Project Authors) dan LXGW WenKai TC (Copyright 2024 The LXGW WenKai Project Authors), berlisensi SIL Open Font License (OFL) 1.1 dan disertakan tanpa modifikasi."
++          }
++        },
++        "it" : {
++          "stringUnit" : {
++            "state" : "needs_review",
++            "value" : "I font usati per il testo biblico in giapponese e cinese, Shippori Mincho (Copyright 2021 The Shippori Mincho Project Authors) e LXGW WenKai TC (Copyright 2024 The LXGW WenKai Project Authors), sono distribuiti con licenza SIL Open Font License (OFL) 1.1 e inclusi senza modifiche."
++          }
++        },
++        "ja" : {
++          "stringUnit" : {
++            "state" : "needs_review",
++            "value" : "日本語・中国語の聖書本文用フォント Shippori Mincho (Copyright 2021 The Shippori Mincho Project Authors)、LXGW WenKai TC (Copyright 2024 The LXGW WenKai Project Authors) は SIL Open Font License (OFL) 1.1 に従い、改変せずに同梱しています。"
++          }
++        },
++        "pt-BR" : {
++          "stringUnit" : {
++            "state" : "needs_review",
++            "value" : "As fontes usadas para o texto bíblico em japonês e chinês, Shippori Mincho (Copyright 2021 The Shippori Mincho Project Authors) e LXGW WenKai TC (Copyright 2024 The LXGW WenKai Project Authors), seguem a SIL Open Font License (OFL) 1.1 e foram incluídas sem modificações."
++          }
++        },
++        "ru" : {
++          "stringUnit" : {
++            "state" : "needs_review",
++            "value" : "Шрифты для текста Библии на японском и китайском языках — Shippori Mincho (Copyright 2021 The Shippori Mincho Project Authors) и LXGW WenKai TC (Copyright 2024 The LXGW WenKai Project Authors) — распространяются по лицензии SIL Open Font License (OFL) 1.1 и включены без изменений."
++          }
++        },
++        "th" : {
++          "stringUnit" : {
++            "state" : "needs_review",
++            "value" : "แบบอักษรสำหรับข้อความพระคัมภีร์ภาษาญี่ปุ่นและภาษาจีน ได้แก่ Shippori Mincho (Copyright 2021 The Shippori Mincho Project Authors) และ LXGW WenKai TC (Copyright 2024 The LXGW WenKai Project Authors) อยู่ภายใต้ SIL Open Font License (OFL) 1.1 และรวมไว้โดยไม่มีการดัดแปลง"
++          }
++        },
++        "vi" : {
++          "stringUnit" : {
++            "state" : "needs_review",
++            "value" : "Các phông chữ dùng cho văn bản Kinh Thánh tiếng Nhật và tiếng Trung, gồm Shippori Mincho (Copyright 2021 The Shippori Mincho Project Authors) và LXGW WenKai TC (Copyright 2024 The LXGW WenKai Project Authors), tuân theo SIL Open Font License (OFL) 1.1 và được đi kèm nguyên bản, không sửa đổi."
++          }
++        },
++        "zh-Hans" : {
++          "stringUnit" : {
++            "state" : "needs_review",
++            "value" : "日语、中文圣经正文用字体 Shippori Mincho (Copyright 2021 The Shippori Mincho Project Authors)、LXGW WenKai TC (Copyright 2024 The LXGW WenKai Project Authors) 遵循 SIL Open Font License (OFL) 1.1，未经修改即包含在内。"
++          }
++        },
++        "zh-Hant" : {
++          "stringUnit" : {
++            "state" : "needs_review",
++            "value" : "日語、中文聖經正文用字型 Shippori Mincho (Copyright 2021 The Shippori Mincho Project Authors)、LXGW WenKai TC (Copyright 2024 The LXGW WenKai Project Authors) 遵循 SIL Open Font License (OFL) 1.1，未經修改即包含在內。"
++          }
++        }
++      }
++    },
+     "일치 없음" : {
+       "localizations" : {
+         "de" : {
+--- a/JBCHBibleResearch/Services/BundledFontRegistrar.swift
++++ b/JBCHBibleResearch/Services/BundledFontRegistrar.swift
+@@ -2,7 +2,7 @@
+ //  BundledFontRegistrar.swift
+ //  JBCHBibleResearch
+ //
+-//  앱에 내장한 Paperlogy(9종)·고운바탕·다국어 글꼴(태국어/키릴/베트남어, 2026-10-12)·Literata(2026-10-29) 등 번들 글꼴을 앱 실행 시 한 번 CoreText에
++//  앱에 내장한 Paperlogy(9종)·고운바탕·다국어 글꼴(태국어/키릴/베트남어, 2026-10-12)·Literata·Shippori Mincho·LXGW WenKai TC(2026-10-29) 등 번들 글꼴을 앱 실행 시 한 번 CoreText에
+ //  등록해, SwiftUI `Font.custom(_:size:)`와 설정 화면 글꼴 목록에서 바로 쓰게 한다.
+ //
+ //  프로세스 단위(.process)로만 등록한다 — `.persistent`는 앱 삭제 후에도 흔적이 남을 수
+@@ -59,12 +59,27 @@
+     static let defaultPostScriptName = "Paperlogy-4Regular"
+ 
+     /// 성경 조회 본문 글꼴(`UserSettingsStore.bibleFontName`)의 기본값 — 저장된 값이 없을 때만 쓴다.
+-    /// [2026-10-29 사용자 결정] 베트남어 앱(번들 성경 VIE1934)은 Literata Regular, 그 밖의 언어는 기존과 같은 Paperlogy Regular.
++    /// [2026-10-29 사용자 결정, fontdef1] 앱 언어(`AppLanguage.baseCode`)별 기본값:
++    ///  - vi, ru와 라틴 문자 언어(en·en-CA, es·es-MX, fr·fr-CA, de, it, pt-BR, id, fil): Literata Regular
++    ///  - th: Noto Serif Thai Regular (숫자·라틴·괄호·따옴표가 없어 그 글자만 시스템 글꼴로 대체된다)
++    ///  - ja: Shippori Mincho Regular, zh(zh-Hans·zh-Hant 모두): LXGW WenKai TC Regular
++    ///  - ko와 그 밖(목록에 없는 언어): 기존과 같은 Paperlogy Regular
+     /// 이 앱에는 번역본별 글꼴 설정이 없어(본문 글꼴은 `bibleFontName` 하나) 앱 언어로 정한다. 번들 성경은 앱 언어의 것 하나만
+-    /// 보이므로(`BundledTranslationCatalog.isVisible`) VIE1934가 보이는 기기는 베트남어 앱뿐이다.
++    /// 보인다(`BundledTranslationCatalog.isVisible`).
+     /// ⚠️ 설교 문단 스타일·메모 에디터 기본값(`languageAdjustedDefaultFontName`)은 이 값과 별개이며 바꾸지 않았다.
+     static var bibleDefaultPostScriptName: String {
+-        AppLanguage.baseCode == "vi" ? literataRegularPostScriptName : defaultPostScriptName
++        switch AppLanguage.baseCode {
++        case "vi", "ru", "en", "es", "fr", "de", "it", "pt", "id", "fil":
++            return literataRegularPostScriptName
++        case "th":
++            return notoSerifThaiRegularPostScriptName
++        case "ja":
++            return shipporiMinchoRegularPostScriptName
++        case "zh":
++            return lxgwWenKaiTCRegularPostScriptName
++        default:
++            return defaultPostScriptName
++        }
+     }
+ 
+     // MARK: 다국어 글꼴 (2026-10-12 추가)
+@@ -81,6 +96,11 @@
+     //    규칙(Regular/Bold/Italic은 family "Literata", SemiBold는 family "Literata SemiBold" + 표시 family "Literata")으로 넣었다.
+     //    라틴·베트남어·키릴·그리스어. 성경 본문용 세리프라 모든 앱 언어의 메뉴에 보인다(`Family.languageCode == nil`).
+     //    Italic은 메뉴에 넣지 않는다 — 원문 정보 직역 카드의 `.italic()`, 메모 기울임 토글이 같은 family에서 찾아 쓴다.
++    //  - Shippori Mincho(2026-10-29 fontdef1): google/fonts `ofl/shipporimincho` 원본 그대로(서브셋·수정 없음). Regular/SemiBold/Bold
++    //    3종만 넣었다(본문·절 번호 `.weight(.semibold)`·굵게 토글). 일본어 가나·한자·라틴. 일본어 앱 메뉴에만 보인다.
++    //  - LXGW WenKai TC(2026-10-29 fontdef1): google/fonts `ofl/lxgwwenkaitc` 원본 그대로. 원본에 SemiBold가 없어 Regular/Bold
++    //    2종만 넣었다(Light는 쓰지 않음). 번체 기준이지만 CUV1919S(간체) 본문 글자도 1자(僈)를 빼고 모두 있다. 중국어 앱 메뉴에만 보인다.
++    //    두 글꼴 모두 Italic이 없다. 파일 하나가 8~13MB라 메뉴는 해당 언어에서만 보이게 했다.
+     // 굵기마다 family 이름이 따로라(name 테이블 확인) Paperlogy처럼 PostScript 이름으로 쓴다.
+     // ⚠️ 이 글꼴들에는 한글이 없다. 한글이 섞이면 그 글자만 시스템 글꼴로 대체된다.
+ 
+@@ -110,11 +130,31 @@
+         Entry(postScriptName: "IBMPlexSansThai-Bold", displayName: "IBM Plex Sans Thai Bold"),
+     ]
+ 
++    /// `Fonts/NotoSerifThai-Regular.ttf` name 테이블 ID 6 값.
++    static let notoSerifThaiRegularPostScriptName = "NotoSerifThai-Regular"
++
+     static let notoSerifThaiEntries: [Entry] = [
+-        Entry(postScriptName: "NotoSerifThai-Regular", displayName: "Noto Serif Thai Regular"),
++        Entry(postScriptName: notoSerifThaiRegularPostScriptName, displayName: "Noto Serif Thai Regular"),
+         Entry(postScriptName: "NotoSerifThai-Bold", displayName: "Noto Serif Thai Bold"),
+     ]
+ 
++    /// `Fonts/ShipporiMincho-*.ttf` name 테이블 ID 6 값(파일 이름과 같다).
++    static let shipporiMinchoRegularPostScriptName = "ShipporiMincho-Regular"
++
++    static let shipporiMinchoEntries: [Entry] = [
++        Entry(postScriptName: shipporiMinchoRegularPostScriptName, displayName: "Shippori Mincho Regular"),
++        Entry(postScriptName: "ShipporiMincho-SemiBold", displayName: "Shippori Mincho SemiBold"),
++        Entry(postScriptName: "ShipporiMincho-Bold", displayName: "Shippori Mincho Bold"),
++    ]
++
++    /// `Fonts/LXGWWenKaiTC-*.ttf` name 테이블 ID 6 값(파일 이름과 같다).
++    static let lxgwWenKaiTCRegularPostScriptName = "LXGWWenKaiTC-Regular"
++
++    static let lxgwWenKaiTCEntries: [Entry] = [
++        Entry(postScriptName: lxgwWenKaiTCRegularPostScriptName, displayName: "LXGW WenKai TC Regular"),
++        Entry(postScriptName: "LXGWWenKaiTC-Bold", displayName: "LXGW WenKai TC Bold"),
++    ]
++
+     static let interEntries: [Entry] = [
+         Entry(postScriptName: "Inter-Light", displayName: "Inter Light"),
+         Entry(postScriptName: "Inter-Regular", displayName: "Inter Regular"),
+@@ -140,13 +180,16 @@
+         Family(name: "Noto Serif Thai", entries: notoSerifThaiEntries, languageCode: "th"),
+         Family(name: "Inter", entries: interEntries, languageCode: "ru"),
+         Family(name: "Be Vietnam Pro", entries: beVietnamProEntries, languageCode: "vi"),
++        Family(name: "Shippori Mincho", entries: shipporiMinchoEntries, languageCode: "ja"),
++        // zh-Hans·zh-Hant 모두 `AppLanguage.baseCode == "zh"`다.
++        Family(name: "LXGW WenKai TC", entries: lxgwWenKaiTCEntries, languageCode: "zh"),
+     ]
+ 
+     // MARK: 공통 글꼴 / 지역 전용 글꼴 (2026-10-12, 사용자 결정: 앱 언어 기준)
+     //
+     // - 공통(모든 언어의 메뉴에 표시): Paperlogy, 고운바탕, Literata(2026-10-29)
+     // - 지역 전용(그 앱 언어에서만 메뉴에 표시): IBM Plex Sans Thai·Noto Serif Thai(th), Inter(ru),
+-    //   Be Vietnam Pro(vi), 조선궁서체(ko — 한자 주석용 한국어 전용 글꼴)
++    //   Be Vietnam Pro(vi), Shippori Mincho(ja), LXGW WenKai TC(zh, 2026-10-29), 조선궁서체(ko — 한자 주석용 한국어 전용 글꼴)
+     // 숨김은 "고르는 메뉴"에만 적용한다. 글꼴 파일은 모든 기기에 번들돼 있으므로 다른 언어 기기에서 만든
+     // 문서·이미 저장된 설정은 그대로 그려진다. 설정 화면 Picker처럼 현재 선택값을 보여줘야 하는 곳은
+     // 현재 선택된 글꼴이면 숨기지 않는다(그래야 빈칸으로 보이지 않는다). 타이틀 대체 서체(`TitleFont`)는
+@@ -162,7 +205,9 @@
+ 
+     /// 시스템 글꼴 목록(설정 화면)에서 번들 글꼴이 중복으로 보이지 않게 걸러낼 family 이름 접두어.
+     /// 등록된 번들 글꼴도 `UIFont.familyNames`/`NSFontManager.availableFontFamilies`에 나타난다.
+-    static let bundledFamilyNamePrefixes: [String] = ["Paperlogy", "IBM Plex Sans Thai", "Noto Serif Thai", "Inter", "Be Vietnam Pro", "Literata"]
++    static let bundledFamilyNamePrefixes: [String] = [
++        "Paperlogy", "IBM Plex Sans Thai", "Noto Serif Thai", "Inter", "Be Vietnam Pro", "Literata", "Shippori Mincho", "LXGW WenKai TC",
++    ]
+ 
+     /// 등록 확인 로그에 쓰는 번들 글꼴 총 개수(목록에서 고르는 글꼴만, 특수 목적 폰트 제외).
+     static var selectableFontCount: Int {
+@@ -326,6 +371,7 @@
+         let knownPrefixes = [
+             "Paperlogy", "GowunBatang", "ChosunGs", "SILEOT", "Gentium", "KMU80SungkokSerif",
+             "IBMPlexSansThai", "NotoSerifThai", "Inter-", "BeVietnamPro", "Literata-",
++            "ShipporiMincho-", "LXGWWenKaiTC-",
+         ]
+         let rootURLs = (
+             (Bundle.main.urls(forResourcesWithExtension: "ttf", subdirectory: nil) ?? [])
+--- a/JBCHBibleResearch/Services/UserSettingsStore.swift
++++ b/JBCHBibleResearch/Services/UserSettingsStore.swift
+@@ -288,7 +288,8 @@
+ 
+     /// 글꼴 이름 — 시스템 글꼴 목록에서 고른 이름, 내장 Paperlogy 폰트의 PostScript 이름
+     /// (`BundledFonts.entries`), 또는 "System"(시스템 기본 서체). 기본값은 내장 기본 글꼴
+-    /// (`BundledFonts.bibleDefaultPostScriptName` — 베트남어 앱은 Literata, 그 밖은 Paperlogy, 2026-10-29)이며,
++    /// (`BundledFonts.bibleDefaultPostScriptName` — 앱 언어별: 라틴 문자·vi·ru는 Literata, th는 Noto Serif Thai,
++    /// ja는 Shippori Mincho, zh는 LXGW WenKai TC, ko는 Paperlogy, 2026-10-29)이며, 키가 저장된 적 없을 때만 쓴다(저장된 값은 기본값과 같아도 그대로 쓴다).
+     /// 폰트가 로드되지 않았어도 `bibleBodyFont`가 시스템 폰트로 대체한다(BundledFontRegistrar.swift 참고).
+     /// 기기 설정(`UserDefaults`)에만 저장하고 iCloud로 동기화하지 않는다.
+     var bibleFontName: String {
+--- a/JBCHBibleResearch/Views/Bible/VerseZoomView.swift
++++ b/JBCHBibleResearch/Views/Bible/VerseZoomView.swift
+@@ -12,6 +12,7 @@
+ //
+ 
+ import SwiftUI
++import CoreText
+ import BibleResearchModels
+ #if os(iOS)
+ import UIKit
+@@ -134,12 +135,40 @@
+         return width.isFinite ? max(width, 0) : 0
+     }
+ 
+-    /// 본문 글꼴로 잰 한글 "가" 한 글자 폭 — `effectiveTextWidth`와 `lineBreakWidth`의 공통 단위.
++    /// 본문 글꼴로 잰 한글 "가" 한 글자 폭 — `effectiveTextWidth`의 단위. 본문 글꼴에 "가"가 있으면 `lineBreakWidth`의 단위이기도 하다
++    /// (`lineBreakUnitWidth` 참고).
+     private var hangulCharWidth: CGFloat {
+         let sample = "가" as NSString
+         return sample.size(withAttributes: [.font: bibleFont]).width
+     }
+ 
++    /// [2026-10-29 fontdef1] 한글 이외 절의 줄바꿈 단위(`lineBreakWidth`) — "가" 한 글자 폭.
++    /// 본문 글꼴 자체에 "가"(U+AC00) 글리프가 있으면 `hangulCharWidth`(그 글꼴로 잰 폭) 그대로다.
++    /// 없으면(Literata·Noto Serif Thai·Shippori Mincho·LXGW WenKai TC·시스템 글꼴 등) 같은 크기의 Paperlogy-4Regular로 잰 폭을 쓴다.
++    /// 글리프가 없는 글꼴로 재면 CoreText 대체 글꼴의 "가" 폭이 잡혀, 기기·대체 글꼴에 따라 단위가 달라지고
++    /// 아이폰 세로에서 폭이 `availableContentWidth`에 막혀 오른쪽 여백이 사라질 수 있다.
++    /// 한글 절의 `effectiveTextWidth`는 이 값을 쓰지 않는다(한국어 경로는 예전과 같다).
++    /// Paperlogy를 만들 수 없으면(등록 실패) 예전처럼 `hangulCharWidth`로 물러난다.
++    private var lineBreakUnitWidth: CGFloat {
++        let font = bibleFont
++        guard !Self.hasHangulGlyph(font) else { return hangulCharWidth }
++        BundledFontRegistrar.ensureAvailable(BundledFonts.defaultPostScriptName)
++        guard let reference = PlatformFont(name: BundledFonts.defaultPostScriptName, size: font.pointSize) else {
++            return hangulCharWidth
++        }
++        return ("가" as NSString).size(withAttributes: [.font: reference]).width
++    }
++
++    /// 글꼴 자체(대체 글꼴 제외)의 문자표에 "가"(U+AC00)가 있는지.
++    /// `CTFontGetGlyphsForCharacters`는 대체 글꼴을 찾지 않는 단순 문자→글리프 대응이며, 대응하지 못한 문자가 있으면
++    /// false를 돌려주고 그 자리 글리프를 0으로 둔다(CoreText 헤더 CTFont.h 설명). `CTFont`는 iOS의 `UIFont`, macOS의
++    /// `NSFont`와 toll-free bridged라(Core Text Programming Guide, Overview) `as CTFont`로 넘긴다.
++    private static func hasHangulGlyph(_ font: PlatformFont) -> Bool {
++        var character: UniChar = 0xAC00
++        var glyph: CGGlyph = 0
++        return CTFontGetGlyphsForCharacters(font as CTFont, &character, &glyph, 1) && glyph != 0
++    }
++
+     private var effectiveTextWidth: CGFloat {
+         let charWidth = hangulCharWidth
+         // 성경 본문 줄바꿈 목표 폭 — "가" 23자 폭으로 제한해 읽기 좋은 줄 길이를 유지한다. 한글 절은 글자 수 기준이라 폭과 무관하고,
+@@ -156,9 +185,10 @@
+     ///   한글 글자 폭 단위로 환산한 값이다. 기본 글꼴(Paperlogy, "가" = 0.88em) 기준 KRV 줄 폭은 중앙값이 "가" 16자(세로 18자 목표)·
+     ///   17.5자(20자 목표), 90백분위가 18자·19.25자라, 이 폭으로 채운 다른 언어 줄이 한글 줄과 비슷한 오른쪽 여백을 남긴다.
+     ///   예전 23자 폭은 한글 줄보다 약 30% 넓어 여백이 거의 남지 않았다.
++    /// [2026-10-29 fontdef1] 단위는 `lineBreakUnitWidth`다. 본문 글꼴에 "가"가 없으면 Paperlogy로 잰 "가" 폭을 쓴다.
+     private var lineBreakWidth: CGFloat {
+         guard !VerseAnnotationRenderer.usesKoreanLineBreaking(verseText) else { return effectiveTextWidth }
+-        let targetWidth = hangulCharWidth * CGFloat(targetCharsPerLine)
++        let targetWidth = lineBreakUnitWidth * CGFloat(targetCharsPerLine)
+         // `targetWidth`가 NaN이면 `> 0`이 거짓이라 예전 폭으로 물러난다.
+         guard targetWidth > 0 else { return effectiveTextWidth }
+         let width = min(availableContentWidth, targetWidth)
+--- a/JBCHBibleResearch/Views/Settings/SettingsView.swift
++++ b/JBCHBibleResearch/Views/Settings/SettingsView.swift
+@@ -755,7 +755,8 @@
+         // `RichTextEditor`(메모/개요 에디터)는 자체 서식 도구모음이 있어 이 설정의 적용 범위에 포함하지 않는다.
+         Section {
+             // 내장 Paperlogy 9종을 맨 위에, 그 아래 "시스템 기본", 이어서 설치된 나머지 글꼴 순.
+-            // 기본값은 내장 Paperlogy(베트남어 앱은 Literata — `BundledFonts.bibleDefaultPostScriptName`)이며 "시스템 기본"도 고를 수 있다.
++            // 기본값은 앱 언어별(`BundledFonts.bibleDefaultPostScriptName` — 라틴 문자·vi·ru는 Literata, th는 Noto Serif Thai,
++            // ja는 Shippori Mincho, zh는 LXGW WenKai TC, ko는 Paperlogy)이며 "시스템 기본"도 고를 수 있다.
+             Picker("글꼴", selection: $settings.bibleFontName) {
+                 Section("내장 기본 글꼴") {
+                     ForEach(BundledFonts.entries) { entry in
+@@ -1157,6 +1158,9 @@
+         FontRepositoryLink(name: "Inter", url: URL(string: "https://github.com/rsms/inter")!),
+         FontRepositoryLink(name: "Be Vietnam Pro", url: URL(string: "https://github.com/bettergui/BeVietnamPro")!),
+         FontRepositoryLink(name: "Literata", url: URL(string: "https://github.com/googlefonts/literata")!),
++        // 2026-10-29 fontdef1 — 각 OFL.txt 저작권 줄에 적힌 저장소.
++        FontRepositoryLink(name: "Shippori Mincho", url: URL(string: "https://github.com/fontdasu/ShipporiMincho")!),
++        FontRepositoryLink(name: "LXGW WenKai TC", url: URL(string: "https://github.com/lxgw/LxgwWenkaiTC")!),
+     ]
+ 
+     var body: some View {
+@@ -1245,6 +1249,11 @@
+                 // 수정본이므로 위 다국어 글꼴 문구("수정 없이")와 따로 고지한다.
+                 Text("성경 본문용 글꼴 Literata(Copyright 2017 The Literata Project Authors)는 SIL Open Font License(OFL) 1.1을 따릅니다. 원본 가변 글꼴에서 앱이 쓰는 굵기(Regular·SemiBold·Bold·Italic, 광학 크기 12pt)만 정적 글꼴로 만들어 포함했습니다.")
+ 
++                // Shippori Mincho·LXGW WenKai TC(2026-10-29 fontdef1) — google/fonts `ofl/shipporimincho/OFL.txt`,
++                // `ofl/lxgwwenkaitc/OFL.txt`(번들 `Fonts/OFL-ShipporiMincho.txt`, `Fonts/OFL-LXGWWenKaiTC.txt`)의 저작권 줄 기준.
++                // 원본 파일을 서브셋·수정 없이 넣었으므로 "수정 없이"로 고지한다.
++                Text("일본어·중국어 성경 본문용 글꼴 Shippori Mincho(Copyright 2021 The Shippori Mincho Project Authors), LXGW WenKai TC(Copyright 2024 The LXGW WenKai Project Authors)는 SIL Open Font License(OFL) 1.1을 따르며 수정 없이 포함했습니다.")
++
+                 ForEach(Self.multilingualFontLinks) { link in
+                     Link(String(localized: "\(link.name) 저장소 보기"), destination: link.url)
+                 }

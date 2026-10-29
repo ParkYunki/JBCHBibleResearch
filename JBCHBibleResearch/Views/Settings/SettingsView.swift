@@ -755,7 +755,8 @@ private struct AppearanceSettingsTab: View {
         // `RichTextEditor`(메모/개요 에디터)는 자체 서식 도구모음이 있어 이 설정의 적용 범위에 포함하지 않는다.
         Section {
             // 내장 Paperlogy 9종을 맨 위에, 그 아래 "시스템 기본", 이어서 설치된 나머지 글꼴 순.
-            // 기본값은 내장 Paperlogy(베트남어 앱은 Literata — `BundledFonts.bibleDefaultPostScriptName`)이며 "시스템 기본"도 고를 수 있다.
+            // 기본값은 앱 언어별(`BundledFonts.bibleDefaultPostScriptName` — 라틴 문자·vi·ru는 Literata, th는 Noto Serif Thai,
+            // ja는 Shippori Mincho, zh는 LXGW WenKai TC, ko는 Paperlogy)이며 "시스템 기본"도 고를 수 있다.
             Picker("글꼴", selection: $settings.bibleFontName) {
                 Section("내장 기본 글꼴") {
                     ForEach(BundledFonts.entries) { entry in
@@ -1157,6 +1158,9 @@ private struct LicenseSettingsTab: View {
         FontRepositoryLink(name: "Inter", url: URL(string: "https://github.com/rsms/inter")!),
         FontRepositoryLink(name: "Be Vietnam Pro", url: URL(string: "https://github.com/bettergui/BeVietnamPro")!),
         FontRepositoryLink(name: "Literata", url: URL(string: "https://github.com/googlefonts/literata")!),
+        // 2026-10-29 fontdef1 — 각 OFL.txt 저작권 줄에 적힌 저장소.
+        FontRepositoryLink(name: "Shippori Mincho", url: URL(string: "https://github.com/fontdasu/ShipporiMincho")!),
+        FontRepositoryLink(name: "LXGW WenKai TC", url: URL(string: "https://github.com/lxgw/LxgwWenkaiTC")!),
     ]
 
     var body: some View {
@@ -1244,6 +1248,11 @@ private struct LicenseSettingsTab: View {
                 // 예약 글꼴 이름(Reserved Font Name)이 없어, 가변 글꼴에서 만든 정적 인스턴스(수정본)도 "Literata" 이름을 쓸 수 있다.
                 // 수정본이므로 위 다국어 글꼴 문구("수정 없이")와 따로 고지한다.
                 Text("성경 본문용 글꼴 Literata(Copyright 2017 The Literata Project Authors)는 SIL Open Font License(OFL) 1.1을 따릅니다. 원본 가변 글꼴에서 앱이 쓰는 굵기(Regular·SemiBold·Bold·Italic, 광학 크기 12pt)만 정적 글꼴로 만들어 포함했습니다.")
+
+                // Shippori Mincho·LXGW WenKai TC(2026-10-29 fontdef1) — google/fonts `ofl/shipporimincho/OFL.txt`,
+                // `ofl/lxgwwenkaitc/OFL.txt`(번들 `Fonts/OFL-ShipporiMincho.txt`, `Fonts/OFL-LXGWWenKaiTC.txt`)의 저작권 줄 기준.
+                // 원본 파일을 서브셋·수정 없이 넣었으므로 "수정 없이"로 고지한다.
+                Text("일본어·중국어 성경 본문용 글꼴 Shippori Mincho(Copyright 2021 The Shippori Mincho Project Authors), LXGW WenKai TC(Copyright 2024 The LXGW WenKai Project Authors)는 SIL Open Font License(OFL) 1.1을 따르며 수정 없이 포함했습니다.")
 
                 ForEach(Self.multilingualFontLinks) { link in
                     Link(String(localized: "\(link.name) 저장소 보기"), destination: link.url)

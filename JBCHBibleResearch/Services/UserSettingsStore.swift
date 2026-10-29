@@ -288,7 +288,8 @@ final class UserSettingsStore {
 
     /// 글꼴 이름 — 시스템 글꼴 목록에서 고른 이름, 내장 Paperlogy 폰트의 PostScript 이름
     /// (`BundledFonts.entries`), 또는 "System"(시스템 기본 서체). 기본값은 내장 기본 글꼴
-    /// (`BundledFonts.bibleDefaultPostScriptName` — 베트남어 앱은 Literata, 그 밖은 Paperlogy, 2026-10-29)이며,
+    /// (`BundledFonts.bibleDefaultPostScriptName` — 앱 언어별: 라틴 문자·vi·ru는 Literata, th는 Noto Serif Thai,
+    /// ja는 Shippori Mincho, zh는 LXGW WenKai TC, ko는 Paperlogy, 2026-10-29)이며, 키가 저장된 적 없을 때만 쓴다(저장된 값은 기본값과 같아도 그대로 쓴다).
     /// 폰트가 로드되지 않았어도 `bibleBodyFont`가 시스템 폰트로 대체한다(BundledFontRegistrar.swift 참고).
     /// 기기 설정(`UserDefaults`)에만 저장하고 iCloud로 동기화하지 않는다.
     var bibleFontName: String {

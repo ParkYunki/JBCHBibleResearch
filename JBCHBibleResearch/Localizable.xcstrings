@@ -98046,6 +98046,112 @@
         }
       }
     },
+    "일본어·중국어 성경 본문용 글꼴 Shippori Mincho(Copyright 2021 The Shippori Mincho Project Authors), LXGW WenKai TC(Copyright 2024 The LXGW WenKai Project Authors)는 SIL Open Font License(OFL) 1.1을 따르며 수정 없이 포함했습니다." : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Die Schriften für den japanischen und chinesischen Bibeltext, Shippori Mincho (Copyright 2021 The Shippori Mincho Project Authors) und LXGW WenKai TC (Copyright 2024 The LXGW WenKai Project Authors), stehen unter der SIL Open Font License (OFL) 1.1 und sind unverändert enthalten."
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "The fonts used for Japanese and Chinese Bible text, Shippori Mincho (Copyright 2021 The Shippori Mincho Project Authors) and LXGW WenKai TC (Copyright 2024 The LXGW WenKai Project Authors), are licensed under the SIL Open Font License (OFL) 1.1 and are included without modification."
+          }
+        },
+        "en-CA" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "The fonts used for Japanese and Chinese Bible text, Shippori Mincho (Copyright 2021 The Shippori Mincho Project Authors) and LXGW WenKai TC (Copyright 2024 The LXGW WenKai Project Authors), are licensed under the SIL Open Font License (OFL) 1.1 and are included without modification."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Las fuentes usadas para el texto bíblico en japonés y chino, Shippori Mincho (Copyright 2021 The Shippori Mincho Project Authors) y LXGW WenKai TC (Copyright 2024 The LXGW WenKai Project Authors), se distribuyen bajo la SIL Open Font License (OFL) 1.1 y se incluyen sin modificaciones."
+          }
+        },
+        "es-MX" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Las fuentes usadas para el texto bíblico en japonés y chino, Shippori Mincho (Copyright 2021 The Shippori Mincho Project Authors) y LXGW WenKai TC (Copyright 2024 The LXGW WenKai Project Authors), se distribuyen bajo la SIL Open Font License (OFL) 1.1 y se incluyen sin modificaciones."
+          }
+        },
+        "fil" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Ang mga font na ginagamit sa teksto ng Bibliya sa Japanese at Chinese, ang Shippori Mincho (Copyright 2021 The Shippori Mincho Project Authors) at LXGW WenKai TC (Copyright 2024 The LXGW WenKai Project Authors), ay nasa ilalim ng SIL Open Font License (OFL) 1.1 at isinama nang walang pagbabago."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Les polices utilisées pour le texte biblique en japonais et en chinois, Shippori Mincho (Copyright 2021 The Shippori Mincho Project Authors) et LXGW WenKai TC (Copyright 2024 The LXGW WenKai Project Authors), sont distribuées sous la SIL Open Font License (OFL) 1.1 et incluses sans modification."
+          }
+        },
+        "fr-CA" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Les polices utilisées pour le texte biblique en japonais et en chinois, Shippori Mincho (Copyright 2021 The Shippori Mincho Project Authors) et LXGW WenKai TC (Copyright 2024 The LXGW WenKai Project Authors), sont distribuées sous la SIL Open Font License (OFL) 1.1 et incluses sans modification."
+          }
+        },
+        "id" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Font untuk teks Alkitab bahasa Jepang dan Tionghoa, yaitu Shippori Mincho (Copyright 2021 The Shippori Mincho Project Authors) dan LXGW WenKai TC (Copyright 2024 The LXGW WenKai Project Authors), berlisensi SIL Open Font License (OFL) 1.1 dan disertakan tanpa modifikasi."
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "I font usati per il testo biblico in giapponese e cinese, Shippori Mincho (Copyright 2021 The Shippori Mincho Project Authors) e LXGW WenKai TC (Copyright 2024 The LXGW WenKai Project Authors), sono distribuiti con licenza SIL Open Font License (OFL) 1.1 e inclusi senza modifiche."
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "日本語・中国語の聖書本文用フォント Shippori Mincho (Copyright 2021 The Shippori Mincho Project Authors)、LXGW WenKai TC (Copyright 2024 The LXGW WenKai Project Authors) は SIL Open Font License (OFL) 1.1 に従い、改変せずに同梱しています。"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "As fontes usadas para o texto bíblico em japonês e chinês, Shippori Mincho (Copyright 2021 The Shippori Mincho Project Authors) e LXGW WenKai TC (Copyright 2024 The LXGW WenKai Project Authors), seguem a SIL Open Font License (OFL) 1.1 e foram incluídas sem modificações."
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Шрифты для текста Библии на японском и китайском языках — Shippori Mincho (Copyright 2021 The Shippori Mincho Project Authors) и LXGW WenKai TC (Copyright 2024 The LXGW WenKai Project Authors) — распространяются по лицензии SIL Open Font License (OFL) 1.1 и включены без изменений."
+          }
+        },
+        "th" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "แบบอักษรสำหรับข้อความพระคัมภีร์ภาษาญี่ปุ่นและภาษาจีน ได้แก่ Shippori Mincho (Copyright 2021 The Shippori Mincho Project Authors) และ LXGW WenKai TC (Copyright 2024 The LXGW WenKai Project Authors) อยู่ภายใต้ SIL Open Font License (OFL) 1.1 และรวมไว้โดยไม่มีการดัดแปลง"
+          }
+        },
+        "vi" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Các phông chữ dùng cho văn bản Kinh Thánh tiếng Nhật và tiếng Trung, gồm Shippori Mincho (Copyright 2021 The Shippori Mincho Project Authors) và LXGW WenKai TC (Copyright 2024 The LXGW WenKai Project Authors), tuân theo SIL Open Font License (OFL) 1.1 và được đi kèm nguyên bản, không sửa đổi."
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "日语、中文圣经正文用字体 Shippori Mincho (Copyright 2021 The Shippori Mincho Project Authors)、LXGW WenKai TC (Copyright 2024 The LXGW WenKai Project Authors) 遵循 SIL Open Font License (OFL) 1.1，未经修改即包含在内。"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "日語、中文聖經正文用字型 Shippori Mincho (Copyright 2021 The Shippori Mincho Project Authors)、LXGW WenKai TC (Copyright 2024 The LXGW WenKai Project Authors) 遵循 SIL Open Font License (OFL) 1.1，未經修改即包含在內。"
+          }
+        }
+      }
+    },
     "일치 없음" : {
       "localizations" : {
         "de" : {
