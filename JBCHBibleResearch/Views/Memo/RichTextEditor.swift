@@ -30,6 +30,9 @@ enum RichTextCodec {
     /// 문단 스타일(줄간격)까지 받는다.
     static func decode(_ stored: String, defaultAttributes: [NSAttributedString.Key: Any]) -> NSAttributedString {
         if stored.hasPrefix("{\\rtf1"), let data = stored.data(using: .utf8) {
+            // [2026-10-29 fontdef2] 다른 언어 앱 전용 CJK 글꼴(Shippori Mincho·LXGW WenKai TC)은 시작할 때 등록하지 않는다.
+            // 등록되지 않은 글꼴 이름은 RTF를 읽는 순간 대체 글꼴로 바뀌고 다시 저장하면 사라지므로, 이 문서가 쓰는 파일만 먼저 등록한다.
+            DeferredFontRegistry.registerFonts(referencedInRTF: stored)
             #if os(iOS)
             if let attrString = try? NSAttributedString(
                 data: data, options: [.documentType: NSAttributedString.DocumentType.rtf], documentAttributes: nil

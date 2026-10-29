@@ -871,6 +871,12 @@ extension UserSettingsStore {
         }
     }
 
+    /// [2026-10-29 fontdef2] 이 기기 설정에 저장된(또는 기본값) 글꼴 이름 전부 — 성경 본문, 한자 주석, 설교 문단 스타일 6종.
+    /// 시작 직후 다른 언어 앱 전용 CJK 글꼴을 백그라운드에서 미리 등록하는 데 쓴다(`DeferredFontRegistry.prefetch`).
+    var configuredFontNames: [String] {
+        [bibleFontName, hanjaFontName] + SermonParagraphStyle.allCases.map { sermonFontName(for: $0) }
+    }
+
     /// 문단 스타일별 폰트 크기 — 위 `sermonFontName(for:)`와 같은 이유.
     func sermonFontSize(for style: SermonParagraphStyle) -> Double {
         switch style {

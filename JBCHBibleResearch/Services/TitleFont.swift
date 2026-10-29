@@ -16,7 +16,12 @@
 //   3. KMU80이 글자를 모두 가지면 KMU80.
 //   4. 태국 문자가 있으면 Noto Serif Thai(숫자·영문은 이 글꼴에 없어 시스템 글꼴로 대체된다).
 //   5. Gentium이 글자를 모두 가지면 Gentium(라틴 악센트·키릴·베트남어).
-//   6. 그 밖(일본어 가나·중국어 한자 등)은 KMU80 — 기존 동작(없는 글자는 시스템 글꼴로 대체)을 유지한다.
+//   6. 그 밖(다른 언어 앱의 일본어 가나·중국어 한자 등)은 KMU80 — 기존 동작(없는 글자는 시스템 글꼴로 대체)을 유지한다.
+//  [2026-10-29 fontdef2] ja 앱의 기본 타이틀 서체는 Shippori Mincho, zh 앱(zh-Hans·zh-Hant)은 LXGW WenKai TC다. 두 글꼴은 그 언어
+//  앱에서는 시작할 때 등록되고(다른 언어 앱은 `DeferredFontRegistry` 참고 — 그 앱의 타이틀은 이 글꼴을 고르지 않는다),
+//  가나·한자·기본 라틴과 SemiBold/Bold 굵기(호출부의 `.fontWeight`)를 가진다(LXGW는 SemiBold 파일이 없어 가까운 굵기로
+//  맞춰진다). 한글이 있는 타이틀은 규칙 1이 먼저라 그대로 KMU80이다. ja·zh-Hans·zh-Hant `Localizable.xcstrings` 값의 글자는
+//  한국어 고지 문구(타이틀 아님)를 빼고 모두 각 글꼴에 있다(fontTools 실측).
 //  글자 판정은 문자·결합 부호·숫자만 본다. 기호(✓, ⚠️ 등)는 어느 글꼴이든 시스템 대체로 그려지므로 제외한다.
 //
 //  고정 문구(`Text("말씀 노트")`처럼 로컬라이즈 키로 그리는 타이틀)는 실제 표시 문자열을 알 수 없어
@@ -36,9 +41,14 @@ enum TitleFont {
             return SpecialPurposeFonts.titleSerifThai
         case "de", "es", "fr", "it", "pt", "ru", "vi":
             return SpecialPurposeFonts.titleSerifLatinFallback
+        case "ja":
+            // [2026-10-29 fontdef2] KMU80에는 가나만 있고 한자가 없어 한 단어 안에서 글꼴이 섞였다.
+            return BundledFonts.shipporiMinchoRegularPostScriptName
+        case "zh":
+            // [2026-10-29 fontdef2] zh-Hans·zh-Hant 모두(`baseCode == "zh"`). KMU80에는 한자가 없다.
+            return BundledFonts.lxgwWenKaiTCRegularPostScriptName
         default:
             // ko, en, id, fil: KMU80이 모든 글자를 가진다.
-            // ja, zh: 가나·한자는 어느 번들 서체에도 없어 기존처럼 KMU80 + 시스템 대체.
             return SpecialPurposeFonts.titleSerif
         }
     }

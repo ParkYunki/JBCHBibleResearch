@@ -1,0 +1,759 @@
+[
+ {
+  "book": 1,
+  "chapter": 13,
+  "verse": 10,
+  "old": "đồng ó cũng",
+  "new": "đồng đó cũng",
+  "evidence": [
+   [
+    "bible.com VIE1925(id 193)",
+    "https://www.bible.com/ro/bible/193/GEN.13.10",
+    "\"đồng đó\""
+   ]
+  ]
+ },
+ {
+  "book": 1,
+  "chapter": 20,
+  "verse": 13,
+  "old": "làm cco tôi pưu lạc",
+  "new": "làm cho tôi phải lưu lạc",
+  "evidence": [
+   [
+    "ebible.com/vietnamese",
+    "https://ebible.com/vietnamese/genesis/20",
+    "\"Khi Ðức Chúa Trời làm cho tôi phải lưu lạc xa nhà\""
+   ],
+   [
+    "biblehub.com/multilingual (구 VNI 판본)",
+    "https://biblehub.com/multilingual/genesis/20-13.htm",
+    "\"Khi Ðức Chúa Trời làm cho tôi phải lưu lạc xa nhà cha.\""
+   ]
+  ]
+ },
+ {
+  "book": 4,
+  "chapter": 7,
+  "verse": 37,
+  "old": "nơi thánhhh;",
+  "new": "nơi thánh;",
+  "evidence": [
+   [
+    "ebible.com/vietnamese",
+    "https://ebible.com/vietnamese/numbers/7",
+    "\"theo siếc-lơ của nơi thánh;\""
+   ]
+  ]
+ },
+ {
+  "book": 4,
+  "chapter": 24,
+  "verse": 21,
+  "old": "vững, ì ngươi đóng",
+  "new": "vững, Ổ ngươi đóng",
+  "evidence": [
+   [
+    "ebible.com/vietnamese",
+    "https://ebible.com/vietnamese/numbers/24",
+    "\"Chỗ ở ngươi là bền vững, Ổ ngươi đóng trong hòn đá.\""
+   ],
+   [
+    "biblehub.com/multilingual (구 VNI 판본)",
+    "https://biblehub.com/multilingual/numbers/24-21.htm",
+    "\"Ổ\""
+   ]
+  ]
+ },
+ {
+  "book": 5,
+  "chapter": 3,
+  "verse": 6,
+  "old": "và connnnn trẻ",
+  "new": "và con trẻ",
+  "evidence": [
+   [
+    "ebible.com/vietnamese",
+    "https://ebible.com/vietnamese/section/289",
+    "\"người nữ, và con trẻ.\""
+   ],
+   [
+    "biblehub.com/multilingual (구 VNI 판본)",
+    "https://biblehub.com/multilingual/deuteronomy/3-6.htm",
+    "\"và con trẻ\""
+   ]
+  ]
+ },
+ {
+  "book": 5,
+  "chapter": 3,
+  "verse": 8,
+  "old": "Ạt-nnôn",
+  "new": "Ạt-nôn",
+  "evidence": [
+   [
+    "ebible.com/vietnamese",
+    "https://ebible.com/vietnamese/section/289",
+    "\"Aït-nôn đến núi Hẹt-môn\" (VNI 찌꺼기 그대로, n 하나)"
+   ]
+  ]
+ },
+ {
+  "book": 6,
+  "chapter": 18,
+  "verse": 21,
+  "old": "Bết-Hôt-la",
+  "new": "Bết-Hốt-la",
+  "evidence": [
+   [
+    "kinhthanh.httlvn.org VI1934",
+    "https://kinhthanh.httlvn.org/doc-kinh-thanh/gios/18?v2=NIV",
+    "\"Giê-ri-cô, Bết-Hốt-la, Ê-méc-kê-sít\""
+   ],
+   [
+    "참고(불일치)",
+    "https://ebible.com/vietnamese/joshua/18 , https://biblehub.com/multilingual/joshua/18-21.htm",
+    "\"Bết-Hô-đa\" (다른 판본 표기). 같은 성경 수 15:6·18:19는 Bết-Hốt-la"
+   ]
+  ]
+ },
+ {
+  "book": 7,
+  "chapter": 7,
+  "verse": 11,
+  "old": "mình cóóóóóómạnh mà",
+  "new": "mình có sức mạnh mà",
+  "evidence": [
+   [
+    "biblehub.com/multilingual (구 VNI 판본)",
+    "https://biblehub.com/multilingual/judges/7-11.htm",
+    "\"rồi ngươi sẽ cảm biết rằng mình có sức mạnh mà hãm dinh chúng nó.\""
+   ]
+  ]
+ },
+ {
+  "book": 9,
+  "chapter": 16,
+  "verse": 2,
+  "old": "rằng: g: àm sao tôi đii đó được?",
+  "new": "rằng: Làm sao tôi đi đó được?",
+  "evidence": [
+   [
+    "ebible.com/vietnamese",
+    "https://ebible.com/vietnamese/1samuel/16",
+    "\"Sa-mu-ên thưa rằng: Làm sao tôi đi đó được? Nếu\""
+   ]
+  ]
+ },
+ {
+  "book": 9,
+  "chapter": 16,
+  "verse": 2,
+  "old": "theo ngggggggơi một",
+  "new": "theo ngươi một",
+  "evidence": [
+   [
+    "ebible.com/vietnamese",
+    "https://ebible.com/vietnamese/1samuel/16",
+    "\"Hãy đem theo ngươi một con bò cái tơ\""
+   ]
+  ]
+ },
+ {
+  "book": 10,
+  "chapter": 12,
+  "verse": 5,
+  "old": "thật đđng chết!",
+  "new": "thật đáng chết!",
+  "evidence": [
+   [
+    "ebible.com/vietnamese",
+    "https://ebible.com/vietnamese/2samuel/12",
+    "\"ấy thật đáng chết!\""
+   ]
+  ]
+ },
+ {
+  "book": 10,
+  "chapter": 12,
+  "verse": 6,
+  "old": "chiên conkhông có lòng",
+  "new": "chiên con, vì đã làm như vậy, và vì không có lòng",
+  "evidence": [
+   [
+    "ebible.com/vietnamese",
+    "https://ebible.com/vietnamese/2samuel/12",
+    "\"Hắn phải thường bốn lần giá chiên con, vì đã làm như vậy, và vì không có lòng thương xót.\""
+   ],
+   [
+    "biblehub.com/multilingual (구 VNI 판본)",
+    "https://biblehub.com/multilingual/2_samuel/12-6.htm",
+    "(같은 문장)"
+   ]
+  ]
+ },
+ {
+  "book": 11,
+  "chapter": 11,
+  "verse": 1,
+  "old": "người n Ê-đôm",
+  "new": "người nữ Mô-áp, Am-môn, Ê-đôm",
+  "evidence": [
+   [
+    "ebible.com/vietnamese",
+    "https://ebible.com/vietnamese/1kings/11",
+    "\"tức là người nữ Mô-áp, Am-môn, Ê-đôm, Si-đôn, và Hê-tít.\""
+   ]
+  ]
+ },
+ {
+  "book": 12,
+  "chapter": 11,
+  "verse": 15,
+  "old": "Giêiêô-gia-đa",
+  "new": "Giê-hô-gia-đa",
+  "evidence": [
+   [
+    "biblehub.com/multilingual (구 VNI 판본)",
+    "https://biblehub.com/multilingual/2_kings/11-15.htm",
+    "\"Nhưng thầy tế lễ Giê-hô-gia-đa truyền lịnh cho\""
+   ]
+  ]
+ },
+ {
+  "book": 19,
+  "chapter": 106,
+  "verse": 47,
+  "old": "Chúa, úa, Và khoe mình về sự ngợ hen Chúaa.",
+  "new": "Chúa, Và khoe mình về sự ngợi khen Chúa.",
+  "evidence": [
+   [
+    "ebible.com/vietnamese",
+    "https://ebible.com/vietnamese/psalms/106",
+    "\"Hầu cho chúng tôi cảm tạ danh thánh Chúa, Và khoe mình về sự ngợi khen Chúa.\""
+   ]
+  ]
+ },
+ {
+  "book": 20,
+  "chapter": 8,
+  "verse": 24,
+  "old": "đã s sh ra rồi",
+  "new": "đã sanh ra rồi",
+  "evidence": [
+   [
+    "biblehub.com/multilingual (구 VNI 판본)",
+    "https://biblehub.com/multilingual/proverbs/8-24.htm",
+    "\"Thì ta đã sanh ra rồi.\""
+   ]
+  ]
+ },
+ {
+  "book": 23,
+  "chapter": 23,
+  "verse": 16,
+  "old": "nhớ đến mầyầyy",
+  "new": "nhớ đến mầy!",
+  "evidence": [
+   [
+    "ebible.com/vietnamese",
+    "https://ebible.com/vietnamese/isaiah/23",
+    "\"cho người ta nhớ đến mầy!\""
+   ]
+  ]
+ },
+ {
+  "book": 24,
+  "chapter": 38,
+  "verse": 7,
+  "old": "người ta quănăng Giê-rê-mi",
+  "new": "người ta quăng Giê-rê-mi",
+  "evidence": [
+   [
+    "ebible.com/vietnamese",
+    "https://ebible.com/vietnamese/jeremiah/38",
+    "\"quăng Giê-rê-mi xuống hố\""
+   ]
+  ]
+ },
+ {
+  "book": 41,
+  "chapter": 3,
+  "verse": 22,
+  "old": "và nhờờờờờờ chúa quỉ mà ttttttrừ quỉ.",
+  "new": "và nhờ phép chúa quỉ mà trừ quỉ.",
+  "evidence": [
+   [
+    "ebible.com/vietnamese",
+    "https://ebible.com/vietnamese/mark/3",
+    "\"ám, và nhờ phép chúa quỉ mà trừ quỉ.\""
+   ],
+   [
+    "biblehub.com/multilingual (구 VNI 판본)",
+    "https://biblehub.com/multilingual/mark/3-22.htm",
+    "(같은 문장)"
+   ]
+  ]
+ },
+ {
+  "book": 41,
+  "chapter": 16,
+  "verse": 20,
+  "old": "mà làm cho v????",
+  "new": "mà làm cho vững đạo.",
+  "evidence": [
+   [
+    "bible.com VIE1925(id 193)",
+    "https://www.bible.com/ca/bible/193/MRK.16.20",
+    "\"lạ cặp theo lời giảng mà làm cho vững đạo.]\""
+   ],
+   [
+    "kinhthanh.httlvn.org VI1934",
+    "https://kinhthanh.httlvn.org/doc-kinh-thanh/mac/16?v2=NKJV",
+    "\"…mà làm cho vững đạo.)\""
+   ],
+   [
+    "ccel.org",
+    "https://ccel.org/ccel/bible/vi.Mark.16.html",
+    "\"…mà làm cho vững đạo.\""
+   ]
+  ]
+ },
+ {
+  "book": 42,
+  "chapter": 1,
+  "verse": 26,
+  "old": "Na-xa- rét",
+  "new": "Na-xa-rét",
+  "evidence": [
+   [
+    "같은 성경 다른 표기",
+    null,
+    "\"Na-xa-rét\" 이 성경 다른 곳 표기"
+   ],
+   [
+    "대조본 예시(눅 3:24·28·37)",
+    "https://ebible.com/vietnamese/luke/3 , https://ccel.org/ccel/bible/vi.Luke.3.html",
+    "공백 없이 \"Gia-nê\", \"Ên-ma-đan\", \"Gia-rết\""
+   ]
+  ]
+ },
+ {
+  "book": 42,
+  "chapter": 2,
+  "verse": 4,
+  "old": "Ga- li",
+  "new": "Ga-li",
+  "evidence": [
+   [
+    "같은 성경 다른 표기",
+    null,
+    "\"Ga-li\" 이 성경 다른 곳 표기"
+   ],
+   [
+    "대조본 예시(눅 3:24·28·37)",
+    "https://ebible.com/vietnamese/luke/3 , https://ccel.org/ccel/bible/vi.Luke.3.html",
+    "공백 없이 \"Gia-nê\", \"Ên-ma-đan\", \"Gia-rết\""
+   ]
+  ]
+ },
+ {
+  "book": 42,
+  "chapter": 2,
+  "verse": 25,
+  "old": "Si- mê",
+  "new": "Si-mê",
+  "evidence": [
+   [
+    "같은 성경 다른 표기",
+    null,
+    "\"Si-mê\" 이 성경 다른 곳 표기"
+   ],
+   [
+    "대조본 예시(눅 3:24·28·37)",
+    "https://ebible.com/vietnamese/luke/3 , https://ccel.org/ccel/bible/vi.Luke.3.html",
+    "공백 없이 \"Gia-nê\", \"Ên-ma-đan\", \"Gia-rết\""
+   ]
+  ]
+ },
+ {
+  "book": 42,
+  "chapter": 2,
+  "verse": 42,
+  "old": "Giê- ru",
+  "new": "Giê-ru",
+  "evidence": [
+   [
+    "같은 성경 다른 표기",
+    null,
+    "\"Giê-ru\" 이 성경 다른 곳 표기"
+   ],
+   [
+    "대조본 예시(눅 3:24·28·37)",
+    "https://ebible.com/vietnamese/luke/3 , https://ccel.org/ccel/bible/vi.Luke.3.html",
+    "공백 없이 \"Gia-nê\", \"Ên-ma-đan\", \"Gia-rết\""
+   ]
+  ]
+ },
+ {
+  "book": 42,
+  "chapter": 3,
+  "verse": 8,
+  "old": "Áp-ra- ham",
+  "new": "Áp-ra-ham",
+  "evidence": [
+   [
+    "같은 성경 다른 표기",
+    null,
+    "\"Áp-ra-ham\" 이 성경 다른 곳 표기"
+   ],
+   [
+    "대조본 예시(눅 3:24·28·37)",
+    "https://ebible.com/vietnamese/luke/3 , https://ccel.org/ccel/bible/vi.Luke.3.html",
+    "공백 없이 \"Gia-nê\", \"Ên-ma-đan\", \"Gia-rết\""
+   ]
+  ]
+ },
+ {
+  "book": 42,
+  "chapter": 3,
+  "verse": 24,
+  "old": "Gia- nê",
+  "new": "Gia-nê",
+  "evidence": [
+   [
+    "같은 성경 다른 표기",
+    null,
+    "\"Gia-nê\" 이 성경 다른 곳 표기"
+   ],
+   [
+    "대조본 예시(눅 3:24·28·37)",
+    "https://ebible.com/vietnamese/luke/3 , https://ccel.org/ccel/bible/vi.Luke.3.html",
+    "공백 없이 \"Gia-nê\", \"Ên-ma-đan\", \"Gia-rết\""
+   ]
+  ]
+ },
+ {
+  "book": 42,
+  "chapter": 3,
+  "verse": 27,
+  "old": "Xô- rô",
+  "new": "Xô-rô",
+  "evidence": [
+   [
+    "같은 성경 다른 표기",
+    null,
+    "\"Xô-rô\" 이 성경 다른 곳 표기"
+   ],
+   [
+    "대조본 예시(눅 3:24·28·37)",
+    "https://ebible.com/vietnamese/luke/3 , https://ccel.org/ccel/bible/vi.Luke.3.html",
+    "공백 없이 \"Gia-nê\", \"Ên-ma-đan\", \"Gia-rết\""
+   ]
+  ]
+ },
+ {
+  "book": 42,
+  "chapter": 3,
+  "verse": 28,
+  "old": "Ên-ma- đan",
+  "new": "Ên-ma-đan",
+  "evidence": [
+   [
+    "같은 성경 다른 표기",
+    null,
+    "\"Ên-ma-đan\" 이 성경 다른 곳 표기"
+   ],
+   [
+    "대조본 예시(눅 3:24·28·37)",
+    "https://ebible.com/vietnamese/luke/3 , https://ccel.org/ccel/bible/vi.Luke.3.html",
+    "공백 없이 \"Gia-nê\", \"Ên-ma-đan\", \"Gia-rết\""
+   ]
+  ]
+ },
+ {
+  "book": 42,
+  "chapter": 3,
+  "verse": 31,
+  "old": "Na- than",
+  "new": "Na-than",
+  "evidence": [
+   [
+    "같은 성경 다른 표기",
+    null,
+    "\"Na-than\" 이 성경 다른 곳 표기"
+   ],
+   [
+    "대조본 예시(눅 3:24·28·37)",
+    "https://ebible.com/vietnamese/luke/3 , https://ccel.org/ccel/bible/vi.Luke.3.html",
+    "공백 없이 \"Gia-nê\", \"Ên-ma-đan\", \"Gia-rết\""
+   ]
+  ]
+ },
+ {
+  "book": 42,
+  "chapter": 3,
+  "verse": 35,
+  "old": "Hê- be",
+  "new": "Hê-be",
+  "evidence": [
+   [
+    "같은 성경 다른 표기",
+    null,
+    "\"Hê-be\" 이 성경 다른 곳 표기"
+   ],
+   [
+    "대조본 예시(눅 3:24·28·37)",
+    "https://ebible.com/vietnamese/luke/3 , https://ccel.org/ccel/bible/vi.Luke.3.html",
+    "공백 없이 \"Gia-nê\", \"Ên-ma-đan\", \"Gia-rết\""
+   ]
+  ]
+ },
+ {
+  "book": 42,
+  "chapter": 3,
+  "verse": 36,
+  "old": "Nô- ê",
+  "new": "Nô-ê",
+  "evidence": [
+   [
+    "같은 성경 다른 표기",
+    null,
+    "\"Nô-ê\" 이 성경 다른 곳 표기"
+   ],
+   [
+    "대조본 예시(눅 3:24·28·37)",
+    "https://ebible.com/vietnamese/luke/3 , https://ccel.org/ccel/bible/vi.Luke.3.html",
+    "공백 없이 \"Gia-nê\", \"Ên-ma-đan\", \"Gia-rết\""
+   ]
+  ]
+ },
+ {
+  "book": 42,
+  "chapter": 3,
+  "verse": 37,
+  "old": "Gia- rết",
+  "new": "Gia-rết",
+  "evidence": [
+   [
+    "같은 성경 다른 표기",
+    null,
+    "\"Gia-rết\" 이 성경 다른 곳 표기"
+   ],
+   [
+    "대조본 예시(눅 3:24·28·37)",
+    "https://ebible.com/vietnamese/luke/3 , https://ccel.org/ccel/bible/vi.Luke.3.html",
+    "공백 없이 \"Gia-nê\", \"Ên-ma-đan\", \"Gia-rết\""
+   ]
+  ]
+ },
+ {
+  "book": 42,
+  "chapter": 4,
+  "verse": 31,
+  "old": "Sa- bát",
+  "new": "Sa-bát",
+  "evidence": [
+   [
+    "같은 성경 다른 표기",
+    null,
+    "\"Sa-bát\" 이 성경 다른 곳 표기"
+   ],
+   [
+    "대조본 예시(눅 3:24·28·37)",
+    "https://ebible.com/vietnamese/luke/3 , https://ccel.org/ccel/bible/vi.Luke.3.html",
+    "공백 없이 \"Gia-nê\", \"Ên-ma-đan\", \"Gia-rết\""
+   ]
+  ]
+ },
+ {
+  "book": 42,
+  "chapter": 9,
+  "verse": 52,
+  "old": "Sa- ma",
+  "new": "Sa-ma",
+  "evidence": [
+   [
+    "같은 성경 다른 표기",
+    null,
+    "\"Sa-ma\" 이 성경 다른 곳 표기"
+   ],
+   [
+    "대조본 예시(눅 3:24·28·37)",
+    "https://ebible.com/vietnamese/luke/3 , https://ccel.org/ccel/bible/vi.Luke.3.html",
+    "공백 없이 \"Gia-nê\", \"Ên-ma-đan\", \"Gia-rết\""
+   ]
+  ]
+ },
+ {
+  "book": 42,
+  "chapter": 9,
+  "verse": 53,
+  "old": "Giê- ru",
+  "new": "Giê-ru",
+  "evidence": [
+   [
+    "같은 성경 다른 표기",
+    null,
+    "\"Giê-ru\" 이 성경 다른 곳 표기"
+   ],
+   [
+    "대조본 예시(눅 3:24·28·37)",
+    "https://ebible.com/vietnamese/luke/3 , https://ccel.org/ccel/bible/vi.Luke.3.html",
+    "공백 없이 \"Gia-nê\", \"Ên-ma-đan\", \"Gia-rết\""
+   ]
+  ]
+ },
+ {
+  "book": 42,
+  "chapter": 14,
+  "verse": 5,
+  "old": "Sa- bát",
+  "new": "Sa-bát",
+  "evidence": [
+   [
+    "같은 성경 다른 표기",
+    null,
+    "\"Sa-bát\" 이 성경 다른 곳 표기"
+   ],
+   [
+    "대조본 예시(눅 3:24·28·37)",
+    "https://ebible.com/vietnamese/luke/3 , https://ccel.org/ccel/bible/vi.Luke.3.html",
+    "공백 없이 \"Gia-nê\", \"Ên-ma-đan\", \"Gia-rết\""
+   ]
+  ]
+ },
+ {
+  "book": 42,
+  "chapter": 16,
+  "verse": 23,
+  "old": "Áp-ra- ham",
+  "new": "Áp-ra-ham",
+  "evidence": [
+   [
+    "같은 성경 다른 표기",
+    null,
+    "\"Áp-ra-ham\" 이 성경 다른 곳 표기"
+   ],
+   [
+    "대조본 예시(눅 3:24·28·37)",
+    "https://ebible.com/vietnamese/luke/3 , https://ccel.org/ccel/bible/vi.Luke.3.html",
+    "공백 없이 \"Gia-nê\", \"Ên-ma-đan\", \"Gia-rết\""
+   ]
+  ]
+ },
+ {
+  "book": 42,
+  "chapter": 17,
+  "verse": 11,
+  "old": "Sa-ma- ri",
+  "new": "Sa-ma-ri",
+  "evidence": [
+   [
+    "같은 성경 다른 표기",
+    null,
+    "\"Sa-ma-ri\" 이 성경 다른 곳 표기"
+   ],
+   [
+    "대조본 예시(눅 3:24·28·37)",
+    "https://ebible.com/vietnamese/luke/3 , https://ccel.org/ccel/bible/vi.Luke.3.html",
+    "공백 없이 \"Gia-nê\", \"Ên-ma-đan\", \"Gia-rết\""
+   ]
+  ]
+ },
+ {
+  "book": 42,
+  "chapter": 23,
+  "verse": 18,
+  "old": "Ba-ra- ba",
+  "new": "Ba-ra-ba",
+  "evidence": [
+   [
+    "같은 성경 다른 표기",
+    null,
+    "\"Ba-ra-ba\" 이 성경 다른 곳 표기"
+   ],
+   [
+    "대조본 예시(눅 3:24·28·37)",
+    "https://ebible.com/vietnamese/luke/3 , https://ccel.org/ccel/bible/vi.Luke.3.html",
+    "공백 없이 \"Gia-nê\", \"Ên-ma-đan\", \"Gia-rết\""
+   ]
+  ]
+ },
+ {
+  "book": 42,
+  "chapter": 23,
+  "verse": 26,
+  "old": "Si- môn",
+  "new": "Si-môn",
+  "evidence": [
+   [
+    "같은 성경 다른 표기",
+    null,
+    "\"Si-môn\" 이 성경 다른 곳 표기"
+   ],
+   [
+    "대조본 예시(눅 3:24·28·37)",
+    "https://ebible.com/vietnamese/luke/3 , https://ccel.org/ccel/bible/vi.Luke.3.html",
+    "공백 없이 \"Gia-nê\", \"Ên-ma-đan\", \"Gia-rết\""
+   ]
+  ]
+ },
+ {
+  "book": 42,
+  "chapter": 23,
+  "verse": 51,
+  "old": "A-ri- ma",
+  "new": "A-ri-ma",
+  "evidence": [
+   [
+    "같은 성경 다른 표기",
+    null,
+    "\"A-ri-ma\" 이 성경 다른 곳 표기"
+   ],
+   [
+    "대조본 예시(눅 3:24·28·37)",
+    "https://ebible.com/vietnamese/luke/3 , https://ccel.org/ccel/bible/vi.Luke.3.html",
+    "공백 없이 \"Gia-nê\", \"Ên-ma-đan\", \"Gia-rết\""
+   ]
+  ]
+ },
+ {
+  "book": 55,
+  "chapter": 4,
+  "verse": 13,
+  "old": "Trô- ách",
+  "new": "Trô-ách",
+  "evidence": [
+   [
+    "같은 성경 다른 표기",
+    null,
+    "\"Trô-ách\" 이 성경 다른 곳 표기"
+   ],
+   [
+    "대조본 예시(눅 3:24·28·37)",
+    "https://ebible.com/vietnamese/luke/3 , https://ccel.org/ccel/bible/vi.Luke.3.html",
+    "공백 없이 \"Gia-nê\", \"Ên-ma-đan\", \"Gia-rết\""
+   ]
+  ]
+ },
+ {
+  "book": 58,
+  "chapter": 5,
+  "verse": 10,
+  "old": "Mên-chi- xê",
+  "new": "Mên-chi-xê",
+  "evidence": [
+   [
+    "같은 성경 다른 표기",
+    null,
+    "\"Mên-chi-xê\" 이 성경 다른 곳 표기"
+   ],
+   [
+    "대조본 예시(눅 3:24·28·37)",
+    "https://ebible.com/vietnamese/luke/3 , https://ccel.org/ccel/bible/vi.Luke.3.html",
+    "공백 없이 \"Gia-nê\", \"Ên-ma-đan\", \"Gia-rết\""
+   ]
+  ]
+ }
+]

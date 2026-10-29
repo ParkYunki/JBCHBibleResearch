@@ -30,6 +30,9 @@ struct JBCHBibleResearchApp: App {
         // 모델 컨테이너 준비와 무관하므로 먼저 실행해도 된다
         // (BundledFontRegistrar.swift 참고 — 등록에 실패해도 앱은 계속 켜진다).
         BundledFontRegistrar.registerBundledFontsIfNeeded()
+        // [2026-10-29 fontdef2] 설정에 저장된 글꼴 이름이 다른 언어 앱 전용 CJK 글꼴이면(앱 언어를 바꾸기 전에 고른 값,
+        // iCloud로 받은 설교 스타일 글꼴) 첫 화면이 그리기 전에 백그라운드에서 미리 등록한다(`DeferredFontRegistry.prefetch`).
+        DeferredFontRegistry.prefetch(UserSettingsStore.shared.configuredFontNames)
 
         // [임시 진단] 설교 뷰어 먹통 추적용 씬 로그(DEBUG+iOS 전용, `SceneDiagnostics.swift` 참고).
         #if DEBUG && os(iOS)

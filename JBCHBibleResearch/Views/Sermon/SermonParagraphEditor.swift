@@ -427,6 +427,8 @@ enum SermonParagraphStyleCodec {
         guard let previous else { return false }
         if abs(Double(originalFont.pointSize) - previous.fontSize) > 0.01 { return true }
         if originalFont.fontName == previous.fontName { return false }
+        // [2026-10-29 fontdef2] 다른 언어 앱 전용 CJK 글꼴이면 이름으로 만들기 전에 지연 등록한다(`DeferredFontRegistry`).
+        BundledFontRegistrar.ensureAvailable(previous.fontName)
         guard let previousFont = PlatformFont(name: previous.fontName, size: CGFloat(previous.fontSize)) else { return true }
         return previousFont.familyName != originalFont.familyName
     }
