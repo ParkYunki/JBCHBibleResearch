@@ -155,8 +155,7 @@ enum SermonParagraphStyleCodec {
     ) -> (style: SermonParagraphStyle, extras: SermonParagraphExtras)? {
         let text = storage.string as NSString
         guard text.length > 0 else { return nil }
-        let start = min(selection.location, text.length)
-        let scope = text.paragraphRange(for: NSRange(location: start, length: min(selection.length, text.length - start)))
+        let scope = extraScope(for: selection, in: storage)
         var first: (style: SermonParagraphStyle, extras: SermonParagraphExtras)?
         var cursor = scope.location
         storage.beginEditing()
@@ -174,6 +173,14 @@ enum SermonParagraphStyleCodec {
         }
         storage.endEditing()
         return first
+    }
+
+    /// `setExtra`가 바꾸는 범위 — 선택이 걸친 문단 전체(빈 문서면 길이 0). 실행 취소 스냅샷도 이 범위를 쓴다.
+    static func extraScope(for selection: NSRange, in storage: NSTextStorage) -> NSRange {
+        let text = storage.string as NSString
+        guard text.length > 0 else { return NSRange(location: 0, length: 0) }
+        let start = min(max(0, selection.location), text.length)
+        return text.paragraphRange(for: NSRange(location: start, length: min(max(0, selection.length), text.length - start)))
     }
 
     /// 타이핑 속성(다음에 입력될 글자의 모양)을 문단 스타일 + 추가 서식에 맞춘다. 정렬은 기존 값을 유지한다.
@@ -235,34 +242,101 @@ enum SermonParagraphStyleCodec {
     /// `previousSnapshot`과 현재 글자의 실제 폰트/색이 다르면 수동 지정으로 보고 유지하고,
     /// 같거나 스냅샷이 없으면 프리셋을 새로 적용한다(굵게/기울임은 보존). 정렬은 프리셋이
     /// 값을 지정하지 않으므로(`.natural`) natural이 아니면 수동 지정으로 본다.
+    ///
+    /// `isStyleChange`(스타일 pill·F1~F6처럼 사용자가 스타일을 "바꿀" 때만 true): 글자마다 이전 문단 스타일의 프리셋과 비교해
+    /// 프리셋에서 온 서식만 새 스타일로 바꾸고, 사용자가 직접 넣은 서식은 남긴다.
+    /// - 굵게: 이전 프리셋 글꼴 자체가 굵으면 그 굵게 비트는 프리셋에서 온 것이므로 넘기지 않는다. 이전 프리셋이 굵지 않은데
+    ///   굵은 글자는 사용자가 넣은 굵게(굵게 버튼·강조1)라 보존한다. 단 강조1 색 글자는 그 색이 이전 프리셋 색과 다를 때
+    ///   (=강조1임이 확실할 때) 굵게도 강조1의 일부로 보고 보존한다 — 색 규칙과 결과를 맞추기 위해서다.
+    /// - 글자색: 이전 프리셋 색과 같으면(`sermonIsClose`) 새 프리셋 색으로, 다르면(강조1·3, 직접 지정한 색) 그대로 둔다.
+    ///   색이 없는 글자는 새 프리셋 색을 입힌다.
+    /// 불러오기(`apply`)는 RTF에 문단 스타일 attribute가 남지 않아 이전 스타일을 알 수 없으므로 false로 두어 예전 동작
+    /// (굵게 보존 + 스냅샷 비교 색)을 그대로 따른다.
     static func applyStyle(
         _ style: SermonParagraphStyle, to paragraphRange: NSRange,
         in textStorage: NSTextStorage, settings: UserSettingsStore,
-        previousSnapshot: [SermonParagraphStyle: StyleSnapshot] = [:]
+        previousSnapshot: [SermonParagraphStyle: StyleSnapshot] = [:],
+        isStyleChange: Bool = false
     ) {
+        // 이전 문단 스타일은 아래에서 attribute를 덮어쓰기 전에 읽는다. 여러 문단을 한 번에 바꾸면 문단마다 이전 스타일이
+        // 다를 수 있어 스타일 attribute 구간별로 나눈다. attribute가 없는(또는 알 수 없는) 구간은 `export`·`currentParagraphStyle`과
+        // 같은 규칙으로 그 글자가 속한 문단 첫 글자의 스타일을 쓰고, 그것도 없을 때만 본문으로 본다(문단마다 따로 판정).
+        var passes: [StyleChangePass] = []
+        if isStyleChange {
+            var presets: [SermonParagraphStyle: StyleChangePass.Preset] = [:]
+            func addPass(_ range: NSRange, previousStyle: SermonParagraphStyle) {
+                let preset = presets[previousStyle] ?? StyleChangePass.Preset(
+                    isBold: SermonEmphasisEditor.fontIsBold(settings.sermonPlatformFont(for: previousStyle)),
+                    color: settings.sermonPlatformFontColor(for: previousStyle)
+                )
+                presets[previousStyle] = preset
+                passes.append(StyleChangePass(range: range, preset: preset))
+            }
+            let text = textStorage.string as NSString
+            textStorage.enumerateAttribute(.sermonParagraphStyle, in: paragraphRange, options: []) { value, subrange, _ in
+                if let style = (value as? String).flatMap(SermonParagraphStyle.init(rawValue:)) {
+                    addPass(subrange, previousStyle: style)
+                    return
+                }
+                // attribute 없는 구간이 여러 문단에 걸칠 수 있어 문단 단위로 나눈다.
+                var cursor = subrange.location
+                while cursor < NSMaxRange(subrange) {
+                    let paragraph = text.paragraphRange(for: NSRange(location: cursor, length: 0))
+                    let piece = NSIntersectionRange(subrange, paragraph)
+                    guard piece.length > 0 else { break }
+                    let firstRaw = paragraph.location < textStorage.length
+                        ? textStorage.attribute(.sermonParagraphStyle, at: paragraph.location, effectiveRange: nil) as? String
+                        : nil
+                    addPass(piece, previousStyle: firstRaw.flatMap(SermonParagraphStyle.init(rawValue:)) ?? .body)
+                    cursor = NSMaxRange(piece)
+                }
+            }
+        }
+
         textStorage.addAttribute(.sermonParagraphStyle, value: style.rawValue, range: paragraphRange)
         let baseFont = settings.sermonPlatformFont(for: style)
         let baseColor = settings.sermonPlatformFontColor(for: style)
-        let previous = previousSnapshot[style]
-        let previousColor = previous.flatMap { Color(hex: $0.colorHex) }.map(PlatformColor.init)
 
-        textStorage.enumerateAttribute(.font, in: paragraphRange, options: []) { value, subrange, _ in
-            let originalFont = (value as? PlatformFont) ?? baseFont
-            guard !isManualFont(originalFont, previous: previous) else { return }
-            // 인용은 예전엔 "항상 이탤릭"이었다(한글 가짜 기울임). 2026-10-03 스타일 재설계로 기울임을 없앴으므로
-            // 저장돼 있던 이탤릭 비트도 떼고 다시 입힌다. 굵게는 보존한다.
-            let resolvedFont = fontPreservingBoldItalic(from: originalFont, applying: baseFont, dropItalic: style == .citation)
-            textStorage.addAttribute(.font, value: resolvedFont, range: subrange)
-        }
+        if isStyleChange {
+            for pass in passes {
+                // 글꼴: 글자색을 바꾸기 전에 처리한다(강조1 판정에 원래 색이 필요하다).
+                textStorage.enumerateAttributes(in: pass.range, options: []) { attrs, subrange, _ in
+                    let originalFont = (attrs[.font] as? PlatformFont) ?? baseFont
+                    let isEmphasisOne = pass.preset.emphasisOneIsDistinct
+                        && ((attrs[.foregroundColor] as? PlatformColor)?.sermonIsClose(to: SermonEmphasis.oneColor) ?? false)
+                    let resolvedFont = fontPreservingBoldItalic(
+                        from: originalFont, applying: baseFont, dropItalic: style == .citation,
+                        dropBold: pass.preset.isBold && !isEmphasisOne
+                    )
+                    textStorage.addAttribute(.font, value: resolvedFont, range: subrange)
+                }
+                textStorage.enumerateAttribute(.foregroundColor, in: pass.range, options: []) { value, subrange, _ in
+                    if let color = value as? PlatformColor, !color.sermonIsClose(to: pass.preset.color) { return }
+                    textStorage.addAttribute(.foregroundColor, value: baseColor, range: subrange)
+                }
+            }
+        } else {
+            let previous = previousSnapshot[style]
+            let previousColor = previous.flatMap { Color(hex: $0.colorHex) }.map(PlatformColor.init)
 
-        textStorage.enumerateAttribute(.foregroundColor, in: paragraphRange, options: []) { value, subrange, _ in
-            let originalColor = value as? PlatformColor
-            let isManualColor: Bool = {
-                guard let previousColor, let originalColor else { return false }
-                return !originalColor.isEqual(previousColor)
-            }()
-            guard !isManualColor else { return }
-            textStorage.addAttribute(.foregroundColor, value: baseColor, range: subrange)
+            textStorage.enumerateAttribute(.font, in: paragraphRange, options: []) { value, subrange, _ in
+                let originalFont = (value as? PlatformFont) ?? baseFont
+                guard !isManualFont(originalFont, previous: previous) else { return }
+                // 인용은 예전엔 "항상 이탤릭"이었다(한글 가짜 기울임). 2026-10-03 스타일 재설계로 기울임을 없앴으므로
+                // 저장돼 있던 이탤릭 비트도 떼고 다시 입힌다. 굵게는 보존한다.
+                let resolvedFont = fontPreservingBoldItalic(from: originalFont, applying: baseFont, dropItalic: style == .citation)
+                textStorage.addAttribute(.font, value: resolvedFont, range: subrange)
+            }
+
+            textStorage.enumerateAttribute(.foregroundColor, in: paragraphRange, options: []) { value, subrange, _ in
+                let originalColor = value as? PlatformColor
+                let isManualColor: Bool = {
+                    guard let previousColor, let originalColor else { return false }
+                    return !originalColor.isEqual(previousColor)
+                }()
+                guard !isManualColor else { return }
+                textStorage.addAttribute(.foregroundColor, value: baseColor, range: subrange)
+            }
         }
 
         // 줄간격·목록은 문단 스타일을 바꿔도 유지한다(문단 첫 글자의 attribute를 읽는다 — 없으면 스타일 기본값).
@@ -282,6 +356,68 @@ enum SermonParagraphStyleCodec {
         }
         // 예전 말씀구절은 박스를 `.backgroundColor`로 저장했다 — 그 색의 배경만 걷어낸다(강조2 등 다른 배경은 유지).
         removeLegacyVerseBackground(in: paragraphRange, textStorage: textStorage, settings: settings)
+    }
+
+    // MARK: 실행 취소 도우미 (iOS 문단 스타일 실행 취소가 쓴다)
+
+    /// 스냅샷을 그 위치에 다시 입힐 수 있는지 — 문서 길이와 범위의 글자가 스냅샷을 찍을 때와 같아야 한다.
+    /// (스타일 적용은 글자를 바꾸지 않으므로 길이·글자가 다르면 그사이 다른 편집이 실행 취소 기록 없이 끼어든 것이다.)
+    static func canRestoreAttributes(_ snapshot: NSAttributedString, range: NSRange, expectedLength: Int, in storage: NSTextStorage) -> Bool {
+        guard storage.length == expectedLength, range.location >= 0, snapshot.length == range.length,
+              NSMaxRange(range) <= storage.length else { return false }
+        return (storage.string as NSString).substring(with: range) == snapshot.string
+    }
+
+    /// 스냅샷의 attribute를 구간마다 `setAttributes`로 그대로 덮는다(스냅샷에 없는 attribute는 지워진다). 글자는 바꾸지 않는다.
+    static func restoreAttributes(from snapshot: NSAttributedString, at location: Int, in storage: NSTextStorage) {
+        snapshot.enumerateAttributes(in: NSRange(location: 0, length: snapshot.length), options: []) { attrs, subrange, _ in
+            storage.setAttributes(attrs, range: NSRange(location: location + subrange.location, length: subrange.length))
+        }
+    }
+
+    /// 문단 단위 attribute — 타이핑 속성을 맞출 때 캐럿 문단 첫 글자에서 가져온다.
+    static let paragraphLevelKeys: [NSAttributedString.Key] = [
+        .paragraphStyle, .sermonParagraphStyle, .sermonLineHeight, .sermonListKind, .sermonVerseBoxFill, .sermonVerseBoxBar,
+    ]
+
+    /// 실행 취소로 되돌린 뒤의 타이핑 속성. 문단 attribute는 캐럿 문단 첫 글자(문서 끝의 빈 줄이면 바로 앞 글자)에서,
+    /// 글자 서식(글꼴·색·밑줄·배경 등)은 선택이 있으면 선택 첫 글자, 캐럿이면 같은 문단의 바로 앞 글자(문단 맨 앞이면 캐럿 위치 글자)에서
+    /// 가져온다. `.link`·`.attachment`는 넣지 않는다. 빈 문서면 nil(호출부는 그대로 둔다).
+    static func typingAttributesAtCaret(_ selection: NSRange, in storage: NSTextStorage) -> [NSAttributedString.Key: Any]? {
+        let length = storage.length
+        guard length > 0 else { return nil }
+        let text = storage.string as NSString
+        let location = min(max(0, selection.location), length)
+        let paragraph = text.paragraphRange(for: NSRange(location: location, length: 0))
+        let paragraphIndex = paragraph.location < length ? paragraph.location : length - 1
+        let characterIndex = (selection.length > 0 || location == paragraph.location) ? min(location, length - 1) : location - 1
+        var attrs = storage.attributes(at: characterIndex, effectiveRange: nil)
+        let paragraphAttrs = storage.attributes(at: paragraphIndex, effectiveRange: nil)
+        for key in paragraphLevelKeys { attrs[key] = paragraphAttrs[key] }
+        // 링크·첨부는 그 글자에만 속한다 — 이어서 입력하는 글자에 붙지 않게 뺀다.
+        attrs[.link] = nil
+        attrs[.attachment] = nil
+        return attrs
+    }
+
+    /// 선택 범위를 문서 길이 안으로 줄인다.
+    static func clampedRange(_ range: NSRange, length: Int) -> NSRange {
+        let location = min(max(0, range.location), length)
+        return NSRange(location: location, length: min(max(0, range.length), length - location))
+    }
+
+    /// `applyStyle(isStyleChange: true)`의 한 구간 — 이전 문단 스타일이 같은 글자 범위와 그 스타일의 프리셋 값.
+    private struct StyleChangePass {
+        struct Preset {
+            /// 이전 프리셋 글꼴 자체가 굵은지(`SermonEmphasisEditor.fontIsBold` — 강조 해제와 같은 판정).
+            let isBold: Bool
+            /// 이전 프리셋 글자색.
+            let color: PlatformColor
+            /// 강조1 색이 이전 프리셋 색과 구별되는지. 기본값의 중주제 색(#753B44)은 강조1 색과 같아 구별할 수 없다.
+            var emphasisOneIsDistinct: Bool { !color.sermonIsClose(to: SermonEmphasis.oneColor) }
+        }
+        let range: NSRange
+        let preset: Preset
     }
 
     /// 사용자가 글꼴을 직접 바꾼 글자인지. 마지막 저장 때의 프리셋(스냅샷)과 크기가 다르거나 글꼴 계열이 다르면 수동 지정이다.
@@ -402,11 +538,15 @@ enum SermonParagraphStyleCodec {
     /// `originalFont`의 굵게/기울임 비트만 골라 `applying`(현재 설정의 패밀리+크기)에 다시 입힌다.
     /// 분류 비트(세리프 등)까지 복사하면 새 패밀리가 그 조합을 지원하지 않아
     /// `withSymbolicTraits`가 실패할 수 있어 두 비트만 옮기며, 실패하면 `baseFont`를 반환한다.
-    /// `dropItalic`이 true면 기울임 비트는 옮기지 않는다(인용 스타일).
-    static func fontPreservingBoldItalic(from originalFont: PlatformFont, applying baseFont: PlatformFont, dropItalic: Bool = false) -> PlatformFont {
+    /// `dropItalic`이 true면 기울임 비트는 옮기지 않는다(인용 스타일). `dropBold`가 true면 굵게 비트를 옮기지 않는다
+    /// (이전 문단 스타일 프리셋에서 온 굵게 — `applyStyle(isStyleChange:)`). 새 프리셋 글꼴 자체의 굵기는 그대로다.
+    static func fontPreservingBoldItalic(
+        from originalFont: PlatformFont, applying baseFont: PlatformFont, dropItalic: Bool = false, dropBold: Bool = false
+    ) -> PlatformFont {
         #if os(iOS)
         var mask: UIFontDescriptor.SymbolicTraits = [.traitBold, .traitItalic]
         if dropItalic { mask.remove(.traitItalic) }
+        if dropBold { mask.remove(.traitBold) }
         let originalBoldItalic = originalFont.fontDescriptor.symbolicTraits.intersection(mask)
         guard !originalBoldItalic.isEmpty else { return baseFont }
         var newTraits = baseFont.fontDescriptor.symbolicTraits
@@ -416,6 +556,7 @@ enum SermonParagraphStyleCodec {
         #elseif os(macOS)
         var mask: NSFontDescriptor.SymbolicTraits = [.bold, .italic]
         if dropItalic { mask.remove(.italic) }
+        if dropBold { mask.remove(.bold) }
         let originalBoldItalic = originalFont.fontDescriptor.symbolicTraits.intersection(mask)
         guard !originalBoldItalic.isEmpty else { return baseFont }
         var newTraits = baseFont.fontDescriptor.symbolicTraits
@@ -461,6 +602,35 @@ final class SermonEditorUITextView: UITextView {
         }
         super.pressesBegan(presses, with: event)
     }
+
+    // MARK: ⌘B / ⌘I (sermonkey1)
+    //
+    // `allowsEditingTextAttributes`가 켜진 UITextView는 하드웨어 키보드 ⌘B/⌘I(iPadOS 메뉴 막대 Format), 텍스트 선택 메뉴의 B/I를 모두
+    // 시스템 `toggleBoldface(_:)`/`toggleItalics(_:)`로 처리한다. 그 기본 구현은 툴바 버튼(`toggleTrait`)과 별개라 굵게 결정 방식과
+    // 실행 취소 등록이 다르다. 두 메서드를 override해 툴바와 같은 앱 경로(`SermonParagraphEditingProxy.toggleBold/Italic` —
+    // 같은 trait 토글, 캐럿만 있으면 타이핑 속성 토글, sermonundo1 실행 취소)로 보낸다. 시스템 구현은 부르지 않으므로 실행 취소가 이중으로
+    // 등록되지 않는다. 밑줄(`toggleUnderline`)은 앱 경로가 없어 시스템 그대로 둔다.
+    // 핸들러가 false를 돌려주면(프록시가 이 텍스트뷰를 가리키지 않음) 시스템 구현으로 넘긴다.
+
+    var onToggleBold: (() -> Bool)?
+    var onToggleItalic: (() -> Bool)?
+
+    override func toggleBoldface(_ sender: Any?) {
+        if performAppTraitToggle(onToggleBold) { return }
+        super.toggleBoldface(sender)
+    }
+
+    override func toggleItalics(_ sender: Any?) {
+        if performAppTraitToggle(onToggleItalic) { return }
+        super.toggleItalics(sender)
+    }
+
+    private func performAppTraitToggle(_ handler: (() -> Bool)?) -> Bool {
+        guard isEditable, let handler else { return false }
+        // 한글 조합 중이면 조합을 먼저 확정한다 — 조합 중인 글자 위에서 attribute를 바꾸지 않도록.
+        if markedTextRange != nil { unmarkText() }
+        return handler()
+    }
 }
 
 // MARK: - iOS
@@ -486,18 +656,19 @@ final class SermonParagraphEditingProxy {
         if activeExtras != extras { activeExtras = extras }
     }
 
-    func toggleBold() { toggleTrait(.traitBold) }
-    func toggleItalic() { toggleTrait(.traitItalic) }
+    func toggleBold() { toggleTrait(.traitBold, actionName: String(localized: "굵게")) }
+    func toggleItalic() { toggleTrait(.traitItalic, actionName: String(localized: "기울임")) }
 
     /// 선택한 글자에만 강조를 적용한다(같은 강조를 다시 누르면 해제, 다른 강조는 교체). `kind`가 nil이면 해제.
     func applyEmphasis(_ kind: SermonEmphasis?, settings: UserSettingsStore) {
         guard let textView else { return }
         let range = textView.selectedRange
         guard range.length > 0 else { return }
-        let storage = textView.textStorage
-        storage.beginEditing()
-        SermonEmphasisEditor.apply(kind, range: range, in: storage, settings: settings)
-        storage.endEditing()
+        performUndoableAttributeEdit(on: textView, range: range, actionName: kind?.displayName ?? String(localized: "강조 해제")) { storage in
+            storage.beginEditing()
+            SermonEmphasisEditor.apply(kind, range: range, in: storage, settings: settings)
+            storage.endEditing()
+        }
     }
 
     /// 커서(선택 시작)가 있는 문단의 최종 지정 스타일. 문단 전체에 같은 값이 칠해져 있으므로 문단 첫 글자의 값을 읽는다.
@@ -527,10 +698,102 @@ final class SermonParagraphEditingProxy {
             return
         }
         let paragraphRange = fullText.paragraphRange(for: textView.selectedRange)
+        // 실행 취소용 — 바뀌기 전 내용(문단 스타일·줄간격·목록·말씀구절 박스 등 커스텀 attribute 포함)과 선택 범위.
+        let before = storage.attributedSubstring(from: paragraphRange)
+        let selection = textView.selectedRange
         storage.beginEditing()
-        SermonParagraphStyleCodec.applyStyle(style, to: paragraphRange, in: storage, settings: settings)
+        SermonParagraphStyleCodec.applyStyle(style, to: paragraphRange, in: storage, settings: settings, isStyleChange: true)
         storage.endEditing()
         applyTypingAttributes(for: style, settings: settings, to: textView)
+        Self.registerAttributeUndo(
+            on: textView, proxy: self, settings: settings, range: paragraphRange, restoring: before, selection: selection,
+            expectedLength: storage.length, actionName: String(localized: "문단 스타일 변경")
+        )
+    }
+
+    // MARK: 문단 스타일 실행 취소 (iOS)
+    //
+    // `UITextView`는 `textStorage`를 코드로 바꾼 서식 변경을 실행 취소에 등록하지 않는다(NSTextView의
+    // `shouldChangeText(in:replacementString:)`·`breakUndoCoalescing()` 같은 공개 API가 UIKit에는 없다). 그래서 타이핑과 같은
+    // `textView.undoManager`에 "바뀌기 전 attribute를 다시 입히는" 항목을 직접 등록한다. 되돌릴 때 그 직전 상태를 반대 방향 항목으로
+    // 다시 등록해 다시 실행(redo)도 된다(`MindMapUndoCoordinator`와 같은 방식). target이 텍스트뷰라 `dismantleUIView`의
+    // `removeAllActions(withTarget:)`로 함께 지워진다. 글자 자체는 바꾸지 않고 attribute만 되돌린다.
+    // ⚠️ UIKit이 열어 둔 묶음(이벤트 단위 자동 묶음·타이핑 묶음)이 있으면 그 안에 들어가 한 단계로 합쳐질 수 있다 — 되돌릴 때는
+    // LIFO라 글자·attribute가 순서대로 복원되어 안전하다(CHANGES_sermonstyle2 한계 참고).
+    // `settings`가 있으면(문단 스타일 변경) 되돌린 뒤 타이핑 속성을 캐럿 문단의 스타일 프리셋으로 다시 맞춘다. 서식 버튼은 nil —
+    // 프리셋으로 덮지 않고(굵게 등 글자 서식 보존) `SermonParagraphStyleCodec.typingAttributesAtCaret`로 복원된 글자에서 직접 다시 정한다.
+    // UITextView는 선택 범위가 실제로 바뀔 때만 타이핑 속성을 비우므로 선택 복원에 맡길 수 없다.
+
+    /// 서식 버튼(강조·굵게·기울임·색·글꼴·크기·정렬·줄간격·목록) 공통 — `range`의 attribute만 바꾸는 `edit`를 실행 취소 한 단계로 감싼다.
+    /// 범위가 비어 있으면(캐럿만 있음, 글자가 없는 문단) 바뀌는 것은 타이핑 속성뿐이라 등록하지 않는다(타이핑 속성은 문서 내용이 아니다).
+    /// 적용 전후 범위의 attributed 내용이 같으면(이미 같은 색·같은 정렬 등) 바뀐 것이 없으므로 등록하지 않는다 — 빈 실행 취소 항목 방지.
+    /// 비교(`isEqual(to:)`)와 스냅샷은 범위 길이에 비례(O(n))하며, 문서 전체를 선택해도 적용 자체와 같은 차수다.
+    private func performUndoableAttributeEdit(on textView: UITextView, range: NSRange, actionName: String, _ edit: (NSTextStorage) -> Void) {
+        let storage = textView.textStorage
+        guard range.length > 0, range.location >= 0, NSMaxRange(range) <= storage.length else {
+            edit(storage)
+            return
+        }
+        let before = storage.attributedSubstring(from: range)
+        let selection = textView.selectedRange
+        edit(storage)
+        guard NSMaxRange(range) <= storage.length, !storage.attributedSubstring(from: range).isEqual(to: before) else { return }
+        Self.registerAttributeUndo(
+            on: textView, proxy: self, settings: nil, range: range, restoring: before, selection: selection,
+            expectedLength: storage.length, actionName: actionName
+        )
+    }
+
+    private static func registerAttributeUndo(
+        on textView: UITextView, proxy: SermonParagraphEditingProxy?, settings: UserSettingsStore?,
+        range: NSRange, restoring snapshot: NSAttributedString, selection: NSRange,
+        expectedLength: Int, actionName: String
+    ) {
+        guard range.length > 0, let undoManager = textView.undoManager else { return }
+        // 열린 묶음이 없으면(이벤트 밖에서 불린 경우 등) 직접 묶어 이 항목이 독립된 한 단계가 되게 한다.
+        // `setActionName`은 현재 열린 최상위 묶음의 이름을 정하므로 묶음을 닫기 전에 부른다.
+        let opensGroup = undoManager.groupingLevel == 0
+        if opensGroup { undoManager.beginUndoGrouping() }
+        undoManager.registerUndo(withTarget: textView) { [weak proxy] target in
+            MainActor.assumeIsolated {
+                SermonParagraphEditingProxy.restoreAttributes(
+                    in: target, proxy: proxy, settings: settings, range: range, snapshot: snapshot, selection: selection,
+                    expectedLength: expectedLength, actionName: actionName
+                )
+            }
+        }
+        undoManager.setActionName(actionName)
+        if opensGroup { undoManager.endUndoGrouping() }
+    }
+
+    private static func restoreAttributes(
+        in textView: UITextView, proxy: SermonParagraphEditingProxy?, settings: UserSettingsStore?,
+        range: NSRange, snapshot: NSAttributedString, selection: NSRange,
+        expectedLength: Int, actionName: String
+    ) {
+        let storage = textView.textStorage
+        // 그사이 실행 취소 기록 없이 글자가 바뀌었으면(외부 동기화로 다시 불러오기 등) 범위가 어긋나므로 아무것도 하지 않는다.
+        guard SermonParagraphStyleCodec.canRestoreAttributes(snapshot, range: range, expectedLength: expectedLength, in: storage) else { return }
+        let current = storage.attributedSubstring(from: range)
+        let currentSelection = textView.selectedRange
+        storage.beginEditing()
+        SermonParagraphStyleCodec.restoreAttributes(from: snapshot, at: range.location, in: storage)
+        storage.endEditing()
+        textView.selectedRange = SermonParagraphStyleCodec.clampedRange(selection, length: storage.length)
+        // 다음 입력 글자의 모양을 복원된 글자에 맞춘다. 선택 범위가 실제로 바뀔 때만 UITextView가 타이핑 속성을 비우므로
+        // (`typingAttributes` 문서) 같은 선택으로 되돌리면 정렬·줄간격·목록 버튼이 직접 넣은 값이 남는다 — 그래서 직접 다시 맞춘다.
+        if let proxy, proxy.textView === textView {
+            if let settings {
+                proxy.applyTypingAttributes(for: proxy.currentParagraphStyle(), settings: settings, to: textView)
+            } else if let attrs = SermonParagraphStyleCodec.typingAttributesAtCaret(textView.selectedRange, in: storage) {
+                textView.typingAttributes = attrs
+            }
+            proxy.refreshActiveStyle()
+        }
+        registerAttributeUndo(
+            on: textView, proxy: proxy, settings: settings, range: range, restoring: current, selection: currentSelection,
+            expectedLength: expectedLength, actionName: actionName
+        )
     }
 
     /// 커서 문단의 줄간격/목록 지정. 글자가 없는 문단(문서 끝의 빈 줄 등)은 타이핑 속성을 따른다.
@@ -552,21 +815,28 @@ final class SermonParagraphEditingProxy {
 
     /// 선택한 문단(들)의 줄간격 배수를 바꾼다. `nil`이면 스타일 기본값으로 되돌린다.
     func applyLineHeight(_ multiple: Double?, settings: UserSettingsStore) {
-        updateExtra(\.lineHeight, to: multiple, settings: settings)
+        updateExtra(\.lineHeight, to: multiple, settings: settings, actionName: String(localized: "줄간격"))
     }
 
     /// 선택한 문단(들)의 목록 종류를 바꾼다. `nil`이면 목록을 해제한다.
+    /// 목록 기호는 글자가 아니라 `SermonLayoutManager`가 그리는 그림이라(문단 attribute `.sermonListKind`) attribute 실행 취소로 충분하다.
     func applyList(_ kind: SermonListKind?, settings: UserSettingsStore) {
-        updateExtra(\.list, to: kind, settings: settings)
+        updateExtra(\.list, to: kind, settings: settings, actionName: String(localized: "목록"))
     }
 
     private func updateExtra<Value>(
-        _ keyPath: WritableKeyPath<SermonParagraphExtras, Value>, to value: Value, settings: UserSettingsStore
+        _ keyPath: WritableKeyPath<SermonParagraphExtras, Value>, to value: Value, settings: UserSettingsStore, actionName: String
     ) {
         guard let textView else { return }
-        SermonParagraphStyleCodec.setExtra(
-            keyPath, to: value, selection: textView.selectedRange, in: textView.textStorage, settings: settings
-        )
+        let storage = textView.textStorage
+        let selection = textView.selectedRange
+        performUndoableAttributeEdit(
+            on: textView, range: SermonParagraphStyleCodec.extraScope(for: selection, in: storage), actionName: actionName
+        ) { storage in
+            SermonParagraphStyleCodec.setExtra(
+                keyPath, to: value, selection: selection, in: storage, settings: settings
+            )
+        }
         // 글자가 없는 문단은 위에서 바뀐 것이 없으므로 타이핑 속성으로 다음 입력에 반영한다.
         var extras = currentExtras()
         extras[keyPath: keyPath] = value
@@ -626,7 +896,7 @@ final class SermonParagraphEditingProxy {
         } else {
             resolvedColor = settings.sermonPlatformFontColor(for: currentParagraphStyle())
         }
-        apply(.foregroundColor, value: resolvedColor, on: textView)
+        apply(.foregroundColor, value: resolvedColor, on: textView, actionName: String(localized: "색상"))
     }
 
     /// `family`가 `nil`이면 현재 문단 스타일의 프리셋 글꼴로 되돌린다(크기는 유지).
@@ -646,13 +916,14 @@ final class SermonParagraphEditingProxy {
             textView.typingAttributes = attrs
             return
         }
-        let storage = textView.textStorage
-        storage.beginEditing()
-        storage.enumerateAttribute(.font, in: range, options: []) { value, subrange, _ in
-            let font = (value as? UIFont) ?? UIFont.systemFont(ofSize: 15)
-            storage.addAttribute(.font, value: makeFont(basedOn: font), range: subrange)
+        performUndoableAttributeEdit(on: textView, range: range, actionName: String(localized: "글꼴")) { storage in
+            storage.beginEditing()
+            storage.enumerateAttribute(.font, in: range, options: []) { value, subrange, _ in
+                let font = (value as? UIFont) ?? UIFont.systemFont(ofSize: 15)
+                storage.addAttribute(.font, value: makeFont(basedOn: font), range: subrange)
+            }
+            storage.endEditing()
         }
-        storage.endEditing()
     }
 
     /// `size`가 `nil`이면 현재 문단 스타일의 프리셋 크기로 되돌린다(글꼴 유지).
@@ -671,13 +942,14 @@ final class SermonParagraphEditingProxy {
             textView.typingAttributes = attrs
             return
         }
-        let storage = textView.textStorage
-        storage.beginEditing()
-        storage.enumerateAttribute(.font, in: range, options: []) { value, subrange, _ in
-            let font = (value as? UIFont) ?? UIFont.systemFont(ofSize: 15)
-            storage.addAttribute(.font, value: makeFont(basedOn: font), range: subrange)
+        performUndoableAttributeEdit(on: textView, range: range, actionName: String(localized: "글자 크기")) { storage in
+            storage.beginEditing()
+            storage.enumerateAttribute(.font, in: range, options: []) { value, subrange, _ in
+                let font = (value as? UIFont) ?? UIFont.systemFont(ofSize: 15)
+                storage.addAttribute(.font, value: makeFont(basedOn: font), range: subrange)
+            }
+            storage.endEditing()
         }
-        storage.endEditing()
     }
 
     /// 정렬은 프리셋이 값을 지정하지 않으므로(`.natural`) 되돌리기도 `applyAlignment(.natural)`이면 된다.
@@ -699,11 +971,13 @@ final class SermonParagraphEditingProxy {
         let storage = textView.textStorage
         let fullText = storage.string as NSString
         let paragraphRange = fullText.paragraphRange(for: range)
-        storage.beginEditing()
-        storage.enumerateAttribute(.paragraphStyle, in: paragraphRange, options: []) { value, subrange, _ in
-            storage.addAttribute(.paragraphStyle, value: makeParagraphStyle(basedOn: value as? NSParagraphStyle), range: subrange)
+        performUndoableAttributeEdit(on: textView, range: paragraphRange, actionName: String(localized: "문단 정렬")) { storage in
+            storage.beginEditing()
+            storage.enumerateAttribute(.paragraphStyle, in: paragraphRange, options: []) { value, subrange, _ in
+                storage.addAttribute(.paragraphStyle, value: makeParagraphStyle(basedOn: value as? NSParagraphStyle), range: subrange)
+            }
+            storage.endEditing()
         }
-        storage.endEditing()
         var attrs = textView.typingAttributes
         attrs[.paragraphStyle] = makeParagraphStyle(basedOn: attrs[.paragraphStyle] as? NSParagraphStyle)
         textView.typingAttributes = attrs
@@ -727,7 +1001,7 @@ final class SermonParagraphEditingProxy {
         textView.typingAttributes = attrs
     }
 
-    private func toggleTrait(_ trait: UIFontDescriptor.SymbolicTraits) {
+    private func toggleTrait(_ trait: UIFontDescriptor.SymbolicTraits, actionName: String) {
         guard let textView else { return }
         let range = textView.selectedRange
         if range.length == 0 {
@@ -737,17 +1011,18 @@ final class SermonParagraphEditingProxy {
             textView.typingAttributes = attrs
             return
         }
-        let storage = textView.textStorage
-        storage.beginEditing()
-        storage.enumerateAttribute(.font, in: range, options: []) { value, subrange, _ in
-            let font = (value as? UIFont) ?? UIFont.systemFont(ofSize: 15)
-            storage.addAttribute(.font, value: font.togglingSermonTrait(trait), range: subrange)
+        performUndoableAttributeEdit(on: textView, range: range, actionName: actionName) { storage in
+            storage.beginEditing()
+            storage.enumerateAttribute(.font, in: range, options: []) { value, subrange, _ in
+                let font = (value as? UIFont) ?? UIFont.systemFont(ofSize: 15)
+                storage.addAttribute(.font, value: font.togglingSermonTrait(trait), range: subrange)
+            }
+            storage.endEditing()
         }
-        storage.endEditing()
     }
 
     /// `applyColor`가 쓰는 공통 헬퍼 — 캐럿만 있으면 타이핑 속성, 선택 범위가 있으면 그 범위에 적용한다.
-    private func apply(_ key: NSAttributedString.Key, value: Any, on textView: UITextView) {
+    private func apply(_ key: NSAttributedString.Key, value: Any, on textView: UITextView, actionName: String) {
         let range = textView.selectedRange
         if range.length == 0 {
             var attrs = textView.typingAttributes
@@ -755,10 +1030,11 @@ final class SermonParagraphEditingProxy {
             textView.typingAttributes = attrs
             return
         }
-        let storage = textView.textStorage
-        storage.beginEditing()
-        storage.addAttribute(key, value: value, range: range)
-        storage.endEditing()
+        performUndoableAttributeEdit(on: textView, range: range, actionName: actionName) { storage in
+            storage.beginEditing()
+            storage.addAttribute(key, value: value, range: range)
+            storage.endEditing()
+        }
     }
 }
 
@@ -793,6 +1069,17 @@ struct SermonParagraphEditorRepresentable: UIViewRepresentable {
             editorTextView.onStyleShortcut = { [proxy, settings] style in
                 proxy.applyParagraphStyle(style, settings: settings)
                 proxy.activeStyle = style
+            }
+            // ⌘B/⌘I·선택 메뉴 B/I — 툴바 굵게/기울임 버튼과 같은 경로.
+            editorTextView.onToggleBold = { [weak editorTextView, proxy] in
+                guard let editorTextView, proxy.textView === editorTextView else { return false }
+                proxy.toggleBold()
+                return true
+            }
+            editorTextView.onToggleItalic = { [weak editorTextView, proxy] in
+                guard let editorTextView, proxy.textView === editorTextView else { return false }
+                proxy.toggleItalic()
+                return true
             }
         }
         textView.delegate = context.coordinator
@@ -928,6 +1215,51 @@ final class SermonEditorNSTextView: NSTextView {
         }
         super.keyDown(with: event)
     }
+
+    // MARK: ⌘B / ⌘I (sermonkey1)
+    //
+    // 앱 메뉴에는 Format(서식) 메뉴가 없어(AppCommands.swift — `TextFormattingCommands` 미사용) NSTextView의 ⌘B/⌘I를 받을 메뉴 항목
+    // (`addFontTrait:`)이 없다. 그래서 이 텍스트뷰가 첫 응답자일 때만 `performKeyEquivalent`에서 직접 받아 툴바 굵게/기울임과 같은 앱 경로
+    // (`SermonParagraphEditingProxy.toggleBold/Italic` — trait 토글·타이핑 속성·sermonundo1 실행 취소)로 보낸다. 수정키는 ⌘만 허용한다
+    // (⌘⇧B "성경 조회 새 창" 등 다른 단축키는 그대로 지나간다). 글꼴 패널(⌘T)의 `changeFont:` 경로는 건드리지 않는다.
+    // 한글 등 비라틴 입력 소스에서는 `charactersIgnoringModifiers`가 그 언어 글자를 돌려주므로 물리 키 코드로도 판별한다
+    // (Carbon HIToolbox `kVK_ANSI_B` = 0x0B, `kVK_ANSI_I` = 0x22).
+
+    var onToggleBold: (() -> Bool)?
+    var onToggleItalic: (() -> Bool)?
+
+    private static let ansiBKeyCode: UInt16 = 0x0B
+    private static let ansiIKeyCode: UInt16 = 0x22
+
+    override func performKeyEquivalent(with event: NSEvent) -> Bool {
+        if isEditable, event.type == .keyDown, window?.isKeyWindow == true, window?.firstResponder === self,
+           event.modifierFlags.intersection(.deviceIndependentFlagsMask).subtracting([.capsLock, .numericPad, .function]) == .command,
+           let handler = traitHandler(for: event) {
+            // 한글 조합 중이면 조합을 먼저 확정한다. `unmarkText()`는 "조합 글자를 정상 입력된 것처럼 받아들인다"(NSTextInputClient 문서).
+            // `inputContext?.discardMarkedText()`("현재 변환 세션을 버린다")를 이어 부를지는 입력기가 그때 글자를 다시 보내거나 버리는지
+            // 문서로 확정할 수 없어 부르지 않는다 — 실기 테스트로 확인(CHANGES_sermonkey1).
+            if hasMarkedText() { unmarkText() }
+            if handler() { return true }
+        }
+        return super.performKeyEquivalent(with: event)
+    }
+
+    private func traitHandler(for event: NSEvent) -> (() -> Bool)? {
+        let characters = (event.charactersIgnoringModifiers ?? "").lowercased()
+        let isASCII = !characters.isEmpty && characters.unicodeScalars.allSatisfy(\.isASCII)
+        if isASCII {
+            switch characters {
+            case "b": return onToggleBold
+            case "i": return onToggleItalic
+            default: return nil
+            }
+        }
+        switch event.keyCode {
+        case Self.ansiBKeyCode: return onToggleBold
+        case Self.ansiIKeyCode: return onToggleItalic
+        default: return nil
+        }
+    }
 }
 
 // MARK: - macOS
@@ -951,17 +1283,46 @@ final class SermonParagraphEditingProxy {
         if activeExtras != extras { activeExtras = extras }
     }
 
-    func toggleBold() { toggleTrait(.bold) }
-    func toggleItalic() { toggleTrait(.italic) }
+    func toggleBold() { toggleTrait(.bold, actionName: String(localized: "굵게")) }
+    func toggleItalic() { toggleTrait(.italic, actionName: String(localized: "기울임")) }
 
     /// iOS `applyEmphasis(_:settings:)`와 같은 구조.
     func applyEmphasis(_ kind: SermonEmphasis?, settings: UserSettingsStore) {
-        guard let textView, let storage = textView.textStorage else { return }
+        guard let textView, textView.textStorage != nil else { return }
         let range = textView.selectedRange()
         guard range.length > 0 else { return }
-        storage.beginEditing()
-        SermonEmphasisEditor.apply(kind, range: range, in: storage, settings: settings)
-        storage.endEditing()
+        performUndoableAttributeEdit(on: textView, range: range, actionName: kind?.displayName ?? String(localized: "강조 해제")) { storage in
+            storage.beginEditing()
+            SermonEmphasisEditor.apply(kind, range: range, in: storage, settings: settings)
+            storage.endEditing()
+        }
+    }
+
+    /// 서식 버튼(강조·굵게·기울임·색·글꼴·크기·정렬·줄간격·목록) 공통 — 문단 스타일 변경(`applyParagraphStyle`)과 같은 NSTextView 표준
+    /// 절차(`breakUndoCoalescing` → `shouldChangeText(in:replacementString: nil)` → 변경 → `didChangeText`)로 `range`의 attribute 변경을
+    /// 실행 취소 한 단계로 등록한다. 범위가 비어 있으면(캐럿만 있음, 글자가 없는 문단) 바뀌는 것은 타이핑 속성뿐이라 등록하지 않는다.
+    /// 편집 불가 등으로 `shouldChangeText`가 false면 예전처럼 적용만 한다. 글꼴 패널(⌘T)은 NSTextView가 이 경로를 따로 타므로 겹치지 않는다.
+    ///
+    /// 빈 실행 취소 항목 방지: `shouldChangeText`는 바꾸기 전에 불러야 하고, 등록된 항목 하나만 골라 지우는 공개 API가 `UndoManager`에 없다
+    /// (`removeAllActions(withTarget:)`는 NSTextView 내부 target의 다른 항목까지 지운다). 그래서 문서 사본(`NSTextStorage`)에 먼저 적용해 보고
+    /// 범위의 attributed 내용이 그대로면 실제 적용·등록을 모두 건너뛴다. 사본 복사·비교는 문서 길이에 비례(O(n))한다.
+    private func performUndoableAttributeEdit(on textView: NSTextView, range: NSRange, actionName: String, _ edit: (NSTextStorage) -> Void) {
+        guard let storage = textView.textStorage else { return }
+        guard range.length > 0, range.location >= 0, NSMaxRange(range) <= storage.length else {
+            edit(storage)
+            return
+        }
+        let before = storage.attributedSubstring(from: range)
+        let trial = NSTextStorage(attributedString: storage)
+        edit(trial)
+        guard trial.length == storage.length, !trial.attributedSubstring(from: range).isEqual(to: before) else { return }
+        textView.breakUndoCoalescing()
+        let registersUndo = textView.shouldChangeText(in: range, replacementString: nil)
+        edit(storage)
+        if registersUndo {
+            textView.didChangeText()
+            textView.undoManager?.setActionName(actionName)
+        }
     }
 
     /// iOS `currentParagraphStyle()`과 같은 규칙.
@@ -987,9 +1348,20 @@ final class SermonParagraphEditingProxy {
             return
         }
         let paragraphRange = fullText.paragraphRange(for: textView.selectedRange())
+        // 실행 취소: NSTextView의 표준 절차 — attribute만 바꿀 때는 `replacementString: nil`로 `shouldChangeText`를 부르고
+        // 바꾼 뒤 `didChangeText`를 부르면 텍스트뷰가 그 범위의 원래 attributed 내용(커스텀 attribute 포함)을 `allowsUndo`
+        // 실행 취소 항목으로 등록하고 다시 실행도 처리한다(글꼴 패널(⌘T) 변경과 같은 경로). 글자가 없는 범위(문서 끝의
+        // 빈 줄)는 바뀌는 글자가 없어 등록하지 않는다. 편집 불가 등으로 false면 예전처럼 적용만 한다.
+        // 직전 타이핑 묶음과 합쳐지지 않게 먼저 끊는다(`NSTextView.breakUndoCoalescing()`).
+        textView.breakUndoCoalescing()
+        let registersUndo = paragraphRange.length > 0 && textView.shouldChangeText(in: paragraphRange, replacementString: nil)
         storage.beginEditing()
-        SermonParagraphStyleCodec.applyStyle(style, to: paragraphRange, in: storage, settings: settings)
+        SermonParagraphStyleCodec.applyStyle(style, to: paragraphRange, in: storage, settings: settings, isStyleChange: true)
         storage.endEditing()
+        if registersUndo {
+            textView.didChangeText()
+            textView.undoManager?.setActionName(String(localized: "문단 스타일 변경"))
+        }
         applyTypingAttributes(for: style, settings: settings, to: textView)
     }
 
@@ -1010,20 +1382,26 @@ final class SermonParagraphEditingProxy {
     }
 
     func applyLineHeight(_ multiple: Double?, settings: UserSettingsStore) {
-        updateExtra(\.lineHeight, to: multiple, settings: settings)
+        updateExtra(\.lineHeight, to: multiple, settings: settings, actionName: String(localized: "줄간격"))
     }
 
+    /// iOS와 같은 이유로 목록도 attribute 실행 취소로 충분하다(기호는 글자가 아니다).
     func applyList(_ kind: SermonListKind?, settings: UserSettingsStore) {
-        updateExtra(\.list, to: kind, settings: settings)
+        updateExtra(\.list, to: kind, settings: settings, actionName: String(localized: "목록"))
     }
 
     private func updateExtra<Value>(
-        _ keyPath: WritableKeyPath<SermonParagraphExtras, Value>, to value: Value, settings: UserSettingsStore
+        _ keyPath: WritableKeyPath<SermonParagraphExtras, Value>, to value: Value, settings: UserSettingsStore, actionName: String
     ) {
         guard let textView, let storage = textView.textStorage else { return }
-        SermonParagraphStyleCodec.setExtra(
-            keyPath, to: value, selection: textView.selectedRange(), in: storage, settings: settings
-        )
+        let selection = textView.selectedRange()
+        performUndoableAttributeEdit(
+            on: textView, range: SermonParagraphStyleCodec.extraScope(for: selection, in: storage), actionName: actionName
+        ) { storage in
+            SermonParagraphStyleCodec.setExtra(
+                keyPath, to: value, selection: selection, in: storage, settings: settings
+            )
+        }
         var extras = currentExtras()
         extras[keyPath: keyPath] = value
         textView.typingAttributes = SermonParagraphStyleCodec.typingAttributes(
@@ -1096,11 +1474,11 @@ final class SermonParagraphEditingProxy {
         } else {
             resolvedColor = settings.sermonPlatformFontColor(for: currentParagraphStyle())
         }
-        apply(.foregroundColor, value: resolvedColor, on: textView)
+        apply(.foregroundColor, value: resolvedColor, on: textView, actionName: String(localized: "색상"))
     }
 
     func applyFontFamily(_ family: String?, settings: UserSettingsStore) {
-        guard let textView, let storage = textView.textStorage else { return }
+        guard let textView, textView.textStorage != nil else { return }
         let range = textView.selectedRange()
         func makeFont(basedOn font: NSFont) -> NSFont {
             let resolvedFamily = family ?? settings.sermonFontName(for: currentParagraphStyle())
@@ -1115,17 +1493,19 @@ final class SermonParagraphEditingProxy {
             textView.typingAttributes = attrs
             return
         }
-        storage.beginEditing()
-        storage.enumerateAttribute(.font, in: range, options: []) { value, subrange, _ in
-            let font = (value as? NSFont) ?? NSFont.systemFont(ofSize: 15)
-            storage.addAttribute(.font, value: makeFont(basedOn: font), range: subrange)
+        performUndoableAttributeEdit(on: textView, range: range, actionName: String(localized: "글꼴")) { storage in
+            storage.beginEditing()
+            storage.enumerateAttribute(.font, in: range, options: []) { value, subrange, _ in
+                let font = (value as? NSFont) ?? NSFont.systemFont(ofSize: 15)
+                storage.addAttribute(.font, value: makeFont(basedOn: font), range: subrange)
+            }
+            storage.endEditing()
         }
-        storage.endEditing()
     }
 
     /// AppKit의 `NSFont`엔 `withSize(_:)`가 없어 `NSFont(descriptor:size:)`로 새 인스턴스를 만든다.
     func applyFontSize(_ size: CGFloat?, settings: UserSettingsStore) {
-        guard let textView, let storage = textView.textStorage else { return }
+        guard let textView, textView.textStorage != nil else { return }
         let range = textView.selectedRange()
         func makeFont(basedOn font: NSFont) -> NSFont {
             let resolvedSize = size ?? CGFloat(settings.sermonFontSize(for: currentParagraphStyle()))
@@ -1138,12 +1518,14 @@ final class SermonParagraphEditingProxy {
             textView.typingAttributes = attrs
             return
         }
-        storage.beginEditing()
-        storage.enumerateAttribute(.font, in: range, options: []) { value, subrange, _ in
-            let font = (value as? NSFont) ?? NSFont.systemFont(ofSize: 15)
-            storage.addAttribute(.font, value: makeFont(basedOn: font), range: subrange)
+        performUndoableAttributeEdit(on: textView, range: range, actionName: String(localized: "글자 크기")) { storage in
+            storage.beginEditing()
+            storage.enumerateAttribute(.font, in: range, options: []) { value, subrange, _ in
+                let font = (value as? NSFont) ?? NSFont.systemFont(ofSize: 15)
+                storage.addAttribute(.font, value: makeFont(basedOn: font), range: subrange)
+            }
+            storage.endEditing()
         }
-        storage.endEditing()
     }
 
     /// `RichTextEditor`의 macOS `applyAlignment(_:)`와 같은 구조 — `NSTextView`는
@@ -1164,18 +1546,20 @@ final class SermonParagraphEditingProxy {
         }
         let fullText = storage.string as NSString
         let paragraphRange = fullText.paragraphRange(for: range)
-        storage.beginEditing()
-        storage.enumerateAttribute(.paragraphStyle, in: paragraphRange, options: []) { value, subrange, _ in
-            storage.addAttribute(.paragraphStyle, value: makeParagraphStyle(basedOn: value as? NSParagraphStyle), range: subrange)
+        performUndoableAttributeEdit(on: textView, range: paragraphRange, actionName: String(localized: "문단 정렬")) { storage in
+            storage.beginEditing()
+            storage.enumerateAttribute(.paragraphStyle, in: paragraphRange, options: []) { value, subrange, _ in
+                storage.addAttribute(.paragraphStyle, value: makeParagraphStyle(basedOn: value as? NSParagraphStyle), range: subrange)
+            }
+            storage.endEditing()
         }
-        storage.endEditing()
         var attrs = textView.typingAttributes
         attrs[.paragraphStyle] = makeParagraphStyle(basedOn: attrs[.paragraphStyle] as? NSParagraphStyle)
         textView.typingAttributes = attrs
     }
 
-    private func toggleTrait(_ trait: NSFontDescriptor.SymbolicTraits) {
-        guard let textView, let storage = textView.textStorage else { return }
+    private func toggleTrait(_ trait: NSFontDescriptor.SymbolicTraits, actionName: String) {
+        guard let textView, textView.textStorage != nil else { return }
         let range = textView.selectedRange()
         if range.length == 0 {
             var attrs = textView.typingAttributes
@@ -1184,16 +1568,18 @@ final class SermonParagraphEditingProxy {
             textView.typingAttributes = attrs
             return
         }
-        storage.beginEditing()
-        storage.enumerateAttribute(.font, in: range, options: []) { value, subrange, _ in
-            let font = (value as? NSFont) ?? NSFont.systemFont(ofSize: 15)
-            storage.addAttribute(.font, value: font.togglingSermonTrait(trait), range: subrange)
+        performUndoableAttributeEdit(on: textView, range: range, actionName: actionName) { storage in
+            storage.beginEditing()
+            storage.enumerateAttribute(.font, in: range, options: []) { value, subrange, _ in
+                let font = (value as? NSFont) ?? NSFont.systemFont(ofSize: 15)
+                storage.addAttribute(.font, value: font.togglingSermonTrait(trait), range: subrange)
+            }
+            storage.endEditing()
         }
-        storage.endEditing()
     }
 
     /// iOS `apply(_:value:on:)`와 같은 이유·같은 구조.
-    private func apply(_ key: NSAttributedString.Key, value: Any, on textView: NSTextView) {
+    private func apply(_ key: NSAttributedString.Key, value: Any, on textView: NSTextView, actionName: String) {
         let range = textView.selectedRange()
         if range.length == 0 {
             var attrs = textView.typingAttributes
@@ -1201,10 +1587,12 @@ final class SermonParagraphEditingProxy {
             textView.typingAttributes = attrs
             return
         }
-        guard let storage = textView.textStorage else { return }
-        storage.beginEditing()
-        storage.addAttribute(key, value: value, range: range)
-        storage.endEditing()
+        guard textView.textStorage != nil else { return }
+        performUndoableAttributeEdit(on: textView, range: range, actionName: actionName) { storage in
+            storage.beginEditing()
+            storage.addAttribute(key, value: value, range: range)
+            storage.endEditing()
+        }
     }
 }
 
@@ -1242,6 +1630,17 @@ struct SermonParagraphEditorRepresentable: NSViewRepresentable {
             editorTextView.onStyleShortcut = { [proxy, settings] style in
                 proxy.applyParagraphStyle(style, settings: settings)
                 proxy.activeStyle = style
+            }
+            // ⌘B/⌘I — 툴바 굵게/기울임 버튼과 같은 경로.
+            editorTextView.onToggleBold = { [weak editorTextView, proxy] in
+                guard let editorTextView, proxy.textView === editorTextView else { return false }
+                proxy.toggleBold()
+                return true
+            }
+            editorTextView.onToggleItalic = { [weak editorTextView, proxy] in
+                guard let editorTextView, proxy.textView === editorTextView else { return false }
+                proxy.toggleItalic()
+                return true
             }
         }
         textView.delegate = context.coordinator

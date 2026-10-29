@@ -41,4 +41,18 @@ extension Book {
         }
         return true
     }
+
+    /// [2026-10-29 bookgrid1] 책 그리드 피커 검색창 전용. 먼저 `matches(query:)`(한국어 이름·약칭·초성)로 비교하고,
+    /// 한국어가 아닌 앱에서는 앱 언어 책 이름/약칭(`displayName`/`displayShortName`)도 대소문자 무시·부분 일치로 비교한다
+    /// (예: 중국어 "创"·"创世" → 创世纪, 영어 "gen" → Genesis).
+    /// - 한국어 앱은 `matches(query:)` 결과 그대로다. 한국어에서 `displayShortName`(`abbreviation.first`)을 부분 일치로
+    ///   더 비교하면 `matches`의 약칭 비교(배열 원소와 정확히 같은지)보다 넓어져 기존 결과가 바뀌므로 비교하지 않는다.
+    /// - `matches(query:)`는 `matchBookPrefix`의 초성 단계도 쓰므로 의미를 바꾸지 않고 이 함수를 따로 둔다.
+    func matchesGridSearch(query: String) -> Bool {
+        guard !query.isEmpty else { return true }
+        if matches(query: query) { return true }
+        guard !AppLanguage.isKorean else { return false }
+        return displayName.localizedCaseInsensitiveContains(query)
+            || displayShortName.localizedCaseInsensitiveContains(query)
+    }
 }

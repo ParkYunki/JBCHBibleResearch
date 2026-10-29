@@ -66,6 +66,10 @@ struct PlaceDetailView: View {
         let bookId: Int
         let chapter: Int
         let verse: Int
+        /// 장 번호가 시작하는 위치(`BibleReferenceExtractor.Match.chapterStart`) — 라벨에서 책 이름과 장절을 나눈다.
+        let chapterStart: String.Index
+        /// 원문 모양(`BibleReferenceExtractor.Match.Kind`) — 라벨과 링크 밖에 남길 구분자를 정한다.
+        let kind: BibleReferenceExtractor.Match.Kind
     }
 
     /// `BibleReferenceExtractor`는 범위 인용("창세기 9:22-25")을 절마다 Match로 펼치되 모두 같은 `range`를 공유하므로,
@@ -76,18 +80,38 @@ struct PlaceDetailView: View {
             if let last = groups.last, last.range == match.range { continue }
             // 절 없는 인용("창세기 17장")은 `verse`가 nil이라 1절로 이동한다.
             groups.append(BibleReferenceLinkGroup(
-                range: match.range, bookId: match.bookId, chapter: match.chapter, verse: match.verse ?? 1
+                range: match.range, bookId: match.bookId, chapter: match.chapter, verse: match.verse ?? 1,
+                chapterStart: match.chapterStart, kind: match.kind
             ))
         }
         return groups
     }
 
-    private func abbreviatedCitationLabel(_ matchedText: String, bookId: Int) -> String {
-        guard let firstDigitIndex = matchedText.firstIndex(where: { $0.isNumber }) else { return matchedText }
-        let book = BooksProvider.shared.book(id: bookId)
-        let abbreviation = book?.displayShortName
-            ?? matchedText[..<firstDigitIndex].trimmingCharacters(in: .whitespaces)
-        return "\(abbreviation) \(matchedText[firstDigitIndex...])"
+    /// [2026-10-29 refext1] 인용 링크 앞에 그대로 남길 구분자와 링크 라벨.
+    /// - `.reference`("창세기 17:5", "2 Chronicles 35:9"): 책 이름(장 번호 앞)만 표준 약어로 바꾸고 장절·범위는 원문 그대로 둔다.
+    ///   경계는 "첫 숫자"가 아니라 추출기가 알려 준 장 번호 위치다 — 외국어 책 이름에는 숫자가 들어갈 수 있다
+    ///   ("2 Chronicles 35:9"를 첫 숫자로 자르면 "2Chr 2 Chronicles 35:9"). 한국어 이름에는 숫자가 없어 두 위치가 같다.
+    /// - `.continuation`(", 3:13", "; 12:1"): 앞 구분자(", ")는 링크 밖에 원문 그대로 남기고 라벨은 "약어 장:절".
+    /// - `.verseListItem`(외국어 "John 3:16, 18"의 ", 18"): 구분자는 링크 밖에 남기고, 라벨에 물려받은 장을 붙여
+    ///   "Jn 3:18"로 만든다(절 번호만 두면 "Jn 18"처럼 장으로 읽힌다).
+    /// ⚠️ 한국어 이어짐(", 3:13")도 이제 구분자가 링크 밖에 남는다(전에는 링크에 묻혀 사라졌다).
+    private func citationLinkParts(_ group: BibleReferenceLinkGroup, in text: String) -> (separator: String, label: String) {
+        guard group.range.lowerBound <= group.chapterStart, group.chapterStart < group.range.upperBound else {
+            return ("", String(text[group.range]))
+        }
+        let book = BooksProvider.shared.book(id: group.bookId)
+        let leading = text[group.range.lowerBound..<group.chapterStart]
+        let rest = text[group.chapterStart..<group.range.upperBound]
+        switch group.kind {
+        case .reference:
+            let abbreviation = book?.displayShortName ?? leading.trimmingCharacters(in: .whitespaces)
+            return ("", "\(abbreviation) \(rest)")
+        case .continuation, .verseListItem:
+            // 라벨 끝 공백은 원문 그대로 둔다(한국어 이어짐 정규식은 뒤 공백까지 범위에 넣으므로, 자르면 뒤 낱말과 붙는다).
+            let abbreviation = book?.displayShortName ?? ""
+            let locator = group.kind == .verseListItem ? "\(group.chapter):\(rest)" : String(rest)
+            return (String(leading), "\(abbreviation) \(locator)")
+        }
     }
 
     /// 본문 중 성경 인용 부분만 약어 + 탭하면 이동하는 링크로 바꾼 `Text`. 인용이 없으면 원문 그대로.
@@ -100,8 +124,9 @@ struct PlaceDetailView: View {
             if cursor < group.range.lowerBound {
                 result += AttributedString(String(text[cursor..<group.range.lowerBound]))
             }
-            let matchedText = String(text[group.range])
-            var linked = AttributedString("📖 " + abbreviatedCitationLabel(matchedText, bookId: group.bookId))
+            let parts = citationLinkParts(group, in: text)
+            if !parts.separator.isEmpty { result += AttributedString(parts.separator) }
+            var linked = AttributedString("📖 " + parts.label)
             linked.link = URL(string: "bibleref:///\(group.bookId)/\(group.chapter)/\(group.verse)")
             linked.font = .footnote.weight(.semibold)
             linked.foregroundColor = JBCHCategoryPalette.gold

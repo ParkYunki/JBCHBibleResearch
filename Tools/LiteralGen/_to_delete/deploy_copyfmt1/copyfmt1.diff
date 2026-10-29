@@ -1,0 +1,146 @@
+--- a/JBCHBibleResearch/Services/AppLanguage.swift
++++ b/JBCHBibleResearch/Services/AppLanguage.swift
+@@ -10,9 +10,11 @@
+ //    시작되므로 프로세스 수명 동안 한 번만 계산해 둔다.
+ //  - 책 이름은 내장 이름표(`BookNameTable`)에서 앱 언어에 맞는 표를 쓴다. 한국어는 기존과 같이
+ //    `Book.nameKo`/`Book.abbreviation`을 쓴다.
+-//  - ⚠️ 이 값은 "화면 표시용"이다. 본문 속 성경 참조 추출(`BibleReferenceExtractor`), 복사 형식
+-//    (`BibleVerseCopyFormatter`), 설교 본문에 삽입되는 참조 표기, 저장되는 관주 라벨처럼 한국어 이름을
++//  - ⚠️ 이 값은 "화면 표시용"이다. 본문 속 성경 참조 추출(`BibleReferenceExtractor`), 말씀 요약에 삽입되는 구절
++//    (`BibleVerseCopyFormatter`의 `.korean`), 설교 본문에 삽입되는 참조 표기, 저장되는 관주 라벨처럼 한국어 이름을
+ //    전제로 하는 곳은 계속 `nameKo`/`abbreviation`을 쓴다.
++//  - [2026-10-29 copyfmt1] 클립보드 복사(`BibleVerseCopyFormatter` 기본값 `.appLanguage`)는 이 파일의 `displayName`/
++//    `displayShortName`을 쓴다(사용자 결정).
+ //  - [2026-10-29 booklabel1] 자유 입력 파싱(`BooksProvider.matchBookPrefix`)은 한국어 후보·초성을 항상 인식하고,
+ //    한국어가 아닌 앱에서는 이 파일의 `bookNameTable`(fullNames/shortNames)도 후보로 함께 인식한다.
+ //
+--- a/JBCHBibleResearch/Services/Bible/BibleVerseCopyFormatter.swift
++++ b/JBCHBibleResearch/Services/Bible/BibleVerseCopyFormatter.swift
+@@ -8,8 +8,11 @@
+ //     `copyTranslationLabelPosition`이 번역본 이름표 위치를 정하고, 복사에 포함되는 번역본이 1개뿐이면 이름표를 붙이지 않는다.
+ //  2. 절 번호 스타일은 "(1) / [1] / 1)" 세 가지다.
+ //
+-//  ⚠️ 책 이름(약어/전체)은 항상 앱 기본 한글 이름(`Book.nameKo`/`Book.abbreviation`)을 쓴다 —
+-//  번역본별 언어의 책이름표(`BookNameTableProvider`)는 따르지 않는다. 필요하면 번역본 언어를 따라가도록 확장할 수 있다.
++//  [2026-10-29 copyfmt1] 책 이름은 기본으로 앱 언어 이름표를 따른다(`Book.displayName`, 약어 설정이면 `Book.displayShortName`,
++//  AppLanguage.swift). 한국어 앱은 두 값이 `nameKo` / `abbreviation.first ?? nameKo`라 이전 출력과 같다. 약칭이 없는
++//  언어(th·vi·fil)는 약어 설정을 켜도 전체 이름이 나온다. 번역본별 언어의 책이름표(`BookNameTableProvider`)는 따르지 않는다.
++//  ⚠️ 말씀 요약 삽입(`BibleReadingViewModel.formattedBaseTranslationText`)은 `.korean`을 넘겨 한글 이름을 유지한다 —
++//  그 본문은 저장 후 `BibleReferenceExtractor`(한글 이름만 인식)로 구절 언급을 색인하기 때문이다.
+ //
+ 
+ import Foundation
+@@ -29,6 +32,14 @@
+         }
+     }
+ 
++    /// 참조에 쓸 책 이름의 출처.
++    enum BookNameSource {
++        /// 앱 언어 이름표(`Book.displayName` / `Book.displayShortName`). 클립보드 복사·설정 미리보기.
++        case appLanguage
++        /// 한글 기본 이름(`Book.nameKo` / `Book.abbreviation.first ?? nameKo`). 저장 후 한글 참조 추출에 걸려야 하는 곳.
++        case korean
++    }
++
+     /// 선택된 절들을 환경설정(`UserSettingsStore`)의 복사 형식대로 하나의
+     /// 문자열로 합친다. 선택이 비었거나 번역본이 하나도 없으면 nil.
+     static func format(
+@@ -36,6 +47,7 @@
+         chapter: Int,
+         selectedVerses: Set<Int>,
+         translations: [TranslationSnapshot],
++        bookNames: BookNameSource = .appLanguage,
+         settings settingsOverride: UserSettingsStore? = nil
+     ) -> String? {
+         // 기본 인자 표현식(`= .shared`)은 @MainActor 함수여도 비격리 컨텍스트에서 평가되어 Swift 6에서
+@@ -44,9 +56,15 @@
+         let settings = settingsOverride ?? .shared
+         guard !selectedVerses.isEmpty, !translations.isEmpty else { return nil }
+         let sortedVerseNumbers = selectedVerses.sorted()
+-        let bookName = settings.copyUseAbbreviatedBookName
+-            ? (book.abbreviation.first ?? book.nameKo)
+-            : book.nameKo
++        let bookName: String
++        switch bookNames {
++        case .appLanguage:
++            bookName = settings.copyUseAbbreviatedBookName ? book.displayShortName : book.displayName
++        case .korean:
++            bookName = settings.copyUseAbbreviatedBookName
++                ? (book.abbreviation.first ?? book.nameKo)
++                : book.nameKo
++        }
+         let bracket = settings.copyReferenceBracketStyle
+         let rangeDescription = formatVerseRange(selectedVerses)
+ 
+--- a/JBCHBibleResearch/Views/Bible/BibleReadingViewModel.swift
++++ b/JBCHBibleResearch/Views/Bible/BibleReadingViewModel.swift
+@@ -1018,6 +1018,8 @@
+     /// 선택된 절들을 "기준 번역본(맨 왼쪽 열)" 한 곳만으로 문자열로 만든다. 말씀 요약을 열면 기준 번역본만
+     /// 남기고 나머지 열을 숨기므로 그 상태와 일치시킨 것이다. 번역본 이름표는 `BibleVerseCopyFormatter`가
+     /// 번역본이 1개면 붙이지 않는다.
++    /// [2026-10-29 copyfmt1] 책 이름은 한글 기본 이름(`.korean`)을 유지한다 — 말씀 요약 본문은 저장 후
++    /// `BibleReferenceIndexingService.reindexWordSummary`가 한글 이름만 아는 `BibleReferenceExtractor`로 구절 언급을 색인한다.
+     func formattedBaseTranslationText(forVerses verseNumbers: Set<Int>) -> String? {
+         guard let firstColumn = columns.first, !verseNumbers.isEmpty else { return nil }
+         let translation = BibleVerseCopyFormatter.TranslationSnapshot(
+@@ -1027,7 +1029,8 @@
+             book: selectedBook,
+             chapter: selectedChapter,
+             selectedVerses: verseNumbers,
+-            translations: [translation]
++            translations: [translation],
++            bookNames: .korean
+         )
+     }
+ 
+--- a/JBCHBibleResearch/Views/Settings/SettingsView.swift
++++ b/JBCHBibleResearch/Views/Settings/SettingsView.swift
+@@ -1067,22 +1067,43 @@
+     }
+ 
+     /// 창세기 1:1-2, 번역본 1~2개로 실제 서식 함수를 돌려 만드는 미리보기 — 실제 "복사" 결과와 항상 같다.
++    /// 책 이름은 포매터 기본값(`.appLanguage`)을 그대로 타므로 S1 "복사"와 같은 이름이 나온다.
+     private var previewText: String {
+         let sampleBook = BooksProvider.shared.books.first(where: { $0.bookId == 1 })
+             ?? Book(bookId: 1, testament: .old, orderIndex: 1, nameKo: "창세기", nameOriginal: "Genesis", abbreviation: ["창"], chapterCount: 50)
+-        let verses = [
+-            BibleVerse(uid: 1, versionCode: nil, bookId: 1, chapter: 1, verse: 1, content: "태초에 하나님이 천지를 창조하시니라", paragraph: nil),
+-            BibleVerse(uid: 2, versionCode: nil, bookId: 1, chapter: 1, verse: 2, content: "땅이 혼돈하고 공허하며 흑암이 깊음 위에 있고", paragraph: nil),
+-        ]
++        let verses = Self.previewSampleVerses
+         var translations = [BibleVerseCopyFormatter.TranslationSnapshot(displayName: String(localized: "번역본 A"), verses: verses)]
+         if registeredTranslationCount > 1 {
+             translations.append(BibleVerseCopyFormatter.TranslationSnapshot(displayName: String(localized: "번역본 B"), verses: verses))
+         }
+         return BibleVerseCopyFormatter.format(
+-            book: sampleBook, chapter: 1, selectedVerses: [1, 2],
++            book: sampleBook, chapter: 1, selectedVerses: Set(verses.map(\.verse)),
+             translations: translations, settings: settings
+         ) ?? ""
+     }
++
++    /// [2026-10-29 copyfmt1] 미리보기 본문(창 1:1-2). 앱 언어는 프로세스 수명 동안 바뀌지 않으므로(`AppLanguage.code`) 한 번만 만든다.
++    /// - 한국어: 기존 문구 그대로.
++    /// - 그 밖: 앱 언어 기본 번들 성경(`BundledTranslationCatalog.current`)의 창 1:1-2 — 성경 조회 화면과 같은 본문이다
++    ///   (인물·지명 상세와 같은 `resolvedCurrentLanguageBundledDatabaseURL()` 경로).
++    /// - 번들을 열지 못하면 번역된 창 1:1 키 하나만 쓴다(한국어 문구가 섞이지 않게). 이때 미리보기는 1절짜리가 된다.
++    private static let previewSampleVerses: [BibleVerse] = {
++        if AppLanguage.isKorean {
++            return [
++                BibleVerse(uid: 1, versionCode: nil, bookId: 1, chapter: 1, verse: 1, content: "태초에 하나님이 천지를 창조하시니라", paragraph: nil),
++                BibleVerse(uid: 2, versionCode: nil, bookId: 1, chapter: 1, verse: 2, content: "땅이 혼돈하고 공허하며 흑암이 깊음 위에 있고", paragraph: nil),
++            ]
++        }
++        if let store = try? BibleReferenceStore(filePath: TranslationBootstrap.resolvedCurrentLanguageBundledDatabaseURL().path),
++           let chapterVerses = try? store.verses(bookId: 1, chapter: 1) {
++            let sample = chapterVerses.filter { $0.verse == 1 || $0.verse == 2 }
++            if sample.count == 2 { return sample }
++        }
++        return [
++            BibleVerse(uid: 1, versionCode: nil, bookId: 1, chapter: 1, verse: 1,
++                       content: String(localized: "태초에 하나님이 천지를 창조하시니라"), paragraph: nil),
++        ]
++    }()
+ }
+ 
+ // MARK: - 단축키(선택 — 스펙 자체가 "필수 아님")

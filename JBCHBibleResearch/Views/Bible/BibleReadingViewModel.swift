@@ -1018,6 +1018,11 @@ final class BibleReadingViewModel {
     /// 선택된 절들을 "기준 번역본(맨 왼쪽 열)" 한 곳만으로 문자열로 만든다. 말씀 요약을 열면 기준 번역본만
     /// 남기고 나머지 열을 숨기므로 그 상태와 일치시킨 것이다. 번역본 이름표는 `BibleVerseCopyFormatter`가
     /// 번역본이 1개면 붙이지 않는다.
+    /// [2026-10-29 refext1] 책 이름은 앱 언어의 전체 이름이다(`.appLanguageFullName` — 한국어가 아닌 앱은 약어 설정과 관계없이
+    /// `displayName`, 한국어 앱은 이전과 같다). 말씀 요약 본문은 저장 후 `BibleReferenceIndexingService.reindexWordSummary`가
+    /// `BibleReferenceExtractor`로 색인하는데, 추출기가 앱 언어 이름표 이름("Genesis 1:1", "創世記 1:1")도 인식하게 되었다
+    /// (copyfmt1에서는 `.korean`). 약칭을 쓰지 않는 것은 언어마다 다른 책을 가리키는 약칭("Jn")이나 앱 언어에서만 인식하는
+    /// 약칭("Ex")이 저장 본문에 들어가 다른 언어 기기에서 색인이 달라지는 것을 막기 위해서다.
     func formattedBaseTranslationText(forVerses verseNumbers: Set<Int>) -> String? {
         guard let firstColumn = columns.first, !verseNumbers.isEmpty else { return nil }
         let translation = BibleVerseCopyFormatter.TranslationSnapshot(
@@ -1027,7 +1032,8 @@ final class BibleReadingViewModel {
             book: selectedBook,
             chapter: selectedChapter,
             selectedVerses: verseNumbers,
-            translations: [translation]
+            translations: [translation],
+            bookNames: .appLanguageFullName
         )
     }
 

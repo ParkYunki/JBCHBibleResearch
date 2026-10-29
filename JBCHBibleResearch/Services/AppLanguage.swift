@@ -10,9 +10,14 @@
 //    시작되므로 프로세스 수명 동안 한 번만 계산해 둔다.
 //  - 책 이름은 내장 이름표(`BookNameTable`)에서 앱 언어에 맞는 표를 쓴다. 한국어는 기존과 같이
 //    `Book.nameKo`/`Book.abbreviation`을 쓴다.
-//  - ⚠️ 이 값은 "화면 표시용"이다. 본문 속 성경 참조 추출(`BibleReferenceExtractor`), 복사 형식
-//    (`BibleVerseCopyFormatter`), 설교 본문에 삽입되는 참조 표기, 저장되는 관주 라벨처럼 한국어 이름을
+//  - ⚠️ 이 값은 "화면 표시용"이다. 설교 본문에 삽입되는 참조 표기, 저장되는 관주 라벨처럼 한국어 이름을
 //    전제로 하는 곳은 계속 `nameKo`/`abbreviation`을 쓴다.
+//  - [2026-10-29 refext1] 본문 속 성경 참조 추출(`BibleReferenceExtractor`)은 한국어 이름에 더해 앱 언어로 쓰이는
+//    13개 이름표 이름을 앱 언어와 관계없이 모두 인식한다(색인이 기기 언어에 좌우되지 않게). 앱 언어(`bookNameTableID`)는
+//    흔한 낱말과 같은 약칭("At", "Ex", "约" 등)을 인정할지와 언어마다 다른 책을 가리키는 같은 약칭을 고를 때만 쓴다.
+//    그래서 말씀 요약 삽입도 앱 언어의 전체 이름(`displayName`)을 쓴다.
+//  - [2026-10-29 copyfmt1] 클립보드 복사(`BibleVerseCopyFormatter` 기본값 `.appLanguage`)는 이 파일의 `displayName`/
+//    `displayShortName`을 쓴다(사용자 결정).
 //  - [2026-10-29 booklabel1] 자유 입력 파싱(`BooksProvider.matchBookPrefix`)은 한국어 후보·초성을 항상 인식하고,
 //    한국어가 아닌 앱에서는 이 파일의 `bookNameTable`(fullNames/shortNames)도 후보로 함께 인식한다.
 //

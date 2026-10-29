@@ -1096,7 +1096,8 @@ struct DocumentsHomeView: View {
     private var searchVerseQueryMatches: [BibleReferenceExtractor.Match] {
         let trimmed = searchText.trimmingCharacters(in: .whitespacesAndNewlines)
         guard !trimmed.isEmpty else { return [] }
-        return BibleReferenceExtractor.extract(from: trimmed)
+        // [2026-10-29 refext1] 검색창 입력이라 앱 언어 책 이름의 대소문자를 가리지 않는다.
+        return BibleReferenceExtractor.extract(from: trimmed, nameMatching: .searchQuery)
     }
 
     private func matchesCategoryFilter(_ document: SourceDocument) -> Bool {

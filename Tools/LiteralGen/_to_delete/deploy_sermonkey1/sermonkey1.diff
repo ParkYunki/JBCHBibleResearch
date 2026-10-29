@@ -1,0 +1,127 @@
+diff -ruN a/JBCHBibleResearch/Views/Sermon/SermonParagraphEditor.swift b/JBCHBibleResearch/Views/Sermon/SermonParagraphEditor.swift
+--- a/JBCHBibleResearch/Views/Sermon/SermonParagraphEditor.swift	2026-10-29 17:31:01.859683433 +0900
++++ b/JBCHBibleResearch/Views/Sermon/SermonParagraphEditor.swift	2026-10-29 17:35:57.427636940 +0900
+@@ -602,6 +602,35 @@
+         }
+         super.pressesBegan(presses, with: event)
+     }
++
++    // MARK: ⌘B / ⌘I (sermonkey1)
++    //
++    // `allowsEditingTextAttributes`가 켜진 UITextView는 하드웨어 키보드 ⌘B/⌘I(iPadOS 메뉴 막대 Format), 텍스트 선택 메뉴의 B/I를 모두
++    // 시스템 `toggleBoldface(_:)`/`toggleItalics(_:)`로 처리한다. 그 기본 구현은 툴바 버튼(`toggleTrait`)과 별개라 굵게 결정 방식과
++    // 실행 취소 등록이 다르다. 두 메서드를 override해 툴바와 같은 앱 경로(`SermonParagraphEditingProxy.toggleBold/Italic` —
++    // 같은 trait 토글, 캐럿만 있으면 타이핑 속성 토글, sermonundo1 실행 취소)로 보낸다. 시스템 구현은 부르지 않으므로 실행 취소가 이중으로
++    // 등록되지 않는다. 밑줄(`toggleUnderline`)은 앱 경로가 없어 시스템 그대로 둔다.
++    // 핸들러가 false를 돌려주면(프록시가 이 텍스트뷰를 가리키지 않음) 시스템 구현으로 넘긴다.
++
++    var onToggleBold: (() -> Bool)?
++    var onToggleItalic: (() -> Bool)?
++
++    override func toggleBoldface(_ sender: Any?) {
++        if performAppTraitToggle(onToggleBold) { return }
++        super.toggleBoldface(sender)
++    }
++
++    override func toggleItalics(_ sender: Any?) {
++        if performAppTraitToggle(onToggleItalic) { return }
++        super.toggleItalics(sender)
++    }
++
++    private func performAppTraitToggle(_ handler: (() -> Bool)?) -> Bool {
++        guard isEditable, let handler else { return false }
++        // 한글 조합 중이면 조합을 먼저 확정한다 — 조합 중인 글자 위에서 attribute를 바꾸지 않도록.
++        if markedTextRange != nil { unmarkText() }
++        return handler()
++    }
+ }
+ 
+ // MARK: - iOS
+@@ -1041,6 +1070,17 @@
+                 proxy.applyParagraphStyle(style, settings: settings)
+                 proxy.activeStyle = style
+             }
++            // ⌘B/⌘I·선택 메뉴 B/I — 툴바 굵게/기울임 버튼과 같은 경로.
++            editorTextView.onToggleBold = { [weak editorTextView, proxy] in
++                guard let editorTextView, proxy.textView === editorTextView else { return false }
++                proxy.toggleBold()
++                return true
++            }
++            editorTextView.onToggleItalic = { [weak editorTextView, proxy] in
++                guard let editorTextView, proxy.textView === editorTextView else { return false }
++                proxy.toggleItalic()
++                return true
++            }
+         }
+         textView.delegate = context.coordinator
+         // 편집 배경이 뷰어와 같은 고정 미색이므로 캐럿·선택·메뉴도 라이트 외형으로 고정한다(`SermonViewerPaper`).
+@@ -1175,6 +1215,51 @@
+         }
+         super.keyDown(with: event)
+     }
++
++    // MARK: ⌘B / ⌘I (sermonkey1)
++    //
++    // 앱 메뉴에는 Format(서식) 메뉴가 없어(AppCommands.swift — `TextFormattingCommands` 미사용) NSTextView의 ⌘B/⌘I를 받을 메뉴 항목
++    // (`addFontTrait:`)이 없다. 그래서 이 텍스트뷰가 첫 응답자일 때만 `performKeyEquivalent`에서 직접 받아 툴바 굵게/기울임과 같은 앱 경로
++    // (`SermonParagraphEditingProxy.toggleBold/Italic` — trait 토글·타이핑 속성·sermonundo1 실행 취소)로 보낸다. 수정키는 ⌘만 허용한다
++    // (⌘⇧B "성경 조회 새 창" 등 다른 단축키는 그대로 지나간다). 글꼴 패널(⌘T)의 `changeFont:` 경로는 건드리지 않는다.
++    // 한글 등 비라틴 입력 소스에서는 `charactersIgnoringModifiers`가 그 언어 글자를 돌려주므로 물리 키 코드로도 판별한다
++    // (Carbon HIToolbox `kVK_ANSI_B` = 0x0B, `kVK_ANSI_I` = 0x22).
++
++    var onToggleBold: (() -> Bool)?
++    var onToggleItalic: (() -> Bool)?
++
++    private static let ansiBKeyCode: UInt16 = 0x0B
++    private static let ansiIKeyCode: UInt16 = 0x22
++
++    override func performKeyEquivalent(with event: NSEvent) -> Bool {
++        if isEditable, event.type == .keyDown, window?.isKeyWindow == true, window?.firstResponder === self,
++           event.modifierFlags.intersection(.deviceIndependentFlagsMask).subtracting([.capsLock, .numericPad, .function]) == .command,
++           let handler = traitHandler(for: event) {
++            // 한글 조합 중이면 조합을 먼저 확정한다. `unmarkText()`는 "조합 글자를 정상 입력된 것처럼 받아들인다"(NSTextInputClient 문서).
++            // `inputContext?.discardMarkedText()`("현재 변환 세션을 버린다")를 이어 부를지는 입력기가 그때 글자를 다시 보내거나 버리는지
++            // 문서로 확정할 수 없어 부르지 않는다 — 실기 테스트로 확인(CHANGES_sermonkey1).
++            if hasMarkedText() { unmarkText() }
++            if handler() { return true }
++        }
++        return super.performKeyEquivalent(with: event)
++    }
++
++    private func traitHandler(for event: NSEvent) -> (() -> Bool)? {
++        let characters = (event.charactersIgnoringModifiers ?? "").lowercased()
++        let isASCII = !characters.isEmpty && characters.unicodeScalars.allSatisfy(\.isASCII)
++        if isASCII {
++            switch characters {
++            case "b": return onToggleBold
++            case "i": return onToggleItalic
++            default: return nil
++            }
++        }
++        switch event.keyCode {
++        case Self.ansiBKeyCode: return onToggleBold
++        case Self.ansiIKeyCode: return onToggleItalic
++        default: return nil
++        }
++    }
+ }
+ 
+ // MARK: - macOS
+@@ -1546,6 +1631,17 @@
+                 proxy.applyParagraphStyle(style, settings: settings)
+                 proxy.activeStyle = style
+             }
++            // ⌘B/⌘I — 툴바 굵게/기울임 버튼과 같은 경로.
++            editorTextView.onToggleBold = { [weak editorTextView, proxy] in
++                guard let editorTextView, proxy.textView === editorTextView else { return false }
++                proxy.toggleBold()
++                return true
++            }
++            editorTextView.onToggleItalic = { [weak editorTextView, proxy] in
++                guard let editorTextView, proxy.textView === editorTextView else { return false }
++                proxy.toggleItalic()
++                return true
++            }
+         }
+         textView.delegate = context.coordinator
+         textView.isEditable = isEditable

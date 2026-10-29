@@ -49,17 +49,12 @@ final class BooksProvider {
         return books[index - 1]
     }
 
-    /// 책 그리드 피커 검색창용 — `Book.matches(query:)`(초성 검색 포함)로 필터링한다.
-    /// 한국어가 아닌 화면에서는 앱 언어 책 이름/약칭(`displayName`/`displayShortName`)도 함께 비교한다.
+    /// 책 이름 검색(전체 목록 대상) — 비교 규칙은 `Book.matchesGridSearch(query:)`(Book+Search.swift)와 같다.
+    /// 책 그리드 피커(`BookGridPicker`)는 호출부가 넘긴 `books`를 거르므로 이 함수가 아니라 `matchesGridSearch`를 직접 쓴다.
     /// (자유 입력 파싱 `matchBookPrefix`도 2026-10-29부터 앱 언어 이름표를 함께 인식한다 — 아래 함수 주석 참고.)
     func search(query: String) -> [Book] {
         guard !query.isEmpty else { return books }
-        return books.filter { book in
-            if book.matches(query: query) { return true }
-            guard !AppLanguage.isKorean else { return false }
-            return book.displayName.localizedCaseInsensitiveContains(query)
-                || book.displayShortName.localizedCaseInsensitiveContains(query)
-        }
+        return books.filter { $0.matchesGridSearch(query: query) }
     }
 
     /// "요한복음 3장", "요3장", "ㅇㅎㅂㅇ3장", "창세기 1" 같은 자유 입력 맨 앞에서

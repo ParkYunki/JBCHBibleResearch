@@ -1,0 +1,919 @@
+{
+  "_doc": "fill: 값이 없는 언어만 추가(기존 값은 덮어쓰지 않음). replace: 명시한 키·언어만, 현재 값이 old와 같을 때만 new로 교체.",
+  "fill": {
+    "문단 스타일 변경": {
+      "de": "Änderung des Absatzstils",
+      "en-CA": "Change Paragraph Style",
+      "es": "Cambio de estilo de párrafo",
+      "es-MX": "Cambio de estilo de párrafo",
+      "fil": "Pagbabago ng Istilo ng Talata",
+      "fr": "Modification du style de paragraphe",
+      "fr-CA": "Modification du style de paragraphe",
+      "id": "Perubahan Gaya Paragraf",
+      "it": "Modifica stile paragrafo",
+      "ja": "段落スタイルの変更",
+      "pt-BR": "Alteração do estilo de parágrafo",
+      "ru": "Изменение стиля абзаца",
+      "th": "การเปลี่ยนสไตล์ย่อหน้า",
+      "vi": "Thay đổi kiểu đoạn văn",
+      "zh-Hans": "段落样式更改",
+      "zh-Hant": "段落樣式變更"
+    },
+    "굵게": {
+      "de": "Fett",
+      "en-CA": "Bold",
+      "es": "Negrita",
+      "es-MX": "Negrita",
+      "fil": "Bold",
+      "fr": "Gras",
+      "fr-CA": "Gras",
+      "id": "Tebal",
+      "it": "Grassetto",
+      "ja": "ボールド",
+      "pt-BR": "Negrito",
+      "ru": "Жирный",
+      "th": "ตัวหนา",
+      "vi": "Đậm",
+      "zh-Hans": "粗体",
+      "zh-Hant": "粗體"
+    },
+    "기울임": {
+      "de": "Kursiv",
+      "en-CA": "Italic",
+      "es": "Cursiva",
+      "es-MX": "Cursiva",
+      "fil": "Italic",
+      "fr": "Italique",
+      "fr-CA": "Italique",
+      "id": "Miring",
+      "it": "Corsivo",
+      "ja": "イタリック",
+      "pt-BR": "Itálico",
+      "ru": "Курсив",
+      "th": "ตัวเอียง",
+      "vi": "Nghiêng",
+      "zh-Hans": "斜体",
+      "zh-Hant": "斜體"
+    },
+    "문단 정렬": {
+      "de": "Ausrichtung",
+      "en-CA": "Alignment",
+      "es": "Alineación",
+      "es-MX": "Alineación",
+      "fil": "Pagkakahanay",
+      "fr": "Alignement",
+      "fr-CA": "Alignement",
+      "id": "Perataan",
+      "it": "Allineamento",
+      "ja": "行揃え",
+      "pt-BR": "Alinhamento",
+      "ru": "Выравнивание",
+      "th": "การจัดแนว",
+      "vi": "Căn chỉnh",
+      "zh-Hans": "对齐",
+      "zh-Hant": "對齊"
+    }
+  },
+  "replace": [
+    {
+      "key": "태초에 하나님이 천지를 창조하시니라",
+      "lang": "de",
+      "old": "태초에 하나님이 천지를 창조하시니라",
+      "new": "Am Anfang schuf Gott Himmel und Erde.",
+      "source": "Resources/Bible_LUT1912.sqlite 창 1:1"
+    },
+    {
+      "key": "태초에 하나님이 천지를 창조하시니라",
+      "lang": "en",
+      "old": "태초에 하나님이 천지를 창조하시니라",
+      "new": "In the beginning God created the heavens and the earth.",
+      "source": "Resources/Bible_BSB.sqlite 창 1:1"
+    },
+    {
+      "key": "태초에 하나님이 천지를 창조하시니라",
+      "lang": "en-CA",
+      "old": "태초에 하나님이 천지를 창조하시니라",
+      "new": "In the beginning God created the heavens and the earth.",
+      "source": "Resources/Bible_BSB.sqlite 창 1:1"
+    },
+    {
+      "key": "태초에 하나님이 천지를 창조하시니라",
+      "lang": "es",
+      "old": "태초에 하나님이 천지를 창조하시니라",
+      "new": "EN el principio crió Dios los cielos y la tierra.",
+      "source": "Resources/Bible_RV1909.sqlite 창 1:1"
+    },
+    {
+      "key": "태초에 하나님이 천지를 창조하시니라",
+      "lang": "es-MX",
+      "old": "태초에 하나님이 천지를 창조하시니라",
+      "new": "EN el principio crió Dios los cielos y la tierra.",
+      "source": "Resources/Bible_RV1909.sqlite 창 1:1"
+    },
+    {
+      "key": "태초에 하나님이 천지를 창조하시니라",
+      "lang": "fil",
+      "old": "태초에 하나님이 천지를 창조하시니라",
+      "new": "Noong simula nilikha ng Diyos ang langit at ang lupa.",
+      "source": "Resources/Bible_TGLULB.sqlite 창 1:1"
+    },
+    {
+      "key": "태초에 하나님이 천지를 창조하시니라",
+      "lang": "fr",
+      "old": "태초에 하나님이 천지를 창조하시니라",
+      "new": "Au commencement, Dieu créa les cieux et la terre.",
+      "source": "Resources/Bible_LSG1910.sqlite 창 1:1"
+    },
+    {
+      "key": "태초에 하나님이 천지를 창조하시니라",
+      "lang": "fr-CA",
+      "old": "태초에 하나님이 천지를 창조하시니라",
+      "new": "Au commencement, Dieu créa les cieux et la terre.",
+      "source": "Resources/Bible_LSG1910.sqlite 창 1:1"
+    },
+    {
+      "key": "태초에 하나님이 천지를 창조하시니라",
+      "lang": "id",
+      "old": "태초에 하나님이 천지를 창조하시니라",
+      "new": "Pada mulanya, Allah menciptakan langit dan bumi.",
+      "source": "Resources/Bible_AYT.sqlite 창 1:1"
+    },
+    {
+      "key": "태초에 하나님이 천지를 창조하시니라",
+      "lang": "it",
+      "old": "태초에 하나님이 천지를 창조하시니라",
+      "new": "Nel principio Iddio creò i cieli e la terra.",
+      "source": "Resources/Bible_RIV1927.sqlite 창 1:1"
+    },
+    {
+      "key": "태초에 하나님이 천지를 창조하시니라",
+      "lang": "ja",
+      "old": "태초에 하나님이 천지를 창조하시니라",
+      "new": "元始に神天地を創造たまへり",
+      "source": "Resources/Bible_JPBUNGO.sqlite 창 1:1"
+    },
+    {
+      "key": "태초에 하나님이 천지를 창조하시니라",
+      "lang": "pt-BR",
+      "old": "태초에 하나님이 천지를 창조하시니라",
+      "new": "No princípio, Deus criou os céus e a terra.",
+      "source": "Resources/Bible_BPM.sqlite 창 1:1"
+    },
+    {
+      "key": "태초에 하나님이 천지를 창조하시니라",
+      "lang": "ru",
+      "old": "태초에 하나님이 천지를 창조하시니라",
+      "new": "В начале сотворил Бог небо и землю.",
+      "source": "Resources/Bible_SYN.sqlite 창 1:1"
+    },
+    {
+      "key": "태초에 하나님이 천지를 창조하시니라",
+      "lang": "th",
+      "old": "태초에 하나님이 천지를 창조하시니라",
+      "new": "ในเริ่มแรกนั้นพระเจ้าทรงเนรมิตสร้างฟ้าและแผ่นดินโลก",
+      "source": "Resources/Bible_THKJV.sqlite 창 1:1"
+    },
+    {
+      "key": "태초에 하나님이 천지를 창조하시니라",
+      "lang": "vi",
+      "old": "태초에 하나님이 천지를 창조하시니라",
+      "new": "Ban đầu Đức Chúa Trời dựng nên trời đất.",
+      "source": "Resources/Bible_VIE1934.sqlite 창 1:1"
+    },
+    {
+      "key": "태초에 하나님이 천지를 창조하시니라",
+      "lang": "zh-Hans",
+      "old": "태초에 하나님이 천지를 창조하시니라",
+      "new": "起初上帝创造天地。",
+      "source": "Resources/Bible_CUV1919S.sqlite 창 1:1"
+    },
+    {
+      "key": "태초에 하나님이 천지를 창조하시니라",
+      "lang": "zh-Hant",
+      "old": "태초에 하나님이 천지를 창조하시니라",
+      "new": "起初上帝創造天地。",
+      "source": "Resources/Bible_CUV1919.sqlite 창 1:1"
+    },
+    {
+      "key": "여러 구절을 콤마(,) 또는 줄바꿈으로 구분해 붙여넣으면 한 번에 추가합니다. 예: 창1:1, 출애굽기1:2~3, 시편112편1,3,5절",
+      "lang": "de",
+      "old": "Füge mehrere Stellen durch Kommas (,) oder Zeilenumbrüche getrennt ein, um sie auf einmal hinzuzufügen. Beispiel: 창1:1, 출애굽기1:2~3, 시편112편1,3,5절",
+      "new": "Füge mehrere Stellen durch Kommas (,) oder Zeilenumbrüche getrennt ein, um sie auf einmal hinzuzufügen. Beispiel: Gen 1:1, Exodus 1:2-3, Ps 112:1,3,5",
+      "source": "BulkCrossReferenceParser 시뮬레이션으로 6절 모두 인식 확인"
+    },
+    {
+      "key": "여러 구절을 콤마(,) 또는 줄바꿈으로 구분해 붙여넣으면 한 번에 추가합니다. 예: 창1:1, 출애굽기1:2~3, 시편112편1,3,5절",
+      "lang": "en",
+      "old": "Paste multiple references separated by commas (,) or line breaks to add them all at once. Example: 창1:1, 출애굽기1:2~3, 시편112편1,3,5절",
+      "new": "Paste multiple references separated by commas (,) or line breaks to add them all at once. Example: Gen 1:1, Exodus 1:2-3, Ps 112:1,3,5",
+      "source": "BulkCrossReferenceParser 시뮬레이션으로 6절 모두 인식 확인"
+    },
+    {
+      "key": "여러 구절을 콤마(,) 또는 줄바꿈으로 구분해 붙여넣으면 한 번에 추가합니다. 예: 창1:1, 출애굽기1:2~3, 시편112편1,3,5절",
+      "lang": "en-CA",
+      "old": "Paste multiple references separated by commas (,) or line breaks to add them all at once. Example: 창1:1, 출애굽기1:2~3, 시편112편1,3,5절",
+      "new": "Paste multiple references separated by commas (,) or line breaks to add them all at once. Example: Gen 1:1, Exodus 1:2-3, Ps 112:1,3,5",
+      "source": "BulkCrossReferenceParser 시뮬레이션으로 6절 모두 인식 확인"
+    },
+    {
+      "key": "여러 구절을 콤마(,) 또는 줄바꿈으로 구분해 붙여넣으면 한 번에 추가합니다. 예: 창1:1, 출애굽기1:2~3, 시편112편1,3,5절",
+      "lang": "es",
+      "old": "Pega varias referencias separadas por comas (,) o saltos de línea para añadirlas todas a la vez. Ejemplo: 창1:1, 출애굽기1:2~3, 시편112편1,3,5절",
+      "new": "Pega varias referencias separadas por comas (,) o saltos de línea para añadirlas todas a la vez. Ejemplo: Gén 1:1, Éxodo 1:2-3, Sal 112:1,3,5",
+      "source": "BulkCrossReferenceParser 시뮬레이션으로 6절 모두 인식 확인"
+    },
+    {
+      "key": "여러 구절을 콤마(,) 또는 줄바꿈으로 구분해 붙여넣으면 한 번에 추가합니다. 예: 창1:1, 출애굽기1:2~3, 시편112편1,3,5절",
+      "lang": "es-MX",
+      "old": "Pega varias referencias separadas por comas (,) o saltos de línea para agregarlas todas a la vez. Ejemplo: 창1:1, 출애굽기1:2~3, 시편112편1,3,5절",
+      "new": "Pega varias referencias separadas por comas (,) o saltos de línea para agregarlas todas a la vez. Ejemplo: Gén 1:1, Éxodo 1:2-3, Sal 112:1,3,5",
+      "source": "BulkCrossReferenceParser 시뮬레이션으로 6절 모두 인식 확인"
+    },
+    {
+      "key": "여러 구절을 콤마(,) 또는 줄바꿈으로 구분해 붙여넣으면 한 번에 추가합니다. 예: 창1:1, 출애굽기1:2~3, 시편112편1,3,5절",
+      "lang": "fil",
+      "old": "I-paste ang maraming reference na pinaghihiwalay ng kuwit (,) o bagong linya para idagdag lahat nang sabay. Halimbawa: 창1:1, 출애굽기1:2~3, 시편112편1,3,5절",
+      "new": "I-paste ang maraming reference na pinaghihiwalay ng kuwit (,) o bagong linya para idagdag lahat nang sabay. Halimbawa: Genesis 1:1, Exodo 1:2-3, Mga Awit 112:1,3,5",
+      "source": "BulkCrossReferenceParser 시뮬레이션으로 6절 모두 인식 확인"
+    },
+    {
+      "key": "여러 구절을 콤마(,) 또는 줄바꿈으로 구분해 붙여넣으면 한 번에 추가합니다. 예: 창1:1, 출애굽기1:2~3, 시편112편1,3,5절",
+      "lang": "fr",
+      "old": "Collez plusieurs références séparées par des virgules (,) ou des retours à la ligne pour les ajouter en une fois. Exemple : 창1:1, 출애굽기1:2~3, 시편112편1,3,5절",
+      "new": "Collez plusieurs références séparées par des virgules (,) ou des retours à la ligne pour les ajouter en une fois. Exemple : Gn 1:1, Exode 1:2-3, Ps 112:1,3,5",
+      "source": "BulkCrossReferenceParser 시뮬레이션으로 6절 모두 인식 확인"
+    },
+    {
+      "key": "여러 구절을 콤마(,) 또는 줄바꿈으로 구분해 붙여넣으면 한 번에 추가합니다. 예: 창1:1, 출애굽기1:2~3, 시편112편1,3,5절",
+      "lang": "fr-CA",
+      "old": "Collez plusieurs références séparées par des virgules (,) ou des retours à la ligne pour les ajouter en une fois. Exemple : 창1:1, 출애굽기1:2~3, 시편112편1,3,5절",
+      "new": "Collez plusieurs références séparées par des virgules (,) ou des retours à la ligne pour les ajouter en une fois. Exemple : Gn 1:1, Exode 1:2-3, Ps 112:1,3,5",
+      "source": "BulkCrossReferenceParser 시뮬레이션으로 6절 모두 인식 확인"
+    },
+    {
+      "key": "여러 구절을 콤마(,) 또는 줄바꿈으로 구분해 붙여넣으면 한 번에 추가합니다. 예: 창1:1, 출애굽기1:2~3, 시편112편1,3,5절",
+      "lang": "id",
+      "old": "Tempel beberapa referensi yang dipisahkan koma (,) atau baris baru untuk menambahkan semuanya sekaligus. Contoh: 창1:1, 출애굽기1:2~3, 시편112편1,3,5절",
+      "new": "Tempel beberapa referensi yang dipisahkan koma (,) atau baris baru untuk menambahkan semuanya sekaligus. Contoh: Gen 1:1, Exodus 1:2-3, Ps 112:1,3,5",
+      "source": "BulkCrossReferenceParser 시뮬레이션으로 6절 모두 인식 확인"
+    },
+    {
+      "key": "여러 구절을 콤마(,) 또는 줄바꿈으로 구분해 붙여넣으면 한 번에 추가합니다. 예: 창1:1, 출애굽기1:2~3, 시편112편1,3,5절",
+      "lang": "it",
+      "old": "Incolla più riferimenti separati da virgole (,) o a capo per aggiungerli tutti insieme. Esempio: 창1:1, 출애굽기1:2~3, 시편112편1,3,5절",
+      "new": "Incolla più riferimenti separati da virgole (,) o a capo per aggiungerli tutti insieme. Esempio: Gen 1:1, Esodo 1:2-3, Sal 112:1,3,5",
+      "source": "BulkCrossReferenceParser 시뮬레이션으로 6절 모두 인식 확인"
+    },
+    {
+      "key": "여러 구절을 콤마(,) 또는 줄바꿈으로 구분해 붙여넣으면 한 번에 추가합니다. 예: 창1:1, 출애굽기1:2~3, 시편112편1,3,5절",
+      "lang": "ja",
+      "old": "複数の箇所をカンマ (,) または改行で区切って貼り付けると、まとめて追加できます。例: 창1:1, 출애굽기1:2~3, 시편112편1,3,5절",
+      "new": "複数の箇所をカンマ (,) または改行で区切って貼り付けると、まとめて追加できます。例: 創1:1, 出エジプト記1:2-3, 詩112:1,3,5",
+      "source": "BulkCrossReferenceParser 시뮬레이션으로 6절 모두 인식 확인"
+    },
+    {
+      "key": "여러 구절을 콤마(,) 또는 줄바꿈으로 구분해 붙여넣으면 한 번에 추가합니다. 예: 창1:1, 출애굽기1:2~3, 시편112편1,3,5절",
+      "lang": "pt-BR",
+      "old": "Cole várias referências separadas por vírgulas (,) ou quebras de linha para adicioná-las de uma vez. Exemplo: 창1:1, 출애굽기1:2~3, 시편112편1,3,5절",
+      "new": "Cole várias referências separadas por vírgulas (,) ou quebras de linha para adicioná-las de uma vez. Exemplo: Gn 1:1, Êxodo 1:2-3, Sl 112:1,3,5",
+      "source": "BulkCrossReferenceParser 시뮬레이션으로 6절 모두 인식 확인"
+    },
+    {
+      "key": "여러 구절을 콤마(,) 또는 줄바꿈으로 구분해 붙여넣으면 한 번에 추가합니다. 예: 창1:1, 출애굽기1:2~3, 시편112편1,3,5절",
+      "lang": "ru",
+      "old": "Вставьте несколько ссылок, разделённых запятыми (,) или переводами строк, чтобы добавить их все сразу. Пример: 창1:1, 출애굽기1:2~3, 시편112편1,3,5절",
+      "new": "Вставьте несколько ссылок, разделённых запятыми (,) или переводами строк, чтобы добавить их все сразу. Пример: Быт 1:1, Исход 1:2-3, Пс 112:1,3,5",
+      "source": "BulkCrossReferenceParser 시뮬레이션으로 6절 모두 인식 확인"
+    },
+    {
+      "key": "여러 구절을 콤마(,) 또는 줄바꿈으로 구분해 붙여넣으면 한 번에 추가합니다. 예: 창1:1, 출애굽기1:2~3, 시편112편1,3,5절",
+      "lang": "th",
+      "old": "วางข้ออ้างอิงหลายรายการที่คั่นด้วยจุลภาค (,) หรือขึ้นบรรทัดใหม่ เพื่อเพิ่มทั้งหมดในครั้งเดียว ตัวอย่าง: 창1:1, 출애굽기1:2~3, 시편112편1,3,5절",
+      "new": "วางข้ออ้างอิงหลายรายการที่คั่นด้วยจุลภาค (,) หรือขึ้นบรรทัดใหม่ เพื่อเพิ่มทั้งหมดในครั้งเดียว ตัวอย่าง: ปฐมกาล 1:1, อพยพ 1:2-3, สดุดี 112:1,3,5",
+      "source": "BulkCrossReferenceParser 시뮬레이션으로 6절 모두 인식 확인"
+    },
+    {
+      "key": "여러 구절을 콤마(,) 또는 줄바꿈으로 구분해 붙여넣으면 한 번에 추가합니다. 예: 창1:1, 출애굽기1:2~3, 시편112편1,3,5절",
+      "lang": "vi",
+      "old": "Dán nhiều đoạn tham chiếu cách nhau bằng dấu phẩy (,) hoặc xuống dòng để thêm tất cả cùng lúc. Ví dụ: 창1:1, 출애굽기1:2~3, 시편112편1,3,5절",
+      "new": "Dán nhiều đoạn tham chiếu cách nhau bằng dấu phẩy (,) hoặc xuống dòng để thêm tất cả cùng lúc. Ví dụ: Sáng Thế Ký 1:1, Xuất Hành Ký 1:2-3, Thi-thiên 112:1,3,5",
+      "source": "BulkCrossReferenceParser 시뮬레이션으로 6절 모두 인식 확인"
+    },
+    {
+      "key": "여러 구절을 콤마(,) 또는 줄바꿈으로 구분해 붙여넣으면 한 번에 추가합니다. 예: 창1:1, 출애굽기1:2~3, 시편112편1,3,5절",
+      "lang": "zh-Hans",
+      "old": "粘贴以逗号 (,) 或换行分隔的多个经文出处，即可一次全部添加。例：창1:1, 출애굽기1:2~3, 시편112편1,3,5절",
+      "new": "粘贴以逗号 (,) 或换行分隔的多个经文出处，即可一次全部添加。例：创1:1, 出1:2-3, 诗112:1,3,5",
+      "source": "BulkCrossReferenceParser 시뮬레이션으로 6절 모두 인식 확인"
+    },
+    {
+      "key": "여러 구절을 콤마(,) 또는 줄바꿈으로 구분해 붙여넣으면 한 번에 추가합니다. 예: 창1:1, 출애굽기1:2~3, 시편112편1,3,5절",
+      "lang": "zh-Hant",
+      "old": "貼上以逗號 (,) 或換行分隔的多個經文出處，即可一次全部新增。例：창1:1, 출애굽기1:2~3, 시편112편1,3,5절",
+      "new": "貼上以逗號 (,) 或換行分隔的多個經文出處，即可一次全部新增。例：創1:1, 出1:2-3, 詩112:1,3,5",
+      "source": "BulkCrossReferenceParser 시뮬레이션으로 6절 모두 인식 확인"
+    },
+    {
+      "key": "[창세기 1:1]",
+      "lang": "de",
+      "old": "[창세기 1:1]",
+      "new": "[Genesis 1:1]",
+      "source": "copyfmt1: BookNameTable lang.de fullNames[0]"
+    },
+    {
+      "key": "(창세기 1:1)",
+      "lang": "de",
+      "old": "(창세기 1:1)",
+      "new": "(Genesis 1:1)",
+      "source": "copyfmt1: BookNameTable lang.de fullNames[0]"
+    },
+    {
+      "key": "예: [NKJV 창세기 1:1]",
+      "lang": "de",
+      "old": "z. B. [NKJV 창세기 1:1]",
+      "new": "z. B. [Lutherbibel 1912 Genesis 1:1]",
+      "source": "copyfmt1: 번들 LUT1912 displayName + BookNameTable lang.de fullNames[0]"
+    },
+    {
+      "key": "예: [NKJV][창세기 1:1]",
+      "lang": "de",
+      "old": "z. B. [NKJV][창세기 1:1]",
+      "new": "z. B. [Lutherbibel 1912][Genesis 1:1]",
+      "source": "copyfmt1: 번들 LUT1912 displayName + BookNameTable lang.de fullNames[0]"
+    },
+    {
+      "key": "성경 이름 약어 사용 (창세기 → 창)",
+      "lang": "de",
+      "old": "Abgekürzte Buchnamen verwenden (창세기 → 창)",
+      "new": "Abgekürzte Buchnamen verwenden (Genesis → Gen)",
+      "source": "copyfmt1: BookNameTable lang.de fullNames[0]/shortNames[0]"
+    },
+    {
+      "key": "[창세기 1:1]",
+      "lang": "en",
+      "old": "[창세기 1:1]",
+      "new": "[Genesis 1:1]",
+      "source": "copyfmt1: BookNameTable lang.en fullNames[0]"
+    },
+    {
+      "key": "(창세기 1:1)",
+      "lang": "en",
+      "old": "(창세기 1:1)",
+      "new": "(Genesis 1:1)",
+      "source": "copyfmt1: BookNameTable lang.en fullNames[0]"
+    },
+    {
+      "key": "예: [NKJV 창세기 1:1]",
+      "lang": "en",
+      "old": "e.g. [NKJV 창세기 1:1]",
+      "new": "e.g. [Berean Standard Bible Genesis 1:1]",
+      "source": "copyfmt1: 번들 BSB displayName + BookNameTable lang.en fullNames[0]"
+    },
+    {
+      "key": "예: [NKJV][창세기 1:1]",
+      "lang": "en",
+      "old": "e.g. [NKJV][창세기 1:1]",
+      "new": "e.g. [Berean Standard Bible][Genesis 1:1]",
+      "source": "copyfmt1: 번들 BSB displayName + BookNameTable lang.en fullNames[0]"
+    },
+    {
+      "key": "성경 이름 약어 사용 (창세기 → 창)",
+      "lang": "en",
+      "old": "Use abbreviated book names (창세기 → 창)",
+      "new": "Use abbreviated book names (Genesis → Gen)",
+      "source": "copyfmt1: BookNameTable lang.en fullNames[0]/shortNames[0]"
+    },
+    {
+      "key": "[창세기 1:1]",
+      "lang": "en-CA",
+      "old": "[창세기 1:1]",
+      "new": "[Genesis 1:1]",
+      "source": "copyfmt1: BookNameTable lang.en fullNames[0]"
+    },
+    {
+      "key": "(창세기 1:1)",
+      "lang": "en-CA",
+      "old": "(창세기 1:1)",
+      "new": "(Genesis 1:1)",
+      "source": "copyfmt1: BookNameTable lang.en fullNames[0]"
+    },
+    {
+      "key": "예: [NKJV 창세기 1:1]",
+      "lang": "en-CA",
+      "old": "e.g. [NKJV 창세기 1:1]",
+      "new": "e.g. [Berean Standard Bible Genesis 1:1]",
+      "source": "copyfmt1: 번들 BSB displayName + BookNameTable lang.en fullNames[0]"
+    },
+    {
+      "key": "예: [NKJV][창세기 1:1]",
+      "lang": "en-CA",
+      "old": "e.g. [NKJV][창세기 1:1]",
+      "new": "e.g. [Berean Standard Bible][Genesis 1:1]",
+      "source": "copyfmt1: 번들 BSB displayName + BookNameTable lang.en fullNames[0]"
+    },
+    {
+      "key": "성경 이름 약어 사용 (창세기 → 창)",
+      "lang": "en-CA",
+      "old": "Use abbreviated book names (창세기 → 창)",
+      "new": "Use abbreviated book names (Genesis → Gen)",
+      "source": "copyfmt1: BookNameTable lang.en fullNames[0]/shortNames[0]"
+    },
+    {
+      "key": "[창세기 1:1]",
+      "lang": "es",
+      "old": "[창세기 1:1]",
+      "new": "[Génesis 1:1]",
+      "source": "copyfmt1: BookNameTable lang.es fullNames[0]"
+    },
+    {
+      "key": "(창세기 1:1)",
+      "lang": "es",
+      "old": "(창세기 1:1)",
+      "new": "(Génesis 1:1)",
+      "source": "copyfmt1: BookNameTable lang.es fullNames[0]"
+    },
+    {
+      "key": "예: [NKJV 창세기 1:1]",
+      "lang": "es",
+      "old": "p. ej. [NKJV 창세기 1:1]",
+      "new": "p. ej. [Reina-Valera 1909 Génesis 1:1]",
+      "source": "copyfmt1: 번들 RV1909 displayName + BookNameTable lang.es fullNames[0]"
+    },
+    {
+      "key": "예: [NKJV][창세기 1:1]",
+      "lang": "es",
+      "old": "p. ej. [NKJV][창세기 1:1]",
+      "new": "p. ej. [Reina-Valera 1909][Génesis 1:1]",
+      "source": "copyfmt1: 번들 RV1909 displayName + BookNameTable lang.es fullNames[0]"
+    },
+    {
+      "key": "성경 이름 약어 사용 (창세기 → 창)",
+      "lang": "es",
+      "old": "Usar nombres de libros abreviados (창세기 → 창)",
+      "new": "Usar nombres de libros abreviados (Génesis → Gén)",
+      "source": "copyfmt1: BookNameTable lang.es fullNames[0]/shortNames[0]"
+    },
+    {
+      "key": "[창세기 1:1]",
+      "lang": "es-MX",
+      "old": "[창세기 1:1]",
+      "new": "[Génesis 1:1]",
+      "source": "copyfmt1: BookNameTable lang.es fullNames[0]"
+    },
+    {
+      "key": "(창세기 1:1)",
+      "lang": "es-MX",
+      "old": "(창세기 1:1)",
+      "new": "(Génesis 1:1)",
+      "source": "copyfmt1: BookNameTable lang.es fullNames[0]"
+    },
+    {
+      "key": "예: [NKJV 창세기 1:1]",
+      "lang": "es-MX",
+      "old": "p. ej. [NKJV 창세기 1:1]",
+      "new": "p. ej. [Reina-Valera 1909 Génesis 1:1]",
+      "source": "copyfmt1: 번들 RV1909 displayName + BookNameTable lang.es fullNames[0]"
+    },
+    {
+      "key": "예: [NKJV][창세기 1:1]",
+      "lang": "es-MX",
+      "old": "p. ej. [NKJV][창세기 1:1]",
+      "new": "p. ej. [Reina-Valera 1909][Génesis 1:1]",
+      "source": "copyfmt1: 번들 RV1909 displayName + BookNameTable lang.es fullNames[0]"
+    },
+    {
+      "key": "성경 이름 약어 사용 (창세기 → 창)",
+      "lang": "es-MX",
+      "old": "Usar nombres de libros abreviados (창세기 → 창)",
+      "new": "Usar nombres de libros abreviados (Génesis → Gén)",
+      "source": "copyfmt1: BookNameTable lang.es fullNames[0]/shortNames[0]"
+    },
+    {
+      "key": "[창세기 1:1]",
+      "lang": "fil",
+      "old": "[창세기 1:1]",
+      "new": "[Genesis 1:1]",
+      "source": "copyfmt1: BookNameTable lang.tl fullNames[0]"
+    },
+    {
+      "key": "(창세기 1:1)",
+      "lang": "fil",
+      "old": "(창세기 1:1)",
+      "new": "(Genesis 1:1)",
+      "source": "copyfmt1: BookNameTable lang.tl fullNames[0]"
+    },
+    {
+      "key": "예: [NKJV 창세기 1:1]",
+      "lang": "fil",
+      "old": "hal. [NKJV 창세기 1:1]",
+      "new": "hal. [Banal na Bibliya (ULB) Genesis 1:1]",
+      "source": "copyfmt1: 번들 TGLULB displayName + BookNameTable lang.tl fullNames[0]"
+    },
+    {
+      "key": "예: [NKJV][창세기 1:1]",
+      "lang": "fil",
+      "old": "hal. [NKJV][창세기 1:1]",
+      "new": "hal. [Banal na Bibliya (ULB)][Genesis 1:1]",
+      "source": "copyfmt1: 번들 TGLULB displayName + BookNameTable lang.tl fullNames[0]"
+    },
+    {
+      "key": "성경 이름 약어 사용 (창세기 → 창)",
+      "lang": "fil",
+      "old": "Gumamit ng pinaikling pangalan ng aklat (창세기 → 창)",
+      "new": "Gumamit ng pinaikling pangalan ng aklat",
+      "source": "copyfmt1: BookNameTable lang.tl shortNames 비어 있음 → 예시 생략(약어를 켜도 전체 이름)"
+    },
+    {
+      "key": "[창세기 1:1]",
+      "lang": "fr",
+      "old": "[창세기 1:1]",
+      "new": "[Genèse 1:1]",
+      "source": "copyfmt1: BookNameTable lang.fr fullNames[0]"
+    },
+    {
+      "key": "(창세기 1:1)",
+      "lang": "fr",
+      "old": "(창세기 1:1)",
+      "new": "(Genèse 1:1)",
+      "source": "copyfmt1: BookNameTable lang.fr fullNames[0]"
+    },
+    {
+      "key": "예: [NKJV 창세기 1:1]",
+      "lang": "fr",
+      "old": "ex. [NKJV 창세기 1:1]",
+      "new": "ex. [Louis Segond 1910 Genèse 1:1]",
+      "source": "copyfmt1: 번들 LSG1910 displayName + BookNameTable lang.fr fullNames[0]"
+    },
+    {
+      "key": "예: [NKJV][창세기 1:1]",
+      "lang": "fr",
+      "old": "ex. [NKJV][창세기 1:1]",
+      "new": "ex. [Louis Segond 1910][Genèse 1:1]",
+      "source": "copyfmt1: 번들 LSG1910 displayName + BookNameTable lang.fr fullNames[0]"
+    },
+    {
+      "key": "성경 이름 약어 사용 (창세기 → 창)",
+      "lang": "fr",
+      "old": "Utiliser les noms de livres abrégés (창세기 → 창)",
+      "new": "Utiliser les noms de livres abrégés (Genèse → Gn)",
+      "source": "copyfmt1: BookNameTable lang.fr fullNames[0]/shortNames[0]"
+    },
+    {
+      "key": "[창세기 1:1]",
+      "lang": "fr-CA",
+      "old": "[창세기 1:1]",
+      "new": "[Genèse 1:1]",
+      "source": "copyfmt1: BookNameTable lang.fr fullNames[0]"
+    },
+    {
+      "key": "(창세기 1:1)",
+      "lang": "fr-CA",
+      "old": "(창세기 1:1)",
+      "new": "(Genèse 1:1)",
+      "source": "copyfmt1: BookNameTable lang.fr fullNames[0]"
+    },
+    {
+      "key": "예: [NKJV 창세기 1:1]",
+      "lang": "fr-CA",
+      "old": "ex. [NKJV 창세기 1:1]",
+      "new": "ex. [Louis Segond 1910 Genèse 1:1]",
+      "source": "copyfmt1: 번들 LSG1910 displayName + BookNameTable lang.fr fullNames[0]"
+    },
+    {
+      "key": "예: [NKJV][창세기 1:1]",
+      "lang": "fr-CA",
+      "old": "ex. [NKJV][창세기 1:1]",
+      "new": "ex. [Louis Segond 1910][Genèse 1:1]",
+      "source": "copyfmt1: 번들 LSG1910 displayName + BookNameTable lang.fr fullNames[0]"
+    },
+    {
+      "key": "성경 이름 약어 사용 (창세기 → 창)",
+      "lang": "fr-CA",
+      "old": "Utiliser les noms de livres abrégés (창세기 → 창)",
+      "new": "Utiliser les noms de livres abrégés (Genèse → Gn)",
+      "source": "copyfmt1: BookNameTable lang.fr fullNames[0]/shortNames[0]"
+    },
+    {
+      "key": "[창세기 1:1]",
+      "lang": "id",
+      "old": "[창세기 1:1]",
+      "new": "[Genesis 1:1]",
+      "source": "copyfmt1: BookNameTable lang.en fullNames[0]"
+    },
+    {
+      "key": "(창세기 1:1)",
+      "lang": "id",
+      "old": "(창세기 1:1)",
+      "new": "(Genesis 1:1)",
+      "source": "copyfmt1: BookNameTable lang.en fullNames[0]"
+    },
+    {
+      "key": "예: [NKJV 창세기 1:1]",
+      "lang": "id",
+      "old": "mis. [NKJV 창세기 1:1]",
+      "new": "mis. [Alkitab Yang Terbuka Genesis 1:1]",
+      "source": "copyfmt1: 번들 AYT displayName + BookNameTable lang.en fullNames[0]"
+    },
+    {
+      "key": "예: [NKJV][창세기 1:1]",
+      "lang": "id",
+      "old": "mis. [NKJV][창세기 1:1]",
+      "new": "mis. [Alkitab Yang Terbuka][Genesis 1:1]",
+      "source": "copyfmt1: 번들 AYT displayName + BookNameTable lang.en fullNames[0]"
+    },
+    {
+      "key": "성경 이름 약어 사용 (창세기 → 창)",
+      "lang": "id",
+      "old": "Gunakan nama kitab singkat (창세기 → 창)",
+      "new": "Gunakan nama kitab singkat (Genesis → Gen)",
+      "source": "copyfmt1: BookNameTable lang.en fullNames[0]/shortNames[0]"
+    },
+    {
+      "key": "[창세기 1:1]",
+      "lang": "it",
+      "old": "[창세기 1:1]",
+      "new": "[Genesi 1:1]",
+      "source": "copyfmt1: BookNameTable lang.it fullNames[0]"
+    },
+    {
+      "key": "(창세기 1:1)",
+      "lang": "it",
+      "old": "(창세기 1:1)",
+      "new": "(Genesi 1:1)",
+      "source": "copyfmt1: BookNameTable lang.it fullNames[0]"
+    },
+    {
+      "key": "예: [NKJV 창세기 1:1]",
+      "lang": "it",
+      "old": "es. [NKJV 창세기 1:1]",
+      "new": "es. [Riveduta 1927 Genesi 1:1]",
+      "source": "copyfmt1: 번들 RIV1927 displayName + BookNameTable lang.it fullNames[0]"
+    },
+    {
+      "key": "예: [NKJV][창세기 1:1]",
+      "lang": "it",
+      "old": "es. [NKJV][창세기 1:1]",
+      "new": "es. [Riveduta 1927][Genesi 1:1]",
+      "source": "copyfmt1: 번들 RIV1927 displayName + BookNameTable lang.it fullNames[0]"
+    },
+    {
+      "key": "성경 이름 약어 사용 (창세기 → 창)",
+      "lang": "it",
+      "old": "Usa nomi abbreviati dei libri (창세기 → 창)",
+      "new": "Usa nomi abbreviati dei libri (Genesi → Gen)",
+      "source": "copyfmt1: BookNameTable lang.it fullNames[0]/shortNames[0]"
+    },
+    {
+      "key": "[창세기 1:1]",
+      "lang": "ja",
+      "old": "[창세기 1:1]",
+      "new": "[創世記 1:1]",
+      "source": "copyfmt1: BookNameTable lang.ja fullNames[0]"
+    },
+    {
+      "key": "(창세기 1:1)",
+      "lang": "ja",
+      "old": "(창세기 1:1)",
+      "new": "(創世記 1:1)",
+      "source": "copyfmt1: BookNameTable lang.ja fullNames[0]"
+    },
+    {
+      "key": "예: [NKJV 창세기 1:1]",
+      "lang": "ja",
+      "old": "例: [NKJV 창세기 1:1]",
+      "new": "例: [文語訳聖書 創世記 1:1]",
+      "source": "copyfmt1: 번들 JPBUNGO displayName + BookNameTable lang.ja fullNames[0]"
+    },
+    {
+      "key": "예: [NKJV][창세기 1:1]",
+      "lang": "ja",
+      "old": "例: [NKJV][창세기 1:1]",
+      "new": "例: [文語訳聖書][創世記 1:1]",
+      "source": "copyfmt1: 번들 JPBUNGO displayName + BookNameTable lang.ja fullNames[0]"
+    },
+    {
+      "key": "성경 이름 약어 사용 (창세기 → 창)",
+      "lang": "ja",
+      "old": "書名の略称を使用 (창세기 → 창)",
+      "new": "書名の略称を使用 (創世記 → 創)",
+      "source": "copyfmt1: BookNameTable lang.ja fullNames[0]/shortNames[0]"
+    },
+    {
+      "key": "[창세기 1:1]",
+      "lang": "pt-BR",
+      "old": "[창세기 1:1]",
+      "new": "[Gênesis 1:1]",
+      "source": "copyfmt1: BookNameTable lang.pt fullNames[0]"
+    },
+    {
+      "key": "(창세기 1:1)",
+      "lang": "pt-BR",
+      "old": "(창세기 1:1)",
+      "new": "(Gênesis 1:1)",
+      "source": "copyfmt1: BookNameTable lang.pt fullNames[0]"
+    },
+    {
+      "key": "예: [NKJV 창세기 1:1]",
+      "lang": "pt-BR",
+      "old": "ex.: [NKJV 창세기 1:1]",
+      "new": "ex.: [Bíblia Portuguesa Mundial Gênesis 1:1]",
+      "source": "copyfmt1: 번들 BPM displayName + BookNameTable lang.pt fullNames[0]"
+    },
+    {
+      "key": "예: [NKJV][창세기 1:1]",
+      "lang": "pt-BR",
+      "old": "ex.: [NKJV][창세기 1:1]",
+      "new": "ex.: [Bíblia Portuguesa Mundial][Gênesis 1:1]",
+      "source": "copyfmt1: 번들 BPM displayName + BookNameTable lang.pt fullNames[0]"
+    },
+    {
+      "key": "성경 이름 약어 사용 (창세기 → 창)",
+      "lang": "pt-BR",
+      "old": "Usar nomes abreviados dos livros (창세기 → 창)",
+      "new": "Usar nomes abreviados dos livros (Gênesis → Gn)",
+      "source": "copyfmt1: BookNameTable lang.pt fullNames[0]/shortNames[0]"
+    },
+    {
+      "key": "[창세기 1:1]",
+      "lang": "ru",
+      "old": "[창세기 1:1]",
+      "new": "[Бытие 1:1]",
+      "source": "copyfmt1: BookNameTable lang.ru fullNames[0]"
+    },
+    {
+      "key": "(창세기 1:1)",
+      "lang": "ru",
+      "old": "(창세기 1:1)",
+      "new": "(Бытие 1:1)",
+      "source": "copyfmt1: BookNameTable lang.ru fullNames[0]"
+    },
+    {
+      "key": "예: [NKJV 창세기 1:1]",
+      "lang": "ru",
+      "old": "напр. [NKJV 창세기 1:1]",
+      "new": "напр. [Синодальный перевод Бытие 1:1]",
+      "source": "copyfmt1: 번들 SYN displayName + BookNameTable lang.ru fullNames[0]"
+    },
+    {
+      "key": "예: [NKJV][창세기 1:1]",
+      "lang": "ru",
+      "old": "напр. [NKJV][창세기 1:1]",
+      "new": "напр. [Синодальный перевод][Бытие 1:1]",
+      "source": "copyfmt1: 번들 SYN displayName + BookNameTable lang.ru fullNames[0]"
+    },
+    {
+      "key": "성경 이름 약어 사용 (창세기 → 창)",
+      "lang": "ru",
+      "old": "Сокращённые названия книг (창세기 → 창)",
+      "new": "Сокращённые названия книг (Бытие → Быт)",
+      "source": "copyfmt1: BookNameTable lang.ru fullNames[0]/shortNames[0]"
+    },
+    {
+      "key": "[창세기 1:1]",
+      "lang": "th",
+      "old": "[창세기 1:1]",
+      "new": "[ปฐมกาล 1:1]",
+      "source": "copyfmt1: BookNameTable lang.th fullNames[0]"
+    },
+    {
+      "key": "(창세기 1:1)",
+      "lang": "th",
+      "old": "(창세기 1:1)",
+      "new": "(ปฐมกาล 1:1)",
+      "source": "copyfmt1: BookNameTable lang.th fullNames[0]"
+    },
+    {
+      "key": "예: [NKJV 창세기 1:1]",
+      "lang": "th",
+      "old": "ตัวอย่าง: [NKJV 창세기 1:1]",
+      "new": "ตัวอย่าง: [พระคัมภีร์ภาษาไทยฉบับ KJV ปฐมกาล 1:1]",
+      "source": "copyfmt1: 번들 THKJV displayName + BookNameTable lang.th fullNames[0]"
+    },
+    {
+      "key": "예: [NKJV][창세기 1:1]",
+      "lang": "th",
+      "old": "ตัวอย่าง: [NKJV][창세기 1:1]",
+      "new": "ตัวอย่าง: [พระคัมภีร์ภาษาไทยฉบับ KJV][ปฐมกาล 1:1]",
+      "source": "copyfmt1: 번들 THKJV displayName + BookNameTable lang.th fullNames[0]"
+    },
+    {
+      "key": "성경 이름 약어 사용 (창세기 → 창)",
+      "lang": "th",
+      "old": "ใช้ชื่อเล่มแบบย่อ (창세기 → 창)",
+      "new": "ใช้ชื่อเล่มแบบย่อ",
+      "source": "copyfmt1: BookNameTable lang.th shortNames 비어 있음 → 예시 생략(약어를 켜도 전체 이름)"
+    },
+    {
+      "key": "[창세기 1:1]",
+      "lang": "vi",
+      "old": "[창세기 1:1]",
+      "new": "[Sáng Thế Ký 1:1]",
+      "source": "copyfmt1: BookNameTable lang.vi fullNames[0]"
+    },
+    {
+      "key": "(창세기 1:1)",
+      "lang": "vi",
+      "old": "(창세기 1:1)",
+      "new": "(Sáng Thế Ký 1:1)",
+      "source": "copyfmt1: BookNameTable lang.vi fullNames[0]"
+    },
+    {
+      "key": "예: [NKJV 창세기 1:1]",
+      "lang": "vi",
+      "old": "Ví dụ: [NKJV 창세기 1:1]",
+      "new": "Ví dụ: [Kinh Thánh 1934 Sáng Thế Ký 1:1]",
+      "source": "copyfmt1: 번들 VIE1934 displayName + BookNameTable lang.vi fullNames[0]"
+    },
+    {
+      "key": "예: [NKJV][창세기 1:1]",
+      "lang": "vi",
+      "old": "Ví dụ: [NKJV][창세기 1:1]",
+      "new": "Ví dụ: [Kinh Thánh 1934][Sáng Thế Ký 1:1]",
+      "source": "copyfmt1: 번들 VIE1934 displayName + BookNameTable lang.vi fullNames[0]"
+    },
+    {
+      "key": "성경 이름 약어 사용 (창세기 → 창)",
+      "lang": "vi",
+      "old": "Dùng tên sách viết tắt (창세기 → 창)",
+      "new": "Dùng tên sách viết tắt",
+      "source": "copyfmt1: BookNameTable lang.vi shortNames 비어 있음 → 예시 생략(약어를 켜도 전체 이름)"
+    },
+    {
+      "key": "[창세기 1:1]",
+      "lang": "zh-Hans",
+      "old": "[창세기 1:1]",
+      "new": "[创世记 1:1]",
+      "source": "copyfmt1: BookNameTable lang.zh-Hans fullNames[0]"
+    },
+    {
+      "key": "(창세기 1:1)",
+      "lang": "zh-Hans",
+      "old": "(창세기 1:1)",
+      "new": "(创世记 1:1)",
+      "source": "copyfmt1: BookNameTable lang.zh-Hans fullNames[0]"
+    },
+    {
+      "key": "예: [NKJV 창세기 1:1]",
+      "lang": "zh-Hans",
+      "old": "例：[NKJV 창세기 1:1]",
+      "new": "例：[官话和合译本（上帝版·简体） 创世记 1:1]",
+      "source": "copyfmt1: 번들 CUV1919S displayName + BookNameTable lang.zh-Hans fullNames[0]"
+    },
+    {
+      "key": "예: [NKJV][창세기 1:1]",
+      "lang": "zh-Hans",
+      "old": "例：[NKJV][창세기 1:1]",
+      "new": "例：[官话和合译本（上帝版·简体）][创世记 1:1]",
+      "source": "copyfmt1: 번들 CUV1919S displayName + BookNameTable lang.zh-Hans fullNames[0]"
+    },
+    {
+      "key": "성경 이름 약어 사용 (창세기 → 창)",
+      "lang": "zh-Hans",
+      "old": "使用书卷名缩写 (창세기 → 창)",
+      "new": "使用书卷名缩写 (创世记 → 创)",
+      "source": "copyfmt1: BookNameTable lang.zh-Hans fullNames[0]/shortNames[0]"
+    },
+    {
+      "key": "[창세기 1:1]",
+      "lang": "zh-Hant",
+      "old": "[창세기 1:1]",
+      "new": "[創世記 1:1]",
+      "source": "copyfmt1: BookNameTable lang.zh-Hant fullNames[0]"
+    },
+    {
+      "key": "(창세기 1:1)",
+      "lang": "zh-Hant",
+      "old": "(창세기 1:1)",
+      "new": "(創世記 1:1)",
+      "source": "copyfmt1: BookNameTable lang.zh-Hant fullNames[0]"
+    },
+    {
+      "key": "예: [NKJV 창세기 1:1]",
+      "lang": "zh-Hant",
+      "old": "例：[NKJV 창세기 1:1]",
+      "new": "例：[官話和合譯本（上帝版） 創世記 1:1]",
+      "source": "copyfmt1: 번들 CUV1919 displayName + BookNameTable lang.zh-Hant fullNames[0]"
+    },
+    {
+      "key": "예: [NKJV][창세기 1:1]",
+      "lang": "zh-Hant",
+      "old": "例：[NKJV][창세기 1:1]",
+      "new": "例：[官話和合譯本（上帝版）][創世記 1:1]",
+      "source": "copyfmt1: 번들 CUV1919 displayName + BookNameTable lang.zh-Hant fullNames[0]"
+    },
+    {
+      "key": "성경 이름 약어 사용 (창세기 → 창)",
+      "lang": "zh-Hant",
+      "old": "使用書卷名縮寫 (창세기 → 창)",
+      "new": "使用書卷名縮寫 (創世記 → 創)",
+      "source": "copyfmt1: BookNameTable lang.zh-Hant fullNames[0]/shortNames[0]"
+    },
+    {
+      "key": "인식하지 못한 항목: %@",
+      "lang": "zh-Hant",
+      "old": "無法識別的專案：%@",
+      "new": "無法識別的項目：%@",
+      "source": "copyfmt1: 사용자 결정 專案(프로젝트) → 項目"
+    }
+  ]
+}

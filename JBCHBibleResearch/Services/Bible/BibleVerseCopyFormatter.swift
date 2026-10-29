@@ -8,8 +8,12 @@
 //     `copyTranslationLabelPosition`이 번역본 이름표 위치를 정하고, 복사에 포함되는 번역본이 1개뿐이면 이름표를 붙이지 않는다.
 //  2. 절 번호 스타일은 "(1) / [1] / 1)" 세 가지다.
 //
-//  ⚠️ 책 이름(약어/전체)은 항상 앱 기본 한글 이름(`Book.nameKo`/`Book.abbreviation`)을 쓴다 —
-//  번역본별 언어의 책이름표(`BookNameTableProvider`)는 따르지 않는다. 필요하면 번역본 언어를 따라가도록 확장할 수 있다.
+//  [2026-10-29 copyfmt1] 책 이름은 기본으로 앱 언어 이름표를 따른다(`Book.displayName`, 약어 설정이면 `Book.displayShortName`,
+//  AppLanguage.swift). 한국어 앱은 두 값이 `nameKo` / `abbreviation.first ?? nameKo`라 이전 출력과 같다. 약칭이 없는
+//  언어(th·vi·fil)는 약어 설정을 켜도 전체 이름이 나온다. 번역본별 언어의 책이름표(`BookNameTableProvider`)는 따르지 않는다.
+//  [2026-10-29 refext1] 말씀 요약 삽입(`BibleReadingViewModel.formattedBaseTranslationText`)은 `.appLanguageFullName`을 쓴다 —
+//  `BibleReferenceExtractor`가 앱 언어 이름표 이름도 인식하게 되었고, 약칭 대신 전체 이름을 넣어 언어마다 다른 책을 가리키는
+//  약칭("Jn")이나 앱 언어에서만 인식하는 약칭("Ex", "Is")이 저장 본문에 생기지 않게 한다. 지금 `.korean`을 넘기는 호출부는 없다.
 //
 
 import Foundation
@@ -29,6 +33,17 @@ enum BibleVerseCopyFormatter {
         }
     }
 
+    /// 참조에 쓸 책 이름의 출처.
+    enum BookNameSource {
+        /// 앱 언어 이름표(`Book.displayName` / `Book.displayShortName`). 클립보드 복사·설정 미리보기.
+        case appLanguage
+        /// 한글 기본 이름(`Book.nameKo` / `Book.abbreviation.first ?? nameKo`). 2026-10-29 refext1부터 호출부 없음.
+        case korean
+        /// [2026-10-29 refext1] 말씀 요약 삽입용. 한국어가 아닌 앱은 약어 설정과 관계없이 `Book.displayName`(전체 이름).
+        /// 한국어 앱은 이전과 같이 약어 설정을 따른다(`nameKo` / `abbreviation.first ?? nameKo` — 한국어 약칭은 언어 간 충돌이 없다).
+        case appLanguageFullName
+    }
+
     /// 선택된 절들을 환경설정(`UserSettingsStore`)의 복사 형식대로 하나의
     /// 문자열로 합친다. 선택이 비었거나 번역본이 하나도 없으면 nil.
     static func format(
@@ -36,6 +51,7 @@ enum BibleVerseCopyFormatter {
         chapter: Int,
         selectedVerses: Set<Int>,
         translations: [TranslationSnapshot],
+        bookNames: BookNameSource = .appLanguage,
         settings settingsOverride: UserSettingsStore? = nil
     ) -> String? {
         // 기본 인자 표현식(`= .shared`)은 @MainActor 함수여도 비격리 컨텍스트에서 평가되어 Swift 6에서
@@ -44,9 +60,23 @@ enum BibleVerseCopyFormatter {
         let settings = settingsOverride ?? .shared
         guard !selectedVerses.isEmpty, !translations.isEmpty else { return nil }
         let sortedVerseNumbers = selectedVerses.sorted()
-        let bookName = settings.copyUseAbbreviatedBookName
-            ? (book.abbreviation.first ?? book.nameKo)
-            : book.nameKo
+        let bookName: String
+        switch bookNames {
+        case .appLanguage:
+            bookName = settings.copyUseAbbreviatedBookName ? book.displayShortName : book.displayName
+        case .korean:
+            bookName = settings.copyUseAbbreviatedBookName
+                ? (book.abbreviation.first ?? book.nameKo)
+                : book.nameKo
+        case .appLanguageFullName:
+            if AppLanguage.isKorean {
+                bookName = settings.copyUseAbbreviatedBookName
+                    ? (book.abbreviation.first ?? book.nameKo)
+                    : book.nameKo
+            } else {
+                bookName = book.displayName
+            }
+        }
         let bracket = settings.copyReferenceBracketStyle
         let rangeDescription = formatVerseRange(selectedVerses)
 

@@ -1,0 +1,122 @@
+--- a/JBCHBibleResearch/Views/Sermon/SermonParagraphEditor.swift	2026-10-29 16:26:01.205772403 +0900
++++ b/JBCHBibleResearch/Views/Sermon/SermonParagraphEditor.swift	2026-10-29 16:29:10.638832974 +0900
+@@ -235,24 +235,67 @@
+     /// `previousSnapshot`과 현재 글자의 실제 폰트/색이 다르면 수동 지정으로 보고 유지하고,
+     /// 같거나 스냅샷이 없으면 프리셋을 새로 적용한다(굵게/기울임은 보존). 정렬은 프리셋이
+     /// 값을 지정하지 않으므로(`.natural`) natural이 아니면 수동 지정으로 본다.
++    ///
++    /// `dropsStyleBold`(스타일 pill·F1~F6처럼 사용자가 스타일을 "바꿀" 때만 true): 글자의 굵게 비트가 이전 문단 스타일의
++    /// 프리셋 글꼴에서 온 것이면(이전 프리셋 글꼴 자체가 굵음) 새 스타일로 넘기지 않는다. 이전 프리셋이 굵지 않은데 굵은 글자는
++    /// 사용자가 직접 넣은 굵게(굵게 버튼·강조1)이므로 지금처럼 보존한다. 불러오기(`apply`)는 RTF에 문단 스타일 attribute가
++    /// 남지 않아 이전 스타일을 알 수 없으므로 false로 두어 예전 동작(굵게 보존)을 그대로 따른다.
+     static func applyStyle(
+         _ style: SermonParagraphStyle, to paragraphRange: NSRange,
+         in textStorage: NSTextStorage, settings: UserSettingsStore,
+-        previousSnapshot: [SermonParagraphStyle: StyleSnapshot] = [:]
++        previousSnapshot: [SermonParagraphStyle: StyleSnapshot] = [:],
++        dropsStyleBold: Bool = false
+     ) {
++        // 이전 문단 스타일은 아래에서 attribute를 덮어쓰기 전에 읽는다. 여러 문단을 한 번에 바꾸면 문단마다 이전 스타일이
++        // 다를 수 있어 스타일 attribute 구간별로 나눈다. attribute가 없는(또는 알 수 없는) 구간은 `export`·`currentParagraphStyle`과
++        // 같은 규칙으로 그 글자가 속한 문단 첫 글자의 스타일을 쓰고, 그것도 없을 때만 본문으로 본다(문단마다 따로 판정).
++        var fontPasses: [(range: NSRange, dropBold: Bool)] = [(range: paragraphRange, dropBold: false)]
++        if dropsStyleBold {
++            var presetIsBold: [SermonParagraphStyle: Bool] = [:]
++            func addPass(_ range: NSRange, previousStyle: SermonParagraphStyle) {
++                let isBold = presetIsBold[previousStyle] ?? SermonEmphasisEditor.fontIsBold(settings.sermonPlatformFont(for: previousStyle))
++                presetIsBold[previousStyle] = isBold
++                fontPasses.append((range: range, dropBold: isBold))
++            }
++            fontPasses = []
++            let text = textStorage.string as NSString
++            textStorage.enumerateAttribute(.sermonParagraphStyle, in: paragraphRange, options: []) { value, subrange, _ in
++                if let style = (value as? String).flatMap(SermonParagraphStyle.init(rawValue:)) {
++                    addPass(subrange, previousStyle: style)
++                    return
++                }
++                // attribute 없는 구간이 여러 문단에 걸칠 수 있어 문단 단위로 나눈다.
++                var cursor = subrange.location
++                while cursor < NSMaxRange(subrange) {
++                    let paragraph = text.paragraphRange(for: NSRange(location: cursor, length: 0))
++                    let piece = NSIntersectionRange(subrange, paragraph)
++                    guard piece.length > 0 else { break }
++                    let firstRaw = paragraph.location < textStorage.length
++                        ? textStorage.attribute(.sermonParagraphStyle, at: paragraph.location, effectiveRange: nil) as? String
++                        : nil
++                    addPass(piece, previousStyle: firstRaw.flatMap(SermonParagraphStyle.init(rawValue:)) ?? .body)
++                    cursor = NSMaxRange(piece)
++                }
++            }
++        }
++
+         textStorage.addAttribute(.sermonParagraphStyle, value: style.rawValue, range: paragraphRange)
+         let baseFont = settings.sermonPlatformFont(for: style)
+         let baseColor = settings.sermonPlatformFontColor(for: style)
+         let previous = previousSnapshot[style]
+         let previousColor = previous.flatMap { Color(hex: $0.colorHex) }.map(PlatformColor.init)
+ 
+-        textStorage.enumerateAttribute(.font, in: paragraphRange, options: []) { value, subrange, _ in
+-            let originalFont = (value as? PlatformFont) ?? baseFont
+-            guard !isManualFont(originalFont, previous: previous) else { return }
+-            // 인용은 예전엔 "항상 이탤릭"이었다(한글 가짜 기울임). 2026-10-03 스타일 재설계로 기울임을 없앴으므로
+-            // 저장돼 있던 이탤릭 비트도 떼고 다시 입힌다. 굵게는 보존한다.
+-            let resolvedFont = fontPreservingBoldItalic(from: originalFont, applying: baseFont, dropItalic: style == .citation)
+-            textStorage.addAttribute(.font, value: resolvedFont, range: subrange)
++        for pass in fontPasses {
++            textStorage.enumerateAttribute(.font, in: pass.range, options: []) { value, subrange, _ in
++                let originalFont = (value as? PlatformFont) ?? baseFont
++                guard !isManualFont(originalFont, previous: previous) else { return }
++                // 인용은 예전엔 "항상 이탤릭"이었다(한글 가짜 기울임). 2026-10-03 스타일 재설계로 기울임을 없앴으므로
++                // 저장돼 있던 이탤릭 비트도 떼고 다시 입힌다. 굵게는 보존한다(이전 스타일 프리셋에서 온 굵게는 `dropBold`로 뗀다).
++                let resolvedFont = fontPreservingBoldItalic(
++                    from: originalFont, applying: baseFont, dropItalic: style == .citation, dropBold: pass.dropBold
++                )
++                textStorage.addAttribute(.font, value: resolvedFont, range: subrange)
++            }
+         }
+ 
+         textStorage.enumerateAttribute(.foregroundColor, in: paragraphRange, options: []) { value, subrange, _ in
+@@ -402,11 +445,15 @@
+     /// `originalFont`의 굵게/기울임 비트만 골라 `applying`(현재 설정의 패밀리+크기)에 다시 입힌다.
+     /// 분류 비트(세리프 등)까지 복사하면 새 패밀리가 그 조합을 지원하지 않아
+     /// `withSymbolicTraits`가 실패할 수 있어 두 비트만 옮기며, 실패하면 `baseFont`를 반환한다.
+-    /// `dropItalic`이 true면 기울임 비트는 옮기지 않는다(인용 스타일).
+-    static func fontPreservingBoldItalic(from originalFont: PlatformFont, applying baseFont: PlatformFont, dropItalic: Bool = false) -> PlatformFont {
++    /// `dropItalic`이 true면 기울임 비트는 옮기지 않는다(인용 스타일). `dropBold`가 true면 굵게 비트를 옮기지 않는다
++    /// (이전 문단 스타일 프리셋에서 온 굵게 — `applyStyle(dropsStyleBold:)`). 새 프리셋 글꼴 자체의 굵기는 그대로다.
++    static func fontPreservingBoldItalic(
++        from originalFont: PlatformFont, applying baseFont: PlatformFont, dropItalic: Bool = false, dropBold: Bool = false
++    ) -> PlatformFont {
+         #if os(iOS)
+         var mask: UIFontDescriptor.SymbolicTraits = [.traitBold, .traitItalic]
+         if dropItalic { mask.remove(.traitItalic) }
++        if dropBold { mask.remove(.traitBold) }
+         let originalBoldItalic = originalFont.fontDescriptor.symbolicTraits.intersection(mask)
+         guard !originalBoldItalic.isEmpty else { return baseFont }
+         var newTraits = baseFont.fontDescriptor.symbolicTraits
+@@ -416,6 +463,7 @@
+         #elseif os(macOS)
+         var mask: NSFontDescriptor.SymbolicTraits = [.bold, .italic]
+         if dropItalic { mask.remove(.italic) }
++        if dropBold { mask.remove(.bold) }
+         let originalBoldItalic = originalFont.fontDescriptor.symbolicTraits.intersection(mask)
+         guard !originalBoldItalic.isEmpty else { return baseFont }
+         var newTraits = baseFont.fontDescriptor.symbolicTraits
+@@ -528,7 +576,7 @@
+         }
+         let paragraphRange = fullText.paragraphRange(for: textView.selectedRange)
+         storage.beginEditing()
+-        SermonParagraphStyleCodec.applyStyle(style, to: paragraphRange, in: storage, settings: settings)
++        SermonParagraphStyleCodec.applyStyle(style, to: paragraphRange, in: storage, settings: settings, dropsStyleBold: true)
+         storage.endEditing()
+         applyTypingAttributes(for: style, settings: settings, to: textView)
+     }
+@@ -988,7 +1036,7 @@
+         }
+         let paragraphRange = fullText.paragraphRange(for: textView.selectedRange())
+         storage.beginEditing()
+-        SermonParagraphStyleCodec.applyStyle(style, to: paragraphRange, in: storage, settings: settings)
++        SermonParagraphStyleCodec.applyStyle(style, to: paragraphRange, in: storage, settings: settings, dropsStyleBold: true)
+         storage.endEditing()
+         applyTypingAttributes(for: style, settings: settings, to: textView)
+     }

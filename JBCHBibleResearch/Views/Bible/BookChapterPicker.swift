@@ -405,21 +405,83 @@ struct BookChapterPicker: View {
 }
 
 
-/// 책/장 선택 팝오버 크기. 맥·아이패드는 최소 360×460을 보장한다(3열 이상 격자와 장 그리드가 잘리지 않도록).
+/// 책/장 선택 팝오버 크기. 맥은 최소 360×460을 보장한다(3열 이상 격자와 장 그리드가 잘리지 않도록). 아이패드는 최소 폭 360만 여기서 걸고,
+/// 높이는 책 목록/장 그리드 쪽(`PickerContentHeight`)이 한 번만 정한다.
 /// 아이폰은 팝오버가 화면 크기의 시트로 바뀌므로 고정 최소 높이를 주지 않는다 — 가로 모드(화면 높이 약 390pt)에서
 /// 최소 높이 460이 시트보다 커져 위쪽이 잘리고 스크롤도 안 되던 문제(2026-10-02)를 막기 위해서다.
+///
+/// [2026-10-29 bookgrid1] 아이패드에서 `frame(minHeight:)`를 뺐다. SwiftUI `frame(minWidth:idealWidth:maxWidth:minHeight:idealHeight:maxHeight:alignment:)`
+/// 문서의 크기 규칙상 최소값은 부모(팝오버)가 그보다 작은 높이를 줘도 뷰를 최소값으로 키운다. 그래서 팝오버가 요청보다 작게 잡히면 내용이
+/// 위아래로 넘쳐 머리(`PickerHeaderBar`, [‹ 책 목록])가 잘렸다. 대신 `IdealHeightFloorLayout`이 이상 크기를 잴 때(제안 높이 nil)만
+/// max(자식의 이상 높이, 최소값)을 보고한다 — 이전 `minHeight`가 nil 제안에서 내던 값과 같으므로 공간이 넉넉하면 팝오버 요청 높이는 이전과 같다.
+/// 구체적 높이를 받으면 자식이 그 높이를 그대로 따르므로 머리는 남고 아래 `ScrollView`만 줄어든다.
+/// (`frame(idealHeight: X)`는 nil 제안에서 자식의 이상 높이와 관계없이 X를 내므로 이전 값을 재현하지 못해 쓰지 않는다.)
+/// 맥과 아이폰은 이전 그대로다.
 private struct PickerPopoverSizing: ViewModifier {
+    /// 아이패드 팝오버 높이의 하한(이상 크기 측정 때만) — 이전 최소 높이(460)와 같은 값.
+    static let padMinimumIdealHeight: CGFloat = 460
+
     @ViewBuilder
     func body(content: Content) -> some View {
         #if os(iOS)
         if UIDevice.current.userInterfaceIdiom == .phone {
             content
         } else {
-            content.frame(minWidth: 360, minHeight: 460)
+            content.frame(minWidth: 360)
         }
         #else
         content.frame(minWidth: 360, minHeight: 460)
         #endif
+    }
+}
+
+/// [2026-10-29 bookgrid1] 책 목록/장 그리드의 높이. 아이패드(아이폰이 아닌 iOS)는 `padMinimumIdealHeight`를 이상 크기 측정 때의 하한으로만 쓰고
+/// (`IdealHeightFloorLayout`, `PickerPopoverSizing` 주석), 맥·아이폰은 `otherMinHeight`를 이전처럼 최소 높이로 건다(nil이면 아무것도 걸지 않는다 —
+/// 이전에 높이 지정이 없던 책 목록).
+private struct PickerContentHeight: ViewModifier {
+    let padMinimumIdealHeight: CGFloat
+    let otherMinHeight: CGFloat?
+
+    @ViewBuilder
+    func body(content: Content) -> some View {
+        #if os(iOS)
+        if UIDevice.current.userInterfaceIdiom != .phone {
+            IdealHeightFloorLayout(minimumIdealHeight: padMinimumIdealHeight) {
+                content
+            }
+        } else {
+            otherPlatformBody(content)
+        }
+        #else
+        otherPlatformBody(content)
+        #endif
+    }
+
+    @ViewBuilder
+    private func otherPlatformBody(_ content: Content) -> some View {
+        if let otherMinHeight {
+            content.frame(minHeight: otherMinHeight)
+        } else {
+            content
+        }
+    }
+}
+
+/// [2026-10-29 bookgrid1] 자식 하나를 감싸, 제안 높이가 nil일 때(이상 크기 측정)만 보고 높이를 max(자식 높이, `minimumIdealHeight`)로 올린다.
+/// 구체적 높이 제안에는 자식이 낸 크기를 그대로 보고하고, 자식에게는 받은 영역 크기를 그대로 제안한다(최소값으로 키우지 않는다).
+private struct IdealHeightFloorLayout: Layout {
+    let minimumIdealHeight: CGFloat
+
+    func sizeThatFits(proposal: ProposedViewSize, subviews: Subviews, cache: inout ()) -> CGSize {
+        guard let child = subviews.first else { return .zero }
+        let size = child.sizeThatFits(proposal)
+        guard proposal.height == nil else { return size }
+        return CGSize(width: size.width, height: max(size.height, minimumIdealHeight))
+    }
+
+    func placeSubviews(in bounds: CGRect, proposal: ProposedViewSize, subviews: Subviews, cache: inout ()) {
+        // `frame`의 기본 정렬(.center)과 같게 가운데에 둔다.
+        subviews.first?.place(at: CGPoint(x: bounds.midX, y: bounds.midY), anchor: .center, proposal: ProposedViewSize(bounds.size))
     }
 }
 
@@ -547,8 +609,9 @@ private struct BookGridPicker: View {
     }
 
     /// 검색 중에도 구약/신약 구분을 유지한다. 빈 섹션은 `testamentSection`이 숨긴다.
+    /// [2026-10-29 bookgrid1] 한국어가 아닌 앱은 앱 언어 책 이름/약칭도 찾는다(`Book.matchesGridSearch`). 한국어 검색(초성 포함)은 이전과 같다.
     private func matches(_ book: Book) -> Bool {
-        searchText.isEmpty || book.matches(query: searchText)
+        searchText.isEmpty || book.matchesGridSearch(query: searchText)
     }
 
     private var oldTestamentBooks: [Book] {
@@ -613,6 +676,8 @@ private struct BookGridPicker: View {
                     }
                 }
                 }
+                // 아이패드만 이상 높이 하한 460(이전 `PickerPopoverSizing`의 최소 높이를 이 단계에서 재현). 맥·아이폰은 지정 없음(이전 그대로).
+                .modifier(PickerContentHeight(padMinimumIdealHeight: PickerPopoverSizing.padMinimumIdealHeight, otherMinHeight: nil))
             }
         }
         // 테마가 없으면 시스템 기본과 동일하게 동작하도록 폴백한다.
@@ -713,7 +778,7 @@ private struct ChapterGrid: View {
     private static let columns = [GridItem(.adaptive(minimum: 52, maximum: 64), spacing: 10)]
 
     /// 팝오버 높이 추정치. 장이 많은 책(창세기 50장 등)은 호출부의 고정 minHeight 460으로 부족해
-    /// 5열 기준 필요 높이를 계산해 `.frame(minHeight:)`로 얹는다(상한 560, 그 이상은 스크롤). 460과는 큰 쪽이 적용된다.
+    /// 5열 기준 필요 높이를 계산해 얹는다 — 맥은 `.frame(minHeight:)`, 아이패드는 이상 크기 측정 때의 하한(`PickerContentHeight`)(상한 560, 그 이상은 스크롤). 460과는 큰 쪽이 적용된다.
     private var estimatedGridHeight: CGFloat {
         // 아이폰은 시트 높이를 따르므로(가로 모드에서 화면보다 커지면 잘림) 최소 높이를 주지 않는다. 장이 많으면 `ScrollView`가 맡는다.
         #if os(iOS)
@@ -755,7 +820,13 @@ private struct ChapterGrid: View {
                 }
             }
         }
-        .frame(minHeight: estimatedGridHeight)
+        // [2026-10-29 bookgrid1] 아이패드는 max(추정치, 460)을 이상 크기 측정 때의 하한으로만 쓴다 — 이전 유효 요청값 max(자식 이상 높이, 추정치, 460)과 같고,
+        // 가용 높이가 모자라면 팝오버가 받은 높이를 따라 머리(`PickerHeaderBar`)는 남고 아래 `ScrollView`만 줄어든다(`PickerPopoverSizing` 주석).
+        // 맥·아이폰은 이전처럼 최소 높이(아이폰은 0).
+        .modifier(PickerContentHeight(
+            padMinimumIdealHeight: max(estimatedGridHeight, PickerPopoverSizing.padMinimumIdealHeight),
+            otherMinHeight: estimatedGridHeight
+        ))
     }
 
     /// 고정 크기 라운드 사각형 버튼. 맥은 강조색 12% 배경 + 35% 테두리(기존 그대로),

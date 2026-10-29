@@ -1289,7 +1289,8 @@ struct DocumentViewerView: View {
     private func verseSearchLiteralTerms(for query: String) -> [String] {
         let trimmed = query.trimmingCharacters(in: .whitespacesAndNewlines)
         guard !trimmed.isEmpty else { return [] }
-        let queryMatches = BibleReferenceExtractor.extract(from: trimmed)
+        // [2026-10-29 refext1] 검색창 입력이라 앱 언어 책 이름의 대소문자를 가리지 않는다.
+        let queryMatches = BibleReferenceExtractor.extract(from: trimmed, nameMatching: .searchQuery)
         guard !queryMatches.isEmpty else { return [] }
 
         let docId = document.id.uuidString

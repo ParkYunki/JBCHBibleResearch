@@ -730,7 +730,8 @@ final class SearchViewModel {
         // "더보기 확인창" 조건 판단(`effectiveMatchedWordCount()`)에 쓰도록 이번 검색
         // 단어를 저장한다.
         lastSearchWords = words
-        let queryMatches = BibleReferenceExtractor.extract(from: query)
+        // [2026-10-29 refext1] 검색창 입력이라 앱 언어 책 이름의 대소문자를 가리지 않는다("john 3:16").
+        let queryMatches = BibleReferenceExtractor.extract(from: query, nameMatching: .searchQuery)
 
         // 성경구절을 먼저 채우고, 각 단계 직후 `await Task.yield()`로 실행을 양보해 SwiftUI가
         // 그 시점까지의 결과로 다시 그리게 한다(성경 → 개요 → 메모/말씀노트 → 연구문서 순으로 이어서 나타남).

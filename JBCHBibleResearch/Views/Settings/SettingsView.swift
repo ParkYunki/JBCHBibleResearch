@@ -1067,22 +1067,43 @@ private struct BibleCopyFormatSettingsTab: View {
     }
 
     /// 창세기 1:1-2, 번역본 1~2개로 실제 서식 함수를 돌려 만드는 미리보기 — 실제 "복사" 결과와 항상 같다.
+    /// 책 이름은 포매터 기본값(`.appLanguage`)을 그대로 타므로 S1 "복사"와 같은 이름이 나온다.
     private var previewText: String {
         let sampleBook = BooksProvider.shared.books.first(where: { $0.bookId == 1 })
             ?? Book(bookId: 1, testament: .old, orderIndex: 1, nameKo: "창세기", nameOriginal: "Genesis", abbreviation: ["창"], chapterCount: 50)
-        let verses = [
-            BibleVerse(uid: 1, versionCode: nil, bookId: 1, chapter: 1, verse: 1, content: "태초에 하나님이 천지를 창조하시니라", paragraph: nil),
-            BibleVerse(uid: 2, versionCode: nil, bookId: 1, chapter: 1, verse: 2, content: "땅이 혼돈하고 공허하며 흑암이 깊음 위에 있고", paragraph: nil),
-        ]
+        let verses = Self.previewSampleVerses
         var translations = [BibleVerseCopyFormatter.TranslationSnapshot(displayName: String(localized: "번역본 A"), verses: verses)]
         if registeredTranslationCount > 1 {
             translations.append(BibleVerseCopyFormatter.TranslationSnapshot(displayName: String(localized: "번역본 B"), verses: verses))
         }
         return BibleVerseCopyFormatter.format(
-            book: sampleBook, chapter: 1, selectedVerses: [1, 2],
+            book: sampleBook, chapter: 1, selectedVerses: Set(verses.map(\.verse)),
             translations: translations, settings: settings
         ) ?? ""
     }
+
+    /// [2026-10-29 copyfmt1] 미리보기 본문(창 1:1-2). 앱 언어는 프로세스 수명 동안 바뀌지 않으므로(`AppLanguage.code`) 한 번만 만든다.
+    /// - 한국어: 기존 문구 그대로.
+    /// - 그 밖: 앱 언어 기본 번들 성경(`BundledTranslationCatalog.current`)의 창 1:1-2 — 성경 조회 화면과 같은 본문이다
+    ///   (인물·지명 상세와 같은 `resolvedCurrentLanguageBundledDatabaseURL()` 경로).
+    /// - 번들을 열지 못하면 번역된 창 1:1 키 하나만 쓴다(한국어 문구가 섞이지 않게). 이때 미리보기는 1절짜리가 된다.
+    private static let previewSampleVerses: [BibleVerse] = {
+        if AppLanguage.isKorean {
+            return [
+                BibleVerse(uid: 1, versionCode: nil, bookId: 1, chapter: 1, verse: 1, content: "태초에 하나님이 천지를 창조하시니라", paragraph: nil),
+                BibleVerse(uid: 2, versionCode: nil, bookId: 1, chapter: 1, verse: 2, content: "땅이 혼돈하고 공허하며 흑암이 깊음 위에 있고", paragraph: nil),
+            ]
+        }
+        if let store = try? BibleReferenceStore(filePath: TranslationBootstrap.resolvedCurrentLanguageBundledDatabaseURL().path),
+           let chapterVerses = try? store.verses(bookId: 1, chapter: 1) {
+            let sample = chapterVerses.filter { $0.verse == 1 || $0.verse == 2 }
+            if sample.count == 2 { return sample }
+        }
+        return [
+            BibleVerse(uid: 1, versionCode: nil, bookId: 1, chapter: 1, verse: 1,
+                       content: String(localized: "태초에 하나님이 천지를 창조하시니라"), paragraph: nil),
+        ]
+    }()
 }
 
 // MARK: - 단축키(선택 — 스펙 자체가 "필수 아님")
