@@ -105,8 +105,9 @@ struct SelectableVerseTextView: UIViewRepresentable {
     let text: String
     let font: PlatformFont
     let textColor: PlatformColor
-    /// `VerseAnnotationRenderer.lineRanges(...)`가 줄을 나누는 폭. 표시 모드에 넘기는
-    /// `effectiveTextWidth`와 같은 값이어야 두 모드의 줄바꿈이 어긋나지 않는다.
+    /// `VerseAnnotationRenderer.lineRanges(...)`가 줄을 나누는 폭이자 이 텍스트뷰의 프레임 폭. 표시 모드에 넘기는
+    /// `VerseZoomView.lineBreakWidth`(한글 절은 "가" 23자 폭, 그 밖은 "가" × 목표 글자 수를 픽셀 격자로 내림한 폭)와
+    /// 같은 값이어야 두 모드의 줄바꿈이 어긋나지 않는다.
     let containerWidth: CGFloat
     /// 세로/가로 모드별 줄당 글자수. 표시 모드(`AnnotatedVerseFlowView`)와 같은 값이어야 한다.
     let targetCharsPerLine: Int

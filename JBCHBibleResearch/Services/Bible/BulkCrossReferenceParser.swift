@@ -10,6 +10,8 @@
 //
 //  ⚠️ `BibleReferenceExtractor`(자유 문장 스캔용 — 매치마다 책+장+절이 자기 완결적이어야
 //  오탐이 적음)와 목적이 달라 별도 파서로 뒀다. 책 이름 인식(`BooksProvider.matchBookPrefix`)만 공유한다.
+//  [2026-10-29 booklabel1] 그 함수가 한국어가 아닌 앱에서 앱 언어 이름("John 3:16", "1 Sam 3:1")도 인식하게 되어
+//  이 입력란도 그런 조각을 받는다. 저장되는 `label`은 언어와 무관하게 계속 한국어 약칭(`canonicalAbbreviation`)이다.
 //
 
 import Foundation

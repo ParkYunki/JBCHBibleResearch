@@ -46,6 +46,8 @@ struct VerseZoomView: View {
     @Binding var autoPresentPersonalNoteEditor: Bool
 
     @Environment(\.dismiss) private var dismiss
+    /// `lineBreakWidth`를 픽셀 격자로 내림하는 데 쓴다.
+    @Environment(\.displayScale) private var displayScale
     private var settings: UserSettingsStore { .shared }
     @State private var selectedColumnID: UUID
     @State private var selectedRange = NSRange(location: 0, length: 0)
@@ -132,14 +134,39 @@ struct VerseZoomView: View {
         return width.isFinite ? max(width, 0) : 0
     }
 
-    private var effectiveTextWidth: CGFloat {
+    /// 본문 글꼴로 잰 한글 "가" 한 글자 폭 — `effectiveTextWidth`와 `lineBreakWidth`의 공통 단위.
+    private var hangulCharWidth: CGFloat {
         let sample = "가" as NSString
-        let charWidth = sample.size(withAttributes: [.font: bibleFont]).width
+        return sample.size(withAttributes: [.font: bibleFont]).width
+    }
+
+    private var effectiveTextWidth: CGFloat {
+        let charWidth = hangulCharWidth
         // 성경 본문 줄바꿈 목표 폭 — "가" 23자 폭으로 제한해 읽기 좋은 줄 길이를 유지한다. 한글 절은 글자 수 기준이라 폭과 무관하고,
-        // 라틴/혼합 절은 `VerseAnnotationRenderer.measuredLineRanges`가 이 폭으로 TextKit 측정한다(선택 모드도 같은 폭).
+        // 이 폭은 한글 절의 선택 모드 텍스트뷰 폭으로 쓰인다(한글 이외 절은 `lineBreakWidth` 참고).
         // 23은 `targetCharsPerLine`과 연동되지 않는 독립 고정값이다.
         let idealWidth = charWidth * 23
         return idealWidth > 0 ? min(availableContentWidth, idealWidth) : availableContentWidth
+    }
+
+    /// [2026-10-29] 표시 모드 줄바꿈과 선택 모드 텍스트뷰가 함께 쓰는 폭 — 두 모드는 반드시 같은 값을 받아야 한다.
+    /// - 한글 절(`VerseAnnotationRenderer.usesKoreanLineBreaking`): 예전 그대로 `effectiveTextWidth`("가" 23자 폭).
+    ///   줄은 글자 수(`targetCharsPerLine`)로 나뉘므로 이 폭은 선택 모드 텍스트뷰 폭에만 영향을 준다.
+    /// - 그 밖의 절(라틴·CJK·태국어·키릴 등, TextKit 실측): "가" × `targetCharsPerLine` 폭. 한글 절과 같은 "글자 수 예산"을
+    ///   한글 글자 폭 단위로 환산한 값이다. 기본 글꼴(Paperlogy, "가" = 0.88em) 기준 KRV 줄 폭은 중앙값이 "가" 16자(세로 18자 목표)·
+    ///   17.5자(20자 목표), 90백분위가 18자·19.25자라, 이 폭으로 채운 다른 언어 줄이 한글 줄과 비슷한 오른쪽 여백을 남긴다.
+    ///   예전 23자 폭은 한글 줄보다 약 30% 넓어 여백이 거의 남지 않았다.
+    private var lineBreakWidth: CGFloat {
+        guard !VerseAnnotationRenderer.usesKoreanLineBreaking(verseText) else { return effectiveTextWidth }
+        let targetWidth = hangulCharWidth * CGFloat(targetCharsPerLine)
+        // `targetWidth`가 NaN이면 `> 0`이 거짓이라 예전 폭으로 물러난다.
+        guard targetWidth > 0 else { return effectiveTextWidth }
+        let width = min(availableContentWidth, targetWidth)
+        // 픽셀 격자로 내림한다(`floor(w * scale) / scale`). 측정용 TextKit 컨테이너와 선택 모드 텍스트뷰 프레임이
+        // 소수점 폭을 서로 다르게 반올림해 줄 끝 글자 하나가 어긋나는 것을 막는다. 두 모드는 이 값을 그대로 함께 받는다.
+        // 한글 경로(`effectiveTextWidth`)는 바꾸지 않는다.
+        guard displayScale > 0, displayScale.isFinite else { return width }
+        return floor(width * displayScale) / displayScale
     }
 
     /// 세로/가로 모드별 줄바꿈 글자 수 구분용 판정 — 아이폰만 대상(`userInterfaceIdiom == .phone`).
@@ -152,7 +179,8 @@ struct VerseZoomView: View {
     }
 
     /// 줄바꿈 목표 글자 수 — 아이폰 세로 18자, 그 외 20자. 그 지점 이후 첫 띄어쓰기에서 줄바꿈하며,
-    /// 알고리즘은 `VerseAnnotationRenderer.koreanLineRanges`(`firstSpaceIndex`)를 재사용한다. 메모 박스 폭 계산(`effectiveTextWidth`)과는 무관.
+    /// 알고리즘은 `VerseAnnotationRenderer.koreanLineRanges`(`firstSpaceIndex`)를 재사용한다(한글 절만 해당).
+    /// 한글 이외 절(TextKit 실측)은 이 값 × "가" 폭이 줄바꿈 폭이 된다(`lineBreakWidth`). 메모 박스 폭·위치(`availableContentWidth`)와는 무관하다.
     private var targetCharsPerLine: Int {
         isPhonePortrait ? 18 : 20
     }
@@ -255,15 +283,15 @@ struct VerseZoomView: View {
                                 // 선택 모드 — 새 구간을 드래그로 고르는 동안만 표시. 표시 모드와 같은 `highlights`/`phraseNotes`를 넘겨
                                 // 어느 표현에 무엇이 붙어 있는지는 보이게 한다(메모 박스/화살표는 그리지 않음).
                                 // `UITextView`/`NSTextView`는 폭 기준 자동 줄바꿈을 하므로 `.frame(width:)`로 좁혀도 잘리지 않는다.
-                                // 표시 모드와 같은 `effectiveTextWidth`를 `containerWidth`로 넘겨야 두 모드의 줄 경계가 일치한다.
+                                // 표시 모드와 같은 `lineBreakWidth`를 `containerWidth`로 넘겨야 두 모드의 줄 경계가 일치한다.
                                 SelectableVerseTextView(
                                     text: verseText, font: bibleFont, textColor: effectiveTextColor,
-                                    containerWidth: effectiveTextWidth, targetCharsPerLine: targetCharsPerLine,
+                                    containerWidth: lineBreakWidth, targetCharsPerLine: targetCharsPerLine,
                                     highlights: highlights, phraseNotes: phraseNotes, crossReferences: crossReferences,
                                     hanjaWords: hanjaWords,
                                     selectedRange: $selectedRange
                                 )
-                                .frame(width: effectiveTextWidth, alignment: .leading)
+                                .frame(width: lineBreakWidth, alignment: .leading)
                             } else {
                                 // 표시 모드(평소) — 순수 SwiftUI 렌더링. 형광펜 취소/메모 수정·삭제는 이 뷰의 `.contextMenu`(길게 누르기/우클릭)로 처리된다.
                                 // ⚠️ `.frame(width:)`를 씌우지 않는다 — `containerWidth`는 줄 나눔의 "목표"일 뿐이고 한글 절은 글자 수 기준이라
@@ -271,7 +299,7 @@ struct VerseZoomView: View {
                                 AnnotatedVerseFlowView(
                                     text: verseText, highlights: highlights, phraseNotes: phraseNotes,
                                     crossReferences: crossReferences, hanjaWords: hanjaWords,
-                                    font: bibleFont, textColor: effectiveTextColor, containerWidth: effectiveTextWidth,
+                                    font: bibleFont, textColor: effectiveTextColor, containerWidth: lineBreakWidth,
                                     availableWidth: availableContentWidth, targetCharsPerLine: targetCharsPerLine,
                                     onRequestRemoveHighlight: { highlight in
                                         viewModel.deleteHighlight(highlight)
@@ -287,7 +315,7 @@ struct VerseZoomView: View {
                             }
                         }
                         .padding()
-                        // 화면이 `effectiveTextWidth`보다 넓으면 남는 공간은 오른쪽에 두고 텍스트 블록은 왼쪽에 붙인다.
+                        // 화면이 `lineBreakWidth`보다 넓으면 남는 공간은 오른쪽에 두고 텍스트 블록은 왼쪽에 붙인다.
                         .frame(maxWidth: .infinity, alignment: .leading)
                         // 도구줄(형광펜·메모·개인 묵상·관주) — 2026-10-07 목업 결정: 말씀구절 → 도구줄 → 한자 뜻풀이 → 관주 칩 순서.
                         // 예전에는 시트 맨 아래에 고정이었으나 구절에서 멀어, 구절 바로 아래로 올려 시트와 함께 스크롤되게 했다(모든 기기).
@@ -1067,11 +1095,14 @@ struct VerseZoomView: View {
                 end = sorted[next]
                 next += 1
             }
-            let abbreviation = BooksProvider.shared.book(id: start.bookId)?.abbreviation.first ?? "?"
+            // [2026-10-29 booklabel1] 표시 전용 칩 라벨(저장·검색 키 아님, `ForEach` id는 offset)이라 앱 언어 약칭을 쓴다.
+            // 한국어는 기존과 같은 "고후1:1"이다(`displayShortReference` = `abbreviation.first ?? nameKo` + 장).
+            let bookAndChapter = BooksProvider.shared.book(id: start.bookId)?.displayShortReference(chapter: start.chapter)
+                ?? "?\(start.chapter)"
             let verses = sorted[index..<next]
             let label = end.verse == start.verse
-                ? "\(abbreviation)\(start.chapter):\(start.verse)"
-                : "\(abbreviation)\(start.chapter):\(start.verse)-\(end.verse)"
+                ? "\(bookAndChapter):\(start.verse)"
+                : "\(bookAndChapter):\(start.verse)-\(end.verse)"
             segments.append((label: label, verses: Array(verses)))
             index = next
         }

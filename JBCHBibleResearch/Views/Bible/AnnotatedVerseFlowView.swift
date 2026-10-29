@@ -75,9 +75,9 @@ struct AnnotatedVerseFlowView: View {
     var hanjaWords: [HanjaWordAnnotation] = []
     let font: PlatformFont
     let textColor: PlatformColor
-    /// 줄바꿈 계산에 쓸 폭 — 호출부(`VerseZoomView`)가 실제 화면 폭(패딩 제외)을 넘긴다.
-    /// `VerseAnnotationRenderer.lineRanges(...)`가 이 폭 기준으로 한글은
-    /// `targetCharsPerLine`자 최근접 띄어쓰기, 라틴/혼합은 TextKit 측정으로 줄을 나눈다.
+    /// 줄바꿈 계산에 쓸 폭 — 호출부(`VerseZoomView.lineBreakWidth`)가 선택 모드와 같은 값을 넘긴다.
+    /// `VerseAnnotationRenderer.lineRanges(...)`는 한글 절(`usesKoreanLineBreaking`)이면 이 폭과 무관하게
+    /// `targetCharsPerLine`자 이후 첫 띄어쓰기에서, 그 밖의 절(라틴·CJK·태국어·키릴 등)은 이 폭으로 TextKit 측정해 줄을 나눈다.
     let containerWidth: CGFloat
     /// 메모 박스가 밀릴 수 있는 최대 거리 계산용 폭(`VerseZoomView` 스크롤 영역 실제 폭, 패딩 제외).
     /// 박스는 좁은 본문 줄 폭(`containerWidth`)에 갇히지 않고 화면 콘텐츠 영역 전체 폭까지

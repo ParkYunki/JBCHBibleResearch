@@ -280,7 +280,9 @@ struct BookChapterPicker: View {
                     }
                     #endif
 
-                if !isFreeTextFocused && !freeText.isEmpty {
+                // [2026-10-29 booklabel1] "장" 라벨은 한국어 앱에서만 붙인다. 다른 언어는 "Gen 1", "创世纪1"처럼 책+숫자만으로
+                // 참조가 되고, 번역 라벨("Ch."/"Cap."/"Гл." 등)은 숫자 뒤에 오면 어순이 어색하며 칸 폭(아래 frame)도 30~56pt 더 든다.
+                if AppLanguage.isKorean && !isFreeTextFocused && !freeText.isEmpty {
                     Text("장")
                         .font(.title3)
                         // TextField와 같은 이유로 테마 글자색 우선, 없으면 `.secondary`.
@@ -294,7 +296,11 @@ struct BookChapterPicker: View {
             // `maxWidth: .infinity`를 쓰면 이 영역이 바깥 `.frame(maxWidth: .infinity)` 안에서 남는 폭을 모두
             // 흡수해 캡슐 전체가 화면 폭만큼 늘어난다. 고정 상한(90)은 최대 6자 안팎의 약어("삼상18", "요3:16")가
             // `.title3`에서도 잘리지 않는 값이다(자간 2pt를 뺐고 좌우 여백도 줄어 이전보다 여유가 있다).
-            .frame(minWidth: 50, maxWidth: 90, minHeight: 44)
+            // [2026-10-29 booklabel1] 한국어가 아닌 앱은 상한 104 — 캡슐 자연 폭(버튼 6×40 + 구분선 6 + 좌우 8 = 254 + 이 칸)이
+            // `BibleReadingView.chapterNavigationControls` 주석의 아이폰 세로 폭 358pt를 넘지 않는 최대값. 영어·스페인어·독일어·
+            // 이탈리아어·일본어 약칭 + 마지막 장("2 Crón 36", "2Thess 3", "Ⅱサム24")이 들어간다. 더 좁은 기기에서는 최소 50까지 줄어든다.
+            // 한국어는 90 그대로(표시 문구도 그대로).
+            .frame(minWidth: 50, maxWidth: AppLanguage.isKorean ? 90 : 104, minHeight: 44)
 
             BibleCapsuleDivider()
 
@@ -326,8 +332,9 @@ struct BookChapterPicker: View {
     /// `compactBarBody` 전용 — 포커스가 없을 때 검색창을 현재 책/장 약어로 채운다. 타이핑 중에는 건드리지 않는다.
     private func syncFreeTextToCurrentPositionIfNeeded() {
         guard !isFreeTextFocused else { return }
-        // "장"은 별도 고정 라벨이 맡으므로 책/장 약어만 넣는다.
-        freeText = "\(selectedBook.abbreviation.first ?? selectedBook.nameKo)\(selectedChapter)"
+        // "장"은 별도 고정 라벨이 맡으므로 책/장 약어만 넣는다. 앱 언어 약칭을 쓴다(한국어는 기존 "창1" 그대로) —
+        // 이 문구는 이동 버튼을 누르면 그대로 `matchBookPrefix`에 들어가므로, 그 함수가 앱 언어 이름표를 인식해야 한다.
+        freeText = selectedBook.displayShortReference(chapter: selectedChapter)
     }
 
     private func submitFreeText() {
@@ -337,7 +344,9 @@ struct BookChapterPicker: View {
             parseErrorMessage = String(localized: "\"\(trimmed)\"에서 책 이름을 찾지 못했습니다.")
             return
         }
-        let remainder = match.remainder.trimmingCharacters(in: .whitespaces)
+        // [booklabel1] 장·절 파싱 직전에 전각 숫자(０-９)와 전각 콜론(：)을 반각으로 바꾼다(일본어·중국어 IME 입력).
+        // 반각만 쓰는 기존 입력은 결과가 같다.
+        let remainder = Self.normalizedFullwidthDigits(match.remainder.trimmingCharacters(in: .whitespaces))
         let digits = remainder.prefix(while: { $0.isNumber })
         let chapter = Int(digits) ?? 1
         // 장 숫자 뒤 나머지에서 절을 인식한다(콜론 "3:16", 한글 어순 "3장 16절" — `BibleReferenceExtractor`와 같은 규칙).
@@ -352,12 +361,28 @@ struct BookChapterPicker: View {
         // 갱신되기 전에도 비어 보이지 않게 이동한 결과의 약어로 즉시 채운다. 표준 모드는 비운다.
         if compactTouchTargets {
             // "장"은 고정 라벨이 보여주므로 붙이지 않는다.
-            freeText = "\(match.book.abbreviation.first ?? match.book.nameKo)\(max(1, chapter))"
+            freeText = match.book.displayShortReference(chapter: max(1, chapter))
         } else {
             freeText = ""
         }
         // 이동에 성공하면 키보드를 내린다. 실패 경로(위 두 `guard`)는 여기 도달하지 않아 포커스가 유지된다.
         isFreeTextFocused = false
+    }
+
+    /// 전각 숫자 ０-９(U+FF10…U+FF19)를 0-9로, 전각 콜론 ：(U+FF1A)를 ":"로 바꾼다. 다른 글자는 그대로 둔다.
+    private static func normalizedFullwidthDigits(_ text: String) -> String {
+        var result = String.UnicodeScalarView()
+        for scalar in text.unicodeScalars {
+            switch scalar.value {
+            case 0xFF10...0xFF19:
+                result.append(Unicode.Scalar(scalar.value - 0xFF10 + 0x30)!)
+            case 0xFF1A:
+                result.append(":")
+            default:
+                result.append(scalar)
+            }
+        }
+        return String(result)
     }
 
     /// "3:16"(콜론) 또는 "3장 16절"(한글 어순) 형태의 나머지 텍스트에서 절 번호만

@@ -12,6 +12,8 @@
 //  ⚠️ 출처 신뢰도: 영어=전 세계 공통 표준 표기 / 태국어·몽골어=단일 출처 확인(각각 bible.eu,
 //  mongol.bible) / 스페인어·독일어·이탈리아어·일본어·타갈로그=fullNames+shortNames 확보 /
 //  네팔어=fullNames만 확보, shortNames는 비어 있음.
+//  [2026-10-29 booklabel2] 프랑스어·중국어 간체/번체·포르투갈어·러시아어 shortNames를 채웠다(출처는 각 표 주석).
+//  태국어·몽골어·네팔어·타갈로그·베트남어는 출처를 확정하지 못해 계속 비어 있다(표시는 fullNames로 폴백).
 //
 
 import Foundation
@@ -215,7 +217,8 @@ nonisolated struct BookNameTable: Codable, Identifiable, Hashable, Sendable {
                     "Ⅰテモ", "Ⅱテモ", "テト", "ピレ", "ヘブ", "ヤコ", "Ⅰペテ", "Ⅱペテ", "Ⅰヨハ", "Ⅱヨハ", "Ⅲヨハ", "ユダ", "黙"
                 ]),
             // [2026-10-11 i18n] 출처: getbible v2 darby (French Darby, Public Domain). 스크립트로 원본 파일에서 추출(수기 입력 아님).
-            // 공식 약어 체계를 확인하지 않아 shortNames는 비워 둔다(표시는 fullNames로 폴백).
+            // [2026-10-29 booklabel2] shortNames 출처: La Bible Segond 21 (Société Biblique de Genève, 2007) 약어표.
+            // 숫자와 약칭은 영어 이름표처럼 붙여 쓴다("1S", "1Jn").
             BookNameTable(
                 id: BuiltInBookNameTable.french, displayName: String(localized: "프랑스어"), isBuiltIn: true,
                 fullNames: [
@@ -229,9 +232,15 @@ nonisolated struct BookNameTable: Codable, Identifiable, Hashable, Sendable {
                     "Tite", "Philémon", "Hébreux", "Jacques", "1 Pierre", "2 Pierre", "1 Jean", "2 Jean", "3 Jean",
                     "Jude", "Apocalypse"
                 ],
-                shortNames: Array(repeating: "", count: 66)),
+                shortNames: [
+                    "Gn", "Ex", "Lv", "Nb", "Dt", "Jos", "Jg", "Rt", "1S", "2S", "1R", "2R", "1Ch", "2Ch", "Esd",
+                    "Né", "Est", "Jb", "Ps", "Pr", "Ec", "Ct", "Es", "Jr", "Lm", "Ez", "Dn", "Os", "Jl", "Am", "Ab",
+                    "Jon", "Mi", "Na", "Ha", "So", "Ag", "Za", "Ml", "Mt", "Mc", "Lc", "Jn", "Ac", "Rm", "1Co",
+                    "2Co", "Ga", "Ep", "Ph", "Col", "1Th", "2Th", "1Tm", "2Tm", "Tt", "Phm", "Hé", "Jc", "1P", "2P",
+                    "1Jn", "2Jn", "3Jn", "Jd", "Ap"
+                ]),
             // [2026-10-11 i18n] 출처: open-bibles chi-cuv-simp (Chinese Union Version, Public Domain). 스크립트로 원본 파일에서 추출(수기 입력 아님).
-            // 공식 약어 체계를 확인하지 않아 shortNames는 비워 둔다(표시는 fullNames로 폴백).
+            // [2026-10-29 booklabel2] shortNames 출처: 和合本 관례 약칭(信望愛 bible.fhl.net 經卷簡寫列表의 간체 대응, casgv.org 簡繁 대조표).
             BookNameTable(
                 id: BuiltInBookNameTable.chineseSimplified, displayName: String(localized: "중국어(간체)"), isBuiltIn: true,
                 fullNames: [
@@ -242,9 +251,14 @@ nonisolated struct BookNameTable: Codable, Identifiable, Hashable, Sendable {
                     "歌罗西书", "帖撒罗尼迦前书", "帖撒罗尼迦后书", "提摩太前书", "提摩太后书", "提多书", "腓利门书", "希伯来书", "雅各书", "彼得前书", "彼得后书",
                     "约翰壹书", "约翰贰书", "约翰参书", "犹大书", "启示录"
                 ],
-                shortNames: Array(repeating: "", count: 66)),
+                shortNames: [
+                    "创", "出", "利", "民", "申", "书", "士", "得", "撒上", "撒下", "王上", "王下", "代上", "代下", "拉", "尼", "斯", "伯",
+                    "诗", "箴", "传", "歌", "赛", "耶", "哀", "结", "但", "何", "珥", "摩", "俄", "拿", "弥", "鸿", "哈", "番", "该",
+                    "亚", "玛", "太", "可", "路", "约", "徒", "罗", "林前", "林后", "加", "弗", "腓", "西", "帖前", "帖后", "提前", "提后",
+                    "多", "门", "来", "雅", "彼前", "彼后", "约一", "约二", "约三", "犹", "启"
+                ]),
             // [2026-10-11 i18n] 출처: open-bibles chi-cuv (Chinese Union Version, Public Domain). 스크립트로 원본 파일에서 추출(수기 입력 아님).
-            // 공식 약어 체계를 확인하지 않아 shortNames는 비워 둔다(표시는 fullNames로 폴백).
+            // [2026-10-29 booklabel2] shortNames 출처: 信望愛 bible.fhl.net 經卷簡寫列表(和合本). 요한1~3서는 대만 관례대로 約一·約二·約三.
             BookNameTable(
                 id: BuiltInBookNameTable.chineseTraditional, displayName: String(localized: "중국어(번체)"), isBuiltIn: true,
                 fullNames: [
@@ -255,9 +269,15 @@ nonisolated struct BookNameTable: Codable, Identifiable, Hashable, Sendable {
                     "歌羅西書", "帖撒羅尼迦前書", "帖撒羅尼迦後書", "提摩太前書", "提摩太後書", "提多書", "腓利門書", "希伯來書", "雅各書", "彼得前書", "彼得後書",
                     "約翰壹書", "約翰貳書", "約翰參書", "猶大書", "啟示錄"
                 ],
-                shortNames: Array(repeating: "", count: 66)),
+                shortNames: [
+                    "創", "出", "利", "民", "申", "書", "士", "得", "撒上", "撒下", "王上", "王下", "代上", "代下", "拉", "尼", "斯", "伯",
+                    "詩", "箴", "傳", "歌", "賽", "耶", "哀", "結", "但", "何", "珥", "摩", "俄", "拿", "彌", "鴻", "哈", "番", "該",
+                    "亞", "瑪", "太", "可", "路", "約", "徒", "羅", "林前", "林後", "加", "弗", "腓", "西", "帖前", "帖後", "提前", "提後",
+                    "多", "門", "來", "雅", "彼前", "彼後", "約一", "約二", "約三", "猶", "啟"
+                ]),
             // [2026-10-11 i18n] 출처: open-bibles por-almeida (João Ferreira de Almeida, Public Domain). 스크립트로 원본 파일에서 추출(수기 입력 아님).
-            // 공식 약어 체계를 확인하지 않아 shortNames는 비워 둔다(표시는 fullNames로 폴백).
+            // [2026-10-29 booklabel2] shortNames 출처: 번들 원본 BibleSources/porbrbsl_usfm.zip(Bíblia Portuguesa Mundial)의 각 책 \toc3 값을
+            // 스크립트로 추출했다(외경 제외, 수기 입력 아님). fullNames(Almeida)와 출처가 다르다.
             BookNameTable(
                 id: BuiltInBookNameTable.portuguese, displayName: String(localized: "포르투갈어"), isBuiltIn: true,
                 fullNames: [
@@ -270,9 +290,16 @@ nonisolated struct BookNameTable: Codable, Identifiable, Hashable, Sendable {
                     "1 Tessalonicenses", "2 Tessalonicenses", "1 Timóteo", "2 Timóteo", "Tito", "Filemom", "Hebreus",
                     "Tiago", "1 Pedro", "2 Pedro", "1 João", "2 João", "3 João", "Judas", "Apocalipse"
                 ],
-                shortNames: Array(repeating: "", count: 66)),
+                shortNames: [
+                    "Gn", "Êxo", "Lv", "Nm", "Dt", "Jos", "Jz", "Rt", "1Sm", "2Sm", "1Rs", "2Rs", "1Cr", "2Cr", "Ed",
+                    "Ne", "Est", "Jó", "Sl", "Pv", "Ecl", "Ct", "Is", "Jr", "Lm", "Ez", "Dn", "Os", "Jl", "Am",
+                    "Oba", "Jn", "Mq", "Na", "Hc", "Sof", "Ageu", "Zac", "Ml", "Mt", "Mc", "Lc", "Jo", "At", "Rm",
+                    "1Co", "2Co", "Gl", "Ef", "Fp", "Cl", "1Ts", "2Ts", "1Tm", "2Tm", "Tt", "Fm", "Hb", "Tg", "1Pe",
+                    "2Pe", "1Jo", "2Jo", "3Jo", "Jd", "Ap"
+                ]),
             // [2026-10-11 i18n] 출처: open-bibles rus-synodal (Russian Synodal Translation, Public Domain). 스크립트로 원본 파일에서 추출(수기 입력 아님).
-            // 공식 약어 체계를 확인하지 않아 shortNames는 비워 둔다(표시는 fullNames로 폴백).
+            // [2026-10-29 booklabel2] shortNames 출처: 시노달역 관례 약칭(ru.wikipedia "Сокращения названий книг Библии",
+            // azbyka.ru 약어표). 숫자와 약칭은 영어 이름표처럼 붙여 쓴다("1Цар", "1Ин").
             BookNameTable(
                 id: BuiltInBookNameTable.russian, displayName: String(localized: "러시아어"), isBuiltIn: true,
                 fullNames: [
@@ -286,7 +313,13 @@ nonisolated struct BookNameTable: Codable, Identifiable, Hashable, Sendable {
                     "2-е Тимофею", "К Титу", "К Филимону", "К Евреям", "Иакова", "1-е Петра", "2-е Петра",
                     "1-е Иоанна", "2-е Иоанна", "3-е Иоанна", "Иуды", "Откровение"
                 ],
-                shortNames: Array(repeating: "", count: 66)),
+                shortNames: [
+                    "Быт", "Исх", "Лев", "Чис", "Втор", "Нав", "Суд", "Руф", "1Цар", "2Цар", "3Цар", "4Цар", "1Пар",
+                    "2Пар", "Езд", "Неем", "Есф", "Иов", "Пс", "Притч", "Еккл", "Песн", "Ис", "Иер", "Плач", "Иез",
+                    "Дан", "Ос", "Иоил", "Ам", "Авд", "Ион", "Мих", "Наум", "Авв", "Соф", "Агг", "Зах", "Мал", "Мф",
+                    "Мк", "Лк", "Ин", "Деян", "Рим", "1Кор", "2Кор", "Гал", "Еф", "Флп", "Кол", "1Фес", "2Фес",
+                    "1Тим", "2Тим", "Тит", "Флм", "Евр", "Иак", "1Пет", "2Пет", "1Ин", "2Ин", "3Ин", "Иуд", "Откр"
+                ]),
             // [2026-10-11 i18n] 출처: getbible v2 vietnamese (Vietnamese 1934, Public Domain). 스크립트로 원본 파일에서 추출(수기 입력 아님).
             // 공식 약어 체계를 확인하지 않아 shortNames는 비워 둔다(표시는 fullNames로 폴백).
             BookNameTable(

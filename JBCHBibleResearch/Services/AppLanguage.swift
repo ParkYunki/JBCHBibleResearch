@@ -10,9 +10,11 @@
 //    시작되므로 프로세스 수명 동안 한 번만 계산해 둔다.
 //  - 책 이름은 내장 이름표(`BookNameTable`)에서 앱 언어에 맞는 표를 쓴다. 한국어는 기존과 같이
 //    `Book.nameKo`/`Book.abbreviation`을 쓴다.
-//  - ⚠️ 이 값은 "화면 표시용"이다. 자유 입력 파싱(`BooksProvider.matchBookPrefix`), 본문 속 성경 참조 추출
-//    (`BibleReferenceExtractor`), 복사 형식(`BibleVerseCopyFormatter`), 설교 본문에 삽입되는 참조 표기처럼
-//    한국어 이름을 전제로 하는 곳은 계속 `nameKo`를 쓴다.
+//  - ⚠️ 이 값은 "화면 표시용"이다. 본문 속 성경 참조 추출(`BibleReferenceExtractor`), 복사 형식
+//    (`BibleVerseCopyFormatter`), 설교 본문에 삽입되는 참조 표기, 저장되는 관주 라벨처럼 한국어 이름을
+//    전제로 하는 곳은 계속 `nameKo`/`abbreviation`을 쓴다.
+//  - [2026-10-29 booklabel1] 자유 입력 파싱(`BooksProvider.matchBookPrefix`)은 한국어 후보·초성을 항상 인식하고,
+//    한국어가 아닌 앱에서는 이 파일의 `bookNameTable`(fullNames/shortNames)도 후보로 함께 인식한다.
 //
 //  `nonisolated`: 프로젝트 기본 액터 격리(MainActor) 때문에 검색 등 백그라운드 경로에서 호출하지 못하게
 //  되는 것을 막는다. 모두 불변 값만 읽는다.
@@ -77,8 +79,17 @@ nonisolated enum AppLanguage {
         }
     }
 
+    /// 책 약칭과 장 번호를 이어 쓸 때의 구분 문자. 한국어·일본어·중국어는 붙여 쓰고("창1", "創1", "创世纪1"),
+    /// 그 밖의 언어는 한 칸 띄운다("Gen 1", "1 Sam 3", "Бытие 1") — 띄어쓰기를 하는 문자 체계의 일반 참조 표기.
+    /// [2026-10-29 booklabel1] 화면 표시 전용(`Book.displayShortReference(chapter:)`). 입력 해석은 공백 유무를 모두 받는다.
+    static var bookChapterSeparator: String {
+        if isKorean || baseCode == "ja" || baseCode == "zh" { return "" }
+        return " "
+    }
+
     /// 앱 언어 책 이름표(한 번만 만든다). 한국어면 nil.
-    fileprivate static let bookNameTable: BookNameTable? = bookNameTableID.flatMap { id in
+    /// [2026-10-29 booklabel1] `BooksProvider.matchBookPrefix`가 입력 후보로 쓰도록 `fileprivate` → 모듈 내부 공개.
+    static let bookNameTable: BookNameTable? = bookNameTableID.flatMap { id in
         BookNameTable.builtInBookNameTables().first { $0.id == id }
     }
 }
@@ -101,5 +112,12 @@ extension Book {
             return table.shortNames[index]
         }
         return displayName
+    }
+
+    /// 화면 표시용 "약칭+장" 문구(예: ko "창1", ja "創1", zh "创世纪1", en "Gen 1", es "1 Sam 3").
+    /// 한국어는 기존 표시(`abbreviation.first ?? nameKo` + 장 번호, 공백 없음)와 같다.
+    /// ⚠️ 저장·검색 키로 쓰지 않는다(앱 언어에 따라 값이 바뀐다).
+    nonisolated func displayShortReference(chapter: Int) -> String {
+        "\(displayShortName)\(AppLanguage.bookChapterSeparator)\(chapter)"
     }
 }

@@ -237,6 +237,33 @@ enum VerseAnnotationRenderer {
         }
     }
 
+    /// 절 텍스트에 한글(음절·자모·호환 자모·확장 자모)이 있는지. `usesKoreanLineBreaking` 판정용.
+    static func containsHangul(_ text: String) -> Bool {
+        text.unicodeScalars.contains { scalar in
+            switch scalar.value {
+            case 0xAC00...0xD7A3, // 한글 음절
+                 0x1100...0x11FF, // 한글 자모
+                 0x3130...0x318F, // 한글 호환 자모
+                 0xA960...0xA97F, // 한글 자모 확장-A
+                 0xD7B0...0xD7FF: // 한글 자모 확장-B
+                return true
+            default:
+                return false
+            }
+        }
+    }
+
+    /// [2026-10-29] 이 절을 `koreanLineRanges`(목표 글자 수 이후 첫 띄어쓰기)로 나눌지 여부 —
+    /// "한글이 있고 라틴 문자/숫자가 없는 절"만 true다. 예전에는 "라틴/숫자가 없으면" 모두 한글 경로였는데,
+    /// 그러면 띄어쓰기가 없는 중국어(CUV)·일본어(문어역)는 줄이 전혀 나뉘지 않고, 태국어(띄어쓰기 대신 U+200B)·
+    /// 키릴 문자(SYN)는 UTF-16 글자 수로 끊겨 폭이 들쭉날쭉했다. 그 밖의 절은 모두 TextKit 실측
+    /// (`measuredLineRanges`)으로 보낸다 — TextKit은 CJK 금칙 처리와 태국어 사전 기반 줄바꿈을 한다.
+    /// 번들 한글 번역본(KRV)은 모든 절에 한글이 있어(전수 확인) 판정 결과가 예전과 같다.
+    /// 사용자 추가 번역본도 언어 필드가 없어 같은 텍스트 판정을 따른다(`containsLatinOrDigit` 주석 참고).
+    static func usesKoreanLineBreaking(_ text: String) -> Bool {
+        containsHangul(text) && !containsLatinOrDigit(text)
+    }
+
     // MARK: - [2026-08-11 8차 수정, 확대보기 전면 재설계] 순수 SwiftUI 표시 레이어
     //
     // 확대보기를 "표시 모드"(이 섹션, 순수 SwiftUI)와 "선택 모드"(`SelectableVerseTextView`,
@@ -245,19 +272,20 @@ enum VerseAnnotationRenderer {
     // 그 줄 아래 `VStack`의 서브뷰로 끼워 넣는다 — 높이 추정이나 TextKit 줄간격 주입이
     // 필요 없다(`Views/Bible/AnnotatedVerseFlowView.swift` 참고).
 
-    /// 절 텍스트를 시각적 "줄" 단위로 나눈 문자 범위 목록. 라틴/숫자 없는 절은
-    /// `koreanLineRanges`(목표 글자수 이후 첫 띄어쓰기), 라틴/혼합 절은 화면에 붙이지 않는
-    /// "측정 전용" TextKit(`measuredLineRanges`)으로 실제 폭 기준 줄바꿈을 구한다.
+    /// 절 텍스트를 시각적 "줄" 단위로 나눈 문자 범위 목록. 한글 절(`usesKoreanLineBreaking`)은
+    /// `koreanLineRanges`(목표 글자수 이후 첫 띄어쓰기), 그 밖의 절(라틴/혼합·CJK·태국어·키릴 등)은
+    /// 화면에 붙이지 않는 "측정 전용" TextKit(`measuredLineRanges`)으로 실제 폭 기준 줄바꿈을 구한다.
     /// 반환 형태가 같아 호출부는 분기하지 않는다.
     ///
     /// `targetCharsPerLine`은 아이폰 세로/가로 모드마다 줄당 글자수를 달리하기 위한
-    /// 매개변수다. 라틴/혼합 절은 폭 기준이라 이 값과 무관하다.
+    /// 매개변수다. 실측 경로는 폭 기준이라 이 값과 무관하다(폭은 호출부가 정한다 —
+    /// `VerseZoomView.lineBreakWidth` 참고).
     static func lineRanges(for text: String, font: PlatformFont, containerWidth: CGFloat, targetCharsPerLine: Int = 23) -> [NSRange] {
         guard !text.isEmpty else { return [] }
-        if containsLatinOrDigit(text) {
-            return measuredLineRanges(for: text, font: font, containerWidth: containerWidth)
+        if usesKoreanLineBreaking(text) {
+            return koreanLineRanges(for: text, targetCharsPerLine: targetCharsPerLine)
         }
-        return koreanLineRanges(for: text, targetCharsPerLine: targetCharsPerLine)
+        return measuredLineRanges(for: text, font: font, containerWidth: containerWidth)
     }
 
     /// 선택 모드(`SelectableVerseTextView`)의 자동 줄바꿈을 표시 모드(`lineRanges(...)`)와
@@ -266,9 +294,10 @@ enum VerseAnnotationRenderer {
     /// 구분자)로 **치환**해 강제로 줄을 바꾼다. 삽입이 아니라 치환이라 글자 수·인덱스가 유지되므로,
     /// 이 문자열에서 얻은 `selectedRange`가 원본 `text`에서도 같은 위치를 가리킨다.
     ///
-    /// 라틴/혼합 절(`measuredLineRanges`)은 줄 끝 공백이 이미 앞 줄 범위에 포함되어 건너뛴
-    /// 구분자가 없고, 같은 폰트·폭·`lineFragmentPadding = 0`의 `UITextView`/`NSTextView`가 같은
-    /// TextKit 엔진으로 줄바꿈하므로 치환이 필요 없다.
+    /// 실측 경로 절(`measuredLineRanges` — 라틴/혼합·CJK·태국어 등)은 줄 범위가 빈틈없이 이어져
+    /// (줄 끝 공백은 앞 줄 범위에 포함, CJK처럼 공백 없이 끊긴 줄도 마찬가지) 건너뛴 구분자가 없고,
+    /// 같은 폰트·폭·`lineFragmentPadding = 0`의 `UITextView`/`NSTextView`가 같은 TextKit 엔진으로
+    /// 줄바꿈하므로 치환이 필요 없다(원문 그대로라 오프셋도 그대로다).
     static func forcedBreakText(from text: String, font: PlatformFont, containerWidth: CGFloat, targetCharsPerLine: Int = 23) -> String {
         let ranges = lineRanges(for: text, font: font, containerWidth: containerWidth, targetCharsPerLine: targetCharsPerLine)
         guard ranges.count > 1 else { return text }
@@ -388,7 +417,7 @@ enum VerseAnnotationRenderer {
         return ranges
     }
 
-    /// 라틴/혼합 절 전용 — 어떤 뷰에도 연결하지 않는 임시 `NSLayoutManager`로 실제 폭 기준
+    /// 한글 경로가 아닌 절 전용(`lineRanges` 참고) — 어떤 뷰에도 연결하지 않는 임시 `NSLayoutManager`로 실제 폭 기준
     /// 줄바꿈 지점을 측정한다. 화면에 그리지 않아 TextKit 표시 좌표 문제와 무관하다.
     static func measuredLineRanges(for text: String, font: PlatformFont, containerWidth: CGFloat) -> [NSRange] {
         let ns = text as NSString
