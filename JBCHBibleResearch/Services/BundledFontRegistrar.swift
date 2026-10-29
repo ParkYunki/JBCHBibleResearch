@@ -2,7 +2,7 @@
 //  BundledFontRegistrar.swift
 //  JBCHBibleResearch
 //
-//  앱에 내장한 Paperlogy(9종)·고운바탕·다국어 글꼴(태국어/키릴/베트남어, 2026-10-12) 등 번들 글꼴을 앱 실행 시 한 번 CoreText에
+//  앱에 내장한 Paperlogy(9종)·고운바탕·다국어 글꼴(태국어/키릴/베트남어, 2026-10-12)·Literata(2026-10-29) 등 번들 글꼴을 앱 실행 시 한 번 CoreText에
 //  등록해, SwiftUI `Font.custom(_:size:)`와 설정 화면 글꼴 목록에서 바로 쓰게 한다.
 //
 //  프로세스 단위(.process)로만 등록한다 — `.persistent`는 앱 삭제 후에도 흔적이 남을 수
@@ -58,6 +58,15 @@ enum BundledFonts {
     /// 앱 기본 글꼴의 PostScript 이름.
     static let defaultPostScriptName = "Paperlogy-4Regular"
 
+    /// 성경 조회 본문 글꼴(`UserSettingsStore.bibleFontName`)의 기본값 — 저장된 값이 없을 때만 쓴다.
+    /// [2026-10-29 사용자 결정] 베트남어 앱(번들 성경 VIE1934)은 Literata Regular, 그 밖의 언어는 기존과 같은 Paperlogy Regular.
+    /// 이 앱에는 번역본별 글꼴 설정이 없어(본문 글꼴은 `bibleFontName` 하나) 앱 언어로 정한다. 번들 성경은 앱 언어의 것 하나만
+    /// 보이므로(`BundledTranslationCatalog.isVisible`) VIE1934가 보이는 기기는 베트남어 앱뿐이다.
+    /// ⚠️ 설교 문단 스타일·메모 에디터 기본값(`languageAdjustedDefaultFontName`)은 이 값과 별개이며 바꾸지 않았다.
+    static var bibleDefaultPostScriptName: String {
+        AppLanguage.baseCode == "vi" ? literataRegularPostScriptName : defaultPostScriptName
+    }
+
     // MARK: 다국어 글꼴 (2026-10-12 추가)
     //
     // Paperlogy·고운바탕·KMU80에 없는 문자(태국어, 러시아어 키릴, 베트남어 성조 글자)를 같은 글꼴로
@@ -67,17 +76,31 @@ enum BundledFonts {
     //    숫자/영문은 시스템 글꼴로 대체된다)
     //  - Inter: rsms/inter v4.1 `extras/ttf` (라틴·키릴·베트남어)
     //  - Be Vietnam Pro: google/fonts `ofl/bevietnampro` (라틴·베트남어. 키릴 없음)
+    //  - Literata(2026-10-29): google/fonts `ofl/literata`의 가변 글꼴(opsz·wght)에서 fontTools instancer로 만든 정적 인스턴스
+    //    4종(opsz 12 = 원본 fvar 기본값·named instance 값, wght 400/600/700, Italic 400). 이름 테이블은 Be Vietnam Pro와 같은
+    //    규칙(Regular/Bold/Italic은 family "Literata", SemiBold는 family "Literata SemiBold" + 표시 family "Literata")으로 넣었다.
+    //    라틴·베트남어·키릴·그리스어. 성경 본문용 세리프라 모든 앱 언어의 메뉴에 보인다(`Family.languageCode == nil`).
+    //    Italic은 메뉴에 넣지 않는다 — 원문 정보 직역 카드의 `.italic()`, 메모 기울임 토글이 같은 family에서 찾아 쓴다.
     // 굵기마다 family 이름이 따로라(name 테이블 확인) Paperlogy처럼 PostScript 이름으로 쓴다.
     // ⚠️ 이 글꼴들에는 한글이 없다. 한글이 섞이면 그 글자만 시스템 글꼴로 대체된다.
 
     /// 글꼴 메뉴의 서브메뉴 하나(family 이름 + 굵기별 항목). `languageCode`는 이 글꼴을 메뉴에 보여줄
-    /// 앱 언어(`AppLanguage.baseCode`) — 지역 전용 글꼴이다(아래 `visibleMultilingualFamilies`).
+    /// 앱 언어(`AppLanguage.baseCode`) — 지역 전용 글꼴이다(아래 `visibleMultilingualFamilies`). nil이면 모든 언어에 보인다.
     struct Family: Identifiable, Hashable {
         let name: String
         let entries: [Entry]
-        let languageCode: String
+        let languageCode: String?
         var id: String { name }
     }
+
+    static let literataRegularPostScriptName = "Literata-Regular"
+
+    /// Literata 메뉴 항목. 번들 파일은 이 3종 + `Literata-Italic`(메뉴에 넣지 않음, `selectableFontCount`에 없음).
+    static let literataEntries: [Entry] = [
+        Entry(postScriptName: literataRegularPostScriptName, displayName: "Literata Regular"),
+        Entry(postScriptName: "Literata-SemiBold", displayName: "Literata SemiBold"),
+        Entry(postScriptName: "Literata-Bold", displayName: "Literata Bold"),
+    ]
 
     static let ibmPlexSansThaiEntries: [Entry] = [
         Entry(postScriptName: "IBMPlexSansThai-Light", displayName: "IBM Plex Sans Thai Light"),
@@ -112,6 +135,7 @@ enum BundledFonts {
 
     /// 글꼴 메뉴(메모 에디터·설교 에디터)와 설정 > 성경 조회 글꼴 목록에 보여줄 다국어 글꼴 묶음.
     static let multilingualFamilies: [Family] = [
+        Family(name: "Literata", entries: literataEntries, languageCode: nil),
         Family(name: "IBM Plex Sans Thai", entries: ibmPlexSansThaiEntries, languageCode: "th"),
         Family(name: "Noto Serif Thai", entries: notoSerifThaiEntries, languageCode: "th"),
         Family(name: "Inter", entries: interEntries, languageCode: "ru"),
@@ -120,7 +144,7 @@ enum BundledFonts {
 
     // MARK: 공통 글꼴 / 지역 전용 글꼴 (2026-10-12, 사용자 결정: 앱 언어 기준)
     //
-    // - 공통(모든 언어의 메뉴에 표시): Paperlogy, 고운바탕
+    // - 공통(모든 언어의 메뉴에 표시): Paperlogy, 고운바탕, Literata(2026-10-29)
     // - 지역 전용(그 앱 언어에서만 메뉴에 표시): IBM Plex Sans Thai·Noto Serif Thai(th), Inter(ru),
     //   Be Vietnam Pro(vi), 조선궁서체(ko — 한자 주석용 한국어 전용 글꼴)
     // 숨김은 "고르는 메뉴"에만 적용한다. 글꼴 파일은 모든 기기에 번들돼 있으므로 다른 언어 기기에서 만든
@@ -130,7 +154,7 @@ enum BundledFonts {
 
     /// 지금 앱 언어의 메뉴에 보여줄 지역 전용 다국어 글꼴.
     static var visibleMultilingualFamilies: [Family] {
-        multilingualFamilies.filter { $0.languageCode == AppLanguage.baseCode }
+        multilingualFamilies.filter { $0.languageCode == nil || $0.languageCode == AppLanguage.baseCode }
     }
 
     /// 한국어 전용 글꼴(조선궁서체)을 메뉴에 보여줄지.
@@ -138,7 +162,7 @@ enum BundledFonts {
 
     /// 시스템 글꼴 목록(설정 화면)에서 번들 글꼴이 중복으로 보이지 않게 걸러낼 family 이름 접두어.
     /// 등록된 번들 글꼴도 `UIFont.familyNames`/`NSFontManager.availableFontFamilies`에 나타난다.
-    static let bundledFamilyNamePrefixes: [String] = ["Paperlogy", "IBM Plex Sans Thai", "Noto Serif Thai", "Inter", "Be Vietnam Pro"]
+    static let bundledFamilyNamePrefixes: [String] = ["Paperlogy", "IBM Plex Sans Thai", "Noto Serif Thai", "Inter", "Be Vietnam Pro", "Literata"]
 
     /// 등록 확인 로그에 쓰는 번들 글꼴 총 개수(목록에서 고르는 글꼴만, 특수 목적 폰트 제외).
     static var selectableFontCount: Int {
@@ -244,7 +268,8 @@ enum BundledFontRegistrar {
             }
         }
         // 한자 1 + 히브리어 1 + Gentium 5(그리스어/타이틀 대체 서체 — 번들 굵기 전체) + 타이틀 세리프 1
-        let expectedCount = BundledFonts.selectableFontCount + 8
+        // + Literata Italic 1(메뉴에 없는 기울임 짝, 2026-10-29)
+        let expectedCount = BundledFonts.selectableFontCount + 9
         print("[BundledFontRegistrar] 번들 폰트 \(registeredPostScriptNames.count)/\(expectedCount)개 등록 완료: \(registeredPostScriptNames)")
     }
 
@@ -300,7 +325,7 @@ enum BundledFontRegistrar {
 
         let knownPrefixes = [
             "Paperlogy", "GowunBatang", "ChosunGs", "SILEOT", "Gentium", "KMU80SungkokSerif",
-            "IBMPlexSansThai", "NotoSerifThai", "Inter-", "BeVietnamPro",
+            "IBMPlexSansThai", "NotoSerifThai", "Inter-", "BeVietnamPro", "Literata-",
         ]
         let rootURLs = (
             (Bundle.main.urls(forResourcesWithExtension: "ttf", subdirectory: nil) ?? [])

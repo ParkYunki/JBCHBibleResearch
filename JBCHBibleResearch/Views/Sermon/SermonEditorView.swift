@@ -437,7 +437,7 @@ struct SermonEditorView: View {
                             Button(entry.displayName) { proxy.applyFontFamily(entry.postScriptName, settings: settings) }
                         }
                     }
-                    // 지역 전용 다국어 글꼴(태국어/키릴/베트남어, 2026-10-12) — 그 앱 언어에서만 보인다.
+                    // 다국어 글꼴 — Literata(2026-10-29)는 모든 언어, 지역 전용 글꼴(태국어/키릴/베트남어, 2026-10-12)은 그 앱 언어에서만 보인다.
                     // family 이름은 고유명사라 번역하지 않는다.
                     ForEach(BundledFonts.visibleMultilingualFamilies) { family in
                         Menu(family.name) {

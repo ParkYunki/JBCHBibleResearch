@@ -1,0 +1,38 @@
+--- a/JBCHBibleResearch/Localizable.xcstrings
++++ b/JBCHBibleResearch/Localizable.xcstrings
+@@ -24071,7 +24071,7 @@
+         "th" : {
+           "stringUnit" : {
+             "state" : "needs_review",
+-            "value" : "การเฝ้าเดี่ยวส่วนตัว"
++            "value" : "เฝ้าเดี่ยว"
+           }
+         },
+         "vi" : {
+@@ -30059,7 +30059,7 @@
+         "ru" : {
+           "stringUnit" : {
+             "state" : "needs_review",
+-            "value" : "Параллельные места"
++            "value" : "Параллели"
+           }
+         },
+         "th" : {
+@@ -59935,7 +59935,7 @@
+         "ru" : {
+           "stringUnit" : {
+             "state" : "needs_review",
+-            "value" : "Просмотрщик"
++            "value" : "Просмотр"
+           }
+         },
+         "th" : {
+@@ -85632,7 +85632,7 @@
+         "ru" : {
+           "stringUnit" : {
+             "state" : "needs_review",
+-            "value" : "Текст оригинала"
++            "value" : "Оригинал"
+           }
+         },
+         "th" : {

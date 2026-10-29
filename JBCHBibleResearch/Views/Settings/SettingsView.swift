@@ -755,14 +755,14 @@ private struct AppearanceSettingsTab: View {
         // `RichTextEditor`(메모/개요 에디터)는 자체 서식 도구모음이 있어 이 설정의 적용 범위에 포함하지 않는다.
         Section {
             // 내장 Paperlogy 9종을 맨 위에, 그 아래 "시스템 기본", 이어서 설치된 나머지 글꼴 순.
-            // 기본값은 내장 Paperlogy(`UserSettingsStore.bibleFontName`)이며 "시스템 기본"도 고를 수 있다.
+            // 기본값은 내장 Paperlogy(베트남어 앱은 Literata — `BundledFonts.bibleDefaultPostScriptName`)이며 "시스템 기본"도 고를 수 있다.
             Picker("글꼴", selection: $settings.bibleFontName) {
                 Section("내장 기본 글꼴") {
                     ForEach(BundledFonts.entries) { entry in
                         Text(entry.displayName).tag(entry.postScriptName)
                     }
-                    // 지역 전용 글꼴(2026-10-12) — 그 앱 언어에서만 보이되, 지금 선택된 값이면 빈칸이 되지 않게 남긴다
-                    // (`BundledFonts.visibleMultilingualFamilies` 주석 참고).
+                    // 다국어 글꼴(2026-10-12) — Literata(2026-10-29)는 모든 언어, 지역 전용 글꼴은 그 앱 언어에서만 보이되,
+                    // 지금 선택된 값이면 빈칸이 되지 않게 남긴다(`BundledFonts.visibleMultilingualFamilies` 주석 참고).
                     ForEach(BundledFonts.multilingualFamilies.flatMap(\.entries).filter { entry in
                         BundledFonts.visibleMultilingualFamilies.contains { $0.entries.contains(entry) }
                             || entry.postScriptName == settings.bibleFontName
@@ -1156,6 +1156,7 @@ private struct LicenseSettingsTab: View {
         FontRepositoryLink(name: "Noto Serif Thai", url: URL(string: "https://github.com/notofonts/thai")!),
         FontRepositoryLink(name: "Inter", url: URL(string: "https://github.com/rsms/inter")!),
         FontRepositoryLink(name: "Be Vietnam Pro", url: URL(string: "https://github.com/bettergui/BeVietnamPro")!),
+        FontRepositoryLink(name: "Literata", url: URL(string: "https://github.com/googlefonts/literata")!),
     ]
 
     var body: some View {
@@ -1238,6 +1239,11 @@ private struct LicenseSettingsTab: View {
                 // 않았으므로 IBM Plex의 예약 글꼴 이름("Plex") 조항에 걸리지 않는다. Gentium은 위 항목의 같은 파일을
                 // 타이틀 대체 서체로도 쓴다(`TitleFont`).
                 Text("태국어·러시아어·베트남어 표시용 글꼴 IBM Plex Sans Thai(Copyright © 2017 IBM Corp.), Noto Serif Thai(Copyright 2022 The Noto Project Authors), Inter(Copyright © 2016 The Inter Project Authors), Be Vietnam Pro(Copyright 2021 The Be Vietnam Pro Project Authors)는 SIL Open Font License(OFL) 1.1을 따르며 수정 없이 포함했습니다. 라틴 악센트·키릴·베트남어 글자가 들어간 화면 타이틀에는 위 Gentium 폰트를 함께 사용합니다.")
+
+                // Literata(2026-10-29) — google/fonts `ofl/literata/OFL.txt`(번들 `Fonts/OFL-Literata.txt`)의 저작권 줄 기준.
+                // 예약 글꼴 이름(Reserved Font Name)이 없어, 가변 글꼴에서 만든 정적 인스턴스(수정본)도 "Literata" 이름을 쓸 수 있다.
+                // 수정본이므로 위 다국어 글꼴 문구("수정 없이")와 따로 고지한다.
+                Text("성경 본문용 글꼴 Literata(Copyright 2017 The Literata Project Authors)는 SIL Open Font License(OFL) 1.1을 따릅니다. 원본 가변 글꼴에서 앱이 쓰는 굵기(Regular·SemiBold·Bold·Italic, 광학 크기 12pt)만 정적 글꼴로 만들어 포함했습니다.")
 
                 ForEach(Self.multilingualFontLinks) { link in
                     Link(String(localized: "\(link.name) 저장소 보기"), destination: link.url)

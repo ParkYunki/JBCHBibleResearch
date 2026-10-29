@@ -256,16 +256,37 @@ struct VerseZoomView: View {
                     }
                     .buttonStyle(BibleBarButtonStyle(kind: .primary, height: 40, cornerRadius: 10, fontSize: 15))
                     .accessibilityLabel("원문 정보로 전환")
+                    // [2026-10-29 zoommenu2] 줄이 좁아 아이콘만 남을 때(`VerseLayerStrip` 4번 배치) 포인터를 올리면 이름이 보이게.
+                    .help("원문 정보")
                     // 펜/눈동자 토글 — 표시 모드에선 펜(선택 모드 진입), 선택 모드에선 눈동자(표시 모드 복귀 + 선택 해제).
                     // 2026-10-07: 아이콘만이던 토글에 글자를 더했다 — 펜 "편집"(선택 모드 진입) ↔ 눈 "뷰어"(표시 모드 복귀). 글자는 누르면 가는 쪽 모드 이름.
                     Button {
                         isSelecting.toggle()
                         selectedRange = NSRange(location: 0, length: 0)
                     } label: {
-                        Label(isSelecting ? String(localized: "뷰어") : String(localized: "편집"), systemImage: isSelecting ? "eye" : "pencil")
+                        // [2026-10-29 zoommenu2] 두 상태(편집·펜 / 뷰어·눈) 중 넓은 쪽 폭을 늘 차지하게 다른 상태의 글자·아이콘을 숨겨 겹쳐 둔다.
+                        // 그래야 토글할 때마다 `VerseLayerStrip`의 `ViewThatFits`가 다른 후보를 고르지 않는다. 버튼 접근성 라벨은 아래 `accessibilityLabel`.
+                        Label {
+                            ZStack {
+                                Text(isSelecting ? String(localized: "뷰어") : String(localized: "편집"))
+                                Text(isSelecting ? String(localized: "편집") : String(localized: "뷰어"))
+                                    .hidden()
+                                    .accessibilityHidden(true)
+                            }
+                        } icon: {
+                            ZStack {
+                                Image(systemName: isSelecting ? "eye" : "pencil")
+                                Image(systemName: isSelecting ? "pencil" : "eye")
+                                    .hidden()
+                                    .accessibilityHidden(true)
+                            }
+                        }
                     }
                     .buttonStyle(BibleBarButtonStyle(kind: isSelecting ? .primary : .secondary, height: 40, cornerRadius: 10, fontSize: 15))
                     .accessibilityLabel(isSelecting ? String(localized: "글자 선택 끝내기") : String(localized: "글자 선택 모드"))
+                    // [2026-10-29 zoommenu2] 펜/눈 토글은 아이콘만으로도 뜻이 통해 줄이 좁으면 먼저 아이콘만으로 접는다(`VerseLayerStrip` 3번 배치).
+                    .verseLayerStripCollapsible()
+                    .help(isSelecting ? String(localized: "뷰어") : String(localized: "편집"))
                 }
                 #endif
                 if columns.count > 1 {
@@ -504,7 +525,7 @@ struct VerseZoomView: View {
     // 수동 밑줄 버튼(`.mark`)은 없앴다 — 그 주황 밑줄은 관주가 걸린 표현에 자동으로 붙는다(`VerseAnnotationRenderer.buildLines`의 `hasCrossReference`).
     // `VerseHighlightStyle.mark` 케이스와 렌더링 분기는 기존 레거시 데이터 표시용으로 남겼고 새로 만드는 진입점은 없다.
     #if os(macOS)
-    /// macOS 하단 도구 줄 — 형광펜 색 점 상자 + 메모/개인 묵상/관주 72×56 타일(목업 결정, `VerseSheetChrome.swift`).
+    /// macOS 하단 도구 줄 — 형광펜 색 점 상자 + 메모/개인 묵상/관주 타일(폭 최소 72·높이 56, 목업 결정, `VerseSheetChrome.swift`).
     /// 선택 모드가 꺼지면 모든 도구를 38%로 흐리게 하고 누를 수 없게 둔다(예전 35%와 같은 의도).
     private var actionBar: some View {
         let textColor: Color = settings.bibleTextColor ?? Color.primary
@@ -558,7 +579,8 @@ struct VerseZoomView: View {
         Button(action: action) {
             VStack(spacing: 4) {
                 Image(systemName: systemImage).font(.system(size: 19))
-                Text(title)
+                // [2026-10-29 zoommenu1] 단어 단위 최대 두 줄. 안쪽 60pt에 한 줄로 들어가면 예전처럼 한 줄(한국어 전부).
+                VerseLayerWrappedTitle(title: title, singleLineMaxWidth: VerseToolTileStyle.singleLineTitleWidth)
             }
         }
         .buttonStyle(VerseToolTileStyle())
@@ -594,67 +616,109 @@ struct VerseZoomView: View {
     #if os(iOS)
     /// 아이패드·아이폰 하단 도구 줄 — 형광펜 색 점 상자 + 메모/개인 묵상/관주 44pt 상자, 이름은 상자 바깥 아래(2026-10-02 목업).
     /// 색 점마다 글자색 38% 외곽선을 둬 연한 색이 배경에 묻히지 않게 한다. 선택 모드가 꺼지면 전체를 흐리게(45%) 하고 누를 수 없게 둔다.
+    ///
+    /// [2026-10-29 zoommenu1] 러시아어·독일어 등에서 이름이 길어 줄이 화면보다 넓어지면, 예전에는 `HStack`이 각 도구를 이상 폭보다 좁게 제안했고
+    /// 형광펜 상자(`verseLayerBox`의 `.frame(minWidth: 44)`)가 그 좁은 폭으로 줄어든 채 안의 색 점(고정 크기)이 상자 양옆·화면 왼쪽 밖으로 넘쳤다.
+    /// 이름은 `lineLimit(1)`이라 0.8배 축소 뒤 말줄임됐다. 이제 `ViewThatFits`가 아래 순서로 처음 들어가는 배치를 고른다.
+    ///   1) 예전 배치 그대로(이름 한 줄) — 한국어·중국어·일본어는 아이폰 세로에서도 이 배치라 모양이 같다.
+    ///   2) 한 줄, 긴 이름만 단어 단위 두 줄(`VerseLayerWrappedTitle`).
+    ///   3) 두 줄 — 형광펜 상자 한 줄, 그 아래 메모·개인 묵상·관주(이름은 2와 같이 두 줄).
+    ///   4) (zoommenu2) 3과 같되 세 도구가 폭을 나눠 쓰고 이름을 축소 — 아주 큰 접근성 글자 전용 안전망.
+    /// 형광펜 상자는 `fixedSize()`로 어느 배치에서도 줄어들지 않는다. 도구 줄은 위 정렬이라 이름이 두 줄인 도구가 있어도 상자(아이콘) 높이가 같다.
     private var actionBar: some View {
-        let textColor: Color = settings.bibleTextColor ?? Color.primary
-        let isPhone = UIDevice.current.userInterfaceIdiom == .phone
-        let dotSize: CGFloat = isPhone ? 21 : 24
-        return VerseLayerFooter {
-            VerseLayerToolCaption(title: String(localized: "형광펜")) {
-                HStack(spacing: isPhone ? 6 : 8) {
-                    ForEach(HighlightColorTag.allCases) { tag in
-                        Button {
-                            handleHighlightTap(tag)
-                        } label: {
-                            Circle()
-                                .fill(tag.swiftUIColor)
-                                .frame(width: dotSize, height: dotSize)
-                                .overlay(Circle().strokeBorder(textColor.opacity(0.38), lineWidth: 1.5))
-                        }
-                        .buttonStyle(.plain)
-                        .contentShape(Rectangle())
+        VerseLayerFooter {
+            ViewThatFits(in: .horizontal) {
+                HStack(alignment: .top, spacing: VerseLayerToolMetrics.spacing) {
+                    highlighterTool
+                    layerTools(wrapsTitles: false)
+                }
+                HStack(alignment: .top, spacing: VerseLayerToolMetrics.spacing) {
+                    highlighterTool
+                    layerTools(wrapsTitles: true)
+                }
+                VStack(spacing: 10) {
+                    highlighterTool
+                    HStack(alignment: .top, spacing: VerseLayerToolMetrics.spacing) {
+                        layerTools(wrapsTitles: true)
                     }
                 }
-                .padding(.horizontal, isPhone ? 8 : 10)
-                .verseLayerBox()
-            }
-
-            // 선택 범위와 겹치는 기존 메모가 있으면(`existingPhraseNote(overlapping:)`) 중복 등록하지 않고 그 메모를 편집 모드로 연다.
-            // 팝오버를 열기로 결정하는 이 순간 `selectedRange`/`anchorText`를 `editingAnchorRange`/`editingAnchorText`에 스냅샷으로 떠 둔다
-            // (상태 선언부 주석 참고). 앞뒤 공백은 `trimmedRange`로 뺀다.
-            VerseLayerToolCaption(title: String(localized: "메모")) {
-                Button {
-                    beginPhraseNoteFromSelection()
-                } label: {
-                    Image(systemName: "text.bubble")
+                // [2026-10-29 zoommenu2] 4) 마지막 후보 — 아주 큰 접근성 글자(AX3 이상)에서 3번도 넘칠 때만 쓰인다(일반 크기에서 3번 아래 줄은 최대 약 270pt).
+                // 세 도구가 받은 폭을 똑같이 나눠 쓰고 이름은 두 줄 + 0.5배까지 축소. 화면 폭을 넘지 않는다(상자 3×44 + 간격 ≤ 164pt).
+                VStack(spacing: 10) {
+                    highlighterTool
+                    HStack(alignment: .top, spacing: VerseLayerToolMetrics.spacing) {
+                        layerTools(wrapsTitles: true, shrinksTitlesToFit: true)
+                    }
                 }
-                .buttonStyle(VerseLayerToolButtonStyle())
-                .accessibilityLabel("메모")
-            }
-
-            VerseLayerToolCaption(title: String(localized: "개인 묵상")) {
-                Button {
-                    beginComposingPersonalNote()
-                } label: {
-                    Image(systemName: "note.text")
-                }
-                .buttonStyle(VerseLayerToolButtonStyle())
-                .accessibilityLabel("개인 묵상")
-            }
-
-            // 관주 버튼은 항상 새로 만들기 시트(`CrossReferenceTargetPicker`)를 열고, 겹치는 기존 관주는 `existingReferences`로
-            // 시트에 넘겨 그 안에서 보여준다(아래 `.sheet` 참고).
-            VerseLayerToolCaption(title: String(localized: "관주")) {
-                Button {
-                    isCrossReferencePickerPresented = true
-                } label: {
-                    Image(systemName: "link")
-                }
-                .buttonStyle(VerseLayerToolButtonStyle())
-                .accessibilityLabel("관주")
             }
         }
         .disabled(!isSelecting)
         .opacity(isSelecting ? 1 : 0.45)
+    }
+
+    /// 형광펜 색 점 상자 + 이름. 상자는 `fixedSize()`라 줄이 좁아도 줄어들지 않는다(예전 넘침의 직접 원인).
+    private var highlighterTool: some View {
+        let textColor: Color = settings.bibleTextColor ?? Color.primary
+        let isPhone = UIDevice.current.userInterfaceIdiom == .phone
+        let dotSize: CGFloat = isPhone ? 21 : 24
+        return VerseLayerToolCaption(title: String(localized: "형광펜")) {
+            HStack(spacing: isPhone ? 6 : 8) {
+                ForEach(HighlightColorTag.allCases) { tag in
+                    Button {
+                        handleHighlightTap(tag)
+                    } label: {
+                        Circle()
+                            .fill(tag.swiftUIColor)
+                            .frame(width: dotSize, height: dotSize)
+                            .overlay(Circle().strokeBorder(textColor.opacity(0.38), lineWidth: 1.5))
+                    }
+                    .buttonStyle(.plain)
+                    .contentShape(Rectangle())
+                }
+            }
+            .padding(.horizontal, isPhone ? 8 : 10)
+            .verseLayerBox()
+            .fixedSize()
+        }
+    }
+
+    /// 메모·개인 묵상·관주 세 도구. `wrapsTitles`가 true면 이름을 단어 단위로 최대 두 줄에 담는다.
+    @ViewBuilder
+    private func layerTools(wrapsTitles: Bool, shrinksTitlesToFit: Bool = false) -> some View {
+        // 선택 범위와 겹치는 기존 메모가 있으면(`existingPhraseNote(overlapping:)`) 중복 등록하지 않고 그 메모를 편집 모드로 연다.
+        // 팝오버를 열기로 결정하는 이 순간 `selectedRange`/`anchorText`를 `editingAnchorRange`/`editingAnchorText`에 스냅샷으로 떠 둔다
+        // (상태 선언부 주석 참고). 앞뒤 공백은 `trimmedRange`로 뺀다.
+        VerseLayerToolCaption(title: String(localized: "메모"), wrapsTitle: wrapsTitles, shrinksTitleToFit: shrinksTitlesToFit) {
+            Button {
+                beginPhraseNoteFromSelection()
+            } label: {
+                Image(systemName: "text.bubble")
+            }
+            .buttonStyle(VerseLayerToolButtonStyle())
+            .accessibilityLabel("메모")
+        }
+
+        VerseLayerToolCaption(title: String(localized: "개인 묵상"), wrapsTitle: wrapsTitles, shrinksTitleToFit: shrinksTitlesToFit) {
+            Button {
+                beginComposingPersonalNote()
+            } label: {
+                Image(systemName: "note.text")
+            }
+            .buttonStyle(VerseLayerToolButtonStyle())
+            .accessibilityLabel("개인 묵상")
+        }
+
+        // 관주 버튼은 항상 새로 만들기 시트(`CrossReferenceTargetPicker`)를 열고, 겹치는 기존 관주는 `existingReferences`로
+        // 시트에 넘겨 그 안에서 보여준다(아래 `.sheet` 참고).
+        VerseLayerToolCaption(title: String(localized: "관주"), wrapsTitle: wrapsTitles, shrinksTitleToFit: shrinksTitlesToFit) {
+            Button {
+                isCrossReferencePickerPresented = true
+            } label: {
+                Image(systemName: "link")
+            }
+            .buttonStyle(VerseLayerToolButtonStyle())
+            .accessibilityLabel("관주")
+        }
     }
     #endif
 

@@ -1,0 +1,298 @@
+--- a/JBCHBibleResearch/Views/Bible/OriginalTextInfoView.swift
++++ b/JBCHBibleResearch/Views/Bible/OriginalTextInfoView.swift
+@@ -176,6 +176,8 @@
+                     }
+                     .buttonStyle(BibleBarButtonStyle(kind: .primary, height: 40, cornerRadius: 10, fontSize: 15))
+                     .accessibilityLabel("메모하기로 전환")
++                    // [2026-10-29 zoommenu2] 줄이 좁아 아이콘만 남을 때(`VerseLayerStrip` 4번 배치) 포인터를 올리면 이름이 보이게.
++                    .help("메모하기")
+                 }
+                 mainScroll
+             }
+--- a/JBCHBibleResearch/Views/Bible/VerseSheetChrome.swift
++++ b/JBCHBibleResearch/Views/Bible/VerseSheetChrome.swift
+@@ -7,7 +7,7 @@
+ //
+ //  - `VerseSheetHeader`: 시스템 도구 모음 대신 시트 안에 직접 그리는 제목 줄(성곡 세리프 + 아래 헤어라인).
+ //  - `VerseSheetFooter`: 하단 버튼 줄 — 테마 배경 위에 강조색 6% 톤 + 위쪽 선 + 옅은 그림자.
+-//  - `VerseToolTileStyle` / `VerseToolBoxChrome`: 메모·개인 묵상·관주 타일(72×56)과 형광펜 색 점 상자의 공통 껍데기.
++//  - `VerseToolTileStyle` / `VerseToolBoxChrome`: 메모·개인 묵상·관주 타일(최소 72, 높이 56)과 형광펜 색 점 상자의 공통 껍데기.
+ //  macOS 전용이다(iOS/iPadOS는 내비게이션 바 툴바를 그대로 쓴다).
+ 
+ #if os(macOS)
+@@ -77,7 +77,7 @@
+     }
+ }
+ 
+-/// 72×56 도구 타일 버튼 스타일(아이콘 위, 이름 아래 라벨을 받는다).
++/// 도구 타일 버튼 스타일(폭 최소 72·높이 56, 아이콘 위, 이름 아래 라벨을 받는다).
+ struct VerseToolTileStyle: ButtonStyle {
+     /// 타일 최소 폭과, 그 안에서 이름이 한 줄로 남는 최대 폭(좌우 안쪽 여백 6pt씩을 뺀 값).
+     static let minimumWidth: CGFloat = 72
+@@ -236,6 +236,14 @@
+ #if os(iOS)
+ /// 머리 2줄 — 구절 이동 묶음 [‹ n절 ›]과 오른쪽 전환/도구 버튼. 아래에 글자색 14% 선.
+ /// 묶음은 성경 조회 상단 막대의 `BibleBarSegmentGroup`을 터치용 크기로 쓴다.
++///
++/// [2026-10-29 zoommenu2] 오른쪽 버튼(`BibleBarButtonStyle`, 높이 40 고정·줄 수 제한 없음)은 줄이 좁으면 눌려 이름이 두 줄로 접히고
++/// 단어 중간에서 끊겼다(러시아어 "Прос/мот…"). 이제 `ViewThatFits`가 아래 순서로 처음 들어가는 배치를 고른다.
++///   1) 예전 그대로(간격 10, 여백 최소 8)
++///   2) 간격만 좁힘(간격 6, 여백 최소 0) — 글자는 그대로
++///   3) 2 + `verseLayerStripCollapsible()`을 붙인 버튼만 아이콘만
++///   4) 2 + 모든 버튼 아이콘만
++/// 아이콘만일 때 이름은 각 버튼의 `accessibilityLabel`·`help`(호출부)로 남는다. 넓은 화면은 1번이라 모양이 같다.
+ struct VerseLayerStrip<Trailing: View>: View {
+     let verseLabel: String
+     let canGoPrevious: Bool
+@@ -246,29 +254,11 @@
+ 
+     var body: some View {
+         let textColor = UserSettingsStore.shared.bibleTextColor ?? Color.primary
+-        HStack(spacing: 10) {
+-            BibleBarSegmentGroup {
+-                Button(action: onPrevious) {
+-                    Image(systemName: "chevron.left").font(.system(size: 16, weight: .semibold))
+-                }
+-                .disabled(!canGoPrevious)
+-                .accessibilityLabel("이전 절")
+-                BibleBarSegmentDivider()
+-                Text(verseLabel)
+-                    .font(.system(size: 15, weight: .medium))
+-                    .foregroundStyle(textColor)
+-                    .lineLimit(1)
+-                    .padding(.horizontal, 6)
+-                    .frame(minWidth: 58, minHeight: 40)
+-                BibleBarSegmentDivider()
+-                Button(action: onNext) {
+-                    Image(systemName: "chevron.right").font(.system(size: 16, weight: .semibold))
+-                }
+-                .disabled(!canGoNext)
+-                .accessibilityLabel("다음 절")
+-            }
+-            Spacer(minLength: 8)
+-            HStack(spacing: 8) { trailing }
++        ViewThatFits(in: .horizontal) {
++            row(spacing: 10, spacerMinLength: 8, collapse: .none)
++            row(spacing: 6, spacerMinLength: 0, collapse: .none)
++            row(spacing: 6, spacerMinLength: 0, collapse: .marked)
++            row(spacing: 6, spacerMinLength: 0, collapse: .all)
+         }
+         .environment(\.bibleBarSizing, .touch)
+         .padding(.horizontal, 16)
+@@ -278,6 +268,75 @@
+             Rectangle().fill(textColor.opacity(0.14)).frame(height: 1)
+         }
+     }
++
++    private enum Collapse { case none, marked, all }
++
++    @ViewBuilder
++    private func row(spacing: CGFloat, spacerMinLength: CGFloat, collapse: Collapse) -> some View {
++        HStack(spacing: spacing) {
++            verseGroup
++            Spacer(minLength: spacerMinLength)
++            if collapse == .all {
++                HStack(spacing: 8) { trailing }
++                    .labelStyle(.iconOnly)
++            } else {
++                HStack(spacing: 8) { trailing }
++                    .environment(\.verseLayerStripCollapsesMarked, collapse == .marked)
++            }
++        }
++    }
++
++    private var verseGroup: some View {
++        let textColor = UserSettingsStore.shared.bibleTextColor ?? Color.primary
++        return BibleBarSegmentGroup {
++            Button(action: onPrevious) {
++                Image(systemName: "chevron.left").font(.system(size: 16, weight: .semibold))
++            }
++            .disabled(!canGoPrevious)
++            .accessibilityLabel("이전 절")
++            BibleBarSegmentDivider()
++            Text(verseLabel)
++                .font(.system(size: 15, weight: .medium))
++                .foregroundStyle(textColor)
++                .lineLimit(1)
++                .padding(.horizontal, 6)
++                .frame(minWidth: 58, minHeight: 40)
++            BibleBarSegmentDivider()
++            Button(action: onNext) {
++                Image(systemName: "chevron.right").font(.system(size: 16, weight: .semibold))
++            }
++            .disabled(!canGoNext)
++            .accessibilityLabel("다음 절")
++        }
++    }
++}
++
++/// [2026-10-29 zoommenu2] `VerseLayerStrip` 3번 배치에서 이 버튼만 아이콘만 보이게 하는 표시. 먼저 접어도 뜻이 통하는 버튼(펜/눈 토글)에 붙인다.
++private struct VerseLayerStripCollapsesMarkedKey: EnvironmentKey {
++    static let defaultValue = false
++}
++
++extension EnvironmentValues {
++    var verseLayerStripCollapsesMarked: Bool {
++        get { self[VerseLayerStripCollapsesMarkedKey.self] }
++        set { self[VerseLayerStripCollapsesMarkedKey.self] = newValue }
++    }
++}
++
++private struct VerseLayerStripCollapsibleModifier: ViewModifier {
++    @Environment(\.verseLayerStripCollapsesMarked) private var collapses
++
++    func body(content: Content) -> some View {
++        if collapses {
++            content.labelStyle(.iconOnly)
++        } else {
++            content
++        }
++    }
++}
++
++extension View {
++    func verseLayerStripCollapsible() -> some View { modifier(VerseLayerStripCollapsibleModifier()) }
+ }
+ 
+ /// 시트 도구 줄 바탕 — 2026-10-07: 화면 맨 아래 고정 바에서 "말씀구절 아래" 본문 흐름 안으로 옮겨(목업 결정) 스크롤 내용의 일부가 되었다.
+@@ -306,15 +365,26 @@
+ /// 도구 하나 — 44pt 상자(내용) 아래, 상자 바깥에 이름. 성경 조회 하단 메뉴와 같은 배치다.
+ /// [2026-10-29 zoommenu1] `wrapsTitle`이 true면 이름을 단어 단위로 최대 두 줄에 담는다(`VerseLayerWrappedTitle`, 44pt 이하 이름은 한 줄 그대로).
+ /// 기본값 false는 예전 그대로(한 줄, 0.8배까지 축소) — 한 줄 배치가 들어가는 화면(한국어 포함)은 이 경로라 모양이 바뀌지 않는다.
++/// [2026-10-29 zoommenu2] `shrinksTitleToFit`이 true면(확대 보기 도구 줄의 마지막 후보, 아주 큰 접근성 글자 전용) 받은 폭을 다 쓰고
++/// 이름은 두 줄 + 0.5배까지 축소. 이 경로만 단어 중간 끊김이 생길 수 있다(넘치는 것보다 낫다).
+ struct VerseLayerToolCaption<Content: View>: View {
+     let title: String
+     var wrapsTitle: Bool = false
++    var shrinksTitleToFit: Bool = false
+     @ViewBuilder var content: Content
+ 
+     var body: some View {
+         VStack(spacing: 5) {
+             content
+-            if wrapsTitle {
++            if shrinksTitleToFit {
++                Text(title)
++                    .font(.caption)
++                    .foregroundStyle(UserSettingsStore.shared.bibleTextColor ?? Color.primary)
++                    .lineLimit(2)
++                    .multilineTextAlignment(.center)
++                    .minimumScaleFactor(0.5)
++                    .accessibilityHidden(true)
++            } else if wrapsTitle {
+                 VerseLayerWrappedTitle(title: title, singleLineMaxWidth: 44)
+                     .font(.caption)
+                     .foregroundStyle(UserSettingsStore.shared.bibleTextColor ?? Color.primary)
+@@ -328,6 +398,7 @@
+                     .accessibilityHidden(true)
+             }
+         }
++        .frame(maxWidth: shrinksTitleToFit ? .infinity : nil)
+     }
+ }
+ 
+--- a/JBCHBibleResearch/Views/Bible/VerseZoomView.swift
++++ b/JBCHBibleResearch/Views/Bible/VerseZoomView.swift
+@@ -256,16 +256,37 @@
+                     }
+                     .buttonStyle(BibleBarButtonStyle(kind: .primary, height: 40, cornerRadius: 10, fontSize: 15))
+                     .accessibilityLabel("원문 정보로 전환")
++                    // [2026-10-29 zoommenu2] 줄이 좁아 아이콘만 남을 때(`VerseLayerStrip` 4번 배치) 포인터를 올리면 이름이 보이게.
++                    .help("원문 정보")
+                     // 펜/눈동자 토글 — 표시 모드에선 펜(선택 모드 진입), 선택 모드에선 눈동자(표시 모드 복귀 + 선택 해제).
+                     // 2026-10-07: 아이콘만이던 토글에 글자를 더했다 — 펜 "편집"(선택 모드 진입) ↔ 눈 "뷰어"(표시 모드 복귀). 글자는 누르면 가는 쪽 모드 이름.
+                     Button {
+                         isSelecting.toggle()
+                         selectedRange = NSRange(location: 0, length: 0)
+                     } label: {
+-                        Label(isSelecting ? String(localized: "뷰어") : String(localized: "편집"), systemImage: isSelecting ? "eye" : "pencil")
++                        // [2026-10-29 zoommenu2] 두 상태(편집·펜 / 뷰어·눈) 중 넓은 쪽 폭을 늘 차지하게 다른 상태의 글자·아이콘을 숨겨 겹쳐 둔다.
++                        // 그래야 토글할 때마다 `VerseLayerStrip`의 `ViewThatFits`가 다른 후보를 고르지 않는다. 버튼 접근성 라벨은 아래 `accessibilityLabel`.
++                        Label {
++                            ZStack {
++                                Text(isSelecting ? String(localized: "뷰어") : String(localized: "편집"))
++                                Text(isSelecting ? String(localized: "편집") : String(localized: "뷰어"))
++                                    .hidden()
++                                    .accessibilityHidden(true)
++                            }
++                        } icon: {
++                            ZStack {
++                                Image(systemName: isSelecting ? "eye" : "pencil")
++                                Image(systemName: isSelecting ? "pencil" : "eye")
++                                    .hidden()
++                                    .accessibilityHidden(true)
++                            }
++                        }
+                     }
+                     .buttonStyle(BibleBarButtonStyle(kind: isSelecting ? .primary : .secondary, height: 40, cornerRadius: 10, fontSize: 15))
+                     .accessibilityLabel(isSelecting ? String(localized: "글자 선택 끝내기") : String(localized: "글자 선택 모드"))
++                    // [2026-10-29 zoommenu2] 펜/눈 토글은 아이콘만으로도 뜻이 통해 줄이 좁으면 먼저 아이콘만으로 접는다(`VerseLayerStrip` 3번 배치).
++                    .verseLayerStripCollapsible()
++                    .help(isSelecting ? String(localized: "뷰어") : String(localized: "편집"))
+                 }
+                 #endif
+                 if columns.count > 1 {
+@@ -504,7 +525,7 @@
+     // 수동 밑줄 버튼(`.mark`)은 없앴다 — 그 주황 밑줄은 관주가 걸린 표현에 자동으로 붙는다(`VerseAnnotationRenderer.buildLines`의 `hasCrossReference`).
+     // `VerseHighlightStyle.mark` 케이스와 렌더링 분기는 기존 레거시 데이터 표시용으로 남겼고 새로 만드는 진입점은 없다.
+     #if os(macOS)
+-    /// macOS 하단 도구 줄 — 형광펜 색 점 상자 + 메모/개인 묵상/관주 72×56 타일(목업 결정, `VerseSheetChrome.swift`).
++    /// macOS 하단 도구 줄 — 형광펜 색 점 상자 + 메모/개인 묵상/관주 타일(폭 최소 72·높이 56, 목업 결정, `VerseSheetChrome.swift`).
+     /// 선택 모드가 꺼지면 모든 도구를 38%로 흐리게 하고 누를 수 없게 둔다(예전 35%와 같은 의도).
+     private var actionBar: some View {
+         let textColor: Color = settings.bibleTextColor ?? Color.primary
+@@ -602,6 +623,7 @@
+     ///   1) 예전 배치 그대로(이름 한 줄) — 한국어·중국어·일본어는 아이폰 세로에서도 이 배치라 모양이 같다.
+     ///   2) 한 줄, 긴 이름만 단어 단위 두 줄(`VerseLayerWrappedTitle`).
+     ///   3) 두 줄 — 형광펜 상자 한 줄, 그 아래 메모·개인 묵상·관주(이름은 2와 같이 두 줄).
++    ///   4) (zoommenu2) 3과 같되 세 도구가 폭을 나눠 쓰고 이름을 축소 — 아주 큰 접근성 글자 전용 안전망.
+     /// 형광펜 상자는 `fixedSize()`로 어느 배치에서도 줄어들지 않는다. 도구 줄은 위 정렬이라 이름이 두 줄인 도구가 있어도 상자(아이콘) 높이가 같다.
+     private var actionBar: some View {
+         VerseLayerFooter {
+@@ -620,6 +642,14 @@
+                         layerTools(wrapsTitles: true)
+                     }
+                 }
++                // [2026-10-29 zoommenu2] 4) 마지막 후보 — 아주 큰 접근성 글자(AX3 이상)에서 3번도 넘칠 때만 쓰인다(일반 크기에서 3번 아래 줄은 최대 약 270pt).
++                // 세 도구가 받은 폭을 똑같이 나눠 쓰고 이름은 두 줄 + 0.5배까지 축소. 화면 폭을 넘지 않는다(상자 3×44 + 간격 ≤ 164pt).
++                VStack(spacing: 10) {
++                    highlighterTool
++                    HStack(alignment: .top, spacing: VerseLayerToolMetrics.spacing) {
++                        layerTools(wrapsTitles: true, shrinksTitlesToFit: true)
++                    }
++                }
+             }
+         }
+         .disabled(!isSelecting)
+@@ -654,11 +684,11 @@
+ 
+     /// 메모·개인 묵상·관주 세 도구. `wrapsTitles`가 true면 이름을 단어 단위로 최대 두 줄에 담는다.
+     @ViewBuilder
+-    private func layerTools(wrapsTitles: Bool) -> some View {
++    private func layerTools(wrapsTitles: Bool, shrinksTitlesToFit: Bool = false) -> some View {
+         // 선택 범위와 겹치는 기존 메모가 있으면(`existingPhraseNote(overlapping:)`) 중복 등록하지 않고 그 메모를 편집 모드로 연다.
+         // 팝오버를 열기로 결정하는 이 순간 `selectedRange`/`anchorText`를 `editingAnchorRange`/`editingAnchorText`에 스냅샷으로 떠 둔다
+         // (상태 선언부 주석 참고). 앞뒤 공백은 `trimmedRange`로 뺀다.
+-        VerseLayerToolCaption(title: String(localized: "메모"), wrapsTitle: wrapsTitles) {
++        VerseLayerToolCaption(title: String(localized: "메모"), wrapsTitle: wrapsTitles, shrinksTitleToFit: shrinksTitlesToFit) {
+             Button {
+                 beginPhraseNoteFromSelection()
+             } label: {
+@@ -668,7 +698,7 @@
+             .accessibilityLabel("메모")
+         }
+ 
+-        VerseLayerToolCaption(title: String(localized: "개인 묵상"), wrapsTitle: wrapsTitles) {
++        VerseLayerToolCaption(title: String(localized: "개인 묵상"), wrapsTitle: wrapsTitles, shrinksTitleToFit: shrinksTitlesToFit) {
+             Button {
+                 beginComposingPersonalNote()
+             } label: {
+@@ -680,7 +710,7 @@
+ 
+         // 관주 버튼은 항상 새로 만들기 시트(`CrossReferenceTargetPicker`)를 열고, 겹치는 기존 관주는 `existingReferences`로
+         // 시트에 넘겨 그 안에서 보여준다(아래 `.sheet` 참고).
+-        VerseLayerToolCaption(title: String(localized: "관주"), wrapsTitle: wrapsTitles) {
++        VerseLayerToolCaption(title: String(localized: "관주"), wrapsTitle: wrapsTitles, shrinksTitleToFit: shrinksTitlesToFit) {
+             Button {
+                 isCrossReferencePickerPresented = true
+             } label: {

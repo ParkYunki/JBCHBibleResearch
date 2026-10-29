@@ -176,6 +176,8 @@ struct OriginalTextInfoView: View {
                     }
                     .buttonStyle(BibleBarButtonStyle(kind: .primary, height: 40, cornerRadius: 10, fontSize: 15))
                     .accessibilityLabel("메모하기로 전환")
+                    // [2026-10-29 zoommenu2] 줄이 좁아 아이콘만 남을 때(`VerseLayerStrip` 4번 배치) 포인터를 올리면 이름이 보이게.
+                    .help("메모하기")
                 }
                 mainScroll
             }

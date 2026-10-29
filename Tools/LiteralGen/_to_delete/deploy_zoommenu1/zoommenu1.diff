@@ -1,0 +1,322 @@
+--- a/JBCHBibleResearch/Views/Bible/VerseSheetChrome.swift
++++ b/JBCHBibleResearch/Views/Bible/VerseSheetChrome.swift
+@@ -79,6 +79,10 @@
+ 
+ /// 72×56 도구 타일 버튼 스타일(아이콘 위, 이름 아래 라벨을 받는다).
+ struct VerseToolTileStyle: ButtonStyle {
++    /// 타일 최소 폭과, 그 안에서 이름이 한 줄로 남는 최대 폭(좌우 안쪽 여백 6pt씩을 뺀 값).
++    static let minimumWidth: CGFloat = 72
++    static let singleLineTitleWidth: CGFloat = minimumWidth - 12
++
+     func makeBody(configuration: Configuration) -> some View {
+         VerseToolTileBody(configuration: configuration)
+     }
+@@ -101,7 +105,12 @@
+         configuration.label
+             .font(.system(size: 11.5, weight: .medium))
+             .foregroundStyle(palette.text)
+-            .frame(width: 72, height: 56)
++            // [2026-10-29 zoommenu1] 폭 72 고정 → 최소 72. 이름이 두 줄로도 72pt(안쪽 60pt)에 안 들어가는 언어(러시아어 등)만
++            // 타일이 넓어진다. 한국어 등 60pt 이하 이름은 예전과 같은 72×56. `fixedSize`로 줄에서 눌려 이름이 잘리지 않게 한다.
++            .padding(.horizontal, 6)
++            .frame(minWidth: VerseToolTileStyle.minimumWidth)
++            .frame(height: 56)
++            .fixedSize()
+             .background(shape.fill(palette.text.opacity(fill)))
+             .overlay(shape.strokeBorder(palette.text.opacity(BibleBarMetrics.lineOpacity), lineWidth: 1))
+             .contentShape(shape)
+@@ -148,6 +157,82 @@
+     }
+ }
+ 
++/// [2026-10-29 zoommenu1] 도구 이름 — 단어 단위로 최대 두 줄, 가운데 정렬.
++/// 한 줄 폭이 `singleLineMaxWidth` 이하이면 지금처럼 한 줄로 두고, 넘으면 두 줄 중 긴 줄이 가장 짧아지는 단어 경계에서 나눈 폭을 쓴다.
++/// 나눌 수 있는 자리는 공백과 하이픈 뒤(유니코드 줄바꿈 규칙 UAX #14에서 줄바꿈이 허용되는 자리)뿐이다. 공백이 없는 이름(태국어·중국어·일본어)은 한 줄 폭 그대로다.
++/// 폭은 숨긴 `Text`(나눈 앞부분·뒷부분)를 같은 글꼴로 재서 정하므로 글자 크기(Dynamic Type)가 바뀌어도 맞고,
++/// 그 폭이 가장 긴 단어보다 좁아지지 않아 단어 중간에서 끊기지 않는다(축소·말줄임 없이 두 줄에 다 들어간다).
++struct VerseLayerWrappedTitle: View {
++    let title: String
++    var singleLineMaxWidth: CGFloat = 0
++
++    var body: some View {
++        let normalized = title.split(separator: " ", omittingEmptySubsequences: true).joined(separator: " ")
++        let phrases = Self.splitPhrases(normalized)
++        VerseLayerBalancedTitleLayout(singleLineMaxWidth: singleLineMaxWidth) {
++            Text(normalized)
++                .lineLimit(2)
++                .multilineTextAlignment(.center)
++            ForEach(phrases.indices, id: \.self) { index in
++                Text(phrases[index]).lineLimit(1).hidden().accessibilityHidden(true)
++            }
++        }
++    }
++
++    /// 나눌 수 있는 자리마다 [앞부분, 뒷부분]을 차례로 이어 붙인 배열(길이 = 자리 수 × 2).
++    private static func splitPhrases(_ text: String) -> [String] {
++        let characters = Array(text)
++        var phrases: [String] = []
++        for index in characters.indices where index > 0 && index < characters.count - 1 {
++            if characters[index] == " " {
++                phrases.append(String(characters[..<index]))
++                phrases.append(String(characters[(index + 1)...]))
++            } else if characters[index] == "-", characters[index - 1].isLetter, characters[index + 1].isLetter {
++                phrases.append(String(characters[...index]))
++                phrases.append(String(characters[(index + 1)...]))
++            }
++        }
++        return phrases
++    }
++}
++
++/// `VerseLayerWrappedTitle` 전용. 첫 자식 = 보이는 이름, 나머지 = 숨긴 [앞부분, 뒷부분] 쌍.
++/// 제안 폭과 상관없이 위 규칙으로 정한 폭을 보고한다(`fixedSize`처럼). 그래서 `ViewThatFits`가 이상 크기를 잴 때도 같은 폭이 나온다.
++struct VerseLayerBalancedTitleLayout: Layout {
++    let singleLineMaxWidth: CGFloat
++
++    func sizeThatFits(proposal: ProposedViewSize, subviews: Subviews, cache: inout ()) -> CGSize {
++        guard let title = subviews.first else { return .zero }
++        let width = titleWidth(subviews)
++        return CGSize(width: width, height: title.sizeThatFits(ProposedViewSize(width: width, height: nil)).height)
++    }
++
++    func placeSubviews(in bounds: CGRect, proposal: ProposedViewSize, subviews: Subviews, cache: inout ()) {
++        guard let title = subviews.first else { return }
++        let width = titleWidth(subviews)
++        title.place(at: CGPoint(x: bounds.midX, y: bounds.minY), anchor: .top, proposal: ProposedViewSize(width: width, height: nil))
++        // 숨긴 측정용 이름은 보이지 않으므로 아무 데나 두어도 된다(배치하지 않은 자식도 SwiftUI가 가운데에 두므로 명시한다).
++        for phrase in subviews.dropFirst() {
++            phrase.place(at: CGPoint(x: bounds.midX, y: bounds.minY), anchor: .top, proposal: .unspecified)
++        }
++    }
++
++    private func titleWidth(_ subviews: Subviews) -> CGFloat {
++        let oneLine = subviews[0].sizeThatFits(.unspecified).width
++        guard oneLine > singleLineMaxWidth else { return oneLine }
++        let widths = subviews.dropFirst().map { $0.sizeThatFits(.unspecified).width }
++        var best = oneLine
++        var index = 0
++        while index + 1 < widths.count {
++            best = min(best, max(widths[index], widths[index + 1]))
++            index += 2
++        }
++        guard best < oneLine else { return oneLine }
++        // 반올림 오차로 마지막 단어가 다음 줄로 밀리지 않게 1pt 여유. 한 줄 폭을 넘지는 않는다.
++        return min(oneLine, best.rounded(.up) + 1)
++    }
++}
++
+ #if os(iOS)
+ /// 머리 2줄 — 구절 이동 묶음 [‹ n절 ›]과 오른쪽 전환/도구 버튼. 아래에 글자색 14% 선.
+ /// 묶음은 성경 조회 상단 막대의 `BibleBarSegmentGroup`을 터치용 크기로 쓴다.
+@@ -203,8 +288,7 @@
+     var body: some View {
+         let settings = UserSettingsStore.shared
+         let textColor: Color = settings.bibleTextColor ?? Color.primary
+-        let isPhone = UIDevice.current.userInterfaceIdiom == .phone
+-        HStack(alignment: .top, spacing: isPhone ? 10 : 16) { content }
++        HStack(alignment: .top, spacing: VerseLayerToolMetrics.spacing) { content }
+             .padding(.horizontal, 10)
+             .padding(.vertical, 10)
+             .frame(maxWidth: .infinity)
+@@ -214,20 +298,35 @@
+     }
+ }
+ 
++/// [2026-10-29 zoommenu1] 하단 도구 사이 간격. `VerseLayerFooter`와 확대 보기 도구 줄(`VerseZoomView.actionBar`의 `ViewThatFits` 후보들)이 같은 값을 쓴다.
++enum VerseLayerToolMetrics {
++    static var spacing: CGFloat { UIDevice.current.userInterfaceIdiom == .phone ? 10 : 16 }
++}
++
+ /// 도구 하나 — 44pt 상자(내용) 아래, 상자 바깥에 이름. 성경 조회 하단 메뉴와 같은 배치다.
++/// [2026-10-29 zoommenu1] `wrapsTitle`이 true면 이름을 단어 단위로 최대 두 줄에 담는다(`VerseLayerWrappedTitle`, 44pt 이하 이름은 한 줄 그대로).
++/// 기본값 false는 예전 그대로(한 줄, 0.8배까지 축소) — 한 줄 배치가 들어가는 화면(한국어 포함)은 이 경로라 모양이 바뀌지 않는다.
+ struct VerseLayerToolCaption<Content: View>: View {
+     let title: String
++    var wrapsTitle: Bool = false
+     @ViewBuilder var content: Content
+ 
+     var body: some View {
+         VStack(spacing: 5) {
+             content
+-            Text(title)
+-                .font(.caption)
+-                .foregroundStyle(UserSettingsStore.shared.bibleTextColor ?? Color.primary)
+-                .lineLimit(1)
+-                .minimumScaleFactor(0.8)
+-                .accessibilityHidden(true)
++            if wrapsTitle {
++                VerseLayerWrappedTitle(title: title, singleLineMaxWidth: 44)
++                    .font(.caption)
++                    .foregroundStyle(UserSettingsStore.shared.bibleTextColor ?? Color.primary)
++                    .accessibilityHidden(true)
++            } else {
++                Text(title)
++                    .font(.caption)
++                    .foregroundStyle(UserSettingsStore.shared.bibleTextColor ?? Color.primary)
++                    .lineLimit(1)
++                    .minimumScaleFactor(0.8)
++                    .accessibilityHidden(true)
++            }
+         }
+     }
+ }
+--- a/JBCHBibleResearch/Views/Bible/VerseZoomView.swift
++++ b/JBCHBibleResearch/Views/Bible/VerseZoomView.swift
+@@ -558,7 +558,8 @@
+         Button(action: action) {
+             VStack(spacing: 4) {
+                 Image(systemName: systemImage).font(.system(size: 19))
+-                Text(title)
++                // [2026-10-29 zoommenu1] 단어 단위 최대 두 줄. 안쪽 60pt에 한 줄로 들어가면 예전처럼 한 줄(한국어 전부).
++                VerseLayerWrappedTitle(title: title, singleLineMaxWidth: VerseToolTileStyle.singleLineTitleWidth)
+             }
+         }
+         .buttonStyle(VerseToolTileStyle())
+@@ -594,67 +595,100 @@
+     #if os(iOS)
+     /// 아이패드·아이폰 하단 도구 줄 — 형광펜 색 점 상자 + 메모/개인 묵상/관주 44pt 상자, 이름은 상자 바깥 아래(2026-10-02 목업).
+     /// 색 점마다 글자색 38% 외곽선을 둬 연한 색이 배경에 묻히지 않게 한다. 선택 모드가 꺼지면 전체를 흐리게(45%) 하고 누를 수 없게 둔다.
++    ///
++    /// [2026-10-29 zoommenu1] 러시아어·독일어 등에서 이름이 길어 줄이 화면보다 넓어지면, 예전에는 `HStack`이 각 도구를 이상 폭보다 좁게 제안했고
++    /// 형광펜 상자(`verseLayerBox`의 `.frame(minWidth: 44)`)가 그 좁은 폭으로 줄어든 채 안의 색 점(고정 크기)이 상자 양옆·화면 왼쪽 밖으로 넘쳤다.
++    /// 이름은 `lineLimit(1)`이라 0.8배 축소 뒤 말줄임됐다. 이제 `ViewThatFits`가 아래 순서로 처음 들어가는 배치를 고른다.
++    ///   1) 예전 배치 그대로(이름 한 줄) — 한국어·중국어·일본어는 아이폰 세로에서도 이 배치라 모양이 같다.
++    ///   2) 한 줄, 긴 이름만 단어 단위 두 줄(`VerseLayerWrappedTitle`).
++    ///   3) 두 줄 — 형광펜 상자 한 줄, 그 아래 메모·개인 묵상·관주(이름은 2와 같이 두 줄).
++    /// 형광펜 상자는 `fixedSize()`로 어느 배치에서도 줄어들지 않는다. 도구 줄은 위 정렬이라 이름이 두 줄인 도구가 있어도 상자(아이콘) 높이가 같다.
+     private var actionBar: some View {
++        VerseLayerFooter {
++            ViewThatFits(in: .horizontal) {
++                HStack(alignment: .top, spacing: VerseLayerToolMetrics.spacing) {
++                    highlighterTool
++                    layerTools(wrapsTitles: false)
++                }
++                HStack(alignment: .top, spacing: VerseLayerToolMetrics.spacing) {
++                    highlighterTool
++                    layerTools(wrapsTitles: true)
++                }
++                VStack(spacing: 10) {
++                    highlighterTool
++                    HStack(alignment: .top, spacing: VerseLayerToolMetrics.spacing) {
++                        layerTools(wrapsTitles: true)
++                    }
++                }
++            }
++        }
++        .disabled(!isSelecting)
++        .opacity(isSelecting ? 1 : 0.45)
++    }
++
++    /// 형광펜 색 점 상자 + 이름. 상자는 `fixedSize()`라 줄이 좁아도 줄어들지 않는다(예전 넘침의 직접 원인).
++    private var highlighterTool: some View {
+         let textColor: Color = settings.bibleTextColor ?? Color.primary
+         let isPhone = UIDevice.current.userInterfaceIdiom == .phone
+         let dotSize: CGFloat = isPhone ? 21 : 24
+-        return VerseLayerFooter {
+-            VerseLayerToolCaption(title: String(localized: "형광펜")) {
+-                HStack(spacing: isPhone ? 6 : 8) {
+-                    ForEach(HighlightColorTag.allCases) { tag in
+-                        Button {
+-                            handleHighlightTap(tag)
+-                        } label: {
+-                            Circle()
+-                                .fill(tag.swiftUIColor)
+-                                .frame(width: dotSize, height: dotSize)
+-                                .overlay(Circle().strokeBorder(textColor.opacity(0.38), lineWidth: 1.5))
+-                        }
+-                        .buttonStyle(.plain)
+-                        .contentShape(Rectangle())
++        return VerseLayerToolCaption(title: String(localized: "형광펜")) {
++            HStack(spacing: isPhone ? 6 : 8) {
++                ForEach(HighlightColorTag.allCases) { tag in
++                    Button {
++                        handleHighlightTap(tag)
++                    } label: {
++                        Circle()
++                            .fill(tag.swiftUIColor)
++                            .frame(width: dotSize, height: dotSize)
++                            .overlay(Circle().strokeBorder(textColor.opacity(0.38), lineWidth: 1.5))
+                     }
++                    .buttonStyle(.plain)
++                    .contentShape(Rectangle())
+                 }
+-                .padding(.horizontal, isPhone ? 8 : 10)
+-                .verseLayerBox()
+             }
++            .padding(.horizontal, isPhone ? 8 : 10)
++            .verseLayerBox()
++            .fixedSize()
++        }
++    }
+ 
+-            // 선택 범위와 겹치는 기존 메모가 있으면(`existingPhraseNote(overlapping:)`) 중복 등록하지 않고 그 메모를 편집 모드로 연다.
+-            // 팝오버를 열기로 결정하는 이 순간 `selectedRange`/`anchorText`를 `editingAnchorRange`/`editingAnchorText`에 스냅샷으로 떠 둔다
+-            // (상태 선언부 주석 참고). 앞뒤 공백은 `trimmedRange`로 뺀다.
+-            VerseLayerToolCaption(title: String(localized: "메모")) {
+-                Button {
+-                    beginPhraseNoteFromSelection()
+-                } label: {
+-                    Image(systemName: "text.bubble")
+-                }
+-                .buttonStyle(VerseLayerToolButtonStyle())
+-                .accessibilityLabel("메모")
++    /// 메모·개인 묵상·관주 세 도구. `wrapsTitles`가 true면 이름을 단어 단위로 최대 두 줄에 담는다.
++    @ViewBuilder
++    private func layerTools(wrapsTitles: Bool) -> some View {
++        // 선택 범위와 겹치는 기존 메모가 있으면(`existingPhraseNote(overlapping:)`) 중복 등록하지 않고 그 메모를 편집 모드로 연다.
++        // 팝오버를 열기로 결정하는 이 순간 `selectedRange`/`anchorText`를 `editingAnchorRange`/`editingAnchorText`에 스냅샷으로 떠 둔다
++        // (상태 선언부 주석 참고). 앞뒤 공백은 `trimmedRange`로 뺀다.
++        VerseLayerToolCaption(title: String(localized: "메모"), wrapsTitle: wrapsTitles) {
++            Button {
++                beginPhraseNoteFromSelection()
++            } label: {
++                Image(systemName: "text.bubble")
+             }
++            .buttonStyle(VerseLayerToolButtonStyle())
++            .accessibilityLabel("메모")
++        }
+ 
+-            VerseLayerToolCaption(title: String(localized: "개인 묵상")) {
+-                Button {
+-                    beginComposingPersonalNote()
+-                } label: {
+-                    Image(systemName: "note.text")
+-                }
+-                .buttonStyle(VerseLayerToolButtonStyle())
+-                .accessibilityLabel("개인 묵상")
++        VerseLayerToolCaption(title: String(localized: "개인 묵상"), wrapsTitle: wrapsTitles) {
++            Button {
++                beginComposingPersonalNote()
++            } label: {
++                Image(systemName: "note.text")
+             }
++            .buttonStyle(VerseLayerToolButtonStyle())
++            .accessibilityLabel("개인 묵상")
++        }
+ 
+-            // 관주 버튼은 항상 새로 만들기 시트(`CrossReferenceTargetPicker`)를 열고, 겹치는 기존 관주는 `existingReferences`로
+-            // 시트에 넘겨 그 안에서 보여준다(아래 `.sheet` 참고).
+-            VerseLayerToolCaption(title: String(localized: "관주")) {
+-                Button {
+-                    isCrossReferencePickerPresented = true
+-                } label: {
+-                    Image(systemName: "link")
+-                }
+-                .buttonStyle(VerseLayerToolButtonStyle())
+-                .accessibilityLabel("관주")
++        // 관주 버튼은 항상 새로 만들기 시트(`CrossReferenceTargetPicker`)를 열고, 겹치는 기존 관주는 `existingReferences`로
++        // 시트에 넘겨 그 안에서 보여준다(아래 `.sheet` 참고).
++        VerseLayerToolCaption(title: String(localized: "관주"), wrapsTitle: wrapsTitles) {
++            Button {
++                isCrossReferencePickerPresented = true
++            } label: {
++                Image(systemName: "link")
+             }
++            .buttonStyle(VerseLayerToolButtonStyle())
++            .accessibilityLabel("관주")
+         }
+-        .disabled(!isSelecting)
+-        .opacity(isSelecting ? 1 : 0.45)
+     }
+     #endif
+ 

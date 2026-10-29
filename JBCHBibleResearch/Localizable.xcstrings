@@ -24071,7 +24071,7 @@
         "th" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "การเฝ้าเดี่ยวส่วนตัว"
+            "value" : "เฝ้าเดี่ยว"
           }
         },
         "vi" : {
@@ -30059,7 +30059,7 @@
         "ru" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "Параллельные места"
+            "value" : "Параллели"
           }
         },
         "th" : {
@@ -59935,7 +59935,7 @@
         "ru" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "Просмотрщик"
+            "value" : "Просмотр"
           }
         },
         "th" : {
@@ -69608,6 +69608,112 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "一款在同一處管理聖經經文、研究資料和個人靈修的 App。下面簡要介紹主要功能。"
+          }
+        }
+      }
+    },
+    "성경 본문용 글꼴 Literata(Copyright 2017 The Literata Project Authors)는 SIL Open Font License(OFL) 1.1을 따릅니다. 원본 가변 글꼴에서 앱이 쓰는 굵기(Regular·SemiBold·Bold·Italic, 광학 크기 12pt)만 정적 글꼴로 만들어 포함했습니다." : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Die Schrift für den Bibeltext, Literata (Copyright 2017 The Literata Project Authors), steht unter der SIL Open Font License (OFL) 1.1. Nur die von der App verwendeten Schnitte (Regular, SemiBold, Bold, Italic; optische Größe 12pt) wurden aus der ursprünglichen variablen Schrift als statische Schriften erzeugt und sind enthalten."
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "The font used for Bible text, Literata (Copyright 2017 The Literata Project Authors), is licensed under the SIL Open Font License (OFL) 1.1. Only the styles the app uses (Regular, SemiBold, Bold, Italic; optical size 12pt) were generated as static fonts from the original variable font and included."
+          }
+        },
+        "en-CA" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "The font used for Bible text, Literata (Copyright 2017 The Literata Project Authors), is licensed under the SIL Open Font License (OFL) 1.1. Only the styles the app uses (Regular, SemiBold, Bold, Italic; optical size 12pt) were generated as static fonts from the original variable font and included."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "La fuente usada para el texto bíblico, Literata (Copyright 2017 The Literata Project Authors), se distribuye bajo la SIL Open Font License (OFL) 1.1. Solo los estilos que usa la app (Regular, SemiBold, Bold, Italic; tamaño óptico 12pt) se generaron como fuentes estáticas a partir de la fuente variable original y se incluyen."
+          }
+        },
+        "es-MX" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "La fuente usada para el texto bíblico, Literata (Copyright 2017 The Literata Project Authors), se distribuye bajo la SIL Open Font License (OFL) 1.1. Solo los estilos que usa la app (Regular, SemiBold, Bold, Italic; tamaño óptico 12pt) se generaron como fuentes estáticas a partir de la fuente variable original y se incluyen."
+          }
+        },
+        "fil" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Ang font na ginagamit sa teksto ng Bibliya, ang Literata (Copyright 2017 The Literata Project Authors), ay nasa ilalim ng SIL Open Font License (OFL) 1.1. Ang mga istilong ginagamit lang ng app (Regular, SemiBold, Bold, Italic; optical size 12pt) ang ginawang static font mula sa orihinal na variable font at isinama."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "La police utilisée pour le texte biblique, Literata (Copyright 2017 The Literata Project Authors), est distribuée sous la SIL Open Font License (OFL) 1.1. Seuls les styles utilisés par l’app (Regular, SemiBold, Bold, Italic ; taille optique 12pt) ont été générés en polices statiques à partir de la police variable d’origine et inclus."
+          }
+        },
+        "fr-CA" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "La police utilisée pour le texte biblique, Literata (Copyright 2017 The Literata Project Authors), est distribuée sous la SIL Open Font License (OFL) 1.1. Seuls les styles utilisés par l’app (Regular, SemiBold, Bold, Italic ; taille optique 12pt) ont été générés en polices statiques à partir de la police variable d’origine et inclus."
+          }
+        },
+        "id" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Font untuk teks Alkitab, yaitu Literata (Copyright 2017 The Literata Project Authors), berlisensi SIL Open Font License (OFL) 1.1. Hanya gaya yang digunakan aplikasi (Regular, SemiBold, Bold, Italic; ukuran optik 12pt) yang dibuat sebagai font statis dari font variabel aslinya dan disertakan."
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Il font usato per il testo biblico, Literata (Copyright 2017 The Literata Project Authors), è distribuito con licenza SIL Open Font License (OFL) 1.1. Solo gli stili usati dall’app (Regular, SemiBold, Bold, Italic; dimensione ottica 12pt) sono stati generati come font statici dal font variabile originale e inclusi."
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "聖書本文用フォント Literata (Copyright 2017 The Literata Project Authors) は SIL Open Font License (OFL) 1.1 に従います。元の可変フォントから、アプリで使うスタイル（Regular・SemiBold・Bold・Italic、オプティカルサイズ 12pt）のみを静的フォントとして生成し、同梱しています。"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "A fonte usada para o texto bíblico, Literata (Copyright 2017 The Literata Project Authors), segue a SIL Open Font License (OFL) 1.1. Somente os estilos usados pelo app (Regular, SemiBold, Bold, Italic; tamanho óptico 12pt) foram gerados como fontes estáticas a partir da fonte variável original e incluídos."
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Шрифт для текста Библии — Literata (Copyright 2017 The Literata Project Authors) — распространяется по лицензии SIL Open Font License (OFL) 1.1. Из исходного вариативного шрифта созданы и включены как статические шрифты только начертания, которые использует приложение (Regular, SemiBold, Bold, Italic; оптический размер 12pt)."
+          }
+        },
+        "th" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "แบบอักษรสำหรับข้อความพระคัมภีร์ Literata (Copyright 2017 The Literata Project Authors) อยู่ภายใต้ SIL Open Font License (OFL) 1.1 โดยสร้างเฉพาะรูปแบบที่แอปใช้ (Regular, SemiBold, Bold, Italic; ขนาดออปติคัล 12pt) เป็นแบบอักษรแบบคงที่จากแบบอักษรแบบแปรผันต้นฉบับและรวมไว้"
+          }
+        },
+        "vi" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Phông chữ dùng cho văn bản Kinh Thánh, Literata (Copyright 2017 The Literata Project Authors), tuân theo SIL Open Font License (OFL) 1.1. Chỉ các kiểu chữ mà ứng dụng dùng (Regular, SemiBold, Bold, Italic; cỡ quang học 12pt) được tạo thành phông chữ tĩnh từ phông chữ biến thiên gốc và được đi kèm."
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "圣经正文用字体 Literata (Copyright 2017 The Literata Project Authors) 遵循 SIL Open Font License (OFL) 1.1。仅将应用使用的样式（Regular、SemiBold、Bold、Italic，光学尺寸 12pt）从原始可变字体生成为静态字体并包含在内。"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "聖經正文用字型 Literata (Copyright 2017 The Literata Project Authors) 遵循 SIL Open Font License (OFL) 1.1。僅將應用程式使用的樣式（Regular、SemiBold、Bold、Italic，光學尺寸 12pt）從原始可變字型產生為靜態字型並包含在內。"
           }
         }
       }
@@ -85632,7 +85738,7 @@
         "ru" : {
           "stringUnit" : {
             "state" : "needs_review",
-            "value" : "Текст оригинала"
+            "value" : "Оригинал"
           }
         },
         "th" : {

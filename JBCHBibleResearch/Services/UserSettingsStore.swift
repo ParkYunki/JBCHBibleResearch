@@ -288,8 +288,9 @@ final class UserSettingsStore {
 
     /// 글꼴 이름 — 시스템 글꼴 목록에서 고른 이름, 내장 Paperlogy 폰트의 PostScript 이름
     /// (`BundledFonts.entries`), 또는 "System"(시스템 기본 서체). 기본값은 내장 기본 글꼴
-    /// (`BundledFonts.defaultPostScriptName`)이며, 폰트가 로드되지 않았어도 `bibleBodyFont`가
-    /// 시스템 폰트로 대체한다(BundledFontRegistrar.swift 참고).
+    /// (`BundledFonts.bibleDefaultPostScriptName` — 베트남어 앱은 Literata, 그 밖은 Paperlogy, 2026-10-29)이며,
+    /// 폰트가 로드되지 않았어도 `bibleBodyFont`가 시스템 폰트로 대체한다(BundledFontRegistrar.swift 참고).
+    /// 기기 설정(`UserDefaults`)에만 저장하고 iCloud로 동기화하지 않는다.
     var bibleFontName: String {
         didSet { defaults.set(bibleFontName, forKey: Key.bibleFontName) }
     }
@@ -617,7 +618,7 @@ final class UserSettingsStore {
         self.bibleReadingPhoneVisibleTranslationCode = defaults.string(forKey: Key.bibleReadingPhoneVisibleTranslationCode)
         self.lastManualSyncAt = defaults.object(forKey: Key.lastManualSyncAt) as? Date
 
-        self.bibleFontName = defaults.string(forKey: Key.bibleFontName) ?? BundledFonts.defaultPostScriptName
+        self.bibleFontName = defaults.string(forKey: Key.bibleFontName) ?? BundledFonts.bibleDefaultPostScriptName
         self.bibleBodyFontSize = defaults.object(forKey: Key.bibleBodyFontSize) as? Double ?? 17
         self.bibleVerseNumberFontSize = defaults.object(forKey: Key.bibleVerseNumberFontSize) as? Double ?? 12
         self.bibleLineSpacing = defaults.object(forKey: Key.bibleLineSpacing) as? Double ?? 4
