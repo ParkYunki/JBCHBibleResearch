@@ -343,6 +343,7 @@
 				"HEADER_SEARCH_PATHS[sdk=macosx*]" = "$(PROJECT_DIR)/JBCHBibleResearch/Native";
 				INFOPLIST_FILE = JBCHBibleResearch/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "엠마오 성경 연구";
+				INFOPLIST_KEY_ITSAppUsesNonExemptEncryption = NO;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.reference";
 				"INFOPLIST_KEY_LSApplicationCategoryType[sdk=macosx*]" = "public.app-category.reference";
 				INFOPLIST_KEY_LSSupportsOpeningDocumentsInPlace = YES;
@@ -425,6 +426,7 @@
 				"HEADER_SEARCH_PATHS[sdk=macosx*]" = "$(PROJECT_DIR)/JBCHBibleResearch/Native";
 				INFOPLIST_FILE = JBCHBibleResearch/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "엠마오 성경 연구";
+				INFOPLIST_KEY_ITSAppUsesNonExemptEncryption = NO;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.reference";
 				"INFOPLIST_KEY_LSApplicationCategoryType[sdk=macosx*]" = "public.app-category.reference";
 				INFOPLIST_KEY_LSSupportsOpeningDocumentsInPlace = YES;
