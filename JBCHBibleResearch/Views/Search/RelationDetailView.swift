@@ -29,12 +29,17 @@ struct RelationDetailView: View {
             Section("원문") {
                 Text(PersonRelationLabeling.displayRawSentence(item.relation.rawSentence)).font(.body)
             }
+            // [relverse1] 맥/아이패드 split 상세(`SearchView.macSplitCardLayout`)의 `List`는 바깥 `cardSectionWrapper`가 없어
+            // 행 배경이 시스템 기본색(흰색/검정)으로 남는다. 머리 절처럼 직접 투명으로 둔다.
+            .listRowBackground(Color.clear)
 
             if !item.verseRefs.isEmpty {
                 Section("관련 성경구절") {
                     BibleVerseChipRow(refs: item.verseRefs)
                         .listRowInsets(EdgeInsets(top: 6, leading: 16, bottom: 10, trailing: 16))
                 }
+                // [relverse1] 위 "원문" 절과 같은 이유.
+                .listRowBackground(Color.clear)
             }
         }
     }

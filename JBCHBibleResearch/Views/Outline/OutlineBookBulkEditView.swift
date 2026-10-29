@@ -27,6 +27,8 @@ struct OutlineBookBulkEditView: View {
     /// ⚠️ 에디터(`RichTextEditor`) 자체의 배경/글자색에는 쓰지 않는다 — 에디터 창은
     /// 읽기 테마와 무관한 고정 기본값이다(`EditorDefaultStyle.swift` 참고).
     private var settings: UserSettingsStore { .shared }
+    /// 개요(아이패드 세로)가 내용 칸을 숨긴 동안 true — 보이지 않는 편집기의 툴바 항목을 내비게이션 바에 올리지 않는다.
+    @Environment(\.isSplitDetailConcealed) private var isConcealedBySplit
     let book: Book
     var focusedChapter: Int? = nil
     var initialIsEditable: Bool = true
@@ -63,22 +65,26 @@ struct OutlineBookBulkEditView: View {
         .navigationBarTitleDisplayMode(.inline)
         #endif
         .toolbar {
-            #if os(iOS)
-            ToolbarItem(placement: .principal) {
-                let titleText = focusedChapter.map { String(localized: "\(book.displayName) \($0)장") } ?? book.displayName
-                Text(titleText)
-                    .font(.titleSerif(titleText, size: 20, relativeTo: .title3))
-                    .fontWeight(.semibold)
-                    .foregroundStyle(settings.bibleTextColor ?? .primary)
-            }
-            #endif
-            ToolbarItem(placement: .primaryAction) {
-                Button {
-                    isEditable.toggle()
-                } label: {
-                    Image(systemName: isEditable ? "eye" : "pencil")
+            // 개요(아이패드 세로)가 내용 칸을 숨긴 동안에는 보이지 않는 편집기의 제목·토글을 올리지 않는다(`isSplitDetailConcealed`).
+            // 그동안 가운데 제목은 트리(`OutlineTreeList`)의 "개요"가 보인다.
+            if !isConcealedBySplit {
+                #if os(iOS)
+                ToolbarItem(placement: .principal) {
+                    let titleText = focusedChapter.map { String(localized: "\(book.displayName) \($0)장") } ?? book.displayName
+                    Text(titleText)
+                        .font(.titleSerif(titleText, size: 20, relativeTo: .title3))
+                        .fontWeight(.semibold)
+                        .foregroundStyle(settings.bibleTextColor ?? .primary)
                 }
-                .help(isEditable ? String(localized: "읽기 전용으로 보기") : String(localized: "편집하기"))
+                #endif
+                ToolbarItem(placement: .primaryAction) {
+                    Button {
+                        isEditable.toggle()
+                    } label: {
+                        Image(systemName: isEditable ? "eye" : "pencil")
+                    }
+                    .help(isEditable ? String(localized: "읽기 전용으로 보기") : String(localized: "편집하기"))
+                }
             }
         }
         .onAppear {

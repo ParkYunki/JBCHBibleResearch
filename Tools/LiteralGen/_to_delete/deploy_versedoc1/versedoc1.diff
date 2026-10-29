@@ -1,0 +1,418 @@
+diff --git a/JBCHBibleResearch/Views/Bible/BibleReadingView.swift b/JBCHBibleResearch/Views/Bible/BibleReadingView.swift
+index dfb0821..5a9a45e 100644
+--- a/JBCHBibleResearch/Views/Bible/BibleReadingView.swift
++++ b/JBCHBibleResearch/Views/Bible/BibleReadingView.swift
+@@ -1096,6 +1096,8 @@ private struct BibleReadingContentView: View {
+                     isChapterBookmarked: viewModel.isChapterBookmarked(translationCode: column.registry.code),
+                     onSelectCrossReferenceTarget: jumpToCrossReferenceTarget,
+                     crossReferencePreviewProvider: { ref in viewModel.versePreviewText(registry: column.registry, ref: ref) },
++                    // 연구문서·내 설교 행 첫 줄의 출처 제목(`BibleReadingViewModel.mentionSourceTitle(for:)`).
++                    mentionTitleProvider: { mention in viewModel.mentionSourceTitle(for: mention) },
+                     onSelectPhraseMemo: { memo in memoBeingCreated = memo },
+                     onSelectVerseMention: handleVerseMentionSelected,
+                     // 다른 provider들과 같이 `column.registry.code`를 붙잡아 넘긴다 — 실제 캐시는
+@@ -1219,6 +1221,8 @@ private struct BibleReadingContentView: View {
+                     isChapterBookmarked: viewModel.isChapterBookmarked(translationCode: column.registry.code),
+                     onSelectCrossReferenceTarget: jumpToCrossReferenceTarget,
+                     crossReferencePreviewProvider: { ref in viewModel.versePreviewText(registry: column.registry, ref: ref) },
++                    // 연구문서·내 설교 행 첫 줄의 출처 제목(`BibleReadingViewModel.mentionSourceTitle(for:)`).
++                    mentionTitleProvider: { mention in viewModel.mentionSourceTitle(for: mention) },
+                     onSelectPhraseMemo: { memo in memoBeingCreated = memo },
+                     onSelectVerseMention: handleVerseMentionSelected,
+                     // 다른 provider들과 같이 `column.registry.code`를 붙잡아 넘긴다 — 실제 캐시는
+diff --git a/JBCHBibleResearch/Views/Bible/BibleReadingViewModel.swift b/JBCHBibleResearch/Views/Bible/BibleReadingViewModel.swift
+index 2479cf7..0ccffdd 100644
+--- a/JBCHBibleResearch/Views/Bible/BibleReadingViewModel.swift
++++ b/JBCHBibleResearch/Views/Bible/BibleReadingViewModel.swift
+@@ -209,6 +209,56 @@ final class BibleReadingViewModel {
+     private func rebuildVerseMentionsIndex() {
+         chapterVerseMentionsIndex = Dictionary(grouping: chapterVerseMentions) { $0.verse ?? -1 }
+     }
++    /// 이 장 언급(`chapterVerseMentions`)의 연구문서·내 설교 출처 제목(키: `mentionSourceKey(_:)`) — 2026-10-29.
++    /// 언급 행 첫 줄에 쓰며, 화면(절 관련 내용 페이지·확대보기 팝오버·사이드 패널)은 그릴 때 이 사전만 읽는다
++    /// (렌더링 중 SwiftData 조회 없음). `chapterVerseMentions`와 같은 시점(`refreshRelatedContent`)에 함께 다시 채우므로
++    /// 언급 목록과 제목의 최신 정도가 같다. 제목을 못 찾았거나 비어 있으면 키가 없다.
++    private var chapterMentionSourceTitles: [String: String] = [:]
++    private static func mentionSourceKey(_ mention: VerseMention) -> String {
++        "\(mention.sourceTypeRaw)|\(normalizedSourceId(mention.sourceId))"
++    }
++    /// `sourceId`를 `UUID(uuidString:)`로 정규화한다(대소문자 차이 흡수 — `UUID(uuidString:)`는 대소문자를 가리지 않고,
++    /// `uuidString`은 항상 대문자다). UUID로 읽히지 않는 문자열은 원래 값 그대로 쓴다.
++    private static func normalizedSourceId(_ sourceId: String) -> String {
++        UUID(uuidString: sourceId)?.uuidString ?? sourceId
++    }
++    /// - Parameter documents: `refreshRelatedContent`가 이미 전체 fetch한 연구문서 목록 — 문서 쪽은 추가 조회 없이 여기서 찾는다.
++    ///   설교는 이 장 언급에 나온 설교마다 `resolveSermon(for:)`(id 조건 fetch)를 한 번씩만 부른다.
++    ///   (`#Predicate`의 `ids.contains(...)` 일괄 조회는 iOS 18에서의 동작 근거를 확인하지 못해 쓰지 않았다.)
++    private func rebuildMentionSourceTitles(documents: [SourceDocument]) {
++        func normalized(_ title: String?) -> String? {
++            guard let trimmed = title?.trimmingCharacters(in: .whitespacesAndNewlines), !trimmed.isEmpty else { return nil }
++            return trimmed
++        }
++        var titles: [String: String] = [:]
++        var neededDocumentIds: Set<String> = []
++        var visitedSermonKeys: Set<String> = []
++        for mention in chapterVerseMentions {
++            switch mention.sourceType {
++            case .document:
++                neededDocumentIds.insert(Self.normalizedSourceId(mention.sourceId))
++            case .sermon:
++                let key = Self.mentionSourceKey(mention)
++                guard visitedSermonKeys.insert(key).inserted else { continue }
++                if let title = normalized(resolveSermon(for: mention)?.title) { titles[key] = title }
++            case .memo, .wordSummary:
++                continue
++            }
++        }
++        if !neededDocumentIds.isEmpty {
++            let documentTypeRaw = VerseMentionSourceType.document.rawValue
++            for document in documents {
++                // `document.id.uuidString`은 이미 정규형(대문자)이라 `normalizedSourceId`와 같은 값이다.
++                let sourceId = document.id.uuidString
++                guard neededDocumentIds.contains(sourceId), let title = normalized(document.displayTitle) else { continue }
++                titles["\(documentTypeRaw)|\(sourceId)"] = title
++            }
++        }
++        // 같으면 대입하지 않는다 — `@Observable`이 이 프로퍼티를 읽는 화면을 불필요하게 다시 그리지 않게 한다.
++        if titles != chapterMentionSourceTitles {
++            chapterMentionSourceTitles = titles
++        }
++    }
+ 
+     /// `TranslationColumnView.VerseRow`가 호출 — 이 번역본·이 절에 걸린 형광펜/표시만
+     /// 골라 낸다.
+@@ -303,6 +353,15 @@ final class BibleReadingViewModel {
+         ))?.first
+     }
+ 
++    /// 연구문서·내 설교 언급 행의 첫 줄에 보일 출처 제목(2026-10-29). 연구문서는 `SourceDocument.displayTitle`
++    /// (사용자 지정 제목, 없으면 파일명), 설교는 `Sermon.title`. 출처를 못 찾거나 제목이 비어 있으면(공백뿐 포함) nil —
++    /// 호출부는 이름 줄을 빼고 내용만 보인다. 메모·말씀 요약은 대상이 아니라 항상 nil이다.
++    /// ⚠️ 조회하지 않고 `chapterMentionSourceTitles`(장 로드 때 채움)만 읽는다 — 화면이 `body`에서 불러도 된다.
++    /// 이 장의 언급(`verseMentions(verse:)`)만 대상이다.
++    func mentionSourceTitle(for mention: VerseMention) -> String? {
++        chapterMentionSourceTitles[Self.mentionSourceKey(mention)]
++    }
++
+     /// 이 번역본·이 절에 보여줄 메모 아이콘 대상. `relatedChapterMemos`를 다시 쿼리하지 않고 필터링만 한다.
+     ///
+     /// 구간 메모(`rangeStart != nil`)는 특정 번역본의 특정 표현에 종속되므로 그 번역본 컬럼에서만,
+@@ -1099,6 +1158,7 @@ final class BibleReadingViewModel {
+             )
+         )) ?? []
+         rebuildVerseMentionsIndex()
++        rebuildMentionSourceTitles(documents: allDocuments)
+     }
+ 
+     private static func makePreview(_ text: String, limit: Int = 80) -> String {
+diff --git a/JBCHBibleResearch/Views/Bible/ChapterRelatedContentPanel.swift b/JBCHBibleResearch/Views/Bible/ChapterRelatedContentPanel.swift
+index d7fccff..fd9409b 100644
+--- a/JBCHBibleResearch/Views/Bible/ChapterRelatedContentPanel.swift
++++ b/JBCHBibleResearch/Views/Bible/ChapterRelatedContentPanel.swift
+@@ -469,6 +469,7 @@ struct ChapterRelatedContentPanel: View {
+         // (스니펫, 없으면 검색어)가 글자 그대로 같은 항목만 한 줄로 묶어 "N곳에서 언급됨"으로
+         // 표시한다. 텍스트가 서로 다르면 합치지 않는다.
+         let groupedMentionedDocuments = groupedByDisplayText(mentionedDocuments)
++        let documentTitles = sourceTitles(for: groupedMentionedDocuments)
+         Section {
+             sectionTitleRow(
+                 String(localized: "\(verse)절 관련 연구문서 (\(taggedDocuments.count + groupedMentionedDocuments.count))"),
+@@ -514,6 +515,9 @@ struct ChapterRelatedContentPanel: View {
+                                         .foregroundStyle(settings.bibleTextColor?.opacity(0.6) ?? Color.secondary)
+                                 }
+                             }
++                            if let title = documentTitles[group.id] {
++                                mentionSourceTitleRow(title, systemImage: "doc.text", truncation: .middle)
++                            }
+                             Text(group.representative.snippet.isEmpty ? group.representative.searchText : group.representative.snippet)
+                                 .font(.callout)
+                                 .foregroundStyle(settings.bibleTextColor ?? .primary)
+@@ -535,6 +539,8 @@ struct ChapterRelatedContentPanel: View {
+         let id: UUID
+         let representative: VerseMention
+         let count: Int
++        /// 묶인 언급이 모두 같은 출처(문서/설교)에서 왔는지 — 출처 제목 줄은 이때만 보인다(`sourceTitles(for:)`).
++        let isSingleSource: Bool
+     }
+ 
+     private func groupedByDisplayText(_ mentions: [VerseMention]) -> [GroupedMention] {
+@@ -549,10 +555,37 @@ struct ChapterRelatedContentPanel: View {
+         }
+         return order.compactMap { key in
+             guard let group = buckets[key], let first = group.first else { return nil }
+-            return GroupedMention(id: first.id, representative: first, count: group.count)
++            return GroupedMention(
++                id: first.id, representative: first, count: group.count,
++                isSingleSource: group.allSatisfy { $0.sourceId == first.sourceId }
++            )
+         }
+     }
+ 
++    /// 묶음별 출처 제목(키: `GroupedMention.id`) — 연구문서·내 설교 언급 행 첫 줄(2026-10-29).
++    /// 묶음 구조(화면 텍스트가 같으면 "N곳에서 언급됨")는 그대로 두고, 서로 다른 출처가 한 묶음에 섞이면
++    /// 대표 하나의 제목이 나머지 출처를 가리게 되므로 제목 줄을 뺀다.
++    /// `mentionSourceTitle(for:)`는 장 로드 때 채운 사전을 읽기만 하므로 `body`마다 불러도 SwiftData 조회가 없다.
++    private func sourceTitles(for groups: [GroupedMention]) -> [UUID: String] {
++        var result: [UUID: String] = [:]
++        for group in groups where group.isSingleSource {
++            if let title = viewModel.mentionSourceTitle(for: group.representative) {
++                result[group.id] = title
++            }
++        }
++        return result
++    }
++
++    /// 언급 행의 출처 제목 1줄. 아이콘은 같은 섹션의 "연결됨" 행(`documentRowLabel`/`sermonReferenceRowLabel`)과
++    /// 같은 심볼을 쓴다. 말줄임 위치는 호출부가 정한다(파일명은 가운데 — 앞부분이 같은 파일명끼리도 구분되게, 설교 제목은 끝).
++    private func mentionSourceTitleRow(_ title: String, systemImage: String, truncation: Text.TruncationMode) -> some View {
++        Label(title, systemImage: systemImage)
++            .font(.callout.weight(.semibold))
++            .foregroundStyle(settings.bibleTextColor ?? .primary)
++            .lineLimit(1)
++            .truncationMode(truncation)
++    }
++
+     /// 위 `taggedDocuments` 행 — "이 장에 연결됨" 배지 + 파일명(`mentionedDocuments` 행과 같은 구조).
+     private func documentRowLabel(_ document: SourceDocument) -> some View {
+         VStack(alignment: .leading, spacing: 6) {
+@@ -575,6 +608,7 @@ struct ChapterRelatedContentPanel: View {
+         let mentionedSermons = viewModel.verseMentions(verse: verse).filter { $0.sourceType == .sermon }
+         // documentSection과 같은 이유로, 같은 텍스트는 "N곳에서 언급됨"으로 묶는다.
+         let groupedMentionedSermons = groupedByDisplayText(mentionedSermons)
++        let sermonTitles = sourceTitles(for: groupedMentionedSermons)
+         Section {
+             sectionTitleRow(
+                 String(localized: "\(verse)절 관련 설교문 (\(taggedReferences.count + groupedMentionedSermons.count))"),
+@@ -599,6 +633,9 @@ struct ChapterRelatedContentPanel: View {
+                                         .foregroundStyle(settings.bibleTextColor?.opacity(0.6) ?? Color.secondary)
+                                 }
+                             }
++                            if let title = sermonTitles[group.id] {
++                                mentionSourceTitleRow(title, systemImage: "mic.fill", truncation: .tail)
++                            }
+                             Text(group.representative.snippet.isEmpty ? group.representative.searchText : group.representative.snippet)
+                                 .font(.callout)
+                                 .foregroundStyle(settings.bibleTextColor ?? .primary)
+diff --git a/JBCHBibleResearch/Views/Bible/TranslationColumnView.swift b/JBCHBibleResearch/Views/Bible/TranslationColumnView.swift
+index 8d31400..402fbc1 100644
+--- a/JBCHBibleResearch/Views/Bible/TranslationColumnView.swift
++++ b/JBCHBibleResearch/Views/Bible/TranslationColumnView.swift
+@@ -87,6 +87,8 @@ struct TranslationColumnView: View {
+     var onSelectCrossReferenceTarget: (BibleVerseRef) -> Void = { _ in }
+     /// 관주 미리보기 글 — 이 컬럼 번역본의 대상 절 본문(없으면 nil). 통합 페이지의 관주 행이 두 줄까지 보여 준다.
+     var crossReferencePreviewProvider: (BibleVerseRef) -> String? = { _ in nil }
++    /// 연구문서·내 설교 언급의 출처 제목(못 찾거나 비어 있으면 nil). 통합 페이지의 연구문서·내 설교 행 첫 줄에 보인다.
++    var mentionTitleProvider: (VerseMention) -> String? = { _ in nil }
+     /// 구간 메모 아이콘에서 메모를 골랐을 때 — 기존 "메모 작성" 시트를 그대로 연다.
+     var onSelectPhraseMemo: (UserMemo) -> Void = { _ in }
+     /// "관련 내용" 목록에서 항목을 골랐을 때 — 메모는 편집기 시트, 연구문서는 PDF 검색+이동 창으로
+@@ -374,6 +376,7 @@ struct TranslationColumnView: View {
+             verseMentions: verseMentionsProvider(verse.verse),
+             onSelectCrossReferenceTarget: onSelectCrossReferenceTarget,
+             crossReferencePreviewProvider: crossReferencePreviewProvider,
++            mentionTitleProvider: mentionTitleProvider,
+             onSelectPhraseMemo: onSelectPhraseMemo,
+             onSelectVerseMention: onSelectVerseMention,
+             inlineAnnotatedContentProvider: inlineAnnotatedContentProvider
+@@ -727,6 +730,8 @@ private struct VerseRow: View {
+     var onSelectCrossReferenceTarget: (BibleVerseRef) -> Void = { _ in }
+     /// 관주 미리보기 글 — 이 컬럼 번역본의 대상 절 본문(없으면 nil). 통합 페이지의 관주 행이 두 줄까지 보여 준다.
+     var crossReferencePreviewProvider: (BibleVerseRef) -> String? = { _ in nil }
++    /// 연구문서·내 설교 언급의 출처 제목 — 통합 페이지의 연구문서·내 설교 행 첫 줄에 보인다(못 찾으면 nil).
++    var mentionTitleProvider: (VerseMention) -> String? = { _ in nil }
+     var onSelectPhraseMemo: (UserMemo) -> Void = { _ in }
+     var onSelectVerseMention: (VerseMention) -> Void = { _ in }
+     /// 캐시되는 인라인 주석 조립 클로저 — `verseContentText`가 사용한다.
+@@ -981,6 +986,7 @@ private struct VerseRow: View {
+             onClose: { isRelatedPresented = false },
+             onSelectTarget: onSelectCrossReferenceTarget,
+             previewProvider: crossReferencePreviewProvider,
++            mentionTitleProvider: mentionTitleProvider,
+             onSelectMemo: onSelectPhraseMemo,
+             onSelectMention: onSelectVerseMention
+         )
+diff --git a/JBCHBibleResearch/Views/Bible/VerseMentionListView.swift b/JBCHBibleResearch/Views/Bible/VerseMentionListView.swift
+index aeb3e3b..35b10b8 100644
+--- a/JBCHBibleResearch/Views/Bible/VerseMentionListView.swift
++++ b/JBCHBibleResearch/Views/Bible/VerseMentionListView.swift
+@@ -3,7 +3,8 @@
+ //  JBCHBibleResearch
+ //
+ //  "관련 내용"(이 구절을 언급하는 메모/연구문서/말씀 요약/설교) 목록 뷰.
+-//  확대보기(VerseZoomView)의 팝오버와 오른쪽 사이드바(ChapterRelatedContentPanel)가 공유한다.
++//  확대보기(VerseZoomView)의 "관련 내용 N개" 팝오버가 쓴다(오른쪽 사이드 패널 `ChapterRelatedContentPanel`은
++//  이 뷰를 쓰지 않고 섹션별 행을 직접 그린다).
+ //  표시만 담당하며, 항목 선택 시 무엇을 열지는 호출부가 `onSelect` 클로저로 결정한다.
+ //
+ 
+@@ -12,6 +13,9 @@ import BibleResearchModels
+ 
+ struct VerseMentionListView: View {
+     let mentions: [VerseMention]
++    /// 연구문서·내 설교 행의 출처 제목(`BibleReadingViewModel.mentionSourceTitle(for:)` — 장 로드 때 채운 사전을
++    /// 읽기만 해 `body`에서 불러도 조회가 없다). nil이면 이름 줄을 뺀다.
++    let titleProvider: (VerseMention) -> String?
+     let onSelect: (VerseMention) -> Void
+ 
+     var body: some View {
+@@ -23,11 +27,28 @@ struct VerseMentionListView: View {
+                     Label(sourceLabel(mention), systemImage: sourceSystemImage(mention))
+                         .font(.caption.bold())
+                         .foregroundStyle(.secondary)
+-                    Text(mention.snippet.isEmpty ? mention.searchText : mention.snippet)
+-                        .font(.callout)
+-                        .foregroundStyle(.primary)
+-                        .lineLimit(3)
+-                        .multilineTextAlignment(.leading)
++                    if let truncation = Self.sourceTitleTruncation(mention.sourceType) {
++                        // 연구문서·내 설교(2026-10-29): 출처 제목 1줄(말줄임) + 언급 내용 2줄.
++                        // 종류 아이콘은 바로 위 라벨에 있어 제목 줄에는 다시 붙이지 않는다.
++                        if let title = titleProvider(mention) {
++                            Text(title)
++                                .font(.callout.weight(.semibold))
++                                .foregroundStyle(.primary)
++                                .lineLimit(1)
++                                .truncationMode(truncation)
++                        }
++                        Text(mention.snippet.isEmpty ? mention.searchText : mention.snippet)
++                            .font(.callout)
++                            .foregroundStyle(.primary)
++                            .lineLimit(2)
++                            .multilineTextAlignment(.leading)
++                    } else {
++                        Text(mention.snippet.isEmpty ? mention.searchText : mention.snippet)
++                            .font(.callout)
++                            .foregroundStyle(.primary)
++                            .lineLimit(3)
++                            .multilineTextAlignment(.leading)
++                    }
+                 }
+                 .frame(maxWidth: .infinity, alignment: .leading)
+             }
+@@ -37,6 +58,15 @@ struct VerseMentionListView: View {
+         .frame(minWidth: 260, minHeight: 160)
+     }
+ 
++    /// 출처 제목을 붙이는 종류와 말줄임 위치 — `VerseRelatedSheet`와 같은 규칙(파일명은 가운데, 설교 제목은 끝). 나머지는 nil.
++    private static func sourceTitleTruncation(_ sourceType: VerseMentionSourceType) -> Text.TruncationMode? {
++        switch sourceType {
++        case .document: return .middle
++        case .sermon: return .tail
++        case .memo, .wordSummary: return nil
++        }
++    }
++
+     // exhaustive switch — `VerseMentionSourceType`에 케이스가 늘면 컴파일 에러로 여기를 놓치지 않는다.
+     private func sourceLabel(_ mention: VerseMention) -> String {
+         switch mention.sourceType {
+diff --git a/JBCHBibleResearch/Views/Bible/VerseRelatedSheet.swift b/JBCHBibleResearch/Views/Bible/VerseRelatedSheet.swift
+index 77f1df7..304445b 100644
+--- a/JBCHBibleResearch/Views/Bible/VerseRelatedSheet.swift
++++ b/JBCHBibleResearch/Views/Bible/VerseRelatedSheet.swift
+@@ -200,6 +200,9 @@ struct VerseRelatedSheet: View {
+     let onSelectTarget: (BibleVerseRef) -> Void
+     /// 관주 대상 절의 미리보기 글(현재 번역본 본문). nil이면 "책 장:절"만 보인다.
+     let previewProvider: (BibleVerseRef) -> String?
++    /// 연구문서·내 설교 언급 행 첫 줄에 보일 출처 제목(`BibleReadingViewModel.mentionSourceTitle(for:)` — 장 로드 때
++    /// 채운 사전을 읽기만 해 `body`에서 불러도 조회가 없다). nil이면(출처를 못 찾음/제목이 비어 있음) 이름 줄 없이 언급 내용만 보인다.
++    let mentionTitleProvider: (VerseMention) -> String?
+     let onSelectMemo: (UserMemo) -> Void
+     let onSelectMention: (VerseMention) -> Void
+ 
+@@ -221,6 +224,7 @@ struct VerseRelatedSheet: View {
+         onClose: @escaping () -> Void,
+         onSelectTarget: @escaping (BibleVerseRef) -> Void,
+         previewProvider: @escaping (BibleVerseRef) -> String?,
++        mentionTitleProvider: @escaping (VerseMention) -> String?,
+         onSelectMemo: @escaping (UserMemo) -> Void,
+         onSelectMention: @escaping (VerseMention) -> Void
+     ) {
+@@ -229,6 +233,7 @@ struct VerseRelatedSheet: View {
+         self.onClose = onClose
+         self.onSelectTarget = onSelectTarget
+         self.previewProvider = previewProvider
++        self.mentionTitleProvider = mentionTitleProvider
+         self.onSelectMemo = onSelectMemo
+         self.onSelectMention = onSelectMention
+ 
+@@ -449,11 +454,46 @@ struct VerseRelatedSheet: View {
+                 .lineLimit(3)
+                 .multilineTextAlignment(.leading)
+         case .mention(let mention):
+-            Text(mention.snippet.isEmpty ? mention.searchText : mention.snippet)
+-                .font(.callout)
+-                .foregroundStyle(textColor)
+-                .lineLimit(3)
+-                .multilineTextAlignment(.leading)
++            if let style = Self.titledSourceStyle(mention.sourceType) {
++                // 연구문서·내 설교(2026-10-29): 1줄째 = 출처 제목(1줄 말줄임), 2~3줄째 = 이 절을 언급한 내용 2줄.
++                // 제목을 못 찾거나 비어 있으면(동기화 지연, 제목 없는 설교 등) 이름 줄 없이 내용 2줄만 보인다.
++                VStack(alignment: .leading, spacing: 2) {
++                    if let title = mentionTitleProvider(mention) {
++                        Label(title, systemImage: style.systemImage)
++                            .font(.callout.weight(.semibold))
++                            .foregroundStyle(textColor)
++                            .lineLimit(1)
++                            .truncationMode(style.truncation)
++                    }
++                    Text(mentionText(mention))
++                        .font(.callout)
++                        .foregroundStyle(textColor)
++                        .lineLimit(2)
++                        .multilineTextAlignment(.leading)
++                }
++            } else {
++                Text(mentionText(mention))
++                    .font(.callout)
++                    .foregroundStyle(textColor)
++                    .lineLimit(3)
++                    .multilineTextAlignment(.leading)
++            }
++        }
++    }
++
++    /// 언급 행 본문 — 주변 문맥(`snippet`), 없으면 원문 표현(`searchText`).
++    private func mentionText(_ mention: VerseMention) -> String {
++        mention.snippet.isEmpty ? mention.searchText : mention.snippet
++    }
++
++    /// 첫 줄에 출처 제목을 붙이는 종류의 아이콘(사이드 패널의 문서/설교 행과 같은 심볼)과 말줄임 위치. 나머지 종류는 nil.
++    /// 파일명은 앞부분이 같은 이름(예: "2026 수련회 1강.pdf"/"2026 수련회 2강.pdf")끼리도 구분되도록 가운데를 줄이고,
++    /// 설교 제목은 문장이라 끝을 줄인다.
++    private static func titledSourceStyle(_ sourceType: VerseMentionSourceType) -> (systemImage: String, truncation: Text.TruncationMode)? {
++        switch sourceType {
++        case .document: return ("doc.text", .middle)
++        case .sermon: return ("mic.fill", .tail)
++        case .memo, .wordSummary: return nil
+         }
+     }
+ 
+@@ -492,7 +532,11 @@ struct VerseRelatedSheet: View {
+             return previews[target].map { "\(label) \($0)" } ?? label
+         case .memo(let memo): return "\(item.kind.title) \(memoLabel(memo))"
+         case .mention(let mention):
+-            return "\(item.kind.title) \(mention.snippet.isEmpty ? mention.searchText : mention.snippet)"
++            // 연구문서·내 설교는 화면 순서(제목 → 내용)대로 읽는다. 제목이 없으면 예전과 같다.
++            if Self.titledSourceStyle(mention.sourceType) != nil, let title = mentionTitleProvider(mention) {
++                return "\(item.kind.title) \(title) \(mentionText(mention))"
++            }
++            return "\(item.kind.title) \(mentionText(mention))"
+         }
+     }
+ }
+diff --git a/JBCHBibleResearch/Views/Bible/VerseZoomView.swift b/JBCHBibleResearch/Views/Bible/VerseZoomView.swift
+index 51c6d6d..f793005 100644
+--- a/JBCHBibleResearch/Views/Bible/VerseZoomView.swift
++++ b/JBCHBibleResearch/Views/Bible/VerseZoomView.swift
+@@ -915,7 +915,10 @@ struct VerseZoomView: View {
+                     }
+                     .buttonStyle(.plain)
+                     .popover(isPresented: $isVerseMentionPopoverPresented) {
+-                        VerseMentionListView(mentions: verseMentions) { mention in
++                        VerseMentionListView(
++                            mentions: verseMentions,
++                            titleProvider: { mention in viewModel.mentionSourceTitle(for: mention) }
++                        ) { mention in
+                             isVerseMentionPopoverPresented = false
+                             onSelectVerseMention(mention)
+                             dismiss()

@@ -29,11 +29,18 @@ struct BibleReadingView: View {
     /// 무시한다.
     var initialBook: Book? = nil
     var initialChapter: Int? = nil
-    /// 지정하면 해당 절까지 스크롤한 뒤 잠시 하이라이트한다(`SearchView.verseRow`가 넘김). nil이면 동작 변화 없음.
+    /// 지정하면 해당 절까지 스크롤한 뒤 잠시 하이라이트하고 장:절 조회 이력을 남긴다. 넘기는 곳: macOS `SearchView`의 push
+    /// (`BibleVerseDestinationRegistration`), 구절 지정 새 창(`BibleReadingWindowContent`). nil이면 동작 변화 없음.
     var initialVerse: Int? = nil
-    /// false면 관련 콘텐츠(인스펙터)/조회 이력 아이콘을 툴바에서 뺀다. macOS "성경 조회 새 창"(`WindowGroup(id:
-    /// "bible-reading")`)만 false를 넘긴다.
+    /// false면 보조 창이다 — 창마다 번역본 선택이 따로이고, 이동 요청(`BibleVerseNavigationRequest`)을 소비하지 않으며,
+    /// 메인 창의 사이드바·인스펙터 상태(`SidebarVisibilityRequest`, `IPadSidebarInspectorCoordination`)를 바꾸지 않는다.
+    /// 도구 모음에서는 책갈피·조회 이력·관련 콘텐츠(아이패드는 사이드바 열기도)를 뺀다(macOS `BibleToolRail`, iOS `BibleTopBar`).
+    /// false를 넘기는 곳: "성경 조회 새 창"(`WindowGroup(id: "bible-reading")`, macOS 메뉴·도구 레일),
+    /// 구절 지정 새 창(`WindowGroup(id: "bible-reading-at")`, macOS·아이패드, `BibleReadingWindowContent`).
     var isPrimaryWindow: Bool = true
+    /// [relverse1] `initialVerse`로 열 때 조회 이력을 남길지 viewModel을 만드는 순간에 묻는다(스크롤·강조는 그대로).
+    /// 기본은 항상 남긴다. 창 복원으로 같은 창이 다시 만들어질 때 이력이 또 쌓이지 않게 `BibleReadingWindowContent`가 넘긴다.
+    var shouldRecordInitialVerseHistory: () -> Bool = { true }
 
     var body: some View {
         Group {
@@ -46,8 +53,8 @@ struct BibleReadingView: View {
                             modelContext: modelContext,
                             initialBook: initialBook,
                             initialChapter: initialChapter,
-                            // 메인 창의 성경 조회 화면(사이드바 "성경 조회", 아이폰 "성경" 탭, 통합 검색에서 띄운 화면)은 이 기기에 저장된
-                            // 번역본 선택을 함께 쓴다. macOS "성경 조회 새 창"(`isPrimaryWindow == false`)만 예전처럼 창마다 따로다.
+                            // 메인 창의 성경 조회 화면(사이드바 "성경 조회", 아이폰 "성경" 탭, macOS 통합 검색에서 push한 화면)은 이 기기에 저장된
+                            // 번역본 선택을 함께 쓴다. 보조 창(`isPrimaryWindow == false` — "성경 조회 새 창", 구절 지정 새 창)만 창마다 따로다.
                             persistsTranslationSelection: isPrimaryWindow
                         )
                         vm.onAppear()
@@ -68,9 +75,12 @@ struct BibleReadingView: View {
                             BibleVerseNavigationRequest.shared.clear()
                         } else if let initialVerse {
                             vm.highlightVerseTemporarily(initialVerse)
-                            // `SearchView.verseRow`가 `initialVerse`로 이 화면을 새로 띄운 경로 — `init`이
+                            // `initialVerse`로 이 화면을 새로 띄운 경로 — `init`이
                             // `selectBook`을 거치지 않아 장 단위 기록도 남지 않으므로 여기서 장:절을 함께 기록한다.
-                            vm.recordVerseHistory(verse: initialVerse)
+                            // [relverse1] 창 복원으로 다시 만들어진 경우는 기록하지 않는다(`shouldRecordInitialVerseHistory`).
+                            if shouldRecordInitialVerseHistory() {
+                                vm.recordVerseHistory(verse: initialVerse)
+                            }
                         }
                         viewModel = vm
                     }
@@ -822,14 +832,18 @@ private struct BibleReadingContentView: View {
         // 관련 콘텐츠 인스펙터가 (어떤 경로로든) 열리고 닫히는 것을 `IPadSidebarInspectorCoordination` 싱글턴에 보고한다(아이패드에서
         // 사이드바/인스펙터 동시 노출 방지). 말씀 요약 편집기가 이 자리를 쓰는 경우는 포함하지 않는다(기존 `SidebarVisibilityRequest` 계약을
         // 따른다).
+        // [relverse1] 보조 성경 창(`isPrimaryWindow == false`)은 보고하지 않는다. 이 싱글턴은 메인 창 `SidebarNavigationView`가 구독하므로,
+        // 보고하면 보조 창의 인스펙터가 메인 창 사이드바를 접는다. 보조 창에는 사이드바가 없어 동시 노출 문제도 없다.
         .onChange(of: isRelatedContentPresented) { _, newValue in
-            guard isIPad else { return }
+            guard isIPad, isPrimaryWindow else { return }
             IPadSidebarInspectorCoordination.shared.reportInspectorVisibility(newValue)
         }
         // 사이드바가 (어떤 경로로든) 열리는 순간을 관찰해 이 화면이 스스로(로컬 상태만) 관련 콘텐츠 인스펙터를 닫는다 — 사이드바 쪽에 대신 닫아 달라는 명령을 보낼
         // 필요가 없다.
         .onChange(of: IPadSidebarInspectorCoordination.shared.isSidebarVisible) { _, newValue in
-            guard isIPad, newValue, isRelatedContentPresented else { return }
+            // [relverse1] 보조 성경 창에서는 반응하지 않는다 — `isSidebarVisible`은 메인 창의 사이드바라, 반응하면 메인 창 사이드바를 열 때
+            // 보조 창 인스펙터가 닫힌다.
+            guard isIPad, isPrimaryWindow, newValue, isRelatedContentPresented else { return }
             isRelatedContentPresented = false
         }
     }
@@ -971,6 +985,11 @@ private struct BibleReadingContentView: View {
     /// 새로 만들기와 기존 항목 선택이 공유하는 "편집기 열기" 절차 —
     /// 번역본 열 좁히기/왼쪽 사이드바 닫기를 동일하게 적용한다.
     private func presentWordSummaryEditor(_ summary: VerseSummary) {
+        // [relverse1] 편집기가 이미 열린 채 다시 호출됐는지(아래 `displayedTranslationIDsBeforeWordSummary`가 편집 세션 표시다 —
+        // 여기서 채우고 `closeWordSummaryEditor()`가 동기적으로 비운다). 다시 호출된 경우 사이드바 숨김 요청을 또 보내지 않는다:
+        // 받는 쪽(`SidebarNavigationView`)이 `.hide`마다 "숨기기 직전 상태"를 새로 기록하므로, 이미 숨긴 뒤의 두 번째 요청이
+        // 첫 기록(열려 있었음)을 "닫혀 있었음"으로 덮어써 편집을 마쳐도 사이드바가 돌아오지 않는다.
+        let isFirstPresentation = displayedTranslationIDsBeforeWordSummary == nil
         // 번역본 열 좁히기 — 나중에 정확히 되돌릴 수 있도록 지금 상태를 먼저
         // 저장해 둔다. 이미 편집기가 열려 있는 상태에서 다시 호출됐다면(예: 관련
         // 콘텐츠 패널에서 다른 항목을 연달아 고름) 기존 저장값을 덮어쓰지 않는다.
@@ -984,7 +1003,11 @@ private struct BibleReadingContentView: View {
 
         // 왼쪽 사이드바 닫기 — macOS/iPadOS에서만 의미가 있다.
         // 아이폰 탭바 레이아웃은 이 요청을 구독하지 않아 무시된다.
-        SidebarVisibilityRequest.shared.requestHide()
+        // [relverse1] 보조 성경 창에는 사이드바가 없고 이 요청은 메인 창이 받으므로 보내지 않는다(끝낼 때 `requestRestore()`도 같은 창 조건).
+        // 편집 세션당 한 번만 보낸다(`isFirstPresentation` 참고). 끝낼 때의 `requestRestore()`는 세션당 한 번이라 짝이 맞는다.
+        if isPrimaryWindow && isFirstPresentation {
+            SidebarVisibilityRequest.shared.requestHide()
+        }
 
         wordSummaryBeingEdited = summary
         // 아이폰 인스펙터(시트)의 표시 여부는 `isWordSummaryInspectorVisible`이 단독으로 맡는다.
@@ -1022,7 +1045,10 @@ private struct BibleReadingContentView: View {
             // 다른 경로와 같이 저장값은 덮어쓰지 않는다 — 보던 번역본이 없어 첫 열로 열어도, 그 번역본을 다시 켜면 다음 실행 때 그 열로 돌아간다.
             setPhoneColumnProgrammatically(targetID)
         }
-        SidebarVisibilityRequest.shared.requestRestore()
+        // [relverse1] 시작 때 `requestHide()`와 같은 조건 — `isPrimaryWindow`는 `let`이라 짝이 어긋나지 않는다.
+        if isPrimaryWindow {
+            SidebarVisibilityRequest.shared.requestRestore()
+        }
         #if os(macOS)
         // macOS는 인스펙터가 아닌 별도 `NSPanel`을 쓰므로 `wordSummaryBeingEdited`를 즉시 비운다.
         // `hide()`가 패널을 닫으면 델리게이트가 `onClose`(이 함수)를 다시 부르지만,
@@ -1096,6 +1122,8 @@ private struct BibleReadingContentView: View {
                     isChapterBookmarked: viewModel.isChapterBookmarked(translationCode: column.registry.code),
                     onSelectCrossReferenceTarget: jumpToCrossReferenceTarget,
                     crossReferencePreviewProvider: { ref in viewModel.versePreviewText(registry: column.registry, ref: ref) },
+                    // 연구문서·내 설교 행 첫 줄의 출처 제목(`BibleReadingViewModel.mentionSourceTitle(for:)`).
+                    mentionTitleProvider: { mention in viewModel.mentionSourceTitle(for: mention) },
                     onSelectPhraseMemo: { memo in memoBeingCreated = memo },
                     onSelectVerseMention: handleVerseMentionSelected,
                     // 다른 provider들과 같이 `column.registry.code`를 붙잡아 넘긴다 — 실제 캐시는
@@ -1219,6 +1247,8 @@ private struct BibleReadingContentView: View {
                     isChapterBookmarked: viewModel.isChapterBookmarked(translationCode: column.registry.code),
                     onSelectCrossReferenceTarget: jumpToCrossReferenceTarget,
                     crossReferencePreviewProvider: { ref in viewModel.versePreviewText(registry: column.registry, ref: ref) },
+                    // 연구문서·내 설교 행 첫 줄의 출처 제목(`BibleReadingViewModel.mentionSourceTitle(for:)`).
+                    mentionTitleProvider: { mention in viewModel.mentionSourceTitle(for: mention) },
                     onSelectPhraseMemo: { memo in memoBeingCreated = memo },
                     onSelectVerseMention: handleVerseMentionSelected,
                     // 다른 provider들과 같이 `column.registry.code`를 붙잡아 넘긴다 — 실제 캐시는
@@ -1756,8 +1786,15 @@ private struct BibleReadingContentView: View {
             } else {
                 // 아이패드: 폭이 넉넉하면 상단바와 장 이동 막대를 한 줄로 합치고(가운데 = 장 이동 막대), 모자라면(세로, 인스펙터가 열린
                 // 가로, 분할 보기) 지금처럼 두 줄로 되돌린다. 장 이동 막대의 표준형/캡슐형 선택(`chapterNavigationControls`)과 같은 방식이다.
+                // 2026-10-28: 한 줄이 안 들어가면 먼저 "아이콘 아래줄" 두 줄(윗줄 = 번역본 칩 + 제목, 아랫줄 = 아이콘 묶음 + 책 버튼 없는
+                // 장 이동 막대)을 시도하고, 그것도 안 들어가면(좁은 분할 보기 등) 기존 두 줄(아이콘 윗줄 + 책 버튼 없는 표준/캡슐 막대)로 되돌린다.
+                // 두 줄 배치는 윗줄 제목이 책/장 그리드를 열어 책 버튼을 뺐다. 한 줄 배치는 제목이 없어 책 버튼을 남긴다(첫 후보는 그대로라
+                // 한 줄 ↔ 두 줄 선택 기준도 바뀌지 않는다).
                 ViewThatFits(in: .horizontal) {
                     bibleTopBar(singleRowCenter: AnyView(chapterNavigationControlsStandard))
+                    bibleTopBar(stackedRowCenter: AnyView(unifiedChapterNavigationBar(
+                        showsBookButton: false, searchFieldFillsWidth: true, usesNarrowSearchField: true, spacing: BibleTopBar.stackedRowSpacing
+                    )))
                     topInsetTwoRows
                 }
             }
@@ -1779,24 +1816,45 @@ private struct BibleReadingContentView: View {
     }
 
     #if os(iOS)
-    /// 상단바 + 아래 장 이동 막대의 두 줄 배치(아이폰 항상, 아이패드는 한 줄이 안 들어갈 때).
+    /// 상단바 + 아래 장 이동 막대의 두 줄 배치(아이폰 항상, 아이패드는 한 줄도 "아이콘 아래줄" 두 줄도 안 들어갈 때).
+    /// 아이패드는 윗줄 제목이 책/장 그리드를 열므로 장 이동 막대에서 책 버튼을 뺀다(2026-10-28). 아이폰은 그대로다.
     private var topInsetTwoRows: some View {
         VStack(spacing: 0) {
             bibleTopBar(singleRowCenter: nil)
-            chapterNavigationControls
-                .padding(.horizontal)
-                .padding(.vertical, 4)
+            Group {
+                if isPhone {
+                    chapterNavigationControls
+                } else {
+                    padChapterNavigationControlsWithoutBookButton
+                }
+            }
+            .padding(.horizontal)
+            .padding(.vertical, 4)
+        }
+    }
+
+    /// 아이패드 기존 두 줄 배치의 장 이동 막대 — `chapterNavigationControls`와 같은 표준 → 캡슐 선택이되 두 막대 모두 책 버튼이 없다.
+    /// 표준 막대의 검색창은 채우지 않고 96~152pt(기본 120~190pt의 4/5, 2026-10-29)다.
+    private var padChapterNavigationControlsWithoutBookButton: some View {
+        ViewThatFits(in: .horizontal) {
+            unifiedChapterNavigationBar(showsBookButton: false, searchFieldFillsWidth: false, usesNarrowSearchField: true)
+                .frame(maxWidth: .infinity)
+            compactChapterNavigationBar(showsBookButton: false)
         }
     }
 
     /// `singleRowCenter`가 nil이면 상단바만, 아니면 아이패드 한 줄 배치(가운데에 그 뷰)를 그린다.
-    private func bibleTopBar(singleRowCenter: AnyView?) -> BibleTopBar {
+    /// `stackedRowCenter`를 넘기면(아이패드) 윗줄 제목 + 아랫줄 [아이콘 묶음 | 그 뷰 | 아이콘 묶음]의 두 줄을 그린다.
+    private func bibleTopBar(singleRowCenter: AnyView? = nil, stackedRowCenter: AnyView? = nil) -> BibleTopBar {
         BibleTopBar(
             viewModel: viewModel,
             translationDisplayName: currentColumnTranslationDisplayName,
             bookmarkTargetTranslationCode: bookmarkTargetTranslationCode,
             isEditingSummary: wordSummaryBeingEdited != nil,
             singleRowCenter: singleRowCenter,
+            stackedRowCenter: stackedRowCenter,
+            // [relverse1] 보조 성경 창은 사이드바 열기·책갈피·조회 이력·관련 콘텐츠를 뺀다(`BibleTopBar.isPrimaryWindow`).
+            isPrimaryWindow: isPrimaryWindow,
             isBookmarkListPresented: $isBookmarkListPresented,
             isHistoryPresented: $isHistoryPresented,
             isRelatedContentPresented: $isRelatedContentPresented,
@@ -1817,17 +1875,20 @@ private struct BibleReadingContentView: View {
         }
     }
 
-    /// iOS(아이폰/아이패드)는 `ViewThatFits`로 표준 막대 → 캡슐 막대 순서로 고르고, macOS는 `chapterNavigationControlsStandard`를 쓴다.
+    /// 아이폰은 `ViewThatFits`로 표준 막대 → 캡슐 막대 순서로 고르고, macOS는 `chapterNavigationControlsStandard`를 쓴다.
+    /// 아이패드는 이 막대를 쓰지 않는다(2026-10-28 — 한 줄은 `chapterNavigationControlsStandard`, 두 줄은 책 버튼 없는
+    /// `unifiedChapterNavigationBar`/`padChapterNavigationControlsWithoutBookButton`).
     @ViewBuilder
     private var chapterNavigationControls: some View {
         #if os(iOS)
         // 아이패드·아이폰 공통(2026-10-02): 맥OS와 같은 막대(묶음 2개 + 책 버튼 + 검색창 + 이동, 터치용 40pt)를 쓰고,
-        // 폭이 모자라 한 줄에 다 안 들어가면(아이폰 세로, 아이패드 분할 보기) 캡슐 막대(`compactChapterNavigationBar`)로 대신한다.
+        // 폭이 모자라 한 줄에 다 안 들어가면(아이폰 세로) 캡슐 막대(`compactChapterNavigationBar`)로 대신한다.
+        // (아이패드 분할 보기의 캡슐 선택은 2026-10-28부터 `padChapterNavigationControlsWithoutBookButton`이 맡는다.)
         // 표준 막대는 약 534pt가 필요해 아이폰 가로(약 700pt)에서는 표준, 세로(358pt)에서는 캡슐이 선택된다.
         // 캡슐 막대의 자연 폭은 최대 약 344pt(버튼 6×40 + 구분선 6 + 검색 칸 최대 90 + 좌우 4×2)라 358pt 안에 들어간다.
         ViewThatFits(in: .horizontal) {
             chapterNavigationControlsStandard
-            compactChapterNavigationBar
+            compactChapterNavigationBar(showsBookButton: true)
         }
         #else
         chapterNavigationControlsStandard
@@ -1874,11 +1935,25 @@ private struct BibleReadingContentView: View {
     }
 
     private var chapterNavigationControlsStandard: some View {
+        unifiedChapterNavigationBar(showsBookButton: true, searchFieldFillsWidth: false, usesNarrowSearchField: false)
+            // 툴바 principal 대신 상단 세이프에어리어 인셋(전체 너비)에 놓이므로 가운데 정렬을 유지하려고 필요하다.
+            .frame(maxWidth: .infinity)
+    }
+
+    /// 표준 장 이동 막대의 본체. `(showsBookButton: true, searchFieldFillsWidth: false, usesNarrowSearchField: false)`가 기존 막대
+    /// (맥OS, 아이폰 표준 막대, 아이패드 한 줄)와 같다. 아이패드 두 줄 배치(②·③)는 검색창 폭을 4/5(96/152pt)로 줄인다(2026-10-29 —
+    /// ②가 뽑히는 최소 폭을 낮추려고. 한 줄 배치는 줄이면 세로 화면에서 한 줄이 뽑힐 수 있어 그대로 둔다).
+    /// 아이패드 두 줄 배치(2026-10-28)는 상단바 제목이 같은 책/장 그리드를 열므로 책 버튼을 빼고(`showsBookButton: false`),
+    /// "아이콘 아래줄" 배치(`BibleTopBar.stackedRowCenter`)에서는 검색창이 남는 폭을 채운다(`searchFieldFillsWidth: true`).
+    /// `spacing`은 묶음·검색창·이동 버튼 사이 간격(기본 10pt). "아이콘 아래줄" 배치는 `BibleTopBar.stackedRowSpacing`(6pt)을 넘긴다.
+    private func unifiedChapterNavigationBar(
+        showsBookButton: Bool, searchFieldFillsWidth: Bool, usesNarrowSearchField: Bool, spacing: CGFloat = 10
+    ) -> some View {
         // 2026-10-02: 맥OS 상단 막대를 `BibleBarControls.swift` 규격(높이 32pt, 모서리 8pt, 글자색 10% 배경 + 24% 테두리)으로 통일.
         // 이전 쪽(히스토리 이전·이전 장)과 다음 쪽(다음 장·히스토리 이후)을 각각 한 묶음으로 두어 좌우 대칭으로 보이게 한다.
         // 이전/다음 장(`chevron`)은 항상 ±1장 이동이고, 히스토리 버튼(`arrow.uturn.*`)은 임의의 이전 위치로 되짚어간다.
         // 각 버튼은 갈 곳이 없으면(`canGo…`/첫·마지막 장) 비활성화된다.
-        HStack(spacing: 10) {
+        HStack(spacing: spacing) {
             BibleBarSegmentGroup {
                 barIconButton(
                     systemImage: "arrow.uturn.backward",
@@ -1904,7 +1979,11 @@ private struct BibleReadingContentView: View {
                     viewModel.selectBook(book, chapter: chapter)
                     viewModel.highlightVerseTemporarily(verse)
                 },
-                unifiedBarStyle: true
+                unifiedBarStyle: true,
+                showsBookButton: showsBookButton,
+                searchFieldFillsWidth: searchFieldFillsWidth,
+                usesNarrowSearchField: usesNarrowSearchField,
+                unifiedBarSpacing: spacing
             ) { book, chapter in
                 viewModel.selectBook(book, chapter: chapter)
             }
@@ -1928,8 +2007,6 @@ private struct BibleReadingContentView: View {
             }
         }
         .environment(\.bibleBarSizing, barSizing)
-        // 툴바 principal 대신 상단 세이프에어리어 인셋(전체 너비)에 놓이므로 가운데 정렬을 유지하려고 필요하다.
-        .frame(maxWidth: .infinity)
     }
 
     /// 상단 막대의 아이콘 버튼 한 칸(`BibleBarSegmentGroup` 안에서 쓴다). 스타일(32×32, 올림/눌림 색)은 묶음이 입힌다.
@@ -1948,7 +2025,8 @@ private struct BibleReadingContentView: View {
     #if os(iOS)
     /// iOS 장 이동 막대: 히스토리 이전·이전장·`BookChapterPicker`(현재장/검색/이동)·다음장·히스토리 다음을
     /// 하나의 캡슐 배경에 담는다. 각 버튼은 `JoinedNavBadgeModifier`(40×44 탭 영역 안의 34pt 원 배지)로 통일한다.
-    private var compactChapterNavigationBar: some View {
+    /// `showsBookButton == false`(아이패드 기존 두 줄 배치)면 가운데 `BookChapterPicker`의 책 아이콘과 그 뒤 구분선을 뺀다.
+    private func compactChapterNavigationBar(showsBookButton: Bool) -> some View {
         // 2026-10-02: 원 배지를 없애고 캡슐(글자색 10% 채움 + 24% 테두리) 안에 글자색 아이콘을 두며, 모든 버튼 사이에 구분선을 넣었다
         // (`BibleBarControls.swift`의 `BibleCapsule*`). 탭 영역 40×44는 그대로라 폭 예산은 이전보다 오히려 줄었다.
         HStack(spacing: 0) {
@@ -1982,7 +2060,8 @@ private struct BibleReadingContentView: View {
                     viewModel.selectBook(book, chapter: chapter)
                     viewModel.highlightVerseTemporarily(verse)
                 },
-                compactTouchTargets: true
+                compactTouchTargets: true,
+                showsBookButton: showsBookButton
             ) { book, chapter in
                 viewModel.selectBook(book, chapter: chapter)
             }

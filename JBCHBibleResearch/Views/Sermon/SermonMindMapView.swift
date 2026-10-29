@@ -307,11 +307,11 @@ struct SermonMindMapView: View {
                     if isLandscape {
                         // 좁은 가로 화면에서 캔버스가 너무 작아지지 않게 폭을 화면의 45%로 제한한다.
                         let panelWidth = min(Self.sidePanelWidth, proxy.size.width * 0.45)
-                        sidePanel(contentWidth: panelWidth - 32)
+                        sidePanel(contentWidth: Self.finiteNonNegative(panelWidth - 32))
                             .frame(width: panelWidth)
                     } else {
                         // 세로: 화면 높이의 절반(최대 420pt)을 패널에 준다. 내용이 길면 패널 안에서 스크롤한다.
-                        sidePanel(contentWidth: proxy.size.width - 32)
+                        sidePanel(contentWidth: Self.finiteNonNegative(proxy.size.width - 32))
                             .frame(height: min(420, proxy.size.height * 0.5))
                     }
                 }
@@ -613,7 +613,10 @@ struct SermonMindMapView: View {
         guard let x = sermon.mindMapViewportX,
               let y = sermon.mindMapViewportY,
               let zoom = sermon.mindMapZoom else { return }
-        zoomScale = CGFloat(zoom)
+        // 저장값은 원래 `clampedZoom`을 거친 값이라 정상이면 그대로다. 손상된 값(NaN·무한대·범위 밖)만 막는다 —
+        // 캔버스 `.frame(width: canvasSize.width * zoomScale, …)`에 그대로 들어가기 때문이다.
+        let restoredZoom = CGFloat(zoom)
+        zoomScale = restoredZoom.isFinite ? clampedZoom(restoredZoom) : 1.0
         scrollPosition.scrollTo(point: CGPoint(x: x, y: y))
     }
 
@@ -1625,6 +1628,12 @@ struct SermonMindMapView: View {
     }
 
     // MARK: - 사이드 패널
+
+    /// `.frame(width:)`에 넣을 계산 폭 — 첫 레이아웃(폭 0)이나 아주 좁은 화면에서 음수가 되거나 NaN·무한대가 되는 값만 0으로 바꾼다.
+    /// 0 이상 유한한 값은 그대로 돌려준다.
+    private static func finiteNonNegative(_ value: CGFloat) -> CGFloat {
+        value.isFinite ? max(0, value) : 0
+    }
 
     private func sidePanel(contentWidth: CGFloat) -> some View {
         ScrollView {

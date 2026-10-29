@@ -89,6 +89,9 @@ struct JBCHBibleResearchApp: App {
     var body: some Scene {
         WindowGroup {
             ContentView()
+                // [relverse2] 메인 창마다 자기 식별자를 등록하고 하위 화면에 알린다. 구절 지정 보조 창의 [메인 창으로]가
+                // 그 보조 창을 연 메인 창을 앞으로 가져오는 데 쓴다(Views/Navigation/MainWindowNavigation.swift).
+                .modifier(MainWindowRegistration())
                 #if os(macOS)
                 // 메인 창 최소 크기. iPadOS/iPhone에는 이 개념이 없어 macOS에서만 적용한다.
                 .frame(minWidth: 1072, minHeight: 700)
@@ -120,6 +123,20 @@ struct JBCHBibleResearchApp: App {
             // 이 "새 창"으로 연 보조 창에서는 관련 콘텐츠(인스펙터)/조회 이력 아이콘을 뺀다
             // (`BibleReadingView.isPrimaryWindow` 참고).
             BibleReadingView(isPrimaryWindow: false)
+                .modifier(AppColorSchemeModifier())
+                #if os(macOS)
+                .frame(minWidth: 500, minHeight: 400)
+                #endif
+        }
+        .modelContainer(modelContainer)
+
+        // [relverse1 2026-10-29] 구절을 지정해 여는 성경 조회 새 창(맥·아이패드) — 통합검색 상세의 "관련 성경구절" 등이
+        // `BibleVerseOpener`(Views/Navigation/BibleReadingTarget.swift)로 연다. 값은 처음 연 구절 + 토큰이다. 같은 구절의 창이 떠 있는 동안은
+        // `BibleReadingWindowTokenStore`가 같은 토큰을 돌려줘 그 창이 앞으로 오고, 닫힌 뒤에는 새 토큰이라 새 창이 열린다
+        // (`SermonWindowTokenStore`와 같은 이유, 그 파일 주석 참고). 위 "bible-reading" 창과 같은 보조 창 규칙
+        // (`isPrimaryWindow: false`, 창마다 선택이 따로)이다.
+        WindowGroup(id: BibleVerseOpener.windowID, for: BibleReadingTarget.self) { $target in
+            BibleReadingWindowContent(target: target)
                 .modifier(AppColorSchemeModifier())
                 #if os(macOS)
                 .frame(minWidth: 500, minHeight: 400)

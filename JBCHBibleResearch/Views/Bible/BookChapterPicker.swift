@@ -26,6 +26,18 @@ struct BookChapterPicker: View {
     /// true면 `standardBody` 대신 `unifiedBarBody`(성경 조회 맥OS 상단 막대와 같은 32pt 규격, `BibleBarControls.swift`)를 쓴다.
     /// 다른 화면(교차참조/설교/메모/문서/말씀 요약)의 선택기는 기본값 false라 모양이 그대로다. `compactTouchTargets`가 true면 무시된다.
     var unifiedBarStyle: Bool = false
+    /// `unifiedBarBody`/`compactBarBody` 전용. false면 책 버튼(표준 막대 "📖 고전 3장", 캡슐 막대 책 아이콘과 뒤 구분선)을 그리지 않는다 —
+    /// 아이패드 두 줄 배치처럼 상단바 제목(`BibleTopBar.bookChapterTitleButton`)이 같은 책/장 그리드 팝오버를 맡을 때 쓴다. 기본값 true.
+    /// `standardBody`(다른 화면)에는 영향이 없다.
+    var showsBookButton: Bool = true
+    /// `unifiedBarBody` 전용. true면 검색창이 남는 폭을 채운다(최소 폭은 그대로, 측정용 이상 폭 = 상한 값).
+    /// false(기본값)면 최소~상한 사이(기본 120~190pt).
+    var searchFieldFillsWidth: Bool = false
+    /// `unifiedBarBody` 전용. true면 검색창 최소/상한 폭을 기본(120/190pt)의 4/5인 96/152pt로 줄인다(2026-10-29, 아이패드 두 줄 배치).
+    /// 맥OS·아이폰 표준 막대·아이패드 한 줄 배치는 기본값 false라 그대로다.
+    var usesNarrowSearchField: Bool = false
+    /// `unifiedBarBody` 전용. 책 버튼·검색창·이동 버튼 사이 간격. 기본 10pt. 아이패드 "아이콘 아래줄" 배치는 6pt(2026-10-29).
+    var unifiedBarSpacing: CGFloat = 10
     var onSelect: (Book, Int) -> Void
 
     @State private var isGridPresented = false
@@ -131,25 +143,31 @@ struct BookChapterPicker: View {
     /// 성경 조회 맥OS 상단 막대용 — 책 버튼, 검색창, 이동 버튼을 `BibleBarControls.swift`의 32pt 규격으로 그린다.
     /// 동작(그리드 팝오버, 자유 텍스트 해석, 오류 알림)은 `standardBody`와 같은 상태·함수를 쓴다.
     private var unifiedBarBody: some View {
-        HStack(spacing: 10) {
-            Button {
-                isGridPresented = true
-            } label: {
-                Label("\(selectedBook.displayShortName) \(selectedChapter)장", systemImage: "book")
-                    .font(.system(size: sizing.fontSize, weight: .bold))
-            }
-            .buttonStyle(BibleBarButtonStyle(height: sizing.height, cornerRadius: sizing.radius, fontSize: sizing.fontSize))
-            .help("책과 장 고르기")
-            .popover(isPresented: $isGridPresented) {
-                BookGridPicker(books: books, initialBook: selectedBook, currentBook: selectedBook, currentChapter: selectedChapter) { book, chapter in
-                    onSelect(book, chapter)
-                    isGridPresented = false
+        HStack(spacing: unifiedBarSpacing) {
+            if showsBookButton {
+                Button {
+                    isGridPresented = true
+                } label: {
+                    Label("\(selectedBook.displayShortName) \(selectedChapter)장", systemImage: "book")
+                        .font(.system(size: sizing.fontSize, weight: .bold))
                 }
-                .modifier(PickerPopoverSizing())
+                .buttonStyle(BibleBarButtonStyle(height: sizing.height, cornerRadius: sizing.radius, fontSize: sizing.fontSize))
+                .help("책과 장 고르기")
+                .popover(isPresented: $isGridPresented) {
+                    BookGridPicker(books: books, initialBook: selectedBook, currentBook: selectedBook, currentChapter: selectedChapter) { book, chapter in
+                        onSelect(book, chapter)
+                        isGridPresented = false
+                    }
+                    .modifier(PickerPopoverSizing())
+                }
             }
 
             if showsFreeTextSearch {
                 let textColor = settings.bibleTextColor ?? Color.primary
+                // 좁은 칸(`usesNarrowSearchField`, 아이패드 두 줄 배치)은 짧은 예시를 보인다(2026-10-29). 기준은 실제 칸 폭이 아니라
+                // 배치(호출부가 정한 값)다 — 폭을 재서 바꾸면 placeholder가 `TextField`의 이상 폭을 바꾸고, 그것이 다시 `ViewThatFits`
+                // 측정(표준 ↔ 캡슐)에 들어가 배치가 오갈 수 있다. 제목 키(접근성 라벨)는 기존 문구 그대로 둔다.
+                let promptText: Text = usesNarrowSearchField ? Text("예: 요3:16") : Text("예: 창세기1, 요3:16")
                 HStack(spacing: 6) {
                     Image(systemName: "magnifyingglass")
                         .font(.system(size: 12, weight: .medium))
@@ -157,7 +175,7 @@ struct BookChapterPicker: View {
                     TextField(
                         "예: 창세기1, 요3:16",
                         text: $freeText,
-                        prompt: Text("예: 창세기1, 요3:16").foregroundStyle(textColor.opacity(0.62))
+                        prompt: promptText.foregroundStyle(textColor.opacity(0.62))
                     )
                     .font(.system(size: sizing.fieldFontSize))
                     .lineLimit(1)
@@ -187,7 +205,13 @@ struct BookChapterPicker: View {
                     RoundedRectangle(cornerRadius: sizing.radius, style: .continuous)
                         .strokeBorder(textColor.opacity(isFreeTextFocused ? 0.5 : BibleBarMetrics.lineOpacity), lineWidth: 1)
                 )
-                .frame(minWidth: 120, maxWidth: 190)
+                // 채움 모드의 `idealWidth`(= 상한 값)는 `ViewThatFits`가 이상 크기(제안 nil)로 잴 때 쓰이는 값이다 — 상한과 같게 두어
+                // 배치 선택 기준이 `TextField`의 이상 폭에 좌우되지 않게 한다. 실제 배치(구체적 제안)에서는 남는 폭을 채운다.
+                .frame(
+                    minWidth: searchFieldMinWidth,
+                    idealWidth: searchFieldFillsWidth ? searchFieldCapWidth : nil,
+                    maxWidth: searchFieldFillsWidth ? CGFloat.infinity : searchFieldCapWidth
+                )
 
                 Button(action: submitFreeText) {
                     Image(systemName: "arrow.right")
@@ -201,27 +225,34 @@ struct BookChapterPicker: View {
         }
     }
 
+    /// `unifiedBarBody` 검색창 최소 폭 — 기본 120pt, `usesNarrowSearchField`면 4/5인 96pt.
+    private var searchFieldMinWidth: CGFloat { usesNarrowSearchField ? 96 : 120 }
+    /// `unifiedBarBody` 검색창 상한(채움 모드에서는 이상) 폭 — 기본 190pt, `usesNarrowSearchField`면 4/5인 152pt.
+    private var searchFieldCapWidth: CGFloat { usesNarrowSearchField ? 152 : 190 }
+
     /// 아이폰/아이패드 공용 "이어진 막대" 레이아웃(책 아이콘·검색창·이동 아이콘).
     /// `BibleReadingView.JoinedNavBadgeModifier`를 재사용해 상단 막대의 나머지 아이콘과 모양을 맞춘다.
     private var compactBarBody: some View {
         HStack(spacing: 0) {
-            Button {
-                isGridPresented = true
-            } label: {
-                Image(systemName: "book")
-            }
-            .buttonStyle(BibleCapsuleItemStyle())
-            .accessibilityLabel("책과 장 고르기")
-            .popover(isPresented: $isGridPresented) {
-                BookGridPicker(books: books, initialBook: selectedBook, currentBook: selectedBook, currentChapter: selectedChapter) { book, chapter in
-                    onSelect(book, chapter)
-                    isGridPresented = false
+            if showsBookButton {
+                Button {
+                    isGridPresented = true
+                } label: {
+                    Image(systemName: "book")
                 }
-                .modifier(PickerPopoverSizing())
-            }
+                .buttonStyle(BibleCapsuleItemStyle())
+                .accessibilityLabel("책과 장 고르기")
+                .popover(isPresented: $isGridPresented) {
+                    BookGridPicker(books: books, initialBook: selectedBook, currentBook: selectedBook, currentChapter: selectedChapter) { book, chapter in
+                        onSelect(book, chapter)
+                        isGridPresented = false
+                    }
+                    .modifier(PickerPopoverSizing())
+                }
 
-            // 버튼 사이 구분선(2026-10-02) — 책 | 검색 칸 | 이동.
-            BibleCapsuleDivider()
+                // 버튼 사이 구분선(2026-10-02) — 책 | 검색 칸 | 이동. 책 버튼이 없으면 바깥 막대의 앞 구분선이 검색 칸 앞을 맡는다.
+                BibleCapsuleDivider()
+            }
 
             // 이 검색창은 "현재 위치 표시"와 "직접 검색 입력"을 겸한다. 포커스가 없을 때는
             // `syncFreeTextToCurrentPositionIfNeeded()`가 현재 책/장 약어로 채우고, 타이핑 중에는 건드리지 않는다.

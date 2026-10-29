@@ -29,6 +29,13 @@ struct SidebarNavigationView: View {
     /// 사이드바 상단 검색 텍스트박스 입력값. `sidebarSearchBar`/`submitSidebarSearch()` 참고.
     @State private var sidebarSearchText: String = ""
 
+    #if os(iOS)
+    /// 이 창 전체가 세로로 긴지(폭 < 높이). 창 전체 크기를 키보드·안전 영역을 무시하고 잰 판정 결과만 저장한다
+    /// (`body`의 `.background` 측정 참고). 사이드바를 뺀 본문 크기가 아니라 창 모양 기준이라, 사이드바를 여닫아도 바뀌지 않는다.
+    @State private var isPortraitWindow = false
+    @Environment(\.horizontalSizeClass) private var horizontalSizeClass
+    #endif
+
     /// 검색결과에서 성경 조회로 push된 상태에서 다시 검색하면 검색결과로 돌아오게 하는
     /// detail 컬럼의 내비게이션 경로. push는 `selection`과 별개인 detail 스택 상태라
     /// `selection = .search`만으로는 pop되지 않는다.
@@ -75,6 +82,21 @@ struct SidebarNavigationView: View {
         UIDevice.current.userInterfaceIdiom != .phone
         #else
         false
+        #endif
+    }
+
+    /// 아이패드 세로(창이 세로로 긴 regular 폭)에서 사이드바가 열려 있으면 true. 본문 화면 중 [목록 | 내용]을 나란히 그리는
+    /// 말씀 노트·개요가 이 값으로 내용 칸을 숨긴다(`EnvironmentValues.concealsDetailBesideSidebar`). compact 폭(좁은 Split View 등)은
+    /// split view가 접혀 사이드바와 본문이 나란히 보이지 않으므로 제외한다. 사이드바 "보임" 기준(`!= .detailOnly`)은
+    /// `reportSidebarVisibility`·`recordVisibilityBeforeHide`와 같다. macOS는 항상 false.
+    private var concealsDetailBesideSidebar: Bool {
+        #if os(iOS)
+        return isIPadIdiom
+            && columnVisibility != .detailOnly
+            && isPortraitWindow
+            && horizontalSizeClass == .regular
+        #else
+        return false
         #endif
     }
 
@@ -314,7 +336,24 @@ struct SidebarNavigationView: View {
                     }
                     #endif
             }
+            // 본문 화면이 "아이패드 세로에서 이 창의 사이드바가 열려 있는지"를 알 수 있게 한다(`concealsDetailBesideSidebar`).
+            // 창마다 자기 상태를 내려주므로 아이패드 다중 창에서도 다른 창과 섞이지 않는다. macOS는 내려주지 않는다(기본값 false).
+            #if os(iOS)
+            .environment(\.concealsDetailBesideSidebar, concealsDetailBesideSidebar)
+            #endif
         }
+        #if os(iOS)
+        // 창 모양 측정 — `NavigationSplitView`는 이 창의 루트라 그 크기가 창(장면) 콘텐츠 크기다. 측정용 투명 뷰는 `.ignoresSafeArea()`
+        // (기본 regions `.all` = container + keyboard)로 안전 영역과 키보드 영역까지 넓혀, 키보드가 올라와도 판정이 바뀌지 않게 한다.
+        // `onGeometryChange(for: Bool.self)`는 변환 결과(Bool)가 바뀔 때만 action을 부르므로 크기 변화마다 상태를 쓰지 않는다.
+        .background {
+            Color.clear
+                .ignoresSafeArea()
+                .onGeometryChange(for: Bool.self, of: { $0.size.width < $0.size.height }) { isPortrait in
+                    isPortraitWindow = isPortrait
+                }
+        }
+        #endif
         // 아이패드는 안쪽 `List`의 `.tint()`만으로는 선택 강조색이 시스템 파란색으로 남는다
         // (macOS는 AppKit, 아이패드는 UIKit `UISplitViewController` 브리징이라 색 해석이 다르다).
         // 그래서 `NavigationSplitView` 자체에도 같은 색을 건다.
@@ -355,6 +394,9 @@ struct SidebarNavigationView: View {
             switch newValue {
             case .hide:
                 SidebarVisibilityRequest.shared.recordVisibilityBeforeHide(columnVisibility != .detailOnly)
+                columnVisibility = .detailOnly
+            case .hideKeepingRestoreState:
+                // 복원 기록(`wasVisibleBeforeHide`)은 그대로 두고 접기만 한다(`SidebarVisibilityRequest.Request` 참고).
                 columnVisibility = .detailOnly
             case .restore:
                 columnVisibility = SidebarVisibilityRequest.shared.wasVisibleBeforeHide ? .all : .detailOnly
@@ -653,6 +695,22 @@ struct SidebarNavigationView: View {
         case .search: SearchView()
         case .tagRelations: EmptyView() // 별도 창으로만 열리므로 본문에는 그려지지 않는다.
         }
+    }
+}
+
+// MARK: - 본문에 알리는 "사이드바 옆 내용 칸 숨김" 상태
+
+/// `SidebarNavigationView.concealsDetailBesideSidebar`(iOS에서만 설정). 말씀 노트(`WordNoteSplitContent`)·개요(`OutlineTreeSplitContent`)가
+/// 이 값이 true일 때 내용 칸을 숨긴다(`View.concealableDetailColumn`). 이 값을 내려주지 않는 곳(macOS, 아이폰 `PhoneTabView`)에서는
+/// 기본값 false라 아무 동작도 하지 않는다.
+private struct ConcealsDetailBesideSidebarKey: EnvironmentKey {
+    static let defaultValue = false
+}
+
+extension EnvironmentValues {
+    var concealsDetailBesideSidebar: Bool {
+        get { self[ConcealsDetailBesideSidebarKey.self] }
+        set { self[ConcealsDetailBesideSidebarKey.self] = newValue }
     }
 }
 

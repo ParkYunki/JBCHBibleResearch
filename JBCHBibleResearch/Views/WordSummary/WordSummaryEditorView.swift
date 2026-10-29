@@ -33,6 +33,8 @@ enum WordSummaryPresentationContext {
 struct WordSummaryEditorView: View {
     @Environment(\.modelContext) private var modelContext
     @Environment(\.self) private var environment
+    /// 말씀 노트(아이패드 세로)가 내용 칸을 숨긴 동안 true — 보이지 않는 편집기의 툴바 버튼을 올리지 않는다.
+    @Environment(\.isSplitDetailConcealed) private var isConcealedBySplit
     /// 화면 배경/보조 텍스트 색(테마)에 쓴다. `RichTextEditor` 자체 배경/글자색(`EditorDefaultStyle`)에는 쓰지 않는다.
     private var settings: UserSettingsStore { .shared }
     @Bindable var summary: VerseSummary
@@ -118,6 +120,8 @@ struct WordSummaryEditorView: View {
         .background(settings.bibleBackgroundColor ?? Color.clear)
         .sheet(item: $drilldownTag) { tag in
             TagDrilldownView(tag: tag)
+                // 시트 안에서도 `MemoDetailView`가 쓰인다. 숨김 상태가 시트로 이어져 그 편집기의 버튼까지 빠지지 않게 되돌린다.
+                .environment(\.isSplitDetailConcealed, false)
         }
         .sheet(isPresented: $isVersePickerPresented) {
             WordNoteVersePickerSheet(
@@ -128,7 +132,8 @@ struct WordSummaryEditorView: View {
         }
         .toolbar {
             // 읽기전용 토글은 새 항목을 바로 편집하는 `.contextual`에서는 의미가 적어 뺀다.
-            if presentationContext == .standalone || presentationContext == .wordNoteList {
+            // 말씀 노트(아이패드 세로)가 내용 칸을 숨긴 동안에는 보이지 않는 편집기의 토글을 올리지 않는다(`isSplitDetailConcealed`).
+            if (presentationContext == .standalone || presentationContext == .wordNoteList) && !isConcealedBySplit {
                 ToolbarItem(placement: .primaryAction) {
                     Button {
                         // 말씀 노트에서 "완료"를 누르면 디바운스 중인 저장을 바로 끝낸다.

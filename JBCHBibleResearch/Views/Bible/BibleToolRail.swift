@@ -38,6 +38,8 @@ struct BibleToolRail: View {
 
     @AppStorage(BibleToolRailDefaults.collapsedKey) private var isCollapsed = false
     @Environment(\.openWindow) private var openWindow
+    /// [relverse2] 구절 지정 보조 창(`BibleReadingWindowContent`)만 넣는 [닫기]·[메인 창으로] 동작. 메인 창·"성경 조회 새 창"은 nil이다.
+    @Environment(\.bibleSecondaryWindowActions) private var secondaryWindowActions
     @Environment(\.self) private var environment
     @Environment(\.colorScheme) private var colorScheme
 
@@ -57,6 +59,8 @@ struct BibleToolRail: View {
     // MARK: - 표시 조건 (예전 `toolbarContent`와 동일)
 
     private var showNavigationGroup: Bool { isPrimaryWindow && !isWordSummaryEditing }
+    /// [relverse2] 보조 창의 창 묶음([닫기 | 메인 창으로]). 말씀 요약 편집 중에는 다른 묶음처럼 감춘다.
+    private var showSecondaryWindowGroup: Bool { !isPrimaryWindow && !isWordSummaryEditing && secondaryWindowActions != nil }
     private var showRelatedGroup: Bool { isPrimaryWindow }
     /// 활성 번역본이 둘 이상이면 창마다 보일 번역본(1~`maxColumns`개)을 고를 수 있게 버튼을 보인다. 선택은 이 창의
     /// `viewModel`에만 걸리므로(`setDisplayedTranslations`) 다른 성경 조회 창에 번지지 않는다. 예전에는 `maxColumns`(3)개를
@@ -103,6 +107,9 @@ struct BibleToolRail: View {
 
     private var expandedRail: some View {
         VStack(spacing: 4) {
+            // [relverse2] 맨 위 — 아이패드 보조 창 상단바 왼쪽 자리와 같은 위치(레일의 첫 칸). 보조 창은 탐색·관련 묶음이 없어 다음은 창 묶음이다.
+            if showSecondaryWindowGroup, let secondaryWindowActions { secondaryWindowGroup(secondaryWindowActions) }
+            if showSecondaryWindowGroup && (showNavigationGroup || showRelatedGroup || showWindowGroup) { groupRule }
             if showNavigationGroup { navigationGroup }
             if showNavigationGroup && (showRelatedGroup || showWindowGroup) { groupRule }
             if showRelatedGroup { relatedGroup }
@@ -153,6 +160,25 @@ struct BibleToolRail: View {
     }
 
     // MARK: - 그룹
+
+    /// [relverse2] 보조 창: 닫기 · 메인 창으로. 닫기는 창의 닫기 버튼과 같은 동작이다(아이패드와 같은 버튼 구성을 맞춘다).
+    private func secondaryWindowGroup(_ actions: BibleSecondaryWindowActions) -> some View {
+        VStack(spacing: 2) {
+            RailButton(
+                systemImage: "xmark", label: String(localized: "닫기"), help: String(localized: "닫기"),
+                iconColor: iconColor, activeFill: activeFill, activeForeground: activeForeground
+            ) {
+                actions.close()
+            }
+            RailButton(
+                systemImage: "macwindow", label: String(localized: "메인 창으로"), help: String(localized: "메인 창으로"),
+                iconColor: iconColor, activeFill: activeFill, activeForeground: activeForeground,
+                isDisabled: !actions.canShowMainWindow
+            ) {
+                actions.showMainWindow()
+            }
+        }
+    }
 
     /// 탐색: 책갈피 이동 · 책갈피 설정/해제 · 조회 이력.
     private var navigationGroup: some View {

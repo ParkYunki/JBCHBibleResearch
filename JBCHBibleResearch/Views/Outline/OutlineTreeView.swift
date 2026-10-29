@@ -102,13 +102,47 @@ private struct OutlineTreeSplitContent: View {
     /// 오른쪽 빈 상태 패널의 테마 배경색용.
     @State private var settings = UserSettingsStore.shared
 
+    /// 아이패드 세로에서 앱 사이드바가 열려 있으면 true — 내용 칸을 숨기고 책/장 트리만 넓게 보인다.
+    /// 판정은 `SidebarNavigationView.concealsDetailBesideSidebar`(창 모양 기준), 숨기는 방식은 `View.concealableDetailColumn`으로
+    /// 말씀 노트(`WordNoteSplitContent`)와 같다. 가로·macOS·compact 폭은 항상 false라 기존 배치 그대로다.
+    @Environment(\.concealsDetailBesideSidebar) private var isContentColumnConcealed
+
+    /// 선택을 바꾼다. 숨긴 동안 "이미 선택이 있는데" 다시 고르면(다른 책·장, 같은 항목 재탭, 개요 열기 요청) 사이드바를 닫아 내용을 보여 준다.
+    /// 선택 없음 → 값은 아래 `.onChange(of: selection)`가 이미 `.hide`를 보낸다. 여기서는 `.hideKeepingRestoreState`로 첫 선택 때의
+    /// 복원 기록을 덮어쓰지 않는다(`WordNoteSplitContent.listSelection` 주석 참고). 숨기지 않을 때와 macOS에서는 단순 대입이다.
+    private func applySelection(_ newValue: OutlineTreeSelection?) {
+        #if os(iOS)
+        let shouldRevealContent = isContentColumnConcealed && newValue != nil && selection != nil
+        selection = newValue
+        if shouldRevealContent {
+            SidebarVisibilityRequest.shared.requestHideKeepingRestoreState()
+        }
+        #else
+        selection = newValue
+        #endif
+    }
+
+    /// 트리에 넘기는 선택 바인딩. 숨기지 않을 때(가로·macOS)는 기존 그대로 `$selection`이다.
+    private var listSelection: Binding<OutlineTreeSelection?> {
+        #if os(iOS)
+        guard isContentColumnConcealed else { return $selection }
+        return Binding(get: { selection }, set: { applySelection($0) })
+        #else
+        return $selection
+        #endif
+    }
+
     var body: some View {
         HStack(spacing: 0) {
             // 목록 영역 폭을 375pt 근처로 좁혀, 스플릿 경계를 드래그해도 크게 벗어나지 않게 한다.
-            OutlineTreeList(isPhoneLayout: false, selection: $selection)
-                .frame(minWidth: 360, idealWidth: 375, maxWidth: 390)
+            // 내용 칸을 숨긴 동안에는 남는 폭을 모두 쓴다.
+            OutlineTreeList(isPhoneLayout: false, selection: listSelection)
+                .frame(minWidth: 360, idealWidth: 375, maxWidth: isContentColumnConcealed ? .infinity : 390)
 
-            Divider()
+            // macOS에서는 `isContentColumnConcealed`가 항상 false라 기존처럼 항상 그려진다.
+            if !isContentColumnConcealed {
+                Divider()
+            }
 
             Group {
                 if let selection {
@@ -126,12 +160,17 @@ private struct OutlineTreeSplitContent: View {
                     .background(settings.bibleBackgroundColor ?? Color.clear)
                 }
             }
+            // 내용 칸 숨김 — 트리에 남긴 채 폭 0·투명으로만 감춘다(`ConcealableDetailColumn.swift`). 개요 편집기는 빈 객체를 지우지 않지만,
+            // 편집 모드·스크롤·커서를 유지하고 사이드바를 여닫을 때마다 `onDisappear`(저장 flush·검색 인덱스 upsert)가 돌지 않게 같은 방식을 쓴다.
+            #if os(iOS)
+            .concealableDetailColumn(isContentColumnConcealed)
+            #endif
         }
         // `ChapterRelatedContentPanel`의 "개요 화면 열기" 요청을 받아 해당 책/장을 선택하고,
         // 왼쪽 트리에서도 그 구약/신약과 책을 펼쳐 둔다.
         .onChange(of: OutlineNavigationRequest.shared.requestedSelection) { _, newValue in
             guard let newValue else { return }
-            selection = newValue
+            applySelection(newValue)
             let bookId: Int
             switch newValue {
             case .book(let id): bookId = id

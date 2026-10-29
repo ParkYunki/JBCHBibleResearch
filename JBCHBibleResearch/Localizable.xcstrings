@@ -2551,10 +2551,112 @@
     },
     "%@ %lld:%lld-%lld 메모" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Notiz zu %@ %lld:%lld-%lld"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "%@ %lld:%lld-%lld Note"
+          }
+        },
+        "en-CA" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "%@ %lld:%lld-%lld Note"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Nota de %@ %lld:%lld-%lld"
+          }
+        },
+        "es-MX" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Nota de %@ %lld:%lld-%lld"
+          }
+        },
+        "fil" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Tala sa %@ %lld:%lld-%lld"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Note – %@ %lld:%lld-%lld"
+          }
+        },
+        "fr-CA" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Note – %@ %lld:%lld-%lld"
+          }
+        },
+        "id" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Catatan %@ %lld:%lld-%lld"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Nota %@ %lld:%lld-%lld"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "%@ %lld:%lld-%lld のメモ"
+          }
+        },
         "ko" : {
           "stringUnit" : {
             "state" : "new",
             "value" : "%1$@ %2$lld:%3$lld-%4$lld 메모"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Anotação de %@ %lld:%lld-%lld"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Заметка: %@ %lld:%lld-%lld"
+          }
+        },
+        "th" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "บันทึก %@ %lld:%lld-%lld"
+          }
+        },
+        "vi" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Ghi chú %@ %lld:%lld-%lld"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "%@ %lld:%lld-%lld 笔记"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "%@ %lld:%lld-%lld 筆記"
           }
         }
       }
@@ -2667,10 +2769,112 @@
     },
     "%@ %lld장 %lld-%lld절" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "%@ %lld:%lld-%lld"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "%@ %lld:%lld-%lld"
+          }
+        },
+        "en-CA" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "%@ %lld:%lld-%lld"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "%@ %lld:%lld-%lld"
+          }
+        },
+        "es-MX" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "%@ %lld:%lld-%lld"
+          }
+        },
+        "fil" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "%@ %lld:%lld-%lld"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "%@ %lld:%lld-%lld"
+          }
+        },
+        "fr-CA" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "%@ %lld:%lld-%lld"
+          }
+        },
+        "id" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "%@ %lld:%lld-%lld"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "%@ %lld:%lld-%lld"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "%@ %lld:%lld-%lld"
+          }
+        },
         "ko" : {
           "stringUnit" : {
             "state" : "new",
             "value" : "%1$@ %2$lld장 %3$lld-%4$lld절"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "%@ %lld:%lld-%lld"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "%@ %lld:%lld-%lld"
+          }
+        },
+        "th" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "%@ %lld:%lld-%lld"
+          }
+        },
+        "vi" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "%@ %lld:%lld-%lld"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "%@ %lld:%lld-%lld"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "%@ %lld:%lld-%lld"
           }
         }
       }
@@ -3312,7 +3516,110 @@
       }
     },
     "%@ 관련 말씀 바꾸기" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Zugehörige Bibelstelle ändern: %@"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Change Related Passage: %@"
+          }
+        },
+        "en-CA" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Change Related Passage: %@"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Cambiar pasaje relacionado: %@"
+          }
+        },
+        "es-MX" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Cambiar pasaje relacionado: %@"
+          }
+        },
+        "fil" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Palitan ang Kaugnay na Talata: %@"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Modifier le passage associé : %@"
+          }
+        },
+        "fr-CA" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Modifier le passage associé : %@"
+          }
+        },
+        "id" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Ubah Ayat Terkait: %@"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Cambia passo correlato: %@"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "%@ の関連する聖書箇所を変更"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Alterar passagem relacionada: %@"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Изменить связанный отрывок: %@"
+          }
+        },
+        "th" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "เปลี่ยนข้อพระคัมภีร์ที่เกี่ยวข้อง: %@"
+          }
+        },
+        "vi" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Đổi đoạn Kinh Thánh liên quan: %@"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "更改 %@ 的相关经文"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "更改 %@ 的相關經文"
+          }
+        }
+      }
     },
     "%@ 단계 오류\n" : {
       "localizations" : {
@@ -9854,20 +10161,224 @@
     },
     "%lld-%lld절 범위에 작성됨" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Zu den Versen %lld-%lld geschrieben"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Written on verses %lld-%lld"
+          }
+        },
+        "en-CA" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Written on verses %lld-%lld"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Escrito en los versículos %lld-%lld"
+          }
+        },
+        "es-MX" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Escrito en los versículos %lld-%lld"
+          }
+        },
+        "fil" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Isinulat sa mga talatang %lld-%lld"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Rédigé sur les versets %lld-%lld"
+          }
+        },
+        "fr-CA" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Rédigé sur les versets %lld-%lld"
+          }
+        },
+        "id" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Ditulis pada ayat %lld-%lld"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Scritto sui versetti %lld-%lld"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "%lld-%lld 節の範囲に作成"
+          }
+        },
         "ko" : {
           "stringUnit" : {
             "state" : "new",
             "value" : "%1$lld-%2$lld절 범위에 작성됨"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Escrito nos versículos %lld-%lld"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Написано к стихам %lld-%lld"
+          }
+        },
+        "th" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "เขียนไว้ที่ข้อ %lld-%lld"
+          }
+        },
+        "vi" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Viết tại câu %lld-%lld"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "写于第 %lld-%lld 节"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "寫於第 %lld-%lld 節"
           }
         }
       }
     },
     "%lld-%lld절 범위에 작성됨 · %@" : {
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Zu den Versen %lld-%lld geschrieben · %@"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Written on verses %lld-%lld · %@"
+          }
+        },
+        "en-CA" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Written on verses %lld-%lld · %@"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Escrito en los versículos %lld-%lld · %@"
+          }
+        },
+        "es-MX" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Escrito en los versículos %lld-%lld · %@"
+          }
+        },
+        "fil" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Isinulat sa mga talatang %lld-%lld · %@"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Rédigé sur les versets %lld-%lld · %@"
+          }
+        },
+        "fr-CA" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Rédigé sur les versets %lld-%lld · %@"
+          }
+        },
+        "id" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Ditulis pada ayat %lld-%lld · %@"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Scritto sui versetti %lld-%lld · %@"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "%lld-%lld 節の範囲に作成 · %@"
+          }
+        },
         "ko" : {
           "stringUnit" : {
             "state" : "new",
             "value" : "%1$lld-%2$lld절 범위에 작성됨 · %3$@"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Escrito nos versículos %lld-%lld · %@"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Написано к стихам %lld-%lld · %@"
+          }
+        },
+        "th" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "เขียนไว้ที่ข้อ %lld-%lld · %@"
+          }
+        },
+        "vi" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Viết tại câu %lld-%lld · %@"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "写于第 %lld-%lld 节 · %@"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "寫於第 %lld-%lld 節 · %@"
           }
         }
       }
@@ -23372,7 +23883,110 @@
       }
     },
     "개요를 크게 보기" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Gliederung vergrößert anzeigen"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "View Outline Larger"
+          }
+        },
+        "en-CA" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "View Outline Larger"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Ver esquema en grande"
+          }
+        },
+        "es-MX" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Ver esquema en grande"
+          }
+        },
+        "fil" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Tingnan nang Malaki ang Balangkas"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Afficher le plan en grand"
+          }
+        },
+        "fr-CA" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Afficher le plan en grand"
+          }
+        },
+        "id" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Lihat Garis Besar Lebih Besar"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Visualizza schema in grande"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "概要を大きく表示"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Ver esboço ampliado"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Показать план крупнее"
+          }
+        },
+        "th" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "ดูโครงร่างแบบขยาย"
+          }
+        },
+        "vi" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Xem dàn ý cỡ lớn"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "放大查看概要"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "放大檢視概要"
+          }
+        }
+      }
     },
     "개인 묵상" : {
       "localizations" : {
@@ -27991,10 +28605,216 @@
       }
     },
     "관련 말씀 바꾸기" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Zugehörige Bibelstelle ändern"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Change Related Passage"
+          }
+        },
+        "en-CA" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Change Related Passage"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Cambiar pasaje relacionado"
+          }
+        },
+        "es-MX" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Cambiar pasaje relacionado"
+          }
+        },
+        "fil" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Palitan ang Kaugnay na Talata"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Modifier le passage associé"
+          }
+        },
+        "fr-CA" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Modifier le passage associé"
+          }
+        },
+        "id" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Ubah Ayat Terkait"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Cambia passo correlato"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "関連する聖書箇所を変更"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Alterar passagem relacionada"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Изменить связанный отрывок"
+          }
+        },
+        "th" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "เปลี่ยนข้อพระคัมภีร์ที่เกี่ยวข้อง"
+          }
+        },
+        "vi" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Đổi đoạn Kinh Thánh liên quan"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "更改相关经文"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "更改相關經文"
+          }
+        }
+      }
     },
     "관련 말씀 선택" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Zugehörige Bibelstelle wählen"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Choose Related Passage"
+          }
+        },
+        "en-CA" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Choose Related Passage"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Elegir pasaje relacionado"
+          }
+        },
+        "es-MX" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Elegir pasaje relacionado"
+          }
+        },
+        "fil" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Pumili ng Kaugnay na Talata"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Choisir le passage associé"
+          }
+        },
+        "fr-CA" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Choisir le passage associé"
+          }
+        },
+        "id" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Pilih Ayat Terkait"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Scegli passo correlato"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "関連する聖書箇所を選択"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Escolher passagem relacionada"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Выбрать связанный отрывок"
+          }
+        },
+        "th" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "เลือกข้อพระคัมภีร์ที่เกี่ยวข้อง"
+          }
+        },
+        "vi" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Chọn đoạn Kinh Thánh liên quan"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "选择相关经文"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "選擇相關經文"
+          }
+        }
+      }
     },
     "관련 메모 (%lld)" : {
       "localizations" : {
@@ -34176,7 +34996,110 @@
       }
     },
     "나중에" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Später"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Not Now"
+          }
+        },
+        "en-CA" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Not Now"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Ahora no"
+          }
+        },
+        "es-MX" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Ahora no"
+          }
+        },
+        "fil" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Mamaya na"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Plus tard"
+          }
+        },
+        "fr-CA" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Plus tard"
+          }
+        },
+        "id" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Nanti"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Più tardi"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "後で"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Agora não"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Позже"
+          }
+        },
+        "th" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "ไว้ทีหลัง"
+          }
+        },
+        "vi" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Để sau"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "稍后"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "稍後"
+          }
+        }
+      }
     },
     "날짜별" : {
       "localizations" : {
@@ -38744,7 +39667,110 @@
       }
     },
     "대구중부교회 청년회" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Jugendgruppe der Daegu Jungbu Church"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Daegu Jungbu Church Youth Group"
+          }
+        },
+        "en-CA" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Daegu Jungbu Church Youth Group"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Grupo de jóvenes de Daegu Jungbu Church"
+          }
+        },
+        "es-MX" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Grupo de jóvenes de Daegu Jungbu Church"
+          }
+        },
+        "fil" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Kabataan ng Daegu Jungbu Church"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Groupe de jeunes de Daegu Jungbu Church"
+          }
+        },
+        "fr-CA" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Groupe de jeunes de Daegu Jungbu Church"
+          }
+        },
+        "id" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Pemuda Daegu Jungbu Church"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Gruppo giovani di Daegu Jungbu Church"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Daegu Jungbu Church 青年会"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Grupo de jovens de Daegu Jungbu Church"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Молодёжная группа Daegu Jungbu Church"
+          }
+        },
+        "th" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "กลุ่มเยาวชน Daegu Jungbu Church"
+          }
+        },
+        "vi" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Hội thanh niên Daegu Jungbu Church"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Daegu Jungbu Church 青年会"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Daegu Jungbu Church 青年會"
+          }
+        }
+      }
     },
     "대기" : {
       "localizations" : {
@@ -46593,6 +47619,112 @@
         }
       }
     },
+    "메인 창으로" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Zum Hauptfenster"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Go to Main Window"
+          }
+        },
+        "en-CA" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Go to Main Window"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Ir a la ventana principal"
+          }
+        },
+        "es-MX" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Ir a la ventana principal"
+          }
+        },
+        "fil" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Pumunta sa Pangunahing Window"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Aller à la fenêtre principale"
+          }
+        },
+        "fr-CA" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Aller à la fenêtre principale"
+          }
+        },
+        "id" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Ke Jendela Utama"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Vai alla finestra principale"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "メインウインドウへ"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Ir para a janela principal"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "К главному окну"
+          }
+        },
+        "th" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "ไปที่หน้าต่างหลัก"
+          }
+        },
+        "vi" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Đến cửa sổ chính"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "前往主窗口"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "前往主視窗"
+          }
+        }
+      }
+    },
     "메인과 동일" : {
       "localizations" : {
         "de" : {
@@ -53381,6 +54513,113 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "譯本"
+          }
+        }
+      }
+    },
+    "번역본 %lld" : {
+      "comment" : "성경 조회 아이패드 상단바의 번역본 칩 — 2개 이상 열에 번역본을 펼쳤을 때 이름 대신 보이는 열 개수(%lld = 2~3). 누르면 번역본 선택 팝오버가 열린다.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Übersetzungen: %lld"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Translations: %lld"
+          }
+        },
+        "en-CA" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Translations: %lld"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Traducciones: %lld"
+          }
+        },
+        "es-MX" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Traducciones: %lld"
+          }
+        },
+        "fil" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Mga salin: %lld"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Traductions : %lld"
+          }
+        },
+        "fr-CA" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Traductions : %lld"
+          }
+        },
+        "id" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Terjemahan: %lld"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Traduzioni: %lld"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "訳：%lld"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Traduções: %lld"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Переводы: %lld"
+          }
+        },
+        "th" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "ฉบับแปล: %lld"
+          }
+        },
+        "vi" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Bản dịch: %lld"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "译本：%lld"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "譯本：%lld"
           }
         }
       }
@@ -69088,7 +70327,110 @@
       }
     },
     "성경 조회로 돌아가기" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Zurück zur Bibel"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Back to Bible"
+          }
+        },
+        "en-CA" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Back to Bible"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Volver a la Biblia"
+          }
+        },
+        "es-MX" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Volver a la Biblia"
+          }
+        },
+        "fil" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Bumalik sa Biblia"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Retour à la Bible"
+          }
+        },
+        "fr-CA" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Retour à la Bible"
+          }
+        },
+        "id" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Kembali ke Alkitab"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Torna alla Bibbia"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "聖書に戻る"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Voltar à Bíblia"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Назад к Библии"
+          }
+        },
+        "th" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "กลับไปที่พระคัมภีร์"
+          }
+        },
+        "vi" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Quay lại Kinh Thánh"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "返回圣经"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "返回聖經"
+          }
+        }
+      }
     },
     "성경구절" : {
       "localizations" : {
@@ -71532,7 +72874,110 @@
       }
     },
     "숨겨진 문을 찾아오셨네요. 환영합니다." : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Du hast die versteckte Tür gefunden. Willkommen!"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "You found the hidden door. Welcome!"
+          }
+        },
+        "en-CA" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "You found the hidden door. Welcome!"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Has encontrado la puerta secreta. ¡Te damos la bienvenida!"
+          }
+        },
+        "es-MX" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Encontraste la puerta secreta. ¡Te damos la bienvenida!"
+          }
+        },
+        "fil" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Natagpuan mo ang nakatagong pinto. Maligayang pagdating!"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Vous avez trouvé la porte cachée. Bienvenue !"
+          }
+        },
+        "fr-CA" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Vous avez trouvé la porte cachée. Bienvenue !"
+          }
+        },
+        "id" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Anda menemukan pintu tersembunyi. Selamat datang!"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Hai trovato la porta nascosta. Ti diamo il benvenuto!"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "隠された扉を見つけましたね。ようこそ。"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Você encontrou a porta escondida. Boas-vindas!"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Вы нашли потайную дверь. Добро пожаловать!"
+          }
+        },
+        "th" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "คุณค้นพบประตูลับแล้ว ยินดีต้อนรับ"
+          }
+        },
+        "vi" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Bạn đã tìm thấy cánh cửa bí mật. Chào mừng bạn!"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "你找到了隐藏的门。欢迎！"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "你找到了隱藏的門。歡迎！"
+          }
+        }
+      }
     },
     "숫자 (1. 2. 3.)" : {
       "localizations" : {
@@ -73126,7 +74571,110 @@
       }
     },
     "시작 절을 누른 뒤 끝 절을 누르면 범위가 됩니다. 절을 고르지 않으면 장 전체에 연결됩니다." : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Tippe auf den ersten und dann auf den letzten Vers, um einen Bereich festzulegen. Wenn du keinen Vers wählst, wird das ganze Kapitel verknüpft."
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Tap a starting verse, then an ending verse to set a range. If you don't choose a verse, the whole chapter is linked."
+          }
+        },
+        "en-CA" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Tap a starting verse, then an ending verse to set a range. If you don't choose a verse, the whole chapter is linked."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Toca el versículo inicial y luego el final para definir un rango. Si no eliges ningún versículo, se vinculará el capítulo completo."
+          }
+        },
+        "es-MX" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Toca el versículo inicial y luego el final para definir un rango. Si no eliges ningún versículo, se vinculará el capítulo completo."
+          }
+        },
+        "fil" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "I-tap ang unang talata, pagkatapos ang huling talata para gumawa ng saklaw. Kung walang pipiliing talata, ang buong kabanata ang mali-link."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Touchez le verset de début, puis celui de fin pour définir une plage. Si vous ne choisissez aucun verset, le chapitre entier sera associé."
+          }
+        },
+        "fr-CA" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Touchez le verset de début, puis celui de fin pour définir une plage. Si vous ne choisissez aucun verset, le chapitre entier sera associé."
+          }
+        },
+        "id" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Ketuk ayat awal, lalu ayat akhir untuk membuat rentang. Jika Anda tidak memilih ayat, seluruh pasal akan ditautkan."
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Tocca il versetto iniziale e poi quello finale per impostare un intervallo. Se non scegli alcun versetto, verrà collegato l’intero capitolo."
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "開始の節をタップしてから終了の節をタップすると範囲になります。節を選ばない場合は章全体に関連付けられます。"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Toque no versículo inicial e depois no final para definir um intervalo. Se você não escolher nenhum versículo, o capítulo inteiro será vinculado."
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Коснитесь начального, а затем конечного стиха, чтобы задать диапазон. Если не выбрать стих, будет связана вся глава."
+          }
+        },
+        "th" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "แตะข้อเริ่มต้นแล้วแตะข้อสุดท้ายเพื่อกำหนดช่วง หากไม่เลือกข้อ จะเชื่อมโยงกับทั้งบท"
+          }
+        },
+        "vi" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Chạm vào câu bắt đầu rồi chạm vào câu kết thúc để chọn phạm vi. Nếu không chọn câu nào, cả chương sẽ được liên kết."
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "先轻点起始节，再轻点结束节即可选定范围。若不选择经节，将关联到整章。"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "先輕點起始節，再輕點結束節即可選定範圍。若不選擇經節，將連結到整章。"
+          }
+        }
+      }
     },
     "시작하기" : {
       "localizations" : {
@@ -81219,6 +82767,113 @@
         }
       }
     },
+    "예: 요3:16" : {
+      "comment" : "성경 조회 아이패드 장 이동 막대의 좁은 검색칸(두 줄 배치) placeholder — 기존 \"예: 창세기1, 요3:16\"의 짧은 형. 예시 참조(요3:16)는 기존 키처럼 그대로 둔다.",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "z. B. 요3:16"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "e.g. 요3:16"
+          }
+        },
+        "en-CA" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "e.g. 요3:16"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "p. ej. 요3:16"
+          }
+        },
+        "es-MX" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "p. ej. 요3:16"
+          }
+        },
+        "fil" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "hal. 요3:16"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "ex. 요3:16"
+          }
+        },
+        "fr-CA" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "ex. 요3:16"
+          }
+        },
+        "id" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "mis. 요3:16"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "es. 요3:16"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "例: 요3:16"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "ex.: 요3:16"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "напр. 요3:16"
+          }
+        },
+        "th" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "ตัวอย่าง: 요3:16"
+          }
+        },
+        "vi" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Ví dụ: 요3:16"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "例：요3:16"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "例：요3:16"
+          }
+        }
+      }
+    },
     "예: 창세기1, 요3:16" : {
       "localizations" : {
         "de" : {
@@ -88591,7 +90246,110 @@
       }
     },
     "이 장의 절 수를 불러오지 못했습니다. 장 전체로만 연결할 수 있습니다." : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Die Versanzahl dieses Kapitels konnte nicht geladen werden. Es kann nur das ganze Kapitel verknüpft werden."
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Couldn't load the number of verses in this chapter. You can link only the whole chapter."
+          }
+        },
+        "en-CA" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Couldn't load the number of verses in this chapter. You can link only the whole chapter."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "No se pudo cargar el número de versículos de este capítulo. Solo puedes vincular el capítulo completo."
+          }
+        },
+        "es-MX" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "No se pudo cargar el número de versículos de este capítulo. Solo puedes vincular el capítulo completo."
+          }
+        },
+        "fil" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Hindi ma-load ang bilang ng talata sa kabanatang ito. Ang buong kabanata lang ang maaaring i-link."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Impossible de charger le nombre de versets de ce chapitre. Seul le chapitre entier peut être associé."
+          }
+        },
+        "fr-CA" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Impossible de charger le nombre de versets de ce chapitre. Seul le chapitre entier peut être associé."
+          }
+        },
+        "id" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Tidak dapat memuat jumlah ayat pasal ini. Anda hanya dapat menautkan seluruh pasal."
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Impossibile caricare il numero di versetti di questo capitolo. Puoi collegare solo l’intero capitolo."
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "この章の節数を読み込めませんでした。章全体にのみ関連付けられます。"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Não foi possível carregar o número de versículos deste capítulo. Só é possível vincular o capítulo inteiro."
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Не удалось загрузить количество стихов в этой главе. Можно связать только всю главу."
+          }
+        },
+        "th" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "ไม่สามารถโหลดจำนวนข้อของบทนี้ได้ เชื่อมโยงได้เฉพาะทั้งบทเท่านั้น"
+          }
+        },
+        "vi" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Không thể tải số câu của chương này. Chỉ có thể liên kết cả chương."
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "无法载入本章的经节数。只能关联到整章。"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "無法載入本章的經節數。只能連結到整章。"
+          }
+        }
+      }
     },
     "이 절에 달렸거나 이 절을 언급하는 개인 묵상이 없습니다." : {
       "localizations" : {
@@ -92120,7 +93878,110 @@
       }
     },
     "이미지 파일을 읽지 못했습니다: %@" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Bilddatei konnte nicht gelesen werden: %@"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Couldn't read the image file: %@"
+          }
+        },
+        "en-CA" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Couldn't read the image file: %@"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "No se pudo leer el archivo de imagen: %@"
+          }
+        },
+        "es-MX" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "No se pudo leer el archivo de imagen: %@"
+          }
+        },
+        "fil" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Hindi mabasa ang file ng larawan: %@"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Impossible de lire le fichier image : %@"
+          }
+        },
+        "fr-CA" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Impossible de lire le fichier image : %@"
+          }
+        },
+        "id" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Tidak dapat membaca file gambar: %@"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Impossibile leggere il file immagine: %@"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "画像ファイルを読み込めませんでした: %@"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Não foi possível ler o arquivo de imagem: %@"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Не удалось прочитать файл изображения: %@"
+          }
+        },
+        "th" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "ไม่สามารถอ่านไฟล์รูปภาพได้: %@"
+          }
+        },
+        "vi" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Không thể đọc tệp ảnh: %@"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "无法读取图像文件：%@"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "無法讀取影象檔案：%@"
+          }
+        }
+      }
     },
     "이미지를 불러오는 중…" : {
       "localizations" : {
@@ -97221,7 +99082,110 @@
       }
     },
     "장 전체" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Ganzes Kapitel"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Whole Chapter"
+          }
+        },
+        "en-CA" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Whole Chapter"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Capítulo completo"
+          }
+        },
+        "es-MX" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Capítulo completo"
+          }
+        },
+        "fil" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Buong Kabanata"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Chapitre entier"
+          }
+        },
+        "fr-CA" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Chapitre entier"
+          }
+        },
+        "id" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Seluruh Pasal"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Intero capitolo"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "章全体"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Capítulo inteiro"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Вся глава"
+          }
+        },
+        "th" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "ทั้งบท"
+          }
+        },
+        "vi" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Cả chương"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "整章"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "整章"
+          }
+        }
+      }
     },
     "장모" : {
       "comment" : "관계 안내 카드 라벨(질의한 %@ 관계가 등록돼 있지 않습니다)",
@@ -98817,7 +100781,110 @@
       }
     },
     "전체 화면으로 보기" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Im Vollbild anzeigen"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "View Full Screen"
+          }
+        },
+        "en-CA" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "View Full Screen"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Ver en pantalla completa"
+          }
+        },
+        "es-MX" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Ver en pantalla completa"
+          }
+        },
+        "fil" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Tingnan sa Full Screen"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Afficher en plein écran"
+          }
+        },
+        "fr-CA" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Afficher en plein écran"
+          }
+        },
+        "id" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Lihat Layar Penuh"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Visualizza a schermo intero"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "全画面で表示"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Ver em tela cheia"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Открыть на весь экран"
+          }
+        },
+        "th" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "ดูแบบเต็มหน้าจอ"
+          }
+        },
+        "vi" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Xem toàn màn hình"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "全屏查看"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "全螢幕檢視"
+          }
+        }
+      }
     },
     "전치사" : {
       "extractionState" : "manual",
@@ -99883,7 +101950,110 @@
       }
     },
     "점수 %lld" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Punkte %lld"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Score %lld"
+          }
+        },
+        "en-CA" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Score %lld"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Puntos %lld"
+          }
+        },
+        "es-MX" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Puntos %lld"
+          }
+        },
+        "fil" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Iskor %lld"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Score %lld"
+          }
+        },
+        "fr-CA" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Score %lld"
+          }
+        },
+        "id" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Skor %lld"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Punti %lld"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "スコア %lld"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Pontos %lld"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Очки %lld"
+          }
+        },
+        "th" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "คะแนน %lld"
+          }
+        },
+        "vi" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Điểm %lld"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "得分 %lld"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "得分 %lld"
+          }
+        }
+      }
     },
     "점점 얇게" : {
       "localizations" : {
@@ -99992,7 +102162,110 @@
       }
     },
     "점프 게임. 두 번 탭하면 점프합니다." : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Sprungspiel. Zum Springen doppeltippen."
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Jump game. Double-tap to jump."
+          }
+        },
+        "en-CA" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Jump game. Double-tap to jump."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Juego de saltos. Toca dos veces para saltar."
+          }
+        },
+        "es-MX" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Juego de saltos. Toca dos veces para saltar."
+          }
+        },
+        "fil" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Laro ng pagtalon. I-double tap para tumalon."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Jeu de saut. Touchez deux fois pour sauter."
+          }
+        },
+        "fr-CA" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Jeu de saut. Touchez deux fois pour sauter."
+          }
+        },
+        "id" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Game lompat. Ketuk dua kali untuk melompat."
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Gioco di salti. Tocca due volte per saltare."
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "ジャンプゲーム。ダブルタップでジャンプします。"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Jogo de pular. Toque duas vezes para pular."
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Игра с прыжками. Дважды коснитесь, чтобы прыгнуть."
+          }
+        },
+        "th" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "เกมกระโดด แตะสองครั้งเพื่อกระโดด"
+          }
+        },
+        "vi" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Trò chơi nhảy. Chạm hai lần để nhảy."
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "跳跃游戏。轻点两下即可跳跃。"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "跳躍遊戲。輕點兩下即可跳躍。"
+          }
+        }
+      }
     },
     "접기" : {
       "localizations" : {
@@ -108510,7 +110783,110 @@
       }
     },
     "청년회 사진 %lld장" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Fotos der Jugendgruppe: %lld"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Youth group photos: %lld"
+          }
+        },
+        "en-CA" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Youth group photos: %lld"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Fotos del grupo de jóvenes: %lld"
+          }
+        },
+        "es-MX" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Fotos del grupo de jóvenes: %lld"
+          }
+        },
+        "fil" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Mga larawan ng kabataan: %lld"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Photos du groupe de jeunes : %lld"
+          }
+        },
+        "fr-CA" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Photos du groupe de jeunes : %lld"
+          }
+        },
+        "id" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Foto pemuda: %lld"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Foto del gruppo giovani: %lld"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "青年会の写真 %lld 枚"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Fotos do grupo de jovens: %lld"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Фото молодёжной группы: %lld"
+          }
+        },
+        "th" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "รูปภาพกลุ่มเยาวชน %lld รูป"
+          }
+        },
+        "vi" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Ảnh hội thanh niên: %lld"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "青年会照片 %lld 张"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "青年會照片 %lld 張"
+          }
+        }
+      }
     },
     "체크 ✓" : {
       "localizations" : {
@@ -108831,7 +111207,110 @@
       }
     },
     "최고 %lld" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Rekord %lld"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Best %lld"
+          }
+        },
+        "en-CA" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Best %lld"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Récord %lld"
+          }
+        },
+        "es-MX" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Récord %lld"
+          }
+        },
+        "fil" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Pinakamataas %lld"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Record %lld"
+          }
+        },
+        "fr-CA" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Record %lld"
+          }
+        },
+        "id" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Terbaik %lld"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Record %lld"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "ベスト %lld"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Recorde %lld"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Рекорд %lld"
+          }
+        },
+        "th" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "สูงสุด %lld"
+          }
+        },
+        "vi" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Cao nhất %lld"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "最高 %lld"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "最高 %lld"
+          }
+        }
+      }
     },
     "최근 %@ %@" : {
       "localizations" : {
@@ -112122,7 +114601,110 @@
       }
     },
     "크게 보기" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Vergrößert anzeigen"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "View Larger"
+          }
+        },
+        "en-CA" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "View Larger"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Ver en grande"
+          }
+        },
+        "es-MX" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Ver en grande"
+          }
+        },
+        "fil" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Tingnan nang Malaki"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Afficher en grand"
+          }
+        },
+        "fr-CA" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Afficher en grand"
+          }
+        },
+        "id" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Lihat Lebih Besar"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Visualizza in grande"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "大きく表示"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Ver ampliado"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Показать крупнее"
+          }
+        },
+        "th" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "ดูแบบขยาย"
+          }
+        },
+        "vi" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Xem cỡ lớn"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "放大查看"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "放大檢視"
+          }
+        }
+      }
     },
     "타이틀 서체 라이선스" : {
       "localizations" : {
@@ -116264,7 +118846,110 @@
       }
     },
     "패널로 줄이기" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Zur Seitenleiste verkleinern"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Shrink to Panel"
+          }
+        },
+        "en-CA" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Shrink to Panel"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Reducir a panel"
+          }
+        },
+        "es-MX" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Reducir a panel"
+          }
+        },
+        "fil" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Paliitin sa Panel"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Réduire en panneau"
+          }
+        },
+        "fr-CA" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Réduire en panneau"
+          }
+        },
+        "id" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Perkecil ke Panel"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Riduci a pannello"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "パネルに縮小"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Reduzir para painel"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Свернуть в панель"
+          }
+        },
+        "th" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "ย่อเป็นแผง"
+          }
+        },
+        "vi" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Thu nhỏ thành bảng"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "缩小为面板"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "縮小為面板"
+          }
+        }
+      }
     },
     "페알" : {
       "extractionState" : "manual",
@@ -122325,10 +125010,216 @@
       }
     },
     "함께 기도하고, 함께 웃고, 함께 했던 여러분을 대구중부교회 청년형제자매님들을 기억하겠습니다. 이 앱을 여는 날마다 말씀 안에서 작은 기쁨과 힘을 얻으시길 바랍니다." : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Wir werden euch, die jungen Brüder und Schwestern der Daegu Jungbu Church, nicht vergessen – mit euch haben wir gebetet, gelacht und so vieles geteilt. Mögt ihr an jedem Tag, an dem ihr diese App öffnet, im Wort ein wenig Freude und Kraft finden."
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "We will remember all of you, the young brothers and sisters of Daegu Jungbu Church, who prayed, laughed, and walked alongside us. Each day you open this app, may you find a little joy and strength in the Word."
+          }
+        },
+        "en-CA" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "We will remember all of you, the young brothers and sisters of Daegu Jungbu Church, who prayed, laughed, and walked alongside us. Each day you open this app, may you find a little joy and strength in the Word."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Os recordaremos a todos, jóvenes hermanos y hermanas de Daegu Jungbu Church, con quienes oramos, reímos y compartimos tanto. Que cada día que abráis esta app encontréis en la Palabra un poco de alegría y fuerza."
+          }
+        },
+        "es-MX" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Los recordaremos a todos ustedes, jóvenes hermanos y hermanas de Daegu Jungbu Church, con quienes oramos, reímos y compartimos tanto. Que cada día que abran esta app encuentren en la Palabra un poco de alegría y fuerza."
+          }
+        },
+        "fil" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Aalalahanin namin kayong lahat, mga kabataang kapatid ng Daegu Jungbu Church, na kasama naming nanalangin, tumawa, at nagsama-sama. Sa bawat araw na bubuksan ninyo ang app na ito, nawa’y makatagpo kayo ng kaunting saya at lakas sa Salita."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Nous nous souviendrons de vous tous, jeunes frères et sœurs de Daegu Jungbu Church, avec qui nous avons prié, ri et tant partagé. Chaque jour où vous ouvrirez cette app, puissiez-vous trouver dans la Parole un peu de joie et de force."
+          }
+        },
+        "fr-CA" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Nous nous souviendrons de vous tous, jeunes frères et sœurs de Daegu Jungbu Church, avec qui nous avons prié, ri et tant partagé. Chaque jour où vous ouvrirez cette app, puissiez-vous trouver dans la Parole un peu de joie et de force."
+          }
+        },
+        "id" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Kami akan selalu mengingat kalian semua, saudara-saudari muda Daegu Jungbu Church, yang telah bersama-sama berdoa, tertawa, dan berbagi. Setiap kali kalian membuka aplikasi ini, kiranya kalian menemukan sedikit sukacita dan kekuatan di dalam firman."
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Ci ricorderemo di tutti voi, giovani fratelli e sorelle di Daegu Jungbu Church, con cui abbiamo pregato, riso e condiviso tanto. Ogni giorno in cui aprirete questa app, possiate trovare nella Parola un po’ di gioia e di forza."
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "共に祈り、共に笑い、共に歩んだ Daegu Jungbu Church の青年の兄弟姉妹の皆さんのことを忘れません。このアプリを開く日ごとに、御言葉の中で小さな喜びと力を得られますように。"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Vamos nos lembrar de todos vocês, jovens irmãos e irmãs de Daegu Jungbu Church, com quem oramos, rimos e compartilhamos tanto. Que a cada dia em que abrirem este app vocês encontrem na Palavra um pouco de alegria e força."
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Мы будем помнить всех вас, молодых братьев и сестёр Daegu Jungbu Church, с которыми мы вместе молились, смеялись и были рядом. Пусть каждый день, когда вы открываете это приложение, вы находите в Слове немного радости и сил."
+          }
+        },
+        "th" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "เราจะระลึกถึงพวกคุณทุกคน พี่น้องเยาวชนของ Daegu Jungbu Church ที่ได้อธิษฐานด้วยกัน หัวเราะด้วยกัน และอยู่เคียงข้างกันมา ขอให้ทุกวันที่เปิดแอปนี้ คุณได้รับความชื่นชมยินดีและกำลังเล็กๆ ในพระวจนะ"
+          }
+        },
+        "vi" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Chúng tôi sẽ luôn nhớ đến các bạn, những anh chị em thanh niên của Daegu Jungbu Church, những người đã cùng cầu nguyện, cùng cười và cùng đồng hành. Mong rằng mỗi ngày mở ứng dụng này, các bạn sẽ nhận được chút niềm vui và sức mạnh trong Lời Chúa."
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "我们会记得一起祷告、一起欢笑、一起走过的各位——Daegu Jungbu Church 的青年弟兄姊妹们。愿你们每天打开这个 App 时，都能在神的话语中得着小小的喜乐和力量。"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "我們會記得一起禱告、一起歡笑、一起走過的各位——Daegu Jungbu Church 的青年弟兄姊妹們。願你們每天打開這個 App 時，都能在神的話語中得著小小的喜樂和力量。"
+          }
+        }
+      }
     },
     "함께 달려볼까요?" : {
-
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Wollen wir zusammen laufen?"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Shall we run together?"
+          }
+        },
+        "en-CA" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Shall we run together?"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "¿Corremos juntos?"
+          }
+        },
+        "es-MX" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "¿Corremos juntos?"
+          }
+        },
+        "fil" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Tara, sabay tayong tumakbo?"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "On court ensemble ?"
+          }
+        },
+        "fr-CA" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "On court ensemble ?"
+          }
+        },
+        "id" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Ayo lari bersama?"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Corriamo insieme?"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "一緒に走ってみませんか？"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Vamos correr juntos?"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Побежим вместе?"
+          }
+        },
+        "th" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "มาวิ่งด้วยกันไหม?"
+          }
+        },
+        "vi" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Cùng chạy nhé?"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "要一起跑吗？"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "要一起跑嗎？"
+          }
+        }
+      }
     },
     "합치기" : {
       "localizations" : {

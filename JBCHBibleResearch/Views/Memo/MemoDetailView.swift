@@ -131,6 +131,8 @@ struct MemoDetailView: View {
     /// 말씀 노트 목록에서 연 화면(`.wordNoteList`)인지 — 조회/편집 모드·구절 줄·테마 배경이 이 경우에만 달라진다.
     private var isWordNote: Bool { presentationContext == .wordNoteList }
     private var settings: UserSettingsStore { .shared }
+    /// 말씀 노트(아이패드 세로)가 내용 칸을 숨긴 동안 true — 보이지 않는 묵상의 툴바 버튼을 내비게이션 바에 올리지 않는다.
+    @Environment(\.isSplitDetailConcealed) private var isConcealedBySplit
 
     @State private var autosave: AutosaveController?
     /// 말씀 노트 목록에서 연 기존 묵상은 조회 모드로 시작하고(2026-10-03), 새로 만든 빈 묵상만 바로 편집 모드로 연다.
@@ -231,37 +233,42 @@ struct MemoDetailView: View {
         // 말씀 노트 화면만 테마 배경을 칠한다(`WordSummaryEditorView`와 같은 처리). 다른 맥락은 기존 그대로(투명).
         .background(isWordNote ? (settings.bibleBackgroundColor ?? Color.clear) : Color.clear)
         .toolbar {
-            ToolbarItem(placement: .primaryAction) {
-                Button {
-                    // 말씀 노트에서 "완료"를 누르면 디바운스 중인 저장을 바로 끝낸다.
-                    if isWordNote && isEditable { autosave?.saveImmediately() }
-                    isEditable.toggle()
-                } label: {
-                    if isWordNote {
-                        Text(isEditable ? String(localized: "완료") : String(localized: "편집")).fontWeight(.semibold)
-                    } else {
-                        Image(systemName: isEditable ? "eye" : "pencil")
+            // 말씀 노트(아이패드 세로)가 내용 칸을 숨긴 동안에는 보이지 않는 묵상의 버튼을 올리지 않는다(`isSplitDetailConcealed`).
+            if !isConcealedBySplit {
+                ToolbarItem(placement: .primaryAction) {
+                    Button {
+                        // 말씀 노트에서 "완료"를 누르면 디바운스 중인 저장을 바로 끝낸다.
+                        if isWordNote && isEditable { autosave?.saveImmediately() }
+                        isEditable.toggle()
+                    } label: {
+                        if isWordNote {
+                            Text(isEditable ? String(localized: "완료") : String(localized: "편집")).fontWeight(.semibold)
+                        } else {
+                            Image(systemName: isEditable ? "eye" : "pencil")
+                        }
                     }
+                    .help(isEditable ? (isWordNote ? String(localized: "편집 끝내고 조회로") : String(localized: "읽기 전용으로 보기")) : String(localized: "편집하기"))
                 }
-                .help(isEditable ? (isWordNote ? String(localized: "편집 끝내고 조회로") : String(localized: "읽기 전용으로 보기")) : String(localized: "편집하기"))
-            }
-            // 표준 공유 시트(`ShareLink`, AirDrop 포함). 파일 인코딩/쓰기는 실제 공유 시점에만
-            // 일어나도록 미뤄(`TransferableSharedMemo`의 `FileRepresentation` 클로저) 항상 최신 내용이 담긴다.
-            // 받는 쪽은 미리보기로 확인 후 개인 묵상에 추가한다(`ImportedMemoPreviewSheet`).
-            ToolbarItem(placement: .secondaryAction) {
-                ShareLink(
-                    item: TransferableSharedMemo(payload: sharePayload, displayName: shareDisplayName),
-                    preview: SharePreview("\(shareDisplayName) 묵상")
-                ) {
-                    Image(systemName: "square.and.arrow.up")
+                // 표준 공유 시트(`ShareLink`, AirDrop 포함). 파일 인코딩/쓰기는 실제 공유 시점에만
+                // 일어나도록 미뤄(`TransferableSharedMemo`의 `FileRepresentation` 클로저) 항상 최신 내용이 담긴다.
+                // 받는 쪽은 미리보기로 확인 후 개인 묵상에 추가한다(`ImportedMemoPreviewSheet`).
+                ToolbarItem(placement: .secondaryAction) {
+                    ShareLink(
+                        item: TransferableSharedMemo(payload: sharePayload, displayName: shareDisplayName),
+                        preview: SharePreview("\(shareDisplayName) 묵상")
+                    ) {
+                        Image(systemName: "square.and.arrow.up")
+                    }
+                    .help("이 묵상 공유하기(에어드롭 포함)")
                 }
-                .help("이 묵상 공유하기(에어드롭 포함)")
             }
         }
         .onAppear(perform: loadIfNeeded)
         .onDisappear(perform: handleDisappear)
         .sheet(item: $drilldownTag) { tag in
             TagDrilldownView(tag: tag)
+                // 시트 안에서도 `MemoDetailView`가 쓰인다. 숨김 상태가 시트로 이어져 그 편집기의 버튼까지 빠지지 않게 되돌린다.
+                .environment(\.isSplitDetailConcealed, false)
         }
         .sheet(isPresented: $isVersePickerPresented) {
             WordNoteVersePickerSheet(

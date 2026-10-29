@@ -87,6 +87,8 @@ struct TranslationColumnView: View {
     var onSelectCrossReferenceTarget: (BibleVerseRef) -> Void = { _ in }
     /// 관주 미리보기 글 — 이 컬럼 번역본의 대상 절 본문(없으면 nil). 통합 페이지의 관주 행이 두 줄까지 보여 준다.
     var crossReferencePreviewProvider: (BibleVerseRef) -> String? = { _ in nil }
+    /// 연구문서·내 설교 언급의 출처 제목(못 찾거나 비어 있으면 nil). 통합 페이지의 연구문서·내 설교 행 첫 줄에 보인다.
+    var mentionTitleProvider: (VerseMention) -> String? = { _ in nil }
     /// 구간 메모 아이콘에서 메모를 골랐을 때 — 기존 "메모 작성" 시트를 그대로 연다.
     var onSelectPhraseMemo: (UserMemo) -> Void = { _ in }
     /// "관련 내용" 목록에서 항목을 골랐을 때 — 메모는 편집기 시트, 연구문서는 PDF 검색+이동 창으로
@@ -374,6 +376,7 @@ struct TranslationColumnView: View {
             verseMentions: verseMentionsProvider(verse.verse),
             onSelectCrossReferenceTarget: onSelectCrossReferenceTarget,
             crossReferencePreviewProvider: crossReferencePreviewProvider,
+            mentionTitleProvider: mentionTitleProvider,
             onSelectPhraseMemo: onSelectPhraseMemo,
             onSelectVerseMention: onSelectVerseMention,
             inlineAnnotatedContentProvider: inlineAnnotatedContentProvider
@@ -727,6 +730,8 @@ private struct VerseRow: View {
     var onSelectCrossReferenceTarget: (BibleVerseRef) -> Void = { _ in }
     /// 관주 미리보기 글 — 이 컬럼 번역본의 대상 절 본문(없으면 nil). 통합 페이지의 관주 행이 두 줄까지 보여 준다.
     var crossReferencePreviewProvider: (BibleVerseRef) -> String? = { _ in nil }
+    /// 연구문서·내 설교 언급의 출처 제목 — 통합 페이지의 연구문서·내 설교 행 첫 줄에 보인다(못 찾으면 nil).
+    var mentionTitleProvider: (VerseMention) -> String? = { _ in nil }
     var onSelectPhraseMemo: (UserMemo) -> Void = { _ in }
     var onSelectVerseMention: (VerseMention) -> Void = { _ in }
     /// 캐시되는 인라인 주석 조립 클로저 — `verseContentText`가 사용한다.
@@ -981,6 +986,7 @@ private struct VerseRow: View {
             onClose: { isRelatedPresented = false },
             onSelectTarget: onSelectCrossReferenceTarget,
             previewProvider: crossReferencePreviewProvider,
+            mentionTitleProvider: mentionTitleProvider,
             onSelectMemo: onSelectPhraseMemo,
             onSelectMention: onSelectVerseMention
         )

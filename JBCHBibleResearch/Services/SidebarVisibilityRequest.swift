@@ -23,6 +23,10 @@ final class SidebarVisibilityRequest {
 
     enum Request: Equatable {
         case hide
+        /// 사이드바를 접되 `wasVisibleBeforeHide` 기록은 그대로 둔다. 말씀 노트/개요가 아이패드 세로에서 내용 칸을 숨긴 동안
+        /// (`View.concealableDetailColumn`) 이미 선택이 있는 상태에서 항목을 다시 골라 내용을 보이게 할 때 쓴다. 이때의 사이드바는
+        /// 첫 선택으로 접힌 뒤 사용자가 다시 연 것이라, `.hide`처럼 기록하면 첫 선택 전 상태가 덮여 `.restore`가 기능 추가 전과 달라진다.
+        case hideKeepingRestoreState
         case restore
     }
 
@@ -34,6 +38,9 @@ final class SidebarVisibilityRequest {
 
     /// 말씀 요약 편집기를 여는 쪽(`BibleReadingContentView`)이 호출한다.
     func requestHide() { pendingRequest = .hide }
+
+    /// `.hideKeepingRestoreState` 참고 — 복원 기록을 바꾸지 않고 사이드바만 접는다.
+    func requestHideKeepingRestoreState() { pendingRequest = .hideKeepingRestoreState }
 
     /// 말씀 요약 편집기를 닫는 쪽이 호출한다.
     func requestRestore() { pendingRequest = .restore }

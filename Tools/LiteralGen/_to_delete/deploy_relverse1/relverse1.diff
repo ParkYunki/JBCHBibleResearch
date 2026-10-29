@@ -1,0 +1,887 @@
+diff --git a/JBCHBibleResearch/JBCHBibleResearchApp.swift b/JBCHBibleResearch/JBCHBibleResearchApp.swift
+index b02f560..5e85bb5 100644
+--- a/JBCHBibleResearch/JBCHBibleResearchApp.swift
++++ b/JBCHBibleResearch/JBCHBibleResearchApp.swift
+@@ -127,6 +127,20 @@ struct JBCHBibleResearchApp: App {
+         }
+         .modelContainer(modelContainer)
+ 
++        // [relverse1 2026-10-29] 구절을 지정해 여는 성경 조회 새 창(맥·아이패드) — 통합검색 상세의 "관련 성경구절" 등이
++        // `BibleVerseOpener`(Views/Navigation/BibleReadingTarget.swift)로 연다. 값은 처음 연 구절 + 토큰이다. 같은 구절의 창이 떠 있는 동안은
++        // `BibleReadingWindowTokenStore`가 같은 토큰을 돌려줘 그 창이 앞으로 오고, 닫힌 뒤에는 새 토큰이라 새 창이 열린다
++        // (`SermonWindowTokenStore`와 같은 이유, 그 파일 주석 참고). 위 "bible-reading" 창과 같은 보조 창 규칙
++        // (`isPrimaryWindow: false`, 창마다 선택이 따로)이다.
++        WindowGroup(id: BibleVerseOpener.windowID, for: BibleReadingTarget.self) { $target in
++            BibleReadingWindowContent(target: target)
++                .modifier(AppColorSchemeModifier())
++                #if os(macOS)
++                .frame(minWidth: 500, minHeight: 400)
++                #endif
++        }
++        .modelContainer(modelContainer)
++
+         // "태그 관계" 사이드바 항목이 여는 별도 창(SidebarNavigationView.swift 참고).
+         WindowGroup(id: "tag-relations") {
+             TagRelationsView()
+diff --git a/JBCHBibleResearch/Views/Bible/BibleReadingView.swift b/JBCHBibleResearch/Views/Bible/BibleReadingView.swift
+index 5a9a45e..33e155e 100644
+--- a/JBCHBibleResearch/Views/Bible/BibleReadingView.swift
++++ b/JBCHBibleResearch/Views/Bible/BibleReadingView.swift
+@@ -29,11 +29,18 @@ struct BibleReadingView: View {
+     /// 무시한다.
+     var initialBook: Book? = nil
+     var initialChapter: Int? = nil
+-    /// 지정하면 해당 절까지 스크롤한 뒤 잠시 하이라이트한다(`SearchView.verseRow`가 넘김). nil이면 동작 변화 없음.
++    /// 지정하면 해당 절까지 스크롤한 뒤 잠시 하이라이트하고 장:절 조회 이력을 남긴다. 넘기는 곳: macOS `SearchView`의 push
++    /// (`BibleVerseDestinationRegistration`), 구절 지정 새 창(`BibleReadingWindowContent`). nil이면 동작 변화 없음.
+     var initialVerse: Int? = nil
+-    /// false면 관련 콘텐츠(인스펙터)/조회 이력 아이콘을 툴바에서 뺀다. macOS "성경 조회 새 창"(`WindowGroup(id:
+-    /// "bible-reading")`)만 false를 넘긴다.
++    /// false면 보조 창이다 — 창마다 번역본 선택이 따로이고, 이동 요청(`BibleVerseNavigationRequest`)을 소비하지 않으며,
++    /// 메인 창의 사이드바·인스펙터 상태(`SidebarVisibilityRequest`, `IPadSidebarInspectorCoordination`)를 바꾸지 않는다.
++    /// 도구 모음에서는 책갈피·조회 이력·관련 콘텐츠(아이패드는 사이드바 열기도)를 뺀다(macOS `BibleToolRail`, iOS `BibleTopBar`).
++    /// false를 넘기는 곳: "성경 조회 새 창"(`WindowGroup(id: "bible-reading")`, macOS 메뉴·도구 레일),
++    /// 구절 지정 새 창(`WindowGroup(id: "bible-reading-at")`, macOS·아이패드, `BibleReadingWindowContent`).
+     var isPrimaryWindow: Bool = true
++    /// [relverse1] `initialVerse`로 열 때 조회 이력을 남길지 viewModel을 만드는 순간에 묻는다(스크롤·강조는 그대로).
++    /// 기본은 항상 남긴다. 창 복원으로 같은 창이 다시 만들어질 때 이력이 또 쌓이지 않게 `BibleReadingWindowContent`가 넘긴다.
++    var shouldRecordInitialVerseHistory: () -> Bool = { true }
+ 
+     var body: some View {
+         Group {
+@@ -46,8 +53,8 @@ struct BibleReadingView: View {
+                             modelContext: modelContext,
+                             initialBook: initialBook,
+                             initialChapter: initialChapter,
+-                            // 메인 창의 성경 조회 화면(사이드바 "성경 조회", 아이폰 "성경" 탭, 통합 검색에서 띄운 화면)은 이 기기에 저장된
+-                            // 번역본 선택을 함께 쓴다. macOS "성경 조회 새 창"(`isPrimaryWindow == false`)만 예전처럼 창마다 따로다.
++                            // 메인 창의 성경 조회 화면(사이드바 "성경 조회", 아이폰 "성경" 탭, macOS 통합 검색에서 push한 화면)은 이 기기에 저장된
++                            // 번역본 선택을 함께 쓴다. 보조 창(`isPrimaryWindow == false` — "성경 조회 새 창", 구절 지정 새 창)만 창마다 따로다.
+                             persistsTranslationSelection: isPrimaryWindow
+                         )
+                         vm.onAppear()
+@@ -68,9 +75,12 @@ struct BibleReadingView: View {
+                             BibleVerseNavigationRequest.shared.clear()
+                         } else if let initialVerse {
+                             vm.highlightVerseTemporarily(initialVerse)
+-                            // `SearchView.verseRow`가 `initialVerse`로 이 화면을 새로 띄운 경로 — `init`이
++                            // `initialVerse`로 이 화면을 새로 띄운 경로 — `init`이
+                             // `selectBook`을 거치지 않아 장 단위 기록도 남지 않으므로 여기서 장:절을 함께 기록한다.
+-                            vm.recordVerseHistory(verse: initialVerse)
++                            // [relverse1] 창 복원으로 다시 만들어진 경우는 기록하지 않는다(`shouldRecordInitialVerseHistory`).
++                            if shouldRecordInitialVerseHistory() {
++                                vm.recordVerseHistory(verse: initialVerse)
++                            }
+                         }
+                         viewModel = vm
+                     }
+@@ -822,14 +832,18 @@ private struct BibleReadingContentView: View {
+         // 관련 콘텐츠 인스펙터가 (어떤 경로로든) 열리고 닫히는 것을 `IPadSidebarInspectorCoordination` 싱글턴에 보고한다(아이패드에서
+         // 사이드바/인스펙터 동시 노출 방지). 말씀 요약 편집기가 이 자리를 쓰는 경우는 포함하지 않는다(기존 `SidebarVisibilityRequest` 계약을
+         // 따른다).
++        // [relverse1] 보조 성경 창(`isPrimaryWindow == false`)은 보고하지 않는다. 이 싱글턴은 메인 창 `SidebarNavigationView`가 구독하므로,
++        // 보고하면 보조 창의 인스펙터가 메인 창 사이드바를 접는다. 보조 창에는 사이드바가 없어 동시 노출 문제도 없다.
+         .onChange(of: isRelatedContentPresented) { _, newValue in
+-            guard isIPad else { return }
++            guard isIPad, isPrimaryWindow else { return }
+             IPadSidebarInspectorCoordination.shared.reportInspectorVisibility(newValue)
+         }
+         // 사이드바가 (어떤 경로로든) 열리는 순간을 관찰해 이 화면이 스스로(로컬 상태만) 관련 콘텐츠 인스펙터를 닫는다 — 사이드바 쪽에 대신 닫아 달라는 명령을 보낼
+         // 필요가 없다.
+         .onChange(of: IPadSidebarInspectorCoordination.shared.isSidebarVisible) { _, newValue in
+-            guard isIPad, newValue, isRelatedContentPresented else { return }
++            // [relverse1] 보조 성경 창에서는 반응하지 않는다 — `isSidebarVisible`은 메인 창의 사이드바라, 반응하면 메인 창 사이드바를 열 때
++            // 보조 창 인스펙터가 닫힌다.
++            guard isIPad, isPrimaryWindow, newValue, isRelatedContentPresented else { return }
+             isRelatedContentPresented = false
+         }
+     }
+@@ -971,6 +985,11 @@ private struct BibleReadingContentView: View {
+     /// 새로 만들기와 기존 항목 선택이 공유하는 "편집기 열기" 절차 —
+     /// 번역본 열 좁히기/왼쪽 사이드바 닫기를 동일하게 적용한다.
+     private func presentWordSummaryEditor(_ summary: VerseSummary) {
++        // [relverse1] 편집기가 이미 열린 채 다시 호출됐는지(아래 `displayedTranslationIDsBeforeWordSummary`가 편집 세션 표시다 —
++        // 여기서 채우고 `closeWordSummaryEditor()`가 동기적으로 비운다). 다시 호출된 경우 사이드바 숨김 요청을 또 보내지 않는다:
++        // 받는 쪽(`SidebarNavigationView`)이 `.hide`마다 "숨기기 직전 상태"를 새로 기록하므로, 이미 숨긴 뒤의 두 번째 요청이
++        // 첫 기록(열려 있었음)을 "닫혀 있었음"으로 덮어써 편집을 마쳐도 사이드바가 돌아오지 않는다.
++        let isFirstPresentation = displayedTranslationIDsBeforeWordSummary == nil
+         // 번역본 열 좁히기 — 나중에 정확히 되돌릴 수 있도록 지금 상태를 먼저
+         // 저장해 둔다. 이미 편집기가 열려 있는 상태에서 다시 호출됐다면(예: 관련
+         // 콘텐츠 패널에서 다른 항목을 연달아 고름) 기존 저장값을 덮어쓰지 않는다.
+@@ -984,7 +1003,11 @@ private struct BibleReadingContentView: View {
+ 
+         // 왼쪽 사이드바 닫기 — macOS/iPadOS에서만 의미가 있다.
+         // 아이폰 탭바 레이아웃은 이 요청을 구독하지 않아 무시된다.
+-        SidebarVisibilityRequest.shared.requestHide()
++        // [relverse1] 보조 성경 창에는 사이드바가 없고 이 요청은 메인 창이 받으므로 보내지 않는다(끝낼 때 `requestRestore()`도 같은 창 조건).
++        // 편집 세션당 한 번만 보낸다(`isFirstPresentation` 참고). 끝낼 때의 `requestRestore()`는 세션당 한 번이라 짝이 맞는다.
++        if isPrimaryWindow && isFirstPresentation {
++            SidebarVisibilityRequest.shared.requestHide()
++        }
+ 
+         wordSummaryBeingEdited = summary
+         // 아이폰 인스펙터(시트)의 표시 여부는 `isWordSummaryInspectorVisible`이 단독으로 맡는다.
+@@ -1022,7 +1045,10 @@ private struct BibleReadingContentView: View {
+             // 다른 경로와 같이 저장값은 덮어쓰지 않는다 — 보던 번역본이 없어 첫 열로 열어도, 그 번역본을 다시 켜면 다음 실행 때 그 열로 돌아간다.
+             setPhoneColumnProgrammatically(targetID)
+         }
+-        SidebarVisibilityRequest.shared.requestRestore()
++        // [relverse1] 시작 때 `requestHide()`와 같은 조건 — `isPrimaryWindow`는 `let`이라 짝이 어긋나지 않는다.
++        if isPrimaryWindow {
++            SidebarVisibilityRequest.shared.requestRestore()
++        }
+         #if os(macOS)
+         // macOS는 인스펙터가 아닌 별도 `NSPanel`을 쓰므로 `wordSummaryBeingEdited`를 즉시 비운다.
+         // `hide()`가 패널을 닫으면 델리게이트가 `onClose`(이 함수)를 다시 부르지만,
+@@ -1827,6 +1853,8 @@ private struct BibleReadingContentView: View {
+             isEditingSummary: wordSummaryBeingEdited != nil,
+             singleRowCenter: singleRowCenter,
+             stackedRowCenter: stackedRowCenter,
++            // [relverse1] 보조 성경 창은 사이드바 열기·책갈피·조회 이력·관련 콘텐츠를 뺀다(`BibleTopBar.isPrimaryWindow`).
++            isPrimaryWindow: isPrimaryWindow,
+             isBookmarkListPresented: $isBookmarkListPresented,
+             isHistoryPresented: $isHistoryPresented,
+             isRelatedContentPresented: $isRelatedContentPresented,
+diff --git a/JBCHBibleResearch/Views/Bible/BibleTopBar.swift b/JBCHBibleResearch/Views/Bible/BibleTopBar.swift
+index 460a6b1..6a9aa3c 100644
+--- a/JBCHBibleResearch/Views/Bible/BibleTopBar.swift
++++ b/JBCHBibleResearch/Views/Bible/BibleTopBar.swift
+@@ -52,6 +52,10 @@ struct BibleTopBar: View {
+     /// 아이패드 두 줄 "아이콘 아래줄" 배치일 때 아랫줄 가운데에 놓을 장 이동 막대(책 버튼 없음). nil이 아니면 윗줄은 [번역본 칩][제목] 한 줄로 두고
+     /// 왼쪽/오른쪽 아이콘 묶음을 아랫줄 양끝으로 내린다(2026-10-28). `singleRowCenter`가 함께 주어지면 `singleRowCenter`가 우선한다.
+     var stackedRowCenter: AnyView? = nil
++    /// [relverse1] false면 보조 성경 창(`BibleReadingView.isPrimaryWindow == false`, 아이패드 "bible-reading-at" 창)이다. macOS 보조 창의
++    /// 도구 레일(`BibleToolRail.showNavigationGroup`/`showRelatedGroup`)과 같은 규칙으로 사이드바 열기·책갈피·조회 이력·관련 콘텐츠를 뺀다.
++    /// 말씀 요약 편집 중에는 "말씀 요약 닫기"(관련 콘텐츠 칸)만 남긴다 — 하단 액션바의 "말씀 요약"으로 보조 창에서도 편집기를 열 수 있기 때문이다.
++    var isPrimaryWindow: Bool = true
+     @Binding var isBookmarkListPresented: Bool
+     @Binding var isHistoryPresented: Bool
+     @Binding var isRelatedContentPresented: Bool
+@@ -218,7 +222,8 @@ struct BibleTopBar: View {
+     /// 아이패드 왼쪽 묶음: [사이드바 열기 | 책갈피 이동 | 책갈피]. 사이드바 열기는 사이드바가 닫혀 있을 때만.
+     @ViewBuilder
+     private var padLeftGroup: some View {
+-        if !hidesIconsWhileEditingSummary {
++        // [relverse1] 보조 창은 이 묶음 전체를 뺀다(`isPrimaryWindow` 참고).
++        if isPrimaryWindow && !hidesIconsWhileEditingSummary {
+             BibleBarSegmentGroup {
+                 if showsSidebarOpenButton {
+                     sidebarOpenItem
+@@ -233,21 +238,28 @@ struct BibleTopBar: View {
+     }
+ 
+     /// 아이패드 오른쪽 묶음: [조회 이력 | 관련 콘텐츠]. 말씀 요약 편집 중에는 관련 콘텐츠 칸(= 말씀 요약 닫기)만 남는다.
++    /// [relverse1] 보조 창은 말씀 요약 편집 중의 "말씀 요약 닫기"만 남기고, 그 밖에는 묶음을 그리지 않는다(`isPrimaryWindow` 참고).
++    @ViewBuilder
+     private var padRightGroup: some View {
+-        BibleBarSegmentGroup {
+-            if !hidesIconsWhileEditingSummary {
+-                historyItem
+-                BibleBarSegmentDivider()
++        if isPrimaryWindow || isEditingSummary {
++            BibleBarSegmentGroup {
++                if isPrimaryWindow && !hidesIconsWhileEditingSummary {
++                    historyItem
++                    BibleBarSegmentDivider()
++                }
++                relatedItem
+             }
+-            relatedItem
++            .fixedSize()
+         }
+-        .fixedSize()
+     }
+ 
+     /// 아이패드: 사이드바가 닫혀 있고 말씀 요약 편집 중이 아닐 때만 둔다(이전 툴바와 같은 조건 —
+     /// 말씀 요약 편집 중에는 `SidebarVisibilityRequest`의 자동 복원 계약과 사이드바 값을 다투게 되므로 노출하지 않는다).
++    /// [relverse1] 보조 성경 창에서도 두지 않는다. 그 창에는 사이드바가 없다(`NavigationSplitView` 없이 `BibleReadingView`만 띄우는
++    /// `WindowGroup`). 판정에 쓰는 `isSidebarVisible`과 누를 때 보내는 `requestShowSidebar()`도 메인 창 `SidebarNavigationView`의 것이라,
++    /// 보조 창에서 누르면 다른 창의 사이드바가 열린다.
+     private var showsSidebarOpenButton: Bool {
+-        !isPhone && !isEditingSummary && !IPadSidebarInspectorCoordination.shared.isSidebarVisible
++        isPrimaryWindow && !isPhone && !isEditingSummary && !IPadSidebarInspectorCoordination.shared.isSidebarVisible
+     }
+ 
+     // MARK: - 제목
+diff --git a/JBCHBibleResearch/Views/Navigation/BibleReadingTarget.swift b/JBCHBibleResearch/Views/Navigation/BibleReadingTarget.swift
+new file mode 100644
+index 0000000..797560f
+--- /dev/null
++++ b/JBCHBibleResearch/Views/Navigation/BibleReadingTarget.swift
+@@ -0,0 +1,240 @@
++//
++//  BibleReadingTarget.swift
++//  JBCHBibleResearch
++//
++//  [relverse1 2026-10-29] 통합검색에서 구절을 누르면 macOS·iPadOS는 그 구절이 열린 성경 조회 새 창을 띄운다.
++//  창: `WindowGroup(id: "bible-reading-at", for: BibleReadingTarget.self)`.
++//  대상: "관련 성경구절", 관계 칩, "성경구절" 탭의 절 행, 인물·지명 본문 인용 링크, 아이패드의 메모 행.
++//  아이폰과 다중 창을 쓸 수 없는 환경(`supportsMultipleWindows == false`)은 "성경 조회" 섹션 전환
++//  (`AppNavigationRequest` + `BibleVerseNavigationRequest`)으로 대신한다.
++//
++//  같은 구절을 다시 누를 때 — 이미 열린 창을 앞으로(사용자 결정 2026-10-29)
++//  - 공식 동작(`OpenWindowAction` 문서): "If the interface already has a window from the group that's presenting the specified value,
++//    the system brings the window to the front. Otherwise, the system creates a new window."
++//  - 같은 값만으로는 부족하다. 이 앱의 아이패드 설교 뷰어에서, 같은 값의 창을 닫은 뒤 같은 값으로 다시 열면 `openWindow`가
++//    씬 이벤트 없이 버려진 기록이 있다(`SermonViewerTarget` 주석, 2026-10-03 `SceneDiag` 로그).
++//  - 그래서 `SermonWindowTokenStore`와 같은 방식으로 토큰을 붙인다(`BibleReadingWindowTokenStore`).
++//    · 같은 구절의 창이 떠 있거나 방금 요청 중(3초 이내)이면 같은 토큰을 돌려준다 → 같은 값 → 그 창이 앞으로 온다.
++//      빠르게 두 번 눌러도 창이 둘로 늘지 않는다.
++//    · 닫힌 뒤에는 새 토큰이다 → 새 값 → 항상 새 창이 열린다.
++//    · 아이패드: "떠 있음" 기록을 재사용하기 직전에 그 창의 씬이 아직 연결돼 있는지 확인한다(`token(for:)` 주석).
++//      앱 전환기에서 밀어 닫는 등 `onDisappear` 없이 창이 사라진 경우에도, 그 구절이 계속 같은 값으로 버려지지 않게 한다.
++//  - 키는 처음 연 구절(책·장·절)이다. 바인딩 값은 앱이 쓰지 않으므로 창이 다른 장으로 옮겨도 처음 연 값 그대로다.
++//    그래서 처음 연 구절을 다시 누르면, 다른 장으로 옮긴 그 창이 옮긴 위치 그대로 앞으로 온다.
++//
++//  `Codable`이라 창 복원(앱 재실행) 때 값(토큰 포함)이 그대로 돌아온다. 복원된 창이 나타나면 `windowDidAppear`가 그 토큰을
++//  "떠 있음"으로 등록하므로, 같은 구절을 누르면 복원된 창이 앞으로 온다.
++//
++
++import SwiftUI
++#if os(iOS)
++import UIKit
++#endif
++
++/// 창을 처음 연 구절 — `BibleReadingWindowTokenStore`의 키.
++struct BibleReadingLocation: Codable, Hashable, Sendable {
++    let bookId: Int
++    let chapter: Int
++    /// nil이면 장만 연다(`BibleReadingView.initialVerse`의 nil과 같다).
++    let verse: Int?
++}
++
++/// "bible-reading-at" 창의 값. `token`은 `BibleReadingWindowTokenStore.token(for:)`에서 받는다.
++struct BibleReadingTarget: Codable, Hashable, Sendable {
++    let location: BibleReadingLocation
++    let token: UUID
++}
++
++/// 열려 있는(또는 방금 열기를 요청한) 구절 창의 토큰 기록. `SermonWindowTokenStore`와 같은 규칙이다(그 타입 주석 참고).
++/// - `token(for:)`: 같은 구절의 창이 떠 있거나(`windowDidAppear` 이후) 방금 요청 중(3초 이내)이면 그 토큰, 아니면 새 토큰.
++/// - 요청 직후 3초가 지나도 창이 안 나타났다면(요청이 버려진 경우) 다음 누름은 새 토큰으로 다시 시도한다.
++/// - 사전(Dictionary) 대신 배열을 쓰는 것도 `SermonWindowTokenStore`와 같다. 항목은 열린 창 수만큼이라 매우 적다.
++@MainActor
++final class BibleReadingWindowTokenStore {
++    static let shared = BibleReadingWindowTokenStore()
++
++    private struct Entry {
++        let location: BibleReadingLocation
++        let token: UUID
++        var requestedAt: Date
++        var isShown: Bool
++        /// 이 토큰의 창이 올라간 씬 세션의 `UISceneSession.persistentIdentifier`(아이패드). 창 안의 `SceneSessionIdentifierReader`가
++        /// 알려 준다. 아직 모르면 nil이고, 이때는 아래 `openSessions` 안전망만 적용된다. macOS는 항상 nil이다.
++        var sessionID: String?
++    }
++
++    /// 요청 후 창이 나타나기를 기다려 주는 시간(이 안의 재요청은 같은 토큰).
++    private static let pendingGrace: TimeInterval = 3
++
++    private var entries: [Entry] = []
++
++    private init() {}
++
++    func token(for location: BibleReadingLocation) -> UUID {
++        #if os(iOS)
++        // [B-1] 재사용 전에 "떠 있음" 기록의 창이 실제로 살아 있는지 확인한다. 기준은 씬 연결이다.
++        // - `UIApplication.connectedScenes`: "The app's currently connected scenes."
++        // - 사용자가 창을 닫으면 씬 연결이 끊긴다. `UISceneSession` 문서: "destroying the session in response to the user closing
++        //   the scene in the app switcher".
++        // - `openSessions`("currently active or archived by the system")에 남아 있는지로 판정하지 않는 이유: 보관(archived)된 세션도
++        //   포함하고, iPadOS 26에서는 사용자가 닫은 창도 "최근 닫은 창 복원"용으로 한동안 남는다는 개발자 포럼 보고가 있다.
++        //   그러면 닫힌 창을 살아 있다고 보고 같은 토큰을 다시 줘서, 이 앱이 겪은 "같은 값이 버려짐"이 되풀이될 수 있다.
++        // - 대가: 시스템이 백그라운드 창의 씬을 해제해 보관만 된 상태면 새 창이 하나 더 열린다(먹통보다 낫다).
++        let connectedSessionIDs = Set(UIApplication.shared.connectedScenes.map { $0.session.persistentIdentifier })
++        entries.removeAll { entry in
++            guard entry.isShown, let sessionID = entry.sessionID else { return false }
++            return !connectedSessionIDs.contains(sessionID)
++        }
++        // 세션 식별자를 아직 못 받은 기록을 위한 기존 안전망(`SermonWindowTokenStore`와 같다) — 열린 세션이 메인 하나뿐이면
++        // 보조 창이 하나도 없으므로 "떠 있음" 기록은 모두 낡은 것이다.
++        if UIApplication.shared.openSessions.count <= 1 {
++            entries.removeAll { $0.isShown }
++        }
++        #endif
++        let now = Date()
++        // 오래 기다려도 안 뜬 요청 기록은 정리한다.
++        entries.removeAll { !$0.isShown && now.timeIntervalSince($0.requestedAt) >= Self.pendingGrace }
++        if let entry = entries.first(where: { $0.location == location }) {
++            sceneDiagNote("성경 창 토큰 재사용 \(entry.token.uuidString.prefix(4)) (열림 \(entry.isShown))")
++            return entry.token
++        }
++        let token = UUID()
++        entries.append(Entry(location: location, token: token, requestedAt: now, isShown: false))
++        sceneDiagNote("성경 창 토큰 새로 발급 \(token.uuidString.prefix(4))")
++        return token
++    }
++
++    /// 창 내용이 나타났을 때(`onAppear`, `sessionID` nil)와 창의 씬 세션을 알아냈을 때(아이패드, `sessionID` 있음) 부른다.
++    /// 두 호출의 순서는 정해져 있지 않아 어느 쪽이 먼저 와도 같은 결과가 되게 합친다.
++    func windowDidAppear(location: BibleReadingLocation, token: UUID, sessionID: String? = nil) {
++        if let index = entries.firstIndex(where: { $0.token == token }) {
++            entries[index].isShown = true
++            entries[index].requestedAt = Date()
++            if let sessionID {
++                entries[index].sessionID = sessionID
++            }
++        } else {
++            // 창 복원 등으로 이 저장소를 거치지 않고 나타난 창.
++            entries.append(Entry(location: location, token: token, requestedAt: Date(), isShown: true, sessionID: sessionID))
++        }
++    }
++
++    func windowDidDisappear(token: UUID) {
++        entries.removeAll { $0.token == token }
++    }
++}
++
++/// "bible-reading-at" 창의 내용. 창마다 선택이 따로인 보조 창 규칙(`isPrimaryWindow: false`)을 따른다.
++/// 책 ID를 찾지 못하면(복원된 값이 낡은 경우 등) 좌표 없이 연다. 장만 넘기면 `BibleReadingViewModel.init`이
++/// 마지막으로 보던 다른 책에 그 장 번호를 붙이므로 장·절도 함께 버린다.
++struct BibleReadingWindowContent: View {
++    let target: BibleReadingTarget?
++
++    /// 이 창(씬)에서 처음 연 구절의 조회 이력을 이미 남겼는지. `@SceneStorage`는 씬마다 따로이고, 시스템이 창 복원 때 함께 되살린다.
++    /// 그래서 복원으로 다시 만들어진 창은 true라 이력을 또 남기지 않는다(`BibleReadingView.shouldRecordInitialVerseHistory`).
++    @SceneStorage("bibleReadingAt.didRecordInitialHistory") private var didRecordInitialHistory = false
++
++    var body: some View {
++        let location = target?.location
++        let book = location.flatMap { BooksProvider.shared.book(id: $0.bookId) }
++        BibleReadingView(
++            initialBook: book,
++            initialChapter: book == nil ? nil : location?.chapter,
++            initialVerse: book == nil ? nil : location?.verse,
++            isPrimaryWindow: false,
++            // viewModel을 만드는 순간(`BibleReadingView`의 첫 `onAppear`)에만 불린다. 처음 한 번만 true를 돌려준다.
++            shouldRecordInitialVerseHistory: {
++                guard !didRecordInitialHistory else { return false }
++                didRecordInitialHistory = true
++                return true
++            }
++        )
++        // [B-2] `.id(target)`은 두지 않는다(`SermonContentWindowContent`와 같다). 앱은 창 바인딩에 쓰지 않으므로 값은 창이
++        // 만들어질 때 정해진 뒤 바뀌지 않는다. `openWindow(id:value:)`는 "creates a new window and passes a binding to the specified
++        // value"(공식 문서)라 첫 렌더부터 값이 있고, nil은 값 없이 만들어진 창(복원 값을 못 읽은 경우 등)뿐이다.
++        #if os(iOS)
++        .background {
++            if let target {
++                SceneSessionIdentifierReader { sessionID in
++                    BibleReadingWindowTokenStore.shared.windowDidAppear(
++                        location: target.location, token: target.token, sessionID: sessionID
++                    )
++                }
++            }
++        }
++        #endif
++        .onAppear {
++            if let target {
++                BibleReadingWindowTokenStore.shared.windowDidAppear(location: target.location, token: target.token)
++            }
++        }
++        .onDisappear {
++            if let target {
++                BibleReadingWindowTokenStore.shared.windowDidDisappear(token: target.token)
++            }
++        }
++    }
++}
++
++#if os(iOS)
++/// 이 뷰가 올라간 창의 씬 세션 식별자를 알려 준다. SwiftUI에는 뷰에서 자기 `UIScene`을 얻는 공개 API가 없어 UIKit 뷰를 하나 끼운다.
++/// 근거(UIKit 문서): `UIView.didMoveToWindow()` "Tells the view that its window object changed.",
++/// `UIView.window` → `UIWindow.windowScene`("The scene containing the window.") → `UIScene.session` →
++/// `UISceneSession.persistentIdentifier`("A unique identifier that persists for the lifetime of the session.").
++/// 창이 없어질 때(`window == nil`)는 알리지 않는다. 기록 정리는 `onDisappear`와 `token(for:)`의 씬 연결 확인이 맡는다.
++private struct SceneSessionIdentifierReader: UIViewRepresentable {
++    let onResolve: (String) -> Void
++
++    func makeUIView(context: Context) -> ReaderView {
++        let view = ReaderView()
++        view.isUserInteractionEnabled = false
++        view.onResolve = onResolve
++        return view
++    }
++
++    func updateUIView(_ uiView: ReaderView, context: Context) {
++        uiView.onResolve = onResolve
++    }
++
++    final class ReaderView: UIView {
++        var onResolve: ((String) -> Void)?
++
++        override func didMoveToWindow() {
++            super.didMoveToWindow()
++            if let sessionID = window?.windowScene?.session.persistentIdentifier {
++                onResolve?(sessionID)
++            }
++        }
++    }
++}
++#endif
++
++/// 구절 열기 동작. 각 화면이 환경값(`openWindow`, `supportsMultipleWindows`)을 넘겨 만든다.
++@MainActor
++struct BibleVerseOpener {
++    static let windowID = "bible-reading-at"
++
++    let openWindow: OpenWindowAction
++    let supportsMultipleWindows: Bool
++
++    /// 아이폰은 항상 섹션 전환이다. 아이패드·맥은 다중 창을 쓸 수 있을 때만 새 창이다.
++    private var opensInNewWindow: Bool {
++        #if os(iOS)
++        return UIDevice.current.userInterfaceIdiom != .phone && supportsMultipleWindows
++        #else
++        return supportsMultipleWindows
++        #endif
++    }
++
++    func open(bookId: Int, chapter: Int, verse: Int?) {
++        if opensInNewWindow {
++            let location = BibleReadingLocation(bookId: bookId, chapter: chapter, verse: verse)
++            let token = BibleReadingWindowTokenStore.shared.token(for: location)
++            openWindow(id: Self.windowID, value: BibleReadingTarget(location: location, token: token))
++        } else {
++            AppNavigationRequest.shared.request(.bibleReading)
++            // `BibleVerseNavigationTarget.verse`는 옵셔널이 아니다. 절이 없으면 1절로 대신한다(`SearchView.bibleVerseRow`의 기존 처리와 같다).
++            BibleVerseNavigationRequest.shared.request(bookId: bookId, chapter: chapter, verse: verse ?? 1)
++        }
++    }
++}
+diff --git a/JBCHBibleResearch/Views/Search/BibleVerseChipRow.swift b/JBCHBibleResearch/Views/Search/BibleVerseChipRow.swift
+index a16aa82..9a28925 100644
+--- a/JBCHBibleResearch/Views/Search/BibleVerseChipRow.swift
++++ b/JBCHBibleResearch/Views/Search/BibleVerseChipRow.swift
+@@ -11,19 +11,22 @@ import UIKit
+ //  "책이름 장:절" 칩을 가로 스크롤로 나열하고, 탭하면 성경 조회 화면으로
+ //  이동시키는 재사용 컴포넌트.
+ //
+-//  아이폰과 맥·아이패드의 이동 분기(성경 탭으로 크로스탭 이동 vs
+-//  `NavigationLink(value:)`)가 사용처마다 어긋나지 않도록 한 곳에 모았다.
++//  아이폰과 맥·아이패드의 이동 분기(성경 탭 전환 vs 성경 새 창, `BibleVerseOpener`)가
++//  사용처마다 어긋나지 않도록 한 곳에 모았다.
+ //
+ //
+ struct BibleVerseChipRow: View {
+     let refs: [BibleVerseRef]
+ 
+-    private var isPhoneIdiom: Bool {
+-        #if os(iOS)
+-        return UIDevice.current.userInterfaceIdiom == .phone
+-        #else
+-        return false
+-        #endif
++    /// [relverse1 2026-10-29] 구절 열기(`BibleVerseOpener`) — 맥·아이패드는 그 구절이 열린 성경 새 창, 아이폰과 다중 창을 못 쓰는 환경은
++    /// "성경 조회" 섹션 전환. 예전에는 맥·아이패드가 `NavigationLink(value:)` push였는데, 한 `List` 행(장 카드/칩 줄) 안에 링크가 여러 개라
++    /// 탭 대상이 불안정했고(`OutlineTreeView`·`SearchView.groupedVerseRow` 주석의 같은 문제), 아이패드에서는 push된 `BibleReadingView`가
++    /// 내비게이션 바를 숨겨 뒤로 버튼도 없었다.
++    @Environment(\.openWindow) private var openWindow
++    @Environment(\.supportsMultipleWindows) private var supportsMultipleWindows
++
++    private var verseOpener: BibleVerseOpener {
++        BibleVerseOpener(openWindow: openWindow, supportsMultipleWindows: supportsMultipleWindows)
+     }
+ 
+     var body: some View {
+@@ -42,10 +45,7 @@ struct BibleVerseChipRow: View {
+         return "\(bookName) \(ref.chapter):\(ref.verse)"
+     }
+ 
+-    /// 아이폰에서는 `.searchable`이 활성인 조상 화면(SearchView)과 `NavigationLink(value:)`가
+-    /// 얽히는 문제가 있어 "성경" 탭의 `BibleReadingView`로 좌표만 전달하고,
+-    /// macOS/iPadOS에서는 조상 `NavigationStack`에 등록된 `BibleVerseDestinationRegistration`으로 push한다.
+-    @ViewBuilder
++    /// 칩마다 독립된 plain `Button`이고, 누르면 `verseOpener`로 연다(맥·아이패드 새 창, 아이폰 성경 탭 전환).
+     private func chipButton(_ ref: BibleVerseRef) -> some View {
+         let chipLabel = Text(refLabel(ref))
+             .font(.subheadline.weight(.semibold))
+@@ -54,18 +54,11 @@ struct BibleVerseChipRow: View {
+             .background(Color.accentColor.opacity(0.12), in: Capsule())
+             .foregroundStyle(Color.accentColor)
+ 
+-        if isPhoneIdiom {
+-            Button {
+-                AppNavigationRequest.shared.request(.bibleReading)
+-                BibleVerseNavigationRequest.shared.request(bookId: ref.bookId, chapter: ref.chapter, verse: ref.verse)
+-            } label: {
+-                chipLabel
+-            }
+-            .buttonStyle(.plain)
+-        } else {
+-            NavigationLink(value: BibleVerseDestination(bookId: ref.bookId, chapter: ref.chapter, verse: ref.verse)) {
+-                chipLabel
+-            }
++        return Button {
++            verseOpener.open(bookId: ref.bookId, chapter: ref.chapter, verse: ref.verse)
++        } label: {
++            chipLabel
+         }
++        .buttonStyle(.plain)
+     }
+ }
+diff --git a/JBCHBibleResearch/Views/Search/PersonDetailView.swift b/JBCHBibleResearch/Views/Search/PersonDetailView.swift
+index d16cd31..dccd8e0 100644
+--- a/JBCHBibleResearch/Views/Search/PersonDetailView.swift
++++ b/JBCHBibleResearch/Views/Search/PersonDetailView.swift
+@@ -66,15 +66,15 @@ struct PersonDetailView: View {
+         }
+     }
+ 
+-    /// `BibleVerseChipRow.isPhoneIdiom`과 같은 판정 — 아이폰은 조상 `NavigationStack`에
+-    /// `BibleVerseDestinationRegistration`이 없어 `NavigationLink(value:)`를 직접 쓸 수 없다.
+-    /// 짧은 판정이라 추출하지 않고 복제했다.
+-    private var isPhoneIdiom: Bool {
+-        #if os(iOS)
+-        return UIDevice.current.userInterfaceIdiom == .phone
+-        #else
+-        return false
+-        #endif
++    /// [relverse1 2026-10-29] 구절 열기(`BibleVerseOpener`) — 맥·아이패드는 그 구절이 열린 성경 새 창, 아이폰과 다중 창을 못 쓰는 환경은
++    /// "성경 조회" 섹션 전환. 예전에는 맥·아이패드가 `NavigationLink(value:)` push였는데, 한 `List` 행(장 카드/칩 줄) 안에 링크가 여러 개라
++    /// 탭 대상이 불안정했고(`OutlineTreeView`·`SearchView.groupedVerseRow` 주석의 같은 문제), 아이패드에서는 push된 `BibleReadingView`가
++    /// 내비게이션 바를 숨겨 뒤로 버튼도 없었다.
++    @Environment(\.openWindow) private var openWindow
++    @Environment(\.supportsMultipleWindows) private var supportsMultipleWindows
++
++    private var verseOpener: BibleVerseOpener {
++        BibleVerseOpener(openWindow: openWindow, supportsMultipleWindows: supportsMultipleWindows)
+     }
+ 
+     /// "관계" 절 — 할아버지~손녀 9종을 라벨 순서대로, 비어있지 않은 것만.
+@@ -453,9 +453,8 @@ struct PersonDetailView: View {
+         return groups.sorted { ($0.bookId, $0.chapter) < ($1.bookId, $1.chapter) }
+     }
+ 
+-    /// 통합검색 "성경구절" 탭의 `groupedVerseRow`와 같은 "N절) 본문" 행. 아이폰은 크로스탭(성경 탭으로
+-    /// 좌표 전달), 맥/아이패드는 조상 `NavigationStack`의 `BibleVerseDestinationRegistration`을 이용한
+-    /// 값 기반 push(`BibleVerseChipRow.chipButton`과 같은 분기).
++    /// 통합검색 "성경구절" 탭의 `groupedVerseRow`와 같은 "N절) 본문" 행. 누르면 `verseOpener`로 연다
++    /// (맥·아이패드 새 창, 아이폰 성경 탭 전환 — `BibleVerseChipRow.chipButton`과 같은 동작).
+     /// "N절)" 접두어와 본문을 별도 `Text`로 `HStack(alignment: .top)`에 두어 본문이 줄바꿈돼도
+     /// 접두어 폭만큼 들여쓰기되게 한다(SwiftUI에 매달린 들여쓰기가 없어 쓰는 우회법).
+     @ViewBuilder
+@@ -471,22 +470,17 @@ struct PersonDetailView: View {
+                 .multilineTextAlignment(.leading)
+         }
+         .frame(maxWidth: .infinity, alignment: .leading)
+-
+-        if isPhoneIdiom {
+-            Button {
+-                AppNavigationRequest.shared.request(.bibleReading)
+-                BibleVerseNavigationRequest.shared.request(bookId: group.bookId, chapter: group.chapter, verse: verse.verse)
+-            } label: {
+-                label
+-            }
+-            .buttonStyle(.plain)
+-            .padding(.vertical, 2)
+-        } else {
+-            NavigationLink(value: BibleVerseDestination(bookId: group.bookId, chapter: group.chapter, verse: verse.verse)) {
+-                label
+-            }
+-            .padding(.vertical, 2)
++        // [relverse1] plain 버튼은 그려진 글자만 탭을 받으므로, 줄 끝 빈 공간까지 탭 영역으로 넓힌다.
++        .contentShape(Rectangle())
++
++        // 절마다 독립된 plain `Button` — 한 행(장 카드)에 여러 개가 있어도 누른 절만 동작한다.
++        Button {
++            verseOpener.open(bookId: group.bookId, chapter: group.chapter, verse: verse.verse)
++        } label: {
++            label
+         }
++        .buttonStyle(.plain)
++        .padding(.vertical, 2)
+     }
+ 
+     @ViewBuilder
+@@ -588,8 +582,7 @@ struct PersonDetailView: View {
+     }
+ 
+     /// `bibleref:///책ID/장/절` URL을 실제 이동으로 바꾼다. `openURL` 핸들러에서는 `NavigationPath`에
+-    /// 접근할 수 없어 값 기반 push 대신 앱 공용 크로스탭 메커니즘(`AppNavigationRequest` +
+-    /// `BibleVerseNavigationRequest`)을 플랫폼 구분 없이 쓴다.
++    /// 접근할 수 없어 값 기반 push를 쓰지 않고 `verseOpener`로 연다(맥·아이패드 새 창, 아이폰 성경 탭 전환).
+     private func handleBibleReferenceLink(_ url: URL) -> OpenURLAction.Result {
+         // `personref:///이름` 링크 — `relationStack`에 밀어 넣어 이 화면 자체가 그 인물의 상세로 바뀌게 한다.
+         if url.scheme == "personref" {
+@@ -610,8 +603,8 @@ struct PersonDetailView: View {
+               let bookId = Int(parts[0]), let chapter = Int(parts[1]), let verse = Int(parts[2]) else {
+             return .systemAction
+         }
+-        AppNavigationRequest.shared.request(.bibleReading)
+-        BibleVerseNavigationRequest.shared.request(bookId: bookId, chapter: chapter, verse: verse)
++        // [relverse1] 맥·아이패드는 성경 새 창, 아이폰과 다중 창을 못 쓰는 환경은 섹션 전환(`BibleVerseOpener`).
++        verseOpener.open(bookId: bookId, chapter: chapter, verse: verse)
+         return .handled
+     }
+ 
+@@ -763,6 +756,9 @@ struct PersonDetailView: View {
+                     .textCase(nil)
+                     .padding(.leading, 16)
+                 }
++                // [relverse1] 맥/아이패드 split 상세(`SearchView.macSplitCardLayout`)의 `List`는 바깥 `cardSectionWrapper`가 없어
++                // 행 배경이 시스템 기본(흰색/검정)으로 남는다. 위 `cardSection`들처럼 이 절도 직접 투명으로 둔다.
++                .listRowBackground(Color.clear)
+             }
+         }
+         // 본문 안 성경 인용 링크가 시스템 브라우저로 가지 않고 앱 안 성경 조회로 이동하도록 가로챈다.
+diff --git a/JBCHBibleResearch/Views/Search/PlaceDetailView.swift b/JBCHBibleResearch/Views/Search/PlaceDetailView.swift
+index b8fba29..57ad24d 100644
+--- a/JBCHBibleResearch/Views/Search/PlaceDetailView.swift
++++ b/JBCHBibleResearch/Views/Search/PlaceDetailView.swift
+@@ -34,12 +34,15 @@ struct PlaceDetailView: View {
+ 
+     private var settings: UserSettingsStore { .shared }
+ 
+-    private var isPhoneIdiom: Bool {
+-        #if os(iOS)
+-        return UIDevice.current.userInterfaceIdiom == .phone
+-        #else
+-        return false
+-        #endif
++    /// [relverse1 2026-10-29] 구절 열기(`BibleVerseOpener`) — 맥·아이패드는 그 구절이 열린 성경 새 창, 아이폰과 다중 창을 못 쓰는 환경은
++    /// "성경 조회" 섹션 전환. 예전에는 맥·아이패드가 `NavigationLink(value:)` push였는데, 한 `List` 행(장 카드/칩 줄) 안에 링크가 여러 개라
++    /// 탭 대상이 불안정했고(`OutlineTreeView`·`SearchView.groupedVerseRow` 주석의 같은 문제), 아이패드에서는 push된 `BibleReadingView`가
++    /// 내비게이션 바를 숨겨 뒤로 버튼도 없었다.
++    @Environment(\.openWindow) private var openWindow
++    @Environment(\.supportsMultipleWindows) private var supportsMultipleWindows
++
++    private var verseOpener: BibleVerseOpener {
++        BibleVerseOpener(openWindow: openWindow, supportsMultipleWindows: supportsMultipleWindows)
+     }
+ 
+     /// 빈 값이면 "-". (빌드 산출물은 이미 "-"지만, 예전 DB를 쓰는 경우에도 같은 모양으로 보이게 한다.)
+@@ -110,7 +113,7 @@ struct PlaceDetailView: View {
+         return Text(result)
+     }
+ 
+-    /// `bibleref:///책ID/장/절` 링크를 앱 공용 크로스탭 이동(`AppNavigationRequest` + `BibleVerseNavigationRequest`)으로 바꾼다.
++    /// `bibleref:///책ID/장/절` 링크를 `verseOpener`로 연다(맥·아이패드 성경 새 창, 아이폰과 다중 창을 못 쓰는 환경은 성경 탭 전환).
+     private func handleBibleReferenceLink(_ url: URL) -> OpenURLAction.Result {
+         guard url.scheme == "bibleref" else { return .systemAction }
+         let parts = url.pathComponents.filter { $0 != "/" }
+@@ -118,8 +121,8 @@ struct PlaceDetailView: View {
+               let bookId = Int(parts[0]), let chapter = Int(parts[1]), let verse = Int(parts[2]) else {
+             return .systemAction
+         }
+-        AppNavigationRequest.shared.request(.bibleReading)
+-        BibleVerseNavigationRequest.shared.request(bookId: bookId, chapter: chapter, verse: verse)
++        // [relverse1] 맥·아이패드는 성경 새 창, 아이폰과 다중 창을 못 쓰는 환경은 섹션 전환(`BibleVerseOpener`).
++        verseOpener.open(bookId: bookId, chapter: chapter, verse: verse)
+         return .handled
+     }
+ 
+@@ -174,22 +177,17 @@ struct PlaceDetailView: View {
+                 .multilineTextAlignment(.leading)
+         }
+         .frame(maxWidth: .infinity, alignment: .leading)
++        // [relverse1] plain 버튼은 그려진 글자만 탭을 받으므로, 줄 끝 빈 공간까지 탭 영역으로 넓힌다.
++        .contentShape(Rectangle())
+ 
+-        if isPhoneIdiom {
+-            Button {
+-                AppNavigationRequest.shared.request(.bibleReading)
+-                BibleVerseNavigationRequest.shared.request(bookId: group.bookId, chapter: group.chapter, verse: verse.verse)
+-            } label: {
+-                label
+-            }
+-            .buttonStyle(.plain)
+-            .padding(.vertical, 2)
+-        } else {
+-            NavigationLink(value: BibleVerseDestination(bookId: group.bookId, chapter: group.chapter, verse: verse.verse)) {
+-                label
+-            }
+-            .padding(.vertical, 2)
++        // 절마다 독립된 plain `Button` — 한 행(장 카드)에 여러 개가 있어도 누른 절만 동작한다.
++        Button {
++            verseOpener.open(bookId: group.bookId, chapter: group.chapter, verse: verse.verse)
++        } label: {
++            label
+         }
++        .buttonStyle(.plain)
++        .padding(.vertical, 2)
+     }
+ 
+     @ViewBuilder
+@@ -355,6 +353,9 @@ struct PlaceDetailView: View {
+                     .textCase(nil)
+                     .padding(.leading, 16)
+                 }
++                // [relverse1] 맥/아이패드 split 상세(`SearchView.macSplitCardLayout`)의 `List`는 바깥 `cardSectionWrapper`가 없어
++                // 행 배경이 시스템 기본(흰색/검정)으로 남는다. 위 `cardSection`들처럼 이 절도 직접 투명으로 둔다.
++                .listRowBackground(Color.clear)
+             }
+         }
+         .environment(\.openURL, OpenURLAction(handler: handleBibleReferenceLink))
+diff --git a/JBCHBibleResearch/Views/Search/RelationDetailView.swift b/JBCHBibleResearch/Views/Search/RelationDetailView.swift
+index 9158141..d31865d 100644
+--- a/JBCHBibleResearch/Views/Search/RelationDetailView.swift
++++ b/JBCHBibleResearch/Views/Search/RelationDetailView.swift
+@@ -29,12 +29,17 @@ struct RelationDetailView: View {
+             Section("원문") {
+                 Text(PersonRelationLabeling.displayRawSentence(item.relation.rawSentence)).font(.body)
+             }
++            // [relverse1] 맥/아이패드 split 상세(`SearchView.macSplitCardLayout`)의 `List`는 바깥 `cardSectionWrapper`가 없어
++            // 행 배경이 시스템 기본색(흰색/검정)으로 남는다. 머리 절처럼 직접 투명으로 둔다.
++            .listRowBackground(Color.clear)
+ 
+             if !item.verseRefs.isEmpty {
+                 Section("관련 성경구절") {
+                     BibleVerseChipRow(refs: item.verseRefs)
+                         .listRowInsets(EdgeInsets(top: 6, leading: 16, bottom: 10, trailing: 16))
+                 }
++                // [relverse1] 위 "원문" 절과 같은 이유.
++                .listRowBackground(Color.clear)
+             }
+         }
+     }
+diff --git a/JBCHBibleResearch/Views/Search/SearchView.swift b/JBCHBibleResearch/Views/Search/SearchView.swift
+index f3899a0..ff02f46 100644
+--- a/JBCHBibleResearch/Views/Search/SearchView.swift
++++ b/JBCHBibleResearch/Views/Search/SearchView.swift
+@@ -156,6 +156,8 @@ private struct SearchContentView: View {
+     let viewModel: SearchViewModel
+     // 검색결과의 문서 진입점은 별도 창(document-viewer WindowGroup)으로 연다.
+     @Environment(\.openWindow) private var openWindow
++    /// [relverse1] 다중 창을 못 쓰는 환경이면 `bibleVerseRow`·`openVerseInBibleReading`이 새 창 대신 섹션 전환으로 연다(`BibleVerseOpener`).
++    @Environment(\.supportsMultipleWindows) private var supportsMultipleWindows
+     // 검색 제출 시(`.onSubmit(of: .search)`) 검색 활성 상태를 종료해, 성경구절 탭 후
+     // 이동할 때 빈 통합검색 화면이 끼어드는 것을 막는다.
+     @Environment(\.dismissSearch) private var dismissSearch
+@@ -227,6 +229,15 @@ private struct SearchContentView: View {
+         #endif
+     }
+ 
++    /// [relverse1] `bibleVerseRow`가 push하지 않는 플랫폼 — iOS(아이폰·아이패드). 아래 `bibleVerseRow` 주석 참고.
++    private var opensBibleVerseWithoutPush: Bool {
++        #if os(iOS)
++        return true
++        #else
++        return false
++        #endif
++    }
++
+     /// 성경 조회 이동 행. 아이폰에서는 이 화면에서 직접 push하지 않는다 — 검색이 활성인
+     /// 채로 같은 화면에서 `BibleVerseDestination`을 push하는 조합이 구조적으로 깨지기
+     /// 때문이다(전환 충돌, 검색 활성 경고, 엉뚱한 탭 이동). 대신 "성경" 탭으로 전환
+@@ -234,23 +245,23 @@ private struct SearchContentView: View {
+     /// 전달(`BibleVerseNavigationRequest`)한다. 이 화면은 `TabView`가 계속 살려 두므로
+     /// 상태를 잃지 않는다.
+     ///
+-    /// macOS/iPadOS는 그대로 `NavigationLink(value:)`를 쓴다. `Button`은 List 행에서
++    /// [relverse1 2026-10-29] 아이패드도 push하지 않는다. push된 `BibleReadingView`(`BibleVerseDestinationRegistration`)는
++    /// iOS에서 시스템 내비게이션 바를 숨겨(`BibleReadingContentView`의 `.toolbar(.hidden, for: .navigationBar)`) 검색 화면으로
++    /// 돌아갈 뒤로 버튼이 없기 때문이다. 아이패드는 `BibleVerseOpener`로 그 구절이 열린 성경 새 창을 띄우고(다중 창을 못 쓰면
++    /// 섹션 전환), 아이폰은 기존과 같이 섹션 전환이다(`BibleVerseOpener`가 아이폰을 판정한다).
++    /// macOS는 그대로 `NavigationLink(value:)` push를 쓴다(바를 숨기지 않아 뒤로 버튼이 있다). `Button`은 List 행에서
+     /// 디스클로저 화살표를 자동으로 그리지 않으므로 같은 모양의 화살표를 직접 그린다.
+     @ViewBuilder
+     private func bibleVerseRow<RowLabel: View>(
+         _ destination: BibleVerseDestination,
+         @ViewBuilder label: () -> RowLabel
+     ) -> some View {
+-        if isPhoneIdiom {
++        if opensBibleVerseWithoutPush {
+             Button {
+-                AppNavigationRequest.shared.request(.bibleReading)
+-                // 메모(VersePhraseNote) 결과처럼 절이 없으면(`verse == nil`) 그 장의 1절로 대체한다
+-                // (`BibleVerseNavigationTarget.verse`는 옵셔널이 아니다).
+-                BibleVerseNavigationRequest.shared.request(
+-                    bookId: destination.bookId,
+-                    chapter: destination.chapter,
+-                    verse: destination.verse ?? 1
+-                )
++                // 메모(VersePhraseNote) 결과처럼 절이 없으면(`verse == nil`) 섹션 전환 때는 그 장의 1절로 대체한다
++                // (`BibleVerseOpener.open` 참고). 새 창은 장만 연다.
++                BibleVerseOpener(openWindow: openWindow, supportsMultipleWindows: supportsMultipleWindows)
++                    .open(bookId: destination.bookId, chapter: destination.chapter, verse: destination.verse)
+             } label: {
+                 HStack(spacing: 8) {
+                     label()
+@@ -1591,13 +1602,12 @@ private struct SearchContentView: View {
+         .accessibilityAddTraits(.isButton)
+     }
+ 
+-    /// 절 행 탭 — "성경 조회" 섹션으로 전환하고 목표 절을 넘긴다. 성경 조회 화면이 새로 만들어지면 `.onAppear`, 이미 떠 있으면
+-    /// `.onChange`가 그 절로 자동 스크롤하고 잠시 강조한다(`BibleReadingView`/`TranslationColumnView`의 `highlightedVerse` 경로).
++    /// 절 행 탭. 아이폰(과 다중 창을 못 쓰는 환경)은 "성경 조회" 섹션으로 전환하고 목표 절을 넘긴다. 성경 조회 화면이 새로 만들어지면
++    /// `.onAppear`, 이미 떠 있으면 `.onChange`가 그 절로 자동 스크롤하고 잠시 강조한다(`BibleReadingView`/`TranslationColumnView`의
++    /// `highlightedVerse` 경로). [relverse1 2026-10-29] 맥·아이패드는 그 절이 열린 성경 새 창을 띄운다(`BibleVerseOpener`).
+     private func openVerseInBibleReading(_ result: VerseSearchResult) {
+-        AppNavigationRequest.shared.request(.bibleReading)
+-        BibleVerseNavigationRequest.shared.request(
+-            bookId: result.bookId, chapter: result.chapter, verse: result.verse
+-        )
++        BibleVerseOpener(openWindow: openWindow, supportsMultipleWindows: supportsMultipleWindows)
++            .open(bookId: result.bookId, chapter: result.chapter, verse: result.verse)
+     }
+ 
+     /// 절 행 오른쪽의 선택/복사 버튼. 이동은 본문 `Button`이 담당한다.
+diff --git a/JBCHBibleResearch/Views/Search/ThemeDetailView.swift b/JBCHBibleResearch/Views/Search/ThemeDetailView.swift
+index f720b28..7c7cda0 100644
+--- a/JBCHBibleResearch/Views/Search/ThemeDetailView.swift
++++ b/JBCHBibleResearch/Views/Search/ThemeDetailView.swift
+@@ -20,12 +20,15 @@ struct ThemeDetailView: View {
+     let theme: ThemeRecord
+     private var settings: UserSettingsStore { .shared }
+ 
+-    private var isPhoneIdiom: Bool {
+-        #if os(iOS)
+-        return UIDevice.current.userInterfaceIdiom == .phone
+-        #else
+-        return false
+-        #endif
++    /// [relverse1 2026-10-29] 구절 열기(`BibleVerseOpener`) — 맥·아이패드는 그 구절이 열린 성경 새 창, 아이폰과 다중 창을 못 쓰는 환경은
++    /// "성경 조회" 섹션 전환. 예전에는 맥·아이패드가 `NavigationLink(value:)` push였는데, 한 `List` 행(장 카드/칩 줄) 안에 링크가 여러 개라
++    /// 탭 대상이 불안정했고(`OutlineTreeView`·`SearchView.groupedVerseRow` 주석의 같은 문제), 아이패드에서는 push된 `BibleReadingView`가
++    /// 내비게이션 바를 숨겨 뒤로 버튼도 없었다.
++    @Environment(\.openWindow) private var openWindow
++    @Environment(\.supportsMultipleWindows) private var supportsMultipleWindows
++
++    private var verseOpener: BibleVerseOpener {
++        BibleVerseOpener(openWindow: openWindow, supportsMultipleWindows: supportsMultipleWindows)
+     }
+ 
+     private var categoryLabel: String {
+@@ -93,6 +96,9 @@ struct ThemeDetailView: View {
+                     .textCase(nil)
+                     .padding(.leading, 16)
+                 }
++                // [relverse1] 맥/아이패드 split 상세(`SearchView.macSplitCardLayout`)의 `List`는 바깥 `cardSectionWrapper`가 없어
++                // 행 배경이 시스템 기본(흰색/검정)으로 남는다. 위 `cardSection`들처럼 이 절도 직접 투명으로 둔다.
++                .listRowBackground(Color.clear)
+             }
+         }
+     }
+@@ -217,22 +223,17 @@ struct ThemeDetailView: View {
+                 .multilineTextAlignment(.leading)
+         }
+         .frame(maxWidth: .infinity, alignment: .leading)
++        // [relverse1] plain 버튼은 그려진 글자만 탭을 받으므로, 줄 끝 빈 공간까지 탭 영역으로 넓힌다.
++        .contentShape(Rectangle())
+ 
+-        if isPhoneIdiom {
+-            Button {
+-                AppNavigationRequest.shared.request(.bibleReading)
+-                BibleVerseNavigationRequest.shared.request(bookId: group.bookId, chapter: group.chapter, verse: verse.verse)
+-            } label: {
+-                label
+-            }
+-            .buttonStyle(.plain)
+-            .padding(.vertical, 2)
+-        } else {
+-            NavigationLink(value: BibleVerseDestination(bookId: group.bookId, chapter: group.chapter, verse: verse.verse)) {
+-                label
+-            }
+-            .padding(.vertical, 2)
++        // 절마다 독립된 plain `Button` — 한 행(장 카드)에 여러 개가 있어도 누른 절만 동작한다.
++        Button {
++            verseOpener.open(bookId: group.bookId, chapter: group.chapter, verse: verse.verse)
++        } label: {
++            label
+         }
++        .buttonStyle(.plain)
++        .padding(.vertical, 2)
+     }
+ 
+     @ViewBuilder

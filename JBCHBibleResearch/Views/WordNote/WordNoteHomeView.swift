@@ -264,11 +264,39 @@ private struct WordNoteSplitContent: View {
     /// 상세 빈 화면에도 테마 배경을 적용하기 위한 읽기 전용 접근.
     private var settings: UserSettingsStore { .shared }
 
+    /// 아이패드 세로에서 앱 사이드바가 열려 있으면 true — 내용(세 번째) 칸을 숨기고 분류 트리 | 목록만 넓게 보인다.
+    /// 판정은 `SidebarNavigationView.concealsDetailBesideSidebar`(창 모양 기준). 사이드바를 닫으면(목록 항목 탭으로 자동으로
+    /// 닫히는 경우 포함) 같은 선택의 내용이 그대로 다시 보인다. 가로·macOS·compact 폭은 항상 false라 기존 배치 그대로다.
+    @Environment(\.concealsDetailBesideSidebar) private var isContentColumnConcealed
+
+    /// 목록에 넘기는 선택 바인딩. 숨기지 않을 때(가로·macOS)는 기존 그대로 `$selectedItem`이다.
+    /// 숨긴 동안에는 "이미 선택이 있는 상태에서 다시 고른 경우"(다른 항목·같은 항목 재탭·새 항목·사이드바 "최근" 진입)에 사이드바를 닫아
+    /// 내용을 보여 준다. 선택 없음 → 항목(nil → 값)은 아래 `.onChange(of: selectedItem?.id)`가 이미 `.hide`를 보낸다.
+    /// 여기서는 `.hideKeepingRestoreState`를 써서 첫 선택 때 기록된 "숨기기 전 사이드바 상태"를 덮어쓰지 않는다 — 선택 해제·화면
+    /// 이탈 때의 `.restore`가 기능 추가 전과 같은 상태로 되돌아간다.
+    private var listSelection: Binding<WordNoteItem?> {
+        #if os(iOS)
+        guard isContentColumnConcealed else { return $selectedItem }
+        return Binding(
+            get: { selectedItem },
+            set: { newValue in
+                let shouldRevealContent = newValue != nil && selectedItem != nil
+                selectedItem = newValue
+                if shouldRevealContent {
+                    SidebarVisibilityRequest.shared.requestHideKeepingRestoreState()
+                }
+            }
+        )
+        #else
+        return $selectedItem
+        #endif
+    }
+
     var body: some View {
         HStack(spacing: 0) {
-            // 분류 트리 열(약 200)과 목록(약 300)을 합친 폭.
-            WordNoteListContent(isPhoneLayout: false, selectedItem: $selectedItem)
-                .frame(minWidth: 460, idealWidth: 560, maxWidth: 720)
+            // 분류 트리 열(약 200)과 목록(약 300)을 합친 폭. 내용 칸을 숨긴 동안에는 남는 폭을 모두 쓴다.
+            WordNoteListContent(isPhoneLayout: false, selectedItem: listSelection)
+                .frame(minWidth: 460, idealWidth: 560, maxWidth: isContentColumnConcealed ? .infinity : 720)
 
             // 목록/본문 구분선 — 툴바(타이틀·아이콘) 영역까지 올라가지 않도록 safe area 상단만큼 띄워 시작한다.
             #if os(macOS)
@@ -280,7 +308,9 @@ private struct WordNoteSplitContent: View {
             }
             .frame(width: 1)
             #else
-            Divider()
+            if !isContentColumnConcealed {
+                Divider()
+            }
             #endif
 
             Group {
@@ -295,6 +325,11 @@ private struct WordNoteSplitContent: View {
                     .background(settings.bibleBackgroundColor ?? Color.clear)
                 }
             }
+            // 내용 칸 숨김 — 트리에 남긴 채 폭 0·투명으로만 감춘다(이유는 `ConcealableDetailColumn.swift` 상단 주석).
+            // macOS는 숨기지 않으므로 수정자 자체를 붙이지 않는다.
+            #if os(iOS)
+            .concealableDetailColumn(isContentColumnConcealed)
+            #endif
         }
         // 항목을 선택하면 왼쪽 사이드바를 숨기고, 선택 해제/화면 이탈 시 복원한다(`SidebarVisibilityRequest` 계약).
         // `WordNoteItem`은 Equatable이 아니라 `id`로 비교한다. macOS는 사이드바를 접을 필요가 없어 iOS로 제한한다.

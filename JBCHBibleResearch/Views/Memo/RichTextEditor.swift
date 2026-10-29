@@ -496,7 +496,12 @@ struct RichTextEditorRepresentable: UIViewRepresentable {
             }
         )
         // `primaryAction:` 이니셜라이저는 `style:` 인자가 없어 생성 후 지정한다(`.done`의 iOS 26 대체 이름이 `.prominent`).
-        doneButton.style = .prominent
+        // `.prominent`는 iOS 26+ 전용이라 iOS 18.x에서는 같은 의미의 `.done`(굵은 글씨 강조)을 쓴다.
+        if #available(iOS 26.0, *) {
+            doneButton.style = .prominent
+        } else {
+            doneButton.style = .done
+        }
         toolbar.items = [flexibleSpace, doneButton]
         return toolbar
     }

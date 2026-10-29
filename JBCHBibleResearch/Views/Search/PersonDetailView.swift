@@ -66,15 +66,17 @@ struct PersonDetailView: View {
         }
     }
 
-    /// `BibleVerseChipRow.isPhoneIdiom`과 같은 판정 — 아이폰은 조상 `NavigationStack`에
-    /// `BibleVerseDestinationRegistration`이 없어 `NavigationLink(value:)`를 직접 쓸 수 없다.
-    /// 짧은 판정이라 추출하지 않고 복제했다.
-    private var isPhoneIdiom: Bool {
-        #if os(iOS)
-        return UIDevice.current.userInterfaceIdiom == .phone
-        #else
-        return false
-        #endif
+    /// [relverse1 2026-10-29] 구절 열기(`BibleVerseOpener`) — 맥·아이패드는 그 구절이 열린 성경 새 창, 아이폰과 다중 창을 못 쓰는 환경은
+    /// "성경 조회" 섹션 전환. 예전에는 맥·아이패드가 `NavigationLink(value:)` push였는데, 한 `List` 행(장 카드/칩 줄) 안에 링크가 여러 개라
+    /// 탭 대상이 불안정했고(`OutlineTreeView`·`SearchView.groupedVerseRow` 주석의 같은 문제), 아이패드에서는 push된 `BibleReadingView`가
+    /// 내비게이션 바를 숨겨 뒤로 버튼도 없었다.
+    @Environment(\.openWindow) private var openWindow
+    @Environment(\.supportsMultipleWindows) private var supportsMultipleWindows
+    /// [relverse2] 이 화면이 들어 있는 메인 창 — 새 성경 창의 [메인 창으로]가 이 창을 앞으로 가져온다.
+    @Environment(\.mainWindowID) private var mainWindowID
+
+    private var verseOpener: BibleVerseOpener {
+        BibleVerseOpener(openWindow: openWindow, supportsMultipleWindows: supportsMultipleWindows, originWindowID: mainWindowID)
     }
 
     /// "관계" 절 — 할아버지~손녀 9종을 라벨 순서대로, 비어있지 않은 것만.
@@ -453,9 +455,8 @@ struct PersonDetailView: View {
         return groups.sorted { ($0.bookId, $0.chapter) < ($1.bookId, $1.chapter) }
     }
 
-    /// 통합검색 "성경구절" 탭의 `groupedVerseRow`와 같은 "N절) 본문" 행. 아이폰은 크로스탭(성경 탭으로
-    /// 좌표 전달), 맥/아이패드는 조상 `NavigationStack`의 `BibleVerseDestinationRegistration`을 이용한
-    /// 값 기반 push(`BibleVerseChipRow.chipButton`과 같은 분기).
+    /// 통합검색 "성경구절" 탭의 `groupedVerseRow`와 같은 "N절) 본문" 행. 누르면 `verseOpener`로 연다
+    /// (맥·아이패드 새 창, 아이폰 성경 탭 전환 — `BibleVerseChipRow.chipButton`과 같은 동작).
     /// "N절)" 접두어와 본문을 별도 `Text`로 `HStack(alignment: .top)`에 두어 본문이 줄바꿈돼도
     /// 접두어 폭만큼 들여쓰기되게 한다(SwiftUI에 매달린 들여쓰기가 없어 쓰는 우회법).
     @ViewBuilder
@@ -471,22 +472,17 @@ struct PersonDetailView: View {
                 .multilineTextAlignment(.leading)
         }
         .frame(maxWidth: .infinity, alignment: .leading)
+        // [relverse1] plain 버튼은 그려진 글자만 탭을 받으므로, 줄 끝 빈 공간까지 탭 영역으로 넓힌다.
+        .contentShape(Rectangle())
 
-        if isPhoneIdiom {
-            Button {
-                AppNavigationRequest.shared.request(.bibleReading)
-                BibleVerseNavigationRequest.shared.request(bookId: group.bookId, chapter: group.chapter, verse: verse.verse)
-            } label: {
-                label
-            }
-            .buttonStyle(.plain)
-            .padding(.vertical, 2)
-        } else {
-            NavigationLink(value: BibleVerseDestination(bookId: group.bookId, chapter: group.chapter, verse: verse.verse)) {
-                label
-            }
-            .padding(.vertical, 2)
+        // 절마다 독립된 plain `Button` — 한 행(장 카드)에 여러 개가 있어도 누른 절만 동작한다.
+        Button {
+            verseOpener.open(bookId: group.bookId, chapter: group.chapter, verse: verse.verse)
+        } label: {
+            label
         }
+        .buttonStyle(.plain)
+        .padding(.vertical, 2)
     }
 
     @ViewBuilder
@@ -588,8 +584,7 @@ struct PersonDetailView: View {
     }
 
     /// `bibleref:///책ID/장/절` URL을 실제 이동으로 바꾼다. `openURL` 핸들러에서는 `NavigationPath`에
-    /// 접근할 수 없어 값 기반 push 대신 앱 공용 크로스탭 메커니즘(`AppNavigationRequest` +
-    /// `BibleVerseNavigationRequest`)을 플랫폼 구분 없이 쓴다.
+    /// 접근할 수 없어 값 기반 push를 쓰지 않고 `verseOpener`로 연다(맥·아이패드 새 창, 아이폰 성경 탭 전환).
     private func handleBibleReferenceLink(_ url: URL) -> OpenURLAction.Result {
         // `personref:///이름` 링크 — `relationStack`에 밀어 넣어 이 화면 자체가 그 인물의 상세로 바뀌게 한다.
         if url.scheme == "personref" {
@@ -610,8 +605,8 @@ struct PersonDetailView: View {
               let bookId = Int(parts[0]), let chapter = Int(parts[1]), let verse = Int(parts[2]) else {
             return .systemAction
         }
-        AppNavigationRequest.shared.request(.bibleReading)
-        BibleVerseNavigationRequest.shared.request(bookId: bookId, chapter: chapter, verse: verse)
+        // [relverse1] 맥·아이패드는 성경 새 창, 아이폰과 다중 창을 못 쓰는 환경은 섹션 전환(`BibleVerseOpener`).
+        verseOpener.open(bookId: bookId, chapter: chapter, verse: verse)
         return .handled
     }
 
@@ -763,6 +758,9 @@ struct PersonDetailView: View {
                     .textCase(nil)
                     .padding(.leading, 16)
                 }
+                // [relverse1] 맥/아이패드 split 상세(`SearchView.macSplitCardLayout`)의 `List`는 바깥 `cardSectionWrapper`가 없어
+                // 행 배경이 시스템 기본(흰색/검정)으로 남는다. 위 `cardSection`들처럼 이 절도 직접 투명으로 둔다.
+                .listRowBackground(Color.clear)
             }
         }
         // 본문 안 성경 인용 링크가 시스템 브라우저로 가지 않고 앱 안 성경 조회로 이동하도록 가로챈다.

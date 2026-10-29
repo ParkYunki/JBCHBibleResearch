@@ -307,9 +307,13 @@ struct SermonViewerView: View {
                 .padding(.bottom, 14)
                 .frame(maxWidth: .infinity, alignment: .trailing)
             GeometryReader { proxy in
+                // 채운 쪽 수는 0…count로 자른다(count는 위에서 1 이상이라 0으로 나누지 않는다). 정상 범위(pageIndex >= 0)에서는
+                // 계산식과 결과가 전과 같고, 비정상 값(음수 쪽, NaN·무한대 폭)만 0으로 막는다.
+                let filledPages = min(max(current + 1, 0), count)
+                let barWidth = proxy.size.width * CGFloat(filledPages) / CGFloat(count)
                 Rectangle()
                     .fill(accent)
-                    .frame(width: proxy.size.width * CGFloat(current + 1) / CGFloat(count), height: 3)
+                    .frame(width: barWidth.isFinite ? max(0, barWidth) : 0, height: 3)
                     .frame(maxHeight: .infinity, alignment: .bottom)
             }
         }

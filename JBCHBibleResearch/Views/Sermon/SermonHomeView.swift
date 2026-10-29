@@ -338,6 +338,39 @@ private struct ThemedNavigationBarBackgroundModifier: ViewModifier {
     }
 }
 
+#if os(iOS)
+/// "내 설교" 상단 툴바(iOS) — 왼쪽 고정 제목 + 오른쪽 "설교 작성" 버튼.
+///
+/// iOS 26(Liquid Glass)부터 툴바 항목은 자동으로 유리 캡슐 배경이 깔려 글자만 있는 제목도 버튼처럼 보인다.
+/// 이 항목은 제목일 뿐이라 공유 배경을 숨긴다(`sharedBackgroundVisibility`, iOS 26+). iOS 18.x에는 유리 캡슐이
+/// 없으므로 수정자 없이 같은 항목을 둔다.
+///
+/// 분기를 `.toolbar { }`(ToolbarContentBuilder) 안이 아니라 이 `ViewModifier`(ViewBuilder)에서 하는 이유:
+/// `ToolbarContentBuilder` 안의 `if #available`은 `ToolbarContentBuilder.buildLimitedAvailability`(불투명 반환
+/// 타입, `@_alwaysEmitIntoClient`)를 거치는데, Release(-O, 모듈 사전 링크) 빌드에서 그 불투명 타입 기술자를 찾지
+/// 못해 링크가 실패한 사례가 보고돼 있다(swiftlang/swift#92850). `ViewBuilder.buildLimitedAvailability`는 `AnyView`로
+/// 지워 이 문제가 없다. 실행 중 `#available` 결과는 바뀌지 않으므로 두 분기 사이에서 뷰 정체성이 바뀌지 않는다.
+private struct SermonHomeIOSToolbarModifier<Title: View, Compose: View>: ViewModifier {
+    let title: Title
+    let compose: Compose
+
+    func body(content: Content) -> some View {
+        if #available(iOS 26.0, *) {
+            content.toolbar {
+                ToolbarItem(placement: .topBarLeading) { title }
+                    .sharedBackgroundVisibility(.hidden)
+                ToolbarItem(placement: .primaryAction) { compose }
+            }
+        } else {
+            content.toolbar {
+                ToolbarItem(placement: .topBarLeading) { title }
+                ToolbarItem(placement: .primaryAction) { compose }
+            }
+        }
+    }
+}
+#endif
+
 struct SermonHomeView: View {
     @Environment(\.modelContext) private var modelContext
     @Environment(\.colorScheme) private var colorScheme
@@ -615,15 +648,14 @@ struct SermonHomeView: View {
             // "미사용" 칩은 설교별 보기에만 있다.
             if newMode != .bySermon, gatheringFilter == .unused { gatheringFilter = .all }
         }
+        #if os(iOS)
+        // 제목(왼쪽) + 설교 작성(오른쪽). iOS 26 분기는 `SermonHomeIOSToolbarModifier` 참고.
+        .modifier(SermonHomeIOSToolbarModifier(title: leftAlignedTitle, compose: composeButton))
+        #else
         .toolbar {
-            #if os(iOS)
-            // iOS 26(Liquid Glass)부터 툴바 항목은 자동으로 유리 캡슐 배경이 깔려 글자만 있는 제목도 버튼처럼 보인다.
-            // 이 항목은 제목일 뿐이라 공유 배경을 숨긴다(`sharedBackgroundVisibility`, iOS 26+ — 배포 타깃 26.5).
-            ToolbarItem(placement: .topBarLeading) { leftAlignedTitle }
-                .sharedBackgroundVisibility(.hidden)
-            #endif
             ToolbarItem(placement: .primaryAction) { composeButton }
         }
+        #endif
         .sheet(isPresented: $isGatheringPickerPresented) {
             GatheringPickerSheet(
                 rows: gatheringPickerRows,

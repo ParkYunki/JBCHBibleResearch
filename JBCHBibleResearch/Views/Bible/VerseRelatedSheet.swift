@@ -149,7 +149,9 @@ struct VerseRelatedIconStack: View {
     private var settings: UserSettingsStore { .shared }
 
     /// 칩 하나의 가로 = 뱃지 폭 ÷ 4. 세로는 그 2배.
-    private var chipWidth: CGFloat { max(badgeWidth, 1) / 4 }
+    /// ⚠️ `max(_:_:)`는 첫 인자가 NaN이면 NaN을 그대로 돌려주고(`y >= x ? y : x`), 무한대도 막지 못한다.
+    /// `.frame(width:height:)`에 NaN·무한대가 들어가지 않도록 유한하지 않은 폭은 하한(1)과 같게 취급한다.
+    private var chipWidth: CGFloat { (badgeWidth.isFinite ? max(badgeWidth, 1) : 1) / 4 }
     private var chipHeight: CGFloat { chipWidth * 2 }
     /// 5칸 전체 폭 — 뱃지보다 넓어(1.25배 + 간격) 양쪽으로 같은 길이씩 튀어나온다.
     var stripWidth: CGFloat { chipWidth * CGFloat(VerseRelatedKind.allCases.count) + gap * CGFloat(VerseRelatedKind.allCases.count - 1) }
@@ -198,6 +200,9 @@ struct VerseRelatedSheet: View {
     let onSelectTarget: (BibleVerseRef) -> Void
     /// 관주 대상 절의 미리보기 글(현재 번역본 본문). nil이면 "책 장:절"만 보인다.
     let previewProvider: (BibleVerseRef) -> String?
+    /// 연구문서·내 설교 언급 행 첫 줄에 보일 출처 제목(`BibleReadingViewModel.mentionSourceTitle(for:)` — 장 로드 때
+    /// 채운 사전을 읽기만 해 `body`에서 불러도 조회가 없다). nil이면(출처를 못 찾음/제목이 비어 있음) 이름 줄 없이 언급 내용만 보인다.
+    let mentionTitleProvider: (VerseMention) -> String?
     let onSelectMemo: (UserMemo) -> Void
     let onSelectMention: (VerseMention) -> Void
 
@@ -219,6 +224,7 @@ struct VerseRelatedSheet: View {
         onClose: @escaping () -> Void,
         onSelectTarget: @escaping (BibleVerseRef) -> Void,
         previewProvider: @escaping (BibleVerseRef) -> String?,
+        mentionTitleProvider: @escaping (VerseMention) -> String?,
         onSelectMemo: @escaping (UserMemo) -> Void,
         onSelectMention: @escaping (VerseMention) -> Void
     ) {
@@ -227,6 +233,7 @@ struct VerseRelatedSheet: View {
         self.onClose = onClose
         self.onSelectTarget = onSelectTarget
         self.previewProvider = previewProvider
+        self.mentionTitleProvider = mentionTitleProvider
         self.onSelectMemo = onSelectMemo
         self.onSelectMention = onSelectMention
 
@@ -447,11 +454,46 @@ struct VerseRelatedSheet: View {
                 .lineLimit(3)
                 .multilineTextAlignment(.leading)
         case .mention(let mention):
-            Text(mention.snippet.isEmpty ? mention.searchText : mention.snippet)
-                .font(.callout)
-                .foregroundStyle(textColor)
-                .lineLimit(3)
-                .multilineTextAlignment(.leading)
+            if let style = Self.titledSourceStyle(mention.sourceType) {
+                // 연구문서·내 설교(2026-10-29): 1줄째 = 출처 제목(1줄 말줄임), 2~3줄째 = 이 절을 언급한 내용 2줄.
+                // 제목을 못 찾거나 비어 있으면(동기화 지연, 제목 없는 설교 등) 이름 줄 없이 내용 2줄만 보인다.
+                VStack(alignment: .leading, spacing: 2) {
+                    if let title = mentionTitleProvider(mention) {
+                        Label(title, systemImage: style.systemImage)
+                            .font(.callout.weight(.semibold))
+                            .foregroundStyle(textColor)
+                            .lineLimit(1)
+                            .truncationMode(style.truncation)
+                    }
+                    Text(mentionText(mention))
+                        .font(.callout)
+                        .foregroundStyle(textColor)
+                        .lineLimit(2)
+                        .multilineTextAlignment(.leading)
+                }
+            } else {
+                Text(mentionText(mention))
+                    .font(.callout)
+                    .foregroundStyle(textColor)
+                    .lineLimit(3)
+                    .multilineTextAlignment(.leading)
+            }
+        }
+    }
+
+    /// 언급 행 본문 — 주변 문맥(`snippet`), 없으면 원문 표현(`searchText`).
+    private func mentionText(_ mention: VerseMention) -> String {
+        mention.snippet.isEmpty ? mention.searchText : mention.snippet
+    }
+
+    /// 첫 줄에 출처 제목을 붙이는 종류의 아이콘(사이드 패널의 문서/설교 행과 같은 심볼)과 말줄임 위치. 나머지 종류는 nil.
+    /// 파일명은 앞부분이 같은 이름(예: "2026 수련회 1강.pdf"/"2026 수련회 2강.pdf")끼리도 구분되도록 가운데를 줄이고,
+    /// 설교 제목은 문장이라 끝을 줄인다.
+    private static func titledSourceStyle(_ sourceType: VerseMentionSourceType) -> (systemImage: String, truncation: Text.TruncationMode)? {
+        switch sourceType {
+        case .document: return ("doc.text", .middle)
+        case .sermon: return ("mic.fill", .tail)
+        case .memo, .wordSummary: return nil
         }
     }
 
@@ -490,7 +532,11 @@ struct VerseRelatedSheet: View {
             return previews[target].map { "\(label) \($0)" } ?? label
         case .memo(let memo): return "\(item.kind.title) \(memoLabel(memo))"
         case .mention(let mention):
-            return "\(item.kind.title) \(mention.snippet.isEmpty ? mention.searchText : mention.snippet)"
+            // 연구문서·내 설교는 화면 순서(제목 → 내용)대로 읽는다. 제목이 없으면 예전과 같다.
+            if Self.titledSourceStyle(mention.sourceType) != nil, let title = mentionTitleProvider(mention) {
+                return "\(item.kind.title) \(title) \(mentionText(mention))"
+            }
+            return "\(item.kind.title) \(mentionText(mention))"
         }
     }
 }

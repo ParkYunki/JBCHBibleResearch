@@ -11,10 +11,14 @@
 //  구성
 //  - 아이폰(1행 52pt, 아래에 장 이동 막대): 왼쪽 = 번역본 이름 + "책 장" 제목, 오른쪽 = 라운드 사각 묶음 5개
 //    [책갈피 이동 | 책갈피 설정/해제 | 조회 이력 | 관련 콘텐츠 | 번역본 선택].
-//  - 아이패드 두 줄(상단바 60pt + 장 이동 막대): 가운데 제목(번역본 줄 + "책 장"), 양끝 배치 —
+//  - 아이패드 기존 두 줄(상단바 60pt + 장 이동 막대, 한 줄도 "아이콘 아래줄"도 안 들어갈 때): 가운데 제목(번역본 줄 + "책 장"), 양끝 배치 —
 //    왼쪽 끝 [사이드바 열기(사이드바가 닫혀 있을 때만) | 책갈피 이동 | 책갈피], 오른쪽 끝 [조회 이력 | 관련 콘텐츠(인스펙터)].
+//    아래 장 이동 막대(표준/캡슐)는 2026-10-28부터 책 버튼이 없다.
 //  - 아이패드 한 줄(폭이 넉넉할 때, `singleRowCenter`를 넘기면): 왼쪽 묶음 + 번역본 칩, 가운데 장 이동 막대(책/장 버튼 포함), 오른쪽 묶음.
 //    폭이 모자라면 호출부(`BibleReadingView.topInsetContent`)의 `ViewThatFits`가 두 줄로 되돌린다.
+//  - 아이패드 두 줄 "아이콘 아래줄"(2026-10-28, `stackedRowCenter`를 넘기면): 한 줄이 안 들어갈 때 먼저 시도한다. 윗줄(한 줄) =
+//    [번역본 칩][제목](제목은 화면 가운데), 아랫줄 = [왼쪽 묶음][장 이동 막대(책 버튼 없음)][오른쪽 묶음]. 이것도 안 들어가면 위의 두 줄 배치.
+//  - 2026-10-28: 아이패드 두 줄 배치 둘 다 장 이동 막대의 책 버튼을 뺀다(제목이 같은 팝오버를 연다). 한 줄 배치는 제목이 없어 책 버튼을 남긴다.
 //  - 제목("책 장")을 탭하면 책/장 그리드 팝오버가 열린다(`BookChapterGridPopover`). 번역본 선택은 별도 아이콘(아이폰)이거나
 //    번역본 이름 줄/칩(아이패드)을 탭한다(활성 번역본이 둘 이상일 때).
 //  - 아이콘 모양은 상단 이동 막대와 같은 `BibleBarSegmentGroup` 규격(글자색 10% 채움 + 24% 테두리, 모서리 10pt).
@@ -42,8 +46,16 @@ struct BibleTopBar: View {
     let bookmarkTargetTranslationCode: String?
     /// 말씀 요약 편집기가 인스펙터 자리를 쓰는 중인지.
     let isEditingSummary: Bool
-    /// 아이패드 한 줄 배치일 때 가운데에 놓을 장 이동 막대. nil이면(아이폰, 아이패드 두 줄) 상단바만 그린다.
+    /// 아이패드 한 줄 배치일 때 가운데에 놓을 장 이동 막대. nil이면 `stackedRowCenter`(아이패드 "아이콘 아래줄")를 보고,
+    /// 그것도 nil이면(아이폰, 아이패드 기존 두 줄) 상단바만 그린다.
     var singleRowCenter: AnyView? = nil
+    /// 아이패드 두 줄 "아이콘 아래줄" 배치일 때 아랫줄 가운데에 놓을 장 이동 막대(책 버튼 없음). nil이 아니면 윗줄은 [번역본 칩][제목] 한 줄로 두고
+    /// 왼쪽/오른쪽 아이콘 묶음을 아랫줄 양끝으로 내린다(2026-10-28). `singleRowCenter`가 함께 주어지면 `singleRowCenter`가 우선한다.
+    var stackedRowCenter: AnyView? = nil
+    /// [relverse1] false면 보조 성경 창(`BibleReadingView.isPrimaryWindow == false`, 아이패드 "bible-reading-at" 창)이다. macOS 보조 창의
+    /// 도구 레일(`BibleToolRail.showNavigationGroup`/`showRelatedGroup`)과 같은 규칙으로 사이드바 열기·책갈피·조회 이력·관련 콘텐츠를 뺀다.
+    /// 말씀 요약 편집 중에는 "말씀 요약 닫기"(관련 콘텐츠 칸)만 남긴다 — 하단 액션바의 "말씀 요약"으로 보조 창에서도 편집기를 열 수 있기 때문이다.
+    var isPrimaryWindow: Bool = true
     @Binding var isBookmarkListPresented: Bool
     @Binding var isHistoryPresented: Bool
     @Binding var isRelatedContentPresented: Bool
@@ -56,6 +68,8 @@ struct BibleTopBar: View {
 
     @Environment(\.self) private var environment
     @Environment(\.colorScheme) private var colorScheme
+    /// [relverse2] 구절 지정 보조 창(`BibleReadingWindowContent`)만 넣는 [닫기]·[메인 창으로] 동작. 메인 창·아이폰은 nil이라 그리지 않는다.
+    @Environment(\.bibleSecondaryWindowActions) private var secondaryWindowActions
 
     private var isPhone: Bool { UIDevice.current.userInterfaceIdiom == .phone }
 
@@ -88,6 +102,8 @@ struct BibleTopBar: View {
                 phoneLayout
             } else if let center = singleRowCenter {
                 singleRowLayout(center: center)
+            } else if let center = stackedRowCenter {
+                stackedRowsLayout(center: center)
             } else {
                 padLayout
             }
@@ -148,7 +164,7 @@ struct BibleTopBar: View {
         HStack(spacing: 12) {
             HStack(spacing: 8) {
                 padLeftGroup
-                singleRowTranslationChip
+                translationChip(showsCountWhenMultiple: false)
             }
             .fixedSize()
             center
@@ -158,10 +174,59 @@ struct BibleTopBar: View {
         .frame(height: 60)
     }
 
+    /// 아이패드 두 줄 "아이콘 아래줄" 배치(2026-10-28).
+    /// - 윗줄(한 줄, 최소 48pt): [번역본 칩][제목]. 제목은 화면 가운데에 고정하고 칩은 제목 바로 왼쪽에 붙인다 — `padLayout`처럼
+    ///   좌우 칸이 같은 폭(`maxWidth: .infinity`)을 나눠 가지고, 왼쪽 칸은 칩을 오른쪽 끝(제목 쪽)에 둔다. 칩 폭(번역본 이름 길이,
+    ///   열 개수 표시, 앱 언어)이 바뀌어도 제목 위치가 움직이지 않고, 기존 두 줄 배치(`padLayout`)의 제목과 같은 화면 가운데에 놓인다.
+    ///   높이 48 = 칩 40pt(`BibleBarSizing.touch`) + 위아래 4pt. Dynamic Type으로 제목이 커지면 `minHeight`라 줄이 따라 늘어난다.
+    /// - 아랫줄: [왼쪽 묶음][장 이동 막대(책 버튼 없음, 검색창이 남는 폭을 채움)][오른쪽 묶음]. 간격 6pt, 좌우 여백 12pt, 위아래 4pt
+    ///   (2026-10-29 — 기존 두 줄 배치의 10pt/기본 여백보다 좁다).
+    /// 한 줄에 안 들어가면 호출부의 `ViewThatFits`가 기존 두 줄 배치(아이콘 윗줄)로 되돌린다.
+    /// "아이콘 아래줄" 배치의 아랫줄 묶음 사이 간격(가운데 장 이동 막대 안 간격 포함, 호출부 `BibleReadingView`도 쓴다).
+    static let stackedRowSpacing: CGFloat = 6
+    /// "아이콘 아래줄" 배치의 좌우 여백(윗줄·아랫줄 공통).
+    static let stackedRowHorizontalPadding: CGFloat = 12
+
+    private func stackedRowsLayout(center: AnyView) -> some View {
+        VStack(spacing: 0) {
+            HStack(spacing: 12) {
+                HStack(spacing: 0) {
+                    Spacer(minLength: 0)
+                    translationChip(showsCountWhenMultiple: true)
+                }
+                .frame(maxWidth: .infinity)
+
+                // 폭이 빠듯할 때 제목이 먼저 자기 폭을 받고(칩 쪽 글자가 먼저 잘림), 남는 폭을 좌우 칸이 나눠 가진다.
+                bookChapterTitleButton
+                    .layoutPriority(1)
+
+                // 오른쪽 빈 칸 — 왼쪽 칸과 같은 폭을 차지해 제목을 화면 가운데에 둔다.
+                Color.clear
+                    .frame(maxWidth: .infinity, maxHeight: 1)
+                    .accessibilityHidden(true)
+            }
+            // 윗줄도 아랫줄과 같은 좌우 여백을 써서 두 줄의 내용 영역 양끝을 맞춘다(제목 가운데 위치는 좌우 대칭이라 여백과 무관).
+            .padding(.horizontal, Self.stackedRowHorizontalPadding)
+            .padding(.vertical, 4)
+            .frame(minHeight: 48)
+            // 아랫줄 간격·여백을 기존 두 줄(10pt, 기본 여백)보다 줄였다(2026-10-29) — 사이드바를 나란히 연 11인치 세로(상세 폭 약 580~594pt)에서
+            // 이 배치가 `ViewThatFits`에 뽑히게 하려고. 버튼 크기(40pt)는 그대로다. 가운데 막대 안 간격도 호출부가 같은 값을 넘긴다.
+            HStack(spacing: Self.stackedRowSpacing) {
+                padLeftGroup
+                center
+                padRightGroup
+            }
+            .padding(.horizontal, Self.stackedRowHorizontalPadding)
+            .padding(.vertical, 4)
+        }
+    }
+
     /// 아이패드 왼쪽 묶음: [사이드바 열기 | 책갈피 이동 | 책갈피]. 사이드바 열기는 사이드바가 닫혀 있을 때만.
+    /// [relverse2] 구절 지정 보조 창은 같은 자리에 [닫기 | 메인 창으로].
     @ViewBuilder
     private var padLeftGroup: some View {
-        if !hidesIconsWhileEditingSummary {
+        // [relverse1] 보조 창은 이 묶음 전체를 뺀다(`isPrimaryWindow` 참고).
+        if isPrimaryWindow && !hidesIconsWhileEditingSummary {
             BibleBarSegmentGroup {
                 if showsSidebarOpenButton {
                     sidebarOpenItem
@@ -172,25 +237,55 @@ struct BibleTopBar: View {
                 bookmarkToggleItem
             }
             .fixedSize()
+        } else if !isPrimaryWindow && !hidesIconsWhileEditingSummary, let secondaryWindowActions {
+            // [relverse2] 보조 창: 사이드바 열기가 있던 왼쪽 자리에 [닫기 | 메인 창으로]. 말씀 요약 편집 중에는 메인 창의 왼쪽 묶음처럼 감춘다
+            // (편집은 "말씀 요약 닫기"로 먼저 마친다).
+            BibleBarSegmentGroup {
+                item("xmark", label: "닫기") {
+                    secondaryWindowActions.close()
+                }
+                BibleBarSegmentDivider()
+                item("macwindow", label: "메인 창으로") {
+                    secondaryWindowActions.showMainWindow()
+                }
+                .disabled(!secondaryWindowActions.canShowMainWindow)
+            }
+            .fixedSize()
+            // 터치 영역 44pt(HIG 최소 탭 영역) — 다른 칸(40pt, `BibleBarSizing.touch`)과 달리 창을 닫는 버튼이라 잘못 누르기 어렵게 한다.
+            // 칸 크기(`BibleTopBarItemBody`)와 묶음 높이(`BibleBarSegmentGroup`)가 모두 이 환경값을 따른다.
+            .environment(\.bibleBarSizing, Self.secondaryWindowControlSizing)
         }
     }
 
+    /// [relverse2] 보조 창 [닫기]·[메인 창으로] 칸 크기 — `BibleBarSizing.touch`에서 높이만 44pt로 키웠다.
+    private static let secondaryWindowControlSizing = BibleBarSizing(
+        height: 44, radius: BibleBarSizing.touch.radius, fontSize: BibleBarSizing.touch.fontSize,
+        iconSize: BibleBarSizing.touch.iconSize, fieldFontSize: BibleBarSizing.touch.fieldFontSize
+    )
+
     /// 아이패드 오른쪽 묶음: [조회 이력 | 관련 콘텐츠]. 말씀 요약 편집 중에는 관련 콘텐츠 칸(= 말씀 요약 닫기)만 남는다.
+    /// [relverse1] 보조 창은 말씀 요약 편집 중의 "말씀 요약 닫기"만 남기고, 그 밖에는 묶음을 그리지 않는다(`isPrimaryWindow` 참고).
+    @ViewBuilder
     private var padRightGroup: some View {
-        BibleBarSegmentGroup {
-            if !hidesIconsWhileEditingSummary {
-                historyItem
-                BibleBarSegmentDivider()
+        if isPrimaryWindow || isEditingSummary {
+            BibleBarSegmentGroup {
+                if isPrimaryWindow && !hidesIconsWhileEditingSummary {
+                    historyItem
+                    BibleBarSegmentDivider()
+                }
+                relatedItem
             }
-            relatedItem
+            .fixedSize()
         }
-        .fixedSize()
     }
 
     /// 아이패드: 사이드바가 닫혀 있고 말씀 요약 편집 중이 아닐 때만 둔다(이전 툴바와 같은 조건 —
     /// 말씀 요약 편집 중에는 `SidebarVisibilityRequest`의 자동 복원 계약과 사이드바 값을 다투게 되므로 노출하지 않는다).
+    /// [relverse1] 보조 성경 창에서도 두지 않는다. 그 창에는 사이드바가 없다(`NavigationSplitView` 없이 `BibleReadingView`만 띄우는
+    /// `WindowGroup`). 판정에 쓰는 `isSidebarVisible`과 누를 때 보내는 `requestShowSidebar()`도 메인 창 `SidebarNavigationView`의 것이라,
+    /// 보조 창에서 누르면 다른 창의 사이드바가 열린다.
     private var showsSidebarOpenButton: Bool {
-        !isPhone && !isEditingSummary && !IPadSidebarInspectorCoordination.shared.isSidebarVisible
+        isPrimaryWindow && !isPhone && !isEditingSummary && !IPadSidebarInspectorCoordination.shared.isSidebarVisible
     }
 
     // MARK: - 제목
@@ -224,6 +319,17 @@ struct BibleTopBar: View {
         }
         .buttonStyle(.plain)
         .accessibilityLabel("책과 장 고르기")
+        // 라벨이 보이는 글자("고린도전서 3장")를 덮으므로, 장 이동 막대에 책 버튼이 없는 아이패드 두 줄 배치(제목이 보이는 아이패드
+        // 배치는 둘 다 책 버튼을 뺐다, 2026-10-28)에서는 현재 위치를 값으로 읽어 준다. 아이폰은 장 이동 막대의 검색 칸이 현재 위치("고전3")를
+        // 보여 주므로 중복을 피하려고 붙이지 않는다. 글자는 위 `Text`와 같은 현지화 키를 쓴다.
+        .modifier(OptionalAccessibilityValue(
+            value: isPhone ? nil : Text("\(viewModel.selectedBook.displayName) \(viewModel.selectedChapter)장")
+        ))
+        // 포인터(트랙패드) 툴팁 — 아이패드 장 이동 막대의 책 버튼에 있던 것과 같은 문구(기존 키 재사용). 포인터가 없는 아이폰에는 붙이지 않는다.
+        // `.help` 글자는 VoiceOver 힌트로도 쓰일 수 있어 라벨("책과 장 고르기")과 같은 말을 두 번 읽을 수 있다. 그러나 `.help`와
+        // `.accessibilityHint`가 함께 있을 때 어느 쪽이 이기는지, 빈 힌트가 힌트 제거로 동작하는지는 문서화되어 있지 않아 덮어쓰지 않았다
+        // (실기기 VoiceOver 확인 항목).
+        .modifier(OptionalHelp(text: isPhone ? nil : "책과 장 고르기"))
         .popover(isPresented: $isBookPickerPresented) {
             BookChapterGridPopover(
                 books: BooksProvider.shared.books,
@@ -272,16 +378,25 @@ struct BibleTopBar: View {
         }
     }
 
-    /// 아이패드 한 줄 배치의 번역본 칩 — 장 이동 막대와 같은 라운드 사각 버튼. 번역본이 하나뿐이면 글자만 보인다.
+    /// 아이패드 번역본 칩 — 장 이동 막대와 같은 라운드 사각 버튼. 번역본이 하나뿐이면 글자만 보인다.
+    /// 한 줄 배치(`singleRowLayout`)와 두 줄 "아이콘 아래줄" 배치(`stackedRowsLayout`)가 쓴다.
+    /// `showsCountWhenMultiple`(두 줄 "아이콘 아래줄" 배치)이면 열이 2개 이상일 때 맨 왼쪽 열 이름 대신 "번역본 N"을 보인다 —
+    /// 이 칩은 여러 번역본을 고르는 팝오버를 여는 자리라, 이름 하나만 보이면 화면 전체가 그 번역본인 것처럼 읽히기 때문이다
+    /// (각 열의 이름은 `TranslationColumnView` 열 머리가 보인다).
     @ViewBuilder
-    private var singleRowTranslationChip: some View {
+    private func translationChip(showsCountWhenMultiple: Bool) -> some View {
         if !translationDisplayName.isEmpty {
+            let countText = Text("번역본 \(viewModel.columns.count)")
+            let chipText: Text = showsCountWhenMultiple && viewModel.columns.count > 1 ? countText : Text(translationDisplayName)
+            // VoiceOver 값(2026-10-28): 라벨 "번역본 선택"이 보이는 글자를 덮으므로, 열이 1개면 번역본 이름, 2개 이상이면 "번역본 N"을
+            // 읽어 준다. 한 줄 배치(①)도 같은 규칙이다(보이는 글자는 이름이어도 열이 여럿이면 개수를 읽는다 — 사용자 결정).
+            let accessibilityText: Text = viewModel.columns.count > 1 ? countText : Text(translationDisplayName)
             if showsTranslationPicker {
                 Button {
                     isTranslationPickerPresented = true
                 } label: {
                     HStack(spacing: 4) {
-                        Text(translationDisplayName)
+                        chipText
                             .lineLimit(1)
                         Image(systemName: "chevron.down")
                             .font(.system(size: 9, weight: .bold))
@@ -289,14 +404,19 @@ struct BibleTopBar: View {
                 }
                 .buttonStyle(BibleBarButtonStyle(height: sizing.height, cornerRadius: sizing.radius, fontSize: 13))
                 .accessibilityLabel("번역본 선택")
+                .accessibilityValue(accessibilityText)
                 .popover(isPresented: $isTranslationPickerPresented) {
                     translationPopoverContent
                 }
             } else {
-                Text(translationDisplayName)
+                // 버튼이 아닐 때(활성 번역본 1개, 말씀 요약 편집 중)도 같은 값 규칙을 쓴다. 라벨은 기존 키 "번역본"으로 두어
+                // 보이는 글자와 값이 겹쳐 두 번 읽히지 않게 한다("번역본, 개역한글" / "번역본, 번역본 2").
+                chipText
                     .font(.system(size: 13, weight: .semibold))
                     .foregroundStyle(palette.strong)
                     .lineLimit(1)
+                    .accessibilityLabel("번역본")
+                    .accessibilityValue(accessibilityText)
             }
         }
     }
@@ -398,6 +518,34 @@ struct BibleTopBar: View {
 extension BibleBarSizing {
     /// 아이폰 상단바 아이콘 묶음 — 높이 36pt(다섯 칸이 180pt), 모서리 10pt.
     static let phoneTopBar = BibleBarSizing(height: 36, radius: 10, fontSize: 15, iconSize: 16, fieldFontSize: 15)
+}
+
+/// 값이 있을 때만 `accessibilityValue`를 붙인다(nil이면 아무것도 하지 않음).
+private struct OptionalAccessibilityValue: ViewModifier {
+    let value: Text?
+
+    @ViewBuilder
+    func body(content: Content) -> some View {
+        if let value {
+            content.accessibilityValue(value)
+        } else {
+            content
+        }
+    }
+}
+
+/// 글자가 있을 때만 `.help`를 붙인다(nil이면 아무것도 하지 않음).
+private struct OptionalHelp: ViewModifier {
+    let text: LocalizedStringKey?
+
+    @ViewBuilder
+    func body(content: Content) -> some View {
+        if let text {
+            content.help(text)
+        } else {
+            content
+        }
+    }
 }
 
 /// 상단바 아이콘 칸 스타일 — `BibleBarSegmentItemStyle`과 같은 정사각 칸에, 활성 상태(`isActive`)면 강조색 채움을 더한다.

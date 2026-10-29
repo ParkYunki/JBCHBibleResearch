@@ -209,6 +209,56 @@ final class BibleReadingViewModel {
     private func rebuildVerseMentionsIndex() {
         chapterVerseMentionsIndex = Dictionary(grouping: chapterVerseMentions) { $0.verse ?? -1 }
     }
+    /// 이 장 언급(`chapterVerseMentions`)의 연구문서·내 설교 출처 제목(키: `mentionSourceKey(_:)`) — 2026-10-29.
+    /// 언급 행 첫 줄에 쓰며, 화면(절 관련 내용 페이지·확대보기 팝오버·사이드 패널)은 그릴 때 이 사전만 읽는다
+    /// (렌더링 중 SwiftData 조회 없음). `chapterVerseMentions`와 같은 시점(`refreshRelatedContent`)에 함께 다시 채우므로
+    /// 언급 목록과 제목의 최신 정도가 같다. 제목을 못 찾았거나 비어 있으면 키가 없다.
+    private var chapterMentionSourceTitles: [String: String] = [:]
+    private static func mentionSourceKey(_ mention: VerseMention) -> String {
+        "\(mention.sourceTypeRaw)|\(normalizedSourceId(mention.sourceId))"
+    }
+    /// `sourceId`를 `UUID(uuidString:)`로 정규화한다(대소문자 차이 흡수 — `UUID(uuidString:)`는 대소문자를 가리지 않고,
+    /// `uuidString`은 항상 대문자다). UUID로 읽히지 않는 문자열은 원래 값 그대로 쓴다.
+    private static func normalizedSourceId(_ sourceId: String) -> String {
+        UUID(uuidString: sourceId)?.uuidString ?? sourceId
+    }
+    /// - Parameter documents: `refreshRelatedContent`가 이미 전체 fetch한 연구문서 목록 — 문서 쪽은 추가 조회 없이 여기서 찾는다.
+    ///   설교는 이 장 언급에 나온 설교마다 `resolveSermon(for:)`(id 조건 fetch)를 한 번씩만 부른다.
+    ///   (`#Predicate`의 `ids.contains(...)` 일괄 조회는 iOS 18에서의 동작 근거를 확인하지 못해 쓰지 않았다.)
+    private func rebuildMentionSourceTitles(documents: [SourceDocument]) {
+        func normalized(_ title: String?) -> String? {
+            guard let trimmed = title?.trimmingCharacters(in: .whitespacesAndNewlines), !trimmed.isEmpty else { return nil }
+            return trimmed
+        }
+        var titles: [String: String] = [:]
+        var neededDocumentIds: Set<String> = []
+        var visitedSermonKeys: Set<String> = []
+        for mention in chapterVerseMentions {
+            switch mention.sourceType {
+            case .document:
+                neededDocumentIds.insert(Self.normalizedSourceId(mention.sourceId))
+            case .sermon:
+                let key = Self.mentionSourceKey(mention)
+                guard visitedSermonKeys.insert(key).inserted else { continue }
+                if let title = normalized(resolveSermon(for: mention)?.title) { titles[key] = title }
+            case .memo, .wordSummary:
+                continue
+            }
+        }
+        if !neededDocumentIds.isEmpty {
+            let documentTypeRaw = VerseMentionSourceType.document.rawValue
+            for document in documents {
+                // `document.id.uuidString`은 이미 정규형(대문자)이라 `normalizedSourceId`와 같은 값이다.
+                let sourceId = document.id.uuidString
+                guard neededDocumentIds.contains(sourceId), let title = normalized(document.displayTitle) else { continue }
+                titles["\(documentTypeRaw)|\(sourceId)"] = title
+            }
+        }
+        // 같으면 대입하지 않는다 — `@Observable`이 이 프로퍼티를 읽는 화면을 불필요하게 다시 그리지 않게 한다.
+        if titles != chapterMentionSourceTitles {
+            chapterMentionSourceTitles = titles
+        }
+    }
 
     /// `TranslationColumnView.VerseRow`가 호출 — 이 번역본·이 절에 걸린 형광펜/표시만
     /// 골라 낸다.
@@ -301,6 +351,15 @@ final class BibleReadingViewModel {
         return (try? modelContext.fetch(
             FetchDescriptor<Sermon>(predicate: #Predicate { $0.id == uuid })
         ))?.first
+    }
+
+    /// 연구문서·내 설교 언급 행의 첫 줄에 보일 출처 제목(2026-10-29). 연구문서는 `SourceDocument.displayTitle`
+    /// (사용자 지정 제목, 없으면 파일명), 설교는 `Sermon.title`. 출처를 못 찾거나 제목이 비어 있으면(공백뿐 포함) nil —
+    /// 호출부는 이름 줄을 빼고 내용만 보인다. 메모·말씀 요약은 대상이 아니라 항상 nil이다.
+    /// ⚠️ 조회하지 않고 `chapterMentionSourceTitles`(장 로드 때 채움)만 읽는다 — 화면이 `body`에서 불러도 된다.
+    /// 이 장의 언급(`verseMentions(verse:)`)만 대상이다.
+    func mentionSourceTitle(for mention: VerseMention) -> String? {
+        chapterMentionSourceTitles[Self.mentionSourceKey(mention)]
     }
 
     /// 이 번역본·이 절에 보여줄 메모 아이콘 대상. `relatedChapterMemos`를 다시 쿼리하지 않고 필터링만 한다.
@@ -1099,6 +1158,7 @@ final class BibleReadingViewModel {
             )
         )) ?? []
         rebuildVerseMentionsIndex()
+        rebuildMentionSourceTitles(documents: allDocuments)
     }
 
     private static func makePreview(_ text: String, limit: Int = 80) -> String {

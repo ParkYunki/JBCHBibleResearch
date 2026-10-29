@@ -469,6 +469,7 @@ struct ChapterRelatedContentPanel: View {
         // (스니펫, 없으면 검색어)가 글자 그대로 같은 항목만 한 줄로 묶어 "N곳에서 언급됨"으로
         // 표시한다. 텍스트가 서로 다르면 합치지 않는다.
         let groupedMentionedDocuments = groupedByDisplayText(mentionedDocuments)
+        let documentTitles = sourceTitles(for: groupedMentionedDocuments)
         Section {
             sectionTitleRow(
                 String(localized: "\(verse)절 관련 연구문서 (\(taggedDocuments.count + groupedMentionedDocuments.count))"),
@@ -514,6 +515,9 @@ struct ChapterRelatedContentPanel: View {
                                         .foregroundStyle(settings.bibleTextColor?.opacity(0.6) ?? Color.secondary)
                                 }
                             }
+                            if let title = documentTitles[group.id] {
+                                mentionSourceTitleRow(title, systemImage: "doc.text", truncation: .middle)
+                            }
                             Text(group.representative.snippet.isEmpty ? group.representative.searchText : group.representative.snippet)
                                 .font(.callout)
                                 .foregroundStyle(settings.bibleTextColor ?? .primary)
@@ -535,6 +539,8 @@ struct ChapterRelatedContentPanel: View {
         let id: UUID
         let representative: VerseMention
         let count: Int
+        /// 묶인 언급이 모두 같은 출처(문서/설교)에서 왔는지 — 출처 제목 줄은 이때만 보인다(`sourceTitles(for:)`).
+        let isSingleSource: Bool
     }
 
     private func groupedByDisplayText(_ mentions: [VerseMention]) -> [GroupedMention] {
@@ -549,8 +555,35 @@ struct ChapterRelatedContentPanel: View {
         }
         return order.compactMap { key in
             guard let group = buckets[key], let first = group.first else { return nil }
-            return GroupedMention(id: first.id, representative: first, count: group.count)
+            return GroupedMention(
+                id: first.id, representative: first, count: group.count,
+                isSingleSource: group.allSatisfy { $0.sourceId == first.sourceId }
+            )
         }
+    }
+
+    /// 묶음별 출처 제목(키: `GroupedMention.id`) — 연구문서·내 설교 언급 행 첫 줄(2026-10-29).
+    /// 묶음 구조(화면 텍스트가 같으면 "N곳에서 언급됨")는 그대로 두고, 서로 다른 출처가 한 묶음에 섞이면
+    /// 대표 하나의 제목이 나머지 출처를 가리게 되므로 제목 줄을 뺀다.
+    /// `mentionSourceTitle(for:)`는 장 로드 때 채운 사전을 읽기만 하므로 `body`마다 불러도 SwiftData 조회가 없다.
+    private func sourceTitles(for groups: [GroupedMention]) -> [UUID: String] {
+        var result: [UUID: String] = [:]
+        for group in groups where group.isSingleSource {
+            if let title = viewModel.mentionSourceTitle(for: group.representative) {
+                result[group.id] = title
+            }
+        }
+        return result
+    }
+
+    /// 언급 행의 출처 제목 1줄. 아이콘은 같은 섹션의 "연결됨" 행(`documentRowLabel`/`sermonReferenceRowLabel`)과
+    /// 같은 심볼을 쓴다. 말줄임 위치는 호출부가 정한다(파일명은 가운데 — 앞부분이 같은 파일명끼리도 구분되게, 설교 제목은 끝).
+    private func mentionSourceTitleRow(_ title: String, systemImage: String, truncation: Text.TruncationMode) -> some View {
+        Label(title, systemImage: systemImage)
+            .font(.callout.weight(.semibold))
+            .foregroundStyle(settings.bibleTextColor ?? .primary)
+            .lineLimit(1)
+            .truncationMode(truncation)
     }
 
     /// 위 `taggedDocuments` 행 — "이 장에 연결됨" 배지 + 파일명(`mentionedDocuments` 행과 같은 구조).
@@ -575,6 +608,7 @@ struct ChapterRelatedContentPanel: View {
         let mentionedSermons = viewModel.verseMentions(verse: verse).filter { $0.sourceType == .sermon }
         // documentSection과 같은 이유로, 같은 텍스트는 "N곳에서 언급됨"으로 묶는다.
         let groupedMentionedSermons = groupedByDisplayText(mentionedSermons)
+        let sermonTitles = sourceTitles(for: groupedMentionedSermons)
         Section {
             sectionTitleRow(
                 String(localized: "\(verse)절 관련 설교문 (\(taggedReferences.count + groupedMentionedSermons.count))"),
@@ -598,6 +632,9 @@ struct ChapterRelatedContentPanel: View {
                                         .font(.caption2)
                                         .foregroundStyle(settings.bibleTextColor?.opacity(0.6) ?? Color.secondary)
                                 }
+                            }
+                            if let title = sermonTitles[group.id] {
+                                mentionSourceTitleRow(title, systemImage: "mic.fill", truncation: .tail)
                             }
                             Text(group.representative.snippet.isEmpty ? group.representative.searchText : group.representative.snippet)
                                 .font(.callout)

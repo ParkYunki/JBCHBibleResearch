@@ -156,6 +156,10 @@ private struct SearchContentView: View {
     let viewModel: SearchViewModel
     // 검색결과의 문서 진입점은 별도 창(document-viewer WindowGroup)으로 연다.
     @Environment(\.openWindow) private var openWindow
+    /// [relverse1] 다중 창을 못 쓰는 환경이면 `bibleVerseRow`·`openVerseInBibleReading`이 새 창 대신 섹션 전환으로 연다(`BibleVerseOpener`).
+    @Environment(\.supportsMultipleWindows) private var supportsMultipleWindows
+    /// [relverse2] 이 화면이 들어 있는 메인 창 — 새 성경 창의 [메인 창으로]가 이 창을 앞으로 가져온다(`BibleVerseOpener.originWindowID`).
+    @Environment(\.mainWindowID) private var mainWindowID
     // 검색 제출 시(`.onSubmit(of: .search)`) 검색 활성 상태를 종료해, 성경구절 탭 후
     // 이동할 때 빈 통합검색 화면이 끼어드는 것을 막는다.
     @Environment(\.dismissSearch) private var dismissSearch
@@ -227,6 +231,15 @@ private struct SearchContentView: View {
         #endif
     }
 
+    /// [relverse1] `bibleVerseRow`가 push하지 않는 플랫폼 — iOS(아이폰·아이패드). 아래 `bibleVerseRow` 주석 참고.
+    private var opensBibleVerseWithoutPush: Bool {
+        #if os(iOS)
+        return true
+        #else
+        return false
+        #endif
+    }
+
     /// 성경 조회 이동 행. 아이폰에서는 이 화면에서 직접 push하지 않는다 — 검색이 활성인
     /// 채로 같은 화면에서 `BibleVerseDestination`을 push하는 조합이 구조적으로 깨지기
     /// 때문이다(전환 충돌, 검색 활성 경고, 엉뚱한 탭 이동). 대신 "성경" 탭으로 전환
@@ -234,23 +247,23 @@ private struct SearchContentView: View {
     /// 전달(`BibleVerseNavigationRequest`)한다. 이 화면은 `TabView`가 계속 살려 두므로
     /// 상태를 잃지 않는다.
     ///
-    /// macOS/iPadOS는 그대로 `NavigationLink(value:)`를 쓴다. `Button`은 List 행에서
+    /// [relverse1 2026-10-29] 아이패드도 push하지 않는다. push된 `BibleReadingView`(`BibleVerseDestinationRegistration`)는
+    /// iOS에서 시스템 내비게이션 바를 숨겨(`BibleReadingContentView`의 `.toolbar(.hidden, for: .navigationBar)`) 검색 화면으로
+    /// 돌아갈 뒤로 버튼이 없기 때문이다. 아이패드는 `BibleVerseOpener`로 그 구절이 열린 성경 새 창을 띄우고(다중 창을 못 쓰면
+    /// 섹션 전환), 아이폰은 기존과 같이 섹션 전환이다(`BibleVerseOpener`가 아이폰을 판정한다).
+    /// macOS는 그대로 `NavigationLink(value:)` push를 쓴다(바를 숨기지 않아 뒤로 버튼이 있다). `Button`은 List 행에서
     /// 디스클로저 화살표를 자동으로 그리지 않으므로 같은 모양의 화살표를 직접 그린다.
     @ViewBuilder
     private func bibleVerseRow<RowLabel: View>(
         _ destination: BibleVerseDestination,
         @ViewBuilder label: () -> RowLabel
     ) -> some View {
-        if isPhoneIdiom {
+        if opensBibleVerseWithoutPush {
             Button {
-                AppNavigationRequest.shared.request(.bibleReading)
-                // 메모(VersePhraseNote) 결과처럼 절이 없으면(`verse == nil`) 그 장의 1절로 대체한다
-                // (`BibleVerseNavigationTarget.verse`는 옵셔널이 아니다).
-                BibleVerseNavigationRequest.shared.request(
-                    bookId: destination.bookId,
-                    chapter: destination.chapter,
-                    verse: destination.verse ?? 1
-                )
+                // 메모(VersePhraseNote) 결과처럼 절이 없으면(`verse == nil`) 섹션 전환 때는 그 장의 1절로 대체한다
+                // (`BibleVerseOpener.open` 참고). 새 창은 장만 연다.
+                BibleVerseOpener(openWindow: openWindow, supportsMultipleWindows: supportsMultipleWindows, originWindowID: mainWindowID)
+                    .open(bookId: destination.bookId, chapter: destination.chapter, verse: destination.verse)
             } label: {
                 HStack(spacing: 8) {
                     label()
@@ -1591,13 +1604,12 @@ private struct SearchContentView: View {
         .accessibilityAddTraits(.isButton)
     }
 
-    /// 절 행 탭 — "성경 조회" 섹션으로 전환하고 목표 절을 넘긴다. 성경 조회 화면이 새로 만들어지면 `.onAppear`, 이미 떠 있으면
-    /// `.onChange`가 그 절로 자동 스크롤하고 잠시 강조한다(`BibleReadingView`/`TranslationColumnView`의 `highlightedVerse` 경로).
+    /// 절 행 탭. 아이폰(과 다중 창을 못 쓰는 환경)은 "성경 조회" 섹션으로 전환하고 목표 절을 넘긴다. 성경 조회 화면이 새로 만들어지면
+    /// `.onAppear`, 이미 떠 있으면 `.onChange`가 그 절로 자동 스크롤하고 잠시 강조한다(`BibleReadingView`/`TranslationColumnView`의
+    /// `highlightedVerse` 경로). [relverse1 2026-10-29] 맥·아이패드는 그 절이 열린 성경 새 창을 띄운다(`BibleVerseOpener`).
     private func openVerseInBibleReading(_ result: VerseSearchResult) {
-        AppNavigationRequest.shared.request(.bibleReading)
-        BibleVerseNavigationRequest.shared.request(
-            bookId: result.bookId, chapter: result.chapter, verse: result.verse
-        )
+        BibleVerseOpener(openWindow: openWindow, supportsMultipleWindows: supportsMultipleWindows, originWindowID: mainWindowID)
+            .open(bookId: result.bookId, chapter: result.chapter, verse: result.verse)
     }
 
     /// 절 행 오른쪽의 선택/복사 버튼. 이동은 본문 `Button`이 담당한다.

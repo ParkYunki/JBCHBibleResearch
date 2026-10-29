@@ -1,0 +1,118 @@
+diff --git a/JBCHBibleResearch/Views/Bible/OriginalTextInfoView.swift b/JBCHBibleResearch/Views/Bible/OriginalTextInfoView.swift
+--- a/JBCHBibleResearch/Views/Bible/OriginalTextInfoView.swift
++++ b/JBCHBibleResearch/Views/Bible/OriginalTextInfoView.swift
+@@ -467,11 +467,18 @@ struct OriginalTextInfoView: View {
+                     Button {
+                         beginEditingKorean(for: word)
+                     } label: {
+-                        Image(systemName: "pencil.circle")
+-                            .font(.system(size: 14))
+-                            .foregroundStyle(settings.bibleTextColor?.opacity(0.6) ?? Color.secondary)
++                        // `pencil.circle`(옅은 글자색)은 장식처럼 보여 "수정" 버튼으로 읽히지 않았다(사용자 피드백 2026-10-29).
++                        // 시스템 표준 편집 기호 `pencil`(SF Symbols 1.0, iOS 13+/macOS 11+)에 같은 카드의 링크 아이콘과
++                        // 같은 포인트색을 써서 누를 수 있는 요소임을 드러낸다.
++                        Image(systemName: "pencil")
++                            .font(.system(size: 15, weight: .medium))
++                            .foregroundStyle(linkTint)
++                            .frame(width: Self.wordCardIconSize, height: Self.wordCardIconSize)
++                            .contentShape(WordCardHitArea(insets: Self.editButtonHitOutsets))
+                     }
+                     .buttonStyle(.plain)
++                    .accessibilityLabel("한글 뜻풀이 수정")
++                    .help("한글 뜻풀이 수정")
+                 }
+             }
+ 
+@@ -483,21 +490,29 @@ struct OriginalTextInfoView: View {
+                     .fixedSize(horizontal: false, vertical: true)
+ 
+                 // 원어 바로 다음, biblehub 링크 앞에 네이버 사전 링크를 둔다(`naverDictionaryURL`/`naverBadge`).
+-                if let naverURL = naverDictionaryURL(for: word) {
+-                    Link(destination: naverURL) {
+-                        naverBadge
++                // 두 링크 사이만 `wordCardLinkGap`으로 띄우고, 맞닿는 쪽 히트 영역은 그 절반까지만 넓혀 서로 겹치지 않게 한다.
++                HStack(spacing: Self.wordCardLinkGap) {
++                    if let naverURL = naverDictionaryURL(for: word) {
++                        Link(destination: naverURL) {
++                            naverBadge
++                                .contentShape(WordCardHitArea(insets: Self.naverLinkHitOutsets))
++                        }
++                        .accessibilityLabel("네이버 사전에서 찾기")
++                        .help("네이버 사전에서 찾기")
+                     }
+-                    .help("네이버 사전에서 찾기")
+-                }
+ 
+-                // 원어 단어별 biblehub Strong 사전 링크.
+-                if let strongURL = bibleHubStrongURL(for: word) {
+-                    Link(destination: strongURL) {
+-                        Image(systemName: "safari")
+-                            .font(.system(size: 13))
+-                            .foregroundStyle(linkTint)
++                    // 원어 단어별 biblehub Strong 사전 링크.
++                    if let strongURL = bibleHubStrongURL(for: word) {
++                        Link(destination: strongURL) {
++                            Image(systemName: "safari")
++                                .font(.system(size: 13))
++                                .foregroundStyle(linkTint)
++                                .frame(width: Self.wordCardIconSize, height: Self.wordCardIconSize)
++                                .contentShape(WordCardHitArea(insets: Self.siteLinkHitOutsets))
++                        }
++                        .accessibilityLabel("biblehub.com에서 찾기")
++                        .help("biblehub.com에서 찾기")
+                     }
+-                    .help("biblehub.com에서 찾기")
+                 }
+             }
+             .padding(.top, 2)
+@@ -556,6 +571,22 @@ struct OriginalTextInfoView: View {
+         )
+     }
+ 
++    // MARK: 원어 카드 아이콘 히트 영역
++    // 아이콘은 16×16 그대로 레이아웃하고(카드 줄바꿈·높이 유지), 누르는 영역만 `contentShape`로 아이콘 밖까지 넓힌다
++    // (Apple Developer Forums thread 831676에서 Apple 엔지니어가 권한 `contentShape(Circle().inset(by: -8))`와 같은 방식).
++    // 넓히는 양(바깥쪽 거리)의 기준:
++    //  - 좌우 바깥쪽 14 = 카드 안쪽 여백(padding 14)이라, 줄이 카드 폭을 꽉 채워도 카드 테두리를 넘지 않는다(이웃 카드와 간격 12는 침범 안 함).
++    //  - 연필 줄과 원어 줄 사이 간격은 VStack spacing 8 + 원어 줄 padding.top 2 = 10. 연필 아래 5 + 링크 위 5 = 10이라
++    //    두 줄 높이가 아이콘 높이(16)까지 줄어드는 최악의 경우에도 서로 겹치지 않는다.
++    //  - 연필 위 14는 카드 위 여백(18) 안, 링크 아래 14는 아래 줄(음역·문맥·형태·Strong 번호 — 누르는 요소 없음) 쪽이다.
++    //  - 네이버↔biblehub 맞닿는 쪽은 간격(`wordCardLinkGap`)의 절반씩.
++    // 결과 히트 영역: 연필 44×35pt, 링크 각 34×35pt — HIG 최소(iOS 28pt) 이상, 권장 44pt는 가로(연필)만 충족.
++    private static let wordCardIconSize: CGFloat = 16
++    private static let wordCardLinkGap: CGFloat = 8
++    private static let editButtonHitOutsets = EdgeInsets(top: 14, leading: 14, bottom: 5, trailing: 14)
++    private static let naverLinkHitOutsets = EdgeInsets(top: 5, leading: 14, bottom: 14, trailing: wordCardLinkGap / 2)
++    private static let siteLinkHitOutsets = EdgeInsets(top: 5, leading: wordCardLinkGap / 2, bottom: 14, trailing: 14)
++
+     /// 테마 글자색이 지정돼 있으면 그 색을 쓰고(전용 서체로 한글 헤드라인과 이미 구분됨),
+     /// 미지정 시엔 라이트/다크에 대응하는 남색을 쓴다.
+     private var hebrewTextColor: Color {
+@@ -672,7 +703,7 @@ struct OriginalTextInfoView: View {
+         Text("N")
+             .font(.system(size: 10, weight: .bold))
+             .foregroundStyle(.white)
+-            .frame(width: 16, height: 16)
++            .frame(width: Self.wordCardIconSize, height: Self.wordCardIconSize)
+             .background(Circle().fill(naverBrandColor))
+     }
+ 
+@@ -912,3 +943,18 @@ struct OriginalTextInfoView: View {
+         }
+     }
+ }
++
++/// 뷰 경계에서 변마다 지정한 만큼 바깥으로 넓힌 사각형 — `contentShape`로 히트 영역만 넓히는 데 쓴다(레이아웃 크기는 그대로).
++/// `Rectangle().inset(by: -n)`은 네 변을 똑같이만 넓힐 수 있어, 이웃 버튼 쪽만 덜 넓히려고 변별 값을 받는다.
++private struct WordCardHitArea: Shape {
++    let insets: EdgeInsets
++
++    func path(in rect: CGRect) -> Path {
++        Path(CGRect(
++            x: rect.minX - insets.leading,
++            y: rect.minY - insets.top,
++            width: rect.width + insets.leading + insets.trailing,
++            height: rect.height + insets.top + insets.bottom
++        ))
++    }
++}

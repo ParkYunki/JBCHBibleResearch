@@ -1,0 +1,414 @@
+//
+//  MainWindowNavigation.swift
+//  JBCHBibleResearch
+//
+//  [relverse2 2026-10-29] 구절 지정 성경 보조 창("bible-reading-at")의 [닫기]·[메인 창으로] 지원.
+//
+//  - 메인 창은 앱의 첫 `WindowGroup`(`ContentView`)이다. 이 그룹에는 `id`가 없어 `openWindow(id:)`로 지목할 수 없다.
+//    `id`를 새로 붙이면 기존 메인 창의 상태 복원 식별이 바뀔 위험이 있어 붙이지 않는다.
+//  - 메인 창마다 자기 식별자를 `MainWindowRegistry`에 등록하고(`MainWindowRegistration`), 하위 화면에는 환경값 `mainWindowID`로
+//    알린다. 보조 창을 여는 쪽(`BibleVerseOpener`)이 이 값을 "요청 출처"로 넘기고, 보조 창은 그 메인 창을 앞으로 가져온다.
+//    출처를 모르거나 그 창이 없어졌으면 가장 최근에 활성이었던 메인 창을 고른다.
+//  - iPadOS
+//    - 식별자는 씬 세션의 `UISceneSession.persistentIdentifier`("persists for the lifetime of the session")다.
+//    - 앞으로 가져오기는 `UIApplication.activateSceneSession(for: UISceneSessionActivationRequest(session:))`다.
+//      iOS 17.0부터 쓸 수 있다. iOS 26 SDK의 UIKit `.swiftinterface`에서 다음 선언을 확인했다.
+//      `@available(iOS 17.0, tvOS 17.0, *) public init(session: UISceneSession, userActivity: NSUserActivity? = nil, options: UIScene.ActivationRequestOptions? = nil)`
+//      예전 `requestSceneSessionActivation(_:userActivity:options:errorHandler:)`는 같은 SDK 헤더에
+//      `API_DEPRECATED("Please use activateSceneSessionForRequest:errorHandler:", ios(13.0, API_TO_BE_DEPRECATED))`로 표시돼 있다.
+//    - 보조 창은 대상 메인 씬이 실제로 활성이 된 것을 확인한 뒤에만 닫는다(`MainWindowActivationTracker`).
+//      확인 방법은 두 가지다. 이미 `foregroundActive`인 경우, 또는 `UIScene.didActivateNotification`이 오는 경우.
+//      정해진 시간 안에 확인되지 않거나 errorHandler가 불리면 보조 창은 그대로 둔다.
+//  - macOS
+//    - 식별자는 메인 창 `NSWindow`(약한 참조)다.
+//    - 앞으로 가져오기는 `NSWindow.makeKeyAndOrderFront(_:)`다
+//      ("Moves the window to the front of the screen list, within its level, and makes it the key window").
+//    - 등록 해제는 그 창의 `NSWindow.willCloseNotification`으로만 한다. 루트 뷰 `onDisappear`, Dock으로 내리기, 탭 합치기,
+//      전체 화면 전환은 창을 닫는 것이 아니라 등록을 유지한다.
+//  - 메인 창이 하나도 없을 때
+//    - iPadOS: 새 장면을 요청한다(`UISceneSessionActivationRequest(role: .windowApplication)`). 그 장면에 어느 `WindowGroup`이
+//      붙는지는 문서로 확인하지 못했다. 그래서 보조 창은 닫지 않는다.
+//    - macOS: [메인 창으로]를 비활성화한다. 메인 그룹에 `id`가 없어 SwiftUI로 새로 열 방법이 없다. 사용자는 Dock이나
+//      파일 > 새 윈도우를 쓴다.
+//
+
+import SwiftUI
+#if os(iOS)
+import UIKit
+#else
+import AppKit
+#endif
+
+// MARK: - 환경값
+
+private struct MainWindowIDKey: EnvironmentKey {
+    static let defaultValue: String? = nil
+}
+
+private struct BibleSecondaryWindowActionsKey: EnvironmentKey {
+    static let defaultValue: BibleSecondaryWindowActions? = nil
+}
+
+extension EnvironmentValues {
+    /// 이 화면이 들어 있는 메인 창의 식별자(`MainWindowRegistry`). 메인 창 밖(보조 창)이거나 등록 전이면 nil이다.
+    var mainWindowID: String? {
+        get { self[MainWindowIDKey.self] }
+        set { self[MainWindowIDKey.self] = newValue }
+    }
+
+    /// 구절 지정 보조 창(`BibleReadingWindowContent`)만 넣는 [닫기]·[메인 창으로] 동작. nil이면 버튼을 그리지 않는다
+    /// (메인 창, 아이폰, macOS "성경 조회 새 창").
+    var bibleSecondaryWindowActions: BibleSecondaryWindowActions? {
+        get { self[BibleSecondaryWindowActionsKey.self] }
+        set { self[BibleSecondaryWindowActionsKey.self] = newValue }
+    }
+}
+
+/// 보조 성경 창의 창 단위 동작. 상단바(`BibleTopBar`, iPadOS)와 도구 레일(`BibleToolRail`, macOS)이 쓴다.
+struct BibleSecondaryWindowActions {
+    /// 이 보조 창만 닫는다.
+    let close: () -> Void
+    /// 메인 창을 앞으로 가져오고, 그것이 확인되면 이 보조 창을 닫는다.
+    let showMainWindow: () -> Void
+    /// false면 [메인 창으로]를 비활성화한다(macOS에서 메인 창이 하나도 없을 때).
+    let canShowMainWindow: Bool
+}
+
+// MARK: - 메인 창 등록부
+
+@MainActor
+@Observable
+final class MainWindowRegistry {
+    static let shared = MainWindowRegistry()
+
+    private struct Entry {
+        let id: String
+        /// macOS 메인 창. iPadOS는 nil이다(세션 식별자만 쓴다).
+        weak var window: AnyObject?
+    }
+
+    /// 오래된 것부터 최근에 활성이었던 것 순서다. 항목 수는 메인 창 수만큼이라 매우 적다.
+    private var entries: [Entry] = []
+
+    private init() {}
+
+    #if os(iOS)
+    /// 메인 창 씬 세션이 나타나거나 활성이 될 때마다 부른다(맨 뒤 = 가장 최근).
+    func noteActive(sessionID: String) {
+        entries.removeAll { $0.id == sessionID }
+        entries.append(Entry(id: sessionID, window: nil))
+    }
+
+    /// 앞으로 가져올 후보를 돌려준다. 요청 출처가 먼저이고, 그다음은 최근 활성 순이다.
+    func candidateSessionIDs(preferred: String?) -> [String] {
+        var ids: [String] = []
+        if let preferred { ids.append(preferred) }
+        for entry in entries.reversed() where entry.id != preferred {
+            ids.append(entry.id)
+        }
+        return ids
+    }
+    #else
+    /// 메인 창이 나타나거나 키 창이 될 때마다 부른다(맨 뒤 = 가장 최근). 돌려준 값이 그 창의 식별자다.
+    @discardableResult
+    func noteActive(window: NSWindow) -> String {
+        let id = Self.identifier(for: window)
+        entries.removeAll { $0.id == id || $0.window == nil }
+        entries.append(Entry(id: id, window: window))
+        return id
+    }
+
+    /// 메인 창이 실제로 닫힐 때(`NSWindow.willCloseNotification`)만 부른다.
+    func unregister(window: NSWindow) {
+        entries.removeAll { $0.window === window || $0.window == nil }
+    }
+
+    /// 이 알림의 창이 등록된 메인 창인지.
+    func isRegistered(_ object: Any?) -> Bool {
+        guard let window = object as? NSWindow else { return false }
+        return entries.contains { $0.window === window }
+    }
+
+    /// 아직 닫히지 않은 메인 창이 있는지. `entries`를 읽으므로 이 값이 바뀌면 화면이 다시 그려진다.
+    /// 등록 해제를 창 닫힘(`willClose`)에서만 하므로, 등록돼 있고 해제되지 않은 창은 열려 있다(Dock에 내려간 창, 뒤쪽 탭 포함).
+    var hasLiveMainWindow: Bool {
+        entries.contains { $0.window != nil }
+    }
+
+    /// 요청 출처 창이 열려 있으면 그 창을, 아니면 가장 최근에 활성이었던 열린 메인 창을 돌려준다.
+    func liveWindow(preferred: String?) -> NSWindow? {
+        if let preferred, let window = entries.first(where: { $0.id == preferred })?.window as? NSWindow {
+            return window
+        }
+        return entries.reversed().lazy.compactMap { $0.window as? NSWindow }.first
+    }
+
+    private static func identifier(for window: NSWindow) -> String {
+        String(describing: ObjectIdentifier(window))
+    }
+    #endif
+}
+
+// MARK: - 메인 창 등록 수정자 (첫 WindowGroup의 `ContentView`에만 붙인다)
+
+struct MainWindowRegistration: ViewModifier {
+    @State private var windowID: String?
+    #if os(iOS)
+    @Environment(\.scenePhase) private var scenePhase
+    #endif
+
+    func body(content: Content) -> some View {
+        content
+            .environment(\.mainWindowID, windowID)
+            .background {
+                #if os(iOS)
+                SceneSessionIdentifierReader { sessionID in
+                    // UIKit 배치 콜백 안에서 SwiftUI 상태를 바로 바꾸지 않도록 다음 실행 주기로 미룬다.
+                    DispatchQueue.main.async {
+                        MainWindowRegistry.shared.noteActive(sessionID: sessionID)
+                        if windowID != sessionID { windowID = sessionID }
+                    }
+                }
+                #else
+                // 창에 붙을 때마다(탭 합치기·전체 화면 전환으로 다시 붙는 경우 포함) 다시 등록한다.
+                HostingWindowReader { window in
+                    DispatchQueue.main.async {
+                        let id = MainWindowRegistry.shared.noteActive(window: window)
+                        if windowID != id { windowID = id }
+                    }
+                }
+                #endif
+            }
+            #if os(iOS)
+            // 메인 창이 여럿일 때 "가장 최근에 쓴 메인 창"을 고르기 위한 기록이다.
+            .onChange(of: scenePhase) { _, phase in
+                if phase == .active, let windowID {
+                    MainWindowRegistry.shared.noteActive(sessionID: windowID)
+                }
+            }
+            #else
+            .onReceive(NotificationCenter.default.publisher(for: NSWindow.didBecomeKeyNotification)) { notification in
+                guard MainWindowRegistry.shared.isRegistered(notification.object),
+                      let window = notification.object as? NSWindow else { return }
+                MainWindowRegistry.shared.noteActive(window: window)
+            }
+            // [B-3] 등록 해제는 창이 실제로 닫힐 때만 한다. 루트 `onDisappear`(탭 합치기·전체 화면 전환 중 일시적으로 올 수 있음)나
+            // Dock으로 내리기는 창이 닫힌 것이 아니므로 등록을 유지한다. 문서: "Posted whenever an NSWindow object is about to close."
+            .onReceive(NotificationCenter.default.publisher(for: NSWindow.willCloseNotification)) { notification in
+                guard let window = notification.object as? NSWindow,
+                      MainWindowRegistry.shared.isRegistered(window) else { return }
+                MainWindowRegistry.shared.unregister(window: window)
+            }
+            #endif
+    }
+}
+
+#if os(macOS)
+/// 이 뷰가 올라간 `NSWindow`를 알려 준다(`NSView.viewDidMoveToWindow()`: "Informs the view that it has been added to a new view
+/// hierarchy."). 창에서 빠질 때(`window == nil`)는 알리지 않는다. 등록 해제는 `MainWindowRegistration`의 `willClose` 처리가 맡는다.
+private struct HostingWindowReader: NSViewRepresentable {
+    let onResolve: (NSWindow) -> Void
+
+    func makeNSView(context: Context) -> ReaderView {
+        let view = ReaderView()
+        view.onResolve = onResolve
+        return view
+    }
+
+    func updateNSView(_ nsView: ReaderView, context: Context) {
+        nsView.onResolve = onResolve
+    }
+
+    final class ReaderView: NSView {
+        var onResolve: ((NSWindow) -> Void)?
+
+        override func viewDidMoveToWindow() {
+            super.viewDidMoveToWindow()
+            if let window {
+                onResolve?(window)
+            }
+        }
+    }
+}
+#endif
+
+// MARK: - 메인 창 앞으로 가져오기
+
+#if os(iOS)
+/// [B-2·B-4] iPadOS 메인 창 활성화 요청을 한 번에 하나만 진행하고, 대상 씬이 실제로 활성이 된 것을 확인한 뒤에만 보조 창을 닫게 한다.
+/// - 진행 중이면 새 요청을 받지 않는다. 연타해도 활성화·새 장면 요청이 한 번만 나간다.
+/// - 진행이 끝나는 경우는 세 가지다. 대상 씬의 `UIScene.didActivateNotification`("Posted when a scene became active and is
+///   now responding to user events."), errorHandler 호출, 시간 초과(`Self.confirmationTimeout`).
+///   시간 초과는 알림이 끝내 오지 않는 경우(요청이 조용히 버려짐 — `SermonViewerTarget` 주석의 관찰)에 진행 상태가 풀리지
+///   않는 것을 막는 상한이다.
+@MainActor
+final class MainWindowActivationTracker {
+    static let shared = MainWindowActivationTracker()
+
+    /// 활성화를 확인할 때까지 기다리는 최대 시간(요청 기준 1~2초).
+    private static let confirmationTimeout: TimeInterval = 2
+
+    private var observer: NSObjectProtocol?
+    private var timeoutWorkItem: DispatchWorkItem?
+    /// [검토 B-1] 요청 세대. `begin`마다 1 늘린다. 늦게 도착한 errorHandler·알림·만료 콜백이 다음 요청의 진행 상태를 풀지 않도록,
+    /// 모든 종료 경로는 자기 세대가 현재 세대와 같을 때만 처리한다.
+    private var generation = 0
+
+    /// 요청이 진행 중인지.
+    private(set) var isInFlight = false
+
+    private init() {}
+
+    /// 기존 메인 세션을 활성화한다. 활성이 확인되면 `onConfirmed`를 부르고, 실패하거나 시간이 초과되면 부르지 않는다.
+    func activate(session: UISceneSession, onConfirmed: @escaping () -> Void) {
+        guard !isInFlight else {
+            sceneDiagNote("메인 창으로: 진행 중이라 무시")
+            return
+        }
+        let targetID = session.persistentIdentifier
+        // 이미 사용자 입력을 받는 중인 장면(예: Split View의 다른 쪽)에는 활성화 알림이 다시 오지 않을 수 있다.
+        // 그래서 이미 활성이면 요청만 보내 앞으로 가져온 뒤 바로 확인으로 본다.
+        // [검토 B-3] 이 경로도 진행 중 잠금을 건다. 보조 창이 닫히기 전에 연타해도 요청과 `dismissWindow`가 한 번만 나간다.
+        // 잠금은 만료(`confirmationTimeout`) 때 풀린다. 그 사이 보조 창은 이미 닫힌 상태다.
+        if session.scene?.activationState == .foregroundActive {
+            let requestGeneration = begin(onDidActivate: nil)
+            sceneDiagNote("메인 창으로: 이미 활성 \(targetID.prefix(6))")
+            UIApplication.shared.activateSceneSession(for: UISceneSessionActivationRequest(session: session)) { error in
+                let message = error.localizedDescription
+                Task { @MainActor in
+                    sceneDiagNote("메인 창으로: 활성화 실패 \(message)")
+                    MainWindowActivationTracker.shared.finish(generation: requestGeneration)
+                }
+            }
+            onConfirmed()
+            return
+        }
+        var requestGeneration = 0
+        requestGeneration = begin { [weak self] notification in
+            guard let scene = notification.object as? UIScene,
+                  scene.session.persistentIdentifier == targetID,
+                  let self, self.isCurrent(requestGeneration) else { return }
+            sceneDiagNote("메인 창으로: 활성 확인 \(targetID.prefix(6))")
+            self.finish(generation: requestGeneration)
+            onConfirmed()
+        }
+        sceneDiagNote("메인 창으로: 세션 활성화 요청 \(targetID.prefix(6))")
+        UIApplication.shared.activateSceneSession(for: UISceneSessionActivationRequest(session: session)) { [requestGeneration] error in
+            let message = error.localizedDescription
+            Task { @MainActor in
+                sceneDiagNote("메인 창으로: 활성화 실패 \(message)")
+                MainWindowActivationTracker.shared.finish(generation: requestGeneration)
+            }
+        }
+    }
+
+    /// 메인 창이 하나도 없을 때 새 장면을 요청한다. 어느 그룹이 붙는지 문서로 확인하지 못해 보조 창은 닫지 않는다.
+    /// 진행 상태는 다른 장면이 활성이 되거나, 요청이 실패하거나, 시간이 초과되면 풀린다.
+    func requestNewMainScene(requestingSessionID: String?) {
+        guard !isInFlight else {
+            sceneDiagNote("메인 창으로: 진행 중이라 무시")
+            return
+        }
+        var requestGeneration = 0
+        requestGeneration = begin { [weak self] notification in
+            guard let scene = notification.object as? UIScene,
+                  scene.session.persistentIdentifier != requestingSessionID,
+                  let self, self.isCurrent(requestGeneration) else { return }
+            self.finish(generation: requestGeneration)
+        }
+        sceneDiagNote("메인 창으로: 메인 세션 없음 → 새 장면 요청")
+        UIApplication.shared.activateSceneSession(for: UISceneSessionActivationRequest(role: .windowApplication)) { [requestGeneration] error in
+            let message = error.localizedDescription
+            Task { @MainActor in
+                sceneDiagNote("메인 창으로: 새 장면 요청 실패 \(message)")
+                MainWindowActivationTracker.shared.finish(generation: requestGeneration)
+            }
+        }
+    }
+
+    /// 진행 상태를 시작하고 이번 요청의 세대를 돌려준다. `onDidActivate`가 nil이면 알림을 구독하지 않는다(만료만 건다).
+    private func begin(onDidActivate: ((Notification) -> Void)?) -> Int {
+        // 혹시 남아 있는 이전 구독·만료 예약을 정리한다(세대 비교 없이 — 새 세대를 시작하기 직전이므로).
+        clearPendingWork()
+        generation += 1
+        let requestGeneration = generation
+        isInFlight = true
+        if let onDidActivate {
+            observer = NotificationCenter.default.addObserver(
+                forName: UIScene.didActivateNotification, object: nil, queue: .main
+            ) { notification in
+                // `queue: .main`이라 메인 스레드에서 불린다.
+                MainActor.assumeIsolated { onDidActivate(notification) }
+            }
+        }
+        let workItem = DispatchWorkItem { [weak self] in
+            guard let self, self.isCurrent(requestGeneration) else { return }
+            sceneDiagNote("메인 창으로: 진행 상태 만료(활성 확인 안 됨이면 보조 창 유지)")
+            self.finish(generation: requestGeneration)
+        }
+        timeoutWorkItem = workItem
+        DispatchQueue.main.asyncAfter(deadline: .now() + Self.confirmationTimeout, execute: workItem)
+        return requestGeneration
+    }
+
+    private func isCurrent(_ requestGeneration: Int) -> Bool {
+        isInFlight && requestGeneration == generation
+    }
+
+    /// 진행 상태를 끝낸다. 세대가 현재 요청과 같을 때만 처리한다. 같은 요청의 여러 경로(활성 확인·실패·만료)에서 불러도 한 번만 처리된다.
+    func finish(generation requestGeneration: Int) {
+        guard isCurrent(requestGeneration) else { return }
+        clearPendingWork()
+        isInFlight = false
+    }
+
+    private func clearPendingWork() {
+        if let observer {
+            NotificationCenter.default.removeObserver(observer)
+        }
+        observer = nil
+        timeoutWorkItem?.cancel()
+        timeoutWorkItem = nil
+    }
+}
+#endif
+
+@MainActor
+enum MainWindowActivator {
+    /// [메인 창으로]를 누를 수 있는지. iPadOS는 메인 창이 없어도 새 장면을 요청하므로 항상 true다.
+    static var canShowMainWindow: Bool {
+        #if os(iOS)
+        return true
+        #else
+        return MainWindowRegistry.shared.hasLiveMainWindow
+        #endif
+    }
+
+    /// 메인 창을 앞으로 가져온다. 기존 메인 창이 앞으로 온 것이 확인되면 `onConfirmed`(보조 창 닫기)를 부른다.
+    /// 메인 창 내용(선택 섹션·검색 결과·상세)은 건드리지 않는다. 섹션 전환 요청(`AppNavigationRequest`)도 보내지 않는다.
+    /// - `requestingSessionID`: 이 요청을 보낸 보조 창의 씬 세션(iPadOS). 새 장면 요청이 끝났는지 판단할 때 자기 자신을 뺀다.
+    static func showMainWindow(preferredID: String?, requestingSessionID: String?, onConfirmed: @escaping () -> Void) {
+        #if os(iOS)
+        let application = UIApplication.shared
+        let candidates = MainWindowRegistry.shared.candidateSessionIDs(preferred: preferredID)
+        // 연결된 장면을 먼저 고른다(`connectedScenes`: "The app's currently connected scenes."). 없으면 보관된 세션
+        // (`openSessions`: "currently active or archived by the system")을 다시 활성화한다.
+        let connectedSessions = application.connectedScenes.map(\.session)
+        let openSessions = application.openSessions
+        let session = candidates.lazy.compactMap { id in connectedSessions.first { $0.persistentIdentifier == id } }.first
+            ?? candidates.lazy.compactMap { id in openSessions.first { $0.persistentIdentifier == id } }.first
+        if let session {
+            MainWindowActivationTracker.shared.activate(session: session, onConfirmed: onConfirmed)
+        } else {
+            MainWindowActivationTracker.shared.requestNewMainScene(requestingSessionID: requestingSessionID)
+        }
+        #else
+        guard let window = MainWindowRegistry.shared.liveWindow(preferred: preferredID) else { return }
+        if window.isMiniaturized {
+            window.deminiaturize(nil)
+        }
+        window.makeKeyAndOrderFront(nil)
+        onConfirmed()
+        #endif
+    }
+}

@@ -127,7 +127,9 @@ struct VerseZoomView: View {
     /// 스크롤 영역의 실제 콘텐츠 폭(패딩 32pt + 여백 20pt 제외). 메모 박스가 화면 안에서 밀릴 수 있는 실제 한계이며,
     /// 성경 본문 줄바꿈 목표 폭(`effectiveTextWidth`)과는 별개로 계산된다(`AnnotatedVerseFlowView.availableWidth` 참고).
     private var availableContentWidth: CGFloat {
-        max(scrollWidth - 52, 0)
+        // `max(x, 0)`는 x가 NaN이면 NaN을 그대로 돌려주므로(`y >= x ? y : x`) 유한한지 먼저 본다.
+        let width = scrollWidth - 52
+        return width.isFinite ? max(width, 0) : 0
     }
 
     private var effectiveTextWidth: CGFloat {
@@ -913,7 +915,10 @@ struct VerseZoomView: View {
                     }
                     .buttonStyle(.plain)
                     .popover(isPresented: $isVerseMentionPopoverPresented) {
-                        VerseMentionListView(mentions: verseMentions) { mention in
+                        VerseMentionListView(
+                            mentions: verseMentions,
+                            titleProvider: { mention in viewModel.mentionSourceTitle(for: mention) }
+                        ) { mention in
                             isVerseMentionPopoverPresented = false
                             onSelectVerseMention(mention)
                             dismiss()
