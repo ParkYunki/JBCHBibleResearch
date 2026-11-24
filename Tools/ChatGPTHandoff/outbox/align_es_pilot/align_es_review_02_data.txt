@@ -1,0 +1,593 @@
+## 12:25:3
+ES: El nueve del mes fue severa el hambre en la ciudad, y no había alimento para el pueblo de la tierra.
+1	בַּחֹדֶשׁ	in the month	→ del mes
+2	בְּתִשְׁעָה	on [day] nine	→ nueve
+3	הָרְבִיעִי		→ —
+4	לַחֹדֶשׁ	of the month	→ del mes
+5	וַיֶּחֱזַק	and it was severe	→ fue severa
+6	הָרָעָב	the famine	→ el hambre
+7	בָּעִיר	in the city	→ en la ciudad
+8	וְלֹא־	and not	→ y no había
+9	הָיָה	it belonged	→ y no había
+10	לֶחֶם	food	→ alimento
+11	לְעַם	to [the] people of	→ para el pueblo
+12	הָאָרֶץ	the land	→ de la tierra
+
+## 13:1:24
+ES: Sem, Arphaxad, Sela,
+1	שֵׁם	Shem	→ Sem
+2	אַרְפַּכְשַׁד	Arphaxad	→ Arphaxad
+3	שָׁלַח	Shelah	→ Sela
+
+## 13:1:28
+ES: Los hijos de Abraham: Isaac y Ismael.
+1	בְּנֵי	[the] sons of	→ Los hijos de
+2	אַבְרָהָם	Abraham	→ Abraham
+3	יִצְחָק	Isaac	→ Isaac
+4	וְיִשְׁמָעֵאל ס	and Ishmael	→ y Ismael
+
+## 13:4:6
+ES: Y Naara le parió a Auzam, y a Hepher, a Themeni, y a Ahastari. Estos fueron los hijos de Naara.
+1	וַתֵּלֶד	and she bore	→ parió
+2	לוֹ	to him	→ le
+3	נַעֲרָה	Naarah	→ Naara
+4	אֶת־	<obj.>	→ —
+5	אֲחֻזָּם	Ahuzzam	→ Auzam
+6	וְאֶת־	and <obj.>	→ y
+7	חֵפֶר	Hepher	→ Hepher
+8	וְאֶת־	and <obj.>	→ —
+9	תֵּימְנִי	Temeni	→ Themeni
+10	וְאֶת־	and <obj.>	→ y
+11	הָאֲחַשְׁתָּרִי	Haahashtari	→ Ahastari
+12	אֵלֶּה	these	→ Estos
+13	בְּנֵי	[were] [the] sons of	→ fueron los hijos de
+14	נַעֲרָה	Naarah	→ Naara
+
+## 13:4:22
+ES: Y Joacim, y los varones de Chôzeba, y Joas, y Saraph, que dominaron en Moab, y Jasubi-lehem; y las palabras son antiguas.
+1	וְיוֹקִים	and Jokim	→ Y Joacim
+2	וְאַנְשֵׁי	and [the] men of	→ y los varones de
+3	כֹזֵבָא	Kozeba	→ Chôzeba
+4	וְיוֹאָשׁ	and Joash	→ y Joas
+5	וְשָׂרָף	and Saraph	→ y Saraph
+6	אֲשֶׁר־	who	→ que
+7	בָּעֲלוּ	they ruled	→ dominaron
+8	לְמוֹאָב	to Moab	→ en Moab
+9	וְיָשֻׁבִי	and Jashubi	→ y Jasubi-lehem
+10	לָחֶם	Lehem	→ y Jasubi-lehem
+11	וְהַדְּבָרִים	and the words	→ y las palabras
+12	עַתִּיקִים	[are] ancient	→ son antiguas
+
+## 13:5:15
+ES: También Ahí, hijo de Abdiel, hijo de Guni, fue principal en la casa de sus padres.
+1	אֲחִי	Ahi	→ Ahí
+2	בֶּן־	[the] son of	→ hijo de
+3	עַבְדִּיאֵל	Abdiel	→ Abdiel
+4	בֶּן־	[the] son of	→ hijo de
+5	גּוּנִי	Guni	→ Guni
+6	רֹאשׁ	[was] chief	→ fue principal
+7	לְבֵית	of [the] house of	→ en la casa de
+8	אֲבוֹתָם	ancestors their	→ sus padres
+
+## 13:8:29
+ES: Y en Gabaón habitaron el padre de Gabaón — el nombre de su mujer era Maachâ —,
+1	וּבְגִבְעוֹן	and in Gibeon	→ Y en Gabaón
+2	יָשְׁבוּ	they dwelt	→ habitaron
+3	אֲבִי	[the] father of	→ el padre de
+4	גִבְעוֹן	Gibeon	→ Gabaón
+5	וְשֵׁם	and [the] name of	→ el nombre de
+6	אִשְׁתּוֹ	wife his	→ su mujer
+7	מַעֲכָה	[was] Maacah	→ era Maachâ
+8	יְעִיאֵל		→ —
+
+## 13:9:2
+ES: Y los primeros habitantes que estaban en sus posesiones, en sus ciudades, fueron Israel, los sacerdotes, los levitas y los servidores del templo.
+1	וְהַיּוֹשְׁבִים	and the inhabitants	→ Y los primeros habitantes
+2	הָרִאשֹׁנִים	<the> first	→ Y los primeros habitantes
+3	אֲשֶׁר	who	→ que
+4	בַּאֲחֻזָּתָם	[were] in possession their	→ estaban en sus posesiones
+5	בְּעָרֵיהֶם	in cities their	→ en sus ciudades
+6	יִשְׂרָאֵל	[were] Israel	→ fueron Israel
+7	הַכֹּהֲנִים	the priests	→ los sacerdotes
+8	הַלְוִיִּם	the Levites	→ los levitas
+9	וְהַנְּתִינִים	and the temple servants	→ y los servidores del templo
+
+## 13:10:8
+ES: Y sucedió al día siguiente que vinieron los filisteos a despojar a los muertos, y encontraron a Saúl y a sus hijos caídos en el monte de Gilboa.
+1	וַיְהִי	and it was	→ Y sucedió
+2	מִמָּחֳרָת	from [the] next day	→ al día siguiente
+3	וַיָּבֹאוּ	and they came	→ vinieron
+4	פְלִשְׁתִּים	[the] Philistines	→ los filisteos
+5	לְפַשֵּׁט	to strip	→ a despojar
+6	אֶת־	<obj.>	→ —
+7	הַחֲלָלִים	the [ones] slain	→ los muertos
+8	וַיִּמְצְאוּ	and they found	→ y encontraron
+9	אֶת־	<obj.>	→ —
+10	שָׁאוּל	Saul	→ Saúl
+11	וְאֶת־	and <obj.>	→ y a sus hijos
+12	בָּנָיו	sons his	→ y a sus hijos
+13	נֹפְלִים	fallen	→ caídos
+14	בְּהַר	on [the] mountain of	→ en el monte de
+15	גִּלְבֹּעַ	Gilboa	→ Gilboa
+
+## 13:13:8
+ES: Y David y todo Israel hacían alegrías delante de Dios con todas sus fuerzas, con canciones, arpas, salterios, tamboriles, címbalos y trompetas.
+1	וְדָוִיד	and David	→ Y David
+2	וְכָל־	and all	→ y todo Israel
+3	יִשְׂרָאֵל	Israel	→ y todo Israel
+4	מְשַׂחֲקִים	[were] making merry	→ hacían alegrías
+5	לִפְנֵי	<to> before	→ delante de
+6	הָאֱלֹהִים	<the> God	→ Dios
+7	בְּכָל־	with all	→ con todas sus fuerzas
+8	עֹז	strength	→ con todas sus fuerzas
+9	וּבְשִׁירִים	and with songs	→ con canciones
+10	וּבְכִנֹּרוֹת	and with harps	→ arpas
+11	וּבִנְבָלִים	and with lyres	→ salterios
+12	וּבְתֻפִּים	and with tambourines	→ tamboriles
+13	וּבִמְצִלְתַּיִם	and with cymbals	→ címbalos
+14	וּבַחֲצֹצְרוֹת	and with trumpets	→ y trompetas
+
+## 13:19:12
+ES: Y dijo: Si los Siros fueren más fuertes que yo, tú me salvarás; y si los Ammonitas fueren más fuertes que tú, yo te salvaré.
+1	וַיֹּאמֶר	and he said	→ Y dijo
+2	אִם־	if	→ Si
+3	תֶּחֱזַק	it will be [too] strong	→ fueren más fuertes
+4	מִמֶּנִּי	for me	→ que yo
+5	אֲרָם	Aram	→ los Siros
+6	וְהָיִיתָ	and you will become	→ tú me salvarás
+7	לִּי	for me	→ tú me salvarás
+8	לִתְשׁוּעָה ס	<into> deliverance	→ tú me salvarás
+9	וְאִם־	and if	→ y si
+10	בְּנֵי	[the] people of	→ los Ammonitas
+11	עַמּוֹן	Ammon	→ los Ammonitas
+12	יֶחֶזְקוּ	they will be [too] strong	→ fueren más fuertes
+13	מִמְּךָ	for you	→ que tú
+14	וְהוֹשַׁעְתִּיךָ	and I will deliver you	→ yo te salvaré
+
+## 13:21:18
+ES: Y el ángel de Jehová dijo a Gad que dijese a David que David subiera para levantar un altar a Jehová en la era de Ornán el jebuseo.
+1	וּמַלְאַךְ	and [the] angel of	→ Y el ángel de
+2	יְהוָה	Yahweh	→ Jehová
+3	אָמַר	he said	→ dijo
+4	אֶל־	to	→ a Gad
+5	גָּד	Gad	→ a Gad
+6	לֵאמֹר	to say	→ que dijese
+7	לְדָוִיד	to David	→ a David
+8	כִּי	that	→ que
+9	יַעֲלֶה	he will go up	→ subiera
+10	דָוִיד	David	→ David
+11	לְהָקִים	to set up	→ para levantar
+12	מִזְבֵּחַ	an altar	→ un altar
+13	לַיהוָה	to Yahweh	→ a Jehová
+14	בְּגֹרֶן	on [the] threshing floor of	→ en la era de
+15	אָרְנָן	Ornan	→ Ornán
+16	הַיְבֻסִי	the Jebusite	→ el jebuseo
+
+## 13:29:26
+ES: Y David, hijo de Isaí, reinó sobre todo Israel.
+1	וְדָוִיד	and David	→ Y David
+2	בֶּן־	[the] son of	→ hijo de
+3	יִשָׁי	Jesse	→ Isaí
+4	מָלַךְ	he reigned	→ reinó
+5	עַל־	over	→ sobre todo
+6	כָּל־	all	→ sobre todo
+7	יִשְׂרָאֵל	Israel	→ Israel
+
+## 14:2:13
+ES: Y ahora he enviado a un hombre sabio, conocedor del entendimiento, Hiram-Abi,
+1	וְעַתָּה	and now	→ Y ahora
+2	שָׁלַחְתִּי	I send	→ he enviado
+3	אִישׁ־	a man	→ un hombre
+4	חָכָם	wise	→ sabio
+5	יוֹדֵעַ	[who] knows	→ conocedor
+6	בִּינָה	understanding	→ del entendimiento
+7	לְחוּרָם	<to> Huram	→ Hiram-Abi
+8	אָבִי	Abi	→ Hiram-Abi
+
+## 14:13:8
+ES: Y ahora vosotros decís que os haréis fuertes ante el reino de Jehová en mano de los hijos de David; y vosotros sois una gran multitud, y con vosotros están los becerros de oro que Jeroboam os hizo por dioses.
+1	וְעַתָּה	and now	→ Y ahora
+2	אַתֶּם	you	→ vosotros
+3	אֹמְרִים	[are] saying	→ decís
+4	לְהִתְחַזֵּק	to show yourselves strong	→ os haréis fuertes
+5	לִפְנֵי	<to> before	→ ante
+6	מַמְלֶכֶת	[the] kingdom of	→ el reino de
+7	יְהוָה	Yahweh	→ Jehová
+8	בְּיַד	in [the] hand of	→ en mano de
+9	בְּנֵי	[the] descendants of	→ los hijos de
+10	דָוִיד	David	→ David
+11	וְאַתֶּם	and you	→ y vosotros
+12	הָמוֹן	[are] a multitude	→ una gran multitud
+13	רָב	great	→ una gran multitud
+14	וְעִמָּכֶם	and [are] with you	→ y con vosotros están
+15	עֶגְלֵי	calves of	→ los becerros de
+16	זָהָב	gold	→ oro
+17	אֲשֶׁר	which	→ que
+18	עָשָׂה	he made	→ hizo
+19	לָכֶם	for you	→ os
+20	יָרָבְעָם	Jeroboam	→ Jeroboam
+21	לֵאלֹהִים	to gods	→ por dioses
+
+## 14:26:12
+ES: Todo el número de los jefes de familias, valientes y esforzados, era dos mil y seiscientos.
+1	כֹּל	all	→ Todo
+2	מִסְפַּר	[the] number of	→ el número de
+3	רָאשֵׁי	[the] heads of	→ los jefes de
+4	הָאָבוֹת	the fathers	→ familias
+5	לְגִבּוֹרֵי	of mighty [men] of	→ valientes y esforzados
+6	חָיִל	strength	→ valientes y esforzados
+7	אַלְפַּיִם	two thousand	→ dos mil
+8	וְשֵׁשׁ	and six	→ y seiscientos
+9	מֵאוֹת	hundred<s>	→ y seiscientos
+
+## 14:31:12
+ES: Y metieron la ofrenda y diezmos y las cosas consagradas, fielmente; y dieron cargo de ello a Chônanías Levita, el principal, y Simi su hermano fue el segundo.
+1	וַיָּבִיאוּ	and they brought	→ Y metieron
+2	אֶת־	<obj.>	→ —
+3	הַתְּרוּמָה	the contribution	→ la ofrenda
+4	וְהַמַּעֲשֵׂר	and the tithe	→ y diezmos
+5	וְהַקֳּדָשִׁים	and the holy things	→ y las cosas consagradas
+6	בֶּאֱמוּנָה	in faithfulness	→ fielmente
+7	וַעֲלֵיהֶם	and [was] over them	→ y dieron cargo de ello
+8	נָגִיד	an officer	→ el principal
+9	כָּנַנְיָהוּ	Konaniah	→ Chônanías
+10	הַלֵּוִי	the Levite	→ Levita
+11	וְשִׁמְעִי	and Shimei	→ y Simi
+12	אָחִיהוּ	brother his	→ su hermano
+13	מִשְׁנֶה	[was] second in command	→ fue el segundo
+
+## 15:2:37
+ES: Los hijos de Immer, mil cincuenta y dos.
+1	בְּנֵי	[the] descendants of	→ Los hijos de
+2	אִמֵּר	Immer	→ Immer
+3	אֶלֶף	one thousand	→ mil
+4	חֲמִשִּׁים	fifty	→ cincuenta
+5	וּשְׁנָיִם ס	and two	→ y dos
+
+## 15:10:39
+ES: y Selemías y Nathán y Adaías,
+1	וְשֶׁלֶמְיָה	and Shelemiah	→ y Selemías
+2	וְנָתָן	and Nathan	→ y Nathán
+3	וַעֲדָיָה	and Adaiah	→ y Adaías
+
+## 16:7:35
+ES: Los hijos de Harim, trescientos veinte.
+1	בְּנֵי	[the] descendants of	→ Los hijos de
+2	חָרִם	Harim	→ Harim
+3	שְׁלֹשׁ	three	→ trescientos
+4	מֵאוֹת	hundred<s>	→ trescientos
+5	וְעֶשְׂרִים ס	and twenty	→ veinte
+
+## 16:7:45
+ES: Los porteros: los hijos de Sallum, los hijos de Ater, los hijos de Talmón, los hijos de Accub, los hijos de Hatita, los hijos de Sobai, ciento treinta y ocho.
+1	הַשֹּׁעֲרִים	the gatekeepers	→ Los porteros
+2	בְּנֵי־	[the] descendants of	→ los hijos de
+3	שַׁלּוּם	Shallum	→ Sallum
+4	בְּנֵי־	[the] descendants of	→ los hijos de
+5	אָטֵר	Ater	→ Ater
+6	בְּנֵי־	[the] descendants of	→ los hijos de
+7	טַלְמֹן	Talmon	→ Talmón
+8	בְּנֵי־	[the] descendants of	→ los hijos de
+9	עַקּוּב	Akkub	→ Accub
+10	בְּנֵי	[the] descendants of	→ los hijos de
+11	חֲטִיטָא	Hatita	→ Hatita
+12	בְּנֵי	[the] descendants of	→ los hijos de
+13	שֹׁבָי	Shobai	→ Sobai
+14	מֵאָה	one hundred	→ ciento
+15	שְׁלֹשִׁים	thirty	→ treinta
+16	וּשְׁמֹנָה ס	and eight	→ y ocho
+
+## 17:1:2
+ES: En aquellos días, cuando el rey Assuero estaba sentado sobre el trono de su reino, que estaba en Susán, la ciudadela.
+1	בַּיָּמִים	in the days	→ En aquellos días
+2	הָהֵם	<the> those	→ En aquellos días
+3	כְּשֶׁבֶת	when sat	→ estaba sentado
+4	הַמֶּלֶךְ	the king	→ el rey
+5	אֲחַשְׁוֵרוֹשׁ	Ahasuerus	→ Assuero
+6	עַל	on	→ sobre
+7	כִּסֵּא	[the] throne of	→ el trono de
+8	מַלְכוּתוֹ	royalty his	→ su reino
+9	אֲשֶׁר	which	→ que
+10	בְּשׁוּשַׁן	[was] in Susa	→ estaba en Susán
+11	הַבִּירָה	the citadel	→ la ciudadela
+
+## 18:2:8
+ES: Y tomó para sí un tiesto para rascarse con él, y él estaba sentado en medio de la ceniza.
+1	וַיִּקַּח־	and he took	→ Y tomó
+2	לוֹ	for himself	→ para sí
+3	חֶרֶשׂ	a potsherd	→ un tiesto
+4	לְהִתְגָּרֵד	to scrape himself	→ para rascarse
+5	בּוֹ	with it	→ con él
+6	וְהוּא	and he	→ y él
+7	יֹשֵׁב	[was] sitting	→ estaba sentado
+8	בְּתוֹךְ־	in [the] midst	→ en medio de
+9	הָאֵפֶר	the ash[es]	→ la ceniza
+
+## 18:21:31
+ES: ¿Quién declarará ante su rostro su camino? Y lo que él hizo, ¿quién se lo pagará?
+1	מִי־	who?	→ Quién
+2	יַגִּיד	will he tell	→ declarará
+3	עַל־	on	→ ante su rostro
+4	פָּנָיו	face his	→ ante su rostro
+5	דַּרְכּוֹ	way his	→ su camino
+6	וְהוּא־	and [that which] he	→ Y lo que él
+7	עָשָׂה	he has done	→ hizo
+8	מִי	who?	→ quién
+9	יְשַׁלֶּם־	will he repay	→ se lo pagará
+10	לוֹ	to <the> him	→ se lo pagará
+
+## 18:30:28
+ES: Ennegrecido anduve sin sol; me levanté en la asamblea, pido auxilio.
+1	קֹדֵר	being dark	→ Ennegrecido
+2	הִלַּכְתִּי	I have gone about	→ anduve
+3	בְּלֹא	with not	→ sin
+4	חַמָּה	sun	→ sol
+5	קַמְתִּי	I have stood	→ me levanté
+6	בַקָּהָל	in the assembly	→ en la asamblea
+7	אֲשַׁוֵּעַ	I cry out for help	→ pido auxilio
+
+## 18:31:34
+ES: porque temí a una gran multitud y el desprecio de las familias me aterrorizó, y callé y no salí de la puerta,
+1	כִּי	for	→ porque
+2	אֶעֱרוֹץ	I feared	→ temí
+3	הָמוֹן	a multitude	→ una gran multitud
+4	רַבָּה	great	→ una gran multitud
+5	וּבוּז־	and [the] contempt of	→ y el desprecio de
+6	מִשְׁפָּחוֹת	clans	→ las familias
+7	יְחִתֵּנִי	it caused to be dismayed me	→ me aterrorizó
+8	וָאֶדֹּם	and I was silent	→ y callé
+9	לֹא־	not	→ no salí
+10	אֵצֵא	I went outside	→ no salí
+11	פָתַח	[the] door	→ la puerta
+
+## 18:32:7
+ES: Dije: Hablen los días y la multitud de años haga conocer sabiduría.
+1	אָמַרְתִּי	I said	→ Dije
+2	יָמִים	days	→ los días
+3	יְדַבֵּרוּ	let them speak	→ Hablen
+4	וְרֹב	and abundance of	→ la multitud de
+5	שָׁנִים	years	→ años
+6	יֹדִיעוּ	let them make known	→ haga conocer
+7	חָכְמָה	wisdom	→ sabiduría
+
+## 18:34:35
+ES: Job habla sin conocimiento y sus palabras sin entendimiento.
+1	אִיּוֹב	Job	→ Job
+2	לֹא־	not	→ sin conocimiento
+3	בְדַעַת	with knowledge	→ sin conocimiento
+4	יְדַבֵּר	he speaks	→ habla
+5	וּדְבָרָיו	and words his	→ sus palabras
+6	לֹא	not	→ sin entendimiento
+7	בְהַשְׂכֵּיל	[are] with insight	→ sin entendimiento
+
+## 19:7:1
+ES: Sigaión de David, que cantó a Jehová sobre las palabras de Cus, benjaminita. Jehová, Dios mío, en ti me he refugiado; sálvame de todos mis perseguidores y líbrame.
+1	יְהוָה	O Yahweh	→ Jehová
+2	אֱלֹהַי	God my	→ Dios mío
+3	בְּךָ	in you	→ en ti
+4	חָסִיתִי	I have sought refuge	→ me he refugiado
+5	הוֹשִׁיעֵנִי	save me	→ sálvame
+6	מִכָּל־	from all	→ de todos
+7	רֹדְפַי	pursuers my	→ mis perseguidores
+8	וְהַצִּילֵנִי	and deliver me	→ y líbrame
+
+## 19:7:16
+ES: Vuelve su mal sobre su cabeza, y sobre su coronilla desciende su violencia.
+1	יָשׁוּב	it returns	→ Vuelve
+2	עֲמָלוֹ	mischief his	→ su mal
+3	בְרֹאשׁוֹ	on own head his	→ sobre su cabeza
+4	וְעַל	and on	→ y sobre
+5	קָדְקֳדוֹ	scalp his	→ su coronilla
+6	חֲמָסוֹ	violence his	→ su violencia
+7	יֵרֵד	it comes down	→ desciende
+
+## 19:14:1
+ES: Al director del coro. De David. Dice el necio en su corazón: «No hay Dios». Actúan con corrupción, hacen obras abominables; no hay quien haga el bien.
+1	אָמַר	he says	→ Dice
+2	נָבָל	a fool	→ el necio
+3	בְּלִבּוֹ	in heart his	→ en su corazón
+4	אֵין	there not	→ No hay
+5	אֱלֹהִים	[is] a god	→ Dios
+6	הִשְׁחִיתוּ	they act corruptly	→ Actúan con corrupción
+7	הִתְעִיבוּ	they do abominably	→ hacen obras abominables
+8	עֲלִילָה	deed[s]	→ hacen obras abominables
+9	אֵין	there not	→ no hay
+10	עֹשֵׂה־	[is one who] does	→ haga
+11	טוֹב	<of> good	→ el bien
+
+## 19:22:3
+ES: Y tú eres santo, sentado en las alabanzas de Israel.
+1	וְאַתָּה	and you	→ Y tú
+2	קָדוֹשׁ	[are] holy	→ eres santo
+3	יוֹשֵׁב	sitting	→ sentado
+4	תְּהִלּוֹת	[the] praises of	→ en las alabanzas de
+5	יִשְׂרָאֵל	Israel	→ Israel
+
+## 19:32:9
+ES: No seáis como un caballo, como un mulo, sin entendimiento; con freno y cabestro, su adorno, para sujetar, no acercarse a ti.
+1	אַל־	may not	→ No seáis
+2	תִּהְיוּ	you be	→ No seáis
+3	כְּסוּס	like a horse	→ como un caballo
+4	כְּפֶרֶד	like a mule	→ como un mulo
+5	אֵין	[which] there not	→ sin entendimiento
+6	הָבִין	[is] understanding	→ sin entendimiento
+7	בְּמֶתֶג־	with bridle	→ con freno
+8	וָרֶסֶן	and halter	→ y cabestro
+9	עֶדְיוֹ	trapping[s] its	→ su adorno
+10	לִבְלוֹם	to restrain	→ para sujetar
+11	בַּל	not	→ no acercarse
+12	קְרֹב	to draw near	→ no acercarse
+13	אֵלֶיךָ	to you	→ a ti
+
+## 19:51:13
+ES: Enseñaré a transgresores tus caminos, y pecadores a ti volverán.
+1	אֲלַמְּדָה	I will teach	→ Enseñaré
+2	פֹשְׁעִים	transgressors	→ transgresores
+3	דְּרָכֶיךָ	ways your	→ tus caminos
+4	וְחַטָּאִים	and sinners	→ y pecadores
+5	אֵלֶיךָ	to you	→ a ti
+6	יָשׁוּבוּ	they will return	→ volverán
+
+## 19:55:20
+ES: Extendió sus manos contra sus aliados; violó su pacto.
+1	שָׁלַח	he stretched out	→ Extendió
+2	יָדָיו	hands his	→ sus manos
+3	בִּשְׁלֹמָיו	on allies his	→ contra sus aliados
+4	חִלֵּל	he violated	→ violó
+5	בְּרִיתוֹ	covenant his	→ su pacto
+
+## 19:70:2
+ES: Sean avergonzados y confundidos los que buscan mi vida; sean vueltos atrás y humillados los que desean mi mal.
+1	יֵבֹשׁוּ	may they be ashamed	→ Sean avergonzados
+2	וְיַחְפְּרוּ	and they may be abashed	→ y confundidos
+3	מְבַקְשֵׁי	[those who] seek	→ los que buscan
+4	נַפְשִׁי	<of> life my	→ mi vida
+5	יִסֹּגוּ	may they be turned back	→ sean vueltos
+6	אָחוֹר	backwards	→ atrás
+7	וְיִכָּלְמוּ	and may they be humiliated	→ y humillados
+8	חֲפֵצֵי	[the] [people] desirous of	→ los que desean
+9	רָעָתִי	harm my	→ mi mal
+
+## 19:72:20
+ES: Han terminado las oraciones de David, hijo de Isaí.
+1	כָּלּוּ	they are finished	→ Han terminado
+2	תְפִלּוֹת	[the] prayers of	→ las oraciones de
+3	דָּוִד	David	→ David
+4	בֶּן־	[the] son of	→ hijo de
+5	יִשָׁי	Jesse	→ Isaí
+
+## 19:73:22
+ES: y yo era necio y no sabía; animales era contigo.
+1	וַאֲנִי־	and I	→ y yo
+2	בַעַר	[was] stupid	→ era necio
+3	וְלֹא	and not	→ y no sabía
+4	אֵדָע	I knew	→ y no sabía
+5	בְּהֵמוֹת	animals	→ animales
+6	הָיִיתִי	I was	→ era
+7	עִמָּךְ	with you	→ contigo
+
+## 19:74:18
+ES: Recuerda esto: el enemigo ha insultado, oh Jehová, y un pueblo necio ha despreciado tu nombre.
+1	זְכָר־	remember	→ Recuerda
+2	זֹאת	this	→ esto
+3	אוֹיֵב	[the] enemy	→ el enemigo
+4	חֵרֵף	he taunted	→ ha insultado
+5	יְהוָה	O Yahweh	→ Jehová
+6	וְעַם	and a people	→ y un pueblo
+7	נָבָל	foolish	→ necio
+8	נִאֲצוּ	they spurned	→ ha despreciado
+9	שְׁמֶךָ	name your	→ tu nombre
+
+## 19:77:13
+ES: Oh Dios, en la santidad está tu camino; ¿quién es un dios grande como Dios?
+1	אֱלֹהִים	O God	→ Dios
+2	בַּקֹּדֶשׁ	[is] in <the> holiness	→ en la santidad está
+3	דַּרְכֶּךָ	way your	→ tu camino
+4	מִי־	who?	→ quién
+5	אֵל	[is] a god	→ un dios
+6	גָּדוֹל	great	→ grande
+7	כֵּאלֹהִים	like God	→ como Dios
+
+## 19:89:8
+ES: Oh Jehová, Dios de los ejércitos, ¿quién como tú es fuerte, oh JAH? Y tu fidelidad está alrededor de ti.
+1	יְהוָה	O Yahweh	→ Jehová
+2	אֱלֹהֵי	God of	→ Dios de
+3	צְבָאוֹת	hosts	→ los ejércitos
+4	מִי־	who?	→ quién
+5	כָמוֹךָ	like you	→ como tú
+6	חֲסִין	[is] mighty	→ es fuerte
+7	יָהּ	O Yahweh	→ JAH
+8	וֶאֱמוּנָתְךָ	and faithfulness your	→ Y tu fidelidad
+9	סְבִיבוֹתֶיךָ	[is] around you	→ alrededor de ti
+
+## 19:106:29
+ES: Y provocaron ira con sus hechos, y brotó entre ellos una plaga.
+1	וַיַּכְעִיסוּ	and they provoked to anger	→ Y provocaron ira
+2	בְּמַעַלְלֵיהֶם	by deeds their	→ con sus hechos
+3	וַתִּפְרָץ־	and it broke out	→ y brotó
+4	בָּם	among them	→ entre ellos
+5	מַגֵּפָה	a plague	→ una plaga
+
+## 19:107:25
+ES: Y habló y levantó viento de tormenta y alzó sus olas.
+1	וַיֹּאמֶר	and he spoke	→ Y habló
+2	וַיַּעֲמֵד	and he appointed	→ y levantó
+3	רוּחַ	a wind of	→ viento de
+4	סְעָרָה	a storm	→ tormenta
+5	וַתְּרוֹמֵם	and it lifted up	→ y alzó
+6	גַּלָּיו	waves its	→ sus olas
+
+## 19:135:13
+ES: Jehová, tu nombre para siempre; Jehová, tu memoria por generación y generación.
+1	יְהוָה	O Yahweh	→ Jehová
+2	שִׁמְךָ	name your	→ tu nombre
+3	לְעוֹלָם	[is] for ever	→ para siempre
+4	יְהוָה	O Yahweh	→ Jehová
+5	זִכְרְךָ	remembrance your	→ tu memoria
+6	לְדֹר־	[is] to a generation	→ por generación
+7	וָדֹר	and a generation	→ y generación
+
+## 19:143:10
+ES: Enséñame a hacer tu voluntad, porque tú eres mi Dios; tu espíritu bueno me guíe en tierra llana.
+1	לַמְּדֵנִי	teach me	→ Enséñame
+2	לַעֲשׂוֹת	to do	→ a hacer
+3	רְצוֹנֶךָ	will your	→ tu voluntad
+4	כִּי־	for	→ porque
+5	אַתָּה	you	→ tú
+6	אֱלוֹהָי	[are] God my	→ mi Dios
+7	רוּחֲךָ	spirit your	→ tu espíritu
+8	טוֹבָה	good	→ bueno
+9	תַּנְחֵנִי	may it lead me	→ me guíe
+10	בְּאֶרֶץ	in a land of	→ en tierra
+11	מִישׁוֹר	level ground	→ llana
+
+## 20:2:1
+ES: Hijo mío, si recibes mis palabras y mis mandamientos atesoras contigo.
+1	בְּנִי	O son my	→ Hijo mío
+2	אִם־	if	→ si
+3	תִּקַּח	you will receive	→ recibes
+4	אֲמָרָי	words my	→ mis palabras
+5	וּמִצְוֹתַי	and commandments my	→ y mis mandamientos
+6	תִּצְפֹּן	you will treasure	→ atesoras
+7	אִתָּךְ	with you	→ contigo
+
+## 20:4:1
+ES: Escuchad, hijos, disciplina de un padre, y atended para conocer entendimiento.
+1	שִׁמְעוּ	listen to	→ Escuchad
+2	בָנִים	O children	→ hijos
+3	מוּסַר	[the] correction of	→ disciplina de
+4	אָב	a father	→ un padre
+5	וְהַקְשִׁיבוּ	and be attentive	→ y atended
+6	לָדַעַת	to know	→ para conocer
+7	בִּינָה	understanding	→ entendimiento
+
+## 20:8:25
+ES: Antes que los montes fueran asentados, antes de las colinas fui engendrada.
+1	בְּטֶרֶם	<in> before	→ Antes que
+2	הָרִים	mountains	→ los montes
+3	הָטְבָּעוּ	they were planted	→ fueran asentados
+4	לִפְנֵי	<to> before	→ antes de
+5	גְבָעוֹת	[the] hills	→ las colinas
+6	חוֹלָלְתִּי	I was brought forth	→ fui engendrada
+
+## 20:19:21
+ES: Muchos planes hay en el corazón de un hombre, y el propósito de Jehová, él permanecerá.
+1	רַבּוֹת	many	→ Muchos
+2	מַחֲשָׁבוֹת	plans	→ planes
+3	בְּלֶב־	[are] in [the] heart of	→ en el corazón de
+4	אִישׁ	a person	→ un hombre
+5	וַעֲצַת	and [the] purpose of	→ y el propósito de
+6	יְהוָה	Yahweh	→ Jehová
+7	הִיא	it	→ él permanecerá
+8	תָקוּם	it will stand	→ él permanecerá
+
+## 20:19:25
+ES: Golpea a un burlador y un ingenuo se hará prudente, y reprende a un entendido y entenderá conocimiento.
+1	לֵץ	a mocker	→ un burlador
+2	תַּכֶּה	you will strike	→ Golpea
+3	וּפֶתִי	and a naive person	→ y un ingenuo
+4	יַעְרִם	he will become prudent	→ se hará prudente
+5	וְהוֹכִיחַ	and to reprove	→ y reprende
+6	לְנָבוֹן	<to> a discerning [person]	→ un entendido
+7	יָבִין	he will understand	→ y entenderá
+8	דָּעַת	knowledge	→ conocimiento

@@ -1,0 +1,224 @@
+## 11:20:42
+KO: 그가 그에게 말하였다. 여호와께서 이렇게 말씀하셨다. "네가 나의 진멸(헤렘)의 사람을 네 손에서 보냈기 때문에, 네 생명은 그의 생명을 대신할 것이며 네 백성은 그의 백성을 대신할 것이다."
+1 וַיֹּאמֶר = and he said
+2 אֵלָיו = to him (to(wards))
+3 כֹּה = thus
+4 אָמַר = he says
+5 יְהוָה = Yahweh (LORD)
+6 יַעַן = because
+7 שִׁלַּחְתָּ = you have let go (to send)
+8 אֶת־ = <obj.> ([Obj.])
+9 אִישׁ־ = [the] man of (man)
+10 חֶרְמִי = total destruction my (devoted thing)
+11 מִיָּד = from a hand (hand)
+12 וְהָיְתָה = and it will be (to be)
+13 נַפְשְׁךָ = life your
+14 תַּחַת = in place of
+15 נַפְשׁוֹ = life his
+16 וְעַמְּךָ = and people your
+17 תַּחַת = in place of
+18 עַמּוֹ = people his
+
+## 11:20:43
+KO: 이스라엘 왕은 그의 집으로 성나고 분하게 가서 사마리아에 이르렀다.
+1 וַיֵּלֶךְ = and he went (to go)
+2 מֶלֶךְ־ = [the] king of (king)
+3 יִשְׂרָאֵל = Israel
+4 עַל־ = to (upon)
+5 בֵּיתוֹ = house his (house)
+6 סַר = sullen (stubborn)
+7 וְזָעֵף = and furious (vexed)
+8 וַיָּבֹא = and he went (to come (in))
+9 שֹׁמְרוֹנָה פ = Samaria towards (Samaria)
+
+## 11:21:1
+KO: 그리고 이 일들 후에 이스르엘 사람 나봇에게 이스르엘에 포도원이 있었는데, 그것은 사마리아 왕 아합의 궁전 곁에 있었다.
+1 וַיְהִי = and it was
+2 אַחַר = after
+3 הַדְּבָרִים = the things (word)
+4 הָאֵלֶּה = <the> these (these)
+5 כֶּרֶם = a vineyard (vineyard)
+6 הָיָה = it belonged
+7 לְנָבוֹת = to Naboth (Naboth)
+8 הַיִּזְרְעֵאלִי = the Jezreelite (Jezreelite)
+9 אֲשֶׁר = which
+10 בְּיִזְרְעֶאל = [was] in Jezreel (Jezreel)
+11 אֵצֶל = beside
+12 הֵיכַל = [the] palace of (temple)
+13 אַחְאָב = Ahab
+14 מֶלֶךְ = [the] king of (king)
+15 שֹׁמְרוֹן = Samaria
+
+## 11:21:2
+KO: 아합이 나봇에게 말하여 이르기를 "너의 포도원을 나에게 주어라, 그것이 나에게 채소 정원이 되게 하라, 왜냐하면 그것이 내 집 곁에 가까이 있기 때문이다. 그리고 내가 너에게 그것 대신에 그것보다 더 좋은 포도원을 주겠다. 만일 네 눈에 좋다면, 내가 너에게 이것의 값으로 은을 주겠다."
+1 וַיְדַבֵּר = and he spoke (to speak)
+2 אַחְאָב = Ahab
+3 אֶל־ = to (to(wards))
+4 נָבוֹת = Naboth
+5 לֵאמֹר = <to> saying (to say)
+6 תְּנָה־ = give !
+7 לִּי = to me
+8 אֶת־ = <obj.> ([Obj.])
+9 כַּרְמְךָ = vineyard your
+10 וִיהִי־ = so may it belong (to be)
+11 לִי = to me
+12 לְגַן־ = to a garden of (garden)
+13 יָרָק = vegetables (herb)
+14 כִּי = for
+15 הוּא = it (he;_she;_it)
+16 קָרוֹב = [is] near (near)
+17 אֵצֶל = beside
+18 בֵּיתִי = house my (house)
+19 וְאֶתְּנָה = and I will give
+20 לְךָ = to <the> you
+21 תַּחְתָּיו = in place of it (underneath)
+22 כֶּרֶם = a vineyard
+23 טוֹב = good
+24 מִמֶּנּוּ = more than it (from)
+25 אִם = if
+26 טוֹב = [it is] good (be pleasing)
+27 בְּעֵינֶיךָ = in view your (eye)
+28 אֶתְּנָה־ = I will give
+29 לְךָ = to you
+30 כֶסֶף = money (silver)
+31 מְחִיר = [the] price of (price)
+32 זֶה = this [one] (this)
+
+## 11:21:3
+KO: 나봇이 아합에게 말하였다. “나에게는 여호와로부터 (금지된 일이다), 내 조상들의 유업을 당신에게 주는 것이 금지된 일이다.”
+1 וַיֹּאמֶר = and he said (to say)
+2 נָבוֹת = Naboth
+3 אֶל־ = to (to(wards))
+4 אַחְאָב = Ahab
+5 חָלִילָה = far be it (forbid)
+6 לִּי = to me (me)
+7 מֵיהוָה = from Yahweh (LORD)
+8 מִתִּתִּי = than to give I (to give)
+9 אֶת־ = <obj.> ([Obj.])
+10 נַחֲלַת = [the] inheritance of (inheritance)
+11 אֲבֹתַי = ancestors my (father)
+12 לָךְ = to you (you)
+
+## 11:21:4
+KO: 아합이 그의 집으로 돌아왔으니, 그가 나봇이라는 이스르엘 사람에게 그가 그에게 말했던 그 일에 관하여 근심하고 분개하였기 때문이었다. 그가 말하기를 "나의 조상들의 유업을 당신에게 줄 수 없소." 하였더라. 그가 그의 침상 위로 누웠고, 그의 얼굴을 돌이켰으며, 음식을 먹지 아니하였더라.
+1 וַיָּבֹא = and he went (to come (in))
+2 אַחְאָב = Ahab
+3 אֶל־ = to
+4 בֵּיתוֹ = house his (house)
+5 סַר = sullen (stubborn)
+6 וְזָעֵף = and furious (vexed)
+7 עַל־ = on
+8 הַדָּבָר = the word (word)
+9 אֲשֶׁר־ = which
+10 דִּבֶּר = he had spoken (to speak)
+11 אֵלָיו = to him
+12 נָבוֹת = Naboth
+13 הַיִּזְרְעֵאלִי = the Jezreelite (Jezreelite)
+14 וַיֹּאמֶר = and he said (to say)
+15 לֹא־ = not
+16 אֶתֵּן = I will give (to give)
+17 לְךָ = to you (you)
+18 אֶת־ = <obj.>
+19 נַחֲלַת = [the] inheritance of (inheritance)
+20 אֲבוֹתָי = ancestors my (father)
+21 וַיִּשְׁכַּב = and he lay down (to lie down)
+22 עַל־ = on
+23 מִטָּתוֹ = bed his (bed)
+24 וַיַּסֵּב = and he turned around (to turn)
+25 אֶת־ = <obj.>
+26 פָּנָיו = face his (face)
+27 וְלֹא־ = and not
+28 אָכַל = he ate (to eat)
+29 לָחֶם = food
+
+## 11:21:5
+KO: 그의 아내 이세벨이 그에게 와서 그에게 말했다. "어찌하여 당신의 영(마음)이 돌아서서 당신이 음식을 먹지 아니합니까?"
+1 וַתָּבֹא = and she came (to come (in))
+2 אֵלָיו = to him
+3 אִיזֶבֶל = Jezebel
+4 אִשְׁתּוֹ = wife his (woman)
+5 וַתְּדַבֵּר = and she spoke (to speak)
+6 אֵלָיו = to him
+7 מַה־ = why? (what?)
+8 זֶּה = this
+9 רוּחֲךָ = [is] spirit your (spirit)
+10 סָרָה = sullen (stubborn)
+11 וְאֵינְךָ = and not you (nothing)
+12 אֹכֵל = [are] eating (to eat)
+13 לָחֶם = food
+
+## 11:21:6
+KO: 그가 그녀(이세벨)에게 말하였다. 왜냐하면 내가 이스르엘 사람 나봇에게 말하여 이르기를 ‘네 포도원을 내게 주라. 은으로(돈으로) 하거나, 만일 네가 기뻐한다면 내가 네게 그 대신 포도원을 주리라’ 하였는데, 그가 ‘나는 내 포도원을 네게 주지 않겠다’라고 말했기 때문이다.
+1 וַיְדַבֵּר = and he spoke
+2 אֵלֶיהָ = to her
+3 כִּי־ = for
+4 אֲדַבֵּר = I spoke
+5 אֶל־ = to
+6 נָבוֹת = Naboth
+7 הַיִּזְרְעֵאלִי = the Jezreelite (Jezreelite)
+8 וָאֹמַר = and I said
+9 לוֹ = to him (him)
+10 תְּנָה־ = give !
+11 לִּי = to me (me)
+12 אֶת־ = <obj.>
+13 כַּרְמְךָ = vineyard your
+14 בְּכֶסֶף = for money (silver)
+15 אוֹ = or
+16 אִם־ = if
+17 חָפֵץ = [are] desiring (delighting)
+18 אַתָּה = you (you(m.s.))
+19 אֶתְּנָה־ = I will give
+20 לְךָ = to you
+21 כֶרֶם = a vineyard
+22 תַּחְתָּיו = in place of it (underneath)
+23 וַיֹּאמֶר = and he said
+24 לֹא־ = not
+25 אֶתֵּן = I will give
+26 לְךָ = to you
+27 אֶת־ = <obj.>
+28 כַּרְמִי = vineyard my
+
+## 11:21:7
+KO: 그의 아내 이세벨이 그에게 말하였다. "이제 당신이 이스라엘 위에 왕권을 행사하십니까? 일어나 빵을 드시고 마음을 기쁘게 하소서. 내가 당신에게 이스르엘 사람 나봇의 포도원을 주겠나이다."
+1 וַתֹּאמֶר = and she said (to say)
+2 אֵלָיו = to him (to(wards))
+3 אִיזֶבֶל = Jezebel
+4 אִשְׁתּוֹ = wife his (woman)
+5 אַתָּה = you (you(m.s.))
+6 עַתָּה = now
+7 תַּעֲשֶׂה = are you doing? (to make)
+8 מְלוּכָה = kingship
+9 עַל־ = over (upon)
+10 יִשְׂרָאֵל = Israel
+11 קוּם = arise (to arise)
+12 אֱכָל־ = eat (to eat)
+13 לֶחֶם = food
+14 וְיִטַב = so it may be good (be good)
+15 לִבֶּךָ = heart your (heart)
+16 אֲנִי = I
+17 אֶתֵּן = I will give (to give)
+18 לְךָ = to you (you)
+19 אֶת־ = <obj.> ([Obj.])
+20 כֶּרֶם = [the] vineyard of (vineyard)
+21 נָבוֹת = Naboth
+22 הַיִּזְרְעֵאלִי = the Jezreelite (Jezreelite)
+
+## 11:21:8
+KO: 그리고 그녀(이세벨)는 아합의 이름으로 편지들을 썼고, 그의 인으로 그것들을 인쳤으며, 그 편지들을 그 성읍에 있는, 나봇과 함께 거주하는 장로들과 귀인들에게 보냈다.
+1 וַתִּכְתֹּב = and she wrote (to write)
+2 סְפָרִים = letters
+3 בְּשֵׁם = in [the] name of (name)
+4 אַחְאָב = Ahab
+5 וַתַּחְתֹּם = and she sealed [them] (to seal)
+6 בְּחֹתָמוֹ = with seal his
+7 וַתִּשְׁלַח = and she sent (to send)
+8 סְפָרִים = letters
+9 אֶל־ = to
+10 הַזְקֵנִים = the elders (old)
+11 וְאֶל־ = and to
+12 הַחֹרִים = the nobles (noble)
+13 אֲשֶׁר = who (which)
+14 בְּעִירוֹ = [were] in city his (city)
+15 הַיֹּשְׁבִים = who dwelt (to dwell)
+16 אֶת־ = with
+17 נָבוֹת = Naboth

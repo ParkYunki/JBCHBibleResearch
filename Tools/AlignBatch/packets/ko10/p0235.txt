@@ -1,0 +1,159 @@
+## 2:29:4
+KO: 그리고 아론과 그의 아들들을 회막 문으로 너는 가까이 데려오고, 그들을 물로 씻겨라.
+1 וְאֶת־ = and <obj.>
+2 אַהֲרֹן = Aaron
+3 וְאֶת־ = and <obj.>
+4 בָּנָיו = sons his (son)
+5 תַּקְרִיב = you will bring near (to present)
+6 אֶל־ = to (to(wards))
+7 פֶּתַח = [the] entrance of (entrance)
+8 אֹהֶל = [the] tent of (tent)
+9 מוֹעֵד = meeting
+10 וְרָחַצְתָּ = and you will wash (to wash)
+11 אֹתָם = <obj.> them
+12 בַּמָּיִם = with <the> water (water)
+
+## 2:29:5
+KO: 그리고 너는 그 의복들을 가져다가 아론에게 속옷과 에봇 받침 겉옷과 에봇과 흉패를 입히고, 그(아론)에게 에봇의 공교히 짠 띠를 띠워라.
+1 וְלָקַחְתָּ = and you will take (to take)
+2 אֶת־ = <obj.>
+3 הַבְּגָדִים = the garments (garment)
+4 וְהִלְבַּשְׁתָּ = and you will clothe (to clothe)
+5 אֶת־ = <obj.>
+6 אַהֲרֹן = Aaron
+7 אֶת־ = <obj.>
+8 הַכֻּתֹּנֶת = the tunic (tunic)
+9 וְאֵת = and <obj.>
+10 מְעִיל = [the] robe of (robe)
+11 הָאֵפֹד = the ephod
+12 וְאֶת־ = and <obj.>
+13 הָאֵפֹד = the ephod
+14 וְאֶת־ = and <obj.>
+15 הַחֹשֶׁן = the breastpiece (breastpiece)
+16 וְאָפַדְתָּ = and you will gird [the] ephod (to gird)
+17 לוֹ = to <the> him (him)
+18 בְּחֵשֶׁב = with [the] girdle of (artwork)
+19 הָאֵפֹד = the ephod
+
+## 2:29:6
+KO: 그리고 너는 관을 그의 머리 위에 씌우고, 거룩함의 성패를 그 관 위에 두어라.
+1 וְשַׂמְתָּ = and you will put (to set)
+2 הַמִּצְנֶפֶת = the turban
+3 עַל־ = on
+4 רֹאשׁוֹ = head his (head)
+5 וְנָתַתָּ = and you will put (to give)
+6 אֶת־ = <obj.> ([Obj.])
+7 נֵזֶר = [the] crown of (consecration)
+8 הַקֹּדֶשׁ = <the> holiness (holiness)
+9 עַל־ = on
+10 הַמִּצְנָפֶת = the turban
+
+## 2:29:7
+KO: 그리고 너는 관유의 기름을 취하여 그의 머리 위에 부을 것이며, 그를 기름 부어 거룩하게 할지니라.
+1 וְלָקַחְתָּ = and you will take (to take)
+2 אֶת־ = <obj.>
+3 שֶׁמֶן = [the] oil of (oil)
+4 הַמִּשְׁחָה = <the> anointing (anointing)
+5 וְיָצַקְתָּ = and you will pour [it] (to pour)
+6 עַל־ = on (upon)
+7 רֹאשׁוֹ = head his (head)
+8 וּמָשַׁחְתָּ = and you will anoint (to anoint)
+9 אֹתוֹ = <obj.> him
+
+## 2:29:8
+KO: 그리고 그의 아들들을 너는 데려오고, 그들에게 속옷들을 입혀라.
+1 וְאֶת־ = and <obj.> ([Obj.])
+2 בָּנָיו = sons his (son)
+3 תַּקְרִיב = you will bring near (to present)
+4 וְהִלְבַּשְׁתָּם = and you will clothe them (to clothe)
+5 כֻּתֳּנֹת = tunics (tunic)
+
+## 2:29:9
+KO: 너는 아론과 그의 아들들에게 띠를 두르고, 그들에게 관을 씌워라. 그러면 제사장 직분이 그들에게 영원한 규례가 될 것이니, 너는 아론의 손과 그의 아들들의 손을 채우라.
+1 וְחָגַרְתָּ = and you will gird (to gird)
+2 אֹתָם = <obj.> them ([Obj.])
+3 אַבְנֵט = a sash (girdle)
+4 אַהֲרֹן = Aaron
+5 וּבָנָיו = and sons his
+6 וְחָבַשְׁתָּ = and you will bind on (to saddle|tie)
+7 לָהֶם = to <the> them
+8 מִגְבָּעֹת = headdresses (headgear)
+9 וְהָיְתָה = and it will be[long] (to be)
+10 לָהֶם = to <the> them
+11 כְּהֻנָּה = priesthood
+12 לְחֻקַּת = to a statute of (statute)
+13 עוֹלָם = perpetuity (forever)
+14 וּמִלֵּאתָ = and you will fill (to fill)
+15 יַד־ = [the] hand of
+16 אַהֲרֹן = Aaron
+17 וְיַד־ = and [the] hand of
+18 בָּנָיו = sons his
+
+## 2:29:10
+KO: 그리고 너는 수송아지를 만남의 장막 앞으로 가까이 가져오게 할 것이고, 아론과 그의 아들들은 그들의 손들을 그 수송아지의 머리 위에 얹을지니라.
+1 וְהִקְרַבְתָּ = and you will bring near (to present)
+2 אֶת־ = <obj.>
+3 הַפָּר = the young bull
+4 לִפְנֵי = <to> before (face)
+5 אֹהֶל = [the] tent of (tent)
+6 מוֹעֵד = meeting
+7 וְסָמַךְ = and he will lay (to support)
+8 אַהֲרֹן = Aaron
+9 וּבָנָיו = and sons his (son)
+10 אֶת־ = <obj.>
+11 יְדֵיהֶם = hands their (hand)
+12 עַל־ = on (upon)
+13 רֹאשׁ = [the] head of (head)
+14 הַפָּר = the young bull
+
+## 2:29:11
+KO: 그리고 너는 주 곧 만남의 장막 입구에서 여호와 앞에 그 수소를 잡을지니라.
+1 וְשָׁחַטְתָּ = and you will slaughter (to slaughter)
+2 אֶת־ = <obj.> ([Obj.])
+3 הַפָּר = the young bull (bullock)
+4 לִפְנֵי = <to> before (face)
+5 יְהוָה = Yahweh (LORD)
+6 פֶּתַח = [the] entrance of (entrance)
+7 אֹהֶל = [the] tent of (tent)
+8 מוֹעֵד = meeting
+
+## 2:29:12
+KO: 그리고 너는 그 수소의 피로부터 취하여, 너의 손가락으로 그 제단의 뿔들 위에 그것(피)을 바르고, 그 모든 피는 그 제단의 밑바닥에 쏟을지니라.
+1 וְלָקַחְתָּ = and you will take (to take)
+2 מִדַּם = some of [the] blood of
+3 הַפָּר = the young bull (bullock)
+4 וְנָתַתָּה = and you will put [it] (to give)
+5 עַל־ = on (upon)
+6 קַרְנֹת = [the] horns of (horn)
+7 הַמִּזְבֵּחַ = the altar
+8 בְּאֶצְבָּעֶךָ = with finger your (finger)
+9 וְאֶת־ = and <obj.> ([Obj.])
+10 כָּל־ = all
+11 הַדָּם = the blood
+12 תִּשְׁפֹּךְ = you will pour out (to pour)
+13 אֶל־ = to (to(wards))
+14 יְסוֹד = [the] base of (foundation)
+15 הַמִּזְבֵּחַ = the altar
+
+## 2:29:13
+KO: 그리고 너는 내장을 덮고 있는 모든 기름과 간 위에 있는 엽상체(꺼풀)와 두 콩팥과 그것들 위에 있는 기름을 취하여, 그것을 제단 위에서 불살라라.
+1 וְלָקַחְתָּ = and you will take (to take)
+2 אֶת־ = <obj.>
+3 כָּל־ = all
+4 הַחֵלֶב = the fat
+5 הַמְכַסֶּה = which covers (to cover)
+6 אֶת־ = <obj.>
+7 הַקֶּרֶב = the entrails (entrails)
+8 וְאֵת = and <obj.>
+9 הַיֹּתֶרֶת = the lobe (lobe)
+10 עַל־ = on
+11 הַכָּבֵד = the liver (liver)
+12 וְאֵת = and <obj.>
+13 שְׁתֵּי = [the] two (two)
+14 הַכְּלָיֹת = the kidneys (kidney)
+15 וְאֶת־ = and <obj.>
+16 הַחֵלֶב = the fat
+17 אֲשֶׁר = which
+18 עֲלֵיהֶן = [is] on them
+19 וְהִקְטַרְתָּ = and you will make [them] smoke (to offer)
+20 הַמִּזְבֵּחָה = the altar towards (altar)

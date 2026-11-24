@@ -1,0 +1,875 @@
+## 26:11:22
+EN: And the cherubim lift up their wings, and the wheels [are] alongside them, and the glory of the God of Israel [is] over them above.
+1	וַיִּשְׂא֤וּ	and they lifted up	→ lift
+2	הַכְּרוּבִים֙	the cherubim	→ the cherubim
+3	אֶת־	<obj.>	→ —
+4	כַּנְפֵיהֶ֔ם	wings their	→ wings
+5	וְהָאֽוֹפַנִּ֖ים	and the wheels	→ and the wheels
+6	לְעֻמָּתָ֑ם	[were] <to> close by them	→ —
+7	וּכְב֧וֹד	and [the] glory of	→ and the glory of
+8	אֱלֹהֵֽי־	[the] God of	→ the God of
+9	יִשְׂרָאֵ֛ל	Israel	→ Israel
+10	עֲלֵיהֶ֖ם	[was] above them	→ above
+11	מִלְמָֽעְלָה	from to above <towards>	→ —
+
+## 26:12:9
+EN: “Son of man, have they not said to you—the house of Israel—the house of rebellion—What are you doing?
+1	בֶּן־	O son of	→ Son
+2	אָדָ֕ם	humankind	→ —
+3	הֲלֹ֨א	¿ not	→ —
+4	אָמְר֥וּ	have they said	→ said
+5	אֵלֶ֛יךָ	to you	→ —
+6	בֵּ֥ית	[the] house of	→ house
+7	יִשְׂרָאֵ֖ל	Israel	→ —
+8	בֵּ֣ית	[the] house of	→ house
+9	הַמֶּ֑רִי	<the> rebellion	→ —
+10	מָ֖ה	what?	→ —
+11	אַתָּ֥ה	[are] you	→ are you
+12	עֹשֶֽׂה	doing	→ doing
+
+## 26:12:23
+EN: Therefore say to them, Thus said Lord YHWH: I have caused this allegory to cease, || And they do not use it as an allegory in Israel again, || But speak to them: The days have drawn near, || And every vision has spoken.
+1	לָכֵ֞ן	<to> therefore	→ Therefore
+2	אֱמֹ֣ר	say	→ say
+3	אֲלֵיהֶ֗ם	to them	→ to them
+4	כֹּֽה־	thus	→ Thus
+5	אָמַר֮	he says	→ said
+6	אֲדֹנָ֣י	[the] Lord	→ Lord
+7	יְהוִה֒	Yahweh	→ —
+8	הִשְׁבַּ֙תִּי֙	I will make to cease	→ cease
+9	אֶת־	<obj.>	→ —
+10	הַמָּשָׁ֣ל	the proverb	→ —
+11	הַזֶּ֔ה	<the> this	→ this
+12	וְלֹֽא־	and not	→ —
+13	יִמְשְׁל֥וּ	people will use as a proverb	→ use
+14	אֹת֛וֹ	<obj.> it	→ it
+15	ע֖וֹד	again	→ again
+16	בְּיִשְׂרָאֵ֑ל	in Israel	→ in Israel
+17	כִּ֚י	that	→ —
+18	אִם־	except	→ —
+19	דַּבֵּ֣ר	speak	→ speak
+20	אֲלֵיהֶ֔ם	to them	→ to them
+21	קָֽרְבוּ֙	they have drawn near	→ drawn
+22	הַיָּמִ֔ים	the days	→ The days
+23	וּדְבַ֖ר	and [the] matter of	→ —
+24	כָּל־	every	→ every
+25	חָזֽוֹן	vision	→ vision
+
+## 26:15:4
+EN: Behold, it has been given to the fire for fuel, || The fire has eaten its two ends, || And its midst has been scorched! Is it profitable for work?
+1	הִנֵּ֥ה	there!	→ —
+2	לָאֵ֖שׁ	to the fire	→ to the fire
+3	נִתַּ֣ן	it is given	→ given
+4	לְאָכְלָ֑ה	for fuel	→ for fuel
+5	אֵת֩	<obj.>	→ —
+6	שְׁנֵ֨י	[the] two	→ two
+7	קְצוֹתָ֜יו	ends its	→ ends
+8	אָכְלָ֤ה	it consumes	→ —
+9	הָאֵשׁ֙	the fire	→ The fire
+10	וְתוֹכ֣וֹ	and [the] middle of it	→ —
+11	נָחָ֔ר	it is charred	→ —
+12	הֲיִצְלַ֖ח	¿ is it successful	→ —
+13	לִמְלָאכָֽה	for a product	→ —
+
+## 26:19:6
+EN: And he goes up and down in the midst of lions, || He has been a young lion, || And he learns to tear prey, || He has devoured man.
+1	וַיִּתְהַלֵּ֥ךְ	and it went about	→ goes
+2	בְּתוֹךְ־	in among	→ —
+3	אֲרָי֖וֹת	lions	→ lions
+4	כְּפִ֣יר	a young lion	→ a young lion
+5	הָיָ֑ה	it was	→ —
+6	וַיִּלְמַ֥ד	and it learned	→ learns
+7	לִטְרָף־	to tear	→ to tear
+8	טֶ֖רֶף	prey	→ prey
+9	אָדָ֥ם	human[s]	→ —
+10	אָכָֽל	it devoured	→ devoured
+
+## 26:31:9
+EN: I have made him beautiful in the multitude of his thin shoots, || And all trees of Eden that [are] in the garden of God envy him.
+1	יָפֶ֣ה	beautiful	→ beautiful
+2	עֲשִׂיתִ֔יו	I made it	→ made
+3	בְּרֹ֖ב	in [the] abundance of	→ —
+4	דָּֽלִיּוֹתָ֑יו	branches its	→ —
+5	וַיְקַנְאֻ֙הוּ֙	and they envied it	→ —
+6	כָּל־	all	→ all
+7	עֲצֵי־	[the] trees of	→ trees
+8	עֵ֔דֶן	Eden	→ Eden
+9	אֲשֶׁ֖ר	which	→ —
+10	בְּגַ֥ן	[were] in [the] garden of	→ of
+11	הָאֱלֹהִֽים׃ ס	<the> God	→ God
+
+## 26:32:30
+EN: There [are] princes of the north, || All of them, and every Zidonian, || Who have gone down with the pierced in their terror, || They are ashamed of their might, || And they lie uncircumcised with the pierced of the sword, || And they bear their shame with those going down to the pit.
+1	שָׁ֣מָּה	[are] there <towards>	→ There
+2	נְסִיכֵ֥י	princes of	→ princes of
+3	צָפ֛וֹן	[the] north	→ the north
+4	כֻּלָּ֖ם	all of them	→ All of them
+5	וְכָל־	and all	→ —
+6	צִֽדֹנִ֑י	[the] Sidonian[s]	→ —
+7	אֲשֶׁר־	who	→ Who
+8	יָרְד֣וּ	they have gone down	→ down
+9	אֶת־	with	→ with
+10	חֲלָלִ֗ים	[those] slain	→ those
+11	בְּחִתִּיתָ֤ם	in terror their	→ terror
+12	מִגְבֽוּרָתָם֙	from strength their	→ —
+13	בּוֹשִׁ֔ים	being ashamed	→ ashamed
+14	וַיִּשְׁכְּב֤וּ	and they lay	→ —
+15	עֲרֵלִים֙	uncircumcised	→ uncircumcised
+16	אֶת־	with	→ with
+17	חַלְלֵי־	[those] slain of	→ —
+18	חֶ֔רֶב	a sword	→ sword
+19	וַיִּשְׂא֥וּ	and they have borne	→ —
+20	כְלִמָּתָ֖ם	disgrace their	→ —
+21	אֶת־	with	→ with
+22	י֥וֹרְדֵי	[those who] go down of	→ down
+23	בֽוֹר	[the] pit	→ the pit
+
+## 26:33:24
+EN: “Son of man, the inhabitants of these ruins on the ground of Israel are speaking, saying, Abraham has been alone—and he possesses the land, and we [are] many—the land has been given to us for a possession.
+1	בֶּן־	O son of	→ Son
+2	אָדָ֗ם	humankind	→ —
+3	יֹ֠שְׁבֵי	[the] inhabitants of	→ the inhabitants of
+4	הֶחֳרָב֨וֹת	the waste places	→ —
+5	הָאֵ֜לֶּה	<the> these	→ these
+6	עַל־	on	→ on
+7	אַדְמַ֤ת	[the] land of	→ land
+8	יִשְׂרָאֵל֙	Israel	→ Israel
+9	אֹמְרִ֣ים	[are] saying	→ saying
+10	לֵאמֹ֔ר	<to> saying	→ —
+11	אֶחָד֙	one	→ —
+12	הָיָ֣ה	he was	→ —
+13	אַבְרָהָ֔ם	Abraham	→ Abraham
+14	וַיִּירַ֖שׁ	and he possessed	→ possesses
+15	אֶת־	<obj.>	→ —
+16	הָאָ֑רֶץ	the land	→ land
+17	וַאֲנַ֣חְנוּ	and we	→ and we
+18	רַבִּ֔ים	[are] many	→ —
+19	לָ֛נוּ	to us	→ to us
+20	נִתְּנָ֥ה	it has been given	→ given
+21	הָאָ֖רֶץ	the land	→ —
+22	לְמוֹרָשָֽׁה׃ ס	to a possession	→ possession
+
+## 26:36:5
+EN: Therefore, thus said Lord YHWH: Have I not, in the fire of My jealousy, || Spoken against the remnant of the nations, || And against Edom—all of it, || Who gave My land to themselves for a possession, || With the joy of the whole heart—with despite of soul, || For the sake of casting it out for a prey?
+1	לָכֵ֗ן	<to> therefore	→ Therefore
+2	כֹּֽה־	thus	→ thus
+3	אָמַר֮	he says	→ said
+4	אֲדֹנָ֣י	[the] Lord	→ Lord
+5	יְהוִה֒	Yahweh	→ —
+6	אִם־	if	→ —
+7	לֹ֠א	not	→ not
+8	בְּאֵ֨שׁ	in [the] fire of	→ in the fire of
+9	קִנְאָתִ֥י	jealousy my	→ jealousy
+10	דִבַּ֛רְתִּי	I have spoken	→ Spoken
+11	עַל־	on	→ —
+12	שְׁאֵרִ֥ית	[the] rest of	→ —
+13	הַגּוֹיִ֖ם	the nations	→ the nations
+14	וְעַל־	and on	→ —
+15	אֱד֣וֹם	Edom	→ —
+16	כֻּלָּ֑א	all of it	→ —
+17	אֲשֶׁ֣ר	which	→ —
+18	נָתְנֽוּ־	they made	→ —
+19	אֶת־	<obj.>	→ —
+20	אַרְצִ֣י׀	land my	→ land
+21	לָ֠הֶם	for themselves	→ themselves
+22	לְמ֨וֹרָשָׁ֜ה	into a possession	→ possession
+23	בְּשִׂמְחַ֤ת	with joy of	→ joy
+24	כָּל־	every	→ —
+25	לֵבָב֙	heart	→ —
+26	בִּשְׁאָ֣ט	with scorn of	→ —
+27	נֶ֔פֶשׁ	self	→ —
+28	לְמַ֥עַן	so that	→ —
+29	מִגְרָשָׁ֖הּ	pastureland its	→ —
+30	לָבַֽז	[becomes] <into> spoil	→ —
+
+## 26:40:33
+EN: and its little chambers, and its posts, and its arches [are] according to these measurements: and windows [are] in it and in its arches all around, the length—fifty cubits, and the breadth—twenty-five cubits;
+1	וְתָאָ֞יו	and chambers its	→ chambers
+2	וְאֵלָ֤יו	and pillars its	→ its
+3	וְאֵֽלַמָּיו֙	and porches its	→ its
+4	כַּמִּדּ֣וֹת	[were] according to the measurements	→ measurements
+5	הָאֵ֔לֶּה	<the> these	→ these
+6	וְחַלּוֹנ֥וֹת	and windows	→ and windows
+7	ל֛וֹ	[belonged] to it	→ —
+8	וּלְאֵלַמָּ֖יו	and to porches its	→ its
+9	סָבִ֣יב׀	all around	→ all around
+10	סָבִ֑יב	all around	→ —
+11	אֹ֚רֶךְ	[the] length	→ —
+12	חֲמִשִּׁ֣ים	[was] fifty	→ —
+13	אַמָּ֔ה	cubit[s]	→ cubits
+14	וְרֹ֕חַב	and [the] breadth	→ —
+15	חָמֵ֥שׁ	[was] five	→ —
+16	וְעֶשְׂרִ֖ים	and twenty	→ —
+17	אַמָּֽה	cubit[s]	→ cubits
+
+## 26:40:41
+EN: four tables [are] on this side and four tables on that side, at the side of the gate, eight tables on which they slaughter.
+1	אַרְבָּעָ֨ה	four	→ four
+2	שֻׁלְחָנ֜וֹת	tables	→ tables
+3	מִפֹּ֗ה	from here	→ —
+4	וְאַרְבָּעָ֧ה	and four	→ and four
+5	שֻׁלְחָנ֛וֹת	tables	→ tables
+6	מִפֹּ֖ה	from here	→ —
+7	לְכֶ֣תֶף	[were] to [the] side of	→ side
+8	הַשָּׁ֑עַר	the gate	→ the gate
+9	שְׁמוֹנָ֥ה	eight	→ eight
+10	שֻׁלְחָנ֖וֹת	tables	→ tables
+11	אֲלֵיהֶ֥ם	[which] to them	→ —
+12	יִשְׁחָֽטוּ	people slaughter	→ slaughter
+
+## 26:44:13
+EN: And they do not draw near to Me to act as My priest, and to draw near to any of My holy things, to the Holy of Holies, and they have borne their shame and their abominations that they have done,
+1	וְלֹֽא־	and not	→ —
+2	יִגְּשׁ֤וּ	they will draw near	→ draw
+3	אֵלַי֙	to me	→ to Me
+4	לְכַהֵ֣ן	to serve as priests	→ priest
+5	לִ֔י	<to> me	→ —
+6	וְלָגֶ֙שֶׁת֙	and to draw near	→ and to draw near
+7	עַל־	to	→ to
+8	כָּל־	all	→ —
+9	קָ֣דָשַׁ֔י	holy things my	→ things
+10	אֶל־	to	→ to
+11	קָדְשֵׁ֖י	[the] holy things of	→ Holy
+12	הַקְּדָשִׁ֑ים	the holy things	→ holy
+13	וְנָֽשְׂאוּ֙	and they will bear	→ —
+14	כְּלִמָּתָ֔ם	disgrace their	→ —
+15	וְתוֹעֲבוֹתָ֖ם	and abominations their	→ abominations
+16	אֲשֶׁ֥ר	which	→ —
+17	עָשֽׂוּ	they have done	→ they have done
+
+## 26:46:18
+EN: And the prince does not take from the people’s inheritance to oppress them—from their possession; he causes his sons to inherit out of his own possession, so that My people are not each scattered from his possession.”
+1	וְלֹא־	and not	→ —
+2	יִקַּ֨ח	he will take away	→ take
+3	הַנָּשִׂ֜יא	the prince	→ the prince
+4	מִנַּחֲלַ֣ת	any of [the] inheritance of	→ inheritance
+5	הָעָ֗ם	the people	→ people
+6	לְהֽוֹנֹתָם֙	to oppress them	→ oppress
+7	מֵאֲחֻזָּתָ֔ם	from possession their	→ possession
+8	מֵאֲחֻזָּת֖וֹ	some of own possession his	→ possession
+9	יַנְחִ֣ל	he will cause to inherit	→ inherit
+10	אֶת־	<obj.>	→ —
+11	בָּנָ֑יו	sons his	→ sons
+12	לְמַ֙עַן֙	so that	→ so that
+13	אֲשֶׁ֣ר	that	→ —
+14	לֹֽא־	not	→ not
+15	יָפֻ֣צוּ	they will be scattered	→ scattered
+16	עַמִּ֔י	people my	→ —
+17	אִ֖ישׁ	anyone	→ —
+18	מֵאֲחֻזָּתֽוֹ	from possession his	→ possession
+
+## 27:1:17
+EN: As for these four boys, God has given to them knowledge and understanding in every [kind of] literature, and wisdom; and Daniel has given instruction about every [kind of] vision and dreams.
+1	וְהַיְלָדִ֤ים	and the youths	→ —
+2	הָאֵ֙לֶּה֙	<the> these	→ these
+3	אַרְבַּעְתָּ֔ם	[the] four of them	→ four
+4	נָתַ֨ן	he gave	→ given
+5	לָהֶ֧ם	to them	→ to them
+6	הָֽאֱלֹהִ֛ים	<the> God	→ God
+7	מַדָּ֥ע	knowledge	→ knowledge
+8	וְהַשְׂכֵּ֖ל	and insight	→ —
+9	בְּכָל־	in all	→ —
+10	סֵ֣פֶר	writing	→ —
+11	וְחָכְמָ֑ה	and wisdom	→ and wisdom
+12	וְדָנִיֵּ֣אל	and Daniel	→ and Daniel
+13	הֵבִ֔ין	he understood	→ —
+14	בְּכָל־	<in> every	→ every
+15	חָז֖וֹן	vision	→ vision
+16	וַחֲלֹמֽוֹת	and dreams	→ and dreams
+
+## 28:12:7
+EN: Canaan! In his hand [are] balances of deceit! He has loved to oppress.
+1	כְּנַ֗עַן	Canaan	→ Canaan
+2	בְּיָד֛וֹ	[who are] in hand his	→ hand
+3	מֹאזְנֵ֥י	scales of	→ —
+4	מִרְמָ֖ה	deceit	→ deceit
+5	לַעֲשֹׁ֥ק	to defraud	→ —
+6	אָהֵֽב	he loves	→ loved
+
+## 29:3:20
+EN: And Judah dwells for all time, || And Jerusalem to generation and generation.
+1	וִיהוּדָ֖ה	and Judah	→ And Judah
+2	לְעוֹלָ֣ם	for ever	→ —
+3	תֵּשֵׁ֑ב	it will remain	→ —
+4	וִירוּשָׁלִַ֖ם	and Jerusalem	→ And Jerusalem
+5	לְד֥וֹר	to a generation	→ generation
+6	וָדֽוֹר	and a generation	→ generation
+
+## 30:2:7
+EN: Who are panting for the dust of the earth on the head of the poor, || And the way of the humble they turn aside, || And a man and his father go to the girl, || So as to defile My holy Name.
+1	הַשֹּׁאֲפִ֤ים	those [who] trample	→ —
+2	עַל־	on	→ on
+3	עֲפַר־	[the] dust of	→ the dust of
+4	אֶ֙רֶץ֙	[the] earth	→ the earth
+5	בְּרֹ֣אשׁ	on [the] head of	→ head
+6	דַּלִּ֔ים	poor [people]	→ poor
+7	וְדֶ֥רֶךְ	and [the] way of	→ And the way of
+8	עֲנָוִ֖ים	humble [people]	→ humble
+9	יַטּ֑וּ	they turn aside	→ they turn aside
+10	וְאִ֣ישׁ	and a man	→ And a man
+11	וְאָבִ֗יו	and father his	→ father
+12	יֵֽלְכוּ֙	they go	→ go
+13	אֶל־	into	→ —
+14	הַֽנַּעֲרָ֔ה	the young woman	→ —
+15	לְמַ֥עַן	so as	→ So as
+16	חַלֵּ֖ל	to profane	→ —
+17	אֶת־	<obj.>	→ —
+18	שֵׁ֥ם	[the] name of	→ Name
+19	קָדְשִֽׁי	holiness my	→ —
+
+## 30:2:11
+EN: And I raise of your sons for prophets, || And of your choice ones for Nazarites, || Is this not true, O sons of Israel?” A declaration of YHWH.
+1	וָאָקִ֤ים	and I raised up	→ —
+2	מִבְּנֵיכֶם֙	some of sons your	→ sons
+3	לִנְבִיאִ֔ים	to prophets	→ prophets
+4	וּמִבַּחוּרֵיכֶ֖ם	and some of young men your	→ —
+5	לִנְזִרִ֑ים	to Nazirites	→ —
+6	הַאַ֥ף	¿ also	→ —
+7	אֵֽין־	not	→ not
+8	זֹ֛את	[is] this	→ Is this
+9	בְּנֵ֥י	O people of	→ —
+10	יִשְׂרָאֵ֖ל	Israel	→ Israel
+11	נְאֻם־	[the] utterance of	→ —
+12	יְהוָֽה	Yahweh	→ —
+
+## 30:3:5
+EN: Does a bird fall into a snare of the earth, || And there is no trap for it? Does a snare go up from the ground, || And it does not capture prey?
+1	הֲתִפֹּ֤ל	¿ does it fall	→ fall
+2	צִפּוֹר֙	a bird	→ a bird
+3	עַל־	on	→ —
+4	פַּ֣ח	<the> bird-trap of	→ —
+5	הָאָ֔רֶץ	the earth	→ the earth
+6	וּמוֹקֵ֖שׁ	and [is] a snare	→ snare
+7	אֵ֣ין	there not	→ there
+8	לָ֑הּ	for it	→ for it
+9	הֲיַֽעֲלֶה־	¿ does it go up	→ go
+10	פַּח֙	a bird-trap	→ —
+11	מִן־	from	→ from
+12	הָ֣אֲדָמָ֔ה	the ground	→ the ground
+13	וְלָכ֖וֹד	and surely <catch>	→ —
+14	לֹ֥א	not	→ not
+15	יִלְכּֽוֹד	it catches [something]	→ —
+
+## 30:5:21
+EN: “I have hated—I have loathed your festivals, || And I am not refreshed by your restraints.
+1	שָׂנֵ֥אתִי	I hate	→ —
+2	מָאַ֖סְתִּי	I reject	→ —
+3	חַגֵּיכֶ֑ם	feasts your	→ —
+4	וְלֹ֥א	and not	→ —
+5	אָרִ֖יחַ	I delight	→ —
+6	בְּעַצְּרֹֽתֵיכֶֽם	in assemblies your	→ —
+
+## 30:6:6
+EN: Who are drinking with bowls of wine, || And anoint themselves [with] chief perfumes, || And have not been pained for the breach of Joseph.
+1	הַשֹּׁתִ֤ים	those [who] drink	→ drinking
+2	בְּמִזְרְקֵי֙	in bowls of	→ bowls
+3	יַ֔יִן	wine	→ wine
+4	וְרֵאשִׁ֥ית	and [the] best of	→ —
+5	שְׁמָנִ֖ים	oils	→ —
+6	יִמְשָׁ֑חוּ	they smear	→ —
+7	וְלֹ֥א	and not	→ —
+8	נֶחְל֖וּ	they were sickened	→ —
+9	עַל־	on	→ —
+10	שֵׁ֥בֶר	[the] ruin of	→ —
+11	יוֹסֵֽף	Joseph	→ Joseph
+
+## 32:4:6
+EN: And YHWH God appoints a gourd, and causes it to come up over Jonah, to be a shade over his head, to give deliverance to him from his affliction, and Jonah rejoices because of the gourd [with] great joy.
+1	וַיְמַ֣ן	and he appointed	→ appoints
+2	יְהוָֽה־	Yahweh	→ —
+3	אֱ֠לֹהִים	God	→ God
+4	קִיקָי֞וֹן	a plant	→ —
+5	וַיַּ֣עַל׀	and it went up	→ up
+6	מֵעַ֣ל	<from> over	→ over
+7	לְיוֹנָ֗ה	<to> Jonah	→ Jonah
+8	לִֽהְי֥וֹת	to be	→ to be
+9	צֵל֙	shade	→ shade
+10	עַל־	over	→ over
+11	רֹאשׁ֔וֹ	head his	→ head
+12	לְהַצִּ֥יל	to deliver	→ —
+13	ל֖וֹ	<to> <the> him	→ —
+14	מֵרָֽעָת֑וֹ	from distress his	→ —
+15	וַיִּשְׂמַ֥ח	and he rejoiced	→ rejoices
+16	יוֹנָ֛ה	Jonah	→ Jonah
+17	עַל־	on	→ —
+18	הַקִּֽיקָי֖וֹן	the plant	→ —
+19	שִׂמְחָ֥ה	a joy	→ joy
+20	גְדוֹלָֽה	great	→ great
+
+## 33:2:10
+EN: Rise and go, for this [is] not the rest, || Because of uncleanness it corrupts, || And corruption is powerful.
+1	ק֣וּמוּ	arise	→ —
+2	וּלְכ֔וּ	and go	→ and go
+3	כִּ֥י	for	→ for
+4	לֹא־	not	→ not
+5	זֹ֖את	this	→ this
+6	הַמְּנוּחָ֑ה	[is] <the> resting place	→ rest
+7	בַּעֲב֥וּר	<in> because	→ Because
+8	טָמְאָ֛ה	it has become unclean	→ —
+9	תְּחַבֵּ֖ל	it will destroy	→ —
+10	וְחֶ֥בֶל	and [the] destruction	→ —
+11	נִמְרָֽץ	[will be] grievous	→ —
+
+## 33:4:10
+EN: Be pained, and bring forth, O daughter of Zion, || As a travailing woman, || For now you go forth from the city, || And you have dwelt in the field, || And you have gone to Babylon, || There you are delivered, || There YHWH redeems you from the hand of your enemies.
+1	ח֧וּלִי	writhe in pain	→ pained
+2	וָגֹ֛חִי	and burst forth	→ forth
+3	בַּת־	O daughter of	→ O daughter of
+4	צִיּ֖וֹן	Zion	→ Zion
+5	כַּיּֽוֹלֵדָ֑ה	like <the> [woman] giving birth	→ woman
+6	כִּֽי־	for	→ For
+7	עַתָּה֩	now	→ now
+8	תֵצְאִ֨י	you will go out	→ go
+9	מִקִּרְיָ֜ה	from [the] town	→ —
+10	וְשָׁכַ֣נְתְּ	and you will dwell	→ dwelt
+11	בַּשָּׂדֶ֗ה	in the open country	→ —
+12	וּבָ֤את	and you will go	→ gone
+13	עַד־	to	→ to
+14	בָּבֶל֙	Babylon	→ Babylon
+15	שָׁ֣ם	there	→ There
+16	תִּנָּצֵ֔לִי	you will be delivered	→ delivered
+17	שָׁ֚ם	there	→ There
+18	יִגְאָלֵ֣ךְ	he will redeem you	→ redeems
+19	יְהוָ֔ה	Yahweh	→ —
+20	מִכַּ֖ף	from [the] hand of	→ from the hand of
+21	אֹיְבָֽיִךְ	enemies your	→ enemies
+
+## 33:5:1
+EN: Now gather yourself together, O daughter of troops, || He has laid a siege against us, || They strike [the] judge of Israel on the cheek with a rod.
+1	עַתָּה֙	now	→ Now
+2	תִּתְגֹּדְדִ֣י	you will cut yourself	→ yourself
+3	בַת־	O daughter of	→ O daughter of
+4	גְּד֔וּד	troop[s]	→ troops
+5	מָצ֖וֹר	a siege	→ a siege
+6	שָׂ֣ם	someone has set	→ —
+7	עָלֵ֑ינוּ	on us	→ —
+8	בַּשֵּׁ֙בֶט֙	with <the> rod	→ rod
+9	יַכּ֣וּ	they will strike	→ strike
+10	עַֽל־	on	→ on
+11	הַלְּחִ֔י	the cheek	→ the cheek
+12	אֵ֖ת	<obj.>	→ —
+13	שֹׁפֵ֥ט	[the] judge of	→ of
+14	יִשְׂרָאֵֽל ס	Israel	→ Israel
+
+## 34:2:11
+EN: Where [is] the habitation of lionesses? And a feeding-place it [is] for young lions || Where a lion has walked, an old lion, || A lion’s whelp, and there is none troubling.
+1	אַיֵּה֙	where?	→ Where
+2	מְע֣וֹן	[is the] dwelling place of	→ —
+3	אֲרָי֔וֹת	lions	→ lions
+4	וּ/מִרְעֶ֥ה	and [is] pasture	→ —
+5	ה֖וּא	it	→ it
+6	לַ/כְּפִרִ֑ים	for <the> young lions	→ young
+7	אֲשֶׁ֣ר	where	→ Where
+8	הָלַךְ֩	it walked	→ walked
+9	אַרְיֵ֨ה	lion	→ lion
+10	לָבִ֥יא	lioness	→ —
+11	שָׁ֛ם	there	→ there
+12	גּ֥וּר	cub of	→ —
+13	אַרְיֵ֖ה	lion	→ lion
+14	וְ/אֵ֥ין	and there not	→ —
+15	מַחֲרִֽיד	[was one who] disturbed [them]	→ —
+
+## 38:3:10
+EN: In that day—a declaration of YHWH of Hosts, || You call, each to his neighbor, || To the place of the vine, || And to the place of the fig tree!”
+1	בַּיּ֣וֹם	in the day	→ —
+2	הַה֗וּא	<the> that	→ —
+3	נְאֻם֙	[the] utterance of	→ —
+4	יְהוָ֣ה	Yahweh	→ —
+5	צְבָא֔וֹת	of hosts	→ of Hosts
+6	תִּקְרְא֖וּ	you will invite	→ —
+7	אִ֣ישׁ	each	→ each
+8	לְרֵעֵ֑הוּ	<to> neighbor his	→ neighbor
+9	אֶל־	to	→ To
+10	תַּ֥חַת	under	→ —
+11	גֶּ֖פֶן	a vine	→ vine
+12	וְאֶל־	and to	→ And to
+13	תַּ֥חַת	under	→ —
+14	תְּאֵנָֽה	a fig tree	→ tree
+
+## 38:9:15
+EN: YHWH of Hosts covers them over, || And they consumed, and subdued sling-stones, || Indeed, they have drunk, || They have made a noise as wine, || And they have been full as a bowl, || As corners of an altar.
+1	יְהוָ֣ה	Yahweh	→ —
+2	צְבָאוֹת֮	of hosts	→ of Hosts
+3	יָגֵ֣ן	he will defend	→ —
+4	עֲלֵיהֶם֒	<on> them	→ —
+5	וְאָכְל֗וּ	and they will eat	→ —
+6	וְכָֽבְשׁוּ֙	and they will subdue	→ —
+7	אַבְנֵי־	stones of	→ —
+8	קֶ֔לַע	a sling	→ —
+9	וְשָׁת֥וּ	and they will drink	→ —
+10	הָמ֖וּ	they will be in an uproar	→ —
+11	כְּמוֹ־	like	→ —
+12	יָ֑יִן	wine	→ wine
+13	וּמָֽלְאוּ֙	and they will be full	→ full
+14	כַּמִּזְרָ֔ק	like <the> bowl	→ bowl
+15	כְּזָוִיּ֖וֹת	like [the] corners of	→ corners
+16	מִזְבֵּֽחַ	[the] altar	→ altar
+
+## 39:3:6
+EN: “For I, YHWH, have not changed, || And you, the sons of Jacob, || You have not been consumed.
+1	כִּ֛י	that	→ —
+2	אֲנִ֥י	I	→ I
+3	יְהוָ֖ה	Yahweh	→ —
+4	לֹ֣א	not	→ not
+5	שָׁנִ֑יתִי	I change	→ —
+6	וְאַתֶּ֥ם	and you	→ And you
+7	בְּנֵֽי־	[the] descendants of	→ —
+8	יַעֲקֹ֖ב	Jacob	→ Jacob
+9	לֹ֥א	not	→ not
+10	כְלִיתֶֽם	you have come to an end	→ —
+
+## 40:2:9
+EN: And they, having heard the king, departed, and behold, the star, that they saw in the east, went before them, until, having come, it stood over where the Child was.
+1	Οἱ	<the>	→ —
+2	δὲ	And	→ And
+3	ἀκούσαντες	having heard	→ having heard
+4	τοῦ	the	→ the
+5	βασιλέως	king	→ king
+6	ἐπορεύθησαν	they went away.	→ went
+7	καὶ	and	→ and
+8	ἰδοὺ	behold	→ behold
+9	ὁ	the	→ the
+10	ἀστὴρ	star	→ star
+11	ὃν	which	→ —
+12	εἶδον	they saw	→ they saw
+13	ἐν	in	→ in
+14	τῇ	the	→ the
+15	ἀνατολῇ	east	→ east
+16	προῆγεν	was going before	→ before
+17	αὐτοὺς	them	→ them
+18	ἕως	until	→ until
+19	ἐλθὼν	having arrived	→ having
+20	ἐστάθη	it was stood	→ stood
+21	ἐπάνω	over	→ over
+22	οὗ	where	→ where
+23	ἦν	was	→ was
+24	τὸ	the	→ the
+25	παιδίον	Child.	→ Child
+
+## 40:14:1
+EN: At that time Herod the tetrarch heard the fame of Jesus,
+1	Ἐν	At	→ At
+2	ἐκείνῳ	that [very]	→ —
+3	τῷ	<the>	→ —
+4	καιρῷ	time	→ time
+5	ἤκουσεν	heard	→ heard
+6	Ἡρῴδης	Herod	→ Herod
+7	ὁ	the	→ the
+8	τετραάρχης	tetrarch	→ tetrarch
+9	τὴν	the	→ the
+10	ἀκοὴν	news	→ —
+11	Ἰησοῦ	of Jesus	→ of Jesus
+
+## 40:14:27
+EN: and immediately Jesus spoke to them, saying, “Take courage! I AM; do not be afraid.”
+1	εὐθὺς	Immediately	→ immediately
+2	δὲ	now	→ —
+3	ἐλάλησεν	spoke	→ spoke
+4	ὁ	<the>	→ —
+5	Ἰησοῦς	Jesus	→ Jesus
+6	αὐτοῖς	to them	→ to them
+7	λέγων·	saying;	→ saying
+8	θαρσεῖτε·	Take courage!	→ Take courage
+9	ἐγώ	I myself	→ —
+10	εἰμι	it is,	→ —
+11	μὴ	not	→ not
+12	φοβεῖσθε	do fear.	→ —
+
+## 40:16:4
+EN: An evil and adulterous generation seeks a sign, and a sign will not be given to it, except the sign of Jonah the prophet”; and having left them He went away.
+1	γενεὰ	A generation	→ generation
+2	πονηρὰ	evil	→ evil
+3	καὶ	and	→ and
+4	μοιχαλὶς	adulterous	→ adulterous
+5	σημεῖον	a sign	→ a sign
+6	ἐπιζητεῖ·	seeks;	→ seeks
+7	καὶ	and	→ and
+8	σημεῖον	a sign	→ a sign
+9	οὐ	not	→ not
+10	δοθήσεται	will be given	→ given
+11	αὐτῇ	to it	→ to it
+12	εἰ	only	→ —
+13	μὴ	except	→ except
+14	τὸ	the	→ the
+15	σημεῖον	sign	→ sign
+16	Ἰωνᾶ	of Jonah	→ of Jonah
+17	τοῦ	<the>	→ —
+18	προφήτου	prophet.	→ prophet
+19	καὶ	And	→ and
+20	καταλιπὼν	having left	→ having left
+21	αὐτοὺς	them	→ them
+22	ἀπῆλθεν	He went away.	→ He went away
+
+## 40:16:18
+EN: And I also say to you that you are Peter, and on this rock I will build My Assembly, and [the] gates of Hades will not prevail against it;
+1	κἀγὼ	I myself also	→ also
+2	δέ	now	→ —
+3	σοι	to you	→ to you
+4	λέγω	say	→ say
+5	ὅτι	that	→ that
+6	σὺ	you yourself	→ —
+7	εἶ	are	→ are
+8	Πέτρος	Peter	→ Peter
+9	καὶ	and	→ and
+10	ἐπὶ	on	→ on
+11	ταύτῃ	this	→ this
+12	τῇ	the	→ the
+13	πέτρᾳ	rock	→ rock
+14	οἰκοδομήσω	I will build	→ I will build
+15	μου	My	→ My
+16	τὴν	<the>	→ —
+17	ἐκκλησίαν	church,	→ —
+18	καὶ	and	→ and
+19	πύλαι	[the] gates	→ gates
+20	ᾅδου	of hades	→ of Hades
+21	οὐ	not	→ not
+22	κατισχύσουσιν	will prevail against	→ prevail
+23	αὐτῆς	it.	→ it
+
+## 40:17:23
+EN: and they will kill Him, and the third day He will rise,” and they were exceedingly sorry.
+1	καὶ	and	→ and
+2	ἀποκτενοῦσιν	they will kill	→ they will kill
+3	αὐτόν	Him,	→ Him
+4	καὶ	and	→ and
+5	τῇ	on the	→ —
+6	τρίτῃ	third	→ third
+7	ἡμέρᾳ	day	→ day
+8	ἐγερθήσεται	He will be raised up.	→ —
+9	καὶ	And	→ and
+10	ἐλυπήθησαν	they were grieved	→ —
+11	σφόδρα	deeply.	→ —
+
+## 40:25:39
+EN: And when did we see You ailing or in prison, and we came to You?
+1	πότε	When	→ when
+2	δέ	now	→ —
+3	σε	You	→ You
+4	εἴδομεν	saw we	→ see
+5	ἀσθενοῦντα	ailing	→ ailing
+6	ἢ	or	→ or
+7	ἐν	in	→ in
+8	φυλακῇ	prison	→ prison
+9	καὶ	and	→ and
+10	ἤλθομεν	came	→ came
+11	πρός	to	→ to
+12	σε;	You?	→ You
+
+## 41:1:9
+EN: And it came to pass in those days, Jesus came from Nazareth of Galilee, and was immersed by John in the Jordan;
+1	Καὶ	And	→ And
+2	ἐγένετο	it came to pass	→ it came to pass
+3	ἐν	in	→ in
+4	ἐκείναις	those	→ those
+5	ταῖς	<the>	→ —
+6	ἡμέραις	days	→ days
+7	ἦλθεν	[that] came	→ came
+8	Ἰησοῦς	Jesus	→ Jesus
+9	ἀπὸ	from	→ from
+10	Ναζαρὲτ	Nazareth	→ Nazareth
+11	τῆς	<the>	→ —
+12	Γαλιλαίας	of Galilee	→ of Galilee
+13	καὶ	and	→ and
+14	ἐβαπτίσθη	was baptized	→ —
+15	εἰς	in	→ in
+16	τὸν	the	→ the
+17	Ἰορδάνην	Jordan	→ Jordan
+18	ὑπὸ	by	→ by
+19	Ἰωάννου	John.	→ John
+
+## 41:2:10
+EN: And that you may know that the Son of Man has authority on the earth to forgive sins—(He says to the paralytic)—
+1	Ἵνα	That	→ that
+2	δὲ	however	→ —
+3	εἰδῆτε	you may know	→ you may know
+4	ὅτι	that	→ that
+5	ἐξουσίαν	authority	→ authority
+6	ἔχει	has	→ has
+7	ὁ	the	→ the
+8	υἱὸς	Son	→ Son
+9	τοῦ	<the>	→ —
+10	ἀνθρώπου	of Man	→ of Man
+11	ἀφιέναι	to forgive	→ to forgive
+12	ἁμαρτίας	sins	→ —
+13	ἐπὶ	on	→ on
+14	τῆς	the	→ the
+15	γῆς	earth	→ earth
+16	λέγει	He says	→ says
+17	τῷ	to the	→ to the
+18	παραλυτικῷ·	paralytic;	→ paralytic
+
+## 41:3:13
+EN: And He goes up to the mountain, and calls near whom He willed, and they went away to Him;
+1	Καὶ	And	→ And
+2	ἀναβαίνει	He goes up	→ He goes up
+3	εἰς	on	→ —
+4	τὸ	the	→ the
+5	ὄρος	mountain	→ mountain
+6	καὶ	and	→ and
+7	προσκαλεῖται	calls near	→ calls near
+8	οὓς	those whom	→ whom
+9	ἤθελεν	he was wanting	→ —
+10	αὐτός	Himself,	→ —
+11	καὶ	and	→ and
+12	ἀπῆλθον	they went	→ they went
+13	πρὸς	to	→ to
+14	αὐτόν	Him.	→ Him
+
+## 41:4:24
+EN: And He said to them, “Take heed what you hear; in what measure you measure, it will be measured to you; and to you who hear it will be added;
+1	Καὶ	And	→ And
+2	ἔλεγεν	He was saying	→ said
+3	αὐτοῖς·	to them;	→ to them
+4	βλέπετε	do take heed	→ Take
+5	τί	what	→ what
+6	ἀκούετε	you hear.	→ you hear
+7	ἐν	With	→ —
+8	ᾧ	what	→ what
+9	μέτρῳ	measure	→ measure
+10	μετρεῖτε	you measure	→ measure
+11	μετρηθήσεται	it will be measured	→ it will be measured
+12	ὑμῖν	to you	→ to you
+13	καὶ	and	→ and
+14	προστεθήσεται	more will be added	→ added
+15	ὑμῖν	to you	→ to you
+16	τοῖς	who	→ who
+17	ἀκούουσιν	are hearing:.	→ hear
+
+## 41:6:54
+EN: and they having come forth out of the boat, immediately having recognized Him,
+1	καὶ	And	→ and
+2	ἐξελθόντων	when were exiting	→ —
+3	αὐτῶν	they	→ they
+4	ἐκ	out of	→ out of
+5	τοῦ	the	→ the
+6	πλοίου	boat	→ boat
+7	εὐθὺς	immediately	→ immediately
+8	ἐπιγνόντες	having recognized	→ having recognized
+9	αὐτὸν	Him	→ Him
+
+## 41:8:7
+EN: And they had a few small fishes, and having blessed, He said to set them also before [them];
+1	καὶ	And	→ And
+2	εἶχον	they had	→ they had
+3	ἰχθύδια	small fish	→ small fishes
+4	ὀλίγα·	a few;	→ a few
+5	καὶ	And	→ and
+6	εὐλογήσας	having blessed	→ having blessed
+7	αὐτὰ	them	→ them
+8	εἶπεν	He ordered	→ —
+9	καὶ	also	→ also
+10	ταῦτα	these	→ —
+11	παρατιθέναι	to be set before [them].	→ before
+
+## 41:8:21
+EN: And He said to them, “How do you not understand?”
+1	καὶ	And	→ And
+2	ἔλεγεν	He was saying	→ said
+3	αὐτοῖς·	to them;	→ to them
+4	οὔπω	Not yet	→ —
+5	πῶς	how	→ How
+6	συνίετε;	do you understand?	→ understand
+
+## 42:1:63
+EN: and having asked for a tablet, he wrote, saying, “John is his name”; and they all wondered;
+1	καὶ	And	→ and
+2	αἰτήσας	having asked for	→ having asked for
+3	πινακίδιον	a writing tablet	→ tablet
+4	ἔγραψεν	he wrote	→ he wrote
+5	λέγων·	saying;	→ saying
+6	Ἰωάννης	John	→ John
+7	ἐστὶν	is	→ is
+8	τὸ	the	→ —
+9	ὄνομα	name	→ name
+10	αὐτοῦ	of him.	→ —
+11	καὶ	And	→ and
+12	ἐθαύμασαν	they marveled	→ —
+13	πάντες	all.	→ all
+
+## 42:1:72
+EN: To do kindness with our fathers, || And to be mindful of His holy covenant,
+1	ποιῆσαι	to fulfill	→ —
+2	ἔλεος	mercy	→ —
+3	μετὰ	toward	→ —
+4	τῶν	the	→ —
+5	πατέρων	fathers	→ fathers
+6	ἡμῶν	of us,	→ —
+7	καὶ	and	→ And
+8	μνησθῆναι	to remember	→ —
+9	διαθήκης	[the] covenant	→ covenant
+10	ἁγίας	holy	→ holy
+11	αὐτοῦ	of Him,	→ —
+
+## 42:2:5
+EN: to register himself with Mary his betrothed wife, being with Child.
+1	ἀπογράψασθαι	to register	→ to register
+2	σὺν	with	→ with
+3	Μαριὰμ	Mary	→ Mary
+4	τῇ	who [was]	→ —
+5	ἐμνηστευμένῃ	betrothed	→ betrothed
+6	αὐτῷ	to him	→ —
+7	γυναικί	wife	→ wife
+8	οὔσῃ	she being	→ being
+9	ἐγκύῳ	with child.	→ with Child
+
+## 42:4:13
+EN: And having ended all temptation, the Devil departed from Him until a convenient season.
+1	καὶ	And	→ And
+2	συντελέσας	having finished	→ having
+3	πάντα	every	→ —
+4	πειρασμὸν	temptation	→ temptation
+5	ὁ	the	→ the
+6	διάβολος	devil	→ Devil
+7	ἀπέστη	departed	→ departed
+8	ἀπ᾽	from	→ from
+9	αὐτοῦ	Him	→ Him
+10	ἄχρι	until	→ until
+11	καιροῦ	an opportune time.	→ —
+
+## 42:5:38
+EN: but new wine is to be put into new skins, and both are preserved together;
+1	ἀλλ᾽	But	→ but
+2	οἶνον	wine	→ wine
+3	νέον	new	→ new
+4	εἰς	into	→ into
+5	ἀσκοὺς	wineskins	→ —
+6	καινοὺς	fresh	→ —
+7	βλητέον	must be put	→ put
+8	καὶ	and	→ and
+9	ἀμφότεροι	both	→ both
+10	συντηροῦνται	are preserved.	→ are preserved
+
+## 42:6:18
+EN: who came to hear Him and to be healed of their diseases, [gathered]. And those harassed by unclean spirits [also gathered] and were healed.
+1	καὶ	[18] And	→ —
+2	οἱ	those	→ those
+3	ἐνοχλούμενοι	being troubled	→ —
+4	ἀπὸ	with	→ —
+5	πνευμάτων	spirits	→ spirits
+6	ἀκαθάρτων	unclean	→ unclean
+7	καὶ	and	→ and
+8	ἐθεραπεύοντο	were healed.	→ were healed
+
+## 42:7:37
+EN: and behold, a woman in the city, who was a sinner, having known that He reclines in the house of the Pharisee, having provided an alabaster box of ointment,
+1	καὶ	And	→ and
+2	ἰδοὺ	behold	→ behold
+3	γυνὴ	a woman	→ a woman
+4	ἥτις	who	→ who
+5	ἦν	was	→ was
+6	ἐν	in	→ in
+7	τῇ	the	→ the
+8	πόλει	city	→ city
+9	ἁμαρτωλός	a sinner.	→ a sinner
+10	καὶ	And	→ —
+11	ἐπιγνοῦσα	she having known	→ known
+12	ὅτι	that	→ that
+13	κατάκειται	reclines back	→ reclines
+14	ἐν	in	→ in
+15	τῇ	the	→ the
+16	οἰκίᾳ	house	→ house
+17	τοῦ	of the	→ —
+18	Φαρισαίου	Pharisee,	→ Pharisee
+19	κομίσασα	having taken	→ having
+20	ἀλάβαστρον	an alabaster flask	→ alabaster
+21	μύρου	of fragrant oil	→ —

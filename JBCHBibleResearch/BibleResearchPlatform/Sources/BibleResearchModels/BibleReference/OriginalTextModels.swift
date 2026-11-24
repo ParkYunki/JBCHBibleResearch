@@ -99,3 +99,20 @@ public struct LiteralTranslationInfo: Sendable, Hashable, Identifiable {
     }
 }
 
+/// [2026-11-02 interlin1] 원어 단어(Strong 번호) 하나가 쓰인 절 — 원문 정보 화면 "쓰인 구절" 목록의 한 줄.
+/// `forms`: 그 절에서 쓰인 원어 형태(그 절에 처음 나온 순서, 중복 없음). `OriginalTextStore.occurrences(strongCode:)`가 만든다.
+public struct OriginalWordOccurrence: Sendable, Hashable, Identifiable {
+    public var id: String { "\(bookId).\(chapter).\(verse)" }
+
+    public let bookId: Int
+    public let chapter: Int
+    public let verse: Int
+    public let forms: [String]
+
+    public init(bookId: Int, chapter: Int, verse: Int, forms: [String]) {
+        self.bookId = bookId
+        self.chapter = chapter
+        self.verse = verse
+        self.forms = forms
+    }
+}

@@ -1,0 +1,975 @@
+## 13:18:10
+KO: 그리고 그(도우)가 그의 아들 하도람을 다윗 왕에게 보내어 그에게 안부를 묻고 그(다윗)를 축복하게 하니, 이는 하닷에셀이 도우와 여러 번 전쟁하였을 때에 그(다윗)가 하닷에셀을 쳐서 그를 쳐부수었기 때문이라. 그(하도람)가 금과 은과 놋의 모든 기명을 가져왔더라.
+1 וַיִּשְׁלַח = and he sent (to send)
+2 אֶת־ = <obj.> ([Obj.])
+3 הֲדוֹרָם־ = Hadoram
+4 בְּנוֹ = son his (son)
+5 אֶל־ = to (to(wards))
+6 הַמֶּלֶךְ־ = the king (king)
+7 דָּוִיד = David
+8 לִשְׁאָל = to ask
+9 לוֹ = of him
+10 לְשָׁלוֹם = to welfare (peace)
+11 וּלְבָרֲכוֹ = and to bless him (to bless)
+12 עַל = on (upon)
+13 אֲשֶׁר = that (which)
+14 נִלְחַם = he had fought (to fight)
+15 בַּהֲדַדְעֶזֶר = against Hadadezer
+16 וַיַּכֵּהוּ = and he had defeated him (to smite)
+17 כִּי־ = for
+18 אִישׁ = <the> man of (man)
+19 מִלְחֲמוֹת = <the> wars of (battle)
+20 תֹּעוּ = Tou (Toi)
+21 הָיָה = he was (to be)
+22 הֲדַדְעָזֶר = Hadadezer
+23 וְכֹל = and all (all)
+24 כְּלֵי = articles of (article|utensil)
+25 זָהָב = gold
+26 וָכֶסֶף = and silver (silver)
+27 וּנְחֹשֶׁת = and bronze (bronze)
+
+## 13:18:11
+KO: 다윗 왕은 그것들 또한 여호와께 거룩하게 구별하여 드렸는데, 그가 모든 나라들, 곧 에돔과 모압과 암몬 자손과 블레셋 사람들과 아말렉에게서 취한 은과 금과 함께 하였다.
+1 גַּם־ = also
+2 אֹתָם = <obj.> them ([Obj.])
+3 הִקְדִּישׁ = he consecrated (to consecrate)
+4 הַמֶּלֶךְ = the king (king)
+5 דָּוִיד = David
+6 לַיהוָה = to Yahweh (LORD)
+7 עִם־ = with
+8 הַכֶּסֶף = the silver (silver)
+9 וְהַזָּהָב = and the gold (gold)
+10 אֲשֶׁר = which
+11 נָשָׂא = he had taken away (to lift)
+12 מִכָּל־ = from all (all)
+13 הַגּוֹיִם = the nations (nation)
+14 מֵאֱדוֹם = from Edom (Edom)
+15 וּמִמּוֹאָב = and from Moab (Moab)
+16 וּמִבְּנֵי = and from [the] people of (son)
+17 עַמּוֹן = Ammon
+18 וּמִפְּלִשְׁתִּים = and from [the] Philistines (Philistine)
+19 וּמֵעֲמָלֵק = and from Amalek (Amalek)
+
+## 13:18:12
+KO: 그리고 스루야의 아들 아비새가 소금 골짜기에서 에돔 사람 만 팔천을 쳐 죽였다.
+1 וְאַבְשַׁי = and Abishai (Abishai)
+2 בֶּן־ = [the] son of (son)
+3 צְרוּיָה = Zeruiah
+4 הִכָּה = he struck down (to smite)
+5 אֶת־ = <obj.> ([Obj.])
+6 אֱדוֹם = Edom
+7 בְּגֵיא = in [the] Valley of (valley)
+8 הַמֶּלַח = <the> Salt (of Salt)
+9 שְׁמוֹנָה = eight- (eight)
+10 עָשָׂר = teen (ten)
+11 אָלֶף = thousand
+
+## 13:18:13
+KO: 그리고 그가 에돔에 수비대들을 두니, 모든 에돔이 다윗에게 종들이 되었더라. 그리고 여호와께서 다윗이 가는 모든 곳에서 그를 구원하셨더라.
+1 וַיָּשֶׂם = and he put (to set)
+2 בֶּאֱדוֹם = in Edom
+3 נְצִיבִים = garrisons (garrison)
+4 וַיִּהְיוּ = and they became (to be)
+5 כָל־ = all
+6 אֱדוֹם = Edom
+7 עֲבָדִים = subjects (servant;_slave)
+8 לְדָוִיד = of David
+9 וַיּוֹשַׁע = and he gave victory to (to save)
+10 יְהוָה = Yahweh (LORD)
+11 אֶת־ = <obj.> ([Obj.])
+12 דָּוִיד = David
+13 בְּכֹל = in every
+14 אֲשֶׁר = where (which)
+15 הָלָךְ = he went (to go)
+
+## 13:18:14
+KO: 다윗은 온 이스라엘 위에서 왕이 되었고, 그의 모든 백성에게 공의와 정의를 행하고 있었다.
+1 וַיִּמְלֹךְ = and he reigned (to reign)
+2 דָּוִיד = David
+3 עַל־ = over (upon)
+4 כָּל־ = all
+5 יִשְׂרָאֵל = Israel
+6 וַיְהִי = and he was (to be)
+7 עֹשֶׂה = doing (to make)
+8 מִשְׁפָּט = justice
+9 וּצְדָקָה = and righteousness (righteousness)
+10 לְכָל־ = for all
+11 עַמּוֹ = people his (people)
+
+## 13:18:15
+KO: 그리고 요압은 스루야의 아들이며, 군대 위에 있었고, 그리고 여호사밧은 아힐룻의 아들이며, 기록관이었다.
+1 וְיוֹאָב = and Joab (Joab)
+2 בֶּן־ = [the] son of
+3 צְרוּיָה = Zeruiah
+4 עַל־ = [was] over (upon)
+5 הַצָּבָא = the army (army)
+6 וִיהוֹשָׁפָט = and Jehoshaphat (Jehoshaphat)
+7 בֶּן־ = [the] son of
+8 אֲחִילוּד = Ahilud
+9 מַזְכִּיר = [was the] recorder (to remember)
+
+## 13:18:16
+KO: 그리고 사독은 아히둡의 아들이고, 아비멜렉은 아비아달의 아들이며, 제사장들이었다. 그리고 사우사는 서기관이었다.
+1 וְצָדוֹק = and Zadok (Zadok)
+2 בֶּן־ = [the] son of
+3 אֲחִיטוּב = Ahitub
+4 וַאֲבִימֶלֶךְ = and Abimelech (Ahimelech)
+5 בֶּן־ = [the] son of
+6 אֶבְיָתָר = Abiathar
+7 כֹּהֲנִים = [were] priests (priest)
+8 וְשַׁוְשָׁא = and Shavsha (Shavsha)
+9 סוֹפֵר = [was the] scribe (secretary)
+
+## 13:18:17
+KO: 그리고 여호야다의 아들 브나야는 그렛 사람과 블렛 사람 위에 있었고, 다윗의 아들들은 왕의 곁에서 첫째들이었더라.
+1 וּבְנָיָהוּ = and Benaiah (Benaiah)
+2 בֶּן־ = [the] son of
+3 יְהוֹיָדָע = Jehoiada
+4 עַל־ = [was] over (upon)
+5 הַכְּרֵתִי = the Kerethite[s] (Cherethite)
+6 וְהַפְּלֵתִי = and the Pelethite[s] (Pelethite)
+7 וּבְנֵי־ = and [the] sons of
+8 דָוִיד = David
+9 הָרִאשֹׁנִים = [were] the first (first)
+10 לְיַד = to [the] side of (hand)
+11 הַמֶּלֶךְ פ = the king (king)
+
+## 13:19:1
+KO: 그리고 그 후에 암몬 자손의 왕 나하스가 죽었고, 그의 아들이 그를 대신하여 왕이 되었다.
+1 וַיְהִי = and it was (to be)
+2 אַחֲרֵי־ = after
+3 כֵן = thus (so)
+4 וַיָּמָת = and he died (to die)
+5 נָחָשׁ = Nahash
+6 מֶלֶךְ = [the] king of (king)
+7 בְּנֵי־ = [the] people of
+8 עַמּוֹן = Ammon
+9 וַיִּמְלֹךְ = and he reigned (to reign)
+10 בְּנוֹ = son his
+11 תַּחְתָּיו = in place of him (underneath)
+
+## 13:19:2
+KO: 다윗이 말하였다. "내가 나하스의 아들 하눈에게 자애를 베풀리라. 이는 그의 아버지가 내게 자애를 베풀었기 때문이다." 그리고 다윗은 그의 아버지를 대신하여 그를 위로하기 위해 사자들을 보냈다. 다윗의 종들이 암몬 자손의 땅에 이르러 하눈에게 나아가 그를 위로하였다.
+1 וַיֹּאמֶר = and he said (to say)
+2 דָּוִיד = David
+3 אֶעֱשֶׂה־ = I will do
+4 חֶסֶד = loyalty
+5 עִם־ = with
+6 חָנוּן = Hanun
+7 בֶּן־ = [the] son of
+8 נָחָשׁ = Nahash
+9 כִּי־ = for
+10 עָשָׂה = he did
+11 אָבִיו = father his
+12 עִמִּי = with me
+13 חֶסֶד = loyalty
+14 וַיִּשְׁלַח = and he sent (to send)
+15 דָּוִיד = David
+16 מַלְאָכִים = messengers (messenger)
+17 לְנַחֲמוֹ = to comfort him
+18 עַל־ = on (upon)
+19 אָבִיו = father his
+20 וַיָּבֹאוּ = and they came (to come (in))
+21 עַבְדֵי = [the] servants of (servant;_slave)
+22 דָוִיד = David
+23 אֶל־ = into
+24 אֶרֶץ = [the] land of (land)
+25 בְּנֵי־ = [the] people of
+26 עַמּוֹן = Ammon
+27 אֶל־ = to
+28 חָנוּן = Hanun
+29 לְנַחֲמוֹ = to comfort him
+
+## 13:19:3
+KO: 암몬 자손의 방백들이 하눈에게 말하였다. 다윗이 당신에게 위로자들을 보낸 것이 당신의 눈에 당신의 아버지를 공경함 때문이라고 여기십니까? 그의 종들이 이 땅을 살피고 뒤엎고 정탐하기 위하여 당신에게 온 것이 아니겠습니까?
+1 וַיֹּאמְרוּ = and they said (to say)
+2 שָׂרֵי = [the] officials of (ruler)
+3 בְנֵי־ = [the] people of (son)
+4 עַמּוֹן = Ammon
+5 לְחָנוּן = to Hanun (Hanun)
+6 הַמְכַבֵּד = ¿ [is] honoring (to honor)
+7 דָּוִיד = David
+8 אֶת־ = <obj.> ([Obj.])
+9 אָבִיךָ = father your (father)
+10 בְּעֵינֶיךָ = in view your (eye)
+11 כִּי־ = for
+12 שָׁלַח = he has sent (to send)
+13 לְךָ = to you (you)
+14 מְנַחֲמִים = comforters (to be sorry)
+15 הֲלֹא = ¿ not (not)
+16 בַּעֲבוּר = in order (for the sake of)
+17 לַחְקֹר = to explore (to search)
+18 וְלַהֲפֹךְ = and to overthrow (to overturn)
+19 וּלְרַגֵּל = and to spy out (to spy)
+20 הָאָרֶץ = the land (land)
+21 בָּאוּ = have they come (to come (in))
+22 עֲבָדָיו = servants his (servant;_slave)
+23 אֵלֶיךָ פ = to you (to(wards))
+
+## 13:19:4
+KO: 그리고 하눈이 다윗의 종들을 붙잡아 그들의 수염을 깎고 그들의 의복을 중간(반)까지, 곧 그들의 엉덩이(넓적다리)까지 자르고 그들을 보냈다.
+1 וַיִּקַּח = and he took (to take)
+2 חָנוּן = Hanun
+3 אֶת־ = <obj.>
+4 עַבְדֵי = [the] servants of (servant;_slave)
+5 דָוִיד = David
+6 וַיְגַלְּחֵם = and he shaved them (to shave)
+7 וַיִּכְרֹת = and he cut off (to cut)
+8 אֶת־ = <obj.>
+9 מַדְוֵיהֶם = robes their (garment)
+10 בַּחֵצִי = in the middle (half)
+11 עַד־ = to (till)
+12 הַמִּפְשָׂעָה = the buttock[s] (hip)
+13 וַיְשַׁלְּחֵם = and he sent away them (to send)
+
+## 13:19:5
+KO: 그들이 가서 그 사람들에 관하여 다윗에게 고하니, 왕이 그들을 맞으러 보내니 이는 그 사람들이 매우 수치를 당하였기 때문이라. 왕이 이르되 너희는 너희 수염이 자랄 때까지 여리고에 머물다가 돌아오라 하니라.
+1 וַיֵּלְכוּ = and people went (to go)
+2 וַיַּגִּידוּ = and they told (to tell)
+3 לְדָוִיד = to David (David)
+4 עַל־ = on (upon)
+5 הָאֲנָשִׁים = the men
+6 וַיִּשְׁלַח = and he sent (to send)
+7 לִקְרָאתָם = to meet them (to encounter)
+8 כִּי־ = for
+9 הָיוּ = they were (to be)
+10 הָאֲנָשִׁים = the men
+11 נִכְלָמִים = humiliated (be humiliated)
+12 מְאֹד = exceedingly (much)
+13 וַיֹּאמֶר = and he said (to say)
+14 הַמֶּלֶךְ = the king (king)
+15 שְׁבוּ = remain (to dwell)
+16 בִירֵחוֹ = at Jericho (Jericho)
+17 עַד = until (till)
+18 אֲשֶׁר־ = that (which)
+19 יְצַמַּח = it will grow back (to spring)
+20 זְקַנְכֶם = beard your (beard)
+21 וְשַׁבְתֶּם = and you will return (to return)
+
+## 13:19:6
+KO: 암몬 자손은 그들이 다윗과 더불어 악취를 풍기게 된(미움을 받게 된) 것을 보았다. 그리하여 하눈과 암몬 자손은 아람 나하라임과 아람 마아가와 소바로부터 병거와 마병을 그들을 위하여 고용하려고 은 일천 달란트를 보냈다.
+1 וַיִּרְאוּ = and they saw (to see)
+2 בְּנֵי = [the] people of
+3 עַמּוֹן = Ammon
+4 כִּי = that (for)
+5 הִתְבָּאֲשׁוּ = they had made themselves odious (to stink)
+6 עִם־ = with
+7 דָּוִיד = David
+8 וַיִּשְׁלַח = and he sent (to send)
+9 חָנוּן = Hanun
+10 וּבְנֵי = and [the] people of
+11 עַמּוֹן = Ammon
+12 אֶלֶף = one thousand (thousand)
+13 כִּכַּר־ = talent[s] of (talent)
+14 כֶּסֶף = silver
+15 לִשְׂכֹּר = to hire
+16 לָהֶם = for themselves (them)
+17 מִן־ = from
+18 אֲרַם = Aram
+19 נַהֲרַיִם = Naharaim
+20 וּמִן־ = and from
+21 אֲרַם = Aram
+22 מַעֲכָה = Maacah (-maacah)
+23 וּמִצּוֹבָה = and from Zobah (Zobah)
+24 רֶכֶב = chariotry (chariot)
+25 וּפָרָשִׁים = and horsemen (horseman)
+
+## 13:19:7
+KO: 그들이 그들을 위하여 병거 삼만 이천 대를 고용하였고, 마아가 왕과 그의 백성을 고용하였으니, 그들이 와서 메드바 앞에 진을 쳤고, 암몬 자손이 그들의 성읍들로부터 모여 와서 전쟁하러 왔다.
+1 וַיִּשְׂכְּרוּ = and they hired (to hire)
+2 לָהֶם = for themselves (them)
+3 שְׁנַיִם = two
+4 וּשְׁלֹשִׁים = and thirty (thirty)
+5 אֶלֶף = thousand
+6 רֶכֶב = chariot[s] (chariot)
+7 וְאֶת־ = and <obj.>
+8 מֶלֶךְ = [the] king of (king)
+9 מַעֲכָה = Maacah
+10 וְאֶת־ = and <obj.>
+11 עַמּוֹ = people his (people)
+12 וַיָּבֹאוּ = and they came
+13 וַיַּחֲנוּ = and they encamped (to camp)
+14 לִפְנֵי = <to> before (face)
+15 מֵידְבָא = Medeba
+16 וּבְנֵי = and [the] people of (son)
+17 עַמּוֹן = Ammon
+18 נֶאֶסְפוּ = they gathered (to gather)
+19 מֵעָרֵיהֶם = from cities their (city)
+20 וַיָּבֹאוּ = and they came
+21 לַמִּלְחָמָה פ = for <the> battle (battle)
+
+## 13:19:8
+KO: 그리고 다윗이 들었다. 그리고 요압과 모든 용사들의 군대를 보냈다.
+1 וַיִּשְׁמַע = and he heard (to hear)
+2 דָּוִיד = David
+3 וַיִּשְׁלַח = and he sent (to send)
+4 אֶת־ = <obj.>
+5 יוֹאָב = Joab
+6 וְאֵת = and <obj.>
+7 כָּל־ = all
+8 צָבָא = [the] army (army)
+9 הַגִּבּוֹרִים = the warriors (mighty)
+
+## 13:19:9
+KO: 그리고 암몬 자손들이 나와서 성문의 입구에 전투를 배치하였고, 온 왕들은 그들 스스로 들에 있었다.
+1 וַיֵּצְאוּ = and they went out (to come out)
+2 בְּנֵי = [the] people of (son)
+3 עַמּוֹן = Ammon
+4 וַיַּעַרְכוּ = and they deployed (to arrange)
+5 מִלְחָמָה = battle
+6 פֶּתַח = [the] entrance of (entrance)
+7 הָעִיר = the city (city)
+8 וְהַמְּלָכִים = and the kings (king)
+9 אֲשֶׁר־ = who (which)
+10 בָּאוּ = they had come (to come (in))
+11 לְבַדָּם = to alone them (alone)
+12 בַּשָּׂדֶה = [were] in the open country (land)
+
+## 13:19:10
+KO: 그리고 요압이 보았다, 왜냐하면 전쟁의 전면이 그에게 앞과 뒤로 있었기 때문이다. 그래서 그는 이스라엘의 모든 정예병 중에서 선택하여 아람을 대항하여 배치하였다.
+1 וַיַּרְא = and he saw (to see)
+2 יוֹאָב = Joab
+3 כִּי־ = that (for)
+4 הָיְתָה = it was (to be)
+5 פְנֵי־ = [the] face of
+6 הַמִּלְחָמָה = the battle (battle)
+7 אֵלָיו = against him (to(wards))
+8 פָּנִים = face
+9 וְאָחוֹר = and back (back)
+10 וַיִּבְחַר = and he chose
+11 מִכָּל־ = from every (all)
+12 בָּחוּר = chosen [man]
+13 בְּיִשְׂרָאֵל = in Israel (Israel)
+14 וַיַּעֲרֹךְ = and he deployed (to arrange)
+15 לִקְרַאת = to meet (to encounter)
+16 אֲרָם = Aram (Syria)
+
+## 13:19:11
+KO: 그리고 그 백성의 남은 자들을 아비새 곧 그의 아우의 손에 맡기셨고, 그들이 암몬 자손들을 맞이하여 진을 쳤더라.
+1 וְאֵת = and <obj.> ([Obj.])
+2 יֶתֶר = [the] rest of (remainder)
+3 הָעָם = the people (people)
+4 נָתַן = he put (to give)
+5 בְּיַד = in [the] hand of (hand)
+6 אַבְשַׁי = Abishai
+7 אָחִיו = brother his (brother)
+8 וַיַּעַרְכוּ = and they deployed (to arrange)
+9 לִקְרַאת = to meet (to encounter)
+10 בְּנֵי = [the] people of (son)
+11 עַמּוֹן = Ammon
+
+## 13:19:12
+KO: 그가 말하기를, "만일 아람이 나보다 강하면 네가 나를 위하여 구원이 될 것이고, 만일 암몬 자손이 너보다 강하면 내가 너를 구원하리라."
+1 וַיֹּאמֶר = and he said (to say)
+2 אִם־ = if
+3 תֶּחֱזַק = it will be [too] strong
+4 מִמֶּנִּי = for me
+5 אֲרָם = Aram (Syria)
+6 וְהָיִיתָ = and you will become (to be)
+7 לִּי = for me (me)
+8 לִתְשׁוּעָה ס = <into> deliverance (deliverance)
+9 וְאִם־ = and if
+10 בְּנֵי = [the] people of (son)
+11 עַמּוֹן = Ammon
+12 יֶחֶזְקוּ = they will be [too] strong
+13 מִמְּךָ = for you
+14 וְהוֹשַׁעְתִּיךָ = and I will deliver you (to save)
+
+## 13:19:13
+KO: 강건하라, 그리고 우리가 우리 백성과 우리 하나님의 성읍들을 위하여 스스로 강건하게 하자. 그리고 여호와께서는 그의 눈에 선한 것을 행하시리라.
+1 חֲזַק = be strong
+2 וְנִתְחַזְּקָה = so let us show ourselves strong
+3 בְּעַד־ = for
+4 עַמֵּנוּ = people our (people)
+5 וּבְעַד = and for
+6 עָרֵי = [the] cities of (city)
+7 אֱלֹהֵינוּ = God our (God)
+8 וַיהוָה = and Yahweh (LORD)
+9 הַטּוֹב = the good (pleasant)
+10 בְּעֵינָיו = in view his (eye)
+11 יַעֲשֶׂה = he will do (to make)
+
+## 13:19:14
+KO: 요압과 그와 함께 있는 백성이 전쟁을 위하여 아람 사람들의 앞으로 나아가니, 그들이 그의 앞에서 도망하였다.
+1 וַיִּגַּשׁ = and he drew near (to approach)
+2 יוֹאָב = Joab
+3 וְהָעָם = and the people (people)
+4 אֲשֶׁר־ = which
+5 עִמּוֹ = [was] with him (with)
+6 לִפְנֵי = <to> before
+7 אֲרָם = Aram (Syria)
+8 לַמִּלְחָמָה = for <the> battle (battle)
+9 וַיָּנוּסוּ = and they fled (to flee)
+10 מִפָּנָיו = from before him
+
+## 13:19:15
+KO: 그리고 암몬 자손은 아람이 도망한 것을 보았고, 그들(암몬 자손) 또한 아비새의 얼굴 앞에서 도망하여 그 성읍으로 들어갔다. 그러자 요압이 예루살렘으로 들어갔다.
+1 וּבְנֵי = and [the] people of (son)
+2 עַמּוֹן = Ammon
+3 רָאוּ = they saw (to see)
+4 כִּי־ = that (for)
+5 נָס = it had fled
+6 אֲרָם = Aram (Syria)
+7 וַיָּנוּסוּ = and they fled
+8 גַם־ = also
+9 הֵם = they (they(masc.))
+10 מִפְּנֵי = from before (face)
+11 אַבְשַׁי = Abishai
+12 אָחִיו = brother his (brother)
+13 וַיָּבֹאוּ = and they went
+14 הָעִירָה = the city towards (city)
+15 וַיָּבֹא = and he went
+16 יוֹאָב = Joab
+17 יְרוּשָׁלִָם פ = Jerusalem
+
+## 13:19:16
+KO: 그리고 아람이 그들이 이스라엘 앞에서 패배당했음을 보았고, 사자들을 보냈으며, 강 건너편에 있는 아람을 불러내니, 하닷에셀의 군대 장관 소박이 그들 앞에 있었다.
+1 וַיַּרְא = and it saw (to see)
+2 אֲרָם = Aram
+3 כִּי = that (for)
+4 נִגְּפוּ = they had been defeated (to strike)
+5 לִפְנֵי = <to> before
+6 יִשְׂרָאֵל = Israel
+7 וַיִּשְׁלְחוּ = and they sent (to send)
+8 מַלְאָכִים = messengers (messenger)
+9 וַיּוֹצִיאוּ = and they brought out (to come out)
+10 אֶת־ = <obj.> ([Obj.])
+11 אֲרָם = Aram
+12 אֲשֶׁר = which
+13 מֵעֵבֶר = [was] from [the] other side of (side)
+14 הַנָּהָר = the river (River)
+15 וְשׁוֹפַךְ = and Shophach (Shophach)
+16 שַׂר־ = [the] commander of (ruler)
+17 צְבָא = [the] army of (army)
+18 הֲדַדְעֶזֶר = Hadadezer
+19 לִפְנֵיהֶם = [was] <to> before them
+
+## 13:19:17
+KO: 그리고 다윗에게 고하여졌고, 다윗이 온 이스라엘을 모으고 요단을 건너 그들에게 이르러, 그들에게 (전투) 대열을 갖추니 다윗이 아람을 향해 전쟁을 맞이하여 대열을 갖추매 그들이 그와 더불어 싸웠더라.
+1 וַיֻּגַּד = and it was told (to tell)
+2 לְדָוִיד = to David
+3 וַיֶּאֱסֹף = and he gathered (to gather)
+4 אֶת־ = <obj.> ([Obj.])
+5 כָּל־ = all
+6 יִשְׂרָאֵל = Israel
+7 וַיַּעֲבֹר = and he passed over (to pass)
+8 הַיַּרְדֵּן = the Jordan (Jordan)
+9 וַיָּבֹא = and he came (to come (in))
+10 אֲלֵהֶם = to them
+11 וַיַּעֲרֹךְ = and he deployed
+12 אֲלֵהֶם = against them
+13 וַיַּעֲרֹךְ = and he deployed
+14 דָּוִיד = David
+15 לִקְרַאת = to meet (to encounter)
+16 אֲרָם = Aram (Syria)
+17 מִלְחָמָה = battle
+18 וַיִּלָּחֲמוּ = and they fought (to fight)
+19 עִמּוֹ = with him (with)
+
+## 13:19:18
+KO: 그리고 아람이 이스라엘의 얼굴 앞에서 도망하였다. 그리고 다윗이 아람으로부터 병거 칠천(명)과 보병 사만(명)을 죽였고, 또한 군대 장관 소박을 죽게 하였다.
+1 וַיָּנָס = and it fled (to flee)
+2 אֲרָם = Aram
+3 מִלִּפְנֵי = from to before (face)
+4 יִשְׂרָאֵל = Israel
+5 וַיַּהֲרֹג = and he killed (to kill)
+6 דָּוִיד = David
+7 מֵאֲרָם = of Aram
+8 שִׁבְעַת = seven
+9 אֲלָפִים = thousand<s>
+10 רֶכֶב = charioteer[s] (chariot)
+11 וְאַרְבָּעִים = and forty (forty)
+12 אֶלֶף = thousand
+13 אִישׁ = man
+14 רַגְלִי = on foot
+15 וְאֵת = and <obj.> ([Obj.])
+16 שׁוֹפַךְ = Shophach
+17 שַׂר־ = [the] commander of (ruler)
+18 הַצָּבָא = the army (army)
+19 הֵמִית = he killed (to die)
+
+## 13:19:19
+KO: 하닷에셀의 신복들이 자신들이 이스라엘 앞에서 패배했음을 보고, 다윗과 화친하여 그를 섬겼다. 그리고 아람은 더 이상 암몬 자손을 돕기를 원하지 아니하였다.
+1 וַיִּרְאוּ = and they saw (to see)
+2 עַבְדֵי = [the] servants of (servant;_slave)
+3 הֲדַדְעֶזֶר = Hadadezer
+4 כִּי = that (for)
+5 נִגְּפוּ = they had been defeated (to strike)
+6 לִפְנֵי = <to> before (face)
+7 יִשְׂרָאֵל = Israel
+8 וַיַּשְׁלִימוּ = and they made peace (to ally)
+9 עִם־ = with
+10 דָּוִיד = David
+11 וַיַּעַבְדֻהוּ = and they served him (to serve)
+12 וְלֹא־ = and not (not)
+13 אָבָה = it was willing (be willing)
+14 אֲרָם = Aram (Syria)
+15 לְהוֹשִׁיעַ = to deliver (to save)
+16 אֶת־ = <obj.> ([Obj.])
+17 בְּנֵי־ = [the] people of (son)
+18 עַמּוֹן = Ammon
+19 עוֹד פ = again (still)
+
+## 13:20:1
+KO: 그리고 해가 돌아오는 때, 곧 왕들이 출전하는 때가 되었고, 요압이 군대의 힘을 이끌고 나가서 암몬 자손들의 땅을 파괴하고 들어가서 랍바를 에워쌌으나 다윗은 예루살렘에 머물러 있었다. 그리고 요압이 랍바를 치고 그것을 무너뜨렸다.
+1 וַיְהִי = and it was (to be)
+2 לְעֵת = to [the] time of
+3 תְּשׁוּבַת = [the] return of (turn)
+4 הַשָּׁנָה = the year (year)
+5 לְעֵת = to [the] time of
+6 צֵאת = [the] going out of (to come out)
+7 הַמְּלָכִים = <the> kings (king)
+8 וַיִּנְהַג = and he lead out (to lead)
+9 יוֹאָב = Joab
+10 אֶת־ = <obj.>
+11 חֵיל = [the] army of (strength)
+12 הַצָּבָא = <the> war (army)
+13 וַיַּשְׁחֵת = and he destroyed (to ruin)
+14 אֶת־ = <obj.>
+15 אֶרֶץ = [the] land of (land)
+16 בְּנֵי־ = [the] people of (son)
+17 עַמּוֹן = Ammon
+18 וַיָּבֹא = and he went (to come (in))
+19 וַיָּצַר = and he besieged (to confine)
+20 אֶת־ = <obj.>
+21 רַבָּה = Rabbah
+22 וְדָוִיד = and David (David)
+23 יֹשֵׁב = [was] remaining (to dwell)
+24 בִּירוּשָׁלִָם = in Jerusalem (Jerusalem)
+25 וַיַּךְ = and he struck (to smite)
+26 יוֹאָב = Joab
+27 אֶת־ = <obj.>
+28 רַבָּה = Rabbah
+29 וַיֶּהֶרְסֶהָ = and he overthrew it (to overthrow)
+
+## 13:20:2
+KO: 그리고 다윗은 그들의 왕의 머리 위에서 그 왕관을 취하였고, 그것의 중량은 금 한 달란트였으며, 그 안에는 보석이 있었고, 그것은 다윗의 머리 위에 있었다. 그리고 그 성읍의 전리품을 그가 매우 많이 끌어내었다.
+1 וַיִּקַּח = and he took (to take)
+2 דָּוִיד = David
+3 אֶת־ = <obj.> ([Obj.])
+4 עֲטֶרֶת־ = [the] crown of (crown)
+5 מַלְכָּם = king their (king)
+6 מֵעַל = from on
+7 רֹאשׁוֹ = head his
+8 וַיִּמְצָאָהּ = and he found it (to find)
+9 מִשְׁקַל = weight of (weight)
+10 כִּכַּר־ = a talent of (talent)
+11 זָהָב = gold
+12 וּבָהּ = and [was] in it (her)
+13 אֶבֶן = a stone (stone)
+14 יְקָרָה = precious
+15 וַתְּהִי = and it was (to be)
+16 עַל־ = on
+17 רֹאשׁ = [the] head of
+18 דָּוִיד = David
+19 וּשְׁלַל = and [the] plunder of (spoil)
+20 הָעִיר = the city (city)
+21 הוֹצִיא = he brought out (to come out)
+22 הַרְבֵּה = much (to multiply)
+23 מְאֹד = very (much)
+
+## 13:20:3
+KO: 그리고 그 안에 있던 백성을 그가 이끌어 내어, 톱과 철 도구들과 톱들로 일을 하게 하니라. 다윗이 암몬 자손의 모든 성읍들에 이같이 하고, 다윗과 모든 백성이 예루살렘으로 돌아오니라.
+1 וְאֶת־ = and <obj.> ([Obj.])
+2 הָעָם = the people
+3 אֲשֶׁר־ = which
+4 בָּהּ = [was] in it (her)
+5 הוֹצִיא = he brought out (to come out)
+6 וַיָּשַׂר = and he sawed (to saw)
+7 בַּמְּגֵרָה = with <the> saw
+8 וּבַחֲרִיצֵי = and with [the] sharp instruments of (incision)
+9 הַבַּרְזֶל = <the> iron (iron)
+10 וּבַמְּגֵרוֹת = and with <the> saws
+11 וְכֵן = and thus (so)
+12 יַעֲשֶׂה = he did (to make)
+13 דָוִיד = David
+14 לְכֹל = to all
+15 עָרֵי = [the] cities of (city)
+16 בְנֵי־ = [the] people of (son)
+17 עַמּוֹן = Ammon
+18 וַיָּשָׁב = and he returned (to return)
+19 דָּוִיד = David
+20 וְכָל־ = and all
+21 הָעָם = the people
+22 יְרוּשָׁלִָם פ = Jerusalem
+
+## 13:20:4
+KO: 그리고 이 일 후에 게셀에서 블레셋 사람들과 전쟁이 일어났고, 그때 후사 사람 십브개가 르바임의 자손 중의 하나인 십배를 쳐 죽였으며, 그들이 스스로 낮추었더라.
+1 וַיְהִי = and it was (to be)
+2 אַחֲרֵיכֵן = after this
+3 וַתַּעֲמֹד = and it arose (to stand)
+4 מִלְחָמָה = a battle (battle)
+5 בְּגֶזֶר = at Gezer (Gezer)
+6 עִם־ = with
+7 פְּלִשְׁתִּים = [the] Philistines (Philistine)
+8 אָז = then
+9 הִכָּה = he struck down (to smite)
+10 סִבְּכַי = Sibbecai
+11 הַחֻשָׁתִי = the Hushathite (Hushathite)
+12 אֶת־ = <obj.> ([Obj.])
+13 סִפַּי = Sippai
+14 מִילִדֵי = one of those born of (born)
+15 הָרְפָאִים = the Rephaites (Raphaite)
+16 וַיִּכָּנֵעוּ = and they were subdued (be humble)
+
+## 13:20:5
+KO: 그리고 블레셋 사람들과의 전쟁이 다시 있었는데, 야일의 아들 엘하난이 가드 사람 골리앗의 형제 라흐미를 쳤으니, 그의 창 나무는 베틀채와 같았다.
+1 וַתְּהִי־ = and it was (to be)
+2 עוֹד = again (still)
+3 מִלְחָמָה = a battle (battle)
+4 אֶת־ = with
+5 פְּלִשְׁתִּים = [the] Philistines (Philistine)
+6 וַיַּךְ = and he struck down (to smite)
+7 אֶלְחָנָן = Elhanan
+8 בֶּן־ = [the] son of (son)
+9 יָעִיר = Jair
+10 אֶת־ = <obj.> ([Obj.])
+11 לַחְמִי = Lahmi
+12 אֲחִי = [the] brother of (brother)
+13 גָּלְיָת = Goliath
+14 הַגִּתִּי = the Gittite (Gath)
+15 וְעֵץ = and [the] wood of (tree)
+16 חֲנִיתוֹ = spear his (spear)
+17 כִּמְנוֹר = [was] like a beam of (loom-beam)
+18 אֹרְגִים = weavers (to weave)
+
+## 13:20:6
+KO: 또 가드에서 전쟁이 계속되었다. 그곳에 장대한 체구의 사람이 있었는데, 그의 손가락과 발가락은 각각 여섯씩 모두 스물넷이었고, 그 또한 라파에게서 태어난 자였다.
+1 וַתְּהִי־ = and it was
+2 עוֹד = again (still)
+3 מִלְחָמָה = a battle (battle)
+4 בְּגַת = at Gath (Gath)
+5 וַיְהִי = and he was
+6 אִישׁ = a man of (man)
+7 מִדָּה = stature ("great stature")
+8 וְאֶצְבְּעֹתָיו = and digits his (finger)
+9 שֵׁשׁ־ = [were] six
+10 וָשֵׁשׁ = and six
+11 עֶשְׂרִים = twenty
+12 וְאַרְבַּע = and four (four)
+13 וְגַם־ = and also (also)
+14 הוּא = he (he;_she;_it)
+15 נוֹלַד = he was born (to beget)
+16 לְהָרָפָא = to <the> Rapha (Rapha)
+
+## 13:20:7
+KO: 그가 이스라엘을 능욕하였으므로, 다윗의 형 시므아의 아들 요나단이 그를 쳐서 죽였다.
+1 וַיְחָרֵף = and he taunted (to taunt)
+2 אֶת־ = <obj.> ([Obj.])
+3 יִשְׂרָאֵל = Israel
+4 וַיַּכֵּהוּ = and he struck down him (to smite)
+5 יְהוֹנָתָן = Jonathan
+6 בֶּן־ = [the] son of (son)
+7 שִׁמְעָא = Shimea
+8 אֲחִי = [the] brother of (brother)
+9 דָוִיד = David
+
+## 13:20:8
+KO: 이들은 가드에 있는 라파(거인)에게서 태어난 자들이며, 다윗의 손과 그의 종들의 손에 쓰러졌다.
+1 אֵל = these
+2 נוּלְּדוּ = they were born (to beget)
+3 לְהָרָפָא = to <the> Rapha (Rapha)
+4 בְּגַת = in Gath (Gath)
+5 וַיִּפְּלוּ = and they fell (to fall)
+6 בְיַד־ = by [the] hand of
+7 דָּוִיד = David
+8 וּבְיַד־ = and by [the] hand of
+9 עֲבָדָיו פ = servants his (servant;_slave)
+
+## 13:21:1
+KO: 그리고 사단이 이스라엘 위에 일어섰고, 그가 다윗을 충동하여 이스라엘을 계수하게 하였다.
+1 וַיַּעֲמֹד = and he rose up (to stand)
+2 שָׂטָן = an adversary (Satan)
+3 עַל־ = on (upon)
+4 יִשְׂרָאֵל = Israel
+5 וַיָּסֶת = and he incited (to incite)
+6 אֶת־ = <obj.>
+7 דָּוִיד = David
+8 לִמְנוֹת = to count
+9 אֶת־ = <obj.>
+10 יִשְׂרָאֵל = Israel
+
+## 13:21:2
+KO: 다윗이 요압과 백성의 지휘관들에게 이르되 너희는 가서 브엘세바에서부터 단까지 이스라엘을 계수하고, 나에게 가져오라(보고하라), 그리하면 내가 그들의 숫자를 알리라.
+1 וַיֹּאמֶר = and he said (to say)
+2 דָּוִיד = David
+3 אֶל־ = to
+4 יוֹאָב = Joab
+5 וְאֶל־ = and to
+6 שָׂרֵי = [the] leaders of (ruler)
+7 הָעָם = the people (people)
+8 לְכוּ = go (to go)
+9 סִפְרוּ = count (to recount)
+10 אֶת־ = <obj.>
+11 יִשְׂרָאֵל = Israel
+12 מִבְּאֵר = from Beer
+13 שֶׁבַע = Sheba
+14 וְעַד־ = and to (till)
+15 דָּן = Dan
+16 וְהָבִיאוּ = and bring [it] (to come (in))
+17 אֵלַי = to me
+18 וְאֵדְעָה = so let me know (to know)
+19 אֶת־ = <obj.>
+20 מִסְפָּרָם = number their (number)
+
+## 13:21:3
+KO: 요압이 말하였다. 여호와께서 그의 백성에게 지금보다 백 배나 더하시기를 원하나이다. 내 주 왕이여, 그들 모두가 내 주의 종들이 아니니이까? 어찌하여 내 주께서 이것을 구하시며, 어찌하여 이스라엘에게 죄(허물)가 있게 하시나이까?
+1 וַיֹּאמֶר = and he said (to say)
+2 יוֹאָב = Joab
+3 יוֹסֵף = may he add (to add)
+4 יְהוָה = Yahweh (LORD)
+5 עַל־ = to (upon)
+6 עַמּוֹ = people his (people)
+7 כָּהֵם = like them (them)
+8 מֵאָה = a hundred (hundred)
+9 פְעָמִים = times (beat)
+10 הֲלֹא = ¿ not (not)
+11 אֲדֹנִי = O lord my
+12 הַמֶּלֶךְ = the king (king)
+13 כֻּלָּם = [do] all of them (all)
+14 לַאדֹנִי = [belong] to lord my
+15 לַעֲבָדִים = to subjects (servant;_slave)
+16 לָמָּה = <to> why?
+17 יְבַקֵּשׁ = does he seek (to seek)
+18 זֹאת = this
+19 אֲדֹנִי = lord my
+20 לָמָּה = <to> why?
+21 יִהְיֶה = will it become (to be)
+22 לְאַשְׁמָה = <into> guilt (guiltiness)
+23 לְיִשְׂרָאֵל = for Israel (Israel)
+
+## 13:21:4
+KO: 그리고 왕의 말씀이 요압 위에 강하였으므로 요압이 나갔고, 온 이스라엘을 두루 다녔으며, 예루살렘으로 돌아왔더라.
+1 וּדְבַר־ = and [the] word of (word)
+2 הַמֶּלֶךְ = the king (king)
+3 חָזַק = it prevailed (to strengthen)
+4 עַל־ = over (upon)
+5 יוֹאָב = Joab
+6 וַיֵּצֵא = and he went out (to come out)
+7 יוֹאָב = Joab
+8 וַיִּתְהַלֵּךְ = and he went about (to go)
+9 בְּכָל־ = in all (all)
+10 יִשְׂרָאֵל = Israel
+11 וַיָּבֹא = and he came (to come (in))
+12 יְרוּשָׁלִָם = Jerusalem
+
+## 13:21:5
+KO: 요압이 그 백성의 조사된 수효를 다윗에게 주니, 온 이스라엘은 칼을 빼는 자가 백십만 명이었고, 유다는 칼을 빼는 자가 사십칠만 명이었다.
+1 וַיִּתֵּן = and he gave (to give)
+2 יוֹאָב = Joab
+3 אֶת־ = <obj.> ([Obj.])
+4 מִסְפַּר = [the] number of (number)
+5 מִפְקַד־ = [the] muster of (appointment)
+6 הָעָם = the people (people)
+7 אֶל־ = to (to(wards))
+8 דָּוִיד = David
+9 וַיְהִי = and it was (to be)
+10 כָל־ = all
+11 יִשְׂרָאֵל = Israel
+12 אֶלֶף = one thousand
+13 אֲלָפִים = thousands
+14 וּמֵאָה = and one hundred
+15 אֶלֶף = thousand
+16 אִישׁ = man
+17 שֹׁלֵף = [who] drew out
+18 חֶרֶב = a sword
+19 וִיהוּדָה = and Judah (Judah)
+20 אַרְבַּע = four
+21 מֵאוֹת = hundred<s>
+22 וְשִׁבְעִים = and seventy (seventy)
+23 אֶלֶף = thousand
+24 אִישׁ = man
+25 שֹׁלֵף = [who] drew out
+26 חָרֶב = a sword
+
+## 13:21:6
+KO: 레위와 베냐민은 그들 가운데 계수하지 아니하였더라, 왜냐하면 왕의 명령이 요압에게 가증하게 여겨졌기 때문이라.
+1 וְלֵוִי = and Levi (Levi)
+2 וּבִנְיָמִן = and Benjamin (Benjamin)
+3 לֹא = not
+4 פָקַד = he enrolled (to reckon)
+5 בְּתוֹכָם = in midst of them (midst)
+6 כִּי־ = for
+7 נִתְעַב = it was abhorred (to abhor)
+8 דְּבַר־ = [the] word of (word)
+9 הַמֶּלֶךְ = the king (king)
+10 אֶת־ = <obj.> (with)
+11 יוֹאָב = Joab
+
+## 13:21:7
+KO: 그리고 그 일이 하나님의 눈에 악하게 보였으므로, 그분이 이스라엘을 치셨다.
+1 וַיֵּרַע = and it was displeasing (be evil)
+2 בְּעֵינֵי = in [the] eyes of (eye)
+3 הָאֱלֹהִים = <the> God (God)
+4 עַל־ = on (upon)
+5 הַדָּבָר = the matter (word)
+6 הַזֶּה = <the> this (this)
+7 וַיַּךְ = and he struck (to smite)
+8 אֶת־ = <obj.> ([Obj.])
+9 יִשְׂרָאֵל פ = Israel
+
+## 13:21:8
+KO: 그리고 다윗이 하나님께 말하였다. "내가 이 일을 행함으로 심히 크게 죄를 범하였습니다. 이제 부디 당신의 종의 죄악을 지나가게 하소서. 내가 참으로 어리석게 행하였습니다."
+1 וַיֹּאמֶר = and he said (to say)
+2 דָּוִיד = David
+3 אֶל־ = to (to(wards))
+4 הָאֱלֹהִים = <the> God (God)
+5 חָטָאתִי = I have sinned (to sin)
+6 מְאֹד = exceedingly
+7 אֲשֶׁר = that (which)
+8 עָשִׂיתִי = I have done (to make)
+9 אֶת־ = <obj.>
+10 הַדָּבָר = the thing (word)
+11 הַזֶּה = <the> this (this)
+12 וְעַתָּה = and now (now)
+13 הַעֲבֶר־ = cause to pass away (to pass)
+14 נָא = please
+15 אֶת־ = <obj.>
+16 עֲווֹן = [the] guilt of (iniquity)
+17 עַבְדְּךָ = servant your (servant;_slave)
+18 כִּי = for
+19 נִסְכַּלְתִּי = I have acted foolishly (be foolish)
+20 מְאֹד פ = exceedingly
+
+## 13:21:9
+KO: 그리고 여호와께서 다윗의 선견자 갓에게 말씀하셨다, “말하여라.”
+1 וַיְדַבֵּר = and he spoke (to speak)
+2 יְהוָה = Yahweh (LORD)
+3 אֶל־ = to (to(wards))
+4 גָּד = Gad
+5 חֹזֵה = [the] seer of (seer)
+6 דָוִיד = David
+7 לֵאמֹר = <to> saying (to say)
+
+## 13:21:10
+KO: 가서 다윗에게 말하여 이르기를 여호와께서 이렇게 말씀하시기를 세 가지를 내가 네게 내어놓으니 그것들 중에서 하나를 너를 위해 택하라, 내가 그것을 네게 행하리라 하라.
+1 לֵךְ = go (to go)
+2 וְדִבַּרְתָּ = and you will speak (to speak)
+3 אֶל־ = to (to(wards))
+4 דָּוִיד = David
+5 לֵאמֹר = <to> saying
+6 כֹּה = thus
+7 אָמַר = he says
+8 יְהוָה = Yahweh (LORD)
+9 שָׁלוֹשׁ = three [things] (three)
+10 אֲנִי = I
+11 נֹטֶה = [am] holding out (to stretch)
+12 עָלֶיךָ = over you (upon)
+13 בְּחַר־ = choose (to choose)
+14 לְךָ = for yourself
+15 אַחַת = one
+16 מֵהֵנָּה = from them (them)
+17 וְאֶעֱשֶׂה־ = so I may do [it] (to make)
+18 לָּךְ = to you
+
+## 13:21:11
+KO: 그리고 갓이 다윗에게 들어왔고 그에게 말하였다. 여호와께서 이렇게 말씀하시기를, “너를 위하여 취하라.”
+1 וַיָּבֹא = and he went (to come (in))
+2 גָד = Gad
+3 אֶל־ = to (to(wards))
+4 דָּוִיד = David
+5 וַיֹּאמֶר = and he said
+6 לוֹ = to him (him)
+7 כֹּה־ = thus
+8 אָמַר = he says
+9 יְהוָה = Yahweh (LORD)
+10 קַבֶּל־ = take (to receive)
+11 לָךְ = for yourself (you)
+
+## 13:21:12
+KO: 혹 삼 년 기근이거나, 혹은 네 원수들의 얼굴 앞에서 네가 쫓겨나서(혹은 피할 곳 없이 몰려서) 그들의 칼이 미칠 석 달이거나, 혹은 여호와의 칼 곧 전염병이 이 땅에 있고 여호와의 사자가 이스라엘의 모든 지경에서 파멸시키는 사흘이거나, 이제 나를 보내신 이에게 내가 어떤 말을 되돌려 줄지 보소서.
+1 אִם־ = whether
+2 שָׁלוֹשׁ = three
+3 שָׁנִים = years (year)
+4 רָעָב = famine
+5 וְאִם־ = and or
+6 שְׁלֹשָׁה = three
+7 חֳדָשִׁים = months (month)
+8 נִסְפֶּה = being swept away (to snatch)
+9 מִפְּנֵי־ = from before (face)
+10 צָרֶיךָ = opponents your (enemy)
+11 וְחֶרֶב = and [the] sword of
+12 אוֹיְבֶךָ = enemies your (enemy)
+13 לְמַשֶּׂגֶת = to overtaking [you] (to overtake)
+14 וְאִם־ = and or
+15 שְׁלֹשֶׁת = three
+16 יָמִים = days (day;_when)
+17 חֶרֶב = [the] sword of
+18 יְהוָה = Yahweh
+19 וְדֶבֶר = and pestilence (pestilence)
+20 בָּאָרֶץ = in the land (land)
+21 וּמַלְאַךְ = and [the] angel of (messenger)
+22 יְהוָה = Yahweh
+23 מַשְׁחִית = destroying (to ruin)
+24 בְּכָל־ = in all (all)
+25 גְּבוּל = [the] territory of (border)
+26 יִשְׂרָאֵל = Israel
+27 וְעַתָּה = and therefore (now)
+28 רְאֵה = consider (to see)
+29 מָה־ = what?
+30 אָשִׁיב = will I bring back (to return)
+31 אֶת־ = <obj.> ([Obj.])
+32 שֹׁלְחִי = [the] [one who] sent me (to send)
+33 דָּבָר פ = word
+
+## 13:21:13
+KO: 다윗이 갓에게 말하였다. “나에게 매우 큰 곤경이 있도다. 부디 여호와의 손에 빠지게 하소서. 왜냐하면 그의 긍휼은 매우 많기 때문입니다. 하지만 사람의 손에는 내가 빠지지 않게 하소서.”
+1 וַיֹּאמֶר = and he said (to say)
+2 דָּוִיד = David
+3 אֶל־ = to (to(wards))
+4 גָּד = Gad
+5 צַר־ = it is distress (distress)
+6 לִי = to me (me)
+7 מְאֹד = exceedingly
+8 אֶפְּלָה־ = let me fall
+9 נָּא = please
+10 בְיַד־ = in [the] hand of
+11 יְהוָה = Yahweh (LORD)
+12 כִּי־ = for
+13 רַבִּים = [are] great (many)
+14 רַחֲמָיו = compassion<s> his (compassion)
+15 מְאֹד = exceedingly
+16 וּבְיַד־ = and in [the] hand of
+17 אָדָם = a human (man)
+18 אַל־ = may not (not)
+19 אֶפֹּל = I fall
+
+## 13:21:14
+KO: 그리고 여호와께서 이스라엘 안에 전염병을 내리시니, 이스라엘로부터 칠만 명의 사람이 엎드러졌다.
+1 וַיִּתֵּן = and he put (to give)
+2 יְהוָה = Yahweh (LORD)
+3 דֶּבֶר = a pestilence (pestilence)
+4 בְּיִשְׂרָאֵל = on Israel
+5 וַיִּפֹּל = and it fell (to fall)
+6 מִיִּשְׂרָאֵל = of Israel
+7 שִׁבְעִים = seventy
+8 אֶלֶף = thousand
+9 אִישׁ = person[s] (man)
+
+## 13:21:15
+KO: 그리고 하나님이 예루살렘을 멸하려고 사자를 보내셨다. 그리고 그가 멸하려 할 때에, 여호와께서 보시고 그 악함(재앙)에 대하여 뜻을 돌이키셨으며, 멸하는 사자에게 말씀하셨다. "충분하다, 이제 네 손을 거두라." 그리고 여호와의 사자가 여부스 사람 오르난의 타작 마당 곁에 서 있었다.
+1 וַיִּשְׁלַח = and he sent (to send)
+2 הָאֱלֹהִים = <the> God (God)
+3 מַלְאָךְ = an angel
+4 לִירוּשָׁלִַם = to Jerusalem (Jerusalem)
+5 לְהַשְׁחִיתָהּ = to destroy it
+6 וּכְהַשְׁחִית = and just as was destroying [it]
+7 רָאָה = he saw (to see)
+8 יְהוָה = Yahweh
+9 וַיִּנָּחֶם = and he relented (to be sorry)
+10 עַל־ = on (upon)
+11 הָרָעָה = the calamity (distress)
+12 וַיֹּאמֶר = and he said (to say)
+13 לַמַּלְאָךְ = to the angel
+14 הַמַּשְׁחִית = <the> destroying
+15 רַב = enough (many)
+16 עַתָּה = now
+17 הֶרֶף = let drop (to slacken)
+18 יָדֶךָ = hand your (hand)
+19 וּמַלְאַךְ = and [the] angel of
+20 יְהוָה = Yahweh
+21 עֹמֵד = [was] standing (to stand)
+22 עִם־ = near (with)
+23 גֹּרֶן = [the] threshing floor of (threshing floor)
+24 אָרְנָן = Ornan
+25 הַיְבוּסִי ס = the Jebusite (Jebusite)

@@ -1,0 +1,188 @@
+## 3:8:13
+KO: 그리고 모세는 아론의 아들들을 가까이 데려오고, 그들에게 속옷들을 입히고, 그들에게 띠를 띠우고, 그들에게 관들을 씌웠으니, 여호와께서 모세에게 명령하신 그대로였더라.
+1 וַיַּקְרֵב = and he presented (to present)
+2 מֹשֶׁה = Moses
+3 אֶת־ = <obj.>
+4 בְּנֵי = [the] sons of (son)
+5 אַהֲרֹן = Aaron
+6 וַיַּלְבִּשֵׁם = and he clothed them (to clothe)
+7 כֻּתֳּנֹת = tunics (tunic)
+8 וַיַּחְגֹּר = and he girded (to gird)
+9 אֹתָם = <obj.> them
+10 אַבְנֵט = a sash (girdle)
+11 וַיַּחֲבֹשׁ = and he bound on (to saddle|tie)
+12 לָהֶם = to <the> them (them)
+13 מִגְבָּעוֹת = headdresses (headgear)
+14 כַּאֲשֶׁר = just as (as which)
+15 צִוָּה = he had commanded (to command)
+16 יְהוָה = Yahweh (LORD)
+17 אֶת־ = <obj.>
+18 מֹשֶׁה = Moses
+
+## 3:8:14
+KO: 그리고 그가 속죄제의 수송아지를 가까이 가져왔고, 아론과 그의 아들들이 그 속죄제의 수송아지 머리 위에 그들의 손들을 얹었다.
+1 וַיַּגֵּשׁ = and he brought near (to approach)
+2 אֵת = <obj.>
+3 פַּר = [the] bull of
+4 הַחַטָּאת = the sin offering
+5 וַיִּסְמֹךְ = and he leaned (to support)
+6 אַהֲרֹן = Aaron
+7 וּבָנָיו = and sons his (son)
+8 אֶת־ = <obj.>
+9 יְדֵיהֶם = hands their (hand)
+10 עַל־ = on (upon)
+11 רֹאשׁ = [the] head of (head)
+12 פַּר = [the] bull of
+13 הַחַטָּאת = the sin offering
+
+## 3:8:15
+KO: 그가 잡고, 모세가 그 피를 취하여 그의 손가락으로 그 제단의 뿔들 위를 사방으로 바르고, 그 제단을 정결하게 하였으며, 그 피는 제단의 기초 위에 쏟아, 그것(제단)을 속죄하여 거룩하게 하였다.
+1 וַיִּשְׁחָט = and he cut [the] throat of [it] (to slaughter)
+2 וַיִּקַּח = and he took (to take)
+3 מֹשֶׁה = Moses
+4 אֶת־ = <obj.>
+5 הַדָּם = the blood
+6 וַיִּתֵּן = and he put [it] (to give)
+7 עַל־ = on
+8 קַרְנוֹת = [the] horns of (horn)
+9 הַמִּזְבֵּחַ = the altar
+10 סָבִיב = all around (around)
+11 בְּאֶצְבָּעוֹ = with finger his (finger)
+12 וַיְחַטֵּא = and he cleansed from sin (to sin)
+13 אֶת־ = <obj.>
+14 הַמִּזְבֵּחַ = the altar
+15 וְאֶת־ = and <obj.>
+16 הַדָּם = the blood
+17 יָצַק = he poured (to pour)
+18 אֶל־ = to (to(wards))
+19 יְסוֹד = [the] base of (foundation)
+20 הַמִּזְבֵּחַ = the altar
+21 וַיְקַדְּשֵׁהוּ = and he set apart as holy it (to consecrate)
+22 לְכַפֵּר = to make atonement (to atone)
+23 עָלָיו = on it
+
+## 3:8:16
+KO: 그리고 그가 내장 위에 있는 모든 기름과 간의 꺼풀과 두 콩팥과 그것들의 기름을 취하여 모세가 제단 위로 불살랐다.
+1 וַיִּקַּח = and he took (to take)
+2 אֶת־ = <obj.>
+3 כָּל־ = all
+4 הַחֵלֶב = the fat
+5 אֲשֶׁר = which
+6 עַל־ = [was] on (upon)
+7 הַקֶּרֶב = the entrails (entrails)
+8 וְאֵת = and <obj.>
+9 יֹתֶרֶת = [the] lobe of (lobe)
+10 הַכָּבֵד = the liver (liver)
+11 וְאֶת־ = and <obj.>
+12 שְׁתֵּי = [the] two (two)
+13 הַכְּלָיֹת = the kidneys (kidney)
+14 וְאֶת־ = and <obj.>
+15 חֶלְבְּהֶן = fat their
+16 וַיַּקְטֵר = and he made [them] smoke (to offer)
+17 מֹשֶׁה = Moses
+18 הַמִּזְבֵּחָה = the altar towards (altar)
+
+## 3:8:17
+KO: 그리고 그 수송아지와, 그리고 그것의 가죽과, 그리고 그것의 살과, 그리고 그것의 똥을 그가 진 밖에서 불 안에서 불살랐으니, 여호와께서 모세에게 명령하셨던 것과 같았더라.
+1 וְאֶת־ = and <obj.>
+2 הַפָּר = the bull (bullock)
+3 וְאֶת־ = and <obj.>
+4 עֹרוֹ = hide its (skin)
+5 וְאֶת־ = and <obj.>
+6 בְּשָׂרוֹ = flesh its (flesh)
+7 וְאֶת־ = and <obj.>
+8 פִּרְשׁוֹ = offal its (refuse)
+9 שָׂרַף = he burned (to burn)
+10 בָּאֵשׁ = with <the> fire (fire)
+11 מִחוּץ = from [the] outside (outside)
+12 לַמַּחֲנֶה = of the camp (camp)
+13 כַּאֲשֶׁר = just as (as which)
+14 צִוָּה = he had commanded (to command)
+15 יְהוָה = Yahweh (LORD)
+16 אֶת־ = <obj.>
+17 מֹשֶׁה = Moses
+
+## 3:8:18
+KO: 그리고 그가 번제의 수양을 가까이 가져왔고, 아론과 그의 아들들이 그 수양의 머리 위에 그들의 손들을 얹었다.
+1 וַיַּקְרֵב = and he presented (to present)
+2 אֵת = <obj.>
+3 אֵיל = [the] ram of
+4 הָעֹלָה = the burnt offering (burnt offering)
+5 וַיִּסְמְכוּ = and they leaned (to support)
+6 אַהֲרֹן = Aaron
+7 וּבָנָיו = and sons his (son)
+8 אֶת־ = <obj.>
+9 יְדֵיהֶם = hands their (hand)
+10 עַל־ = on (upon)
+11 רֹאשׁ = [the] head of (head)
+12 הָאָיִל = the ram
+
+## 3:8:19
+KO: 그리고 모세가 잡았다, 그리고 그 피를 제단 위에, 주위에 뿌렸다.
+1 וַיִּשְׁחָט = and he cut [the] throat of [it] (to slaughter)
+2 וַיִּזְרֹק = and he sprinkled (to scatter)
+3 מֹשֶׁה = Moses
+4 אֶת־ = <obj.> ([Obj.])
+5 הַדָּם = the blood (blood)
+6 עַל־ = on (upon)
+7 הַמִּזְבֵּחַ = the altar (altar)
+8 סָבִיב = all around (around)
+
+## 3:8:20
+KO: 그리고 그 숫양을 그 조각들로 토막 내었다. 그리고 모세가 그 머리와 그 조각들과 그 기름을 불살랐다.
+1 וְאֶת־ = and <obj.>
+2 הָאַיִל = the ram (ram)
+3 נִתַּח = he cut in pieces (to cut)
+4 לִנְתָחָיו = into pieces its
+5 וַיַּקְטֵר = and he made smoke (to offer)
+6 מֹשֶׁה = Moses
+7 אֶת־ = <obj.>
+8 הָרֹאשׁ = the head (head)
+9 וְאֶת־ = and <obj.>
+10 הַנְּתָחִים = the pieces
+11 וְאֶת־ = and <obj.>
+12 הַפָּדֶר = the suet (suet)
+
+## 3:8:21
+KO: 그리고 내장과 정갱이들을 물로 씻고, 모세가 그 수양의 전부를 제단 위로 불살랐으니, 이는 여호와께 향기로운 냄새를 위하여 드리는 번제 곧 화제라. 여호와께서 모세에게 명령하신 것과 같았더라.
+1 וְאֶת־ = and <obj.>
+2 הַקֶּרֶב = the entrails (entrails)
+3 וְאֶת־ = and <obj.>
+4 הַכְּרָעַיִם = the legs (leg)
+5 רָחַץ = he washed (to wash)
+6 בַּמָּיִם = with <the> water (water)
+7 וַיַּקְטֵר = and he made smoke (to offer)
+8 מֹשֶׁה = Moses
+9 אֶת־ = <obj.>
+10 כָּל־ = all
+11 הָאַיִל = the ram (ram)
+12 הַמִּזְבֵּחָה = the altar towards (altar)
+13 עֹלָה = [was] a burnt offering (burnt offering)
+14 הוּא = it
+15 לְרֵיחַ־ = to an odor of (aroma)
+16 נִיחֹחַ = soothing
+17 אִשֶּׁה = [was] a fire offering (burnt offering)
+18 הוּא = it
+19 לַיהוָה = to Yahweh
+20 כַּאֲשֶׁר = just as (as which)
+21 צִוָּה = he had commanded (to command)
+22 יְהוָה = Yahweh
+23 אֶת־ = <obj.>
+24 מֹשֶׁה = Moses
+
+## 3:8:22
+KO: 그리고 그가 두 번째 숫양 곧 위임식의 숫양을 가까이 가져오매, 아론과 그의 아들들이 그들의 손을 그 숫양의 머리 위에 얹었다.
+1 וַיַּקְרֵב = and he presented (to present)
+2 אֶת־ = <obj.>
+3 הָאַיִל = the ram
+4 הַשֵּׁנִי = <the> second (second)
+5 אֵיל = [the] ram of
+6 הַמִּלֻּאִים = <the> installation offering<s> (setting)
+7 וַיִּסְמְכוּ = and they leaned (to support)
+8 אַהֲרֹן = Aaron
+9 וּבָנָיו = and sons his (son)
+10 אֶת־ = <obj.>
+11 יְדֵיהֶם = hands their (hand)
+12 עַל־ = on (upon)
+13 רֹאשׁ = [the] head of (head)
+14 הָאָיִל = the ram

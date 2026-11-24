@@ -1,0 +1,175 @@
+## 13:17:27
+KO: 이제 당신께서 종의 집을 축복하기를 기뻐하셨으니, 당신 앞에 영원히 있기 위함이니이다. 왜냐하면 여호와여, 당신께서 복을 주셨고, 그것은 영원히 복을 받은 상태이기 때문이니이다.
+1 וְעַתָּה = and now (now)
+2 הוֹאַלְתָּ = you have determined (be willing)
+3 לְבָרֵךְ = to bless
+4 אֶת־ = <obj.> ([Obj.])
+5 בֵּית = [the] house of (house)
+6 עַבְדְּךָ = servant your (servant;_slave)
+7 לִהְיוֹת = to be
+8 לְעוֹלָם = for ever
+9 לְפָנֶיךָ = <to> before you (face)
+10 כִּי־ = for
+11 אַתָּה = you (you(m.s.))
+12 יְהוָה = O Yahweh (LORD)
+13 בֵּרַכְתָּ = you have blessed
+14 וּמְבֹרָךְ = and [it is] blessed
+15 לְעוֹלָם פ = for ever
+
+## 13:18:1
+KO: 그리고 그 후에 다윗이 블레셋 사람들을 쳤고 그들을 굴복시켰으며, 블레셋 사람들의 손에서 가드와 그 딸린 마을들을 빼앗았다.
+1 וַיְהִי = and it was (to be)
+2 אַחֲרֵי־ = after
+3 כֵן = thus (so)
+4 וַיַּךְ = and he struck down (to smite)
+5 דָּוִיד = David
+6 אֶת־ = <obj.>
+7 פְּלִשְׁתִּים = [the] Philistines
+8 וַיַּכְנִיעֵם = and he subdued them (be humble)
+9 וַיִּקַּח = and he took (to take)
+10 אֶת־ = <obj.>
+11 גַּת = Gath
+12 וּבְנֹתֶיהָ = and daughters its (daughter)
+13 מִיַּד = from [the] hand of (hand)
+14 פְּלִשְׁתִּים = [the] Philistines
+
+## 13:18:2
+KO: 그리고 그가 모압을 쳤고, 모압은 다윗의 종들이 되어 예물을 나르는 자들이 되었다.
+1 וַיַּךְ = and he struck down (to smite)
+2 אֶת־ = <obj.> ([Obj.])
+3 מוֹאָב = Moab
+4 וַיִּהְיוּ = and they became (to be)
+5 מוֹאָב = Moab
+6 עֲבָדִים = subjects (servant;_slave)
+7 לְדָוִיד = of David (David)
+8 נֹשְׂאֵי = bearers of (to lift)
+9 מִנְחָה = tribute (offering)
+
+## 13:18:3
+KO: 그리고 다윗이 소바 왕 하닷에셀을 쳤으니, 그가 유브라데 강 가에 자기 손을 세우러 갈 때에 하맛까지라.
+1 וַיַּךְ = and he struck down (to smite)
+2 דָּוִיד = David
+3 אֶת־ = <obj.> ([Obj.])
+4 הֲדַדְעֶזֶר = Hadadezer
+5 מֶלֶךְ־ = [the] king of (king)
+6 צוֹבָה = Zobah
+7 חֲמָתָה = Hamath towards (-Hamath)
+8 בְּלֶכְתּוֹ = when went he (to go)
+9 לְהַצִּיב = to establish (to stand)
+10 יָדוֹ = monument his (hand)
+11 בִּנְהַר־ = at [the] river of (river)
+12 פְּרָת = Euphrates
+
+## 13:18:4
+KO: 그리고 다윗이 그로부터 병거 일천과 기병 칠천과 보병 이만을 사로잡았고, 다윗이 그 모든 병거를 (다) 발의 힘줄을 끊었으며, 그로부터 병거 일백만을 남겨 두었다.
+1 וַיִּלְכֹּד = and he captured (to capture)
+2 דָּוִיד = David
+3 מִמֶּנּוּ = from him
+4 אֶלֶף = one thousand
+5 רֶכֶב = chariot[s]
+6 וְשִׁבְעַת = and seven (seven)
+7 אֲלָפִים = thousand<s>
+8 פָּרָשִׁים = horsemen (horseman)
+9 וְעֶשְׂרִים = and twenty (twenty)
+10 אֶלֶף = thousand
+11 אִישׁ = man
+12 רַגְלִי = on foot
+13 וַיְעַקֵּר = and he hamstrung (to hamstring)
+14 דָּוִיד = David
+15 אֶת־ = <obj.> ([Obj.])
+16 כָּל־ = all
+17 הָרֶכֶב = the chariotry
+18 וַיּוֹתֵר = and he left (to remain)
+19 מִמֶּנּוּ = of it
+20 מֵאָה = one hundred (hundred)
+21 רָכֶב = chariot[s]
+
+## 13:18:5
+KO: 그리고 다메섹의 아람 사람들이 소바 왕 하닷에셀을 돕기 위해 왔는데, 다윗이 아람 사람 이만 이천 명을 쳤다.
+1 וַיָּבֹא = and it came (to come (in))
+2 אֲרַם = Aram
+3 דַּרְמֶשֶׂק = Damascus
+4 לַעְזוֹר = to help
+5 לַהֲדַדְעֶזֶר = <to> Hadadezer (Hadadezer)
+6 מֶלֶךְ = [the] king of (king)
+7 צוֹבָה = Zobah
+8 וַיַּךְ = and he struck down (to smite)
+9 דָּוִיד = David
+10 בַּאֲרָם = in Aram
+11 עֶשְׂרִים־ = twenty
+12 וּשְׁנַיִם = and two (two)
+13 אֶלֶף = thousand
+14 אִישׁ = man
+
+## 13:18:6
+KO: 그리고 다윗이 다메섹의 아람에 수비대를 두니, 아람 사람들이 다윗의 종이 되어 조공을 올리는 자들이 되었더라. 그리고 여호와께서 다윗이 가는 곳마다 그를 구원하시니라.
+1 וַיָּשֶׂם = and he put (to set)
+2 דָּוִיד = David
+3 בַּאֲרַם = in Aram
+4 דַּרְמֶשֶׂק = Damascus
+5 וַיְהִי = and it became (to be)
+6 אֲרָם = Aram
+7 לְדָוִיד = of David
+8 עֲבָדִים = subjects (servant;_slave)
+9 נֹשְׂאֵי = bearers of (to lift)
+10 מִנְחָה = tribute (offering)
+11 וַיּוֹשַׁע = and he gave victory (to save)
+12 יְהוָה = Yahweh (LORD)
+13 לְדָוִיד = to David
+14 בְּכֹל = in every (all)
+15 אֲשֶׁר = where (which)
+16 הָלָךְ = he went (to go)
+
+## 13:18:7
+KO: 그리고 다윗이 하닷에셀의 신복들에게 있었던 그 금방패들을 취하여, 예루살렘으로 그것들을 가져왔다.
+1 וַיִּקַּח = and he took (to take)
+2 דָּוִיד = David
+3 אֵת = <obj.> ([Obj.])
+4 שִׁלְטֵי = [the] shields of (shield)
+5 הַזָּהָב = <the> gold (gold)
+6 אֲשֶׁר = which
+7 הָיוּ = they were (to be)
+8 עַל = on (upon)
+9 עַבְדֵי = [the] servants of (servant;_slave)
+10 הֲדַדְעָזֶר = Hadadezer
+11 וַיְבִיאֵם = and he brought them (to come (in))
+12 יְרוּשָׁלִָם = Jerusalem
+
+## 13:18:8
+KO: 그리고 하닷에셀의 성읍들인 디브핫과 군으로부터 다윗이 심히 많은 놋을 취하였으니, 솔로몬이 그것으로 그 놋 바다와 기둥들과 그 놋 기구들을 만들었더라.
+1 וּמִטִּבְחַת = and from Tibhath (Tibhath)
+2 וּמִכּוּן = and from Kun (Cun)
+3 עָרֵי = [the] cities of (city)
+4 הֲדַדְעֶזֶר = Hadadezer
+5 לָקַח = he took (to take)
+6 דָּוִיד = David
+7 נְחֹשֶׁת = bronze
+8 רַבָּה = much (many)
+9 מְאֹד = very (much)
+10 בָּהּ = with it (her)
+11 עָשָׂה = he made (to make)
+12 שְׁלֹמֹה = Solomon
+13 אֶת־ = <obj.>
+14 יָם = [the] sea of (sea)
+15 הַנְּחֹשֶׁת = <the> bronze
+16 וְאֶת־ = and <obj.>
+17 הָעַמּוּדִים = the pillars (pillar)
+18 וְאֵת = and <obj.>
+19 כְּלֵי = [the] articles of (article|utensil)
+20 הַנְּחֹשֶׁת פ = <the> bronze
+
+## 13:18:9
+KO: 그리고 하맛 왕 도우가 들었다, 다윗이 소바 왕 하닷에셀의 모든 군대를 쳐서 무찔렀음을.
+1 וַיִּשְׁמַע = and he heard (to hear)
+2 תֹּעוּ = Tou (Toi)
+3 מֶלֶךְ = [the] king of
+4 חֲמָת = Hamath
+5 כִּי = that (for)
+6 הִכָּה = he had struck down (to smite)
+7 דָוִיד = David
+8 אֶת־ = <obj.> ([Obj.])
+9 כָּל־ = all
+10 חֵיל = [the] army of (strength)
+11 הֲדַדְעֶזֶר = Hadadezer
+12 מֶלֶךְ־ = [the] king of
+13 צוֹבָה = Zobah

@@ -1,0 +1,119 @@
+## 13:2:34
+KO: 세산에게는 아들들이 없었고 딸들뿐이었더라. 그리고 세산에게는 야르하라 하는 이름의 애굽 종이 있었으니,
+1 וְלֹא־ = and not (not)
+2 הָיָה = it belonged (to be)
+3 לְשֵׁשָׁן = to Sheshan
+4 בָּנִים = sons (son)
+5 כִּי = that
+6 אִם־ = except (if)
+7 בָּנוֹת = daughters (daughter)
+8 וּלְשֵׁשָׁן = and [belonged] to Sheshan
+9 עֶבֶד = a slave (servant;_slave)
+10 מִצְרִי = Egyptian
+11 וּשְׁמוֹ = and name his (name)
+12 יַרְחָע = [was] Jarha (Jarha)
+
+## 13:2:35
+KO: 그리고 셰샨은 그의 딸을 그의 종 야르하에게 아내로 주었으니, 그녀가 그에게 앗대를 낳아 주었다.
+1 וַיִּתֵּן = and he gave (to give)
+2 שֵׁשָׁן = Sheshan
+3 אֶת־ = <obj.>
+4 בִּתּוֹ = daughter his (daughter)
+5 לְיַרְחָע = to Jarha (Jarha)
+6 עַבְדּוֹ = slave his (servant;_slave)
+7 לְאִשָּׁה = to a wife (woman)
+8 וַתֵּלֶד = and she bore (to beget)
+9 לוֹ = to him (him)
+10 אֶת־ = <obj.>
+11 עַתָּי = Attai
+
+## 13:2:36
+KO: 그리고 앗대는 나단을 낳았고, 그리고 나단은 자밧을 낳았다.
+1 וְעַתַּי = and Attai (Attai)
+2 הֹלִיד = he fathered
+3 אֶת־ = <obj.>
+4 נָתָן = Nathan
+5 וְנָתָן = and Nathan
+6 הוֹלִיד = he fathered
+7 אֶת־ = <obj.>
+8 זָבָד = Zabad
+
+## 13:2:37
+KO: 그리고 자밧은 에블랄을 낳았고, 그리고 에블랄은 오벳을 낳았다.
+1 וְזָבָד = and Zabad (Zabad)
+2 הוֹלִיד = he fathered
+3 אֶת־ = <obj.>
+4 אֶפְלָל = Ephlal
+5 וְאֶפְלָל = and Ephlal
+6 הוֹלִיד = he fathered
+7 אֶת־ = <obj.>
+8 עוֹבֵד = Obed
+
+## 13:2:38
+KO: 그리고 오벳은 예후를 낳았고, 그리고 예후는 아사랴를 낳았다.
+1 וְעוֹבֵד = and Obed (Obed)
+2 הוֹלִיד = he fathered
+3 אֶת־ = <obj.>
+4 יֵהוּא = Jehu
+5 וְיֵהוּא = and Jehu
+6 הוֹלִיד = he fathered
+7 אֶת־ = <obj.>
+8 עֲזַרְיָה = Azariah
+
+## 13:2:39
+KO: 그리고 아사랴는 헬레스를 낳았고, 그리고 헬레스는 엘르아사를 낳았다.
+1 וַעֲזַרְיָה = and Azariah (Azariah)
+2 הֹלִיד = he fathered
+3 אֶת־ = <obj.>
+4 חָלֶץ = Helez
+5 וְחֶלֶץ = and Helez
+6 הֹלִיד = he fathered
+7 אֶת־ = <obj.>
+8 אֶלְעָשָׂה = Eleasah
+
+## 13:2:40
+KO: 그리고 엘르아사는 시스매를 낳았고, 시스매는 살룸을 낳았다.
+1 וְאֶלְעָשָׂה = and Eleasah (Eleasah)
+2 הֹלִיד = he fathered
+3 אֶת־ = <obj.>
+4 סִסְמָי = Sismai
+5 וְסִסְמַי = and Sismai
+6 הֹלִיד = he fathered
+7 אֶת־ = <obj.>
+8 שַׁלּוּם = Shallum
+
+## 13:2:41
+KO: 그리고 살룸은 여가먀를 낳았고, 여가먀는 엘리사마를 낳았다.
+1 וְשַׁלּוּם = and Shallum (Shallum)
+2 הוֹלִיד = he fathered
+3 אֶת־ = <obj.>
+4 יְקַמְיָה = Jekamiah
+5 וִיקַמְיָה = and Jekamiah
+6 הֹלִיד = he fathered
+7 אֶת־ = <obj.>
+8 אֱלִישָׁמָע = Elishama
+
+## 13:2:42
+KO: 여라므엘의 형제 갈렙의 아들들은 그의 맏아들 메사니, 그는 십의 아버지요, 마레사의 아들들은 헤브론의 아버지이다.
+1 וּבְנֵי = and [the] sons of
+2 כָלֵב = Caleb
+3 אֲחִי = [the] brother of (brother)
+4 יְרַחְמְאֵל = Jerahmeel
+5 מֵישָׁע = Mesha
+6 בְּכֹרוֹ = firstborn his (firstborn)
+7 הוּא = he (he;_she;_it)
+8 אֲבִי־ = [was] [the] father of
+9 זִיף = Ziph
+10 וּבְנֵי = and [the] sons of
+11 מָרֵשָׁה = Mareshah
+12 אֲבִי = [the] father of
+13 חֶבְרוֹן = Hebron
+
+## 13:2:43
+KO: 그리고 헤브론의 아들들은 고라와 답부아와 레겜과 세마이다.
+1 וּבְנֵי = and [the] sons of (son)
+2 חֶבְרוֹן = Hebron
+3 קֹרַח = Korah
+4 וְתַפֻּחַ = and Tappuah (Tappuah)
+5 וְרֶקֶם = and Rekem (Rekem)
+6 וָשָׁמַע = and Shema (Shema)

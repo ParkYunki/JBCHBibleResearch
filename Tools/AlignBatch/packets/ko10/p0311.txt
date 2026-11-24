@@ -1,0 +1,217 @@
+## 3:13:48
+KO: 혹은 날(warp)에나 혹은 씨(mixture)에나, 아마(flax)나 혹은 양털(wool)에나, 혹은 가죽에나 혹은 가죽으로 만든 모든 일(제품)에나.
+1 אוֹ = or
+2 בִשְׁתִי = in warp (warp)
+3 אוֹ = or
+4 בְעֵרֶב = in woof (mixture)
+5 לַפִּשְׁתִּים = of the linen<s> (flax)
+6 וְלַצָּמֶר = and of the wool (wool)
+7 אוֹ = or
+8 בְעוֹר = in a hide
+9 אוֹ = or
+10 בְּכָל־ = in every (all)
+11 מְלֶאכֶת = work of (work)
+12 עוֹר = hide
+
+## 3:13:49
+KO: 그리고 그 환부가 의복이나 가죽이나 날(씨)이나 씨(실)나 가죽으로 만든 모든 기구 위에 푸르스름하거나 불그스름하면, 그것은 나병의 환부이니 제사장에게 보일 것이다.
+1 וְהָיָה = and it will be (to be)
+2 הַנֶּגַע = the plague
+3 יְרַקְרַק = greenish
+4 אוֹ = or
+5 אֲדַמְדָּם = reddish
+6 בַּבֶּגֶד = in the clothing (garment)
+7 אוֹ = or
+8 בָעוֹר = in the hide
+9 אוֹ־ = or
+10 בַשְּׁתִי = in the warp (warp)
+11 אוֹ־ = or
+12 בָעֵרֶב = in the woof (mixture)
+13 אוֹ = or
+14 בְכָל־ = in every (all)
+15 כְּלִי־ = article of (article|utensil)
+16 עוֹר = hide
+17 נֶגַע = [is] a plague of
+18 צָרַעַת = a serious disease (leprosy)
+19 הוּא = it (he;_she;_it)
+20 וְהָרְאָה = and it will be shown to (to see)
+21 אֶת־ = <obj.> ([Obj.])
+22 הַכֹּהֵן = the priest (priest)
+
+## 3:13:50
+KO: 그리고 그 제사장은 그 색점을 볼 것이며, 그 색점을 칠 일 동안 가둘 것이다.
+1 וְרָאָה = and he will see (to see)
+2 הַכֹּהֵן = the priest (priest)
+3 אֶת־ = <obj.>
+4 הַנָּגַע = the plague
+5 וְהִסְגִּיר = and he will shut up (to shut)
+6 אֶת־ = <obj.>
+7 הַנֶּגַע = the plague
+8 שִׁבְעַת = seven
+9 יָמִים = days (day;_when)
+
+## 3:13:51
+KO: 그리고 일곱째 날에 그 색점을 볼지니, 만약 그 색점이 의복이나 날실이나 씨실이나 혹은 가죽으로 만든 모든 일거리에 퍼졌다면, 그것은 악성 나병(짜라아트 마므에레트)이며 그 색점은 부정하다.
+1 וְרָאָה = and he will see (to see)
+2 אֶת־ = <obj.> ([Obj.])
+3 הַנֶּגַע = the plague
+4 בַּיּוֹם = on the day (day;_when)
+5 הַשְּׁבִיעִי = <the> seventh (seventh)
+6 כִּי־ = if (for)
+7 פָשָׂה = it has spread (to spread)
+8 הַנֶּגַע = the plague
+9 בַּבֶּגֶד = in the clothing (garment)
+10 אוֹ־ = or
+11 בַשְּׁתִי = in the warp (warp)
+12 אוֹ־ = or
+13 בָעֵרֶב = in the woof (mixture)
+14 אוֹ = or
+15 בָעוֹר = in the hide
+16 לְכֹל = to all (all)
+17 אֲשֶׁר־ = that (which)
+18 יֵעָשֶׂה = it will be made (to make)
+19 הָעוֹר = the hide
+20 לִמְלָאכָה = into a product (work)
+21 צָרַעַת = [is] a serious disease (leprosy)
+22 מַמְאֶרֶת = malignant (to malign)
+23 הַנֶּגַע = the plague
+24 טָמֵא = [is] unclean (unclean)
+25 הוּא = it (he;_she;_it)
+
+## 3:13:52
+KO: 그리고 그는 그 옷이나 그 날이나 그 씨(털이나 베의)나 가죽으로 만든 모든 기구를 불사를 것이니, 그것에 그 재앙이 있을 것이기 때문이다. 그것은 악성 나병(짜라아트)이니 불에 태워질 것이다.
+1 וְשָׂרַף = and he will burn
+2 אֶת־ = <obj.>
+3 הַבֶּגֶד = the garment (garment)
+4 אוֹ = or
+5 אֶת־ = <obj.>
+6 הַשְּׁתִי = the warp (warp)
+7 אוֹ = or
+8 אֶת־ = <obj.>
+9 הָעֵרֶב = the woof (mixture)
+10 בַּצֶּמֶר = in the wool (wool)
+11 אוֹ = or
+12 בַפִּשְׁתִּים = in the linen<s> (flax)
+13 אוֹ = or
+14 אֶת־ = <obj.>
+15 כָּל־ = every (all)
+16 כְּלִי = <the> article of (article|utensil)
+17 הָעוֹר = <the> hide (skin)
+18 אֲשֶׁר־ = which
+19 יִהְיֶה = it will be (to be)
+20 בוֹ = in <the> it (him)
+21 הַנָּגַע = the plague (plague)
+22 כִּי־ = for
+23 צָרַעַת = [is] a serious disease (leprosy)
+24 מַמְאֶרֶת = malignant (to malign)
+25 הִוא = it (he;_she;_it)
+26 בָּאֵשׁ = with <the> fire (fire)
+27 תִּשָּׂרֵף = it will be burned
+
+## 3:13:53
+KO: 만약 제사장이 보는데, 보라 그 재앙이 그 의복에나, 날실에나, 씨실에나, 또는 가죽으로 만든 모든 도구에 퍼지지 아니하였으면
+1 וְאִם = and if (if)
+2 יִרְאֶה = he will see (to see)
+3 הַכֹּהֵן = the priest (priest)
+4 וְהִנֵּה = and there! (behold)
+5 לֹא־ = not
+6 פָשָׂה = it has spread (to spread)
+7 הַנֶּגַע = the plague (plague)
+8 בַּבֶּגֶד = in the garment (garment)
+9 אוֹ = or
+10 בַשְּׁתִי = in the warp (warp)
+11 אוֹ = or
+12 בָעֵרֶב = in the woof (mixture)
+13 אוֹ = or
+14 בְּכָל־ = in every (all)
+15 כְּלִי־ = article of (article|utensil)
+16 עוֹר = hide (skin)
+
+## 3:13:54
+KO: 그리고 제사장은 명령할 것이니, 그들은 그 안에 환부가 있는 것을 빨게 하고, 그것을 이레 동안 다시 가두어 둘 것이다.
+1 וְצִוָּה = and he will command (to command)
+2 הַכֹּהֵן = the priest (priest)
+3 וְכִבְּסוּ = and they will wash (to wash)
+4 אֵת = <obj.> ([Obj.])
+5 אֲשֶׁר־ = [that] which (which)
+6 בּוֹ = [is] in <the> it (him)
+7 הַנָּגַע = the plague (plague)
+8 וְהִסְגִּירוֹ = and he will shut up it (to shut)
+9 שִׁבְעַת־ = seven
+10 יָמִים = days (day;_when)
+11 שֵׁנִית = a second (second)
+
+## 3:13:55
+KO: 제사장은 그 환부를 씻은 후에 볼 것이니, 보라 그 환부가 그 빛을 바꾸지 아니하고 그 환부가 퍼지지 아니하였으면, 그것은 부정하니 너는 그것을 불로 불사를지니라. 그것은 그(옷/가죽)의 깎인 곳에 있든지 그(옷/가죽)의 대머리에 있든지 침식(패인 상처)이니라.
+1 וְרָאָה = and he will see (to see)
+2 הַכֹּהֵן = the priest (priest)
+3 אַחֲרֵי = after
+4 הֻכַּבֵּס = was washed out (to wash)
+5 אֶת־ = <obj.>
+6 הַנֶּגַע = the plague
+7 וְהִנֵּה = and there! (behold)
+8 לֹא־ = not
+9 הָפַךְ = it has turned (to overturn)
+10 הַנֶּגַע = the plague
+11 אֶת־ = <obj.>
+12 עֵינוֹ = eye its (eye)
+13 וְהַנֶּגַע = and the plague
+14 לֹא־ = not
+15 פָשָׂה = it has spread (to spread)
+16 טָמֵא = [is] unclean (unclean)
+17 הוּא = it
+18 בָּאֵשׁ = with <the> fire (fire)
+19 תִּשְׂרְפֶנּוּ = you will burn it (to burn)
+20 פְּחֶתֶת = [is] a mildew (eating)
+21 הִוא = it
+22 בְּקָרַחְתּוֹ = on bald spot its (baldness)
+23 אוֹ = or
+24 בְגַבַּחְתּוֹ = on bald forehead its (baldness)
+
+## 3:13:56
+KO: 그리고 만일 제사장이 보았는데, 보라, 그 색점이 씻긴 후에 엷어졌으면, 그는 그것을 그 의복에서나, 혹은 그 가죽에서나, 혹은 그 날실에서나, 혹은 그 씨실에서 찢어 버릴 것이다.
+1 וְאִם = and if (if)
+2 רָאָה = he has seen (to see)
+3 הַכֹּהֵן = the priest (priest)
+4 וְהִנֵּה = and there! (behold)
+5 כֵּהָה = it has become dull (to grow dim)
+6 הַנֶּגַע = the plague (plague)
+7 אַחֲרֵי = after
+8 הֻכַּבֵּס = was washed out (to wash)
+9 אֹתוֹ = <obj.> it
+10 וְקָרַע = and he will tear (to tear)
+11 אֹתוֹ = <obj.> it
+12 מִן־ = from
+13 הַבֶּגֶד = the clothing (garment)
+14 אוֹ = or
+15 מִן־ = from
+16 הָעוֹר = the hide (skin)
+17 אוֹ = or
+18 מִן־ = from
+19 הַשְּׁתִי = the warp (warp)
+20 אוֹ = or
+21 מִן־ = from
+22 הָעֵרֶב = the woof (mixture)
+
+## 3:13:57
+KO: 만약 그 의복이나 씨실이나 날실이나 가죽으로 만든 모든 물건에 그것(색점)이 여전히 나타나면, 그것은 번지는 것이니 너는 그 색점이 있는 것을 불로 태울지니라.
+1 וְאִם־ = and if (if)
+2 תֵּרָאֶה = it will appear (to see)
+3 עוֹד = again (still)
+4 בַּבֶּגֶד = in the garment (garment)
+5 אוֹ־ = or
+6 בַשְּׁתִי = in the warp (warp)
+7 אוֹ־ = or
+8 בָעֵרֶב = in the woof (mixture)
+9 אוֹ = or
+10 בְכָל־ = in every (all)
+11 כְּלִי־ = article of (article|utensil)
+12 עוֹר = hide (skin)
+13 פֹּרַחַת = [is] breaking out (to sprout)
+14 הִוא = it (he;_she;_it)
+15 בָּאֵשׁ = with <the> fire (fire)
+16 תִּשְׂרְפֶנּוּ = you will burn it (to burn)
+17 אֵת = <obj.> ([Obj.])
+18 אֲשֶׁר־ = [that] which (which)
+19 בּוֹ = [is] in <the> it (him)
+20 הַנָּגַע = the plague (plague)

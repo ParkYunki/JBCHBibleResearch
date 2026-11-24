@@ -11,6 +11,8 @@
 //  - [2026-10-21] 사용자 추가 번역본은 절 본문 지문(`VerseTextFingerprint`)으로 알려진 번역본(NASB1995·NKJV1982·ABAB)을
 //    알아보고 그 설명을 찾는다(`externalDifference`).
 //  - `Literal_<언어>.sqlite`는 아직 생성 전이라 파일이 없으면 nil을 돌려준다(에러 아님).
+//  - [2026-11-02 interlin1] 단어 짝(`alignedPhrases`): 앱 언어 `Literal_<언어>.sqlite`(한국어는 `Literal_ko.sqlite`)의 `WordAlignment`.
+//    표가 없으면 빈 결과 — 화면은 "—"로 보인다.
 //
 
 import Foundation
@@ -39,6 +41,73 @@ final class LiteralCommentaryService {
             print("[LiteralCommentaryService] 직역 조회 실패: \(error)")
             return nil
         }
+    }
+
+    /// [2026-11-02 interlin1] 원문 정보 "단어별" 칸 위 줄 — 원어 단어 위치(`OriginalTextLookupService.words` 배열의 0부터 위치)
+    /// → 지금 화면 직역 문장(`literal`, `appLanguageLiteral` 결과) 속 말.
+    /// 직역 문장의 `start`(Unicode scalar 위치)부터 `phrase`가 그대로 있을 때만 넣는다 — 직역을 다시 만들어 문장이 바뀌면
+    /// 맞지 않는 짝은 저절로 빠진다. 직역이 없거나 표·파일이 없으면 빈 결과(에러 아님).
+    func alignedPhrases(bookId: Int, chapter: Int, verse: Int, literal: String?) -> [Int: String] {
+        alignedPhraseSpans(bookId: bookId, chapter: chapter, verse: verse, literal: literal).mapValues(\.text)
+    }
+
+    /// [2026-11-05 rowhide1] 앱 언어에 단어 짝 데이터가 있는지(`Literal_<언어>.sqlite`에 `WordAlignment` 표가 있는지, 한국어는 `Literal_ko.sqlite`).
+    /// 파일·표가 없거나 조회에 실패하면 false — 화면이 단어별 칸 위 줄(직역 속 말)을 숨긴다.
+    /// 짝짓기를 마친 언어에서 절 하나만 짝이 없으면 true 그대로다(그 절은 위 줄이 "—").
+    func appLanguageHasWordAlignments() -> Bool {
+        let language = AppLanguage.isKorean ? "ko" : AppLanguage.baseCode
+        guard let store = store(forLanguage: language) else { return false }
+        do {
+            return try store.hasWordAlignmentTable()
+        } catch {
+            print("[LiteralCommentaryService] 단어 짝 표 확인 실패: \(error)")
+            return false
+        }
+    }
+
+    /// [2026-11-04 mergecell] 단어 짝 한 개 — 화면에 보일 말(`text`, 어절 가운데서 시작하면 앞에 "~")과 직역 문장 속 시작 위치(`start`).
+    /// 연이은 단어가 같은 구간(같은 `start`, 같은 말)을 함께 쓰는지 화면이 판단할 때 쓴다(`==`).
+    struct AlignedPhrase: Equatable {
+        let text: String
+        let start: Int
+    }
+
+    /// [2026-11-04 mergecell] `alignedPhrases`와 같은 짝을 시작 위치와 함께 돌려준다. 규칙·실패 처리는 `alignedPhrases` 설명과 같다.
+    func alignedPhraseSpans(bookId: Int, chapter: Int, verse: Int, literal: String?) -> [Int: AlignedPhrase] {
+        guard let literal, !literal.isEmpty else { return [:] }
+        let language = AppLanguage.isKorean ? "ko" : AppLanguage.baseCode
+        guard let store = store(forLanguage: language) else { return [:] }
+        let rows: [LiteralWordAlignment]
+        do {
+            rows = try store.wordAlignments(bookId: bookId, chapter: chapter, verse: verse)
+        } catch {
+            print("[LiteralCommentaryService] 단어 짝 조회 실패: \(error)")
+            return [:]
+        }
+        guard !rows.isEmpty else { return [:] }
+        let literalScalars = Array(literal.unicodeScalars)
+        var result: [Int: AlignedPhrase] = [:]
+        for row in rows {
+            let phraseScalars = Array(row.phrase.unicodeScalars)
+            // `start + 길이 <= 전체 길이`를 뺄셈으로 비교해 큰 `start`에서도 넘치지 않게 한다.
+            guard row.wordIndex >= 0, row.start >= 0, !phraseScalars.isEmpty,
+                  row.start <= literalScalars.count - phraseScalars.count,
+                  literalScalars[row.start ..< row.start + phraseScalars.count].elementsEqual(phraseScalars) else { continue }
+            // [2026-11-04 prepsplit] 어절 가운데서 시작하는 말(한국어 짝에서 전치사에 따로 준 조사, 예: "아비아달에게"의 "에게")은
+            // 앞말에 붙는 말임을 보이도록 "~"를 붙인다. 바로 앞 글자가 공백·문장부호·기호이거나 문장 처음이면 붙이지 않는다.
+            // [2026-11-07 tilde1] "~"는 한국어에서만 붙인다. 중국어처럼 띄어쓰기가 없는 언어는 짝 앞 글자가 거의 늘 문자라
+            // 모든 칸에 "~"가 붙게 된다. 다른 언어 데이터에는 어절 중간 짝이 없어 지금까지와 결과가 같다.
+            let isAttached = language == "ko" && row.start > 0 && !Self.isWordBoundary(literalScalars[row.start - 1])
+            result[row.wordIndex] = AlignedPhrase(text: isAttached ? "~" + row.phrase : row.phrase, start: row.start)
+        }
+        return result
+    }
+
+    /// `alignedPhrases`의 어절 경계 판정. 공백, 문장부호(따옴표·괄호·대시 포함), 기호(`<` 등)를 경계로 본다.
+    private static func isWordBoundary(_ scalar: Unicode.Scalar) -> Bool {
+        scalar.properties.isWhitespace
+            || CharacterSet.punctuationCharacters.contains(scalar)
+            || CharacterSet.symbols.contains(scalar)
     }
 
     /// 번역본 하나와 원어의 차이 설명. 데이터가 없으면 nil.

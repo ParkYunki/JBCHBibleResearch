@@ -1,0 +1,992 @@
+## 11:1:33
+KO: 그리고 왕이 그들에게 말하였다. 너희는 너희 주인의 신복들을 너희와 함께 취하여, 내 아들 솔로몬을 나에게 속한 암노새에 태우고, 그를 기혼으로 내려가게 하라.
+1 וַיֹּאמֶר = and he said (to say)
+2 הַמֶּלֶךְ = the king (king)
+3 לָהֶם = to them (them)
+4 קְחוּ = take (to take)
+5 עִמָּכֶם = with you (with)
+6 אֶת־ = <obj.>
+7 עַבְדֵי = [the] servants of (servant;_slave)
+8 אֲדֹנֵיכֶם = lord<s> your (lord)
+9 וְהִרְכַּבְתֶּם = and you will cause to ride (to ride)
+10 אֶת־ = <obj.>
+11 שְׁלֹמֹה = Solomon
+12 בְנִי = son my (son)
+13 עַל־ = on (upon)
+14 הַפִּרְדָּה = the mule (female mule)
+15 אֲשֶׁר־ = which
+16 לִי = [belongs] to me (me)
+17 וְהוֹרַדְתֶּם = and you will take down (to go down)
+18 אֹתוֹ = <obj.> him
+19 אֶל־ = to (to(wards))
+20 גִּחוֹן = Gihon
+
+## 11:1:34
+KO: 그리고 제사장 사독과 선지자 나단이 거기서 그에게 기름을 부어 이스라엘 위에 왕으로 삼으라. 그리고 너희는 양각 나팔을 불며 말하라, 왕 솔로몬이 살기를(만세를 부르기를).
+1 וּמָשַׁח = and he will anoint (to anoint)
+2 אֹתוֹ = <obj.> him ([Obj.])
+3 שָׁם = there
+4 צָדוֹק = Zadok
+5 הַכֹּהֵן = the priest (priest)
+6 וְנָתָן = and Nathan (Nathan)
+7 הַנָּבִיא = the prophet (prophet)
+8 לְמֶלֶךְ = to king
+9 עַל־ = over (upon)
+10 יִשְׂרָאֵל = Israel
+11 וּתְקַעְתֶּם = and you will give a blast (to blow)
+12 בַּשּׁוֹפָר = on the ram's horn (trumpet)
+13 וַאֲמַרְתֶּם = and you will say (to say)
+14 יְחִי = may he live (to live)
+15 הַמֶּלֶךְ = the king
+16 שְׁלֹמֹה = Solomon
+
+## 11:1:35
+KO: 너희는 그를 따라 올라오라. 그가 와서 내 보좌 위에 앉아 내 대신 왕이 될 것이며, 내가 그에게 이스라엘과 유다 위에 통치자가 되라고 명령하였노라.
+1 וַעֲלִיתֶם = and you will come up (to ascend)
+2 אַחֲרָיו = after him (after)
+3 וּבָא = and he will come (to come (in))
+4 וְיָשַׁב = and he will sit (to dwell)
+5 עַל־ = on
+6 כִּסְאִי = throne my (throne)
+7 וְהוּא = and he (he;_she;_it)
+8 יִמְלֹךְ = he will reign (to reign)
+9 תַּחְתָּי = in place of me (underneath)
+10 וְאֹתוֹ = and <with> him (with)
+11 צִוִּיתִי = I have appointed (to command)
+12 לִהְיוֹת = to be
+13 נָגִיד = ruler (leader)
+14 עַל־ = over
+15 יִשְׂרָאֵל = Israel
+16 וְעַל־ = and over
+17 יְהוּדָה = Judah
+
+## 11:1:36
+KO: 그리고 브나야가 여호야다의 아들이 왕에게 대답하였고 말하였다, 아멘. 이렇게 주 나의 왕의 하나님 여호와께서 말씀하시기를.
+1 וַיַּעַן = and he answered (to answer)
+2 בְּנָיָהוּ = Benaiah
+3 בֶן־ = [the] son of (son)
+4 יְהוֹיָדָע = Jehoiada
+5 אֶת־ = <obj.> ([Obj.])
+6 הַמֶּלֶךְ = the king
+7 וַיֹּאמֶר = and he said
+8 אָמֵן = amen
+9 כֵּן = thus (so)
+10 יֹאמַר = may he say
+11 יְהוָה = Yahweh (LORD)
+12 אֱלֹהֵי = [the] God of (God)
+13 אֲדֹנִי = lord my (lord)
+14 הַמֶּלֶךְ = the king
+
+## 11:1:37
+KO: 여호와께서 내 주 왕과 함께 계셨던 것같이 그렇게 솔로몬과 함께 계시기를, 그리고 그의 보좌를 내 주 다윗 왕의 보좌보다 더 크게 하시기를 원하나이다.
+1 כַּאֲשֶׁר = just as (as which)
+2 הָיָה = he has been
+3 יְהוָה = Yahweh (LORD)
+4 עִם־ = with
+5 אֲדֹנִי = lord my
+6 הַמֶּלֶךְ = the king
+7 כֵּן = so
+8 יִהְיֶה = he will be
+9 עִם־ = with
+10 שְׁלֹמֹה = Solomon
+11 וִיגַדֵּל = and may he make great (to magnify)
+12 אֶת־ = <obj.> ([Obj.])
+13 כִּסְאוֹ = throne his
+14 מִכִּסֵּא = more than [the] throne of
+15 אֲדֹנִי = lord my
+16 הַמֶּלֶךְ = the king
+17 דָּוִד = David
+
+## 11:1:38
+KO: 그리고 사독 제사장과 나단 선지자와 여호야다의 아들 브나야와 그렛 사람들과 블렛 사람들이 내려갔고, 그들이 솔로몬을 다윗 왕의 암나귀(노새) 위에 태우고 기혼으로 그를 데리고 갔다.
+1 וַיֵּרֶד = and he went down (to go down)
+2 צָדוֹק = Zadok
+3 הַכֹּהֵן = the priest (priest)
+4 וְנָתָן = and Nathan (Nathan)
+5 הַנָּבִיא = the prophet (prophet)
+6 וּבְנָיָהוּ = and Benaiah (Benaiah)
+7 בֶן־ = [the] son of (son)
+8 יְהוֹיָדָע = Jehoiada
+9 וְהַכְּרֵתִי = and the Kerethite[s] (Cherethite)
+10 וְהַפְּלֵתִי = and the Pelethite[s] (Pelethite)
+11 וַיַּרְכִּבוּ = and they caused to ride (to ride)
+12 אֶת־ = <obj.>
+13 שְׁלֹמֹה = Solomon
+14 עַל־ = on
+15 פִּרְדַּת = [the] mule of (female mule)
+16 הַמֶּלֶךְ = the king (king)
+17 דָּוִד = David
+18 וַיֹּלִכוּ = and they brought (to go)
+19 אֹתוֹ = <obj.> him
+20 עַל־ = to
+21 גִּחוֹן = Gihon
+
+## 11:1:39
+KO: 사독 제사장이 성막으로부터 기름의 뿔을 취하여 솔로몬에게 기름을 부으니, 그들이 나팔을 불었고 모든 백성이 말하기를 “왕 솔로몬이여, 사소서(만수무강하소서)” 하니라.
+1 וַיִּקַּח = and he took (to take)
+2 צָדוֹק = Zadok
+3 הַכֹּהֵן = the priest (priest)
+4 אֶת־ = <obj.>
+5 קֶרֶן = [the] horn of (horn)
+6 הַשֶּׁמֶן = <the> oil (oil)
+7 מִן־ = from
+8 הָאֹהֶל = the tent (tent)
+9 וַיִּמְשַׁח = and he anointed (to anoint)
+10 אֶת־ = <obj.>
+11 שְׁלֹמֹה = Solomon
+12 וַיִּתְקְעוּ = and they gave a blast (to blow)
+13 בַּשּׁוֹפָר = on the ram's horn (trumpet)
+14 וַיֹּאמְרוּ = and they said (to say)
+15 כָּל־ = all
+16 הָעָם = the people (people)
+17 יְחִי = may he live (to live)
+18 הַמֶּלֶךְ = the king (king)
+19 שְׁלֹמֹה = Solomon
+
+## 11:1:40
+KO: 그리고 모든 백성이 그를 따라 올라왔고, 그 백성은 피리들로 피리를 불며 큰 기쁨으로 기뻐하니, 그 땅이 그들의 소리로 인하여 갈라졌다.
+1 וַיַּעֲלוּ = and they went up (to ascend)
+2 כָל־ = all
+3 הָעָם = the people
+4 אַחֲרָיו = after him (after)
+5 וְהָעָם = and the people
+6 מְחַלְּלִים = [were] playing [the] flute (to play flute)
+7 בַּחֲלִלִים = with flutes (flute)
+8 וּשְׂמֵחִים = and joyful (glad)
+9 שִׂמְחָה = joy
+10 גְדוֹלָה = great
+11 וַתִּבָּקַע = and it was split open (to break up|open)
+12 הָאָרֶץ = the earth (land)
+13 בְּקוֹלָם = by noise their (voice)
+
+## 11:1:41
+KO: 그리고 아도니야와 그와 함께 있던 모든 청함을 받은 자들이 먹기를 마쳤을 때에 들었다. 요압이 그 나팔 소리를 듣고 말하기를, "어찌하여 성읍의 소리가 요란한가?"라고 하였다.
+1 וַיִּשְׁמַע = and he heard
+2 אֲדֹנִיָּהוּ = Adonijah
+3 וְכָל־ = and all (all)
+4 הַקְּרֻאִים = those [who] were invited (to call)
+5 אֲשֶׁר = who (which)
+6 אִתּוֹ = [were] with him (with)
+7 וְהֵם = and they (they(masc.))
+8 כִּלּוּ = they had finished (to end)
+9 לֶאֱכֹל = to eat
+10 וַיִּשְׁמַע = and he heard
+11 יוֹאָב = Joab
+12 אֶת־ = <obj.> ([Obj.])
+13 קוֹל = [the] sound of
+14 הַשּׁוֹפָר = the ram's horn (trumpet)
+15 וַיֹּאמֶר = and he said (to say)
+16 מַדּוּעַ = why?
+17 קוֹל־ = [is] [the] sound of
+18 הַקִּרְיָה = the town (town)
+19 הוֹמָה = in an uproar (to roar)
+
+## 11:1:42
+KO: 그가 여전히 말하고 있을 때, 보라, 제사장 아비아달의 아들 요나단이 오고 있었다. 아도니야가 말하였다. "들어오라, 왜냐하면 너는 용사이며 좋은 소식을 전하는구나."
+1 עוֹדֶנּוּ = still he (still)
+2 מְדַבֵּר = [was] speaking (to speak)
+3 וְהִנֵּה = and there! (behold)
+4 יוֹנָתָן = Jonathan
+5 בֶּן־ = [the] son of (son)
+6 אֶבְיָתָר = Abiathar
+7 הַכֹּהֵן = the priest (priest)
+8 בָּא = he came
+9 וַיֹּאמֶר = and he said (to say)
+10 אֲדֹנִיָּהוּ = Adonijah
+11 בֹּא = come
+12 כִּי = for
+13 אִישׁ = [are] a man of (man)
+14 חַיִל = worth (strength)
+15 אַתָּה = you (you(m.s.))
+16 וְטוֹב = and good (good)
+17 תְּבַשֵּׂר = you bear news (to bear tidings)
+
+## 11:1:43
+KO: 요나단이 대답하여 아도니야에게 말하였다. "참으로 우리 주 다윗 왕이 솔로몬을 왕으로 세우셨나이다."
+1 וַיַּעַן = and he answered (to answer)
+2 יוֹנָתָן = Jonathan
+3 וַיֹּאמֶר = and he said (to say)
+4 לַאֲדֹנִיָּהוּ = to Adonijah (Adonijah)
+5 אֲבָל = indeed (truly)
+6 אֲדֹנֵינוּ = lord<s> our (lord)
+7 הַמֶּלֶךְ־ = the king (king)
+8 דָּוִד = David
+9 הִמְלִיךְ = he has made king (to reign)
+10 אֶת־ = <obj.> ([Obj.])
+11 שְׁלֹמֹה = Solomon
+
+## 11:1:44
+KO: 왕이 그와 함께 제사장 사독과 선지자 나단과 여호야다의 아들 브나야와 그렛 사람과 블렛 사람을 보냈고, 그들이 그를 왕의 암노새 위에 태웠다.
+1 וַיִּשְׁלַח = and he has sent (to send)
+2 אִתּוֹ־ = with him (with)
+3 הַמֶּלֶךְ = the king
+4 אֶת־ = <obj.>
+5 צָדוֹק = Zadok
+6 הַכֹּהֵן = the priest (priest)
+7 וְאֶת־ = and <obj.>
+8 נָתָן = Nathan
+9 הַנָּבִיא = the prophet (prophet)
+10 וּבְנָיָהוּ = and Benaiah (Benaiah)
+11 בֶּן־ = [the] son of (son)
+12 יְהוֹיָדָע = Jehoiada
+13 וְהַכְּרֵתִי = and the Kerethite[s] (Cherethite)
+14 וְהַפְּלֵתִי = and the Pelethite[s] (Pelethite)
+15 וַיַּרְכִּבוּ = and they have caused to ride (to ride)
+16 אֹתוֹ = <obj.> him
+17 עַל = on (upon)
+18 פִּרְדַּת = [the] mule of (female mule)
+19 הַמֶּלֶךְ = the king
+
+## 11:1:45
+KO: 그리고 사독 제사장과 나단 선지자가 기혼에서 그에게 기름을 부어 왕으로 삼았고, 그들이 거기서 기뻐하며 올라오니 그 성읍이 소란하였으니 이것이 너희가 들은 소리이다.
+1 וַיִּמְשְׁחוּ = and they have anointed (to anoint)
+2 אֹתוֹ = <obj.> him ([Obj.])
+3 צָדוֹק = Zadok
+4 הַכֹּהֵן = the priest (priest)
+5 וְנָתָן = and Nathan (Nathan)
+6 הַנָּבִיא = the prophet (prophet)
+7 לְמֶלֶךְ = to king (king)
+8 בְּגִחוֹן = at Gihon (Gihon)
+9 וַיַּעֲלוּ = and they have gone up (to ascend)
+10 מִשָּׁם = from there (there)
+11 שְׂמֵחִים = joyful (glad)
+12 וַתֵּהֹם = and it was excited (to make noise)
+13 הַקִּרְיָה = the town (town)
+14 הוּא = that (he;_she;_it)
+15 הַקּוֹל = [is] the noise (voice)
+16 אֲשֶׁר = which
+17 שְׁמַעְתֶּם = you have heard (to hear)
+
+## 11:1:46
+KO: 또한 솔로몬이 왕국의 보좌 위에 앉았다.
+1 וְגַם = and also (also)
+2 יָשַׁב = he has sat (to dwell)
+3 שְׁלֹמֹה = Solomon
+4 עַל = on (upon)
+5 כִּסֵּא = [the] throne of (throne)
+6 הַמְּלוּכָה = <the> royalty (kingship)
+
+## 11:1:47
+KO: 또한 왕의 신복들이 와서 우리 주 왕 다윗을 축복하려고 말하기를, "왕의 하나님께서 솔로몬의 이름을 왕의 이름보다 좋게 하시고, 그의 보좌를 왕의 보좌보다 크게 하시기를 원합니다"라고 하매, 왕이 침상 위에서 몸을 굽혔다.
+1 וְגַם־ = and also (also)
+2 בָּאוּ = they have come (to come (in))
+3 עַבְדֵי = [the] servants of (servant;_slave)
+4 הַמֶּלֶךְ = the king
+5 לְבָרֵךְ = to bless
+6 אֶת־ = <obj.>
+7 אֲדֹנֵינוּ = lord<s> our (lord)
+8 הַמֶּלֶךְ = the king
+9 דָּוִד = David
+10 לֵאמֹר = <to> saying (to say)
+11 יֵיטֵב = may he make good (be good)
+12 אֱלֹהִים = God
+13 אֶת־ = <obj.>
+14 שֵׁם = [the] name of
+15 שְׁלֹמֹה = Solomon
+16 מִשְּׁמֶךָ = more than name your
+17 וִיגַדֵּל = and may he make great (to magnify)
+18 אֶת־ = <obj.>
+19 כִּסְאוֹ = throne his
+20 מִכִּסְאֶךָ = more than throne your
+21 וַיִּשְׁתַּחוּ = and he bowed down (to bow)
+22 הַמֶּלֶךְ = the king
+23 עַל־ = on (upon)
+24 הַמִּשְׁכָּב = the bed (bed)
+
+## 11:1:48
+KO: 또한 이와 같이 왕이 말하였다. "이스라엘의 하나님 여호와를 송축할지로다. 그분께서 오늘 내 보좌 위에 앉을 자를 주셔서 내 눈으로 보게 하셨도다."
+1 וְגַם־ = and also (also)
+2 כָּכָה = thus
+3 אָמַר = he has said (to say)
+4 הַמֶּלֶךְ = the king (king)
+5 בָּרוּךְ = [be] blessed (to bless)
+6 יְהוָה = Yahweh (LORD)
+7 אֱלֹהֵי = [the] God of (God)
+8 יִשְׂרָאֵל = Israel
+9 אֲשֶׁר = who (which)
+10 נָתַן = he has given (to give)
+11 הַיּוֹם = this day (day)
+12 יֹשֵׁב = [one who] sits (to dwell)
+13 עַל־ = on (upon)
+14 כִּסְאִי = throne my (throne)
+15 וְעֵינַי = and own eyes my (eye)
+16 רֹאוֹת = [are] seeing (to see)
+
+## 11:1:49
+KO: 그리고 아도니야에게 속한 모든 부름 받은 자들이 떨며 일어나 각각 자기 길로 갔다.
+1 וַיֶּחֶרְדוּ = and they trembled (to tremble)
+2 וַיָּקֻמוּ = and they rose up (to arise)
+3 כָּל־ = all
+4 הַקְּרֻאִים = those [who] were invited (to call)
+5 אֲשֶׁר = who (which)
+6 לַאֲדֹנִיָּהוּ = [belonged] to Adonijah (Adonijah)
+7 וַיֵּלְכוּ = and they went (to go)
+8 אִישׁ = each (man)
+9 לְדַרְכּוֹ = to way his (way)
+
+## 11:1:50
+KO: 그리고 아도니야는 솔로몬의 얼굴 앞에서 두려워하여, 일어나 가서 제단의 뿔들을 붙잡았다.
+1 וַאֲדֹנִיָּהוּ = and Adonijah (Adonijah)
+2 יָרֵא = he was afraid (to fear)
+3 מִפְּנֵי = of <the face of> (face)
+4 שְׁלֹמֹה = Solomon
+5 וַיָּקָם = and he arose (to arise)
+6 וַיֵּלֶךְ = and he went (to go)
+7 וַיַּחֲזֵק = and he took hold (to strengthen)
+8 בְּקַרְנוֹת = on [the] horns of (horn)
+9 הַמִּזְבֵּחַ = the altar (altar)
+
+## 11:1:51
+KO: 그리고 솔로몬에게 말하여지기를, "보라, 아도니야가 솔로몬 왕을 두려워하여, 보라, 그가 제단 뿔들을 잡고 말하기를, '솔로몬 왕이 오늘 자기 종을 칼로 죽이지 않겠다고 내게 맹세하기를 원한다' 하였나이다."
+1 וַיֻּגַּד = and it was told (to tell)
+2 לִשְׁלֹמֹה = to Solomon
+3 לֵאמֹר = <to> saying
+4 הִנֵּה = there!
+5 אֲדֹנִיָּהוּ = Adonijah
+6 יָרֵא = he fears (to fear)
+7 אֶת־ = <obj.>
+8 הַמֶּלֶךְ = the king
+9 שְׁלֹמֹה = Solomon
+10 וְהִנֵּה = and there!
+11 אָחַז = he has taken hold (to grasp)
+12 בְּקַרְנוֹת = on [the] horns of (horn)
+13 הַמִּזְבֵּחַ = the altar (altar)
+14 לֵאמֹר = <to> saying
+15 יִשָּׁבַע־ = let him swear (to swear)
+16 לִי = to me (me)
+17 כַיּוֹם = as the day (day)
+18 הַמֶּלֶךְ = the king
+19 שְׁלֹמֹה = Solomon
+20 אִם־ = if
+21 יָמִית = he will put to death (to die)
+22 אֶת־ = <obj.>
+23 עַבְדּוֹ = servant his (servant;_slave)
+24 בֶּחָרֶב = by the sword (sword)
+
+## 11:1:52
+KO: 솔로몬이 말하였다. "만일 그가 유능한 사람이 된다면, 그의 머리카락 하나도 땅에 떨어지지 않을 것이다. 그러나 만일 그에게 악함이 발견된다면, 그는 죽을 것이다."
+1 וַיֹּאמֶר = and he said (to say)
+2 שְׁלֹמֹה = Solomon
+3 אִם = if
+4 יִהְיֶה = he will become (to be)
+5 לְבֶן־ = <into> a son of (son)
+6 חַיִל = worth (strength)
+7 לֹא־ = not
+8 יִפֹּל = it will fall (to fall)
+9 מִשַּׂעֲרָתוֹ = one of hair[s] his (hair)
+10 אָרְצָה = [the] ground towards (land)
+11 וְאִם־ = and if
+12 רָעָה = evil (distress)
+13 תִמָּצֵא־ = it will be found (to find)
+14 בוֹ = in him (him)
+15 וָמֵת = and he will die (to die)
+
+## 11:1:53
+KO: 그리고 솔로몬 왕이 사람들을 보내어 그를 제단 위에서 내려오게 하니, 그가 와서 솔로몬 왕에게 절하였고, 솔로몬이 그에게 이르기를 "네 집으로 가라" 하였더라.
+1 וַיִּשְׁלַח = and he sent (to send)
+2 הַמֶּלֶךְ = the king
+3 שְׁלֹמֹה = Solomon
+4 וַיֹּרִדֻהוּ = and they brought down him (to go down)
+5 מֵעַל = from at (upon)
+6 הַמִּזְבֵּחַ = the altar (altar)
+7 וַיָּבֹא = and he came (to come (in))
+8 וַיִּשְׁתַּחוּ = and he bowed down (to bow)
+9 לַמֶּלֶךְ = to the king
+10 שְׁלֹמֹה = Solomon
+11 וַיֹּאמֶר־ = and he said (to say)
+12 לוֹ = to him (him)
+13 שְׁלֹמֹה = Solomon
+14 לֵךְ = go (to go)
+15 לְבֵיתֶךָ פ = to house your (house)
+
+## 11:2:1
+KO: 다윗의 죽을 날들이 가까워졌고, 그가 그의 아들 솔로몬에게 명령하여 말하였다.
+1 וַיִּקְרְבוּ = and they drew near (to present)
+2 יְמֵי־ = [the] days of (day;_when)
+3 דָוִד = David
+4 לָמוּת = to die
+5 וַיְצַו = and he commanded (to command)
+6 אֶת־ = <obj.> ([Obj.])
+7 שְׁלֹמֹה = Solomon
+8 בְנוֹ = son his (son)
+9 לֵאמֹר = <to> saying (to say)
+
+## 11:2:2
+KO: 나는 이제 세상 모든 사람의 길로 가고 있으니, 너는 강건하여 대장부가 되어라.
+1 אָנֹכִי = I
+2 הֹלֵךְ = [am] about to go (to go)
+3 בְּדֶרֶךְ = in [the] way of (way)
+4 כָּל־ = all
+5 הָאָרֶץ = the earth (land)
+6 וְחָזַקְתָּ = and you will be strong (to strengthen)
+7 וְהָיִיתָ = and you will become (to be)
+8 לְאִישׁ = <into> a man (man)
+
+## 11:2:3
+KO: 그리고 너는 네 하나님 여호와의 책무를 지키고, 그분의 길들로 행하며, 모세의 토라에 기록된 대로 그분의 율례들과 명령들과 규례들과 증언들을 지키라. 그리하면 네가 무엇을 행하든지, 그리고 네가 어디로 향하든지, 네가 지혜롭게 행할 것이다.
+1 וְשָׁמַרְתָּ = and you will keep
+2 אֶת־ = <obj.>
+3 מִשְׁמֶרֶת = [the] charge of (charge)
+4 יְהוָה = Yahweh (LORD)
+5 אֱלֹהֶיךָ = God your (God)
+6 לָלֶכֶת = to walk (to go)
+7 בִּדְרָכָיו = in ways his (way)
+8 לִשְׁמֹר = to keep
+9 חֻקֹּתָיו = statutes his (statute)
+10 מִצְוֹתָיו = commandments his (commandment)
+11 וּמִשְׁפָּטָיו = and judgments his (justice)
+12 וְעֵדְוֹתָיו = and testimonies his (testimony)
+13 כַּכָּתוּב = according to <the> [what] is written (to write)
+14 בְּתוֹרַת = in [the] law of (instruction)
+15 מֹשֶׁה = Moses
+16 לְמַעַן = so that (because)
+17 תַּשְׂכִּיל = you may cause to prosper (be prudent)
+18 אֵת = <obj.>
+19 כָּל־ = all
+20 אֲשֶׁר = that
+21 תַּעֲשֶׂה = you will do (to make)
+22 וְאֵת = and <obj.>
+23 כָּל־ = every
+24 אֲשֶׁר = where
+25 תִּפְנֶה = you will turn (to turn)
+26 שָׁם = there
+
+## 11:2:4
+KO: 여호와께서 나에 관하여 말씀하신 그분의 말씀을 세우시기 위함이니, 이르시기를 “만일 네 아들들이 그들의 길을 지켜, 내 앞에서 진실함으로 그들의 온 마음과 온 영혼을 다하여 행하면, 이스라엘의 왕좌 위에 너에게서 사람이 끊어지지 아니하리라” 하셨느니라.
+1 לְמַעַן = so that (because)
+2 יָקִים = he may establish (to arise)
+3 יְהוָה = Yahweh (LORD)
+4 אֶת־ = <obj.>
+5 דְּבָרוֹ = word his (word)
+6 אֲשֶׁר = which
+7 דִּבֶּר = he spoke (to speak)
+8 עָלַי = on me
+9 לֵאמֹר = <to> saying
+10 אִם־ = if
+11 יִשְׁמְרוּ = they will guard (to keep)
+12 בָנֶיךָ = descendants your (son)
+13 אֶת־ = <obj.>
+14 דַּרְכָּם = way their (way)
+15 לָלֶכֶת = to walk (to go)
+16 לְפָנַי = <to> before me (face)
+17 בֶּאֱמֶת = in faithfulness (truth)
+18 בְּכָל־ = with all
+19 לְבָבָם = heart their (heart)
+20 וּבְכָל־ = and with all
+21 נַפְשָׁם = being their (soul)
+22 לֵאמֹר = <to> saying
+23 לֹא־ = not
+24 יִכָּרֵת = it will be cut off (to cut)
+25 לְךָ = to you (you)
+26 אִישׁ = a man (man)
+27 מֵעַל = from on
+28 כִּסֵּא = [the] throne of (throne)
+29 יִשְׂרָאֵל = Israel
+
+## 11:2:5
+KO: 또한 너는 스루야의 아들 요압이 내게 행한 일, 곧 그가 이스라엘 군대의 두 장관인 넬의 아들 아브넬과 예델의 아들 아마사에게 행한 일을 알고 있다. 그가 그들을 죽여 평화의 때에 전쟁의 피를 흘렸고, 전쟁의 피를 그의 허리에 있는 띠와 그의 발에 있는 신에 두었다.
+1 וְגַם = and also (also)
+2 אַתָּה = you (you(m.s.))
+3 יָדַעְתָּ = you know (to know)
+4 אֵת = <obj.> ([Obj.])
+5 אֲשֶׁר־ = [that] which
+6 עָשָׂה = he did
+7 לִי = to me (me)
+8 יוֹאָב = Joab
+9 בֶּן־ = [the] son of
+10 צְרוּיָה = Zeruiah
+11 אֲשֶׁר = [that] which
+12 עָשָׂה = he did
+13 לִשְׁנֵי־ = to [the] two (two)
+14 שָׂרֵי = [the] commanders of (ruler)
+15 צִבְאוֹת = [the] armies of (army)
+16 יִשְׂרָאֵל = Israel
+17 לְאַבְנֵר = to Abner (Abner)
+18 בֶּן־ = [the] son of
+19 נֵר = Ner
+20 וְלַעֲמָשָׂא = and to Amasa (Amasa)
+21 בֶן־ = [the] son of
+22 יֶתֶר = Jether
+23 וַיַּהַרְגֵם = and he killed them (to kill)
+24 וַיָּשֶׂם = and he put (to set)
+25 דְּמֵי־ = blood<s> of
+26 מִלְחָמָה = war
+27 בְּשָׁלֹם = in peace (peace)
+28 וַיִּתֵּן = and he put (to give)
+29 דְּמֵי = blood<s> of
+30 מִלְחָמָה = war
+31 בַּחֲגֹרָתוֹ = on belt his (belt)
+32 אֲשֶׁר = which
+33 בְּמָתְנָיו = [was] on loins his (loin)
+34 וּבְנַעֲלוֹ = and on sandal[s] his (sandal)
+35 אֲשֶׁר = which
+36 בְּרַגְלָיו = [was] on feet his (foot)
+
+## 11:2:6
+KO: 네가 네 지혜에 따라 행할지니, 그러나 그의 백발을 평안히 음부(스올)로 내려가게 하지 말라.
+1 וְעָשִׂיתָ = and you will act (to make)
+2 כְּחָכְמָתֶךָ = according to wisdom your (wisdom)
+3 וְלֹא־ = and not (not)
+4 תוֹרֵד = you must bring down (to go down)
+5 שֵׂיבָתוֹ = grey hair his (greyheaded)
+6 בְּשָׁלֹם = in peace (peace)
+7 שְׁאֹל ס = Sheol
+
+## 11:2:7
+KO: 그리고 길르앗 사람 바르실래의 아들들에게 인애를 베풀라. 그들이 네 상에서 먹는 자들 중에 있게 하라. 왜냐하면 내가 네 형 압살롬의 얼굴로부터 도망할 때에 그들이 내게 가까이 나아왔기 때문이다.
+1 וְלִבְנֵי = and to [the] sons of (son)
+2 בַרְזִלַּי = Barzillai
+3 הַגִּלְעָדִי = the Gileadite (Gileadite)
+4 תַּעֲשֶׂה־ = you will do (to make)
+5 חֶסֶד = loyalty (kindness)
+6 וְהָיוּ = and they will be (to be)
+7 בְּאֹכְלֵי = among [those who] eat of (to eat)
+8 שֻׁלְחָנֶךָ = table your (table)
+9 כִּי־ = for
+10 כֵן = thus (so)
+11 קָרְבוּ = they drew near (to present)
+12 אֵלַי = to me (to(wards))
+13 בְּבָרְחִי = when fled I (to flee)
+14 מִפְּנֵי = from before (face)
+15 אַבְשָׁלוֹם = Absalom
+16 אָחִיךָ = brother your (brother)
+
+## 11:2:8
+KO: 보라, 너와 함께 바후림 출신의 베냐민 사람 게라의 아들 시므이가 있나니, 그는 내가 마하나임으로 가던 날에 나를 치명적인 저주로 저주하였도다. 그러나 그가 요단으로 나를 맞으러 내려왔을 때, 내가 여호와를 가리켜 그에게 맹세하여 이르기를 내가 칼로 너를 죽이지 아니하리라 하였노라.
+1 וְהִנֵּה = and here! (behold)
+2 עִמְּךָ = [is] with you (with)
+3 שִׁמְעִי = Shimei
+4 בֶן־ = [the] son of (son)
+5 גֵּרָא = Gera
+6 בֶן־ = [the] Ben-
+7 הַיְמִינִי = <the> jaminite
+8 מִבַּחֻרִים = from Bahurim (Bahurim)
+9 וְהוּא = and he
+10 קִלְלַנִי = he cursed me (to lighten)
+11 קְלָלָה = a curse (curse)
+12 נִמְרֶצֶת = grievous (be sick)
+13 בְּיוֹם = on [the] day (day;_when)
+14 לֶכְתִּי = went I (to go)
+15 מַחֲנָיִם = Mahanaim
+16 וְהוּא־ = and he
+17 יָרַד = he came down (to go down)
+18 לִקְרָאתִי = to meet me (to encounter)
+19 הַיַּרְדֵּן = the Jordan (Jordan)
+20 וָאֶשָּׁבַע = and I swore (to swear)
+21 לוֹ = to him (him)
+22 בַיהוָה = by Yahweh (LORD)
+23 לֵאמֹר = <to> saying (to say)
+24 אִם־ = if
+25 אֲמִיתְךָ = I will put to death you (to die)
+26 בֶּחָרֶב = by the sword (sword)
+
+## 11:2:9
+KO: 이제는 그를 무죄하다고 여기지 마라. 너는 지혜 있는 사람이니, 그에게 행할 바를 알 것이며, 그 백발을 피와 함께 스올로 내려가게 하여라.
+1 וְעַתָּה = and therefore (now)
+2 אַל־ = may not (not)
+3 תְּנַקֵּהוּ = you leave unpunished him (to clear)
+4 כִּי = for
+5 אִישׁ = [are] a man (man)
+6 חָכָם = wise
+7 אָתָּה = you (you(m.s.))
+8 וְיָדַעְתָּ = and you will know (to know)
+9 אֵת = <obj.>
+10 אֲשֶׁר = [that] which (which)
+11 תַּעֲשֶׂה־ = you will do (to make)
+12 לּוֹ = to him (him)
+13 וְהוֹרַדְתָּ = and you will bring down (to go down)
+14 אֶת־ = <obj.>
+15 שֵׂיבָתוֹ = grey hair his (greyheaded)
+16 בְּדָם = in blood (blood)
+17 שְׁאוֹל = Sheol
+
+## 11:2:10
+KO: 그리고 다윗이 그의 조상들과 함께 누웠고, 다윗 성에 장사되었다.
+1 וַיִּשְׁכַּב = and he lay down (to lie down)
+2 דָּוִד = David
+3 עִם־ = with
+4 אֲבֹתָיו = ancestors his (father)
+5 וַיִּקָּבֵר = and he was buried (to bury)
+6 בְּעִיר = in [the] city of (city)
+7 דָּוִד פ = David
+
+## 11:2:11
+KO: 다윗이 이스라엘 위에 다스렸던 날들은 사십 년이라. 헤브론에서 일곱 해를 다스렸고, 예루살렘에서 삼십삼 년을 다스렸더라.
+1 וְהַיָּמִים = and the days (day;_when)
+2 אֲשֶׁר = which
+3 מָלַךְ = he reigned
+4 דָּוִד = David
+5 עַל־ = over (upon)
+6 יִשְׂרָאֵל = Israel
+7 אַרְבָּעִים = [were] forty (forty)
+8 שָׁנָה = year[s]
+9 בְּחֶבְרוֹן = in Hebron (Hebron)
+10 מָלַךְ = he reigned
+11 שֶׁבַע = seven
+12 שָׁנִים = years
+13 וּבִירוּשָׁלִַם = and in Jerusalem (Jerusalem)
+14 מָלַךְ = he reigned
+15 שְׁלֹשִׁים = thirty
+16 וְשָׁלֹשׁ = and three (three)
+17 שָׁנִים = years
+
+## 11:2:12
+KO: 그리고 솔로몬은 그의 아버지 다윗의 보좌 위에 앉았고, 그의 왕권은 심히 견고하게 되었다.
+1 וּשְׁלֹמֹה = and Solomon (Solomon)
+2 יָשַׁב = he sat (to dwell)
+3 עַל־ = on (upon)
+4 כִּסֵּא = [the] throne of (throne)
+5 דָּוִד = David
+6 אָבִיו = father his (father)
+7 וַתִּכֹּן = and it was established (to establish)
+8 מַלְכֻתוֹ = reign his (royalty)
+9 מְאֹד = exceedingly (much)
+
+## 11:2:13
+KO: 그리고 학깃의 아들 아도니야가 솔로몬의 어머니 밧세바에게 왔다. 그러자 그녀가 말하기를, "당신의 옴이 평화입니까?" 하였다. 그가 대답하였다. "평화입니다."
+1 וַיָּבֹא = and he came
+2 אֲדֹנִיָּהוּ = Adonijah
+3 בֶן־ = [the] son of (son)
+4 חַגֵּית = Haggith
+5 אֶל־ = to (to(wards))
+6 בַּת־ = Bath-
+7 שֶׁבַע = -sheba
+8 אֵם־ = [the] mother of (mother)
+9 שְׁלֹמֹה = Solomon
+10 וַתֹּאמֶר = and she said
+11 הֲשָׁלוֹם = ¿ peace
+12 בֹּאֶךָ = [are] coming you
+13 וַיֹּאמֶר = and he said
+14 שָׁלוֹם = peace
+
+## 11:2:14
+KO: 그리고 그가 말하였다. "나에게 한 말이 있습니다." 밧세바가 말하였다. "말하시오."
+1 וַיֹּאמֶר = and he said
+2 דָּבָר = a word (word)
+3 לִי = [belongs] to <the> me (me)
+4 אֵלָיִךְ = to you (to(wards))
+5 וַתֹּאמֶר = and she said
+6 דַּבֵּר = speak (to speak)
+
+## 11:2:15
+KO: 그가 말하였다. "당신도 아는바와 같이 왕위는 내 것이었고, 온 이스라엘은 나를 왕으로 삼기 위해 그들의 얼굴을 내게로 향하였으나, 그 왕위가 돌이켜 내 아우의 것이 되었음은 여호와께로부터였나이다."
+1 וַיֹּאמֶר = and he said (to say)
+2 אַתְּ = you (you(f.s.))
+3 יָדַעַתְּ = you know (to know)
+4 כִּי־ = that
+5 לִי = to me (me)
+6 הָיְתָה = it belonged
+7 הַמְּלוּכָה = the kingship
+8 וְעָלַי = and on me (upon)
+9 שָׂמוּ = they set (to set)
+10 כָל־ = all
+11 יִשְׂרָאֵל = Israel
+12 פְּנֵיהֶם = faces their (face)
+13 לִמְלֹךְ = to become king (to reign)
+14 וַתִּסֹּב = and it has turned round (to turn)
+15 הַמְּלוּכָה = the kingship
+16 וַתְּהִי = and it has belonged
+17 לְאָחִי = to brother my (brother)
+18 כִּי = for
+19 מֵיְהוָה = from Yahweh (LORD)
+20 הָיְתָה = it belonged
+21 לּוֹ = to him (him)
+
+## 11:2:16
+KO: 그리고 이제 한 가지 청을 내가 당신에게 구하니, 나의 얼굴을 돌이키지 마소서. 그녀가 그에게 말하였다. 말하시오.
+1 וְעַתָּה = and now (now)
+2 שְׁאֵלָה = a petition (petition)
+3 אַחַת = one
+4 אָנֹכִי = I
+5 שֹׁאֵל = [am] asking (to ask)
+6 מֵאִתָּךְ = from with <the> you (with)
+7 אַל־ = may not (not)
+8 תָּשִׁבִי = you turn away (to return)
+9 אֶת־ = <obj.>
+10 פָּנָי = face my (face)
+11 וַתֹּאמֶר = and she said (to say)
+12 אֵלָיו = to him (to(wards))
+13 דַּבֵּר = speak (to speak)
+
+## 11:2:17
+KO: 그가 말하였다. "청하건대 솔로몬 왕에게 말해 주시오. 왜냐하면 그는 당신의 얼굴을 돌이키지(거절하지) 않을 것이기 때문이오. 그가 나에게 수넴 여자 아비삭을 아내로 줄 것이오."
+1 וַיֹּאמֶר = and he said
+2 אִמְרִי־ = speak
+3 נָא = please
+4 לִשְׁלֹמֹה = to Solomon (Solomon)
+5 הַמֶּלֶךְ = the king (king)
+6 כִּי = for
+7 לֹא־ = not
+8 יָשִׁיב = he will turn away (to return)
+9 אֶת־ = <obj.>
+10 פָּנָיִךְ = face your (face)
+11 וְיִתֶּן־ = so he may give (to give)
+12 לִי = to me (me)
+13 אֶת־ = <obj.>
+14 אֲבִישַׁג = Abishag
+15 הַשּׁוּנַמִּית = the Shunammite (Shunammite)
+16 לְאִשָּׁה = to a wife (woman)
+
+## 11:2:18
+KO: 밧세바가 말하였다. "좋다, 내가 너를 위하여 왕에게 말하리라."
+1 וַתֹּאמֶר = and she said (to say)
+2 בַּת־ = Bath-
+3 שֶׁבַע = -sheba
+4 טוֹב = good (pleasant)
+5 אָנֹכִי = I
+6 אֲדַבֵּר = I will speak (to speak)
+7 עָלֶיךָ = on you (upon)
+8 אֶל־ = to (to(wards))
+9 הַמֶּלֶךְ = the king (king)
+
+## 11:2:19
+KO: 밧세바가 솔로몬 왕에게 아도니야를 위하여 말하려고 들어갔다. 왕이 일어나 그녀를 맞으러 나아가 절하고 그의 보좌에 앉고, 왕의 어머니를 위하여 보좌를 두니 그가 그의 오른편에 앉았다.
+1 וַתָּבֹא = and she went (to come (in))
+2 בַת־ = Bath-
+3 שֶׁבַע = -sheba
+4 אֶל־ = to (to(wards))
+5 הַמֶּלֶךְ = the king
+6 שְׁלֹמֹה = Solomon
+7 לְדַבֶּר־ = to speak
+8 לוֹ = to him (him)
+9 עַל־ = on
+10 אֲדֹנִיָּהוּ = Adonijah
+11 וַיָּקָם = and he rose (to arise)
+12 הַמֶּלֶךְ = the king
+13 לִקְרָאתָהּ = to meet her (to encounter)
+14 וַיִּשְׁתַּחוּ = and he bowed down (to bow)
+15 לָהּ = to her (her)
+16 וַיֵּשֶׁב = and he sat
+17 עַל־ = on
+18 כִּסְאוֹ = throne his
+19 וַיָּשֶׂם = and he placed (to set)
+20 כִּסֵּא = a throne
+21 לְאֵם = for [the] mother of (mother)
+22 הַמֶּלֶךְ = the king
+23 וַתֵּשֶׁב = and she sat
+24 לִימִינוֹ = to right [hand] his (right)
+
+## 11:2:20
+KO: 그녀가 말하였다. "내가 당신에게 한 가지 작은 요청을 구하오니, 내 얼굴을 돌려보내지 마소서." 왕이 그녀에게 말하였다. "구하시오, 나의 어머니여. 내가 당신의 얼굴을 돌려보내지 않을 것이오."
+1 וַתֹּאמֶר = and she said
+2 שְׁאֵלָה = a petition (petition)
+3 אַחַת = one
+4 קְטַנָּה = small
+5 אָנֹכִי = I
+6 שֹׁאֶלֶת = [am] asking
+7 מֵאִתָּךְ = from with <the> you (with)
+8 אַל־ = may not (not)
+9 תָּשֶׁב = you turn away
+10 אֶת־ = <obj.>
+11 פָּנָי = face my
+12 וַיֹּאמֶר־ = and he said
+13 לָהּ = to her (her)
+14 הַמֶּלֶךְ = the king (king)
+15 שַׁאֲלִי = ask
+16 אִמִּי = O mother my (mother)
+17 כִּי = for
+18 לֹא־ = not
+19 אָשִׁיב = I will turn away
+20 אֶת־ = <obj.>
+21 פָּנָיִךְ = face your
+
+## 11:2:21
+KO: 그녀가 말하였다. "수넴 여인 아비삭이 당신의 형제 아도니야에게 아내로 주어지게 하소서."
+1 וַתֹּאמֶר = and she said (to say)
+2 יֻתַּן = let it be given (to give)
+3 אֶת־ = <obj.> ([Obj.])
+4 אֲבִישַׁג = Abishag
+5 הַשֻּׁנַמִּית = the Shunammite (Shunammite)
+6 לַאֲדֹנִיָּהוּ = to Adonijah (Adonijah)
+7 אָחִיךָ = brother your (brother)
+8 לְאִשָּׁה = to a wife (woman)
+
+## 11:2:22
+KO: 솔로몬 왕이 대답하여 그의 어머니에게 말하였다. 어찌하여 당신은 아도니야를 위하여 수넴 여자 아비삭을 구하고 있습니까? 그를 위하여 왕권도 구하시오. 그는 나보다 나이가 많은 형이니, 그를 위하여, 그리고 제사장 아비아달을 위하여, 그리고 스루야의 아들 요압을 위하여 구하시오.
+1 וַיַּעַן = and he answered (to answer)
+2 הַמֶּלֶךְ = the king (king)
+3 שְׁלֹמֹה = Solomon
+4 וַיֹּאמֶר = and he said (to say)
+5 לְאִמּוֹ = to mother his (mother)
+6 וְלָמָה = and <to> why? (what?)
+7 אַתְּ = [are] you (you(f.s.))
+8 שֹׁאֶלֶת = asking
+9 אֶת־ = <obj.>
+10 אֲבִישַׁג = Abishag
+11 הַשֻּׁנַמִּית = the Shunammite (Shunammite)
+12 לַאֲדֹנִיָּהוּ = for Adonijah (Adonijah)
+13 וְשַׁאֲלִי־ = and ask
+14 לוֹ = for him
+15 אֶת־ = <obj.>
+16 הַמְּלוּכָה = the kingship (kingship)
+17 כִּי = for
+18 הוּא = he (he;_she;_it)
+19 אָחִי = [is] brother my (brother)
+20 הַגָּדוֹל = <the> old (great)
+21 מִמֶּנִּי = more than me (from)
+22 וְלוֹ = and for him
+23 וּלְאֶבְיָתָר = and for Abiathar (Abiathar)
+24 הַכֹּהֵן = the priest (priest)
+25 וּלְיוֹאָב = and for Joab (Joab)
+26 בֶּן־ = [the] son of (son)
+27 צְרוּיָה פ = Zeruiah
+
+## 11:2:23
+KO: 솔로몬 왕이 여호와를 두고 맹세하여 말하기를, "하나님이 나에게 이같이 행하시고 저같이 더하시리라, 아도니야가 자기 목숨을 걸고 이 말을 하였으니"라고 하였다.
+1 וַיִּשָּׁבַע = and he swore an oath (to swear)
+2 הַמֶּלֶךְ = the king (king)
+3 שְׁלֹמֹה = Solomon
+4 בַּיהוָה = by Yahweh (LORD)
+5 לֵאמֹר = <to> saying (to say)
+6 כֹּה = thus
+7 יַעֲשֶׂה־ = may he do (to make)
+8 לִּי = to me (me)
+9 אֱלֹהִים = God
+10 וְכֹה = and thus
+11 יוֹסִיף = may he add (to add)
+12 כִּי = if (for)
+13 בְנַפְשׁוֹ = by own life his (soul)
+14 דִּבֶּר = he has spoken (to speak)
+15 אֲדֹנִיָּהוּ = Adonijah
+16 אֶת־ = <obj.> ([Obj.])
+17 הַדָּבָר = the word (word)
+18 הַזֶּה = <the> this (this)
+
+## 11:2:24
+KO: 이제, 나를 세우시고 내 아버지 다윗의 보좌 위에 나를 앉게 하신 여호와께서 살아 계심을 두고, 또한 그분께서 말씀하신 대로 나를 위하여 집을 세우신 그분을 두고 맹세하노니, 오늘 아도니야는 죽임을 당하리라.
+1 וְעַתָּה = and therefore (now)
+2 חַי־ = [by] [the] life (alive)
+3 יְהוָה = of Yahweh (LORD)
+4 אֲשֶׁר = who
+5 הֱכִינַנִי = he appointed me (to establish)
+6 וַיּוֹשִׁיבַנִי = and he made sit me (to dwell)
+7 עַל־ = on (upon)
+8 כִּסֵּא = [the] throne of (throne)
+9 דָּוִד = David
+10 אָבִי = father my (father)
+11 וַאֲשֶׁר = and who
+12 עָשָׂה־ = he has made (to make)
+13 לִי = for me (me)
+14 בַּיִת = a house (house)
+15 כַּאֲשֶׁר = just as
+16 דִּבֵּר = he spoke (to speak)
+17 כִּי = that (for)
+18 הַיּוֹם = this day (day;_when)
+19 יוּמַת = he will be put to death (to die)
+20 אֲדֹנִיָּהוּ = Adonijah
+
+## 11:2:25
+KO: 그리고 솔로몬 왕이 여호야다의 아들 브나야의 손을 통하여 보냈고, 그가 그를 쳤으며 그가 죽었다.
+1 וַיִּשְׁלַח = and he sent (to send)
+2 הַמֶּלֶךְ = the king (king)
+3 שְׁלֹמֹה = Solomon
+4 בְּיַד = by [the] hand of (hand)
+5 בְּנָיָהוּ = Benaiah
+6 בֶן־ = [the] son of (son)
+7 יְהוֹיָדָע = Jehoiada
+8 וַיִּפְגַּע־ = and he fell (to fall on)
+9 בּוֹ = on him (him)
+10 וַיָּמֹת ס = and he died (to die)
+
+## 11:2:26
+KO: 그리고 왕이 제사장 아비아달에게 말했다. "너의 밭(고향) 아나돗으로 가라. 왜냐하면 너는 죽음의 사람이기 때문이다. 그러나 오늘 이 날에는 내가 너를 죽이지 않겠다. 왜냐하면 네가 내 아버지 다윗의 얼굴 앞에서 주 여호와의 궤를 메었고, 또 내 아버지가 고난을 받았던 모든 것 안에서 네가 고난을 받았기 때문이다."
+1 וּלְאֶבְיָתָר = and to Abiathar (Abiathar)
+2 הַכֹּהֵן = the priest (priest)
+3 אָמַר = he said (to say)
+4 הַמֶּלֶךְ = the king (king)
+5 עֲנָתֹת = Anathoth
+6 לֵךְ = go (to go)
+7 עַל־ = to (upon)
+8 שָׂדֶיךָ = fields your (land)
+9 כִּי = for
+10 אִישׁ = [are] a man of (man)
+11 מָוֶת = death
+12 אָתָּה = you (you(m.s.))
+13 וּבַיּוֹם = and on the day (day)
+14 הַזֶּה = <the> this (this)
+15 לֹא = not
+16 אֲמִיתֶךָ = I will put to death you (to die)
+17 כִּי־ = for
+18 נָשָׂאתָ = you carried (to lift)
+19 אֶת־ = <obj.> ([Obj.])
+20 אֲרוֹן = [the] ark of (ark)
+21 אֲדֹנָי = [the] Lord (Lord)
+22 יְהֹוִה = Yahweh (YHWH|Yahweh)
+23 לִפְנֵי = <to> before (face)
+24 דָּוִד = David
+25 אָבִי = father my
+26 וְכִי = and for
+27 הִתְעַנִּיתָ = you were afflicted
+28 בְּכֹל = in all (all)
+29 אֲשֶׁר־ = that (which)
+30 הִתְעַנָּה = he was afflicted
+31 אָבִי = father my
+
+## 11:2:27
+KO: 솔로몬이 아비아달을 내쫓아 여호와의 제사장 직분에서 물러나게 하였으니, 이는 실로에서 엘리의 집에 대하여 여호와께서 말씀하신 말씀을 채우려 함이었더라.
+1 וַיְגָרֶשׁ = and he drove out (to drive out)
+2 שְׁלֹמֹה = Solomon
+3 אֶת־ = <obj.>
+4 אֶבְיָתָר = Abiathar
+5 מִהְיוֹת = from being (to be)
+6 כֹּהֵן = a priest (priest)
+7 לַיהוָה = of Yahweh
+8 לְמַלֵּא = to fulfill (to fill)
+9 אֶת־ = <obj.>
+10 דְּבַר = [the] word of (word)
+11 יְהוָה = Yahweh
+12 אֲשֶׁר = which
+13 דִּבֶּר = he had spoken (to speak)
+14 עַל־ = on (upon)
+15 בֵּית = [the] house of (house)
+16 עֵלִי = Eli
+17 בְּשִׁלֹה פ = in Shiloh (Shiloh)
+
+## 11:2:28
+KO: 그 소문이 요압에게 이르렀으니, 이는 요압이 압살롬을 따르지 않았으나 아도니야를 따랐기 때문이었다. 요압이 여호와의 장막으로 도망하여 제단 뿔들을 잡았다.
+1 וְהַשְּׁמֻעָה = and the report (tidings)
+2 בָּאָה = it came (to come (in))
+3 עַד־ = to (till)
+4 יוֹאָב = Joab
+5 כִּי = for
+6 יוֹאָב = Joab
+7 נָטָה = he had turned aside
+8 אַחֲרֵי = after
+9 אֲדֹנִיָּה = Adonijah
+10 וְאַחֲרֵי = and after
+11 אַבְשָׁלוֹם = Absalom
+12 לֹא = not
+13 נָטָה = he had turned aside
+14 וַיָּנָס = and he fled (to flee)
+15 יוֹאָב = Joab
+16 אֶל־ = to (to(wards))
+17 אֹהֶל = [the] tent of (tent)
+18 יְהוָה = Yahweh (LORD)
+19 וַיַּחֲזֵק = and he took hold (to strengthen)
+20 בְּקַרְנוֹת = on [the] horns of (horn)
+21 הַמִּזְבֵּחַ = the altar (altar)
+
+## 11:2:29
+KO: 그리고 솔로몬 왕에게 고하여지기를 “요압이 여호와의 장막으로 도망하였고 보라, 그가 제단 곁에 있나이다” 하니, 솔로몬이 여호야다의 아들 브나야를 보내며 말하기를 “가서 그를 치라” 하였다.
+1 וַיֻּגַּד = and it was told (to tell)
+2 לַמֶּלֶךְ = to the king (king)
+3 שְׁלֹמֹה = Solomon
+4 כִּי = that (for)
+5 נָס = he had fled (to flee)
+6 יוֹאָב = Joab
+7 אֶל־ = to (to(wards))
+8 אֹהֶל = [the] tent of (tent)
+9 יְהוָה = Yahweh (LORD)
+10 וְהִנֵּה = and there! (behold)
+11 אֵצֶל = [he was] beside (beside)
+12 הַמִּזְבֵּחַ = the altar (altar)
+13 וַיִּשְׁלַח = and he sent (to send)
+14 שְׁלֹמֹה = Solomon
+15 אֶת־ = <obj.> ([Obj.])
+16 בְּנָיָהוּ = Benaiah
+17 בֶן־ = [the] son of (son)
+18 יְהוֹיָדָע = Jehoiada
+19 לֵאמֹר = <to> saying (to say)
+20 לֵךְ = go (to go)
+21 פְּגַע־ = fall (to fall on)
+22 בּוֹ = on him (him)

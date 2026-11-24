@@ -23,8 +23,28 @@ private let SQLITE_TRANSIENT = unsafeBitCast(-1, to: sqlite3_destructor_type.sel
 //   CREATE TABLE TranslationVerseHash (   -- [2026-10-21] 사용자 추가 번역본(본문 미배포)의 절 본문 지문. 없을 수 있다.
 //     translation_code TEXT NOT NULL, book_id INTEGER NOT NULL, chapter INTEGER NOT NULL, verse INTEGER NOT NULL,
 //     hash INTEGER NOT NULL, PRIMARY KEY(translation_code, book_id, chapter, verse)) WITHOUT ROWID
+//   CREATE TABLE WordAlignment (          -- [2026-11-02 interlin1] 직역 문장과 원어 단어의 짝. 아직 생성 전이라 없을 수 있다.
+//     book_id, chapter, verse,
+//     word_index,   -- `OriginalTextStore.words`가 돌려주는 그 절 단어 배열의 0부터 위치
+//     phrase,       -- 그 단어에 짝지은 직역 문장 속 말
+//     start,        -- 직역 문장 속 시작 위치(Unicode scalar, 0부터)
+//     PRIMARY KEY(book_id, chapter, verse, word_index)) WITHOUT ROWID
 //
 // 한국어(KRV)는 기존 `OriginalText.sqlite`의 `LiteralTranslation` 표를 그대로 쓴다(앱 레이어 `LiteralCommentaryService`).
+// 단, 한국어 단어 짝(`WordAlignment`)은 `Literal_ko.sqlite`에 둔다.
+
+/// [2026-11-02 interlin1] `WordAlignment` 한 행. 지금 직역 문장과 맞는지는 호출부(`LiteralCommentaryService`)가 확인한다.
+public struct LiteralWordAlignment: Sendable, Hashable {
+    public let wordIndex: Int
+    public let phrase: String
+    public let start: Int
+
+    public init(wordIndex: Int, phrase: String, start: Int) {
+        self.wordIndex = wordIndex
+        self.phrase = phrase
+        self.start = start
+    }
+}
 
 public final class LiteralCommentaryStore {
     private var handle: OpaquePointer?
@@ -91,6 +111,47 @@ public final class LiteralCommentaryStore {
             }
         }
         return codes
+    }
+
+    /// [2026-11-05 rowhide1] 이 언어 파일에 단어 짝 표(`WordAlignment`)가 있는지. 없으면 화면이 단어별 칸 위 줄을 숨긴다.
+    public func hasWordAlignmentTable() throws -> Bool {
+        try hasTable("WordAlignment")
+    }
+
+    /// [2026-11-02 interlin1] 이 절의 단어 짝(`WordAlignment`), 단어 위치 순. 표가 없는 DB면 빈 배열(정상 상태).
+    /// `phrase`/`start`가 NULL이거나 `phrase`가 빈 행은 건너뛴다.
+    public func wordAlignments(bookId: Int, chapter: Int, verse: Int) throws -> [LiteralWordAlignment] {
+        guard try hasTable("WordAlignment") else { return [] }
+        var statement: OpaquePointer?
+        defer { sqlite3_finalize(statement) }
+        let sql = """
+            SELECT word_index, phrase, start FROM WordAlignment
+            WHERE book_id = ? AND chapter = ? AND verse = ?
+            ORDER BY word_index
+            """
+        guard sqlite3_prepare_v2(handle, sql, -1, &statement, nil) == SQLITE_OK else {
+            throw BibleReferenceError.statementPrepareFailed(code: sqlite3_errcode(handle))
+        }
+        sqlite3_bind_int(statement, 1, Int32(bookId))
+        sqlite3_bind_int(statement, 2, Int32(chapter))
+        sqlite3_bind_int(statement, 3, Int32(verse))
+        var rows: [LiteralWordAlignment] = []
+        while true {
+            let step = sqlite3_step(statement)
+            if step == SQLITE_DONE { break }
+            guard step == SQLITE_ROW else { throw BibleReferenceError.stepFailed(code: step) }
+            guard sqlite3_column_type(statement, 0) != SQLITE_NULL,
+                  sqlite3_column_type(statement, 2) != SQLITE_NULL,
+                  let phrasePointer = sqlite3_column_text(statement, 1) else { continue }
+            let phrase = String(cString: phrasePointer)
+            guard !phrase.isEmpty else { continue }
+            rows.append(LiteralWordAlignment(
+                wordIndex: Int(sqlite3_column_int64(statement, 0)),
+                phrase: phrase,
+                start: Int(sqlite3_column_int64(statement, 2))
+            ))
+        }
+        return rows
     }
 
     /// 표 존재 여부(파일이 읽기 전용이라 열린 동안 바뀌지 않으므로 한 번만 묻는다).

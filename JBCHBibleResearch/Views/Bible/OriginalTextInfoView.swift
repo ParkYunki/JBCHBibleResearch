@@ -20,6 +20,13 @@
 //    번역과의 차이(고른 번역본 이름 표시). 데이터 출처는 `LiteralCommentaryService`.
 //  - 단어 카드: 뜻풀이를 앱 언어로(한국어는 기존 캐시·수정 기능 그대로, 다른 언어는 기기 번역 결과를 실행 중에만
 //    메모리에 보관하고 수정 기능 없음, 영어는 원문 뜻 그대로) + "문맥" 줄(`translationEn`).
+//
+//  [2026-11-02 interlin1] 원문 정보 개편(사양: original-text-interlinear-proposal-2026-10-31, 목업 승인):
+//  - 직역 카드: "원어 어순" 줄을 "단어별" 칸(위 = 직역 속 말 / 가운데 = 문맥 영어 / 아래 = 원어)으로 바꿨다. 칸을 누르면 아래 원어 카드로
+//    스크롤해 잠깐 강조한다. 영어 직역(LSV)은 접지 않고 항상 보인다.
+//  - 원어 카드: 원어 → 음역·Strong → (품사 정보, 펼쳤을 때만) → 사전 뜻 → "이 절에서" → [쓰인 구절 | 네이버 · biblehub].
+//    연필은 오른쪽 위 구석. "문맥" 줄은 단어별 칸 가운데 줄로 옮겨 카드에서 뺐다.
+//  - 쓰인 구절(`OriginalWordOccurrencesView`): iOS는 이 시트의 내비게이션 스택에 push, macOS는 시트 안에서 화면을 바꾼다.
 
 import SwiftUI
 import Translation
@@ -35,6 +42,9 @@ struct OriginalTextVerseSource: Hashable, Identifiable {
     let displayName: String
     /// 이 절 본문. 그 번역본에 이 절이 없으면 빈 문자열.
     let text: String
+    /// [2026-11-02 interlin1] 이 번역본 SQLite 파일 경로(`BibleReadingViewModel.verseTextFilePath`) — "쓰인 구절" 본문 미리보기용.
+    /// nil이면 미리보기 없이 참조만 보인다.
+    var databasePath: String? = nil
 }
 
 struct OriginalTextInfoView: View {
@@ -53,6 +63,9 @@ struct OriginalTextInfoView: View {
     var canGoToNextVerse: Bool = false
     /// 성경 조회 화면에 켜 둔 열(왼쪽부터)의 이 절 본문. 비어 있으면 KRV 본문을 직접 읽는다.
     var verseSources: [OriginalTextVerseSource] = []
+    /// [2026-11-02 interlin1] "쓰인 구절"에서 절을 골랐을 때. 호출부가 이 시트를 닫고 성경 화면을 그 장·절로 옮긴다
+    /// (시트가 닫힌 뒤에 옮겨야 한다 — `onSwitchToMemo`와 같은 이유).
+    var onOpenVerse: (BibleVerseRef) -> Void = { _ in }
 
     @Environment(\.dismiss) private var dismiss
     @Environment(\.modelContext) private var modelContext
@@ -61,10 +74,27 @@ struct OriginalTextInfoView: View {
     @State private var words: [OriginalWordInfo] = []
     /// 앱 언어 직역(`LiteralCommentaryService`). 없으면 직역 문장 줄을 숨긴다.
     @State private var appLiteral: String?
-    /// 공통 영어 직역(LSV). 없으면 접기 줄을 숨긴다.
+    /// 공통 영어 직역(LSV). 없으면 그 칸을 숨긴다. [2026-11-02 interlin1] 접기 없이 항상 보인다.
     @State private var literalEnglish: LiteralEnglishInfo?
-    /// LSV 펼침 상태 — 절을 옮길 때마다 접힌 상태로 돌아간다(사용자 결정: 모든 언어에서 접어서 표시).
-    @State private var isLiteralEnglishExpanded = false
+    /// [2026-11-02 interlin1] 원어 단어 위치(`words`의 0부터 위치) → 직역 문장 속 말(`LiteralCommentaryService.alignedPhrases`).
+    /// 짝 데이터가 없으면 비어 있고, 단어별 칸 위 줄은 "—", 원어 카드의 "이 절에서" 줄은 숨는다.
+    @State private var alignedPhrases: [Int: String] = [:]
+    /// [2026-11-04 mergecell] `alignedPhrases`와 같은 짝의 직역 속 시작 위치까지. 연이은 단어가 같은 구간을 함께 쓰는지 가릴 때 쓴다(`wordCellRuns`).
+    @State private var alignedSpans: [Int: LiteralCommentaryService.AlignedPhrase] = [:]
+    /// [2026-11-05 rowhide1] 단어별 칸 위 줄(직역 속 말)을 보일지. 앱 언어에 짝 데이터가 없으면 false — 칸은 영어·원어 2줄.
+    @State private var showsPhraseLine = true
+    /// [2026-11-02 interlin1] Strong 번호 → 쓰인 절 수. 화면을 열 때(절이 바뀔 때) 백그라운드에서 한 번에 센다. 아직 없으면 버튼에 숫자 없이.
+    @State private var verseCounts: [String: Int] = [:]
+    /// [2026-11-02 interlin1] 단어별 칸을 눌러 잠깐 강조 중인 원어 카드 위치와, 강조를 끄는 예약의 차례 번호(나중 누름이 앞 예약을 무효로 한다).
+    @State private var highlightedWordIndex: Int?
+    @State private var highlightGeneration = 0
+    /// [2026-11-02 interlin1] "쓰인 구절" 화면 대상 단어. nil이면 원문 정보 본 화면.
+    @State private var occurrenceWord: OriginalWordInfo?
+    /// [2026-11-02 interlin1] 지금 화면에 읽어 둔 절(책-장-절). 절이 바뀔 때만 쓰인 구절 화면·강조를 닫는다(번역본 열 목록만 바뀐 경우는 그대로).
+    @State private var loadedVerseKey: String?
+    /// [2026-11-02 interlin1] 원어 카드 품사 정보 펼침 — 모든 카드 공통, 처음엔 접힘, 마지막 상태를 기억한다.
+    /// 키는 기존 UserDefaults 키 규칙(`기능.항목`, 예: "bibleToolRail.collapsed", "sermon.listSort")을 따른다.
+    @AppStorage("originalTextInfo.showsMorphology") private var showsMorphology = false
     /// 번역본 코드 → 차이 설명. `verseSources` 중 데이터가 있는 번역본만 들어 있다.
     @State private var differences: [String: String] = [:]
     /// 구절 카드·차이 설명에 지금 보여주는 번역본 코드.
@@ -92,43 +122,50 @@ struct OriginalTextInfoView: View {
     }
 
     /// 시트 본문(스크롤 영역). macOS/iOS 모두 같은 내용을 쓴다.
+    /// [2026-11-02 interlin1] 단어별 칸 → 원어 카드 스크롤을 위해 `ScrollViewReader`로 감쌌다.
     private var mainScroll: some View {
-        ScrollView {
-            VStack(alignment: .leading, spacing: 16) {
-                // biblehub 인터리니어 링크(시스템 기본 브라우저로 열림). 슬러그를 못 찾거나 URL이 안 만들어지면
-                // 깨진 링크를 보여주는 대신 숨긴다.
-                if let interlinearURL = bibleHubInterlinearURL {
-                    Link(destination: interlinearURL) {
-                        Label("영문-원어성경", systemImage: "safari")
-                            .font(.system(size: 13, weight: .medium))
+        ScrollViewReader { proxy in
+            ScrollView {
+                VStack(alignment: .leading, spacing: 16) {
+                    // biblehub 인터리니어 링크(시스템 기본 브라우저로 열림). 슬러그를 못 찾거나 URL이 안 만들어지면
+                    // 깨진 링크를 보여주는 대신 숨긴다.
+                    if let interlinearURL = bibleHubInterlinearURL {
+                        Link(destination: interlinearURL) {
+                            Label("영문-원어성경", systemImage: "safari")
+                                .font(.system(size: 13, weight: .medium))
+                        }
+                        .foregroundStyle(linkTint)
                     }
-                    .foregroundStyle(linkTint)
-                }
-                // 원어 데이터가 없는 절에서도 구절 본문은 보이도록 `words.isEmpty` 분기 밖에 둔다.
-                verseCard
-                // 직역 카드 — 구절 아래, 원어 카드 위. 보여줄 내용이 하나도 없으면 숨긴다.
-                if hasLiteralCardContent {
-                    literalCard
-                }
-                if words.isEmpty {
-                    ContentUnavailableView(
-                        "원문 정보 없음",
-                        systemImage: "character.book.closed",
-                        description: Text("이 절에 대한 원문 데이터를 찾을 수 없습니다.")
-                    )
-                    .frame(maxWidth: .infinity)
-                    .padding(.top, 24)
-                } else {
-                    // 화면 너비에 맞춰 여러 열로 자동 배치한다.
-                    LazyVGrid(columns: gridColumns, spacing: 12) {
-                        // 원본 DB에 같은 절·같은 word_order가 겹치는 행(17쌍)이 있어 `word.id` 대신 위치로 구분한다.
-                        ForEach(Array(words.enumerated()), id: \.offset) { _, word in
-                            wordCard(word)
+                    // 원어 데이터가 없는 절에서도 구절 본문은 보이도록 `words.isEmpty` 분기 밖에 둔다.
+                    verseCard
+                    // 직역 카드 — 구절 아래, 원어 카드 위. 보여줄 내용이 하나도 없으면 숨긴다.
+                    if hasLiteralCardContent {
+                        literalCard(proxy: proxy)
+                    }
+                    if words.isEmpty {
+                        ContentUnavailableView(
+                            "원문 정보 없음",
+                            systemImage: "character.book.closed",
+                            description: Text("이 절에 대한 원문 데이터를 찾을 수 없습니다.")
+                        )
+                        .frame(maxWidth: .infinity)
+                        .padding(.top, 24)
+                    } else {
+                        VStack(alignment: .leading, spacing: 8) {
+                            wordsHeader
+                            // 화면 너비에 맞춰 여러 열로 자동 배치한다.
+                            LazyVGrid(columns: gridColumns, spacing: 12) {
+                                // 원본 DB에 같은 절·같은 word_order가 겹치는 행(17쌍)이 있어 `word.id` 대신 위치로 구분한다.
+                                ForEach(Array(words.enumerated()), id: \.offset) { index, word in
+                                    wordCard(word, index: index)
+                                        .id(Self.wordCardScrollID(index))
+                                }
+                            }
                         }
                     }
                 }
+                .padding(16)
             }
-            .padding(16)
         }
         .background(settings.bibleBackgroundColor ?? Color.clear)
     }
@@ -136,12 +173,24 @@ struct OriginalTextInfoView: View {
     /// 시트 껍데기. macOS는 시스템 도구 모음이 제목 줄·버튼 줄을 시스템 회색으로 그려 본문의 테마 배경과 색이 끊겼으므로,
     /// 내비게이션 스택을 쓰지 않고 시트 안에 제목 줄(`VerseSheetHeader`)과 하단 버튼 줄(`VerseSheetFooter`)을 직접 그린다
     /// (확대보기 `VerseZoomView`와 같은 바탕·선·그림자 — 2026-10-02 목업 결정). iOS/iPadOS는 기존 내비게이션 바 툴바를 그대로 쓴다.
+    /// [2026-11-02 interlin1] 쓰인 구절: macOS는 내비게이션 스택이 없어 같은 시트 안에서 본문 자리를 바꾼다(아래 버튼 줄은 그대로).
+    /// 본 화면은 숨기기만 하고 계층에 남겨 돌아왔을 때 스크롤 위치가 그대로다. iOS/iPadOS는 기존 내비게이션 스택에 push한다.
     @ViewBuilder
     private var sheetRoot: some View {
         #if os(macOS)
         VStack(spacing: 0) {
-            VerseSheetHeader(title: displayTitle)
-            mainScroll
+            ZStack {
+                VStack(spacing: 0) {
+                    VerseSheetHeader(title: displayTitle)
+                    mainScroll
+                }
+                .opacity(occurrenceWord == nil ? 1 : 0)
+                .allowsHitTesting(occurrenceWord == nil)
+                .accessibilityHidden(occurrenceWord != nil)
+                if let word = occurrenceWord {
+                    occurrencesView(for: word)
+                }
+            }
             VerseSheetFooter {
                 // 내비게이션 툴바의 `.cancellationAction`이 주던 Esc 닫기를 `.cancelAction` 단축키로 유지한다.
                 Button("닫기") { dismiss() }
@@ -183,6 +232,11 @@ struct OriginalTextInfoView: View {
             }
             .background(UserSettingsStore.shared.bibleBackgroundColor ?? Color.clear)
             .toolbar(.hidden, for: .navigationBar)
+            // [2026-11-02 interlin1] 쓰인 구절. 화면 머리(‹ 원문 정보 · 제목)는 본 화면처럼 직접 그리고 시스템 바는 숨긴다.
+            .navigationDestination(item: $occurrenceWord) { word in
+                occurrencesView(for: word)
+                    .toolbar(.hidden, for: .navigationBar)
+            }
         }
         #endif
     }
@@ -204,7 +258,10 @@ struct OriginalTextInfoView: View {
         // `.task(id:)`로 절/장/권이 바뀔 때마다 다시 로드한다 — 시트가 열린 채 이전/다음 절로 이동해도
         // 원어 정보가 첫 절 데이터로 멈춰 있지 않도록 하기 위해서다.
         // 켜 둔 번역본 목록이 바뀌어도(차이 설명 대상이 달라지므로) 다시 읽는다.
-        .task(id: "\(bookId)-\(chapter)-\(verseNumber)|\(verseSources.map(\.code).joined(separator: ","))") { loadWords() }
+        .task(id: "\(bookId)-\(chapter)-\(verseNumber)|\(verseSources.map(\.code).joined(separator: ","))") {
+            loadWords()
+            await loadVerseCounts()
+        }
         .translationTask(translationConfiguration) { session in
             await translateMissingGlosses(session: session)
         }
@@ -310,18 +367,14 @@ struct OriginalTextInfoView: View {
 
     // MARK: - 직역 카드
 
-    /// 원어 어순 줄 — STEPBible 문맥 번역을 원문 순서대로(빈 값 제외).
-    private var wordOrderGlosses: [String] {
-        words.map(\.translationEn).filter { !$0.isEmpty }
-    }
-
     private var currentDifference: String? {
         guard let code = currentSource?.code else { return nil }
         return differences[code]
     }
 
     private var hasLiteralCardContent: Bool {
-        appLiteral != nil || !wordOrderGlosses.isEmpty || literalEnglish != nil || currentDifference != nil
+        // [2026-11-02 interlin1] "원어 어순"(문맥 영어가 있는 단어만) 대신 단어별 칸 — 원어 단어가 하나라도 있으면 보인다.
+        appLiteral != nil || !words.isEmpty || literalEnglish != nil || currentDifference != nil
     }
 
     /// AI 생성 표시 배지(직역·차이 설명). 고유 표기라 번역하지 않는다.
@@ -338,7 +391,7 @@ struct OriginalTextInfoView: View {
         settings.bibleTextColor?.opacity(0.6) ?? Color.secondary
     }
 
-    private var literalCard: some View {
+    private func literalCard(proxy: ScrollViewProxy) -> some View {
         VStack(alignment: .leading, spacing: 10) {
             if let appLiteral {
                 HStack(spacing: 6) {
@@ -356,57 +409,64 @@ struct OriginalTextInfoView: View {
                     .frame(maxWidth: .infinity, alignment: .center)
             }
 
-            let glosses = wordOrderGlosses
-            if !glosses.isEmpty {
-                // 원어 어순(사용자 결정: 직역 카드 안). STEPBible 문맥 번역이라 영어 그대로 보여준다.
-                Text("원어 어순")
-                    .font(.system(size: 12, weight: .bold))
+            if !words.isEmpty {
+                // [2026-11-02 interlin1] 단어별 칸 — "원어 어순" 줄을 대신한다. 원문 단어 순서대로 왼쪽부터 흘려 놓는다
+                // (히브리어도 칸 순서는 왼쪽부터, 칸 안의 글자는 오른쪽→왼쪽 그대로).
+                HStack(alignment: .firstTextBaseline, spacing: 8) {
+                    Text("단어별")
+                        .font(.system(size: 12, weight: .bold))
+                        .foregroundStyle(sectionLabelColor)
+                    Spacer(minLength: 0)
+                    // [2026-11-05 rowhide1] 위 줄을 숨기면 설명도 2줄로(삼항 대신 if — 두 문자열 모두 현지화 키로 뽑히게).
+                    Group {
+                        if showsPhraseLine {
+                            Text("위부터 직역 속 말 · 영어 · 원어")
+                        } else {
+                            Text("위부터 영어 · 원어")
+                        }
+                    }
+                    .font(.system(size: 11))
                     .foregroundStyle(sectionLabelColor)
-                    .frame(maxWidth: .infinity, alignment: .center)
-                FlowLayoutHStack(spacing: 5) {
-                    ForEach(Array(glosses.enumerated()), id: \.offset) { _, gloss in
-                        Text(verbatim: gloss)
-                            .font(.system(size: 12))
-                            .foregroundStyle(settings.bibleTextColor ?? Color.primary)
-                            .padding(.horizontal, 7)
-                            .padding(.vertical, 3)
-                            .background(
-                                RoundedRectangle(cornerRadius: 6, style: .continuous)
-                                    .fill(linkTint.opacity(0.14))
-                            )
+                    .multilineTextAlignment(.trailing)
+                }
+                .padding(.top, appLiteral == nil ? 0 : 4)
+                FlowLayoutHStack(spacing: 6, clampsItemsToRowWidth: true) {
+                    // [2026-11-04 mergecell] 연이은 단어가 직역 속 같은 말을 함께 쓰면 한 칸으로 묶어 그 말을 한 번만 보인다.
+                    ForEach(wordCellRuns, id: \.lowerBound) { run in
+                        if run.count == 1 {
+                            wordCell(words[run.lowerBound], index: run.lowerBound, proxy: proxy)
+                        } else {
+                            mergedWordCell(run, proxy: proxy)
+                        }
                     }
                 }
-                .frame(maxWidth: .infinity, alignment: .center)
+                .frame(maxWidth: .infinity, alignment: .leading)
             }
 
-            // 영어 화면은 직역이 곧 LSV(`Literal_en`의 basis = LSV)라 같은 문장을 접기 줄로 또 보여주지 않는다.
+            // 영어 화면은 직역이 곧 LSV(`Literal_en`의 basis = LSV)라 같은 문장을 또 보여주지 않는다.
+            // [2026-11-02 interlin1] 접기(DisclosureGroup) 없이 항상 보인다.
             if let literalEnglish, literalEnglish.text != appLiteral {
                 Rectangle()
                     .fill(cardBorderColor)
                     .frame(height: 1)
-                DisclosureGroup(isExpanded: $isLiteralEnglishExpanded) {
-                    VStack(spacing: 6) {
-                        // 원본의 시행 구분 표기 " || "는 줄바꿈으로 보여준다.
-                        Text(verbatim: literalEnglish.text.replacingOccurrences(of: " || ", with: "\n"))
-                            .font(.system(size: 14.5, design: .serif))
-                            .foregroundStyle(settings.bibleTextColor ?? Color.primary)
-                            .multilineTextAlignment(.center)
-                            .fixedSize(horizontal: false, vertical: true)
-                            .frame(maxWidth: .infinity, alignment: .center)
-                        // CC BY-SA 4.0 출처 표기(원문 표기 그대로).
-                        Text(verbatim: "Literal Standard Version © 2020 Covenant Press · CC BY-SA 4.0")
-                            .font(.system(size: 10.5))
-                            .foregroundStyle(settings.bibleTextColor?.opacity(0.45) ?? Color.secondary)
-                            .multilineTextAlignment(.center)
-                            .frame(maxWidth: .infinity, alignment: .center)
-                    }
-                    .padding(.top, 6)
-                } label: {
-                    Text("영어 직역 (LSV)")
-                        .font(.system(size: 12, weight: .bold))
-                        .foregroundStyle(sectionLabelColor)
+                Text("영어 직역 (LSV)")
+                    .font(.system(size: 12, weight: .bold))
+                    .foregroundStyle(sectionLabelColor)
+                VStack(spacing: 6) {
+                    // 원본의 시행 구분 표기 " || "는 줄바꿈으로 보여준다.
+                    Text(verbatim: literalEnglish.text.replacingOccurrences(of: " || ", with: "\n"))
+                        .font(.system(size: 14.5, design: .serif))
+                        .foregroundStyle(settings.bibleTextColor ?? Color.primary)
+                        .multilineTextAlignment(.center)
+                        .fixedSize(horizontal: false, vertical: true)
+                        .frame(maxWidth: .infinity, alignment: .center)
+                    // CC BY-SA 4.0 출처 표기(원문 표기 그대로).
+                    Text(verbatim: "Literal Standard Version © 2020 Covenant Press · CC BY-SA 4.0")
+                        .font(.system(size: 10.5))
+                        .foregroundStyle(settings.bibleTextColor?.opacity(0.45) ?? Color.secondary)
+                        .multilineTextAlignment(.center)
+                        .frame(maxWidth: .infinity, alignment: .center)
                 }
-                .tint(sectionLabelColor)
             }
 
             if let difference = currentDifference, let source = currentSource {
@@ -445,154 +505,417 @@ struct OriginalTextInfoView: View {
         )
     }
 
-    private func wordCard(_ word: OriginalWordInfo) -> some View {
-        VStack(spacing: 8) {
-            // 편집용 연필 아이콘은 한글 뜻 헤드라인 오른쪽에 둔다.
-            HStack(spacing: 6) {
-                Group {
-                    if let headline = headlineGloss(for: word) {
-                        Text(verbatim: headline)
-                    } else if isTranslating && !word.glossEn.isEmpty {
-                        Text("번역 중…")
-                    } else {
-                        Text(verbatim: "-")
-                    }
-                }
-                .font(.system(size: 16, weight: .bold))
-                .foregroundStyle(settings.bibleTextColor ?? .primary)
-                .multilineTextAlignment(.center)
-                .lineLimit(2)
-                .fixedSize(horizontal: false, vertical: true)
+    // MARK: 단어별 칸 [2026-11-02 interlin1]
 
-                // 직접 수정은 한국어 뜻(`StrongGlossTranslation` 캐시)만 지원한다.
-                if AppLanguage.isKorean {
+    /// 단어별 칸 하나(3줄): 위 = 직역 속 말(짝 없으면 "—"), 가운데 = 문맥 영어(`translationEn`), 아래 = 원어.
+    /// [2026-11-05 rowhide1] 앱 언어에 짝 데이터가 없으면(`showsPhraseLine == false`) 위 줄 없이 영어·원어 2줄.
+    /// 위 줄과 가운데 줄이 같은 말이면(영어 화면: 직역이 영어라 짝 말이 문맥 영어와 겹치기 쉽다) 가운데 줄을 비워 같은 말을 두 번 쓰지 않는다.
+    /// 줄 자리는 남겨(투명) 모든 칸이 같은 높이로 줄 맞춰 놓이고, 원어 줄이 칸마다 같은 높이에 온다. 판정은 `isSameGloss`.
+    /// 누르면 아래 같은 위치의 원어 카드로 스크롤하고 잠깐 강조한다.
+    private func wordCell(_ word: OriginalWordInfo, index: Int, proxy: ScrollViewProxy) -> some View {
+        let phrase = alignedPhrases[index]
+        let english = word.translationEn
+        let showsEnglish = !english.isEmpty && !(phrase.map { Self.isSameGloss($0, english) } ?? false)
+        let isHighlighted = highlightedWordIndex == index
+        let shape = RoundedRectangle(cornerRadius: 8, style: .continuous)
+        let textColor = settings.bibleTextColor ?? Color.primary
+        return Button {
+            jumpToWordCard(index, proxy: proxy)
+        } label: {
+            VStack(spacing: 2) {
+                // [2026-11-05 rowhide1] 앱 언어에 짝 데이터가 없으면 위 줄을 두지 않는다(모든 칸이 같이 2줄이라 원어 줄 높이는 맞는다).
+                if showsPhraseLine {
+                    Text(verbatim: phrase ?? "—")
+                        .font(.system(size: 13, weight: .bold))
+                        .foregroundStyle(phrase == nil ? sectionLabelColor : textColor)
+                }
+                // 빈 문자열이면 줄 높이가 0이 되므로 공백 한 칸으로 자리를 지킨다.
+                Text(verbatim: english.isEmpty ? " " : english)
+                    .font(.system(size: 11))
+                    .foregroundStyle(textColor.opacity(0.7))
+                    .opacity(showsEnglish ? 1 : 0)
+                Text(verbatim: word.originalText)
+                    .font(Self.originalTextFont(isHebrew: word.isHebrew, size: 17))
+                    .foregroundStyle(hebrewTextColor)
+            }
+            .lineLimit(1)
+            .padding(.horizontal, 8)
+            .padding(.vertical, 6)
+            .frame(minWidth: 44)
+            .background(shape.fill(linkTint.opacity(isHighlighted ? 0.2 : 0.08)))
+            .overlay(shape.stroke(isHighlighted ? linkTint : Color.clear, lineWidth: 1))
+            .contentShape(shape)
+        }
+        .buttonStyle(.plain)
+        .accessibilityElement(children: .ignore)
+        .accessibilityLabel(Text(verbatim: wordCellAccessibilityText(phrase: phrase, english: showsEnglish ? english : "", original: word.originalText)))
+        .accessibilityHint(Text("원어 카드로 이동"))
+    }
+
+    /// [2026-11-04 mergecell] 단어별 칸 묶음 — `words` 위치 범위 목록(앞부터 빈틈 없이). 바로 이웃한 단어끼리 짝(`alignedSpans`)이 같으면
+    /// (같은 말, 같은 시작 위치) 한 범위로 묶고, 짝이 없는 단어는 늘 혼자 범위다. 떨어진 단어가 같은 짝을 쓰는 경우는 묶지 않는다.
+    private var wordCellRuns: [Range<Int>] {
+        var runs: [Range<Int>] = []
+        var lower = 0
+        while lower < words.count {
+            var upper = lower + 1
+            if let span = alignedSpans[lower] {
+                while upper < words.count, alignedSpans[upper] == span {
+                    upper += 1
+                }
+            }
+            runs.append(lower ..< upper)
+            lower = upper
+        }
+        return runs
+    }
+
+    /// [2026-11-04 mergecell] 묶인 단어별 칸: 위 = 함께 쓰는 직역 속 말(한 번), 아래 = 단어마다 영어·원어 작은 칸(누르면 그 원어 카드로).
+    /// 영어 줄을 비우는 규칙은 `wordCell`과 같다(짝 말과 영어가 같으면 투명). 칸 순서·모양은 `wordCell`과 맞춘다.
+    private func mergedWordCell(_ run: Range<Int>, proxy: ScrollViewProxy) -> some View {
+        let phrase = alignedPhrases[run.lowerBound] ?? "—"
+        let textColor = settings.bibleTextColor ?? Color.primary
+        let shape = RoundedRectangle(cornerRadius: 8, style: .continuous)
+        let innerShape = RoundedRectangle(cornerRadius: 6, style: .continuous)
+        let isAnyHighlighted = highlightedWordIndex.map { run.contains($0) } ?? false
+        return VStack(spacing: 2) {
+            Text(verbatim: phrase)
+                .font(.system(size: 13, weight: .bold))
+                .foregroundStyle(textColor)
+                .lineLimit(1)
+                // 위 줄을 눌러도 묶음 첫 단어의 원어 카드로 간다(혼자 칸은 칸 전체가 버튼). VoiceOver에는 단어 버튼마다 이 말이 들어간다.
+                .contentShape(Rectangle())
+                .onTapGesture { jumpToWordCard(run.lowerBound, proxy: proxy) }
+                .accessibilityHidden(true)
+            HStack(spacing: 2) {
+                ForEach(Array(run), id: \.self) { index in
+                    let word = words[index]
+                    let english = word.translationEn
+                    let showsEnglish = !english.isEmpty && !Self.isSameGloss(phrase, english)
+                    let isHighlighted = highlightedWordIndex == index
                     Button {
-                        beginEditingKorean(for: word)
+                        jumpToWordCard(index, proxy: proxy)
                     } label: {
-                        // `pencil.circle`(옅은 글자색)은 장식처럼 보여 "수정" 버튼으로 읽히지 않았다(사용자 피드백 2026-10-29).
-                        // 시스템 표준 편집 기호 `pencil`(SF Symbols 1.0, iOS 13+/macOS 11+)에 같은 카드의 링크 아이콘과
-                        // 같은 포인트색을 써서 누를 수 있는 요소임을 드러낸다.
-                        Image(systemName: "pencil")
-                            .font(.system(size: 15, weight: .medium))
-                            .foregroundStyle(linkTint)
-                            .frame(width: Self.wordCardIconSize, height: Self.wordCardIconSize)
-                            .contentShape(WordCardHitArea(insets: Self.editButtonHitOutsets))
+                        VStack(spacing: 2) {
+                            // 빈 문자열이면 줄 높이가 0이 되므로 공백 한 칸으로 자리를 지킨다.
+                            Text(verbatim: english.isEmpty ? " " : english)
+                                .font(.system(size: 11))
+                                .foregroundStyle(textColor.opacity(0.7))
+                                .opacity(showsEnglish ? 1 : 0)
+                            Text(verbatim: word.originalText)
+                                .font(Self.originalTextFont(isHebrew: word.isHebrew, size: 17))
+                                .foregroundStyle(hebrewTextColor)
+                        }
+                        .lineLimit(1)
+                        .padding(.horizontal, 4)
+                        .frame(minWidth: 44)
+                        .background(innerShape.fill(linkTint.opacity(isHighlighted ? 0.2 : 0)))
+                        .overlay(innerShape.stroke(isHighlighted ? linkTint : Color.clear, lineWidth: 1))
+                        .contentShape(innerShape)
                     }
                     .buttonStyle(.plain)
-                    .accessibilityLabel("한글 뜻풀이 수정")
-                    .help("한글 뜻풀이 수정")
+                    .accessibilityElement(children: .ignore)
+                    .accessibilityLabel(Text(verbatim: wordCellAccessibilityText(phrase: phrase, english: showsEnglish ? english : "", original: word.originalText)))
+                    .accessibilityHint(Text("원어 카드로 이동"))
                 }
             }
+        }
+        .padding(.horizontal, 4)
+        // 안쪽 칸에는 위아래 여백을 두지 않아 줄 높이가 `wordCell`과 같다(위 6 · 말 · 2 · 영어 · 2 · 원어 · 아래 6) — 원어 줄이 칸마다 같은 높이에 온다.
+        .padding(.vertical, 6)
+        .frame(minWidth: 44)
+        .background(shape.fill(linkTint.opacity(isAnyHighlighted ? 0.14 : 0.08)))
+        .accessibilityElement(children: .contain)
+    }
 
-            HStack(spacing: 5) {
-                Text(word.originalText)
-                    .font(originalTextFont(for: word))
-                    .foregroundStyle(hebrewTextColor)
-                    .multilineTextAlignment(.center)
-                    .fixedSize(horizontal: false, vertical: true)
+    private func wordCellAccessibilityText(phrase: String?, english: String, original: String) -> String {
+        [phrase ?? "", english, original].filter { !$0.isEmpty }.joined(separator: ", ")
+    }
 
-                // 원어 바로 다음, biblehub 링크 앞에 네이버 사전 링크를 둔다(`naverDictionaryURL`/`naverBadge`).
-                // 두 링크 사이만 `wordCardLinkGap`으로 띄우고, 맞닿는 쪽 히트 영역은 그 절반까지만 넓혀 서로 겹치지 않게 한다.
-                HStack(spacing: Self.wordCardLinkGap) {
-                    if let naverURL = naverDictionaryURL(for: word) {
-                        Link(destination: naverURL) {
-                            naverBadge
-                                .contentShape(WordCardHitArea(insets: Self.naverLinkHitOutsets))
-                        }
-                        .accessibilityLabel("네이버 사전에서 찾기")
-                        .help("네이버 사전에서 찾기")
-                    }
+    /// 짝 말과 문맥 영어가 "같은 말"인지 — 대소문자, 문장부호, 보충어 괄호("[the]", "<obj.>"의 괄호), 여러 칸 공백 차이는 무시한다
+    /// (예: "Word" = "Word,", "In the" = "In [the]"). 글자·숫자가 하나도 없으면 같다고 보지 않는다.
+    private static func isSameGloss(_ lhs: String, _ rhs: String) -> Bool {
+        let left = glossComparisonKey(lhs)
+        return !left.isEmpty && left == glossComparisonKey(rhs)
+    }
 
-                    // 원어 단어별 biblehub Strong 사전 링크.
-                    if let strongURL = bibleHubStrongURL(for: word) {
-                        Link(destination: strongURL) {
-                            Image(systemName: "safari")
-                                .font(.system(size: 13))
-                                .foregroundStyle(linkTint)
-                                .frame(width: Self.wordCardIconSize, height: Self.wordCardIconSize)
-                                .contentShape(WordCardHitArea(insets: Self.siteLinkHitOutsets))
-                        }
-                        .accessibilityLabel("biblehub.com에서 찾기")
-                        .help("biblehub.com에서 찾기")
-                    }
-                }
+    private static func glossComparisonKey(_ text: String) -> String {
+        var scalars = String.UnicodeScalarView()
+        for scalar in text.lowercased().unicodeScalars {
+            if CharacterSet.alphanumerics.contains(scalar) {
+                scalars.append(scalar)
+            } else if CharacterSet.whitespacesAndNewlines.contains(scalar) {
+                scalars.append(" ")
             }
-            .padding(.top, 2)
+        }
+        return String(scalars).split(separator: " ").joined(separator: " ")
+    }
 
-            if !word.transliteration.isEmpty {
-                Text("[\(word.transliteration)]")
-                    .font(.system(size: 14, weight: .medium))
-                    .foregroundStyle(settings.bibleTextColor?.opacity(0.6) ?? Color.secondary)
+    /// 원어 카드 스크롤 대상 id(`ScrollViewReader`). 원어 카드 `ForEach`는 위치로 구분하므로 같은 위치를 쓴다.
+    private static func wordCardScrollID(_ index: Int) -> String {
+        "originalTextInfo.wordCard.\(index)"
+    }
+
+    /// 단어별 칸 → 원어 카드로 스크롤하고 1.6초 동안 테두리로 강조한다. 그 사이 다른 칸을 누르면 앞 예약은 무시된다(`highlightGeneration`).
+    private func jumpToWordCard(_ index: Int, proxy: ScrollViewProxy) {
+        withAnimation(.easeInOut(duration: 0.3)) {
+            proxy.scrollTo(Self.wordCardScrollID(index), anchor: .center)
+        }
+        highlightGeneration += 1
+        let generation = highlightGeneration
+        highlightedWordIndex = index
+        Task {
+            try? await Task.sleep(for: .seconds(1.6))
+            guard highlightGeneration == generation else { return }
+            withAnimation(.easeOut(duration: 0.3)) {
+                highlightedWordIndex = nil
             }
+        }
+    }
 
-            // [2026-10-12] 이 절 문맥의 영어 번역(STEPBible). 사전형 뜻과 다르게 문맥에 맞춘 형태다.
-            if !word.translationEn.isEmpty {
+    // MARK: - 원어 카드
+
+    /// 원어 카드 목록 제목 줄 — "원어 단어 (N)"과 품사 정보 펼치기/접기(모든 카드 공통).
+    private var wordsHeader: some View {
+        HStack(spacing: 8) {
+            Text("원어 단어 (\(words.count))")
+                .font(.system(size: 12, weight: .bold))
+                .foregroundStyle(sectionLabelColor)
+            Spacer(minLength: 0)
+            Button {
+                showsMorphology.toggle()
+            } label: {
                 HStack(spacing: 4) {
-                    Text("문맥")
-                        .font(.system(size: 10.5, weight: .medium))
-                        .foregroundStyle(settings.bibleTextColor?.opacity(0.5) ?? Color.secondary)
-                    Text(verbatim: word.translationEn)
+                    Text("품사 정보")
+                    Image(systemName: "chevron.down")
+                        .font(.system(size: 10, weight: .semibold))
+                        .rotationEffect(.degrees(showsMorphology ? 180 : 0))
+                }
+                .font(.system(size: 12, weight: .medium))
+                .foregroundStyle(linkTint)
+                .padding(.horizontal, 10)
+                .frame(height: 30)
+                .overlay(
+                    RoundedRectangle(cornerRadius: 8, style: .continuous)
+                        .stroke(linkTint.opacity(0.35), lineWidth: 1)
+                )
+                .contentShape(RoundedRectangle(cornerRadius: 8, style: .continuous))
+            }
+            .buttonStyle(.plain)
+            .accessibilityValue(showsMorphology ? Text("펼침") : Text("접힘"))
+        }
+        .padding(.horizontal, 2)
+    }
+
+    private func wordCard(_ word: OriginalWordInfo, index: Int) -> some View {
+        let isHighlighted = highlightedWordIndex == index
+        let showsEditButton = AppLanguage.isKorean
+        return VStack(spacing: 6) {
+            // 1. 원어(글꼴·색은 예전 그대로).
+            Text(word.originalText)
+                .font(originalTextFont(for: word))
+                .foregroundStyle(hebrewTextColor)
+                .multilineTextAlignment(.center)
+                .fixedSize(horizontal: false, vertical: true)
+
+            // 2. 음역 · Strong 번호.
+            Text(verbatim: word.transliteration.isEmpty ? word.strongCode : "\(word.transliteration) · \(word.strongCode)")
+                .font(.system(size: 12, weight: .medium))
+                .foregroundStyle(settings.bibleTextColor?.opacity(0.6) ?? Color.secondary)
+                .multilineTextAlignment(.center)
+                .fixedSize(horizontal: false, vertical: true)
+
+            // 3. 품사 정보 — 제목 줄 버튼으로 펼쳤을 때만.
+            if showsMorphology {
+                let morphOrFallback = morphOrFallbackText(word)
+                if !morphOrFallback.isEmpty {
+                    Text(morphOrFallback)
                         .font(.system(size: 12))
-                        .foregroundStyle(settings.bibleTextColor ?? Color.primary)
+                        .foregroundStyle(settings.bibleTextColor?.opacity(0.6) ?? Color.secondary)
                         .multilineTextAlignment(.center)
                         .fixedSize(horizontal: false, vertical: true)
                 }
-                .padding(.horizontal, 7)
-                .padding(.vertical, 2)
-                .background(
-                    RoundedRectangle(cornerRadius: 6, style: .continuous)
-                        .fill(linkTint.opacity(0.14))
-                )
             }
 
-            let morphOrFallback = morphOrFallbackText(word)
-            if !morphOrFallback.isEmpty {
-                Text(morphOrFallback)
+            // 4. 사전 뜻(앱 언어). "번역 중…"/"-" 처리는 예전 그대로.
+            Group {
+                if let headline = headlineGloss(for: word) {
+                    Text(verbatim: headline)
+                } else if isTranslating && !word.glossEn.isEmpty {
+                    Text("번역 중…")
+                } else {
+                    Text(verbatim: "-")
+                }
+            }
+            .font(.system(size: 16, weight: .bold))
+            .foregroundStyle(settings.bibleTextColor ?? .primary)
+            .multilineTextAlignment(.center)
+            .lineLimit(2)
+            .fixedSize(horizontal: false, vertical: true)
+
+            // 5. 이 절에서 — 짝 데이터가 지금 직역과 맞을 때만(`alignedPhrases`).
+            if let phrase = alignedPhrases[index] {
+                Text("이 절에서: \(phrase)")
                     .font(.system(size: 12))
-                    .foregroundStyle(settings.bibleTextColor?.opacity(0.6) ?? Color.secondary)
+                    .foregroundStyle(linkTint)
                     .multilineTextAlignment(.center)
                     .fixedSize(horizontal: false, vertical: true)
-                    .padding(.top, 2)
+                    .padding(.horizontal, 8)
+                    .padding(.vertical, 1)
+                    .background(
+                        RoundedRectangle(cornerRadius: 6, style: .continuous)
+                            .fill(linkTint.opacity(0.12))
+                    )
             }
 
-            Text(word.strongCode)
-                .font(.system(size: 10, weight: .medium))
-                .foregroundStyle(settings.bibleTextColor?.opacity(0.4) ?? Color.secondary)
+            // 6. 쓰인 구절 | 네이버 · biblehub.
+            wordCardLinksRow(word)
                 .padding(.top, 4)
         }
         .frame(maxWidth: .infinity)
         .padding(.horizontal, 14)
-        .padding(.vertical, 18)
+        .padding(.top, showsEditButton ? Self.wordCardTopPaddingWithEdit : Self.wordCardTopPadding)
+        .padding(.bottom, Self.wordCardBottomPadding)
         .background(
             RoundedRectangle(cornerRadius: 12, style: .continuous)
                 .fill(cardBackground)
         )
         .overlay(
             RoundedRectangle(cornerRadius: 12, style: .continuous)
-                .stroke(cardBorderColor, lineWidth: 1)
+                .stroke(isHighlighted ? linkTint : cardBorderColor, lineWidth: isHighlighted ? 2 : 1)
         )
+        .overlay(alignment: .topTrailing) {
+            // 직접 수정은 한국어 뜻(`StrongGlossTranslation` 캐시)만 지원한다.
+            if showsEditButton {
+                Button {
+                    beginEditingKorean(for: word)
+                } label: {
+                    // `pencil.circle`(옅은 글자색)은 장식처럼 보여 "수정" 버튼으로 읽히지 않았다(사용자 피드백 2026-10-29).
+                    // 시스템 표준 편집 기호 `pencil`(SF Symbols 1.0, iOS 13+/macOS 11+)에 같은 카드의 링크 아이콘과
+                    // 같은 포인트색을 써서 누를 수 있는 요소임을 드러낸다.
+                    Image(systemName: "pencil")
+                        .font(.system(size: 15, weight: .medium))
+                        .foregroundStyle(linkTint)
+                        .frame(width: Self.wordCardIconSize, height: Self.wordCardIconSize)
+                        .contentShape(WordCardHitArea(insets: Self.editButtonHitOutsets))
+                }
+                .buttonStyle(.plain)
+                .padding(.top, Self.editButtonInset)
+                .padding(.trailing, Self.editButtonInset)
+                .accessibilityLabel("한글 뜻풀이 수정")
+                .help("한글 뜻풀이 수정")
+            }
+        }
+    }
+
+    /// 원어 카드 아래 줄: [돋보기 + "N절"] | 네이버 · biblehub. 좁은 카드(약 170pt)에서 넘치면 "N절" 대신 숫자만 쓴다(`ViewThatFits`).
+    private func wordCardLinksRow(_ word: OriginalWordInfo) -> some View {
+        let count = verseCounts[word.strongCode]
+        return ViewThatFits(in: .horizontal) {
+            wordCardLinksRowContent(word, count: count, compact: false)
+            wordCardLinksRowContent(word, count: count, compact: true)
+        }
+    }
+
+    private func wordCardLinksRowContent(_ word: OriginalWordInfo, count: Int?, compact: Bool) -> some View {
+        HStack(spacing: Self.wordCardRowSpacing) {
+            occurrenceButton(word, count: count, compact: compact)
+
+            Rectangle()
+                .fill(cardBorderColor)
+                .frame(width: 1, height: 18)
+
+            // 두 링크 사이만 `wordCardLinkGap`으로 띄우고, 맞닿는 쪽 히트 영역은 그 절반까지만 넓혀 서로 겹치지 않게 한다.
+            HStack(spacing: Self.wordCardLinkGap) {
+                if let naverURL = naverDictionaryURL(for: word) {
+                    Link(destination: naverURL) {
+                        naverBadge
+                            .contentShape(WordCardHitArea(insets: Self.naverLinkHitOutsets))
+                    }
+                    .accessibilityLabel("네이버 사전에서 찾기")
+                    .help("네이버 사전에서 찾기")
+                }
+
+                // 원어 단어별 biblehub Strong 사전 링크.
+                if let strongURL = bibleHubStrongURL(for: word) {
+                    Link(destination: strongURL) {
+                        Image(systemName: "safari")
+                            .font(.system(size: 13))
+                            .foregroundStyle(linkTint)
+                            .frame(width: Self.wordCardIconSize, height: Self.wordCardIconSize)
+                            .contentShape(WordCardHitArea(insets: Self.siteLinkHitOutsets))
+                    }
+                    .accessibilityLabel("biblehub.com에서 찾기")
+                    .help("biblehub.com에서 찾기")
+                }
+            }
+        }
+    }
+
+    /// 쓰인 구절 버튼. 절 수를 아직 못 셌으면(백그라운드 조회 중·실패) 돋보기만 보이고 눌러도 된다(목록은 따로 조회한다).
+    private func occurrenceButton(_ word: OriginalWordInfo, count: Int?, compact: Bool) -> some View {
+        let shape = RoundedRectangle(cornerRadius: 8, style: .continuous)
+        // 숫자만 보이는 좁은 배치에서도 접근성 이름·도움말은 "이 단어가 쓰인 구절 N절" 그대로.
+        let accessibilityText: Text = count.map { Text("이 단어가 쓰인 구절 \($0)절") } ?? Text("이 단어가 쓰인 구절")
+        return Button {
+            occurrenceWord = word
+        } label: {
+            HStack(spacing: 3) {
+                Image(systemName: "magnifyingglass")
+                    .font(.system(size: 11, weight: .semibold))
+                if let count {
+                    if compact {
+                        Text(verbatim: "\(count)")
+                    } else {
+                        Text("쓰인 구절 \(count)절")
+                    }
+                }
+            }
+            .font(.system(size: 12, weight: .medium))
+            .lineLimit(1)
+            .foregroundStyle(linkTint)
+            .padding(.horizontal, 7)
+            .frame(minWidth: Self.wordCardRowHeight, minHeight: Self.wordCardRowHeight)
+            .overlay(shape.stroke(linkTint.opacity(0.35), lineWidth: 1))
+            .contentShape(shape)
+        }
+        .buttonStyle(.plain)
+        .accessibilityLabel(accessibilityText)
+        .help(accessibilityText)
     }
 
     // MARK: 원어 카드 아이콘 히트 영역
     // 아이콘은 16×16 그대로 레이아웃하고(카드 줄바꿈·높이 유지), 누르는 영역만 `contentShape`로 아이콘 밖까지 넓힌다
     // (Apple Developer Forums thread 831676에서 Apple 엔지니어가 권한 `contentShape(Circle().inset(by: -8))`와 같은 방식).
-    // 넓히는 양(바깥쪽 거리)의 기준:
-    //  - 좌우 바깥쪽 14 = 카드 안쪽 여백(padding 14)이라, 줄이 카드 폭을 꽉 채워도 카드 테두리를 넘지 않는다(이웃 카드와 간격 12는 침범 안 함).
-    //  - 연필 줄과 원어 줄 사이 간격은 VStack spacing 8 + 원어 줄 padding.top 2 = 10. 연필 아래 5 + 링크 위 5 = 10이라
-    //    두 줄 높이가 아이콘 높이(16)까지 줄어드는 최악의 경우에도 서로 겹치지 않는다.
-    //  - 연필 위 14는 카드 위 여백(18) 안, 링크 아래 14는 아래 줄(음역·문맥·형태·Strong 번호 — 누르는 요소 없음) 쪽이다.
-    //  - 네이버↔biblehub 맞닿는 쪽은 간격(`wordCardLinkGap`)의 절반씩.
-    // 결과 히트 영역: 연필 44×35pt, 링크 각 34×35pt — HIG 최소(iOS 28pt) 이상, 권장 44pt는 가로(연필)만 충족.
+    // [2026-11-02 interlin1] 배치가 바뀌어 기준을 다시 잡았다.
+    //  - 연필: 카드 오른쪽 위 구석(위·오른쪽 6pt 안쪽). 히트 영역 = 위·오른쪽은 카드 테두리까지(6), 왼쪽 22, 아래 8
+    //    → 44×30pt(카드 위쪽 y 0~30). 연필이 보이는 카드(한국어)는 내용 위 여백을 30으로 늘려, 원어 줄이 아무리 넓어도
+    //    히트 영역과 겹치지 않는다. 연필이 없는 언어는 예전 위 여백(18).
+    //  - 아래 줄 링크: 줄 높이 28(쓰인 구절 버튼). 아이콘 16 위아래로 6씩 넓혀 줄 높이를 채우고, 아래는 카드 아래 여백(14) 안까지 더 넓힌다.
+    //    왼쪽(네이버)은 세로선까지(줄 간격 6) — 세로선 너머 쓰인 구절 버튼과 겹치지 않는다. 오른쪽(biblehub)은 카드 안쪽 여백(14)까지.
+    //    네이버↔biblehub 맞닿는 쪽은 간격(`wordCardLinkGap`)의 절반씩.
+    // 결과 히트 영역: 연필 44×30pt, 링크 각 26~34×34pt — HIG 최소(iOS 28pt) 이상.
     private static let wordCardIconSize: CGFloat = 16
     private static let wordCardLinkGap: CGFloat = 8
-    private static let editButtonHitOutsets = EdgeInsets(top: 14, leading: 14, bottom: 5, trailing: 14)
-    private static let naverLinkHitOutsets = EdgeInsets(top: 5, leading: 14, bottom: 14, trailing: wordCardLinkGap / 2)
-    private static let siteLinkHitOutsets = EdgeInsets(top: 5, leading: wordCardLinkGap / 2, bottom: 14, trailing: 14)
+    private static let wordCardRowSpacing: CGFloat = 6
+    private static let wordCardRowHeight: CGFloat = 28
+    private static let wordCardTopPadding: CGFloat = 18
+    private static let wordCardBottomPadding: CGFloat = 14
+    private static let editButtonInset: CGFloat = 6
+    private static let wordCardTopPaddingWithEdit: CGFloat = editButtonInset + wordCardIconSize + editButtonHitOutsets.bottom
+    private static let editButtonHitOutsets = EdgeInsets(top: editButtonInset, leading: 22, bottom: 8, trailing: editButtonInset)
+    private static let naverLinkHitOutsets = EdgeInsets(top: 6, leading: wordCardRowSpacing, bottom: 12, trailing: wordCardLinkGap / 2)
+    private static let siteLinkHitOutsets = EdgeInsets(top: 6, leading: wordCardLinkGap / 2, bottom: 12, trailing: 14)
 
     /// 테마 글자색이 지정돼 있으면 그 색을 쓰고(전용 서체로 한글 헤드라인과 이미 구분됨),
     /// 미지정 시엔 라이트/다크에 대응하는 남색을 쓴다.
     private var hebrewTextColor: Color {
-        if let themeColor = settings.bibleTextColor {
+        Self.originalTextColor(colorScheme: colorScheme)
+    }
+
+    /// [2026-11-02 interlin1] 원어 글자색 규칙을 "쓰인 구절" 화면(`OriginalWordOccurrencesView`)도 같이 쓰도록 정적 함수로 뺐다(값은 그대로).
+    static func originalTextColor(colorScheme: ColorScheme) -> Color {
+        if let themeColor = UserSettingsStore.shared.bibleTextColor {
             return themeColor
         }
         return colorScheme == .dark
@@ -603,19 +926,29 @@ struct OriginalTextInfoView: View {
     /// 히브리어/그리스어 전용 폰트를 `word.isHebrew`로 고른다. 히브리어 성서 조판체(Ezra SIL)는
     /// 굵은 변형이 없고 볼드체를 쓰는 관례도 없어 `.bold()`를 씌우지 않는다.
     private func originalTextFont(for word: OriginalWordInfo) -> Font {
-        if word.isHebrew {
+        Self.originalTextFont(isHebrew: word.isHebrew, size: 26)
+    }
+
+    /// [2026-11-02 interlin1] 크기를 받는 공용판 — 단어별 칸(17)·쓰인 구절 화면도 같은 글꼴을 쓴다. 원어 카드는 예전 그대로 26.
+    static func originalTextFont(isHebrew: Bool, size: CGFloat) -> Font {
+        if isHebrew {
             BundledFontRegistrar.ensureAvailable(SpecialPurposeFonts.hebrew)
-            return .custom(SpecialPurposeFonts.hebrew, size: 26)
+            return .custom(SpecialPurposeFonts.hebrew, size: size)
         } else {
             BundledFontRegistrar.ensureAvailable(SpecialPurposeFonts.greekBold)
-            return .custom(SpecialPurposeFonts.greekBold, size: 26)
+            return .custom(SpecialPurposeFonts.greekBold, size: size)
         }
     }
 
     /// 테마 글자색의 옅은 opacity를 테두리색으로 쓴다(`DocumentsHomeView`의 카드 테두리와 같은 관례).
     /// 테마 미지정 시엔 `Color.secondary` 계열로 대체한다.
     private var cardBorderColor: Color {
-        settings.bibleTextColor?.opacity(0.2) ?? Color.secondary.opacity(0.2)
+        Self.cardBorderColor
+    }
+
+    /// [2026-11-02 interlin1] 쓰인 구절 화면과 공용(값은 그대로).
+    static var cardBorderColor: Color {
+        UserSettingsStore.shared.bibleTextColor?.opacity(0.2) ?? Color.secondary.opacity(0.2)
     }
 
     /// 형태소 설명이 있으면 그걸(히브리어), 없으면(그리스어 등 미지원 언어) 영어
@@ -720,7 +1053,12 @@ struct OriginalTextInfoView: View {
     /// 테마 글자색의 아주 옅은 opacity로 카드를 배경에서 살짝 띄운다(`DocumentsHomeView`와 같은 관례).
     /// 미지정 시엔 `Color.secondary` 계열로 대체한다.
     private var cardBackground: Color {
-        settings.bibleTextColor?.opacity(0.08) ?? Color.secondary.opacity(0.08)
+        Self.cardBackground
+    }
+
+    /// [2026-11-02 interlin1] 쓰인 구절 화면과 공용(값은 그대로).
+    static var cardBackground: Color {
+        UserSettingsStore.shared.bibleTextColor?.opacity(0.08) ?? Color.secondary.opacity(0.08)
     }
 
     private func loadWords() {
@@ -728,7 +1066,18 @@ struct OriginalTextInfoView: View {
         let commentary = LiteralCommentaryService.shared
         appLiteral = commentary.appLanguageLiteral(bookId: bookId, chapter: chapter, verse: verseNumber)
         literalEnglish = OriginalTextLookupService.shared.literalEnglish(bookId: bookId, chapter: chapter, verse: verseNumber)
-        isLiteralEnglishExpanded = false
+        alignedSpans = commentary.alignedPhraseSpans(bookId: bookId, chapter: chapter, verse: verseNumber, literal: appLiteral)
+        alignedPhrases = alignedSpans.mapValues(\.text)
+        showsPhraseLine = commentary.appLanguageHasWordAlignments()
+        // 절 수는 `loadVerseCounts()`가 이어서 채운다. 앞 절 숫자가 남아 보이지 않게 비운다.
+        verseCounts = [:]
+        // 절이 바뀌면 쓰인 구절 화면·카드 강조를 닫는다(번역본 열 목록만 바뀌어 다시 읽는 경우는 그대로 둔다).
+        let verseKey = "\(bookId)-\(chapter)-\(verseNumber)"
+        if loadedVerseKey != verseKey {
+            loadedVerseKey = verseKey
+            occurrenceWord = nil
+            highlightedWordIndex = nil
+        }
 
         var found: [String: String] = [:]
         for source in verseSources {
@@ -749,6 +1098,40 @@ struct OriginalTextInfoView: View {
         if verseSources.isEmpty {
             loadKRVVerseText()
         }
+    }
+
+    /// [2026-11-02 interlin1] 이 절 단어들의 Strong 번호별 쓰인 절 수를 백그라운드에서 한 번에 센다(전체 스캔 1회).
+    /// `.task(id:)` 안에서 불리므로 절이 바뀌면 이 작업은 취소되고, 늦게 끝난 결과는 버린다.
+    private func loadVerseCounts() async {
+        let codes = Array(Set(words.map(\.strongCode).filter { !$0.isEmpty })).sorted()
+        guard !codes.isEmpty else { return }
+        let counts = await Task.detached(priority: .userInitiated) {
+            OriginalTextLookupService.verseCounts(strongCodes: codes)
+        }.value
+        guard !Task.isCancelled else { return }
+        verseCounts = counts
+    }
+
+    /// "쓰인 구절" 본문 미리보기 번역본 — 구절 카드와 같은 번역본(`currentSource`: 칩으로 고른 것, 없으면 첫 열).
+    /// 켜 둔 열 정보가 없으면 구절 카드처럼 KRV. 파일 경로를 모르면 nil(미리보기 없이 참조만).
+    private var occurrencePreviewSource: OriginalWordOccurrencesView.PreviewSource? {
+        if let source = currentSource {
+            guard let path = source.databasePath else { return nil }
+            return OriginalWordOccurrencesView.PreviewSource(filePath: path, translationCode: source.code)
+        }
+        guard let url = try? TranslationBootstrap.resolvedBundledDatabaseURL() else { return nil }
+        return OriginalWordOccurrencesView.PreviewSource(filePath: url.path, translationCode: TranslationBootstrap.bundledTranslationCode)
+    }
+
+    private func occurrencesView(for word: OriginalWordInfo) -> some View {
+        OriginalWordOccurrencesView(
+            word: word,
+            gloss: headlineGloss(for: word),
+            knownVerseCount: verseCounts[word.strongCode],
+            previewSource: occurrencePreviewSource,
+            onBack: { occurrenceWord = nil },
+            onSelectVerse: onOpenVerse
+        )
     }
 
     /// 번들 KRV DB에서 이 절 텍스트를 읽는다. 시트가 열릴 때 한 번만 조회하므로 커넥션을 캐싱하지 않는다.

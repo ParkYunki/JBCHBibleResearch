@@ -1,0 +1,205 @@
+## 24:28:2
+KO: 이같이 만군의 여호와 이스라엘의 하나님이 말씀하신다, 이르기를, 내가 바벨론 왕의 멍에를 꺾었다.
+1 כֹּה־ = thus
+2 אָמַר = he says
+3 יְהוָה = Yahweh (LORD)
+4 צְבָאוֹת = of hosts (Hosts)
+5 אֱלֹהֵי = [the] God of (God)
+6 יִשְׂרָאֵל = Israel
+7 לֵאמֹר = <to> saying
+8 שָׁבַרְתִּי = I will break (to break)
+9 אֶת־ = <obj.> ([Obj.])
+10 עֹל = [the] yoke of (yoke)
+11 מֶלֶךְ = [the] king of (king)
+12 בָּבֶל = Babylon
+
+## 24:28:3
+KO: 아직 이년의 날들이 차기 전에, 내가 바벨론 왕 느부갓네살이 이 장소에서 바벨론으로 가져갔던 여호와의 집의 모든 기구들을 이 장소로 다시 돌아오게 하리라.
+1 בְּעוֹד = in yet (still)
+2 שְׁנָתַיִם = two years (year)
+3 יָמִים = days (day;_when)
+4 אֲנִי = I
+5 מֵשִׁיב = [will] bring back (to return)
+6 אֶל־ = to (to(wards))
+7 הַמָּקוֹם = the place
+8 הַזֶּה = <the> this
+9 אֶת־ = <obj.> ([Obj.])
+10 כָּל־ = all
+11 כְּלֵי = [the] articles of (article|utensil)
+12 בֵּית = [the] house of (house)
+13 יְהוָה = Yahweh (LORD)
+14 אֲשֶׁר = which
+15 לָקַח = he took (to take)
+16 נְבוּכַדנֶאצַּר = Nebuchadnezzar
+17 מֶלֶךְ־ = [the] king of (king)
+18 בָּבֶל = Babylon
+19 מִן־ = from
+20 הַמָּקוֹם = the place
+21 הַזֶּה = <the> this
+22 וַיְבִיאֵם = and he brought them (to come (in))
+23 בָּבֶל = Babylon
+
+## 24:28:4
+KO: 그리고 유다 왕 여호야김의 아들 여고니야와, 바벨론으로 들어간 유다의 모든 사로잡힌 자들을 내가 이 장소로 돌아오게 하리니, 이는 내가 바벨론 왕의 멍에를 꺾을 것이기 때문이라, 여호와의 말씀이다.
+1 וְאֶת־ = and <obj.>
+2 יְכָנְיָה = Jeconiah
+3 בֶן־ = [the] son of (son)
+4 יְהוֹיָקִים = Jehoiakim
+5 מֶלֶךְ־ = [the] king of
+6 יְהוּדָה = Judah
+7 וְאֶת־ = and <obj.>
+8 כָּל־ = all
+9 גָּלוּת = [the] exile[s] of (captivity)
+10 יְהוּדָה = Judah
+11 הַבָּאִים = who went (to come (in))
+12 בָּבֶלָה = Babylon towards
+13 אֲנִי = I
+14 מֵשִׁיב = [will] bring back (to return)
+15 אֶל־ = to (to(wards))
+16 הַמָּקוֹם = the place (standing place)
+17 הַזֶּה = <the> this (this)
+18 נְאֻם־ = [the] utterance of (utterance)
+19 יְהוָה = Yahweh (LORD)
+20 כִּי = that (for)
+21 אֶשְׁבֹּר = I will break (to break)
+22 אֶת־ = <obj.>
+23 עֹל = [the] yoke of (yoke)
+24 מֶלֶךְ = [the] king of
+25 בָּבֶל = Babylon
+
+## 24:28:5
+KO: 그리고 선지자 예레미야가 선지자 하나냐에게 말하였다, 제사장들의 눈앞에서 그리고 여호와의 집에 서 있는 모든 백성의 눈앞에서.
+1 וַיֹּאמֶר = and he said (to say)
+2 יִרְמְיָה = Jeremiah
+3 הַנָּבִיא = the prophet
+4 אֶל־ = to (to(wards))
+5 חֲנַנְיָה = Hananiah
+6 הַנָּבִיא = the prophet
+7 לְעֵינֵי = to [the] eyes of
+8 הַכֹּהֲנִים = the priests (priest)
+9 וּלְעֵינֵי = and to [the] eyes of
+10 כָל־ = all
+11 הָעָם = the people (people)
+12 הָעֹמְדִים = who were standing (to stand)
+13 בְּבֵית = in [the] house of (house)
+14 יְהוָה = Yahweh (LORD)
+
+## 24:28:6
+KO: 선지자 예레미야가 말하였다. "아멘! 여호와께서 이같이 행하시고, 여호와께서 네가 예언한 네 말들을 세우셔서, 여호와의 집의 기구들과 모든 포로들을 바벨론으로부터 이 장소로 다시 돌려보내시기를 원하노라."
+1 וַיֹּאמֶר = and he said (to say)
+2 יִרְמְיָה = Jeremiah
+3 הַנָּבִיא = the prophet (prophet)
+4 אָמֵן = amen
+5 כֵּן = thus (so)
+6 יַעֲשֶׂה = may he do (to make)
+7 יְהוָה = Yahweh
+8 יָקֵם = may he carry out (to arise)
+9 יְהוָה = Yahweh
+10 אֶת־ = <obj.> ([Obj.])
+11 דְּבָרֶיךָ = words your (word)
+12 אֲשֶׁר = which
+13 נִבֵּאתָ = you have prophesied (to prophesy)
+14 לְהָשִׁיב = by bringing back (to return)
+15 כְּלֵי = [the] articles of (article|utensil)
+16 בֵית־ = [the] house of (house)
+17 יְהוָה = Yahweh
+18 וְכָל־ = and all (all)
+19 הַגּוֹלָה = the exile[s] (captivity)
+20 מִבָּבֶל = from Babylon (Babylon)
+21 אֶל־ = to (to(wards))
+22 הַמָּקוֹם = the place (standing place)
+23 הַזֶּה = <the> this (this)
+
+## 24:28:7
+KO: 참으로 이제 들으라, 내가 네 귀들과 모든 백성의 귀들에 말하고 있는 이 말을.
+1 אַךְ־ = nevertheless (surely)
+2 שְׁמַע־ = listen to (to hear)
+3 נָא = please
+4 הַדָּבָר = the word (word)
+5 הַזֶּה = <the> this (this)
+6 אֲשֶׁר = which
+7 אָנֹכִי = I
+8 דֹּבֵר = [am] about to speak (to speak)
+9 בְּאָזְנֶיךָ = in ears your
+10 וּבְאָזְנֵי = and in [the] ears of
+11 כָּל־ = all
+12 הָעָם = the people (people)
+
+## 24:28:8
+KO: 나보다 앞서고 너보다 앞서 있던 그 선지자들이 예로부터 여러 땅들과 큰 왕국들에 대하여 전쟁과 재앙과 염병을 예언하였느니라.
+1 הַנְּבִיאִים = the prophets (prophet)
+2 אֲשֶׁר = who (which)
+3 הָיוּ = they were (to be)
+4 לְפָנַי = <to> before me
+5 וּלְפָנֶיךָ = and <to> before you
+6 מִן־ = from
+7 הָעוֹלָם = <the> antiquity (forever)
+8 וַיִּנָּבְאוּ = and they prophesied (to prophesy)
+9 אֶל־ = against (to(wards))
+10 אֲרָצוֹת = lands (land)
+11 רַבּוֹת = many
+12 וְעַל־ = and on (upon)
+13 מַמְלָכוֹת = kingdoms (kingdom)
+14 גְּדֹלוֹת = great
+15 לְמִלְחָמָה = of war (battle)
+16 וּלְרָעָה = and of calamity (distress)
+17 וּלְדָבֶר = and of pestilence (pestilence)
+
+## 24:28:9
+KO: 평화를 예언하는 그 선지자는 그 선지자의 말이 올 때에(이루어질 때에), 그 선지자가 여호와께서 진실로 보내신 자임을 알게 될 것이다.
+1 הַנָּבִיא = the prophet
+2 אֲשֶׁר = who
+3 יִנָּבֵא = he prophesies (to prophesy)
+4 לְשָׁלוֹם = of peace (peace)
+5 בְּבֹא = when comes (to come (in))
+6 דְּבַר = [the] word of (word)
+7 הַנָּבִיא = the prophet
+8 יִוָּדַע = he will be recognized (to know)
+9 הַנָּבִיא = the prophet
+10 אֲשֶׁר־ = whom
+11 שְׁלָחוֹ = he sent him (to send)
+12 יְהוָה = Yahweh (LORD)
+13 בֶּאֱמֶת = in truth (truth)
+
+## 24:28:10
+KO: 그리고 선지자 하나냐가 예레미야 선지자의 목 위로부터 그 멍에를 취하여 그것을 꺾었다.
+1 וַיִּקַּח = and he took (to take)
+2 חֲנַנְיָה = Hananiah
+3 הַנָּבִיא = the prophet
+4 אֶת־ = <obj.> ([Obj.])
+5 הַמּוֹטָה = the yoke-bar (yoke)
+6 מֵעַל = from on (upon)
+7 צַוַּאר = [the] neck of (neck)
+8 יִרְמְיָה = Jeremiah
+9 הַנָּבִיא = the prophet
+10 וַיִּשְׁבְּרֵהוּ = and he broke it (to break)
+
+## 24:28:11
+KO: 하나냐가 모든 백성의 눈앞에서 말하여 이르되, 여호와께서 이같이 말씀하시되, 내가 바벨론 왕 느부갓네살의 멍에를 이년이 차기 전 아직 며칠 동안에 모든 민족의 목 위에서 이같이 꺾어 버리리라 하셨느니라 하매, 예언자 예레미야가 자기 길로 가니라.
+1 וַיֹּאמֶר = and he said
+2 חֲנַנְיָה = Hananiah
+3 לְעֵינֵי = to [the] eyes of (eye)
+4 כָל־ = all
+5 הָעָם = the people (people)
+6 לֵאמֹר = <to> saying
+7 כֹּה = thus
+8 אָמַר = he says
+9 יְהוָה = Yahweh (LORD)
+10 כָּכָה = thus
+11 אֶשְׁבֹּר = I will break (to break)
+12 אֶת־ = <obj.> ([Obj.])
+13 עֹל = [the] yoke of (yoke)
+14 נְבֻכַדְנֶאצַּר = Nebuchadnezzar
+15 מֶלֶךְ־ = [the] king of (king)
+16 בָּבֶל = Babylon
+17 בְּעוֹד = in yet (still)
+18 שְׁנָתַיִם = two years (year)
+19 יָמִים = days (day;_when)
+20 מֵעַל = from on (upon)
+21 צַוַּאר = [the] neck of (neck)
+22 כָּל־ = all
+23 הַגּוֹיִם = the nations (nation)
+24 וַיֵּלֶךְ = and he went (to go)
+25 יִרְמְיָה = Jeremiah
+26 הַנָּבִיא = the prophet (prophet)
+27 לְדַרְכּוֹ פ = to way his (way)

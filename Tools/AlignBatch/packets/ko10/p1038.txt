@@ -1,0 +1,95 @@
+## 13:3:9
+KO: 모두 다윗의 아들들이요, 첩들의 아들들은 제외하고, 그리고 그들의 누이는 다말이었더라.
+1 כֹּל = all
+2 בְּנֵי = [the] sons of
+3 דָוִיד = David
+4 מִלְּבַד = <from> <to> besides (alone)
+5 בְּנֵי־ = sons of
+6 פִילַגְשִׁים = concubines (concubine)
+7 וְתָמָר = and Tamar (Tamar)
+8 אֲחוֹתָם פ = [was] sister their (sister)
+
+## 13:3:10
+KO: 그리고 솔로몬의 아들은 르호보암이요, 그의 아들은 아비야요, 그의 아들은 아사요, 그의 아들은 여호사밧이다.
+1 וּבֶן־ = and [the] son of
+2 שְׁלֹמֹה = Solomon
+3 רְחַבְעָם = Rehoboam
+4 אֲבִיָּה = Abijah
+5 בְנוֹ = son his
+6 אָסָא = Asa
+7 בְנוֹ = son his
+8 יְהוֹשָׁפָט = Jehoshaphat
+9 בְּנוֹ = son his
+
+## 13:3:11
+KO: 요람, 그의 아들은 아하시야, 그의 아들은 요아스.
+1 יוֹרָם = Joram
+2 בְּנוֹ = son his
+3 אֲחַזְיָהוּ = Ahaziah
+4 בְנוֹ = son his
+5 יוֹאָשׁ = Joash
+6 בְּנוֹ = son his
+
+## 13:3:12
+KO: 그의 아들은 아마샤요, 그의 아들은 아사랴요, 그의 아들은 요담이라.
+1 אֲמַצְיָהוּ = Amaziah
+2 בְנוֹ = son his
+3 עֲזַרְיָה = Azariah
+4 בְנוֹ = son his
+5 יוֹתָם = Jotham
+6 בְּנוֹ = son his
+
+## 13:3:13
+KO: 아하스, 그의 아들은 히스기야, 그의 아들은 므낫세이다.
+1 אָחָז = Ahaz
+2 בְּנוֹ = son his
+3 חִזְקִיָּהוּ = Hezekiah
+4 בְנוֹ = son his
+5 מְנַשֶּׁה = Manasseh
+6 בְנוֹ = son his
+
+## 13:3:14
+KO: 아몬, 그의 아들, 요시야, 그의 아들.
+1 אָמוֹן = Amon
+2 בְּנוֹ = son his
+3 יֹאשִׁיָּהוּ = Josiah
+4 בְנוֹ = son his
+
+## 13:3:15
+KO: 그리고 요시야의 아들들은 맏아들 요하난, 둘째 여호야김, 셋째 시드기야, 넷째 살룸이라.
+1 וּבְנֵי = and [the] sons of (son)
+2 יֹאשִׁיָּהוּ = Josiah
+3 הַבְּכוֹר = the firstborn (firstborn)
+4 יוֹחָנָן = Johanan
+5 הַשֵּׁנִי = the second (second)
+6 יְהוֹיָקִים = Jehoiakim
+7 הַשְּׁלִשִׁי = the third (third)
+8 צִדְקִיָּהוּ = Zedekiah
+9 הָרְבִיעִי = the fourth (fourth)
+10 שַׁלּוּם = Shallum
+
+## 13:3:16
+KO: 그리고 여호야김의 아들들은 그의 아들 여고냐, 그의 아들 시드기야이다.
+1 וּבְנֵי = and [the] sons of
+2 יְהוֹיָקִים = Jehoiakim
+3 יְכָנְיָה = Jeconiah
+4 בְנוֹ = son his
+5 צִדְקִיָּה = Zedekiah
+6 בְנוֹ = son his
+
+## 13:3:17
+KO: 그리고 여고냐의 아들들은 포로된 자, 그의 아들 스알디엘과
+1 וּבְנֵי = and [the] sons of
+2 יְכָנְיָה = Jeconiah
+3 אַסִּר = a prisoner (prisoner)
+4 שְׁאַלְתִּיאֵל = Shealtiel
+5 בְּנוֹ = son his
+
+## 13:3:18
+KO: 그리고 말기람과 그리고 브다야와 그리고 세낫살과 여가먀와 호사마와 그리고 느다뱌이다.
+1 וּמַלְכִּירָם = and Malkiram (Malchiram)
+2 וּפְדָיָה = and Pedaiah (Pedaiah)
+3 וְשֶׁנְאַצַּר = and Shenazzar (Shenazzar)
+4 יְקַמְיָה = Jekamiah
+5 הוֹשָׁמָע = Hoshama
+6 וּנְדַבְיָה = and Nedabiah (Nedabiah)

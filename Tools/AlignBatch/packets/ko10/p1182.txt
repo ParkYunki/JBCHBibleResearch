@@ -1,0 +1,180 @@
+## 14:29:19
+KO: 그리고 아하스가 그의 통치 기간에 그의 불충실함으로 말미암아 내버렸던 모든 기구들을 우리가 정돈하였고 거룩하게 하였으니, 보소서, 그것들이 여호와의 제단 앞에 있나이다.
+1 וְאֵת = and <obj.> ([Obj.])
+2 כָּל־ = all
+3 הַכֵּלִים = the utensils (article|utensil)
+4 אֲשֶׁר = which
+5 הִזְנִיחַ = he had rejected (to reject)
+6 הַמֶּלֶךְ = the king (king)
+7 אָחָז = Ahaz
+8 בְּמַלְכוּתוֹ = in reign his (royalty)
+9 בְּמַעֲלוֹ = in unfaithfulness his (unfaithfulness)
+10 הֵכַנּוּ = we have prepared (to establish)
+11 וְהִקְדָּשְׁנוּ = and we have consecrated (to consecrate)
+12 וְהִנָּם = and there they (look!)
+13 לִפְנֵי = [are] <to> before (face)
+14 מִזְבַּח = [the] altar of (altar)
+15 יְהוָה ס = Yahweh (LORD)
+
+## 14:29:20
+KO: 그리고 히스기야 왕이 일찍 일어나 성읍의 관원들을 모으고 여호와의 집으로 올라갔다.
+1 וַיַּשְׁכֵּם = and he rose early (to rise)
+2 יְחִזְקִיָּהוּ = Hezekiah
+3 הַמֶּלֶךְ = the king (king)
+4 וַיֶּאֱסֹף = and he gathered (to gather)
+5 אֵת = <obj.> ([Obj.])
+6 שָׂרֵי = [the] officials of (ruler)
+7 הָעִיר = the city (city)
+8 וַיַּעַל = and he went up (to ascend)
+9 בֵּית = [the] house of (house)
+10 יְהוָה = Yahweh (LORD)
+
+## 14:29:21
+KO: 그들이 수송아지 일곱과 수양 일곱과 어린 양 일곱과 염소 새끼 일곱을 가져와서 나라와 성소와 유다를 위하여 속죄 제물로 삼았다. 그리고 아론의 자손 제사장들에게 명하여 여호와의 제단 위로 올리게 하였다.
+1 וַיָּבִיאוּ = and they brought (to come (in))
+2 פָרִים־ = young bulls (bullock)
+3 שִׁבְעָה = seven
+4 וְאֵילִים = and rams (ram)
+5 שִׁבְעָה = seven
+6 וּכְבָשִׂים = and lambs (lamb)
+7 שִׁבְעָה = seven
+8 וּצְפִירֵי = and he-goats of (male goat)
+9 עִזִּים = goats (goat)
+10 שִׁבְעָה = seven
+11 לְחַטָּאת = to a sin offering (sin)
+12 עַל־ = on
+13 הַמַּמְלָכָה = the kingdom (kingdom)
+14 וְעַל־ = and on
+15 הַמִּקְדָּשׁ = the sanctuary (sanctuary)
+16 וְעַל־ = and on
+17 יְהוּדָה = Judah
+18 וַיֹּאמֶר = and he said (to say)
+19 לִבְנֵי = to [the] descendants of (son)
+20 אַהֲרֹן = Aaron
+21 הַכֹּהֲנִים = the priests (priest)
+22 לְהַעֲלוֹת = to offer up (to ascend)
+23 עַל־ = on
+24 מִזְבַּח = [the] altar of (altar)
+25 יְהוָה = Yahweh (LORD)
+
+## 14:29:22
+KO: 그리고 그들이 소를 잡았고, 제사장들이 그 피를 받았고, 그것을 제단 위에 뿌렸다. 그리고 그들이 수양들을 잡았고, 그 피를 제단 위에 뿌렸다. 그리고 그들이 어린 양들을 잡았고, 그 피를 제단 위에 뿌렸다.
+1 וַיִּשְׁחֲטוּ = and they slaughtered
+2 הַבָּקָר = the cattle (cattle)
+3 וַיְקַבְּלוּ = and they took (to receive)
+4 הַכֹּהֲנִים = the priests (priest)
+5 אֶת־ = <obj.> ([Obj.])
+6 הַדָּם = the blood
+7 וַיִּזְרְקוּ = and they sprinkled [it]
+8 הַמִּזְבֵּחָה = the altar towards
+9 וַיִּשְׁחֲטוּ = and they slaughtered
+10 הָאֵלִים = the rams (ram)
+11 וַיִּזְרְקוּ = and they sprinkled
+12 הַדָּם = the blood
+13 הַמִּזְבֵּחָה = the altar towards
+14 וַיִּשְׁחֲטוּ = and they slaughtered
+15 הַכְּבָשִׂים = the lambs (lamb)
+16 וַיִּזְרְקוּ = and they sprinkled
+17 הַדָּם = the blood
+18 הַמִּזְבֵּחָה = the altar towards
+
+## 14:29:23
+KO: 그리고 그들이 속죄의 수염소들을 왕과 회중 앞으로 가까이 가져오매, 그들이 그들 위에 그들의 손들을 얹었다.
+1 וַיַּגִּישׁוּ = and they brought near (to approach)
+2 אֶת־ = <obj.> ([Obj.])
+3 שְׂעִירֵי = [the] goats of (he-goat)
+4 הַחַטָּאת = the sin offering (sin)
+5 לִפְנֵי = <to> before (face)
+6 הַמֶּלֶךְ = the king (king)
+7 וְהַקָּהָל = and the assembly (assembly)
+8 וַיִּסְמְכוּ = and they laid (to support)
+9 יְדֵיהֶם = hands their (hand)
+10 עֲלֵיהֶם = on them (upon)
+
+## 14:29:24
+KO: 그리고 제사장들이 그것들을 잡았고, 그들의 피로 제단 위에 속죄하여 온 이스라엘을 위하여 속죄하였으니, 이는 왕이 온 이스라엘을 위하여 번제와 속죄제를 (드리라고) 말하였기 때문이었다.
+1 וַיִּשְׁחָטוּם = and they slaughtered them (to slaughter)
+2 הַכֹּהֲנִים = the priests (priest)
+3 וַיְחַטְּאוּ = and they made a sin offering (to sin)
+4 אֶת־ = <obj.> ([Obj.])
+5 דָּמָם = blood their (blood)
+6 הַמִּזְבֵּחָה = the altar towards (altar)
+7 לְכַפֵּר = to make atonement (to atone)
+8 עַל־ = on (upon)
+9 כָּל־ = all
+10 יִשְׂרָאֵל = Israel
+11 כִּי = for
+12 לְכָל־ = for all
+13 יִשְׂרָאֵל = Israel
+14 אָמַר = he had said (to say)
+15 הַמֶּלֶךְ = the king (king)
+16 הָעוֹלָה = the burnt offering (burnt offering)
+17 וְהַחַטָּאת = and the sin offering (sin)
+
+## 14:29:25
+KO: 그가 레위 사람들을 여호와의 집에 세웠으니, 제금들과 비파들과 수금들을 가지고 다윗과 왕의 선견자 갓과 선지자 나단의 명령에 따라 행하게 함이라. 이는 여호와의 손에 의한 명령이 그의 선지자들의 손에 있었기 때문이라.
+1 וַיַּעֲמֵד = and he stationed (to stand)
+2 אֶת־ = <obj.> ([Obj.])
+3 הַלְוִיִּם = the Levites (Levi)
+4 בֵּית = [the] house of (house)
+5 יְהוָה = Yahweh
+6 בִּמְצִלְתַּיִם = with cymbals (cymbal)
+7 בִּנְבָלִים = with lyres (harp)
+8 וּבְכִנֹּרוֹת = and with harps (lyre)
+9 בְּמִצְוַת = by [the] command of
+10 דָּוִיד = David
+11 וְגָד = and Gad (Gad)
+12 חֹזֵה־ = [the] seer of (seer)
+13 הַמֶּלֶךְ = the king (king)
+14 וְנָתָן = and Nathan (Nathan)
+15 הַנָּבִיא = the prophet
+16 כִּי = for
+17 בְיַד־ = [was] by [the] hand of
+18 יְהוָה = Yahweh
+19 הַמִּצְוָה = the commandment
+20 בְּיַד־ = by [the] hand of
+21 נְבִיאָיו ס = prophets his
+
+## 14:29:26
+KO: 그리고 레위 사람들은 다윗의 기구들을 가지고 섰고, 제사장들은 나팔들을 가지고 섰더라.
+1 וַיַּעַמְדוּ = and they stood (to stand)
+2 הַלְוִיִּם = the Levites (Levi)
+3 בִּכְלֵי = with [the] instruments of (article|utensil)
+4 דָוִיד = David
+5 וְהַכֹּהֲנִים = and the priests (priest)
+6 בַּחֲצֹצְרוֹת ס = with trumpets (trumpet)
+
+## 14:29:27
+KO: 그리고 히스기야가 번제를 제단 위에 올리라고 명령하였다. 번제를 올리기 시작함과 동시에 여호와의 노래가 시작되었고, 나팔들과 이스라엘 왕 다윗의 악기들에 맞추어 (노래하였다).
+1 וַיֹּאמֶר = and he said (to say)
+2 חִזְקִיָּהוּ = Hezekiah
+3 לְהַעֲלוֹת = to offer up (to ascend)
+4 הָעֹלָה = the burnt offering
+5 לְהַמִּזְבֵּחַ = to the altar (altar)
+6 וּבְעֵת = and at [the] time (time)
+7 הֵחֵל = [when] it began
+8 הָעוֹלָה = the burnt offering
+9 הֵחֵל = it began
+10 שִׁיר־ = [the] song of (song)
+11 יְהוָה = Yahweh (LORD)
+12 וְהַחֲצֹצְרוֹת = and the trumpets (trumpet)
+13 וְעַל־ = and on (upon)
+14 יְדֵי = [the] hands of (hand)
+15 כְּלֵי = [the] instruments of (article|utensil)
+16 דָּוִיד = David
+17 מֶלֶךְ־ = [the] king of (king)
+18 יִשְׂרָאֵל = Israel
+
+## 14:29:28
+KO: 그리고 온 회중은 경배하고, 노래하는 자들은 노래하며, 나팔 부는 자들은 나팔을 불었는데, 그 모든 것이 번제가 마치기까지였더라.
+1 וְכָל־ = and all
+2 הַקָּהָל = the assembly (assembly)
+3 מִשְׁתַּחֲוִים = [were] bowing down (to bow)
+4 וְהַשִּׁיר = and the song (song)
+5 מְשׁוֹרֵר = [was] singing (to sing)
+6 וְהַחֲצֹצְרוֹת = and the trumpets (trumpet)
+7 מַחְצְרִים = [were] blowing a trumpet (to blow)
+8 הַכֹּל = <the> everything
+9 עַד = until (till)
+10 לִכְלוֹת = <to> was complete (to end)
+11 הָעֹלָה = the burnt offering (burnt offering)

@@ -1,0 +1,164 @@
+## 6:21:39
+KO: 헤스본과 그 목초지들, 그리고 야셀과 그 목초지들, 모든 성읍은 넷이라.
+1 אֶת־ = <obj.>
+2 חֶשְׁבּוֹן = Heshbon
+3 וְאֶת־ = and <obj.>
+4 מִגְרָשֶׁהָ = pasture lands its
+5 אֶת־ = <obj.>
+6 יַעְזֵר = Jazer
+7 וְאֶת־ = and <obj.>
+8 מִגְרָשֶׁהָ = pasture lands its
+9 כָּל־ = all
+10 עָרִים = [the] cities (city)
+11 אַרְבַּע = [were] four (four)
+
+## 6:21:40
+KO: 레위 자손의 남은 자들인 므라리 자손을 위한 그들의 가족별 모든 성읍들, 곧 그들의 제비 뽑기는 열두 성읍이었더라.
+1 כָּל־ = all
+2 הֶעָרִים = the cities
+3 לִבְנֵי = of [the] descendants of (son)
+4 מְרָרִי = Merari
+5 לְמִשְׁפְּחֹתָם = to clans their
+6 הַנּוֹתָרִים = which remained (to remain)
+7 מִמִּשְׁפְּחוֹת = of [the] clans of
+8 הַלְוִיִּם = the Levites (Levi)
+9 וַיְהִי = and it was (to be)
+10 גּוֹרָלָם = lot their (lot)
+11 עָרִים = cities
+12 שְׁתֵּים = two [plus] (two)
+13 עֶשְׂרֵה = ten
+
+## 6:21:41
+KO: 레위 사람들의 모든 성읍들은 이스라엘 자손들의 소유의 한가운데에, 성읍들 사십팔 개와 그들의 목초지들이었다.
+1 כֹּל = all
+2 עָרֵי = [the] cities of
+3 הַלְוִיִּם = the Levites (Levi)
+4 בְּתוֹךְ = in [the] midst of (midst)
+5 אֲחֻזַּת = [the] possession of (possesion)
+6 בְּנֵי־ = [the] people of (son)
+7 יִשְׂרָאֵל = Israel
+8 עָרִים = [were] cities
+9 אַרְבָּעִים = forty
+10 וּשְׁמֹנֶה = and eight (eight)
+11 וּמִגְרְשֵׁיהֶן = and pasture lands their (pasture)
+
+## 6:21:42
+KO: 이 성읍들은 있게 되었다, 성읍 성읍마다 그 둘레의 목초지와 함께; 모든 이 성읍들이 그러하였다.
+1 תִּהְיֶינָה = they were (to be)
+2 הֶעָרִים = the cities
+3 הָאֵלֶּה = <the> these
+4 עִיר = a city
+5 עִיר = a city
+6 וּמִגְרָשֶׁיהָ = and pasture lands its (pasture)
+7 סְבִיבֹתֶיהָ = around it (around)
+8 כֵּן = thus (so)
+9 לְכָל־ = for all (all)
+10 הֶעָרִים = the cities
+11 הָאֵלֶּה ס = <the> these
+
+## 6:21:43
+KO: 여호와께서 이스라엘에게 그들의 조상들에게 주겠다고 맹세하셨던 온 땅을 다 주셨으므로, 그들이 그것을 차지하고 그 안에 거주하였다.
+1 וַיִּתֵּן = and he gave
+2 יְהוָה = Yahweh (LORD)
+3 לְיִשְׂרָאֵל = to Israel (Israel)
+4 אֶת־ = <obj.> ([Obj.])
+5 כָּל־ = all
+6 הָאָרֶץ = the land (land)
+7 אֲשֶׁר = which
+8 נִשְׁבַּע = he had sworn (to swear)
+9 לָתֵת = to give
+10 לַאֲבוֹתָם = to ancestors their (father)
+11 וַיִּרָשׁוּהָ = and they took possession of it (to possess)
+12 וַיֵּשְׁבוּ = and they dwelt (to dwell)
+13 בָהּ = in <the> it (her)
+
+## 6:21:44
+KO: 그리고 여호와께서 그들의 사방에 안식을 주셨으니, 그들의 조상들에게 맹세하신 모든 것과 같았더라. 그리고 그들의 모든 원수들 중에서 그들 앞에 맞서 선 자가 아무도 없었으니, 여호와께서 그들의 모든 원수들을 그들의 손에 주셨음이라.
+1 וַיָּנַח = and he gave rest (to rest)
+2 יְהוָה = Yahweh
+3 לָהֶם = to <the> them (them)
+4 מִסָּבִיב = from round about (around)
+5 כְּכֹל = according to all
+6 אֲשֶׁר־ = that (which)
+7 נִשְׁבַּע = he had sworn (to swear)
+8 לַאֲבוֹתָם = to ancestors their (father)
+9 וְלֹא־ = and not (not)
+10 עָמַד = he stood (to stand)
+11 אִישׁ = anyone (man)
+12 בִּפְנֵיהֶם = in faces their (face)
+13 מִכָּל־ = from all
+14 אֹיְבֵיהֶם = enemies their
+15 אֵת = <obj.> ([Obj.])
+16 כָּל־ = all
+17 אֹיְבֵיהֶם = enemies their
+18 נָתַן = he gave (to give)
+19 יְהוָה = Yahweh
+20 בְּיָדָם = in hand their (hand)
+
+## 6:21:45
+KO: 여호와께서 이스라엘의 집에 말씀하신 그 선한 그 말들 중 하나도 떨어지지 아니하였고, 모든 것이 이루어졌더라.
+1 לֹא־ = not
+2 נָפַל = it fell (to fall)
+3 דָּבָר = a word
+4 מִכֹּל = from every
+5 הַדָּבָר = <the> word
+6 הַטּוֹב = <the> good (pleasant)
+7 אֲשֶׁר־ = which
+8 דִּבֶּר = he had spoken (to speak)
+9 יְהוָה = Yahweh (LORD)
+10 אֶל־ = to (to(wards))
+11 בֵּית = [the] house of (house)
+12 יִשְׂרָאֵל = Israel
+13 הַכֹּל = <the> everything
+14 בָּא פ = it came (to come (in))
+
+## 6:22:1
+KO: 그때에 여호수아가 르우벤 사람과 갓 사람과 므낫세 반 지파를 불렀다.
+1 אָז = then
+2 יִקְרָא = he summoned (to call)
+3 יְהוֹשֻׁעַ = Joshua
+4 לָראוּבֵנִי = <to> the Reubenite[s] (Reubenite)
+5 וְלַגָּדִי = and <to> the Gadite[s] (Gad)
+6 וְלַחֲצִי = and <to> [the] half of (half)
+7 מַטֵּה = [the] tribe of (tribe)
+8 מְנַשֶּׁה = Manasseh
+
+## 6:22:2
+KO: 그가 그들에게 말하였다. 너희는 여호와의 종 모세가 너희에게 명령한 모든 것을 지켰고, 또 내가 너희에게 명령한 모든 것에 대하여 내 목소리를 너희가 청종하였다.
+1 וַיֹּאמֶר = and he said (to say)
+2 אֲלֵיהֶם = to them (to(wards))
+3 אַתֶּם = you (you(m.p.))
+4 שְׁמַרְתֶּם = you have kept (to keep)
+5 אֵת = <obj.>
+6 כָּל־ = all
+7 אֲשֶׁר = that
+8 צִוָּה = he commanded
+9 אֶתְכֶם = <obj.> you
+10 מֹשֶׁה = Moses
+11 עֶבֶד = [the] servant of (servant;_slave)
+12 יְהוָה = Yahweh (LORD)
+13 וַתִּשְׁמְעוּ = and you have listened (to hear)
+14 בְקוֹלִי = to voice my (voice)
+15 לְכֹל = to all
+16 אֲשֶׁר־ = that
+17 צִוִּיתִי = I have commanded
+18 אֶתְכֶם = <obj.> you
+
+## 6:22:3
+KO: 너희는 많은 날들 동안, 오늘날까지 너희 형제들을 떠나지 아니하였고, 너희 하나님 여호와의 계명의 책임을 지켰도다.
+1 לֹא־ = not
+2 עֲזַבְתֶּם = you have forsaken (to leave)
+3 אֶת־ = <obj.>
+4 אֲחֵיכֶם = countrymen your (brother)
+5 זֶה = this
+6 יָמִים = days
+7 רַבִּים = many
+8 עַד = until (till)
+9 הַיּוֹם = the day
+10 הַזֶּה = <the> this
+11 וּשְׁמַרְתֶּם = and you have kept (to keep)
+12 אֶת־ = <obj.>
+13 מִשְׁמֶרֶת = [the] charge of (charge)
+14 מִצְוַת = [the] commandment of (commandment)
+15 יְהוָה = Yahweh (LORD)
+16 אֱלֹהֵיכֶם = God your (God)

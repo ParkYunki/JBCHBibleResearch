@@ -1,0 +1,933 @@
+## 42:3:25
+KO: 맛다디아의, 아모스의, 나훔의, 에슬리의, 낙개의.
+1 τοῦ = <the> (the/this/who)
+2 Ματταθίου = of Mattathias (Mattathias)
+3 τοῦ = <the> (the/this/who)
+4 Ἀμὼς = of Amos (Amos)
+5 τοῦ = <the> (the/this/who)
+6 Ναοὺμ = of Nahum (Nahum)
+7 τοῦ = <the> (the/this/who)
+8 Ἑσλὶ = of Esli (Esli)
+9 τοῦ = <the> (the/this/who)
+10 Ναγγαὶ = of Naggai (Naggai)
+
+## 42:3:26
+KO: 마앗의 (그)요, 맛다디아의 (그)요, 서머인의 (그)요, 요섹의 (그)요, 요다의 (그)이라.
+1 τοῦ = <the> (the/this/who)
+2 Μάαθ = of Maath (Maath)
+3 τοῦ = <the> (the/this/who)
+4 Ματταθίου = of Mattathias (Mattathias)
+5 τοῦ = <the> (the/this/who)
+6 Σεμεῒν = of Semein (Semein)
+7 τοῦ = <the> (the/this/who)
+8 Ἰωσὴχ = of Josech (Josech)
+9 τοῦ = <the> (the/this/who)
+10 Ἰωδὰ = of Joda (Joda)
+
+## 42:3:27
+KO: 요아난의 [아들]이요, 레사의 [아들]이요, 스룹바벨의 [아들]이요, 스알디엘의 [아들]이요, 네리의 [아들]이다.
+1 τοῦ = <the> (the/this/who)
+2 Ἰωανὰν = of Joannen (Joannan)
+3 τοῦ = <the> (the/this/who)
+4 Ῥησὰ = of Rhesa (Rhesa)
+5 τοῦ = <the> (the/this/who)
+6 Ζοροβαβὲλ = of Zerubbabel (Zerubbabel)
+7 τοῦ = <the> (the/this/who)
+8 Σαλαθιὴλ = of Shealtiel (Salathiel)
+9 τοῦ = <the> (the/this/who)
+10 Νηρὶ = of Neri (Neri)
+
+## 42:3:28
+KO: 멜기요, 앗디요, 고삼이요, 엘마담이요, 에르라.
+1 τοῦ = <the> (the/this/who)
+2 Μελχὶ = of Melchi (Melki)
+3 τοῦ = <the> (the/this/who)
+4 Ἀδδὶ = of Addi (Addi)
+5 τοῦ = <the> (the/this/who)
+6 Κωσὰμ = of Cosam (Cosam)
+7 τοῦ = <the> (the/this/who)
+8 Ἐλμαδὰμ = of Elmadam (Elmadam)
+9 τοῦ = <the> (the/this/who)
+10 Ἢρ = of Er (Er)
+
+## 42:3:29
+KO: 그분은 예수의, 그분은 엘리에셀의, 그분은 요림의, 그분은 맛닷의, 그분은 레위의 (아들이라).
+1 τοῦ = <the> (the/this/who)
+2 Ἰησοῦ = of Joshua (Jesus/Joshua)
+3 τοῦ = <the> (the/this/who)
+4 Ἐλιέζερ = of Eliezer (Eliezer)
+5 τοῦ = <the> (the/this/who)
+6 Ἰωρὶμ = of Jorim (Jorim)
+7 τοῦ = <the> (the/this/who)
+8 Μαθθὰτ = of Matthat (Matthat)
+9 τοῦ = <the> (the/this/who)
+10 Λευὶ = of Levi (Levi)
+
+## 42:3:30
+KO: (그는) 시므온의, 유다의, 요셉의, 요남의, 엘리아김의 (사람이다).
+1 τοῦ = <the> (the/this/who)
+2 Συμεὼν = of Simeon (Simeon)
+3 τοῦ = <the> (the/this/who)
+4 Ἰούδα = of Judah (Judah/Judas/Jude)
+5 τοῦ = <the> (the/this/who)
+6 Ἰωσὴφ = of Joseph (Joseph)
+7 τοῦ = <the> (the/this/who)
+8 Ἰωνὰμ = of Jonam (Jonam)
+9 τοῦ = <the> (the/this/who)
+10 Ἐλιακὶμ = of Eliakim (Eliakim)
+
+## 42:3:31
+KO: 멜레아의 [후손]이요, 멘나의 [후손]이요, 맛다다의 [후손]이요, 나단의 [후손]이요, 다윗의 [후손]이라.
+1 τοῦ = <the> (the/this/who)
+2 Μελεὰ = of Melea (Melea)
+3 τοῦ = <the> (the/this/who)
+4 Μεννὰ = of Menna (Menna)
+5 τοῦ = <the> (the/this/who)
+6 Ματταθὰ = of Mattatha (Mattatha)
+7 τοῦ = <the> (the/this/who)
+8 Ναθὰμ = of Nathan (Nathan)
+9 τοῦ = <the> (the/this/who)
+10 Δαυὶδ = of David (David)
+
+## 42:3:32
+KO: 그는 이새의(아들)요, 그(이새)는 오벳의(아들)요, 그(오벳)는 보아스의(아들)요, 그(보아스)는 살몬의(아들)요, 그(살몬)는 나손의(아들)이다.
+1 τοῦ = <the> (the/this/who)
+2 Ἰεσσαὶ = of Jesse (Jesse)
+3 τοῦ = <the> (the/this/who)
+4 Ἰωβὴδ = of Obed (Obed)
+5 τοῦ = <the> (the/this/who)
+6 Βόος = of Boaz (Boaz)
+7 τοῦ = <the> (the/this/who)
+8 Σαλὰ = of Sala (Sala)
+9 τοῦ = <the> (the/this/who)
+10 Ναασσὼν = of Nahshon (Nahshon)
+
+## 42:3:33
+KO: 아미나답의, 아드민의, 아르니의, 헤스론의, 베레스의, 유다의
+1 τοῦ = <the> (the/this/who)
+2 Ἀμιναδὰβ = of Amminadab (Amminadab)
+3 τοῦ = <the> (the/this/who)
+4 Ἀδμὶν = of Admin (Admin)
+5 τοῦ = <the> (the/this/who)
+6 Ἀρνὶ = of Arni (Arni)
+7 τοῦ = <the> (the/this/who)
+8 Ἑσρὼμ = of Hezron (Hezron)
+9 τοῦ = <the> (the/this/who)
+10 Φάρες = of Perez (Perez)
+11 τοῦ = <the> (the/this/who)
+12 Ἰούδα = of Judah (Judah/Judas/Jude)
+
+## 42:3:34
+KO: 야곱의, 이삭의, 아브라함의, 데라의, 나홀의.
+1 τοῦ = <the> (the/this/who)
+2 Ἰακὼβ = of Jacob (Jacob)
+3 τοῦ = <the> (the/this/who)
+4 Ἰσαὰκ = of Isaac (Isaac)
+5 τοῦ = <the> (the/this/who)
+6 Ἀβραὰμ = of Abraham (Abraham)
+7 τοῦ = <the> (the/this/who)
+8 Θάρα = of Terah (Terah)
+9 τοῦ = <the> (the/this/who)
+10 Ναχὼρ = of Nahor (Nahor)
+
+## 42:3:35
+KO: 스룩의, 르우의, 벨렉의, 에벨의, 살라의.
+1 τοῦ = <the> (the/this/who)
+2 Σεροὺχ = of Serug (Serug)
+3 τοῦ = <the> (the/this/who)
+4 Ῥαγαὺ = of Reu (Reu)
+5 τοῦ = <the> (the/this/who)
+6 Φάλεκ = of Peleg (Peleg)
+7 τοῦ = <the> (the/this/who)
+8 Ἔβερ = of Heber (Eber)
+9 τοῦ = <the> (the/this/who)
+10 Σαλὰ = of Shelah (Sala)
+
+## 42:3:36
+KO: 가이난의, 아박삿의, 셈의, 노아의, 레멕의
+1 τοῦ = <the> (the/this/who)
+2 Καϊνὰμ = of Cainan (Cainan)
+3 τοῦ = <the> (the/this/who)
+4 Ἀρφαξὰδ = of Arphaxad (Arphaxad)
+5 τοῦ = <the> (the/this/who)
+6 Σὴμ = of Shem (Shem)
+7 τοῦ = <the> (the/this/who)
+8 Νῶε = of Noah (Noah)
+9 τοῦ = <the> (the/this/who)
+10 Λάμεχ = of Lamech (Lamech)
+
+## 42:3:37
+KO: (그는) 므두셀라의 (아들)이요, (그는) 에녹의 (아들)이요, (그는) 야렛의 (아들)이요, (그는) 마할랄렐의 (아들)이요, (그는) 가이난의 (아들)이라.
+1 τοῦ = <the> (the/this/who)
+2 Μαθουσαλὰ = of Methuselah (Methuselah)
+3 τοῦ = <the> (the/this/who)
+4 Ἑνὼχ = of Enoch (Enoch)
+5 τοῦ = <the> (the/this/who)
+6 Ἰάρετ = of Jared (Jared)
+7 τοῦ = <the> (the/this/who)
+8 Μαλελεὴλ = of Mahalalel (Mahalalel)
+9 τοῦ = <the> (the/this/who)
+10 Καϊνὰμ = of Cainan (Cainan)
+
+## 42:3:38
+KO: (그는) 에노스의 (아들)이요, 셋의 (아들)이요, 아담의 (아들)이요, 하나님의 (아들)이다.
+1 τοῦ = <the> (the/this/who)
+2 Ἐνὼς = of Enosh (Enosh)
+3 τοῦ = <the> (the/this/who)
+4 Σὴθ = of Seth (Seth)
+5 τοῦ = <the> (the/this/who)
+6 Ἀδὰμ = of Adam (Adam)
+7 τοῦ = <the> (the/this/who)
+8 θεοῦ = of God. (God)
+
+## 42:4:1
+KO: 예수는 성령으로 가득 찬 채 요단으로부터 돌아오셨고, 성령 안에서 광야로 이끌리셨다.
+1 Ἰησοῦς = Jesus (Jesus/Joshua)
+2 δὲ = then (but/and)
+3 πλήρης = full
+4 πνεύματος = of [the] Spirit (spirit/breath)
+5 ἁγίου = Holy
+6 ὑπέστρεψεν = returned (to return)
+7 ἀπὸ = from (away from)
+8 τοῦ = the (the/this/who)
+9 Ἰορδάνου = Jordan
+10 καὶ = and
+11 ἤγετο = was led (to bring)
+12 ἐν = by (in/on/among)
+13 τῷ = the (the/this/who)
+14 πνεύματι = Spirit (spirit/breath)
+15 ἐν = into (in/on/among)
+16 τῇ = the (the/this/who)
+17 ἐρήμῳ = wilderness (deserted)
+
+## 42:4:2
+KO: 사십 일을 마귀에게 시험받으시며, 그 날들 동안 아무것도 잡수시지 않으셨고, 그것들이 다 되었을 때에 나중에 주리셨다.
+1 ἡμέρας = days (day)
+2 τεσσεράκοντα = forty
+3 πειραζόμενος = being tempted (to test/tempt)
+4 ὑπὸ = by (by/under)
+5 τοῦ = the (the/this/who)
+6 διαβόλου = devil. (devilish/the Devil)
+7 καὶ = And
+8 οὐκ = not (no)
+9 ἔφαγεν = He ate (to eat)
+10 οὐδὲν = no [thing] (none)
+11 ἐν = in (in/on/among)
+12 ταῖς = the (the/this/who)
+13 ἡμέραις = days (day)
+14 ἐκείναις = those, (that)
+15 καὶ = and
+16 συντελεσθεισῶν = when were ending (to complete)
+17 αὐτῶν = they (he/she/it/self)
+18 ὕστερον = afterward (later)
+19 ἐπείνασεν = He was hungry. (to hunger)
+
+## 42:4:3
+KO: 그리고 마귀가 그에게 말하였다. “만일 네가 하나님의 아들이거든, 이 돌에게 명하여 빵이 되게 하라.”
+1 Καὶ = and
+2 εἶπεν = Said (to say)
+3 δὲ = then (but/and)
+4 αὐτῷ = to Him (he/she/it/self)
+5 ὁ = the (the/this/who)
+6 διάβολος· = devil; (devilish/the Devil)
+7 εἰ = If
+8 υἱὸς = [the] Son (son)
+9 εἶ = You are (to be)
+10 τοῦ = <the> (the/this/who)
+11 θεοῦ = of God, (God)
+12 εἰπὲ = do speak (to say)
+13 τῷ = to the (the/this/who)
+14 λίθῳ = stone
+15 τούτῳ = this (this/he/she/it)
+16 ἵνα = that (in order that/to)
+17 γένηται = it may become (to be)
+18 ἄρτος = bread. (bread)
+
+## 42:4:4
+KO: 그리고 그분(예수)께서 대답하시기를 그를 향하여 예수께서 말씀하시길 기록되었다 사람이 떡으로만 살 것이 아니라 하나님의 모든 말씀으로 살 것이라 하였느니라.
+1 καὶ = And
+2 ἀπεκρίθη = answered (to answer)
+3 πρὸς = to (to/with)
+4 αὐτὸν = him (he/she/it/self)
+5 ὁ = <the> (the/this/who)
+6 Ἰησοῦς = Jesus (Jesus/Joshua)
+7 λέγων· = saying: (to speak)
+8 γέγραπται = It has been written (to write)
+9 ὅτι = that (that/since)
+10 οὐκ = Not (no)
+11 ἐπ᾽ = on (upon/to/against)
+12 ἄρτῳ = bread
+13 μόνῳ = alone
+14 ζήσεται = will live (to live)
+15 ὁ = the (the/this/who)
+16 ἄνθρωπος = man’ (a human)
+17 ἀλλ᾽ = but
+18 ἐπὶ = upon (upon/to/against)
+19 παντὶ = everything (all)
+20 ῥήματι = declaration
+21 θεοῦ = of God. (God)
+
+## 42:4:5
+KO: 그리고 마귀가 그를 높은 산으로 이끌어 올려, 그에게 시간의 한 순간에 거주하는 세계의 모든 왕국들을 보여 주었다.
+1 Καὶ = And
+2 ἀναγαγὼν = having led up (to lead)
+3 αὐτὸν = Him (he/she/it/self)
+4 ὁ = <the> (the/this/who)
+5 διάβολος = devil (devilish/the Devil)
+6 εἰς = into (toward)
+7 ὄρος = mountain
+8 ὑψηλὸν = high
+9 ἔδειξεν = he showed (to show)
+10 αὐτῷ = to Him (he/she/it/self)
+11 πάσας = all
+12 τὰς = the (the/this/who)
+13 βασιλείας = kingdoms (kingdom)
+14 τῆς = of the (the/this/who)
+15 οἰκουμένης = world
+16 ἐν = in (in/on/among)
+17 στιγμῇ = a moment (instant)
+18 χρόνου = of time (time)
+
+## 42:4:6
+KO: 그리고 마귀가 그에게 말하였다. “이 모든 권세와 그것들의 영광을 내가 너에게 주겠다. 왜냐하면 그것이 나에게 넘겨졌고, 내가 원하는 누구에게나 내가 그것을 주기 때문이다.”
+1 καὶ = And
+2 εἶπεν = said (to say)
+3 αὐτῷ = to Him (he/she/it/self)
+4 ὁ = the (the/this/who)
+5 διάβολος· = devil; (devilish/the Devil)
+6 σοὶ = To You (you)
+7 δώσω = will I give (to give)
+8 τὴν = <the> (the/this/who)
+9 ἐξουσίαν = authority
+10 ταύτην = this (this/he/she/it)
+11 ἅπασαν = all
+12 καὶ = and
+13 τὴν = the (the/this/who)
+14 δόξαν = glory
+15 αὐτῶν = of it, (he/she/it/self)
+16 ὅτι = for (that/since)
+17 ἐμοὶ = to me myself (I/we)
+18 παραδέδοται = it has been delivered (to deliver)
+19 καὶ = and
+20 ᾧ = to whom (which)
+21 ἐὰν = maybe (if)
+22 θέλω = I shall wish (to will/desire)
+23 δίδωμι = I give (to give)
+24 αὐτήν· = it; (he/she/it/self)
+
+## 42:4:7
+KO: 그러므로 만일 네가 내 앞에서 경배하면, 모든 것이 네 것이 될 것이다.
+1 σὺ = You yourself (you)
+2 οὖν = therefore (therefore/then)
+3 ἐὰν = if
+4 προσκυνήσῃς = You shall worship (to worship)
+5 ἐνώπιον = before
+6 ἐμοῦ = me (I/we)
+7 ἔσται = will be (to be)
+8 σοῦ = Yours (you)
+9 πᾶσα = everything. (all)
+
+## 42:4:8
+KO: 그리고 대답하여 예수께서 그에게 말씀하시기를 "내 뒤로 물러가라, 사탄아! 왜냐하면 기록되었다. 주 너의 하나님께 너는 경배할 것이며, 그분만을 너는 섬길 것이다."
+1 καὶ = And
+2 ἀποκριθεὶς = answering (to answer)
+3 ὁ = <the> (the/this/who)
+4 Ἰησοῦς = Jesus (Jesus/Joshua)
+5 εἶπεν = said (to say)
+6 αὐτῷ = to him (he/she/it/self)
+7 ὕπαγε = do go (to go)
+8 ὀπίσω = behind (after)
+9 μου = me (I/we)
+10 Σατανᾶ· = Satan; (Satan)
+11 γέγραπται· = It has been written: (to write)
+12 γὰρ = for
+13 κύριον = [The] Lord (lord)
+14 τὸν = the (the/this/who)
+15 θεόν = God
+16 σου = of you (you)
+17 προσκυνήσεις = you will worship (to worship)
+18 καὶ = and
+19 αὐτῷ = Him (he/she/it/self)
+20 μόνῳ = only (alone)
+21 λατρεύσεις = you will serve.’ (to minister)
+
+## 42:4:9
+KO: 그리고 그를 예루살렘으로 데려가서 성전 꼭대기 위에 그를 세우고 그에게 말하였다. 만일 네가 하나님의 아들이라면, 여기서 아래로 너 자신을 던지라.
+1 Καὶ = and
+2 Ἤγαγεν = He led (to bring)
+3 δὲ = also (but/and)
+4 αὐτὸν = Him (he/she/it/self)
+5 εἰς = to (toward)
+6 Ἰερουσαλὴμ = Jerusalem
+7 καὶ = and
+8 ἔστησεν = set (to stand)
+9 αὐτὸν = him (he/she/it/self)
+10 ἐπὶ = upon (upon/to/against)
+11 τὸ = the (the/this/who)
+12 πτερύγιον = pinnacle
+13 τοῦ = of the (the/this/who)
+14 ἱεροῦ = temple
+15 καὶ = and
+16 εἶπεν = said (to say)
+17 αὐτῷ· = to Him; (he/she/it/self)
+18 εἰ = If
+19 ὁ = the (the/this/who)
+20 υἱὸς = Son
+21 εἶ = You are (to be)
+22 τοῦ = <the> (the/this/who)
+23 θεοῦ = of God, (God)
+24 βάλε = do cast (to throw)
+25 σεαυτὸν = Yourself
+26 ἐντεῦθεν = from here
+27 κάτω· = down; (under)
+
+## 42:4:10
+KO: 기록되었다, 왜냐하면 그가 그의 천사들에게 너에 관하여 명령하여 너를 지키게 하실 것이기 때문이다.
+1 γέγραπται = It has been written (to write)
+2 γὰρ = for
+3 ὅτι = that (that/since)
+4 τοῖς = To the (the/this/who)
+5 ἀγγέλοις = angels (angel)
+6 αὐτοῦ = of Him (he/she/it/self)
+7 ἐντελεῖται = He will give orders (to order)
+8 περὶ = concerning (about)
+9 σοῦ = You
+10 τοῦ = <the> (the/this/who)
+11 διαφυλάξαι = to guard (to protect)
+12 σε· = You; (you)
+
+## 42:4:11
+KO: 그리고 그들이 그들의 손들 위에서 너를 들어 올릴 것이다, 혹시 네가 돌에 네 발을 부딪힐까 하여.
+1 καὶ = and
+2 ὅτι = that (that/since)
+3 ἐπὶ = in (upon/to/against)
+4 χειρῶν = [their] hands (hand)
+5 ἀροῦσίν = will they bear (to take up)
+6 σε = You, (you)
+7 μήποτε = otherwise (lest + πότε=when)
+8 προσκόψῃς = You may strike (to strike)
+9 πρὸς = against (to/with)
+10 λίθον = a stone (stone)
+11 τὸν = the (the/this/who)
+12 πόδα = foot
+13 σου = of You.’ (you)
+
+## 42:4:12
+KO: 그리고 예수께서 대답하여 그에게 말씀하시기를, "주 너의 하나님을 시험하지 말라"고 기록되었다.
+1 Καὶ = And
+2 ἀποκριθεὶς = answering (to answer)
+3 εἶπεν = He said (to say)
+4 αὐτῷ = to him (he/she/it/self)
+5 ὁ = <the> (the/this/who)
+6 Ἰησοῦς = Jesus (Jesus/Joshua)
+7 ὅτι = that (that/since)
+8 εἴρηται· = It has been said; (to say)
+9 οὐκ = Not (no)
+10 ἐκπειράσεις = you will test (to test/tempt)
+11 κύριον = [the] Lord (lord)
+12 τὸν = the (the/this/who)
+13 θεόν = God
+14 σου = of you.’ (you)
+
+## 42:4:13
+KO: 그리고 마귀가 모든 시험을 다 마친 후에, 그(예수)로부터 얼마 동안 떠나 있었다.
+1 καὶ = And
+2 συντελέσας = having finished (to complete)
+3 πάντα = every (all)
+4 πειρασμὸν = temptation (temptation/testing)
+5 ὁ = the (the/this/who)
+6 διάβολος = devil (devilish/the Devil)
+7 ἀπέστη = departed (to leave)
+8 ἀπ᾽ = from (away from)
+9 αὐτοῦ = Him (he/she/it/self)
+10 ἄχρι = until
+11 καιροῦ = an opportune time. (time/right time)
+
+## 42:4:14
+KO: 그리고 예수께서 성령의 권능 안에서 갈릴리로 돌아가시니, 그분에 관한 소문이 온 사방 지역으로 퍼져 나갔다.
+1 Καὶ = And
+2 ὑπέστρεψεν = returned (to return)
+3 ὁ = <the> (the/this/who)
+4 Ἰησοῦς = Jesus (Jesus/Joshua)
+5 ἐν = in (in/on/among)
+6 τῇ = the (the/this/who)
+7 δυνάμει = power
+8 τοῦ = of the (the/this/who)
+9 πνεύματος = Spirit (spirit/breath)
+10 εἰς = to (toward)
+11 τὴν = <the> (the/this/who)
+12 Γαλιλαίαν = Galilee, (Galilee)
+13 καὶ = and
+14 φήμη = a report (news)
+15 ἐξῆλθεν = went out (to go out)
+16 καθ᾽ = into (according to)
+17 ὅλης = all
+18 τῆς = the (the/this/who)
+19 περιχώρου = surrounding region
+20 περὶ = concerning (about)
+21 αὐτοῦ = Him. (he/she/it/self)
+
+## 42:4:15
+KO: 그리고 그분은 그들의 회당들 안에서 가르치셨으며, 모든 사람에 의해 영광을 받으셨다.
+1 καὶ = And
+2 αὐτὸς = He himself (he/she/it/self)
+3 ἐδίδασκεν = was teaching (to teach)
+4 ἐν = in (in/on/among)
+5 ταῖς = the (the/this/who)
+6 συναγωγαῖς = synagogues (synagogue)
+7 αὐτῶν = of them (he/she/it/self)
+8 δοξαζόμενος = being glorified (to glorify)
+9 ὑπὸ = by (by/under)
+10 πάντων = all. (all)
+
+## 42:4:16
+KO: 그리고 그분은 나사렛에 이르셨는데, 그곳은 그분이 양육받으셨던 곳이다. 그리고 그분은 안식일에 관습대로 회당 안으로 들어가셨고, 읽으려고 일어나셨다.
+1 Καὶ = And
+2 ἦλθεν = He came (to come/go)
+3 εἰς = to (toward)
+4 τὴν = <the> (the/this/who)
+5 Ναζαρὰ = Nazareth
+6 οὗ = where (whither)
+7 ἦν = He was (to be)
+8 τεθραμμένος = raised, (to feed)
+9 καὶ = and
+10 εἰσῆλθεν = He entered (to enter)
+11 κατὰ = according to
+12 τὸ = the (the/this/who)
+13 εἰωθὸς = being customary (to have a custom)
+14 αὐτῷ = to Him (he/she/it/self)
+15 ἐν = on (in/on/among)
+16 τῇ = the (the/this/who)
+17 ἡμέρᾳ = day
+18 τῶν = of the (the/this/who)
+19 σαββάτων = Sabbaths (Sabbath)
+20 εἰς = into (toward)
+21 τὴν = the (the/this/who)
+22 συναγωγὴν = synagogue
+23 καὶ = and
+24 ἀνέστη = stood up (to arise)
+25 ἀναγνῶναι = to read. (to read)
+
+## 42:4:17
+KO: 그리고 선지자 이사야의 두루마리가 그에게 건네졌고, 그 두루마리를 펴서, 기록된 곳을 찾으시니,
+1 καὶ = And
+2 ἐπεδόθη = there was given (to give/deliver)
+3 αὐτῷ = to Him (he/she/it/self)
+4 βιβλίον = [the] scroll of (scroll)
+5 τοῦ = the (the/this/who)
+6 προφήτου = prophet
+7 Ἠσαΐου· = Isaiah; (Isaiah)
+8 καὶ = and
+9 ἀναπτύξας = having unrolled (to unroll)
+10 τὸ = the (the/this/who)
+11 βιβλίον = scroll
+12 εὗρεν = He found (to find/meet)
+13 τὸν = the (the/this/who)
+14 τόπον = place
+15 οὗ = where (whither)
+16 ἦν = it was (to be)
+17 γεγραμμένον = written (to write)
+
+## 42:4:18
+KO: 주의 영이 내 위에 있으니, 이는 그분께서 가난한 자들에게 좋은 소식을 전하게 하시려고 나에게 기름을 부으셨기 때문이라. 그분은 나를 보내사 마음이 부서진 자들을 고치고, 포로들에게 사면을, 눈먼 자들에게 다시 보게 함을 선포하게 하시고, 짓눌린 자들을 사면 안에서 보내게 하셨다.
+1 πνεῦμα = [The] Spirit (spirit/breath)
+2 κυρίου = of [the] Lord [is] (lord)
+3 ἐπ᾽ = upon (upon/to/against)
+4 ἐμέ = Me myself, (I/we)
+5 οὗ = of which (which)
+6 εἵνεκεν = because (because of)
+7 ἔχρισέν = He has anointed (to anoint)
+8 με = Me (I/we)
+9 εὐαγγελίσασθαι = to evangelise (to speak good news)
+10 πτωχοῖς = to [the] poor, (poor)
+11 ἀπέσταλκέν = He has sent (to send)
+12 με = Me (I/we)
+13 ἰὰσασθαι = to heal
+14 τοὺς = the (the/this/who)
+15 συντετριμμένους = bruised (to break)
+16 τὴν = <the> (the/this/who)
+17 καρδίαν = heart
+18 κηρύξαι = to proclaim (to preach)
+19 αἰχμαλώτοις = to [the] captives (captive)
+20 ἄφεσιν = deliverance (forgiveness)
+21 καὶ = and
+22 τυφλοῖς = to [the] blind (blind)
+23 ἀνάβλεψιν = recovery of sight, (recovery of sight)
+24 ἀποστεῖλαι = to send forth (to send)
+25 τεθραυσμένους = [the] oppressed (to crush)
+26 ἐν = in (in/on/among)
+27 ἀφέσει = deliverance, (forgiveness)
+
+## 42:4:19
+KO: 주의 받아들여질 만한 해를 선포하게 하려 하심이라.
+1 κηρύξαι = to proclaim (to preach)
+2 ἐνιαυτὸν = [the] year (year)
+3 κυρίου = of [the] Lord’s (lord)
+4 δεκτόν = favor. (acceptable)
+
+## 42:4:20
+KO: 그리고 그 두루마리를 접어 그 시종에게 돌려주고 앉으시니, 회당 안에 있는 모든 이들의 눈이 그분을 향하여 고정되어 있었다.
+1 καὶ = And
+2 πτύξας = having rolled up (to roll up)
+3 τὸ = the (the/this/who)
+4 βιβλίον = scroll
+5 ἀποδοὺς = having delivered [it] (to pay)
+6 τῷ = to the (the/this/who)
+7 ὑπηρέτῃ = attendant (servant)
+8 ἐκάθισεν = He sat down, (to seat)
+9 καὶ = and
+10 πάντων = of all (all)
+11 οἱ = the (the/this/who)
+12 ὀφθαλμοὶ = eyes (eye)
+13 ἐν = in (in/on/among)
+14 τῇ = the (the/this/who)
+15 συναγωγῇ = synagogue
+16 ἦσαν = were (to be)
+17 ἀτενίζοντες = fixed upon (to gaze)
+18 αὐτῷ = Him. (he/she/it/self)
+
+## 42:4:21
+KO: 그리고 그분께서 그들에게 말씀하시기 시작하셨다. "오늘 이 성경(기록)이 너희 귀에 이루어졌다."
+1 ἤρξατο = He began (be first)
+2 δὲ = then (but/and)
+3 λέγειν = to say (to speak)
+4 πρὸς = to (to/with)
+5 αὐτοὺς = them (he/she/it/self)
+6 ὅτι = that (that/since)
+7 σήμερον = Today
+8 πεπλήρωται = has been fulfilled (to fulfill)
+9 ἡ = <the> (the/this/who)
+10 γραφὴ = Scripture (a writing)
+11 αὕτη = this (this/he/she/it)
+12 ἐν = in (in/on/among)
+13 τοῖς = the (the/this/who)
+14 ὠσὶν = hearing (ear)
+15 ὑμῶν = of you. (you)
+
+## 42:4:22
+KO: 그리고 모두가 그에게 증거하였고, 그의 입으로부터 나오는 그 은혜의 말씀들 위에 기이히 여겼으며 말하였다. “이 사람은 요셉의 아들이 아니냐?”
+1 καὶ = And
+2 πάντες = all
+3 ἐμαρτύρουν = were bearing witness (to testify)
+4 αὐτῷ = to Him (he/she/it/self)
+5 καὶ = and
+6 ἐθαύμαζον = they were marveling (to marvel)
+7 ἐπὶ = at (upon/to/against)
+8 τοῖς = the (the/this/who)
+9 λόγοις = words (word)
+10 τῆς = of the (the/this/who)
+11 χάριτος = grace
+12 τοῖς = which (the/this/who)
+13 ἐκπορευομένοις = are proceeding (to depart)
+14 ἐκ = out of (out from)
+15 τοῦ = the (the/this/who)
+16 στόματος = mouth
+17 αὐτοῦ = of Him (he/she/it/self)
+18 καὶ = and
+19 ἔλεγον· = they were saying; (to speak)
+20 οὐχὶ = surely (not)
+21 υἱός = [the] son (son)
+22 ἐστιν = is (to be)
+23 ὁ = <the> (the/this/who)
+24 Ἰωσὴφ = of Joseph (Joseph)
+25 οὗτος; = this? (this/he/she/it)
+
+## 42:4:23
+KO: 그리고 그분께서 그들에게 말씀하셨다. "너희가 분명히 나에게 이 비유를 말할 것이다. '의사여, 너 자신을 고치라.' 우리가 들었던 가버나움에서 일어난 것들을 너의 고향인 여기에서도 행하라."
+1 καὶ = And
+2 εἶπεν = He said (to say)
+3 πρὸς = to (to/with)
+4 αὐτούς· = them; (he/she/it/self)
+5 πάντως = Surely
+6 ἐρεῖτέ = you will say (to say)
+7 μοι = to Me (I/we)
+8 τὴν = <the> (the/this/who)
+9 παραβολὴν = proverb (parable)
+10 ταύτην· = this; (this/he/she/it)
+11 ἰατρέ = Physician
+12 θεράπευσον = do heal (to serve/heal)
+13 σεαυτόν· = yourself! (yourself)
+14 ὅσα = As much as (just as/how much)
+15 ἠκούσαμεν = we have heard (to hear)
+16 γενόμενα = has been done (to be)
+17 εἰς = in (toward)
+18 τὴν = <the> (the/this/who)
+19 Καφαρναούμ = Capernaum, (Capernaum)
+20 ποίησον = do perform (to do/make)
+21 καὶ = also (and)
+22 ὧδε = here
+23 ἐν = in (in/on/among)
+24 τῇ = the (the/this/who)
+25 πατρίδι = hometown (fatherland)
+26 σου = of You. (you)
+
+## 42:4:24
+KO: 그가 말씀하시기를 “진실로 내가 너희에게 이르노니, 아무 선지자도 자기 고향 안에서는 환영받지 못한다.”
+1 Εἶπεν = He said (to say)
+2 δέ· = then; (but/and)
+3 ἀμὴν = Amen
+4 λέγω = I say (to speak)
+5 ὑμῖν = to you (you)
+6 ὅτι = that (that/since)
+7 οὐδεὶς = no (none)
+8 προφήτης = prophet
+9 δεκτός = acceptable
+10 ἐστιν = is (to be)
+11 ἐν = in (in/on/among)
+12 τῇ = the (the/this/who)
+13 πατρίδι = hometown (fatherland)
+14 αὐτοῦ = of him. (he/she/it/self)
+
+## 42:4:25
+KO: 진실로 내가 너희에게 말하노니, 엘리야의 날들에, 하늘이 3년과 6개월 동안 닫히어 온 땅 위에 큰 흉년이 있었을 때에, 이스라엘 안에 많은 과부가 있었으되,
+1 ἐπ᾽ = In (upon/to/against)
+2 ἀληθείας = truth
+3 δὲ = now (but/and)
+4 λέγω = I say (to speak)
+5 ὑμῖν· = to you; (you)
+6 πολλαὶ = many (much)
+7 χῆραι = widows (widow)
+8 ἦσαν = there were (to be)
+9 ἐν = in (in/on/among)
+10 ταῖς = the (the/this/who)
+11 ἡμέραις = days (day)
+12 Ἠλίου = of Elijah (Elijah)
+13 ἐν = in (in/on/among)
+14 τῷ = <the> (the/this/who)
+15 Ἰσραὴλ = Israel
+16 ὅτε = when
+17 ἐκλείσθη = was shut up (to shut)
+18 ὁ = the (the/this/who)
+19 οὐρανὸς = heaven
+20 ἐπὶ = for (upon/to/against)
+21 ἔτη = years (year)
+22 τρία = three
+23 καὶ = and
+24 μῆνας = months (month)
+25 ἕξ = six, (six)
+26 ὡς = when (which/how)
+27 ἐγένετο = there was (to be)
+28 λιμὸς = a famine (hunger)
+29 μέγας = great
+30 ἐπὶ = upon (upon/to/against)
+31 πᾶσαν = all
+32 τὴν = the (the/this/who)
+33 γῆν· = land; (earth)
+
+## 42:4:26
+KO: 그리고 엘리야는 그들 중 아무에게도 보내심을 받지 않았으나, 오직 시돈 땅의 사렙다에 있는 한 과부에게로 보내심을 받았다.
+1 καὶ = and
+2 πρὸς = to (to/with)
+3 οὐδεμίαν = none
+4 αὐτῶν = of them (he/she/it/self)
+5 ἐπέμφθη = was sent (to send)
+6 Ἠλίας = Elijah
+7 εἰ = only (if)
+8 μὴ = except (not)
+9 εἰς = to (toward)
+10 Σάρεπτα = Zarephath
+11 τῆς = <the> (the/this/who)
+12 Σιδωνίας = of Sidon (Sidonian)
+13 πρὸς = to (to/with)
+14 γυναῖκα = a woman (woman)
+15 χήραν = a widow. (widow)
+
+## 42:4:27
+KO: 그리고 선지자 엘리사 때에 이스라엘에 많은 나병 환자들이 있었으나, 그들 중 아무도 깨끗하게 되지 못했고 오직 수리아 사람 나아만뿐이었더라.
+1 καὶ = And
+2 πολλοὶ = many (much)
+3 λεπροὶ = lepers (leprous)
+4 ἦσαν = were (to be)
+5 ἐν = in (in/on/among)
+6 τῷ = <the> (the/this/who)
+7 Ἰσραὴλ = Israel
+8 ἐπὶ = in the time (upon/to/against)
+9 Ἐλισαίου = of Elisha (Elisha)
+10 τοῦ = the (the/this/who)
+11 προφήτου· = prophet; (prophet)
+12 καὶ = and
+13 οὐδεὶς = none
+14 αὐτῶν = of them (he/she/it/self)
+15 ἐκαθαρίσθη = was cleansed (to clean)
+16 εἰ = only (if)
+17 μὴ = except (not)
+18 Ναιμὰν = Naaman
+19 ὁ = the (the/this/who)
+20 Σύρος = Syrian. (Syrian)
+
+## 42:4:28
+KO: 그리고 회당에 있는 모든 이들이 이것들을 듣고 분노로 가득 찼다.
+1 Καὶ = And
+2 ἐπλήσθησαν = were filled (to fill)
+3 πάντες = all
+4 θυμοῦ = with anger (wrath)
+5 ἐν = in (in/on/among)
+6 τῇ = the (the/this/who)
+7 συναγωγῇ = synagogue
+8 ἀκούοντες = hearing (to hear)
+9 ταῦτα· = these things; (this/he/she/it)
+
+## 42:4:29
+KO: 그리고 일어나서 그를 성읍 밖으로 내쫓았고, 그들의 성읍이 세워져 있던 산의 눈썹(벼랑)까지 그를 끌고 가서, 그를 아래로 떨어뜨리려 하였다.
+1 καὶ = and
+2 ἀναστάντες = having risen up (to arise)
+3 ἐξέβαλον = they cast (to expel)
+4 αὐτὸν = Him (he/she/it/self)
+5 ἔξω = out (out/outside(r))
+6 τῆς = of the (the/this/who)
+7 πόλεως = city
+8 καὶ = and
+9 ἤγαγον = led (to bring)
+10 αὐτὸν = Him (he/she/it/self)
+11 ἕως = unto (until)
+12 τῆς = the (the/this/who)
+13 ὀφρύος = brow
+14 τοῦ = of the (the/this/who)
+15 ὄρους = hill (mountain)
+16 ἐφ᾽ = upon (upon/to/against)
+17 οὗ = which
+18 ἡ = the (the/this/who)
+19 πόλις = town (city)
+20 ᾠκοδόμητο = had been built (to build)
+21 αὐτῶν = of them (he/she/it/self)
+22 ὥστε = in order (so)
+23 κατακρημνίσαι = to throw over (to cast down)
+24 αὐτόν = him. (he/she/it/self)
+
+## 42:4:30
+KO: 그러나 그분은 그들 가운데를 통과하여 지나가셨다.
+1 αὐτὸς = He himself (he/she/it/self)
+2 δὲ = however (but/and)
+3 διελθὼν = having passed (to pass through)
+4 διὰ = through (through/because of)
+5 μέσου = [the] midst (midst)
+6 αὐτῶν = of them (he/she/it/self)
+7 ἐπορεύετο = was going away. (to travel)
+
+## 42:4:31
+KO: 그리고 갈릴래아의 도시 가버나움으로 내려가셨고, 안식일들에 그들을 가르치고 계셨다.
+1 Καὶ = And
+2 κατῆλθεν = He went down (to descend)
+3 εἰς = to (toward)
+4 Καφαρναοὺμ = Capernaum
+5 πόλιν = a city (city)
+6 τῆς = <the> (the/this/who)
+7 Γαλιλαίας = of Galilee (Galilee)
+8 καὶ = And
+9 ἦν = He was (to be)
+10 διδάσκων = teaching (to teach)
+11 αὐτοὺς = them (he/she/it/self)
+12 ἐν = on (in/on/among)
+13 τοῖς = the (the/this/who)
+14 σάββασιν = Sabbaths. (Sabbath)
+
+## 42:4:32
+KO: 그리고 그들은 그의 가르침 위에 놀라니, 이는 그의 말씀이 권세 안에 있었기 때문이다.
+1 καὶ = and
+2 ἐξεπλήσσοντο = they were astonished (be astonished)
+3 ἐπὶ = at (upon/to/against)
+4 τῇ = the (the/this/who)
+5 διδαχῇ = teaching
+6 αὐτοῦ = of Him (he/she/it/self)
+7 ὅτι = for (that/since)
+8 ἐν = with (in/on/among)
+9 ἐξουσίᾳ = authority
+10 ἦν = was (to be)
+11 ὁ = the (the/this/who)
+12 λόγος = message (word)
+13 αὐτοῦ = of Him. (he/she/it/self)
+
+## 42:4:33
+KO: 그리고 회당 안에 더러운 귀신의 영을 가진 한 사람이 있었고, 그가 큰 소리로 소리 질렀다.
+1 καὶ = And
+2 ἐν = in (in/on/among)
+3 τῇ = the (the/this/who)
+4 συναγωγῇ = synagogue
+5 ἦν = was (to be)
+6 ἄνθρωπος = a man (a human)
+7 ἔχων = having (to have/be)
+8 πνεῦμα = a spirit (spirit/breath)
+9 δαιμονίου = of a demon (demon)
+10 ἀκαθάρτου = unclean, (unclean)
+11 καὶ = and
+12 ἀνέκραξεν = he cried out (to yell)
+13 φωνῇ = in a voice (voice/sound)
+14 μεγάλῃ· = loud; (great)
+
+## 42:4:34
+KO: 말하며, "아! 나사렛 예수여, 우리와 당신에게 무슨 상관이 있나이까? 우리를 멸하려고 오셨나이까? 나는 당신이 누구인지 아노니, 곧 하나님의 거룩한 자이시니이다."
+1 λέγων = saying (to speak)
+2 ἔα = Ha! (ha!/aha!)
+3 τί = What (which?)
+4 ἡμῖν = to us (I/we)
+5 καὶ = and
+6 σοί = to You, (you)
+7 Ἰησοῦ = Jesus (Jesus/Joshua)
+8 Ναζαρηνέ; = of Nazareth? (Nazarene)
+9 ἦλθες = Are You come (to come/go)
+10 ἀπολέσαι = to destroy
+11 ἡμᾶς; = us? (I/we)
+12 οἶδά = I know (to perceive)
+13 σε = You
+14 τίς = who (which?)
+15 εἶ = are, (to be)
+16 ὁ = the (the/this/who)
+17 ἅγιος = Holy [One] (holy)
+18 τοῦ = <the> (the/this/who)
+19 θεοῦ = of God. (God)
+
+## 42:4:35
+KO: 그리고 예수께서 그를 꾸짖으며 말씀하시기를, "입을 다물고 그에게서 나오라." 하시니, 그 귀신이 그를 무리 가운데로 던져버리고 그에게서 나왔는데, 아무것도 그를 해치지 아니하였다.
+1 καὶ = And
+2 ἐπετίμησεν = rebuked (to rebuke)
+3 αὐτῷ = him (he/she/it/self)
+4 ὁ = <the> (the/this/who)
+5 Ἰησοῦς = Jesus (Jesus/Joshua)
+6 λέγων· = saying; (to speak)
+7 φιμώθητι = do be silent (to muzzle)
+8 καὶ = and
+9 ἔξελθε = do come forth (to go out)
+10 ἀπ᾽ = out of (away from)
+11 αὐτοῦ = him! (he/she/it/self)
+12 καὶ = And
+13 ῥῖψαν = having thrown (to throw/lay down)
+14 αὐτὸν = him (he/she/it/self)
+15 τὸ = the (the/this/who)
+16 δαιμόνιον = demon
+17 εἰς = into (toward)
+18 τὸ = the (the/this/who)
+19 μέσον = midst
+20 ἐξῆλθεν = it came out (to go out)
+21 ἀπ᾽ = from (away from)
+22 αὐτοῦ = him (he/she/it/self)
+23 μηδὲν = in nothing (nothing)
+24 βλάψαν = having hurt (to hurt)
+25 αὐτόν = him. (he/she/it/self)
+
+## 42:4:36
+KO: 그리고 모든 이들에게 놀라움이 일어났고, 그들은 서로 말하였다. "이 어떠한 말씀인가? 이는 그가 권세와 능력으로 더러운 영들에게 명령하시니 그들이 나가는도다."
+1 καὶ = And
+2 ἐγένετο = came (to be)
+3 θάμβος = astonishment (amazement)
+4 ἐπὶ = upon (upon/to/against)
+5 πάντας = all, (all)
+6 καὶ = and
+7 συνελάλουν = they were speaking (to talk with)
+8 πρὸς = to (to/with)
+9 ἀλλήλους = one another
+10 λέγοντες· = saying; (to speak)
+11 τίς = What (which?)
+12 ὁ = <the> (the/this/who)
+13 λόγος = word
+14 οὗτος = [is] this (this/he/she/it)
+15 ὅτι = for (that/since)
+16 ἐν = with (in/on/among)
+17 ἐξουσίᾳ = authority
+18 καὶ = and
+19 δυνάμει = power
+20 ἐπιτάσσει = He commands (to command)
+21 τοῖς = the (the/this/who)
+22 ἀκαθάρτοις = unclean
+23 πνεύμασιν = spirits, (spirit/breath)
+24 καὶ = and
+25 ἐξέρχονται; = they come out? (to go out)

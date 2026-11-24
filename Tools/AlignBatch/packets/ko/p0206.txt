@@ -1,0 +1,545 @@
+## 12:25:28
+KO: 그리고 그(바벨론 왕)는 그에게 좋게 말하였고, 그의 왕좌를 바벨론에 그와 함께 있는 왕들의 왕좌들 위로 높였다.
+1 וַיְדַבֵּר = and he spoke (to speak)
+2 אִתּוֹ = with him
+3 טֹבוֹת = good (welfare)
+4 וַיִּתֵּן = and he set (to give)
+5 אֶת־ = <obj.> ([Obj.])
+6 כִּסְאוֹ = throne his
+7 מֵעַל = <from> above (upon)
+8 כִּסֵּא = [the] throne of
+9 הַמְּלָכִים = the kings (king)
+10 אֲשֶׁר = who (which)
+11 אִתּוֹ = [were] with him
+12 בְּבָבֶל = in Babylon (Babylon)
+
+## 12:25:29
+KO: 그리고 그는 그의 감옥의 의복들을 바꾸었고, 그의 생명의 모든 날들 동안 그의 앞에서 항상 음식을 먹었다.
+1 וְשִׁנָּא = and he changed (to change)
+2 אֵת = <obj.> ([Obj.])
+3 בִּגְדֵי = [the] clothes of (garment)
+4 כִלְאוֹ = imprisonment his (prison)
+5 וְאָכַל = and he ate (to eat)
+6 לֶחֶם = bread (food)
+7 תָּמִיד = continually (continuity)
+8 לְפָנָיו = <to> before him (face)
+9 כָּל־ = all
+10 יְמֵי = [the] days of (day;_when)
+11 חַיָּיו = life his (life)
+
+## 12:25:30
+KO: 그리고 그에게는 정해진 배급이, 곧 날마다 그날의 배급이, 그의 모든 생애 동안 끊임없이 왕으로부터 주어졌다.
+1 וַאֲרֻחָתוֹ = and allowance his
+2 אֲרֻחַת = an allowance of
+3 תָּמִיד = continuity
+4 נִתְּנָה־ = it was given (to give)
+5 לּוֹ = to him (him)
+6 מֵאֵת = from with (with)
+7 הַמֶּלֶךְ = the king (king)
+8 דְּבַר־ = [the] matter of (word)
+9 יוֹם = a day
+10 בְּיוֹמוֹ = in day its
+11 כֹּל = all
+12 יְמֵי = [the] days of
+13 חַיָּו = life his (life)
+
+## 13:1:1
+KO: 아담, 셋, 에노스,
+1 אָדָם = Adam
+2 שֵׁת = Seth
+3 אֱנוֹשׁ = Enosh
+
+## 13:1:2
+KO: 게난, 마할랄렐, 야렛.
+1 קֵינָן = Kenan
+2 מַהֲלַלְאֵל = Mahalalel
+3 יָרֶד = Jared
+
+## 13:1:3
+KO: 에녹, 므두셀라, 라멕.
+1 חֲנוֹךְ = Enoch
+2 מְתוּשֶׁלַח = Methuselah
+3 לָמֶךְ = Lamech
+
+## 13:1:4
+KO: 노아, 셈, 함 그리고 야벳.
+1 נֹחַ = Noah
+2 שֵׁם = Shem
+3 חָם = Ham
+4 וָיָפֶת ס = and Japheth (Japheth)
+
+## 13:1:5
+KO: 야벳의 아들들은 고멜과 마곡과 마대와 야완과 두발과 메섹과 디라스이다.
+1 בְּנֵי = [the] sons of (son)
+2 יֶפֶת = Japheth
+3 גֹּמֶר = Gomer
+4 וּמָגוֹג = and Magog (Magog)
+5 וּמָדַי = and Madai (Madai)
+6 וְיָוָן = and Javan (Javan)
+7 וְתֻבָל = and Tubal (Tubal)
+8 וּמֶשֶׁךְ = and Meshech (Meshech)
+9 וְתִירָס ס = and Tiras (Tiras)
+
+## 13:1:6
+KO: 그리고 고멜의 아들들은 아스그나스와 디밧과 도갈마이다.
+1 וּבְנֵי = and [the] sons of (son)
+2 גֹּמֶר = Gomer
+3 אַשְׁכֲּנַז = Ashkenaz
+4 וְדִיפַת = and Diphath (Riphath)
+5 וְתוֹגַרְמָה = and Togarmah (Togarmah)
+
+## 13:1:7
+KO: 그리고 야완의 아들은 엘리사와 타르시스와 킷팀과 로다님이라.
+1 וּבְנֵי = and [the] sons of (son)
+2 יָוָן = Javan
+3 אֱלִישָׁה = [were] Elishah (Elishah)
+4 וְתַרְשִׁישָׁה = and Tarshish <towards> (Tarshish)
+5 כִּתִּים = Kittim
+6 וְרוֹדָנִים ס = and Rodanim (Dodanim)
+
+## 13:1:8
+KO: 함의 아들들은 구스와 미스라임과 붓과 가나안이라.
+1 בְּנֵי = [the] sons of (son)
+2 חָם = Ham
+3 כּוּשׁ = Cush
+4 וּמִצְרַיִם = and Mizraim (Egypt)
+5 פּוּט = Put
+6 וּכְנָעַן = and Canaan (Canaan)
+
+## 13:1:9
+KO: 그리고 구스의 아들들은 스바와 하윌라와 삽다와 라아마와 삽드가요, 라아마의 아들들은 스바와 드단이다.
+1 וּבְנֵי = and [the] sons of
+2 כוּשׁ = Cush
+3 סְבָא = Seba
+4 וַחֲוִילָה = and Havilah (Havilah)
+5 וְסַבְתָּא = and Sabta (Sabtah)
+6 וְרַעְמָא = and Raamah
+7 וְסַבְתְּכָא = and Sabteca (Sabteca)
+8 וּבְנֵי = and [the] sons of
+9 רַעְמָא = Raamah
+10 שְׁבָא = Sheba
+11 וּדְדָן ס = and Dedan (Dedan)
+
+## 13:1:10
+KO: 그리고 구스가 니므롯을 낳았으니, 그는 땅 위에서 용사가 되기 시작한 자라.
+1 וְכוּשׁ = and Cush (Cush)
+2 יָלַד = he fathered (to beget)
+3 אֶת־ = <obj.> ([Obj.])
+4 נִמְרוֹד = Nimrod
+5 הוּא = he (he;_she;_it)
+6 הֵחֵל = he began (to profane;_begin)
+7 לִהְיוֹת = to be
+8 גִּבּוֹר = a mighty [man] (mighty)
+9 בָּאָרֶץ ס = on the earth (land)
+
+## 13:1:11
+KO: 그리고 미스라임은 루딤과, 그리고 아나밈과, 그리고 르하빔과, 그리고 납두힘을 낳았다.
+1 וּמִצְרַיִם = and Mizraim (Egypt)
+2 יָלַד = he fathered (to beget)
+3 אֶת־ = <obj.>
+4 לוּדִים = [the] Ludites (Ludim)
+5 וְאֶת־ = and <obj.>
+6 עֲנָמִים = [the] Anamites (Anamim)
+7 וְאֶת־ = and <obj.>
+8 לְהָבִים = [the] Lehabites (Lehabim)
+9 וְאֶת־ = and <obj.>
+10 נַפְתֻּחִים = [the] Naphtuhites (Naphtuhim)
+
+## 13:1:12
+KO: 그리고 바드루심을, 그리고 가슬루힘을—그들로부터 블레셋 사람들이 나왔는데—그리고 갑도림을 [낳았더라].
+1 וְאֶת־ = and <obj.>
+2 פַּתְרֻסִים = [the] Pathrusites (Pathrusim)
+3 וְאֶת־ = and <obj.>
+4 כַּסְלֻחִים = [the] Casluhites (Casluhim)
+5 אֲשֶׁר = whom (which)
+6 יָצְאוּ = they came forth (to come out)
+7 מִשָּׁם = from there (there)
+8 פְּלִשְׁתִּים = [the] Philistines (Philistine)
+9 וְאֶת־ = and <obj.>
+10 כַּפְתֹּרִים ס = [the] Caphtorites (Caphtorim)
+
+## 13:1:13
+KO: 그리고 가나안은 그의 맏아들 시돈과 헷을 낳았다.
+1 וּכְנַעַן = and Canaan (Canaan)
+2 יָלַד = he fathered (to beget)
+3 אֶת־ = <obj.>
+4 צִידוֹן = Sidon
+5 בְּכֹרוֹ = firstborn his (firstborn)
+6 וְאֶת־ = and <obj.>
+7 חֵת = Heth
+
+## 13:1:14
+KO: 그리고 여부스 족속을, 그리고 아모리 족속을, 그리고 기르가스 족속을
+1 וְאֶת־ = and <obj.>
+2 הַיְבוּסִי = the Jebusite[s] (Jebusite)
+3 וְאֶת־ = and <obj.>
+4 הָאֱמֹרִי = the Amorite[s] (Amorite)
+5 וְאֵת = and <obj.>
+6 הַגִּרְגָּשִׁי = the Girgashite[s] (Girgashite)
+
+## 13:1:15
+KO: 그리고 히위 사람을, 그리고 아르기 사람을, 그리고 신 사람을
+1 וְאֶת־ = and <obj.>
+2 הַחִוִּי = the Hivite[s] (Hivite)
+3 וְאֶת־ = and <obj.>
+4 הַעַרְקִי = the Arkite[s] (Arkite)
+5 וְאֶת־ = and <obj.>
+6 הַסִּינִי = the Sinite[s] (Sinite)
+
+## 13:1:16
+KO: 그리고 아르왓 사람과, 그리고 스말 사람과, 그리고 하맛 사람을 [낳았더라].
+1 וְאֶת־ = and <obj.>
+2 הָאַרְוָדִי = the Arvadite[s] (Arvadite)
+3 וְאֶת־ = and <obj.>
+4 הַצְּמָרִי = the Zemarite[s] (Zemarite)
+5 וְאֶת־ = and <obj.>
+6 הַחֲמָתִי ס = the Hamathite[s] (Hamathite)
+
+## 13:1:17
+KO: 셈의 아들들은 엘람과 앗수르와 아르박삿과 룻과 아람과 우스와 훌과 게델과 메섹이라.
+1 בְּנֵי = [the] sons of (son)
+2 שֵׁם = Shem
+3 עֵילָם = Elam
+4 וְאַשּׁוּר = and Asshur (Asshur)
+5 וְאַרְפַּכְשַׁד = and Arphaxad (Arpachshad)
+6 וְלוּד = and Lud (Lud)
+7 וַאֲרָם = and Aram (Aram)
+8 וְעוּץ = and Uz (Uz)
+9 וְחוּל = and Hul (Hul)
+10 וְגֶתֶר = and Gether (Gether)
+11 וָמֶשֶׁךְ ס = and Meshech (Meshech)
+
+## 13:1:18
+KO: 그리고 아르박삿은 셀라를 낳았고, 그리고 셀라는 에벨을 낳았다.
+1 וְאַרְפַּכְשַׁד = and Arphaxad (Arpachshad)
+2 יָלַד = he fathered
+3 אֶת־ = <obj.>
+4 שָׁלַח = Shelah
+5 וְשֶׁלַח = and Shelah
+6 יָלַד = he fathered
+7 אֶת־ = <obj.>
+8 עֵבֶר = Eber
+
+## 13:1:19
+KO: 그리고 에벨에게 두 아들이 태어났으니, 한 사람의 이름은 벨렉이라 하였으니 이는 그(에벨)의 날들에 땅이 나뉘었기 때문이며, 그의 아우의 이름은 욕단이라.
+1 וּלְעֵבֶר = and to Eber (Eber)
+2 יֻלַּד = it was born (to beget)
+3 שְׁנֵי = two
+4 בָנִים = sons (son)
+5 שֵׁם = [the] name of
+6 הָאֶחָד = <the> one (one)
+7 פֶּלֶג = [was] Peleg (Peleg)
+8 כִּי = for
+9 בְיָמָיו = in days his (day;_when)
+10 נִפְלְגָה = it was divided (to divide)
+11 הָאָרֶץ = the earth (land)
+12 וְשֵׁם = and [the] name of
+13 אָחִיו = brother his (brother)
+14 יָקְטָן = [was] Joktan (Joktan)
+
+## 13:1:20
+KO: 그리고 욕단이 알모닷을 낳았고, 그리고 셀렙을, 그리고 하살마웹을, 그리고 예라를 낳았다.
+1 וְיָקְטָן = and Joktan (Joktan)
+2 יָלַד = he fathered (to beget)
+3 אֶת־ = <obj.>
+4 אַלְמוֹדָד = Almodad
+5 וְאֶת־ = and <obj.>
+6 שָׁלֶף = Sheleph
+7 וְאֶת־ = and <obj.>
+8 חֲצַרְמָוֶת = Hazarmaveth
+9 וְאֶת־ = and <obj.>
+10 יָרַח = Jerah
+
+## 13:1:21
+KO: 그리고 하도람과, 그리고 우살과, 그리고 디글라와
+1 וְאֶת־ = and <obj.>
+2 הֲדוֹרָם = Hadoram
+3 וְאֶת־ = and <obj.>
+4 אוּזָל = Uzal
+5 וְאֶת־ = and <obj.>
+6 דִּקְלָה = Diklah
+
+## 13:1:22
+KO: 그리고 에발과 그리고 아비마엘과 그리고 스바와
+1 וְאֶת־ = and <obj.>
+2 עֵיבָל = Ebal (Obal)
+3 וְאֶת־ = and <obj.>
+4 אֲבִימָאֵל = Abimael
+5 וְאֶת־ = and <obj.>
+6 שְׁבָא = Sheba
+
+## 13:1:23
+KO: 그리고 오빌과, 그리고 하윌라와, 그리고 요밥을 [낳았다]. 이 모든 이들이 욕단의 아들들이다.
+1 וְאֶת־ = and <obj.>
+2 אוֹפִיר = Ophir
+3 וְאֶת־ = and <obj.>
+4 חֲוִילָה = Havilah
+5 וְאֶת־ = and <obj.>
+6 יוֹבָב = Jobab
+7 כָּל־ = all
+8 אֵלֶּה = these
+9 בְּנֵי = [were] [the] sons of (son)
+10 יָקְטָן ס = Joktan
+
+## 13:1:24
+KO: 셈, 아르박삿, 셀라,
+1 שֵׁם = Shem
+2 אַרְפַּכְשַׁד = Arphaxad (Arpachshad)
+3 שָׁלַח = Shelah
+
+## 13:1:25
+KO: 에벨, 벨렉, 르우.
+1 עֵבֶר = Eber
+2 פֶּלֶג = Peleg
+3 רְעוּ = Reu
+
+## 13:1:26
+KO: 스룩, 나홀, 데라.
+1 שְׂרוּג = Serug
+2 נָחוֹר = Nahor
+3 תָּרַח = Terah
+
+## 13:1:27
+KO: 아브람, 그는 아브라함.
+1 אַבְרָם = Abram
+2 הוּא = he (he;_she;_it)
+3 אַבְרָהָם ס = [is] Abraham (Abraham)
+
+## 13:1:28
+KO: 아브라함의 아들들은 이삭과 이스마엘이라.
+1 בְּנֵי = [the] sons of (son)
+2 אַבְרָהָם = Abraham
+3 יִצְחָק = Isaac
+4 וְיִשְׁמָעֵאל ס = and Ishmael (Ishmael)
+
+## 13:1:29
+KO: 이들은 이스마엘의 족보들이니, 그의 맏아들은 느바욧이요, 게달과 앗브엘과 밉삼과
+1 אֵלֶּה = these
+2 תֹּלְדוֹתָם = [were] generations their (generation)
+3 בְּכוֹר = [the] firstborn of (firstborn)
+4 יִשְׁמָעֵאל = Ishmael
+5 נְבָיוֹת = Nebaioth
+6 וְקֵדָר = and Kedar (Kedar)
+7 וְאַדְבְּאֵל = and Adbeel (Adbeel)
+8 וּמִבְשָׂם = and Mibsam (Mibsam)
+
+## 13:1:30
+KO: 미스마와 두마와 맛사와 하닷과 테마.
+1 מִשְׁמָע = Mishma
+2 וְדוּמָה = and Dumah (Dumah)
+3 מַשָּׂא = Massa
+4 חֲדַד = Hadad
+5 וְתֵימָא = and Tema (Tema)
+
+## 13:1:31
+KO: 여둘과 나비스와 게드마, 이들이 이스마엘의 아들들이라.
+1 יְטוּר = Jetur
+2 נָפִישׁ = Naphish
+3 וָקֵדְמָה = and Kedemah (Kedemah)
+4 אֵלֶּה = these
+5 הֵם = they (they(masc.))
+6 בְּנֵי = [were] [the] sons of (son)
+7 יִשְׁמָעֵאל ס = Ishmael
+
+## 13:1:32
+KO: 그리고 아브라함의 첩 그두라가 낳은 아들들은 시므란과 욕산과 므단과 미디안과 이스박과 수아이며, 욕산의 아들들은 스바와 드단이다.
+1 וּבְנֵי = and [the] sons of
+2 קְטוּרָה = Keturah
+3 פִּילֶגֶשׁ = [the] concubine of (concubine)
+4 אַבְרָהָם = Abraham
+5 יָלְדָה = she bore (to beget)
+6 אֶת־ = <obj.> ([Obj.])
+7 זִמְרָן = Zimran
+8 וְיָקְשָׁן = and Jokshan
+9 וּמְדָן = and Medan (Medan)
+10 וּמִדְיָן = and Midian (Midian)
+11 וְיִשְׁבָּק = and Ishbak (Ishbak)
+12 וְשׁוּחַ = and Shuah (Shuah)
+13 וּבְנֵי = and [the] sons of
+14 יָקְשָׁן = Jokshan
+15 שְׁבָא = Sheba
+16 וּדְדָן ס = and Dedan (Dedan)
+
+## 13:1:33
+KO: 미디안의 아들들은 에바와 에벨과 하녹과 아비다와 엘다아였으니, 이 모든 이들은 그두라의 아들들이더라.
+1 וּבְנֵי = and [the] sons of
+2 מִדְיָן = Midian
+3 עֵיפָה = Ephah
+4 וָעֵפֶר = and Epher (Epher)
+5 וַחֲנוֹךְ = and Hanoch (Hanoch)
+6 וַאֲבִידָע = and Abida (Abida)
+7 וְאֶלְדָּעָה = and Eldaah (Eldaah)
+8 כָּל־ = all
+9 אֵלֶּה = these
+10 בְּנֵי = [were] [the] sons of
+11 קְטוּרָה ס = Keturah
+
+## 13:1:34
+KO: 그리고 아브라함이 이삭을 낳았으니, 이삭의 아들들은 에서와 이스라엘이라.
+1 וַיּוֹלֶד = and he fathered (to beget)
+2 אַבְרָהָם = Abraham
+3 אֶת־ = <obj.> ([Obj.])
+4 יִצְחָק ס = Isaac
+5 בְּנֵי = [the] sons of (son)
+6 יִצְחָק = Isaac
+7 עֵשָׂו = Esau
+8 וְיִשְׂרָאֵל ס = and Israel (Israel)
+
+## 13:1:35
+KO: 에서의 아들들은 엘리바스, 르우엘, 여우스, 얄람, 그리고 고라이다.
+1 בְּנֵי = [the] sons of (son)
+2 עֵשָׂו = Esau
+3 אֱלִיפַז = Eliphaz
+4 רְעוּאֵל = Reuel
+5 וִיעוּשׁ = and Jeush (Jeush)
+6 וְיַעְלָם = and Jalam (Jalam)
+7 וְקֹרַח ס = and Korah (Korah)
+
+## 13:1:36
+KO: 엘리바스의 아들들은 데만과 오말과 스비와 가담과 그나스와 딤나와 아말렉이다.
+1 בְּנֵי = [the] sons of (son)
+2 אֱלִיפָז = Eliphaz
+3 תֵּימָן = Teman
+4 וְאוֹמָר = and Omar (Omar)
+5 צְפִי = Zephi (Zepho)
+6 וְגַעְתָּם = and Gatam (Gatam)
+7 קְנַז = Kenaz
+8 וְתִמְנָע = and Timna (Timna)
+9 וַעֲמָלֵק ס = and Amalek (Amalek)
+
+## 13:1:37
+KO: 르우엘의 아들들은 나핫과 세라와 삼마와 밋사이다.
+1 בְּנֵי = [the] sons of (son)
+2 רְעוּאֵל = Reuel
+3 נַחַת = Nahath
+4 זֶרַח = Zerah
+5 שַׁמָּה = Shammah
+6 וּמִזָּה ס = and Mizzah (Mizzah)
+
+## 13:1:38
+KO: 그리고 세일의 아들들은 로단과 소발과 시브온과 아나와 디손과 에셀과 디산이다.
+1 וּבְנֵי = and [the] sons of (son)
+2 שֵׂעִיר = Seir
+3 לוֹטָן = Lotan
+4 וְשׁוֹבָל = and Shobal (Shobal)
+5 וְצִבְעוֹן = and Zibeon (Zibeon)
+6 וַעֲנָה = and Anah (Anah)
+7 וְדִישֹׁן = and Dishon (Dishon)
+8 וְאֵצֶר = and Ezer (Ezer)
+9 וְדִישָׁן = and Dishan (Dishan)
+
+## 13:1:39
+KO: 그리고 로단의 아들들은 호리와 호맘이고, 그리고 로단의 누이는 딤나이다.
+1 וּבְנֵי = and [the] sons of (son)
+2 לוֹטָן = Lotan
+3 חֹרִי = Hori
+4 וְהוֹמָם = and Homam (Hemam)
+5 וַאֲחוֹת = and [was] [the] sister of (sister)
+6 לוֹטָן = Lotan
+7 תִּמְנָע ס = Timna
+
+## 13:1:40
+KO: 쇼발의 아들들은 알랸과 마나핫과 에발과 스비와 오남이요, 시브온의 아들들은 아야와 아나요.
+1 בְּנֵי = [the] sons of
+2 שׁוֹבָל = Shobal
+3 עַלְיָן = Alyan (Alvan)
+4 וּמָנַחַת = and Manahath (Manahath)
+5 וְעֵיבָל = and Ebal (Ebal)
+6 שְׁפִי = Shephi (Shepho)
+7 וְאוֹנָם ס = and Onam (Onam)
+8 וּבְנֵי = and [the] sons of
+9 צִבְעוֹן = Zibeon
+10 אַיָּה = Aiah
+11 וַעֲנָה = and Anah (Anah)
+
+## 13:1:41
+KO: 아나의 아들은 디손이며, 디손의 아들은 하므란과 에스반과 이드란과 크란이다.
+1 בְּנֵי = [the] sons of
+2 עֲנָה = Anah
+3 דִּישׁוֹן ס = Dishon
+4 וּבְנֵי = and [the] sons of
+5 דִישׁוֹן = Dishon
+6 חַמְרָן = Hamran (Hemdan)
+7 וְאֶשְׁבָּן = and Eshban (Eshban)
+8 וְיִתְרָן = and Ithran (Ithran)
+9 וּכְרָן ס = and Keran (Cheran)
+
+## 13:1:42
+KO: 에셀의 아들은 빌한과 자아완과 야아간이요, 디손의 아들은 우스와 아란이더라.
+1 בְּנֵי־ = [the] sons of
+2 אֵצֶר = Ezer
+3 בִּלְהָן = Bilhan
+4 וְזַעֲוָן = and Zaavan (Zaavan)
+5 יַעֲקָן = Jaakan (Akan)
+6 בְּנֵי = [the] sons of
+7 דִישׁוֹן = Dishon (Dishan)
+8 עוּץ = Uz
+9 וַאֲרָן פ = and Aran (Aran)
+
+## 13:1:43
+KO: 그리고 이들은 이스라엘 자손을 위해 왕이 다스리기 전에 에돔 땅에서 다스렸던 왕들이다. 브올의 아들 벨라니, 그 성읍의 이름은 딘하바며.
+1 וְאֵלֶּה = and these (these)
+2 הַמְּלָכִים = [were] the kings
+3 אֲשֶׁר = who (which)
+4 מָלְכוּ = they reigned
+5 בְּאֶרֶץ = in [the] land of (land)
+6 אֱדוֹם = Edom
+7 לִפְנֵי = <to> before (face)
+8 מְלָךְ־ = reigned
+9 מֶלֶךְ = a king
+10 לִבְנֵי = of [the] people of
+11 יִשְׂרָאֵל = Israel
+12 בֶּלַע = Bela
+13 בֶּן־ = [the] son of
+14 בְּעוֹר = Beor
+15 וְשֵׁם = and [the] name of (name)
+16 עִירוֹ = city his (city)
+17 דִּנְהָבָה = [was] Dinhabah (Dinhabah)
+
+## 13:1:44
+KO: 그리고 벨라가 죽었다. 그리고 보스라 출신의 세라의 아들 요밥이 그를 대신하여 왕이 되었다.
+1 וַיָּמָת = and he died (to die)
+2 בָּלַע = Bela
+3 וַיִּמְלֹךְ = and he reigned (to reign)
+4 תַּחְתָּיו = in place of him (underneath)
+5 יוֹבָב = Jobab
+6 בֶּן־ = [the] son of (son)
+7 זֶרַח = Zerah
+8 מִבָּצְרָה = from Bozrah (Bozrah)
+
+## 13:1:45
+KO: 그리고 요밥이 죽었고, 그를 대신하여 데만 사람의 땅에서 온 후삼이 왕이 되었다.
+1 וַיָּמָת = and he died (to die)
+2 יוֹבָב = Jobab
+3 וַיִּמְלֹךְ = and he reigned (to reign)
+4 תַּחְתָּיו = in place of him (underneath)
+5 חוּשָׁם = Husham
+6 מֵאֶרֶץ = from [the] land of (land)
+7 הַתֵּימָנִי = the Temanite[s] (Temanite)
+
+## 13:1:46
+KO: 그리고 후삼이 죽었고, 그를 대신하여 브닷의 아들 하닷이 왕이 되었으니, 그는 모압의 들에서 미디안을 친 자이며, 그의 성읍의 이름은 아윗이다.
+1 וַיָּמָת = and he died (to die)
+2 חוּשָׁם = Husham
+3 וַיִּמְלֹךְ = and he reigned (to reign)
+4 תַּחְתָּיו = in place of him (underneath)
+5 הֲדַד = Hadad
+6 בֶּן־ = [the] son of (son)
+7 בְּדַד = Bedad
+8 הַמַּכֶּה = who struck down (to smite)
+9 אֶת־ = <obj.> ([Obj.])
+10 מִדְיָן = Midian
+11 בִּשְׂדֵה = in [the] region of (land)
+12 מוֹאָב = Moab
+13 וְשֵׁם = and [the] name of (name)
+14 עִירוֹ = city his (city)
+15 עֲוִית = [was] Avith (Avith)
+
+## 13:1:47
+KO: 그리고 하닷이 죽었고, 그의 밑(대신)으로 마스레가의 사믈라가 왕이 되었다.
+1 וַיָּמָת = and he died (to die)
+2 הֲדָד = Hadad
+3 וַיִּמְלֹךְ = and he reigned (to reign)
+4 תַּחְתָּיו = in place of him (underneath)
+5 שַׂמְלָה = Samlah
+6 מִמַּשְׂרֵקָה = from Masrekah (Masrekah)

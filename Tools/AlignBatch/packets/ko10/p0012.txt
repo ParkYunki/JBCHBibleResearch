@@ -1,0 +1,138 @@
+## 1:5:5
+KO: 그리고 아담이 살았던 모든 날들이 구백삼십 년이었고, 그가 죽었더라.
+1 וַיִּהְיוּ = and they were (to be)
+2 כָּל־ = all
+3 יְמֵי = [the] days of (day;_when)
+4 אָדָם = Adam
+5 אֲשֶׁר־ = which
+6 חַי = he lived (to live)
+7 תְּשַׁע = nine
+8 מֵאוֹת = hundred<s> (hundred)
+9 שָׁנָה = year[s]
+10 וּשְׁלֹשִׁים = and thirty (thirty)
+11 שָׁנָה = year[s]
+12 וַיָּמֹת ס = and he died (to die)
+
+## 1:5:6
+KO: 그리고 셋은 살았다, 백오 년을, 그리고 낳았다, 에노스를.
+1 וַיְחִי־ = and he lived (to live)
+2 שֵׁת = Seth
+3 חָמֵשׁ = five
+4 שָׁנִים = years
+5 וּמְאַת = and one hundred (hundred)
+6 שָׁנָה = year[s]
+7 וַיּוֹלֶד = and he fathered (to beget)
+8 אֶת־ = <obj.> ([Obj.])
+9 אֱנוֹשׁ = Enosh
+
+## 1:5:7
+KO: 그리고 셋은 에노스를 낳은 후 팔백칠 년을 살았으며, 아들들과 딸들을 낳았다.
+1 וַיְחִי־ = and he lived (to live)
+2 שֵׁת = Seth
+3 אַחֲרֵי = after
+4 הוֹלִידוֹ = fathered he
+5 אֶת־ = <obj.> ([Obj.])
+6 אֱנוֹשׁ = Enosh
+7 שֶׁבַע = seven
+8 שָׁנִים = years
+9 וּשְׁמֹנֶה = and eight (eight)
+10 מֵאוֹת = hundred<s> (hundred)
+11 שָׁנָה = year[s]
+12 וַיּוֹלֶד = and he fathered
+13 בָּנִים = sons (son)
+14 וּבָנוֹת = and daughters (daughter)
+
+## 1:5:8
+KO: 그리고 셋의 모든 날들은 십이 년 그리고 구백 년이었고, 그가 죽었다.
+1 וַיִּהְיוּ = and they were (to be)
+2 כָּל־ = all
+3 יְמֵי־ = [the] days of (day;_when)
+4 שֵׁת = Seth
+5 שְׁתֵּים = two [plus] (two)
+6 עֶשְׂרֵה = ten
+7 שָׁנָה = year[s]
+8 וּתְשַׁע = and nine (nine)
+9 מֵאוֹת = hundred<s> (hundred)
+10 שָׁנָה = year[s]
+11 וַיָּמֹת ס = and he died (to die)
+
+## 1:5:9
+KO: 그리고 에노스는 구십 년을 살았고, 게난을 낳았다.
+1 וַיְחִי = and he lived (to live)
+2 אֱנוֹשׁ = Enosh
+3 תִּשְׁעִים = ninety
+4 שָׁנָה = year[s] (year)
+5 וַיּוֹלֶד = and he fathered (to beget)
+6 אֶת־ = <obj.> ([Obj.])
+7 קֵינָן = Kenan
+
+## 1:5:10
+KO: 에노스가 게난을 낳은 후 팔백십오 년을 살며 아들들과 딸들을 낳았다.
+1 וַיְחִי = and he lived (to live)
+2 אֱנוֹשׁ = Enosh
+3 אַחֲרֵי = after
+4 הוֹלִידוֹ = fathered he
+5 אֶת־ = <obj.> ([Obj.])
+6 קֵינָן = Kenan
+7 חֲמֵשׁ = fif- (five)
+8 עֶשְׂרֵה = teen (ten)
+9 שָׁנָה = year[s]
+10 וּשְׁמֹנֶה = and eight (eight)
+11 מֵאוֹת = hundred<s> (hundred)
+12 שָׁנָה = year[s]
+13 וַיּוֹלֶד = and he fathered
+14 בָּנִים = sons (son)
+15 וּבָנוֹת = and daughters (daughter)
+
+## 1:5:11
+KO: 그리고 에노스의 모든 날들이 구백오 년이었고, 그가 죽었다.
+1 וַיִּהְיוּ = and they were (to be)
+2 כָּל־ = all
+3 יְמֵי = [the] days of (day;_when)
+4 אֱנוֹשׁ = Enosh
+5 חָמֵשׁ = five
+6 שָׁנִים = years
+7 וּתְשַׁע = and nine (nine)
+8 מֵאוֹת = hundred<s> (hundred)
+9 שָׁנָה = year[s]
+10 וַיָּמֹת ס = and he died (to die)
+
+## 1:5:12
+KO: 그리고 게난은 칠십 년을 살았고, 마할랄렐을 낳았다.
+1 וַיְחִי = and he lived (to live)
+2 קֵינָן = Kenan
+3 שִׁבְעִים = seventy
+4 שָׁנָה = year[s] (year)
+5 וַיּוֹלֶד = and he fathered (to beget)
+6 אֶת־ = <obj.> ([Obj.])
+7 מַהֲלַלְאֵל = Mahalalel
+
+## 1:5:13
+KO: 게난이 마할랄렐을 낳은 후 팔백사십 년을 살며 아들들과 딸들을 낳았다.
+1 וַיְחִי = and he lived (to live)
+2 קֵינָן = Kenan
+3 אַחֲרֵי = after
+4 הוֹלִידוֹ = fathered he
+5 אֶת־ = <obj.> ([Obj.])
+6 מַהֲלַלְאֵל = Mahalalel
+7 אַרְבָּעִים = forty
+8 שָׁנָה = year[s]
+9 וּשְׁמֹנֶה = and eight (eight)
+10 מֵאוֹת = hundred<s> (hundred)
+11 שָׁנָה = year[s]
+12 וַיּוֹלֶד = and he fathered
+13 בָּנִים = sons (son)
+14 וּבָנוֹת = and daughters (daughter)
+
+## 1:5:14
+KO: 그리고 게난의 모든 날들이 구백십 년이 되었고 그가 죽었다.
+1 וַיִּהְיוּ = and they were (to be)
+2 כָּל־ = all
+3 יְמֵי = [the] days of (day;_when)
+4 קֵינָן = Kenan
+5 עֶשֶׂר = ten
+6 שָׁנִים = years
+7 וּתְשַׁע = and nine (nine)
+8 מֵאוֹת = hundred<s> (hundred)
+9 שָׁנָה = year[s]
+10 וַיָּמֹת ס = and he died (to die)

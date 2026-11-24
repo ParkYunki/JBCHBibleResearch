@@ -1,0 +1,153 @@
+## 8:4:20
+KO: 그리고 암미나답은 나손을 낳았고, 그리고 나손은 살몬을 낳았다.
+1 וְעַמִּינָדָב = and Amminadab (Amminadab)
+2 הוֹלִיד = he fathered
+3 אֶת־ = <obj.>
+4 נַחְשׁוֹן = Nahshon
+5 וְנַחְשׁוֹן = and Nahshon
+6 הוֹלִיד = he fathered
+7 אֶת־ = <obj.>
+8 שַׂלְמָה = Salmah (Salmon)
+
+## 8:4:21
+KO: 그리고 살몬은 보아스를 낳았고, 그리고 보아스는 오벳을 낳았다.
+1 וְשַׂלְמוֹן = and Salmon (Salmon)
+2 הוֹלִיד = he fathered
+3 אֶת־ = <obj.>
+4 בֹּעַז = Boaz
+5 וּבֹעַז = and Boaz
+6 הוֹלִיד = he fathered
+7 אֶת־ = <obj.>
+8 עוֹבֵד = Obed
+
+## 8:4:22
+KO: 그리고 오벳은 이새를 낳았고, 그리고 이새는 다윗을 낳았다.
+1 וְעֹבֵד = and Obed (Obed)
+2 הוֹלִיד = he fathered
+3 אֶת־ = <obj.>
+4 יִשָׁי = Jesse
+5 וְיִשַׁי = and Jesse
+6 הוֹלִיד = he fathered
+7 אֶת־ = <obj.>
+8 דָּוִד = David
+
+## 9:1:1
+KO: 그리고 라마다임소빔, 즉 에브라임 산지의 한 사람이 있었는데, 그의 이름은 엘가나였고, 그는 에브라임 사람으로서 여로함의 아들이요, 엘리후의 아들이요, 도후의 아들이요, 숩의 아들이더라.
+1 וַיְהִי = and he was (to be)
+2 אִישׁ = a man (man)
+3 אֶחָד = one
+4 מִן־ = from
+5 הָרָמָתַיִם = <the> Ramathaim
+6 צוֹפִים = Zophim
+7 מֵהַר = from [the] hill country of (mountain)
+8 אֶפְרָיִם = Ephraim
+9 וּשְׁמוֹ = and name his (name)
+10 אֶלְקָנָה = [was] Elkanah (Elkanah)
+11 בֶּן־ = [the] son of
+12 יְרֹחָם = Jeroham
+13 בֶּן־ = [the] son of
+14 אֱלִיהוּא = Elihu
+15 בֶּן־ = [the] son of
+16 תֹּחוּ = Tohu
+17 בֶן־ = [the] son of
+18 צוּף = Zuph
+19 אֶפְרָתִי = an Ephrathite (Ephraimite)
+
+## 9:1:2
+KO: 그에게 두 아내가 있었으니, 하나의 이름은 한나요, 두 번째의 이름은 브닌나라. 브닌나에게는 자녀들이 있었고, 한나에게는 자녀들이 없었더라.
+1 וְלוֹ = and [belonged] to <the> him (him)
+2 שְׁתֵּי = two
+3 נָשִׁים = wives (woman)
+4 שֵׁם = [the] name of
+5 אַחַת = one
+6 חַנָּה = [was] Hannah
+7 וְשֵׁם = and [the] name of
+8 הַשֵּׁנִית = the second (second)
+9 פְּנִנָּה = [was] Peninnah
+10 וַיְהִי = and it belonged (to be)
+11 לִפְנִנָּה = to Peninnah
+12 יְלָדִים = children
+13 וּלְחַנָּה = and [belonged] to Hannah
+14 אֵין = not (nothing)
+15 יְלָדִים = children
+
+## 9:1:3
+KO: 그리고 그 사람은 매년(날들로부터 날들로) 자기 성읍에서 올라가서, 만군의 여호와께 경배하고 제사 드리기 위해 실로에 이르렀고, 그곳에 엘리의 두 아들 홉니와 비느하스가 여호와의 제사장들로 있었다.
+1 וְעָלָה = and he went up (to ascend)
+2 הָאִישׁ = the man (man)
+3 הַהוּא = <the> that (he;_she;_it)
+4 מֵעִירוֹ = from city his (city)
+5 מִיָּמִים = from days
+6 יָמִימָה = days towards
+7 לְהִשְׁתַּחֲוֹת = to bow down (to bow)
+8 וְלִזְבֹּחַ = and to sacrifice (to sacrifice)
+9 לַיהוָה = to Yahweh
+10 צְבָאוֹת = of hosts (Hosts)
+11 בְּשִׁלֹה = at Shiloh (Shiloh)
+12 וְשָׁם = and there (there)
+13 שְׁנֵי = [the] two (two)
+14 בְנֵי־ = [the] sons of (son)
+15 עֵלִי = Eli
+16 חָפְנִי = Hophni
+17 וּפִנְחָס = and Phinehas (Phinehas)
+18 כֹּהֲנִים = [were] priests (priest)
+19 לַיהוָה = of Yahweh
+
+## 9:1:4
+KO: 그리고 엘가나가 제사를 드리는 그날이 되었고, 그는 그의 아내 브닌나와 그녀의 모든 아들과 그녀의 모든 딸들에게 분깃들을 주었다.
+1 וַיְהִי = and it was (to be)
+2 הַיּוֹם = the day (day;_when)
+3 וַיִּזְבַּח = and he sacrificed (to sacrifice)
+4 אֶלְקָנָה = Elkanah
+5 וְנָתַן = and he gave (to give)
+6 לִפְנִנָּה = to Peninnah (Peninnah)
+7 אִשְׁתּוֹ = wife his (woman)
+8 וּלְכָל־ = and to all (all)
+9 בָּנֶיהָ = sons her (son)
+10 וּבְנוֹתֶיהָ = and daughters her (daughter)
+11 מָנוֹת = portions (portion)
+
+## 9:1:5
+KO: 그러나 한나에게는 그가 한 몫(분깃)을 주었으니, 이는 그가 한나를 사랑했기 때문이라. 그러나 여호와께서 그의 태를 닫으셨더라.
+1 וּלְחַנָּה = and to Hannah
+2 יִתֵּן = he gave (to give)
+3 מָנָה = a portion (portion)
+4 אַחַת = one
+5 אַפָּיִם = double (face)
+6 כִּי = for
+7 אֶת־ = <obj.> ([Obj.])
+8 חַנָּה = Hannah
+9 אָהֵב = he loved (to love)
+10 וַיהוָה = and Yahweh (LORD)
+11 סָגַר = he had closed (to shut)
+12 רַחְמָהּ = womb her (womb)
+
+## 9:1:6
+KO: 그녀의 대적이 또한 그녀를 격동시키니, 이는 여호와께서 그녀의 태를 닫으셨기 때문에 그녀를 번민하게 하려 함이었더라.
+1 וְכִעֲסַתָּה = and she provoked her (to provoke)
+2 צָרָתָהּ = rival her (vexer)
+3 גַּם־ = also
+4 כַּעַס = provocation (vexation)
+5 בַּעֲבוּר = in order (for the sake of)
+6 הַרְּעִמָהּ = to disconcert her (to thunder)
+7 כִּי־ = for
+8 סָגַר = he had closed (to shut)
+9 יְהוָה = Yahweh (LORD)
+10 בְּעַד = behind (about|through|for)
+11 רַחְמָהּ = womb her (womb)
+
+## 9:1:7
+KO: 그리고 그가 매년 그렇게 행하였으니, 그녀가 여호와의 집에 올라갈 때마다, (브닌나가) 그와 같이 그녀를 격동시키매, 그가 울고 먹지 아니하였다.
+1 וְכֵן = and thus
+2 יַעֲשֶׂה = he did (to make)
+3 שָׁנָה = a year
+4 בְשָׁנָה = in a year
+5 מִדֵּי = as often as (enough)
+6 עֲלֹתָהּ = went up she (to ascend)
+7 בְּבֵית = in [the] house of (house)
+8 יְהוָה = Yahweh (LORD)
+9 כֵּן = thus
+10 תַּכְעִסֶנָּה = she provoked her (to provoke)
+11 וַתִּבְכֶּה = and she wept (to weep)
+12 וְלֹא = and not (not)
+13 תֹאכַל = she ate (to eat)

@@ -1,0 +1,154 @@
+## 2:29:44
+KO: 그리고 내가 회막과 단을 거룩하게 할 것이며, 아론과 그의 아들들을 거룩하게 하여 나를 위해 제사장 직분을 행하게 할 것이다.
+1 וְקִדַּשְׁתִּי = and I will consecrate
+2 אֶת־ = <obj.>
+3 אֹהֶל = [the] tent of (tent)
+4 מוֹעֵד = meeting
+5 וְאֶת־ = and <obj.>
+6 הַמִּזְבֵּחַ = the altar (altar)
+7 וְאֶת־ = and <obj.>
+8 אַהֲרֹן = Aaron
+9 וְאֶת־ = and <obj.>
+10 בָּנָיו = sons his (son)
+11 אֲקַדֵּשׁ = I will consecrate
+12 לְכַהֵן = to serve as priests (to minister)
+13 לִי = <to> <the> me (me)
+
+## 2:29:45
+KO: 그리고 내가 이스라엘 자손들의 한가운데에 거할 것이며, 나는 그들에게 하나님이 될 것이다.
+1 וְשָׁכַנְתִּי = and I will dwell (to dwell)
+2 בְּתוֹךְ = in among (midst)
+3 בְּנֵי = [the] people of (son)
+4 יִשְׂרָאֵל = Israel
+5 וְהָיִיתִי = and I will become (to be)
+6 לָהֶם = for <the> them (them)
+7 לֵאלֹהִים = <into> God (God)
+
+## 2:29:46
+KO: 그리고 그들은 알게 될 것이다. 왜냐하면 내가 그들의 하나님 여호와로서, 내가 그들을 애굽 땅으로부터 인도하여 냈기 때문이다, 그들 가운데 거하기 위하여. 나, 여호와 그들의 하나님이다.
+1 וְיָדְעוּ = and they will know (to know)
+2 כִּי = that (for)
+3 אֲנִי = I
+4 יְהוָה = [am] Yahweh
+5 אֱלֹהֵיהֶם = God their
+6 אֲשֶׁר = who (which)
+7 הוֹצֵאתִי = I brought out (to come out)
+8 אֹתָם = <obj.> them ([Obj.])
+9 מֵאֶרֶץ = from [the] land of (land)
+10 מִצְרַיִם = Egypt
+11 לְשָׁכְנִי = to dwell I (to dwell)
+12 בְתוֹכָם = in midst of them (midst)
+13 אֲנִי = I
+14 יְהוָה = [am] Yahweh
+15 אֱלֹהֵיהֶם פ = God their
+
+## 2:30:1
+KO: 너는 분향을 위한 제단을 만들지니, 조각목으로 그것을 만들라.
+1 וְעָשִׂיתָ = and you will make
+2 מִזְבֵּחַ = an altar (altar)
+3 מִקְטַר = a place of smoke of (fumigation)
+4 קְטֹרֶת = incense
+5 עֲצֵי = wood<s> of (tree)
+6 שִׁטִּים = acacia
+7 תַּעֲשֶׂה = you will make
+8 אֹתוֹ = <obj.> it ([Obj.])
+
+## 2:30:2
+KO: 한 규빗이 그 길이이며, 한 규빗이 그 너비로 사각형이 될 것이고, 두 규빗이 그 높이이며, 그것으로부터 그 뿔들이 나올 것이다.
+1 אַמָּה = [will be] a cubit
+2 אָרְכּוֹ = length its (length)
+3 וְאַמָּה = and [will be] a cubit
+4 רָחְבּוֹ = breadth its (width)
+5 רָבוּעַ = square (to square)
+6 יִהְיֶה = it will be (to be)
+7 וְאַמָּתַיִם = and [will be] two cubits
+8 קֹמָתוֹ = height its (height)
+9 מִמֶּנּוּ = [will be] from it (from)
+10 קַרְנֹתָיו = horns its (horn)
+
+## 2:30:3
+KO: 너는 그것(제단)의 윗면과 그것의 벽들과 그것의 뿔들을 정금으로 입히고, 그것을 위하여 주위에 금테를 만들지니라.
+1 וְצִפִּיתָ = and you will overlay (to overlay)
+2 אֹתוֹ = <obj.> it
+3 זָהָב = gold
+4 טָהוֹר = pure (clean)
+5 אֶת־ = <obj.>
+6 גַּגּוֹ = top its (roof)
+7 וְאֶת־ = and <obj.>
+8 קִירֹתָיו = sides its (wall)
+9 סָבִיב = all around
+10 וְאֶת־ = and <obj.>
+11 קַרְנֹתָיו = horns its (horn)
+12 וְעָשִׂיתָ = and you will make (to make)
+13 לּוֹ = for <the> it (him)
+14 זֵר = a molding of (border)
+15 זָהָב = gold
+16 סָבִיב = all around
+
+## 2:30:4
+KO: 그것(단)의 금 테 아래 양쪽에 금 고리 두 개를 만들되, 그것의 두 옆면 위에 만들 것이니, 그것은 그(단)를 메는 채들을 위한 집(수용처)이 되어 그것들로 그것을 들게 할 것이다.
+1 וּשְׁתֵּי = and two
+2 טַבְּעֹת = rings of (ring)
+3 זָהָב = gold
+4 תַּעֲשֶׂה־ = you will make
+5 לּוֹ = for <the> it (him)
+6 מִתַּחַת = from under (underneath)
+7 לְזֵרוֹ = to molding its (border)
+8 עַל = on
+9 שְׁתֵּי = [the] two
+10 צַלְעֹתָיו = sides its (side)
+11 תַּעֲשֶׂה = you will make [them]
+12 עַל־ = on
+13 שְׁנֵי = [the] two
+14 צִדָּיו = sides its (side)
+15 וְהָיָה = and it will become (to be)
+16 לְבָתִּים = <into> holders (house)
+17 לְבַדִּים = for poles (alone)
+18 לָשֵׂאת = to carry (to lift)
+19 אֹתוֹ = <obj.> it ([Obj.])
+20 בָּהֵמָּה = by them (them)
+
+## 2:30:5
+KO: 그리고 너는 그 채들을 조각목(아카시아 나무)으로 만들고 그것들을 금으로 입혀라.
+1 וְעָשִׂיתָ = and you will make (to make)
+2 אֶת־ = <obj.>
+3 הַבַּדִּים = the poles (alone)
+4 עֲצֵי = wood<s> of (tree)
+5 שִׁטִּים = acacia
+6 וְצִפִּיתָ = and you will overlay (to overlay)
+7 אֹתָם = <obj.> them
+8 זָהָב = gold
+
+## 2:30:6
+KO: 그리고 너는 그것을 증거궤 위에 있는 휘장 앞, 곧 증거궤 위의 속죄소 앞, 내가 너와 만나는 그곳에 두라.
+1 וְנָתַתָּה = and you will put (to give)
+2 אֹתוֹ = <obj.> it ([Obj.])
+3 לִפְנֵי = <to> before
+4 הַפָּרֹכֶת = the curtain (curtain)
+5 אֲשֶׁר = which
+6 עַל־ = [is] on
+7 אֲרֹן = [the] ark of (ark)
+8 הָעֵדֻת = the testimony
+9 לִפְנֵי = <to> before
+10 הַכַּפֹּרֶת = the atonement cover (mercy seat)
+11 אֲשֶׁר = which
+12 עַל־ = [is] on
+13 הָעֵדֻת = the testimony
+14 אֲשֶׁר = where
+15 אִוָּעֵד = I will meet (to appoint)
+16 לְךָ = <to> <the> you (you)
+17 שָׁמָּה = there <towards> (there)
+
+## 2:30:7
+KO: 그리고 아론은 그 위에 향기로운 향을 살라야 한다. 아침마다, 아침마다 그는 등불들을 정돈할 때에 그것을 살라야 한다.
+1 וְהִקְטִיר = and he will make smoke
+2 עָלָיו = on it (upon)
+3 אַהֲרֹן = Aaron
+4 קְטֹרֶת = incense of (incense)
+5 סַמִּים = perfume<s> (spice)
+6 בַּבֹּקֶר = in the morning
+7 בַּבֹּקֶר = in the morning
+8 בְּהֵיטִיבוֹ = when makes good he (be good)
+9 אֶת־ = <obj.> ([Obj.])
+10 הַנֵּרֹת = the lamps (lamp)
+11 יַקְטִירֶנָּה = he will make smoke it

@@ -1,0 +1,854 @@
+## 3:1:5
+KO: 그리고 그는 그 소의 아들을 여호와 앞에서 잡을 것이며, 아론의 자손 제사장들은 그 피를 가져와서 회막 문 앞에 있는 제단 사면에 그 피를 뿌릴 것이다.
+1 וְשָׁחַט = and he will cut [the] throat of (to slaughter)
+2 אֶת־ = <obj.>
+3 בֶּן = [the] young one of
+4 הַבָּקָר = the herd (cattle)
+5 לִפְנֵי = <to> before (face)
+6 יְהוָה = Yahweh (LORD)
+7 וְהִקְרִיבוּ = and they will present (to present)
+8 בְּנֵי = [the] sons of
+9 אַהֲרֹן = Aaron
+10 הַכֹּהֲנִים = the priests (priest)
+11 אֶת־ = <obj.>
+12 הַדָּם = the blood
+13 וְזָרְקוּ = and they will sprinkle (to scatter)
+14 אֶת־ = <obj.>
+15 הַדָּם = the blood
+16 עַל־ = on (upon)
+17 הַמִּזְבֵּחַ = the altar (altar)
+18 סָבִיב = all around (around)
+19 אֲשֶׁר־ = which
+20 פֶּתַח = [is] [the] entrance of (entrance)
+21 אֹהֶל = [the] tent of (tent)
+22 מוֹעֵד = meeting
+
+## 3:1:6
+KO: 그리고 그는 그 번제물을 벗길 것이며, 그것을 그 마디들로 나눌 것이다.
+1 וְהִפְשִׁיט = and he will skin (to strip)
+2 אֶת־ = <obj.>
+3 הָעֹלָה = the burnt offering (burnt offering)
+4 וְנִתַּח = and he will cut in pieces (to cut)
+5 אֹתָהּ = <obj.> it
+6 לִנְתָחֶיהָ = into pieces its (piece)
+
+## 3:1:7
+KO: 그리고 아론 제사장의 아들들은 제단 위에 불을 둘 것이며, 그 불 위에 나무들을 벌여 놓을 것이다.
+1 וְנָתְנוּ = and they will put (to give)
+2 בְּנֵי = [the] sons of (son)
+3 אַהֲרֹן = Aaron
+4 הַכֹּהֵן = the priest (priest)
+5 אֵשׁ = fire
+6 עַל־ = on
+7 הַמִּזְבֵּחַ = the altar (altar)
+8 וְעָרְכוּ = and they will arrange (to arrange)
+9 עֵצִים = wood<s> (tree)
+10 עַל־ = on
+11 הָאֵשׁ = the fire
+
+## 3:1:8
+KO: 그리고 아론의 자손 제사장들은 그 조각들과 그 머리와 그 기름을, 제단 위에 있는 불 위의 나무들 위에 벌여 놓을 것이다.
+1 וְעָרְכוּ = and they will arrange (to arrange)
+2 בְּנֵי = [the] sons of (son)
+3 אַהֲרֹן = Aaron
+4 הַכֹּהֲנִים = the priests (priest)
+5 אֵת = <obj.>
+6 הַנְּתָחִים = the pieces (piece)
+7 אֶת־ = <obj.>
+8 הָרֹאשׁ = the head (head)
+9 וְאֶת־ = and <obj.>
+10 הַפָּדֶר = the suet (suet)
+11 עַל־ = on
+12 הָעֵצִים = the wood<s> (tree)
+13 אֲשֶׁר = which
+14 עַל־ = [are] on
+15 הָאֵשׁ = the fire (fire)
+16 אֲשֶׁר = which
+17 עַל־ = [is] on
+18 הַמִּזְבֵּחַ = the altar (altar)
+
+## 3:1:9
+KO: 그리고 그의 내장과 그의 정강이들을 그가 물로 씻을 것이요, 제사장은 그 전부를 단 위에서 살라 번제로 삼을지니, 이는 여호와께 향기로운 냄새인 화제라.
+1 וְקִרְבּוֹ = and entrails its (entrails)
+2 וּכְרָעָיו = and legs its (leg)
+3 יִרְחַץ = he will wash (to wash)
+4 בַּמָּיִם = with <the> water (water)
+5 וְהִקְטִיר = and he will make smoke (to offer)
+6 הַכֹּהֵן = the priest (priest)
+7 אֶת־ = <obj.> ([Obj.])
+8 הַכֹּל = <the> everything (all)
+9 הַמִּזְבֵּחָה = the altar towards (altar)
+10 עֹלָה = a burnt offering (burnt offering)
+11 אִשֵּׁה = a fire offering of (burnt offering)
+12 רֵיחַ־ = an odor of (aroma)
+13 נִיחוֹחַ = soothing
+14 לַיהוָה ס = to Yahweh (LORD)
+
+## 3:1:10
+KO: 만일 양 떼에서 그의 예물이, 곧 어린 양들이나 염소들에서 번제를 위한 것이라면, 흠 없는 수컷으로 그것을 바칠지니라.
+1 וְאִם־ = and if (if)
+2 מִן־ = [is] from
+3 הַצֹּאן = the flock (flock)
+4 קָרְבָּנוֹ = present his (offering)
+5 מִן־ = from
+6 הַכְּשָׂבִים = the young rams (sheep)
+7 אוֹ = or
+8 מִן־ = from
+9 הָעִזִּים = the goats (goat)
+10 לְעֹלָה = to a burnt offering (burnt offering)
+11 זָכָר = a male (male)
+12 תָּמִים = unblemished
+13 יַקְרִיבֶנּוּ = he will present it (to present)
+
+## 3:1:11
+KO: 그는 그것을 여호와 앞 제단의 북편 곁에서 잡을 것이요, 아론의 자손 제사장들은 그 피를 제단 위에 사면으로 뿌릴 것이며
+1 וְשָׁחַט = and he will cut [the] throat of (to slaughter)
+2 אֹתוֹ = <obj.> it
+3 עַל = at
+4 יֶרֶךְ = [the] side of (thigh)
+5 הַמִּזְבֵּחַ = the altar
+6 צָפֹנָה = north -ward (north)
+7 לִפְנֵי = <to> before (face)
+8 יְהוָה = Yahweh (LORD)
+9 וְזָרְקוּ = and they will sprinkle (to scatter)
+10 בְּנֵי = [the] sons of (son)
+11 אַהֲרֹן = Aaron
+12 הַכֹּהֲנִים = the priests (priest)
+13 אֶת־ = <obj.>
+14 דָּמוֹ = blood its (blood)
+15 עַל־ = on
+16 הַמִּזְבֵּחַ = the altar
+17 סָבִיב = all around (around)
+
+## 3:1:12
+KO: 그리고 그는 그것을 그것의 조각들로 조각 낼 것이며, 또한 그것의 머리와 그것의 기름(지방)을 그리할 것이고, 제사장은 그것들을 불 위에 있는 나무들 곧 제단 위에 있는 나무들 위에 배열할 것이다.
+1 וְנִתַּח = and he will cut in pieces (to cut)
+2 אֹתוֹ = <obj.> it
+3 לִנְתָחָיו = into pieces its (piece)
+4 וְאֶת־ = and <obj.>
+5 רֹאשׁוֹ = head its (head)
+6 וְאֶת־ = and <obj.>
+7 פִּדְרוֹ = suet its (suet)
+8 וְעָרַךְ = and he will arrange (to arrange)
+9 הַכֹּהֵן = the priest (priest)
+10 אֹתָם = <obj.> them
+11 עַל־ = on
+12 הָעֵצִים = the wood<s> (tree)
+13 אֲשֶׁר = which
+14 עַל־ = [are] on
+15 הָאֵשׁ = the fire (fire)
+16 אֲשֶׁר = which
+17 עַל־ = [is] on
+18 הַמִּזְבֵּחַ = the altar (altar)
+
+## 3:1:13
+KO: 그리고 내장과 정갱이를 그가 물로 씻을 것이요, 제사장이 그 전부를 가까이 가져와서 제단 위에서 불살라 번제로 삼을지니, 그것은 여호와께 향기로운 냄새가 되는 화제라.
+1 וְהַקֶּרֶב = and the entrails (entrails)
+2 וְהַכְּרָעַיִם = and the legs (leg)
+3 יִרְחַץ = he will wash (to wash)
+4 בַּמָּיִם = with <the> water (water)
+5 וְהִקְרִיב = and he will present (to present)
+6 הַכֹּהֵן = the priest (priest)
+7 אֶת־ = <obj.> ([Obj.])
+8 הַכֹּל = <the> everything (all)
+9 וְהִקְטִיר = and he will make [it] smoke (to offer)
+10 הַמִּזְבֵּחָה = the altar towards (altar)
+11 עֹלָה = [is] a burnt offering (burnt offering)
+12 הוּא = it (he;_she;_it)
+13 אִשֵּׁה = a fire offering of (burnt offering)
+14 רֵיחַ = an odor of (aroma)
+15 נִיחֹחַ = soothing
+16 לַיהוָה פ = to Yahweh (LORD)
+
+## 3:1:14
+KO: 만일 여호와를 향한 그의 예물이 새들의 번제라면, 그는 산비둘기들이나 집비둘기 새끼들로부터 그의 예물을 가까이 가져올 것이다.
+1 וְאִם = and if (if)
+2 מִן־ = from
+3 הָעוֹף = the bird[s] (bird)
+4 עֹלָה = [is] a burnt offering (burnt offering)
+5 קָרְבָּנוֹ = present his
+6 לַיהוָה = to Yahweh (LORD)
+7 וְהִקְרִיב = and he will present (to present)
+8 מִן־ = from
+9 הַתֹּרִים = the turtle-doves (turtledove)
+10 אוֹ = or
+11 מִן־ = from
+12 בְּנֵי = [the] young ones of (son)
+13 הַיּוֹנָה = the dove (dove)
+14 אֶת־ = <obj.> ([Obj.])
+15 קָרְבָּנוֹ = present his
+
+## 3:1:15
+KO: 그리고 제사장은 그것을 제단으로 가져와서 그 머리를 비틀어 끊고 제단 위에서 불사를 것이며, 그 피는 제단의 벽 위로 흘릴 것이다.
+1 וְהִקְרִיבוֹ = and he will present it (to present)
+2 הַכֹּהֵן = the priest (priest)
+3 אֶל־ = to (to(wards))
+4 הַמִּזְבֵּחַ = the altar
+5 וּמָלַק = and he will nip off (to nip)
+6 אֶת־ = <obj.> ([Obj.])
+7 רֹאשׁוֹ = head its (head)
+8 וְהִקְטִיר = and he will make [it] smoke (to offer)
+9 הַמִּזְבֵּחָה = the altar towards
+10 וְנִמְצָה = and it will be drained out (to drain)
+11 דָמוֹ = blood its (blood)
+12 עַל = on (upon)
+13 קִיר = [the] side of (wall)
+14 הַמִּזְבֵּחַ = the altar
+
+## 3:1:16
+KO: 그는 그것(새)의 멱통을 그 깃털과 함께 제거하여 제단 동쪽, 재를 버리는 곳 곁에 던질지니라.
+1 וְהֵסִיר = and he will remove (to turn aside)
+2 אֶת־ = <obj.>
+3 מֻרְאָתוֹ = craw its (crop)
+4 בְּנֹצָתָהּ = with feather[s] its (plumage)
+5 וְהִשְׁלִיךְ = and he will throw (to throw)
+6 אֹתָהּ = <obj.> it
+7 אֵצֶל = beside
+8 הַמִּזְבֵּחַ = the altar (altar)
+9 קֵדְמָה = east -ward (east)
+10 אֶל־ = to (to(wards))
+11 מְקוֹם = [the] place of (standing place)
+12 הַדָּשֶׁן = the fatty ash (ashes)
+
+## 3:1:17
+KO: 그리고 그 날개들로 그것을 찢되, 쪼개지는 말고, 제사장이 그것을 단 위 불 위의 나무들 위에 있는 그것을 살라 번제로 삼을지니, 그것은 여호와께 향기로운 냄새인 화제라.
+1 וְשִׁסַּע = and he will tear apart (to cleave)
+2 אֹתוֹ = <obj.> it
+3 בִכְנָפָיו = by wings its (wing)
+4 לֹא = not
+5 יַבְדִּיל = he will separate [it] (to separate)
+6 וְהִקְטִיר = and he will make smoke (to offer)
+7 אֹתוֹ = <obj.> it
+8 הַכֹּהֵן = the priest (priest)
+9 הַמִּזְבֵּחָה = the altar towards (altar)
+10 עַל־ = on
+11 הָעֵצִים = the wood<s> (tree)
+12 אֲשֶׁר = which
+13 עַל־ = [are] on
+14 הָאֵשׁ = the fire (fire)
+15 עֹלָה = [is] a burnt offering (burnt offering)
+16 הוּא = it (he;_she;_it)
+17 אִשֵּׁה = a fire offering of (burnt offering)
+18 רֵיחַ = an odor of (aroma)
+19 נִיחֹחַ = soothing
+20 לַיהוָה ס = to Yahweh (LORD)
+
+## 3:2:1
+KO: 그리고 영혼이 여호와께 소제의 예물을 가까이 가져오려거든, 고운 가루가 그 예물이 될 것이요, 그 위에 기름을 붓고 또 그 위에 유향을 둘 것이라.
+1 וְנֶפֶשׁ = and anyone (soul)
+2 כִּי־ = for
+3 תַקְרִיב = it will present (to present)
+4 קָרְבַּן = a present of
+5 מִנְחָה = a grain offering (offering)
+6 לַיהוָה = to Yahweh (LORD)
+7 סֹלֶת = fine flour
+8 יִהְיֶה = it will be (to be)
+9 קָרְבָּנוֹ = present his
+10 וְיָצַק = and he will pour (to pour)
+11 עָלֶיהָ = on it
+12 שֶׁמֶן = oil
+13 וְנָתַן = and he will put (to give)
+14 עָלֶיהָ = on it
+15 לְבֹנָה = frankincense
+
+## 3:2:2
+KO: 그것을 아론의 자손 제사장들에게 가져올 것이요, 제사장은 거기에서 고운 가루 한 줌과 기름, 그리고 그 모든 유향의 가득한 양을 취하여, 그 기념물을 제단 위에서 불사를지니, 이는 여호와께 향기로운 냄새가 나는 화제라.
+1 וֶהֱבִיאָהּ = and he will bring it (to come (in))
+2 אֶל־ = to (to(wards))
+3 בְּנֵי = [the] sons of (son)
+4 אַהֲרֹן = Aaron
+5 הַכֹּהֲנִים = the priests
+6 וְקָמַץ = and he will take a handful (to grasp)
+7 מִשָּׁם = from there (there)
+8 מְלֹא = [the] fullness of (fullness)
+9 קֻמְצוֹ = handful his (handful)
+10 מִסָּלְתָּהּ = from fine flour its (fine flour)
+11 וּמִשַּׁמְנָהּ = and of oil its (oil)
+12 עַל = with (upon)
+13 כָּל־ = all
+14 לְבֹנָתָהּ = frankincense its (frankincense)
+15 וְהִקְטִיר = and he will make smoke (to offer)
+16 הַכֹּהֵן = the priest
+17 אֶת־ = <obj.> ([Obj.])
+18 אַזְכָּרָתָהּ = memorial offering its (memorial)
+19 הַמִּזְבֵּחָה = the altar towards (altar)
+20 אִשֵּׁה = a fire offering of (burnt offering)
+21 רֵיחַ = an odor of (aroma)
+22 נִיחֹחַ = soothing
+23 לַיהוָה = to Yahweh (LORD)
+
+## 3:2:3
+KO: 그리고 그 소제물로부터 남은 것은 아론과 그의 아들들에게 속할 것이니, 이는 여호와의 화제물들로부터 온 지극히 거룩한 것이다.
+1 וְהַנּוֹתֶרֶת = and the remainder (to remain)
+2 מִן־ = of (from)
+3 הַמִּנְחָה = the grain offering (offering)
+4 לְאַהֲרֹן = [belongs] to Aaron (Aaron)
+5 וּלְבָנָיו = and to sons his (son)
+6 קֹדֶשׁ = a holy thing of
+7 קָדָשִׁים = holy things
+8 מֵאִשֵּׁי = from [the] fire offerings of (burnt offering)
+9 יְהוָה ס = Yahweh (LORD)
+
+## 3:2:4
+KO: 네가 화덕에 구운 것으로 소제의 예물을 가져오려 하거든, 기름을 섞은 고운 가루의 무교병들이나 기름을 바른 무교전병을 드릴지니라.
+1 וְכִי = and if (for)
+2 תַקְרִב = you will present (to present)
+3 קָרְבַּן = a present of (offering)
+4 מִנְחָה = a grain offering (offering)
+5 מַאֲפֵה = a baked item of (baked (good))
+6 תַנּוּר = an oven (oven)
+7 סֹלֶת = fine flour of (fine flour)
+8 חַלּוֹת = round perforated breads of (bun)
+9 מַצֹּת = unleavened bread<s>
+10 בְּלוּלֹת = mixed (to mix)
+11 בַּשֶּׁמֶן = with <the> oil
+12 וּרְקִיקֵי = and thin breads of (flatbread)
+13 מַצּוֹת = unleavened bread<s>
+14 מְשֻׁחִים = smeared (to anoint)
+15 בַּשָּׁמֶן ס = with <the> oil
+
+## 3:2:5
+KO: 그리고 만일 네 예물이 번철 위에서의 소제라면, 기름이 섞인 누룩 없는 고운 가루일지니라.
+1 וְאִם־ = and if (if)
+2 מִנְחָה = [is] a grain offering (offering)
+3 עַל־ = on (upon)
+4 הַמַּחֲבַת = the baking tray (griddle)
+5 קָרְבָּנֶךָ = present your (offering)
+6 סֹלֶת = fine flour
+7 בְּלוּלָה = mixed (to mix)
+8 בַשֶּׁמֶן = with <the> oil (oil)
+9 מַצָּה = unleavened bread<s> (unleavened bread)
+10 תִהְיֶה = it will be (to be)
+
+## 3:2:6
+KO: 그것(소제물)을 조각들로 조각내고, 그 위에 기름을 부을지니, 그것은 소제이다.
+1 פָּתוֹת = you will crumble (to break)
+2 אֹתָהּ = <obj.> it ([Obj.])
+3 פִּתִּים = crumbs (morsel)
+4 וְיָצַקְתָּ = and you will pour (to pour)
+5 עָלֶיהָ = on it (upon)
+6 שָׁמֶן = oil
+7 מִנְחָה = [is] a grain offering (offering)
+8 הִוא ס = it (he;_she;_it)
+
+## 3:2:7
+KO: 그리고 만약 솥에서 만든 너의 소제물이 고운 가루를 기름과 섞은 것이라면 그것을 만들지니라.
+1 וְאִם־ = and if (if)
+2 מִנְחַת = [is] a grain offering of (offering)
+3 מַרְחֶשֶׁת = a baking pan (pan)
+4 קָרְבָּנֶךָ = present your (offering)
+5 סֹלֶת = fine flour
+6 בַּשֶּׁמֶן = with <the> oil (oil)
+7 תֵּעָשֶׂה = it will be made (to make)
+
+## 3:2:8
+KO: 그리고 너는 이것들로 만들어진 그 소제물을 여호와께 가져오고, 그것을 제사장에게 가까이 가져갈 것이며, 제사장은 그것을 그 제단으로 가까이 가져갈 것이다.
+1 וְהֵבֵאתָ = and you will bring (to come (in))
+2 אֶת־ = <obj.> ([Obj.])
+3 הַמִּנְחָה = the grain offering (offering)
+4 אֲשֶׁר = which
+5 יֵעָשֶׂה = it will be made (to make)
+6 מֵאֵלֶּה = from these [things] (these)
+7 לַיהוָה = to Yahweh (LORD)
+8 וְהִקְרִיבָהּ = and he will present it (to present)
+9 אֶל־ = to
+10 הַכֹּהֵן = the priest (priest)
+11 וְהִגִּישָׁהּ = and he will bring near it (to approach)
+12 אֶל־ = to
+13 הַמִּזְבֵּחַ = the altar (altar)
+
+## 3:2:9
+KO: 그리고 제사장이 그 소제물로부터 그것의 기념물을 취하여 제단 위로 불사를지니, 이는 화제 곧 여호와께 향기로운 냄새니라.
+1 וְהֵרִים = and he will lift up (to exalt)
+2 הַכֹּהֵן = the priest (priest)
+3 מִן־ = from
+4 הַמִּנְחָה = the grain offering (offering)
+5 אֶת־ = <obj.> ([Obj.])
+6 אַזְכָּרָתָהּ = memorial offering its (memorial)
+7 וְהִקְטִיר = and he will make [it] smoke (to offer)
+8 הַמִּזְבֵּחָה = the altar towards (altar)
+9 אִשֵּׁה = a fire offering of (burnt offering)
+10 רֵיחַ = an odor of (aroma)
+11 נִיחֹחַ = soothing
+12 לַיהוָה = to Yahweh (LORD)
+
+## 3:2:10
+KO: 그리고 그 소제물로부터 남은 것은 아론과 그의 아들들에게 돌릴지니, 그것은 여호와의 화제물들로부터 온 지극히 거룩한 것이다.
+1 וְהַנּוֹתֶרֶת = and the remainder (to remain)
+2 מִן־ = of (from)
+3 הַמִּנְחָה = the grain offering (offering)
+4 לְאַהֲרֹן = [belongs] to Aaron (Aaron)
+5 וּלְבָנָיו = and to sons his (son)
+6 קֹדֶשׁ = a holy thing of
+7 קָדָשִׁים = holy things
+8 מֵאִשֵּׁי = from [the] fire offerings of (burnt offering)
+9 יְהוָה = Yahweh (LORD)
+
+## 3:2:11
+KO: 너희가 여호와께 가까이 가져가는 모든 소제물은 누룩을 넣어 만들지 말지니, 이는 너희가 누룩이나 꿀 가운데서 어떤 것이라도 여호와께 화제로 살라 드리지 못할 것이기 때문이라.
+1 כָּל־ = any
+2 הַמִּנְחָה = <the> grain offering (offering)
+3 אֲשֶׁר = which
+4 תַּקְרִיבוּ = you will present (to present)
+5 לַיהוָה = to Yahweh
+6 לֹא = not
+7 תֵעָשֶׂה = it will be made (to make)
+8 חָמֵץ = leaven
+9 כִּי = for
+10 כָל־ = any
+11 שְׂאֹר = leaven
+12 וְכָל־ = and any
+13 דְּבַשׁ = honey
+14 לֹא־ = not
+15 תַקְטִירוּ = you must make to smoke (to offer)
+16 מִמֶּנּוּ = any of it (from)
+17 אִשֶּׁה = a fire offering (burnt offering)
+18 לַיהוָה = to Yahweh
+
+## 3:2:12
+KO: 첫 열매의 예물로서 너희는 그것들을 여호와께 드릴 것이나, 향기로운 냄새를 위하여는 제단 위로 올라가지 못할 것이다.
+1 קָרְבַּן = a present of (offering)
+2 רֵאשִׁית = first [fruit] (first)
+3 תַּקְרִיבוּ = you will present (to present)
+4 אֹתָם = <obj.> them ([Obj.])
+5 לַיהוָה = to Yahweh (LORD)
+6 וְאֶל־ = and to (to(wards))
+7 הַמִּזְבֵּחַ = the altar (altar)
+8 לֹא־ = not
+9 יַעֲלוּ = they will go up (to ascend)
+10 לְרֵיחַ = to an odor of (aroma)
+11 נִיחֹחַ = soothing
+
+## 3:2:13
+KO: 그리고 너의 소제(민하)의 모든 예물(코르반)을 소금으로 소금 칠지니라. 너의 하나님의 언약의 소금을 너의 소제 위에서 그치게 하지 말지니라. 너의 모든 예물 위에 소금을 드릴지니라.
+1 וְכָל־ = and every
+2 קָרְבַּן = present of
+3 מִנְחָתְךָ = grain offering your
+4 בַּמֶּלַח = with <the> salt
+5 תִּמְלָח = you will salt (to salt)
+6 וְלֹא = and not (not)
+7 תַשְׁבִּית = you must cause to cease (to cease)
+8 מֶלַח = [the] salt of
+9 בְּרִית = [the] covenant of (covenant)
+10 אֱלֹהֶיךָ = God your (God)
+11 מֵעַל = from on
+12 מִנְחָתֶךָ = grain offering your
+13 עַל = with
+14 כָּל־ = every
+15 קָרְבָּנְךָ = present your
+16 תַּקְרִיב = you will present (to present)
+17 מֶלַח ס = salt
+
+## 3:2:14
+KO: 네가 여호와께 첫 이삭의 소제를 예물로 드리려거든, 불에 볶은 아비브(햇곡식)를 찧은 것으로 네 첫 이삭의 소제를 삼을지니라.
+1 וְאִם־ = and if (if)
+2 תַּקְרִיב = you will present
+3 מִנְחַת = a grain offering of
+4 בִּכּוּרִים = first-fruits
+5 לַיהוָה = to Yahweh (LORD)
+6 אָבִיב = young barley ear[s] (Abib)
+7 קָלוּי = roasted (to roast)
+8 בָּאֵשׁ = in the fire (fire)
+9 גֶּרֶשׂ = groats of (crushed grain)
+10 כַּרְמֶל = new corn (plantation)
+11 תַּקְרִיב = you will present
+12 אֵת = <obj.> ([Obj.])
+13 מִנְחַת = [the] grain offering of
+14 בִּכּוּרֶיךָ = first-fruits your
+
+## 3:2:15
+KO: 그리고 너는 그것 위에 기름을 줄 것이요, 그리고 그것 위에 유향을 둘 것이니, 그것은 소제라.
+1 וְנָתַתָּ = and you will put (to give)
+2 עָלֶיהָ = on it
+3 שֶׁמֶן = oil
+4 וְשַׂמְתָּ = and you will place (to set)
+5 עָלֶיהָ = on it
+6 לְבֹנָה = frankincense
+7 מִנְחָה = [is] a grain offering (offering)
+8 הִוא = it (he;_she;_it)
+
+## 3:2:16
+KO: 그리고 제사장은 그 찧은 곡식과 그 기름에서 그 기념물을 그 모든 유향 위에 불사를지니, 이는 여호와께 드리는 화제니라.
+1 וְהִקְטִיר = and he will make smoke (to offer)
+2 הַכֹּהֵן = the priest (priest)
+3 אֶת־ = <obj.> ([Obj.])
+4 אַזְכָּרָתָהּ = memorial offering its (memorial)
+5 מִגִּרְשָׂהּ = some of groats its (crushed grain)
+6 וּמִשַּׁמְנָהּ = and some of oil its (oil)
+7 עַל = with (upon)
+8 כָּל־ = all
+9 לְבֹנָתָהּ = frankincense its (frankincense)
+10 אִשֶּׁה = a fire offering (burnt offering)
+11 לַיהוָה פ = to Yahweh (LORD)
+
+## 3:3:1
+KO: 만일 그의 예물이 화목제의 희생제물이고, 만일 그가 소 떼 중에서 그것을 드리려거든, 수컷이든 암컷이든 흠 없는 것으로 그는 여호와 앞에 드릴지니라.
+1 וְאִם־ = and if
+2 זֶבַח = [is] a sacrifice of (sacrifice)
+3 שְׁלָמִים = peace offering<s> (peace offering)
+4 קָרְבָּנוֹ = present his (offering)
+5 אִם = if
+6 מִן־ = one of (from)
+7 הַבָּקָר = the herd (cattle)
+8 הוּא = he (he;_she;_it)
+9 מַקְרִיב = [is] presenting
+10 אִם־ = whether
+11 זָכָר = a male (male)
+12 אִם־ = or
+13 נְקֵבָה = a female (female)
+14 תָּמִים = unblemished
+15 יַקְרִיבֶנּוּ = he will present it
+16 לִפְנֵי = <to> before (face)
+17 יְהוָה = Yahweh (LORD)
+
+## 3:3:2
+KO: 그리고 그가 그의 손을 그의 예물의 머리 위에 얹을 것이며, 회막 문에서 그것을 잡을 것이요, 아론의 자손 제사장들은 그 피를 제단 위에 사면으로 뿌릴 것이니라.
+1 וְסָמַךְ = and he will lean (to support)
+2 יָדוֹ = hand his (hand)
+3 עַל־ = on
+4 רֹאשׁ = [the] head of (head)
+5 קָרְבָּנוֹ = present his (offering)
+6 וּשְׁחָטוֹ = and he will cut throat its (to slaughter)
+7 פֶּתַח = [the] entrance of (entrance)
+8 אֹהֶל = [the] tent of (tent)
+9 מוֹעֵד = meeting
+10 וְזָרְקוּ = and they will sprinkle (to scatter)
+11 בְּנֵי = [the] sons of (son)
+12 אַהֲרֹן = Aaron
+13 הַכֹּהֲנִים = the priests (priest)
+14 אֶת־ = <obj.> ([Obj.])
+15 הַדָּם = the blood (blood)
+16 עַל־ = on
+17 הַמִּזְבֵּחַ = the altar (altar)
+18 סָבִיב = all around (around)
+
+## 3:3:3
+KO: 그리고 그는 화목제 희생 중에서 여호와께 화제를 드릴지니, 곧 내장을 덮는 기름과 내장 위에 있는 모든 기름이니라.
+1 וְהִקְרִיב = and he will present (to present)
+2 מִזֶּבַח = from [the] sacrifice of (sacrifice)
+3 הַשְּׁלָמִים = the peace offering<s> (peace offering)
+4 אִשֶּׁה = a fire offering (burnt offering)
+5 לַיהוָה = to Yahweh (LORD)
+6 אֶת־ = <obj.>
+7 הַחֵלֶב = the fat
+8 הַמְכַסֶּה = which covers (to cover)
+9 אֶת־ = <obj.>
+10 הַקֶּרֶב = the entrails
+11 וְאֵת = and <obj.>
+12 כָּל־ = all
+13 הַחֵלֶב = the fat
+14 אֲשֶׁר = which
+15 עַל־ = [is] on (upon)
+16 הַקֶּרֶב = the entrails
+
+## 3:3:4
+KO: 두 콩팥과 그 위의 기름, 곧 허리 근방에 있는 것과, 간 위에 있는 꺼풀을 콩팥과 함께 그것을 떼어낼 것이요.
+1 וְאֵת = and <obj.>
+2 שְׁתֵּי = [the] two (two)
+3 הַכְּלָיֹת = the kidneys
+4 וְאֶת־ = and <obj.>
+5 הַחֵלֶב = the fat (fat)
+6 אֲשֶׁר = which
+7 עֲלֵהֶן = [is] on them
+8 אֲשֶׁר = which
+9 עַל־ = [is] on
+10 הַכְּסָלִים = the loins (loin)
+11 וְאֶת־ = and <obj.>
+12 הַיֹּתֶרֶת = the lobe (lobe)
+13 עַל־ = on
+14 הַכָּבֵד = the liver (liver)
+15 עַל־ = on
+16 הַכְּלָיוֹת = the kidneys
+17 יְסִירֶנָּה = he will remove it (to turn aside)
+
+## 3:3:5
+KO: 그리고 아론의 자손들은 그것을 제단 위에서, 불 위에 있는 나무 위 번제물 위에 살라야 하니, 이는 여호와께 드리는 향기로운 냄새가 나는 화제이다.
+1 וְהִקְטִירוּ = and they will make smoke (to offer)
+2 אֹתוֹ = <obj.> it ([Obj.])
+3 בְנֵי־ = [the] sons of (son)
+4 אַהֲרֹן = Aaron
+5 הַמִּזְבֵּחָה = the altar towards (altar)
+6 עַל־ = on
+7 הָעֹלָה = the burnt offering (burnt offering)
+8 אֲשֶׁר = which
+9 עַל־ = [is] on
+10 הָעֵצִים = the wood<s> (tree)
+11 אֲשֶׁר = which
+12 עַל־ = [are] on
+13 הָאֵשׁ = the fire (fire)
+14 אִשֵּׁה = a fire offering of (burnt offering)
+15 רֵיחַ = an odor of (aroma)
+16 נִיחֹחַ = soothing
+17 לַיהוָה פ = to Yahweh (LORD)
+
+## 3:3:6
+KO: 만약 여호와께 화목제의 희생으로 드리는 그의 예물이 양 떼 중에서라면, 수컷이나 암컷이나 흠 없는 것으로 그것을 드릴지니라.
+1 וְאִם־ = and if (if)
+2 מִן־ = [is] one of (from)
+3 הַצֹּאן = the flock (flock)
+4 קָרְבָּנוֹ = present his (offering)
+5 לְזֶבַח = to a sacrifice of (sacrifice)
+6 שְׁלָמִים = peace offering<s> (peace offering)
+7 לַיהוָה = to Yahweh (LORD)
+8 זָכָר = a male (male)
+9 אוֹ = or
+10 נְקֵבָה = a female (female)
+11 תָּמִים = unblemished
+12 יַקְרִיבֶנּוּ = he will present it (to present)
+
+## 3:3:7
+KO: 만약 그의 예물로 드리는 것이 어린 양이라면, 그는 그것을 여호와 앞(얼굴)으로 끌어올지니라.
+1 אִם־ = if
+2 כֶּשֶׂב = a young ram (sheep)
+3 הוּא־ = he (he;_she;_it)
+4 מַקְרִיב = [is] presenting
+5 אֶת־ = <obj.>
+6 קָרְבָּנוֹ = present his (offering)
+7 וְהִקְרִיב = and he will present
+8 אֹתוֹ = <obj.> it
+9 לִפְנֵי = <to> before (face)
+10 יְהוָה = Yahweh (LORD)
+
+## 3:3:8
+KO: 그리고 그(제사 드리는 자)가 그의 손을 그의 예물의 머리 위에 얹을 것이요, 그리고 그(제사 드리는 자)가 그것을 만남의 장막 앞에서 잡을 것이며, 아론의 자손들은 그 피를 제단 위에 사면으로 뿌릴 것이다.
+1 וְסָמַךְ = and he will lean (to support)
+2 אֶת־ = <obj.>
+3 יָדוֹ = hand his (hand)
+4 עַל־ = on
+5 רֹאשׁ = [the] head of (head)
+6 קָרְבָּנוֹ = present his (offering)
+7 וְשָׁחַט = and he will cut [the] throat of (to slaughter)
+8 אֹתוֹ = <obj.> it
+9 לִפְנֵי = <to> before (face)
+10 אֹהֶל = [the] tent of (tent)
+11 מוֹעֵד = meeting
+12 וְזָרְקוּ = and they will sprinkle (to scatter)
+13 בְּנֵי = [the] sons of (son)
+14 אַהֲרֹן = Aaron
+15 אֶת־ = <obj.>
+16 דָּמוֹ = blood its (blood)
+17 עַל־ = on
+18 הַמִּזְבֵּחַ = the altar (altar)
+19 סָבִיב = all around (around)
+
+## 3:3:9
+KO: 그리고 그는 화목제 희생물 중에서 여호와께 화제로 그 기름, 곧 미려골(척추) 바로 옆에서 떼어낼 흠 없는 꼬리 전체와 내장을 덮는 기름과 내장에 붙은 모든 기름을 드릴 것이며.
+1 וְהִקְרִיב = and he will present (to present)
+2 מִזֶּבַח = from [the] sacrifice of (sacrifice)
+3 הַשְּׁלָמִים = the peace offering<s> (peace offering)
+4 אִשֶּׁה = a fire offering (burnt offering)
+5 לַיהוָה = to Yahweh (LORD)
+6 חֶלְבּוֹ = fat its
+7 הָאַלְיָה = the fat tail (fat tail)
+8 תְמִימָה = complete (unblemished)
+9 לְעֻמַּת = <to> close to (close)
+10 הֶעָצֶה = the backbone (spine)
+11 יְסִירֶנָּה = he will remove it (to turn aside)
+12 וְאֶת־ = and <obj.>
+13 הַחֵלֶב = the fat
+14 הַמְכַסֶּה = which covers (to cover)
+15 אֶת־ = <obj.>
+16 הַקֶּרֶב = the entrails
+17 וְאֵת = and <obj.>
+18 כָּל־ = all
+19 הַחֵלֶב = the fat
+20 אֲשֶׁר = which
+21 עַל־ = [is] on (upon)
+22 הַקֶּרֶב = the entrails
+
+## 3:3:10
+KO: 두 콩팥과 그 위에 있는 기름, 곧 허리 근방에 있는 그것과, 간 위에 있는 꺼풀을 콩팥과 함께 그것을 떼어낼 것이다.
+1 וְאֵת = and <obj.>
+2 שְׁתֵּי = [the] two (two)
+3 הַכְּלָיֹת = the kidneys
+4 וְאֶת־ = and <obj.>
+5 הַחֵלֶב = the fat (fat)
+6 אֲשֶׁר = which
+7 עֲלֵהֶן = [is] on them
+8 אֲשֶׁר = which
+9 עַל־ = [is] on
+10 הַכְּסָלִים = the loins (loin)
+11 וְאֶת־ = and <obj.>
+12 הַיֹּתֶרֶת = the lobe (lobe)
+13 עַל־ = on
+14 הַכָּבֵד = the liver (liver)
+15 עַל־ = on
+16 הַכְּלָיֹת = the kidneys
+17 יְסִירֶנָּה = he will remove it (to turn aside)
+
+## 3:3:11
+KO: 그리고 제사장은 그것을 제단 위로 태워 연기를 올릴 것이니, 이는 여호와께 화제로 드리는 음식이다.
+1 וְהִקְטִירוֹ = and he will make smoke it (to offer)
+2 הַכֹּהֵן = the priest (priest)
+3 הַמִּזְבֵּחָה = the altar towards (altar)
+4 לֶחֶם = food of (food)
+5 אִשֶּׁה = a fire offering (burnt offering)
+6 לַיהוָה פ = to Yahweh (LORD)
+
+## 3:3:12
+KO: 그리고 만일 그 예물이 염소라면, 그것을 여호와의 얼굴 앞으로 끌어올지니라.
+1 וְאִם = and if (if)
+2 עֵז = [is] a goat (goat)
+3 קָרְבָּנוֹ = present his (offering)
+4 וְהִקְרִיבוֹ = and he will present it (to present)
+5 לִפְנֵי = <to> before (face)
+6 יְהוָה = Yahweh (LORD)
+
+## 3:3:13
+KO: 그리고 그가 그의 손을 그(제물)의 머리 위에 얹을 것이요, 그가 그를 회막 앞에서 잡을 것이며, 아론의 자손들은 그 피를 제단 위에 사면으로 뿌릴 것이다.
+1 וְסָמַךְ = and he will lean (to support)
+2 אֶת־ = <obj.>
+3 יָדוֹ = hand his (hand)
+4 עַל־ = on
+5 רֹאשׁוֹ = head its (head)
+6 וְשָׁחַט = and he will cut [the] throat of (to slaughter)
+7 אֹתוֹ = <obj.> it
+8 לִפְנֵי = <to> before (face)
+9 אֹהֶל = [the] tent of (tent)
+10 מוֹעֵד = meeting
+11 וְזָרְקוּ = and they will sprinkle (to scatter)
+12 בְּנֵי = [the] sons of (son)
+13 אַהֲרֹן = Aaron
+14 אֶת־ = <obj.>
+15 דָּמוֹ = blood its (blood)
+16 עַל־ = on
+17 הַמִּזְבֵּחַ = the altar (altar)
+18 סָבִיב = all around (around)
+
+## 3:3:14
+KO: 그리고 그는 그의 예물 중에서 여호와께 화제를 드릴 것이니, 곧 내장을 덮는 기름과 내장 위에 있는 모든 기름이라.
+1 וְהִקְרִיב = and he will present (to present)
+2 מִמֶּנּוּ = from it (from)
+3 קָרְבָּנוֹ = present his (offering)
+4 אִשֶּׁה = a fire offering (burnt offering)
+5 לַיהוָה = to Yahweh (LORD)
+6 אֶת־ = <obj.>
+7 הַחֵלֶב = the fat
+8 הַמְכַסֶּה = which covers (to cover)
+9 אֶת־ = <obj.>
+10 הַקֶּרֶב = the entrails
+11 וְאֵת = and <obj.>
+12 כָּל־ = all
+13 הַחֵלֶב = the fat
+14 אֲשֶׁר = which
+15 עַל־ = [is] on (upon)
+16 הַקֶּרֶב = the entrails
+
+## 3:3:15
+KO: 그리고 두 콩팥과 그것들 위에 있는 기름, 곧 허리 근방에 있는 것과, 간 위에 있는 꺼풀을 콩팥과 함께 떼어낼 것이다.
+1 וְאֵת = and <obj.>
+2 שְׁתֵּי = [the] two (two)
+3 הַכְּלָיֹת = the kidneys
+4 וְאֶת־ = and <obj.>
+5 הַחֵלֶב = the fat (fat)
+6 אֲשֶׁר = which
+7 עֲלֵהֶן = [is] on them
+8 אֲשֶׁר = which
+9 עַל־ = [is] on
+10 הַכְּסָלִים = the loins (loin)
+11 וְאֶת־ = and <obj.>
+12 הַיֹּתֶרֶת = the lobe (lobe)
+13 עַל־ = on
+14 הַכָּבֵד = the liver (liver)
+15 עַל־ = on
+16 הַכְּלָיֹת = the kidneys
+17 יְסִירֶנָּה = he will remove it (to turn aside)
+
+## 3:3:16
+KO: 그리고 제사장은 그것들을 제단 위에서 불사를 것이니, 이는 화제(火祭)의 음식이며 향기로운 냄새이다. 모든 기름은 여호와의 것이다.
+1 וְהִקְטִירָם = and he will make smoke them (to offer)
+2 הַכֹּהֵן = the priest (priest)
+3 הַמִּזְבֵּחָה = the altar towards (altar)
+4 לֶחֶם = food of (food)
+5 אִשֶּׁה = a fire offering (burnt offering)
+6 לְרֵיחַ = to an odor of (aroma)
+7 נִיחֹחַ = soothing
+8 כָּל־ = all
+9 חֵלֶב = fat
+10 לַיהוָה = [belongs] to Yahweh (LORD)
+
+## 3:3:17
+KO: 영원한 규례이다, 너희의 모든 거주지에서 너희의 세대들을 위하여. 모든 기름과 모든 피를 너희는 먹지 말라.
+1 חֻקַּת = a statute of (statute)
+2 עוֹלָם = perpetuity (forever)
+3 לְדֹרֹתֵיכֶם = to generations your (generation)
+4 בְּכֹל = in all
+5 מוֹשְׁבֹתֵיכֶם = dwelling places your (seat)
+6 כָּל־ = any
+7 חֵלֶב = fat
+8 וְכָל־ = and any
+9 דָּם = blood
+10 לֹא = not
+11 תֹאכֵלוּ פ = you must eat (to eat)
+
+## 3:4:1
+KO: 그리고 여호와께서 모세에게 말씀하여 이르셨다.
+1 וַיְדַבֵּר = and he spoke (to speak)
+2 יְהוָה = Yahweh (LORD)
+3 אֶל־ = to (to(wards))
+4 מֹשֶׁה = Moses
+5 לֵּאמֹר = <to> saying (to say)
+
+## 3:4:2
+KO: 이스라엘 자손에게 말하여 이르라. 어떤 사람이 여호와의 모든 명령 중에서 행하여져서는 안 될 하나라도 그릇 범하여 그중 하나라도 행하면,
+1 דַּבֵּר = speak (to speak)
+2 אֶל־ = to (to(wards))
+3 בְּנֵי = [the] people of (son)
+4 יִשְׂרָאֵל = Israel
+5 לֵאמֹר = <to> saying (to say)
+6 נֶפֶשׁ = anyone (soul)
+7 כִּי־ = that (for)
+8 תֶחֱטָא = it will sin (to sin)
+9 בִשְׁגָגָה = by inadvertence (unintentionally)
+10 מִכֹּל = any of all (all)
+11 מִצְוֹת = [the] commandments of (commandment)
+12 יְהוָה = Yahweh (LORD)
+13 אֲשֶׁר = which
+14 לֹא = not
+15 תֵעָשֶׂינָה = they will be done
+16 וְעָשָׂה = and he will do
+17 מֵאַחַת = any one (one)
+18 מֵהֵנָּה = of them (them)
+
+## 3:4:3
+KO: 만약 기름 부음을 받은 제사장이 백성의 죄책을 위하여 범죄하였다면, 그가 범한 자신의 죄를 위하여 흠 없는 수소(소의 아들)를 여호와께 속죄제물로 드릴지니라.
+1 אִם = if
+2 הַכֹּהֵן = the priest (priest)
+3 הַמָּשִׁיחַ = <the> anointed (anointed)
+4 יֶחֱטָא = he will sin
+5 לְאַשְׁמַת = to [the] guilt of (guiltiness)
+6 הָעָם = the people (people)
+7 וְהִקְרִיב = and he will present (to present)
+8 עַל = on (upon)
+9 חַטָּאתוֹ = sin his
+10 אֲשֶׁר = which
+11 חָטָא = he sinned
+12 פַּר = a bull (bullock)
+13 בֶּן־ = a young one of (son)
+14 בָּקָר = [the] herd (cattle)
+15 תָּמִים = unblemished
+16 לַיהוָה = to Yahweh (LORD)
+17 לְחַטָּאת = to a sin offering
+
+## 3:4:4
+KO: 그리고 그가 그 수송아지를 회막의 입구, 곧 여호와의 앞(면전)으로 가져올 것이며, 그가 그 수송아지의 머리 위에 그의 손을 얹고, 그 수송아지를 여호와 앞에서 잡을 것이다.
+1 וְהֵבִיא = and he will bring (to come (in))
+2 אֶת־ = <obj.>
+3 הַפָּר = the bull
+4 אֶל־ = to (to(wards))
+5 פֶּתַח = [the] entrance of (entrance)
+6 אֹהֶל = [the] tent of (tent)
+7 מוֹעֵד = meeting
+8 לִפְנֵי = <to> before
+9 יְהוָה = Yahweh
+10 וְסָמַךְ = and he will lean (to support)
+11 אֶת־ = <obj.>
+12 יָדוֹ = hand his (hand)
+13 עַל־ = on (upon)
+14 רֹאשׁ = [the] head of (head)
+15 הַפָּר = the bull
+16 וְשָׁחַט = and he will cut [the] throat of (to slaughter)
+17 אֶת־ = <obj.>
+18 הַפָּר = the bull
+19 לִפְנֵי = <to> before
+20 יְהוָה = Yahweh

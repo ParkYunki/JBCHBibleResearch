@@ -1,0 +1,139 @@
+## 2:14:31
+KO: 그리고 이스라엘이 여호와께서 이집트인들에게 행하신 그 큰 손을 보았다. 그리하여 백성이 여호와를 경외하였고, 여호와와 그의 종 모세를 믿었다.
+1 וַיַּרְא = and it saw (to see)
+2 יִשְׂרָאֵל = Israel
+3 אֶת־ = <obj.>
+4 הַיָּד = the hand (hand)
+5 הַגְּדֹלָה = <the> great (great)
+6 אֲשֶׁר = which
+7 עָשָׂה = he had used (to make)
+8 יְהוָה = Yahweh
+9 בְּמִצְרַיִם = on Egypt (Egypt)
+10 וַיִּירְאוּ = and they feared (to fear)
+11 הָעָם = the people (people)
+12 אֶת־ = <obj.>
+13 יְהוָה = Yahweh
+14 וַיַּאֲמִינוּ = and they believed (be faithful)
+15 בַּיהוָה = in Yahweh
+16 וּבְמֹשֶׁה = and in Moses (Moses)
+17 עַבְדּוֹ פ = servant his (servant;_slave)
+
+## 2:15:1
+KO: 그때에 모세와 이스라엘 자손이 이 노래를 여호와께 노래하였다. 그들이 말하기를 "내가 여호와께 노래하리니, 이는 그가 높고 영화로우심이요, 말과 그 탄 자를 바다에 던지셨음이라."
+1 אָז = then
+2 יָשִׁיר־ = he sang
+3 מֹשֶׁה = Moses
+4 וּבְנֵי = and [the] people of (son)
+5 יִשְׂרָאֵל = Israel
+6 אֶת־ = <obj.> ([Obj.])
+7 הַשִּׁירָה = the song (song)
+8 הַזֹּאת = <the> this (this)
+9 לַיהוָה = to Yahweh
+10 וַיֹּאמְרוּ = and they said
+11 לֵאמֹר = <to> saying
+12 אָשִׁירָה = I will sing
+13 לַיהוָה = to Yahweh
+14 כִּי־ = for
+15 גָאֹה = certainly <to exalted>
+16 גָּאָה = he is exalted
+17 סוּס = [the] horse (horse)
+18 וְרֹכְבוֹ = and rider its (to ride)
+19 רָמָה = he has thrown (to shoot)
+20 בַיָּם = in the sea (sea)
+
+## 2:15:2
+KO: 나의 힘과 노래가 야훼이시니, 그분이 나에게 구원이 되셨다. 이분은 나의 하나님이시니 내가 그분을 영화롭게 할 것이요, 나의 아버지의 하나님이시니 내가 그분을 높이리라.
+1 עָזִּי = [is] might my (strength)
+2 וְזִמְרָת = and strength (song)
+3 יָהּ = Yahweh (LORD)
+4 וַיְהִי־ = and he has become (to be)
+5 לִי = of me (me)
+6 לִישׁוּעָה = <into> salvation (salvation)
+7 זֶה = this
+8 אֵלִי = [is] God my (God)
+9 וְאַנְוֵהוּ = and I will glorify him (to beautify)
+10 אֱלֹהֵי = [the] God of (God)
+11 אָבִי = father my (father)
+12 וַאֲרֹמְמֶנְהוּ = and I will exalt him (to exalt)
+
+## 2:15:3
+KO: 여호와는 전쟁의 사람, 여호와는 그의 이름이다.
+1 יְהוָה = Yahweh
+2 אִישׁ = [is] a man of (man)
+3 מִלְחָמָה = war (battle)
+4 יְהוָה = Yahweh
+5 שְׁמוֹ = [is] name his (name)
+
+## 2:15:4
+KO: 그분께서 바로의 병거들과 그의 군대를 바다 안으로 던지셨으니, 그의 선택된 장관들이 갈대 바다(홍해) 속으로 잠겼다.
+1 מַרְכְּבֹת = [the] chariots of (chariot)
+2 פַּרְעֹה = Pharaoh
+3 וְחֵילוֹ = and army his (strength)
+4 יָרָה = he has thrown (to shoot)
+5 בַיָּם = in the sea
+6 וּמִבְחַר = and [the] choicest of (best)
+7 שָׁלִשָׁיו = officers his (officer)
+8 טֻבְּעוּ = they have been sunk (to sink)
+9 בְיַם־ = in [the] sea of
+10 סוּף = reed[s] (Red( Sea))
+
+## 2:15:5
+KO: 심연들이 그들을 덮으니, 그들이 돌처럼 깊은 곳들로 내려갔도다.
+1 תְּהֹמֹת = [the] deeps (abyss)
+2 יְכַסְיֻמוּ = they have covered them (to cover)
+3 יָרְדוּ = they went down (to go down)
+4 בִמְצוֹלֹת = in [the] depths (depth)
+5 כְּמוֹ־ = like
+6 אָבֶן = a stone (stone)
+
+## 2:15:6
+KO: 주의 오른손이여, 여호와여, 권능으로 영광스러우시나이다. 주의 오른손이여, 여호와여, 원수를 부수시나이다.
+1 יְמִינְךָ = right [hand] your
+2 יְהוָה = O Yahweh
+3 נֶאְדָּרִי = [was] glorious (be glorious)
+4 בַּכֹּחַ = in <the> power (strength)
+5 יְמִינְךָ = right [hand] your
+6 יְהוָה = O Yahweh
+7 תִּרְעַץ = it shattered (to shatter)
+8 אוֹיֵב = [the] enemy (enemy)
+
+## 2:15:7
+KO: 그리고 주의 큰 위엄으로 주께서 일어나는 자들을 무너뜨리시나이다. 주께서 주의 진노를 보내시니, 그것이 그들을 지푸라기처럼 삼키나이다.
+1 וּבְרֹב = and in [the] greatness of (abundance)
+2 גְּאוֹנְךָ = majesty your (pride)
+3 תַּהֲרֹס = you threw down (to overthrow)
+4 קָמֶיךָ = [those who] rose against you (to arise)
+5 תְּשַׁלַּח = you sent forth (to send)
+6 חֲרֹנְךָ = anger your (burning anger)
+7 יֹאכְלֵמוֹ = it consumed them (to eat)
+8 כַּקַּשׁ = like <the> stubble (stubble)
+
+## 2:15:8
+KO: 그리고 당신의 코의 영(콧김)으로 물들이 쌓였고, 흐르는 것들의 더미처럼 섰으며, 깊은 바다들의 중심에서 얼어붙었나이다.
+1 וּבְרוּחַ = and by [the] breath of (spirit)
+2 אַפֶּיךָ = nostrils your (face)
+3 נֶעֶרְמוּ = they were piled up (to pile up)
+4 מַיִם = [the] waters (water)
+5 נִצְּבוּ = they stood up (to stand)
+6 כְמוֹ־ = like
+7 נֵד = a heap (heap)
+8 נֹזְלִים = streams (to flow)
+9 קָפְאוּ = they congealed (to congeal)
+10 תְהֹמֹת = [the] deeps (abyss)
+11 בְּלֶב־ = in [the] heart of (heart)
+12 יָם = [the] sea (sea)
+
+## 2:15:9
+KO: 대적이 말하였다. "내가 뒤쫓아, 내가 따라잡아, 내가 탈취물을 나누리라. 내 영혼이 그들로 채워지리라. 내가 내 칼을 뽑으리니, 내 손이 그들을 차지하리라."
+1 אָמַר = he said (to say)
+2 אוֹיֵב = [the] enemy (enemy)
+3 אֶרְדֹּף = I will pursue (to pursue)
+4 אַשִּׂיג = I will overtake (to overtake)
+5 אֲחַלֵּק = I will divide (to divide)
+6 שָׁלָל = [the] plunder (spoil)
+7 תִּמְלָאֵמוֹ = it will be full of them (to fill)
+8 נַפְשִׁי = self my (soul)
+9 אָרִיק = I will draw (to empty)
+10 חַרְבִּי = sword my (sword)
+11 תּוֹרִישֵׁמוֹ = it will dispossess them (to possess)
+12 יָדִי = hand my (hand)

@@ -1,0 +1,167 @@
+## 11:6:4
+KO: 그리고 그는 그 집을 위하여 좁고 닫힌 창문들을 만들었다.
+1 וַיַּעַשׂ = and he made (to make)
+2 לַבָּיִת = for the house (house)
+3 חַלּוֹנֵי = windows of (window)
+4 שְׁקֻפִים = frames (frame)
+5 אֲטֻמִים = shut (to shutter)
+
+## 11:6:5
+KO: 그리고 그가 성전의 벽 위에, 곧 그 성전의 벽들을 둘러싼 성소와 지성소를 향하여 다락(층)을 건축하였다. 그리고 그가 사방으로 골방들을 만들었다.
+1 וַיִּבֶן = and he built (to build)
+2 עַל־ = on (upon)
+3 קִיר = [the] wall of
+4 הַבַּיִת = the house
+5 יָצִיעַ = an extension (floor)
+6 סָבִיב = all around
+7 אֶת־ = <obj.> ([Obj.])
+8 קִירוֹת = [the] walls of
+9 הַבַּיִת = the house
+10 סָבִיב = around
+11 לַהֵיכָל = <to> the temple (temple)
+12 וְלַדְּבִיר = and <to> the innermost room (oracle)
+13 וַיַּעַשׂ = and he made (to make)
+14 צְלָעוֹת = side-chambers (side)
+15 סָבִיב = all around
+
+## 11:6:6
+KO: 하층 다락의 너비는 다섯 규빗이고, 중층의 너비는 여섯 규빗이고, 제삼층의 너비는 일곱 규빗이다. 이는 그가 성전 밖으로 돌아가며 턱들을 두어, 들보들이 성전 벽들에 박히지 않게 하려 함이었더라.
+1 הַיָּצִיעַ = the extension (floor)
+2 הַתַּחְתֹּנָה = <the> lower (lower)
+3 חָמֵשׁ = [was] five (five)
+4 בָּאַמָּה = by the cubit
+5 רָחְבָּהּ = breadth its
+6 וְהַתִּיכֹנָה = and the middle [extension] (middle)
+7 שֵׁשׁ = [was] six (six)
+8 בָּאַמָּה = by the cubit
+9 רָחְבָּהּ = breadth its
+10 וְהַשְּׁלִישִׁית = and <the> third [extension] (third)
+11 שֶׁבַע = [was] seven (seven)
+12 בָּאַמָּה = by the cubit
+13 רָחְבָּהּ = breadth its
+14 כִּי = for
+15 מִגְרָעוֹת = ledges (recess)
+16 נָתַן = he made (to give)
+17 לַבַּיִת = for the house
+18 סָבִיב = around
+19 חוּצָה = [the] outside towards (outside)
+20 לְבִלְתִּי = to not (lest)
+21 אֲחֹז = to have hold (to grasp)
+22 בְּקִירוֹת־ = in [the] walls of (wall)
+23 הַבָּיִת = the house
+
+## 11:6:7
+KO: 그리고 그 집은 건축될 때에, 채석장에서 가져온 다듬어진 돌로 건축되었으니, 그 집이 건축되는 동안에 망치와 도끼와 모든 철 연장 소리가 그 집 안에서 들리지 아니하였다.
+1 וְהַבַּיִת = and the house
+2 בְּהִבָּנֹתוֹ = when was built it
+3 אֶבֶן־ = stone
+4 שְׁלֵמָה = perfect (complete)
+5 מַסָּע = quarry
+6 נִבְנָה = it was built
+7 וּמַקָּבוֹת = and hammers (hammer)
+8 וְהַגַּרְזֶן = and <the> axe (axe)
+9 כָּל־ = any (all)
+10 כְּלִי = article of (article|utensil)
+11 בַרְזֶל = iron
+12 לֹא־ = not
+13 נִשְׁמַע = it was heard (to hear)
+14 בַּבַּיִת = in the house
+15 בְּהִבָּנֹתוֹ = when was built it
+
+## 11:6:8
+KO: 중간 층의 옆면 입구는 집의 오른쪽 어깨(옆)에 있었고, 나사 모양의 층계로 그들은 중간 층으로 올라가고, 중간 층에서 세 번째 층으로 (올라가게) 하였다.
+1 פֶּתַח = [the] entrance of (entrance)
+2 הַצֵּלָע = the side-chamber (side)
+3 הַתִּיכֹנָה = <the> middle
+4 אֶל־ = [was] to
+5 כֶּתֶף = [the] side of (shoulder)
+6 הַבַּיִת = the house (house)
+7 הַיְמָנִית = <the> south (right)
+8 וּבְלוּלִּים = and by stairs (stairs)
+9 יַעֲלוּ = people went up (to ascend)
+10 עַל־ = to (upon)
+11 הַתִּיכֹנָה = the middle
+12 וּמִן־ = and from (from)
+13 הַתִּיכֹנָה = the middle
+14 אֶל־ = to
+15 הַשְּׁלִשִׁים = the thirty (third)
+
+## 11:6:9
+KO: 그리고 그가 그 집을 건축하였고, 그것을 마치니라. 그리고 그가 그 집을 서까래들과 백향목 판자들로 덮었느니라.
+1 וַיִּבֶן = and he built (to build)
+2 אֶת־ = <obj.>
+3 הַבַּיִת = the house
+4 וַיְכַלֵּהוּ = and he finished it (to end)
+5 וַיִּסְפֹּן = and he covered (to cover)
+6 אֶת־ = <obj.>
+7 הַבַּיִת = the house
+8 גֵּבִים = beams (beam)
+9 וּשְׂדֵרֹת = and planks (rank)
+10 בָּאֲרָזִים = with <the> cedar<s> (cedar)
+
+## 11:6:10
+KO: 그리고 그는 성전 전체 위에 층(다락)을 건축하였는데, 그 높이는 다섯 규빗이었고, 백향목 나무들로 성전을 붙들게(연결하게) 하였다.
+1 וַיִּבֶן = and he built (to build)
+2 אֶת־ = <obj.>
+3 הַיָּצִיעַ = the extension (floor)
+4 עַל־ = on (upon)
+5 כָּל־ = all
+6 הַבַּיִת = the house
+7 חָמֵשׁ = [was] five (five)
+8 אַמּוֹת = cubits (cubit)
+9 קוֹמָתוֹ = height its (height)
+10 וַיֶּאֱחֹז = and he covered (to grasp)
+11 אֶת־ = <obj.>
+12 הַבַּיִת = the house
+13 בַּעֲצֵי = with wood<s> of (tree)
+14 אֲרָזִים פ = cedar<s> (cedar)
+
+## 11:6:11
+KO: 그리고 여호와의 말씀이 솔로몬에게 임하여 이르되
+1 וַיְהִי = and it came (to be)
+2 דְּבַר־ = [the] word of (word)
+3 יְהוָה = Yahweh (LORD)
+4 אֶל־ = to (to(wards))
+5 שְׁלֹמֹה = Solomon
+6 לֵאמֹר = <to> saying (to say)
+
+## 11:6:12
+KO: 이 집, 네가 건축하고 있는 이것, 만일 네가 나의 규례들 안에서 걷고 나의 법도들을 행하며, 그것들 안에서 행하기 위하여 나의 모든 계명들을 지킨다면, 내가 다윗 네 아버지에게 말했던 나의 말을 너와 함께 확실히 세울 것이다.
+1 הַבַּיִת = the house (house)
+2 הַזֶּה = <the> this (this)
+3 אֲשֶׁר־ = which
+4 אַתָּה = you (you(m.s.))
+5 בֹנֶה = [are] building (to build)
+6 אִם־ = if
+7 תֵּלֵךְ = you will walk
+8 בְּחֻקֹּתַי = in statutes my (statute)
+9 וְאֶת־ = and <obj.>
+10 מִשְׁפָּטַי = judgments my (justice)
+11 תַּעֲשֶׂה = you will observe (to make)
+12 וְשָׁמַרְתָּ = and you will keep (to keep)
+13 אֶת־ = <obj.>
+14 כָּל־ = all
+15 מִצְוֹתַי = commandments my (commandment)
+16 לָלֶכֶת = to walk
+17 בָּהֶם = in <the> them (them)
+18 וַהֲקִמֹתִי = and I will establish (to arise)
+19 אֶת־ = <obj.>
+20 דְּבָרִי = word my (word)
+21 אִתָּךְ = with you (with)
+22 אֲשֶׁר = which
+23 דִּבַּרְתִּי = I spoke (to speak)
+24 אֶל־ = to (to(wards))
+25 דָּוִד = David
+26 אָבִיךָ = father your (father)
+
+## 11:6:13
+KO: 그리고 내가 이스라엘 자손들의 한가운데 거할 것이며, 나의 백성 이스라엘을 버리지 아니할 것이다.
+1 וְשָׁכַנְתִּי = and I will dwell (to dwell)
+2 בְּתוֹךְ = in among (midst)
+3 בְּנֵי = [the] people of (son)
+4 יִשְׂרָאֵל = Israel
+5 וְלֹא = and not (not)
+6 אֶעֱזֹב = I will abandon (to leave)
+7 אֶת־ = <obj.> ([Obj.])
+8 עַמִּי = people my (people)
+9 יִשְׂרָאֵל ס = Israel

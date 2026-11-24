@@ -1,0 +1,173 @@
+## 12:24:18
+KO: 시드기야는 스물한 살이었을 때에 왕이 되었고, 예루살렘에서 열한 해를 다스렸다. 그의 어머니의 이름은 하무달이었으니, 립나 출신 예레미야의 딸이었다.
+1 בֶּן־ = [was] a son of (son)
+2 עֶשְׂרִים = twenty
+3 וְאַחַת = and one
+4 שָׁנָה = year[s]
+5 צִדְקִיָּהוּ = Zedekiah
+6 בְמָלְכוֹ = when became king he
+7 וְאַחַת = and one [plus]
+8 עֶשְׂרֵה = ten
+9 שָׁנָה = year[s]
+10 מָלַךְ = he reigned
+11 בִּירוּשָׁלִָם = in Jerusalem (Jerusalem)
+12 וְשֵׁם = and [the] name of (name)
+13 אִמּוֹ = mother his (mother)
+14 חֲמוּטַל = [was] Hamutal (Hamutal)
+15 בַּת־ = [the] daughter of (daughter)
+16 יִרְמְיָהוּ = Jeremiah
+17 מִלִּבְנָה = from Libnah (Libnah)
+
+## 12:24:19
+KO: 그리고 그가 여호와의 눈들 안에서 악을 행하였으니, 여호야김이 행했던 모든 것과 같았다.
+1 וַיַּעַשׂ = and he did
+2 הָרַע = the evil (bad)
+3 בְּעֵינֵי = in [the] eyes of (eye)
+4 יְהוָה = Yahweh (LORD)
+5 כְּכֹל = according to all (all)
+6 אֲשֶׁר־ = that (which)
+7 עָשָׂה = he had done
+8 יְהוֹיָקִים = Jehoiakim
+
+## 12:24:20
+KO: 이는 여호와의 진노가 예루살렘과 유다 위에 임하여 그분께서 그들을 자신의 면전으로부터 내던지실 때까지였더라. 시드기야가 바벨론 왕을 배반하였더라.
+1 כִּי = for
+2 עַל־ = on
+3 אַף = [the] anger of (face)
+4 יְהוָה = Yahweh (LORD)
+5 הָיְתָה = it happened (to be)
+6 בִירוּשָׁלִַם = in Jerusalem (Jerusalem)
+7 וּבִיהוּדָה = and in Judah (Judah)
+8 עַד־ = until (till)
+9 הִשְׁלִכוֹ = threw he (to throw)
+10 אֹתָם = <obj.> them ([Obj.])
+11 מֵעַל = from on
+12 פָּנָיו = face his (face)
+13 וַיִּמְרֹד = and he rebelled (to rebel)
+14 צִדְקִיָּהוּ = Zedekiah
+15 בְּמֶלֶךְ = against [the] king of (king)
+16 בָּבֶל ס = Babylon
+
+## 12:25:1
+KO: 그리고 그가 그의 통치 제구년 시월 십일에, 그 달 십일에 바벨론 왕 느부갓네살이 그와 그의 모든 군대가 예루살렘 위로 들어와서, 그곳 위에 진을 쳤고, 그곳 주위에 토성을 쌓았다.
+1 וַיְהִי = and it was (to be)
+2 בִשְׁנַת = in [the] year (year)
+3 הַתְּשִׁיעִית = <of the> ninth (ninth)
+4 לְמָלְכוֹ = of reigning his (to reign)
+5 בַּחֹדֶשׁ = in the month
+6 הָעֲשִׂירִי = <the> tenth (tenth)
+7 בֶּעָשׂוֹר = on the ten (ten)
+8 לַחֹדֶשׁ = of the month
+9 בָּא = he came (to come (in))
+10 נְבֻכַדְנֶאצַּר = Nebuchadnezzar
+11 מֶלֶךְ־ = [the] king of (king)
+12 בָּבֶל = Babylon
+13 הוּא = he (he;_she;_it)
+14 וְכָל־ = and all (all)
+15 חֵילוֹ = army his (strength)
+16 עַל־ = on
+17 יְרוּשָׁלִַם = Jerusalem
+18 וַיִּחַן = and he encamped (to camp)
+19 עָלֶיהָ = on it
+20 וַיִּבְנוּ = and they built (to build)
+21 עָלֶיהָ = on it
+22 דָּיֵק = a siege-wall (fort)
+23 סָבִיב = all around (around)
+
+## 12:25:2
+KO: 그리고 그 성이 시드기야 왕 제십일년까지 포위 상태로 들어갔다.
+1 וַתָּבֹא = and it came (to come (in))
+2 הָעִיר = the city (city)
+3 בַּמָּצוֹר = in <the> state of siege (siege)
+4 עַד = until (till)
+5 עַשְׁתֵּי = one [plus] (eleven)
+6 עֶשְׂרֵה = ten
+7 שָׁנָה = year
+8 לַמֶּלֶךְ = of the king (king)
+9 צִדְקִיָּהוּ = Zedekiah
+
+## 12:25:3
+KO: 그 달의 아홉째 날에 그 기근이 그 성읍 안에서 강하여졌고, 그 땅 백성을 위한 양식이 없었더라.
+1 בַּחֹדֶשׁ = in the month
+2 בְּתִשְׁעָה = on [day] nine (nine)
+3 הָרְבִיעִי = - (fourth)
+4 לַחֹדֶשׁ = of the month
+5 וַיֶּחֱזַק = and it was severe (to strengthen)
+6 הָרָעָב = the famine (famine)
+7 בָּעִיר = in the city (city)
+8 וְלֹא־ = and not (not)
+9 הָיָה = it belonged (to be)
+10 לֶחֶם = food
+11 לְעַם = to [the] people of (people)
+12 הָאָרֶץ = the land (land)
+
+## 12:25:4
+KO: 그리고 그 성읍이 뚫리니, 모든 전사의 군사들이 밤에 두 성벽 사이의 문 길, 곧 왕의 동산 곁에 있는 길로 도망하였고, 갈대아 사람들이 성읍을 에워쌌으므로 그(군사들)가 아라바 길로 갔다.
+1 וַתִּבָּקַע = and it was broken into (to break up|open)
+2 הָעִיר = the city
+3 וְכָל־ = and all (all)
+4 אַנְשֵׁי = [the] men of (human)
+5 הַמִּלְחָמָה = <the> war (battle)
+6 הַלַּיְלָה = this night (night)
+7 דֶּרֶךְ = [the] way of
+8 שַׁעַר = [the] gate (gate)
+9 בֵּין = between
+10 הַחֹמֹתַיִם = the two walls (wall)
+11 אֲשֶׁר = which
+12 עַל־ = [was] at
+13 גַּן = [the] garden of (garden)
+14 הַמֶּלֶךְ = the king (king)
+15 וְכַשְׂדִּים = and [the] Chaldeans (Chaldea)
+16 עַל־ = [were] on
+17 הָעִיר = the city
+18 סָבִיב = all around (around)
+19 וַיֵּלֶךְ = and he went (to go)
+20 דֶּרֶךְ = [the] direction of
+21 הָעֲרָבָה = the Arabah (Arabah)
+
+## 12:25:5
+KO: 그리고 갈대아 군대가 그 왕의 뒤를 쫓아갔고, 여리고 평지에서 그를 따라잡았으며, 그의 모든 군대는 그로부터 흩어졌다.
+1 וַיִּרְדְּפוּ = and they pursued (to pursue)
+2 חֵיל־ = [the] army of
+3 כַּשְׂדִּים = [the] Chaldeans (Chaldea)
+4 אַחַר = after
+5 הַמֶּלֶךְ = the king (king)
+6 וַיַּשִּׂגוּ = and they overtook (to overtake)
+7 אֹתוֹ = <obj.> him ([Obj.])
+8 בְּעַרְבוֹת = in [the] plains of (plain)
+9 יְרֵחוֹ = Jericho
+10 וְכָל־ = and all (all)
+11 חֵילוֹ = army his
+12 נָפֹצוּ = they were scattered (to scatter)
+13 מֵעָלָיו = from with <the> him (upon)
+
+## 12:25:6
+KO: 그들이 왕을 잡았고, 그를 립나에 있는 바벨론 왕에게로 데리고 올라갔으며, 그들이 그에게 판결을 내렸다.
+1 וַיִּתְפְּשׂוּ = and they seized (to capture)
+2 אֶת־ = <obj.>
+3 הַמֶּלֶךְ = the king
+4 וַיַּעֲלוּ = and they brought up (to ascend)
+5 אֹתוֹ = <obj.> him
+6 אֶל־ = to (to(wards))
+7 מֶלֶךְ = [the] king of
+8 בָּבֶל = Babylon
+9 רִבְלָתָה = Riblah towards (Riblah)
+10 וַיְדַבְּרוּ = and they spoke (to speak)
+11 אִתּוֹ = with him (with)
+12 מִשְׁפָּט = judgment (justice)
+
+## 12:25:7
+KO: 그리고 시드기야의 아들들을 그들이 그의 눈앞에서 도살하였고, 시드기야의 눈들을 그가 멀게 하였으며, 그를 두 놋 사슬로 결박하여 바벨론으로 데려갔더라.
+1 וְאֶת־ = and <obj.>
+2 בְּנֵי = [the] sons of (son)
+3 צִדְקִיָּהוּ = Zedekiah
+4 שָׁחֲטוּ = they slaughtered (to slaughter)
+5 לְעֵינָיו = to eyes his
+6 וְאֶת־ = and <obj.>
+7 עֵינֵי = [the] eyes of
+8 צִדְקִיָּהוּ = Zedekiah
+9 עִוֵּר = he made blind (to blind)
+10 וַיַּאַסְרֵהוּ = and he bound him (to bind)
+11 בַנְחֻשְׁתַּיִם = with <the> bronze fetters (bronze)
+12 וַיְבִאֵהוּ = and he brought him (to come (in))
+13 בָּבֶל ס = Babylon

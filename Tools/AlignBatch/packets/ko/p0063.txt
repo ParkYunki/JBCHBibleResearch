@@ -1,0 +1,956 @@
+## 3:13:48
+KO: 혹은 날(warp)에나 혹은 씨(mixture)에나, 아마(flax)나 혹은 양털(wool)에나, 혹은 가죽에나 혹은 가죽으로 만든 모든 일(제품)에나.
+1 אוֹ = or
+2 בִשְׁתִי = in warp (warp)
+3 אוֹ = or
+4 בְעֵרֶב = in woof (mixture)
+5 לַפִּשְׁתִּים = of the linen<s> (flax)
+6 וְלַצָּמֶר = and of the wool (wool)
+7 אוֹ = or
+8 בְעוֹר = in a hide
+9 אוֹ = or
+10 בְּכָל־ = in every (all)
+11 מְלֶאכֶת = work of (work)
+12 עוֹר = hide
+
+## 3:13:49
+KO: 그리고 그 환부가 의복이나 가죽이나 날(씨)이나 씨(실)나 가죽으로 만든 모든 기구 위에 푸르스름하거나 불그스름하면, 그것은 나병의 환부이니 제사장에게 보일 것이다.
+1 וְהָיָה = and it will be (to be)
+2 הַנֶּגַע = the plague
+3 יְרַקְרַק = greenish
+4 אוֹ = or
+5 אֲדַמְדָּם = reddish
+6 בַּבֶּגֶד = in the clothing (garment)
+7 אוֹ = or
+8 בָעוֹר = in the hide
+9 אוֹ־ = or
+10 בַשְּׁתִי = in the warp (warp)
+11 אוֹ־ = or
+12 בָעֵרֶב = in the woof (mixture)
+13 אוֹ = or
+14 בְכָל־ = in every (all)
+15 כְּלִי־ = article of (article|utensil)
+16 עוֹר = hide
+17 נֶגַע = [is] a plague of
+18 צָרַעַת = a serious disease (leprosy)
+19 הוּא = it (he;_she;_it)
+20 וְהָרְאָה = and it will be shown to (to see)
+21 אֶת־ = <obj.> ([Obj.])
+22 הַכֹּהֵן = the priest (priest)
+
+## 3:13:50
+KO: 그리고 그 제사장은 그 색점을 볼 것이며, 그 색점을 칠 일 동안 가둘 것이다.
+1 וְרָאָה = and he will see (to see)
+2 הַכֹּהֵן = the priest (priest)
+3 אֶת־ = <obj.>
+4 הַנָּגַע = the plague
+5 וְהִסְגִּיר = and he will shut up (to shut)
+6 אֶת־ = <obj.>
+7 הַנֶּגַע = the plague
+8 שִׁבְעַת = seven
+9 יָמִים = days (day;_when)
+
+## 3:13:51
+KO: 그리고 일곱째 날에 그 색점을 볼지니, 만약 그 색점이 의복이나 날실이나 씨실이나 혹은 가죽으로 만든 모든 일거리에 퍼졌다면, 그것은 악성 나병(짜라아트 마므에레트)이며 그 색점은 부정하다.
+1 וְרָאָה = and he will see (to see)
+2 אֶת־ = <obj.> ([Obj.])
+3 הַנֶּגַע = the plague
+4 בַּיּוֹם = on the day (day;_when)
+5 הַשְּׁבִיעִי = <the> seventh (seventh)
+6 כִּי־ = if (for)
+7 פָשָׂה = it has spread (to spread)
+8 הַנֶּגַע = the plague
+9 בַּבֶּגֶד = in the clothing (garment)
+10 אוֹ־ = or
+11 בַשְּׁתִי = in the warp (warp)
+12 אוֹ־ = or
+13 בָעֵרֶב = in the woof (mixture)
+14 אוֹ = or
+15 בָעוֹר = in the hide
+16 לְכֹל = to all (all)
+17 אֲשֶׁר־ = that (which)
+18 יֵעָשֶׂה = it will be made (to make)
+19 הָעוֹר = the hide
+20 לִמְלָאכָה = into a product (work)
+21 צָרַעַת = [is] a serious disease (leprosy)
+22 מַמְאֶרֶת = malignant (to malign)
+23 הַנֶּגַע = the plague
+24 טָמֵא = [is] unclean (unclean)
+25 הוּא = it (he;_she;_it)
+
+## 3:13:52
+KO: 그리고 그는 그 옷이나 그 날이나 그 씨(털이나 베의)나 가죽으로 만든 모든 기구를 불사를 것이니, 그것에 그 재앙이 있을 것이기 때문이다. 그것은 악성 나병(짜라아트)이니 불에 태워질 것이다.
+1 וְשָׂרַף = and he will burn
+2 אֶת־ = <obj.>
+3 הַבֶּגֶד = the garment (garment)
+4 אוֹ = or
+5 אֶת־ = <obj.>
+6 הַשְּׁתִי = the warp (warp)
+7 אוֹ = or
+8 אֶת־ = <obj.>
+9 הָעֵרֶב = the woof (mixture)
+10 בַּצֶּמֶר = in the wool (wool)
+11 אוֹ = or
+12 בַפִּשְׁתִּים = in the linen<s> (flax)
+13 אוֹ = or
+14 אֶת־ = <obj.>
+15 כָּל־ = every (all)
+16 כְּלִי = <the> article of (article|utensil)
+17 הָעוֹר = <the> hide (skin)
+18 אֲשֶׁר־ = which
+19 יִהְיֶה = it will be (to be)
+20 בוֹ = in <the> it (him)
+21 הַנָּגַע = the plague (plague)
+22 כִּי־ = for
+23 צָרַעַת = [is] a serious disease (leprosy)
+24 מַמְאֶרֶת = malignant (to malign)
+25 הִוא = it (he;_she;_it)
+26 בָּאֵשׁ = with <the> fire (fire)
+27 תִּשָּׂרֵף = it will be burned
+
+## 3:13:53
+KO: 만약 제사장이 보는데, 보라 그 재앙이 그 의복에나, 날실에나, 씨실에나, 또는 가죽으로 만든 모든 도구에 퍼지지 아니하였으면
+1 וְאִם = and if (if)
+2 יִרְאֶה = he will see (to see)
+3 הַכֹּהֵן = the priest (priest)
+4 וְהִנֵּה = and there! (behold)
+5 לֹא־ = not
+6 פָשָׂה = it has spread (to spread)
+7 הַנֶּגַע = the plague (plague)
+8 בַּבֶּגֶד = in the garment (garment)
+9 אוֹ = or
+10 בַשְּׁתִי = in the warp (warp)
+11 אוֹ = or
+12 בָעֵרֶב = in the woof (mixture)
+13 אוֹ = or
+14 בְּכָל־ = in every (all)
+15 כְּלִי־ = article of (article|utensil)
+16 עוֹר = hide (skin)
+
+## 3:13:54
+KO: 그리고 제사장은 명령할 것이니, 그들은 그 안에 환부가 있는 것을 빨게 하고, 그것을 이레 동안 다시 가두어 둘 것이다.
+1 וְצִוָּה = and he will command (to command)
+2 הַכֹּהֵן = the priest (priest)
+3 וְכִבְּסוּ = and they will wash (to wash)
+4 אֵת = <obj.> ([Obj.])
+5 אֲשֶׁר־ = [that] which (which)
+6 בּוֹ = [is] in <the> it (him)
+7 הַנָּגַע = the plague (plague)
+8 וְהִסְגִּירוֹ = and he will shut up it (to shut)
+9 שִׁבְעַת־ = seven
+10 יָמִים = days (day;_when)
+11 שֵׁנִית = a second (second)
+
+## 3:13:55
+KO: 제사장은 그 환부를 씻은 후에 볼 것이니, 보라 그 환부가 그 빛을 바꾸지 아니하고 그 환부가 퍼지지 아니하였으면, 그것은 부정하니 너는 그것을 불로 불사를지니라. 그것은 그(옷/가죽)의 깎인 곳에 있든지 그(옷/가죽)의 대머리에 있든지 침식(패인 상처)이니라.
+1 וְרָאָה = and he will see (to see)
+2 הַכֹּהֵן = the priest (priest)
+3 אַחֲרֵי = after
+4 הֻכַּבֵּס = was washed out (to wash)
+5 אֶת־ = <obj.>
+6 הַנֶּגַע = the plague
+7 וְהִנֵּה = and there! (behold)
+8 לֹא־ = not
+9 הָפַךְ = it has turned (to overturn)
+10 הַנֶּגַע = the plague
+11 אֶת־ = <obj.>
+12 עֵינוֹ = eye its (eye)
+13 וְהַנֶּגַע = and the plague
+14 לֹא־ = not
+15 פָשָׂה = it has spread (to spread)
+16 טָמֵא = [is] unclean (unclean)
+17 הוּא = it
+18 בָּאֵשׁ = with <the> fire (fire)
+19 תִּשְׂרְפֶנּוּ = you will burn it (to burn)
+20 פְּחֶתֶת = [is] a mildew (eating)
+21 הִוא = it
+22 בְּקָרַחְתּוֹ = on bald spot its (baldness)
+23 אוֹ = or
+24 בְגַבַּחְתּוֹ = on bald forehead its (baldness)
+
+## 3:13:56
+KO: 그리고 만일 제사장이 보았는데, 보라, 그 색점이 씻긴 후에 엷어졌으면, 그는 그것을 그 의복에서나, 혹은 그 가죽에서나, 혹은 그 날실에서나, 혹은 그 씨실에서 찢어 버릴 것이다.
+1 וְאִם = and if (if)
+2 רָאָה = he has seen (to see)
+3 הַכֹּהֵן = the priest (priest)
+4 וְהִנֵּה = and there! (behold)
+5 כֵּהָה = it has become dull (to grow dim)
+6 הַנֶּגַע = the plague (plague)
+7 אַחֲרֵי = after
+8 הֻכַּבֵּס = was washed out (to wash)
+9 אֹתוֹ = <obj.> it
+10 וְקָרַע = and he will tear (to tear)
+11 אֹתוֹ = <obj.> it
+12 מִן־ = from
+13 הַבֶּגֶד = the clothing (garment)
+14 אוֹ = or
+15 מִן־ = from
+16 הָעוֹר = the hide (skin)
+17 אוֹ = or
+18 מִן־ = from
+19 הַשְּׁתִי = the warp (warp)
+20 אוֹ = or
+21 מִן־ = from
+22 הָעֵרֶב = the woof (mixture)
+
+## 3:13:57
+KO: 만약 그 의복이나 씨실이나 날실이나 가죽으로 만든 모든 물건에 그것(색점)이 여전히 나타나면, 그것은 번지는 것이니 너는 그 색점이 있는 것을 불로 태울지니라.
+1 וְאִם־ = and if (if)
+2 תֵּרָאֶה = it will appear (to see)
+3 עוֹד = again (still)
+4 בַּבֶּגֶד = in the garment (garment)
+5 אוֹ־ = or
+6 בַשְּׁתִי = in the warp (warp)
+7 אוֹ־ = or
+8 בָעֵרֶב = in the woof (mixture)
+9 אוֹ = or
+10 בְכָל־ = in every (all)
+11 כְּלִי־ = article of (article|utensil)
+12 עוֹר = hide (skin)
+13 פֹּרַחַת = [is] breaking out (to sprout)
+14 הִוא = it (he;_she;_it)
+15 בָּאֵשׁ = with <the> fire (fire)
+16 תִּשְׂרְפֶנּוּ = you will burn it (to burn)
+17 אֵת = <obj.> ([Obj.])
+18 אֲשֶׁר־ = [that] which (which)
+19 בּוֹ = [is] in <the> it (him)
+20 הַנָּגַע = the plague (plague)
+
+## 3:13:58
+KO: 그리고 그 의복, 혹은 그 날실, 혹은 그 씨실, 혹은 가죽으로 된 모든 기구, 네가 빤 것에서 그 재앙이 떠났다면, 그것을 두 번째로 빨아야 하며, 그리하면 정하게 되리라.
+1 וְהַבֶּגֶד = and the garment (garment)
+2 אוֹ־ = or
+3 הַשְּׁתִי = the warp (warp)
+4 אוֹ־ = or
+5 הָעֵרֶב = the woof (mixture)
+6 אוֹ־ = or
+7 כָל־ = every (all)
+8 כְּלִי = <the> article of (article|utensil)
+9 הָעוֹר = <the> hide (skin)
+10 אֲשֶׁר = which
+11 תְּכַבֵּס = you will wash
+12 וְסָר = and it will depart (to turn aside)
+13 מֵהֶם = from <the> them (them)
+14 הַנָּגַע = the plague (plague)
+15 וְכֻבַּס = and it will be washed
+16 שֵׁנִית = a second [time] (second)
+17 וְטָהֵר = and it will be pure (be pure)
+
+## 3:13:59
+KO: 이것은 양털 의복이나 아마포(베)나 씨실이나 날실이나 무릇 가죽으로 만든 모든 물건 안에 있는 나병 색점을 그것을 정하게 하거나 혹은 그것을 부정하게 할(판단하는) 규례이다.
+1 זֹאת = this
+2 תּוֹרַת = [is] [the] legal [procedure] of (instruction)
+3 נֶגַע־ = [the] plague of (plague)
+4 צָרַעַת = [the] serious disease of (leprosy)
+5 בֶּגֶד = [the] clothing of (garment)
+6 הַצֶּמֶר = <the> wool (wool)
+7 אוֹ = or
+8 הַפִּשְׁתִּים = of <the> linen<s> (flax)
+9 אוֹ = or
+10 הַשְּׁתִי = the warp (warp)
+11 אוֹ = or
+12 הָעֵרֶב = the woof (mixture)
+13 אוֹ = or
+14 כָּל־ = every (all)
+15 כְּלִי־ = article of (article|utensil)
+16 עוֹר = hide (skin)
+17 לְטַהֲרוֹ = to declare pure it (be pure)
+18 אוֹ = or
+19 לְטַמְּאוֹ פ = to declare unclean it (to defile)
+
+## 3:14:1
+KO: 그리고 여호와께서 모세에게 말씀하여 이르셨다.
+1 וַיְדַבֵּר = and he spoke (to speak)
+2 יְהוָה = Yahweh (LORD)
+3 אֶל־ = to (to(wards))
+4 מֹשֶׁה = Moses
+5 לֵּאמֹר = <to> saying (to say)
+
+## 3:14:2
+KO: 이것이 나병 환자가 자신의 정결해지는 날에 나병 환자의 법이 될 것이니, 곧 그가 제사장에게로 인도될 것이라.
+1 זֹאת = this
+2 תִּהְיֶה = it will be (to be)
+3 תּוֹרַת = [the] legal [procedure] of (instruction)
+4 הַמְּצֹרָע = the [one who] has a serious skin disease (be leprous)
+5 בְּיוֹם = on [the] day of (day;_when)
+6 טָהֳרָתוֹ = purification his (purifying)
+7 וְהוּבָא = and he will be brought (to come (in))
+8 אֶל־ = to (to(wards))
+9 הַכֹּהֵן = the priest (priest)
+
+## 3:14:3
+KO: 그리고 그 제사장은 진영 밖으로 나갈 것이며, 그 제사장은 볼 것인데, 보라, 나병의 환부가 그 나병 환자로부터 나았으면.
+1 וְיָצָא = and he will go out (to come out)
+2 הַכֹּהֵן = the priest
+3 אֶל־ = to (to(wards))
+4 מִחוּץ = from [the] outside (outside)
+5 לַמַּחֲנֶה = of the camp (camp)
+6 וְרָאָה = and he will see (to see)
+7 הַכֹּהֵן = the priest
+8 וְהִנֵּה = and there! (behold)
+9 נִרְפָּא = it has been healed (to heal)
+10 נֶגַע־ = [the] plague of (plague)
+11 הַצָּרַעַת = the serious skin disease (leprosy)
+12 מִן־ = from
+13 הַצָּרוּעַ = the [one who] had a serious skin disease (be leprous)
+
+## 3:14:4
+KO: 그리고 제사장은 명령할 것이다. 정결함을 받는 자를 위하여 살아 있고 정결한 새 두 마리와 백향목과 홍색 벌레(실)와 우슬초를 가져오라고.
+1 וְצִוָּה = and he will command (to command)
+2 הַכֹּהֵן = the priest (priest)
+3 וְלָקַח = and someone will take (to take)
+4 לַמִּטַּהֵר = for the [one] purifying himself (be pure)
+5 שְׁתֵּי־ = two
+6 צִפֳּרִים = birds (bird)
+7 חַיּוֹת = living (alive)
+8 טְהֹרוֹת = pure (clean)
+9 וְעֵץ = and wood of (tree)
+10 אֶרֶז = cedar
+11 וּשְׁנִי = and scarlet of (scarlet)
+12 תוֹלַעַת = a worm (worm)
+13 וְאֵזֹב = and hyssop (hyssop)
+
+## 3:14:5
+KO: 그리고 제사장은 명령할 것이다, 그 새 하나를 흐르는 물 위의 질그릇 안에서 잡도록.
+1 וְצִוָּה = and he will command (to command)
+2 הַכֹּהֵן = the priest (priest)
+3 וְשָׁחַט = and someone will cut [the] throat of (to slaughter)
+4 אֶת־ = <obj.> ([Obj.])
+5 הַצִּפּוֹר = the bird (bird)
+6 הָאֶחָת = <the> one (one)
+7 אֶל־ = into (to(wards))
+8 כְּלִי־ = a vessel of (article|utensil)
+9 חֶרֶשׂ = earthenware
+10 עַל־ = over (upon)
+11 מַיִם = water
+12 חַיִּים = living (alive)
+
+## 3:14:6
+KO: 그 살아 있는 새를 그가 취할 것이며, 그것과 백향목과 홍색 벌레실과 우슬초를 취하고, 그것들을 흐르는 물 위에서 도살된 새의 피에 찍을지니라.
+1 אֶת־ = <obj.>
+2 הַצִּפֹּר = the bird
+3 הַחַיָּה = <the> living
+4 יִקַּח = he will take (to take)
+5 אֹתָהּ = <obj.> it
+6 וְאֶת־ = and <obj.>
+7 עֵץ = [the] wood of (tree)
+8 הָאֶרֶז = <the> cedar (cedar)
+9 וְאֶת־ = and <obj.>
+10 שְׁנִי = [the] scarlet of (scarlet)
+11 הַתּוֹלַעַת = the worm (worm)
+12 וְאֶת־ = and <obj.>
+13 הָאֵזֹב = the hyssop (hyssop)
+14 וְטָבַל = and he will dip (to dip)
+15 אוֹתָם = <obj.> them
+16 וְאֵת = and <obj.>
+17 הַצִּפֹּר = the bird
+18 הַחַיָּה = <the> living
+19 בְּדַם = in [the] blood of (blood)
+20 הַצִּפֹּר = the bird
+21 הַשְּׁחֻטָה = [which] had the throat cut (to slaughter)
+22 עַל = over (upon)
+23 הַמַּיִם = the water (water)
+24 הַחַיִּים = <the> living
+
+## 3:14:7
+KO: 그리고 나병으로부터 정결하게 되는 자 위에 일곱 번 뿌리고, 그를 정하다 하고, 그 살아 있는 새를 들의 표면 위로 보낼지며.
+1 וְהִזָּה = and he will spatter [it] (to sprinkle)
+2 עַל = on
+3 הַמִּטַּהֵר = the [one] purifying himself
+4 מִן־ = from
+5 הַצָּרַעַת = the serious skin disease (leprosy)
+6 שֶׁבַע = seven
+7 פְּעָמִים = times (beat)
+8 וְטִהֲרוֹ = and he will declare pure him
+9 וְשִׁלַּח = and he will let go (to send)
+10 אֶת־ = <obj.> ([Obj.])
+11 הַצִּפֹּר = the bird (bird)
+12 הַחַיָּה = <the> living (alive)
+13 עַל־ = over
+14 פְּנֵי = [the] surface of (face)
+15 הַשָּׂדֶה = the field (land)
+
+## 3:14:8
+KO: 정결함을 입는 자는 그의 옷들을 빨고 그의 모든 털을 밀고 물로 몸을 씻을 것이며, 그리하면 정하게 될 것이라. 그 후에 진에 들어올 것이나 자기 장막 밖에서 칠 일을 머무를 것이요.
+1 וְכִבֶּס = and he will wash (to wash)
+2 הַמִּטַּהֵר = the [one] purifying himself
+3 אֶת־ = <obj.>
+4 בְּגָדָיו = garments his (garment)
+5 וְגִלַּח = and he will shave (to shave)
+6 אֶת־ = <obj.>
+7 כָּל־ = all
+8 שְׂעָרוֹ = hair his (hair)
+9 וְרָחַץ = and he will wash (to wash)
+10 בַּמַּיִם = with <the> water (water)
+11 וְטָהֵר = and he will be pure
+12 וְאַחַר = and after (after)
+13 יָבוֹא = he will come (to come (in))
+14 אֶל־ = into (to(wards))
+15 הַמַּחֲנֶה = the camp (camp)
+16 וְיָשַׁב = and he will remain (to dwell)
+17 מִחוּץ = from [the] outside (outside)
+18 לְאָהֳלוֹ = of tent his (tent)
+19 שִׁבְעַת = seven
+20 יָמִים = days (day;_when)
+
+## 3:14:9
+KO: 그리고 일곱째 날에 그가 모든 그의 털을 밀 것이니, 곧 그의 머리털과 그의 수염과 그의 눈썹들을 밀고, 그리고 그의 옷들을 빨고, 그리고 물로 그의 살을 씻을 것이라. 그리하면 그가 정하리라.
+1 וְהָיָה = and it will be (to be)
+2 בַיּוֹם = on the day (day;_when)
+3 הַשְּׁבִיעִי = <the> seventh (seventh)
+4 יְגַלַּח = he will shave
+5 אֶת־ = <obj.>
+6 כָּל־ = all
+7 שְׂעָרוֹ = hair his
+8 אֶת־ = <obj.>
+9 רֹאשׁוֹ = head his (head)
+10 וְאֶת־ = and <obj.>
+11 זְקָנוֹ = beard his (beard)
+12 וְאֵת = and <obj.>
+13 גַּבֹּת = [the] eyebrows of (back;_rim;_brow)
+14 עֵינָיו = eyes his (eye)
+15 וְאֶת־ = and <obj.>
+16 כָּל־ = all
+17 שְׂעָרוֹ = hair his
+18 יְגַלֵּחַ = he will shave
+19 וְכִבֶּס = and he will wash (to wash)
+20 אֶת־ = <obj.>
+21 בְּגָדָיו = garments his (garment)
+22 וְרָחַץ = and he will wash (to wash)
+23 אֶת־ = <obj.>
+24 בְּשָׂרוֹ = body his (flesh)
+25 בַּמַּיִם = with <the> water (water)
+26 וְטָהֵר = and he will be pure (be pure)
+
+## 3:14:10
+KO: 그리고 여덟째 날에 그는 흠 없는 어린 수양 둘과 일 년 된 흠 없는 어린 암양 하나와, 기름 섞은 고운 가루 에바 십분의 삼을 소제물로, 그리고 기름 한 록을 취할 것이요.
+1 וּבַיּוֹם = and on the day (day;_when)
+2 הַשְּׁמִינִי = <the> eighth (eighth)
+3 יִקַּח = he will take (to take)
+4 שְׁנֵי־ = two
+5 כְבָשִׂים = male lambs (lamb)
+6 תְּמִימִים = unblemished
+7 וְכַבְשָׂה = and a ewe-lamb (ewe-lamb)
+8 אַחַת = one
+9 בַּת־ = a daughter of (daughter)
+10 שְׁנָתָהּ = year its (year)
+11 תְּמִימָה = unblemished
+12 וּשְׁלֹשָׁה = and three (three)
+13 עֶשְׂרֹנִים = tenths (tenth)
+14 סֹלֶת = fine flour
+15 מִנְחָה = a grain offering (offering)
+16 בְּלוּלָה = mixed (to mix)
+17 בַשֶּׁמֶן = with <the> oil
+18 וְלֹג = and a log (log)
+19 אֶחָד = one
+20 שָׁמֶן = oil
+
+## 3:14:11
+KO: 정결하게 하는 제사장은 정결함을 받는 그 사람과 그것들을 회막 문 앞 여호와 앞에 세울 것이요.
+1 וְהֶעֱמִיד = and he will station (to stand)
+2 הַכֹּהֵן = the priest (priest)
+3 הַמְטַהֵר = who declares pure
+4 אֵת = <obj.> ([Obj.])
+5 הָאִישׁ = the person (man)
+6 הַמִּטַּהֵר = who is purifying himself
+7 וְאֹתָם = and with <the> them (with)
+8 לִפְנֵי = <to> before (face)
+9 יְהוָה = Yahweh (LORD)
+10 פֶּתַח = [the] entrance of (entrance)
+11 אֹהֶל = [the] tent of (tent)
+12 מוֹעֵד = meeting
+
+## 3:14:12
+KO: 그리고 제사장이 그 어린 수양 하나를 취하여 그것을 속건제로, 그리고 기름 한 록을 드리되, 여호와 앞에 그것들을 흔들어 요제로 삼을 것이다.
+1 וְלָקַח = and he will take (to take)
+2 הַכֹּהֵן = the priest (priest)
+3 אֶת־ = <obj.>
+4 הַכֶּבֶשׂ = the male lamb (lamb)
+5 הָאֶחָד = <the> one (one)
+6 וְהִקְרִיב = and he will present (to present)
+7 אֹתוֹ = <obj.> it
+8 לְאָשָׁם = to a guilt offering (guilt (offering))
+9 וְאֶת־ = and <obj.>
+10 לֹג = [the] log of (log)
+11 הַשָּׁמֶן = <the> oil (oil)
+12 וְהֵנִיף = and he will wave (to wave)
+13 אֹתָם = <obj.> them
+14 תְּנוּפָה = a wave-offering (wave offering)
+15 לִפְנֵי = <to> before (face)
+16 יְהוָה = Yahweh (LORD)
+
+## 3:14:13
+KO: 그리고 그는 그 어린양을 속죄제와 번제를 잡는 곳 곧 거룩한 장소에서 잡을 것이니, 왜냐하면 속건제는 속죄제와 같이 그것이 제사장에게 속한 지극히 거룩한 것이기 때문이다.
+1 וְשָׁחַט = and he will cut [the] throat of
+2 אֶת־ = <obj.>
+3 הַכֶּבֶשׂ = the male lamb (lamb)
+4 בִּמְקוֹם = in [the] place
+5 אֲשֶׁר = <of> where (which)
+6 יִשְׁחַט = someone cuts [the] throat of
+7 אֶת־ = <obj.>
+8 הַחַטָּאת = the sin offering
+9 וְאֶת־ = and <obj.>
+10 הָעֹלָה = the burnt offering (burnt offering)
+11 בִּמְקוֹם = in [the] place of
+12 הַקֹּדֶשׁ = <the> holiness
+13 כִּי = for
+14 כַּחַטָּאת = like the sin offering
+15 הָאָשָׁם = the guilt offering (guilt (offering))
+16 הוּא = it
+17 לַכֹּהֵן = [belongs] to the priest (priest)
+18 קֹדֶשׁ = [is] a holy thing of
+19 קָדָשִׁים = holy things
+20 הוּא = it
+
+## 3:14:14
+KO: 그리고 제사장은 그 속건제의 피로부터 취하여, 그 제사장은 정결함을 받는 자의 오른쪽 귀의 귓부리와 그의 오른쪽 손의 엄지와 그의 오른쪽 발의 엄지 위에 바를 것이다.
+1 וְלָקַח = and he will take (to take)
+2 הַכֹּהֵן = the priest
+3 מִדַּם = some of [the] blood of (blood)
+4 הָאָשָׁם = the guilt offering (guilt (offering))
+5 וְנָתַן = and he will put [it] (to give)
+6 הַכֹּהֵן = the priest
+7 עַל־ = on
+8 תְּנוּךְ = [the] lobe of (lobe)
+9 אֹזֶן = [the] ear of (ear)
+10 הַמִּטַּהֵר = the [one] purifying himself (be pure)
+11 הַיְמָנִית = <the> right
+12 וְעַל־ = and on
+13 בֹּהֶן = [the] thumb of
+14 יָדוֹ = hand his (hand)
+15 הַיְמָנִית = <the> right
+16 וְעַל־ = and on
+17 בֹּהֶן = [the] big toe of
+18 רַגְלוֹ = foot his (foot)
+19 הַיְמָנִית = <the> right
+
+## 3:14:15
+KO: 그리고 그 제사장은 그 기름의 ‘로그’ 중에서 취하여, 그 제사장의 왼쪽 손바닥 위에 따를 것이다.
+1 וְלָקַח = and he will take (to take)
+2 הַכֹּהֵן = the priest
+3 מִלֹּג = some of [the] log of (log)
+4 הַשָּׁמֶן = <the> oil (oil)
+5 וְיָצַק = and he will pour [it] (to pour)
+6 עַל־ = on (upon)
+7 כַּף = [the] palm of (palm)
+8 הַכֹּהֵן = the priest
+9 הַשְּׂמָאלִית = <the> left (left)
+
+## 3:14:16
+KO: 그리고 제사장은 그의 오른편 손가락으로 그의 왼편 손바닥 위에 있는 그 기름을 찍을 것이며, 그 기름을 그 손가락으로 여호와의 앞에서 일곱 번 뿌릴 것이다.
+1 וְטָבַל = and he will dip (to dip)
+2 הַכֹּהֵן = the priest (priest)
+3 אֶת־ = <obj.> ([Obj.])
+4 אֶצְבָּעוֹ = finger his
+5 הַיְמָנִית = <the> right (right)
+6 מִן־ = some of
+7 הַשֶּׁמֶן = the oil
+8 אֲשֶׁר = which
+9 עַל־ = [is] on (upon)
+10 כַּפּוֹ = palm his (palm)
+11 הַשְּׂמָאלִית = <the> left (left)
+12 וְהִזָּה = and he will spatter (to sprinkle)
+13 מִן־ = some of
+14 הַשֶּׁמֶן = the oil
+15 בְּאֶצְבָּעוֹ = with finger his
+16 שֶׁבַע = seven
+17 פְּעָמִים = times (beat)
+18 לִפְנֵי = <to> before (face)
+19 יְהוָה = Yahweh (LORD)
+
+## 3:14:17
+KO: 그리고 그 제사장의 손바닥 위에 있는 남은 기름을, 그 제사장은 정결함을 받는 자의 오른쪽 귓부리와 그의 오른쪽 손 엄지 그리고 그의 오른쪽 발 엄지 위에, 그 속건제 제물의 피 위에 바를 것이다.
+1 וּמִיֶּתֶר = and some of [the] remainder of (remainder)
+2 הַשֶּׁמֶן = the oil (oil)
+3 אֲשֶׁר = which
+4 עַל־ = [is] on
+5 כַּפּוֹ = palm his (palm)
+6 יִתֵּן = he will put (to give)
+7 הַכֹּהֵן = the priest (priest)
+8 עַל־ = on
+9 תְּנוּךְ = [the] lobe of (lobe)
+10 אֹזֶן = [the] ear of (ear)
+11 הַמִּטַּהֵר = the [one] purifying himself (be pure)
+12 הַיְמָנִית = <the> right
+13 וְעַל־ = and on
+14 בֹּהֶן = [the] thumb of
+15 יָדוֹ = hand his (hand)
+16 הַיְמָנִית = <the> right
+17 וְעַל־ = and on
+18 בֹּהֶן = [the] big toe of
+19 רַגְלוֹ = foot his (foot)
+20 הַיְמָנִית = <the> right
+21 עַל = on
+22 דַּם = [the] blood of (blood)
+23 הָאָשָׁם = the guilt offering (guilt (offering))
+
+## 3:14:18
+KO: 그리고 그 남은 기름은 제사장이 그 정결함을 받는 자의 머리 위에 바를 것이며, 제사장은 여호와 앞에서 그를 위하여 속죄할지니라.
+1 וְהַנּוֹתָר = and the remainder (to remain)
+2 בַּשֶּׁמֶן = in the oil (oil)
+3 אֲשֶׁר = which
+4 עַל־ = [is] on
+5 כַּף = [the] palm of (palm)
+6 הַכֹּהֵן = the priest
+7 יִתֵּן = he will put (to give)
+8 עַל־ = on
+9 רֹאשׁ = [the] head of (head)
+10 הַמִּטַּהֵר = the [one] purifying himself (be pure)
+11 וְכִפֶּר = and he will make atonement (to atone)
+12 עָלָיו = on him
+13 הַכֹּהֵן = the priest
+14 לִפְנֵי = <to> before (face)
+15 יְהוָה = Yahweh (LORD)
+
+## 3:14:19
+KO: 그리고 제사장은 속죄제를 드리고, 정결하게 되려는 자를 위하여 그의 부정함으로부터 속죄할 것이며, 그 후에 번제물을 잡을 것이다.
+1 וְעָשָׂה = and he will offer (to make)
+2 הַכֹּהֵן = the priest (priest)
+3 אֶת־ = <obj.>
+4 הַחַטָּאת = the sin offering (sin)
+5 וְכִפֶּר = and he will make atonement (to atone)
+6 עַל־ = on (upon)
+7 הַמִּטַּהֵר = the [one] purifying himself (be pure)
+8 מִטֻּמְאָתוֹ = from uncleanness his (uncleanness)
+9 וְאַחַר = and after (after)
+10 יִשְׁחַט = he will cut [the] throat of (to slaughter)
+11 אֶת־ = <obj.>
+12 הָעֹלָה = the burnt offering (burnt offering)
+
+## 3:14:20
+KO: 그리고 제사장은 번제와 소제를 제단 위로 올릴 것이며, 제사장이 그를 위하여 속죄할 것이라. 그리하면 그가 정결하게 될 것이다.
+1 וְהֶעֱלָה = and he will offer up (to ascend)
+2 הַכֹּהֵן = the priest
+3 אֶת־ = <obj.>
+4 הָעֹלָה = the burnt offering (burnt offering)
+5 וְאֶת־ = and <obj.>
+6 הַמִּנְחָה = the grain offering (offering)
+7 הַמִּזְבֵּחָה = the altar towards (altar)
+8 וְכִפֶּר = and he will make atonement (to atone)
+9 עָלָיו = on him (upon)
+10 הַכֹּהֵן = the priest
+11 וְטָהֵר ס = and he will be clean (be pure)
+
+## 3:14:21
+KO: 만일 그가 가난하고 그의 손이 미치지 못하면, 흔듦을 위한 속건제로 어린 수양 하나와 그를 위하여 속죄하기 위한 고운 가루 십분 일 에바에 기름 섞은 것과 기름 한 록을 취할 것이니라.
+1 וְאִם־ = and if (if)
+2 דַּל = [is] poor (poor)
+3 הוּא = he (he;_she;_it)
+4 וְאֵין = and not (nothing)
+5 יָדוֹ = hand his (hand)
+6 מַשֶּׂגֶת = [is] reaching (to overtake)
+7 וְלָקַח = and he will take (to take)
+8 כֶּבֶשׂ = a male lamb (lamb)
+9 אֶחָד = one
+10 אָשָׁם = a guilt offering (guilt (offering))
+11 לִתְנוּפָה = to a wave-offering (wave offering)
+12 לְכַפֵּר = to make atonement (to atone)
+13 עָלָיו = on himself (upon)
+14 וְעִשָּׂרוֹן = and a tenth of (tenth)
+15 סֹלֶת = fine flour
+16 אֶחָד = one
+17 בָּלוּל = mixed (to mix)
+18 בַּשֶּׁמֶן = with <the> oil
+19 לְמִנְחָה = to a grain offering (offering)
+20 וְלֹג = and a log of (log)
+21 שָׁמֶן = oil
+
+## 3:14:22
+KO: 그리고 산비둘기 두 마리 혹은 집비둘기 새끼 두 마리, 곧 그의 손이 미치는 것을 취하여 하나는 속죄제로, 하나는 번제로 삼을지니라.
+1 וּשְׁתֵּי = and two
+2 תֹרִים = turtle-doves (turtledove)
+3 אוֹ = or
+4 שְׁנֵי = two
+5 בְּנֵי = young ones of (son)
+6 יוֹנָה = a dove (dove)
+7 אֲשֶׁר = which
+8 תַּשִּׂיג = it will reach (to overtake)
+9 יָדוֹ = hand his (hand)
+10 וְהָיָה = and it will be (to be)
+11 אֶחָד = one [bird]
+12 חַטָּאת = a sin offering (sin)
+13 וְהָאֶחָד = and the one
+14 עֹלָה = a burnt offering (burnt offering)
+
+## 3:14:23
+KO: 그리고 그는 그것들을 그의 정결을 위하여 여덟째 날에 제사장에게로, 회막 문 입구로, 여호와 앞으로 가져올 것이다.
+1 וְהֵבִיא = and he will bring (to come (in))
+2 אֹתָם = <obj.> them ([Obj.])
+3 בַּיּוֹם = on the day (day;_when)
+4 הַשְּׁמִינִי = <the> eighth (eighth)
+5 לְטָהֳרָתוֹ = for purification his (purifying)
+6 אֶל־ = to
+7 הַכֹּהֵן = the priest (priest)
+8 אֶל־ = to
+9 פֶּתַח = [the] entrance of (entrance)
+10 אֹהֶל־ = [the] tent of (tent)
+11 מוֹעֵד = meeting
+12 לִפְנֵי = <to> before (face)
+13 יְהוָה = Yahweh (LORD)
+
+## 3:14:24
+KO: 그리고 제사장은 그 속건제의 어린 양과 그 기름 한 록을 취하고, 제사장은 그것들을 여호와의 면전에서 흔들어 요제로 삼을 것이다.
+1 וְלָקַח = and he will take (to take)
+2 הַכֹּהֵן = the priest
+3 אֶת־ = <obj.>
+4 כֶּבֶשׂ = [the] male lamb of (lamb)
+5 הָאָשָׁם = the guilt offering (guilt (offering))
+6 וְאֶת־ = and <obj.>
+7 לֹג = [the] log of (log)
+8 הַשָּׁמֶן = <the> oil (oil)
+9 וְהֵנִיף = and he will wave (to wave)
+10 אֹתָם = <obj.> them
+11 הַכֹּהֵן = the priest
+12 תְּנוּפָה = a wave-offering (wave offering)
+13 לִפְנֵי = <to> before (face)
+14 יְהוָה = Yahweh (LORD)
+
+## 3:14:25
+KO: 그리고 그는 속건제의 어린 양을 잡을 것이요, 제사장은 그 속건제의 피로부터 취하여, 정결함을 받는 자의 오른쪽 귀의 귓불과 그의 오른쪽 손 엄지가락과 그의 오른쪽 발 엄지가락 위에 줄 것이다.
+1 וְשָׁחַט = and he will cut [the] throat of (to slaughter)
+2 אֶת־ = <obj.> ([Obj.])
+3 כֶּבֶשׂ = [the] male lamb of (lamb)
+4 הָאָשָׁם = the guilt offering
+5 וְלָקַח = and he will take (to take)
+6 הַכֹּהֵן = the priest (priest)
+7 מִדַּם = some of [the] blood of (blood)
+8 הָאָשָׁם = the guilt offering
+9 וְנָתַן = and he will put [it] (to give)
+10 עַל־ = on
+11 תְּנוּךְ = [the] lobe of (lobe)
+12 אֹזֶן־ = [the] ear of (ear)
+13 הַמִּטַּהֵר = the [one] purifying himself (be pure)
+14 הַיְמָנִית = <the> right
+15 וְעַל־ = and on
+16 בֹּהֶן = [the] thumb of
+17 יָדוֹ = hand his (hand)
+18 הַיְמָנִית = <the> right
+19 וְעַל־ = and on
+20 בֹּהֶן = [the] big toe of
+21 רַגְלוֹ = foot his (foot)
+22 הַיְמָנִית = <the> right
+
+## 3:14:26
+KO: 그리고 그 제사장은 그 기름 중 얼마를 그 제사장의 왼쪽 손바닥 위에 부을 것이며,
+1 וּמִן־ = and some of (from)
+2 הַשֶּׁמֶן = the oil (oil)
+3 יִצֹק = he will pour (to pour)
+4 הַכֹּהֵן = the priest
+5 עַל־ = on (upon)
+6 כַּף = [the] palm of (palm)
+7 הַכֹּהֵן = the priest
+8 הַשְּׂמָאלִית = <the> left (left)
+
+## 3:14:27
+KO: 그리고 제사장이 그의 오른손가락으로 왼손바닥에 있는 기름 중에서 일곱 번 여호와 앞에 뿌릴 것이다.
+1 וְהִזָּה = and he will spatter (to sprinkle)
+2 הַכֹּהֵן = the priest (priest)
+3 בְּאֶצְבָּעוֹ = with finger his (finger)
+4 הַיְמָנִית = <the> right (right)
+5 מִן־ = some of (from)
+6 הַשֶּׁמֶן = the oil (oil)
+7 אֲשֶׁר = which
+8 עַל־ = [is] on (upon)
+9 כַּפּוֹ = palm his (palm)
+10 הַשְּׂמָאלִית = <the> left (left)
+11 שֶׁבַע = seven
+12 פְּעָמִים = times (beat)
+13 לִפְנֵי = <to> before (face)
+14 יְהוָה = Yahweh (LORD)
+
+## 3:14:28
+KO: 그리고 제사장은 그 손바닥에 있는 기름 중에서 정결함을 받는 자의 오른쪽 귓부리와, 오른쪽 손 엄지 손가락과, 오른쪽 발 엄지 발가락 위, 곧 속건제 희생의 피를 바른 곳 위에 바를 것이다.
+1 וְנָתַן = and he will put (to give)
+2 הַכֹּהֵן = the priest (priest)
+3 מִן־ = some of (from)
+4 הַשֶּׁמֶן = the oil (oil)
+5 אֲשֶׁר = which
+6 עַל־ = [is] on
+7 כַּפּוֹ = palm his (palm)
+8 עַל־ = on
+9 תְּנוּךְ = [the] lobe of (lobe)
+10 אֹזֶן = [the] ear of (ear)
+11 הַמִּטַּהֵר = the [one] purifying himself (be pure)
+12 הַיְמָנִית = <the> right
+13 וְעַל־ = and on
+14 בֹּהֶן = [the] thumb of
+15 יָדוֹ = hand his (hand)
+16 הַיְמָנִית = <the> right
+17 וְעַל־ = and on
+18 בֹּהֶן = [the] big toe of
+19 רַגְלוֹ = foot his (foot)
+20 הַיְמָנִית = <the> right
+21 עַל־ = on
+22 מְקוֹם = [the] place of (standing place)
+23 דַּם = [the] blood of (blood)
+24 הָאָשָׁם = the guilt offering (guilt (offering))
+
+## 3:14:29
+KO: 그리고 제사장의 손바닥 위에 있는 기름 중 남은 것을, 제사장은 정결함을 받는 자의 머리 위에 두어 그를 위하여 여호와 앞에서 속죄할 것이다.
+1 וְהַנּוֹתָר = and the remainder (to remain)
+2 מִן־ = of (from)
+3 הַשֶּׁמֶן = the oil (oil)
+4 אֲשֶׁר = which
+5 עַל־ = [is] on
+6 כַּף = [the] palm of (palm)
+7 הַכֹּהֵן = the priest (priest)
+8 יִתֵּן = he will put (to give)
+9 עַל־ = on
+10 רֹאשׁ = [the] head of (head)
+11 הַמִּטַּהֵר = the [one] purifying himself (be pure)
+12 לְכַפֵּר = to make atonement (to atone)
+13 עָלָיו = on him
+14 לִפְנֵי = <to> before (face)
+15 יְהוָה = Yahweh (LORD)
+
+## 3:14:30
+KO: 그리고 그는 산비둘기들 중 하나를, 혹은 비둘기 새끼들 중 하나를, 그의 손이 미치는 것에서부터 드릴지니라.
+1 וְעָשָׂה = and he will offer (to make)
+2 אֶת־ = <obj.> ([Obj.])
+3 הָאֶחָד = the one (one)
+4 מִן־ = of
+5 הַתֹּרִים = the turtle-doves (turtledove)
+6 אוֹ = or
+7 מִן־ = of
+8 בְּנֵי = [the] young ones of (son)
+9 הַיּוֹנָה = the dove (dove)
+10 מֵאֲשֶׁר = from [that] which (from which)
+11 תַּשִּׂיג = it will reach (to overtake)
+12 יָדוֹ = hand his (hand)
+
+## 3:14:31
+KO: 그의 손이 미치는 것 중 하나는 속죄제로, 하나는 소제와 함께 번제로 드릴 것이요, 제사장은 정결함을 받는 자를 위하여 여호와 앞에서 속죄할지니라.
+1 אֵת = <obj.>
+2 אֲשֶׁר־ = [that] which (which)
+3 תַּשִּׂיג = it will reach (to overtake)
+4 יָדוֹ = hand his (hand)
+5 אֶת־ = <obj.>
+6 הָאֶחָד = the one [bird]
+7 חַטָּאת = a sin offering (sin)
+8 וְאֶת־ = and <obj.>
+9 הָאֶחָד = the one
+10 עֹלָה = a burnt offering (burnt offering)
+11 עַל־ = with
+12 הַמִּנְחָה = the grain offering (offering)
+13 וְכִפֶּר = and he will make atonement (to atone)
+14 הַכֹּהֵן = the priest (priest)
+15 עַל = on
+16 הַמִּטַּהֵר = the [one] purifying himself (be pure)
+17 לִפְנֵי = <to> before (face)
+18 יְהוָה = Yahweh (LORD)
+
+## 3:14:32
+KO: 이것은 그 안에 나병의 재앙이 있고 그의 손이 그의 정결함에 미치지 못한 자의 규례이다.
+1 זֹאת = this
+2 תּוֹרַת = [is] [the] legal [procedure] of (instruction)
+3 אֲשֶׁר־ = [one] whom
+4 בּוֹ = [was] in <the> him (him)
+5 נֶגַע = a plague of (plague)
+6 צָרָעַת = a serious skin disease (leprosy)
+7 אֲשֶׁר = who
+8 לֹא־ = not
+9 תַשִּׂיג = it will reach (to overtake)
+10 יָדוֹ = hand his (hand)
+11 בְּטָהֳרָתוֹ פ = for purification his (purifying)
+
+## 3:14:33
+KO: 그리고 여호와께서 모세와 아론에게 말씀하여 이르셨다.
+1 וַיְדַבֵּר = and he spoke (to speak)
+2 יְהוָה = Yahweh (LORD)
+3 אֶל־ = to
+4 מֹשֶׁה = Moses
+5 וְאֶל־ = and to
+6 אַהֲרֹן = Aaron
+7 לֵאמֹר = <to> saying (to say)
+
+## 3:14:34
+KO: 너희가 내가 너희에게 소유로 주는 가나안 땅에 들어갈 때에, 내가 너희 소유의 땅에 있는 집에 나병의 재앙을 둔다면,
+1 כִּי = that (for)
+2 תָבֹאוּ = you will go (to come (in))
+3 אֶל־ = into (to(wards))
+4 אֶרֶץ = [the] land of
+5 כְּנַעַן = Canaan
+6 אֲשֶׁר = which
+7 אֲנִי = I
+8 נֹתֵן = [am] about to give
+9 לָכֶם = to <the> you (you)
+10 לַאֲחֻזָּה = to a possession
+11 וְנָתַתִּי = and I will put
+12 נֶגַע = a plague of (plague)
+13 צָרַעַת = a serious disease (leprosy)
+14 בְּבֵית = in [the] house of (house)
+15 אֶרֶץ = [the] land of
+16 אֲחֻזַּתְכֶם = possession your
+
+## 3:14:35
+KO: 그리고 그 집이 그에게 속한 (그) 주인은 와서 그 제사장에게 고하여 말하기를, "그 집에 마치 한 색점이 나타난 것 같습니다" 할 것이요.
+1 וּבָא = and he will come (to come (in))
+2 אֲשֶׁר־ = [the one] whom (which)
+3 לוֹ = [belongs] to <the> him (him)
+4 הַבַּיִת = the house
+5 וְהִגִּיד = and he will tell (to tell)
+6 לַכֹּהֵן = to the priest (priest)
+7 לֵאמֹר = <to> saying (to say)
+8 כְּנֶגַע = like a plague (plague)
+9 נִרְאָה = it has appeared (to see)
+10 לִי = to <the> me (me)
+11 בַּבָּיִת = in the house
+
+## 3:14:36
+KO: 그리고 제사장은 명령할 것이다. 제사장이 그 재앙을 보러 오기 전에, 그들이 그 집을 비우게 하여 집 안에 있는 모든 것이 부정하게 되지 않게 하기 위함이다. 그리고 그 후에 제사장이 그 집을 보러 올 것이다.
+1 וְצִוָּה = and he will command (to command)
+2 הַכֹּהֵן = the priest
+3 וּפִנּוּ = and people will make clear (to turn)
+4 אֶת־ = <obj.>
+5 הַבַּיִת = the house
+6 בְּטֶרֶם = <in> before (before)
+7 יָבֹא = he will go
+8 הַכֹּהֵן = the priest
+9 לִרְאוֹת = to see
+10 אֶת־ = <obj.>
+11 הַנֶּגַע = the plague (plague)
+12 וְלֹא = and not (not)
+13 יִטְמָא = it will be unclean (to defile)
+14 כָּל־ = all
+15 אֲשֶׁר = that (which)
+16 בַּבָּיִת = [is] in the house
+17 וְאַחַר = and after (after)
+18 כֵּן = thus (so)
+19 יָבֹא = he will go
+20 הַכֹּהֵן = the priest
+21 לִרְאוֹת = to see
+22 אֶת־ = <obj.>
+23 הַבָּיִת = the house
+
+## 3:14:37
+KO: 그리고 그가 그 재앙을 볼 때, 보라 그 집의 벽들에 녹색이거나 붉은색의 우묵한 무늬가 있고, 그것들의 모양이 그 벽보다 낮으면.
+1 וְרָאָה = and he will see (to see)
+2 אֶת־ = <obj.> ([Obj.])
+3 הַנֶּגַע = the plague
+4 וְהִנֵּה = and there! (behold)
+5 הַנֶּגַע = the plague
+6 בְּקִירֹת = [is] in [the] walls of
+7 הַבַּיִת = the house (house)
+8 שְׁקַעֲרוּרֹת = depressions (hollow)
+9 יְרַקְרַקֹּת = greenish
+10 אוֹ = or
+11 אֲדַמְדַּמֹּת = reddish
+12 וּמַרְאֵיהֶן = and appearance their (appearance)
+13 שָׁפָל = [is] deep (low)
+14 מִן־ = more than (from)
+15 הַקִּיר = the wall
+
+## 3:14:38
+KO: 그리고 그 제사장은 그 집으로부터 그 집 입구로 나와서, 그 집을 칠 일 동안 폐쇄할 것이다.
+1 וְיָצָא = and he will go out (to come out)
+2 הַכֹּהֵן = the priest (priest)
+3 מִן־ = from
+4 הַבַּיִת = the house
+5 אֶל־ = to (to(wards))
+6 פֶּתַח = [the] entrance of (entrance)
+7 הַבָּיִת = the house
+8 וְהִסְגִּיר = and he will shut up (to shut)
+9 אֶת־ = <obj.> ([Obj.])
+10 הַבַּיִת = the house
+11 שִׁבְעַת = seven
+12 יָמִים = days (day;_when)

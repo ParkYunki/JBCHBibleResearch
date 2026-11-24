@@ -1,0 +1,151 @@
+## 6:21:29
+KO: 야르뭇과 그 방목지들과, 엔간님과 그 방목지들을 주었으니, 네 성읍이다.
+1 אֶת־ = <obj.>
+2 יַרְמוּת = Jarmuth
+3 וְאֶת־ = and <obj.>
+4 מִגְרָשֶׁהָ = pasture lands its
+5 אֶת־ = <obj.>
+6 עֵין = En
+7 גַּנִּים = Gannim
+8 וְאֶת־ = and <obj.>
+9 מִגְרָשֶׁהָ = pasture lands its
+10 עָרִים = cities (city)
+11 אַרְבַּע ס = four
+
+## 6:21:30
+KO: 그리고 아셀 지파로부터는 미살과 그 방목지들과 압돈과 그 방목지들과
+1 וּמִמַּטֵּה = and from [the] tribe of (tribe)
+2 אָשֵׁר = Asher
+3 אֶת־ = <obj.>
+4 מִשְׁאָל = Mishal
+5 וְאֶת־ = and <obj.>
+6 מִגְרָשֶׁהָ = pasture lands its
+7 אֶת־ = <obj.>
+8 עַבְדּוֹן = Abdon
+9 וְאֶת־ = and <obj.>
+10 מִגְרָשֶׁהָ = pasture lands its
+
+## 6:21:31
+KO: 헬갓과 그 목초지와 르홉과 그 목초지, 네 성읍들이다.
+1 אֶת־ = <obj.>
+2 חֶלְקָת = Helkath
+3 וְאֶת־ = and <obj.>
+4 מִגְרָשֶׁהָ = pasture lands its
+5 וְאֶת־ = and <obj.>
+6 רְחֹב = Rehob
+7 וְאֶת־ = and <obj.>
+8 מִגְרָשֶׁהָ = pasture lands its
+9 עָרִים = cities (city)
+10 אַרְבַּע ס = four
+
+## 6:21:32
+KO: 그리고 납달리 지파로부터 살인자의 도피성인 갈릴리의 게데스와 그 목초지들을, 그리고 함못 돌과 그 목초지들을, 그리고 가르단과 그 목초지들을 주었으니, 세 성읍이라.
+1 וּמִמַּטֵּה = and from [the] tribe of (tribe)
+2 נַפְתָּלִי = Naphtali
+3 אֶת־ = <obj.>
+4 עִיר = [the] city of
+5 מִקְלַט = <the> refuge of (refuge)
+6 הָרֹצֵחַ = the killer (to murder)
+7 אֶת־ = <obj.>
+8 קֶדֶשׁ = Kedesh
+9 בַּגָּלִיל = in <the> Galilee (Galilee)
+10 וְאֶת־ = and <obj.>
+11 מִגְרָשֶׁהָ = pasture lands its
+12 וְאֶת־ = and <obj.>
+13 חַמֹּת = Hammoth
+14 דֹּאר = Dor
+15 וְאֶת־ = and <obj.>
+16 מִגְרָשֶׁהָ = pasture lands its
+17 וְאֶת־ = and <obj.>
+18 קַרְתָּן = Kartan
+19 וְאֶת־ = and <obj.>
+20 מִגְרָשֶׁהָ = pasture lands its
+21 עָרִים = cities
+22 שָׁלֹשׁ = three
+
+## 6:21:33
+KO: 게르손 자손의 성읍들, 그들의 가족들에 따른 것은 모두 열세 성읍과 그들의 방목지들이었더라.
+1 כָּל־ = all
+2 עָרֵי = [the] cities of
+3 הַגֵּרְשֻׁנִּי = the Gershonite[s] (Gershonite)
+4 לְמִשְׁפְּחֹתָם = to clans their (family)
+5 שְׁלֹשׁ־ = [were] thir- (three)
+6 עֶשְׂרֵה = teen (ten)
+7 עִיר = citi[es]
+8 וּמִגְרְשֵׁיהֶן ס = and pasture lands their (pasture)
+
+## 6:21:34
+KO: 그리고 레위 자손들 가운데 남은 므라리 자손들의 가족들에게는, 스불론 지파로부터 욕느암과 그 들(방목지)과, 가르다와 그 들(방목지)을 주었다.
+1 וּלְמִשְׁפְּחוֹת = and to [the] clans of (family)
+2 בְּנֵי־ = [the] descendants of (son)
+3 מְרָרִי = Merari
+4 הַלְוִיִּם = the Levites (Levi)
+5 הַנּוֹתָרִים = which remained (to remain)
+6 מֵאֵת = from with (with)
+7 מַטֵּה = [the] tribe of (tribe)
+8 זְבוּלֻן = Zebulun
+9 אֶת־ = <obj.>
+10 יָקְנְעָם = Jokneam
+11 וְאֶת־ = and <obj.>
+12 מִגְרָשֶׁהָ = pasture lands its
+13 אֶת־ = <obj.>
+14 קַרְתָּה = Kartah
+15 וְאֶת־ = and <obj.>
+16 מִגְרָשֶׁהָ = pasture lands its
+
+## 6:21:35
+KO: 딤나와 그 목초지들과 나할랄과 그 목초지들이니, 네 성읍들이다.
+1 אֶת־ = <obj.>
+2 דִּמְנָה = Dimnah
+3 וְאֶת־ = and <obj.>
+4 מִגְרָשֶׁהָ = pasture lands its
+5 אֶת־ = <obj.>
+6 נַהֲלָל = Nahalal (Nahalol)
+7 וְאֶת־ = and <obj.>
+8 מִגְרָשֶׁהָ = pasture lands its
+9 עָרִים = cities (city)
+10 אַרְבַּע = four
+
+## 6:21:36
+KO: 그리고 르우벤 지파로부터는 베셀과 그 들(방목지)과, 야하사와 그 들(방목지)을 주었다.
+1 וּמִמַּטֵּה = and from [the] tribe of (tribe)
+2 רְאוּבֵן = Reuben
+3 אֶת־ = <obj.>
+4 בֶּצֶר = Bezer
+5 וְאֶת־ = and <obj.>
+6 מִגְרָשֶׁהָ = pasture lands its
+7 וְאֶת־ = and <obj.>
+8 יַהְצָה = Jahaz <towards> (Jahaz)
+9 וְאֶת־ = and <obj.>
+10 מִגְרָשֶׁהָ = pasture lands its
+
+## 6:21:37
+KO: 그데못과 그들의 들과 므바앗과 그들의 들, 네 성읍이니라.
+1 אֶת־ = <obj.>
+2 קְדֵמוֹת = Kedemoth
+3 וְאֶת־ = and <obj.>
+4 מִגְרָשֶׁהָ = pasture lands its
+5 וְאֶת־ = and <obj.>
+6 מֵיפָעַת = Mephaath
+7 וְאֶת־ = and <obj.>
+8 מִגְרָשֶׁהָ = pasture lands its
+9 עָרִים = cities (city)
+10 אַרְבַּע ס = four
+
+## 6:21:38
+KO: 그리고 갓 지파로부터 살인자의 도피성인 길르앗의 라못과 그 주변 초원 지대, 그리고 마하나임과 그 주변 초원 지대를 (주었다).
+1 וּמִמַּטֵּה־ = and from [the] tribe of (tribe)
+2 גָד = Gad
+3 אֶת־ = <obj.>
+4 עִיר = [the] city of (city)
+5 מִקְלַט = <the> refuge of (refuge)
+6 הָרֹצֵחַ = the killer (to murder)
+7 אֶת־ = <obj.>
+8 רָמֹת = Ramoth
+9 בַּגִּלְעָד = in <the> Gilead (Gilead)
+10 וְאֶת־ = and <obj.>
+11 מִגְרָשֶׁהָ = pasture lands its
+12 וְאֶת־ = and <obj.>
+13 מַחֲנַיִם = Mahanaim
+14 וְאֶת־ = and <obj.>
+15 מִגְרָשֶׁהָ = pasture lands its

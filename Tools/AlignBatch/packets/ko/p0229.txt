@@ -1,0 +1,885 @@
+## 14:10:5
+KO: 그리고 그가 그들에게 말하였다, "아직 삼 일 후에 나에게로 돌아오라." 그리고 그 백성이 갔다.
+1 וַיֹּאמֶר = and he said (to say)
+2 אֲלֵהֶם = to them
+3 עוֹד = again (still)
+4 שְׁלֹשֶׁת = three
+5 יָמִים = days (day;_when)
+6 וְשׁוּבוּ = and return (to return)
+7 אֵלָי = to me
+8 וַיֵּלֶךְ = and it went (to go)
+9 הָעָם ס = the people (people)
+
+## 14:10:6
+KO: 르호보암 왕이 자기 아버지 솔로몬이 살아 있을 때에 그의 앞에 섰던 노인들과 의논하여 말하기를 "너희는 어떻게 이 백성에게 대답하도록 의논하느냐?" 하였다.
+1 וַיִּוָּעַץ = and he consulted
+2 הַמֶּלֶךְ = the king (king)
+3 רְחַבְעָם = Rehoboam
+4 אֶת־ = with
+5 הַזְּקֵנִים = the elders (old)
+6 אֲשֶׁר־ = who (which)
+7 הָיוּ = they had been
+8 עֹמְדִים = standing (to stand)
+9 לִפְנֵי = <to> before (face)
+10 שְׁלֹמֹה = Solomon
+11 אָבִיו = father his (father)
+12 בִּהְיֹתוֹ = when was he
+13 חַי = alive
+14 לֵאמֹר = <to> saying (to say)
+15 אֵיךְ = how?
+16 אַתֶּם = [are] you (you(m.p.))
+17 נוֹעָצִים = counseling
+18 לְהָשִׁיב = to bring back (to return)
+19 לָעָם־ = to the people (people)
+20 הַזֶּה = <the> this (this)
+21 דָּבָר = word
+
+## 14:10:7
+KO: 그들이 그에게 말하여 이르되, “만일 당신이 이 백성에게 좋게 대하시고, 그들을 기쁘게 하시며, 그들에게 선한 말씀들을 하시면, 그들이 모든 날 동안 당신의 종들이 될 것입니다.”
+1 וַיְדַבְּרוּ = and they spoke
+2 אֵלָיו = to him
+3 לֵאמֹר = <to> saying (to say)
+4 אִם־ = if
+5 תִּהְיֶה = you will become
+6 לְטוֹב = <into> good
+7 לְהָעָם = to the people (people)
+8 הַזֶּה = <the> this (this)
+9 וּרְצִיתָם = and you will be favorable to them (to accept)
+10 וְדִבַּרְתָּ = and you will speak
+11 אֲלֵהֶם = to them
+12 דְּבָרִים = words (word)
+13 טוֹבִים = kind
+14 וְהָיוּ = and they will be
+15 לְךָ = of you (you)
+16 עֲבָדִים = servants (servant;_slave)
+17 כָּל־ = all
+18 הַיָּמִים = the days (day)
+
+## 14:10:8
+KO: 그리고 그는 노인들의 조언을 버렸다, 그들이 그에게 조언했던, 그리고 그는 자기와 함께 자란, 그의 앞에 서 있는 소년들과 상의했다.
+1 וַיַּעֲזֹב = and he abandoned (to leave)
+2 אֶת־ = <obj.> ([Obj.])
+3 עֲצַת = [the] counsel of (counsel)
+4 הַזְּקֵנִים = the elders (old)
+5 אֲשֶׁר = which
+6 יְעָצֻהוּ = they had counseled him
+7 וַיִּוָּעַץ = and he consulted
+8 אֶת־ = with
+9 הַיְלָדִים = the youths (youth)
+10 אֲשֶׁר = who
+11 גָּדְלוּ = they had grown up (to magnify)
+12 אִתּוֹ = with him
+13 הָעֹמְדִים = who stood (to stand)
+14 לְפָנָיו = <to> before him (face)
+
+## 14:10:9
+KO: 그가 그들에게 말하였다. "너희는 무엇을 의논하느냐? 우리가 이 백성에게 대답할 말을, 곧 나에게 말하여 이르기를 '당신의 아버지가 우리에게 지운 멍에를 가볍게 하라'고 한 이 백성에게, 어떻게 대답하면 좋겠느냐?"
+1 וַיֹּאמֶר = and he said
+2 אֲלֵהֶם = to them
+3 מָה = what?
+4 אַתֶּם = [are] you (you(m.p.))
+5 נוֹעָצִים = counseling (to advise)
+6 וְנָשִׁיב = and we may bring back (to return)
+7 דָּבָר = word
+8 אֶת־ = <obj.> ([Obj.])
+9 הָעָם = the people (people)
+10 הַזֶּה = <the> this (this)
+11 אֲשֶׁר = who
+12 דִּבְּרוּ = they have spoken (to speak)
+13 אֵלַי = to me
+14 לֵאמֹר = <to> saying
+15 הָקֵל = lighten (to lighten)
+16 מִן־ = some of (from)
+17 הָעֹל = the yoke (yoke)
+18 אֲשֶׁר־ = which
+19 נָתַן = he put (to give)
+20 אָבִיךָ = father your (father)
+21 עָלֵינוּ = on us (upon)
+
+## 14:10:10
+KO: 그와 함께 자란 소년들이 그에게 말하여 이르기를, "당신은 당신에게 말하여 이르기를 '당신의 아버지가 우리의 멍에를 무겁게 하였으나 당신은 우리를 위하여 가볍게 하라'고 한 이 백성에게 이렇게 말하십시오. '나의 새끼손가락이 내 아버지의 허리보다 굵다.'"
+1 וַיְדַבְּרוּ = and they spoke
+2 אִתּוֹ = with him
+3 הַיְלָדִים = the youths (youth)
+4 אֲשֶׁר = who
+5 גָּדְלוּ = they had grown up (to magnify)
+6 אִתּוֹ = with him
+7 לֵאמֹר = <to> saying
+8 כֹּה־ = thus
+9 תֹאמַר = you will say
+10 לָעָם = to the people (people)
+11 אֲשֶׁר־ = which
+12 דִּבְּרוּ = they have spoken
+13 אֵלֶיךָ = to you
+14 לֵאמֹר = <to> saying
+15 אָבִיךָ = father your
+16 הִכְבִּיד = he made heavy (to honor)
+17 אֶת־ = <obj.> ([Obj.])
+18 עֻלֵּנוּ = yoke our (yoke)
+19 וְאַתָּה = and you (you(m.s.))
+20 הָקֵל = lighten (to lighten)
+21 מֵעָלֵינוּ = from on <the> us (upon)
+22 כֹּה = thus
+23 תֹּאמַר = you will say
+24 אֲלֵהֶם = to them
+25 קָטָנִּי = little finger my (little finger)
+26 עָבָה = it is thick (to thicken)
+27 מִמָּתְנֵי = more than [the] loins of (loin)
+28 אָבִי = father my
+
+## 14:10:11
+KO: 그리고 이제 내 아버지가 너희 위에 무거운 멍에를 지웠으나, 나는 너희의 멍에에 더할 것이며, 내 아버지는 채찍들로 너희를 징계하였으나, 나는 전갈들로 하리라.
+1 וְעַתָּה = and therefore (now)
+2 אָבִי = father my
+3 הֶעְמִיס = he loaded (to lift)
+4 עֲלֵיכֶם = on you
+5 עֹל = a yoke
+6 כָּבֵד = heavy
+7 וַאֲנִי = and I
+8 אֹסִיף = I will add (to add)
+9 עַל־ = to
+10 עֻלְּכֶם = yoke your
+11 אָבִי = father my
+12 יִסַּר = he disciplined (to discipline)
+13 אֶתְכֶם = <obj.> you ([Obj.])
+14 בַּשּׁוֹטִים = with <the> whips (whip)
+15 וַאֲנִי = and I
+16 בָּעֲקְרַבִּים ס = with <the> scorpions (scorpion)
+
+## 14:10:12
+KO: 그리고 여로보암과 모든 백성이 그 셋째 날에 르호보암에게 왔으니, 이는 왕이 말하여 이르기를 “셋째 날에 내게로 다시 오라”고 하였기 때문이라.
+1 וַיָּבֹא = and he came (to come (in))
+2 יָרָבְעָם = Jeroboam
+3 וְכָל־ = and all (all)
+4 הָעָם = the people (people)
+5 אֶל־ = to
+6 רְחַבְעָם = Rehoboam
+7 בַּיּוֹם = on the day
+8 הַשְּׁלִשִׁי = <the> third
+9 כַּאֲשֶׁר = just as (as which)
+10 דִּבֶּר = he had spoken (to speak)
+11 הַמֶּלֶךְ = the king (king)
+12 לֵאמֹר = <to> saying (to say)
+13 שׁוּבוּ = return (to return)
+14 אֵלַי = to me
+15 בַּיּוֹם = on the day
+16 הַשְּׁלִשִׁי = <the> third
+
+## 14:10:13
+KO: 그리고 왕은 그들에게 거칠게 대답하였다. 그리고 르호보암 왕은 노인들의 조언을 버렸다.
+1 וַיַּעֲנֵם = and he answered them (to answer)
+2 הַמֶּלֶךְ = the king
+3 קָשָׁה = hard (severe)
+4 וַיַּעֲזֹב = and he abandoned (to leave)
+5 הַמֶּלֶךְ = the king
+6 רְחַבְעָם = Rehoboam
+7 אֵת = <obj.> ([Obj.])
+8 עֲצַת = [the] counsel of (counsel)
+9 הַזְּקֵנִים = the elders (old)
+
+## 14:10:14
+KO: 그가 청년들의 조언을 따라 그들에게 말하여 이르기를 “나의 아버지는 너희의 멍에를 무겁게 하였으나 나는 더할 것이라. 나의 아버지는 채찍들로 너희를 징계하였으나 나는 전갈들로 하리라” 하니라.
+1 וַיְדַבֵּר = and he spoke (to speak)
+2 אֲלֵהֶם = to them (to(wards))
+3 כַּעֲצַת = according to [the] counsel of (counsel)
+4 הַיְלָדִים = the young men (youth)
+5 לֵאמֹר = <to> saying (to say)
+6 אַכְבִּיד = I will make heavy (to honor)
+7 אֶת־ = <obj.>
+8 עֻלְּכֶם = yoke your (yoke)
+9 וַאֲנִי = and I
+10 אֹסִיף = I will add (to add)
+11 עָלָיו = to it (upon)
+12 אָבִי = father my (father)
+13 יִסַּר = he disciplined (to discipline)
+14 אֶתְכֶם = <obj.> you
+15 בַּשּׁוֹטִים = with <the> whips (whip)
+16 וַאֲנִי = and I
+17 בָּעֲקְרַבִּים = with <the> scorpions (scorpion)
+
+## 14:10:15
+KO: 왕이 백성의 말을 듣지 아니하였으니, 왜냐하면 그 돌이킴은 하나님으로부터 온 것이기 때문이라. 이는 여호와께서 실로 사람 아히야의 손을 통해 느밧의 아들 여로보암에게 말씀하신 자신의 말씀을 세우기 위함이었더라.
+1 וְלֹא־ = and not (not)
+2 שָׁמַע = he listened (to hear)
+3 הַמֶּלֶךְ = the king (king)
+4 אֶל־ = to
+5 הָעָם = the people (people)
+6 כִּי־ = for
+7 הָיְתָה = it was (to be)
+8 נְסִבָּה = a turn (turn)
+9 מֵעִם = from with
+10 הָאֱלֹהִים = <the> God (God)
+11 לְמַעַן = so as (because)
+12 הָקִים = to establish (to arise)
+13 יְהוָה = Yahweh (LORD)
+14 אֶת־ = <obj.> ([Obj.])
+15 דְּבָרוֹ = word his (word)
+16 אֲשֶׁר = which
+17 דִּבֶּר = he had spoken (to speak)
+18 בְּיַד = by [the] hand of (hand)
+19 אֲחִיָּהוּ = Ahijah
+20 הַשִּׁלוֹנִי = the Shilonite (Shilonite)
+21 אֶל־ = to
+22 יָרָבְעָם = Jeroboam
+23 בֶּן־ = [the] son of (son)
+24 נְבָט = Nebat
+
+## 14:10:16
+KO: 그리고 온 이스라엘은 왕이 그들에게 듣지 아니함을 보고, 백성이 왕에게 대답하여 이르기를, "우리에게 다윗 안에 분깃이 무엇인가? 그리고 이새의 아들 안에 기업이 없도다. 이스라엘아, 각각 너희 장막들로 가라. 다윗아, 이제 네 집을 보라" 하니, 온 이스라엘이 그들의 장막들로 가니라.
+1 וְכָל־ = and all
+2 יִשְׂרָאֵל = Israel
+3 כִּי = that (for)
+4 לֹא־ = not
+5 שָׁמַע = he had listened (to hear)
+6 הַמֶּלֶךְ = the king
+7 לָהֶם = to them (them)
+8 וַיָּשִׁיבוּ = and they brought back (to return)
+9 הָעָם = the people (people)
+10 אֶת־ = <obj.> ([Obj.])
+11 הַמֶּלֶךְ = the king
+12 לֵאמֹר = <to> saying (to say)
+13 מַה־ = what?
+14 לָּנוּ = [belongs] to us (us)
+15 חֵלֶק = portion
+16 בְּדָוִיד = in David
+17 וְלֹא־ = and not
+18 נַחֲלָה = an inheritance (inheritance)
+19 בְּבֶן־ = in [the] son of (son)
+20 יִשַׁי = Jesse
+21 אִישׁ = everyone (man)
+22 לְאֹהָלֶיךָ = to tents your
+23 יִשְׂרָאֵל = O Israel
+24 עַתָּה = now
+25 רְאֵה = consider (to see)
+26 בֵיתְךָ = own house your (house)
+27 דָּוִיד = O David
+28 וַיֵּלֶךְ = and it went (to go)
+29 כָּל־ = all
+30 יִשְׂרָאֵל = Israel
+31 לְאֹהָלָיו ס = to tents its
+
+## 14:10:17
+KO: 그리고 유다의 성읍들에 거주하는 이스라엘 자손들 위에 르호보암이 왕이 되었다.
+1 וּבְנֵי = and [the] people of (son)
+2 יִשְׂרָאֵל = Israel
+3 הַיֹּשְׁבִים = who were dwelling (to dwell)
+4 בְּעָרֵי = in [the] cities of (city)
+5 יְהוּדָה = Judah
+6 וַיִּמְלֹךְ = and he reigned (to reign)
+7 עֲלֵיהֶם = over them (upon)
+8 רְחַבְעָם = Rehoboam
+
+## 14:10:18
+KO: 그리고 르호보암 왕이 역군(부역)의 책임자인 하도람을 보냈는데, 이스라엘 자손들이 그를 돌들로 쳐서 그가 죽었다. 그리고 르호보암 왕은 예루살렘으로 도망치기 위해 병거에 올라타 스스로를 강하게(용기를 내어) 하였다.
+1 וַיִּשְׁלַח = and he sent (to send)
+2 הַמֶּלֶךְ = the king
+3 רְחַבְעָם = Rehoboam
+4 אֶת־ = <obj.> ([Obj.])
+5 הֲדֹרָם = Hadoram
+6 אֲשֶׁר = who (which)
+7 עַל־ = [was] over (upon)
+8 הַמַּס = the forced labor (taskworker)
+9 וַיִּרְגְּמוּ־ = and they stoned (to stone)
+10 בוֹ = <in> him (him)
+11 בְנֵי־ = [the] people of (son)
+12 יִשְׂרָאֵל = Israel
+13 אֶבֶן = stone[s] (stone)
+14 וַיָּמֹת = and he died (to die)
+15 וְהַמֶּלֶךְ = and the king
+16 רְחַבְעָם = Rehoboam
+17 הִתְאַמֵּץ = he proved himself strong (to strengthen)
+18 לַעֲלוֹת = to go up (to ascend)
+19 בַּמֶּרְכָּבָה = in the chariot (chariot)
+20 לָנוּס = to flee
+21 יְרוּשָׁלִָם ס = Jerusalem
+
+## 14:10:19
+KO: 그리고 이스라엘은 다윗의 집을 반역하였으니, 이 날까지 이르니라.
+1 וַיִּפְשְׁעוּ = and they have rebelled (to transgress)
+2 יִשְׂרָאֵל = Israel
+3 בְּבֵית = against [the] house of (house)
+4 דָּוִיד = David
+5 עַד = until (till)
+6 הַיּוֹם = the day (day)
+7 הַזֶּה ס = <the> this (this)
+
+## 14:11:1
+KO: 그리고 르호보암이 예루살렘으로 와서, 유다와 베냐민의 집을 모으니, 전쟁을 수행하는 선택된 용사 십팔만 명이라. 그들이 이스라엘과 싸워 그 왕국을 르호보암에게 돌려주려고 하였다.
+1 וַיָּבֹא = and he came (to come (in))
+2 רְחַבְעָם = Rehoboam
+3 יְרוּשָׁלִַם = Jerusalem
+4 וַיַּקְהֵל = and he called together (to gather)
+5 אֶת־ = <obj.>
+6 בֵּית = [the] house of (house)
+7 יְהוּדָה = Judah
+8 וּבִנְיָמִן = and Benjamin (Benjamin)
+9 מֵאָה = one hundred (hundred)
+10 וּשְׁמוֹנִים = and eighty (eighty)
+11 אֶלֶף = thousand
+12 בָּחוּר = chosen [man] (to choose)
+13 עֹשֵׂה = maker[s] of (to make)
+14 מִלְחָמָה = war (battle)
+15 לְהִלָּחֵם = to do battle (to fight)
+16 עִם־ = with
+17 יִשְׂרָאֵל = Israel
+18 לְהָשִׁיב = to restore (to return)
+19 אֶת־ = <obj.>
+20 הַמַּמְלָכָה = the kingdom (kingdom)
+21 לִרְחַבְעָם פ = to Rehoboam
+
+## 14:11:2
+KO: 그리고 여호와의 말씀이 하나님의 사람 스마야에게 임하였다, 말하며.
+1 וַיְהִי = and it came (to be)
+2 דְּבַר־ = [the] word of (word)
+3 יְהוָה = Yahweh (LORD)
+4 אֶל־ = to (to(wards))
+5 שְׁמַעְיָהוּ = Shemaiah
+6 אִישׁ־ = [the] man of (man)
+7 הָאֱלֹהִים = <the> God (God)
+8 לֵאמֹר = <to> saying (to say)
+
+## 14:11:3
+KO: 말하라, 유다 왕 솔로몬의 아들 르호보암에게, 그리고 유다와 베냐민에 있는 모든 이스라엘에게 말하여 이르기를,
+1 אֱמֹר = say
+2 אֶל־ = to
+3 רְחַבְעָם = Rehoboam
+4 בֶּן־ = [the] son of (son)
+5 שְׁלֹמֹה = Solomon
+6 מֶלֶךְ = [the] king of (king)
+7 יְהוּדָה = Judah
+8 וְאֶל = and to
+9 כָּל־ = all
+10 יִשְׂרָאֵל = Israel
+11 בִּיהוּדָה = in Judah
+12 וּבִנְיָמִן = and Benjamin (Benjamin)
+13 לֵאמֹר = <to> saying
+
+## 14:11:4
+KO: 여호와께서 이같이 말씀하셨다. 너희는 올라가지 말라, 그리고 너희 형제들과 싸우지 말라. 각기 자기 집으로 돌아가라. 왜냐하면 이 일이 나로부터 일어났기 때문이다. 그들이 여호와의 말씀들을 들었고, 여로보암에게로 가려던 데서 돌아갔다.
+1 כֹּה = thus
+2 אָמַר = he says (to say)
+3 יְהוָה = Yahweh
+4 לֹא־ = not
+5 תַעֲלוּ = you must go up (to ascend)
+6 וְלֹא־ = and not
+7 תִלָּחֲמוּ = you must do battle (to fight)
+8 עִם־ = with
+9 אֲחֵיכֶם = countrymen your (brother)
+10 שׁוּבוּ = return
+11 אִישׁ = everyone (man)
+12 לְבֵיתוֹ = to own house his (house)
+13 כִּי = for
+14 מֵאִתִּי = from with <the> me (with)
+15 נִהְיָה = it has occurred (to be)
+16 הַדָּבָר = the thing
+17 הַזֶּה = <the> this (this)
+18 וַיִּשְׁמְעוּ = and they obeyed (to hear)
+19 אֶת־ = <obj.>
+20 דִּבְרֵי = [the] words of
+21 יְהוָה = Yahweh
+22 וַיָּשֻׁבוּ = and they turned back
+23 מִלֶּכֶת = from going (to go)
+24 אֶל־ = against (to(wards))
+25 יָרָבְעָם פ = Jeroboam
+
+## 14:11:5
+KO: 그리고 르호보암은 예루살렘에 거주하였고, 그는 유다 안에 포위를 위한 성읍들을 건축하였다.
+1 וַיֵּשֶׁב = and he dwelt (to dwell)
+2 רְחַבְעָם = Rehoboam
+3 בִּירוּשָׁלִָם = in Jerusalem (Jerusalem)
+4 וַיִּבֶן = and he built (to build)
+5 עָרִים = cities (city)
+6 לְמָצוֹר = to fortification (siege)
+7 בִּיהוּדָה = in Judah (Judah)
+
+## 14:11:6
+KO: 그리고 그가 베들레헴과 에담과 드고아를 건축하였다.
+1 וַיִּבֶן = and he built (to build)
+2 אֶת־ = <obj.>
+3 בֵּית־ = Beth-
+4 לֶחֶם = -lehem
+5 וְאֶת־ = and <obj.>
+6 עֵיטָם = Etam
+7 וְאֶת־ = and <obj.>
+8 תְּקוֹעַ = Tekoa
+
+## 14:11:7
+KO: 그리고 벧술과, 그리고 소고와, 그리고 아둘람과
+1 וְאֶת־ = and <obj.>
+2 בֵּית־ = Beth
+3 צוּר = Zur
+4 וְאֶת־ = and <obj.>
+5 שׂוֹכוֹ = Socoh (Soco)
+6 וְאֶת־ = and <obj.>
+7 עֲדֻלָּם = Adullam
+
+## 14:11:8
+KO: 그리고 가드를, 그리고 마레사를, 그리고 십을
+1 וְאֶת־ = and <obj.>
+2 גַּת = Gath
+3 וְאֶת־ = and <obj.>
+4 מָרֵשָׁה = Mareshah
+5 וְאֶת־ = and <obj.>
+6 זִיף = Ziph
+
+## 14:11:9
+KO: 그리고 아도라임과, 그리고 라기스와, 그리고 아세가와
+1 וְאֶת־ = and <obj.>
+2 אֲדוֹרַיִם = Adoraim
+3 וְאֶת־ = and <obj.>
+4 לָכִישׁ = Lachish
+5 וְאֶת־ = and <obj.>
+6 עֲזֵקָה = Azekah
+
+## 14:11:10
+KO: 그리고 소라와, 그리고 아얄론과, 그리고 헤브론이니, 이것들은 유다와 베냐민 안에 있는 견고한 성읍들이라.
+1 וְאֶת־ = and <obj.>
+2 צָרְעָה = Zorah
+3 וְאֶת־ = and <obj.>
+4 אַיָּלוֹן = Aijalon
+5 וְאֶת־ = and <obj.>
+6 חֶבְרוֹן = Hebron
+7 אֲשֶׁר = which
+8 בִּיהוּדָה = [were] in Judah (Judah)
+9 וּבְבִנְיָמִן = and in Benjamin (Benjamin)
+10 עָרֵי = cities of (city)
+11 מְצֻרוֹת = fortifications (fortress)
+
+## 14:11:11
+KO: 그리고 그가 요새들을 견고하게 하였고, 그들 가운데 지도자들을 두었으며, 양식과 기름과 포도주의 저장소들을 두었다.
+1 וַיְחַזֵּק = and he strengthened (to strengthen)
+2 אֶת־ = <obj.> ([Obj.])
+3 הַמְּצֻרוֹת = the fortifications (fortress)
+4 וַיִּתֵּן = and he put (to give)
+5 בָּהֶם = in them (them)
+6 נְגִידִים = commanders (leader)
+7 וְאֹצְרוֹת = and supplies of (treasure)
+8 מַאֲכָל = food
+9 וְשֶׁמֶן = and oil (oil)
+10 וָיָיִן = and wine (wine)
+
+## 14:11:12
+KO: 그리고 모든 성읍마다 방패들과 창들을 두어 그들을 심히 강하게 하였고, 유다와 베냐민이 그에게 속하였다.
+1 וּבְכָל־ = and [were] in every (all)
+2 עִיר = city
+3 וָעִיר = and a city
+4 צִנּוֹת = body shields (shield)
+5 וּרְמָחִים = and spears (spear)
+6 וַיְחַזְּקֵם = and he made strong them (to strengthen)
+7 לְהַרְבֵּה = to abundance (to multiply)
+8 מְאֹד = exceedingly (much)
+9 וַיְהִי־ = and it belonged (to be)
+10 לוֹ = to him (him)
+11 יְהוּדָה = Judah
+12 וּבִנְיָמִן ס = and Benjamin (Benjamin)
+
+## 14:11:13
+KO: 그리고 온 이스라엘 안에 있는 제사장들과 레위 사람들이 그들의 모든 경계로부터 그에게로 섰더라.
+1 וְהַכֹּהֲנִים = and the priests (priest)
+2 וְהַלְוִיִּם = and the Levites (Levi)
+3 אֲשֶׁר = who (which)
+4 בְּכָל־ = [were] in all
+5 יִשְׂרָאֵל = Israel
+6 הִתְיַצְּבוּ = they took their stand (to stand)
+7 עָלָיו = at him (upon)
+8 מִכָּל־ = from all
+9 גְּבוּלָם = territory their (border)
+
+## 14:11:14
+KO: 레위 사람들이 그들의 목초지와 그들의 소유를 떠났고, 유다와 예루살렘으로 갔으니, 이는 여로보암과 그의 아들들이 그들을 여호와께 제사장 직분을 수행하지 못하도록 버렸기 때문이다.
+1 כִּי־ = for
+2 עָזְבוּ = they forsook (to leave)
+3 הַלְוִיִּם = the Levites (Levi)
+4 אֶת־ = <obj.> ([Obj.])
+5 מִגְרְשֵׁיהֶם = pasture lands their (pasture)
+6 וַאֲחֻזָּתָם = and property their (possesion)
+7 וַיֵּלְכוּ = and they went (to go)
+8 לִיהוּדָה = to Judah (Judah)
+9 וְלִירוּשָׁלִָם = and to Jerusalem (Jerusalem)
+10 כִּי־ = for
+11 הִזְנִיחָם = he had rejected them (to reject)
+12 יָרָבְעָם = Jeroboam
+13 וּבָנָיו = and sons his (son)
+14 מִכַּהֵן = from serving as priests (to minister)
+15 לַיהוָה = to Yahweh (LORD)
+
+## 14:11:15
+KO: 그리고 그가 자기 자신을 위하여 산당들과 수염소들과 그가 만든 송아지들을 위하여 제사장들을 세웠더라.
+1 וַיַּעֲמֶד־ = and he appointed (to stand)
+2 לוֹ = for himself (him)
+3 כֹּהֲנִים = priests (priest)
+4 לַבָּמוֹת = for the high places (high place)
+5 וְלַשְּׂעִירִים = and for the goats (satyr)
+6 וְלָעֲגָלִים = and for the calves (calf)
+7 אֲשֶׁר = which
+8 עָשָׂה = he had made (to make)
+
+## 14:11:16
+KO: 그들 뒤에 이스라엘의 모든 지파들로부터 그들의 마음을 주는 자들, 곧 이스라엘의 하나님 여호와를 찾기 위하여 그들의 마음을 주는 자들이 그들의 조상들의 하나님 여호와께 제사하기 위해 예루살렘으로 왔다.
+1 וְאַחֲרֵיהֶם = and after them (after)
+2 מִכֹּל = from all (all)
+3 שִׁבְטֵי = [the] tribes of (tribe)
+4 יִשְׂרָאֵל = Israel
+5 הַנֹּתְנִים = those [who] set (to give)
+6 אֶת־ = <obj.>
+7 לְבָבָם = heart their (heart)
+8 לְבַקֵּשׁ = to seek
+9 אֶת־ = <obj.>
+10 יְהוָה = Yahweh
+11 אֱלֹהֵי = [the] God of
+12 יִשְׂרָאֵל = Israel
+13 בָּאוּ = they came (to come (in))
+14 יְרוּשָׁלִַם = Jerusalem
+15 לִזְבּוֹחַ = to sacrifice
+16 לַיהוָה = to Yahweh
+17 אֱלֹהֵי = [the] God of
+18 אֲבוֹתֵיהֶם = ancestors their (father)
+
+## 14:11:17
+KO: 그들이 유다 왕국을 견고하게 하였고, 솔로몬의 아들 르호보암을 삼 년 동안 강성하게 하였으니, 이는 그들이 다윗과 솔로몬의 길로 삼 년을 행하였기 때문이더라.
+1 וַיְחַזְּקוּ = and they strengthened (to strengthen)
+2 אֶת־ = <obj.>
+3 מַלְכוּת = [the] kingdom of (royalty)
+4 יְהוּדָה = Judah
+5 וַיְאַמְּצוּ = and they strengthened (to strengthen)
+6 אֶת־ = <obj.>
+7 רְחַבְעָם = Rehoboam
+8 בֶּן־ = [the] son of (son)
+9 שְׁלֹמֹה = Solomon
+10 לְשָׁנִים = for years
+11 שָׁלוֹשׁ = three
+12 כִּי = for
+13 הָלְכוּ = they walked (to go)
+14 בְּדֶרֶךְ = in [the] way of (way)
+15 דָּוִיד = David
+16 וּשְׁלֹמֹה = and Solomon
+17 לְשָׁנִים = for years
+18 שָׁלוֹשׁ = three
+
+## 14:11:18
+KO: 르호보암이 자신을 위하여 아내로 마할랏을 취하였으니, 그녀는 다윗의 아들 여리못의 딸이며, 이새의 아들 엘리압의 딸 아비하일의 소생이다.
+1 וַיִּקַּח־ = and he took (to take)
+2 לוֹ = for himself (him)
+3 רְחַבְעָם = Rehoboam
+4 אִשָּׁה = a wife (woman)
+5 אֶת־ = <obj.> ([Obj.])
+6 מָחֲלַת = Mahalath
+7 בַּת = [the] daughter of
+8 יְרִימוֹת = Jerimoth
+9 בֶּן־ = [the] son of
+10 דָּוִיד = David
+11 אֲבִיהַיִל = Abihail
+12 בַּת־ = [the] daughter of
+13 אֱלִיאָב = Eliab
+14 בֶּן־ = [the] son of
+15 יִשָׁי = Jesse
+
+## 14:11:19
+KO: 그리고 그녀는 그에게 아들들을 낳았으니, 여우스와 스마랴와 사함이라.
+1 וַתֵּלֶד = and she bore (to beget)
+2 לוֹ = to him (him)
+3 בָּנִים = sons (son)
+4 אֶת־ = <obj.>
+5 יְעוּשׁ = Jeush
+6 וְאֶת־ = and <obj.>
+7 שְׁמַרְיָה = Shemariah
+8 וְאֶת־ = and <obj.>
+9 זָהַם = Zaham
+
+## 14:11:20
+KO: 그리고 그 후에 그가 압살롬의 딸 마아가를 취하였더니, 그녀가 그에게 아비야와 앗대와 시사와 슬로밋을 낳았더라.
+1 וְאַחֲרֶיהָ = and after her (after)
+2 לָקַח = he took (to take)
+3 אֶת־ = <obj.>
+4 מַעֲכָה = Maacah
+5 בַּת־ = [the] daughter of (daughter)
+6 אַבְשָׁלוֹם = Absalom
+7 וַתֵּלֶד = and she bore (to beget)
+8 לוֹ = to him (him)
+9 אֶת־ = <obj.>
+10 אֲבִיָּה = Abijah
+11 וְאֶת־ = and <obj.>
+12 עַתַּי = Attai
+13 וְאֶת־ = and <obj.>
+14 זִיזָא = Ziza
+15 וְאֶת־ = and <obj.>
+16 שְׁלֹמִית = Shelomith
+
+## 14:11:21
+KO: 그리고 르호보암이 압살롬의 딸 마아가를 그의 모든 아내와 그의 첩들보다 더 사랑하였으니, 이는 그가 아내 열여덟과 첩 예순을 취하였고, 아들 스물여덟과 딸 예순을 낳았기 때문이라.
+1 וַיֶּאֱהַב = and he loved (to love)
+2 רְחַבְעָם = Rehoboam
+3 אֶת־ = <obj.> ([Obj.])
+4 מַעֲכָה = Maacah
+5 בַת־ = [the] daughter of
+6 אַבְשָׁלוֹם = Absalom
+7 מִכָּל־ = more than all (all)
+8 נָשָׁיו = wives his
+9 וּפִילַגְשָׁיו = and concubines his
+10 כִּי = for
+11 נָשִׁים = wives
+12 שְׁמוֹנֶה־ = eight-
+13 עֶשְׂרֵה = teen (ten)
+14 נָשָׂא = he had taken (to lift)
+15 וּפִילַגְשִׁים = and concubines
+16 שִׁשִּׁים = sixty
+17 וַיּוֹלֶד = and he fathered (to beget)
+18 עֶשְׂרִים = twenty
+19 וּשְׁמוֹנָה = and eight
+20 בָּנִים = sons (son)
+21 וְשִׁשִּׁים = and sixty
+22 בָּנוֹת = daughters
+
+## 14:11:22
+KO: 르호보암이 마아가의 아들 아비야를 머리로 세웠으니, 이는 그의 형제들 가운데 지도자로 삼아 그를 왕으로 세우려 함이라.
+1 וַיַּעֲמֵד = and he appointed (to stand)
+2 לָרֹאשׁ = to the chief (head)
+3 רְחַבְעָם = Rehoboam
+4 אֶת־ = <obj.> ([Obj.])
+5 אֲבִיָּה = Abijah
+6 בֶן־ = [the] son of (son)
+7 מַעֲכָה = Maacah
+8 לְנָגִיד = to leader (leader)
+9 בְּאֶחָיו = among brothers his (brother)
+10 כִּי = for
+11 לְהַמְלִיכוֹ = to make king him (to reign)
+
+## 14:11:23
+KO: 그리고 그가 지혜롭게 행동하였고, 그의 아들들 모두를 유다와 베냐민의 온 땅의 모든 요새화된 성읍들로 흩어지게 하였으며, 그들에게 음식을 풍족하게 주었고, 많은 아내들을 구하였다.
+1 וַיָּבֶן = and he acted wisely (to understand)
+2 וַיִּפְרֹץ = and he distributed (to break through)
+3 מִכָּל־ = some of all
+4 בָּנָיו = sons his (son)
+5 לְכָל־ = to all
+6 אַרְצוֹת = [the] lands of (land)
+7 יְהוּדָה = Judah
+8 וּבִנְיָמִן = and Benjamin (Benjamin)
+9 לְכֹל = to all
+10 עָרֵי = [the] cities of (city)
+11 הַמְּצֻרוֹת = <the> fortifications (fortress)
+12 וַיִּתֵּן = and he gave (to give)
+13 לָהֶם = to them (them)
+14 הַמָּזוֹן = <the> food (food)
+15 לָרֹב = to abundance (abundance)
+16 וַיִּשְׁאַל = and he sought (to ask)
+17 הֲמוֹן = a multitude of (crowd)
+18 נָשִׁים = wives (woman)
+
+## 14:12:1
+KO: 르호보암의 왕권이 견고해지고 그 힘이 강해졌을 때, 그가 여호와의 율법을 버리니 온 이스라엘이 그와 함께하였다.
+1 וַיְהִי = and it was (to be)
+2 כְּהָכִין = when established (to establish)
+3 מַלְכוּת = [the] kingdom of (royalty)
+4 רְחַבְעָם = Rehoboam
+5 וּכְחֶזְקָתוֹ = and according to strengthening his (strength)
+6 עָזַב = he forsook (to leave)
+7 אֶת־ = <obj.> ([Obj.])
+8 תּוֹרַת = [the] law of (instruction)
+9 יְהוָה = Yahweh (LORD)
+10 וְכָל־ = and all (all)
+11 יִשְׂרָאֵל = Israel
+12 עִמּוֹ פ = with him (with)
+
+## 14:12:2
+KO: 그리고 르호보암 왕의 다섯째 해에 애굽 왕 시삭이 예루살렘을 치러 올라왔으니, 이는 그들이 여호와께 범죄하였기 때문이다.
+1 וַיְהִי = and it was (to be)
+2 בַּשָּׁנָה = in the year (year)
+3 הַחֲמִישִׁית = <the> fifth (fifth)
+4 לַמֶּלֶךְ = of the king
+5 רְחַבְעָם = Rehoboam
+6 עָלָה = he came up (to ascend)
+7 שִׁישַׁק = Shishak
+8 מֶלֶךְ־ = [the] king of
+9 מִצְרַיִם = Egypt
+10 עַל־ = on (upon)
+11 יְרוּשָׁלִָם = Jerusalem
+12 כִּי = for
+13 מָעֲלוּ = they had acted unfaithfully (be unfaithful)
+14 בַּיהוָה = against Yahweh (LORD)
+
+## 14:12:3
+KO: 일천이백의 병거와 육만의 마병, 그리고 그와 함께 애굽으로부터 나온 백성인 룹인과 숙기인과 구스인에게는 셀 수 있는 수가 없었다.
+1 בְּאֶלֶף = with one thousand
+2 וּמָאתַיִם = and two hundred (hundred)
+3 רֶכֶב = chariot[s] (chariot)
+4 וּבְשִׁשִּׁים = and with sixty (sixty)
+5 אֶלֶף = thousand
+6 פָּרָשִׁים = horsemen (horseman)
+7 וְאֵין = and not (nothing)
+8 מִסְפָּר = number
+9 לָעָם = [belonged] to the people (people)
+10 אֲשֶׁר־ = which
+11 בָּאוּ = they came (to come (in))
+12 עִמּוֹ = with him (with)
+13 מִמִּצְרַיִם = from Egypt (Egypt)
+14 לוּבִים = Libyans (Libyan)
+15 סֻכִּיִּים = Sukkites (Sukkiim)
+16 וְכוּשִׁים = and Cushites (Cushite)
+
+## 14:12:4
+KO: 그가 유다에 속한 견고한 성읍들을 취하였고, 예루살렘까지 이르렀다.
+1 וַיִּלְכֹּד = and he captured (to capture)
+2 אֶת־ = <obj.> ([Obj.])
+3 עָרֵי = [the] cities of (city)
+4 הַמְּצֻרוֹת = <the> fortifications (fortress)
+5 אֲשֶׁר = which
+6 לִיהוּדָה = [belonged] to Judah (Judah)
+7 וַיָּבֹא = and he came (to come (in))
+8 עַד־ = to (till)
+9 יְרוּשָׁלִָם ס = Jerusalem
+
+## 14:12:5
+KO: 그리고 선지자 스마야가 르호보암과 유다의 방백들에게 왔는데, 그들은 시삭의 면전(얼굴) 때문에 예루살렘으로 모였더라. 그리고 그들에게 이르기를 “여호와께서 이같이 말씀하시되, 너희가 나를 버렸으므로, 또한 내가 너희를 버려 시삭의 손에 (넘겨) 주었노라” 하니라.
+1 וּשְׁמַעְיָה = and Shemaiah (Shemaiah)
+2 הַנָּבִיא = the prophet (prophet)
+3 בָּא = he came (to come (in))
+4 אֶל־ = to
+5 רְחַבְעָם = Rehoboam
+6 וְשָׂרֵי = and [the] leaders of (ruler)
+7 יְהוּדָה = Judah
+8 אֲשֶׁר־ = who (which)
+9 נֶאֶסְפוּ = they had gathered (to gather)
+10 אֶל־ = to
+11 יְרוּשָׁלִַם = Jerusalem
+12 מִפְּנֵי = <from> because of (face)
+13 שִׁישָׁק = Shishak
+14 וַיֹּאמֶר = and he said
+15 לָהֶם = to them (them)
+16 כֹּה־ = thus
+17 אָמַר = he says
+18 יְהוָה = Yahweh (LORD)
+19 אַתֶּם = you (you(m.p.))
+20 עֲזַבְתֶּם = you have abandoned
+21 אֹתִי = <obj.> me
+22 וְאַף־ = and also (also)
+23 אֲנִי = I
+24 עָזַבְתִּי = I have abandoned
+25 אֶתְכֶם = <obj.> you
+26 בְּיַד־ = in [the] hand of (hand)
+27 שִׁישָׁק = Shishak
+
+## 14:12:6
+KO: 그리고 이스라엘의 방백들과 왕이 겸비하게 되었고, 그들이 말하였다. "여호와는 의로우시다."
+1 וַיִּכָּנְעוּ = and they humbled themselves (be humble)
+2 שָׂרֵי־ = [the] leaders of (ruler)
+3 יִשְׂרָאֵל = Israel
+4 וְהַמֶּלֶךְ = and the king (king)
+5 וַיֹּאמְרוּ = and they said (to say)
+6 צַדִּיק = [is] righteous (righteous)
+7 יְהוָה = Yahweh (LORD)
+
+## 14:12:7
+KO: 여호와께서 그들이 스스로 겸비함을 보셨을 때, 여호와의 말씀이 스마야에게 임하여 가라사대 "그들이 스스로 겸비하였으니, 내가 그들을 멸하지 아니하고 조금은 구원하여 주리라. 그러므로 나의 노를 시삭의 손으로 예루살렘에 쏟지 아니하리라."
+1 וּבִרְאוֹת = and when saw (to see)
+2 יְהוָה = Yahweh
+3 כִּי = that (for)
+4 נִכְנָעוּ = they had humbled themselves
+5 הָיָה = it came (to be)
+6 דְבַר־ = [the] word of (word)
+7 יְהוָה = Yahweh
+8 אֶל־ = to (to(wards))
+9 שְׁמַעְיָה = Shemaiah
+10 לֵאמֹר = <to> saying (to say)
+11 נִכְנְעוּ = they have humbled themselves
+12 לֹא = not
+13 אַשְׁחִיתֵם = I will destroy them (to ruin)
+14 וְנָתַתִּי = and I will give (to give)
+15 לָהֶם = to them (them)
+16 כִּמְעַט = like a little (little)
+17 לִפְלֵיטָה = <to> deliverance (survivor)
+18 וְלֹא־ = and not
+19 תִתַּךְ = it will pour forth (to pour)
+20 חֲמָתִי = rage my (rage)
+21 בִּירוּשָׁלִַם = on Jerusalem (Jerusalem)
+22 בְּיַד־ = by [the] hand of (hand)
+23 שִׁישָׁק = Shishak
+
+## 14:12:8
+KO: 왜냐하면 그들이 그에게 종들이 될 것이고, 나의 섬김과 여러 나라의 왕국들의 섬김이 어떠한지 그들이 알게 될 것이기 때문이다.
+1 כִּי = for
+2 יִהְיוּ־ = they will become (to be)
+3 לוֹ = of him (him)
+4 לַעֲבָדִים = <into> subjects (servant;_slave)
+5 וְיֵדְעוּ = so they may know (to know)
+6 עֲבוֹדָתִי = service my
+7 וַעֲבוֹדַת = and [the] service of
+8 מַמְלְכוֹת = [the] kingdoms of (kingdom)
+9 הָאֲרָצוֹת ס = the lands (land)
+
+## 14:12:9
+KO: 그리고 애굽 왕 시삭이 올라와서 예루살렘을 대항하여, 여호와의 집의 보물들과 왕의 집의 보물들을 취하였고, 모든 것을 취하였다. 그리고 솔로몬이 만든 금 방패들을 취하였다.
+1 וַיַּעַל = and he came up (to ascend)
+2 שִׁישַׁק = Shishak
+3 מֶלֶךְ־ = [the] king of
+4 מִצְרַיִם = Egypt
+5 עַל־ = on (upon)
+6 יְרוּשָׁלִַם = Jerusalem
+7 וַיִּקַּח = and he took
+8 אֶת־ = <obj.>
+9 אֹצְרוֹת = [the] treasures of
+10 בֵּית־ = [the] house of
+11 יְהוָה = Yahweh (LORD)
+12 וְאֶת־ = and <obj.>
+13 אֹצְרוֹת = [the] treasures of
+14 בֵּית = [the] house of
+15 הַמֶּלֶךְ = the king
+16 אֶת־ = <obj.>
+17 הַכֹּל = <the> everything (all)
+18 לָקָח = he took
+19 וַיִּקַּח = and he took
+20 אֶת־ = <obj.>
+21 מָגִנֵּי = [the] shields of (shield)
+22 הַזָּהָב = <the> gold (gold)
+23 אֲשֶׁר = which
+24 עָשָׂה = he had made (to make)
+25 שְׁלֹמֹה = Solomon
+
+## 14:12:10
+KO: 그리고 르호보암 왕은 그들 대신에 놋 방패들을 만들었고, 왕의 집 입구를 지키는 달리는 자들(시위대)의 우두머리들의 손에 맡겼다.
+1 וַיַּעַשׂ = and he made (to make)
+2 הַמֶּלֶךְ = the king
+3 רְחַבְעָם = Rehoboam
+4 תַּחְתֵּיהֶם = in place of them (underneath)
+5 מָגִנֵּי = shields of (shield)
+6 נְחֹשֶׁת = bronze
+7 וְהִפְקִיד = and he entrusted [them] (to reckon)
+8 עַל־ = on (upon)
+9 יַד = [the] hand of (hand)
+10 שָׂרֵי = [the] commanders of (ruler)
+11 הָרָצִים = the runners (to run)
+12 הַשֹּׁמְרִים = who guarded (to keep)
+13 פֶּתַח = [the] entrance of (entrance)
+14 בֵּית = [the] house of (house)
+15 הַמֶּלֶךְ = the king
+
+## 14:12:11
+KO: 그리고 왕이 여호와의 집에 들어갈 때마다 그 호위병들이 들어와서 그것들(방패들)을 들고 가고, 그것들을 호위병들의 방으로 되돌려 놓았더라.
+1 וַיְהִי = and it was (to be)
+2 מִדֵּי־ = as often as (enough)
+3 בוֹא = came
+4 הַמֶּלֶךְ = the king (king)
+5 בֵּית = [the] house of (house)
+6 יְהוָה = Yahweh (LORD)
+7 בָּאוּ = they came
+8 הָרָצִים = the runners
+9 וּנְשָׂאוּם = and they carried them (to lift)
+10 וֶהֱשִׁבוּם = and they returned them (to return)
+11 אֶל־ = to (to(wards))
+12 תָּא = [the] guardroom of (chamber)
+13 הָרָצִים = the runners
+
+## 14:12:12
+KO: 그가 스스로 겸비하였을 때, 여호와의 진노가 그에게서 돌이켜져서 그를 전멸시키지 아니하셨고, 유다에도 선한 일들이 있었다.
+1 וּבְהִכָּנְעוֹ = and when he humbled himself (be humble)
+2 שָׁב = it turned back (to return)
+3 מִמֶּנּוּ = from him (from)
+4 אַף־ = [the] anger of (face)
+5 יְהוָה = Yahweh (LORD)
+6 וְלֹא = and not (not)
+7 לְהַשְׁחִית = to destroy (to ruin)
+8 לְכָלָה = to complete destruction (consumption)
+9 וְגַם = and also (also)
+10 בִּיהוּדָה = in Judah (Judah)
+11 הָיָה = it was (to be)
+12 דְּבָרִים = things (word)
+13 טוֹבִים ס = good (pleasant)

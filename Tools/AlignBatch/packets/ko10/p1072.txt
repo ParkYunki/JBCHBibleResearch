@@ -1,0 +1,92 @@
+## 13:11:37
+KO: 헤스로, 갈멜 사람, 나아래, 에스배의 아들.
+1 חֶצְרוֹ = Hezro
+2 הַכַּרְמְלִי = the Carmelite (Carmel)
+3 נַעֲרַי = Naarai
+4 בֶּן־ = [the] son of (son)
+5 אֶזְבָּי ס = Ezbai
+
+## 13:11:38
+KO: 요엘, 나단의 형제, 그리고 밉할, 하그리의 아들.
+1 יוֹאֵל = Joel
+2 אֲחִי = [the] brother of (brother)
+3 נָתָן = Nathan
+4 מִבְחָר = Mibhar
+5 בֶּן־ = [the] son of (son)
+6 הַגְרִי ס = Hagri
+
+## 13:11:39
+KO: 암몬 사람 셀렉, 베롯 사람 나하래, 요압 벤 스루야의 병기 드는 자.
+1 צֶלֶק = Zelek
+2 הָעַמּוֹנִי = the Ammonite (Ammon)
+3 נַחְרַי = Naharai
+4 הַבֵּרֹתִי = the Beerothite (Beeroth)
+5 נֹשֵׂא = [the] bearer (to lift)
+6 כְּלֵי = of [the] weapons of (article|utensil)
+7 יוֹאָב = Joab
+8 בֶּן־ = [the] son of (son)
+9 צְרוּיָה ס = Zeruiah
+
+## 13:11:40
+KO: 이라 그 이델 사람과, 가렙 그 이델 사람이니라.
+1 עִירָא = Ira
+2 הַיִּתְרִי = the Ithrite
+3 גָּרֵב = Gareb
+4 הַיִּתְרִי ס = the Ithrite
+
+## 13:11:41
+KO: 우리아 헷 사람, 사밧 아들 알래.
+1 אוּרִיָּה = Uriah
+2 הַחִתִּי = the Hittite (Hittite)
+3 זָבָד = Zabad
+4 בֶּן־ = [the] son of (son)
+5 אַחְלָי ס = Ahlai
+
+## 13:11:42
+KO: 아디나, 시사의 아들, 그 르우벤 사람, 르우벤 사람들의 우두머리, 그리고 그와 함께 삼십 명이 있었다.
+1 עֲדִינָא = Adina
+2 בֶן־ = [the] son of (son)
+3 שִׁיזָא = Shiza
+4 הָראוּבֵנִי = the Reubenite
+5 רֹאשׁ = a chief (head)
+6 לָראוּבֵנִי = of the Reubenite[s]
+7 וְעָלָיו = and with him (upon)
+8 שְׁלוֹשִׁים ס = thirty [warriors] (thirty)
+
+## 13:11:43
+KO: 하난, 곧 마아가의 아들이요, 그리고 미덴 사람 요사밧이라.
+1 חָנָן = Hanan
+2 בֶּן־ = [the] son of (son)
+3 מַעֲכָה = Maacah
+4 וְיוֹשָׁפָט = and Joshaphat (Joshaphat)
+5 הַמִּתְנִי ס = the Mithnite (Mithnite)
+
+## 13:11:44
+KO: 아스드랏 사람 웃시야와 아로엘 사람 호담의 아들들인 사마와 여이엘과
+1 עֻזִיָּא = Uzzia
+2 הָעֲשְׁתְּרָתִי = the Ashterathite (Ashterathite)
+3 שָׁמָע = Shama
+4 וִיעִיאֵל = and Jeiel (Jeiel)
+5 בְּנֵי = [the] sons of (son)
+6 חוֹתָם = Hotham
+7 הָעֲרֹעֵרִי ס = the Aroerite (Aroerite)
+
+## 13:11:45
+KO: 여디아엘, 시므리의 아들, 그리고 그의 형제 디스 사람 요하.
+1 יְדִיעֲאֵל = Jediael
+2 בֶּן־ = [the] son of (son)
+3 שִׁמְרִי = Shimri
+4 וְיֹחָא = and Joha (Joha)
+5 אָחִיו = brother his (brother)
+6 הַתִּיצִי ס = the Tizite (Tizite)
+
+## 13:11:46
+KO: 엘리엘, 그 마하위 사람, 그리고 리배와, 그리고 요사위야, 엘나암의 아들들, 그리고 이드마, 그 모압 사람.
+1 אֱלִיאֵל = Eliel
+2 הַמַּחֲוִים = the Mahavite (Mahavite)
+3 וִירִיבַי = and Jeribai (Jeribai)
+4 וְיוֹשַׁוְיָה = and Joshaviah (Joshaviah)
+5 בְּנֵי = [the] sons of (son)
+6 אֶלְנָעַם = Elnaam
+7 וְיִתְמָה = and Ithmah (Ithmah)
+8 הַמּוֹאָבִי = the Moabite (Moab)

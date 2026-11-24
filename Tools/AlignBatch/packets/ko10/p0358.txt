@@ -1,0 +1,167 @@
+## 3:26:46
+KO: 이것들은 여호와께서 시내 산에서 자기와 이스라엘 자손 사이에 모세의 손을 통하여 주신 규례들과 법도들과 율법들이니라.
+1 אֵלֶּה = these
+2 הַחֻקִּים = [are] the statutes (statute)
+3 וְהַמִּשְׁפָּטִים = and the judgments (justice)
+4 וְהַתּוֹרֹת = and the legal [procedures] (instruction)
+5 אֲשֶׁר = which
+6 נָתַן = he gave (to give)
+7 יְהוָה = Yahweh (LORD)
+8 בֵּינוֹ = between himself
+9 וּבֵין = and between
+10 בְּנֵי = [the] people of (son)
+11 יִשְׂרָאֵל = Israel
+12 בְּהַר = on [the] mountain of (mountain)
+13 סִינַי = Sinai
+14 בְּיַד־ = by [the] hand of (hand)
+15 מֹשֶׁה פ = Moses
+
+## 3:27:1
+KO: 그리고 여호와께서 모세에게 말씀하여 이르셨다.
+1 וַיְדַבֵּר = and he spoke (to speak)
+2 יְהוָה = Yahweh (LORD)
+3 אֶל־ = to (to(wards))
+4 מֹשֶׁה = Moses
+5 לֵּאמֹר = <to> saying (to say)
+
+## 3:27:2
+KO: 이스라엘 자손에게 말하여 그들에게 이르라. 어떤 사람이 서원을 특별히 구별하여 드리기로 하면, 사람들은 너의 평가에 따라 여호와께 속한다.
+1 דַּבֵּר = speak (to speak)
+2 אֶל־ = to
+3 בְּנֵי = [the] people of (son)
+4 יִשְׂרָאֵל = Israel
+5 וְאָמַרְתָּ = and you will say (to say)
+6 אֲלֵהֶם = to them
+7 אִישׁ = anyone (man)
+8 כִּי = if (for)
+9 יַפְלִא = he will make hard (to wonder)
+10 נֶדֶר = a vow (vow)
+11 בְּעֶרְכְּךָ = by valuation of your (valuation)
+12 נְפָשֹׁת = persons (soul)
+13 לַיהוָה = to Yahweh (LORD)
+
+## 3:27:3
+KO: 그리고 너의 평가액은, 남자가 이십 세로부터 육십 세까지라면, 너의 평가액은 은 오십 세겔이 될 것이다, 성소의 세겔에 따라.
+1 וְהָיָה = and it will be
+2 עֶרְכְּךָ = valuation of your
+3 הַזָּכָר = the male (male)
+4 מִבֶּן = from a son of
+5 עֶשְׂרִים = twenty
+6 שָׁנָה = year[s]
+7 וְעַד = and to (till)
+8 בֶּן־ = a son of
+9 שִׁשִּׁים = sixty
+10 שָׁנָה = year[s]
+11 וְהָיָה = and it will be
+12 עֶרְכְּךָ = valuation your
+13 חֲמִשִּׁים = fifty
+14 שֶׁקֶל = shekel[s]
+15 כֶּסֶף = silver
+16 בְּשֶׁקֶל = by [the] shekel of
+17 הַקֹּדֶשׁ = the holy place (holiness)
+
+## 3:27:4
+KO: 만약 그가 여자라면, 그의 가치는 삼십 세겔이 될 것이다.
+1 וְאִם־ = and if (if)
+2 נְקֵבָה = [is] female (female)
+3 הִוא = she (he;_she;_it)
+4 וְהָיָה = and it will be (to be)
+5 עֶרְכְּךָ = valuation your (valuation)
+6 שְׁלֹשִׁים = thirty
+7 שָׁקֶל = shekel[s] (shekel)
+
+## 3:27:5
+KO: 그리고 만일 오 세로부터 이십 세까지라면, 너의 평가는 남자에게는 이십 세겔이고, 여자에게는 십 세겔일 것이다.
+1 וְאִם = and if (if)
+2 מִבֶּן־ = from a son of
+3 חָמֵשׁ = five
+4 שָׁנִים = years
+5 וְעַד = and to (till)
+6 בֶּן־ = a son of
+7 עֶשְׂרִים = twenty
+8 שָׁנָה = year[s]
+9 וְהָיָה = and it will be (to be)
+10 עֶרְכְּךָ = valuation of your (valuation)
+11 הַזָּכָר = the male (male)
+12 עֶשְׂרִים = twenty
+13 שְׁקָלִים = shekels
+14 וְלַנְּקֵבָה = and of the female (female)
+15 עֲשֶׂרֶת = ten
+16 שְׁקָלִים = shekels
+
+## 3:27:6
+KO: 만약 한 달 된 자로부터 다섯 살 된 자까지라면, 그 남자의 값은 은 오 세겔이 될 것이며, 그 여자를 위한 값은 은 삼 세겔이 될 것이다.
+1 וְאִם = and if (if)
+2 מִבֶּן־ = from a son of
+3 חֹדֶשׁ = a month (month)
+4 וְעַד = and to (till)
+5 בֶּן־ = a son of
+6 חָמֵשׁ = five
+7 שָׁנִים = years (year)
+8 וְהָיָה = and it will be (to be)
+9 עֶרְכְּךָ = valuation of your
+10 הַזָּכָר = the male (male)
+11 חֲמִשָּׁה = five
+12 שְׁקָלִים = shekels
+13 כָּסֶף = silver
+14 וְלַנְּקֵבָה = and of the female (female)
+15 עֶרְכְּךָ = valuation your
+16 שְׁלֹשֶׁת = three
+17 שְׁקָלִים = shekels
+18 כָּסֶף = silver
+
+## 3:27:7
+KO: 만약 육십 세의 나이로부터 그 이상이라면, 만약 남자라면 너의 평가는 십오 세겔이 될 것이며, 여자에게는 십 세겔이라.
+1 וְאִם = and if
+2 מִבֶּן־ = from a son of (son)
+3 שִׁשִּׁים = sixty
+4 שָׁנָה = year[s] (year)
+5 וָמַעְלָה = and up -wards (above)
+6 אִם־ = if
+7 זָכָר = male
+8 וְהָיָה = and it will be (to be)
+9 עֶרְכְּךָ = valuation your (valuation)
+10 חֲמִשָּׁה = fif- (five)
+11 עָשָׂר = teen (ten)
+12 שָׁקֶל = shekel[s]
+13 וְלַנְּקֵבָה = and of the female (female)
+14 עֲשָׂרָה = ten
+15 שְׁקָלִים = shekels
+
+## 3:27:8
+KO: 만일 그가 너의 평가액보다 가난하다면, 그를 제사장 앞으로 데려갈 것이요, 제사장은 그 값을 정할지니, 서원하는 자의 손이 미치는 대로 제사장이 그 값을 정할지니라.
+1 וְאִם־ = and if (if)
+2 מָךְ = [is too] impoverished (be poor)
+3 הוּא = he (he;_she;_it)
+4 מֵעֶרְכֶּךָ = for valuation your (valuation)
+5 וְהֶעֱמִידוֹ = and he will station him (to stand)
+6 לִפְנֵי = <to> before (face)
+7 הַכֹּהֵן = the priest
+8 וְהֶעֱרִיךְ = and he will evaluate
+9 אֹתוֹ = <obj.> him ([Obj.])
+10 הַכֹּהֵן = the priest
+11 עַל־ = on (upon)
+12 פִּי = [the] mouth of (lip)
+13 אֲשֶׁר = [that] which (which)
+14 תַּשִּׂיג = it will reach (to overtake)
+15 יַד = [the] hand of (hand)
+16 הַנֹּדֵר = the [one who] vows (to vow)
+17 יַעֲרִיכֶנּוּ = he will evaluate him
+18 הַכֹּהֵן ס = the priest
+
+## 3:27:9
+KO: 만약 그들이 여호와께 예물로 드리는 것이 생축이라면, 그(생축) 중에서 여호와께 드리는 모든 것은 거룩할 것이다.
+1 וְאִם־ = and if (if)
+2 בְּהֵמָה = an animal (animal)
+3 אֲשֶׁר = which
+4 יַקְרִיבוּ = people will present (to present)
+5 מִמֶּנָּה = from it
+6 קָרְבָּן = a present (offering)
+7 לַיהוָה = to Yahweh
+8 כֹּל = all
+9 אֲשֶׁר = that
+10 יִתֵּן = someone will give (to give)
+11 מִמֶּנּוּ = from it
+12 לַיהוָה = to Yahweh
+13 יִהְיֶה־ = it will be (to be)
+14 קֹּדֶשׁ = a holy thing (holiness)

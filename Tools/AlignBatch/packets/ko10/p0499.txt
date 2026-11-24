@@ -1,0 +1,185 @@
+## 5:3:5
+KO: 이 모든 성읍은 높은 성벽과 문과 빗장으로 견고하게 되었으며, 그 외에도 성벽 없는 고을들이 매우 많았느니라.
+1 כָּל־ = all
+2 אֵלֶּה = these
+3 עָרִים = [were] cities
+4 בְּצֻרוֹת = fortified (to gather|restrain|fortify)
+5 חוֹמָה = wall
+6 גְבֹהָה = high
+7 דְּלָתַיִם = gates (door)
+8 וּבְרִיחַ = and bar[s] (bar)
+9 לְבַד = <to> apart (alone)
+10 מֵעָרֵי = from [the] cities of
+11 הַפְּרָזִי = the hamlet-dweller[s] (villager)
+12 הַרְבֵּה = many (to multiply)
+13 מְאֹד = very (much)
+
+## 5:3:6
+KO: 그리고 우리가 그들을 진멸하였다, 우리가 헤스본 왕 시혼에게 행했던 것처럼, 각 성읍의 남성과 여성과 유아들을 진멸함(으로).
+1 וַנַּחֲרֵם = and we totally destroyed
+2 אוֹתָם = <obj.> them ([Obj.])
+3 כַּאֲשֶׁר = just as (as which)
+4 עָשִׂינוּ = we had done (to make)
+5 לְסִיחֹן = to Sihon (Sihon)
+6 מֶלֶךְ = [the] king of (king)
+7 חֶשְׁבּוֹן = Heshbon
+8 הַחֲרֵם = we totally destroyed
+9 כָּל־ = every (all)
+10 עִיר = city of (city)
+11 מְתִם = men (man)
+12 הַנָּשִׁים = the women (woman)
+13 וְהַטָּף = and the little one[s] (child)
+
+## 5:3:7
+KO: 그리고 모든 가축과 그 성읍들의 탈취물은 우리가 우리를 위하여 탈취하였으며.
+1 וְכָל־ = and all (all)
+2 הַבְּהֵמָה = the livestock (animal)
+3 וּשְׁלַל = and [the] booty of (spoil)
+4 הֶעָרִים = the cities (city)
+5 בַּזּוֹנוּ = we plundered (to plunder)
+6 לָנוּ = for ourselves (us)
+
+## 5:3:8
+KO: 그때에 우리가 요단 너머에 있는 아모리 족속의 두 왕의 손에서 그 땅을 취하였으니, 아르논 골짜기에서부터 헤르몬 산까지라.
+1 וַנִּקַּח = and we took (to take)
+2 בָּעֵת = at the time (time)
+3 הַהִוא = <the> that (he;_she;_it)
+4 אֶת־ = <obj.> ([Obj.])
+5 הָאָרֶץ = the land (land)
+6 מִיַּד = from [the] hand of (hand)
+7 שְׁנֵי = [the] two (two)
+8 מַלְכֵי = [the] kings of (king)
+9 הָאֱמֹרִי = the Amorite[s] (Amorite)
+10 אֲשֶׁר = who (which)
+11 בְּעֵבֶר = [were] on [the] other side of (side)
+12 הַיַּרְדֵּן = the Jordan (Jordan)
+13 מִנַּחַל = from [the] wadi of (torrent)
+14 אַרְנֹן = Arnon
+15 עַד־ = to (till)
+16 הַר = [the] mountain of (mountain)
+17 חֶרְמוֹן = Hermon ((Mount )Hermon)
+
+## 5:3:9
+KO: 시돈 사람들은 헤르몬을 시룐이라 부르고, 아모리 사람들은 그것을 스닐이라 부르느니라.
+1 צִידֹנִים = [the] Sidonians (Sidonian)
+2 יִקְרְאוּ = they call
+3 לְחֶרְמוֹן = <to> Hermon ((Mount )Hermon)
+4 שִׂרְיֹן = Sirion
+5 וְהָאֱמֹרִי = and the Amorite[s] (Amorite)
+6 יִקְרְאוּ־ = they call
+7 לוֹ = <to> it (him)
+8 שְׂנִיר = Senir
+
+## 5:3:10
+KO: 평원의 모든 성읍과 길르앗 온 땅과 바산 온 땅, 곧 바산에 있는 옥의 왕국 성읍들인 살르가와 에드레이까지 (우리가 취하였다).
+1 כֹּל = all
+2 עָרֵי = [the] cities of
+3 הַמִּישֹׁר = the plain (plain)
+4 וְכָל־ = and all
+5 הַגִּלְעָד = <the> Gilead (Gilead)
+6 וְכָל־ = and all
+7 הַבָּשָׁן = <the> Bashan
+8 עַד־ = to (till)
+9 סַלְכָה = Salecah
+10 וְאֶדְרֶעִי = and Edrei (Edrei)
+11 עָרֵי = [the] cities of
+12 מַמְלֶכֶת = [the] kingdom of (kingdom)
+13 עוֹג = Og
+14 בַּבָּשָׁן = in <the> Bashan
+
+## 5:3:11
+KO: 왜냐하면 오직 바산 왕 옥만이 르바임의 남은 자들로부터 남았기 때문이다. 보라, 그의 침상은 철 침상이다. 그것이 암몬 자손의 랍바에 있지 아니하냐? 사람의 규빗으로 그 길이가 아홉 규빗이고, 그 너비가 네 규빗이니라.
+1 כִּי = for
+2 רַק־ = only (except)
+3 עוֹג = Og
+4 מֶלֶךְ = [the] king of (king)
+5 הַבָּשָׁן = <the> Bashan (Bashan)
+6 נִשְׁאַר = he survived (to remain)
+7 מִיֶּתֶר = from [the] remnant of (remainder)
+8 הָרְפָאִים = the Rephaites (Rephaim)
+9 הִנֵּה = there! (behold)
+10 עַרְשׂוֹ = sarcophagus his
+11 עֶרֶשׂ = [was] a sarcophagus of
+12 בַּרְזֶל = iron
+13 הֲלֹה = ¿ not (not)
+14 הִוא = [is] it (he;_she;_it)
+15 בְּרַבַּת = in Rabbah of (Rabbah)
+16 בְּנֵי = [the] people of (son)
+17 עַמּוֹן = Ammon
+18 תֵּשַׁע = [was] nine (nine)
+19 אַמּוֹת = cubits
+20 אָרְכָּהּ = length its (length)
+21 וְאַרְבַּע = and [was] four (four)
+22 אַמּוֹת = cubits
+23 רָחְבָּהּ = breadth its (width)
+24 בְּאַמַּת־ = by a cubit of
+25 אִישׁ = a human (man)
+
+## 5:3:12
+KO: 그리고 이 땅을 우리가 그 때에 소유하였으니, 아르논 골짜기 위에 있는 아로엘로부터 길르앗 산지의 절반과 그 성읍들을 내가 르우벤 자손과 갓 자손에게 주었다.
+1 וְאֶת־ = and <obj.> ([Obj.])
+2 הָאָרֶץ = the land (land)
+3 הַזֹּאת = <the> this (this)
+4 יָרַשְׁנוּ = we took possession of (to possess)
+5 בָּעֵת = at the time (time)
+6 הַהִוא = <the> that (he;_she;_it)
+7 מֵעֲרֹעֵר = from Aroer (Aroer)
+8 אֲשֶׁר־ = which
+9 עַל־ = [was] at (upon)
+10 נַחַל = [the] wadi of (torrent)
+11 אַרְנֹן = Arnon
+12 וַחֲצִי = and [the] half of (half)
+13 הַר־ = [the] hill country of (mountain)
+14 הַגִּלְעָד = <the> Gilead (Gilead)
+15 וְעָרָיו = and cities its (city)
+16 נָתַתִּי = I gave (to give)
+17 לָרֻאוּבֵנִי = to the Reubenite[s] (Reubenite)
+18 וְלַגָּדִי = and to the Gadite[s] (Gad)
+
+## 5:3:13
+KO: 길르앗의 남은 부분과 옥의 나라였던 바산의 온 땅을 내가 므낫세 반 지파에게 주었노라. 아르곱의 온 지방, 곧 바산의 그 온 땅을 르바임의 땅이라 부르더라.
+1 וְיֶתֶר = and [the] remainder of (remainder)
+2 הַגִּלְעָד = <the> Gilead (Gilead)
+3 וְכָל־ = and all
+4 הַבָּשָׁן = <the> Bashan
+5 מַמְלֶכֶת = [the] kingdom of (kingdom)
+6 עוֹג = Og
+7 נָתַתִּי = I gave (to give)
+8 לַחֲצִי = to [the] half of (half)
+9 שֵׁבֶט = [the] tribe of (tribe)
+10 הַמְנַשֶּׁה = <the> Manasseh (Manasseh)
+11 כֹּל = all
+12 חֶבֶל = [the] region of (cord)
+13 הָאַרְגֹּב = <the> Argob (Argob)
+14 לְכָל־ = to all
+15 הַבָּשָׁן = <the> Bashan
+16 הַהוּא = <the> it (he;_she;_it)
+17 יִקָּרֵא = it was called (to call)
+18 אֶרֶץ = [the] land of (land)
+19 רְפָאִים = [the] Rephaites (Rephaim)
+
+## 5:3:14
+KO: 므낫세의 아들 야일이 아르곱의 온 구역을 그술 족속과 마아갓 족속의 경계까지 취하였고, 자기의 이름으로 바산을 하봇야일이라 불러 오늘까지 이르느니라.
+1 יָאִיר = Jair
+2 בֶּן־ = [the] son of (son)
+3 מְנַשֶּׁה = Manasseh
+4 לָקַח = he took (to take)
+5 אֶת־ = <obj.>
+6 כָּל־ = all
+7 חֶבֶל = [the] region of (cord)
+8 אַרְגֹּב = Argob
+9 עַד־ = to
+10 גְּבוּל = [the] border of (border)
+11 הַגְּשׁוּרִי = the Geshurite[s] (Geshurite)
+12 וְהַמַּעֲכָתִי = and the Maacathite[s] (Maacathite)
+13 וַיִּקְרָא = and he called (to call)
+14 אֹתָם = <obj.> them
+15 עַל־ = on (upon)
+16 שְׁמוֹ = own name his (name)
+17 אֶת־ = <obj.>
+18 הַבָּשָׁן = <the> Bashan (Bashan)
+19 חַוֹּת = [the] villages of
+20 יָאִיר = Jair
+21 עַד = until
+22 הַיּוֹם = the day (day)
+23 הַזֶּה = <the> this (this)

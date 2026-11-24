@@ -1,0 +1,224 @@
+## 11:2:20
+KO: 그녀가 말하였다. "내가 당신에게 한 가지 작은 요청을 구하오니, 내 얼굴을 돌려보내지 마소서." 왕이 그녀에게 말하였다. "구하시오, 나의 어머니여. 내가 당신의 얼굴을 돌려보내지 않을 것이오."
+1 וַתֹּאמֶר = and she said
+2 שְׁאֵלָה = a petition (petition)
+3 אַחַת = one
+4 קְטַנָּה = small
+5 אָנֹכִי = I
+6 שֹׁאֶלֶת = [am] asking
+7 מֵאִתָּךְ = from with <the> you (with)
+8 אַל־ = may not (not)
+9 תָּשֶׁב = you turn away
+10 אֶת־ = <obj.>
+11 פָּנָי = face my
+12 וַיֹּאמֶר־ = and he said
+13 לָהּ = to her (her)
+14 הַמֶּלֶךְ = the king (king)
+15 שַׁאֲלִי = ask
+16 אִמִּי = O mother my (mother)
+17 כִּי = for
+18 לֹא־ = not
+19 אָשִׁיב = I will turn away
+20 אֶת־ = <obj.>
+21 פָּנָיִךְ = face your
+
+## 11:2:21
+KO: 그녀가 말하였다. "수넴 여인 아비삭이 당신의 형제 아도니야에게 아내로 주어지게 하소서."
+1 וַתֹּאמֶר = and she said (to say)
+2 יֻתַּן = let it be given (to give)
+3 אֶת־ = <obj.> ([Obj.])
+4 אֲבִישַׁג = Abishag
+5 הַשֻּׁנַמִּית = the Shunammite (Shunammite)
+6 לַאֲדֹנִיָּהוּ = to Adonijah (Adonijah)
+7 אָחִיךָ = brother your (brother)
+8 לְאִשָּׁה = to a wife (woman)
+
+## 11:2:22
+KO: 솔로몬 왕이 대답하여 그의 어머니에게 말하였다. 어찌하여 당신은 아도니야를 위하여 수넴 여자 아비삭을 구하고 있습니까? 그를 위하여 왕권도 구하시오. 그는 나보다 나이가 많은 형이니, 그를 위하여, 그리고 제사장 아비아달을 위하여, 그리고 스루야의 아들 요압을 위하여 구하시오.
+1 וַיַּעַן = and he answered (to answer)
+2 הַמֶּלֶךְ = the king (king)
+3 שְׁלֹמֹה = Solomon
+4 וַיֹּאמֶר = and he said (to say)
+5 לְאִמּוֹ = to mother his (mother)
+6 וְלָמָה = and <to> why? (what?)
+7 אַתְּ = [are] you (you(f.s.))
+8 שֹׁאֶלֶת = asking
+9 אֶת־ = <obj.>
+10 אֲבִישַׁג = Abishag
+11 הַשֻּׁנַמִּית = the Shunammite (Shunammite)
+12 לַאֲדֹנִיָּהוּ = for Adonijah (Adonijah)
+13 וְשַׁאֲלִי־ = and ask
+14 לוֹ = for him
+15 אֶת־ = <obj.>
+16 הַמְּלוּכָה = the kingship (kingship)
+17 כִּי = for
+18 הוּא = he (he;_she;_it)
+19 אָחִי = [is] brother my (brother)
+20 הַגָּדוֹל = <the> old (great)
+21 מִמֶּנִּי = more than me (from)
+22 וְלוֹ = and for him
+23 וּלְאֶבְיָתָר = and for Abiathar (Abiathar)
+24 הַכֹּהֵן = the priest (priest)
+25 וּלְיוֹאָב = and for Joab (Joab)
+26 בֶּן־ = [the] son of (son)
+27 צְרוּיָה פ = Zeruiah
+
+## 11:2:23
+KO: 솔로몬 왕이 여호와를 두고 맹세하여 말하기를, "하나님이 나에게 이같이 행하시고 저같이 더하시리라, 아도니야가 자기 목숨을 걸고 이 말을 하였으니"라고 하였다.
+1 וַיִּשָּׁבַע = and he swore an oath (to swear)
+2 הַמֶּלֶךְ = the king (king)
+3 שְׁלֹמֹה = Solomon
+4 בַּיהוָה = by Yahweh (LORD)
+5 לֵאמֹר = <to> saying (to say)
+6 כֹּה = thus
+7 יַעֲשֶׂה־ = may he do (to make)
+8 לִּי = to me (me)
+9 אֱלֹהִים = God
+10 וְכֹה = and thus
+11 יוֹסִיף = may he add (to add)
+12 כִּי = if (for)
+13 בְנַפְשׁוֹ = by own life his (soul)
+14 דִּבֶּר = he has spoken (to speak)
+15 אֲדֹנִיָּהוּ = Adonijah
+16 אֶת־ = <obj.> ([Obj.])
+17 הַדָּבָר = the word (word)
+18 הַזֶּה = <the> this (this)
+
+## 11:2:24
+KO: 이제, 나를 세우시고 내 아버지 다윗의 보좌 위에 나를 앉게 하신 여호와께서 살아 계심을 두고, 또한 그분께서 말씀하신 대로 나를 위하여 집을 세우신 그분을 두고 맹세하노니, 오늘 아도니야는 죽임을 당하리라.
+1 וְעַתָּה = and therefore (now)
+2 חַי־ = [by] [the] life (alive)
+3 יְהוָה = of Yahweh (LORD)
+4 אֲשֶׁר = who
+5 הֱכִינַנִי = he appointed me (to establish)
+6 וַיּוֹשִׁיבַנִי = and he made sit me (to dwell)
+7 עַל־ = on (upon)
+8 כִּסֵּא = [the] throne of (throne)
+9 דָּוִד = David
+10 אָבִי = father my (father)
+11 וַאֲשֶׁר = and who
+12 עָשָׂה־ = he has made (to make)
+13 לִי = for me (me)
+14 בַּיִת = a house (house)
+15 כַּאֲשֶׁר = just as
+16 דִּבֵּר = he spoke (to speak)
+17 כִּי = that (for)
+18 הַיּוֹם = this day (day;_when)
+19 יוּמַת = he will be put to death (to die)
+20 אֲדֹנִיָּהוּ = Adonijah
+
+## 11:2:25
+KO: 그리고 솔로몬 왕이 여호야다의 아들 브나야의 손을 통하여 보냈고, 그가 그를 쳤으며 그가 죽었다.
+1 וַיִּשְׁלַח = and he sent (to send)
+2 הַמֶּלֶךְ = the king (king)
+3 שְׁלֹמֹה = Solomon
+4 בְּיַד = by [the] hand of (hand)
+5 בְּנָיָהוּ = Benaiah
+6 בֶן־ = [the] son of (son)
+7 יְהוֹיָדָע = Jehoiada
+8 וַיִּפְגַּע־ = and he fell (to fall on)
+9 בּוֹ = on him (him)
+10 וַיָּמֹת ס = and he died (to die)
+
+## 11:2:26
+KO: 그리고 왕이 제사장 아비아달에게 말했다. "너의 밭(고향) 아나돗으로 가라. 왜냐하면 너는 죽음의 사람이기 때문이다. 그러나 오늘 이 날에는 내가 너를 죽이지 않겠다. 왜냐하면 네가 내 아버지 다윗의 얼굴 앞에서 주 여호와의 궤를 메었고, 또 내 아버지가 고난을 받았던 모든 것 안에서 네가 고난을 받았기 때문이다."
+1 וּלְאֶבְיָתָר = and to Abiathar (Abiathar)
+2 הַכֹּהֵן = the priest (priest)
+3 אָמַר = he said (to say)
+4 הַמֶּלֶךְ = the king (king)
+5 עֲנָתֹת = Anathoth
+6 לֵךְ = go (to go)
+7 עַל־ = to (upon)
+8 שָׂדֶיךָ = fields your (land)
+9 כִּי = for
+10 אִישׁ = [are] a man of (man)
+11 מָוֶת = death
+12 אָתָּה = you (you(m.s.))
+13 וּבַיּוֹם = and on the day (day)
+14 הַזֶּה = <the> this (this)
+15 לֹא = not
+16 אֲמִיתֶךָ = I will put to death you (to die)
+17 כִּי־ = for
+18 נָשָׂאתָ = you carried (to lift)
+19 אֶת־ = <obj.> ([Obj.])
+20 אֲרוֹן = [the] ark of (ark)
+21 אֲדֹנָי = [the] Lord (Lord)
+22 יְהֹוִה = Yahweh (YHWH|Yahweh)
+23 לִפְנֵי = <to> before (face)
+24 דָּוִד = David
+25 אָבִי = father my
+26 וְכִי = and for
+27 הִתְעַנִּיתָ = you were afflicted
+28 בְּכֹל = in all (all)
+29 אֲשֶׁר־ = that (which)
+30 הִתְעַנָּה = he was afflicted
+31 אָבִי = father my
+
+## 11:2:27
+KO: 솔로몬이 아비아달을 내쫓아 여호와의 제사장 직분에서 물러나게 하였으니, 이는 실로에서 엘리의 집에 대하여 여호와께서 말씀하신 말씀을 채우려 함이었더라.
+1 וַיְגָרֶשׁ = and he drove out (to drive out)
+2 שְׁלֹמֹה = Solomon
+3 אֶת־ = <obj.>
+4 אֶבְיָתָר = Abiathar
+5 מִהְיוֹת = from being (to be)
+6 כֹּהֵן = a priest (priest)
+7 לַיהוָה = of Yahweh
+8 לְמַלֵּא = to fulfill (to fill)
+9 אֶת־ = <obj.>
+10 דְּבַר = [the] word of (word)
+11 יְהוָה = Yahweh
+12 אֲשֶׁר = which
+13 דִּבֶּר = he had spoken (to speak)
+14 עַל־ = on (upon)
+15 בֵּית = [the] house of (house)
+16 עֵלִי = Eli
+17 בְּשִׁלֹה פ = in Shiloh (Shiloh)
+
+## 11:2:28
+KO: 그 소문이 요압에게 이르렀으니, 이는 요압이 압살롬을 따르지 않았으나 아도니야를 따랐기 때문이었다. 요압이 여호와의 장막으로 도망하여 제단 뿔들을 잡았다.
+1 וְהַשְּׁמֻעָה = and the report (tidings)
+2 בָּאָה = it came (to come (in))
+3 עַד־ = to (till)
+4 יוֹאָב = Joab
+5 כִּי = for
+6 יוֹאָב = Joab
+7 נָטָה = he had turned aside
+8 אַחֲרֵי = after
+9 אֲדֹנִיָּה = Adonijah
+10 וְאַחֲרֵי = and after
+11 אַבְשָׁלוֹם = Absalom
+12 לֹא = not
+13 נָטָה = he had turned aside
+14 וַיָּנָס = and he fled (to flee)
+15 יוֹאָב = Joab
+16 אֶל־ = to (to(wards))
+17 אֹהֶל = [the] tent of (tent)
+18 יְהוָה = Yahweh (LORD)
+19 וַיַּחֲזֵק = and he took hold (to strengthen)
+20 בְּקַרְנוֹת = on [the] horns of (horn)
+21 הַמִּזְבֵּחַ = the altar (altar)
+
+## 11:2:29
+KO: 그리고 솔로몬 왕에게 고하여지기를 “요압이 여호와의 장막으로 도망하였고 보라, 그가 제단 곁에 있나이다” 하니, 솔로몬이 여호야다의 아들 브나야를 보내며 말하기를 “가서 그를 치라” 하였다.
+1 וַיֻּגַּד = and it was told (to tell)
+2 לַמֶּלֶךְ = to the king (king)
+3 שְׁלֹמֹה = Solomon
+4 כִּי = that (for)
+5 נָס = he had fled (to flee)
+6 יוֹאָב = Joab
+7 אֶל־ = to (to(wards))
+8 אֹהֶל = [the] tent of (tent)
+9 יְהוָה = Yahweh (LORD)
+10 וְהִנֵּה = and there! (behold)
+11 אֵצֶל = [he was] beside (beside)
+12 הַמִּזְבֵּחַ = the altar (altar)
+13 וַיִּשְׁלַח = and he sent (to send)
+14 שְׁלֹמֹה = Solomon
+15 אֶת־ = <obj.> ([Obj.])
+16 בְּנָיָהוּ = Benaiah
+17 בֶן־ = [the] son of (son)
+18 יְהוֹיָדָע = Jehoiada
+19 לֵאמֹר = <to> saying (to say)
+20 לֵךְ = go (to go)
+21 פְּגַע־ = fall (to fall on)
+22 בּוֹ = on him (him)

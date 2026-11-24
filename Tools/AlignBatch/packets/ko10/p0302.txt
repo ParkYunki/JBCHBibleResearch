@@ -1,0 +1,127 @@
+## 3:11:13
+KO: 그리고 새들 중에서 너희가 가증히 여길 것들은 이것들이니, 이것들은 가증한 것이라 먹지 말지니 곧 독수리와 솔개와 어응이라.
+1 וְאֶת־ = and <obj.>
+2 אֵלֶּה = these
+3 תְּשַׁקְּצוּ = you will consider detestable (to detest)
+4 מִן־ = from
+5 הָעוֹף = the bird[s] (bird)
+6 לֹא = not
+7 יֵאָכְלוּ = they will be eaten (to eat)
+8 שֶׁקֶץ = [are] detestable thing[s] (detestation)
+9 הֵם = they (they(masc.))
+10 אֶת־ = <obj.>
+11 הַנֶּשֶׁר = the eagle (eagle)
+12 וְאֶת־ = and <obj.>
+13 הַפֶּרֶס = the bearded vulture (vulture)
+14 וְאֵת = and <obj.>
+15 הָעָזְנִיָּה = the osprey (vulture)
+
+## 3:11:14
+KO: 그리고 솔개와 그리고 매를 그 종류대로.
+1 וְאֶת־ = and <obj.>
+2 הַדָּאָה = the black kite (kite)
+3 וְאֶת־ = and <obj.>
+4 הָאַיָּה = the hawk (falcon)
+5 לְמִינָהּ = to kind its (kind)
+
+## 3:11:15
+KO: 모든 까마귀를 그 종류대로
+1 אֵת = <obj.> ([Obj.])
+2 כָּל־ = every (all)
+3 עֹרֵב = raven
+4 לְמִינוֹ = to kind its (kind)
+
+## 3:11:16
+KO: 그리고 타조의 딸과, 그리고 다호마스와, 그리고 갈매기와, 그리고 그 종류대로의 새매와
+1 וְאֵת = and <obj.>
+2 בַּת = [the] daughter of (daughter)
+3 הַיַּעֲנָה = the ostrich (ostrich)
+4 וְאֶת־ = and <obj.>
+5 הַתַּחְמָס = the screech owl (ostrich)
+6 וְאֶת־ = and <obj.>
+7 הַשָּׁחַף = the gull (gull)
+8 וְאֶת־ = and <obj.>
+9 הַנֵּץ = the falcon (hawk)
+10 לְמִינֵהוּ = to kind its (kind)
+
+## 3:11:17
+KO: 그리고 올빼미와 그리고 가마우지와 그리고 부엉이를
+1 וְאֶת־ = and <obj.>
+2 הַכּוֹס = the little owl (owl)
+3 וְאֶת־ = and <obj.>
+4 הַשָּׁלָךְ = the cormorant (cormorant)
+5 וְאֶת־ = and <obj.>
+6 הַיַּנְשׁוּף = the great owl (owl)
+
+## 3:11:18
+KO: 그리고 올빼미와 그리고 사다새와 그리고 매와
+1 וְאֶת־ = and <obj.>
+2 הַתִּנְשֶׁמֶת = the barn owl (chameleon)
+3 וְאֶת־ = and <obj.>
+4 הַקָּאָת = the desert owl (pelican)
+5 וְאֶת־ = and <obj.>
+6 הָרָחָם = the Egyptian vulture (carrion)
+
+## 3:11:19
+KO: 그리고 황새와 그 종류대로의 왜가리와 그리고 대승과 그리고 박쥐니라.
+1 וְאֵת = and <obj.>
+2 הַחֲסִידָה = the stork (stork)
+3 הָאֲנָפָה = the heron (heron)
+4 לְמִינָהּ = to kind its (kind)
+5 וְאֶת־ = and <obj.>
+6 הַדּוּכִיפַת = the hoopoe (hoopoe)
+7 וְאֶת־ = and <obj.>
+8 הָעֲטַלֵּף = the bat (bat)
+
+## 3:11:20
+KO: 네 발로 기어 다니는 모든 날짐승은 너희에게 가증한 것이니라.
+1 כֹּל = every (all)
+2 שֶׁרֶץ = <the> swarming thing of (swarm)
+3 הָעוֹף = <the> wing (bird)
+4 הַהֹלֵךְ = which walks (to go)
+5 עַל־ = on (upon)
+6 אַרְבַּע = four [legs] (four)
+7 שֶׁקֶץ = [is] a detestable thing (detestation)
+8 הוּא = it (he;_she;_it)
+9 לָכֶם ס = to <the> you (you)
+
+## 3:11:21
+KO: 오직 이것은 너희가 먹을지니, 날개 달린 모든 기어다니는 것들 중에서 네 발로 기어 다니는 것으로서, 그 발 위에 그들을 가지고 땅 위에서 뛰는 다리들이 있는 것은 (먹을지니라).
+1 אַךְ = nevertheless (surely)
+2 אֶת־ = <obj.> ([Obj.])
+3 זֶה = this
+4 תֹּאכְלוּ = you will eat (to eat)
+5 מִכֹּל = from every (all)
+6 שֶׁרֶץ = <the> swarming thing of (swarm)
+7 הָעוֹף = <the> wing (bird)
+8 הַהֹלֵךְ = which walks (to go)
+9 עַל־ = on
+10 אַרְבַּע = four [legs] (four)
+11 אֲשֶׁר־ = which
+12 לוֹ = [belong] to <the> it (him)
+13 כְרָעַיִם = legs (leg)
+14 מִמַּעַל = from above (above)
+15 לְרַגְלָיו = <to> feet its (foot)
+16 לְנַתֵּר = to hop (to start)
+17 בָּהֵן = with <the> them (them)
+18 עַל־ = on
+19 הָאָרֶץ = the ground (land)
+
+## 3:11:22
+KO: 이것들 중에서 너희가 먹을 수 있는 것은 곧 메뚜기를 그 종류대로, 그리고 베짱이를 그 종류대로, 그리고 귀뚜라미를 그 종류대로, 그리고 팟종이를 그 종류대로이다.
+1 אֶת־ = <obj.>
+2 אֵלֶּה = these
+3 מֵהֶם = any of <the> them (them)
+4 תֹּאכֵלוּ = you will eat (to eat)
+5 אֶת־ = <obj.>
+6 הָאַרְבֶּה = the locust (locust)
+7 לְמִינוֹ = to kind its
+8 וְאֶת־ = and <obj.>
+9 הַסָּלְעָם = the locust (locust)
+10 לְמִינֵהוּ = to kind its
+11 וְאֶת־ = and <obj.>
+12 הַחַרְגֹּל = the locust (locust)
+13 לְמִינֵהוּ = to kind its
+14 וְאֶת־ = and <obj.>
+15 הֶחָגָב = the grasshopper (locust)
+16 לְמִינֵהוּ = to kind its

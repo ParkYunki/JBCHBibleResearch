@@ -1,0 +1,1039 @@
+## 42:20:39
+ES: Y respondiendo algunos de los escribas, dijeron: Maestro, bien has dicho.
+1	Ἀποκριθέντες	Answering	→ respondiendo
+2	δέ	now	→ Y
+3	τινες	some	→ algunos
+4	τῶν	of the	→ de los escribas
+5	γραμματέων	scribes	→ de los escribas
+6	εἶπαν·	said;	→ dijeron
+7	διδάσκαλε	Teacher,	→ Maestro
+8	καλῶς	well	→ bien
+9	εἶπας	you have spoken.	→ has dicho
+
+## 42:22:22
+ES: Porque el Hijo del hombre, a la verdad, va según lo que está determinado; pero ¡ay de aquel hombre por quien es entregado!
+1	ὅτι	For	→ Porque
+2	ὁ	the	→ el
+3	υἱὸς	Son	→ Hijo
+4	μὲν	indeed	→ a la verdad
+5	τοῦ	<the>	→ del hombre
+6	ἀνθρώπου	of man	→ del hombre
+7	κατὰ	according to	→ según
+8	τὸ	that	→ lo que está determinado
+9	ὡρισμένον	determined	→ lo que está determinado
+10	πορεύεται·	goes;	→ va
+11	πλὴν	but	→ pero
+12	οὐαὶ	woe	→ ay
+13	τῷ	to the	→ de aquel hombre
+14	ἀνθρώπῳ	man	→ de aquel hombre
+15	ἐκείνῳ	that [one]	→ de aquel hombre
+16	δι᾽	through	→ por
+17	οὗ	whom	→ quien
+18	παραδίδοται	He is betrayed.	→ es entregado
+
+## 42:24:38
+ES: Y les dijo: ¿Por qué estáis turbados, y por qué suben dudas a vuestro corazón?
+1	καὶ	And	→ Y
+2	εἶπεν	He said	→ les dijo
+3	αὐτοῖς·	to them;	→ les dijo
+4	τί	Why	→ Por qué
+5	τεταραγμένοι	troubled	→ turbados
+6	ἐστὲ	are you	→ estáis
+7	καὶ	and	→ y
+8	διὰ	through	→ por
+9	τί	why	→ qué
+10	διαλογισμοὶ	doubts	→ dudas
+11	ἀναβαίνουσιν	do come up	→ suben
+12	ἐν	in	→ a
+13	τῇ	the	→ —
+14	καρδίᾳ	heart	→ corazón
+15	ὑμῶν;	of you?	→ vuestro
+
+## 43:2:1
+ES: Y al tercer día hubo unas bodas en Caná de Galilea, y estaba allí la madre de Jesús.
+1	Καὶ	And	→ Y
+2	τῇ	on the	→ al tercer día
+3	ἡμέρᾳ	day	→ al tercer día
+4	τῇ	<the>	→ al tercer día
+5	τρίτῃ	third	→ al tercer día
+6	γάμος	a wedding	→ unas bodas
+7	ἐγένετο	took place	→ hubo
+8	ἐν	in	→ en
+9	Κανὰ	Cana	→ Caná
+10	τῆς	<the>	→ de Galilea
+11	Γαλιλαίας	of Galilee,	→ de Galilea
+12	καὶ	and	→ y
+13	ἦν	was	→ estaba
+14	ἡ	the	→ la madre
+15	μήτηρ	mother	→ la madre
+16	τοῦ	<the>	→ de Jesús
+17	Ἰησοῦ	of Jesus	→ de Jesús
+18	ἐκεῖ·	there;	→ allí
+
+## 43:4:24
+ES: Dios es Espíritu, y los que le adoran, en espíritu y en verdad es necesario que adoren.
+1	πνεῦμα	Spirit	→ Espíritu
+2	ὁ	<the>	→ Dios
+3	θεός	God [is],	→ Dios
+4	καὶ	and	→ y
+5	τοὺς	those	→ los que le adoran
+6	προσκυνοῦντας	worshiping	→ los que le adoran
+7	αὐτὸν	Him	→ los que le adoran
+8	ἐν	in	→ en
+9	πνεύματι	spirit	→ espíritu
+10	καὶ	and	→ y
+11	ἀληθείᾳ	truth	→ verdad
+12	δεῖ	it behooves	→ es necesario
+13	προσκυνεῖν	to worship.	→ adoren
+
+## 43:5:21
+ES: Porque como el Padre levanta a los muertos y les da vida, así también el Hijo da vida a los que quiere.
+1	ὥσπερ	Even as	→ como
+2	γὰρ	for	→ Porque
+3	ὁ	the	→ el
+4	πατὴρ	Father	→ Padre
+5	ἐγείρει	raises up	→ levanta
+6	τοὺς	the	→ los muertos
+7	νεκροὺς	dead	→ los muertos
+8	καὶ	and	→ y
+9	ζῳοποιεῖ	gives life,	→ les da vida
+10	οὕτως	thus	→ así
+11	καὶ	also	→ también
+12	ὁ	the	→ el
+13	υἱὸς	Son	→ Hijo
+14	οὓς	to whom	→ los que
+15	θέλει	He wishes	→ quiere
+16	ζῳοποιεῖ	gives life.	→ da vida
+
+## 43:8:51
+ES: De cierto, de cierto os digo: si alguno guarda mi palabra, jamás verá la muerte para siempre.
+1	Ἀμὴν	Amen	→ De cierto
+2	ἀμὴν	Amen	→ de cierto
+3	λέγω	I say	→ os digo
+4	ὑμῖν·	to you;	→ os digo
+5	ἐάν	if	→ si
+6	τις	anyone	→ alguno
+7	τὸν	<the>	→ mi palabra
+8	ἐμὸν	My	→ mi palabra
+9	λόγον	word	→ mi palabra
+10	τὸν	<the>	→ —
+11	τηρήσῃ	shall keep,	→ guarda
+12	θάνατον	death	→ la muerte
+13	οὐ	certainly	→ jamás
+14	μὴ	not	→ jamás
+15	θεωρήσῃ	shall he see	→ verá
+16	εἰς	to	→ para siempre
+17	τὸν	the	→ para siempre
+18	αἰῶνα	age.	→ para siempre
+
+## 43:9:19
+ES: y les preguntaron, diciendo: ¿Es éste vuestro hijo, el que vosotros decís que nació ciego? ¿Cómo, pues, ve ahora?
+1	καὶ	And	→ y
+2	ἠρώτησαν	they asked	→ les preguntaron
+3	αὐτοὺς	them	→ les preguntaron
+4	λέγοντες·	saying;	→ diciendo
+5	οὗτός	This	→ éste
+6	ἐστιν	is	→ Es
+7	ὁ	the	→ vuestro hijo
+8	υἱὸς	son	→ vuestro hijo
+9	ὑμῶν	of you	→ vuestro hijo
+10	ὃν	of whom	→ el que
+11	ὑμεῖς	you yourselves	→ vosotros
+12	λέγετε	say	→ decís
+13	ὅτι	that	→ que
+14	τυφλὸς	blind	→ ciego
+15	ἐγεννήθη;	he was born?	→ nació
+16	πῶς	How	→ Cómo
+17	οὖν	then	→ pues
+18	βλέπει	does he see	→ ve
+19	ἄρτι;	presently	→ ahora
+
+## 43:9:23
+ES: Por esto dijeron sus padres: Edad tiene, preguntadle a él.
+1	διὰ	Because of	→ Por esto
+2	τοῦτο	this	→ Por esto
+3	οἱ	the	→ sus padres
+4	γονεῖς	parents	→ sus padres
+5	αὐτοῦ	of him	→ sus padres
+6	εἶπαν	said	→ dijeron
+7	ὅτι	that	→ —
+8	ἡλικίαν	Age	→ Edad
+9	ἔχει	he has,	→ tiene
+10	αὐτὸν	him	→ preguntadle
+11	ἐπερωτήσατε	do question.	→ preguntadle
+
+## 43:9:37
+ES: Le dijo Jesús: Pues le has visto, y el que habla contigo, ése es.
+1	εἶπεν	Said	→ Le dijo
+2	δὲ	now	→ —
+3	αὐτῷ	to him	→ Le dijo
+4	ὁ	<the>	→ Jesús
+5	Ἰησοῦς·	Jesus;	→ Jesús
+6	καὶ	Both	→ Pues
+7	ἑώρακας	You have seen	→ le has visto
+8	αὐτόν	Him,	→ le has visto
+9	καὶ	and	→ y
+10	ὁ	the [One]	→ el que
+11	λαλῶν	speaking	→ habla
+12	μετὰ	with	→ contigo
+13	σοῦ	you	→ contigo
+14	ἐκεῖνός	He	→ ése
+15	ἐστιν	is.	→ es
+
+## 43:13:13
+ES: Vosotros me llamáis el Maestro y el Señor; y decís bien, porque lo soy.
+1	ὑμεῖς	You yourselves	→ Vosotros
+2	φωνεῖτέ	call	→ me llamáis
+3	με·	Me:	→ me llamáis
+4	ὁ	<the>	→ el Maestro
+5	διδάσκαλος	Teacher	→ el Maestro
+6	καὶ	and	→ y
+7	ὁ	<the>	→ el Señor
+8	κύριος	Lord,	→ el Señor
+9	καὶ	and	→ y
+10	καλῶς	rightly	→ bien
+11	λέγετε·	you say;	→ decís
+12	εἰμὶ	I am	→ lo soy
+13	γάρ	for.	→ porque
+
+## 43:20:3
+ES: Salió, pues, Pedro y el otro discípulo, y venían al sepulcro.
+1	Ἐξῆλθεν	Went forth	→ Salió
+2	οὖν	therefore	→ pues
+3	ὁ	<the>	→ Pedro
+4	Πέτρος	Peter	→ Pedro
+5	καὶ	and	→ y
+6	ὁ	the	→ el otro discípulo
+7	ἄλλος	other	→ el otro discípulo
+8	μαθητὴς	disciple	→ el otro discípulo
+9	καὶ	and	→ y
+10	ἤρχοντο	were coming	→ venían
+11	εἰς	to	→ al sepulcro
+12	τὸ	the	→ al sepulcro
+13	μνημεῖον·	tomb;	→ al sepulcro
+
+## 43:21:7
+ES: Dice entonces aquel discípulo a quien Jesús amaba a Pedro: ¡Es el Señor! Simón Pedro, pues, oyendo que era el Señor, se ciñó la ropa de encima, porque estaba desnudo, y se echó al mar.
+1	λέγει	Says	→ Dice
+2	οὖν	therefore	→ entonces
+3	ὁ	the	→ aquel discípulo
+4	μαθητὴς	disciple	→ aquel discípulo
+5	ἐκεῖνος	that [one]	→ aquel discípulo
+6	ὃν	whom	→ quien
+7	ἠγάπα	was loving	→ amaba
+8	ὁ	<the>	→ Jesús
+9	Ἰησοῦς	Jesus	→ Jesús
+10	τῷ	<the>	→ Pedro
+11	Πέτρῳ·	to Peter;	→ Pedro
+12	ὁ	The	→ el Señor
+13	κύριός	Lord	→ el Señor
+14	ἐστιν	it is.	→ Es
+15	Σίμων	Simon	→ Simón Pedro
+16	οὖν	therefore	→ pues
+17	Πέτρος	Peter	→ Simón Pedro
+18	ἀκούσας	having heard	→ oyendo
+19	ὅτι	that	→ que
+20	ὁ	the	→ el Señor
+21	κύριός	Lord	→ el Señor
+22	ἐστιν	it is	→ era
+23	τὸν	the	→ la ropa de encima
+24	ἐπενδύτην	outer garment	→ la ropa de encima
+25	διεζώσατο	put on	→ se ciñó
+26	ἦν	he was	→ estaba
+27	γὰρ	for	→ porque
+28	γυμνός	naked	→ desnudo
+29	καὶ	and	→ y
+30	ἔβαλεν	he cast	→ se echó
+31	ἑαυτὸν	himself	→ se echó
+32	εἰς	into	→ al mar
+33	τὴν	the	→ al mar
+34	θάλασσαν	sea.	→ al mar
+
+## 44:3:25
+ES: Vosotros sois los hijos de los profetas y del pacto que Dios concertó con vuestros padres, diciendo a Abraham: En tu simiente serán benditas todas las familias de la tierra.
+1	ὑμεῖς	You yourselves	→ Vosotros
+2	ἐστε	are	→ sois
+3	οἱ	the	→ los hijos
+4	υἱοὶ	sons	→ los hijos
+5	τῶν	of the	→ de los profetas
+6	προφητῶν	prophets	→ de los profetas
+7	καὶ	and	→ y
+8	τῆς	of the	→ del pacto
+9	διαθήκης	covenant	→ del pacto
+10	ἧς	that	→ que
+11	διέθετο	made	→ concertó
+12	ὁ	<the>	→ Dios
+13	θεὸς	God	→ Dios
+14	πρὸς	with	→ con vuestros padres
+15	τοὺς	the	→ con vuestros padres
+16	πατέρας	fathers	→ con vuestros padres
+17	ὑμῶν	of you	→ con vuestros padres
+18	λέγων	saying	→ diciendo
+19	πρὸς	to	→ a Abraham
+20	Ἀβραάμ·	Abraham;	→ a Abraham
+21	καὶ	And	→ —
+22	ἐν	in	→ En
+23	τῷ	the	→ tu simiente
+24	σπέρματί	seed	→ tu simiente
+25	σου	of you	→ tu simiente
+26	ἐνευλογηθήσονται	will be blessed	→ serán benditas
+27	πᾶσαι	all	→ todas
+28	αἱ	the	→ las familias
+29	πατριαὶ	families	→ las familias
+30	τῆς	of the	→ de la tierra
+31	γῆς	earth.’	→ de la tierra
+
+## 44:15:12
+ES: Y toda la multitud calló, y oían a Bernabé y a Pablo, que contaban cuán grandes señales y prodigios había hecho Dios por medio de ellos entre los gentiles.
+1	ἐσίγησεν	Kept silent	→ calló
+2	δὲ	now	→ Y
+3	πᾶν	all	→ toda la multitud
+4	τὸ	the	→ toda la multitud
+5	πλῆθος	multitude	→ toda la multitud
+6	καὶ	and	→ y
+7	ἤκουον	were listening to	→ oían
+8	Βαρναβᾶ	Barnabas	→ Bernabé
+9	καὶ	and	→ y
+10	Παύλου	Paul	→ Pablo
+11	ἐξηγουμένων	relating	→ contaban
+12	ὅσα	how much	→ cuán grandes
+13	ἐποίησεν	did	→ había hecho
+14	ὁ	<the>	→ Dios
+15	θεὸς	God	→ Dios
+16	σημεῖα	signs	→ señales
+17	καὶ	and	→ y
+18	τέρατα	wonders	→ prodigios
+19	ἐν	among	→ entre los gentiles
+20	τοῖς	the	→ entre los gentiles
+21	ἔθνεσιν	Gentiles	→ entre los gentiles
+22	δι᾽	through	→ por medio de ellos
+23	αὐτῶν	them.	→ por medio de ellos
+
+## 44:17:15
+ES: Y los que acompañaban a Pablo le llevaron hasta Atenas; y recibido encargo para Silas y Timoteo de que viniesen a él lo más pronto posible, partieron.
+1	οἱ	Those	→ los que
+2	δὲ	now	→ Y
+3	καθιστάνοντες	escorting	→ acompañaban
+4	τὸν	<the>	→ Pablo
+5	Παῦλον	Paul	→ Pablo
+6	ἤγαγον	brought	→ le llevaron
+7	αὐτὸν	him	→ le llevaron
+8	ἕως	unto	→ hasta
+9	Ἀθηνῶν	Athens,	→ Atenas
+10	καὶ	and	→ y
+11	λαβόντες	having received	→ recibido
+12	ἐντολὴν	a command	→ encargo
+13	πρὸς	unto	→ para
+14	τὸν	<the>	→ Silas
+15	Σιλᾶν	Silas	→ Silas
+16	καὶ	and	→ y
+17	τὸν	<the>	→ Timoteo
+18	Τιμόθεον	Timothy	→ Timoteo
+19	ἵνα	that	→ que
+20	ὡς	as	→ lo más pronto posible
+21	τάχιστα	quickly as possible	→ lo más pronto posible
+22	ἔλθωσιν	they may come	→ viniesen
+23	πρὸς	to	→ a él
+24	αὐτὸν	him	→ a él
+25	ἐξῄεσαν	they were departing.	→ partieron
+
+## 44:18:10
+ES: porque yo estoy contigo, y nadie pondrá la mano sobre ti para hacerte mal; porque yo tengo mucho pueblo en esta ciudad.
+1	διότι	because	→ porque
+2	ἐγώ	I myself	→ yo
+3	εἰμι	am	→ estoy
+4	μετὰ	with	→ contigo
+5	σοῦ	you,	→ contigo
+6	καὶ	and	→ y
+7	οὐδεὶς	no [one]	→ nadie
+8	ἐπιθήσεταί	will lay a hand on	→ pondrá la mano
+9	σοι	you	→ sobre ti
+10	τοῦ	<the>	→ para hacerte mal
+11	κακῶσαί	to harm	→ para hacerte mal
+12	σε·	you;	→ para hacerte mal
+13	διότι	because	→ porque
+14	λαός	people	→ pueblo
+15	ἐστίν	there is	→ tengo
+16	μοι	to me	→ tengo
+17	πολὺς	many	→ mucho
+18	ἐν	in	→ en esta ciudad
+19	τῇ	<the>	→ en esta ciudad
+20	πόλει	city	→ en esta ciudad
+21	ταύτῃ·	this;	→ en esta ciudad
+
+## 44:19:20
+ES: Así crecía y prevalecía poderosamente la palabra del Señor.
+1	οὕτως	thus	→ Así
+2	κατὰ	with	→ poderosamente
+3	κράτος	might	→ poderosamente
+4	τοῦ	of the	→ del Señor
+5	κυρίου	Lord	→ del Señor
+6	ὁ	the	→ la palabra
+7	λόγος	word	→ la palabra
+8	ηὔξανεν	was continuing to increase	→ crecía
+9	καὶ	and	→ y
+10	ἴσχυεν	was prevailing.	→ prevalecía
+
+## 45:8:36
+ES: Como está escrito: Por causa de ti somos muertos todo el día; fuimos contados como ovejas de matadero.
+1	καθὼς	Even as	→ Como
+2	γέγραπται	it has been written	→ está escrito
+3	ὅτι	that	→ —
+4	ἕνεκεν	For the sake	→ Por causa de ti
+5	σοῦ	of you	→ Por causa de ti
+6	θανατούμεθα	we face death	→ somos muertos
+7	ὅλην	all	→ todo el día
+8	τὴν	the	→ todo el día
+9	ἡμέραν	day,	→ todo el día
+10	ἐλογίσθημεν	we were regarded	→ fuimos contados
+11	ὡς	as	→ como
+12	πρόβατα	sheep	→ ovejas
+13	σφαγῆς	of slaughter.	→ de matadero
+
+## 45:9:19
+ES: Me dirás, pues: ¿Por qué, pues, todavía inculpa? Porque ¿quién ha resistido a su voluntad?
+1	Ἐρεῖς	You will say	→ Me dirás
+2	μοι	to me	→ Me dirás
+3	οὖν·	then:	→ pues
+4	τί	Why	→ Por qué
+5	οὖν	then	→ pues
+6	ἔτι	still	→ todavía
+7	μέμφεται;	does He find fault?	→ inculpa
+8	τῷ	The	→ su voluntad
+9	γὰρ	for	→ Porque
+10	βουλήματι	purpose	→ su voluntad
+11	αὐτοῦ	of Him	→ su voluntad
+12	τίς	who	→ quién
+13	ἀνθέστηκεν;	has been resisting?	→ ha resistido
+
+## 45:16:3
+ES: Saludad a Prisca y a Aquila, mis colaboradores en Cristo Jesús,
+1	Ἀσπάσασθε	do greet	→ Saludad
+2	Πρίσκαν	Prisca	→ Prisca
+3	καὶ	and	→ y
+4	Ἀκύλαν	Aquila	→ Aquila
+5	τοὺς	the	→ mis colaboradores
+6	συνεργούς	fellow workers	→ mis colaboradores
+7	μου	of mine	→ mis colaboradores
+8	ἐν	in	→ en Cristo Jesús
+9	Χριστῷ	Christ	→ en Cristo Jesús
+10	Ἰησοῦ	Jesus —	→ en Cristo Jesús
+
+## 46:1:25
+ES: Porque lo insensato de Dios es más sabio que los hombres, y lo débil de Dios es más fuerte que los hombres.
+1	ὅτι	For	→ Porque
+2	τὸ	the	→ lo insensato
+3	μωρὸν	foolishness	→ lo insensato
+4	τοῦ	<the>	→ de Dios
+5	θεοῦ	of God	→ de Dios
+6	σοφώτερον	wiser	→ más sabio
+7	τῶν	<the>	→ que los hombres
+8	ἀνθρώπων	than men	→ que los hombres
+9	ἐστὶν	is	→ es
+10	καὶ	and	→ y
+11	τὸ	the	→ lo débil
+12	ἀσθενὲς	weakness	→ lo débil
+13	τοῦ	<the>	→ de Dios
+14	θεοῦ	of God	→ de Dios
+15	ἰσχυρότερον	stronger	→ más fuerte
+16	τῶν	<the>	→ que los hombres
+17	ἀνθρώπων	than men	→ que los hombres
+18	ἐστίν	is.	→ es
+
+## 46:9:27
+ES: sino que golpeo mi cuerpo y lo pongo en servidumbre, no sea que, habiendo predicado a otros, yo mismo venga a ser reprobado.
+1	ἀλλ᾽	But	→ sino que
+2	ὑπωπιάζω	I batter	→ golpeo
+3	μου	my	→ mi cuerpo
+4	τὸ	<the>	→ mi cuerpo
+5	σῶμα	body	→ mi cuerpo
+6	καὶ	and	→ y
+7	δουλαγωγῶ	bring [it] into servitude,	→ lo pongo en servidumbre
+8	μή	lest	→ no sea que
+9	πως	perhaps	→ —
+10	ἄλλοις	to others	→ otros
+11	κηρύξας	having preached	→ habiendo predicado
+12	αὐτὸς	myself	→ yo mismo
+13	ἀδόκιμος	disqualified	→ reprobado
+14	γένωμαι	I may be.	→ venga a ser
+
+## 46:14:1
+ES: Seguid el amor; y procurad los dones espirituales, pero sobre todo que profeticéis.
+1	Διώκετε	do earnestly pursue	→ Seguid
+2	τὴν	<the>	→ el amor
+3	ἀγάπην·	love;	→ el amor
+4	ζηλοῦτε	do earnestly desire	→ procurad
+5	δὲ	now	→ y
+6	τὰ	<the>	→ los dones espirituales
+7	πνευματικά	spiritual gifts,	→ los dones espirituales
+8	μᾶλλον	especially	→ sobre todo
+9	δὲ	now	→ pero
+10	ἵνα	that	→ que
+11	προφητεύητε	you may prophesy.	→ profeticéis
+
+## 46:14:5
+ES: Y quisiera que todos vosotros hablaseis en lenguas, pero más que profetizaseis; y mayor es el que profetiza que el que habla en lenguas, a no ser que interprete, para que la iglesia reciba edificación.
+1	Θέλω	I desire	→ quisiera
+2	δὲ	now	→ Y
+3	πάντας	all	→ todos
+4	ὑμᾶς	you	→ vosotros
+5	λαλεῖν	to speak	→ hablaseis
+6	γλώσσαις	in tongues,	→ en lenguas
+7	μᾶλλον	rather	→ más
+8	δὲ	however	→ pero
+9	ἵνα	that	→ que
+10	προφητεύητε·	you may prophesy;	→ profetizaseis
+11	μείζων	greater [is]	→ mayor es
+12	δὲ	now	→ y
+13	ὁ	the [one]	→ el que profetiza
+14	προφητεύων	prophesying	→ el que profetiza
+15	ἢ	than	→ que
+16	ὁ	the [one]	→ el que habla
+17	λαλῶν	speaking	→ el que habla
+18	γλώσσαις	in tongues	→ en lenguas
+19	ἐκτὸς	except	→ a no ser que
+20	εἰ	only	→ a no ser que
+21	μὴ	unless	→ a no ser que
+22	διερμηνεύῃ	he shall interpret,	→ interprete
+23	ἵνα	so that	→ para que
+24	ἡ	the	→ la iglesia
+25	ἐκκλησία	church	→ la iglesia
+26	οἰκοδομὴν	edification	→ edificación
+27	λάβῃ	may receive.	→ reciba
+
+## 46:15:46
+ES: Pero no es primero lo espiritual, sino lo animal; luego lo espiritual.
+1	ἀλλ᾽	However	→ Pero
+2	οὐ	not	→ no
+3	πρῶτον	first [was]	→ primero
+4	τὸ	the	→ lo espiritual
+5	πνευματικὸν	spiritual	→ lo espiritual
+6	ἀλλὰ	but	→ sino
+7	τὸ	the	→ lo animal
+8	ψυχικόν	natural,	→ lo animal
+9	ἔπειτα	then	→ luego
+10	τὸ	the	→ lo espiritual
+11	πνευματικόν	spiritual.	→ lo espiritual
+
+## 47:5:2
+ES: Y por esto también gemimos, deseando ser revestidos de nuestra habitación que es del cielo,
+1	καὶ	And	→ también
+2	γὰρ	indeed	→ Y
+3	ἐν	in	→ por esto
+4	τούτῳ	this	→ por esto
+5	στενάζομεν	we groan,	→ gemimos
+6	τὸ	the	→ nuestra habitación
+7	οἰκητήριον	dwelling	→ nuestra habitación
+8	ἡμῶν	of us	→ nuestra habitación
+9	τὸ	which [is]	→ que
+10	ἐξ	from	→ del cielo
+11	οὐρανοῦ	heaven	→ del cielo
+12	ἐπενδύσασθαι	to be clothed with	→ ser revestidos
+13	ἐπιποθοῦντες·	longing;	→ deseando
+
+## 48:1:23
+ES: solamente oían decir: El que en otro tiempo nos perseguía, ahora anuncia la fe que en otro tiempo asolaba.
+1	μόνον	Only	→ solamente
+2	δὲ	however	→ —
+3	ἀκούοντες	hearing	→ oían decir
+4	ἦσαν	they were	→ oían decir
+5	ὅτι	that	→ —
+6	ὁ	the [one]	→ El que
+7	διώκων	persecuting	→ nos perseguía
+8	ἡμᾶς	us	→ nos perseguía
+9	ποτε	formerly	→ en otro tiempo
+10	νῦν	now	→ ahora
+11	εὐαγγελίζεται	is evangelising	→ anuncia
+12	τὴν	the	→ la fe
+13	πίστιν	faith	→ la fe
+14	ἥν	which	→ que
+15	ποτε	once	→ en otro tiempo
+16	ἐπόρθει·	he was destroying;	→ asolaba
+
+## 48:3:15
+ES: Hermanos, hablo según los hombres: aun un pacto de hombre, una vez ratificado, nadie lo invalida ni le añade.
+1	ἀδελφοί	Brothers,	→ Hermanos
+2	κατὰ	according to	→ según los hombres
+3	ἄνθρωπον	man	→ según los hombres
+4	λέγω	I am speaking.	→ hablo
+5	ὅμως	Even	→ aun
+6	ἀνθρώπου	of man	→ un pacto de hombre
+7	κεκυρωμένην	ratified	→ ratificado
+8	διαθήκην	a covenant	→ un pacto de hombre
+9	οὐδεὶς	no [one]	→ nadie
+10	ἀθετεῖ	sets aside	→ lo invalida
+11	ἢ	or	→ ni
+12	ἐπιδιατάσσεται	adds thereto.	→ le añade
+
+## 48:6:3
+ES: Porque si alguno se cree ser algo, no siendo nada, a sí mismo se engaña.
+1	εἰ	If	→ si
+2	γὰρ	for	→ Porque
+3	δοκεῖ	thinks [himself]	→ se cree
+4	τις	anyone	→ alguno
+5	εἶναί	to be	→ ser
+6	τι	something	→ algo
+7	μηδὲν	nothing	→ no siendo nada
+8	ὤν	being,	→ no siendo nada
+9	φρεναπατᾷ	he deceives	→ se engaña
+10	ἑαυτόν·	himself;	→ a sí mismo
+
+## 49:2:1
+ES: Y a vosotros, estando muertos en vuestros delitos y pecados,
+1	Καὶ	And	→ Y
+2	ὑμᾶς	you	→ vosotros
+3	ὄντας	being	→ estando
+4	νεκροὺς	dead	→ muertos
+5	τοῖς	in the	→ en vuestros delitos
+6	παραπτώμασιν	trespasses	→ en vuestros delitos
+7	καὶ	and	→ y
+8	ταῖς	in the	→ pecados
+9	ἁμαρτίαις	sins	→ pecados
+10	ὑμῶν	of you,	→ en vuestros delitos
+
+## 49:5:4
+ES: ni la obscenidad, ni la necedad, ni las truhanerías, que no convienen, sino más bien la acción de gracias.
+1	καὶ	and	→ ni
+2	αἰσχρότης	filthiness	→ obscenidad
+3	καὶ	and	→ ni
+4	μωρολογία	foolish talking	→ necedad
+5	ἢ	or	→ ni
+6	εὐτραπελία	crude joking	→ truhanerías
+7	ἃ	which	→ que
+8	οὐκ	not	→ no
+9	ἀνῆκεν	were fit	→ convienen
+10	ἀλλὰ	but	→ sino
+11	μᾶλλον	rather	→ más bien
+12	εὐχαριστία	thanksgiving.	→ acción de gracias
+
+## 50:1:14
+ES: y la mayoría de los hermanos en el Señor, confiados por mis prisiones, se atreven mucho más a hablar sin temor la palabra.
+1	καὶ	and	→ y
+2	τοὺς	<the>	→ la mayoría
+3	πλείονας	most	→ la mayoría
+4	τῶν	of the	→ de los hermanos
+5	ἀδελφῶν	brothers	→ de los hermanos
+6	ἐν	in	→ en el Señor
+7	κυρίῳ	[the] Lord	→ en el Señor
+8	πεποιθότας	already trusting	→ confiados
+9	τοῖς	by the	→ por mis prisiones
+10	δεσμοῖς	chains	→ por mis prisiones
+11	μου	of mine	→ por mis prisiones
+12	περισσοτέρως	more abundantly	→ mucho más
+13	τολμᾶν	to dare	→ se atreven
+14	ἀφόβως	fearlessly	→ sin temor
+15	τὸν	the	→ la palabra
+16	λόγον	word	→ la palabra
+17	τοῦ	of the	→ —
+18	θεοῦ	God	→ —
+19	λαλεῖν	to speak.	→ hablar
+
+## 50:4:12
+ES: Sé también estar humillado, y sé tener abundancia; en todo y por todo estoy enseñado, así a estar saciado como a tener hambre, así a tener abundancia como a padecer necesidad.
+1	οἶδα	I know	→ Sé
+2	καὶ	also	→ también
+3	ταπεινοῦσθαι	[how] to be brought low,	→ estar humillado
+4	οἶδα	I know	→ sé
+5	καὶ	also	→ y
+6	περισσεύειν·	[how] to abound;	→ tener abundancia
+7	ἐν	In	→ en todo
+8	παντὶ	everything	→ en todo
+9	καὶ	and	→ y
+10	ἐν	in	→ por todo
+11	πᾶσιν	all things	→ por todo
+12	μεμύημαι	I have learned the secret	→ estoy enseñado
+13	καὶ	also	→ así
+14	χορτάζεσθαι	to be full	→ estar saciado
+15	καὶ	and	→ como
+16	πεινᾶν	to hunger	→ tener hambre
+17	καὶ	also	→ así
+18	περισσεύειν	to abound	→ tener abundancia
+19	καὶ	and	→ como
+20	ὑστερεῖσθαι·	to be deficient;	→ padecer necesidad
+
+## 51:1:24
+ES: Ahora me gozo en los padecimientos por vosotros, y cumplo en mi carne lo que falta de las aflicciones de Cristo por su cuerpo, que es la iglesia,
+1	Νῦν	Now	→ Ahora
+2	χαίρω	I rejoice	→ me gozo
+3	ἐν	in	→ en los padecimientos
+4	τοῖς	the	→ en los padecimientos
+5	παθήμασιν	sufferings	→ en los padecimientos
+6	μου	of mine	→ —
+7	ὑπὲρ	for	→ por vosotros
+8	ὑμῶν	you	→ por vosotros
+9	καὶ	and	→ y
+10	ἀνταναπληρῶ	I am filling up	→ cumplo
+11	τὰ	that which	→ lo que falta
+12	ὑστερήματα	is lacking	→ lo que falta
+13	τῶν	of the	→ de las aflicciones
+14	θλίψεων	tribulations	→ de las aflicciones
+15	τοῦ	<the>	→ de Cristo
+16	Χριστοῦ	of Christ	→ de Cristo
+17	ἐν	in	→ en mi carne
+18	τῇ	the	→ en mi carne
+19	σαρκί	flesh	→ en mi carne
+20	μου	of mine	→ en mi carne
+21	ὑπὲρ	for	→ por su cuerpo
+22	τοῦ	the	→ por su cuerpo
+23	σώματος	body	→ por su cuerpo
+24	αὐτοῦ	of Him	→ por su cuerpo
+25	ὅ	which	→ que
+26	ἐστιν	is	→ es
+27	ἡ	the	→ la iglesia
+28	ἐκκλησία·	church;	→ la iglesia
+
+## 54:4:10
+ES: Que para esto trabajamos y luchamos, porque esperamos en el Dios viviente, que es Salvador de todos los hombres, mayormente de los que creen.
+1	εἰς	Towards	→ para esto
+2	τοῦτο	this	→ para esto
+3	γὰρ	for	→ Que
+4	καὶ	also	→ —
+5	κοπιῶμεν	we toil	→ trabajamos
+6	καὶ	and	→ y
+7	ἀγωνιζόμεθα	strive,	→ luchamos
+8	ὅτι	because	→ porque
+9	ἠλπίκαμεν	we have hope	→ esperamos
+10	ἐπὶ	on	→ en el Dios viviente
+11	θεῷ	God	→ en el Dios viviente
+12	ζῶντι	[the] living,	→ en el Dios viviente
+13	ὅς	who	→ que
+14	ἐστιν	is	→ es
+15	σωτὴρ	[the] Savior	→ Salvador
+16	πάντων	of all	→ de todos los hombres
+17	ἀνθρώπων	men	→ de todos los hombres
+18	μάλιστα	especially	→ mayormente
+19	πιστῶν	of believers.	→ de los que creen
+
+## 55:3:8
+ES: Y de la manera que Jannes y Jambres resistieron a Moisés, así también estos resisten a la verdad; hombres corruptos de entendimiento, réprobos en cuanto a la fe.
+1	Ὃν	By which	→ de la manera que
+2	τρόπον	way	→ de la manera que
+3	δὲ	now	→ Y
+4	Ἰάννης	Jannes	→ Jannes
+5	καὶ	and	→ y
+6	Ἰαμβρῆς	Jambres	→ Jambres
+7	ἀντέστησαν	opposed	→ resistieron
+8	Μωϋσεῖ	to Moses,	→ Moisés
+9	οὕτως	so	→ así
+10	καὶ	also	→ también
+11	οὗτοι	these	→ estos
+12	ἀνθίστανται	oppose	→ resisten
+13	τῇ	to the	→ a la verdad
+14	ἀληθείᾳ	truth,	→ a la verdad
+15	ἄνθρωποι	men	→ hombres
+16	κατεφθαρμένοι	depraved	→ corruptos de entendimiento
+17	τὸν	<the>	→ corruptos de entendimiento
+18	νοῦν	in mind,	→ corruptos de entendimiento
+19	ἀδόκιμοι	disqualified	→ réprobos
+20	περὶ	regarding	→ en cuanto a la fe
+21	τὴν	the	→ en cuanto a la fe
+22	πίστιν	faith.	→ en cuanto a la fe
+
+## 55:4:7
+ES: He peleado la buena batalla, he acabado la carrera, he guardado la fe.
+1	τὸν	The	→ la buena batalla
+2	καλὸν	good	→ la buena batalla
+3	τὸν	<the>	→ la buena batalla
+4	ἀγῶνα	fight	→ la buena batalla
+5	ἠγώνισμαι	I have fought,	→ He peleado
+6	τὸν	the	→ la carrera
+7	δρόμον	race	→ la carrera
+8	τετέλεκα	I have finished,	→ he acabado
+9	τὴν	the	→ la fe
+10	πίστιν	faith	→ la fe
+11	τετήρηκα·	I have kept;	→ he guardado
+
+## 59:1:7
+ES: No piense, pues, quien tal haga, que recibirá cosa alguna del Señor:
+1	μὴ	Not	→ No piense
+2	γὰρ	for	→ pues
+3	οἰέσθω	should suppose	→ No piense
+4	ὁ	the	→ quien tal haga
+5	ἄνθρωπος	man	→ quien tal haga
+6	ἐκεῖνος	that	→ quien tal haga
+7	ὅτι	that	→ que
+8	λήμψεταί	he will receive	→ recibirá
+9	τι	anything	→ cosa alguna
+10	παρὰ	from	→ del Señor
+11	τοῦ	the	→ del Señor
+12	κυρίου·	Lord;	→ del Señor
+
+## 59:2:7
+ES: ¿No blasfeman ellos el buen nombre que fue invocado sobre vosotros?
+1	οὐκ	Surely	→ No
+2	αὐτοὶ	they themselves	→ ellos
+3	βλασφημοῦσιν	are denigrating	→ blasfeman
+4	τὸ	the	→ el buen nombre
+5	καλὸν	good	→ el buen nombre
+6	ὄνομα	Name	→ el buen nombre
+7	τὸ	which	→ que
+8	ἐπικληθὲν	having been called	→ fue invocado
+9	ἐφ᾽	upon	→ sobre vosotros
+10	ὑμᾶς;	you?	→ sobre vosotros
+
+## 59:4:2
+ES: Codiciáis, y no tenéis; matáis y ardéis de envidia, y no podéis alcanzar; combatís y guerreáis; no tenéis, porque no pedís;
+1	ἐπιθυμεῖτε	You desire	→ Codiciáis
+2	καὶ	and	→ y
+3	οὐκ	not	→ no
+4	ἔχετε·	have;	→ tenéis
+5	φονεύετε	you kill	→ matáis
+6	καὶ	and	→ y
+7	ζηλοῦτε	covet	→ ardéis de envidia
+8	καὶ	and	→ y
+9	οὐ	not	→ no
+10	δύνασθε	are able	→ podéis
+11	ἐπιτυχεῖν·	to obtain;	→ alcanzar
+12	μάχεσθε	You quarrel	→ combatís
+13	καὶ	and	→ y
+14	πολεμεῖτε·	wrangle;	→ guerreáis
+15	οὐκ	Not	→ no
+16	ἔχετε	you have	→ tenéis
+17	δὲ	now	→ —
+18	διὰ	because	→ porque
+19	τὸ	<the>	→ —
+20	μὴ	not	→ no pedís
+21	αἰτεῖσθαι	to ask	→ no pedís
+22	ὑμᾶς·	you;	→ no pedís
+
+## 62:3:20
+ES: pues si nuestro corazón nos reprende, mayor es Dios que nuestro corazón, y él conoce todas las cosas.
+1	ὅτι	that	→ pues
+2	ἐὰν	if	→ si
+3	καταγινώσκῃ	shall condemn [us]	→ nos reprende
+4	ἡμῶν	our	→ nuestro corazón
+5	ἡ	<the>	→ nuestro corazón
+6	καρδία	heart,	→ nuestro corazón
+7	ὅτι	that	→ que nuestro corazón
+8	μείζων	greater than	→ mayor
+9	ἐστὶν	is	→ es
+10	ὁ	the	→ Dios
+11	θεὸς	God	→ Dios
+12	τῆς	of the	→ que nuestro corazón
+13	καρδίας	heart	→ que nuestro corazón
+14	ἡμῶν	of us	→ que nuestro corazón
+15	καὶ	and	→ y
+16	γινώσκει	He knows	→ él conoce
+17	πάντα	all things.	→ todas las cosas
+
+## 62:4:17
+ES: En esto se ha perfeccionado el amor con nosotros, para que tengamos confianza en el día del juicio: pues como él es, así somos también nosotros en este mundo.
+1	ἐν	In	→ En esto
+2	τούτῳ	this	→ En esto
+3	τετελείωται	has been perfected	→ se ha perfeccionado
+4	ἡ	<the>	→ el amor
+5	ἀγάπη	love	→ el amor
+6	μεθ᾽	with	→ con nosotros
+7	ἡμῶν	us,	→ con nosotros
+8	ἵνα	so that	→ para que
+9	παρρησίαν	confidence	→ confianza
+10	ἔχωμεν	we may have	→ tengamos
+11	ἐν	in	→ en el día
+12	τῇ	the	→ en el día
+13	ἡμέρᾳ	day	→ en el día
+14	τῆς	<the>	→ del juicio
+15	κρίσεως	of judgment,	→ del juicio
+16	ὅτι	that	→ pues
+17	καθὼς	even as	→ como
+18	ἐκεῖνός	He	→ él
+19	ἐστιν	is	→ es
+20	καὶ	also	→ también
+21	ἡμεῖς	we ourselves	→ nosotros
+22	ἐσμεν	are	→ somos
+23	ἐν	in	→ en este mundo
+24	τῷ	<the>	→ en este mundo
+25	κόσμῳ	world	→ en este mundo
+26	τούτῳ	this.	→ en este mundo
+
+## 66:2:6
+ES: Pero tienes esto, que aborreces las obras de los nicolaítas, las cuales yo también aborrezco.
+1	ἀλλὰ	But	→ Pero
+2	τοῦτο	this	→ esto
+3	ἔχεις	you have	→ tienes
+4	ὅτι	that	→ que
+5	μισεῖς	you hate	→ aborreces
+6	τὰ	the	→ las obras
+7	ἔργα	works	→ las obras
+8	τῶν	of the	→ de los nicolaítas
+9	Νικολαϊτῶν	Nicolaitans	→ de los nicolaítas
+10	ἃ	which	→ las cuales
+11	κἀγὼ	I myself also	→ yo también
+12	μισῶ	hate.	→ aborrezco
+
+## 66:3:1
+ES: Y escribe al ángel de la iglesia en Sardis: Esto dice el que tiene los siete espíritus de Dios y las siete estrellas: Conozco tus obras, que tienes nombre de que vives, y estás muerto.
+1	Καὶ	And	→ Y
+2	τῷ	to the	→ al ángel
+3	ἀγγέλῳ	angel	→ al ángel
+4	τῆς	of the	→ de la iglesia
+5	ἐν	in	→ en Sardis
+6	Σάρδεσιν	Sardis	→ en Sardis
+7	ἐκκλησίας	church	→ de la iglesia
+8	γράψον·	do write:	→ escribe
+9	τάδε	These things	→ Esto
+10	λέγει	says	→ dice
+11	ὁ	the [One]	→ el que tiene
+12	ἔχων	having	→ el que tiene
+13	τὰ	the	→ los siete espíritus
+14	ἑπτὰ	seven	→ los siete espíritus
+15	πνεύματα	Spirits	→ los siete espíritus
+16	τοῦ	<the>	→ de Dios
+17	θεοῦ	of God	→ de Dios
+18	καὶ	and	→ y
+19	τοὺς	the	→ las siete estrellas
+20	ἑπτὰ	seven	→ las siete estrellas
+21	ἀστέρας·	stars;	→ las siete estrellas
+22	οἶδά	I know	→ Conozco
+23	σου	your	→ tus obras
+24	τὰ	<the>	→ tus obras
+25	ἔργα	deeds	→ tus obras
+26	ὅτι	that	→ que
+27	τὸ	<the>	→ nombre
+28	ὄνομα	characterization	→ nombre
+29	ἔχεις	you have	→ tienes
+30	ὅτι	that	→ de que
+31	ζῇς	you are alive	→ vives
+32	καὶ	and yet	→ y
+33	νεκρὸς	dead	→ estás muerto
+34	εἶ	you are.	→ estás muerto
+
+## 66:6:5
+ES: Y cuando abrió el tercer sello, oí al tercer ser viviente, que decía: Ven. Y miré, y he aquí un caballo negro; y el que estaba sentado sobre él tenía una balanza en su mano.
+1	Καὶ	And	→ Y
+2	ὅτε	when	→ cuando
+3	ἤνοιξεν	He opened	→ abrió
+4	τὴν	the	→ el tercer sello
+5	σφραγῖδα	seal	→ el tercer sello
+6	τὴν	<the>	→ el tercer sello
+7	τρίτην	third	→ el tercer sello
+8	ἤκουσα	I heard	→ oí
+9	τοῦ	the	→ al tercer ser viviente
+10	τρίτου	third	→ al tercer ser viviente
+11	ζῴου	living creature	→ al tercer ser viviente
+12	λέγοντος·	saying;	→ decía
+13	ἔρχου	do come	→ Ven
+14	καὶ	and	→ —
+15	βλέπε	do heed.	→ —
+16	καὶ	And	→ Y
+17	εἶδον	I saw	→ miré
+18	καὶ	and	→ y
+19	ἰδοὺ	behold	→ he aquí
+20	ἵππος	a horse	→ un caballo
+21	μέλας	black	→ negro
+22	καὶ	and	→ y
+23	ὁ	the [one]	→ el que estaba sentado
+24	καθήμενος	sitting	→ el que estaba sentado
+25	ἐπ᾽	on	→ sobre él
+26	αὐτὸν	it	→ sobre él
+27	ἔχων	having	→ tenía
+28	ζυγὸν	a pair of scales	→ una balanza
+29	ἐν	in	→ en su mano
+30	τῇ	the	→ en su mano
+31	χειρὶ	hand	→ en su mano
+32	αὐτοῦ	of him.	→ en su mano
+
+## 66:11:6
+ES: Estos tienen autoridad para cerrar el cielo, para que no llueva en los días de su profecía; y tienen autoridad sobre las aguas para convertirlas en sangre, y para herir la tierra con toda plaga cuantas veces quieran.
+1	οὗτοι	These	→ Estos
+2	ἔχουσιν	have	→ tienen
+3	τὴν	the	→ autoridad
+4	ἐξουσίαν	power	→ autoridad
+5	κλεῖσαι	to shut	→ cerrar
+6	τὸν	the	→ el cielo
+7	οὐρανὸν	sky	→ el cielo
+8	ἵνα	so that	→ para que
+9	μὴ	not	→ no
+10	ὑετὸς	rain	→ llueva
+11	βρέχῃ	may fall	→ llueva
+12	τὰς	in the	→ en los días de su profecía
+13	ἡμέρας	days	→ en los días de su profecía
+14	τῆς	of the	→ en los días de su profecía
+15	προφητείας	prophecy	→ en los días de su profecía
+16	αὐτῶν	of them,	→ en los días de su profecía
+17	καὶ	and	→ y
+18	ἐξουσίαν	power	→ autoridad
+19	ἔχουσιν	they have	→ tienen
+20	ἐπὶ	over	→ sobre las aguas
+21	τῶν	the	→ sobre las aguas
+22	ὑδάτων	waters	→ sobre las aguas
+23	στρέφειν	to turn	→ convertirlas
+24	αὐτὰ	them	→ convertirlas
+25	εἰς	into	→ en sangre
+26	αἷμα	blood	→ en sangre
+27	καὶ	and	→ y
+28	πατάξαι	to strike	→ herir
+29	τὴν	the	→ la tierra
+30	γῆν	earth	→ la tierra
+31	ἐν	with	→ con toda plaga
+32	πάσῃ	every	→ con toda plaga
+33	πληγῇ	plague	→ con toda plaga
+34	ὁσάκις	as often as	→ cuantas veces
+35	ἐὰν	if	→ quieran
+36	θελήσωσιν	they shall desire.	→ quieran
+
+## 66:14:5
+ES: y en su boca no fue hallada mentira; son sin mancha.
+1	καὶ	And	→ y
+2	ἐν	in	→ en su boca
+3	τῷ	the	→ en su boca
+4	στόματι	mouth	→ en su boca
+5	αὐτῶν	of them	→ en su boca
+6	οὐχ	not	→ no
+7	εὑρέθη	was found	→ fue hallada
+8	ψεῦδος	a lie,	→ mentira
+9	ἄμωμοί	blameless	→ sin mancha
+10	γάρ	for	→ —
+11	εἰσιν	they are	→ son
+12	ἐνώπιον	before	→ —
+13	τοῦ	the	→ —
+14	θρόνου	throne	→ —
+15	τοῦ	of the	→ —
+16	θεοῦ	God.	→ —
+
+## 66:21:6
+ES: Y me dijo: Hecho está. Yo soy el Alfa y la Omega, el principio y el fin. Al que tiene sed yo le daré de la fuente del agua de la vida gratuitamente.
+1	καὶ	And	→ Y
+2	εἶπέν	He said	→ me dijo
+3	μοι·	to me;	→ me dijo
+4	γέγοναν	It has been done!	→ Hecho está
+5	ἐγώ	I myself	→ Yo
+6	εἰμι	am	→ soy
+7	τὸ	the	→ el Alfa
+8	ἄλφα	Alpha	→ el Alfa
+9	καὶ	and	→ y
+10	τὸ	the	→ la Omega
+11	ὦ	Omega,	→ la Omega
+12	ἡ	the	→ el principio
+13	ἀρχὴ	beginning	→ el principio
+14	καὶ	and	→ y
+15	τὸ	the	→ el fin
+16	τέλος	end.	→ el fin
+17	ἐγὼ	I myself	→ yo
+18	τῷ	to the [one]	→ Al que tiene sed
+19	διψῶντι	thirsting	→ Al que tiene sed
+20	δώσω	I will give	→ daré
+21	ἐκ	of	→ de la fuente
+22	τῆς	the	→ de la fuente
+23	πηγῆς	spring	→ de la fuente
+24	τοῦ	of the	→ del agua
+25	ὕδατος	water	→ del agua
+26	τῆς	<the>	→ de la vida
+27	ζωῆς	of life	→ de la vida
+28	δωρεάν	freely.	→ gratuitamente
+
+## 66:22:7
+ES: Y he aquí, vengo pronto. Bienaventurado el que guarda las palabras de la profecía de este libro.
+1	καὶ	And	→ Y
+2	ἰδοὺ	behold	→ he aquí
+3	ἔρχομαι	I am coming	→ vengo
+4	ταχύ	quickly.	→ pronto
+5	μακάριος	Blessed [is]	→ Bienaventurado
+6	ὁ	the [one]	→ el que guarda
+7	τηρῶν	keeping	→ el que guarda
+8	τοὺς	the	→ las palabras
+9	λόγους	words	→ las palabras
+10	τῆς	of the	→ de la profecía
+11	προφητείας	prophecy	→ de la profecía
+12	τοῦ	of the	→ de este libro
+13	βιβλίου	book	→ de este libro
+14	τούτου	this.	→ de este libro

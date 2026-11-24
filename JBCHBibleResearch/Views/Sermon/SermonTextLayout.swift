@@ -34,6 +34,13 @@ extension NSAttributedString.Key {
     static let sermonLineHeight = NSAttributedString.Key("com.jbch.sermon.lineHeight")
     /// 문단 목록 종류(`SermonListKind.rawValue`). 없으면 목록이 아니다. 저장 방식은 `sermonLineHeight`와 같다.
     static let sermonListKind = NSAttributedString.Key("com.jbch.sermon.listKind")
+    /// [2026-11-14] 문단별 들여쓰기·문단 간격 직접 지정(pt, `Double`). 없으면 그 문단 스타일의 기본값(`SermonStyleMetrics`).
+    /// 줄간격·목록과 같은 방식으로 RTF에 남지 않아 `paragraphStyles`에 문단별로 병행 저장한다.
+    static let sermonFirstLineIndent = NSAttributedString.Key("com.jbch.sermon.firstLineIndent")
+    static let sermonLeftIndent = NSAttributedString.Key("com.jbch.sermon.leftIndent")
+    static let sermonRightIndent = NSAttributedString.Key("com.jbch.sermon.rightIndent")
+    static let sermonSpaceBefore = NSAttributedString.Key("com.jbch.sermon.spaceBefore")
+    static let sermonSpaceAfter = NSAttributedString.Key("com.jbch.sermon.spaceAfter")
 }
 
 // MARK: - 문단 목록 / 줄간격 (문단별 추가 서식)
@@ -83,8 +90,19 @@ enum SermonListKind: String, CaseIterable {
 struct SermonParagraphExtras: Equatable {
     var lineHeight: Double?
     var list: SermonListKind?
+    /// [2026-11-14] 들여쓰기·문단 간격 직접 지정(pt). nil이면 스타일 기본값.
+    var firstLineIndent: Double?
+    var leftIndent: Double?
+    var rightIndent: Double?
+    var spaceBefore: Double?
+    var spaceAfter: Double?
 
     static let none = SermonParagraphExtras(lineHeight: nil, list: nil)
+
+    /// 줄간격·목록을 뺀 "들여쓰기·간격" 값이 하나라도 지정돼 있는지.
+    var hasSpacingOverrides: Bool {
+        firstLineIndent != nil || leftIndent != nil || rightIndent != nil || spaceBefore != nil || spaceAfter != nil
+    }
 }
 
 // MARK: - 색 비교 도우미
@@ -151,10 +169,31 @@ struct SermonStyleMetrics {
 
 // MARK: - 레이아웃 매니저 (말씀구절 박스 + 글자 배경)
 
+/// 찾기 일치 항목 하나(그리기 전용).
+struct SermonFindHighlight: Equatable {
+    var range: NSRange
+    var isCurrent: Bool
+}
+
 /// 에디터·스크롤 뷰어·페이지 뷰어가 함께 쓰는 TextKit 1 레이아웃 매니저.
 final class SermonLayoutManager: NSLayoutManager {
     /// 말씀구절 박스 왼쪽 세로 바 두께.
     private static let verseBarWidth: CGFloat = 3
+
+    private static let findColor = PlatformColor(red: 1.0, green: 0.89, blue: 0.54, alpha: 1)
+    private static let currentFindColor = PlatformColor(red: 1.0, green: 0.62, blue: 0.26, alpha: 1)
+
+    /// 찾기 일치 항목(그리기 전용 — 저장되는 서식이 아니다). iOS의 `NSLayoutManager`에는 임시 attribute API가 없어
+    /// `drawBackground`에서 직접 칠한다. 값이 바뀌면 이전·새 범위를 다시 그리게 한다.
+    var findHighlights: [SermonFindHighlight] = [] {
+        didSet {
+            guard let length = textStorage?.length, length > 0 else { return }
+            for highlight in oldValue + findHighlights {
+                let clamped = NSIntersectionRange(highlight.range, NSRange(location: 0, length: length))
+                if clamped.length > 0 { invalidateDisplay(forCharacterRange: clamped) }
+            }
+        }
+    }
 
     /// 표준 `.backgroundColor` 칠하기는 막는다 — TextKit 1은 이 attribute를 줄 높이(줄 간격 포함) 전체로 칠해
     /// 줄 사이가 이어진 큰 덩어리가 된다. 대신 `drawBackground`에서 줄마다 글자 상자 모양으로 직접 칠한다.
@@ -195,6 +234,7 @@ final class SermonLayoutManager: NSLayoutManager {
         }
         drawVerseBoxes(storage: storage, charRange: verseScan, glyphsToShow: drawableGlyphs, origin: origin)
         drawTextBackgrounds(storage: storage, charRange: charRange, origin: origin)
+        drawFindHighlights(storage: storage, charRange: charRange, origin: origin)
         drawListMarkers(storage: storage, charRange: charRange, glyphsToShow: glyphsToShow, origin: origin)
         super.drawBackground(forGlyphRange: glyphsToShow, at: origin)
     }
@@ -264,6 +304,44 @@ final class SermonLayoutManager: NSLayoutManager {
                     } else {
                         break
                     }
+                }
+                guard runChars.length > 0 else { return }
+                let paintGlyphs = self.glyphRange(forCharacterRange: runChars, actualCharacterRange: nil)
+                let bounds = self.boundingRect(forGlyphRange: paintGlyphs, in: container)
+                guard bounds.width > 0.5 else { return }
+                let font = (storage.attribute(.font, at: runChars.location, effectiveRange: nil) as? PlatformFont)
+                    ?? PlatformFont.systemFont(ofSize: 17)
+                let baselineY = lineRect.minY + self.location(forGlyphAt: paintGlyphs.location).y
+                let box = CGRect(
+                    x: bounds.minX + origin.x,
+                    y: baselineY - font.ascender + origin.y,
+                    width: bounds.width,
+                    height: font.ascender - font.descender
+                )
+                self.fillRect(box, color: color)
+            }
+        }
+    }
+
+    // MARK: 찾기 하이라이트
+
+    private func drawFindHighlights(storage: NSTextStorage, charRange: NSRange, origin: CGPoint) {
+        guard !findHighlights.isEmpty else { return }
+        let text = storage.string as NSString
+        let length = text.length
+        for highlight in findHighlights {
+            // 편집으로 범위가 낡았을 수 있어 문서 길이로 자르고, 지금 그리는 구간과 겹치는 부분만 칠한다.
+            let range = NSIntersectionRange(NSIntersectionRange(highlight.range, charRange), NSRange(location: 0, length: length))
+            guard range.length > 0 else { continue }
+            let color = highlight.isCurrent ? Self.currentFindColor : Self.findColor
+            let glyphRange = self.glyphRange(forCharacterRange: range, actualCharacterRange: nil)
+            enumerateLineFragments(forGlyphRange: glyphRange) { lineRect, _, container, lineGlyphRange, _ in
+                let runGlyphs = NSIntersectionRange(lineGlyphRange, glyphRange)
+                guard runGlyphs.length > 0 else { return }
+                var runChars = self.characterRange(forGlyphRange: runGlyphs, actualGlyphRange: nil)
+                while runChars.length > 0 {
+                    let last = text.character(at: NSMaxRange(runChars) - 1)
+                    if last == 0x0A || last == 0x0D || last == 0x2028 || last == 0x2029 { runChars.length -= 1 } else { break }
                 }
                 guard runChars.length > 0 else { return }
                 let paintGlyphs = self.glyphRange(forCharacterRange: runChars, actualCharacterRange: nil)

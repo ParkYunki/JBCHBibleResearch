@@ -1,0 +1,110 @@
+## 13:1:28
+KO: 아브라함의 아들들은 이삭과 이스마엘이라.
+1 בְּנֵי = [the] sons of (son)
+2 אַבְרָהָם = Abraham
+3 יִצְחָק = Isaac
+4 וְיִשְׁמָעֵאל ס = and Ishmael (Ishmael)
+
+## 13:1:29
+KO: 이들은 이스마엘의 족보들이니, 그의 맏아들은 느바욧이요, 게달과 앗브엘과 밉삼과
+1 אֵלֶּה = these
+2 תֹּלְדוֹתָם = [were] generations their (generation)
+3 בְּכוֹר = [the] firstborn of (firstborn)
+4 יִשְׁמָעֵאל = Ishmael
+5 נְבָיוֹת = Nebaioth
+6 וְקֵדָר = and Kedar (Kedar)
+7 וְאַדְבְּאֵל = and Adbeel (Adbeel)
+8 וּמִבְשָׂם = and Mibsam (Mibsam)
+
+## 13:1:30
+KO: 미스마와 두마와 맛사와 하닷과 테마.
+1 מִשְׁמָע = Mishma
+2 וְדוּמָה = and Dumah (Dumah)
+3 מַשָּׂא = Massa
+4 חֲדַד = Hadad
+5 וְתֵימָא = and Tema (Tema)
+
+## 13:1:31
+KO: 여둘과 나비스와 게드마, 이들이 이스마엘의 아들들이라.
+1 יְטוּר = Jetur
+2 נָפִישׁ = Naphish
+3 וָקֵדְמָה = and Kedemah (Kedemah)
+4 אֵלֶּה = these
+5 הֵם = they (they(masc.))
+6 בְּנֵי = [were] [the] sons of (son)
+7 יִשְׁמָעֵאל ס = Ishmael
+
+## 13:1:32
+KO: 그리고 아브라함의 첩 그두라가 낳은 아들들은 시므란과 욕산과 므단과 미디안과 이스박과 수아이며, 욕산의 아들들은 스바와 드단이다.
+1 וּבְנֵי = and [the] sons of
+2 קְטוּרָה = Keturah
+3 פִּילֶגֶשׁ = [the] concubine of (concubine)
+4 אַבְרָהָם = Abraham
+5 יָלְדָה = she bore (to beget)
+6 אֶת־ = <obj.> ([Obj.])
+7 זִמְרָן = Zimran
+8 וְיָקְשָׁן = and Jokshan
+9 וּמְדָן = and Medan (Medan)
+10 וּמִדְיָן = and Midian (Midian)
+11 וְיִשְׁבָּק = and Ishbak (Ishbak)
+12 וְשׁוּחַ = and Shuah (Shuah)
+13 וּבְנֵי = and [the] sons of
+14 יָקְשָׁן = Jokshan
+15 שְׁבָא = Sheba
+16 וּדְדָן ס = and Dedan (Dedan)
+
+## 13:1:33
+KO: 미디안의 아들들은 에바와 에벨과 하녹과 아비다와 엘다아였으니, 이 모든 이들은 그두라의 아들들이더라.
+1 וּבְנֵי = and [the] sons of
+2 מִדְיָן = Midian
+3 עֵיפָה = Ephah
+4 וָעֵפֶר = and Epher (Epher)
+5 וַחֲנוֹךְ = and Hanoch (Hanoch)
+6 וַאֲבִידָע = and Abida (Abida)
+7 וְאֶלְדָּעָה = and Eldaah (Eldaah)
+8 כָּל־ = all
+9 אֵלֶּה = these
+10 בְּנֵי = [were] [the] sons of
+11 קְטוּרָה ס = Keturah
+
+## 13:1:34
+KO: 그리고 아브라함이 이삭을 낳았으니, 이삭의 아들들은 에서와 이스라엘이라.
+1 וַיּוֹלֶד = and he fathered (to beget)
+2 אַבְרָהָם = Abraham
+3 אֶת־ = <obj.> ([Obj.])
+4 יִצְחָק ס = Isaac
+5 בְּנֵי = [the] sons of (son)
+6 יִצְחָק = Isaac
+7 עֵשָׂו = Esau
+8 וְיִשְׂרָאֵל ס = and Israel (Israel)
+
+## 13:1:35
+KO: 에서의 아들들은 엘리바스, 르우엘, 여우스, 얄람, 그리고 고라이다.
+1 בְּנֵי = [the] sons of (son)
+2 עֵשָׂו = Esau
+3 אֱלִיפַז = Eliphaz
+4 רְעוּאֵל = Reuel
+5 וִיעוּשׁ = and Jeush (Jeush)
+6 וְיַעְלָם = and Jalam (Jalam)
+7 וְקֹרַח ס = and Korah (Korah)
+
+## 13:1:36
+KO: 엘리바스의 아들들은 데만과 오말과 스비와 가담과 그나스와 딤나와 아말렉이다.
+1 בְּנֵי = [the] sons of (son)
+2 אֱלִיפָז = Eliphaz
+3 תֵּימָן = Teman
+4 וְאוֹמָר = and Omar (Omar)
+5 צְפִי = Zephi (Zepho)
+6 וְגַעְתָּם = and Gatam (Gatam)
+7 קְנַז = Kenaz
+8 וְתִמְנָע = and Timna (Timna)
+9 וַעֲמָלֵק ס = and Amalek (Amalek)
+
+## 13:1:37
+KO: 르우엘의 아들들은 나핫과 세라와 삼마와 밋사이다.
+1 בְּנֵי = [the] sons of (son)
+2 רְעוּאֵל = Reuel
+3 נַחַת = Nahath
+4 זֶרַח = Zerah
+5 שַׁמָּה = Shammah
+6 וּמִזָּה ס = and Mizzah (Mizzah)

@@ -1,0 +1,197 @@
+## 1:22:3
+KO: 그리고 아브라함이 아침에 일찍 일어났다. 그리고 그가 그의 나귀에 안장을 지웠다. 그리고 그가 그의 두 사환을 그와 함께, 그리고 그의 아들 이삭을 데리고 번제의 나무들을 쪼개었다. 그리고 그가 일어나 그가 그에게 말씀하신 그 장소로 그 하나님이(향해) 갔다.
+1 וַיַּשְׁכֵּם = and he rose early (to rise)
+2 אַבְרָהָם = Abraham
+3 בַּבֹּקֶר = in the morning (morning)
+4 וַיַּחֲבֹשׁ = and he saddled (to saddle|tie)
+5 אֶת־ = <obj.>
+6 חֲמֹרוֹ = donkey his (donkey)
+7 וַיִּקַּח = and he took (to take)
+8 אֶת־ = <obj.>
+9 שְׁנֵי = two of (two)
+10 נְעָרָיו = servants his (youth)
+11 אִתּוֹ = with him (with)
+12 וְאֵת = and <obj.>
+13 יִצְחָק = Isaac
+14 בְּנוֹ = son his (son)
+15 וַיְבַקַּע = and he cut (to break up|open)
+16 עֲצֵי = wood<s> of (tree)
+17 עֹלָה = burnt offering
+18 וַיָּקָם = and he arose (to arise)
+19 וַיֵּלֶךְ = and he went (to go)
+20 אֶל־ = to (to(wards))
+21 הַמָּקוֹם = the place (standing place)
+22 אֲשֶׁר־ = which
+23 אָמַר־ = he had said (to say)
+24 לוֹ = to <the> him (him)
+25 הָאֱלֹהִים = <the> God (God)
+
+## 1:22:4
+KO: 그 제삼일에 아브라함이 그의 눈들을 들어 올렸고, 그곳을 멀리서 보았다.
+1 בַּיּוֹם = on the day (day;_when)
+2 הַשְּׁלִישִׁי = <the> third (third)
+3 וַיִּשָּׂא = and he lifted up (to lift)
+4 אַבְרָהָם = Abraham
+5 אֶת־ = <obj.>
+6 עֵינָיו = eyes his (eye)
+7 וַיַּרְא = and he saw (to see)
+8 אֶת־ = <obj.>
+9 הַמָּקוֹם = the place (standing place)
+10 מֵרָחֹק = from a distance (distant)
+
+## 1:22:5
+KO: 그리고 아브라함이 그의 종들에게 말하였다. "너희는 나귀와 함께 여기서 머물러라. 그리고 나와 그 아이는 저기까지 가서, 우리가 경배하고, 너희에게 돌아오리라."
+1 וַיֹּאמֶר = and he said (to say)
+2 אַבְרָהָם = Abraham
+3 אֶל־ = to
+4 נְעָרָיו = servants his
+5 שְׁבוּ־ = remain (to dwell)
+6 לָכֶם = for <the> yourselves (you)
+7 פֹּה = here
+8 עִם־ = with
+9 הַחֲמוֹר = the donkey (donkey)
+10 וַאֲנִי = and I (I)
+11 וְהַנַּעַר = and the lad
+12 נֵלְכָה = we will go (to go)
+13 עַד־ = to (till)
+14 כֹּה = there (thus)
+15 וְנִשְׁתַּחֲוֶה = so we may bow down (to bow)
+16 וְנָשׁוּבָה = and we will return (to return)
+17 אֲלֵיכֶם = to you
+
+## 1:22:6
+KO: 그리고 아브라함이 번제의 나무들을 취하여, 그의 아들 이삭 위에 그것들을 지우고, 그의 손에 불과 칼을 취하였고, 그들 두 사람이 함께 걸어갔다.
+1 וַיִּקַּח = and he took
+2 אַבְרָהָם = Abraham
+3 אֶת־ = <obj.>
+4 עֲצֵי = [the] wood<s> of (tree)
+5 הָעֹלָה = the burnt offering (burnt offering)
+6 וַיָּשֶׂם = and he put [it] (to set)
+7 עַל־ = on (upon)
+8 יִצְחָק = Isaac
+9 בְּנוֹ = son his (son)
+10 וַיִּקַּח = and he took
+11 בְּיָדוֹ = in hand his (hand)
+12 אֶת־ = <obj.>
+13 הָאֵשׁ = the fire (fire)
+14 וְאֶת־ = and <obj.>
+15 הַמַּאֲכֶלֶת = the knife (knife)
+16 וַיֵּלְכוּ = and they went (to go)
+17 שְׁנֵיהֶם = [the] two of them (two)
+18 יַחְדָּו = together
+
+## 1:22:7
+KO: 그리고 이삭이 그의 아버지 아브라함에게 말하였다. 그가 "내 아버지여"라고 말하니, 그가 "내 아들아, 여기 내가 있다"라고 말하였다. 그리고 그가 말하였다. "보라, 불과 나무는 있으나, 번제를 위한 어린 양은 어디에 있습니까?"
+1 וַיֹּאמֶר = and he said
+2 יִצְחָק = Isaac
+3 אֶל־ = to (to(wards))
+4 אַבְרָהָם = Abraham
+5 אָבִיו = father his
+6 וַיֹּאמֶר = and he said
+7 אָבִי = O father my
+8 וַיֹּאמֶר = and he said
+9 הִנֶּנִּי = here [am] I
+10 בְנִי = O son my (son)
+11 וַיֹּאמֶר = and he said
+12 הִנֵּה = here!
+13 הָאֵשׁ = the fire (fire)
+14 וְהָעֵצִים = and the wood<s> (tree)
+15 וְאַיֵּה = and where? (where?)
+16 הַשֶּׂה = [is] the sheep (sheep)
+17 לְעֹלָה = for a burnt offering (burnt offering)
+
+## 1:22:8
+KO: 아브라함이 말하였다. "내 아들아, 하나님께서 자신을 위해 번제물로 쓸 어린 양을 보실 것이다." 그리고 그들 두 사람이 함께 걸어갔다.
+1 וַיֹּאמֶר = and he said (to say)
+2 אַבְרָהָם = Abraham
+3 אֱלֹהִים = God
+4 יִרְאֶה־ = he will see (to see)
+5 לּוֹ = for <the> himself (him)
+6 הַשֶּׂה = the sheep (sheep)
+7 לְעֹלָה = for a burnt offering (burnt offering)
+8 בְּנִי = O son my (son)
+9 וַיֵּלְכוּ = and they went (to go)
+10 שְׁנֵיהֶם = [the] two of them (two)
+11 יַחְדָּו = together
+
+## 1:22:9
+KO: 그들이 하나님께서 그에게 말씀하신 그 장소에 이르렀고, 아브라함이 그곳에 제단을 쌓았고 나무들을 배열하였고, 그의 아들 이삭을 결박하였고, 제단 위에, 나무들 위로 그를 두었다.
+1 וַיָּבֹאוּ = and they came (to come (in))
+2 אֶל־ = to (to(wards))
+3 הַמָּקוֹם = the place (standing place)
+4 אֲשֶׁר = which
+5 אָמַר־ = he had said (to say)
+6 לוֹ = to <the> him (him)
+7 הָאֱלֹהִים = <the> God (God)
+8 וַיִּבֶן = and he built (to build)
+9 שָׁם = there
+10 אַבְרָהָם = Abraham
+11 אֶת־ = <obj.>
+12 הַמִּזְבֵּחַ = the altar
+13 וַיַּעֲרֹךְ = and he arranged (to arrange)
+14 אֶת־ = <obj.>
+15 הָעֵצִים = the wood<s>
+16 וַיַּעֲקֹד = and he bound (to bind)
+17 אֶת־ = <obj.>
+18 יִצְחָק = Isaac
+19 בְּנוֹ = son his (son)
+20 וַיָּשֶׂם = and he put (to set)
+21 אֹתוֹ = <obj.> him
+22 עַל־ = on (upon)
+23 הַמִּזְבֵּחַ = the altar
+24 מִמַּעַל = from above (above)
+25 לָעֵצִים = <to> the wood<s>
+
+## 1:22:10
+KO: 그리고 아브라함이 그의 손을 내밀었고, 칼을 취하여 그의 아들을 잡으려(도살하려) 하였다.
+1 וַיִּשְׁלַח = and he stretched out (to send)
+2 אַבְרָהָם = Abraham
+3 אֶת־ = <obj.>
+4 יָדוֹ = hand his (hand)
+5 וַיִּקַּח = and he took (to take)
+6 אֶת־ = <obj.>
+7 הַמַּאֲכֶלֶת = the knife (knife)
+8 לִשְׁחֹט = to slaughter
+9 אֶת־ = <obj.>
+10 בְּנוֹ = son his (son)
+
+## 1:22:11
+KO: 그리고 여호와의 사자가 하늘로부터 그를 향하여 불렀고, 이르기를 “아브라함아, 아브라함아” 하니, 그가 말하기를 “내가 여기 있나이다” 하였다.
+1 וַיִּקְרָא = and he called (to call)
+2 אֵלָיו = to him (to(wards))
+3 מַלְאַךְ = [the] angel of (messenger)
+4 יְהוָה = Yahweh (LORD)
+5 מִן־ = from
+6 הַשָּׁמַיִם = the heavens (heaven)
+7 וַיֹּאמֶר = and he said
+8 אַבְרָהָם = O Abraham
+9 אַבְרָהָם = Abraham
+10 וַיֹּאמֶר = and he said
+11 הִנֵּנִי = here [am] I (behold)
+
+## 1:22:12
+KO: 그가 말씀하셨다. "그 소년에게 네 손을 뻗지 말라. 그리고 그에게 아무것도 하지 말라. 왜냐하면 이제야 내가 네가 하나님을 경외하는 자임을 알았기 때문이다. 네가 네 아들, 곧 네 독자를 나에게서 아끼지 아니하였다."
+1 וַיֹּאמֶר = and he said (to say)
+2 אַל־ = may not
+3 תִּשְׁלַח = you stretch out (to send)
+4 יָדְךָ = hand your (hand)
+5 אֶל־ = against (to(wards))
+6 הַנַּעַר = the lad (youth)
+7 וְאַל־ = and may not
+8 תַּעַשׂ = you do (to make)
+9 לוֹ = to <the> him (him)
+10 מְאוּמָּה = anything
+11 כִּי = for
+12 עַתָּה = now
+13 יָדַעְתִּי = I know (to know)
+14 כִּי־ = that
+15 יְרֵא = [are one] fearing (afraid)
+16 אֱלֹהִים = <of> God (God)
+17 אַתָּה = you (you(m.s.))
+18 וְלֹא = and not (not)
+19 חָשַׂכְתָּ = you have withheld (to withhold)
+20 אֶת־ = <obj.>
+21 בִּנְךָ = son your (son)
+22 אֶת־ = <obj.>
+23 יְחִידְךָ = only [son] your (only)
+24 מִמֶּנִּי = from me (from)

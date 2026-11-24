@@ -1,0 +1,175 @@
+## 2:18:1
+KO: 그리고 미디안의 제사장이며 모세의 장인인 이드로가, 하나님께서 모세에게와 자기 백성 이스라엘에게 행하신 모든 일 곧 여호와께서 이스라엘을 애굽에서 인도하여 내신 모든 일을 들었더라.
+1 וַיִּשְׁמַע = and he heard (to hear)
+2 יִתְרוֹ = Jethro
+3 כֹהֵן = [the] priest of (priest)
+4 מִדְיָן = Midian
+5 חֹתֵן = [the] father-in-law of (relative)
+6 מֹשֶׁה = Moses
+7 אֵת = <obj.>
+8 כָּל־ = all
+9 אֲשֶׁר = that (which)
+10 עָשָׂה = he had done (to make)
+11 אֱלֹהִים = God
+12 לְמֹשֶׁה = for Moses
+13 וּלְיִשְׂרָאֵל = and for Israel
+14 עַמּוֹ = people his (people)
+15 כִּי־ = that (for)
+16 הוֹצִיא = he had brought out (to come out)
+17 יְהוָה = Yahweh (LORD)
+18 אֶת־ = <obj.>
+19 יִשְׂרָאֵל = Israel
+20 מִמִּצְרָיִם = from Egypt (Egypt)
+
+## 2:18:2
+KO: 그리고 이드로, 모세의 장인이 모세의 아내 십보라를 데려왔는데, 이는 그녀의 내보냄 이후였다.
+1 וַיִּקַּח = and he had taken (to take)
+2 יִתְרוֹ = Jethro
+3 חֹתֵן = [the] father-in-law of (relative)
+4 מֹשֶׁה = Moses
+5 אֶת־ = <obj.> ([Obj.])
+6 צִפֹּרָה = Zipporah
+7 אֵשֶׁת = [the] wife of (woman)
+8 מֹשֶׁה = Moses
+9 אַחַר = after
+10 שִׁלּוּחֶיהָ = dismissal<s> her (parting gift)
+
+## 2:18:3
+KO: 그리고 그(녀)의 두 아들을 데려왔으니, 그 하나의 이름은 게르솜이라. 이는 그가 말하기를 "내가 외국 땅에서 나그네가 되었다" 함이요.
+1 וְאֵת = and <obj.> ([Obj.])
+2 שְׁנֵי = [the] two (two)
+3 בָנֶיהָ = sons her (son)
+4 אֲשֶׁר = who (which)
+5 שֵׁם = [the] name of (name)
+6 הָאֶחָד = the one (one)
+7 גֵּרְשֹׁם = [was] Gershom (Gershom)
+8 כִּי = for
+9 אָמַר = he had said (to say)
+10 גֵּר = a sojourner (sojourner)
+11 הָיִיתִי = I have become (to be)
+12 בְּאֶרֶץ = in a land (land)
+13 נָכְרִיָּה = foreign
+
+## 2:18:4
+KO: 그리고 하나의 이름은 엘리에셀이라, 이는 내 아버지의 하나님이 나의 도움이 되셔서 바로의 칼에서 나를 구원하셨기 때문이라.
+1 וְשֵׁם = and [the] name of (name)
+2 הָאֶחָד = the one (one)
+3 אֱלִיעֶזֶר = [was] Eliezer (Eliezer)
+4 כִּי־ = for
+5 אֱלֹהֵי = [the] God of (God)
+6 אָבִי = father my (father)
+7 בְּעֶזְרִי = [has been] <in> help my (helper)
+8 וַיַּצִּלֵנִי = and he has delivered me (to rescue)
+9 מֵחֶרֶב = from [the] sword of (sword)
+10 פַּרְעֹה = Pharaoh
+
+## 2:18:5
+KO: 이드로가, 곧 모세의 장인이, 모세의 아들들과 그의 아내를 데리고 모세에게 광야로 왔는데, 그곳은 그가 하나님의 산에 진 치고 있는 곳이라.
+1 וַיָּבֹא = and he came (to come (in))
+2 יִתְרוֹ = Jethro
+3 חֹתֵן = [the] father-in-law of (relative)
+4 מֹשֶׁה = Moses
+5 וּבָנָיו = and sons his (son)
+6 וְאִשְׁתּוֹ = and wife his (woman)
+7 אֶל־ = to
+8 מֹשֶׁה = Moses
+9 אֶל־ = into
+10 הַמִּדְבָּר = the wilderness (wilderness)
+11 אֲשֶׁר־ = where (which)
+12 הוּא = he (he;_she;_it)
+13 חֹנֶה = [was] encamped (to camp)
+14 שָׁם = there
+15 הַר = [the] mountain of (mountain)
+16 הָאֱלֹהִים = <the> God (God)
+
+## 2:18:6
+KO: 그가 모세에게 이르기를 "나, 그대의 장인 이드로가 그대의 아내와 그녀와 함께한 그녀의 두 아들과 함께 그대에게 왔노라" 하였다.
+1 וַיֹּאמֶר = and he said (to say)
+2 אֶל־ = to
+3 מֹשֶׁה = Moses
+4 אֲנִי = I
+5 חֹתֶנְךָ = father-in-law your (relative)
+6 יִתְרוֹ = Jethro
+7 בָּא = [am] coming (to come (in))
+8 אֵלֶיךָ = to you
+9 וְאִשְׁתְּךָ = and wife your (woman)
+10 וּשְׁנֵי = and [the] two (two)
+11 בָנֶיהָ = sons her (son)
+12 עִמָּהּ = with her (with)
+
+## 2:18:7
+KO: 그리고 모세가 그의 장인을 맞으러 나갔고, 그에게 절하였으며, 그에게 입 맞추었고, 그들이 각자 자기 이웃에게 평안을 물었으며, 그들이 장막 안으로 들어왔다.
+1 וַיֵּצֵא = and he went out (to come out)
+2 מֹשֶׁה = Moses
+3 לִקְרַאת = to meet (to encounter)
+4 חֹתְנוֹ = father-in-law his (relative)
+5 וַיִּשְׁתַּחוּ = and he bowed down (to bow)
+6 וַיִּשַּׁק־ = and he kissed (to kiss)
+7 לוֹ = <to> him (him)
+8 וַיִּשְׁאֲלוּ = and they asked (to ask)
+9 אִישׁ־ = each (man)
+10 לְרֵעֵהוּ = of neighbor his (neighbor)
+11 לְשָׁלוֹם = to welfare (peace)
+12 וַיָּבֹאוּ = and they went (to come (in))
+13 הָאֹהֱלָה = the tent towards (tent)
+
+## 2:18:8
+KO: 모세가 그의 장인에게 여호와께서 이스라엘 때문에 바로와 애굽 사람에게 행하신 모든 일과, 그들이 길에서 겪은 모든 고난과, 여호와께서 그들을 구원하신 일을 다 말하였다.
+1 וַיְסַפֵּר = and he recounted (to recount)
+2 מֹשֶׁה = Moses
+3 לְחֹתְנוֹ = to father-in-law his (relative)
+4 אֵת = <obj.>
+5 כָּל־ = all
+6 אֲשֶׁר = that
+7 עָשָׂה = he had done (to make)
+8 יְהוָה = Yahweh
+9 לְפַרְעֹה = to Pharaoh (Pharaoh)
+10 וּלְמִצְרַיִם = and to Egypt (Egypt)
+11 עַל = on (upon)
+12 אוֹדֹת = [the] causes of (because)
+13 יִשְׂרָאֵל = Israel
+14 אֵת = <obj.>
+15 כָּל־ = all
+16 הַתְּלָאָה = the hardship (hardship)
+17 אֲשֶׁר = which
+18 מְצָאָתַם = it had come upon them (to find)
+19 בַּדֶּרֶךְ = on the journey (way)
+20 וַיַּצִּלֵם = and he had delivered them (to rescue)
+21 יְהוָה = Yahweh
+
+## 2:18:9
+KO: 그리고 이드로가 기뻐하였다, 여호와께서 이스라엘에게 행하신 모든 선하심 위에, 곧 그분께서 그를 애굽 사람의 손에서 구원하신 것에 대하여.
+1 וַיִּחַדְּ = and he rejoiced (to rejoice)
+2 יִתְרוֹ = Jethro
+3 עַל = on (upon)
+4 כָּל־ = all
+5 הַטּוֹבָה = the good (welfare)
+6 אֲשֶׁר־ = which
+7 עָשָׂה = he had done (to make)
+8 יְהוָה = Yahweh (LORD)
+9 לְיִשְׂרָאֵל = to Israel (Israel)
+10 אֲשֶׁר = whom
+11 הִצִּילוֹ = he had delivered it (to rescue)
+12 מִיַּד = from [the] hand of (hand)
+13 מִצְרָיִם = Egypt
+
+## 2:18:10
+KO: 이드로가 말하기를, "여호와는 찬송받으실지로다. 그분은 너희를 이집트의 손과 파라오의 손에서 건져내셨고, 그 백성을 이집트의 손 밑에서 건져내셨도다."
+1 וַיֹּאמֶר = and he said (to say)
+2 יִתְרוֹ = Jethro
+3 בָּרוּךְ = [be] blessed (to bless)
+4 יְהוָה = Yahweh (LORD)
+5 אֲשֶׁר = who
+6 הִצִּיל = he has delivered
+7 אֶתְכֶם = <obj.> you
+8 מִיַּד = from [the] hand of
+9 מִצְרַיִם = Egypt
+10 וּמִיַּד = and from [the] hand of
+11 פַּרְעֹה = Pharaoh
+12 אֲשֶׁר = who
+13 הִצִּיל = he has delivered
+14 אֶת־ = <obj.>
+15 הָעָם = the people (people)
+16 מִתַּחַת = from under (underneath)
+17 יַד־ = [the] hand of
+18 מִצְרָיִם = Egypt

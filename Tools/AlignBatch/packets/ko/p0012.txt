@@ -1,0 +1,879 @@
+## 1:22:3
+KO: 그리고 아브라함이 아침에 일찍 일어났다. 그리고 그가 그의 나귀에 안장을 지웠다. 그리고 그가 그의 두 사환을 그와 함께, 그리고 그의 아들 이삭을 데리고 번제의 나무들을 쪼개었다. 그리고 그가 일어나 그가 그에게 말씀하신 그 장소로 그 하나님이(향해) 갔다.
+1 וַיַּשְׁכֵּם = and he rose early (to rise)
+2 אַבְרָהָם = Abraham
+3 בַּבֹּקֶר = in the morning (morning)
+4 וַיַּחֲבֹשׁ = and he saddled (to saddle|tie)
+5 אֶת־ = <obj.>
+6 חֲמֹרוֹ = donkey his (donkey)
+7 וַיִּקַּח = and he took (to take)
+8 אֶת־ = <obj.>
+9 שְׁנֵי = two of (two)
+10 נְעָרָיו = servants his (youth)
+11 אִתּוֹ = with him (with)
+12 וְאֵת = and <obj.>
+13 יִצְחָק = Isaac
+14 בְּנוֹ = son his (son)
+15 וַיְבַקַּע = and he cut (to break up|open)
+16 עֲצֵי = wood<s> of (tree)
+17 עֹלָה = burnt offering
+18 וַיָּקָם = and he arose (to arise)
+19 וַיֵּלֶךְ = and he went (to go)
+20 אֶל־ = to (to(wards))
+21 הַמָּקוֹם = the place (standing place)
+22 אֲשֶׁר־ = which
+23 אָמַר־ = he had said (to say)
+24 לוֹ = to <the> him (him)
+25 הָאֱלֹהִים = <the> God (God)
+
+## 1:22:4
+KO: 그 제삼일에 아브라함이 그의 눈들을 들어 올렸고, 그곳을 멀리서 보았다.
+1 בַּיּוֹם = on the day (day;_when)
+2 הַשְּׁלִישִׁי = <the> third (third)
+3 וַיִּשָּׂא = and he lifted up (to lift)
+4 אַבְרָהָם = Abraham
+5 אֶת־ = <obj.>
+6 עֵינָיו = eyes his (eye)
+7 וַיַּרְא = and he saw (to see)
+8 אֶת־ = <obj.>
+9 הַמָּקוֹם = the place (standing place)
+10 מֵרָחֹק = from a distance (distant)
+
+## 1:22:5
+KO: 그리고 아브라함이 그의 종들에게 말하였다. "너희는 나귀와 함께 여기서 머물러라. 그리고 나와 그 아이는 저기까지 가서, 우리가 경배하고, 너희에게 돌아오리라."
+1 וַיֹּאמֶר = and he said (to say)
+2 אַבְרָהָם = Abraham
+3 אֶל־ = to
+4 נְעָרָיו = servants his
+5 שְׁבוּ־ = remain (to dwell)
+6 לָכֶם = for <the> yourselves (you)
+7 פֹּה = here
+8 עִם־ = with
+9 הַחֲמוֹר = the donkey (donkey)
+10 וַאֲנִי = and I (I)
+11 וְהַנַּעַר = and the lad
+12 נֵלְכָה = we will go (to go)
+13 עַד־ = to (till)
+14 כֹּה = there (thus)
+15 וְנִשְׁתַּחֲוֶה = so we may bow down (to bow)
+16 וְנָשׁוּבָה = and we will return (to return)
+17 אֲלֵיכֶם = to you
+
+## 1:22:6
+KO: 그리고 아브라함이 번제의 나무들을 취하여, 그의 아들 이삭 위에 그것들을 지우고, 그의 손에 불과 칼을 취하였고, 그들 두 사람이 함께 걸어갔다.
+1 וַיִּקַּח = and he took
+2 אַבְרָהָם = Abraham
+3 אֶת־ = <obj.>
+4 עֲצֵי = [the] wood<s> of (tree)
+5 הָעֹלָה = the burnt offering (burnt offering)
+6 וַיָּשֶׂם = and he put [it] (to set)
+7 עַל־ = on (upon)
+8 יִצְחָק = Isaac
+9 בְּנוֹ = son his (son)
+10 וַיִּקַּח = and he took
+11 בְּיָדוֹ = in hand his (hand)
+12 אֶת־ = <obj.>
+13 הָאֵשׁ = the fire (fire)
+14 וְאֶת־ = and <obj.>
+15 הַמַּאֲכֶלֶת = the knife (knife)
+16 וַיֵּלְכוּ = and they went (to go)
+17 שְׁנֵיהֶם = [the] two of them (two)
+18 יַחְדָּו = together
+
+## 1:22:7
+KO: 그리고 이삭이 그의 아버지 아브라함에게 말하였다. 그가 "내 아버지여"라고 말하니, 그가 "내 아들아, 여기 내가 있다"라고 말하였다. 그리고 그가 말하였다. "보라, 불과 나무는 있으나, 번제를 위한 어린 양은 어디에 있습니까?"
+1 וַיֹּאמֶר = and he said
+2 יִצְחָק = Isaac
+3 אֶל־ = to (to(wards))
+4 אַבְרָהָם = Abraham
+5 אָבִיו = father his
+6 וַיֹּאמֶר = and he said
+7 אָבִי = O father my
+8 וַיֹּאמֶר = and he said
+9 הִנֶּנִּי = here [am] I
+10 בְנִי = O son my (son)
+11 וַיֹּאמֶר = and he said
+12 הִנֵּה = here!
+13 הָאֵשׁ = the fire (fire)
+14 וְהָעֵצִים = and the wood<s> (tree)
+15 וְאַיֵּה = and where? (where?)
+16 הַשֶּׂה = [is] the sheep (sheep)
+17 לְעֹלָה = for a burnt offering (burnt offering)
+
+## 1:22:8
+KO: 아브라함이 말하였다. "내 아들아, 하나님께서 자신을 위해 번제물로 쓸 어린 양을 보실 것이다." 그리고 그들 두 사람이 함께 걸어갔다.
+1 וַיֹּאמֶר = and he said (to say)
+2 אַבְרָהָם = Abraham
+3 אֱלֹהִים = God
+4 יִרְאֶה־ = he will see (to see)
+5 לּוֹ = for <the> himself (him)
+6 הַשֶּׂה = the sheep (sheep)
+7 לְעֹלָה = for a burnt offering (burnt offering)
+8 בְּנִי = O son my (son)
+9 וַיֵּלְכוּ = and they went (to go)
+10 שְׁנֵיהֶם = [the] two of them (two)
+11 יַחְדָּו = together
+
+## 1:22:9
+KO: 그들이 하나님께서 그에게 말씀하신 그 장소에 이르렀고, 아브라함이 그곳에 제단을 쌓았고 나무들을 배열하였고, 그의 아들 이삭을 결박하였고, 제단 위에, 나무들 위로 그를 두었다.
+1 וַיָּבֹאוּ = and they came (to come (in))
+2 אֶל־ = to (to(wards))
+3 הַמָּקוֹם = the place (standing place)
+4 אֲשֶׁר = which
+5 אָמַר־ = he had said (to say)
+6 לוֹ = to <the> him (him)
+7 הָאֱלֹהִים = <the> God (God)
+8 וַיִּבֶן = and he built (to build)
+9 שָׁם = there
+10 אַבְרָהָם = Abraham
+11 אֶת־ = <obj.>
+12 הַמִּזְבֵּחַ = the altar
+13 וַיַּעֲרֹךְ = and he arranged (to arrange)
+14 אֶת־ = <obj.>
+15 הָעֵצִים = the wood<s>
+16 וַיַּעֲקֹד = and he bound (to bind)
+17 אֶת־ = <obj.>
+18 יִצְחָק = Isaac
+19 בְּנוֹ = son his (son)
+20 וַיָּשֶׂם = and he put (to set)
+21 אֹתוֹ = <obj.> him
+22 עַל־ = on (upon)
+23 הַמִּזְבֵּחַ = the altar
+24 מִמַּעַל = from above (above)
+25 לָעֵצִים = <to> the wood<s>
+
+## 1:22:10
+KO: 그리고 아브라함이 그의 손을 내밀었고, 칼을 취하여 그의 아들을 잡으려(도살하려) 하였다.
+1 וַיִּשְׁלַח = and he stretched out (to send)
+2 אַבְרָהָם = Abraham
+3 אֶת־ = <obj.>
+4 יָדוֹ = hand his (hand)
+5 וַיִּקַּח = and he took (to take)
+6 אֶת־ = <obj.>
+7 הַמַּאֲכֶלֶת = the knife (knife)
+8 לִשְׁחֹט = to slaughter
+9 אֶת־ = <obj.>
+10 בְּנוֹ = son his (son)
+
+## 1:22:11
+KO: 그리고 여호와의 사자가 하늘로부터 그를 향하여 불렀고, 이르기를 “아브라함아, 아브라함아” 하니, 그가 말하기를 “내가 여기 있나이다” 하였다.
+1 וַיִּקְרָא = and he called (to call)
+2 אֵלָיו = to him (to(wards))
+3 מַלְאַךְ = [the] angel of (messenger)
+4 יְהוָה = Yahweh (LORD)
+5 מִן־ = from
+6 הַשָּׁמַיִם = the heavens (heaven)
+7 וַיֹּאמֶר = and he said
+8 אַבְרָהָם = O Abraham
+9 אַבְרָהָם = Abraham
+10 וַיֹּאמֶר = and he said
+11 הִנֵּנִי = here [am] I (behold)
+
+## 1:22:12
+KO: 그가 말씀하셨다. "그 소년에게 네 손을 뻗지 말라. 그리고 그에게 아무것도 하지 말라. 왜냐하면 이제야 내가 네가 하나님을 경외하는 자임을 알았기 때문이다. 네가 네 아들, 곧 네 독자를 나에게서 아끼지 아니하였다."
+1 וַיֹּאמֶר = and he said (to say)
+2 אַל־ = may not
+3 תִּשְׁלַח = you stretch out (to send)
+4 יָדְךָ = hand your (hand)
+5 אֶל־ = against (to(wards))
+6 הַנַּעַר = the lad (youth)
+7 וְאַל־ = and may not
+8 תַּעַשׂ = you do (to make)
+9 לוֹ = to <the> him (him)
+10 מְאוּמָּה = anything
+11 כִּי = for
+12 עַתָּה = now
+13 יָדַעְתִּי = I know (to know)
+14 כִּי־ = that
+15 יְרֵא = [are one] fearing (afraid)
+16 אֱלֹהִים = <of> God (God)
+17 אַתָּה = you (you(m.s.))
+18 וְלֹא = and not (not)
+19 חָשַׂכְתָּ = you have withheld (to withhold)
+20 אֶת־ = <obj.>
+21 בִּנְךָ = son your (son)
+22 אֶת־ = <obj.>
+23 יְחִידְךָ = only [son] your (only)
+24 מִמֶּנִּי = from me (from)
+
+## 1:22:13
+KO: 아브라함이 그의 눈들을 들어 보았는데, 보라, 한 수양이 뒤에 수풀 속에 그 뿔들로 붙잡혀 있더라. 아브라함이 가서 그 수양을 취하여 자기 아들을 대신하여 번제로 드렸더라.
+1 וַיִּשָּׂא = and he lifted up (to lift)
+2 אַבְרָהָם = Abraham
+3 אֶת־ = <obj.>
+4 עֵינָיו = eyes his (eye)
+5 וַיַּרְא = and he saw (to see)
+6 וְהִנֵּה־ = and there! (behold)
+7 אַיִל = a ram
+8 אַחַר = behind (after)
+9 נֶאֱחַז = it was caught (to grasp)
+10 בַּסְּבַךְ = in the thicket (thicket)
+11 בְּקַרְנָיו = by horns its (horn)
+12 וַיֵּלֶךְ = and he went (to go)
+13 אַבְרָהָם = Abraham
+14 וַיִּקַּח = and he took (to take)
+15 אֶת־ = <obj.>
+16 הָאַיִל = the ram
+17 וַיַּעֲלֵהוּ = and he offered up it (to ascend)
+18 לְעֹלָה = to a burnt offering (burnt offering)
+19 תַּחַת = in place of (underneath)
+20 בְּנוֹ = son his (son)
+
+## 1:22:14
+KO: 그리고 아브라함은 그 장소의 이름을 '여호와 이레'라고 불렀으니, 이 때문에 오늘날까지 사람들이 "여호와의 산에서 그가 나타나실 것이다"라고 말한다.
+1 וַיִּקְרָא = and he called (to call)
+2 אַבְרָהָם = Abraham
+3 שֵׁם־ = [the] name of (name)
+4 הַמָּקוֹם = the place (standing place)
+5 הַהוּא = <the> that (he;_she;_it)
+6 יְהוָה = Yahweh
+7 יִרְאֶה = he will see
+8 אֲשֶׁר = that (which)
+9 יֵאָמֵר = it is said (to say)
+10 הַיּוֹם = this day (day)
+11 בְּהַר = on [the] mountain of (mountain)
+12 יְהוָה = Yahweh
+13 יֵרָאֶה = it will be seen
+
+## 1:22:15
+KO: 그리고 여호와의 사자가 하늘로부터 두 번째로 아브라함을 불렀다.
+1 וַיִּקְרָא = and he called (to call)
+2 מַלְאַךְ = [the] angel of (messenger)
+3 יְהוָה = Yahweh (LORD)
+4 אֶל־ = to (to(wards))
+5 אַבְרָהָם = Abraham
+6 שֵׁנִית = a second [time] (second)
+7 מִן־ = from
+8 הַשָּׁמָיִם = the heavens (heaven)
+
+## 1:22:16
+KO: 그가 말씀하시기를 "나를 두고 내가 맹세하노니, 여호와의 말씀이라. 네가 이 일을 행하였고, 네 아들, 네 독자를 아끼지 아니하였기 때문이다."
+1 וַיֹּאמֶר = and he said (to say)
+2 בִּי = by <the> myself (me)
+3 נִשְׁבַּעְתִּי = I swear (to swear)
+4 נְאֻם־ = [the] utterance of (utterance)
+5 יְהוָה = Yahweh (LORD)
+6 כִּי = that (for)
+7 יַעַן = because
+8 אֲשֶׁר = that (which)
+9 עָשִׂיתָ = you have done (to make)
+10 אֶת־ = <obj.>
+11 הַדָּבָר = the thing (word)
+12 הַזֶּה = <the> this (this)
+13 וְלֹא = and not (not)
+14 חָשַׂכְתָּ = you have withheld (to withhold)
+15 אֶת־ = <obj.>
+16 בִּנְךָ = son your (son)
+17 אֶת־ = <obj.>
+18 יְחִידֶךָ = only [son] your (only)
+
+## 1:22:17
+KO: 정녕 내가 네게 복을 주고 복을 줄 것이며, 내가 네 씨를 하늘의 별들처럼 그리고 바닷가에 있는 모래처럼 번성하게 할 것이니, 네 씨가 자기 대적들의 문을 차지할 것이다.
+1 כִּי־ = for
+2 בָרֵךְ = surely <bless>
+3 אֲבָרֶכְךָ = I will bless you
+4 וְהַרְבָּה = and certainly <to increase>
+5 אַרְבֶּה = I will increase
+6 אֶת־ = <obj.>
+7 זַרְעֲךָ = offspring your
+8 כְּכוֹכְבֵי = like [the] stars of (star)
+9 הַשָּׁמַיִם = the heavens (heaven)
+10 וְכַחוֹל = and like the sand (sand)
+11 אֲשֶׁר = which
+12 עַל־ = [is] on (upon)
+13 שְׂפַת = [the] shore of (lip)
+14 הַיָּם = the sea (sea)
+15 וְיִרַשׁ = so <it> may take possession of (to possess)
+16 זַרְעֲךָ = offspring your
+17 אֵת = <obj.>
+18 שַׁעַר = [the] gate of (gate)
+19 אֹיְבָיו = enemies its (enemy)
+
+## 1:22:18
+KO: 그리고 땅의 모든 민족들이 네 씨로 말미암아 복을 받으리니, 이는 네가 나의 목소리를 청종하였기 때문이라.
+1 וְהִתְבָּרֲכוּ = and they will bless themselves (to bless)
+2 בְזַרְעֲךָ = by offspring your (seed)
+3 כֹּל = all
+4 גּוֹיֵי = [the] nations of (nation)
+5 הָאָרֶץ = the earth (land)
+6 עֵקֶב = consequence
+7 אֲשֶׁר = that (which)
+8 שָׁמַעְתָּ = you have listened (to hear)
+9 בְּקֹלִי = to voice my (voice)
+
+## 1:22:19
+KO: 그리고 아브라함이 그의 사환들에게 돌아왔고, 그들이 일어나 함께 브엘세바로 갔으며, 아브라함이 브엘세바에 거주하였다.
+1 וַיָּשָׁב = and he returned (to return)
+2 אַבְרָהָם = Abraham
+3 אֶל־ = to
+4 נְעָרָיו = servants his (youth)
+5 וַיָּקֻמוּ = and they arose (to arise)
+6 וַיֵּלְכוּ = and they went (to go)
+7 יַחְדָּו = together
+8 אֶל־ = to
+9 בְּאֵר = Beer
+10 שָׁבַע = Sheba
+11 וַיֵּשֶׁב = and he dwelt (to dwell)
+12 אַבְרָהָם = Abraham
+13 בִּבְאֵר = in Beer
+14 שָׁבַע פ = Sheba
+
+## 1:22:20
+KO: 그리고 이 일들 후에 아브라함에게 고하여 말하기를, "보라, 밀가도 당신의 형제 나홀에게 아들들을 낳았다"라고 하였다.
+1 וַיְהִי = and it was (to be)
+2 אַחֲרֵי = after
+3 הַדְּבָרִים = the things (word)
+4 הָאֵלֶּה = <the> these (these)
+5 וַיֻּגַּד = and it was told (to tell)
+6 לְאַבְרָהָם = to Abraham (Abraham)
+7 לֵאמֹר = <to> saying (to say)
+8 הִנֵּה = there! (behold)
+9 יָלְדָה = she has borne (to beget)
+10 מִלְכָּה = Milcah
+11 גַם־ = also
+12 הִוא = she (he;_she;_it)
+13 בָּנִים = children (son)
+14 לְנָחוֹר = to Nahor (Nahor)
+15 אָחִיךָ = brother your (brother)
+
+## 1:22:21
+KO: 그의 맏아들은 우스요, 그리고 그의 형제 부스요, 그리고 아람의 아버지 그므엘이라.
+1 אֶת־ = <obj.>
+2 עוּץ = Uz
+3 בְּכֹרוֹ = firstborn his (firstborn)
+4 וְאֶת־ = and <obj.>
+5 בּוּז = Buz
+6 אָחִיו = brother his (brother)
+7 וְאֶת־ = and <obj.>
+8 קְמוּאֵל = Kemuel
+9 אֲבִי = [the] father of (father)
+10 אֲרָם = Aram
+
+## 1:22:22
+KO: 그리고 게셋과, 그리고 하소와, 그리고 빌다스와, 그리고 이들랍과, 그리고 브두엘이라.
+1 וְאֶת־ = and <obj.>
+2 כֶּשֶׂד = Kesed (Chesed)
+3 וְאֶת־ = and <obj.>
+4 חֲזוֹ = Hazo
+5 וְאֶת־ = and <obj.>
+6 פִּלְדָּשׁ = Pildash
+7 וְאֶת־ = and <obj.>
+8 יִדְלָף = Jidlaph
+9 וְאֵת = and <obj.>
+10 בְּתוּאֵל = Bethuel
+
+## 1:22:23
+KO: 그리고 브두엘은 리브가를 낳았다. 이 여덟은 밀가가 아브라함의 동생 나홀에게 낳은 자들이다.
+1 וּבְתוּאֵל = and Bethuel (Bethuel)
+2 יָלַד = he fathered
+3 אֶת־ = <obj.> ([Obj.])
+4 רִבְקָה = Rebekah
+5 שְׁמֹנָה = eight [sons] (eight)
+6 אֵלֶּה = these
+7 יָלְדָה = she bore
+8 מִלְכָּה = Milcah
+9 לְנָחוֹר = to Nahor (Nahor)
+10 אֲחִי = [the] brother of (brother)
+11 אַבְרָהָם = Abraham
+
+## 1:22:24
+KO: 그리고 그의 첩, 곧 그녀의 이름은 르우마인데, 그녀 또한 테바와 가함과 다하스와 마아가를 낳았다.
+1 וּפִילַגְשׁוֹ = and concubine his (concubine)
+2 וּשְׁמָהּ = and name her (name)
+3 רְאוּמָה = [was] Reumah (Reumah)
+4 וַתֵּלֶד = and she bore (to beget)
+5 גַּם־ = also
+6 הִוא = she (he;_she;_it)
+7 אֶת־ = <obj.>
+8 טֶבַח = Tebah
+9 וְאֶת־ = and <obj.>
+10 גַּחַם = Gaham
+11 וְאֶת־ = and <obj.>
+12 תַּחַשׁ = Tahash
+13 וְאֶת־ = and <obj.>
+14 מַעֲכָה ס = Maacah
+
+## 1:23:1
+KO: 그리고 사라의 삶의 연수는 백 년과 이십 년과 칠 년이었으니, 이것이 사라의 삶의 연수들이라.
+1 וַיִּהְיוּ = and they were (to be)
+2 חַיֵּי = [the] life of
+3 שָׂרָה = Sarah
+4 מֵאָה = one hundred (hundred)
+5 שָׁנָה = year[s]
+6 וְעֶשְׂרִים = and twenty (twenty)
+7 שָׁנָה = year[s]
+8 וְשֶׁבַע = and seven (seven)
+9 שָׁנִים = years
+10 שְׁנֵי = [the] years of
+11 חַיֵּי = [the] life of
+12 שָׂרָה = Sarah
+
+## 1:23:2
+KO: 그리고 사라가 죽었다, 기럇아르바 곧 헤브론에서, 가나안 땅에 있는 그것(그곳). 그리고 아브라함이 사라를 위하여 애도하고 그녀를 위하여 울기 위해 들어왔다.
+1 וַתָּמָת = and she died (to die)
+2 שָׂרָה = Sarah
+3 בְּקִרְיַת = at Kiriath
+4 אַרְבַּע = Arba
+5 הִוא = that (he;_she;_it)
+6 חֶבְרוֹן = [is] Hebron (Hebron)
+7 בְּאֶרֶץ = in [the] land of (land)
+8 כְּנָעַן = Canaan
+9 וַיָּבֹא = and he went (to come (in))
+10 אַבְרָהָם = Abraham
+11 לִסְפֹּד = to mourn
+12 לְשָׂרָה = for Sarah
+13 וְלִבְכֹּתָהּ = and to weep for her (to weep)
+
+## 1:23:3
+KO: 그리고 아브라함이 자기 죽은 자의 얼굴 위로부터 일어나서 헷의 자손들에게 말하며 이르기를,
+1 וַיָּקָם = and he arose (to arise)
+2 אַבְרָהָם = Abraham
+3 מֵעַל = from on (upon)
+4 פְּנֵי = [the] face of (face)
+5 מֵתוֹ = dead his (to die)
+6 וַיְדַבֵּר = and he spoke (to speak)
+7 אֶל־ = to (to(wards))
+8 בְּנֵי־ = [the] people of (son)
+9 חֵת = Heth
+10 לֵאמֹר = <to> saying (to say)
+
+## 1:23:4
+KO: 나는 당신들과 함께 있는 나그네요 우거하는 자이니, 당신들 중에서 내게 매장지의 소유를 주어 내가 내 죽은 자를 내 얼굴 앞에서 장사하게 하시오.
+1 גֵּר־ = [am] a sojourner (sojourner)
+2 וְתוֹשָׁב = and a resident alien (sojourner)
+3 אָנֹכִי = I
+4 עִמָּכֶם = with you
+5 תְּנוּ = give (to give)
+6 לִי = to <the> me (me)
+7 אֲחֻזַּת־ = a possession of (possesion)
+8 קֶבֶר = a burial site (grave)
+9 עִמָּכֶם = with you
+10 וְאֶקְבְּרָה = so let me bury (to bury)
+11 מֵתִי = dead my (to die)
+12 מִלְּפָנָי = from to before me (face)
+
+## 1:23:5
+KO: 그리고 헷의 자손들이 아브라함에게 대답하여 말하기를 그에게 (이르되)
+1 וַיַּעֲנוּ = and they answered (to answer)
+2 בְנֵי־ = [the] people of (son)
+3 חֵת = Heth
+4 אֶת־ = <obj.> ([Obj.])
+5 אַבְרָהָם = Abraham
+6 לֵאמֹר = <to> saying (to say)
+7 לוֹ = to <the> him (him)
+
+## 1:23:6
+KO: 우리 말을 들으소서, 나의 주여. 당신은 우리 가운데 하나님의 방백이시니, 우리 묘실들의 좋은 것 안에서 당신의 죽은 자를 장사하소서. 우리 중 누구도 당신의 죽은 자를 장사하는 것을 당신의 묘실에서 금할 자가 없나이다.
+1 שְׁמָעֵנוּ = listen to us (to hear)
+2 אֲדֹנִי = O lord my (lord)
+3 נְשִׂיא = [are] a prince of (leader)
+4 אֱלֹהִים = God
+5 אַתָּה = you (you(m.s.))
+6 בְּתוֹכֵנוּ = in midst of us (midst)
+7 בְּמִבְחַר = in [the] choicest of (best)
+8 קְבָרֵינוּ = burial sites our
+9 קְבֹר = bury
+10 אֶת־ = <obj.>
+11 מֵתֶךָ = dead your
+12 אִישׁ = anyone (man)
+13 מִמֶּנּוּ = of us
+14 אֶת־ = <obj.>
+15 קִבְרוֹ = burial site his
+16 לֹא־ = not
+17 יִכְלֶה = he will withhold (to restrain)
+18 מִמְּךָ = from you
+19 מִקְּבֹר = from burying
+20 מֵתֶךָ = dead your
+
+## 1:23:7
+KO: 그리고 아브라함이 일어나서 그 땅의 백성 곧 헷의 자손들을 향하여 몸을 굽혔다.
+1 וַיָּקָם = and he arose (to arise)
+2 אַבְרָהָם = Abraham
+3 וַיִּשְׁתַּחוּ = and he bowed down (to bow)
+4 לְעַם־ = to [the] people of (people)
+5 הָאָרֶץ = the land (land)
+6 לִבְנֵי־ = to [the] people of (son)
+7 חֵת = Heth
+
+## 1:23:8
+KO: 그가 그들에게 말하여 이르되, 만일 당신들의 영혼이 나의 죽은 자를 내 앞(내 면전)에서 장사 지내게 하기를 원한다면, 나를 위해 듣고 나를 위해 소할의 아들 에브론에게 간구하여(그를 마주하여 청하여).
+1 וַיְדַבֵּר = and he spoke (to speak)
+2 אִתָּם = with them
+3 לֵאמֹר = <to> saying (to say)
+4 אִם־ = if
+5 יֵשׁ = there
+6 אֶת־ = with
+7 נַפְשְׁכֶם = desire your (soul)
+8 לִקְבֹּר = to bury
+9 אֶת־ = <obj.> ([Obj.])
+10 מֵתִי = dead my (to die)
+11 מִלְּפָנַי = from to before me (face)
+12 שְׁמָעוּנִי = listen to me (to hear)
+13 וּפִגְעוּ־ = and entreat (to fall on)
+14 לִי = for <the> me (me)
+15 בְּעֶפְרוֹן = <in> Ephron (Ephron)
+16 בֶּן־ = [the] son of (son)
+17 צֹחַר = Zohar
+
+## 1:23:9
+KO: 그가 나에게 그의 밭 끝에 있는 막벨라 굴을 주게 하소서. 그가 그것을 그 굴을 나에게 은 가득한 값으로 주어서 당신들 가운데 내 소유 매장지가 되게 하소서.
+1 וְיִתֶּן־ = so may he give
+2 לִי = to <the> me
+3 אֶת־ = <obj.> ([Obj.])
+4 מְעָרַת = [the] cave of (cave)
+5 הַמַּכְפֵּלָה = <the> Machpelah (Machpelah)
+6 אֲשֶׁר־ = which
+7 לוֹ = [belongs] to <the> him (him)
+8 אֲשֶׁר = which
+9 בִּקְצֵה = [is] at [the] end of (end)
+10 שָׂדֵהוּ = field his (land)
+11 בְּכֶסֶף = for silver (silver)
+12 מָלֵא = full
+13 יִתְּנֶנָּה = let him give it
+14 לִי = to <the> me
+15 בְּתוֹכְכֶם = in midst of you (midst)
+16 לַאֲחֻזַּת־ = to a possession of (possesion)
+17 קָבֶר = a burial site (grave)
+
+## 1:23:10
+KO: 그리고 에브론이 헷 자손들 가운데 앉아 있었는데, 헷 자손 곧 그의 성문에 들어오는 모든 자의 귀에 에브론 그 헷 사람이 아브라함에게 대답하여 말하였다.
+1 וְעֶפְרוֹן = and Ephron
+2 יֹשֵׁב = [was] sitting (to dwell)
+3 בְּתוֹךְ = in among (midst)
+4 בְּנֵי־ = [the] people of
+5 חֵת = Heth
+6 וַיַּעַן = and he answered (to answer)
+7 עֶפְרוֹן = Ephron
+8 הַחִתִּי = the Hethite (Hittite)
+9 אֶת־ = <obj.> ([Obj.])
+10 אַבְרָהָם = Abraham
+11 בְּאָזְנֵי = in [the] ears of (ear)
+12 בְנֵי־ = [the] people of
+13 חֵת = Heth
+14 לְכֹל = to all (all)
+15 בָּאֵי = [those who were] entering (to come (in))
+16 שַׁעַר־ = <of> [the] gate of (gate)
+17 עִירוֹ = city his (city)
+18 לֵאמֹר = <to> saying (to say)
+
+## 1:23:11
+KO: 아니오, 내 주여, 내 말을 들으소서. 그 밭을 내가 당신께 드렸고, 그 안에 있는 굴도 내가 당신께 드렸나이다. 내 동족의 눈앞에서 내가 그것을 당신께 드렸으니, 당신의 죽은 자를 장사하소서.
+1 לֹא־ = no (not)
+2 אֲדֹנִי = O lord my (lord)
+3 שְׁמָעֵנִי = listen to me (to hear)
+4 הַשָּׂדֶה = the field (land)
+5 נָתַתִּי = I give
+6 לָךְ = to <the> you
+7 וְהַמְּעָרָה = and the cave (cave)
+8 אֲשֶׁר־ = which
+9 בּוֹ = [is] in <the> it (him)
+10 לְךָ = to <the> you (you)
+11 נְתַתִּיהָ = I give it
+12 לְעֵינֵי = to [the] eyes of (eye)
+13 בְנֵי־ = [the] sons of (son)
+14 עַמִּי = people my (people)
+15 נְתַתִּיהָ = I give it
+16 לָּךְ = to <the> you
+17 קְבֹר = bury (to bury)
+18 מֵתֶךָ = dead your (to die)
+
+## 1:23:12
+KO: 그리고 아브라함은 그 땅의 백성들의 얼굴 앞에서 몸을 굽혔다.
+1 וַיִּשְׁתַּחוּ = and he bowed down (to bow)
+2 אַבְרָהָם = Abraham
+3 לִפְנֵי = <to> before (face)
+4 עַם = [the] people of (people)
+5 הָאָרֶץ = the land (land)
+
+## 1:23:13
+KO: 그가 그 땅 백성의 귀들에 에브론에게 말하며 이르기를, "만일 당신이 부디 내 말을 들으시오. 내가 그 밭의 은을 주리니, 나에게서 받으시오. 그러면 내가 나의 죽은 자를 그곳에 장사하겠소"라고 하였다.
+1 וַיְדַבֵּר = and he spoke (to speak)
+2 אֶל־ = to (to(wards))
+3 עֶפְרוֹן = Ephron
+4 בְּאָזְנֵי = in [the] ears of (ear)
+5 עַם־ = [the] people of (people)
+6 הָאָרֶץ = the land (land)
+7 לֵאמֹר = <to> saying (to say)
+8 אַךְ = nevertheless (surely)
+9 אִם־ = if
+10 אַתָּה = you (you(m.s.))
+11 לוּ = if
+12 שְׁמָעֵנִי = listen to me (to hear)
+13 נָתַתִּי = I give (to give)
+14 כֶּסֶף = [the] money of (silver)
+15 הַשָּׂדֶה = the field (land)
+16 קַח = take [it] (to take)
+17 מִמֶּנִּי = from me (from)
+18 וְאֶקְבְּרָה = so let me bury (to bury)
+19 אֶת־ = <obj.> ([Obj.])
+20 מֵתִי = dead my (to die)
+21 שָׁמָּה = there <towards> (there)
+
+## 1:23:14
+KO: 그리고 에브론이 아브라함에게 대답하여 말하였다.
+1 וַיַּעַן = and he answered (to answer)
+2 עֶפְרוֹן = Ephron
+3 אֶת־ = <obj.> ([Obj.])
+4 אַבְרָהָם = Abraham
+5 לֵאמֹר = <to> saying (to say)
+6 לוֹ = to <the> him (him)
+
+## 1:23:15
+KO: 내 주여, 내게 들으소서. 은 사백 세겔인 땅이 나와 당신 사이에 무엇입니까? 당신의 죽은 자를 장사하소서.
+1 אֲדֹנִי = O lord my (lord)
+2 שְׁמָעֵנִי = listen to me (to hear)
+3 אֶרֶץ = land of (land)
+4 אַרְבַּע = four
+5 מֵאֹת = hundred<s> (hundred)
+6 שֶׁקֶל־ = shekel[s] of (shekel)
+7 כֶּסֶף = silver
+8 בֵּינִי = between me
+9 וּבֵינְךָ = and between you
+10 מַה־ = what?
+11 הִוא = [is] it (he;_she;_it)
+12 וְאֶת־ = and <obj.> ([Obj.])
+13 מֵתְךָ = dead your (to die)
+14 קְבֹר = bury (to bury)
+
+## 1:23:16
+KO: 아브라함이 에브론의 말을 들었고, 아브라함이 에브론에게 헷 자손의 귀에 그가 말한 은, 곧 사백 세겔의 은을 달아 주었으니, 상인들에게 통용되는 것이었다.
+1 וַיִּשְׁמַע = and he listened (to hear)
+2 אַבְרָהָם = Abraham
+3 אֶל־ = to (to(wards))
+4 עֶפְרוֹן = Ephron
+5 וַיִּשְׁקֹל = and he weighed out (to weigh)
+6 אַבְרָהָם = Abraham
+7 לְעֶפְרֹן = for Ephron
+8 אֶת־ = <obj.> ([Obj.])
+9 הַכֶּסֶף = the money
+10 אֲשֶׁר = which
+11 דִּבֶּר = he had spoken (to speak)
+12 בְּאָזְנֵי = in [the] ears of (ear)
+13 בְנֵי־ = [the] people of (son)
+14 חֵת = Heth
+15 אַרְבַּע = four
+16 מֵאוֹת = hundred<s> (hundred)
+17 שֶׁקֶל = shekel[s] of (shekel)
+18 כֶּסֶף = silver
+19 עֹבֵר = passing along (to pass)
+20 לַסֹּחֵר = to the trader (to trade)
+
+## 1:23:17
+KO: 마므레 앞에 있는 막벨라에 있는 에브론의 밭과 그 안의 굴과 그 밭 안의 그 모든 나무 곧 그 모든 경계 주위에 있는 나무가 확정되었다.
+1 וַיָּקָם = and it was confirmed (to arise)
+2 שְׂדֵה = [the] field of
+3 עֶפְרוֹן = Ephron
+4 אֲשֶׁר = which
+5 בַּמַּכְפֵּלָה = [was] in <the> Machpelah (Machpelah)
+6 אֲשֶׁר = which
+7 לִפְנֵי = [was] <to> before (face)
+8 מַמְרֵא = Mamre
+9 הַשָּׂדֶה = the field
+10 וְהַמְּעָרָה = and the cave (cave)
+11 אֲשֶׁר־ = which
+12 בּוֹ = [was] in <the> it (him)
+13 וְכָל־ = and every
+14 הָעֵץ = <the> tree (tree)
+15 אֲשֶׁר = which
+16 בַּשָּׂדֶה = [was] in the field
+17 אֲשֶׁר = which
+18 בְּכָל־ = [was] in all
+19 גְּבֻלוֹ = border its (border)
+20 סָבִיב = round about (around)
+
+## 1:23:18
+KO: 아브라함에게 소유로, 그의 성문 안으로 들어오는 모든 자들의 눈앞에서, 헷 자손들 앞에서 (확정되었다).
+1 לְאַבְרָהָם = to Abraham (Abraham)
+2 לְמִקְנָה = to a possession (purchase)
+3 לְעֵינֵי = to [the] eyes of (eye)
+4 בְנֵי־ = [the] people of (son)
+5 חֵת = Heth
+6 בְּכֹל = for all (all)
+7 בָּאֵי = [those who were] entering (to come (in))
+8 שַׁעַר־ = <of> [the] gate of (gate)
+9 עִירוֹ = city his (city)
+
+## 1:23:19
+KO: 그 후에 아브라함이 그의 아내 사라를 가나안 땅에 있는, 마므레 앞 막벨라 밭의 굴에 장사하였다(그곳은 헤브론이다).
+1 וְאַחֲרֵי־ = and after (after)
+2 כֵן = thus (so)
+3 קָבַר = he buried (to bury)
+4 אַבְרָהָם = Abraham
+5 אֶת־ = <obj.> ([Obj.])
+6 שָׂרָה = Sarah
+7 אִשְׁתּוֹ = wife his (woman)
+8 אֶל־ = into (to(wards))
+9 מְעָרַת = [the] cave of (cave)
+10 שְׂדֵה = [the] field of (land)
+11 הַמַּכְפֵּלָה = <the> Machpelah (Machpelah)
+12 עַל־ = on (upon)
+13 פְּנֵי = [the] face of (face)
+14 מַמְרֵא = Mamre
+15 הִוא = that (he;_she;_it)
+16 חֶבְרוֹן = [is] Hebron (Hebron)
+17 בְּאֶרֶץ = in [the] land of (land)
+18 כְּנָעַן = Canaan
+
+## 1:23:20
+KO: 그 밭과 그 안에 있는 굴이 헷의 자손들로부터 아브라함에게 매장지의 소유로 확정되었다.
+1 וַיָּקָם = and it was confirmed (to arise)
+2 הַשָּׂדֶה = the field (land)
+3 וְהַמְּעָרָה = and the cave (cave)
+4 אֲשֶׁר־ = which
+5 בּוֹ = [was] in <the> it (him)
+6 לְאַבְרָהָם = to Abraham (Abraham)
+7 לַאֲחֻזַּת־ = to a possession of (possesion)
+8 קָבֶר = a burial site (grave)
+9 מֵאֵת = from with (with)
+10 בְּנֵי־ = [the] people of (son)
+11 חֵת ס = Heth
+
+## 1:24:1
+KO: 그리고 아브라함은 나이가 들었고, 날들 안으로 들어왔으며, 여호와께서는 아브라함에게 모든 것 안에서 복을 주셨더라.
+1 וְאַבְרָהָם = and Abraham
+2 זָקֵן = he was old (be old)
+3 בָּא = he had come (to come (in))
+4 בַּיָּמִים = in <the> days (day)
+5 וַיהוָה = and Yahweh (LORD)
+6 בֵּרַךְ = he had blessed (to bless)
+7 אֶת־ = <obj.> ([Obj.])
+8 אַבְרָהָם = Abraham
+9 בַּכֹּל = in <the> everything (all)
+
+## 1:24:2
+KO: 그리고 아브라함이 자기 집의 노인이자 자기에게 속한 모든 것을 다스리는 종에게 말하였다. "부디 네 손을 내 넓적다리 밑에 두어라."
+1 וַיֹּאמֶר = and he said (to say)
+2 אַבְרָהָם = Abraham
+3 אֶל־ = to (to(wards))
+4 עַבְדּוֹ = servant his (servant;_slave)
+5 זְקַן = <the> old of (old)
+6 בֵּיתוֹ = household his (house)
+7 הַמֹּשֵׁל = who was ruling (to rule)
+8 בְּכָל־ = over all (all)
+9 אֲשֶׁר־ = that (which)
+10 לוֹ = [belonged] to <the> him (him)
+11 שִׂים־ = put (to set)
+12 נָא = please
+13 יָדְךָ = hand your (hand)
+14 תַּחַת = under (underneath)
+15 יְרֵכִי = thigh my (thigh)
+
+## 1:24:3
+KO: 그리고 내가 너에게 맹세하게 하겠다, 하늘의 하나님이시며 땅의 하나님이신 여호와를 가리켜. 너는 나의 아들을 위하여 내가 거하고 있는 이 땅의 가나안 족속의 딸들 중에서 아내를 취하지 마라.
+1 וְאַשְׁבִּיעֲךָ = so I may make swear you (to swear)
+2 בַּיהוָה = by Yahweh (LORD)
+3 אֱלֹהֵי = [the] God of
+4 הַשָּׁמַיִם = the heavens (heaven)
+5 וֵאלֹהֵי = and [the] God of
+6 הָאָרֶץ = the earth (land)
+7 אֲשֶׁר = that
+8 לֹא־ = not
+9 תִקַּח = you will take (to take)
+10 אִשָּׁה = a wife (woman)
+11 לִבְנִי = for son my (son)
+12 מִבְּנוֹת = from [the] daughters of (daughter)
+13 הַכְּנַעֲנִי = the Canaanite[s] (Canaanite)
+14 אֲשֶׁר = whom
+15 אָנֹכִי = I
+16 יוֹשֵׁב = [am] dwelling (to dwell)
+17 בְּקִרְבּוֹ = in midst its (entrails)
+
+## 1:24:4
+KO: 왜냐하면 내 땅과 내 친족에게 가서, 내 아들 이삭을 위하여 아내를 취할 것이기 때문이다.
+1 כִּי = for
+2 אֶל־ = to
+3 אַרְצִי = land my (land)
+4 וְאֶל־ = and to
+5 מוֹלַדְתִּי = kindred my (relatives)
+6 תֵּלֵךְ = you will go (to go)
+7 וְלָקַחְתָּ = and you will take (to take)
+8 אִשָּׁה = a wife (woman)
+9 לִבְנִי = for son my (son)
+10 לְיִצְחָק = for Isaac (Isaac)
+
+## 1:24:5
+KO: 그 종이 그에게 말하였다. "혹시 그 여자가 나를 따라 이 땅으로 오기를 원하지 아니하면, 내가 당신의 아들을 당신이 나온 그 땅으로 정녕 돌려보내야 하겠습니까?"
+1 וַיֹּאמֶר = and he said (to say)
+2 אֵלָיו = to him
+3 הָעֶבֶד = the servant (servant;_slave)
+4 אוּלַי = perhaps
+5 לֹא־ = not
+6 תֹאבֶה = she will be willing (be willing)
+7 הָאִשָּׁה = the woman (woman)
+8 לָלֶכֶת = to go
+9 אַחֲרַי = after me (after)
+10 אֶל־ = to
+11 הָאָרֶץ = the land
+12 הַזֹּאת = <the> this (this)
+13 הֶהָשֵׁב = ¿ really <to take back>
+14 אָשִׁיב = will I take back
+15 אֶת־ = <obj.> ([Obj.])
+16 בִּנְךָ = son your (son)
+17 אֶל־ = to
+18 הָאָרֶץ = the land
+19 אֲשֶׁר־ = where (which)
+20 יָצָאתָ = you came out (to come out)
+21 מִשָּׁם = from there (there)
+
+## 1:24:6
+KO: 아브라함이 그에게 이르기를, 너는 삼가 내 아들을 그리로 다시 데리고 돌아가지 말라.
+1 וַיֹּאמֶר = and he said (to say)
+2 אֵלָיו = to him (to(wards))
+3 אַבְרָהָם = Abraham
+4 הִשָּׁמֶר = take heed (to keep)
+5 לְךָ = to <the> yourself (you)
+6 פֶּן־ = lest
+7 תָּשִׁיב = you should take back (to return)
+8 אֶת־ = <obj.> ([Obj.])
+9 בְּנִי = son my (son)
+10 שָׁמָּה = there towards (there)
+
+## 1:24:7
+KO: 하늘의 하나님 여호와, 그분께서 나를 내 아버지의 집과 내 출생지로부터 취하셨고, 나에게 말씀하셨으며, 나에게 맹세하여 말씀하시기를 “네 씨에게 이 땅을 주리라” 하셨으니, 그분께서 당신의 사자를 네 앞서 보내실 것이고, 네가 거기서 내 아들을 위하여 아내를 취할 것이다.
+1 יְהוָה = Yahweh (LORD)
+2 אֱלֹהֵי = [the] God of (God)
+3 הַשָּׁמַיִם = the heavens (heaven)
+4 אֲשֶׁר = who
+5 לְקָחַנִי = he took me
+6 מִבֵּית = from [the] household of (house)
+7 אָבִי = father my (father)
+8 וּמֵאֶרֶץ = and from [the] land of
+9 מוֹלַדְתִּי = kindred my (relatives)
+10 וַאֲשֶׁר = and who
+11 דִּבֶּר־ = he spoke (to speak)
+12 לִי = to <the> me
+13 וַאֲשֶׁר = and who
+14 נִשְׁבַּע־ = he swore an oath (to swear)
+15 לִי = to <the> me
+16 לֵאמֹר = <to> saying (to say)
+17 לְזַרְעֲךָ = to offspring your (seed)
+18 אֶתֵּן = I will give (to give)
+19 אֶת־ = <obj.> ([Obj.])
+20 הָאָרֶץ = the land
+21 הַזֹּאת = <the> this (this)
+22 הוּא = he (he;_she;_it)
+23 יִשְׁלַח = he will send (to send)
+24 מַלְאָכוֹ = angel his (messenger)
+25 לְפָנֶיךָ = <to> before you (face)
+26 וְלָקַחְתָּ = and you will take
+27 אִשָּׁה = a wife (woman)
+28 לִבְנִי = for son my (son)
+29 מִשָּׁם = from there (there)
+
+## 1:24:8
+KO: 그리고 만일 그 여자가 너를 따라가기를 원하지 아니하면, 너는 나의 이 맹세로부터 깨끗하게 되리라. 오직 나의 아들을 거기로 되돌려 보내지 말지어다.
+1 וְאִם־ = and if (if)
+2 לֹא = not
+3 תֹאבֶה = she will be willing (be willing)
+4 הָאִשָּׁה = the woman (woman)
+5 לָלֶכֶת = to go
+6 אַחֲרֶיךָ = after you (after)
+7 וְנִקִּיתָ = and you will be free (to clear)
+8 מִשְּׁבֻעָתִי = from oath my (oath)
+9 זֹאת = this
+10 רַק = only (except)
+11 אֶת־ = <obj.> ([Obj.])
+12 בְּנִי = son my (son)
+13 לֹא = not
+14 תָשֵׁב = you must take back (to return)
+15 שָׁמָּה = there towards (there)

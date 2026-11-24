@@ -397,6 +397,8 @@ struct SermonHomeView: View {
     @State private var sermonPendingNewDelivery: Sermon?
     /// 모임 필터 칩에서 고른 대상. 보기 방식을 바꿔도 유지하되, "미사용"은 설교별 보기에만 있어 다른 보기로 가면 "전체"로 되돌린다.
     @State private var gatheringFilter: GatheringFilter = .all
+    /// [2026-11-14] 상태 필터(초안/다듬는 중/완성). nil이면 전체.
+    @State private var statusFilter: SermonStatus?
     /// 정렬 기준 — 기기별로 기억한다. 처음엔 기존 순서(최근 수정)와 같다.
     @AppStorage("sermon.listSort") private var listSort: SermonListSort = .recentlyEdited
     @State private var gatherings: [SermonGathering] = []
@@ -455,10 +457,14 @@ struct SermonHomeView: View {
 
     /// 검색어만 적용한 설교(모임 필터 전).
     private var searchFilteredSermons: [Sermon] {
-        guard !searchText.isEmpty else { return sermons }
-        return sermons.filter {
-            $0.title.localizedCaseInsensitiveContains(searchText)
-                || $0.contentText.localizedCaseInsensitiveContains(searchText)
+        let byStatus = statusFilter.map { filter in sermons.filter { $0.status == filter } } ?? sermons
+        guard !searchText.isEmpty else { return byStatus }
+        return byStatus.filter { sermon in
+            sermon.title.localizedCaseInsensitiveContains(searchText)
+                || sermon.contentText.localizedCaseInsensitiveContains(searchText)
+                || sermon.mainPassage.localizedCaseInsensitiveContains(searchText)
+                // 회차 사본에만 있는 문구로도 찾을 수 있게 한다.
+                || (sermon.deliveries ?? []).contains { $0.contentText.localizedCaseInsensitiveContains(searchText) }
         }
     }
 
@@ -730,9 +736,44 @@ struct SermonHomeView: View {
                     .font(ListFonts.meta)
                     .foregroundStyle(subtleText)
                 Spacer(minLength: 8)
+                statusMenu
                 sortMenu
             }
         }
+    }
+
+    /// 상태 필터 — 전체 / 초안 / 다듬는 중 / 완성.
+    private var statusMenu: some View {
+        Menu {
+            Button {
+                statusFilter = nil
+            } label: {
+                if statusFilter == nil { Label(String(localized: "전체 상태"), systemImage: "checkmark") } else { Text(String(localized: "전체 상태")) }
+            }
+            Divider()
+            ForEach(SermonStatus.allCases, id: \.self) { status in
+                Button {
+                    statusFilter = status
+                } label: {
+                    if statusFilter == status { Label(status.displayName, systemImage: "checkmark") } else { Text(status.displayName) }
+                }
+            }
+        } label: {
+            HStack(spacing: 4) {
+                Text(String(localized: "상태: \(statusFilter?.displayName ?? String(localized: "전체"))"))
+                Image(systemName: "chevron.up.chevron.down")
+                    .font(.system(size: 10, weight: .semibold))
+            }
+            .font(ListFonts.control)
+            .foregroundStyle(settings.bibleTextColor ?? Color.primary)
+            .padding(.horizontal, 8)
+            .frame(minHeight: 30)
+            .overlay(Capsule().strokeBorder((settings.bibleTextColor ?? Color.primary).opacity(statusFilter == nil ? 0.24 : 0.7), lineWidth: 1))
+            .contentShape(Capsule())
+        }
+        .menuIndicator(.hidden)
+        .fixedSize()
+        .accessibilityLabel(String(localized: "상태 필터"))
     }
 
     /// 정렬 메뉴 — "최근 수정 / 최근 등록" 두 가지. 세 보기 모두에 적용된다.
@@ -1217,10 +1258,14 @@ struct SermonHomeView: View {
         let tags = (sermon.sermonTags ?? []).compactMap(\.tag).filter { !$0.isMerged }
         return HStack(spacing: 10) {
             VStack(alignment: .leading, spacing: 2) {
-                Text(sermon.title.isEmpty ? String(localized: "제목 없음") : sermon.title)
-                    .font(ListFonts.rowTitle)
-                    .foregroundStyle(settings.bibleTextColor ?? .primary)
-                    .lineLimit(1)
+                HStack(spacing: 6) {
+                    Text(sermon.title.isEmpty ? String(localized: "제목 없음") : sermon.title)
+                        .font(ListFonts.rowTitle)
+                        .foregroundStyle(settings.bibleTextColor ?? .primary)
+                        .lineLimit(1)
+                    SermonBadge(text: sermon.status.displayName, color: sermon.status.tint)
+                        .layoutPriority(1)
+                }
                 HStack(spacing: 8) {
                     if showsDates {
                         // 모임별 보기: 그 모임에서 쓴 날짜(최근 4개 + 나머지 개수).
@@ -1235,6 +1280,12 @@ struct SermonHomeView: View {
                                 .foregroundStyle(subtleText)
                         }
                     } else {
+                        // 목록에서는 직접 지정한 주 본문만 보인다(본문 속 참조 제안은 행마다 본문 전체를 훑어야 해서 상세 화면에서만 쓴다).
+                        if !sermon.mainPassage.isEmpty {
+                            Text(sermon.mainPassage)
+                                .foregroundStyle(settings.bibleTextColor ?? .primary)
+                                .lineLimit(1)
+                        }
                         if !tags.isEmpty {
                             Text(tags.prefix(2).map { "#\($0.name)" }.joined(separator: " "))
                                 .foregroundStyle(accent)

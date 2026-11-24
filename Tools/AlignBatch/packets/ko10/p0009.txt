@@ -1,0 +1,154 @@
+## 1:4:1
+KO: 그리고 그 아담이 그의 아내 하와를 알았고, 그녀가 임신하여 가인을 낳았으며, 그녀가 말하기를 "내가 여호와와 함께 한 남자를 얻었다" 하였다.
+1 וְהָאָדָם = and the man (Adam)
+2 יָדַע = he knew (to know)
+3 אֶת־ = <obj.>
+4 חַוָּה = Eve
+5 אִשְׁתּוֹ = wife his (woman)
+6 וַתַּהַר = and she conceived (to conceive)
+7 וַתֵּלֶד = and she bore (to beget)
+8 אֶת־ = <obj.>
+9 קַיִן = Cain
+10 וַתֹּאמֶר = and she said (to say)
+11 קָנִיתִי = I have acquired (to buy)
+12 אִישׁ = a man (man)
+13 אֶת־ = with
+14 יְהוָה = Yahweh (LORD)
+
+## 1:4:2
+KO: 그녀가 또한 그의 형제 아벨을 낳기를 더하였다. 그리고 아벨은 양을 치는 자가 되었고, 가인은 땅을 경작하는 자가 되었다.
+1 וַתֹּסֶף = and she repeated (to add)
+2 לָלֶדֶת = to give birth to (to beget)
+3 אֶת־ = <obj.>
+4 אָחִיו = brother his (brother)
+5 אֶת־ = <obj.>
+6 הָבֶל = Abel
+7 וַיְהִי־ = and he was
+8 הֶבֶל = Abel
+9 רֹעֵה = a herder of (to pasture)
+10 צֹאן = sheep (flock)
+11 וְקַיִן = and Cain (Cain)
+12 הָיָה = he was
+13 עֹבֵד = a tiller of (to serve)
+14 אֲדָמָה = [the] ground (land)
+
+## 1:4:3
+KO: 그리고 날들의 끝으로부터 가인이 땅의 열매로부터 여호와께 예물을 가져왔다.
+1 וַיְהִי = and it happened (to be)
+2 מִקֵּץ = from [the] end of (end)
+3 יָמִים = days (day;_when)
+4 וַיָּבֵא = and he brought (to come (in))
+5 קַיִן = Cain
+6 מִפְּרִי = some of [the] fruit of (fruit)
+7 הָאֲדָמָה = the ground (land)
+8 מִנְחָה = an offering (offering)
+9 לַיהוָה = to Yahweh (LORD)
+
+## 1:4:4
+KO: 그리고 아벨도 그의 양 떼의 첫 새끼들 중에서 그리고 그것들의 기름들 중에서 가져왔다. 그리고 여호와께서 아벨과 그의 제물 위로 눈길을 두셨다.
+1 וְהֶבֶל = and Abel
+2 הֵבִיא = he brought (to come (in))
+3 גַם־ = also
+4 הוּא = he (he;_she;_it)
+5 מִבְּכֹרוֹת = some of [the] firstborn<s> of (firstborn)
+6 צֹאנוֹ = flock his (flock)
+7 וּמֵחֶלְבֵהֶן = and some of fat<s> their (fat)
+8 וַיִּשַׁע = and he looked (to gaze)
+9 יְהוָה = Yahweh (LORD)
+10 אֶל־ = to
+11 הֶבֶל = Abel
+12 וְאֶל־ = and to
+13 מִנְחָתוֹ = offering his (offering)
+
+## 1:4:5
+KO: 그리고 가인과 그의 제물에게는 그분께서 주목하지 않으셨다. 그리고 가인에게는 매우 불타올랐고, 그의 얼굴들이 떨어졌다.
+1 וְאֶל־ = and to
+2 קַיִן = Cain
+3 וְאֶל־ = and to
+4 מִנְחָתוֹ = offering his (offering)
+5 לֹא = not
+6 שָׁעָה = he looked (to gaze)
+7 וַיִּחַר = and burned (to burn)
+8 לְקַיִן = to Cain
+9 מְאֹד = exceedingly (much)
+10 וַיִּפְּלוּ = and they fell (to fall)
+11 פָּנָיו = face his (face)
+
+## 1:4:6
+KO: 그리고 여호와께서 가인에게 말씀하셨다. "어찌하여 네게 분노가 일어났느냐? 그리고 어찌하여 네 얼굴이 떨어졌느냐?"
+1 וַיֹּאמֶר = and he said (to say)
+2 יְהוָה = Yahweh (LORD)
+3 אֶל־ = to (to(wards))
+4 קָיִן = Cain
+5 לָמָּה = <to> why?
+6 חָרָה = does it burn (to burn)
+7 לָךְ = to <the> you (you)
+8 וְלָמָּה = and <to> why?
+9 נָפְלוּ = have they fallen (to fall)
+10 פָנֶיךָ = face your (face)
+
+## 1:4:7
+KO: 만약 네가 선을 행한다면, 높임(받음)이 있지 않겠느냐? 그러나 만약 네가 선을 행하지 않는다면, 죄가 문 앞에 웅크리고 있다. 그리고 너에게 그것의 갈망이 있으나, 너는 그것을 다스려야 한다.
+1 הֲלוֹא = ¿ not
+2 אִם־ = if
+3 תֵּיטִיב = you will do well
+4 שְׂאֵת = lifting up (elevation)
+5 וְאִם = and if
+6 לֹא = not
+7 תֵיטִיב = you will do well
+8 לַפֶּתַח = to the door (entrance)
+9 חַטָּאת = sin
+10 רֹבֵץ = [is] crouching (to stretch)
+11 וְאֵלֶיךָ = and [is] to you (to(wards))
+12 תְּשׁוּקָתוֹ = desire its (desire)
+13 וְאַתָּה = and you (you(m.s.))
+14 תִּמְשָׁל־ = you will rule (to rule)
+15 בּוֹ = over <the> it (him)
+
+## 1:4:8
+KO: 가인이 그의 아우 아벨에게 말하였다. 그리고 그들이 들에 있을 때에, 가인이 그의 아우 아벨을 대적하여 일어나 그를 죽였다.
+1 וַיֹּאמֶר = and he said (to say)
+2 קַיִן = Cain
+3 אֶל־ = to
+4 הֶבֶל = Abel
+5 אָחִיו = brother his
+6 וַיְהִי = and it was
+7 בִּהְיוֹתָם = when were they
+8 בַּשָּׂדֶה = in the field
+9 וַיָּקָם = and he rose up (to arise)
+10 קַיִן = Cain
+11 אֶל־ = against
+12 הֶבֶל = Abel
+13 אָחִיו = brother his
+14 וַיַּהַרְגֵהוּ = and he killed him (to kill)
+15 נֵלְכָה = - (to go)
+16 הַשָּׂדֶה = -
+
+## 1:4:9
+KO: 그리고 여호와께서 가인에게 말씀하셨다. "네 아우 아벨이 어디 있느냐?" 그가 말하였다. "나는 알지 못합니다. 내가 내 아우를 지키는 자입니까?"
+1 וַיֹּאמֶר = and he said
+2 יְהוָה = Yahweh (LORD)
+3 אֶל־ = to (to(wards))
+4 קַיִן = Cain
+5 אֵי = where?
+6 הֶבֶל = [is] Abel (Abel)
+7 אָחִיךָ = brother your
+8 וַיֹּאמֶר = and he said
+9 לֹא = not
+10 יָדַעְתִּי = I know (to know)
+11 הֲשֹׁמֵר = ¿ [the] keeper (to keep)
+12 אָחִי = of brother my
+13 אָנֹכִי = [am] I (I)
+
+## 1:4:10
+KO: 그가 말씀하셨다. "네가 무엇을 하였느냐? 네 아우의 피들의 소리가 땅으로부터 내게 부르짖고 있다."
+1 וַיֹּאמֶר = and he said (to say)
+2 מֶה = what?
+3 עָשִׂיתָ = have you done (to make)
+4 קוֹל = [the] voice of (voice)
+5 דְּמֵי = [the] blood<s> of (blood)
+6 אָחִיךָ = brother your (brother)
+7 צֹעֲקִים = [are] crying out (to cry)
+8 אֵלַי = to me (to(wards))
+9 מִן־ = from
+10 הָאֲדָמָה = the ground (land)

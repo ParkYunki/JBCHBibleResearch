@@ -1,0 +1,201 @@
+## 26:4:1
+KO: 그리고 너 사람의 아들아, 너를 위하여 벽돌 하나를 취하고, 그것을 네 앞에 두고, 그 위에 한 성읍 곧 예루살렘을 새기라.
+1 וְאַתָּה = and you (you(m.s.))
+2 בֶן־ = O son of (son)
+3 אָדָם = humankind (man)
+4 קַח־ = take (to take)
+5 לְךָ = <for> yourself (you)
+6 לְבֵנָה = a brick (brick)
+7 וְנָתַתָּה = and you will set (to give)
+8 אוֹתָהּ = <obj.> it
+9 לְפָנֶיךָ = <to> before you (face)
+10 וְחַקּוֹתָ = and you will inscribe (to decree)
+11 עָלֶיהָ = on it (upon)
+12 עִיר = a city (city)
+13 אֶת־ = <obj.>
+14 יְרוּשָׁלִָם = Jerusalem
+
+## 26:4:2
+KO: 그리고 너는 그것(성읍) 위에 포위망을 두고, 그것 위에 요새를 쌓고, 그것 위에 토둔을 붓고, 그것 위에 진영들을 두고, 그것 주위에 공성퇴들을 두라.
+1 וְנָתַתָּה = and you will make
+2 עָלֶיהָ = on it
+3 מָצוֹר = a siege (siege)
+4 וּבָנִיתָ = and you will build (to build)
+5 עָלֶיהָ = on it
+6 דָּיֵק = a siege-wall (fort)
+7 וְשָׁפַכְתָּ = and you will pour out (to pour)
+8 עָלֶיהָ = on it
+9 סֹלְלָה = a mound (siege)
+10 וְנָתַתָּה = and you will set up
+11 עָלֶיהָ = on it
+12 מַחֲנוֹת = armies (camp)
+13 וְשִׂים־ = and set (to set)
+14 עָלֶיהָ = on it
+15 כָּרִים = battering-rams (ram)
+16 סָבִיב = all around (around)
+
+## 26:4:3
+KO: 그리고 너는 너를 위하여 철 철판을 취하여 그것을 너와 그 성읍 사이에 철벽으로 두고, 네 얼굴을 그것을 향하게 하여 그것이 포위 상태에 있게 하고, 그것을 에워싸라. 이것이 이스라엘 족속에게 징조가 되리라.
+1 וְאַתָּה = and you (you(m.s.))
+2 קַח־ = take (to take)
+3 לְךָ = <for> yourself (you)
+4 מַחֲבַת = a baking tray of (griddle)
+5 בַּרְזֶל = iron
+6 וְנָתַתָּה = and you will make (to give)
+7 אוֹתָהּ = <obj.> it
+8 קִיר = a wall of (wall)
+9 בַּרְזֶל = iron
+10 בֵּינְךָ = between you
+11 וּבֵין = and between
+12 הָעִיר = the city (city)
+13 וַהֲכִינֹתָה = and you will direct (to establish)
+14 אֶת־ = <obj.>
+15 פָּנֶיךָ = face your (face)
+16 אֵלֶיהָ = to it (to(wards))
+17 וְהָיְתָה = and it will be (to be)
+18 בַמָּצוֹר = in <the> state of siege (siege)
+19 וְצַרְתָּ = and you will lay siege (to confine)
+20 עָלֶיהָ = on it (upon)
+21 אוֹת = [will be] a sign (sign)
+22 הִיא = it (he;_she;_it)
+23 לְבֵית = for [the] house of (house)
+24 יִשְׂרָאֵל ס = Israel
+
+## 26:4:4
+KO: 그리고 너는 너의 왼쪽 옆으로 누워라. 그리고 너는 이스라엘 집의 죄악을 그(왼쪽 옆) 위에 두어라. 네가 그 위에 눕는 날들의 수만큼 너는 그들의 죄악을 짊어질 것이다.
+1 וְאַתָּה = and you (you(m.s.))
+2 שְׁכַב = lie down
+3 עַל־ = on
+4 צִדְּךָ = side your (side)
+5 הַשְּׂמָאלִי = <the> left (left)
+6 וְשַׂמְתָּ = and you will put (to set)
+7 אֶת־ = <obj.>
+8 עֲוֹן = [the] iniquity of
+9 בֵּית־ = [the] house of (house)
+10 יִשְׂרָאֵל = Israel
+11 עָלָיו = on it
+12 מִסְפַּר = [the] number of (number)
+13 הַיָּמִים = the days (day;_when)
+14 אֲשֶׁר = which
+15 תִּשְׁכַּב = you will lie
+16 עָלָיו = on it
+17 תִּשָּׂא = you will bear (to lift)
+18 אֶת־ = <obj.>
+19 עֲוֹנָם = iniquity their
+
+## 26:4:5
+KO: 그리고 나(는) 그들의 죄악의 햇수들을 너에게 날들의 수대로 삼백구십 일로 주었나니, 너는 이스라엘 집의 죄악을 짊어질지니라.
+1 וַאֲנִי = and I (I)
+2 נָתַתִּי = I have assigned (to give)
+3 לְךָ = to you (you)
+4 אֶת־ = <obj.> ([Obj.])
+5 שְׁנֵי = [the] years of (year)
+6 עֲוֹנָם = iniquity their
+7 לְמִסְפַּר = to [the] number of (number)
+8 יָמִים = days
+9 שְׁלֹשׁ־ = three
+10 מֵאוֹת = hundreds (hundred)
+11 וְתִשְׁעִים = and ninety (ninety)
+12 יוֹם = day[s]
+13 וְנָשָׂאתָ = and you will bear (to lift)
+14 עֲוֹן = [the] iniquity of
+15 בֵּית־ = [the] house of (house)
+16 יִשְׂרָאֵל = Israel
+
+## 26:4:6
+KO: 그리고 네가 이것들을 끝마치면, 너는 너의 오른쪽 옆구리로 누워 유다 족속의 죄악을 짊어져라. 사십 일, 곧 일 일이 일 년, 일 일이 일 년을 내가 너에게 주었느니라.
+1 וְכִלִּיתָ = and you will complete (to end)
+2 אֶת־ = <obj.>
+3 אֵלֶּה = these
+4 וְשָׁכַבְתָּ = and you will lie down (to lie down)
+5 עַל־ = on (upon)
+6 צִדְּךָ = side your (side)
+7 הַיְמָנִי = <the> right (right)
+8 שֵׁנִית = a second [time] (second)
+9 וְנָשָׂאתָ = and you will bear (to lift)
+10 אֶת־ = <obj.>
+11 עֲוֹן = [the] iniquity of (iniquity)
+12 בֵּית־ = [the] house of (house)
+13 יְהוּדָה = Judah
+14 אַרְבָּעִים = forty
+15 יוֹם = day[s]
+16 יוֹם = a day
+17 לַשָּׁנָה = for the year
+18 יוֹם = a day
+19 לַשָּׁנָה = for the year
+20 נְתַתִּיו = I have assigned it (to give)
+21 לָךְ = to you (you)
+
+## 26:4:7
+KO: 그리고 너는 예루살렘의 에워쌈을 향하여 네 얼굴을 향하게 하고, 네 팔을 드러내고 예언하라.
+1 וְאֶל־ = and to (to(wards))
+2 מְצוֹר = [the] siege of (siege)
+3 יְרוּשָׁלִַם = Jerusalem
+4 תָּכִין = you will direct (to establish)
+5 פָּנֶיךָ = face your (face)
+6 וּזְרֹעֲךָ = and arm your (arm)
+7 חֲשׂוּפָה = [will be ] bared (to strip)
+8 וְנִבֵּאתָ = and you will prophesy (to prophesy)
+9 עָלֶיהָ = on it (upon)
+
+## 26:4:8
+KO: 보라, 내가 네 위에 줄들을 두리니, 네가 너의 포위의 날들을 마칠 때까지 너는 이편에서 저편으로 몸을 돌리지 못하리라.
+1 וְהִנֵּה = and there! (behold)
+2 נָתַתִּי = I will put (to give)
+3 עָלֶיךָ = on you (upon)
+4 עֲבוֹתִים = ropes (cord)
+5 וְלֹא־ = and not (not)
+6 תֵהָפֵךְ = you will turn yourself (to overturn)
+7 מִצִּדְּךָ = from side your
+8 אֶל־ = to (to(wards))
+9 צִדֶּךָ = side your
+10 עַד־ = until (till)
+11 כַּלּוֹתְךָ = completing you (to end)
+12 יְמֵי = [the] days of (day;_when)
+13 מְצוּרֶךָ = siege your (siege)
+
+## 26:4:9
+KO: 너는 너를 위하여 밀과 보리와 콩과 팥과 조와 귀리를 취하여, 그것들을 한 그릇 안에 두고, 그것들로 너를 위하여 떡을 만들라. 네가 너의 옆으로 눕는 날들의 수 곧 삼백구십 일 동안 그것을 먹되,
+1 וְאַתָּה = and you
+2 קַח־ = take (to take)
+3 לְךָ = <for> yourself
+4 חִטִּין = wheat<s> (wheat)
+5 וּשְׂעֹרִים = and barley<s> (barley)
+6 וּפוֹל = and bean[s] (bean)
+7 וַעֲדָשִׁים = and lentils (lentil)
+8 וְדֹחַן = and millet (millet)
+9 וְכֻסְּמִים = and spelt<s> (rye)
+10 וְנָתַתָּה = and you will put (to give)
+11 אוֹתָם = <obj.> them
+12 בִּכְלִי = in a vessel (article|utensil)
+13 אֶחָד = one
+14 וְעָשִׂיתָ = and you will make (to make)
+15 אוֹתָם = <obj.> them
+16 לְךָ = for <the> yourself
+17 לְלָחֶם = into bread (food)
+18 מִסְפַּר = [the] number of (number)
+19 הַיָּמִים = the days
+20 אֲשֶׁר־ = which
+21 אַתָּה = you
+22 שׁוֹכֵב = [will be] lying (to lie down)
+23 עַל־ = on (upon)
+24 צִדְּךָ = side your (side)
+25 שְׁלֹשׁ־ = three
+26 מֵאוֹת = hundreds (hundred)
+27 וְתִשְׁעִים = and ninety (ninety)
+28 יוֹם = day[s]
+29 תֹּאכֲלֶנּוּ = you will eat it (to eat)
+
+## 26:4:10
+KO: 네가 먹을 너의 식물은 무게로 하루 이십 세겔씩, 때로부터 때까지 그것을 먹을 것이다.
+1 וּמַאֲכָלְךָ = and food your (food)
+2 אֲשֶׁר = which
+3 תֹּאכֲלֶנּוּ = you will eat it
+4 בְּמִשְׁקוֹל = by weight (weight)
+5 עֶשְׂרִים = [will be] twenty (twenty)
+6 שֶׁקֶל = shekel[s] (shekel)
+7 לַיּוֹם = to the day (day;_when)
+8 מֵעֵת = from time
+9 עַד־ = to (till)
+10 עֵת = time
+11 תֹּאכֲלֶנּוּ = you will eat it

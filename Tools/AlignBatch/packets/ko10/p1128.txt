@@ -1,0 +1,186 @@
+## 14:5:2
+KO: 그때에 솔로몬이 이스라엘의 장로들과 이스라엘 자손들의 조상들의 우두머리들 곧 모든 지파의 수령들을 예루살렘으로 소집하였으니, 이는 여호와의 언약궤를 다윗의 성, 곧 시온에서 메어 올리기 위함이었다.
+1 אָז = then
+2 יַקְהֵיל = he called together (to gather)
+3 שְׁלֹמֹה = Solomon
+4 אֶת־ = <obj.>
+5 זִקְנֵי = [the] elders of (old)
+6 יִשְׂרָאֵל = Israel
+7 וְאֶת־ = and <obj.>
+8 כָּל־ = all
+9 רָאשֵׁי = [the] chiefs of (head)
+10 הַמַּטּוֹת = the tribes (tribe)
+11 נְשִׂיאֵי = [the] leaders of (leader)
+12 הָאָבוֹת = the fathers (father)
+13 לִבְנֵי = of [the] people of (son)
+14 יִשְׂרָאֵל = Israel
+15 אֶל־ = to (to(wards))
+16 יְרוּשָׁלִָם = Jerusalem
+17 לְהַעֲלוֹת = to bring up (to ascend)
+18 אֶת־ = <obj.>
+19 אֲרוֹן = [the] ark of (ark)
+20 בְּרִית־ = [the] covenant of (covenant)
+21 יְהוָה = Yahweh (LORD)
+22 מֵעִיר = from [the] city of (city)
+23 דָּוִיד = David
+24 הִיא = it (he;_she;_it)
+25 צִיּוֹן = [is] Zion (Zion)
+
+## 14:5:3
+KO: 그리고 이스라엘의 모든 사람이 그 제7월의 절기에 왕에게로 모였다.
+1 וַיִּקָּהֲלוּ = and they assembled (to gather)
+2 אֶל־ = to (to(wards))
+3 הַמֶּלֶךְ = the king (king)
+4 כָּל־ = every (all)
+5 אִישׁ = <the> person of (man)
+6 יִשְׂרָאֵל = Israel
+7 בֶּחָג = at the festival (feast)
+8 הוּא = it (he;_she;_it)
+9 הַחֹדֶשׁ = [was] the month (month)
+10 הַשְּׁבִעִי = <the> seventh (seventh)
+
+## 14:5:4
+KO: 그리고 이스라엘의 모든 장로가 왔고, 레위 사람들이 그 궤를 들어 올렸다.
+1 וַיָּבֹאוּ = and they came (to come (in))
+2 כֹּל = all
+3 זִקְנֵי = [the] elders of (old)
+4 יִשְׂרָאֵל = Israel
+5 וַיִּשְׂאוּ = and they lifted (to lift)
+6 הַלְוִיִּם = the Levites (Levi)
+7 אֶת־ = <obj.> ([Obj.])
+8 הָאָרוֹן = the ark (ark)
+
+## 14:5:5
+KO: 그리고 그들이 궤와 회막과 장막 안에 있는 거룩의 모든 기구들을 메고 올라갔으니, 제사장들과 레위 사람들이 그것들을 메고 올라갔다.
+1 וַיַּעֲלוּ = and they brought up
+2 אֶת־ = <obj.>
+3 הָאָרוֹן = the ark (ark)
+4 וְאֶת־ = and <obj.>
+5 אֹהֶל = [the] tent of
+6 מוֹעֵד = meeting
+7 וְאֶת־ = and <obj.>
+8 כָּל־ = all
+9 כְּלֵי = [the] articles of (article|utensil)
+10 הַקֹּדֶשׁ = <the> holiness (holiness)
+11 אֲשֶׁר = which
+12 בָּאֹהֶל = [were] in the tent
+13 הֶעֱלוּ = they brought up
+14 אֹתָם = <obj.> them
+15 הַכֹּהֲנִים = the priests (priest)
+16 הַלְוִיִּם = the Levites (Levi)
+
+## 14:5:6
+KO: 그리고 솔로몬 왕과 그 앞에 모인 이스라엘의 모든 회중이 궤 앞에 있어 양과 소를 제물로 바치고 있었는데, 그것들은 너무 많아서 셀 수도 없고 기록할 수도 없었다.
+1 וְהַמֶּלֶךְ = and the king (king)
+2 שְׁלֹמֹה = Solomon
+3 וְכָל־ = and all (all)
+4 עֲדַת = [the] congregation of (congregation)
+5 יִשְׂרָאֵל = Israel
+6 הַנּוֹעָדִים = who were gathered (to appoint)
+7 עָלָיו = with him (upon)
+8 לִפְנֵי = <to> before (face)
+9 הָאָרוֹן = the ark (ark)
+10 מְזַבְּחִים = [were] sacrificing (to sacrifice)
+11 צֹאן = sheep (flock)
+12 וּבָקָר = and cattle (cattle)
+13 אֲשֶׁר = which
+14 לֹא־ = not
+15 יִסָּפְרוּ = they were counted (to recount)
+16 וְלֹא = and not
+17 יִמָּנוּ = they were numbered (to count)
+18 מֵרֹב = from multitude (abundance)
+
+## 14:5:7
+KO: 그리고 제사장들이 여호와의 언약궤를 그 처소로, 곧 그 집의 지성소로, 그룹들의 날개 아래로 메어 들였다.
+1 וַיָּבִיאוּ = and they brought (to come (in))
+2 הַכֹּהֲנִים = the priests (priest)
+3 אֶת־ = <obj.> ([Obj.])
+4 אֲרוֹן = [the] ark of (ark)
+5 בְּרִית־ = [the] covenant of (covenant)
+6 יְהוָה = Yahweh (LORD)
+7 אֶל־ = to
+8 מְקוֹמוֹ = place its (standing place)
+9 אֶל־ = to
+10 דְּבִיר = [the] innermost room of (oracle)
+11 הַבַּיִת = the house (house)
+12 אֶל־ = to
+13 קֹדֶשׁ = [the] holy place of
+14 הַקְּדָשִׁים = the holy places
+15 אֶל־ = to
+16 תַּחַת = under (underneath)
+17 כַּנְפֵי = [the] wings of (wing)
+18 הַכְּרוּבִים = the cherubim (cherub)
+
+## 14:5:8
+KO: 그리고 그룹들이 궤의 처소 위로 날개들을 펴고 있었고, 그룹들이 궤와 그 채들을 위로부터 덮었다.
+1 וַיִּהְיוּ = and they were (to be)
+2 הַכְּרוּבִים = the cherubim
+3 פֹּרְשִׂים = spreading out (to spread)
+4 כְּנָפַיִם = wings (wing)
+5 עַל־ = over
+6 מְקוֹם = [the] place of (standing place)
+7 הָאָרוֹן = the ark
+8 וַיְכַסּוּ = and they covered (to cover)
+9 הַכְּרוּבִים = the cherubim
+10 עַל־ = over
+11 הָאָרוֹן = the ark
+12 וְעַל־ = and over
+13 בַּדָּיו = poles its (alone)
+14 מִלְמָעְלָה = from to above <towards> (above)
+
+## 14:5:9
+KO: 그리고 그 채들이 길어졌으니, 그 채들의 머리들이 그 궤로부터 그 지성소의 앞면 위로 보였으나, 밖으로는 보이지 아니하였으며, 그것들이 오늘날까지 거기에 있다.
+1 וַיַּאֲרִיכוּ = and they were long (to prolong)
+2 הַבַּדִּים = the poles
+3 וַיֵּרָאוּ = and they were visible
+4 רָאשֵׁי = [the] heads of (head)
+5 הַבַּדִּים = the poles
+6 מִן־ = from
+7 הָאָרוֹן = the ark (ark)
+8 עַל־ = on (upon)
+9 פְּנֵי = [the] face of (face)
+10 הַדְּבִיר = the innermost room (oracle)
+11 וְלֹא = and not (not)
+12 יֵרָאוּ = they were visible
+13 הַחוּצָה = the outside towards (outside)
+14 וַיְהִי־ = and it was (to be)
+15 שָׁם = there
+16 עַד = until (till)
+17 הַיּוֹם = the day (day;_when)
+18 הַזֶּה = <the> this (this)
+
+## 14:5:10
+KO: 궤 안에는 두 돌판 외에 아무것도 없으니, 그것은 모세가 호렙에서 그 안에 넣은 것이며, 여호와께서 이스라엘 자손이 이집트에서 나올 때 그들과 언약을 세우셨던 것이다.
+1 אֵין = there not (nothing)
+2 בָּאָרוֹן = [was] in the ark (ark)
+3 רַק = only (except)
+4 שְׁנֵי = [the] two (two)
+5 הַלֻּחוֹת = the tablets (tablet)
+6 אֲשֶׁר־ = which
+7 נָתַן = he put (to give)
+8 מֹשֶׁה = Moses
+9 בְּחֹרֵב = at Horeb (Horeb)
+10 אֲשֶׁר = where
+11 כָּרַת = he made (to cut)
+12 יְהוָה = Yahweh (LORD)
+13 עִם־ = with
+14 בְּנֵי = [the] people of (son)
+15 יִשְׂרָאֵל = Israel
+16 בְּצֵאתָם = when came out they (to come out)
+17 מִמִּצְרָיִם פ = from Egypt (Egypt)
+
+## 14:5:11
+KO: 그리고 제사장들이 성소로부터 나올 때에 그 일이 일어났다. 왜냐하면 성소에 있는 모든 제사장들이 자신들을 성결하게 하였고, 반차들에 따라 지킬(순서를 따를) 필요가 없었기 때문이다.
+1 וַיְהִי = and it was (to be)
+2 בְּצֵאת = when came out (to come out)
+3 הַכֹּהֲנִים = the priests
+4 מִן־ = from
+5 הַקֹּדֶשׁ = the holy place (Holy Place)
+6 כִּי = for
+7 כָּל־ = all
+8 הַכֹּהֲנִים = the priests
+9 הַנִּמְצְאִים = who were found (to find)
+10 הִתְקַדָּשׁוּ = they had consecrated themselves (to consecrate)
+11 אֵין = not (nothing)
+12 לִשְׁמוֹר = to keep
+13 לְמַחְלְקוֹת = to divisions (division)

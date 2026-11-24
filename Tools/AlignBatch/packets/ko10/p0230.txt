@@ -1,0 +1,180 @@
+## 2:27:18
+KO: 뜰의 길이는 백 규빗이며, 너비는 오십 규빗, 높이는 다섯 규빗이며, 꼬아 짠 세마포이고, 그 받침들은 놋이다.
+1 אֹרֶךְ = [the] length of (length)
+2 הֶחָצֵר = the courtyard (court)
+3 מֵאָה = [will be] one hundred (hundred)
+4 בָאַמָּה = by the cubit
+5 וְרֹחַב = and [the] breadth (width)
+6 חֲמִשִּׁים = [will be] fifty
+7 בַּחֲמִשִּׁים = on fifty
+8 וְקֹמָה = and [the] height (height)
+9 חָמֵשׁ = [will be] five (five)
+10 אַמּוֹת = cubits
+11 שֵׁשׁ = fine linen (linen)
+12 מָשְׁזָר = twisted (to twist)
+13 וְאַדְנֵיהֶם = and bases their (socket)
+14 נְחֹשֶׁת = [will be] bronze (bronze)
+
+## 2:27:19
+KO: 성막의 모든 기구와 그 모든 봉사에 쓰는 것들과, 그 모든 말뚝들과, 그 뜰의 모든 말뚝은 놋으로 할지니라.
+1 לְכֹל = to all
+2 כְּלֵי = [the] articles of (article|utensil)
+3 הַמִּשְׁכָּן = the tabernacle (tabernacle)
+4 בְּכֹל = in all
+5 עֲבֹדָתוֹ = service its (service)
+6 וְכָל־ = and all
+7 יְתֵדֹתָיו = tent pegs its
+8 וְכָל־ = and all
+9 יִתְדֹת = [the] tent pegs of
+10 הֶחָצֵר = the courtyard (court)
+11 נְחֹשֶׁת ס = [will be] bronze (bronze)
+
+## 2:27:20
+KO: 그리고 너는 이스라엘 자손들에게 명하여, 그들이 등불을 위하여 감람나무의 순결한 찧은 기름을 네게로 가져오게 하고, 등불이 항상 오르게 하라.
+1 וְאַתָּה = and you (you(m.s.))
+2 תְּצַוֶּה = you will command (to command)
+3 אֶת־ = <obj.> ([Obj.])
+4 בְּנֵי = [the] people of (son)
+5 יִשְׂרָאֵל = Israel
+6 וְיִקְחוּ = so they may bring (to take)
+7 אֵלֶיךָ = to you (to(wards))
+8 שֶׁמֶן = oil of (oil)
+9 זַיִת = olive
+10 זָךְ = pure
+11 כָּתִית = pressed (beaten)
+12 לַמָּאוֹר = for the light (light)
+13 לְהַעֲלֹת = to lift up (to ascend)
+14 נֵר = a lamp (lamp)
+15 תָּמִיד = continually (continuity)
+
+## 2:27:21
+KO: 회막 안, 증거궤 위에 있는 휘장 밖에서, 아론과 그 아들들이 저녁부터 아침까지 여호와 앞에서 그것(등불)을 정리하게 하라. 이는 이스라엘 자손들의 세대들을 위한 영원한 규례이다.
+1 בְּאֹהֶל = in [the] tent of (tent)
+2 מוֹעֵד = meeting
+3 מִחוּץ = from [the] outside (outside)
+4 לַפָּרֹכֶת = of the curtain (curtain)
+5 אֲשֶׁר = which
+6 עַל־ = [is] on (upon)
+7 הָעֵדֻת = the testimony (testimony)
+8 יַעֲרֹךְ = he will arrange (to arrange)
+9 אֹתוֹ = <obj.> it ([Obj.])
+10 אַהֲרֹן = Aaron
+11 וּבָנָיו = and sons his
+12 מֵעֶרֶב = from evening (evening)
+13 עַד־ = until (till)
+14 בֹּקֶר = morning
+15 לִפְנֵי = <to> before (face)
+16 יְהוָה = Yahweh (LORD)
+17 חֻקַּת = a statute of (statute)
+18 עוֹלָם = perpetuity (forever)
+19 לְדֹרֹתָם = to generations their (generation)
+20 מֵאֵת = from with (with)
+21 בְּנֵי = [the] people of
+22 יִשְׂרָאֵל ס = Israel
+
+## 2:28:1
+KO: 그리고 너는 이스라엘 자손의 한가운데로부터 너의 형 아론과 그와 함께 그의 아들들 곧 아론, 나답과 아비후, 엘르아살과 이다말을 너에게로 가까이 오게 하여 나를 위해 제사장 직분을 행하게 하라.
+1 וְאַתָּה = and you (you(m.s.))
+2 הַקְרֵב = bring near (to present)
+3 אֵלֶיךָ = to yourself (to(wards))
+4 אֶת־ = <obj.>
+5 אַהֲרֹן = Aaron
+6 אָחִיךָ = brother your (brother)
+7 וְאֶת־ = and <obj.>
+8 בָּנָיו = sons his
+9 אִתּוֹ = with him (with)
+10 מִתּוֹךְ = from among (midst)
+11 בְּנֵי = [the] people of
+12 יִשְׂרָאֵל = Israel
+13 לְכַהֲנוֹ־ = to serve as priest he (to minister)
+14 לִי = to <the> me (me)
+15 אַהֲרֹן = Aaron
+16 נָדָב = Nadab
+17 וַאֲבִיהוּא = and Abihu (Abihu)
+18 אֶלְעָזָר = Eleazar
+19 וְאִיתָמָר = and Ithamar (Ithamar)
+20 בְּנֵי = [the] sons of
+21 אַהֲרֹן = Aaron
+
+## 2:28:2
+KO: 그리고 너는 네 형 아론을 위하여 거룩한 옷들을 만들지니, 영광과 아름다움을 위하여라.
+1 וְעָשִׂיתָ = and you will make (to make)
+2 בִגְדֵי־ = garments of (garment)
+3 קֹדֶשׁ = holiness
+4 לְאַהֲרֹן = for Aaron (Aaron)
+5 אָחִיךָ = brother your (brother)
+6 לְכָבוֹד = for glory (glory)
+7 וּלְתִפְאָרֶת = and for beauty (beauty)
+
+## 2:28:3
+KO: 그리고 너는 마음이 지혜로운 모든 자들에게 말하라. 곧 내가 지혜의 영으로 그를 채운 자들에게 말하여, 아론의 옷들을 만들게 하여 그를 거룩하게 하고 나를 위해 제사장 직분을 행하게 하라.
+1 וְאַתָּה = and you (you(m.s.))
+2 תְּדַבֵּר = you will speak (to speak)
+3 אֶל־ = to (to(wards))
+4 כָּל־ = all
+5 חַכְמֵי־ = [people] skillful of (wise)
+6 לֵב = heart
+7 אֲשֶׁר = which
+8 מִלֵּאתִיו = I have filled it (to fill)
+9 רוּחַ = a spirit of (spirit)
+10 חָכְמָה = wisdom
+11 וְעָשׂוּ = and they will make (to make)
+12 אֶת־ = <obj.> ([Obj.])
+13 בִּגְדֵי = [the] garments of (garment)
+14 אַהֲרֹן = Aaron
+15 לְקַדְּשׁוֹ = to consecrate him (to consecrate)
+16 לְכַהֲנוֹ־ = to serve as priest he (to minister)
+17 לִי = to <the> me (me)
+
+## 2:28:4
+KO: 그리고 이것들이 그들이 만들 옷들이니, 곧 흉패와 에봇과 겉옷과 바둑판 무늬의 속옷과 관과 띠라. 그들이 네 형 아론과 그의 아들들을 위하여 거룩한 옷들을 만들어 그가 내게 제사장 직분을 행하게 할지니라.
+1 וְאֵלֶּה = and these (these)
+2 הַבְּגָדִים = [are] the garments
+3 אֲשֶׁר = which
+4 יַעֲשׂוּ = they will make
+5 חֹשֶׁן = a breastpiece (breastpiece)
+6 וְאֵפוֹד = and an ephod (ephod)
+7 וּמְעִיל = and a robe (robe)
+8 וּכְתֹנֶת = and a tunic of (tunic)
+9 תַּשְׁבֵּץ = checkered work (checkered)
+10 מִצְנֶפֶת = a turban (turban)
+11 וְאַבְנֵט = and a sash (girdle)
+12 וְעָשׂוּ = and they will make
+13 בִגְדֵי־ = garments of
+14 קֹדֶשׁ = holiness
+15 לְאַהֲרֹן = for Aaron (Aaron)
+16 אָחִיךָ = brother your (brother)
+17 וּלְבָנָיו = and for sons his (son)
+18 לְכַהֲנוֹ־ = to serve as priest he (to minister)
+19 לִי = to <the> me (me)
+
+## 2:28:5
+KO: 그리고 그들은 금과 청색실과 자색실과 홍색실과 가늘게 꼰 베실을 취할 것이다.
+1 וְהֵם = and they (they(masc.))
+2 יִקְחוּ = they will take (to take)
+3 אֶת־ = <obj.>
+4 הַזָּהָב = the gold (gold)
+5 וְאֶת־ = and <obj.>
+6 הַתְּכֵלֶת = the violet stuff (blue)
+7 וְאֶת־ = and <obj.>
+8 הָאַרְגָּמָן = the purple (purple)
+9 וְאֶת־ = and <obj.>
+10 תּוֹלַעַת = [the] scarlet stuff of (worm)
+11 הַשָּׁנִי = the scarlet (scarlet)
+12 וְאֶת־ = and <obj.>
+13 הַשֵּׁשׁ פ = the fine linen (linen)
+
+## 2:28:6
+KO: 그들이 금과 청색과 자색과 홍색 실과 가늘게 꼰 베 실로, 숙련된 자의 솜씨로 에봇을 만들되
+1 וְעָשׂוּ = and they will make (to make)
+2 אֶת־ = <obj.> ([Obj.])
+3 הָאֵפֹד = the ephod (ephod)
+4 זָהָב = gold
+5 תְּכֵלֶת = violet stuff (blue)
+6 וְאַרְגָּמָן = and purple (purple)
+7 תּוֹלַעַת = scarlet stuff of (worm)
+8 שָׁנִי = scarlet
+9 וְשֵׁשׁ = and fine linen (linen)
+10 מָשְׁזָר = twisted (to twist)
+11 מַעֲשֵׂה = [the] work of (deed)
+12 חֹשֵׁב = a skillful worker (to devise)

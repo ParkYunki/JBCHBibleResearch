@@ -1,0 +1,162 @@
+## 3:8:3
+KO: 그리고 온 회중을 회막의 문으로 모으라.
+1 וְאֵת = and <obj.> ([Obj.])
+2 כָּל־ = all
+3 הָעֵדָה = the congregation (congregation)
+4 הַקְהֵל = assemble (to gather)
+5 אֶל־ = to (to(wards))
+6 פֶּתַח = [the] entrance of (entrance)
+7 אֹהֶל = [the] tent of (tent)
+8 מוֹעֵד = meeting
+
+## 3:8:4
+KO: 그리고 모세는 여호와께서 그에게 명령하신 대로 행하였다. 그리고 회중이 회막 문으로 모였다.
+1 וַיַּעַשׂ = and he did (to make)
+2 מֹשֶׁה = Moses
+3 כַּאֲשֶׁר = just as (as which)
+4 צִוָּה = he had commanded (to command)
+5 יְהוָה = Yahweh (LORD)
+6 אֹתוֹ = <obj.> him ([Obj.])
+7 וַתִּקָּהֵל = and it assembled (to gather)
+8 הָעֵדָה = the congregation (congregation)
+9 אֶל־ = to (to(wards))
+10 פֶּתַח = [the] entrance of (entrance)
+11 אֹהֶל = [the] tent of (tent)
+12 מוֹעֵד = meeting
+
+## 3:8:5
+KO: 모세가 회중에게 말하였다. "이것이 여호와께서 행하라고 명령하신 말씀이다."
+1 וַיֹּאמֶר = and he said (to say)
+2 מֹשֶׁה = Moses
+3 אֶל־ = to (to(wards))
+4 הָעֵדָה = the congregation (congregation)
+5 זֶה = this
+6 הַדָּבָר = [is] the word (word)
+7 אֲשֶׁר־ = which
+8 צִוָּה = he has commanded (to command)
+9 יְהוָה = Yahweh (LORD)
+10 לַעֲשׂוֹת = to do (to make)
+
+## 3:8:6
+KO: 그리고 모세는 아론과 그의 아들들을 가까이 오게 하였고, 그들을 물로 씻겼다.
+1 וַיַּקְרֵב = and he presented (to present)
+2 מֹשֶׁה = Moses
+3 אֶת־ = <obj.>
+4 אַהֲרֹן = Aaron
+5 וְאֶת־ = and <obj.>
+6 בָּנָיו = sons his (son)
+7 וַיִּרְחַץ = and he washed (to wash)
+8 אֹתָם = <obj.> them
+9 בַּמָּיִם = with <the> water (water)
+
+## 3:8:7
+KO: 그리고 그(아론) 위에 속옷을 입히고, 그에게 띠를 띠우고, 그에게 겉옷을 입히고, 그 위에 에봇을 더하고, 그 에봇의 정교한 띠로 그를 띠우며, 그것으로 그(에봇)를 그에게 매었다.
+1 וַיִּתֵּן = and he put
+2 עָלָיו = on him
+3 אֶת־ = <obj.>
+4 הַכֻּתֹּנֶת = the tunic (tunic)
+5 וַיַּחְגֹּר = and he girded
+6 אֹתוֹ = <obj.> him
+7 בָּאַבְנֵט = with the sash (girdle)
+8 וַיַּלְבֵּשׁ = and he clothed (to clothe)
+9 אֹתוֹ = <obj.> him
+10 אֶת־ = <obj.>
+11 הַמְּעִיל = the robe (robe)
+12 וַיִּתֵּן = and he put
+13 עָלָיו = on him
+14 אֶת־ = <obj.>
+15 הָאֵפֹד = the ephod
+16 וַיַּחְגֹּר = and he girded
+17 אֹתוֹ = <obj.> him
+18 בְּחֵשֶׁב = with [the] girdle of (artwork)
+19 הָאֵפֹד = the ephod
+20 וַיֶּאְפֹּד = and he girded [the] ephod (to gird)
+21 לוֹ = to <the> him
+22 בּוֹ = with <the> it
+
+## 3:8:8
+KO: 그리고 그(모세)가 그 위에 흉패를 두었고, 그 흉패 안에 우림과 둠밈을 두었다.
+1 וַיָּשֶׂם = and he placed (to set)
+2 עָלָיו = on him (upon)
+3 אֶת־ = <obj.>
+4 הַחֹשֶׁן = the breastpiece
+5 וַיִּתֵּן = and he put (to give)
+6 אֶל־ = into (to(wards))
+7 הַחֹשֶׁן = the breastpiece
+8 אֶת־ = <obj.>
+9 הָאוּרִים = the Urim (Urim)
+10 וְאֶת־ = and <obj.>
+11 הַתֻּמִּים = the Thummim (Thummim)
+
+## 3:8:9
+KO: 그리고 그(모세)는 관을 그의 머리 위에 두었고, 그리고 그 관 위에 그 얼굴 맞은편으로 금 패 곧 거룩의 관을 두었으니, 여호와께서 모세에게 명령하신 그대로였다.
+1 וַיָּשֶׂם = and he placed
+2 אֶת־ = <obj.>
+3 הַמִּצְנֶפֶת = the turban
+4 עַל־ = on
+5 רֹאשׁוֹ = head his (head)
+6 וַיָּשֶׂם = and he placed
+7 עַל־ = on
+8 הַמִּצְנֶפֶת = the turban
+9 אֶל־ = to (to(wards))
+10 מוּל = [the] front of (opposite)
+11 פָּנָיו = face his (face)
+12 אֵת = <obj.>
+13 צִיץ = [the] plate of (flower)
+14 הַזָּהָב = <the> gold (gold)
+15 נֵזֶר = [the] crown of (consecration)
+16 הַקֹּדֶשׁ = <the> holiness (holiness)
+17 כַּאֲשֶׁר = just as (as which)
+18 צִוָּה = he had commanded (to command)
+19 יְהוָה = Yahweh (LORD)
+20 אֶת־ = <obj.>
+21 מֹשֶׁה = Moses
+
+## 3:8:10
+KO: 그리고 모세가 관유(기름)를 취하여, 성막과 그 안에 있는 모든 것을 발랐고, 그것들을 거룩하게 하였다.
+1 וַיִּקַּח = and he took (to take)
+2 מֹשֶׁה = Moses
+3 אֶת־ = <obj.>
+4 שֶׁמֶן = [the] oil of (oil)
+5 הַמִּשְׁחָה = <the> anointing (anointing)
+6 וַיִּמְשַׁח = and he anointed (to anoint)
+7 אֶת־ = <obj.>
+8 הַמִּשְׁכָּן = the tabernacle (tabernacle)
+9 וְאֶת־ = and <obj.>
+10 כָּל־ = all
+11 אֲשֶׁר־ = that (which)
+12 בּוֹ = [was] in <the> it (him)
+13 וַיְקַדֵּשׁ = and he set apart as holy (to consecrate)
+14 אֹתָם = <obj.> them
+
+## 3:8:11
+KO: 그리고 그(모세)는 그것(기름)으로부터 제단 위에 일곱 번 뿌렸고, 제단과 그 모든 기구와 물두멍과 그 받침에 기름을 발라 그것들을 거룩하게 했다.
+1 וַיַּז = and he spattered (to sprinkle)
+2 מִמֶּנּוּ = some of it (from)
+3 עַל־ = on (upon)
+4 הַמִּזְבֵּחַ = the altar
+5 שֶׁבַע = seven
+6 פְּעָמִים = times (beat)
+7 וַיִּמְשַׁח = and he anointed (to anoint)
+8 אֶת־ = <obj.>
+9 הַמִּזְבֵּחַ = the altar
+10 וְאֶת־ = and <obj.>
+11 כָּל־ = all
+12 כֵּלָיו = utensils its (article|utensil)
+13 וְאֶת־ = and <obj.>
+14 הַכִּיֹּר = the laver (basin)
+15 וְאֶת־ = and <obj.>
+16 כַּנּוֹ = base its (stand)
+17 לְקַדְּשָׁם = to set apart as holy them (to consecrate)
+
+## 3:8:12
+KO: 그리고 그가 관유를 아론의 머리 위에 부었고, 그를 거룩하게 하기 위하여 그에게 기름을 발랐다.
+1 וַיִּצֹק = and he poured (to pour)
+2 מִשֶּׁמֶן = some of [the] oil of (oil)
+3 הַמִּשְׁחָה = <the> anointing (anointing)
+4 עַל = on (upon)
+5 רֹאשׁ = [the] head of (head)
+6 אַהֲרֹן = Aaron
+7 וַיִּמְשַׁח = and he anointed (to anoint)
+8 אֹתוֹ = <obj.> him ([Obj.])
+9 לְקַדְּשׁוֹ = to set apart as holy him (to consecrate)

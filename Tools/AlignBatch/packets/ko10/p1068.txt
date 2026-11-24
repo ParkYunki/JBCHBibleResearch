@@ -1,0 +1,193 @@
+## 13:10:11
+KO: 그리고 길르앗 야베스의 모든 사람들이 블레셋 사람들이 사울에게 행했던 모든 것을 들었다.
+1 וַיִּשְׁמְעוּ = and they heard (to hear)
+2 כֹּל = all
+3 יָבֵישׁ = Jabesh
+4 גִּלְעָד = Gilead (-gilead)
+5 אֵת = <obj.> ([Obj.])
+6 כָּל־ = all
+7 אֲשֶׁר־ = that (which)
+8 עָשׂוּ = they had done (to make)
+9 פְלִשְׁתִּים = [the] Philistines (Philistine)
+10 לְשָׁאוּל = to Saul (Saul)
+
+## 13:10:12
+KO: 모든 용사들이 일어나 사울의 몸들과 그의 아들들의 몸들을 들어 올려 야베스로 가져왔고, 그들의 뼈들을 야베스의 상수리나무 아래에 장사하였으며 칠 일 동안 금식하였다.
+1 וַיָּקוּמוּ = and they arose (to arise)
+2 כָּל־ = every (all)
+3 אִישׁ = man of (man)
+4 חַיִל = strength
+5 וַיִּשְׂאוּ = and they took (to lift)
+6 אֶת־ = <obj.>
+7 גּוּפַת = [the] corpse of
+8 שָׁאוּל = Saul
+9 וְאֵת = and <obj.>
+10 גּוּפֹת = [the] corpses of
+11 בָּנָיו = sons his (son)
+12 וַיְבִיאוּם = and they brought them (to come (in))
+13 יָבֵישָׁה = Jabesh towards
+14 וַיִּקְבְּרוּ = and they buried (to bury)
+15 אֶת־ = <obj.>
+16 עַצְמוֹתֵיהֶם = bones their (bone)
+17 תַּחַת = under (underneath)
+18 הָאֵלָה = the oak (oak)
+19 בְּיָבֵשׁ = in Jabesh
+20 וַיָּצוּמוּ = and they fasted (to fast)
+21 שִׁבְעַת = seven
+22 יָמִים = days (day;_when)
+
+## 13:10:13
+KO: 그리하여 사울이 죽었으니, 이는 그가 여호와께 범한 신실치 못함 때문이라. 그가 여호와의 말씀을 지키지 않았고, 또한 신접한 자에게 묻기 위하여 그것을 구하였기 때문이라.
+1 וַיָּמָת = and he died (to die)
+2 שָׁאוּל = Saul
+3 בְּמַעֲלוֹ = in unfaithfulness his (unfaithfulness)
+4 אֲשֶׁר = which
+5 מָעַל = he had acted unfaithfully
+6 בַּיהוָה = against Yahweh
+7 עַל־ = on (upon)
+8 דְּבַר = [the] word of (word)
+9 יְהוָה = Yahweh
+10 אֲשֶׁר = which
+11 לֹא־ = not
+12 שָׁמָר = he kept (to keep)
+13 וְגַם־ = and also (also)
+14 לִשְׁאוֹל = to consult (to ask)
+15 בָּאוֹב = by <the> necromancy (medium)
+16 לִדְרוֹשׁ = to consult (to seek)
+
+## 13:10:14
+KO: 그리고 그가 여호와께 묻지 않았으므로, 그분께서 그를 죽이셨고, 그 왕권을 이새의 아들 다윗에게 돌리셨다.
+1 וְלֹא־ = and not (not)
+2 דָרַשׁ = he consulted (to seek)
+3 בַּיהוָה = <in> Yahweh (LORD)
+4 וַיְמִיתֵהוּ = and he put to death him (to die)
+5 וַיַּסֵּב = and he turned over (to turn)
+6 אֶת־ = <obj.> ([Obj.])
+7 הַמְּלוּכָה = the kingship (kingship)
+8 לְדָוִיד = to David (David)
+9 בֶּן־ = [the] son of (son)
+10 יִשָׁי פ = Jesse
+
+## 13:11:1
+KO: 그리고 온 이스라엘이 헤브론으로 다윗에게 모여 말하기를, "보소서, 우리는 당신의 뼈요 당신의 살입니다."
+1 וַיִּקָּבְצוּ = and they gathered together (to gather)
+2 כָל־ = all
+3 יִשְׂרָאֵל = Israel
+4 אֶל־ = to (to(wards))
+5 דָּוִיד = David
+6 חֶבְרוֹנָה = Hebron towards (Hebron)
+7 לֵאמֹר = <to> saying (to say)
+8 הִנֵּה = here! (behold)
+9 עַצְמְךָ = [are] bone your (bone)
+10 וּבְשָׂרְךָ = and flesh your (flesh)
+11 אֲנָחְנוּ = we
+
+## 13:11:2
+KO: 어제도, 또한 그저께도, 또한 사울이 왕이었을 때에도 당신은 이스라엘을 데리고 나가고 들어오게 한 자였고, 당신의 하나님 여호와께서도 당신에게 말씀하시기를 "당신은 내 백성 이스라엘을 먹일 것이며, 당신은 내 백성 이스라엘의 주권자가 될 것이다"라고 하셨나이다.
+1 גַּם־ = both
+2 תְּמוֹל = yesterday
+3 גַּם־ = as well as
+4 שִׁלְשׁוֹם = three days ago (before)
+5 גַּם = also
+6 בִּהְיוֹת = when was
+7 שָׁאוּל = Saul
+8 מֶלֶךְ = king
+9 אַתָּה = you
+10 הַמּוֹצִיא = [were] the [one who] led out (to come out)
+11 וְהַמֵּבִיא = and the [one who] brought (to come (in))
+12 אֶת־ = <obj.>
+13 יִשְׂרָאֵל = Israel
+14 וַיֹּאמֶר = and he said (to say)
+15 יְהוָה = Yahweh (LORD)
+16 אֱלֹהֶיךָ = God your (God)
+17 לְךָ = to you (you)
+18 אַתָּה = you
+19 תִרְעֶה = you will shepherd (to pasture)
+20 אֶת־ = <obj.>
+21 עַמִּי = people my
+22 אֶת־ = <obj.>
+23 יִשְׂרָאֵל = Israel
+24 וְאַתָּה = and you
+25 תִּהְיֶה = you will be
+26 נָגִיד = ruler (leader)
+27 עַל = over (upon)
+28 עַמִּי = people my
+29 יִשְׂרָאֵל = Israel
+
+## 13:11:3
+KO: 이스라엘의 모든 장로가 헤브론으로 왕에게 나아오니, 다윗이 헤브론에서 여호와 앞에서 그들과 언약을 세우고, 그들이 다윗에게 기름을 부어 이스라엘 위에 왕을 삼으니, 여호와의 말씀대로 곧 사무엘의 손을 통하여 하신 대로 되었더라.
+1 וַיָּבֹאוּ = and they came (to come (in))
+2 כָּל־ = all
+3 זִקְנֵי = [the] elders of (old)
+4 יִשְׂרָאֵל = Israel
+5 אֶל־ = to (to(wards))
+6 הַמֶּלֶךְ = the king
+7 חֶבְרוֹנָה = Hebron towards
+8 וַיִּכְרֹת = and he made (to cut)
+9 לָהֶם = to them (them)
+10 דָּוִיד = David
+11 בְּרִית = a covenant (covenant)
+12 בְּחֶבְרוֹן = at Hebron
+13 לִפְנֵי = <to> before (face)
+14 יְהוָה = Yahweh
+15 וַיִּמְשְׁחוּ = and they anointed (to anoint)
+16 אֶת־ = <obj.> ([Obj.])
+17 דָּוִיד = David
+18 לְמֶלֶךְ = to king
+19 עַל־ = over (upon)
+20 יִשְׂרָאֵל = Israel
+21 כִּדְבַר = according to [the] word of (word)
+22 יְהוָה = Yahweh
+23 בְּיַד־ = by [the] hand of (hand)
+24 שְׁמוּאֵל ס = Samuel
+
+## 13:11:4
+KO: 그리고 다윗이 온 이스라엘과 함께 예루살렘, 곧 여부스로 갔으니, 그곳에 그 땅의 거주민인 여부스 사람이 있었더라.
+1 וַיֵּלֶךְ = and he went (to go)
+2 דָּוִיד = David
+3 וְכָל־ = and all (all)
+4 יִשְׂרָאֵל = Israel
+5 יְרוּשָׁלִַם = Jerusalem
+6 הִיא = it (he;_she;_it)
+7 יְבוּס = [was] Jebus (Jebus)
+8 וְשָׁם = and [were] there (there)
+9 הַיְבוּסִי = the Jebusite[s] (Jebusite)
+10 יֹשְׁבֵי = [the] inhabitants of (to dwell)
+11 הָאָרֶץ = the land (land)
+
+## 13:11:5
+KO: 그리고 여부스의 거민들이 다윗에게 말하기를 "너는 이리로 들어오지 못할 것이다"라고 하였으나, 다윗이 시온의 산성을 빼앗았으니, 그것은 다윗 성이다.
+1 וַיֹּאמְרוּ = and they said (to say)
+2 יֹשְׁבֵי = [the] inhabitants of (to dwell)
+3 יְבוּס = Jebus
+4 לְדָוִיד = to David
+5 לֹא = not
+6 תָבוֹא = you will enter (to come (in))
+7 הֵנָּה = here (hither)
+8 וַיִּלְכֹּד = and he captured (to capture)
+9 דָּוִיד = David
+10 אֶת־ = <obj.> ([Obj.])
+11 מְצֻדַת = [the] stronghold of (fortress)
+12 צִיּוֹן = Zion
+13 הִיא = it (he;_she;_it)
+14 עִיר = [was] [the] city of (city)
+15 דָּוִיד = David
+
+## 13:11:6
+KO: 그리고 다윗이 말하기를 "여부스 사람을 먼저 치는 자는 그가 우두머리와 장관이 될 것이다"라고 하였다. 그리하여 스루야의 아들 요압이 먼저 올라갔고, 그가 우두머리가 되었다.
+1 וַיֹּאמֶר = and he had said (to say)
+2 דָּוִיד = David
+3 כָּל־ = any (all)
+4 מַכֵּה = [one who] strikes down (to smite)
+5 יְבוּסִי = <of> a Jebusite (Jebusite)
+6 בָּרִאשׁוֹנָה = at the first
+7 יִהְיֶה = he will become
+8 לְרֹאשׁ = <into> a chief
+9 וּלְשָׂר = and <into> a commander (ruler)
+10 וַיַּעַל = and he went up (to ascend)
+11 בָּרִאשׁוֹנָה = at the first
+12 יוֹאָב = Joab
+13 בֶּן־ = [the] son of (son)
+14 צְרוּיָה = Zeruiah
+15 וַיְהִי = and he became
+16 לְרֹאשׁ = <into> a chief

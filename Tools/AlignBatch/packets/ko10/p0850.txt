@@ -1,0 +1,209 @@
+## 10:18:12
+KO: 그 사람이 요압에게 말하였다. "내가 내 손바닥들에 은 천 개를 달아 준다 할지라도, 나는 왕의 아들에게 내 손을 내밀지 않을 것입니다. 왜냐하면 우리 귀에 왕께서 당신과 아비새와 잇대에게 이르시기를 '누구든지 소년 압살롬을 삼가 지키라'고 명령하셨기 때문입니다."
+1 וַיֹּאמֶר = and he said
+2 הָאִישׁ = the man (man)
+3 אֶל־ = to
+4 יוֹאָב = Joab
+5 וְלוּא = and if (if)
+6 אָנֹכִי = I
+7 שֹׁקֵל = [were] weighing (to weigh)
+8 עַל־ = on (upon)
+9 כַּפַּי = hands my (palm)
+10 אֶלֶף = a thousand (thousand)
+11 כֶּסֶף = silver
+12 לֹא־ = not
+13 אֶשְׁלַח = I will stretch out (to send)
+14 יָדִי = hand my (hand)
+15 אֶל־ = against
+16 בֶּן־ = [the] son of (son)
+17 הַמֶּלֶךְ = the king
+18 כִּי = for
+19 בְאָזְנֵינוּ = in ears our (ear)
+20 צִוָּה = he commanded (to command)
+21 הַמֶּלֶךְ = the king
+22 אֹתְךָ = <obj.> you
+23 וְאֶת־ = and <obj.>
+24 אֲבִישַׁי = Abishai
+25 וְאֶת־ = and <obj.>
+26 אִתַּי = Ittai
+27 לֵאמֹר = <to> saying
+28 שִׁמְרוּ־ = protect (to keep)
+29 מִי = whoever (who?)
+30 בַּנַּעַר = <in> the young man (youth)
+31 בְּאַבְשָׁלוֹם = <in> Absalom (Absalom)
+
+## 10:18:13
+KO: 혹은 내가 내 생명(또는 나 자신)에 대하여 거짓을 행하였다면, 그리고 어떤 일도 왕으로부터 숨겨지지 않았을 것이니, 당신(왕)은 당신 스스로(그것을) 대적하여 섰을 것입니다.
+1 אוֹ־ = or
+2 עָשִׂיתִי = I had done (to make)
+3 בְנַפְשִׁי = on life my (soul)
+4 שֶׁקֶר = falsehood (deception)
+5 וְכָל־ = and any (all)
+6 דָּבָר = thing (word)
+7 לֹא־ = not
+8 יִכָּחֵד = it is hidden (to hide)
+9 מִן־ = from
+10 הַמֶּלֶךְ = the king (king)
+11 וְאַתָּה = and you (you(m.s.))
+12 תִּתְיַצֵּב = you will stand (to stand)
+13 מִנֶּגֶד = from in front (before)
+
+## 10:18:14
+KO: 요압이 말했다. "나는 네 앞에서 이같이 지체할 수 없다." 그리고 그가 세 개의 막대기(창)를 자기 손바닥에 취하여, 아직 살아 있는 압살롬의 심장(중심부)을 상수리나무 가운데서 찔렀다.
+1 וַיֹּאמֶר = and he said (to say)
+2 יוֹאָב = Joab
+3 לֹא־ = not
+4 כֵן = thus (so)
+5 אֹחִילָה = I will wait (to wait)
+6 לְפָנֶיךָ = <to> before you (face)
+7 וַיִּקַּח = and he took (to take)
+8 שְׁלֹשָׁה = three
+9 שְׁבָטִים = spears (tribe)
+10 בְּכַפּוֹ = in hand his (palm)
+11 וַיִּתְקָעֵם = and he thrust them (to blow)
+12 בְּלֵב = in [the] heart of
+13 אַבְשָׁלוֹם = Absalom
+14 עוֹדֶנּוּ = still he (still)
+15 חַי = [was] alive (alive)
+16 בְּלֵב = in [the] heart of
+17 הָאֵלָה = the oak (oak)
+
+## 10:18:15
+KO: 그리고 요압의 기구들을 드는 소년 열이 에워쌌고, 그리고 그들이 압살롬을 쳤으며, 그리고 그들이 그를 죽게 하였다.
+1 וַיָּסֹבּוּ = and they surrounded [him] (to turn)
+2 עֲשָׂרָה = ten
+3 נְעָרִים = young men (youth)
+4 נֹשְׂאֵי = [the] bearers of (to lift)
+5 כְּלֵי = [the] armor<s> of (article|utensil)
+6 יוֹאָב = Joab
+7 וַיַּכּוּ = and they struck (to smite)
+8 אֶת־ = <obj.> ([Obj.])
+9 אַבְשָׁלוֹם = Absalom
+10 וַיְמִיתֻהוּ = and they killed him (to die)
+
+## 10:18:16
+KO: 그리고 요압이 나팔을 불었고, 백성이 이스라엘을 뒤쫓는 것으로부터 돌아왔으니, 이는 요압이 그 백성을 말렸기 때문이라.
+1 וַיִּתְקַע = and he gave a blast (to blow)
+2 יוֹאָב = Joab
+3 בַּשֹּׁפָר = on the trumpet (trumpet)
+4 וַיָּשָׁב = and it turned back (to return)
+5 הָעָם = the people
+6 מִרְדֹף = from pursuing (to pursue)
+7 אַחֲרֵי = after
+8 יִשְׂרָאֵל = Israel
+9 כִּי־ = for
+10 חָשַׂךְ = he restrained (to withhold)
+11 יוֹאָב = Joab
+12 אֶת־ = <obj.> ([Obj.])
+13 הָעָם = the people
+
+## 10:18:17
+KO: 그리고 그들은 압살롬을 취하여 그를 숲속의 큰 구멍 안으로 던졌고, 그 위에 매우 큰 돌무더기를 세웠다. 그리고 온 이스라엘은 각기 자기 장막들로 도망하였다.
+1 וַיִּקְחוּ = and they took (to take)
+2 אֶת־ = <obj.>
+3 אַבְשָׁלוֹם = Absalom
+4 וַיַּשְׁלִיכוּ = and they threw (to throw)
+5 אֹתוֹ = <obj.> him
+6 בַיַּעַר = in the forest (wood)
+7 אֶל־ = into (to(wards))
+8 הַפַּחַת = the pit (pit)
+9 הַגָּדוֹל = <the> great
+10 וַיַּצִּבוּ = and they set up (to stand)
+11 עָלָיו = over him (upon)
+12 גַּל־ = a heap of (heap)
+13 אֲבָנִים = stones (stone)
+14 גָּדוֹל = great
+15 מְאֹד = very (much)
+16 וְכָל־ = and all (all)
+17 יִשְׂרָאֵל = Israel
+18 נָסוּ = they fled (to flee)
+19 אִישׁ = each (man)
+20 לְאֹהָלָיו ס = to tents his (tent)
+
+## 10:18:18
+KO: 압살롬이 그의 살아있는 동안에 스스로를 위하여 왕의 골짜기에 있는 한 비석을 가져다 세웠으니, 이는 그가 “내 이름을 기억하게 할 아들이 나에게 없다”라고 말하였기 때문이라. 그러므로 그가 그 비석을 자기 이름으로 불렀고, 그 비석이 오늘날까지 압살롬의 ‘손(기념비)’이라 불리더라.
+1 וְאַבְשָׁלֹם = and Absalom
+2 לָקַח = he had taken (to take)
+3 וַיַּצֶּב־ = and he had set up (to stand)
+4 לוֹ = for <the> himself (him)
+5 בְחַיָּיו = in life his (life)
+6 אֶת־ = <obj.> ([Obj.])
+7 מַצֶּבֶת = a pillar
+8 אֲשֶׁר = which
+9 בְּעֵמֶק־ = [is] in [the] valley of (valley)
+10 הַמֶּלֶךְ = the king (King's)
+11 כִּי = for
+12 אָמַר = he said (to say)
+13 אֵין־ = not (nothing)
+14 לִי = [belongs] to <the> me (me)
+15 בֵן = a son (son)
+16 בַּעֲבוּר = in order (for the sake of)
+17 הַזְכִּיר = to cause to be remembered (to remember)
+18 שְׁמִי = name my
+19 וַיִּקְרָא = and he called
+20 לַמַּצֶּבֶת = <to> the pillar
+21 עַל־ = on (upon)
+22 שְׁמוֹ = own name his
+23 וַיִּקָּרֵא = and it has been called
+24 לָהּ = to <the> it (her)
+25 יַד = [the] monument of (hand)
+26 אַבְשָׁלֹם = Absalom
+27 עַד = until (till)
+28 הַיּוֹם = the day (day)
+29 הַזֶּה ס = <the> this (this)
+
+## 10:18:19
+KO: 사독의 아들 아히마아스가 말하기를, "부디 내가 달려가서 왕에게 여호와께서 왕의 원수들의 손으로부터 그를 심판하셨다는 소식을 전하게 하소서."
+1 וַאֲחִימַעַץ = and Ahimaaz (Ahimaaz)
+2 בֶּן־ = [the] son of (son)
+3 צָדוֹק = Zadok
+4 אָמַר = he said (to say)
+5 אָרוּצָה = let me run (to run)
+6 נָּא = please
+7 וַאֲבַשְּׂרָה = and let me bear [the] news to (to bear tidings)
+8 אֶת־ = <obj.> ([Obj.])
+9 הַמֶּלֶךְ = the king (king)
+10 כִּי־ = that (for)
+11 שְׁפָטוֹ = he has vindicated him (to judge)
+12 יְהוָה = Yahweh (LORD)
+13 מִיַּד = from [the] hand of (hand)
+14 אֹיְבָיו = enemies his (enemy)
+
+## 10:18:20
+KO: 요압이 그에게 이르기를, 너는 오늘 소식의 사람이 되지 말고, 다른 날에 소식을 전하라. 그러나 오늘 너는 소식을 전하지 말라, 왜냐하면 왕의 아들이 죽었기 때문이다.
+1 וַיֹּאמֶר = and he said (to say)
+2 לוֹ = to <the> him (him)
+3 יוֹאָב = Joab
+4 לֹא = not
+5 אִישׁ = [are] a man of (man)
+6 בְּשֹׂרָה = news (good news)
+7 אַתָּה = you (you(m.s.))
+8 הַיּוֹם = <the> day
+9 הַזֶּה = <the> this
+10 וּבִשַּׂרְתָּ = and you will bear news
+11 בְּיוֹם = on a day
+12 אַחֵר = another
+13 וְהַיּוֹם = and <the> day
+14 הַזֶּה = <the> this
+15 לֹא = not
+16 תְבַשֵּׂר = you will bear [the] news
+17 כִּי־ = for (for since)
+18 עַל־כֵּן = since-<thus>
+19 בֶּן־ = [the] son of (son)
+20 הַמֶּלֶךְ = the king (king)
+21 מֵת = he has died (to die)
+
+## 10:18:21
+KO: 요압이 구스 사람에게 말하였다. "가서 네가 본 것을 왕에게 고하라." 그러자 구스 사람이 요압에게 절하고 달려갔다.
+1 וַיֹּאמֶר = and he said (to say)
+2 יוֹאָב = Joab
+3 לַכּוּשִׁי = to the Cushite
+4 לֵךְ = go (to go)
+5 הַגֵּד = tell (to tell)
+6 לַמֶּלֶךְ = to the king (king)
+7 אֲשֶׁר = [that] which (which)
+8 רָאִיתָה = you have seen (to see)
+9 וַיִּשְׁתַּחוּ = and he bowed down (to bow)
+10 כוּשִׁי = [the] Cushite
+11 לְיוֹאָב = to Joab
+12 וַיָּרֹץ = and he ran (to run)

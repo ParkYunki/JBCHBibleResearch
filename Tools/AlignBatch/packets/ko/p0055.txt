@@ -1,0 +1,760 @@
+## 2:39:36
+KO: 그 상과 그 모든 기구와 그 얼굴의 빵을
+1 אֶת־ = <obj.>
+2 הַשֻּׁלְחָן = the table (table)
+3 אֶת־ = <obj.>
+4 כָּל־ = all
+5 כֵּלָיו = articles its (article|utensil)
+6 וְאֵת = and <obj.>
+7 לֶחֶם = [the] bread of (food)
+8 הַפָּנִים = the presence (face)
+
+## 2:39:37
+KO: 정금 등잔대와 그 등잔들 곧 정렬하는 등잔들과 그 모든 기구와 등잔용 기름과
+1 אֶת־ = <obj.>
+2 הַמְּנֹרָה = the lampstand (lampstand)
+3 הַטְּהֹרָה = <the> pure (clean)
+4 אֶת־ = <obj.>
+5 נֵרֹתֶיהָ = lamps its
+6 נֵרֹת = [the] lamps of
+7 הַמַּעֲרָכָה = the row (rank)
+8 וְאֶת־ = and <obj.>
+9 כָּל־ = all
+10 כֵּלֶיהָ = articles its (article|utensil)
+11 וְאֵת = and <obj.>
+12 שֶׁמֶן = [the] oil of (oil)
+13 הַמָּאוֹר = the light (light)
+
+## 2:39:38
+KO: 그리고 금 제단과, 그리고 관유와, 그리고 향기로운 향과, 그리고 그 장막 입구의 휘장과
+1 וְאֵת = and <obj.>
+2 מִזְבַּח = [the] altar of (altar)
+3 הַזָּהָב = <the> gold (gold)
+4 וְאֵת = and <obj.>
+5 שֶׁמֶן = [the] oil of (oil)
+6 הַמִּשְׁחָה = <the> anointing (anointing)
+7 וְאֵת = and <obj.>
+8 קְטֹרֶת = [the] incense of (incense)
+9 הַסַּמִּים = the perfume<s> (spice)
+10 וְאֵת = and <obj.>
+11 מָסַךְ = [the] screen of (covering)
+12 פֶּתַח = [the] entrance of (entrance)
+13 הָאֹהֶל = the tent (tent)
+
+## 2:39:39
+KO: 그 놋 제단과 그 놋 그물과 그 채들과 그 모든 기구와 그 물두멍과 그 받침.
+1 אֵת = <obj.>
+2 מִזְבַּח = [the] altar of (altar)
+3 הַנְּחֹשֶׁת = <the> bronze
+4 וְאֶת־ = and <obj.>
+5 מִכְבַּר = [the] grating of (grate)
+6 הַנְּחֹשֶׁת = <the> bronze
+7 אֲשֶׁר־ = which
+8 לוֹ = [belonged] to <the> it (him)
+9 אֶת־ = <obj.>
+10 בַּדָּיו = poles its (alone)
+11 וְאֶת־ = and <obj.>
+12 כָּל־ = all
+13 כֵּלָיו = articles its (article|utensil)
+14 אֶת־ = <obj.>
+15 הַכִּיֹּר = the laver (basin)
+16 וְאֶת־ = and <obj.>
+17 כַּנּוֹ = base its (stand)
+
+## 2:39:40
+KO: 뜰의 포장들과 그 기둥들과 그 받침들과 뜰의 문을 위한 덮개와, 그것의 줄들과 그것의 말뚝들과, 성막 곧 회막의 봉사를 위한 모든 기구들을 (만들었으니)
+1 אֵת = <obj.>
+2 קַלְעֵי = [the] curtains of (curtain)
+3 הֶחָצֵר = the courtyard
+4 אֶת־ = <obj.>
+5 עַמֻּדֶיהָ = pillars its (pillar)
+6 וְאֶת־ = and <obj.>
+7 אֲדָנֶיהָ = bases its (socket)
+8 וְאֶת־ = and <obj.>
+9 הַמָּסָךְ = the screen (covering)
+10 לְשַׁעַר = for [the] gate of (gate)
+11 הֶחָצֵר = the courtyard
+12 אֶת־ = <obj.>
+13 מֵיתָרָיו = ropes its (cord)
+14 וִיתֵדֹתֶיהָ = and tent pegs its (peg)
+15 וְאֵת = and <obj.>
+16 כָּל־ = all
+17 כְּלֵי = [the] articles of (article|utensil)
+18 עֲבֹדַת = [the] service of (service)
+19 הַמִּשְׁכָּן = the tabernacle (tabernacle)
+20 לְאֹהֶל = for [the] tent of (tent)
+21 מוֹעֵד = meeting
+
+## 2:39:41
+KO: (그들은) 성소에서 섬기기 위한 정교한 옷들, 곧 제사장 아론의 거룩한 옷들과 그 아들들의 옷들을 (만들었으니) 그들이 제사 직분을 행하기 위함이었다.
+1 אֶת־ = <obj.>
+2 בִּגְדֵי = [the] garments of
+3 הַשְּׂרָד = the woven material (braiding)
+4 לְשָׁרֵת = to serve (to minister)
+5 בַּקֹּדֶשׁ = in the holy place
+6 אֶת־ = <obj.>
+7 בִּגְדֵי = [the] garments of
+8 הַקֹּדֶשׁ = <the> holiness
+9 לְאַהֲרֹן = for Aaron (Aaron)
+10 הַכֹּהֵן = the priest (priest)
+11 וְאֶת־ = and <obj.>
+12 בִּגְדֵי = [the] garments of
+13 בָנָיו = sons his (son)
+14 לְכַהֵן = to serve as priests (to minister)
+
+## 2:39:42
+KO: 여호와께서 모세에게 명령하신 모든 것같이, 이스라엘 자손이 모든 사역을 행하였다.
+1 כְּכֹל = according to all
+2 אֲשֶׁר־ = that (which)
+3 צִוָּה = he had commanded (to command)
+4 יְהוָה = Yahweh (LORD)
+5 אֶת־ = <obj.>
+6 מֹשֶׁה = Moses
+7 כֵּן = so
+8 עָשׂוּ = they did (to make)
+9 בְּנֵי = [the] people of (son)
+10 יִשְׂרָאֵל = Israel
+11 אֵת = <obj.>
+12 כָּל־ = all
+13 הָעֲבֹדָה = the labor (service)
+
+## 2:39:43
+KO: 그리고 모세가 모든 일을 보았는데, 보라, 그들이 그것을 행하였더라. 여호와께서 명하신 대로 그렇게 그들이 행하였으므로 모세가 그들에게 축복하였더라.
+1 וַיַּרְא = and he saw (to see)
+2 מֹשֶׁה = Moses
+3 אֶת־ = <obj.>
+4 כָּל־ = all
+5 הַמְּלָאכָה = the work (work)
+6 וְהִנֵּה = and there! (behold)
+7 עָשׂוּ = they had done
+8 אֹתָהּ = <obj.> it
+9 כַּאֲשֶׁר = just as (as which)
+10 צִוָּה = he had commanded (to command)
+11 יְהוָה = Yahweh (LORD)
+12 כֵּן = so
+13 עָשׂוּ = they had done
+14 וַיְבָרֶךְ = and he blessed (to bless)
+15 אֹתָם = <obj.> them
+16 מֹשֶׁה פ = Moses
+
+## 2:40:1
+KO: 그리고 여호와께서 모세에게 말씀하여 이르셨다.
+1 וַיְדַבֵּר = and he spoke (to speak)
+2 יְהוָה = Yahweh (LORD)
+3 אֶל־ = to (to(wards))
+4 מֹשֶׁה = Moses
+5 לֵּאמֹר = <to> saying (to say)
+
+## 2:40:2
+KO: 첫째 달의 그날에, 곧 그 달의 첫째 날에, 너는 성막, 곧 회막을 세울지니라.
+1 בְּיוֹם־ = on [the] day of (day;_when)
+2 הַחֹדֶשׁ = the month
+3 הָרִאשׁוֹן = <the> first (first)
+4 בְּאֶחָד = on [day] one (one)
+5 לַחֹדֶשׁ = of the month
+6 תָּקִים = you will set up (to arise)
+7 אֶת־ = <obj.> ([Obj.])
+8 מִשְׁכַּן = [the] tabernacle of (tabernacle)
+9 אֹהֶל = [the] tent of (tent)
+10 מוֹעֵד = meeting
+
+## 2:40:3
+KO: 그리고 너는 그 증거궤를 그곳에 두고, 그 휘장으로 그 궤를 가리워라.
+1 וְשַׂמְתָּ = and you will put (to set)
+2 שָׁם = there
+3 אֵת = <obj.>
+4 אֲרוֹן = [the] ark of
+5 הָעֵדוּת = the testimony (testimony)
+6 וְסַכֹּתָ = and you will cover (to cover)
+7 עַל־ = over (upon)
+8 הָאָרֹן = the ark
+9 אֶת־ = <obj.>
+10 הַפָּרֹכֶת = the curtain (curtain)
+
+## 2:40:4
+KO: 그리고 너는 상을 들여놓고 그 위에 놓일 것들을 차려 놓으며, 등잔대를 들여놓고 그 등잔들을 켜라.
+1 וְהֵבֵאתָ = and you will bring
+2 אֶת־ = <obj.>
+3 הַשֻּׁלְחָן = the table (table)
+4 וְעָרַכְתָּ = and you will arrange (to arrange)
+5 אֶת־ = <obj.>
+6 עֶרְכּוֹ = arrangement its (valuation)
+7 וְהֵבֵאתָ = and you will bring
+8 אֶת־ = <obj.>
+9 הַמְּנֹרָה = the lampstand (lampstand)
+10 וְהַעֲלֵיתָ = and you will lift up (to ascend)
+11 אֶת־ = <obj.>
+12 נֵרֹתֶיהָ = lamps its (lamp)
+
+## 2:40:5
+KO: 그리고 너는 금 향단을 증거궤 앞에 두고, 성막의 입구 가리개를 둘 것이다.
+1 וְנָתַתָּה = and you will put (to give)
+2 אֶת־ = <obj.>
+3 מִזְבַּח = [the] altar of (altar)
+4 הַזָּהָב = <the> gold (gold)
+5 לִקְטֹרֶת = for incense (incense)
+6 לִפְנֵי = <to> before (face)
+7 אֲרוֹן = [the] ark of (ark)
+8 הָעֵדֻת = the testimony (testimony)
+9 וְשַׂמְתָּ = and you will put (to set)
+10 אֶת־ = <obj.>
+11 מָסַךְ = [the] screen of (covering)
+12 הַפֶּתַח = the entrance (entrance)
+13 לַמִּשְׁכָּן = of the tabernacle (tabernacle)
+
+## 2:40:6
+KO: 그리고 너는 번제단을 회막의 성막 문 앞에 둘 것이다.
+1 וְנָתַתָּה = and you will put (to give)
+2 אֵת = <obj.> ([Obj.])
+3 מִזְבַּח = [the] altar of (altar)
+4 הָעֹלָה = the burnt offering (burnt offering)
+5 לִפְנֵי = <to> before (face)
+6 פֶּתַח = [the] entrance of (entrance)
+7 מִשְׁכַּן = [the] tabernacle of (tabernacle)
+8 אֹהֶל־ = [the] tent of (tent)
+9 מוֹעֵד = meeting
+
+## 2:40:7
+KO: 그리고 너는 물두멍을 회막과 제단 사이에 두고, 그곳에 물을 둘 것이다.
+1 וְנָתַתָּ = and you will put
+2 אֶת־ = <obj.> ([Obj.])
+3 הַכִּיֹּר = the laver (basin)
+4 בֵּין־ = between
+5 אֹהֶל = [the] tent of (tent)
+6 מוֹעֵד = meeting
+7 וּבֵין = and between
+8 הַמִּזְבֵּחַ = the altar (altar)
+9 וְנָתַתָּ = and you will put
+10 שָׁם = there
+11 מָיִם = water
+
+## 2:40:8
+KO: 그리고 너는 뜰을 사방에 설치할 것이며, 뜰 문의 덮개를 둘 것이다.
+1 וְשַׂמְתָּ = and you will put (to set)
+2 אֶת־ = <obj.>
+3 הֶחָצֵר = the courtyard
+4 סָבִיב = all around (around)
+5 וְנָתַתָּ = and you will put (to give)
+6 אֶת־ = <obj.>
+7 מָסַךְ = [the] screen of (covering)
+8 שַׁעַר = [the] gate of (gate)
+9 הֶחָצֵר = the courtyard
+
+## 2:40:9
+KO: 그리고 너는 관유를 취하여 성막과 그 안에 있는 모든 것을 바르고, 그것과 그 모든 기구들을 거룩하게 하라. 그리하여 그것들이 거룩하게 될 것이다.
+1 וְלָקַחְתָּ = and you will take (to take)
+2 אֶת־ = <obj.>
+3 שֶׁמֶן = [the] oil of (oil)
+4 הַמִּשְׁחָה = <the> anointing (anointing)
+5 וּמָשַׁחְתָּ = and you will anoint (to anoint)
+6 אֶת־ = <obj.>
+7 הַמִּשְׁכָּן = the tabernacle (tabernacle)
+8 וְאֶת־ = and <obj.>
+9 כָּל־ = all
+10 אֲשֶׁר־ = that (which)
+11 בּוֹ = [is] in <the> it (him)
+12 וְקִדַּשְׁתָּ = and you will consecrate (to consecrate)
+13 אֹתוֹ = <obj.> it
+14 וְאֶת־ = and <obj.>
+15 כָּל־ = all
+16 כֵּלָיו = articles its (article|utensil)
+17 וְהָיָה = and it will be (to be)
+18 קֹדֶשׁ = a holy thing (holiness)
+
+## 2:40:10
+KO: 그리고 너는 번제단과 그 모든 기구에 기름을 바르고, 그 단을 거룩하게 하라. 그러면 그 단은 지극히 거룩한 것들이 될 것이다.
+1 וּמָשַׁחְתָּ = and you will anoint (to anoint)
+2 אֶת־ = <obj.>
+3 מִזְבַּח = [the] altar of
+4 הָעֹלָה = the burnt offering (burnt offering)
+5 וְאֶת־ = and <obj.>
+6 כָּל־ = all
+7 כֵּלָיו = articles its (article|utensil)
+8 וְקִדַּשְׁתָּ = and you will consecrate (to consecrate)
+9 אֶת־ = <obj.>
+10 הַמִּזְבֵּחַ = the altar
+11 וְהָיָה = and it will be (to be)
+12 הַמִּזְבֵּחַ = the altar
+13 קֹדֶשׁ = holiness of
+14 קָדָשִׁים = holiness<es>
+
+## 2:40:11
+KO: 그리고 너는 물두멍과 그 받침에 기름을 발라 거룩하게 할지니라.
+1 וּמָשַׁחְתָּ = and you will anoint (to anoint)
+2 אֶת־ = <obj.>
+3 הַכִּיֹּר = the laver (basin)
+4 וְאֶת־ = and <obj.>
+5 כַּנּוֹ = base its (stand)
+6 וְקִדַּשְׁתָּ = and you will consecrate (to consecrate)
+7 אֹתוֹ = <obj.> it
+
+## 2:40:12
+KO: 그리고 너는 아론과 그의 아들들을 회막 입구로 데려와서, 그들을 물로 씻겨라.
+1 וְהִקְרַבְתָּ = and you will bring near (to present)
+2 אֶת־ = <obj.>
+3 אַהֲרֹן = Aaron
+4 וְאֶת־ = and <obj.>
+5 בָּנָיו = sons his (son)
+6 אֶל־ = to (to(wards))
+7 פֶּתַח = [the] entrance of (entrance)
+8 אֹהֶל = [the] tent of (tent)
+9 מוֹעֵד = meeting
+10 וְרָחַצְתָּ = and you will wash (to wash)
+11 אֹתָם = <obj.> them
+12 בַּמָּיִם = with <the> water (water)
+
+## 2:40:13
+KO: 그리고 너는 아론에게 거룩함의 옷들을 입히고 그에게 기름을 붓고 그를 거룩하게 하여 그가 내게 제사장 직분을 행하게 하라.
+1 וְהִלְבַּשְׁתָּ = and you will clothe (to clothe)
+2 אֶת־ = <obj.>
+3 אַהֲרֹן = Aaron
+4 אֵת = <obj.>
+5 בִּגְדֵי = [the] garments of (garment)
+6 הַקֹּדֶשׁ = <the> holiness (holiness)
+7 וּמָשַׁחְתָּ = and you will anoint (to anoint)
+8 אֹתוֹ = <obj.> him
+9 וְקִדַּשְׁתָּ = and you will consecrate (to consecrate)
+10 אֹתוֹ = <obj.> him
+11 וְכִהֵן = and he will serve as a priest (to minister)
+12 לִי = <to> <the> me (me)
+
+## 2:40:14
+KO: 그리고 그의 아들들을 너는 가까이 데려오고, 그들에게 속옷들을 입혀라.
+1 וְאֶת־ = and <obj.>
+2 בָּנָיו = sons his (son)
+3 תַּקְרִיב = you will bring near (to present)
+4 וְהִלְבַּשְׁתָּ = and you will clothe (to clothe)
+5 אֹתָם = <obj.> them
+6 כֻּתֳּנֹת = tunics (tunic)
+
+## 2:40:15
+KO: 그리고 너는 그들의 아비에게 기름을 부었던 것처럼 그들에게도 부어 그들이 내게 제사장 직분을 행하게 하라. 그리고 그들의 기름 부음은 그들의 세대를 따라 영원한 제사장 직분이 되리라.
+1 וּמָשַׁחְתָּ = and you will anoint
+2 אֹתָם = <obj.> them
+3 כַּאֲשֶׁר = just as (as which)
+4 מָשַׁחְתָּ = you anointed
+5 אֶת־ = <obj.>
+6 אֲבִיהֶם = father their (father)
+7 וְכִהֲנוּ = and they will serve as priests (to minister)
+8 לִי = <to> <the> me (me)
+9 וְהָיְתָה = and it will become
+10 לִהְיֹת = to be
+11 לָהֶם = for <the> them (them)
+12 מָשְׁחָתָם = anointing their (anointing)
+13 לִכְהֻנַּת = <into> a priesthood of (priesthood)
+14 עוֹלָם = perpetuity (forever)
+15 לְדֹרֹתָם = to generations their (generation)
+
+## 2:40:16
+KO: 그리고 모세는 여호와께서 그에게 명령하셨던 모든 것에 따라 행하였고, 그렇게 행하였다.
+1 וַיַּעַשׂ = and he did
+2 מֹשֶׁה = Moses
+3 כְּכֹל = according to all (all)
+4 אֲשֶׁר = that (which)
+5 צִוָּה = he had commanded (to command)
+6 יְהוָה = Yahweh (LORD)
+7 אֹתוֹ = <obj.> him ([Obj.])
+8 כֵּן = so
+9 עָשָׂה ס = he did
+
+## 2:40:17
+KO: 그리고 그 일이 일어났다, 첫째 달, 둘째 해, 그 달 초하루에, 그 성막이 세워졌다.
+1 וַיְהִי = and it was (to be)
+2 בַּחֹדֶשׁ = in the month
+3 הָרִאשׁוֹן = <the> first (first)
+4 בַּשָּׁנָה = in the year (year)
+5 הַשֵּׁנִית = <the> second (second)
+6 בְּאֶחָד = on [day] one (one)
+7 לַחֹדֶשׁ = of the month
+8 הוּקַם = it was set up (to arise)
+9 הַמִּשְׁכָּן = the tabernacle (tabernacle)
+
+## 2:40:18
+KO: 모세가 성막을 세웠고, 그것의 받침들을 놓았고, 그것의 널판들을 두었고, 그것의 띠들을 놓았고, 그것의 기둥들을 세웠다.
+1 וַיָּקֶם = and he set up
+2 מֹשֶׁה = Moses
+3 אֶת־ = <obj.>
+4 הַמִּשְׁכָּן = the tabernacle (tabernacle)
+5 וַיִּתֵּן = and he put
+6 אֶת־ = <obj.>
+7 אֲדָנָיו = bases its (socket)
+8 וַיָּשֶׂם = and he set up (to set)
+9 אֶת־ = <obj.>
+10 קְרָשָׁיו = frames its (board)
+11 וַיִּתֵּן = and he put
+12 אֶת־ = <obj.>
+13 בְּרִיחָיו = bars its (bar)
+14 וַיָּקֶם = and he set up
+15 אֶת־ = <obj.>
+16 עַמּוּדָיו = pillars its (pillar)
+
+## 2:40:19
+KO: 그리고 그가 성막 위에 그 천막을 폈으며, 그가 그 천막의 덮개를 그 위에 위로 씌우니, 여호와께서 모세에게 명령하신 대로였더라.
+1 וַיִּפְרֹשׂ = and he spread out (to spread)
+2 אֶת־ = <obj.>
+3 הָאֹהֶל = the tent
+4 עַל־ = over
+5 הַמִּשְׁכָּן = the tabernacle (tabernacle)
+6 וַיָּשֶׂם = and he put (to set)
+7 אֶת־ = <obj.>
+8 מִכְסֵה = [the] covering of (covering)
+9 הָאֹהֶל = the tent
+10 עָלָיו = over it
+11 מִלְמָעְלָה = from to above <towards> (above)
+12 כַּאֲשֶׁר = just as (as which)
+13 צִוָּה = he had commanded (to command)
+14 יְהוָה = Yahweh (LORD)
+15 אֶת־ = <obj.>
+16 מֹשֶׁה ס = Moses
+
+## 2:40:20
+KO: 그가 증거판을 가져다가 궤 안에 넣고, 채들을 궤 위에 두고, 속죄소를 궤 위에 두었다.
+1 וַיִּקַּח = and he took (to take)
+2 וַיִּתֵּן = and he put
+3 אֶת־ = <obj.>
+4 הָעֵדֻת = the testimony (testimony)
+5 אֶל־ = into (to(wards))
+6 הָאָרֹן = the ark
+7 וַיָּשֶׂם = and he put (to set)
+8 אֶת־ = <obj.>
+9 הַבַּדִּים = the poles (alone)
+10 עַל־ = on
+11 הָאָרֹן = the ark
+12 וַיִּתֵּן = and he put
+13 אֶת־ = <obj.>
+14 הַכַּפֹּרֶת = the atonement cover (mercy seat)
+15 עַל־ = on
+16 הָאָרֹן = the ark
+17 מִלְמָעְלָה = from to above <towards> (above)
+
+## 2:40:21
+KO: 그리고 그가 그 궤를 성막 안으로 가져와서, 그 휘장의 장막을 배치하고, 그 증거궤 위를 가리니, 여호와께서 모세에게 명령하신 그대로였다.
+1 וַיָּבֵא = and he brought (to come (in))
+2 אֶת־ = <obj.>
+3 הָאָרֹן = the ark
+4 אֶל־ = into (to(wards))
+5 הַמִּשְׁכָּן = the tabernacle (tabernacle)
+6 וַיָּשֶׂם = and he set up (to set)
+7 אֵת = <obj.>
+8 פָּרֹכֶת = [the] curtain of (curtain)
+9 הַמָּסָךְ = the screen (covering)
+10 וַיָּסֶךְ = and he covered (to cover)
+11 עַל = over (upon)
+12 אֲרוֹן = [the] ark of
+13 הָעֵדוּת = the testimony (testimony)
+14 כַּאֲשֶׁר = just as (as which)
+15 צִוָּה = he had commanded (to command)
+16 יְהוָה = Yahweh (LORD)
+17 אֶת־ = <obj.>
+18 מֹשֶׁה ס = Moses
+
+## 2:40:22
+KO: 그리고 그는 회막 안에, 성막의 북쪽 넓적다리(곁)에, 휘장 밖으로 상을 두었다.
+1 וַיִּתֵּן = and he put (to give)
+2 אֶת־ = <obj.> ([Obj.])
+3 הַשֻּׁלְחָן = the table (table)
+4 בְּאֹהֶל = in [the] tent of (tent)
+5 מוֹעֵד = meeting
+6 עַל = on (upon)
+7 יֶרֶךְ = [the] side of (thigh)
+8 הַמִּשְׁכָּן = the tabernacle (tabernacle)
+9 צָפֹנָה = north -ward (north)
+10 מִחוּץ = from [the] outside (outside)
+11 לַפָּרֹכֶת = of the curtain (curtain)
+
+## 2:40:23
+KO: 그리고 그(모세)가 그 위에 떡의 진설을 여호와 앞에 배열하였으니, 여호와께서 모세에게 명령하신 그대로였다.
+1 וַיַּעֲרֹךְ = and he arranged (to arrange)
+2 עָלָיו = on it (upon)
+3 עֵרֶךְ = an arrangement of (valuation)
+4 לֶחֶם = bread (food)
+5 לִפְנֵי = <to> before (face)
+6 יְהוָה = Yahweh
+7 כַּאֲשֶׁר = just as (as which)
+8 צִוָּה = he had commanded (to command)
+9 יְהוָה = Yahweh
+10 אֶת־ = <obj.> ([Obj.])
+11 מֹשֶׁה ס = Moses
+
+## 2:40:24
+KO: 그가 회막 안에 등대를 두었으니, 성막의 남쪽 편, 상과 마주 보는 곳이었다.
+1 וַיָּשֶׂם = and he put (to set)
+2 אֶת־ = <obj.> ([Obj.])
+3 הַמְּנֹרָה = the lampstand (lampstand)
+4 בְּאֹהֶל = in [the] tent of (tent)
+5 מוֹעֵד = meeting
+6 נֹכַח = opposite to (before)
+7 הַשֻּׁלְחָן = the table (table)
+8 עַל = on (upon)
+9 יֶרֶךְ = [the] side of (thigh)
+10 הַמִּשְׁכָּן = the tabernacle (tabernacle)
+11 נֶגְבָּה = south -ward (south)
+
+## 2:40:25
+KO: 그리고 그가 등잔들을 여호와의 면전(앞)으로 올라가게 하였으니, 여호와께서 모세에게 명령하셨던 것과 같았다.
+1 וַיַּעַל = and he lifted up (to ascend)
+2 הַנֵּרֹת = the lamps (lamp)
+3 לִפְנֵי = <to> before (face)
+4 יְהוָה = Yahweh
+5 כַּאֲשֶׁר = just as (as which)
+6 צִוָּה = he had commanded (to command)
+7 יְהוָה = Yahweh
+8 אֶת־ = <obj.> ([Obj.])
+9 מֹשֶׁה ס = Moses
+
+## 2:40:26
+KO: 그리고 그가 금 제단을 회막 안 장 앞에 두었다.
+1 וַיָּשֶׂם = and he put (to set)
+2 אֶת־ = <obj.> ([Obj.])
+3 מִזְבַּח = [the] altar of (altar)
+4 הַזָּהָב = <the> gold (gold)
+5 בְּאֹהֶל = in [the] tent of (tent)
+6 מוֹעֵד = meeting
+7 לִפְנֵי = <to> before (face)
+8 הַפָּרֹכֶת = the curtain (curtain)
+
+## 2:40:27
+KO: 그리고 그가 그 위에 향기로운 향을 사르니, 여호와께서 모세에게 명령하신 그대로였다.
+1 וַיַּקְטֵר = and he made smoke (to offer)
+2 עָלָיו = on it (upon)
+3 קְטֹרֶת = incense of (incense)
+4 סַמִּים = perfume<s> (spice)
+5 כַּאֲשֶׁר = just as (as which)
+6 צִוָּה = he had commanded (to command)
+7 יְהוָה = Yahweh (LORD)
+8 אֶת־ = <obj.> ([Obj.])
+9 מֹשֶׁה פ = Moses
+
+## 2:40:28
+KO: 그리고 그가 성막의 입구를 위한 덮개(장)를 달았다.
+1 וַיָּשֶׂם = and he set up (to set)
+2 אֶת־ = <obj.> ([Obj.])
+3 מָסַךְ = [the] screen of (covering)
+4 הַפֶּתַח = the entrance (entrance)
+5 לַמִּשְׁכָּן = of the tabernacle (tabernacle)
+
+## 2:40:29
+KO: 그리고 번제단을 회막의 성막 문 앞에 두었고, 그것 위에 번제와 소제를 드렸으니, 여호와께서 모세에게 명령하신 대로였다.
+1 וְאֵת = and <obj.>
+2 מִזְבַּח = [the] altar of (altar)
+3 הָעֹלָה = the burnt offering
+4 שָׂם = he set up (to set)
+5 פֶּתַח = [the] entrance of (entrance)
+6 מִשְׁכַּן = [the] tabernacle of (tabernacle)
+7 אֹהֶל־ = [the] tent of (tent)
+8 מוֹעֵד = meeting
+9 וַיַּעַל = and he offered up (to ascend)
+10 עָלָיו = on it (upon)
+11 אֶת־ = <obj.>
+12 הָעֹלָה = the burnt offering
+13 וְאֶת־ = and <obj.>
+14 הַמִּנְחָה = the grain offering (offering)
+15 כַּאֲשֶׁר = just as (as which)
+16 צִוָּה = he had commanded (to command)
+17 יְהוָה = Yahweh (LORD)
+18 אֶת־ = <obj.>
+19 מֹשֶׁה ס = Moses
+
+## 2:40:30
+KO: 그리고 그는 물두멍을 회막과 단 사이에 두었고, 씻기 위하여 물을 그곳에 두었다.
+1 וַיָּשֶׂם = and he put (to set)
+2 אֶת־ = <obj.> ([Obj.])
+3 הַכִּיֹּר = the laver (basin)
+4 בֵּין־ = between
+5 אֹהֶל = [the] tent of (tent)
+6 מוֹעֵד = meeting
+7 וּבֵין = and between
+8 הַמִּזְבֵּחַ = the altar (altar)
+9 וַיִּתֵּן = and he put (to give)
+10 שָׁמָּה = there <towards> (there)
+11 מַיִם = water
+12 לְרָחְצָה = for washing (to wash)
+
+## 2:40:31
+KO: 그리고 모세와 아론과 그의 아들들이 그곳에서 그들의 손들과 그들의 발들을 씻었다.
+1 וְרָחֲצוּ = and they washed (to wash)
+2 מִמֶּנּוּ = from it (from)
+3 מֹשֶׁה = Moses
+4 וְאַהֲרֹן = and Aaron (Aaron)
+5 וּבָנָיו = and sons his (son)
+6 אֶת־ = <obj.>
+7 יְדֵיהֶם = hands their (hand)
+8 וְאֶת־ = and <obj.>
+9 רַגְלֵיהֶם = feet their (foot)
+
+## 2:40:32
+KO: 그들이 회막으로 들어올 때와 제단으로 가까이 나아올 때에 그들은 씻었으니, 여호와께서 모세에게 명령하신 그대로였다.
+1 בְּבֹאָם = when went they (to come (in))
+2 אֶל־ = into
+3 אֹהֶל = [the] tent of (tent)
+4 מוֹעֵד = meeting
+5 וּבְקָרְבָתָם = and when drew near they (to present)
+6 אֶל־ = to
+7 הַמִּזְבֵּחַ = the altar (altar)
+8 יִרְחָצוּ = they washed (to wash)
+9 כַּאֲשֶׁר = just as (as which)
+10 צִוָּה = he had commanded (to command)
+11 יְהוָה = Yahweh (LORD)
+12 אֶת־ = <obj.> ([Obj.])
+13 מֹשֶׁה ס = Moses
+
+## 2:40:33
+KO: 그가 성막과 제단 둘레의 뜰을 세우고, 뜰 문의 휘장을 달았더라. 모세가 그 일을 마쳤더라.
+1 וַיָּקֶם = and he set up (to arise)
+2 אֶת־ = <obj.>
+3 הֶחָצֵר = the courtyard
+4 סָבִיב = around
+5 לַמִּשְׁכָּן = <to> the tabernacle (tabernacle)
+6 וְלַמִּזְבֵּחַ = and <to> the altar (altar)
+7 וַיִּתֵּן = and he put (to give)
+8 אֶת־ = <obj.>
+9 מָסַךְ = [the] screen of (covering)
+10 שַׁעַר = [the] gate of (gate)
+11 הֶחָצֵר = the courtyard
+12 וַיְכַל = and he finished (to end)
+13 מֹשֶׁה = Moses
+14 אֶת־ = <obj.>
+15 הַמְּלָאכָה פ = the work (work)
+
+## 2:40:34
+KO: 그리고 구름이 회막을 덮었고, 여호와의 영광이 성막을 채웠다.
+1 וַיְכַס = and it covered (to cover)
+2 הֶעָנָן = the cloud (cloud)
+3 אֶת־ = <obj.>
+4 אֹהֶל = [the] tent of (tent)
+5 מוֹעֵד = meeting
+6 וּכְבוֹד = and [the] glory of (glory)
+7 יְהוָה = Yahweh (LORD)
+8 מָלֵא = it filled (to fill)
+9 אֶת־ = <obj.>
+10 הַמִּשְׁכָּן = the tabernacle (tabernacle)
+
+## 2:40:35
+KO: 모세는 회막 안으로 들어갈 수 없었으니, 이는 그 구름이 그 위에 머물렀고 여호와의 영광이 그 성막을 가득 채웠기 때문이었다.
+1 וְלֹא־ = and not (not)
+2 יָכֹל = he was able (be able)
+3 מֹשֶׁה = Moses
+4 לָבוֹא = to go (to come (in))
+5 אֶל־ = into (to(wards))
+6 אֹהֶל = [the] tent of (tent)
+7 מוֹעֵד = meeting
+8 כִּי־ = for
+9 שָׁכַן = it had settled down (to dwell)
+10 עָלָיו = over it (upon)
+11 הֶעָנָן = the cloud (cloud)
+12 וּכְבוֹד = and [the] glory of (glory)
+13 יְהוָה = Yahweh (LORD)
+14 מָלֵא = it had filled (to fill)
+15 אֶת־ = <obj.> ([Obj.])
+16 הַמִּשְׁכָּן = the tabernacle (tabernacle)
+
+## 2:40:36
+KO: 그리고 구름이 성막 위에서 올라갈 때에, 이스라엘 자손은 그들의 모든 행군에서 앞으로 나아갔다.
+1 וּבְהֵעָלוֹת = and when was taken up (to ascend)
+2 הֶעָנָן = the cloud (cloud)
+3 מֵעַל = from over (upon)
+4 הַמִּשְׁכָּן = the tabernacle (tabernacle)
+5 יִסְעוּ = they set out (to set out)
+6 בְּנֵי = [the] people of (son)
+7 יִשְׂרָאֵל = Israel
+8 בְּכֹל = in all (all)
+9 מַסְעֵיהֶם = journeyings their (journey)
+
+## 2:40:37
+KO: 만약 구름이 올라가지 않으면, 그것이 올라가는 날까지 그들은 발행하지 아니하였다.
+1 וְאִם־ = and if (if)
+2 לֹא = not
+3 יֵעָלֶה = it was taken up
+4 הֶעָנָן = the cloud (cloud)
+5 וְלֹא = and not
+6 יִסְעוּ = they set out (to set out)
+7 עַד־ = until (till)
+8 יוֹם = [the] day (day;_when)
+9 הֵעָלֹתוֹ = was taken up it
+
+## 2:40:38
+KO: 왜냐하면 낮에는 여호와의 구름이 성막 위에 있고, 밤에는 불이 그 안에 있었기 때문이니, 이스라엘 온 집의 모든 행군 속에서 그러하였더라.
+1 כִּי = for
+2 עֲנַן = [the] cloud of (cloud)
+3 יְהוָה = Yahweh (LORD)
+4 עַל־ = [was] over (upon)
+5 הַמִּשְׁכָּן = the tabernacle (tabernacle)
+6 יוֹמָם = by day
+7 וְאֵשׁ = and fire (fire)
+8 תִּהְיֶה = it was (to be)
+9 לַיְלָה = night
+10 בּוֹ = on <the> it (him)
+11 לְעֵינֵי = to [the] eyes of (eye)
+12 כָל־ = all
+13 בֵּית־ = [the] house of (house)
+14 יִשְׂרָאֵל = Israel
+15 בְּכָל־ = in all
+16 מַסְעֵיהֶם = journeyings their (journey)
+
+## 3:1:1
+KO: 그리고 그분(여호와)께서 모세를 부르셨고, 여호와께서 그에게 회막으로부터 말씀하시며 이르시되,
+1 וַיִּקְרָא = and he called (to call)
+2 אֶל־ = to
+3 מֹשֶׁה = Moses
+4 וַיְדַבֵּר = and he spoke (to speak)
+5 יְהוָה = Yahweh (LORD)
+6 אֵלָיו = to him
+7 מֵאֹהֶל = from [the] tent of (tent)
+8 מוֹעֵד = meeting
+9 לֵאמֹר = <to> saying (to say)
+
+## 3:1:2
+KO: 이스라엘 자손에게 말하여 그들에게 이르라. 너희 중에 사람이 여호와께 예물을 드리려거든, 가축 중에서, 곧 소나 양 중에서 너희의 예물을 드릴지니라.
+1 דַּבֵּר = speak (to speak)
+2 אֶל־ = to
+3 בְּנֵי = [the] people of (son)
+4 יִשְׂרָאֵל = Israel
+5 וְאָמַרְתָּ = and you will say (to say)
+6 אֲלֵהֶם = to them
+7 אָדָם = anyone (man)
+8 כִּי־ = that (for)
+9 יַקְרִיב = he will present
+10 מִכֶּם = of <the> you (you)
+11 קָרְבָּן = a present
+12 לַיהוָה = to Yahweh (LORD)
+13 מִן־ = from
+14 הַבְּהֵמָה = the livestock (animal)
+15 מִן־ = from
+16 הַבָּקָר = the herd (cattle)
+17 וּמִן־ = and from
+18 הַצֹּאן = the flock (flock)
+19 תַּקְרִיבוּ = you will present
+20 אֶת־ = <obj.> ([Obj.])
+21 קָרְבַּנְכֶם = present your
+
+## 3:1:3
+KO: 만약 그 예물이 소로부터의 번제라면, 흠 없는 수컷으로 그것을 바칠지니, 회막 문에서 여호와 앞에 그가 그것을 기쁘게 받으시도록 그것을 바칠지니라.
+1 אִם־ = if
+2 עֹלָה = [is] a burnt offering (burnt offering)
+3 קָרְבָּנוֹ = present his (offering)
+4 מִן־ = from
+5 הַבָּקָר = the herd (cattle)
+6 זָכָר = a male (male)
+7 תָּמִים = unblemished
+8 יַקְרִיבֶנּוּ = he will present it
+9 אֶל־ = to (to(wards))
+10 פֶּתַח = [the] entrance of (entrance)
+11 אֹהֶל = [the] tent of (tent)
+12 מוֹעֵד = meeting
+13 יַקְרִיב = he will present
+14 אֹתוֹ = <obj.> it ([Obj.])
+15 לִרְצֹנוֹ = for acceptance its (acceptance)
+16 לִפְנֵי = <to> before (face)
+17 יְהוָה = Yahweh (LORD)
+
+## 3:1:4
+KO: 그리고 그는 그의 손을 그 번제물의 머리 위에 안수할 것이며, 그러면 그(번제물)가 그를 위하여 열납될 것이니, 그를 위하여 속죄하기 위함이라.
+1 וְסָמַךְ = and he will lean (to support)
+2 יָדוֹ = hand his (hand)
+3 עַל = on
+4 רֹאשׁ = [the] head of (head)
+5 הָעֹלָה = the burnt offering (burnt offering)
+6 וְנִרְצָה = and it will be accepted (to accept)
+7 לוֹ = for <the> him (him)
+8 לְכַפֵּר = to make atonement (to atone)
+9 עָלָיו = on him

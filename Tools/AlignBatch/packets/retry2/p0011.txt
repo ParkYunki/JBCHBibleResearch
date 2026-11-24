@@ -1,0 +1,153 @@
+## 3:23:1
+KO: 그리고 여호와께서 모세에게 말씀하셨다, 말씀하시기를.
+1 וַיְדַבֵּר = and he spoke (to speak)
+2 יְהוָה = Yahweh (LORD)
+3 אֶל־ = to (to(wards))
+4 מֹשֶׁה = Moses
+5 לֵּאמֹר = <to> saying (to say)
+
+## 3:23:2
+KO: 이스라엘 자손에게 말하여 그들에게 이르라. 너희가 그들을 거룩한 모임으로 선포할 여호와의 절기들, 이것들은 나의 절기들이니라.
+1 דַּבֵּר = speak (to speak)
+2 אֶל־ = to
+3 בְּנֵי = [the] people of (son)
+4 יִשְׂרָאֵל = Israel
+5 וְאָמַרְתָּ = and you will say (to say)
+6 אֲלֵהֶם = to them
+7 מוֹעֲדֵי = [the] appointed feasts of
+8 יְהוָה = Yahweh (LORD)
+9 אֲשֶׁר־ = which
+10 תִּקְרְאוּ = you will proclaim (to call)
+11 אֹתָם = <obj.> them ([Obj.])
+12 מִקְרָאֵי = convocations of (assembly)
+13 קֹדֶשׁ = holiness
+14 אֵלֶּה = these
+15 הֵם = they (they(masc.))
+16 מוֹעֲדָי = [are] appointed feasts my
+
+## 3:23:3
+KO: 엿새 동안은 일이 행해질 것이요, 일곱째 날은 안식의 안식일이며 거룩한 모임이니라. 너희는 어떤 일도 하지 말라. 그것은 너희의 모든 거주지에서 여호와를 위한 안식일이니라.
+1 שֵׁשֶׁת = six
+2 יָמִים = days
+3 תֵּעָשֶׂה = it will be done
+4 מְלָאכָה = work
+5 וּבַיּוֹם = and [is] on the day
+6 הַשְּׁבִיעִי = <the> seventh (seventh)
+7 שַׁבַּת = a sabbath of
+8 שַׁבָּתוֹן = sabbath observance
+9 מִקְרָא־ = a convocation of (assembly)
+10 קֹדֶשׁ = holiness
+11 כָּל־ = any
+12 מְלָאכָה = work
+13 לֹא = not
+14 תַעֲשׂוּ = you will do
+15 שַׁבָּת = [is] a sabbath
+16 הִוא = it (he;_she;_it)
+17 לַיהוָה = to Yahweh (LORD)
+18 בְּכֹל = in all
+19 מוֹשְׁבֹתֵיכֶם פ = dwelling places your (seat)
+
+## 3:23:4
+KO: 이것들은 여호와의 절기들이니, 너희가 그것들을 그 정해진 때에 거룩한 집회로 공포할 것들이니라.
+1 אֵלֶּה = these
+2 מוֹעֲדֵי = [are] [the] appointed feasts of
+3 יְהוָה = Yahweh (LORD)
+4 מִקְרָאֵי = convocations of (assembly)
+5 קֹדֶשׁ = holiness
+6 אֲשֶׁר־ = which
+7 תִּקְרְאוּ = you will proclaim (to call)
+8 אֹתָם = <obj.> them ([Obj.])
+9 בְּמוֹעֲדָם = at appointed time their
+
+## 3:23:5
+KO: 첫째 달 십사 일 그 달 사이에 저녁들에 여호와의 유월절이라.
+1 בַּחֹדֶשׁ = [is] in the month
+2 הָרִאשׁוֹן = <the> first (first)
+3 בְּאַרְבָּעָה = on [day] four- (four)
+4 עָשָׂר = teen (ten)
+5 לַחֹדֶשׁ = of the month
+6 בֵּין = between
+7 הָעַרְבָּיִם = the evenings (evening)
+8 פֶּסַח = a passover (Passover)
+9 לַיהוָה = to Yahweh (LORD)
+
+## 3:23:6
+KO: 그리고 이 달의 열다섯째 날은 여호와께 드리는 무교절이니, 칠 일 동안 너희는 무교병을 먹을 것이다.
+1 וּבַחֲמִשָּׁה = and [is] on [the] fif- (five)
+2 עָשָׂר = teen (ten)
+3 יוֹם = day
+4 לַחֹדֶשׁ = of the month (month)
+5 הַזֶּה = <the> this (this)
+6 חַג = [the] festival of (feast)
+7 הַמַּצּוֹת = <the> unleavened bread<s>
+8 לַיהוָה = to Yahweh (LORD)
+9 שִׁבְעַת = seven
+10 יָמִים = days
+11 מַצּוֹת = unleavened bread<s>
+12 תֹּאכֵלוּ = you will eat (to eat)
+
+## 3:23:7
+KO: 그 첫날에는 너희에게 거룩한 소집이 있을 것이며, 모든 노동의 일을 하지 말지니라.
+1 בַּיּוֹם = on the day (day;_when)
+2 הָרִאשׁוֹן = <the> first (first)
+3 מִקְרָא־ = a convocation of (assembly)
+4 קֹדֶשׁ = holiness
+5 יִהְיֶה = it will be (to be)
+6 לָכֶם = to <the> you (you)
+7 כָּל־ = any (all)
+8 מְלֶאכֶת = work of (work)
+9 עֲבֹדָה = servitude (service)
+10 לֹא = not
+11 תַעֲשׂוּ = you will do (to make)
+
+## 3:25:21
+KO: 내가 제육년에 나의 복을 너희에게 명령할 것이니, 그것(그 해)이 삼 년 동안의 소출을 낼 것이다.
+1 וְצִוִּיתִי = and I will command (to command)
+2 אֶת־ = <obj.>
+3 בִּרְכָתִי = blessing my (blessing)
+4 לָכֶם = for <the> you (you)
+5 בַּשָּׁנָה = in the year
+6 הַשִּׁשִּׁית = <the> sixth (sixth)
+7 וְעָשָׂת = and it will make (to make)
+8 אֶת־ = <obj.>
+9 הַתְּבוּאָה = the produce (produce)
+10 לִשְׁלֹשׁ = for [the] three (three)
+11 הַשָּׁנִים = the years
+
+## 3:25:50
+KO: 그리고 그는 자신을 산 자와 함께 그가 그에게 팔린 해로부터 희년의 해까지 계산할 것이며, 그의 매매 가격은 연수의 수에 따라 있을 것이니, 품꾼의 날들처럼 그와 함께 있을 것이다.
+1 וְחִשַּׁב = and he will calculate (to devise)
+2 עִם־ = with
+3 קֹנֵהוּ = [the] [one who] bought him (to buy)
+4 מִשְּׁנַת = from [the] year
+5 הִמָּכְרוֹ = he sold himself (to sell)
+6 לוֹ = to <the> him (him)
+7 עַד = until (till)
+8 שְׁנַת = [the] year of
+9 הַיֹּבֵל = the jubilee (jubilee|horn)
+10 וְהָיָה = and it will be
+11 כֶּסֶף = [the] silver of (silver)
+12 מִמְכָּרוֹ = sale his (sale)
+13 בְּמִסְפַּר = by [the] number of (number)
+14 שָׁנִים = years
+15 כִּימֵי = according to [the] days of (day;_when)
+16 שָׂכִיר = a hired laborer (hired)
+17 יִהְיֶה = he will be
+18 עִמּוֹ = with him
+
+## 3:27:20
+KO: 그리고 만일 그가 그 밭을 무르지 않으려 하거나, 혹은 그가 그 밭을 다른 사람에게 팔았다면, 다시는 무를 수 없으리라.
+1 וְאִם־ = and if
+2 לֹא = not
+3 יִגְאַל = he will redeem
+4 אֶת־ = <obj.>
+5 הַשָּׂדֶה = the field
+6 וְאִם־ = and if
+7 מָכַר = he has sold (to sell)
+8 אֶת־ = <obj.>
+9 הַשָּׂדֶה = the field
+10 לְאִישׁ = to a man (man)
+11 אַחֵר = another
+12 לֹא = not
+13 יִגָּאֵל = it will be redeemed
+14 עוֹד = again (still)

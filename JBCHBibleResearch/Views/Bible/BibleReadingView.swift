@@ -340,6 +340,8 @@ private struct BibleReadingContentView: View {
     @Query(sort: \TranslationRegistry.addedAt, order: .forward) private var translationRegistries: [TranslationRegistry]
     /// "성경 조회 새 창" 진입점(메뉴 AppCommands.swift와 이 화면 툴바 아이콘). 창마다 다른 번역본을 조회할 수 있다.
     @Environment(\.openWindow) private var openWindow
+    /// 설교 작성 분할 화면의 성경 패널(`SermonBibleSplit.swift`)에서만 값이 있다. 있으면 절 선택 액션바에 [에디터에 인용 삽입]을 더한다.
+    @Environment(\.sermonQuoteInsert) private var sermonQuoteInsert
     let viewModel: BibleReadingViewModel
     /// false면(macOS 보조 창) 관련 콘텐츠/조회 이력 아이콘을 툴바에서 뺀다(`BibleReadingView.isPrimaryWindow` 참고).
     let isPrimaryWindow: Bool
@@ -406,6 +408,8 @@ private struct BibleReadingContentView: View {
     @State private var pendingSwitchToOriginalTextInfo = false
     /// 반대 방향("원문 정보 → 메모하기") 전환용 — 원문 정보 시트가 완전히 닫힌 뒤 확대보기(메모하기) 시트를 연다.
     @State private var pendingSwitchToVerseZoom = false
+    /// [2026-11-02 interlin1] 원문 정보 "쓰인 구절"에서 고른 절 — 원문 정보 시트가 완전히 닫힌 뒤 `onDismiss`에서 그 장·절로 옮긴다.
+    @State private var pendingOriginalTextJump: BibleVerseRef?
     /// nil이 아니면 "지금 인스펙터에 말씀 요약 편집기를 띄우는 중"이라는 신호다. `isRelatedContentPresented`(관련 내용 패널)와 같은 인스펙터
     /// 자리를 공유하며 내용만 바뀐다(아래 `.inspector` 참고).
     @State private var wordSummaryBeingEdited: VerseSummary?
@@ -456,6 +460,23 @@ private struct BibleReadingContentView: View {
         #endif
     }
 
+    #if os(iOS)
+    /// 이 창이 compact 폭인지(아이패드 Split View·Slide Over 등). `NavigationSplitView`가 칸을 겹쳐 쌓는 기준과 같은 값이라
+    /// 이때만 사이드바를 "나란히"가 아니라 "화면 전환"으로 열어야 한다. 창 단위 값이라 이 화면이 다른 화면의 한 칸(설교 분할의 성경 패널)이어도
+    /// 그 칸의 폭이 아니라 창의 값을 준다 — 그래서 아래 `isNarrowWindow`는 `isPrimaryWindow`를 함께 본다.
+    @Environment(\.horizontalSizeClass) private var horizontalSizeClass
+    /// `narrowSearchRow`의 색(`BibleBarPalette`)을 만들 때 쓴다.
+    @Environment(\.self) private var environment
+    @Environment(\.colorScheme) private var colorScheme
+    /// 좁은 폭에서 키워드 검색 시트(`BibleSearchSheet`)를 여는 상태.
+    @State private var isSearchSheetPresented = false
+
+    /// 메인 창 + 아이패드 + compact 폭. 이때만 상단바 위에 "창 컨트롤 옆 줄"(사이드바 열기 + 검색 입력줄)을 더한다(`narrowSearchRow`).
+    private var isNarrowWindow: Bool {
+        isPrimaryWindow && !isPhone && horizontalSizeClass == .compact
+    }
+    #endif
+
     /// 툴바의 책갈피 토글/조회 버튼(화면에 하나뿐)이 대상으로 삼을 번역본 코드.
     /// - macOS/iPadOS(나란히 표시): 맨 왼쪽 컬럼 — `viewModel.columns`는 `displayedTranslationIDs` 순서 그대로다.
     /// - iPhone: 지금 스와이프로 보고 있는 컬럼(`selectedPhoneColumnID`). 아직 스와이프 전이라 nil이면 첫 컬럼.
@@ -497,7 +518,10 @@ private struct BibleReadingContentView: View {
             let code = column.registry.code
             guard seenCodes.insert(code).inserted else { return nil }
             let text = column.verses.first { $0.verse == verse }?.content ?? ""
-            return OriginalTextVerseSource(code: code, displayName: column.registry.displayName, text: text)
+            return OriginalTextVerseSource(
+                code: code, displayName: column.registry.displayName, text: text,
+                databasePath: viewModel.verseTextFilePath(registry: column.registry)
+            )
         }
     }
 
@@ -646,6 +670,11 @@ private struct BibleReadingContentView: View {
                 onCopy: copyRawText
             )
         }
+        #if os(iOS)
+        .sheet(isPresented: $isSearchSheetPresented) {
+            BibleSearchSheet(viewModel: viewModel)
+        }
+        #endif
         .sheet(item: $memoBeingCreated, onDismiss: {
             // 메모를 만들거나 고친 뒤 닫으면 관련 콘텐츠 패널의 메모 목록/순서(최신 수정순)에 바로 반영되도록 새로고침한다.
             viewModel.refreshRelatedContent()
@@ -1438,6 +1467,12 @@ private struct BibleReadingContentView: View {
                 pendingSwitchToVerseZoom = false
                 openVerseZoom()
             }
+            // [2026-11-02 interlin1] "쓰인 구절"에서 고른 절로 이동. 시트가 다 닫힌 뒤에 한다 — `selectBook`이 절 선택을 비워
+            // 시트가 열린 채 옮기면 시트 내용(`selectedVerses.first`)이 닫히는 도중에 사라진다. 관주 이동과 같은 경로를 쓴다.
+            if let target = pendingOriginalTextJump {
+                pendingOriginalTextJump = nil
+                jumpToCrossReferenceTarget(target)
+            }
         }) {
             if let verseNumber = viewModel.selectedVerses.first {
                 OriginalTextInfoView(
@@ -1445,6 +1480,8 @@ private struct BibleReadingContentView: View {
                     chapter: viewModel.selectedChapter,
                     verseNumber: verseNumber,
                     onSwitchToMemo: {
+                        // 닫히는 도중 두 동작이 모두 눌린 경우 마지막 것만 남긴다(리뷰 interlin1 B6).
+                        pendingOriginalTextJump = nil
                         pendingSwitchToVerseZoom = true
                         isOriginalTextInfoPresented = false
                     },
@@ -1453,7 +1490,12 @@ private struct BibleReadingContentView: View {
                     onNavigateToNextVerse: { viewModel.goToNextVerse(from: verseNumber) },
                     canGoToPreviousVerse: viewModel.canGoToPreviousVerse(from: verseNumber),
                     canGoToNextVerse: viewModel.canGoToNextVerse(from: verseNumber),
-                    verseSources: originalTextVerseSources(verse: verseNumber)
+                    verseSources: originalTextVerseSources(verse: verseNumber),
+                    onOpenVerse: { target in
+                        pendingSwitchToVerseZoom = false
+                        pendingOriginalTextJump = target
+                        isOriginalTextInfoPresented = false
+                    }
                 )
             }
         }
@@ -1630,17 +1672,20 @@ private struct BibleReadingContentView: View {
                     #else
                     .modifier(BibleBarActionModifier(kind: .secondary, help: String(localized: "말씀 요약")))
                     #endif
-                    // 말씀 요약과 같은 노출 조건(1개 이상).
-                    Button {
-                        startSermonFromSelectedVerses()
-                    } label: {
-                        Label("설교작성", systemImage: "text.book.closed")
+                    // 말씀 요약과 같은 노출 조건(1개 이상). 설교 작성 분할 화면의 성경 패널(`sermonQuoteInsert` 있음)에서는 이미 설교를 쓰는
+                    // 중이라 "새 설교 창 열기"를 뺀다 — 대신 아래 [에디터에 인용 삽입]이 있다.
+                    if sermonQuoteInsert == nil {
+                        Button {
+                            startSermonFromSelectedVerses()
+                        } label: {
+                            Label("설교작성", systemImage: "text.book.closed")
+                        }
+                        #if os(iOS)
+                        .modifier(ActionBarCircularIconModifier(isNarrow: isNarrowBottomBarLayout, isProminent: false, title: String(localized: "설교작성"), systemImage: "text.book.closed"))
+                        #else
+                        .modifier(BibleBarActionModifier(kind: .secondary, help: String(localized: "설교작성")))
+                        #endif
                     }
-                    #if os(iOS)
-                    .modifier(ActionBarCircularIconModifier(isNarrow: isNarrowBottomBarLayout, isProminent: false, title: String(localized: "설교작성"), systemImage: "text.book.closed"))
-                    #else
-                    .modifier(BibleBarActionModifier(kind: .secondary, help: String(localized: "설교작성")))
-                    #endif
                 }
                 if showsActionGroupDividers { BibleBarGroupDivider() }
                 Button {
@@ -1660,12 +1705,58 @@ private struct BibleReadingContentView: View {
                     Label("복사", systemImage: "doc.on.doc")
                 }
                 #if os(iOS)
-                .modifier(ActionBarCircularIconModifier(isNarrow: isNarrowBottomBarLayout, isProminent: true, title: String(localized: "복사"), systemImage: "doc.on.doc"))
+                .modifier(ActionBarCircularIconModifier(isNarrow: isNarrowBottomBarLayout, isProminent: sermonQuoteInsert == nil, title: String(localized: "복사"), systemImage: "doc.on.doc"))
                 #else
-                .modifier(BibleBarActionModifier(kind: .primary, help: String(localized: "복사")))
+                .modifier(BibleBarActionModifier(kind: sermonQuoteInsert == nil ? .primary : .secondary, help: String(localized: "복사")))
                 #endif
+                if sermonQuoteInsert != nil {
+                    Button {
+                        insertSelectedVersesIntoSermon()
+                    } label: {
+                        Label("에디터에 인용 삽입", systemImage: "text.insert")
+                    }
+                    #if os(iOS)
+                    .modifier(ActionBarCircularIconModifier(isNarrow: isNarrowBottomBarLayout, isProminent: true, title: String(localized: "에디터에 인용 삽입"), systemImage: "text.insert"))
+                    #else
+                    .modifier(BibleBarActionModifier(kind: .primary, help: String(localized: "에디터에 인용 삽입")))
+                    #endif
+                }
             }
         }
+    }
+
+    /// 선택한 절을 설교 에디터에 "말씀구절" 문단으로 넣는다(설교 작성 분할 화면 전용 — `sermonQuoteInsert`가 있을 때만 불린다).
+    /// 연속된 절은 한 문단("본문 (책 장:시작-끝)"), 떨어진 절은 연속 구간마다 한 문단씩이다. 문단 형식은 `SermonVerseReferencePicker`와 같고,
+    /// 문단·구절 참조 저장은 에디터(`SermonEditorView.insertVerseQuote`)가 맡는다. 기준 번역본(맨 왼쪽 열)만 쓴다.
+    private func insertSelectedVersesIntoSermon() {
+        guard let insertAction = sermonQuoteInsert,
+              !viewModel.selectedVerses.isEmpty,
+              let firstColumn = viewModel.columns.first else { return }
+        let versesByNumber = Dictionary(firstColumn.verses.map { ($0.verse, $0) }, uniquingKeysWith: { first, _ in first })
+        // 오름차순 절 번호를 연속 구간으로 나눈다.
+        var runs: [[Int]] = []
+        for number in viewModel.selectedVerses.sorted() where versesByNumber[number] != nil {
+            if var last = runs.last, let tail = last.last, number == tail + 1 {
+                last.append(number)
+                runs[runs.count - 1] = last
+            } else {
+                runs.append([number])
+            }
+        }
+        guard !runs.isEmpty else { return }
+        let book = viewModel.selectedBook
+        let chapter = viewModel.selectedChapter
+        for run in runs {
+            guard let start = run.first, let end = run.last else { continue }
+            let contents = run.compactMap { versesByNumber[$0]?.content }
+            let referenceLabel = end > start
+                ? "\(book.displayName) \(chapter):\(start)-\(end)"
+                : "\(book.displayName) \(chapter):\(start)"
+            let text = "\(contents.joined(separator: " ")) (\(referenceLabel))"
+            insertAction.insert(text, book.bookId, chapter, start, end > start ? end : nil)
+        }
+        viewModel.clearVerseSelection()
+        showToast(String(localized: "에디터에 삽입했습니다."))
     }
 
     /// 뷰모델이 환경설정대로 만들어 준 문자열을 플랫폼 클립보드에 넣는다.
@@ -1790,12 +1881,18 @@ private struct BibleReadingContentView: View {
                 // 장 이동 막대)을 시도하고, 그것도 안 들어가면(좁은 분할 보기 등) 기존 두 줄(아이콘 윗줄 + 책 버튼 없는 표준/캡슐 막대)로 되돌린다.
                 // 두 줄 배치는 윗줄 제목이 책/장 그리드를 열어 책 버튼을 뺐다. 한 줄 배치는 제목이 없어 책 버튼을 남긴다(첫 후보는 그대로라
                 // 한 줄 ↔ 두 줄 선택 기준도 바뀌지 않는다).
-                ViewThatFits(in: .horizontal) {
-                    bibleTopBar(singleRowCenter: AnyView(chapterNavigationControlsStandard))
-                    bibleTopBar(stackedRowCenter: AnyView(unifiedChapterNavigationBar(
-                        showsBookButton: false, searchFieldFillsWidth: true, usesNarrowSearchField: true, spacing: BibleTopBar.stackedRowSpacing
-                    )))
-                    topInsetTwoRows
+                VStack(spacing: 0) {
+                    // 좁은 폭(compact)에서만: 창 컨트롤 옆 줄 = [사이드바 열기][검색 입력줄]. 아래 상단바는 그대로다.
+                    if isNarrowWindow {
+                        narrowSearchRow
+                    }
+                    ViewThatFits(in: .horizontal) {
+                        bibleTopBar(singleRowCenter: AnyView(chapterNavigationControlsStandard))
+                        bibleTopBar(stackedRowCenter: AnyView(unifiedChapterNavigationBar(
+                            showsBookButton: false, searchFieldFillsWidth: true, usesNarrowSearchField: true, spacing: BibleTopBar.stackedRowSpacing
+                        )))
+                        topInsetTwoRows
+                    }
                 }
             }
         }
@@ -1816,6 +1913,52 @@ private struct BibleReadingContentView: View {
     }
 
     #if os(iOS)
+    /// 좁은 폭(compact)의 맨 위 줄(2026-11-11 안2). iPadOS 26 창 컨트롤(●●●)이 상단바 맨 왼쪽 버튼을 덮고, 좁은 폭에서는 사이드바 안의 통합 검색에
+    /// 닿을 수 없었던 문제를 푼다. 왼쪽은 창 컨트롤 폭만큼 비우고(`narrowWindowControlsClearance`), 그 옆에 [사이드바 열기][검색 입력줄]을 둔다.
+    /// 입력줄은 입력창이 아니라 버튼이다 — 누르면 아래에서 `BibleSearchSheet`가 올라온다.
+    private var narrowSearchRow: some View {
+        let palette = BibleBarPalette(environment: environment, colorScheme: colorScheme)
+        return HStack(spacing: 8) {
+            BibleBarSegmentGroup {
+                Button {
+                    // 좁은 폭에서는 `SidebarNavigationView`가 `preferredCompactColumn = .sidebar`로 사이드바 화면을 앞으로 가져온다.
+                    IPadSidebarInspectorCoordination.shared.requestShowSidebar()
+                } label: {
+                    Image(systemName: "sidebar.leading")
+                        .font(.system(size: BibleBarSizing.touch.iconSize, weight: .semibold))
+                        .frame(width: 40, height: 40)
+                }
+                .accessibilityLabel(String(localized: "사이드바 열기"))
+            }
+            Button {
+                isSearchSheetPresented = true
+            } label: {
+                HStack(spacing: 7) {
+                    Image(systemName: "magnifyingglass")
+                    Text(String(localized: "성경 · 개요 · 메모 · 설교 검색"))
+                        .lineLimit(1)
+                    Spacer(minLength: 0)
+                }
+                .font(.system(size: 13))
+                .foregroundStyle(palette.text.opacity(0.58))
+                .padding(.horizontal, 10)
+                .frame(height: 32)
+                .background(RoundedRectangle(cornerRadius: 10, style: .continuous).fill(palette.text.opacity(BibleBarMetrics.fillOpacity)))
+                .overlay(RoundedRectangle(cornerRadius: 10, style: .continuous).strokeBorder(palette.text.opacity(BibleBarMetrics.lineOpacity), lineWidth: 1))
+            }
+            .buttonStyle(.plain)
+            .accessibilityLabel(String(localized: "검색 열기"))
+        }
+        .environment(\.bibleBarSizing, .touch)
+        .padding(.leading, Self.narrowWindowControlsClearance)
+        .padding(.trailing, 12)
+        .frame(height: 48)
+    }
+
+    /// iPadOS 26 창 컨트롤(●●● 알약) 폭 + 여백. 목업(`iPad-Narrow-Search`)의 76pt를 그대로 쓴 고정값이다.
+    /// ⚠️ 실기기(창 모드/Split View)에서 확인 필요 — 시스템 제공 값(`containerCornerOffset`/`containerCornerInsets`)으로 바꿀 수 있다.
+    private static let narrowWindowControlsClearance: CGFloat = 76
+
     /// 상단바 + 아래 장 이동 막대의 두 줄 배치(아이폰 항상, 아이패드는 한 줄도 "아이콘 아래줄" 두 줄도 안 들어갈 때).
     /// 아이패드는 윗줄 제목이 책/장 그리드를 열므로 장 이동 막대에서 책 버튼을 뺀다(2026-10-28). 아이폰은 그대로다.
     private var topInsetTwoRows: some View {
@@ -1855,6 +1998,8 @@ private struct BibleReadingContentView: View {
             stackedRowCenter: stackedRowCenter,
             // [relverse1] 보조 성경 창은 사이드바 열기·책갈피·조회 이력·관련 콘텐츠를 뺀다(`BibleTopBar.isPrimaryWindow`).
             isPrimaryWindow: isPrimaryWindow,
+            // 좁은 폭에서는 같은 버튼이 `narrowSearchRow`에 있다 — 상단바에서는 뺀다.
+            hidesSidebarOpenButton: isNarrowWindow,
             isBookmarkListPresented: $isBookmarkListPresented,
             isHistoryPresented: $isHistoryPresented,
             isRelatedContentPresented: $isRelatedContentPresented,

@@ -1,0 +1,95 @@
+## 13:1:18
+KO: 그리고 아르박삿은 셀라를 낳았고, 그리고 셀라는 에벨을 낳았다.
+1 וְאַרְפַּכְשַׁד = and Arphaxad (Arpachshad)
+2 יָלַד = he fathered
+3 אֶת־ = <obj.>
+4 שָׁלַח = Shelah
+5 וְשֶׁלַח = and Shelah
+6 יָלַד = he fathered
+7 אֶת־ = <obj.>
+8 עֵבֶר = Eber
+
+## 13:1:19
+KO: 그리고 에벨에게 두 아들이 태어났으니, 한 사람의 이름은 벨렉이라 하였으니 이는 그(에벨)의 날들에 땅이 나뉘었기 때문이며, 그의 아우의 이름은 욕단이라.
+1 וּלְעֵבֶר = and to Eber (Eber)
+2 יֻלַּד = it was born (to beget)
+3 שְׁנֵי = two
+4 בָנִים = sons (son)
+5 שֵׁם = [the] name of
+6 הָאֶחָד = <the> one (one)
+7 פֶּלֶג = [was] Peleg (Peleg)
+8 כִּי = for
+9 בְיָמָיו = in days his (day;_when)
+10 נִפְלְגָה = it was divided (to divide)
+11 הָאָרֶץ = the earth (land)
+12 וְשֵׁם = and [the] name of
+13 אָחִיו = brother his (brother)
+14 יָקְטָן = [was] Joktan (Joktan)
+
+## 13:1:20
+KO: 그리고 욕단이 알모닷을 낳았고, 그리고 셀렙을, 그리고 하살마웹을, 그리고 예라를 낳았다.
+1 וְיָקְטָן = and Joktan (Joktan)
+2 יָלַד = he fathered (to beget)
+3 אֶת־ = <obj.>
+4 אַלְמוֹדָד = Almodad
+5 וְאֶת־ = and <obj.>
+6 שָׁלֶף = Sheleph
+7 וְאֶת־ = and <obj.>
+8 חֲצַרְמָוֶת = Hazarmaveth
+9 וְאֶת־ = and <obj.>
+10 יָרַח = Jerah
+
+## 13:1:21
+KO: 그리고 하도람과, 그리고 우살과, 그리고 디글라와
+1 וְאֶת־ = and <obj.>
+2 הֲדוֹרָם = Hadoram
+3 וְאֶת־ = and <obj.>
+4 אוּזָל = Uzal
+5 וְאֶת־ = and <obj.>
+6 דִּקְלָה = Diklah
+
+## 13:1:22
+KO: 그리고 에발과 그리고 아비마엘과 그리고 스바와
+1 וְאֶת־ = and <obj.>
+2 עֵיבָל = Ebal (Obal)
+3 וְאֶת־ = and <obj.>
+4 אֲבִימָאֵל = Abimael
+5 וְאֶת־ = and <obj.>
+6 שְׁבָא = Sheba
+
+## 13:1:23
+KO: 그리고 오빌과, 그리고 하윌라와, 그리고 요밥을 [낳았다]. 이 모든 이들이 욕단의 아들들이다.
+1 וְאֶת־ = and <obj.>
+2 אוֹפִיר = Ophir
+3 וְאֶת־ = and <obj.>
+4 חֲוִילָה = Havilah
+5 וְאֶת־ = and <obj.>
+6 יוֹבָב = Jobab
+7 כָּל־ = all
+8 אֵלֶּה = these
+9 בְּנֵי = [were] [the] sons of (son)
+10 יָקְטָן ס = Joktan
+
+## 13:1:24
+KO: 셈, 아르박삿, 셀라,
+1 שֵׁם = Shem
+2 אַרְפַּכְשַׁד = Arphaxad (Arpachshad)
+3 שָׁלַח = Shelah
+
+## 13:1:25
+KO: 에벨, 벨렉, 르우.
+1 עֵבֶר = Eber
+2 פֶּלֶג = Peleg
+3 רְעוּ = Reu
+
+## 13:1:26
+KO: 스룩, 나홀, 데라.
+1 שְׂרוּג = Serug
+2 נָחוֹר = Nahor
+3 תָּרַח = Terah
+
+## 13:1:27
+KO: 아브람, 그는 아브라함.
+1 אַבְרָם = Abram
+2 הוּא = he (he;_she;_it)
+3 אַבְרָהָם ס = [is] Abraham (Abraham)

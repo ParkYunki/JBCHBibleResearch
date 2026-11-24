@@ -1,0 +1,194 @@
+## 4:9:5
+KO: 그들이 첫째 달 열넷째 날 저녁 사이에 시내 광야에서 유월절을 행하였는데, 여호와께서 모세에게 명령하신 모든 것에 따라 이스라엘 자손이 그렇게 행하였더라.
+1 וַיַּעֲשׂוּ = and they observed
+2 אֶת־ = <obj.>
+3 הַפֶּסַח = the passover (Passover)
+4 בָּרִאשׁוֹן = in the first [month] (first)
+5 בְּאַרְבָּעָה = on [the] four- (four)
+6 עָשָׂר = teen (ten)
+7 יוֹם = day (day;_when)
+8 לַחֹדֶשׁ = of the month (month)
+9 בֵּין = between
+10 הָעַרְבַּיִם = the evenings (evening)
+11 בְּמִדְבַּר = in [the] wilderness of (wilderness)
+12 סִינָי = Sinai (of Sinai)
+13 כְּכֹל = according to all (all)
+14 אֲשֶׁר = that (which)
+15 צִוָּה = he had commanded (to command)
+16 יְהוָה = Yahweh (LORD)
+17 אֶת־ = <obj.>
+18 מֹשֶׁה = Moses
+19 כֵּן = so
+20 עָשׂוּ = they did
+21 בְּנֵי = [the] people of (son)
+22 יִשְׂרָאֵל = Israel
+
+## 4:9:6
+KO: 사람의 혼(시체)으로 인하여 부정하게 된 사람들이 있었는데, 그들이 그날에 유월절을 지킬 수 없었다. 그래서 그들이 모세 앞과 아론 앞에 그날에 가까이 나아왔다.
+1 וַיְהִי = and it was
+2 אֲנָשִׁים = people (human)
+3 אֲשֶׁר = who (which)
+4 הָיוּ = they were
+5 טְמֵאִים = unclean
+6 לְנֶפֶשׁ = to a corpse of (soul)
+7 אָדָם = a person (man)
+8 וְלֹא־ = and not (not)
+9 יָכְלוּ = they were able (be able)
+10 לַעֲשֹׂת־ = to observe (to make)
+11 הַפֶּסַח = the passover (Passover)
+12 בַּיּוֹם = on the day
+13 הַהוּא = <the> that
+14 וַיִּקְרְבוּ = and they drew near (to present)
+15 לִפְנֵי = <to> before
+16 מֹשֶׁה = Moses
+17 וְלִפְנֵי = and <to> before
+18 אַהֲרֹן = Aaron
+19 בַּיּוֹם = on the day
+20 הַהוּא = <the> that
+
+## 4:9:7
+KO: 그 사람들이 그에게 이르되 “우리는 사람의 시체로 인하여 부정하니, 어찌하여 우리가 이스라엘 자손의 가운데에서 여호와의 예물을 그 정한 때에 드리지 못하게 하심으로 우리를 감해지게(부족하게) 하심이니이까?”
+1 וַיֹּאמְרוּ = and they said (to say)
+2 הָאֲנָשִׁים = the people (human)
+3 הָהֵמָּה = <the> those (they(masc.))
+4 אֵלָיו = to him (to(wards))
+5 אֲנַחְנוּ = we
+6 טְמֵאִים = [are] unclean (unclean)
+7 לְנֶפֶשׁ = to a corpse of (soul)
+8 אָדָם = a person (man)
+9 לָמָּה = <to> why? (what?)
+10 נִגָּרַע = are we restrained (to dimish)
+11 לְבִלְתִּי = to not (lest)
+12 הַקְרִב = to bring near (to present)
+13 אֶת־ = <obj.> ([Obj.])
+14 קָרְבַּן = [the] offering of (offering)
+15 יְהוָה = Yahweh (LORD)
+16 בְּמֹעֲדוֹ = at appointed time its (meeting)
+17 בְּתוֹךְ = in among (midst)
+18 בְּנֵי = [the] people of (son)
+19 יִשְׂרָאֵל = Israel
+
+## 4:9:8
+KO: 그리고 모세가 그들에게 말했다. "너희는 서 있으라. 그리고 내가 여호와께서 너희에게 무엇을 명령하실지 들으리라."
+1 וַיֹּאמֶר = and he said (to say)
+2 אֲלֵהֶם = to them (to(wards))
+3 מֹשֶׁה = Moses
+4 עִמְדוּ = stand (to stand)
+5 וְאֶשְׁמְעָה = so let me hear (to hear)
+6 מַה־ = what?
+7 יְצַוֶּה = will he command (to command)
+8 יְהוָה = Yahweh (LORD)
+9 לָכֶם פ = of <the> you (you)
+
+## 4:9:9
+KO: 그리고 여호와께서 모세에게 말씀하셨다, 말하기를.
+1 וַיְדַבֵּר = and he spoke (to speak)
+2 יְהוָה = Yahweh (LORD)
+3 אֶל־ = to (to(wards))
+4 מֹשֶׁה = Moses
+5 לֵּאמֹר = <to> saying (to say)
+
+## 4:9:10
+KO: 이스라엘 자손에게 말하여 이르라. 너희나 너희 세대들 중에 누구든지 시체로 인하여 부정하게 되거나, 혹은 먼 길에 있다 하더라도, 그는 여호와를 위하여 유월절을 지켜야 한다.
+1 דַּבֵּר = speak (to speak)
+2 אֶל־ = to (to(wards))
+3 בְּנֵי = [the] people of (son)
+4 יִשְׂרָאֵל = Israel
+5 לֵאמֹר = <to> saying (to say)
+6 אִישׁ = a man
+7 אִישׁ = a man
+8 כִּי־ = if (for)
+9 יִהְיֶה־ = he will be (to be)
+10 טָמֵא = unclean
+11 לָנֶפֶשׁ = to a corpse (soul)
+12 אוֹ = or
+13 בְדֶרֶךְ = on a journey (way)
+14 רְחֹקָה = distant
+15 לָכֶם = to you (you)
+16 אוֹ = or
+17 לְדֹרֹתֵיכֶם = to generations your (generation)
+18 וְעָשָׂה = and he will observe (to make)
+19 פֶסַח = a passover (Passover)
+20 לַיהוָה = to Yahweh (LORD)
+
+## 4:9:11
+KO: 둘째 달 십사 일 해 질 때에 그들이 그것을 행할 것이요, 무교병들과 쓴 나물들 위에서 그것을 먹을지니라.
+1 בַּחֹדֶשׁ = in the month (month)
+2 הַשֵּׁנִי = <the> second (second)
+3 בְּאַרְבָּעָה = on [the] four- (four)
+4 עָשָׂר = teen (ten)
+5 יוֹם = day (day;_when)
+6 בֵּין = between
+7 הָעַרְבַּיִם = the evenings (evening)
+8 יַעֲשׂוּ = they will observe (to make)
+9 אֹתוֹ = <obj.> it ([Obj.])
+10 עַל־ = with (upon)
+11 מַצּוֹת = unleavened bread<s> (unleavened bread)
+12 וּמְרֹרִים = and bitter herbs (bitterness)
+13 יֹאכְלֻהוּ = they will eat it (to eat)
+
+## 4:9:12
+KO: 그들은 아침까지 그것(그것으로부터)을 남겨 두지 말며, 그 뼈를 하나도 꺾지 말라. 그들은 유월절의 모든 율례대로 그것을 행할 것이니라.
+1 לֹא־ = not
+2 יַשְׁאִירוּ = they will leave over (to remain)
+3 מִמֶּנּוּ = any of it (from)
+4 עַד־ = until (till)
+5 בֹּקֶר = morning
+6 וְעֶצֶם = and a bone (bone)
+7 לֹא = not
+8 יִשְׁבְּרוּ־ = they will break (to break)
+9 בוֹ = in <the> it (him)
+10 כְּכָל־ = according to every (all)
+11 חֻקַּת = <the> statute of (statute)
+12 הַפֶּסַח = the passover (Passover)
+13 יַעֲשׂוּ = they will observe (to make)
+14 אֹתוֹ = <obj.> it ([Obj.])
+
+## 4:9:13
+KO: 그리고 그 사람이 정결하고, 여행 중에 있지 아니하였는데도, 그 유월절을 지키기를 그쳤다면, 그 사람은 자기 백성 중에서 끊어질 것이니, 이는 그가 여호와의 예물을 그 정한 때에 드리지 아니하였음이라. 그 사람이 그 죄를 담당할지라.
+1 וְהָאִישׁ = and the person
+2 אֲשֶׁר־ = who (which)
+3 הוּא = he
+4 טָהוֹר = [was] pure (clean)
+5 וּבְדֶרֶךְ = and on a journey (way)
+6 לֹא־ = not
+7 הָיָה = he was (to be)
+8 וְחָדַל = and he failed (to cease)
+9 לַעֲשׂוֹת = to observe (to make)
+10 הַפֶּסַח = the passover (Passover)
+11 וְנִכְרְתָה = and it will be cut off (to cut)
+12 הַנֶּפֶשׁ = the person (soul)
+13 הַהִוא = <the> that
+14 מֵעַמֶּיהָ = from kinspeople<s> its (kinsman)
+15 כִּי = for
+16 קָרְבַּן = [the] offering of (offering)
+17 יְהוָה = Yahweh (LORD)
+18 לֹא = not
+19 הִקְרִיב = he brought near (to present)
+20 בְּמֹעֲדוֹ = at appointed time its (meeting)
+21 חֶטְאוֹ = sin his (sin)
+22 יִשָּׂא = he will bear (to lift)
+23 הָאִישׁ = the person
+24 הַהוּא = <the> that
+
+## 4:9:14
+KO: 그리고 만일 너희와 함께 타국인이 우거하여 여호와께 유월절을 지키고자 하면, 유월절의 율례와 그 규례대로 그가 행할 것이니, 우거하는 자나 그 땅의 본토인에게나 그 율례는 하나가 너희에게 있을 것이니라.
+1 וְכִי־ = and if (for)
+2 יָגוּר = he will sojourn (to sojourn)
+3 אִתְּכֶם = with you (with)
+4 גֵּר = a sojourner
+5 וְעָשָׂה = and he will observe
+6 פֶסַח = a passover
+7 לַיהוָה = to Yahweh (LORD)
+8 כְּחֻקַּת = according to [the] statute of
+9 הַפֶּסַח = the passover
+10 וּכְמִשְׁפָּטוֹ = and according to judgment its (justice)
+11 כֵּן = so
+12 יַעֲשֶׂה = he will do
+13 חֻקָּה = a statute
+14 אַחַת = one
+15 יִהְיֶה = it will belong (to be)
+16 לָכֶם = to you (you)
+17 וְלַגֵּר = and to the sojourner
+18 וּלְאֶזְרַח = and to [the] native-born of (born)
+19 הָאָרֶץ פ = the land (land)

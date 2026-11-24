@@ -1,0 +1,147 @@
+## 4:3:8
+KO: 그리고 그들은 회막의 모든 기구를 지키며, 이스라엘 자손의 직무를 (수행)하여 성막의 봉사를 섬길지니라.
+1 וְשָׁמְרוּ = and they will keep (to keep)
+2 אֶת־ = <obj.>
+3 כָּל־ = all
+4 כְּלֵי = [the] articles of (article|utensil)
+5 אֹהֶל = [the] tent of (tent)
+6 מוֹעֵד = meeting
+7 וְאֶת־ = and <obj.>
+8 מִשְׁמֶרֶת = [the] duty of (charge)
+9 בְּנֵי = [the] people of (son)
+10 יִשְׂרָאֵל = Israel
+11 לַעֲבֹד = by serving (to serve)
+12 אֶת־ = <obj.>
+13 עֲבֹדַת = [the] service of (service)
+14 הַמִּשְׁכָּן = the tabernacle (tabernacle)
+
+## 4:3:9
+KO: 너는 레위인들을 아론과 그의 아들들에게 주라. 그들은 이스라엘 자손들에게서 그에게 온전히 주어진 자들이다.
+1 וְנָתַתָּה = and you will give
+2 אֶת־ = <obj.> ([Obj.])
+3 הַלְוִיִּם = the Levites (Levi)
+4 לְאַהֲרֹן = to Aaron (Aaron)
+5 וּלְבָנָיו = and to sons his
+6 נְתוּנִם = [are] assigned
+7 נְתוּנִם = assigned
+8 הֵמָּה = they (they(masc.))
+9 לוֹ = to <the> him (him)
+10 מֵאֵת = from with (with)
+11 בְּנֵי = [the] people of
+12 יִשְׂרָאֵל = Israel
+
+## 4:3:10
+KO: 그리고 아론과 그의 아들들을 너는 임명하라. 그리고 그들이 그들의 제사장 직분을 지킬 것이며, 가까이 다가오는 외인은 죽임을 당할 것이다.
+1 וְאֶת־ = and <obj.>
+2 אַהֲרֹן = Aaron
+3 וְאֶת־ = and <obj.>
+4 בָּנָיו = sons his (son)
+5 תִּפְקֹד = you will appoint (to reckon)
+6 וְשָׁמְרוּ = and they will keep (to keep)
+7 אֶת־ = <obj.>
+8 כְּהֻנָּתָם = priesthood their (priesthood)
+9 וְהַזָּר = and the stranger (be a stranger)
+10 הַקָּרֵב = <the> approaching (approaching)
+11 יוּמָת פ = he will be put to death (to die)
+
+## 4:3:11
+KO: 그리고 여호와께서 모세에게 말씀하여 이르셨다.
+1 וַיְדַבֵּר = and he spoke (to speak)
+2 יְהוָה = Yahweh (LORD)
+3 אֶל־ = to (to(wards))
+4 מֹשֶׁה = Moses
+5 לֵּאמֹר = <to> saying (to say)
+
+## 4:3:12
+KO: 그리고 보라, 내가 이스라엘 자손의 한가운데로부터 레위인들을 취하여 이스라엘 자손의 태를 여는 모든 첫 태생들을 대신하게 하였으니, 레위인들은 내 것이라.
+1 וַאֲנִי = and I (I)
+2 הִנֵּה = here! (behold)
+3 לָקַחְתִּי = I have taken (to take)
+4 אֶת־ = <obj.> ([Obj.])
+5 הַלְוִיִּם = the Levites
+6 מִתּוֹךְ = from among (midst)
+7 בְּנֵי = [the] people of
+8 יִשְׂרָאֵל = Israel
+9 תַּחַת = in place of (underneath)
+10 כָּל־ = every (all)
+11 בְּכוֹר = firstborn
+12 פֶּטֶר = [the] firstborn of (firstborn)
+13 רֶחֶם = a womb (womb)
+14 מִבְּנֵי = from [the] people of
+15 יִשְׂרָאֵל = Israel
+16 וְהָיוּ = and they will belong (to be)
+17 לִי = to <the> me (me)
+18 הַלְוִיִּם = the Levites
+
+## 4:3:13
+KO: 왜냐하면 모든 첫 태생은 내 것이기 때문이다. 내가 애굽 땅에서 모든 첫 태생을 치던 날에, 이스라엘의 모든 첫 태생(사람으로부터 짐승까지)을 나를 위하여 거룩하게 구별하였기 때문이다. 그들은 내 것이 될 것이다. 나, 여호와이다.
+1 כִּי = for
+2 לִי = [belongs] to <the> me
+3 כָּל־ = every
+4 בְּכוֹר = firstborn
+5 בְּיוֹם = on [the] day (day;_when)
+6 הַכֹּתִי = struck I (to smite)
+7 כָל־ = every
+8 בְּכוֹר = firstborn
+9 בְּאֶרֶץ = in [the] land of (land)
+10 מִצְרַיִם = Egypt
+11 הִקְדַּשְׁתִּי = I set apart (to consecrate)
+12 לִי = for <the> myself
+13 כָל־ = every
+14 בְּכוֹר = firstborn
+15 בְּיִשְׂרָאֵל = in Israel (Israel)
+16 מֵאָדָם = from humankind (man)
+17 עַד־ = unto (till)
+18 בְּהֵמָה = livestock (animal)
+19 לִי = to <the> me
+20 יִהְיוּ = they will belong (to be)
+21 אֲנִי = I
+22 יְהוָה ס = [am] Yahweh (LORD)
+
+## 4:3:14
+KO: 그리고 여호와께서 시내 광야에서 모세에게 말씀하셨다, 가라사대.
+1 וַיְדַבֵּר = and he spoke (to speak)
+2 יְהוָה = Yahweh (LORD)
+3 אֶל־ = to (to(wards))
+4 מֹשֶׁה = Moses
+5 בְּמִדְבַּר = in [the] wilderness of (wilderness)
+6 סִינַי = Sinai (of Sinai)
+7 לֵאמֹר = <to> saying (to say)
+
+## 4:3:15
+KO: 레위 자손을 그들의 조상들의 집과 그들의 가족들에 따라 계수하라. 한 달 이상의 모든 남자를 너는 그들을 계수하라.
+1 פְּקֹד = enroll
+2 אֶת־ = <obj.> ([Obj.])
+3 בְּנֵי = [the] descendants of
+4 לֵוִי = Levi
+5 לְבֵית = to [the] house of (house)
+6 אֲבֹתָם = ancestors their (father)
+7 לְמִשְׁפְּחֹתָם = to clans their (family)
+8 כָּל־ = every (all)
+9 זָכָר = male
+10 מִבֶּן־ = from a son of
+11 חֹדֶשׁ = a month (month)
+12 וָמַעְלָה = and up -wards (above)
+13 תִּפְקְדֵם = you will enroll them
+
+## 4:3:16
+KO: 그리고 모세는 여호와의 입에 따라, 그가 명령받은 것처럼 그들을 계수하였다.
+1 וַיִּפְקֹד = and he enrolled (to reckon)
+2 אֹתָם = <obj.> them ([Obj.])
+3 מֹשֶׁה = Moses
+4 עַל־ = on (upon)
+5 פִּי = [the] mouth of (lip)
+6 יְהוָה = Yahweh (LORD)
+7 כַּאֲשֶׁר = just as (as which)
+8 צֻוָּה = he had been commanded (to command)
+
+## 4:3:17
+KO: 그리고 레위의 아들들의 이름은 이러하니, 게르손과 고핫과 므라리라.
+1 וַיִּהְיוּ־ = and they were (to be)
+2 אֵלֶּה = these
+3 בְנֵי־ = [the] sons of (son)
+4 לֵוִי = Levi
+5 בִּשְׁמֹתָם = by names their (name)
+6 גֵּרְשׁוֹן = Gershon
+7 וּקְהָת = and Kohath (Kohath)
+8 וּמְרָרִי = and Merari (Merari)

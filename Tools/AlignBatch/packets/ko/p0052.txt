@@ -1,0 +1,835 @@
+## 2:35:19
+KO: (그들이) 성소에서 섬기기 위한 정교한 옷들, 곧 제사장 아론의 거룩한 옷들과 제사장 직분을 행하기 위한 그의 아들들의 옷들이라.
+1 אֶת־ = <obj.>
+2 בִּגְדֵי = [the] garments of
+3 הַשְּׂרָד = the woven material (braiding)
+4 לְשָׁרֵת = to serve (to minister)
+5 בַּקֹּדֶשׁ = in the holy place
+6 אֶת־ = <obj.>
+7 בִּגְדֵי = [the] garments of
+8 הַקֹּדֶשׁ = <the> holiness
+9 לְאַהֲרֹן = for Aaron (Aaron)
+10 הַכֹּהֵן = the priest (priest)
+11 וְאֶת־ = and <obj.>
+12 בִּגְדֵי = [the] garments of
+13 בָנָיו = sons his (son)
+14 לְכַהֵן = to serve as priests (to minister)
+
+## 2:35:20
+KO: 그리고 이스라엘 자손의 온 회중이 모세의 앞(들)으로부터 나갔더라.
+1 וַיֵּצְאוּ = and they went out (to come out)
+2 כָּל־ = all
+3 עֲדַת = [the] congregation of (congregation)
+4 בְּנֵי־ = [the] people of (son)
+5 יִשְׂרָאֵל = Israel
+6 מִלִּפְנֵי = from to before (face)
+7 מֹשֶׁה = Moses
+
+## 2:35:21
+KO: 그리고 그 마음이 그를 일으킨 모든 사람과 그의 영이 그를 자원하게 한 모든 사람이 왔으니, 그들이 회막의 일과 그 모든 봉사와 거룩한 옷들을 위하여 여호와의 예물을 가져왔더라.
+1 וַיָּבֹאוּ = and they came
+2 כָּל־ = every
+3 אִישׁ = person (man)
+4 אֲשֶׁר־ = whom
+5 נְשָׂאוֹ = it lifted him (to lift)
+6 לִבּוֹ = heart his (heart)
+7 וְכֹל = and every
+8 אֲשֶׁר = [one] whom
+9 נָדְבָה = it impelled (be willing)
+10 רוּחוֹ = spirit his (spirit)
+11 אֹתוֹ = <obj.> him
+12 הֵבִיאוּ = they brought
+13 אֶת־ = <obj.>
+14 תְּרוּמַת = [the] contribution of (contribution)
+15 יְהוָה = Yahweh (LORD)
+16 לִמְלֶאכֶת = for [the] work of (work)
+17 אֹהֶל = [the] tent of (tent)
+18 מוֹעֵד = meeting
+19 וּלְכָל־ = and for all
+20 עֲבֹדָתוֹ = service its (service)
+21 וּלְבִגְדֵי = and for [the] garments of (garment)
+22 הַקֹּדֶשׁ = <the> holiness (holiness)
+
+## 2:35:22
+KO: 그 남자들이 여자들과 함께 왔다. 마음이 자원하는 모든 자가 갈고리와 코걸이와 반지와 팔찌, 곧 금의 모든 기물을 가져왔고, 누구든지 여호와께 금을 흔들어 드리는 예물로 바쳤다.
+1 וַיָּבֹאוּ = and they came
+2 הָאֲנָשִׁים = the men (human)
+3 עַל־ = with (upon)
+4 הַנָּשִׁים = the women (woman)
+5 כֹּל = every
+6 נְדִיב = [person] willing of (noble)
+7 לֵב = heart
+8 הֵבִיאוּ = they brought
+9 חָח = nose ring[s] (hook)
+10 וָנֶזֶם = and earring[s] (ring)
+11 וְטַבַּעַת = and finger ring[s] (ring)
+12 וְכוּמָז = and ornament[s] (bracelet)
+13 כָּל־ = every
+14 כְּלִי = article of (article|utensil)
+15 זָהָב = gold
+16 וְכָל־ = and every
+17 אִישׁ = person
+18 אֲשֶׁר = who (which)
+19 הֵנִיף = he waved (to wave)
+20 תְּנוּפַת = a wave-offering of (wave offering)
+21 זָהָב = gold
+22 לַיהוָה = to Yahweh (LORD)
+
+## 2:35:23
+KO: 그리고 그와 함께 청색과 자색과 홍색실과 가는 베실과 염소털과 붉게 물들인 수양 가죽들과 해달 가죽들이 있는 모든 남자가 그것들을 가져왔다.
+1 וְכָל־ = and every (all)
+2 אִישׁ = person (man)
+3 אֲשֶׁר־ = whom (which)
+4 נִמְצָא = it was found (to find)
+5 אִתּוֹ = with him (with)
+6 תְּכֵלֶת = violet stuff (blue)
+7 וְאַרְגָּמָן = and purple (purple)
+8 וְתוֹלַעַת = and scarlet stuff of (worm)
+9 שָׁנִי = scarlet
+10 וְשֵׁשׁ = and fine linen (linen)
+11 וְעִזִּים = and goat hair<s> (goat)
+12 וְעֹרֹת = and hides of
+13 אֵילִם = rams (ram)
+14 מְאָדָּמִים = dyed red (to redden)
+15 וְעֹרֹת = and hides of
+16 תְּחָשִׁים = dolphins (animal)
+17 הֵבִיאוּ = they brought [them] (to come (in))
+
+## 2:35:24
+KO: 은과 놋의 거제물을 드리는 모든 자는 여호와의 거제물을 가져왔으며, 섬기는 일의 모든 작업을 위하여 조각목이 그와 함께 발견된 모든 자는 그것을 가져왔다.
+1 כָּל־ = all
+2 מֵרִים = [those who] contributed (to exalt)
+3 תְּרוּמַת = a contribution of
+4 כֶּסֶף = silver
+5 וּנְחֹשֶׁת = and bronze (bronze)
+6 הֵבִיאוּ = they brought
+7 אֵת = <obj.> ([Obj.])
+8 תְּרוּמַת = [the] contribution of
+9 יְהוָה = Yahweh (LORD)
+10 וְכֹל = and every
+11 אֲשֶׁר = [one] whom (which)
+12 נִמְצָא = it was found (to find)
+13 אִתּוֹ = with him (with)
+14 עֲצֵי = wood<s> of (tree)
+15 שִׁטִּים = acacia
+16 לְכָל־ = for all
+17 מְלֶאכֶת = [the] work of (work)
+18 הָעֲבֹדָה = the service (service)
+19 הֵבִיאוּ = they brought [it]
+
+## 2:35:25
+KO: 그리고 마음이 지혜로운 모든 여인은 그들의 손으로 실을 자았고, 그들이 자은 청색 실과 자주색 실과 홍색 실(벌레의 붉은색)과 가는 베실을 가져왔다.
+1 וְכָל־ = and every (all)
+2 אִשָּׁה = woman
+3 חַכְמַת־ = skillful of (wise)
+4 לֵב = heart
+5 בְּיָדֶיהָ = with hands her (hand)
+6 טָווּ = they spun (to spin)
+7 וַיָּבִיאוּ = and they brought (to come (in))
+8 מַטְוֶה = that which was spun (yarn)
+9 אֶת־ = <obj.>
+10 הַתְּכֵלֶת = the violet stuff (blue)
+11 וְאֶת־ = and <obj.>
+12 הָאַרְגָּמָן = the purple (purple)
+13 אֶת־ = <obj.>
+14 תּוֹלַעַת = [the] scarlet stuff of (worm)
+15 הַשָּׁנִי = the scarlet (scarlet)
+16 וְאֶת־ = and <obj.>
+17 הַשֵּׁשׁ = the fine linen (linen)
+
+## 2:35:26
+KO: 마음이 그들을 지혜 안에서 들어 올린 모든 여인들은 염소(털)를 자아내었다.
+1 וְכָל־ = and all (all)
+2 הַנָּשִׁים = the women (woman)
+3 אֲשֶׁר = whom (which)
+4 נָשָׂא = it lifted (to lift)
+5 לִבָּן = heart their (heart)
+6 אֹתָנָה = <obj.> them
+7 בְּחָכְמָה = with skill (wisdom)
+8 טָווּ = they spun (to spin)
+9 אֶת־ = <obj.>
+10 הָעִזִּים = the goat hair<s> (goat)
+
+## 2:35:27
+KO: 그리고 족장들은 호마노 돌들과 에봇과 흉패를 위한 채움의 돌들을 가져왔다.
+1 וְהַנְּשִׂאִם = and the leaders (leader)
+2 הֵבִיאוּ = they brought (to come (in))
+3 אֵת = <obj.>
+4 אַבְנֵי = [the] stones of
+5 הַשֹּׁהַם = the onyx (onyx)
+6 וְאֵת = and <obj.>
+7 אַבְנֵי = [the] stones of
+8 הַמִּלֻּאִים = the setting<s> (setting)
+9 לָאֵפוֹד = for the ephod (ephod)
+10 וְלַחֹשֶׁן = and for the breastpiece (breastpiece)
+
+## 2:35:28
+KO: 그리고 향품과 그리고 기름을, 곧 등불을 위한 것과, 관유를 위한 기름과, 향품의 분향을 위한 것을 가져왔다.
+1 וְאֶת־ = and <obj.>
+2 הַבֹּשֶׂם = the spice (spice)
+3 וְאֶת־ = and <obj.>
+4 הַשָּׁמֶן = the oil
+5 לְמָאוֹר = for light (light)
+6 וּלְשֶׁמֶן = and for [the] oil of
+7 הַמִּשְׁחָה = <the> anointing (anointing)
+8 וְלִקְטֹרֶת = and for [the] incense of (incense)
+9 הַסַּמִּים = the perfume<s> (spice)
+
+## 2:35:29
+KO: 마음이 그들을 자원하게 한 이스라엘 자손의 모든 남자와 여자가, 여호와께서 모세의 손을 통하여 명령하신 모든 일을 만들기 위하여 자원하는 예물을 여호와께 가져왔더라.
+1 כָּל־ = every
+2 אִישׁ = man
+3 וְאִשָּׁה = and woman (woman)
+4 אֲשֶׁר = whom
+5 נָדַב = it impelled (be willing)
+6 לִבָּם = heart their (heart)
+7 אֹתָם = <obj.> them ([Obj.])
+8 לְהָבִיא = to bring [it]
+9 לְכָל־ = for all
+10 הַמְּלָאכָה = the work (work)
+11 אֲשֶׁר = which
+12 צִוָּה = he had commanded (to command)
+13 יְהוָה = Yahweh
+14 לַעֲשׂוֹת = to do (to make)
+15 בְּיַד־ = by [the] hand of (hand)
+16 מֹשֶׁה = Moses
+17 הֵבִיאוּ = they brought
+18 בְנֵי־ = [the] people of (son)
+19 יִשְׂרָאֵל = Israel
+20 נְדָבָה = a freewill offering (voluntariness)
+21 לַיהוָה פ = to Yahweh
+
+## 2:35:30
+KO: 모세가 이스라엘 자손에게 말하였다. 보라, 여호와께서 유다 지파의 훌의 손자이며 우리의 아들인 브사렐을 이름으로 부르셨다.
+1 וַיֹּאמֶר = and he said (to say)
+2 מֹשֶׁה = Moses
+3 אֶל־ = to (to(wards))
+4 בְּנֵי = [the] people of
+5 יִשְׂרָאֵל = Israel
+6 רְאוּ = see (to see)
+7 קָרָא = he has called (to call)
+8 יְהוָה = Yahweh (LORD)
+9 בְּשֵׁם = by name (name)
+10 בְּצַלְאֵל = Bezalel
+11 בֶּן־ = [the] son of
+12 אוּרִי = Uri
+13 בֶן־ = [the] son of
+14 חוּר = Hur
+15 לְמַטֵּה = of [the] tribe of (tribe)
+16 יְהוּדָה = Judah
+
+## 2:35:31
+KO: 그분께서 그를 하나님의 영으로 지혜와 총명과 지식과 모든 일에 있어서 충만하게 하셨다.
+1 וַיְמַלֵּא = and he has filled (to fill)
+2 אֹתוֹ = <obj.> him ([Obj.])
+3 רוּחַ = [the] spirit of (spirit)
+4 אֱלֹהִים = God
+5 בְּחָכְמָה = with skill (wisdom)
+6 בִּתְבוּנָה = with understanding (understanding)
+7 וּבְדַעַת = and with knowledge (knowledge)
+8 וּבְכָל־ = and with all (all)
+9 מְלָאכָה = workmanship (work)
+
+## 2:35:32
+KO: 그리고 계략들을 고안하며, 금과 은과 놋으로 (일들을) 만들기 위하여
+1 וְלַחְשֹׁב = and to design (to devise)
+2 מַחַשָׁבֹת = designs (plot)
+3 לַעֲשֹׂת = to work (to make)
+4 בַּזָּהָב = in <the> gold (gold)
+5 וּבַכֶּסֶף = and in <the> silver (silver)
+6 וּבַנְּחֹשֶׁת = and in <the> bronze (bronze)
+
+## 2:35:33
+KO: 그리고 돌을 새기는 것과, 채우는 것과, 나무를 새기는 것과, 모든 고안된 일을 만드는 것에 대하여.
+1 וּבַחֲרֹשֶׁת = and in carving of
+2 אֶבֶן = stone
+3 לְמַלֹּאת = to fill
+4 וּבַחֲרֹשֶׁת = and in carving of
+5 עֵץ = wood (tree)
+6 לַעֲשׂוֹת = to work (to make)
+7 בְּכָל־ = in all (all)
+8 מְלֶאכֶת = workmanship of (work)
+9 מַחֲשָׁבֶת = design (plot)
+
+## 2:35:34
+KO: 그리고 가르치도록 그의 마음 안에 그가 두셨다, 또한 단 지파 아히사막의 아들 오홀리압을.
+1 וּלְהוֹרֹת = and to teach (to show)
+2 נָתַן = he has put (to give)
+3 בְּלִבּוֹ = in heart his (heart)
+4 הוּא = he (he;_she;_it)
+5 וְאָהֳלִיאָב = and Oholiab (Oholiab)
+6 בֶּן־ = [the] son of (son)
+7 אֲחִיסָמָךְ = Ahisamach
+8 לְמַטֵּה־ = of [the] tribe of (tribe)
+9 דָן = Dan
+
+## 2:35:35
+KO: 그는 그들의 마음을 지혜로 충만하게 하셔서, 모든 장인의 일과, 고안하는 자의 일과, 청색 자색 홍색 실과 가는 베실로 수놓는 자의 일과, 짜는 자의 일, 곧 모든 일을 하는 자들과 고안하는 자들이 그 고안들을 행하게 하셨다.
+1 מִלֵּא = he has filled (to fill)
+2 אֹתָם = <obj.> them ([Obj.])
+3 חָכְמַת־ = wisdom of (wisdom)
+4 לֵב = heart
+5 לַעֲשׂוֹת = to do
+6 כָּל־ = all
+7 מְלֶאכֶת = [the] work of
+8 חָרָשׁ = an engraver (artificer)
+9 וְחֹשֵׁב = and a skillful worker
+10 וְרֹקֵם = and a worker in colors (to weave)
+11 בַּתְּכֵלֶת = in the violet stuff (blue)
+12 וּבָאַרְגָּמָן = and in the purple (purple)
+13 בְּתוֹלַעַת = in [the] scarlet stuff of (worm)
+14 הַשָּׁנִי = the scarlet (scarlet)
+15 וּבַשֵּׁשׁ = and in the fine linen (linen)
+16 וְאֹרֵג = and a weaver (to weave)
+17 עֹשֵׂי = doers of
+18 כָּל־ = all
+19 מְלָאכָה = workmanship
+20 וְחֹשְׁבֵי = and designers of
+21 מַחֲשָׁבֹת = designs (plot)
+
+## 2:36:1
+KO: 그리고 브살렐과 오홀리압과, 여호와께서 그들 안에 지혜와 총명을 주셔서 거룩한 사역의 모든 일을 알게 하시고 행하게 하신 마음이 지혜로운 모든 사람은, 여호와께서 명령하신 모든 것에 따라 행할 것이다.
+1 וְעָשָׂה = and he will do
+2 בְצַלְאֵל = Bezalel
+3 וְאָהֳלִיאָב = and Oholiab (Oholiab)
+4 וְכֹל = and every
+5 אִישׁ = person (man)
+6 חֲכַם־ = skillful of (wise)
+7 לֵב = heart
+8 אֲשֶׁר = whom
+9 נָתַן = he has put (to give)
+10 יְהוָה = Yahweh
+11 חָכְמָה = skill (wisdom)
+12 וּתְבוּנָה = and understanding (understanding)
+13 בָּהֵמָּה = in them (them)
+14 לָדַעַת = to know
+15 לַעֲשֹׂת = to do
+16 אֶת־ = <obj.> ([Obj.])
+17 כָּל־ = all
+18 מְלֶאכֶת = [the] work of (work)
+19 עֲבֹדַת = [the] service of (service)
+20 הַקֹּדֶשׁ = the holy place (holiness)
+21 לְכֹל = to all
+22 אֲשֶׁר־ = that
+23 צִוָּה = he has commanded (to command)
+24 יְהוָה = Yahweh
+
+## 2:36:2
+KO: 그리고 모세가 브살렐과 오홀리압과, 그리고 여호와께서 그의 마음속에 지혜를 주신 마음이 지혜로운 모든 사람, 곧 그 마음이 그 일을 하려고 다가오기를 갈망하는 모든 자를 불렀다.
+1 וַיִּקְרָא = and he called (to call)
+2 מֹשֶׁה = Moses
+3 אֶל־ = to
+4 בְּצַלְאֵל = Bezalel
+5 וְאֶל־ = and to
+6 אָהֳלִיאָב = Oholiab
+7 וְאֶל = and to
+8 כָּל־ = every
+9 אִישׁ = person (man)
+10 חֲכַם־ = skillful of (wise)
+11 לֵב = heart
+12 אֲשֶׁר = whom
+13 נָתַן = he had put (to give)
+14 יְהוָה = Yahweh (LORD)
+15 חָכְמָה = skill (wisdom)
+16 בְּלִבּוֹ = in heart his
+17 כֹּל = every
+18 אֲשֶׁר = [one] whom
+19 נְשָׂאוֹ = it lifted him (to lift)
+20 לִבּוֹ = heart his
+21 לְקָרְבָה = to draw near (to present)
+22 אֶל־ = to
+23 הַמְּלָאכָה = the work (work)
+24 לַעֲשֹׂת = to do (to make)
+25 אֹתָהּ = <obj.> it ([Obj.])
+
+## 2:36:3
+KO: 그들이 모세의 앞에서 이스라엘 자손들이 성소의 봉사 일을 하기 위해 가져온 모든 예물을 취하였더라. 그러나 그들은 아침마다 계속해서 자원하는 예물을 그에게 가져왔더라.
+1 וַיִּקְחוּ = and they received (to take)
+2 מִלִּפְנֵי = from to before (face)
+3 מֹשֶׁה = Moses
+4 אֵת = <obj.>
+5 כָּל־ = all
+6 הַתְּרוּמָה = the contribution (contribution)
+7 אֲשֶׁר = which
+8 הֵבִיאוּ = they had brought
+9 בְּנֵי = [the] people of (son)
+10 יִשְׂרָאֵל = Israel
+11 לִמְלֶאכֶת = for [the] work of (work)
+12 עֲבֹדַת = [the] service of (service)
+13 הַקֹּדֶשׁ = the holy place (holiness)
+14 לַעֲשֹׂת = to do (to make)
+15 אֹתָהּ = <obj.> it
+16 וְהֵם = and they (they(masc.))
+17 הֵבִיאוּ = they brought
+18 אֵלָיו = to him (to(wards))
+19 עוֹד = still
+20 נְדָבָה = a freewill offering (voluntariness)
+21 בַּבֹּקֶר = in the morning
+22 בַּבֹּקֶר = in the morning
+
+## 2:36:4
+KO: 그리고 성소의 모든 일을 행하는 지혜로운 자들이 각기 자기들이 행하고 있던 일을 멈추고 왔다.
+1 וַיָּבֹאוּ = and they came (to come (in))
+2 כָּל־ = all
+3 הַחֲכָמִים = the skillful [people] (wise)
+4 הָעֹשִׂים = who were doing
+5 אֵת = <obj.> ([Obj.])
+6 כָּל־ = all
+7 מְלֶאכֶת = [the] work of
+8 הַקֹּדֶשׁ = the holy place (holiness)
+9 אִישׁ־ = person
+10 אִישׁ = person
+11 מִמְּלַאכְתּוֹ = from work his
+12 אֲשֶׁר־ = which
+13 הֵמָּה = they (they(masc.))
+14 עֹשִׂים = [were] doing
+
+## 2:36:5
+KO: 그들이 모세에게 말하여 이르기를, "백성이 여호와께서 행하라고 명령하신 그 일을 하기에 (충분한) 정도보다 더 많이 가져오나이다."
+1 וַיֹּאמְרוּ = and they said
+2 אֶל־ = to (to(wards))
+3 מֹשֶׁה = Moses
+4 לֵּאמֹר = <to> saying
+5 מַרְבִּים = [are] multiplying (to multiply)
+6 הָעָם = the people (people)
+7 לְהָבִיא = to bring (to come (in))
+8 מִדֵּי = more than sufficiency of (enough)
+9 הָעֲבֹדָה = the service (service)
+10 לַמְּלָאכָה = for the work (work)
+11 אֲשֶׁר־ = which
+12 צִוָּה = he has commanded (to command)
+13 יְהוָה = Yahweh (LORD)
+14 לַעֲשֹׂת = to do (to make)
+15 אֹתָהּ = <obj.> it ([Obj.])
+
+## 2:36:6
+KO: 모세가 명령하였고, 그들이 진영에 소리를 전달하며 말하기를, "남자와 여자는 더 이상 성소의 예물을 위하여 일을 만들지 말라" 하니, 백성이 가져오는 일을 멈추었다.
+1 וַיְצַו = and he commanded (to command)
+2 מֹשֶׁה = Moses
+3 וַיַּעֲבִירוּ = and they caused to pass (to pass)
+4 קוֹל = a proclamation (voice)
+5 בַּמַּחֲנֶה = in the camp (camp)
+6 לֵאמֹר = <to> saying (to say)
+7 אִישׁ = a man (man)
+8 וְאִשָּׁה = and a woman (woman)
+9 אַל־ = may not (not)
+10 יַעֲשׂוּ־ = they make (to make)
+11 עוֹד = again (still)
+12 מְלָאכָה = work
+13 לִתְרוּמַת = for [the] contribution of (contribution)
+14 הַקֹּדֶשׁ = the holy place (holiness)
+15 וַיִּכָּלֵא = and it was restrained (to restrain)
+16 הָעָם = the people (people)
+17 מֵהָבִיא = from bringing (to come (in))
+
+## 2:36:7
+KO: 그리고 그 일은 모든 일을 행하기에 그들에게 충분하였고, 남음이 있었다.
+1 וְהַמְּלָאכָה = and the work
+2 הָיְתָה = it was (to be)
+3 דַיָּם = sufficiency their (enough)
+4 לְכָל־ = for all (all)
+5 הַמְּלָאכָה = the work
+6 לַעֲשׂוֹת = to do (to make)
+7 אֹתָהּ = <obj.> it ([Obj.])
+8 וְהוֹתֵר ס = and it was more than enough (to remain)
+
+## 2:36:8
+KO: 일을 하는 자들 가운데 마음이 지혜로운 모든 사람이 성막을 만들었는데, 열 폭의 휘장 곧 가늘게 꼰 베실과 청색 자색 홍색실로 정교한 솜씨(의 일)로 그룹들을 만들어 그것들을 만들었다.
+1 וַיַּעֲשׂוּ = and they made
+2 כָל־ = every (all)
+3 חֲכַם־ = [person] skillful of (wise)
+4 לֵב = heart
+5 בְּעֹשֵׂי = among [those who] did
+6 הַמְּלָאכָה = <of> the work (work)
+7 אֶת־ = <obj.>
+8 הַמִּשְׁכָּן = the tabernacle (tabernacle)
+9 עֶשֶׂר = ten
+10 יְרִיעֹת = curtains (curtain)
+11 שֵׁשׁ = fine linen (linen)
+12 מָשְׁזָר = twisted (to twist)
+13 וּתְכֵלֶת = and violet stuff (blue)
+14 וְאַרְגָּמָן = and purple (purple)
+15 וְתוֹלַעַת = and scarlet stuff of (worm)
+16 שָׁנִי = scarlet
+17 כְּרֻבִים = cherubim (cherub)
+18 מַעֲשֵׂה = [the] work of (deed)
+19 חֹשֵׁב = a skillful worker (to devise)
+20 עָשָׂה = he made
+21 אֹתָם = <obj.> them
+
+## 2:36:9
+KO: 한 폭의 길이는 이십팔 규빗이며, 너비는 사 규빗이다. 한 폭은 모든 폭들에 대하여 하나의 치수이다.
+1 אֹרֶךְ = [the] length of (length)
+2 הַיְרִיעָה = the curtain
+3 הָאַחַת = <the> one
+4 שְׁמֹנֶה = [was] eight (eight)
+5 וְעֶשְׂרִים = and twenty (twenty)
+6 בָּאַמָּה = by the cubit
+7 וְרֹחַב = and [the] breadth (width)
+8 אַרְבַּע = [was] four (four)
+9 בָּאַמָּה = by the cubit
+10 הַיְרִיעָה = the curtain
+11 הָאֶחָת = <the> one
+12 מִדָּה = size (measure)
+13 אַחַת = one
+14 לְכָל־ = [belonged] to all (all)
+15 הַיְרִיעֹת = the curtains
+
+## 2:36:10
+KO: 그리고 그는 다섯 휘장을 하나를 다른 하나에 연결하였고, 또한 다섯 휘장을 하나를 다른 하나에 연결하였다.
+1 וַיְחַבֵּר = and he joined
+2 אֶת־ = <obj.> ([Obj.])
+3 חֲמֵשׁ = five of
+4 הַיְרִיעֹת = the curtains
+5 אַחַת = one
+6 אֶל־ = to
+7 אֶחָת = one
+8 וְחָמֵשׁ = and five
+9 יְרִיעֹת = curtains
+10 חִבַּר = he joined
+11 אַחַת = one
+12 אֶל־ = to
+13 אֶחָת = one
+
+## 2:36:11
+KO: 그리고 그가 한 휘장의 가장자리, 연결 부분에 청색 고리를 만들었고, 마찬가지로 연결 부분의 바깥쪽 휘장 가장자리에도 만들었다.
+1 וַיַּעַשׂ = and he made
+2 לֻלְאֹת = loops of (loop)
+3 תְּכֵלֶת = violet stuff (blue)
+4 עַל = on (upon)
+5 שְׂפַת = [the] edge of
+6 הַיְרִיעָה = the curtain
+7 הָאֶחָת = <the> one (one)
+8 מִקָּצָה = from an end (end)
+9 בַּמַּחְבָּרֶת = in the joined set
+10 כֵּן = thus (so)
+11 עָשָׂה = he did
+12 בִּשְׂפַת = on [the] edge of
+13 הַיְרִיעָה = the curtain
+14 הַקִּיצוֹנָה = <the> outermost (outermost)
+15 בַּמַּחְבֶּרֶת = in the joined set
+16 הַשֵּׁנִית = <the> second (second)
+
+## 2:36:12
+KO: 그는 한 휘장에 고 오십 개를 만들고, 또 다른 휘장의 끝, 곧 두 번째 연결부에 있는 고 오십 개를 만들어서 그 고들이 서로 마주 보게 하였다.
+1 חֲמִשִּׁים = fifty
+2 לֻלָאֹת = loops
+3 עָשָׂה = he made
+4 בַּיְרִיעָה = on the curtain
+5 הָאֶחָת = <the> one
+6 וַחֲמִשִּׁים = and fifty
+7 לֻלָאֹת = loops
+8 עָשָׂה = he made
+9 בִּקְצֵה = on [the] edge of (end)
+10 הַיְרִיעָה = the curtain
+11 אֲשֶׁר = which
+12 בַּמַּחְבֶּרֶת = [was] in the joined set (joining)
+13 הַשֵּׁנִית = <the> second (second)
+14 מַקְבִּילֹת = [were] opposite (to receive)
+15 הַלֻּלָאֹת = the loops
+16 אַחַת = one
+17 אֶל־ = to (to(wards))
+18 אֶחָת = one
+
+## 2:36:13
+KO: 그리고 그는 금 갈고리 오십 개를 만들었고, 그 갈고리들로 휘장들 하나를 다른 하나에 연결하였으니, 성막이 하나가 되었다.
+1 וַיַּעַשׂ = and he made (to make)
+2 חֲמִשִּׁים = fifty
+3 קַרְסֵי = hooks of
+4 זָהָב = gold
+5 וַיְחַבֵּר = and he joined (to unite)
+6 אֶת־ = <obj.> ([Obj.])
+7 הַיְרִעֹת = the curtains (curtain)
+8 אַחַת = one
+9 אֶל־ = to (to(wards))
+10 אַחַת = one
+11 בַּקְּרָסִים = with the hooks
+12 וַיְהִי = and it was (to be)
+13 הַמִּשְׁכָּן = the tabernacle (tabernacle)
+14 אֶחָד ס = one
+
+## 2:36:14
+KO: 그리고 그는 성막 위에 있는 장막을 위해 염소털의 휘장들을 만들었으니, 열한 폭의 휘장들을 그것으로 만들었다.
+1 וַיַּעַשׂ = and he made
+2 יְרִיעֹת = curtains of
+3 עִזִּים = goat hair<s> (goat)
+4 לְאֹהֶל = into a tent (tent)
+5 עַל־ = over (upon)
+6 הַמִּשְׁכָּן = the tabernacle (tabernacle)
+7 עַשְׁתֵּי־ = one [plus] (eleven)
+8 עֶשְׂרֵה = ten
+9 יְרִיעֹת = curtains
+10 עָשָׂה = he made
+11 אֹתָם = <obj.> them ([Obj.])
+
+## 2:36:15
+KO: 한 폭의 길이는 삼십 규빗이고, 한 폭의 너비는 사 규빗이며, 열한 폭의 치수가 같았다.
+1 אֹרֶךְ = [the] length of (length)
+2 הַיְרִיעָה = the curtain
+3 הָאַחַת = <the> one
+4 שְׁלֹשִׁים = [was] thirty (thirty)
+5 בָּאַמָּה = by the cubit
+6 וְאַרְבַּע = and [was] four (four)
+7 אַמּוֹת = cubits
+8 רֹחַב = [the] breadth of (width)
+9 הַיְרִיעָה = the curtain
+10 הָאֶחָת = <the> one
+11 מִדָּה = size (measure)
+12 אַחַת = one
+13 לְעַשְׁתֵּי = [belonged] to one [plus] (eleven)
+14 עֶשְׂרֵה = ten
+15 יְרִיעֹת = curtains
+
+## 2:36:16
+KO: 그는 휘장 다섯 폭을 따로 연결하고, 여섯 폭을 따로 연결하였다.
+1 וַיְחַבֵּר = and he joined (to unite)
+2 אֶת־ = <obj.>
+3 חֲמֵשׁ = five of (five)
+4 הַיְרִיעֹת = the curtains
+5 לְבָד = <to> alone
+6 וְאֶת־ = and <obj.>
+7 שֵׁשׁ = six of (six)
+8 הַיְרִיעֹת = the curtains
+9 לְבָד = <to> alone
+
+## 2:36:17
+KO: 그리고 그는 가장자리에 있는 휘장의 끝, 곧 그 결합부의 가장자리에 고리 오십 개를 만들었고, 연결하는 다른 휘장의 가장자리에도 고리 오십 개를 만들었다.
+1 וַיַּעַשׂ = and he made
+2 לֻלָאֹת = loops
+3 חֲמִשִּׁים = fifty
+4 עַל = on
+5 שְׂפַת = [the] edge of
+6 הַיְרִיעָה = the curtain
+7 הַקִּיצֹנָה = <the> outermost (outermost)
+8 בַּמַּחְבָּרֶת = in the joined set (joining)
+9 וַחֲמִשִּׁים = and fifty
+10 לֻלָאֹת = loops
+11 עָשָׂה = he made
+12 עַל־ = on
+13 שְׂפַת = [the] edge of
+14 הַיְרִיעָה = the curtain
+15 הַחֹבֶרֶת = the joined set (set)
+16 הַשֵּׁנִית = <the> second (second)
+
+## 2:36:18
+KO: 그리고 그는 놋 갈고리 오십 개를 만들어서 그 휘장을 연합하여 하나가 되게 하였다.
+1 וַיַּעַשׂ = and he made (to make)
+2 קַרְסֵי = hooks of (clasp)
+3 נְחֹשֶׁת = bronze
+4 חֲמִשִּׁים = fifty
+5 לְחַבֵּר = to join together (to unite)
+6 אֶת־ = <obj.> ([Obj.])
+7 הָאֹהֶל = the tent (tent)
+8 לִהְיֹת = to be
+9 אֶחָד = one
+
+## 2:36:19
+KO: 그리고 그가 붉게 물들인 숫양들의 가죽으로 그 천막을 위한 덮개를 만들었고, 위쪽으로는 해달들의 가죽으로 된 덮개를 만들었다.
+1 וַיַּעַשׂ = and he made (to make)
+2 מִכְסֶה = a covering
+3 לָאֹהֶל = for the tent (tent)
+4 עֹרֹת = skins of
+5 אֵלִים = rams (ram)
+6 מְאָדָּמִים = dyed red (to redden)
+7 וּמִכְסֵה = and a covering of
+8 עֹרֹת = skins of
+9 תְּחָשִׁים = dolphins (animal)
+10 מִלְמָעְלָה ס = from to above <towards> (above)
+
+## 2:36:20
+KO: 그리고 그가 성막을 위하여 조각목으로 세워질 널판들을 만들었다.
+1 וַיַּעַשׂ = and he made (to make)
+2 אֶת־ = <obj.> ([Obj.])
+3 הַקְּרָשִׁים = the frames (board)
+4 לַמִּשְׁכָּן = for the tabernacle (tabernacle)
+5 עֲצֵי = wood<s> of (tree)
+6 שִׁטִּים = acacia
+7 עֹמְדִים = standing upright (to stand)
+
+## 2:36:21
+KO: 십 규빗은 각 판의 길이였고, 한 규빗 반은 그 판 하나의 너비였다.
+1 עֶשֶׂר = [was] ten (ten)
+2 אַמֹּות = cubits
+3 אֹרֶךְ = [the] length of (length)
+4 הַקָּרֶשׁ = the frame
+5 וְאַמָּה = and [was] a cubit
+6 וַחֲצִי = and [the] half of (half)
+7 הָאַמָּה = <the> cubit
+8 רֹחַב = [the] breadth of (width)
+9 הַקֶּרֶשׁ = the frame
+10 הָאֶחָד = <the> one (one)
+
+## 2:36:22
+KO: 그 한 판에 두 개의 손(촉)이 서로 연결되도록 되어 있었으니, 성막의 모든 판들에 대하여 그와 같이 만들었다.
+1 שְׁתֵּי = two
+2 יָדֹת = hands (hand)
+3 לַקֶּרֶשׁ = [belonged] to the frame
+4 הָאֶחָד = the one
+5 מְשֻׁלָּבֹת = joined (to fit)
+6 אַחַת = one
+7 אֶל־ = to (to(wards))
+8 אֶחָת = one
+9 כֵּן = thus (so)
+10 עָשָׂה = he did (to make)
+11 לְכֹל = for all (all)
+12 קַרְשֵׁי = [the] frames of
+13 הַמִּשְׁכָּן = the tabernacle (tabernacle)
+
+## 2:36:23
+KO: 그가 성막을 위하여 널판들을 만들었으니, 남쪽을 향한 면 곧 남쪽으로 널판들이 이십 개였다.
+1 וַיַּעַשׂ = and he made (to make)
+2 אֶת־ = <obj.> ([Obj.])
+3 הַקְּרָשִׁים = the frames
+4 לַמִּשְׁכָּן = for the tabernacle (tabernacle)
+5 עֶשְׂרִים = twenty
+6 קְרָשִׁים = frames
+7 לִפְאַת = for [the] side of (side)
+8 נֶגֶב = [the] south (south)
+9 תֵּימָנָה = south -ward (south)
+
+## 2:36:24
+KO: 그리고 사십 개의 은 받침들을 그 이십 개의 널판들 아래에 만들었으니, 곧 한 널판 아래에는 그 두 촉들을 위하여 두 받침을, 또 다른 한 널판 아래에도 그 두 촉들을 위하여 두 받침을 두었다.
+1 וְאַרְבָּעִים = and forty (forty)
+2 אַדְנֵי־ = bases of
+3 כֶסֶף = silver
+4 עָשָׂה = he made (to make)
+5 תַּחַת = under
+6 עֶשְׂרִים = twenty
+7 הַקְּרָשִׁים = the frames
+8 שְׁנֵי = two
+9 אֲדָנִים = bases
+10 תַּחַת־ = [were] under
+11 הַקֶּרֶשׁ = the frame
+12 הָאֶחָד = <the> one
+13 לִשְׁתֵּי = for [the] two
+14 יְדֹתָיו = hands its
+15 וּשְׁנֵי = and two
+16 אֲדָנִים = bases
+17 תַּחַת־ = [were] under
+18 הַקֶּרֶשׁ = the frame
+19 הָאֶחָד = <the> one
+20 לִשְׁתֵּי = for [the] two
+21 יְדֹתָיו = hands its
+
+## 2:36:25
+KO: 그리고 성막의 두 번째 편, 곧 북쪽 측면을 위하여 널판 스무 개를 만들었다.
+1 וּלְצֶלַע = and for [the] side of (side)
+2 הַמִּשְׁכָּן = the tabernacle (tabernacle)
+3 הַשֵּׁנִית = <the> second (second)
+4 לִפְאַת = to [the] side of (side)
+5 צָפוֹן = [the] north (north)
+6 עָשָׂה = he made (to make)
+7 עֶשְׂרִים = twenty
+8 קְרָשִׁים = frames (board)
+
+## 2:36:26
+KO: 그리고 은으로 된 그들의 받침 사십 개를 만들었으니, 한 판 밑에 두 받침이요, 또 다른 한 판 밑에도 두 받침이라.
+1 וְאַרְבָּעִים = and forty (forty)
+2 אַדְנֵיהֶם = bases their
+3 כָּסֶף = silver
+4 שְׁנֵי = two
+5 אֲדָנִים = bases
+6 תַּחַת = [were] under
+7 הַקֶּרֶשׁ = the frame
+8 הָאֶחָד = <the> one
+9 וּשְׁנֵי = and two
+10 אֲדָנִים = bases
+11 תַּחַת = [were] under
+12 הַקֶּרֶשׁ = the frame
+13 הָאֶחָד = <the> one
+
+## 2:36:27
+KO: 그리고 장막의 측면들을 위하여, 바다(서쪽) 편으로, 여섯 개의 널판들을 만들었다.
+1 וּלְיַרְכְּתֵי = and for [the] innermost parts of (flank)
+2 הַמִּשְׁכָּן = the tabernacle (tabernacle)
+3 יָמָּה = west -ward (sea)
+4 עָשָׂה = he made (to make)
+5 שִׁשָּׁה = six
+6 קְרָשִׁים = frames (board)
+
+## 2:36:28
+KO: 그리고 그는 성막의 뒤쪽 모퉁이들을 위하여 판자 두 개를 만들었다.
+1 וּשְׁנֵי = and two (two)
+2 קְרָשִׁים = frames (board)
+3 עָשָׂה = he made (to make)
+4 לִמְקֻצְעֹת = for [the] corners of (corner)
+5 הַמִּשְׁכָּן = the tabernacle (tabernacle)
+6 בַּיַּרְכָתָיִם = in the innermost parts (flank)
+
+## 2:36:29
+KO: 그리고 그것들은 아래로부터 쌍둥이였고, 함께 그것들은 그 머리(정상)에 있는 하나의 고리에 이르기까지 완전하였으니, 그렇게 그(제작자)는 두 모퉁이를 위하여 그 둘을 만들었다.
+1 וְהָיוּ = and they were
+2 תוֹאֲמִם = twins (twin)
+3 מִלְּמַטָּה = from to downwards (beneath)
+4 וְיַחְדָּו = and together (together)
+5 יִהְיוּ = they were
+6 תַמִּים = complete
+7 אֶל־ = to
+8 רֹאשׁוֹ = top its (head)
+9 אֶל־ = into
+10 הַטַּבַּעַת = the ring (ring)
+11 הָאֶחָת = <the> one (one)
+12 כֵּן = thus (so)
+13 עָשָׂה = he did (to make)
+14 לִשְׁנֵיהֶם = for [the] two of them
+15 לִשְׁנֵי = for [the] two
+16 הַמִּקְצֹעֹת = the corners (corner)
+
+## 2:36:30
+KO: 그리고 널판들은 여덟이었고, 그것들의 은 받침들은 열여섯이었으니, 받침 두 개씩이 널판 하나 밑에 있었다.
+1 וְהָיוּ = and they were (to be)
+2 שְׁמֹנָה = eight
+3 קְרָשִׁים = frames
+4 וְאַדְנֵיהֶם = and bases their
+5 כֶּסֶף = [were] silver (silver)
+6 שִׁשָּׁה = six- (six)
+7 עָשָׂר = teen (ten)
+8 אֲדָנִים = bases
+9 שְׁנֵי = two
+10 אֲדָנִים = bases
+11 שְׁנֵי = two
+12 אֲדָנִים = bases
+13 תַּחַת = [were] under (underneath)
+14 הַקֶּרֶשׁ = the frame
+15 הָאֶחָד = <the> one (one)
+
+## 2:36:31
+KO: 그가 만들었다, 조각목(아카시아 나무)의 띠들을, 다섯은 성막의 한쪽 면의 널판들을 위하여.
+1 וַיַּעַשׂ = and he made (to make)
+2 בְּרִיחֵי = bars of (bar)
+3 עֲצֵי = wood<s> of (tree)
+4 שִׁטִּים = acacia
+5 חֲמִשָּׁה = five [bars] (five)
+6 לְקַרְשֵׁי = for [the] frames of (board)
+7 צֶלַע־ = [the] side of (side)
+8 הַמִּשְׁכָּן = the tabernacle (tabernacle)
+9 הָאֶחָת = <the> one (one)
+
+## 2:36:32
+KO: 그리고 다섯 개의 빗장들이 성막의 두 번째 옆면의 널판들을 위하여 있고, 그리고 다섯 개의 빗장들이 성막의 뒤쪽 곧 바다 쪽 널판들을 위하여 있다.
+1 וַחֲמִשָּׁה = and five
+2 בְרִיחִם = bars
+3 לְקַרְשֵׁי = for [the] frames of
+4 צֶלַע־ = [the] side of (side)
+5 הַמִּשְׁכָּן = the tabernacle
+6 הַשֵּׁנִית = <the> second (second)
+7 וַחֲמִשָּׁה = and five
+8 בְרִיחִם = bars
+9 לְקַרְשֵׁי = for [the] frames of
+10 הַמִּשְׁכָּן = the tabernacle
+11 לַיַּרְכָתַיִם = for the innermost parts (flank)
+12 יָמָּה = west -ward (sea)
+
+## 2:36:33
+KO: 그리고 그가 중간 띠를 만들었는데, 판자들의 한가운데를 가로질러 한쪽 끝에서 다른 쪽 끝에까지 미치게 하였다.
+1 וַיַּעַשׂ = and he made (to make)
+2 אֶת־ = <obj.> ([Obj.])
+3 הַבְּרִיחַ = the bar (bar)
+4 הַתִּיכֹן = <the> middle (middle)
+5 לִבְרֹחַ = to pass through (to flee)
+6 בְּתוֹךְ = in [the] middle of (midst)
+7 הַקְּרָשִׁים = the frames (board)
+8 מִן־ = from
+9 הַקָּצֶה = the end
+10 אֶל־ = to (to(wards))
+11 הַקָּצֶה = the end

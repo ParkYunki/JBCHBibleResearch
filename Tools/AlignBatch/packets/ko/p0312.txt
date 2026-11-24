@@ -1,0 +1,533 @@
+## 19:103:1
+KO: 내 영혼아 여호와를 송축하라. 내 속에 있는 모든 것들아, 그의 거룩한 이름을 송축하라.
+1 בָּרֲכִי = bless (to bless)
+2 נַפְשִׁי = O soul my (soul)
+3 אֶת־ = <obj.>
+4 יְהוָה = Yahweh (LORD)
+5 וְכָל־ = and O all (all)
+6 קְרָבַי = inward parts my (entrails)
+7 אֶת־ = <obj.>
+8 שֵׁם = [the] name of (name)
+9 קָדְשׁוֹ = holiness his (holiness)
+
+## 19:103:2
+KO: 송축하라, 내 영혼아, 주(여호와)를, 그리고 잊지 말라 그의 모든 은혜로운 행위를.
+1 בָּרֲכִי = bless (to bless)
+2 נַפְשִׁי = O soul my (soul)
+3 אֶת־ = <obj.> ([Obj.])
+4 יְהוָה = Yahweh (LORD)
+5 וְאַל־ = and may not (not)
+6 תִּשְׁכְּחִי = you forget (to forget)
+7 כָּל־ = all
+8 גְּמוּלָיו = benefits his (recompense)
+
+## 19:103:3
+KO: 그분은 네 모든 죄악을 용서하시는 분이시며, 네 모든 질병을 고치시는 분이시다.
+1 הַסֹּלֵחַ = who forgives (to forgive)
+2 לְכָל־ = <to> all
+3 עֲוֹנֵכִי = iniquity your (iniquity)
+4 הָרֹפֵא = who heals (to heal)
+5 לְכָל־ = <to> all
+6 תַּחֲלֻאָיְכִי = diseases your (disease)
+
+## 19:103:4
+KO: 네 생명을 파멸로부터 속량하시며, 인자와 긍휼로 너에게 관을 씌우시는도다.
+1 הַגּוֹאֵל = who redeems (to redeem)
+2 מִשַּׁחַת = from a pit (pit)
+3 חַיָּיְכִי = life your (life)
+4 הַמְעַטְּרֵכִי = who crowns you (to crown)
+5 חֶסֶד = covenant loyalty (kindness)
+6 וְרַחֲמִים = and compassion<s> (compassion)
+
+## 19:103:5
+KO: 좋은 것으로 너의 입을 만족하게 하시니, 너의 청춘이 독수리 같이 새로워지는구나.
+1 הַמַּשְׂבִּיַע = who satisfies (to satisfy)
+2 בַּטּוֹב = with <the> good (good)
+3 עֶדְיֵךְ = ornament[s] your (ornament)
+4 תִּתְחַדֵּשׁ = it renews itself (to renew)
+5 כַּנֶּשֶׁר = like <the> eagle (eagle)
+6 נְעוּרָיְכִי = youth<s> your (youth)
+
+## 19:103:6
+KO: 여호와는 의로운 일들과 정의를 행하시니, 모든 압제받는 자들을 위함이라.
+1 עֹשֵׂה = [is] doing (to make)
+2 צְדָקוֹת = <of> righteousness<es> (righteousness)
+3 יְהוָה = Yahweh (LORD)
+4 וּמִשְׁפָּטִים = and judgments (justice)
+5 לְכָל־ = for all (all)
+6 עֲשׁוּקִים = [those who] are oppressed (to oppress)
+
+## 19:103:7
+KO: 그분은 그의 길들을 모세에게, 그의 행위들을 이스라엘 자손들에게 알게 하셨도다.
+1 יוֹדִיעַ = he made known (to know)
+2 דְּרָכָיו = ways his (way)
+3 לְמֹשֶׁה = to Moses (Moses)
+4 לִבְנֵי = to [the] people of (son)
+5 יִשְׂרָאֵל = Israel
+6 עֲלִילוֹתָיו = deeds his (wantonness)
+
+## 19:103:8
+KO: 자비로우시며 그리고 은혜로우신 여호와는 노하기를 더디 하시며 그리고 인자하심이 많으시도다.
+1 רַחוּם = [is] compassionate (compassionate)
+2 וְחַנּוּן = and gracious (gracious)
+3 יְהוָה = Yahweh (LORD)
+4 אֶרֶךְ = long of (slow)
+5 אַפַּיִם = anger<s> (face)
+6 וְרַב־ = and great of (many)
+7 חָסֶד = covenant loyalty (kindness)
+
+## 19:103:9
+KO: 그분은 영원히 다투지 않으시며, 영원토록 화를 품지 않으시리로다.
+1 לֹא־ = not
+2 לָנֶצַח = to perpetuity (perpetuity)
+3 יָרִיב = he will conduct a case (to contend)
+4 וְלֹא = and not
+5 לְעוֹלָם = for ever (forever)
+6 יִטּוֹר = he will keep (to keep)
+
+## 19:103:10
+KO: 그분은 우리의 죄들에 따라 우리에게 행하지 않으셨고, 우리의 죄악들에 따라 우리에게 보응하지 않으셨다.
+1 לֹא = not
+2 כַחֲטָאֵינוּ = according to sins our (sin)
+3 עָשָׂה = he has done (to make)
+4 לָנוּ = to us (us)
+5 וְלֹא = and not
+6 כַעֲוֹנֹתֵינוּ = according to iniquities our (iniquity)
+7 גָּמַל = he has repaid (to wean)
+8 עָלֵינוּ = to us (upon)
+
+## 19:103:11
+KO: 이는 하늘이 땅 위로 높음같이, 그(하나님)를 경외하는 자들 위에 그의 인자하심이 강함이라.
+1 כִּי = for
+2 כִגְבֹהַּ = as is high (to exult)
+3 שָׁמַיִם = heaven
+4 עַל־ = above
+5 הָאָרֶץ = the earth (land)
+6 גָּבַר = it is strong (to prevail)
+7 חַסְדּוֹ = covenant loyalty his (kindness)
+8 עַל־ = towards
+9 יְרֵאָיו = [those] fearing him (afraid)
+
+## 19:103:12
+KO: 동쪽이 서쪽으로부터 먼 것 같이, 그분께서 우리의 범죄들을 우리로부터 멀리 옮기셨다.
+1 כִּרְחֹק = as is far away
+2 מִזְרָח = east
+3 מִמַּעֲרָב = from west (west)
+4 הִרְחִיק = he has removed far away
+5 מִמֶּנּוּ = from us (from)
+6 אֶת־ = <obj.> ([Obj.])
+7 פְּשָׁעֵינוּ = transgressions our (transgression)
+
+## 19:103:13
+KO: 아버지(가) 자식들을 불쌍히 여기는 것같이, 여호와께서 자신을 경외하는 자들을 불쌍히 여기신다.
+1 כְּרַחֵם = as has compassion
+2 אָב = a father (father)
+3 עַל־ = on
+4 בָּנִים = children (son)
+5 רִחַם = he has compassion
+6 יְהוָה = Yahweh (LORD)
+7 עַל־ = on
+8 יְרֵאָיו = [those] fearing him (afraid)
+
+## 19:103:14
+KO: 이는 그가 우리의 지으심을 아시며, 우리가 먼지임을 기억하시기 때문이라.
+1 כִּי־ = for
+2 הוּא = he (he;_she;_it)
+3 יָדַע = he knows (to know)
+4 יִצְרֵנוּ = form our (purpose)
+5 זָכוּר = [he is] remembering (to remember)
+6 כִּי־ = that
+7 עָפָר = [are] dust (dust)
+8 אֲנָחְנוּ = we
+
+## 19:103:15
+KO: 사람은, 그의 날들이 풀과 같고, 들의 꽃처럼, 그렇게 그는 꽃을 피운다.
+1 אֱנוֹשׁ = humankind (human)
+2 כֶּחָצִיר = [are] like <the> grass (grass)
+3 יָמָיו = days his (day;_when)
+4 כְּצִיץ = like [the] flower of (flower)
+5 הַשָּׂדֶה = the field (land)
+6 כֵּן = so
+7 יָצִיץ = he flourishes (to blossom)
+
+## 19:103:16
+KO: 왜냐하면 바람이 그것을 지나가면 그것은 없고, 그것의 자리도 다시는 그것을 알지 못하기 때문이라.
+1 כִּי = if (for)
+2 רוּחַ = a wind (spirit)
+3 עָבְרָה־ = it passes by (to pass)
+4 בּוֹ = on it (him)
+5 וְאֵינֶנּוּ = and there not [is] it (nothing)
+6 וְלֹא־ = and not (not)
+7 יַכִּירֶנּוּ = it will recognize it (to recognize)
+8 עוֹד = again (still)
+9 מְקוֹמוֹ = place its (standing place)
+
+## 19:103:17
+KO: 그러나 여호와의 인자하심은 영원으로부터 그리고 영원까지 그분을 경외하는 자들 위에 있으며, 그의 의로움은 자손의 자손들에게까지 미친다.
+1 וְחֶסֶד = and [the] covenant loyalty of (kindness)
+2 יְהוָה = Yahweh (LORD)
+3 מֵעוֹלָם = from antiquity
+4 וְעַד־ = and until (till)
+5 עוֹלָם = perpetuity
+6 עַל־ = [is] towards (upon)
+7 יְרֵאָיו = [those] fearing him (afraid)
+8 וְצִדְקָתוֹ = and righteousness his (righteousness)
+9 לִבְנֵי = [is] to [the] children of
+10 בָנִים = children
+
+## 19:103:18
+KO: 그의 언약을 지키는 자들과 그의 법도들을 기억하여 그것들을 행하는 자들에게로다.
+1 לְשֹׁמְרֵי = to [those who] keep (to keep)
+2 בְרִיתוֹ = <of> covenant his (covenant)
+3 וּלְזֹכְרֵי = and to [those who] remember (to remember)
+4 פִקֻּדָיו = <of> precepts his (precept)
+5 לַעֲשׂוֹתָם = to do them (to make)
+
+## 19:103:19
+KO: 여호와께서 하늘들에 그분의 보좌를 세우셨고, 그분의 왕권이 모든 것 위에 다스리도다.
+1 יְהוָה = Yahweh (LORD)
+2 בַּשָּׁמַיִם = in the heavens (heaven)
+3 הֵכִין = he has established (to establish)
+4 כִּסְאוֹ = throne his (throne)
+5 וּמַלְכוּתוֹ = and kingdom his (royalty)
+6 בַּכֹּל = over <the> all (all)
+7 מָשָׁלָה = it rules (to rule)
+
+## 19:103:20
+KO: 여호와의 천사들아, 너희는 송축하라, 힘에 있어서 용맹한 자들아, 그의 말씀을 행하는 자들아, 그의 말씀의 소리를 듣기 위하여(너희는 송축하라).
+1 בָּרֲכוּ = bless (to bless)
+2 יְהוָה = Yahweh (LORD)
+3 מַלְאָכָיו = O angels his (messenger)
+4 גִּבֹּרֵי = O mighty [ones] of (mighty)
+5 כֹחַ = strength
+6 עֹשֵׂי = [who] do (to make)
+7 דְבָרוֹ = <of> word his
+8 לִשְׁמֹעַ = by obeying (to hear)
+9 בְּקוֹל = <in> [the] sound of (voice)
+10 דְּבָרוֹ = word his
+
+## 19:103:21
+KO: 여호와를 송축하라, 너희 그의 모든 군대여, 그의 뜻을 행하는 그의 봉사자들아.
+1 בָּרֲכוּ = bless (to bless)
+2 יְהוָה = Yahweh (LORD)
+3 כָּל־ = O all (all)
+4 צְבָאָיו = hosts his (army)
+5 מְשָׁרְתָיו = servants his (to minister)
+6 עֹשֵׂי = [who] do (to make)
+7 רְצוֹנוֹ = <of> will his (acceptance)
+
+## 19:103:22
+KO: 여호와를 송축하라, 그분의 모든 행한 일들아, 그분의 통치가 있는 모든 곳들에 있는(자들아). 내 영혼아, 여호와를 송축하라.
+1 בָּרֲכוּ = bless
+2 יְהוָה = Yahweh
+3 כָּל־ = O all
+4 מַעֲשָׂיו = works his (deed)
+5 בְּכָל־ = in all
+6 מְקֹמוֹת = [the] places of (standing place)
+7 מֶמְשַׁלְתּוֹ = dominion his (dominion)
+8 בָּרֲכִי = bless
+9 נַפְשִׁי = O self my (soul)
+10 אֶת־ = <obj.> ([Obj.])
+11 יְהוָה = Yahweh
+
+## 19:104:1
+KO: 내 영혼아 여호와를 송축하라. 여호와 나의 하나님이여, 주는 심히 위대하시며, 존귀와 위엄을 입으셨나이다.
+1 בָּרֲכִי = bless (to bless)
+2 נַפְשִׁי = O self my (soul)
+3 אֶת־ = <obj.> ([Obj.])
+4 יְהוָה = Yahweh
+5 יְהוָה = O Yahweh
+6 אֱלֹהַי = God my (God)
+7 גָּדַלְתָּ = you are great (to magnify)
+8 מְּאֹד = exceedingly (much)
+9 הוֹד = splendor
+10 וְהָדָר = and majesty (glory)
+11 לָבָשְׁתָּ = you are clothed (to clothe)
+
+## 19:104:2
+KO: 빛을 옷처럼 입으시며, 하늘들을 휘장처럼 펼치시는도다.
+1 עֹטֶה־ = [you are] wrapping yourself (to enwrap)
+2 אוֹר = light
+3 כַּשַּׂלְמָה = like <the> garment (garment)
+4 נוֹטֶה = [you are] stretching out (to stretch)
+5 שָׁמַיִם = [the] heavens (heaven)
+6 כַּיְרִיעָה = like <the> tent curtain (curtain)
+
+## 19:104:3
+KO: 물들에 그의 다락방들의 들보를 놓으시고, 구름들을 그의 병거로 삼으시고, 바람의 날개들 위로 다니시는도다.
+1 הַמְקָרֶה = the [one who] makes beams for (to lay beams)
+2 בַמַּיִם = on the waters (water)
+3 עֲלִיּוֹתָיו = upper rooms his (upper room)
+4 הַשָּׂם־ = the [one who] makes (to set)
+5 עָבִים = clouds (cloud)
+6 רְכוּבוֹ = chariot his (chariot)
+7 הַמְהַלֵּךְ = the [one who] walks (to go)
+8 עַל־ = on (upon)
+9 כַּנְפֵי־ = [the] wings of (wing)
+10 רוּחַ = [the] wind (spirit)
+
+## 19:104:4
+KO: 바람들을 그의 사자들로, 화염을 그의 사역자들로 삼으시며
+1 עֹשֶׂה = [he is] making (to make)
+2 מַלְאָכָיו = messengers his (messenger)
+3 רוּחוֹת = winds (spirit)
+4 מְשָׁרְתָיו = servants his (to minister)
+5 אֵשׁ = a fire (fire)
+6 לֹהֵט = flaming (to kindle)
+
+## 19:104:5
+KO: 그분께서 땅을 그 기초들 위에 세우셨으니, 영원히 그리고 세세토록 요동치 아니할 것이다.
+1 יָסַד־ = he established (to found)
+2 אֶרֶץ = [the] earth (land)
+3 עַל־ = on (upon)
+4 מְכוֹנֶיהָ = foundations its (foundation)
+5 בַּל־ = not
+6 תִּמּוֹט = it will be shaken (to shake)
+7 עוֹלָם = forever
+8 וָעֶד = and ever (perpetuity)
+
+## 19:104:6
+KO: 깊음(바다)이 옷과 같이 그것을 덮으셨고, 산들 위에 물들이 섰더라.
+1 תְּהוֹם = [the] deep (abyss)
+2 כַּלְּבוּשׁ = like <the> clothing (clothing)
+3 כִּסִּיתוֹ = you covered it (to cover)
+4 עַל־ = above (upon)
+5 הָרִים = [the] mountains (mountain)
+6 יַעַמְדוּ־ = they stood (to stand)
+7 מָיִם = [the] waters (water)
+
+## 19:104:7
+KO: 주의 꾸짖으심으로부터 그들이 도망하였고, 주의 우레 소리로부터 그들이 급히 달아났나이다.
+1 מִן־ = from
+2 גַּעֲרָתְךָ = rebuke your (rebuke)
+3 יְנוּסוּן = they fled ! (to flee)
+4 מִן־ = from
+5 קוֹל = [the] sound of (voice)
+6 רַעַמְךָ = thunder your (thunder)
+7 יֵחָפֵזוּן = they hurried away ! (to hurry)
+
+## 19:104:8
+KO: 산들은 올라가고 골짜기들은 내려갔나이다, 주께서 그것들을 위하여 기초를 놓으신 그곳으로.
+1 יַעֲלוּ = they went up (to ascend)
+2 הָרִים = mountains (mountain)
+3 יֵרְדוּ = they went down (to go down)
+4 בְקָעוֹת = valleys (valley)
+5 אֶל־ = to (to(wards))
+6 מְקוֹם = [the] place (standing place)
+7 זֶה = <of> which (this)
+8 יָסַדְתָּ = you had established (to found)
+9 לָהֶם = for them (them)
+
+## 19:104:9
+KO: 당신이 경계를 정하셨으니, 그것들이 넘지 못하며, 그것들이 돌아와 땅을 덮지 못할 것입니다.
+1 גְּבוּל־ = a boundary (border)
+2 שַׂמְתָּ = you set (to set)
+3 בַּל־ = [which] not
+4 יַעֲבֹרוּן = they will pass ! (to pass)
+5 בַּל־ = not
+6 יְשׁוּבוּן = they will return ! (to return)
+7 לְכַסּוֹת = to cover
+8 הָאָרֶץ = the earth (land)
+
+## 19:104:10
+KO: 그분은 샘들을 골짜기들 안으로 보내시니, 그것들이 산들 사이로 흐른다.
+1 הַמְשַׁלֵּחַ = the [one who] sends forth (to send)
+2 מַעְיָנִים = springs (spring)
+3 בַּנְּחָלִים = in the wadis (torrent)
+4 בֵּין = between
+5 הָרִים = [the] mountains (mountain)
+6 יְהַלֵּכוּן = they go ! (to go)
+
+## 19:104:11
+KO: 그들이 들의 모든 짐승에게 물을 마시게 하시니, 들나귀들이 그들의 갈증을 꺾는도다.
+1 יַשְׁקוּ = they give drink to (to water)
+2 כָּל־ = every (all)
+3 חַיְתוֹ = animal of (living thing)
+4 שָׂדָי = [the] field (field)
+5 יִשְׁבְּרוּ = they break (to break)
+6 פְרָאִים = wild donkeys (wild donkey)
+7 צְמָאָם = thirst their (thirst)
+
+## 19:104:12
+KO: 그들(나무들) 위로 하늘의 새들이 거하며, 가지들 사이로부터 소리를 내는도다.
+1 עֲלֵיהֶם = at them (upon)
+2 עוֹף־ = [the] bird[s] of (bird)
+3 הַשָּׁמַיִם = the heavens (heaven)
+4 יִשְׁכּוֹן = it dwells (to dwell)
+5 מִבֵּין = from between (between)
+6 עֳפָאיִם = foliage (branch)
+7 יִתְּנוּ־ = they give forth (to give)
+8 קוֹל = voice
+
+## 19:104:13
+KO: 그분은 그의 다락방들로부터 산들에게 물을 대시니, 네 행위들의 열매로 땅이 만족하도다.
+1 מַשְׁקֶה = [he is] watering (to water)
+2 הָרִים = mountains (mountain)
+3 מֵעֲלִיּוֹתָיו = from upper rooms his (upper room)
+4 מִפְּרִי = from [the] fruit of (fruit)
+5 מַעֲשֶׂיךָ = works your (deed)
+6 תִּשְׂבַּע = it is satisfied (to satisfy)
+7 הָאָרֶץ = the earth (land)
+
+## 19:104:14
+KO: 그가 가축을 위하여 풀을 자라게 하시며, 사람의 봉사를 위하여 채소를 자라게 하시어, 땅으로부터 음식을 나오게 하시는도다.
+1 מַצְמִיחַ = [he is] causing to grow (to spring)
+2 חָצִיר = grass
+3 לַבְּהֵמָה = for the cattle (animal)
+4 וְעֵשֶׂב = and vegetation (vegetation)
+5 לַעֲבֹדַת = for [the] labor of (service)
+6 הָאָדָם = <the> humankind (man)
+7 לְהוֹצִיא = to bring forth (to come out)
+8 לֶחֶם = food
+9 מִן־ = from
+10 הָאָרֶץ = the earth (land)
+
+## 19:104:15
+KO: 그리고 사람의 마음을 기쁘게 하는 포도주, 그리고 사람의 얼굴을 기름보다 더 빛나게 하는 것, 그리고 사람의 마음을 지탱하는 빵을 주셨도다.
+1 וְיַיִן = and wine (wine)
+2 יְשַׂמַּח = [which] it makes glad (to rejoice)
+3 לְבַב־ = [the] heart of
+4 אֱנוֹשׁ = humankind
+5 לְהַצְהִיל = to make shine (to shine)
+6 פָּנִים = faces (face)
+7 מִשָּׁמֶן = from oil (oil)
+8 וְלֶחֶם = and food (food)
+9 לְבַב־ = [which the] heart of
+10 אֱנוֹשׁ = humankind
+11 יִסְעָד = it sustains (to support)
+
+## 19:104:16
+KO: 여호와의 나무들이 만족하게 되니, 곧 그가 심으신 레바논의 백향목들이라.
+1 יִשְׂבְּעוּ = they are satisfied (to satisfy)
+2 עֲצֵי = [the] trees of (tree)
+3 יְהוָה = Yahweh (LORD)
+4 אַרְזֵי = [the] cedars of (cedar)
+5 לְבָנוֹן = Lebanon
+6 אֲשֶׁר = which
+7 נָטָע = he planted (to plant)
+
+## 19:104:17
+KO: 거기에 새들이 둥지를 트니, 학은 잣나무들이 그 집이라.
+1 אֲשֶׁר־ = where (which)
+2 שָׁם = there
+3 צִפֳּרִים = birds (bird)
+4 יְקַנֵּנוּ = they make nests (to make a nest)
+5 חֲסִידָה = [the] stork (stork)
+6 בְּרוֹשִׁים = [is] fir trees (cypress)
+7 בֵּיתָהּ = home its (house)
+
+## 19:104:18
+KO: 높은 산들은 산양들을 위함이요, 바위들은 너구리들의 피난처로다.
+1 הָרִים = [the] mountains (mountain)
+2 הַגְּבֹהִים = <the> high (high)
+3 לַיְּעֵלִים = [belong] to the mountain goats (goat)
+4 סְלָעִים = crags (crag)
+5 מַחְסֶה = [are] a refuge (refuge)
+6 לַשְׁפַנִּים = for the rock badgers (rock badger)
+
+## 19:104:19
+KO: 그가 절기들을 위하여 달을 만드셨으며, 해는 그 지는 곳을 알도다.
+1 עָשָׂה = he made (to make)
+2 יָרֵחַ = [the] moon (moon)
+3 לְמוֹעֲדִים = for appointed times (meeting)
+4 שֶׁמֶשׁ = [the] sun (sun)
+5 יָדַע = it knows (to know)
+6 מְבוֹאוֹ = setting its (entrance)
+
+## 19:104:20
+KO: 당신이 흑암을 두시니 밤이 되나이다. 그(밤) 안에 숲의 모든 생물이 기어다니나이다.
+1 תָּשֶׁת־ = you make (to set)
+2 חֹשֶׁךְ = darkness
+3 וִיהִי = and it may be (to be)
+4 לָיְלָה = night
+5 בּוֹ־ = in it (him)
+6 תִרְמֹשׂ = it moves about (to creep)
+7 כָּל־ = every (all)
+8 חַיְתוֹ־ = animal of (living thing)
+9 יָעַר = [the] forest (wood)
+
+## 19:104:21
+KO: 젊은 사자들은 그 먹이를 쫓아 부르짖으며, 하나님으로부터 그들의 식물을 구한다.
+1 הַכְּפִירִים = the young lions (lion)
+2 שֹׁאֲגִים = [are] roaring (to roar)
+3 לַטָּרֶף = for the prey (prey)
+4 וּלְבַקֵּשׁ = and to seek (to seek)
+5 מֵאֵל = from God (God)
+6 אָכְלָם = food their (food)
+
+## 19:104:22
+KO: 해가 떠오르면 그것들은 모이고, 그들의 거처들로 (가서) 엎드린다.
+1 תִּזְרַח = it rises (to rise)
+2 הַשֶּׁמֶשׁ = the sun (sun)
+3 יֵאָסֵפוּן = they gather ! (to gather)
+4 וְאֶל־ = and into (to(wards))
+5 מְעוֹנֹתָם = dens their (habitation)
+6 יִרְבָּצוּן = they lie down ! (to stretch)
+
+## 19:104:23
+KO: 사람이 그의 일과 그의 노동을 위하여 저녁까지 나아가는도다.
+1 יֵצֵא = he goes out (to come out)
+2 אָדָם = a person (man)
+3 לְפָעֳלוֹ = to work his (work)
+4 וְלַעֲבֹדָתוֹ = and to labor his (service)
+5 עֲדֵי־ = until (till)
+6 עָרֶב = evening
+
+## 19:104:24
+KO: 여호와여, 주의 행하신 일들이 어찌 그리 많은지요! 주께서 그 모든 것을 지혜로 만드셨으니, 땅이 주의 소유로 가득하나이다.
+1 מָה־ = how! (what?)
+2 רַבּוּ = they are many (to multiply)
+3 מַעֲשֶׂיךָ = works your (deed)
+4 יְהוָה = O Yahweh (LORD)
+5 כֻּלָּם = all of them (all)
+6 בְּחָכְמָה = with wisdom (wisdom)
+7 עָשִׂיתָ = you have made (to make)
+8 מָלְאָה = it is full (to fill)
+9 הָאָרֶץ = the earth (land)
+10 קִנְיָנֶךָ = creature[s] your (acquisition)
+
+## 19:104:25
+KO: 이 크고 두 손(양팔)으로 넓은 바다, 그곳에 수가 없는 기는 것들, 작은 것들과 함께 큰 생물들이 있나이다.
+1 זֶה = this
+2 הַיָּם = the sea (sea)
+3 גָּדוֹל = [is] great
+4 וּרְחַב = and wide of (broad)
+5 יָדָיִם = both hands (hand)
+6 שָׁם־ = [are] there (there)
+7 רֶמֶשׂ = moving thing[s] (creeping)
+8 וְאֵין = and there not (nothing)
+9 מִסְפָּר = [is] a number (number)
+10 חַיּוֹת = living creatures (living thing)
+11 קְטַנּוֹת = small
+12 עִם־ = with
+13 גְּדֹלוֹת = large
+
+## 19:104:26
+KO: 거기에 배들이 다니고, 당신이 지으신 리워야단이 거기서 놀게 하셨나이다.
+1 שָׁם = there
+2 אֳנִיּוֹת = ships (fleet)
+3 יְהַלֵּכוּן = they go about ! (to go)
+4 לִוְיָתָן = Leviathan
+5 זֶה־ = which (this)
+6 יָצַרְתָּ = you formed (to form)
+7 לְשַׂחֶק־ = to play (to laugh)
+8 בּוֹ = in it (him)
+
+## 19:104:27
+KO: 그들 모두는 당신을 바라나이다, 그들의 식물을 그(하나님)의 때에 주시기를.
+1 כֻּלָּם = all of them (all)
+2 אֵלֶיךָ = to you (to(wards))
+3 יְשַׂבֵּרוּן = they wait ! (to await)
+4 לָתֵת = to give
+5 אָכְלָם = food their (food)
+6 בְּעִתּוֹ = at appropriate time its (time)
+
+## 19:104:28
+KO: 당신이 그들에게 주시면 그들이 거두고, 당신의 손을 펴시면 그들이 좋은 것으로 만족합니다.
+1 תִּתֵּן = you give (to give)
+2 לָהֶם = to them (them)
+3 יִלְקֹטוּן = they gather ! (to gather)
+4 תִּפְתַּח = you open (to open)
+5 יָדְךָ = hand your (hand)
+6 יִשְׂבְּעוּן = they are satisfied ! (to satisfy)
+7 טוֹב = good thing[s] (good)

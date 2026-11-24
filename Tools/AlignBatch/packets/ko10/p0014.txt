@@ -1,0 +1,155 @@
+## 1:5:25
+KO: 그리고 므두셀라는 칠십팔 년과 백 년을 살았고, 라멕을 낳았다.
+1 וַיְחִי = and he lived (to live)
+2 מְתוּשֶׁלַח = Methuselah
+3 שֶׁבַע = seven
+4 וּשְׁמֹנִים = and eighty (eighty)
+5 שָׁנָה = year[s]
+6 וּמְאַת = and one hundred (hundred)
+7 שָׁנָה = year[s]
+8 וַיּוֹלֶד = and he fathered (to beget)
+9 אֶת־ = <obj.> ([Obj.])
+10 לָמֶךְ = Lamech
+
+## 1:5:26
+KO: 그리고 므두셀라는 라멕을 낳은 후 칠백팔십 이 년을 살았고, 아들들과 딸들을 낳았다.
+1 וַיְחִי = and he lived (to live)
+2 מְתוּשֶׁלַח = Methuselah
+3 אַחֲרֵי = after
+4 הוֹלִידוֹ = fathered he
+5 אֶת־ = <obj.> ([Obj.])
+6 לֶמֶךְ = Lamech
+7 שְׁתַּיִם = two
+8 וּשְׁמוֹנִים = and eighty (eighty)
+9 שָׁנָה = year[s]
+10 וּשְׁבַע = and seven (seven)
+11 מֵאוֹת = hundred<s> (hundred)
+12 שָׁנָה = year[s]
+13 וַיּוֹלֶד = and he fathered
+14 בָּנִים = sons (son)
+15 וּבָנוֹת = and daughters (daughter)
+
+## 1:5:27
+KO: 므두셀라의 모든 날들은 구백육십구 년이었고, 그가 죽었더라.
+1 וַיִּהְיוּ = and they were (to be)
+2 כָּל־ = all
+3 יְמֵי = [the] days of (day;_when)
+4 מְתוּשֶׁלַח = Methuselah
+5 תֵּשַׁע = nine
+6 וְשִׁשִּׁים = and sixty (sixty)
+7 שָׁנָה = year[s]
+8 וּתְשַׁע = and nine
+9 מֵאוֹת = hundred<s> (hundred)
+10 שָׁנָה = year[s]
+11 וַיָּמֹת פ = and he died (to die)
+
+## 1:5:28
+KO: 그리고 라멕은 살았다, 이십과 팔십과 일백 년을, 그리고 그가 아들을 낳았다.
+1 וַיְחִי־ = and he lived (to live)
+2 לֶמֶךְ = Lamech
+3 שְׁתַּיִם = two
+4 וּשְׁמֹנִים = and eighty (eighty)
+5 שָׁנָה = year[s]
+6 וּמְאַת = and one hundred (hundred)
+7 שָׁנָה = year[s]
+8 וַיּוֹלֶד = and he fathered (to beget)
+9 בֵּן = a son (son)
+
+## 1:5:29
+KO: 그리고 그가 그의 이름을 노아라 불렀다. 말하기를, "이 사람이 우리의 일과 우리 손의 수고로부터 우리를 위로할 것이다. 여호와께서 저주하신 그 땅으로부터"라고 하였다.
+1 וַיִּקְרָא = and he called (to call)
+2 אֶת־ = <obj.> ([Obj.])
+3 שְׁמוֹ = name his (name)
+4 נֹחַ = Noah
+5 לֵאמֹר = <to> saying (to say)
+6 זֶה = this [one] (this)
+7 יְנַחֲמֵנוּ = he will comfort us (to be sorry)
+8 מִמַּעֲשֵׂנוּ = from work our (deed)
+9 וּמֵעִצְּבוֹן = and from [the] pain of (toil)
+10 יָדֵינוּ = hands our (hand)
+11 מִן־ = from
+12 הָאֲדָמָה = the ground (land)
+13 אֲשֶׁר = which
+14 אֵרְרָהּ = he has cursed it (to curse)
+15 יְהוָה = Yahweh (LORD)
+
+## 1:5:30
+KO: 그리고 라멕은 노아를 낳은 후에 오백구십오 년을 살았으며, 아들들과 딸들을 낳았다.
+1 וַיְחִי־ = and he lived (to live)
+2 לֶמֶךְ = Lamech
+3 אַחֲרֵי = after
+4 הוֹלִידוֹ = fathered he
+5 אֶת־ = <obj.> ([Obj.])
+6 נֹחַ = Noah
+7 חָמֵשׁ = five
+8 וְתִשְׁעִים = and ninety (ninety)
+9 שָׁנָה = year[s]
+10 וַחֲמֵשׁ = and five
+11 מֵאֹת = hundred<s> (hundred)
+12 שָׁנָה = year[s]
+13 וַיּוֹלֶד = and he fathered
+14 בָּנִים = sons (son)
+15 וּבָנוֹת = and daughters (daughter)
+
+## 1:5:31
+KO: 라멕의 모든 날들은 칠백칠십칠 년이었고, 그가 죽었다.
+1 וַיְהִי = and it was (to be)
+2 כָּל־ = all
+3 יְמֵי־ = [the] days of (day;_when)
+4 לֶמֶךְ = Lamech
+5 שֶׁבַע = seven
+6 וְשִׁבְעִים = and seventy (seventy)
+7 שָׁנָה = year[s]
+8 וּשְׁבַע = and seven
+9 מֵאוֹת = hundred<s> (hundred)
+10 שָׁנָה = year[s]
+11 וַיָּמֹת ס = and he died (to die)
+
+## 1:5:32
+KO: 그리고 노아는 오백 년의 아들이 되었고, 노아는 셈과 함과 야벳을 낳았다.
+1 וַיְהִי־ = and he was (to be)
+2 נֹחַ = Noah
+3 בֶּן־ = a son of (son)
+4 חֲמֵשׁ = five
+5 מֵאוֹת = hundred<s> (hundred)
+6 שָׁנָה = year[s] (year)
+7 וַיּוֹלֶד = and he fathered (to beget)
+8 נֹחַ = Noah
+9 אֶת־ = <obj.>
+10 שֵׁם = Shem
+11 אֶת־ = <obj.>
+12 חָם = Ham
+13 וְאֶת־ = and <obj.>
+14 יָפֶת = Japheth
+
+## 1:6:1
+KO: 그리고 사람이 땅의 표면 위로 번성하기 시작했을 때, 그들에게 딸들이 태어났다.
+1 וַיְהִי = and it was (to be)
+2 כִּי־ = that (for)
+3 הֵחֵל = <it> began (to profane;_begin)
+4 הָאָדָם = <the> humankind (man)
+5 לָרֹב = to become numerous (to multiply)
+6 עַל־ = on (upon)
+7 פְּנֵי = [the] surface of (face)
+8 הָאֲדָמָה = the ground (land)
+9 וּבָנוֹת = and daughters (daughter)
+10 יֻלְּדוּ = they were born (to beget)
+11 לָהֶם = to <the> them (them)
+
+## 1:6:2
+KO: 그리고 하나님의 아들들이 사람의 딸들을 보니 그들이 아름다웠더라. 그래서 그들이 자기들을 위하여 그들이 택한 모든 자들을 아내로 삼았더라.
+1 וַיִּרְאוּ = and they saw (to see)
+2 בְנֵי־ = [the] sons of (son)
+3 הָאֱלֹהִים = <the> God (God)
+4 אֶת־ = <obj.> ([Obj.])
+5 בְּנוֹת = [the] daughters of (daughter)
+6 הָאָדָם = <the> humankind (man)
+7 כִּי = that (for)
+8 טֹבֹת = [were] good (pleasant)
+9 הֵנָּה = they (they(fem.))
+10 וַיִּקְחוּ = and they took (to take)
+11 לָהֶם = for <the> themselves (them)
+12 נָשִׁים = wives (woman)
+13 מִכֹּל = from all (all)
+14 אֲשֶׁר = whom (which)
+15 בָּחָרוּ = they chose (to choose)

@@ -1,0 +1,184 @@
+## 5:31:22
+KO: 그리고 모세가 그날에 이 노래를 기록하였고, 그것을 이스라엘 자손들에게 가르쳤다.
+1 וַיִּכְתֹּב = and he wrote down (to write)
+2 מֹשֶׁה = Moses
+3 אֶת־ = <obj.>
+4 הַשִּׁירָה = the song (song)
+5 הַזֹּאת = <the> this (this)
+6 בַּיּוֹם = on the day (day;_when)
+7 הַהוּא = <the> that (he;_she;_it)
+8 וַיְלַמְּדָהּ = and he taught it (to learn)
+9 אֶת־ = <obj.>
+10 בְּנֵי = [the] people of (son)
+11 יִשְׂרָאֵל = Israel
+
+## 5:31:23
+KO: 그리고 그분(여호와)께서 눈의 아들 여호수아에게 명령하시며 말씀하셨다. "너는 강하게 하고 용기를 내라. 왜냐하면 너 자신이 이스라엘 자손을 내가 그들에게 맹세한 그 땅으로 들어가게 할 것이며, 내가 너와 함께 있을 것이기 때문이다."
+1 וַיְצַו = and he commissioned (to command)
+2 אֶת־ = <obj.>
+3 יְהוֹשֻׁעַ = Joshua
+4 בִּן־ = [the] son of
+5 נוּן = Nun
+6 וַיֹּאמֶר = and he said (to say)
+7 חֲזַק = be strong (to strengthen)
+8 וֶאֱמָץ = and be bold (to strengthen)
+9 כִּי = for
+10 אַתָּה = you (you(m.s.))
+11 תָּבִיא = you will bring (to come (in))
+12 אֶת־ = <obj.>
+13 בְּנֵי = [the] people of
+14 יִשְׂרָאֵל = Israel
+15 אֶל־ = into (to(wards))
+16 הָאָרֶץ = the land (land)
+17 אֲשֶׁר־ = which
+18 נִשְׁבַּעְתִּי = I swore (to swear)
+19 לָהֶם = to <the> them (them)
+20 וְאָנֹכִי = and I (I)
+21 אֶהְיֶה = I will be (to be)
+22 עִמָּךְ = with you (with)
+
+## 5:31:24
+KO: 그리고 모세가 이 율법의 말씀들을 책 위에 다 기록하기를 마쳤을 때에 그 일이 있었다.
+1 וַיְהִי = and it was (to be)
+2 כְּכַלּוֹת = when finished (to end)
+3 מֹשֶׁה = Moses
+4 לִכְתֹּב = to write down (to write)
+5 אֶת־ = <obj.> ([Obj.])
+6 דִּבְרֵי = [the] words of (word)
+7 הַתּוֹרָה־ = the law (instruction)
+8 הַזֹּאת = <the> this (this)
+9 עַל־ = on (upon)
+10 סֵפֶר = a book (scroll)
+11 עַד = until (till)
+12 תֻּמָּם = were complete they (to finish)
+
+## 5:31:25
+KO: 그리고 모세가 여호와의 언약궤를 메는 레위 사람들에게 명령하여 이르기를,
+1 וַיְצַו = and he commanded (to command)
+2 מֹשֶׁה = Moses
+3 אֶת־ = <obj.> ([Obj.])
+4 הַלְוִיִּם = the Levites (Levi)
+5 נֹשְׂאֵי = [who] carry (to lift)
+6 אֲרוֹן = <of> [the] ark of (ark)
+7 בְּרִית־ = [the] covenant of (covenant)
+8 יְהוָה = Yahweh (LORD)
+9 לֵאמֹר = <to> saying (to say)
+
+## 5:31:26
+KO: 이 율법책을 취하여 너희 하나님 여호와의 언약궤 곁에 두라. 그리고 그것이 거기서 너희에게 증거가 되게 하라.
+1 לָקֹחַ = take (to take)
+2 אֵת = <obj.>
+3 סֵפֶר = [the] book of (scroll)
+4 הַתּוֹרָה = the law (instruction)
+5 הַזֶּה = <the> this (this)
+6 וְשַׂמְתֶּם = and you will put (to set)
+7 אֹתוֹ = <obj.> it
+8 מִצַּד = from [the] side of (side)
+9 אֲרוֹן = [the] ark of (ark)
+10 בְּרִית־ = [the] covenant of (covenant)
+11 יְהוָה = Yahweh (LORD)
+12 אֱלֹהֵיכֶם = God your (God)
+13 וְהָיָה־ = and it will become (to be)
+14 שָׁם = there
+15 בְּךָ = on <the> you (you)
+16 לְעֵד = <into> a witness (witness)
+
+## 5:31:27
+KO: 왜냐하면 내가 너희의 반역과 너희의 곧은 목을 알기 때문이다. 보라, 내가 오늘 너희와 함께 살아 있는 동안에도 너희가 여호와를 반역하였는데, 하물며 내 죽음 후에는 더 그러하지 않겠느냐.
+1 כִּי = for
+2 אָנֹכִי = I
+3 יָדַעְתִּי = I know (to know)
+4 אֶת־ = <obj.>
+5 מֶרְיְךָ = rebellion your (rebellion)
+6 וְאֶת־ = and <obj.>
+7 עָרְפְּךָ = neck your (neck)
+8 הַקָּשֶׁה = <the> stiff (severe)
+9 הֵן = here! (look!)
+10 בְּעוֹדֶנִּי = when still I (still)
+11 חַי = [am] alive (alive)
+12 עִמָּכֶם = with you
+13 הַיּוֹם = this day (day;_when)
+14 מַמְרִים = rebellious (to rebel)
+15 הֱיִתֶם = you have been (to be)
+16 עִם־ = with
+17 יְהֹוָה = Yahweh (LORD)
+18 וְאַף = and indeed? (also)
+19 כִּי־ = for
+20 אַחֲרֵי = after
+21 מוֹתִי = death my (death)
+
+## 5:31:28
+KO: 너희 지파들의 모든 장로와 너희 유사들을 내 앞으로 모으라. 내가 이 말씀들을 그들의 귀에 말하고, 그들에게 하늘과 땅을 증인으로 삼으리라.
+1 הַקְהִילוּ = assemble (to gather)
+2 אֵלַי = to me (to(wards))
+3 אֶת־ = <obj.>
+4 כָּל־ = all
+5 זִקְנֵי = [the] elders of (old)
+6 שִׁבְטֵיכֶם = tribes your (tribe)
+7 וְשֹׁטְרֵיכֶם = and officials your (official)
+8 וַאֲדַבְּרָה = and let me speak (to speak)
+9 בְאָזְנֵיהֶם = in ears their (ear)
+10 אֵת = <obj.>
+11 הַדְּבָרִים = the words (word)
+12 הָאֵלֶּה = <the> these (these)
+13 וְאָעִידָה = so I may call as witnesses (to testify)
+14 בָּם = against <the> them (them)
+15 אֶת־ = <obj.>
+16 הַשָּׁמַיִם = the heavens (heaven)
+17 וְאֶת־ = and <obj.>
+18 הָאָרֶץ = the earth (land)
+
+## 5:31:29
+KO: 왜냐하면 나는 알고 있다, 나의 죽음 후에 너희가 부패하고 부패할 것을, 그리고 너희가 내가 너희에게 명했던 그 길로부터 돌아설 것을, 그리고 날들의 끝에 그 재앙이 너희를 만날 것을, 왜냐하면 너희가 여호와의 눈들 안에서 악을 행하여 너희 손들의 행위로 그를 격노하게 할 것이기 때문이다.
+1 כִּי = for
+2 יָדַעְתִּי = I know (to know)
+3 אַחֲרֵי = after
+4 מוֹתִי = death my (death)
+5 כִּי־ = that
+6 הַשְׁחֵת = certainly <to act corruptly>
+7 תַּשְׁחִתוּן = you will act corruptly !
+8 וְסַרְתֶּם = and you will turn aside (to turn aside)
+9 מִן־ = from
+10 הַדֶּרֶךְ = the way (way)
+11 אֲשֶׁר = which
+12 צִוִּיתִי = I have commanded (to command)
+13 אֶתְכֶם = <obj.> you
+14 וְקָרָאת = and it will happen to (to encounter)
+15 אֶתְכֶם = <obj.> you
+16 הָרָעָה = <the> evil
+17 בְּאַחֲרִית = at [the] end of (end)
+18 הַיָּמִים = the days (day;_when)
+19 כִּי־ = for
+20 תַעֲשׂוּ = you will do (to make)
+21 אֶת־ = <obj.>
+22 הָרַע = the evil
+23 בְּעֵינֵי = in [the] eyes of (eye)
+24 יְהוָה = Yahweh (LORD)
+25 לְהַכְעִיסוֹ = to provoke to anger him (to provoke)
+26 בְּמַעֲשֵׂה = by [the] work of (deed)
+27 יְדֵיכֶם = hands your (hand)
+
+## 5:31:30
+KO: 그리고 모세가 이스라엘의 모든 회중의 귀에 이 노래의 말씀들을 그것들이 다 마쳐지기까지 말하였다.
+1 וַיְדַבֵּר = and he spoke (to speak)
+2 מֹשֶׁה = Moses
+3 בְּאָזְנֵי = in [the] ears of (ear)
+4 כָּל־ = all
+5 קְהַל = [the] assembly of (assembly)
+6 יִשְׂרָאֵל = Israel
+7 אֶת־ = <obj.> ([Obj.])
+8 דִּבְרֵי = [the] words of (word)
+9 הַשִּׁירָה = the song (song)
+10 הַזֹּאת = <the> this (this)
+11 עַד = until (till)
+12 תֻּמָּם פ = were complete they (to finish)
+
+## 5:32:1
+KO: 귀를 기울이라, 하늘들아, 내가 말할 것이니. 그리고 듣게 하라, 땅아, 내 입의 말들을.
+1 הַאֲזִינוּ = give ear (to listen)
+2 הַשָּׁמַיִם = O heavens (heaven)
+3 וַאֲדַבֵּרָה = so let me speak (to speak)
+4 וְתִשְׁמַע = and it may hear (to hear)
+5 הָאָרֶץ = the earth (land)
+6 אִמְרֵי־ = [the] words of (word)
+7 פִי = mouth my (lip)

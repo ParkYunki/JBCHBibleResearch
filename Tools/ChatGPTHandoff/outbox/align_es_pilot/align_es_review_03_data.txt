@@ -1,0 +1,957 @@
+## 20:21:4
+ES: Altivez de ojos y amplitud de corazón, lámpara de los impíos, son pecado.
+1	רוּם־	haughtiness of	→ Altivez
+2	עֵינַיִם	eyes	→ ojos
+3	וּרְחַב־	and a [person] arrogant of	→ amplitud
+4	לֵב	heart	→ corazón
+5	נִר	[the] lamp of	→ lámpara
+6	רְשָׁעִים	wicked [people]	→ los impíos
+7	חַטָּאת	[is] sin	→ pecado
+
+## 20:27:27
+ES: y suficiente leche de cabras para tu alimento, para el alimento de tu casa y vida para tus criadas.
+1	וְדֵי	and a sufficiency of	→ y suficiente
+2	חֲלֵב	[the] milk of	→ leche
+3	עִזִּים	goats	→ cabras
+4	לְלַחְמְךָ	for food your	→ para tu alimento
+5	לְלֶחֶם	for [the] food of	→ para el alimento
+6	בֵּיתֶךָ	household your	→ tu casa
+7	וְחַיִּים	and life	→ y vida
+8	לְנַעֲרוֹתֶיךָ	of maids your	→ para tus criadas
+
+## 23:20:4
+ES: así llevará el rey de Asiria a los cautivos de Egipto y a los exiliados de Etiopía, jóvenes y viejos, desnudos y descalzos, y con las nalgas descubiertas, la desnudez de Egipto.
+1	כֵּן	so	→ así
+2	יִנְהַג	he will lead away	→ llevará
+3	מֶלֶךְ־	[the] king of	→ el rey
+4	אַשּׁוּר	Assyria	→ Asiria
+5	אֶת־	<obj.>	→ —
+6	שְׁבִי	[the] captive[s] of	→ los cautivos
+7	מִצְרַיִם	Egypt	→ Egipto
+8	וְאֶת־	and <obj.>	→ —
+9	גָּלוּת	[the] exile[s] of	→ los exiliados
+10	כּוּשׁ	Cush	→ Etiopía
+11	נְעָרִים	young men	→ jóvenes
+12	וּזְקֵנִים	and old [men]	→ viejos
+13	עָרוֹם	naked	→ desnudos
+14	וְיָחֵף	and barefoot	→ descalzos
+15	וַחֲשׂוּפַי	and [ones] uncovered of	→ descubiertas
+16	שֵׁת	buttock	→ las nalgas
+17	עֶרְוַת	[the] nakedness of	→ la desnudez
+18	מִצְרָיִם	Egypt	→ Egipto
+
+## 23:54:1
+ES: Grita de alegría, estéril que no dio a luz; prorrumpe en grito de alegría y clama, la que no estuvo de parto, pues más son los hijos de la desolada que los hijos de la casada, dice Jehová.
+1	רָנִּי	shout for joy	→ Grita de alegría
+2	עֲקָרָה	O barren [woman]	→ estéril
+3	לֹא	[who] not	→ no
+4	יָלָדָה	she has given birth	→ dio a luz
+5	פִּצְחִי	break forth	→ prorrumpe
+6	רִנָּה	a shout of joy	→ grito de alegría
+7	וְצַהֲלִי	and cry aloud	→ y clama
+8	לֹא־	O [one who] not	→ la que no
+9	חָלָה	she has been in labor	→ estuvo de parto
+10	כִּי־	for	→ pues
+11	רַבִּים	[are] many	→ más son
+12	בְּנֵי־	[the] children of	→ los hijos
+13	שׁוֹמֵמָה	a desolate [woman]	→ la desolada
+14	מִבְּנֵי	more than [the] children of	→ que los hijos
+15	בְעוּלָה	a married [woman]	→ la casada
+16	אָמַר	he says	→ dice
+17	יְהוָה	Yahweh	→ Jehová
+
+## 24:2:4
+ES: Escuchad palabra de Jehová, casa de Jacob y todas las familias de la casa de Israel.
+1	שִׁמְעוּ	hear	→ Escuchad
+2	דְבַר־	[the] word of	→ palabra
+3	יְהוָה	Yahweh	→ Jehová
+4	בֵּית	O house of	→ casa
+5	יַעֲקֹב	Jacob	→ Jacob
+6	וְכָל־	and all	→ y todas
+7	מִשְׁפְּחוֹת	[the] clans of	→ las familias
+8	בֵּית	[the] house of	→ la casa
+9	יִשְׂרָאֵל	Israel	→ Israel
+
+## 24:6:12
+ES: Y sus casas pasarán a otros, campos y mujeres juntamente; porque extenderé mi mano sobre los habitantes de la tierra, declaración de Jehová.
+1	וְנָסַבּוּ	and they will be turned over	→ pasarán
+2	בָתֵּיהֶם	houses their	→ sus casas
+3	לַאֲחֵרִים	to others	→ otros
+4	שָׂדוֹת	fields	→ campos
+5	וְנָשִׁים	and wives	→ y mujeres
+6	יַחְדָּו	alike	→ juntamente
+7	כִּי־	for	→ porque
+8	אַטֶּה	I will stretch out	→ extenderé
+9	אֶת־	<obj.>	→ —
+10	יָדִי	hand my	→ mi mano
+11	עַל־	on	→ sobre
+12	יֹשְׁבֵי	[the] inhabitants of	→ los habitantes
+13	הָאָרֶץ	the land	→ la tierra
+14	נְאֻם־	[the] utterance of	→ declaración
+15	יְהוָה	Yahweh	→ Jehová
+
+## 24:9:2
+ES: ¡Quién me diera en el desierto alojamiento de viajeros, para que dejara a mi pueblo y me fuera de junto a ellos! Porque todos ellos son adúlteros, asamblea de traidores.
+1	מִי־	who?	→ Quién
+2	יִתְּנֵנִי	will he give me	→ me diera
+3	בַמִּדְבָּר	in the wilderness	→ en el desierto
+4	מְלוֹן	a lodging place of	→ alojamiento
+5	אֹרְחִים	travelers	→ viajeros
+6	וְאֶעֶזְבָה	and I will leave	→ dejara
+7	אֶת־	<obj.>	→ —
+8	עַמִּי	people my	→ mi pueblo
+9	וְאֵלְכָה	and I will go	→ me fuera
+10	מֵאִתָּם	from with <the> them	→ de junto a ellos
+11	כִּי	for	→ Porque
+12	כֻלָּם	all of them	→ todos ellos
+13	מְנָאֲפִים	[are] adulterers	→ adúlteros
+14	עֲצֶרֶת	an assembly of	→ asamblea
+15	בֹּגְדִים	treacherous [people]	→ traidores
+
+## 24:43:5
+ES: Y tomó Johanán hijo de Carea y todos jefes de ejércitos todo resto de Judá que volvieron de todas naciones adonde fueron expulsados a residir en tierra de Judá.
+1	וַיִּקַּח	and he took	→ Y tomó
+2	יוֹחָנָן	Johanan	→ Johanán
+3	בֶּן־	[the] son of	→ hijo
+4	קָרֵחַ	Kareah	→ Carea
+5	וְכָל־	and all	→ y todos
+6	שָׂרֵי	[the] commanders of	→ jefes
+7	הַחֲיָלִים	the armies	→ ejércitos
+8	אֵת	<obj.>	→ —
+9	כָּל־	all	→ todo
+10	שְׁאֵרִית	[the] remnant of	→ resto
+11	יְהוּדָה	Judah	→ Judá
+12	אֲשֶׁר־	who	→ que
+13	שָׁבוּ	they had come back	→ volvieron
+14	מִכָּל־	from all	→ de todas
+15	הַגּוֹיִם	the nations	→ naciones
+16	אֲשֶׁר	where	→ adonde
+17	נִדְּחוּ־	they had been driven away	→ fueron expulsados
+18	שָׁם	there	→ adonde
+19	לָגוּר	to sojourn	→ residir
+20	בְּאֶרֶץ	in [the] land of	→ en tierra
+21	יְהוּדָה	Judah	→ Judá
+
+## 24:47:7
+ES: ¿Cómo descansarás, cuando Jehová le ha mandado? Contra Ascalón y contra la costa del mar, allí la designó.
+1	אֵיךְ	how?	→ Cómo
+2	תִּשְׁקֹטִי	will you be inactive	→ descansarás
+3	וַיהוָה	and Yahweh	→ Jehová
+4	צִוָּה־	he has commanded	→ ha mandado
+5	לָהּ	<to> <the> it	→ le
+6	אֶל־	against	→ Contra
+7	אַשְׁקְלוֹן	Ashkelon	→ Ascalón
+8	וְאֶל־	and against	→ y contra
+9	חוֹף	[the] coast of	→ la costa del mar
+10	הַיָּם	the sea	→ la costa del mar
+11	שָׁם	there	→ allí
+12	יְעָדָהּ ס	he has appointed it	→ la designó
+
+## 25:3:34
+ES: Aplastar bajo sus pies a todos los presos de la tierra,
+1	לְדַכֵּא	to crush	→ Aplastar
+2	תַּחַת	under	→ bajo
+3	רַגְלָיו	feet his	→ sus pies
+4	כֹּל	all	→ todos
+5	אֲסִירֵי	[the] prisoners of	→ los presos
+6	אָרֶץ	[the] land	→ la tierra
+
+## 25:3:55
+ES: Llamé tu nombre, Jehová, desde el hoyo de las profundidades.
+1	קָרָאתִי	I called	→ Llamé
+2	שִׁמְךָ	name your	→ tu nombre
+3	יְהוָה	O Yahweh	→ Jehová
+4	מִבּוֹר	from a pit of	→ desde el hoyo
+5	תַּחְתִּיּוֹת	lowest parts	→ las profundidades
+
+## 26:3:26
+ES: Y tu lengua haré pegarse a tu paladar y quedarás mudo, y no serás para ellos hombre que reprenda, porque son casa de rebelión.
+1	וּלְשׁוֹנְךָ	and tongue your	→ Y tu lengua
+2	אַדְבִּיק	I will make stick	→ haré pegarse
+3	אֶל־	to	→ a
+4	חִכֶּךָ	palate your	→ tu paladar
+5	וְנֶאֱלַמְתָּ	and you will be dumb	→ y quedarás mudo
+6	וְלֹא־	and not	→ y no
+7	תִהְיֶה	you will become	→ serás
+8	לָהֶם	to them	→ para ellos
+9	לְאִישׁ	<into> a person	→ hombre
+10	מוֹכִיחַ	[who] reproves	→ que reprenda
+11	כִּי	for	→ porque
+12	בֵּית	[are] a house of	→ casa
+13	מְרִי	rebellion	→ rebelión
+14	הֵמָּה	they	→ —
+
+## 26:13:8
+ES: Por tanto, así dice el Señor Jehová: Porque habéis hablado vanidad y visto mentira, por tanto, heme aquí contra vosotros, oráculo del Señor Jehová.
+1	לָכֵן	<to> therefore	→ Por tanto
+2	כֹּה	thus	→ así
+3	אָמַר	he says	→ dice
+4	אֲדֹנָי	[the] Lord	→ el Señor
+5	יְהוִה	Yahweh	→ Jehová
+6	יַעַן	because	→ Porque
+7	דַּבֶּרְכֶם	have spoken you	→ habéis hablado
+8	שָׁוְא	worthlessness	→ vanidad
+9	וַחֲזִיתֶם	and you have seen	→ y visto
+10	כָּזָב	falsehood	→ mentira
+11	לָכֵן	<to> therefore	→ por tanto
+12	הִנְנִי	here I	→ heme aquí
+13	אֲלֵיכֶם	[am] against you	→ contra vosotros
+14	נְאֻם	[the] utterance of	→ oráculo
+15	אֲדֹנָי	[the] Lord	→ del Señor
+16	יְהוִה	Yahweh	→ Jehová
+
+## 26:16:34
+ES: Y en ti sucedió lo contrario de las mujeres en tus prostituciones: no te buscaban para prostituirse, y al dar tú la paga sin que se te diera paga, fuiste lo contrario.
+1	וַיְהִי־	and it was	→ sucedió
+2	בָךְ	in you	→ en ti
+3	הֵפֶךְ	contrariness	→ lo contrario
+4	מִן־	from	→ de las mujeres
+5	הַנָּשִׁים	the women	→ de las mujeres
+6	בְּתַזְנוּתַיִךְ	in prostitution<s> your	→ en tus prostituciones
+7	וְאַחֲרַיִךְ	and after you	→ te buscaban
+8	לֹא	not	→ no
+9	זוּנָּה	it was approached for prostitution	→ prostituirse
+10	וּבְתִתֵּךְ	and because gave you	→ y al dar tú
+11	אֶתְנָן	[the] hire of a prostitute	→ la paga
+12	וְאֶתְנַן	and [the] hire of a prostitute	→ paga
+13	לֹא	not	→ sin que
+14	נִתַּן־	it was given	→ se te diera
+15	לָךְ	to you	→ se te diera
+16	וַתְּהִי	and you became	→ fuiste
+17	לְהֶפֶךְ	<into> contrariness	→ lo contrario
+
+## 26:24:13
+ES: En tu impureza hay depravación, porque te purifiqué y no quedaste pura; de tu impureza no serás purificada más hasta que haga reposar mi furor en ti.
+1	בְּטֻמְאָתֵךְ	in uncleanness your	→ En tu impureza
+2	זִמָּה	licentiousness	→ depravación
+3	יַעַן	because	→ porque
+4	טִהַרְתִּיךְ	I cleansed you	→ te purifiqué
+5	וְלֹא	and not	→ y no
+6	טָהַרְתְּ	you are clean	→ quedaste pura
+7	מִטֻּמְאָתֵךְ	from uncleanness your	→ de tu impureza
+8	לֹא	not	→ no
+9	תִטְהֲרִי־	you will be clean	→ serás purificada
+10	עוֹד	again	→ más
+11	עַד־	until	→ hasta que
+12	הֲנִיחִי	give rest to I	→ haga reposar
+13	אֶת־	<obj.>	→ —
+14	חֲמָתִי	rage my	→ mi furor
+15	בָּךְ	on you	→ en ti
+
+## 26:30:12
+ES: Y haré los canales suelo seco y venderé la tierra en mano de malvados y desolaré la tierra y lo que la llena por mano de extranjeros. Yo, Jehová, he hablado.
+1	וְנָתַתִּי	and I will make	→ Y haré
+2	יְאֹרִים	canals	→ los canales
+3	חָרָבָה	dry ground	→ suelo seco
+4	וּמָכַרְתִּי	and I will sell	→ y venderé
+5	אֶת־	<obj.>	→ —
+6	הָאָרֶץ	the land	→ la tierra
+7	בְּיַד־	in [the] hand of	→ en mano
+8	רָעִים	wicked [people]	→ malvados
+9	וַהֲשִׁמֹּתִי	and I will devastate	→ y desolaré
+10	אֶרֶץ	[the] land	→ la tierra
+11	וּמְלֹאָהּ	and what fills it	→ y lo que la llena
+12	בְּיַד־	by [the] hand of	→ por mano
+13	זָרִים	strangers	→ extranjeros
+14	אֲנִי	I	→ Yo
+15	יְהוָה	Yahweh	→ Jehová
+16	דִּבַּרְתִּי ס	I have spoken	→ he hablado
+
+## 26:30:17
+ES: Los jóvenes de Avén y de Pibeseth caerán por espada, y ellas irán en cautividad.
+1	בַּחוּרֵי	[the] young men of	→ Los jóvenes
+2	אָוֶן	On	→ Avén
+3	וּפִי־	and Pi-	→ y de Pibeseth
+4	בֶסֶת	beseth	→ y de Pibeseth
+5	בַּחֶרֶב	by the sword	→ por espada
+6	יִפֹּלוּ	they will fall	→ caerán
+7	וְהֵנָּה	and they [fem]	→ y ellas
+8	בַּשְּׁבִי	in <the> captivity	→ en cautividad
+9	תֵלַכְנָה	they will go	→ irán
+
+## 26:32:14
+ES: Entonces haré asentarse sus aguas y haré ir sus ríos como aceite, declaración del Señor Jehová.
+1	אָז	then	→ Entonces
+2	אַשְׁקִיעַ	I will make settle	→ haré asentarse
+3	מֵימֵיהֶם	waters their	→ sus aguas
+4	וְנַהֲרוֹתָם	and rivers their	→ sus ríos
+5	כַּשֶּׁמֶן	like <the> oil	→ como aceite
+6	אוֹלִיךְ	I will make go	→ haré ir
+7	נְאֻם	[the] utterance of	→ declaración
+8	אֲדֹנָי	[the] Lord	→ del Señor
+9	יְהוִה	Yahweh	→ Jehová
+
+## 26:33:9
+ES: Pero tú, si has advertido al impío de su camino para que vuelva de él y no ha vuelto de su camino, él morirá en su iniquidad y tú has librado tu vida.
+1	וְאַתָּה	and you	→ Pero tú
+2	כִּי־	if	→ si
+3	הִזְהַרְתָּ	you have warned	→ has advertido
+4	רָשָׁע	[the] wicked [person]	→ al impío
+5	מִדַּרְכּוֹ	from way his	→ de su camino
+6	לָשׁוּב	to turn back	→ para que vuelva
+7	מִמֶּנָּה	from it	→ de él
+8	וְלֹא־	and not	→ y no ha vuelto
+9	שָׁב	he has turned back	→ y no ha vuelto
+10	מִדַּרְכּוֹ	from way his	→ de su camino
+11	הוּא	he	→ él morirá
+12	בַּעֲוֹנוֹ	in iniquity his	→ en su iniquidad
+13	יָמוּת	he will die	→ él morirá
+14	וְאַתָּה	and you	→ y tú
+15	נַפְשְׁךָ	life your	→ tu vida
+16	הִצַּלְתָּ ס	you have delivered	→ has librado
+
+## 26:40:48
+ES: Y me trajo al pórtico de la casa y midió pilar de pórtico, cinco codos de aquí y cinco codos de aquí, y anchura de la puerta tres codos de aquí y tres codos de aquí.
+1	וַיְבִאֵנִי	and he brought me	→ Y me trajo
+2	אֶל־	to	→ al pórtico
+3	אֻלָם	[the] porch of	→ al pórtico
+4	הַבַּיִת	the house	→ la casa
+5	וַיָּמָד	and he measured	→ y midió
+6	אֵל	a pillar of	→ pilar
+7	אֻלָם	a porch	→ pórtico
+8	חָמֵשׁ	five	→ cinco
+9	אַמּוֹת	cubits	→ codos
+10	מִפֹּה	from here	→ de aquí
+11	וְחָמֵשׁ	and five	→ y cinco
+12	אַמּוֹת	cubits	→ codos
+13	מִפֹּה	from here	→ de aquí
+14	וְרֹחַב	and [the] breadth of	→ y anchura
+15	הַשַּׁעַר	the gate	→ la puerta
+16	שָׁלֹשׁ	[was] three	→ tres
+17	אַמּוֹת	cubits	→ codos
+18	מִפּוֹ	from here	→ de aquí
+19	וְשָׁלֹשׁ	and three	→ y tres
+20	אַמּוֹת	cubits	→ codos
+21	מִפּוֹ	from here	→ de aquí
+
+## 26:45:11
+ES: El efa y el bato serán una misma medida: el bato contendrá la décima parte del homer y el efa la décima parte del homer; según el homer será su medida.
+1	הָאֵיפָה	the ephah	→ El efa
+2	וְהַבַּת	and the bath	→ y el bato
+3	תֹּכֶן	measurement	→ medida
+4	אֶחָד	one	→ una misma
+5	יִהְיֶה	it will be	→ serán
+6	לָשֵׂאת	[is] to carry	→ contendrá
+7	מַעְשַׂר	[the] tenth part of	→ la décima parte
+8	הַחֹמֶר	the homer	→ del homer
+9	הַבָּת	the bath	→ el bato
+10	וַעֲשִׂירִת	and [the] tenth [part] of	→ la décima parte
+11	הַחֹמֶר	the homer	→ del homer
+12	הָאֵיפָה	the ephah	→ y el efa
+13	אֶל־	to	→ según
+14	הַחֹמֶר	the homer	→ el homer
+15	יִהְיֶה	it will be	→ será
+16	מַתְכֻּנְתּוֹ	measurement its	→ su medida
+
+## 27:3:15
+ES: Ahora pues, si estáis dispuestos para que en el momento en que oigáis el son de la bocina, de la flauta, de la cítara, del trígono, del salterio, de la zampoña y de toda clase de música, os postréis y adoréis la imagen que he hecho…; pero si no la adoráis, en la misma hora seréis echados en medio del horno de fuego ardiente; ¿y quién es el dios que os librará de mis manos?
+1	כְּעַן	now	→ Ahora pues
+2	הֵן	if	→ si
+3	אִיתֵיכוֹן	are you	→ estáis
+4	עֲתִידִין	ready	→ dispuestos
+5	דִּי	that	→ para que
+6	בְעִדָּנָא	at time the	→ en el momento
+7	דִּי־	which	→ en que
+8	תִשְׁמְעוּן	you will hear	→ oigáis
+9	קָל	[the] sound of	→ el son
+10	קַרְנָא	horn the	→ la bocina
+11	מַשְׁרוֹקִיתָא	flute the	→ la flauta
+12	קַתְרוֹס	zither	→ la cítara
+13	שַׂבְּכָא	trigon	→ del trígono
+14	פְּסַנְתֵּרִין	harp	→ del salterio
+15	וְסוּמְפֹּנְיָה	and pipe	→ la zampoña
+16	וְכֹל	and all	→ y de toda clase
+17	זְנֵי	<the> kinds of	→ y de toda clase
+18	זְמָרָא	<the> music	→ música
+19	תִּפְּלוּן	you will fall down	→ os postréis
+20	וְתִסְגְּדוּן	so you may pay homage	→ y adoréis
+21	לְצַלְמָא	to image the	→ la imagen
+22	דִי־	which	→ que
+23	עַבְדֵת	I have made	→ he hecho
+24	וְהֵן	and if	→ pero si
+25	לָא	not	→ no
+26	תִסְגְּדוּן	you will pay homage	→ la adoráis
+27	בַּהּ־	at it	→ —
+28	שַׁעֲתָה	moment the	→ en la misma hora
+29	תִתְרְמוֹן	you will be thrown	→ seréis echados
+30	לְגוֹא־	to [the] midst of	→ en medio
+31	אַתּוּן	[the] furnace of	→ del horno
+32	נוּרָא	fire the	→ fuego
+33	יָקִדְתָּא	<the> burning	→ ardiente
+34	וּמַן־	and who?	→ y quién
+35	הוּא	he	→ es
+36	אֱלָהּ	[is the] god	→ el dios
+37	דֵּי	who	→ que
+38	יְשֵׁיזְבִנְכוֹן	he will deliver you	→ os librará
+39	מִן־	from	→ de mis manos
+40	יְדָי	hands my	→ de mis manos
+
+## 27:10:4
+ES: Y el día veinticuatro del mes primero, yo estaba a la orilla del gran río, que es el Hidekel.
+1	וּבְיוֹם	and on day	→ Y el día
+2	עֶשְׂרִים	twenty	→ veinticuatro
+3	וְאַרְבָּעָה	and four	→ veinticuatro
+4	לַחֹדֶשׁ	of the month	→ del mes
+5	הָרִאשׁוֹן	<the> first	→ primero
+6	וַאֲנִי	and I	→ yo
+7	הָיִיתִי	I was	→ estaba
+8	עַל	on	→ a la orilla
+9	יַד	[the] side of	→ a la orilla
+10	הַנָּהָר	the river	→ del gran río
+11	הַגָּדוֹל	<the> great	→ del gran río
+12	הוּא	that	→ que
+13	חִדָּקֶל	[is] [the] Tigris	→ es el Hidekel
+
+## 28:2:23
+ES: Y la sembraré para mí en la tierra y tendré compasión de Lo-ruhama, y diré a Lo-ammi: Tú eres mi pueblo, y él dirá: Dios mío.
+1	וּזְרַעְתִּיהָ	and I will sow her	→ Y la sembraré
+2	לִּי	for myself	→ para mí
+3	בָּאָרֶץ	in the land	→ en la tierra
+4	וְרִחַמְתִּי	and I will have compassion on	→ y tendré compasión
+5	אֶת־	<obj.>	→ —
+6	לֹא	Lo-	→ Lo-ruhama
+7	רֻחָמָה	Ruhamah	→ Lo-ruhama
+8	וְאָמַרְתִּי	and I will say	→ y diré
+9	לְלֹא־	to Not-	→ Lo-ammi
+10	עַמִּי	-People My	→ Lo-ammi
+11	עַמִּי־	[are] people my	→ mi pueblo
+12	אַתָּה	you	→ Tú eres
+13	וְהוּא	and he	→ y él dirá
+14	יֹאמַר	he will say	→ y él dirá
+15	אֱלֹהָי פ	God my	→ Dios mío
+
+## 28:6:4
+ES: ¿Qué te haré, Ephraim? ¿Qué te haré, Judá? Y vuestra lealtad es como nube de mañana y como rocío que madruga y se va.
+1	מָה	what?	→ Qué
+2	אֶעֱשֶׂה־	will I do	→ te haré
+3	לְּךָ	to you	→ te haré
+4	אֶפְרַיִם	O Ephraim	→ Ephraim
+5	מָה	what?	→ Qué
+6	אֶעֱשֶׂה־	will I do	→ te haré
+7	לְּךָ	to you	→ te haré
+8	יְהוּדָה	O Judah	→ Judá
+9	וְחַסְדְּכֶם	and loyalty your	→ Y vuestra lealtad
+10	כַּעֲנַן־	[is] like a cloud of	→ como nube
+11	בֹּקֶר	[the] morning	→ mañana
+12	וְכַטַּל	and like <the> dew	→ y como rocío
+13	מַשְׁכִּים	rising early	→ que madruga
+14	הֹלֵךְ	going	→ y se va
+
+## 28:7:15
+ES: Y yo discipliné, fortalecí sus brazos, y contra mí traman mal.
+1	וַאֲנִי	and I	→ Y yo
+2	יִסַּרְתִּי	I instructed [them]	→ discipliné
+3	חִזַּקְתִּי	I strengthened	→ fortalecí
+4	זְרוֹעֹתָם	arms their	→ sus brazos
+5	וְאֵלַי	and against me	→ y contra mí
+6	יְחַשְּׁבוּ־	they plot	→ traman
+7	רָע	evil	→ mal
+
+## 28:9:15
+ES: Toda su maldad está en Gilgal, porque allí los odié; por la maldad de sus obras de mi casa los expulsaré, no volveré a amarlos; todos sus príncipes son rebeldes.
+1	כָּל־	all	→ Toda
+2	רָעָתָם	wickedness their	→ su maldad
+3	בַּגִּלְגָּל	[is] in <the> Gilgal	→ en Gilgal
+4	כִּי־	for	→ porque
+5	שָׁם	there	→ allí
+6	שְׂנֵאתִים	I hated them	→ los odié
+7	עַל	on	→ por
+8	רֹעַ	[the] wickedness of	→ la maldad
+9	מַעַלְלֵיהֶם	deeds their	→ sus obras
+10	מִבֵּיתִי	from house my	→ de mi casa
+11	אֲגָרְשֵׁם	I will drive out them	→ los expulsaré
+12	לֹא	not	→ no
+13	אוֹסֵף	I will repeat	→ volveré
+14	אַהֲבָתָם	to love them	→ a amarlos
+15	כָּל־	all	→ todos
+16	שָׂרֵיהֶם	leaders their	→ sus príncipes
+17	סֹרְרִים	[are] rebellious	→ rebeldes
+
+## 28:11:12
+ES: Me rodearon con mentira Ephraim y con engaño la casa de Israel; y Judá aún vaga con Dios y es fiel con los santos.
+1	סְבָבֻנִי	they have surrounded me	→ Me rodearon
+2	בְכַחַשׁ	with lying	→ con mentira
+3	אֶפְרַיִם	Ephraim	→ Ephraim
+4	וּבְמִרְמָה	and with deceit	→ y con engaño
+5	בֵּית	[the] house of	→ la casa
+6	יִשְׂרָאֵל	Israel	→ Israel
+7	וִיהוּדָה	and Judah	→ y Judá
+8	עֹד	still	→ aún
+9	רָד	it has roamed	→ vaga
+10	עִם־	with	→ con Dios
+11	אֵל	God	→ con Dios
+12	וְעִם־	and with	→ con los santos
+13	קְדוֹשִׁים	[the] holy [one<s>]	→ con los santos
+14	נֶאֱמָן	faithful	→ es fiel
+
+## 33:4:12
+ES: Pero ellos no conocen los pensamientos de Jehová, ni entienden su consejo; que los ha juntado como gavillas en la era.
+1	וְהֵמָּה	and they	→ Pero ellos
+2	לֹא	not	→ no
+3	יָדְעוּ	they know	→ conocen
+4	מַחְשְׁבוֹת	[the] thoughts of	→ los pensamientos
+5	יְהוָה	Yahweh	→ Jehová
+6	וְלֹא	and not	→ ni
+7	הֵבִינוּ	they understand	→ entienden
+8	עֲצָתוֹ	counsel his	→ su consejo
+9	כִּי	that	→ que
+10	קִבְּצָם	he has gathered them	→ los ha juntado
+11	כֶּעָמִיר	like <the> cut grain	→ como gavillas
+12	גֹּרְנָה	[the] threshing floor towards	→ en la era
+
+## 38:3:3
+ES: Y Josué estaba vestido de vestiduras sucias, y estaba delante del ángel.
+1	וִיהוֹשֻׁעַ	and Joshua	→ Y Josué
+2	הָיָה	he was	→ estaba
+3	לָבֻשׁ	clothed	→ vestido
+4	בְּגָדִים	garments	→ vestiduras
+5	צוֹאִים	filthy	→ sucias
+6	וְעֹמֵד	and standing	→ y estaba
+7	לִפְנֵי	<to> before	→ delante del ángel
+8	הַמַּלְאָךְ	the angel	→ delante del ángel
+
+## 38:11:8
+ES: Y destruí a los tres pastores en un mes; y mi alma se impacientó con ellos, y también el alma de ellos me aborreció.
+1	וָאַכְחִד	and I annihilated	→ Y destruí
+2	אֶת־	<obj.>	→ —
+3	שְׁלֹשֶׁת	[the] three	→ los tres pastores
+4	הָרֹעִים	the shepherds	→ los tres pastores
+5	בְּיֶרַח	in a month	→ en un mes
+6	אֶחָד	one	→ en un mes
+7	וַתִּקְצַר	and it was short	→ se impacientó
+8	נַפְשִׁי	self my	→ mi alma
+9	בָּהֶם	with them	→ con ellos
+10	וְגַם־	and also	→ y también
+11	נַפְשָׁם	self their	→ el alma de ellos
+12	בָּחֲלָה	it loathed	→ me aborreció
+13	בִי	<in> me	→ me aborreció
+
+## 38:13:4
+ES: Y será en aquel día que se avergonzarán los profetas, cada uno de su visión cuando profetice; y no se vestirán más de manto de pelo para mentir.
+1	וְהָיָה	and it will be	→ Y será
+2	בַּיּוֹם	on the day	→ en aquel día
+3	הַהוּא	<the> that	→ en aquel día
+4	יֵבֹשׁוּ	they will be ashamed	→ se avergonzarán
+5	הַנְּבִיאִים	the prophets	→ los profetas
+6	אִישׁ	each one	→ cada uno
+7	מֵחֶזְיֹנוֹ	from vision his	→ de su visión
+8	בְּהִנָּבְאֹתוֹ	when prophecies he	→ cuando profetice
+9	וְלֹא	and not	→ y no
+10	יִלְבְּשׁוּ	they will wear	→ se vestirán
+11	אַדֶּרֶת	a cloak of	→ manto
+12	שֵׂעָר	hair	→ pelo
+13	לְמַעַן	so as	→ para mentir
+14	כַּחֵשׁ	to deceive	→ para mentir
+
+## 39:3:10
+ES: Traed todo el diezmo al alfolí, y haya alimento en mi casa; y probadme ahora en esto, dice Jehová de los ejércitos, si no os abriré las ventanas de los cielos, y derramaré sobre vosotros bendición hasta que no haya más necesidad.
+1	הָבִיאוּ	bring	→ Traed
+2	אֶת־	<obj.>	→ —
+3	כָּל־	all	→ todo el diezmo
+4	הַמַּעֲשֵׂר	the tithe	→ todo el diezmo
+5	אֶל־	into	→ al alfolí
+6	בֵּית	[the] house of	→ al alfolí
+7	הָאוֹצָר	the store	→ al alfolí
+8	וִיהִי	so it may be	→ y haya
+9	טֶרֶף	food	→ alimento
+10	בְּבֵיתִי	in house my	→ en mi casa
+11	וּבְחָנוּנִי	and test me	→ y probadme
+12	נָא	please	→ ahora
+13	בָּזֹאת	by this	→ en esto
+14	אָמַר	he says	→ dice
+15	יְהוָה	Yahweh	→ Jehová
+16	צְבָאוֹת	of hosts	→ de los ejércitos
+17	אִם־	if	→ si no
+18	לֹא	not	→ si no
+19	אֶפְתַּח	I will open	→ os abriré
+20	לָכֶם	for you	→ os abriré
+21	אֵת	<obj.>	→ —
+22	אֲרֻבּוֹת	[the] windows of	→ las ventanas
+23	הַשָּׁמַיִם	the heavens	→ los cielos
+24	וַהֲרִיקֹתִי	and I will pour out	→ y derramaré
+25	לָכֶם	for you	→ sobre vosotros
+26	בְּרָכָה	blessing	→ bendición
+27	עַד־	until	→ hasta que
+28	בְּלִי־	not	→ no haya más necesidad
+29	דָי	sufficiency	→ no haya más necesidad
+
+## 40:1:1
+ES: Libro de la generación de Jesucristo, hijo de David, hijo de Abraham.
+1	Βίβλος	[The] book	→ Libro
+2	γενέσεως	of [the] genealogy	→ la generación
+3	Ἰησοῦ	of Jesus	→ Jesucristo
+4	Χριστοῦ	Christ	→ Jesucristo
+5	υἱοῦ	son	→ hijo
+6	Δαυὶδ	of David	→ David
+7	υἱοῦ	son	→ hijo
+8	Ἀβραάμ	of Abraham.	→ Abraham
+
+## 40:4:12
+ES: Y oyendo que Juan había sido entregado, se retiró a Galilea.
+1	Ἀκούσας	Having heard	→ Y oyendo
+2	δὲ	now	→ Y oyendo
+3	ὁ	<the>	→ —
+4	Ἰησοῦς	Jesus	→ —
+5	ὅτι	that	→ que
+6	Ἰωάννης	John	→ Juan
+7	παρεδόθη	was delivered up	→ había sido entregado
+8	ἀνεχώρησεν	He withdrew	→ se retiró
+9	εἰς	into	→ a Galilea
+10	τὴν	<the>	→ a Galilea
+11	Γαλιλαίαν	Galilee.	→ a Galilea
+
+## 40:8:30
+ES: Y había lejos de ellos un hato de muchos cerdos paciendo.
+1	ἦν	There was	→ Y había
+2	δὲ	now	→ —
+3	μακρὰν	far off	→ lejos
+4	ἀπ᾽	from	→ de ellos
+5	αὐτῶν	them	→ de ellos
+6	ἀγέλη	a herd	→ un hato
+7	χοίρων	of pigs	→ cerdos
+8	πολλῶν	many	→ muchos
+9	βοσκομένη	feeding.	→ paciendo
+
+## 40:21:42
+ES: Les dice Jesús: ¿Nunca leísteis en las Escrituras: La piedra que desecharon los que edificaban, esta vino a ser cabeza de ángulo; de parte del Señor sucedió esto, y es maravilloso a nuestros ojos?
+1	Λέγει	Says	→ Les dice
+2	αὐτοῖς	to them	→ Les dice
+3	ὁ	<the>	→ Jesús
+4	Ἰησοῦς·	Jesus;	→ Jesús
+5	οὐδέποτε	surely sometime	→ Nunca
+6	ἀνέγνωτε	you did read	→ leísteis
+7	ἐν	in	→ en las Escrituras
+8	ταῖς	the	→ en las Escrituras
+9	γραφαῖς·	Scriptures:	→ en las Escrituras
+10	λίθον	[The] stone	→ La piedra
+11	ὃν	which	→ que
+12	ἀπεδοκίμασαν	rejected	→ desecharon
+13	οἱ	those	→ los que edificaban
+14	οἰκοδομοῦντες	building,	→ los que edificaban
+15	οὗτος	this	→ esta
+16	ἐγενήθη	has become	→ vino a ser
+17	εἰς	the	→ —
+18	κεφαλὴν	chief	→ cabeza
+19	γωνίας	corner.	→ ángulo
+20	παρὰ	From	→ de parte del Señor
+21	κυρίου	[the] Lord	→ de parte del Señor
+22	ἐγένετο	was	→ sucedió
+23	αὕτη	this,	→ esto
+24	καὶ	and	→ y
+25	ἔστιν	it is	→ es maravilloso
+26	θαυμαστὴ	marvelous	→ es maravilloso
+27	ἐν	in	→ a nuestros ojos
+28	ὀφθαλμοῖς	[the] eyes	→ a nuestros ojos
+29	ἡμῶν;	of us?’	→ a nuestros ojos
+
+## 40:24:38
+ES: Porque como en aquellos días antes del diluvio estaban comiendo y bebiendo, casándose y dando en casamiento, hasta el día en que Noé entró en el arca,
+1	ὡς	As	→ como
+2	γὰρ	for	→ Porque
+3	ἦσαν	they were	→ estaban
+4	ἐν	in	→ en aquellos días
+5	ταῖς	the	→ en aquellos días
+6	ἡμέραις	days	→ en aquellos días
+7	ἐκείναις	those	→ en aquellos días
+8	ταῖς	<the>	→ antes del diluvio
+9	πρὸ	before	→ antes del diluvio
+10	τοῦ	the	→ antes del diluvio
+11	κατακλυσμοῦ	flood,	→ antes del diluvio
+12	τρώγοντες	eating	→ comiendo
+13	καὶ	and	→ y
+14	πίνοντες	drinking,	→ bebiendo
+15	γαμοῦντες	marrying	→ casándose
+16	καὶ	and	→ y
+17	γαμίζοντες	giving in marriage,	→ dando en casamiento
+18	ἄχρι	until	→ hasta el día
+19	ἧς	that	→ en que
+20	ἡμέρας	day	→ hasta el día
+21	εἰσῆλθεν	entered	→ entró
+22	Νῶε	Noah	→ Noé
+23	εἰς	into	→ en el arca
+24	τὴν	the	→ en el arca
+25	κιβωτόν	ark,	→ en el arca
+
+## 40:28:20
+ES: enseñándoles a guardar todas las cosas que os he mandado; y he aquí, yo estoy con vosotros todos los días hasta la consumación del siglo.
+1	διδάσκοντες	teaching	→ enseñándoles
+2	αὐτοὺς	them	→ enseñándoles
+3	τηρεῖν	to observe	→ guardar
+4	πάντα	all things	→ todas las cosas
+5	ὅσα	as much as	→ que
+6	ἐνετειλάμην	I commanded	→ os he mandado
+7	ὑμῖν·	you;	→ os he mandado
+8	καὶ	And	→ y
+9	ἰδοὺ	behold	→ he aquí
+10	ἐγὼ	I myself	→ yo
+11	μεθ᾽	with	→ con vosotros
+12	ὑμῶν	you	→ con vosotros
+13	εἰμι	am	→ estoy
+14	πάσας	all	→ todos los días
+15	τὰς	the	→ todos los días
+16	ἡμέρας	days	→ todos los días
+17	ἕως	until	→ hasta
+18	τῆς	the	→ la consumación
+19	συντελείας	completion	→ la consumación
+20	τοῦ	of the	→ del siglo
+21	αἰῶνος	age.	→ del siglo
+22	ἀμήν	Amen	→ —
+
+## 41:11:11
+ES: Y entró en Jerusalem, en el templo; y habiendo mirado alrededor todas las cosas, siendo ya tarde la hora, salió a Bethania con los doce.
+1	Καὶ	And	→ Y entró
+2	εἰσῆλθεν	He entered	→ Y entró
+3	εἰς	into	→ en Jerusalem
+4	Ἱεροσόλυμα	Jerusalem	→ en Jerusalem
+5	ὁ	<the>	→ —
+6	Ἰησοῦς	Jesus	→ —
+7	καὶ	and	→ —
+8	εἰς	into	→ en el templo
+9	τὸ	the	→ en el templo
+10	ἱερόν	temple,	→ en el templo
+11	καὶ	and	→ y habiendo mirado alrededor
+12	περιβλεψάμενος	having looked around on	→ y habiendo mirado alrededor
+13	πάντα	all things,	→ todas las cosas
+14	ὀψίας	when late [evening]	→ tarde
+15	ἤδη	already	→ ya
+16	οὔσης	being	→ siendo
+17	τῆς	the	→ la hora
+18	ὥρας	hour,	→ la hora
+19	ἐξῆλθεν	He went out	→ salió
+20	εἰς	to	→ a Bethania
+21	Βηθανίαν	Bethany	→ a Bethania
+22	μετὰ	with	→ con los doce
+23	τῶν	the	→ con los doce
+24	δώδεκα	Twelve.	→ con los doce
+
+## 41:14:62
+ES: Y Jesús dijo: Yo soy; y veréis al Hijo del hombre sentado a la diestra del Poder, y viniendo con las nubes del cielo.
+1	ὁ	<the>	→ Y Jesús dijo
+2	δὲ	And	→ Y Jesús dijo
+3	Ἰησοῦς	Jesus	→ Y Jesús dijo
+4	εἶπεν·	said;	→ Y Jesús dijo
+5	ἐγώ	I myself	→ Yo soy
+6	εἰμι	am,	→ Yo soy
+7	καὶ	And	→ y veréis
+8	ὄψεσθε	you will behold	→ y veréis
+9	τὸν	the	→ al Hijo
+10	υἱὸν	Son	→ al Hijo
+11	τοῦ	<the>	→ del hombre
+12	ἀνθρώπου	of Man	→ del hombre
+13	ἐκ	at [the]	→ a la diestra
+14	δεξιῶν	right hand	→ a la diestra
+15	καθήμενον	sitting	→ sentado
+16	τῆς	<the>	→ del Poder
+17	δυνάμεως	of Power	→ del Poder
+18	καὶ	and	→ y viniendo
+19	ἐρχόμενον	coming	→ y viniendo
+20	μετὰ	with	→ con las nubes
+21	τῶν	the	→ con las nubes
+22	νεφελῶν	clouds	→ con las nubes
+23	τοῦ	<the>	→ del cielo
+24	οὐρανοῦ	of heaven.	→ del cielo
+
+## 41:15:31
+ES: Del mismo modo también los principales sacerdotes, burlándose entre ellos con los escribas, decían: A otros salvó, a sí mismo no puede salvarse.
+1	ὁμοίως	Likewise	→ Del mismo modo
+2	δὲ	now	→ Del mismo modo
+3	καὶ	also	→ también
+4	οἱ	the	→ los principales sacerdotes
+5	ἀρχιερεῖς	chief priests	→ los principales sacerdotes
+6	ἐμπαίζοντες	mocking	→ burlándose
+7	πρὸς	among	→ entre ellos
+8	ἀλλήλους	one another	→ entre ellos
+9	μετὰ	with	→ con los escribas
+10	τῶν	the	→ con los escribas
+11	γραμματέων	scribes	→ con los escribas
+12	ἔλεγον·	were saying;	→ decían
+13	ἄλλους	Others	→ otros
+14	ἔσωσεν	He saved,	→ salvó
+15	ἑαυτὸν	Himself	→ a sí mismo
+16	οὐ	not	→ no
+17	δύναται	He is able	→ puede
+18	σῶσαι·	to save;	→ salvarse
+
+## 42:1:19
+ES: Y respondiendo el ángel le dijo: Yo soy Gabriel, el que está de pie delante de Dios, y fui enviado a hablarte y a anunciarte estas buenas nuevas.
+1	Καὶ	And	→ Y respondiendo
+2	ἀποκριθεὶς	answering	→ Y respondiendo
+3	ὁ	the	→ el ángel
+4	ἄγγελος	angel	→ el ángel
+5	εἶπεν	said	→ le dijo
+6	αὐτῷ·	to him;	→ le dijo
+7	ἐγώ	I myself	→ Yo soy
+8	εἰμι	am	→ Yo soy
+9	Γαβριὴλ	Gabriel	→ Gabriel
+10	ὁ	the [one]	→ el que
+11	παρεστηκὼς	standing	→ está de pie
+12	ἐνώπιον	before	→ delante de
+13	τοῦ	<the>	→ Dios
+14	θεοῦ	God	→ Dios
+15	καὶ	and	→ y fui enviado
+16	ἀπεστάλην	I was sent	→ y fui enviado
+17	λαλῆσαι	to speak	→ hablarte
+18	πρὸς	to	→ hablarte
+19	σὲ	you	→ hablarte
+20	καὶ	and	→ y a anunciarte
+21	εὐαγγελίσασθαί	to bring glad tidings	→ y a anunciarte
+22	σοι	to you	→ y a anunciarte
+23	ταῦτα	these.	→ estas
+
+## 42:1:21
+ES: Y el pueblo estaba esperando a Zacarías, y se maravillaban de que él tardara en el templo.
+1	Καὶ	And	→ Y el pueblo
+2	ἦν	were	→ estaba
+3	ὁ	the	→ Y el pueblo
+4	λαὸς	people	→ Y el pueblo
+5	προσδοκῶν	expecting	→ esperando
+6	τὸν	<the>	→ Zacarías
+7	Ζαχαρίαν	Zechariah	→ Zacarías
+8	καὶ	and	→ y se maravillaban
+9	ἐθαύμαζον	they were wondering	→ y se maravillaban
+10	ἐν	at	→ de que
+11	τῷ	the	→ tardara
+12	χρονίζειν	delaying	→ tardara
+13	ἐν	in	→ en el templo
+14	τῷ	the	→ en el templo
+15	ναῷ	temple	→ en el templo
+16	αὐτόν	of him.	→ él
+
+## 42:3:12
+ES: Y vinieron también publicanos para ser bautizados, y le dijeron: Maestro, ¿qué haremos?
+1	ἦλθον	Came	→ Y vinieron
+2	δὲ	then	→ Y vinieron
+3	καὶ	also	→ también
+4	τελῶναι	tax collectors	→ publicanos
+5	βαπτισθῆναι	to be baptized	→ ser bautizados
+6	καὶ	and	→ y le dijeron
+7	εἶπαν	they said	→ y le dijeron
+8	πρὸς	to	→ y le dijeron
+9	αὐτόν·	him;	→ y le dijeron
+10	διδάσκαλε	Teacher,	→ Maestro
+11	τί	what	→ qué
+12	ποιήσωμεν;	shall we do?	→ haremos
+
+## 42:3:28
+ES: de Melchî, de Abdi, de Cosam, de Elmodam, de Er,
+1	τοῦ	<the>	→ Melchî
+2	Μελχὶ	of Melchi	→ Melchî
+3	τοῦ	<the>	→ Abdi
+4	Ἀδδὶ	of Addi	→ Abdi
+5	τοῦ	<the>	→ Cosam
+6	Κωσὰμ	of Cosam	→ Cosam
+7	τοῦ	<the>	→ Elmodam
+8	Ἐλμαδὰμ	of Elmadam	→ Elmodam
+9	τοῦ	<the>	→ Er
+10	Ἢρ	of Er	→ Er
+
+## 42:4:38
+ES: Y levantándose de la sinagoga, entró en la casa de Simón. Y la suegra de Simón estaba afligida de una gran fiebre, y le rogaron por ella.
+1	Ἀναστὰς	Having risen up	→ Y levantándose
+2	δὲ	then	→ Y levantándose
+3	ἀπὸ	out of	→ de la sinagoga
+4	τῆς	the	→ de la sinagoga
+5	συναγωγῆς	synagogue	→ de la sinagoga
+6	εἰσῆλθεν	He entered	→ entró
+7	εἰς	into	→ en la casa
+8	τὴν	the	→ en la casa
+9	οἰκίαν	house	→ en la casa
+10	Σίμωνος	of Simon.	→ Simón
+11	ἡ	The	→ Y la suegra
+12	πενθερὰ	mother-in-law	→ Y la suegra
+13	δὲ	then	→ Y la suegra
+14	τοῦ	<the>	→ Simón
+15	Σίμωνος	of Simon	→ Simón
+16	ἦν	was	→ estaba
+17	συνεχομένη	oppressed with	→ afligida
+18	πυρετῷ	a fever	→ una gran fiebre
+19	μεγάλῳ	great,	→ una gran fiebre
+20	καὶ	and	→ y le rogaron
+21	ἠρώτησαν	they appealed	→ y le rogaron
+22	αὐτὸν	to Him	→ y le rogaron
+23	περὶ	for	→ por ella
+24	αὐτῆς	her.	→ por ella
+
+## 42:6:48
+ES: Semejante es a un hombre que edificaba una casa, el cual cavó y ahondó, y puso el fundamento sobre la roca; y venida una inundación, el río dio con ímpetu contra aquella casa, y no pudo moverla, porque estaba bien edificada.
+1	ὅμοιός	Like	→ Semejante es
+2	ἐστιν	he is	→ Semejante es
+3	ἀνθρώπῳ	to a man	→ a un hombre
+4	οἰκοδομοῦντι	building	→ edificaba
+5	οἰκίαν	a house	→ una casa
+6	ὃς	who	→ el cual
+7	ἔσκαψεν	dug	→ cavó
+8	καὶ	and	→ y ahondó
+9	ἐβάθυνεν	he deepened	→ y ahondó
+10	καὶ	and	→ y puso
+11	ἔθηκεν	he laid	→ y puso
+12	θεμέλιον	a foundation	→ el fundamento
+13	ἐπὶ	on	→ sobre
+14	τὴν	the	→ la roca
+15	πέτραν	rock.	→ la roca
+16	πλημμύρης	when a flood	→ una inundación
+17	δὲ	then	→ y venida
+18	γενομένης	having come	→ y venida
+19	προσέρηξεν	burst upon	→ dio con ímpetu contra
+20	ὁ	the	→ el río
+21	ποταμὸς	stream	→ el río
+22	τῇ	the	→ aquella casa
+23	οἰκίᾳ	house	→ aquella casa
+24	ἐκείνῃ	that,	→ aquella casa
+25	καὶ	and	→ y no pudo
+26	οὐκ	not	→ y no pudo
+27	ἴσχυσεν	was able	→ y no pudo
+28	σαλεῦσαι	to shake	→ moverla
+29	αὐτὴν	it	→ moverla
+30	διὰ	because	→ porque
+31	τὸ	<the>	→ porque
+32	καλῶς	well	→ bien
+33	οἰκοδομῆσθαι	to have been built	→ edificada
+34	αὐτήν	it	→ edificada
+35	ἐπὶ	upon	→ —
+36	τὴν	the	→ —
+37	πέτραν	rock.	→ —
+
+## 42:12:7
+ES: Pero aun los cabellos de vuestra cabeza están todos contados. No temáis; más valéis vosotros que muchos pajarillos.
+1	ἀλλὰ	But	→ Pero
+2	καὶ	even	→ aun
+3	αἱ	the	→ los cabellos
+4	τρίχες	hairs	→ los cabellos
+5	τῆς	of the	→ de vuestra cabeza
+6	κεφαλῆς	head	→ de vuestra cabeza
+7	ὑμῶν	of you	→ de vuestra cabeza
+8	πᾶσαι	all	→ todos
+9	ἠρίθμηνται	have been numbered.	→ contados
+10	μὴ	Not	→ No temáis
+11	οὖν	therefore	→ —
+12	φοβεῖσθε·	do fear;	→ No temáis
+13	πολλῶν	than many	→ que muchos
+14	στρουθίων	sparrows	→ pajarillos
+15	διαφέρετε	you are more valuable.	→ más valéis
+
+## 42:20:21
+ES: Y le preguntaron, diciendo: Maestro, sabemos que dices y enseñas rectamente, y no haces acepción de persona, sino que enseñas el camino de Dios con verdad.
+1	καὶ	And	→ Y le preguntaron
+2	ἐπηρώτησαν	they questioned	→ Y le preguntaron
+3	αὐτὸν	Him	→ Y le preguntaron
+4	λέγοντες·	saying;	→ diciendo
+5	διδάσκαλε	Teacher,	→ Maestro
+6	οἴδαμεν	we know	→ sabemos
+7	ὅτι	that	→ que
+8	ὀρθῶς	rightly	→ rectamente
+9	λέγεις	You speak	→ dices
+10	καὶ	and	→ y
+11	διδάσκεις	You teach	→ enseñas
+12	καὶ	and	→ y no haces
+13	οὐ	not	→ y no haces
+14	λαμβάνεις	You receive	→ y no haces
+15	πρόσωπον	[any] person	→ acepción de persona
+16	ἀλλ᾽	but	→ sino que
+17	ἐπ᾽	on the basis of	→ con verdad
+18	ἀληθείας	truth	→ con verdad
+19	τὴν	the	→ el camino
+20	ὁδὸν	way	→ el camino
+21	τοῦ	<the>	→ de Dios
+22	θεοῦ	of God	→ de Dios
+23	διδάσκεις	teach.	→ enseñas

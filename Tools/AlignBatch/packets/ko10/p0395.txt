@@ -1,0 +1,151 @@
+## 4:8:1
+KO: 그리고 여호와께서 모세에게 말씀하여 이르셨다.
+1 וַיְדַבֵּר = and he spoke (to speak)
+2 יְהוָה = Yahweh (LORD)
+3 אֶל־ = to (to(wards))
+4 מֹשֶׁה = Moses
+5 לֵּאמֹר = <to> saying (to say)
+
+## 4:8:2
+KO: 아론에게 말하여 그에게 이르라. 네가 등잔들을 올릴 때에 일곱 등잔이 등잔대 앞을 향하여 비추게 할지니라.
+1 דַּבֵּר = speak (to speak)
+2 אֶל־ = to
+3 אַהֲרֹן = Aaron
+4 וְאָמַרְתָּ = and you will say (to say)
+5 אֵלָיו = to him
+6 בְּהַעֲלֹתְךָ = when lifting up you (to ascend)
+7 אֶת־ = <obj.> ([Obj.])
+8 הַנֵּרֹת = the lamps
+9 אֶל־ = to
+10 מוּל = [the] front of (opposite)
+11 פְּנֵי = [the] face of (face)
+12 הַמְּנוֹרָה = the lampstand (lampstand)
+13 יָאִירוּ = they will give light (to light)
+14 שִׁבְעַת = [the] seven (seven)
+15 הַנֵּרוֹת = the lamps
+
+## 4:8:3
+KO: 아론이 그리하여 등잔대의 얼굴 맞은편으로 그 등잔들을 올렸으니, 여호와께서 모세에게 명령하신 것과 같았더라.
+1 וַיַּעַשׂ = and he did (to make)
+2 כֵּן = so
+3 אַהֲרֹן = Aaron
+4 אֶל־ = to (to(wards))
+5 מוּל = [the] front of (opposite)
+6 פְּנֵי = [the] face of (face)
+7 הַמְּנוֹרָה = the lampstand (lampstand)
+8 הֶעֱלָה = he lifted up (to ascend)
+9 נֵרֹתֶיהָ = lamps its (lamp)
+10 כַּאֲשֶׁר = just as (as which)
+11 צִוָּה = he had commanded (to command)
+12 יְהוָה = Yahweh (LORD)
+13 אֶת־ = <obj.> ([Obj.])
+14 מֹשֶׁה = Moses
+
+## 4:8:4
+KO: 그리고 이것은 등잔대의 제작 방식인데, 곧 금을 두드려 만든 것이며 그 밑판으로부터 그 꽃까지 두드려 만든 것이다. 이 등잔대를 여호와께서 모세에게 보이신 모양에 따라 그가 만들었더라.
+1 וְזֶה = and this (this)
+2 מַעֲשֵׂה = [was] [the] work of (deed)
+3 הַמְּנֹרָה = the lampstand
+4 מִקְשָׁה = hammered work
+5 זָהָב = gold
+6 עַד־ = to
+7 יְרֵכָהּ = base its (thigh)
+8 עַד־ = to
+9 פִּרְחָהּ = blossom its (flower)
+10 מִקְשָׁה = [was] hammered work
+11 הִוא = it (he;_she;_it)
+12 כַּמַּרְאֶה = like the appearance (appearance)
+13 אֲשֶׁר = which
+14 הֶרְאָה = he had shown (to see)
+15 יְהוָה = Yahweh (LORD)
+16 אֶת־ = <obj.>
+17 מֹשֶׁה = Moses
+18 כֵּן = so
+19 עָשָׂה = he made (to make)
+20 אֶת־ = <obj.>
+21 הַמְּנֹרָה פ = the lampstand
+
+## 4:8:5
+KO: 그리고 여호와께서 모세에게 말씀하여 이르셨다.
+1 וַיְדַבֵּר = and he spoke (to speak)
+2 יְהוָה = Yahweh (LORD)
+3 אֶל־ = to (to(wards))
+4 מֹשֶׁה = Moses
+5 לֵּאמֹר = <to> saying (to say)
+
+## 4:8:6
+KO: 이스라엘 자손들의 한가운데로부터 레위인들을 취하라, 그리고 그들을 정결하게 하라.
+1 קַח = take (to take)
+2 אֶת־ = <obj.>
+3 הַלְוִיִּם = the Levites (Levi)
+4 מִתּוֹךְ = from among (midst)
+5 בְּנֵי = [the] people of (son)
+6 יִשְׂרָאֵל = Israel
+7 וְטִהַרְתָּ = and you will purify (be pure)
+8 אֹתָם = <obj.> them
+
+## 4:8:7
+KO: 그리고 이같이 너는 그들에게 행하라, 그들을 정결하게 하기 위하여. 속죄의 물을 그들 위에 뿌리고, 그들로 그들의 온 살 위로 삭도를 지나가게 하며, 그들의 옷을 빨게 하여 그들을 정결하게 하라.
+1 וְכֹה־ = and thus (thus)
+2 תַעֲשֶׂה = you will do (to make)
+3 לָהֶם = to <the> them (them)
+4 לְטַהֲרָם = to purify them
+5 הַזֵּה = spatter (to sprinkle)
+6 עֲלֵיהֶם = on them
+7 מֵי = water of (water)
+8 חַטָּאת = sin offering (sin)
+9 וְהֶעֱבִירוּ = and they will cause to pass (to pass)
+10 תַעַר = a razor (razor)
+11 עַל־ = over
+12 כָּל־ = all
+13 בְּשָׂרָם = body their (flesh)
+14 וְכִבְּסוּ = and they will wash (to wash)
+15 בִגְדֵיהֶם = clothes their (garment)
+16 וְהִטֶּהָרוּ = and they will purify themselves
+
+## 4:8:8
+KO: 그리고 그들이 번제물로 수송아지 한 마리를 취하게 하라. 그리고 그 소제물로는 기름에 섞은 고운 가루를 취하게 하라. 그리고 너는 속죄물로 제이의(두 번째) 수송아지 한 마리를 취할지니라.
+1 וְלָקְחוּ = and they will take
+2 פַּר = a young bull
+3 בֶּן־ = a young one of
+4 בָּקָר = cattle
+5 וּמִנְחָתוֹ = and grain offering its (offering)
+6 סֹלֶת = fine flour
+7 בְּלוּלָה = mixed (to mix)
+8 בַשָּׁמֶן = with <the> oil (oil)
+9 וּפַר־ = and a young bull
+10 שֵׁנִי = second
+11 בֶן־ = a young one of
+12 בָּקָר = cattle
+13 תִּקַּח = you will take
+14 לְחַטָּאת = to a sin offering (sin)
+
+## 4:8:9
+KO: 그리고 너는 레위인들을 회막 앞으로 가까이 오게 하고, 이스라엘 자손의 온 회중을 모으라.
+1 וְהִקְרַבְתָּ = and you will bring near (to present)
+2 אֶת־ = <obj.>
+3 הַלְוִיִּם = the Levites (Levi)
+4 לִפְנֵי = <to> before (face)
+5 אֹהֶל = [the] tent of (tent)
+6 מוֹעֵד = meeting
+7 וְהִקְהַלְתָּ = and you will assemble (to gather)
+8 אֶת־ = <obj.>
+9 כָּל־ = all
+10 עֲדַת = [the] congregation of (congregation)
+11 בְּנֵי = [the] people of (son)
+12 יִשְׂרָאֵל = Israel
+
+## 4:8:10
+KO: 그리고 너는 레위인들을 여호와 앞에 나아오게 할 것이요, 이스라엘 자손들은 레위인들 위에 그들의 손들을 얹을 것이다.
+1 וְהִקְרַבְתָּ = and you will bring near (to present)
+2 אֶת־ = <obj.>
+3 הַלְוִיִּם = the Levites
+4 לִפְנֵי = <to> before (face)
+5 יְהוָה = Yahweh (LORD)
+6 וְסָמְכוּ = and they will lay (to support)
+7 בְנֵי־ = [the] people of (son)
+8 יִשְׂרָאֵל = Israel
+9 אֶת־ = <obj.>
+10 יְדֵיהֶם = hands their (hand)
+11 עַל־ = on (upon)
+12 הַלְוִיִּם = the Levites

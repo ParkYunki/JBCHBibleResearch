@@ -1,0 +1,212 @@
+## 6:19:49
+KO: 그리고 이스라엘 자손이 그 경계들을 따라 땅을 기업으로 나누는 것을 마쳤고, 그들 중에서 눈의 아들 여호수아에게 기업을 주었다.
+1 וַיְכַלּוּ = and they finished (to end)
+2 לִנְחֹל־ = to divide for possession (to inherit)
+3 אֶת־ = <obj.> ([Obj.])
+4 הָאָרֶץ = the land (land)
+5 לִגְבוּלֹתֶיהָ = to borders its (border)
+6 וַיִּתְּנוּ = and they gave (to give)
+7 בְנֵי־ = [the] people of
+8 יִשְׂרָאֵל = Israel
+9 נַחֲלָה = an inheritance (inheritance)
+10 לִיהוֹשֻׁעַ = to Joshua (Joshua)
+11 בִּן־ = [the] son of
+12 נוּן = Nun
+13 בְּתוֹכָם = in midst of them (midst)
+
+## 6:19:50
+KO: 여호와의 입(명령)에 따라 그들이 그에게 성읍, 곧 그가 구한 에브라임 산지의 딤낫세라를 주었고, 그가 그 성읍을 건축하고 그 안에 거주하였다.
+1 עַל־ = on (upon)
+2 פִּי = [the] mouth of (lip)
+3 יְהוָה = Yahweh (LORD)
+4 נָתְנוּ = they gave (to give)
+5 לוֹ = to <the> him (him)
+6 אֶת־ = <obj.>
+7 הָעִיר = the city
+8 אֲשֶׁר = which
+9 שָׁאָל = he asked for (to ask)
+10 אֶת־ = <obj.>
+11 תִּמְנַת־ = Timnath
+12 סֶרַח = Serah
+13 בְּהַר = in [the] hill country of (mountain)
+14 אֶפְרָיִם = Ephraim
+15 וַיִּבְנֶה = and he built (to build)
+16 אֶת־ = <obj.>
+17 הָעִיר = the city
+18 וַיֵּשֶׁב = and he dwelt (to dwell)
+19 בָּהּ = in <the> it (her)
+
+## 6:19:51
+KO: 이것들은 제사장 엘르아살과 눈의 아들 여호수아와 이스라엘 자손의 지파 족장들이 실로에서, 회막 문 앞 여호와 앞에서 제비 뽑아 나눈 기업이니라. 그리고 그들이 땅을 나누는 일을 마쳤더라.
+1 אֵלֶּה = these
+2 הַנְּחָלֹת = [are] the inheritances (inheritance)
+3 אֲשֶׁר = which
+4 נִחֲלוּ = they gave as a possession (to inherit)
+5 אֶלְעָזָר = Eleazar
+6 הַכֹּהֵן = the priest (priest)
+7 וִיהוֹשֻׁעַ = and Joshua (Joshua)
+8 בִּן־ = [the] son of
+9 נוּן = Nun
+10 וְרָאשֵׁי = and [the] leaders of (head)
+11 הָאָבוֹת = the fathers (father)
+12 לְמַטּוֹת = of [the] tribes of (tribe)
+13 בְּנֵי־ = [the] people of
+14 יִשְׂרָאֵל = Israel
+15 בְּגוֹרָל = by lot (lot)
+16 בְּשִׁלֹה = at Shiloh (Shiloh)
+17 לִפְנֵי = <to> before (face)
+18 יְהוָה = Yahweh (LORD)
+19 פֶּתַח = [the] entrance of (entrance)
+20 אֹהֶל = [the] tent of (tent)
+21 מוֹעֵד = meeting
+22 וַיְכַלּוּ = and they finished (to end)
+23 מֵחַלֵּק = from apportioning (to divide)
+24 אֶת־ = <obj.> ([Obj.])
+25 הָאָרֶץ פ = the land (land)
+
+## 6:20:1
+KO: 그리고 여호와께서 여호수아에게 말씀하여 이르시되
+1 וַיְדַבֵּר = and he spoke (to speak)
+2 יְהוָה = Yahweh (LORD)
+3 אֶל־ = to (to(wards))
+4 יְהוֹשֻׁעַ = Joshua
+5 לֵאמֹר = <to> saying (to say)
+
+## 6:20:2
+KO: 이스라엘 자손에게 말하여 이르라. 내가 모세를 통하여 너희에게 말한 그 도피성들을 너희를 위하여 주라.
+1 דַּבֵּר = speak
+2 אֶל־ = to
+3 בְּנֵי = [the] people of (son)
+4 יִשְׂרָאֵל = Israel
+5 לֵאמֹר = <to> saying (to say)
+6 תְּנוּ = assign (to give)
+7 לָכֶם = for <the> yourselves (you)
+8 אֶת־ = <obj.> ([Obj.])
+9 עָרֵי = [the] cities of (city)
+10 הַמִּקְלָט = <the> refuge (refuge)
+11 אֲשֶׁר־ = which
+12 דִּבַּרְתִּי = I spoke
+13 אֲלֵיכֶם = to you
+14 בְּיַד־ = by [the] hand of (hand)
+15 מֹשֶׁה = Moses
+
+## 6:20:3
+KO: 부지중에 알지 못하고 사람(생명)을 친 살인자가 그곳으로 도망하게 하라. 그리고 그들이 너희에게 피의 보수자로부터의 도피처가 되게 하라.
+1 לָנוּס = to flee
+2 שָׁמָּה = there towards (there)
+3 רוֹצֵחַ = a killer (to murder)
+4 מַכֵּה־ = [who] strikes down (to smite)
+5 נֶפֶשׁ = <of> a person (soul)
+6 בִּשְׁגָגָה = by inadvertence (unintentionally)
+7 בִּבְלִי־ = with not (without)
+8 דָעַת = knowledge
+9 וְהָיוּ = and they will become (to be)
+10 לָכֶם = for <the> you (you)
+11 לְמִקְלָט = <into> a refuge (refuge)
+12 מִגֹּאֵל = from [the] avenger of (to redeem)
+13 הַדָּם = <the> blood (blood)
+
+## 6:20:4
+KO: 그는 이 성읍들 중 하나로 도피할 것이며, 그 성읍의 문 어귀에 서서 그 성읍 장로들의 귀에 자신의 말들을 고할 것이요, 그들은 그를 그 성읍으로 받아들이고 그에게 한 장소를 주어 그들과 함께 거하게 할 것이다.
+1 וְנָס = and he will flee (to flee)
+2 אֶל־ = to
+3 אַחַת = one
+4 מֵהֶעָרִים = of the cities
+5 הָאֵלֶּה = <the> these (these)
+6 וְעָמַד = and he will stand (to stand)
+7 פֶּתַח = [the] entrance of (entrance)
+8 שַׁעַר = [the] gate of (gate)
+9 הָעִיר = the city
+10 וְדִבֶּר = and he will speak (to speak)
+11 בְּאָזְנֵי = in [the] ears of (ear)
+12 זִקְנֵי־ = [the] elders of (old)
+13 הָעִיר = the city
+14 הַהִיא = <the> that (he;_she;_it)
+15 אֶת־ = <obj.>
+16 דְּבָרָיו = words his (word)
+17 וְאָסְפוּ = and they will gather (to gather)
+18 אֹתוֹ = <obj.> him
+19 הָעִירָה = the city towards
+20 אֲלֵיהֶם = to themselves
+21 וְנָתְנוּ־ = and they will give (to give)
+22 לוֹ = to <the> him (him)
+23 מָקוֹם = a place (standing place)
+24 וְיָשַׁב = and he will dwell (to dwell)
+25 עִמָּם = with them (with)
+
+## 6:20:5
+KO: 그리고 만약 피의 보수자가 그의 뒤를 추격한다면, 그들은 그 살인자를 그의 손에 내어주지 말아야 한다. 이는 그가 지식(의도) 없이 그의 이웃을 쳤고, 그(살인자)가 어제와 그저께 그(이웃)를 미워하지 않았기 때문이다.
+1 וְכִי = and if
+2 יִרְדֹּף = he will pursue (to pursue)
+3 גֹּאֵל = [the] avenger of (to redeem)
+4 הַדָּם = <the> blood (blood)
+5 אַחֲרָיו = after him (after)
+6 וְלֹא־ = and not
+7 יַסְגִּרוּ = they will deliver up (to shut)
+8 אֶת־ = <obj.>
+9 הָרֹצֵחַ = the killer (to murder)
+10 בְּיָדוֹ = in hand his (hand)
+11 כִּי = for
+12 בִבְלִי־ = with not (without)
+13 דַעַת = knowledge
+14 הִכָּה = he struck (to smite)
+15 אֶת־ = <obj.>
+16 רֵעֵהוּ = neighbor his (neighbor)
+17 וְלֹא־ = and not
+18 שֹׂנֵא = [was] hating (to hate)
+19 הוּא = he (he;_she;_it)
+20 לוֹ = <to> <the> him (him)
+21 מִתְּמוֹל = from yesterday (yesterday)
+22 שִׁלְשׁוֹם = [the] third day (before)
+
+## 6:20:6
+KO: 그리고 그는 그 성읍에 거주해야 한다. 회중 앞에서 그가 서서 재판을 받기까지, 혹은 그 당시에 있을 대제사장의 죽음까지이다. 그때에 그 살인자는 돌아와야 한다. 그리고 그 살인자는 그의 성읍으로, 곧 그가 거기서 도망쳐 나왔던 그 성읍에 있는 그의 집으로 들어와야 한다.
+1 וְיָשַׁב = and he will dwell (to dwell)
+2 בָּעִיר = in the city
+3 הַהִיא = <the> that (he;_she;_it)
+4 עַד־ = until
+5 עָמְדוֹ = stands he (to stand)
+6 לִפְנֵי = <to> before (face)
+7 הָעֵדָה = the congregation (congregation)
+8 לַמִּשְׁפָּט = for <the> judgment (justice)
+9 עַד־ = until
+10 מוֹת = [the] death of (death)
+11 הַכֹּהֵן = the priest (priest)
+12 הַגָּדוֹל = <the> great (great)
+13 אֲשֶׁר = who
+14 יִהְיֶה = he will be (to be)
+15 בַּיָּמִים = in the days (day;_when)
+16 הָהֵם = <the> those (they(masc.))
+17 אָז = then
+18 יָשׁוּב = he will return (to return)
+19 הָרוֹצֵחַ = the killer (to murder)
+20 וּבָא = and he will go (to come (in))
+21 אֶל־ = to
+22 עִירוֹ = own city his
+23 וְאֶל־ = and to
+24 בֵּיתוֹ = own house his (house)
+25 אֶל־ = to
+26 הָעִיר = the city
+27 אֲשֶׁר־ = where
+28 נָס = he fled (to flee)
+29 מִשָּׁם = from there (there)
+
+## 6:20:7
+KO: 그리고 그들이 납달리의 산지에 있는 갈릴리 게데스와 에브라임 산지에 있는 세겜과 유다 산지에 있는 기럇 아르바 곧 헤브론을 거룩하게 구별하였다.
+1 וַיַּקְדִּשׁוּ = and they set apart (to consecrate)
+2 אֶת־ = <obj.>
+3 קֶדֶשׁ = Kedesh
+4 בַּגָּלִיל = in <the> Galilee (Galilee)
+5 בְּהַר = in [the] hill country of
+6 נַפְתָּלִי = Naphtali
+7 וְאֶת־ = and <obj.>
+8 שְׁכֶם = Shechem
+9 בְּהַר = in [the] hill country of
+10 אֶפְרָיִם = Ephraim
+11 וְאֶת־ = and <obj.>
+12 קִרְיַת = Kiriath
+13 אַרְבַּע = Arba
+14 הִיא = that (he;_she;_it)
+15 חֶבְרוֹן = [is] Hebron (Hebron)
+16 בְּהַר = in [the] hill country of
+17 יְהוּדָה = Judah

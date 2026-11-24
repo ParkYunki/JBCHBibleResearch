@@ -1,0 +1,144 @@
+## 1:1:1
+KO: 태초에 하나님께서 그 하늘들과 그 땅을 창조하셨다.
+1 בְּרֵאשִׁית = in beginning (first)
+2 בָּרָא = he created (to create)
+3 אֱלֹהִים = God
+4 אֵת = <obj.>
+5 הַשָּׁמַיִם = the heavens (heaven)
+6 וְאֵת = and <obj.>
+7 הָאָרֶץ = the earth (land)
+
+## 1:1:2
+KO: 그리고 그 땅은 혼돈과 공허였고, 어둠이 깊음의 표면 위에 있었으며, 하나님의 영은 물들의 표면 위를 배회하고 계셨다.
+1 וְהָאָרֶץ = and the earth (land)
+2 הָיְתָה = <it> was (to be)
+3 תֹהוּ = formlessness
+4 וָבֹהוּ = and emptiness (void)
+5 וְחֹשֶׁךְ = and darkness (darkness)
+6 עַל־ = [was] over
+7 פְּנֵי = [the] surface of
+8 תְהוֹם = [the] deep (abyss)
+9 וְרוּחַ = and [the] spirit of (spirit)
+10 אֱלֹהִים = God
+11 מְרַחֶפֶת = [was] hovering (to hover)
+12 עַל־ = over
+13 פְּנֵי = [the] surface of
+14 הַמָּיִם = the waters (water)
+
+## 1:1:3
+KO: 그리고 하나님이 말씀하셨다, "빛이 있어라." 그리고 빛이 있었다.
+1 וַיֹּאמֶר = and he said (to say)
+2 אֱלֹהִים = God
+3 יְהִי = let it be
+4 אוֹר = light
+5 וַיְהִי־ = and there was
+6 אוֹר = light
+
+## 1:1:4
+KO: 그리고 하나님이 그 빛을 보셨는데, 왜냐하면 그것이 좋았기 때문이다. 그리고 하나님이 빛과 어둠 사이를 나누셨다.
+1 וַיַּרְא = and he saw (to see)
+2 אֱלֹהִים = God
+3 אֶת־ = <obj.> ([Obj.])
+4 הָאוֹר = the light
+5 כִּי־ = that (for)
+6 טוֹב = [it was] good (be pleasing)
+7 וַיַּבְדֵּל = and he separated (to separate)
+8 אֱלֹהִים = God
+9 בֵּין = between
+10 הָאוֹר = the light
+11 וּבֵין = and between
+12 הַחֹשֶׁךְ = the darkness (darkness)
+
+## 1:1:5
+KO: 그리고 하나님이 그 빛을 낮이라 부르셨고, 그 어둠을 밤이라 부르셨다. 그리고 저녁이 있었고 아침이 있었다, 한 날.
+1 וַיִּקְרָא = and he called
+2 אֱלֹהִים = God
+3 לָאוֹר = <to> the light (light)
+4 יוֹם = day
+5 וְלַחֹשֶׁךְ = and <to> the darkness (darkness)
+6 קָרָא = he called
+7 לָיְלָה = night
+8 וַיְהִי־ = and there was
+9 עֶרֶב = evening
+10 וַיְהִי־ = and there was
+11 בֹקֶר = morning
+12 יוֹם = day
+13 אֶחָד פ = one
+
+## 1:1:6
+KO: 그리고 하나님이 말씀하셨다. "물들 가운데 궁창이 있으라. 그리고 물과 물들 사이를 나누는 것이 있으라."
+1 וַיֹּאמֶר = and he said (to say)
+2 אֱלֹהִים = God
+3 יְהִי = let it be
+4 רָקִיעַ = a firmament (expanse)
+5 בְּתוֹךְ = in [the] middle of (midst)
+6 הַמָּיִם = the waters
+7 וִיהִי = and let it be
+8 מַבְדִּיל = separating (to separate)
+9 בֵּין = between
+10 מַיִם = waters
+11 לָמָיִם = to waters
+
+## 1:1:7
+KO: 하나님이 궁창을 만드시고, 궁창 아래에 있는 물들과 궁창 위에 있는 물들 사이를 나누시니, 그대로 되었다.
+1 וַיַּעַשׂ = and he made (to make)
+2 אֱלֹהִים = God
+3 אֶת־ = <obj.> ([Obj.])
+4 הָרָקִיעַ = the firmament
+5 וַיַּבְדֵּל = and he separated (to separate)
+6 בֵּין = between
+7 הַמַּיִם = the waters
+8 אֲשֶׁר = which
+9 מִתַּחַת = [were] from under (underneath)
+10 לָרָקִיעַ = to the firmament
+11 וּבֵין = and between
+12 הַמַּיִם = the waters
+13 אֲשֶׁר = which
+14 מֵעַל = [were] from <above> (upon)
+15 לָרָקִיעַ = <to> the firmament
+16 וַיְהִי־ = and it was (to be)
+17 כֵן = so
+
+## 1:1:8
+KO: 그리고 하나님이 그 궁창을 '하늘'이라 부르셨다. 저녁이 되었고 아침이 되었다. 둘째 날이다.
+1 וַיִּקְרָא = and he called (to call)
+2 אֱלֹהִים = God
+3 לָרָקִיעַ = <to> the firmament (expanse)
+4 שָׁמָיִם = heaven
+5 וַיְהִי־ = and there was
+6 עֶרֶב = evening
+7 וַיְהִי־ = and there was
+8 בֹקֶר = morning
+9 יוֹם = a day (day;_when)
+10 שֵׁנִי פ = second
+
+## 1:1:9
+KO: 그리고 하나님이 말씀하시기를, "하늘 아래의 물들은 한 곳으로 모이고 뭍은 나타나라" 하시니 그대로 되었다.
+1 וַיֹּאמֶר = and he said (to say)
+2 אֱלֹהִים = God
+3 יִקָּווּ = let them gather (to collect)
+4 הַמַּיִם = the waters (water)
+5 מִתַּחַת = from under (underneath)
+6 הַשָּׁמַיִם = the heavens (heaven)
+7 אֶל־ = to (to(wards))
+8 מָקוֹם = a place (standing place)
+9 אֶחָד = one
+10 וְתֵרָאֶה = and let it appear (to see)
+11 הַיַּבָּשָׁה = the dry ground (dry land)
+12 וַיְהִי־ = and it was (to be)
+13 כֵן = so
+
+## 1:1:10
+KO: 그리고 하나님이 그 마른 땅을 '땅'이라 부르셨고, 물들이 모인 곳을 '바다'라 부르셨다. 그리고 하나님이 보시기에 그것이 좋았다.
+1 וַיִּקְרָא = and he called
+2 אֱלֹהִים = God
+3 לַיַּבָּשָׁה = <to> the dry ground (dry land)
+4 אֶרֶץ = earth (land)
+5 וּלְמִקְוֵה = and <to> [the] collection of (collection)
+6 הַמַּיִם = the waters (water)
+7 קָרָא = he called
+8 יַמִּים = seas (sea)
+9 וַיַּרְא = and he saw (to see)
+10 אֱלֹהִים = God
+11 כִּי־ = that (for)
+12 טוֹב = [it was] good (be pleasing)

@@ -1,0 +1,988 @@
+## 9:13:15
+KO: 그리고 사무엘이 일어나 길갈에서 베냐민 기브아로 올라갔고, 사울이 자기와 함께 있는 백성 약 육백 명을 계수하였다. 그리고 사울은 자기 길을 갔고 나머지 백성은 사울을 따라 전쟁하는 백성을 만나러 올라가 길갈로부터 들어왔다.
+1 וַיָּקָם = and he arose (to arise)
+2 שְׁמוּאֵל = Samuel
+3 וַיַּעַל = and he went up
+4 מִן־ = from
+5 הַגִּלְגָּל = <the> Gilgal
+6 גִּבְעַת = - (Gibeah)
+7 בִּנְיָמִן = - (Benjamin)
+8 וַיִּפְקֹד = - (to reckon)
+9 שָׁאוּל = -
+10 אֶת־ = - ([Obj.])
+11 הָעָם = -
+12 הַנִּמְצְאִים = - (to find)
+13 עִמּוֹ = - (with)
+14 כְּשֵׁשׁ = - (six)
+15 מֵאוֹת = - (hundred)
+16 אִישׁ = - (man)
+17 וַיֵּלֶךְ = and he went (to go)
+18 לְדַרְכּוֹ = on way his (way)
+19 וְיֶתֶר = and the rest of (remainder)
+20 הָעָם = the people
+21 עָלָה = it went up
+22 אַחֲרֵי = after
+23 שָׁאוּל = Saul
+24 לִקְרַאת = to meet (to encounter)
+25 עַם־ = [the] people
+26 הַמִּלְחָמָה = [of] the battle (battle)
+27 וַיָּבֹאוּ = and they went (to come (in))
+28 מִן־ = from
+29 הַגִּלְגָּל = <the> Gilgal
+
+## 9:13:16
+KO: 그리고 사울과 그의 아들 요나단과 그들과 함께 있는 백성은 베냐민의 게바에 거주하고, 블레셋 사람들은 믹마스에 진을 쳤더라.
+1 וְשָׁאוּל = and Saul (Saul)
+2 וְיוֹנָתָן = and Jonathan (Jonathan)
+3 בְּנוֹ = son his (son)
+4 וְהָעָם = and the people (people)
+5 הַנִּמְצָא = which was found (to find)
+6 עִמָּם = with them (with)
+7 יֹשְׁבִים = [were] remaining (to dwell)
+8 בְּגֶבַע = in Geba (Geba)
+9 בִּנְיָמִן = of Benjamin (Benjamin)
+10 וּפְלִשְׁתִּים = and [the] Philistines (Philistine)
+11 חָנוּ = they encamped (to camp)
+12 בְמִכְמָשׂ = in Micmash (Michmash)
+
+## 9:13:17
+KO: 그리고 파괴자들이 블레셋의 진영으로부터 세 부대로 나왔는데, 한 부대는 오브라의 길로 향하여 수알 땅으로 이르렀고
+1 וַיֵּצֵא = and it came out (to come out)
+2 הַמַּשְׁחִית = the destroyer (to ruin)
+3 מִמַּחֲנֵה = from [the] camp of (camp)
+4 פְלִשְׁתִּים = [the] Philistines (Philistine)
+5 שְׁלֹשָׁה = three
+6 רָאשִׁים = companies
+7 הָרֹאשׁ = the company
+8 אֶחָד = one
+9 יִפְנֶה = it turned (to turn)
+10 אֶל־ = to
+11 דֶּרֶךְ = [the] direction of (way)
+12 עָפְרָה = Ophrah
+13 אֶל־ = to
+14 אֶרֶץ = [the] land of (land)
+15 שׁוּעָל = Shual
+
+## 9:13:18
+KO: 그리고 한 무리는 벧호론의 길로 향하였고, 그리고 다른 한 무리는 스보임 골짜기 위를 내려다보는 지경의 길, 곧 광야 쪽으로 향하였더라.
+1 וְהָרֹאשׁ = and the company
+2 אֶחָד = one
+3 יִפְנֶה = it turned
+4 דֶּרֶךְ = [the] direction of
+5 בֵּית = Beth
+6 חֹרוֹן = Horon
+7 וְהָרֹאשׁ = and the company
+8 אֶחָד = one
+9 יִפְנֶה = it turned
+10 דֶּרֶךְ = [the] direction
+11 הַגְּבוּל = the border (border)
+12 הַנִּשְׁקָף = which looks down (to look)
+13 עַל־ = over (upon)
+14 גֵּי = [the] valley of (valley)
+15 הַצְּבֹעִים = <the> Zeboim (of Zeboim)
+16 הַמִּדְבָּרָה ס = the wilderness towards (wilderness)
+
+## 9:13:19
+KO: 그리고 이스라엘의 온 땅에서 대장장이가 발견되지 않았으니, 이는 블레셋 사람들이 말하기를 '히브리 사람들이 칼이나 창을 만들까 두렵기' 때문이었다.
+1 וְחָרָשׁ = and a craftsman (artificer)
+2 לֹא = not
+3 יִמָּצֵא = he was found (to find)
+4 בְּכֹל = in all (all)
+5 אֶרֶץ = [the] land of (land)
+6 יִשְׂרָאֵל = Israel
+7 כִּי־ = for
+8 אָמְרוּ = they said (to say)
+9 פְלִשְׁתִּים = [the] Philistines (Philistine)
+10 פֶּן = lest
+11 יַעֲשׂוּ = they should make (to make)
+12 הָעִבְרִים = the Hebrews (Hebrew)
+13 חֶרֶב = a sword (sword)
+14 אוֹ = or
+15 חֲנִית = a spear (spear)
+
+## 9:13:20
+KO: 그리고 온 이스라엘은 내려갔다, 블레셋 사람들에게, 그의 보습과 그의 삽과 그의 도끼와 그의 괭이를 벼리기 위하여.
+1 וַיֵּרְדוּ = and they went down (to go down)
+2 כָל־ = all
+3 יִשְׂרָאֵל = Israel
+4 הַפְּלִשְׁתִּים = the Philistines (Philistine)
+5 לִלְטוֹשׁ = to sharpen
+6 אִישׁ = each man (man)
+7 אֶת־ = <obj.>
+8 מַחֲרַשְׁתּוֹ = plowshare his
+9 וְאֶת־ = and <obj.>
+10 אֵתוֹ = mattock his (plowshare)
+11 וְאֶת־ = and <obj.>
+12 קַרְדֻּמּוֹ = axe his (axe)
+13 וְאֵת = and <obj.>
+14 מַחֲרֵשָׁתוֹ = plowshare his
+
+## 9:13:21
+KO: 그리고 괭이들과 삽들과 세 갈래 갈퀴들과 도끼들의 무딤이 있었고, 찌르는 막대기를 세우는 것이 있었다.
+1 וְהָיְתָה = and it was (to be)
+2 הַפְּצִירָה = the charge (bluntness)
+3 פִים = two thirds of a shekel (lip)
+4 לַמַּחֲרֵשֹׁת = for the plowshares (plowshare)
+5 וְלָאֵתִים = and for the mattocks (plowshare)
+6 וְלִשְׁלֹשׁ = and for three (three)
+7 קִלְּשׁוֹן = fork
+8 וּלְהַקַּרְדֻּמִּים = and for the axes (axe)
+9 וּלְהַצִּיב = and to make straight (to stand)
+10 הַדָּרְבָן = the goad[s] (goad)
+
+## 9:13:22
+KO: 그리고 전쟁의 날에 사울과 함께한 그리고 요나단과 함께한 모든 백성의 손에는 칼과 창이 발견되지 않았으나, 사울과 그의 아들 요나단에게는 발견되었다.
+1 וְהָיָה = and it was (to be)
+2 בְּיוֹם = on a day of (day;_when)
+3 מִלְחֶמֶת = battle
+4 וְלֹא = and not (not)
+5 נִמְצָא = it was found
+6 חֶרֶב = a sword (sword)
+7 וַחֲנִית = and a spear (spear)
+8 בְּיַד = in [the] hand of (hand)
+9 כָּל־ = any of (all)
+10 הָעָם = the people (people)
+11 אֲשֶׁר = which
+12 אֶת־ = [was] with
+13 שָׁאוּל = Saul
+14 וְאֶת־ = and with
+15 יוֹנָתָן = Jonathan
+16 וַתִּמָּצֵא = and it was found
+17 לְשָׁאוּל = to Saul
+18 וּלְיוֹנָתָן = and to Jonathan
+19 בְּנוֹ = son his (son)
+
+## 9:13:23
+KO: 그리고 블레셋 사람들의 주둔지가 믹마스의 길목으로 나아갔더라.
+1 וַיֵּצֵא = and it came out (to come out)
+2 מַצַּב = [the] garrison of (station)
+3 פְּלִשְׁתִּים = [the] Philistines (Philistine)
+4 אֶל־ = to (to(wards))
+5 מַעֲבַר = [the] pass of (ford)
+6 מִכְמָשׂ ס = Micmash (Michmash)
+
+## 9:14:1
+KO: 그리고 그날이 있었다. 요나단, 사울의 아들이 그의 기구들을 드는 소년에게 말하였다. “가자. 우리가 저편에 있는 블레셋 사람들의 주둔지로 건너가자.” 그러나 그의 아버지에게는 그는 알리지 아니하였다.
+1 וַיְהִי = and it was (to be)
+2 הַיּוֹם = the day (day;_when)
+3 וַיֹּאמֶר = and he said (to say)
+4 יוֹנָתָן = Jonathan
+5 בֶּן־ = [the] son of (son)
+6 שָׁאוּל = Saul
+7 אֶל־ = to
+8 הַנַּעַר = the young man (youth)
+9 נֹשֵׂא = [the] bearer of (to lift)
+10 כֵלָיו = armor<s> his (article|utensil)
+11 לְכָה = come ! (to go)
+12 וְנַעְבְּרָה = so let us pass over (to pass)
+13 אֶל־ = to
+14 מַצַּב = [the] garrison of (station)
+15 פְּלִשְׁתִּים = [the] Philistines (Philistine)
+16 אֲשֶׁר = which
+17 מֵעֵבֶר = [is] from [the] other side of (side)
+18 הַלָּז = this
+19 וּלְאָבִיו = and to father his (father)
+20 לֹא = not
+21 הִגִּיד = he told (to tell)
+
+## 9:14:2
+KO: 그리고 사울은 기브아 끝에 있는 석류나무 아래에 앉아 있었고, 그와 함께한 백성은 육백 명 가량이었다.
+1 וְשָׁאוּל = and Saul (Saul)
+2 יוֹשֵׁב = [was] remaining (to dwell)
+3 בִּקְצֵה = at [the] edge of (end)
+4 הַגִּבְעָה = <the> Gibeah (Gibeah)
+5 תַּחַת = under (underneath)
+6 הָרִמּוֹן = <the> pomegranate tree (pomegranate)
+7 אֲשֶׁר = which
+8 בְּמִגְרוֹן = [is] in Migron (Migron)
+9 וְהָעָם = and the people (people)
+10 אֲשֶׁר = which
+11 עִמּוֹ = [was] with him (with)
+12 כְּשֵׁשׁ = [was] about six (six)
+13 מֵאוֹת = hundred<s> (hundred)
+14 אִישׁ = man
+
+## 9:14:3
+KO: 그리고 아히야는 에봇을 입고(메고) 그곳에 있었으니, 그는 이가봇의 형제 아히둡의 아들이요, 엘리의 증손인 비느하스의 아들이며, 실로에서 여호와의 제사장이었던 자였다. 그리고 백성은 요나단이 갔다는 것을 알지 못하였다.
+1 וַאֲחִיָּה = and Ahijah (Ahijah)
+2 בֶן־ = [the] son of
+3 אֲחִטוּב = Ahitub
+4 אֲחִי = [the] brother of (brother)
+5 אִיכָבוֹד = Ichabod
+6 בֶּן־ = [the] son of
+7 פִּינְחָס = Phinehas
+8 בֶּן־ = [the] son of
+9 עֵלִי = Eli
+10 כֹּהֵן = [the] priest of (priest)
+11 יְהוָה = Yahweh (LORD)
+12 בְּשִׁלוֹ = in Shiloh (Shiloh)
+13 נֹשֵׂא = [was] bearing (to lift)
+14 אֵפוֹד = an ephod (ephod)
+15 וְהָעָם = and the people (people)
+16 לֹא = not
+17 יָדַע = it knew (to know)
+18 כִּי = that (for)
+19 הָלַךְ = he had gone (to go)
+20 יוֹנָתָן = Jonathan
+
+## 9:14:4
+KO: 요나단이 블레셋 사람들의 수비대로 건너가려고 찾았던 통로들 사이에는, 이편에도 험한 바위(돌기)가 있고 저편에도 험한 바위(돌기)가 있는데, 하나의 이름은 보세스요 하나의 이름은 세네라.
+1 וּבֵין = and [were] between (between)
+2 הַמַּעְבְּרוֹת = the passes (ford)
+3 אֲשֶׁר = which
+4 בִּקֵּשׁ = he sought (to seek)
+5 יוֹנָתָן = Jonathan
+6 לַעֲבֹר = to pass over (to pass)
+7 עַל־ = to (upon)
+8 מַצַּב = [the] garrison of (station)
+9 פְּלִשְׁתִּים = [the] Philistines (Philistine)
+10 שֵׁן־ = [the] tooth of
+11 הַסֶּלַע = the rock
+12 מֵהָעֵבֶר = from the other side
+13 מִזֶּה = from this
+14 וְשֵׁן־ = and [the] tooth of
+15 הַסֶּלַע = the rock
+16 מֵהָעֵבֶר = from the other side
+17 מִזֶּה = from this
+18 וְשֵׁם = and [the] name of
+19 הָאֶחָד = the one
+20 בּוֹצֵץ = [was] Bozez (Bozez)
+21 וְשֵׁם = and [the] name of
+22 הָאֶחָד = the one
+23 סֶנֶּה = [was] Seneh (Seneh)
+
+## 9:14:5
+KO: 하나의 험준한 바위(치아)는 북쪽에서 믹마스를 마주하고, 하나는 남쪽에서 게바를 마주하며 서 있다.
+1 הַשֵּׁן = the tooth (tooth)
+2 הָאֶחָד = the one
+3 מָצוּק = a pillar (pillar)
+4 מִצָּפוֹן = [was] from [the] north (north)
+5 מוּל = opposite to
+6 מִכְמָשׂ = Micmash (Michmash)
+7 וְהָאֶחָד = and the one [tooth]
+8 מִנֶּגֶב = [was] from [the] south (south)
+9 מוּל = opposite to
+10 גָּבַע ס = Geba
+
+## 9:14:6
+KO: 요나단이 그의 무기를 든 소년에게 말하였다. "오라, 우리가 이 할례 없는 자들의 주둔지로 건너가자. 혹시 여호와께서 우리를 위하여 일하실지 모른다. 이는 여호와께는 많은 사람으로든 혹은 적은 사람으로든 구원하시는 데에 아무런 제한이 없기 때문이다."
+1 וַיֹּאמֶר = and he said (to say)
+2 יְהוֹנָתָן = Jonathan
+3 אֶל־ = to
+4 הַנַּעַר = the young man (youth)
+5 נֹשֵׂא = [the] bearer of (to lift)
+6 כֵלָיו = armor<s> his (article|utensil)
+7 לְכָה = come ! (to go)
+8 וְנַעְבְּרָה = so let us pass over (to pass)
+9 אֶל־ = to
+10 מַצַּב = [the] garrison of (station)
+11 הָעֲרֵלִים = the uncircumcised [men] (uncircumcised)
+12 הָאֵלֶּה = <the> these (these)
+13 אוּלַי = perhaps
+14 יַעֲשֶׂה = he will act (to make)
+15 יְהוָה = Yahweh
+16 לָנוּ = for <the> us (us)
+17 כִּי = for
+18 אֵין = not (nothing)
+19 לַיהוָה = [belongs] to Yahweh
+20 מַעְצוֹר = a limitation (restraint)
+21 לְהוֹשִׁיעַ = to save
+22 בְּרַב = by many (many)
+23 אוֹ = or
+24 בִמְעָט = by few (little)
+
+## 9:14:7
+KO: 그의 무기를 든 자가 그에게 말하였다. "당신의 마음속에 있는 모든 것을 행하십시오. 당신을 위하여 나아가십시오. 보십시오, 내가 당신과 함께합니다. 당신의 마음과 같이."
+1 וַיֹּאמֶר = and he said (to say)
+2 לוֹ = to <the> him (him)
+3 נֹשֵׂא = [the] bearer of (to lift)
+4 כֵלָיו = armor<s> his (article|utensil)
+5 עֲשֵׂה = do (to make)
+6 כָּל־ = all
+7 אֲשֶׁר = that (which)
+8 בִּלְבָבֶךָ = [is] in heart your
+9 נְטֵה = turn aside (to stretch)
+10 לָךְ = for <the> yourself (you)
+11 הִנְנִי = here I (look!)
+12 עִמְּךָ = [am] with you (with)
+13 כִּלְבָבֶךָ ס = according to heart your
+
+## 9:14:8
+KO: 그리고 요나단이 말했다. "보라, 우리가 그 사람들에게로 건너가서 그들에게 우리 자신을 드러내리라."
+1 וַיֹּאמֶר = and he said (to say)
+2 יְהוֹנָתָן = Jonathan
+3 הִנֵּה = here! (behold)
+4 אֲנַחְנוּ = we
+5 עֹבְרִים = [are] about to pass over (to pass)
+6 אֶל־ = to
+7 הָאֲנָשִׁים = the men (human)
+8 וְנִגְלִינוּ = and we will reveal ourselves (to reveal)
+9 אֲלֵיהֶם = to them
+
+## 9:14:9
+KO: 만일 그들이 우리에게 이렇게 말하기를 "너희가 우리에게 이를 때까지 잠잠하라" 하면, 우리는 우리 처소에 머물러 있고 그들에게 올라가지 않을 것이다.
+1 אִם־ = if
+2 כֹּה = thus
+3 יֹאמְרוּ = they will say (to say)
+4 אֵלֵינוּ = to us
+5 דֹּמּוּ = be still (to silence)
+6 עַד־ = until (till)
+7 הַגִּיעֵנוּ = reach we (to touch)
+8 אֲלֵיכֶם = <to> you
+9 וְעָמַדְנוּ = and we will remain (to stand)
+10 תַחְתֵּינוּ = in place our (underneath)
+11 וְלֹא = and not (not)
+12 נַעֲלֶה = we will go up (to ascend)
+13 אֲלֵיהֶם = to them
+
+## 9:14:10
+KO: 그리고 만일 그들이 이같이 말하기를, "우리에게로 올라오라" 하면, 우리가 올라갈 것이니, 이는 여호와께서 그들을 우리 손에 넘겨주셨기 때문이며, 이것이 우리에게 그 표징이 될 것이다.
+1 וְאִם־ = and if (if)
+2 כֹּה = thus
+3 יֹאמְרוּ = they will say (to say)
+4 עֲלוּ = come up
+5 עָלֵינוּ = to us (upon)
+6 וְעָלִינוּ = and we will go up
+7 כִּי־ = for
+8 נְתָנָם = he has given them (to give)
+9 יְהוָה = Yahweh (LORD)
+10 בְּיָדֵנוּ = in hand our (hand)
+11 וְזֶה־ = and this (this)
+12 לָּנוּ = for <the> us (us)
+13 הָאוֹת = [will be] the sign (sign)
+
+## 9:14:11
+KO: 그리고 그들 둘이 블레셋 사람의 초소(주둔지)에게 나타나니, 블레셋 사람들이 말하였다. "보라, 히브리 사람들이 그들이 그곳에 숨었던 구멍들로부터 나오고 있다."
+1 וַיִּגָּלוּ = and they revealed themselves (to reveal)
+2 שְׁנֵיהֶם = [the] two of them (two)
+3 אֶל־ = to (to(wards))
+4 מַצַּב = [the] garrison of (station)
+5 פְּלִשְׁתִּים = [the] Philistines
+6 וַיֹּאמְרוּ = and they said (to say)
+7 פְלִשְׁתִּים = [the] Philistines
+8 הִנֵּה = here! (behold)
+9 עִבְרִים = Hebrews (Hebrew)
+10 יֹצְאִים = [are] coming out (to come out)
+11 מִן־ = from
+12 הַחֹרִים = the holes (hole)
+13 אֲשֶׁר = where (which)
+14 הִתְחַבְּאוּ־ = they have hidden themselves (to hide)
+15 שָׁם = there
+
+## 9:14:12
+KO: 그 수비대의 사람들이 요나단과 그의 기구 드는 자에게 대답하여 말하기를 "우리에게로 올라오라, 그러면 우리가 너희에게 한 가지 일을 알게 하리라" 하였다. 요나단이 자기 기구 드는 자에게 말하기를 "나를 따라 올라오라. 왜냐하면 여호와께서 그들을 이스라엘의 손에 넘겨주셨기 때문이다"라고 하였다.
+1 וַיַּעֲנוּ = and they answered (to answer)
+2 אַנְשֵׁי = [the] men of (human)
+3 הַמַּצָּבָה = the garrison (guard)
+4 אֶת־ = <obj.>
+5 יוֹנָתָן = Jonathan
+6 וְאֶת־ = and <obj.>
+7 נֹשֵׂא = [the] bearer of
+8 כֵלָיו = armor<s> his
+9 וַיֹּאמְרוּ = and they said
+10 עֲלוּ = come up
+11 אֵלֵינוּ = to us
+12 וְנוֹדִיעָה = so let us make known to (to know)
+13 אֶתְכֶם = <obj.> you
+14 דָּבָר פ = something (word)
+15 וַיֹּאמֶר = and he said
+16 יוֹנָתָן = Jonathan
+17 אֶל־ = to
+18 נֹשֵׂא = [the] bearer of
+19 כֵלָיו = armor<s> his
+20 עֲלֵה = come up
+21 אַחֲרַי = after me (after)
+22 כִּי־ = for
+23 נְתָנָם = he has given them (to give)
+24 יְהוָה = Yahweh (LORD)
+25 בְּיַד = in [the] hand of (hand)
+26 יִשְׂרָאֵל = Israel
+
+## 9:14:13
+KO: 그리고 요나단이 그의 손들과 그의 발들 위로 올라갔고, 그의 병기 든 자가 그를 따라(올라갔다). 그리고 그들(블레셋 사람들)이 요나단의 얼굴 앞에서 엎드러졌고, 그의 병기 든 자가 그 뒤에서 죽이며 나아갔다.
+1 וַיַּעַל = and he went up (to ascend)
+2 יוֹנָתָן = Jonathan
+3 עַל־ = on
+4 יָדָיו = hands his (hand)
+5 וְעַל־ = and on
+6 רַגְלָיו = feet his (foot)
+7 וְנֹשֵׂא = and [the] bearer of
+8 כֵלָיו = armor<s> his
+9 אַחֲרָיו = [was] behind him
+10 וַיִּפְּלוּ = and they fell (to fall)
+11 לִפְנֵי = <to> before (face)
+12 יוֹנָתָן = Jonathan
+13 וְנֹשֵׂא = and [the] bearer of
+14 כֵלָיו = armor<s> his
+15 מְמוֹתֵת = [was] killing (to die)
+16 אַחֲרָיו = behind him
+
+## 9:14:14
+KO: 그리고 요나단과 그의 무기를 든 자가 친 첫 번째 살륙은 약 이십 명의 남자였는데, 쟁기질하는 멍에의 반 이랑 정도의 공간 안에서였다.
+1 וַתְּהִי = and it was (to be)
+2 הַמַּכָּה = the slaughter (wound)
+3 הָרִאשֹׁנָה = <the> first (first)
+4 אֲשֶׁר = which
+5 הִכָּה = he struck down (to smite)
+6 יוֹנָתָן = Jonathan
+7 וְנֹשֵׂא = and [the] bearer of (to lift)
+8 כֵלָיו = armor<s> his (article|utensil)
+9 כְּעֶשְׂרִים = about twenty (twenty)
+10 אִישׁ = man
+11 כְּבַחֲצִי = about in half of (half)
+12 מַעֲנָה = a furrow (furrow)
+13 צֶמֶד = an acre of (pair)
+14 שָׂדֶה = a field (land)
+
+## 9:14:15
+KO: 진과 들과 모든 백성과 부대와 파괴자들 가운데 떨림이 있었고 그들 또한 떨었으며, 땅이 진동하였으니 이는 하나님의 떨림이 되었더라.
+1 וַתְּהִי = and it was
+2 חֲרָדָה = trembling
+3 בַמַּחֲנֶה = in the camp (camp)
+4 בַשָּׂדֶה = in the field (land)
+5 וּבְכָל־ = and among all (all)
+6 הָעָם = the people (people)
+7 הַמַּצָּב = the garrison (station)
+8 וְהַמַּשְׁחִית = and the destroyer (to ruin)
+9 חָרְדוּ = they trembled (to tremble)
+10 גַּם־ = also
+11 הֵמָּה = they (they(masc.))
+12 וַתִּרְגַּז = and it quaked (to tremble)
+13 הָאָרֶץ = the earth (land)
+14 וַתְּהִי = and it became
+15 לְחֶרְדַּת = <into> a trembling of
+16 אֱלֹהִים = God
+
+## 9:14:16
+KO: 베냐민 기브아에 있는 사울의 파수꾼들이 바라보니, 보라, 그 무리가 녹아내리고 이리저리 흩어지더라.
+1 וַיִּרְאוּ = and they saw (to see)
+2 הַצֹּפִים = the watchmen (to watch)
+3 לְשָׁאוּל = of Saul (Saul)
+4 בְּגִבְעַת = at Gibeah of (Gibeah)
+5 בִּנְיָמִן = Benjamin
+6 וְהִנֵּה = and there! (behold)
+7 הֶהָמוֹן = the multitude (crowd)
+8 נָמוֹג = it melted away (to melt)
+9 וַיֵּלֶךְ = and it went (to go)
+10 וַהֲלֹם פ = and here (here)
+
+## 9:14:17
+KO: 사울이 그와 함께한 백성에게 말하였다. "이제 점고하여 우리에게서 누가 나갔는지 보라." 그러자 그들이 점고하였는데, 보라, 요나단과 그의 기물을 드는 자가 없었다.
+1 וַיֹּאמֶר = and he said (to say)
+2 שָׁאוּל = Saul
+3 לָעָם = to the people (people)
+4 אֲשֶׁר = which
+5 אִתּוֹ = [was] with him (with)
+6 פִּקְדוּ־ = muster
+7 נָא = please
+8 וּרְאוּ = and see (to see)
+9 מִי = who?
+10 הָלַךְ = has he gone (to go)
+11 מֵעִמָּנוּ = from with <the> us (from with)
+12 וַיִּפְקְדוּ = and they mustered
+13 וְהִנֵּה = and there! (behold)
+14 אֵין = there not (nothing)
+15 יוֹנָתָן = [were] Jonathan (Jonathan)
+16 וְנֹשֵׂא = and [the] bearer of (to lift)
+17 כֵלָיו = armor<s> his (article|utensil)
+
+## 9:14:18
+KO: 사울이 아히야에게 말하였다. "하나님의 궤를 이리로 가져오너라." 왜냐하면 하나님의 궤가 그날에 이스라엘 자손과 함께 있었기 때문이다.
+1 וַיֹּאמֶר = and he said (to say)
+2 שָׁאוּל = Saul
+3 לַאֲחִיָּה = to Ahijah (Ahijah)
+4 הַגִּישָׁה = bring near ! (to approach)
+5 אֲרוֹן = [the] ark of
+6 הָאֱלֹהִים = <the> God
+7 כִּי־ = for
+8 הָיָה = it was (to be)
+9 אֲרוֹן = [the] ark of
+10 הָאֱלֹהִים = <the> God
+11 בַּיּוֹם = on the day (day;_when)
+12 הַהוּא = <the> that (he;_she;_it)
+13 וּבְנֵי = and [the] people of (son)
+14 יִשְׂרָאֵל = Israel
+
+## 9:14:19
+KO: 사울이 제사장에게 말할 때, 블레셋 사람들의 진영에 있는 소란이 점점 더 커지고 많아졌다. 사울이 제사장에게 말하였다. "네 손을 거두라."
+1 וַיְהִי = and it was (to be)
+2 עַד = until (till)
+3 דִּבֶּר = he spoke (to speak)
+4 שָׁאוּל = Saul
+5 אֶל־ = to
+6 הַכֹּהֵן = the priest
+7 וְהֶהָמוֹן = and the tumult (crowd)
+8 אֲשֶׁר = which
+9 בְּמַחֲנֵה = [was] in [the] camp of (camp)
+10 פְלִשְׁתִּים = [the] Philistines (Philistine)
+11 וַיֵּלֶךְ = and it went
+12 הָלוֹךְ = continuously <to go>
+13 וָרָב פ = and great (many)
+14 וַיֹּאמֶר = and he said (to say)
+15 שָׁאוּל = Saul
+16 אֶל־ = to
+17 הַכֹּהֵן = the priest
+18 אֱסֹף = withdraw (to gather)
+19 יָדֶךָ = hand your (hand)
+
+## 9:14:20
+KO: 그리고 사울과 그와 함께한 모든 백성이 소집되어 전쟁터에 이르렀는데, 보라, 각 사람의 칼이 그의 이웃을 향해 있었고 큰 혼란이 매우 심하였더라.
+1 וַיִּזָּעֵק = and he was called together (to cry out)
+2 שָׁאוּל = Saul
+3 וְכָל־ = and all (all)
+4 הָעָם = the people (people)
+5 אֲשֶׁר = which
+6 אִתּוֹ = [was] with him (with)
+7 וַיָּבֹאוּ = and they went (to come (in))
+8 עַד־ = to (till)
+9 הַמִּלְחָמָה = the battle (battle)
+10 וְהִנֵּה = and there! (behold)
+11 הָיְתָה = it was (to be)
+12 חֶרֶב = [the] sword of (sword)
+13 אִישׁ = each man (man)
+14 בְּרֵעֵהוּ = in neighbor his (neighbor)
+15 מְהוּמָה = panic (tumult)
+16 גְּדוֹלָה = [was] great (great)
+17 מְאֹד = very (much)
+
+## 9:14:21
+KO: 그리고 히브리인들은 이전에 블레셋 사람들과 함께하던 것과 같이, 사방에서 그들과 함께 진영으로 올라왔던 자들이었는데, 그들 또한 사울과 요나단과 함께한 이스라엘 사람들과 함께하기 위하여 돌이켰더라.
+1 וְהָעִבְרִים = and the Hebrews (Hebrew)
+2 הָיוּ = they [who] were [belonging]
+3 לַפְּלִשְׁתִּים = to the Philistines (Philistine)
+4 כְּאֶתְמוֹל = as yesterday (previously)
+5 שִׁלְשׁוֹם = three days ago (before)
+6 אֲשֶׁר = who
+7 עָלוּ = they had gone up (to ascend)
+8 עִמָּם = with them
+9 בַּמַּחֲנֶה = in the camp (camp)
+10 סָבִיב = all around (around)
+11 וְגַם־ = and also (also)
+12 הֵמָּה = they (they(masc.))
+13 לִהְיוֹת = to be
+14 עִם־ = with
+15 יִשְׂרָאֵל = Israel
+16 אֲשֶׁר = which
+17 עִם־ = [was] with
+18 שָׁאוּל = Saul
+19 וְיוֹנָתָן = and Jonathan (Jonathan)
+
+## 9:14:22
+KO: 그리고 에브라임 산지에 숨어 있던 이스라엘의 모든 사람도, 블레셋 사람들이 도망하였다는 것을 듣고, 그들 역시 전쟁터에서 그들의 뒤를 바짝 쫓았다.
+1 וְכֹל = and every (all)
+2 אִישׁ = <the> person of (man)
+3 יִשְׂרָאֵל = Israel
+4 הַמִּתְחַבְּאִים = who had hidden themselves (to hide)
+5 בְּהַר־ = in [the] hill country of (mountain)
+6 אֶפְרַיִם = Ephraim
+7 שָׁמְעוּ = they heard (to hear)
+8 כִּי־ = that (for)
+9 נָסוּ = they had fled (to flee)
+10 פְּלִשְׁתִּים = [the] Philistines (Philistine)
+11 וַיַּדְבְּקוּ = and they pursued closely (to cleave)
+12 גַם־ = also
+13 הֵמָּה = they (they(masc.))
+14 אַחֲרֵיהֶם = after them (after)
+15 בַּמִּלְחָמָה = in the battle (battle)
+
+## 9:14:23
+KO: 그리고 여호와께서 그날에 이스라엘을 구원하셨고, 전쟁이 벧아웬을 지났다.
+1 וַיּוֹשַׁע = and he delivered (to save)
+2 יְהוָה = Yahweh (LORD)
+3 בַּיּוֹם = on the day (day;_when)
+4 הַהוּא = <the> that (he;_she;_it)
+5 אֶת־ = <obj.>
+6 יִשְׂרָאֵל = Israel
+7 וְהַמִּלְחָמָה = and the battle (battle)
+8 עָבְרָה = it passed beyond (to pass)
+9 אֶת־ = <obj.>
+10 בֵּית = Beth
+11 אָוֶן = Aven
+
+## 9:14:24
+KO: 그날에 이스라엘 사람들은 곤고하게 되었으니, 사울이 백성에게 맹세시키며 이르기를 “저녁까지, 곧 내가 내 원수들에게 보수할 때까지, 음식을 먹는 사람은 누구든지 저주를 받을지어다” 하였음이라. 그러므로 모든 백성이 음식을 맛보지 못하였더라.
+1 וְאִישׁ־ = and [the] man of
+2 יִשְׂרָאֵל = Israel
+3 נִגַּשׂ = he was hard pressed (to oppress)
+4 בַּיּוֹם = on the day (day;_when)
+5 הַהוּא = <the> that (he;_she;_it)
+6 וַיֹּאֶל = and he had put under oath (to swear)
+7 שָׁאוּל = Saul
+8 אֶת־ = <obj.> ([Obj.])
+9 הָעָם = the people
+10 לֵאמֹר = <to> saying (to say)
+11 אָרוּר = [be] cursed (to curse)
+12 הָאִישׁ = the person
+13 אֲשֶׁר־ = who (which)
+14 יֹאכַל = he will eat (to eat)
+15 לֶחֶם = food
+16 עַד־ = until (till)
+17 הָעֶרֶב = the evening (evening)
+18 וְנִקַּמְתִּי = and I will avenge myself (to avenge)
+19 מֵאֹיְבַי = from enemies my (enemy)
+20 וְלֹא = and not (not)
+21 טָעַם = it tasted (to taste)
+22 כָּל־ = all
+23 הָעָם = the people
+24 לָחֶם ס = food
+
+## 9:14:25
+KO: 그리고 땅의 모든 이들이 수풀로 들어갔는데, 밭의 표면 위에 꿀이 있었다.
+1 וְכָל־ = and all (all)
+2 הָאָרֶץ = the land (land)
+3 בָּאוּ = they went (to come (in))
+4 בַיָּעַר = in the forest (honeycomb)
+5 וַיְהִי = and it was (to be)
+6 דְבַשׁ = honey
+7 עַל־ = on (upon)
+8 פְּנֵי = [the] surface of (face)
+9 הַשָּׂדֶה = the field (land)
+
+## 9:14:26
+KO: 백성이 수풀로 들어왔을 때, 보라, 꿀이 흐르고 있었으나, 그 맹세를 두려워하였기에 아무도 자기 손을 자기 입으로 가져가는 자가 없었다.
+1 וַיָּבֹא = and it came (to come (in))
+2 הָעָם = the people
+3 אֶל־ = into
+4 הַיַּעַר = the forest (honeycomb)
+5 וְהִנֵּה = and there! (behold)
+6 הֵלֶךְ = a flowing of (traveller)
+7 דְּבָשׁ = honey
+8 וְאֵין־ = and there not (nothing)
+9 מַשִּׂיג = [was one who] reached (to overtake)
+10 יָדוֹ = hand his (hand)
+11 אֶל־ = to
+12 פִּיו = mouth his (lip)
+13 כִּי־ = for
+14 יָרֵא = it feared (to fear)
+15 הָעָם = the people
+16 אֶת־ = <obj.> ([Obj.])
+17 הַשְּׁבֻעָה = the oath (oath)
+
+## 9:14:27
+KO: 요나단은 듣지 못했다, 그의 아버지가 백성에게 맹세하게 할 때에. 그래서 그는 그의 손에 있는 지팡이 끝을 뻗어 그것을 벌집에 담갔고, 그의 손을 그의 입으로 돌이켰더니 그의 눈들이 밝아졌다.
+1 וְיוֹנָתָן = and Jonathan (Jonathan)
+2 לֹא־ = not
+3 שָׁמַע = he had heard (to hear)
+4 בְּהַשְׁבִּיעַ = when made to swear an oath (to swear)
+5 אָבִיו = father his (father)
+6 אֶת־ = <obj.>
+7 הָעָם = the people (people)
+8 וַיִּשְׁלַח = and he stretched out (to send)
+9 אֶת־ = <obj.>
+10 קְצֵה = [the] end of (end)
+11 הַמַּטֶּה = the staff (tribe)
+12 אֲשֶׁר = which
+13 בְּיָדוֹ = [was] in hand his
+14 וַיִּטְבֹּל = and he dipped (to dip)
+15 אוֹתָהּ = <obj.> it
+16 בְּיַעְרַת = in [the] honeycomb of (honeycomb)
+17 הַדְּבָשׁ = the honey (honey)
+18 וַיָּשֶׁב = and he brought back (to return)
+19 יָדוֹ = hand his
+20 אֶל־ = to (to(wards))
+21 פִּיו = mouth his (lip)
+22 וַתָּאֹרְנָה = and they brightened (to light)
+23 עֵינָיו = eyes his (eye)
+
+## 9:14:28
+KO: 그리고 백성 중의 한 사람이 대답하여 말하였다. "당신의 아버지가 맹세로 백성에게 엄히 명하여 말하기를, '오늘 음식을 먹는 그 사람은 저주를 받을지어다' 하셨나이다." 그래서 백성이 피곤하였나이다.
+1 וַיַּעַן = and he answered (to answer)
+2 אִישׁ = a person
+3 מֵהָעָם = from the people
+4 וַיֹּאמֶר = and he said
+5 הַשְׁבֵּעַ = certainly <to swear an oath>
+6 הִשְׁבִּיעַ = he made to swear an oath
+7 אָבִיךָ = father your (father)
+8 אֶת־ = <obj.> ([Obj.])
+9 הָעָם = the people
+10 לֵאמֹר = <to> saying
+11 אָרוּר = [be] cursed (to curse)
+12 הָאִישׁ = the person
+13 אֲשֶׁר־ = who (which)
+14 יֹאכַל = he will eat (to eat)
+15 לֶחֶם = food
+16 הַיּוֹם = this day (day)
+17 וַיָּעַף = and it was weary (be faint)
+18 הָעָם = the people
+
+## 9:14:29
+KO: 요나단이 말하였다. "내 아버지가 이 땅을 괴롭게 하셨도다. 보라, 내가 이 꿀 조금을 맛보았을 뿐인데 내 눈이 밝아졌구나."
+1 וַיֹּאמֶר = and he said (to say)
+2 יוֹנָתָן = Jonathan
+3 עָכַר = he has troubled (to trouble)
+4 אָבִי = father my (father)
+5 אֶת־ = <obj.> ([Obj.])
+6 הָאָרֶץ = the land (land)
+7 רְאוּ־ = see (to see)
+8 נָא = please
+9 כִּי־ = that
+10 אֹרוּ = they brightened (to light)
+11 עֵינַי = eyes my (eye)
+12 כִּי = for
+13 טָעַמְתִּי = I tasted (to taste)
+14 מְעַט = a little of (little)
+15 דְּבַשׁ = honey
+16 הַזֶּה = <the> this (this)
+
+## 9:14:30
+KO: 하물며 오늘 백성이 그들이 찾아낸 그들의 원수들의 전리품 중에서 먹었더라면, 블레셋 사람들 안에 살육이 더욱 많지 아니하였겠느냐?
+1 אַף = indeed? (also)
+2 כִּי = for
+3 לוּא = <if> (if)
+4 אָכֹל = certainly [if] <to eat>
+5 אָכַל = it had eaten
+6 הַיּוֹם = this day (day;_when)
+7 הָעָם = the people (people)
+8 מִשְּׁלַל = any of [the] plunder of (spoil)
+9 אֹיְבָיו = enemies its (enemy)
+10 אֲשֶׁר = which
+11 מָצָא = it found (to find)
+12 כִּי = for
+13 עַתָּה = now
+14 לֹא־ = not
+15 רָבְתָה = it has been great (to multiply)
+16 מַכָּה = defeat (wound)
+17 בַּפְּלִשְׁתִּים = among the Philistines (Philistine)
+
+## 9:14:31
+KO: 그리고 그들이 그 날에 믹마스로부터 아얄론까지 블레셋 사람들을 쳤으므로, 그 백성이 심히 피곤하게 되었다.
+1 וַיַּכּוּ = and they defeated (to smite)
+2 בַּיּוֹם = on the day (day;_when)
+3 הַהוּא = <the> that (he;_she;_it)
+4 בַּפְּלִשְׁתִּים = <in> the Philistines (Philistine)
+5 מִמִּכְמָשׂ = from Micmash (Michmash)
+6 אַיָּלֹנָה = Aijalon towards (Aijalon)
+7 וַיָּעַף = and it was weary (be faint)
+8 הָעָם = the people (people)
+9 מְאֹד = exceedingly (much)
+
+## 9:14:32
+KO: 그리고 백성이 탈취물로 달려들어서 양과 소와 소의 새끼들을 취하고, 그것을 땅 위에서 도살하여 백성이 피와 함께 먹었다.
+1 וַיַּעַט = and it rushed (to pounce)
+2 הָעָם = the people
+3 אֶל־ = to (to(wards))
+4 הַשָּׁלָל = the plunder (spoil)
+5 וַיִּקְחוּ = and they took (to take)
+6 צֹאן = sheep (flock)
+7 וּבָקָר = and cattle
+8 וּבְנֵי = and [the] young of (son)
+9 בָקָר = cattle
+10 וַיִּשְׁחֲטוּ־ = and they slaughtered [them] (to slaughter)
+11 אָרְצָה = [the] ground towards (land)
+12 וַיֹּאכַל = and it ate [them] (to eat)
+13 הָעָם = the people
+14 עַל־ = with (upon)
+15 הַדָּם = the blood (blood)
+
+## 9:14:33
+KO: 그리고 그들이 사울에게 고하며 이르기를 “보소서, 백성이 피 위에서 먹음으로 여호와께 범죄하나이다.” 사울이 이르되 “너희가 신의 없게 행하였도다. 오늘 내게 큰 돌을 굴려 오라.”
+1 וַיַּגִּידוּ = and people told (to tell)
+2 לְשָׁאוּל = to Saul (Saul)
+3 לֵאמֹר = <to> saying
+4 הִנֵּה = there! (behold)
+5 הָעָם = the people (people)
+6 חֹטִאים = [are] sinning (to sin)
+7 לַיהוָה = to Yahweh (LORD)
+8 לֶאֱכֹל = by eating (to eat)
+9 עַל־ = with (upon)
+10 הַדָּם = the blood (blood)
+11 וַיֹּאמֶר = and he said
+12 בְּגַדְתֶּם = you have acted treacherously (to act treacherously)
+13 גֹּלּוּ־ = roll (to roll)
+14 אֵלַי = to me (to(wards))
+15 הַיּוֹם = this day (day;_when)
+16 אֶבֶן = a stone (stone)
+17 גְּדוֹלָה = great
+
+## 9:14:34
+KO: 사울이 말하기를 "너희는 백성 중에 흩어져서 그들에게 말하라. 각 사람이 그의 소와 그의 양을 나에게로 끌어오고 여기서 잡아서 먹되, 피와 함께 먹음으로 여호와께 죄를 짓지 말라." 하매, 그 밤에 모든 백성이 각각 자기의 소를 자기 손에 끌어다가 거기서 잡으니라.
+1 וַיֹּאמֶר = and he said
+2 שָׁאוּל = Saul
+3 פֻּצוּ = be scattered (to scatter)
+4 בָעָם = among the people
+5 וַאֲמַרְתֶּם = and you will say
+6 לָהֶם = to <the> them (them)
+7 הַגִּישׁוּ = bring near
+8 אֵלַי = to me
+9 אִישׁ = each one
+10 שׁוֹרוֹ = ox his
+11 וְאִישׁ = and each one
+12 שְׂיֵהוּ = sheep his (sheep)
+13 וּשְׁחַטְתֶּם = and you will slaughter [it]
+14 בָּזֶה = in this [place] (this)
+15 וַאֲכַלְתֶּם = and you will eat [it]
+16 וְלֹא־ = and not (not)
+17 תֶחֶטְאוּ = you will sin (to sin)
+18 לַיהוָה = to Yahweh (LORD)
+19 לֶאֱכֹל = by eating
+20 אֶל־ = with
+21 הַדָּם = the blood (blood)
+22 וַיַּגִּשׁוּ = and they brought near
+23 כָל־ = all
+24 הָעָם = the people
+25 אִישׁ = each one
+26 שׁוֹרוֹ = ox his
+27 בְיָדוֹ = in hand his (hand)
+28 הַלַּיְלָה = this night (night)
+29 וַיִּשְׁחֲטוּ־ = and they slaughtered [it]
+30 שָׁם = there
+
+## 9:14:35
+KO: 그리고 사울은 여호와를 위하여 제단을 쌓았다. 이것은 그가 여호와를 위하여 쌓기 시작한 첫 제단이었다.
+1 וַיִּבֶן = and he built
+2 שָׁאוּל = Saul
+3 מִזְבֵּחַ = an altar
+4 לַיהוָה = to Yahweh
+5 אֹתוֹ = <obj.> it ([Obj.])
+6 הֵחֵל = he began (to profane;_begin)
+7 לִבְנוֹת = to build
+8 מִזְבֵּחַ = an altar
+9 לַיהוָה פ = to Yahweh
+
+## 9:14:36
+KO: 사울이 말하기를 "우리가 밤에 블레셋 사람들의 뒤를 쫓아 내려가서 동틀 때까지 그들 가운데서 노략하자. 그리고 한 사람도 그들 중에 남겨 두지 말자" 하니, 그들이 말하기를 "왕의 눈에 좋은 대로 행하십시오" 하였다. 그때 제사장이 말하기를 "이리로 하나님께로 가까이 나아갑시다" 하였다.
+1 וַיֹּאמֶר = and he said
+2 שָׁאוּל = Saul
+3 נֵרְדָה = let us go down (to go down)
+4 אַחֲרֵי = after
+5 פְלִשְׁתִּים = [the] Philistines (Philistine)
+6 לַיְלָה = night
+7 וְנָבֹזָה = and let us plunder (to plunder)
+8 בָהֶם = <in> <the> them
+9 עַד־ = until (till)
+10 אוֹר = [the] light of (light)
+11 הַבֹּקֶר = the morning (morning)
+12 וְלֹא־ = and not (not)
+13 נַשְׁאֵר = we will leave (to remain)
+14 בָּהֶם = among <the> them
+15 אִישׁ = anyone (man)
+16 וַיֹּאמְרוּ = and people said
+17 כָּל־ = all
+18 הַטּוֹב = the good (pleasant)
+19 בְּעֵינֶיךָ = in view your (eye)
+20 עֲשֵׂה ס = do (to make)
+21 וַיֹּאמֶר = and he said
+22 הַכֹּהֵן = the priest (priest)
+23 נִקְרְבָה = let us draw near (to present)
+24 הֲלֹם = here
+25 אֶל־ = to (to(wards))
+26 הָאֱלֹהִים = <the> God (God)
+
+## 9:14:37
+KO: 사울이 하나님께 물었다. "내가 블레셋 사람들을 뒤쫓아 내려가겠습니까? 그들을 이스라엘의 손에 넘겨주시겠습니까?" 그러나 그분은 그날 그에게 대답하지 않으셨다.
+1 וַיִּשְׁאַל = and he enquired (to ask)
+2 שָׁאוּל = Saul
+3 בֵּאלֹהִים = by God (God)
+4 הַאֵרֵד = ¿ will I go down (to go down)
+5 אַחֲרֵי = after
+6 פְלִשְׁתִּים = [the] Philistines (Philistine)
+7 הֲתִתְּנֵם = ¿ will you give them (to give)
+8 בְּיַד = in [the] hand of (hand)
+9 יִשְׂרָאֵל = Israel
+10 וְלֹא = and not (not)
+11 עָנָהוּ = he answered him (to answer)
+12 בַּיּוֹם = on the day (day;_when)
+13 הַהוּא = <the> that (he;_she;_it)
+
+## 9:14:38
+KO: 사울이 말했다. “너희 백성의 모든 모퉁이(지도자들)들아 이리로 가까이 오라. 그리고 이 죄가 오늘 어떻게(무엇 안에서) 일어났는지 알아보고 확인하라.”
+1 וַיֹּאמֶר = and he said (to say)
+2 שָׁאוּל = Saul
+3 גֹּשׁוּ = draw near (to approach)
+4 הֲלֹם = here
+5 כֹּל = O all (all)
+6 פִּנּוֹת = [the] corners of (corner)
+7 הָעָם = the people (people)
+8 וּדְעוּ = and know (to know)
+9 וּרְאוּ = and see (to see)
+10 בַּמָּה = <in> how? (what?)
+11 הָיְתָה = has it happened (to be)
+12 הַחַטָּאת = the sin (sin)
+13 הַזֹּאת = <the> this (this)
+14 הַיּוֹם = this day (day;_when)
+
+## 9:14:39
+KO: 이스라엘을 구원하시는 여호와께서 살아 계심을 두고 맹세하노니, 비록 그 죄가 내 아들 요나단에게 있을지라도 그는 반드시 죽으리라 하였으나, 온 백성 중 아무도 그에게 대답하는 자가 없더라.
+1 כִּי = for
+2 חַי־ = [by] [the] life (alive)
+3 יְהוָה = of Yahweh (LORD)
+4 הַמּוֹשִׁיעַ = who delivers (to save)
+5 אֶת־ = <obj.> ([Obj.])
+6 יִשְׂרָאֵל = Israel
+7 כִּי = for
+8 אִם־ = except (if)
+9 יֶשְׁנוֹ = there it (there)
+10 בְּיוֹנָתָן = [is] in Jonathan (Jonathan)
+11 בְּנִי = son my (son)
+12 כִּי = for
+13 מוֹת = certainly <to die>
+14 יָמוּת = he will die
+15 וְאֵין = and not (nothing)
+16 עֹנֵהוּ = [was] answering him (to answer)
+17 מִכָּל־ = any of all (all)
+18 הָעָם = the people (people)
+
+## 9:14:40
+KO: 그가 온 이스라엘에게 말하였다. "너희는 한쪽(의) 편에 있으라. 그리고 나와 나의 아들 요나단은 다른 한쪽(의) 편에 있으리라." 백성이 사울에게 말하였다. "왕의 눈에 선한 것을 행하십시오."
+1 וַיֹּאמֶר = and he said
+2 אֶל־ = to
+3 כָּל־ = all
+4 יִשְׂרָאֵל = Israel
+5 אַתֶּם = you (you(m.p.))
+6 תִּהְיוּ = you will be
+7 לְעֵבֶר = to a side
+8 אֶחָד = one
+9 וַאֲנִי = and I (I)
+10 וְיוֹנָתָן = and Jonathan (Jonathan)
+11 בְּנִי = son my (son)
+12 נִהְיֶה = we will be
+13 לְעֵבֶר = to a side
+14 אֶחָד = one
+15 וַיֹּאמְרוּ = and they said
+16 הָעָם = the people (people)
+17 אֶל־ = to
+18 שָׁאוּל = Saul
+19 הַטּוֹב = the good (pleasant)
+20 בְּעֵינֶיךָ = in view your (eye)
+21 עֲשֵׂה ס = do (to make)
+
+## 9:14:41
+KO: 사울이 이스라엘의 하나님 여호와께 말하였다. "온전한 것을 주소서." 그러자 요나단과 사울이 뽑혔고, 백성은 나갔다. (사울이 말하기를) "어찌하여 오늘 당신의 종에게 대답하지 않으셨습니까? 만일 내게 혹은 내 아들 요나단에게 이 죄가 있다면, 여호와 이스라엘의 하나님이여, 우림을 주소서. 그러나 만일 이 죄가 당신의 백성 이스라엘에게 있다면, (그들에게) 둠밈을 주소서."
+1 וַיֹּאמֶר = and he said (to say)
+2 שָׁאוּל = Saul
+3 אֶל־ = to (to(wards))
+4 יְהוָה = Yahweh
+5 אֱלֹהֵי = [the] God of
+6 יִשְׂרָאֵל = Israel
+7 הָבָה = -
+8 תָמִים = - (unblemished)
+9 וַיִּלָּכֵד = - (to capture)
+10 יוֹנָתָן = -
+11 וְשָׁאוּל = -
+12 וְהָעָם = -
+13 יָצָאוּ = - (to come out)
+14 לָמָּה = <to> why? (what?)
+15 לֹא = not
+16 עָנִיתָ = you did answer (to answer)
+17 אֶת־ = <obj.> ([Obj.])
+18 עַבְדְּךָ = servant your (servant;_slave)
+19 הַיּוֹם = the day (day)
+20 אִם = if
+21 יֶשׁ־ = there
+22 בִּי = in me (me)
+23 אוֹ = or
+24 בְּיוֹנָתָן = in Jonathan
+25 בְנִי = son my (son)
+26 הֶעָוֹן = the iniquity
+27 הַזֶּה = <the> this
+28 יְהוָה = Yahweh
+29 אֱלֹהֵי = [the] God
+30 יִשְׂרָאֵל = [of] Israel
+31 הָבָה = give !
+32 אוּרִים = Urim
+33 וְאִם = and if
+34 יֶשְׁנוֹ = is it
+35 הֶעָוֹן = the iniquity
+36 הַזֶּה = <the> this
+37 בְּעַמְּךָ = in people your
+38 יִשְׂרָאֵל = [of] Israel

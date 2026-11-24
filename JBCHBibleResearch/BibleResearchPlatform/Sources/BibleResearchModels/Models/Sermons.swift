@@ -17,6 +17,14 @@ public enum SermonParagraphStyle: String, Codable, Sendable, CaseIterable {
     case body        // 본문
 }
 
+/// 설교 진행 상태(2026-11-14 내 설교 고도화). `Sermon.statusRaw`에 rawValue를 저장한다 —
+/// SwiftData/CloudKit의 enum 컬럼 제약을 피하려고 모델에는 Optional `String`으로만 둔다.
+public enum SermonStatus: String, Codable, Sendable, CaseIterable {
+    case draft      // 초안
+    case refining   // 다듬는 중
+    case complete   // 완성
+}
+
 /// 설교(`Sermon`) 또는 회차 사본(`SermonDelivery`) 본문 안에서 "말씀구절" 스타일로 작성자가
 /// 명시적으로 지정한 성경 좌표. 본문을 정규식으로 재스캔해 자동 추출하는 `VerseMention`과는 별개다.
 ///
@@ -115,6 +123,22 @@ public final class Sermon {
     public var pendingIndexRefresh: Bool = false
     /// `UserMemo.isPinned`와 같은 패턴.
     public var isPinned: Bool = false
+
+    // MARK: 2026-11-14 내 설교 고도화 — 모두 기본값이 있는 새 필드라 기존 행은 그대로 읽힌다(CloudKit 프로덕션 스키마 배포 필요).
+
+    /// 주 본문 표기(예: "요 3:1–15"). 빈 문자열이면 미지정 — 화면이 본문 속 첫 성경 참조를 제안한다.
+    public var mainPassage: String = ""
+
+    /// 진행 상태 `SermonStatus.rawValue`. `nil`(기존 설교)은 "초안"으로 본다.
+    public var statusRaw: String?
+
+    /// 이어지는 설교(상위 링크) — 다른 `Sermon.id`(UUID 문자열)를 줄바꿈으로 이어 붙인 문자열.
+    /// 관계(Relationship) 대신 문자열로 둔 이유: 같은 모델끼리의 다대다 자기참조는 CloudKit 관계 제약
+    /// (양방향·inverse 필수)을 더 많이 건드리고, 연결 대상이 지워져도 깨지지 않게 화면에서 걸러 쓰면 충분하기 때문이다.
+    public var parentLinkIds: String = ""
+
+    /// 이 설교가 참고한 연구 자료 링크 목록(JSON 배열 문자열, `SermonReferenceLink`의 배열). 빈 문자열이면 없음.
+    public var referenceLinksJSON: String = ""
 
     public var sermonTags: [SermonTag]? = []
 

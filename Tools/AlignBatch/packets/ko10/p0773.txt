@@ -1,0 +1,185 @@
+## 9:19:14
+KO: 그리고 사울이 다윗을 잡으려고 사자들을 보냈는데, 그녀가 말하기를 "그가 병들었습니다" 하였다.
+1 וַיִּשְׁלַח = and he sent (to send)
+2 שָׁאוּל = Saul
+3 מַלְאָכִים = messengers (messenger)
+4 לָקַחַת = to fetch (to take)
+5 אֶת־ = <obj.> ([Obj.])
+6 דָּוִד = David
+7 וַתֹּאמֶר = and she said (to say)
+8 חֹלֶה = [is] sick (be weak)
+9 הוּא פ = he (he;_she;_it)
+
+## 9:19:15
+KO: 그리고 사울이 사자들을 보내어 다윗을 보게 하였으며, 이르되 그를 침상째 내게로 데리고 올라오라, 내가 그를 죽이리라.
+1 וַיִּשְׁלַח = and he sent (to send)
+2 שָׁאוּל = Saul
+3 אֶת־ = <obj.>
+4 הַמַּלְאָכִים = the messengers (messenger)
+5 לִרְאוֹת = to see
+6 אֶת־ = <obj.>
+7 דָּוִד = David
+8 לֵאמֹר = <to> saying (to say)
+9 הַעֲלוּ = bring up (to ascend)
+10 אֹתוֹ = <obj.> him
+11 בַמִּטָּה = on the bed (bed)
+12 אֵלַי = to me (to(wards))
+13 לַהֲמִתוֹ = to kill him (to die)
+
+## 9:19:16
+KO: 그 사자들이 들어갔고, 보라, 그 드라빔이 그 침상 위에 있었고, 그 염소들의 엮은 것이 그의 머리맡에 있었더라.
+1 וַיָּבֹאוּ = and they came (to come (in))
+2 הַמַּלְאָכִים = the messengers (messenger)
+3 וְהִנֵּה = and there! (behold)
+4 הַתְּרָפִים = the teraphim (teraphim)
+5 אֶל־ = [was] to (to(wards))
+6 הַמִּטָּה = the bed (bed)
+7 וּכְבִיר = and [the] quilt of (quilt)
+8 הָעִזִּים = <the> goat hair<s> (goat)
+9 מְרַאֲשֹׁתָיו = [the] place of head its (head)
+
+## 9:19:17
+KO: 그리고 사울이 미갈에게 말했다. "어찌하여 너는 이처럼 나를 속였고 내 대적을 보내어 그가 피하게 하였느냐?" 그리고 미갈이 사울에게 말했다. "그가 나에게 말하기를 '나를 보내라, 어찌하여 내가 너를 죽이게 하겠느냐'라고 하였나이다."
+1 וַיֹּאמֶר = and he said
+2 שָׁאוּל = Saul
+3 אֶל־ = to
+4 מִיכַל = Michal
+5 לָמָּה = <to> why?
+6 כָּכָה = thus
+7 רִמִּיתִנִי = have you deceived me (to deceive)
+8 וַתְּשַׁלְּחִי = and you have let go
+9 אֶת־ = <obj.> ([Obj.])
+10 אֹיְבִי = enemy my (enemy)
+11 וַיִּמָּלֵט = and he has escaped (to escape)
+12 וַתֹּאמֶר = and she said
+13 מִיכַל = Michal
+14 אֶל־ = to
+15 שָׁאוּל = Saul
+16 הוּא־ = he (he;_she;_it)
+17 אָמַר = he said
+18 אֵלַי = to me
+19 שַׁלְּחִנִי = let go me
+20 לָמָה = <to> why?
+21 אֲמִיתֵךְ = will I kill you (to die)
+
+## 9:19:18
+KO: 그리고 다윗은 도망하였고, 그는 피하였으며, 그는 라마에 있는 사무엘에게로 와서, 사울이 그에게 행하였던 모든 것을 그에게 말하였고, 그와 사무엘은 가서 나욧에 거주하였다.
+1 וְדָוִד = and David (David)
+2 בָּרַח = he fled (to flee)
+3 וַיִּמָּלֵט = and he escaped (to escape)
+4 וַיָּבֹא = and he went (to come (in))
+5 אֶל־ = to (to(wards))
+6 שְׁמוּאֵל = Samuel
+7 הָרָמָתָה = <the> Ramah towards (Ramah)
+8 וַיַּגֶּד־ = and he told (to tell)
+9 לוֹ = to <the> him
+10 אֵת = <obj.> ([Obj.])
+11 כָּל־ = all
+12 אֲשֶׁר = that (which)
+13 עָשָׂה־ = he had done (to make)
+14 לוֹ = to <the> him
+15 שָׁאוּל = Saul
+16 וַיֵּלֶךְ = and he went (to go)
+17 הוּא = he (he;_she;_it)
+18 וּשְׁמוּאֵל = and Samuel
+19 וַיֵּשְׁבוּ = and they dwelt (to dwell)
+20 בְּנָיוֹת = at Naioth (Naioth)
+
+## 9:19:19
+KO: 그리고 사울에게 보고되었다, 이르기를 "보라, 다윗이 라마의 나욧에 있다."
+1 וַיֻּגַּד = and it was told (to tell)
+2 לְשָׁאוּל = to Saul (Saul)
+3 לֵאמֹר = <to> saying (to say)
+4 הִנֵּה = there! (behold)
+5 דָוִד = David
+6 בְּנָיוֹת = [is] at Naioth (Naioth)
+7 בָּרָמָה = in <the> Ramah (Ramah)
+
+## 9:19:20
+KO: 그리고 사울이 다윗을 잡으려고 사자들을 보냈다. 그들이 선지자들의 무리가 예언하고, 사무엘이 그들의 머리로서 서 있는 것을 보았을 때, 사울의 사자들에게 하나님의 영이 임하였고, 그들도 예언하였다.
+1 וַיִּשְׁלַח = and he sent (to send)
+2 שָׁאוּל = Saul
+3 מַלְאָכִים = messengers
+4 לָקַחַת = to fetch (to take)
+5 אֶת־ = <obj.>
+6 דָּוִד = David
+7 וַיַּרְא = and he saw (to see)
+8 אֶת־ = <obj.>
+9 לַהֲקַת = [the] company of (company)
+10 הַנְּבִיאִים = the prophets (prophet)
+11 נִבְּאִים = prophesying
+12 וּשְׁמוּאֵל = and Samuel (Samuel)
+13 עֹמֵד = [was] standing (to stand)
+14 נִצָּב = chief (to stand)
+15 עֲלֵיהֶם = over them
+16 וַתְּהִי = and it was (to be)
+17 עַל־ = on
+18 מַלְאֲכֵי = [the] messengers of
+19 שָׁאוּל = Saul
+20 רוּחַ = [the] spirit of (spirit)
+21 אֱלֹהִים = God
+22 וַיִּתְנַבְּאוּ = and they prophesied
+23 גַּם־ = also
+24 הֵמָּה = they (they(masc.))
+
+## 9:19:21
+KO: 그리고 그들이 사울에게 고하니, 그가 다른 사자들을 보냈고, 그들도 또한 예언하였다. 그리고 사울이 세 번째 사자들을 다시 보냈고, 그들도 역시 예언하였다.
+1 וַיַּגִּדוּ = and people told (to tell)
+2 לְשָׁאוּל = to Saul
+3 וַיִּשְׁלַח = and he sent
+4 מַלְאָכִים = messengers
+5 אֲחֵרִים = other (another)
+6 וַיִּתְנַבְּאוּ = and they prophesied
+7 גַּם־ = also
+8 הֵמָּה = they
+9 וַיֹּסֶף = and he repeated (to add)
+10 שָׁאוּל = Saul
+11 וַיִּשְׁלַח = and he sent
+12 מַלְאָכִים = messengers
+13 שְׁלִשִׁים = third
+14 וַיִּתְנַבְּאוּ = and they prophesied
+15 גַּם־ = also
+16 הֵמָּה = they
+
+## 9:19:22
+KO: 그 역시 라마로 갔고, 세구에 있는 큰 우물에 이르러 물어 말하였다. "사무엘과 다윗이 어디에 있느냐?" 그가 말하였다. "보라, 라마의 나욧에 있습니다."
+1 וַיֵּלֶךְ = and he went (to go)
+2 גַּם־ = also
+3 הוּא = he (he;_she;_it)
+4 הָרָמָתָה = <the> Ramah towards
+5 וַיָּבֹא = and he came (to come (in))
+6 עַד־ = to (till)
+7 בּוֹר = a cistern (pit)
+8 הַגָּדוֹל = <the> great (great)
+9 אֲשֶׁר = which
+10 בַּשֶּׂכוּ = [is] in <the> Secu (Secu)
+11 וַיִּשְׁאַל = and he asked (to ask)
+12 וַיֹּאמֶר = and he said
+13 אֵיפֹה = where?
+14 שְׁמוּאֵל = [are] Samuel (Samuel)
+15 וְדָוִד = and David (David)
+16 וַיֹּאמֶר = and someone said
+17 הִנֵּה = there! (behold)
+18 בְּנָיוֹת = at Naioth (Naioth)
+19 בָּרָמָה = in <the> Ramah
+
+## 9:19:23
+KO: 그가 라마의 나욧으로 갔고, 하나님의 영이 그에게도 임하니, 그가 라마의 나욧에 이를 때까지 가면서 예언하였다.
+1 וַיֵּלֶךְ = and he went
+2 שָׁם = there
+3 אֶל־ = to (to(wards))
+4 נָיוֹת = Naioth
+5 בָּרָמָה = in <the> Ramah
+6 וַתְּהִי = and it was (to be)
+7 עָלָיו = on him (upon)
+8 גַּם־ = also
+9 הוּא = he (he;_she;_it)
+10 רוּחַ = [the] spirit of (spirit)
+11 אֱלֹהִים = God
+12 וַיֵּלֶךְ = and he went
+13 הָלוֹךְ = continuously <to go>
+14 וַיִּתְנַבֵּא = and he prophesied (to prophesy)
+15 עַד־ = until (till)
+16 בֹּאוֹ = came he (to come (in))
+17 בְּנָיוֹת = at Naioth
+18 בָּרָמָה = in <the> Ramah

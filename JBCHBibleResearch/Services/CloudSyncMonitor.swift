@@ -27,6 +27,22 @@ final class CloudSyncMonitor {
         failures.keys.sorted().first.flatMap { failureDetails[$0] }
     }
 
+    /// 설정 화면용: 실패한 모든 단계(setup/import/export)를 단계 번호 순으로 돌려준다.
+    /// `errorMessage`는 가장 낮은 번호의 한 단계만 보여 줘서(예: import 오류가 export 오류를 가림) 따로 둔다.
+    struct FailedPhase: Identifiable {
+        let phase: Int
+        let message: String
+        let detail: String?
+        var id: Int { phase }
+    }
+
+    var failedPhases: [FailedPhase] {
+        failures.keys.sorted().compactMap { phase in
+            guard let message = failures[phase] else { return nil }
+            return FailedPhase(phase: phase, message: message, detail: failureDetails[phase])
+        }
+    }
+
     private init() {}
 
     func start() {

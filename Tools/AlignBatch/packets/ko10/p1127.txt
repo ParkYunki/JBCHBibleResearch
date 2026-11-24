@@ -1,0 +1,158 @@
+## 14:4:14
+KO: 그리고 받침대들을 그가 만들었고, 그리고 물두멍들을 그가 받침대들 위에 만들었다.
+1 וְאֶת־ = and <obj.>
+2 הַמְּכֹנוֹת = the stands
+3 עָשָׂה = he made
+4 וְאֶת־ = and <obj.>
+5 הַכִּיֹּרוֹת = the lavers (basin)
+6 עָשָׂה = he made
+7 עַל־ = on (upon)
+8 הַמְּכֹנוֹת = the stands
+
+## 14:4:15
+KO: 그 바다 하나와 그 바다 아래에 있는 열두 소(를)
+1 אֶת־ = <obj.>
+2 הַיָּם = the sea (sea)
+3 אֶחָד = one
+4 וְאֶת־ = and <obj.>
+5 הַבָּקָר = the cattle (cattle)
+6 שְׁנֵים־ = two [plus] (two)
+7 עָשָׂר = ten
+8 תַּחְתָּיו = under it (underneath)
+
+## 14:4:16
+KO: 그리고 솥들과 그리고 부삽들과 그리고 고기 갈고리들과 그리고 그들의 모든 기구들을 후람 아비가 솔로몬 왕을 위하여 여호와의 집을 위해 광택이 나는 놋으로 만들었다.
+1 וְאֶת־ = and <obj.>
+2 הַסִּירוֹת = the pots (pot)
+3 וְאֶת־ = and <obj.>
+4 הַיָּעִים = the shovels (shovel)
+5 וְאֶת־ = and <obj.>
+6 הַמִּזְלָגוֹת = the forks (fork)
+7 וְאֶת־ = and <obj.>
+8 כָּל־ = all
+9 כְּלֵיהֶם = articles their (article|utensil)
+10 עָשָׂה = he made (to make)
+11 חוּרָם = Huram (Hiram)
+12 אָבִיו = Abi (-abi)
+13 לַמֶּלֶךְ = for the king (king)
+14 שְׁלֹמֹה = Solomon
+15 לְבֵית = for [the] house of (house)
+16 יְהוָה = Yahweh (LORD)
+17 נְחֹשֶׁת = bronze
+18 מָרוּק = polished (to polish)
+
+## 14:4:17
+KO: 요단 평지에서 왕이 그것들을 숙곳과 스레다 사이의 진흙(땅의 두께) 안에 부어 내었다.
+1 בְּכִכַּר = in [the] valley of (talent)
+2 הַיַּרְדֵּן = the Jordan (Jordan)
+3 יְצָקָם = he cast them (to pour)
+4 הַמֶּלֶךְ = the king (king)
+5 בַּעֲבִי = in [the] thickness of (thickness)
+6 הָאֲדָמָה = the ground (land)
+7 בֵּין = between
+8 סֻכּוֹת = Succoth
+9 וּבֵין = and between
+10 צְרֵדָתָה = Zeredah
+
+## 14:4:18
+KO: 그리고 솔로몬이 이 모든 기구들을 대단히 많이 만들었으니, 그 놋의 무게를 헤아릴 수 없었더라.
+1 וַיַּעַשׂ = and he made (to make)
+2 שְׁלֹמֹה = Solomon
+3 כָּל־ = all
+4 הַכֵּלִים = the articles (article|utensil)
+5 הָאֵלֶּה = <the> these (these)
+6 לָרֹב = to abundance (abundance)
+7 מְאֹד = exceedingly (much)
+8 כִּי = that (for)
+9 לֹא = not
+10 נֶחְקַר = it was ascertained (to search)
+11 מִשְׁקַל = [the] weight of (weight)
+12 הַנְּחֹשֶׁת פ = the bronze (bronze)
+
+## 14:4:19
+KO: 그리고 솔로몬이 하나님의 집의 모든 기구들을 만들었으니, 곧 금의 제단과 진설병이 그 위에 있는 상들이라.
+1 וַיַּעַשׂ = and he made (to make)
+2 שְׁלֹמֹה = Solomon
+3 אֵת = <obj.>
+4 כָּל־ = all
+5 הַכֵּלִים = the articles (article|utensil)
+6 אֲשֶׁר = which
+7 בֵּית = [were] [the] house of (house)
+8 הָאֱלֹהִים = <the> God (God)
+9 וְאֵת = and <obj.>
+10 מִזְבַּח = [the] altar of (altar)
+11 הַזָּהָב = <the> gold (gold)
+12 וְאֶת־ = and <obj.>
+13 הַשֻּׁלְחָנוֹת = the tables (table)
+14 וַעֲלֵיהֶם = and on them (upon)
+15 לֶחֶם = [the] bread of (food)
+16 הַפָּנִים = the presence (face)
+
+## 14:4:20
+KO: 그리고 그 등잔대들과 그것들의 등잔들을 규례대로 내소 앞에서 불타오르게 할 정금으로 (만들었다).
+1 וְאֶת־ = and <obj.> ([Obj.])
+2 הַמְּנֹרוֹת = the lampstands (lampstand)
+3 וְנֵרֹתֵיהֶם = and lamps their (lamp)
+4 לְבַעֲרָם = to burn they (to burn)
+5 כַּמִּשְׁפָּט = according to the ordinance (justice)
+6 לִפְנֵי = <to> before (face)
+7 הַדְּבִיר = the innermost room (oracle)
+8 זָהָב = gold
+9 סָגוּר = pure gold (to shut)
+
+## 14:4:21
+KO: 그리고 그 꽃들과 그 등잔들과 그 집게들은 순금이니, 그것은 순금의 완제품들이라.
+1 וְהַפֶּרַח = and the blossom (flower)
+2 וְהַנֵּרוֹת = and the lamps (lamp)
+3 וְהַמֶּלְקַחַיִם = and the tongs (tong)
+4 זָהָב = gold
+5 הוּא = it (he;_she;_it)
+6 מִכְלוֹת = [was] perfection<s> of (perfection)
+7 זָהָב = gold
+
+## 14:4:22
+KO: 그리고 불집게들과 대접들과 숟가락들과 불 옮기는 그릇들은 순금이며, 성전의 안쪽 문들 곧 지성소의 문들과 성전의 문들은 금으로(입혔더라).
+1 וְהַמְזַמְּרוֹת = and the snuffers (snuffer)
+2 וְהַמִּזְרָקוֹת = and the bowls (bowl)
+3 וְהַכַּפּוֹת = and the pans (palm)
+4 וְהַמַּחְתּוֹת = and the fire-pans (censer)
+5 זָהָב = gold
+6 סָגוּר = pure gold (to shut)
+7 וּפֶתַח = and [the] entrance of (entrance)
+8 הַבַּיִת = the house
+9 דַּלְתוֹתָיו = doors its
+10 הַפְּנִימִיּוֹת = <the> inner (inner)
+11 לְקֹדֶשׁ = to [the] holy place of
+12 הַקֳּדָשִׁים = the holy places
+13 וְדַלְתֵי = and [the] doors of
+14 הַבַּיִת = the house
+15 לַהֵיכָל = of the temple (temple)
+16 זָהָב = gold
+
+## 14:5:1
+KO: 그리고 솔로몬이 여호와의 집을 위하여 만든 모든 일이 완료되었다. 그리하여 솔로몬은 그의 아버지 다윗이 성별한 것들과 은과 금과 모든 기구들을 가져와 하나님의 집 곳간들에 두었다.
+1 וַתִּשְׁלַם = and it was complete (to complete)
+2 כָּל־ = all
+3 הַמְּלָאכָה = the work (work)
+4 אֲשֶׁר־ = which
+5 עָשָׂה = he had done (to make)
+6 שְׁלֹמֹה = Solomon
+7 לְבֵית = for [the] house of
+8 יְהוָה ס = Yahweh (LORD)
+9 וַיָּבֵא = and he brought (to come (in))
+10 שְׁלֹמֹה = Solomon
+11 אֶת־ = <obj.>
+12 קָדְשֵׁי = [the] holy things of (holiness)
+13 דָּוִיד = David
+14 אָבִיו = father his (father)
+15 וְאֶת־ = and <obj.>
+16 הַכֶּסֶף = the silver (silver)
+17 וְאֶת־ = and <obj.>
+18 הַזָּהָב = the gold (gold)
+19 וְאֶת־ = and <obj.>
+20 כָּל־ = all
+21 הַכֵּלִים = the articles (article|utensil)
+22 נָתַן = he put (to give)
+23 בְּאֹצְרוֹת = in [the] treasuries of (treasure)
+24 בֵּית = [the] house of
+25 הָאֱלֹהִים פ = <the> God (God)

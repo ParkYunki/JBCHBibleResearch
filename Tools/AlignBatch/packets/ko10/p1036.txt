@@ -1,0 +1,128 @@
+## 13:2:44
+KO: 그리고 세마는 라함을 낳았는데, (라함은) 요르그암의 아버지이다. 그리고 레겜은 삼매를 낳았다.
+1 וְשֶׁמַע = and Shema (Shema)
+2 הוֹלִיד = he fathered
+3 אֶת־ = <obj.>
+4 רַחַם = Raham
+5 אֲבִי = [the] father of (father)
+6 יָרְקֳעָם = Jorkeam
+7 וְרֶקֶם = and Rekem (Rekem)
+8 הוֹלִיד = he fathered
+9 אֶת־ = <obj.>
+10 שַׁמָּי = Shammai
+
+## 13:2:45
+KO: 그리고 삼매의 아들은 마온이며, 마온은 벳술의 아버지이다.
+1 וּבֶן־ = and [the] son of (son)
+2 שַׁמַּי = Shammai
+3 מָעוֹן = [was] Maon
+4 וּמָעוֹן = and Maon
+5 אֲבִי = [was] [the] father of (father)
+6 בֵית־ = Beth
+7 צוּר = Zur
+
+## 13:2:46
+KO: 그리고 갈렙의 첩 에바는 하란과 모사와 가세스를 낳았고, 하란은 가세스를 낳았다.
+1 וְעֵיפָה = and Ephah (Ephah)
+2 פִּילֶגֶשׁ = [the] concubine of (concubine)
+3 כָּלֵב = Caleb
+4 יָלְדָה = she bore
+5 אֶת־ = <obj.>
+6 חָרָן = Haran
+7 וְאֶת־ = and <obj.>
+8 מוֹצָא = Moza
+9 וְאֶת־ = and <obj.>
+10 גָּזֵז = Gazez
+11 וְחָרָן = and Haran
+12 הֹלִיד = he fathered
+13 אֶת־ = <obj.>
+14 גָּזֵז ס = Gazez
+
+## 13:2:47
+KO: 그리고 야대의 아들들은 레겜과 요담과 게산과 벨렛과 에바와 사압이라.
+1 וּבְנֵי = and [the] sons of (son)
+2 יָהְדָּי = Jahdai
+3 רֶגֶם = Regem
+4 וְיוֹתָם = and Jotham (Jotham)
+5 וְגֵישָׁן = and Geshan (Geshan)
+6 וָפֶלֶט = and Pelet (Pelet)
+7 וְעֵיפָה = and Ephah (Ephah)
+8 וָשָׁעַף = and Shaaph (Shaaph)
+
+## 13:2:48
+KO: 갈렙의 첩 마아가는 세벨과 그리고 디르하나를 낳았다.
+1 פִּלֶגֶשׁ = [the] concubine of (concubine)
+2 כָּלֵב = Caleb
+3 מַעֲכָה = Maacah
+4 יָלַד = he bore (to beget)
+5 שֶׁבֶר = Sheber
+6 וְאֶת־ = and <obj.> ([Obj.])
+7 תִּרְחֲנָה = Tirhanah
+
+## 13:2:49
+KO: 그리고 그(여자)가 맛만나의 아버지 사압을 낳았고, 막베나와 기브아의 아버지 스와를 낳았으며, 갈렙의 딸은 악사였다.
+1 וַתֵּלֶד = and she bore (to beget)
+2 שַׁעַף = Shaaph
+3 אֲבִי = [the] father of
+4 מַדְמַנָּה = Madmannah
+5 אֶת־ = <obj.> ([Obj.])
+6 שְׁוָא = Sheva
+7 אֲבִי = [the] father of
+8 מַכְבֵּנָה = Machbenah
+9 וַאֲבִי = and [the] father of
+10 גִבְעָא = Gibea
+11 וּבַת־ = and [was] [the] daughter of (daughter)
+12 כָּלֵב = Caleb
+13 עַכְסָה ס = Achsah
+
+## 13:2:50
+KO: 이들은 갈렙의 아들들 곧 에브라다의 맏아들 훌의 아들들이니, 기럇여아림의 아버지 소발과
+1 אֵלֶּה = these
+2 הָיוּ = they were (to be)
+3 בְּנֵי = [the] descendants of
+4 כָלֵב = Caleb
+5 בֶּן־ = [the] son of
+6 חוּר = Hur
+7 בְּכוֹר = [the] firstborn of (firstborn)
+8 אֶפְרָתָה = Ephrath (Ephrathah)
+9 שׁוֹבָל = Shobal
+10 אֲבִי = [the] father of (father)
+11 קִרְיַת = Kiriath
+12 יְעָרִים = Jearim
+
+## 13:2:51
+KO: 살마, 베들레헴의 아버지; 그리고 하렙, 벧가델의 아버지.
+1 שַׂלְמָא = Salma
+2 אֲבִי = [the] father of
+3 בֵית־ = Beth-
+4 לָחֶם = -lehem
+5 חָרֵף = Hareph
+6 אֲבִי = [the] father of
+7 בֵית־ = Beth-
+8 גָּדֵר = Gader
+
+## 13:2:52
+KO: 그리고 쇼발의 아들들, 곧 기럇여아림의 아버지의 자손들은 하로에와 므누홋 사람들의 절반이었다.
+1 וַיִּהְיוּ = and they belonged (to be)
+2 בָנִים = sons (son)
+3 לְשׁוֹבָל = to Shobal (Shobal)
+4 אֲבִי = [the] father of (father)
+5 קִרְיַת = Kiriath
+6 יְעָרִים = Jearim
+7 הָרֹאֶה = Haroeh
+8 חֲצִי = half
+9 הַמְּנֻחוֹת = of <the> Menuchite[s] (Menuhoth)
+
+## 13:2:53
+KO: 그리고 기럇여아림의 종족들은 이델 사람들과 붓 사람들과 수맛 사람들과 미스라 사람들이다. 이들로부터 소라 사람들과 에스다올 사람들이 나왔다.
+1 וּמִשְׁפְּחוֹת = and [the] clans of (family)
+2 קִרְיַת = Kiriath
+3 יְעָרִים = Jearim
+4 הַיִּתְרִי = the Ithrite[s] (Ithrite)
+5 וְהַפּוּתִי = and the Puthite[s] (Puthite)
+6 וְהַשֻּׁמָתִי = and the Shumathite[s] (Shumathite)
+7 וְהַמִּשְׁרָעִי = and the Mishraite[s] (Mishraite)
+8 מֵאֵלֶּה = from these (these)
+9 יָצְאוּ = they came forth (to come out)
+10 הַצָּרְעָתִי = the Zorathite[s] (Zorathite)
+11 וְהָאֶשְׁתָּאֻלִי ס = and the Eshtaolite[s] (Eshtaolite)

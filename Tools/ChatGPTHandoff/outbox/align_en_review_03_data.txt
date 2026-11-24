@@ -1,0 +1,620 @@
+## 13:1:5
+EN: Sons of Japheth: Gomer and Magog, and Madai, and Javan, and Tubal, and Meshech, and Tiras.
+1	בְּנֵ֣י	[the] sons of	→ Sons
+2	יֶ֔פֶת	Japheth	→ Japheth
+3	גֹּ֣מֶר	Gomer	→ Gomer
+4	וּמָג֔וֹג	and Magog	→ and Magog
+5	וּמָדַ֖י	and Madai	→ and Madai
+6	וְיָוָ֣ן	and Javan	→ and Javan
+7	וְתֻבָ֑ל	and Tubal	→ and Tubal
+8	וּמֶ֖שֶׁךְ	and Meshech	→ and Meshech
+9	וְתִירָֽס׃ ס	and Tiras	→ and Tiras
+
+## 13:2:15
+EN: Ozem the sixth, David the seventh,
+1	אֹ֚צֶם	Ozem	→ Ozem
+2	הַשִּׁשִּׁ֔י	the sixth	→ the sixth
+3	דָּוִ֖יד	David	→ David
+4	הַשְּׁבִעִֽי	the seventh	→ the seventh
+
+## 13:2:33
+EN: And sons of Jonathan: Peleth and Zaza. These were sons of Jerahmeel.
+1	וּבְנֵ֥י	and [the] sons of	→ sons
+2	יוֹנָתָ֖ן	Jonathan	→ Jonathan
+3	פֶּ֣לֶת	Peleth	→ Peleth
+4	וְזָזָ֑א	and Zaza	→ and Zaza
+5	אֵ֥לֶּה	these	→ These
+6	הָי֖וּ	they were	→ —
+7	בְּנֵ֥י	[the] sons of	→ sons
+8	יְרַחְמְאֵֽל	Jerahmeel	→ Jerahmeel
+
+## 13:5:3
+EN: sons of Reuben, firstborn of Israel: Enoch, and Pallu, Hezron, and Carmi.
+1	בְּנֵ֥י	[the] sons of	→ sons
+2	רְאוּבֵ֖ן	Reuben	→ Reuben
+3	בְּכ֣וֹר	[the] firstborn of	→ firstborn
+4	יִשְׂרָאֵ֑ל	Israel	→ Israel
+5	חֲנ֥וֹךְ	Hanoch	→ —
+6	וּפַלּ֖וּא	and Pallu	→ and Pallu
+7	חֶצְר֥וֹן	Hezron	→ Hezron
+8	וְכַרְמִֽי	and Carmi	→ and Carmi
+
+## 13:5:17
+EN: all of them reckoned themselves by genealogy in the days of Jotham king of Judah, and in the days of Jeroboam king of Israel.
+1	כֻּלָּם֙	all of them	→ all of them
+2	הִתְיַחְשׂ֔וּ	they had themselves enrolled	→ themselves
+3	בִּימֵ֖י	in [the] days of	→ in the days of
+4	יוֹתָ֣ם	Jotham	→ Jotham
+5	מֶֽלֶךְ־	[the] king of	→ king
+6	יְהוּדָ֑ה	Judah	→ Judah
+7	וּבִימֵ֖י	and in [the] days	→ and in the days
+8	יָרָבְעָ֥ם	Jeroboam	→ Jeroboam
+9	מֶֽלֶךְ־	[the] king of	→ king
+10	יִשְׂרָאֵֽל׃ פ	Israel	→ Israel
+
+## 13:6:17
+EN: And these [are] names of sons of Gershom: Libni and Shimei.
+1	וְאֵ֛לֶּה	and these	→ And these
+2	שְׁמ֥וֹת	[are] [the] names of	→ names
+3	בְּֽנֵי־	[the] sons of	→ sons
+4	גֵרְשׁ֖וֹם	Gershom	→ Gershom
+5	לִבְנִ֥י	Libni	→ Libni
+6	וְשִׁמְעִֽי	and Shimei	→ and Shimei
+
+## 13:7:9
+EN: with their genealogy, after their generations, heads of a house of their fathers, mighty men of valor, twenty thousand and two hundred.
+1	וְהִתְיַחְשָׂ֣ם	and recording genealogy they	→ genealogy
+2	לְתֹלְדוֹתָ֗ם	to generations their	→ generations
+3	רָאשֵׁי֙	chiefs of	→ —
+4	בֵּ֣ית	[the] house of	→ house
+5	אֲבוֹתָ֔ם	ancestors their	→ —
+6	גִּבּוֹרֵ֖י	mighty [men] of	→ mighty men of
+7	חָ֑יִל	strength	→ —
+8	עֶשְׂרִ֥ים	[was] twenty	→ twenty
+9	אֶ֖לֶף	thousand	→ thousand
+10	וּמָאתָֽיִם׃ ס	and two hundred	→ and two hundred
+
+## 13:8:8
+EN: And Shaharaim begot in the field of Moab after his sending them away; Hushim and Baara [are] his wives.
+1	וְשַׁחֲרַ֗יִם	and Shaharaim	→ And Shaharaim
+2	הוֹלִיד֙	he fathered	→ —
+3	בִּשְׂדֵ֣ה	in [the] region of	→ —
+4	מוֹאָ֔ב	Moab	→ Moab
+5	מִן־	from when	→ —
+6	שִׁלְח֖וֹ	sent away he	→ sending
+7	אֹתָ֑ם	<obj.> them	→ them
+8	חוּשִׁ֥ים	Hushim	→ Hushim
+9	וְאֶֽת־	and <obj.>	→ and
+10	בַּעֲרָ֖א	Baara	→ Baara
+11	נָשָֽׁיו	wives his	→ wives
+
+## 13:26:6
+EN: And sons have been born to his son Shemaiah, who are ruling throughout the house of their father, for they [are] mighty men of valor.
+1	וְלִֽשְׁמַֽעְיָ֤ה	and to Shemaiah	→ Shemaiah
+2	בְנוֹ֙	son his	→ sons
+3	נוֹלַ֣ד	it was born	→ born
+4	בָּנִ֔ים	sons	→ son
+5	הַמִּמְשָׁלִ֖ים	the rulers	→ —
+6	לְבֵ֣ית	of [the] house of	→ house
+7	אֲבִיהֶ֑ם	father their	→ father
+8	כִּֽי־	for	→ for
+9	גִבּ֥וֹרֵי	[were] mighty [men] of	→ of
+10	חַ֖יִל	ability	→ —
+11	הֵֽמָּה	they	→ they
+
+## 13:27:4
+EN: And over the division of the second month [is] Dodai the Ahohite, and Mikloth [is] also president of his division, and twenty-four thousand [are] on his division.
+1	וְעַ֞ל	and [was] over	→ over
+2	מַחֲלֹ֣קֶת׀	[the] division of	→ the division of
+3	הַחֹ֣דֶשׁ	the month	→ month
+4	הַשֵּׁנִ֗י	<the> second	→ second
+5	דּוֹדַ֤י	Dodai	→ Dodai
+6	הָאֲחוֹחִי֙	the Ahohite	→ the Ahohite
+7	וּמַ֣חֲלֻקְתּ֔וֹ	and division his	→ division
+8	וּמִקְל֖וֹת	and Mikloth	→ and Mikloth
+9	הַנָּגִ֑יד	[was] the leader	→ —
+10	וְעַל֙	and [were] with	→ —
+11	מַחֲלֻקְתּ֔וֹ	division his	→ division
+12	עֶשְׂרִ֥ים	twenty	→ —
+13	וְאַרְבָּעָ֖ה	and four	→ —
+14	אָֽלֶף׃ ס	thousand	→ thousand
+
+## 14:3:15
+EN: And he makes two pillars at the front of the house, thirty-five cubits in length, and the ornament that [is] on their heads [is] five cubits.
+1	וַיַּ֜עַשׂ	and he made	→ And he makes
+2	לִפְנֵ֤י	<to> before	→ —
+3	הַבַּ֙יִת֙	the house	→ the house
+4	עַמּוּדִ֣ים	pillars	→ pillars
+5	שְׁנַ֔יִם	two	→ two
+6	אַמּ֕וֹת	cubits	→ cubits
+7	שְׁלֹשִׁ֥ים	thirty	→ —
+8	וְחָמֵ֖שׁ	and five	→ five
+9	אֹ֑רֶךְ	length	→ length
+10	וְהַצֶּ֥פֶת	and the capital	→ —
+11	אֲשֶׁר־	which	→ —
+12	עַל־	[was] on	→ on
+13	רֹאשׁ֖וֹ	top its	→ —
+14	אַמּ֥וֹת	[was] cubits	→ cubits
+15	חָמֵֽשׁ׃ ס	five	→ —
+
+## 14:12:10
+EN: and King Rehoboam makes shields of bronze in their stead, and has given [them] a charge on the hand of the heads of the runners who are keeping the opening of the house of the king;
+1	וַיַּ֨עַשׂ	and he made	→ makes
+2	הַמֶּ֤לֶךְ	the king	→ the king
+3	רְחַבְעָם֙	Rehoboam	→ Rehoboam
+4	תַּחְתֵּיהֶ֔ם	in place of them	→ —
+5	מָגִנֵּ֖י	shields of	→ shields of
+6	נְחֹ֑שֶׁת	bronze	→ bronze
+7	וְהִפְקִ֗יד	and he entrusted [them]	→ —
+8	עַל־	on	→ on
+9	יַד֙	[the] hand of	→ the hand of
+10	שָׂרֵ֣י	[the] commanders of	→ —
+11	הָרָצִ֔ים	the runners	→ the runners
+12	הַשֹּׁ֣מְרִ֔ים	who guarded	→ —
+13	פֶּ֖תַח	[the] entrance of	→ —
+14	בֵּ֥ית	[the] house of	→ the house of
+15	הַמֶּֽלֶךְ	the king	→ King
+
+## 14:16:8
+EN: Did the Cushim and the Lubim not become a very great force for multitude, for chariot, and for horsemen? And in your leaning on YHWH He gave them into your hand,
+1	הֲלֹ֧א	¿ not	→ —
+2	הַכּוּשִׁ֣ים	the Cushites	→ —
+3	וְהַלּוּבִ֗ים	and the Libyans	→ —
+4	הָי֨וּ	were they	→ —
+5	לְחַ֧יִל׀	<to> an army	→ —
+6	לָרֹ֛ב	for multitude	→ for multitude
+7	לְרֶ֥כֶב	<to> chariotry	→ —
+8	וּלְפָרָשִׁ֖ים	and <to> horsemen	→ horsemen
+9	לְהַרְבֵּ֣ה	to abundance	→ —
+10	מְאֹ֑ד	exceedingly	→ —
+11	וּבְהִשָּֽׁעֶנְךָ֥	and because depending you	→ —
+12	עַל־	on	→ on
+13	יְהוָ֖ה	Yahweh	→ —
+14	נְתָנָ֥ם	he gave them	→ He gave them
+15	בְּיָדֶֽךָ	in hand your	→ hand
+
+## 14:26:7
+EN: And God helps him against the Philistines, and against the Arabians who are dwelling in Gur-Ba‘al and the Mehunim.
+1	וַיַּעְזְרֵ֨הוּ	and he helped him	→ helps
+2	הָֽאֱלֹהִ֜ים	<the> God	→ God
+3	עַל־	on	→ —
+4	פְּלִשְׁתִּ֧ים	[the] Philistines	→ the Philistines
+5	וְעַל־	and on	→ —
+6	הָֽעַרְבִ֛ים	the Arabs	→ —
+7	הַיֹּשְׁבִ֥ים	who were dwelling	→ who are dwelling
+8	בְּגוּר־	in Gur	→ —
+9	בָּ֖עַל	Baal	→ —
+10	וְהַמְּעוּנִֽים	and the Meunites	→ —
+
+## 14:26:17
+EN: And Azariah the priest goes in after him, and with him eighty priests of YHWH, sons of valor,
+1	וַיָּבֹ֥א	and he went	→ goes
+2	אַחֲרָ֖יו	after him	→ after him
+3	עֲזַרְיָ֣הוּ	Azariah	→ Azariah
+4	הַכֹּהֵ֑ן	the priest	→ the priest
+5	וְעִמּ֞וֹ	and [were] with him	→ —
+6	כֹּהֲנִ֧ים׀	priests	→ priests
+7	לַיהוָ֛ה	of Yahweh	→ —
+8	שְׁמוֹנִ֖ים	eighty	→ eighty
+9	בְּנֵי־	sons of	→ sons of
+10	חָֽיִל	strength	→ —
+
+## 15:2:14
+EN: sons of Bigvai, two thousand fifty-six;
+1	בְּנֵ֣י	[the] descendants of	→ —
+2	בִגְוָ֔י	Bigvai	→ Bigvai
+3	אַלְפַּ֖יִם	two thousand	→ two thousand
+4	חֲמִשִּׁ֥ים	fifty	→ —
+5	וְשִׁשָּֽׁה׃ ס	and six	→ —
+
+## 15:5:16
+EN: Then this Sheshbazzar has come—he has laid the foundations of the house of God that [is] in Jerusalem, and from there even until now it has been building, and is not finished.
+1	אֱדַ֙יִן֙	then	→ Then
+2	שֵׁשְׁבַּצַּ֣ר	Sheshbazzar	→ Sheshbazzar
+3	דֵּ֔ךְ	this	→ this
+4	אֲתָ֗א	he came	→ —
+5	יְהַ֧ב	he laid	→ laid
+6	אֻשַּׁיָּ֛א	foundations the	→ foundations
+7	דִּי־	of	→ of
+8	בֵ֥ית	[the] house of	→ house
+9	אֱלָהָ֖א	<the> God	→ God
+10	דִּ֣י	which	→ —
+11	בִירוּשְׁלֶ֑ם	[is] in Jerusalem	→ Jerusalem
+12	וּמִן־	and from	→ and from
+13	אֱדַ֧יִן	then	→ —
+14	וְעַד־	and until	→ until
+15	כְּעַ֛ן	now	→ now
+16	מִתְבְּנֵ֖א	[it is] being built	→ building
+17	וְלָ֥א	and not	→ —
+18	שְׁלִֽם	[it is] finished	→ finished
+
+## 15:6:16
+EN: And the sons of Israel have made, [and] the priests, and the Levites, and the rest of the sons of the captivity, a dedication of this house of God with joy,
+1	וַעֲבַ֣דוּ	and they made	→ made
+2	בְנֵֽי־	[the] people of	→ —
+3	יִ֠שְׂרָאֵל	Israel	→ Israel
+4	כָּהֲנַיָּ֨א	priests the	→ priests
+5	וְלֵוָיֵ֜א	and Levites the	→ Levites
+6	וּשְׁאָ֣ר	and [the] rest of	→ and the rest of
+7	בְּנֵי־	[the] people of	→ —
+8	גָלוּתָ֗א	exile the	→ —
+9	חֲנֻכַּ֛ת	[the] dedication of	→ dedication
+10	בֵּית־	[the] house of	→ house
+11	אֱלָהָ֥א	<the> God	→ God
+12	דְנָ֖ה	this	→ this
+13	בְּחֶדְוָֽה	with joy	→ with joy
+
+## 16:2:1
+EN: And it comes to pass, in the month of Nisan, the twentieth year of Artaxerxes the king, wine [is] before him, and I lift up the wine, and give to the king, and I had not been sad before him;
+1	וַיְהִ֣י׀	and it was	→ —
+2	בְּחֹ֣דֶשׁ	in [the] month of	→ in the month of
+3	נִיסָ֗ן	Nisan	→ Nisan
+4	שְׁנַ֥ת	year	→ year
+5	עֶשְׂרִ֛ים	twenty	→ —
+6	לְאַרְתַּחְשַׁ֥סְתְּא	of Artaxerxes	→ of Artaxerxes
+7	הַמֶּ֖לֶךְ	the king	→ the king
+8	יַ֣יִן	wine	→ wine
+9	לְפָנָ֑יו	[was] <to> before him	→ before
+10	וָאֶשָּׂ֤א	and I took	→ —
+11	אֶת־	<obj.>	→ —
+12	הַיַּ֙יִן֙	the wine	→ the wine
+13	וָאֶתְּנָ֣ה	and I gave [it] !	→ give
+14	לַמֶּ֔לֶךְ	to the king	→ to the king
+15	וְלֹא־	and not	→ —
+16	הָיִ֥יתִי	I had been	→ —
+17	רַ֖ע	sad	→ sad
+18	לְפָנָֽיו	<to> before him	→ before
+
+## 16:7:55
+EN: sons of Barkos, sons of Sisera, sons of Tamah,
+1	בְּנֵי־	[the] descendants of	→ —
+2	בַרְק֥וֹס	Barkos	→ Barkos
+3	בְּֽנֵי־	[the] descendants of	→ —
+4	סִֽיסְרָ֖א	Sisera	→ Sisera
+5	בְּנֵי־	[the] descendants of	→ —
+6	תָֽמַח	Temah	→ —
+
+## 16:7:63
+EN: And of the priests: sons of Habaiah, sons of Koz, sons of Barzillai (who has taken a wife from the daughters of Barzillai the Gileadite, and is called by their name).
+1	וּמִן־	and of	→ And of
+2	הַכֹּ֣הֲנִ֔ים	the priests	→ the priests
+3	בְּנֵ֥י	[the] descendants of	→ —
+4	חֳבַיָּ֖ה	Hobaiah	→ —
+5	בְּנֵ֣י	[the] descendants of	→ —
+6	הַקּ֑וֹץ	Hakkoz	→ —
+7	בְּנֵ֣י	[the] descendants of	→ —
+8	בַרְזִלַּ֗י	Barzillai	→ Barzillai
+9	אֲשֶׁ֣ר	who	→ who
+10	לָ֠קַח	he had taken	→ taken
+11	מִבְּנ֞וֹת	one of [the] daughters of	→ daughters
+12	בַּרְזִלַּ֤י	Barzillai	→ Barzillai
+13	הַגִּלְעָדִי֙	the Gileadite	→ the Gileadite
+14	אִשָּׁ֔ה	wife	→ wife
+15	וַיִּקָּרֵ֖א	and he was called	→ called
+16	עַל־	on	→ —
+17	שְׁמָֽם	name their	→ name
+
+## 16:12:11
+EN: and Joiada has begotten Jonathan, and Jonathan has begotten Jaddua.
+1	וְיוֹיָדָע֙	and Joiada	→ and Joiada
+2	הוֹלִ֣יד	he fathered	→ —
+3	אֶת־	<obj.>	→ —
+4	יוֹנָתָ֔ן	Jonathan	→ Jonathan
+5	וְיוֹנָתָ֖ן	and Jonathan	→ and Jonathan
+6	הוֹלִ֥יד	he fathered	→ —
+7	אֶת־	<obj.>	→ —
+8	יַדּֽוּעַ	Jaddua	→ Jaddua
+
+## 16:12:27
+EN: And at the dedication of the wall of Jerusalem they sought the Levites out of all their places, to bring them to Jerusalem, to make the dedication even with gladness, and with thanksgivings, and with singing, [with] cymbals, psalteries, and with harps;
+1	וּבַחֲנֻכַּ֞ת	and at [the] dedication of	→ And at the dedication of
+2	חוֹמַ֣ת	[the] wall of	→ the wall of
+3	יְרוּשָׁלִַ֗ם	Jerusalem	→ Jerusalem
+4	בִּקְשׁ֤וּ	people sought	→ sought
+5	אֶת־	<obj.>	→ —
+6	הַלְוִיִּם֙	the Levites	→ the Levites
+7	מִכָּל־	from all	→ all
+8	מְק֣וֹמֹתָ֔ם	places their	→ places
+9	לַהֲבִיאָ֖ם	to bring them	→ to bring them
+10	לִֽירוּשָׁלִָ֑ם	to Jerusalem	→ to Jerusalem
+11	לַעֲשֹׂ֨ת	to celebrate	→ —
+12	חֲנֻכָּ֤ה	dedication	→ dedication
+13	וְשִׂמְחָה֙	and joy	→ —
+14	וּבְתוֹד֣וֹת	and with thanksgivings	→ and with thanksgivings
+15	וּבְשִׁ֔יר	and with song	→ —
+16	מְצִלְתַּ֖יִם	cymbals	→ cymbals
+17	נְבָלִ֥ים	lyres	→ —
+18	וּבְכִנֹּרֽוֹת	and with harps	→ and with harps
+
+## 16:13:21
+EN: and I testify against them, and say to them, “Why are you lodging in front of the wall? If you repeat [it], I put forth a hand on you”; from that time they have not come in on the Sabbath.
+1	וָאָעִ֣ידָה	and I warned !	→ —
+2	בָהֶ֗ם	<in> them	→ —
+3	וָאֹמְרָ֤ה	and I said !	→ say
+4	אֲלֵיהֶם֙	to them	→ to them
+5	מַדּ֜וּעַ	why?	→ Why
+6	אַתֶּ֤ם	[are] you	→ are you
+7	לֵנִים֙	passing [the] night	→ —
+8	נֶ֣גֶד	before	→ —
+9	הַחוֹמָ֔ה	the wall	→ the wall
+10	אִם־	if	→ If
+11	תִּשְׁנ֕וּ	you will do [it] again	→ —
+12	יָ֖ד	a hand	→ a hand
+13	אֶשְׁלַ֣ח	I will stretch out	→ —
+14	בָּכֶ֑ם	on you	→ on you
+15	מִן־	from	→ from
+16	הָעֵ֣ת	the time	→ time
+17	הַהִ֔יא	<the> that	→ —
+18	לֹא־	not	→ not
+19	בָ֖אוּ	they came	→ come
+20	בַּשַּׁבָּֽת׃ ס	on the sabbath	→ on the Sabbath
+
+## 18:3:25
+EN: For I feared a fear and it meets me, || And what I was afraid of comes to me.
+1	כִּ֤י	for	→ For
+2	פַ֣חַד	a fear	→ a fear
+3	פָּ֭חַדְתִּי	I feared	→ I feared
+4	וַיֶּאֱתָיֵ֑נִי	and it came to me	→ comes
+5	וַאֲשֶׁ֥ר	and [that] which	→ —
+6	יָ֝גֹ֗רְתִּי	I dreaded	→ —
+7	יָ֣בֹא	it came	→ —
+8	לִֽי	to me	→ to me
+
+## 18:7:3
+EN: So I have been caused to inherit months of vanity, || And they numbered nights of misery to me.
+1	כֵּ֤ן	so	→ So
+2	הָנְחַ֣לְתִּי	I have been allotted	→ —
+3	לִ֭י	for myself	→ —
+4	יַרְחֵי־	months of	→ months of
+5	שָׁ֑וְא	worthlessness	→ —
+6	וְלֵיל֥וֹת	and nights of	→ nights
+7	עָ֝מָ֗ל	trouble	→ —
+8	מִנּוּ־	people have allotted	→ —
+9	לִֽי	to me	→ to me
+
+## 18:12:5
+EN: A torch—despised in the thoughts of the secure || Is prepared for those sliding with the feet.
+1	לַפִּ֣יד	[belongs] to <the> disaster	→ —
+2	בּ֭וּז	contempt	→ —
+3	לְעַשְׁתּ֣וּת	to [the] thought of	→ thoughts
+4	שַׁאֲנָ֑ן	[one] at ease	→ —
+5	נָ֝כ֗וֹן	a push	→ —
+6	לְמ֣וֹעֲדֵי	[belongs] to [those who] are sliding of	→ those
+7	רָֽגֶל	foot	→ —
+
+## 18:21:13
+EN: They wear out their days in good, || And in a moment go down [to] Sheol.
+1	יְכַלּ֣וּ	they complete	→ —
+2	בַטּ֣וֹב	in the good	→ good
+3	יְמֵיהֶ֑ם	days their	→ days
+4	וּ֝בְרֶ֗גַע	and in a moment	→ And in a moment
+5	שְׁא֣וֹל	Sheol	→ Sheol
+6	יֵחָֽתּוּ	they descend	→ —
+
+## 18:29:12
+EN: For I deliver the afflicted who is crying, || And the fatherless who has no helper.
+1	כִּֽי־	that	→ —
+2	אֲ֭מַלֵּט	I rescued	→ —
+3	עָנִ֣י	[the] afflicted	→ the afflicted
+4	מְשַׁוֵּ֑עַ	[who] cried for help	→ —
+5	וְ֝יָת֗וֹם	and [the] fatherless	→ And the fatherless
+6	וְֽלֹא־	and [the one whom] not	→ —
+7	עֹזֵ֥ר	a helper	→ helper
+8	לֽוֹ	[belonged] to him	→ —
+
+## 18:29:21
+EN: They have listened to me, || Indeed, they wait, and are silent for my counsel.
+1	לִֽי־	to me	→ to me
+2	שָׁמְע֥וּ	people listened	→ listened
+3	וְיִחֵ֑לּוּ	and they waited	→ wait
+4	וְ֝יִדְּמ֗וּ	and they may be silent	→ silent
+5	לְמ֣וֹ	for	→ for
+6	עֲצָתִֽי	counsel my	→ counsel
+
+## 18:32:9
+EN: The multitude are not wise, || Nor do the aged understand judgment.
+1	לֹֽא־	not	→ not
+2	רַבִּ֥ים	many [people]	→ —
+3	יֶחְכָּ֑מוּ	they are wise	→ wise
+4	וּ֝זְקֵנִ֗ים	and old [people]	→ —
+5	יָבִ֥ינוּ	they understand	→ understand
+6	מִשְׁפָּֽט	justice	→ —
+
+## 18:35:4
+EN: I return words, and your friends with you,
+1	אֲ֭נִי	I	→ I
+2	אֲשִֽׁיבְךָ֣	I will respond to you	→ —
+3	מִלִּ֑ין	words	→ words
+4	וְֽאֶת־	and <obj.>	→ and
+5	רֵעֶ֥יךָ	friends your	→ friends
+6	עִמָּֽךְ	with you	→ with you
+
+## 19:22:18
+EN: They apportion My garments to themselves, || And they cause a lot to fall for My clothing.
+1	יְחַלְּק֣וּ	they distribute	→ —
+2	בְגָדַ֣י	clothes my	→ clothing
+3	לָהֶ֑ם	to themselves	→ to themselves
+4	וְעַל־	and on	→ —
+5	לְ֝בוּשִׁ֗י	clothing my	→ —
+6	יַפִּ֥ילוּ	they cast	→ —
+7	גוֹרָֽל	a lot	→ a lot
+
+## 19:31:1
+EN: TO THE OVERSEER. A PSALM OF DAVID. In You, O YHWH, I have trusted, || Do not let me be ashamed for all time, || In Your righteousness deliver me.
+1	בְּךָ֖	in you	→ In You
+2	יְהוָ֣ה	O Yahweh	→ —
+3	חָ֭סִיתִי	I have taken refuge	→ —
+4	אַל־	may not	→ —
+5	אֵב֣וֹשָׁה	I be ashamed	→ ashamed
+6	לְעוֹלָ֑ם	for ever	→ —
+7	בְּצִדְקָתְךָ֥	in righteousness your	→ righteousness
+8	פַלְּטֵֽנִי	deliver me	→ deliver me
+
+## 19:31:3
+EN: For You [are] my rock and my bulwark, || For Your Name’s sake lead me and tend me.
+1	כִּֽי־	for	→ For
+2	סַלְעִ֣י	[are] rock my	→ rock
+3	וּמְצוּדָתִ֣י	and stronghold my	→ —
+4	אָ֑תָּה	you	→ You
+5	וּלְמַ֥עַן	and for [the] sake of	→ sake
+6	שִׁ֝מְךָ֗	name your	→ —
+7	תַּֽנְחֵ֥נִי	you guide me	→ —
+8	וּֽתְנַהֲלֵֽנִי	and you lead me	→ lead
+
+## 19:35:16
+EN: With profane ones, mockers in feasts, || Gnashing their teeth against me.
+1	בְּ֭חַנְפֵי	<in> godless [ones] of	→ ones
+2	לַעֲגֵ֣י	mockers of	→ mockers
+3	מָע֑וֹג	cake	→ —
+4	חָרֹ֖ק	they gnashed	→ Gnashing
+5	עָלַ֣י	towards me	→ —
+6	שִׁנֵּֽימוֹ	teeth their	→ teeth
+
+## 19:45:13
+EN: All glory [is] the daughter of the king within, || Her clothing [is] with filigrees of gold.
+1	כָּל־	[is] all	→ All
+2	כְּבוּדָּ֣ה	glorious	→ —
+3	בַת־	a daughter of	→ daughter
+4	מֶ֣לֶךְ	a king	→ king
+5	פְּנִ֑ימָה	within	→ within
+6	מִֽמִּשְׁבְּצ֖וֹת	[is] from settings of	→ —
+7	זָהָ֣ב	gold	→ gold
+8	לְבוּשָֽׁהּ	clothing her	→ clothing
+
+## 19:50:20
+EN: You sit, you speak against your brother, || You give slander against a son of your mother.
+1	תֵּ֭שֵׁב	you sit	→ You sit
+2	בְּאָחִ֣יךָ	on brother your	→ brother
+3	תְדַבֵּ֑ר	you speak	→ you speak
+4	בְּבֶֽן־	on [the] child of	→ —
+5	אִ֝מְּךָ֗	mother your	→ mother
+6	תִּתֶּן־	you give	→ You give
+7	דֹּֽפִי	a fault	→ —
+
+## 19:51:6
+EN: Behold, You have desired truth in the inward parts, || And in the hidden part You cause me to know Wisdom.
+1	הֵן־	here!	→ —
+2	אֱ֭מֶת	faithfulness	→ —
+3	חָפַ֣צְתָּ	you desire	→ —
+4	בַטֻּח֑וֹת	in the covered places	→ —
+5	וּ֝בְסָתֻ֗ם	and in a [place] kept secret	→ —
+6	חָכְמָ֥ה	wisdom	→ Wisdom
+7	תוֹדִיעֵֽנִי	you cause to know me	→ cause
+
+## 19:52:5
+EN: Also—God breaks you down forever, || Takes you, and pulls you out of the tent, || And He has uprooted you || Out of the land of the living. Selah.
+1	גַּם־	also	→ —
+2	אֵל֮	God	→ —
+3	יִתָּצְךָ֪	he will tear down you	→ down
+4	לָ֫נֶ֥צַח	to perpetuity	→ —
+5	יַחְתְּךָ֣	he will snatch up you	→ —
+6	וְיִסָּחֲךָ֣	and he will tear away you	→ —
+7	מֵאֹ֑הֶל	from a tent	→ tent
+8	וְשֵֽׁרֶשְׁךָ֨	and he will root up you	→ —
+9	מֵאֶ֖רֶץ	from [the] land of	→ land
+10	חַיִּ֣ים	living [people]	→ living
+11	סֶֽלָה	Selah	→ Selah
+
+## 19:59:17
+EN: O my Strength, I sing praise to You, || For God [is] my tower, the God of my kindness!
+1	עֻ֭זִּי	O strength my	→ Strength
+2	אֵלֶ֣יךָ	to you	→ to You
+3	אֲזַמֵּ֑רָה	I will sing praises	→ sing
+4	כִּֽי־	for	→ For
+5	אֱלֹהִ֥ים	God	→ God
+6	מִ֝שְׂגַּבִּ֗י	[is] refuge my	→ —
+7	אֱלֹהֵ֥י	[the] God of	→ the God of
+8	חַסְדִּֽי	covenant loyalty my	→ —
+
+## 19:60:11
+EN: Give to us help from adversity, || And the deliverance of man [is] vain.
+1	הָֽבָה־	give !	→ Give
+2	לָּ֣נוּ	to us	→ to us
+3	עֶזְרָ֣ת	help	→ help
+4	מִצָּ֑ר	from [the] foe	→ —
+5	וְ֝שָׁ֗וְא	and [is] worthlessness	→ —
+6	תְּשׁוּעַ֥ת	[the] deliverance of	→ the deliverance of
+7	אָדָם	humankind	→ —
+
+## 19:71:12
+EN: O God, do not be far from me, || O my God, make haste for my help.
+1	אֱ֭לֹהִים	O God	→ O God
+2	אַל־	may not	→ —
+3	תִּרְחַ֣ק	you be far	→ far
+4	מִמֶּ֑נִּי	from me	→ from me
+5	אֱ֝לֹהַ֗י	O God my	→ God
+6	לְעֶזְרָ֥תִי	to help my	→ help
+7	חֽוּשָׁה	make haste !	→ make haste
+
+## 19:74:20
+EN: Look attentively to the covenant, || For the dark places of earth, || Have been full of habitations of violence.
+1	הַבֵּ֥ט	pay attention	→ —
+2	לַבְּרִ֑ית	to the covenant	→ to the covenant
+3	כִּ֥י	for	→ For
+4	מָלְא֥וּ	they are full	→ full
+5	מַחֲשַׁכֵּי־	[the] dark places of	→ the dark places of
+6	אֶ֝֗רֶץ	[the] land	→ —
+7	נְא֣וֹת	settlements of	→ —
+8	חָמָֽס	violence	→ violence
+
+## 19:76:2
+EN: And His dwelling place is in Salem, || And His habitation in Zion.
+1	וַיְהִ֣י	and it was	→ —
+2	בְשָׁלֵ֣ם	in Salem	→ in Salem
+3	סֻכּ֑וֹ	lair his	→ —
+4	וּמְע֖וֹנָת֣וֹ	and den his	→ —
+5	בְצִיּֽוֹן	in Zion	→ in Zion
+
+## 19:82:1
+EN: A PSALM OF ASAPH. God has stood in the congregation of God, || He judges among the gods.
+1	אֱֽלֹהִ֗ים	God	→ God
+2	נִצָּ֥ב	[is] taking his stand	→ stood
+3	בַּעֲדַת־	in [the] congregation of	→ in the congregation of
+4	אֵ֑ל	God	→ God
+5	בְּקֶ֖רֶב	in [the] midst of	→ —
+6	אֱלֹהִ֣ים	[the] gods	→ the gods
+7	יִשְׁפֹּֽט	he gives judgment	→ —
+
+## 19:88:8
+EN: You have put my acquaintance far from me, || You have made me an abomination to them, || Shut up—I do not go forth.
+1	הִרְחַ֥קְתָּ	you have removed far away	→ far
+2	מְיֻדָּעַ֗י	acquaintances my	→ —
+3	מִ֫מֶּ֥נִּי	from me	→ from me
+4	שַׁתַּ֣נִי	you have made me	→ You have made me
+5	תוֹעֵב֣וֹת	abominations	→ abomination
+6	לָ֑מוֹ	to them	→ to them
+7	כָּ֝לֻ֗א	[I am] shut up	→ Shut
+8	וְלֹ֣א	and not	→ —
+9	אֵצֵֽא	I will go out	→ go
+
+## 19:94:9
+EN: He who plants the ear, does He not hear? He who forms the eye, does He not see?
+1	הֲנֹ֣טַֽע	¿ [the] planter of	→ —
+2	אֹ֭זֶן	[the] ear	→ the ear
+3	הֲלֹ֣א	¿ not	→ —
+4	יִשְׁמָ֑ע	does he hear	→ hear
+5	אִֽם־	or?	→ —
+6	יֹ֥צֵֽר	[the] former of	→ —
+7	עַ֝֗יִן	[the] eye	→ the eye
+8	הֲלֹ֣א	¿ not	→ —
+9	יַבִּֽיט	does he see	→ see
+
+## 19:97:2
+EN: Cloud and darkness [are] around Him, || Righteousness and judgment the basis of His throne.
+1	עָנָ֣ן	cloud	→ Cloud
+2	וַעֲרָפֶ֣ל	and thick darkness	→ darkness
+3	סְבִיבָ֑יו	[are] around him	→ Him
+4	צֶ֥דֶק	[is] righteousness	→ Righteousness
+5	וּ֝מִשְׁפָּ֗ט	and justice	→ —
+6	מְכ֣וֹן	[the] foundation of	→ —
+7	כִּסְאֽוֹ	throne his	→ throne
+
+## 19:107:26
+EN: They go up [to] the heavens, they go down [to] the depths, || Their soul is melted in evil.
+1	יַעֲל֣וּ	they went up	→ They go up
+2	שָׁ֭מַיִם	[the] heavens	→ the heavens
+3	יֵרְד֣וּ	they went down	→ they go down
+4	תְהוֹמ֑וֹת	[the] deeps	→ —
+5	נַ֝פְשָׁ֗ם	soul their	→ soul
+6	בְּרָעָ֥ה	in distress	→ —
+7	תִתְמוֹגָֽג	it melted	→ melted

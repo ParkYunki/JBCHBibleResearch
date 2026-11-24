@@ -1,0 +1,195 @@
+## 12:25:8
+KO: 그리고 다섯째 달, 그 달 칠일에, 그것은 바벨론 왕 느부갓네살의 열아홉째 해였는데, 바벨론 왕의 신하 시위대 장관 느부사라단이 예루살렘에 왔다.
+1 וּבַחֹדֶשׁ = and in the month
+2 הַחֲמִישִׁי = <the> fifth (fifth)
+3 בְּשִׁבְעָה = on [day] seven (seven)
+4 לַחֹדֶשׁ = of the month
+5 הִיא = it (he;_she;_it)
+6 שְׁנַת = [was] year
+7 תְּשַׁע־ = nine- (nine)
+8 עֶשְׂרֵה = teen (ten)
+9 שָׁנָה = year
+10 לַמֶּלֶךְ = of the king
+11 נְבֻכַדְנֶאצַּר = Nebuchadnezzar
+12 מֶלֶךְ־ = [the] king of
+13 בָּבֶל = Babylon
+14 בָּא = he came (to come (in))
+15 נְבוּזַרְאֲדָן = Nebuzaradan
+16 רַב־ = [the] chief of (chief)
+17 טַבָּחִים = [the] bodyguards (guard)
+18 עֶבֶד = [the] servant of (servant;_slave)
+19 מֶלֶךְ־ = [the] king of
+20 בָּבֶל = Babylon
+21 יְרוּשָׁלִָם = Jerusalem
+
+## 12:25:9
+KO: 그리고 그가 여호와의 집과 왕의 집과 예루살렘의 모든 집들을 불살랐으며, 모든 큰 집을 불로 태웠다.
+1 וַיִּשְׂרֹף = and he burned
+2 אֶת־ = <obj.>
+3 בֵּית־ = [the] house of
+4 יְהוָה = Yahweh (LORD)
+5 וְאֶת־ = and <obj.>
+6 בֵּית = [the] house of
+7 הַמֶּלֶךְ = the king (king)
+8 וְאֵת = and <obj.>
+9 כָּל־ = all
+10 בָּתֵּי = [the] houses of
+11 יְרוּשָׁלִַם = Jerusalem
+12 וְאֶת־ = and <obj.>
+13 כָּל־ = every
+14 בֵּית = house of
+15 גָּדוֹל = a great [person] (great)
+16 שָׂרַף = he burned
+17 בָּאֵשׁ = with <the> fire (fire)
+
+## 12:25:10
+KO: 그리고 시위대장의 지휘 아래 있는 갈대아의 모든 군대가 예루살렘 사면의 성벽들을 헐어 버렸다.
+1 וְאֶת־ = and <obj.> ([Obj.])
+2 חוֹמֹת = [the] walls of (wall)
+3 יְרוּשָׁלִַם = Jerusalem
+4 סָבִיב = all around (around)
+5 נָתְצוּ = they broke down (to tear)
+6 כָּל־ = all
+7 חֵיל = [the] army of (strength)
+8 כַּשְׂדִּים = [the] Chaldeans (Chaldea)
+9 אֲשֶׁר = who (which)
+10 רַב־ = [was the] chief of (chief)
+11 טַבָּחִים = [the] bodyguards (guard)
+
+## 12:25:11
+KO: 그리고 성중에 남아 있는 백성의 나머지들과, 바벨론 왕에게 항복한 자들과, 무리의 나머지들을 시위대 장관 느부사라단이 사로잡아 갔다.
+1 וְאֵת = and <obj.>
+2 יֶתֶר = [the] rest of
+3 הָעָם = the people (people)
+4 הַנִּשְׁאָרִים = which remained (to remain)
+5 בָּעִיר = in the city (city)
+6 וְאֶת־ = and <obj.>
+7 הַנֹּפְלִים = those [who] fell
+8 אֲשֶׁר = who (which)
+9 נָפְלוּ = they fell
+10 עַל־ = on (upon)
+11 הַמֶּלֶךְ = the king of (king)
+12 בָּבֶל = Babylon
+13 וְאֵת = and <obj.>
+14 יֶתֶר = [the] rest of
+15 הֶהָמוֹן = the multitude (crowd)
+16 הֶגְלָה = he took into exile (to reveal)
+17 נְבוּזַרְאֲדָן = Nebuzaradan
+18 רַב־ = [the] chief of (chief)
+19 טַבָּחִים = [the] bodyguards (guard)
+
+## 12:25:12
+KO: 그리고 그 땅의 가난한 자들로부터 시위대장이 포도원을 가꾸는 자들과 경작하는 자들로 남겨두었다.
+1 וּמִדַּלַּת = and some of [the] poor people of (poor)
+2 הָאָרֶץ = the land (land)
+3 הִשְׁאִיר = he left behind (to remain)
+4 רַב־ = [the] chief of (chief)
+5 טַבָּחִים = [the] bodyguards (guard)
+6 לְכֹרְמִים = to vinedressers (to tend vineyards)
+7 וּלְיֹגְבִים = and to ploughmen (to till)
+
+## 12:25:13
+KO: 그리고 여호와의 집에 있는 그 놋 기둥들과, 그 받침들과, 여호와의 집에 있는 그 놋 바다를 갈대아 사람들이 깨뜨렸고, 그들의 놋을 바벨론으로 가져갔다.
+1 וְאֶת־ = and <obj.>
+2 עַמּוּדֵי = [the] pillars of (pillar)
+3 הַנְּחֹשֶׁת = <the> bronze
+4 אֲשֶׁר = which
+5 בֵּית־ = [were] [the] house of
+6 יְהוָה = Yahweh
+7 וְאֶת־ = and <obj.>
+8 הַמְּכֹנוֹת = the stands (base)
+9 וְאֶת־ = and <obj.>
+10 יָם = [the] sea of (sea)
+11 הַנְּחֹשֶׁת = <the> bronze
+12 אֲשֶׁר = which
+13 בְּבֵית־ = [was] in [the] house of
+14 יְהוָה = Yahweh
+15 שִׁבְּרוּ = they broke (to break)
+16 כַשְׂדִּים = [the] Chaldeans (Chaldea)
+17 וַיִּשְׂאוּ = and they carried (to lift)
+18 אֶת־ = <obj.>
+19 נְחֻשְׁתָּם = bronze their
+20 בָּבֶלָה = Babylon towards (Babylon)
+
+## 12:25:14
+KO: 그리고 가마들과 그리고 부삽들과 그리고 불집게들과 그리고 숟가락들과 그리고 그들이 그것들로 섬기는 모든 놋그릇들을 그들이 가져갔다.
+1 וְאֶת־ = and <obj.>
+2 הַסִּירֹת = the pots (pot)
+3 וְאֶת־ = and <obj.>
+4 הַיָּעִים = the shovels (shovel)
+5 וְאֶת־ = and <obj.>
+6 הַמְזַמְּרוֹת = the snuffers (snuffer)
+7 וְאֶת־ = and <obj.>
+8 הַכַּפּוֹת = the pans (palm)
+9 וְאֵת = and <obj.>
+10 כָּל־ = all
+11 כְּלֵי = [the] articles of (article|utensil)
+12 הַנְּחֹשֶׁת = <the> bronze (bronze)
+13 אֲשֶׁר = which
+14 יְשָׁרְתוּ־ = people served (to minister)
+15 בָם = with them (them)
+16 לָקָחוּ = they took (to take)
+
+## 12:25:15
+KO: 그리고 불 옮기는 그릇들과 그리고 대접들을, 곧 금은 금으로서 그리고 은은 은으로서, 시위대 장관이 가져갔다.
+1 וְאֶת־ = and <obj.>
+2 הַמַּחְתּוֹת = the fire-pans (censer)
+3 וְאֶת־ = and <obj.>
+4 הַמִּזְרָקוֹת = the bowls (bowl)
+5 אֲשֶׁר = which
+6 זָהָב = [were] gold
+7 זָהָב = gold
+8 וַאֲשֶׁר־ = and which
+9 כֶּסֶף = [were] silver
+10 כָּסֶף = silver
+11 לָקַח = he took (to take)
+12 רַב־ = [the] chief of (chief)
+13 טַבָּחִים = [the] bodyguards (guard)
+
+## 12:25:16
+KO: 두 기둥들과 바다 하나와 받침들을, 곧 솔로몬이 여호와의 집을 위하여 만든 것들을 취하였는데, 이 모든 기구들의 놋의 무게는 헤아릴 수 없었다.
+1 הָעַמּוּדִים = the pillars (pillar)
+2 שְׁנַיִם = two
+3 הַיָּם = the sea (sea)
+4 הָאֶחָד = <the> one (one)
+5 וְהַמְּכֹנוֹת = and the stands (base)
+6 אֲשֶׁר־ = which
+7 עָשָׂה = he had made (to make)
+8 שְׁלֹמֹה = Solomon
+9 לְבֵית = for [the] house of (house)
+10 יְהוָה = Yahweh (LORD)
+11 לֹא־ = not
+12 הָיָה = it belonged (to be)
+13 מִשְׁקָל = weight
+14 לִנְחֹשֶׁת = to [the] bronze of (bronze)
+15 כָּל־ = all
+16 הַכֵּלִים = the articles (article|utensil)
+17 הָאֵלֶּה = <the> these (these)
+
+## 12:25:17
+KO: 열여덟 규빗이 한 기둥의 높이이고, 그 위에 놋으로 된 머리(장식)가 있으며, 그 머리의 높이는 세 규빗이고, 그 머리 위 둘레에 그물과 석류가 다 놋이라. 다른 기둥에도 이와 같이 그물(장식)이 있었더라.
+1 שְׁמֹנֶה = [was] eight- (eight)
+2 עֶשְׂרֵה = teen (ten)
+3 אַמָּה = cubit[s]
+4 קוֹמַת = [the] height of
+5 הָעַמּוּד = the pillar
+6 הָאֶחָד = <the> one (one)
+7 וְכֹתֶרֶת = and a capital
+8 עָלָיו = [was] on it
+9 נְחֹשֶׁת = bronze
+10 וְקוֹמַת = and [the] height of
+11 הַכֹּתֶרֶת = the capital
+12 שָׁלֹשׁ = [was] three (three)
+13 אַמּוֹת = cubits
+14 וּשְׂבָכָה = and a network
+15 וְרִמֹּנִים = and pomegranates (pomegranate)
+16 עַל־ = [were] on
+17 הַכֹּתֶרֶת = the capital
+18 סָבִיב = all around (around)
+19 הַכֹּל = <the> everything (all)
+20 נְחֹשֶׁת = [was] bronze
+21 וְכָאֵלֶּה = and like these [things] (these)
+22 לַעַמּוּד = [belonged] to the pillar
+23 הַשֵּׁנִי = <the> second (second)
+24 עַל־ = with
+25 הַשְּׂבָכָה = the network

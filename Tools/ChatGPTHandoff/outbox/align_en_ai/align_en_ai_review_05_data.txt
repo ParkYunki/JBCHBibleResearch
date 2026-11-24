@@ -1,0 +1,792 @@
+## 23:22:2
+EN: Full of stirs—a noisy city—an exulting city, || Your pierced are not pierced of the sword, || Nor dead in battle.
+1	תְּשֻׁא֣וֹת׀	noises	→ Full of stirs—a noisy city—an exulting city
+2	מְלֵאָ֗ה	full	→ Full of stirs—a noisy city—an exulting city
+3	עִ֚יר	O city	→ Full of stirs—a noisy city—an exulting city
+4	הֽוֹמִיָּ֔ה	turbulent	→ Full of stirs—a noisy city—an exulting city
+5	קִרְיָ֖ה	O town	→ Full of stirs—a noisy city—an exulting city
+6	עַלִּיזָ֑ה	jubilant	→ Full of stirs—a noisy city—an exulting city
+7	חֲלָלַ֙יִךְ֙	slain [ones] your	→ Your pierced
+8	לֹ֣א	not	→ not
+9	חַלְלֵי־	[are] slain of	→ pierced of
+10	חֶ֔רֶב	a sword	→ sword
+11	וְלֹ֖א	and not	→ Nor
+12	מֵתֵ֥י	[are] dead of	→ dead
+13	מִלְחָמָֽה	battle	→ battle
+
+## 23:22:18
+EN: And your coverer covering, wrapping around, || Wraps you around, O babbler, || On a land of broad sides—there you die, || And there the chariots of your glory [are] the shame of the house of your lord.
+1	צָנ֤וֹף	certainly <to wind up>	→ And your coverer covering
+2	יִצְנָפְךָ֙	he will wind up you	→ Wraps you around
+3	צְנֵפָ֔ה	a winding	→ wrapping around
+4	כַּדּ֕וּר	a ball	→ O babbler
+5	אֶל־	to	→ On a land of broad sides—there
+6	אֶ֖רֶץ	a land	→ On a land of broad sides—there
+7	רַחֲבַ֣ת	broad of	→ On a land of broad sides—there
+8	יָדָ֑יִם	both hands	→ On a land of broad sides—there
+9	שָׁ֣מָּה	there <towards>	→ On a land of broad sides—there
+10	תָמ֗וּת	you will die	→ you die
+11	וְשָׁ֙מָּה֙	and there <towards>	→ And there
+12	מַרְכְּב֣וֹת	[the] chariots of	→ chariots of
+13	כְּבוֹדֶ֔ךָ	splendor your	→ your glory
+14	קְל֖וֹן	[will be] [the] disgrace of	→ the shame of
+15	בֵּ֥ית	[the] house of	→ the house of
+16	אֲדֹנֶֽיךָ	master<s> your	→ your lord
+
+## 23:24:6
+EN: Therefore a curse has consumed the earth, || And the inhabitants in it become desolate, || Therefore inhabitants of the earth have been consumed, || And few men have been left.
+1	עַל־	there-	→ Therefore
+2	כֵּ֗ן	-fore	→ Therefore
+3	אָלָה֙	a curse	→ a curse
+4	אָ֣כְלָה	it has consumed	→ has consumed
+5	אֶ֔רֶץ	[the] earth	→ the earth
+6	וַֽיֶּאְשְׁמ֖וּ	and they have been held guilty	→ become desolate
+7	יֹ֣שְׁבֵי	[the] inhabitants	→ the inhabitants
+8	בָ֑הּ	in <the> it	→ in it
+9	עַל־	there-	→ Therefore
+10	כֵּ֗ן	-fore	→ Therefore
+11	חָרוּ֙	they have diminished	→ have been consumed
+12	יֹ֣שְׁבֵי	[the] inhabitants of	→ inhabitants of
+13	אֶ֔רֶץ	[the] earth	→ the earth
+14	וְנִשְׁאַ֥ר	and it will be left	→ have been left
+15	אֱנ֖וֹשׁ	humankind of	→ men
+16	מִזְעָֽר	smallness	→ few
+
+## 23:26:6
+EN: A foot treads it down, || Feet of the poor—steps of the weak.
+1	תִּרְמְסֶ֖נָּה	it will trample it	→ treads it down
+2	רָ֑גֶל	a foot	→ A foot
+3	רַגְלֵ֥י	[the] feet of	→ Feet of
+4	עָנִ֖י	[the] afflicted	→ the poor—steps of the weak
+5	פַּעֲמֵ֥י	[the] footsteps of	→ the poor—steps of the weak
+6	דַלִּֽים	poor [people]	→ the poor—steps of the weak
+
+## 23:28:21
+EN: For as YHWH rises [at] Mount Perazim, || As He is troubled [at] the valley in Gibeon, || To do His work—strange [is] His work, || And to do His deed—strange [is] His deed.”
+1	כִּ֤י	for	→ For
+2	כְהַר־	like [the] mountain of	→ Mount Perazim
+3	פְּרָצִים֙	Perazim	→ Mount Perazim
+4	יָק֣וּם	he will arise	→ rises
+5	יְהוָ֔ה	Yahweh	→ YHWH
+6	כְּעֵ֖מֶק	like a valley	→ the valley
+7	בְּגִבְע֣וֹן	in Gibeon	→ in Gibeon
+8	יִרְגָּ֑ז	he will rage	→ troubled
+9	לַעֲשׂ֤וֹת	to do	→ To do
+10	מַעֲשֵׂ֙הוּ֙	deed his	→ His work
+11	זָ֣ר	[is] strange	→ strange
+12	מַעֲשֵׂ֔הוּ	deed his	→ His work
+13	וְלַֽעֲבֹד֙	and to work	→ And to do
+14	עֲבֹ֣דָת֔וֹ	work his	→ His deed
+15	נָכְרִיָּ֖ה	[is] alien	→ strange
+16	עֲבֹדָתֽוֹ	work his	→ His deed
+
+## 23:38:7
+EN: And this [is] to you the sign from YHWH, that YHWH does this thing that He has spoken.
+1	וְזֶה־	and this	→ And this
+2	לְּךָ֥	for you	→ to you
+3	הָא֖וֹת	[will be] the sign	→ the sign
+4	מֵאֵ֣ת	from with	→ from
+5	יְהוָ֑ה	Yahweh	→ YHWH
+6	אֲשֶׁר֙	that	→ that
+7	יַעֲשֶׂ֣ה	he will do	→ does
+8	יְהוָ֔ה	Yahweh	→ YHWH
+9	אֶת־	<obj.>	→ —
+10	הַדָּבָ֥ר	the thing	→ this thing
+11	הַזֶּ֖ה	<the> this	→ this thing
+12	אֲשֶׁ֥ר	which	→ that
+13	דִּבֵּֽר	he has spoken	→ He has spoken
+
+## 23:40:24
+EN: Indeed, they have not been planted, || Indeed, they have not been sown, || Indeed, their stock is not taking root in the earth, || And He has also blown on them, and they wither, || And a whirlwind takes them away as stubble.
+1	אַ֣ף	even	→ Indeed
+2	בַּל־	not	→ not been planted
+3	נִטָּ֗עוּ	they have been planted	→ not been planted
+4	אַ֚ף	even	→ Indeed
+5	בַּל־	not	→ not been sown
+6	זֹרָ֔עוּ	they have been sown	→ not been sown
+7	אַ֛ף	even	→ Indeed
+8	בַּל־	not	→ not taking root
+9	שֹׁרֵ֥שׁ	it has taken root	→ not taking root
+10	בָּאָ֖רֶץ	in the ground	→ in the earth
+11	גִּזְעָ֑ם	rootstock their	→ their stock
+12	וְגַם־	and also	→ also
+13	נָשַׁ֤ף	he blows	→ blown
+14	בָּהֶם֙	on them	→ on them
+15	וַיִּבָ֔שׁוּ	and they have dried up	→ wither
+16	וּסְעָרָ֖ה	and a tempest	→ whirlwind
+17	כַּקַּ֥שׁ	like <the> chaff	→ as stubble
+18	תִּשָּׂאֵֽם׃ ס	it carries off them	→ takes them away
+
+## 23:41:12
+EN: You seek them, and do not find them, || The men who debate with you, || They are as nothing, indeed, as nothing, || The men who war with you.
+1	תְּבַקְשֵׁם֙	you will seek them	→ You seek them
+2	וְלֹ֣א	and not	→ do not find them
+3	תִמְצָאֵ֔ם	you will find them	→ do not find them
+4	אַנְשֵׁ֖י	[the] people of	→ men
+5	מַצֻּתֶ֑ךָ	strife your	→ debate with you
+6	יִהְי֥וּ	they will be	→ are
+7	כְאַ֛יִן	as nothing	→ as nothing
+8	וּכְאֶ֖פֶס	and as nothing	→ as nothing
+9	אַנְשֵׁ֥י	[the] people of	→ men
+10	מִלְחַמְתֶּֽךָ	warfare your	→ war with you
+
+## 23:41:19
+EN: I give in a wilderness the cedar, || Shittah, and myrtle, and oil-tree, || I set in a desert the fir-pine and box-wood together.
+1	אֶתֵּ֤ן	I will put	→ give
+2	בַּמִּדְבָּר֙	in the wilderness	→ in a wilderness
+3	אֶ֣רֶז	cedar[s]	→ cedar
+4	שִׁטָּ֔ה	acacia tree[s]	→ Shittah
+5	וַהֲדַ֖ס	and myrtle tree[s]	→ myrtle
+6	וְעֵ֣ץ	and tree[s] of	→ oil-tree
+7	שָׁ֑מֶן	oil	→ oil-tree
+8	אָשִׂ֣ים	I will set	→ set
+9	בָּעֲרָבָ֗ה	in the desert plain	→ in a desert
+10	בְּר֛וֹשׁ	cypress[es]	→ fir-pine
+11	תִּדְהָ֥ר	elm[s]	→ fir-pine
+12	וּתְאַשּׁ֖וּר	and box tree[s]	→ box-wood
+13	יַחְדָּֽו	together	→ together
+
+## 23:43:4
+EN: Since you were precious in My eyes, || You were honored, and I have loved you, || And I appoint men in your stead, || And peoples instead of your life.
+1	מֵאֲשֶׁ֨ר	<from> because	→ Since
+2	יָקַ֧רְתָּ	you are precious	→ precious
+3	בְעֵינַ֛י	in view my	→ in My eyes
+4	נִכְבַּ֖דְתָּ	you are honored	→ honored
+5	וַאֲנִ֣י	and I	→ I
+6	אֲהַבְתִּ֑יךָ	I love you	→ loved you
+7	וְאֶתֵּ֤ן	and I may give	→ appoint
+8	אָדָם֙	humankind	→ men
+9	תַּחְתֶּ֔יךָ	in place of you	→ in your stead
+10	וּלְאֻמִּ֖ים	and peoples	→ peoples
+11	תַּ֥חַת	in place of	→ instead of
+12	נַפְשֶֽׁךָ	life your	→ your life
+
+## 23:49:4
+EN: And I said, “I labored in vain, || I consumed my power for emptiness and vanity, || But my judgment [is] with YHWH, || And my wage with my God.”
+1	וַאֲנִ֤י	and I	→ I
+2	אָמַ֙רְתִּי֙	I said	→ said
+3	לְרִ֣יק	to emptiness	→ in vain
+4	יָגַ֔עְתִּי	I have labored	→ labored
+5	לְתֹ֥הוּ	to nothingness	→ emptiness
+6	וְהֶ֖בֶל	and futility	→ vanity
+7	כֹּחִ֣י	strength my	→ my power
+8	כִלֵּ֑יתִי	I have caused to fail	→ consumed
+9	אָכֵן֙	nevertheless	→ But
+10	מִשְׁפָּטִ֣י	justice my	→ my judgment
+11	אֶת־	[is] with	→ with YHWH
+12	יְהוָ֔ה	Yahweh	→ with YHWH
+13	וּפְעֻלָּתִ֖י	and recompense my	→ my wage
+14	אֶת־	[is] with	→ with my God
+15	אֱלֹהָֽי	God my	→ with my God
+
+## 23:50:7
+EN: And Lord YHWH gives help to Me, || Therefore I have not been ashamed, || Therefore I have set My face as a flint, || And I know that I am not ashamed.
+1	וַאדֹנָ֤י	and [the] Lord	→ Lord
+2	יְהוִה֙	Yahweh	→ YHWH
+3	יַֽעֲזָר־	he helps	→ gives help
+4	לִ֔י	<to> me	→ to Me
+5	עַל־	there-	→ Therefore
+6	כֵּ֖ן	-fore	→ Therefore
+7	לֹ֣א	not	→ not been ashamed
+8	נִכְלָ֑מְתִּי	I have been humiliated	→ not been ashamed
+9	עַל־	there-	→ Therefore
+10	כֵּ֞ן	-fore	→ Therefore
+11	שַׂ֤מְתִּי	I have made	→ set
+12	פָנַי֙	face my	→ My face
+13	כַּֽחַלָּמִ֔ישׁ	like <the> flint	→ as a flint
+14	וָאֵדַ֖ע	and I have perceived	→ know
+15	כִּי־	that	→ that
+16	לֹ֥א	not	→ not ashamed
+17	אֵבֽוֹשׁ	I will be put to shame	→ not ashamed
+
+## 23:65:19
+EN: And I have rejoiced in Jerusalem, || And have rejoiced in My people, || And the voice of weeping is not heard in her anymore, and the voice of crying.
+1	וְגַלְתִּ֥י	and I will be glad	→ rejoiced
+2	בִירוּשָׁלִַ֖ם	in Jerusalem	→ in Jerusalem
+3	וְשַׂשְׂתִּ֣י	and I will rejoice	→ rejoiced
+4	בְעַמִּ֑י	in people my	→ in My people
+5	וְלֹֽא־	and not	→ not
+6	יִשָּׁמַ֥ע	it will be heard	→ heard
+7	בָּהּ֙	in it	→ in her
+8	ע֔וֹד	again	→ anymore
+9	ק֥וֹל	a sound of	→ voice of
+10	בְּכִ֖י	weeping	→ weeping
+11	וְק֥וֹל	and a sound of	→ voice of
+12	זְעָקָֽה	a cry of distress	→ crying
+
+## 24:1:19
+EN: and they have fought against you, and they do not prevail against you; for I [am] with you,” a declaration of YHWH, “to deliver you.”
+1	וְנִלְחֲמ֥וּ	and they will fight	→ fought
+2	אֵלֶ֖יךָ	against you	→ against you
+3	וְלֹא־	and not	→ do not
+4	י֣וּכְלוּ	they will prevail	→ prevail
+5	לָ֑ךְ	to <the> you	→ against you
+6	כִּֽי־	for	→ for
+7	אִתְּךָ֥	[will be] with you	→ with you
+8	אֲנִ֛י	I	→ I
+9	נְאֻם־	[the] utterance of	→ declaration of
+10	יְהוָ֖ה	Yahweh	→ YHWH
+11	לְהַצִּילֶֽךָ׃ פ	to deliver you	→ to deliver you
+
+## 24:2:14
+EN: [Is] Israel a servant? Is he a child of the house? Why has he been for a prey?
+1	הַעֶ֙בֶד֙	¿ a slave	→ servant
+2	יִשְׂרָאֵ֔ל	[is] Israel	→ Israel
+3	אִם־	or?	→ —
+4	יְלִ֥יד	one born of	→ child of
+5	בַּ֖יִת	[the] household	→ house
+6	ה֑וּא	[is] it	→ he
+7	מַדּ֖וּעַ	why?	→ Why
+8	הָיָ֥ה	has it become	→ been
+9	לָבַֽז	<into> plunder	→ prey
+
+## 24:3:1
+EN: “Saying, Behold, one sends his wife away, || And she has gone from him, || And she has been to another man, || Does he return to her again? Is that land not greatly defiled? And you have committed whoredom with many lovers, || And turn to Me again,” || A declaration of YHWH.
+1	לֵאמֹ֡ר	<to> saying	→ Saying
+2	הֵ֣ן	there!	→ Behold
+3	יְשַׁלַּ֣ח	he will send away	→ sends
+4	אִ֣ישׁ	a husband	→ one
+5	אֶת־	<obj.>	→ —
+6	אִשְׁתּוֹ֩	wife his	→ wife
+7	וְהָלְכָ֨ה	and she will go	→ gone
+8	מֵאִתּ֜וֹ	from with <the> him	→ from him
+9	וְהָיְתָ֣ה	and she will belong	→ been
+10	לְאִישׁ־	to a man	→ to another man
+11	אַחֵ֗ר	another	→ to another man
+12	הֲיָשׁ֤וּב	¿ will he return	→ return
+13	אֵלֶ֙יהָ֙	to her	→ to her
+14	ע֔וֹד	again	→ again
+15	הֲל֛וֹא	¿ not	→ not
+16	חָנ֥וֹף	certainly <to be polluted>	→ greatly
+17	תֶּחֱנַ֖ף	will it be polluted	→ defiled
+18	הָאָ֣רֶץ	the land	→ land
+19	הַהִ֑יא	<the> that	→ that
+20	וְאַ֗תְּ	and you	→ you
+21	זָנִית֙	you have acted as a prostitute	→ committed whoredom
+22	רֵעִ֣ים	companions	→ lovers
+23	רַבִּ֔ים	many	→ many
+24	וְשׁ֥וֹב	and will you return?	→ turn
+25	אֵלַ֖י	to me	→ to Me
+26	נְאֻם־	[the] utterance of	→ declaration of
+27	יְהֹוָֽה	Yahweh	→ YHWH
+
+## 24:6:3
+EN: Shepherds and their droves come to her, || They have struck tents by her all around, || They have each fed [in] his own station.”
+1	אֵלֶ֛יהָ	to it	→ to her
+2	יָבֹ֥אוּ	they will come	→ come
+3	רֹעִ֖ים	shepherds	→ Shepherds
+4	וְעֶדְרֵיהֶ֑ם	and flocks their	→ and their droves
+5	תָּקְע֨וּ	they will pitch	→ struck
+6	עָלֶ֤יהָ	at it	→ by her
+7	אֹהָלִים֙	tents	→ tents
+8	סָבִ֔יב	all around	→ all around
+9	רָע֖וּ	they will graze	→ fed
+10	אִ֥ישׁ	everyone	→ each
+11	אֶת־	<obj.>	→ —
+12	יָדֽוֹ	hand his	→ his own station
+
+## 24:6:13
+EN: “For from their least to their greatest, || Everyone is gaining dishonest gain, || And from prophet even to priest, || Everyone is dealing falsely,
+1	כִּ֤י	that	→ For
+2	מִקְּטַנָּם֙	from little their	→ from their least
+3	וְעַד־	and unto	→ to
+4	גְּדוֹלָ֔ם	great their	→ their greatest
+5	כֻּלּ֖וֹ	all of it	→ Everyone
+6	בּוֹצֵ֣עַ	[is] gaining	→ gaining
+7	בָּ֑צַע	unjust gain	→ dishonest gain
+8	וּמִנָּבִיא֙	and from prophet	→ from prophet
+9	וְעַד־	and unto	→ even to
+10	כֹּהֵ֔ן	priest	→ priest
+11	כֻּלּ֖וֹ	all of him	→ Everyone
+12	עֹ֥שֶׂה	[is] doing	→ dealing
+13	שָּֽׁקֶר	falsehood	→ falsely
+
+## 24:8:17
+EN: For behold, I am sending serpents among you, || Vipers that have no charmer, || And they have bitten you,” || A declaration of YHWH.
+1	כִּי֩	for	→ For
+2	הִנְנִ֨י	here I	→ behold
+3	מְשַׁלֵּ֜חַ	[am] about to send	→ sending
+4	בָּכֶ֗ם	among <the> you	→ among you
+5	נְחָשִׁים֙	snakes	→ serpents
+6	צִפְעֹנִ֔ים	vipers	→ Vipers
+7	אֲשֶׁ֥ר	which	→ that
+8	אֵין־	there not	→ no
+9	לָהֶ֖ם	for <the> them	→ —
+10	לָ֑חַשׁ	[is] a charm	→ charmer
+11	וְנִשְּׁכ֥וּ	and they will bite	→ bitten
+12	אֶתְכֶ֖ם	<obj.> you	→ you
+13	נְאֻם־	[the] utterance of	→ A declaration of
+14	יְהוָֽה׃ ס	Yahweh	→ YHWH
+
+## 24:10:17
+EN: Gather your merchandise from the land, || O dweller in the bulwark,
+1	אִסְפִּ֥י	gather up	→ Gather
+2	מֵאֶ֖רֶץ	from [the] ground	→ from the land
+3	כִּנְעָתֵ֑ךְ	bundle your	→ your merchandise
+4	יֹשֶׁ֖בֶת	O [you who] dwell	→ O dweller
+5	בַּמָּצֽוֹר׃ ס	in the siege	→ in the bulwark
+
+## 24:13:9
+EN: Thus I mar the excellence of Judah, || And the great excellence of Jerusalem.
+1	כֹּ֖ה	thus	→ —
+2	אָמַ֣ר	he says	→ —
+3	יְהוָ֑ה	Yahweh	→ —
+4	כָּ֠כָה	thus	→ Thus
+5	אַשְׁחִ֞ית	I will ruin	→ mar
+6	אֶת־	<obj.>	→ —
+7	גְּא֧וֹן	[the] pride of	→ the excellence of
+8	יְהוּדָ֛ה	Judah	→ Judah
+9	וְאֶת־	and <obj.>	→ —
+10	גְּא֥וֹן	[the] pride of	→ excellence of
+11	יְרוּשָׁלִַ֖ם	Jerusalem	→ Jerusalem
+12	הָרָֽב	<the> great	→ the great
+
+## 24:30:20
+EN: And his sons have been as before, || And his congregation is established before Me, || And I have seen after all his oppressors.
+1	וְהָי֤וּ	and they will be	→ have been
+2	בָנָיו֙	children its	→ his sons
+3	כְּקֶ֔דֶם	like long ago	→ as before
+4	וַעֲדָת֖וֹ	and congregation its	→ his congregation
+5	לְפָנַ֣י	<to> before me	→ before Me
+6	תִּכּ֑וֹן	it will be established	→ established
+7	וּפָ֣קַדְתִּ֔י	and I will visit [judgment]	→ I have seen
+8	עַ֖ל	on	→ after
+9	כָּל־	all	→ all
+10	לֹחֲצָֽיו	[those who] oppress it	→ his oppressors
+
+## 24:32:9
+EN: and I buy the field that [is] in Anathoth from Hanameel, my uncle’s son, and I weigh the money to him—seventeen shekels of silver.
+1	וָֽאֶקְנֶה֙	and I bought	→ I buy
+2	אֶת־	<obj.>	→ —
+3	הַשָּׂדֶ֔ה	the field	→ the field
+4	מֵאֵ֛ת	from with	→ from
+5	חֲנַמְאֵ֥ל	Hanamel	→ Hanameel
+6	בֶּן־	[the] son of	→ my uncle’s son
+7	דֹּדִ֖י	uncle my	→ my uncle’s son
+8	אֲשֶׁ֣ר	which	→ that
+9	בַּעֲנָת֑וֹת	[was] at Anathoth	→ in Anathoth
+10	וָֽאֶשְׁקֲלָה־	and I weighed out !	→ I weigh
+11	לּוֹ֙	for <the> him	→ to him
+12	אֶת־	<obj.>	→ —
+13	הַכֶּ֔סֶף	the silver	→ the money
+14	שִׁבְעָ֥ה	[was] seven	→ seventeen
+15	שְׁקָלִ֖ים	shekels	→ shekels
+16	וַעֲשָׂרָ֥ה	and ten	→ seventeen
+17	הַכָּֽסֶף	the silver	→ of silver
+
+## 24:32:38
+EN: and they have been to Me for a people, and I am to them for God;
+1	וְהָ֥יוּ	and they will become	→ they have been
+2	לִ֖י	for <the> me	→ to Me
+3	לְעָ֑ם	<into> a people	→ for a people
+4	וַאֲנִ֕י	and I	→ I
+5	אֶהְיֶ֥ה	I will become	→ am
+6	לָהֶ֖ם	for <the> them	→ to them
+7	לֵאלֹהִֽים	<into> God	→ for God
+
+## 24:33:6
+EN: Behold, I am increasing health and cure to it, || And have healed them, and revealed to them || The abundance of peace and truth.
+1	הִנְנִ֧י	here I	→ Behold
+2	מַעֲלֶה־	[will] bring up	→ I am increasing
+3	לָּ֛הּ	for <the> it	→ to it
+4	אֲרֻכָ֥ה	healing	→ health
+5	וּמַרְפֵּ֖א	and healing	→ and cure
+6	וּרְפָאתִ֑ים	and I will heal them	→ have healed them
+7	וְגִלֵּיתִ֣י	and I will uncover	→ revealed
+8	לָהֶ֔ם	to <the> them	→ to them
+9	עֲתֶ֥רֶת	an abundance of	→ The abundance of
+10	שָׁל֖וֹם	well-being	→ peace
+11	וֶאֱמֶֽת	and faithfulness	→ and truth
+
+## 24:34:10
+EN: and all the heads listen, and all the people who have come into the covenant to each send forth his manservant and each his maidservant free, so as not to lay service on them anymore, indeed, they listen, and send them away;
+1	וַיִּשְׁמְעוּ֩	and they obeyed	→ listen
+2	כָל־	all	→ all
+3	הַשָּׂרִ֨ים	the officials	→ the heads
+4	וְכָל־	and all	→ all
+5	הָעָ֜ם	the people	→ the people
+6	אֲשֶׁר־	who	→ who
+7	בָּ֣אוּ	they went	→ have come
+8	בַבְּרִ֗ית	in the covenant	→ into the covenant
+9	לְ֠שַׁלַּח	to let go	→ send forth
+10	אִ֣ישׁ	everyone	→ each
+11	אֶת־	<obj.>	→ —
+12	עַבְדּ֞וֹ	[male] slave his	→ his manservant
+13	וְאִ֤ישׁ	and everyone	→ each
+14	אֶת־	<obj.>	→ —
+15	שִׁפְחָתוֹ֙	female slave his	→ his maidservant
+16	חָפְשִׁ֔ים	free [people]	→ free
+17	לְבִלְתִּ֥י	to not	→ so as not
+18	עֲבָד־	to work	→ service
+19	בָּ֖ם	by <the> them	→ them
+20	ע֑וֹד	again	→ anymore
+21	וַֽיִּשְׁמְע֖וּ	and they obeyed	→ they listen
+22	וַיְשַׁלֵּֽחוּ	and they let [them] go	→ send them away
+
+## 24:34:12
+EN: And there is a word of YHWH to Jeremiah from YHWH, saying,
+1	וַיְהִ֤י	and it came	→ there is
+2	דְבַר־	[the] word of	→ a word of
+3	יְהוָה֙	Yahweh	→ YHWH
+4	אֶֽל־	to	→ to
+5	יִרְמְיָ֔הוּ	Jeremiah	→ Jeremiah
+6	מֵאֵ֥ת	from with	→ from
+7	יְהוָ֖ה	Yahweh	→ YHWH
+8	לֵאמֹֽר	<to> saying	→ saying
+
+## 24:41:8
+EN: And ten men have been found among them, and they say to Ishmael, “Do not put us to death, for we have things hidden in the field—wheat, and barley, and oil, and honey.” And he refrains, and has not put them to death in the midst of their brothers.
+1	וַעֲשָׂרָ֨ה	and ten	→ ten
+2	אֲנָשִׁ֜ים	men	→ men
+3	נִמְצְאוּ־	they were found	→ have been found
+4	בָ֗ם	among <the> them	→ among them
+5	וַיֹּאמְר֤וּ	and they said	→ they say
+6	אֶל־	to	→ to
+7	יִשְׁמָעֵאל֙	Ishmael	→ Ishmael
+8	אַל־	may not	→ Do not
+9	תְּמִתֵ֔נוּ	you kill us	→ put us to death
+10	כִּֽי־	for	→ for
+11	יֶשׁ־	there is	→ we have
+12	לָ֤נוּ	[belonging] to <the> us	→ we have
+13	מַטְמֹנִים֙	treasures	→ things hidden
+14	בַּשָּׂדֶ֔ה	in the field	→ in the field
+15	חִטִּ֥ים	wheat<s>	→ wheat
+16	וּשְׂעֹרִ֖ים	and barley<s>	→ barley
+17	וְשֶׁ֣מֶן	and oil	→ oil
+18	וּדְבָ֑שׁ	and honey	→ honey
+19	וַיֶּחְדַּ֕ל	and he refrained	→ refrains
+20	וְלֹ֥א	and not	→ not
+21	הֱמִיתָ֖ם	he killed them	→ put them to death
+22	בְּת֥וֹךְ	in among	→ in the midst of
+23	אֲחֵיהֶֽם	relatives their	→ their brothers
+
+## 24:42:12
+EN: And I give mercies to you, and he has pitied you, and caused you to return to your own ground.
+1	וְאֶתֵּ֥ן	so I may give	→ I give
+2	לָכֶ֛ם	to <the> you	→ to you
+3	רַחֲמִ֖ים	compassion<s>	→ mercies
+4	וְרִחַ֣ם	and he will have compassion on	→ he has pitied you
+5	אֶתְכֶ֑ם	<obj.> you	→ he has pitied you
+6	וְהֵשִׁ֥יב	and he will restore	→ caused you to return
+7	אֶתְכֶ֖ם	<obj.> you	→ caused you to return
+8	אֶל־	to	→ to your own ground
+9	אַדְמַתְכֶֽם	land your	→ to your own ground
+
+## 24:43:9
+EN: “Take great stones in your hand, and you have hidden them in the clay in the brick-kiln, that [is] at the opening of the house of Pharaoh in Tahpanhes, before the eyes of the men of Judah,
+1	קַ֣ח	take	→ Take
+2	בְּיָדְךָ֞	in hand your	→ in your hand
+3	אֲבָנִ֣ים	stones	→ stones
+4	גְּדֹל֗וֹת	large	→ great
+5	וּטְמַנְתָּ֤ם	and you will hide them	→ and you have hidden them
+6	בַּמֶּ֙לֶט֙	in the mortar	→ in the clay
+7	בַּמַּלְבֵּ֔ן	in the brick-terrace	→ in the brick-kiln
+8	אֲשֶׁ֛ר	which	→ that
+9	בְּפֶ֥תַח	[is] at [the] entrance of	→ at the opening of
+10	בֵּית־	[the] house of	→ the house of
+11	פַּרְעֹ֖ה	Pharaoh	→ Pharaoh
+12	בְּתַחְפַּנְחֵ֑ס	in Tahpanhes	→ in Tahpanhes
+13	לְעֵינֵ֖י	to [the] eyes of	→ before the eyes of
+14	אֲנָשִׁ֥ים	[the] people	→ the men of
+15	יְהוּדִֽים	Jews	→ Judah
+
+## 24:44:22
+EN: And YHWH is not able to accept [you] anymore, because of the evil of your doings, because of the abominations that you have done, and your land is for a ruin, and for an astonishment, and for a reviling, without inhabitant, as [at] this day.
+1	וְלֹֽא־	and not	→ And
+2	יוּכַל֩	he was able	→ is not able
+3	יְהוָ֨ה	Yahweh	→ YHWH
+4	ע֜וֹד	still	→ anymore
+5	לָשֵׂ֗את	to endure	→ to accept
+6	מִפְּנֵי֙	<from> because of	→ because of
+7	רֹ֣עַ	[the] wickedness of	→ the evil of
+8	מַעַלְלֵיכֶ֔ם	deeds your	→ your doings
+9	מִפְּנֵ֥י	<from> because of	→ because of
+10	הַתּוֹעֵבֹ֖ת	the abominations	→ the abominations
+11	אֲשֶׁ֣ר	which	→ that
+12	עֲשִׂיתֶ֑ם	you did	→ you have done
+13	וַתְּהִ֣י	and it has become	→ and
+14	אַ֠רְצְכֶם	land your	→ your land
+15	לְחָרְבָּ֨ה	<into> a desolation	→ for a ruin
+16	וּלְשַׁמָּ֧ה	and <into> a waste	→ and for an astonishment
+17	וְלִקְלָלָ֛ה	and <into> a curse	→ and for a reviling
+18	מֵאֵ֥ין	from not	→ without
+19	יוֹשֵׁ֖ב	inhabitant	→ inhabitant
+20	כְּהַיּ֥וֹם	as the day	→ as
+21	הַזֶּֽה	<the> this	→ this day
+
+## 24:48:6
+EN: Flee, deliver yourselves, || You are as a naked thing in a wilderness.
+1	נֻ֖סוּ	flee	→ Flee
+2	מַלְּט֣וּ	save	→ deliver yourselves
+3	נַפְשְׁכֶ֑ם	life your	→ deliver yourselves
+4	וְתִֽהְיֶ֕ינָה	so they may be	→ You are
+5	כַּעֲרוֹעֵ֖ר	like a juniper bush	→ as a naked thing
+6	בַּמִּדְבָּֽר	in the wilderness	→ in a wilderness
+
+## 24:50:45
+EN: Therefore, hear the counsel of YHWH, || That He counseled concerning Babylon, || And His plans that He has devised || Concerning the land of the Chaldeans; Do little ones of the flock not drag them out, || Does He not make the habitation desolate over them?
+1	לָכֵ֞ן	<to> therefore	→ Therefore
+2	שִׁמְע֣וּ	hear	→ hear
+3	עֲצַת־	[the] plan of	→ the counsel of
+4	יְהוָ֗ה	Yahweh	→ YHWH
+5	אֲשֶׁ֤ר	which	→ That
+6	יָעַץ֙	he has planned	→ He counseled
+7	אֶל־	against	→ concerning
+8	בָּבֶ֔ל	Babylon	→ Babylon
+9	וּמַ֨חְשְׁבוֹתָ֔יו	and purposes his	→ And His plans
+10	אֲשֶׁ֥ר	which	→ that
+11	חָשַׁ֖ב	he has purposed	→ He has devised
+12	אֶל־	against	→ Concerning
+13	אֶ֣רֶץ	[the] land of	→ the land of
+14	כַּשְׂדִּ֑ים	[the] Chaldeans	→ the Chaldeans
+15	אִם־	if	→ —
+16	לֹ֤א	not	→ not
+17	יִסְחָבוּם֙	people will drag away them	→ drag them out
+18	צְעִירֵ֣י	[the] young [ones] of	→ little ones of
+19	הַצֹּ֔אן	the flock	→ the flock
+20	אִם־	if	→ —
+21	לֹ֥א	not	→ not
+22	יַשִּׁ֛ים	he will devastate	→ make the habitation desolate
+23	עֲלֵיהֶ֖ם	on them	→ over them
+24	נָוֶֽה	[the] pastureland	→ make the habitation desolate
+
+## 24:51:29
+EN: And the land shakes, and it is pained, || For the purposes of YHWH have stood against Babylon, || To make the land of Babylon a desolation without inhabitant.
+1	וַתִּרְעַ֥שׁ	and it quaked	→ shakes
+2	הָאָ֖רֶץ	the land	→ the land
+3	וַתָּחֹ֑ל	and it writhed	→ and it is pained
+4	כִּ֣י	for	→ For
+5	קָ֤מָה	it will be fulfilled	→ stood
+6	עַל־	on	→ against
+7	בָּבֶל֙	Babylon	→ Babylon
+8	מַחְשְׁב֣וֹת	[the] plans of	→ the purposes
+9	יְהוָ֔ה	Yahweh	→ YHWH
+10	לָשׂ֞וּם	to make	→ To make
+11	אֶת־	<obj.>	→ —
+12	אֶ֧רֶץ	[the] land of	→ the land of
+13	בָּבֶ֛ל	Babylon	→ Babylon
+14	לְשַׁמָּ֖ה	into a waste	→ a desolation
+15	מֵאֵ֥ין	from not	→ without
+16	יוֹשֵֽׁב	inhabitant	→ inhabitant
+
+## 25:3:5
+EN: He has built up against me, || And sets around poverty and weariness.
+1	בָּנָ֥ה	he has built	→ He has built up
+2	עָלַ֛י	on me	→ against me
+3	וַיַּקַּ֖ף	and he has surrounded [me]	→ And sets around
+4	רֹ֥אשׁ	poison	→ poverty
+5	וּתְלָאָֽה	and hardship	→ and weariness
+
+## 25:3:32
+EN: For though He afflicted, yet He has pitied, || According to the abundance of His kindness.
+1	כִּ֣י	that	→ For though
+2	אִם־	except	→ For though
+3	הוֹגָ֔ה	he has caused grief	→ He afflicted
+4	וְרִחַ֖ם	and he will have compassion	→ He has pitied
+5	כְּרֹ֥ב	according to [the] greatness of	→ According to the abundance of
+6	חֲסָדָֽיו	covenant loyalti<es> his	→ His kindness
+
+## 26:12:26
+EN: And there is a word of YHWH to me, saying,
+1	וַיְהִ֥י	and it came	→ And there is
+2	דְבַר־	[the] word of	→ word of
+3	יְהוָ֖ה	Yahweh	→ YHWH
+4	אֵלַ֥י	to me	→ to me
+5	לֵאמֹֽר	<to> saying	→ saying
+
+## 26:13:14
+EN: And I have broken down the wall that you coated with chalk, || And have caused it to come to the earth, || And its foundation has been revealed, || And it has fallen, || And you have been consumed in its midst, || And you have known that I [am] YHWH.
+1	וְהָ֨רַסְתִּ֜י	and I will tear down	→ I have broken down
+2	אֶת־	<obj.>	→ —
+3	הַקִּ֨יר	the wall	→ the wall
+4	אֲשֶׁר־	which	→ that
+5	טַחְתֶּ֥ם	you plastered	→ you coated
+6	תָּפֵ֛ל	whitewash	→ chalk
+7	וְהִגַּעְתִּ֥יהוּ	and I will make touch it	→ caused it to come
+8	אֶל־	<to>	→ to
+9	הָאָ֖רֶץ	the ground	→ the earth
+10	וְנִגְלָ֣ה	and it will be uncovered	→ has been revealed
+11	יְסֹד֑וֹ	foundation[s] its	→ its foundation
+12	וְנָֽפְלָה֙	and it will fall	→ it has fallen
+13	וּכְלִיתֶ֣ם	and you will come to an end	→ you have been consumed
+14	בְּתוֹכָ֔הּ	in [the] midst of it	→ in its midst
+15	וִֽידַעְתֶּ֖ם	and you will know	→ you have known
+16	כִּֽי־	that	→ that
+17	אֲנִ֥י	I	→ I
+18	יְהוָֽה	[am] Yahweh	→ YHWH
+
+## 26:15:2
+EN: “Son of man, || What is the vine-tree more than any tree? The vine-branch that has been, || Among trees of the forest?
+1	בֶּן־	O son of	→ Son of man
+2	אָדָ֕ם	humankind	→ Son of man
+3	מַה־	what?	→ What
+4	יִּֽהְיֶ֥ה	is it	→ is
+5	עֵץ־	[the] wood of	→ the vine-tree
+6	הַגֶּ֖פֶן	the vine	→ the vine-tree
+7	מִכָּל־	more than any	→ more than any
+8	עֵ֑ץ	tree	→ tree
+9	הַזְּמוֹרָ֕ה	the vine branch	→ The vine-branch
+10	אֲשֶׁ֥ר	which	→ that
+11	הָיָ֖ה	it is	→ has been
+12	בַּעֲצֵ֥י	among [the] trees of	→ Among trees of
+13	הַיָּֽעַר	the forest	→ the forest
+
+## 26:15:5
+EN: Behold, in its being perfect it is not used for work, || How much less when fire has eaten of it, || And it is scorched, || Has it been used yet for work?”
+1	הִנֵּה֙	there!	→ Behold
+2	בִּֽהְיוֹת֣וֹ	when was it	→ in its being
+3	תָמִ֔ים	complete	→ perfect
+4	לֹ֥א	not	→ is not used
+5	יֵֽעָשֶׂ֖ה	it was made	→ is not used
+6	לִמְלָאכָ֑ה	into a product	→ for work
+7	אַ֣ף	indeed?	→ How much less
+8	כִּי־	if	→ when
+9	אֵ֤שׁ	a fire	→ fire
+10	אֲכָלַ֙תְהוּ֙	it has consumed it	→ has eaten of it
+11	וַיֵּחָ֔ר	and it has been charred	→ And it is scorched
+12	וְנַעֲשָׂ֥ה	and will it be made?	→ Has it been used
+13	ע֖וֹד	again	→ yet
+14	לִמְלָאכָֽה׃ ס	into a product	→ for work
+
+## 26:16:11
+EN: And I adorn you with adornments, || And I give bracelets for your hands, || And a chain for your neck.
+1	וָאֶעְדֵּ֖ךְ	and I ornamented you	→ And I adorn you
+2	עֶ֑דִי	ornament[s]	→ adornments
+3	וָאֶתְּנָ֤ה	and I put !	→ I give
+4	צְמִידִים֙	bracelets	→ bracelets
+5	עַל־	on	→ for
+6	יָדַ֔יִךְ	hands your	→ your hands
+7	וְרָבִ֖יד	and a chain	→ a chain
+8	עַל־	on	→ for
+9	גְּרוֹנֵֽךְ	neck your	→ your neck
+
+## 26:21:26
+EN: Thus said Lord YHWH: Turn aside the turban, and carry away the crown, || This—not this—make high the low, || And make low the high.
+1	כֹּ֤ה	thus	→ Thus
+2	אָמַר֙	he says	→ said
+3	אֲדֹנָ֣י	[the] Lord	→ Lord
+4	יְהוִ֔ה	Yahweh	→ YHWH
+5	הָסִיר֙	to remove	→ Turn aside
+6	הַמִּצְנֶ֔פֶת	the turban	→ the turban
+7	וְהָרִ֖ים	and to lift off	→ and carry away
+8	הָֽעֲטָרָ֑ה	the crown	→ the crown
+9	זֹ֣את	this	→ This
+10	לֹא־	not	→ not
+11	זֹ֔את	this	→ this
+12	הַשָּׁפָ֣לָה	the lowly	→ the low
+13	הַגְבֵּ֔הַ	exalt	→ make high
+14	וְהַגָּבֹ֖הַ	and the exalted	→ the high
+15	הַשְׁפִּֽיל	to bring low	→ And make low
+
+## 26:24:10
+EN: Make the wood abundant, || Kindle the fire, consume the flesh, || And make the compound, || And let the bones be burned.
+1	הַרְבֵּ֤ה	increase	→ abundant
+2	הָעֵצִים֙	the wood<s>	→ the wood
+3	הַדְלֵ֣ק	kindle	→ Kindle
+4	הָאֵ֔שׁ	the fire	→ the fire
+5	הָתֵ֖ם	complete	→ consume
+6	הַבָּשָׂ֑ר	the meat	→ the flesh
+7	וְהַרְקַח֙	and mix	→ make
+8	הַמֶּרְקָחָ֔ה	the seasoning	→ the compound
+9	וְהָעֲצָמ֖וֹת	and the bones	→ the bones
+10	יֵחָֽרוּ	let them be charred	→ burned
+
+## 26:24:14
+EN: I, YHWH, have spoken, || It has come, and I have done [it], || I do not free, nor do I spare, nor do I regret, || According to your ways, and according to your acts, || They have judged you, || A declaration of Lord YHWH.”
+1	אֲנִ֨י	I	→ I
+2	יְהוָ֤ה	Yahweh	→ YHWH
+3	דִּבַּ֙רְתִּי֙	I have spoken	→ spoken
+4	בָּאָ֣ה	[it is] coming	→ It has come
+5	וְעָשִׂ֔יתִי	and I will act	→ and I have done
+6	לֹֽא־	not	→ I do not free
+7	אֶפְרַ֥ע	I will refrain	→ I do not free
+8	וְלֹא־	and not	→ nor do I spare
+9	אָח֖וּס	I will have compassion	→ nor do I spare
+10	וְלֹ֣א	and not	→ nor do I regret
+11	אֶנָּחֵ֑ם	I will have pity	→ nor do I regret
+12	כִּדְרָכַ֤יִךְ	according to ways your	→ According to your ways
+13	וְכַעֲלִילוֹתַ֙יִךְ֙	and according to practices your	→ and according to your acts
+14	שְׁפָט֔וּךְ	they have judged you	→ They have judged you
+15	נְאֻ֖ם	[the] utterance of	→ A declaration of
+16	אֲדֹנָ֥י	[the] Lord	→ Lord
+17	יְהֹוִֽה׃ פ	Yahweh	→ YHWH
+
+## 26:25:1
+EN: And there is a word of YHWH to me, saying,
+1	וַיְהִ֥י	and it came	→ And there is
+2	דְבַר־	[the] word of	→ a word of
+3	יְהוָ֖ה	Yahweh	→ YHWH
+4	אֵלַ֥י	to me	→ to me
+5	לֵאמֹֽר	<to> saying	→ saying
+
+## 26:26:21
+EN: I make you a terror, and you are not, || And you are sought, and are not found anymore—for all time,” || A declaration of Lord YHWH!
+1	בַּלָּה֥וֹת	terrors	→ a terror
+2	אֶתְּנֵ֖ךְ	I will give to you	→ I make you
+3	וְאֵינֵ֑ךְ	and there not [will be] you	→ and you are not
+4	וּֽתְבֻקְשִׁ֗י	so you may be sought	→ And you are sought
+5	וְלֹֽא־	and not	→ and are not found
+6	תִמָּצְאִ֥י	you will be found	→ and are not found
+7	עוֹד֙	again	→ anymore
+8	לְעוֹלָ֔ם	for ever	→ for all time
+9	נְאֻ֖ם	[the] utterance of	→ A declaration of
+10	אֲדֹנָ֥י	[the] Lord	→ Lord
+11	יְהֹוִֽה׃ ס	Yahweh	→ YHWH
+
+## 26:27:35
+EN: All inhabitants of the islands have been astonished at you, || And their kings have been severely afraid, || They have been troubled in countenance.
+1	כֹּ֚ל	all	→ All
+2	יֹשְׁבֵ֣י	[the] inhabitants of	→ inhabitants of
+3	הָאִיִּ֔ים	the islands	→ the islands
+4	שָׁמְמ֖וּ	they have been appalled	→ astonished
+5	עָלָ֑יִךְ	on you	→ at you
+6	וּמַלְכֵיהֶם֙	and kings their	→ And their kings
+7	שָׂ֣עֲרוּ	they have shuddered	→ have been severely afraid
+8	שַׂ֔עַר	shuddering	→ have been severely afraid
+9	רָעֲמ֖וּ	they have been disconcerted	→ troubled
+10	פָּנִֽים	faces	→ countenance
+
+## 26:30:17
+EN: The youths of Aven and Pi-Beseth fall by sword, || And these go into captivity.
+1	בַּח֥וּרֵי	[the] young men of	→ The youths of
+2	אָ֛וֶן	On	→ Aven
+3	וּפִי־	and Pi-	→ and Pi-Beseth
+4	בֶ֖סֶת	beseth	→ and Pi-Beseth
+5	בַּחֶ֣רֶב	by the sword	→ by sword
+6	יִפֹּ֑לוּ	they will fall	→ fall
+7	וְהֵ֖נָּה	and they [fem]	→ And these
+8	בַּשְּׁבִ֥י	in <the> captivity	→ into captivity
+9	תֵלַֽכְנָה	they will go	→ go
+
+## 26:32:16
+EN: It [is] a lamentation, and they have lamented her, || Daughters of the nations lament her, || For Egypt, and for all her multitude, they lament her, || A declaration of Lord YHWH.”
+1	קִינָ֥ה	[is] a lamentation	→ a lamentation
+2	הִיא֙	it	→ It
+3	וְק֣וֹנְנ֔וּהָ	and people will chant it	→ and they have lamented her
+4	בְּנ֥וֹת	[the] daughters of	→ Daughters of
+5	הַגּוֹיִ֖ם	the nations	→ the nations
+6	תְּקוֹנֵ֣נָּה	they will chant	→ lament
+7	אוֹתָ֑הּ	<obj.> it	→ her
+8	עַל־	over	→ For
+9	מִצְרַ֤יִם	Egypt	→ Egypt
+10	וְעַל־	and over	→ and for
+11	כָּל־	all	→ all her multitude
+12	הֲמוֹנָהּ֙	multitude its	→ all her multitude
+13	תְּקוֹנֵ֣נָּה	they will chant	→ they lament
+14	אוֹתָ֔הּ	<obj.> it	→ her
+15	נְאֻ֖ם	[the] utterance of	→ A declaration of
+16	אֲדֹנָ֥י	[the] Lord	→ Lord
+17	יְהוִֽה׃ פ	Yahweh	→ YHWH
+
+## 26:32:20
+EN: They fall in the midst of the pierced of the sword, || She has been given [to] the sword, || They drew her out, and all her multitude.
+1	בְּת֥וֹךְ	in among	→ in the midst of
+2	חַלְלֵי־	[those] slain of	→ the pierced of
+3	חֶ֖רֶב	a sword	→ the sword
+4	יִפֹּ֑לוּ	they will fall	→ fall
+5	חֶ֣רֶב	a sword	→ the sword
+6	נִתָּ֔נָה	it has been appointed	→ given
+7	מָשְׁכ֥וּ	they have drawn down	→ They drew
+8	אוֹתָ֖הּ	<obj.> it	→ her
+9	וְכָל־	and all	→ and all her multitude
+10	הֲמוֹנֶֽיהָ	multitudes its	→ and all her multitude

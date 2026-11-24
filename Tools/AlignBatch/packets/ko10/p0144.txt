@@ -1,0 +1,207 @@
+## 1:47:10
+KO: 그리고 야곱이 바로를 축복하였다. 그리고 그는 바로의 면전으로부터 나왔다.
+1 וַיְבָרֶךְ = and he blessed (to bless)
+2 יַעֲקֹב = Jacob
+3 אֶת־ = <obj.> ([Obj.])
+4 פַּרְעֹה = Pharaoh
+5 וַיֵּצֵא = and he went out (to come out)
+6 מִלִּפְנֵי = from to before (face)
+7 פַרְעֹה = Pharaoh
+
+## 1:47:11
+KO: 그리고 요셉은 그의 아버지와 그의 형제들을 거주하게 하였고, 그들에게 애굽 땅 안의 땅의 최고인 라암세스 땅에서 소유지를 주었으니, 바로가 명령한 것과 같았다.
+1 וַיּוֹשֵׁב = and he caused to dwell (to dwell)
+2 יוֹסֵף = Joseph
+3 אֶת־ = <obj.>
+4 אָבִיו = father his (father)
+5 וְאֶת־ = and <obj.>
+6 אֶחָיו = brothers his (brother)
+7 וַיִּתֵּן = and he gave (to give)
+8 לָהֶם = to them (them)
+9 אֲחֻזָּה = a possession (possesion)
+10 בְּאֶרֶץ = in [the] land of
+11 מִצְרַיִם = Egypt
+12 בְּמֵיטַב = in [the] best of (best)
+13 הָאָרֶץ = the land
+14 בְּאֶרֶץ = in [the] land of
+15 רַעְמְסֵס = Rameses
+16 כַּאֲשֶׁר = just as (as which)
+17 צִוָּה = he had commanded (to command)
+18 פַרְעֹה = Pharaoh
+
+## 1:47:12
+KO: 그리고 요셉은 그의 아버지와 그의 형제들과 그의 아버지의 온 집을 그 어린아이들의 수에 따라 양식으로 봉양하였다.
+1 וַיְכַלְכֵּל = and he provided for (to sustain)
+2 יוֹסֵף = Joseph
+3 אֶת־ = <obj.>
+4 אָבִיו = father his
+5 וְאֶת־ = and <obj.>
+6 אֶחָיו = brothers his (brother)
+7 וְאֵת = and <obj.>
+8 כָּל־ = all
+9 בֵּית = [the] household of (house)
+10 אָבִיו = father his
+11 לֶחֶם = food
+12 לְפִי = to [the] mouth of (lip)
+13 הַטָּף = the little one[s] (child)
+
+## 1:47:13
+KO: 그리고 온 땅에 양식이 없으니, 이는 기근이 매우 무거웠기 때문이라. 애굽 땅과 가나안 땅이 기근의 얼굴 앞에서 쇠약해졌더라.
+1 וְלֶחֶם = and [was] food (food)
+2 אֵין = there not (nothing)
+3 בְּכָל־ = in all (all)
+4 הָאָרֶץ = the land
+5 כִּי־ = for
+6 כָבֵד = [was] heavy (heavy)
+7 הָרָעָב = the famine
+8 מְאֹד = very (much)
+9 וַתֵּלַהּ = and it languished (to languish)
+10 אֶרֶץ = [the] land of
+11 מִצְרַיִם = Egypt
+12 וְאֶרֶץ = and [the] land of
+13 כְּנַעַן = Canaan
+14 מִפְּנֵי = <from> because of (face)
+15 הָרָעָב = the famine
+
+## 1:47:14
+KO: 요셉이 그들이 곡식을 사던 곡식에 대하여 애굽 땅과 가나안 땅에서 발견되는 모든 돈을 거두어들였고, 요셉이 그 돈을 바로의 집으로 가져왔다.
+1 וַיְלַקֵּט = and he gathered up (to gather)
+2 יוֹסֵף = Joseph
+3 אֶת־ = <obj.>
+4 כָּל־ = all
+5 הַכֶּסֶף = the money
+6 הַנִּמְצָא = which was found (to find)
+7 בְאֶרֶץ־ = in [the] land of
+8 מִצְרַיִם = Egypt
+9 וּבְאֶרֶץ = and in [the] land of
+10 כְּנַעַן = Canaan
+11 בַּשֶּׁבֶר = for the grain (grain)
+12 אֲשֶׁר־ = which
+13 הֵם = they (they(masc.))
+14 שֹׁבְרִים = [were] buying grain (to buy grain)
+15 וַיָּבֵא = and he brought (to come (in))
+16 יוֹסֵף = Joseph
+17 אֶת־ = <obj.>
+18 הַכֶּסֶף = the money
+19 בֵּיתָה = [the] house of towards (house)
+20 פַרְעֹה = Pharaoh
+
+## 1:47:15
+KO: 그리고 애굽 땅과 가나안 땅에서 은이 다하였다. 그러자 온 애굽 사람들이 요셉에게 와서 말하였다. "우리에게 식물을 주소서. 어찌하여 우리가 당신 앞에서 죽어야 합니까? 은이 다하였기 때문입니다."
+1 וַיִּתֹּם = and it was finished (to finish)
+2 הַכֶּסֶף = the money
+3 מֵאֶרֶץ = from [the] land of
+4 מִצְרַיִם = Egypt
+5 וּמֵאֶרֶץ = and from [the] land of
+6 כְּנַעַן = Canaan
+7 וַיָּבֹאוּ = and they came (to come (in))
+8 כָל־ = all
+9 מִצְרַיִם = Egypt (Egyptian)
+10 אֶל־ = to (to(wards))
+11 יוֹסֵף = Joseph
+12 לֵאמֹר = <to> saying (to say)
+13 הָבָה־ = give ! (to give)
+14 לָּנוּ = to us (us)
+15 לֶחֶם = food
+16 וְלָמָּה = and <to> why? (what?)
+17 נָמוּת = will we die (to die)
+18 נֶגְדֶּךָ = before you (before)
+19 כִּי = for
+20 אָפֵס = it has come to an end (to end)
+21 כָּסֶף = money
+
+## 1:47:16
+KO: 요셉이 말했다. "너희의 가축을 내어라. 은이 다하였으니 내가 너희의 가축을 받고 너희에게 주겠다."
+1 וַיֹּאמֶר = and he said (to say)
+2 יוֹסֵף = Joseph
+3 הָבוּ = give (to give)
+4 מִקְנֵיכֶם = livestock your
+5 וְאֶתְּנָה = so let me give [it] (to give)
+6 לָכֶם = to you (you)
+7 בְּמִקְנֵיכֶם = for livestock your
+8 אִם־ = if
+9 אָפֵס = it has come to an end (to end)
+10 כָּסֶף = money (silver)
+
+## 1:47:17
+KO: 그들이 그들의 가축을 요셉에게 데려오니, 요셉이 그들에게 말을 대가로, 그리고 양 떼와 소 떼와 나귀 떼를 대가로 양식을 주었고, 그 해 동안 그들의 모든 가축을 대가로 그들을 양식으로 먹여 인도하였다.
+1 וַיָּבִיאוּ = and they brought (to come (in))
+2 אֶת־ = <obj.> ([Obj.])
+3 מִקְנֵיהֶם = livestock their
+4 אֶל־ = to (to(wards))
+5 יוֹסֵף = Joseph
+6 וַיִּתֵּן = and he gave (to give)
+7 לָהֶם = to them (them)
+8 יוֹסֵף = Joseph
+9 לֶחֶם = food
+10 בַּסּוּסִים = for the horses (horse)
+11 וּבְמִקְנֵה = and for [the] livestock of
+12 הַצֹּאן = the flock[s] (flock)
+13 וּבְמִקְנֵה = and for [the] livestock of
+14 הַבָּקָר = the herd[s] (cattle)
+15 וּבַחֲמֹרִים = and for the donkeys (donkey)
+16 וַיְנַהֲלֵם = and he refreshed them (to guide)
+17 בַּלֶּחֶם = with <the> food
+18 בְּכָל־ = for all (all)
+19 מִקְנֵהֶם = livestock their
+20 בַּשָּׁנָה = in the year (year)
+21 הַהִוא = <the> that (he;_she;_it)
+
+## 1:47:18
+KO: 그 해가 마쳤고 그 둘째 해에 그들이 그에게 와서 그에게 말했다. "우리가 내 주께 숨기지 않나이다. 왜냐하면 은이 다했고 가축 떼가 내 주께로 돌아갔기 때문이니, 내 주 앞에 남은 것이 아무것도 없나이다. 다만 우리의 몸과 우리의 땅뿐입니다."
+1 וַתִּתֹּם = and it was finished
+2 הַשָּׁנָה = the year
+3 הַהִוא = <the> that (he;_she;_it)
+4 וַיָּבֹאוּ = and they came (to come (in))
+5 אֵלָיו = to him
+6 בַּשָּׁנָה = in the year
+7 הַשֵּׁנִית = <the> second (second)
+8 וַיֹּאמְרוּ = and they said (to say)
+9 לוֹ = to him (him)
+10 לֹא־ = not
+11 נְכַחֵד = we will hide (to hide)
+12 מֵאֲדֹנִי = from lord my
+13 כִּי = that
+14 אִם־ = except
+15 תַּם = it has been finished
+16 הַכֶּסֶף = the money (silver)
+17 וּמִקְנֵה = and [the] livestock of (livestock)
+18 הַבְּהֵמָה = the cattle (animal)
+19 אֶל־ = [is] to
+20 אֲדֹנִי = lord my
+21 לֹא = not
+22 נִשְׁאַר = it is left (to remain)
+23 לִפְנֵי = <to> before (face)
+24 אֲדֹנִי = lord my
+25 בִּלְתִּי = except (lest)
+26 אִם־ = <if>
+27 גְּוִיָּתֵנוּ = body our (body)
+28 וְאַדְמָתֵנוּ = and land our (land)
+
+## 1:47:19
+KO: 어찌하여 우리가 우리의 땅과 함께 당신의 눈앞에서 죽겠습니까? 우리와 우리의 땅을 양식으로 사십시오. 그리하면 우리와 우리의 땅이 바로의 종들이 될 것입니다. 우리에게 씨앗을 주시면 우리가 살 것이고 죽지 않을 것이며, 땅도 황폐해지지 않을 것입니다.
+1 לָמָּה = <to> why? (what?)
+2 נָמוּת = will we die
+3 לְעֵינֶיךָ = to eyes your (eye)
+4 גַּם־ = both
+5 אֲנַחְנוּ = we
+6 גַּם = as well as
+7 אַדְמָתֵנוּ = land our
+8 קְנֵה־ = buy (to buy)
+9 אֹתָנוּ = <obj.> us
+10 וְאֶת־ = and <obj.>
+11 אַדְמָתֵנוּ = land our
+12 בַּלָּחֶם = for <the> food (food)
+13 וְנִהְיֶה = so we may be (to be)
+14 אֲנַחְנוּ = we
+15 וְאַדְמָתֵנוּ = and land our
+16 עֲבָדִים = slaves (servant;_slave)
+17 לְפַרְעֹה = of Pharaoh (Pharaoh)
+18 וְתֶן־ = and give (to give)
+19 זֶרַע = seed
+20 וְנִחְיֶה = so we may live (to live)
+21 וְלֹא = and not
+22 נָמוּת = we will die
+23 וְהָאֲדָמָה = and the land
+24 לֹא = not
+25 תֵשָׁם = it will be desolate (be desolate)

@@ -1,0 +1,197 @@
+## 1:47:20
+KO: 요셉이 애굽의 모든 땅을 바로를 위하여 샀으니, 애굽 사람들이 기근이 그들 위에 강하였기 때문에 각각 자기 밭을 팔았음이라. 그리하여 그 땅이 바로의 것이 되었더라.
+1 וַיִּקֶן = and he bought (to buy)
+2 יוֹסֵף = Joseph
+3 אֶת־ = <obj.> ([Obj.])
+4 כָּל־ = all
+5 אַדְמַת = [the] land of (land)
+6 מִצְרַיִם = Egypt
+7 לְפַרְעֹה = to Pharaoh
+8 כִּי־ = for
+9 מָכְרוּ = they sold (to sell)
+10 מִצְרַיִם = Egypt (Egyptian)
+11 אִישׁ = everyone (man)
+12 שָׂדֵהוּ = field his (land)
+13 כִּי־ = for
+14 חָזַק = it was severe (to strengthen)
+15 עֲלֵהֶם = on them (upon)
+16 הָרָעָב = the famine (famine)
+17 וַתְּהִי = and it be[longed] (to be)
+18 הָאָרֶץ = the land (land)
+19 לְפַרְעֹה = to Pharaoh
+
+## 1:47:21
+KO: 그리고 그 백성을 그가 애굽의 한쪽 경계로부터 다른 쪽 경계까지 성읍들로 옮겼다.
+1 וְאֶת־ = and <obj.>
+2 הָעָם = the people (people)
+3 הֶעֱבִיר = he brought in (to pass)
+4 אֹתוֹ = <obj.> it
+5 לֶעָרִים = to the cities (city)
+6 מִקְצֵה = from [the] end of
+7 גְבוּל־ = [the] territory of (border)
+8 מִצְרַיִם = Egypt
+9 וְעַד־ = and to (till)
+10 קָצֵהוּ = end its
+
+## 1:47:22
+KO: 오직 제사장들의 땅은 사지 아니하였으니, 이는 바로로부터 제사장들에게 (주어지는) 정해진 분량이 있기 때문이라. 그들은 바로가 그들에게 준 그들의 분량을 먹었으므로, 그 때문에 그들의 땅을 팔지 않았더라.
+1 רַק = only (except)
+2 אַדְמַת = [the] land of
+3 הַכֹּהֲנִים = the priests
+4 לֹא = not
+5 קָנָה = he bought (to buy)
+6 כִּי = for
+7 חֹק = an allowance
+8 לַכֹּהֲנִים = [belonged] to the priests
+9 מֵאֵת = from with (with)
+10 פַּרְעֹה = Pharaoh
+11 וְאָכְלוּ = and they eat (to eat)
+12 אֶת־ = <obj.>
+13 חֻקָּם = allowance their
+14 אֲשֶׁר = which
+15 נָתַן = he gave (to give)
+16 לָהֶם = to them (them)
+17 פַּרְעֹה = Pharaoh
+18 עַל־ = there- (upon)
+19 כֵּן = -fore (so)
+20 לֹא = not
+21 מָכְרוּ = they sold (to sell)
+22 אֶת־ = <obj.>
+23 אַדְמָתָם = land their
+
+## 1:47:23
+KO: 요셉이 백성에게 말하였다. "보라, 내가 오늘 너희와 너희의 땅을 바로를 위하여 샀노라. 보라, 너희에게 씨가 있으니 너희는 그 땅에 뿌리라."
+1 וַיֹּאמֶר = and he said (to say)
+2 יוֹסֵף = Joseph
+3 אֶל־ = to (to(wards))
+4 הָעָם = the people (people)
+5 הֵן = here! (look!)
+6 קָנִיתִי = I have bought (to buy)
+7 אֶתְכֶם = <obj.> you
+8 הַיּוֹם = this day (day)
+9 וְאֶת־ = and <obj.>
+10 אַדְמַתְכֶם = land your
+11 לְפַרְעֹה = for Pharaoh (Pharaoh)
+12 הֵא־ = here! (behold)
+13 לָכֶם = for you (you)
+14 זֶרַע = [is] seed (seed)
+15 וּזְרַעְתֶּם = and you will sow (to sow)
+16 אֶת־ = <obj.>
+17 הָאֲדָמָה = the land
+
+## 1:47:24
+KO: 그리고 수확물들에 있어서 그것이 일어날 것이다. 너희는 5분의 1을 바로에게 줄 것이며, 4개의 손(부분)들은 너희의 것이 될 것이다: 밭의 씨앗으로, 그리고 너희를 위한 양식으로, 그리고 너희 집들에 있는 자들을 위한 것으로, 그리고 너희 어린아이들을 먹이기 위한 것으로.
+1 וְהָיָה = and it will be
+2 בַּתְּבוּאֹת = at the harvest<s> (produce)
+3 וּנְתַתֶּם = and you will give (to give)
+4 חֲמִישִׁית = a fifth (fifth)
+5 לְפַרְעֹה = to Pharaoh (Pharaoh)
+6 וְאַרְבַּע = and [the] four (four)
+7 הַיָּדֹת = the hands (hand)
+8 יִהְיֶה = it will be[long]
+9 לָכֶם = to you (you)
+10 לְזֶרַע = to [the] seed of (seed)
+11 הַשָּׂדֶה = the field (land)
+12 וּלְאָכְלְכֶם = and to food your (food)
+13 וְלַאֲשֶׁר = and for [those] who (which)
+14 בְּבָתֵּיכֶם = [are] in households your (house)
+15 וְלֶאֱכֹל = and to eat (to eat)
+16 לְטַפְּכֶם = for little one[s] your (child)
+
+## 1:47:25
+KO: 그들이 말하였다. "당신이 우리를 살리셨으니, 우리가 내 주님의 눈앞에서 은혜를 입고 바로의 종들이 되겠나이다."
+1 וַיֹּאמְרוּ = and they said (to say)
+2 הֶחֱיִתָנוּ = you have preserved alive us (to live)
+3 נִמְצָא־ = may we find (to find)
+4 חֵן = favor
+5 בְּעֵינֵי = in [the] eyes of (eye)
+6 אֲדֹנִי = lord my (lord)
+7 וְהָיִינוּ = and we will be (to be)
+8 עֲבָדִים = slaves (servant;_slave)
+9 לְפַרְעֹה = of Pharaoh (Pharaoh)
+
+## 1:47:26
+KO: 요셉이 그것(토지)을 오늘날까지 애굽 땅 위에 바로를 위한 규례로 세우니, 오 분의 일이 바로의 것이라. 다만 제사장들의 땅만이 바로의 것이 되지 아니하였더라.
+1 וַיָּשֶׂם = and he established (to set)
+2 אֹתָהּ = <obj.> it ([Obj.])
+3 יוֹסֵף = Joseph
+4 לְחֹק = to a statute (statute)
+5 עַד־ = until (till)
+6 הַיּוֹם = the day (day)
+7 הַזֶּה = <the> this (this)
+8 עַל־ = on (upon)
+9 אַדְמַת = [the] land of
+10 מִצְרַיִם = Egypt
+11 לְפַרְעֹה = [belongs] to Pharaoh
+12 לַחֹמֶשׁ = to the fifth part (fifth)
+13 רַק = only (except)
+14 אַדְמַת = [the] land of
+15 הַכֹּהֲנִים = the priests (priest)
+16 לְבַדָּם = to alone them (alone)
+17 לֹא = not
+18 הָיְתָה = it belonged (to be)
+19 לְפַרְעֹה = to Pharaoh
+
+## 1:47:27
+KO: 그리고 이스라엘이 애굽 땅, 고센 땅에 거주하였고, 그들이 그곳에서 소유를 얻었으며, 생육하고 번성하였다, 심히.
+1 וַיֵּשֶׁב = and he dwelt (to dwell)
+2 יִשְׂרָאֵל = Israel
+3 בְּאֶרֶץ = in [the] land of
+4 מִצְרַיִם = Egypt
+5 בְּאֶרֶץ = in [the] land of
+6 גֹּשֶׁן = Goshen
+7 וַיֵּאָחֲזוּ = and they had possessions (to grasp)
+8 בָהּ = in it (her)
+9 וַיִּפְרוּ = and they were fruitful (be fruitful)
+10 וַיִּרְבּוּ = and they multiplied (to multiply)
+11 מְאֹד = exceedingly (much)
+
+## 1:47:28
+KO: 그리고 야곱이 애굽 땅에서 십칠 년을 살았다. 그리고 야곱의 생애의 날들은 칠 년과 사십과 백 년이었다.
+1 וַיְחִי = and he lived (to live)
+2 יַעֲקֹב = Jacob
+3 בְּאֶרֶץ = in [the] land of (land)
+4 מִצְרַיִם = Egypt
+5 שְׁבַע = seven-
+6 עֶשְׂרֵה = teen (ten)
+7 שָׁנָה = year[s]
+8 וַיְהִי = and it was (to be)
+9 יְמֵי־ = [the] days of (day;_when)
+10 יַעֲקֹב = Jacob
+11 שְׁנֵי = [the] years of
+12 חַיָּיו = life his (life)
+13 שֶׁבַע = seven
+14 שָׁנִים = years
+15 וְאַרְבָּעִים = and forty (forty)
+16 וּמְאַת = and one hundred (hundred)
+17 שָׁנָה = year[s]
+
+## 1:47:29
+KO: 이스라엘의 죽을 날들이 가까웠고, 그가 그의 아들 요셉을 불렀으며, 그에게 말하였다. "만일 내가 네 눈에 은혜를 입었다면, 부디 네 손을 내 넓적다리 아래에 두고, 내게 인애와 진실을 행하여 나를 애굽에 장사하지 마라."
+1 וַיִּקְרְבוּ = and they drew near (to present)
+2 יְמֵי־ = [the] days of (day;_when)
+3 יִשְׂרָאֵל = Israel
+4 לָמוּת = to die
+5 וַיִּקְרָא = and he summoned (to call)
+6 לִבְנוֹ = <to> son his (son)
+7 לְיוֹסֵף = <to> Joseph (Joseph)
+8 וַיֹּאמֶר = and he said (to say)
+9 לוֹ = to him (him)
+10 אִם־ = if
+11 נָא = please
+12 מָצָאתִי = I have found (to find)
+13 חֵן = favor
+14 בְּעֵינֶיךָ = in view your (eye)
+15 שִׂים־ = put (to set)
+16 נָא = please
+17 יָדְךָ = hand your (hand)
+18 תַּחַת = under (underneath)
+19 יְרֵכִי = thigh my (thigh)
+20 וְעָשִׂיתָ = and you will do (to make)
+21 עִמָּדִי = with me
+22 חֶסֶד = loyalty (kindness)
+23 וֶאֱמֶת = and faithfulness (truth)
+24 אַל־ = may not (not)
+25 נָא = please
+26 תִקְבְּרֵנִי = you bury me (to bury)
+27 בְּמִצְרָיִם = in Egypt (Egypt)

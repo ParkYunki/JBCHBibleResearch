@@ -1,0 +1,174 @@
+## 2:16:23
+KO: 그가 그들에게 이르기를 "이것은 여호와께서 말씀하신 것이다. 내일은 여호와께 거룩한 안식일, 곧 안식의 날이다. 너희가 구울 것은 굽고, 삶을 것은 삶아라. 그리고 남은 모든 것은 너희를 위하여 아침까지 간수하여 두어라."
+1 וַיֹּאמֶר = and he said (to say)
+2 אֲלֵהֶם = to them (to(wards))
+3 הוּא = it (he;_she;_it)
+4 אֲשֶׁר = [is that] which
+5 דִּבֶּר = he said (to speak)
+6 יְהוָה = Yahweh
+7 שַׁבָּתוֹן = a sabbath observance (sabbath observance)
+8 שַׁבַּת־ = a sabbath of (Sabbath)
+9 קֹדֶשׁ = holiness
+10 לַיהוָה = to Yahweh
+11 מָחָר = [is] tomorrow (tomorrow)
+12 אֵת = <obj.>
+13 אֲשֶׁר־ = [that] which
+14 תֹּאפוּ = you will bake
+15 אֵפוּ = bake
+16 וְאֵת = and <obj.>
+17 אֲשֶׁר־ = [that] which
+18 תְּבַשְּׁלוּ = you will boil
+19 בַּשֵּׁלוּ = boil
+20 וְאֵת = and <obj.>
+21 כָּל־ = all
+22 הָעֹדֵף = the surplus (to remain)
+23 הַנִּיחוּ = leave (to rest)
+24 לָכֶם = for <the> yourselves (you)
+25 לְמִשְׁמֶרֶת = for keeping (charge)
+26 עַד־ = until (till)
+27 הַבֹּקֶר = the morning (morning)
+
+## 2:16:24
+KO: 그들이 모세가 명령했던 것처럼 그것을 아침까지 두었으나, 그것은 악취를 풍기지 않았고 벌레도 그 안에 있지 아니하였다.
+1 וַיַּנִּיחוּ = and they left (to rest)
+2 אֹתוֹ = <obj.> it ([Obj.])
+3 עַד־ = until (till)
+4 הַבֹּקֶר = the morning (morning)
+5 כַּאֲשֶׁר = just as (as which)
+6 צִוָּה = he had commanded (to command)
+7 מֹשֶׁה = Moses
+8 וְלֹא = and not
+9 הִבְאִישׁ = it stank (to stink)
+10 וְרִמָּה = and a maggot (worm)
+11 לֹא־ = not
+12 הָיְתָה = it was (to be)
+13 בּוֹ = in <the> it (him)
+
+## 2:16:25
+KO: 모세가 말하였다. "그것을 오늘 먹으라. 왜냐하면 오늘이 여호와께 안식일이기 때문이다. 오늘 너희는 그것을 들에서 찾지 못할 것이다."
+1 וַיֹּאמֶר = and he said (to say)
+2 מֹשֶׁה = Moses
+3 אִכְלֻהוּ = eat it (to eat)
+4 הַיּוֹם = this day
+5 כִּי־ = for
+6 שַׁבָּת = [is] a sabbath (Sabbath)
+7 הַיּוֹם = this day
+8 לַיהוָה = to Yahweh (LORD)
+9 הַיּוֹם = this day
+10 לֹא = not
+11 תִמְצָאֻהוּ = you will find it (to find)
+12 בַּשָּׂדֶה = in the field (land)
+
+## 2:16:26
+KO: 엿새 동안은 너희가 그것을 거둘 것이나, 제칠일에는 안식일이니 그날에는 그것이 있지 않을 것이다.
+1 שֵׁשֶׁת = six
+2 יָמִים = days
+3 תִּלְקְטֻהוּ = you will gather it (to gather)
+4 וּבַיּוֹם = and on the day
+5 הַשְּׁבִיעִי = <the> seventh (seventh)
+6 שַׁבָּת = a sabbath (Sabbath)
+7 לֹא = not
+8 יִהְיֶה־ = it will be (to be)
+9 בּוֹ = in <the> it (him)
+
+## 2:16:27
+KO: 그리고 일곱째 날에 백성 중에서 더러가 거두러 나갔으나, 그들이 찾지 못하였다.
+1 וַיְהִי = and it was (to be)
+2 בַּיּוֹם = on the day (day;_when)
+3 הַשְּׁבִיעִי = <the> seventh (seventh)
+4 יָצְאוּ = they went out (to come out)
+5 מִן־ = some of (from)
+6 הָעָם = the people (people)
+7 לִלְקֹט = to gather [it] (to gather)
+8 וְלֹא = and not (not)
+9 מָצָאוּ ס = they found [it] (to find)
+
+## 2:16:28
+KO: 그리고 여호와께서 모세에게 말씀하셨다. "너희가 어느 때까지 나의 계명들과 나의 율법들을 지키기를 거절하려느냐?"
+1 וַיֹּאמֶר = and he said (to say)
+2 יְהוָה = Yahweh (LORD)
+3 אֶל־ = to (to(wards))
+4 מֹשֶׁה = Moses
+5 עַד־ = until (till)
+6 אָנָה = when? (where?)
+7 מֵאַנְתֶּם = have you refused (to refuse)
+8 לִשְׁמֹר = to keep
+9 מִצְוֹתַי = commandments my (commandment)
+10 וְתוֹרֹתָי = and laws my (instruction)
+
+## 2:16:29
+KO: 보라, 여호와가 너희에게 안식일을 주었다. 그러므로 그가 여섯째 날에는 너희에게 이틀 치의 양식을 주는 것이다. 각 사람은 자기 처소에 머물라. 아무도 일곱째 날에는 그 처소에서 나오지 말지니라.
+1 רְאוּ = consider (to see)
+2 כִּי־ = that (for)
+3 יְהוָה = Yahweh (LORD)
+4 נָתַן = he has given
+5 לָכֶם = to <the> you
+6 הַשַּׁבָּת = the sabbath (Sabbath)
+7 עַל־ = there- (upon)
+8 כֵּן = -fore (so)
+9 הוּא = he (he;_she;_it)
+10 נֹתֵן = [is] giving
+11 לָכֶם = to <the> you
+12 בַּיּוֹם = on the day
+13 הַשִּׁשִּׁי = <the> sixth (sixth)
+14 לֶחֶם = bread of (food)
+15 יוֹמָיִם = two days
+16 שְׁבוּ = remain (to dwell)
+17 אִישׁ = everyone
+18 תַּחְתָּיו = in place his (underneath)
+19 אַל־ = may not (not)
+20 יֵצֵא = him go out (to come out)
+21 אִישׁ = anyone
+22 מִמְּקֹמוֹ = from place his (standing place)
+23 בַּיּוֹם = on the day
+24 הַשְּׁבִיעִי = <the> seventh (seventh)
+
+## 2:16:30
+KO: 그리고 백성이 제칠일에 쉬었더라.
+1 וַיִּשְׁבְּתוּ = and they rested (to cease)
+2 הָעָם = the people (people)
+3 בַּיּוֹם = on the day (day;_when)
+4 הַשְּׁבִעִי = <the> seventh (seventh)
+
+## 2:16:31
+KO: 이스라엘 집이 그 이름을 만(만나)이라 불렀으니, 그것은 깟(고수) 씨와 같고 희며, 그 맛은 꿀 섞은 과자와 같았다.
+1 וַיִּקְרְאוּ = and they called (to call)
+2 בֵית־ = [the] household of (house)
+3 יִשְׂרָאֵל = Israel
+4 אֶת־ = <obj.> ([Obj.])
+5 שְׁמוֹ = name its (name)
+6 מָן = manna
+7 וְהוּא = and it (he;_she;_it)
+8 כְּזֶרַע = [was] like [the] seed of (seed)
+9 גַּד = coriander
+10 לָבָן = white
+11 וְטַעְמוֹ = and taste its (taste)
+12 כְּצַפִּיחִת = [was] like a wafer (flatbread)
+13 בִּדְבָשׁ = with honey (honey)
+
+## 2:16:32
+KO: 모세가 말하였다. 이것이 여호와께서 명령하신 말씀이다. "그것(오멜)의 충만함(가득 채운 양)을 너희 대대 후손을 위한 간직함으로 채우라. 이는 내가 너희를 애굽 땅에서 인도하여 낼 때 광야에서 너희에게 먹였던 양식을 그들(후손들)이 보도록 하기 위함이다."
+1 וַיֹּאמֶר = and he said (to say)
+2 מֹשֶׁה = Moses
+3 זֶה = this
+4 הַדָּבָר = [is] the word (word)
+5 אֲשֶׁר = which
+6 צִוָּה = he commands (to command)
+7 יְהוָה = Yahweh (LORD)
+8 מְלֹא = [the] fullness of (fullness)
+9 הָעֹמֶר = the omer (omer)
+10 מִמֶּנּוּ = of it (from)
+11 לְמִשְׁמֶרֶת = [will be] for keeping (charge)
+12 לְדֹרֹתֵיכֶם = to generations your (generation)
+13 לְמַעַן = so that (because)
+14 יִרְאוּ = they may see (to see)
+15 אֶת־ = <obj.>
+16 הַלֶּחֶם = the bread (food)
+17 אֲשֶׁר = which
+18 הֶאֱכַלְתִּי = I caused to eat (to eat)
+19 אֶתְכֶם = <obj.> you
+20 בַּמִּדְבָּר = in the wilderness (wilderness)
+21 בְּהוֹצִיאִי = when brought out I (to come out)
+22 אֶתְכֶם = <obj.> you
+23 מֵאֶרֶץ = from [the] land of (land)
+24 מִצְרָיִם = Egypt

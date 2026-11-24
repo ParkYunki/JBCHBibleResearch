@@ -1943,7 +1943,7 @@ private struct SearchContentView: View {
         if isPhoneIdiom {
             groupCardBorder {
                 NavigationLink {
-                    SermonViewerView(subject: .sermon(result.sermon))
+                    SermonViewerView(subject: result.delivery.map { SermonEditingSubject.delivery($0) } ?? SermonEditingSubject.sermon(result.sermon))
                 } label: {
                     compactItemLabel(
                         icon: "mic.fill", iconColor: settings.bibleTextColor ?? .primary,
@@ -1957,7 +1957,7 @@ private struct SearchContentView: View {
         } else {
             groupCardBorder {
                 Button {
-                    openWindow(id: "sermon-viewer", value: SermonViewerTarget.sermon(result.sermon))
+                    openWindow(id: "sermon-viewer", value: result.delivery.map { SermonViewerTarget.delivery($0) } ?? SermonViewerTarget.sermon(result.sermon))
                 } label: {
                     compactItemLabel(
                         icon: "mic.fill", iconColor: settings.bibleTextColor ?? .primary,
@@ -1975,7 +1975,11 @@ private struct SearchContentView: View {
     }
 
     private func sermonTitle(_ result: SermonSearchResult) -> String {
-        result.sermon.title.isEmpty ? String(localized: "제목 없음") : result.sermon.title
+        let base = result.sermon.title.isEmpty ? String(localized: "제목 없음") : result.sermon.title
+        guard let delivery = result.delivery else { return base }
+        // 회차 사본에서 찾은 결과 — 어느 모임·날짜의 사본인지 함께 보여 준다.
+        let gathering = delivery.gathering?.name ?? String(localized: "모임 미지정")
+        return "\(base) · \(gathering) \(delivery.deliveredAt.formatted(date: .abbreviated, time: .omitted))"
     }
 
     // MARK: - 형광펜 강조 / 태그 뱃지 (DocumentsHomeView.DocumentRowView와 같은 원리)

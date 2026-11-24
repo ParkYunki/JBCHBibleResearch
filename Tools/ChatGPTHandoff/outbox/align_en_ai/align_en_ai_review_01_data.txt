@@ -1,0 +1,783 @@
+## 1:4:15
+EN: And YHWH says to him, “Therefore, of any slayer of Cain it is required sevenfold”; and YHWH sets to Cain a token that none finding him will slay him.
+1	וַיֹּ֧אמֶר	and he said	→ says
+2	ל֣וֹ	to <the> him	→ to him
+3	יְהוָ֗ה	Yahweh	→ YHWH
+4	לָכֵן֙	<to> therefore	→ Therefore
+5	כָּל־	any	→ any
+6	הֹרֵ֣ג	[one who] kills	→ slayer of
+7	קַ֔יִן	<of> Cain	→ Cain
+8	שִׁבְעָתַ֖יִם	sevenfold	→ sevenfold
+9	יֻקָּ֑ם	he will be avenged	→ it is required
+10	וַיָּ֨שֶׂם	and he appointed	→ sets
+11	יְהוָ֤ה	Yahweh	→ YHWH
+12	לְקַ֙יִן֙	for Cain	→ to Cain
+13	א֔וֹת	a sign	→ token
+14	לְבִלְתִּ֥י	to not	→ that
+15	הַכּוֹת־	to strike	→ will slay him
+16	אֹת֖וֹ	<obj.> him	→ will slay him
+17	כָּל־	any	→ none
+18	מֹצְאֽוֹ	[one who] found him	→ finding him
+
+## 1:8:17
+EN: and they have teemed in the earth, and been fruitful, and have multiplied on the earth.”
+1	כָּל־	every	→ —
+2	הַחַיָּ֨ה	<the> animal	→ —
+3	אֲשֶֽׁר־	which	→ —
+4	אִתְּךָ֜	[is] with you	→ —
+5	מִכָּל־	some of all	→ —
+6	בָּשָׂ֗ר	flesh	→ —
+7	בָּע֧וֹף	among the bird[s]	→ —
+8	וּבַבְּהֵמָ֛ה	and among the livestock	→ —
+9	וּבְכָל־	and among every	→ —
+10	הָרֶ֛מֶשׂ	<the> creeping thing	→ —
+11	הָרֹמֵ֥שׂ	which creeps	→ —
+12	עַל־	on	→ —
+13	הָאָ֖רֶץ	the earth	→ —
+14	הַיְצֵ֣א	bring out	→ —
+15	אִתָּ֑ךְ	with you	→ —
+16	וְשָֽׁרְצ֣וּ	and they will swarm	→ and they have teemed
+17	בָאָ֔רֶץ	on the earth	→ in the earth
+18	וּפָר֥וּ	and they will be fruitful	→ and been fruitful
+19	וְרָב֖וּ	and they will multiply	→ and have multiplied
+20	עַל־	on	→ on
+21	הָאָֽרֶץ	the earth	→ the earth
+
+## 1:8:21
+EN: and YHWH smells the refreshing fragrance, and YHWH says to His heart, “I do not continue to disfavor the ground because of man anymore, though the imagination of the heart of man [is] evil from his youth; and I do not continue to strike all living anymore, as I have done;
+1	וַיָּ֣רַח	and he smelled	→ smells
+2	יְהוָה֮	Yahweh	→ YHWH
+3	אֶת־	<obj.>	→ —
+4	רֵ֣יחַ	[the] odor of	→ fragrance
+5	הַנִּיחֹחַ֒	<the> soothing	→ the refreshing
+6	וַיֹּ֨אמֶר	and he said	→ says
+7	יְהוָ֜ה	Yahweh	→ YHWH
+8	אֶל־	to	→ to
+9	לִבּ֗וֹ	heart his	→ His heart
+10	לֹֽא־	not	→ I do not continue
+11	אֹ֠סִף	I will repeat	→ I do not continue
+12	לְקַלֵּ֨ל	to curse	→ to disfavor
+13	ע֤וֹד	again	→ anymore
+14	אֶת־	<obj.>	→ —
+15	הָֽאֲדָמָה֙	the ground	→ the ground
+16	בַּעֲב֣וּר	for sake of	→ because of
+17	הָֽאָדָ֔ם	<the> humankind	→ man
+18	כִּ֠י	for	→ though
+19	יֵ֣צֶר	[the] inclination of	→ the imagination of
+20	לֵ֧ב	[the] heart of	→ the heart of
+21	הָאָדָ֛ם	<the> humankind	→ man
+22	רַ֖ע	[is] evil	→ evil
+23	מִנְּעֻרָ֑יו	since youth<s> his	→ from his youth
+24	וְלֹֽא־	and not	→ and I do not continue
+25	אֹסִ֥ף	I will repeat	→ and I do not continue
+26	ע֛וֹד	again	→ anymore
+27	לְהַכּ֥וֹת	to strike down	→ to strike
+28	אֶת־	<obj.>	→ —
+29	כָּל־	every	→ all
+30	חַ֖י	living [thing]	→ living
+31	כַּֽאֲשֶׁ֥ר	just as	→ as
+32	עָשִֽׂיתִי	I have done	→ I have done
+
+## 1:10:13
+EN: And Mitzraim has begotten the Ludim, and the Anamim, and the Lehabim, and the Naphtuhim,
+1	וּמִצְרַ֡יִם	and Mizraim	→ And Mitzraim
+2	יָלַ֞ד	he fathered	→ has begotten
+3	אֶת־	<obj.>	→ —
+4	לוּדִ֧ים	[the] Ludites	→ the Ludim
+5	וְאֶת־	and <obj.>	→ —
+6	עֲנָמִ֛ים	[the] Anamites	→ the Anamim
+7	וְאֶת־	and <obj.>	→ —
+8	לְהָבִ֖ים	[the] Lehabites	→ the Lehabim
+9	וְאֶת־	and <obj.>	→ —
+10	נַפְתֻּחִֽים	[the] Naphtuhites	→ the Naphtuhim
+
+## 1:10:18
+EN: and the Arvadite, and the Zemarite, and the Hamathite; and afterward the families of the Canaanite have been scattered.
+1	וְאֶת־	and <obj.>	→ —
+2	הָֽאַרְוָדִ֥י	the Arvadite[s]	→ the Arvadite
+3	וְאֶת־	and <obj.>	→ —
+4	הַצְּמָרִ֖י	the Zemarite[s]	→ the Zemarite
+5	וְאֶת־	and <obj.>	→ —
+6	הַֽחֲמָתִ֑י	the Hamathite[s]	→ the Hamathite
+7	וְאַחַ֣ר	and after	→ and afterward
+8	נָפֹ֔צוּ	they were scattered	→ have been scattered
+9	מִשְׁפְּח֖וֹת	[the] clans of	→ the families of
+10	הַֽכְּנַעֲנִֽי	the Canaanite[s]	→ the Canaanite
+
+## 1:12:17
+EN: And YHWH plagues Pharaoh and his house—great plagues—for the matter of Sarai, Abram’s wife.
+1	וַיְנַגַּ֨ע	and he struck	→ plagues
+2	יְהוָ֧ה׀	Yahweh	→ YHWH
+3	אֶת־	<obj.>	→ —
+4	פַּרְעֹ֛ה	Pharaoh	→ Pharaoh
+5	נְגָעִ֥ים	plagues	→ plagues
+6	גְּדֹלִ֖ים	great	→ great
+7	וְאֶת־	and <obj.>	→ —
+8	בֵּית֑וֹ	house his	→ his house
+9	עַל־	on	→ for
+10	דְּבַ֥ר	[the] matter of	→ the matter of
+11	שָׂרַ֖י	Sarai	→ Sarai
+12	אֵ֥שֶׁת	[the] wife of	→ wife
+13	אַבְרָֽם	Abram	→ Abram’s
+
+## 1:14:4
+EN: [for] twelve years they served Chedorlaomer, and the thirteenth year they rebelled.
+1	שְׁתֵּ֤ים	two [plus]	→ twelve
+2	עֶשְׂרֵה֙	ten	→ twelve
+3	שָׁנָ֔ה	year[s]	→ years
+4	עָבְד֖וּ	they had served	→ they served
+5	אֶת־	<obj.>	→ —
+6	כְּדָרְלָעֹ֑מֶר	Kedorlaomer	→ Chedorlaomer
+7	וּשְׁלֹשׁ־	and thir-	→ and the thirteenth
+8	עֶשְׂרֵ֥ה	teen	→ and the thirteenth
+9	שָׁנָ֖ה	year	→ year
+10	מָרָֽדוּ	they rebelled	→ they rebelled
+
+## 1:15:6
+EN: And he has believed in YHWH, and He reckons it to him—righteousness.
+1	וְהֶאֱמִ֖ן	and he believed	→ And he has believed
+2	בַּֽיהוָ֑ה	in Yahweh	→ in YHWH
+3	וַיַּחְשְׁבֶ֥הָ	and he credited it	→ and He reckons it
+4	לּ֖וֹ	to <the> him	→ to him
+5	צְדָקָֽה	righteousness	→ righteousness
+
+## 1:17:2
+EN: and I give My covenant between Me and you, and multiply you very exceedingly.”
+1	וְאֶתְּנָ֥ה	so let me make	→ and I give
+2	בְרִיתִ֖י	covenant my	→ My covenant
+3	בֵּינִ֣י	between me	→ between Me
+4	וּבֵינֶ֑ךָ	and between you	→ and you
+5	וְאַרְבֶּ֥ה	so I may increase	→ and multiply
+6	אוֹתְךָ֖	<obj.> you	→ you
+7	בִּמְאֹ֥ד	with muchness	→ very
+8	מְאֹֽד	muchness	→ exceedingly
+
+## 1:17:27
+EN: and all the men of his house—born in the house, and bought with money from the son of a stranger—have been circumcised with him.
+1	וְכָל־	and all	→ and all
+2	אַנְשֵׁ֤י	[the] men of	→ men
+3	בֵיתוֹ֙	household his	→ his house
+4	יְלִ֣יד	one born of	→ born
+5	בָּ֔יִת	[the] household	→ house
+6	וּמִקְנַת־	and a purchase of	→ bought
+7	כֶּ֖סֶף	silver	→ money
+8	מֵאֵ֣ת	from with	→ from
+9	בֶּן־	a son of	→ son
+10	נֵכָ֑ר	foreignness	→ stranger
+11	נִמֹּ֖לוּ	they were circumcised	→ circumcised
+12	אִתּֽוֹ׃ פ	with him	→ with him
+
+## 1:28:14
+EN: and your seed has been as the dust of the land, and you have broken forth westward, and eastward, and northward, and southward, and all families of the ground have been blessed in you and in your seed.
+1	וְהָיָ֤ה	and it will be	→ been
+2	זַרְעֲךָ֙	offspring your	→ your seed
+3	כַּעֲפַ֣ר	like [the] dust of	→ dust
+4	הָאָ֔רֶץ	the earth	→ land
+5	וּפָרַצְתָּ֛	and you will spread out	→ broken forth
+6	יָ֥מָּה	west -ward	→ westward
+7	וָקֵ֖דְמָה	and east -ward	→ eastward
+8	וְצָפֹ֣נָה	and north -ward	→ northward
+9	וָנֶ֑גְבָּה	and south -ward	→ southward
+10	וְנִבְרֲכ֥וּ	and they will be blessed	→ blessed
+11	בְךָ֛	by <the> you	→ in you
+12	כָּל־	all	→ all
+13	מִשְׁפְּחֹ֥ת	[the] clans of	→ families
+14	הָאֲדָמָ֖ה	the earth	→ ground
+15	וּבְזַרְעֶֽךָ	and by offspring your	→ in your seed
+
+## 1:30:38
+EN: and sets up the rods which he has peeled in the gutters in the watering troughs (where the flock comes to drink), in front of the flock, that they may conceive in their coming to drink;
+1	וַיַּצֵּ֗ג	and he placed	→ sets up
+2	אֶת־	<obj.>	→ —
+3	הַמַּקְלוֹת֙	the branches	→ rods
+4	אֲשֶׁ֣ר	which	→ which
+5	פִּצֵּ֔ל	he had stripped	→ peeled
+6	בָּרֳהָטִ֖ים	in the drinking troughs	→ in the gutters
+7	בְּשִֽׁקֲת֣וֹת	in [the] watering channels of	→ in the watering troughs
+8	הַמָּ֑יִם	<the> water	→ in the watering troughs
+9	אֲשֶׁר֩	which	→ where
+10	תָּבֹ֨אןָ	they came	→ comes
+11	הַצֹּ֤אן	the flock	→ flock
+12	לִשְׁתּוֹת֙	to drink	→ to drink
+13	לְנֹ֣כַח	to before	→ in front of
+14	הַצֹּ֔אן	the flock	→ flock
+15	וַיֵּחַ֖מְנָה	and they mated	→ conceive
+16	בְּבֹאָ֥ן	when came they	→ in their coming
+17	לִשְׁתּֽוֹת	to drink	→ to drink
+
+## 1:37:11
+EN: And his brothers are zealous against him, and his father has watched the matter.
+1	וַיְקַנְאוּ־	and they were jealous	→ zealous
+2	ב֖וֹ	of him	→ against him
+3	אֶחָ֑יו	brothers his	→ his brothers
+4	וְאָבִ֖יו	and father his	→ his father
+5	שָׁמַ֥ר	he kept	→ watched
+6	אֶת־	<obj.>	→ —
+7	הַדָּבָֽר	the matter	→ the matter
+
+## 1:39:18
+EN: and it comes to pass, when I lift my voice and call, that he leaves his garment near me, and flees outside.”
+1	וַיְהִ֕י	and it was	→ and it comes to pass
+2	כַּהֲרִימִ֥י	when raised I	→ when I lift
+3	קוֹלִ֖י	voice my	→ my voice
+4	וָאֶקְרָ֑א	and I called out	→ call
+5	וַיַּעֲזֹ֥ב	and he left	→ leaves
+6	בִּגְד֛וֹ	clothing his	→ his garment
+7	אֶצְלִ֖י	beside me	→ near me
+8	וַיָּ֥נָס	and he fled	→ flees
+9	הַחֽוּצָה	the outside towards	→ outside
+
+## 1:39:21
+EN: And YHWH is with Joseph, and stretches out kindness to him, and puts his grace in the eyes of the chief of the round-house;
+1	וַיְהִ֤י	and he was	→ is
+2	יְהוָה֙	Yahweh	→ YHWH
+3	אֶת־	with	→ with
+4	יוֹסֵ֔ף	Joseph	→ Joseph
+5	וַיֵּ֥ט	and he extended	→ stretches out
+6	אֵלָ֖יו	to him	→ to him
+7	חָ֑סֶד	covenant loyalty	→ kindness
+8	וַיִּתֵּ֣ן	and he gave	→ puts
+9	חִנּ֔וֹ	favor his	→ his grace
+10	בְּעֵינֵ֖י	in [the] eyes of	→ in the eyes of
+11	שַׂ֥ר	[the] commander of	→ the chief of
+12	בֵּית־	[the] house of	→ the round-house
+13	הַסֹּֽהַר	the prison	→ the round-house
+
+## 1:44:28
+EN: and one goes out from me, and I say, Surely he is torn—torn! And I have not seen him since;
+1	וַיֵּצֵ֤א	and he went out	→ goes out
+2	הָֽאֶחָד֙	the one	→ one
+3	מֵֽאִתִּ֔י	from with <the> me	→ from me
+4	וָאֹמַ֕ר	and I said	→ I say
+5	אַ֖ךְ	surely	→ Surely
+6	טָרֹ֣ף	certainly <to tear>	→ torn
+7	טֹרָ֑ף	he has been torn to pieces	→ torn
+8	וְלֹ֥א	and not	→ not
+9	רְאִיתִ֖יו	I have seen him	→ seen him
+10	עַד־	until	→ since
+11	הֵֽנָּה	now	→ —
+
+## 2:3:20
+EN: and I have put forth My hand, and have struck Egypt with all My wonders, which I do in its midst—and afterward he sends you away.
+1	וְשָׁלַחְתִּ֤י	and I will stretch out	→ have put forth
+2	אֶת־	<obj.>	→ —
+3	יָדִי֙	hand my	→ My hand
+4	וְהִכֵּיתִ֣י	and I will strike	→ struck
+5	אֶת־	<obj.>	→ —
+6	מִצְרַ֔יִם	Egypt	→ Egypt
+7	בְּכֹל֙	with all	→ with all
+8	נִפְלְאֹתַ֔י	wonders my	→ My wonders
+9	אֲשֶׁ֥ר	which	→ which
+10	אֶֽעֱשֶׂ֖ה	I will do	→ do
+11	בְּקִרְבּ֑וֹ	in midst its	→ in its midst
+12	וְאַחֲרֵי־	and after	→ afterward
+13	כֵ֖ן	thus	→ afterward
+14	יְשַׁלַּ֥ח	he will let go	→ sends you away
+15	אֶתְכֶֽם	<obj.> you	→ sends you away
+
+## 2:9:12
+EN: And YHWH strengthens the heart of Pharaoh, and he has not listened to them, as YHWH has spoken to Moses.
+1	וַיְחַזֵּ֤ק	and he made strong	→ strengthens
+2	יְהוָה֙	Yahweh	→ YHWH
+3	אֶת־	<obj.>	→ —
+4	לֵ֣ב	[the] heart of	→ the heart
+5	פַּרְעֹ֔ה	Pharaoh	→ Pharaoh
+6	וְלֹ֥א	and not	→ he has not listened
+7	שָׁמַ֖ע	he listened	→ he has not listened
+8	אֲלֵהֶ֑ם	to them	→ to them
+9	כַּאֲשֶׁ֛ר	just as	→ as
+10	דִּבֶּ֥ר	he had said	→ has spoken
+11	יְהוָ֖ה	Yahweh	→ YHWH
+12	אֶל־	to	→ to
+13	מֹשֶֽׁה׃ ס	Moses	→ Moses
+
+## 2:32:18
+EN: And he says, “It is not the voice of the crying of might, nor is it the voice of the crying of weakness—I am hearing a voice of singing.”
+1	וַיֹּ֗אמֶר	and he said	→ And he says
+2	אֵ֥ין	there not	→ It is not
+3	קוֹל֙	[is] a sound of	→ the voice of
+4	עֲנ֣וֹת	singing of	→ the crying of
+5	גְּבוּרָ֔ה	strength	→ might
+6	וְאֵ֥ין	and there not	→ nor is it
+7	ק֖וֹל	[is] a sound of	→ the voice of
+8	עֲנ֣וֹת	singing of	→ the crying of
+9	חֲלוּשָׁ֑ה	weakness	→ weakness
+10	ק֣וֹל	a sound of	→ a voice of
+11	עַנּ֔וֹת	singing	→ singing
+12	אָנֹכִ֖י	I	→ I
+13	שֹׁמֵֽעַ	[am] hearing	→ hearing
+
+## 2:33:16
+EN: and in what is it known now, that I have found grace in Your eyes—I and Your people—is it not in Your going with us? And we have been distinguished—I and Your people—from all the people who [are] on the face of the ground.”
+1	וּבַמֶּ֣ה׀	and <in> how?	→ and in what
+2	יִוָּדַ֣ע	will it be known	→ is it known
+3	אֵפ֗וֹא	then	→ now
+4	כִּֽי־	that	→ that
+5	מָצָ֨אתִי	I have found	→ I have found
+6	חֵ֤ן	favor	→ grace
+7	בְּעֵינֶ֙יךָ֙	in view your	→ in Your eyes
+8	אֲנִ֣י	I	→ I
+9	וְעַמֶּ֔ךָ	and people your	→ and Your people
+10	הֲל֖וֹא	¿ not	→ not
+11	בְּלֶכְתְּךָ֣	by going you	→ in Your going
+12	עִמָּ֑נוּ	with us	→ with us
+13	וְנִפְלֵ֙ינוּ֙	and we will be distinguished	→ And we have been distinguished
+14	אֲנִ֣י	I	→ I
+15	וְעַמְּךָ֔	and people your	→ and Your people
+16	מִכָּ֨ל־	from every	→ from all
+17	הָעָ֔ם	<the> people	→ the people
+18	אֲשֶׁ֖ר	which	→ who
+19	עַל־	[is] on	→ on
+20	פְּנֵ֥י	[the] surface of	→ the face of
+21	הָאֲדָמָֽה׃ פ	the ground	→ the ground
+
+## 2:35:18
+EN: the pins of the Dwelling Place, and the pins of the court, and their cords,
+1	אֶת־	<obj.>	→ —
+2	יִתְדֹ֧ת	[the] tent pegs of	→ the pins
+3	הַמִּשְׁכָּ֛ן	the tabernacle	→ the Dwelling Place
+4	וְאֶת־	and <obj.>	→ —
+5	יִתְדֹ֥ת	[the] tent pegs of	→ and the pins
+6	הֶחָצֵ֖ר	the courtyard	→ the court
+7	וְאֶת־	and <obj.>	→ —
+8	מֵיתְרֵיהֶֽם	ropes their	→ and their cords
+
+## 2:39:29
+EN: and the girdle of twined linen, and blue, and purple, and scarlet, the work of an embroiderer, as YHWH has commanded Moses.
+1	וְֽאֶת־	and <obj.>	→ —
+2	הָאַבְנֵ֞ט	the sash	→ the girdle
+3	שֵׁ֣שׁ	fine linen	→ linen
+4	מָשְׁזָ֗ר	twisted	→ twined
+5	וּתְכֵ֧לֶת	and violet stuff	→ and blue
+6	וְאַרְגָּמָ֛ן	and purple	→ and purple
+7	וְתוֹלַ֥עַת	and scarlet stuff of	→ and scarlet
+8	שָׁנִ֖י	scarlet	→ and scarlet
+9	מַעֲשֵׂ֣ה	[the] work of	→ the work
+10	רֹקֵ֑ם	a worker in colors	→ an embroiderer
+11	כַּאֲשֶׁ֛ר	just as	→ as
+12	צִוָּ֥ה	he had commanded	→ has commanded
+13	יְהוָ֖ה	Yahweh	→ YHWH
+14	אֶת־	<obj.>	→ —
+15	מֹשֶֽׁה׃ ס	Moses	→ Moses
+
+## 2:40:27
+EN: and makes incense on it—spice-incense—as YHWH has commanded Moses.
+1	וַיַּקְטֵ֥ר	and he made smoke	→ and makes
+2	עָלָ֖יו	on it	→ on it
+3	קְטֹ֣רֶת	incense of	→ incense
+4	סַמִּ֑ים	perfume<s>	→ spice-incense
+5	כַּאֲשֶׁ֛ר	just as	→ as
+6	צִוָּ֥ה	he had commanded	→ has commanded
+7	יְהוָ֖ה	Yahweh	→ YHWH
+8	אֶת־	<obj.>	→ —
+9	מֹשֶֽׁה׃ פ	Moses	→ Moses
+
+## 3:6:22
+EN: And the priest who is anointed in his stead, from among his sons, makes it; [it is] a continuous statute of YHWH; it is completely burned as incense;
+1	וְהַכֹּהֵ֨ן	and the priest	→ And the priest
+2	הַמָּשִׁ֧יחַ	<the> anointed	→ anointed
+3	תַּחְתָּ֛יו	in place of him	→ in his stead
+4	מִבָּנָ֖יו	one of sons his	→ from among his sons
+5	יַעֲשֶׂ֣ה	he will offer	→ makes
+6	אֹתָ֑הּ	<obj.> it	→ it
+7	חָק־	a prescribed portion of	→ statute
+8	עוֹלָ֕ם	perpetuity	→ continuous
+9	לַיהוָ֖ה	to Yahweh	→ of YHWH
+10	כָּלִ֥יל	a whole offering	→ completely
+11	תָּקְטָֽר	it will be made to smoke	→ burned as incense
+
+## 3:7:11
+EN: And this [is] a law of the sacrifice of the peace-offerings which [one] brings near to YHWH:
+1	וְזֹ֥את	and this	→ And this
+2	תּוֹרַ֖ת	[is] [the] legal [procedure] of	→ law
+3	זֶ֣בַח	[the] sacrifice of	→ sacrifice
+4	הַשְּׁלָמִ֑ים	the peace offering<s>	→ peace-offerings
+5	אֲשֶׁ֥ר	which	→ which
+6	יַקְרִ֖יב	someone will present	→ brings near
+7	לַיהוָֽה	to Yahweh	→ YHWH
+
+## 3:11:43
+EN: you do not make yourselves abominable with any teeming thing which is teeming, nor do you make yourselves unclean with them, so that you have been unclean with them.
+1	אַל־	may not	→ do not
+2	תְּשַׁקְּצוּ֙	you make detestable	→ make yourselves abominable
+3	אֶת־	<obj.>	→ —
+4	נַפְשֹׁ֣תֵיכֶ֔ם	selves your	→ make yourselves abominable
+5	בְּכָל־	by any	→ with any
+6	הַשֶּׁ֖רֶץ	<the> swarming thing	→ teeming thing
+7	הַשֹּׁרֵ֑ץ	which swarms	→ which is teeming
+8	וְלֹ֤א	and not	→ nor
+9	תִֽטַּמְּאוּ֙	you must make yourselves unclean	→ make yourselves unclean
+10	בָּהֶ֔ם	by <the> them	→ with them
+11	וְנִטְמֵתֶ֖ם	and you will make yourselves unclean	→ have been unclean
+12	בָּֽם	by <the> them	→ with them
+
+## 3:21:21
+EN: No man in whom is blemish (of the seed of Aaron the priest) comes near to bring the fire-offerings of YHWH near; blemish [is] in him; he does not come near to bring the bread of his God near.
+1	כָּל־	any	→ No
+2	אִ֞ישׁ	man	→ man
+3	אֲשֶׁר־	whom	→ in whom
+4	בּ֣וֹ	[is] in <the> him	→ in whom
+5	מ֗וּם	a blemish	→ blemish
+6	מִזֶּ֙רַע֙	from [the] offspring of	→ the seed
+7	אַהֲרֹ֣ן	Aaron	→ Aaron
+8	הַכֹּהֵ֔ן	the priest	→ the priest
+9	לֹ֣א	not	→ No
+10	יִגַּ֔שׁ	he will draw near	→ comes near
+11	לְהַקְרִ֖יב	to present	→ to bring
+12	אֶת־	<obj.>	→ —
+13	אִשֵּׁ֣י	[the] fire offerings of	→ fire-offerings
+14	יְהוָ֑ה	Yahweh	→ YHWH
+15	מ֣וּם	a blemish	→ blemish
+16	בּ֔וֹ	[is] in <the> him	→ in him
+17	אֵ֚ת	<obj.>	→ —
+18	לֶ֣חֶם	[the] food of	→ bread
+19	אֱלֹהָ֔יו	God his	→ his God
+20	לֹ֥א	not	→ does not come near
+21	יִגַּ֖שׁ	he will draw near	→ does not come near
+22	לְהַקְרִֽיב	to present	→ to bring
+
+## 3:23:25
+EN: you do no servile work, and you have brought a fire-offering near to YHWH.”
+1	כָּל־	any	→ do no servile work
+2	מְלֶ֥אכֶת	work of	→ do no servile work
+3	עֲבֹדָ֖ה	servitude	→ do no servile work
+4	לֹ֣א	not	→ do no servile work
+5	תַעֲשׂ֑וּ	you will do	→ do no servile work
+6	וְהִקְרַבְתֶּ֥ם	and you will present	→ and you have brought
+7	אִשֶּׁ֖ה	a fire offering	→ a fire-offering
+8	לַיהוָֽה׃ ס	to Yahweh	→ to YHWH
+
+## 3:24:18
+EN: And he who strikes a beast repays it, body for body.
+1	וּמַכֵּ֥ה	and [one who] strikes down	→ And he who strikes
+2	נֶֽפֶשׁ־	[the] life of	→ a beast
+3	בְּהֵמָ֖ה	an animal	→ a beast
+4	יְשַׁלְּמֶ֑נָּה	he will repay it	→ repays it
+5	נֶ֖פֶשׁ	a life	→ body
+6	תַּ֥חַת	for	→ for
+7	נָֽפֶשׁ	a life	→ body
+
+## 3:25:17
+EN: and you do not oppress one another, and you have been afraid of your God; for I [am] your God YHWH.
+1	וְלֹ֤א	and not	→ and you do not oppress
+2	תוֹנוּ֙	you will maltreat	→ and you do not oppress
+3	אִ֣ישׁ	anyone	→ one another
+4	אֶת־	<obj.>	→ —
+5	עֲמִית֔וֹ	fellow citizen his	→ one another
+6	וְיָרֵ֖אתָ	and you will fear	→ and you have been afraid
+7	מֵֽאֱלֹהֶ֑יךָ	from God your	→ your God
+8	כִּ֛י	for	→ for
+9	אֲנִ֥י	I	→ I
+10	יְהֹוָ֖ה	[am] Yahweh	→ YHWH
+11	אֱלֹהֵיכֶֽם	God your	→ your God
+
+## 3:26:11
+EN: And I have given My Dwelling Place in your midst, and My soul does not loathe you;
+1	וְנָתַתִּ֥י	and I will put	→ And I have given
+2	מִשְׁכָּנִ֖י	dwelling place my	→ My Dwelling Place
+3	בְּתוֹכְכֶ֑ם	in midst of you	→ in your midst
+4	וְלֹֽא־	and not	→ does not loathe
+5	תִגְעַ֥ל	it will abhor	→ does not loathe
+6	נַפְשִׁ֖י	self my	→ My soul
+7	אֶתְכֶֽם	<obj.> you	→ you
+
+## 3:26:24
+EN: then I have walked—I also—with you in opposition, and have struck you, even I, sevenfold for your sins;
+1	וְהָלַכְתִּ֧י	and I will walk	→ then I have walked
+2	אַף־	also	→ also
+3	אֲנִ֛י	I	→ I
+4	עִמָּכֶ֖ם	with you	→ with you
+5	בְּקֶ֑רִי	in contrariness	→ in opposition
+6	וְהִכֵּיתִ֤י	and I will strike down	→ and have struck
+7	אֶתְכֶם֙	<obj.> you	→ you
+8	גַּם־	also	→ even
+9	אָ֔נִי	I	→ I
+10	שֶׁ֖בַע	sevenfold	→ sevenfold
+11	עַל־	on	→ for your sins
+12	חַטֹּאתֵיכֶֽם	sins your	→ for your sins
+
+## 4:1:44
+EN: These [are] those numbered, whom Moses numbered—Aaron also—and the princes of Israel, twelve men, each one has been [the representative] for the house of his fathers.
+1	אֵ֣לֶּה	these	→ These
+2	הַפְּקֻדִ֡ים	[were] the enrolled [men]	→ those numbered
+3	אֲשֶׁר֩	whom	→ whom
+4	פָּקַ֨ד	he enrolled	→ numbered
+5	מֹשֶׁ֤ה	Moses	→ Moses
+6	וְאַהֲרֹן֙	and Aaron	→ Aaron
+7	וּנְשִׂיאֵ֣י	and [the] leaders of	→ the princes of
+8	יִשְׂרָאֵ֔ל	Israel	→ Israel
+9	שְׁנֵ֥ים	two [plus]	→ twelve
+10	עָשָׂ֖ר	ten	→ twelve
+11	אִ֑ישׁ	man	→ men
+12	אִישׁ־	a man	→ each one
+13	אֶחָ֥ד	one	→ each one
+14	לְבֵית־	for [the] house of	→ for the house of
+15	אֲבֹתָ֖יו	ancestors his	→ his fathers
+16	הָיֽוּ	they were	→ has been
+
+## 4:2:30
+EN: and his host, and their numbered ones, [are] fifty-three thousand and four hundred.
+1	וּצְבָא֖וֹ	and military group his	→ and his host
+2	וּפְקֻדֵיהֶ֑ם	and enrolled [men] their	→ and their numbered ones
+3	שְׁלֹשָׁ֧ה	[were] three	→ fifty-three
+4	וַחֲמִשִּׁ֛ים	and fifty	→ fifty-three
+5	אֶ֖לֶף	thousand	→ thousand
+6	וְאַרְבַּ֥ע	and four	→ and four hundred
+7	מֵאֽוֹת	hundred<s>	→ and four hundred
+
+## 4:3:35
+EN: And the prince of a father’s house for the families of Merari [is] Zuriel son of Abihail; they encamp northward by the side of the Dwelling Place.
+1	וּנְשִׂ֤יא	and [the] leader of	→ And the prince of
+2	בֵֽית־	[the] house of	→ a father’s house
+3	אָב֙	a father	→ a father’s house
+4	לְמִשְׁפְּחֹ֣ת	of [the] clans of	→ for the families of
+5	מְרָרִ֔י	[the] Merarite[s]	→ Merari
+6	צוּרִיאֵ֖ל	[was] Zuriel	→ Zuriel
+7	בֶּן־	[the] son of	→ son of
+8	אֲבִיחָ֑יִל	Abihail	→ Abihail
+9	עַ֣ל	at	→ by the side of
+10	יֶ֧רֶךְ	[the] side of	→ by the side of
+11	הַמִּשְׁכָּ֛ן	the tabernacle	→ the Dwelling Place
+12	יַחֲנ֖וּ	they will encamp	→ they encamp
+13	צָפֹֽנָה	north -ward	→ northward
+
+## 4:3:46
+EN: And [from] those ransomed of the two hundred and seventy-three of the firstborn of the sons of Israel, who are more than the Levites,
+1	וְאֵת֙	and <obj.>	→ And
+2	פְּדוּיֵ֣י	[the] ransom<s> of	→ those ransomed
+3	הַשְּׁלֹשָׁ֔ה	the three	→ and seventy-three
+4	וְהַשִּׁבְעִ֖ים	and the seventy	→ and seventy-three
+5	וְהַמָּאתָ֑יִם	and the two hundred	→ the two hundred
+6	הָעֹֽדְפִים֙	who are in excess	→ who are more than
+7	עַל־	to	→ who are more than
+8	הַלְוִיִּ֔ם	the Levites	→ the Levites
+9	מִבְּכ֖וֹר	of [the] firstborn of	→ of the firstborn of
+10	בְּנֵ֥י	[the] people of	→ the sons of
+11	יִשְׂרָאֵֽל	Israel	→ Israel
+
+## 4:4:46
+EN: All those numbered, whom Moses numbered—Aaron also, and the princes of Israel—of the Levites, by their families, and by the house of their fathers,
+1	כָּֽל־	all	→ All
+2	הַפְּקֻדִ֡ים	those enrolled	→ those numbered
+3	אֲשֶׁר֩	whom	→ whom
+4	פָּקַ֨ד	he enrolled	→ numbered
+5	מֹשֶׁ֧ה	Moses	→ Moses
+6	וְאַהֲרֹ֛ן	and Aaron	→ Aaron also
+7	וּנְשִׂיאֵ֥י	and [the] leaders of	→ and the princes of
+8	יִשְׂרָאֵ֖ל	Israel	→ Israel
+9	אֶת־	<obj.>	→ —
+10	הַלְוִיִּ֑ם	the Levites	→ the Levites
+11	לְמִשְׁפְּחֹתָ֖ם	to clans their	→ by their families
+12	וּלְבֵ֥ית	and to [the] house of	→ and by the house of
+13	אֲבֹתָֽם	ancestors their	→ their fathers
+
+## 4:9:18
+EN: by the command of YHWH the sons of Israel journey, and by the command of YHWH they encamp; all the days that the cloud dwells over the Dwelling Place they encamp.
+1	עַל־	on	→ by the command of
+2	פִּ֣י	[the] mouth of	→ by the command of
+3	יְהוָ֗ה	Yahweh	→ YHWH
+4	יִסְעוּ֙	they set out	→ journey
+5	בְּנֵ֣י	[the] people of	→ the sons of
+6	יִשְׂרָאֵ֔ל	Israel	→ Israel
+7	וְעַל־	and on	→ and by the command of
+8	פִּ֥י	[the] mouth of	→ and by the command of
+9	יְהוָ֖ה	Yahweh	→ YHWH
+10	יַחֲנ֑וּ	they encamped	→ they encamp
+11	כָּל־	all	→ all
+12	יְמֵ֗י	[the] days	→ the days
+13	אֲשֶׁ֨ר	<of> which	→ that
+14	יִשְׁכֹּ֧ן	it settled down	→ dwells
+15	הֶעָנָ֛ן	the cloud	→ the cloud
+16	עַל־	over	→ over
+17	הַמִּשְׁכָּ֖ן	the tabernacle	→ the Dwelling Place
+18	יַחֲנֽוּ	they encamped	→ they encamp
+
+## 4:14:18
+EN: YHWH [is] slow to anger and of great kindness, bearing away iniquity and transgression, and not entirely acquitting, charging iniquity of fathers on sons, on a third and on a fourth [generation]—
+1	יְהוָ֗ה	Yahweh	→ YHWH
+2	אֶ֤רֶךְ	[is] long of	→ slow to anger
+3	אַפַּ֙יִם֙	anger<s>	→ slow to anger
+4	וְרַב־	and great of	→ and of great
+5	חֶ֔סֶד	covenant loyalty	→ kindness
+6	נֹשֵׂ֥א	forgiving	→ bearing away
+7	עָוֹ֖ן	iniquity	→ iniquity
+8	וָפָ֑שַׁע	and transgression	→ and transgression
+9	וְנַקֵּה֙	and certainly <to leave unpunished>	→ and not entirely acquitting
+10	לֹ֣א	not	→ and not entirely acquitting
+11	יְנַקֶּ֔ה	he will leave unpunished	→ and not entirely acquitting
+12	פֹּקֵ֞ד	visiting	→ charging
+13	עֲוֹ֤ן	[the] iniquity of	→ iniquity of
+14	אָבוֹת֙	parents	→ fathers
+15	עַל־	on	→ on sons
+16	בָּנִ֔ים	[the] children	→ on sons
+17	עַל־	on	→ on a third
+18	שִׁלֵּשִׁ֖ים	a third generation	→ on a third
+19	וְעַל־	and on	→ and on a fourth
+20	רִבֵּעִֽים	a fourth generation	→ and on a fourth
+
+## 4:18:9
+EN: This is yours from the most holy things, from the fire: all their offering, of all their present, and of all their sin-offering, and of all their guilt-offering, which they give back to Me, is most holy to you and to your sons;
+1	זֶֽה־	this	→ This
+2	יִהְיֶ֥ה	it will belong	→ is
+3	לְךָ֛	to <the> you	→ yours
+4	מִקֹּ֥דֶשׁ	from [the] holy thing of	→ from the most holy things
+5	הַקֳּדָשִׁ֖ים	the holy things	→ from the most holy things
+6	מִן־	from	→ from the fire
+7	הָאֵ֑שׁ	the fire	→ from the fire
+8	כָּל־	every	→ all their offering
+9	קָ֠רְבָּנָם	offering their	→ all their offering
+10	לְֽכָל־	to every	→ of all their present
+11	מִנְחָתָ֞ם	grain offering their	→ of all their present
+12	וּלְכָל־	and to every	→ of all their sin-offering
+13	חַטָּאתָ֗ם	sin offering their	→ of all their sin-offering
+14	וּלְכָל־	and to every	→ of all their guilt-offering
+15	אֲשָׁמָם֙	guilt offering their	→ of all their guilt-offering
+16	אֲשֶׁ֣ר	which	→ which
+17	יָשִׁ֣יבוּ	they will give back	→ they give back
+18	לִ֔י	to <the> me	→ to Me
+19	קֹ֣דֶשׁ	[will be] a holy thing of	→ most holy
+20	קָֽדָשִׁ֥ים	holy things	→ most holy
+21	לְךָ֛	for <the> you	→ to you
+22	ה֖וּא	it	→ is
+23	וּלְבָנֶֽיךָ	and for sons your	→ to your sons
+
+## 4:26:43
+EN: all the families of the Shuhamite by their numbered ones—sixty-four thousand and four hundred.
+1	כָּל־	all	→ all
+2	מִשְׁפְּחֹ֥ת	[the] clans of	→ families of
+3	הַשּׁוּחָמִ֖י	the Shuhamite[s]	→ the Shuhamite
+4	לִפְקֻדֵיהֶ֑ם	to enrolled [men] their	→ by their numbered ones
+5	אַרְבָּעָ֧ה	[were] four	→ sixty-four
+6	וְשִׁשִּׁ֛ים	and sixty	→ sixty-four
+7	אֶ֖לֶף	thousand	→ thousand
+8	וְאַרְבַּ֥ע	and four	→ and four
+9	מֵאֽוֹת׃ ס	hundred<s>	→ hundred
+
+## 4:28:23
+EN: Apart from the burnt-offering of the morning, which [is] for the continual burnt-offering, you prepare these;
+1	מִלְּבַד֙	<from> <to> besides	→ Apart from
+2	עֹלַ֣ת	[the] burnt offering of	→ the burnt-offering of
+3	הַבֹּ֔קֶר	the morning	→ the morning
+4	אֲשֶׁ֖ר	which	→ which
+5	לְעֹלַ֣ת	[is] for [the] burnt offering of	→ for the continual burnt-offering
+6	הַתָּמִ֑יד	<the> continuity	→ for the continual burnt-offering
+7	תַּעֲשׂ֖וּ	you will offer	→ you prepare
+8	אֶת־	<obj.>	→ —
+9	אֵֽלֶּה	these [things]	→ these
+
+## 4:31:33
+EN: and seventy-two thousand of the herd;
+1	וּבָקָ֕ר	and cattle	→ of the herd
+2	שְׁנַ֥יִם	two	→ and seventy-two thousand
+3	וְשִׁבְעִ֖ים	and seventy	→ and seventy-two thousand
+4	אָֽלֶף	thousand	→ and seventy-two thousand
+
+## 4:33:31
+EN: And they journey from Moseroth and encamp in Bene-Jaakan.
+1	וַיִּסְע֖וּ	and they set out	→ And they journey
+2	מִמֹּסֵר֑וֹת	from Moseroth	→ from Moseroth
+3	וַֽיַּחֲנ֖וּ	and they encamped	→ and encamp
+4	בִּבְנֵ֥י	at Bene-	→ in Bene-Jaakan
+5	יַעֲקָֽן	jaakan	→ in Bene-Jaakan
+
+## 4:35:19
+EN: The redeemer of blood puts the murderer to death himself; in his coming against him he puts him to death.
+1	גֹּאֵ֣ל	[the] avenger of	→ The redeemer of
+2	הַדָּ֔ם	<the> blood	→ blood
+3	ה֥וּא	he	→ himself
+4	יָמִ֖ית	he will put to death	→ puts the murderer to death
+5	אֶת־	<obj.>	→ —
+6	הָרֹצֵ֑חַ	the killer	→ puts the murderer to death
+7	בְּפִגְעוֹ־	when meets he	→ in his coming
+8	ב֖וֹ	<in> <the> him	→ against him
+9	ה֥וּא	he	→ he
+10	יְמִיתֶֽנּוּ	he will put to death him	→ puts him to death
+
+## 5:2:15
+EN: and indeed the hand of YHWH has been against them, to destroy them from the midst of the camp until they are consumed.
+1	וְגַ֤ם	and also	→ and indeed
+2	יַד־	[the] hand of	→ the hand of
+3	יְהוָה֙	Yahweh	→ YHWH
+4	הָ֣יְתָה	it was	→ has been
+5	בָּ֔ם	on them	→ against them
+6	לְהֻמָּ֖ם	to disturb them	→ to destroy them
+7	מִקֶּ֣רֶב	from [the] midst of	→ from the midst of
+8	הַֽמַּחֲנֶ֑ה	the camp	→ the camp
+9	עַ֖ד	until	→ until
+10	תֻּמָּֽם	were finished they	→ they are consumed
+
+## 5:2:20
+EN: It is reckoned [as] a land of Rephaim, even it; Rephaim formerly dwelt in it, and the Ammonites call them Zamzummim,
+1	אֶֽרֶץ־	[the] land of	→ a land of
+2	רְפָאִ֥ים	[the] Rephaites	→ Rephaim
+3	תֵּחָשֵׁ֖ב	it was regarded	→ It is reckoned
+4	אַף־	also	→ even
+5	הִ֑וא	it	→ it
+6	רְפָאִ֤ים	[the] Rephaites	→ Rephaim
+7	יָֽשְׁבוּ־	they dwelt	→ dwelt
+8	בָהּ֙	in it	→ in it
+9	לְפָנִ֔ים	<to> before	→ formerly
+10	וְהָֽעַמֹּנִ֔ים	and the Ammonites	→ and the Ammonites
+11	יִקְרְא֥וּ	they called	→ call
+12	לָהֶ֖ם	<to> them	→ them
+13	זַמְזֻמִּֽים	Zamzummites	→ Zamzummim
+
+## 5:7:1
+EN: “When your God YHWH brings you into the land to where you are going in to possess it, and He has cast out many nations from your presence, the Hittite, and the Girgashite, and the Amorite, and the Canaanite, and the Perizzite, and the Hivite, and the Jebusite, seven nations more numerous and mighty than you,
+1	כִּ֤י	if	→ When
+2	יְבִֽיאֲךָ֙	he will bring you	→ brings you
+3	יְהוָ֣ה	Yahweh	→ YHWH
+4	אֱלֹהֶ֔יךָ	God your	→ your God
+5	אֶל־	into	→ into the land
+6	הָאָ֕רֶץ	the land	→ into the land
+7	אֲשֶׁר־	where	→ to where
+8	אַתָּ֥ה	you	→ you
+9	בָא־	[are] about to go	→ are going in
+10	שָׁ֖מָּה	there towards	→ —
+11	לְרִשְׁתָּ֑הּ	to take possession of it	→ to possess it
+12	וְנָשַׁ֣ל	and he will clear away	→ and He has cast out
+13	גּֽוֹיִם־	nations	→ nations
+14	רַבִּ֣ים׀	many	→ many
+15	מִפָּנֶ֡יךָ	from before you	→ from your presence
+16	הַֽחִתִּי֩	the Hittite[s]	→ the Hittite
+17	וְהַגִּרְגָּשִׁ֨י	and the Girgashite[s]	→ and the Girgashite
+18	וְהָאֱמֹרִ֜י	and the Amorite[s]	→ and the Amorite
+19	וְהַכְּנַעֲנִ֣י	and the Canaanite[s]	→ and the Canaanite
+20	וְהַפְּרִזִּ֗י	and the Perizzite[s]	→ and the Perizzite
+21	וְהַֽחִוִּי֙	and the Hivite[s]	→ and the Hivite
+22	וְהַיְבוּסִ֔י	and the Jebusite[s]	→ and the Jebusite
+23	שִׁבְעָ֣ה	seven	→ seven
+24	גוֹיִ֔ם	nations	→ nations
+25	רַבִּ֥ים	great	→ more numerous and mighty
+26	וַעֲצוּמִ֖ים	and mighty	→ more numerous and mighty
+27	מִמֶּֽךָּ	more than you	→ than you
+
+## 5:15:12
+EN: When your brother is sold to you, a Hebrew or a Hebrewess, and he has served you [for] six years, then in the seventh year you send him away free from you.
+1	כִּֽי־	if	→ When
+2	יִמָּכֵ֨ר	he will sell himself	→ is sold
+3	לְךָ֜	to <the> you	→ to you
+4	אָחִ֣יךָ	countryman your	→ your brother
+5	הָֽעִבְרִ֗י	<the> Hebrew [masc]	→ Hebrew
+6	א֚וֹ	or	→ or
+7	הָֽעִבְרִיָּ֔ה	<the> Hebrew [fem]	→ Hebrewess
+8	וַעֲבָֽדְךָ֖	and he will serve you	→ he has served you
+9	שֵׁ֣שׁ	six	→ six
+10	שָׁנִ֑ים	years	→ years
+11	וּבַשָּׁנָה֙	and in the year	→ in the seventh year
+12	הַשְּׁבִיעִ֔ת	<the> seventh	→ in the seventh year
+13	תְּשַׁלְּחֶ֥נּוּ	you will let go him	→ you send him away
+14	חָפְשִׁ֖י	a free [person]	→ free
+15	מֵעִמָּֽךְ	from with <the> you	→ from you
+
+## 5:16:13
+EN: You observe the Celebration of Shelters for yourself [for] seven days, in your ingathering of your threshing-floor and of your wine-vat;
+1	חַ֧ג	[the] festival of	→ the Celebration of
+2	הַסֻּכֹּ֛ת	the booths	→ Shelters
+3	תַּעֲשֶׂ֥ה	you will observe	→ You observe
+4	לְךָ֖	<for> yourself	→ for yourself
+5	שִׁבְעַ֣ת	seven	→ seven
+6	יָמִ֑ים	days	→ days
+7	בְּאָ֨סְפְּךָ֔	when gathering you	→ in your ingathering
+8	מִֽגָּרְנְךָ֖	from threshing floor your	→ of your threshing-floor
+9	וּמִיִּקְבֶֽךָ	and from wine-press your	→ and of your wine-vat

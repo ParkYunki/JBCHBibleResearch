@@ -1,0 +1,217 @@
+## 6:11:13
+KO: 단지 그 언덕 위에 서 있는 모든 성읍은 이스라엘이 불사르지 아니하였으나, 오직 하솔만 여호수아가 불살랐다.
+1 רַק = only (except)
+2 כָּל־ = all
+3 הֶעָרִים = the cities (city)
+4 הָעֹמְדוֹת = which were standing (to stand)
+5 עַל־ = on (upon)
+6 תִּלָּם = mounds their (mound)
+7 לֹא = not
+8 שְׂרָפָם = it burned them
+9 יִשְׂרָאֵל = Israel
+10 זוּלָתִי = except (exception)
+11 אֶת־ = <obj.> ([Obj.])
+12 חָצוֹר = Hazor
+13 לְבַדָּהּ = to alone it (alone)
+14 שָׂרַף = he burned
+15 יְהוֹשֻׁעַ = Joshua
+
+## 6:11:14
+KO: 그리고 이 성읍들의 모든 전리품과 가축은 이스라엘 자손들이 그들을 위하여 탈취하였고, 오직 모든 사람은 칼날로 쳤으니, 그들을 멸절할 때까지 그들이 호흡 있는 자는 하나도 남기지 아니하였다.
+1 וְכֹל = and all
+2 שְׁלַל = [the] booty of (spoil)
+3 הֶעָרִים = the cities (city)
+4 הָאֵלֶּה = <the> these (these)
+5 וְהַבְּהֵמָה = and the cattle (animal)
+6 בָּזְזוּ = they plundered (to plunder)
+7 לָהֶם = for <the> themselves (them)
+8 בְּנֵי = [the] people of (son)
+9 יִשְׂרָאֵל = Israel
+10 רַק = only (except)
+11 אֶת־ = <obj.>
+12 כָּל־ = every
+13 הָאָדָם = <the> man (man)
+14 הִכּוּ = they struck (to smite)
+15 לְפִי־ = to [the] mouth of (lip)
+16 חֶרֶב = [the] sword (sword)
+17 עַד־ = until (till)
+18 הִשְׁמִדָם = had destroyed they (to destroy)
+19 אוֹתָם = <obj.> them
+20 לֹא = not
+21 הִשְׁאִירוּ = they left (to remain)
+22 כָּל־ = any
+23 נְשָׁמָה = breathing thing (breath)
+
+## 6:11:15
+KO: 여호와께서 그분의 종 모세에게 명령하셨던 것처럼, 그렇게 모세는 여호수아에게 명령하였고, 그렇게 여호수아는 행하였으니, 여호와께서 모세에게 명령하셨던 모든 것으로부터 그가 한 단어라도 치우치지 아니하였더라.
+1 כַּאֲשֶׁר = just as
+2 צִוָּה = he had commanded
+3 יְהוָה = Yahweh
+4 אֶת־ = <obj.>
+5 מֹשֶׁה = Moses
+6 עַבְדּוֹ = servant his (servant;_slave)
+7 כֵּן־ = so
+8 צִוָּה = he commanded
+9 מֹשֶׁה = Moses
+10 אֶת־ = <obj.>
+11 יְהוֹשֻׁעַ = Joshua
+12 וְכֵן = and so
+13 עָשָׂה = he did (to make)
+14 יְהוֹשֻׁעַ = Joshua
+15 לֹא־ = not
+16 הֵסִיר = he left undone (to turn aside)
+17 דָּבָר = anything (word)
+18 מִכֹּל = from all (all)
+19 אֲשֶׁר־ = that
+20 צִוָּה = he had commanded
+21 יְהוָה = Yahweh
+22 אֶת־ = <obj.>
+23 מֹשֶׁה = Moses
+
+## 6:11:16
+KO: 그리고 여호수아가 이 온 땅, 곧 산지와 온 남방과 고센의 온 땅과 평지와 아라바와 이스라엘의 산지와 그 평지를 취하였다.
+1 וַיִּקַּח = and he took (to take)
+2 יְהוֹשֻׁעַ = Joshua
+3 אֶת־ = <obj.>
+4 כָּל־ = all
+5 הָאָרֶץ = the land
+6 הַזֹּאת = <the> this (this)
+7 הָהָר = the hill country
+8 וְאֶת־ = and <obj.>
+9 כָּל־ = all
+10 הַנֶּגֶב = the Negev (Negeb)
+11 וְאֵת = and <obj.>
+12 כָּל־ = all
+13 אֶרֶץ = [the] land of
+14 הַגֹּשֶׁן = <the> Goshen (Goshen)
+15 וְאֶת־ = and <obj.>
+16 הַשְּׁפֵלָה = the Shephelah
+17 וְאֶת־ = and <obj.>
+18 הָעֲרָבָה = the Arabah (Arabah)
+19 וְאֶת־ = and <obj.>
+20 הַר = [the] hill country of
+21 יִשְׂרָאֵל = Israel
+22 וּשְׁפֵלָתֹה = and Shephelah its
+
+## 6:11:17
+KO: 세일로 올라가는 할락 산으로부터 레바논 골짜기의 바알갓, 곧 헤르몬 산 아래까지라. 그(여호수아)가 그들의 모든 왕을 포획하고 그들을 치며 그들을 죽였더라.
+1 מִן־ = from
+2 הָהָר = the mountain
+3 הֶחָלָק = <the> Halak ((Mount )Halak)
+4 הָעוֹלֶה = which goes up (to ascend)
+5 שֵׂעִיר = Seir
+6 וְעַד־ = and to (till)
+7 בַּעַל = Baal
+8 גָּד = Gad
+9 בְּבִקְעַת = in [the] valley of (valley)
+10 הַלְּבָנוֹן = <the> Lebanon (of Lebanon)
+11 תַּחַת = under (underneath)
+12 הַר־ = [the] mountain of
+13 חֶרְמוֹן = Hermon ((Mount )Hermon)
+14 וְאֵת = and <obj.> ([Obj.])
+15 כָּל־ = all
+16 מַלְכֵיהֶם = kings their (king)
+17 לָכַד = he captured (to capture)
+18 וַיַּכֵּם = and he struck them (to smite)
+19 וַיְמִיתֵם = and he killed them (to die)
+
+## 6:11:18
+KO: 여러 날 동안 여호수아가 이 모든 왕들과 전쟁을 벌였다.
+1 יָמִים = days (day;_when)
+2 רַבִּים = many
+3 עָשָׂה = he did (to make)
+4 יְהוֹשֻׁעַ = Joshua
+5 אֶת־ = with
+6 כָּל־ = all
+7 הַמְּלָכִים = the kings (king)
+8 הָאֵלֶּה = <the> these (these)
+9 מִלְחָמָה = battle
+
+## 6:11:19
+KO: 이스라엘 자손들과 화친한 성읍은 하나도 없었으니, 기브온에 거주하는 히위 사람 외에는 없었고, 그들은 모두 전쟁을 통해 취하였다.
+1 לֹא־ = not
+2 הָיְתָה = it was (to be)
+3 עִיר = a city (city)
+4 אֲשֶׁר = which
+5 הִשְׁלִימָה = it made peace (to ally)
+6 אֶל־ = to (to(wards))
+7 בְּנֵי = [the] people of (son)
+8 יִשְׂרָאֵל = Israel
+9 בִּלְתִּי = except (lest)
+10 הַחִוִּי = the Hivite[s] (Hivite)
+11 יֹשְׁבֵי = [the] inhabitants of (to dwell)
+12 גִבְעוֹן = Gibeon
+13 אֶת־ = <obj.> ([Obj.])
+14 הַכֹּל = <the> everything (all)
+15 לָקְחוּ = they took (to take)
+16 בַמִּלְחָמָה = in <the> battle (battle)
+
+## 6:11:20
+KO: 이는 여호와로부터 그들의 마음을 강퍅하게 하여 이스라엘을 대적하여 싸우게 하려는 일이 있었기 때문이니, 그들을 진멸하여 그들에게 은혜가 없게 하려고, 곧 여호와께서 모세에게 명령하신 대로 그들을 멸절하려 하심이었더라.
+1 כִּי = for
+2 מֵאֵת = from with
+3 יְהוָה = Yahweh
+4 הָיְתָה = it was
+5 לְחַזֵּק = to strengthen
+6 אֶת־ = <obj.>
+7 לִבָּם = heart their (heart)
+8 לִקְרַאת = to meet (to encounter)
+9 הַמִּלְחָמָה = the battle (battle)
+10 אֶת־ = with
+11 יִשְׂרָאֵל = Israel
+12 לְמַעַן = so as
+13 הַחֲרִימָם = to totally destroy them (to devote;_destroy)
+14 לְבִלְתִּי = to not (lest)
+15 הֱיוֹת־ = to belong
+16 לָהֶם = to <the> them (them)
+17 תְּחִנָּה = favor (supplication)
+18 כִּי = for
+19 לְמַעַן = so as
+20 הַשְׁמִידָם = to destroy them (to destroy)
+21 כַּאֲשֶׁר = just as (as which)
+22 צִוָּה = he had commanded (to command)
+23 יְהוָה = Yahweh
+24 אֶת־ = <obj.>
+25 מֹשֶׁה ס = Moses
+
+## 6:11:21
+KO: 그때에 여호수아가 와서 아낙 사람들을 산지로부터, 곧 헤브론과 드빌과 아납과 유다의 온 산지와 이스라엘의 온 산지로부터 끊어버리고, 그가 그들의 성읍들과 함께 그들을 진멸하였다.
+1 וַיָּבֹא = and he came (to come (in))
+2 יְהוֹשֻׁעַ = Joshua
+3 בָּעֵת = at the time (time)
+4 הַהִיא = <the> that (he;_she;_it)
+5 וַיַּכְרֵת = and he cut off (to cut)
+6 אֶת־ = <obj.> ([Obj.])
+7 הָעֲנָקִים = the Anakites (Anakim)
+8 מִן־ = from
+9 הָהָר = the hill country
+10 מִן־ = from
+11 חֶבְרוֹן = Hebron
+12 מִן־ = from
+13 דְּבִר = Debir
+14 מִן־ = from
+15 עֲנָב = Anab
+16 וּמִכֹּל = and from all
+17 הַר = [the] hill country of
+18 יְהוּדָה = Judah
+19 וּמִכֹּל = and from all
+20 הַר = [the] hill country of
+21 יִשְׂרָאֵל = Israel
+22 עִם־ = with
+23 עָרֵיהֶם = cities their (city)
+24 הֶחֱרִימָם = he totally destroyed them (to devote;_destroy)
+25 יְהוֹשֻׁעַ = Joshua
+
+## 6:11:22
+KO: 이스라엘 자손의 땅 안에는 아낙 사람들이 하나도 남지 않았고, 다만 가사와 가드와 아스돗에만 남았더라.
+1 לֹא־ = not
+2 נוֹתַר = it was left (to remain)
+3 עֲנָקִים = Anakites (Anakim)
+4 בְּאֶרֶץ = in [the] land of (land)
+5 בְּנֵי = [the] people of (son)
+6 יִשְׂרָאֵל = Israel
+7 רַק = only (except)
+8 בְּעַזָּה = in Gaza (Gaza)
+9 בְּגַת = in Gath (Gath)
+10 וּבְאַשְׁדּוֹד = and in Ashdod (Ashdod)
+11 נִשְׁאָרוּ = they remained (to remain)

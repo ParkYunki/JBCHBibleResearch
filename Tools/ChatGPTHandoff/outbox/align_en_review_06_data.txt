@@ -1,0 +1,1019 @@
+## 42:11:25
+EN: and having come, it finds [it] swept and adorned;
+1	καὶ	And	→ and
+2	ἐλθὸν	having come	→ having come
+3	εὑρίσκει	it finds [it]	→ it
+4	σχολάζοντα	being unoccupied	→ —
+5	σεσαρωμένον	swept	→ swept
+6	καὶ	and	→ and
+7	κεκοσμημένον	ordered.	→ —
+
+## 42:12:29
+EN: And you—do not seek what you may eat, or what you may drink, and do not be in suspense,
+1	καὶ	And	→ And
+2	ὑμεῖς	you yourselves	→ —
+3	μὴ	not	→ not
+4	ζητεῖτε	do seek	→ seek
+5	τί	what	→ what
+6	φάγητε	you may eat	→ you may eat
+7	καὶ	and	→ and
+8	τί	what	→ what
+9	πίητε	you may drink,	→ you may drink
+10	καὶ	and	→ —
+11	μὴ	not	→ not
+12	μετεωρίζεσθε	do worry yourself.	→ —
+
+## 42:12:41
+EN: And Peter said to Him, “Lord, do You speak this allegory to us, or also to all?”
+1	Εἶπεν	Said	→ said
+2	δὲ	then	→ —
+3	αὐτῷ	to him	→ to Him
+4	ὁ	<the>	→ —
+5	Πέτρος·	Peter;	→ Peter
+6	κύριε	Lord,	→ Lord
+7	πρὸς	to	→ to
+8	ἡμᾶς	us	→ us
+9	τὴν	<the>	→ —
+10	παραβολὴν	parable	→ —
+11	ταύτην	this	→ this
+12	λέγεις	speak You	→ speak
+13	ἢ	or	→ or
+14	καὶ	also	→ also
+15	πρὸς	to	→ to
+16	πάντας;	all?	→ all
+
+## 42:12:44
+EN: truly I say to you that he will set him over all his goods.
+1	ἀληθῶς	Of a truth	→ —
+2	λέγω	I say	→ I say
+3	ὑμῖν	to you	→ to you
+4	ὅτι	that	→ that
+5	ἐπὶ	over	→ over
+6	πᾶσιν	all	→ all
+7	τοῖς	the	→ —
+8	ὑπάρχουσιν	possessions	→ —
+9	αὐτοῦ	of him	→ —
+10	καταστήσει	he will set	→ he will set
+11	αὐτόν	him.	→ him
+
+## 42:13:5
+EN: No—I say to you, but if you may not convert, all you will perish in like manner.”
+1	οὐχί	No,	→ —
+2	λέγω	I say	→ say
+3	ὑμῖν	to you,	→ to you
+4	ἀλλ᾽	but	→ but
+5	ἐὰν	only	→ —
+6	μὴ	unless	→ —
+7	μετανοῆτε	you shall repent,	→ —
+8	πάντες	all	→ all
+9	ὡσαύτως	likewise	→ —
+10	ἀπολεῖσθε	you will perish.	→ you will perish
+
+## 42:15:10
+EN: So I say to you, joy comes before the messengers of God over one sinner converting.”
+1	Οὕτως	Thus	→ —
+2	λέγω	I say	→ I say
+3	ὑμῖν	to you,	→ to you
+4	γίνεται	there is	→ —
+5	χαρὰ	joy	→ joy
+6	ἐνώπιον	before	→ before
+7	τῶν	the	→ the
+8	ἀγγέλων	angels	→ —
+9	τοῦ	<the>	→ —
+10	θεοῦ	of God	→ of God
+11	ἐπὶ	over	→ over
+12	ἑνὶ	one	→ one
+13	ἁμαρτωλῷ	sinner	→ sinner
+14	μετανοοῦντι	repenting.	→ —
+
+## 42:21:33
+EN: the sky and the earth will pass away, but My words may not pass away.
+1	ὁ	The	→ the
+2	οὐρανὸς	heaven	→ —
+3	καὶ	and	→ and
+4	ἡ	the	→ the
+5	γῆ	earth	→ earth
+6	παρελεύσονται	will pass away,	→ will pass away
+7	οἱ	<the>	→ —
+8	δὲ	but	→ but
+9	λόγοι	the words	→ words
+10	μου	of Mine	→ —
+11	οὐ	certainly	→ —
+12	μὴ	not	→ not
+13	παρελεύσονται	will pass away.	→ away
+
+## 43:4:24
+EN: God [is] Spirit, and those worshiping Him should worship in spirit and truth.”
+1	πνεῦμα	Spirit	→ Spirit
+2	ὁ	<the>	→ —
+3	θεός	God [is],	→ is
+4	καὶ	and	→ and
+5	τοὺς	those	→ those
+6	προσκυνοῦντας	worshiping	→ worshiping
+7	αὐτὸν	Him	→ Him
+8	ἐν	in	→ in
+9	πνεύματι	spirit	→ spirit
+10	καὶ	and	→ and
+11	ἀληθείᾳ	truth	→ truth
+12	δεῖ	it behooves	→ —
+13	προσκυνεῖν	to worship.	→ worship
+
+## 43:5:32
+EN: there is another who is testifying concerning Me, and I have known that the testimony that He testifies concerning Me is true;
+1	ἄλλος	Another	→ another
+2	ἐστὶν	it is	→ —
+3	ὁ	who	→ who
+4	μαρτυρῶν	is bearing witness	→ —
+5	περὶ	concerning	→ concerning
+6	ἐμοῦ	Me,	→ Me
+7	καὶ	and	→ and
+8	οἶδα	I know	→ known
+9	ὅτι	that	→ that
+10	ἀληθής	true	→ true
+11	ἐστιν	is	→ is
+12	ἡ	the	→ the
+13	μαρτυρία	testimony	→ testimony
+14	ἣν	which	→ —
+15	μαρτυρεῖ	he bears witness	→ —
+16	περὶ	concerning	→ concerning
+17	ἐμοῦ	Me.	→ Me
+
+## 43:6:44
+EN: no one is able to come to Me if the Father who sent Me may not draw him, and I will raise him up in the last day;
+1	οὐδεὶς	No [one]	→ no one
+2	δύναται	is able	→ is able
+3	ἐλθεῖν	to come	→ to come
+4	πρός	to	→ to
+5	με	Me,	→ Me
+6	ἐὰν	only	→ —
+7	μὴ	unless	→ —
+8	ὁ	the	→ the
+9	πατὴρ	Father	→ Father
+10	ὁ	the [one]	→ —
+11	πέμψας	having sent	→ sent
+12	με	Me	→ Me
+13	ἑλκύσῃ	shall draw	→ draw
+14	αὐτόν	him,	→ him
+15	κἀγὼ	and I myself	→ —
+16	ἀναστήσω	will raise up	→ raise
+17	αὐτὸν	him	→ him
+18	ἐν	in	→ in
+19	τῇ	the	→ the
+20	ἐσχάτῃ	last	→ last
+21	ἡμέρᾳ	day.	→ day
+
+## 43:6:66
+EN: From this [time] many of His disciples went away backward, and were no longer walking with Him,
+1	ἐκ	From	→ From
+2	τούτου	that [time]	→ time
+3	πολλοὶ	many	→ many
+4	ἐκ	out of	→ —
+5	τῶν	the	→ —
+6	μαθητῶν	disciples	→ disciples
+7	αὐτοῦ	of Him	→ —
+8	ἀπῆλθον	went away	→ went away
+9	εἰς	to	→ —
+10	τὰ	the	→ —
+11	ὀπίσω	back	→ —
+12	καὶ	and	→ and
+13	οὐκέτι	no longer	→ no longer
+14	μετ᾽	with	→ with
+15	αὐτοῦ	Him	→ Him
+16	περιεπάτουν	were walking.	→ walking
+
+## 43:9:24
+EN: They called, therefore, the man who was blind a second time, and they said to him, “Give glory to God, we have known that this Man is a sinner”;
+1	Ἐφώνησαν	They called	→ They called
+2	οὖν	therefore	→ therefore
+3	τὸν	the	→ the
+4	ἄνθρωπον	man	→ man
+5	ἐκ	out	→ —
+6	δευτέρου	a second time	→ a second time
+7	ὃς	who	→ who
+8	ἦν	were	→ was
+9	τυφλὸς	blind	→ blind
+10	καὶ	and	→ and
+11	εἶπαν	they said	→ they said
+12	αὐτῷ·	to him;	→ to him
+13	δὸς	do give	→ Give
+14	δόξαν	glory	→ glory
+15	τῷ	<the>	→ —
+16	θεῷ·	to God!	→ to God
+17	ἡμεῖς	We ourselves	→ —
+18	οἴδαμεν	know	→ known
+19	ὅτι	that	→ that
+20	οὗτος	this	→ this
+21	ὁ	<the>	→ —
+22	ἄνθρωπος	man	→ Man
+23	ἁμαρτωλός	a sinner	→ a sinner
+24	ἐστιν	is.	→ is
+
+## 43:13:20
+EN: truly, truly, I say to you, he who is receiving whomsoever I may send, receives Me; and he who is receiving Me, receives Him who sent Me.”
+1	ἀμὴν	Amen	→ —
+2	ἀμὴν	Amen	→ —
+3	λέγω	I say	→ I say
+4	ὑμῖν·	to you;	→ to you
+5	ὁ	the [one]	→ —
+6	λαμβάνων	receiving	→ receiving
+7	ἄν	maybe	→ —
+8	τινα	any	→ —
+9	πέμψω	I shall send,	→ send
+10	ἐμὲ	Me myself	→ —
+11	λαμβάνει·	receives;	→ receives
+12	ὁ	the [one]	→ —
+13	δὲ	now	→ —
+14	ἐμὲ	Me myself	→ —
+15	λαμβάνων	receiving,	→ receiving
+16	λαμβάνει	receives	→ receives
+17	τὸν	the [One]	→ —
+18	πέμψαντά	having sent	→ sent
+19	με	Me.	→ Me
+
+## 43:13:25
+EN: and that one having leaned back on the breast of Jesus, responds to Him, “Lord, who is it?”
+1	ἀναπεσὼν	Having leaned	→ having leaned
+2	οὖν	then	→ —
+3	ἐκεῖνος	he	→ —
+4	οὕτως	thus	→ —
+5	ἐπὶ	on	→ on
+6	τὸ	the	→ the
+7	στῆθος	breast	→ breast
+8	τοῦ	<the>	→ —
+9	Ἰησοῦ	of Jesus	→ of Jesus
+10	λέγει	he says	→ —
+11	αὐτῷ·	to Him;	→ to Him
+12	κύριε	Lord,	→ Lord
+13	τίς	who	→ who
+14	ἐστιν;	is it?	→ is it
+
+## 43:13:38
+EN: Jesus answered him, “You will lay down your life for Me? Truly, truly, I say to you, a rooster will not crow until you may deny Me three times.”
+1	ἀποκρίνεται	answers	→ answered
+2	αὐτῷ	to him	→ —
+3	ὁ	<the>	→ —
+4	Ἰησοῦς·	Jesus;	→ Jesus
+5	τὴν	The	→ —
+6	ψυχήν	life	→ life
+7	σου	of you	→ —
+8	ὑπὲρ	for	→ for
+9	ἐμοῦ	Me	→ Me
+10	θήσεις;	will you lay down?	→ down
+11	ἀμὴν	Amen	→ —
+12	ἀμὴν	Amen	→ —
+13	λέγω	I say	→ I say
+14	σοι·	to you;	→ to you
+15	οὐ	certainly	→ —
+16	μὴ	not	→ not
+17	ἀλέκτωρ	[the] rooster	→ rooster
+18	φωνήσῃ	may crow	→ crow
+19	ἕως	until	→ until
+20	οὗ	that	→ —
+21	ἀρνήσῃ	you will deny	→ deny
+22	με	Me	→ Me
+23	τρίς	three times.	→ three times
+
+## 43:15:16
+EN: You did not choose Me, but I chose you, and appointed you, that you might go away, and might bear fruit, and your fruit might remain, that whatever you may ask of the Father in My Name, He may give you.
+1	Οὐχ	Not	→ not
+2	ὑμεῖς	you yourselves	→ —
+3	με	Me	→ Me
+4	ἐξελέξασθε	chose,	→ chose
+5	ἀλλ᾽	but	→ but
+6	ἐγὼ	I myself	→ —
+7	ἐξελεξάμην	chose	→ —
+8	ὑμᾶς	you	→ you
+9	καὶ	and	→ and
+10	ἔθηκα	appointed	→ appointed
+11	ὑμᾶς	you	→ you
+12	ἵνα	that	→ that
+13	ὑμεῖς	you yourselves	→ —
+14	ὑπάγητε	may go	→ may
+15	καὶ	and	→ and
+16	καρπὸν	fruit	→ fruit
+17	φέρητε	you may bear,	→ bear
+18	καὶ	and	→ and
+19	ὁ	the	→ the
+20	καρπὸς	fruit	→ fruit
+21	ὑμῶν	of you	→ —
+22	μένῃ·	may remain;	→ remain
+23	ἵνα	so that	→ —
+24	ὅ	which	→ —
+25	τι	one	→ —
+26	ἂν	maybe	→ —
+27	αἰτήσητε	you may ask	→ may
+28	τὸν	the	→ —
+29	πατέρα	Father	→ Father
+30	ἐν	in	→ in
+31	τῷ	the	→ —
+32	ὀνόματί	name	→ Name
+33	μου	of Me,	→ —
+34	δῷ	He may give	→ give
+35	ὑμῖν	you.	→ you
+
+## 43:21:22
+EN: Jesus says to him, “If I will him to remain until I come, what [is that] to you? Follow Me.”
+1	λέγει	Says	→ says
+2	αὐτῷ	to him	→ to him
+3	ὁ	<the>	→ —
+4	Ἰησοῦς·	Jesus;	→ Jesus
+5	ἐὰν	If	→ If
+6	αὐτὸν	him	→ him
+7	θέλω	I shall desire	→ —
+8	μένειν	to remain	→ to remain
+9	ἕως	until	→ until
+10	ἔρχομαι	I come,	→ I come
+11	τί	what [is it]	→ what
+12	πρὸς	to	→ to
+13	σέ;	you?	→ you
+14	σύ	You yourself	→ —
+15	μοι	Me	→ Me
+16	ἀκολούθει	do follow.	→ Follow
+
+## 44:7:5
+EN: and He gave him no inheritance in it, not even a footstep, and promised to give it to him for a possession, and to his seed after him—he having no child.
+1	καὶ	And	→ and
+2	οὐκ	not	→ not
+3	ἔδωκεν	He did give	→ gave
+4	αὐτῷ	to him	→ to him
+5	κληρονομίαν	an inheritance	→ inheritance
+6	ἐν	in	→ in
+7	αὐτῇ	it	→ it
+8	οὐδὲ	not even [give]	→ even
+9	βῆμα	[the] length	→ —
+10	ποδὸς	of a foot	→ —
+11	καὶ	but	→ —
+12	ἐπηγγείλατο	He promised	→ promised
+13	δοῦναι	to give	→ to give
+14	αὐτῷ	to him	→ —
+15	εἰς	for	→ for
+16	κατάσχεσιν	a possession	→ a possession
+17	αὐτὴν	it	→ it
+18	καὶ	and	→ and
+19	τῷ	to the	→ —
+20	σπέρματι	descendants	→ —
+21	αὐτοῦ	of him	→ —
+22	μετ᾽	after	→ after
+23	αὐτόν	him,	→ him
+24	οὐκ	not	→ —
+25	ὄντος	there being	→ —
+26	αὐτῷ	to him	→ —
+27	τέκνου	a child.	→ child
+
+## 44:7:6
+EN: And God spoke thus, that his seed will be sojourning in a strange land, and they will cause it to serve, and will do it evil [for] four hundred years.
+1	ἐλάλησεν	Spoke	→ spoke
+2	δὲ	however	→ —
+3	οὕτως	thus	→ thus
+4	ὁ	<the>	→ —
+5	θεός	God	→ God
+6	ὅτι	that	→ that
+7	ἔσται	will be	→ will be
+8	τὸ	the	→ —
+9	σπέρμα	seed	→ seed
+10	αὐτοῦ	of him	→ —
+11	πάροικον	a sojourner	→ —
+12	ἐν	in	→ in
+13	γῇ	a land	→ land
+14	ἀλλοτρίᾳ	strange	→ strange
+15	καὶ	and	→ and
+16	δουλώσουσιν	they will enslave	→ —
+17	αὐτὸ	it	→ it
+18	καὶ	and	→ and
+19	κακώσουσιν	they will mistreat [it]	→ —
+20	ἔτη	years	→ years
+21	τετρακόσια	four hundred.	→ four hundred
+
+## 44:11:27
+EN: And in those days there came from Jerusalem prophets to Antioch,
+1	Ἐν	In	→ in
+2	ταύταις	these	→ —
+3	δὲ	now	→ —
+4	ταῖς	<the>	→ —
+5	ἡμέραις	days	→ days
+6	κατῆλθον	came down	→ came
+7	ἀπὸ	from	→ from
+8	Ἱεροσολύμων	Jerusalem	→ Jerusalem
+9	προφῆται	prophets	→ prophets
+10	εἰς	to	→ to
+11	Ἀντιόχειαν·	Antioch;	→ Antioch
+
+## 44:13:14
+EN: and they having gone through from Perga, came to Antioch of Pisidia, and having gone into the synagogue on the day of the Sabbaths, they sat down,
+1	αὐτοὶ	They themselves	→ —
+2	δὲ	now	→ —
+3	διελθόντες	having passed through	→ through
+4	ἀπὸ	from	→ from
+5	τῆς	<the>	→ —
+6	Πέργης	Perga	→ Perga
+7	παρεγένοντο	came	→ came
+8	εἰς	to	→ to
+9	Ἀντιόχειαν	Antioch	→ Antioch
+10	τὴν	<the>	→ —
+11	Πισιδίαν	Pisidia,	→ Pisidia
+12	καὶ	and	→ and
+13	εἰσελθόντες	having gone	→ having gone
+14	εἰς	into	→ into
+15	τὴν	the	→ the
+16	συναγωγὴν	synagogue	→ synagogue
+17	τῇ	on the	→ —
+18	ἡμέρᾳ	day	→ day
+19	τῶν	of the	→ of the
+20	σαββάτων	Sabbaths	→ Sabbaths
+21	ἐκάθισαν	they sat down.	→ they sat down
+
+## 44:13:30
+EN: and God raised Him out of the dead,
+1	ὁ	<the>	→ —
+2	δὲ	But	→ —
+3	θεὸς	God	→ God
+4	ἤγειρεν	raised	→ raised
+5	αὐτὸν	Him	→ Him
+6	ἐκ	out from	→ out
+7	νεκρῶν	[the] dead,	→ the dead
+
+## 44:16:32
+EN: And they spoke to him the word of the LORD, and to all those in his household;
+1	καὶ	And	→ And
+2	ἐλάλησαν	they spoke	→ they spoke
+3	αὐτῷ	to him	→ to him
+4	τὸν	the	→ the
+5	λόγον	word	→ word
+6	τοῦ	of the	→ of the
+7	κυρίου	Lord	→ LORD
+8	σὺν	along with	→ —
+9	πᾶσιν	all	→ all
+10	τοῖς	those	→ those
+11	ἐν	in	→ in
+12	τῇ	the	→ —
+13	οἰκίᾳ	house	→ —
+14	αὐτοῦ	of him.	→ —
+
+## 44:17:28
+EN: for in Him we live, and move, and are; as certain of your poets have also said: For we are also His offspring.
+1	ἐν	In	→ in
+2	αὐτῷ	Him	→ Him
+3	γὰρ	for	→ for
+4	ζῶμεν	we live	→ we live
+5	καὶ	and	→ and
+6	κινούμεθα	move	→ move
+7	καὶ	and	→ and
+8	ἐσμέν	are,’	→ are
+9	ὡς	As	→ as
+10	καί	also	→ also
+11	τινες	some	→ —
+12	τῶν	of the	→ —
+13	καθ᾽	among	→ —
+14	ὑμᾶς	you	→ —
+15	ποιητῶν	poets	→ poets
+16	εἰρήκασιν·	have said;	→ said
+17	τοῦ	of [Him]	→ —
+18	γὰρ	For	→ For
+19	καὶ	also	→ also
+20	γένος	offspring	→ offspring
+21	ἐσμέν	we are.’	→ we are
+
+## 44:25:17
+EN: They, therefore, having come together—I, making no delay, on the succeeding [day] having sat on the judgment seat, commanded the man to be brought,
+1	συνελθόντων	When were assembling	→ —
+2	οὖν	therefore	→ therefore
+3	αὐτῶν	they	→ They
+4	ἐνθάδε	here	→ —
+5	ἀναβολὴν	delay	→ delay
+6	μηδεμίαν	no	→ no
+7	ποιησάμενος	having made,	→ having
+8	τῇ	on the	→ on the
+9	ἑξῆς	next [day]	→ day
+10	καθίσας	having sat	→ having
+11	ἐπὶ	on	→ on
+12	τοῦ	the	→ the
+13	βήματος	judgment seat	→ judgment seat
+14	ἐκέλευσα	I commanded	→ commanded
+15	ἀχθῆναι	to be brought	→ to be brought
+16	τὸν	the	→ the
+17	ἄνδρα·	man;	→ man
+
+## 44:25:26
+EN: concerning whom I have no certain thing to write to [my] lord, for what reason I brought him forth before you, and especially before you, King Agrippa, that the examination having been made, I may have something to write;
+1	περὶ	concerning	→ concerning
+2	οὗ	whom	→ whom
+3	ἀσφαλές	definite	→ —
+4	τι	anything	→ —
+5	γράψαι	to write	→ to write
+6	τῷ	<the>	→ —
+7	κυρίῳ	to [my] lord	→ lord
+8	οὐκ	not	→ —
+9	ἔχω	I have,	→ I have
+10	διὸ	Therefore	→ —
+11	προήγαγον	I have brought	→ brought
+12	αὐτὸν	him	→ him
+13	ἐφ᾽	before	→ before
+14	ὑμῶν	you all	→ —
+15	καὶ	and	→ and
+16	μάλιστα	especially	→ especially
+17	ἐπὶ	before	→ before
+18	σοῦ	you,	→ you
+19	βασιλεῦ	King	→ King
+20	Ἀγρίππα	Agrippa,	→ Agrippa
+21	ὅπως	so that	→ —
+22	τῆς	when the	→ —
+23	ἀνακρίσεως	examination	→ examination
+24	γενομένης	having taken place	→ having
+25	σχῶ	I may have	→ I may have
+26	τί	something	→ something
+27	γράψω·	I may write;	→ write
+
+## 44:26:13
+EN: at midday, I saw in the way, O king, out of Heaven, above the brightness of the sun, shining around me a light—and those going on with me;
+1	ἡμέρας	At day	→ —
+2	μέσης	mid	→ —
+3	κατὰ	on	→ on
+4	τὴν	the	→ the
+5	ὁδὸν	road	→ —
+6	εἶδον	I saw,	→ I saw
+7	βασιλεῦ	O king,	→ O king
+8	οὐρανόθεν	from heaven	→ Heaven
+9	ὑπὲρ	above	→ above
+10	τὴν	the	→ the
+11	λαμπρότητα	brightness	→ brightness
+12	τοῦ	of the	→ of the
+13	ἡλίου	sun	→ sun
+14	περιλάμψαν	having shone around	→ around
+15	με	me	→ me
+16	φῶς	a light	→ —
+17	καὶ	and	→ —
+18	τοὺς	those	→ those
+19	σὺν	with	→ with
+20	ἐμοὶ	me myself	→ —
+21	πορευομένους	journeying.	→ —
+
+## 45:6:13
+EN: neither present your members instruments of unrighteousness to sin, but present yourselves to God as living out of the dead, and your members instruments of righteousness to God;
+1	μηδὲ	Neither	→ neither
+2	παριστάνετε	do yield	→ —
+3	τὰ	the	→ the
+4	μέλη	members	→ members
+5	ὑμῶν	of you	→ —
+6	ὅπλα	[as] instruments	→ instruments
+7	ἀδικίας	of unrighteousness	→ of unrighteousness
+8	τῇ	<the>	→ —
+9	ἁμαρτίᾳ	to sin,	→ to sin
+10	ἀλλὰ	but	→ but
+11	παραστήσατε	do yield	→ —
+12	ἑαυτοὺς	yourselves	→ yourselves
+13	τῷ	<the>	→ —
+14	θεῷ	to God	→ to God
+15	ὡσεὶ	as	→ as
+16	ἐκ	out from	→ out
+17	νεκρῶν	[the] dead	→ dead
+18	ζῶντας	living	→ living
+19	καὶ	and	→ and
+20	τὰ	the	→ —
+21	μέλη	members	→ members
+22	ὑμῶν	of you	→ —
+23	ὅπλα	[as] instruments	→ instruments
+24	δικαιοσύνης	of righteousness	→ of righteousness
+25	τῷ	<the>	→ —
+26	θεῷ	to God.	→ to God
+
+## 45:11:4
+EN: but what does the divine answer say to him? “I left to Myself seven thousand men who did not bow a knee to Ba‘al.”
+1	ἀλλὰ	But	→ but
+2	τί	what [was]	→ what
+3	λέγει	spoken	→ —
+4	αὐτῷ	to him	→ to him
+5	ὁ	the	→ the
+6	χρηματισμός;	divine answer?	→ divine answer
+7	κατέλιπον	I have left	→ left
+8	ἐμαυτῷ	to Myself	→ to Myself
+9	ἑπτακισχιλίους	seven thousand	→ seven thousand
+10	ἄνδρας	men	→ men
+11	οἵτινες	who	→ who
+12	οὐκ	not	→ not
+13	ἔκαμψαν	bowed	→ bow
+14	γόνυ	[the] knee	→ knee
+15	τῇ	<the>	→ —
+16	Βάαλ	to Baal.	→ —
+
+## 45:11:18
+EN: do not boast against the branches; and if you boast, you do not bear the root, but the root you!
+1	μὴ	not	→ not
+2	κατακαυχῶ	do boast	→ boast
+3	τῶν	over the	→ —
+4	κλάδων·	branches;	→ branches
+5	εἰ	If	→ if
+6	δὲ	now	→ —
+7	κατακαυχᾶσαι	you boast against [them],	→ against
+8	οὐ	not	→ not
+9	σὺ	you yourself	→ —
+10	τὴν	the	→ the
+11	ῥίζαν	root	→ root
+12	βαστάζεις	support	→ —
+13	ἀλλ᾽	but	→ but
+14	ἡ	the	→ the
+15	ῥίζα	root	→ root
+16	σέ	you.	→ you
+
+## 45:11:20
+EN: By unbelief they were broken off, and you have stood by faith; do not be high-minded, but be fearing;
+1	καλῶς·	Rightly so;	→ —
+2	τῇ	by the	→ —
+3	ἀπιστίᾳ	unbelief	→ unbelief
+4	ἐξεκλάσθησαν	they were broken off,	→ they were broken off
+5	σὺ	you yourself	→ —
+6	δὲ	however	→ —
+7	τῇ	<the>	→ —
+8	πίστει	by faith	→ by faith
+9	ἕστηκας	have stood.	→ have stood
+10	μὴ	Not	→ not
+11	ὑψηλὰ	high	→ —
+12	φρόνει	do be minded	→ —
+13	ἀλλὰ	but	→ but
+14	φοβοῦ·	do be afraid;	→ —
+
+## 45:12:7
+EN: or ministry, in the ministry; or he who is teaching, in the teaching;
+1	εἴτε	or	→ or
+2	διακονίαν	service	→ —
+3	ἐν	in	→ in
+4	τῇ	the	→ the
+5	διακονίᾳ	service,	→ —
+6	εἴτε	or	→ or
+7	ὁ	the [one]	→ —
+8	διδάσκων	teaching	→ teaching
+9	ἐν	in	→ in
+10	τῇ	the	→ the
+11	διδασκαλίᾳ	teaching,	→ teaching
+
+## 46:6:19
+EN: Have you not known that your body is a temple of the Holy Spirit in you, which you have from God? And you are not your own,
+1	ἢ	Or	→ —
+2	οὐκ	surely	→ —
+3	οἴδατε	you know	→ known
+4	ὅτι	that	→ that
+5	τὸ	the	→ the
+6	σῶμα	body	→ body
+7	ὑμῶν	of you	→ —
+8	ναὸς	a temple	→ a temple
+9	τοῦ	of the	→ —
+10	ἐν	in	→ in
+11	ὑμῖν	you	→ you
+12	ἁγίου	Holy	→ Holy
+13	πνεύματός	Spirit	→ Spirit
+14	ἐστιν	is	→ are
+15	οὗ	whom	→ —
+16	ἔχετε	you have	→ you have
+17	ἀπὸ	from	→ from
+18	θεοῦ	God?	→ God
+19	καὶ	And	→ And
+20	οὐκ	not	→ not
+21	ἐστὲ	you are	→ —
+22	ἑαυτῶν;	your own?	→ your own
+
+## 46:14:33
+EN: for God is not [a God] of tumult, but of peace, as in all the assemblies of the holy ones.
+1	οὐ	Not	→ not
+2	γάρ	for	→ for
+3	ἐστιν	He is	→ —
+4	ἀκαταστασίας	of disorder	→ —
+5	ὁ	the	→ the
+6	θεὸς	God	→ God
+7	ἀλλ᾽	but	→ but
+8	εἰρήνης	of peace,	→ of peace
+9	ὡς	as	→ as
+10	ἐν	in	→ in
+11	πάσαις	all	→ all
+12	ταῖς	the	→ the
+13	ἐκκλησίαις	churches	→ —
+14	τῶν	of the	→ —
+15	ἁγίων	saints.	→ —
+
+## 47:2:9
+EN: for this also I wrote, that I might know your proof, whether you are obedient in regard to all things.
+1	εἰς	For	→ for
+2	τοῦτο	this	→ this
+3	γὰρ	indeed	→ —
+4	καὶ	also	→ also
+5	ἔγραψα	did I write,	→ —
+6	ἵνα	so that	→ —
+7	γνῶ	I may know	→ know
+8	τὴν	the	→ —
+9	δοκιμὴν	proof	→ proof
+10	ὑμῶν	of you,	→ —
+11	εἰ	whether	→ whether
+12	εἰς	to	→ to
+13	πάντα	everything	→ —
+14	ὑπήκοοί	obedient	→ obedient
+15	ἐστε	you are.	→ you are
+
+## 47:2:17
+EN: For we are not as the many, adulterating the word of God, but as of sincerity—but as of God; in the presence of God, in Christ we speak.
+1	οὐ	Not	→ not
+2	γάρ	for	→ For
+3	ἐσμεν	we are	→ we are
+4	ὡς	like	→ —
+5	οἱ	the	→ the
+6	πολλοὶ	many	→ many
+7	καπηλεύοντες	peddling	→ —
+8	τὸν	the	→ the
+9	λόγον	word	→ word
+10	τοῦ	<the>	→ —
+11	θεοῦ	of God,	→ of God
+12	ἀλλ᾽	but	→ but
+13	ὡς	as	→ as
+14	ἐξ	of	→ of
+15	εἰλικρινείας	sincerity,	→ —
+16	ἀλλ᾽	but	→ —
+17	ὡς	as	→ as
+18	ἐκ	of	→ of
+19	θεοῦ	God,	→ God
+20	κατέναντι	before	→ —
+21	τοῦ	<the>	→ —
+22	θεοῦ	God	→ God
+23	ἐν	in	→ in
+24	Χριστῷ	Christ	→ Christ
+25	λαλοῦμεν	we speak.	→ we speak
+
+## 47:11:29
+EN: Who is weak, and I am not weak? Who is stumbled, and I am not burned?
+1	τίς	Who	→ Who
+2	ἀσθενεῖ	is weak,	→ is weak
+3	καὶ	and	→ and
+4	οὐκ	not	→ not
+5	ἀσθενῶ;	I am weak?	→ weak
+6	τίς	Who	→ Who
+7	σκανδαλίζεται	is led into sin,	→ —
+8	καὶ	and	→ and
+9	οὐκ	surely	→ —
+10	ἐγὼ	I myself	→ —
+11	πυροῦμαι;	do burn inwardly?	→ burned
+
+## 47:13:4
+EN: for even if He was crucified from weakness, yet He lives from the power of God; for we also are weak in Him, but we will live with Him from the power of God toward you.
+1	καὶ	And	→ —
+2	γὰρ	for	→ for
+3	εἰ	if	→ if
+4	ἐσταυρώθη	He was crucified	→ He was crucified
+5	ἐξ	in	→ in
+6	ἀσθενείας	weakness	→ weakness
+7	ἀλλὰ	yet	→ yet
+8	ζῇ	He lives	→ He lives
+9	ἐκ	by	→ —
+10	δυνάμεως	power	→ power
+11	θεοῦ·	God’s;	→ —
+12	καὶ	Also	→ also
+13	γὰρ	for	→ for
+14	ἡμεῖς	we ourselves	→ —
+15	ἀσθενοῦμεν	are weak	→ are weak
+16	ἐν	in	→ —
+17	αὐτῷ	Him	→ Him
+18	ἀλλὰ	but	→ but
+19	ζήσομεν	we will live	→ we will live
+20	σὺν	with	→ with
+21	αὐτῷ	Him	→ Him
+22	ἐκ	by	→ —
+23	δυνάμεως	power	→ power
+24	θεοῦ	God’s	→ —
+25	εἰς	toward	→ toward
+26	ὑμᾶς	you.	→ you
+
+## 48:2:14
+EN: But when I saw that they are not walking uprightly to the truth of the good news, I said to Peter before all, “If you, being a Jew, live in the manner of the nations, and not in the manner of the Jews, how do you compel the nations to live like Jews?
+1	ἀλλ᾽	But	→ But
+2	ὅτε	when	→ when
+3	εἶδον	I saw	→ I saw
+4	ὅτι	that	→ that
+5	οὐκ	not	→ not
+6	ὀρθοποδοῦσιν	they are walking uprightly	→ uprightly
+7	πρὸς	according to	→ —
+8	τὴν	the	→ the
+9	ἀλήθειαν	truth	→ truth
+10	τοῦ	of the	→ of the
+11	εὐαγγελίου	gospel,	→ —
+12	εἶπον	I said	→ I said
+13	τῷ	<the>	→ —
+14	Κηφᾷ	to Peter	→ to Peter
+15	ἔμπροσθεν	before	→ before
+16	πάντων·	all;	→ all
+17	εἰ	If	→ If
+18	σὺ	you yourself	→ —
+19	Ἰουδαῖος	a Jew	→ a Jew
+20	ὑπάρχων	being	→ being
+21	ἐθνικῶς	like a Gentile	→ like
+22	καὶ	and	→ and
+23	οὐχὶ	not	→ not
+24	Ἰουδαϊκῶς	like a Jew	→ Jews
+25	ζῇς	live,	→ live
+26	πῶς	why	→ —
+27	τὰ	the	→ the
+28	ἔθνη	Gentiles	→ —
+29	ἀναγκάζεις	do you compel	→ do you compel
+30	ἰουδαΐζειν;	to Judaize?	→ —
+
+## 49:5:23
+EN: because the husband is head of the wife, as also the Christ [is] head of the Assembly, and He is Savior of the body,
+1	ὅτι	for	→ —
+2	ὁ	the	→ the
+3	ἀνήρ	husband	→ husband
+4	ἐστιν	is	→ is
+5	κεφαλὴ	head	→ head
+6	τῆς	of the	→ of the
+7	γυναικὸς	wife	→ wife
+8	ὡς	as	→ as
+9	καὶ	also	→ also
+10	ὁ	<the>	→ —
+11	Χριστὸς	Christ	→ Christ
+12	κεφαλὴ	[is the] head	→ head
+13	τῆς	of the	→ of the
+14	ἐκκλησίας	church,	→ —
+15	καὶ	and	→ and
+16	αὐτὸς	He Himself	→ —
+17	ἐστιν	is	→ is
+18	σωτὴρ	Savior	→ Savior
+19	τοῦ	of the	→ of the
+20	σώματος·	body;	→ body
+
+## 50:3:4
+EN: though I also have [cause of] trust in flesh. If any other one thinks to have trust in flesh, I more:
+1	καίπερ	though	→ though
+2	ἐγὼ	I myself	→ —
+3	ἔχων	have	→ have
+4	πεποίθησιν	confidence	→ —
+5	καὶ	even	→ —
+6	ἐν	in	→ in
+7	σαρκί	[the] flesh.	→ flesh
+8	εἴ	If	→ If
+9	τις	any	→ any
+10	δοκεῖ	thinks	→ thinks
+11	ἄλλος	other	→ other
+12	πεποιθέναι	to have confidence	→ —
+13	ἐν	in	→ in
+14	σαρκί	[the] flesh,	→ flesh
+15	ἐγὼ	I myself	→ —
+16	μᾶλλον·	more:	→ more
+
+## 51:1:5
+EN: because of the hope that is laid up for you in the heavens, which you heard of beforehand by the word of the truth of the good news,
+1	διὰ	because of	→ because of
+2	τὴν	the	→ the
+3	ἐλπίδα	hope	→ hope
+4	τὴν	which	→ which
+5	ἀποκειμένην	is being laid up	→ laid
+6	ὑμῖν	for you	→ for you
+7	ἐν	in	→ in
+8	τοῖς	the	→ the
+9	οὐρανοῖς	heavens	→ heavens
+10	ἣν	which	→ —
+11	προηκούσατε	you heard of before	→ heard
+12	ἐν	in	→ —
+13	τῷ	the	→ the
+14	λόγῳ	word	→ word
+15	τῆς	<the>	→ —
+16	ἀληθείας	of truth	→ truth
+17	τοῦ	the	→ the
+18	εὐαγγελίου	gospel	→ —
+
+## 55:1:6
+EN: For which cause I remind you to stir up the gift of God that is in you through the putting on of my hands,
+1	Δι᾽	For	→ For
+2	ἣν	this	→ —
+3	αἰτίαν	reason	→ —
+4	ἀναμιμνῄσκω	I remind	→ I remind
+5	σε	you	→ you
+6	ἀναζωπυρεῖν	to kindle anew	→ —
+7	τὸ	the	→ the
+8	χάρισμα	gift	→ gift
+9	τοῦ	<the>	→ —
+10	θεοῦ	of God,	→ of God
+11	ὅ	which	→ which
+12	ἐστιν	is	→ is
+13	ἐν	in	→ in
+14	σοὶ	you	→ you
+15	διὰ	through	→ through
+16	τῆς	the	→ the
+17	ἐπιθέσεως	laying on	→ —
+18	τῶν	of the	→ —
+19	χειρῶν	hands	→ hands
+20	μου·	of mine;	→ —
+
+## 56:1:12
+EN: A certain one of them, a prophet of their own, said, “Cretans! Always liars, evil beasts, lazy bellies!”
+1	εἶπέν	Said	→ said
+2	τις	one	→ one
+3	ἐξ	of	→ of
+4	αὐτῶν	them	→ them
+5	ἴδιος	own	→ own
+6	αὐτῶν	of them	→ —
+7	προφήτης·	a prophet;	→ a prophet
+8	Κρῆτες	Cretans	→ Cretans
+9	ἀεὶ	[are] always	→ Always
+10	ψεῦσται	liars,	→ liars
+11	κακὰ	evil	→ evil
+12	θηρία	beasts,	→ beasts
+13	γαστέρες	gluttons	→ —
+14	ἀργαί	lazy.	→ lazy
+
+## 58:5:10
+EN: having been called by God a Chief Priest according to the order of Melchizedek,
+1	προσαγορευθεὶς	having been designated	→ having
+2	ὑπὸ	by	→ by
+3	τοῦ	<the>	→ —
+4	θεοῦ	God	→ God
+5	ἀρχιερεὺς	a high priest	→ Priest
+6	κατὰ	according to	→ according to
+7	τὴν	the	→ the
+8	τάξιν	order	→ order
+9	Μελχισέδεκ	of Melchizedek.	→ of Melchizedek
+
+## 58:11:27
+EN: By faith he left Egypt behind, having not been afraid of the wrath of the king, for as seeing the Invisible One—he endured.
+1	Πίστει	By faith	→ By faith
+2	κατέλιπεν	he left	→ he left
+3	Αἴγυπτον	Egypt	→ Egypt
+4	μὴ	not	→ not
+5	φοβηθεὶς	having feared	→ having
+6	τὸν	the	→ the
+7	θυμὸν	anger	→ —
+8	τοῦ	of the	→ of the
+9	βασιλέως·	king;	→ king
+10	τὸν	the	→ the
+11	γὰρ	for	→ for
+12	ἀόρατον	Invisible [One]	→ Invisible
+13	ὡς	as	→ as
+14	ὁρῶν	seeing	→ seeing
+15	ἐκαρτέρησεν	he persevered.	→ —
+
+## 59:1:20
+EN: for the wrath of a man does not work the righteousness of God;
+1	ὀργὴ	[the] anger	→ —
+2	γὰρ	for	→ for
+3	ἀνδρὸς	of man	→ man
+4	δικαιοσύνην	[the] righteousness	→ the righteousness
+5	θεοῦ	of God	→ of God
+6	οὐκ	not	→ not
+7	ἐργάζεται	works.	→ work
+
+## 60:1:5
+EN: who, in the power of God are being guarded, through faith, to salvation, ready to be revealed in the last time,
+1	τοὺς	who	→ who
+2	ἐν	by	→ —
+3	δυνάμει	[the] power	→ the power
+4	θεοῦ	of God	→ of God
+5	φρουρουμένους	[are] being guarded	→ are being guarded
+6	διὰ	through	→ through
+7	πίστεως	faith	→ faith
+8	εἰς	for	→ —
+9	σωτηρίαν	[the] salvation	→ salvation
+10	ἑτοίμην	ready	→ ready
+11	ἀποκαλυφθῆναι	to be revealed	→ to be revealed
+12	ἐν	in	→ in
+13	καιρῷ	[the] time	→ time
+14	ἐσχάτῳ·	last;	→ last
+
+## 60:3:10
+EN: for “he who is willing to love life, and to see good days, let him guard his tongue from evil, and his lips—not to speak guile;
+1	ὁ	The [one]	→ —
+2	γὰρ	for	→ for
+3	θέλων	desiring	→ —
+4	ζωὴν	life	→ life
+5	ἀγαπᾶν	to love	→ to love
+6	καὶ	and	→ and
+7	ἰδεῖν	to see	→ to see
+8	ἡμέρας	days	→ days
+9	ἀγαθὰς	good	→ good
+10	παυσάτω	he should keep	→ —
+11	τὴν	the	→ —
+12	γλῶσσαν	tongue	→ tongue
+13	αὐτοῦ	of him	→ —
+14	ἀπὸ	from	→ from
+15	κακοῦ	evil	→ evil
+16	καὶ	and	→ and
+17	χείλη	lips	→ —
+18	αὐτοῦ	of him	→ —
+19	τοῦ	<the>	→ —
+20	μὴ	not	→ —
+21	λαλῆσαι	to speak	→ to speak
+22	δόλον	deceit.	→ —
+
+## 66:2:11
+EN: He who is having an ear—let him hear what the Spirit says to the assemblies: He who is overcoming may not be injured of the second death.
+1	ὁ	The [one]	→ —
+2	ἔχων	having	→ having
+3	οὖς	an ear	→ —
+4	ἀκουσάτω	he should hear	→ hear
+5	τί	what	→ what
+6	τὸ	the	→ the
+7	πνεῦμα	Spirit	→ Spirit
+8	λέγει	says	→ says
+9	ταῖς	to the	→ to the
+10	ἐκκλησίαις·	churches;	→ —
+11	ὁ	The [one]	→ —
+12	νικῶν	overcoming	→ overcoming
+13	οὐ	certainly	→ —
+14	μὴ	not	→ not
+15	ἀδικηθῇ	may be injured	→ injured
+16	ἐκ	by	→ —
+17	τοῦ	the	→ the
+18	θανάτου	death	→ death
+19	τοῦ	<the>	→ —
+20	δευτέρου	second.	→ second

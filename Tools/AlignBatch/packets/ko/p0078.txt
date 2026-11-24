@@ -1,0 +1,738 @@
+## 4:6:27
+KO: 그리고 그들이 내 이름을 이스라엘 자손들 위에 둘지니, 내가 그들을 복 주리라.
+1 וְשָׂמוּ = and they will put (to set)
+2 אֶת־ = <obj.> ([Obj.])
+3 שְׁמִי = name my (name)
+4 עַל־ = on (upon)
+5 בְּנֵי = [the] people of (son)
+6 יִשְׂרָאֵל = Israel
+7 וַאֲנִי = and I (I)
+8 אֲבָרֲכֵם פ = I will bless them (to bless)
+
+## 4:7:1
+KO: 그리고 모세가 그 성막을 세우기를 마친 날에 그 일이 있었다. 그리고 그는 그것(성막)에 기름을 발랐고 그것을 거룩하게 하였으며, 또 그 모든 기구들과 그 제단과 그 모든 기구들에 기름을 발랐고 그것들을 거룩하게 하였다.
+1 וַיְהִי = and it was (to be)
+2 בְּיוֹם = on [the] day (day;_when)
+3 כַּלּוֹת = finished (to end)
+4 מֹשֶׁה = Moses
+5 לְהָקִים = to set up (to arise)
+6 אֶת־ = <obj.>
+7 הַמִּשְׁכָּן = the tabernacle (tabernacle)
+8 וַיִּמְשַׁח = and he anointed
+9 אֹתוֹ = <obj.> it
+10 וַיְקַדֵּשׁ = and he consecrated
+11 אֹתוֹ = <obj.> it
+12 וְאֶת־ = and <obj.>
+13 כָּל־ = all
+14 כֵּלָיו = articles its
+15 וְאֶת־ = and <obj.>
+16 הַמִּזְבֵּחַ = the altar (altar)
+17 וְאֶת־ = and <obj.>
+18 כָּל־ = all
+19 כֵּלָיו = articles its
+20 וַיִּמְשָׁחֵם = and he anointed them
+21 וַיְקַדֵּשׁ = and he consecrated
+22 אֹתָם = <obj.> them
+
+## 4:7:2
+KO: 그들이 예물을 드렸으니, 곧 이스라엘의 지휘관들, 그들 조상들의 집의 우두머리들, 그들은 지파들의 지휘관들, 그들은 계수된 자들 위에 서 있는 자들이었다.
+1 וַיַּקְרִיבוּ = and they brought near (to present)
+2 נְשִׂיאֵי = [the] leaders of
+3 יִשְׂרָאֵל = Israel
+4 רָאשֵׁי = [the] heads of (head)
+5 בֵּית = [the] house of (house)
+6 אֲבֹתָם = ancestors their (father)
+7 הֵם = they
+8 נְשִׂיאֵי = [were] [the] leaders of
+9 הַמַּטֹּת = the tribes (tribe)
+10 הֵם = they
+11 הָעֹמְדִים = [were] the [ones who] stood (to stand)
+12 עַל־ = over (upon)
+13 הַפְּקֻדִים = the enrolled [men] (to reckon)
+
+## 4:7:3
+KO: 그들이 여호와 앞에 그들의 예물을 가져왔으니, 덮개 있는 수레 여섯과 소 열둘이라. 수레는 족장 둘에 하나씩이고, 소는 하나에 하나씩이며, 그것들을 장막 앞에 드렸다.
+1 וַיָּבִיאוּ = and they brought (to come (in))
+2 אֶת־ = <obj.>
+3 קָרְבָּנָם = offering their (offering)
+4 לִפְנֵי = <to> before
+5 יְהוָה = Yahweh (LORD)
+6 שֵׁשׁ־ = six
+7 עֶגְלֹת = carts of
+8 צָב = covering (litter)
+9 וּשְׁנֵי = and two [plus]
+10 עָשָׂר = ten
+11 בָּקָר = ox[en] (cattle)
+12 עֲגָלָה = a cart
+13 עַל־ = on (upon)
+14 שְׁנֵי = two of
+15 הַנְּשִׂאִים = the leaders (leader)
+16 וְשׁוֹר = and an ox (cattle)
+17 לְאֶחָד = for one (one)
+18 וַיַּקְרִיבוּ = and they brought near (to present)
+19 אוֹתָם = <obj.> them
+20 לִפְנֵי = <to> before
+21 הַמִּשְׁכָּן = the tabernacle (tabernacle)
+
+## 4:7:4
+KO: 그리고 여호와께서 모세에게 말씀하셨다, 말씀하시기를.
+1 וַיֹּאמֶר = and he said
+2 יְהוָה = Yahweh (LORD)
+3 אֶל־ = to (to(wards))
+4 מֹשֶׁה = Moses
+5 לֵּאמֹר = <to> saying
+
+## 4:7:5
+KO: 그것을 그들에게서 취하라. 그리고 그것들이 회막의 봉사를 행하기 위해 있게 하고, 너는 그것들을 레위인들에게 주되, 각자의 봉사에 따라 줄지니라.
+1 קַח = take [them] (to take)
+2 מֵאִתָּם = from with <the> them (with)
+3 וְהָיוּ = and they will be (to be)
+4 לַעֲבֹד = to serve
+5 אֶת־ = <obj.>
+6 עֲבֹדַת = [the] service of
+7 אֹהֶל = [the] tent of (tent)
+8 מוֹעֵד = meeting
+9 וְנָתַתָּה = and you will give (to give)
+10 אוֹתָם = <obj.> them
+11 אֶל־ = to (to(wards))
+12 הַלְוִיִּם = the Levites (Levi)
+13 אִישׁ = each one (man)
+14 כְּפִי = according to [the] mouth of (lip)
+15 עֲבֹדָתוֹ = service his
+
+## 4:7:6
+KO: 그리고 모세가 그 수레들과 그 소들을 취하였고, 그것들을 레위인들에게 주었다.
+1 וַיִּקַּח = and he took (to take)
+2 מֹשֶׁה = Moses
+3 אֶת־ = <obj.>
+4 הָעֲגָלֹת = the carts (cart)
+5 וְאֶת־ = and <obj.>
+6 הַבָּקָר = the ox[en] (cattle)
+7 וַיִּתֵּן = and he gave (to give)
+8 אוֹתָם = <obj.> them
+9 אֶל־ = to (to(wards))
+10 הַלְוִיִּם = the Levites (Levi)
+
+## 4:7:7
+KO: 그는 게르손 자손들에게 그들의 직무에 따라 수레 둘과 소 넷을 주었다.
+1 אֵת = <obj.>
+2 שְׁתֵּי = two of (two)
+3 הָעֲגָלֹת = the carts (cart)
+4 וְאֵת = and <obj.>
+5 אַרְבַּעַת = four of (four)
+6 הַבָּקָר = the ox[en] (cattle)
+7 נָתַן = he gave (to give)
+8 לִבְנֵי = to [the] descendants of (son)
+9 גֵרְשׁוֹן = Gershon
+10 כְּפִי = according to [the] mouth of (lip)
+11 עֲבֹדָתָם = service their (service)
+
+## 4:7:8
+KO: 그리고 수레 넷과 소 여덟을 그들의 직무에 따라 므라리의 아들들에게 주었으니, 제사장 아론의 아들 이다말의 손하에 있었다.
+1 וְאֵת = and <obj.>
+2 אַרְבַּע = four of (four)
+3 הָעֲגָלֹת = the carts (cart)
+4 וְאֵת = and <obj.>
+5 שְׁמֹנַת = eight of (eight)
+6 הַבָּקָר = the ox[en] (cattle)
+7 נָתַן = he gave (to give)
+8 לִבְנֵי = to [the] descendants of
+9 מְרָרִי = Merari
+10 כְּפִי = according to [the] mouth of (lip)
+11 עֲבֹדָתָם = service their (service)
+12 בְּיַד = in [the] hand of (hand)
+13 אִיתָמָר = Ithamar
+14 בֶּן־ = [the] son of
+15 אַהֲרֹן = Aaron
+16 הַכֹּהֵן = the priest (priest)
+
+## 4:7:9
+KO: 그리고 고핫의 자손들에게는 주지 아니하였으니, 왜냐하면 그들의 성소의 섬김은 어깨로 메는 것이었기 때문이다.
+1 וְלִבְנֵי = and to [the] descendants of (son)
+2 קְהָת = Kohath
+3 לֹא = not
+4 נָתָן = he gave (to give)
+5 כִּי־ = for
+6 עֲבֹדַת = [the] service of (service)
+7 הַקֹּדֶשׁ = the holy thing[s] (holiness)
+8 עֲלֵהֶם = [was] on them (upon)
+9 בַּכָּתֵף = on the shoulder (shoulder)
+10 יִשָּׂאוּ = they carried (to lift)
+
+## 4:7:10
+KO: 족장들이 제단을 기름 부어 바르던 날에 제단의 봉헌을 위하여 예물을 가져왔고, 족장들이 제단 앞에 그들의 예물을 드렸더라.
+1 וַיַּקְרִיבוּ = and they brought near
+2 הַנְּשִׂאִים = the leaders
+3 אֵת = <obj.>
+4 חֲנֻכַּת = [the] dedication of (dedication)
+5 הַמִּזְבֵּחַ = the altar
+6 בְּיוֹם = on [the] day (day;_when)
+7 הִמָּשַׁח = was anointed (to anoint)
+8 אֹתוֹ = <obj.> it
+9 וַיַּקְרִיבוּ = and they brought near
+10 הַנְּשִׂיאִם = the leaders
+11 אֶת־ = <obj.>
+12 קָרְבָּנָם = offering their (offering)
+13 לִפְנֵי = <to> before (face)
+14 הַמִּזְבֵּחַ = the altar
+
+## 4:7:11
+KO: 여호와께서 모세에게 말씀하셨다. "족장들이 하루 한 사람씩, 족장들이 하루 한 사람씩 제단 봉헌을 위하여 그들의 예물을 가져와야 한다."
+1 וַיֹּאמֶר = and he said (to say)
+2 יְהוָה = Yahweh (LORD)
+3 אֶל־ = to (to(wards))
+4 מֹשֶׁה = Moses
+5 נָשִׂיא = a leader
+6 אֶחָד = one
+7 לַיּוֹם = for the day
+8 נָשִׂיא = a leader
+9 אֶחָד = one
+10 לַיּוֹם = for the day
+11 יַקְרִיבוּ = they will bring near (to present)
+12 אֶת־ = <obj.> ([Obj.])
+13 קָרְבָּנָם = offering their (offering)
+14 לַחֲנֻכַּת = for [the] dedication of (dedication)
+15 הַמִּזְבֵּחַ ס = the altar (altar)
+
+## 4:7:12
+KO: 그리고 첫째 날에 그의 예물을 드린 자는 유다 지파의 암미나답의 아들 나손이었다.
+1 וַיְהִי = and it was (to be)
+2 הַמַּקְרִיב = the [one who] brought near (to present)
+3 בַּיּוֹם = on the day (day;_when)
+4 הָרִאשׁוֹן = <the> first (first)
+5 אֶת־ = <obj.> ([Obj.])
+6 קָרְבָּנוֹ = offering his (offering)
+7 נַחְשׁוֹן = [was] Nahshon (Nahshon)
+8 בֶּן־ = [the] son of (son)
+9 עַמִּינָדָב = Amminadab
+10 לְמַטֵּה = of [the] tribe of (tribe)
+11 יְהוּדָה = Judah
+
+## 4:7:13
+KO: 그의 예물은 은쟁반 하나, 그것의 무게는 성소의 세겔대로 백삼십 세겔이었고, 은바리 하나, 칠십 세겔이라, 이 둘은 기름 섞인 고운 가루로 가득 찼으니, 소제물로 (사용할 것이었다).
+1 וְקָרְבָּנוֹ = and offering his (offering)
+2 קַעֲרַת־ = [was] a dish of (dish)
+3 כֶּסֶף = silver
+4 אַחַת = one
+5 שְׁלֹשִׁים = [was] thirty (thirty)
+6 וּמֵאָה = and one hundred (hundred)
+7 מִשְׁקָלָהּ = weight its (weight)
+8 מִזְרָק = a bowl (bowl)
+9 אֶחָד = one
+10 כֶּסֶף = silver
+11 שִׁבְעִים = seventy
+12 שֶׁקֶל = shekel[s]
+13 בְּשֶׁקֶל = by [the] shekel of
+14 הַקֹּדֶשׁ = the holy place (holiness)
+15 שְׁנֵיהֶם = both of them (two)
+16 מְלֵאִים = [were] full (full)
+17 סֹלֶת = fine flour
+18 בְּלוּלָה = mixed (to mix)
+19 בַשֶּׁמֶן = with <the> oil (oil)
+20 לְמִנְחָה = to a grain offering (offering)
+
+## 4:7:14
+KO: 금 열 세겔의 숟가락 하나, 그것은 향으로 가득 찼더라.
+1 כַּף = a pan (palm)
+2 אַחַת = one
+3 עֲשָׂרָה = ten
+4 זָהָב = gold
+5 מְלֵאָה = full
+6 קְטֹרֶת = incense
+
+## 4:7:15
+KO: 수송아지 하나와, 소의 새끼(수양) 하나와, 일 년 된 어린 양 하나를 번제물로 드리며
+1 פַּר = a young bull (bullock)
+2 אֶחָד = one
+3 בֶּן־ = a young one of
+4 בָּקָר = cattle
+5 אַיִל = a ram (ram)
+6 אֶחָד = one
+7 כֶּבֶשׂ־ = a lamb (lamb)
+8 אֶחָד = one
+9 בֶּן־ = [the] son of
+10 שְׁנָתוֹ = year its (year)
+11 לְעֹלָה = to a burnt offering (burnt offering)
+
+## 4:7:16
+KO: 염소들 중의 수염소 하나가 속죄제를 위하여.
+1 שְׂעִיר־ = a male goat of (he-goat)
+2 עִזִּים = goats (goat)
+3 אֶחָד = one
+4 לְחַטָּאת = to a sin offering (sin)
+
+## 4:7:17
+KO: 그리고 화목제물로는 소 두 마리, 수양 다섯 마리, 수염소 다섯 마리, 일 년 된 어린 수양 다섯 마리이니, 이것이 암미나답의 아들 나손의 예물이었다.
+1 וּלְזֶבַח = and to [the] sacrifice of (sacrifice)
+2 הַשְּׁלָמִים = the peace offerings (peace offering)
+3 בָּקָר = ox[en] (cattle)
+4 שְׁנַיִם = two
+5 אֵילִם = rams (ram)
+6 חֲמִשָּׁה = five
+7 עַתּוּדִים = goats (goat)
+8 חֲמִשָּׁה = five
+9 כְּבָשִׂים = lambs (lamb)
+10 בְּנֵי־ = sons of
+11 שָׁנָה = a year (year)
+12 חֲמִשָּׁה = five
+13 זֶה = this
+14 קָרְבַּן = [was] [the] offering of (offering)
+15 נַחְשׁוֹן = Nahshon
+16 בֶּן־ = [the] son of
+17 עַמִּינָדָב פ = Amminadab
+
+## 4:7:18
+KO: 둘째 날에는 잇사갈의 지휘관 수알의 아들 느다넬이 드렸다.
+1 בַּיּוֹם = on the day (day;_when)
+2 הַשֵּׁנִי = <the> second (second)
+3 הִקְרִיב = he brought near (to present)
+4 נְתַנְאֵל = Nethanel
+5 בֶּן־ = [the] son of (son)
+6 צוּעָר = Zuar
+7 נְשִׂיא = [the] leader of (leader)
+8 יִשָּׂשכָר = Issachar
+
+## 4:7:19
+KO: 그가 자신의 예물을 드렸으니, 성소의 세겔에 따라 일백삼십 세겔 무게의 은 대접 하나와 칠십 세겔의 은 바리 하나라. 이 둘은 기름 섞은 고운 가루로 가득 찼으니 소제물이라.
+1 הִקְרִב = he brought near (to present)
+2 אֶת־ = <obj.> ([Obj.])
+3 קָרְבָּנוֹ = offering his (offering)
+4 קַעֲרַת־ = a dish of (dish)
+5 כֶּסֶף = silver
+6 אַחַת = one
+7 שְׁלֹשִׁים = [was] thirty (thirty)
+8 וּמֵאָה = and one hundred (hundred)
+9 מִשְׁקָלָהּ = weight its (weight)
+10 מִזְרָק = a bowl (bowl)
+11 אֶחָד = one
+12 כֶּסֶף = silver
+13 שִׁבְעִים = seventy
+14 שֶׁקֶל = shekel[s]
+15 בְּשֶׁקֶל = by [the] shekel of
+16 הַקֹּדֶשׁ = the holy place (holiness)
+17 שְׁנֵיהֶם = both of them (two)
+18 מְלֵאִים = [were] full (full)
+19 סֹלֶת = fine flour
+20 בְּלוּלָה = mixed (to mix)
+21 בַשֶּׁמֶן = with <the> oil (oil)
+22 לְמִנְחָה = to a grain offering (offering)
+
+## 4:7:20
+KO: 금 열 세겔 무게의 숟가락 하나, 그것은 향으로 가득 찼고.
+1 כַּף = a pan (palm)
+2 אַחַת = one
+3 עֲשָׂרָה = ten
+4 זָהָב = gold
+5 מְלֵאָה = full
+6 קְטֹרֶת = incense
+
+## 4:7:21
+KO: 수송아지 하나와, 숫양 하나와, 일 년 된 어린 양 하나가 번제물이다.
+1 פַּר = a young bull (bullock)
+2 אֶחָד = one
+3 בֶּן־ = a young one of
+4 בָּקָר = cattle
+5 אַיִל = a ram (ram)
+6 אֶחָד = one
+7 כֶּבֶשׂ־ = a lamb (lamb)
+8 אֶחָד = one
+9 בֶּן־ = [the] son of
+10 שְׁנָתוֹ = year its (year)
+11 לְעֹלָה = to a burnt offering (burnt offering)
+
+## 4:7:22
+KO: 염소들 중 수염소 하나가 속죄제물이라.
+1 שְׂעִיר־ = a male goat of (he-goat)
+2 עִזִּים = goats (goat)
+3 אֶחָד = one
+4 לְחַטָּאת = to a sin offering (sin)
+
+## 4:7:23
+KO: 그리고 화목 제물로 소 두 마리, 수양 다섯 마리, 수염소 다섯 마리, 일 년 된 어린 수양 다섯 마리, 이것은 수알의 아들 느다넬의 예물이었다.
+1 וּלְזֶבַח = and to [the] sacrifice of (sacrifice)
+2 הַשְּׁלָמִים = the peace offerings (peace offering)
+3 בָּקָר = ox[en] (cattle)
+4 שְׁנַיִם = two
+5 אֵילִם = rams (ram)
+6 חֲמִשָּׁה = five
+7 עַתּוּדִים = goats (goat)
+8 חֲמִשָּׁה = five
+9 כְּבָשִׂים = lambs (lamb)
+10 בְּנֵי־ = sons of
+11 שָׁנָה = a year (year)
+12 חֲמִשָּׁה = five
+13 זֶה = this
+14 קָרְבַּן = [was] [the] offering of (offering)
+15 נְתַנְאֵל = Nethanel
+16 בֶּן־ = [the] son of
+17 צוּעָר פ = Zuar
+
+## 4:7:24
+KO: 그 셋째 날에는 스불론 자손의 지휘관 헬론의 아들 엘리압이 드렸다.
+1 בַּיּוֹם = on the day (day;_when)
+2 הַשְּׁלִישִׁי = <the> third (third)
+3 נָשִׂיא = [the] leader (leader)
+4 לִבְנֵי = of [the] descendants of
+5 זְבוּלֻן = Zebulun
+6 אֱלִיאָב = Eliab
+7 בֶּן־ = [the] son of
+8 חֵלֹן = Helon
+
+## 4:7:25
+KO: 그의 예물은 성소의 세겔에 따라 무게가 130세겔인 은쟁반 하나와 70세겔인 은대접 하나였으니, 이 둘은 기름 섞인 고운 가루로 가득하여 소제물로 삼았다.
+1 קָרְבָּנוֹ = offering his (offering)
+2 קַעֲרַת־ = [was] a dish of (dish)
+3 כֶּסֶף = silver
+4 אַחַת = one
+5 שְׁלֹשִׁים = [was] thirty (thirty)
+6 וּמֵאָה = and one hundred (hundred)
+7 מִשְׁקָלָהּ = weight its (weight)
+8 מִזְרָק = a bowl (bowl)
+9 אֶחָד = one
+10 כֶּסֶף = silver
+11 שִׁבְעִים = seventy
+12 שֶׁקֶל = shekel[s]
+13 בְּשֶׁקֶל = by [the] shekel of
+14 הַקֹּדֶשׁ = the holy place (holiness)
+15 שְׁנֵיהֶם = both of them (two)
+16 מְלֵאִים = [were] full (full)
+17 סֹלֶת = fine flour
+18 בְּלוּלָה = mixed (to mix)
+19 בַשֶּׁמֶן = with <the> oil (oil)
+20 לְמִנְחָה = to a grain offering (offering)
+
+## 4:7:26
+KO: 금 십 세겔 무게의 숟가락 하나, 이것은 향으로 가득 찼고
+1 כַּף = a pan (palm)
+2 אַחַת = one
+3 עֲשָׂרָה = ten
+4 זָהָב = gold
+5 מְלֵאָה = full
+6 קְטֹרֶת = incense
+
+## 4:7:27
+KO: 수송아지 하나와, 숫양 하나와, 일 년 된 어린 양 하나를 번제물로 드려라.
+1 פַּר = a young bull (bullock)
+2 אֶחָד = one
+3 בֶּן־ = a young one of
+4 בָּקָר = cattle
+5 אַיִל = a ram (ram)
+6 אֶחָד = one
+7 כֶּבֶשׂ־ = a lamb (lamb)
+8 אֶחָד = one
+9 בֶּן־ = [the] son of
+10 שְׁנָתוֹ = year its (year)
+11 לְעֹלָה = to a burnt offering (burnt offering)
+
+## 4:7:28
+KO: 염소들의 수염소 하나가 속죄제를 위하여.
+1 שְׂעִיר־ = a male goat of (he-goat)
+2 עִזִּים = goats (goat)
+3 אֶחָד = one
+4 לְחַטָּאת = to a sin offering (sin)
+
+## 4:7:29
+KO: 그리고 화목 제물로 소 둘과, 수양 다섯과, 수염소 다섯과, 일 년 된 어린 수양 다섯이라. 이것이 헬론의 아들 엘리압의 예물이었다.
+1 וּלְזֶבַח = and to [the] sacrifice of (sacrifice)
+2 הַשְּׁלָמִים = the peace offerings (peace offering)
+3 בָּקָר = ox[en] (cattle)
+4 שְׁנַיִם = two
+5 אֵילִם = rams (ram)
+6 חֲמִשָּׁה = five
+7 עַתֻּדִים = goats (goat)
+8 חֲמִשָּׁה = five
+9 כְּבָשִׂים = lambs (lamb)
+10 בְּנֵי־ = sons of
+11 שָׁנָה = a year (year)
+12 חֲמִשָּׁה = five
+13 זֶה = this
+14 קָרְבַּן = [was] [the] offering of (offering)
+15 אֱלִיאָב = Eliab
+16 בֶּן־ = [the] son of
+17 חֵלֹן פ = Helon
+
+## 4:7:30
+KO: 넷째 날에는 르우벤 자손의 지휘관 스데울의 아들 엘리술이 드렸다.
+1 בַּיּוֹם = on the day (day;_when)
+2 הָרְבִיעִי = <the> fourth (fourth)
+3 נָשִׂיא = [the] leader (leader)
+4 לִבְנֵי = of [the] descendants of
+5 רְאוּבֵן = Reuben
+6 אֱלִיצוּר = Elizur
+7 בֶּן־ = [the] son of
+8 שְׁדֵיאוּר = Shedeur
+
+## 4:7:31
+KO: 그의 예물은 성소의 세겔에 따라 일백삼십 세겔 무게의 은쟁반 하나와, 칠십 세겔의 은 바리 하나였으니, 이 둘은 기름 섞은 고운 가루로 가득 찼으며, 소제물이었다.
+1 קָרְבָּנוֹ = offering his (offering)
+2 קַעֲרַת־ = [was] a dish of (dish)
+3 כֶּסֶף = silver
+4 אַחַת = one
+5 שְׁלֹשִׁים = [was] thirty (thirty)
+6 וּמֵאָה = and one hundred (hundred)
+7 מִשְׁקָלָהּ = weight its (weight)
+8 מִזְרָק = a bowl (bowl)
+9 אֶחָד = one
+10 כֶּסֶף = silver
+11 שִׁבְעִים = seventy
+12 שֶׁקֶל = shekel[s]
+13 בְּשֶׁקֶל = by [the] shekel of
+14 הַקֹּדֶשׁ = the holy place (holiness)
+15 שְׁנֵיהֶם = both of them (two)
+16 מְלֵאִים = [were] full (full)
+17 סֹלֶת = fine flour
+18 בְּלוּלָה = mixed (to mix)
+19 בַשֶּׁמֶן = with <the> oil (oil)
+20 לְמִנְחָה = to a grain offering (offering)
+
+## 4:7:32
+KO: 금 열 세겔 무게의 숟가락 하나, 이것은 향으로 가득 찼고.
+1 כַּף = a pan (palm)
+2 אַחַת = one
+3 עֲשָׂרָה = ten
+4 זָהָב = gold
+5 מְלֵאָה = full
+6 קְטֹרֶת = incense
+
+## 4:7:33
+KO: 수소 하나, 소의 아들(수송아지), 그리고 숫양 하나, 그리고 일 년 된 어린 양 하나를 번제물로(드려라).
+1 פַּר = a young bull (bullock)
+2 אֶחָד = one
+3 בֶּן־ = a young one of
+4 בָּקָר = cattle
+5 אַיִל = a ram (ram)
+6 אֶחָד = one
+7 כֶּבֶשׂ־ = a lamb (lamb)
+8 אֶחָד = one
+9 בֶּן־ = [the] son of
+10 שְׁנָתוֹ = year its (year)
+11 לְעֹלָה = to a burnt offering (burnt offering)
+
+## 4:7:34
+KO: 속죄제를 위한 염소들의 수염소 하나
+1 שְׂעִיר־ = a male goat of (he-goat)
+2 עִזִּים = goats (goat)
+3 אֶחָד = one
+4 לְחַטָּאת = to a sin offering (sin)
+
+## 4:7:35
+KO: 그리고 화목제의 제물로 소 두 마리, 수양 다섯, 수염소 다섯, 일 년 된 어린 양 다섯. 이것이 스데울의 아들 엘리술의 예물이었다.
+1 וּלְזֶבַח = and to [the] sacrifice of (sacrifice)
+2 הַשְּׁלָמִים = the peace offerings (peace offering)
+3 בָּקָר = ox[en] (cattle)
+4 שְׁנַיִם = two
+5 אֵילִם = rams (ram)
+6 חֲמִשָּׁה = five
+7 עַתֻּדִים = goats (goat)
+8 חֲמִשָּׁה = five
+9 כְּבָשִׂים = lambs (lamb)
+10 בְּנֵי־ = sons of
+11 שָׁנָה = a year (year)
+12 חֲמִשָּׁה = five
+13 זֶה = this
+14 קָרְבַּן = [was] [the] offering of (offering)
+15 אֱלִיצוּר = Elizur
+16 בֶּן־ = [the] son of
+17 שְׁדֵיאוּר פ = Shedeur
+
+## 4:7:36
+KO: 다섯째 날에는 시므온 자손들의 지도자, 수리삿대의 아들 슬루미엘이 헌물을 드렸다.
+1 בַּיּוֹם = on the day (day;_when)
+2 הַחֲמִישִׁי = <the> fifth (fifth)
+3 נָשִׂיא = [the] leader (leader)
+4 לִבְנֵי = of [the] descendants of
+5 שִׁמְעוֹן = Simeon
+6 שְׁלֻמִיאֵל = Shelumiel
+7 בֶּן־ = [the] son of
+8 צוּרִישַׁדָּי = Zurishaddai
+
+## 4:7:37
+KO: 그의 예물은 은쟁반 하나인데 그 무게는 성소의 세겔로 일백삼십 세겔이었고, 은바리 하나는 칠십 세겔이었으니, 이 둘은 기름 섞인 고운 가루로 가득 찬 소제물이었다.
+1 קָרְבָּנוֹ = offering his (offering)
+2 קַעֲרַת־ = [was] a dish of (dish)
+3 כֶּסֶף = silver
+4 אַחַת = one
+5 שְׁלֹשִׁים = [was] thirty (thirty)
+6 וּמֵאָה = and one hundred (hundred)
+7 מִשְׁקָלָהּ = weight its (weight)
+8 מִזְרָק = a bowl (bowl)
+9 אֶחָד = one
+10 כֶּסֶף = silver
+11 שִׁבְעִים = seventy
+12 שֶׁקֶל = shekel[s]
+13 בְּשֶׁקֶל = by [the] shekel of
+14 הַקֹּדֶשׁ = the holy place (holiness)
+15 שְׁנֵיהֶם = both of them (two)
+16 מְלֵאִים = [were] full (full)
+17 סֹלֶת = fine flour
+18 בְּלוּלָה = mixed (to mix)
+19 בַשֶּׁמֶן = with <the> oil (oil)
+20 לְמִנְחָה = to a grain offering (offering)
+
+## 4:7:38
+KO: 금 십 세겔 무게의 숟가락 하나, 이것은 향으로 가득 찼더라.
+1 כַּף = a pan (palm)
+2 אַחַת = one
+3 עֲשָׂרָה = ten
+4 זָהָב = gold
+5 מְלֵאָה = full
+6 קְטֹרֶת = incense
+
+## 4:7:39
+KO: 그리고 번제물로 수송아지 하나와, 수양 하나와, 일 년 된 어린양 하나이며
+1 פַּר = a young bull (bullock)
+2 אֶחָד = one
+3 בֶּן־ = a young one of
+4 בָּקָר = cattle
+5 אַיִל = a ram (ram)
+6 אֶחָד = one
+7 כֶּבֶשׂ־ = a lamb (lamb)
+8 אֶחָד = one
+9 בֶּן־ = [the] son of
+10 שְׁנָתוֹ = year its (year)
+11 לְעֹלָה = to a burnt offering (burnt offering)
+
+## 4:7:40
+KO: 염소들 중의 수염소 하나를 속죄제물을 위하여.
+1 שְׂעִיר־ = a male goat of (he-goat)
+2 עִזִּים = goats (goat)
+3 אֶחָד = one
+4 לְחַטָּאת = to a sin offering (sin)
+
+## 4:7:41
+KO: 그리고 화목제의 제물로 소 두 마리, 수양 다섯 마리, 수염소 다섯 마리, 일 년 된 어린 양 다섯 마리라. 이것은 수리삿대의 아들 슬루미엘의 예물이었더라.
+1 וּלְזֶבַח = and to [the] sacrifice of (sacrifice)
+2 הַשְּׁלָמִים = the peace offerings (peace offering)
+3 בָּקָר = ox[en] (cattle)
+4 שְׁנַיִם = two
+5 אֵילִם = rams (ram)
+6 חֲמִשָּׁה = five
+7 עַתֻּדִים = goats (goat)
+8 חֲמִשָּׁה = five
+9 כְּבָשִׂים = lambs (lamb)
+10 בְּנֵי־ = sons of
+11 שָׁנָה = a year (year)
+12 חֲמִשָּׁה = five
+13 זֶה = this
+14 קָרְבַּן = [was] [the] offering of (offering)
+15 שְׁלֻמִיאֵל = Shelumiel
+16 בֶּן־ = [the] son of
+17 צוּרִישַׁדָּי פ = Zurishaddai
+
+## 4:7:42
+KO: 여섯째 날에는 갓 자손의 지휘관 드우엘의 아들 엘리아삽이 드렸으니.
+1 בַּיּוֹם = on the day (day;_when)
+2 הַשִּׁשִּׁי = <the> sixth (sixth)
+3 נָשִׂיא = [the] leader (leader)
+4 לִבְנֵי = of [the] descendants of
+5 גָד = Gad
+6 אֶלְיָסָף = Eliasaph
+7 בֶּן־ = [the] son of
+8 דְּעוּאֵל = Deuel
+
+## 4:7:43
+KO: 그의 예물은 성소의 세겔에 따라 무게가 백삼십 세겔인 은쟁반 하나와, 칠십 세겔인 은대접 하나라, 이 둘은 기름 섞은 고운 가루로 가득 찼으니 소제물이라.
+1 קָרְבָּנוֹ = offering his (offering)
+2 קַעֲרַת־ = [was] a dish of (dish)
+3 כֶּסֶף = silver
+4 אַחַת = one
+5 שְׁלֹשִׁים = [was] thirty (thirty)
+6 וּמֵאָה = and one hundred (hundred)
+7 מִשְׁקָלָהּ = weight its (weight)
+8 מִזְרָק = a bowl (bowl)
+9 אֶחָד = one
+10 כֶּסֶף = silver
+11 שִׁבְעִים = seventy
+12 שֶׁקֶל = shekel[s]
+13 בְּשֶׁקֶל = by [the] shekel of
+14 הַקֹּדֶשׁ = the holy place (holiness)
+15 שְׁנֵיהֶם = both of them (two)
+16 מְלֵאִים = [were] full (full)
+17 סֹלֶת = fine flour
+18 בְּלוּלָה = mixed (to mix)
+19 בַשֶּׁמֶן = with <the> oil (oil)
+20 לְמִנְחָה = to a grain offering (offering)
+
+## 4:7:44
+KO: 금 십 세겔 무게의 숟가락 하나, 이것은 향으로 가득 찼다.
+1 כַּף = a pan (palm)
+2 אַחַת = one
+3 עֲשָׂרָה = ten
+4 זָהָב = gold
+5 מְלֵאָה = full
+6 קְטֹרֶת = incense
+
+## 4:7:45
+KO: 수송아지 하나, 소의 자식 하나, 숫양 하나, 일 년 된 어린양 하나를 번제물로.
+1 פַּר = a young bull (bullock)
+2 אֶחָד = one
+3 בֶּן־ = a young one of
+4 בָּקָר = cattle
+5 אַיִל = a ram (ram)
+6 אֶחָד = one
+7 כֶּבֶשׂ־ = a lamb (lamb)
+8 אֶחָד = one
+9 בֶּן־ = [the] son of
+10 שְׁנָתוֹ = year its (year)
+11 לְעֹלָה = to a burnt offering (burnt offering)
+
+## 4:7:46
+KO: 염소들 중에서 수염소 하나를 속죄제로 삼을지니라.
+1 שְׂעִיר־ = a male goat of (he-goat)
+2 עִזִּים = goats (goat)
+3 אֶחָד = one
+4 לְחַטָּאת = to a sin offering (sin)
+
+## 4:7:47
+KO: 그리고 화목제의 제물로 소 둘과, 수양 다섯과, 숫염소 다섯과, 일 년 된 어린 양 다섯이라. 이것이 드우엘의 아들 엘리아삽의 예물이었더라.
+1 וּלְזֶבַח = and to [the] sacrifice of (sacrifice)
+2 הַשְּׁלָמִים = the peace offerings (peace offering)
+3 בָּקָר = ox[en] (cattle)
+4 שְׁנַיִם = two
+5 אֵילִם = rams (ram)
+6 חֲמִשָּׁה = five
+7 עַתֻּדִים = goats (goat)
+8 חֲמִשָּׁה = five
+9 כְּבָשִׂים = lambs (lamb)
+10 בְּנֵי־ = sons of
+11 שָׁנָה = a year (year)
+12 חֲמִשָּׁה = five
+13 זֶה = this
+14 קָרְבַּן = [was] [the] offering of (offering)
+15 אֶלְיָסָף = Eliasaph
+16 בֶּן־ = [the] son of
+17 דְּעוּאֵל פ = Deuel
+
+## 4:7:48
+KO: 일곱째 날에는 에브라임 자손들의 지휘관, 암미훗의 아들 엘리사마가 드렸다.
+1 בַּיּוֹם = on the day (day;_when)
+2 הַשְּׁבִיעִי = <the> seventh (seventh)
+3 נָשִׂיא = [the] leader (leader)
+4 לִבְנֵי = of [the] descendants of
+5 אֶפְרָיִם = Ephraim
+6 אֱלִישָׁמָע = Elishama
+7 בֶּן־ = [the] son of
+8 עַמִּיהוּד = Ammihud
+
+## 4:7:49
+KO: 그의 예물은 은쟁반 하나인데 그 무게는 성소의 세겔로 일백삼십 세겔이었고, 은바리 하나는 칠십 세겔이며, 이 둘은 기름 섞인 고운 가루로 가득 찼으니 소제물이라.
+1 קָרְבָּנוֹ = offering his (offering)
+2 קַעֲרַת־ = [was] a dish of (dish)
+3 כֶּסֶף = silver
+4 אַחַת = one
+5 שְׁלֹשִׁים = [was] thirty (thirty)
+6 וּמֵאָה = and one hundred (hundred)
+7 מִשְׁקָלָהּ = weight its (weight)
+8 מִזְרָק = a bowl (bowl)
+9 אֶחָד = one
+10 כֶּסֶף = silver
+11 שִׁבְעִים = seventy
+12 שֶׁקֶל = shekel[s]
+13 בְּשֶׁקֶל = by [the] shekel of
+14 הַקֹּדֶשׁ = the holy place (holiness)
+15 שְׁנֵיהֶם = both of them (two)
+16 מְלֵאִים = [were] full (full)
+17 סֹלֶת = fine flour
+18 בְּלוּלָה = mixed (to mix)
+19 בַשֶּׁמֶן = with <the> oil (oil)
+20 לְמִנְחָה = to a grain offering (offering)

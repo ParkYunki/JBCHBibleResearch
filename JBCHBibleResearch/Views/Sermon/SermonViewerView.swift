@@ -22,6 +22,45 @@
 
 import SwiftUI
 import BibleResearchModels
+#if os(iOS)
+import UIKit
+#endif
+
+/// [2026-11-14] 설교 뷰어가 열려 있는 동안 화면이 꺼지지 않게 한다. 뷰어 창이 여러 개일 수 있어(아이패드·맥) 개수를 세어
+/// 마지막 뷰어가 닫힐 때만 되돌린다.
+/// - iOS: `UIApplication.isIdleTimerDisabled`(앱 전체 값이라 개수 관리가 필요하다).
+/// - macOS: `ProcessInfo.beginActivity(.idleDisplaySleepDisabled)`.
+@MainActor
+enum SermonKeepAwake {
+    private static var holders = 0
+    #if os(macOS)
+    private static var activity: NSObjectProtocol?
+    #endif
+
+    static func acquire() {
+        holders += 1
+        if holders == 1 { apply(true) }
+    }
+
+    static func release() {
+        guard holders > 0 else { return }
+        holders -= 1
+        if holders == 0 { apply(false) }
+    }
+
+    private static func apply(_ on: Bool) {
+        #if os(iOS)
+        UIApplication.shared.isIdleTimerDisabled = on
+        #else
+        if on {
+            activity = ProcessInfo.processInfo.beginActivity(options: [.idleDisplaySleepDisabled, .userInitiated], reason: "Sermon viewer")
+        } else if let activity {
+            ProcessInfo.processInfo.endActivity(activity)
+            self.activity = nil
+        }
+        #endif
+    }
+}
 
 struct SermonViewerView: View {
     let subject: SermonEditingSubject
@@ -51,6 +90,15 @@ struct SermonViewerView: View {
     @State private var peekBottom = false
     @State private var toast: String?
     @State private var toastTask: Task<Void, Never>?
+
+    // MARK: [2026-11-14] 화면 꺼짐 방지 · 설교 타이머
+    @Environment(\.scenePhase) private var scenePhase
+    @AppStorage(SermonPrefs.viewerKeepAwake) private var keepAwake = true
+    @AppStorage(SermonPrefs.viewerTargetMinutes) private var targetMinutes = SermonPrefs.defaultViewerTargetMinutes
+    @State private var holdsAwake = false
+    /// 타이머: 지금 달리는 구간의 시작 시각(멈춰 있으면 nil)과 그 전까지 쌓인 시간.
+    @State private var timerStart: Date?
+    @State private var timerBase: TimeInterval = 0
 
     /// "Aa" 스테퍼가 오가는 단계(80~200%).
     private static let scaleSteps: [Double] = [0.8, 0.9, 1.0, 1.1, 1.25, 1.5, 1.75, 2.0]
@@ -119,6 +167,10 @@ struct SermonViewerView: View {
         // 번질 수 있어 쓰지 않는다.
         .background(SermonViewerPaper.color.ignoresSafeArea())
         .environment(\.colorScheme, .light)
+        .onAppear { updateKeepAwake() }
+        .onDisappear { releaseKeepAwake() }
+        .onChange(of: keepAwake) { _, _ in updateKeepAwake() }
+        .onChange(of: scenePhase) { _, _ in updateKeepAwake() }
         .navigationTitle("설교 뷰어")
         #if DEBUG && os(iOS)
         // [임시 진단] 뷰어 화면이 나타나고 사라지는 시점 — `SceneDiagnostics.swift` 참고.
@@ -338,6 +390,8 @@ struct SermonViewerView: View {
     private var topBar: some View {
         HStack(spacing: 14) {
             Spacer()
+            timerPill
+            keepAwakeButton
             fontScaleStepper
             viewModeToggle
             Button {
@@ -359,6 +413,101 @@ struct SermonViewerView: View {
         .padding(.vertical, 10)
         .background(SermonViewerPaper.color)
         .overlay(alignment: .bottom) { Divider() }
+    }
+
+    // MARK: - 화면 꺼짐 방지 · 타이머
+
+    private func updateKeepAwake() {
+        let wanted = keepAwake && scenePhase == .active
+        if wanted && !holdsAwake {
+            SermonKeepAwake.acquire()
+            holdsAwake = true
+        } else if !wanted && holdsAwake {
+            SermonKeepAwake.release()
+            holdsAwake = false
+        }
+    }
+
+    private func releaseKeepAwake() {
+        if holdsAwake {
+            SermonKeepAwake.release()
+            holdsAwake = false
+        }
+    }
+
+    private var keepAwakeButton: some View {
+        Button {
+            keepAwake.toggle()
+            showToast(keepAwake ? String(localized: "화면이 꺼지지 않습니다") : String(localized: "화면 꺼짐 방지를 껐습니다"))
+        } label: {
+            Image(systemName: keepAwake ? "sun.max.fill" : "sun.max")
+                .font(.caption.weight(.bold))
+                .foregroundStyle(keepAwake ? accent : Color.secondary)
+                .frame(width: 30, height: 30)
+                .background(Color.secondary.opacity(0.12), in: Circle())
+        }
+        .buttonStyle(.plain)
+        .accessibilityLabel(String(localized: "화면 꺼짐 방지"))
+        .accessibilityValue(keepAwake ? String(localized: "켜짐") : String(localized: "꺼짐"))
+    }
+
+    private func timerElapsed(at date: Date) -> TimeInterval {
+        timerBase + (timerStart.map { max(0, date.timeIntervalSince($0)) } ?? 0)
+    }
+
+    private static func clock(_ seconds: TimeInterval) -> String {
+        let total = Int(max(0, seconds))
+        let hours = total / 3600, minutes = (total % 3600) / 60, secs = total % 60
+        return hours > 0 ? String(format: "%d:%02d:%02d", hours, minutes, secs) : String(format: "%02d:%02d", minutes, secs)
+    }
+
+    private func toggleTimer() {
+        if let start = timerStart {
+            timerBase += max(0, Date().timeIntervalSince(start))
+            timerStart = nil
+        } else {
+            timerStart = Date()
+        }
+    }
+
+    private func resetTimer() {
+        timerStart = nil
+        timerBase = 0
+    }
+
+    /// 누르면 시작/일시정지, 길게 누르면(맥은 화살표) 처음부터·목표 시간 메뉴. 목표를 넘기면 색이 바뀐다.
+    private var timerPill: some View {
+        Menu {
+            Button(timerStart == nil ? String(localized: "시작") : String(localized: "일시정지")) { toggleTimer() }
+            Button(String(localized: "처음부터")) { resetTimer() }
+            Divider()
+            Picker(String(localized: "목표 시간"), selection: $targetMinutes) {
+                ForEach([10, 15, 20, 25, 30, 35, 40, 45, 50, 60, 90], id: \.self) { minutes in
+                    Text(String(localized: "\(minutes)분")).tag(minutes)
+                }
+            }
+        } label: {
+            TimelineView(.periodic(from: .now, by: 1)) { context in
+                let elapsed = timerElapsed(at: context.date)
+                let isOver = elapsed > Double(targetMinutes) * 60
+                HStack(spacing: 4) {
+                    Image(systemName: timerStart == nil ? "play.fill" : "pause.fill").font(.system(size: 9, weight: .bold))
+                    Text("\(Self.clock(elapsed)) / \(targetMinutes):00")
+                        .font(.caption.monospacedDigit().weight(.semibold))
+                }
+                .foregroundStyle(isOver ? SermonTheme.warning : Color.primary)
+                .padding(.horizontal, 10)
+                .frame(height: 30)
+                .background(Color.secondary.opacity(0.12), in: Capsule())
+            }
+        } primaryAction: {
+            toggleTimer()
+        }
+        .menuStyle(.button)
+        .buttonStyle(.plain)
+        .menuIndicator(.hidden)
+        .fixedSize()
+        .accessibilityLabel(String(localized: "설교 타이머"))
     }
 
     /// "A-  100%  A+" 알약 스테퍼 — `scaleSteps`를 한 단계씩 넘긴다.

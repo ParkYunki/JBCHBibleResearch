@@ -56,6 +56,9 @@ struct BibleTopBar: View {
     /// 도구 레일(`BibleToolRail.showNavigationGroup`/`showRelatedGroup`)과 같은 규칙으로 사이드바 열기·책갈피·조회 이력·관련 콘텐츠를 뺀다.
     /// 말씀 요약 편집 중에는 "말씀 요약 닫기"(관련 콘텐츠 칸)만 남긴다 — 하단 액션바의 "말씀 요약"으로 보조 창에서도 편집기를 열 수 있기 때문이다.
     var isPrimaryWindow: Bool = true
+    /// true면 상단바 왼쪽 묶음에서 "사이드바 열기" 칸을 뺀다. 좁은 폭(compact)에서는 호출부(`BibleReadingView.narrowSearchRow`)가
+    /// 창 컨트롤 옆 별도 줄에 같은 버튼을 두기 때문에 중복을 막으려고 쓴다. 기본값 false는 기존 동작과 같다.
+    var hidesSidebarOpenButton: Bool = false
     @Binding var isBookmarkListPresented: Bool
     @Binding var isHistoryPresented: Bool
     @Binding var isRelatedContentPresented: Bool
@@ -285,7 +288,8 @@ struct BibleTopBar: View {
     /// `WindowGroup`). 판정에 쓰는 `isSidebarVisible`과 누를 때 보내는 `requestShowSidebar()`도 메인 창 `SidebarNavigationView`의 것이라,
     /// 보조 창에서 누르면 다른 창의 사이드바가 열린다.
     private var showsSidebarOpenButton: Bool {
-        isPrimaryWindow && !isPhone && !isEditingSummary && !IPadSidebarInspectorCoordination.shared.isSidebarVisible
+        isPrimaryWindow && !isPhone && !isEditingSummary && !hidesSidebarOpenButton
+            && !IPadSidebarInspectorCoordination.shared.isSidebarVisible
     }
 
     // MARK: - 제목

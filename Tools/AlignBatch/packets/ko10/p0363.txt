@@ -1,0 +1,155 @@
+## 4:1:16
+KO: 이들은 회중의 부름을 받은 자들이며, 그들 조상 지파들의 지휘관들이고, 이스라엘의 천 명 단위들의 우두머리들, 그들이다.
+1 אֵלֶּה = these
+2 קְרוּאֵי = [were those] called (to call)
+3 הָעֵדָה = [of] the congregation (congregation)
+4 נְשִׂיאֵי = [the] leaders of (leader)
+5 מַטּוֹת = [the] tribes of (tribe)
+6 אֲבוֹתָם = ancestors their (father)
+7 רָאשֵׁי = [were] [the] heads of (head)
+8 אַלְפֵי = [the] families of (thousand)
+9 יִשְׂרָאֵל = Israel
+10 הֵם = they (they(masc.))
+
+## 4:1:17
+KO: 그리고 모세와 아론은 이 사람들을 취하였다, 곧 이름들로 지명된 자들을.
+1 וַיִּקַּח = and he took (to take)
+2 מֹשֶׁה = Moses
+3 וְאַהֲרֹן = and Aaron (Aaron)
+4 אֵת = <obj.> ([Obj.])
+5 הָאֲנָשִׁים = the men (human)
+6 הָאֵלֶּה = <the> these (these)
+7 אֲשֶׁר = who (which)
+8 נִקְּבוּ = they had been designated (to pierce)
+9 בְּשֵׁמוֹת = by names (name)
+
+## 4:1:18
+KO: 그리고 온 회중을 둘째 달 일일에 모으니, 그들이 자기 가족과 그들 조상들의 집을 따라, 이름들의 수에 의하여, 이십 세 이상으로부터 그들의 머리 수대로 자기 혈통을 말하였다.
+1 וְאֵת = and <obj.> ([Obj.])
+2 כָּל־ = all
+3 הָעֵדָה = the congregation (congregation)
+4 הִקְהִילוּ = they summoned (to gather)
+5 בְּאֶחָד = on [day] one (one)
+6 לַחֹדֶשׁ = of the month (month)
+7 הַשֵּׁנִי = <the> second (second)
+8 וַיִּתְיַלְדוּ = and they recorded their ancestry (to beget)
+9 עַל־ = on (upon)
+10 מִשְׁפְּחֹתָם = clans their (family)
+11 לְבֵית = to [the] house of (house)
+12 אֲבֹתָם = ancestors their (father)
+13 בְּמִסְפַּר = by [the] number of (number)
+14 שֵׁמוֹת = names (name)
+15 מִבֶּן = from a son of (son)
+16 עֶשְׂרִים = twenty
+17 שָׁנָה = year[s] (year)
+18 וָמַעְלָה = and up -wards (above)
+19 לְגֻלְגְּלֹתָם = to heads their (head)
+
+## 4:1:19
+KO: 여호와께서 모세에게 명령하신 그대로, 그(모세)는 시내 광야에서 그들을 계수하였다.
+1 כַּאֲשֶׁר = just as (as which)
+2 צִוָּה = he had commanded (to command)
+3 יְהוָה = Yahweh (LORD)
+4 אֶת־ = <obj.> ([Obj.])
+5 מֹשֶׁה = Moses
+6 וַיִּפְקְדֵם = and he enrolled them (to reckon)
+7 בְּמִדְבַּר = in [the] wilderness of (wilderness)
+8 סִינָי פ = Sinai (of Sinai)
+
+## 4:1:20
+KO: 이스라엘의 장자인 르우벤의 자손들이 그들의 세대와 그들의 가족과 그들의 조상들의 가문을 따라, 그들의 명수대로, 머리들마다 이십 세 이상으로 군대에 나갈 모든 남자를 그 이름의 수대로 계수하였다.
+1 וַיִּהְיוּ = and they were (to be)
+2 בְנֵי־ = [the] descendants of
+3 רְאוּבֵן = Reuben
+4 בְּכֹר = [the] firstborn of (firstborn)
+5 יִשְׂרָאֵל = Israel
+6 תּוֹלְדֹתָם = genealogies their (generation)
+7 לְמִשְׁפְּחֹתָם = to clans their (family)
+8 לְבֵית = to [the] house of (house)
+9 אֲבֹתָם = ancestors their (father)
+10 בְּמִסְפַּר = by [the] number of (number)
+11 שֵׁמוֹת = names (name)
+12 לְגֻלְגְּלֹתָם = to heads their (head)
+13 כָּל־ = every
+14 זָכָר = male
+15 מִבֶּן = from a son of
+16 עֶשְׂרִים = twenty
+17 שָׁנָה = year[s] (year)
+18 וָמַעְלָה = and up -wards (above)
+19 כֹּל = every
+20 יֹצֵא = [one who] goes forth (to come out)
+21 צָבָא = warfare (army)
+
+## 4:1:21
+KO: 그들의 계수된 자들은 르우벤 지파를 위하여 사만 육천오백 명이었더라.
+1 פְּקֻדֵיהֶם = enrolled [men] their (to reckon)
+2 לְמַטֵּה = of [the] tribe of (tribe)
+3 רְאוּבֵן = Reuben
+4 שִׁשָּׁה = [were] six (six)
+5 וְאַרְבָּעִים = and forty (forty)
+6 אֶלֶף = thousand
+7 וַחֲמֵשׁ = and five (five)
+8 מֵאוֹת פ = hundred<s> (hundred)
+
+## 4:1:22
+KO: 시므온의 자손들에게서 난 자들을 그들의 세대와 그들의 가족과 그들의 조상들의 가문을 따라, 그 명수대로 이름들의 수에 따라, 머리별로, 이십 세 이상으로 군대에 나갈 만한 모든 남자를 다 계수하니.
+1 לִבְנֵי = of [the] descendants of
+2 שִׁמְעוֹן = Simeon
+3 תּוֹלְדֹתָם = genealogies their (generation)
+4 לְמִשְׁפְּחֹתָם = to clans their (family)
+5 לְבֵית = to [the] house of (house)
+6 אֲבֹתָם = ancestors their (father)
+7 פְּקֻדָיו = enrolled [men] its (to reckon)
+8 בְּמִסְפַּר = by [the] number of (number)
+9 שֵׁמוֹת = names (name)
+10 לְגֻלְגְּלֹתָם = to heads their (head)
+11 כָּל־ = every
+12 זָכָר = male
+13 מִבֶּן = from a son of
+14 עֶשְׂרִים = twenty
+15 שָׁנָה = year[s] (year)
+16 וָמַעְלָה = and up -wards (above)
+17 כֹּל = every
+18 יֹצֵא = [one who] goes forth (to come out)
+19 צָבָא = warfare (army)
+
+## 4:1:23
+KO: 시므온 지파에 대한 그들의 계수함을 입은 자들은 오만 구천삼백 명이었더라.
+1 פְּקֻדֵיהֶם = enrolled [men] their (to reckon)
+2 לְמַטֵּה = of [the] tribe of (tribe)
+3 שִׁמְעוֹן = Simeon
+4 תִּשְׁעָה = [were] nine (nine)
+5 וַחֲמִשִּׁים = and fifty (fifty)
+6 אֶלֶף = thousand
+7 וּשְׁלֹשׁ = and three (three)
+8 מֵאוֹת פ = hundred<s> (hundred)
+
+## 4:1:24
+KO: 갓의 자손들에게서, 그들의 세대와 그들의 가족들과 그들의 조상의 집을 따라, 이름들의 수에 의하여, 이십 세로부터 그리고 그 이상으로, 군대로 나가는 모든 자를 (계수하니).
+1 לִבְנֵי = of [the] descendants of
+2 גָד = Gad
+3 תּוֹלְדֹתָם = genealogies their (generation)
+4 לְמִשְׁפְּחֹתָם = to clans their (family)
+5 לְבֵית = to [the] house of (house)
+6 אֲבֹתָם = ancestors their (father)
+7 בְּמִסְפַּר = by [the] number of (number)
+8 שֵׁמוֹת = names (name)
+9 מִבֶּן = from a son of
+10 עֶשְׂרִים = twenty
+11 שָׁנָה = year[s] (year)
+12 וָמַעְלָה = and up -wards (above)
+13 כֹּל = every (all)
+14 יֹצֵא = [one who] goes forth (to come out)
+15 צָבָא = warfare (army)
+
+## 4:1:25
+KO: 그들의 계수된 자들은 갓 지파에 대하여 사만 오천육백오십 명이었더라.
+1 פְּקֻדֵיהֶם = enrolled [men] their (to reckon)
+2 לְמַטֵּה = of [the] tribe of (tribe)
+3 גָד = Gad
+4 חֲמִשָּׁה = [were] five (five)
+5 וְאַרְבָּעִים = and forty (forty)
+6 אֶלֶף = thousand
+7 וְשֵׁשׁ = and six (six)
+8 מֵאוֹת = hundred<s> (hundred)
+9 וַחֲמִשִּׁים פ = and fifty (fifty)

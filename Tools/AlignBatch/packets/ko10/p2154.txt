@@ -1,0 +1,188 @@
+## 26:41:4
+KO: 그가 그 길이를 측정하니 이십 규빗이요, 그 너비를 측정하니 이십 규빗이라. 그가 내게 이르되, "이것은 지성소니라" 하였더라.
+1 וַיָּמָד = and he measured (to measure)
+2 אֶת־ = <obj.> ([Obj.])
+3 אָרְכּוֹ = length its (length)
+4 עֶשְׂרִים = twenty
+5 אַמָּה = cubit[s]
+6 וְרֹחַב = and [the] breadth (width)
+7 עֶשְׂרִים = [was] twenty
+8 אַמָּה = cubit[s]
+9 אֶל־ = to
+10 פְּנֵי = [the] face of (face)
+11 הַהֵיכָל = the temple (temple)
+12 וַיֹּאמֶר = and he said (to say)
+13 אֵלַי = to me
+14 זֶה = this
+15 קֹדֶשׁ = [is] [the] holy place of
+16 הַקֳּדָשִׁים = the holy places
+
+## 26:41:5
+KO: 그리고 그가 그 집의 벽을 측량하니 여섯 규빗이었고, 그 집의 사방으로 있는 곁방(골방)의 너비는 사방 사방 사방 네 규빗이었다.
+1 וַיָּמָד = and he measured (to measure)
+2 קִיר־ = [the] wall of (wall)
+3 הַבַּיִת = the house
+4 שֵׁשׁ = six
+5 אַמּוֹת = cubits
+6 וְרֹחַב = and [the] breadth of (width)
+7 הַצֵּלָע = the side-chamber (side)
+8 אַרְבַּע = [was] four (four)
+9 אַמּוֹת = cubits
+10 סָבִיב = all around
+11 סָבִיב = all around
+12 לַבַּיִת = to the house
+13 סָבִיב = all around
+
+## 26:41:6
+KO: 그리고 그 곁방들은 곁방에 대하여 셋, 곧 삼십 번이었고, 성전에 속한 그 벽으로 들어왔으니, 그 곁방들이 사방으로 사방에 붙어 있게 하기 위함이었으며, 성전의 벽에는 붙어 있지 아니하였더라.
+1 וְהַצְּלָעוֹת = and the side-chambers
+2 צֵלָע = side-chamber
+3 אֶל־ = to (to(wards))
+4 צֵלָע = side-chamber
+5 שָׁלוֹשׁ = [were] three (three)
+6 וּשְׁלֹשִׁים = and thirty (thirty)
+7 פְּעָמִים = times (beat)
+8 וּבָאוֹת = and [were] going (to come (in))
+9 בַּקִּיר = in the wall
+10 אֲשֶׁר־ = which
+11 לַבַּיִת = [belonged] to the house
+12 לַצְּלָעוֹת = for the side-chambers
+13 סָבִיב = all around
+14 סָבִיב = all around
+15 לִהְיוֹת = to be
+16 אֲחוּזִים = supports
+17 וְלֹא־ = and not (not)
+18 יִהְיוּ = they will be
+19 אֲחוּזִים = supports
+20 בְּקִיר = in [the] wall of
+21 הַבָּיִת = the house
+
+## 26:41:7
+KO: 그리고 그 곁방들은 넓어지고 위로, 위로 돌려졌으니, 이는 성전의 둘레가 위로, 위로 갈수록 성전을 둘러쌌기 때문이다. 그러므로 성전의 넓이는 아래에서 위로 더해졌고, 아래층에서 중층으로 윗층으로 올라가게 되었다.
+1 וְרָחֲבָה = and it was broad (to enlarge)
+2 וְנָסְבָה = and it surrounded (to turn)
+3 לְמַעְלָה = <to> upwards <towards>
+4 לְמַעְלָה = <to> upwards <towards>
+5 לַצְּלָעוֹת = to the side-chambers (side)
+6 כִּי = for
+7 מוּסַב־ = [the] surrounding of (surrounding)
+8 הַבַּיִת = the house
+9 לְמַעְלָה = <to> upwards <towards>
+10 לְמַעְלָה = <to> upwards <towards>
+11 סָבִיב = all around
+12 סָבִיב = all around
+13 לַבַּיִת = to the house
+14 עַל־ = there-
+15 כֵּן = -fore
+16 רֹחַב־ = [the] breadth (width)
+17 לַבַּיִת = of the house
+18 לְמָעְלָה = <to> upwards <towards>
+19 וְכֵן = and thus
+20 הַתַּחְתּוֹנָה = the lower [story] (lower)
+21 יַעֲלֶה = someone will ascend (to ascend)
+22 עַל־ = to
+23 הָעֶלְיוֹנָה = the upper [story] (high)
+24 לַתִּיכוֹנָה = to the middle [story] (middle)
+
+## 26:41:8
+KO: 그리고 내가 그 집을 보았는데, 사방으로 둘러싼 지대(기초)의 높이는 갈대 곧 육 규빗(팔꿈치 길이)의 완전한 크기인 관절에 이르렀다.
+1 וְרָאִיתִי = and I saw (to see)
+2 לַבַּיִת = [belonged] to the house (house)
+3 גֹּבַהּ = a height (height)
+4 סָבִיב = all around
+5 סָבִיב = all around
+6 מוּסְדוֹת = [the] foundations of (appointment)
+7 הַצְּלָעוֹת = the side-chambers (side)
+8 מְלוֹ = [was] [the] fullness of (fullness)
+9 הַקָּנֶה = the reed (branch)
+10 שֵׁשׁ = six
+11 אַמּוֹת = cubits (cubit)
+12 אַצִּילָה = a joint (joint)
+
+## 26:41:9
+KO: 바깥쪽 곁방들을 위한 벽의 너비는 다섯 규빗이었고, 집(성전)에 속한 곁방들이 놓여 있는 곳이 (그 외에) 남았다.
+1 רֹחַב = [the] breadth of (width)
+2 הַקִּיר = the wall (wall)
+3 אֲשֶׁר־ = which
+4 לַצֵּלָע = [belonged] to the side-chamber
+5 אֶל־ = to (to(wards))
+6 הַחוּץ = the outside (outside)
+7 חָמֵשׁ = [was] five (five)
+8 אַמּוֹת = cubits (cubit)
+9 וַאֲשֶׁר = and which
+10 מֻנָּח = [was] free space (to rest)
+11 בֵּית = between
+12 צְלָעוֹת = [the] side-chambers
+13 אֲשֶׁר = which
+14 לַבָּיִת = [belonged] to the house
+
+## 26:41:10
+KO: 그리고 그 방들 사이에 이십 규빗의 너비가 집을 둘러 사방으로 사방으로 있었다.
+1 וּבֵין = and between (between)
+2 הַלְּשָׁכוֹת = the rooms (chamber)
+3 רֹחַב = [the] breadth (width)
+4 עֶשְׂרִים = [was] twenty (twenty)
+5 אַמָּה = cubit[s] (cubit)
+6 סָבִיב = around
+7 לַבַּיִת = <to> the house (house)
+8 סָבִיב = all around
+9 סָבִיב = all around
+
+## 26:41:11
+KO: 그리고 그 빈 터를 향한 골방의 문은, 하나의 문은 북쪽 길을 향하였고, 하나의 문은 남쪽을 향하였으며, 그 빈 터의 너비는 사방으로 다섯 규빗이었더라.
+1 וּפֶתַח = and [the] entrance of
+2 הַצֵּלָע = the side-chamber (side)
+3 לַמֻּנָּח = [was] to the free space
+4 פֶּתַח = an entrance
+5 אֶחָד = one
+6 דֶּרֶךְ = [was] [the] direction of (way)
+7 הַצָּפוֹן = the north (north)
+8 וּפֶתַח = and an entrance
+9 אֶחָד = one
+10 לַדָּרוֹם = [was] to the south (south)
+11 וְרֹחַב = and [the] breadth of (width)
+12 מְקוֹם = [the] place of (standing place)
+13 הַמֻּנָּח = the free space
+14 חָמֵשׁ = [was] five (five)
+15 אַמּוֹת = cubits (cubit)
+16 סָבִיב = all around
+17 סָבִיב = all around
+
+## 26:41:12
+KO: 분리된 구역의 앞쪽, 바다 방향의 측면에 있는 그 건물은 폭이 칠십 규빗이고, 그 건물의 벽은 사면으로 오 규빗의 두께이며, 길이는 구십 규빗이라.
+1 וְהַבִּנְיָן = and the structure
+2 אֲשֶׁר = which
+3 אֶל־ = [was] to (to(wards))
+4 פְּנֵי = [the] face of (face)
+5 הַגִּזְרָה = the separate place (cutting|separation)
+6 פְּאַת = [the] side of (side)
+7 דֶּרֶךְ־ = [the] direction of (way)
+8 הַיָּם = the sea (sea)
+9 רֹחַב = [the] breadth
+10 שִׁבְעִים = [was] seventy (seventy)
+11 אַמָּה = cubit[s]
+12 וְקִיר = and [the] wall of (wall)
+13 הַבִּנְיָן = the structure
+14 חָמֵשׁ־ = [was] five (five)
+15 אַמּוֹת = cubits
+16 רֹחַב = breadth
+17 סָבִיב = all around
+18 סָבִיב = all around
+19 וְאָרְכּוֹ = and length its (length)
+20 תִּשְׁעִים = [was] ninety (ninety)
+21 אַמָּה = cubit[s]
+
+## 26:41:13
+KO: 그리고 그가 그 집을 측량하니 길이가 일백 규빗이요, 그리고 그 분리된 곳과 그 건물과 그것의 벽들이 길이가 일백 규빗이더라.
+1 וּמָדַד = and he measured (to measure)
+2 אֶת־ = <obj.> ([Obj.])
+3 הַבַּיִת = the house (house)
+4 אֹרֶךְ = [the] length
+5 מֵאָה = [was] a hundred
+6 אַמָּה = cubit[s]
+7 וְהַגִּזְרָה = and the separate place (cutting|separation)
+8 וְהַבִּנְיָה = and the structure (building)
+9 וְקִירוֹתֶיהָ = and walls its (wall)
+10 אֹרֶךְ = [the] length
+11 מֵאָה = [was] a hundred
+12 אַמָּה = cubit[s]

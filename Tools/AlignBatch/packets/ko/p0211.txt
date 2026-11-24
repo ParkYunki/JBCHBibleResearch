@@ -1,0 +1,733 @@
+## 13:6:46
+KO: (그는) 암시의 아들이요, (그는) 바니의 아들이요, (그는) 세멜의 아들이라.
+1 בֶּן־ = [the] son of (son)
+2 אַמְצִי = Amzi
+3 בֶן־ = [the] son of (son)
+4 בָּנִי = Bani
+5 בֶּן־ = [the] son of (son)
+6 שָׁמֶר = Shemer
+
+## 13:6:47
+KO: 말리의 아들이요, 무시의 아들이요, 므라리의 아들이요, 레위의 아들이다.
+1 בֶּן־ = [the] son of (son)
+2 מַחְלִי = Mahli
+3 בֶּן־ = [the] son of (son)
+4 מוּשִׁי = Mushi
+5 בֶּן־ = [the] son of (son)
+6 מְרָרִי = Merari
+7 בֶּן־ = [the] son of (son)
+8 לֵוִי ס = Levi
+
+## 13:6:48
+KO: 그리고 그들의 형제 레위 사람들은 하나님의 집의 장막의 모든 일을 위하여 주어진 자들이었다.
+1 וַאֲחֵיהֶם = and relatives their (brother)
+2 הַלְוִיִּם = the Levites (Levi)
+3 נְתוּנִים = [were] assigned (to give)
+4 לְכָל־ = to all (all)
+5 עֲבוֹדַת = [the] service of (service)
+6 מִשְׁכַּן = [the] tabernacle of (tabernacle)
+7 בֵּית = [the] house of (house)
+8 הָאֱלֹהִים = <the> God (God)
+
+## 13:6:49
+KO: 아론과 그의 아들들은 번제단과 분향단 위에 살랐으며, 지성소의 모든 일과 이스라엘을 위하여 속죄하는 일을 하였으니, 하나님의 종 모세가 명한 모든 것에 따른 것이었다.
+1 וְאַהֲרֹן = and Aaron (Aaron)
+2 וּבָנָיו = and descendants his (son)
+3 מַקְטִירִים = [were] making smoke (to offer)
+4 עַל־ = on (upon)
+5 מִזְבַּח = [the] altar of (altar)
+6 הָעוֹלָה = the burnt offering (burnt offering)
+7 וְעַל־ = and on (upon)
+8 מִזְבַּח = [the] altar of (altar)
+9 הַקְּטֹרֶת = the incense (incense)
+10 לְכֹל = for all (all)
+11 מְלֶאכֶת = [the] work of (work)
+12 קֹדֶשׁ = [the] holy place of (Most Holy Place)
+13 הַקֳּדָשִׁים = the holy places (Most Holy Place)
+14 וּלְכַפֵּר = and to make atonement (to atone)
+15 עַל־ = on (upon)
+16 יִשְׂרָאֵל = Israel
+17 כְּכֹל = according to all (all)
+18 אֲשֶׁר = that (which)
+19 צִוָּה = he had commanded (to command)
+20 מֹשֶׁה = Moses
+21 עֶבֶד = [the] servant of (servant;_slave)
+22 הָאֱלֹהִים פ = <the> God (God)
+
+## 13:6:50
+KO: 그리고 이것들은 아론의 자손들이니, 그의 아들은 엘르아살이요, 그의 아들은 비느하스요, 그의 아들은 아비수아요.
+1 וְאֵלֶּה = and these (these)
+2 בְּנֵי = [are] [the] descendants of (son)
+3 אַהֲרֹן = Aaron
+4 אֶלְעָזָר = Eleazar
+5 בְּנוֹ = son his (son)
+6 פִּינְחָס = Phinehas
+7 בְּנוֹ = son his (son)
+8 אֲבִישׁוּעַ = Abishua
+9 בְּנוֹ = son his (son)
+
+## 13:6:51
+KO: 북기 그의 아들, 웃시 그의 아들, 스라히야 그의 아들.
+1 בֻּקִּי = Bukki
+2 בְנוֹ = son his (son)
+3 עֻזִּי = Uzzi
+4 בְנוֹ = son his (son)
+5 זְרַחְיָה = Zerahiah
+6 בְנוֹ = son his (son)
+
+## 13:6:52
+KO: 므라욧, 그의 아들은 아마랴, 그의 아들은 아히둡.
+1 מְרָיוֹת = Meraioth
+2 בְּנוֹ = son his (son)
+3 אֲמַרְיָה = Amariah
+4 בְנוֹ = son his (son)
+5 אֲחִיטוּב = Ahitub
+6 בְּנוֹ = son his (son)
+
+## 13:6:53
+KO: 사독, 그의 아들은 아히마아스, 그의 아들.
+1 צָדוֹק = Zadok
+2 בְּנוֹ = son his (son)
+3 אֲחִימַעַץ = Ahimaaz
+4 בְּנוֹ ס = son his (son)
+
+## 13:6:54
+KO: 그리고 이들은 그들의 거처가 그들의 지경 안에 있는 그들의 촌락들을 위한 (것이니), 아론의 자손들, 곧 그핫 가족을 위한 것이니 이는 그들에게 제비가 있었기 때문이라.
+1 וְאֵלֶּה = and these (these)
+2 מוֹשְׁבוֹתָם = [were] dwelling places their (seat)
+3 לְטִירוֹתָם = to encampments their (encampment)
+4 בִּגְבוּלָם = in territory their (border)
+5 לִבְנֵי = to [the] descendants of (son)
+6 אַהֲרֹן = Aaron
+7 לְמִשְׁפַּחַת = to [the] clan of (family)
+8 הַקְּהָתִי = the Kohathite[s] (Kohathite)
+9 כִּי = for
+10 לָהֶם = to them (them)
+11 הָיָה = it belonged (to be)
+12 הַגּוֹרָל = the lot (lot)
+
+## 13:6:55
+KO: 그리고 그들이 그들에게 유다 땅의 헤브론과 그 주변의 목초지들을 주었다.
+1 וַיִּתְּנוּ = and people gave (to give)
+2 לָהֶם = to them (them)
+3 אֶת־ = <obj.> ([Obj.])
+4 חֶבְרוֹן = Hebron
+5 בְּאֶרֶץ = in [the] land of (land)
+6 יְהוּדָה = Judah
+7 וְאֶת־ = and <obj.> ([Obj.])
+8 מִגְרָשֶׁיהָ = pasture lands its (pasture)
+9 סְבִיבֹתֶיהָ = around it (around)
+
+## 13:6:56
+KO: 그리고 그 성의 밭과 그(성)의 마을들을 그들은 여분네의 아들 갈렙에게 주었다.
+1 וְאֶת־ = and <obj.> ([Obj.])
+2 שְׂדֵה = [the] field of (land)
+3 הָעִיר = the city (city)
+4 וְאֶת־ = and <obj.> ([Obj.])
+5 חֲצֵרֶיהָ = villages its (village)
+6 נָתְנוּ = people gave (to give)
+7 לְכָלֵב = to Caleb (Caleb)
+8 בֶּן־ = [the] son of (son)
+9 יְפֻנֶּה ס = Jephunneh
+
+## 13:6:57
+KO: 그리고 아론의 자손들에게 그들이 도피성들을 주었으니, 헤브론과, 립나와 그 목초지들과, 얏딜과, 에스드모아와 그 목초지들과
+1 וְלִבְנֵי = and to [the] descendants of (son)
+2 אַהֲרֹן = Aaron
+3 נָתְנוּ = people gave (to give)
+4 אֶת־ = <obj.> ([Obj.])
+5 עָרֵי = [the] cities of (city)
+6 הַמִּקְלָט = <the> refuge (refuge)
+7 אֶת־ = <obj.> ([Obj.])
+8 חֶבְרוֹן = Hebron
+9 וְאֶת־ = and <obj.> ([Obj.])
+10 לִבְנָה = Libnah
+11 וְאֶת־ = and <obj.> ([Obj.])
+12 מִגְרָשֶׁיהָ = pasture lands its (pasture)
+13 וְאֶת־ = and <obj.> ([Obj.])
+14 יַתִּר = Jattir
+15 וְאֶת־ = and <obj.> ([Obj.])
+16 אֶשְׁתְּמֹעַ = Eshtemoa
+17 וְאֶת־ = and <obj.> ([Obj.])
+18 מִגְרָשֶׁיהָ = pasture lands its (pasture)
+
+## 13:6:58
+KO: 그리고 힐렌과 그 목초지들과, 그리고 드빌과 그 목초지들을.
+1 וְאֶת־ = and <obj.> ([Obj.])
+2 חִילֵז = Hilez (Hilen)
+3 וְאֶת־ = and <obj.> ([Obj.])
+4 מִגְרָשֶׁיהָ = pasture lands its (pasture)
+5 אֶת־ = <obj.> ([Obj.])
+6 דְּבִיר = Debir
+7 וְאֶת־ = and <obj.> ([Obj.])
+8 מִגְרָשֶׁיהָ = pasture lands its (pasture)
+
+## 13:6:59
+KO: 그리고 아산과 그 목초지들과, 그리고 벧세메스와 그 목초지들과, 그리고 윳다와 그 목초지들과
+1 וְאֶת־ = and <obj.> ([Obj.])
+2 עָשָׁן = Ashan
+3 וְאֶת־ = and <obj.> ([Obj.])
+4 מִגְרָשֶׁיהָ = pasture lands its (pasture)
+5 וְאֶת־ = and <obj.> ([Obj.])
+6 בֵּית = Beth (Beth-shemesh)
+7 שֶׁמֶשׁ = Shemesh (Beth-shemesh)
+8 וְאֶת־ = and <obj.> ([Obj.])
+9 מִגְרָשֶׁיהָ ס = pasture lands its (pasture)
+10 וְאֶת־ = - ([Obj.])
+11 יֻטָּה = - (Juttah)
+12 וְאֶת־ = - ([Obj.])
+13 מִגְרָשֶׁיהָ = - (pasture)
+
+## 13:6:60
+KO: 그리고 베냐민 지파로부터는 게바와 그 목초지들, 알레멧과 그 목초지들, 그리고 아나돗과 그 목초지들을 주었으니, 그들의 가족들을 따른 그들의 성읍들은 모두 열세 성읍이었더라. (기본 텍스트 외 추가된 기브온 관련 부분: 기브온과 그 목초지들.)
+1 וּמִמַּטֵּה = and from [the] tribe of (tribe)
+2 בִנְיָמִן = Benjamin
+3 אֶת־ = <obj.> ([Obj.])
+4 גֶּבַע = Geba
+5 וְאֶת־ = and <obj.> ([Obj.])
+6 מִגְרָשֶׁיהָ = pasture lands its (pasture)
+7 וְאֶת־ = and <obj.> ([Obj.])
+8 עָלֶמֶת = Alemeth
+9 וְאֶת־ = and <obj.> ([Obj.])
+10 מִגְרָשֶׁיהָ = pasture lands its (pasture)
+11 וְאֶת־ = and <obj.> ([Obj.])
+12 עֲנָתוֹת = Anathoth
+13 וְאֶת־ = and <obj.> ([Obj.])
+14 מִגְרָשֶׁיהָ = pasture lands its (pasture)
+15 כָּל־ = all
+16 עָרֵיהֶם = cities their (city)
+17 שְׁלֹשׁ־ = [were] thir- (three)
+18 עֶשְׂרֵה = teen (ten)
+19 עִיר = citi[es] (city)
+20 בְּמִשְׁפְּחוֹתֵיהֶם ס = in clans their (family)
+21 אֶת־ = - ([Obj.])
+22 גִּבְעוֹן = - (Gibeon)
+23 וְאֶת־ = - ([Obj.])
+24 מִגְרָשֶׁיהָ = - (pasture)
+
+## 13:6:61
+KO: 그리고 그핫 자손의 남은 자들에게는 므낫세 지파의 절반, 즉 므낫세 반 지파의 가족으로부터 제비뽑기를 통하여 성읍 열 개를 주었다.
+1 וְלִבְנֵי = and to [the] descendants of (son)
+2 קְהָת = Kohath
+3 הַנּוֹתָרִים = which remained (to remain)
+4 מִמִּשְׁפַּחַת = of [the] clan of (family)
+5 הַמַּטֶּה = the tribe (tribe)
+6 מִמַּחֲצִית = from [the] half of (half)
+7 מַטֵּה = [the] tribe of (tribe)
+8 חֲצִי = [the] half of (half)
+9 מְנַשֶּׁה = Manasseh
+10 בַּגּוֹרָל = by the lot (lot)
+11 עָרִים = cities (city)
+12 עָשֶׂר ס = ten
+
+## 13:6:62
+KO: 게르손의 자손들에게는 그들의 가족들에 따라 잇사갈 지파로부터, 그리고 아셀 지파로부터, 그리고 납달리 지파로부터, 그리고 바산에 있는 므낫세 지파로부터 열세 성읍들을 주었다.
+1 וְלִבְנֵי = and to [the] descendants of (son)
+2 גֵרְשׁוֹם = Gershom
+3 לְמִשְׁפְּחוֹתָם = to clans their (family)
+4 מִמַּטֵּה = from [the] tribe of (tribe)
+5 יִשָׂשכָר = Issachar
+6 וּמִמַּטֵּה = and from [the] tribe of (tribe)
+7 אָשֵׁר = Asher
+8 וּמִמַּטֵּה = and from [the] tribe of (tribe)
+9 נַפְתָּלִי = Naphtali
+10 וּמִמַּטֵּה = and from [the] tribe of (tribe)
+11 מְנַשֶּׁה = Manasseh
+12 בַּבָּשָׁן = in <the> Bashan (Bashan)
+13 עָרִים = cities (city)
+14 שְׁלֹשׁ = thir- (three)
+15 עֶשְׂרֵה ס = teen (ten)
+
+## 13:6:63
+KO: 므라리 자손에게 그들의 가족들을 따라 르우벤 지파와 갓 지파와 스불론 지파로부터 제비 뽑기를 통하여 열두 성읍을 주었더라.
+1 לִבְנֵי = to [the] descendants of (son)
+2 מְרָרִי = Merari
+3 לְמִשְׁפְּחוֹתָם = to clans their (family)
+4 מִמַּטֵּה = from [the] tribe of (tribe)
+5 רְאוּבֵן = Reuben
+6 וּמִמַּטֵּה־ = and from [the] tribe of (tribe)
+7 גָד = Gad
+8 וּמִמַּטֵּה = and from [the] tribe of (tribe)
+9 זְבוּלֻן = Zebulun
+10 בַּגּוֹרָל = by the lot (lot)
+11 עָרִים = cities (city)
+12 שְׁתֵּים = two [plus] (two)
+13 עֶשְׂרֵה = ten
+
+## 13:6:64
+KO: 그리고 이스라엘 자손들이 그 성읍들과 그들의 목초지를 레위 사람들에게 주었다.
+1 וַיִּתְּנוּ = and they gave (to give)
+2 בְנֵי־ = [the] people of (son)
+3 יִשְׂרָאֵל = Israel
+4 לַלְוִיִּם = to the Levites (Levi)
+5 אֶת־ = <obj.> ([Obj.])
+6 הֶעָרִים = the cities (city)
+7 וְאֶת־ = and <obj.> ([Obj.])
+8 מִגְרְשֵׁיהֶם = pasture lands their (pasture)
+
+## 13:6:65
+KO: 그리고 그들이 제비를 뽑아 유다 자손의 지파로부터, 그리고 시므온 자손의 지파로부터, 그리고 베냐민 자손의 지파로부터 이 성읍들을 주었으니, 그들이 그것들을 이름으로 불렀더라.
+1 וַיִּתְּנוּ = and they gave (to give)
+2 בַגּוֹרָל = by the lot (lot)
+3 מִמַּטֵּה = from [the] tribe of (tribe)
+4 בְנֵי־ = [the] descendants of (son)
+5 יְהוּדָה = Judah
+6 וּמִמַּטֵּה = and from [the] tribe of (tribe)
+7 בְנֵי־ = [the] descendants of (son)
+8 שִׁמְעוֹן = Simeon
+9 וּמִמַּטֵּה = and from [the] tribe of (tribe)
+10 בְּנֵי = [the] descendants of (son)
+11 בִנְיָמִן = Benjamin
+12 אֵת = <obj.> ([Obj.])
+13 הֶעָרִים = the cities (city)
+14 הָאֵלֶּה = <the> these (these)
+15 אֲשֶׁר־ = which
+16 יִקְרְאוּ = they called (to call)
+17 אֶתְהֶם = <obj.> them ([Obj.])
+18 בְּשֵׁמוֹת ס = by names (name)
+
+## 13:6:66
+KO: 그리고 그핫 자손의 가족들로부터, 그들의 경계(영토)의 성읍들이 에브라임 지파로부터 있게 되었다.
+1 וּמִמִּשְׁפְּחוֹת = and some of [the] clans of (family)
+2 בְּנֵי = [the] descendants of (son)
+3 קְהָת = Kohath
+4 וַיְהִי = and it was (to be)
+5 עָרֵי = [the] cities of (city)
+6 גְבוּלָם = territory their (border)
+7 מִמַּטֵּה = [were] from [the] tribe of (tribe)
+8 אֶפְרָיִם = Ephraim
+
+## 13:6:67
+KO: 그리고 그들이 그들에게 도피성의 성읍들을 주었으니, 에브라임 산지에 세겜과 그 목초지들, 그리고 게셀과 그 목초지들이다.
+1 וַיִּתְּנוּ = and they gave (to give)
+2 לָהֶם = to them (them)
+3 אֶת־ = <obj.> ([Obj.])
+4 עָרֵי = [the] cities of (city)
+5 הַמִּקְלָט = <the> refuge (refuge)
+6 אֶת־ = <obj.> ([Obj.])
+7 שְׁכֶם = Shechem
+8 וְאֶת־ = and <obj.> ([Obj.])
+9 מִגְרָשֶׁיהָ = pasture lands its (pasture)
+10 בְּהַר = in [the] hill country of (mountain)
+11 אֶפְרָיִם = Ephraim
+12 וְאֶת־ = and <obj.> ([Obj.])
+13 גֶּזֶר = Gezer
+14 וְאֶת־ = and <obj.> ([Obj.])
+15 מִגְרָשֶׁיהָ = pasture lands its (pasture)
+
+## 13:6:68
+KO: 그리고 욕므암과 그 목초지들과 그리고 벧호론과 그 목초지들을 (주었다).
+1 וְאֶת־ = and <obj.> ([Obj.])
+2 יָקְמְעָם = Jokmeam
+3 וְאֶת־ = and <obj.> ([Obj.])
+4 מִגְרָשֶׁיהָ = pasture lands its (pasture)
+5 וְאֶת־ = and <obj.> ([Obj.])
+6 בֵּית = Beth (Beth-horon)
+7 חוֹרוֹן = Horon (Beth-horon)
+8 וְאֶת־ = and <obj.> ([Obj.])
+9 מִגְרָשֶׁיהָ = pasture lands its (pasture)
+
+## 13:6:69
+KO: 그리고 아얄론과 그 목초지들과 그리고 가드 림몬과 그 목초지들이며
+1 וְאֶת־ = and <obj.> ([Obj.])
+2 אַיָּלוֹן = Aijalon
+3 וְאֶת־ = and <obj.> ([Obj.])
+4 מִגְרָשֶׁיהָ = pasture lands its (pasture)
+5 וְאֶת־ = and <obj.> ([Obj.])
+6 גַּת־ = Gath (Gath-rimmon)
+7 רִמּוֹן = Rimmon (Gath-rimmon)
+8 וְאֶת־ = and <obj.> ([Obj.])
+9 מִגְרָשֶׁיהָ פ = pasture lands its (pasture)
+
+## 13:6:70
+KO: 그리고 므낫세 반 지파로부터는 아넬과 그 목초지들과 빌르암과 그 목초지들을 그핫 자손의 남은 족속에게 주었더라.
+1 וּמִמַּחֲצִית = and from [the] half of (half)
+2 מַטֵּה = [the] tribe of (tribe)
+3 מְנַשֶּׁה = Manasseh
+4 אֶת־ = <obj.> ([Obj.])
+5 עָנֵר = Aner
+6 וְאֶת־ = and <obj.> ([Obj.])
+7 מִגְרָשֶׁיהָ = pasture lands its (pasture)
+8 וְאֶת־ = and <obj.> ([Obj.])
+9 בִּלְעָם = Bileam
+10 וְאֶת־ = and <obj.> ([Obj.])
+11 מִגְרָשֶׁיהָ = pasture lands its (pasture)
+12 לְמִשְׁפַּחַת = for [the] clan (family)
+13 לִבְנֵי־ = of [the] descendants of (son)
+14 קְהָת = Kohath
+15 הַנּוֹתָרִים פ = which remained (to remain)
+
+## 13:6:71
+KO: 게르손 자손들에게는 므낫세 반 지파의 가족으로부터 바산의 골란과 그 목초지들과 아스다롯과 그 목초지들을 주었고,
+1 לִבְנֵי = to [the] descendants of (son)
+2 גֵּרְשׁוֹם = Gershom
+3 מִמִּשְׁפַּחַת = from [the] clan of (family)
+4 חֲצִי = [the] half of (half)
+5 מַטֵּה = [the] tribe of (tribe)
+6 מְנַשֶּׁה = Manasseh
+7 אֶת־ = <obj.> ([Obj.])
+8 גּוֹלָן = Golan
+9 בַּבָּשָׁן = in <the> Bashan (Bashan)
+10 וְאֶת־ = and <obj.> ([Obj.])
+11 מִגְרָשֶׁיהָ = pasture lands its (pasture)
+12 וְאֶת־ = and <obj.> ([Obj.])
+13 עַשְׁתָּרוֹת = Ashtaroth
+14 וְאֶת־ = and <obj.> ([Obj.])
+15 מִגְרָשֶׁיהָ ס = pasture lands its (pasture)
+
+## 13:6:72
+KO: 그리고 잇사갈 지파로부터 게데스와 그 목초지들을, 그리고 다브랏과 그 목초지들을 (주었다).
+1 וּמִמַּטֵּה = and from [the] tribe of (tribe)
+2 יִשָׂשכָר = Issachar
+3 אֶת־ = <obj.> ([Obj.])
+4 קֶדֶשׁ = Kedesh
+5 וְאֶת־ = and <obj.> ([Obj.])
+6 מִגְרָשֶׁיהָ = pasture lands its (pasture)
+7 אֶת־ = <obj.> ([Obj.])
+8 דָּבְרַת = Daberath
+9 וְאֶת־ = and <obj.> ([Obj.])
+10 מִגְרָשֶׁיהָ = pasture lands its (pasture)
+
+## 13:6:73
+KO: 그리고 라못과 그것의 목초지들과 그리고 아넴과 그것의 목초지들을 (주었다).
+1 וְאֶת־ = and <obj.> ([Obj.])
+2 רָאמוֹת = Ramoth
+3 וְאֶת־ = and <obj.> ([Obj.])
+4 מִגְרָשֶׁיהָ = pasture lands its (pasture)
+5 וְאֶת־ = and <obj.> ([Obj.])
+6 עָנֵם = Anem
+7 וְאֶת־ = and <obj.> ([Obj.])
+8 מִגְרָשֶׁיהָ ס = pasture lands its (pasture)
+
+## 13:6:74
+KO: 그리고 아셀 지파로부터 마살과 그 목초지들과 압돈과 그 목초지들과
+1 וּמִמַּטֵּה = and from [the] tribe of (tribe)
+2 אָשֵׁר = Asher
+3 אֶת־ = <obj.> ([Obj.])
+4 מָשָׁל = Mashal
+5 וְאֶת־ = and <obj.> ([Obj.])
+6 מִגְרָשֶׁיהָ = pasture lands its (pasture)
+7 וְאֶת־ = and <obj.> ([Obj.])
+8 עַבְדּוֹן = Abdon
+9 וְאֶת־ = and <obj.> ([Obj.])
+10 מִגְרָשֶׁיהָ = pasture lands its (pasture)
+
+## 13:6:75
+KO: 그리고 훅곡과 그 들을, 그리고 르홉과 그 들을 주었다.
+1 וְאֶת־ = and <obj.> ([Obj.])
+2 חוּקֹק = Hukok
+3 וְאֶת־ = and <obj.> ([Obj.])
+4 מִגְרָשֶׁיהָ = pasture lands its (pasture)
+5 וְאֶת־ = and <obj.> ([Obj.])
+6 רְחֹב = Rehob
+7 וְאֶת־ = and <obj.> ([Obj.])
+8 מִגְרָשֶׁיהָ = pasture lands its (pasture)
+
+## 13:6:76
+KO: 그리고 납달리 지파로부터는 갈릴리의 게데스와 그 목초지들과, 함몬과 그 목초지들과, 기랴다임과 그 목초지들을 주었더라.
+1 וּמִמַּטֵּה = and from [the] tribe of (tribe)
+2 נַפְתָּלִי = Naphtali
+3 אֶת־ = <obj.> ([Obj.])
+4 קֶדֶשׁ = Kedesh
+5 בַּגָּלִיל = in <the> Galilee (Galilee)
+6 וְאֶת־ = and <obj.> ([Obj.])
+7 מִגְרָשֶׁיהָ = pasture lands its (pasture)
+8 וְאֶת־ = and <obj.> ([Obj.])
+9 חַמּוֹן = Hammon
+10 וְאֶת־ = and <obj.> ([Obj.])
+11 מִגְרָשֶׁיהָ = pasture lands its (pasture)
+12 וְאֶת־ = and <obj.> ([Obj.])
+13 קִרְיָתַיִם = Kiriathaim
+14 וְאֶת־ = and <obj.> ([Obj.])
+15 מִגְרָשֶׁיהָ ס = pasture lands its (pasture)
+
+## 13:6:77
+KO: 므라리 자손들의 남은 자들에게는 스불론 지파로부터 림모노와 그 목초지들과 다볼과 그 목초지들과 요크느암과 그 목초지들과 카르타와 그 목초지들을 주었고
+1 לִבְנֵי = to [the] descendants of (son)
+2 מְרָרִי = Merari
+3 הַנּוֹתָרִים = which remained (to remain)
+4 מִמַּטֵּה = of [the] tribe of (tribe)
+5 זְבוּלֻן = Zebulun
+6 אֶת־ = <obj.> ([Obj.])
+7 רִמּוֹנוֹ = Rimmono (Rimmon)
+8 וְאֶת־ = and <obj.> ([Obj.])
+9 מִגְרָשֶׁיהָ = pasture lands its (pasture)
+10 אֶת־ = <obj.> ([Obj.])
+11 תָּבוֹר = Tabor
+12 וְאֶת־ = and <obj.> ([Obj.])
+13 מִגְרָשֶׁיהָ = pasture lands its (pasture)
+14 אֶת־ = - ([Obj.])
+15 יָקְנְעָם = - (Jokneam)
+16 וְאֶת־ = - ([Obj.])
+17 מִגְרָשֶׁיהָ = - (pasture)
+18 אֶת־ = - ([Obj.])
+19 קַרְתָּה = - (Kartah)
+20 וְאֶת־ = - ([Obj.])
+21 מִגְרָשֶׁיהָ = - (pasture)
+
+## 13:6:78
+KO: 그리고 요단 건너편, 여리고 동쪽의 요단으로부터, 르우벤 지파 중에서 광야의 베셀과 그 들들과 야사와 그 들들(을 주었더라).
+1 וּמֵעֵבֶר = and from [the] other side (side)
+2 לְיַרְדֵּן = of [the] Jordan (Jordan)
+3 יְרֵחוֹ = of Jericho (Jericho)
+4 לְמִזְרַח = to [the] east of (east)
+5 הַיַּרְדֵּן = the Jordan (Jordan)
+6 מִמַּטֵּה = from [the] tribe of (tribe)
+7 רְאוּבֵן = Reuben
+8 אֶת־ = <obj.> ([Obj.])
+9 בֶּצֶר = Bezer
+10 בַּמִּדְבָּר = in the wilderness (wilderness)
+11 וְאֶת־ = and <obj.> ([Obj.])
+12 מִגְרָשֶׁיהָ = pasture lands its (pasture)
+13 וְאֶת־ = and <obj.> ([Obj.])
+14 יַהְצָה = Jahaz <towards> (Jahaz)
+15 וְאֶת־ = and <obj.> ([Obj.])
+16 מִגְרָשֶׁיהָ = pasture lands its (pasture)
+
+## 13:6:79
+KO: 그리고 그데못과 그 목초지들과 그리고 메바앗과 그 목초지들을 주었다.
+1 וְאֶת־ = and <obj.> ([Obj.])
+2 קְדֵמוֹת = Kedemoth
+3 וְאֶת־ = and <obj.> ([Obj.])
+4 מִגְרָשֶׁיהָ = pasture lands its (pasture)
+5 וְאֶת־ = and <obj.> ([Obj.])
+6 מֵיפַעַת = Mephaath
+7 וְאֶת־ = and <obj.> ([Obj.])
+8 מִגְרָשֶׁיהָ = pasture lands its (pasture)
+
+## 13:6:80
+KO: 그리고 갓 지파로부터 길르앗의 라못과 그 목초지들과 마하나임과 그 목초지들을 (주었다).
+1 וּמִמַּטֵּה־ = and from [the] tribe of (tribe)
+2 גָד = Gad
+3 אֶת־ = <obj.> ([Obj.])
+4 רָאמוֹת = Ramoth
+5 בַּגִּלְעָד = in <the> Gilead (Gilead)
+6 וְאֶת־ = and <obj.> ([Obj.])
+7 מִגְרָשֶׁיהָ = pasture lands its (pasture)
+8 וְאֶת־ = and <obj.> ([Obj.])
+9 מַחֲנַיִם = Mahanaim
+10 וְאֶת־ = and <obj.> ([Obj.])
+11 מִגְרָשֶׁיהָ = pasture lands its (pasture)
+
+## 13:6:81
+KO: 그리고 헤스본과 그것의 방목지들과, 그리고 야셀과 그것의 방목지들을 주었더라.
+1 וְאֶת־ = and <obj.> ([Obj.])
+2 חֶשְׁבּוֹן = Heshbon
+3 וְאֶת־ = and <obj.> ([Obj.])
+4 מִגְרָשֶׁיהָ = pasture lands its (pasture)
+5 וְאֶת־ = and <obj.> ([Obj.])
+6 יַעְזֵיר = Jazer
+7 וְאֶת־ = and <obj.> ([Obj.])
+8 מִגְרָשֶׁיהָ ס = pasture lands its (pasture)
+
+## 13:7:1
+KO: 그리고 잇사갈의 아들들은 돌라와 부아와 야숩과 시므론, 네 사람이라.
+1 וְלִבְנֵי = and to [the] sons of (son)
+2 יִשָׂשכָר = Issachar
+3 תּוֹלָע = Tola
+4 וּפוּאָה = and Puah (Puah)
+5 יָשׁוּב = Jashub
+6 וְשִׁמְרוֹן = and Shimron (Shimron)
+7 אַרְבָּעָה ס = four
+
+## 13:7:2
+KO: 돌라의 아들들은 웃시와 르바야와 여리엘과 야매와 입삼과 스므엘이니, 그들은 그들의 조상들의 집의 우두머리들이며, 돌라에게 속한 용사들로서 그들의 세대들에 따라 그들의 수효는 다윗의 날들에 이만 이천육백 명이었더라.
+1 וּבְנֵי = and [the] sons of (son)
+2 תוֹלָע = Tola
+3 עֻזִּי = Uzzi
+4 וּרְפָיָה = and Rephaiah (Rephaiah)
+5 וִירִיאֵל = and Jeriel (Jeriel)
+6 וְיַחְמַי = and Jahmai (Jahmai)
+7 וְיִבְשָׂם = and Jibsam (Ibsam)
+8 וּשְׁמוּאֵל = and Samuel (Shemuel)
+9 רָאשִׁים = chiefs (head)
+10 לְבֵית־ = of [the] house of (house)
+11 אֲבוֹתָם = ancestors their (father)
+12 לְתוֹלָע = of Tola
+13 גִּבּוֹרֵי = mighty [men] of (mighty)
+14 חַיִל = strength
+15 לְתֹלְדוֹתָם = to generations their (generation)
+16 מִסְפָּרָם = number their (number)
+17 בִּימֵי = in [the] days of (day;_when)
+18 דָוִיד = David
+19 עֶשְׂרִים־ = [was] twenty (twenty)
+20 וּשְׁנַיִם = and two (two)
+21 אֶלֶף = thousand
+22 וְשֵׁשׁ = and six (six)
+23 מֵאוֹת ס = hundred<s> (hundred)
+
+## 13:7:3
+KO: 그리고 웃시의 아들은 이스라히야요, 이스라히야의 아들들은 미가엘과 오바댜와 요엘과 잇시야 다섯 사람이니, 그들 모두가 족장들이라.
+1 וּבְנֵי = and [the] sons of
+2 עֻזִּי = Uzzi
+3 יִזְרַחְיָה = Izrahiah
+4 וּבְנֵי = and [the] sons
+5 יִזְרַחְיָה = Izrahiah
+6 מִיכָאֵל = Michael
+7 וְעֹבַדְיָה = and Obadiah (Obadiah)
+8 וְיוֹאֵל = and Joel (Joel)
+9 יִשִּׁיָּה = Isshiah
+10 חֲמִשָּׁה = five
+11 רָאשִׁים = chiefs (head)
+12 כֻּלָּם = all of them (all)
+
+## 13:7:4
+KO: 그리고 그들 위에는 그들의 세대와 그들의 조상의 가문을 따라 전쟁의 군대 곧 삼만 육천 명이 있었으니, 이는 그들에게 아내들과 아들들이 많았기 때문이다.
+1 וַעֲלֵיהֶם = and with them (upon)
+2 לְתֹלְדוֹתָם = to generations their (generation)
+3 לְבֵית = of [the] house of (house)
+4 אֲבוֹתָם = ancestors their (father)
+5 גְּדוּדֵי = troops of (band)
+6 צְבָא = war of (army)
+7 מִלְחָמָה = warfare (battle)
+8 שְׁלֹשִׁים = thirty
+9 וְשִׁשָּׁה = and six (six)
+10 אָלֶף = thousand
+11 כִּי־ = for
+12 הִרְבּוּ = they had many (to multiply)
+13 נָשִׁים = wives (woman)
+14 וּבָנִים = and sons (son)
+
+## 13:7:5
+KO: 그리고 그들의 형제들, 잇사갈의 모든 종족들에게는, (그들이) 다 힘의 용사들이었으니, 그들의 보계대로 계수하면 팔만 칠천 명이었다.
+1 וַאֲחֵיהֶם = and relatives their (brother)
+2 לְכֹל = to all
+3 מִשְׁפְּחוֹת = [the] clans of (family)
+4 יִשָׂשכָר = Issachar
+5 גִּבּוֹרֵי = mighty [men] of (mighty)
+6 חֲיָלִים = strength<s> (strength)
+7 שְׁמוֹנִים = [was] eighty (eighty)
+8 וְשִׁבְעָה = and seven (seven)
+9 אֶלֶף = thousand
+10 הִתְיַחְשָׂם = recording genealogy they (to enroll)
+11 לַכֹּל פ = of <the> everyone
+
+## 13:7:6
+KO: 베냐민의 아들들은 벨라와 베겔과 여디아엘, 셋이라.
+1 בִּנְיָמִן = Benjamin
+2 בֶּלַע = Bela
+3 וָבֶכֶר = and Beker (Becher)
+4 וִידִיעֲאֵל = and Jediael (Jediael)
+5 שְׁלֹשָׁה = three
+
+## 13:7:7
+KO: 그리고 벨라의 아들들은 에스본과 우시와 웃시엘과 여리못과 이리 다섯, 곧 조상 가문의 우두머리들이며 용맹한 용사들이라. 그들의 계보를 따라 계수하면 이만 이천삼십사 인이었더라.
+1 וּבְנֵי = and [the] sons of (son)
+2 בֶלַע = Bela
+3 אֶצְבּוֹן = Ezbon
+4 וְעֻזִּי = and Uzzi (Uzzi)
+5 וְעֻזִּיאֵל = and Uzziel (Uzziel)
+6 וִירִימוֹת = and Jerimoth (Jerimoth)
+7 וְעִירִי = and Iri (Iri)
+8 חֲמִשָּׁה = five
+9 רָאשֵׁי = chiefs of (head)
+10 בֵּית = a house of (house)
+11 אָבוֹת = ancestors (father)
+12 גִּבּוֹרֵי = mighty [men] of (mighty)
+13 חֲיָלִים = strength<s> (strength)
+14 וְהִתְיַחְשָׂם = and recording genealogy they (to enroll)
+15 עֶשְׂרִים = [was] twenty (twenty)
+16 וּשְׁנַיִם = and two (two)
+17 אֶלֶף = thousand
+18 וּשְׁלֹשִׁים = and thirty (thirty)
+19 וְאַרְבָּעָה ס = and four (four)
+
+## 13:7:8
+KO: 그리고 베겔의 아들들은 스미라와 요아스와 엘리에셀과 엘료에내와 오므리와 여레못과 아비야와 아나돗과 알레멧이니, 이 모든 이들이 베겔의 아들들이더라.
+1 וּבְנֵי = and [the] sons of
+2 בֶכֶר = Beker
+3 זְמִירָה = Zemirah
+4 וְיוֹעָשׁ = and Joash (Joash)
+5 וֶאֱלִיעֶזֶר = and Eliezer (Eliezer)
+6 וְאֶלְיוֹעֵינַי = and Elioenai (Elioenai)
+7 וְעָמְרִי = and Omri (Omri)
+8 וִירֵמוֹת = and Jeremoth (Jeremoth)
+9 וַאֲבִיָּה = and Abijah (Abijah)
+10 וַעֲנָתוֹת = and Anathoth (Anathoth)
+11 וְעָלָמֶת = and Alemeth (Alemeth)
+12 כָּל־ = all
+13 אֵלֶּה = these
+14 בְּנֵי־ = [were] [the] sons of
+15 בָכֶר = Beker
+
+## 13:7:9
+KO: 그들의 계보는 그들의 세대들에 따라, 그들 조상들의 집의 우두머리들이요, 힘의 용사들이며, 그 수는 이만 이백 명이라.
+1 וְהִתְיַחְשָׂם = and recording genealogy they (to enroll)
+2 לְתֹלְדוֹתָם = to generations their (generation)
+3 רָאשֵׁי = chiefs of (head)
+4 בֵּית = [the] house of (house)
+5 אֲבוֹתָם = ancestors their (father)
+6 גִּבּוֹרֵי = mighty [men] of (mighty)
+7 חָיִל = strength
+8 עֶשְׂרִים = [was] twenty (twenty)
+9 אֶלֶף = thousand
+10 וּמָאתָיִם ס = and two hundred (hundred)
+
+## 13:7:10
+KO: 그리고 여디아엘의 아들은 빌한이요, 빌한의 아들들은 여우스와 베냐민과 에훗과 그나아나와 제단과 다시스와 아히사할이니라.
+1 וּבְנֵי = and [the] sons of
+2 יְדִיעֲאֵל = Jediael
+3 בִּלְהָן = Bilhan
+4 וּבְנֵי = and [the] sons of
+5 בִלְהָן = Bilhan
+6 יְעוּשׁ = Jeush
+7 וּבִנְיָמִן = and Benjamin (Benjamin)
+8 וְאֵהוּד = and Ehud (Ehud)
+9 וּכְנַעֲנָה = and Kenaanah (Chenaanah)
+10 וְזֵיתָן = and Zethan (Zethan)
+11 וְתַרְשִׁישׁ = and Tarshish (Tarshish)
+12 וַאֲחִישָׁחַר = and Ahishahar (Ahishahar)
+
+## 13:7:11
+KO: 이들 모두는 여디아엘의 아들들이며, 아버지들의 우두머리들이자 용맹한 자들이니, 전쟁에 나가는 군대 소집 인원이 일만 칠천이백 명이었다.
+1 כָּל־ = all
+2 אֵלֶּה = these
+3 בְּנֵי = [were] [the] sons of (son)
+4 יְדִיעֲאֵל = Jediael
+5 לְרָאשֵׁי = to [the] chiefs of (head)
+6 הָאָבוֹת = the fathers (father)
+7 גִּבּוֹרֵי = mighty [men] of (mighty)
+8 חֲיָלִים = strength<s> (strength)
+9 שִׁבְעָה־ = seven- (seven)
+10 עָשָׂר = teen (ten)
+11 אֶלֶף = thousand
+12 וּמָאתַיִם = and two hundred (hundred)
+13 יֹצְאֵי = [those who] went forth of (to come out)
+14 צָבָא = war (army)
+15 לַמִּלְחָמָה = for <the> battle (battle)
+
+## 13:7:12
+KO: 그리고 숩빔과 훕빔은 ‘이르’의 아들들이요, 후심은 ‘아헬’의 아들이더라.
+1 וְשֻׁפִּם = and Shuppim (Shuppim)
+2 וְחֻפִּם = and Huppim (Huppim)
+3 בְּנֵי = [were] [the] sons of
+4 עִיר = Ir
+5 חֻשִׁם = Hushim
+6 בְּנֵי = [were] [the] sons of
+7 אַחֵר = Aher
+
+## 13:7:13
+KO: 납달리의 아들들은 야하시엘과 구니와 예셀과 살룸이니, (그들은) 빌하의 아들들이다.
+1 בְּנֵי = [the] sons of
+2 נַפְתָּלִי = Naphtali
+3 יַחֲצִיאֵל = Jahziel
+4 וְגוּנִי = and Guni (Guni)
+5 וְיֵצֶר = and Jezer (Jezer)
+6 וְשַׁלּוּם = and Shallum (Shallum)
+7 בְּנֵי = [the] sons of
+8 בִלְהָה פ = Bilhah
+
+## 13:7:14
+KO: 므낫세의 아들들은 그 아내가 낳은 아스리엘이며, 그의 첩인 아람 여인은 길르앗의 아버지 마길을 낳았더라.
+1 בְּנֵי = [the] sons of (son)
+2 מְנַשֶּׁה = Manasseh
+3 אַשְׂרִיאֵל = Asriel
+4 אֲשֶׁר = whom (which)
+5 יָלָדָה = she bore
+6 פִּילַגְשׁוֹ = concubine his (concubine)
+7 הָאֲרַמִּיָּה = <the> Aramean (Aramean)
+8 יָלְדָה = she bore
+9 אֶת־ = <obj.> ([Obj.])
+10 מָכִיר = Makir (Machir)
+11 אֲבִי = [the] father of (father)
+12 גִלְעָד = Gilead

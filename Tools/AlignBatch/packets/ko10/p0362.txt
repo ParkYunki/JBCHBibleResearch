@@ -1,0 +1,75 @@
+## 4:1:6
+KO: 시므온에게는 수리삿대의 아들 슬루미엘이더라.
+1 לְשִׁמְעוֹן = for Simeon (Simeon)
+2 שְׁלֻמִיאֵל = Shelumiel
+3 בֶּן־ = [the] son of (son)
+4 צוּרִישַׁדָּי = Zurishaddai
+
+## 4:1:7
+KO: 유다에게는 암미나답의 아들 나손이라.
+1 לִיהוּדָה = for Judah (Judah)
+2 נַחְשׁוֹן = Nahshon
+3 בֶּן־ = [the] son of (son)
+4 עַמִּינָדָב = Amminadab
+
+## 4:1:8
+KO: 잇사갈에게는 수아르의 아들 느다넬이요
+1 לְיִשָּׂשכָר = for Issachar (Issachar)
+2 נְתַנְאֵל = Nethanel
+3 בֶּן־ = [the] son of (son)
+4 צוּעָר = Zuar
+
+## 4:1:9
+KO: 스불론에게는 헬론의 아들 엘리압이라.
+1 לִזְבוּלֻן = for Zebulun (Zebulun)
+2 אֱלִיאָב = Eliab
+3 בֶּן־ = [the] son of (son)
+4 חֵלֹן = Helon
+
+## 4:1:10
+KO: 요셉의 자손들에게는, 에브라임에게는 암미훗의 아들 엘리사마요, 므낫세에게는 브다술의 아들 가말리엘이라.
+1 לִבְנֵי = for [the] sons of
+2 יוֹסֵף = Joseph
+3 לְאֶפְרַיִם = for Ephraim (Ephraim)
+4 אֱלִישָׁמָע = Elishama
+5 בֶּן־ = [the] son of
+6 עַמִּיהוּד = Ammihud
+7 לִמְנַשֶּׁה = for Manasseh (Manasseh)
+8 גַּמְלִיאֵל = Gamaliel
+9 בֶּן־ = [the] son of
+10 פְּדָהצוּר = Pedahzur
+
+## 4:1:11
+KO: 베냐민에게는 기드오니의 아들 아비단이라.
+1 לְבִנְיָמִן = for Benjamin (Benjamin)
+2 אֲבִידָן = Abidan
+3 בֶּן־ = [the] son of (son)
+4 גִּדְעֹנִי = Gideoni
+
+## 4:1:12
+KO: 단에게는 암미삿대의 아들 아히에셀이다.
+1 לְדָן = for Dan (Dan)
+2 אֲחִיעֶזֶר = Ahiezer
+3 בֶּן־ = [the] son of (son)
+4 עַמִּישַׁדָּי = Ammishaddai
+
+## 4:1:13
+KO: 아셀에게는 오그란의 아들 바기엘이요.
+1 לְאָשֵׁר = for Asher (Asher)
+2 פַּגְעִיאֵל = Pagiel
+3 בֶּן־ = [the] son of (son)
+4 עָכְרָן = Ocran (Ochran)
+
+## 4:1:14
+KO: 갓에게는 드우엘의 아들 엘리아삽이라.
+1 לְגָד = for Gad (Gad)
+2 אֶלְיָסָף = Eliasaph
+3 בֶּן־ = [the] son of (son)
+4 דְּעוּאֵל = Deuel
+
+## 4:1:15
+KO: 납달리에게는 에난의 아들 아히라라.
+1 לְנַפְתָּלִי = for Naphtali (Naphtali)
+2 אֲחִירַע = Ahira
+3 בֶּן־ = [the] son of (son)
+4 עֵינָן = Enan

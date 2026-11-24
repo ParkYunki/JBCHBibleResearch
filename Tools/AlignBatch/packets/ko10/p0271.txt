@@ -1,0 +1,159 @@
+## 2:39:36
+KO: 그 상과 그 모든 기구와 그 얼굴의 빵을
+1 אֶת־ = <obj.>
+2 הַשֻּׁלְחָן = the table (table)
+3 אֶת־ = <obj.>
+4 כָּל־ = all
+5 כֵּלָיו = articles its (article|utensil)
+6 וְאֵת = and <obj.>
+7 לֶחֶם = [the] bread of (food)
+8 הַפָּנִים = the presence (face)
+
+## 2:39:37
+KO: 정금 등잔대와 그 등잔들 곧 정렬하는 등잔들과 그 모든 기구와 등잔용 기름과
+1 אֶת־ = <obj.>
+2 הַמְּנֹרָה = the lampstand (lampstand)
+3 הַטְּהֹרָה = <the> pure (clean)
+4 אֶת־ = <obj.>
+5 נֵרֹתֶיהָ = lamps its
+6 נֵרֹת = [the] lamps of
+7 הַמַּעֲרָכָה = the row (rank)
+8 וְאֶת־ = and <obj.>
+9 כָּל־ = all
+10 כֵּלֶיהָ = articles its (article|utensil)
+11 וְאֵת = and <obj.>
+12 שֶׁמֶן = [the] oil of (oil)
+13 הַמָּאוֹר = the light (light)
+
+## 2:39:38
+KO: 그리고 금 제단과, 그리고 관유와, 그리고 향기로운 향과, 그리고 그 장막 입구의 휘장과
+1 וְאֵת = and <obj.>
+2 מִזְבַּח = [the] altar of (altar)
+3 הַזָּהָב = <the> gold (gold)
+4 וְאֵת = and <obj.>
+5 שֶׁמֶן = [the] oil of (oil)
+6 הַמִּשְׁחָה = <the> anointing (anointing)
+7 וְאֵת = and <obj.>
+8 קְטֹרֶת = [the] incense of (incense)
+9 הַסַּמִּים = the perfume<s> (spice)
+10 וְאֵת = and <obj.>
+11 מָסַךְ = [the] screen of (covering)
+12 פֶּתַח = [the] entrance of (entrance)
+13 הָאֹהֶל = the tent (tent)
+
+## 2:39:39
+KO: 그 놋 제단과 그 놋 그물과 그 채들과 그 모든 기구와 그 물두멍과 그 받침.
+1 אֵת = <obj.>
+2 מִזְבַּח = [the] altar of (altar)
+3 הַנְּחֹשֶׁת = <the> bronze
+4 וְאֶת־ = and <obj.>
+5 מִכְבַּר = [the] grating of (grate)
+6 הַנְּחֹשֶׁת = <the> bronze
+7 אֲשֶׁר־ = which
+8 לוֹ = [belonged] to <the> it (him)
+9 אֶת־ = <obj.>
+10 בַּדָּיו = poles its (alone)
+11 וְאֶת־ = and <obj.>
+12 כָּל־ = all
+13 כֵּלָיו = articles its (article|utensil)
+14 אֶת־ = <obj.>
+15 הַכִּיֹּר = the laver (basin)
+16 וְאֶת־ = and <obj.>
+17 כַּנּוֹ = base its (stand)
+
+## 2:39:40
+KO: 뜰의 포장들과 그 기둥들과 그 받침들과 뜰의 문을 위한 덮개와, 그것의 줄들과 그것의 말뚝들과, 성막 곧 회막의 봉사를 위한 모든 기구들을 (만들었으니)
+1 אֵת = <obj.>
+2 קַלְעֵי = [the] curtains of (curtain)
+3 הֶחָצֵר = the courtyard
+4 אֶת־ = <obj.>
+5 עַמֻּדֶיהָ = pillars its (pillar)
+6 וְאֶת־ = and <obj.>
+7 אֲדָנֶיהָ = bases its (socket)
+8 וְאֶת־ = and <obj.>
+9 הַמָּסָךְ = the screen (covering)
+10 לְשַׁעַר = for [the] gate of (gate)
+11 הֶחָצֵר = the courtyard
+12 אֶת־ = <obj.>
+13 מֵיתָרָיו = ropes its (cord)
+14 וִיתֵדֹתֶיהָ = and tent pegs its (peg)
+15 וְאֵת = and <obj.>
+16 כָּל־ = all
+17 כְּלֵי = [the] articles of (article|utensil)
+18 עֲבֹדַת = [the] service of (service)
+19 הַמִּשְׁכָּן = the tabernacle (tabernacle)
+20 לְאֹהֶל = for [the] tent of (tent)
+21 מוֹעֵד = meeting
+
+## 2:39:41
+KO: (그들은) 성소에서 섬기기 위한 정교한 옷들, 곧 제사장 아론의 거룩한 옷들과 그 아들들의 옷들을 (만들었으니) 그들이 제사 직분을 행하기 위함이었다.
+1 אֶת־ = <obj.>
+2 בִּגְדֵי = [the] garments of
+3 הַשְּׂרָד = the woven material (braiding)
+4 לְשָׁרֵת = to serve (to minister)
+5 בַּקֹּדֶשׁ = in the holy place
+6 אֶת־ = <obj.>
+7 בִּגְדֵי = [the] garments of
+8 הַקֹּדֶשׁ = <the> holiness
+9 לְאַהֲרֹן = for Aaron (Aaron)
+10 הַכֹּהֵן = the priest (priest)
+11 וְאֶת־ = and <obj.>
+12 בִּגְדֵי = [the] garments of
+13 בָנָיו = sons his (son)
+14 לְכַהֵן = to serve as priests (to minister)
+
+## 2:39:42
+KO: 여호와께서 모세에게 명령하신 모든 것같이, 이스라엘 자손이 모든 사역을 행하였다.
+1 כְּכֹל = according to all
+2 אֲשֶׁר־ = that (which)
+3 צִוָּה = he had commanded (to command)
+4 יְהוָה = Yahweh (LORD)
+5 אֶת־ = <obj.>
+6 מֹשֶׁה = Moses
+7 כֵּן = so
+8 עָשׂוּ = they did (to make)
+9 בְּנֵי = [the] people of (son)
+10 יִשְׂרָאֵל = Israel
+11 אֵת = <obj.>
+12 כָּל־ = all
+13 הָעֲבֹדָה = the labor (service)
+
+## 2:39:43
+KO: 그리고 모세가 모든 일을 보았는데, 보라, 그들이 그것을 행하였더라. 여호와께서 명하신 대로 그렇게 그들이 행하였으므로 모세가 그들에게 축복하였더라.
+1 וַיַּרְא = and he saw (to see)
+2 מֹשֶׁה = Moses
+3 אֶת־ = <obj.>
+4 כָּל־ = all
+5 הַמְּלָאכָה = the work (work)
+6 וְהִנֵּה = and there! (behold)
+7 עָשׂוּ = they had done
+8 אֹתָהּ = <obj.> it
+9 כַּאֲשֶׁר = just as (as which)
+10 צִוָּה = he had commanded (to command)
+11 יְהוָה = Yahweh (LORD)
+12 כֵּן = so
+13 עָשׂוּ = they had done
+14 וַיְבָרֶךְ = and he blessed (to bless)
+15 אֹתָם = <obj.> them
+16 מֹשֶׁה פ = Moses
+
+## 2:40:1
+KO: 그리고 여호와께서 모세에게 말씀하여 이르셨다.
+1 וַיְדַבֵּר = and he spoke (to speak)
+2 יְהוָה = Yahweh (LORD)
+3 אֶל־ = to (to(wards))
+4 מֹשֶׁה = Moses
+5 לֵּאמֹר = <to> saying (to say)
+
+## 2:40:2
+KO: 첫째 달의 그날에, 곧 그 달의 첫째 날에, 너는 성막, 곧 회막을 세울지니라.
+1 בְּיוֹם־ = on [the] day of (day;_when)
+2 הַחֹדֶשׁ = the month
+3 הָרִאשׁוֹן = <the> first (first)
+4 בְּאֶחָד = on [day] one (one)
+5 לַחֹדֶשׁ = of the month
+6 תָּקִים = you will set up (to arise)
+7 אֶת־ = <obj.> ([Obj.])
+8 מִשְׁכַּן = [the] tabernacle of (tabernacle)
+9 אֹהֶל = [the] tent of (tent)
+10 מוֹעֵד = meeting

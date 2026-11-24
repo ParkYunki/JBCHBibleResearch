@@ -1,0 +1,190 @@
+## 16:3:13
+KO: 골짜기 문은 하눈과 자노아 거민들이 보수하였으니, 그들은 그것을 건축하고 그 문짝들과 그 자물쇠들과 그 빗장들을 세웠으며, 또 분문까지 성벽 일천 규빗을 보수하였다.
+1 אֵת = <obj.> ([Obj.])
+2 שַׁעַר = [the] gate of
+3 הַגַּיְא = the valley (Valley( Gate))
+4 הֶחֱזִיק = he repaired (to strengthen)
+5 חָנוּן = Hanun
+6 וְיֹשְׁבֵי = and [the] inhabitants of (to dwell)
+7 זָנוֹחַ = Zanoah
+8 הֵמָּה = they (they(masc.))
+9 בָנוּהוּ = they rebuilt it (to build)
+10 וַיַּעֲמִידוּ = and they set up (to stand)
+11 דַּלְתֹתָיו = doors its (door)
+12 מַנְעֻלָיו = bolts its (bolt)
+13 וּבְרִיחָיו = and bars its (bar)
+14 וְאֶלֶף = and one thousand (thousand)
+15 אַמָּה = cubit[s] (cubit)
+16 בַּחוֹמָה = in the wall (wall)
+17 עַד = to (till)
+18 שַׁעַר = [the] gate of
+19 הָשֲׁפוֹת = the dung (Dung( Gate))
+
+## 16:3:14
+KO: 분문(거름문)은 벧학게렘 지방의 통치자인 레갑의 아들 말기야가 보수하였는데, 그는 그것을 건축하고 그 문짝들과 그 자물쇠들과 그 빗장들을 세웠다.
+1 וְאֵת = and <obj.> ([Obj.])
+2 שַׁעַר = [the] gate of (gate)
+3 הָאַשְׁפּוֹת = the dung (Dung( Gate))
+4 הֶחֱזִיק = he repaired (to strengthen)
+5 מַלְכִּיָּה = Malkijah (Malchijah)
+6 בֶן־ = [the] son of (son)
+7 רֵכָב = Rechab
+8 שַׂר = [the] official of (ruler)
+9 פֶּלֶךְ = [the] district of (district)
+10 בֵּית־ = Beth
+11 הַכָּרֶם = Hakkerem
+12 הוּא = he (he;_she;_it)
+13 יִבְנֶנּוּ = he rebuilt it (to build)
+14 וְיַעֲמִיד = and he may set up (to stand)
+15 דַּלְתֹתָיו = doors its (door)
+16 מַנְעֻלָיו = bolts its (bolt)
+17 וּבְרִיחָיו ס = and bars its (bar)
+
+## 16:3:15
+KO: 그리고 샘 문은 미스바 지방의 통치자인 골호세의 아들 살룬이 보수하였고, 그는 그것을 세우고 그것을 덮었으며, 그것의 문짝들을 세우고, 그것의 자물쇠들과 그것의 빗장들을 (갖추었으며), 그리고 왕의 동산 곁에 있는 셀라 못의 성벽을 보수하여 다윗 성에서 내려오는 계단들까지 이르렀다.
+1 וְאֵת = and <obj.>
+2 שַׁעַר = [the] gate of (gate)
+3 הָעַיִן = the spring (Fountain( Gate))
+4 הֶחֱזִיק = he repaired (to strengthen)
+5 שַׁלּוּן = Shallun (Shallum)
+6 בֶּן־ = [the] son of (son)
+7 כָּל־ = Col-
+8 חֹזֶה = Hozeh
+9 שַׂר = [the] official of (ruler)
+10 פֶּלֶךְ = [the] district of (district)
+11 הַמִּצְפָּה = <the> Mizpah (Mizpah)
+12 הוּא = he (he;_she;_it)
+13 יִבְנֶנּוּ = he rebuilt it (to build)
+14 וִיטַלְלֶנּוּ = and he roofed over it (to cover)
+15 וְיַעֲמִיד = so he may set up (to stand)
+16 דַּלְתֹתָיו = doors its (door)
+17 מַנְעֻלָיו = bolts its (bolt)
+18 וּבְרִיחָיו = and bars its (bar)
+19 וְאֵת = and <obj.>
+20 חוֹמַת = [the] wall of (wall)
+21 בְּרֵכַת = [the] pool of (pool)
+22 הַשֶּׁלַח = <the> Shelah (Shelah)
+23 לְגַן־ = of [the] garden of (garden)
+24 הַמֶּלֶךְ = the king (king)
+25 וְעַד־ = and to (till)
+26 הַמַּעֲלוֹת = the steps (step)
+27 הַיּוֹרְדוֹת = which go down (to go down)
+28 מֵעִיר = from [the] city of (city)
+29 דָּוִיד ס = David
+
+## 16:3:16
+KO: 그 뒤를 이어 벧술 지방 절반의 통치자 아스북의 아들 느헤미야가 다윗의 묘실들과 마주 대한 곳까지, 그리고 만든 못까지, 그리고 용사들의 집까지 중수하였다.
+1 אַחֲרָיו = after him (after)
+2 הֶחֱזִיק = he repaired (to strengthen)
+3 נְחֶמְיָה = Nehemiah
+4 בֶן־ = [the] son of (son)
+5 עַזְבּוּק = Azbuk
+6 שַׂר = [the] official of (ruler)
+7 חֲצִי = <the> half of (half)
+8 פֶּלֶךְ = [the] district of (district)
+9 בֵּית־ = Beth
+10 צוּר = Zur
+11 עַד־ = to
+12 נֶגֶד = before
+13 קִבְרֵי = [the] tombs of (grave)
+14 דָוִיד = David
+15 וְעַד־ = and to
+16 הַבְּרֵכָה = the pool (pool)
+17 הָעֲשׂוּיָה = <the> made (to make)
+18 וְעַד = and to
+19 בֵּית = [the] house of (house)
+20 הַגִּבֹּרִים ס = the mighty [men] (mighty)
+
+## 16:3:17
+KO: 그의 뒤를 이어 레위 사람들인 바니의 아들 르훔이 보수하였고, 그의 곁에서 하사뱌가 그일라의 절반 구역을 다스리는 자로서 그의 구역을 위하여 보수하였고
+1 אַחֲרָיו = after him (after)
+2 הֶחֱזִיקוּ = they repaired
+3 הַלְוִיִּם = the Levites (Levi)
+4 רְחוּם = Rehum
+5 בֶּן־ = [the] son of (son)
+6 בָּנִי = Bani
+7 עַל־ = on (upon)
+8 יָדוֹ = hand his (hand)
+9 הֶחֱזִיק = he repaired
+10 חֲשַׁבְיָה = Hashabiah
+11 שַׂר־ = [the] official of (ruler)
+12 חֲצִי־ = <the> half of (half)
+13 פֶלֶךְ = [the] district of
+14 קְעִילָה = Keilah
+15 לְפִלְכּוֹ ס = for district his
+
+## 16:3:18
+KO: 그 뒤를 이어 그들의 형제 바왜, 곧 헤나닷의 아들로서 그일라 지방의 절반을 다스리는 자가 중수하였다.
+1 אַחֲרָיו = after him (after)
+2 הֶחֱזִיקוּ = they repaired (to strengthen)
+3 אֲחֵיהֶם = brothers their (brother)
+4 בַּוַּי = Bavvai
+5 בֶּן־ = [the] son of (son)
+6 חֵנָדָד = Henadad
+7 שַׂר = [the] official of (ruler)
+8 חֲצִי = <the> half of (half)
+9 פֶּלֶךְ = [the] district of (district)
+10 קְעִילָה ס = Keilah
+
+## 16:3:19
+KO: 그리고 미스바의 통치자 예수아의 아들 에셀은 그 손 옆의 한 부분을 견고하게 하였으니, 곧 무기를 올리는 곳(군기고) 맞은편 굽이까지이다.
+1 וַיְחַזֵּק = and he repaired (to strengthen)
+2 עַל־ = on (upon)
+3 יָדוֹ = hand his (hand)
+4 עֵזֶר = Ezer
+5 בֶּן־ = [the] son of (son)
+6 יֵשׁוּעַ = Jeshua
+7 שַׂר = [the] official of (ruler)
+8 הַמִּצְפָּה = <the> Mizpah (Mizpah)
+9 מִדָּה = a measured portion (measure)
+10 שֵׁנִית = second
+11 מִנֶּגֶד = from before (before)
+12 עֲלֹת = [the] going up of (to ascend)
+13 הַנֶּשֶׁק = the armory (weapon)
+14 הַמִּקְצֹעַ ס = the buttress (corner)
+
+## 16:3:20
+KO: 그의 다음에는 삽배의 아들 바룩이 두 번째 구역을 힘써 보수하여, 모퉁이로부터 대제사장 엘리아십 집의 문에 이르렀다.
+1 אַחֲרָיו = after him (after)
+2 הֶחֱרָה = zealously (to burn)
+3 הֶחֱזִיק = he repaired (to strengthen)
+4 בָּרוּךְ = Baruch
+5 בֶּן־ = [the] son of (son)
+6 זַכַּי = Zaccai
+7 מִדָּה = a measured portion (measure)
+8 שֵׁנִית = second
+9 מִן־ = from
+10 הַמִּקְצוֹעַ = the buttress (corner)
+11 עַד־ = to (till)
+12 פֶּתַח = [the] entrance of (entrance)
+13 בֵּית = [the] house of (house)
+14 אֶלְיָשִׁיב = Eliashib
+15 הַכֹּהֵן = the priest (priest)
+16 הַגָּדוֹל ס = <the> great (great)
+
+## 16:3:21
+KO: 그의 다음으로 하코스의 아들 우리야의 아들 므레못이 제2의 부분을 굳게 잡았으니, 엘리아십 집의 입구로부터 엘리아십 집의 끝에 이르기까지이다.
+1 אַחֲרָיו = after him (after)
+2 הֶחֱזִיק = he repaired (to strengthen)
+3 מְרֵמוֹת = Meremoth
+4 בֶּן־ = [the] son of
+5 אוּרִיָּה = Uriah
+6 בֶּן־ = [the] son of
+7 הַקּוֹץ = Hakkoz
+8 מִדָּה = a measured portion (measure)
+9 שֵׁנִית = second
+10 מִפֶּתַח = from [the] entrance of (entrance)
+11 בֵּית = [the] house of
+12 אֶלְיָשִׁיב = Eliashib
+13 וְעַד־ = and to (till)
+14 תַּכְלִית = [the] end of (limit)
+15 בֵּית = [the] house of
+16 אֶלְיָשִׁיב ס = Eliashib
+
+## 16:3:22
+KO: 그리고 그 뒤를 이어 평지의 사람들이었던 제사장들이 중수하였다.
+1 וְאַחֲרָיו = and after him (after)
+2 הֶחֱזִיקוּ = they repaired (to strengthen)
+3 הַכֹּהֲנִים = the priests (priest)
+4 אַנְשֵׁי = [the] men of (human)
+5 הַכִּכָּר = the surrounding region (talent)

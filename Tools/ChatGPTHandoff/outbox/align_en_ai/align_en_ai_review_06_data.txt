@@ -1,0 +1,855 @@
+## 26:42:12
+EN: And according to the openings of the chambers that [are] southward [is] an opening at the head of the way, the way directly in the front of the wall eastward in entering them.
+1	וּכְפִתְחֵ֣י	and like [the] entrances of	→ according to the openings
+2	הַלְּשָׁכ֗וֹת	the rooms	→ the chambers
+3	אֲשֶׁר֙	which	→ that
+4	דֶּ֣רֶךְ	[were] [the] direction of	→ southward
+5	הַדָּר֔וֹם	the south	→ southward
+6	פֶּ֖תַח	an entrance	→ an opening
+7	בְּרֹ֣אשׁ	[was] at [the] head of	→ at the head
+8	דָּ֑רֶךְ	a way	→ the way
+9	דֶּ֗רֶךְ	a way	→ the way
+10	בִּפְנֵי֙	in front of	→ in the front
+11	הַגְּדֶ֣רֶת	the wall	→ the wall
+12	הֲגִינָ֔ה	corresponding	→ directly
+13	דֶּ֥רֶךְ	[the] direction of	→ eastward
+14	הַקָּדִ֖ים	the east	→ eastward
+15	בְּבוֹאָֽן	when come [to] them	→ in entering them
+
+## 26:43:1
+EN: And he causes me to go to the gate, the gate that is looking eastward.
+1	וַיּוֹלִכֵ֖נִי	and he led me	→ And he causes me to go
+2	אֶל־	to	→ to
+3	הַשָּׁ֑עַר	the gate	→ the gate
+4	שַׁ֕עַר	[the] gate	→ the gate
+5	אֲשֶׁ֥ר	which	→ that
+6	פֹּנֶ֖ה	[was] facing	→ looking
+7	דֶּ֥רֶךְ	[the] direction of	→ eastward
+8	הַקָּדִֽים	the east	→ eastward
+
+## 26:43:9
+EN: Now they put their whoredom far off, || And the carcasses of their kings—from Me, || And I have dwelt in their midst for all time.
+1	עַתָּ֞ה	now	→ Now
+2	יְרַחֲק֧וּ	let them put far away	→ they put
+3	אֶת־	<obj.>	→ —
+4	זְנוּתָ֛ם	prostitution their	→ whoredom
+5	וּפִגְרֵ֥י	and [the] corpses of	→ carcasses
+6	מַלְכֵיהֶ֖ם	kings their	→ kings
+7	מִמֶּ֑נִּי	from me	→ from Me
+8	וְשָׁכַנְתִּ֥י	and I will dwell	→ I have dwelt
+9	בְתוֹכָ֖ם	in midst of them	→ in their midst
+10	לְעוֹלָֽם׃ ס	for ever	→ for all time
+
+## 26:45:12
+EN: And the shekel [is] twenty gerah: twenty shekels, twenty-five shekels, fifteen shekels—is your maneh.
+1	וְהַשֶּׁ֖קֶל	and the shekel	→ And the shekel
+2	עֶשְׂרִ֣ים	[will be] twenty	→ twenty
+3	גֵּרָ֑ה	gerah[s]	→ gerah
+4	עֶשְׂרִ֨ים	twenty	→ twenty shekels
+5	שְׁקָלִ֜ים	shekels	→ twenty shekels
+6	חֲמִשָּׁ֧ה	five	→ twenty-five shekels
+7	וְעֶשְׂרִ֣ים	and twenty	→ twenty-five shekels
+8	שְׁקָלִ֗ים	shekels	→ twenty-five shekels
+9	עֲשָׂרָ֤ה	ten	→ fifteen shekels
+10	וַחֲמִשָּׁה֙	and five	→ fifteen shekels
+11	שֶׁ֔קֶל	shekel[s]	→ fifteen shekels
+12	הַמָּנֶ֖ה	the mina	→ your maneh
+13	יִֽהְיֶ֥ה	it will be	→ is
+14	לָכֶֽם	for you	→ your maneh
+
+## 26:47:16
+EN: Hamath, Berothah, Sibraim, that [is] between the border of Damascus and the border of Hamath; Hazar-Hatticon, that [is] at the coast of Havran.
+1	חֲמָ֤ת׀	Hamath	→ Hamath
+2	בֵּר֙וֹתָה֙	Berothah	→ Berothah
+3	סִבְרַ֔יִם	Sibraim	→ Sibraim
+4	אֲשֶׁר֙	which	→ that
+5	בֵּין־	[is] between	→ between the border of
+6	גְּב֣וּל	[the] territory of	→ between the border of
+7	דַּמֶּ֔שֶׂק	Damascus	→ Damascus
+8	וּבֵ֖ין	and between	→ and the border of
+9	גְּב֣וּל	[the] territory of	→ and the border of
+10	חֲמָ֑ת	Hamath	→ Hamath
+11	חָצֵר֙	Hazer-	→ Hazar-Hatticon
+12	הַתִּיכ֔וֹן	hattikon	→ Hazar-Hatticon
+13	אֲשֶׁ֖ר	which	→ that
+14	אֶל־	[is] to	→ at the coast of
+15	גְּב֥וּל	[the] border of	→ at the coast of
+16	חַוְרָֽן	Hauran	→ Havran
+
+## 26:48:10
+EN: And of these is the holy raised-offering for the priests, northward twenty-five thousand, and westward ten thousand [in] breadth, and eastward ten thousand [in] breadth, and southward twenty-five thousand [in] length: and the sanctuary of YHWH has been in its midst.
+1	וּ֠לְאֵ֜לֶּה	and to these	→ And of these
+2	תִּהְיֶ֣ה	it will belong	→ is
+3	תְרֽוּמַת־	[the] contribution of	→ the holy raised-offering
+4	הַקֹּדֶשׁ֮	<the> holiness	→ the holy raised-offering
+5	לַכֹּֽהֲנִים֒	to the priests	→ for the priests
+6	צָפ֜וֹנָה	north -ward	→ northward
+7	חֲמִשָּׁ֧ה	five	→ twenty-five thousand
+8	וְעֶשְׂרִ֣ים	and twenty	→ twenty-five thousand
+9	אֶ֗לֶף	thousand [cubits]	→ twenty-five thousand
+10	וְיָ֙מָּה֙	and west -ward	→ westward
+11	רֹ֚חַב	[the] breadth	→ breadth
+12	עֲשֶׂ֣רֶת	[will be] ten	→ ten thousand
+13	אֲלָפִ֔ים	thousand [cubits]	→ ten thousand
+14	וְקָדִ֗ימָה	and east -ward	→ eastward
+15	רֹ֚חַב	[the] breadth	→ breadth
+16	עֲשֶׂ֣רֶת	[will be] ten	→ ten thousand
+17	אֲלָפִ֔ים	thousand [cubits]	→ ten thousand
+18	וְנֶ֕גְבָּה	and south -ward	→ southward
+19	אֹ֕רֶךְ	[the] length	→ length
+20	חֲמִשָּׁ֥ה	[will be] five	→ twenty-five thousand
+21	וְעֶשְׂרִ֖ים	and twenty	→ twenty-five thousand
+22	אָ֑לֶף	thousand [cubits]	→ twenty-five thousand
+23	וְהָיָ֥ה	and it will be	→ has been
+24	מִקְדַּשׁ־	[the] sanctuary of	→ the sanctuary of YHWH
+25	יְהוָ֖ה	Yahweh	→ the sanctuary of YHWH
+26	בְּתוֹכֽוֹ	in [the] middle of it	→ in its midst
+
+## 27:3:12
+EN: There are certain Jews whom you have appointed over the work of the province of Babylon—Shadrach, Meshach, and Abed-Nego, these men have not made of you, O king, [any] regard; your gods they are not serving, and to the golden image you have raised up—are not making worship.”
+1	אִיתַ֞י	there	→ There are
+2	גֻּבְרִ֣ין	[are] men	→ certain Jews
+3	יְהוּדָאיִ֗ן	Jewish	→ certain Jews
+4	דִּֽי־	whom	→ whom
+5	מַנִּ֤יתָ	you have appointed	→ you have appointed
+6	יָתְהוֹן֙	<obj.> them	→ whom
+7	עַל־	over	→ over the work of
+8	עֲבִידַת֙	[the] administration of	→ over the work of
+9	מְדִינַ֣ת	[the] province of	→ the province of Babylon
+10	בָּבֶ֔ל	Babylon	→ the province of Babylon
+11	שַׁדְרַ֥ךְ	Shadrach	→ Shadrach
+12	מֵישַׁ֖ךְ	Meshach	→ Meshach
+13	וַעֲבֵ֣ד	and Abed-	→ Abed-Nego
+14	נְג֑וֹ	-nego	→ Abed-Nego
+15	גֻּבְרַיָּ֣א	men the	→ these men
+16	אִלֵּ֗ךְ	these	→ these men
+17	לָא־	not	→ not made
+18	שָׂ֨מֽוּ	they have set	→ not made
+19	עֲלָ֤ךְ	to you	→ of you
+20	מַלְכָּא֙	king O	→ king
+21	טְעֵ֔ם	discretion	→ regard
+22	לֵֽאלָהָךְ֙	to god your	→ your gods
+23	לָ֣א	not	→ not serving
+24	פָלְחִ֔ין	[they are] paying reverence	→ not serving
+25	וּלְצֶ֧לֶם	and to [the] image of	→ and to the golden image
+26	דַּהֲבָ֛א	<the> gold	→ and to the golden image
+27	דִּ֥י	which	→ —
+28	הֲקֵ֖ימְתָּ	you have set up	→ you have raised up
+29	לָ֥א	not	→ are not making worship
+30	סָגְדִֽין׃ ס	[they are] paying homage	→ are not making worship
+
+## 27:5:25
+EN: and this [is] the writing that is noted down: Numbered, Numbered, Weighed, and Divided.
+1	וּדְנָ֥ה	and this	→ and this
+2	כְתָבָ֖א	[is] writing the	→ the writing
+3	דִּ֣י	which	→ that
+4	רְשִׁ֑ים	it was inscribed	→ noted down
+5	מְנֵ֥א	mene	→ Numbered
+6	מְנֵ֖א	mene	→ Numbered
+7	תְּקֵ֥ל	teqel	→ Weighed
+8	וּפַרְסִֽין	and pharsin	→ Divided
+
+## 27:11:23
+EN: And after they join themselves to him, he works deceit, and has increased, and has been strong by a few of the nation.
+1	וּמִן־	and from when	→ And after
+2	הִֽתְחַבְּר֥וּת	made an alliance	→ they join themselves
+3	אֵלָ֖יו	with him	→ to him
+4	יַעֲשֶׂ֣ה	he will act	→ he works
+5	מִרְמָ֑ה	deceit	→ deceit
+6	וְעָלָ֥ה	and he will rise	→ and has increased
+7	וְעָצַ֖ם	and he will become mighty	→ and has been strong
+8	בִּמְעַט־	with fewness of	→ by a few of
+9	גּֽוֹי	a nation	→ the nation
+
+## 27:12:12
+EN: O the blessedness of him who is waiting earnestly, and comes to the one thousand, three hundred, thirty-five days.
+1	אַשְׁרֵ֥י	how blessed!	→ O the blessedness of
+2	הַֽמְחַכֶּ֖ה	[is] the [one who] waits	→ him who is waiting earnestly
+3	וְיַגִּ֑יעַ	and he may arrive	→ and comes
+4	לְיָמִ֕ים	to days	→ days
+5	אֶ֕לֶף	one thousand	→ one thousand
+6	שְׁלֹ֥שׁ	three	→ three hundred
+7	מֵא֖וֹת	hundreds	→ three hundred
+8	שְׁלֹשִׁ֥ים	thirty	→ thirty-five
+9	וַחֲמִשָּֽׁה	and five	→ thirty-five
+
+## 28:1:8
+EN: And she weans Lo-Ruhamah, and conceives, and bears a son;
+1	וַתִּגְמֹ֖ל	and she weaned	→ And she weans
+2	אֶת־	<obj.>	→ —
+3	לֹ֣א	Lo-	→ Lo-Ruhamah
+4	רֻחָ֑מָה	Ruhamah	→ Lo-Ruhamah
+5	וַתַּ֖הַר	and she conceived	→ and conceives
+6	וַתֵּ֥לֶד	and she bore	→ and bears
+7	בֵּֽן	a son	→ a son
+
+## 28:2:17
+EN: And I have turned aside the names of the lords from her mouth, || And they are not remembered anymore by their name.
+1	וַהֲסִרֹתִ֛י	and I will remove	→ And I have turned aside
+2	אֶת־	<obj.>	→ —
+3	שְׁמ֥וֹת	[the] names of	→ the names of
+4	הַבְּעָלִ֖ים	the Baals	→ the lords
+5	מִפִּ֑יהָ	from mouth her	→ from her mouth
+6	וְלֹֽא־	and not	→ And they are not
+7	יִזָּכְר֥וּ	they will be remembered	→ remembered
+8	ע֖וֹד	again	→ anymore
+9	בִּשְׁמָֽם	by name their	→ by their name
+
+## 28:4:18
+EN: Sour [is] their drink, || They have gone whoring diligently, || Her protectors have thoroughly loved shame.
+1	סָ֖ר	it has come to an end	→ Sour
+2	סָבְאָ֑ם	drink their	→ their drink
+3	הַזְנֵ֣ה	certainly <to prostitute themselves>	→ diligently
+4	הִזְנ֔וּ	they have prostituted themselves	→ They have gone whoring
+5	אָהֲב֥וּ	they have loved	→ have thoroughly loved
+6	הֵב֛וּ	love	→ have thoroughly loved
+7	קָל֖וֹן	shame	→ shame
+8	מָגִנֶּֽיהָ	shields its	→ Her protectors
+
+## 30:4:9
+EN: “I have struck you with blasting and with mildew, || The abundance of your gardens and of your vineyards, || And of your figs, and of your olives, || The palmer-worm eats, || And you have not turned back to Me,” || A declaration of YHWH.
+1	הִכֵּ֣יתִי	I struck	→ I have struck
+2	אֶתְכֶם֮	<obj.> you	→ —
+3	בַּשִּׁדָּפ֣וֹן	with <the> blight	→ with blasting
+4	וּבַיֵּרָקוֹן֒	and with <the> mildew	→ and with mildew
+5	הַרְבּ֨וֹת	to make many	→ The abundance of
+6	גַּנּוֹתֵיכֶ֧ם	gardens your	→ your gardens
+7	וְכַרְמֵיכֶ֛ם	and vineyards your	→ and of your vineyards
+8	וּתְאֵנֵיכֶ֥ם	and fig trees your	→ And of your figs
+9	וְזֵיתֵיכֶ֖ם	and olive trees your	→ and of your olives
+10	יֹאכַ֣ל	it ate	→ eats
+11	הַגָּזָ֑ם	the locust	→ The palmer-worm
+12	וְלֹֽא־	and not	→ And you have not turned back
+13	שַׁבְתֶּ֥ם	you returned	→ And you have not turned back
+14	עָדַ֖י	to me	→ to Me
+15	נְאֻם־	[the] utterance of	→ A declaration of
+16	יְהוָֽה׃ ס	Yahweh	→ YHWH
+
+## 32:3:5
+EN: And the men of Nineveh believe in God, and proclaim a fast, and put on sackcloth, from their greatest even to their least,
+1	וַֽיַּאֲמִ֛ינוּ	and they believed	→ believe
+2	אַנְשֵׁ֥י	[the] people of	→ And the men of
+3	נִֽינְוֵ֖ה	Nineveh	→ Nineveh
+4	בֵּֽאלֹהִ֑ים	in God	→ in God
+5	וַיִּקְרְאוּ־	and they proclaimed	→ proclaim
+6	צוֹם֙	a fast	→ a fast
+7	וַיִּלְבְּשׁ֣וּ	and they wore	→ put on
+8	שַׂקִּ֔ים	sackcloth<s>	→ sackcloth
+9	מִגְּדוֹלָ֖ם	from great their	→ from their greatest
+10	וְעַד־	and unto	→ even to
+11	קְטַנָּֽם	insignificant their	→ their least
+
+## 33:3:5
+EN: Thus said YHWH concerning the prophets || Who are causing My people to err, || Who are biting with their teeth, || And have cried “Peace,” || And he who does not give to their mouth, || They have sanctified against him war:
+1	כֹּ֚ה	thus	→ Thus said
+2	אָמַ֣ר	he says	→ Thus said
+3	יְהוָ֔ה	Yahweh	→ YHWH
+4	עַל־	on	→ concerning
+5	הַנְּבִיאִ֖ים	the prophets	→ the prophets
+6	הַמַּתְעִ֣ים	who mislead	→ to err
+7	אֶת־	<obj.>	→ —
+8	עַמִּ֑י	people my	→ My people
+9	הַנֹּשְׁכִ֤ים	who bite	→ Who are biting
+10	בְּשִׁנֵּיהֶם֙	with teeth their	→ with their teeth
+11	וְקָרְא֣וּ	and they proclaim	→ And have cried
+12	שָׁל֔וֹם	peace	→ Peace
+13	וַאֲשֶׁר֙	and [the one] who	→ And he who
+14	לֹא־	not	→ does not
+15	יִתֵּ֣ן	he puts	→ give
+16	עַל־	on	→ to their mouth
+17	פִּיהֶ֔ם	mouth their	→ to their mouth
+18	וְקִדְּשׁ֥וּ	and they consecrate	→ They have sanctified
+19	עָלָ֖יו	on him	→ against him
+20	מִלְחָמָֽה	war	→ war
+
+## 33:7:4
+EN: Their best one [is] as a brier, || The upright one—than a thorn-hedge, || The day of your watchmen—Your visitation—has come. Now is their perplexity.
+1	טוֹבָ֣ם	good person their	→ Their best one
+2	כְּחֵ֔דֶק	[is] like a thorn-bush	→ as a brier
+3	יָשָׁ֖ר	an upright [person]	→ The upright one
+4	מִמְּסוּכָ֑ה	more than a thorn hedge	→ than a thorn-hedge
+5	י֤וֹם	[the] day of	→ The day of
+6	מְצַפֶּ֙יךָ֙	watchmen your	→ your watchmen
+7	פְּקֻדָּתְךָ֣	punishment your	→ Your visitation
+8	בָ֔אָה	it has come	→ has come
+9	עַתָּ֥ה	now	→ Now
+10	תִהְיֶ֖ה	it will be	→ is
+11	מְבוּכָתָֽם	confusion their	→ their perplexity
+
+## 34:1:13
+EN: And now I break his rod from off you, || And your bands I draw away.”
+1	וְעַתָּ֕ה	and now	→ And now
+2	אֶשְׁבֹּ֥ר	I will break	→ I break
+3	מֹטֵ֖הוּ	yoke-bar his	→ his rod
+4	מֵֽעָלָ֑יִךְ	from on <the> you	→ from off you
+5	וּמוֹסְרֹתַ֖יִךְ	and fetters your	→ And your bands
+6	אֲנַתֵּֽק	I will tear apart	→ I draw away
+
+## 34:2:3
+EN: The shield of his mighty ones has become red, || Men of might [are in] scarlet, || With fiery torches [is] the chariot in a day of his preparation, || And the firs have been caused to tremble.
+1	מָגֵ֨ן	[the] shield of	→ The shield of
+2	גִּבֹּרֵ֜י/הוּ	warriors his	→ his mighty ones
+3	מְאָדָּ֗ם	[is] dyed red	→ has become red
+4	אַנְשֵׁי	men of	→ Men of
+5	חַ֨יִל֙	strength	→ might
+6	מְתֻלָּעִ֔ים	[are] clothed in scarlet	→ scarlet
+7	בְּ/אֵשׁ	[are] in fire of	→ fiery
+8	פְּלָד֥וֹת	iron<s>	→ torches
+9	הָ/רֶ֖כֶב	the chariotry	→ the chariot
+10	בְּ/י֣וֹם	on [the] day	→ in a day of
+11	הֲכִינ֑/וֹ	prepares he	→ his preparation
+12	וְ/הַ/בְּרֹשִׁ֖ים	and the cypresses	→ And the firs
+13	הָרְעָֽלוּ	they have been made to quiver	→ caused to tremble
+
+## 35:2:16
+EN: You have been filled—shame without honor, || Drink also, and be uncircumcised, || Turn around to you does the cup of the right hand of YHWH, || And shameful spewing [is] on your glory.
+1	שָׂבַ֤עְתָּ	you are satisfied	→ You have been filled
+2	קָלוֹן֙	shame	→ shame
+3	מִכָּב֔וֹד	more than honor	→ without honor
+4	שְׁתֵ֥ה	drink	→ Drink
+5	גַם־	also	→ also
+6	אַ֖תָּה	you	→ —
+7	וְהֵֽעָרֵ֑ל	and be counted as uncircumcised	→ uncircumcised
+8	תִּסּ֣וֹב	it will come round	→ Turn around
+9	עָלֶ֗יךָ	to you	→ to you
+10	כּ֚וֹס	[the] cup of	→ the cup of
+11	יְמִ֣ין	[the] right [hand] of	→ right hand of
+12	יְהוָ֔ה	Yahweh	→ YHWH
+13	וְקִיקָל֖וֹן	and disgrace	→ And shameful spewing
+14	עַל־	[will be] over	→ on
+15	כְּבוֹדֶֽךָ	honor your	→ your glory
+
+## 38:1:5
+EN: Your fathers—where [are] they? And the prophets—do they live for all time?
+1	אֲבֽוֹתֵיכֶ֖ם	ancestors your	→ Your fathers
+2	אַיֵּה־	where?	→ where
+3	הֵ֑ם	[are] they	→ they
+4	וְהַ֨נְּבִאִ֔ים	and the prophets	→ And the prophets
+5	הַלְעוֹלָ֖ם	¿ to forever	→ for all time
+6	יִֽחְיֽוּ	do they live	→ do they live
+
+## 38:2:5
+EN: And I am to her—a declaration of YHWH—A wall of fire all around, || And I am for glory in her midst.
+1	וַאֲנִ֤י	and I	→ And I am
+2	אֶֽהְיֶה־	I will be	→ And I am
+3	לָּהּ֙	to it	→ to her
+4	נְאֻם־	[the] utterance of	→ a declaration of
+5	יְהוָ֔ה	Yahweh	→ YHWH
+6	ח֥וֹמַת	a wall of	→ A wall of
+7	אֵ֖שׁ	fire	→ fire
+8	סָבִ֑יב	all around	→ all around
+9	וּלְכָב֖וֹד	and <into> glory	→ for glory
+10	אֶֽהְיֶ֥ה	I will become	→ I am
+11	בְתוֹכָֽהּ פ	in [the] middle of it	→ in her midst
+
+## 38:4:8
+EN: And there is a word of YHWH to me, saying,
+1	וַיְהִ֥י	and it came	→ And there is
+2	דְבַר־	[the] word of	→ a word of
+3	יְהוָ֖ה	Yahweh	→ YHWH
+4	אֵלַ֥י	to me	→ to me
+5	לֵאמֹֽר	<to> saying	→ saying
+
+## 38:12:14
+EN: All the families that are left, || Every family apart, and their women apart!”
+1	כֹּ֗ל	all	→ All
+2	הַמִּשְׁפָּחוֹת֙	the clans	→ the families
+3	הַנִּשְׁאָר֔וֹת	which remain	→ that are left
+4	מִשְׁפָּחֹ֥ת	clans	→ Every family
+5	מִשְׁפָּחֹ֖ת	clans	→ Every family
+6	לְבָ֑ד	<to> alone	→ apart
+7	וּנְשֵׁיהֶ֖ם	and wives their	→ and their women
+8	לְבָֽד׃ ס	<to> alone	→ apart
+
+## 40:6:15
+EN: but if you may not forgive men their trespasses, neither will your Father forgive your trespasses.
+1	ἐὰν	only	→ if
+2	δὲ	however	→ but
+3	μὴ	unless	→ may not forgive
+4	ἀφῆτε	you shall forgive	→ may not forgive
+5	τοῖς	<the>	→ men
+6	ἀνθρώποις	men	→ men
+7	τὰ	the	→ their trespasses
+8	παραπτώματα	trespasses	→ their trespasses
+9	αὐτῶν	of them	→ their trespasses
+10	οὐδὲ	neither	→ neither
+11	ὁ	the	→ your Father
+12	πατὴρ	Father	→ your Father
+13	ὑμῶν	of you	→ your Father
+14	ἀφήσει	will forgive	→ forgive
+15	τὰ	the	→ your trespasses
+16	παραπτώματα	trespasses	→ your trespasses
+17	ὑμῶν	of you.	→ your trespasses
+
+## 40:26:32
+EN: but after My having risen, I will go before you to Galilee.”
+1	μετὰ	After	→ after
+2	δὲ	however	→ but
+3	τὸ	<the>	→ My having risen
+4	ἐγερθῆναί	to raise	→ My having risen
+5	με	Me	→ My having risen
+6	προάξω	I will go before	→ I will go before
+7	ὑμᾶς	you	→ you
+8	εἰς	into	→ to
+9	τὴν	<the>	→ Galilee
+10	Γαλιλαίαν	Galilee.	→ Galilee
+
+## 41:5:17
+EN: and they began to call on Him to go away from their borders.
+1	καὶ	And	→ and
+2	ἤρξαντο	they began	→ they began
+3	παρακαλεῖν	to implore	→ to call on
+4	αὐτὸν	Him	→ Him
+5	ἀπελθεῖν	to depart	→ to go away
+6	ἀπὸ	from	→ from
+7	τῶν	the	→ their borders
+8	ὁρίων	region	→ their borders
+9	αὐτῶν	of them.	→ their borders
+
+## 41:6:27
+EN: and immediately the king having sent a guardsman, commanded his head to be brought,
+1	καὶ	And	→ and
+2	εὐθὺς	immediately	→ immediately
+3	ἀποστείλας	having sent	→ having sent
+4	ὁ	the	→ the king
+5	βασιλεὺς	king	→ the king
+6	σπεκουλάτορα	an executioner	→ guardsman
+7	ἐπέταξεν	he commanded	→ commanded
+8	ἐνέγκαι	to be brought	→ to be brought
+9	τὴν	the	→ his head
+10	κεφαλὴν	head	→ his head
+11	αὐτοῦ	of him.	→ his head
+12	ὁ	<the>	→ —
+13	καὶ	And	→ —
+14	ἀπελθὼν	having gone	→ —
+15	ἀπεκεφάλισεν	he beheaded	→ —
+16	αὐτὸν	him	→ —
+17	ἐν	in	→ —
+18	τῇ	the	→ —
+19	φυλακῇ	prison	→ —
+
+## 42:1:1
+EN: Seeing that many took in hand to set in order a narration of the matters that have been fully assured among us,
+1	Ἐπειδήπερ	Inasmuch as	→ Seeing that
+2	πολλοὶ	many	→ many
+3	ἐπεχείρησαν	undertook	→ took in hand
+4	ἀνατάξασθαι	to draw up	→ to set in order
+5	διήγησιν	a narration	→ narration
+6	περὶ	concerning	→ of
+7	τῶν	the	→ the matters
+8	πεπληροφορημένων	accomplished	→ that have been fully assured
+9	ἐν	among	→ among us
+10	ἡμῖν	us	→ among us
+11	πραγμάτων	things,	→ the matters
+
+## 42:1:74
+EN: To give to us, without fear, || Having been delivered out of the hand of our enemies,
+1	ἀφόβως	without fear	→ without fear
+2	ἐκ	from	→ out of
+3	χειρὸς	[the] hand	→ the hand
+4	τῶν	of the	→ of our enemies
+5	ἐχθρῶν	enemies	→ of our enemies
+6	ἡμῶν	of us	→ of our enemies
+7	ῥυσθέντας	having been saved	→ Having been delivered
+8	λατρεύειν	to serve	→ —
+9	αὐτῷ	Him	→ —
+
+## 42:8:36
+EN: and those also having seen [it], told them how the demoniac was saved.
+1	ἀπήγγειλαν	Related	→ told
+2	δὲ	then	→ and
+3	αὐτοῖς	to them	→ them
+4	καὶ	and	→ also
+5	οἱ	those	→ those
+6	ἰδόντες	having seen [it]	→ having seen
+7	πῶς	how	→ how
+8	ἐσώθη	was healed	→ was saved
+9	ὁ	the [one]	→ the demoniac
+10	δαιμονισθείς	having been demonised.	→ the demoniac
+
+## 42:14:24
+EN: for I say to you that none of those men who have been called will taste of my dinner.”
+1	λέγω	I say	→ I say
+2	γὰρ	for	→ for
+3	ὑμῖν	to you	→ to you
+4	ὅτι	that	→ that
+5	οὐδεὶς	not [one]	→ none of those men
+6	τῶν	of the	→ none of those men
+7	ἀνδρῶν	men	→ none of those men
+8	ἐκείνων	of those	→ none of those men
+9	τῶν	which	→ who have been called
+10	κεκλημένων	invited	→ who have been called
+11	γεύσεταί	will taste	→ will taste
+12	μου	my	→ my
+13	τοῦ	<the>	→ —
+14	δείπνου	supper	→ dinner
+15	πολλοί	many	→ —
+16	γὰρ	for	→ —
+17	εἰσιν	are	→ —
+18	κλητοί	called	→ —
+19	ὀλίγοι	few	→ —
+20	δέ	but	→ —
+21	ἐκλεκτοί	chosen.	→ —
+
+## 42:14:32
+EN: And if not so—he being yet a long way off—having sent a delegation, he asks the things for peace.
+1	εἰ	lest	→ if
+2	δὲ	then	→ And
+3	μή	except	→ not
+4	γε	indeed	→ so
+5	ἔτι	still	→ yet
+6	αὐτοῦ	of him	→ he
+7	πόρρω	far off	→ long way off
+8	ὄντος	being	→ being
+9	πρεσβείαν	an embassy	→ delegation
+10	ἀποστείλας	having sent	→ having sent
+11	ἐρωτᾷ	he asks	→ he asks
+12	τὰ	<the>	→ —
+13	πρὸς	for	→ for
+14	εἰρήνην	peace.	→ peace
+
+## 42:16:12
+EN: And if in the other’s you did not become faithful—who will give to you your own?
+1	καὶ	And	→ And
+2	εἰ	if	→ if
+3	ἐν	in	→ in
+4	τῷ	that which [is]	→ the other’s
+5	ἀλλοτρίῳ	of another	→ the other’s
+6	πιστοὶ	faithful	→ faithful
+7	οὐκ	not	→ did not become
+8	ἐγένεσθε	you have been,	→ did not become
+9	τὸ	that which	→ your own
+10	ὑμέτερον	[is] yours	→ your own
+11	τίς	who	→ who
+12	ὑμῖν	to you	→ to you
+13	δώσει;	will give	→ will give
+
+## 43:8:38
+EN: I speak that which I have seen with My Father, and you, therefore, do that which you have seen with your father.”
+1	ἃ	Those which	→ that which
+2	ἐγὼ	I myself	→ I
+3	ἑώρακα	have seen	→ have seen
+4	παρὰ	with	→ with
+5	τῷ	the	→ —
+6	πατρὶ	Father	→ My Father
+7	μου	of mine	→ My Father
+8	λαλῶ·	I speak;	→ I speak
+9	καὶ	also	→ and
+10	ὑμεῖς	you yourselves	→ you
+11	οὖν	therefore	→ therefore
+12	ἃ	what things	→ that which
+13	ἠκούσατε	you have heard	→ you have seen
+14	παρὰ	from	→ with
+15	τοῦ	the	→ —
+16	πατρὸς	father	→ your father
+17	ὑμῶν	of you	→ your father
+18	ποιεῖτε	you do.	→ do
+
+## 44:7:14
+EN: and Joseph having sent, called for his father Jacob, and all his relatives—with seventy-five souls—
+1	ἀποστείλας	Having sent	→ having sent
+2	δὲ	then	→ and
+3	Ἰωσὴφ	Joseph	→ Joseph
+4	μετεκαλέσατο	he called for	→ called for
+5	Ἰακὼβ	Jacob	→ Jacob
+6	τὸν	the	→ —
+7	πατέρα	father	→ his father
+8	αὐτοῦ	of him	→ his father
+9	καὶ	and	→ and
+10	πᾶσαν	all	→ all
+11	τὴν	the	→ —
+12	συγγένειαν	kindred	→ his relatives
+13	αὐτοῦ	of him	→ his relatives
+14	ἐν	in all	→ with
+15	ψυχαῖς	souls	→ souls
+16	ἑβδομήκοντα	seventy	→ seventy-five
+17	πέντε	five.	→ seventy-five
+
+## 44:7:25
+EN: and he was supposing his brothers to understand that God gives salvation through his hand; and they did not understand.
+1	ἐνόμιζεν	He was supposing	→ he was supposing
+2	δὲ	now	→ and
+3	συνιέναι	to understand	→ to understand
+4	τοὺς	the	→ —
+5	ἀδελφοὺς	brothers	→ his brothers
+6	αὐτοῦ	of him	→ his brothers
+7	ὅτι	that	→ that
+8	ὁ	<the>	→ —
+9	θεὸς	God	→ God
+10	διὰ	through	→ through
+11	χειρὸς	[the] hand	→ his hand
+12	αὐτοῦ	of him	→ his hand
+13	δίδωσιν	is giving	→ gives
+14	σωτηρίαν	salvation	→ salvation
+15	αὐτοῖς·	to them;	→ —
+16	οἱ	<the>	→ —
+17	δὲ	but	→ and
+18	οὐ	not	→ they did not understand
+19	συνῆκαν	they understood.	→ they did not understand
+
+## 44:8:33
+EN: In His humiliation His judgment was taken away, || And His generation—who will declare? Because His life is taken from the earth.”
+1	ἐν	In	→ In
+2	τῇ	the	→ —
+3	ταπεινώσει	humiliation	→ His humiliation
+4	αὐτοῦ	of Him	→ His humiliation
+5	ἡ	<the>	→ —
+6	κρίσις	justice	→ His judgment
+7	αὐτοῦ	from Him	→ His judgment
+8	ἤρθη	was taken away,	→ was taken away
+9	τὴν	The	→ —
+10	δὲ	now	→ And
+11	γενεὰν	generation	→ His generation
+12	αὐτοῦ	of Him	→ His generation
+13	τίς	who	→ who
+14	διηγήσεται;	will describe?	→ will declare
+15	ὅτι	For	→ Because
+16	αἴρεται	is removed	→ is taken
+17	ἀπὸ	from	→ from
+18	τῆς	the	→ the earth
+19	γῆς	earth	→ the earth
+20	ἡ	the	→ —
+21	ζωὴ	life	→ His life
+22	αὐτοῦ	of Him.	→ His life
+
+## 45:3:13
+EN: Their throat [is] an opened grave; with their tongues they used deceit; poison of cobras [is] under their lips—
+1	τάφος	A grave	→ an opened grave
+2	ἀνεῳγμένος	opened	→ an opened grave
+3	ὁ	[is] the	→ —
+4	λάρυγξ	throat	→ Their throat
+5	αὐτῶν	of them,	→ Their throat
+6	ταῖς	with the	→ with their tongues
+7	γλώσσαις	tongues	→ with their tongues
+8	αὐτῶν	of them	→ with their tongues
+9	ἐδολιοῦσαν·	they were practicing deceit;	→ they used deceit
+10	ἰὸς	[the] venom	→ poison
+11	ἀσπίδων	of vipers	→ of cobras
+12	ὑπὸ	[is] under	→ under
+13	τὰ	the	→ —
+14	χείλη	lips	→ their lips
+15	αὐτῶν·	of them;	→ their lips
+
+## 46:1:29
+EN: that no flesh may glory before Him;
+1	ὅπως	so that	→ that
+2	μὴ	not	→ no flesh
+3	καυχήσηται	may boast	→ may glory
+4	πᾶσα	all	→ no flesh
+5	σὰρξ	flesh	→ no flesh
+6	ἐνώπιον	before	→ before Him
+7	τοῦ	<the>	→ —
+8	θεοῦ	God.	→ before Him
+
+## 46:6:7
+EN: Already, indeed, then, there is altogether a fault among you, that you have judgments with one another; why do you not rather suffer injustice? Why not be defrauded?
+1	ἤδη	Already	→ Already
+2	μὲν	indeed	→ indeed
+3	οὖν	therefore	→ then
+4	ὅλως	altogether	→ altogether
+5	ἥττημα	a defeat	→ fault
+6	ἐν	in	→ among you
+7	ὑμῖν	you	→ among you
+8	ἐστιν	it is	→ there is
+9	ὅτι	for	→ that
+10	κρίματα	lawsuits	→ judgments
+11	ἔχετε	you have	→ you have
+12	μεθ᾽	among	→ with one another
+13	ἑαυτῶν	yourselves.	→ with one another
+14	διὰ	Because of	→ why
+15	τί	why	→ why
+16	οὐχὶ	surely	→ not
+17	μᾶλλον	rather	→ rather
+18	ἀδικεῖσθε;	suffer wrong?	→ suffer injustice
+19	διὰ	Because of	→ Why
+20	τί	why	→ Why
+21	οὐχὶ	surely	→ not
+22	μᾶλλον	rather	→ —
+23	ἀποστερεῖσθε;	be defrauded?	→ be defrauded
+
+## 46:10:16
+EN: The cup of the blessing that we bless—is it not the fellowship of the blood of the Christ? The bread that we break—is it not the fellowship of the body of the Christ?
+1	τὸ	The	→ The cup
+2	ποτήριον	cup	→ The cup
+3	τῆς	<the>	→ —
+4	εὐλογίας	of blessing	→ blessing
+5	ὃ	that	→ that
+6	εὐλογοῦμεν	we bless,	→ we bless
+7	οὐχὶ	surely	→ is it not
+8	κοινωνία	a participation	→ fellowship
+9	ἐστὶν	it is	→ is it not
+10	τοῦ	in the	→ of the blood
+11	αἵματος	blood	→ of the blood
+12	τοῦ	<the>	→ —
+13	Χριστοῦ;	of Christ	→ Christ
+14	τὸν	The	→ The bread
+15	ἄρτον	bread	→ The bread
+16	ὃν	that	→ that
+17	κλῶμεν	we break,	→ we break
+18	οὐχὶ	surely	→ is it not
+19	κοινωνία	a participation	→ fellowship
+20	τοῦ	in the	→ of the body
+21	σώματος	body	→ of the body
+22	τοῦ	<the>	→ —
+23	Χριστοῦ	of Christ	→ Christ
+24	ἐστιν;	it is?	→ is it not
+
+## 46:10:24
+EN: let no one seek his own—but each another’s.
+1	μηδεὶς	No one	→ let no one seek
+2	τὸ	the [good]	→ his own
+3	ἑαυτοῦ	of himself	→ his own
+4	ζητείτω	should seek	→ let no one seek
+5	ἀλλὰ	but	→ but
+6	τὸ	that	→ another’s
+7	τοῦ	of the	→ another’s
+8	ἑτέρου	other	→ another’s
+9	ἕκαστος	each.	→ each
+
+## 47:7:12
+EN: If, then, I also wrote to you—not for his cause who did wrong, nor for his cause who suffered wrong, but for our diligence in your behalf being revealed to you before God—
+1	ἄρα	So	→ then
+2	εἰ	if	→ If
+3	καὶ	even	→ also
+4	ἔγραψα	I wrote	→ wrote
+5	ὑμῖν	to you,	→ to you
+6	οὐχ	[it was] not	→ not
+7	ἕνεκεν	for the sake of	→ for his cause
+8	τοῦ	the [one]	→ who did wrong
+9	ἀδικήσαντος	having done wrong	→ who did wrong
+10	ἀλλ᾽	but	→ —
+11	οὐδὲ	nor	→ nor
+12	ἕνεκεν	for the sake of	→ for his cause
+13	τοῦ	the [one]	→ who suffered wrong
+14	ἀδικηθέντος	having suffered wrong,	→ who suffered wrong
+15	ἀλλ᾽	but rather	→ but
+16	ἕνεκεν	for the sake of	→ for
+17	τοῦ	<the>	→ —
+18	φανερωθῆναι	being revealed	→ being revealed
+19	τὴν	the	→ —
+20	σπουδὴν	earnestness	→ diligence
+21	ὑμῶν	of you	→ your
+22	τὴν	which [is]	→ —
+23	ὑπὲρ	for	→ in
+24	ἡμῶν	us	→ our
+25	πρὸς	to	→ to you
+26	ὑμᾶς	you	→ to you
+27	ἐνώπιον	before	→ before
+28	τοῦ	<the>	→ —
+29	θεοῦ	God.	→ God
+
+## 47:11:7
+EN: Did I do sin—humbling myself that you might be exalted, because I freely proclaimed the good news of God to you?
+1	ἢ	Or	→ —
+2	ἁμαρτίαν	a sin	→ sin
+3	ἐποίησα	did I commit	→ Did I do
+4	ἐμαυτὸν	myself	→ myself
+5	ταπεινῶν	humbling	→ humbling
+6	ἵνα	so that	→ that
+7	ὑμεῖς	you yourselves	→ you
+8	ὑψωθῆτε	may be exalted,	→ might be exalted
+9	ὅτι	because	→ because
+10	δωρεὰν	freely	→ freely
+11	τὸ	the	→ the good news
+12	τοῦ	<the>	→ —
+13	θεοῦ	of God	→ of God
+14	εὐαγγέλιον	gospel	→ the good news
+15	εὐηγγελισάμην	I evangelised	→ proclaimed
+16	ὑμῖν;	to you?	→ to you
+
+## 48:5:12
+EN: O that even they would cut themselves off who are unsettling you!
+1	ὄφελον	I wish	→ O that
+2	καὶ	also	→ even
+3	ἀποκόψονται	will emasculate themselves	→ cut themselves off
+4	οἱ	those	→ who
+5	ἀναστατοῦντες	upsetting	→ unsettling
+6	ὑμᾶς	you.	→ you
+
+## 53:3:18
+EN: The grace of our Lord Jesus Christ [is] with you all! Amen.
+1	Ἡ	The	→ The grace
+2	χάρις	grace	→ The grace
+3	τοῦ	of the	→ —
+4	κυρίου	Lord	→ Lord
+5	ἡμῶν	of us	→ our
+6	Ἰησοῦ	Jesus	→ Jesus
+7	Χριστοῦ	Christ	→ Christ
+8	μετὰ	[be] with	→ with
+9	πάντων	all	→ you all
+10	ὑμῶν	of you	→ you all
+11	ἀμήν	Amen.	→ Amen
+12	πρός	to	→ —
+13	Θεσσαλονικείς	Thessalonica	→ —
+14	δευτέρᾳ	second	→ —
+15	ἐγράφη	it was written	→ —
+16	ἀπό	from	→ —
+17	Ἀθηνῶν	Athens	→ —
+
+## 55:4:22
+EN: The Lord Jesus Christ [is] with your spirit. The grace [is] with you! Amen.
+1	Ὁ	The	→ The
+2	κύριος	Lord	→ Lord
+3	Ἰησοῦς	Jesus	→ Jesus
+4	Χριστὸς	Christ	→ Christ
+5	μετὰ	[be] with	→ with
+6	τοῦ	the	→ —
+7	πνεύματός	spirit	→ spirit
+8	σου	of you.	→ your
+9	ἡ	<the>	→ —
+10	χάρις	Grace [be]	→ grace
+11	μεθ᾽	with	→ with
+12	ὑμῶν	you all	→ you
+13	ἀμήν	Amen.	→ Amen
+14	πρός	to	→ —
+15	Τιμόθεον	Timothy	→ —
+16	δευτέρᾳ	second [epistle]	→ —
+17	τῆς	of the	→ —
+18	Ἐφεσίων	Ephesian	→ —
+19	ἐκκλησίας	church	→ —
+20	πρῶτον	first	→ —
+21	ἐπίσκοπον	overseer	→ —
+22	χειροτονηθέντα	having been chosen	→ —
+23	ἐγράφη	It was written	→ —
+24	ἀπό	from	→ —
+25	Ῥώμης	Rome	→ —
+26	ὅτε	when	→ —
+27	ἐκ	from	→ —
+28	δευτέρου	second time	→ —
+29	παρέστη	stood	→ —
+30	Παῦλος	Paul	→ —
+31	τῷ	<the>	→ —
+32	Καίσαρί	before Caesar	→ —
+33	Νέρωνι	Nero	→ —
+
+## 57:1:2
+EN: and Apphia the beloved, and Archippus our fellow-soldier, and the assembly in your house:
+1	καὶ	and	→ and
+2	Ἀπφίᾳ	to Apphia	→ Apphia
+3	τῇ	<the>	→ the beloved
+4	ἀδελφῇ	our sister	→ the beloved
+5	καὶ	and	→ and
+6	Ἀρχίππῳ	to Archippus	→ Archippus
+7	τῷ	the	→ —
+8	συστρατιώτῃ	fellow soldier	→ fellow-soldier
+9	ἡμῶν	of us	→ our
+10	καὶ	and	→ and
+11	τῇ	to the	→ the assembly
+12	κατ᾽	at	→ in
+13	οἶκόν	[the] house	→ house
+14	σου	of you	→ your
+15	ἐκκλησίᾳ·	church:	→ the assembly
+
+## 64:1:8
+EN: we, then, ought to receive such, that we may become fellow-workers to the truth.
+1	ἡμεῖς	We ourselves	→ we
+2	οὖν	therefore	→ then
+3	ὀφείλομεν	ought	→ ought
+4	ὑπολαμβάνειν	to receive	→ receive
+5	τοὺς	<the>	→ such
+6	τοιούτους	such [men]	→ such
+7	ἵνα	so that	→ that
+8	συνεργοὶ	fellow workers	→ fellow-workers
+9	γινώμεθα	we may be	→ we may become
+10	τῇ	in the	→ the truth
+11	ἀληθείᾳ	truth.	→ the truth

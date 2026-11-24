@@ -1,0 +1,150 @@
+## 13:8:35
+KO: 그리고 미가의 아들들은 비돈과 멜렉과 다레아와 아하스이다.
+1 וּבְנֵי = and [the] sons of (son)
+2 מִיכָה = Micah
+3 פִּיתוֹן = Pithon
+4 וָמֶלֶךְ = and Melech (Melech)
+5 וְתַאְרֵעַ = and Tarea (Tarea)
+6 וְאָחָז = and Ahaz (Ahaz)
+
+## 13:8:36
+KO: 그리고 아하스가 여호앗다를 낳았고, 여호앗다는 알레멧과 아스마웹과 시므리를 낳았고, 그리고 시므리는 모사를 낳았다.
+1 וְאָחָז = and Ahaz (Ahaz)
+2 הוֹלִיד = he fathered
+3 אֶת־ = <obj.>
+4 יְהוֹעַדָּה = Jehoaddah
+5 וִיהוֹעַדָּה = and Jehoaddah
+6 הוֹלִיד = he fathered
+7 אֶת־ = <obj.>
+8 עָלֶמֶת = Alemeth
+9 וְאֶת־ = and <obj.>
+10 עַזְמָוֶת = Azmaveth
+11 וְאֶת־ = and <obj.>
+12 זִמְרִי = Zimri
+13 וְזִמְרִי = and Zimri
+14 הוֹלִיד = he fathered
+15 אֶת־ = <obj.>
+16 מוֹצָא = Moza
+
+## 13:8:37
+KO: 모사는 비느아를 낳았고, 그의 아들은 라바요, 그의 아들은 엘르아사요, 그의 아들은 아셀이다.
+1 וּמוֹצָא = and Moza (Moza)
+2 הוֹלִיד = he fathered (to beget)
+3 אֶת־ = <obj.> ([Obj.])
+4 בִּנְעָא = Binea
+5 רָפָה = Raphah
+6 בְנוֹ = son his
+7 אֶלְעָשָׂה = Eleasah
+8 בְנוֹ = son his
+9 אָצֵל = Azel
+10 בְּנוֹ = son his
+
+## 13:8:38
+KO: 아셀에게는 여섯 아들이 있었고, 그들의 이름은 이러하니 아스리감과 보그루와 이스마엘과 스아랴와 오바댜와 하난이라. 이 모든 이들이 아셀의 아들들이라.
+1 וּלְאָצֵל = and [belonged] to Azel
+2 שִׁשָּׁה = six
+3 בָנִים = sons
+4 וְאֵלֶּה = and these
+5 שְׁמוֹתָם = [are] names their (name)
+6 עַזְרִיקָם = Azrikam
+7 בֹּכְרוּ = Bocheru
+8 וְיִשְׁמָעֵאל = and Ishmael (Ishmael)
+9 וּשְׁעַרְיָה = and Sheariah (Sheariah)
+10 וְעֹבַדְיָה = and Obadiah (Obadiah)
+11 וְחָנָן = and Hanan (Hanan)
+12 כָּל־ = all
+13 אֵלֶּה = these
+14 בְּנֵי = [were] [the] sons of
+15 אָצַל = Azel
+
+## 13:8:39
+KO: 그리고 그의 형제 에섹의 아들들은 이러하니, 그의 장자는 울람이요, 둘째는 여우스요, 셋째는 엘리벨렛이라.
+1 וּבְנֵי = and [the] sons of (son)
+2 עֵשֶׁק = Eshek
+3 אָחִיו = brother his (brother)
+4 אוּלָם = Ulam
+5 בְּכֹרוֹ = firstborn his (firstborn)
+6 יְעוּשׁ = Jeush
+7 הַשֵּׁנִי = the second (second)
+8 וֶאֱלִיפֶלֶט = and Eliphelet (Eliphelet)
+9 הַשְּׁלִשִׁי = the third (third)
+
+## 13:8:40
+KO: 그리고 울람의 아들들은 큰 용사들이었고 활을 당기는 자들이었으며, 아들과 손자들이 많아 모두 일백오십 명이었더라. 이 모든 이들은 베냐민의 자손들이었더라.
+1 וַיִּהְיוּ = and they were (to be)
+2 בְנֵי־ = [the] sons of
+3 אוּלָם = Ulam
+4 אֲנָשִׁים = men (human)
+5 גִּבֹּרֵי־ = mighty of (mighty)
+6 חַיִל = strength
+7 דֹּרְכֵי = [who] bent (to tread)
+8 קֶשֶׁת = a bow (bow)
+9 וּמַרְבִּים = and [who] had many (to multiply)
+10 בָּנִים = children
+11 וּבְנֵי = and children of
+12 בָנִים = children
+13 מֵאָה = one hundred (hundred)
+14 וַחֲמִשִּׁים = and fifty (fifty)
+15 כָּל־ = all
+16 אֵלֶּה = these
+17 מִבְּנֵי = [were] of [the] descendants of
+18 בִנְיָמִן פ = Benjamin
+
+## 13:9:1
+KO: 그리고 온 이스라엘이 족보에 기록되었고, 보라 그들은 이스라엘 왕들의 책에 기록되어 있다. 그리고 유다는 그들의 신실치 못함 때문에 바벨론으로 사로잡혀 갔다.
+1 וְכָל־ = and all (all)
+2 יִשְׂרָאֵל = Israel
+3 הִתְיַחְשׂוּ = they had themselves enrolled (to enroll)
+4 וְהִנָּם = and there they (behold)
+5 כְּתוּבִים = [are] written (to write)
+6 עַל־ = on (upon)
+7 סֵפֶר = [the] scroll of (scroll)
+8 מַלְכֵי = [the] kings of (king)
+9 יִשְׂרָאֵל = Israel
+10 וִיהוּדָה = and Judah (Judah)
+11 הָגְלוּ = they were taken into exile (to reveal)
+12 לְבָבֶל = to Babylon (Babylon)
+13 בְּמַעֲלָם ס = in unfaithfulness their (unfaithfulness)
+
+## 13:9:2
+KO: 그리고 그들의 성읍들에 있는 그들의 소유지 안에 거주하는 자들, 그 첫 번째들은 이스라엘 제사장들과 레위 사람들과 느디님 사람들이다.
+1 וְהַיּוֹשְׁבִים = and the inhabitants (to dwell)
+2 הָרִאשֹׁנִים = <the> first (first)
+3 אֲשֶׁר = who (which)
+4 בַּאֲחֻזָּתָם = [were] in possession their (possesion)
+5 בְּעָרֵיהֶם = in cities their (city)
+6 יִשְׂרָאֵל = [were] Israel (Israel)
+7 הַכֹּהֲנִים = the priests (priest)
+8 הַלְוִיִּם = the Levites (Levi)
+9 וְהַנְּתִינִים = and the temple servants (temple servant)
+
+## 13:9:3
+KO: 그리고 예루살렘에 유다 자손들로부터, 그리고 베냐민 자손들로부터, 그리고 에브라임과 므낫세 자손들로부터 거주하였더라.
+1 וּבִירוּשָׁלִַם = and in Jerusalem (Jerusalem)
+2 יָשְׁבוּ = they dwelt (to dwell)
+3 מִן־ = some of
+4 בְּנֵי = [the] descendants of
+5 יְהוּדָה = Judah
+6 וּמִן־ = and some of
+7 בְּנֵי = [the] descendants of
+8 בִנְיָמִן = Benjamin
+9 וּמִן־ = and some of
+10 בְּנֵי = [the] descendants of
+11 אֶפְרַיִם = Ephraim
+12 וּמְנַשֶּׁה = and Manasseh (Manasseh)
+
+## 13:9:4
+KO: 우대니, 그는 암미훗의 아들이요, 오므리의 아들이요, 이므리의 아들이요, 바니의 아들이며, 유다의 아들 베레스의 자손들 중(에 있었다).
+1 עוּתַי = Uthai
+2 בֶּן־ = [the] son of
+3 עַמִּיהוּד = Ammihud
+4 בֶּן־ = [the] son of
+5 עָמְרִי = Omri
+6 בֶּן־ = [the] son of
+7 אִמְרִי = Imri
+8 בֶן־ = [the] son of
+9 בָּנִי מִן = Bani from
+10 בְּנֵי־ = [the] descendants of
+11 פֶרֶץ = Perez
+12 בֶּן־ = [the] son of
+13 יְהוּדָה = Judah

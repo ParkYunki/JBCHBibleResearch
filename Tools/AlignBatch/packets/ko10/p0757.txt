@@ -1,0 +1,200 @@
+## 9:14:52
+KO: 그리고 사울의 모든 날 동안 블레셋 사람들에 대하여 강한 전쟁이 있었고, 사울이 모든 힘센 사람과 모든 용맹 있는 사람을 보면 그를 자기에게로 모았더라.
+1 וַתְּהִי = and it was (to be)
+2 הַמִּלְחָמָה = the war (battle)
+3 חֲזָקָה = severe (strong)
+4 עַל־ = on (upon)
+5 פְּלִשְׁתִּים = [the] Philistines (Philistine)
+6 כֹּל = all
+7 יְמֵי = [the] days of (day;_when)
+8 שָׁאוּל = Saul
+9 וְרָאָה = and he saw (to see)
+10 שָׁאוּל = Saul
+11 כָּל־ = every
+12 אִישׁ = man
+13 גִּבּוֹר = mighty
+14 וְכָל־ = and every
+15 בֶּן־ = son of (son)
+16 חַיִל = strength
+17 וַיַּאַסְפֵהוּ = and he gathered him (to gather)
+18 אֵלָיו ס = to himself (to(wards))
+
+## 9:15:1
+KO: 그리고 사무엘이 사울에게 말하였다. 여호와께서 당신에게 기름을 부어 그의 백성 이스라엘 위에 왕으로 삼으시려고 나를 보내셨으니, 이제 당신은 여호와의 말씀들의 소리를 들으소서.
+1 וַיֹּאמֶר = and he said (to say)
+2 שְׁמוּאֵל = Samuel
+3 אֶל־ = to (to(wards))
+4 שָׁאוּל = Saul
+5 אֹתִי = <obj.> me ([Obj.])
+6 שָׁלַח = he sent (to send)
+7 יְהוָה = Yahweh
+8 לִמְשָׁחֳךָ = to anoint you (to anoint)
+9 לְמֶלֶךְ = to king (king)
+10 עַל־ = over
+11 עַמּוֹ = people his (people)
+12 עַל־ = over
+13 יִשְׂרָאֵל = Israel
+14 וְעַתָּה = and therefore (now)
+15 שְׁמַע = listen (to hear)
+16 לְקוֹל = to [the] voice of (voice)
+17 דִּבְרֵי = [the] words of (word)
+18 יְהוָה ס = Yahweh
+
+## 9:15:2
+KO: 만군의 여호와가 이같이 말씀하신다. 내가 아말렉이 이스라엘에게 행한 일, 곧 그들이 애굽에서 올라올 때에 길에서 그에게 대적한 일을 기억하노라.
+1 כֹּה = thus
+2 אָמַר = he says (to say)
+3 יְהוָה = Yahweh (LORD)
+4 צְבָאוֹת = of hosts (Hosts)
+5 פָּקַדְתִּי = I have paid attention to (to reckon)
+6 אֵת = <obj.> ([Obj.])
+7 אֲשֶׁר־ = [that] which
+8 עָשָׂה = it did (to make)
+9 עֲמָלֵק = Amalek
+10 לְיִשְׂרָאֵל = to Israel (Israel)
+11 אֲשֶׁר־ = [that] which
+12 שָׂם = it set (to set)
+13 לוֹ = to <the> it (him)
+14 בַּדֶּרֶךְ = on the way (way)
+15 בַּעֲלֹתוֹ = when came up it (to ascend)
+16 מִמִּצְרָיִם = from Egypt (Egypt)
+
+## 9:15:3
+KO: 지금 가서 너는 아말렉을 치고, 그들에게 속한 모든 것을 진멸하라. 그리고 그들을 불쌍히 여기지 말고, 남자로부터 여자까지, 젖 떼지 않은 아이로부터 젖 빠는 아이까지, 소로부터 양까지, 낙타로부터 나귀까지 죽이라.
+1 עַתָּה = now
+2 לֵךְ = go (to go)
+3 וְהִכִּיתָה = and you will attack (to smite)
+4 אֶת־ = <obj.>
+5 עֲמָלֵק = Amalek
+6 וְהַחֲרַמְתֶּם = and you will totally destroy (to devote;_destroy)
+7 אֶת־ = <obj.>
+8 כָּל־ = all
+9 אֲשֶׁר־ = that (which)
+10 לוֹ = [belongs] to <the> it (him)
+11 וְלֹא = and not (not)
+12 תַחְמֹל = you must have compassion (to spare)
+13 עָלָיו = on it (upon)
+14 וְהֵמַתָּה = and you will put to death (to die)
+15 מֵאִישׁ = from a man (man)
+16 עַד־ = unto
+17 אִשָּׁה = a woman (woman)
+18 מֵעֹלֵל = from a child (infant)
+19 וְעַד־ = and unto
+20 יוֹנֵק = a suckling-child (to suck)
+21 מִשּׁוֹר = from an ox (cattle)
+22 וְעַד־ = and unto
+23 שֶׂה = a sheep (sheep)
+24 מִגָּמָל = from a camel (camel)
+25 וְעַד־ = and unto
+26 חֲמוֹר ס = a donkey (donkey)
+
+## 9:15:4
+KO: 그리고 사울이 백성을 소집하게 하였고, 그들을 들라임에서 계수하니, 보병이 이십만이었고 유다 사람이 일만이었다.
+1 וַיְשַׁמַּע = and he summoned (to hear)
+2 שָׁאוּל = Saul
+3 אֶת־ = <obj.> ([Obj.])
+4 הָעָם = the people (people)
+5 וַיִּפְקְדֵם = and he mustered them (to reckon)
+6 בַּטְּלָאִים = at <the> Telaim (Telaim)
+7 מָאתַיִם = two hundred (hundred)
+8 אֶלֶף = thousand
+9 רַגְלִי = foot soldier[s] (on foot)
+10 וַעֲשֶׂרֶת = and ten (ten)
+11 אֲלָפִים = thousand<s>
+12 אֶת־ = with
+13 אִישׁ = <the> man of (man)
+14 יְהוּדָה = Judah
+
+## 9:15:5
+KO: 그리고 사울이 아말렉 성읍에 이르러 골짜기 안에서 매복하였다.
+1 וַיָּבֹא = and he came (to come (in))
+2 שָׁאוּל = Saul
+3 עַד־ = to (till)
+4 עִיר = [the] city of (city)
+5 עֲמָלֵק = Amalek
+6 וַיָּרֶב = and he lay in wait (to ambush)
+7 בַּנָּחַל = in the wadi (torrent)
+
+## 9:15:6
+KO: 사울이 겐 사람에게 말했다. "가라, 돌이켜 내려가라, 아말렉 사람의 한가운데서, 내가 너를 그와 함께 멸할까 함이라. 그리고 너는 이스라엘의 모든 자손이 애굽에서 올라올 때에 그들과 인애를 행하였느니라." 그러자 겐 사람이 아말렉의 한가운데서 떠났다.
+1 וַיֹּאמֶר = and he said (to say)
+2 שָׁאוּל = Saul
+3 אֶל־ = to (to(wards))
+4 הַקֵּינִי = the Kenite[s]
+5 לְכוּ = go (to go)
+6 סֻּרוּ = depart
+7 רְדוּ = go down (to go down)
+8 מִתּוֹךְ = from among
+9 עֲמָלֵקִי = [the] Amalekite[s] (Amalekite)
+10 פֶּן־ = lest
+11 אֹסִפְךָ = I should destroy you (to gather)
+12 עִמּוֹ = with it
+13 וְאַתָּה = and you (you(m.s.))
+14 עָשִׂיתָה = you did (to make)
+15 חֶסֶד = loyalty (kindness)
+16 עִם־ = with
+17 כָּל־ = all
+18 בְּנֵי = [the] people of (son)
+19 יִשְׂרָאֵל = Israel
+20 בַּעֲלוֹתָם = when came up they (to ascend)
+21 מִמִּצְרָיִם = from Egypt (Egypt)
+22 וַיָּסַר = and it departed
+23 קֵינִי = [the] Kenite[s]
+24 מִתּוֹךְ = from among
+25 עֲמָלֵק = Amalek
+
+## 9:15:7
+KO: 그리고 사울이 하윌라로부터 애굽의 동쪽(얼굴)인 술에 이르기까지 아말렉 사람을 쳤다.
+1 וַיַּךְ = and he attacked (to smite)
+2 שָׁאוּל = Saul
+3 אֶת־ = <obj.> ([Obj.])
+4 עֲמָלֵק = Amalek
+5 מֵחֲוִילָה = from Havilah (Havilah)
+6 בּוֹאֲךָ = coming you (to come (in))
+7 שׁוּר = Shur
+8 אֲשֶׁר = which
+9 עַל־ = [is] on (upon)
+10 פְּנֵי = [the] face of (face)
+11 מִצְרָיִם = Egypt
+
+## 9:15:8
+KO: 그리고 그가 아말렉의 왕 아각을 산 채로 사로잡았고, 모든 백성은 칼날로 진멸하였다.
+1 וַיִּתְפֹּשׂ = and he seized (to capture)
+2 אֶת־ = <obj.>
+3 אֲגַג = Agag
+4 מֶלֶךְ־ = [the] king of (king)
+5 עֲמָלֵק = Amalek
+6 חָי = alive
+7 וְאֶת־ = and <obj.>
+8 כָּל־ = all
+9 הָעָם = the people (people)
+10 הֶחֱרִים = he totally destroyed (to devote;_destroy)
+11 לְפִי־ = to [the] mouth of (lip)
+12 חָרֶב = [the] sword (sword)
+
+## 9:15:9
+KO: 그리고 사울과 백성은 아각과 양과 소의 가장 좋은 것과 둘째 된 것과 어린 양들(혹은 살진 것들)과 모든 좋은 것을 아꼈으며, 그것들을 진멸하기를 원치 아니하였다. 그리고 가치 없고 녹아 없어진 모든 물건은 그들이 진멸하였다.
+1 וַיַּחְמֹל = and he had compassion (to spare)
+2 שָׁאוּל = Saul
+3 וְהָעָם = and the people (people)
+4 עַל־ = on
+5 אֲגָג = Agag
+6 וְעַל־ = and on
+7 מֵיטַב = [the] best of (best)
+8 הַצֹּאן = the sheep (flock)
+9 וְהַבָּקָר = and the cattle (cattle)
+10 וְהַמִּשְׁנִים = and the second (second)
+11 וְעַל־ = and on
+12 הַכָּרִים = the lambs (ram)
+13 וְעַל־ = and on
+14 כָּל־ = all
+15 הַטּוֹב = the good (good)
+16 וְלֹא = and not (not)
+17 אָבוּ = they were willing (be willing)
+18 הַחֲרִימָם = to totally destroy them
+19 וְכָל־ = and all
+20 הַמְּלָאכָה = the property (work)
+21 נְמִבְזָה = despised (vile)
+22 וְנָמֵס = and worthless (to melt)
+23 אֹתָהּ = <obj.> it ([Obj.])
+24 הֶחֱרִימוּ פ = they totally destroyed

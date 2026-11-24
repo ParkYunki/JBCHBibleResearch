@@ -1,0 +1,846 @@
+## 5:1:8
+KO: 보라, 내가 너희 앞에 그 땅을 주었으니, 들어가서 여호와께서 너희 조상들 곧 아브라함과 이삭과 야곱에게 그들과 그들의 후손에게 주겠다고 맹세하신 그 땅을 차지하라.
+1 רְאֵה = see (to see)
+2 נָתַתִּי = I set
+3 לִפְנֵיכֶם = <to> before you (face)
+4 אֶת־ = <obj.>
+5 הָאָרֶץ = the land
+6 בֹּאוּ = go (to come (in))
+7 וּרְשׁוּ = and take possession of (to possess)
+8 אֶת־ = <obj.>
+9 הָאָרֶץ = the land
+10 אֲשֶׁר = which
+11 נִשְׁבַּע = he swore (to swear)
+12 יְהוָה = Yahweh (LORD)
+13 לַאֲבֹתֵיכֶם = to ancestors your (father)
+14 לְאַבְרָהָם = to Abraham (Abraham)
+15 לְיִצְחָק = to Isaac (Isaac)
+16 וּלְיַעֲקֹב = and to Jacob (Jacob)
+17 לָתֵת = to give
+18 לָהֶם = to them (them)
+19 וּלְזַרְעָם = and to offspring their (seed)
+20 אַחֲרֵיהֶם = after them (after)
+
+## 5:1:9
+KO: 그때에 내가 너희에게 말하여 이르기를, 나 홀로 너희를 짊어질 수 없도다.
+1 וָאֹמַר = and I said
+2 אֲלֵכֶם = to you (to(wards))
+3 בָּעֵת = at the time (time)
+4 הַהִוא = <the> that (he;_she;_it)
+5 לֵאמֹר = <to> saying
+6 לֹא־ = not
+7 אוּכַל = I am able (be able)
+8 לְבַדִּי = to alone me (alone)
+9 שְׂאֵת = to bear (to lift)
+10 אֶתְכֶם = <obj.> you ([Obj.])
+
+## 5:1:10
+KO: 너희의 하나님 여호와께서 너희를 번성하게 하셨으니, 보라, 오늘 너희가 하늘의 별들처럼 많도다.
+1 יְהוָה = Yahweh (LORD)
+2 אֱלֹהֵיכֶם = God your (God)
+3 הִרְבָּה = he has increased (to multiply)
+4 אֶתְכֶם = <obj.> you ([Obj.])
+5 וְהִנְּכֶם = and here you (behold)
+6 הַיּוֹם = this day (day;_when)
+7 כְּכוֹכְבֵי = [are] like [the] stars of (star)
+8 הַשָּׁמַיִם = the heavens (heaven)
+9 לָרֹב = for multitude (abundance)
+
+## 5:1:11
+KO: 너희 조상들의 하나님 여호와께서 너희를 현재의 천 배나 더하시고, 너희에게 말씀하신 것과 같이 너희에게 복 주시기를 원하노라.
+1 יְהוָה = Yahweh (LORD)
+2 אֱלֹהֵי = [the] God of (God)
+3 אֲבוֹתֵכֶם = ancestors your (father)
+4 יֹסֵף = may he add (to add)
+5 עֲלֵיכֶם = to you (upon)
+6 כָּכֶם = like you
+7 אֶלֶף = a thousand (thousand)
+8 פְּעָמִים = times (beat)
+9 וִיבָרֵךְ = and may he bless (to bless)
+10 אֶתְכֶם = <obj.> you ([Obj.])
+11 כַּאֲשֶׁר = just as (as which)
+12 דִּבֶּר = he spoke (to speak)
+13 לָכֶם = to you
+
+## 5:1:12
+KO: 어찌 내가 홀로 너희의 수고와 너희의 짐과 너희의 다툼을 감당할 수 있으랴.
+1 אֵיכָה = how?
+2 אֶשָּׂא = will I bear (to lift)
+3 לְבַדִּי = to alone me (alone)
+4 טָרְחֲכֶם = burden your (burden)
+5 וּמַשַּׂאֲכֶם = and burden your (burden)
+6 וְרִיבְכֶם = and dispute[s] your (strife)
+
+## 5:1:13
+KO: 너희의 각 지파에서 지혜 있고 명철하며 알려진 사람들을 너희를 위해 내어놓으라. 그러면 내가 그들을 너희의 머리로 세우리라.
+1 הָבוּ = provide (to give)
+2 לָכֶם = for yourselves (you)
+3 אֲנָשִׁים = men (human)
+4 חֲכָמִים = wise
+5 וּנְבֹנִים = and understanding (to understand)
+6 וִידֻעִים = and known (to know)
+7 לְשִׁבְטֵיכֶם = to tribes your (tribe)
+8 וַאֲשִׂימֵם = so I may appoint them (to set)
+9 בְּרָאשֵׁיכֶם = <in> chiefs your (head)
+
+## 5:1:14
+KO: 그리고 너희가 나에게 대답하여 말하기를, "네가 말한 그 말이 행하기에 좋다" 하였기에
+1 וַתַּעֲנוּ = and you answered (to answer)
+2 אֹתִי = <obj.> me ([Obj.])
+3 וַתֹּאמְרוּ = and you said (to say)
+4 טוֹב־ = [is] good (pleasant)
+5 הַדָּבָר = the word (word)
+6 אֲשֶׁר־ = which
+7 דִּבַּרְתָּ = you have spoken (to speak)
+8 לַעֲשׂוֹת = to do (to make)
+
+## 5:1:15
+KO: 그리고 내가 너희 지파들의 우두머리들 곧 지혜롭고 알려진(유명한) 사람들을 취하여, 그들을 너희 위에 우두머리들, 곧 천부장들과 백부장들과 오십부장들과 십부장들과 너희 지파들을 위한 관리들로 세웠다.
+1 וָאֶקַּח = and I took (to take)
+2 אֶת־ = <obj.>
+3 רָאשֵׁי = [the] chiefs of
+4 שִׁבְטֵיכֶם = tribes your
+5 אֲנָשִׁים = men (human)
+6 חֲכָמִים = wise
+7 וִידֻעִים = and known (to know)
+8 וָאֶתֵּן = and I appointed (to give)
+9 אֹתָם = <obj.> them
+10 רָאשִׁים = chiefs
+11 עֲלֵיכֶם = over you (upon)
+12 שָׂרֵי = leaders of
+13 אֲלָפִים = thousands (thousand)
+14 וְשָׂרֵי = and leaders of
+15 מֵאוֹת = hundreds (hundred)
+16 וְשָׂרֵי = and leaders of
+17 חֲמִשִּׁים = fifties (fifty)
+18 וְשָׂרֵי = and leaders of
+19 עֲשָׂרֹת = tens (ten)
+20 וְשֹׁטְרִים = and officials (official)
+21 לְשִׁבְטֵיכֶם = of tribes your
+
+## 5:1:16
+KO: 그때에 내가 너희 재판장들에게 명령하며 이르기를, 너희 형제들 사이에서 송사를 들을 때에 의롭게 재판하라. 사람과 그의 형제 사이, 그리고 그의 거류민 사이에서도 그리 할 것이라.
+1 וָאֲצַוֶּה = and I commanded (to command)
+2 אֶת־ = <obj.> ([Obj.])
+3 שֹׁפְטֵיכֶם = judges your
+4 בָּעֵת = at the time (time)
+5 הַהִוא = <the> that (he;_she;_it)
+6 לֵאמֹר = <to> saying (to say)
+7 שָׁמֹעַ = hear (to hear)
+8 בֵּין־ = between
+9 אֲחֵיכֶם = countrymen your
+10 וּשְׁפַטְתֶּם = and you will judge
+11 צֶדֶק = righteousness
+12 בֵּין־ = between
+13 אִישׁ = anyone (man)
+14 וּבֵין־ = and between
+15 אָחִיו = countryman his
+16 וּבֵין = and between
+17 גֵּרוֹ = sojourner his (sojourner)
+
+## 5:1:17
+KO: 재판 안에서 너희는 얼굴을 인정하지 말라. 작은 자를 큰 자와 같이 너희는 들어야 한다. 어떤 사람의 얼굴 앞에서도 너희는 두려워하지 말라. 왜냐하면 그 재판은 하나님께 속한 것이기 때문이다. 그리고 너희에게 어려운 일은 내게로 가져오라. 내가 그것을 들을 것이다.
+1 לֹא־ = not
+2 תַכִּירוּ = you will pay regard to (to recognize)
+3 פָנִים = faces
+4 בַּמִּשְׁפָּט = in <the> judgment
+5 כַּקָּטֹן = as the small (small)
+6 כַּגָּדֹל = as the great (great)
+7 תִּשְׁמָעוּן = you will listen !
+8 לֹא = not
+9 תָגוּרוּ = you will be afraid (to dread)
+10 מִפְּנֵי־ = of <the face of> (face)
+11 אִישׁ = anyone (man)
+12 כִּי = for
+13 הַמִּשְׁפָּט = the judgment
+14 לֵאלֹהִים = [belongs] to God (God)
+15 הוּא = it (he;_she;_it)
+16 וְהַדָּבָר = and the matter (word)
+17 אֲשֶׁר = which
+18 יִקְשֶׁה = it will be [too] hard (to harden)
+19 מִכֶּם = for you (you)
+20 תַּקְרִבוּן = you will bring near ! (to present)
+21 אֵלַי = to me (to(wards))
+22 וּשְׁמַעְתִּיו = and I will hear it
+
+## 5:1:18
+KO: 그리고 내가 그때에 너희가 행할 모든 일들을 너희에게 명령하였다.
+1 וָאֲצַוֶּה = and I commanded (to command)
+2 אֶתְכֶם = <obj.> you
+3 בָּעֵת = at the time (time)
+4 הַהִוא = <the> that (he;_she;_it)
+5 אֵת = <obj.>
+6 כָּל־ = all
+7 הַדְּבָרִים = the things (word)
+8 אֲשֶׁר = which
+9 תַּעֲשׂוּן = you will do ! (to make)
+
+## 5:1:19
+KO: 그리고 우리가 호렙에서 떠나, 너희가 본 그 크고 두려운 그 광야를 거쳐 아모리 족속의 산지 길로 갔으니, 여호와 우리 하나님이 우리에게 명령하신 대로였고, 우리가 가데스 바네아에 이르렀다.
+1 וַנִּסַּע = and we set out (to set out)
+2 מֵחֹרֵב = from Horeb (Horeb)
+3 וַנֵּלֶךְ = and we walked (to go)
+4 אֵת = <obj.>
+5 כָּל־ = all
+6 הַמִּדְבָּר = the wilderness (wilderness)
+7 הַגָּדוֹל = <the> great (great)
+8 וְהַנּוֹרָא = and <the> awesome (to fear)
+9 הַהוּא = <the> that (he;_she;_it)
+10 אֲשֶׁר = which
+11 רְאִיתֶם = you saw (to see)
+12 דֶּרֶךְ = [the] way of (way)
+13 הַר = [the] hill country of (mountain)
+14 הָאֱמֹרִי = the Amorite[s] (Amorite)
+15 כַּאֲשֶׁר = just as
+16 צִוָּה = he had commanded (to command)
+17 יְהוָה = Yahweh (LORD)
+18 אֱלֹהֵינוּ = God our (God)
+19 אֹתָנוּ = <obj.> us
+20 וַנָּבֹא = and we came (to come (in))
+21 עַד = to (till)
+22 קָדֵשׁ = Kadesh
+23 בַּרְנֵעַ = Barnea
+
+## 5:1:20
+KO: 그리고 내가 너희에게 말하였다. 너희가 우리 하나님 여호와께서 우리에게 주시는 아모리 사람의 산에 이르렀다.
+1 וָאֹמַר = and I said (to say)
+2 אֲלֵכֶם = to you (to(wards))
+3 בָּאתֶם = you have come (to come (in))
+4 עַד־ = to (till)
+5 הַר = [the] hill country of (mountain)
+6 הָאֱמֹרִי = the Amorite[s] (Amorite)
+7 אֲשֶׁר־ = which
+8 יְהוָה = Yahweh (LORD)
+9 אֱלֹהֵינוּ = God our (God)
+10 נֹתֵן = [is] about to give (to give)
+11 לָנוּ = to us (us)
+
+## 5:1:21
+KO: 보라, 너희 하나님 여호와께서 너희 앞에 이 땅을 두셨으니, 너희 열조의 하나님 여호와께서 너희에게 말씀하신 대로 올라가서 차지하라. 두려워하지 말며 낙담하지 말라.
+1 רְאֵה = see (to see)
+2 נָתַן = he sets (to give)
+3 יְהוָה = Yahweh
+4 אֱלֹהֶיךָ = God your
+5 לְפָנֶיךָ = <to> before you (face)
+6 אֶת־ = <obj.> ([Obj.])
+7 הָאָרֶץ = the land (land)
+8 עֲלֵה = go up (to ascend)
+9 רֵשׁ = take possession of [it] (to possess)
+10 כַּאֲשֶׁר = just as (as which)
+11 דִּבֶּר = he spoke (to speak)
+12 יְהוָה = Yahweh
+13 אֱלֹהֵי = [the] God of
+14 אֲבֹתֶיךָ = ancestors your (father)
+15 לָךְ = to you (you)
+16 אַל־ = may not
+17 תִּירָא = you be afraid (to fear)
+18 וְאַל־ = and may not
+19 תֵּחָת = you be dismayed (to to be dismayed)
+
+## 5:1:22
+KO: 너희 모두가 내게 가까이 나아와 말하기를, "우리가 사람들을 우리 앞서 보내어 그들이 우리를 위하여 그 땅을 정탐하게 하고, 우리가 올라가야 할 길과 우리가 들어갈 성읍들에 대하여 우리에게 회보하게 하자" 하기에.
+1 וַתִּקְרְבוּן = and you drew near ! (to present)
+2 אֵלַי = to me
+3 כֻּלְּכֶם = all of you (all)
+4 וַתֹּאמְרוּ = and you said (to say)
+5 נִשְׁלְחָה = let us send out (to send)
+6 אֲנָשִׁים = men (human)
+7 לְפָנֵינוּ = <to> before us (face)
+8 וְיַחְפְּרוּ־ = so they may spy out (to search)
+9 לָנוּ = for us (us)
+10 אֶת־ = <obj.>
+11 הָאָרֶץ = the land (land)
+12 וְיָשִׁבוּ = so they may bring back (to return)
+13 אֹתָנוּ = <obj.> us
+14 דָּבָר = word
+15 אֶת־ = <obj.>
+16 הַדֶּרֶךְ = the way (way)
+17 אֲשֶׁר = which
+18 נַעֲלֶה־ = we will go up (to ascend)
+19 בָּהּ = on it (her)
+20 וְאֵת = and <obj.>
+21 הֶעָרִים = the cities (city)
+22 אֲשֶׁר = which
+23 נָבֹא = we will go (to come (in))
+24 אֲלֵיהֶן = to them
+
+## 5:1:23
+KO: 그리고 그 말이 내 눈에 좋았으므로, 내가 너희 중에서 열둘을 취하였으니, 각 지파마다 한 사람씩이라.
+1 וַיִּיטַב = and it was good (be good)
+2 בְּעֵינַי = in view my (eye)
+3 הַדָּבָר = the thing (word)
+4 וָאֶקַּח = and I took (to take)
+5 מִכֶּם = from you (you)
+6 שְׁנֵים = two [plus] (two)
+7 עָשָׂר = ten
+8 אֲנָשִׁים = men (human)
+9 אִישׁ = a man
+10 אֶחָד = one
+11 לַשָּׁבֶט = to the tribe (tribe)
+
+## 5:1:24
+KO: 그리고 그들은 돌이켰고 산으로 올라갔으며 에스골 골짜기까지 이르렀고 그것을 정탐하였다.
+1 וַיִּפְנוּ = and they turned (to turn)
+2 וַיַּעֲלוּ = and they went up (to ascend)
+3 הָהָרָה = the hill country towards (mountain)
+4 וַיָּבֹאוּ = and they came (to come (in))
+5 עַד־ = to (till)
+6 נַחַל = [the] wadi of (Valley)
+7 אֶשְׁכֹּל = Eshcol (of Eshcol)
+8 וַיְרַגְּלוּ = and they spied out (to spy)
+9 אֹתָהּ = <obj.> it ([Obj.])
+
+## 5:1:25
+KO: 그리고 그들이 그 땅의 열매를 그들의 손에 취하여 우리에게 내려왔고, 우리에게 회답하여 말하기를 “우리 하나님 여호와께서 우리에게 주시는 그 땅이 좋더라” 하였다.
+1 וַיִּקְחוּ = and they took (to take)
+2 בְיָדָם = in hand their (hand)
+3 מִפְּרִי = some of [the] fruit of (fruit)
+4 הָאָרֶץ = the land
+5 וַיּוֹרִדוּ = and they brought [it] down (to go down)
+6 אֵלֵינוּ = to us (to(wards))
+7 וַיָּשִׁבוּ = and they brought back (to return)
+8 אֹתָנוּ = <obj.> us ([Obj.])
+9 דָבָר = word
+10 וַיֹּאמְרוּ = and they said (to say)
+11 טוֹבָה = [is] good (pleasant)
+12 הָאָרֶץ = the land
+13 אֲשֶׁר־ = which
+14 יְהוָה = Yahweh (LORD)
+15 אֱלֹהֵינוּ = God our (God)
+16 נֹתֵן = [is] about to give (to give)
+17 לָנוּ = to us (us)
+
+## 5:1:26
+KO: 그러나 너희는 올라가기를 원하지 아니하였고, 너희 하나님 여호와의 입을 거역하였도다.
+1 וְלֹא = and not (not)
+2 אֲבִיתֶם = you were willing (be willing)
+3 לַעֲלֹת = to go up (to ascend)
+4 וַתַּמְרוּ = and you rebelled toward (to rebel)
+5 אֶת־ = <obj.> ([Obj.])
+6 פִּי = [the] mouth of (lip)
+7 יְהוָה = Yahweh (LORD)
+8 אֱלֹהֵיכֶם = God your (God)
+
+## 5:1:27
+KO: 그리고 너희는 너희 장막들 안에서 원망하며 말하기를, 여호와께서 우리를 미워하심으로 우리를 아모리 사람의 손에 붙여 우리를 멸하시려고 애굽 땅에서 인도하여 내셨도다.
+1 וַתֵּרָגְנוּ = and you murmured (to grumble)
+2 בְאָהֳלֵיכֶם = in tents your (tent)
+3 וַתֹּאמְרוּ = and you said (to say)
+4 בְּשִׂנְאַת = in [the] hatred of (hating)
+5 יְהוָה = Yahweh (LORD)
+6 אֹתָנוּ = <obj.> us
+7 הוֹצִיאָנוּ = he brought out us (to come out)
+8 מֵאֶרֶץ = from [the] land of (land)
+9 מִצְרָיִם = Egypt
+10 לָתֵת = to give
+11 אֹתָנוּ = <obj.> us
+12 בְּיַד = in [the] hand of (hand)
+13 הָאֱמֹרִי = the Amorite[s] (Amorite)
+14 לְהַשְׁמִידֵנוּ = to destroy us (to destroy)
+
+## 5:1:28
+KO: 어디로 우리가 올라가는가? 우리 형제들이 우리의 마음을 녹였으며 이르기를, 그 백성은 우리보다 크고 높으며, 성읍들은 크고 하늘에 닿게 요새화되었고, 또한 우리가 거기서 아낙 자손들을 보았노라 하는도다.
+1 אָנָה = where?
+2 אֲנַחְנוּ = [are] we (we)
+3 עֹלִים = going up (to ascend)
+4 אַחֵינוּ = countrymen our (brother)
+5 הֵמַסּוּ = they have made melt (to melt)
+6 אֶת־ = <obj.> ([Obj.])
+7 לְבָבֵנוּ = heart our (heart)
+8 לֵאמֹר = <to> saying (to say)
+9 עַם = [the] people (people)
+10 גָּדוֹל = [is] great
+11 וָרָם = and lofty (to exalt)
+12 מִמֶּנּוּ = more than us (from)
+13 עָרִים = [the] cities (city)
+14 גְּדֹלֹת = [are] large
+15 וּבְצוּרֹת = and fortified (to gather|restrain|fortify)
+16 בַּשָּׁמָיִם = in the heavens (heaven)
+17 וְגַם־ = and also (also)
+18 בְּנֵי = [the] descendants of (son)
+19 עֲנָקִים = [the] Anakites (Anakim)
+20 רָאִינוּ = we saw (to see)
+21 שָׁם = there
+
+## 5:1:29
+KO: 그리고 내가 그들에게 말하였다, 너희는 그들 앞에서 떨지 말라 그리고 두려워하지 말라.
+1 וָאֹמַר = and I said (to say)
+2 אֲלֵכֶם = to you (to(wards))
+3 לֹא־ = not
+4 תַעַרְצוּן = you must be terrified ! (to tremble)
+5 וְלֹא־ = and not
+6 תִירְאוּן = you must be afraid ! (to fear)
+7 מֵהֶם = from them (them)
+
+## 5:1:30
+KO: 너희 앞서 가시는 너희 하나님 여호와 그분께서, 애굽에서 너희를 위하여 너희 눈앞에서 행하셨던 모든 것과 같이, 너희를 위하여 싸우실 것이다.
+1 יְהוָה = Yahweh (LORD)
+2 אֱלֹהֵיכֶם = God your (God)
+3 הַהֹלֵךְ = [is] the [one who] goes (to go)
+4 לִפְנֵיכֶם = <to> before you (face)
+5 הוּא = he (he;_she;_it)
+6 יִלָּחֵם = he will fight (to fight)
+7 לָכֶם = for you (you)
+8 כְּכֹל = according to all (all)
+9 אֲשֶׁר = that (which)
+10 עָשָׂה = he did (to make)
+11 אִתְּכֶם = with you (with)
+12 בְּמִצְרַיִם = in Egypt (Egypt)
+13 לְעֵינֵיכֶם = to eyes your (eye)
+
+## 5:1:31
+KO: 그리고 광야에서 네가 보았거니와, 사람이 자기 아들을 안음 같이 너희 하나님 여호와께서 너희가 걸어온 모든 길 위에서 너희를 안으사 이 장소에 이르기까지 너희가 오게 하셨느니라.
+1 וּבַמִּדְבָּר = and in the wilderness (wilderness)
+2 אֲשֶׁר = where
+3 רָאִיתָ = you saw (to see)
+4 אֲשֶׁר = that
+5 נְשָׂאֲךָ = he carried you
+6 יְהוָה = Yahweh (LORD)
+7 אֱלֹהֶיךָ = God your (God)
+8 כַּאֲשֶׁר = just as
+9 יִשָּׂא־ = he carries
+10 אִישׁ = anyone (man)
+11 אֶת־ = <obj.> ([Obj.])
+12 בְּנוֹ = child his (son)
+13 בְּכָל־ = on all (all)
+14 הַדֶּרֶךְ = the journey (way)
+15 אֲשֶׁר = which
+16 הֲלַכְתֶּם = you walked (to go)
+17 עַד־ = until
+18 בֹּאֲכֶם = came you (to come (in))
+19 עַד־ = to
+20 הַמָּקוֹם = the place (standing place)
+21 הַזֶּה = <the> this (this)
+
+## 5:1:32
+KO: 그리고 이 일에 너희는 너희 하나님 여호와를 믿지 아니하였다.
+1 וּבַדָּבָר = and in the thing (word)
+2 הַזֶּה = <the> this (this)
+3 אֵינְכֶם = not you (nothing)
+4 מַאֲמִינִם = [were] trusting (be faithful)
+5 בַּיהוָה = in Yahweh (LORD)
+6 אֱלֹהֵיכֶם = God your (God)
+
+## 5:1:33
+KO: 그분은 너희들 앞서 길에서 너희를 위하여 장막 칠 곳을 찾으시며, 밤에는 불 속에서, 그리고 낮에는 구름 속에서 너희가 그 안에서 걸어야 할 길을 너희에게 보여 주시는 분이시다.
+1 הַהֹלֵךְ = who went
+2 לִפְנֵיכֶם = <to> before you (face)
+3 בַּדֶּרֶךְ = on the journey
+4 לָתוּר = to seek out (to spy)
+5 לָכֶם = for you (you)
+6 מָקוֹם = a place (standing place)
+7 לַחֲנֹתְכֶם = to camp you (to camp)
+8 בָּאֵשׁ = in the fire (fire)
+9 לַיְלָה = night
+10 לַרְאֹתְכֶם = to show you (to see)
+11 בַּדֶּרֶךְ = <in> the way
+12 אֲשֶׁר = which
+13 תֵּלְכוּ־ = you will go
+14 בָהּ = on it (her)
+15 וּבֶעָנָן = and in the cloud (cloud)
+16 יוֹמָם = by day
+
+## 5:1:34
+KO: 그리고 여호와께서 너희 말들의 소리를 들으시고, 노하시며, 맹세하여 말씀하시기를
+1 וַיִּשְׁמַע = and he heard (to hear)
+2 יְהוָה = Yahweh (LORD)
+3 אֶת־ = <obj.> ([Obj.])
+4 קוֹל = [the] sound of (voice)
+5 דִּבְרֵיכֶם = words your (word)
+6 וַיִּקְצֹף = and he was angry (be angry)
+7 וַיִּשָּׁבַע = and he swore an oath (to swear)
+8 לֵאמֹר = <to> saying (to say)
+
+## 5:1:35
+KO: 만일 이 악한 세대의 이 사람들 중의 한 사람이 내가 그들의 열조에게 주기로 맹세한 그 좋은 땅을 본다면(그렇지 않으리라).
+1 אִם־ = if
+2 יִרְאֶה = he will see (to see)
+3 אִישׁ = anyone
+4 בָּאֲנָשִׁים = among the men (human)
+5 הָאֵלֶּה = <the> these (these)
+6 הַדּוֹר = the generation (generation)
+7 הָרָע = <the> evil (bad)
+8 הַזֶּה = <the> this (this)
+9 אֵת = <obj.> ([Obj.])
+10 הָאָרֶץ = the land (land)
+11 הַטּוֹבָה = <the> good (pleasant)
+12 אֲשֶׁר = which
+13 נִשְׁבַּעְתִּי = I swore (to swear)
+14 לָתֵת = to give
+15 לַאֲבֹתֵיכֶם = to ancestors your (father)
+
+## 5:1:36
+KO: 오직 여분네의 아들 갈렙만이 그것을 볼 것이요, 그가 밟은 땅을 그와 그의 자손들에게 내가 줄 것이니, 이는 그가 여호와를 온전히 따랐기 때문이라.
+1 זוּלָתִי = except (exception)
+2 כָּלֵב = Caleb
+3 בֶּן־ = [the] son of
+4 יְפֻנֶּה = Jephunneh
+5 הוּא = he (he;_she;_it)
+6 יִרְאֶנָּה = he will see it (to see)
+7 וְלוֹ־ = and to him (him)
+8 אֶתֵּן = I will give (to give)
+9 אֶת־ = <obj.> ([Obj.])
+10 הָאָרֶץ = the land (land)
+11 אֲשֶׁר = which
+12 דָּרַךְ־ = he has trodden (to tread)
+13 בָּהּ = on it (her)
+14 וּלְבָנָיו = and to sons his
+15 יַעַן = because
+16 אֲשֶׁר = that
+17 מִלֵּא = he filled (to fill)
+18 אַחֲרֵי = after
+19 יְהוָה = Yahweh (LORD)
+
+## 5:1:37
+KO: 또한 여호와께서 너희들 때문에 나에게도 진노하셔서 말씀하시기를, 너 또한 거기로 들어가지 못할 것이다.
+1 גַּם־ = also
+2 בִּי = with me (me)
+3 הִתְאַנַּף = he was angry (be angry)
+4 יְהוָה = Yahweh (LORD)
+5 בִּגְלַלְכֶם = on account of you (because of)
+6 לֵאמֹר = <to> saying (to say)
+7 גַּם־ = also
+8 אַתָּה = you (you(m.s.))
+9 לֹא־ = not
+10 תָבֹא = you will go (to come (in))
+11 שָׁם = there
+
+## 5:1:38
+KO: 네 앞에 서 있는 눈의 아들 여호수아, 그가 그리로 들어갈 것이니, 너는 그를 강하게 하라. 이는 그가 이스라엘에게 그것을 기업으로 얻게 할 것이기 때문이다.
+1 יְהוֹשֻׁעַ = Joshua
+2 בִּן = [the] son of (son)
+3 נוּן = Nun
+4 הָעֹמֵד = who stands (to stand)
+5 לְפָנֶיךָ = <to> before you (face)
+6 הוּא = he
+7 יָבֹא = he will go (to come (in))
+8 שָׁמָּה = there towards (there)
+9 אֹתוֹ = <obj.> him
+10 חַזֵּק = encourage (to strengthen)
+11 כִּי־ = for
+12 הוּא = he
+13 יַנְחִלֶנָּה = he will give as an inheritance it (to inherit)
+14 אֶת־ = <obj.>
+15 יִשְׂרָאֵל = Israel
+
+## 5:1:39
+KO: 그리고 너희의 아이들 곧 너희가 약탈물이 될 것이라고 말했던 자들과, 오늘 선악을 알지 못하는 너희의 아들들, 그들이 그곳으로 들어갈 것이며, 그들에게 내가 그것을 줄 것이고 그들이 그것을 차지할 것이다.
+1 וְטַפְּכֶם = and little one[s] your (child)
+2 אֲשֶׁר = who
+3 אֲמַרְתֶּם = you said (to say)
+4 לָבַז = <into> plunder (plunder)
+5 יִהְיֶה = he will become (to be)
+6 וּבְנֵיכֶם = and children your (son)
+7 אֲשֶׁר = who
+8 לֹא־ = not
+9 יָדְעוּ = they know (to know)
+10 הַיּוֹם = this day (day;_when)
+11 טוֹב = good
+12 וָרָע = and evil (evil)
+13 הֵמָּה = they
+14 יָבֹאוּ = they will go (to come (in))
+15 שָׁמָּה = there towards (there)
+16 וְלָהֶם = and to them (them)
+17 אֶתְּנֶנָּה = I will give it (to give)
+18 וְהֵם = and they
+19 יִירָשׁוּהָ = they will take possession of it (to possess)
+
+## 5:1:40
+KO: 그리고 너희는 너희를 위하여 돌이켜, 홍해 길로 광야로 나아가라.
+1 וְאַתֶּם = and you (you(m.p.))
+2 פְּנוּ = turn (to turn)
+3 לָכֶם = <for> yourselves (you)
+4 וּסְעוּ = and set out (to set out)
+5 הַמִּדְבָּרָה = the wilderness towards (wilderness)
+6 דֶּרֶךְ = [the] way of (way)
+7 יַם־ = [the] sea of (sea)
+8 סוּף = reed[s] (Red( Sea))
+
+## 5:1:41
+KO: 그리고 너희가 대답하였고, 내게 말하였다. “우리가 여호와께 범죄하였으니, 우리 하나님께서 우리에게 명하신 대로 우리가 올라가서 싸우리이다.” 그리고 너희가 각각 자기의 전쟁 도구를 띠고, 산으로 올라가는 일을 경솔히 하였더라.
+1 וַתַּעֲנוּ = and you answered (to answer)
+2 וַתֹּאמְרוּ = and you said (to say)
+3 אֵלַי = to me (to(wards))
+4 חָטָאנוּ = we have sinned (to sin)
+5 לַיהוָה = to Yahweh
+6 אֲנַחְנוּ = we
+7 נַעֲלֶה = we will go up
+8 וְנִלְחַמְנוּ = and we will fight (to fight)
+9 כְּכֹל = according to all (all)
+10 אֲשֶׁר־ = that (which)
+11 צִוָּנוּ = he has commanded us (to command)
+12 יְהוָה = Yahweh
+13 אֱלֹהֵינוּ = God our (God)
+14 וַתַּחְגְּרוּ = and you girded on (to gird)
+15 אִישׁ = everyone (man)
+16 אֶת־ = <obj.> ([Obj.])
+17 כְּלֵי = [the] weapons of (article|utensil)
+18 מִלְחַמְתּוֹ = war his (battle)
+19 וַתָּהִינוּ = and you regarded as easy (be ready)
+20 לַעֲלֹת = to go up
+21 הָהָרָה = the hill country towards (mountain)
+
+## 5:1:42
+KO: 여호와께서 내게 이르시기를 "너는 그들에게 말하라. 너희는 올라가지 말라, 그리고 싸우지 말라. 왜냐하면 내가 너희 가운데 있지 아니하니, 너희가 너희 원수들 앞에서 패할까 하노라" 하시기로.
+1 וַיֹּאמֶר = and he said
+2 יְהוָה = Yahweh (LORD)
+3 אֵלַי = to me (to(wards))
+4 אֱמֹר = say
+5 לָהֶם = to them (them)
+6 לֹא = not
+7 תַעֲלוּ = you must go up (to ascend)
+8 וְלֹא־ = and not
+9 תִלָּחֲמוּ = you must fight (to fight)
+10 כִּי = for
+11 אֵינֶנִּי = not I (nothing)
+12 בְּקִרְבְּכֶם = [will be] in midst your (entrails)
+13 וְלֹא = and not
+14 תִּנָּגְפוּ = you will be defeated (to strike)
+15 לִפְנֵי = <to> before (face)
+16 אֹיְבֵיכֶם = enemies your (enemy)
+
+## 5:1:43
+KO: 그리고 내가 너희에게 말하였으나 너희가 듣지 아니하였고, 여호와의 입을 거역하였으며, 뻔뻔하게 산지로 올라갔다.
+1 וָאֲדַבֵּר = and I spoke (to speak)
+2 אֲלֵיכֶם = to you (to(wards))
+3 וְלֹא = and not (not)
+4 שְׁמַעְתֶּם = you listened (to hear)
+5 וַתַּמְרוּ = and you rebelled against (to rebel)
+6 אֶת־ = <obj.> ([Obj.])
+7 פִּי = [the] mouth of (lip)
+8 יְהוָה = Yahweh (LORD)
+9 וַתָּזִדוּ = and you acted presumptuously (to boil)
+10 וַתַּעֲלוּ = and you went up (to ascend)
+11 הָהָרָה = the hill country towards (mountain)
+
+## 5:1:44
+KO: 그리고 그 산지에 거주하는 아모리 족속이 너희를 마주 나오더니, 벌들이 하는 것과 같이 너희를 뒤쫓아 세일에서 너희를 쳐서 호르마까지 미쳤더라.
+1 וַיֵּצֵא = and he came out (to come out)
+2 הָאֱמֹרִי = the Amorite[s] (Amorite)
+3 הַיֹּשֵׁב = who was dwelling (to dwell)
+4 בָּהָר = in the hill country (mountain)
+5 הַהוּא = <the> that (he;_she;_it)
+6 לִקְרַאתְכֶם = to meet you (to encounter)
+7 וַיִּרְדְּפוּ = and they pursued (to pursue)
+8 אֶתְכֶם = <obj.> you
+9 כַּאֲשֶׁר = just as (as which)
+10 תַּעֲשֶׂינָה = they do (to make)
+11 הַדְּבֹרִים = <the> bees (bee)
+12 וַיַּכְּתוּ = and they scattered (to crush)
+13 אֶתְכֶם = <obj.> you
+14 בְּשֵׂעִיר = in Seir (Seir)
+15 עַד־ = to (till)
+16 חָרְמָה = Hormah
+
+## 5:1:45
+KO: 그리고 너희가 돌아와서, 여호와의 면전에서 통곡하였으나, 여호와께서는 너희의 소리를 듣지 않으셨고, 너희에게 귀를 기울이지 않으셨다.
+1 וַתָּשֻׁבוּ = and you returned (to return)
+2 וַתִּבְכּוּ = and you wept (to weep)
+3 לִפְנֵי = <to> before (face)
+4 יְהוָה = Yahweh
+5 וְלֹא־ = and not
+6 שָׁמַע = he listened (to hear)
+7 יְהוָה = Yahweh
+8 בְּקֹלְכֶם = to voice your (voice)
+9 וְלֹא = and not
+10 הֶאֱזִין = he gave ear (to listen)
+11 אֲלֵיכֶם = to you (to(wards))
+
+## 5:1:46
+KO: 그리고 너희는 가데스에서 많은 날들 동안 거주하였으니, 너희가 거주했던 그 날들만큼이다.
+1 וַתֵּשְׁבוּ = and you remained
+2 בְקָדֵשׁ = at Kadesh (Kadesh)
+3 יָמִים = days
+4 רַבִּים = many
+5 כַּיָּמִים = like the days
+6 אֲשֶׁר = which
+7 יְשַׁבְתֶּם = you remained
+
+## 5:2:1
+KO: 그리고 우리가 돌이켜 홍해 길로 광야 안으로 행진하였으니, 여호와께서 내게 말씀하신 것과 같이 하였고, 우리가 많은 날 동안 세일 산을 돌았다.
+1 וַנֵּפֶן = and we turned (to turn)
+2 וַנִּסַּע = and we set out (to set out)
+3 הַמִּדְבָּרָה = the wilderness towards (wilderness)
+4 דֶּרֶךְ = [the] way of (way)
+5 יַם־ = [the] sea of (sea)
+6 סוּף = reed[s] (Red( Sea))
+7 כַּאֲשֶׁר = just as (as which)
+8 דִּבֶּר = he had spoken (to speak)
+9 יְהוָה = Yahweh (LORD)
+10 אֵלָי = to me (to(wards))
+11 וַנָּסָב = and we went around (to turn)
+12 אֶת־ = <obj.> ([Obj.])
+13 הַר־ = [the] hill country of (mountain)
+14 שֵׂעִיר = Seir ((Mount )Seir)
+15 יָמִים = days (day;_when)
+16 רַבִּים ס = many
+
+## 5:2:2
+KO: 그리고 여호와께서 내게 말씀하시어 이르시기를
+1 וַיֹּאמֶר = and he said
+2 יְהוָה = Yahweh (LORD)
+3 אֵלַי = to me (to(wards))
+4 לֵאמֹר = <to> saying
+
+## 5:2:3
+KO: 너희에게는 이 산을 두루 다니는 것이 많으니, 너희는 북쪽으로 방향을 돌려라.
+1 רַב־ = [is] enough (many)
+2 לָכֶם = for you
+3 סֹב = going round (to turn)
+4 אֶת־ = <obj.> ([Obj.])
+5 הָהָר = the hill country (mountain)
+6 הַזֶּה = <the> this (this)
+7 פְּנוּ = turn (to turn)
+8 לָכֶם = <for> yourselves
+9 צָפֹנָה = north -ward (north)
+
+## 5:2:4
+KO: 그리고 백성에게 명령하여 말하라. 너희가 세일에 거주하는 너희 형제 에서 자손들의 영토를 지나갈 때, 그들이 너희를 두려워할 것이니, 너희는 매우 삼가라.
+1 וְאֶת־ = and <obj.> ([Obj.])
+2 הָעָם = the people (people)
+3 צַו = command (to command)
+4 לֵאמֹר = <to> saying (to say)
+5 אַתֶּם = you (you(m.p.))
+6 עֹבְרִים = [are] about to pass (to pass)
+7 בִּגְבוּל = in [the] territory of (border)
+8 אֲחֵיכֶם = relatives your (brother)
+9 בְּנֵי־ = [the] descendants of (son)
+10 עֵשָׂו = Esau
+11 הַיֹּשְׁבִים = who dwell (to dwell)
+12 בְּשֵׂעִיר = in Seir (Seir)
+13 וְיִירְאוּ = so they may be afraid (to fear)
+14 מִכֶּם = from you (you)
+15 וְנִשְׁמַרְתֶּם = and you will take heed (to keep)
+16 מְאֹד = exceedingly (much)
+
+## 5:2:5
+KO: 그들과 다투지 말라. 왜냐하면 내가 그들의 땅을, 발바닥이 밟을 곳조차도 너희에게 주지 않을 것이기 때문이다. 이는 내가 세일 산을 에서에게 기업으로 주었기 때문이다.
+1 אַל־ = may not (not)
+2 תִּתְגָּרוּ = you engage in strife (to stir up)
+3 בָם = with them (them)
+4 כִּי = for
+5 לֹא־ = not
+6 אֶתֵּן = I will give
+7 לָכֶם = to you (you)
+8 מֵאַרְצָם = any of land their (land)
+9 עַד = up to (till)
+10 מִדְרַךְ = a treading place of (treading)
+11 כַּף־ = [the] sole of (palm)
+12 רָגֶל = a foot (foot)
+13 כִּי־ = for
+14 יְרֻשָּׁה = a possession (possession)
+15 לְעֵשָׂו = to Esau (Esau)
+16 נָתַתִּי = I have given
+17 אֶת־ = <obj.> ([Obj.])
+18 הַר = [the] hill country of (mountain)
+19 שֵׂעִיר = Seir ((Mount )Seir)
+
+## 5:2:6
+KO: 양식을 너희는 그들에게서 은으로 사서 먹으라. 그리고 또한 물을 너희는 그들에게서 은으로 사서 마시라.
+1 אֹכֶל = food
+2 תִּשְׁבְּרוּ = you will buy (to buy grain)
+3 מֵאִתָּם = from with them
+4 בַּכֶּסֶף = for <the> silver
+5 וַאֲכַלְתֶּם = and you will eat (to eat)
+6 וְגַם־ = and also (also)
+7 מַיִם = water
+8 תִּכְרוּ = you will buy (to trade)
+9 מֵאִתָּם = from with them
+10 בַּכֶּסֶף = for <the> silver
+11 וּשְׁתִיתֶם = and you will drink (to drink)
+
+## 5:2:7
+KO: 이는 네 하나님 여호와께서 네 손의 모든 일에 너에게 복을 주셨고, 네가 이 큰 광야를 두루 다니는 것을 아셨기 때문이다. 이 사십 년 동안 네 하나님 여호와가 너와 함께하였으므로, 네게 부족한 것이 없었다.
+1 כִּי = for
+2 יְהוָה = Yahweh
+3 אֱלֹהֶיךָ = God your
+4 בֵּרַכְךָ = he has blessed you (to bless)
+5 בְּכֹל = in all (all)
+6 מַעֲשֵׂה = [the] work of (deed)
+7 יָדֶךָ = hand your (hand)
+8 יָדַע = he has known (to know)
+9 לֶכְתְּךָ = walking you (to go)
+10 אֶת־ = <obj.> ([Obj.])
+11 הַמִּדְבָּר = the wilderness (wilderness)
+12 הַגָּדֹל = <the> great (great)
+13 הַזֶּה = <the> this
+14 זֶה = this
+15 אַרְבָּעִים = forty
+16 שָׁנָה = year[s] (year)
+17 יְהוָה = Yahweh
+18 אֱלֹהֶיךָ = God your
+19 עִמָּךְ = [has been] with you (with)
+20 לֹא = not
+21 חָסַרְתָּ = you have lacked (to lack)
+22 דָּבָר = anything (word)
+
+## 5:2:8
+KO: 그리고 우리는 세일에 거주하는 우리 형제들인 에서의 자손들로부터 아라바의 길로부터, 엘랏과 에시온 게벨로부터 떠나 지나갔으며, 우리가 돌이켜 모압 광야의 길로 나아갔다.
+1 וַנַּעֲבֹר = and we passed away
+2 מֵאֵת = from with (with)
+3 אַחֵינוּ = relatives our (brother)
+4 בְנֵי־ = [the] descendants of (son)
+5 עֵשָׂו = Esau
+6 הַיֹּשְׁבִים = who were dwelling (to dwell)
+7 בְּשֵׂעִיר = in Seir (Seir)
+8 מִדֶּרֶךְ = from [the] way of
+9 הָעֲרָבָה = the desert plain (Arabah)
+10 מֵאֵילַת = from Elath (Elath)
+11 וּמֵעֶצְיֹן = and from Ezion
+12 גָּבֶר ס = Geber
+13 וַנֵּפֶן = and we turned (to turn)
+14 וַנַּעֲבֹר = and we passed along
+15 דֶּרֶךְ = [the] way of
+16 מִדְבַּר = [the] wilderness of (wilderness)
+17 מוֹאָב = Moab
+
+## 5:2:9
+KO: 그리고 여호와께서 내게 말씀하셨다. "모압을 괴롭게 하지 마라. 그리고 그들과 전쟁을 일으키지 마라. 왜냐하면 나는 그의 땅을 너에게 기업으로 주지 않을 것이기 때문이다. 이는 내가 롯의 자손들에게 아르를 기업으로 주었기 때문이다."
+1 וַיֹּאמֶר = and he said (to say)
+2 יְהוָה = Yahweh (LORD)
+3 אֵלַי = to me
+4 אֶל־ = to
+5 תָּצַר = you may provoke (to provoke)
+6 אֶת־ = <obj.>
+7 מוֹאָב = Moab
+8 וְאַל־ = and may not (not)
+9 תִּתְגָּר = you engage in strife (to stir up)
+10 בָּם = with them (them)
+11 מִלְחָמָה = battle
+12 כִּי = for
+13 לֹא־ = not
+14 אֶתֵּן = I will give
+15 לְךָ = to you (you)
+16 מֵאַרְצוֹ = any of land his (land)
+17 יְרֻשָּׁה = a possession
+18 כִּי = for
+19 לִבְנֵי־ = to [the] descendants of (son)
+20 לוֹט = Lot
+21 נָתַתִּי = I have given
+22 אֶת־ = <obj.>
+23 עָר = Ar
+24 יְרֻשָּׁה = a possession
+
+## 5:2:10
+KO: 엠 사람들이 이전부터 그 안에 거주하였으니, 그들은 크고 많고 아낙 자손들처럼 키가 큰 민족이었다.
+1 הָאֵמִים = the Emites (Emim)
+2 לְפָנִים = <to> before (face)
+3 יָשְׁבוּ = they dwelt (to dwell)
+4 בָהּ = in it (her)
+5 עַם = a people (people)
+6 גָּדוֹל = great
+7 וְרַב = and numerous (many)
+8 וָרָם = and lofty (to exalt)
+9 כָּעֲנָקִים = like the Anakites (Anakim)
+
+## 5:2:11
+KO: 그들 또한 르바임이라 여겨졌으니 아낙 족속들과 같았다. 그러나 모압 사람들은 그들을 에밈이라 불렀다.
+1 רְפָאִים = Rephaites (Rephaim)
+2 יֵחָשְׁבוּ = they were regarded (to devise)
+3 אַף־ = also
+4 הֵם = they (they(masc.))
+5 כָּעֲנָקִים = like the Anakites (Anakim)
+6 וְהַמֹּאָבִים = and the Moabites (Moab)
+7 יִקְרְאוּ = they called (to call)
+8 לָהֶם = <to> them (them)
+9 אֵמִים = Emites (Emim)

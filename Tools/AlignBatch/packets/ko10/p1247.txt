@@ -1,0 +1,100 @@
+## 16:7:40
+KO: 임멜의 자손은 일천 오십 이명이라.
+1 בְּנֵי = [the] descendants of (son)
+2 אִמֵּר = Immer
+3 אֶלֶף = one thousand (thousand)
+4 חֲמִשִּׁים = fifty
+5 וּשְׁנָיִם ס = and two (two)
+
+## 16:7:41
+KO: 파스훌의 자손들은 천 이백 사십 칠 명이었다.
+1 בְּנֵי = [the] descendants of (son)
+2 פַשְׁחוּר = Pashhur
+3 אֶלֶף = one thousand (thousand)
+4 מָאתַיִם = two hundred (hundred)
+5 אַרְבָּעִים = forty
+6 וְשִׁבְעָה ס = and seven (seven)
+
+## 16:7:42
+KO: 하림의 자손들은 천십칠 명이었더라.
+1 בְּנֵי = [the] descendants of (son)
+2 חָרִם = Harim
+3 אֶלֶף = one thousand (thousand)
+4 שִׁבְעָה = seven- (seven)
+5 עָשָׂר פ = teen (ten)
+
+## 16:7:43
+KO: 레위 사람들은, 예수아와 갓미엘의 자손 곧 호드야의 자손으로 칠십사 명이었다.
+1 הַלְוִיִּם = the Levites (Levi)
+2 בְּנֵי־ = [the] descendants of
+3 יֵשׁוּעַ = Jeshua
+4 לְקַדְמִיאֵל = of Kadmiel (Kadmiel)
+5 לִבְנֵי = of [the] descendants
+6 לְהוֹדְוָה = of Hodaviah (Hodevah)
+7 שִׁבְעִים = seventy
+8 וְאַרְבָּעָה ס = and four (four)
+
+## 16:7:44
+KO: 노래하는 자들은 아삽의 자손들이 백 사십 팔 명이었다.
+1 הַמְשֹׁרְרִים = the singers (to sing)
+2 בְּנֵי = [the] descendants of (son)
+3 אָסָף = Asaph
+4 מֵאָה = one hundred (hundred)
+5 אַרְבָּעִים = forty
+6 וּשְׁמֹנָה ס = and eight (eight)
+
+## 16:7:45
+KO: 문지기들은 살룸의 자손들, 아델의 자손들, 달문의 자손들, 악굽의 자손들, 하디다의 자손들, 소배의 자손들, 백삼십팔 명이었더라.
+1 הַשֹּׁעֲרִים = the gatekeepers (gatekeeper)
+2 בְּנֵי־ = [the] descendants of
+3 שַׁלּוּם = Shallum
+4 בְּנֵי־ = [the] descendants of
+5 אָטֵר = Ater
+6 בְּנֵי־ = [the] descendants of
+7 טַלְמֹן = Talmon
+8 בְּנֵי־ = [the] descendants of
+9 עַקּוּב = Akkub
+10 בְּנֵי = [the] descendants of
+11 חֲטִיטָא = Hatita
+12 בְּנֵי = [the] descendants of
+13 שֹׁבָי = Shobai
+14 מֵאָה = one hundred (hundred)
+15 שְׁלֹשִׁים = thirty
+16 וּשְׁמֹנָה ס = and eight (eight)
+
+## 16:7:46
+KO: 그 느디님 사람들, 시하의 자손들, 하수바의 자손들, 답바옷의 자손들.
+1 הַנְּתִינִים = the temple servants (temple servant)
+2 בְּנֵי־ = [the] descendants of
+3 צִחָא = Ziha
+4 בְנֵי־ = [the] descendants of
+5 חֲשֻׂפָא = Hasupha
+6 בְּנֵי = [the] descendants of
+7 טַבָּעוֹת = Tabbaoth
+
+## 16:7:47
+KO: 게로스의 자손들, 시아의 자손들, 파돈의 자손들
+1 בְּנֵי־ = [the] descendants of
+2 קֵירֹס = Keros
+3 בְּנֵי־ = [the] descendants of
+4 סִיעָא = Sia (Siaha)
+5 בְּנֵי = [the] descendants of
+6 פָדוֹן = Padon
+
+## 16:7:48
+KO: 르바나 자손과 하가바 자손과 살매 자손
+1 בְּנֵי־ = [the] descendants of
+2 לְבָנָה = Lebanah
+3 בְנֵי־ = [the] descendants of
+4 חֲגָבָה = Hagabah
+5 בְּנֵי = [the] descendants of
+6 שַׁלְמָי = Shalmai
+
+## 16:7:49
+KO: 하난의 자손들, 깃델의 자손들, 가할의 자손들.
+1 בְּנֵי־ = [the] descendants of
+2 חָנָן = Hanan
+3 בְּנֵי־ = [the] descendants of
+4 גִדֵּל = Giddel
+5 בְּנֵי־ = [the] descendants of
+6 גָחַר = Gahar

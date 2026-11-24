@@ -1,0 +1,159 @@
+## 1:8:7
+KO: 그가 까마귀를 내보내니, 그것이 물이 땅 위에서 마르기까지 나아가며 돌아오고 있었더라.
+1 וַיְשַׁלַּח = and he sent out (to send)
+2 אֶת־ = <obj.> ([Obj.])
+3 הָעֹרֵב = the raven (raven)
+4 וַיֵּצֵא = and it went out
+5 יָצוֹא = continuously <to go out>
+6 וָשׁוֹב = and returned (to return)
+7 עַד־ = until (till)
+8 יְבֹשֶׁת = dried up (to wither)
+9 הַמַּיִם = the waters (water)
+10 מֵעַל = from on (upon)
+11 הָאָרֶץ = the earth (land)
+
+## 1:8:8
+KO: 그가 또 그 비둘기를 그에게서 내보냈으니, 물이 땅의 표면 위에서 줄어들었는지를 보기 위함이었더라.
+1 וַיְשַׁלַּח = and he sent out (to send)
+2 אֶת־ = <obj.> ([Obj.])
+3 הַיּוֹנָה = the dove (dove)
+4 מֵאִתּוֹ = from with <the> him (with)
+5 לִרְאוֹת = to see
+6 הֲקַלּוּ = ¿ were they abated (to lighten)
+7 הַמַּיִם = the waters (water)
+8 מֵעַל = from on (upon)
+9 פְּנֵי = [the] surface of (face)
+10 הָאֲדָמָה = the ground (land)
+
+## 1:8:9
+KO: 비둘기가 자기 발바닥을 위한 쉴 곳을 찾지 못하였으므로, 온 땅의 얼굴 위에 물이 있기에 그것이 그에게, 방주로 돌아왔고, 그가 그의 손을 뻗어 그것을 취하여 방주 속 그의 곁으로 그것을 들여왔다.
+1 וְלֹא־ = and not (not)
+2 מָצְאָה = <it> found (to find)
+3 הַיּוֹנָה = the dove (dove)
+4 מָנוֹחַ = a resting place (resting)
+5 לְכַף־ = for [the] sole of (palm)
+6 רַגְלָהּ = foot its (foot)
+7 וַתָּשָׁב = and it returned (to return)
+8 אֵלָיו = to him
+9 אֶל־ = into
+10 הַתֵּבָה = the ark
+11 כִּי־ = for
+12 מַיִם = water
+13 עַל־ = [was] on (upon)
+14 פְּנֵי = [the] surface of (face)
+15 כָל־ = all
+16 הָאָרֶץ = the earth (land)
+17 וַיִּשְׁלַח = and he stretched out (to send)
+18 יָדוֹ = hand his (hand)
+19 וַיִּקָּחֶהָ = and he took it (to take)
+20 וַיָּבֵא = and he brought (to come (in))
+21 אֹתָהּ = <obj.> it ([Obj.])
+22 אֵלָיו = to him
+23 אֶל־ = into
+24 הַתֵּבָה = the ark
+
+## 1:8:10
+KO: 그리고 그가 다시 칠 일들을 기다렸고, 그가 비둘기를 방주로부터 내보내기를 더하였다.
+1 וַיָּחֶל = and he waited (to twist)
+2 עוֹד = again (still)
+3 שִׁבְעַת = seven
+4 יָמִים = days (day;_when)
+5 אֲחֵרִים = other (another)
+6 וַיֹּסֶף = and he repeated (to add)
+7 שַׁלַּח = to send out (to send)
+8 אֶת־ = <obj.> ([Obj.])
+9 הַיּוֹנָה = the dove (dove)
+10 מִן־ = from
+11 הַתֵּבָה = the ark (ark)
+
+## 1:8:11
+KO: 비둘기가 저녁 때에 그에게로 돌아왔는데, 보라, 그 입에 갓 딴 감람 잎사귀가 있는지라. 노아가 물이 땅 위에서 감해진 것을 알았더라.
+1 וַתָּבֹא = and it came (to come (in))
+2 אֵלָיו = to him (to(wards))
+3 הַיּוֹנָה = the dove (dove)
+4 לְעֵת = to [the] time of (time)
+5 עֶרֶב = evening
+6 וְהִנֵּה = and there! (behold)
+7 עֲלֵה־ = a leaf of (leaf)
+8 זַיִת = olive
+9 טָרָף = freshly plucked (fresh-plucked)
+10 בְּפִיהָ = [was] in mouth its (lip)
+11 וַיֵּדַע = and he knew (to know)
+12 נֹחַ = Noah
+13 כִּי־ = that (for)
+14 קַלּוּ = they were abated (to lighten)
+15 הַמַּיִם = the waters (water)
+16 מֵעַל = from on (upon)
+17 הָאָרֶץ = the earth (land)
+
+## 1:8:12
+KO: 그리고 그가 다시 칠 일을 기다렸고, 비둘기를 내보내니 그것이 다시는 그에게로 돌아오는 것을 더하지 아니하였더라.
+1 וַיִּיָּחֶל = and he waited (to wait)
+2 עוֹד = again
+3 שִׁבְעַת = seven
+4 יָמִים = days (day;_when)
+5 אֲחֵרִים = other (another)
+6 וַיְשַׁלַּח = and he sent out (to send)
+7 אֶת־ = <obj.> ([Obj.])
+8 הַיּוֹנָה = the dove (dove)
+9 וְלֹא־ = and not (not)
+10 יָסְפָה = it repeated (to add)
+11 שׁוּב־ = to return
+12 אֵלָיו = to him (to(wards))
+13 עוֹד = again
+
+## 1:8:13
+KO: 그리고 육백 일 년 첫째 달 일일에 지면으로부터 물들이 말랐다. 그리고 노아가 방주의 덮개를 치웠고 그가 보았는데, 보라, 땅의 표면이 말라 있었다.
+1 וַיְהִי = and it was (to be)
+2 בְּאַחַת = in one
+3 וְשֵׁשׁ־ = and six (six)
+4 מֵאוֹת = hundred<s> (hundred)
+5 שָׁנָה = year
+6 בָּרִאשׁוֹן = in the first [month] (first)
+7 בְּאֶחָד = on [day] one
+8 לַחֹדֶשׁ = of the month (month)
+9 חָרְבוּ = they were dried up
+10 הַמַּיִם = the waters (water)
+11 מֵעַל = from on (upon)
+12 הָאָרֶץ = the earth (land)
+13 וַיָּסַר = and he removed (to turn aside)
+14 נֹחַ = Noah
+15 אֶת־ = <obj.> ([Obj.])
+16 מִכְסֵה = [the] covering of (covering)
+17 הַתֵּבָה = the ark (ark)
+18 וַיַּרְא = and he saw (to see)
+19 וְהִנֵּה = and there! (behold)
+20 חָרְבוּ = they were dried up
+21 פְּנֵי = [the] surface of (face)
+22 הָאֲדָמָה = the ground (land)
+
+## 1:8:14
+KO: 그리고 그 둘째 달에, 그 달의 스물일곱째 날에, 그 땅이 말랐더라.
+1 וּבַחֹדֶשׁ = and in the month
+2 הַשֵּׁנִי = <the> second (second)
+3 בְּשִׁבְעָה = on [the] seven (seven)
+4 וְעֶשְׂרִים = and twenty (twenty)
+5 יוֹם = day (day;_when)
+6 לַחֹדֶשׁ = of the month
+7 יָבְשָׁה = <it> was dry (to wither)
+8 הָאָרֶץ ס = the earth (land)
+
+## 1:8:15
+KO: 그리고 하나님이 노아에게 말씀하시기를 이르셨다.
+1 וַיְדַבֵּר = and he spoke (to speak)
+2 אֱלֹהִים = God
+3 אֶל־ = to (to(wards))
+4 נֹחַ = Noah
+5 לֵאמֹר = <to> saying (to say)
+
+## 1:8:16
+KO: 너는 방주로부터 나오라, 너와 네 아내와 네 아들들과 네 아들들의 아내들이 너와 함께.
+1 צֵא = go out (to come out)
+2 מִן־ = from
+3 הַתֵּבָה = the ark (ark)
+4 אַתָּה = you (you(m.s.))
+5 וְאִשְׁתְּךָ = and wife your
+6 וּבָנֶיךָ = and sons your
+7 וּנְשֵׁי־ = and [the] wives of
+8 בָנֶיךָ = sons your
+9 אִתָּךְ = with you (with)

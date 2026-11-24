@@ -288,6 +288,12 @@ final class BibleReadingViewModel {
         return text.isEmpty ? nil : text
     }
 
+    /// [2026-11-02 interlin1] 원문 정보 "쓰인 구절" 본문 미리보기용 — 이 번역본 SQLite 파일 경로. 열 본문과 같은 규칙(`store(for:)`)으로
+    /// 찾고, 이미 열어 둔 `storeCache`를 쓴다. 미리보기 쪽이 메인 스레드 밖에서 자기 연결을 따로 열므로 경로만 넘긴다. 못 찾으면 nil.
+    func verseTextFilePath(registry: TranslationRegistry) -> String? {
+        (try? store(for: registry))?.filePath
+    }
+
     /// `TranslationColumnView.VerseRow`가 호출 — 이 번역본·이 절의 한자 주석
     /// 단어 목록. 개역한글(`TranslationBootstrap.bundledTranslationCode`) 외의
     /// 번역본은 애초에 이 코드로 저장된 레코드가 없어 항상 빈 배열이 나온다 —

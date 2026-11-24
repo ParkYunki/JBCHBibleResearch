@@ -1,0 +1,227 @@
+## 10:18:2
+KO: 그리고 다윗이 그 백성을 내보냈는데, 삼분의 일은 요압의 손에, 삼분의 일은 스루야의 아들 요압의 형제 아비새의 손에, 삼분의 일은 가드 사람 잇대의 손에 (두었더라). 그리고 왕이 그 백성에게 이르되, "내가 나가는 것을 반드시 나도 너희와 함께 나가리라."
+1 וַיְשַׁלַּח = and he sent out (to send)
+2 דָּוִד = David
+3 אֶת־ = <obj.> ([Obj.])
+4 הָעָם = the people
+5 הַשְּׁלִשִׁית = the third
+6 בְּיַד־ = [was] in [the] hand of
+7 יוֹאָב = Joab
+8 וְהַשְּׁלִשִׁית = and the third
+9 בְּיַד = [was] in [the] hand of
+10 אֲבִישַׁי = Abishai
+11 בֶּן־ = [the] son of (son)
+12 צְרוּיָה = Zeruiah
+13 אֲחִי = [the] brother of (brother)
+14 יוֹאָב = Joab
+15 וְהַשְּׁלִשִׁת = and the third
+16 בְּיַד = [was] in [the] hand of
+17 אִתַּי = Ittai
+18 הַגִּתִּי ס = the Gittite (Gath)
+19 וַיֹּאמֶר = and he said (to say)
+20 הַמֶּלֶךְ = the king (king)
+21 אֶל־ = to (to(wards))
+22 הָעָם = the people
+23 יָצֹא = certainly <to go out>
+24 אֵצֵא = I will go out
+25 גַּם־ = also
+26 אֲנִי = I
+27 עִמָּכֶם = with you (with)
+
+## 10:18:3
+KO: 백성이 말하기를 "왕은 나가지 마소서. 왜냐하면 만일 우리가 도망할지라도 그들은 우리에게 마음을 두지 않을 것이며, 만일 우리 중 절반이 죽을지라도 그들은 우리에게 마음을 두지 않을 것이기 때문입니다. 왜냐하면 지금은 우리 같은 자 만 명보다도 왕이 중요하시기 때문입니다. 그러므로 지금은 왕께서 성읍에서 우리를 도우시는 것이 좋습니다."
+1 וַיֹּאמֶר = and it said (to say)
+2 הָעָם = the people (people)
+3 לֹא = not
+4 תֵצֵא = you must go out (to come out)
+5 כִּי = for
+6 אִם־ = if
+7 נֹס = certainly [if] <to flee>
+8 נָנוּס = we will flee
+9 לֹא־ = not
+10 יָשִׂימוּ = they will set
+11 אֵלֵינוּ = to us
+12 לֵב = heart
+13 וְאִם־ = and if
+14 יָמֻתוּ = they will die (to die)
+15 חֶצְיֵנוּ = half of us (half)
+16 לֹא־ = not
+17 יָשִׂימוּ = they will set
+18 אֵלֵינוּ = to us
+19 לֵב = heart
+20 כִּי־ = for
+21 עַתָּה = now
+22 כָמֹנוּ = like us (like)
+23 עֲשָׂרָה = ten
+24 אֲלָפִים = thousand<s> (thousand)
+25 וְעַתָּה = and therefore
+26 טוֹב = [is] good (pleasant)
+27 כִּי־ = that
+28 תִהְיֶה־ = you will be (to be)
+29 לָּנוּ = <to> <the> us (us)
+30 מֵעִיר = from [the] city (city)
+31 לַעְזוֹר ס = to help
+
+## 10:18:4
+KO: 그리고 왕이 그들에게 말하였다. “너희의 눈에 선하게 보이는 것을 내가 행할 것이다.” 왕이 성문 곁에 섰고, 모든 백성은 백 명씩 그리고 천 명씩 나아갔다.
+1 וַיֹּאמֶר = and he said (to say)
+2 אֲלֵיהֶם = to them
+3 הַמֶּלֶךְ = the king
+4 אֲשֶׁר־ = [that] which (which)
+5 יִיטַב = it will be good (be good)
+6 בְּעֵינֵיכֶם = in view your (eye)
+7 אֶעֱשֶׂה = I will do (to make)
+8 וַיַּעֲמֹד = and he stood (to stand)
+9 הַמֶּלֶךְ = the king
+10 אֶל־ = to
+11 יַד = [the] side of (hand)
+12 הַשַּׁעַר = the gate (gate)
+13 וְכָל־ = and all (all)
+14 הָעָם = the people (people)
+15 יָצְאוּ = they went out (to come out)
+16 לְמֵאוֹת = to hundreds (hundred)
+17 וְלַאֲלָפִים = and to thousands (thousand)
+
+## 10:18:5
+KO: 그리고 왕이 요압과 아비새와 잇대에게 명령하여 말하였다. “나를 위하여 소년 압살롬을 부드럽게 대하시오.” 그리고 왕이 모든 지휘관들에게 압살롬에 관한 일로 명령할 때에 모든 백성이 들었다.
+1 וַיְצַו = and he commanded
+2 הַמֶּלֶךְ = the king
+3 אֶת־ = <obj.>
+4 יוֹאָב = Joab
+5 וְאֶת־ = and <obj.>
+6 אֲבִישַׁי = Abishai
+7 וְאֶת־ = and <obj.>
+8 אִתַּי = Ittai
+9 לֵאמֹר = <to> saying (to say)
+10 לְאַט־ = to gentleness (softly)
+11 לִי = for <the> me (me)
+12 לַנַּעַר = to the young man (youth)
+13 לְאַבְשָׁלוֹם = to Absalom
+14 וְכָל־ = and all
+15 הָעָם = the people (people)
+16 שָׁמְעוּ = they heard (to hear)
+17 בְּצַוֹּת = when commanded
+18 הַמֶּלֶךְ = the king
+19 אֶת־ = <obj.>
+20 כָּל־ = all
+21 הַשָּׂרִים = the commanders (ruler)
+22 עַל־ = on (upon)
+23 דְּבַר = [the] matter of (word)
+24 אַבְשָׁלוֹם = Absalom
+
+## 10:18:6
+KO: 그리고 그 백성이 이스라엘을 맞이하여 들로 나갔고, 그 전쟁은 에브라임의 수풀 안에서 있었다.
+1 וַיֵּצֵא = and it went out (to come out)
+2 הָעָם = the people (people)
+3 הַשָּׂדֶה = the field (land)
+4 לִקְרַאת = to meet (to encounter)
+5 יִשְׂרָאֵל = Israel
+6 וַתְּהִי = and it was (to be)
+7 הַמִּלְחָמָה = the battle (battle)
+8 בְּיַעַר = in [the] forest of (Forest)
+9 אֶפְרָיִם = Ephraim (of Ephraim)
+
+## 10:18:7
+KO: 그리고 이스라엘 백성이 다윗의 종들 앞에서 패하였고, 그곳에 그날 큰 살륙이 있어 이만에 이르렀다.
+1 וַיִּנָּגְפוּ = and they were defeated (to strike)
+2 שָׁם = there
+3 עַם = [the] people of (people)
+4 יִשְׂרָאֵל = Israel
+5 לִפְנֵי = <to> before (face)
+6 עַבְדֵי = [the] servants of (servant;_slave)
+7 דָוִד = David
+8 וַתְּהִי־ = and it was (to be)
+9 שָׁם = there
+10 הַמַּגֵּפָה = the slaughter (plague)
+11 גְדוֹלָה = great
+12 בַּיּוֹם = on the day (day;_when)
+13 הַהוּא = <the> that (he;_she;_it)
+14 עֶשְׂרִים = twenty
+15 אָלֶף = thousand
+
+## 10:18:8
+KO: 그곳에서 그 전쟁이 온 땅의 지면 위로 흩어지게 되었고, 그날에 수풀이 칼이 삼킨 것보다 더 많은 백성을 삼켰다.
+1 וַתְּהִי־ = and it was (to be)
+2 שָׁם = there
+3 הַמִּלְחָמָה = the battle (battle)
+4 נָפֹצֶת = scattered (to scatter)
+5 עַל־ = over (upon)
+6 פְּנֵי = [the] face of (face)
+7 כָל־ = all
+8 הָאָרֶץ = the land (land)
+9 וַיֶּרֶב = and it increased (to multiply)
+10 הַיַּעַר = the forest (wood)
+11 לֶאֱכֹל = to consume
+12 בָּעָם = among the people (people)
+13 מֵאֲשֶׁר = more than [those] whom (from which)
+14 אָכְלָה = it consumed
+15 הַחֶרֶב = the sword (sword)
+16 בַּיּוֹם = on the day (day;_when)
+17 הַהוּא = <the> that (he;_she;_it)
+
+## 10:18:9
+KO: 그리고 압살롬이 다윗의 종들의 면전에서 마주쳤다. 그리고 압살롬은 노새를 타고 있었는데, 그 노새가 큰 상수리나무의 울창한 가지들 아래로 들어갔고, 그의 머리가 그 상수리나무에 붙잡혔으며, 그가 하늘과 땅 사이에 매달리게 되었고, 그 아래에 있던 그 노새는 지나가 버렸다.
+1 וַיִּקָּרֵא = and he was met (to encounter)
+2 אַבְשָׁלוֹם = Absalom
+3 לִפְנֵי = <to> before (face)
+4 עַבְדֵי = [the] servants of (servant;_slave)
+5 דָוִד = David
+6 וְאַבְשָׁלוֹם = and Absalom
+7 רֹכֵב = [was] riding (to ride)
+8 עַל־ = on (upon)
+9 הַפֶּרֶד = the mule
+10 וַיָּבֹא = and it went (to come (in))
+11 הַפֶּרֶד = the mule
+12 תַּחַת = under
+13 שׂוֹבֶךְ = [the] branche[s] of (thicket)
+14 הָאֵלָה = the oak
+15 הַגְּדוֹלָה = <the> great (great)
+16 וַיֶּחֱזַק = and it was firm (to strengthen)
+17 רֹאשׁוֹ = head his (head)
+18 בָאֵלָה = in the oak
+19 וַיֻּתַּן = and he was put (to give)
+20 בֵּין = between
+21 הַשָּׁמַיִם = the heavens (heaven)
+22 וּבֵין = and between
+23 הָאָרֶץ = the earth (land)
+24 וְהַפֶּרֶד = and the mule
+25 אֲשֶׁר־ = which
+26 תַּחְתָּיו = [was] under him
+27 עָבָר = it passed on (to pass)
+
+## 10:18:10
+KO: 그리고 한 사람이 보고 요압에게 고하여 이르되, 보소서, 내가 압살롬이 상수리나무에 매달려 있는 것을 보았습니다.
+1 וַיַּרְא = and he saw
+2 אִישׁ = a man (man)
+3 אֶחָד = one
+4 וַיַּגֵּד = and he told (to tell)
+5 לְיוֹאָב = to Joab (Joab)
+6 וַיֹּאמֶר = and he said (to say)
+7 הִנֵּה = there! (behold)
+8 רָאִיתִי = I saw
+9 אֶת־ = <obj.> ([Obj.])
+10 אַבְשָׁלֹם = Absalom
+11 תָּלוּי = hung up (to hang)
+12 בָּאֵלָה = in the oak (oak)
+
+## 10:18:11
+KO: 요압이 그에게 알리는 그 사람에게 말하였다. "보라, 네가 보았는데 어찌하여 그를 그곳 땅에 쳐서 떨어뜨리지 아니하였느냐? 그러면 내가 너에게 은 열 개와 띠 하나를 주었을 텐데."
+1 וַיֹּאמֶר = and he said (to say)
+2 יוֹאָב = Joab
+3 לָאִישׁ = to the man (man)
+4 הַמַּגִּיד = who had told (to tell)
+5 לוֹ = to <the> him (him)
+6 וְהִנֵּה = and there! (behold)
+7 רָאִיתָ = you saw (to see)
+8 וּמַדּוּעַ = and why? (why?)
+9 לֹא־ = not
+10 הִכִּיתוֹ = did you strike down him (to smite)
+11 שָׁם = there
+12 אָרְצָה = [the] ground towards (land)
+13 וְעָלַי = and on me (upon)
+14 לָתֶת = to give
+15 לְךָ = to <the> you (you)
+16 עֲשָׂרָה = ten
+17 כֶסֶף = silver
+18 וַחֲגֹרָה = and a belt (belt)
+19 אֶחָת = one

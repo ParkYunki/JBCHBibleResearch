@@ -1,0 +1,975 @@
+## 11:20:42
+KO: 그가 그에게 말하였다. 여호와께서 이렇게 말씀하셨다. "네가 나의 진멸(헤렘)의 사람을 네 손에서 보냈기 때문에, 네 생명은 그의 생명을 대신할 것이며 네 백성은 그의 백성을 대신할 것이다."
+1 וַיֹּאמֶר = and he said
+2 אֵלָיו = to him (to(wards))
+3 כֹּה = thus
+4 אָמַר = he says
+5 יְהוָה = Yahweh (LORD)
+6 יַעַן = because
+7 שִׁלַּחְתָּ = you have let go (to send)
+8 אֶת־ = <obj.> ([Obj.])
+9 אִישׁ־ = [the] man of (man)
+10 חֶרְמִי = total destruction my (devoted thing)
+11 מִיָּד = from a hand (hand)
+12 וְהָיְתָה = and it will be (to be)
+13 נַפְשְׁךָ = life your
+14 תַּחַת = in place of
+15 נַפְשׁוֹ = life his
+16 וְעַמְּךָ = and people your
+17 תַּחַת = in place of
+18 עַמּוֹ = people his
+
+## 11:20:43
+KO: 이스라엘 왕은 그의 집으로 성나고 분하게 가서 사마리아에 이르렀다.
+1 וַיֵּלֶךְ = and he went (to go)
+2 מֶלֶךְ־ = [the] king of (king)
+3 יִשְׂרָאֵל = Israel
+4 עַל־ = to (upon)
+5 בֵּיתוֹ = house his (house)
+6 סַר = sullen (stubborn)
+7 וְזָעֵף = and furious (vexed)
+8 וַיָּבֹא = and he went (to come (in))
+9 שֹׁמְרוֹנָה פ = Samaria towards (Samaria)
+
+## 11:21:1
+KO: 그리고 이 일들 후에 이스르엘 사람 나봇에게 이스르엘에 포도원이 있었는데, 그것은 사마리아 왕 아합의 궁전 곁에 있었다.
+1 וַיְהִי = and it was
+2 אַחַר = after
+3 הַדְּבָרִים = the things (word)
+4 הָאֵלֶּה = <the> these (these)
+5 כֶּרֶם = a vineyard (vineyard)
+6 הָיָה = it belonged
+7 לְנָבוֹת = to Naboth (Naboth)
+8 הַיִּזְרְעֵאלִי = the Jezreelite (Jezreelite)
+9 אֲשֶׁר = which
+10 בְּיִזְרְעֶאל = [was] in Jezreel (Jezreel)
+11 אֵצֶל = beside
+12 הֵיכַל = [the] palace of (temple)
+13 אַחְאָב = Ahab
+14 מֶלֶךְ = [the] king of (king)
+15 שֹׁמְרוֹן = Samaria
+
+## 11:21:2
+KO: 아합이 나봇에게 말하여 이르기를 "너의 포도원을 나에게 주어라, 그것이 나에게 채소 정원이 되게 하라, 왜냐하면 그것이 내 집 곁에 가까이 있기 때문이다. 그리고 내가 너에게 그것 대신에 그것보다 더 좋은 포도원을 주겠다. 만일 네 눈에 좋다면, 내가 너에게 이것의 값으로 은을 주겠다."
+1 וַיְדַבֵּר = and he spoke (to speak)
+2 אַחְאָב = Ahab
+3 אֶל־ = to (to(wards))
+4 נָבוֹת = Naboth
+5 לֵאמֹר = <to> saying (to say)
+6 תְּנָה־ = give !
+7 לִּי = to me
+8 אֶת־ = <obj.> ([Obj.])
+9 כַּרְמְךָ = vineyard your
+10 וִיהִי־ = so may it belong (to be)
+11 לִי = to me
+12 לְגַן־ = to a garden of (garden)
+13 יָרָק = vegetables (herb)
+14 כִּי = for
+15 הוּא = it (he;_she;_it)
+16 קָרוֹב = [is] near (near)
+17 אֵצֶל = beside
+18 בֵּיתִי = house my (house)
+19 וְאֶתְּנָה = and I will give
+20 לְךָ = to <the> you
+21 תַּחְתָּיו = in place of it (underneath)
+22 כֶּרֶם = a vineyard
+23 טוֹב = good
+24 מִמֶּנּוּ = more than it (from)
+25 אִם = if
+26 טוֹב = [it is] good (be pleasing)
+27 בְּעֵינֶיךָ = in view your (eye)
+28 אֶתְּנָה־ = I will give
+29 לְךָ = to you
+30 כֶסֶף = money (silver)
+31 מְחִיר = [the] price of (price)
+32 זֶה = this [one] (this)
+
+## 11:21:3
+KO: 나봇이 아합에게 말하였다. “나에게는 여호와로부터 (금지된 일이다), 내 조상들의 유업을 당신에게 주는 것이 금지된 일이다.”
+1 וַיֹּאמֶר = and he said (to say)
+2 נָבוֹת = Naboth
+3 אֶל־ = to (to(wards))
+4 אַחְאָב = Ahab
+5 חָלִילָה = far be it (forbid)
+6 לִּי = to me (me)
+7 מֵיהוָה = from Yahweh (LORD)
+8 מִתִּתִּי = than to give I (to give)
+9 אֶת־ = <obj.> ([Obj.])
+10 נַחֲלַת = [the] inheritance of (inheritance)
+11 אֲבֹתַי = ancestors my (father)
+12 לָךְ = to you (you)
+
+## 11:21:4
+KO: 아합이 그의 집으로 돌아왔으니, 그가 나봇이라는 이스르엘 사람에게 그가 그에게 말했던 그 일에 관하여 근심하고 분개하였기 때문이었다. 그가 말하기를 "나의 조상들의 유업을 당신에게 줄 수 없소." 하였더라. 그가 그의 침상 위로 누웠고, 그의 얼굴을 돌이켰으며, 음식을 먹지 아니하였더라.
+1 וַיָּבֹא = and he went (to come (in))
+2 אַחְאָב = Ahab
+3 אֶל־ = to
+4 בֵּיתוֹ = house his (house)
+5 סַר = sullen (stubborn)
+6 וְזָעֵף = and furious (vexed)
+7 עַל־ = on
+8 הַדָּבָר = the word (word)
+9 אֲשֶׁר־ = which
+10 דִּבֶּר = he had spoken (to speak)
+11 אֵלָיו = to him
+12 נָבוֹת = Naboth
+13 הַיִּזְרְעֵאלִי = the Jezreelite (Jezreelite)
+14 וַיֹּאמֶר = and he said (to say)
+15 לֹא־ = not
+16 אֶתֵּן = I will give (to give)
+17 לְךָ = to you (you)
+18 אֶת־ = <obj.>
+19 נַחֲלַת = [the] inheritance of (inheritance)
+20 אֲבוֹתָי = ancestors my (father)
+21 וַיִּשְׁכַּב = and he lay down (to lie down)
+22 עַל־ = on
+23 מִטָּתוֹ = bed his (bed)
+24 וַיַּסֵּב = and he turned around (to turn)
+25 אֶת־ = <obj.>
+26 פָּנָיו = face his (face)
+27 וְלֹא־ = and not
+28 אָכַל = he ate (to eat)
+29 לָחֶם = food
+
+## 11:21:5
+KO: 그의 아내 이세벨이 그에게 와서 그에게 말했다. "어찌하여 당신의 영(마음)이 돌아서서 당신이 음식을 먹지 아니합니까?"
+1 וַתָּבֹא = and she came (to come (in))
+2 אֵלָיו = to him
+3 אִיזֶבֶל = Jezebel
+4 אִשְׁתּוֹ = wife his (woman)
+5 וַתְּדַבֵּר = and she spoke (to speak)
+6 אֵלָיו = to him
+7 מַה־ = why? (what?)
+8 זֶּה = this
+9 רוּחֲךָ = [is] spirit your (spirit)
+10 סָרָה = sullen (stubborn)
+11 וְאֵינְךָ = and not you (nothing)
+12 אֹכֵל = [are] eating (to eat)
+13 לָחֶם = food
+
+## 11:21:6
+KO: 그가 그녀(이세벨)에게 말하였다. 왜냐하면 내가 이스르엘 사람 나봇에게 말하여 이르기를 ‘네 포도원을 내게 주라. 은으로(돈으로) 하거나, 만일 네가 기뻐한다면 내가 네게 그 대신 포도원을 주리라’ 하였는데, 그가 ‘나는 내 포도원을 네게 주지 않겠다’라고 말했기 때문이다.
+1 וַיְדַבֵּר = and he spoke
+2 אֵלֶיהָ = to her
+3 כִּי־ = for
+4 אֲדַבֵּר = I spoke
+5 אֶל־ = to
+6 נָבוֹת = Naboth
+7 הַיִּזְרְעֵאלִי = the Jezreelite (Jezreelite)
+8 וָאֹמַר = and I said
+9 לוֹ = to him (him)
+10 תְּנָה־ = give !
+11 לִּי = to me (me)
+12 אֶת־ = <obj.>
+13 כַּרְמְךָ = vineyard your
+14 בְּכֶסֶף = for money (silver)
+15 אוֹ = or
+16 אִם־ = if
+17 חָפֵץ = [are] desiring (delighting)
+18 אַתָּה = you (you(m.s.))
+19 אֶתְּנָה־ = I will give
+20 לְךָ = to you
+21 כֶרֶם = a vineyard
+22 תַּחְתָּיו = in place of it (underneath)
+23 וַיֹּאמֶר = and he said
+24 לֹא־ = not
+25 אֶתֵּן = I will give
+26 לְךָ = to you
+27 אֶת־ = <obj.>
+28 כַּרְמִי = vineyard my
+
+## 11:21:7
+KO: 그의 아내 이세벨이 그에게 말하였다. "이제 당신이 이스라엘 위에 왕권을 행사하십니까? 일어나 빵을 드시고 마음을 기쁘게 하소서. 내가 당신에게 이스르엘 사람 나봇의 포도원을 주겠나이다."
+1 וַתֹּאמֶר = and she said (to say)
+2 אֵלָיו = to him (to(wards))
+3 אִיזֶבֶל = Jezebel
+4 אִשְׁתּוֹ = wife his (woman)
+5 אַתָּה = you (you(m.s.))
+6 עַתָּה = now
+7 תַּעֲשֶׂה = are you doing? (to make)
+8 מְלוּכָה = kingship
+9 עַל־ = over (upon)
+10 יִשְׂרָאֵל = Israel
+11 קוּם = arise (to arise)
+12 אֱכָל־ = eat (to eat)
+13 לֶחֶם = food
+14 וְיִטַב = so it may be good (be good)
+15 לִבֶּךָ = heart your (heart)
+16 אֲנִי = I
+17 אֶתֵּן = I will give (to give)
+18 לְךָ = to you (you)
+19 אֶת־ = <obj.> ([Obj.])
+20 כֶּרֶם = [the] vineyard of (vineyard)
+21 נָבוֹת = Naboth
+22 הַיִּזְרְעֵאלִי = the Jezreelite (Jezreelite)
+
+## 11:21:8
+KO: 그리고 그녀(이세벨)는 아합의 이름으로 편지들을 썼고, 그의 인으로 그것들을 인쳤으며, 그 편지들을 그 성읍에 있는, 나봇과 함께 거주하는 장로들과 귀인들에게 보냈다.
+1 וַתִּכְתֹּב = and she wrote (to write)
+2 סְפָרִים = letters
+3 בְּשֵׁם = in [the] name of (name)
+4 אַחְאָב = Ahab
+5 וַתַּחְתֹּם = and she sealed [them] (to seal)
+6 בְּחֹתָמוֹ = with seal his
+7 וַתִּשְׁלַח = and she sent (to send)
+8 סְפָרִים = letters
+9 אֶל־ = to
+10 הַזְקֵנִים = the elders (old)
+11 וְאֶל־ = and to
+12 הַחֹרִים = the nobles (noble)
+13 אֲשֶׁר = who (which)
+14 בְּעִירוֹ = [were] in city his (city)
+15 הַיֹּשְׁבִים = who dwelt (to dwell)
+16 אֶת־ = with
+17 נָבוֹת = Naboth
+
+## 11:21:9
+KO: 그리고 그녀는 그 두루마리들에 쓰기를, 금식을 선포하고 나봇을 그 백성의 머리에 앉히라 하였더라.
+1 וַתִּכְתֹּב = and she wrote (to write)
+2 בַּסְּפָרִים = in the letters (scroll)
+3 לֵאמֹר = <to> saying (to say)
+4 קִרְאוּ־ = proclaim (to call)
+5 צוֹם = a fast (fast)
+6 וְהוֹשִׁיבוּ = and make sit (to dwell)
+7 אֶת־ = <obj.> ([Obj.])
+8 נָבוֹת = Naboth
+9 בְּרֹאשׁ = at [the] head of (head)
+10 הָעָם = the people (people)
+
+## 11:21:10
+KO: 그리고 벨리알의 아들들인 두 사람을 그의 맞은편에 앉히고, 그들이 그를 대적하여 증언하여 말하기를 "네가 하나님과 왕을 축복하였다" 하게 하라. 그리고 그를 밖으로 끌어내어 그를 돌로 쳐서 그가 죽게 하라.
+1 וְהוֹשִׁיבוּ = and make sit (to dwell)
+2 שְׁנַיִם = two
+3 אֲנָשִׁים = men (human)
+4 בְּנֵי־ = sons of (son)
+5 בְלִיַּעַל = worthlessness (Belial)
+6 נֶגְדּוֹ = before him (before)
+7 וִיעִדֻהוּ = and let them testify against him (to testify)
+8 לֵאמֹר = <to> saying (to say)
+9 בֵּרַכְתָּ = you have blessed (to bless)
+10 אֱלֹהִים = God
+11 וָמֶלֶךְ = and [the] king (king)
+12 וְהוֹצִיאֻהוּ = and take out him (to come out)
+13 וְסִקְלֻהוּ = and stone him (to stone)
+14 וְיָמֹת = so may he die (to die)
+
+## 11:21:11
+KO: 그리고 그 성읍의 사람들, 곧 그 성읍에 거주하는 장로들과 귀인들이 이세벨이 그들에게 보낸 편지들에 기록된 그대로 행하였다.
+1 וַיַּעֲשׂוּ = and they did (to make)
+2 אַנְשֵׁי = [the] people of (human)
+3 עִירוֹ = city his
+4 הַזְּקֵנִים = the elders (old)
+5 וְהַחֹרִים = and the nobles (noble)
+6 אֲשֶׁר = who
+7 הַיֹּשְׁבִים = [were] the [ones who] dwelt (to dwell)
+8 בְּעִירוֹ = in city his
+9 כַּאֲשֶׁר = just as
+10 שָׁלְחָה = she had sent
+11 אֲלֵיהֶם = to them
+12 אִיזָבֶל = Jezebel
+13 כַּאֲשֶׁר = just as
+14 כָּתוּב = [it was] written (to write)
+15 בַּסְּפָרִים = in the letters (scroll)
+16 אֲשֶׁר = which
+17 שָׁלְחָה = she had sent
+18 אֲלֵיהֶם = to them
+
+## 11:21:12
+KO: 그들이 금식을 선포하고, 나봇을 백성들의 머리(우두머리 자리)에 앉히라.
+1 קָרְאוּ = they proclaimed (to call)
+2 צוֹם = a fast (fast)
+3 וְהֹשִׁיבוּ = and they made sit (to dwell)
+4 אֶת־ = <obj.> ([Obj.])
+5 נָבוֹת = Naboth
+6 בְּרֹאשׁ = at [the] head of (head)
+7 הָעָם = the people (people)
+
+## 11:21:13
+KO: 그리고 비류의 두 사람이 들어와서 그의 맞은편에 앉았다. 그리고 그 비류들이 나봇에 대하여 백성 맞은편에서 증언하며 말하기를, "나봇이 하나님과 왕을 저주하였다" 하였다. 그리고 그들이 그를 성읍 밖으로 끌어내고 그를 돌들로 쳐서 그가 죽었다.
+1 וַיָּבֹאוּ = and they came (to come (in))
+2 שְׁנֵי = [the] two (two)
+3 הָאֲנָשִׁים = the men
+4 בְּנֵי־ = sons of (son)
+5 בְלִיַּעַל = worthlessness
+6 וַיֵּשְׁבוּ = and they sat (to dwell)
+7 נֶגְדּוֹ = before him
+8 וַיְעִדֻהוּ = and they testified against him (to testify)
+9 אַנְשֵׁי = [the] men of
+10 הַבְּלִיַּעַל = <the> worthlessness
+11 אֶת־ = <obj.> ([Obj.])
+12 נָבוֹת = Naboth
+13 נֶגֶד = before
+14 הָעָם = the people (people)
+15 לֵאמֹר = <to> saying (to say)
+16 בֵּרַךְ = he has blessed (to bless)
+17 נָבוֹת = Naboth
+18 אֱלֹהִים = God
+19 וָמֶלֶךְ = and [the] king (king)
+20 וַיֹּצִאֻהוּ = and they took out him (to come out)
+21 מִחוּץ = from [the] outside (outside)
+22 לָעִיר = of the city (city)
+23 וַיִּסְקְלֻהוּ = and they stoned him (to stone)
+24 בָאֲבָנִים = with <the> stones (stone)
+25 וַיָּמֹת = and he died (to die)
+
+## 11:21:14
+KO: 그들이 이세벨에게 보내어 말하기를, "나봇이 돌에 맞아 죽었나이다"라고 하였다.
+1 וַיִּשְׁלְחוּ = and they sent (to send)
+2 אֶל־ = to (to(wards))
+3 אִיזֶבֶל = Jezebel
+4 לֵאמֹר = <to> saying (to say)
+5 סֻקַּל = he has been stoned (to stone)
+6 נָבוֹת = Naboth
+7 וַיָּמֹת = and he has died (to die)
+
+## 11:21:15
+KO: 그리고 이세벨이 나봇이 돌에 맞아 죽고 그가 죽었다는 것을 들었을 때에, 이세벨이 아합에게 말했다. "일어나서 그 이스르엘 사람 나봇이 은으로 너에게 주기를 거절했던 그 포도원을 차지하소서. 나봇은 살아 있지 않고 죽었나이다."
+1 וַיְהִי = and it was (to be)
+2 כִּשְׁמֹעַ = when heard (to hear)
+3 אִיזֶבֶל = Jezebel
+4 כִּי־ = that
+5 סֻקַּל = he had been stoned (to stone)
+6 נָבוֹת = Naboth
+7 וַיָּמֹת = and he had died
+8 וַתֹּאמֶר = and she said (to say)
+9 אִיזֶבֶל = Jezebel
+10 אֶל־ = to (to(wards))
+11 אַחְאָב = Ahab
+12 קוּם = arise (to arise)
+13 רֵשׁ = take possession of (to possess)
+14 אֶת־ = <obj.> ([Obj.])
+15 כֶּרֶם = [the] vineyard of (vineyard)
+16 נָבוֹת = Naboth
+17 הַיִּזְרְעֵאלִי = the Jezreelite (Jezreelite)
+18 אֲשֶׁר = which
+19 מֵאֵן = he refused (to refuse)
+20 לָתֶת־ = to give
+21 לְךָ = to you (you)
+22 בְכֶסֶף = for money (silver)
+23 כִּי = for
+24 אֵין = not (nothing)
+25 נָבוֹת = Naboth
+26 חַי = [is] alive (alive)
+27 כִּי־ = for
+28 מֵת = he has died
+
+## 11:21:16
+KO: 그리고 아합이 나봇이 죽었다는 것을 듣자, 아합이 일어나 나봇, 곧 이스르엘 사람의 포도원을 차지하려고 그곳으로 내려갔다.
+1 וַיְהִי = and it was (to be)
+2 כִּשְׁמֹעַ = when heard (to hear)
+3 אַחְאָב = Ahab
+4 כִּי = that (for)
+5 מֵת = he had died (to die)
+6 נָבוֹת = Naboth
+7 וַיָּקָם = and he arose (to arise)
+8 אַחְאָב = Ahab
+9 לָרֶדֶת = to go down
+10 אֶל־ = to (to(wards))
+11 כֶּרֶם = [the] vineyard of (vineyard)
+12 נָבוֹת = Naboth
+13 הַיִּזְרְעֵאלִי = the Jezreelite (Jezreelite)
+14 לְרִשְׁתּוֹ ס = to take possession of it (to possess)
+
+## 11:21:17
+KO: 그리고 여호와의 말씀이 디셉 사람 엘리야에게 임하여 이르기를,
+1 וַיְהִי = and it came (to be)
+2 דְּבַר־ = [the] word of (word)
+3 יְהוָה = Yahweh (LORD)
+4 אֶל־ = to (to(wards))
+5 אֵלִיָּהוּ = Elijah
+6 הַתִּשְׁבִּי = the Tishbite (Tishbite)
+7 לֵאמֹר = <to> saying (to say)
+
+## 11:21:18
+KO: 일어나 내려가서 사마리아에 있는 이스라엘 왕 아합을 맞으라. 보라, 그가 나봇의 포도원에 있는데, 그것을 차지하려고 거기로 내려갔다.
+1 קוּם = arise (to arise)
+2 רֵד = go down
+3 לִקְרַאת = to meet (to encounter)
+4 אַחְאָב = Ahab
+5 מֶלֶךְ־ = [the] king of (king)
+6 יִשְׂרָאֵל = Israel
+7 אֲשֶׁר = who
+8 בְּשֹׁמְרוֹן = [is] in Samaria (Samaria)
+9 הִנֵּה = there! (behold)
+10 בְּכֶרֶם = [he is] in [the] vineyard of (vineyard)
+11 נָבוֹת = Naboth
+12 אֲשֶׁר־ = where
+13 יָרַד = he has gone down
+14 שָׁם = there
+15 לְרִשְׁתּוֹ = to take possession of it (to possess)
+
+## 11:21:19
+KO: 너는 그에게 말하여 이르기를 ‘여호와가 이같이 말한다. 네가 살인하고 또한 상속받았느냐?’ 하라. 그리고 너는 그에게 말하여 이르기를 ‘여호와가 이같이 말한다. 개들이 나봇의 피를 핥았던 그 장소에서 개들이 네 피, 곧 네 피를 핥을 것이다. 너도 또한’ 하라.
+1 וְדִבַּרְתָּ = and you will speak
+2 אֵלָיו = to him
+3 לֵאמֹר = <to> saying
+4 כֹּה = thus
+5 אָמַר = he says
+6 יְהוָה = Yahweh
+7 הֲרָצַחְתָּ = ¿ have you murdered (to murder)
+8 וְגַם־ = and also
+9 יָרָשְׁתָּ = have you taken possession? (to possess)
+10 וְדִבַּרְתָּ = and you will speak
+11 אֵלָיו = to him
+12 לֵאמֹר = <to> saying
+13 כֹּה = thus
+14 אָמַר = he says
+15 יְהוָה = Yahweh
+16 בִּמְקוֹם = in [the] place (standing place)
+17 אֲשֶׁר = <of> where (which)
+18 לָקְקוּ = they licked up
+19 הַכְּלָבִים = the dogs
+20 אֶת־ = <obj.>
+21 דַּם = [the] blood of
+22 נָבוֹת = Naboth
+23 יָלֹקּוּ = they will lick up
+24 הַכְּלָבִים = the dogs
+25 אֶת־ = <obj.>
+26 דָּמְךָ = blood your
+27 גַּם־ = also
+28 אָתָּה = you (you(m.s.))
+
+## 11:21:20
+KO: 그리고 아합이 엘리야에게 말하였다. "나의 대적이여, 네가 나를 찾아내었느냐?" 그가 대답하였다. "내가 찾아내었노라. 네가 스스로를 팔아 여호와의 눈앞에서 악을 행하였으므로,"
+1 וַיֹּאמֶר = and he said
+2 אַחְאָב = Ahab
+3 אֶל־ = to (to(wards))
+4 אֵלִיָּהוּ = Elijah
+5 הַמְצָאתַנִי = ¿ have you found me
+6 אֹיְבִי = O enemy my (enemy)
+7 וַיֹּאמֶר = and he said
+8 מָצָאתִי = I have found [you]
+9 יַעַן = because
+10 הִתְמַכֶּרְךָ = you having sold yourself (to sell)
+11 לַעֲשׂוֹת = to do (to make)
+12 הָרַע = the evil (bad)
+13 בְּעֵינֵי = in [the] eyes of (eye)
+14 יְהוָה = Yahweh (LORD)
+
+## 11:21:21
+KO: 보라, 내가 너에게 재앙을 가져오리니, 내가 네 뒤를 쓸어버리고 아합에게 속한 자들 가운데 성벽에 소변 보는 모든 남자와 이스라엘 안의 갇힌 자와 버려진 자를 끊어버릴 것이다.
+1 הִנְנִי = here I (look!)
+2 מֵבִיא = [am] about to bring (to come (in))
+3 אֵלֶיךָ = to you (to(wards))
+4 רָעָה = evil (distress)
+5 וּבִעַרְתִּי = and I will sweep away (to burn)
+6 אַחֲרֶיךָ = after you (after)
+7 וְהִכְרַתִּי = and I will cut off (to cut)
+8 לְאַחְאָב = to Ahab (Ahab)
+9 מַשְׁתִּין = [one who] urinates (to urinate)
+10 בְּקִיר = on a wall (wall)
+11 וְעָצוּר = and shut up (to restrain)
+12 וְעָזוּב = and freed (to leave)
+13 בְּיִשְׂרָאֵל = in Israel (Israel)
+
+## 11:21:22
+KO: 그리고 내가 네 집을 느밧의 아들 여로보암의 집과 같이, 그리고 아히야의 아들 바아사의 집과 같이 되게 하리니, 이는 네가 나를 격노하게 하고 이스라엘로 죄를 짓게 한 그 분노 때문이라.
+1 וְנָתַתִּי = and I will make (to give)
+2 אֶת־ = <obj.>
+3 בֵּיתְךָ = house your
+4 כְּבֵית = like [the] house of
+5 יָרָבְעָם = Jeroboam
+6 בֶּן־ = [the] son of
+7 נְבָט = Nebat
+8 וּכְבֵית = and like [the] house of
+9 בַּעְשָׁא = Baasha
+10 בֶן־ = [the] son of
+11 אֲחִיָּה = Ahijah
+12 אֶל־ = because of (to(wards))
+13 הַכַּעַס = the provocation (vexation)
+14 אֲשֶׁר = which
+15 הִכְעַסְתָּ = you have provoked to anger (to provoke)
+16 וַתַּחֲטִא = and you have caused to sin (to sin)
+17 אֶת־ = <obj.>
+18 יִשְׂרָאֵל = Israel
+
+## 11:21:23
+KO: 또한 이세벨에 대하여서도 여호와께서 말씀하여 이르시되, 개들이 이스르엘의 성벽 곁에서 이세벨을 먹을지라.
+1 וְגַם־ = and also (also)
+2 לְאִיזֶבֶל = of Jezebel
+3 דִּבֶּר = he has spoken (to speak)
+4 יְהוָה = Yahweh (LORD)
+5 לֵאמֹר = <to> saying (to say)
+6 הַכְּלָבִים = the dogs (dog)
+7 יֹאכְלוּ = they will devour (to eat)
+8 אֶת־ = <obj.> ([Obj.])
+9 אִיזֶבֶל = Jezebel
+10 בְּחֵל = in [the] rampart of (rampart)
+11 יִזְרְעֶאל = Jezreel
+
+## 11:21:24
+KO: 아합에게 속하여 성읍 안에서 죽는 자는 개들이 먹을 것이고, 들에서 죽는 자는 하늘의 새들이 먹을 것이다.
+1 הַמֵּת = the [one who] dies
+2 לְאַחְאָב = of Ahab (Ahab)
+3 בָּעִיר = in the city (city)
+4 יֹאכְלוּ = they will devour
+5 הַכְּלָבִים = the dogs (dog)
+6 וְהַמֵּת = and the [one who] dies
+7 בַּשָּׂדֶה = in the open country (land)
+8 יֹאכְלוּ = they will devour
+9 עוֹף = [the] bird[s] of (bird)
+10 הַשָּׁמָיִם = the heavens (heaven)
+
+## 11:21:25
+KO: 참으로 아합과 같이 스스로를 팔아 여호와의 눈앞에서 악을 행한 자가 없었으니, 이는 그의 아내 이세벨이 그를 충동질하였기 때문이라.
+1 רַק = certainly (except)
+2 לֹא־ = not
+3 הָיָה = anyone was (to be)
+4 כְאַחְאָב = like Ahab (Ahab)
+5 אֲשֶׁר = who
+6 הִתְמַכֵּר = he sold himself (to sell)
+7 לַעֲשׂוֹת = to do (to make)
+8 הָרַע = the evil (bad)
+9 בְּעֵינֵי = in [the] eyes of (eye)
+10 יְהוָה = Yahweh (LORD)
+11 אֲשֶׁר־ = whom
+12 הֵסַתָּה = she incited (to incite)
+13 אֹתוֹ = <obj.> him ([Obj.])
+14 אִיזֶבֶל = Jezebel
+15 אִשְׁתּוֹ = wife his (woman)
+
+## 11:21:26
+KO: 그는 매우 가증하게 행하였으니, 여호와께서 이스라엘 자손의 앞에서 쫓아내신 아모리 사람의 모든 행한 것 같이 우상들을 따라 행하였더라.
+1 וַיַּתְעֵב = and he acted abominably (to abhor)
+2 מְאֹד = exceedingly (much)
+3 לָלֶכֶת = by walking (to go)
+4 אַחֲרֵי = after
+5 הַגִּלֻּלִים = the idols (idol)
+6 כְּכֹל = according to all (all)
+7 אֲשֶׁר = that
+8 עָשׂוּ = they had done (to make)
+9 הָאֱמֹרִי = the Amorite[s] (Amorite)
+10 אֲשֶׁר = whom
+11 הוֹרִישׁ = he dispossessed (to possess)
+12 יְהוָה = Yahweh (LORD)
+13 מִפְּנֵי = from before (face)
+14 בְּנֵי = [the] people of (son)
+15 יִשְׂרָאֵל ס = Israel
+
+## 11:21:27
+KO: 아합이 이 말씀들을 들었을 때에, 그가 자기 옷들을 찢고, 자기 살 위에 굵은 베를 입히고(두고), 금식하며, 그 굵은 베 위에 눕고, 천천히 걸었다.
+1 וַיְהִי = and it was (to be)
+2 כִשְׁמֹעַ = when heard (to hear)
+3 אַחְאָב = Ahab
+4 אֶת־ = <obj.> ([Obj.])
+5 הַדְּבָרִים = the words (word)
+6 הָאֵלֶּה = <the> these (these)
+7 וַיִּקְרַע = and he tore (to tear)
+8 בְּגָדָיו = clothes his (garment)
+9 וַיָּשֶׂם־ = and he put (to set)
+10 שַׂק = sackcloth
+11 עַל־ = on (upon)
+12 בְּשָׂרוֹ = body his (flesh)
+13 וַיָּצוֹם = and he fasted (to fast)
+14 וַיִּשְׁכַּב = and he lay down (to lie down)
+15 בַּשָּׂק = in the sackcloth
+16 וַיְהַלֵּךְ = and he went about (to go)
+17 אַט ס = dejectedly (softly)
+
+## 11:21:28
+KO: 그리고 여호와의 말씀이 디셉 사람 엘리야에게 임하여 이르기를,
+1 וַיְהִי = and it came (to be)
+2 דְּבַר־ = [the] word of (word)
+3 יְהוָה = Yahweh (LORD)
+4 אֶל־ = to (to(wards))
+5 אֵלִיָּהוּ = Elijah
+6 הַתִּשְׁבִּי = the Tishbite (Tishbite)
+7 לֵאמֹר = <to> saying (to say)
+
+## 11:21:29
+KO: 네가 보았느냐, 아합이 내 앞에서 스스로 낮춘 것을? 그가 내 앞에서 스스로 낮추었기 때문에, 내가 재앙을 그의 시대에는 가져오지 않겠고, 그의 아들의 시대에 그의 집에 그 재앙을 가져오리라.
+1 הֲרָאִיתָ = ¿ have you seen (to see)
+2 כִּי־ = that
+3 נִכְנַע = he has humbled himself
+4 אַחְאָב = Ahab
+5 מִלְּפָנָי = from to before me
+6 יַעַן = because
+7 כִּי־ = for
+8 נִכְנַע = he has humbled himself
+9 מִפָּנַי = from before me
+10 לֹא־ = not
+11 אָבִיא = I will bring
+12 הָרָעָה = <the> evil
+13 בְּיָמָיו = in days his
+14 בִּימֵי = in [the] days of
+15 בְנוֹ = son his (son)
+16 אָבִיא = I will bring
+17 הָרָעָה = <the> evil
+18 עַל־ = on (upon)
+19 בֵּיתוֹ = house his (house)
+
+## 11:22:1
+KO: 그리고 그들이 삼 년을 거주하였으니, 아람과 그리고 이스라엘 사이에 전쟁이 없었다.
+1 וַיֵּשְׁבוּ = and they remained (to dwell)
+2 שָׁלֹשׁ = three
+3 שָׁנִים = years (year)
+4 אֵין = there not (nothing)
+5 מִלְחָמָה = [was] war (battle)
+6 בֵּין = between
+7 אֲרָם = Aram (Syria)
+8 וּבֵין = and between
+9 יִשְׂרָאֵל פ = Israel
+
+## 11:22:2
+KO: 그리고 제삼년에 유다의 왕 여호사밧이 이스라엘의 왕에게 내려갔다.
+1 וַיְהִי = and it was (to be)
+2 בַּשָּׁנָה = in the year (year)
+3 הַשְּׁלִישִׁית = <the> third (third)
+4 וַיֵּרֶד = and he went down (to go down)
+5 יְהוֹשָׁפָט = Jehoshaphat
+6 מֶלֶךְ־ = [the] king of
+7 יְהוּדָה = Judah
+8 אֶל־ = to (to(wards))
+9 מֶלֶךְ = [the] king of
+10 יִשְׂרָאֵל = Israel
+
+## 11:22:3
+KO: 이스라엘의 왕이 그의 신복들에게 말하였다. "너희는 길르앗 라못이 우리에게 속한 것임을 알지 못하느냐? 그런데도 우리가 아람 왕의 손으로부터 그것을 취하기를 그치고 잠잠히 있느냐?"
+1 וַיֹּאמֶר = and he said (to say)
+2 מֶלֶךְ־ = [the] king of
+3 יִשְׂרָאֵל = Israel
+4 אֶל־ = to (to(wards))
+5 עֲבָדָיו = servants his (servant;_slave)
+6 הַיְדַעְתֶּם = ¿ do you know (to know)
+7 כִּי־ = that (for)
+8 לָנוּ = [belongs] to us (us)
+9 רָמֹת = Ramoth
+10 גִּלְעָד = Gilead
+11 וַאֲנַחְנוּ = and we (we)
+12 מַחְשִׁים = [are] inactive (be silent)
+13 מִקַּחַת = from taking (to take)
+14 אֹתָהּ = <obj.> it ([Obj.])
+15 מִיַּד = from [the] hand of (hand)
+16 מֶלֶךְ = [the] king of
+17 אֲרָם = Aram (Syria)
+
+## 11:22:4
+KO: 그리고 그가 여호사밧에게 말하였다. "너는 나와 함께 길르앗 라못으로 전쟁을 하러 가겠느냐?" 그리고 여호사밧이 이스라엘의 왕에게 말하였다. "나와 당신은 같고, 나의 백성과 당신의 백성도 같으며, 나의 말들과 당신의 말들도 같습니다."
+1 וַיֹּאמֶר = and he said
+2 אֶל־ = to
+3 יְהוֹשָׁפָט = Jehoshaphat
+4 הֲתֵלֵךְ = ¿ will you go (to go)
+5 אִתִּי = with me (with)
+6 לַמִּלְחָמָה = for <the> battle (battle)
+7 רָמֹת = Ramoth
+8 גִּלְעָד = Gilead
+9 וַיֹּאמֶר = and he said
+10 יְהוֹשָׁפָט = Jehoshaphat
+11 אֶל־ = to
+12 מֶלֶךְ = [the] king of (king)
+13 יִשְׂרָאֵל = Israel
+14 כָּמוֹנִי = as me
+15 כָמוֹךָ = as you
+16 כְּעַמִּי = as people my
+17 כְעַמֶּךָ = as people your
+18 כְּסוּסַי = as horses my
+19 כְּסוּסֶיךָ = as horses your
+
+## 11:22:5
+KO: 그리고 여호사밧이 이스라엘 왕에게 말했다. "부디 오늘, 여호와의 말씀을 구하십시오."
+1 וַיֹּאמֶר = and he said (to say)
+2 יְהוֹשָׁפָט = Jehoshaphat
+3 אֶל־ = to (to(wards))
+4 מֶלֶךְ = [the] king of (king)
+5 יִשְׂרָאֵל = Israel
+6 דְּרָשׁ־ = seek (to seek)
+7 נָא = please
+8 כַיּוֹם = as the day (day)
+9 אֶת־ = <obj.> ([Obj.])
+10 דְּבַר = [the] word of (word)
+11 יְהוָה = Yahweh (LORD)
+
+## 11:22:6
+KO: 그리고 이스라엘 왕이 사백 명쯤 되는 선지자들을 모으고 그들에게 말하였다. "내가 길르앗 라못으로 전쟁하러 갈까, 아니면 그만둘까?" 그들이 말하였다. "올라가소서. 주께서 왕의 손에 그것을 넘겨주실 것입니다."
+1 וַיִּקְבֹּץ = and he gathered (to gather)
+2 מֶלֶךְ־ = [the] king of
+3 יִשְׂרָאֵל = Israel
+4 אֶת־ = <obj.> ([Obj.])
+5 הַנְּבִיאִים = the prophets (prophet)
+6 כְּאַרְבַּע = about four (four)
+7 מֵאוֹת = hundred<s> (hundred)
+8 אִישׁ = man
+9 וַיֹּאמֶר = and he said
+10 אֲלֵהֶם = to them (to(wards))
+11 הַאֵלֵךְ = ¿ will I go (to go)
+12 עַל־ = on (upon)
+13 רָמֹת = Ramoth
+14 גִּלְעָד = Gilead
+15 לַמִּלְחָמָה = for <the> battle (battle)
+16 אִם־ = or? (if)
+17 אֶחְדָּל = will I refrain (to cease)
+18 וַיֹּאמְרוּ = and they said
+19 עֲלֵה = go up (to ascend)
+20 וְיִתֵּן = so he may give [it] (to give)
+21 אֲדֹנָי = [the] Lord (Lord)
+22 בְּיַד = in [the] hand of (hand)
+23 הַמֶּלֶךְ = the king
+
+## 11:22:7
+KO: 그리고 여호사밧이 말했다. "여호와께 (속한) 선지자가 여기 더 이상 있지 아니한가? 우리가 그를 통해 (여호와의 뜻을) 물을 수 있도록."
+1 וַיֹּאמֶר = and he said (to say)
+2 יְהוֹשָׁפָט = Jehoshaphat
+3 הַאֵין = ¿ [is] there not (nothing)
+4 פֹּה = here
+5 נָבִיא = a prophet (prophet)
+6 לַיהוָה = of Yahweh (LORD)
+7 עוֹד = still
+8 וְנִדְרְשָׁה = so we may enquire (to seek)
+9 מֵאוֹתוֹ = from <obj.> him ([Obj.])
+
+## 11:22:8
+KO: 이스라엘 왕이 여호사밧에게 말하였다. "여호와께 여쭈어 볼 한 사람이 아직 남아 있으나, 그가 나에 대하여 선한 것은 예언하지 않고 오직 악한 것만을 예언하기로 내가 그를 미워하나이다." 여호사밧이 말하였다. "왕은 그렇게 말씀하지 마소서."
+1 וַיֹּאמֶר = and he said
+2 מֶלֶךְ־ = [the] king of
+3 יִשְׂרָאֵל = Israel
+4 אֶל־ = to (to(wards))
+5 יְהוֹשָׁפָט = Jehoshaphat
+6 עוֹד = still
+7 אִישׁ־ = a man (man)
+8 אֶחָד = one
+9 לִדְרֹשׁ = to consult (to seek)
+10 אֶת־ = <obj.>
+11 יְהוָה = Yahweh (LORD)
+12 מֵאֹתוֹ = from <obj.> him
+13 וַאֲנִי = and I (I)
+14 שְׂנֵאתִיו = I hate him (to hate)
+15 כִּי = for
+16 לֹא־ = not
+17 יִתְנַבֵּא = he prophesies (to prophesy)
+18 עָלַי = on me (upon)
+19 טוֹב = good (pleasant)
+20 כִּי = that
+21 אִם־ = except (if)
+22 רָע = evil
+23 מִיכָיְהוּ = Micaiah
+24 בֶּן־ = [the] son of (son)
+25 יִמְלָה = Imlah
+26 וַיֹּאמֶר = and he said
+27 יְהוֹשָׁפָט = Jehoshaphat
+28 אַל־ = may not (not)
+29 יֹאמַר = he speak
+30 הַמֶּלֶךְ = the king
+31 כֵּן = thus (so)
+
+## 11:22:9
+KO: 그리고 이스라엘 왕이 한 내시를 불렀고, 말하였다. "이믈라의 아들 미가야를 속히 오게 하라."
+1 וַיִּקְרָא = and he summoned (to call)
+2 מֶלֶךְ = [the] king of (king)
+3 יִשְׂרָאֵל = Israel
+4 אֶל־ = <to> (to(wards))
+5 סָרִיס = a court-official (eunuch)
+6 אֶחָד = one
+7 וַיֹּאמֶר = and he said (to say)
+8 מַהֲרָה = bring quickly ! (to hasten)
+9 מִיכָיְהוּ = Micaiah
+10 בֶן־ = [the] son of (son)
+11 יִמְלָה = Imlah
+
+## 11:22:10
+KO: 이스라엘의 왕과 유다의 여호사밧 왕이 각기 그 보좌 위에 앉아 있고, 사마리아 문 어귀의 타작마당에서 옷들을 입었으며, 모든 선지자가 그들 앞에서 예언하고 있더라.
+1 וּמֶלֶךְ = and [the] king of
+2 יִשְׂרָאֵל = Israel
+3 וִיהוֹשָׁפָט = and Jehoshaphat (Jehoshaphat)
+4 מֶלֶךְ־ = [the] king of
+5 יְהוּדָה = Judah
+6 יֹשְׁבִים = [were] sitting (to dwell)
+7 אִישׁ = each (man)
+8 עַל־ = on (upon)
+9 כִּסְאוֹ = throne his (throne)
+10 מְלֻבָּשִׁים = clothed (to clothe)
+11 בְּגָדִים = garments (garment)
+12 בְּגֹרֶן = at [the] threshing floor (threshing floor)
+13 פֶּתַח = [the] entrance of (entrance)
+14 שַׁעַר = [the] gate of (gate)
+15 שֹׁמְרוֹן = Samaria
+16 וְכָל־ = and all (all)
+17 הַנְּבִיאִים = the prophets (prophet)
+18 מִתְנַבְּאִים = [were] prophesying (to prophesy)
+19 לִפְנֵיהֶם = <to> before them (face)
+
+## 11:22:11
+KO: 그나아나의 아들 시드기야는 그를 위하여 철 뿔들을 만들었고, 말하기를 "여호와가 이같이 말씀하셨다. 이것들로 네가 아람 사람을 들이받아 그들을 끝장내리라" 하였다.
+1 וַיַּעַשׂ = and he made (to make)
+2 לוֹ = for himself (him)
+3 צִדְקִיָּה = Zedekiah
+4 בֶן־ = [the] son of (son)
+5 כְּנַעֲנָה = Kenaanah (Chenaanah)
+6 קַרְנֵי = horns of (horn)
+7 בַרְזֶל = iron
+8 וַיֹּאמֶר = and he said
+9 כֹּה־ = thus
+10 אָמַר = he says
+11 יְהוָה = Yahweh (LORD)
+12 בְּאֵלֶּה = with these (these)
+13 תְּנַגַּח = you will gore (to gore)
+14 אֶת־ = <obj.> ([Obj.])
+15 אֲרָם = Aram (Syria)
+16 עַד־ = until (till)
+17 כַּלֹּתָם = destroy them (to end)
+
+## 11:22:12
+KO: 그리고 모든 선지자들도 이와 같이 예언하며 말하기를, "길르앗 라못으로 올라가 번성하십시오. 여호와께서 왕의 손에 붙이실 것입니다."
+1 וְכָל־ = and all (all)
+2 הַנְּבִאִים = the prophets (prophet)
+3 נִבְּאִים = [were] prophesying (to prophesy)
+4 כֵּן = thus (so)
+5 לֵאמֹר = <to> saying (to say)
+6 עֲלֵה = go up (to ascend)
+7 רָמֹת = Ramoth
+8 גִּלְעָד = Gilead
+9 וְהַצְלַח = and succeed (to prosper)
+10 וְנָתַן = and he will give [it] (to give)
+11 יְהוָה = Yahweh (LORD)
+12 בְּיַד = in [the] hand of (hand)
+13 הַמֶּלֶךְ = the king (king)
+
+## 11:22:13
+KO: 미가야를 부르러 갔던 그 사자가 그에게 말하여 이르되, 보라, 이제 선지자들의 말들이 한입으로 왕에게 좋으니, 부디 당신의 말도 그들 중 한 사람의 말과 같이 되게 하시고, 좋게 말씀하소서.
+1 וְהַמַּלְאָךְ = and the messenger (messenger)
+2 אֲשֶׁר־ = who (which)
+3 הָלַךְ = he had gone (to go)
+4 לִקְרֹא = to summon (to call)
+5 מִיכָיְהוּ = Micaiah
+6 דִּבֶּר = he spoke
+7 אֵלָיו = to him
+8 לֵאמֹר = <to> saying (to say)
+9 הִנֵּה־ = here! (behold)
+10 נָא = please
+11 דִּבְרֵי = [the] words of
+12 הַנְּבִיאִים = the prophets (prophet)
+13 פֶּה־ = a mouth (lip)
+14 אֶחָד = one
+15 טוֹב = [is] good
+16 אֶל־ = to
+17 הַמֶּלֶךְ = the king (king)
+18 יְהִי־ = let it be (to be)
+19 נָא = please
+20 דְבָרְךָ = word your
+21 כִּדְבַר = like [the] word of
+22 אַחַד = one
+23 מֵהֶם = from them (them)
+24 וְדִבַּרְתָּ = and you will speak
+25 טּוֹב = good
+
+## 11:22:14
+KO: 미가야가 말하였다. "여호와께서 살아 계심을 두고 맹세하노니, 여호와께서 내게 말씀하시는 것, 곧 그것을 내가 말하리라."
+1 וַיֹּאמֶר = and he said
+2 מִיכָיְהוּ = Micaiah
+3 חַי־ = [by] [the] life (alive)
+4 יְהוָה = of Yahweh
+5 כִּי = for
+6 אֶת־ = <obj.>
+7 אֲשֶׁר = [that] which (which)
+8 יֹאמַר = he will say
+9 יְהוָה = Yahweh
+10 אֵלַי = to me (to(wards))
+11 אֹתוֹ = <obj.> it
+12 אֲדַבֵּר = I will speak (to speak)
+
+## 11:22:15
+KO: 그가 왕에게 왔고, 왕이 그에게 이르기를 “미가야여, 우리가 길르앗 라못으로 싸우러 올라가랴, 아니면 우리가 그치랴?” 하니, 그가 그에게 이르기를 “올라가서 승리하소서. 여호와께서 왕의 손에 붙이실 것이니이다” 하였다.
+1 וַיָּבוֹא = and he came (to come (in))
+2 אֶל־ = to
+3 הַמֶּלֶךְ = the king
+4 וַיֹּאמֶר = and he said
+5 הַמֶּלֶךְ = the king
+6 אֵלָיו = to him
+7 מִיכָיְהוּ = O Micaiah (Micaiah)
+8 הֲנֵלֵךְ = ¿ will we go (to go)
+9 אֶל־ = against
+10 רָמֹת = Ramoth
+11 גִּלְעָד = Gilead
+12 לַמִּלְחָמָה = for <the> battle (battle)
+13 אִם־ = or? (if)
+14 נֶחְדָּל = will we refrain (to cease)
+15 וַיֹּאמֶר = and he said
+16 אֵלָיו = to him
+17 עֲלֵה = go up (to ascend)
+18 וְהַצְלַח = and succeed (to prosper)
+19 וְנָתַן = and he will give [it] (to give)
+20 יְהוָה = Yahweh (LORD)
+21 בְּיַד = in [the] hand of (hand)
+22 הַמֶּלֶךְ = the king
+
+## 11:22:16
+KO: 그리고 왕이 그에게 말하였다. "내가 너에게 몇 번이나 맹세하게 해야, 네가 나에게 여호와의 이름으로 진실한 것 외에는 말하지 않겠느냐?"
+1 וַיֹּאמֶר = and he said (to say)
+2 אֵלָיו = to him
+3 הַמֶּלֶךְ = the king (king)
+4 עַד־ = until (till)
+5 כַּמֶּה = how many? (what?)
+6 פְעָמִים = times (beat)
+7 אֲנִי = [will] I (I)
+8 מַשְׁבִּעֶךָ = make swear you (to swear)
+9 אֲשֶׁר = that (which)
+10 לֹא־ = not
+11 תְדַבֵּר = you must speak (to speak)
+12 אֵלַי = to me
+13 רַק־ = only (except)
+14 אֱמֶת = truth
+15 בְּשֵׁם = in [the] name of (name)
+16 יְהוָה = Yahweh (LORD)
+
+## 11:22:17
+KO: 그가 말하였다. "내가 모든 이스라엘이 산들에 흩어진 것을 보았는데, 마치 목자가 없는 양 떼와 같았습니다. 그리고 여호와께서 말씀하시기를 '이들에게 주인이 없으니, 각각 자기 집으로 평안히 돌아갈지니라' 하셨습니다."
+1 וַיֹּאמֶר = and he said
+2 רָאִיתִי = I saw (to see)
+3 אֶת־ = <obj.> ([Obj.])
+4 כָּל־ = all
+5 יִשְׂרָאֵל = Israel
+6 נְפֹצִים = scattered (to scatter)
+7 אֶל־ = to (to(wards))
+8 הֶהָרִים = the mountains (mountain)
+9 כַּצֹּאן = like <the> flock (flock)
+10 אֲשֶׁר = which
+11 אֵין־ = not (nothing)
+12 לָהֶם = [belongs] to them (them)
+13 רֹעֶה = a shepherd (to pasture)
+14 וַיֹּאמֶר = and he said
+15 יְהוָה = Yahweh (LORD)
+16 לֹא־ = not
+17 אֲדֹנִים = masters (lord)
+18 לָאֵלֶּה = [belong] to these (these)
+19 יָשׁוּבוּ = let them return (to return)
+20 אִישׁ־ = each (man)
+21 לְבֵיתוֹ = to house his (house)
+22 בְּשָׁלוֹם = in peace (peace)
+
+## 11:22:18
+KO: 이스라엘의 왕이 여호사밧에게 말하였다. "내가 당신에게 말하지 아니하였나이까? 그가 내게 대하여 좋은 것을 예언하지 않고, 오직 악한 것을 예언할 것이라고 말입니다."
+1 וַיֹּאמֶר = and he said
+2 מֶלֶךְ־ = [the] king of (king)
+3 יִשְׂרָאֵל = Israel
+4 אֶל־ = to
+5 יְהוֹשָׁפָט = Jehoshaphat
+6 הֲלוֹא = ¿ not
+7 אָמַרְתִּי = did I say
+8 אֵלֶיךָ = to you
+9 לוֹא־ = not
+10 יִתְנַבֵּא = he prophesies (to prophesy)
+11 עָלַי = on me (upon)
+12 טוֹב = good (pleasant)
+13 כִּי = that
+14 אִם־ = except (if)
+15 רָע = evil
+
+## 11:22:19
+KO: 그가 말하였다. "그러므로 여호와의 말씀을 들으시오. 내가 보니, 여호와께서 그의 보좌 위에 앉아 계시고, 하늘의 모든 군대가 그의 곁에, 그의 오른편과 왼편에 서 있었소."
+1 וַיֹּאמֶר = and he said (to say)
+2 לָכֵן = <to> therefore (so)
+3 שְׁמַע = hear (to hear)
+4 דְּבַר־ = [the] word of (word)
+5 יְהוָה = Yahweh
+6 רָאִיתִי = I saw (to see)
+7 אֶת־ = <obj.> ([Obj.])
+8 יְהוָה = Yahweh
+9 יֹשֵׁב = sitting (to dwell)
+10 עַל־ = on
+11 כִּסְאוֹ = throne his (throne)
+12 וְכָל־ = and all (all)
+13 צְבָא = [the] host of (army)
+14 הַשָּׁמַיִם = the heavens (heaven)
+15 עֹמֵד = [was] standing (to stand)
+16 עָלָיו = at him
+17 מִימִינוֹ = from right his (right)
+18 וּמִשְּׂמֹאלוֹ = and from left his (left)

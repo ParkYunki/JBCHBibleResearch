@@ -1,0 +1,114 @@
+## 13:6:6
+KO: 그리고 웃시는 제라히야를 낳았고, 그리고 제라히야는 메라욧을 낳았다.
+1 וְעֻזִּי = and Uzzi (Uzzi)
+2 הוֹלִיד = he fathered (to beget)
+3 אֶת־ = <obj.> ([Obj.])
+4 זְרַחְיָה = Zerahiah
+5 וּזְרַחְיָה = and Zerahiah (Zerahiah)
+6 הוֹלִיד = he fathered (to beget)
+7 אֶת־ = <obj.> ([Obj.])
+8 מְרָיוֹת = Meraioth
+
+## 13:6:7
+KO: 므라욧은 아마랴를 낳았고, 아마랴는 아히둡을 낳았다.
+1 מְרָיוֹת = Meraioth
+2 הוֹלִיד = he fathered (to beget)
+3 אֶת־ = <obj.> ([Obj.])
+4 אֲמַרְיָה = Amariah
+5 וַאֲמַרְיָה = and Amariah (Amariah)
+6 הוֹלִיד = he fathered (to beget)
+7 אֶת־ = <obj.> ([Obj.])
+8 אֲחִיטוּב = Ahitub
+
+## 13:6:8
+KO: 그리고 아히둡은 사독을 낳았고, 그리고 사독은 아히마아스를 낳았다.
+1 וַאֲחִיטוּב = and Ahitub (Ahitub)
+2 הוֹלִיד = he fathered (to beget)
+3 אֶת־ = <obj.> ([Obj.])
+4 צָדוֹק = Zadok
+5 וְצָדוֹק = and Zadok (Zadok)
+6 הוֹלִיד = he fathered (to beget)
+7 אֶת־ = <obj.> ([Obj.])
+8 אֲחִימָעַץ = Ahimaaz
+
+## 13:6:9
+KO: 그리고 아히마아스는 아사랴를 낳았고, 아사랴는 요하난을 낳았다.
+1 וַאֲחִימַעַץ = and Ahimaaz (Ahimaaz)
+2 הוֹלִיד = he fathered (to beget)
+3 אֶת־ = <obj.> ([Obj.])
+4 עֲזַרְיָה = Azariah
+5 וַעֲזַרְיָה = and Azariah (Azariah)
+6 הוֹלִיד = he fathered (to beget)
+7 אֶת־ = <obj.> ([Obj.])
+8 יוֹחָנָן = Johanan
+
+## 13:6:10
+KO: 요하난은 아사랴를 낳았으니, 그는 예루살렘에서 솔로몬이 건축한 집에서 제사장의 직분을 행한 자이다.
+1 וְיוֹחָנָן = and Johanan (Johanan)
+2 הוֹלִיד = he fathered (to beget)
+3 אֶת־ = <obj.> ([Obj.])
+4 עֲזַרְיָה = Azariah
+5 הוּא = he (he;_she;_it)
+6 אֲשֶׁר = [was [the] one] who (which)
+7 כִּהֵן = he served as a priest (to minister)
+8 בַּבַּיִת = in the house (house)
+9 אֲשֶׁר־ = which
+10 בָּנָה = he had built (to build)
+11 שְׁלֹמֹה = Solomon
+12 בִּירוּשָׁלִָם = in Jerusalem (Jerusalem)
+
+## 13:6:11
+KO: 그리고 아사랴가 아마랴를 낳았고, 아마랴는 아히둡을 낳았다.
+1 וַיּוֹלֶד = and he fathered (to beget)
+2 עֲזַרְיָה = Azariah
+3 אֶת־ = <obj.> ([Obj.])
+4 אֲמַרְיָה = Amariah
+5 וַאֲמַרְיָה = and Amariah (Amariah)
+6 הוֹלִיד = he fathered (to beget)
+7 אֶת־ = <obj.> ([Obj.])
+8 אֲחִיטוּב = Ahitub
+
+## 13:6:12
+KO: 그리고 아히둡은 사독을 낳았고, 그리고 사독은 살룸을 낳았다.
+1 וַאֲחִיטוּב = and Ahitub (Ahitub)
+2 הוֹלִיד = he fathered (to beget)
+3 אֶת־ = <obj.> ([Obj.])
+4 צָדוֹק = Zadok
+5 וְצָדוֹק = and Zadok (Zadok)
+6 הוֹלִיד = he fathered (to beget)
+7 אֶת־ = <obj.> ([Obj.])
+8 שַׁלּוּם = Shallum
+
+## 13:6:13
+KO: 그리고 살룸은 힐기야를 낳았고, 그리고 힐기야는 아사랴를 낳았다.
+1 וְשַׁלּוּם = and Shallum (Shallum)
+2 הוֹלִיד = he fathered (to beget)
+3 אֶת־ = <obj.> ([Obj.])
+4 חִלְקִיָּה = Hilkiah
+5 וְחִלְקִיָּה = and Hilkiah (Hilkiah)
+6 הוֹלִיד = he fathered (to beget)
+7 אֶת־ = <obj.> ([Obj.])
+8 עֲזַרְיָה = Azariah
+
+## 13:6:14
+KO: 그리고 아사랴가 스라야를 낳았고, 그리고 스라야가 여호사닥을 낳았다.
+1 וַעֲזַרְיָה = and Azariah (Azariah)
+2 הוֹלִיד = he fathered (to beget)
+3 אֶת־ = <obj.> ([Obj.])
+4 שְׂרָיָה = Seraiah
+5 וּשְׂרָיָה = and Seraiah (Seraiah)
+6 הוֹלִיד = he fathered (to beget)
+7 אֶת־ = <obj.> ([Obj.])
+8 יְהוֹצָדָק = Jehozadak
+
+## 13:6:15
+KO: 그리고 여호사닥은 여호와께서 유다와 예루살렘을 느부갓네살의 손으로 옮기실 때에 갔더라.
+1 וִיהוֹצָדָק = and Jehozadak (Jehozadak)
+2 הָלַךְ = he went (to go)
+3 בְּהַגְלוֹת = when sent into exile (to reveal)
+4 יְהוָה = Yahweh (LORD)
+5 אֶת־ = <obj.> ([Obj.])
+6 יְהוּדָה = Judah
+7 וִירוּשָׁלִָם = and Jerusalem (Jerusalem)
+8 בְּיַד = by [the] hand of (hand)
+9 נְבֻכַדְנֶאצַּר ס = Nebuchadnezzar

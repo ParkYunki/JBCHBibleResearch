@@ -1,0 +1,852 @@
+## 5:14:10
+KO: 그리고 지느러미와 비늘이 그에게 없는 모든 것은 너희는 먹지 말지니, 그것은 너희에게 부정하니라.
+1 וְכֹל = and all (all)
+2 אֲשֶׁר = that (which)
+3 אֵין־ = not (nothing)
+4 לוֹ = [belongs] to <the> it (him)
+5 סְנַפִּיר = fin
+6 וְקַשְׂקֶשֶׂת = and scale (scale)
+7 לֹא = not
+8 תֹאכֵלוּ = you will eat (to eat)
+9 טָמֵא = [is] unclean (unclean)
+10 הוּא = it (he;_she;_it)
+11 לָכֶם ס = to <the> you (you)
+
+## 5:14:11
+KO: 모든 정한 새는 너희가 먹을지니라.
+1 כָּל־ = every (all)
+2 צִפּוֹר = bird
+3 טְהֹרָה = clean
+4 תֹּאכֵלוּ = you will eat (to eat)
+
+## 5:14:12
+KO: 그리고 이것은 너희가 그것들로부터 먹지 못할 것들이니, 곧 독수리와 살수리(페레스)와 물수리(아즈니야)이다.
+1 וְזֶה = and this (this)
+2 אֲשֶׁר = [is that] which (which)
+3 לֹא־ = not
+4 תֹאכְלוּ = you will eat (to eat)
+5 מֵהֶם = any of <the> them (them)
+6 הַנֶּשֶׁר = the eagle (eagle)
+7 וְהַפֶּרֶס = and the bearded vulture (vulture)
+8 וְהָעָזְנִיָּה = and the osprey (vulture)
+
+## 5:14:13
+KO: 그리고 솔개와, 매와, 그리고 쏙독새가 그 종류대로.
+1 וְהָרָאָה = and the red kite (glede)
+2 וְאֶת־ = and <obj.> ([Obj.])
+3 הָאַיָּה = the hawk (falcon)
+4 וְהַדַּיָּה = and the black kite (hawk)
+5 לְמִינָהּ = to kind its (kind)
+
+## 5:14:14
+KO: 그리고 모든 까마귀를 그 종류대로.
+1 וְאֵת = and <obj.> ([Obj.])
+2 כָּל־ = every (all)
+3 עֹרֵב = raven
+4 לְמִינוֹ = to kind its (kind)
+
+## 5:14:15
+KO: 그리고 타조의 딸과, 그리고 다호마스와, 그리고 갈매기와, 그리고 그 종류대로의 새매와
+1 וְאֵת = and <obj.>
+2 בַּת = [the] daughter of (daughter)
+3 הַיַּעֲנָה = the ostrich (ostrich)
+4 וְאֶת־ = and <obj.>
+5 הַתַּחְמָס = the screech owl (ostrich)
+6 וְאֶת־ = and <obj.>
+7 הַשָּׁחַף = the gull (gull)
+8 וְאֶת־ = and <obj.>
+9 הַנֵּץ = the falcon (hawk)
+10 לְמִינֵהוּ = to kind its (kind)
+
+## 5:14:16
+KO: 올빼미와 부엉이와 따오기와
+1 אֶת־ = <obj.>
+2 הַכּוֹס = the little owl (owl)
+3 וְאֶת־ = and <obj.>
+4 הַיַּנְשׁוּף = the great owl (owl)
+5 וְהַתִּנְשָׁמֶת = and the barn owl (chameleon)
+
+## 5:14:17
+KO: 그리고 사다새와, 그리고 솔개와, 그리고 가마우지와
+1 וְהַקָּאָת = and the desert owl (pelican)
+2 וְאֶת־ = and <obj.>
+3 הָרָחָמָה = the Egyptian vulture <towards> (carrion)
+4 וְאֶת־ = and <obj.>
+5 הַשָּׁלָךְ = the cormorant (cormorant)
+
+## 5:14:18
+KO: 그리고 학과 그 종류대로의 왜가리와 오디새와 박쥐니라.
+1 וְהַחֲסִידָה = and the stork (stork)
+2 וְהָאֲנָפָה = and the heron (heron)
+3 לְמִינָהּ = to kind its (kind)
+4 וְהַדּוּכִיפַת = and the hoopoe (hoopoe)
+5 וְהָעֲטַלֵּף = and the bat (bat)
+
+## 5:14:19
+KO: 그리고 날아다니는 모든 기어 다니는 것은 너희에게 부정하다. 그것들은 먹지 말아야 한다.
+1 וְכֹל = and every (all)
+2 שֶׁרֶץ = <the> swarming thing of (swarm)
+3 הָעוֹף = the insect (bird)
+4 טָמֵא = [is] unclean (unclean)
+5 הוּא = it (he;_she;_it)
+6 לָכֶם = to <the> you (you)
+7 לֹא = not
+8 יֵאָכֵלוּ = they will be eaten (to eat)
+
+## 5:14:20
+KO: 모든 정한 새는 너희가 먹을지니라.
+1 כָּל־ = every (all)
+2 עוֹף = insect (bird)
+3 טָהוֹר = clean
+4 תֹּאכֵלוּ = you will eat (to eat)
+
+## 5:14:21
+KO: 너희는 어떠한 사체도 먹지 말라. 네 성문 안에 있는 객에게 그것을 주어 먹게 하거나, 이방인에게 팔아도 된다. 왜냐하면 너는 네 하나님 여호와께 거룩한 백성이기 때문이다. 너는 염소 새끼를 그 어미의 젖에 삶지 말라.
+1 לֹא = not
+2 תֹאכְלוּ = you will eat
+3 כָל־ = any (all)
+4 נְבֵלָה = carcass
+5 לַגֵּר = to the sojourner (sojourner)
+6 אֲשֶׁר־ = who (which)
+7 בִּשְׁעָרֶיךָ = [is] in gates your (gate)
+8 תִּתְּנֶנָּה = you will give it (to give)
+9 וַאֲכָלָהּ = and he will eat it
+10 אוֹ = or
+11 מָכֹר = you will sell it (to sell)
+12 לְנָכְרִי = to a foreigner (foreign)
+13 כִּי = for
+14 עַם = [are] a people (people)
+15 קָדוֹשׁ = holy
+16 אַתָּה = you (you(m.s.))
+17 לַיהוָה = to Yahweh (LORD)
+18 אֱלֹהֶיךָ = God your (God)
+19 לֹא־ = not
+20 תְבַשֵּׁל = you will boil (to boil)
+21 גְּדִי = a kid (kid)
+22 בַּחֲלֵב = in [the] milk of (milk)
+23 אִמּוֹ פ = mother its (mother)
+
+## 5:14:22
+KO: 너는 반드시 십일조를 드릴지니, 곧 들에서 나오는 네 씨의 모든 소산의 십일조를 해마다 드릴 것이니라.
+1 עַשֵּׂר = fully <tithe>
+2 תְּעַשֵּׂר = you will tithe
+3 אֵת = <obj.> ([Obj.])
+4 כָּל־ = all
+5 תְּבוּאַת = [the] produce of (produce)
+6 זַרְעֶךָ = seed your (seed)
+7 הַיֹּצֵא = which comes out (to come out)
+8 הַשָּׂדֶה = the field (land)
+9 שָׁנָה = a year
+10 שָׁנָה = a year
+
+## 5:14:23
+KO: 그리고 너는 네 하나님 여호와의 면전, 곧 그분이 그분의 이름을 거하게 하시려고 선택하실 그 장소에서 네 곡식과 네 포도주와 네 기름의 십일조를 먹을 것이며, 네 소들과 네 양들의 첫 새끼들을 먹고, 네 하나님 여호와를 경외하기를 모든 날 동안 항상 배울 것이다.
+1 וְאָכַלְתָּ = and you will eat (to eat)
+2 לִפְנֵי = <to> before (face)
+3 יְהוָה = Yahweh
+4 אֱלֹהֶיךָ = God your
+5 בַּמָּקוֹם = in the place (standing place)
+6 אֲשֶׁר־ = where (which)
+7 יִבְחַר = he will choose (to choose)
+8 לְשַׁכֵּן = to cause to dwell (to dwell)
+9 שְׁמוֹ = name his (name)
+10 שָׁם = there
+11 מַעְשַׂר = [the] tithe of (tithe)
+12 דְּגָנְךָ = grain your (grain)
+13 תִּירֹשְׁךָ = new wine your (new wine)
+14 וְיִצְהָרֶךָ = and fresh oil your (oil)
+15 וּבְכֹרֹת = and [the] firstborn<s> of (firstborn)
+16 בְּקָרְךָ = herd your (cattle)
+17 וְצֹאנֶךָ = and flock your (flock)
+18 לְמַעַן = so that (because)
+19 תִּלְמַד = you may learn (to learn)
+20 לְיִרְאָה = to fear
+21 אֶת־ = <obj.> ([Obj.])
+22 יְהוָה = Yahweh
+23 אֱלֹהֶיךָ = God your
+24 כָּל־ = all
+25 הַיָּמִים = the days (day)
+
+## 5:14:24
+KO: 그리고 만일 그 길이 네게 너무 멀어서, 네가 그것을 가지고 갈 수 없거든, 이는 네 하나님 여호와께서 그분의 이름을 거기에 두시려고 택하신 그 장소가 너로부터 멀기 때문이며, 네 하나님 여호와께서 네게 복 주신 것이기 때문이다.
+1 וְכִי־ = and if
+2 יִרְבֶּה = it will be [too] great (to multiply)
+3 מִמְּךָ = for you
+4 הַדֶּרֶךְ = the journey (way)
+5 כִּי = for
+6 לֹא = not
+7 תוּכַל = you will be able (be able)
+8 שְׂאֵתוֹ = to carry it (to lift)
+9 כִּי־ = that
+10 יִרְחַק = it will be [too] far (to remove)
+11 מִמְּךָ = for you
+12 הַמָּקוֹם = the place (standing place)
+13 אֲשֶׁר = where (which)
+14 יִבְחַר = he will choose (to choose)
+15 יְהוָה = Yahweh
+16 אֱלֹהֶיךָ = God your
+17 לָשׂוּם = to put (to set)
+18 שְׁמוֹ = name his (name)
+19 שָׁם = there
+20 כִּי = for
+21 יְבָרֶכְךָ = he will bless you (to bless)
+22 יְהוָה = Yahweh
+23 אֱלֹהֶיךָ = God your
+
+## 5:14:25
+KO: 그리고 너는 그것을 은으로 바꾸고, 그 은을 네 손에 싸서, 네 하나님 여호와께서 선택하실 그곳으로 가라.
+1 וְנָתַתָּה = and you will exchange [it] (to give)
+2 בַּכָּסֶף = for <the> money
+3 וְצַרְתָּ = and you will secure (to confine)
+4 הַכֶּסֶף = the money
+5 בְּיָדְךָ = in hand your (hand)
+6 וְהָלַכְתָּ = and you will go (to go)
+7 אֶל־ = to (to(wards))
+8 הַמָּקוֹם = the place (standing place)
+9 אֲשֶׁר = which
+10 יִבְחַר = he will choose (to choose)
+11 יְהוָה = Yahweh (LORD)
+12 אֱלֹהֶיךָ = God your (God)
+13 בּוֹ = <in> <the> it (him)
+
+## 5:14:26
+KO: 그리고 너는 그 은을 네 영혼이 원하는 모든 것, 곧 소나 양이나 포도주나 독주나 네 영혼이 너에게 요구하는 모든 것을 위하여 주고, 거기 네 하나님 여호와 앞에서 너와 네 집이 먹고 즐거워할 것이다.
+1 וְנָתַתָּה = and you will exchange (to give)
+2 הַכֶּסֶף = the money (silver)
+3 בְּכֹל = for all
+4 אֲשֶׁר־ = that
+5 תְּאַוֶּה = it will desire (to desire)
+6 נַפְשְׁךָ = appetite your
+7 בַּבָּקָר = for <the> cattle (cattle)
+8 וּבַצֹּאן = and for <the> sheep (flock)
+9 וּבַיַּיִן = and for <the> wine (wine)
+10 וּבַשֵּׁכָר = and for <the> strong drink (strong drink)
+11 וּבְכֹל = and for all
+12 אֲשֶׁר = that
+13 תִּשְׁאָלְךָ = it will ask you (to ask)
+14 נַפְשֶׁךָ = appetite your
+15 וְאָכַלְתָּ = and you will eat (to eat)
+16 שָּׁם = there
+17 לִפְנֵי = <to> before (face)
+18 יְהוָה = Yahweh (LORD)
+19 אֱלֹהֶיךָ = God your (God)
+20 וְשָׂמַחְתָּ = and you will rejoice (to rejoice)
+21 אַתָּה = you (you(m.s.))
+22 וּבֵיתֶךָ = and household your (house)
+
+## 5:14:27
+KO: 그리고 네 성읍들 안에 있는 레위인은 너를 저버리지 말지니, 왜냐하면 그에게는 너와 함께 분깃이나 기업이 없기 때문이라.
+1 וְהַלֵּוִי = and the Levite (Levi)
+2 אֲשֶׁר־ = who (which)
+3 בִּשְׁעָרֶיךָ = [is] in gates your (gate)
+4 לֹא = not
+5 תַעַזְבֶנּוּ = you will neglect him (to leave)
+6 כִּי = for
+7 אֵין = not (nothing)
+8 לוֹ = [belongs] to <the> him (him)
+9 חֵלֶק = a portion (portion)
+10 וְנַחֲלָה = and an inheritance (inheritance)
+11 עִמָּךְ ס = with you (with)
+
+## 5:14:28
+KO: 삼 년의 끝에 너는 그 해 네 소산의 모든 십일조를 밖으로 내어 네 성읍들 안에 두어라.
+1 מִקְצֵה = from [the] end of (end)
+2 שָׁלֹשׁ = three
+3 שָׁנִים = years
+4 תּוֹצִיא = you will bring out (to come out)
+5 אֶת־ = <obj.> ([Obj.])
+6 כָּל־ = all
+7 מַעְשַׂר = [the] tithe of (tithe)
+8 תְּבוּאָתְךָ = produce your (produce)
+9 בַּשָּׁנָה = in the year
+10 הַהִוא = <the> that (he;_she;_it)
+11 וְהִנַּחְתָּ = and you will deposit [it] (to rest)
+12 בִּשְׁעָרֶיךָ = in gates your (gate)
+
+## 5:14:29
+KO: 그리고 레위인이 올지니, 왜냐하면 그에게는 너와 함께 분깃과 기업이 없기 때문이라. 그리고 네 성문들 안에 있는 객과 고아와 과부가 와서 먹고 배부를지니, 그리하면 네 하나님 여호와께서 네 손으로 행하는 네 모든 일에 너에게 복을 주실 것이라.
+1 וּבָא = and he will come (to come (in))
+2 הַלֵּוִי = the Levite (Levi)
+3 כִּי = for
+4 אֵין־ = not (nothing)
+5 לוֹ = [belongs] to <the> him (him)
+6 חֵלֶק = a portion (portion)
+7 וְנַחֲלָה = and an inheritance (inheritance)
+8 עִמָּךְ = with you (with)
+9 וְהַגֵּר = and the sojourner (sojourner)
+10 וְהַיָּתוֹם = and the fatherless one (orphan)
+11 וְהָאַלְמָנָה = and the widow (widow)
+12 אֲשֶׁר = who
+13 בִּשְׁעָרֶיךָ = [are] in gates your (gate)
+14 וְאָכְלוּ = and they will eat (to eat)
+15 וְשָׂבֵעוּ = and they will be satisfied (to satisfy)
+16 לְמַעַן = so that (because)
+17 יְבָרֶכְךָ = he may bless you (to bless)
+18 יְהוָה = Yahweh (LORD)
+19 אֱלֹהֶיךָ = God your (God)
+20 בְּכָל־ = in all (all)
+21 מַעֲשֵׂה = [the] work of (deed)
+22 יָדְךָ = hand your (hand)
+23 אֲשֶׁר = which
+24 תַּעֲשֶׂה ס = you will do (to make)
+
+## 5:15:1
+KO: 칠 년의 끝에 너는 면제를 행하라.
+1 מִקֵּץ = from [the] end of (end)
+2 שֶׁבַע־ = seven
+3 שָׁנִים = years (year)
+4 תַּעֲשֶׂה = you will observe (to make)
+5 שְׁמִטָּה = a remission (remission)
+
+## 5:15:2
+KO: 그리고 이것이 면제의 규례이다. 자기 손으로 빌려준 모든 채주는 그것을 면제할 것이요, 그의 이웃이나 그의 형제에게 독촉하지 말지니, 이는 여호와를 위한 면제가 선포되었기 때문이라.
+1 וְזֶה = and this (this)
+2 דְּבַר = [is] [the] manner of (word)
+3 הַשְּׁמִטָּה = the remission
+4 שָׁמוֹט = he will remit (to release)
+5 כָּל־ = every (all)
+6 בַּעַל = owner (master)
+7 מַשֵּׁה = [the] loan of (loan)
+8 יָדוֹ = hand his (hand)
+9 אֲשֶׁר = which
+10 יַשֶּׁה = he will lend (to lend)
+11 בְּרֵעֵהוּ = to neighbor his
+12 לֹא־ = not
+13 יִגֹּשׂ = he will press (to oppress)
+14 אֶת־ = <obj.>
+15 רֵעֵהוּ = neighbor his
+16 וְאֶת־ = and <obj.>
+17 אָחִיו = countryman his (brother)
+18 כִּי־ = for
+19 קָרָא = someone has proclaimed (to call)
+20 שְׁמִטָּה = a remission
+21 לַיהוָה = of Yahweh (LORD)
+
+## 5:15:3
+KO: 외국인은 네가 독촉할 것이나, 네 형제에게 있는 네 것은 네 손으로 면제할 것이다.
+1 אֶת־ = <obj.> ([Obj.])
+2 הַנָּכְרִי = the foreigner (foreign)
+3 תִּגֹּשׂ = you will press (to oppress)
+4 וַאֲשֶׁר = and [that] which (which)
+5 יִהְיֶה = it will belong (to be)
+6 לְךָ = to <the> you (you)
+7 אֶת־ = with
+8 אָחִיךָ = countryman your (brother)
+9 תַּשְׁמֵט = let it release (to release)
+10 יָדֶךָ = hand your (hand)
+
+## 5:15:4
+KO: 다만 너희 중에 가난한 자가 없을 것이니, 이는 여호와께서 네 하나님 여호와께서 네게 유업으로 주어 차지하게 하시려고 네게 주시는 땅에서 복을 주시고 복을 주실 것이기 때문이라.
+1 אֶפֶס = nevertheless (end)
+2 כִּי = for
+3 לֹא = not
+4 יִהְיֶה־ = he will be (to be)
+5 בְּךָ = among <the> you
+6 אֶבְיוֹן = a needy [person] (needy)
+7 כִּי־ = for
+8 בָרֵךְ = surely <bless>
+9 יְבָרֶכְךָ = he will bless you
+10 יְהוָה = Yahweh
+11 בָּאָרֶץ = in the land (land)
+12 אֲשֶׁר = which
+13 יְהוָה = Yahweh
+14 אֱלֹהֶיךָ = God your (God)
+15 נֹתֵן־ = [is] about to give (to give)
+16 לְךָ = to <the> you
+17 נַחֲלָה = an inheritance (inheritance)
+18 לְרִשְׁתָּהּ = to take possession of it (to possess)
+
+## 5:15:5
+KO: 다만 만일 네가 네 하나님 여호와의 음성을 듣기를 듣고, 내가 오늘 네게 명령하는 이 모든 명령을 지켜 행하기 위하여 삼가면, 네 하나님 여호와께서 네게 유업으로 주셔서 네가 기업으로 얻게 하신 땅에서 정녕 네게 복을 주시리니, 너희 가운데 가난한 자가 없으리라.
+1 רַק = only (except)
+2 אִם־ = <if> (if)
+3 שָׁמוֹעַ = certainly [if] <listen>
+4 תִּשְׁמַע = you will listen
+5 בְּקוֹל = to [the] voice of (voice)
+6 יְהוָה = Yahweh (LORD)
+7 אֱלֹהֶיךָ = God your (God)
+8 לִשְׁמֹר = to take care (to keep)
+9 לַעֲשׂוֹת = to observe (to make)
+10 אֶת־ = <obj.> ([Obj.])
+11 כָּל־ = all
+12 הַמִּצְוָה = the commandment (commandment)
+13 הַזֹּאת = <the> this (this)
+14 אֲשֶׁר = which
+15 אָנֹכִי = I
+16 מְצַוְּךָ = [am] commanding you (to command)
+17 הַיּוֹם = this day (day;_when)
+
+## 5:15:6
+KO: 왜냐하면 네 하나님 여호와께서 네게 말씀하신 대로 너에게 복을 주실 것이기 때문이다. 그리하여 너는 많은 민족들에게 꾸어 줄 것이나 너는 꾸지 않을 것이며, 너는 많은 민족들을 다스릴 것이나 그들이 너를 다스리지 못할 것이다.
+1 כִּי־ = for
+2 יְהוָה = Yahweh (LORD)
+3 אֱלֹהֶיךָ = God your (God)
+4 בֵּרַכְךָ = he has blessed you (to bless)
+5 כַּאֲשֶׁר = just as (as which)
+6 דִּבֶּר־ = he spoke (to speak)
+7 לָךְ = to <the> you
+8 וְהַעֲבַטְתָּ = and you will lend to
+9 גּוֹיִם = nations
+10 רַבִּים = many
+11 וְאַתָּה = and you (you(m.s.))
+12 לֹא = not
+13 תַעֲבֹט = you will borrow
+14 וּמָשַׁלְתָּ = and you will rule
+15 בְּגוֹיִם = over nations
+16 רַבִּים = many
+17 וּבְךָ = and over <the> you
+18 לֹא = not
+19 יִמְשֹׁלוּ ס = they will rule
+
+## 5:15:7
+KO: 만약 너희 가운데, 곧 네 하나님 여호와께서 네게 주시는 네 땅 안의 네 성읍들 중 하나에 있는 너의 형제들 중 하나 가운데 가난한 자가 있거든, 너는 그 가난한 형제에게 네 마음을 강퍅하게 하지 말며 네 손을 움켜쥐지 말라.
+1 כִּי־ = if (for)
+2 יִהְיֶה = he will be (to be)
+3 בְךָ = among <the> you
+4 אֶבְיוֹן = a needy [person]
+5 מֵאַחַד = any one of
+6 אַחֶיךָ = countrymen your
+7 בְּאַחַד = in one of
+8 שְׁעָרֶיךָ = gates your (gate)
+9 בְּאַרְצְךָ = in land your (land)
+10 אֲשֶׁר־ = which
+11 יְהוָה = Yahweh (LORD)
+12 אֱלֹהֶיךָ = God your (God)
+13 נֹתֵן = [is] about to give (to give)
+14 לָךְ = to <the> you
+15 לֹא = not
+16 תְאַמֵּץ = you will harden (to strengthen)
+17 אֶת־ = <obj.>
+18 לְבָבְךָ = heart your (heart)
+19 וְלֹא = and not
+20 תִקְפֹּץ = you will shut (to gather)
+21 אֶת־ = <obj.>
+22 יָדְךָ = hand your (hand)
+23 מֵאָחִיךָ = from countryman your
+24 הָאֶבְיוֹן = <the> needy
+
+## 5:15:8
+KO: 너는 반드시 네 손을 그에게 펴서, 그가 부족함을 느끼는 것, 곧 그에게 부족한 것을 넉넉히 꾸어주라.
+1 כִּי־ = for
+2 פָתֹחַ = certainly <to open>
+3 תִּפְתַּח = you will open
+4 אֶת־ = <obj.> ([Obj.])
+5 יָדְךָ = hand your (hand)
+6 לוֹ = to <the> him
+7 וְהַעֲבֵט = and certainly <to lend>
+8 תַּעֲבִיטֶנּוּ = you will lend to him
+9 דֵּי = sufficiency of (enough)
+10 מַחְסֹרוֹ = lack his (need)
+11 אֲשֶׁר = which
+12 יֶחְסַר = it will be lacking (to lack)
+13 לוֹ = to <the> him
+
+## 5:15:9
+KO: 삼가 너는 네 마음에 벨리알(무가치함/악함)의 말이 있지 않도록 주의하라. 말하기를 “일곱째 해, 곧 면제년이 가까웠다” 하여, 네 궁핍한 형제에게 네 눈이 악하여 그에게 주지 않는다면, 그가 너에 대하여 여호와께 부르짖을 것이고, 그것이 네게 죄가 될 것이다.
+1 הִשָּׁמֶר = take heed (to keep)
+2 לְךָ = to <the> yourself
+3 פֶּן־ = lest
+4 יִהְיֶה = it should be
+5 דָבָר = a word (word)
+6 עִם־ = with
+7 לְבָבְךָ = heart your (heart)
+8 בְלִיַּעַל = worthlessness (Belial)
+9 לֵאמֹר = <to> saying (to say)
+10 קָרְבָה = it has drawn near (to present)
+11 שְׁנַת־ = [the] year of
+12 הַשֶּׁבַע = the seven (seven)
+13 שְׁנַת = [the] year of
+14 הַשְּׁמִטָּה = the remission (remission)
+15 וְרָעָה = and it will be evil (be evil)
+16 עֵינְךָ = eye your (eye)
+17 בְּאָחִיךָ = on countryman your (brother)
+18 הָאֶבְיוֹן = <the> needy (needy)
+19 וְלֹא = and not (not)
+20 תִתֵּן = you will give (to give)
+21 לוֹ = to <the> him (him)
+22 וְקָרָא = and he will call out (to call)
+23 עָלֶיךָ = against you (upon)
+24 אֶל־ = to (to(wards))
+25 יְהוָה = Yahweh (LORD)
+26 וְהָיָה = and it will be
+27 בְךָ = on <the> you
+28 חֵטְא = sin
+
+## 5:15:10
+KO: 너는 그에게 반드시 줄 것이요, 그에게 줄 때에 네 마음이 악하게 굴지 말라. 왜냐하면 이 일로 인하여 네 하나님 여호와께서 네 모든 행위와 네 손의 모든 펼침(수고)에 네게 복을 주실 것이기 때문이다.
+1 נָתוֹן = certainly <to give>
+2 תִּתֵּן = you will give
+3 לוֹ = to <the> him
+4 וְלֹא־ = and not (not)
+5 יֵרַע = it will sadden (be evil)
+6 לְבָבְךָ = heart your (heart)
+7 בְּתִתְּךָ = when giving you
+8 לוֹ = to <the> him
+9 כִּי = for
+10 בִּגְלַל = on account of (because of)
+11 הַדָּבָר = the thing (word)
+12 הַזֶּה = <the> this (this)
+13 יְבָרֶכְךָ = he will bless you (to bless)
+14 יְהוָה = Yahweh (LORD)
+15 אֱלֹהֶיךָ = God your (God)
+16 בְּכָל־ = in all
+17 מַעֲשֶׂךָ = work your (deed)
+18 וּבְכֹל = and in every
+19 מִשְׁלַח = <the> undertaking of (sending)
+20 יָדֶךָ = hand your (hand)
+
+## 5:15:11
+KO: 왜냐하면 땅의 한가운데로부터 궁핍한 자가 그치지 않을 것이기 때문이다. 그러므로 내가 네게 명하여 이르기를, 네 손을 네 형제, 네게 있는 고난받는 자와 네 궁핍한 자에게 네 땅에서 반드시 펼지니라.
+1 כִּי = for
+2 לֹא־ = not
+3 יֶחְדַּל = he will cease (to cease)
+4 אֶבְיוֹן = [the] needy
+5 מִקֶּרֶב = from [the] midst of (entrails)
+6 הָאָרֶץ = the land
+7 עַל־ = there- (upon)
+8 כֵּן = -fore (so)
+9 אָנֹכִי = I
+10 מְצַוְּךָ = [am] commanding you (to command)
+11 לֵאמֹר = <to> saying (to say)
+12 פָּתֹחַ = certainly <to open>
+13 תִּפְתַּח = you will open
+14 אֶת־ = <obj.> ([Obj.])
+15 יָדְךָ = hand your (hand)
+16 לְאָחִיךָ = to countryman your (brother)
+17 לַעֲנִיֶּךָ = to poor [person] your (afflicted)
+18 וּלְאֶבְיֹנְךָ = and to needy [person] your
+19 בְּאַרְצֶךָ ס = in land your
+
+## 5:15:12
+KO: 네 동족 히브리 남자나 히브리 여자가 네게 팔리고, 그가 너를 여섯 해 동안 섬겼거든, 일곱째 해에 너는 그를 너에게서 자유롭게 보내라.
+1 כִּי־ = if (for)
+2 יִמָּכֵר = he will sell himself (to sell)
+3 לְךָ = to <the> you (you)
+4 אָחִיךָ = countryman your (brother)
+5 הָעִבְרִי = <the> Hebrew [masc]
+6 אוֹ = or
+7 הָעִבְרִיָּה = <the> Hebrew [fem]
+8 וַעֲבָדְךָ = and he will serve you (to serve)
+9 שֵׁשׁ = six
+10 שָׁנִים = years
+11 וּבַשָּׁנָה = and in the year
+12 הַשְּׁבִיעִת = <the> seventh (seventh)
+13 תְּשַׁלְּחֶנּוּ = you will let go him (to send)
+14 חָפְשִׁי = a free [person] (free)
+15 מֵעִמָּךְ = from with <the> you (from with)
+
+## 5:15:13
+KO: 그리고 네가 그를 자유인으로 네게서 보내어 놓을 때, 그를 빈손으로 보내지 말라.
+1 וְכִי־ = and if (for)
+2 תְשַׁלְּחֶנּוּ = you will let go him
+3 חָפְשִׁי = a free [person] (free)
+4 מֵעִמָּךְ = from with <the> you (from with)
+5 לֹא = not
+6 תְשַׁלְּחֶנּוּ = you will let go him
+7 רֵיקָם = emptily
+
+## 5:15:14
+KO: 너는 그에게 반드시 후히 주어라, 너의 양 떼에서, 그리고 너의 타작마당에서, 그리고 너의 포도주 틀에서. 너의 하나님 여호와께서 너에게 복 주신 대로 너는 그에게 줄지니라.
+1 הַעֲנֵיק = certainly <to provide>
+2 תַּעֲנִיק = you will provide
+3 לוֹ = for <the> him
+4 מִצֹּאנְךָ = from flock your (flock)
+5 וּמִגָּרְנְךָ = and from threshing floor your (threshing floor)
+6 וּמִיִּקְבֶךָ = and from wine-press your (wine)
+7 אֲשֶׁר = [that] which (which)
+8 בֵּרַכְךָ = he has blessed you (to bless)
+9 יְהוָה = Yahweh (LORD)
+10 אֱלֹהֶיךָ = God your (God)
+11 תִּתֶּן־ = you will give (to give)
+12 לוֹ = to <the> him
+
+## 5:15:15
+KO: 그리고 너는 기억하라, 네가 애굽 땅에서 종이었음을, 그리고 여호와 네 하나님이 너를 속량하셨음을. 그러므로 내가 오늘 이 명령을 네게 명하노라.
+1 וְזָכַרְתָּ = and you will remember (to remember)
+2 כִּי = that (for)
+3 עֶבֶד = a slave (servant;_slave)
+4 הָיִיתָ = you were (to be)
+5 בְּאֶרֶץ = in [the] land of (land)
+6 מִצְרַיִם = Egypt
+7 וַיִּפְדְּךָ = and he redeemed you (to ransom)
+8 יְהוָה = Yahweh (LORD)
+9 אֱלֹהֶיךָ = God your (God)
+10 עַל־ = there- (upon)
+11 כֵּן = -fore (so)
+12 אָנֹכִי = I
+13 מְצַוְּךָ = [am] commanding you (to command)
+14 אֶת־ = <obj.> ([Obj.])
+15 הַדָּבָר = the matter (word)
+16 הַזֶּה = <the> this (this)
+17 הַיּוֹם = this day (day;_when)
+
+## 5:15:16
+KO: 그리고 만일 그가 네게 "나는 네게서 나가지 않겠다"라고 말하면, 왜냐하면 그가 너와 네 집을 사랑하고, 왜냐하면 그에게 너와 함께 있는 것이 좋기 때문이다.
+1 וְהָיָה = and it will be (to be)
+2 כִּי־ = that
+3 יֹאמַר = he will say (to say)
+4 אֵלֶיךָ = to you (to(wards))
+5 לֹא = not
+6 אֵצֵא = I will go out (to come out)
+7 מֵעִמָּךְ = from with <the> you
+8 כִּי = for
+9 אֲהֵבְךָ = he loves you (to love)
+10 וְאֶת־ = and <obj.> ([Obj.])
+11 בֵּיתֶךָ = household your (house)
+12 כִּי־ = for
+13 טוֹב = it has been good (be pleasing)
+14 לוֹ = for <the> him (him)
+15 עִמָּךְ = with you
+
+## 5:15:17
+KO: 그리고 너는 송곳을 취하여 그것을 그의 귀와 문에 대고 뚫으라. 그러면 그는 너에게 영원한 종이 될 것이다. 또한 너의 여종에게도 이와 같이 행할지니라.
+1 וְלָקַחְתָּ = and you will take (to take)
+2 אֶת־ = <obj.> ([Obj.])
+3 הַמַּרְצֵעַ = the awl (awl)
+4 וְנָתַתָּה = and you will put [it] (to give)
+5 בְאָזְנוֹ = in ear his (ear)
+6 וּבַדֶּלֶת = and in the door (door)
+7 וְהָיָה = and he will be (to be)
+8 לְךָ = of you (you)
+9 עֶבֶד = a slave of (servant;_slave)
+10 עוֹלָם = perpetuity (forever)
+11 וְאַף = and also (also)
+12 לַאֲמָתְךָ = to maidservant your (maidservant)
+13 תַּעֲשֶׂה־ = you will do (to make)
+14 כֵּן = thus (so)
+
+## 5:15:18
+KO: 네 눈에 그를 네게서 자유롭게 떠나보내는 것이 어렵지 않게 하라. 왜냐하면 그가 육 년 동안 품꾼의 삯의 갑절이나 될 만큼 너를 섬겼기 때문이다. 그리하면 네 하나님 여호와께서 네가 행하는 모든 일에 네게 복을 주실 것이다.
+1 לֹא־ = not
+2 יִקְשֶׁה = it will be hard (to harden)
+3 בְעֵינֶךָ = in view your (eye)
+4 בְּשַׁלֵּחֲךָ = when letting go you (to send)
+5 אֹתוֹ = <obj.> him ([Obj.])
+6 חָפְשִׁי = a free [person] (free)
+7 מֵעִמָּךְ = from with <the> you (from with)
+8 כִּי = for
+9 מִשְׁנֶה = double (second)
+10 שְׂכַר = [the] hire of (wages)
+11 שָׂכִיר = a hired laborer (hired)
+12 עֲבָדְךָ = he has served you (to serve)
+13 שֵׁשׁ = six
+14 שָׁנִים = years (year)
+15 וּבֵרַכְךָ = and he will bless you (to bless)
+16 יְהוָה = Yahweh (LORD)
+17 אֱלֹהֶיךָ = God your (God)
+18 בְּכֹל = in all (all)
+19 אֲשֶׁר = that (which)
+20 תַּעֲשֶׂה פ = you will do (to make)
+
+## 5:15:19
+KO: 너의 소와 너의 양 중에서 태어나는 모든 첫째 수컷은 너의 하나님 여호와께 거룩하게 할지니라. 너의 소의 첫째를 부리지 말 것이며 너의 양의 첫째의 털을 깎지 말지니라.
+1 כָּל־ = every (all)
+2 הַבְּכוֹר = <the> firstborn
+3 אֲשֶׁר = which
+4 יִוָּלֵד = it will be born (to beget)
+5 בִּבְקָרְךָ = in herd your (cattle)
+6 וּבְצֹאנְךָ = and in flock your
+7 הַזָּכָר = the male (male)
+8 תַּקְדִּישׁ = you will consecrate (to consecrate)
+9 לַיהוָה = to Yahweh (LORD)
+10 אֱלֹהֶיךָ = God your (God)
+11 לֹא = not
+12 תַעֲבֹד = you will labor (to serve)
+13 בִּבְכֹר = by [the] firstborn of
+14 שׁוֹרֶךָ = ox[en] your (cattle)
+15 וְלֹא = and not
+16 תָגֹז = you will shear (to shear)
+17 בְּכוֹר = [the] firstborn of
+18 צֹאנֶךָ = sheep your
+
+## 5:15:20
+KO: 네 하나님 여호와 앞, 그분께서 선택하실 그 장소에서 너와 네 집은 해마다 그것을 먹을지니라.
+1 לִפְנֵי = <to> before (face)
+2 יְהוָה = Yahweh
+3 אֱלֹהֶיךָ = God your (God)
+4 תֹאכֲלֶנּוּ = you will eat it (to eat)
+5 שָׁנָה = a year
+6 בְשָׁנָה = in a year
+7 בַּמָּקוֹם = in the place (standing place)
+8 אֲשֶׁר־ = which
+9 יִבְחַר = he will choose (to choose)
+10 יְהוָה = Yahweh
+11 אַתָּה = you (you(m.s.))
+12 וּבֵיתֶךָ = and household your (house)
+
+## 5:15:21
+KO: 그리고 만일 그에게 흠, 곧 저는 것이나 눈먼 것이나 모든 악한 흠이 있다면, 너는 그것을 네 하나님 여호와께 제사하지 못할지니라.
+1 וְכִי־ = and if (for)
+2 יִהְיֶה = it will be (to be)
+3 בוֹ = in <the> it (him)
+4 מוּם = a blemish
+5 פִּסֵּחַ = lame
+6 אוֹ = or
+7 עִוֵּר = blind
+8 כֹּל = any (all)
+9 מוּם = blemish
+10 רָע = bad
+11 לֹא = not
+12 תִזְבָּחֶנּוּ = you will sacrifice it (to sacrifice)
+13 לַיהוָה = to Yahweh (LORD)
+14 אֱלֹהֶיךָ = God your (God)
+
+## 5:15:22
+KO: 너의 성문들 안에서 그것을 먹되, 부정하게 된 자와 정하게 된 자가 다 같이, 노루와 사슴을 먹는 것처럼 먹을 것이다.
+1 בִּשְׁעָרֶיךָ = in gates your (gate)
+2 תֹּאכֲלֶנּוּ = you will eat it (to eat)
+3 הַטָּמֵא = the unclean (unclean)
+4 וְהַטָּהוֹר = and the clean (clean)
+5 יַחְדָּו = alike (together)
+6 כַּצְּבִי = like <the> gazelle (gazelle)
+7 וְכָאַיָּל = and like <the> deer (deer)
+
+## 5:15:23
+KO: 오직 그 피는 먹지 말지니, 땅 위에 그것을 물처럼 쏟을지니라.
+1 רַק = only (except)
+2 אֶת־ = <obj.> ([Obj.])
+3 דָּמוֹ = blood its (blood)
+4 לֹא = not
+5 תֹאכֵל = you must eat (to eat)
+6 עַל־ = on (upon)
+7 הָאָרֶץ = the ground (land)
+8 תִּשְׁפְּכֶנּוּ = you will pour out it (to pour)
+9 כַּמָּיִם פ = like <the> water (water)
+
+## 5:16:1
+KO: 아빕의 달을 지켜라. 그리고 너의 하나님 여호와를 위하여 유월절을 행하라. 왜냐하면 아빕의 달에 너의 하나님 여호와께서 너를 밤에 애굽으로부터 인도하여 내셨기 때문이다.
+1 שָׁמוֹר = keep (to keep)
+2 אֶת־ = <obj.> ([Obj.])
+3 חֹדֶשׁ = [the] month of
+4 הָאָבִיב = <the> Abib
+5 וְעָשִׂיתָ = and you will observe (to make)
+6 פֶּסַח = a passover (Passover)
+7 לַיהוָה = to Yahweh
+8 אֱלֹהֶיךָ = God your
+9 כִּי = for
+10 בְּחֹדֶשׁ = in [the] month of
+11 הָאָבִיב = <the> Abib
+12 הוֹצִיאֲךָ = he brought out you (to come out)
+13 יְהוָה = Yahweh
+14 אֱלֹהֶיךָ = God your
+15 מִמִּצְרַיִם = from Egypt (Egypt)
+16 לָיְלָה = night
+
+## 5:16:2
+KO: 그리고 너는 네 하나님 여호와를 위하여 양 떼와 소 떼로 유월절 제사를 드리라. 여호와께서 그분의 이름을 거하게 하시려고 선택하실 그곳에서.
+1 וְזָבַחְתָּ = and you will sacrifice (to sacrifice)
+2 פֶּסַח = a passover (Passover)
+3 לַיהוָה = to Yahweh
+4 אֱלֹהֶיךָ = God your (God)
+5 צֹאן = flock
+6 וּבָקָר = and herd (cattle)
+7 בַּמָּקוֹם = in the place (standing place)
+8 אֲשֶׁר־ = where (which)
+9 יִבְחַר = he will choose (to choose)
+10 יְהוָה = Yahweh
+11 לְשַׁכֵּן = to cause to dwell (to dwell)
+12 שְׁמוֹ = name his (name)
+13 שָׁם = there
+
+## 5:16:3
+KO: 그것(제물) 위에 유교병을 먹지 말라. 칠 일 동안 그것 위에 무교병 곧 고난의 떡을 먹으라. 이는 네가 애굽 땅에서 서두름으로 나왔기 때문이니, 이는 네가 애굽 땅에서 나온 날을 네 생명의 모든 날 동안 기억하게 하려 함이라.
+1 לֹא־ = not
+2 תֹאכַל = you will eat
+3 עָלָיו = with it
+4 חָמֵץ = leaven
+5 שִׁבְעַת = seven
+6 יָמִים = days
+7 תֹּאכַל־ = you will eat
+8 עָלָיו = with it
+9 מַצּוֹת = unleavened bread<s> (unleavened bread)
+10 לֶחֶם = bread of (food)
+11 עֹנִי = affliction
+12 כִּי = for
+13 בְחִפָּזוֹן = in haste (haste)
+14 יָצָאתָ = you came out
+15 מֵאֶרֶץ = from [the] land of
+16 מִצְרַיִם = Egypt
+17 לְמַעַן = so that (because)
+18 תִּזְכֹּר = you may remember (to remember)
+19 אֶת־ = <obj.> ([Obj.])
+20 יוֹם = [the] day of
+21 צֵאתְךָ = coming out you
+22 מֵאֶרֶץ = from [the] land of
+23 מִצְרַיִם = Egypt
+24 כֹּל = all
+25 יְמֵי = [the] days of
+26 חַיֶּיךָ = life your (life)
+
+## 5:16:4
+KO: 칠 일 동안은 네 모든 경계 안에서 누룩이 너에게 보이지 않게 할 것이며, 첫째 날 저녁에 네가 제사 드린 그 고기 중에서 무엇이라도 아침까지 머물러 있지 않게 할 것이니라.
+1 וְלֹא־ = and not
+2 יֵרָאֶה = it will be seen (to see)
+3 לְךָ = by you (you)
+4 שְׂאֹר = leaven
+5 בְּכָל־ = in all (all)
+6 גְּבֻלְךָ = territory your (border)
+7 שִׁבְעַת = seven
+8 יָמִים = days
+9 וְלֹא־ = and not
+10 יָלִין = it will remain overnight (to lodge)
+11 מִן־ = any of (from)
+12 הַבָּשָׂר = the meat (flesh)
+13 אֲשֶׁר = which
+14 תִּזְבַּח = you will sacrifice (to sacrifice)
+15 בָּעֶרֶב = in the evening (evening)
+16 בַּיּוֹם = on the day
+17 הָרִאשׁוֹן = <the> first (first)
+18 לַבֹּקֶר = to the morning (morning)
+
+## 5:16:5
+KO: 네 하나님 여호와께서 네게 주시는 네 성읍들 중 어느 곳에서도 너는 유월절 제사를 드리지 못할 것이다.
+1 לֹא = not
+2 תוּכַל = you will be able (be able)
+3 לִזְבֹּחַ = to sacrifice
+4 אֶת־ = <obj.> ([Obj.])
+5 הַפָּסַח = the passover (Passover)
+6 בְּאַחַד = in one of (one)
+7 שְׁעָרֶיךָ = gates your (gate)
+8 אֲשֶׁר־ = which
+9 יְהוָה = Yahweh (LORD)
+10 אֱלֹהֶיךָ = God your (God)
+11 נֹתֵן = [is] about to give (to give)
+12 לָךְ = to you (you)
+
+## 5:16:6
+KO: 오직 네 하나님 여호와께서 자기 이름을 거하게 하시려고 택하신 그 장소에서, 네가 애굽에서 나오던 그 정해진 때, 곧 해가 질 무렵인 저녁에 유월절 제물을 잡을지니라.
+1 כִּי = that
+2 אִם־ = except (if)
+3 אֶל־ = to (to(wards))
+4 הַמָּקוֹם = the place (standing place)
+5 אֲשֶׁר־ = which
+6 יִבְחַר = he will choose (to choose)
+7 יְהוָה = Yahweh (LORD)
+8 אֱלֹהֶיךָ = God your (God)
+9 לְשַׁכֵּן = to cause to dwell (to dwell)
+10 שְׁמוֹ = name his (name)
+11 שָׁם = there
+12 תִּזְבַּח = you will sacrifice (to sacrifice)
+13 אֶת־ = <obj.> ([Obj.])
+14 הַפֶּסַח = the passover (Passover)
+15 בָּעָרֶב = in the evening (evening)
+16 כְּבוֹא = when goes (to come (in))
+17 הַשֶּׁמֶשׁ = the sun (sun)
+18 מוֹעֵד = [the] time of (meeting)
+19 צֵאתְךָ = coming out you (to come out)
+20 מִמִּצְרָיִם = from Egypt (Egypt)
+
+## 5:16:7
+KO: 그리고 너는 삶아야 한다. 그리고 너는 먹어야 한다 그 장소에서, 곧 여호와 네 하나님이 그곳을 택하실, 그리고 너는 아침에 돌이켜서 너의 장막들로 가야 한다.
+1 וּבִשַּׁלְתָּ = and you will cook [it] (to boil)
+2 וְאָכַלְתָּ = and you will eat [it] (to eat)
+3 בַּמָּקוֹם = in the place (standing place)
+4 אֲשֶׁר = which
+5 יִבְחַר = he will choose (to choose)
+6 יְהוָה = Yahweh (LORD)
+7 אֱלֹהֶיךָ = God your (God)
+8 בּוֹ = <in> it (him)
+9 וּפָנִיתָ = and you will turn (to turn)
+10 בַבֹּקֶר = in the morning (morning)
+11 וְהָלַכְתָּ = and you will go (to go)
+12 לְאֹהָלֶיךָ = to tents your (tent)

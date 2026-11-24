@@ -1,0 +1,181 @@
+## 14:36:7
+KO: 그리고 여호와의 집의 기구들로부터 느브갓네살이 바벨론으로 가져갔고, 그것들을 바벨론에 있는 그의 신전에 두었다.
+1 וּמִכְּלֵי = and some of [the] articles of (article|utensil)
+2 בֵּית = [the] house of (house)
+3 יְהוָה = Yahweh (LORD)
+4 הֵבִיא = he brought (to come (in))
+5 נְבוּכַדְנֶאצַּר = Nebuchadnezzar
+6 לְבָבֶל = to Babylon
+7 וַיִּתְּנֵם = and he put them (to give)
+8 בְּהֵיכָלוֹ = in palace his (temple)
+9 בְּבָבֶל = in Babylon
+
+## 14:36:8
+KO: 여호야김의 남은 사적들과 그가 행한 그의 가증한 일들과 그에게서 발견된 것이 보라, 이스라엘과 유다의 왕들의 책에 기록되어 있다. 그의 아들 여호야긴이 그를 대신하여 왕이 되었다.
+1 וְיֶתֶר = and [the] rest of (remainder)
+2 דִּבְרֵי = [the] matters of (word)
+3 יְהוֹיָקִים = Jehoiakim
+4 וְתֹעֲבֹתָיו = and abominations his (abomination)
+5 אֲשֶׁר־ = which
+6 עָשָׂה = he did (to make)
+7 וְהַנִּמְצָא = and <the> [what] was found (to find)
+8 עָלָיו = on him
+9 הִנָּם = there they (look!)
+10 כְּתוּבִים = [are] written (to write)
+11 עַל־ = on
+12 סֵפֶר = [the] scroll of (scroll)
+13 מַלְכֵי = [the] kings of (king)
+14 יִשְׂרָאֵל = Israel
+15 וִיהוּדָה = and Judah (Judah)
+16 וַיִּמְלֹךְ = and he became king (to reign)
+17 יְהוֹיָכִין = Jehoiachin
+18 בְּנוֹ = son his (son)
+19 תַּחְתָּיו פ = in place of him (underneath)
+
+## 14:36:9
+KO: 여호야긴은 왕이 되었을 때 여덟 살이었고, 예루살렘에서 석 달 열흘을 다스렸으며, 여호와 보시기에 악을 행하였다.
+1 בֶּן־ = [was] a son of (son)
+2 שְׁמוֹנֶה = eight
+3 שָׁנִים = years (year)
+4 יְהוֹיָכִין = Jehoiachin
+5 בְּמָלְכוֹ = when became king he
+6 וּשְׁלֹשָׁה = and three (three)
+7 חֳדָשִׁים = months (month)
+8 וַעֲשֶׂרֶת = and ten (ten)
+9 יָמִים = days (day;_when)
+10 מָלַךְ = he reigned
+11 בִּירוּשָׁלִָם = in Jerusalem (Jerusalem)
+12 וַיַּעַשׂ = and he did (to make)
+13 הָרַע = the evil (bad)
+14 בְּעֵינֵי = in [the] eyes of (eye)
+15 יְהוָה = Yahweh (LORD)
+
+## 14:36:10
+KO: 그 해가 돌아올 때에 느브갓네살 왕이 사람을 보내어 그를 바벨론으로 데려오게 하였고, 여호와의 집의 귀한 기구들과 함께하였으며, 그의 형제 시드기야를 유다와 예루살렘 위에 왕으로 세웠더라.
+1 וְלִתְשׁוּבַת = and to [the] return of (turn)
+2 הַשָּׁנָה = the year (year)
+3 שָׁלַח = he sent (to send)
+4 הַמֶּלֶךְ = the king (king)
+5 נְבוּכַדְנֶאצַּר = Nebuchadnezzar
+6 וַיְבִאֵהוּ = and he brought him (to come (in))
+7 בָבֶלָה = Babylon towards (Babylon)
+8 עִם־ = with
+9 כְּלֵי = [the] articles of (article|utensil)
+10 חֶמְדַּת = preciousness of (desire)
+11 בֵּית־ = [the] house of (house)
+12 יְהוָה = Yahweh (LORD)
+13 וַיַּמְלֵךְ = and he made king (to reign)
+14 אֶת־ = <obj.> ([Obj.])
+15 צִדְקִיָּהוּ = Zedekiah
+16 אָחִיו = relative his (brother)
+17 עַל־ = over (upon)
+18 יְהוּדָה = Judah
+19 וִירוּשָׁלִָם פ = and Jerusalem (Jerusalem)
+
+## 14:36:11
+KO: 시드기야는 그가 왕이 되었을 때 스물한 살이었고, 예루살렘에서 열한 해를 다스렸다.
+1 בֶּן־ = [was] a son of (son)
+2 עֶשְׂרִים = twenty
+3 וְאַחַת = and one
+4 שָׁנָה = year[s]
+5 צִדְקִיָּהוּ = Zedekiah
+6 בְמָלְכוֹ = when became king he
+7 וְאַחַת = and one [plus]
+8 עֶשְׂרֵה = ten
+9 שָׁנָה = year[s]
+10 מָלַךְ = he reigned
+11 בִּירוּשָׁלִָם = in Jerusalem (Jerusalem)
+
+## 14:36:12
+KO: 그리고 그가 여호와 그의 하나님들의 눈들 안에 악을 행하였고, 선지자 예레미야의 얼굴 앞에서(그로부터) 겸비하지 아니하였으며, 여호와의 입으로부터(나온 말씀으로 인하여).
+1 וַיַּעַשׂ = and he did (to make)
+2 הָרַע = the evil (bad)
+3 בְּעֵינֵי = in [the] eyes of (eye)
+4 יְהוָה = Yahweh
+5 אֱלֹהָיו = God his (God)
+6 לֹא = not
+7 נִכְנַע = he humbled himself (be humble)
+8 מִלִּפְנֵי = from to before (face)
+9 יִרְמְיָהוּ = Jeremiah
+10 הַנָּבִיא = the prophet (prophet)
+11 מִפִּי = from [the] mouth of (lip)
+12 יְהוָה = Yahweh
+
+## 14:36:13
+KO: 또한 그는 느브갓네살 왕이 그를 하나님을 가리켜 맹세하게 하였음에도 반역하였고, 그의 목을 굳게 하였으며 그의 마음을 강퍅하게 하여 이스라엘의 하나님 여호와께로 돌아오지 아니하였다.
+1 וְגַם = and also (also)
+2 בַּמֶּלֶךְ = against the king (king)
+3 נְבוּכַדְנֶאצַּר = Nebuchadnezzar
+4 מָרָד = he rebelled (to rebel)
+5 אֲשֶׁר = who (which)
+6 הִשְׁבִּיעוֹ = he had made swear an oath him (to swear)
+7 בֵּאלֹהִים = by God
+8 וַיֶּקֶשׁ = and he made stiff (to harden)
+9 אֶת־ = <obj.>
+10 עָרְפּוֹ = neck his (neck)
+11 וַיְאַמֵּץ = and he made hard (to strengthen)
+12 אֶת־ = <obj.>
+13 לְבָבוֹ = heart his (heart)
+14 מִשּׁוּב = from turning back (to return)
+15 אֶל־ = to (to(wards))
+16 יְהוָה = Yahweh (LORD)
+17 אֱלֹהֵי = [the] God of
+18 יִשְׂרָאֵל = Israel
+
+## 14:36:14
+KO: 또한 제사장들의 모든 우두머리들과 백성이 이방인들의 모든 가증한 것들을 따라서 거듭하여 불충실하게 행하였으며, 그들이 여호와께서 예루살렘에 거룩하게 하셨던 여호와의 전을 더럽혔더라.
+1 גַּם = also
+2 כָּל־ = all
+3 שָׂרֵי = [the] leaders of (ruler)
+4 הַכֹּהֲנִים = the priests (priest)
+5 וְהָעָם = and the people (people)
+6 הִרְבּוּ = they increased (to multiply)
+7 לִמְעָל = to act unfaithfully (be unfaithful)
+8 מַעַל = unfaithfulness
+9 כְּכֹל = according to all
+10 תֹּעֲבוֹת = [the] abominations of (abomination)
+11 הַגּוֹיִם = the nations (nation)
+12 וַיְטַמְּאוּ = and they made unclean (to defile)
+13 אֶת־ = <obj.> ([Obj.])
+14 בֵּית = [the] house of (house)
+15 יְהוָה = Yahweh (LORD)
+16 אֲשֶׁר = which
+17 הִקְדִּישׁ = he had consecrated (to consecrate)
+18 בִּירוּשָׁלִָם = in Jerusalem (Jerusalem)
+
+## 14:36:15
+KO: 그리고 그들의 열조의 하나님 여호와께서 그의 사자들의 손을 통하여 그들에게 일찍 일어나 보내셨으니, 이는 그가 그의 백성과 그의 거처를 아끼셨기 때문이다.
+1 וַיִּשְׁלַח = and he sent
+2 יְהוָה = Yahweh (LORD)
+3 אֱלֹהֵי = [the] God of (God)
+4 אֲבוֹתֵיהֶם = ancestors their (father)
+5 עֲלֵיהֶם = to them
+6 בְּיַד = by [the] hand of (hand)
+7 מַלְאָכָיו = messengers his (messenger)
+8 הַשְׁכֵּם = rising early (to rise)
+9 וְשָׁלוֹחַ = and sending
+10 כִּי־ = for
+11 חָמַל = he had compassion (to spare)
+12 עַל־ = on
+13 עַמּוֹ = people his (people)
+14 וְעַל־ = and on
+15 מְעוֹנוֹ = dwelling place his (habitation)
+
+## 14:36:16
+KO: 그들이 하나님의 사자들을 비웃고, 그의 말씀들을 멸시하며, 그의 선지자들을 조롱하였으니, 여호와의 진노가 그의 백성 위에 올라 치유할 수 없게 되기까지였다.
+1 וַיִּהְיוּ = and they were (to be)
+2 מַלְעִבִים = deriding (to jest)
+3 בְּמַלְאֲכֵי = <in> [the] messengers of (messenger)
+4 הָאֱלֹהִים = <the> God (God)
+5 וּבוֹזִים = and despising (to despise)
+6 דְּבָרָיו = words his (word)
+7 וּמִתַּעְתְּעִים = and mocking (to mock)
+8 בִּנְבִאָיו = at prophets his (prophet)
+9 עַד = until
+10 עֲלוֹת = came up (to ascend)
+11 חֲמַת־ = [the] anger of (rage)
+12 יְהוָה = Yahweh (LORD)
+13 בְּעַמּוֹ = on people his (people)
+14 עַד־ = until
+15 לְאֵין = <to> there not (nothing)
+16 מַרְפֵּא = [was] healing (healing)

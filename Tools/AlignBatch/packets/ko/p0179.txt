@@ -1,0 +1,823 @@
+## 11:6:4
+KO: 그리고 그는 그 집을 위하여 좁고 닫힌 창문들을 만들었다.
+1 וַיַּעַשׂ = and he made (to make)
+2 לַבָּיִת = for the house (house)
+3 חַלּוֹנֵי = windows of (window)
+4 שְׁקֻפִים = frames (frame)
+5 אֲטֻמִים = shut (to shutter)
+
+## 11:6:5
+KO: 그리고 그가 성전의 벽 위에, 곧 그 성전의 벽들을 둘러싼 성소와 지성소를 향하여 다락(층)을 건축하였다. 그리고 그가 사방으로 골방들을 만들었다.
+1 וַיִּבֶן = and he built (to build)
+2 עַל־ = on (upon)
+3 קִיר = [the] wall of
+4 הַבַּיִת = the house
+5 יָצִיעַ = an extension (floor)
+6 סָבִיב = all around
+7 אֶת־ = <obj.> ([Obj.])
+8 קִירוֹת = [the] walls of
+9 הַבַּיִת = the house
+10 סָבִיב = around
+11 לַהֵיכָל = <to> the temple (temple)
+12 וְלַדְּבִיר = and <to> the innermost room (oracle)
+13 וַיַּעַשׂ = and he made (to make)
+14 צְלָעוֹת = side-chambers (side)
+15 סָבִיב = all around
+
+## 11:6:6
+KO: 하층 다락의 너비는 다섯 규빗이고, 중층의 너비는 여섯 규빗이고, 제삼층의 너비는 일곱 규빗이다. 이는 그가 성전 밖으로 돌아가며 턱들을 두어, 들보들이 성전 벽들에 박히지 않게 하려 함이었더라.
+1 הַיָּצִיעַ = the extension (floor)
+2 הַתַּחְתֹּנָה = <the> lower (lower)
+3 חָמֵשׁ = [was] five (five)
+4 בָּאַמָּה = by the cubit
+5 רָחְבָּהּ = breadth its
+6 וְהַתִּיכֹנָה = and the middle [extension] (middle)
+7 שֵׁשׁ = [was] six (six)
+8 בָּאַמָּה = by the cubit
+9 רָחְבָּהּ = breadth its
+10 וְהַשְּׁלִישִׁית = and <the> third [extension] (third)
+11 שֶׁבַע = [was] seven (seven)
+12 בָּאַמָּה = by the cubit
+13 רָחְבָּהּ = breadth its
+14 כִּי = for
+15 מִגְרָעוֹת = ledges (recess)
+16 נָתַן = he made (to give)
+17 לַבַּיִת = for the house
+18 סָבִיב = around
+19 חוּצָה = [the] outside towards (outside)
+20 לְבִלְתִּי = to not (lest)
+21 אֲחֹז = to have hold (to grasp)
+22 בְּקִירוֹת־ = in [the] walls of (wall)
+23 הַבָּיִת = the house
+
+## 11:6:7
+KO: 그리고 그 집은 건축될 때에, 채석장에서 가져온 다듬어진 돌로 건축되었으니, 그 집이 건축되는 동안에 망치와 도끼와 모든 철 연장 소리가 그 집 안에서 들리지 아니하였다.
+1 וְהַבַּיִת = and the house
+2 בְּהִבָּנֹתוֹ = when was built it
+3 אֶבֶן־ = stone
+4 שְׁלֵמָה = perfect (complete)
+5 מַסָּע = quarry
+6 נִבְנָה = it was built
+7 וּמַקָּבוֹת = and hammers (hammer)
+8 וְהַגַּרְזֶן = and <the> axe (axe)
+9 כָּל־ = any (all)
+10 כְּלִי = article of (article|utensil)
+11 בַרְזֶל = iron
+12 לֹא־ = not
+13 נִשְׁמַע = it was heard (to hear)
+14 בַּבַּיִת = in the house
+15 בְּהִבָּנֹתוֹ = when was built it
+
+## 11:6:8
+KO: 중간 층의 옆면 입구는 집의 오른쪽 어깨(옆)에 있었고, 나사 모양의 층계로 그들은 중간 층으로 올라가고, 중간 층에서 세 번째 층으로 (올라가게) 하였다.
+1 פֶּתַח = [the] entrance of (entrance)
+2 הַצֵּלָע = the side-chamber (side)
+3 הַתִּיכֹנָה = <the> middle
+4 אֶל־ = [was] to
+5 כֶּתֶף = [the] side of (shoulder)
+6 הַבַּיִת = the house (house)
+7 הַיְמָנִית = <the> south (right)
+8 וּבְלוּלִּים = and by stairs (stairs)
+9 יַעֲלוּ = people went up (to ascend)
+10 עַל־ = to (upon)
+11 הַתִּיכֹנָה = the middle
+12 וּמִן־ = and from (from)
+13 הַתִּיכֹנָה = the middle
+14 אֶל־ = to
+15 הַשְּׁלִשִׁים = the thirty (third)
+
+## 11:6:9
+KO: 그리고 그가 그 집을 건축하였고, 그것을 마치니라. 그리고 그가 그 집을 서까래들과 백향목 판자들로 덮었느니라.
+1 וַיִּבֶן = and he built (to build)
+2 אֶת־ = <obj.>
+3 הַבַּיִת = the house
+4 וַיְכַלֵּהוּ = and he finished it (to end)
+5 וַיִּסְפֹּן = and he covered (to cover)
+6 אֶת־ = <obj.>
+7 הַבַּיִת = the house
+8 גֵּבִים = beams (beam)
+9 וּשְׂדֵרֹת = and planks (rank)
+10 בָּאֲרָזִים = with <the> cedar<s> (cedar)
+
+## 11:6:10
+KO: 그리고 그는 성전 전체 위에 층(다락)을 건축하였는데, 그 높이는 다섯 규빗이었고, 백향목 나무들로 성전을 붙들게(연결하게) 하였다.
+1 וַיִּבֶן = and he built (to build)
+2 אֶת־ = <obj.>
+3 הַיָּצִיעַ = the extension (floor)
+4 עַל־ = on (upon)
+5 כָּל־ = all
+6 הַבַּיִת = the house
+7 חָמֵשׁ = [was] five (five)
+8 אַמּוֹת = cubits (cubit)
+9 קוֹמָתוֹ = height its (height)
+10 וַיֶּאֱחֹז = and he covered (to grasp)
+11 אֶת־ = <obj.>
+12 הַבַּיִת = the house
+13 בַּעֲצֵי = with wood<s> of (tree)
+14 אֲרָזִים פ = cedar<s> (cedar)
+
+## 11:6:11
+KO: 그리고 여호와의 말씀이 솔로몬에게 임하여 이르되
+1 וַיְהִי = and it came (to be)
+2 דְּבַר־ = [the] word of (word)
+3 יְהוָה = Yahweh (LORD)
+4 אֶל־ = to (to(wards))
+5 שְׁלֹמֹה = Solomon
+6 לֵאמֹר = <to> saying (to say)
+
+## 11:6:12
+KO: 이 집, 네가 건축하고 있는 이것, 만일 네가 나의 규례들 안에서 걷고 나의 법도들을 행하며, 그것들 안에서 행하기 위하여 나의 모든 계명들을 지킨다면, 내가 다윗 네 아버지에게 말했던 나의 말을 너와 함께 확실히 세울 것이다.
+1 הַבַּיִת = the house (house)
+2 הַזֶּה = <the> this (this)
+3 אֲשֶׁר־ = which
+4 אַתָּה = you (you(m.s.))
+5 בֹנֶה = [are] building (to build)
+6 אִם־ = if
+7 תֵּלֵךְ = you will walk
+8 בְּחֻקֹּתַי = in statutes my (statute)
+9 וְאֶת־ = and <obj.>
+10 מִשְׁפָּטַי = judgments my (justice)
+11 תַּעֲשֶׂה = you will observe (to make)
+12 וְשָׁמַרְתָּ = and you will keep (to keep)
+13 אֶת־ = <obj.>
+14 כָּל־ = all
+15 מִצְוֹתַי = commandments my (commandment)
+16 לָלֶכֶת = to walk
+17 בָּהֶם = in <the> them (them)
+18 וַהֲקִמֹתִי = and I will establish (to arise)
+19 אֶת־ = <obj.>
+20 דְּבָרִי = word my (word)
+21 אִתָּךְ = with you (with)
+22 אֲשֶׁר = which
+23 דִּבַּרְתִּי = I spoke (to speak)
+24 אֶל־ = to (to(wards))
+25 דָּוִד = David
+26 אָבִיךָ = father your (father)
+
+## 11:6:13
+KO: 그리고 내가 이스라엘 자손들의 한가운데 거할 것이며, 나의 백성 이스라엘을 버리지 아니할 것이다.
+1 וְשָׁכַנְתִּי = and I will dwell (to dwell)
+2 בְּתוֹךְ = in among (midst)
+3 בְּנֵי = [the] people of (son)
+4 יִשְׂרָאֵל = Israel
+5 וְלֹא = and not (not)
+6 אֶעֱזֹב = I will abandon (to leave)
+7 אֶת־ = <obj.> ([Obj.])
+8 עַמִּי = people my (people)
+9 יִשְׂרָאֵל ס = Israel
+
+## 11:6:14
+KO: 그리고 솔로몬이 그 집을 건축하였고, 그것을 마쳤다.
+1 וַיִּבֶן = and he built (to build)
+2 שְׁלֹמֹה = Solomon
+3 אֶת־ = <obj.> ([Obj.])
+4 הַבַּיִת = the house (house)
+5 וַיְכַלֵּהוּ = and he finished it (to end)
+
+## 11:6:15
+KO: 그리고 그가 그 집의 벽들을 안쪽으로 백향목 널판들로, 그 집의 바닥에서부터 천장의 벽들까지 나무로 안쪽을 입혔고, 그리고 그 집의 바닥을 잣나무 널판들로 입혔다.
+1 וַיִּבֶן = and he built (to build)
+2 אֶת־ = <obj.>
+3 קִירוֹת = [the] walls of
+4 הַבַּיִת = the house
+5 מִבַּיְתָה = from inside <towards>
+6 בְּצַלְעוֹת = with boards of
+7 אֲרָזִים = cedar<s> (cedar)
+8 מִקַּרְקַע = from [the] floor of
+9 הַבַּיִת = the house
+10 עַד־ = to (till)
+11 קִירוֹת = [the] walls of
+12 הַסִּפֻּן = the ceiling (ceiling)
+13 צִפָּה = he overlaid
+14 עֵץ = wood (tree)
+15 מִבָּיִת = from inside
+16 וַיְצַף = and he overlaid
+17 אֶת־ = <obj.>
+18 קַרְקַע = [the] floor of
+19 הַבַּיִת = the house
+20 בְּצַלְעוֹת = with boards of
+21 בְּרוֹשִׁים = cypresses (cypress)
+
+## 11:6:16
+KO: 그리고 그는 성전의 뒤편으로부터 이십 규빗을 백향목 널판으로 바닥에서부터 벽들(천장)까지 쌓았고, 그에게 성전 안쪽으로 지성소 곧 거룩한 것들의 거룩한 곳을 건축하였다.
+1 וַיִּבֶן = and he built
+2 אֶת־ = <obj.> ([Obj.])
+3 עֶשְׂרִים = twenty
+4 אַמָּה = cubit[s] (cubit)
+5 מִיַּרְכְּתֵי = from [the] innermost parts of (flank)
+6 הַבַּיִת = the house
+7 בְּצַלְעוֹת = with boards of (side)
+8 אֲרָזִים = cedar<s> (cedar)
+9 מִן־ = from
+10 הַקַּרְקַע = the floor (floor)
+11 עַד־ = to (till)
+12 הַקִּירוֹת = the walls (wall)
+13 וַיִּבֶן = and he built
+14 לוֹ = for <the> it (him)
+15 מִבַּיִת = from inside
+16 לִדְבִיר = to an innermost room (oracle)
+17 לְקֹדֶשׁ = to [the] holy place of
+18 הַקֳּדָשִׁים = the holy places
+
+## 11:6:17
+KO: 그리고 사십 규빗이 그 집, 곧 내 앞의 성전이었다.
+1 וְאַרְבָּעִים = and forty (forty)
+2 בָּאַמָּה = by the cubit (cubit)
+3 הָיָה = it was (to be)
+4 הַבָּיִת = the house (house)
+5 הוּא = that (he;_she;_it)
+6 הַהֵיכָל = [is] the temple (temple)
+7 לִפְנָי = <to> before me (face)
+
+## 11:6:18
+KO: 그리고 성전 안쪽의 백향목에는 박들과 피어난 꽃들의 조각이 있었고, 모두 백향목이었으며 돌은 보이지 않았다.
+1 וְאֶרֶז = and cedar
+2 אֶל־ = [was] to (to(wards))
+3 הַבַּיִת = the house (house)
+4 פְּנִימָה = within
+5 מִקְלַעַת = carving of (engraving)
+6 פְּקָעִים = gourds (gourd)
+7 וּפְטוּרֵי = and spread out [things] of (to separate)
+8 צִצִּים = flowers (flower)
+9 הַכֹּל = <the> everything (all)
+10 אֶרֶז = [was] cedar
+11 אֵין = not (nothing)
+12 אֶבֶן = stone
+13 נִרְאָה = [was] visible (to see)
+
+## 11:6:19
+KO: 그리고 성전 안쪽 가운데에 그가 지성소를 예비하였으니, 여호와의 언약궤를 그곳에 두기 위함이었다.
+1 וּדְבִיר = and an innermost room (oracle)
+2 בְּתוֹךְ־ = in [the] middle of (midst)
+3 הַבַּיִת = the house (house)
+4 מִפְּנִימָה = from within (within)
+5 הֵכִין = he prepared (to establish)
+6 לְתִתֵּן = to put (to give)
+7 שָׁם = there
+8 אֶת־ = <obj.> ([Obj.])
+9 אֲרוֹן = [the] ark of (ark)
+10 בְּרִית = [the] covenant of (covenant)
+11 יְהוָה = Yahweh (LORD)
+
+## 11:6:20
+KO: 그 내소 앞은 길이가 이십 규빗이요 너비가 이십 규빗이요 높이가 이십 규빗이며, 그가 그것을 정금으로 입혔고 백향목 제단도 입혔더라.
+1 וְלִפְנֵי = and <to> before (face)
+2 הַדְּבִיר = the innermost room (oracle)
+3 עֶשְׂרִים = [was] twenty
+4 אַמָּה = cubit[s]
+5 אֹרֶךְ = length
+6 וְעֶשְׂרִים = and [was] twenty
+7 אַמָּה = cubit[s]
+8 רֹחַב = breadth (width)
+9 וְעֶשְׂרִים = and [was] twenty
+10 אַמָּה = cubit[s]
+11 קוֹמָתוֹ = height its (height)
+12 וַיְצַפֵּהוּ = and he overlaid it
+13 זָהָב = gold
+14 סָגוּר = gold plate (to shut)
+15 וַיְצַף = and he overlaid
+16 מִזְבֵּחַ = an altar (altar)
+17 אָרֶז = cedar
+
+## 11:6:21
+KO: 그리고 솔로몬이 그 집 안쪽을 정금으로 입혔고, 금사슬들로 그 지성소(드비르) 앞에 건너지르게 하였으며, 그것(지성소)을 금으로 입혔다.
+1 וַיְצַף = and he overlaid
+2 שְׁלֹמֹה = Solomon
+3 אֶת־ = <obj.> ([Obj.])
+4 הַבַּיִת = the house (house)
+5 מִפְּנִימָה = from within (within)
+6 זָהָב = gold
+7 סָגוּר = gold plate (to shut)
+8 וַיְעַבֵּר = and he made pass (to pass)
+9 בְּרַתּוּקוֹת = with chains of (chain)
+10 זָהָב = gold
+11 לִפְנֵי = <to> before (face)
+12 הַדְּבִיר = the innermost room (oracle)
+13 וַיְצַפֵּהוּ = and he overlaid it
+14 זָהָב = gold
+
+## 11:6:22
+KO: 그리고 그 온 집을 그가 금으로 입혔으니, 온 집의 끝마침까지였다. 그리고 지성소(드비르)에 속한 모든 제단도 그가 금으로 입혔다.
+1 וְאֶת־ = and <obj.> ([Obj.])
+2 כָּל־ = all
+3 הַבַּיִת = the house
+4 צִפָּה = he overlaid
+5 זָהָב = gold
+6 עַד־ = until (till)
+7 תֹּם = was finished (to finish)
+8 כָּל־ = all
+9 הַבָּיִת = the house
+10 וְכָל־ = and all
+11 הַמִּזְבֵּחַ = the altar (altar)
+12 אֲשֶׁר־ = which
+13 לַדְּבִיר = [belonged] to the innermost room (oracle)
+14 צִפָּה = he overlaid
+15 זָהָב = gold
+
+## 11:6:23
+KO: 그리고 그가 내소 안에 기름 나무의 두 그룹들을 만들었는데, 그 높이가 십 규빗이었다.
+1 וַיַּעַשׂ = and he made (to make)
+2 בַּדְּבִיר = in the innermost room (oracle)
+3 שְׁנֵי = two
+4 כְרוּבִים = cherubim (cherub)
+5 עֲצֵי־ = wood<s> of (tree)
+6 שָׁמֶן = olive (oil)
+7 עֶשֶׂר = [was] ten (ten)
+8 אַמּוֹת = cubits (cubit)
+9 קוֹמָתוֹ = height its (height)
+
+## 11:6:24
+KO: 그리고 그룹의 한 날개는 다섯 규빗이고, 두 번째 그룹의 날개도 다섯 규빗이며, 그것의 날개 끝들로부터 그것의 날개 끝들까지는 십 규빗이다.
+1 וְחָמֵשׁ = and [was] five
+2 אַמּוֹת = cubits
+3 כְּנַף = [the] wing of
+4 הַכְּרוּב = the cherub
+5 הָאֶחָת = <the> one (one)
+6 וְחָמֵשׁ = and [was] five
+7 אַמּוֹת = cubits
+8 כְּנַף = [the] wing of
+9 הַכְּרוּב = the cherub
+10 הַשֵּׁנִית = <the> second (second)
+11 עֶשֶׂר = [was] ten (ten)
+12 אַמּוֹת = cubits
+13 מִקְצוֹת = from [the] ends of
+14 כְּנָפָיו = wings its
+15 וְעַד־ = and to (till)
+16 קְצוֹת = [the] ends of
+17 כְּנָפָיו = wings its
+
+## 11:6:25
+KO: 그리고 두 번째 그룹도 십 규빗이니, 두 그룹은 한 측량과 한 모양이었다.
+1 וְעֶשֶׂר = and [was] ten (ten)
+2 בָּאַמָּה = by the cubit (cubit)
+3 הַכְּרוּב = the cherub
+4 הַשֵּׁנִי = <the> second (second)
+5 מִדָּה = a measurement (measure)
+6 אַחַת = one
+7 וְקֶצֶב = and a shape (shape)
+8 אֶחָד = one
+9 לִשְׁנֵי = [belonged] to [the] two (two)
+10 הַכְּרֻבִים = the cherubim
+
+## 11:6:26
+KO: 그 한 그룹의 높이는 열 규빗이었고, 둘째 그룹도 그와 같았다.
+1 קוֹמַת = [the] height of (height)
+2 הַכְּרוּב = the cherub
+3 הָאֶחָד = <the> one (one)
+4 עֶשֶׂר = [was] ten (ten)
+5 בָּאַמָּה = by the cubit (cubit)
+6 וְכֵן = and thus (so)
+7 הַכְּרוּב = the cherub
+8 הַשֵּׁנִי = <the> second (second)
+
+## 11:6:27
+KO: 그리고 그는 그 그룹들을 그 안쪽 집 가운데에 두었다. 그리고 그 그룹들이 그들의 날개들을 폈는데, 한쪽의 날개는 그 벽에 닿았고, 그 두 번째 그룹의 날개는 그 두 번째 벽에 닿았으며, 그리고 그들의 날개들은 그 집의 가운데에서 날개가 날개에 닿았다.
+1 וַיִּתֵּן = and he put (to give)
+2 אֶת־ = <obj.>
+3 הַכְּרוּבִים = the cherubim
+4 בְּתוֹךְ = in [the] middle of
+5 הַבַּיִת = the house
+6 הַפְּנִימִי = <the> inner (inner)
+7 וַיִּפְרְשׂוּ = and they spread out (to spread)
+8 אֶת־ = <obj.>
+9 כַּנְפֵי = [the] wings of
+10 הַכְּרֻבִים = the cherubim
+11 וַתִּגַּע = and it touched
+12 כְּנַף־ = [the] wing of
+13 הָאֶחָד = the one [cherub] (one)
+14 בַּקִּיר = <in> the wall
+15 וּכְנַף = and [the] wing of
+16 הַכְּרוּב = the cherub
+17 הַשֵּׁנִי = <the> second
+18 נֹגַעַת = [was] touching
+19 בַּקִּיר = <in> the wall
+20 הַשֵּׁנִי = <the> second
+21 וְכַנְפֵיהֶם = and wings their
+22 אֶל־ = to
+23 תּוֹךְ = [the] middle of
+24 הַבַּיִת = the house
+25 נֹגְעֹת = [were] touching
+26 כָּנָף = wing
+27 אֶל־ = to
+28 כָּנָף = wing
+
+## 11:6:28
+KO: 그리고 그가 그룹들을 금으로 입혔다.
+1 וַיְצַף = and he overlaid (to overlay)
+2 אֶת־ = <obj.> ([Obj.])
+3 הַכְּרוּבִים = the cherubim (cherub)
+4 זָהָב = gold
+
+## 11:6:29
+KO: 그리고 집의 모든 사면 벽에 그룹들과 종려나무들과 핀 꽃들의 아로새긴 조각들을 안쪽과 바깥쪽에 새겼더라.
+1 וְאֵת = and <obj.> ([Obj.])
+2 כָּל־ = all
+3 קִירוֹת = [the] walls of (wall)
+4 הַבַּיִת = the house (house)
+5 מֵסַב = round about (surrounds)
+6 קָלַע = he carved (to carve)
+7 פִּתּוּחֵי = engravings of (engraving)
+8 מִקְלְעוֹת = carvings of (engraving)
+9 כְּרוּבִים = cherubim (cherub)
+10 וְתִמֹרֹת = and palm trees (palm)
+11 וּפְטוּרֵי = and spread out [things] of (to separate)
+12 צִצִּים = flowers (flower)
+13 מִלִּפְנִים = from to faces (face)
+14 וְלַחִיצוֹן = and to the outer (outer)
+
+## 11:6:30
+KO: 그리고 그 집의 바닥을 금으로 입혔으니, 안쪽과 바깥쪽이다.
+1 וְאֶת־ = and <obj.> ([Obj.])
+2 קַרְקַע = [the] floor of (floor)
+3 הַבַּיִת = the house (house)
+4 צִפָּה = he overlaid (to overlay)
+5 זָהָב = gold
+6 לִפְנִימָה = to within (within)
+7 וְלַחִיצוֹן = and to the outer (outer)
+
+## 11:6:31
+KO: 그리고 내소의 입구에 그는 감람나무의 문들을 만들었다. 그 문 인방과 문설주들은 다섯째(오분의 일)이다.
+1 וְאֵת = and <obj.> ([Obj.])
+2 פֶּתַח = [the] entrance of (entrance)
+3 הַדְּבִיר = the innermost room (oracle)
+4 עָשָׂה = he made (to make)
+5 דַּלְתוֹת = doors of (door)
+6 עֲצֵי־ = wood<s> of (tree)
+7 שָׁמֶן = olive (oil)
+8 הָאַיִל = the pillar (pillar)
+9 מְזוּזוֹת = doorposts of (doorpost)
+10 חֲמִשִׁית = fifth
+
+## 11:6:32
+KO: 그리고 감람나무의 두 문짝 위에 그는 그룹들과 종려나무들과 꽃들의 조각들을 새겼고, 금으로 입혔으니, 곧 그 그룹들과 그 종려나무들 위로 금을 입혔더라.
+1 וּשְׁתֵּי = and two (two)
+2 דַּלְתוֹת = doors of (door)
+3 עֲצֵי־ = wood<s> of (tree)
+4 שֶׁמֶן = olive (oil)
+5 וְקָלַע = and he carved (to carve)
+6 עֲלֵיהֶם = on them
+7 מִקְלְעוֹת = carvings of (engraving)
+8 כְּרוּבִים = cherubim
+9 וְתִמֹרוֹת = and palm trees
+10 וּפְטוּרֵי = and spread out [things] of (to separate)
+11 צִצִּים = flowers (flower)
+12 וְצִפָּה = and he overlaid [them] (to overlay)
+13 זָהָב = gold
+14 וַיָּרֶד = and he hammered out (to subdue)
+15 עַל־ = on
+16 הַכְּרוּבִים = the cherubim
+17 וְעַל־ = and on
+18 הַתִּמֹרוֹת = the palm trees
+19 אֶת־ = <obj.> ([Obj.])
+20 הַזָּהָב = the gold
+
+## 11:6:33
+KO: 그리고 그와 같이 그가 성전의 입구를 위하여 감람나무 문설주들을 만들었으니, 곧 사분의 일이다.
+1 וְכֵן = and thus (so)
+2 עָשָׂה = he made (to make)
+3 לְפֶתַח = for [the] entrance of (entrance)
+4 הַהֵיכָל = the temple (temple)
+5 מְזוּזוֹת = doorposts of (doorpost)
+6 עֲצֵי־ = wood<s> of (tree)
+7 שָׁמֶן = olive (oil)
+8 מֵאֵת = from with (with)
+9 רְבִעִית = a fourth (fourth)
+
+## 11:6:34
+KO: 그리고 잣나무의 두 문짝들, 하나의 문짝은 두 겹(접는 판)이었고, 두 번째 문짝도 두 겹(접는 판)이었다.
+1 וּשְׁתֵּי = and two
+2 דַלְתוֹת = doors of
+3 עֲצֵי = wood<s> of (tree)
+4 בְרוֹשִׁים = cypresses (cypress)
+5 שְׁנֵי = two
+6 צְלָעִים = sides (side)
+7 הַדֶּלֶת = the door
+8 הָאַחַת = <the> one (one)
+9 גְּלִילִים = [were] revolving
+10 וּשְׁנֵי = and two
+11 קְלָעִים = curtains (curtain)
+12 הַדֶּלֶת = the door
+13 הַשֵּׁנִית = <the> second (second)
+14 גְּלִילִים = [were] revolving
+
+## 11:6:35
+KO: 그리고 그(문짝) 위에 그룹들과 종려나무들과 피어 있는 꽃들을 아로새겼고, 금으로 입히되 그 새겨진 것 위에 평평하게 맞추었다.
+1 וְקָלַע = and he carved (to carve)
+2 כְּרוּבִים = cherubim (cherub)
+3 וְתִמֹרוֹת = and palm trees (palm)
+4 וּפְטֻרֵי = and spread out [things] of (to separate)
+5 צִצִּים = flowers (flower)
+6 וְצִפָּה = and he overlaid (to overlay)
+7 זָהָב = gold
+8 מְיֻשָּׁר = made smooth (to smooth)
+9 עַל־ = on (upon)
+10 הַמְּחֻקֶּה = the carved [work] (to engrave)
+
+## 11:6:36
+KO: 그리고 그가 안뜰을 건축하였다, 다듬은 돌 세 켜와, 백향목 판자 한 켜로.
+1 וַיִּבֶן = and he built (to build)
+2 אֶת־ = <obj.> ([Obj.])
+3 הֶחָצֵר = the court (court)
+4 הַפְּנִימִית = <the> inner (inner)
+5 שְׁלֹשָׁה = three
+6 טוּרֵי = rows of
+7 גָזִית = hewn [stone] (cutting)
+8 וְטוּר = and a row of
+9 כְּרֻתֹת = beams of (beam)
+10 אֲרָזִים = cedar<s> (cedar)
+
+## 11:6:37
+KO: 그 넷째 해에 여호와의 집이 기초 놓였다, 시브월에.
+1 בַּשָּׁנָה = in the year (year)
+2 הָרְבִיעִית = <the> fourth (fourth)
+3 יֻסַּד = it was founded (to found)
+4 בֵּית = [the] house of (house)
+5 יְהוָה = Yahweh (LORD)
+6 בְּיֶרַח = in [the] month of (month)
+7 זִו = Ziv
+
+## 11:6:38
+KO: 그리고 열한 번째 해, 불 월 곧 여덟째 달에, 그 집이 그것의 모든 말들과 그것의 모든 규례들에 따라 끝마쳐졌다. 그리고 그가 칠 년 동안 그것을 건축하였다.
+1 וּבַשָּׁנָה = and in the year
+2 הָאַחַת = <the> one [plus] (one)
+3 עֶשְׂרֵה = ten
+4 בְּיֶרַח = in [the] month of (month)
+5 בּוּל = Bul
+6 הוּא = that (he;_she;_it)
+7 הַחֹדֶשׁ = [was] the month (month)
+8 הַשְּׁמִינִי = <the> eighth (eighth)
+9 כָּלָה = it was complete (to end)
+10 הַבַּיִת = the house (house)
+11 לְכָל־ = to all
+12 דְּבָרָיו = parts its (word)
+13 וּלְכָל־ = and to all
+14 מִשְׁפָּטָיו = plans its (justice)
+15 וַיִּבְנֵהוּ = and he built it (to build)
+16 שֶׁבַע = seven
+17 שָׁנִים = years
+
+## 11:7:1
+KO: 그리고 솔로몬이 자신의 집을 십삼 년 동안 건축하였고, 그가 그의 모든 집을 완공하였다.
+1 וְאֶת־ = and <obj.>
+2 בֵּיתוֹ = own house his
+3 בָּנָה = he built (to build)
+4 שְׁלֹמֹה = Solomon
+5 שְׁלֹשׁ = thir- (three)
+6 עֶשְׂרֵה = teen (ten)
+7 שָׁנָה = year[s] (year)
+8 וַיְכַל = and he completed (to end)
+9 אֶת־ = <obj.>
+10 כָּל־ = all
+11 בֵּיתוֹ = house his
+
+## 11:7:2
+KO: 그리고 그는 ‘레바논 숲의 집’을 건축하였으니, 길이가 백 규빗이요, 너비가 오십 규빗이요, 높이가 삼십 규빗이라. 백향목 기둥 네 줄과 기둥들 위에 백향목 들보들이 있더라.
+1 וַיִּבֶן = and he built (to build)
+2 אֶת־ = <obj.> ([Obj.])
+3 בֵּית = [the] House of (House)
+4 יַעַר = [the] Forest of (wood)
+5 הַלְּבָנוֹן = <the> Lebanon (of the Forest of Lebanon)
+6 מֵאָה = [was] one hundred (hundred)
+7 אַמָּה = cubit[s]
+8 אָרְכּוֹ = length its (length)
+9 וַחֲמִשִּׁים = and [was] fifty (fifty)
+10 אַמָּה = cubit[s]
+11 רָחְבּוֹ = breadth its (width)
+12 וּשְׁלֹשִׁים = and [was] thirty (thirty)
+13 אַמָּה = cubit[s]
+14 קוֹמָתוֹ = height its (height)
+15 עַל = on
+16 אַרְבָּעָה = four
+17 טוּרֵי = rows of (row)
+18 עַמּוּדֵי = pillars of
+19 אֲרָזִים = cedar<s>
+20 וּכְרֻתוֹת = and beams of (beam)
+21 אֲרָזִים = cedar<s>
+22 עַל־ = [were] on
+23 הָעַמּוּדִים = the pillars
+
+## 11:7:3
+KO: 그리고 그것(기둥 위의 들보들)은 백향목으로 덮여 있었으니, 기둥들 위에 있는 그 측면들(들보들) 위에 있었고, 사십오 개였는데, 한 줄에 열다섯 개였다.
+1 וְסָפֻן = and [it was] paneled (to cover)
+2 בָּאֶרֶז = with <the> cedar (cedar)
+3 מִמַּעַל = from above (above)
+4 עַל־ = above
+5 הַצְּלָעֹת = the side-chambers (side)
+6 אֲשֶׁר = which
+7 עַל־ = [were] on
+8 הָעַמּוּדִים = the pillars (pillar)
+9 אַרְבָּעִים = forty
+10 וַחֲמִשָּׁה = and five
+11 חֲמִשָּׁה = fif-
+12 עָשָׂר = teen (ten)
+13 הַטּוּר = the row (row)
+
+## 11:7:4
+KO: 그리고 창틀들이 세 줄이었고, 창문이 창문을 향하여 세 번(층)이었다.
+1 וּשְׁקֻפִים = and window frames (frame)
+2 שְׁלֹשָׁה = three
+3 טוּרִים = rows (row)
+4 וּמֶחֱזָה = and window
+5 אֶל־ = [was] to (to(wards))
+6 מֶחֱזָה = window
+7 שָׁלֹשׁ = three
+8 פְּעָמִים = times (beat)
+
+## 11:7:5
+KO: 그리고 모든 문들과 문설주들은 네모진 틀이었고, 창문들이 세 층으로 서로 맞대어 있었다.
+1 וְכָל־ = and all (all)
+2 הַפְּתָחִים = the openings (entrance)
+3 וְהַמְּזוּזוֹת = and the doorposts (doorpost)
+4 רְבֻעִים = [were] square (to square)
+5 שָׁקֶף = frame-work (frame)
+6 וּמוּל = and [the] front (opposite)
+7 מֶחֱזָה = window
+8 אֶל־ = [was] to (to(wards))
+9 מֶחֱזָה = window
+10 שָׁלֹשׁ = three
+11 פְּעָמִים = times (beat)
+
+## 11:7:6
+KO: 그리고 기둥들의 낭실을 만들었으니, 그 길이가 오십 규빗이요 그 너비가 삼십 규빗이며, 또 그들 앞에 낭실이 있고, 또 그들 앞에 기둥들과 섬돌이 있더라.
+1 וְאֵת = and <obj.> ([Obj.])
+2 אוּלָם = [the] porch of
+3 הָעַמּוּדִים = the pillars
+4 עָשָׂה = he made (to make)
+5 חֲמִשִּׁים = [was] fifty (fifty)
+6 אַמָּה = cubit[s]
+7 אָרְכּוֹ = length its (length)
+8 וּשְׁלֹשִׁים = and [was] thirty (thirty)
+9 אַמָּה = cubit[s]
+10 רָחְבּוֹ = breadth its (width)
+11 וְאוּלָם = and a porch
+12 עַל־ = [was] on
+13 פְּנֵיהֶם = face their
+14 וְעַמֻּדִים = and pillars
+15 וְעָב = and a threshold (threshold)
+16 עַל־ = [were] on
+17 פְּנֵיהֶם = face their
+
+## 11:7:7
+KO: 그리고 그가 심판을 위한 보좌의 낭실 곧 재판의 낭실을 만들었고, 바닥에서부터 바닥까지 백향목으로 덮었다.
+1 וְאוּלָם = and [the] porch of
+2 הַכִּסֵּא = the throne (of the Throne)
+3 אֲשֶׁר = where (which)
+4 יִשְׁפָּט־ = he gave judgment (to judge)
+5 שָׁם = there
+6 אֻלָם = [the] porch of
+7 הַמִּשְׁפָּט = <the> judgment (of Judgment)
+8 עָשָׂה = he made (to make)
+9 וְסָפוּן = and [it was] paneled (to cover)
+10 בָּאֶרֶז = with <the> cedar (cedar)
+11 מֵהַקַּרְקַע = from the floor
+12 עַד־ = to (till)
+13 הַקַּרְקָע = the floor
+
+## 11:7:8
+KO: 그가 거처하는 그의 집은 낭실 뒤 다른 뜰에 있었으니, 이 공작과 같았고, 솔로몬이 그가 취한 바로의 딸을 위하여 집을 지었는데, 이 낭실과 같았다.
+1 וּבֵיתוֹ = and own house his
+2 אֲשֶׁר־ = where
+3 יֵשֶׁב = he dwelt (to dwell)
+4 שָׁם = there
+5 חָצֵר = [the] court (court)
+6 הָאַחֶרֶת = <the> other (another)
+7 מִבֵּית = from inside
+8 לָאוּלָם = to the porch
+9 כַּמַּעֲשֶׂה = like the workmanship (deed)
+10 הַזֶּה = <the> this
+11 הָיָה = it was (to be)
+12 וּבַיִת = and a house
+13 יַעֲשֶׂה = he made (to make)
+14 לְבַת־ = for [the] daughter of (daughter)
+15 פַּרְעֹה = Pharaoh
+16 אֲשֶׁר = whom
+17 לָקַח = he had taken (to take)
+18 שְׁלֹמֹה = Solomon
+19 כָּאוּלָם = like the porch
+20 הַזֶּה = <the> this
+
+## 11:7:9
+KO: 이 모든 돌들은 귀한 돌들이니, 척수에 따라 다듬은 돌들이며, 안쪽에서부터 바깥쪽까지, 그리고 기초석에서부터 처마까지, 또한 바깥쪽에서부터 큰 뜰에 이르기까지 톱으로 켜진 것들이라.
+1 כָּל־ = all
+2 אֵלֶּה = these
+3 אֲבָנִים = [were] stones (stone)
+4 יְקָרֹת = costly (precious)
+5 כְּמִדֹּת = according to measurements of (measure)
+6 גָּזִית = hewn [stone] (cutting)
+7 מְגֹרָרוֹת = sawn (to drag|chew|saw)
+8 בַּמְּגֵרָה = with <the> saw (saw)
+9 מִבַּיִת = from inside (house)
+10 וּמִחוּץ = and from outside
+11 וּמִמַּסָּד = and from [the] foundation (foundation)
+12 עַד־ = to
+13 הַטְּפָחוֹת = the coping stone (handbreadth)
+14 וּמִחוּץ = and from [the] outside
+15 עַד־ = to
+16 הֶחָצֵר = the court (court)
+17 הַגְּדוֹלָה = <the> great (great)
+
+## 11:7:10
+KO: 그리고 기초가 놓였다, 귀한 돌들과 큰 돌들, 십 규빗의 돌들과 팔 규빗의 돌들.
+1 וּמְיֻסָּד = and [it was] founded (to found)
+2 אֲבָנִים = stones
+3 יְקָרוֹת = costly (precious)
+4 אֲבָנִים = stones
+5 גְּדֹלוֹת = large (great)
+6 אַבְנֵי = stones of
+7 עֶשֶׂר = ten
+8 אַמּוֹת = cubits
+9 וְאַבְנֵי = and stones of
+10 שְׁמֹנֶה = eight
+11 אַמּוֹת = cubits
+
+## 11:7:11
+KO: 그리고 위로부터는 척수대로 다듬은 귀한 돌들이 있고, 또한 백향목들이 있다.
+1 וּמִלְמַעְלָה = and [were] from to above <towards> (above)
+2 אֲבָנִים = stones (stone)
+3 יְקָרוֹת = costly (precious)
+4 כְּמִדּוֹת = according to measurements of (measure)
+5 גָּזִית = hewn [stone] (cutting)
+6 וָאָרֶז = and cedar (cedar)
+
+## 11:7:12
+KO: 그리고 그 큰 뜰 둘레에는 다듬은 돌 세 켜와 백향목 두꺼운 판자 한 켜가 있으니, 여호와의 안뜰과 그 집의 낭실에도 그와 같았더라.
+1 וְחָצֵר = and [the] court
+2 הַגְּדוֹלָה = <the> great (great)
+3 סָבִיב = [were] all around (around)
+4 שְׁלֹשָׁה = three
+5 טוּרִים = rows
+6 גָּזִית = hewn [stone] (cutting)
+7 וְטוּר = and a row of
+8 כְּרֻתֹת = beams of (beam)
+9 אֲרָזִים = cedar<s> (cedar)
+10 וְלַחֲצַר = and to [the] court of
+11 בֵּית־ = [the] house of
+12 יְהוָה = Yahweh (LORD)
+13 הַפְּנִימִית = <the> inner (inner)
+14 וּלְאֻלָם = and to [the] porch of (porch)
+15 הַבָּיִת פ = the house
+
+## 11:7:13
+KO: 그리고 솔로몬 왕이 보내어 두로로부터 히람을 취하였다.
+1 וַיִּשְׁלַח = and he sent (to send)
+2 הַמֶּלֶךְ = the king (king)
+3 שְׁלֹמֹה = Solomon
+4 וַיִּקַּח = and he brought (to take)
+5 אֶת־ = <obj.> ([Obj.])
+6 חִירָם = Hiram
+7 מִצֹּר = from Tyre (Tyre)
+
+## 11:7:14
+KO: 그는 납달리 지파의 과부인 한 여인의 아들이었고, 그의 아버지는 두로 사람으로 놋을 다루는 기술자였더라. 그는 지혜와 총명과 지식을 가득 채워 놋으로 된 모든 일을 행하는 자였으며, 솔로몬 왕에게 와서 그의 모든 일을 행하였더라.
+1 בֶּן־ = [was] a son of (son)
+2 אִשָּׁה = a woman (woman)
+3 אַלְמָנָה = a widow (widow)
+4 הוּא = he (he;_she;_it)
+5 מִמַּטֵּה = from [the] tribe of (tribe)
+6 נַפְתָּלִי = Naphtali
+7 וְאָבִיו = and father his (father)
+8 אִישׁ־ = [was] a man (man)
+9 צֹרִי = Tyrian
+10 חֹרֵשׁ = a worker (to plow|plot|engrave)
+11 נְחֹשֶׁת = of bronze
+12 וַיִּמָּלֵא = and he was filled (to fill)
+13 אֶת־ = <obj.>
+14 הַחָכְמָה = the wisdom (wisdom)
+15 וְאֶת־ = and <obj.>
+16 הַתְּבוּנָה = the skill (understanding)
+17 וְאֶת־ = and <obj.>
+18 הַדַּעַת = the knowledge (knowledge)
+19 לַעֲשׂוֹת = to do
+20 כָּל־ = any
+21 מְלָאכָה = work
+22 בַּנְּחֹשֶׁת = with <the> bronze
+23 וַיָּבוֹא = and he came (to come (in))
+24 אֶל־ = to (to(wards))
+25 הַמֶּלֶךְ = the king (king)
+26 שְׁלֹמֹה = Solomon
+27 וַיַּעַשׂ = and he did
+28 אֶת־ = <obj.>
+29 כָּל־ = all
+30 מְלַאכְתּוֹ = work his
+
+## 11:7:15
+KO: 그리고 그가 놋으로 된 두 기둥을 만들었으니, 한 기둥의 높이는 십팔 규빗이며, 십이 규빗의 줄이 제이 기둥을 두를 수 있었다.
+1 וַיָּצַר = and he fashioned (to form)
+2 אֶת־ = <obj.>
+3 שְׁנֵי = [the] two
+4 הָעַמּוּדִים = the pillars
+5 נְחֹשֶׁת = bronze
+6 שְׁמֹנֶה = [was] eight- (eight)
+7 עֶשְׂרֵה = teen
+8 אַמָּה = cubit[s]
+9 קוֹמַת = [the] height of (height)
+10 הָעַמּוּד = the pillar
+11 הָאֶחָד = <the> one (one)
+12 וְחוּט = and a line of (thread)
+13 שְׁתֵּים־ = two [plus]
+14 עֶשְׂרֵה = ten
+15 אַמָּה = cubit[s]
+16 יָסֹב = it went round (to turn)
+17 אֶת־ = <obj.>
+18 הָעַמּוּד = the pillar
+19 הַשֵּׁנִי = <the> second (second)

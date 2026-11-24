@@ -1,0 +1,235 @@
+## 42:5:33
+KO: 그들이 그에게 말하였다. "어찌하여 요한의 제자들은 자주 금식하고 간구를 드리며, 또한 바리새인들의 제자들도 그러한데, 당신의 제자들은 먹고 마십니까?"
+1 οἱ = <the> (the/this/who)
+2 δὲ = And (but/and)
+3 εἶπαν = they said (to say)
+4 πρὸς = to (to/with)
+5 αὐτόν· = Him; (he/she/it/self)
+6 διὰ = through (through/because of)
+7 τί = why (which?)
+8 οἱ = The (the/this/who)
+9 μαθηταὶ = disciples (disciple)
+10 Ἰωάννου = of John (John)
+11 νηστεύουσιν = fast (to fast)
+12 πυκνὰ = often
+13 καὶ = and
+14 δεήσεις = prayers (petition)
+15 ποιοῦνται = make, (to do/make)
+16 ὁμοίως = likewise (similarly)
+17 καὶ = also (and)
+18 οἱ = those (the/this/who)
+19 τῶν = of the (the/this/who)
+20 Φαρισαίων = Pharisees, (Pharisee)
+21 οἱ = those (the/this/who)
+22 δὲ = however (but/and)
+23 σοὶ = of You (your)
+24 ἐσθίουσιν = eat (to eat)
+25 καὶ = and
+26 πίνουσιν = drink. (to drink)
+
+## 42:5:34
+KO: 예수께서 그들에게 말씀하셨다. "혼인 잔치 집의 아들들이 신랑이 그들과 함께 있는 동안에 금식하게 할 수 있느냐?"
+1 Ὁ = <the> (the/this/who)
+2 δὲ = And (but/and)
+3 Ἰησοῦς = Jesus (Jesus/Joshua)
+4 εἶπεν = said (to say)
+5 πρὸς = to (to/with)
+6 αὐτούς· = them; (he/she/it/self)
+7 μὴ = Not
+8 δύνασθε = are you able (be able)
+9 τοὺς = the (the/this/who)
+10 υἱοὺς = sons (son)
+11 τοῦ = of the (the/this/who)
+12 νυμφῶνος = bridechamber (bridegroom)
+13 ἐν = in (in/on/among)
+14 ᾧ = which [time] (which)
+15 ὁ = the (the/this/who)
+16 νυμφίος = bridegroom
+17 μετ᾽ = with (with/after)
+18 αὐτῶν = them (he/she/it/self)
+19 ἐστιν = is, (to be)
+20 ποιῆσαι = to make (to do/make)
+21 νηστεῦσαι; = to fast? (to fast)
+
+## 42:5:35
+KO: 그러나 그 날들이 이를 것이니, 신랑이 그들에게서 빼앗길 그때에 그들이 그 날들에는 금식할 것이다.
+1 ἐλεύσονται = Will come (to come/go)
+2 δὲ = however (but/and)
+3 ἡμέραι = days (day)
+4 καὶ = also (and)
+5 ὅταν = when (when(-ever))
+6 ἀπαρθῇ = may be taken away (to take away)
+7 ἀπ᾽ = from (away from)
+8 αὐτῶν = them (he/she/it/self)
+9 ὁ = the (the/this/who)
+10 νυμφίος = bridegroom, (bridegroom)
+11 τότε = then
+12 νηστεύσουσιν = they will fast (to fast)
+13 ἐν = in (in/on/among)
+14 ἐκείναις = those (that)
+15 ταῖς = <the> (the/this/who)
+16 ἡμέραις = days. (day)
+
+## 42:5:36
+KO: 그리고 그분은 그들에게 한 비유를 말씀하셨다. "아무도 새 옷으로부터 조각을 찢어 낡은 옷 위에 붙이지 않는다. 만일 그렇지 않으면, (그는) 새 옷을 찢을 것이며, 또한 새 옷으로부터 온 조각은 낡은 것과 어울리지 않을 것이다."
+1 ἔλεγεν = He was speaking (to speak)
+2 δὲ = now (but/and)
+3 καὶ = also (and)
+4 παραβολὴν = a parable (parable)
+5 πρὸς = to (to/with)
+6 αὐτοὺς = them (he/she/it/self)
+7 ὅτι = that (that/since)
+8 οὐδεὶς = No [one] (none)
+9 ἐπίβλημα = a piece (patch)
+10 ἀπὸ = of (away from)
+11 ἱματίου = a garment (clothing)
+12 καινοῦ = new
+13 σχίσας = having torn (to split)
+14 ἐπιβάλλει = puts [it] (to put on/seize)
+15 ἐπὶ = on (upon/to/against)
+16 ἱμάτιον = a garment (clothing)
+17 παλαιόν· = old; (old)
+18 εἰ = lest (if)
+19 δὲ = then (but/and)
+20 μή = except (not)
+21 γε = indeed
+22 καὶ = also (and)
+23 τὸ = the (the/this/who)
+24 καινὸν = new
+25 σχίσει = will tear, (to split)
+26 καὶ = and
+27 τῷ = to the (the/this/who)
+28 παλαιῷ = old
+29 οὐ = not (no)
+30 συμφωνήσει = it will match (to agree with)
+31 τὸ = the (the/this/who)
+32 ἐπίβλημα = piece (patch)
+33 τὸ = <the> (the/this/who)
+34 ἀπὸ = of (away from)
+35 τοῦ = the (the/this/who)
+36 καινοῦ = new. (new)
+
+## 42:5:37
+KO: 그리고 아무도 새 포도주를 낡은 가죽 부대들에 넣지 아니한다. 만일 그렇지 아니하면, 새 포도주가 그 가죽 부대들을 터뜨릴 것이요, 그리고 그것(포도주)은 쏟아질 것이며, 가죽 부대들은 멸망할 것이다.
+1 καὶ = And
+2 οὐδεὶς = no [one] (none)
+3 βάλλει = puts (to throw)
+4 οἶνον = wine
+5 νέον = new
+6 εἰς = into (toward)
+7 ἀσκοὺς = wineskins (wineskin)
+8 παλαιούς· = old; (old)
+9 εἰ = lest (if)
+10 δὲ = then (but/and)
+11 μή = except (not)
+12 γε = indeed
+13 ῥήξει = will burst (to throw violently)
+14 ὁ = the (the/this/who)
+15 οἶνος = wine
+16 ὁ = <the> (the/this/who)
+17 νέος = new
+18 τοὺς = the (the/this/who)
+19 ἀσκοὺς = wineskins (wineskin)
+20 καὶ = and
+21 αὐτὸς = it (he/she/it/self)
+22 ἐκχυθήσεται = will be spilled out, (to pour out)
+23 καὶ = and
+24 οἱ = the (the/this/who)
+25 ἀσκοὶ = wineskins (wineskin)
+26 ἀπολοῦνται· = will be destroyed; (to destroy)
+
+## 42:5:38
+KO: 그러나 새 포도주는 새 부대에 넣어야 한다, 그리고 둘 다 보존된다.
+1 ἀλλ᾽ = But
+2 οἶνον = wine
+3 νέον = new
+4 εἰς = into (toward)
+5 ἀσκοὺς = wineskins (wineskin)
+6 καινοὺς = fresh (new)
+7 βλητέον = must be put
+8 καὶ = and
+9 ἀμφότεροι = both
+10 συντηροῦνται = are preserved. (to preserve)
+
+## 42:5:39
+KO: 그리고 묵은 것을 마신 아무도 즉시 새 것을 원하지 않나니, 왜냐하면 그가 말하기를 묵은 것이 좋기 때문이라.
+1 καὶ = And
+2 οὐδεὶς = no [one] (none)
+3 πιὼν = having drunk (to drink)
+4 παλαιὸν = old [wine] (old)
+5 εὐθέως = immediately
+6 θέλει = desires (to will/desire)
+7 νέον = new, (new)
+8 λέγει = he says (to speak)
+9 γάρ· = for; (for)
+10 ὁ = The (the/this/who)
+11 παλαιὸς = old
+12 χρηστός = good (good/kind)
+13 ἐστιν = is. (to be)
+
+## 42:6:1
+KO: '둘째 첫' 안식일에 그가 곡식 밭 사이로 지나가실 때, 그의 제자들이 이삭들을 따서 손들로 비비며 먹고 있었다.
+1 Ἐγένετο = It came to pass (to be)
+2 δὲ = then (but/and)
+3 ἐν = on (in/on/among)
+4 σαββάτῳ = a Sabbath (Sabbath)
+5 δευτεροπρώτῳ = second [after the] first (second-first)
+6 διαπορεύεσθαι = [is] passing along (to travel through)
+7 αὐτὸν = He (he/she/it/self)
+8 διὰ = through (through/because of)
+9 τῶν = <the> (the/this/who)
+10 σπορίμων = grainfields, (grainfield)
+11 καὶ = and
+12 ἔτιλλον = were plucking (to pluck)
+13 οἱ = the (the/this/who)
+14 μαθηταὶ = disciples (disciple)
+15 αὐτοῦ = of Him (he/she/it/self)
+16 καὶ = and
+17 ἤσθιον = were eating (to eat)
+18 τοὺς = the (the/this/who)
+19 στάχυας = heads of grain (head of grain)
+20 ψώχοντες = rubbing [them] (to rub)
+21 ταῖς = in the (the/this/who)
+22 χερσίν = hands. (hand)
+
+## 42:6:2
+KO: 그런데 바리새인들 중 어떤 이들이 그들에게 말하기를, "어찌하여 너희는 안식일에 해서는 안 되는 일을 하느냐?" 하였다.
+1 τινὲς = Some (one)
+2 δὲ = however (but/and)
+3 τῶν = of the (the/this/who)
+4 Φαρισαίων = Pharisees (Pharisee)
+5 εἶπαν = said (to say)
+6 αὐτοῖς· = to them: (he/she/it/self)
+7 τί = Why (which?)
+8 ποιεῖτε = do you (to do/make)
+9 ὃ = that which (which)
+10 οὐκ = not (no)
+11 ἔξεστιν = it is lawful (it is permitted)
+12 ποιεῖν = to do (to do/make)
+13 ἐν = in (in/on/among)
+14 τοῖς = [on] the (the/this/who)
+15 σάββασιν; = Sabbaths? (Sabbath)
+
+## 42:6:3
+KO: 그리고 대답하여 그들에게 예수께서 말씀하셨다. "너희는 다윗이 그와 함께 있는 자들이 주렸을 때에 무엇을 행하였는지 이것조차도 읽지 못하였느냐?"
+1 καὶ = And
+2 ἀποκριθεὶς = answering (to answer)
+3 πρὸς = to (to/with)
+4 αὐτοὺς = them (he/she/it/self)
+5 εἶπεν = said (to say)
+6 ὁ = <the> (the/this/who)
+7 Ἰησοῦς· = Jesus; (Jesus/Joshua)
+8 οὐδὲ = Surely (and not)
+9 τοῦτο = this (this/he/she/it)
+10 ἀνέγνωτε = have you read (to read)
+11 ὃ = what (which)
+12 ἐποίησεν = did (to do/make)
+13 Δαυίδ = David, (David)
+14 ὅτε = when
+15 ἐπείνασεν = was hungry (to hunger)
+16 αὐτὸς = he himself (he/she/it/self)
+17 καὶ = and
+18 οἱ = those who (the/this/who)
+19 μετ᾽ = with (with/after)
+20 αὐτοῦ = him (he/she/it/self)
+21 ὄντες; = being? (to be)

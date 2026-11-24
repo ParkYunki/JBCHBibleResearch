@@ -1,0 +1,917 @@
+## 2:18:1
+KO: 그리고 미디안의 제사장이며 모세의 장인인 이드로가, 하나님께서 모세에게와 자기 백성 이스라엘에게 행하신 모든 일 곧 여호와께서 이스라엘을 애굽에서 인도하여 내신 모든 일을 들었더라.
+1 וַיִּשְׁמַע = and he heard (to hear)
+2 יִתְרוֹ = Jethro
+3 כֹהֵן = [the] priest of (priest)
+4 מִדְיָן = Midian
+5 חֹתֵן = [the] father-in-law of (relative)
+6 מֹשֶׁה = Moses
+7 אֵת = <obj.>
+8 כָּל־ = all
+9 אֲשֶׁר = that (which)
+10 עָשָׂה = he had done (to make)
+11 אֱלֹהִים = God
+12 לְמֹשֶׁה = for Moses
+13 וּלְיִשְׂרָאֵל = and for Israel
+14 עַמּוֹ = people his (people)
+15 כִּי־ = that (for)
+16 הוֹצִיא = he had brought out (to come out)
+17 יְהוָה = Yahweh (LORD)
+18 אֶת־ = <obj.>
+19 יִשְׂרָאֵל = Israel
+20 מִמִּצְרָיִם = from Egypt (Egypt)
+
+## 2:18:2
+KO: 그리고 이드로, 모세의 장인이 모세의 아내 십보라를 데려왔는데, 이는 그녀의 내보냄 이후였다.
+1 וַיִּקַּח = and he had taken (to take)
+2 יִתְרוֹ = Jethro
+3 חֹתֵן = [the] father-in-law of (relative)
+4 מֹשֶׁה = Moses
+5 אֶת־ = <obj.> ([Obj.])
+6 צִפֹּרָה = Zipporah
+7 אֵשֶׁת = [the] wife of (woman)
+8 מֹשֶׁה = Moses
+9 אַחַר = after
+10 שִׁלּוּחֶיהָ = dismissal<s> her (parting gift)
+
+## 2:18:3
+KO: 그리고 그(녀)의 두 아들을 데려왔으니, 그 하나의 이름은 게르솜이라. 이는 그가 말하기를 "내가 외국 땅에서 나그네가 되었다" 함이요.
+1 וְאֵת = and <obj.> ([Obj.])
+2 שְׁנֵי = [the] two (two)
+3 בָנֶיהָ = sons her (son)
+4 אֲשֶׁר = who (which)
+5 שֵׁם = [the] name of (name)
+6 הָאֶחָד = the one (one)
+7 גֵּרְשֹׁם = [was] Gershom (Gershom)
+8 כִּי = for
+9 אָמַר = he had said (to say)
+10 גֵּר = a sojourner (sojourner)
+11 הָיִיתִי = I have become (to be)
+12 בְּאֶרֶץ = in a land (land)
+13 נָכְרִיָּה = foreign
+
+## 2:18:4
+KO: 그리고 하나의 이름은 엘리에셀이라, 이는 내 아버지의 하나님이 나의 도움이 되셔서 바로의 칼에서 나를 구원하셨기 때문이라.
+1 וְשֵׁם = and [the] name of (name)
+2 הָאֶחָד = the one (one)
+3 אֱלִיעֶזֶר = [was] Eliezer (Eliezer)
+4 כִּי־ = for
+5 אֱלֹהֵי = [the] God of (God)
+6 אָבִי = father my (father)
+7 בְּעֶזְרִי = [has been] <in> help my (helper)
+8 וַיַּצִּלֵנִי = and he has delivered me (to rescue)
+9 מֵחֶרֶב = from [the] sword of (sword)
+10 פַּרְעֹה = Pharaoh
+
+## 2:18:5
+KO: 이드로가, 곧 모세의 장인이, 모세의 아들들과 그의 아내를 데리고 모세에게 광야로 왔는데, 그곳은 그가 하나님의 산에 진 치고 있는 곳이라.
+1 וַיָּבֹא = and he came (to come (in))
+2 יִתְרוֹ = Jethro
+3 חֹתֵן = [the] father-in-law of (relative)
+4 מֹשֶׁה = Moses
+5 וּבָנָיו = and sons his (son)
+6 וְאִשְׁתּוֹ = and wife his (woman)
+7 אֶל־ = to
+8 מֹשֶׁה = Moses
+9 אֶל־ = into
+10 הַמִּדְבָּר = the wilderness (wilderness)
+11 אֲשֶׁר־ = where (which)
+12 הוּא = he (he;_she;_it)
+13 חֹנֶה = [was] encamped (to camp)
+14 שָׁם = there
+15 הַר = [the] mountain of (mountain)
+16 הָאֱלֹהִים = <the> God (God)
+
+## 2:18:6
+KO: 그가 모세에게 이르기를 "나, 그대의 장인 이드로가 그대의 아내와 그녀와 함께한 그녀의 두 아들과 함께 그대에게 왔노라" 하였다.
+1 וַיֹּאמֶר = and he said (to say)
+2 אֶל־ = to
+3 מֹשֶׁה = Moses
+4 אֲנִי = I
+5 חֹתֶנְךָ = father-in-law your (relative)
+6 יִתְרוֹ = Jethro
+7 בָּא = [am] coming (to come (in))
+8 אֵלֶיךָ = to you
+9 וְאִשְׁתְּךָ = and wife your (woman)
+10 וּשְׁנֵי = and [the] two (two)
+11 בָנֶיהָ = sons her (son)
+12 עִמָּהּ = with her (with)
+
+## 2:18:7
+KO: 그리고 모세가 그의 장인을 맞으러 나갔고, 그에게 절하였으며, 그에게 입 맞추었고, 그들이 각자 자기 이웃에게 평안을 물었으며, 그들이 장막 안으로 들어왔다.
+1 וַיֵּצֵא = and he went out (to come out)
+2 מֹשֶׁה = Moses
+3 לִקְרַאת = to meet (to encounter)
+4 חֹתְנוֹ = father-in-law his (relative)
+5 וַיִּשְׁתַּחוּ = and he bowed down (to bow)
+6 וַיִּשַּׁק־ = and he kissed (to kiss)
+7 לוֹ = <to> him (him)
+8 וַיִּשְׁאֲלוּ = and they asked (to ask)
+9 אִישׁ־ = each (man)
+10 לְרֵעֵהוּ = of neighbor his (neighbor)
+11 לְשָׁלוֹם = to welfare (peace)
+12 וַיָּבֹאוּ = and they went (to come (in))
+13 הָאֹהֱלָה = the tent towards (tent)
+
+## 2:18:8
+KO: 모세가 그의 장인에게 여호와께서 이스라엘 때문에 바로와 애굽 사람에게 행하신 모든 일과, 그들이 길에서 겪은 모든 고난과, 여호와께서 그들을 구원하신 일을 다 말하였다.
+1 וַיְסַפֵּר = and he recounted (to recount)
+2 מֹשֶׁה = Moses
+3 לְחֹתְנוֹ = to father-in-law his (relative)
+4 אֵת = <obj.>
+5 כָּל־ = all
+6 אֲשֶׁר = that
+7 עָשָׂה = he had done (to make)
+8 יְהוָה = Yahweh
+9 לְפַרְעֹה = to Pharaoh (Pharaoh)
+10 וּלְמִצְרַיִם = and to Egypt (Egypt)
+11 עַל = on (upon)
+12 אוֹדֹת = [the] causes of (because)
+13 יִשְׂרָאֵל = Israel
+14 אֵת = <obj.>
+15 כָּל־ = all
+16 הַתְּלָאָה = the hardship (hardship)
+17 אֲשֶׁר = which
+18 מְצָאָתַם = it had come upon them (to find)
+19 בַּדֶּרֶךְ = on the journey (way)
+20 וַיַּצִּלֵם = and he had delivered them (to rescue)
+21 יְהוָה = Yahweh
+
+## 2:18:9
+KO: 그리고 이드로가 기뻐하였다, 여호와께서 이스라엘에게 행하신 모든 선하심 위에, 곧 그분께서 그를 애굽 사람의 손에서 구원하신 것에 대하여.
+1 וַיִּחַדְּ = and he rejoiced (to rejoice)
+2 יִתְרוֹ = Jethro
+3 עַל = on (upon)
+4 כָּל־ = all
+5 הַטּוֹבָה = the good (welfare)
+6 אֲשֶׁר־ = which
+7 עָשָׂה = he had done (to make)
+8 יְהוָה = Yahweh (LORD)
+9 לְיִשְׂרָאֵל = to Israel (Israel)
+10 אֲשֶׁר = whom
+11 הִצִּילוֹ = he had delivered it (to rescue)
+12 מִיַּד = from [the] hand of (hand)
+13 מִצְרָיִם = Egypt
+
+## 2:18:10
+KO: 이드로가 말하기를, "여호와는 찬송받으실지로다. 그분은 너희를 이집트의 손과 파라오의 손에서 건져내셨고, 그 백성을 이집트의 손 밑에서 건져내셨도다."
+1 וַיֹּאמֶר = and he said (to say)
+2 יִתְרוֹ = Jethro
+3 בָּרוּךְ = [be] blessed (to bless)
+4 יְהוָה = Yahweh (LORD)
+5 אֲשֶׁר = who
+6 הִצִּיל = he has delivered
+7 אֶתְכֶם = <obj.> you
+8 מִיַּד = from [the] hand of
+9 מִצְרַיִם = Egypt
+10 וּמִיַּד = and from [the] hand of
+11 פַּרְעֹה = Pharaoh
+12 אֲשֶׁר = who
+13 הִצִּיל = he has delivered
+14 אֶת־ = <obj.>
+15 הָעָם = the people (people)
+16 מִתַּחַת = from under (underneath)
+17 יַד־ = [the] hand of
+18 מִצְרָיִם = Egypt
+
+## 2:18:11
+KO: 이제 내가 알았노라, 여호와는 모든 신들보다 크시니, 그들이 그들에 대하여 오만하게 행했던 그 일에 있어서도 그러하도다.
+1 עַתָּה = now
+2 יָדַעְתִּי = I know (to know)
+3 כִּי־ = that
+4 גָדוֹל = [is] great (great)
+5 יְהוָה = Yahweh (LORD)
+6 מִכָּל־ = more than all (all)
+7 הָאֱלֹהִים = the gods (gods)
+8 כִּי = for
+9 בַדָּבָר = in the matter (word)
+10 אֲשֶׁר = which
+11 זָדוּ = they have acted presumptuously (to boil)
+12 עֲלֵיהֶם = on them (upon)
+
+## 2:18:12
+KO: 그리고 모세의 장인 이드로가 번제물과 희생제물들을 하나님을 위하여 가져왔고, 아론과 이스라엘의 모든 장로들이 모세의 장인과 함께 하나님 앞에서 떡(음식)을 먹으려고 왔다.
+1 וַיִּקַּח = and he took (to take)
+2 יִתְרוֹ = Jethro
+3 חֹתֵן = [the] father-in-law of
+4 מֹשֶׁה = Moses
+5 עֹלָה = a burnt offering (burnt offering)
+6 וּזְבָחִים = and sacrifices (sacrifice)
+7 לֵאלֹהִים = to God
+8 וַיָּבֹא = and he came (to come (in))
+9 אַהֲרֹן = Aaron
+10 וְכֹל = and all (all)
+11 זִקְנֵי = [the] elders of (old)
+12 יִשְׂרָאֵל = Israel
+13 לֶאֱכָל־ = to eat
+14 לֶחֶם = food
+15 עִם־ = with
+16 חֹתֵן = [the] father-in-law of
+17 מֹשֶׁה = Moses
+18 לִפְנֵי = <to> before (face)
+19 הָאֱלֹהִים = <the> God
+
+## 2:18:13
+KO: 그리고 이튿날에 모세가 백성을 재판하려고 앉았고, 백성은 아침부터 저녁까지 모세 곁에 섰더라.
+1 וַיְהִי = and it was (to be)
+2 מִמָּחֳרָת = from [the] next day (morrow)
+3 וַיֵּשֶׁב = and he sat (to dwell)
+4 מֹשֶׁה = Moses
+5 לִשְׁפֹּט = to judge
+6 אֶת־ = <obj.> ([Obj.])
+7 הָעָם = the people
+8 וַיַּעֲמֹד = and it stood (to stand)
+9 הָעָם = the people
+10 עַל־ = at (upon)
+11 מֹשֶׁה = Moses
+12 מִן־ = from
+13 הַבֹּקֶר = the morning (morning)
+14 עַד־ = until (till)
+15 הָעָרֶב = the evening (evening)
+
+## 2:18:14
+KO: 모세의 장인이 모세가 그 백성에게 행하고 있는 모든 것을 보았고, 그가 말하였다. “그대가 백성에게 행하고 있는 이 일은 무엇인가? 왜 그대는 홀로 앉아 있고, 모든 백성은 아침부터 저녁까지 그대 곁에 서 있는가?”
+1 וַיַּרְא = and he saw (to see)
+2 חֹתֵן = [the] father-in-law of (relative)
+3 מֹשֶׁה = Moses
+4 אֵת = <obj.> ([Obj.])
+5 כָּל־ = all
+6 אֲשֶׁר־ = that
+7 הוּא = he (he;_she;_it)
+8 עֹשֶׂה = [was] doing
+9 לָעָם = for the people
+10 וַיֹּאמֶר = and he said (to say)
+11 מָה־ = what?
+12 הַדָּבָר = [is] the thing (word)
+13 הַזֶּה = <the> this (this)
+14 אֲשֶׁר = which
+15 אַתָּה = you
+16 עֹשֶׂה = [are] doing
+17 לָעָם = for the people
+18 מַדּוּעַ = why?
+19 אַתָּה = [are] you
+20 יוֹשֵׁב = sitting (to dwell)
+21 לְבַדֶּךָ = to alone you (alone)
+22 וְכָל־ = and all
+23 הָעָם = the people
+24 נִצָּב = [is] standing (to stand)
+25 עָלֶיךָ = at you (upon)
+26 מִן־ = from
+27 בֹּקֶר = morning
+28 עַד־ = until (till)
+29 עָרֶב = evening
+
+## 2:18:15
+KO: 모세가 그의 장인에게 말하였다. “백성이 하나님을 찾으려고 내게로 오기 때문입니다.”
+1 וַיֹּאמֶר = and he said (to say)
+2 מֹשֶׁה = Moses
+3 לְחֹתְנוֹ = to father-in-law his (relative)
+4 כִּי־ = thatr (for)
+5 יָבֹא = it comes (to come (in))
+6 אֵלַי = to me (to(wards))
+7 הָעָם = the people (people)
+8 לִדְרֹשׁ = to consult (to seek)
+9 אֱלֹהִים = God
+
+## 2:18:16
+KO: 왜냐하면 그들에게 일이 있으면 내게로 오고, 내가 사람과 그의 이웃 사이를 판단하며, 하나님의 율례들과 그분의 법도들을 알게 하기 때문입니다.
+1 כִּי־ = for
+2 יִהְיֶה = it will be[long] (to be)
+3 לָהֶם = to them (them)
+4 דָּבָר = a matter (word)
+5 בָּא = [it is] coming (to come (in))
+6 אֵלַי = to me (to(wards))
+7 וְשָׁפַטְתִּי = and I judge (to judge)
+8 בֵּין = between
+9 אִישׁ = each (man)
+10 וּבֵין = and between
+11 רֵעֵהוּ = neighbor his (neighbor)
+12 וְהוֹדַעְתִּי = and I make known (to know)
+13 אֶת־ = <obj.>
+14 חֻקֵּי = [the] statutes of (statute)
+15 הָאֱלֹהִים = <the> God (God)
+16 וְאֶת־ = and <obj.>
+17 תּוֹרֹתָיו = laws his (instruction)
+
+## 2:18:17
+KO: 그리고 모세의 장인이 그에게 말하였다. "그대가 행하고 있는 그 일이 선하지 않도다."
+1 וַיֹּאמֶר = and he said (to say)
+2 חֹתֵן = [the] father-in-law of (relative)
+3 מֹשֶׁה = Moses
+4 אֵלָיו = to him (to(wards))
+5 לֹא־ = not
+6 טוֹב = [is] good (pleasant)
+7 הַדָּבָר = the thing (word)
+8 אֲשֶׁר = which
+9 אַתָּה = you (you(m.s.))
+10 עֹשֶׂה = [are] doing (to make)
+
+## 2:18:18
+KO: 너도 그리고 너와 함께 있는 이 백성도 필히 쇠잔할 것이니, 왜냐하면 이 일이 너에게 너무 무겁기 때문이며, 너 혼자서는 그것을 감당할 수 없을 것이기 때문이다.
+1 נָבֹל = certainly <to wear out>
+2 תִּבֹּל = you will wear yourself out
+3 גַּם־ = both
+4 אַתָּה = you (you(m.s.))
+5 גַּם־ = as well as
+6 הָעָם = the people (people)
+7 הַזֶּה = <the> this (this)
+8 אֲשֶׁר = which
+9 עִמָּךְ = [is] with you (with)
+10 כִּי־ = for
+11 כָבֵד = [is too] heavy (heavy)
+12 מִמְּךָ = for you (from)
+13 הַדָּבָר = the thing (word)
+14 לֹא־ = not
+15 תוּכַל = you are able (be able)
+16 עֲשֹׂהוּ = to do it (to make)
+17 לְבַדֶּךָ = to alone you (alone)
+
+## 2:18:19
+KO: 이제 내 음성을 들으라. 내가 너에게 조언하리니 하나님이 너와 함께 계실 것이다. 너는 백성을 위하여 하나님 앞에 있어라. 그리고 너는 그 일들을 하나님께 가져오라.
+1 עַתָּה = now
+2 שְׁמַע = listen (to hear)
+3 בְּקֹלִי = to voice my (voice)
+4 אִיעָצְךָ = let me advise you (to advise)
+5 וִיהִי = and may he be
+6 אֱלֹהִים = God
+7 עִמָּךְ = with you (with)
+8 הֱיֵה = be
+9 אַתָּה = you
+10 לָעָם = for the people (people)
+11 מוּל = in front of (opposite)
+12 הָאֱלֹהִים = <the> God
+13 וְהֵבֵאתָ = and you will bring (to come (in))
+14 אַתָּה = you
+15 אֶת־ = <obj.> ([Obj.])
+16 הַדְּבָרִים = the matters (word)
+17 אֶל־ = to (to(wards))
+18 הָאֱלֹהִים = <the> God
+
+## 2:18:20
+KO: 그리고 너는 그들에게 그 규례들과 그 가르침들을 경고하고, 그들이 그 안에서 걸어야 할 길과 그들이 행해야 할 일을 그들에게 알게 하라.
+1 וְהִזְהַרְתָּה = and you will warn (to warn)
+2 אֶתְהֶם = <obj.> them
+3 אֶת־ = <obj.>
+4 הַחֻקִּים = the statutes (statute)
+5 וְאֶת־ = and <obj.>
+6 הַתּוֹרֹת = the laws (instruction)
+7 וְהוֹדַעְתָּ = and you will make known (to know)
+8 לָהֶם = to them (them)
+9 אֶת־ = <obj.>
+10 הַדֶּרֶךְ = the way (way)
+11 יֵלְכוּ = [which] they will walk (to go)
+12 בָהּ = in it (her)
+13 וְאֶת־ = and <obj.>
+14 הַמַּעֲשֶׂה = the work (deed)
+15 אֲשֶׁר = which
+16 יַעֲשׂוּן = they will do ! (to make)
+
+## 2:18:21
+KO: 그리고 너는 모든 백성 가운데서 능력 있는 사람들 곧 하나님을 경외하는 자들, 진실한 자들, 불의한 이익을 미워하는 자들을 살펴보고, 그들 위에 천부장들과 백부장들과 오십부장들과 십부장들로 세우라.
+1 וְאַתָּה = and you (you(m.s.))
+2 תֶחֱזֶה = you will provide (to see)
+3 מִכָּל־ = from all (all)
+4 הָעָם = the people (people)
+5 אַנְשֵׁי־ = men of
+6 חַיִל = ability (strength)
+7 יִרְאֵי = [those] fearing (afraid)
+8 אֱלֹהִים = <of> God (God)
+9 אַנְשֵׁי = men of
+10 אֱמֶת = faithfulness (truth)
+11 שֹׂנְאֵי = [who] hate (to hate)
+12 בָצַע = <of> unjust gain ((unjust) gain)
+13 וְשַׂמְתָּ = and you will appoint (to set)
+14 עֲלֵהֶם = over them (upon)
+15 שָׂרֵי = officials of
+16 אֲלָפִים = thousands (thousand)
+17 שָׂרֵי = officials of
+18 מֵאוֹת = hundreds (hundred)
+19 שָׂרֵי = officials of
+20 חֲמִשִּׁים = fifties (fifty)
+21 וְשָׂרֵי = and officials of
+22 עֲשָׂרֹת = tens (ten)
+
+## 2:18:22
+KO: 그들이 모든 때에 백성을 재판하게 하라. 무릇 큰 일은 그들이 네게 가져올 것이고, 무릇 작은 일은 그들 자신이 재판할 것이니, 이것은 네게서 (짐을) 가볍게 하여 그들이 너와 함께 짊어질 것이다.
+1 וְשָׁפְטוּ = and they will judge
+2 אֶת־ = <obj.> ([Obj.])
+3 הָעָם = the people (people)
+4 בְּכָל־ = at every
+5 עֵת = time
+6 וְהָיָה = and it will be (to be)
+7 כָּל־ = every
+8 הַדָּבָר = <the> matter
+9 הַגָּדֹל = <the> great (great)
+10 יָבִיאוּ = they will bring (to come (in))
+11 אֵלֶיךָ = to you (to(wards))
+12 וְכָל־ = and every
+13 הַדָּבָר = <the> matter
+14 הַקָּטֹן = <the> small (small)
+15 יִשְׁפְּטוּ־ = they will judge
+16 הֵם = they (they(masc.))
+17 וְהָקֵל = and lighten (to lighten)
+18 מֵעָלֶיךָ = from on <the> yourself (upon)
+19 וְנָשְׂאוּ = and they will bear (to lift)
+20 אִתָּךְ = with you (with)
+
+## 2:18:23
+KO: 만일 이 일을 네가 행하고, 하나님이 너에게 명령하시면, 너는 설 수 있을 것이고, 또한 이 모든 백성도 자기 처소로 평안히 올 것이다.
+1 אִם = if
+2 אֶת־ = <obj.> ([Obj.])
+3 הַדָּבָר = the thing (word)
+4 הַזֶּה = <the> this
+5 תַּעֲשֶׂה = you will do (to make)
+6 וְצִוְּךָ = and he will command you (to command)
+7 אֱלֹהִים = God
+8 וְיָכָלְתָּ = and you will be able (be able)
+9 עֲמֹד = to endure (to stand)
+10 וְגַם = and also (also)
+11 כָּל־ = all
+12 הָעָם = the people (people)
+13 הַזֶּה = <the> this
+14 עַל־ = to (upon)
+15 מְקֹמוֹ = place its (standing place)
+16 יָבֹא = it will go (to come (in))
+17 בְשָׁלוֹם = in peace (peace)
+
+## 2:18:24
+KO: 그리고 모세가 그의 장인의 목소리를 들었고, 그가 말한 모든 것을 행하였다.
+1 וַיִּשְׁמַע = and he listened (to hear)
+2 מֹשֶׁה = Moses
+3 לְקוֹל = to [the] voice (voice)
+4 חֹתְנוֹ = father-in-law his (relative)
+5 וַיַּעַשׂ = and he did (to make)
+6 כֹּל = all
+7 אֲשֶׁר = that (which)
+8 אָמָר = he had said (to say)
+
+## 2:18:25
+KO: 모세가 온 이스라엘로부터 유능한 사람들을 선택하였고, 그들을 백성 위에 머리들, 곧 천부장들과 백부장들과 오십부장들과 십부장들로 세웠다.
+1 וַיִּבְחַר = and he chose (to choose)
+2 מֹשֶׁה = Moses
+3 אַנְשֵׁי־ = men of (human)
+4 חַיִל = ability (strength)
+5 מִכָּל־ = from all (all)
+6 יִשְׂרָאֵל = Israel
+7 וַיִּתֵּן = and he appointed (to give)
+8 אֹתָם = <obj.> them ([Obj.])
+9 רָאשִׁים = chiefs (head)
+10 עַל־ = over (upon)
+11 הָעָם = the people of (people)
+12 שָׂרֵי = icials of
+13 אֲלָפִים = thousands (thousand)
+14 שָׂרֵי = officials of
+15 מֵאוֹת = hundreds (hundred)
+16 שָׂרֵי = officials of
+17 חֲמִשִּׁים = fifties (fifty)
+18 וְשָׂרֵי = and officials of
+19 עֲשָׂרֹת = tens (ten)
+
+## 2:18:26
+KO: 그리고 그들은 모든 때에 백성을 재판하였으니, 어려운 사건은 그들이 모세에게 가져왔고 모든 작은 사건은 그들이 재판하였다.
+1 וְשָׁפְטוּ = and they judged
+2 אֶת־ = <obj.>
+3 הָעָם = the people (people)
+4 בְּכָל־ = at every
+5 עֵת = time
+6 אֶת־ = <obj.>
+7 הַדָּבָר = the matter
+8 הַקָּשֶׁה = <the> difficult (severe)
+9 יְבִיאוּן = they brought ! (to come (in))
+10 אֶל־ = to (to(wards))
+11 מֹשֶׁה = Moses
+12 וְכָל־ = and every
+13 הַדָּבָר = <the> matter
+14 הַקָּטֹן = <the> small (small)
+15 יִשְׁפּוּטוּ = they judged
+16 הֵם = they (they(masc.))
+
+## 2:18:27
+KO: 그리고 모세는 그의 장인을 보내었고, 그는 자기 땅으로 갔더라.
+1 וַיְשַׁלַּח = and he sent off (to send)
+2 מֹשֶׁה = Moses
+3 אֶת־ = <obj.> ([Obj.])
+4 חֹתְנוֹ = father-in-law his (relative)
+5 וַיֵּלֶךְ = and he went (to go)
+6 לוֹ = <for> himself (him)
+7 אֶל־ = to (to(wards))
+8 אַרְצוֹ פ = land his (land)
+
+## 2:19:1
+KO: 이스라엘 자손들이 애굽 땅에서 나온 지 제삼월, 바로 그날에 그들이 시내 광야에 이르렀다.
+1 בַּחֹדֶשׁ = in the month (month)
+2 הַשְּׁלִישִׁי = <the> third (third)
+3 לְצֵאת = of [the] going out of (to come out)
+4 בְּנֵי־ = [the] people of (son)
+5 יִשְׂרָאֵל = Israel
+6 מֵאֶרֶץ = from [the] land of (land)
+7 מִצְרָיִם = Egypt
+8 בַּיּוֹם = on the day (day;_when)
+9 הַזֶּה = <the> this (this)
+10 בָּאוּ = they came (to come (in))
+11 מִדְבַּר = [the] wilderness of (wilderness)
+12 סִינָי = Sinai (of Sinai)
+
+## 2:19:2
+KO: 그들이 르비딤에서 떠나 시내 광야에 이르러 그 광야에 진을 쳤고, 이스라엘이 거기 산 앞에 진을 쳤다.
+1 וַיִּסְעוּ = and they set out (to set out)
+2 מֵרְפִידִים = from Rephidim (Rephidim)
+3 וַיָּבֹאוּ = and they came (to come (in))
+4 מִדְבַּר = [the] wilderness of
+5 סִינַי = Sinai (of Sinai)
+6 וַיַּחֲנוּ = and they encamped
+7 בַּמִּדְבָּר = in the wilderness
+8 וַיִּחַן־ = and it encamped
+9 שָׁם = there
+10 יִשְׂרָאֵל = Israel
+11 נֶגֶד = before
+12 הָהָר = the mountain (mountain)
+
+## 2:19:3
+KO: 그리고 모세가 하나님께 올라갔고, 여호와께서 그 산으로부터 그를 불러 말씀하시기를, "너는 이같이 야곱의 집에 말하고 이스라엘 자손들에게 고하라."
+1 וּמֹשֶׁה = and Moses (Moses)
+2 עָלָה = he went up (to ascend)
+3 אֶל־ = to
+4 הָאֱלֹהִים = <the> God (God)
+5 וַיִּקְרָא = and he called (to call)
+6 אֵלָיו = to him
+7 יְהוָה = Yahweh (LORD)
+8 מִן־ = from
+9 הָהָר = the mountain (mountain)
+10 לֵאמֹר = <to> saying
+11 כֹּה = thus
+12 תֹאמַר = you will say
+13 לְבֵית = to [the] house of (house)
+14 יַעֲקֹב = Jacob
+15 וְתַגֵּיד = so you may tell (to tell)
+16 לִבְנֵי = to [the] people of (son)
+17 יִשְׂרָאֵל = Israel
+
+## 2:19:4
+KO: 너희가 보았느니라, 내가 애굽 사람들에게 행했던 것과, 내가 너희를 독수리 날개들 위에 업어 나에게로 데려온 것을.
+1 אַתֶּם = you (you(m.p.))
+2 רְאִיתֶם = you have seen (to see)
+3 אֲשֶׁר = [that] which (which)
+4 עָשִׂיתִי = I did (to make)
+5 לְמִצְרָיִם = to Egypt (Egypt)
+6 וָאֶשָּׂא = and I carried (to lift)
+7 אֶתְכֶם = <obj.> you
+8 עַל־ = on (upon)
+9 כַּנְפֵי = wings of (wing)
+10 נְשָׁרִים = eagles (eagle)
+11 וָאָבִא = and I brought (to come (in))
+12 אֶתְכֶם = <obj.> you
+13 אֵלָי = to myself (to(wards))
+
+## 2:19:5
+KO: 그리고 이제, 만일 너희가 정녕 내 음성을 듣고 내 언약을 지키면, 너희는 모든 민족 중에서 나에게 소유가 될 것이다. 왜냐하면 온 땅이 나에게 속하였기 때문이다.
+1 וְעַתָּה = and therefore (now)
+2 אִם־ = <if> (if)
+3 שָׁמוֹעַ = certainly [if] <to listen>
+4 תִּשְׁמְעוּ = you will listen
+5 בְּקֹלִי = to voice my (voice)
+6 וּשְׁמַרְתֶּם = and you will keep (to keep)
+7 אֶת־ = <obj.> ([Obj.])
+8 בְּרִיתִי = covenant my (covenant)
+9 וִהְיִיתֶם = and you will be (to be)
+10 לִי = of me
+11 סְגֻלָּה = a possession (possession)
+12 מִכָּל־ = from all
+13 הָעַמִּים = the peoples (people)
+14 כִּי־ = for
+15 לִי = [belongs] to <the> me
+16 כָּל־ = all
+17 הָאָרֶץ = the earth (land)
+
+## 2:19:6
+KO: 그리고 너희는 나에게 제사장들의 왕국이 될 것이며, 거룩한 민족이 될 것이다. 이것들이 네가 이스라엘 자손들에게 말할 그 말씀들이다.
+1 וְאַתֶּם = and you (you(m.p.))
+2 תִּהְיוּ־ = you will be (to be)
+3 לִי = for <the> me (me)
+4 מַמְלֶכֶת = a kingdom of (kingdom)
+5 כֹּהֲנִים = priests (priest)
+6 וְגוֹי = and a nation (nation)
+7 קָדוֹשׁ = holy
+8 אֵלֶּה = these
+9 הַדְּבָרִים = [are] the words (word)
+10 אֲשֶׁר = which
+11 תְּדַבֵּר = you will speak (to speak)
+12 אֶל־ = to (to(wards))
+13 בְּנֵי = [the] people of (son)
+14 יִשְׂרָאֵל = Israel
+
+## 2:19:7
+KO: 그리고 모세가 와서 백성의 장로들을 불렀고, 여호와께서 그에게 명령하신 이 모든 말씀을 그들의 앞에 두었다.
+1 וַיָּבֹא = and he went (to come (in))
+2 מֹשֶׁה = Moses
+3 וַיִּקְרָא = and he summoned (to call)
+4 לְזִקְנֵי = <to> [the] elders of (old)
+5 הָעָם = the people (people)
+6 וַיָּשֶׂם = and he set (to set)
+7 לִפְנֵיהֶם = <to> before them (face)
+8 אֵת = <obj.> ([Obj.])
+9 כָּל־ = all
+10 הַדְּבָרִים = the words (word)
+11 הָאֵלֶּה = <the> these (these)
+12 אֲשֶׁר = which
+13 צִוָּהוּ = he had commanded him (to command)
+14 יְהוָה = Yahweh (LORD)
+
+## 2:19:8
+KO: 그리고 모든 백성이 함께 대답하며 말하였다. “여호와께서 말씀하신 모든 것을 우리가 행하겠습니다.” 그리고 모세가 백성의 말들을 여호와께 돌려보냈다.
+1 וַיַּעֲנוּ = and they answered (to answer)
+2 כָל־ = all
+3 הָעָם = the people
+4 יַחְדָּו = together
+5 וַיֹּאמְרוּ = and they said (to say)
+6 כֹּל = all
+7 אֲשֶׁר־ = that (which)
+8 דִּבֶּר = he has spoken (to speak)
+9 יְהוָה = Yahweh
+10 נַעֲשֶׂה = we will do (to make)
+11 וַיָּשֶׁב = and he brought back (to return)
+12 מֹשֶׁה = Moses
+13 אֶת־ = <obj.> ([Obj.])
+14 דִּבְרֵי = [the] words of (word)
+15 הָעָם = the people
+16 אֶל־ = to (to(wards))
+17 יְהוָה = Yahweh
+
+## 2:19:9
+KO: 그리고 여호와께서 모세에게 말씀하셨다. "보라, 내가 구름의 빽빽함 속에서 네게로 나아가리니, 이는 백성이 내가 너와 말하는 것을 듣게 하려 함이며, 또한 너를 영원히 믿게 하려 함이라." 모세가 백성의 말들을 여호와께 고하였다.
+1 וַיֹּאמֶר = and he said (to say)
+2 יְהוָה = Yahweh
+3 אֶל־ = to
+4 מֹשֶׁה = Moses
+5 הִנֵּה = here! (behold)
+6 אָנֹכִי = I
+7 בָּא = [am] about to come (to come (in))
+8 אֵלֶיךָ = to you
+9 בְּעַב = in [the] dark cloud of (cloud)
+10 הֶעָנָן = the cloud (cloud)
+11 בַּעֲבוּר = inorder that (for the sake of)
+12 יִשְׁמַע = <it> may hear (to hear)
+13 הָעָם = the people
+14 בְּדַבְּרִי = when speak I (to speak)
+15 עִמָּךְ = with you (with)
+16 וְגַם־ = and also (also)
+17 בְּךָ = in <the> you (you)
+18 יַאֲמִינוּ = they will trust (be faithful)
+19 לְעוֹלָם = for ever (forever)
+20 וַיַּגֵּד = and he told (to tell)
+21 מֹשֶׁה = Moses
+22 אֶת־ = <obj.> ([Obj.])
+23 דִּבְרֵי = [the] words of (word)
+24 הָעָם = the people
+25 אֶל־ = to
+26 יְהוָה = Yahweh
+
+## 2:19:10
+KO: 그리고 여호와께서 모세에게 말씀하셨다. "너는 백성에게 가서 오늘과 내일 그들을 거룩하게 하여라. 그리고 그들이 그들의 옷을 빨게 하여라."
+1 וַיֹּאמֶר = and he said (to say)
+2 יְהוָה = Yahweh (LORD)
+3 אֶל־ = to
+4 מֹשֶׁה = Moses
+5 לֵךְ = go (to go)
+6 אֶל־ = to
+7 הָעָם = the people (people)
+8 וְקִדַּשְׁתָּם = and you will consecrate them (to consecrate)
+9 הַיּוֹם = this day (day;_when)
+10 וּמָחָר = and tomorrow (tomorrow)
+11 וְכִבְּסוּ = and they will wash (to wash)
+12 שִׂמְלֹתָם = clothes their (mantle)
+
+## 2:19:11
+KO: 그리고 그들은 제삼일을 위하여 준비될 것이다. 이는 제삼일에 여호와가 온 백성의 눈앞에서 시내 산 위로 내려올 것이기 때문이다.
+1 וְהָיוּ = and they will be (to be)
+2 נְכֹנִים = prepared (to establish)
+3 לַיּוֹם = for the day
+4 הַשְּׁלִישִׁי = <the> third
+5 כִּי = for
+6 בַּיּוֹם = on the day
+7 הַשְּׁלִישִׁי = <the> third
+8 יֵרֵד = he will come down (to go down)
+9 יְהוָה = Yahweh (LORD)
+10 לְעֵינֵי = to [the] eyes of (eye)
+11 כָל־ = all
+12 הָעָם = the people (people)
+13 עַל־ = on (upon)
+14 הַר = [the] mountain of (mountain)
+15 סִינָי = Sinai
+
+## 2:19:12
+KO: 너는 백성을 위하여 사면으로 경계를 정하고 이르기를, 너희는 스스로 삼가 산에 오르거나 그 경계 끝에 닿지 말지니, 산에 닿는 모든 자는 죽임을 당할 것이라.
+1 וְהִגְבַּלְתָּ = and you will set a boundary for (to border)
+2 אֶת־ = <obj.> ([Obj.])
+3 הָעָם = the people (people)
+4 סָבִיב = all around (around)
+5 לֵאמֹר = <to> saying (to say)
+6 הִשָּׁמְרוּ = take heed (to keep)
+7 לָכֶם = to <the> yourselves (you)
+8 עֲלוֹת = to go up (to ascend)
+9 בָּהָר = on the mountain
+10 וּנְגֹעַ = and to touch
+11 בְּקָצֵהוּ = <in> edge its (end)
+12 כָּל־ = every (all)
+13 הַנֹּגֵעַ = <the> [one who] touches
+14 בָּהָר = <in> the mountain
+15 מוֹת = certainly <to die>
+16 יוּמָת = he will be put to death
+
+## 2:19:13
+KO: 그의 위에 손을 대지 말라, 왜냐하면 그는 돌로 쳐서 죽임을 당하거나, 혹은 활로 쏘아 죽임을 당할 것이기 때문이다. 짐승이든 사람이든 살지 못할 것이다. 수양의 뿔이 길게 울려 퍼질 때, 그들은 산으로 올라올 것이다.
+1 לֹא־ = not
+2 תִגַּע = it will touch (to touch)
+3 בּוֹ = <in> <the> him (him)
+4 יָד = a hand (hand)
+5 כִּי־ = for
+6 סָקוֹל = certainly <to stone>
+7 יִסָּקֵל = he will be stoned to death
+8 אוֹ־ = or
+9 יָרֹה = certainly <to shot>
+10 יִיָּרֶה = he will be shot
+11 אִם־ = whether
+12 בְּהֵמָה = an animal (animal)
+13 אִם־ = or
+14 אִישׁ = a human (man)
+15 לֹא = not
+16 יִחְיֶה = it will live (to live)
+17 בִּמְשֹׁךְ = when sounds (to draw)
+18 הַיֹּבֵל = the ram's horn (jubilee|horn)
+19 הֵמָּה = they (they(masc.))
+20 יַעֲלוּ = they will go up (to ascend)
+21 בָהָר = on the mountain (mountain)
+
+## 2:19:14
+KO: 그리고 모세가 산으로부터 내려와 백성에게로 향했고, 그가 백성을 성결하게 하니 그들이 자기들의 옷들을 빨았다.
+1 וַיֵּרֶד = and he went down (to go down)
+2 מֹשֶׁה = Moses
+3 מִן־ = from
+4 הָהָר = the mountain (mountain)
+5 אֶל־ = to (to(wards))
+6 הָעָם = the people
+7 וַיְקַדֵּשׁ = and he consecrated (to consecrate)
+8 אֶת־ = <obj.> ([Obj.])
+9 הָעָם = the people
+10 וַיְכַבְּסוּ = and they washed (to wash)
+11 שִׂמְלֹתָם = clothes their (mantle)
+
+## 2:19:15
+KO: 그리고 그가 백성에게 말했다. "너희는 삼 일에 대비하여 있으라. 여인을 가까이하지 말라."
+1 וַיֹּאמֶר = and he said (to say)
+2 אֶל־ = to
+3 הָעָם = the people (people)
+4 הֱיוּ = be (to be)
+5 נְכֹנִים = prepared (to establish)
+6 לִשְׁלֹשֶׁת = to three (three)
+7 יָמִים = days (day;_when)
+8 אַל־ = may not (not)
+9 תִּגְּשׁוּ = you draw near (to approach)
+10 אֶל־ = to
+11 אִשָּׁה = a woman (woman)
+
+## 2:19:16
+KO: 제삼일에 아침이 되었을 때에, 산 위에 우레들과 번개들과 무거운 구름이 있었고, 매우 강한 나팔 소리가 나니 진중에 있던 모든 백성이 떨었다.
+1 וַיְהִי = and it was
+2 בַיּוֹם = on the day (day;_when)
+3 הַשְּׁלִישִׁי = <the> third (third)
+4 בִּהְיֹת = when came
+5 הַבֹּקֶר = the morning (morning)
+6 וַיְהִי = and it was
+7 קֹלֹת = thunder claps
+8 וּבְרָקִים = and lightning<s> (lightning)
+9 וְעָנָן = and a cloud (cloud)
+10 כָּבֵד = heavy
+11 עַל־ = on (upon)
+12 הָהָר = the mountain (mountain)
+13 וְקֹל = and [the] sound of
+14 שֹׁפָר = a ram's horn (trumpet)
+15 חָזָק = strong
+16 מְאֹד = very (much)
+17 וַיֶּחֱרַד = and it trembled (to tremble)
+18 כָּל־ = all
+19 הָעָם = the people (people)
+20 אֲשֶׁר = which
+21 בַּמַּחֲנֶה = [was] in the camp (camp)
+
+## 2:19:17
+KO: 모세가 하나님을 맞으러 백성을 진 밖으로 이끌어 내매, 그들이 산 아래쪽에 섰더라.
+1 וַיּוֹצֵא = and he led out (to come out)
+2 מֹשֶׁה = Moses
+3 אֶת־ = <obj.> ([Obj.])
+4 הָעָם = the people (people)
+5 לִקְרַאת = to meet (to encounter)
+6 הָאֱלֹהִים = <the> God (God)
+7 מִן־ = from
+8 הַמַּחֲנֶה = the camp (camp)
+9 וַיִּתְיַצְּבוּ = and they stood (to stand)
+10 בְּתַחְתִּית = at [the] lower part of (lower)
+11 הָהָר = the mountain (mountain)
+
+## 2:19:18
+KO: 그리고 시내 산 전체가 여호와께서 불 가운데 그 위에 내려오셨으므로 연기가 났고, 그 연기가 가마(용광로)의 연기처럼 올라갔으며, 온 산이 매우 크게 진동하였다.
+1 וְהַר = and [the] mountain of
+2 סִינַי = Sinai
+3 עָשַׁן = it was smoking (be angry)
+4 כֻּלּוֹ = all of it
+5 מִפְּנֵי = <from> because (face)
+6 אֲשֶׁר = that (which)
+7 יָרַד = he had come down (to go down)
+8 עָלָיו = on it (upon)
+9 יְהוָה = Yahweh (LORD)
+10 בָּאֵשׁ = in <the> fire (fire)
+11 וַיַּעַל = and it went up (to ascend)
+12 עֲשָׁנוֹ = smoke its
+13 כְּעֶשֶׁן = like [the] smoke of
+14 הַכִּבְשָׁן = <the> furnace (kiln)
+15 וַיֶּחֱרַד = and it trembled (to tremble)
+16 כָּל־ = all
+17 הָהָר = the mountain
+18 מְאֹד = exceedingly (much)
+
+## 2:19:19
+KO: 그리고 나팔 소리가 계속해서 가고 더 강해지고 있었고, 모세가 말하면 하나님께서 그에게 음성으로 대답하셨다.
+1 וַיְהִי = and it was (to be)
+2 קוֹל = [the] sound of
+3 הַשּׁוֹפָר = the ram's horn (trumpet)
+4 הוֹלֵךְ = going (to go)
+5 וְחָזֵק = and strong (stronger)
+6 מְאֹד = very (much)
+7 מֹשֶׁה = Moses
+8 יְדַבֵּר = he spoke (to speak)
+9 וְהָאֱלֹהִים = and <the> God (God)
+10 יַעֲנֶנּוּ = he answered him (to answer)
+11 בְקוֹל = with a voice
+
+## 2:19:20
+KO: 그리고 여호와께서 시내 산 곧 그 산꼭대기 위로 내려오셨고, 여호와께서 모세를 그 산꼭대기로 부르시니 모세가 올라갔다.
+1 וַיֵּרֶד = and he came down (to go down)
+2 יְהוָה = Yahweh
+3 עַל־ = on (upon)
+4 הַר = [the] mountain of
+5 סִינַי = Sinai
+6 אֶל־ = to
+7 רֹאשׁ = [the] top of
+8 הָהָר = the mountain
+9 וַיִּקְרָא = and he summoned (to call)
+10 יְהוָה = Yahweh
+11 לְמֹשֶׁה = <to> Moses
+12 אֶל־ = to
+13 רֹאשׁ = [the] top of
+14 הָהָר = the mountain
+15 וַיַּעַל = and he went up (to ascend)
+16 מֹשֶׁה = Moses
+
+## 2:19:21
+KO: 여호와께서 모세에게 말씀하셨다. "내려가서 백성에게 경고하라. 백성이 여호와를 보려고 억지로 뚫고 들어오다가 그들 중에서 많이 죽을까 하노라."
+1 וַיֹּאמֶר = and he said (to say)
+2 יְהוָה = Yahweh
+3 אֶל־ = to
+4 מֹשֶׁה = Moses
+5 רֵד = go down (to go down)
+6 הָעֵד = warn (to testify)
+7 בָּעָם = <in> the people (people)
+8 פֶּן־ = lest
+9 יֶהֶרְסוּ = they should break through (to overthrow)
+10 אֶל־ = to
+11 יְהוָה = Yahweh
+12 לִרְאוֹת = to see
+13 וְנָפַל = and it will fall (to fall)
+14 מִמֶּנּוּ = of it (from)
+15 רָב = many
+
+## 2:19:22
+KO: 또한 여호와께 가까이 나아가는 제사장들은 스스로를 거룩하게 할지니, 여호와가 그들을 뚫고 들어와 치지 않도록 함이라.
+1 וְגַם = and also (also)
+2 הַכֹּהֲנִים = the priests (priest)
+3 הַנִּגָּשִׁים = who draw near (to approach)
+4 אֶל־ = to (to(wards))
+5 יְהוָה = Yahweh
+6 יִתְקַדָּשׁוּ = they will make themselves holy (to consecrate)
+7 פֶּן־ = lest
+8 יִפְרֹץ = he should break out (to break through)
+9 בָּהֶם = against <the> them (them)
+10 יְהוָה = Yahweh
+
+## 2:19:23
+KO: 모세가 여호와께 말하였다. "백성이 시내 산에 오를 수 없습니다. 왜냐하면 주께서 우리에게 증언하여 말씀하시기를 '그 산에 경계를 정하고 그것을 거룩하게 하라' 하셨기 때문입니다."
+1 וַיֹּאמֶר = and he said
+2 מֹשֶׁה = Moses
+3 אֶל־ = to
+4 יְהוָה = Yahweh (LORD)
+5 לֹא־ = not
+6 יוּכַל = it is able (be able)
+7 הָעָם = the people (people)
+8 לַעֲלֹת = to go up (to ascend)
+9 אֶל־ = to
+10 הַר = [the] mountain of
+11 סִינָי = Sinai
+12 כִּי־ = for
+13 אַתָּה = you (you(m.s.))
+14 הַעֵדֹתָה = you warned (to testify)
+15 בָּנוּ = <in> <the> us (us)
+16 לֵאמֹר = <to> saying
+17 הַגְבֵּל = set a boundary for (to border)
+18 אֶת־ = <obj.> ([Obj.])
+19 הָהָר = the mountain
+20 וְקִדַּשְׁתּוֹ = and you will consecrate it (to consecrate)

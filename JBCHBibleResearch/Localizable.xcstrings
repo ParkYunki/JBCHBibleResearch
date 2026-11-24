@@ -110,6 +110,9 @@
         }
       }
     },
+    " " : {
+
+    },
     " · 필터 적용" : {
       "localizations" : {
         "de" : {
@@ -460,6 +463,9 @@
     "–" : {
 
     },
+    "… 같은 문단 %lld개" : {
+
+    },
     "· %@" : {
 
     },
@@ -568,6 +574,9 @@
           }
         }
       }
+    },
+    "'기본'은 문단 스타일 프리셋을 따릅니다." : {
+
     },
     "“%@”" : {
 
@@ -1446,6 +1455,15 @@
         }
       }
     },
+    "(요 3:16)" : {
+
+    },
+    "(요한복음 3:16)" : {
+
+    },
+    "(제목 없음)" : {
+
+    },
     "(창세기 1:1)" : {
       "localizations" : {
         "de" : {
@@ -1763,6 +1781,16 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "%@\n\n可在「設定 > 通用 > iCloud 同步」中檢視詳細狀態。"
+          }
+        }
+      }
+    },
+    "%@  %@" : {
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$@  %2$@"
           }
         }
       }
@@ -2111,6 +2139,16 @@
           "stringUnit" : {
             "state" : "new",
             "value" : "%1$@ (F%2$lld · ⌃%3$lld)"
+          }
+        }
+      }
+    },
+    "%@ / %lld:00" : {
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$@ / %2$lld:00"
           }
         }
       }
@@ -3409,6 +3447,9 @@
         }
       }
     },
+    "%@ ▾" : {
+
+    },
     "%@ 1장" : {
       "localizations" : {
         "de" : {
@@ -3514,6 +3555,9 @@
           }
         }
       }
+    },
+    "%@ 개요" : {
+
     },
     "%@ 관련 말씀 바꾸기" : {
       "localizations" : {
@@ -5445,6 +5489,9 @@
           }
         }
       }
+    },
+    "%@pt" : {
+
     },
     "%@와(과) 연결할 구절을 선택하세요" : {
       "localizations" : {
@@ -12473,6 +12520,9 @@
         }
       }
     },
+    "%lld단계" : {
+
+    },
     "%lld단어" : {
       "localizations" : {
         "de" : {
@@ -12707,6 +12757,25 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "%lld 個詞"
+          }
+        }
+      }
+    },
+    "%lld문단" : {
+
+    },
+    "%lld분" : {
+
+    },
+    "%lld자" : {
+
+    },
+    "%lld자 · %@" : {
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "%1$lld자 · %2$@"
           }
         }
       }
@@ -14645,7 +14714,13 @@
         }
       }
     },
+    "+" : {
+
+    },
     "+%lld" : {
+
+    },
+    "−" : {
 
     },
     "● " : {
@@ -15107,6 +15182,9 @@
     "1" : {
 
     },
+    "1 : 1" : {
+
+    },
     "1단계 100% · 2단계 75% · 3단계 55% · 4단계 이후 40%" : {
       "localizations" : {
         "de" : {
@@ -15212,6 +15290,9 @@
           }
         }
       }
+    },
+    "1분 미만" : {
+
     },
     "1인칭" : {
       "extractionState" : "manual",
@@ -15320,6 +15401,9 @@
         }
       }
     },
+    "2 : 1 (기본)" : {
+
+    },
     "2인칭" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -15426,6 +15510,9 @@
           }
         }
       }
+    },
+    "3 : 1" : {
+
     },
     "3개가 모두 사용 중이라 %@은(는) 꺼진 상태로 추가되었습니다. 켜려면 먼저 다른 번역본을 꺼 주세요." : {
       "localizations" : {
@@ -18627,6 +18714,9 @@
         }
       }
     },
+    "macOS 텍스트 입력의 기본 키(⌃%@)와 겹칠 수 있습니다. 앱이 먼저 처리하도록 했지만 실기기에서 확인이 필요합니다." : {
+
+    },
     "Map" : {
 
     },
@@ -19914,6 +20004,9 @@
           }
         }
       }
+    },
+    "pt" : {
+
     },
     "Resources/hwp_viewer.html이 앱 번들에 포함됐는지 확인해주세요." : {
       "localizations" : {
@@ -21521,6 +21614,9 @@
           }
         }
       }
+    },
+    "가운데 정렬" : {
+
     },
     "가져오기" : {
       "localizations" : {
@@ -25498,6 +25594,9 @@
         }
       }
     },
+    "검색 열기" : {
+
+    },
     "검색 이력 기능 추가" : {
       "localizations" : {
         "de" : {
@@ -25816,6 +25915,9 @@
         }
       }
     },
+    "검색어" : {
+
+    },
     "검색어 입력" : {
       "localizations" : {
         "de" : {
@@ -26027,6 +26129,9 @@
           }
         }
       }
+    },
+    "검색어를 입력하고 검색을 누르세요." : {
+
     },
     "검정" : {
       "localizations" : {
@@ -27514,6 +27619,9 @@
           }
         }
       }
+    },
+    "공백 제외 %lld자" : {
+
     },
     "공성(동사)" : {
       "extractionState" : "manual",
@@ -31174,6 +31282,18 @@
         }
       }
     },
+    "구절 본문을 찾지 못했습니다. 설정의 설교 인용 번역본을 확인하세요." : {
+
+    },
+    "구절 인용" : {
+
+    },
+    "구절 치환" : {
+
+    },
+    "구절 치환 단축키" : {
+
+    },
     "굵게" : {
       "comment" : "설교 에디터: 굵게 버튼 실행 취소/다시 실행 메뉴의 동작 이름",
       "localizations" : {
@@ -31819,6 +31939,9 @@
         }
       }
     },
+    "글자 색" : {
+
+    },
     "글자 선택 끝내기" : {
       "localizations" : {
         "de" : {
@@ -32136,6 +32259,22 @@
           }
         }
       }
+    },
+    "글자 수 %@%lld" : {
+      "localizations" : {
+        "ko" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "글자 수 %1$@%2$lld"
+          }
+        }
+      }
+    },
+    "글자 작게" : {
+
+    },
+    "글자 크게" : {
+
     },
     "글자 크기" : {
       "localizations" : {
@@ -33198,6 +33337,9 @@
         }
       }
     },
+    "기본값으로" : {
+
+    },
     "기본색" : {
       "localizations" : {
         "de" : {
@@ -33629,6 +33771,9 @@
           }
         }
       }
+    },
+    "기준" : {
+
     },
     "기타" : {
       "comment" : "관계 카드 묶음 머리 — X에 해당하는 인물이 여럿일 때, 어느 인물의 답인지 정할 수 없는 답(이름만 있는 동명이인 행)을 모은 마지막 묶음",
@@ -37559,6 +37704,9 @@
         }
       }
     },
+    "다듬는 중" : {
+
+    },
     "다른 번역본을 보려면 먼저 하나를 해제하세요." : {
       "localizations" : {
         "de" : {
@@ -39043,6 +39191,9 @@
         }
       }
     },
+    "다음 찾기" : {
+
+    },
     "다이아몬드" : {
       "localizations" : {
         "de" : {
@@ -39358,6 +39509,17 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "單數"
+          }
+        }
+      }
+    },
+    "단어별" : {
+      "comment" : "원문 정보(interlin1): 직역 카드의 단어별 칸 제목",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Word by Word"
           }
         }
       }
@@ -40529,6 +40691,12 @@
           }
         }
       }
+    },
+    "대주제·중주제·소주제 스타일을 쓰면 여기에 개요가 만들어집니다." : {
+
+    },
+    "더 이어짐" : {
+
     },
     "더보기" : {
       "localizations" : {
@@ -42438,6 +42606,9 @@
           }
         }
       }
+    },
+    "두 동작이 같은 키입니다." : {
+
     },
     "두께" : {
       "localizations" : {
@@ -44771,6 +44942,12 @@
         }
       }
     },
+    "링크 해제" : {
+
+    },
+    "링크됨" : {
+
+    },
     "마인드맵" : {
       "localizations" : {
         "de" : {
@@ -46891,6 +47068,9 @@
         }
       }
     },
+    "말씀구절 스타일로 치환" : {
+
+    },
     "말씀구절 추가" : {
       "localizations" : {
         "de" : {
@@ -47102,6 +47282,12 @@
           }
         }
       }
+    },
+    "말씀구절로 치환" : {
+
+    },
+    "말씀구절로 치환했습니다." : {
+
     },
     "매 절마다 장:절 표기" : {
       "localizations" : {
@@ -47844,6 +48030,9 @@
           }
         }
       }
+    },
+    "메인 설교" : {
+
     },
     "메인 창으로" : {
       "localizations" : {
@@ -48591,6 +48780,12 @@
         }
       }
     },
+    "모두 기본값으로" : {
+
+    },
+    "모두 바꾸기" : {
+
+    },
     "모두 접기" : {
       "localizations" : {
         "de" : {
@@ -48905,6 +49100,17 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "一次應用到所有路徑（曲線與折線不會混用）。"
+          }
+        }
+      }
+    },
+    "모든 형태 포함" : {
+      "comment" : "원문 정보(interlin1): 쓰인 구절 화면 머리 — 모든 굴절 형태를 포함한 절 수",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "all forms"
           }
         }
       }
@@ -50606,6 +50812,9 @@
         }
       }
     },
+    "목표 시간" : {
+
+    },
     "몽골어" : {
       "localizations" : {
         "de" : {
@@ -50924,6 +51133,15 @@
         }
       }
     },
+    "문단 뒤 간격" : {
+
+    },
+    "문단 모양" : {
+
+    },
+    "문단 모양 (들여쓰기·간격)" : {
+
+    },
     "문단 스타일 변경" : {
       "comment" : "설교 에디터: 문단 스타일 버튼·F1~F6 적용을 실행 취소/다시 실행 메뉴에 표시하는 동작 이름",
       "localizations" : {
@@ -51036,6 +51254,9 @@
           }
         }
       }
+    },
+    "문단 앞 간격" : {
+
     },
     "문단 정렬" : {
       "comment" : "설교 에디터: 정렬 버튼 실행 취소/다시 실행 메뉴의 동작 이름",
@@ -51151,6 +51372,7 @@
       }
     },
     "문맥" : {
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -52104,6 +52326,12 @@
         }
       }
     },
+    "문서에서 찾기" : {
+
+    },
+    "문서에서 찾기 (⌘F)" : {
+
+    },
     "문서함" : {
       "localizations" : {
         "de" : {
@@ -52952,6 +53180,12 @@
           }
         }
       }
+    },
+    "바꾸기" : {
+
+    },
+    "바꿀 말" : {
+
     },
     "바를 보입니다" : {
       "localizations" : {
@@ -56454,6 +56688,9 @@
         }
       }
     },
+    "변경된 부분만" : {
+
+    },
     "별도 창에서 보기" : {
       "localizations" : {
         "de" : {
@@ -57302,6 +57539,9 @@
           }
         }
       }
+    },
+    "복사할 서식이 없습니다." : {
+
     },
     "복수" : {
       "extractionState" : "manual",
@@ -59326,6 +59566,12 @@
         }
       }
     },
+    "분당 글자 수" : {
+
+    },
+    "분량 · 뷰어" : {
+
+    },
     "분류" : {
       "localizations" : {
         "de" : {
@@ -60387,6 +60633,18 @@
           }
         }
       }
+    },
+    "뷰어에서 화면 꺼짐 방지" : {
+
+    },
+    "비교" : {
+
+    },
+    "비교 대상" : {
+
+    },
+    "비교할 내용이 없습니다." : {
+
     },
     "비워 두면 파일명 \"%@\"을(를) 씁니다." : {
       "localizations" : {
@@ -62006,6 +62264,15 @@
         }
       }
     },
+    "삭제 %lld문단" : {
+
+    },
+    "삭제된 회차" : {
+
+    },
+    "삭제됨" : {
+
+    },
     "삭제하면 이 카테고리의 문서는 '분류 없음'으로 옮겨집니다. 문서는 지워지지 않습니다." : {
       "localizations" : {
         "de" : {
@@ -62535,6 +62802,12 @@
           }
         }
       }
+    },
+    "상태 필터" : {
+
+    },
+    "상태: %@" : {
+
     },
     "새 개인 묵상 작성" : {
       "localizations" : {
@@ -64870,6 +65143,21 @@
         }
       }
     },
+    "서식 복사 (⌥⌘C)" : {
+
+    },
+    "서식 복사됨: %@" : {
+
+    },
+    "서식 붙여넣기" : {
+
+    },
+    "서식 붙여넣기 (⌥⌘V)" : {
+
+    },
+    "서식 붙여넣음" : {
+
+    },
     "선 모양" : {
       "localizations" : {
         "de" : {
@@ -66380,6 +66668,12 @@
         }
       }
     },
+    "선택하거나 커서를 둔 '요 3:16' 같은 표기를 성경 본문으로 바꿉니다." : {
+
+    },
+    "설교" : {
+
+    },
     "설교 %lld개" : {
       "localizations" : {
         "de" : {
@@ -66724,6 +67018,9 @@
         }
       }
     },
+    "설교 본문에서 ‘요 3:16’ 같은 표기를 구절로 바꿀 때 쓰는 번역본과 출처 표기입니다. 성경 조회 화면의 번역본과는 따로 정합니다." : {
+
+    },
     "설교 뷰어" : {
       "localizations" : {
         "de" : {
@@ -66829,6 +67126,9 @@
           }
         }
       }
+    },
+    "설교 상태" : {
+
     },
     "설교 작성" : {
       "localizations" : {
@@ -66936,6 +67236,9 @@
         }
       }
     },
+    "설교 작성 화면의 [연구 자료]에서 참고한 장 개요·말씀 요약·묵상을 링크해 둘 수 있습니다." : {
+
+    },
     "설교 제목" : {
       "localizations" : {
         "de" : {
@@ -67042,6 +67345,9 @@
         }
       }
     },
+    "설교 제목 검색" : {
+
+    },
     "설교 제목을 “%@”(으)로 설정하고," : {
       "localizations" : {
         "de" : {
@@ -67147,6 +67453,9 @@
           }
         }
       }
+    },
+    "설교 타이머" : {
+
     },
     "설교 태그" : {
       "localizations" : {
@@ -68975,6 +69284,12 @@
           }
         }
       }
+    },
+    "성경 · 개요 · 메모 · 설교 검색" : {
+
+    },
+    "성경 · 개요 · 메모 · 설교 검색 (2글자 이상)" : {
+
     },
     "성경 도구 레일 접기" : {
       "localizations" : {
@@ -70989,6 +71304,15 @@
           }
         }
       }
+    },
+    "성경 패널 끄기" : {
+
+    },
+    "성경 패널 접기" : {
+
+    },
+    "성경 패널 켜기" : {
+
     },
     "성경구절" : {
       "localizations" : {
@@ -73005,6 +73329,9 @@
         }
       }
     },
+    "수정키" : {
+
+    },
     "숙부" : {
       "localizations" : {
         "de" : {
@@ -74704,6 +75031,9 @@
         }
       }
     },
+    "시작" : {
+
+    },
     "시작 두께" : {
       "localizations" : {
         "de" : {
@@ -75973,6 +76303,57 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "雙數"
+          }
+        }
+      }
+    },
+    "쓰인 구절" : {
+      "comment" : "원문 정보(interlin1): 쓰인 구절 화면 제목",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Occurrences"
+          }
+        }
+      }
+    },
+    "쓰인 구절 %lld절" : {
+      "comment" : "원문 정보(interlin1): 원어 카드 버튼·쓰인 구절 화면의 절 수. 한국어 화면에는 'N절'만 보인다(기존 키 '%lld절'은 en 'Verse %lld' = 절 번호라 따로 둠)",
+      "localizations" : {
+        "en" : {
+          "variations" : {
+            "plural" : {
+              "one" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld verse"
+                }
+              },
+              "other" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld verses"
+                }
+              }
+            }
+          }
+        },
+        "ko" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld절"
+          }
+        }
+      }
+    },
+    "쓰인 구절을 불러오지 못했습니다." : {
+      "comment" : "원문 정보(interlin1): 쓰인 구절 조회 실패",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Couldn't load the verses."
           }
         }
       }
@@ -78736,6 +79117,9 @@
         }
       }
     },
+    "앱 언어의 기본 번역본" : {
+
+    },
     "앱 정보" : {
       "localizations" : {
         "de" : {
@@ -78841,6 +79225,12 @@
           }
         }
       }
+    },
+    "앱의 기존 단축키(⇧⌘B · ⇧⌘N · ⇧⌘T)와 겹칩니다." : {
+
+    },
+    "약 %lld분" : {
+
     },
     "양성(명사)" : {
       "extractionState" : "manual",
@@ -80036,6 +80426,18 @@
         }
       }
     },
+    "에디터에 삽입했습니다." : {
+
+    },
+    "에디터에 인용 삽입" : {
+
+    },
+    "에디터와 성경 패널 비율" : {
+
+    },
+    "에디터와 성경 패널 크기 조절" : {
+
+    },
     "엠마오 성경 연구" : {
       "localizations" : {
         "de" : {
@@ -81098,6 +81500,9 @@
         }
       }
     },
+    "연결 편집" : {
+
+    },
     "연결된 구절: %@" : {
       "localizations" : {
         "de" : {
@@ -81203,6 +81608,9 @@
           }
         }
       }
+    },
+    "연결된 설교가 없습니다. 연속 강해가 아니어도 앞서 전한 설교를 상위로 연결할 수 있습니다." : {
+
     },
     "연계형" : {
       "extractionState" : "manual",
@@ -82052,6 +82460,12 @@
           }
         }
       }
+    },
+    "연구 자료" : {
+
+    },
+    "연구 자료 탭에서 [참고 자료로 링크]를 누르면 여기에 모입니다." : {
+
     },
     "연구문서" : {
       "localizations" : {
@@ -83644,6 +84058,12 @@
         }
       }
     },
+    "예상 %@" : {
+
+    },
+    "예상 설교 시간은 글자 수(공백 포함) ÷ 분당 글자 수로 계산합니다. 기본값은 %lld자입니다." : {
+
+    },
     "예상한 성경 데이터베이스 형식이 아닙니다: %@" : {
       "localizations" : {
         "de" : {
@@ -84281,6 +84701,12 @@
         }
       }
     },
+    "오른쪽 들여쓰기" : {
+
+    },
+    "오른쪽 정렬" : {
+
+    },
     "오픈소스 라이선스 고지" : {
       "localizations" : {
         "de" : {
@@ -84599,6 +85025,9 @@
           }
         }
       }
+    },
+    "완성" : {
+
     },
     "외손자" : {
       "localizations" : {
@@ -85130,6 +85559,9 @@
         }
       }
     },
+    "왼쪽 들여쓰기" : {
+
+    },
     "왼쪽 목록에서 항목을 선택하세요" : {
       "localizations" : {
         "de" : {
@@ -85342,6 +85774,9 @@
           }
         }
       }
+    },
+    "왼쪽 정렬" : {
+
     },
     "왼쪽에서 설교를 선택하세요." : {
       "localizations" : {
@@ -86403,6 +86838,17 @@
         }
       }
     },
+    "원문 정보로 돌아가기" : {
+      "comment" : "원문 정보(interlin1): 쓰인 구절 화면 뒤로 버튼 접근성 이름",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Back to Original Text"
+          }
+        }
+      }
+    },
     "원문 정보로 전환" : {
       "localizations" : {
         "de" : {
@@ -87145,7 +87591,22 @@
         }
       }
     },
+    "원본이 삭제되었습니다." : {
+
+    },
+    "원어 단어 (%lld)" : {
+      "comment" : "원문 정보(interlin1): 원어 카드 목록 제목",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Original Words (%lld)"
+          }
+        }
+      }
+    },
     "원어 어순" : {
+      "extractionState" : "stale",
       "localizations" : {
         "de" : {
           "stringUnit" : {
@@ -87247,6 +87708,17 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "原文語序"
+          }
+        }
+      }
+    },
+    "원어 카드로 이동" : {
+      "comment" : "원문 정보(interlin1): 단어별 칸 접근성 힌트",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Goes to the word card"
           }
         }
       }
@@ -87568,6 +88040,31 @@
           }
         }
       }
+    },
+    "위부터 영어 · 원어" : {
+      "comment" : "원문 정보(rowhide1): 단어별 칸 2줄 설명(앱 언어에 단어 짝 데이터가 없을 때)",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Top to bottom: English · original"
+          }
+        }
+      }
+    },
+    "위부터 직역 속 말 · 영어 · 원어" : {
+      "comment" : "원문 정보(interlin1): 단어별 칸 3줄 설명",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Top to bottom: literal · English · original"
+          }
+        }
+      }
+    },
+    "위에 이미 나옴" : {
+
     },
     "응답을 해석하지 못했습니다." : {
       "localizations" : {
@@ -88309,6 +88806,28 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "刪除此節點"
+          }
+        }
+      }
+    },
+    "이 단어가 쓰인 구절" : {
+      "comment" : "원문 정보(interlin1): 쓰인 구절 버튼 접근성 이름·도움말(절 수를 아직 모를 때)",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Verses with this word"
+          }
+        }
+      }
+    },
+    "이 단어가 쓰인 구절 %lld절" : {
+      "comment" : "원문 정보(interlin1): 쓰인 구절 버튼 접근성 이름·도움말",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Verses with this word: %lld"
           }
         }
       }
@@ -89399,6 +89918,9 @@
         }
       }
     },
+    "이 설교를 이어받는 설교" : {
+
+    },
     "이 설교와 활용 이력 %lld건이 모두 삭제됩니다. 되돌릴 수 없습니다." : {
       "localizations" : {
         "de" : {
@@ -90485,6 +91007,9 @@
         }
       }
     },
+    "이 장에 저장된 연구 자료가 없습니다." : {
+
+    },
     "이 장에 표시할 절이 없습니다." : {
       "localizations" : {
         "de" : {
@@ -91541,6 +92066,17 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "寫於本節 · %@"
+          }
+        }
+      }
+    },
+    "이 절에서: %@" : {
+      "comment" : "원문 정보(interlin1): 원어 카드 — 이 절 직역 속 짝 말",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "In this verse: %@"
           }
         }
       }
@@ -95390,6 +95926,12 @@
         }
       }
     },
+    "이어지는 설교" : {
+
+    },
+    "이어지는 설교 연결" : {
+
+    },
     "이전" : {
       "localizations" : {
         "de" : {
@@ -96449,6 +96991,9 @@
           }
         }
       }
+    },
+    "이전 찾기" : {
+
     },
     "이전에 보던 위치로 돌아가기" : {
       "localizations" : {
@@ -97727,6 +98272,9 @@
         }
       }
     },
+    "인용 번역본" : {
+
+    },
     "인칭대명사" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -98151,6 +98699,9 @@
           }
         }
       }
+    },
+    "일시정지" : {
+
     },
     "일치 없음" : {
       "localizations" : {
@@ -98684,6 +99235,218 @@
         }
       }
     },
+    "자부" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Schwiegertochter"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Daughter-in-law"
+          }
+        },
+        "en-CA" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Daughter-in-law"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Nuera"
+          }
+        },
+        "es-MX" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Nuera"
+          }
+        },
+        "fil" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Manugang na Babae"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Belle-fille"
+          }
+        },
+        "fr-CA" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Belle-fille"
+          }
+        },
+        "id" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Menantu Perempuan"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Nuora"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "嫁"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Nora"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Невестка"
+          }
+        },
+        "th" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "บุตรสะใภ้"
+          }
+        },
+        "vi" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Con dâu"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "儿媳"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "兒媳"
+          }
+        }
+      }
+    },
+    "장" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Kap."
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Ch."
+          }
+        },
+        "en-CA" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Ch."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Cap."
+          }
+        },
+        "es-MX" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Cap."
+          }
+        },
+        "fil" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Kab."
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Chap."
+          }
+        },
+        "fr-CA" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Chap."
+          }
+        },
+        "id" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Psl."
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Cap."
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "章"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Cap."
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Гл."
+          }
+        },
+        "th" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "บท"
+          }
+        },
+        "vi" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Ch."
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "章"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "章"
+          }
+        }
+      }
+    },
     "자동 변경" : {
       "localizations" : {
         "de" : {
@@ -98998,218 +99761,6 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "姐妹"
-          }
-        }
-      }
-    },
-    "자부" : {
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Schwiegertochter"
-          }
-        },
-        "en" : {
-          "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Daughter-in-law"
-          }
-        },
-        "en-CA" : {
-          "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Daughter-in-law"
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Nuera"
-          }
-        },
-        "es-MX" : {
-          "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Nuera"
-          }
-        },
-        "fil" : {
-          "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Manugang na Babae"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Belle-fille"
-          }
-        },
-        "fr-CA" : {
-          "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Belle-fille"
-          }
-        },
-        "id" : {
-          "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Menantu Perempuan"
-          }
-        },
-        "it" : {
-          "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Nuora"
-          }
-        },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "嫁"
-          }
-        },
-        "pt-BR" : {
-          "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Nora"
-          }
-        },
-        "ru" : {
-          "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Невестка"
-          }
-        },
-        "th" : {
-          "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "บุตรสะใภ้"
-          }
-        },
-        "vi" : {
-          "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Con dâu"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "儿媳"
-          }
-        },
-        "zh-Hant" : {
-          "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "兒媳"
-          }
-        }
-      }
-    },
-    "장" : {
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Kap."
-          }
-        },
-        "en" : {
-          "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Ch."
-          }
-        },
-        "en-CA" : {
-          "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Ch."
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Cap."
-          }
-        },
-        "es-MX" : {
-          "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Cap."
-          }
-        },
-        "fil" : {
-          "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Kab."
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Chap."
-          }
-        },
-        "fr-CA" : {
-          "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Chap."
-          }
-        },
-        "id" : {
-          "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Psl."
-          }
-        },
-        "it" : {
-          "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Cap."
-          }
-        },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "章"
-          }
-        },
-        "pt-BR" : {
-          "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Cap."
-          }
-        },
-        "ru" : {
-          "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Гл."
-          }
-        },
-        "th" : {
-          "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "บท"
-          }
-        },
-        "vi" : {
-          "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Ch."
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "章"
-          }
-        },
-        "zh-Hant" : {
-          "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "章"
           }
         }
       }
@@ -100276,6 +100827,9 @@
         }
       }
     },
+    "저장 대기" : {
+
+    },
     "저장 대기 중" : {
       "localizations" : {
         "de" : {
@@ -100487,6 +101041,15 @@
           }
         }
       }
+    },
+    "저장 중…" : {
+
+    },
+    "저장됨" : {
+
+    },
+    "저장됨 %@" : {
+
     },
     "저장소를 열지 못했습니다. 현재 변경 내용은 앱을 종료하면 사라집니다. %@" : {
       "localizations" : {
@@ -101443,6 +102006,12 @@
           }
         }
       }
+    },
+    "전체 보기" : {
+
+    },
+    "전체 상태" : {
+
     },
     "전체 화면으로 보기" : {
       "localizations" : {
@@ -103677,6 +104246,9 @@
         }
       }
     },
+    "정렬 기본값으로" : {
+
+    },
     "정렬 기준" : {
       "localizations" : {
         "de" : {
@@ -104418,6 +104990,9 @@
           }
         }
       }
+    },
+    "제안 적용" : {
+
     },
     "제자" : {
       "localizations" : {
@@ -105586,6 +106161,12 @@
           }
         }
       }
+    },
+    "주 본문 · 제안: %@" : {
+
+    },
+    "주 본문 (예: 요 3:1-15)" : {
+
     },
     "주군" : {
       "localizations" : {
@@ -107392,6 +107973,9 @@
         }
       }
     },
+    "지우기" : {
+
+    },
     "지원하지 않는 파일 형식입니다(.%@)." : {
       "localizations" : {
         "de" : {
@@ -108028,6 +108612,15 @@
         }
       }
     },
+    "참고 자료 (%lld)" : {
+
+    },
+    "참고 자료 %lld" : {
+
+    },
+    "참고 자료로 링크" : {
+
+    },
     "참조 일치" : {
       "localizations" : {
         "de" : {
@@ -108345,6 +108938,9 @@
           }
         }
       }
+    },
+    "책" : {
+
     },
     "책 · 장" : {
       "localizations" : {
@@ -111022,6 +111618,9 @@
         }
       }
     },
+    "처음부터" : {
+
+    },
     "첫 절 번호 표시" : {
       "localizations" : {
         "de" : {
@@ -111127,6 +111726,9 @@
           }
         }
       }
+    },
+    "첫 줄 들여쓰기" : {
+
     },
     "첫 쪽" : {
       "localizations" : {
@@ -111869,6 +112471,9 @@
           }
         }
       }
+    },
+    "초안" : {
+
     },
     "최고 %lld" : {
       "localizations" : {
@@ -112930,6 +113535,9 @@
         }
       }
     },
+    "추가 %lld문단" : {
+
+    },
     "추가 검색결과 안내" : {
       "localizations" : {
         "de" : {
@@ -113778,6 +114386,9 @@
         }
       }
     },
+    "출처 표기" : {
+
+    },
     "취소" : {
       "localizations" : {
         "de" : {
@@ -113990,6 +114601,9 @@
         }
       }
     },
+    "치환할 성경 구절 표기가 없습니다. 예: 요 3:16" : {
+
+    },
     "친구" : {
       "localizations" : {
         "de" : {
@@ -114096,6 +114710,325 @@
         }
       }
     },
+    "카테고리" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Kategorie"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Category"
+          }
+        },
+        "en-CA" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Category"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Categoría"
+          }
+        },
+        "es-MX" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Categoría"
+          }
+        },
+        "fil" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Kategorya"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Catégorie"
+          }
+        },
+        "fr-CA" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Catégorie"
+          }
+        },
+        "id" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Kategori"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Categoria"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "カテゴリ"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Categoria"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Категория"
+          }
+        },
+        "th" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "หมวดหมู่"
+          }
+        },
+        "vi" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Danh mục"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "类别"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "類別"
+          }
+        }
+      }
+    },
+    "카테고리를 선택하세요" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Kategorie wählen"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Choose a Category"
+          }
+        },
+        "en-CA" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Choose a Category"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Elige una categoría"
+          }
+        },
+        "es-MX" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Elige una categoría"
+          }
+        },
+        "fil" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Pumili ng Kategorya"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Choisissez une catégorie"
+          }
+        },
+        "fr-CA" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Choisissez une catégorie"
+          }
+        },
+        "id" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Pilih Kategori"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Scegli una categoria"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "カテゴリを選択してください"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Escolha uma categoria"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Выберите категорию"
+          }
+        },
+        "th" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "เลือกหมวดหมู่"
+          }
+        },
+        "vi" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Chọn danh mục"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "请选择类别"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "請選擇類別"
+          }
+        }
+      }
+    },
+    "칼" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Qal"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Qal"
+          }
+        },
+        "en-CA" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Qal"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Qal"
+          }
+        },
+        "es-MX" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Qal"
+          }
+        },
+        "fil" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Qal"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Qal"
+          }
+        },
+        "fr-CA" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Qal"
+          }
+        },
+        "id" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Qal"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Qal"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Qal"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Qal"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Каль"
+          }
+        },
+        "th" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Qal"
+          }
+        },
+        "vi" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Qal"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Qal"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Qal"
+          }
+        }
+      }
+    },
     "카테고리 관리" : {
       "localizations" : {
         "de" : {
@@ -114198,6 +115131,112 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "管理類別"
+          }
+        }
+      }
+    },
+    "카테고리 삭제" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Kategorie löschen"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Delete Category"
+          }
+        },
+        "en-CA" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Delete Category"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Eliminar categoría"
+          }
+        },
+        "es-MX" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Eliminar categoría"
+          }
+        },
+        "fil" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "I-delete ang Kategorya"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Supprimer la catégorie"
+          }
+        },
+        "fr-CA" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Supprimer la catégorie"
+          }
+        },
+        "id" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Hapus Kategori"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Elimina categoria"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "カテゴリを削除"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Excluir categoria"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Удалить категорию"
+          }
+        },
+        "th" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "ลบหมวดหมู่"
+          }
+        },
+        "vi" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Xóa danh mục"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "删除类别"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "刪除類別"
           }
         }
       }
@@ -114414,325 +115453,6 @@
         }
       }
     },
-    "칼" : {
-      "extractionState" : "manual",
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Qal"
-          }
-        },
-        "en" : {
-          "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Qal"
-          }
-        },
-        "en-CA" : {
-          "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Qal"
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Qal"
-          }
-        },
-        "es-MX" : {
-          "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Qal"
-          }
-        },
-        "fil" : {
-          "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Qal"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Qal"
-          }
-        },
-        "fr-CA" : {
-          "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Qal"
-          }
-        },
-        "id" : {
-          "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Qal"
-          }
-        },
-        "it" : {
-          "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Qal"
-          }
-        },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Qal"
-          }
-        },
-        "pt-BR" : {
-          "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Qal"
-          }
-        },
-        "ru" : {
-          "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Каль"
-          }
-        },
-        "th" : {
-          "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Qal"
-          }
-        },
-        "vi" : {
-          "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Qal"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Qal"
-          }
-        },
-        "zh-Hant" : {
-          "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Qal"
-          }
-        }
-      }
-    },
-    "카테고리" : {
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Kategorie"
-          }
-        },
-        "en" : {
-          "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Category"
-          }
-        },
-        "en-CA" : {
-          "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Category"
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Categoría"
-          }
-        },
-        "es-MX" : {
-          "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Categoría"
-          }
-        },
-        "fil" : {
-          "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Kategorya"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Catégorie"
-          }
-        },
-        "fr-CA" : {
-          "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Catégorie"
-          }
-        },
-        "id" : {
-          "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Kategori"
-          }
-        },
-        "it" : {
-          "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Categoria"
-          }
-        },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "カテゴリ"
-          }
-        },
-        "pt-BR" : {
-          "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Categoria"
-          }
-        },
-        "ru" : {
-          "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Категория"
-          }
-        },
-        "th" : {
-          "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "หมวดหมู่"
-          }
-        },
-        "vi" : {
-          "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Danh mục"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "类别"
-          }
-        },
-        "zh-Hant" : {
-          "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "類別"
-          }
-        }
-      }
-    },
-    "카테고리 삭제" : {
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Kategorie löschen"
-          }
-        },
-        "en" : {
-          "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Delete Category"
-          }
-        },
-        "en-CA" : {
-          "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Delete Category"
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Eliminar categoría"
-          }
-        },
-        "es-MX" : {
-          "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Eliminar categoría"
-          }
-        },
-        "fil" : {
-          "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "I-delete ang Kategorya"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Supprimer la catégorie"
-          }
-        },
-        "fr-CA" : {
-          "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Supprimer la catégorie"
-          }
-        },
-        "id" : {
-          "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Hapus Kategori"
-          }
-        },
-        "it" : {
-          "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Elimina categoria"
-          }
-        },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "カテゴリを削除"
-          }
-        },
-        "pt-BR" : {
-          "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Excluir categoria"
-          }
-        },
-        "ru" : {
-          "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Удалить категорию"
-          }
-        },
-        "th" : {
-          "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "ลบหมวดหมู่"
-          }
-        },
-        "vi" : {
-          "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Xóa danh mục"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "删除类别"
-          }
-        },
-        "zh-Hant" : {
-          "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "刪除類別"
-          }
-        }
-      }
-    },
     "카테고리 추가" : {
       "localizations" : {
         "de" : {
@@ -114835,112 +115555,6 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "新增類別"
-          }
-        }
-      }
-    },
-    "카테고리를 선택하세요" : {
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Kategorie wählen"
-          }
-        },
-        "en" : {
-          "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Choose a Category"
-          }
-        },
-        "en-CA" : {
-          "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Choose a Category"
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Elige una categoría"
-          }
-        },
-        "es-MX" : {
-          "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Elige una categoría"
-          }
-        },
-        "fil" : {
-          "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Pumili ng Kategorya"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Choisissez une catégorie"
-          }
-        },
-        "fr-CA" : {
-          "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Choisissez une catégorie"
-          }
-        },
-        "id" : {
-          "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Pilih Kategori"
-          }
-        },
-        "it" : {
-          "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Scegli una categoria"
-          }
-        },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "カテゴリを選択してください"
-          }
-        },
-        "pt-BR" : {
-          "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Escolha uma categoria"
-          }
-        },
-        "ru" : {
-          "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Выберите категорию"
-          }
-        },
-        "th" : {
-          "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "เลือกหมวดหมู่"
-          }
-        },
-        "vi" : {
-          "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Chọn danh mục"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "请选择类别"
-          }
-        },
-        "zh-Hant" : {
-          "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "請選擇類別"
           }
         }
       }
@@ -115264,6 +115878,9 @@
         }
       }
     },
+    "켜짐" : {
+
+    },
     "크게 보기" : {
       "localizations" : {
         "de" : {
@@ -115369,6 +115986,9 @@
           }
         }
       }
+    },
+    "키" : {
+
     },
     "타이틀 서체 라이선스" : {
       "localizations" : {
@@ -117595,6 +118215,9 @@
           }
         }
       }
+    },
+    "통합 검색에서 모두 보기" : {
+
     },
     "통합검색 성경구절 묶음단위 표시" : {
       "localizations" : {
@@ -120572,112 +121195,6 @@
         }
       }
     },
-    "펼치기" : {
-      "localizations" : {
-        "de" : {
-          "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Ausklappen"
-          }
-        },
-        "en" : {
-          "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Expand"
-          }
-        },
-        "en-CA" : {
-          "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Expand"
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Expandir"
-          }
-        },
-        "es-MX" : {
-          "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Expandir"
-          }
-        },
-        "fil" : {
-          "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "I-expand"
-          }
-        },
-        "fr" : {
-          "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Développer"
-          }
-        },
-        "fr-CA" : {
-          "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Développer"
-          }
-        },
-        "id" : {
-          "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Bentangkan"
-          }
-        },
-        "it" : {
-          "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Espandi"
-          }
-        },
-        "ja" : {
-          "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "展開"
-          }
-        },
-        "pt-BR" : {
-          "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Expandir"
-          }
-        },
-        "ru" : {
-          "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Развернуть"
-          }
-        },
-        "th" : {
-          "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "ขยาย"
-          }
-        },
-        "vi" : {
-          "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "Mở rộng"
-          }
-        },
-        "zh-Hans" : {
-          "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "展开"
-          }
-        },
-        "zh-Hant" : {
-          "stringUnit" : {
-            "state" : "needs_review",
-            "value" : "展開"
-          }
-        }
-      }
-    },
     "펼침" : {
       "localizations" : {
         "de" : {
@@ -120780,6 +121297,112 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "已展開"
+          }
+        }
+      }
+    },
+    "펼치기" : {
+      "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Ausklappen"
+          }
+        },
+        "en" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Expand"
+          }
+        },
+        "en-CA" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Expand"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Expandir"
+          }
+        },
+        "es-MX" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Expandir"
+          }
+        },
+        "fil" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "I-expand"
+          }
+        },
+        "fr" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Développer"
+          }
+        },
+        "fr-CA" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Développer"
+          }
+        },
+        "id" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Bentangkan"
+          }
+        },
+        "it" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Espandi"
+          }
+        },
+        "ja" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "展開"
+          }
+        },
+        "pt-BR" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Expandir"
+          }
+        },
+        "ru" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Развернуть"
+          }
+        },
+        "th" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "ขยาย"
+          }
+        },
+        "vi" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Mở rộng"
+          }
+        },
+        "zh-Hans" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "展开"
+          }
+        },
+        "zh-Hant" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "展開"
           }
         }
       }
@@ -122273,6 +122896,9 @@
         }
       }
     },
+    "표기 안 함" : {
+
+    },
     "표시 이름" : {
       "localizations" : {
         "de" : {
@@ -123013,6 +123639,17 @@
           "stringUnit" : {
             "state" : "needs_review",
             "value" : "Pulal"
+          }
+        }
+      }
+    },
+    "품사 정보" : {
+      "comment" : "원문 정보(interlin1): 원어 카드 품사 정보 펼치기/접기 버튼",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Grammar"
           }
         }
       }
@@ -124080,6 +124717,9 @@
           }
         }
       }
+    },
+    "하드웨어 키보드에서 쓰는 단축키입니다. 에디터에서 성경 구절 표기를 선택하거나 그 옆에 커서를 두고 누릅니다. 우클릭(길게 누르기) 메뉴에도 같은 항목이 있습니다." : {
+
     },
     "하위 노드 단계별 전개\n(대주제 → 중주제 → 소주제 → 본문)" : {
       "localizations" : {
@@ -126416,6 +127056,15 @@
         }
       }
     },
+    "현재 스타일 유지하며 치환" : {
+
+    },
+    "현재 스타일로 치환" : {
+
+    },
+    "현재 스타일로 치환했습니다." : {
+
+    },
     "현재는 재지정할 수 없고, 위 고정된 단축키만 지원합니다(사용자 재지정은 다음 단계 후보)." : {
       "localizations" : {
         "de" : {
@@ -127267,6 +127916,12 @@
         }
       }
     },
+    "화면 꺼짐 방지" : {
+
+    },
+    "화면 꺼짐 방지를 껐습니다" : {
+
+    },
     "화면 모드" : {
       "localizations" : {
         "de" : {
@@ -127478,6 +128133,9 @@
           }
         }
       }
+    },
+    "화면이 꺼지지 않습니다" : {
+
     },
     "화살표" : {
       "localizations" : {
@@ -128009,6 +128667,9 @@
           }
         }
       }
+    },
+    "회차 비교" : {
+
     },
     "후손" : {
       "comment" : "관계 안내 카드 라벨(질의한 %@ 관계가 등록돼 있지 않습니다)",

@@ -1,0 +1,98 @@
+## 19:147:9
+KO: 그분은 짐승에게, 곧 부르짖는 까마귀 새끼들에게 그들의 양식을 주시는도다.
+1 נוֹתֵן = [who] gives (to give)
+2 לִבְהֵמָה = to animal[s] (animal)
+3 לַחְמָהּ = food its (food)
+4 לִבְנֵי = to [the] young ones of (son)
+5 עֹרֵב = a raven (raven)
+6 אֲשֶׁר = which
+7 יִקְרָאוּ = they call out (to call)
+
+## 19:147:10
+KO: 그는 말의 힘을 기뻐하지 아니하며, 사람의 다리들을 즐거워하지 아니한다.
+1 לֹא = not
+2 בִגְבוּרַת = in [the] strength of (might)
+3 הַסּוּס = <the> horse (horse)
+4 יֶחְפָּץ = he delights (to delight in)
+5 לֹא־ = not
+6 בְשׁוֹקֵי = in [the] legs of (leg)
+7 הָאִישׁ = <the> man (man)
+8 יִרְצֶה = he takes pleasure (to accept)
+
+## 19:147:11
+KO: 여호와는 그를 경외하는 자들과 그의 인자하심을 바라는 자들을 기뻐하신다.
+1 רוֹצֶה = [is] taking pleasure in (to accept)
+2 יְהוָה = Yahweh (LORD)
+3 אֶת־ = <obj.>
+4 יְרֵאָיו = [those] fearing him (afraid)
+5 אֶת־ = <obj.>
+6 הַמְיַחֲלִים = those [who] hope (to wait)
+7 לְחַסְדּוֹ = for covenant loyalty his (kindness)
+
+## 19:147:12
+KO: 찬양하라 예루살렘아, 여호와를. 찬송하라 네 하나님을, 시온아.
+1 שַׁבְּחִי = extol (to praise)
+2 יְרוּשָׁלִַם = O Jerusalem (Jerusalem)
+3 אֶת־ = <obj.> ([Obj.])
+4 יְהוָה = Yahweh (LORD)
+5 הַלְלִי = praise (to boast)
+6 אֱלֹהַיִךְ = God your (God)
+7 צִיּוֹן = O Zion (Zion)
+
+## 19:147:13
+KO: 대저 그가 네 성문들의 빗장들을 견고하게 하셨고, 네 가운데 있는 네 자녀들에게 복을 주셨도다.
+1 כִּי־ = for
+2 חִזַּק = he has strengthened (to strengthen)
+3 בְּרִיחֵי = [the] bars of (bar)
+4 שְׁעָרָיִךְ = gates your (gate)
+5 בֵּרַךְ = he has blessed (to bless)
+6 בָּנַיִךְ = children your (son)
+7 בְּקִרְבֵּךְ = in midst your (entrails)
+
+## 19:147:14
+KO: 그분은 너의 경내를 평안으로 두시고, 밀의 기름짐으로 너를 배불리신다.
+1 הַשָּׂם־ = the [one who] makes (to set)
+2 גְּבוּלֵךְ = territory your (border)
+3 שָׁלוֹם = peace
+4 חֵלֶב = [the] best of (fat)
+5 חִטִּים = wheat<s> (wheat)
+6 יַשְׂבִּיעֵךְ = he satisfies you (to satisfy)
+
+## 19:147:15
+KO: 그분께서 그분의 말씀을 땅으로 보내시니, 그분의 말씀이 매우 급히 달리는도다.
+1 הַשֹּׁלֵחַ = the [one who] sends (to send)
+2 אִמְרָתוֹ = word his (word)
+3 אָרֶץ = [the] earth (land)
+4 עַד־ = to (till)
+5 מְהֵרָה = quickly (haste)
+6 יָרוּץ = it runs (to run)
+7 דְּבָרוֹ = word his (word)
+
+## 19:147:16
+KO: 눈을 양털처럼 주시는 분, 서리를 재처럼 흩으시는 분.
+1 הַנֹּתֵן = the [one who] gives (to give)
+2 שֶׁלֶג = snow
+3 כַּצָּמֶר = like <the> wool (wool)
+4 כְּפוֹר = frost
+5 כָּאֵפֶר = like <the> ash[es] (ashes)
+6 יְפַזֵּר = he scatters (to scatter)
+
+## 19:147:17
+KO: 그분은 그의 얼음을 떡 부스러기들처럼 던지시니, 그분의 추위 앞에서 누가 능히 서리요?
+1 מַשְׁלִיךְ = [the one who] throws (to throw)
+2 קַרְחוֹ = ice his (ice)
+3 כְפִתִּים = like crumbs (morsel)
+4 לִפְנֵי = <to> before (face)
+5 קָרָתוֹ = coldness his (cold)
+6 מִי = who?
+7 יַעֲמֹד = will he stand (to stand)
+
+## 19:147:18
+KO: 그분은 자신의 말씀을 보내시어 그것들을 녹이시고, 자신의 바람을 불게 하시니 물들이 흐르는도다.
+1 יִשְׁלַח = he sends (to send)
+2 דְּבָרוֹ = word his (word)
+3 וְיַמְסֵם = and he melts them (to liquefy)
+4 יַשֵּׁב = he makes blow (to blow)
+5 רוּחוֹ = wind his (spirit)
+6 יִזְּלוּ־ = they flow (to flow)
+7 מָיִם = waters (water)

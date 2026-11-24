@@ -1,0 +1,145 @@
+## 5:27:5
+KO: 그리고 너는 거기서 네 하나님 여호와를 위하여 제단, 곧 돌들의 제단을 쌓을 것이요, 그 위에 철을 휘두르지 말지니라.
+1 וּבָנִיתָ = and you will build (to build)
+2 שָּׁם = there
+3 מִזְבֵּחַ = an altar
+4 לַיהוָה = to Yahweh (LORD)
+5 אֱלֹהֶיךָ = God your (God)
+6 מִזְבַּח = an altar of
+7 אֲבָנִים = stones (stone)
+8 לֹא־ = not
+9 תָנִיף = you will wield (to wave)
+10 עֲלֵיהֶם = on them (upon)
+11 בַּרְזֶל = iron
+
+## 5:27:6
+KO: 너는 온전한 돌들로 네 하나님 여호와의 제단을 쌓고, 그 위에 네 하나님 여호와를 위하여 번제물들을 올릴 것이며
+1 אֲבָנִים = stones (stone)
+2 שְׁלֵמוֹת = complete
+3 תִּבְנֶה = you will build (to build)
+4 אֶת־ = <obj.> ([Obj.])
+5 מִזְבַּח = [the] altar of (altar)
+6 יְהוָה = Yahweh
+7 אֱלֹהֶיךָ = God your
+8 וְהַעֲלִיתָ = and you will offer up (to ascend)
+9 עָלָיו = on it (upon)
+10 עוֹלֹת = burnt offerings (burnt offering)
+11 לַיהוָה = to Yahweh
+12 אֱלֹהֶיךָ = God your
+
+## 5:27:7
+KO: 그리고 너는 화목제물을 희생으로 드리고 거기서 먹으며 너의 하나님 여호와 앞에서 즐거워할지니라.
+1 וְזָבַחְתָּ = and you will sacrifice (to sacrifice)
+2 שְׁלָמִים = peace offerings (peace offering)
+3 וְאָכַלְתָּ = and you will eat [them] (to eat)
+4 שָּׁם = there
+5 וְשָׂמַחְתָּ = and you will rejoice (to rejoice)
+6 לִפְנֵי = <to> before (face)
+7 יְהוָה = Yahweh (LORD)
+8 אֱלֹהֶיךָ = God your (God)
+
+## 5:27:8
+KO: 그리고 너는 그 돌들 위에 이 율법의 모든 말씀들을 아주 명백하게 기록할지니라.
+1 וְכָתַבְתָּ = and you will write (to write)
+2 עַל־ = on (upon)
+3 הָאֲבָנִים = the stones (stone)
+4 אֶת־ = <obj.> ([Obj.])
+5 כָּל־ = all
+6 דִּבְרֵי = [the] words of (word)
+7 הַתּוֹרָה = the law (instruction)
+8 הַזֹּאת = <the> this (this)
+9 בַּאֵר = surely clearly (to make plain)
+10 הֵיטֵב ס = doing well (be good)
+
+## 5:27:9
+KO: 그리고 모세와 레위 제사장들이 온 이스라엘에게 말하여 이르기를, "이스라엘아, 잠잠하라! 그리고 들으라! 오늘 이 날에 너는 주 너의 하나님의 백성이 되었다."
+1 וַיְדַבֵּר = and he spoke (to speak)
+2 מֹשֶׁה = Moses
+3 וְהַכֹּהֲנִים = and the priests (priest)
+4 הַלְוִיִּם = the Levites (Levi)
+5 אֶל = to (to(wards))
+6 כָּל־ = all
+7 יִשְׂרָאֵל = Israel
+8 לֵאמֹר = <to> saying (to say)
+9 הַסְכֵּת = keep silent (be silent)
+10 וּשְׁמַע = and listen (to hear)
+11 יִשְׂרָאֵל = O Israel
+12 הַיּוֹם = the day (day)
+13 הַזֶּה = <the> this (this)
+14 נִהְיֵיתָ = you have become (to be)
+15 לְעָם = <into> a people (people)
+16 לַיהוָה = of Yahweh (LORD)
+17 אֱלֹהֶיךָ = God your (God)
+
+## 5:27:10
+KO: 그리고 너는 네 하나님 여호와의 소리를 들으라. 그리고 내가 오늘 네게 명령하는 그의 명령들과 그의 규례들을 행하라.
+1 וְשָׁמַעְתָּ = and you will listen (to hear)
+2 בְּקוֹל = to [the] voice of (voice)
+3 יְהוָה = Yahweh (LORD)
+4 אֱלֹהֶיךָ = God your (God)
+5 וְעָשִׂיתָ = and you will do (to make)
+6 אֶת־ = <obj.>
+7 מִצְוֹתָיו = commandments his (commandment)
+8 וְאֶת־ = and <obj.>
+9 חֻקָּיו = statutes his (statute)
+10 אֲשֶׁר = which
+11 אָנֹכִי = I
+12 מְצַוְּךָ = [am] commanding you (to command)
+13 הַיּוֹם ס = this day (day;_when)
+
+## 5:27:11
+KO: 그리고 모세는 그날에 그 백성에게 명령하며 말했다.
+1 וַיְצַו = and he commanded (to command)
+2 מֹשֶׁה = Moses
+3 אֶת־ = <obj.> ([Obj.])
+4 הָעָם = the people (people)
+5 בַּיּוֹם = on the day (day;_when)
+6 הַהוּא = <the> that (he;_she;_it)
+7 לֵאמֹר = <to> saying (to say)
+
+## 5:27:12
+KO: 이들은 너희가 요단을 건넌 후에 백성을 축복하기 위하여 그리심 산 위에 설지니, 시므온과 레위와 유다와 잇사갈과 요셉과 베냐민이다.
+1 אֵלֶּה = these [tribes] (these)
+2 יַעַמְדוּ = they will stand (to stand)
+3 לְבָרֵךְ = to bless
+4 אֶת־ = <obj.>
+5 הָעָם = the people (people)
+6 עַל־ = on (upon)
+7 הַר = [the] mountain of (mountain)
+8 גְּרִזִים = Gerizim ((Mount )Gerizim)
+9 בְּעָבְרְכֶם = when have passed over you (to pass)
+10 אֶת־ = <obj.>
+11 הַיַּרְדֵּן = the Jordan (Jordan)
+12 שִׁמְעוֹן = Simeon
+13 וְלֵוִי = and Levi (Levi)
+14 וִיהוּדָה = and Judah (Judah)
+15 וְיִשָּׂשכָר = and Issachar (Issachar)
+16 וְיוֹסֵף = and Joseph (Joseph)
+17 וּבִנְיָמִן = and Benjamin (Benjamin)
+
+## 5:27:13
+KO: 그리고 이들은 저주를 위하여 에발 산 위에 설 것이니, 르우벤, 갓, 그리고 아셀, 그리고 스불론, 단, 그리고 납달리이다.
+1 וְאֵלֶּה = and these [tribes] (these)
+2 יַעַמְדוּ = they will stand (to stand)
+3 עַל־ = on (upon)
+4 הַקְּלָלָה = the curse (curse)
+5 בְּהַר = on [the] mountain of (mountain)
+6 עֵיבָל = Ebal ((Mount )Ebal)
+7 רְאוּבֵן = Reuben
+8 גָּד = Gad
+9 וְאָשֵׁר = and Asher (Asher)
+10 וּזְבוּלֻן = and Zebulun (Zebulun)
+11 דָּן = Dan
+12 וְנַפְתָּלִי = and Naphtali (Naphtali)
+
+## 5:27:14
+KO: 그리고 레위 사람들은 응답할 것이며, 이스라엘의 모든 사람에게 높은 소리로 말할 것이다.
+1 וְעָנוּ = and they will answer (to answer)
+2 הַלְוִיִּם = the Levites (Levi)
+3 וְאָמְרוּ = and they will say (to say)
+4 אֶל־ = to (to(wards))
+5 כָּל־ = every (all)
+6 אִישׁ = person of (man)
+7 יִשְׂרָאֵל = Israel
+8 קוֹל = a voice (voice)
+9 רָם ס = high (to exalt)

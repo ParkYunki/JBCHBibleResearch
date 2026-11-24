@@ -1,0 +1,697 @@
+## 19:119:45
+KO: 그리고 내가 넓은 곳에서 걸을 것이니, 이는 내가 주의 법도들을 찾았기 때문입니다.
+1	וְאֶתְהַלְּכָ֥ה	and I will walk about	→ 걸을
+2	בָרְחָבָ֑ה	in the broad place	→ 넓은 곳에서
+3	כִּ֖י	for	→ —
+4	פִקֻּדֶ֣יךָ	precepts your	→ 법도들을
+5	דָרָֽשְׁתִּי	I have sought	→ 찾았기
+
+## 19:129:6
+KO: 그들은 지붕 위의 풀들처럼 될지니, 그것은 자라기 전에 시들어 버리는 것이라.
+1	יִ֭הְיוּ	may they be	→ 될지니
+2	כַּחֲצִ֣יר	like [the] grass of	→ 풀들처럼
+3	גַּגּ֑וֹת	roofs	→ 지붕
+4	שֶׁקַּדְמַ֖ת	that before	→ 전에
+5	שָׁלַ֣ף	it has shot up	→ 자라기
+6	יָבֵֽשׁ	it has withered	→ 시들어 버리는
+
+## 19:135:1
+KO: 야를 찬양하라. 여호와의 이름을 찬양하라. 여호와의 종들아, 찬양하라.
+1	הַ֥לְלוּ	praise	→ 찬양하라
+2	יָ֨הּ׀	Yahweh	→ 야를
+3	הַֽ֭לְלוּ	praise	→ 찬양하라
+4	אֶת־	<obj.>	→ —
+5	שֵׁ֣ם	[the] name of	→ 이름을
+6	יְהוָ֑ה	Yahweh	→ 여호와의
+7	הַֽ֝לְלוּ	praise	→ 찬양하라
+8	עַבְדֵ֥י	O servants of	→ 종들아
+9	יְהוָֽה	Yahweh	→ 여호와의
+
+## 19:135:17
+KO: 그들에게 귀들이 있으나 듣지 못하며, 또한 그들의 입 안에는 아무런 호흡도 없느니라.
+1	אָזְנַ֣יִם	ears	→ 귀들이
+2	לָ֭הֶם	[belong] to them	→ 그들에게
+3	וְלֹ֣א	and not	→ 듣지 못하며
+4	יַאֲזִ֑ינוּ	they give ear	→ 듣지 못하며
+5	אַ֝֗ף	also	→ 또한
+6	אֵין־	there not	→ 아무런
+7	יֶשׁ־	there	→ 없느니라
+8	ר֥וּחַ	[is] breath	→ 호흡도
+9	בְּפִיהֶֽם	in mouth their	→ 입 안에는
+
+## 19:145:6
+KO: 그리고 그들이 당신의 두려운 일들의 세력을 말할 것이요, 나도 당신의 위대하심을 선포하리이다.
+1	וֶעֱז֣וּז	and [the] might of	→ 당신의 두려운 일들의 세력을
+2	נוֹרְאֹתֶ֣יךָ	awesome [deeds] your	→ 당신의 두려운 일들의 세력을
+3	יֹאמֵ֑רוּ	they will tell	→ 말할 것이요
+4	וּגְדוּלָּתְךָ֥	and greatness your	→ 당신의 위대하심을
+5	אֲסַפְּרֶֽנָּה	I will recount it	→ 선포하리이다
+
+## 19:147:1
+KO: 야를 찬양하라! 왜냐하면 우리 하나님께 노래하는 것이 선하기 때문이며, 왜냐하면 찬양이 아름답고 마땅하기 때문이다.
+1	הַ֥לְלוּ	praise	→ 찬양하라
+2	יָ֨הּ׀	Yahweh	→ 야를
+3	כִּי־	for	→ 왜냐하면
+4	ט֭וֹב	[is] good	→ 선하기 때문이며
+5	זַמְּרָ֣ה	to sing praises to	→ 노래하는 것이
+6	אֱלֹהֵ֑ינוּ	God our	→ 우리 하나님께
+7	כִּֽי־	for	→ 왜냐하면
+8	נָ֝עִים	[is] pleasant	→ 아름답고
+9	נָאוָ֥ה	[is] fitting	→ 마땅하기 때문이다
+10	תְהִלָּֽה	praise	→ 찬양이
+
+## 20:4:27
+KO: 오른쪽으로나 왼쪽으로나 치우치지 말라, 네 발을 악으로부터 돌이키라.
+1	אַֽל־	may not	→ 치우치지 말라
+2	תֵּט־	you turn aside	→ 치우치지 말라
+3	יָמִ֥ין	right	→ 오른쪽으로나
+4	וּשְׂמֹ֑אול	and left	→ 왼쪽으로나
+5	הָסֵ֖ר	turn aside	→ 돌이키라
+6	רַגְלְךָ֣	foot your	→ 네 발을
+7	מֵרָֽע	from evil	→ 악으로부터
+
+## 20:9:9
+KO: 지혜 있는 자에게 주라, 그러면 그가 더욱 지혜로워질 것이요. 의로운 자에게 알게 하라, 그러면 그가 학식을 더할 것이다.
+1	תֵּ֣ן	give	→ 주라
+2	לְ֭חָכָם	to a wise [person]	→ 지혜
+3	וְיֶחְכַּם־	so he may be wise	→ 지혜로워질
+4	ע֑וֹד	yet	→ 더욱
+5	הוֹדַ֥ע	make known	→ 알게 하라
+6	לְ֝צַדִּ֗יק	to a righteous [person]	→ 의로운
+7	וְי֣וֹסֶף	so may he increase	→ 더할
+8	לֶֽקַח׃ פ	insight	→ 학식을
+
+## 20:13:22
+KO: 선한 자는 아들들의 아들들에게 유산으로 물려주나, 죄인의 재물은 의인을 위하여 쌓여 있느니라.
+1	ט֗וֹב	a good [person]	→ 선한
+2	יַנְחִ֥יל	he leaves an inheritance to	→ 유산으로 물려주나
+3	בְּנֵֽי־	children of	→ 아들들의
+4	בָנִ֑ים	children	→ 아들들에게
+5	וְצָפ֥וּן	and [is] stored up	→ 쌓여 있느니라
+6	לַ֝צַּדִּ֗יק	for the righteous	→ 의인을 위하여
+7	חֵ֣יל	[the] wealth of	→ 재물은
+8	חוֹטֵֽא	a sinner	→ 죄인의
+
+## 20:19:25
+KO: 거만한 자를 네가 때리라, 그리하면 어리석은 자가 신중해질 것이며, 명철한 자를 책망하라, 그리하면 그가 지식을 깨달을 것이다.
+1	לֵ֣ץ	a mocker	→ 거만한 자를
+2	תַּ֭כֶּה	you will strike	→ 때리라
+3	וּפֶ֣תִי	and a naive person	→ 어리석은 자가
+4	יַעְרִ֑ם	he will become prudent	→ 신중해질 것이며
+5	וְהוֹכִ֥יחַ	and to reprove	→ 책망하라
+6	לְ֝נָב֗וֹן	<to> a discerning [person]	→ 명철한 자를
+7	יָבִ֥ין	he will understand	→ 깨달을 것이다
+8	דָּֽעַת	knowledge	→ 지식을
+
+## 20:20:5
+KO: 사람의 마음속에 있는 모략은 깊은 물들과 같으니, 명철한 사람은 그것을 길어 올릴 것이다.
+1	מַ֣יִם	[is] water	→ 물들과 같으니
+2	עֲ֭מֻקִּים	deep	→ 깊은
+3	עֵצָ֣ה	a plan	→ 모략은
+4	בְלֶב־	in [the] heart of	→ 마음속에
+5	אִ֑ישׁ	a person	→ 사람의
+6	וְאִ֖ישׁ	and a person of	→ 사람은
+7	תְּבוּנָ֣ה	understanding	→ 명철한
+8	יִדְלֶֽנָּה	he draws out it	→ 길어 올릴 것이다
+
+## 20:22:29
+KO: 네가 자기 일에 신속한 사람을 보았느냐? 그는 왕들 앞에 설 것이요, 그는 보잘것없는 자들 앞에 서지 아니하리라.
+1	חָזִ֡יתָ	you see	→ 보았느냐
+2	אִ֤ישׁ׀	a person	→ 사람을
+3	מָ֘הִ֤יר	skilled	→ 신속한
+4	בִּמְלַאכְתּ֗וֹ	in work his	→ 일에
+5	לִֽפְנֵֽי־	<to> before	→ 앞에
+6	מְלָכִ֥ים	kings	→ 왕들
+7	יִתְיַצָּ֑ב	he will take his stand	→ 설 것이요
+8	בַּל־	not	→ 아니하리라
+9	יִ֝תְיַצֵּב	he will take his stand	→ 서지
+10	לִפְנֵ֥י	<to> before	→ 앞에
+11	חֲשֻׁכִּֽים׃ פ	insignificant [people]	→ 보잘것없는 자들
+
+## 20:23:13
+KO: 아이에게서 훈계를 금하지 말라. 네가 그를 채찍으로 때릴지라도 그는 죽지 않을 것이다.
+1	אַל־	may not	→ 금하지 말라
+2	תִּמְנַ֣ע	you withhold	→ 금하지 말라
+3	מִנַּ֣עַר	from a youth	→ 아이에게서
+4	מוּסָ֑ר	discipline	→ 훈계를
+5	כִּֽי־	for	→ 때릴지라도
+6	תַכֶּ֥נּוּ	you will strike him	→ 때릴지라도
+7	בַ֝שֵּׁ֗בֶט	with the rod	→ 채찍으로
+8	לֹ֣א	not	→ 죽지 않을 것이다
+9	יָמֽוּת	he will die	→ 죽지 않을 것이다
+
+## 20:29:16
+KO: 악인들이 많아질 때에 범죄가 많아진다. 그러나 의인들은 그들의 패망을 볼 것이다.
+1	בִּרְב֣וֹת	when increase	→ 많아질
+2	רְ֭שָׁעִים	wicked [people]	→ 악인들이
+3	יִרְבֶּה־	it increases	→ 많아진다
+4	פָּ֑שַׁע	transgression	→ 범죄가
+5	וְ֝צַדִּיקִ֗ים	and righteous [people]	→ 의인들은
+6	בְּֽמַפַּלְתָּ֥ם	on overthrow their	→ 패망을
+7	יִרְאֽוּ	they will look	→ 볼
+
+## 20:30:26
+KO: 사반들은 강하지 않은 민족이되, 그들의 집을 바위 위에 두느니라.
+1	שְׁ֭פַנִּים	rock badgers	→ 사반들은
+2	עַ֣ם	[are] a people	→ 민족이되
+3	לֹא־	not	→ 않은
+4	עָצ֑וּם	mighty	→ 강하지
+5	וַיָּשִׂ֖ימוּ	and they made	→ 두느니라
+6	בַסֶּ֣לַע	in the rock[s]	→ 바위 위에
+7	בֵּיתָֽם	home their	→ 그들의 집을
+
+## 21:2:12
+KO: 그리고 내가 지혜와 미친 짓과 어리석음을 보려고 돌이켰으니, 이는 왕의 뒤에 오는 사람이 무엇을 하겠는가? 이미 행해진 그것일 뿐이라.
+1	וּפָנִ֤יתִֽי	and I turned	→ 돌이켰으니
+2	אֲנִי֙	I	→ 내가
+3	לִרְא֣וֹת	to consider	→ 보려고
+4	חָכְמָ֔ה	wisdom	→ 지혜와
+5	וְהוֹלֵל֖וֹת	and madness	→ 미친 짓과
+6	וְסִכְל֑וּת	and folly	→ 어리석음을
+7	כִּ֣י׀	for	→ 이는
+8	מֶ֣ה	what?	→ 무엇을
+9	הָאָדָ֗ם	[is] the person	→ 사람이
+10	שֶׁיָּבוֹא֙	who <he >will come	→ 오는
+11	אַחֲרֵ֣י	after	→ 뒤에
+12	הַמֶּ֔לֶךְ	the king	→ 왕의
+13	אֵ֥ת	<obj.>	→ —
+14	אֲשֶׁר־	[that] which	→ 그것일 뿐이라
+15	כְּבָ֖ר	already	→ 이미
+16	עָשֽׂוּהוּ	people have done it	→ 행해진
+
+## 21:7:4
+KO: 지혜로운 자들의 마음은 애곡하는 집에 있고, 미련한 자들의 마음은 기쁨의 집에 있느니라.
+1	לֵ֤ב	[the] heart of	→ 마음은
+2	חֲכָמִים֙	wise people	→ 지혜로운 자들의
+3	בְּבֵ֣ית	[is] in a house of	→ 집에
+4	אֵ֔בֶל	mourning	→ 애곡하는
+5	וְלֵ֥ב	and [the] heart of	→ 마음은
+6	כְּסִילִ֖ים	fools	→ 미련한 자들의
+7	בְּבֵ֥ית	[is] in a house of	→ 집에
+8	שִׂמְחָֽה	gladness	→ 기쁨의
+
+## 21:8:3
+KO: 그의 얼굴 앞에서 서두르지 말고 떠나지 마라. 악한 일에 서 있지 마라. 왜냐하면 그가 기뻐하는 모든 것을 그가 행하기 때문이다.
+1	אַל־	may not	→ 서두르지 말고
+2	תִּבָּהֵ֤ל	you be hasty	→ 서두르지 말고
+3	מִפָּנָיו֙	from before him	→ 그의 얼굴 앞에서
+4	תֵּלֵ֔ךְ	you will go	→ 떠나지 마라
+5	אַֽל־	may not	→ 서 있지 마라
+6	תַּעֲמֹ֖ד	you stand	→ 서 있지 마라
+7	בְּדָבָ֣ר	in a matter	→ 일에
+8	רָ֑ע	evil	→ 악한
+9	כִּ֛י	for	→ 왜냐하면
+10	כָּל־	all	→ 모든
+11	אֲשֶׁ֥ר	that	→ 것을
+12	יַחְפֹּ֖ץ	he will desire	→ 기뻐하는
+13	יַעֲשֶֽׂה	he will do	→ 행하기
+
+## 21:10:12
+KO: 지혜자의 입의 말들은 은혜이나, 우매자의 입술들은 그를 삼킨다.
+1	דִּבְרֵ֥י	[the] words of	→ 말들은
+2	פִי־	[the] mouth of	→ 입의
+3	חָכָ֖ם	a wise [person]	→ 지혜자의
+4	חֵ֑ן	[are] favor	→ 은혜이나
+5	וְשִׂפְת֥וֹת	and [the] lips of	→ 입술들은
+6	כְּסִ֖יל	a fool	→ 우매자의
+7	תְּבַלְּעֶֽנּוּ	it swallows him	→ 삼킨다
+
+## 22:4:11
+KO: 꿀이 떨어진다, 네 입술들로부터, 신부야; 꿀과 젖이 네 혀 아래에 있고, 네 의복들의 향기는 레바논의 향기 같구나.
+1	נֹ֛פֶת	honey	→ 꿀이
+2	תִּטֹּ֥פְנָה	they drip	→ 떨어진다
+3	שִׂפְתוֹתַ֖יִךְ	lips your	→ 네 입술들로부터
+4	כַּלָּ֑ה	O bride	→ 신부야
+5	דְּבַ֤שׁ	honey	→ 꿀과
+6	וְחָלָב֙	and milk	→ 젖이
+7	תַּ֣חַת	[are] under	→ 아래에
+8	לְשׁוֹנֵ֔ךְ	tongue your	→ 네 혀
+9	וְרֵ֥יחַ	and [the] odor of	→ 향기는
+10	שַׂלְמֹתַ֖יִךְ	garments your	→ 네 의복들의
+11	כְּרֵ֥יחַ	[is] like [the] odor of	→ 향기 같구나
+12	לְבָנֽוֹן׃ ס	Lebanon	→ 레바논의
+
+## 23:2:20
+KO: 그 날에 사람이 자기의 은 우상들과 자기의 금 우상들을, 곧 자기가 경배하려고 만든 그것들을 두더쥐들과 박쥐들에게 던질 것이라.
+1	בַּיּ֤וֹם	in the day	→ 그 날에
+2	הַהוּא֙	<the> that	→ 그 날에
+3	יַשְׁלִ֣יךְ	it will throw away	→ 던질 것이라
+4	הָאָדָ֔ם	<the> humankind	→ 사람이
+5	אֵ֚ת	<obj.>	→ —
+6	אֱלִילֵ֣י	[the] idols of	→ 우상들과
+7	כַסְפּ֔וֹ	silver its	→ 은
+8	וְאֵ֖ת	and <obj.>	→ —
+9	אֱלִילֵ֣י	[the] idols of	→ 우상들을
+10	זְהָב֑וֹ	gold its	→ 금
+11	אֲשֶׁ֤ר	which	→ —
+12	עָֽשׂוּ־	they made	→ 만든
+13	לוֹ֙	for himself	→ —
+14	לְהִֽשְׁתַּחֲוֹ֔ת	to bow down	→ 경배하려고
+15	לַחְפֹּ֥ר	to [the] digging of	→ 두더쥐들과
+16	פֵּר֖וֹת	moles	→ 두더쥐들과
+17	וְלָעֲטַלֵּפִֽים	and to the bats	→ 박쥐들에게
+
+## 23:5:15
+KO: 그리고 사람이 굴복될 것이며, 사람이 낮아질 것이고, 오만한 자들의 눈들은 낮아질 것이다.
+1	וַיִּשַּׁ֥ח	and he has been humbled	→ 굴복될 것이며
+2	אָדָ֖ם	everyone	→ 사람이
+3	וַיִּשְׁפַּל־	and he has become low	→ 낮아질 것이고
+4	אִ֑ישׁ	everyone	→ 사람이
+5	וְעֵינֵ֥י	and [the] eyes of	→ 눈들은
+6	גְבֹהִ֖ים	proud [people]	→ 오만한 자들의
+7	תִּשְׁפַּֽלְנָה	they will become low	→ 낮아질 것이다
+
+## 23:5:23
+KO: 뇌물의 결과로 악인을 의롭다 하고, 의인들의 의로움을 그들에게서 빼앗는도다.
+1	מַצְדִּיקֵ֥י	[those who] justify	→ 의롭다 하고
+2	רָשָׁ֖ע	<of> a wicked [person]	→ 악인을
+3	עֵ֣קֶב	[the] consequence of	→ 결과로
+4	שֹׁ֑חַד	a bribe	→ 뇌물의
+5	וְצִדְקַ֥ת	and [the] righteousness of	→ 의로움을
+6	צַדִּיקִ֖ים	righteous [people]	→ 의인들의
+7	יָסִ֥ירוּ	they take away	→ 빼앗는도다
+8	מִמֶּֽנּוּ׃ ס	from him	→ 그들에게서
+
+## 23:14:14
+KO: 내가 구름들의 높은 곳들 위로 올라가, 지극히 높은 자와 닮아지리라.
+1	אֶעֱלֶ֖ה	I will ascend	→ 올라가
+2	עַל־	above	→ 위로
+3	בָּ֣מֳתֵי	[the] high places of	→ 높은 곳들
+4	עָ֑ב	[the] cloud[s]	→ 구름들의
+5	אֶדַּמֶּ֖ה	I will make myself like	→ 닮아지리라
+6	לְעֶלְיֽוֹן	<to> [the] Most High	→ 지극히 높은 자와
+
+## 23:16:13
+KO: 이것은 여호와께서 과거로부터 모압에 대하여 말씀하셨던 그 말씀이다.
+1	זֶ֣ה	this	→ 이것은
+2	הַדָּבָ֗ר	[is] the word	→ 그 말씀이다
+3	אֲשֶׁ֨ר	which	→ 말씀하셨던
+4	דִּבֶּ֧ר	he has spoken	→ 말씀하셨던
+5	יְהוָ֛ה	Yahweh	→ 여호와께서
+6	אֶל־	concerning	→ 모압에 대하여
+7	מוֹאָ֖ב	Moab	→ 모압에 대하여
+8	מֵאָֽז	from then	→ 과거로부터
+
+## 23:21:10
+KO: 나의 타작된 것이여, 나의 타작마당의 아들이여, 내가 이스라엘의 하나님 만군의 여호와께 들은 것을 너희에게 고하였노라.
+1	מְדֻשָׁתִ֖י	O threshed one my	→ 나의 타작된 것이여
+2	וּבֶן־	and [the] son of	→ 아들이여
+3	גָּרְנִ֑י	threshing floor my	→ 나의 타작마당의
+4	אֲשֶׁ֣ר	[that] which	→ 것을
+5	שָׁמַ֗עְתִּי	I have heard	→ 들은
+6	מֵאֵ֨ת	from with	→ 여호와께
+7	יְהוָ֧ה	Yahweh	→ 여호와께
+8	צְבָא֛וֹת	of hosts	→ 만군의
+9	אֱלֹהֵ֥י	[the] God of	→ 하나님
+10	יִשְׂרָאֵ֖ל	Israel	→ 이스라엘의
+11	הִגַּ֥דְתִּי	I have told	→ 고하였노라
+12	לָכֶֽם׃ ס	to <the> you	→ 너희에게
+
+## 23:22:17
+KO: 보라, 여호와가 너를 힘센 자가 내던지듯 세게 내던질 것이며, 너를 단단히 감쌀 것이다.
+1	הִנֵּ֤ה	there!	→ 보라
+2	יְהוָה֙	Yahweh	→ 여호와가
+3	מְטַלְטֶלְךָ֔	[is] about to hurl away you	→ 내던질 것이며
+4	טַלְטֵלָ֖ה	hurling	→ 내던지듯
+5	גָּ֑בֶר	O man	→ 힘센 자가
+6	וְעֹטְךָ֖	and [is] about to grasp you	→ 감쌀 것이다
+7	עָטֹֽה	completely <to grasp>	→ 단단히
+
+## 23:23:6
+KO: 다시스로 건너가라, 해안의 거민들아, 슬피 울부짖으라.
+1	עִבְר֖וּ	pass over	→ 건너가라
+2	תַּרְשִׁ֑ישָׁה	Tarshish towards	→ 다시스로
+3	הֵילִ֖ילוּ	wail	→ 슬피 울부짖으라
+4	יֹ֥שְׁבֵי	O inhabitants of	→ 거민들아
+5	אִֽי	[the] coastland	→ 해안의
+
+## 23:28:15
+KO: 이는 너희가 말하기를 "우리는 죽음과 언약을 맺었고, 스올(음부)과 협약을 세웠다. 넘치는 채찍이 지나갈지라도 그것은 우리에게 이르지 않을 것이다. 이는 우리가 거짓을 우리의 피난처로 삼았고, 속임수 아래에 우리를 숨겼기 때문이다"라고 하기 때문이다.
+1	כִּ֣י	for	→ 이는
+2	אֲמַרְתֶּ֗ם	you have said	→ 말하기를
+3	כָּרַ֤תְנֽוּ	we have made	→ 맺었고
+4	בְרִית֙	a covenant	→ 언약을
+5	אֶת־	with	→ 죽음과
+6	מָ֔וֶת	death	→ 죽음과
+7	וְעִם־	and with	→ 스올(음부)과
+8	שְׁא֖וֹל	Sheol	→ 스올(음부)과
+9	עָשִׂ֣ינוּ	we have made	→ 세웠다
+10	חֹזֶ֑ה	an agreement	→ 협약을
+11	שׁ֣וֹט	a scourge	→ 채찍이
+12	שׁוֹטֵ֤ף	overflowing	→ 넘치는
+13	כִּֽי־	if	→ 지나갈지라도
+14	יַֽעֲבֹר֙	it will pass by	→ 지나갈지라도
+15	לֹ֣א	not	→ 않을
+16	יְבוֹאֵ֔נוּ	it will come to us	→ 우리에게 이르지
+17	כִּ֣י	for	→ 이는
+18	שַׂ֧מְנוּ	we have made	→ 삼았고
+19	כָזָ֛ב	falsehood	→ 거짓을
+20	מַחְסֵ֖נוּ	refuge our	→ 우리의 피난처로
+21	וּבַשֶּׁ֥קֶר	and in <the> deception	→ 속임수 아래에
+22	נִסְתָּֽרְנוּ׃ ס	we have hidden ourselves	→ 우리를 숨겼기
+
+## 23:30:28
+KO: 그리고 그의 호흡은 목까지 가르는 범람하는 급류 같아서, 열방을 허무의 키로 흔들며, 민족들의 턱 위에는 미혹케 하는 자갈을 두시리라.
+1	וְרוּח֞וֹ	and breath his	→ 그의 호흡은
+2	כְּנַ֤חַל	[is] like a torrent	→ 급류 같아서
+3	שׁוֹטֵף֙	overflowing	→ 범람하는
+4	עַד־	to	→ 목까지
+5	צַוָּ֣אר	[the] neck	→ 목까지
+6	יֶֽחֱצֶ֔ה	it reaches	→ 가르는
+7	לַהֲנָפָ֥ה	for shaking	→ 흔들며
+8	גוֹיִ֖ם	nations	→ 열방을
+9	בְּנָ֣פַת	in a sieve of	→ 키로
+10	שָׁ֑וְא	worthlessness	→ 허무의
+11	וְרֶ֣סֶן	and a halter	→ 자갈을
+12	מַתְעֶ֔ה	[which] leads astray	→ 미혹케 하는
+13	עַ֖ל	[is] on	→ 위에는
+14	לְחָיֵ֥י	[the] jaws of	→ 턱
+15	עַמִּֽים	peoples	→ 민족들의
+
+## 23:32:8
+KO: 고귀한 자는 고귀한 것들을 계획하고, 그는 고귀한 것들 위에 설 것이다.
+1	וְנָדִ֖יב	and a noble [person]	→ 고귀한 자는
+2	נְדִיב֣וֹת	noble deeds	→ 고귀한 것들을
+3	יָעָ֑ץ	he plans	→ 계획하고
+4	וְה֖וּא	and he	→ 그는
+5	עַל־	on	→ 위에
+6	נְדִיב֥וֹת	noble deeds	→ 고귀한 것들
+7	יָקֽוּם׃ פ	he stands	→ 설 것이다
+
+## 23:40:21
+KO: 알지 못하였느냐? 너희가 듣지 못하였느냐? 태초로부터 너희에게 전하여지지 아니하였느냐? 너희가 땅의 기초들을 깨닫지 못하였느냐?
+1	הֲל֤וֹא	¿ not	→ 알지 못하였느냐
+2	תֵֽדְעוּ֙	do you know	→ 알지 못하였느냐
+3	הֲל֣וֹא	¿ not	→ 듣지 못하였느냐
+4	תִשְׁמָ֔עוּ	do you hear	→ 듣지 못하였느냐
+5	הֲל֛וֹא	¿ not	→ 전하여지지 아니하였느냐
+6	הֻגַּ֥ד	has it been told	→ 전하여지지 아니하였느냐
+7	מֵרֹ֖אשׁ	from [the] beginning	→ 태초로부터
+8	לָכֶ֑ם	to you	→ 너희에게
+9	הֲלוֹא֙	¿ not	→ 깨닫지 못하였느냐
+10	הֲבִ֣ינֹתֶ֔ם	have you understood	→ 깨닫지 못하였느냐
+11	מוֹסְד֖וֹת	[the] foundations of	→ 기초들을
+12	הָאָֽרֶץ	the earth	→ 땅의
+
+## 23:49:17
+KO: 너의 자녀들은 서두를 것이고, 너를 무너뜨리는 자들과 너를 황폐하게 하는 자들은 너로부터 나갈 것이다.
+1	מִֽהֲר֖וּ	they have made haste	→ 서두를 것이고
+2	בָּנָ֑יִךְ	children your	→ 자녀들은
+3	מְהָֽרְסַ֥יִךְ	[those who] tear down you	→ 무너뜨리는 자들과
+4	וּמַחֲרִבַ֖יִךְ	and [those who] make desolate you	→ 황폐하게 하는 자들은
+5	מִמֵּ֥ךְ	from you	→ 너로부터
+6	יֵצֵֽאוּ	they will go out	→ 나갈 것이다
+
+## 23:51:8
+KO: 왜냐하면 옷처럼 좀이 그들을 먹을 것이고, 양털처럼 좀벌레가 그들을 먹을 것이기 때문이다. 그러나 나의 의는 영원히 있을 것이며, 나의 구원은 대대로 미칠 것이다.
+1	כִּ֤י	for	→ 왜냐하면
+2	כַבֶּ֙גֶד֙	like <the> garment	→ 옷처럼
+3	יֹאכְלֵ֣ם	it will eat them	→ 먹을 것이고
+4	עָ֔שׁ	moth	→ 좀이
+5	וְכַצֶּ֖מֶר	and like <the> wool	→ 양털처럼
+6	יֹאכְלֵ֣ם	it will eat them	→ 먹을 것이기 때문이다
+7	סָ֑ס	clothes-moth	→ 좀벌레가
+8	וְצִדְקָתִי֙	and righteousness my	→ 나의 의는
+9	לְעוֹלָ֣ם	for ever	→ 영원히
+10	תִּֽהְיֶ֔ה	it will be	→ 있을 것이며
+11	וִישׁוּעָתִ֖י	and salvation my	→ 나의 구원은
+12	לְד֥וֹר	to a generation of	→ 대대로
+13	דּוֹרִֽים׃ ס	generations	→ 대대로
+
+## 24:1:10
+KO: 보라, 내가 오늘 이 날에 너를 민족들 위와 왕국들 위에 세웠으니, 뽑아내며, 무너뜨리며, 멸망시키며, 파괴하며, 건설하며, 심기 위함이다.
+1	רְאֵ֞ה	see	→ 보라
+2	הִפְקַדְתִּ֣יךָ׀	I appoint you	→ 세웠으니
+3	הַיּ֣וֹם	the day	→ 오늘
+4	הַזֶּ֗ה	<the> this	→ 이 날에
+5	עַל־	over	→ 위와
+6	הַגּוֹיִם֙	the nations	→ 민족들
+7	וְעַל־	and over	→ 위에
+8	הַמַּמְלָכ֔וֹת	<the> kingdoms	→ 왕국들
+9	לִנְת֥וֹשׁ	to pluck up	→ 뽑아내며
+10	וְלִנְת֖וֹץ	and to pull down	→ 무너뜨리며
+11	וּלְהַאֲבִ֣יד	and to destroy	→ 멸망시키며
+12	וְלַהֲר֑וֹס	and to tear down	→ 파괴하며
+13	לִבְנ֖וֹת	to build	→ 건설하며
+14	וְלִנְטֽוֹעַ׃ פ	and to plant	→ 심기 위함이다
+
+## 24:7:8
+KO: 보라, 너희가 너희를 위해 거짓의 말들을 의뢰하며, 유익하지 못하게 하는도다.
+1	הִנֵּ֤ה	here!	→ 보라
+2	אַתֶּם֙	you	→ 너희가
+3	בֹּטְחִ֣ים	[are] relying	→ 의뢰하며
+4	לָכֶ֔ם	for <the> yourselves	→ 너희를 위해
+5	עַל־	on	→ 말들을
+6	דִּבְרֵ֖י	<the> words of	→ 말들을
+7	הַשָּׁ֑קֶר	<the> deception	→ 거짓의
+8	לְבִלְתִּ֖י	to not	→ 유익하지 못하게 하는도다
+9	הוֹעִֽיל	to profit	→ 유익하지 못하게 하는도다
+
+## 24:10:11
+KO: 이같이 너희는 그들에게 말하라. 하늘과 땅을 만들지 아니한 신들은 땅으로부터 그리고 이 하늘 아래로부터 멸망할 것이다.
+1	כִּדְנָה֙	like this	→ 이같이
+2	תֵּאמְר֣וּן	you will say	→ 말하라
+3	לְה֔וֹם	to <the> them	→ 그들에게
+4	אֱלָ֣הַיָּ֔א	gods the	→ 신들은
+5	דִּֽי־	who	→ —
+6	שְׁמַיָּ֥א	heavens the	→ 하늘과
+7	וְאַרְקָ֖א	and earth the	→ 땅을
+8	לָ֣א	not	→ 만들지 아니한
+9	עֲבַ֑דוּ	they made	→ 만들지 아니한
+10	יֵאבַ֧דוּ	may they perish	→ 멸망할 것이다
+11	מֵֽאַרְעָ֛א	from earth the	→ 땅으로부터
+12	וּמִן־	and from	→ 그리고
+13	תְּח֥וֹת	under	→ 아래로부터
+14	שְׁמַיָּ֖א	heavens the	→ 하늘
+15	אֵֽלֶּה׃ ס	these	→ 이
+
+## 24:17:7
+KO: 복되도다, 여호와를 의지하고 여호와가 그의 의지처가 되는 그 사람은.
+1	בָּר֣וּךְ	[is] blessed	→ 복되도다
+2	הַגֶּ֔בֶר	the man	→ 그 사람은
+3	אֲשֶׁ֥ר	who	→ —
+4	יִבְטַ֖ח	he trusts	→ 의지하고
+5	בַּֽיהוָ֑ה	in Yahweh	→ 여호와를
+6	וְהָיָ֥ה	and he is	→ 되는
+7	יְהוָ֖ה	Yahweh	→ 여호와가
+8	מִבְטַחֽוֹ	trust his	→ 그의 의지처가
+
+## 24:18:1
+KO: 여호와로부터 예레미야에게 임한 그 말씀, 이르시되
+1	הַדָּבָר֙	the word	→ 그 말씀
+2	אֲשֶׁ֣ר	which	→ 임한
+3	הָיָ֣ה	it came	→ 임한
+4	אֶֽל־	to	→ 예레미야에게
+5	יִרְמְיָ֔הוּ	Jeremiah	→ 예레미야에게
+6	מֵאֵ֥ת	from with	→ 여호와로부터
+7	יְהוָ֖ה	Yahweh	→ 여호와로부터
+8	לֵאמֹֽר	<to> saying	→ 이르시되
+
+## 24:23:17
+KO: 그들은 나를 멸시하는 자들에게 끊임없이 말하기를 “평안이 너희에게 있을 것이다”라고 여호와께서 말씀하신다. 그리고 자기 마음의 완고함대로 행하는 모든 자에게 말하기를 “재앙이 너희에게 임하지 않을 것이다”라고 말하였다.
+1	אֹמְרִ֤ים	[they are] saying	→ 그들은
+2	אָמוֹר֙	continually <to say>	→ 끊임없이 말하기를
+3	לִֽמְנַאֲצַ֔י	to [those who] despise me	→ 나를 멸시하는 자들에게
+4	דִּבֶּ֣ר	he says	→ 말씀하신다
+5	יְהוָ֔ה	Yahweh	→ 여호와께서
+6	שָׁל֖וֹם	peace	→ 평안이
+7	יִֽהְיֶ֣ה	it will belong	→ 있을 것이다
+8	לָכֶ֑ם	to <the> you	→ 너희에게
+9	וְ֠כֹל	and every	→ 모든
+10	הֹלֵ֞ךְ	[one who] walks	→ 행하는
+11	בִּשְׁרִר֤וּת	in [the] stubbornness of	→ 완고함대로
+12	לִבּוֹ֙	own heart his	→ 마음의
+13	אָֽמְר֔וּ	they have said	→ 말하였다
+14	לֹֽא־	not	→ 임하지 않을 것이다
+15	תָב֥וֹא	it will come	→ 임하지 않을 것이다
+16	עֲלֵיכֶ֖ם	on you	→ 너희에게
+17	רָעָֽה	calamity	→ 재앙이
+
+## 24:25:24
+KO: 그리고 아라비아의 모든 왕들과, 광야에서 거주하는 잡족(혼합된 자들)의 모든 왕들과,
+1	וְאֵ֖ת	and <obj.>	→ —
+2	כָּל־	all	→ 모든
+3	מַלְכֵ֣י	[the] kings of	→ 왕들과
+4	עֲרָ֑ב	Arabia	→ 아라비아의
+5	וְאֵת֙	and <obj.>	→ —
+6	כָּל־	all	→ 모든
+7	מַלְכֵ֣י	[the] kings of	→ 왕들과
+8	הָעֶ֔רֶב	the Arab[s]	→ 잡족(혼합된 자들)의
+9	הַשֹּׁכְנִ֖ים	who dwell	→ 거주하는
+10	בַּמִּדְבָּֽר	in the wilderness	→ 광야에서
+
+## 24:27:5
+KO: 나 자신이 나의 큰 힘과 나의 펼쳐진 팔로 땅과 사람과 땅의 표면 위에 있는 짐승들을 만들었고, 나의 눈에 바른 자에게 그것을 주었노라.
+1	אָנֹכִ֞י	I	→ 나
+2	עָשִׂ֣יתִי	I made	→ 만들었고
+3	אֶת־	<obj.>	→ —
+4	הָאָ֗רֶץ	the earth	→ 땅과
+5	אֶת־	<obj.>	→ —
+6	הָאָדָ֤ם	<the> humankind	→ 사람과
+7	וְאֶת־	and <obj.>	→ 사람과
+8	הַבְּהֵמָה֙	the animal[s]	→ 짐승들을
+9	אֲשֶׁר֙	which	→ 있는
+10	עַל־	[are] on	→ 위에
+11	פְּנֵ֣י	[the] surface of	→ 표면
+12	הָאָ֔רֶץ	the earth	→ 땅의
+13	בְּכֹחִי֙	by power my	→ 나의 큰 힘과
+14	הַגָּד֔וֹל	<the> great	→ 나의 큰 힘과
+15	וּבִזְרוֹעִ֖י	and by arm my	→ 나의 펼쳐진 팔로
+16	הַנְּטוּיָ֑ה	<the> outstretched	→ 나의 펼쳐진 팔로
+17	וּנְתַתִּ֕יהָ	and I give it	→ 주었노라
+18	לַאֲשֶׁ֖ר	to [those] whom	→ 자에게
+19	יָשַׁ֥ר	it is pleasing	→ 바른
+20	בְּעֵינָֽי	in view my	→ 나의 눈에
+
+## 24:34:3
+KO: 그리고 너는 그의 손에서 벗어나지 못할 것이며, 왜냐하면 너는 반드시 붙잡혀 그의 손에 넘겨질 것이고, 네 눈들은 바벨론 왕의 눈들을 볼 것이며, 그의 입은 네 입과 함께 말할 것이고, 너는 바벨론으로 들어갈 것이다.
+1	וְאַתָּ֗ה	and you	→ 너는
+2	לֹ֚א	not	→ 벗어나지 못할
+3	תִמָּלֵט֙	you will escape	→ 벗어나지 못할
+4	מִיָּד֔וֹ	from hand his	→ 손에서
+5	כִּ֚י	for	→ 왜냐하면
+6	תָּפֹ֣שׂ	certainly <to capture>	→ 반드시
+7	תִּתָּפֵ֔שׂ	you will be captured	→ 붙잡혀
+8	וּבְיָד֖וֹ	and in hand his	→ 손에
+9	תִּנָּתֵ֑ן	you will be given	→ 넘겨질
+10	וְֽ֠עֵינֶיךָ	and eyes your	→ 네 눈들은
+11	אֶת־	<obj.>	→ —
+12	עֵינֵ֨י	[the] eyes of	→ 눈들을
+13	מֶֽלֶךְ־	[the] king of	→ 왕의
+14	בָּבֶ֜ל	Babylon	→ 바벨론
+15	תִּרְאֶ֗ינָה	they will see	→ 볼
+16	וּפִ֛יהוּ	and mouth his	→ 그의 입은
+17	אֶת־	with	→ 함께
+18	פִּ֥יךָ	mouth your	→ 네 입과
+19	יְדַבֵּ֖ר	it will speak	→ 말할
+20	וּבָבֶ֥ל	and Babylon	→ 바벨론으로
+21	תָּבֽוֹא	you will go	→ 들어갈
+
+## 24:37:15
+KO: 그리고 그 방백들이 예레미야에게 노하여 그를 때렸고, 그를 서기관 요나단의 집, 즉 감옥의 집으로 넘겨주었으니, 이는 그들이 그곳을 감옥으로 만들었기 때문이라.
+1	וַיִּקְצְפ֧וּ	and they were angry	→ 노하여
+2	הַשָּׂרִ֛ים	the officials	→ 그 방백들이
+3	עַֽל־	towards	→ 예레미야에게
+4	יִרְמְיָ֖הוּ	Jeremiah	→ 예레미야에게
+5	וְהִכּ֣וּ	and they struck	→ 때렸고
+6	אֹת֑וֹ	<obj.> him	→ —
+7	וְנָתְנ֨וּ	and they put	→ 넘겨주었으니
+8	אוֹת֜וֹ	<obj.> him	→ —
+9	בֵּ֣ית	[the] house of	→ 집으로
+10	הָאֵס֗וּר	<the> fetter[s]	→ 감옥의
+11	בֵּ֚ית	[the] house of	→ 집
+12	יְהוֹנָתָ֣ן	Jonathan	→ 요나단의
+13	הַסֹּפֵ֔ר	the scribe	→ 서기관
+14	כִּֽי־	for	→ 만들었기 때문이라
+15	אֹת֥וֹ	<obj.> it	→ 그곳을
+16	עָשׂ֖וּ	they had made	→ 만들었기 때문이라
+17	לְבֵ֥ית	into [the] house of	→ 감옥으로
+18	הַכֶּֽלֶא	<the> imprisonment	→ 감옥으로
+
+## 24:46:19
+KO: 포로의 그릇들을 너를 위하여 준비하라, 애굽에 거주하는 딸아, 왜냐하면 놉이 황무지가 될 것이며, 거주하는 자가 없이 불태워질 것이기 때문이다.
+1	כְּלֵ֤י	baggage<s> of	→ 그릇들을
+2	גוֹלָה֙	exile	→ 포로의
+3	עֲשִׂ֣י	make	→ 준비하라
+4	לָ֔ךְ	for <the> yourself	→ 너를 위하여
+5	יוֹשֶׁ֖בֶת	O inhabitant[s]	→ 거주하는
+6	בַּת־	<of> [the] daughter of	→ 딸아
+7	מִצְרָ֑יִם	Egypt	→ 애굽에
+8	כִּֽי־	for	→ 왜냐하면
+9	נֹף֙	Memphis	→ 놉이
+10	לְשַׁמָּ֣ה	<into> a waste	→ 황무지가
+11	תִֽהְיֶ֔ה	it will become	→ 될 것이며
+12	וְנִצְּתָ֖ה	and it will be made desolate	→ 불태워질 것이기
+13	מֵאֵ֥ין	from not	→ 없이
+14	יוֹשֵֽׁב׃ ס	inhabitant	→ 거주하는 자가
+
+## 24:48:11
+KO: 모압은 그의 젊음으로부터 안일하였고, 그는 그의 찌꺼기 위에 가라앉아 있었으며, 그릇에서 그릇으로 비워지지 않았고, 포로 됨으로 가지 아니하였다. 그러므로 그의 맛이 그 안에 머물러 있고, 그의 향기가 변하지 아니하였다.
+1	שַׁאֲנַ֨ן	it has been at ease	→ 안일하였고
+2	מוֹאָ֜ב	Moab	→ 모압은
+3	מִנְּעוּרָ֗יו	since youth<s> its	→ 젊음으로부터
+4	וְשֹׁקֵ֥ט	and [has been] undisturbed	→ 가라앉아 있었으며
+5	הוּא֙	it	→ 가라앉아 있었으며
+6	אֶל־	to	→ 가라앉아 있었으며
+7	שְׁמָרָ֔יו	lees its	→ 찌꺼기
+8	וְלֹֽא־	and not	→ 비워지지 않았고
+9	הוּרַ֤ק	it has been poured	→ 비워지지 않았고
+10	מִכְּלִי֙	from vessel	→ 그릇에서
+11	אֶל־	to	→ 그릇으로
+12	כֶּ֔לִי	vessel	→ 그릇으로
+13	וּבַגּוֹלָ֖ה	and in <the> exile	→ 포로 됨으로
+14	לֹ֣א	not	→ 가지 아니하였다
+15	הָלָ֑ךְ	it has gone	→ 가지 아니하였다
+16	עַל־	there-	→ 그러므로
+17	כֵּ֗ן	-fore	→ 그러므로
+18	עָמַ֤ד	it has remained	→ 머물러 있고
+19	טַעְמוֹ֙	taste its	→ 맛이
+20	בּ֔וֹ	in <the> it	→ 안에
+21	וְרֵיח֖וֹ	and aroma its	→ 향기가
+22	לֹ֥א	not	→ 변하지 아니하였다
+23	נָמָֽר׃ ס	it has been changed	→ 변하지 아니하였다
+
+## 24:49:35
+KO: 만군의 여호와가 이같이 말한다. 보라, 내가 엘람의 힘의 으뜸인 활을 꺾을 것이다.
+1	כֹּ֤ה	thus	→ 이같이
+2	אָמַר֙	he says	→ 말한다
+3	יְהוָ֣ה	Yahweh	→ 여호와가
+4	צְבָא֔וֹת	of hosts	→ 만군의
+5	הִנְנִ֥י	here I	→ 보라
+6	שֹׁבֵ֖ר	[am] about to break	→ 꺾을 것이다
+7	אֶת־	<obj.>	→ —
+8	קֶ֣שֶׁת	[the] bow of	→ 활을
+9	עֵילָ֑ם	Elam	→ 엘람의
+10	רֵאשִׁ֖ית	[the] beginning of	→ 으뜸인
+11	גְּבוּרָתָֽם	strength their	→ 힘의
+
+## 24:51:21
+KO: 그리고 내가 너로 말과 그 탄 자를 부수며, 그리고 내가 너로 병거와 그 탄 자를 부수리라.
+1	וְנִפַּצְתִּ֣י	and I smash	→ 부수며
+2	בְךָ֔	by <the> you	→ 너로
+3	ס֖וּס	horse	→ 말과
+4	וְרֹֽכְב֑וֹ	and rider its	→ 그 탄 자를
+5	וְנִפַּצְתִּ֣י	and I smash	→ 부수리라
+6	בְךָ֔	by <the> you	→ 너로
+7	רֶ֖כֶב	chariotry	→ 병거와
+8	וְרֹכְבֽוֹ	and rider[s] its	→ 그 탄 자를
+
+## 24:52:24
+KO: 그리고 시위대 장관이 대제사장 스라야와, 둘째 제사장 스바냐와, 문지기 세 사람을 붙잡았다.
+1	וַיִּקַּ֣ח	and he took	→ 붙잡았다
+2	רַב־	[the] chief of	→ 장관이
+3	טַבָּחִ֗ים	[the] bodyguards	→ 시위대
+4	אֶת־	<obj.>	→ —
+5	שְׂרָיָה֙	Seraiah	→ 스라야와
+6	כֹּהֵ֣ן	[the] priest of	→ 대제사장
+7	הָרֹ֔אשׁ	the head	→ 대제사장
+8	וְאֶת־	and <obj.>	→ —
+9	צְפַנְיָ֖ה	Zephaniah	→ 스바냐와
+10	כֹּהֵ֣ן	[the] priest of	→ 제사장
+11	הַמִּשְׁנֶ֑ה	the second rank	→ 둘째
+12	וְאֶת־	and <obj.>	→ —
+13	שְׁלֹ֖שֶׁת	[the] three	→ 세
+14	שֹׁמְרֵ֥י	[the] keepers of	→ 문지기
+15	הַסַּֽף	the threshold	→ 문지기
+
+## 26:8:1
+KO: 그리고 여섯째 해 여섯째 달 다섯째 날에 내가 나의 집에 앉아 있었고, 유다의 장로들은 내 앞에 앉아 있었는데, 거기서 주 여호와의 손이 내 위에 임하였다.
+1	וַיְהִ֣י׀	and it was	→ 그리고
+2	בַּשָּׁנָ֣ה	in the year	→ 해
+3	הַשִּׁשִּׁ֗ית	<the> sixth	→ 여섯째
+4	בַּשִּׁשִּׁי֙	in the sixth [month]	→ 여섯째
+5	בַּחֲמִשָּׁ֣ה	on [day] five	→ 다섯째 날에
+6	לַחֹ֔דֶשׁ	of the month	→ 달
+7	אֲנִי֙	I	→ 내가
+8	יוֹשֵׁ֣ב	[was] sitting	→ 앉아 있었고
+9	בְּבֵיתִ֔י	in house my	→ 나의 집에
+10	וְזִקְנֵ֥י	and [the] elders of	→ 장로들은
+11	יְהוּדָ֖ה	Judah	→ 유다의
+12	יוֹשְׁבִ֣ים	[were] sitting	→ 앉아 있었는데
+13	לְפָנָ֑י	<to> before me	→ 내 앞에
+14	וַתִּפֹּ֤ל	and it fell	→ 임하였다
+15	עָלַי֙	on me	→ 내 위에
+16	שָׁ֔ם	there	→ 거기서
+17	יַ֖ד	[the] hand of	→ 손이
+18	אֲדֹנָ֥י	[the] Lord	→ 주
+19	יְהֹוִֽה	Yahweh	→ 여호와의

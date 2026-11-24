@@ -1,0 +1,835 @@
+## 1:1:1
+KO: 태초에 하나님께서 그 하늘들과 그 땅을 창조하셨다.
+1 בְּרֵאשִׁית = in beginning (first)
+2 בָּרָא = he created (to create)
+3 אֱלֹהִים = God
+4 אֵת = <obj.>
+5 הַשָּׁמַיִם = the heavens (heaven)
+6 וְאֵת = and <obj.>
+7 הָאָרֶץ = the earth (land)
+
+## 1:1:2
+KO: 그리고 그 땅은 혼돈과 공허였고, 어둠이 깊음의 표면 위에 있었으며, 하나님의 영은 물들의 표면 위를 배회하고 계셨다.
+1 וְהָאָרֶץ = and the earth (land)
+2 הָיְתָה = <it> was (to be)
+3 תֹהוּ = formlessness
+4 וָבֹהוּ = and emptiness (void)
+5 וְחֹשֶׁךְ = and darkness (darkness)
+6 עַל־ = [was] over
+7 פְּנֵי = [the] surface of
+8 תְהוֹם = [the] deep (abyss)
+9 וְרוּחַ = and [the] spirit of (spirit)
+10 אֱלֹהִים = God
+11 מְרַחֶפֶת = [was] hovering (to hover)
+12 עַל־ = over
+13 פְּנֵי = [the] surface of
+14 הַמָּיִם = the waters (water)
+
+## 1:1:3
+KO: 그리고 하나님이 말씀하셨다, "빛이 있어라." 그리고 빛이 있었다.
+1 וַיֹּאמֶר = and he said (to say)
+2 אֱלֹהִים = God
+3 יְהִי = let it be
+4 אוֹר = light
+5 וַיְהִי־ = and there was
+6 אוֹר = light
+
+## 1:1:4
+KO: 그리고 하나님이 그 빛을 보셨는데, 왜냐하면 그것이 좋았기 때문이다. 그리고 하나님이 빛과 어둠 사이를 나누셨다.
+1 וַיַּרְא = and he saw (to see)
+2 אֱלֹהִים = God
+3 אֶת־ = <obj.> ([Obj.])
+4 הָאוֹר = the light
+5 כִּי־ = that (for)
+6 טוֹב = [it was] good (be pleasing)
+7 וַיַּבְדֵּל = and he separated (to separate)
+8 אֱלֹהִים = God
+9 בֵּין = between
+10 הָאוֹר = the light
+11 וּבֵין = and between
+12 הַחֹשֶׁךְ = the darkness (darkness)
+
+## 1:1:5
+KO: 그리고 하나님이 그 빛을 낮이라 부르셨고, 그 어둠을 밤이라 부르셨다. 그리고 저녁이 있었고 아침이 있었다, 한 날.
+1 וַיִּקְרָא = and he called
+2 אֱלֹהִים = God
+3 לָאוֹר = <to> the light (light)
+4 יוֹם = day
+5 וְלַחֹשֶׁךְ = and <to> the darkness (darkness)
+6 קָרָא = he called
+7 לָיְלָה = night
+8 וַיְהִי־ = and there was
+9 עֶרֶב = evening
+10 וַיְהִי־ = and there was
+11 בֹקֶר = morning
+12 יוֹם = day
+13 אֶחָד פ = one
+
+## 1:1:6
+KO: 그리고 하나님이 말씀하셨다. "물들 가운데 궁창이 있으라. 그리고 물과 물들 사이를 나누는 것이 있으라."
+1 וַיֹּאמֶר = and he said (to say)
+2 אֱלֹהִים = God
+3 יְהִי = let it be
+4 רָקִיעַ = a firmament (expanse)
+5 בְּתוֹךְ = in [the] middle of (midst)
+6 הַמָּיִם = the waters
+7 וִיהִי = and let it be
+8 מַבְדִּיל = separating (to separate)
+9 בֵּין = between
+10 מַיִם = waters
+11 לָמָיִם = to waters
+
+## 1:1:7
+KO: 하나님이 궁창을 만드시고, 궁창 아래에 있는 물들과 궁창 위에 있는 물들 사이를 나누시니, 그대로 되었다.
+1 וַיַּעַשׂ = and he made (to make)
+2 אֱלֹהִים = God
+3 אֶת־ = <obj.> ([Obj.])
+4 הָרָקִיעַ = the firmament
+5 וַיַּבְדֵּל = and he separated (to separate)
+6 בֵּין = between
+7 הַמַּיִם = the waters
+8 אֲשֶׁר = which
+9 מִתַּחַת = [were] from under (underneath)
+10 לָרָקִיעַ = to the firmament
+11 וּבֵין = and between
+12 הַמַּיִם = the waters
+13 אֲשֶׁר = which
+14 מֵעַל = [were] from <above> (upon)
+15 לָרָקִיעַ = <to> the firmament
+16 וַיְהִי־ = and it was (to be)
+17 כֵן = so
+
+## 1:1:8
+KO: 그리고 하나님이 그 궁창을 '하늘'이라 부르셨다. 저녁이 되었고 아침이 되었다. 둘째 날이다.
+1 וַיִּקְרָא = and he called (to call)
+2 אֱלֹהִים = God
+3 לָרָקִיעַ = <to> the firmament (expanse)
+4 שָׁמָיִם = heaven
+5 וַיְהִי־ = and there was
+6 עֶרֶב = evening
+7 וַיְהִי־ = and there was
+8 בֹקֶר = morning
+9 יוֹם = a day (day;_when)
+10 שֵׁנִי פ = second
+
+## 1:1:9
+KO: 그리고 하나님이 말씀하시기를, "하늘 아래의 물들은 한 곳으로 모이고 뭍은 나타나라" 하시니 그대로 되었다.
+1 וַיֹּאמֶר = and he said (to say)
+2 אֱלֹהִים = God
+3 יִקָּווּ = let them gather (to collect)
+4 הַמַּיִם = the waters (water)
+5 מִתַּחַת = from under (underneath)
+6 הַשָּׁמַיִם = the heavens (heaven)
+7 אֶל־ = to (to(wards))
+8 מָקוֹם = a place (standing place)
+9 אֶחָד = one
+10 וְתֵרָאֶה = and let it appear (to see)
+11 הַיַּבָּשָׁה = the dry ground (dry land)
+12 וַיְהִי־ = and it was (to be)
+13 כֵן = so
+
+## 1:1:10
+KO: 그리고 하나님이 그 마른 땅을 '땅'이라 부르셨고, 물들이 모인 곳을 '바다'라 부르셨다. 그리고 하나님이 보시기에 그것이 좋았다.
+1 וַיִּקְרָא = and he called
+2 אֱלֹהִים = God
+3 לַיַּבָּשָׁה = <to> the dry ground (dry land)
+4 אֶרֶץ = earth (land)
+5 וּלְמִקְוֵה = and <to> [the] collection of (collection)
+6 הַמַּיִם = the waters (water)
+7 קָרָא = he called
+8 יַמִּים = seas (sea)
+9 וַיַּרְא = and he saw (to see)
+10 אֱלֹהִים = God
+11 כִּי־ = that (for)
+12 טוֹב = [it was] good (be pleasing)
+
+## 1:1:11
+KO: 그리고 하나님이 말씀하셨다. "땅은 풀을, 씨를 뿌리는 채소를, 땅 위에서 그 씨가 그 안에 있는 그 종류대로 열매를 맺는 나무를 내라." 하니 그대로 되었다.
+1 וַיֹּאמֶר = and he said (to say)
+2 אֱלֹהִים = God
+3 תַּדְשֵׁא = let it sprout (to sprout)
+4 הָאָרֶץ = the earth
+5 דֶּשֶׁא = vegetation (grass)
+6 עֵשֶׂב = plant[s] (vegetation)
+7 מַזְרִיעַ = [which] bears seed (to sow)
+8 זֶרַע = seed
+9 עֵץ = tree[s] of (tree)
+10 פְּרִי = fruit
+11 עֹשֶׂה = producing (to make)
+12 פְּרִי = fruit
+13 לְמִינוֹ = to kind its (kind)
+14 אֲשֶׁר = which
+15 זַרְעוֹ־ = seed its
+16 בוֹ = [is] in <the> it (him)
+17 עַל־ = on (upon)
+18 הָאָרֶץ = the earth
+19 וַיְהִי־ = and it was (to be)
+20 כֵן = so
+
+## 1:1:12
+KO: 그리고 땅이 풀과, 그 종류대로 씨를 내는 채소와, 그 안에 씨가 있는 열매를 그 종류대로 맺는 나무를 내었다. 그리고 하나님께서 보시니 좋았다.
+1 וַתּוֹצֵא = and <it> brought forth (to come out)
+2 הָאָרֶץ = the earth (land)
+3 דֶּשֶׁא = vegetation (grass)
+4 עֵשֶׂב = plant[s] (vegetation)
+5 מַזְרִיעַ = [which] bears seed (to sow)
+6 זֶרַע = seed
+7 לְמִינֵהוּ = to kind its
+8 וְעֵץ = and tree[s] (tree)
+9 עֹשֶׂה־ = producing (to make)
+10 פְּרִי = fruit
+11 אֲשֶׁר = which
+12 זַרְעוֹ־ = seed its
+13 בוֹ = [was] in <the> it (him)
+14 לְמִינֵהוּ = to kind its
+15 וַיַּרְא = and he saw (to see)
+16 אֱלֹהִים = God
+17 כִּי־ = that (for)
+18 טוֹב = [it was] good (be pleasing)
+
+## 1:1:13
+KO: 그리고 저녁이 있었고, 그리고 아침이 있었다, 셋째 날.
+1 וַיְהִי־ = and there was
+2 עֶרֶב = evening
+3 וַיְהִי־ = and there was
+4 בֹקֶר = morning
+5 יוֹם = a day (day;_when)
+6 שְׁלִישִׁי פ = third
+
+## 1:1:14
+KO: 그리고 하나님이 말씀하셨다. "하늘들의 궁창 안에 광명체들이 있어 낮과 밤 사이를 나누게 하라. 그것들이 표적들과 절기들과 날들과 해들을 위한 것들이 되게 하라."
+1 וַיֹּאמֶר = and he said (to say)
+2 אֱלֹהִים = God
+3 יְהִי = let it be
+4 מְאֹרֹת = luminaries (light)
+5 בִּרְקִיעַ = in [the] firmament of (expanse)
+6 הַשָּׁמַיִם = the heavens (heaven)
+7 לְהַבְדִּיל = to separate
+8 בֵּין = between
+9 הַיּוֹם = the day
+10 וּבֵין = and between
+11 הַלָּיְלָה = the night (night)
+12 וְהָיוּ = and they will become
+13 לְאֹתֹת = <into> signs (sign)
+14 וּלְמוֹעֲדִים = and <into> appointed times (meeting)
+15 וּלְיָמִים = and <into> days
+16 וְשָׁנִים = and years (year)
+
+## 1:1:15
+KO: 그리고 그것들이 하늘의 궁창 안의 광명체들이 되어 땅 위를 비추게 하라 하시니, 그대로 되었더라.
+1 וְהָיוּ = and they will become
+2 לִמְאוֹרֹת = <into> luminaries (light)
+3 בִּרְקִיעַ = in [the] firmament of (expanse)
+4 הַשָּׁמַיִם = the heavens (heaven)
+5 לְהָאִיר = to give light (to light)
+6 עַל־ = on (upon)
+7 הָאָרֶץ = the earth (land)
+8 וַיְהִי־ = and it was
+9 כֵן = so
+
+## 1:1:16
+KO: 그리고 하나님이 그 두 큰 광명체들을 만드셨으니, 그 큰 광명체는 낮을 주관하기 위함이고, 그 작은 광명체와 별들은 밤을 주관하기 위함이며 만드셨다.
+1 וַיַּעַשׂ = and he made (to make)
+2 אֱלֹהִים = God
+3 אֶת־ = <obj.>
+4 שְׁנֵי = [the] two (two)
+5 הַמְּאֹרֹת = the luminaries
+6 הַגְּדֹלִים = <the> great
+7 אֶת־ = <obj.>
+8 הַמָּאוֹר = the luminary
+9 הַגָּדֹל = <the> great
+10 לְמֶמְשֶׁלֶת = for [the] dominion of
+11 הַיּוֹם = the day (day;_when)
+12 וְאֶת־ = and <obj.>
+13 הַמָּאוֹר = the luminary
+14 הַקָּטֹן = <the> small (small)
+15 לְמֶמְשֶׁלֶת = for [the] dominion of
+16 הַלַּיְלָה = the night (night)
+17 וְאֵת = and <obj.>
+18 הַכּוֹכָבִים = the stars (star)
+
+## 1:1:17
+KO: 그리고 하나님이 그들을 하늘의 궁창 안에 두셔서 땅 위를 비추게 하셨다.
+1 וַיִּתֵּן = and he set (to give)
+2 אֹתָם = <obj.> them ([Obj.])
+3 אֱלֹהִים = God
+4 בִּרְקִיעַ = in [the] firmament of (expanse)
+5 הַשָּׁמָיִם = the heavens (heaven)
+6 לְהָאִיר = to give light (to light)
+7 עַל־ = on (upon)
+8 הָאָרֶץ = the earth (land)
+
+## 1:1:18
+KO: 그리고 낮과 밤을 주관하게 하시며, 빛과 어두움 사이를 나누게 하시니라. 그리고 하나님께서 보시니 그것이 좋았더라.
+1 וְלִמְשֹׁל = and to rule (to rule)
+2 בַּיּוֹם = over the day (day;_when)
+3 וּבַלַּיְלָה = and over the night (night)
+4 וּלֲהַבְדִּיל = and to separate (to separate)
+5 בֵּין = between
+6 הָאוֹר = the light (light)
+7 וּבֵין = and between
+8 הַחֹשֶׁךְ = the darkness (darkness)
+9 וַיַּרְא = and he saw (to see)
+10 אֱלֹהִים = God
+11 כִּי־ = that (for)
+12 טוֹב = [it was] good (be pleasing)
+
+## 1:1:19
+KO: 그리고 저녁이 있었고, 그리고 아침이 있었다, 넷째 날.
+1 וַיְהִי־ = and there was
+2 עֶרֶב = evening
+3 וַיְהִי־ = and there was
+4 בֹקֶר = morning
+5 יוֹם = a day (day;_when)
+6 רְבִיעִי פ = fourth
+
+## 1:1:20
+KO: 그리고 하나님이 말씀하셨다. "물들은 살아 있는 생물의 떼를 번성하게 하라. 그리고 새들은 땅 위 하늘의 궁창 표면 위로 날아다니라."
+1 וַיֹּאמֶר = and he said (to say)
+2 אֱלֹהִים = God
+3 יִשְׁרְצוּ = let them swarm (to swarm)
+4 הַמַּיִם = the waters (water)
+5 שֶׁרֶץ = swarming thing[s] (swarm)
+6 נֶפֶשׁ = creature[s] (soul)
+7 חַיָּה = living (alive)
+8 וְעוֹף = and bird[s] (bird)
+9 יְעוֹפֵף = let it fly (to fly)
+10 עַל־ = above
+11 הָאָרֶץ = the earth (land)
+12 עַל־ = on
+13 פְּנֵי = [the] surface of (face)
+14 רְקִיעַ = [the] firmament of (expanse)
+15 הַשָּׁמָיִם = the heavens (heaven)
+
+## 1:1:21
+KO: 그리고 하나님이 그 큰 바다 괴물들과, 생명이 있는 모든 움직이는 생물들 곧 물들이 그 종류대로 번성하게 한 것들을 그 종류대로, 그리고 날개 있는 모든 새를 그 종류대로 창조하셨다. 그리고 하나님이 보시니 좋았다.
+1 וַיִּבְרָא = and he created (to create)
+2 אֱלֹהִים = God
+3 אֶת־ = <obj.>
+4 הַתַּנִּינִם = the sea monsters (serpent)
+5 הַגְּדֹלִים = <the> great (great)
+6 וְאֵת = and <obj.>
+7 כָּל־ = every
+8 נֶפֶשׁ = creature (soul)
+9 הַחַיָּה = <the> living (alive)
+10 הָרֹמֶשֶׂת = which creeps (to creep)
+11 אֲשֶׁר = which
+12 שָׁרְצוּ = they swarmed (to swarm)
+13 הַמַּיִם = the waters (water)
+14 לְמִינֵהֶם = to kind their
+15 וְאֵת = and <obj.>
+16 כָּל־ = every
+17 עוֹף = bird of (bird)
+18 כָּנָף = wing
+19 לְמִינֵהוּ = to kind its
+20 וַיַּרְא = and he saw (to see)
+21 אֱלֹהִים = God
+22 כִּי־ = that (for)
+23 טוֹב = [it was] good (be pleasing)
+
+## 1:1:22
+KO: 그리고 하나님께서 그들에게 복을 주시며 말씀하셨다. "생육하라, 그리고 번성하라, 그리고 바다들 안에 있는 물들을 채우라. 그리고 새들은 땅 위에서 번성하라."
+1 וַיְבָרֶךְ = and he blessed (to bless)
+2 אֹתָם = <obj.> them
+3 אֱלֹהִים = God
+4 לֵאמֹר = <to> saying (to say)
+5 פְּרוּ = be fruitful
+6 וּרְבוּ = and multiply
+7 וּמִלְאוּ = and fill (to fill)
+8 אֶת־ = <obj.>
+9 הַמַּיִם = the waters (water)
+10 בַּיַּמִּים = in the seas (sea)
+11 וְהָעוֹף = and the bird[s] (bird)
+12 יִרֶב = let it multiply
+13 בָּאָרֶץ = on the earth (land)
+
+## 1:1:23
+KO: 그리고 저녁이 있었고, 그리고 아침이 있었다, 다섯째 날.
+1 וַיְהִי־ = and there was
+2 עֶרֶב = evening
+3 וַיְהִי־ = and there was
+4 בֹקֶר = morning
+5 יוֹם = a day (day;_when)
+6 חֲמִישִׁי פ = fifth
+
+## 1:1:24
+KO: 그리고 하나님이 말씀하시기를, "땅은 생물을 그 종류대로, 가축과 기는 것과 땅의 짐승을 그 종류대로 내라" 하시니, 그대로 되었다.
+1 וַיֹּאמֶר = and he said (to say)
+2 אֱלֹהִים = God
+3 תּוֹצֵא = let it produce (to come out)
+4 הָאָרֶץ = the earth
+5 נֶפֶשׁ = creature[s] (soul)
+6 חַיָּה = living
+7 לְמִינָהּ = to kind its
+8 בְּהֵמָה = livestock (animal)
+9 וָרֶמֶשׂ = and creeping thing[s] (creeping)
+10 וְחַיְתוֹ־ = and animal[s] of
+11 אֶרֶץ = [the] earth
+12 לְמִינָהּ = to kind its
+13 וַיְהִי־ = and it was (to be)
+14 כֵן = so
+
+## 1:1:25
+KO: 그리고 하나님이 땅의 짐승을 그 종류대로, 가축을 그 종류대로, 땅의 모든 기는 것을 그 종류대로 만드셨다. 그리고 하나님이 보시니 그것이 좋았다.
+1 וַיַּעַשׂ = and he made (to make)
+2 אֱלֹהִים = God
+3 אֶת־ = <obj.>
+4 חַיַּת = [the] animal[s] of (living thing)
+5 הָאָרֶץ = the earth (land)
+6 לְמִינָהּ = to kind its
+7 וְאֶת־ = and <obj.>
+8 הַבְּהֵמָה = the livestock (animal)
+9 לְמִינָהּ = to kind its
+10 וְאֵת = and <obj.>
+11 כָּל־ = every (all)
+12 רֶמֶשׂ = <the> creeping thing of (creeping)
+13 הָאֲדָמָה = the ground (land)
+14 לְמִינֵהוּ = to kind its
+15 וַיַּרְא = and he saw (to see)
+16 אֱלֹהִים = God
+17 כִּי־ = that (for)
+18 טוֹב = [it was] good (be pleasing)
+
+## 1:1:26
+KO: 그리고 하나님이 말씀하셨다. "우리의 형상을 따라, 우리의 모양대로 우리가 사람을 만들자. 그리고 바다의 물고기와 하늘의 새와 가축과 온 땅과 땅 위에서 기는 모든 기는 것을 다스리게 하자."
+1 וַיֹּאמֶר = and he said (to say)
+2 אֱלֹהִים = God
+3 נַעֲשֶׂה = let us make (to make)
+4 אָדָם = humankind (man)
+5 בְּצַלְמֵנוּ = in image our (image)
+6 כִּדְמוּתֵנוּ = according to likeness our (likeness)
+7 וְיִרְדּוּ = and they may rule (to rule)
+8 בִדְגַת = over [the] fish of (fish)
+9 הַיָּם = the sea (sea)
+10 וּבְעוֹף = and over [the] bird[s] of (bird)
+11 הַשָּׁמַיִם = the heavens (heaven)
+12 וּבַבְּהֵמָה = and over the livestock (animal)
+13 וּבְכָל־ = and over all
+14 הָאָרֶץ = the earth
+15 וּבְכָל־ = and over every
+16 הָרֶמֶשׂ = <the> creeping thing (creeping)
+17 הָרֹמֵשׂ = which creeps (to creep)
+18 עַל־ = on (upon)
+19 הָאָרֶץ = the earth
+
+## 1:1:27
+KO: 그리고 하나님이 그 사람을 자기 형상 안에, 하나님의 형상 안에 그를 창조하셨고, 남자와 여자를 그들을 창조하셨다.
+1 וַיִּבְרָא = and he created
+2 אֱלֹהִים = God
+3 אֶת־ = <obj.>
+4 הָאָדָם = <the> humankind (man)
+5 בְּצַלְמוֹ = in own image his
+6 בְּצֶלֶם = in [the] image of
+7 אֱלֹהִים = God
+8 בָּרָא = he created
+9 אֹתוֹ = <obj.> it
+10 זָכָר = male
+11 וּנְקֵבָה = and female (female)
+12 בָּרָא = he created
+13 אֹתָם = <obj.> them
+
+## 1:1:28
+KO: 그리고 하나님이 그들에게 복을 주셨고, 하나님이 그들에게 말씀하셨다. "생육하라, 그리고 번성하라, 그리고 땅을 채우라, 그리고 그것을 정복하라. 그리고 바다의 물고기와 하늘의 새와 땅 위에서 기어 다니는 모든 생물을 다스리라."
+1 וַיְבָרֶךְ = and he blessed (to bless)
+2 אֹתָם = <obj.> them
+3 אֱלֹהִים = God
+4 וַיֹּאמֶר = and he said (to say)
+5 לָהֶם = to <the> them (them)
+6 אֱלֹהִים = God
+7 פְּרוּ = be fruitful
+8 וּרְבוּ = and multiply (to multiply)
+9 וּמִלְאוּ = and fill (to fill)
+10 אֶת־ = <obj.>
+11 הָאָרֶץ = the earth
+12 וְכִבְשֻׁהָ = and subdue it (to subdue)
+13 וּרְדוּ = and rule (to rule)
+14 בִּדְגַת = over [the] fish of (fish)
+15 הַיָּם = the sea (sea)
+16 וּבְעוֹף = and over [the] bird[s] of (bird)
+17 הַשָּׁמַיִם = the heavens (heaven)
+18 וּבְכָל־ = and over every (all)
+19 חַיָּה = animal (alive)
+20 הָרֹמֶשֶׂת = which creeps (to creep)
+21 עַל־ = on (upon)
+22 הָאָרֶץ = the earth
+
+## 1:1:29
+KO: 그리고 하나님이 말씀하셨다. "보라, 내가 온 땅의 지면 위에 씨를 뿌리는 모든 채소와, 그 안에 나무의 씨가 있는 모든 나무를 너희에게 주었으니, 그것이 너희에게 먹을 것이 되리라."
+1 וַיֹּאמֶר = and he said (to say)
+2 אֱלֹהִים = God
+3 הִנֵּה = here! (behold)
+4 נָתַתִּי = I give (to give)
+5 לָכֶם = to <the> you
+6 אֶת־ = <obj.>
+7 כָּל־ = every
+8 עֵשֶׂב = plant (vegetation)
+9 זֹרֵעַ = [which] bears seed
+10 זֶרַע = seed
+11 אֲשֶׁר = which
+12 עַל־ = [is] on (upon)
+13 פְּנֵי = [the] surface of (face)
+14 כָל־ = all
+15 הָאָרֶץ = the earth (land)
+16 וְאֶת־ = and <obj.>
+17 כָּל־ = every
+18 הָעֵץ = <the> tree
+19 אֲשֶׁר־ = which
+20 בּוֹ = in <the> it (him)
+21 פְרִי־ = [is the] fruit of (fruit)
+22 עֵץ = a tree
+23 זֹרֵעַ = [which] bears seed
+24 זָרַע = seed
+25 לָכֶם = to <the> you
+26 יִהְיֶה = <it> will be[long] (to be)
+27 לְאָכְלָה = to food (food)
+
+## 1:1:30
+KO: 그리고 땅의 모든 짐승과, 공중의 모든 새와, 땅 위에서 생명이 있는 것(살아있는 혼)을 가진 모든 기는 것에게, 내가 모든 푸른 풀을 식물로 주노라 하시니, 그대로 되었다.
+1 וּלְכָל־ = and to every
+2 חַיַּת = <the> animal of
+3 הָאָרֶץ = the earth
+4 וּלְכָל־ = and to every
+5 עוֹף = <the> bird of (bird)
+6 הַשָּׁמַיִם = the heavens (heaven)
+7 וּלְכֹל = and to every
+8 רוֹמֵשׂ = creeping [thing] (to creep)
+9 עַל־ = on (upon)
+10 הָאָרֶץ = the earth
+11 אֲשֶׁר־ = which
+12 בּוֹ = [is] in <the> it (him)
+13 נֶפֶשׁ = life (soul)
+14 חַיָּה = living
+15 אֶת־ = <obj.> ([Obj.])
+16 כָּל־ = all
+17 יֶרֶק = greenery of (green)
+18 עֵשֶׂב = plant[s] (vegetation)
+19 לְאָכְלָה = to food (food)
+20 וַיְהִי־ = and it was (to be)
+21 כֵן = so
+
+## 1:1:31
+KO: 그리고 하나님이 그 만드신 모든 것을 보셨는데, 보라, 매우 좋았더라. 그리고 저녁이 되었고 아침이 되었으니, 여섯째 날이라.
+1 וַיַּרְא = and he saw (to see)
+2 אֱלֹהִים = God
+3 אֶת־ = <obj.> ([Obj.])
+4 כָּל־ = all
+5 אֲשֶׁר = that (which)
+6 עָשָׂה = he had made (to make)
+7 וְהִנֵּה־ = and there! (behold)
+8 טוֹב = [it was] good (pleasant)
+9 מְאֹד = very (much)
+10 וַיְהִי־ = and there was
+11 עֶרֶב = evening
+12 וַיְהִי־ = and there was
+13 בֹקֶר = morning
+14 יוֹם = [the] day (day;_when)
+15 הַשִּׁשִּׁי פ = <the> sixth (sixth)
+
+## 1:2:1
+KO: 그리고 하늘들과 땅과 그것들의 모든 군대가 완성되었다.
+1 וַיְכֻלּוּ = and they were completed (to end)
+2 הַשָּׁמַיִם = the heavens (heaven)
+3 וְהָאָרֶץ = and the earth (land)
+4 וְכָל־ = and all (all)
+5 צְבָאָם = host their (army)
+
+## 1:2:2
+KO: 그리고 하나님이 일곱째 날에 그분이 만드셨던 그분의 일을 마치셨고, 일곱째 날에 그분이 만드셨던 그분의 모든 일로부터 그분이 쉬셨다.
+1 וַיְכַל = and he completed (to end)
+2 אֱלֹהִים = God
+3 בַּיּוֹם = on the day
+4 הַשְּׁבִיעִי = <the> seventh
+5 מְלַאכְתּוֹ = work his
+6 אֲשֶׁר = which
+7 עָשָׂה = he had done
+8 וַיִּשְׁבֹּת = and he rested (to cease)
+9 בַּיּוֹם = on the day
+10 הַשְּׁבִיעִי = <the> seventh
+11 מִכָּל־ = from all (all)
+12 מְלַאכְתּוֹ = work his
+13 אֲשֶׁר = which
+14 עָשָׂה = he had done
+
+## 1:2:3
+KO: 그리고 하나님이 일곱째 날을 복 주셨고 그것을 거룩하게 하셨으니, 이는 그가 창조하시며 만드시던 그의 모든 일로부터 그 날에 그가 쉬셨기 때문이라.
+1 וַיְבָרֶךְ = and he blessed (to bless)
+2 אֱלֹהִים = God
+3 אֶת־ = <obj.>
+4 יוֹם = [the] day (day;_when)
+5 הַשְּׁבִיעִי = <the> seventh (seventh)
+6 וַיְקַדֵּשׁ = and he set apart as holy (to consecrate)
+7 אֹתוֹ = <obj.> it
+8 כִּי = for
+9 בוֹ = on <the> it (him)
+10 שָׁבַת = he rested (to cease)
+11 מִכָּל־ = from all (all)
+12 מְלַאכְתּוֹ = work his (work)
+13 אֲשֶׁר־ = which
+14 בָּרָא = he had created (to create)
+15 אֱלֹהִים = God
+16 לַעֲשׂוֹת פ = to make
+
+## 1:2:4
+KO: 이것들은 하늘들과 땅의 세대들이니, 그것들이 창조되던 날에 여호와 하나님이 땅과 하늘을 만드셨을 때니라.
+1 אֵלֶּה = these
+2 תוֹלְדוֹת = [are] [the] accounts of (generation)
+3 הַשָּׁמַיִם = the heavens
+4 וְהָאָרֶץ = and the earth
+5 בְּהִבָּרְאָם = when were created they (to create)
+6 בְּיוֹם = on [the] day (day;_when)
+7 עֲשׂוֹת = made (to make)
+8 יְהוָה = Yahweh (LORD)
+9 אֱלֹהִים = God
+10 אֶרֶץ = earth
+11 וְשָׁמָיִם = and heaven
+
+## 1:2:5
+KO: 들판의 모든 관목이 아직 땅에 있지 않았고, 들판의 모든 채소가 아직 싹트지 않았으니, 이는 주 하나님께서 땅 위에 비를 내리지 않으셨고, 땅을 경작할 사람도 없었기 때문이다.
+1 וְכֹל = and any
+2 שִׂיחַ = <the> shrub of (bush)
+3 הַשָּׂדֶה = the field
+4 טֶרֶם = not yet
+5 יִהְיֶה = <it> was (to be)
+6 בָאָרֶץ = on the earth
+7 וְכָל־ = and any
+8 עֵשֶׂב = <the> vegetation of (vegetation)
+9 הַשָּׂדֶה = the field
+10 טֶרֶם = not yet
+11 יִצְמָח = <it> was sprouting (to spring)
+12 כִּי = for
+13 לֹא = not
+14 הִמְטִיר = he had caused rain (to rain)
+15 יְהוָה = Yahweh (LORD)
+16 אֱלֹהִים = God
+17 עַל־ = on (upon)
+18 הָאָרֶץ = the earth
+19 וְאָדָם = and [was] a human (man)
+20 אַיִן = there not (nothing)
+21 לַעֲבֹד = to till (to serve)
+22 אֶת־ = <obj.> ([Obj.])
+23 הָאֲדָמָה = the ground (land)
+
+## 1:2:6
+KO: 그리고 안개가 땅으로부터 올라와, 땅(아다마)의 모든 표면을 적셨다.
+1 וְאֵד = and water (mist)
+2 יַעֲלֶה = <it> came up (to ascend)
+3 מִן־ = from
+4 הָאָרֶץ = the earth (land)
+5 וְהִשְׁקָה = and it watered (to water)
+6 אֶת־ = <obj.> ([Obj.])
+7 כָּל־ = all
+8 פְּנֵי־ = [the] surface of (face)
+9 הָאֲדָמָה = the ground (land)
+
+## 1:2:7
+KO: 그리고 주 하나님께서 땅의 흙으로부터 그 사람을 빚으셨고, 그(사람)의 콧구멍들에 생명의 호흡을 불어넣으셨으며, 그 사람은 살아있는 혼이 되었다.
+1 וַיִּיצֶר = and he formed (to form)
+2 יְהוָה = Yahweh (LORD)
+3 אֱלֹהִים = God
+4 אֶת־ = <obj.> ([Obj.])
+5 הָאָדָם = the man
+6 עָפָר = dust
+7 מִן־ = from
+8 הָאֲדָמָה = the ground (land)
+9 וַיִּפַּח = and he blew (to breathe)
+10 בְּאַפָּיו = in nostrils his (face)
+11 נִשְׁמַת = [the] breath of (breath)
+12 חַיִּים = life
+13 וַיְהִי = and he became (to be)
+14 הָאָדָם = the man
+15 לְנֶפֶשׁ = <into> a creature (soul)
+16 חַיָּה = living
+
+## 1:2:8
+KO: 그리고 여호와 하나님께서 에덴에 동쪽으로 동산을 심으시고, 그분께서 형성하신 그 사람을 거기에 두셨다.
+1 וַיִּטַּע = and he planted (to plant)
+2 יְהוָה = Yahweh (LORD)
+3 אֱלֹהִים = God
+4 גַּן־ = a garden (garden)
+5 בְעֵדֶן = in Eden (Eden)
+6 מִקֶּדֶם = from [the] east (front)
+7 וַיָּשֶׂם = and he put (to set)
+8 שָׁם = there
+9 אֶת־ = <obj.> ([Obj.])
+10 הָאָדָם = the man (Adam)
+11 אֲשֶׁר = whom (which)
+12 יָצָר = he had formed (to form)
+
+## 1:2:9
+KO: 여호와 하나님이 땅으로부터 보기에 탐스럽고 먹기에 좋은 모든 나무가 자라나게 하시니, 동산 가운데에는 생명나무와 선악을 알게 하는 나무도 있더라.
+1 וַיַּצְמַח = and he made sprout (to spring)
+2 יְהוָה = Yahweh (LORD)
+3 אֱלֹהִים = God
+4 מִן־ = from
+5 הָאֲדָמָה = the ground (land)
+6 כָּל־ = every (all)
+7 עֵץ = tree
+8 נֶחְמָד = desirable (to desire)
+9 לְמַרְאֶה = to appearance (appearance)
+10 וְטוֹב = and good
+11 לְמַאֲכָל = for food (food)
+12 וְעֵץ = and [the] tree of
+13 הַחַיִּים = <the> life (life)
+14 בְּתוֹךְ = [was] in [the] middle of (midst)
+15 הַגָּן = the garden (garden)
+16 וְעֵץ = and [the] tree of
+17 הַדַּעַת = the knowledge (knowledge)
+18 טוֹב = good
+19 וָרָע = and evil (evil)
+
+## 1:2:10
+KO: 그리고 강이 에덴으로부터 나와서 그 동산을 적시고, 그곳으로부터 갈라져 네 근원들이 되었다.
+1 וְנָהָר = and a river (river)
+2 יֹצֵא = [was] going out (to come out)
+3 מֵעֵדֶן = from Eden (Eden)
+4 לְהַשְׁקוֹת = to water
+5 אֶת־ = <obj.> ([Obj.])
+6 הַגָּן = the garden (garden)
+7 וּמִשָּׁם = and from there (there)
+8 יִפָּרֵד = <it> divided (to separate)
+9 וְהָיָה = and it became (to be)
+10 לְאַרְבָּעָה = <into> four (four)
+11 רָאשִׁים = heads (head)
+
+## 1:2:11
+KO: 그 첫째의 이름은 비손이니, 그것은 하윌라의 온 땅을 두르는 것이며, 거기에는 금이 있다.
+1 שֵׁם = [the] name of (name)
+2 הָאֶחָד = the one (one)
+3 פִּישׁוֹן = [is] Pishon (Pishon)
+4 הוּא = it (he;_she;_it)
+5 הַסֹּבֵב = [is] the [one which] goes around (to turn)
+6 אֵת = <obj.> ([Obj.])
+7 כָּל־ = all
+8 אֶרֶץ = [the] land of (land)
+9 הַחֲוִילָה = <the> Havilah (Havilah)
+10 אֲשֶׁר־ = where (which)
+11 שָׁם = [is] there (there)
+12 הַזָּהָב = <the> gold (gold)
+
+## 1:2:12
+KO: 그리고 그 땅의 금은 좋고, 그곳에는 베델리엄과 호마노도 있다.
+1 וּזֲהַב = and [the] gold of (gold)
+2 הָאָרֶץ = the land (land)
+3 הַהִוא = <the> that (he;_she;_it)
+4 טוֹב = [is] good (pleasant)
+5 שָׁם = [are] there (there)
+6 הַבְּדֹלַח = <the> bdellium (bdellium)
+7 וְאֶבֶן = and [the] stone of (stone)
+8 הַשֹּׁהַם = <the> onyx (onyx)
+
+## 1:2:13
+KO: 그리고 둘째 강의 이름은 기혼이라, 그것은 구스의 모든 땅을 두르는 것이니라.
+1 וְשֵׁם־ = and [the] name of (name)
+2 הַנָּהָר = the river (river)
+3 הַשֵּׁנִי = <the> second (second)
+4 גִּיחוֹן = [is] Gihon (Gihon)
+5 הוּא = it (he;_she;_it)
+6 הַסּוֹבֵב = [is] the [one which] goes around (to turn)
+7 אֵת = <obj.> ([Obj.])
+8 כָּל־ = all
+9 אֶרֶץ = [the] land of (land)
+10 כּוּשׁ = Cush
+
+## 1:2:14
+KO: 그리고 셋째 강의 이름은 힛데겔인데, 그것은 앗수르 동쪽으로 흐르는 것이며, 넷째 강은 유브라데이다.
+1 וְשֵׁם = and [the] name of (name)
+2 הַנָּהָר = the river
+3 הַשְּׁלִישִׁי = <the> third (third)
+4 חִדֶּקֶל = [is] Tigris (Tigris)
+5 הוּא = it
+6 הַהֹלֵךְ = [is] the [one which] goes (to go)
+7 קִדְמַת = [the] east of (east)
+8 אַשּׁוּר = Assyria
+9 וְהַנָּהָר = and the river
+10 הָרְבִיעִי = <the> fourth (fourth)
+11 הוּא = it
+12 פְרָת = [is the] Euphrates (Euphrates)
+
+## 1:2:15
+KO: 그리고 여호와 하나님이 그 사람을 취하시어 에덴동산에 그를 두시고, 그것을 경작하게 하며 그것을 지키게 하셨다.
+1 וַיִּקַּח = and he took (to take)
+2 יְהוָה = Yahweh (LORD)
+3 אֱלֹהִים = God
+4 אֶת־ = <obj.> ([Obj.])
+5 הָאָדָם = the man (Adam)
+6 וַיַּנִּחֵהוּ = and he put him (to rest)
+7 בְגַן־ = in [the] garden of (garden)
+8 עֵדֶן = Eden
+9 לְעָבְדָהּ = to till it (to serve)
+10 וּלְשָׁמְרָהּ = and to keep it (to keep)
+
+## 1:2:16
+KO: 그리고 여호와 하나님이 그 사람에게 명령하여 말씀하시기를, "동산의 모든 나무의 열매를 네가 먹되, (반드시) 먹을 것이다."
+1 וַיְצַו = and he commanded (to command)
+2 יְהוָה = Yahweh (LORD)
+3 אֱלֹהִים = God
+4 עַל־ = to (upon)
+5 הָאָדָם = the man (Adam)
+6 לֵאמֹר = <to> saying (to say)
+7 מִכֹּל = from any (all)
+8 עֵץ־ = <the> tree of (tree)
+9 הַגָּן = the garden (garden)
+10 אָכֹל = certainly <to eat>
+11 תֹּאכֵל = you will eat
+
+## 1:2:17
+KO: 그리고 선과 악의 지식의 나무로부터는 너는 그것을 먹지 말라. 왜냐하면 네가 그것으로부터 먹는 날에, 반드시 죽을 것이기 때문이다.
+1 וּמֵעֵץ = and from [the] tree of (tree)
+2 הַדַּעַת = the knowledge (knowledge)
+3 טוֹב = good
+4 וָרָע = and evil (evil)
+5 לֹא = not
+6 תֹאכַל = you must eat
+7 מִמֶּנּוּ = from it
+8 כִּי = for
+9 בְּיוֹם = on [the] day (day;_when)
+10 אֲכָלְךָ = eating you
+11 מִמֶּנּוּ = from it
+12 מוֹת = certainly <to die>
+13 תָּמוּת = you will die
+
+## 1:2:18
+KO: 그리고 여호와 하나님께서 말씀하셨다. "그 사람이 혼자 있는 것이 좋지 않으니, 그를 위하여 그에 상응하는 돕는 자를 내가 만들겠다."
+1 וַיֹּאמֶר = and he said (to say)
+2 יְהוָה = Yahweh (LORD)
+3 אֱלֹהִים = God
+4 לֹא־ = not
+5 טוֹב = [is] good (pleasant)
+6 הֱיוֹת = to be
+7 הָאָדָם = the man (Adam)
+8 לְבַדּוֹ = to only him (alone)
+9 אֶעֱשֶׂהּ־ = I will make (to make)
+10 לּוֹ = for <the> him (him)
+11 עֵזֶר = a helper (helper)
+12 כְּנֶגְדּוֹ = like before him (before)
+
+## 1:2:19
+KO: 그리고 여호와 하나님이 땅으로부터 모든 들짐승과 공중의 모든 새를 빚으시고, 아담에게로 그것들을 이끌어 그가 무엇이라 부르는지 보시려 하셨다. 그리고 아담이 살아 있는 생물마다 부르는 것이 곧 그것의 이름이었다.
+1 וַיִּצֶר = and he formed (to form)
+2 יְהוָה = Yahweh (LORD)
+3 אֱלֹהִים = God
+4 מִן־ = from
+5 הָאֲדָמָה = the ground (land)
+6 כָּל־ = every
+7 חַיַּת = <the> animal of
+8 הַשָּׂדֶה = the field (land)
+9 וְאֵת = and <obj.> ([Obj.])
+10 כָּל־ = every
+11 עוֹף = <the> bird of (bird)
+12 הַשָּׁמַיִם = the heavens (heaven)
+13 וַיָּבֵא = and he brought [them] (to come (in))
+14 אֶל־ = to (to(wards))
+15 הָאָדָם = the man
+16 לִרְאוֹת = to see
+17 מַה־ = what?
+18 יִּקְרָא־ = will he call
+19 לוֹ = to <the> it
+20 וְכֹל = and all
+21 אֲשֶׁר = that (which)
+22 יִקְרָא־ = he called
+23 לוֹ = to <the> it
+24 הָאָדָם = the man
+25 נֶפֶשׁ = a creature (soul)
+26 חַיָּה = living
+27 הוּא = it (he;_she;_it)
+28 שְׁמוֹ = [was] name its (name)

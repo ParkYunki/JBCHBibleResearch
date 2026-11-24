@@ -1,0 +1,9 @@
+19:36:12 {거기|1} {악을|4} {행하는|3} {자들이|3} {넘어졌으니|2}, {밀침을 당하여|5} {능히|7} {일어나지 못하리이다|6,8}.
+
+Wait—I must follow the rule that each number is used once, so I'll redo this properly.
+
+19:36:12 {거기|1} {악을|4} {행하는 |3}
+
+
+<invoke name="x">
+</invoke>

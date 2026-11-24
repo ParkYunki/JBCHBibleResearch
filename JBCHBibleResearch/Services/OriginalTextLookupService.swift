@@ -89,4 +89,46 @@ final class OriginalTextLookupService {
             return nil
         }
     }
+
+    // MARK: - 쓰인 구절(백그라운드) [2026-11-02 interlin1]
+    //
+    // `strong_code` 조회는 전체 스캔(Mac 측정 20~40ms)이라 메인 스레드 밖에서 부른다(`Task.detached`).
+    // 위의 공유 커넥션(`store`)은 메인 액터 전용이고 `OriginalTextStore`는 스레드 안전하지 않으므로, 부를 때마다 읽기 전용 연결을
+    // 따로 열고 함수가 끝나면 닫는다(인스턴스를 스레드 사이에 넘기지 않는다). `nonisolated` — 이 타입이 `@MainActor`라
+    // 없으면 `Task.detached` 안에서 불러도 메인 액터로 돌아온다(`DocumentViewerViewModel.readSecurityScopedData`와 같은 이유).
+
+    /// 이 Strong 번호가 쓰인 절(성경 순). DB를 못 열거나 조회에 실패하면 nil.
+    nonisolated static func occurrences(strongCode: String) -> [OriginalWordOccurrence]? {
+        guard let store = openBackgroundStore() else { return nil }
+        do {
+            return try store.occurrences(strongCode: strongCode)
+        } catch {
+            print("[OriginalTextLookupService] 쓰인 구절 조회 실패: \(error)")
+            return nil
+        }
+    }
+
+    /// Strong 번호별 쓰인 절 수. 실패하면 빈 결과(카드는 숫자 없이 버튼만 보인다).
+    nonisolated static func verseCounts(strongCodes: [String]) -> [String: Int] {
+        guard let store = openBackgroundStore() else { return [:] }
+        do {
+            return try store.verseCounts(strongCodes: strongCodes)
+        } catch {
+            print("[OriginalTextLookupService] 쓰인 절 수 조회 실패: \(error)")
+            return [:]
+        }
+    }
+
+    private nonisolated static func openBackgroundStore() -> OriginalTextStore? {
+        guard let url = Bundle.main.url(forResource: "OriginalText", withExtension: "sqlite") else {
+            print("[OriginalTextLookupService] OriginalText.sqlite를 번들에서 찾지 못했습니다.")
+            return nil
+        }
+        do {
+            return try OriginalTextStore(filePath: url.path)
+        } catch {
+            print("[OriginalTextLookupService] OriginalText.sqlite 열기 실패: \(error)")
+            return nil
+        }
+    }
 }

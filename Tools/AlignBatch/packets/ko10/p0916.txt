@@ -1,0 +1,173 @@
+## 11:11:42
+KO: 그리고 솔로몬이 예루살렘에서 온 이스라엘 위에 왕으로 다스렸던 그 날들은 사십 년이었다.
+1 וְהַיָּמִים = and the days (day;_when)
+2 אֲשֶׁר = which
+3 מָלַךְ = he reigned (to reign)
+4 שְׁלֹמֹה = Solomon
+5 בִירוּשָׁלִַם = in Jerusalem (Jerusalem)
+6 עַל־ = over (upon)
+7 כָּל־ = all
+8 יִשְׂרָאֵל = Israel
+9 אַרְבָּעִים = [were] forty (forty)
+10 שָׁנָה = year[s] (year)
+
+## 11:11:43
+KO: 그리고 솔로몬이 그의 조상들과 함께 누웠고, 그가 다윗의 성에 장사되었으며, 그의 아들 르호보암이 그를 대신하여 왕이 되었다.
+1 וַיִּשְׁכַּב = and he lay down (to lie down)
+2 שְׁלֹמֹה = Solomon
+3 עִם־ = with
+4 אֲבֹתָיו = ancestors his
+5 וַיִּקָּבֵר = and he was buried (to bury)
+6 בְּעִיר = in [the] city of (city)
+7 דָּוִד = David
+8 אָבִיו = father his
+9 וַיִּמְלֹךְ = and he became king (to reign)
+10 רְחַבְעָם = Rehoboam
+11 בְּנוֹ = son his (son)
+12 תַּחְתָּיו ס = in place of him (underneath)
+
+## 11:12:1
+KO: 그리고 르호보암이 세겜으로 갔다. 왜냐하면 온 이스라엘이 그를 왕으로 세우기 위하여 세겜에 이르렀기 때문이다.
+1 וַיֵּלֶךְ = and he went (to go)
+2 רְחַבְעָם = Rehoboam
+3 שְׁכֶם = Shechem
+4 כִּי = for
+5 שְׁכֶם = Shechem
+6 בָּא = it had gone (to come (in))
+7 כָל־ = all
+8 יִשְׂרָאֵל = Israel
+9 לְהַמְלִיךְ = to make king (to reign)
+10 אֹתוֹ = <obj.> him ([Obj.])
+
+## 11:12:2
+KO: 그리고 느밧의 아들 여로보암이 듣게 되었을 때[그가 들었을 때] 일어났다. 그리고 그가 아직 애굽에 있었는데, 그곳은 그가 솔로몬 왕의 얼굴로부터 도망하였던 곳이다. 그리하여 여로보암이 애굽에 거주하였다.
+1 וַיְהִי = and it was (to be)
+2 כִּשְׁמֹעַ = when heard (to hear)
+3 יָרָבְעָם = Jeroboam
+4 בֶּן־ = [the] son of (son)
+5 נְבָט = Nebat
+6 וְהוּא = and he (he;_she;_it)
+7 עוֹדֶנּוּ = still he (still)
+8 בְמִצְרַיִם = [was] in Egypt
+9 אֲשֶׁר = where (which)
+10 בָּרַח = he had fled (to flee)
+11 מִפְּנֵי = <from> because of (face)
+12 הַמֶּלֶךְ = the king (king)
+13 שְׁלֹמֹה = Solomon
+14 וַיֵּשֶׁב = and he dwelt (to dwell)
+15 יָרָבְעָם = Jeroboam
+16 בְּמִצְרָיִם = in Egypt
+
+## 11:12:3
+KO: 그리고 그들이 사람을 보내어 그(여로보암)를 불렀고, 여로보암과 이스라엘의 모든 회중이 와서 르호보암에게 말하여 이르되,
+1 וַיִּשְׁלְחוּ = and people sent (to send)
+2 וַיִּקְרְאוּ־ = and they summoned (to call)
+3 לוֹ = <to> him (him)
+4 וַיָּבֹא = and he came (to come (in))
+5 יָרָבְעָם = Jeroboam
+6 וְכָל־ = and all (all)
+7 קְהַל = [the] assembly of (assembly)
+8 יִשְׂרָאֵל = Israel
+9 וַיְדַבְּרוּ = and they spoke (to speak)
+10 אֶל־ = to (to(wards))
+11 רְחַבְעָם = Rehoboam
+12 לֵאמֹר = <to> saying (to say)
+
+## 11:12:4
+KO: 당신의 아버지가 우리의 멍에를 무겁게 하였으나, 이제 당신은 당신의 아버지가 우리에게 지운 고역과 그 무거운 멍에를 가볍게 하소서. 그리하면 우리가 당신을 섬기겠나이다.
+1 אָבִיךָ = father your
+2 הִקְשָׁה = he made hard (to harden)
+3 אֶת־ = <obj.> ([Obj.])
+4 עֻלֵּנוּ = yoke our
+5 וְאַתָּה = and you (you(m.s.))
+6 עַתָּה = now
+7 הָקֵל = lighten (to lighten)
+8 מֵעֲבֹדַת = some of [the] service of (service)
+9 אָבִיךָ = father your
+10 הַקָּשָׁה = <the> hard (severe)
+11 וּמֵעֻלּוֹ = and some of yoke his
+12 הַכָּבֵד = <the> heavy (heavy)
+13 אֲשֶׁר־ = which
+14 נָתַן = he put (to give)
+15 עָלֵינוּ = on us (upon)
+16 וְנַעַבְדֶךָּ = and we will serve you (to serve)
+
+## 11:12:5
+KO: 그가 그들에게 말하였다. "다시 삼 일 동안 가라. 그리고 나에게 돌아오라." 그러자 그 백성이 갔다.
+1 וַיֹּאמֶר = and he said (to say)
+2 אֲלֵיהֶם = to them
+3 לְכוּ = go
+4 עֹד = yet (still)
+5 שְׁלֹשָׁה = three
+6 יָמִים = days (day;_when)
+7 וְשׁוּבוּ = and return (to return)
+8 אֵלָי = to me
+9 וַיֵּלְכוּ = and they went
+10 הָעָם = the people (people)
+
+## 11:12:6
+KO: 그리고 르호보암 왕은 그의 아버지 솔로몬이 살아 있는 동안 그의 앞에 서 있던 노인들과 의논하여 말하였다. “너희는 이 백성에게 대답할 말을 어떻게 의논하느냐?”
+1 וַיִּוָּעַץ = and he consulted
+2 הַמֶּלֶךְ = the king (king)
+3 רְחַבְעָם = Rehoboam
+4 אֶת־ = with
+5 הַזְּקֵנִים = the elders (old)
+6 אֲשֶׁר־ = who (which)
+7 הָיוּ = they were
+8 עֹמְדִים = standing (to stand)
+9 אֶת־ = with
+10 פְּנֵי = [the] presence of (face)
+11 שְׁלֹמֹה = Solomon
+12 אָבִיו = father his (father)
+13 בִּהְיֹתוֹ = when was he
+14 חַי = alive
+15 לֵאמֹר = <to> saying (to say)
+16 אֵיךְ = how?
+17 אַתֶּם = [are] you (you(m.p.))
+18 נוֹעָצִים = counseling
+19 לְהָשִׁיב = to bring back (to return)
+20 אֶת־ = <obj.> ([Obj.])
+21 הָעָם־ = the people (people)
+22 הַזֶּה = <the> this (this)
+23 דָּבָר = word
+
+## 11:12:7
+KO: 그들이 그에게 말하였다. 말하기를, "만일 오늘 왕이 이 백성에게 종이 되어 그들을 섬기고, 그들에게 좋은 말들로 대답하신다면, 그들은 모든 날 동안 왕의 종들이 될 것입니다."
+1 וַיְדַבְּרוּ = and they spoke
+2 אֵלָיו = to him
+3 לֵאמֹר = <to> saying (to say)
+4 אִם־ = if
+5 הַיּוֹם = this day
+6 תִּהְיֶה־ = you will be
+7 עֶבֶד = a servant
+8 לָעָם = of the people (people)
+9 הַזֶּה = <the> this (this)
+10 וַעֲבַדְתָּם = and you will serve them (to serve)
+11 וַעֲנִיתָם = and you will answer them (to answer)
+12 וְדִבַּרְתָּ = and you will speak
+13 אֲלֵיהֶם = to them
+14 דְּבָרִים = words (word)
+15 טוֹבִים = kind (pleasant)
+16 וְהָיוּ = and they will be
+17 לְךָ = of you (you)
+18 עֲבָדִים = servants
+19 כָּל־ = all
+20 הַיָּמִים = the days
+
+## 11:12:8
+KO: 그리고 그가 노인들이 그에게 준 조언을 저버리고, 그와 함께 자라난 소년들, 즉 그 앞에 서 있는 자들과 의논하였다.
+1 וַיַּעֲזֹב = and he forsook (to leave)
+2 אֶת־ = <obj.> ([Obj.])
+3 עֲצַת = [the] counsel of (counsel)
+4 הַזְּקֵנִים = the elders (old)
+5 אֲשֶׁר = which
+6 יְעָצֻהוּ = they had counseled him
+7 וַיִּוָּעַץ = and he consulted
+8 אֶת־ = with
+9 הַיְלָדִים = the young men (youth)
+10 אֲשֶׁר = who
+11 גָּדְלוּ = they had grown up (to magnify)
+12 אִתּוֹ = with him
+13 אֲשֶׁר = who
+14 הָעֹמְדִים = [were] the [ones who] stood (to stand)
+15 לְפָנָיו = <to> before him (face)

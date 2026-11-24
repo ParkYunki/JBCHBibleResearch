@@ -1,0 +1,165 @@
+## 1:11:24
+KO: 그리고 나홀은 살았다, 아홉과 스무 해를, 그리고 그는 데라를 낳았다.
+1 וַיְחִי = and he lived (to live)
+2 נָחוֹר = Nahor
+3 תֵּשַׁע = nine
+4 וְעֶשְׂרִים = and twenty (twenty)
+5 שָׁנָה = year[s] (year)
+6 וַיּוֹלֶד = and he fathered (to beget)
+7 אֶת־ = <obj.> ([Obj.])
+8 תָּרַח = Terah
+
+## 1:11:25
+KO: 그리고 나홀은 데라를 낳은 후에 일백십구 년을 살았으며, 아들들과 딸들을 낳았다.
+1 וַיְחִי = and he lived (to live)
+2 נָחוֹר = Nahor
+3 אַחֲרֵי = after
+4 הוֹלִידוֹ = fathered he
+5 אֶת־ = <obj.> ([Obj.])
+6 תֶּרַח = Terah
+7 תְּשַׁע־ = nine- (nine)
+8 עֶשְׂרֵה = teen (ten)
+9 שָׁנָה = year[s]
+10 וּמְאַת = and one hundred (hundred)
+11 שָׁנָה = year[s]
+12 וַיּוֹלֶד = and he fathered
+13 בָּנִים = sons (son)
+14 וּבָנוֹת ס = and daughters (daughter)
+
+## 1:11:26
+KO: 그리고 데라는 칠십 년을 살았고, 아브람과 나홀과 하란을 낳았다.
+1 וַיְחִי־ = and he lived (to live)
+2 תֶרַח = Terah
+3 שִׁבְעִים = seventy
+4 שָׁנָה = year[s] (year)
+5 וַיּוֹלֶד = and he fathered (to beget)
+6 אֶת־ = <obj.>
+7 אַבְרָם = Abram
+8 אֶת־ = <obj.>
+9 נָחוֹר = Nahor
+10 וְאֶת־ = and <obj.>
+11 הָרָן = Haran
+
+## 1:11:27
+KO: 그리고 이것들은 데라의 족보라. 데라는 아브람과 나홀과 하란을 낳았고, 하란은 롯을 낳았더라.
+1 וְאֵלֶּה = and these (these)
+2 תּוֹלְדֹת = [are] [the] accounts of (generation)
+3 תֶּרַח = Terah
+4 תֶּרַח = Terah
+5 הוֹלִיד = he fathered
+6 אֶת־ = <obj.>
+7 אַבְרָם = Abram
+8 אֶת־ = <obj.>
+9 נָחוֹר = Nahor
+10 וְאֶת־ = and <obj.>
+11 הָרָן = Haran
+12 וְהָרָן = and Haran
+13 הוֹלִיד = he fathered
+14 אֶת־ = <obj.>
+15 לוֹט = Lot
+
+## 1:11:28
+KO: 그리고 하란은 그의 아버지 데라의 면전에서, 그의 출생지의 땅인 갈대아 우르에서 죽었다.
+1 וַיָּמָת = and he died (to die)
+2 הָרָן = Haran
+3 עַל־ = on (upon)
+4 פְּנֵי = [the] face of (face)
+5 תֶּרַח = Terah
+6 אָבִיו = father his (father)
+7 בְּאֶרֶץ = in [the] land of (land)
+8 מוֹלַדְתּוֹ = kindred his (relatives)
+9 בְּאוּר = in Ur (Ur)
+10 כַּשְׂדִּים = of [the] Chaldeans (Chaldea)
+
+## 1:11:29
+KO: 그리고 아브람과 나홀이 그들을 위하여 아내들을 취하였으니, 아브람의 아내의 이름은 사래이며 나홀의 아내의 이름은 밀가니, (그녀는) 하란의 딸이요, 하란은 밀가의 아버지이며 또한 이스가의 아버지더라.
+1 וַיִּקַּח = and he took (to take)
+2 אַבְרָם = Abram
+3 וְנָחוֹר = and Nahor
+4 לָהֶם = for <the> themselves (them)
+5 נָשִׁים = wives
+6 שֵׁם = [the] name of
+7 אֵשֶׁת־ = [the] wife of
+8 אַבְרָם = Abram
+9 שָׂרָי = [was] Sarai (Sarai)
+10 וְשֵׁם = and [the] name of
+11 אֵשֶׁת־ = [the] wife of
+12 נָחוֹר = Nahor
+13 מִלְכָּה = [was] Milcah
+14 בַּת־ = [the] daughter of (daughter)
+15 הָרָן = Haran
+16 אֲבִי־ = [the] father of
+17 מִלְכָּה = Milcah
+18 וַאֲבִי = and [the] father of
+19 יִסְכָּה = Iscah
+
+## 1:11:30
+KO: 그리고 사래는 불임이었으니, 그녀에게는 아이가 없었다.
+1 וַתְּהִי = and she was (to be)
+2 שָׂרַי = Sarai
+3 עֲקָרָה = barren
+4 אֵין = not (nothing)
+5 לָהּ = [belonged] to <the> her (her)
+6 וָלָד = a child (child)
+
+## 1:11:31
+KO: 그리고 데라가 그의 아들 아브람과 하란의 아들인 그의 손자 롯과 그의 며느리인 아브람의 아내 사래를 취하였다. 그리고 그들이 갈대아 우르로부터 가나안 땅으로 가기 위하여 함께 나왔고, 그들은 하란에 이르렀으며 거기 거하였다.
+1 וַיִּקַּח = and he took (to take)
+2 תֶּרַח = Terah
+3 אֶת־ = <obj.>
+4 אַבְרָם = Abram
+5 בְּנוֹ = son his
+6 וְאֶת־ = and <obj.>
+7 לוֹט = Lot
+8 בֶּן־ = [the] son of
+9 הָרָן = Haran
+10 בֶּן־ = [the] son of
+11 בְּנוֹ = son his
+12 וְאֵת = and <obj.>
+13 שָׂרַי = Sarai
+14 כַּלָּתוֹ = daughter-in-law his (daughter-in-law)
+15 אֵשֶׁת = [the] wife of (woman)
+16 אַבְרָם = Abram
+17 בְּנוֹ = son his
+18 וַיֵּצְאוּ = and they went out (to come out)
+19 אִתָּם = with them (with)
+20 מֵאוּר = from Ur (Ur)
+21 כַּשְׂדִּים = of [the] Chaldeans (Chaldea)
+22 לָלֶכֶת = to go
+23 אַרְצָה = [the] land of towards (land)
+24 כְּנַעַן = Canaan
+25 וַיָּבֹאוּ = and they came (to come (in))
+26 עַד־ = to (till)
+27 חָרָן = Haran
+28 וַיֵּשְׁבוּ = and they dwelt (to dwell)
+29 שָׁם = there
+
+## 1:11:32
+KO: 그리고 데라의 날들이 이백오 년이었고, 데라가 하란에서 죽었다.
+1 וַיִּהְיוּ = and they were (to be)
+2 יְמֵי־ = [the] days of (day;_when)
+3 תֶרַח = Terah
+4 חָמֵשׁ = five
+5 שָׁנִים = years
+6 וּמָאתַיִם = and two hundred (hundred)
+7 שָׁנָה = year[s]
+8 וַיָּמָת = and he died (to die)
+9 תֶּרַח = Terah
+10 בְּחָרָן ס = in Haran (Haran)
+
+## 1:12:1
+KO: 그리고 여호와께서 아브람에게 말씀하셨다. "너는 너의 땅으로부터, 그리고 너의 친족들로부터, 그리고 너의 아버지의 집으로부터, 내가 너에게 보게 할 그 땅으로 가라."
+1 וַיֹּאמֶר = and he said (to say)
+2 יְהוָה = Yahweh (LORD)
+3 אֶל־ = to
+4 אַבְרָם = Abram
+5 לֶךְ־ = go (to go)
+6 לְךָ = for <the> yourself (you)
+7 מֵאַרְצְךָ = from land your
+8 וּמִמּוֹלַדְתְּךָ = and from kindred your (relatives)
+9 וּמִבֵּית = and from [the] household of (house)
+10 אָבִיךָ = father your (father)
+11 אֶל־ = to
+12 הָאָרֶץ = the land
+13 אֲשֶׁר = which
+14 אַרְאֶךָּ = I will show you (to see)

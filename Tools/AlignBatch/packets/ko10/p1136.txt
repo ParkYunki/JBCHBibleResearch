@@ -1,0 +1,199 @@
+## 14:8:4
+KO: 그리고 그가 광야에 다드몰을 건축하였고, 그가 하맛에 건축하였던 모든 국고성들을 (건축하였다).
+1 וַיִּבֶן = and he built
+2 אֶת־ = <obj.>
+3 תַּדְמֹר = Tadmor
+4 בַּמִּדְבָּר = in the wilderness (wilderness)
+5 וְאֵת = and <obj.>
+6 כָּל־ = all
+7 עָרֵי = [the] cities of (city)
+8 הַמִּסְכְּנוֹת = <the> storage (storage)
+9 אֲשֶׁר = which
+10 בָּנָה = he built
+11 בַּחֲמָת = in Hamath (Hamath)
+
+## 14:8:5
+KO: 그리고 그는 윗 벧호론과 아래 벧호론을 건축하였으니, 성벽들과 문들과 문빗장들이 있는 요새의 성읍들이었다.
+1 וַיִּבֶן = and he built (to build)
+2 אֶת־ = <obj.>
+3 בֵּית = Beth
+4 חוֹרוֹן = Horon
+5 הָעֶלְיוֹן = <the> upper (Upper)
+6 וְאֶת־ = and <obj.>
+7 בֵּית = Beth
+8 חוֹרוֹן = Horon
+9 הַתַּחְתּוֹן = <the> lower (Lower)
+10 עָרֵי = cities of (city)
+11 מָצוֹר = fortification (siege)
+12 חוֹמוֹת = walls (wall)
+13 דְּלָתַיִם = doors (door)
+14 וּבְרִיחַ = and bar[s] (bar)
+
+## 14:8:6
+KO: 그리고 바알랏을, 그리고 솔로몬에게 속하였던 모든 국고 성들을, 그리고 모든 병거의 성들을, 그리고 마병의 성들을, 그리고 솔로몬이 예루살렘과 레바논과 그의 통치 아래 있는 모든 땅에 건축하기를 원하였던 솔로몬의 모든 소망을 건축하였다.
+1 וְאֶת־ = and <obj.>
+2 בַּעֲלָת = Baalath
+3 וְאֵת = and <obj.>
+4 כָּל־ = all
+5 עָרֵי = [the] cities of
+6 הַמִּסְכְּנוֹת = <the> storage (storage)
+7 אֲשֶׁר = which
+8 הָיוּ = they belonged (to be)
+9 לִשְׁלֹמֹה = to Solomon
+10 וְאֵת = and <obj.>
+11 כָּל־ = all
+12 עָרֵי = [the] cities of
+13 הָרֶכֶב = <the> chariotry (chariot)
+14 וְאֵת = and <obj.>
+15 עָרֵי = [the] cities of
+16 הַפָּרָשִׁים = the horsemen (horseman)
+17 וְאֵת = and <obj.>
+18 כָּל־ = all
+19 חֵשֶׁק = [the] desire of (desire)
+20 שְׁלֹמֹה = Solomon
+21 אֲשֶׁר = which
+22 חָשַׁק = he desired (to desire)
+23 לִבְנוֹת = to build
+24 בִּירוּשָׁלִַם = in Jerusalem (Jerusalem)
+25 וּבַלְּבָנוֹן = and in <the> Lebanon (Lebanon)
+26 וּבְכֹל = and in all
+27 אֶרֶץ = [the] land of (land)
+28 מֶמְשַׁלְתּוֹ = dominion his (dominion)
+
+## 14:8:7
+KO: 이스라엘로부터가 아닌, 헷 족속과 아모리 족속과 브리스 족속과 히위 족속과 여부스 족속 중에 남아 있는 그 모든 백성, 그들.
+1 כָּל־ = all
+2 הָעָם = the people (people)
+3 הַנּוֹתָר = which remained (to remain)
+4 מִן־ = of (from)
+5 הַחִתִּי = the Hittite[s] (Hittite)
+6 וְהָאֱמֹרִי = and the Amorite[s] (Amorite)
+7 וְהַפְּרִזִּי = and the Perizzite[s] (Perizzite)
+8 וְהַחִוִּי = and the Hivite[s] (Hivite)
+9 וְהַיְבוּסִי = and the Jebusite[s] (Jebusite)
+10 אֲשֶׁר = which
+11 לֹא = not
+12 מִיִּשְׂרָאֵל = [were] from Israel (Israel)
+13 הֵמָּה = they (they(masc.))
+
+## 14:8:8
+KO: 그들(이스라엘 자손) 뒤에 그 땅에 남아 있는 그들의 자손들로부터, 이스라엘 자손이 그들을 진멸하지 못하였던 자들, 솔로몬이 그들을 역군으로 올려 오늘날까지 이르렀다.
+1 מִן־ = some of (from)
+2 בְּנֵיהֶם = descendants their
+3 אֲשֶׁר = who
+4 נוֹתְרוּ = they remained (to remain)
+5 אַחֲרֵיהֶם = after them (after)
+6 בָּאָרֶץ = in the land (land)
+7 אֲשֶׁר = whom
+8 לֹא־ = not
+9 כִלּוּם = they had destroyed them (to end)
+10 בְּנֵי = [the] people of
+11 יִשְׂרָאֵל = Israel
+12 וַיַּעֲלֵם = and he brought up them (to ascend)
+13 שְׁלֹמֹה = Solomon
+14 לְמַס = to forced labor (taskworker)
+15 עַד = until (till)
+16 הַיּוֹם = the day (day)
+17 הַזֶּה = <the> this (this)
+
+## 14:8:9
+KO: 그러나 이스라엘 자손 중에는 솔로몬이 그의 일을 하기 위한 종들로 삼지 않았으니, 이는 그들이 군사이며, 그의 장관들의 우두머리들이며, 그의 병거와 기병의 장관들이었기 때문이다.
+1 וּמִן־ = and of (from)
+2 בְּנֵי = [the] people of (son)
+3 יִשְׂרָאֵל = Israel
+4 אֲשֶׁר = whom (which)
+5 לֹא־ = not
+6 נָתַן = he made (to give)
+7 שְׁלֹמֹה = Solomon
+8 לַעֲבָדִים = into slaves (servant;_slave)
+9 לִמְלַאכְתּוֹ = for work his (work)
+10 כִּי־ = for
+11 הֵמָּה = they (they(masc.))
+12 אַנְשֵׁי = [were] men of (human)
+13 מִלְחָמָה = war (battle)
+14 וְשָׂרֵי = and [the] commanders of
+15 שָׁלִישָׁיו = officers his (officer)
+16 וְשָׂרֵי = and [the] commanders of
+17 רִכְבּוֹ = chariotry his (chariot)
+18 וּפָרָשָׁיו פ = and horsemen his (horseman)
+
+## 14:8:10
+KO: 그리고 이들이 솔로몬 왕에게 속한 감독관들의 우두머리들인데, 오십과 이백 명이 백성을 다스렸다.
+1 וְאֵלֶּה = and these (these)
+2 שָׂרֵי = [were] [the] commanders of (ruler)
+3 הַנִּצָּבִים = the overseers (to stand)
+4 אֲשֶׁר־ = who (which)
+5 לַמֶּלֶךְ = [belonged] to the king (king)
+6 שְׁלֹמֹה = Solomon
+7 חֲמִשִּׁים = fifty
+8 וּמָאתָיִם = and two hundred (hundred)
+9 הָרֹדִים = who ruled (to rule)
+10 בָּעָם = over the people (people)
+
+## 14:8:11
+KO: 그리고 솔로몬은 바로의 딸을 다윗 성으로부터 그가 그녀를 위하여 건축한 집으로 올라오게 하였는데, 이는 그가 말하기를 "내 아내가 이스라엘 왕 다윗의 집에 거주하지 못할 것이니, 왜냐하면 여호와의 궤가 이른 곳들이 거룩함이기 때문이다"라고 하였기 때문이다.
+1 וְאֶת־ = and <obj.> ([Obj.])
+2 בַּת־ = [the] daughter of (daughter)
+3 פַּרְעֹה = Pharaoh
+4 הֶעֱלָה = he brought up (to ascend)
+5 שְׁלֹמֹה = Solomon
+6 מֵעִיר = from [the] city of (city)
+7 דָּוִיד = David
+8 לַבַּיִת = to the house
+9 אֲשֶׁר = which
+10 בָּנָה־ = he had built (to build)
+11 לָהּ = for her (her)
+12 כִּי = for
+13 אָמַר = he said (to say)
+14 לֹא־ = not
+15 תֵשֵׁב = she will dwell (to dwell)
+16 אִשָּׁה = a wife (woman)
+17 לִי = of me (me)
+18 בְּבֵית = in [the] house of
+19 דָּוִיד = David
+20 מֶלֶךְ־ = [the] king of (king)
+21 יִשְׂרָאֵל = Israel
+22 כִּי־ = for
+23 קֹדֶשׁ = [are] holiness (holiness)
+24 הֵמָּה = they (they(masc.))
+25 אֲשֶׁר־ = [places] where
+26 בָּאָה = it has come (to come (in))
+27 אֲלֵיהֶם = to them (to(wards))
+28 אֲרוֹן = [the] ark of (ark)
+29 יְהוָה פ = Yahweh (LORD)
+
+## 14:8:12
+KO: 그때에 솔로몬이 번제물들을 여호와께 드렸으니, 그가 성전 낭실 앞에 세운 여호와의 제단 위에였다.
+1 אָז = then
+2 הֶעֱלָה = he offered up (to ascend)
+3 שְׁלֹמֹה = Solomon
+4 עֹלוֹת = burnt offerings (burnt offering)
+5 לַיהוָה = to Yahweh
+6 עַל = on (upon)
+7 מִזְבַּח = [the] altar of (altar)
+8 יְהוָה = Yahweh
+9 אֲשֶׁר = which
+10 בָּנָה = he had built (to build)
+11 לִפְנֵי = <to> before (face)
+12 הָאוּלָם = the porch (porch)
+
+## 14:8:13
+KO: 그리고 모세의 계명에 따라, 날마다의 일에 대하여, 안식일들과 월삭들과 정한 절기들 곧 일 년에 세 번, 무교절의 절기와 칠칠절의 절기와 초막절의 절기에 드렸더라.
+1 וּבִדְבַר־ = and <in> a matter of (word)
+2 יוֹם = a day
+3 בְּיוֹם = in a day
+4 לְהַעֲלוֹת = to offer up (to ascend)
+5 כְּמִצְוַת = according to [the] commandment of (commandment)
+6 מֹשֶׁה = Moses
+7 לַשַּׁבָּתוֹת = for the sabbaths (Sabbath)
+8 וְלֶחֳדָשִׁים = and for the new moons (month)
+9 וְלַמּוֹעֲדוֹת = and for the appointed times (meeting)
+10 שָׁלוֹשׁ = three
+11 פְּעָמִים = times (beat)
+12 בַּשָּׁנָה = in the year (year)
+13 בְּחַג = at [the] festival of
+14 הַמַּצּוֹת = the unleavened bread<s> (unleavened bread)
+15 וּבְחַג = and at [the] festival of
+16 הַשָּׁבֻעוֹת = the weeks (Weeks)
+17 וּבְחַג = and at [the] festival of
+18 הַסֻּכּוֹת = <the> booths (booth)

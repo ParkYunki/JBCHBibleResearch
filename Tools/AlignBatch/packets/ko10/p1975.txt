@@ -1,0 +1,182 @@
+## 24:32:9
+KO: 그리고 내가 샀다, 그 밭을, 나의 숙부의 아들 하나멜로부터, 아나돗에 있는. 그리고 내가 달아 주었다 그에게, 그 은, 일곱 세겔들과 열(의) 은을.
+1 וָאֶקְנֶה = and I bought (to buy)
+2 אֶת־ = <obj.>
+3 הַשָּׂדֶה = the field (land)
+4 מֵאֵת = from with (with)
+5 חֲנַמְאֵל = Hanamel
+6 בֶּן־ = [the] son of (son)
+7 דֹּדִי = uncle my (beloved)
+8 אֲשֶׁר = which
+9 בַּעֲנָתוֹת = [was] at Anathoth (Anathoth)
+10 וָאֶשְׁקֲלָה־ = and I weighed out ! (to weigh)
+11 לּוֹ = for <the> him (him)
+12 אֶת־ = <obj.>
+13 הַכֶּסֶף = the silver
+14 שִׁבְעָה = [was] seven (seven)
+15 שְׁקָלִים = shekels (shekel)
+16 וַעֲשָׂרָה = and ten (ten)
+17 הַכָּסֶף = the silver
+
+## 24:32:10
+KO: 그리고 내가 그 책에 기록하고, 그리고 내가 봉인하고, 그리고 내가 증인들을 증언하게 세우고, 그리고 내가 그 은을 저울들로 달았다.
+1 וָאֶכְתֹּב = and I wrote (to write)
+2 בַּסֵּפֶר = on the document (scroll)
+3 וָאֶחְתֹּם = and I sealed [it] (to seal)
+4 וָאָעֵד = and I caused to witness [it] (to testify)
+5 עֵדִים = witnesses (witness)
+6 וָאֶשְׁקֹל = and I weighed out (to weigh)
+7 הַכֶּסֶף = the silver (silver)
+8 בְּמֹאזְנָיִם = on scales (balance)
+
+## 24:32:11
+KO: 그리고 내가 취하였다, 그 매매 증서를, 그 인봉된 것을, 그 명령과 그 규례들과, 그리고 그 열린(봉인되지 않은) 것을.
+1 וָאֶקַּח = and I took (to take)
+2 אֶת־ = <obj.>
+3 סֵפֶר = [the] document of (scroll)
+4 הַמִּקְנָה = the purchase (purchase)
+5 אֶת־ = <obj.>
+6 הֶחָתוּם = the sealed [one] (to seal)
+7 הַמִּצְוָה = the order (commandment)
+8 וְהַחֻקִּים = and the conditions (statute)
+9 וְאֶת־ = and <obj.>
+10 הַגָּלוּי = the uncovered [one] (to reveal)
+
+## 24:32:12
+KO: 그리고 나는 그 매매 증서를 바룩에게, 곧 마세야의 아들 네리야의 아들에게 주었다. 내 숙부 하나멜의 목전에서, 그리고 그 매매 증서를 기록하고 있던 증인들의 목전에서, 그리고 시위대 뜰에 앉아 있는 모든 유다인들의 목전에서였다.
+1 וָאֶתֵּן = and I gave (to give)
+2 אֶת־ = <obj.> ([Obj.])
+3 הַסֵּפֶר = the document
+4 הַמִּקְנָה = the purchase
+5 אֶל־ = to (to(wards))
+6 בָּרוּךְ = Baruch
+7 בֶּן־ = [the] son of
+8 נֵרִיָּה = Neriah
+9 בֶּן־ = [the] son of
+10 מַחְסֵיָה = Mahseiah
+11 לְעֵינֵי = to [the] eyes of
+12 חֲנַמְאֵל = Hanamel
+13 דֹּדִי = uncle my (beloved)
+14 וּלְעֵינֵי = and to [the] eyes of
+15 הָעֵדִים = the witnesses (witness)
+16 הַכֹּתְבִים = who wrote (to write)
+17 בְּסֵפֶר = on [the] document of
+18 הַמִּקְנָה = the purchase
+19 לְעֵינֵי = to [the] eyes of
+20 כָּל־ = all
+21 הַיְּהוּדִים = the Jews (Judean)
+22 הַיֹּשְׁבִים = who were sitting (to dwell)
+23 בַּחֲצַר = in [the] courtyard of (court)
+24 הַמַּטָּרָה = the guard (guardhouse)
+
+## 24:32:13
+KO: 그리고 내가 그들의 눈앞에서 바룩에게 명령하며 말하였다.
+1 וָאֲצַוֶּה = and I commanded (to command)
+2 אֶת = <obj.> ([Obj.])
+3 בָּרוּךְ = Baruch
+4 לְעֵינֵיהֶם = to eyes their (eye)
+5 לֵאמֹר = <to> saying (to say)
+
+## 24:32:14
+KO: 만군의 여호와 이스라엘의 하나님이 이같이 말씀하시기를, 너는 이 문서들, 곧 인봉된 이 매매 문서와 인봉되지 않은 이 문서를 취하여, 그것들을 질그릇에 담아 많은 날 동안 서 있게 하라.
+1 כֹּה־ = thus
+2 אָמַר = he says (to say)
+3 יְהוָה = Yahweh (LORD)
+4 צְבָאוֹת = of hosts (Hosts)
+5 אֱלֹהֵי = [the] God of (God)
+6 יִשְׂרָאֵל = Israel
+7 לָקוֹחַ = take (to take)
+8 אֶת־ = <obj.>
+9 הַסְּפָרִים = the documents
+10 הָאֵלֶּה = <the> these (these)
+11 אֵת = <obj.>
+12 סֵפֶר = [the] document of
+13 הַמִּקְנָה = the purchase (purchase)
+14 הַזֶּה = <the> this
+15 וְאֵת = and <obj.>
+16 הֶחָתוּם = the sealed [one] (to seal)
+17 וְאֵת = and <obj.>
+18 סֵפֶר = [the] document
+19 הַגָּלוּי = <the> uncovered (to reveal)
+20 הַזֶּה = <the> this
+21 וּנְתַתָּם = and you will put them (to give)
+22 בִּכְלִי־ = in a vessel of (article|utensil)
+23 חָרֶשׂ = earthenware
+24 לְמַעַן = so that (because)
+25 יַעַמְדוּ = they may remain (to stand)
+26 יָמִים = days (day;_when)
+27 רַבִּים ס = many
+
+## 24:32:15
+KO: 대저 만군의 여호와 이스라엘의 하나님이 이같이 말씀하시기를, 이 땅에서 집들과 밭들과 포도원들이 다시 사여지게 되리라 하셨느니라.
+1 כִּי = for
+2 כֹה = thus
+3 אָמַר = he says (to say)
+4 יְהוָה = Yahweh (LORD)
+5 צְבָאוֹת = of hosts (Hosts)
+6 אֱלֹהֵי = [the] God of (God)
+7 יִשְׂרָאֵל = Israel
+8 עוֹד = again (still)
+9 יִקָּנוּ = they will be bought (to buy)
+10 בָתִּים = houses (house)
+11 וְשָׂדוֹת = and fields (land)
+12 וּכְרָמִים = and vineyards (vineyard)
+13 בָּאָרֶץ = in the land (land)
+14 הַזֹּאת פ = <the> this (this)
+
+## 24:32:16
+KO: 그리고 내가 매매의 그 두루마리를 네리야의 아들 바룩에게 준 후에 여호와께 기도하며 말하였다.
+1 וָאֶתְפַּלֵּל = and I prayed (to pray)
+2 אֶל־ = to
+3 יְהוָה = Yahweh (LORD)
+4 אַחֲרֵי = after
+5 תִתִּי = gave I (to give)
+6 אֶת־ = <obj.> ([Obj.])
+7 סֵפֶר = [the] document of (scroll)
+8 הַמִּקְנָה = the purchase (purchase)
+9 אֶל־ = to
+10 בָּרוּךְ = Baruch
+11 בֶּן־ = [the] son of (son)
+12 נֵרִיָּה = Neriah
+13 לֵאמֹר = <to> saying (to say)
+
+## 24:32:17
+KO: 아아, 주 여호와여, 보소서! 주께서 주의 큰 능력과 주의 펴신 팔로 하늘과 땅을 만드셨으니, 주께는 어떤 일도 너무 어렵지 아니하니이다.
+1 אֲהָהּ = alas!
+2 אֲדֹנָי = O Lord (Lord)
+3 יְהוִה = Yahweh (YHWH|Yahweh)
+4 הִנֵּה = there! (behold)
+5 אַתָּה = you (you(m.s.))
+6 עָשִׂיתָ = you made (to make)
+7 אֶת־ = <obj.>
+8 הַשָּׁמַיִם = the heavens (heaven)
+9 וְאֶת־ = and <obj.>
+10 הָאָרֶץ = the earth (land)
+11 בְּכֹחֲךָ = by strength your (strength)
+12 הַגָּדוֹל = <the> great (great)
+13 וּבִזְרֹעֲךָ = and by arm your (arm)
+14 הַנְּטוּיָה = <the> outstretched (to stretch)
+15 לֹא־ = not
+16 יִפָּלֵא = it is [too] difficult (to wonder)
+17 מִמְּךָ = for you (from)
+18 כָּל־ = any (all)
+19 דָּבָר = thing (word)
+
+## 24:32:18
+KO: 수천에게 인애를 행하시며, 아버지들의 죄악을 그들 뒤에 있는 그들 자손들의 품에 갚으시는, 크고 능하신 하나님, 만군의 여호와이시니, 그의 이름(이 그러하시니이다).
+1 עֹשֶׂה = [who] does (to make)
+2 חֶסֶד = covenant loyalty (kindness)
+3 לַאֲלָפִים = to thousands (thousand)
+4 וּמְשַׁלֵּם = and [who] pays back (to complete)
+5 עֲוֹן = [the] iniquity of (iniquity)
+6 אָבוֹת = fathers (father)
+7 אֶל־ = into (to(wards))
+8 חֵיק = [the] bosom of (bosom)
+9 בְּנֵיהֶם = children their (son)
+10 אַחֲרֵיהֶם = after them (after)
+11 הָאֵל = <the> God (God)
+12 הַגָּדוֹל = <the> great (great)
+13 הַגִּבּוֹר = <the> mighty (mighty)
+14 יְהוָה = [is] Yahweh (LORD)
+15 צְבָאוֹת = of hosts (Hosts)
+16 שְׁמוֹ = name his (name)

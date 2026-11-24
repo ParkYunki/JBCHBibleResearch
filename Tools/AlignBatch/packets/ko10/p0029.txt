@@ -1,0 +1,131 @@
+## 1:11:14
+KO: 그리고 셀라는 삼십 년을 살았고, 에벨을 낳았다.
+1 וְשֶׁלַח = and Shelah (Shelah)
+2 חַי = he lived (to live)
+3 שְׁלֹשִׁים = thirty
+4 שָׁנָה = year[s] (year)
+5 וַיּוֹלֶד = and he fathered (to beget)
+6 אֶת־ = <obj.> ([Obj.])
+7 עֵבֶר = Eber
+
+## 1:11:15
+KO: 그리고 셀라는 에벨을 낳은 후에 사백삼 년을 살았고, 아들들과 딸들을 낳았다.
+1 וַיְחִי־ = and he lived (to live)
+2 שֶׁלַח = Shelah
+3 אַחֲרֵי = after
+4 הוֹלִידוֹ = fathered he
+5 אֶת־ = <obj.> ([Obj.])
+6 עֵבֶר = Eber
+7 שָׁלֹשׁ = three
+8 שָׁנִים = years
+9 וְאַרְבַּע = and four (four)
+10 מֵאוֹת = hundred<s> (hundred)
+11 שָׁנָה = year[s]
+12 וַיּוֹלֶד = and he fathered
+13 בָּנִים = sons (son)
+14 וּבָנוֹת ס = and daughters (daughter)
+
+## 1:11:16
+KO: 그리고 에벨은 살았다, 사십과 삼십 년을, 그리고 낳았다 벨렉을.
+1 וַיְחִי־ = and he lived (to live)
+2 עֵבֶר = Eber
+3 אַרְבַּע = four
+4 וּשְׁלֹשִׁים = and thirty (thirty)
+5 שָׁנָה = year[s] (year)
+6 וַיּוֹלֶד = and he fathered (to beget)
+7 אֶת־ = <obj.> ([Obj.])
+8 פָּלֶג = Peleg
+
+## 1:11:17
+KO: 그리고 에벨은 벨렉을 낳은 후에 사백삼십 년을 살았고, 아들들과 딸들을 낳았다.
+1 וַיְחִי־ = and he lived (to live)
+2 עֵבֶר = Eber
+3 אַחֲרֵי = after
+4 הוֹלִידוֹ = fathered he
+5 אֶת־ = <obj.> ([Obj.])
+6 פֶּלֶג = Peleg
+7 שְׁלֹשִׁים = thirty
+8 שָׁנָה = year[s]
+9 וְאַרְבַּע = and four (four)
+10 מֵאוֹת = hundred<s> (hundred)
+11 שָׁנָה = year[s]
+12 וַיּוֹלֶד = and he fathered
+13 בָּנִים = sons (son)
+14 וּבָנוֹת ס = and daughters (daughter)
+
+## 1:11:18
+KO: 그리고 벨렉은 삼십 년을 살았고, 르우를 낳았다.
+1 וַיְחִי־ = and he lived (to live)
+2 פֶלֶג = Peleg
+3 שְׁלֹשִׁים = thirty
+4 שָׁנָה = year[s] (year)
+5 וַיּוֹלֶד = and he fathered (to beget)
+6 אֶת־ = <obj.> ([Obj.])
+7 רְעוּ = Reu
+
+## 1:11:19
+KO: 그리고 펠렉은 르우를 낳은 후에 이백구 년을 살며 아들들과 딸들을 낳았다.
+1 וַיְחִי־ = and he lived (to live)
+2 פֶלֶג = Peleg
+3 אַחֲרֵי = after
+4 הוֹלִידוֹ = fathered he
+5 אֶת־ = <obj.> ([Obj.])
+6 רְעוּ = Reu
+7 תֵּשַׁע = nine
+8 שָׁנִים = years
+9 וּמָאתַיִם = and two hundred (hundred)
+10 שָׁנָה = year[s]
+11 וַיּוֹלֶד = and he fathered
+12 בָּנִים = sons (son)
+13 וּבָנוֹת ס = and daughters (daughter)
+
+## 1:11:20
+KO: 그리고 르우는 삼십이 년을 살았고, 스룩을 낳았다.
+1 וַיְחִי = and he lived (to live)
+2 רְעוּ = Reu
+3 שְׁתַּיִם = two
+4 וּשְׁלֹשִׁים = and thirty (thirty)
+5 שָׁנָה = year[s] (year)
+6 וַיּוֹלֶד = and he fathered (to beget)
+7 אֶת־ = <obj.> ([Obj.])
+8 שְׂרוּג = Serug
+
+## 1:11:21
+KO: 르우는 스룩을 낳은 후에 이백칠 년을 살았고, 아들들과 딸들을 낳았다.
+1 וַיְחִי = and he lived (to live)
+2 רְעוּ = Reu
+3 אַחֲרֵי = after
+4 הוֹלִידוֹ = fathered he
+5 אֶת־ = <obj.> ([Obj.])
+6 שְׂרוּג = Serug
+7 שֶׁבַע = seven
+8 שָׁנִים = years
+9 וּמָאתַיִם = and two hundred (hundred)
+10 שָׁנָה = year[s]
+11 וַיּוֹלֶד = and he fathered
+12 בָּנִים = sons (son)
+13 וּבָנוֹת ס = and daughters (daughter)
+
+## 1:11:22
+KO: 그리고 스룩은 삼십 년을 살았고, 나홀을 낳았다.
+1 וַיְחִי = and he lived (to live)
+2 שְׂרוּג = Serug
+3 שְׁלֹשִׁים = thirty
+4 שָׁנָה = year[s] (year)
+5 וַיּוֹלֶד = and he fathered (to beget)
+6 אֶת־ = <obj.> ([Obj.])
+7 נָחוֹר = Nahor
+
+## 1:11:23
+KO: 그리고 그(스룩)는 나홀을 낳은 후에 이백 년을 살았으며, 아들들과 딸들을 낳았다.
+1 וַיְחִי = and he lived (to live)
+2 שְׂרוּג = Serug
+3 אַחֲרֵי = after
+4 הוֹלִידוֹ = fathered he
+5 אֶת־ = <obj.> ([Obj.])
+6 נָחוֹר = Nahor
+7 מָאתַיִם = two hundred (hundred)
+8 שָׁנָה = year[s] (year)
+9 וַיּוֹלֶד = and he fathered
+10 בָּנִים = sons (son)
+11 וּבָנוֹת ס = and daughters (daughter)

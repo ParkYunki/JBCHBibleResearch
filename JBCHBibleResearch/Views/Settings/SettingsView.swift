@@ -32,6 +32,10 @@ struct SettingsView: View {
                 .tabItem { Label("일반", systemImage: "gearshape") }
             BibleSettingsGroup()
                 .tabItem { Label("성경", systemImage: "book.closed") }
+            // [2026-11-14] 내 설교 — 구절 인용 번역본·치환 단축키·분량·뷰어. 이 기기에만 저장한다.
+            SermonSettingsTab()
+                .settingsThemedBackdrop()
+                .tabItem { Label("설교", systemImage: "mic") }
             // DEBUG 전용 — 개요 화면에서 작성한 서식(RTF)을 배포용 시드 파일로 내보낸다
             // (OutlineSeedExporter.swift 참고). 배포 빌드에서는 이 탭 자체가 빠진다.
             #if DEBUG
@@ -210,6 +214,20 @@ struct SettingsHomeView: View {
             }
             .settingsRowBackground()
 
+            Section {
+                NavigationLink {
+                    SermonSettingsTab()
+                        .settingsNavigationPage(String(localized: "설교"))
+                } label: {
+                    SettingsCategoryRow(title: String(localized: "설교"), systemImage: "mic.fill", tint: JBCHCategoryPalette.slateTeal)
+                }
+            } header: {
+                Text("내 설교")
+                    .font(.title3.bold())
+                    .foregroundStyle(.secondary)
+            }
+            .settingsRowBackground()
+
             #if DEBUG
             Section {
                 NavigationLink {
@@ -287,16 +305,22 @@ private struct GeneralSettingsTab: View {
 
             // 동기화 실패 알림(`ContentView`)은 한 번만 뜨므로, 현재 상태와 오류 원문은 여기서 다시 볼 수 있다.
             Section {
-                if let message = CloudSyncMonitor.shared.errorMessage {
+                let failedPhases = CloudSyncMonitor.shared.failedPhases
+                if !failedPhases.isEmpty {
+                    // import 오류가 export 오류를 가리지 않도록 실패한 모든 단계를 각각 보여 준다.
                     Label("동기화 실패", systemImage: "exclamationmark.icloud")
                         .foregroundStyle(.orange)
-                    Text(message)
-                        .font(.caption)
-                    if let detail = CloudSyncMonitor.shared.errorDetail {
-                        Text(detail)
-                            .font(.caption2)
-                            .foregroundStyle(.secondary)
-                            .textSelection(.enabled)
+                    ForEach(failedPhases) { failed in
+                        VStack(alignment: .leading, spacing: 4) {
+                            Text(failed.message)
+                                .font(.caption)
+                            if let detail = failed.detail {
+                                Text(detail)
+                                    .font(.caption2)
+                                    .foregroundStyle(.secondary)
+                                    .textSelection(.enabled)
+                            }
+                        }
                     }
                 } else {
                     Label("이번 실행에서 확인된 동기화 오류 없음", systemImage: "checkmark.icloud")

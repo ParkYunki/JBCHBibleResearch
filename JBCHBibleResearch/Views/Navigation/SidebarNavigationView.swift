@@ -25,6 +25,10 @@ struct SidebarNavigationView: View {
     private var settings: UserSettingsStore { .shared }
     @State private var selection: AppSection? = SidebarNavigationView.initialSelection()
     @State private var columnVisibility: NavigationSplitViewVisibility = .all
+    /// 좁은 폭(아이패드 Split View·Slide Over 등 compact 폭)에서 `NavigationSplitView`는 칸을 겹쳐 쌓는 스택처럼 동작해
+    /// `columnVisibility`만 바꿔서는 사이드바 화면으로 돌아가지 않는다. 이 값이 "스택에서 맨 위에 보일 칸"이다.
+    /// 기본값 `.detail`은 지금까지의 동작(본문이 먼저 보임)과 같다. 항목을 고르면 시스템이 이 값을 `.detail`로 바꾼다.
+    @State private var preferredCompactColumn: NavigationSplitViewColumn = .detail
     @State private var isSettingsPresented = false
     /// 사이드바 상단 검색 텍스트박스 입력값. `sidebarSearchBar`/`submitSidebarSearch()` 참고.
     @State private var sidebarSearchText: String = ""
@@ -270,7 +274,7 @@ struct SidebarNavigationView: View {
     }
 
     var body: some View {
-        NavigationSplitView(columnVisibility: $columnVisibility) {
+        NavigationSplitView(columnVisibility: $columnVisibility, preferredCompactColumn: $preferredCompactColumn) {
             // ⚠️ [주의] `List(AppSection.allCases, selection:)`처럼 컬렉션을 첫 인자로
             // 넘기는 초기화 구문은 selection의 타입을 `AppSection.ID?`(=String?)로
             // 강제한다(Data.Element: Identifiable 기반 오버로드) — `.tag(_:)`로 요소
@@ -417,6 +421,8 @@ struct SidebarNavigationView: View {
         .onChange(of: IPadSidebarInspectorCoordination.shared.showSidebarRequestToken) { _, newValue in
             guard isIPadIdiom, newValue > 0 else { return }
             columnVisibility = .all
+            // 좁은 폭에서는 위 한 줄만으로는 화면이 바뀌지 않는다 — 사이드바 칸을 맨 위로 올린다. 넓은 폭에서는 영향이 없다.
+            preferredCompactColumn = .sidebar
         }
         // ③ 관련 콘텐츠 인스펙터가 열리는 순간을 관찰해, 이 화면이 자기 로컬 상태로 사이드바를 접는다.
         .onChange(of: IPadSidebarInspectorCoordination.shared.isInspectorVisible) { _, newValue in

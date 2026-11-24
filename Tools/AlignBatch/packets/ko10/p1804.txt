@@ -1,0 +1,173 @@
+## 23:20:1
+KO: 군대장관(타르탄)이 아스돗으로 들어오던 해에, 앗수르 왕 사르곤이 그를 보냈을 때, 그가 아스돗과 싸워 그것을 점령하였다.
+1 בִּשְׁנַת = in [the] year (year)
+2 בֹּא = came (to come (in))
+3 תַרְתָּן = [the] supreme commander (Tartan)
+4 אַשְׁדּוֹדָה = Ashdod towards
+5 בִּשְׁלֹח = when sent (to send)
+6 אֹתוֹ = <obj.> him ([Obj.])
+7 סַרְגוֹן = Sargon
+8 מֶלֶךְ = [the] king of (king)
+9 אַשּׁוּר = Assyria
+10 וַיִּלָּחֶם = and he fought (to fight)
+11 בְּאַשְׁדּוֹד = against Ashdod
+12 וַיִּלְכְּדָהּ = and he captured it (to capture)
+
+## 23:20:2
+KO: 그때에 여호와께서 아모스의 아들 이사야의 손으로 말씀하여 이르시되, 가라. 그리고 네 허리 위로부터 굵은 베를 풀고 네 발 위로부터 네 신을 벗으라 하시니, 그가 그대로 행하여 벗은 몸과 벗은 발로 걸었더라.
+1 בָּעֵת = at the time (time)
+2 הַהִיא = <the> that (he;_she;_it)
+3 דִּבֶּר = he spoke (to speak)
+4 יְהוָה = Yahweh (LORD)
+5 בְּיַד = by [the] hand of (hand)
+6 יְשַׁעְיָהוּ = Isaiah
+7 בֶן־ = [the] son of (son)
+8 אָמוֹץ = Amoz
+9 לֵאמֹר = <to> saying (to say)
+10 לֵךְ = go
+11 וּפִתַּחְתָּ = and you will loosen (to open)
+12 הַשַּׂק = the sackcloth (sackcloth)
+13 מֵעַל = from on
+14 מָתְנֶיךָ = hips your (loin)
+15 וְנַעַלְךָ = and sandal[s] your (sandal)
+16 תַחֲלֹץ = you will take off (to rescue)
+17 מֵעַל = from on
+18 רַגְלֶיךָ = feet your (foot)
+19 וַיַּעַשׂ = and he did (to make)
+20 כֵּן = thus (so)
+21 הָלֹךְ = he went
+22 עָרוֹם = naked
+23 וְיָחֵף ס = and barefoot (barefoot)
+
+## 23:20:3
+KO: 여호와께서 말씀하셨다. "나의 종 이사야가 삼 년 동안 벌거벗고 맨발로 행한 것처럼, 그것이 애굽과 구스에 대하여 징조와 기적이 되었느니라."
+1 וַיֹּאמֶר = and he said (to say)
+2 יְהוָה = Yahweh (LORD)
+3 כַּאֲשֶׁר = just as (as which)
+4 הָלַךְ = he has gone (to go)
+5 עַבְדִּי = servant my (servant;_slave)
+6 יְשַׁעְיָהוּ = Isaiah
+7 עָרוֹם = naked
+8 וְיָחֵף = and barefoot (barefoot)
+9 שָׁלֹשׁ = three
+10 שָׁנִים = years (year)
+11 אוֹת = a sign (sign)
+12 וּמוֹפֵת = and a portent (wonder)
+13 עַל־ = on
+14 מִצְרַיִם = Egypt
+15 וְעַל־ = and on
+16 כּוּשׁ = Cush
+
+## 23:20:4
+KO: 이와 같이 앗수르 왕은 애굽의 포로들과 구스의 사로잡힌 자들을 젊은이든 노인이든 벌거벗고 맨발로, 엉덩이를 드러낸 채로, 애굽의 수치를 보이며 끌고 갈 것이다.
+1 כֵּן = so
+2 יִנְהַג = he will lead away (to lead)
+3 מֶלֶךְ־ = [the] king of (king)
+4 אַשּׁוּר = Assyria
+5 אֶת־ = <obj.>
+6 שְׁבִי = [the] captive[s] of (captivity)
+7 מִצְרַיִם = Egypt
+8 וְאֶת־ = and <obj.>
+9 גָּלוּת = [the] exile[s] of (captivity)
+10 כּוּשׁ = Cush
+11 נְעָרִים = young men (youth)
+12 וּזְקֵנִים = and old [men] (old)
+13 עָרוֹם = naked
+14 וְיָחֵף = and barefoot (barefoot)
+15 וַחֲשׂוּפַי = and [ones] uncovered of (to strip)
+16 שֵׁת = buttock
+17 עֶרְוַת = [the] nakedness of (nakedness)
+18 מִצְרָיִם = Egypt
+
+## 23:20:5
+KO: 그리고 그들은 낙담할 것이며, 그들의 소망이었던 구스로 인하여, 그리고 그들의 아름다움이었던 애굽으로 인하여 부끄러워할 것이다.
+1 וְחַתּוּ = and they will be dismayed (to to be dismayed)
+2 וָבֹשׁוּ = and they will be ashamed (be ashamed)
+3 מִכּוּשׁ = from Cush (Cush)
+4 מַבָּטָם = hope their (expectation)
+5 וּמִן־ = and from (from)
+6 מִצְרַיִם = Egypt
+7 תִּפְאַרְתָּם = boasting their (beauty)
+
+## 23:20:6
+KO: 그리고 이 해변의 거민이 그 날에 말할 것이다. 보라, 우리가 앗수르 왕의 얼굴 앞에서 구조받기 위하여 도움을 구하러 도망쳐 갔던 우리의 기대가 이와 같을진대, 우리가 어떻게 피하겠는가?
+1 וְאָמַר = and he will say (to say)
+2 יֹשֵׁב = [one who] dwells (to dwell)
+3 הָאִי = the coast (coastland)
+4 הַזֶּה = <the> this (this)
+5 בַּיּוֹם = in the day (day;_when)
+6 הַהוּא = <the> that (he;_she;_it)
+7 הִנֵּה־ = there! (behold)
+8 כֹה = [is] thus (thus)
+9 מַבָּטֵנוּ = hope our (expectation)
+10 אֲשֶׁר־ = where (which)
+11 נַסְנוּ = we fled (to flee)
+12 שָׁם = there
+13 לְעֶזְרָה = for help (help)
+14 לְהִנָּצֵל = to be delivered (to rescue)
+15 מִפְּנֵי = from before (face)
+16 מֶלֶךְ = [the] king of (king)
+17 אַשּׁוּר = Assyria
+18 וְאֵיךְ = and how? (how?)
+19 נִמָּלֵט = will we escape (to escape)
+20 אֲנָחְנוּ ס = we
+
+## 23:21:1
+KO: 바다의 광야에 관한 경고라. 마치 남방의 회리바람들이 지나가듯이, 그가 광야로부터, 두려운 땅으로부터 오고 있도다.
+1 מַשָּׂא = [the] oracle of (oracle)
+2 מִדְבַּר־ = [the] wilderness of
+3 יָם = [the] sea (sea)
+4 כְּסוּפוֹת = like storm-winds (whirlwind)
+5 בַּנֶּגֶב = in the south (Negeb)
+6 לַחֲלֹף = to sweep on (to pass)
+7 מִמִּדְבָּר = from [the] wilderness
+8 בָּא = [someone is] coming (to come (in))
+9 מֵאֶרֶץ = from a land (land)
+10 נוֹרָאָה = to be feared (to fear)
+
+## 23:21:2
+KO: 가혹한 환상이 나에게 고하여졌다. 배신하는 자는 배신하고, 약탈하는 자는 약탈한다. 엘람이여 올라가라, 매대여 에워싸라. 내가 그(바빌론)의 모든 탄식을 그치게 하였노라.
+1 חָזוּת = a vision (vision)
+2 קָשָׁה = severe
+3 הֻגַּד־ = it has been told (to tell)
+4 לִי = to me (me)
+5 הַבּוֹגֵד = the traitor
+6 בּוֹגֵד = [is] acting treacherously
+7 וְהַשּׁוֹדֵד = and the destroyer
+8 שׁוֹדֵד = [is] destroying
+9 עֲלִי = go up (to ascend)
+10 עֵילָם = O Elam (Elam)
+11 צוּרִי = lay siege (to confine)
+12 מָדַי = O Media (Media)
+13 כָּל־ = all
+14 אַנְחָתָה = groaning its (sighing)
+15 הִשְׁבַּתִּי = I will cause to cease (to cease)
+
+## 23:21:3
+KO: 그러므로 내 허리들이 고통으로 가득 찼으니, 해산하는 여인의 진통들처럼 고통이 나를 사로잡았도다. 나는 듣지 못할 만큼 뒤틀렸고, 보지 못할 만큼 놀랐도다.
+1 עַל־ = there- (upon)
+2 כֵּן = -fore (so)
+3 מָלְאוּ = they are full (to fill)
+4 מָתְנַי = loins my (loin)
+5 חַלְחָלָה = anguish
+6 צִירִים = pangs
+7 אֲחָזוּנִי = they have seized me (to grasp)
+8 כְּצִירֵי = like [the] pangs of
+9 יוֹלֵדָה = [a woman who] gives birth (to beget)
+10 נַעֲוֵיתִי = I am bent over (to twist)
+11 מִשְּׁמֹעַ = from hearing (to hear)
+12 נִבְהַלְתִּי = I am terrified (to dismay)
+13 מֵרְאוֹת = from seeing (to see)
+
+## 23:21:4
+KO: 내 마음이 방황하며, 떨림이 나를 놀라게 하였으니, 내 황혼의 열망을 나에게 두려움으로 두었도다.
+1 תָּעָה = it has wandered (to go astray)
+2 לְבָבִי = heart my (heart)
+3 פַּלָּצוּת = shuddering
+4 בִּעֲתָתְנִי = it has overwhelmed me (to terrify)
+5 אֵת = <obj.> ([Obj.])
+6 נֶשֶׁף = [the] twilight of (twilight)
+7 חִשְׁקִי = desire my (desire)
+8 שָׂם = it has made (to set)
+9 לִי = for me (me)
+10 לַחֲרָדָה = <into> trembling (trembling)

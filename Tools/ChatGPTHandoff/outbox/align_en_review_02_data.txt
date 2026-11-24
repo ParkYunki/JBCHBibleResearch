@@ -1,0 +1,846 @@
+## 5:28:28
+EN: YHWH strikes you with madness, and with blindness, and with astonishment of heart;
+1	יַכְּכָ֣ה	he will strike you	→ —
+2	יְהוָ֔ה	Yahweh	→ —
+3	בְּשִׁגָּע֖וֹן	with madness	→ with madness
+4	וּבְעִוָּר֑וֹן	and with blindness	→ and with blindness
+5	וּבְתִמְה֖וֹן	and with bewilderment of	→ —
+6	לֵבָֽב	heart	→ heart
+
+## 5:28:49
+EN: YHWH lifts up a nation against you from afar, from the end of the earth—it flies as the eagle—a nation whose tongue you have not heard,
+1	יִשָּׂ֣א	he will raise up	→ up
+2	יְהוָה֩	Yahweh	→ —
+3	עָלֶ֨יךָ	on you	→ —
+4	גּ֤וֹי	a nation	→ a nation
+5	מֵרָחוֹק֙	from a distance	→ —
+6	מִקְצֵ֣ה	from [the] end of	→ from the end of
+7	הָאָ֔רֶץ	the earth	→ —
+8	כַּאֲשֶׁ֥ר	just as	→ —
+9	יִדְאֶ֖ה	it swoops down	→ —
+10	הַנָּ֑שֶׁר	<the> eagle	→ —
+11	גּ֕וֹי	a nation	→ nation
+12	אֲשֶׁ֥ר	which	→ —
+13	לֹא־	not	→ not
+14	תִשְׁמַ֖ע	you will understand	→ —
+15	לְשֹׁנֽוֹ	language its	→ —
+
+## 6:5:11
+EN: and they eat of the old grain of the land on the next day of the Passover, unleavened things and roasted [grain], on this very same day;
+1	וַיֹּ֨אכְל֜וּ	and they ate	→ —
+2	מֵעֲב֥וּר	some of [the] produce of	→ —
+3	הָאָ֛רֶץ	the land	→ the land
+4	מִמָּֽחֳרַ֥ת	from [the] next day of	→ next
+5	הַפֶּ֖סַח	the passover	→ the Passover
+6	מַצּ֣וֹת	unleavened bread<s>	→ unleavened
+7	וְקָל֑וּי	and roasted [grain]	→ grain
+8	בְּעֶ֖צֶם	on [the] substance of	→ —
+9	הַיּ֥וֹם	the day	→ day
+10	הַזֶּֽה	<the> this	→ this
+
+## 6:15:29
+EN: Ba‘alah, and Iim, and Azem,
+1	בַּעֲלָ֥ה	Baalah	→ —
+2	וְעִיִּ֖ים	and Iim	→ and Iim
+3	וָעָֽצֶם	and Ezem	→ —
+
+## 6:19:13
+EN: and there it has passed over eastward, to the east, to Gittah-Hepher, [to] Ittah-Kazin, and gone out [to] Rimmon-Methoar to Neah;
+1	וּמִשָּׁ֤ם	and from there	→ there
+2	עָבַר֙	it passes on	→ passed
+3	קֵ֣דְמָה	east -ward	→ east
+4	מִזְרָ֔חָה	east -ward	→ —
+5	גִּתָּ֥ה	Gath towards	→ —
+6	חֵ֖פֶר	Hepher	→ —
+7	עִתָּ֣ה	Eth towards	→ —
+8	קָצִ֑ין	Kazin	→ —
+9	וְיָצָ֛א	and it goes out	→ out
+10	רִמּ֥וֹן	Rimmon	→ —
+11	הַמְּתֹאָ֖ר	which is turned	→ —
+12	הַנֵּעָֽה	<the> Neah	→ Neah
+
+## 6:19:26
+EN: and Alammelech, and Amad, and Misheal; and it touches against Carmel westward, and against Shihor-Libnath;
+1	וְאַֽלַמֶּ֥לֶךְ	and Alammelech	→ and Alammelech
+2	וְעַמְעָ֖ד	and Amad	→ and Amad
+3	וּמִשְׁאָ֑ל	and Mishal	→ —
+4	וּפָגַ֤ע	and it touches	→ and it touches
+5	בְּכַרְמֶל֙	<on> Carmel	→ Carmel
+6	הַיָּ֔מָּה	<the> west -ward	→ —
+7	וּבְשִׁיח֖וֹר	and <on> Shihor	→ —
+8	לִבְנָֽת	Libnath	→ —
+
+## 6:19:32
+EN: The sixth lot has gone out for the sons of Naphtali—for the sons of Naphtali, for their families;
+1	לִבְנֵ֣י	for [the] descendants of	→ —
+2	נַפְתָּלִ֔י	Naphtali	→ Naphtali
+3	יָצָ֖א	it came out	→ out
+4	הַגּוֹרָ֣ל	the lot	→ lot
+5	הַשִּׁשִּׁ֑י	<the> sixth	→ sixth
+6	לִבְנֵ֥י	for [the] descendants of	→ —
+7	נַפְתָּלִ֖י	Naphtali	→ —
+8	לְמִשְׁפְּחֹתָֽם	to clans their	→ —
+
+## 6:20:5
+EN: And when the redeemer of blood pursues after him, then they do not shut up the manslayer into his hand, for he has struck his neighbor without knowledge, and is not hating him until now;
+1	וְכִ֨י	and if	→ —
+2	יִרְדֹּ֜ף	he will pursue	→ —
+3	גֹּאֵ֤ל	[the] avenger of	→ —
+4	הַדָּם֙	<the> blood	→ blood
+5	אַֽחֲרָ֔יו	after him	→ after him
+6	וְלֹֽא־	and not	→ —
+7	יַסְגִּ֥רוּ	they will deliver up	→ up
+8	אֶת־	<obj.>	→ —
+9	הָרֹצֵ֖חַ	the killer	→ —
+10	בְּיָד֑וֹ	in hand his	→ hand
+11	כִּ֤י	for	→ for
+12	בִבְלִי־	with not	→ —
+13	דַ֙עַת֙	knowledge	→ knowledge
+14	הִכָּ֣ה	he struck	→ struck
+15	אֶת־	<obj.>	→ —
+16	רֵעֵ֔הוּ	neighbor his	→ neighbor
+17	וְלֹֽא־	and not	→ —
+18	שֹׂנֵ֥א	[was] hating	→ hating
+19	ה֛וּא	he	→ he
+20	ל֖וֹ	<to> <the> him	→ —
+21	מִתְּמ֥וֹל	from yesterday	→ —
+22	שִׁלְשֽׁוֹם	[the] third day	→ —
+
+## 6:21:32
+EN: And out of the tribe of Naphtali, the city of refuge [for] the manslayer, Kedesh in Galilee and its outskirts, and Hammoth-Dor and its outskirts, and Kartan and its outskirts—three cities;
+1	וּמִמַּטֵּ֨ה	and from [the] tribe of	→ tribe
+2	נַפְתָּלִ֜י	Naphtali	→ Naphtali
+3	אֶת־	<obj.>	→ —
+4	עִ֣יר׀	[the] city of	→ the city of
+5	מִקְלַ֣ט	<the> refuge of	→ refuge
+6	הָֽרֹצֵ֗חַ	the killer	→ —
+7	אֶת־	<obj.>	→ —
+8	קֶ֨דֶשׁ	Kedesh	→ Kedesh
+9	בַּגָּלִ֤יל	in <the> Galilee	→ Galilee
+10	וְאֶת־	and <obj.>	→ and
+11	מִגְרָשֶׁ֙הָ֙	pasture lands its	→ its
+12	וְאֶת־	and <obj.>	→ and
+13	חַמֹּ֥ת	Hammoth	→ —
+14	דֹּאר֙	Dor	→ —
+15	וְאֶת־	and <obj.>	→ and
+16	מִגְרָשֶׁ֔הָ	pasture lands its	→ its
+17	וְאֶת־	and <obj.>	→ and
+18	קַרְתָּ֖ן	Kartan	→ Kartan
+19	וְאֶת־	and <obj.>	→ and
+20	מִגְרָשֶׁ֑הָ	pasture lands its	→ its
+21	עָרִ֖ים	cities	→ cities
+22	שָׁלֹֽשׁ	three	→ —
+
+## 6:22:25
+EN: For YHWH has put a border between us and you, O sons of Reuben, and sons of Gad—Jordan; you have no portion in YHWH—and your sons have caused our sons to cease, not to fear YHWH.
+1	וּגְב֣וּל	and a border	→ border
+2	נָֽתַן־	he has put	→ put
+3	יְ֠הוָה	Yahweh	→ —
+4	בֵּינֵ֨נוּ	between us	→ between us
+5	וּבֵינֵיכֶ֜ם	and between you	→ —
+6	בְּנֵי־	[the] descendants of	→ —
+7	רְאוּבֵ֤ן	Reuben	→ Reuben
+8	וּבְנֵי־	and [the] descendants of	→ —
+9	גָד֙	Gad	→ —
+10	אֶת־	<obj.>	→ —
+11	הַיַּרְדֵּ֔ן	the Jordan	→ —
+12	אֵין־	not	→ not
+13	לָכֶ֥ם	[belongs] to <the> you	→ —
+14	חֵ֖לֶק	a portion	→ portion
+15	בַּֽיהוָ֑ה	in Yahweh	→ —
+16	וְהִשְׁבִּ֤יתוּ	and they will cause to cease	→ cease
+17	בְנֵיכֶם֙	descendants your	→ —
+18	אֶת־	<obj.>	→ —
+19	בָּנֵ֔ינוּ	descendants our	→ —
+20	לְבִלְתִּ֖י	to not	→ —
+21	יְרֹ֥א	to fear	→ to fear
+22	אֶת־	<obj.>	→ —
+23	יְהוָֽה	Yahweh	→ —
+
+## 7:1:34
+EN: And the Amorites press the sons of Dan to the mountain, for they have not permitted them to go down to the valley;
+1	וַיִּלְחֲצ֧וּ	and they pressed	→ —
+2	הָאֱמֹרִ֛י	the Amorite[s]	→ the Amorites
+3	אֶת־	<obj.>	→ —
+4	בְּנֵי־	[the] descendants of	→ —
+5	דָ֖ן	Dan	→ Dan
+6	הָהָ֑רָה	the hill country towards	→ —
+7	כִּי־	for	→ for
+8	לֹ֥א	not	→ not
+9	נְתָנ֖וֹ	it permitted it	→ permitted
+10	לָרֶ֥דֶת	to go down	→ to go down
+11	לָעֵֽמֶק	to the valley	→ to the valley
+
+## 7:3:30
+EN: and Moab is humbled in that day under the hand of Israel; and the land rests [for] eighty years.
+1	וַתִּכָּנַ֤ע	and it was subdued	→ —
+2	מוֹאָב֙	Moab	→ Moab
+3	בַּיּ֣וֹם	on the day	→ day
+4	הַה֔וּא	<the> that	→ —
+5	תַּ֖חַת	under	→ under
+6	יַ֣ד	[the] hand of	→ the hand of
+7	יִשְׂרָאֵ֑ל	Israel	→ Israel
+8	וַתִּשְׁקֹ֥ט	and it was at peace	→ —
+9	הָאָ֖רֶץ	the land	→ the land
+10	שְׁמוֹנִ֥ים	eighty	→ eighty
+11	שָׁנָֽה׃ ס	year[s]	→ years
+
+## 7:4:1
+EN: And the sons of Israel add to do evil in the eyes of YHWH when Ehud is dead,
+1	וַיֹּסִ֙פוּ֙	and they repeated	→ —
+2	בְּנֵ֣י	[the] people of	→ —
+3	יִשְׂרָאֵ֔ל	Israel	→ Israel
+4	לַעֲשׂ֥וֹת	to do	→ to do
+5	הָרַ֖ע	the evil	→ evil
+6	בְּעֵינֵ֣י	in [the] eyes of	→ in the eyes of
+7	יְהוָ֑ה	Yahweh	→ —
+8	וְאֵה֖וּד	and Ehud	→ Ehud
+9	מֵֽת	he had died	→ —
+
+## 7:6:22
+EN: And Gideon sees that He [is] the Messenger of YHWH, and Gideon says, “Aah, Lord YHWH! For so I have looked on the Messenger of YHWH face to face!”
+1	וַיַּ֣רְא	and he saw	→ sees
+2	גִּדְע֔וֹן	Gideon	→ Gideon
+3	כִּֽי־	that	→ that
+4	מַלְאַ֥ךְ	[was] [the] angel of	→ —
+5	יְהוָ֖ה	Yahweh	→ —
+6	ה֑וּא ס	it	→ —
+7	וַיֹּ֣אמֶר	and he said	→ says
+8	גִּדְע֗וֹן	Gideon	→ Gideon
+9	אֲהָהּ֙	alas!	→ —
+10	אֲדֹנָ֣י	O Lord	→ Lord
+11	יְהוִ֔ה	Yahweh	→ —
+12	כִּֽי־	for	→ For
+13	עַל־	since	→ —
+14	כֵּ֤ן	<thus>	→ —
+15	רָאִ֙יתִי֙	I have seen	→ —
+16	מַלְאַ֣ךְ	[the] angel of	→ —
+17	יְהוָ֔ה	Yahweh	→ —
+18	פָּנִ֖ים	face	→ face
+19	אֶל־	to	→ to
+20	פָּנִֽים	face	→ face
+
+## 7:7:16
+EN: And he divides the three hundred men [into] three detachments, and puts horns into the hand of all of them, and empty pitchers, and lamps within the pitchers.
+1	וַיַּ֛חַץ	and he divided	→ And he divides
+2	אֶת־	<obj.>	→ —
+3	שְׁלֹשׁ־	three	→ three
+4	מֵא֥וֹת	hundred<s>	→ —
+5	הָאִ֖ישׁ	the man	→ men
+6	שְׁלֹשָׁ֣ה	three	→ three
+7	רָאשִׁ֑ים	companies	→ —
+8	וַיִּתֵּ֨ן	and he put	→ puts
+9	שׁוֹפָר֤וֹת	trumpets	→ —
+10	בְּיַד־	in [the] hand of	→ hand
+11	כֻּלָּם֙	all of them	→ all of them
+12	וְכַדִּ֣ים	and jars	→ —
+13	רֵקִ֔ים	empty	→ empty
+14	וְלַפִּדִ֖ים	and torches	→ —
+15	בְּת֥וֹךְ	in [the] midst of	→ —
+16	הַכַּדִּֽים	the jars	→ —
+
+## 7:11:21
+EN: and YHWH, God of Israel, gives Sihon and all his people into the hand of Israel, and they strike them, and Israel possesses all the land of the Amorite, the inhabitant of that land,
+1	וַ֠יִּתֵּן	and he gave	→ gives
+2	יְהוָ֨ה	Yahweh	→ —
+3	אֱלֹהֵֽי־	[the] God of	→ God
+4	יִשְׂרָאֵ֜ל	Israel	→ Israel
+5	אֶת־	<obj.>	→ —
+6	סִיח֧וֹן	Sihon	→ Sihon
+7	וְאֶת־	and <obj.>	→ and
+8	כָּל־	all	→ all
+9	עַמּ֛וֹ	people his	→ people
+10	בְּיַ֥ד	in [the] hand of	→ hand
+11	יִשְׂרָאֵ֖ל	Israel	→ Israel
+12	וַיַּכּ֑וּם	and they defeated them	→ —
+13	וַיִּירַשׁ֙	and it took possession of	→ —
+14	יִשְׂרָאֵ֔ל	Israel	→ Israel
+15	אֵ֚ת	<obj.>	→ —
+16	כָּל־	all	→ all
+17	אֶ֣רֶץ	[the] land of	→ the land of
+18	הָאֱמֹרִ֔י	the Amorite[s]	→ —
+19	יוֹשֵׁ֖ב	[who] dwelt	→ —
+20	הָאָ֥רֶץ	of the land	→ land
+21	הַהִֽיא	<the> that	→ —
+
+## 7:14:7
+EN: And he goes down and speaks to the woman, and she is right in the eyes of Samson;
+1	וַיֵּ֖רֶד	and he went down	→ And he goes down
+2	וַיְדַבֵּ֣ר	and he spoke	→ speaks
+3	לָאִשָּׁ֑ה	to the woman	→ to the woman
+4	וַתִּישַׁ֖ר	and she was pleasing	→ —
+5	בְּעֵינֵ֥י	in [the] eyes of	→ in the eyes of
+6	שִׁמְשֽׁוֹן	Samson	→ Samson
+
+## 7:16:22
+EN: And the hair of his head begins to shoot up when he has been shaven,
+1	וַיָּ֧חֶל	and it began	→ —
+2	שְׂעַר־	[the] hair of	→ the hair of
+3	רֹאשׁ֛וֹ	head his	→ head
+4	לְצַמֵּ֖חַ	to grow back	→ —
+5	כַּאֲשֶׁ֥ר	<just> when	→ when
+6	גֻּלָּֽח׃ פ	it had been shaved	→ —
+
+## 9:1:8
+EN: And her husband Elkanah says to her, “Hannah, why do you weep? And why do you not eat? And why is your heart afflicted? Am I not better to you than ten sons?”
+1	וַיֹּ֨אמֶר	and he said	→ says
+2	לָ֜הּ	to <the> her	→ —
+3	אֶלְקָנָ֣ה	Elkanah	→ Elkanah
+4	אִישָׁ֗הּ	husband her	→ husband
+5	חַנָּה֙	O Hannah	→ Hannah
+6	לָ֣מֶה	<to> why?	→ why
+7	תִבְכִּ֗י	do you weep	→ do you weep
+8	וְלָ֙מֶה֙	and <to> why?	→ why
+9	לֹ֣א	not	→ not
+10	תֹֽאכְלִ֔י	are you eating	→ eat
+11	וְלָ֖מֶה	and <to> why?	→ why
+12	יֵרַ֣ע	is sad	→ —
+13	לְבָבֵ֑ךְ	heart your	→ heart
+14	הֲל֤וֹא	¿ not	→ —
+15	אָֽנֹכִי֙	[am] I	→ Am I
+16	ט֣וֹב	good	→ —
+17	לָ֔ךְ	to <the> you	→ —
+18	מֵעֲשָׂרָ֖ה	more than ten	→ than
+19	בָּנִֽים	sons	→ sons
+
+## 9:1:25
+EN: And they slaughter the bullock, and bring in the youth to Eli,
+1	וַֽיִּשְׁחֲט֖וּ	and they slaughtered	→ And they slaughter
+2	אֶת־	<obj.>	→ —
+3	הַפָּ֑ר	the young bull	→ —
+4	וַיָּבִ֥יאוּ	and they brought	→ bring
+5	אֶת־	<obj.>	→ —
+6	הַנַּ֖עַר	the lad	→ —
+7	אֶל־	to	→ to
+8	עֵלִֽי	Eli	→ Eli
+
+## 9:3:17
+EN: And he says, “What [is] the word which He has spoken to you? Please do not hide it from me; so God does to you, and so does He add, if you hide from me a word of all the words that He has spoken to you.”
+1	וַיֹּ֗אמֶר	and he said	→ And he says
+2	מָ֤ה	what?	→ What
+3	הַדָּבָר֙	[was] the word	→ word
+4	אֲשֶׁ֣ר	which	→ which
+5	דִּבֶּ֣ר	he spoke	→ spoken
+6	אֵלֶ֔יךָ	to you	→ to you
+7	אַל־	may not	→ —
+8	נָ֥א	please	→ Please
+9	תְכַחֵ֖ד	you hide [it]	→ hide
+10	מִמֶּ֑נִּי	from me	→ from me
+11	כֹּ֣ה	thus	→ —
+12	יַעֲשֶׂה־	may he do	→ —
+13	לְּךָ֤	to <the> you	→ —
+14	אֱלֹהִים֙	God	→ God
+15	וְכֹ֣ה	and thus	→ —
+16	יוֹסִ֔יף	may he add	→ add
+17	אִם־	if	→ if
+18	תְּכַחֵ֤ד	you will hide	→ hide
+19	מִמֶּ֙נִּי֙	from me	→ from me
+20	דָּבָ֔ר	a word	→ a word
+21	מִכָּל־	from all	→ all
+22	הַדָּבָ֖ר	the word	→ the words
+23	אֲשֶׁר־	which	→ —
+24	דִּבֶּ֥ר	he spoke	→ spoken
+25	אֵלֶֽיךָ	to you	→ to you
+
+## 9:4:2
+EN: and the Philistines set themselves in array to meet Israel, and the battle spreads itself, and Israel is struck before the Philistines, and they strike among the ranks in the field about four thousand men.
+1	וַיַּעַרְכ֨וּ	and they deployed	→ —
+2	פְלִשְׁתִּ֜ים	[the] Philistines	→ the Philistines
+3	לִקְרַ֣את	to meet	→ to meet
+4	יִשְׂרָאֵ֗ל	Israel	→ Israel
+5	וַתִּטֹּשׁ֙	and it spread out	→ spreads
+6	הַמִּלְחָמָ֔ה	the battle	→ the battle
+7	וַיִּנָּ֥גֶף	and it was defeated	→ —
+8	יִשְׂרָאֵ֖ל	Israel	→ Israel
+9	לִפְנֵ֣י	<to> before	→ before
+10	פְלִשְׁתִּ֑ים	[the] Philistines	→ the Philistines
+11	וַיַּכּ֤וּ	and they struck down	→ struck
+12	בַמַּֽעֲרָכָה֙	in the battle line	→ —
+13	בַּשָּׂדֶ֔ה	in the field	→ in the field
+14	כְּאַרְבַּ֥עַת	about four	→ about four
+15	אֲלָפִ֖ים	thousand<s>	→ —
+16	אִֽישׁ	man	→ men
+
+## 9:12:12
+EN: And you see that Nahash king of the sons of Ammon has come against you, and you say to me, No, but a king reigns over us; and your God YHWH [is] your king!
+1	וַתִּרְא֗וּ	and you saw	→ And you see
+2	כִּֽי־	that	→ that
+3	נָחָ֞שׁ	Nahash	→ Nahash
+4	מֶ֣לֶךְ	[the] king of	→ king
+5	בְּנֵֽי־	[the] people of	→ —
+6	עַמּוֹן֮	Ammon	→ Ammon
+7	בָּ֣א	[was] coming	→ —
+8	עֲלֵיכֶם֒	on you	→ —
+9	וַתֹּ֣אמְרוּ	and you said	→ and you say
+10	לִ֔י	to <the> me	→ —
+11	לֹ֕א	In-	→ —
+12	כִּי־	deed	→ —
+13	מֶ֖לֶךְ	a king	→ a king
+14	יִמְלֹ֣ךְ	he will reign	→ reigns
+15	עָלֵ֑ינוּ	over us	→ over us
+16	וַיהוָ֥ה	and Yahweh	→ —
+17	אֱלֹהֵיכֶ֖ם	God your	→ God
+18	מַלְכְּכֶֽם	[was] king your	→ king
+
+## 9:15:13
+EN: And Samuel comes to Saul, and Saul says to him, “Blessed [are] you of YHWH; I have performed the word of YHWH.”
+1	וַיָּבֹ֥א	and he came	→ comes
+2	שְׁמוּאֵ֖ל	Samuel	→ Samuel
+3	אֶל־	to	→ to
+4	שָׁא֑וּל	Saul	→ Saul
+5	וַיֹּ֧אמֶר	and he said	→ says
+6	ל֣וֹ	to <the> him	→ —
+7	שָׁא֗וּל	Saul	→ Saul
+8	בָּר֤וּךְ	[be] blessed	→ Blessed
+9	אַתָּה֙	you	→ you
+10	לַֽיהוָ֔ה	by Yahweh	→ —
+11	הֲקִימֹ֖תִי	I have carried out	→ —
+12	אֶת־	<obj.>	→ —
+13	דְּבַ֥ר	[the] word of	→ the word of
+14	יְהוָֽה	Yahweh	→ —
+
+## 9:20:10
+EN: And David says to Jonathan, “Who declares [it] to me? Or what [if] your father answers you sharply?”
+1	וַיֹּ֤אמֶר	and he said	→ says
+2	דָּוִד֙	David	→ David
+3	אֶל־	to	→ to
+4	יְה֣וֹנָתָ֔ן	Jonathan	→ Jonathan
+5	מִ֖י	who?	→ Who
+6	יַגִּ֣יד	will he tell	→ —
+7	לִ֑י	to <the> me	→ —
+8	א֛וֹ	or	→ Or
+9	מַה־	what?	→ what
+10	יַּעַנְךָ֥	will he answer you	→ answers
+11	אָבִ֖יךָ	father your	→ father
+12	קָשָֽׁה׃ ס	hard	→ —
+
+## 9:24:2
+EN: And Saul takes three thousand chosen men out of all Israel, and goes to seek David and his men, on the front of the rocks of the wild goats,
+1	וַיִּקַּ֣ח	and he took	→ takes
+2	שָׁא֗וּל	Saul	→ Saul
+3	שְׁלֹ֧שֶׁת	three	→ three
+4	אֲלָפִ֛ים	thousand<s>	→ —
+5	אִ֥ישׁ	man	→ men
+6	בָּח֖וּר	chosen	→ chosen
+7	מִכָּל־	from all	→ all
+8	יִשְׂרָאֵ֑ל	Israel	→ Israel
+9	וַיֵּ֗לֶךְ	and he went	→ goes
+10	לְבַקֵּ֤שׁ	to seek	→ to seek
+11	אֶת־	<obj.>	→ —
+12	דָּוִד֙	David	→ David
+13	וַֽאֲנָשָׁ֔יו	and men his	→ men
+14	עַל־	on	→ on
+15	פְּנֵ֖י	[the] face of	→ —
+16	צוּרֵ֥י	[the] rocks of	→ the rocks of
+17	הַיְּעֵלִֽים	the mountain goats	→ goats
+
+## 9:24:20
+EN: And now, behold, I have known that you certainly reign, and the kingdom of Israel has stood in your hand;
+1	וְעַתָּה֙	and therefore	→ —
+2	הִנֵּ֣ה	here!	→ —
+3	יָדַ֔עְתִּי	I know	→ known
+4	כִּ֥י	that	→ that
+5	מָלֹ֖ךְ	certainly <to reign>	→ certainly
+6	תִּמְל֑וֹךְ	you will reign	→ reign
+7	וְקָ֙מָה֙	and it will be established	→ —
+8	בְּיָ֣דְךָ֔	in hand your	→ hand
+9	מַמְלֶ֖כֶת	[the] kingdom of	→ the kingdom of
+10	יִשְׂרָאֵֽל	Israel	→ Israel
+
+## 9:25:22
+EN: thus God does to the enemies of David, and thus He adds, if I leave of all that he has until the morning light—of those sitting on the wall.”
+1	כֹּה־	thus	→ thus
+2	יַעֲשֶׂ֧ה	may he do	→ —
+3	אֱלֹהִ֛ים	God	→ God
+4	לְאֹיְבֵ֥י	to [the] enemies	→ to the enemies
+5	דָוִ֖ד	David	→ David
+6	וְכֹ֣ה	and thus	→ and thus
+7	יֹסִ֑יף	may he add	→ adds
+8	אִם־	if	→ if
+9	אַשְׁאִ֧יר	I will leave	→ leave
+10	מִכָּל־	any of all	→ all
+11	אֲשֶׁר־	that	→ that
+12	ל֛וֹ	[belongs] to <the> him	→ —
+13	עַד־	until	→ until
+14	הַבֹּ֖קֶר	the morning	→ the morning
+15	מַשְׁתִּ֥ין	[one who] urinates	→ —
+16	בְּקִֽיר	on a wall	→ wall
+
+## 10:2:32
+EN: And they lift up Asahel, and bury him in the burying-place of his father, which [is] in Beth-Lehem, and they go all the night—Joab and his men—and [dawn’s light] shines on them in Hebron.
+1	וַיִּשְׂאוּ֙	and people lifted up	→ lift
+2	אֶת־	<obj.>	→ —
+3	עֲשָׂהאֵ֔ל	Asahel	→ Asahel
+4	וַֽיִּקְבְּרֻ֙הוּ֙	and they buried him	→ —
+5	בְּקֶ֣בֶר	in [the] tomb of	→ —
+6	אָבִ֔יו	father his	→ father
+7	אֲשֶׁ֖ר	which	→ which
+8	בֵּ֣ית	[was] Beth-	→ —
+9	לָ֑חֶם	-lehem	→ —
+10	וַיֵּלְכ֣וּ	and they went	→ and they go
+11	כָל־	all	→ all
+12	הַלַּ֗יְלָה	the night	→ —
+13	יוֹאָב֙	Joab	→ —
+14	וַֽאֲנָשָׁ֔יו	and men his	→ —
+15	וַיֵּאֹ֥ר	and it became light	→ light
+16	לָהֶ֖ם	for <the> them	→ —
+17	בְּחֶבְרֽוֹן	at Hebron	→ Hebron
+
+## 10:3:14
+EN: And David sends messengers to Ish-Bosheth son of Saul, saying, “Give up my wife Michal, whom I betrothed to myself with one hundred foreskins of the Philistines.”
+1	וַיִּשְׁלַ֤ח	and he sent	→ sends
+2	דָּוִד֙	David	→ David
+3	מַלְאָכִ֔ים	messengers	→ messengers
+4	אֶל־	to	→ to
+5	אִֽישׁ־	Ish-	→ —
+6	בֹּ֥שֶׁת	bosheth	→ —
+7	בֶּן־	[the] son of	→ son
+8	שָׁא֖וּל	Saul	→ Saul
+9	לֵאמֹ֑ר	<to> saying	→ —
+10	תְּנָ֤ה	give !	→ Give
+11	אֶת־	<obj.>	→ —
+12	אִשְׁתִּי֙	wife my	→ wife
+13	אֶת־	<obj.>	→ —
+14	מִיכַ֔ל	Michal	→ Michal
+15	אֲשֶׁר֙	whom	→ whom
+16	אֵרַ֣שְׂתִּי	I betrothed	→ I betrothed
+17	לִ֔י	to <the> myself	→ myself
+18	בְּמֵאָ֖ה	for a hundred	→ hundred
+19	עָרְל֥וֹת	foreskins of	→ foreskins of
+20	פְּלִשְׁתִּֽים	Philistines	→ Philistines
+
+## 10:12:26
+EN: And Joab fights against Rabbah of the sons of Ammon, and captures the royal city,
+1	וַיִּלָּ֣חֶם	and he fought	→ —
+2	יוֹאָ֔ב	Joab	→ Joab
+3	בְּרַבַּ֖ת	against Rabbah of	→ against Rabbah of
+4	בְּנֵ֣י	[the] people of	→ —
+5	עַמּ֑וֹן	Ammon	→ Ammon
+6	וַיִּלְכֹּ֖ד	and he captured	→ captures
+7	אֶת־	<obj.>	→ —
+8	עִ֥יר	[the] city of	→ city
+9	הַמְּלוּכָֽה	<the> royalty	→ —
+
+## 10:15:26
+EN: and if thus He says, I have not delighted in you; here I [am], He does to me as [is] good in His eyes.”
+1	וְאִם֙	and if	→ and if
+2	כֹּ֣ה	thus	→ thus
+3	יֹאמַ֔ר	he will say	→ says
+4	לֹ֥א	not	→ not
+5	חָפַ֖צְתִּי	I delight	→ delighted
+6	בָּ֑ךְ	in <the> you	→ —
+7	הִנְנִ֕י	here [am] I	→ here
+8	יַֽעֲשֶׂה־	let him do	→ —
+9	לִּ֕י	to <the> me	→ —
+10	כַּאֲשֶׁ֥ר	just as	→ —
+11	ט֖וֹב	it is good	→ good
+12	בְּעֵינָֽיו׃ ס	in view his	→ —
+
+## 10:16:23
+EN: And the counsel of Ahithophel which he counseled in those days [is] as [when] one inquires at the word of God; so [is] all the counsel of Ahithophel both to David and to Absalom.
+1	וַעֲצַ֣ת	and [the] counsel of	→ And the counsel of
+2	אֲחִיתֹ֗פֶל	Ahithophel	→ Ahithophel
+3	אֲשֶׁ֤ר	which	→ which
+4	יָעַץ֙	he counseled	→ he counseled
+5	בַּיָּמִ֣ים	in the days	→ days
+6	הָהֵ֔ם	<the> those	→ those
+7	כַּאֲשֶׁ֥ר	[was] just as	→ —
+8	יִשְׁאַל־אִ֖ישׁ	he enquires-anyone	→ —
+9	בִּדְבַ֣ר	by [the] word of	→ word
+10	הָאֱלֹהִ֑ים	<the> God	→ God
+11	כֵּ֚ן	[was] so	→ so
+12	כָּל־	all	→ all
+13	עֲצַ֣ת	[the] counsel of	→ the counsel of
+14	אֲחִיתֹ֔פֶל	Ahithophel	→ Ahithophel
+15	גַּם־	both	→ both
+16	לְדָוִ֖ד	to David	→ to David
+17	גַּ֥ם	as well as	→ —
+18	לְאַבְשָׁלֹֽם׃ ס	to Absalom	→ to Absalom
+
+## 10:21:17
+EN: and Abishai son of Zeruiah gives help to him, and strikes the Philistine, and puts him to death; then the men of David swear to him, saying, “You do not go out with us to battle again, nor quench the lamp of Israel.”
+1	וַיַּֽעֲזָר־	and he helped	→ help
+2	לוֹ֙	<to> <the> him	→ —
+3	אֲבִישַׁ֣י	Abishai	→ Abishai
+4	בֶּן־	[the] son of	→ son
+5	צְרוּיָ֔ה	Zeruiah	→ Zeruiah
+6	וַיַּ֥ךְ	and he struck	→ —
+7	אֶת־	<obj.>	→ —
+8	הַפְּלִשְׁתִּ֖י	the Philistine	→ the Philistine
+9	וַיְמִיתֵ֑הוּ	and he killed him	→ —
+10	אָ֣ז	then	→ then
+11	נִשְׁבְּעוּ֩	they swore	→ —
+12	אַנְשֵׁי־	[the] men of	→ the men of
+13	דָוִ֨ד	David	→ David
+14	ל֜וֹ	to <the> him	→ —
+15	לֵאמֹ֗ר	<to> saying	→ —
+16	לֹא־	not	→ not
+17	תֵצֵ֨א	you will go out	→ out
+18	ע֤וֹד	again	→ again
+19	אִתָּ֙נוּ֙	with us	→ with us
+20	לַמִּלְחָמָ֔ה	for <the> battle	→ battle
+21	וְלֹ֥א	and not	→ —
+22	תְכַבֶּ֖ה	you will extinguish	→ —
+23	אֶת־	<obj.>	→ —
+24	נֵ֥ר	[the] lamp of	→ the lamp of
+25	יִשְׂרָאֵֽל׃ פ	Israel	→ Israel
+
+## 10:22:24
+EN: And I am perfect before Him, || And I keep myself from my iniquity.
+1	וָאֶהְיֶ֥ה	and I was	→ And I am
+2	תָמִ֖ים	blameless	→ —
+3	ל֑וֹ	to <the> him	→ —
+4	וָאֶשְׁתַּמְּרָ֖ה	and I kept myself !	→ And I keep myself
+5	מֵעֲוֹנִֽי	from iniquity my	→ iniquity
+
+## 10:22:38
+EN: I pursue my enemies and destroy them, || And I do not turn until they are consumed.
+1	אֶרְדְּפָ֥ה	let me pursue	→ pursue
+2	אֹיְבַ֖י	enemies my	→ enemies
+3	וָאַשְׁמִידֵ֑ם	and I destroyed them	→ destroy
+4	וְלֹ֥א	and not	→ —
+5	אָשׁ֖וּב	I returned	→ —
+6	עַד־	until	→ until
+7	כַּלּוֹתָֽם	brought to an end them	→ —
+
+## 11:7:9
+EN: All these [are] of precious stones, according to the measures of hewn work, sawn with a saw, inside and outside, even from the foundation to the coping, and at the outside, to the great court.
+1	כָּל־	all	→ All
+2	אֵ֜לֶּה	these	→ these
+3	אֲבָנִ֤ים	[were] stones	→ stones
+4	יְקָרֹת֙	costly	→ —
+5	כְּמִדֹּ֣ת	according to measurements of	→ according
+6	גָּזִ֔ית	hewn [stone]	→ hewn
+7	מְגֹרָר֥וֹת	sawn	→ sawn
+8	בַּמְּגֵרָ֖ה	with <the> saw	→ saw
+9	מִבַּ֣יִת	from inside	→ inside
+10	וּמִח֑וּץ	and from outside	→ outside
+11	וּמִמַּסָּד֙	and from [the] foundation	→ foundation
+12	עַד־	to	→ to
+13	הַטְּפָח֔וֹת	the coping stone	→ coping
+14	וּמִח֖וּץ	and from [the] outside	→ outside
+15	עַד־	to	→ to
+16	הֶחָצֵ֥ר	the court	→ court
+17	הַגְּדוֹלָֽה	<the> great	→ great
+
+## 11:7:40
+EN: And Hiram makes the lavers, and the shovels, and the bowls; and Hiram completes to do all the work that he made for King Solomon, [for] the house of YHWH:
+1	וַיַּ֣עַשׂ	and he made	→ makes
+2	חִיר֔וֹם	Hiram	→ Hiram
+3	אֶת־	<obj.>	→ —
+4	הַ֨כִּיֹּר֔וֹת	the lavers	→ the lavers
+5	וְאֶת־	and <obj.>	→ and
+6	הַיָּעִ֖ים	the shovels	→ the shovels
+7	וְאֶת־	and <obj.>	→ and
+8	הַמִּזְרָק֑וֹת	the bowls	→ the bowls
+9	וַיְכַ֣ל	and he finished	→ —
+10	חִירָ֗ם	Hiram	→ Hiram
+11	לַֽעֲשׂוֹת֙	to do	→ to do
+12	אֶת־	<obj.>	→ —
+13	כָּל־	all	→ all
+14	הַמְּלָאכָ֔ה	the work	→ the work
+15	אֲשֶׁ֥ר	which	→ —
+16	עָשָׂ֛ה	he did	→ —
+17	לַמֶּ֥לֶךְ	for the king	→ King
+18	שְׁלֹמֹ֖ה	Solomon	→ Solomon
+19	בֵּ֥ית	[the] house of	→ the house of
+20	יְהוָֽה	Yahweh	→ —
+
+## 11:18:22
+EN: And Elijah says to the people, “I have been left, by myself, a prophet of YHWH; and the prophets of Ba‘al [are] four hundred and fifty men;
+1	וַיֹּ֤אמֶר	and he said	→ says
+2	אֵלִיָּ֙הוּ֙	Elijah	→ Elijah
+3	אֶל־	to	→ to
+4	הָעָ֔ם	the people	→ the people
+5	אֲנִ֞י	I	→ I
+6	נוֹתַ֧רְתִּי	I am left	→ left
+7	נָבִ֛יא	a prophet	→ a prophet
+8	לַיהוָ֖ה	of Yahweh	→ —
+9	לְבַדִּ֑י	to alone me	→ —
+10	וּנְבִיאֵ֣י	and [the] prophets of	→ and the prophets of
+11	הַבַּ֔עַל	<the> Baal	→ —
+12	אַרְבַּע־	[are] four	→ four
+13	מֵא֥וֹת	hundred<s>	→ —
+14	וַחֲמִשִּׁ֖ים	and fifty	→ and fifty
+15	אִֽישׁ	man	→ men
+
+## 11:22:28
+EN: And Micaiah says, “If you return in peace at all, YHWH has not spoken by me”; and he says, “Hear, O peoples, all of them.”
+1	וַיֹּ֣אמֶר	and he said	→ and he says
+2	מִיכָ֔יְהוּ	Micaiah	→ Micaiah
+3	אִם־	<if>	→ —
+4	שׁ֤וֹב	certainly [if] <to return>	→ If
+5	תָּשׁוּב֙	you will return	→ return
+6	בְּשָׁל֔וֹם	in peace	→ in peace
+7	לֹֽא־	not	→ not
+8	דִבֶּ֥ר	he has spoken	→ spoken
+9	יְהוָ֖ה	Yahweh	→ —
+10	בִּ֑י	by me	→ by me
+11	וַיֹּ֕אמֶר	and he said	→ says
+12	שִׁמְע֖וּ	listen	→ —
+13	עַמִּ֥ים	O peoples	→ O peoples
+14	כֻּלָּֽם	all of them	→ all of them
+
+## 11:22:35
+EN: And the battle increases on that day, and the king has been caused to stand in the chariot, in front of Aram, and he dies in the evening, and the blood of the wound runs out to the midst of the chariot,
+1	וַתַּעֲלֶ֤ה	and it went up	→ —
+2	הַמִּלְחָמָה֙	the battle	→ the battle
+3	בַּיּ֣וֹם	on the day	→ day
+4	הַה֔וּא	<the> that	→ —
+5	וְהַמֶּ֗לֶךְ	and the king	→ and the king
+6	הָיָ֧ה	he was	→ —
+7	מָעֳמָ֛ד	placed	→ —
+8	בַּמֶּרְכָּבָ֖ה	in the chariot	→ in the chariot
+9	נֹ֣כַח	opposite to	→ —
+10	אֲרָ֑ם	Aram	→ Aram
+11	וַיָּ֣מָת	and he died	→ —
+12	בָּעֶ֔רֶב	in the evening	→ in the evening
+13	וַיִּ֥צֶק	and it flowed	→ —
+14	דַּֽם־	[the] blood of	→ the blood of
+15	הַמַּכָּ֖ה	the wound	→ the wound
+16	אֶל־	into	→ —
+17	חֵ֥יק	[the] bottom of	→ —
+18	הָרָֽכֶב	the chariot	→ the chariot
+
+## 12:1:7
+EN: And he says to them, “What [is] the fashion of the man who has come up to meet you, and speaks these words to you?”
+1	וַיְדַבֵּ֣ר	and he spoke	→ speaks
+2	אֲלֵהֶ֔ם	to them	→ to them
+3	מֶ֚ה	what?	→ What
+4	מִשְׁפַּ֣ט	[was] [the] appearance of	→ —
+5	הָאִ֔ישׁ	the man	→ the man
+6	אֲשֶׁ֥ר	who	→ who
+7	עָלָ֖ה	he came up	→ come
+8	לִקְרַאתְכֶ֑ם	to meet you	→ to meet you
+9	וַיְדַבֵּ֣ר	and he spoke	→ —
+10	אֲלֵיכֶ֔ם	to you	→ to you
+11	אֶת־	<obj.>	→ —
+12	הַדְּבָרִ֖ים	the words	→ words
+13	הָאֵֽלֶּה	<the> these	→ these
+
+## 12:3:8
+EN: And he says, “Where [is] this—the way we go up?” And he says, “The way of the wilderness of Edom.”
+1	וַיֹּ֕אמֶר	and he said	→ And he says
+2	אֵי־	where?	→ Where
+3	זֶ֥ה	this	→ —
+4	הַדֶּ֖רֶךְ	[is] the way	→ way
+5	נַעֲלֶ֑ה	[which] we will go up	→ go
+6	וַיֹּ֕אמֶר	and he said	→ And he says
+7	דֶּ֖רֶךְ	[the] way of	→ The way of
+8	מִדְבַּ֥ר	[the] wilderness of	→ the wilderness of
+9	אֱדֽוֹם	Edom	→ Edom
+
+## 12:3:16
+EN: and he says, “Thus said YHWH: Make this valley ditches—ditches;
+1	וַיֹּ֕אמֶר	and he said	→ and he says
+2	כֹּ֖ה	thus	→ Thus
+3	אָמַ֣ר	he says	→ said
+4	יְהוָ֑ה	Yahweh	→ —
+5	עָשֹׂ֛ה	make	→ Make
+6	הַנַּ֥חַל	the wadi	→ —
+7	הַזֶּ֖ה	<the> this	→ this
+8	גֵּבִ֥ים׀	ditches	→ —
+9	גֵּבִֽים	ditches	→ —
+
+## 12:14:23
+EN: In the fifteenth year of Amaziah son of Joash, king of Judah, Jeroboam son of Joash, king of Israel, has reigned in Samaria, forty-one years,
+1	בִּשְׁנַת֙	in year	→ year
+2	חֲמֵשׁ־	fif-	→ —
+3	עֶשְׂרֵ֣ה	teen	→ —
+4	שָׁנָ֔ה	year	→ years
+5	לַאֲמַצְיָ֥הוּ	of Amaziah	→ of Amaziah
+6	בֶן־	[the] son of	→ son
+7	יוֹאָ֖שׁ	Joash	→ Joash
+8	מֶ֣לֶךְ	[the] king of	→ king
+9	יְהוּדָ֑ה	Judah	→ Judah
+10	מָ֠לַךְ	he became king	→ king
+11	יָרָבְעָ֨ם	Jeroboam	→ Jeroboam
+12	בֶּן־	[the] son of	→ son
+13	יוֹאָ֤שׁ	Joash	→ Joash
+14	מֶֽלֶךְ־	[the] king of	→ —
+15	יִשְׂרָאֵל֙	Israel	→ Israel
+16	בְּשֹׁ֣מְר֔וֹן	in Samaria	→ in Samaria
+17	אַרְבָּעִ֥ים	forty	→ —
+18	וְאַחַ֖ת	and one	→ —
+19	שָׁנָֽה	year[s]	→ —
+
+## 12:14:24
+EN: and he does evil in the eyes of YHWH; he has not turned aside from all the sins of Jeroboam son of Nebat that he caused Israel to sin.
+1	וַיַּ֥עַשׂ	and he did	→ and he does
+2	הָרַ֖ע	the evil	→ evil
+3	בְּעֵינֵ֣י	in [the] eyes of	→ in the eyes of
+4	יְהוָ֑ה	Yahweh	→ —
+5	לֹ֣א	not	→ not
+6	סָ֗ר	he turned aside	→ aside
+7	מִכָּל־	from all	→ from all
+8	חַטֹּאות֙	[the] sins of	→ the sins of
+9	יָרָבְעָ֣ם	Jeroboam	→ Jeroboam
+10	בֶּן־	[the] son of	→ son
+11	נְבָ֔ט	Nebat	→ Nebat
+12	אֲשֶׁ֥ר	which	→ —
+13	הֶחֱטִ֖יא	he caused to sin	→ caused
+14	אֶת־	<obj.>	→ —
+15	יִשְׂרָאֵֽל	Israel	→ Israel
+
+## 12:18:20
+EN: You have said: Only a word of the lips! Counsel and might [are] for battle; now, on whom have you trusted that you have rebelled against me?
+1	אָמַ֙רְתָּ֙	you have said	→ You have said
+2	אַךְ־	only	→ Only
+3	דְּבַר־	a word of	→ a word of
+4	שְׂפָתַ֔יִם	lips	→ lips
+5	עֵצָ֥ה	counsel	→ Counsel
+6	וּגְבוּרָ֖ה	and strength	→ —
+7	לַמִּלְחָמָ֑ה	for <the> war	→ —
+8	עַתָּה֙	now	→ now
+9	עַל־	on	→ on
+10	מִ֣י	whom?	→ whom
+11	בָטַ֔חְתָּ	do you rely	→ —
+12	כִּ֥י	that	→ that
+13	מָרַ֖דְתָּ	you have rebelled	→ you have rebelled
+14	בִּֽי	against me	→ against me
+
+## 12:22:11
+EN: And it comes to pass, at the king’s hearing the words of the Scroll of the Law, that he tears his garments,
+1	וַֽיְהִי֙	and it was	→ —
+2	כִּשְׁמֹ֣עַ	when heard	→ hearing
+3	הַמֶּ֔לֶךְ	the king	→ —
+4	אֶת־	<obj.>	→ —
+5	דִּבְרֵ֖י	[the] words of	→ the words of
+6	סֵ֣פֶר	[the] scroll of	→ the Scroll of
+7	הַתּוֹרָ֑ה	the law	→ the Law
+8	וַיִּקְרַ֖ע	and he tore	→ —
+9	אֶת־	<obj.>	→ —
+10	בְּגָדָֽיו	clothes his	→ —
+
+## 12:23:36
+EN: Jehoiakim [is] a son of twenty-five years in his reigning, and he has reigned eleven years in Jerusalem, and the name of his mother [is] Zebudah daughter of Pedaiah of Rumah,
+1	בֶּן־	[was] a son of	→ of
+2	עֶשְׂרִ֨ים	twenty	→ —
+3	וְחָמֵ֤שׁ	and five	→ —
+4	שָׁנָ֨ה	year[s]	→ years
+5	יְהוֹיָקִ֣ים	Jehoiakim	→ Jehoiakim
+6	בְּמָלְכ֔וֹ	when became king he	→ —
+7	וְאַחַ֤ת	and one [plus]	→ —
+8	עֶשְׂרֵה֙	ten	→ —
+9	שָׁנָ֔ה	year[s]	→ years
+10	מָלַ֖ךְ	he reigned	→ reigned
+11	בִּירוּשָׁלִָ֑ם	in Jerusalem	→ in Jerusalem
+12	וְשֵׁ֣ם	and [the] name of	→ and the name of
+13	אִמּ֔וֹ	mother his	→ mother
+14	זְבוּדָּ֥ה	[was] Zebudah	→ Zebudah
+15	בַת־	[the] daughter of	→ daughter
+16	פְּדָיָ֖ה	Pedaiah	→ Pedaiah
+17	מִן־	from	→ —
+18	רוּמָֽה	Rumah	→ Rumah
+
+## 12:24:11
+EN: and Nebuchadnezzar king of Babylon comes against the city, and his servants are laying siege to it,
+1	וַיָּבֹ֛א	and he came	→ comes
+2	נְבוּכַדְנֶאצַּ֥ר	Nebuchadnezzar	→ Nebuchadnezzar
+3	מֶֽלֶךְ־	[the] king of	→ king
+4	בָּבֶ֖ל	Babylon	→ Babylon
+5	עַל־	to	→ to
+6	הָעִ֑יר	the city	→ the city
+7	וַעֲבָדָ֖יו	and servants his	→ servants
+8	צָרִ֥ים	[were] laying siege	→ are laying siege
+9	עָלֶֽיהָ	on it	→ —

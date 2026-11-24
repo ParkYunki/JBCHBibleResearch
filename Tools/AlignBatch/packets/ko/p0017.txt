@@ -1,0 +1,790 @@
+## 1:29:5
+KO: 그가 그들에게 말하였다. “너희는 나홀의 아들 라반을 아느냐?” 그들이 말하였다. “우리는 안다.”
+1 וַיֹּאמֶר = and he said
+2 לָהֶם = to <the> them (them)
+3 הַיְדַעְתֶּם = ¿ do you know
+4 אֶת־ = <obj.> ([Obj.])
+5 לָבָן = Laban
+6 בֶּן־ = [the] son of (son)
+7 נָחוֹר = Nahor
+8 וַיֹּאמְרוּ = and they said
+9 יָדָעְנוּ = we know [him]
+
+## 1:29:6
+KO: 그리고 그가 그들에게 말하였다. “그에게 평안이 있느냐?” 그들이 말하였다. “평안하다. 그리고 보라, 그의 딸 라헬이 양 떼와 함께 오고 있다.”
+1 וַיֹּאמֶר = and he said
+2 לָהֶם = to <the> them (them)
+3 הֲשָׁלוֹם = ¿ [does] health
+4 לוֹ = [belong] to <the> him (him)
+5 וַיֹּאמְרוּ = and they said
+6 שָׁלוֹם = health
+7 וְהִנֵּה = and there! (behold)
+8 רָחֵל = Rachel
+9 בִּתּוֹ = daughter his (daughter)
+10 בָּאָה = [is] coming (to come (in))
+11 עִם־ = with
+12 הַצֹּאן = the sheep (flock)
+
+## 1:29:7
+KO: 그가 말하였다. 보라, 아직 날이 크니 가축들이 모일 때가 아니다. 양들에게 물을 마시게 하고 가서 풀을 뜯게 하라.
+1 וַיֹּאמֶר = and he said (to say)
+2 הֵן = here! (look!)
+3 עוֹד = still
+4 הַיּוֹם = the day (day;_when)
+5 גָּדוֹל = [is] great (great)
+6 לֹא־ = not
+7 עֵת = [the] time of (time)
+8 הֵאָסֵף = [the] being gathered of (to gather)
+9 הַמִּקְנֶה = the livestock (livestock)
+10 הַשְׁקוּ = water (to water)
+11 הַצֹּאן = the sheep (flock)
+12 וּלְכוּ = and go (to go)
+13 רְעוּ = pasture [them] (to pasture)
+
+## 1:29:8
+KO: 그들이 말하였다. "우리는 할 수 없다, 모든 떼가 모이고 그들이 우물 입구에서 돌을 굴려 내기까지는; 그러고 나서야 우리가 양들에게 물을 먹일 것이다."
+1 וַיֹּאמְרוּ = and they said (to say)
+2 לֹא = not
+3 נוּכַל = we are able (be able)
+4 עַד = until (till)
+5 אֲשֶׁר = that (which)
+6 יֵאָסְפוּ = they will be gathered (to gather)
+7 כָּל־ = all
+8 הָעֲדָרִים = the flocks (flock)
+9 וְגָלֲלוּ = and people will roll (to roll)
+10 אֶת־ = <obj.> ([Obj.])
+11 הָאֶבֶן = the stone (stone)
+12 מֵעַל = from over (upon)
+13 פִּי = [the] mouth of (lip)
+14 הַבְּאֵר = the well (well)
+15 וְהִשְׁקִינוּ = and we will water (to water)
+16 הַצֹּאן = the sheep (flock)
+
+## 1:29:9
+KO: 그가 그들과 말하고 있는 동안에 라헬이 그녀의 아버지에게 속한 양들과 함께 왔으니, 왜냐하면 그녀가 그 양들을 치고 있었기 때문이다.
+1 עוֹדֶנּוּ = still [was] he (still)
+2 מְדַבֵּר = speaking (to speak)
+3 עִמָּם = with them
+4 וְרָחֵל = and Rachel (Rachel)
+5 בָּאָה = she came (to come (in))
+6 עִם־ = with
+7 הַצֹּאן = the sheep (flock)
+8 אֲשֶׁר = which
+9 לְאָבִיהָ = [belonged] to father her (father)
+10 כִּי = for
+11 רֹעָה = [was] a shepherdess (to pasture)
+12 הִוא = she (he;_she;_it)
+
+## 1:29:10
+KO: 그리고 야곱이 그의 어머니의 형제 라반의 딸 라헬과 라반의 양 떼를 보았을 때에, 야곱이 나아가서 우물 입구 위에서 돌을 굴려 옮기고, 라반 그의 어머니의 형제의 양 떼에게 물을 먹였다.
+1 וַיְהִי = and it was (to be)
+2 כַּאֲשֶׁר = just as (as which)
+3 רָאָה = he saw (to see)
+4 יַעֲקֹב = Jacob
+5 אֶת־ = <obj.>
+6 רָחֵל = Rachel
+7 בַּת־ = [the] daughter of (daughter)
+8 לָבָן = Laban
+9 אֲחִי = [the] brother of
+10 אִמּוֹ = mother his
+11 וְאֶת־ = and <obj.>
+12 צֹאן = [the] sheep of
+13 לָבָן = Laban
+14 אֲחִי = [the] brother of
+15 אִמּוֹ = mother his
+16 וַיִּגַּשׁ = and he drew near (to approach)
+17 יַעֲקֹב = Jacob
+18 וַיָּגֶל = and he rolled (to roll)
+19 אֶת־ = <obj.>
+20 הָאֶבֶן = the stone (stone)
+21 מֵעַל = from over (upon)
+22 פִּי = [the] mouth of (lip)
+23 הַבְּאֵר = the well (well)
+24 וַיַּשְׁקְ = and he watered (to water)
+25 אֶת־ = <obj.>
+26 צֹאן = [the] sheep of
+27 לָבָן = Laban
+28 אֲחִי = [the] brother of
+29 אִמּוֹ = mother his
+
+## 1:29:11
+KO: 그리고 야곱이 라헬에게 입맞추었다. 그리고 그가 그의 목소리를 높여 울었다.
+1 וַיִּשַּׁק = and he kissed (to kiss)
+2 יַעֲקֹב = Jacob
+3 לְרָחֵל = <to> Rachel (Rachel)
+4 וַיִּשָּׂא = and he lifted up (to lift)
+5 אֶת־ = <obj.> ([Obj.])
+6 קֹלוֹ = voice his (voice)
+7 וַיֵּבְךְּ = and he wept (to weep)
+
+## 1:29:12
+KO: 그리고 야곱은 라헬에게 그가 그녀 아버지의 형제(친족)이며 그가 리브가의 아들임을 고하였다. 그리고 그녀가 달려가서 그녀의 아버지에게 고하였다.
+1 וַיַּגֵּד = and he told
+2 יַעֲקֹב = Jacob
+3 לְרָחֵל = to Rachel (Rachel)
+4 כִּי = that
+5 אֲחִי = [was] [the] relative of (brother)
+6 אָבִיהָ = father her
+7 הוּא = he
+8 וְכִי = and that
+9 בֶן־ = [was] [the] son of (son)
+10 רִבְקָה = Rebekah
+11 הוּא = he
+12 וַתָּרָץ = and she ran (to run)
+13 וַתַּגֵּד = and she told
+14 לְאָבִיהָ = to father her
+
+## 1:29:13
+KO: 그리고 라반이 자기 누이의 아들 야곱에 관한 소문을 듣자, 그를 맞으러 달려가 그를 껴안고 그에게 입 맞추고 그를 자기 집으로 데리고 들어왔다. 그리고 야곱이 이 모든 일들을 라반에게 말하였다.
+1 וַיְהִי = and it was (to be)
+2 כִשְׁמֹעַ = when heard (to hear)
+3 לָבָן = Laban
+4 אֶת־ = <obj.>
+5 שֵׁמַע = [the] report of (report)
+6 יַעֲקֹב = Jacob
+7 בֶּן־ = [the] son of (son)
+8 אֲחֹתוֹ = sister his (sister)
+9 וַיָּרָץ = and he ran (to run)
+10 לִקְרָאתוֹ = to meet him (to encounter)
+11 וַיְחַבֶּק־ = and he embraced (to embrace)
+12 לוֹ = <to> <the> him
+13 וַיְנַשֶּׁק־ = and he kissed (to kiss)
+14 לוֹ = <to> <the> him
+15 וַיְבִיאֵהוּ = and he brought him (to come (in))
+16 אֶל־ = to (to(wards))
+17 בֵּיתוֹ = house his (house)
+18 וַיְסַפֵּר = and he recounted (to recount)
+19 לְלָבָן = to Laban
+20 אֵת = <obj.>
+21 כָּל־ = all
+22 הַדְּבָרִים = the things (word)
+23 הָאֵלֶּה = <the> these (these)
+
+## 1:29:14
+KO: 그리고 라반이 그에게 말하였다. "너는 참으로 나의 뼈요 나의 살이다." 그리고 야곱이 한 달 동안 그와 함께 거주하였다.
+1 וַיֹּאמֶר = and he said (to say)
+2 לוֹ = to <the> him (him)
+3 לָבָן = Laban
+4 אַךְ = surely
+5 עַצְמִי = [are] bone my (bone)
+6 וּבְשָׂרִי = and flesh my (flesh)
+7 אָתָּה = you (you(m.s.))
+8 וַיֵּשֶׁב = and he remained (to dwell)
+9 עִמּוֹ = with him (with)
+10 חֹדֶשׁ = a month of (month)
+11 יָמִים = days (day;_when)
+
+## 1:29:15
+KO: 그리고 라반이 야곱에게 말했다. "네가 비록 나의 형제일지라도 어찌 나를 무상으로 섬기겠느냐? 내게 말하라, 무엇이 네 품삯이겠느냐?"
+1 וַיֹּאמֶר = and he said (to say)
+2 לָבָן = Laban
+3 לְיַעֲקֹב = to Jacob (Jacob)
+4 הֲכִי־ = ¿ for (for)
+5 אָחִי = relative my (brother)
+6 אַתָּה = [are] you (you(m.s.))
+7 וַעֲבַדְתַּנִי = and you will serve me (to serve)
+8 חִנָּם = for nothing
+9 הַגִּידָה = tell ! (to tell)
+10 לִּי = to <the> me (me)
+11 מַה־ = what?
+12 מַּשְׂכֻּרְתֶּךָ = [is] wage[s] your (wage)
+
+## 1:29:16
+KO: 그리고 라반에게는 두 딸이 있었으니, 큰 딸의 이름은 레아요 작은 딸의 이름은 라헬이었다.
+1 וּלְלָבָן = and [belonged] to Laban (Laban)
+2 שְׁתֵּי = two
+3 בָנוֹת = daughters (daughter)
+4 שֵׁם = [the] name of
+5 הַגְּדֹלָה = the old [one] (great)
+6 לֵאָה = [was] Leah (Leah)
+7 וְשֵׁם = and [the] name of
+8 הַקְּטַנָּה = the young [one] (small)
+9 רָחֵל = [was] Rachel (Rachel)
+
+## 1:29:17
+KO: 그리고 레아의 눈들은 연약하였고, 라헬은 용모가 아름답고 모습이 아름다웠다.
+1 וְעֵינֵי = and [the] eyes of (eye)
+2 לֵאָה = Leah
+3 רַכּוֹת = [were] weak (tender)
+4 וְרָחֵל = and Rachel (Rachel)
+5 הָיְתָה = she was (to be)
+6 יְפַת־ = beautiful of
+7 תֹּאַר = form (appearance)
+8 וִיפַת = and beautiful of
+9 מַרְאֶה = appearance
+
+## 1:29:18
+KO: 그리고 야곱이 라헬을 사랑하였다. 그리고 그가 말하였다. "내가 당신의 작은 딸 라헬을 위하여 당신을 일곱 해 동안 섬기겠나이다."
+1 וַיֶּאֱהַב = and he loved (to love)
+2 יַעֲקֹב = Jacob
+3 אֶת־ = <obj.> ([Obj.])
+4 רָחֵל = Rachel
+5 וַיֹּאמֶר = and he said (to say)
+6 אֶעֱבָדְךָ = I will serve you (to serve)
+7 שֶׁבַע = seven
+8 שָׁנִים = years (year)
+9 בְּרָחֵל = for Rachel
+10 בִּתְּךָ = daughter your (daughter)
+11 הַקְּטַנָּה = <the> young (small)
+
+## 1:29:19
+KO: 라반이 말하였다. "그녀를 네게 주는 것이 내가 다른 남자에게 그녀를 주는 것보다 나으니, 나와 함께 머물라."
+1 וַיֹּאמֶר = and he said (to say)
+2 לָבָן = Laban
+3 טוֹב = [is] good (pleasant)
+4 תִּתִּי = to give I
+5 אֹתָהּ = <obj.> her
+6 לָךְ = to <the> you (you)
+7 מִתִּתִּי = more than to give I
+8 אֹתָהּ = <obj.> her
+9 לְאִישׁ = to a man (man)
+10 אַחֵר = another
+11 שְׁבָה = remain ! (to dwell)
+12 עִמָּדִי = with me
+
+## 1:29:20
+KO: 그리고 야곱은 라헬을 위하여 칠 년을 봉사하였다. 그리고 그것들(칠 년)은 그의 눈에 며칠 같이 되었다, 그가 그녀를 사랑하는 사랑 안에서.
+1 וַיַּעֲבֹד = and he served (to serve)
+2 יַעֲקֹב = Jacob
+3 בְּרָחֵל = for Rachel (Rachel)
+4 שֶׁבַע = seven
+5 שָׁנִים = years (year)
+6 וַיִּהְיוּ = and they were (to be)
+7 בְעֵינָיו = in view his (eye)
+8 כְּיָמִים = like days (day;_when)
+9 אֲחָדִים = one<s> (one)
+10 בְּאַהֲבָתוֹ = in love his (love)
+11 אֹתָהּ = <obj.> her ([Obj.])
+
+## 1:29:21
+KO: 야곱이 라반에게 말하였다. “나의 아내를 주시오. 나의 날들이 찼으니 내가 그에게 들어가겠소.”
+1 וַיֹּאמֶר = and he said (to say)
+2 יַעֲקֹב = Jacob
+3 אֶל־ = to
+4 לָבָן = Laban
+5 הָבָה = give ! (to give)
+6 אֶת־ = <obj.> ([Obj.])
+7 אִשְׁתִּי = wife my (woman)
+8 כִּי = for
+9 מָלְאוּ = they have been completed (to fill)
+10 יָמָי = days my (day;_when)
+11 וְאָבוֹאָה = so I may go (to come (in))
+12 אֵלֶיהָ = into her
+
+## 1:29:22
+KO: 그리고 라반이 그곳의 모든 사람을 모으고 잔치를 베풀었다.
+1 וַיֶּאֱסֹף = and he gathered (to gather)
+2 לָבָן = Laban
+3 אֶת־ = <obj.> ([Obj.])
+4 כָּל־ = all
+5 אַנְשֵׁי = [the] people of (human)
+6 הַמָּקוֹם = the place (standing place)
+7 וַיַּעַשׂ = and he prepared (to make)
+8 מִשְׁתֶּה = a feast (feast)
+
+## 1:29:23
+KO: 그리고 저녁이 되었다. 그리고 그가 그의 딸 레아를 취하여 그가 그에게 데려갔고, 그가 그녀에게로 들어갔다.
+1 וַיְהִי = and it was (to be)
+2 בָעֶרֶב = in the evening (evening)
+3 וַיִּקַּח = and he took (to take)
+4 אֶת־ = <obj.>
+5 לֵאָה = Leah
+6 בִתּוֹ = daughter his (daughter)
+7 וַיָּבֵא = and he brought
+8 אֹתָהּ = <obj.> her
+9 אֵלָיו = to him
+10 וַיָּבֹא = and he went
+11 אֵלֶיהָ = into her
+
+## 1:29:24
+KO: 그리고 라반이 그녀에게, 즉 그의 여종 실바를 그의 딸 레아에게 시녀로 주었다.
+1 וַיִּתֵּן = and he had given (to give)
+2 לָבָן = Laban
+3 לָהּ = to <the> her (her)
+4 אֶת־ = <obj.> ([Obj.])
+5 זִלְפָּה = Zilpah
+6 שִׁפְחָתוֹ = maidservant his
+7 לְלֵאָה = to Leah (Leah)
+8 בִתּוֹ = daughter his (daughter)
+9 שִׁפְחָה = a maidservant
+
+## 1:29:25
+KO: 그리고 아침이 되니, 보라, 그녀는 레아였다. 그가 라반에게 말했다. "이 무슨 일을 내게 행하셨습니까? 내가 라헬을 위하여 당신을 섬기지 않았습니까? 그런데 어찌하여 나를 속이셨습니까?"
+1 וַיְהִי = and it was (to be)
+2 בַבֹּקֶר = in the morning (morning)
+3 וְהִנֵּה־ = and there! (behold)
+4 הִוא = she (he;_she;_it)
+5 לֵאָה = [was] Leah (Leah)
+6 וַיֹּאמֶר = and he said (to say)
+7 אֶל־ = to (to(wards))
+8 לָבָן = Laban
+9 מַה־ = what?
+10 זֹּאת = this
+11 עָשִׂיתָ = have you done (to make)
+12 לִּי = to <the> me (me)
+13 הֲלֹא = ¿ not (not)
+14 בְרָחֵל = for Rachel (Rachel)
+15 עָבַדְתִּי = have I served (to serve)
+16 עִמָּךְ = with you (with)
+17 וְלָמָּה = and <to> why?
+18 רִמִּיתָנִי = have you deceived me (to deceive)
+
+## 1:29:26
+KO: 라반이 말하였다. "우리 지방에서는, 연소한 자를 장자보다 먼저 주는 것은 그렇게 행하여지지 않는다."
+1 וַיֹּאמֶר = and he said (to say)
+2 לָבָן = Laban
+3 לֹא־ = not
+4 יֵעָשֶׂה = it is done (to make)
+5 כֵן = thus (so)
+6 בִּמְקוֹמֵנוּ = in place our (standing place)
+7 לָתֵת = to give
+8 הַצְּעִירָה = the young (little)
+9 לִפְנֵי = <to> before (face)
+10 הַבְּכִירָה = the firstborn (firstborn)
+
+## 1:29:27
+KO: 이 한 주를 채우라. 그러면 우리가 이것 또한 네게 줄 것이니, 네가 나를 위하여 일곱 해를 더 섬길지니라.
+1 מַלֵּא = complete (to fill)
+2 שְׁבֻעַ = [the] week of (week)
+3 זֹאת = this [one]
+4 וְנִתְּנָה = so let us give (to give)
+5 לְךָ = to <the> you (you)
+6 גַּם־ = also
+7 אֶת־ = <obj.> ([Obj.])
+8 זֹאת = this [one]
+9 בַּעֲבֹדָה = for [the] service (service)
+10 אֲשֶׁר = which
+11 תַּעֲבֹד = you will serve (to serve)
+12 עִמָּדִי = with me
+13 עוֹד = again (still)
+14 שֶׁבַע־ = seven
+15 שָׁנִים = years (year)
+16 אֲחֵרוֹת = another
+
+## 1:29:28
+KO: 그리고 야곱이 그렇게 행하였고, 이 한 주간을 채우매, 그(라반)가 그에게 그의 딸 라헬을 아내로 주었다.
+1 וַיַּעַשׂ = and he did (to make)
+2 יַעֲקֹב = Jacob
+3 כֵּן = thus (so)
+4 וַיְמַלֵּא = and he completed (to fill)
+5 שְׁבֻעַ = [the] week of (week)
+6 זֹאת = this [one] (this)
+7 וַיִּתֶּן־ = and he gave (to give)
+8 לוֹ = to <the> him
+9 אֶת־ = <obj.> ([Obj.])
+10 רָחֵל = Rachel
+11 בִּתּוֹ = daughter his (daughter)
+12 לוֹ = of him
+13 לְאִשָּׁה = to a wife (woman)
+
+## 1:29:29
+KO: 그리고 라반이 그의 딸 라헬에게 그의 여종 빌하를 주어 그녀에게 시녀가 되게 하였다.
+1 וַיִּתֵּן = and he had given (to give)
+2 לָבָן = Laban
+3 לְרָחֵל = to Rachel (Rachel)
+4 בִּתּוֹ = daughter his (daughter)
+5 אֶת־ = <obj.> ([Obj.])
+6 בִּלְהָה = Bilhah
+7 שִׁפְחָתוֹ = maidservant his
+8 לָהּ = to her (her)
+9 לְשִׁפְחָה = to [be] a maidservant
+
+## 1:29:30
+KO: 그리고 그가 라헬에게로도 들어갔고, 그가 레아보다 라헬을 더 사랑하였으며, 그가 그와 함께 또 다른 칠 년을 봉사하였다.
+1 וַיָּבֹא = and he went (to come (in))
+2 גַּם = also
+3 אֶל־ = into (to(wards))
+4 רָחֵל = Rachel
+5 וַיֶּאֱהַב = and he loved (to love)
+6 גַּם־ = also
+7 אֶת־ = <obj.> ([Obj.])
+8 רָחֵל = Rachel
+9 מִלֵּאָה = more than Leah (Leah)
+10 וַיַּעֲבֹד = and he served (to serve)
+11 עִמּוֹ = with him (with)
+12 עוֹד = again (still)
+13 שֶׁבַע־ = seven
+14 שָׁנִים = years (year)
+15 אֲחֵרוֹת = another
+
+## 1:29:31
+KO: 그리고 여호와께서 보셨다, 레아가 미움을 받고 있음을; 그래서 그분께서 그의 태를 여셨으나, 라헬은 불임 상태였다.
+1 וַיַּרְא = and he saw (to see)
+2 יְהוָה = Yahweh (LORD)
+3 כִּי־ = that (for)
+4 שְׂנוּאָה = [was] hated (to hate)
+5 לֵאָה = Leah
+6 וַיִּפְתַּח = and he opened (to open)
+7 אֶת־ = <obj.> ([Obj.])
+8 רַחְמָהּ = womb her (womb)
+9 וְרָחֵל = and Rachel (Rachel)
+10 עֲקָרָה = [was] barren (barren)
+
+## 1:29:32
+KO: 그리고 레아가 잉태하였고, 아들을 낳았고, 그 이름을 르우벤이라 불렀다. 왜냐하면 그녀가 말하기를 "여호와께서 나의 고난을 보셨기 때문이다. 왜냐하면 이제 나의 남편이 나를 사랑할 것이기 때문이다"라고 하였기 때문이다.
+1 וַתַּהַר = and she conceived (to conceive)
+2 לֵאָה = Leah
+3 וַתֵּלֶד = and she bore (to beget)
+4 בֵּן = a son (son)
+5 וַתִּקְרָא = and she called (to call)
+6 שְׁמוֹ = name his (name)
+7 רְאוּבֵן = Reuben
+8 כִּי = for
+9 אָמְרָה = she said (to say)
+10 כִּי־ = that
+11 רָאָה = he has looked (to see)
+12 יְהוָה = Yahweh (LORD)
+13 בְּעָנְיִי = on affliction my (affliction)
+14 כִּי = for
+15 עַתָּה = now
+16 יֶאֱהָבַנִי = he will love me (to love)
+17 אִישִׁי = husband my (man)
+
+## 1:29:33
+KO: 그녀가 다시 임신하여 아들을 낳았고 그녀가 말하기를, “여호와께서 내가 미움받는다는 것을 들으셨으므로 나에게 이것도 주셨다”라고 하였으며, 그녀가 그의 이름을 시므온이라 불렀다.
+1 וַתַּהַר = and she conceived (to conceive)
+2 עוֹד = again (still)
+3 וַתֵּלֶד = and she bore (to beget)
+4 בֵּן = a son (son)
+5 וַתֹּאמֶר = and she said (to say)
+6 כִּי־ = that
+7 שָׁמַע = he has heard (to hear)
+8 יְהוָה = Yahweh (LORD)
+9 כִּי־ = that
+10 שְׂנוּאָה = [am] hated (to hate)
+11 אָנֹכִי = I
+12 וַיִּתֶּן־ = and he has given (to give)
+13 לִי = to <the> me (me)
+14 גַּם־ = also
+15 אֶת־ = <obj.> ([Obj.])
+16 זֶה = this [one] (this)
+17 וַתִּקְרָא = and she called (to call)
+18 שְׁמוֹ = name his (name)
+19 שִׁמְעוֹן = Simeon
+
+## 1:29:34
+KO: 그녀가 또 잉태하여 아들을 낳았고, 그녀가 말하였다. "이제 이번에는 내 남편이 나와 연합할 것이다. 왜냐하면 내가 그에게 세 아들을 낳았기 때문이다." 그래서 그의 이름을 레위라 불렀다.
+1 וַתַּהַר = and she conceived (to conceive)
+2 עוֹד = again (still)
+3 וַתֵּלֶד = and she bore
+4 בֵּן = a son
+5 וַתֹּאמֶר = and she said (to say)
+6 עַתָּה = now
+7 הַפַּעַם = this time (beat)
+8 יִלָּוֶה = he will join himself (to join)
+9 אִישִׁי = husband my (man)
+10 אֵלַי = to me (to(wards))
+11 כִּי־ = for
+12 יָלַדְתִּי = I have borne
+13 לוֹ = to <the> him (him)
+14 שְׁלֹשָׁה = three
+15 בָנִים = sons
+16 עַל־ = there- (upon)
+17 כֵּן = -fore (so)
+18 קָרָא־ = he called (to call)
+19 שְׁמוֹ = name his (name)
+20 לֵוִי = Levi
+
+## 1:29:35
+KO: 그가 다시 잉태하여 아들을 낳고 말하기를 "이번에는 내가 여호와를 찬송하리라" 하였다. 그러므로 그가 그 이름을 유다라 불렀고, 그가 출산을 멈추었더라.
+1 וַתַּהַר = and she conceived (to conceive)
+2 עוֹד = again (still)
+3 וַתֵּלֶד = and she bore
+4 בֵּן = a son (son)
+5 וַתֹּאמֶר = and she said (to say)
+6 הַפַּעַם = this time (beat)
+7 אוֹדֶה = I will praise (to give thanks)
+8 אֶת־ = <obj.> ([Obj.])
+9 יְהוָה = Yahweh (LORD)
+10 עַל־ = there- (upon)
+11 כֵּן = -fore (so)
+12 קָרְאָה = she called (to call)
+13 שְׁמוֹ = name his (name)
+14 יְהוּדָה = Judah
+15 וַתַּעֲמֹד = and she stopped (to stand)
+16 מִלֶּדֶת = from bearing children
+
+## 1:30:1
+KO: 그리고 라헬이 보았다, 왜냐하면 그녀가 야곱에게 자식을 낳지 못하였기 때문이다. 그리하여 라헬이 그녀의 언니를 시기하였고, 야곱에게 말하였다. "나에게 아들들을 주시오. 만일 그렇지 않으면 내가 죽을 것이오."
+1 וַתֵּרֶא = and she saw (to see)
+2 רָחֵל = Rachel
+3 כִּי = that (for)
+4 לֹא = not
+5 יָלְדָה = she had borne children (to beget)
+6 לְיַעֲקֹב = to Jacob
+7 וַתְּקַנֵּא = and she was jealous (be jealous)
+8 רָחֵל = Rachel
+9 בַּאֲחֹתָהּ = of sister her (sister)
+10 וַתֹּאמֶר = and she said (to say)
+11 אֶל־ = to (to(wards))
+12 יַעֲקֹב = Jacob
+13 הָבָה־ = give ! (to give)
+14 לִּי = to <the> me (me)
+15 בָנִים = children (son)
+16 וְאִם־ = and if (if)
+17 אַיִן = not (nothing)
+18 מֵתָה = [am] about to die (to die)
+19 אָנֹכִי = I
+
+## 1:30:2
+KO: 그리고 야곱의 코가 라헬에게 타올랐다. 그리고 그가 말했다. 내가 하나님 아래에(대신하여) 있는가, 그분께서 네 태의 열매를 막으셨는데?
+1 וַיִּחַר־ = and it burned (to burn)
+2 אַף = [the] anger of (face)
+3 יַעֲקֹב = Jacob
+4 בְּרָחֵל = on Rachel (Rachel)
+5 וַיֹּאמֶר = and he said (to say)
+6 הֲתַחַת = ¿ in place of (underneath)
+7 אֱלֹהִים = God
+8 אָנֹכִי = [am] I (I)
+9 אֲשֶׁר־ = who (which)
+10 מָנַע = he has withheld (to withhold)
+11 מִמֵּךְ = from you (from)
+12 פְּרִי־ = fruit of (fruit)
+13 בָטֶן = [the] womb (belly)
+
+## 1:30:3
+KO: 그리고 그가 말하였다. "보라, 내 여종 빌하에게로 들어가라. 그러면 그가 내 무릎 위에 낳을 것이고, 나도 그로 말미암아 세워지리라."
+1 וַתֹּאמֶר = and she said (to say)
+2 הִנֵּה = here! (behold)
+3 אֲמָתִי = maidservant my (maidservant)
+4 בִלְהָה = Bilhah
+5 בֹּא = go (to come (in))
+6 אֵלֶיהָ = into her (to(wards))
+7 וְתֵלֵד = so she may bear children (to beget)
+8 עַל־ = on (upon)
+9 בִּרְכַּי = knees my (knee)
+10 וְאִבָּנֶה = so I may be built up (to build)
+11 גַם־ = also
+12 אָנֹכִי = I
+13 מִמֶּנָּה = from her (from)
+
+## 1:30:4
+KO: 그리고 그가 그녀의 시녀 빌하를 그에게 아내로 주매, 야곱이 그녀에게로 들어갔더라.
+1 וַתִּתֶּן־ = and she gave (to give)
+2 לוֹ = to <the> him (him)
+3 אֶת־ = <obj.> ([Obj.])
+4 בִּלְהָה = Bilhah
+5 שִׁפְחָתָהּ = maidservant her (maidservant)
+6 לְאִשָּׁה = to a wife (woman)
+7 וַיָּבֹא = and he went (to come (in))
+8 אֵלֶיהָ = into her (to(wards))
+9 יַעֲקֹב = Jacob
+
+## 1:30:5
+KO: 그리고 빌하가 임신하였고, 빌하가 야곱에게 아들을 낳았다.
+1 וַתַּהַר = and she conceived (to conceive)
+2 בִּלְהָה = Bilhah
+3 וַתֵּלֶד = and she bore (to beget)
+4 לְיַעֲקֹב = to Jacob (Jacob)
+5 בֵּן = a son (son)
+
+## 1:30:6
+KO: 라헬이 말하였다. “하나님께서 나를 판단하셨고, 또한 내 목소리를 들으셨으며, 내게 아들을 주셨다.” 그러므로 그녀가 그의 이름을 단이라 불렀다.
+1 וַתֹּאמֶר = and she said (to say)
+2 רָחֵל = Rachel
+3 דָּנַנִּי = he has vindicated me (to judge)
+4 אֱלֹהִים = God
+5 וְגַם = and also (also)
+6 שָׁמַע = he has listened (to hear)
+7 בְּקֹלִי = to voice my (voice)
+8 וַיִּתֶּן־ = and he has given (to give)
+9 לִי = to <the> me (me)
+10 בֵּן = a son (son)
+11 עַל־ = there- (upon)
+12 כֵּן = -fore (so)
+13 קָרְאָה = she called (to call)
+14 שְׁמוֹ = name his (name)
+15 דָּן = Dan
+
+## 1:30:7
+KO: 그리고 라헬의 여종 빌하가 다시 임신하였고, 야곱에게 두 번째 아들을 낳았다.
+1 וַתַּהַר = and she conceived (to conceive)
+2 עוֹד = again (still)
+3 וַתֵּלֶד = and she bore (to beget)
+4 בִּלְהָה = Bilhah
+5 שִׁפְחַת = [the] maidservant of (maidservant)
+6 רָחֵל = Rachel
+7 בֵּן = a son (son)
+8 שֵׁנִי = second
+9 לְיַעֲקֹב = to Jacob (Jacob)
+
+## 1:30:8
+KO: 라헬이 말하였다. "내가 하나님의 씨름들로 나의 언니와 씨름하였고, 또한 이기었다." 그리고 그의 이름을 납달리라 불렀다.
+1 וַתֹּאמֶר = and she said (to say)
+2 רָחֵל = Rachel
+3 נַפְתּוּלֵי = wrestling<s> of (wrestling)
+4 אֱלֹהִים = God
+5 נִפְתַּלְתִּי = I have wrestled (to twist)
+6 עִם־ = with
+7 אֲחֹתִי = sister my (sister)
+8 גַּם־ = also
+9 יָכֹלְתִּי = I have prevailed (be able)
+10 וַתִּקְרָא = and she called (to call)
+11 שְׁמוֹ = name his (name)
+12 נַפְתָּלִי = Naphtali
+
+## 1:30:9
+KO: 그리고 레아가 보았다, 왜냐하면 그녀가 출산하는 것으로부터 멈추었기 때문이다. 그리고 그녀는 그녀의 여종 질바를 취하여 그녀를 야곱에게 아내로 주었다.
+1 וַתֵּרֶא = and she saw (to see)
+2 לֵאָה = Leah
+3 כִּי = that (for)
+4 עָמְדָה = she had stopped (to stand)
+5 מִלֶּדֶת = from bearing children (to beget)
+6 וַתִּקַּח = and she took (to take)
+7 אֶת־ = <obj.>
+8 זִלְפָּה = Zilpah
+9 שִׁפְחָתָהּ = maidservant her (maidservant)
+10 וַתִּתֵּן = and she gave (to give)
+11 אֹתָהּ = <obj.> her
+12 לְיַעֲקֹב = to Jacob (Jacob)
+13 לְאִשָּׁה = to a wife (woman)
+
+## 1:30:10
+KO: 그리고 레아의 여종 실바가 야곱에게 아들을 낳았다.
+1 וַתֵּלֶד = and she bore (to beget)
+2 זִלְפָּה = Zilpah
+3 שִׁפְחַת = [the] maidservant of (maidservant)
+4 לֵאָה = Leah
+5 לְיַעֲקֹב = to Jacob (Jacob)
+6 בֵּן = a son (son)
+
+## 1:30:11
+KO: 그리고 레아가 말했다, "복이 왔다!" 그리고 그녀가 그의 이름을 갓이라 불렀다.
+1 וַתֹּאמֶר = and she said (to say)
+2 לֵאָה = Leah
+3 בָּאגָד = it has comegood fortune
+4 וַתִּקְרָא = and she called (to call)
+5 אֶת־ = <obj.> ([Obj.])
+6 שְׁמוֹ = name his (name)
+7 גָּד = Gad
+
+## 1:30:12
+KO: 그리고 레아의 여종 실바가 야곱에게 두 번째 아들을 낳았다.
+1 וַתֵּלֶד = and she bore (to beget)
+2 זִלְפָּה = Zilpah
+3 שִׁפְחַת = [the] maidservant of (maidservant)
+4 לֵאָה = Leah
+5 בֵּן = a son (son)
+6 שֵׁנִי = second
+7 לְיַעֲקֹב = to Jacob (Jacob)
+
+## 1:30:13
+KO: 레아가 말했다. “나의 행복함이다. 왜냐하면 딸들이 나를 행복하다고 부를 것이기 때문이다.” 그리고 그녀는 그의 이름을 아셀이라 불렀다.
+1 וַתֹּאמֶר = and she said (to say)
+2 לֵאָה = Leah
+3 בְּאָשְׁרִי = in happiness my (happy)
+4 כִּי = for
+5 אִשְּׁרוּנִי = they will call happy me (to bless)
+6 בָּנוֹת = daughters (daughter)
+7 וַתִּקְרָא = and she called (to call)
+8 אֶת־ = <obj.> ([Obj.])
+9 שְׁמוֹ = name his (name)
+10 אָשֵׁר = Asher
+
+## 1:30:14
+KO: 그리고 르우벤이 밀 추수 날들에 가서 들에서 합환채들을 발견하였고, 그것들을 자기 어머니 레아에게 가져왔다. 그리고 라헬이 레아에게 말했다. "부디 네 아들의 합환채를 나에게 다오."
+1 וַיֵּלֶךְ = and he went (to go)
+2 רְאוּבֵן = Reuben
+3 בִּימֵי = in [the] days of (day;_when)
+4 קְצִיר־ = [the] harvest of (harvest)
+5 חִטִּים = wheat<s> (wheat)
+6 וַיִּמְצָא = and he found (to find)
+7 דוּדָאִים = mandrakes
+8 בַּשָּׂדֶה = in the field (land)
+9 וַיָּבֵא = and he brought (to come (in))
+10 אֹתָם = <obj.> them ([Obj.])
+11 אֶל־ = to
+12 לֵאָה = Leah
+13 אִמּוֹ = mother his (mother)
+14 וַתֹּאמֶר = and she said (to say)
+15 רָחֵל = Rachel
+16 אֶל־ = to
+17 לֵאָה = Leah
+18 תְּנִי־ = give (to give)
+19 נָא = please
+20 לִי = to <the> me (me)
+21 מִדּוּדָאֵי = some of [the] mandrakes of
+22 בְּנֵךְ = son your (son)
+
+## 1:30:15
+KO: 그녀(레아)가 그녀(라헬)에게 말했다. "내 남편을 취한 것이 작은 일이냐? 그런데 너는 내 아들의 합환채도 취하려 하느냐?" 라헬이 말했다. "그러므로 오늘 밤에 내 남편이 당신(레아)의 아들의 합환채를 대신하여 당신과 동침할 것입니다."
+1 וַתֹּאמֶר = and she said
+2 לָהּ = to <the> her (her)
+3 הַמְעַט = ¿ small (little)
+4 קַחְתֵּךְ = taking you
+5 אֶת־ = <obj.>
+6 אִישִׁי = husband my (man)
+7 וְלָקַחַת = and to take
+8 גַּם = also
+9 אֶת־ = <obj.>
+10 דּוּדָאֵי = [the] mandrakes of
+11 בְּנִי = son my
+12 וַתֹּאמֶר = and she said
+13 רָחֵל = Rachel
+14 לָכֵן = <to> therefore (so)
+15 יִשְׁכַּב = he will lie (to lie down)
+16 עִמָּךְ = with you (with)
+17 הַלַּיְלָה = this night (night)
+18 תַּחַת = for (underneath)
+19 דּוּדָאֵי = [the] mandrakes of
+20 בְנֵךְ = son your
+
+## 1:30:16
+KO: 야곱이 저녁에 들에서 왔고, 레아가 그를 맞으러 나와서 말하였다. "너는 내게로 들어와야 한다. 왜냐하면 내가 내 아들의 합환채로 너를 샀기 때문이다." 그 밤에 그가 그녀와 동침하였다.
+1 וַיָּבֹא = and he came
+2 יַעֲקֹב = Jacob
+3 מִן־ = from
+4 הַשָּׂדֶה = the field (land)
+5 בָּעֶרֶב = in the evening (evening)
+6 וַתֵּצֵא = and she went out (to come out)
+7 לֵאָה = Leah
+8 לִקְרָאתוֹ = to meet him (to encounter)
+9 וַתֹּאמֶר = and she said (to say)
+10 אֵלַי = into me (to(wards))
+11 תָּבוֹא = you will come
+12 כִּי = for
+13 שָׂכֹר = certainly <to hire>
+14 שְׂכַרְתִּיךָ = I have hired you
+15 בְּדוּדָאֵי = for [the] mandrakes of (mandrake)
+16 בְּנִי = son my (son)
+17 וַיִּשְׁכַּב = and he lay (to lie down)
+18 עִמָּהּ = with her (with)
+19 בַּלַּיְלָה = in the night (night)
+20 הוּא = that (he;_she;_it)
+
+## 1:30:17
+KO: 그리고 하나님이 레아에게 들으셨고, 그가 임신하였으며, 야곱에게 다섯째 아들을 낳았다.
+1 וַיִּשְׁמַע = and he listened (to hear)
+2 אֱלֹהִים = God
+3 אֶל־ = to (to(wards))
+4 לֵאָה = Leah
+5 וַתַּהַר = and she conceived (to conceive)
+6 וַתֵּלֶד = and she bore (to beget)
+7 לְיַעֲקֹב = to Jacob (Jacob)
+8 בֵּן = a son (son)
+9 חֲמִישִׁי = fifth
+
+## 1:30:18
+KO: 레아가 말했다. "하나님께서 나의 품삯을 주셨다. 내가 나의 시녀를 나의 남편에게 주었기 때문이다." 그리고 그녀는 그 이름을 잇사갈이라 불렀다.
+1 וַתֹּאמֶר = and she said (to say)
+2 לֵאָה = Leah
+3 נָתַן = he has given
+4 אֱלֹהִים = God
+5 שְׂכָרִי = reward my (wages)
+6 אֲשֶׁר־ = that (which)
+7 נָתַתִּי = I gave
+8 שִׁפְחָתִי = maidservant my (maidservant)
+9 לְאִישִׁי = to husband my (man)
+10 וַתִּקְרָא = and she called (to call)
+11 שְׁמוֹ = name his (name)
+12 יִשָּׂשכָר = Issachar
+
+## 1:30:19
+KO: 그리고 레아가 다시 임신하였고, 레아가 야곱에게 여섯째 아들을 낳았다.
+1 וַתַּהַר = and she conceived (to conceive)
+2 עוֹד = again (still)
+3 לֵאָה = Leah
+4 וַתֵּלֶד = and she bore (to beget)
+5 בֵּן־ = a son (son)
+6 שִׁשִּׁי = sixth
+7 לְּיַעֲקֹב = to Jacob (Jacob)

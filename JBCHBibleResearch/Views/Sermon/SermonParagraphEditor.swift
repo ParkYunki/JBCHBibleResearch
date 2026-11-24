@@ -100,6 +100,12 @@ enum SermonParagraphStyleCodec {
         var item = style
         if let lineHeight = extras.lineHeight { item += "\(itemSeparator)lh=\(lineHeight)" }
         if let list = extras.list { item += "\(itemSeparator)ls=\(list.rawValue)" }
+        // [2026-11-14] 들여쓰기·문단 간격(pt) — 첫 줄 fi, 왼쪽 li, 오른쪽 ri, 위 sb, 아래 sa.
+        if let value = extras.firstLineIndent { item += "\(itemSeparator)fi=\(value)" }
+        if let value = extras.leftIndent { item += "\(itemSeparator)li=\(value)" }
+        if let value = extras.rightIndent { item += "\(itemSeparator)ri=\(value)" }
+        if let value = extras.spaceBefore { item += "\(itemSeparator)sb=\(value)" }
+        if let value = extras.spaceAfter { item += "\(itemSeparator)sa=\(value)" }
         return item
     }
 
@@ -115,6 +121,16 @@ enum SermonParagraphStyleCodec {
                 if let value = Double(pair[1]), value >= 0.8, value <= 4 { extras.lineHeight = value }
             case "ls":
                 extras.list = SermonListKind(rawValue: pair[1])
+            case "fi":
+                if let value = Double(pair[1]), value >= -200, value <= 200 { extras.firstLineIndent = value }
+            case "li":
+                if let value = Double(pair[1]), value >= 0, value <= 400 { extras.leftIndent = value }
+            case "ri":
+                if let value = Double(pair[1]), value >= 0, value <= 400 { extras.rightIndent = value }
+            case "sb":
+                if let value = Double(pair[1]), value >= 0, value <= 200 { extras.spaceBefore = value }
+            case "sa":
+                if let value = Double(pair[1]), value >= 0, value <= 200 { extras.spaceAfter = value }
             default:
                 break
             }
@@ -127,7 +143,25 @@ enum SermonParagraphStyleCodec {
         guard location >= 0, location < storage.length else { return .none }
         let lineHeight = (storage.attribute(.sermonLineHeight, at: location, effectiveRange: nil) as? NSNumber)?.doubleValue
         let list = (storage.attribute(.sermonListKind, at: location, effectiveRange: nil) as? String).flatMap(SermonListKind.init(rawValue:))
-        return SermonParagraphExtras(lineHeight: lineHeight, list: list)
+        func number(_ key: NSAttributedString.Key) -> Double? {
+            (storage.attribute(key, at: location, effectiveRange: nil) as? NSNumber)?.doubleValue
+        }
+        return SermonParagraphExtras(
+            lineHeight: lineHeight, list: list,
+            firstLineIndent: number(.sermonFirstLineIndent), leftIndent: number(.sermonLeftIndent), rightIndent: number(.sermonRightIndent),
+            spaceBefore: number(.sermonSpaceBefore), spaceAfter: number(.sermonSpaceAfter)
+        )
+    }
+
+    /// 문단 attribute(`.sermon…`)에서 읽은 추가 서식 — 타이핑 속성(`[Key: Any]`)에서 `SermonParagraphExtras`를 만드는 공용 경로.
+    static func extras(fromAttributes attrs: [NSAttributedString.Key: Any]) -> SermonParagraphExtras {
+        func number(_ key: NSAttributedString.Key) -> Double? { (attrs[key] as? NSNumber)?.doubleValue }
+        return SermonParagraphExtras(
+            lineHeight: number(.sermonLineHeight),
+            list: (attrs[.sermonListKind] as? String).flatMap(SermonListKind.init(rawValue:)),
+            firstLineIndent: number(.sermonFirstLineIndent), leftIndent: number(.sermonLeftIndent), rightIndent: number(.sermonRightIndent),
+            spaceBefore: number(.sermonSpaceBefore), spaceAfter: number(.sermonSpaceAfter)
+        )
     }
 
     /// 문단 범위에 추가 서식 attribute를 심는다(nil이면 지운다).
@@ -142,6 +176,17 @@ enum SermonParagraphStyleCodec {
             storage.addAttribute(.sermonListKind, value: list.rawValue, range: range)
         } else {
             storage.removeAttribute(.sermonListKind, range: range)
+        }
+        let spacing: [(NSAttributedString.Key, Double?)] = [
+            (.sermonFirstLineIndent, extras.firstLineIndent), (.sermonLeftIndent, extras.leftIndent), (.sermonRightIndent, extras.rightIndent),
+            (.sermonSpaceBefore, extras.spaceBefore), (.sermonSpaceAfter, extras.spaceAfter),
+        ]
+        for (key, value) in spacing {
+            if let value {
+                storage.addAttribute(key, value: NSNumber(value: value), range: range)
+            } else {
+                storage.removeAttribute(key, range: range)
+            }
         }
     }
 
@@ -191,10 +236,15 @@ enum SermonParagraphStyleCodec {
         let alignment = (existing[.paragraphStyle] as? NSParagraphStyle)?.alignment
         attrs[.paragraphStyle] = makeParagraphStyle(
             for: style, baseFont: settings.sermonPlatformFont(for: style), settings: settings, alignment: alignment,
-            lineHeightMultiple: extras.lineHeight.map { CGFloat($0) }, list: extras.list
+            lineHeightMultiple: extras.lineHeight.map { CGFloat($0) }, list: extras.list, overrides: extras
         )
         attrs[.sermonLineHeight] = extras.lineHeight.map { NSNumber(value: $0) }
         attrs[.sermonListKind] = extras.list?.rawValue
+        attrs[.sermonFirstLineIndent] = extras.firstLineIndent.map { NSNumber(value: $0) }
+        attrs[.sermonLeftIndent] = extras.leftIndent.map { NSNumber(value: $0) }
+        attrs[.sermonRightIndent] = extras.rightIndent.map { NSNumber(value: $0) }
+        attrs[.sermonSpaceBefore] = extras.spaceBefore.map { NSNumber(value: $0) }
+        attrs[.sermonSpaceAfter] = extras.spaceAfter.map { NSNumber(value: $0) }
         return attrs
     }
 
@@ -208,7 +258,7 @@ enum SermonParagraphStyleCodec {
             let existingAlignment = (value as? NSParagraphStyle)?.alignment
             let paragraphStyle = makeParagraphStyle(
                 for: style, baseFont: baseFont, settings: settings, alignment: existingAlignment,
-                lineHeightMultiple: extras.lineHeight.map { CGFloat($0) }, list: extras.list
+                lineHeightMultiple: extras.lineHeight.map { CGFloat($0) }, list: extras.list, overrides: extras
             )
             storage.addAttribute(.paragraphStyle, value: paragraphStyle, range: subrange)
         }
@@ -378,6 +428,7 @@ enum SermonParagraphStyleCodec {
     /// 문단 단위 attribute — 타이핑 속성을 맞출 때 캐럿 문단 첫 글자에서 가져온다.
     static let paragraphLevelKeys: [NSAttributedString.Key] = [
         .paragraphStyle, .sermonParagraphStyle, .sermonLineHeight, .sermonListKind, .sermonVerseBoxFill, .sermonVerseBoxBar,
+        .sermonFirstLineIndent, .sermonLeftIndent, .sermonRightIndent, .sermonSpaceBefore, .sermonSpaceAfter,
     ]
 
     /// 실행 취소로 되돌린 뒤의 타이핑 속성. 문단 attribute는 캐럿 문단 첫 글자(문서 끝의 빈 줄이면 바로 앞 글자)에서,
@@ -437,9 +488,19 @@ enum SermonParagraphStyleCodec {
     /// 불러오기·스타일 적용·타이핑 속성이 모두 이 함수를 써서 같은 모양이 된다.
     static func makeParagraphStyle(
         for style: SermonParagraphStyle, baseFont: PlatformFont, settings: UserSettingsStore, alignment: NSTextAlignment? = nil,
-        lineHeightMultiple: CGFloat? = nil, list: SermonListKind? = nil
+        lineHeightMultiple: CGFloat? = nil, list: SermonListKind? = nil, overrides: SermonParagraphExtras? = nil
     ) -> NSMutableParagraphStyle {
-        let metrics = SermonStyleMetrics.metrics(for: style, fontSize: baseFont.pointSize)
+        var metrics = SermonStyleMetrics.metrics(for: style, fontSize: baseFont.pointSize)
+        // [2026-11-14] 문단별 직접 지정(들여쓰기·간격)이 있으면 그 값을 쓴다. 말씀구절은 박스 안여백이 간격에 포함돼 있어
+        // 위·아래 직접 지정값에도 그 안여백을 더한다(박스가 간격 안쪽에 그려지므로 레이아웃이 어긋나지 않게).
+        if let overrides {
+            let verseExtra = style == .verseQuote ? baseFont.pointSize * SermonStyleMetrics.versePaddingRatio : 0
+            if let value = overrides.spaceBefore { metrics.spacingBefore = CGFloat(value) + verseExtra }
+            if let value = overrides.spaceAfter { metrics.spacingAfter = CGFloat(value) + verseExtra }
+            if let value = overrides.leftIndent { metrics.leftIndent = CGFloat(value) }
+            if let value = overrides.rightIndent { metrics.rightIndent = CGFloat(value) }
+            if let value = overrides.firstLineIndent { metrics.firstLineIndent = CGFloat(value) }
+        }
         let paragraphStyle = NSMutableParagraphStyle()
         // 줄 높이 = 글자 크기 × 배수(CSS `line-height`와 같은 해석). 글꼴 자체의 기본 줄 높이(한글 글꼴은 대개 1.4~1.5배)를 넘는 만큼만
         // `lineSpacing`(줄 아래 추가 간격)으로 준다 — 기본 줄 높이에 배수를 또 곱하면 간격이 두 배 가까이 벌어진다.
@@ -578,6 +639,8 @@ enum SermonParagraphStyleCodec {
 /// 수정키 없는 F1~F6만 가로채고 나머지 키는 `super`로 넘긴다. 뷰어는 일반 `UITextView`를 쓰므로 영향 없음.
 final class SermonEditorUITextView: UITextView {
     var onStyleShortcut: ((SermonParagraphStyle) -> Void)?
+    /// [2026-11-14] 구절 치환 단축키(설정에서 바꿀 수 있는 ⌃R/⌃T). 처리했으면 true.
+    var onVerseSubstitute: ((SermonVerseSubstituteMode) -> Bool)?
 
     private static let functionKeyCodes: [UIKeyboardHIDUsage] = [
         .keyboardF1, .keyboardF2, .keyboardF3,
@@ -585,6 +648,20 @@ final class SermonEditorUITextView: UITextView {
     ]
 
     override func pressesBegan(_ presses: Set<UIPress>, with event: UIPressesEvent?) {
+        if isEditable, presses.count == 1, let key = presses.first?.key,
+           !key.modifierFlags.intersection([.control, .alternate, .command]).isEmpty,
+           let letter = SermonKeyLetters.letter(forHIDUsage: key.keyCode.rawValue) {
+            let flags = key.modifierFlags
+            for mode in [SermonVerseSubstituteMode.verseStyle, .inline]
+            where SermonShortcut.load(mode: mode).matches(
+                characters: letter, control: flags.contains(.control), option: flags.contains(.alternate),
+                command: flags.contains(.command), shift: flags.contains(.shift)
+            ) {
+                // 한글 조합 중이면 조합을 먼저 확정한다.
+                if markedTextRange != nil { unmarkText() }
+                if onVerseSubstitute?(mode) == true { return }
+            }
+        }
         let styles = SermonParagraphStyle.allCases
         if isEditable {
             var handled = false
@@ -649,6 +726,10 @@ final class SermonParagraphEditingProxy {
     var activeStyle: SermonParagraphStyle = .body
     /// 커서 문단의 줄간격/목록 지정 — 툴바 줄간격·목록 메뉴의 체크 표시에 쓴다(`activeStyle`과 같은 시점에 갱신).
     var activeExtras = SermonParagraphExtras.none
+    /// [2026-11-14] 구절 치환 실행기 — 에디터 화면(`SermonEditorView`)이 번역본·저장 로직과 함께 채운다. 단축키·우클릭 메뉴·툴바가 공유한다.
+    @ObservationIgnored var onVerseSubstitute: ((SermonVerseSubstituteMode) -> Void)?
+    /// [2026-11-14] 커서(선택 시작) 위치의 글꼴·크기·색·정렬 — 툴바에 "현재 값"을 보여 준다(`refreshActiveStyle`과 같은 시점에 갱신).
+    var activeFormat = SermonActiveFormat()
 
     /// `currentParagraphStyle()`을 읽어 `activeStyle`에 반영한다(값이 같으면 건드리지 않아 불필요한 뷰 갱신을 피한다).
     func refreshActiveStyle() {
@@ -656,6 +737,7 @@ final class SermonParagraphEditingProxy {
         if activeStyle != style { activeStyle = style }
         let extras = currentExtras()
         if activeExtras != extras { activeExtras = extras }
+        refreshActiveFormat()
     }
 
     func toggleBold() { toggleTrait(.traitBold, actionName: String(localized: "굵게")) }
@@ -730,7 +812,7 @@ final class SermonParagraphEditingProxy {
     /// 범위가 비어 있으면(캐럿만 있음, 글자가 없는 문단) 바뀌는 것은 타이핑 속성뿐이라 등록하지 않는다(타이핑 속성은 문서 내용이 아니다).
     /// 적용 전후 범위의 attributed 내용이 같으면(이미 같은 색·같은 정렬 등) 바뀐 것이 없으므로 등록하지 않는다 — 빈 실행 취소 항목 방지.
     /// 비교(`isEqual(to:)`)와 스냅샷은 범위 길이에 비례(O(n))하며, 문서 전체를 선택해도 적용 자체와 같은 차수다.
-    private func performUndoableAttributeEdit(on textView: UITextView, range: NSRange, actionName: String, _ edit: (NSTextStorage) -> Void) {
+    func performUndoableAttributeEdit(on textView: UITextView, range: NSRange, actionName: String, _ edit: (NSTextStorage) -> Void) {
         let storage = textView.textStorage
         guard range.length > 0, range.location >= 0, NSMaxRange(range) <= storage.length else {
             edit(storage)
@@ -809,10 +891,7 @@ final class SermonParagraphEditingProxy {
             return SermonParagraphStyleCodec.extras(in: storage, at: paragraph.location)
         }
         let attrs = textView.typingAttributes
-        return SermonParagraphExtras(
-            lineHeight: (attrs[.sermonLineHeight] as? NSNumber)?.doubleValue,
-            list: (attrs[.sermonListKind] as? String).flatMap(SermonListKind.init(rawValue:))
-        )
+        return SermonParagraphStyleCodec.extras(fromAttributes: attrs)
     }
 
     /// 선택한 문단(들)의 줄간격 배수를 바꾼다. `nil`이면 스타일 기본값으로 되돌린다.
@@ -826,7 +905,7 @@ final class SermonParagraphEditingProxy {
         updateExtra(\.list, to: kind, settings: settings, actionName: String(localized: "목록"))
     }
 
-    private func updateExtra<Value>(
+    func updateExtra<Value>(
         _ keyPath: WritableKeyPath<SermonParagraphExtras, Value>, to value: Value, settings: UserSettingsStore, actionName: String
     ) {
         guard let textView else { return }
@@ -985,7 +1064,7 @@ final class SermonParagraphEditingProxy {
         textView.typingAttributes = attrs
     }
 
-    private func applyTypingAttributes(for style: SermonParagraphStyle, settings: UserSettingsStore, to textView: UITextView) {
+    func applyTypingAttributes(for style: SermonParagraphStyle, settings: UserSettingsStore, to textView: UITextView) {
         let baseFont = settings.sermonPlatformFont(for: style)
         var attrs = textView.typingAttributes
         attrs[.font] = baseFont
@@ -993,10 +1072,15 @@ final class SermonParagraphEditingProxy {
         let extras = currentExtras()
         attrs[.paragraphStyle] = SermonParagraphStyleCodec.makeParagraphStyle(
             for: style, baseFont: baseFont, settings: settings,
-            lineHeightMultiple: extras.lineHeight.map { CGFloat($0) }, list: extras.list
+            lineHeightMultiple: extras.lineHeight.map { CGFloat($0) }, list: extras.list, overrides: extras
         )
         attrs[.sermonLineHeight] = extras.lineHeight.map { NSNumber(value: $0) }
         attrs[.sermonListKind] = extras.list?.rawValue
+        attrs[.sermonFirstLineIndent] = extras.firstLineIndent.map { NSNumber(value: $0) }
+        attrs[.sermonLeftIndent] = extras.leftIndent.map { NSNumber(value: $0) }
+        attrs[.sermonRightIndent] = extras.rightIndent.map { NSNumber(value: $0) }
+        attrs[.sermonSpaceBefore] = extras.spaceBefore.map { NSNumber(value: $0) }
+        attrs[.sermonSpaceAfter] = extras.spaceAfter.map { NSNumber(value: $0) }
         attrs[.sermonParagraphStyle] = style.rawValue
         attrs[.sermonVerseBoxFill] = style == .verseQuote ? settings.sermonVerseQuoteBackgroundPlatformColor : nil
         attrs[.sermonVerseBoxBar] = style == .verseQuote ? PlatformColor(settings.sermonVerseQuoteBarColor) : nil
@@ -1071,6 +1155,13 @@ struct SermonParagraphEditorRepresentable: UIViewRepresentable {
             editorTextView.onStyleShortcut = { [proxy, settings] style in
                 proxy.applyParagraphStyle(style, settings: settings)
                 proxy.activeStyle = style
+            }
+            // 구절 치환 단축키 — 참조가 없거나 이 텍스트뷰가 프록시 대상이 아니면 키를 그대로 넘긴다.
+            editorTextView.onVerseSubstitute = { [weak editorTextView, proxy] mode in
+                guard let editorTextView, proxy.textView === editorTextView,
+                      proxy.canSubstituteVerse(), let handler = proxy.onVerseSubstitute else { return false }
+                handler(mode)
+                return true
             }
             // ⌘B/⌘I·선택 메뉴 B/I — 툴바 굵게/기울임 버튼과 같은 경로.
             editorTextView.onToggleBold = { [weak editorTextView, proxy] in
@@ -1167,6 +1258,22 @@ struct SermonParagraphEditorRepresentable: UIViewRepresentable {
             }
         }
 
+        /// 선택/캐럿이 성경 참조일 때 편집 메뉴(길게 누르기·Apple Pencil·포인터 보조 클릭)에 치환 항목을 맨 위에 넣는다.
+        func textView(_ textView: UITextView, editMenuForTextIn range: NSRange, suggestedActions: [UIMenuElement]) -> UIMenu? {
+            let proxy = parent.proxy
+            guard textView.isEditable, proxy.textView === textView, proxy.onVerseSubstitute != nil, proxy.canSubstituteVerse() else { return nil }
+            func title(_ base: String, _ mode: SermonVerseSubstituteMode) -> String {
+                "\(base)  \(SermonShortcut.load(mode: mode).label)"
+            }
+            let verse = UIAction(title: title(String(localized: "말씀구절로 치환"), .verseStyle), image: UIImage(systemName: "text.quote")) { [weak proxy] _ in
+                proxy?.onVerseSubstitute?(.verseStyle)
+            }
+            let inline = UIAction(title: title(String(localized: "현재 스타일로 치환"), .inline), image: UIImage(systemName: "text.insert")) { [weak proxy] _ in
+                proxy?.onVerseSubstitute?(.inline)
+            }
+            return UIMenu(children: [UIMenu(options: .displayInline, children: [verse, inline])] + suggestedActions)
+        }
+
         func textStorage(
             _ textStorage: NSTextStorage, didProcessEditing editedMask: NSTextStorage.EditActions,
             range editedRange: NSRange, changeInLength delta: Int
@@ -1199,13 +1306,73 @@ struct SermonParagraphEditorRepresentable: UIViewRepresentable {
 /// 시스템 설정의 "F1, F2 등의 키를 표준 기능 키로 사용"을 켜야 앱에 전달된다.
 final class SermonEditorNSTextView: NSTextView {
     var onStyleShortcut: ((SermonParagraphStyle) -> Void)?
+    /// [2026-11-14] 구절 치환 단축키·우클릭 메뉴. 처리했으면 true.
+    var onVerseSubstitute: ((SermonVerseSubstituteMode) -> Bool)?
+    /// 현재 선택/캐럿에서 치환할 참조가 있는지(우클릭 메뉴 표시용).
+    var canSubstituteVerse: (() -> Bool)?
 
     private static let functionKeys: [Int] = [
         NSF1FunctionKey, NSF2FunctionKey, NSF3FunctionKey,
         NSF4FunctionKey, NSF5FunctionKey, NSF6FunctionKey,
     ]
 
+    /// 설정의 구절 치환 단축키와 맞으면 실행한다(⌃R/⌃T 기본). 참조가 없으면 false라 키는 원래 동작으로 간다.
+    private func handleVerseShortcut(_ event: NSEvent) -> Bool {
+        guard isEditable, let handler = onVerseSubstitute else { return false }
+        let flags = event.modifierFlags.intersection(.deviceIndependentFlagsMask)
+        guard !flags.intersection([.control, .option, .command]).isEmpty else { return false }
+        let characters = (event.charactersIgnoringModifiers ?? "").lowercased()
+        let letter: String
+        if characters.count == 1, characters.unicodeScalars.allSatisfy(\.isASCII) {
+            letter = characters
+        } else if let mapped = SermonKeyLetters.macKeyCodes[event.keyCode] {
+            letter = mapped
+        } else {
+            return false
+        }
+        for mode in [SermonVerseSubstituteMode.verseStyle, .inline]
+        where SermonShortcut.load(mode: mode).matches(
+            characters: letter, control: flags.contains(.control), option: flags.contains(.option),
+            command: flags.contains(.command), shift: flags.contains(.shift)
+        ) {
+            if hasMarkedText() { unmarkText() }
+            if handler(mode) { return true }
+        }
+        return false
+    }
+
+    @objc private func substituteVerseStyleAction(_ sender: Any?) { _ = onVerseSubstitute?(.verseStyle) }
+    @objc private func substituteInlineAction(_ sender: Any?) { _ = onVerseSubstitute?(.inline) }
+
+    /// 우클릭 메뉴 맨 위에 구절 치환 항목을 넣는다. 클릭한 자리가 선택 밖이어도 그 자리의 성경 참조는 대상으로 삼는다.
+    override func menu(for event: NSEvent) -> NSMenu? {
+        let base = super.menu(for: event)
+        guard isEditable, onVerseSubstitute != nil else { return base }
+        let point = convert(event.locationInWindow, from: nil)
+        let index = characterIndexForInsertion(at: point)
+        let selection = selectedRange()
+        let length = (string as NSString).length
+        if index <= length, !(selection.length > 0 && NSLocationInRange(index, selection)),
+           SermonQuoteService.target(in: string, selection: NSRange(location: index, length: 0)) != nil {
+            setSelectedRange(NSRange(location: index, length: 0))
+        }
+        guard canSubstituteVerse?() == true, let base else { return base }
+        func item(_ title: String, _ mode: SermonVerseSubstituteMode, _ action: Selector, _ symbol: String) -> NSMenuItem {
+            let shortcut = SermonShortcut.load(mode: mode)
+            let menuItem = NSMenuItem(title: title, action: action, keyEquivalent: shortcut.key)
+            menuItem.keyEquivalentModifierMask = shortcut.modifier.eventModifierFlags
+            menuItem.target = self
+            menuItem.image = NSImage(systemSymbolName: symbol, accessibilityDescription: nil)
+            return menuItem
+        }
+        base.insertItem(item(String(localized: "말씀구절로 치환"), .verseStyle, #selector(substituteVerseStyleAction(_:)), "text.quote"), at: 0)
+        base.insertItem(item(String(localized: "현재 스타일로 치환"), .inline, #selector(substituteInlineAction(_:)), "text.insert"), at: 1)
+        base.insertItem(.separator(), at: 2)
+        return base
+    }
+
     override func keyDown(with event: NSEvent) {
+        if handleVerseShortcut(event) { return }
         let styles = SermonParagraphStyle.allCases
         if isEditable,
            event.modifierFlags.intersection([.shift, .control, .option, .command]).isEmpty,
@@ -1234,6 +1401,7 @@ final class SermonEditorNSTextView: NSTextView {
     private static let ansiIKeyCode: UInt16 = 0x22
 
     override func performKeyEquivalent(with event: NSEvent) -> Bool {
+        if event.type == .keyDown, window?.isKeyWindow == true, window?.firstResponder === self, handleVerseShortcut(event) { return true }
         if isEditable, event.type == .keyDown, window?.isKeyWindow == true, window?.firstResponder === self,
            event.modifierFlags.intersection(.deviceIndependentFlagsMask).subtracting([.capsLock, .numericPad, .function]) == .command,
            let handler = traitHandler(for: event) {
@@ -1276,6 +1444,10 @@ final class SermonParagraphEditingProxy {
     var activeStyle: SermonParagraphStyle = .body
     /// 커서 문단의 줄간격/목록 지정 — 툴바 줄간격·목록 메뉴의 체크 표시에 쓴다(`activeStyle`과 같은 시점에 갱신).
     var activeExtras = SermonParagraphExtras.none
+    /// [2026-11-14] 구절 치환 실행기 — 에디터 화면(`SermonEditorView`)이 번역본·저장 로직과 함께 채운다. 단축키·우클릭 메뉴·툴바가 공유한다.
+    @ObservationIgnored var onVerseSubstitute: ((SermonVerseSubstituteMode) -> Void)?
+    /// [2026-11-14] 커서(선택 시작) 위치의 글꼴·크기·색·정렬 — 툴바에 "현재 값"을 보여 준다(`refreshActiveStyle`과 같은 시점에 갱신).
+    var activeFormat = SermonActiveFormat()
 
     /// `currentParagraphStyle()`을 읽어 `activeStyle`에 반영한다(값이 같으면 건드리지 않아 불필요한 뷰 갱신을 피한다).
     func refreshActiveStyle() {
@@ -1283,6 +1455,7 @@ final class SermonParagraphEditingProxy {
         if activeStyle != style { activeStyle = style }
         let extras = currentExtras()
         if activeExtras != extras { activeExtras = extras }
+        refreshActiveFormat()
     }
 
     func toggleBold() { toggleTrait(.bold, actionName: String(localized: "굵게")) }
@@ -1308,7 +1481,7 @@ final class SermonParagraphEditingProxy {
     /// 빈 실행 취소 항목 방지: `shouldChangeText`는 바꾸기 전에 불러야 하고, 등록된 항목 하나만 골라 지우는 공개 API가 `UndoManager`에 없다
     /// (`removeAllActions(withTarget:)`는 NSTextView 내부 target의 다른 항목까지 지운다). 그래서 문서 사본(`NSTextStorage`)에 먼저 적용해 보고
     /// 범위의 attributed 내용이 그대로면 실제 적용·등록을 모두 건너뛴다. 사본 복사·비교는 문서 길이에 비례(O(n))한다.
-    private func performUndoableAttributeEdit(on textView: NSTextView, range: NSRange, actionName: String, _ edit: (NSTextStorage) -> Void) {
+    func performUndoableAttributeEdit(on textView: NSTextView, range: NSRange, actionName: String, _ edit: (NSTextStorage) -> Void) {
         guard let storage = textView.textStorage else { return }
         guard range.length > 0, range.location >= 0, NSMaxRange(range) <= storage.length else {
             edit(storage)
@@ -1377,10 +1550,7 @@ final class SermonParagraphEditingProxy {
             return SermonParagraphStyleCodec.extras(in: storage, at: paragraph.location)
         }
         let attrs = textView.typingAttributes
-        return SermonParagraphExtras(
-            lineHeight: (attrs[.sermonLineHeight] as? NSNumber)?.doubleValue,
-            list: (attrs[.sermonListKind] as? String).flatMap(SermonListKind.init(rawValue:))
-        )
+        return SermonParagraphStyleCodec.extras(fromAttributes: attrs)
     }
 
     func applyLineHeight(_ multiple: Double?, settings: UserSettingsStore) {
@@ -1392,7 +1562,7 @@ final class SermonParagraphEditingProxy {
         updateExtra(\.list, to: kind, settings: settings, actionName: String(localized: "목록"))
     }
 
-    private func updateExtra<Value>(
+    func updateExtra<Value>(
         _ keyPath: WritableKeyPath<SermonParagraphExtras, Value>, to value: Value, settings: UserSettingsStore, actionName: String
     ) {
         guard let textView, let storage = textView.textStorage else { return }
@@ -1449,7 +1619,7 @@ final class SermonParagraphEditingProxy {
         return currentParagraphIndex + 1
     }
 
-    private func applyTypingAttributes(for style: SermonParagraphStyle, settings: UserSettingsStore, to textView: NSTextView) {
+    func applyTypingAttributes(for style: SermonParagraphStyle, settings: UserSettingsStore, to textView: NSTextView) {
         let baseFont = settings.sermonPlatformFont(for: style)
         var attrs = textView.typingAttributes
         attrs[.font] = baseFont
@@ -1457,10 +1627,15 @@ final class SermonParagraphEditingProxy {
         let extras = currentExtras()
         attrs[.paragraphStyle] = SermonParagraphStyleCodec.makeParagraphStyle(
             for: style, baseFont: baseFont, settings: settings,
-            lineHeightMultiple: extras.lineHeight.map { CGFloat($0) }, list: extras.list
+            lineHeightMultiple: extras.lineHeight.map { CGFloat($0) }, list: extras.list, overrides: extras
         )
         attrs[.sermonLineHeight] = extras.lineHeight.map { NSNumber(value: $0) }
         attrs[.sermonListKind] = extras.list?.rawValue
+        attrs[.sermonFirstLineIndent] = extras.firstLineIndent.map { NSNumber(value: $0) }
+        attrs[.sermonLeftIndent] = extras.leftIndent.map { NSNumber(value: $0) }
+        attrs[.sermonRightIndent] = extras.rightIndent.map { NSNumber(value: $0) }
+        attrs[.sermonSpaceBefore] = extras.spaceBefore.map { NSNumber(value: $0) }
+        attrs[.sermonSpaceAfter] = extras.spaceAfter.map { NSNumber(value: $0) }
         attrs[.sermonParagraphStyle] = style.rawValue
         attrs[.sermonVerseBoxFill] = style == .verseQuote ? settings.sermonVerseQuoteBackgroundPlatformColor : nil
         attrs[.sermonVerseBoxBar] = style == .verseQuote ? PlatformColor(settings.sermonVerseQuoteBarColor) : nil
@@ -1632,6 +1807,16 @@ struct SermonParagraphEditorRepresentable: NSViewRepresentable {
             editorTextView.onStyleShortcut = { [proxy, settings] style in
                 proxy.applyParagraphStyle(style, settings: settings)
                 proxy.activeStyle = style
+            }
+            editorTextView.onVerseSubstitute = { [weak editorTextView, proxy] mode in
+                guard let editorTextView, proxy.textView === editorTextView,
+                      proxy.canSubstituteVerse(), let handler = proxy.onVerseSubstitute else { return false }
+                handler(mode)
+                return true
+            }
+            editorTextView.canSubstituteVerse = { [weak editorTextView, proxy] in
+                guard let editorTextView, proxy.textView === editorTextView else { return false }
+                return proxy.canSubstituteVerse()
             }
             // ⌘B/⌘I — 툴바 굵게/기울임 버튼과 같은 경로.
             editorTextView.onToggleBold = { [weak editorTextView, proxy] in

@@ -1,0 +1,732 @@
+## 4:3:8
+KO: 그리고 그들은 회막의 모든 기구를 지키며, 이스라엘 자손의 직무를 (수행)하여 성막의 봉사를 섬길지니라.
+1 וְשָׁמְרוּ = and they will keep (to keep)
+2 אֶת־ = <obj.>
+3 כָּל־ = all
+4 כְּלֵי = [the] articles of (article|utensil)
+5 אֹהֶל = [the] tent of (tent)
+6 מוֹעֵד = meeting
+7 וְאֶת־ = and <obj.>
+8 מִשְׁמֶרֶת = [the] duty of (charge)
+9 בְּנֵי = [the] people of (son)
+10 יִשְׂרָאֵל = Israel
+11 לַעֲבֹד = by serving (to serve)
+12 אֶת־ = <obj.>
+13 עֲבֹדַת = [the] service of (service)
+14 הַמִּשְׁכָּן = the tabernacle (tabernacle)
+
+## 4:3:9
+KO: 너는 레위인들을 아론과 그의 아들들에게 주라. 그들은 이스라엘 자손들에게서 그에게 온전히 주어진 자들이다.
+1 וְנָתַתָּה = and you will give
+2 אֶת־ = <obj.> ([Obj.])
+3 הַלְוִיִּם = the Levites (Levi)
+4 לְאַהֲרֹן = to Aaron (Aaron)
+5 וּלְבָנָיו = and to sons his
+6 נְתוּנִם = [are] assigned
+7 נְתוּנִם = assigned
+8 הֵמָּה = they (they(masc.))
+9 לוֹ = to <the> him (him)
+10 מֵאֵת = from with (with)
+11 בְּנֵי = [the] people of
+12 יִשְׂרָאֵל = Israel
+
+## 4:3:10
+KO: 그리고 아론과 그의 아들들을 너는 임명하라. 그리고 그들이 그들의 제사장 직분을 지킬 것이며, 가까이 다가오는 외인은 죽임을 당할 것이다.
+1 וְאֶת־ = and <obj.>
+2 אַהֲרֹן = Aaron
+3 וְאֶת־ = and <obj.>
+4 בָּנָיו = sons his (son)
+5 תִּפְקֹד = you will appoint (to reckon)
+6 וְשָׁמְרוּ = and they will keep (to keep)
+7 אֶת־ = <obj.>
+8 כְּהֻנָּתָם = priesthood their (priesthood)
+9 וְהַזָּר = and the stranger (be a stranger)
+10 הַקָּרֵב = <the> approaching (approaching)
+11 יוּמָת פ = he will be put to death (to die)
+
+## 4:3:11
+KO: 그리고 여호와께서 모세에게 말씀하여 이르셨다.
+1 וַיְדַבֵּר = and he spoke (to speak)
+2 יְהוָה = Yahweh (LORD)
+3 אֶל־ = to (to(wards))
+4 מֹשֶׁה = Moses
+5 לֵּאמֹר = <to> saying (to say)
+
+## 4:3:12
+KO: 그리고 보라, 내가 이스라엘 자손의 한가운데로부터 레위인들을 취하여 이스라엘 자손의 태를 여는 모든 첫 태생들을 대신하게 하였으니, 레위인들은 내 것이라.
+1 וַאֲנִי = and I (I)
+2 הִנֵּה = here! (behold)
+3 לָקַחְתִּי = I have taken (to take)
+4 אֶת־ = <obj.> ([Obj.])
+5 הַלְוִיִּם = the Levites
+6 מִתּוֹךְ = from among (midst)
+7 בְּנֵי = [the] people of
+8 יִשְׂרָאֵל = Israel
+9 תַּחַת = in place of (underneath)
+10 כָּל־ = every (all)
+11 בְּכוֹר = firstborn
+12 פֶּטֶר = [the] firstborn of (firstborn)
+13 רֶחֶם = a womb (womb)
+14 מִבְּנֵי = from [the] people of
+15 יִשְׂרָאֵל = Israel
+16 וְהָיוּ = and they will belong (to be)
+17 לִי = to <the> me (me)
+18 הַלְוִיִּם = the Levites
+
+## 4:3:13
+KO: 왜냐하면 모든 첫 태생은 내 것이기 때문이다. 내가 애굽 땅에서 모든 첫 태생을 치던 날에, 이스라엘의 모든 첫 태생(사람으로부터 짐승까지)을 나를 위하여 거룩하게 구별하였기 때문이다. 그들은 내 것이 될 것이다. 나, 여호와이다.
+1 כִּי = for
+2 לִי = [belongs] to <the> me
+3 כָּל־ = every
+4 בְּכוֹר = firstborn
+5 בְּיוֹם = on [the] day (day;_when)
+6 הַכֹּתִי = struck I (to smite)
+7 כָל־ = every
+8 בְּכוֹר = firstborn
+9 בְּאֶרֶץ = in [the] land of (land)
+10 מִצְרַיִם = Egypt
+11 הִקְדַּשְׁתִּי = I set apart (to consecrate)
+12 לִי = for <the> myself
+13 כָל־ = every
+14 בְּכוֹר = firstborn
+15 בְּיִשְׂרָאֵל = in Israel (Israel)
+16 מֵאָדָם = from humankind (man)
+17 עַד־ = unto (till)
+18 בְּהֵמָה = livestock (animal)
+19 לִי = to <the> me
+20 יִהְיוּ = they will belong (to be)
+21 אֲנִי = I
+22 יְהוָה ס = [am] Yahweh (LORD)
+
+## 4:3:14
+KO: 그리고 여호와께서 시내 광야에서 모세에게 말씀하셨다, 가라사대.
+1 וַיְדַבֵּר = and he spoke (to speak)
+2 יְהוָה = Yahweh (LORD)
+3 אֶל־ = to (to(wards))
+4 מֹשֶׁה = Moses
+5 בְּמִדְבַּר = in [the] wilderness of (wilderness)
+6 סִינַי = Sinai (of Sinai)
+7 לֵאמֹר = <to> saying (to say)
+
+## 4:3:15
+KO: 레위 자손을 그들의 조상들의 집과 그들의 가족들에 따라 계수하라. 한 달 이상의 모든 남자를 너는 그들을 계수하라.
+1 פְּקֹד = enroll
+2 אֶת־ = <obj.> ([Obj.])
+3 בְּנֵי = [the] descendants of
+4 לֵוִי = Levi
+5 לְבֵית = to [the] house of (house)
+6 אֲבֹתָם = ancestors their (father)
+7 לְמִשְׁפְּחֹתָם = to clans their (family)
+8 כָּל־ = every (all)
+9 זָכָר = male
+10 מִבֶּן־ = from a son of
+11 חֹדֶשׁ = a month (month)
+12 וָמַעְלָה = and up -wards (above)
+13 תִּפְקְדֵם = you will enroll them
+
+## 4:3:16
+KO: 그리고 모세는 여호와의 입에 따라, 그가 명령받은 것처럼 그들을 계수하였다.
+1 וַיִּפְקֹד = and he enrolled (to reckon)
+2 אֹתָם = <obj.> them ([Obj.])
+3 מֹשֶׁה = Moses
+4 עַל־ = on (upon)
+5 פִּי = [the] mouth of (lip)
+6 יְהוָה = Yahweh (LORD)
+7 כַּאֲשֶׁר = just as (as which)
+8 צֻוָּה = he had been commanded (to command)
+
+## 4:3:17
+KO: 그리고 레위의 아들들의 이름은 이러하니, 게르손과 고핫과 므라리라.
+1 וַיִּהְיוּ־ = and they were (to be)
+2 אֵלֶּה = these
+3 בְנֵי־ = [the] sons of (son)
+4 לֵוִי = Levi
+5 בִּשְׁמֹתָם = by names their (name)
+6 גֵּרְשׁוֹן = Gershon
+7 וּקְהָת = and Kohath (Kohath)
+8 וּמְרָרִי = and Merari (Merari)
+
+## 4:3:18
+KO: 그리고 이것들은 게르손 자손들의 이름들이니, 그들의 가족들에 따라 립니와 시므이다.
+1 וְאֵלֶּה = and these (these)
+2 שְׁמוֹת = [were] [the] names of (name)
+3 בְּנֵי־ = [the] sons of (son)
+4 גֵרְשׁוֹן = Gershon
+5 לְמִשְׁפְּחֹתָם = to clans their (family)
+6 לִבְנִי = Libni
+7 וְשִׁמְעִי = and Shimei (Shimei)
+
+## 4:3:19
+KO: 그리고 고핫의 아들들은 그들의 가족들에 따라 이러하니, 아므람과 이스할과 헤브론과 웃시엘이라.
+1 וּבְנֵי = and [the] sons of (son)
+2 קְהָת = Kohath
+3 לְמִשְׁפְּחֹתָם = to clans their (family)
+4 עַמְרָם = Amram
+5 וְיִצְהָר = and Izhar (Izhar)
+6 חֶבְרוֹן = Hebron
+7 וְעֻזִּיאֵל = and Uzziel (Uzziel)
+
+## 4:3:20
+KO: 그리고 므라리의 아들들은 그들의 가족대로 말리와 무시이니, 이들이 레위인들의 가족들 곧 그들의 조상들의 가문대로 된 자들이라.
+1 וּבְנֵי = and [the] sons of (son)
+2 מְרָרִי = Merari
+3 לְמִשְׁפְּחֹתָם = to clans their
+4 מַחְלִי = Mahli
+5 וּמוּשִׁי = and Mushi (Mushi)
+6 אֵלֶּה = these
+7 הֵם = they (they(masc.))
+8 מִשְׁפְּחֹת = [were] [the] clans of
+9 הַלֵּוִי = the Levites (Levi)
+10 לְבֵית = to [the] house of (house)
+11 אֲבֹתָם = ancestors their (father)
+
+## 4:3:21
+KO: 게르손에게는 립니의 가족과 시므이의 가족이 있으니, 이들이 곧 게르손의 가족들이다.
+1 לְגֵרְשׁוֹן = [belonged] to Gershon (Gershon)
+2 מִשְׁפַּחַת = [the] clan of
+3 הַלִּבְנִי = the Libnite[s] (Libnite)
+4 וּמִשְׁפַּחַת = and [the] clan of
+5 הַשִּׁמְעִי = the Shimeite[s] (Shimeite)
+6 אֵלֶּה = these
+7 הֵם = they (they(masc.))
+8 מִשְׁפְּחֹת = [were] [the] clans of
+9 הַגֵּרְשֻׁנִּי = the Gershonite[s] (Gershonite)
+
+## 4:3:22
+KO: 그들의 계수함을 받은 자들, 즉 일 개월 이상 된 모든 남자의 수효에 따른 그들의 계수함을 받은 자들은 칠천오백 명이었다.
+1 פְּקֻדֵיהֶם = enrolled [men] their
+2 בְּמִסְפַּר = by [the] number of (number)
+3 כָּל־ = every (all)
+4 זָכָר = male
+5 מִבֶּן־ = from a son of (son)
+6 חֹדֶשׁ = a month (month)
+7 וָמָעְלָה = and up -wards (above)
+8 פְּקֻדֵיהֶם = enrolled [men] their
+9 שִׁבְעַת = [were] seven (seven)
+10 אֲלָפִים = thousand<s> (thousand)
+11 וַחֲמֵשׁ = and five (five)
+12 מֵאוֹת = hundred<s> (hundred)
+
+## 4:3:23
+KO: 게르손의 종족들은 그 성막 뒤편 곧 서쪽으로 진을 칠 것이다.
+1 מִשְׁפְּחֹת = [the] clans of (family)
+2 הַגֵּרְשֻׁנִּי = the Gershonite[s] (Gershonite)
+3 אַחֲרֵי = behind (after)
+4 הַמִּשְׁכָּן = the tabernacle (tabernacle)
+5 יַחֲנוּ = they will encamp (to camp)
+6 יָמָּה = west -ward (sea)
+
+## 4:3:24
+KO: 그리고 게르손 사람들의 아버지의 집의 족장은 라엘의 아들 엘리아삽이다.
+1 וּנְשִׂיא = and [the] leader of (leader)
+2 בֵית־ = [the] house of (house)
+3 אָב = a father (father)
+4 לַגֵּרְשֻׁנִּי = of the Gershonite[s] (Gershonite)
+5 אֶלְיָסָף = [was] Eliasaph (Eliasaph)
+6 בֶּן־ = [the] son of (son)
+7 לָאֵל = Lael
+
+## 4:3:25
+KO: 그리고 게르손 자손의 회막에 대한 임무는 성막과 장막과 그 덮개와 회막 입구의 휘장과,
+1 וּמִשְׁמֶרֶת = and [the] duty of (charge)
+2 בְּנֵי־ = [the] descendants of (son)
+3 גֵרְשׁוֹן = Gershon
+4 בְּאֹהֶל = in [the] tent of
+5 מוֹעֵד = meeting
+6 הַמִּשְׁכָּן = [was] the tabernacle (tabernacle)
+7 וְהָאֹהֶל = and the tent
+8 מִכְסֵהוּ = covering its (covering)
+9 וּמָסַךְ = and [the] screen of (covering)
+10 פֶּתַח = [the] entrance of (entrance)
+11 אֹהֶל = [the] tent of
+12 מוֹעֵד = meeting
+
+## 4:3:26
+KO: 그리고 뜰의 휘장들과, 성막과 제단 사면에 있는 뜰의 입구 휘장, 그리고 그것의 모든 봉사에 쓰이는 그것의 줄들이니라.
+1 וְקַלְעֵי = and [the] curtains of (curtain)
+2 הֶחָצֵר = the courtyard
+3 וְאֶת־ = and <obj.>
+4 מָסַךְ = [the] screen of (covering)
+5 פֶּתַח = [the] entrance of (entrance)
+6 הֶחָצֵר = the courtyard
+7 אֲשֶׁר = which
+8 עַל־ = [is] at
+9 הַמִּשְׁכָּן = the tabernacle (tabernacle)
+10 וְעַל־ = and at
+11 הַמִּזְבֵּחַ = the altar (altar)
+12 סָבִיב = all around (around)
+13 וְאֵת = and <obj.>
+14 מֵיתָרָיו = ropes its (cord)
+15 לְכֹל = for all (all)
+16 עֲבֹדָתוֹ = service its (service)
+
+## 4:3:27
+KO: 그리고 고핫에게는 아므람 가족과 이스할 가족과 헤브론 가족과 웃시엘 가족이 있었으니, 이들이 곧 고핫 가족들이라.
+1 וְלִקְהָת = and [belonged] to Kohath (Kohath)
+2 מִשְׁפַּחַת = [the] clan of
+3 הַעַמְרָמִי = the Amramite[s] (Amramite)
+4 וּמִשְׁפַּחַת = and [the] clan of
+5 הַיִּצְהָרִי = the Izharite[s] (Izharite)
+6 וּמִשְׁפַּחַת = and [the] clan of
+7 הַחֶבְרֹנִי = the Hebronite[s] (Hebronite)
+8 וּמִשְׁפַּחַת = and [the] clan of
+9 הָעָזִּיאֵלִי = the Uzzielite[s] (Uzzielite)
+10 אֵלֶּה = these
+11 הֵם = they (they(masc.))
+12 מִשְׁפְּחֹת = [were] [the] clans of
+13 הַקְּהָתִי = the Kohathite[s] (Kohathite)
+
+## 4:3:28
+KO: 한 달 이상 된 모든 남자의 수효대로, 곧 팔천육백 명은 성소의 직무를 지키는 자들이라.
+1 בְּמִסְפַּר = by [the] number of (number)
+2 כָּל־ = every (all)
+3 זָכָר = male
+4 מִבֶּן־ = from a son of (son)
+5 חֹדֶשׁ = a month (month)
+6 וָמָעְלָה = and up -wards (above)
+7 שְׁמֹנַת = eight
+8 אֲלָפִים = thousand<s> (thousand)
+9 וְשֵׁשׁ = and six (six)
+10 מֵאוֹת = hundred<s> (hundred)
+11 שֹׁמְרֵי = [were] [the] keepers of (to keep)
+12 מִשְׁמֶרֶת = [the] duty of (charge)
+13 הַקֹּדֶשׁ = the holy place (holiness)
+
+## 4:3:29
+KO: 고핫 자손의 가족들은 성막의 옆면 남쪽으로 진을 칠 것이라.
+1 מִשְׁפְּחֹת = [the] clans of (family)
+2 בְּנֵי־ = [the] descendants of (son)
+3 קְהָת = Kohath
+4 יַחֲנוּ = they will encamp (to camp)
+5 עַל = at (upon)
+6 יֶרֶךְ = [the] side of (thigh)
+7 הַמִּשְׁכָּן = the tabernacle (tabernacle)
+8 תֵּימָנָה = south -ward (south)
+
+## 4:3:30
+KO: 그리고 고핫 사람들의 가족들을 위한 아버지의 집의 족장은 웃시엘의 아들 엘리사반일 것이다.
+1 וּנְשִׂיא = and [the] leader of (leader)
+2 בֵית־ = [the] house of (house)
+3 אָב = a father (father)
+4 לְמִשְׁפְּחֹת = of [the] clans of (family)
+5 הַקְּהָתִי = the Kohathite[s] (Kohathite)
+6 אֶלִיצָפָן = [was] Elizaphan (Elizaphan)
+7 בֶּן־ = [the] son of (son)
+8 עֻזִּיאֵל = Uzziel
+
+## 4:3:31
+KO: 그리고 그들의 직무는 증거궤와 상과 등대와 제단들과 성소에서 그들이 섬기는 기구들과 휘장과 그것의 모든 쓰임새이다.
+1 וּמִשְׁמַרְתָּם = and duty their (charge)
+2 הָאָרֹן = [was] the ark (ark)
+3 וְהַשֻּׁלְחָן = and the table (table)
+4 וְהַמְּנֹרָה = and the lampstand (lampstand)
+5 וְהַמִּזְבְּחֹת = and the altars (altar)
+6 וּכְלֵי = and [the] equipment<s> of (article|utensil)
+7 הַקֹּדֶשׁ = the holy place (holiness)
+8 אֲשֶׁר = which
+9 יְשָׁרְתוּ = they will serve (to minister)
+10 בָּהֶם = by <the> them (them)
+11 וְהַמָּסָךְ = and the screen (covering)
+12 וְכֹל = and all (all)
+13 עֲבֹדָתוֹ = service its (service)
+
+## 4:3:32
+KO: 그리고 레위인의 족장들의 족장인 제사장 아론의 아들 엘리아살은 성소의 직무를 지키는 자들에 대한 감독을 맡을 것이다.
+1 וּנְשִׂיא = and [the] leader of
+2 נְשִׂיאֵי = [the] leaders of
+3 הַלֵּוִי = the Levite[s] (Levi)
+4 אֶלְעָזָר = [was] Eleazar (Eleazar)
+5 בֶּן־ = [the] son of (son)
+6 אַהֲרֹן = Aaron
+7 הַכֹּהֵן = the priest (priest)
+8 פְּקֻדַּת = [the] oversight of (punishment)
+9 שֹׁמְרֵי = [the] keepers of (to keep)
+10 מִשְׁמֶרֶת = [the] duty of (charge)
+11 הַקֹּדֶשׁ = the holy place (holiness)
+
+## 4:3:33
+KO: 므라리에게는 말리 가족과 무시 가족이 있으니, 이들이 곧 므라리의 가족들이다.
+1 לִמְרָרִי = [belonged] to Merari
+2 מִשְׁפַּחַת = [the] clan of
+3 הַמַּחְלִי = the Mahlite[s] (Mahlite)
+4 וּמִשְׁפַּחַת = and [the] clan of
+5 הַמּוּשִׁי = the Mushite[s] (Mushite)
+6 אֵלֶּה = these
+7 הֵם = they (they(masc.))
+8 מִשְׁפְּחֹת = [were] [the] clans of
+9 מְרָרִי = [the] Merarite[s]
+
+## 4:3:34
+KO: 그리고 그들의 계수된 자들은 한 달 이상인 모든 남자의 수효에 따라 육천이백 명이었다.
+1 וּפְקֻדֵיהֶם = and enrolled [men] their (to reckon)
+2 בְּמִסְפַּר = by [the] number of (number)
+3 כָּל־ = every (all)
+4 זָכָר = male
+5 מִבֶּן־ = from a son of (son)
+6 חֹדֶשׁ = a month (month)
+7 וָמָעְלָה = and up -wards (above)
+8 שֵׁשֶׁת = [were] six (six)
+9 אֲלָפִים = thousand<s> (thousand)
+10 וּמָאתָיִם = and two hundred (hundred)
+
+## 4:3:35
+KO: 그리고 므라리 가족의 종족들의 아비 집의 지도자는 아비하일의 아들 수리엘이며, 그들은 성막의 옆면인 북편에 진을 칠 것이다.
+1 וּנְשִׂיא = and [the] leader of (leader)
+2 בֵית־ = [the] house of (house)
+3 אָב = a father (father)
+4 לְמִשְׁפְּחֹת = of [the] clans of (family)
+5 מְרָרִי = [the] Merarite[s] (Merari)
+6 צוּרִיאֵל = [was] Zuriel (Zuriel)
+7 בֶּן־ = [the] son of (son)
+8 אֲבִיחָיִל = Abihail
+9 עַל = at (upon)
+10 יֶרֶךְ = [the] side of (thigh)
+11 הַמִּשְׁכָּן = the tabernacle (tabernacle)
+12 יַחֲנוּ = they will encamp (to camp)
+13 צָפֹנָה = north -ward (north)
+
+## 4:3:36
+KO: 므라리 자손의 직무와 책임은 성막의 널판들과 그 띠들과 그 기둥들과 그 받침들과 그 모든 기구들과 그 모든 섬기는 일이다.
+1 וּפְקֻדַּת = and [the] office of (punishment)
+2 מִשְׁמֶרֶת = [the] duty of (charge)
+3 בְּנֵי = [the] descendants of (son)
+4 מְרָרִי = Merari
+5 קַרְשֵׁי = [was] [the] frames of (board)
+6 הַמִּשְׁכָּן = the tabernacle (tabernacle)
+7 וּבְרִיחָיו = and bars its (bar)
+8 וְעַמֻּדָיו = and pillars its (pillar)
+9 וַאֲדָנָיו = and bases its (socket)
+10 וְכָל־ = and all
+11 כֵּלָיו = articles its (article|utensil)
+12 וְכֹל = and all
+13 עֲבֹדָתוֹ = service its (service)
+
+## 4:3:37
+KO: 그리고 뜰의 기둥들과 그 받침들과 그 말뚝들과 그 줄들이니라.
+1 וְעַמֻּדֵי = and [the] pillars of (pillar)
+2 הֶחָצֵר = the courtyard (court)
+3 סָבִיב = all around (around)
+4 וְאַדְנֵיהֶם = and bases their (socket)
+5 וִיתֵדֹתָם = and tent pegs their (peg)
+6 וּמֵיתְרֵיהֶם = and ropes their (cord)
+
+## 4:3:38
+KO: 그리고 장막 앞 동쪽에 진을 치는 자들, 회막 앞 동쪽의 모세와 아론과 그의 아들들은 이스라엘 자손의 직무를 위하여 성소의 직무를 지킬 것이며, 가까이하는 외인은 죽임을 당할 것이다.
+1 וְהַחֹנִים = and those [who] encamp (to camp)
+2 לִפְנֵי = <to> before
+3 הַמִּשְׁכָּן = the tabernacle (tabernacle)
+4 קֵדְמָה = east -ward (east)
+5 לִפְנֵי = <to> before
+6 אֹהֶל־ = [the] tent of (tent)
+7 מוֹעֵד = meeting
+8 מִזְרָחָה = east -ward (east)
+9 מֹשֶׁה = [were] Moses (Moses)
+10 וְאַהֲרֹן = and Aaron (Aaron)
+11 וּבָנָיו = and sons his
+12 שֹׁמְרִים = keeping (to keep)
+13 מִשְׁמֶרֶת = [the] duty of
+14 הַמִּקְדָּשׁ = the sanctuary (sanctuary)
+15 לְמִשְׁמֶרֶת = to [the] duty of
+16 בְּנֵי = [the] people of
+17 יִשְׂרָאֵל = Israel
+18 וְהַזָּר = and the stranger (be a stranger)
+19 הַקָּרֵב = <the> approaching (approaching)
+20 יוּמָת = he will be put to death (to die)
+
+## 4:3:39
+KO: 모세와 아론이 여호와의 입에 따라 그들의 가족별로 계수한 레위인의 모든 계수된 자들은, 한 달 이상 된 모든 남자는 이만 이천 명이었다.
+1 כָּל־ = all
+2 פְּקוּדֵי = [those] enrolled of
+3 הַלְוִיִּם = the Levites (Levi)
+4 אֲשֶׁר = whom (which)
+5 פָּקַד = he enrolled
+6 מֹשֶׁה = Moses
+7 וְאַהֲרֹן = and Aaron (Aaron)
+8 עַל־ = on (upon)
+9 פִּי = [the] mouth of (lip)
+10 יְהוָה = Yahweh (LORD)
+11 לְמִשְׁפְּחֹתָם = to clans their (family)
+12 כָּל־ = every
+13 זָכָר = male
+14 מִבֶּן־ = from a son of (son)
+15 חֹדֶשׁ = a month (month)
+16 וָמַעְלָה = and up -wards (above)
+17 שְׁנַיִם = [were] two (two)
+18 וְעֶשְׂרִים = and twenty (twenty)
+19 אָלֶף ס = thousand
+
+## 4:3:40
+KO: 그리고 여호와께서 모세에게 말씀하셨다. "이스라엘 자손의 모든 남자 첫 태생을 한 달 이상으로 계수하고, 그 이름들의 숫자를 들어 올려라(기록하라)."
+1 וַיֹּאמֶר = and he said (to say)
+2 יְהוָה = Yahweh (LORD)
+3 אֶל־ = to (to(wards))
+4 מֹשֶׁה = Moses
+5 פְּקֹד = enroll (to reckon)
+6 כָּל־ = every (all)
+7 בְּכֹר = firstborn
+8 זָכָר = male
+9 לִבְנֵי = of [the] people of
+10 יִשְׂרָאֵל = Israel
+11 מִבֶּן־ = from a son of
+12 חֹדֶשׁ = a month (month)
+13 וָמָעְלָה = and up -wards (above)
+14 וְשָׂא = and take (to lift)
+15 אֵת = <obj.> ([Obj.])
+16 מִסְפַּר = [the] number of (number)
+17 שְׁמֹתָם = names their (name)
+
+## 4:3:41
+KO: 그리고 너는 레위인을 나에게 취하라. 나 여호와니라, 이스라엘 자손 중 모든 처음 난 자를 대신하여. 그리고 이스라엘 자손의 가축 중 모든 처음 난 것을 대신하여 레위인의 가축을 나에게 취하라.
+1 וְלָקַחְתָּ = and you will take (to take)
+2 אֶת־ = <obj.>
+3 הַלְוִיִּם = the Levites
+4 לִי = for <the> me (me)
+5 אֲנִי = I
+6 יְהוָה = [am] Yahweh (LORD)
+7 תַּחַת = in place of
+8 כָּל־ = every
+9 בְּכֹר = firstborn
+10 בִּבְנֵי = among [the] people of
+11 יִשְׂרָאֵל = Israel
+12 וְאֵת = and <obj.>
+13 בֶּהֱמַת = [the] livestock of
+14 הַלְוִיִּם = the Levites
+15 תַּחַת = in place of
+16 כָּל־ = every
+17 בְּכוֹר = firstborn
+18 בְּבֶהֱמַת = among [the] livestock of
+19 בְּנֵי = [the] people of
+20 יִשְׂרָאֵל = Israel
+
+## 4:3:42
+KO: 그리고 모세는 여호와께서 그에게 명령하신 대로 이스라엘 자손 가운데 모든 첫 태생을 계수하였다.
+1 וַיִּפְקֹד = and he enrolled (to reckon)
+2 מֹשֶׁה = Moses
+3 כַּאֲשֶׁר = just as (as which)
+4 צִוָּה = he had commanded (to command)
+5 יְהוָה = Yahweh (LORD)
+6 אֹתוֹ = <obj.> him
+7 אֶת־ = <obj.>
+8 כָּל־ = every (all)
+9 בְּכֹר = firstborn
+10 בִּבְנֵי = among [the] people of (son)
+11 יִשְׂרָאֵל = Israel
+
+## 4:3:43
+KO: 그리고 이름들의 수에 따라, 한 달 된 자부터 그 이상으로 계수된 모든 처음 난 남자의 총계는 이만 이천이백칠십삼이었더라.
+1 וַיְהִי = and it was (to be)
+2 כָל־ = every (all)
+3 בְּכוֹר = firstborn
+4 זָכָר = male
+5 בְּמִסְפַּר = by [the] number of (number)
+6 שֵׁמוֹת = names (name)
+7 מִבֶּן־ = from a son of (son)
+8 חֹדֶשׁ = a month (month)
+9 וָמַעְלָה = and up -wards (above)
+10 לִפְקֻדֵיהֶם = to enrolled [men] their (to reckon)
+11 שְׁנַיִם = [were] two (two)
+12 וְעֶשְׂרִים = and twenty (twenty)
+13 אֶלֶף = thousand
+14 שְׁלֹשָׁה = three
+15 וְשִׁבְעִים = and seventy (seventy)
+16 וּמָאתָיִם פ = and two hundred (hundred)
+
+## 4:3:44
+KO: 그리고 여호와께서 모세에게 말씀하셨다, 말하기를.
+1 וַיְדַבֵּר = and he spoke (to speak)
+2 יְהוָה = Yahweh (LORD)
+3 אֶל־ = to (to(wards))
+4 מֹשֶׁה = Moses
+5 לֵּאמֹר = <to> saying (to say)
+
+## 4:3:45
+KO: 이스라엘 자손 가운데 모든 처음 난 자 대신에 레위인을 취하고, 그들의 가축 대신에 레위인의 가축을 취하라. 레위인은 내 것이라. 나 여호와니라.
+1 קַח = take (to take)
+2 אֶת־ = <obj.>
+3 הַלְוִיִּם = the Levites
+4 תַּחַת = in place of
+5 כָּל־ = every (all)
+6 בְּכוֹר = firstborn
+7 בִּבְנֵי = among [the] people of (son)
+8 יִשְׂרָאֵל = Israel
+9 וְאֶת־ = and <obj.>
+10 בֶּהֱמַת = [the] livestock of
+11 הַלְוִיִּם = the Levites
+12 תַּחַת = in place of
+13 בְּהֶמְתָּם = livestock their
+14 וְהָיוּ־ = and they will belong (to be)
+15 לִי = to <the> me (me)
+16 הַלְוִיִּם = the Levites
+17 אֲנִי = I
+18 יְהוָה = [am] Yahweh (LORD)
+
+## 4:3:46
+KO: 그리고 이스라엘 자손들의 처음 난 자들로부터 레위인들보다 더 많은 이백칠십삼 명의 속전(대상)들을 위하여
+1 וְאֵת = and <obj.> ([Obj.])
+2 פְּדוּיֵי = [the] ransom<s> of (ransomed)
+3 הַשְּׁלֹשָׁה = the three (three)
+4 וְהַשִּׁבְעִים = and the seventy (seventy)
+5 וְהַמָּאתָיִם = and the two hundred (hundred)
+6 הָעֹדְפִים = who are in excess (to remain)
+7 עַל־ = to (upon)
+8 הַלְוִיִּם = the Levites (Levi)
+9 מִבְּכוֹר = of [the] firstborn of (firstborn)
+10 בְּנֵי = [the] people of (son)
+11 יִשְׂרָאֵל = Israel
+
+## 4:3:47
+KO: 그리고 너는 머리마다 다섯 세겔씩 취할 것이며, 성소의 세겔에 따라 취할지니, 그 세겔은 이십 게라이다.
+1 וְלָקַחְתָּ = and you will take
+2 חֲמֵשֶׁת = five
+3 חֲמֵשֶׁת = five
+4 שְׁקָלִים = shekels
+5 לַגֻּלְגֹּלֶת = for the head (head)
+6 בְּשֶׁקֶל = by [the] shekel of
+7 הַקֹּדֶשׁ = the holy place (holiness)
+8 תִּקָּח = you will take
+9 עֶשְׂרִים = [is] twenty (twenty)
+10 גֵּרָה = gerah[s] (gerah)
+11 הַשָּׁקֶל = the shekel
+
+## 4:3:48
+KO: 그리고 너는 그 남은 자들의 속전을 아론과 그의 아들들에게 줄 것이다.
+1 וְנָתַתָּה = and you will give (to give)
+2 הַכֶּסֶף = the money (silver)
+3 לְאַהֲרֹן = to Aaron (Aaron)
+4 וּלְבָנָיו = and to sons his (son)
+5 פְּדוּיֵי = [the] ransom<s> of (ransomed)
+6 הָעֹדְפִים = those [who] are in excess (to remain)
+7 בָּהֶם = among <the> them (them)
+
+## 4:3:49
+KO: 그리고 모세는 레위인들에 의해 대속된 이들보다 초과한 자들로부터 그 대속의 은을 취하였다.
+1 וַיִּקַּח = and he took (to take)
+2 מֹשֶׁה = Moses
+3 אֵת = <obj.> ([Obj.])
+4 כֶּסֶף = [the] money of (silver)
+5 הַפִּדְיוֹם = the ransom (redemption)
+6 מֵאֵת = from with (with)
+7 הָעֹדְפִים = those [who] were in excess (to remain)
+8 עַל = to (upon)
+9 פְּדוּיֵי = [the] ransom<s> of (ransomed)
+10 הַלְוִיִּם = the Levites (Levi)
+
+## 4:3:50
+KO: 이스라엘 자손들의 처음 난 자들로부터 그가 은을 취하였는데, 곧 성소의 세겔로 천삼백육십오 세겔이라.
+1 מֵאֵת = from with (with)
+2 בְּכוֹר = [the] firstborn of (firstborn)
+3 בְּנֵי = [the] people of (son)
+4 יִשְׂרָאֵל = Israel
+5 לָקַח = he took (to take)
+6 אֶת־ = <obj.>
+7 הַכָּסֶף = the money (silver)
+8 חֲמִשָּׁה = five
+9 וְשִׁשִּׁים = and sixty (sixty)
+10 וּשְׁלֹשׁ = and three (three)
+11 מֵאוֹת = hundred<s> (hundred)
+12 וָאֶלֶף = and one thousand (thousand)
+13 בְּשֶׁקֶל = by [the] shekel of (shekel)
+14 הַקֹּדֶשׁ = the holy place (holiness)
+
+## 4:3:51
+KO: 그리고 모세는 그 속전(속량된 자들의 은)을 아론과 그의 아들들에게 주었다, 여호와의 입(말씀)에 따라, 여호와께서 모세에게 명령하셨던 것과 같이.
+1 וַיִּתֵּן = and he gave (to give)
+2 מֹשֶׁה = Moses
+3 אֶת־ = <obj.>
+4 כֶּסֶף = [the] money of (silver)
+5 הַפְּדוּיִם = the ransom<s> (ransomed)
+6 לְאַהֲרֹן = to Aaron (Aaron)
+7 וּלְבָנָיו = and to sons his (son)
+8 עַל־ = on (upon)
+9 פִּי = [the] mouth of (lip)
+10 יְהוָה = Yahweh
+11 כַּאֲשֶׁר = just as (as which)
+12 צִוָּה = he had commanded (to command)
+13 יְהוָה = Yahweh
+14 אֶת־ = <obj.>
+15 מֹשֶׁה פ = Moses
+
+## 4:4:1
+KO: 그리고 여호와께서 모세와 그리고 아론에게 말씀하여 이르시되
+1 וַיְדַבֵּר = and he spoke (to speak)
+2 יְהוָה = Yahweh (LORD)
+3 אֶל־ = to
+4 מֹשֶׁה = Moses
+5 וְאֶל־ = and to
+6 אַהֲרֹן = Aaron
+7 לֵאמֹר = <to> saying (to say)
+
+## 4:4:2
+KO: 고핫 자손의 머리(수)를 레위 자손의 한가운데로부터 그들의 가족과 그들의 조상의 가문을 따라 계수하라.
+1 נָשֹׂא = lift up (to lift)
+2 אֶת־ = <obj.> ([Obj.])
+3 רֹאשׁ = [the] head of (head)
+4 בְּנֵי = [the] descendants of
+5 קְהָת = Kohath
+6 מִתּוֹךְ = from among (midst)
+7 בְּנֵי = [the] descendants of
+8 לֵוִי = Levi
+9 לְמִשְׁפְּחֹתָם = to clans their (family)
+10 לְבֵית = to [the] house of (house)
+11 אֲבֹתָם = ancestors their (father)
+
+## 4:4:3
+KO: 삼십 세로부터 오십 세까지, 회막 안에서 일을 행하기 위하여 군대로 들어오는 모든 자를 계수하라.
+1 מִבֶּן = from a son of
+2 שְׁלֹשִׁים = thirty
+3 שָׁנָה = year[s]
+4 וָמַעְלָה = and up -wards (above)
+5 וְעַד = and to (till)
+6 בֶּן־ = a son of
+7 חֲמִשִּׁים = fifty
+8 שָׁנָה = year[s]
+9 כָּל־ = every (all)
+10 בָּא = [one who] comes (to come (in))
+11 לַצָּבָא = for the service (army)
+12 לַעֲשׂוֹת = to do (to make)
+13 מְלָאכָה = work
+14 בְּאֹהֶל = in [the] tent of (tent)
+15 מוֹעֵד = meeting
+
+## 4:4:4
+KO: 이것은 고핫 자손이 회막 안에서 하는 지성물에 관한 봉사이다.
+1 זֹאת = this
+2 עֲבֹדַת = [is] [the] service of (service)
+3 בְּנֵי־ = [the] descendants of (son)
+4 קְהָת = Kohath
+5 בְּאֹהֶל = in [the] tent of (tent)
+6 מוֹעֵד = meeting
+7 קֹדֶשׁ = [the] holy thing of
+8 הַקֳּדָשִׁים = the holy things
+
+## 4:4:5
+KO: 진영이 길을 떠날 때에 아론과 그의 아들들이 들어와서, 가리는 휘장(성막의 휘장)을 내려 증거궤를 그것으로 덮을 것이며,
+1 וּבָא = and he will go (to come (in))
+2 אַהֲרֹן = Aaron
+3 וּבָנָיו = and sons his (son)
+4 בִּנְסֹעַ = when sets out (to set out)
+5 הַמַּחֲנֶה = the camp (camp)
+6 וְהוֹרִדוּ = and they will take down (to go down)
+7 אֵת = <obj.>
+8 פָּרֹכֶת = [the] curtain of (curtain)
+9 הַמָּסָךְ = the screen (covering)
+10 וְכִסּוּ־ = and they will cover (to cover)
+11 בָהּ = with <the> it (her)
+12 אֵת = <obj.>
+13 אֲרֹן = [the] ark of (ark)
+14 הָעֵדֻת = the testimony (testimony)
+
+## 4:4:6
+KO: 그리고 그들(제사장들)은 그것(언약궤) 위에 해달 가죽의 덮개를 둘 것이며, 그 위에 전체가 청색인 보자기를 펴고, 그것의 채들을 꿸 것이다.
+1 וְנָתְנוּ = and they will put (to give)
+2 עָלָיו = over it (upon)
+3 כְּסוּי = a covering of (covering)
+4 עוֹר = skin of (skin)
+5 תַּחַשׁ = dolphin (animal)
+6 וּפָרְשׂוּ = and they will spread out (to spread)
+7 בֶגֶד־ = a covering of (garment)
+8 כְּלִיל = an entirety of (entire)
+9 תְּכֵלֶת = violet stuff (blue)
+10 מִלְמָעְלָה = from to above <towards> (above)
+11 וְשָׂמוּ = and they will put in (to set)
+12 בַּדָּיו = poles its (alone)

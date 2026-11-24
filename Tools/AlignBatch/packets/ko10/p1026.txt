@@ -1,0 +1,98 @@
+## 12:25:28
+KO: 그리고 그(바벨론 왕)는 그에게 좋게 말하였고, 그의 왕좌를 바벨론에 그와 함께 있는 왕들의 왕좌들 위로 높였다.
+1 וַיְדַבֵּר = and he spoke (to speak)
+2 אִתּוֹ = with him
+3 טֹבוֹת = good (welfare)
+4 וַיִּתֵּן = and he set (to give)
+5 אֶת־ = <obj.> ([Obj.])
+6 כִּסְאוֹ = throne his
+7 מֵעַל = <from> above (upon)
+8 כִּסֵּא = [the] throne of
+9 הַמְּלָכִים = the kings (king)
+10 אֲשֶׁר = who (which)
+11 אִתּוֹ = [were] with him
+12 בְּבָבֶל = in Babylon (Babylon)
+
+## 12:25:29
+KO: 그리고 그는 그의 감옥의 의복들을 바꾸었고, 그의 생명의 모든 날들 동안 그의 앞에서 항상 음식을 먹었다.
+1 וְשִׁנָּא = and he changed (to change)
+2 אֵת = <obj.> ([Obj.])
+3 בִּגְדֵי = [the] clothes of (garment)
+4 כִלְאוֹ = imprisonment his (prison)
+5 וְאָכַל = and he ate (to eat)
+6 לֶחֶם = bread (food)
+7 תָּמִיד = continually (continuity)
+8 לְפָנָיו = <to> before him (face)
+9 כָּל־ = all
+10 יְמֵי = [the] days of (day;_when)
+11 חַיָּיו = life his (life)
+
+## 12:25:30
+KO: 그리고 그에게는 정해진 배급이, 곧 날마다 그날의 배급이, 그의 모든 생애 동안 끊임없이 왕으로부터 주어졌다.
+1 וַאֲרֻחָתוֹ = and allowance his
+2 אֲרֻחַת = an allowance of
+3 תָּמִיד = continuity
+4 נִתְּנָה־ = it was given (to give)
+5 לּוֹ = to him (him)
+6 מֵאֵת = from with (with)
+7 הַמֶּלֶךְ = the king (king)
+8 דְּבַר־ = [the] matter of (word)
+9 יוֹם = a day
+10 בְּיוֹמוֹ = in day its
+11 כֹּל = all
+12 יְמֵי = [the] days of
+13 חַיָּו = life his (life)
+
+## 13:1:1
+KO: 아담, 셋, 에노스,
+1 אָדָם = Adam
+2 שֵׁת = Seth
+3 אֱנוֹשׁ = Enosh
+
+## 13:1:2
+KO: 게난, 마할랄렐, 야렛.
+1 קֵינָן = Kenan
+2 מַהֲלַלְאֵל = Mahalalel
+3 יָרֶד = Jared
+
+## 13:1:3
+KO: 에녹, 므두셀라, 라멕.
+1 חֲנוֹךְ = Enoch
+2 מְתוּשֶׁלַח = Methuselah
+3 לָמֶךְ = Lamech
+
+## 13:1:4
+KO: 노아, 셈, 함 그리고 야벳.
+1 נֹחַ = Noah
+2 שֵׁם = Shem
+3 חָם = Ham
+4 וָיָפֶת ס = and Japheth (Japheth)
+
+## 13:1:5
+KO: 야벳의 아들들은 고멜과 마곡과 마대와 야완과 두발과 메섹과 디라스이다.
+1 בְּנֵי = [the] sons of (son)
+2 יֶפֶת = Japheth
+3 גֹּמֶר = Gomer
+4 וּמָגוֹג = and Magog (Magog)
+5 וּמָדַי = and Madai (Madai)
+6 וְיָוָן = and Javan (Javan)
+7 וְתֻבָל = and Tubal (Tubal)
+8 וּמֶשֶׁךְ = and Meshech (Meshech)
+9 וְתִירָס ס = and Tiras (Tiras)
+
+## 13:1:6
+KO: 그리고 고멜의 아들들은 아스그나스와 디밧과 도갈마이다.
+1 וּבְנֵי = and [the] sons of (son)
+2 גֹּמֶר = Gomer
+3 אַשְׁכֲּנַז = Ashkenaz
+4 וְדִיפַת = and Diphath (Riphath)
+5 וְתוֹגַרְמָה = and Togarmah (Togarmah)
+
+## 13:1:7
+KO: 그리고 야완의 아들은 엘리사와 타르시스와 킷팀과 로다님이라.
+1 וּבְנֵי = and [the] sons of (son)
+2 יָוָן = Javan
+3 אֱלִישָׁה = [were] Elishah (Elishah)
+4 וְתַרְשִׁישָׁה = and Tarshish <towards> (Tarshish)
+5 כִּתִּים = Kittim
+6 וְרוֹדָנִים ס = and Rodanim (Dodanim)

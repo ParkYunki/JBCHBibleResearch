@@ -1,0 +1,222 @@
+## 24:11:4
+KO: 내가 너희 열조를 철 풀무인 애굽 땅으로부터 이끌어 내던 날에 그들에게 명했던 것인데, 이르기를 너희는 내 목소리를 듣고 내가 너희에게 명하는 모든 것에 따라 그것들을 행하라. 그리하면 너희는 나에게 백성이 될 것이고, 나는 너희에게 하나님이 되리라.
+1 אֲשֶׁר = which
+2 צִוִּיתִי = I commanded
+3 אֶת־ = <obj.>
+4 אֲבוֹתֵיכֶם = ancestors your (father)
+5 בְּיוֹם = on [the] day (day;_when)
+6 הוֹצִיאִי־ = brought out I (to come out)
+7 אוֹתָם = <obj.> them
+8 מֵאֶרֶץ־ = from [the] land of (land)
+9 מִצְרַיִם = Egypt
+10 מִכּוּר = from [the] furnace of (furnace)
+11 הַבַּרְזֶל = <the> iron (iron)
+12 לֵאמֹר = <to> saying (to say)
+13 שִׁמְעוּ = listen (to hear)
+14 בְקוֹלִי = to voice my (voice)
+15 וַעֲשִׂיתֶם = and you will do (to make)
+16 אוֹתָם = <obj.> them
+17 כְּכֹל = according to all (all)
+18 אֲשֶׁר־ = that
+19 אֲצַוֶּה = I will command
+20 אֶתְכֶם = <obj.> you
+21 וִהְיִיתֶם = and you will become
+22 לִי = for <the> me (me)
+23 לְעָם = <into> a people (people)
+24 וְאָנֹכִי = and I (I)
+25 אֶהְיֶה = I will become
+26 לָכֶם = for <the> you (you)
+27 לֵאלֹהִים = <into> God (God)
+
+## 24:11:5
+KO: 내가 너희 조상들에게 젖과 꿀이 흐르는 땅을 주겠다고 맹세한 그 맹세를 이루기 위하여, 오늘과 같이 그것을 증거하느니라 하라 하시기로 내가 대답하여 말하기를 아멘 여호와여 하였노라.
+1 לְמַעַן = so as (because)
+2 הָקִים = to carry out (to arise)
+3 אֶת־ = <obj.> ([Obj.])
+4 הַשְּׁבוּעָה = the oath (oath)
+5 אֲשֶׁר־ = which
+6 נִשְׁבַּעְתִּי = I swore (to swear)
+7 לַאֲבוֹתֵיכֶם = to ancestors your (father)
+8 לָתֵת = to give
+9 לָהֶם = to <the> them (them)
+10 אֶרֶץ = a land (land)
+11 זָבַת = flowing of (to flow)
+12 חָלָב = milk
+13 וּדְבַשׁ = and honey (honey)
+14 כַּיּוֹם = like the day (day)
+15 הַזֶּה = <the> this (this)
+16 וָאַעַן = and I answered (to answer)
+17 וָאֹמַר = and I said (to say)
+18 אָמֵן = amen
+19 יְהוָה ס = O Yahweh (LORD)
+
+## 24:11:6
+KO: 여호와께서 내게 말씀하셨다. "유다 성읍들과 예루살렘 거리들에서 이 모든 말들을 선포하여 이르라. '너희는 이 언약의 말들을 듣고 그것들을 행하라.'"
+1 וַיֹּאמֶר = and he said
+2 יְהוָה = Yahweh (LORD)
+3 אֵלַי = to me (to(wards))
+4 קְרָא = proclaim (to call)
+5 אֶת־ = <obj.>
+6 כָּל־ = all
+7 הַדְּבָרִים = the words
+8 הָאֵלֶּה = <the> these (these)
+9 בְּעָרֵי = in [the] cities of (city)
+10 יְהוּדָה = Judah
+11 וּבְחֻצוֹת = and in [the] streets of (outside)
+12 יְרוּשָׁלִַם = Jerusalem
+13 לֵאמֹר = <to> saying
+14 שִׁמְעוּ = hear (to hear)
+15 אֶת־ = <obj.>
+16 דִּבְרֵי = [the] words of
+17 הַבְּרִית = the covenant (covenant)
+18 הַזֹּאת = <the> this (this)
+19 וַעֲשִׂיתֶם = and you will do (to make)
+20 אוֹתָם = <obj.> them
+
+## 24:11:7
+KO: 왜냐하면 내가 너희 조상들을 애굽 땅에서 올라오게 한 날부터 오늘까지, 간절히 증언하고 증언하며 말하기를 “내 목소리를 들으라”고 하였으나,
+1 כִּי = for
+2 הָעֵד = certainly <to warn>
+3 הַעִדֹתִי = I warned
+4 בַּאֲבוֹתֵיכֶם = <in> ancestors your (father)
+5 בְּיוֹם = on [the] day
+6 הַעֲלוֹתִי = brought up I (to ascend)
+7 אוֹתָם = <obj.> them ([Obj.])
+8 מֵאֶרֶץ = from [the] land of (land)
+9 מִצְרַיִם = Egypt
+10 וְעַד־ = and until (till)
+11 הַיּוֹם = the day
+12 הַזֶּה = <the> this (this)
+13 הַשְׁכֵּם = rising early (to rise)
+14 וְהָעֵד = and warning
+15 לֵאמֹר = <to> saying (to say)
+16 שִׁמְעוּ = listen (to hear)
+17 בְּקוֹלִי = to voice my (voice)
+
+## 24:11:8
+KO: 그들이 듣지 아니하였고, 그들의 귀를 기울이지 아니하였으며, 각 사람이 그 악한 마음의 완악함대로 걸었으므로, 내가 그들에게 행하라고 명령하였으나 그들이 행하지 아니한 이 언약의 모든 말을 그들에게 가져오게 하였느니라.
+1 וְלֹא = and not
+2 שָׁמְעוּ = they listened (to hear)
+3 וְלֹא־ = and not
+4 הִטּוּ = they inclined (to stretch)
+5 אֶת־ = <obj.>
+6 אָזְנָם = ear their (ear)
+7 וַיֵּלְכוּ = and they walked (to go)
+8 אִישׁ = everyone (man)
+9 בִּשְׁרִירוּת = in [the] stubbornness of (stubbornness)
+10 לִבָּם = own heart their (heart)
+11 הָרָע = <the> evil (bad)
+12 וָאָבִיא = and I brought (to come (in))
+13 עֲלֵיהֶם = on them (upon)
+14 אֶת־ = <obj.>
+15 כָּל־ = all
+16 דִּבְרֵי = [the] words of (word)
+17 הַבְּרִית־ = the covenant (covenant)
+18 הַזֹּאת = <the> this (this)
+19 אֲשֶׁר־ = which
+20 צִוִּיתִי = I commanded (to command)
+21 לַעֲשׂוֹת = to do
+22 וְלֹא = and not
+23 עָשׂוּ ס = they did
+
+## 24:11:9
+KO: 그리고 여호와께서 내게 말씀하시기를, "유다 사람들과 예루살렘 거민들 가운데서 음모가 발견되었다" 하셨다.
+1 וַיֹּאמֶר = and he said (to say)
+2 יְהוָה = Yahweh (LORD)
+3 אֵלָי = to me (to(wards))
+4 נִמְצָא־ = it has been found (to find)
+5 קֶשֶׁר = a conspiracy (conspiracy)
+6 בְּאִישׁ = among everyone of (man)
+7 יְהוּדָה = Judah
+8 וּבְיֹשְׁבֵי = and among [the] inhabitants of (to dwell)
+9 יְרוּשָׁלִָם = Jerusalem
+
+## 24:11:10
+KO: 그들은 내 말을 듣기를 거절했던 자기들의 이전 조상들의 죄악들로 돌아갔고, 그들은 다른 신들을 좇아 그들을 섬겼으니, 이스라엘 집과 유다 집이 내가 그들의 조상들과 맺은 나의 언약을 파하였다.
+1 שָׁבוּ = they have returned (to return)
+2 עַל־ = to (upon)
+3 עֲוֹנֹת = [the] iniquities of (iniquity)
+4 אֲבוֹתָם = ancestors their
+5 הָרִאשֹׁנִים = <the> former (first)
+6 אֲשֶׁר = who
+7 מֵאֲנוּ = they refused (to refuse)
+8 לִשְׁמוֹעַ = to hear
+9 אֶת־ = <obj.>
+10 דְּבָרַי = words my (word)
+11 וְהֵמָּה = and they (they(masc.))
+12 הָלְכוּ = they have walked (to go)
+13 אַחֲרֵי = after
+14 אֱלֹהִים = gods
+15 אֲחֵרִים = other (another)
+16 לְעָבְדָם = to serve them (to serve)
+17 הֵפֵרוּ = they have broken (to break)
+18 בֵית־ = [the] house of
+19 יִשְׂרָאֵל = Israel
+20 וּבֵית = and [the] house of
+21 יְהוּדָה = Judah
+22 אֶת־ = <obj.>
+23 בְּרִיתִי = covenant my (covenant)
+24 אֲשֶׁר = which
+25 כָּרַתִּי = I made (to cut)
+26 אֶת־ = with
+27 אֲבוֹתָם ס = ancestors their
+
+## 24:11:11
+KO: 그러므로 여호와가 이같이 말한다. 보라, 내가 재앙을 그들에게 가져오리니 그들이 피하여 나갈 수 없을 것이라. 그들이 나에게 부르짖을지라도 내가 그들에게 듣지 아니하리라.
+1 לָכֵן = <to> therefore (so)
+2 כֹּה = thus
+3 אָמַר = he says (to say)
+4 יְהוָה = Yahweh (LORD)
+5 הִנְנִי = here I (look!)
+6 מֵבִיא = [am] about to bring (to come (in))
+7 אֲלֵיהֶם = to them
+8 רָעָה = a calamity (distress)
+9 אֲשֶׁר = which
+10 לֹא־ = not
+11 יוּכְלוּ = they will be able (be able)
+12 לָצֵאת = to go out (to come out)
+13 מִמֶּנָּה = from it (from)
+14 וְזָעֲקוּ = and they will cry out (to cry out)
+15 אֵלַי = to me
+16 וְלֹא = and not
+17 אֶשְׁמַע = I will listen (to hear)
+18 אֲלֵיהֶם = to them
+
+## 24:11:12
+KO: 그리고 유다의 성읍들과 예루살렘의 거민들이 가서 그들이 향을 피우는 그 신들에게 부르짖을지라도, 그들의 재앙의 때에 그들을 구원하는 구원은 결코 구원하지 못하리라.
+1 וְהָלְכוּ = and they will go (to go)
+2 עָרֵי = [the] cities of (city)
+3 יְהוּדָה = Judah
+4 וְיֹשְׁבֵי = and [the] inhabitants of (to dwell)
+5 יְרוּשָׁלִַם = Jerusalem
+6 וְזָעֲקוּ = and they will cry out (to cry out)
+7 אֶל־ = to (to(wards))
+8 הָאֱלֹהִים = the gods (gods)
+9 אֲשֶׁר = which
+10 הֵם = they (they(masc.))
+11 מְקַטְּרִים = [are] making smoke (to offer)
+12 לָהֶם = to <the> them
+13 וְהוֹשֵׁעַ = and certainly <to deliver>
+14 לֹא־ = not
+15 יוֹשִׁיעוּ = they will deliver
+16 לָהֶם = <to> <the> them
+17 בְּעֵת = at [the] time of (time)
+18 רָעָתָם = calamity their (distress)
+
+## 24:11:13
+KO: 대저 너의 신들이 너의 성읍들의 수와 같도다, 유다여. 그리고 너희가 예루살렘의 거리들의 수대로 그 수치스러운 것의 제단들, 곧 바알에게 분향하기 위한 제단들을 세웠도다.
+1 כִּי = for
+2 מִסְפַּר = [the] number of
+3 עָרֶיךָ = cities your (city)
+4 הָיוּ = they are (to be)
+5 אֱלֹהֶיךָ = gods your (gods)
+6 יְהוּדָה = O Judah (Judah)
+7 וּמִסְפַּר = and [the] number of
+8 חֻצוֹת = [the] streets of (outside)
+9 יְרוּשָׁלִַם = Jerusalem
+10 שַׂמְתֶּם = you have made (to set)
+11 מִזְבְּחוֹת = altars
+12 לַבֹּשֶׁת = to the shameful thing (shame)
+13 מִזְבְּחוֹת = altars
+14 לְקַטֵּר = to make smoke (to offer)
+15 לַבָּעַל ס = to <the> Baal (Baal)

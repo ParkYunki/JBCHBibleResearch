@@ -1,0 +1,229 @@
+## 10:21:10
+KO: 그리고 아야의 딸 리스바가 굵은 베를 취하여 그것을 자기 자신을 위해 반석 위에 폈으니, 수확의 시작으로부터 하늘에서 물이 그들 위로 쏟아지기까지였고, 그녀는 낮에는 공중의 새가 그들 위에 쉬지 못하게 하였으며 밤에는 들의 짐승도 그리하지 못하게 하였다.
+1 וַתִּקַּח = and she took (to take)
+2 רִצְפָּה = Rizpah
+3 בַת־ = [the] daughter of (daughter)
+4 אַיָּה = Aiah
+5 אֶת־ = <obj.>
+6 הַשַּׂק = <the> sackcloth (sackcloth)
+7 וַתַּטֵּהוּ = and she spread out it (to stretch)
+8 לָהּ = for <the> herself (her)
+9 אֶל־ = to (to(wards))
+10 הַצּוּר = the rock (rock)
+11 מִתְּחִלַּת = from [the] beginning of (beginning)
+12 קָצִיר = harvest
+13 עַד = until (till)
+14 נִתַּךְ־ = it was poured out (to pour)
+15 מַיִם = water
+16 עֲלֵיהֶם = on them
+17 מִן־ = from
+18 הַשָּׁמָיִם = the heavens
+19 וְלֹא־ = and not (not)
+20 נָתְנָה = she permitted (to give)
+21 עוֹף = [the] bird[s] of (bird)
+22 הַשָּׁמַיִם = the heavens
+23 לָנוּחַ = to rest
+24 עֲלֵיהֶם = on them
+25 יוֹמָם = by day
+26 וְאֶת־ = and <obj.>
+27 חַיַּת = [the] animal[s] of (living thing)
+28 הַשָּׂדֶה = the field (land)
+29 לָיְלָה = night
+
+## 10:21:11
+KO: 그리고 아야의 딸, 사울의 첩 리스바가 행한 것이 다윗에게 고해졌다.
+1 וַיֻּגַּד = and it was told (to tell)
+2 לְדָוִד = to David (David)
+3 אֵת = <obj.> ([Obj.])
+4 אֲשֶׁר־ = [that] which (which)
+5 עָשְׂתָה = she had done (to make)
+6 רִצְפָּה = Rizpah
+7 בַת־ = [the] daughter of (daughter)
+8 אַיָּה = Aiah
+9 פִּלֶגֶשׁ = [the] concubine of (concubine)
+10 שָׁאוּל = Saul
+
+## 10:21:12
+KO: 그리고 다윗이 가서 사울의 뼈들과 요나단 그의 아들의 뼈들을 길르앗 야베스의 주인들에게서 가져왔는데, 이는 블레셋 사람들이 길보아에서 사울을 칠 때 그들이 그곳에 매달았던 벳산 광장에서 그들(사울과 요나단)을 훔쳐왔기 때문이다.
+1 וַיֵּלֶךְ = and he went (to go)
+2 דָּוִד = David
+3 וַיִּקַּח = and he took (to take)
+4 אֶת־ = <obj.>
+5 עַצְמוֹת = [the] bones of
+6 שָׁאוּל = Saul
+7 וְאֶת־ = and <obj.>
+8 עַצְמוֹת = [the] bones of
+9 יְהוֹנָתָן = Jonathan
+10 בְּנוֹ = son his (son)
+11 מֵאֵת = from with (with)
+12 בַּעֲלֵי = [the] citizens of (master)
+13 יָבֵישׁ = Jabesh
+14 גִּלְעָד = Gilead (-gilead)
+15 אֲשֶׁר = who
+16 גָּנְבוּ = they had stolen (to steal)
+17 אֹתָם = <obj.> them
+18 מֵרְחֹב = from [the] open square of (street|plaza)
+19 בֵּית־ = Beth
+20 שַׁן = Shan
+21 אֲשֶׁר = where
+22 תְּלָאוּם = they had hung up them (to hang)
+23 שָׁמָּה = there <towards> (there)
+24 פְּלִשְׁתִּים = [the] Philistines
+25 בְּיוֹם = on [the] day (day;_when)
+26 הַכּוֹת = struck down (to smite)
+27 פְּלִשְׁתִּים = [the] Philistines
+28 אֶת־ = <obj.>
+29 שָׁאוּל = Saul
+30 בַּגִּלְבֹּעַ = on <the> Gilboa (Gilboa)
+
+## 10:21:13
+KO: 그리고 그가 그곳으로부터 사울의 뼈들과 그의 아들 요나단의 뼈들을 가지고 올라갔고, 그들은 그 매달린 자들의 뼈들을 거두어들였다.
+1 וַיַּעַל = and he brought up (to ascend)
+2 מִשָּׁם = from there (there)
+3 אֶת־ = <obj.>
+4 עַצְמוֹת = [the] bones of
+5 שָׁאוּל = Saul
+6 וְאֶת־ = and <obj.>
+7 עַצְמוֹת = [the] bones of
+8 יְהוֹנָתָן = Jonathan
+9 בְּנוֹ = son his (son)
+10 וַיַּאַסְפוּ = and they gathered (to gather)
+11 אֶת־ = <obj.>
+12 עַצְמוֹת = [the] bones of
+13 הַמּוּקָעִים = the impaled [men] (to dislocate|hang)
+
+## 10:21:14
+KO: 그리고 그들이 사울과 그의 아들 요나단의 뼈들을 베냐민 땅 셀라에 있는 그의 아버지 기스의 무덤에 장사하였고, 왕이 명령한 모든 것을 행하였으며, 그 후에 하나님이 그 땅을 위하여 기도를 들으셨다.
+1 וַיִּקְבְּרוּ = and they buried (to bury)
+2 אֶת־ = <obj.> ([Obj.])
+3 עַצְמוֹת־ = [the] bones of (bone)
+4 שָׁאוּל = Saul
+5 וִיהוֹנָתָן־ = and Jonathan (Jonathan)
+6 בְּנוֹ = son his (son)
+7 בְּאֶרֶץ = in [the] land of
+8 בִּנְיָמִן = Benjamin
+9 בְּצֵלָע = at Zela (Zela)
+10 בְּקֶבֶר = in [the] tomb of (grave)
+11 קִישׁ = Kish
+12 אָבִיו = father his (father)
+13 וַיַּעֲשׂוּ = and they did (to make)
+14 כֹּל = all
+15 אֲשֶׁר־ = that (which)
+16 צִוָּה = he commanded (to command)
+17 הַמֶּלֶךְ = the king (king)
+18 וַיֵּעָתֵר = and he was entreated (to pray)
+19 אֱלֹהִים = God
+20 לָאָרֶץ = for the land
+21 אַחֲרֵי־ = after
+22 כֵן פ = thus (so)
+
+## 10:21:15
+KO: 그리고 블레셋 사람들에게 이스라엘을 향한 전쟁이 다시 있었고, 다윗과 그의 신복들이 그와 함께 내려가서 블레셋 사람들과 싸웠는데, 다윗이 피곤하게 되었다.
+1 וַתְּהִי־ = and it belonged (to be)
+2 עוֹד = again (still)
+3 מִלְחָמָה = war (battle)
+4 לַפְּלִשְׁתִּים = to the Philistines
+5 אֶת־ = with
+6 יִשְׂרָאֵל = Israel
+7 וַיֵּרֶד = and he went down (to go down)
+8 דָּוִד = David
+9 וַעֲבָדָיו = and servants his (servant;_slave)
+10 עִמּוֹ = with him (with)
+11 וַיִּלָּחֲמוּ = and they fought (to fight)
+12 אֶת־ = with
+13 פְּלִשְׁתִּים = [the] Philistines
+14 וַיָּעַף = and he was weary (be faint)
+15 דָּוִד = David
+
+## 10:21:16
+KO: 그리고 라파의 자손들 중에 있는 이스비브놉, 그가 창의 무게가 놋 삼백 세겔이었고, 그가 새 칼을 띠고 있었는데, 그가 다윗을 치겠다고 말하였다.
+1 וְיִשְׁבִּי = and Ishbi-
+2 בְּנֹב = Benob
+3 אֲשֶׁר = who (which)
+4 בִּילִידֵי = [was] among those born of (born)
+5 הָרָפָה = the Raphah (Rapha)
+6 וּמִשְׁקַל = and [the] weight of
+7 קֵינוֹ = spear his (spear)
+8 שְׁלֹשׁ = [was] three (three)
+9 מֵאוֹת = hundred<s> (hundred)
+10 מִשְׁקַל = [the] weight of
+11 נְחֹשֶׁת = bronze
+12 וְהוּא = and he (he;_she;_it)
+13 חָגוּר = [was] girded (to gird)
+14 חֲדָשָׁה = a new [weapon] (new)
+15 וַיֹּאמֶר = and he said (to say)
+16 לְהַכּוֹת = to strike down (to smite)
+17 אֶת־ = <obj.> ([Obj.])
+18 דָּוִד = David
+
+## 10:21:17
+KO: 그리고 스루야의 아들 아비새가 그를 도왔고, 그 블레셋 사람을 쳐서 그를 죽였다. 그때 다윗의 사람들이 그에게 맹세하며 말하였다. "당신은 다시는 우리와 함께 전장에 나가지 마십시오. 그리고 이스라엘의 등불을 끄지 마십시오."
+1 וַיַּעֲזָר־ = and he helped (to help)
+2 לוֹ = <to> <the> him
+3 אֲבִישַׁי = Abishai
+4 בֶּן־ = [the] son of (son)
+5 צְרוּיָה = Zeruiah
+6 וַיַּךְ = and he struck (to smite)
+7 אֶת־ = <obj.>
+8 הַפְּלִשְׁתִּי = the Philistine (Philistine)
+9 וַיְמִיתֵהוּ = and he killed him (to die)
+10 אָז = then
+11 נִשְׁבְּעוּ = they swore (to swear)
+12 אַנְשֵׁי־ = [the] men of (human)
+13 דָוִד = David
+14 לוֹ = to <the> him
+15 לֵאמֹר = <to> saying (to say)
+16 לֹא־ = not
+17 תֵצֵא = you will go out (to come out)
+18 עוֹד = again (still)
+19 אִתָּנוּ = with us (with)
+20 לַמִּלְחָמָה = for <the> battle (battle)
+21 וְלֹא = and not
+22 תְכַבֶּה = you will extinguish (to quench)
+23 אֶת־ = <obj.>
+24 נֵר = [the] lamp of (lamp)
+25 יִשְׂרָאֵל פ = Israel
+
+## 10:21:18
+KO: 그리고 그 후에 다시 곱에서 블레셋 사람들과 전쟁이 있었다. 그때 후사 사람 십브개가 라파의 자손들 중에 있는 삽을 쳐 죽였다.
+1 וַיְהִי = and it was
+2 אַחֲרֵי־ = after
+3 כֵן = thus (so)
+4 וַתְּהִי־ = and it was
+5 עוֹד = again (still)
+6 הַמִּלְחָמָה = <the> war (battle)
+7 בְּגוֹב = at Gob (Gob)
+8 עִם־ = with
+9 פְּלִשְׁתִּים = [the] Philistines (Philistine)
+10 אָז = then
+11 הִכָּה = he struck down (to smite)
+12 סִבְּכַי = Sibbecai
+13 הַחֻשָׁתִי = the Hushathite (Hushathite)
+14 אֶת־ = <obj.> ([Obj.])
+15 סַף = Saph
+16 אֲשֶׁר = who (which)
+17 בִּילִדֵי = [was] among those born of (born)
+18 הָרָפָה פ = the Raphah (Rapha)
+
+## 10:21:19
+KO: 그리고 곱에서 블레셋 사람들과의 전쟁이 또다시 있었는데, 베들레헴 사람 야레오르김의 아들 엘하난이 가드 사람 골리앗을 쳤으니, 그의 창 자루는 베 짜는 사람의 베틀채와 같았더라.
+1 וַתְּהִי־ = and it was (to be)
+2 עוֹד = again (still)
+3 הַמִּלְחָמָה = <the> war (battle)
+4 בְּגוֹב = at Gob (Gob)
+5 עִם־ = with
+6 פְּלִשְׁתִּים = [the] Philistines (Philistine)
+7 וַיַּךְ = and he struck down (to smite)
+8 אֶלְחָנָן = Elhanan
+9 בֶּן־ = [the] son of (son)
+10 יַעְרֵי = Jaare-
+11 אֹרְגִים = Oregim
+12 בֵּית = [the] Beth-
+13 הַלַּחְמִי = <the> -lehemite
+14 אֵת = <obj.> ([Obj.])
+15 גָּלְיָת = Goliath
+16 הַגִּתִּי = the Gittite (Gath)
+17 וְעֵץ = and [the] wood of (tree)
+18 חֲנִיתוֹ = spear his (spear)
+19 כִּמְנוֹר = [was] like a beam of (loom-beam)
+20 אֹרְגִים ס = weavers (to weave)

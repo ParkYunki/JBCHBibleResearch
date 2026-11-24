@@ -1,0 +1,194 @@
+## 6:24:4
+KO: 그리고 내가 이삭에게 야곱과 에서를 주었고, 에서에게는 소유하기 위하여 세일 산을 주었으며, 야곱과 그의 아들들은 애굽으로 내려갔다.
+1 וָאֶתֵּן = and I gave
+2 לְיִצְחָק = to Isaac (Isaac)
+3 אֶת־ = <obj.>
+4 יַעֲקֹב = Jacob
+5 וְאֶת־ = and <obj.>
+6 עֵשָׂו = Esau
+7 וָאֶתֵּן = and I gave
+8 לְעֵשָׂו = to Esau
+9 אֶת־ = <obj.>
+10 הַר = [the] mountain of (mountain)
+11 שֵׂעִיר = Seir
+12 לָרֶשֶׁת = to take possession of (to possess)
+13 אוֹתוֹ = <obj.> it
+14 וְיַעֲקֹב = and Jacob
+15 וּבָנָיו = and sons his (son)
+16 יָרְדוּ = they went down (to go down)
+17 מִצְרָיִם = Egypt
+
+## 6:24:5
+KO: 그리고 내가 모세와 아론을 보냈고, 내가 애굽을 쳤으니, 곧 내가 그 가운데 행했던 것과 같으며, 그 후에 내가 너희를 인도하여 내었다.
+1 וָאֶשְׁלַח = and I sent (to send)
+2 אֶת־ = <obj.>
+3 מֹשֶׁה = Moses
+4 וְאֶת־ = and <obj.>
+5 אַהֲרֹן = Aaron
+6 וָאֶגֹּף = and I struck (to strike)
+7 אֶת־ = <obj.>
+8 מִצְרַיִם = Egypt
+9 כַּאֲשֶׁר = just as (as which)
+10 עָשִׂיתִי = I did (to make)
+11 בְּקִרְבּוֹ = in midst its (entrails)
+12 וְאַחַר = and after (after)
+13 הוֹצֵאתִי = I brought out (to come out)
+14 אֶתְכֶם = <obj.> you
+
+## 6:24:6
+KO: 내가 너희 조상들을 애굽에서 인도하여 내었고, 너희가 바다에 이르렀으며, 애굽 사람들이 병거와 마병을 거느리고 너희 조상들을 갈대 바다까지 뒤쫓았으므로.
+1 וָאוֹצִיא = and I brought out (to come out)
+2 אֶת־ = <obj.> ([Obj.])
+3 אֲבוֹתֵיכֶם = fathers your
+4 מִמִּצְרַיִם = from Egypt (Egypt)
+5 וַתָּבֹאוּ = and you came (to come (in))
+6 הַיָּמָּה = the sea towards
+7 וַיִּרְדְּפוּ = and they pursued (to pursue)
+8 מִצְרַיִם = Egypt (Egyptian)
+9 אַחֲרֵי = after
+10 אֲבוֹתֵיכֶם = fathers your
+11 בְּרֶכֶב = with chariotry (chariot)
+12 וּבְפָרָשִׁים = and with horsemen (horseman)
+13 יַם־ = [the] sea of
+14 סוּף = reed[s] (Red( Sea))
+
+## 6:24:7
+KO: 그들이 여호와께 부르짖었고, 그(하나님)가 너희와 애굽 사람들 사이에 흑암을 두셨으며, 그가 바다를 그들 위로 오게 하시고 그를 덮으셨다. 그리고 너희 눈이 내가 애굽에서 행한 것을 보았으며, 너희가 광야에 여러 날 동안 거하였다.
+1 וַיִּצְעֲקוּ = and they cried out (to cry)
+2 אֶל־ = to (to(wards))
+3 יְהוָה = Yahweh (LORD)
+4 וַיָּשֶׂם = and he put (to set)
+5 מַאֲפֵל = darkness
+6 בֵּינֵיכֶם = between you
+7 וּבֵין = and between
+8 הַמִּצְרִים = the Egyptians (Egyptian)
+9 וַיָּבֵא = and he brought (to come (in))
+10 עָלָיו = over it (upon)
+11 אֶת־ = <obj.>
+12 הַיָּם = the sea (sea)
+13 וַיְכַסֵּהוּ = and it covered it (to cover)
+14 וַתִּרְאֶינָה = and they saw (to see)
+15 עֵינֵיכֶם = eyes your (eye)
+16 אֵת = <obj.>
+17 אֲשֶׁר־ = [that] which (which)
+18 עָשִׂיתִי = I did (to make)
+19 בְּמִצְרָיִם = in Egypt (Egypt)
+20 וַתֵּשְׁבוּ = and you dwelt (to dwell)
+21 בַמִּדְבָּר = in the wilderness (wilderness)
+22 יָמִים = days (day;_when)
+23 רַבִּים = many
+
+## 6:24:8
+KO: 그리고 내가 너희를 요단 저편에 거주하는 아모리 사람의 땅으로 인도하여 들였고, 그들이 너희와 싸웠으나 내가 그들을 너희 손에 넘겨주었기에 너희가 그들의 땅을 차지하였고, 내가 그들을 너희 앞에서 멸절시켰다.
+1 וָאָבִיא = and I brought (to come (in))
+2 אֶתְכֶם = <obj.> you
+3 אֶל־ = to (to(wards))
+4 אֶרֶץ = [the] land of
+5 הָאֱמֹרִי = the Amorite[s] (Amorite)
+6 הַיּוֹשֵׁב = who dwelt (to dwell)
+7 בְּעֵבֶר = on [the] other side of (side)
+8 הַיַּרְדֵּן = the Jordan (Jordan)
+9 וַיִּלָּחֲמוּ = and they fought (to fight)
+10 אִתְּכֶם = with you (with)
+11 וָאֶתֵּן = and I gave (to give)
+12 אוֹתָם = <obj.> them
+13 בְּיֶדְכֶם = in hand your (hand)
+14 וַתִּירְשׁוּ = and you took possession of (to possess)
+15 אֶת־ = <obj.>
+16 אַרְצָם = land their
+17 וָאַשְׁמִידֵם = and I destroyed them (to destroy)
+18 מִפְּנֵיכֶם = from before you (face)
+
+## 6:24:9
+KO: 그리고 모압의 왕 십볼의 아들 발락이 일어나서 이스라엘과 싸웠고, 그가 사람을 보내어 브올의 아들 발람을 불러 너희를 저주하게 하려 하였다.
+1 וַיָּקָם = and he arose (to arise)
+2 בָּלָק = Balak
+3 בֶּן־ = [the] son of
+4 צִפּוֹר = Zippor
+5 מֶלֶךְ = [the] king of (king)
+6 מוֹאָב = Moab
+7 וַיִּלָּחֶם = and he fought (to fight)
+8 בְּיִשְׂרָאֵל = against Israel (Israel)
+9 וַיִּשְׁלַח = and he sent (to send)
+10 וַיִּקְרָא = and he summoned (to call)
+11 לְבִלְעָם = <to> Balaam (Balaam)
+12 בֶּן־ = [the] son of
+13 בְּעוֹר = Beor
+14 לְקַלֵּל = to curse (to lighten)
+15 אֶתְכֶם = <obj.> you ([Obj.])
+
+## 6:24:10
+KO: 그리고 나는 발람에게 듣기를 원하지 않았다. 그러므로 그가 너희를 축복하며 축복하였고, 나는 너희를 그의 손에서 건져내었다.
+1 וְלֹא = and not (not)
+2 אָבִיתִי = I was willing (be willing)
+3 לִשְׁמֹעַ = to listen (to hear)
+4 לְבִלְעָם = to Balaam (Balaam)
+5 וַיְבָרֶךְ = and he blessed
+6 בָּרוֹךְ = continuously <to bless>
+7 אֶתְכֶם = <obj.> you
+8 וָאַצִּל = and I delivered (to rescue)
+9 אֶתְכֶם = <obj.> you
+10 מִיָּדוֹ = from hand his (hand)
+
+## 6:24:11
+KO: 그리고 너희가 요단을 건너 여리고에 이르렀고, 여리고의 주인들 곧 아모리 사람과 브리스 사람과 가나안 사람과 헷 사람과 기르가스 사람과 히위 사람과 여부스 사람들이 너희와 싸웠으나 내가 그들을 너희의 손에 붙였으며
+1 וַתַּעַבְרוּ = and you passed over (to pass)
+2 אֶת־ = <obj.>
+3 הַיַּרְדֵּן = the Jordan (Jordan)
+4 וַתָּבֹאוּ = and you came (to come (in))
+5 אֶל־ = to (to(wards))
+6 יְרִיחוֹ = Jericho
+7 וַיִּלָּחֲמוּ = and they fought (to fight)
+8 בָכֶם = against <the> you (you)
+9 בַּעֲלֵי־ = [the] citizens of (master)
+10 יְרִיחוֹ = Jericho
+11 הָאֱמֹרִי = the Amorite[s] (Amorite)
+12 וְהַפְּרִזִּי = and the Perizzite[s] (Perizzite)
+13 וְהַכְּנַעֲנִי = and the Canaanite[s] (Canaanite)
+14 וְהַחִתִּי = and the Hittite[s] (Hittite)
+15 וְהַגִּרְגָּשִׁי = and the Girgashite[s] (Girgashite)
+16 הַחִוִּי = the Hivite[s] (Hivite)
+17 וְהַיְבוּסִי = and the Jebusite[s] (Jebusite)
+18 וָאֶתֵּן = and I gave (to give)
+19 אוֹתָם = <obj.> them
+20 בְּיֶדְכֶם = in hand your (hand)
+
+## 6:24:12
+KO: 그리고 내가 너희 앞에 왕벌을 보내었고, 그것이 그 아모리 사람의 두 왕을 너희 앞에서 쫓아내었다. 너희의 칼로도 아니고, 너희의 활로도 아니다.
+1 וָאֶשְׁלַח = and I sent (to send)
+2 לִפְנֵיכֶם = <to> before you
+3 אֶת־ = <obj.>
+4 הַצִּרְעָה = the hornet (hornet)
+5 וַתְּגָרֶשׁ = and it drove out (to drive out)
+6 אוֹתָם = <obj.> them
+7 מִפְּנֵיכֶם = from before you
+8 שְׁנֵי = [the] two (two)
+9 מַלְכֵי = [the] kings of (king)
+10 הָאֱמֹרִי = the Amorite[s] (Amorite)
+11 לֹא = not
+12 בְחַרְבְּךָ = by sword your (sword)
+13 וְלֹא = and not
+14 בְקַשְׁתֶּךָ = by bow your (bow)
+
+## 6:24:13
+KO: 내가 너희에게 땅, 곧 네가 그 안에서 수고하지 않은 것을 주었고, 너희가 건축하지 않은 성읍들을 주었으니 너희가 그 가운데 거하며, 너희가 심지 않은 포도원들과 감람원들의 열매를 너희가 먹는다.
+1 וָאֶתֵּן = and I gave (to give)
+2 לָכֶם = to <the> you (you)
+3 אֶרֶץ = a land (land)
+4 אֲשֶׁר = which
+5 לֹא־ = not
+6 יָגַעְתָּ = you had labored (be weary|toil)
+7 בָּהּ = for it (her)
+8 וְעָרִים = and cities (city)
+9 אֲשֶׁר = which
+10 לֹא־ = not
+11 בְנִיתֶם = you had built (to build)
+12 וַתֵּשְׁבוּ = and you dwelt (to dwell)
+13 בָּהֶם = in <the> them (them)
+14 כְּרָמִים = vineyards (vineyard)
+15 וְזֵיתִים = and olive trees (olive)
+16 אֲשֶׁר = which
+17 לֹא־ = not
+18 נְטַעְתֶּם = you had planted (to plant)
+19 אַתֶּם = you (you(m.p.))
+20 אֹכְלִים = [are] eating (to eat)

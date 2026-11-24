@@ -1,0 +1,163 @@
+## 1:31:17
+KO: 그리고 야곱이 일어났다. 그리고 그가 그의 아들들과 그의 아내들을 낙타들 위에 태웠다.
+1 וַיָּקָם = and he arose (to arise)
+2 יַעֲקֹב = Jacob
+3 וַיִּשָּׂא = and he lifted up (to lift)
+4 אֶת־ = <obj.>
+5 בָּנָיו = children his (son)
+6 וְאֶת־ = and <obj.>
+7 נָשָׁיו = wives his (woman)
+8 עַל־ = on (upon)
+9 הַגְּמַלִּים = <the> camels (camel)
+
+## 1:31:18
+KO: 그리고 그는 그의 모든 가축과, 그가 획득한 모든 소유물 곧 밧단아람에서 획득한 그 가축의 획득물을 이끌고 가나안 땅에 있는 그의 아버지 이삭에게로 가려 하였다.
+1 וַיִּנְהַג = and he drove (to lead)
+2 אֶת־ = <obj.>
+3 כָּל־ = all
+4 מִקְנֵהוּ = livestock his
+5 וְאֶת־ = and <obj.>
+6 כָּל־ = all
+7 רְכֻשׁוֹ = possession[s] his (property)
+8 אֲשֶׁר = which
+9 רָכָשׁ = he had accumulated
+10 מִקְנֵה = [the] livestock of
+11 קִנְיָנוֹ = acquisition his (acquisition)
+12 אֲשֶׁר = which
+13 רָכַשׁ = he had accumulated
+14 בְּפַדַּן = in Paddan (Paddan)
+15 אֲרָם = Aram (-aram)
+16 לָבוֹא = to go (to come (in))
+17 אֶל־ = to (to(wards))
+18 יִצְחָק = Isaac
+19 אָבִיו = father his (father)
+20 אַרְצָה = [the] land of towards (land)
+21 כְּנָעַן = Canaan
+
+## 1:31:19
+KO: 그리고 라반이 자기 양 떼를 깎으러 갔으므로 라헬은 자기 아버지의 드라빔을 훔쳤다.
+1 וְלָבָן = and Laban (Laban)
+2 הָלַךְ = he had gone (to go)
+3 לִגְזֹז = to shear
+4 אֶת־ = <obj.>
+5 צֹאנוֹ = sheep his (flock)
+6 וַתִּגְנֹב = and she stole (to steal)
+7 רָחֵל = Rachel
+8 אֶת־ = <obj.>
+9 הַתְּרָפִים = the teraphim (teraphim)
+10 אֲשֶׁר = which
+11 לְאָבִיהָ = [belonged] to father her (father)
+
+## 1:31:20
+KO: 그리고 야곱은 아람 사람 라반의 마음을 훔쳤으니, 그에게 그가 도망하고 있다는 것을 알리지 않았기 때문이다.
+1 וַיִּגְנֹב = and he stole (to steal)
+2 יַעֲקֹב = Jacob
+3 אֶת־ = <obj.> ([Obj.])
+4 לֵב = [the] heart of (heart)
+5 לָבָן = Laban
+6 הָאֲרַמִּי = the Aramean (Aramean)
+7 עַל־ = on (upon)
+8 בְּלִי = not (without)
+9 הִגִּיד = he told (to tell)
+10 לוֹ = to <the> him (him)
+11 כִּי = that (for)
+12 בֹרֵחַ = [was] fleeing (to flee)
+13 הוּא = he (he;_she;_it)
+
+## 1:31:21
+KO: 그리고 그가 도망하였다. 그리고 그에게 속한 모든 것과 함께, 그리고 그가 일어났고, 그리고 그가 강을 건너갔고, 그리고 그가 길르앗 산을 향하여 그의 얼굴을 두었다.
+1 וַיִּבְרַח = and he fled (to flee)
+2 הוּא = he (he;_she;_it)
+3 וְכָל־ = and all (all)
+4 אֲשֶׁר־ = that (which)
+5 לוֹ = [belonged] to <the> him (him)
+6 וַיָּקָם = and he arose (to arise)
+7 וַיַּעֲבֹר = and he passed over (to pass)
+8 אֶת־ = <obj.>
+9 הַנָּהָר = the river (River)
+10 וַיָּשֶׂם = and he set (to set)
+11 אֶת־ = <obj.>
+12 פָּנָיו = face his (face)
+13 הַר = [the] hill country of (mountain)
+14 הַגִּלְעָד = <the> Gilead (Gilead)
+
+## 1:31:22
+KO: 그리고 야곱이 도망쳤다는 것이 제삼일에 라반에게 알려졌다.
+1 וַיֻּגַּד = and it was told (to tell)
+2 לְלָבָן = to Laban (Laban)
+3 בַּיּוֹם = on the day (day;_when)
+4 הַשְּׁלִישִׁי = <the> third (third)
+5 כִּי = that (for)
+6 בָרַח = he had fled (to flee)
+7 יַעֲקֹב = Jacob
+
+## 1:31:23
+KO: 그리고 그가 그의 형제들을 그와 함께 데리고, 칠 일 길을 그의 뒤를 쫓아가서, 길르앗 산에서 그에게 따라붙었다.
+1 וַיִּקַּח = and he took (to take)
+2 אֶת־ = <obj.>
+3 אֶחָיו = relatives his (brother)
+4 עִמּוֹ = with him (with)
+5 וַיִּרְדֹּף = and he pursued (to pursue)
+6 אַחֲרָיו = after him (after)
+7 דֶּרֶךְ = a journey of (way)
+8 שִׁבְעַת = seven
+9 יָמִים = days (day;_when)
+10 וַיַּדְבֵּק = and he overtook (to cleave)
+11 אֹתוֹ = <obj.> him
+12 בְּהַר = in [the] hill country of (mountain)
+13 הַגִּלְעָד = <the> Gilead (Gilead)
+
+## 1:31:24
+KO: 그리고 하나님이 밤에 꿈으로 아람 사람 라반에게 오셔서 그에게 말씀하시기를, 너는 스스로 삼가서 야곱에게 좋음에서부터 나쁨까지 말하지 않도록 하라 하셨더라.
+1 וַיָּבֹא = and he came (to come (in))
+2 אֱלֹהִים = God
+3 אֶל־ = to (to(wards))
+4 לָבָן = Laban
+5 הָאֲרַמִּי = the Aramean (Aramean)
+6 בַּחֲלֹם = in [the] dream of (dream)
+7 הַלָּיְלָה = the night (night)
+8 וַיֹּאמֶר = and he said (to say)
+9 לוֹ = to <the> him (him)
+10 הִשָּׁמֶר = take heed (to keep)
+11 לְךָ = to <the> yourself (you)
+12 פֶּן־ = lest
+13 תְּדַבֵּר = you should speak (to speak)
+14 עִם־ = with
+15 יַעֲקֹב = Jacob
+16 מִטּוֹב = from good (pleasant)
+17 עַד־ = unto (till)
+18 רָע = bad
+
+## 1:31:25
+KO: 그리고 라반이 야곱을 따라잡았다. 그런데 야곱은 그 산에 자기의 장막을 쳤고, 라반은 그의 형제들과 함께 길르앗 산에 자기의 장막을 쳤다.
+1 וַיַּשֵּׂג = and he overtook (to overtake)
+2 לָבָן = Laban
+3 אֶת־ = <obj.>
+4 יַעֲקֹב = Jacob
+5 וְיַעֲקֹב = and Jacob
+6 תָּקַע = he had pitched
+7 אֶת־ = <obj.>
+8 אָהֳלוֹ = tent his (tent)
+9 בָּהָר = in the hill country
+10 וְלָבָן = and Laban
+11 תָּקַע = he pitched tent
+12 אֶת־ = with
+13 אֶחָיו = relatives his (brother)
+14 בְּהַר = in [the] hill country of
+15 הַגִּלְעָד = <the> Gilead (Gilead)
+
+## 1:31:26
+KO: 라반이 야곱에게 말했다. "네가 무슨 짓을 하였느냐? 네가 내 마음을 훔치고, 내 딸들을 칼에 사로잡힌 자들처럼 끌고 갔으니 말이다."
+1 וַיֹּאמֶר = and he said (to say)
+2 לָבָן = Laban
+3 לְיַעֲקֹב = to Jacob (Jacob)
+4 מֶה = what?
+5 עָשִׂיתָ = have you done (to make)
+6 וַתִּגְנֹב = and you have stolen (to steal)
+7 אֶת־ = <obj.>
+8 לְבָבִי = heart my (heart)
+9 וַתְּנַהֵג = and you have led away (to lead)
+10 אֶת־ = <obj.>
+11 בְּנֹתַי = daughters my (daughter)
+12 כִּשְׁבֻיוֹת = like captives of (to take captive)
+13 חָרֶב = [the] sword (sword)

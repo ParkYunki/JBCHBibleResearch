@@ -1,0 +1,780 @@
+## 3:11:3
+KO: 짐승 중에서 굽을 갈라지게 하고 굽의 틈을 쪼개며 새김질을 올라오게 하는 모든 것은 그것을 너희가 먹을지니라.
+1 כֹּל = any (all)
+2 מַפְרֶסֶת = [one which] divides in two (to divide)
+3 פַּרְסָה = a hoof
+4 וְשֹׁסַעַת = and [which] cleaves (to cleave)
+5 שֶׁסַע = a cleft of (cleft)
+6 פְּרָסֹת = hooves
+7 מַעֲלַת = [which] brings up (to ascend)
+8 גֵּרָה = cud
+9 בַּבְּהֵמָה = among the animal[s] (animal)
+10 אֹתָהּ = <obj.> it ([Obj.])
+11 תֹּאכֵלוּ = you will eat (to eat)
+
+## 3:11:4
+KO: 오직 새김질하는 것들로부터 또는 굽이 갈라진 것들로부터 이것들은 너희가 먹지 못할 것이니, 낙타는 새김질은 하지만 굽을 갈라지게 하지 아니하였으므로 그것은 너희에게 부정하다.
+1 אַךְ = nevertheless (surely)
+2 אֶת־ = <obj.>
+3 זֶה = this
+4 לֹא = not
+5 תֹאכְלוּ = you must eat (to eat)
+6 מִמַּעֲלֵי = from [those which] bring up
+7 הַגֵּרָה = <of> the cud
+8 וּמִמַּפְרִיסֵי = and from [those which] divide in two
+9 הַפַּרְסָה = <of> the hoof
+10 אֶת־ = <obj.>
+11 הַגָּמָל = the camel (camel)
+12 כִּי־ = that (for)
+13 מַעֲלֵה = [is] bringing up
+14 גֵרָה = <of> cud
+15 הוּא = it
+16 וּפַרְסָה = and a hoof
+17 אֵינֶנּוּ = not it (nothing)
+18 מַפְרִיס = [is] dividing in two
+19 טָמֵא = [is] unclean (unclean)
+20 הוּא = it
+21 לָכֶם = to <the> you (you)
+
+## 3:11:5
+KO: 그리고 너희에게 바위너구리는, 왜냐하면 그것은 새김질은 올라오게 하지만 굽은 갈라지지 않았으므로, 부정하다.
+1 וְאֶת־ = and <obj.> ([Obj.])
+2 הַשָּׁפָן = the rock badger (rock badger)
+3 כִּי־ = that (for)
+4 מַעֲלֵה = [is] bringing up (to ascend)
+5 גֵרָה = <of> cud (cud)
+6 הוּא = it
+7 וּפַרְסָה = and a hoof (hoof)
+8 לֹא = not
+9 יַפְרִיס = it divides in two (to divide)
+10 טָמֵא = [is] unclean (unclean)
+11 הוּא = it
+12 לָכֶם = to <the> you (you)
+
+## 3:11:6
+KO: 그리고 토끼도, 왜냐하면 그것은 새김질을 올리는 것이나, 굽이 갈라지지 않았기 때문이니, 그것은 너희에게 부정하다.
+1 וְאֶת־ = and <obj.> ([Obj.])
+2 הָאַרְנֶבֶת = the hare (hare)
+3 כִּי־ = that (for)
+4 מַעֲלַת = [is] bringing up (to ascend)
+5 גֵּרָה = <of> cud (cud)
+6 הִוא = it
+7 וּפַרְסָה = and a hoof (hoof)
+8 לֹא = not
+9 הִפְרִיסָה = it divides in two (to divide)
+10 טְמֵאָה = [is] unclean (unclean)
+11 הִוא = it
+12 לָכֶם = to <the> you (you)
+
+## 3:11:7
+KO: 그리고 돼지는, 비록 그것이 굽을 나누어 굽이 갈라졌을지라도, 그것이 새김질은 하지 아니하므로 너희에게 부정하다.
+1 וְאֶת־ = and <obj.> ([Obj.])
+2 הַחֲזִיר = the pig (swine)
+3 כִּי־ = that (for)
+4 מַפְרִיס = [is] dividing in two (to divide)
+5 פַּרְסָה = a hoof
+6 הוּא = it
+7 וְשֹׁסַע = and [is] cleaving (to cleave)
+8 שֶׁסַע = a cleft of (cleft)
+9 פַּרְסָה = a hoof
+10 וְהוּא = and it
+11 גֵּרָה = cud
+12 לֹא־ = not
+13 יִגָּר = it ruminates (to drag|chew|saw)
+14 טָמֵא = [is] unclean (unclean)
+15 הוּא = it
+16 לָכֶם = to <the> you (you)
+
+## 3:11:8
+KO: 그들의 고기로부터 너희는 먹지 말고, 그리고 그들의 주검에 너희는 만지지 말라. 그들은 너희에게 부정하다.
+1 מִבְּשָׂרָם = any of meat their (flesh)
+2 לֹא = not
+3 תֹאכֵלוּ = you must eat (to eat)
+4 וּבְנִבְלָתָם = and <in> carcass their (carcass)
+5 לֹא = not
+6 תִגָּעוּ = you will touch (to touch)
+7 טְמֵאִים = [are] unclean (unclean)
+8 הֵם = they (they(masc.))
+9 לָכֶם = to <the> you (you)
+
+## 3:11:9
+KO: 이것을 너희가 먹을 것이니, 물 안에 있는 모든 것 중에서 지느러미와 비늘이 그것에게 있는 모든 것은, 바다들과 강들에 있는 것들로서, 너희가 그것들을 먹을지니라.
+1 אֶת־ = <obj.>
+2 זֶה = this
+3 תֹּאכְלוּ = you will eat
+4 מִכֹּל = from all
+5 אֲשֶׁר = that
+6 בַּמָּיִם = [is] in the waters
+7 כֹּל = all
+8 אֲשֶׁר־ = that
+9 לוֹ = [belong] to <the> it (him)
+10 סְנַפִּיר = fin
+11 וְקַשְׂקֶשֶׂת = and scale (scale)
+12 בַּמַּיִם = in the waters
+13 בַּיַּמִּים = in the seas (sea)
+14 וּבַנְּחָלִים = and in the wadis (torrent)
+15 אֹתָם = <obj.> them
+16 תֹּאכֵלוּ = you will eat
+
+## 3:11:10
+KO: 그리고 물속의 모든 기어 다니는 것들과 물속에 있는 살아 있는 모든 생물, 곧 강과 바다에 있는 모든 것들 중에서 지느러미와 비늘이 없는 것들은, 그것들은 너희에게 가증한 것이다.
+1 וְכֹל = and all
+2 אֲשֶׁר = that
+3 אֵין־ = not (nothing)
+4 לוֹ = [belong] to <the> it (him)
+5 סְנַפִּיר = fin
+6 וְקַשְׂקֶשֶׂת = and scale (scale)
+7 בַּיַּמִּים = in the seas (sea)
+8 וּבַנְּחָלִים = and in the wadis (torrent)
+9 מִכֹּל = from every
+10 שֶׁרֶץ = <the> swarming thing of (swarm)
+11 הַמַּיִם = the waters
+12 וּמִכֹּל = and of every
+13 נֶפֶשׁ = creature (soul)
+14 הַחַיָּה = <the> living (alive)
+15 אֲשֶׁר = which
+16 בַּמָּיִם = [is] in the waters
+17 שֶׁקֶץ = [are] detestable thing[s] (detestation)
+18 הֵם = they (they(masc.))
+19 לָכֶם = to <the> you (you)
+
+## 3:11:11
+KO: 그리고 그것들은 너희에게 가증한 것이 될 것이다. 그것들의 고기로부터 너희는 먹지 말 것이며, 그것들의 주검을 너희는 가증히 여길 것이다.
+1 וְשֶׁקֶץ = and detestable thing[s] (detestation)
+2 יִהְיוּ = they will be (to be)
+3 לָכֶם = to <the> you (you)
+4 מִבְּשָׂרָם = any of meat their (flesh)
+5 לֹא = not
+6 תֹאכֵלוּ = you must eat (to eat)
+7 וְאֶת־ = and <obj.> ([Obj.])
+8 נִבְלָתָם = carcass their (carcass)
+9 תְּשַׁקֵּצוּ = you will consider detestable (to detest)
+
+## 3:11:12
+KO: 물속에 있는 모든 것들, 곧 그것에게 지느러미와 비늘이 없는 것은 너희에게 가증한 것이니라.
+1 כֹּל = all
+2 אֲשֶׁר = that (which)
+3 אֵין־ = not (nothing)
+4 לוֹ = [belong] to <the> it (him)
+5 סְנַפִּיר = fin
+6 וְקַשְׂקֶשֶׂת = and scale (scale)
+7 בַּמָּיִם = in the waters (water)
+8 שֶׁקֶץ = [is] a detestable thing (detestation)
+9 הוּא = it (he;_she;_it)
+10 לָכֶם = to <the> you (you)
+
+## 3:11:13
+KO: 그리고 새들 중에서 너희가 가증히 여길 것들은 이것들이니, 이것들은 가증한 것이라 먹지 말지니 곧 독수리와 솔개와 어응이라.
+1 וְאֶת־ = and <obj.>
+2 אֵלֶּה = these
+3 תְּשַׁקְּצוּ = you will consider detestable (to detest)
+4 מִן־ = from
+5 הָעוֹף = the bird[s] (bird)
+6 לֹא = not
+7 יֵאָכְלוּ = they will be eaten (to eat)
+8 שֶׁקֶץ = [are] detestable thing[s] (detestation)
+9 הֵם = they (they(masc.))
+10 אֶת־ = <obj.>
+11 הַנֶּשֶׁר = the eagle (eagle)
+12 וְאֶת־ = and <obj.>
+13 הַפֶּרֶס = the bearded vulture (vulture)
+14 וְאֵת = and <obj.>
+15 הָעָזְנִיָּה = the osprey (vulture)
+
+## 3:11:14
+KO: 그리고 솔개와 그리고 매를 그 종류대로.
+1 וְאֶת־ = and <obj.>
+2 הַדָּאָה = the black kite (kite)
+3 וְאֶת־ = and <obj.>
+4 הָאַיָּה = the hawk (falcon)
+5 לְמִינָהּ = to kind its (kind)
+
+## 3:11:15
+KO: 모든 까마귀를 그 종류대로
+1 אֵת = <obj.> ([Obj.])
+2 כָּל־ = every (all)
+3 עֹרֵב = raven
+4 לְמִינוֹ = to kind its (kind)
+
+## 3:11:16
+KO: 그리고 타조의 딸과, 그리고 다호마스와, 그리고 갈매기와, 그리고 그 종류대로의 새매와
+1 וְאֵת = and <obj.>
+2 בַּת = [the] daughter of (daughter)
+3 הַיַּעֲנָה = the ostrich (ostrich)
+4 וְאֶת־ = and <obj.>
+5 הַתַּחְמָס = the screech owl (ostrich)
+6 וְאֶת־ = and <obj.>
+7 הַשָּׁחַף = the gull (gull)
+8 וְאֶת־ = and <obj.>
+9 הַנֵּץ = the falcon (hawk)
+10 לְמִינֵהוּ = to kind its (kind)
+
+## 3:11:17
+KO: 그리고 올빼미와 그리고 가마우지와 그리고 부엉이를
+1 וְאֶת־ = and <obj.>
+2 הַכּוֹס = the little owl (owl)
+3 וְאֶת־ = and <obj.>
+4 הַשָּׁלָךְ = the cormorant (cormorant)
+5 וְאֶת־ = and <obj.>
+6 הַיַּנְשׁוּף = the great owl (owl)
+
+## 3:11:18
+KO: 그리고 올빼미와 그리고 사다새와 그리고 매와
+1 וְאֶת־ = and <obj.>
+2 הַתִּנְשֶׁמֶת = the barn owl (chameleon)
+3 וְאֶת־ = and <obj.>
+4 הַקָּאָת = the desert owl (pelican)
+5 וְאֶת־ = and <obj.>
+6 הָרָחָם = the Egyptian vulture (carrion)
+
+## 3:11:19
+KO: 그리고 황새와 그 종류대로의 왜가리와 그리고 대승과 그리고 박쥐니라.
+1 וְאֵת = and <obj.>
+2 הַחֲסִידָה = the stork (stork)
+3 הָאֲנָפָה = the heron (heron)
+4 לְמִינָהּ = to kind its (kind)
+5 וְאֶת־ = and <obj.>
+6 הַדּוּכִיפַת = the hoopoe (hoopoe)
+7 וְאֶת־ = and <obj.>
+8 הָעֲטַלֵּף = the bat (bat)
+
+## 3:11:20
+KO: 네 발로 기어 다니는 모든 날짐승은 너희에게 가증한 것이니라.
+1 כֹּל = every (all)
+2 שֶׁרֶץ = <the> swarming thing of (swarm)
+3 הָעוֹף = <the> wing (bird)
+4 הַהֹלֵךְ = which walks (to go)
+5 עַל־ = on (upon)
+6 אַרְבַּע = four [legs] (four)
+7 שֶׁקֶץ = [is] a detestable thing (detestation)
+8 הוּא = it (he;_she;_it)
+9 לָכֶם ס = to <the> you (you)
+
+## 3:11:21
+KO: 오직 이것은 너희가 먹을지니, 날개 달린 모든 기어다니는 것들 중에서 네 발로 기어 다니는 것으로서, 그 발 위에 그들을 가지고 땅 위에서 뛰는 다리들이 있는 것은 (먹을지니라).
+1 אַךְ = nevertheless (surely)
+2 אֶת־ = <obj.> ([Obj.])
+3 זֶה = this
+4 תֹּאכְלוּ = you will eat (to eat)
+5 מִכֹּל = from every (all)
+6 שֶׁרֶץ = <the> swarming thing of (swarm)
+7 הָעוֹף = <the> wing (bird)
+8 הַהֹלֵךְ = which walks (to go)
+9 עַל־ = on
+10 אַרְבַּע = four [legs] (four)
+11 אֲשֶׁר־ = which
+12 לוֹ = [belong] to <the> it (him)
+13 כְרָעַיִם = legs (leg)
+14 מִמַּעַל = from above (above)
+15 לְרַגְלָיו = <to> feet its (foot)
+16 לְנַתֵּר = to hop (to start)
+17 בָּהֵן = with <the> them (them)
+18 עַל־ = on
+19 הָאָרֶץ = the ground (land)
+
+## 3:11:22
+KO: 이것들 중에서 너희가 먹을 수 있는 것은 곧 메뚜기를 그 종류대로, 그리고 베짱이를 그 종류대로, 그리고 귀뚜라미를 그 종류대로, 그리고 팟종이를 그 종류대로이다.
+1 אֶת־ = <obj.>
+2 אֵלֶּה = these
+3 מֵהֶם = any of <the> them (them)
+4 תֹּאכֵלוּ = you will eat (to eat)
+5 אֶת־ = <obj.>
+6 הָאַרְבֶּה = the locust (locust)
+7 לְמִינוֹ = to kind its
+8 וְאֶת־ = and <obj.>
+9 הַסָּלְעָם = the locust (locust)
+10 לְמִינֵהוּ = to kind its
+11 וְאֶת־ = and <obj.>
+12 הַחַרְגֹּל = the locust (locust)
+13 לְמִינֵהוּ = to kind its
+14 וְאֶת־ = and <obj.>
+15 הֶחָגָב = the grasshopper (locust)
+16 לְמִינֵהוּ = to kind its
+
+## 3:11:23
+KO: 그리고 날개를 가지고 네 발로 기어 다니는 모든 기어 다니는 것들은 너희에게 가증한 것이니라.
+1 וְכֹל = and every (all)
+2 שֶׁרֶץ = <the> swarming thing of (swarm)
+3 הָעוֹף = <the> wing (bird)
+4 אֲשֶׁר־ = which
+5 לוֹ = [belong] to <the> it (him)
+6 אַרְבַּע = four
+7 רַגְלָיִם = feet (foot)
+8 שֶׁקֶץ = [is] a detestable thing (detestation)
+9 הוּא = it (he;_she;_it)
+10 לָכֶם = to <the> you (you)
+
+## 3:11:24
+KO: 그리고 이들로 인하여 너희는 부정하게 되나니, 이것들의 주검을 만지는 모든 자는 저녁까지 부정할 것이다.
+1 וּלְאֵלֶּה = and to these (these)
+2 תִּטַּמָּאוּ = you will make yourselves unclean
+3 כָּל־ = every (all)
+4 הַנֹּגֵעַ = <the> [one who] touches (to touch)
+5 בְּנִבְלָתָם = <in> carcass their (carcass)
+6 יִטְמָא = he will be unclean
+7 עַד־ = until (till)
+8 הָעָרֶב = the evening (evening)
+
+## 3:11:25
+KO: 그리고 그들의 주검을 들어 옮기는 모든 자는 자기의 옷들을 빨아야 한다. 그리고 그는 저녁까지 부정할 것이다.
+1 וְכָל־ = and every (all)
+2 הַנֹּשֵׂא = <the> [one who] carries (to lift)
+3 מִנִּבְלָתָם = any of carcass their (carcass)
+4 יְכַבֵּס = he will wash (to wash)
+5 בְּגָדָיו = garments his (garment)
+6 וְטָמֵא = and he will be unclean (to defile)
+7 עַד־ = until (till)
+8 הָעָרֶב = the evening (evening)
+
+## 3:11:26
+KO: 굽이 갈라져 있고, 갈라진 틈이 없는 모든 짐승들과, 새김질을 하지 않는 짐승들의 주검은 너희에게 부정하다. 그것들을 만지는 자는 누구나 부정해질 것이다.
+1 לְכָל־ = to every
+2 הַבְּהֵמָה = <the> animal (animal)
+3 אֲשֶׁר = which
+4 הִוא = it (he;_she;_it)
+5 מַפְרֶסֶת = [is] dividing in two (to divide)
+6 פַּרְסָה = a hoof (hoof)
+7 וְשֶׁסַע = and a cleft
+8 אֵינֶנָּה = not it
+9 שֹׁסַעַת = [is] cleaving
+10 וְגֵרָה = and cud (cud)
+11 אֵינֶנָּה = not it
+12 מַעֲלָה = [is] bringing up (to ascend)
+13 טְמֵאִים = [are] unclean (unclean)
+14 הֵם = they
+15 לָכֶם = to <the> you (you)
+16 כָּל־ = every
+17 הַנֹּגֵעַ = <the> [one who] touches (to touch)
+18 בָּהֶם = <in> <the> them (them)
+19 יִטְמָא = he will be unclean (to defile)
+
+## 3:11:27
+KO: 그리고 네 발(넷) 위로 걷는 모든 짐승들 가운데 그 발바닥들 위로 걷는 모든 것은 너희에게 부정하니, 그들의 주검을 만지는 모든 자는 저녁까지 부정할 것이다.
+1 וְכֹל = and any
+2 הוֹלֵךְ = [one which] walks
+3 עַל־ = on
+4 כַּפָּיו = paws its (palm)
+5 בְּכָל־ = among every
+6 הַחַיָּה = <the> living creature (living thing)
+7 הַהֹלֶכֶת = which walks
+8 עַל־ = on
+9 אַרְבַּע = four [feet] (four)
+10 טְמֵאִים = [are] unclean (unclean)
+11 הֵם = they (they(masc.))
+12 לָכֶם = to <the> you (you)
+13 כָּל־ = every
+14 הַנֹּגֵעַ = <the> [one who] touches (to touch)
+15 בְּנִבְלָתָם = <in> carcass their (carcass)
+16 יִטְמָא = he will be unclean (to defile)
+17 עַד־ = until (till)
+18 הָעָרֶב = the evening (evening)
+
+## 3:11:28
+KO: 그리고 그들의 주검을 들어 옮기는 자는 그의 옷을 빨아야 한다. 그리고 그는 저녁까지 부정할 것이다. 그것들은 너희에게 부정하다.
+1 וְהַנֹּשֵׂא = and who [-ever] carries (to lift)
+2 אֶת־ = <obj.> ([Obj.])
+3 נִבְלָתָם = carcass their (carcass)
+4 יְכַבֵּס = he will wash (to wash)
+5 בְּגָדָיו = garments his (garment)
+6 וְטָמֵא = and he will be unclean (to defile)
+7 עַד־ = until (till)
+8 הָעָרֶב = the evening (evening)
+9 טְמֵאִים = [are] unclean (unclean)
+10 הֵמָּה = they (they(masc.))
+11 לָכֶם ס = to <the> you (you)
+
+## 3:11:29
+KO: 그리고 이것은 너희에게 부정한 것이니, 땅 위에서 기어 다니는 기는 것들 중에서 곧 족제비와 쥐와 도마뱀 종류이다.
+1 וְזֶה = and this (this)
+2 לָכֶם = to <the> you (you)
+3 הַטָּמֵא = [is] the unclean (unclean)
+4 בַּשֶּׁרֶץ = among the swarming thing[s] (swarm)
+5 הַשֹּׁרֵץ = which swarms (to swarm)
+6 עַל־ = on (upon)
+7 הָאָרֶץ = the earth (land)
+8 הַחֹלֶד = the weasel (weasel)
+9 וְהָעַכְבָּר = and the mouse (mouse)
+10 וְהַצָּב = and the great lizard (lizard)
+11 לְמִינֵהוּ = to kind its (kind)
+
+## 3:11:30
+KO: 그리고 도마뱀붙이와 파충류와 도마뱀과 모래 도마뱀과 카멜레온이라.
+1 וְהָאֲנָקָה = and the gecko (gecko)
+2 וְהַכֹּחַ = and the monitor lizard (reptile)
+3 וְהַלְּטָאָה = and the wall lizard (lizard)
+4 וְהַחֹמֶט = and the skink (lizard)
+5 וְהַתִּנְשָׁמֶת = and the chameleon (chameleon)
+
+## 3:11:31
+KO: 이것들은 너희에게 부정하다, 기는 모든 것들 중에서. 그것들이 죽었을 때에 그것들을 만지는 모든 자는 저녁까지 부정할 것이다.
+1 אֵלֶּה = these
+2 הַטְּמֵאִים = [are] the unclean (unclean)
+3 לָכֶם = to <the> you (you)
+4 בְּכָל־ = among every
+5 הַשָּׁרֶץ = <the> swarming thing (swarm)
+6 כָּל־ = every
+7 הַנֹּגֵעַ = <the> [one who] touches (to touch)
+8 בָּהֶם = <in> <the> them (them)
+9 בְּמֹתָם = in death their (death)
+10 יִטְמָא = he will be unclean (to defile)
+11 עַד־ = until (till)
+12 הָעָרֶב = the evening (evening)
+
+## 3:11:32
+KO: 그리고 그것들(죽은 것들)이 죽을 때에 그것들 중 어떤 것의 주검이라도 어떤 나무 그릇이나, 의복이나, 가죽이나, 자루나, 어떤 일(용도)을 하는 그릇 위로 떨어지면, 그것은 부정해지리니, 물 안으로 그것을 들여야 하고, 저녁까지 부정하다가 깨끗해질 것이다.
+1 וְכֹל = and all
+2 אֲשֶׁר־ = that
+3 יִפֹּל־ = it will fall (to fall)
+4 עָלָיו = on it (upon)
+5 מֵהֶם = any of <the> them
+6 בְּמֹתָם = in death their (death)
+7 יִטְמָא = it will be unclean
+8 מִכָּל־ = from every
+9 כְּלִי־ = vessel of
+10 עֵץ = wood (tree)
+11 אוֹ = or
+12 בֶגֶד = a garment (garment)
+13 אוֹ־ = or
+14 עוֹר = a hide (skin)
+15 אוֹ = or
+16 שָׂק = sackcloth
+17 כָּל־ = every
+18 כְּלִי = vessel
+19 אֲשֶׁר־ = which
+20 יֵעָשֶׂה = it will be done (to make)
+21 מְלָאכָה = a work (work)
+22 בָּהֶם = in <the> them
+23 בַּמַּיִם = in <the> water (water)
+24 יוּבָא = it will be put (to come (in))
+25 וְטָמֵא = and it will be unclean
+26 עַד־ = until (till)
+27 הָעֶרֶב = the evening (evening)
+28 וְטָהֵר = and it will be pure (be pure)
+
+## 3:11:33
+KO: 그리고 그들 중 어떤 것이 어떤 질그릇 안으로 떨어지면, 그 안에 있는 모든 것은 부정하게 될 것이며, 너희는 그것을 깨뜨릴지니라.
+1 וְכָל־ = and every
+2 כְּלִי־ = vessel of (article|utensil)
+3 חֶרֶשׂ = earthenware
+4 אֲשֶׁר־ = which
+5 יִפֹּל = it will fall (to fall)
+6 מֵהֶם = any of <the> them (them)
+7 אֶל־ = into (to(wards))
+8 תּוֹכוֹ = [the] middle of it
+9 כֹּל = all
+10 אֲשֶׁר = that
+11 בְּתוֹכוֹ = [is] in [the] midst of it
+12 יִטְמָא = it will be unclean (to defile)
+13 וְאֹתוֹ = and <obj.> it ([Obj.])
+14 תִשְׁבֹּרוּ = you will break (to break)
+
+## 3:11:34
+KO: 먹을 수 있는 모든 식물 중, 물이 그 위에 닿으면 그것은 부정하여질 것이요, 마실 수 있는 모든 마실 것도 모든 그릇 안에서 부정하여질 것이다.
+1 מִכָּל־ = any of all
+2 הָאֹכֶל = the food (food)
+3 אֲשֶׁר = which
+4 יֵאָכֵל = it will be eaten (to eat)
+5 אֲשֶׁר = which
+6 יָבוֹא = it will come (to come (in))
+7 עָלָיו = on it (upon)
+8 מַיִם = water
+9 יִטְמָא = it will be unclean
+10 וְכָל־ = and any
+11 מַשְׁקֶה = drink (irrigation)
+12 אֲשֶׁר = which
+13 יִשָּׁתֶה = it is drunk (to drink)
+14 בְּכָל־ = in every
+15 כְּלִי = vessel (article|utensil)
+16 יִטְמָא = it will be unclean
+
+## 3:11:35
+KO: 그리고 그것들의 주검 중에서 무엇이든지 그것(물건) 위에 떨어지면, 그것은 부정하게 될 것이니, 화덕이든지 질탕관이든지 깨뜨려질 것이다. 그것들은 부정하며, 너희에게 부정하게 될 것이다.
+1 וְכֹל = and all (all)
+2 אֲשֶׁר־ = that (which)
+3 יִפֹּל = it will fall (to fall)
+4 מִנִּבְלָתָם = any of carcass their (carcass)
+5 עָלָיו = on it (upon)
+6 יִטְמָא = it will be unclean (to defile)
+7 תַּנּוּר = an oven (oven)
+8 וְכִירַיִם = and a stove (stove)
+9 יֻתָּץ = it will be broken up (to tear)
+10 טְמֵאִים = [are] unclean
+11 הֵם = they (they(masc.))
+12 וּטְמֵאִים = and unclean
+13 יִהְיוּ = they will be (to be)
+14 לָכֶם = to <the> you (you)
+
+## 3:11:36
+KO: 단지 샘이나 웅덩이, 곧 물이 모인 곳은 깨끗할 것이나, 그것들의 사체에 닿는 것은 부정해질 것이다.
+1 אַךְ = nevertheless (surely)
+2 מַעְיָן = a spring (spring)
+3 וּבוֹר = and a cistern (pit)
+4 מִקְוֵה־ = a reservoir of (collection)
+5 מַיִם = water
+6 יִהְיֶה = it will be (to be)
+7 טָהוֹר = pure (clean)
+8 וְנֹגֵעַ = and [one who] touches (to touch)
+9 בְּנִבְלָתָם = <in> carcass their (carcass)
+10 יִטְמָא = he will be unclean (to defile)
+
+## 3:11:37
+KO: 그리고 만일 그것들의 주검이 파종할 모든 씨앗 위에 떨어진다면, 그것은 정하다.
+1 וְכִי = and if (for)
+2 יִפֹּל = it will fall (to fall)
+3 מִנִּבְלָתָם = any of carcass their (carcass)
+4 עַל־ = on (upon)
+5 כָּל־ = every (all)
+6 זֶרַע = seed of (seed)
+7 זֵרוּעַ = sowing
+8 אֲשֶׁר = which
+9 יִזָּרֵעַ = it will be sown (to sow)
+10 טָהוֹר = [is] pure (clean)
+11 הוּא = it (he;_she;_it)
+
+## 3:11:38
+KO: 그리고 만일 물이 씨앗 위에 주어지고, 그들의 사체 중 일부가 그 위에 떨어지면, 그것은 너희에게 부정하다.
+1 וְכִי = and if (for)
+2 יֻתַּן־ = it will be put (to give)
+3 מַיִם = water
+4 עַל־ = on
+5 זֶרַע = seed
+6 וְנָפַל = and it will fall (to fall)
+7 מִנִּבְלָתָם = any of carcass their (carcass)
+8 עָלָיו = on it
+9 טָמֵא = [is] unclean (unclean)
+10 הוּא = it (he;_she;_it)
+11 לָכֶם ס = to <the> you (you)
+
+## 3:11:39
+KO: 그리고 너희에게 먹을거리가 되는 짐승들 중 그것이 죽으면, 그것의 사체를 만지는 자는 저녁까지 부정할 것이다.
+1 וְכִי = and if (for)
+2 יָמוּת = it will die (to die)
+3 מִן־ = any of (from)
+4 הַבְּהֵמָה = the livestock (animal)
+5 אֲשֶׁר־ = which
+6 הִיא = it (he;_she;_it)
+7 לָכֶם = [belongs] to <the> you (you)
+8 לְאָכְלָה = to food (food)
+9 הַנֹּגֵעַ = who [-ever] touches (to touch)
+10 בְּנִבְלָתָהּ = <in> carcass its (carcass)
+11 יִטְמָא = he will be unclean (to defile)
+12 עַד־ = until (till)
+13 הָעָרֶב = the evening (evening)
+
+## 3:11:40
+KO: 그것(들)의 사체를 먹는 자는 자기 옷들을 빨아야 하고 저녁까지 부정할 것이며, 그 사체를 옮기는 자도 자기 옷들을 빨아야 하고 저녁까지 부정할 것이다.
+1 וְהָאֹכֵל = and [who [-ever] eats (to eat)
+2 מִנִּבְלָתָהּ = any of carcass its
+3 יְכַבֵּס = he will wash
+4 בְּגָדָיו = garments his
+5 וְטָמֵא = and he will be unclean
+6 עַד־ = until
+7 הָעָרֶב = the evening
+8 וְהַנֹּשֵׂא = and who [-ever] carries (to lift)
+9 אֶת־ = <obj.> ([Obj.])
+10 נִבְלָתָהּ = carcass its
+11 יְכַבֵּס = he will wash
+12 בְּגָדָיו = garments his
+13 וְטָמֵא = and he will be unclean
+14 עַד־ = until
+15 הָעָרֶב = the evening
+
+## 3:11:41
+KO: 그리고 땅 위를 기어 다니는 모든 기는 것은 가증한 것이니, 먹어서는 안 된다.
+1 וְכָל־ = and every (all)
+2 הַשֶּׁרֶץ = <the> swarming thing (swarm)
+3 הַשֹּׁרֵץ = which swarms (to swarm)
+4 עַל־ = on (upon)
+5 הָאָרֶץ = the earth (land)
+6 שֶׁקֶץ = [is] a detestable thing (detestation)
+7 הוּא = it (he;_she;_it)
+8 לֹא = not
+9 יֵאָכֵל = it will be eaten (to eat)
+
+## 3:11:42
+KO: 땅 위에서 기어 다니는 모든 기는 것 중에서 배로 밀어 다니는 것이나, 네 발로 걷는 것이나, 혹은 많은 발을 가진 모든 것, 즉 땅 위에서 기는 모든 기는 것들은 너희가 그것들을 먹지 말지니, 이는 그것들이 가증함이기 때문이다.
+1 כֹּל = any
+2 הוֹלֵךְ = [one which] walks
+3 עַל־ = on
+4 גָּחוֹן = belly
+5 וְכֹל = and any
+6 הוֹלֵךְ = [one which] walks
+7 עַל־ = on
+8 אַרְבַּע = four [feet] (four)
+9 עַד = to (till)
+10 כָּל־ = any
+11 מַרְבֵּה = [one which] multiplies (to multiply)
+12 רַגְלַיִם = <of> feet (foot)
+13 לְכָל־ = to every
+14 הַשֶּׁרֶץ = <the> swarming thing (swarm)
+15 הַשֹּׁרֵץ = which swarms (to swarm)
+16 עַל־ = on
+17 הָאָרֶץ = the earth (land)
+18 לֹא = not
+19 תֹאכְלוּם = you must eat them (to eat)
+20 כִּי־ = for
+21 שֶׁקֶץ = [are] a detestable thing (detestation)
+22 הֵם = they (they(masc.))
+
+## 3:11:43
+KO: 너희는 기어 다니는 모든 기는 것들로 인하여 너희 자신을 가증하게 하지 말며, 그것들로 인하여 스스로를 더럽히지 말라. 그러면 너희가 그것들로 인하여 부정하게 될 것이다.
+1 אַל־ = may not (not)
+2 תְּשַׁקְּצוּ = you make detestable (to detest)
+3 אֶת־ = <obj.> ([Obj.])
+4 נַפְשֹׁתֵיכֶם = selves your (soul)
+5 בְּכָל־ = by any (all)
+6 הַשֶּׁרֶץ = <the> swarming thing (swarm)
+7 הַשֹּׁרֵץ = which swarms (to swarm)
+8 וְלֹא = and not (not)
+9 תִטַּמְּאוּ = you must make yourselves unclean
+10 בָּהֶם = by <the> them
+11 וְנִטְמֵתֶם = and you will make yourselves unclean
+12 בָּם = by <the> them
+
+## 3:11:44
+KO: 왜냐하면 나 여호와 너희 하나님이기 때문이다. 그러므로 너희는 스스로 거룩하게 하라. 그리고 너희는 거룩하게 되어라. 왜냐하면 내가 거룩하기 때문이다. 그리고 너희는 땅 위를 기어 다니는 모든 기는 것들로 인하여 너희 영혼들을 더럽히지 말라.
+1 כִּי = for
+2 אֲנִי = I
+3 יְהוָה = [am] Yahweh (LORD)
+4 אֱלֹהֵיכֶם = God your (God)
+5 וְהִתְקַדִּשְׁתֶּם = and you will keep yourselves holy (to consecrate)
+6 וִהְיִיתֶם = and you will be (to be)
+7 קְדֹשִׁים = holy
+8 כִּי = for
+9 קָדוֹשׁ = [am] holy
+10 אָנִי = I
+11 וְלֹא = and not (not)
+12 תְטַמְּאוּ = you must make unclean (to defile)
+13 אֶת־ = <obj.> ([Obj.])
+14 נַפְשֹׁתֵיכֶם = selves your (soul)
+15 בְּכָל־ = by any (all)
+16 הַשֶּׁרֶץ = <the> swarming thing (swarm)
+17 הָרֹמֵשׂ = which creeps (to creep)
+18 עַל־ = on (upon)
+19 הָאָרֶץ = the earth (land)
+
+## 3:11:45
+KO: 왜냐하면 내가 너희를 애굽 땅에서 올라오게 한 여호와이기 때문이다. 너희는 너희에게 하나님이 되기 위하여(너희의 하나님이 되기 위하여), 그러므로 너희는 거룩하게 되어라. 왜냐하면 내가 거룩하기 때문이다.
+1 כִּי = for
+2 אֲנִי = I
+3 יְהוָה = [am] Yahweh (LORD)
+4 הַמַּעֲלֶה = who brought up (to ascend)
+5 אֶתְכֶם = <obj.> you ([Obj.])
+6 מֵאֶרֶץ = from [the] land of (land)
+7 מִצְרַיִם = Egypt
+8 לִהְיֹת = to become
+9 לָכֶם = for <the> you (you)
+10 לֵאלֹהִים = <into> God (God)
+11 וִהְיִיתֶם = and you will be
+12 קְדֹשִׁים = holy
+13 כִּי = for
+14 קָדוֹשׁ = [am] holy
+15 אָנִי = I
+
+## 3:11:46
+KO: 이것은 짐승과 새와 물속에서 움직이는 모든 살아있는 생물과 땅 위에서 기어다니는 모든 생물에 관한 규례니라.
+1 זֹאת = this
+2 תּוֹרַת = [is] [the] legal [procedure] of (instruction)
+3 הַבְּהֵמָה = the livestock (animal)
+4 וְהָעוֹף = and the bird[s] (bird)
+5 וְכֹל = and every
+6 נֶפֶשׁ = creature
+7 הַחַיָּה = <the> living (alive)
+8 הָרֹמֶשֶׂת = which moves (to creep)
+9 בַּמָּיִם = in the waters (water)
+10 וּלְכָל־ = and to every
+11 נֶפֶשׁ = creature
+12 הַשֹּׁרֶצֶת = which swarms (to swarm)
+13 עַל־ = on (upon)
+14 הָאָרֶץ = the earth (land)
+
+## 3:11:47
+KO: 부정한 것과 정한 것 사이를, 그리고 먹을 수 있는 생물과 먹을 수 없는 생물 사이를 구별하기 위함이니라.
+1 לְהַבְדִּיל = to separate
+2 בֵּין = between
+3 הַטָּמֵא = the unclean [thing] (unclean)
+4 וּבֵין = and between
+5 הַטָּהֹר = the pure [thing] (clean)
+6 וּבֵין = and between
+7 הַחַיָּה = the living creature
+8 הַנֶּאֱכֶלֶת = which is eaten
+9 וּבֵין = and between
+10 הַחַיָּה = the living creature
+11 אֲשֶׁר = which
+12 לֹא = not
+13 תֵאָכֵל פ = it will be eaten
+
+## 3:12:1
+KO: 그리고 여호와께서 모세에게 말씀하여 이르셨다.
+1 וַיְדַבֵּר = and he spoke (to speak)
+2 יְהוָה = Yahweh (LORD)
+3 אֶל־ = to (to(wards))
+4 מֹשֶׁה = Moses
+5 לֵּאמֹר = <to> saying (to say)
+
+## 3:12:2
+KO: 이스라엘 자손들에게 말하여 이르라. 여인이 씨를 뿌려 남자를 낳으면, 그녀는 칠 일 동안 부정할 것이니, 곧 그녀의 불결함(월경)의 날들처럼 부정할 것이다.
+1 דַּבֵּר = speak (to speak)
+2 אֶל־ = to (to(wards))
+3 בְּנֵי = [the] people of (son)
+4 יִשְׂרָאֵל = Israel
+5 לֵאמֹר = <to> saying (to say)
+6 אִשָּׁה = a woman (woman)
+7 כִּי = that (for)
+8 תַזְרִיעַ = she will bear a child (to sow)
+9 וְיָלְדָה = and she will bear (to beget)
+10 זָכָר = a male (male)
+11 וְטָמְאָה = and she will be unclean
+12 שִׁבְעַת = seven
+13 יָמִים = days
+14 כִּימֵי = like [the] days of
+15 נִדַּת = menstrous impurity of (impurity)
+16 דְּוֹתָהּ = being unwell she (be sick)
+17 תִּטְמָא = she will be unclean
+
+## 3:12:3
+KO: 그리고 그 여덟째 날에, 그의 포피의 살이 할례를 받을 것이다.
+1 וּבַיּוֹם = and on the day (day;_when)
+2 הַשְּׁמִינִי = <the> eighth (eighth)
+3 יִמּוֹל = it will be circumcised (to circumcise)
+4 בְּשַׂר = [the] flesh of (flesh)
+5 עָרְלָתוֹ = foreskin his (foreskin)
+
+## 3:12:4
+KO: 그리고 삼십삼 일을 그녀는 정결의 피 가운데 머물러야 한다. 모든 성물에 만지지 말 것이며, 성소에 들어오지 말아야 한다, 그녀의 정결의 날들이 찰 때까지.
+1 וּשְׁלֹשִׁים = and thirty (thirty)
+2 יוֹם = day[s]
+3 וּשְׁלֹשֶׁת = and three (three)
+4 יָמִים = days
+5 תֵּשֵׁב = she will remain (to dwell)
+6 בִּדְמֵי = in [the] blood<s> of (blood)
+7 טָהֳרָה = purification
+8 בְּכָל־ = <in> any (all)
+9 קֹדֶשׁ = holy thing (holiness)
+10 לֹא־ = not
+11 תִגָּע = she will touch (to touch)
+12 וְאֶל־ = and into (to(wards))
+13 הַמִּקְדָּשׁ = the sanctuary (sanctuary)
+14 לֹא = not
+15 תָבֹא = she will go (to come (in))
+16 עַד־ = until (till)
+17 מְלֹאת = are completed (to fill)
+18 יְמֵי = [the] days of
+19 טָהֳרָהּ = purification her
+
+## 3:12:5
+KO: 만일 여자아이를 낳으면, 그는 이 주 동안 부정할 것이니, 그녀의 월경 때와 같이 될 것이며, 정결함의 피들로 인해 육십육 일을 머물러야 한다.
+1 וְאִם־ = and if (if)
+2 נְקֵבָה = a female (female)
+3 תֵלֵד = she will bear (to beget)
+4 וְטָמְאָה = and she will be unclean (to defile)
+5 שְׁבֻעַיִם = two weeks (week)
+6 כְּנִדָּתָהּ = like menstruous impurity her (impurity)
+7 וְשִׁשִּׁים = and sixty (sixty)
+8 יוֹם = day[s]
+9 וְשֵׁשֶׁת = and six (six)
+10 יָמִים = days
+11 תֵּשֵׁב = she will remain (to dwell)
+12 עַל־ = on (upon)
+13 דְּמֵי = [the] blood<s> of (blood)
+14 טָהֳרָה = purification (purity)

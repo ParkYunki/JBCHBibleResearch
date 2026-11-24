@@ -1,0 +1,160 @@
+## 2:40:33
+KO: 그가 성막과 제단 둘레의 뜰을 세우고, 뜰 문의 휘장을 달았더라. 모세가 그 일을 마쳤더라.
+1 וַיָּקֶם = and he set up (to arise)
+2 אֶת־ = <obj.>
+3 הֶחָצֵר = the courtyard
+4 סָבִיב = around
+5 לַמִּשְׁכָּן = <to> the tabernacle (tabernacle)
+6 וְלַמִּזְבֵּחַ = and <to> the altar (altar)
+7 וַיִּתֵּן = and he put (to give)
+8 אֶת־ = <obj.>
+9 מָסַךְ = [the] screen of (covering)
+10 שַׁעַר = [the] gate of (gate)
+11 הֶחָצֵר = the courtyard
+12 וַיְכַל = and he finished (to end)
+13 מֹשֶׁה = Moses
+14 אֶת־ = <obj.>
+15 הַמְּלָאכָה פ = the work (work)
+
+## 2:40:34
+KO: 그리고 구름이 회막을 덮었고, 여호와의 영광이 성막을 채웠다.
+1 וַיְכַס = and it covered (to cover)
+2 הֶעָנָן = the cloud (cloud)
+3 אֶת־ = <obj.>
+4 אֹהֶל = [the] tent of (tent)
+5 מוֹעֵד = meeting
+6 וּכְבוֹד = and [the] glory of (glory)
+7 יְהוָה = Yahweh (LORD)
+8 מָלֵא = it filled (to fill)
+9 אֶת־ = <obj.>
+10 הַמִּשְׁכָּן = the tabernacle (tabernacle)
+
+## 2:40:35
+KO: 모세는 회막 안으로 들어갈 수 없었으니, 이는 그 구름이 그 위에 머물렀고 여호와의 영광이 그 성막을 가득 채웠기 때문이었다.
+1 וְלֹא־ = and not (not)
+2 יָכֹל = he was able (be able)
+3 מֹשֶׁה = Moses
+4 לָבוֹא = to go (to come (in))
+5 אֶל־ = into (to(wards))
+6 אֹהֶל = [the] tent of (tent)
+7 מוֹעֵד = meeting
+8 כִּי־ = for
+9 שָׁכַן = it had settled down (to dwell)
+10 עָלָיו = over it (upon)
+11 הֶעָנָן = the cloud (cloud)
+12 וּכְבוֹד = and [the] glory of (glory)
+13 יְהוָה = Yahweh (LORD)
+14 מָלֵא = it had filled (to fill)
+15 אֶת־ = <obj.> ([Obj.])
+16 הַמִּשְׁכָּן = the tabernacle (tabernacle)
+
+## 2:40:36
+KO: 그리고 구름이 성막 위에서 올라갈 때에, 이스라엘 자손은 그들의 모든 행군에서 앞으로 나아갔다.
+1 וּבְהֵעָלוֹת = and when was taken up (to ascend)
+2 הֶעָנָן = the cloud (cloud)
+3 מֵעַל = from over (upon)
+4 הַמִּשְׁכָּן = the tabernacle (tabernacle)
+5 יִסְעוּ = they set out (to set out)
+6 בְּנֵי = [the] people of (son)
+7 יִשְׂרָאֵל = Israel
+8 בְּכֹל = in all (all)
+9 מַסְעֵיהֶם = journeyings their (journey)
+
+## 2:40:37
+KO: 만약 구름이 올라가지 않으면, 그것이 올라가는 날까지 그들은 발행하지 아니하였다.
+1 וְאִם־ = and if (if)
+2 לֹא = not
+3 יֵעָלֶה = it was taken up
+4 הֶעָנָן = the cloud (cloud)
+5 וְלֹא = and not
+6 יִסְעוּ = they set out (to set out)
+7 עַד־ = until (till)
+8 יוֹם = [the] day (day;_when)
+9 הֵעָלֹתוֹ = was taken up it
+
+## 2:40:38
+KO: 왜냐하면 낮에는 여호와의 구름이 성막 위에 있고, 밤에는 불이 그 안에 있었기 때문이니, 이스라엘 온 집의 모든 행군 속에서 그러하였더라.
+1 כִּי = for
+2 עֲנַן = [the] cloud of (cloud)
+3 יְהוָה = Yahweh (LORD)
+4 עַל־ = [was] over (upon)
+5 הַמִּשְׁכָּן = the tabernacle (tabernacle)
+6 יוֹמָם = by day
+7 וְאֵשׁ = and fire (fire)
+8 תִּהְיֶה = it was (to be)
+9 לַיְלָה = night
+10 בּוֹ = on <the> it (him)
+11 לְעֵינֵי = to [the] eyes of (eye)
+12 כָל־ = all
+13 בֵּית־ = [the] house of (house)
+14 יִשְׂרָאֵל = Israel
+15 בְּכָל־ = in all
+16 מַסְעֵיהֶם = journeyings their (journey)
+
+## 3:1:1
+KO: 그리고 그분(여호와)께서 모세를 부르셨고, 여호와께서 그에게 회막으로부터 말씀하시며 이르시되,
+1 וַיִּקְרָא = and he called (to call)
+2 אֶל־ = to
+3 מֹשֶׁה = Moses
+4 וַיְדַבֵּר = and he spoke (to speak)
+5 יְהוָה = Yahweh (LORD)
+6 אֵלָיו = to him
+7 מֵאֹהֶל = from [the] tent of (tent)
+8 מוֹעֵד = meeting
+9 לֵאמֹר = <to> saying (to say)
+
+## 3:1:2
+KO: 이스라엘 자손에게 말하여 그들에게 이르라. 너희 중에 사람이 여호와께 예물을 드리려거든, 가축 중에서, 곧 소나 양 중에서 너희의 예물을 드릴지니라.
+1 דַּבֵּר = speak (to speak)
+2 אֶל־ = to
+3 בְּנֵי = [the] people of (son)
+4 יִשְׂרָאֵל = Israel
+5 וְאָמַרְתָּ = and you will say (to say)
+6 אֲלֵהֶם = to them
+7 אָדָם = anyone (man)
+8 כִּי־ = that (for)
+9 יַקְרִיב = he will present
+10 מִכֶּם = of <the> you (you)
+11 קָרְבָּן = a present
+12 לַיהוָה = to Yahweh (LORD)
+13 מִן־ = from
+14 הַבְּהֵמָה = the livestock (animal)
+15 מִן־ = from
+16 הַבָּקָר = the herd (cattle)
+17 וּמִן־ = and from
+18 הַצֹּאן = the flock (flock)
+19 תַּקְרִיבוּ = you will present
+20 אֶת־ = <obj.> ([Obj.])
+21 קָרְבַּנְכֶם = present your
+
+## 3:1:3
+KO: 만약 그 예물이 소로부터의 번제라면, 흠 없는 수컷으로 그것을 바칠지니, 회막 문에서 여호와 앞에 그가 그것을 기쁘게 받으시도록 그것을 바칠지니라.
+1 אִם־ = if
+2 עֹלָה = [is] a burnt offering (burnt offering)
+3 קָרְבָּנוֹ = present his (offering)
+4 מִן־ = from
+5 הַבָּקָר = the herd (cattle)
+6 זָכָר = a male (male)
+7 תָּמִים = unblemished
+8 יַקְרִיבֶנּוּ = he will present it
+9 אֶל־ = to (to(wards))
+10 פֶּתַח = [the] entrance of (entrance)
+11 אֹהֶל = [the] tent of (tent)
+12 מוֹעֵד = meeting
+13 יַקְרִיב = he will present
+14 אֹתוֹ = <obj.> it ([Obj.])
+15 לִרְצֹנוֹ = for acceptance its (acceptance)
+16 לִפְנֵי = <to> before (face)
+17 יְהוָה = Yahweh (LORD)
+
+## 3:1:4
+KO: 그리고 그는 그의 손을 그 번제물의 머리 위에 안수할 것이며, 그러면 그(번제물)가 그를 위하여 열납될 것이니, 그를 위하여 속죄하기 위함이라.
+1 וְסָמַךְ = and he will lean (to support)
+2 יָדוֹ = hand his (hand)
+3 עַל = on
+4 רֹאשׁ = [the] head of (head)
+5 הָעֹלָה = the burnt offering (burnt offering)
+6 וְנִרְצָה = and it will be accepted (to accept)
+7 לוֹ = for <the> him (him)
+8 לְכַפֵּר = to make atonement (to atone)
+9 עָלָיו = on him

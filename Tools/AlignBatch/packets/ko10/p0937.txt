@@ -1,0 +1,230 @@
+## 11:18:19
+KO: 이제 보내어 온 이스라엘을 갈멜 산으로 나에게 모으고, 이세벨의 상에서 먹는 바알의 선지자 사백오십 명과 아세라의 선지자 사백 명을 모으소서.
+1 וְעַתָּה = and now (now)
+2 שְׁלַח = send (to send)
+3 קְבֹץ = gather (to gather)
+4 אֵלַי = to me
+5 אֶת־ = <obj.>
+6 כָּל־ = all
+7 יִשְׂרָאֵל = Israel
+8 אֶל־ = to
+9 הַר = [the] mountain of (mountain)
+10 הַכַּרְמֶל = <the> Carmel ((Mount )Carmel)
+11 וְאֶת־ = and <obj.>
+12 נְבִיאֵי = [the] prophets of
+13 הַבַּעַל = <the> Baal (Baal)
+14 אַרְבַּע = four
+15 מֵאוֹת = hundred<s>
+16 וַחֲמִשִּׁים = and fifty (fifty)
+17 וּנְבִיאֵי = and [the] prophets of
+18 הָאֲשֵׁרָה = <the> Asherah (Asherah)
+19 אַרְבַּע = four
+20 מֵאוֹת = hundred<s>
+21 אֹכְלֵי = [who] eat of (to eat)
+22 שֻׁלְחַן = [the] table of (table)
+23 אִיזָבֶל = Jezebel
+
+## 11:18:20
+KO: 그리고 아합은 이스라엘의 모든 자손에게 보내어, 그 선지자들을 갈멜 산으로 모았다.
+1 וַיִּשְׁלַח = and he sent (to send)
+2 אַחְאָב = Ahab
+3 בְּכָל־ = among all (all)
+4 בְּנֵי = [the] people of (son)
+5 יִשְׂרָאֵל = Israel
+6 וַיִּקְבֹּץ = and he gathered (to gather)
+7 אֶת־ = <obj.> ([Obj.])
+8 הַנְּבִיאִים = the prophets (prophet)
+9 אֶל־ = to (to(wards))
+10 הַר = [the] mountain of (mountain)
+11 הַכַּרְמֶל = <the> Carmel ((Mount )Carmel)
+
+## 11:18:21
+KO: 그리고 엘리야가 모든 백성에게 가까이 나아갔다. 그리고 그가 말했다. “너희가 두 의견 사이에서 어느 때까지 절뚝거리겠느냐? 만약 여호와가 하나님이면 그분을 따르고, 만약 바알이 (하나님)이면 그분을 따르라.” 그러자 백성이 그에게 아무 말도 대답하지 않았다.
+1 וַיִּגַּשׁ = and he drew near (to approach)
+2 אֵלִיָּהוּ = Elijah
+3 אֶל־ = to (to(wards))
+4 כָּל־ = all
+5 הָעָם = the people
+6 וַיֹּאמֶר = and he said (to say)
+7 עַד־ = until (till)
+8 מָתַי = when? (how)
+9 אַתֶּם = [will] you (you(m.p.))
+10 פֹּסְחִים = [be] limping (to limp)
+11 עַל־ = on (upon)
+12 שְׁתֵּי = [the] two (two)
+13 הַסְּעִפִּים = the crutches (division)
+14 אִם־ = if
+15 יְהוָה = Yahweh (LORD)
+16 הָאֱלֹהִים = [is] <the> God (God)
+17 לְכוּ = walk
+18 אַחֲרָיו = after him
+19 וְאִם־ = and if
+20 הַבַּעַל = <the> Baal (Baal)
+21 לְכוּ = walk
+22 אַחֲרָיו = after him
+23 וְלֹא־ = and not (not)
+24 עָנוּ = they answered (to answer)
+25 הָעָם = the people
+26 אֹתוֹ = <obj.> him ([Obj.])
+27 דָּבָר = a word (word)
+
+## 11:18:22
+KO: 엘리야가 백성에게 말하였다. "나는 여호와의 선지자로 홀로 남았으나, 바알의 선지자들은 사백오십 명이다."
+1 וַיֹּאמֶר = and he said (to say)
+2 אֵלִיָּהוּ = Elijah
+3 אֶל־ = to (to(wards))
+4 הָעָם = the people (people)
+5 אֲנִי = I
+6 נוֹתַרְתִּי = I am left (to remain)
+7 נָבִיא = a prophet
+8 לַיהוָה = of Yahweh (LORD)
+9 לְבַדִּי = to alone me (alone)
+10 וּנְבִיאֵי = and [the] prophets of
+11 הַבַּעַל = <the> Baal (Baal)
+12 אַרְבַּע־ = [are] four (four)
+13 מֵאוֹת = hundred<s> (hundred)
+14 וַחֲמִשִּׁים = and fifty (fifty)
+15 אִישׁ = man
+
+## 11:18:23
+KO: 그러므로 그들이 우리에게 두 마리의 수송아지를 주게 하라. 그리고 그들은 그 수송아지 한 마리를 자기들을 위하여 선택하고, 그것을 토막 내어 나무들 위에 놓되, 불은 놓지 말게 하라. 그리고 나도 그 수송아지 한 마리를 예비하여 나무들 위에 놓고, 불은 놓지 않겠노라.
+1 וְיִתְּנוּ־ = and let people give
+2 לָנוּ = to us (us)
+3 שְׁנַיִם = two
+4 פָּרִים = young bulls
+5 וְיִבְחֲרוּ = and let them choose (to choose)
+6 לָהֶם = for themselves (them)
+7 הַפָּר = the young bull
+8 הָאֶחָד = <the> one
+9 וִינַתְּחֻהוּ = and let them cut in pieces it (to cut)
+10 וְיָשִׂימוּ = and they may put
+11 עַל־ = on
+12 הָעֵצִים = the wood<s>
+13 וְאֵשׁ = and fire
+14 לֹא = not
+15 יָשִׂימוּ = they will set
+16 וַאֲנִי = and I (I)
+17 אֶעֱשֶׂה = I will prepare (to make)
+18 אֶת־ = <obj.> ([Obj.])
+19 הַפָּר = the young bull
+20 הָאֶחָד = <the> one
+21 וְנָתַתִּי = and I will put
+22 עַל־ = on
+23 הָעֵצִים = the wood<s>
+24 וְאֵשׁ = and fire
+25 לֹא = not
+26 אָשִׂים = I will set
+
+## 11:18:24
+KO: 너희는 너희 신들의 이름을 부르라. 그리고 나는 여호와의 이름을 부를 것이니, 불로 응답하는 그 신, 그가 하나님이다. 모든 백성이 대답하여 말하였다. “그 말씀이 좋습니다.”
+1 וּקְרָאתֶם = and you will call
+2 בְּשֵׁם = on [the] name of
+3 אֱלֹהֵיכֶם = god your
+4 וַאֲנִי = and I (I)
+5 אֶקְרָא = I will call
+6 בְשֵׁם־ = on [the] name of
+7 יְהוָה = Yahweh (LORD)
+8 וְהָיָה = and he will be (to be)
+9 הָאֱלֹהִים = the god
+10 אֲשֶׁר־ = who (which)
+11 יַעֲנֶה = he will answer
+12 בָאֵשׁ = by <the> fire (fire)
+13 הוּא = he (he;_she;_it)
+14 הָאֱלֹהִים = <the> God
+15 וַיַּעַן = and it answered
+16 כָּל־ = all
+17 הָעָם = the people (people)
+18 וַיֹּאמְרוּ = and they said (to say)
+19 טוֹב = [is] good (pleasant)
+20 הַדָּבָר = the word (word)
+
+## 11:18:25
+KO: 엘리야가 바알의 선지자들에게 말했다. "너희 자신들을 위해 그 수송아지 한 마리를 먼저 택하여 잡으라. 왜냐하면 너희가 많은 자들이기 때문이다. 그리고 너희 신의 이름을 부르라. 그러나 불은 놓지 말라."
+1 וַיֹּאמֶר = and he said (to say)
+2 אֵלִיָּהוּ = Elijah
+3 לִנְבִיאֵי = to [the] prophets of (prophet)
+4 הַבַּעַל = <the> Baal (Baal)
+5 בַּחֲרוּ = choose (to choose)
+6 לָכֶם = for yourselves (you)
+7 הַפָּר = the young bull (bullock)
+8 הָאֶחָד = <the> one (one)
+9 וַעֲשׂוּ = and prepare [it] (to make)
+10 רִאשֹׁנָה = first
+11 כִּי = for
+12 אַתֶּם = you (you(m.p.))
+13 הָרַבִּים = [are] the many (many)
+14 וְקִרְאוּ = and call (to call)
+15 בְּשֵׁם = on [the] name of (name)
+16 אֱלֹהֵיכֶם = god your (God)
+17 וְאֵשׁ = and fire (fire)
+18 לֹא = not
+19 תָשִׂימוּ = you will set (to set)
+
+## 11:18:26
+KO: 그들이 그들에게 주어진 그 수송아지를 취하여, 그들이 그것을 준비하고 아침부터 정오까지 바알의 이름을 부르며 말하기를, "바알이여, 우리에게 응답하소서" 하였으나, 소리도 없고 응답하는 자도 없으므로 그들이 만든 그 제단 위에서 절뚝거렸다.
+1 וַיִּקְחוּ = and they took (to take)
+2 אֶת־ = <obj.> ([Obj.])
+3 הַפָּר = the young bull (bullock)
+4 אֲשֶׁר־ = which
+5 נָתַן = someone gave (to give)
+6 לָהֶם = to them (them)
+7 וַיַּעֲשׂוּ = and they prepared [it]
+8 וַיִּקְרְאוּ = and they called (to call)
+9 בְשֵׁם־ = on [the] name of (name)
+10 הַבַּעַל = <the> Baal
+11 מֵהַבֹּקֶר = from the morning (morning)
+12 וְעַד־ = and until (till)
+13 הַצָּהֳרַיִם = the noontide<s> (midday)
+14 לֵאמֹר = <to> saying (to say)
+15 הַבַּעַל = O Baal
+16 עֲנֵנוּ = answer us
+17 וְאֵין = and there not
+18 קוֹל = [was] a sound (voice)
+19 וְאֵין = and there not
+20 עֹנֶה = [was one who] answered
+21 וַיְפַסְּחוּ = and they limped around (to limp)
+22 עַל־ = at (upon)
+23 הַמִּזְבֵּחַ = the altar (altar)
+24 אֲשֶׁר = which
+25 עָשָׂה = he had made
+
+## 11:18:27
+KO: 정오가 되었을 때, 엘리야가 그들을 조롱하며 말했다. "큰 소리로 부르라. 그는 신이기에 아마 그에게 묵상이나, 혹은 볼일(추격/떠남)이 있거나, 혹은 길을 가는 중이거나, 어쩌면 그가 잠들어서 깨어나야 할지도 모른다."
+1 וַיְהִי = and it was (to be)
+2 בַצָּהֳרַיִם = at the noontide<s> (midday)
+3 וַיְהַתֵּל = and he mocked (to mock)
+4 בָּהֶם = <in> them (them)
+5 אֵלִיָּהוּ = Elijah
+6 וַיֹּאמֶר = and he said (to say)
+7 קִרְאוּ = call out (to call)
+8 בְקוֹל־ = with a voice (voice)
+9 גָּדוֹל = great
+10 כִּי־ = for
+11 אֱלֹהִים = [is] a god (God)
+12 הוּא = he
+13 כִּי = for
+14 שִׂיחַ = musing (complaint)
+15 וְכִי־ = and for
+16 שִׂיג = a going away (pursuing)
+17 לוֹ = [belongs] to him
+18 וְכִי־ = and for
+19 דֶרֶךְ = a journey (way)
+20 לוֹ = [belongs] to him
+21 אוּלַי = perhaps
+22 יָשֵׁן = [is] sleeping (sleeping)
+23 הוּא = he
+24 וְיִקָץ = so he may awake (to awake)
+
+## 11:18:28
+KO: 그들이 큰 소리로 부르고, 그들의 규례를 따라 칼들과 창들로 피가 그들 위에 쏟아지기까지 그들의 몸을 상하게 하였다.
+1 וַיִּקְרְאוּ = and they called out (to call)
+2 בְּקוֹל = with a voice (voice)
+3 גָּדוֹל = great
+4 וַיִּתְגֹּדְדוּ = and they cut themselves (to cut)
+5 כְּמִשְׁפָּטָם = according to custom their (justice)
+6 בַּחֲרָבוֹת = with <the> swords (sword)
+7 וּבָרְמָחִים = and with <the> lances (spear)
+8 עַד־ = until (till)
+9 שְׁפָךְ־ = poured out (to pour)
+10 דָּם = blood
+11 עֲלֵיהֶם = over them (upon)

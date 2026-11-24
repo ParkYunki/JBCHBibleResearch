@@ -1,0 +1,137 @@
+## 13:14:16
+KO: 그리고 다윗은 하나님께서 그에게 명령하신 대로 행하였다. 그리고 그들이 기브온으로부터 게셀에 이르기까지 블레셋 사람들의 진영을 쳤다.
+1 וַיַּעַשׂ = and he did (to make)
+2 דָּוִיד = David
+3 כַּאֲשֶׁר = just as (as which)
+4 צִוָּהוּ = he had commanded him (to command)
+5 הָאֱלֹהִים = <the> God (God)
+6 וַיַּכּוּ = and they struck down (to smite)
+7 אֶת־ = <obj.> ([Obj.])
+8 מַחֲנֵה = [the] camp of (camp)
+9 פְלִשְׁתִּים = [the] Philistines (Philistine)
+10 מִגִּבְעוֹן = from Gibeon (Gibeon)
+11 וְעַד־ = and to (till)
+12 גָּזְרָה = Gezer <towards> (Gezer)
+
+## 13:14:17
+KO: 그리고 다윗의 이름이 모든 땅들로 퍼져 나갔고, 여호와께서 그에 대한 두려움을 모든 민족들 위에 주셨더라.
+1 וַיֵּצֵא = and it went out (to come out)
+2 שֵׁם־ = [the] name of (name)
+3 דָּוִיד = David
+4 בְּכָל־ = in all
+5 הָאֲרָצוֹת = the lands (land)
+6 וַיהוָה = and Yahweh (LORD)
+7 נָתַן = he put (to give)
+8 אֶת־ = <obj.> ([Obj.])
+9 פַּחְדּוֹ = dread of him (dread)
+10 עַל־ = on (upon)
+11 כָּל־ = all
+12 הַגּוֹיִם = the nations (nation)
+
+## 13:15:1
+KO: 그리고 그가 다윗 성 안에 자기(를) 위하여 집들을 만들었고, 그리고 하나님의 궤를 위하여 장소를 예비하였으며, 그리고 그것(궤)을 위하여 장막을 쳤다.
+1 וַיַּעַשׂ־ = and he made (to make)
+2 לוֹ = for himself
+3 בָתִּים = houses (house)
+4 בְּעִיר = in [the] city of (city)
+5 דָּוִיד = David
+6 וַיָּכֶן = and he prepared (to establish)
+7 מָקוֹם = a place (standing place)
+8 לַאֲרוֹן = for [the] ark of (ark)
+9 הָאֱלֹהִים = <the> God (God)
+10 וַיֶּט־ = and he pitched (to stretch)
+11 לוֹ = for it
+12 אֹהֶל = a tent (tent)
+
+## 13:15:2
+KO: 그때에 다윗이 말하였다. "레위 사람 외에는 하나님의 궤를 멜 수 없으니, 이는 여호와께서 하나님의 궤를 메고 그분을 영원히 섬기게 하려고 그들을 택하셨기 때문이다."
+1 אָז = then
+2 אָמַר = he said (to say)
+3 דָּוִיד = David
+4 לֹא = not
+5 לָשֵׂאת = to carry
+6 אֶת־ = <obj.>
+7 אֲרוֹן = [the] ark of
+8 הָאֱלֹהִים = <the> God (God)
+9 כִּי = that
+10 אִם־ = except (if)
+11 הַלְוִיִּם = the Levites (Levi)
+12 כִּי־ = for
+13 בָם = <in> them (them)
+14 בָּחַר = he had chosen (to choose)
+15 יְהוָה = Yahweh
+16 לָשֵׂאת = to carry
+17 אֶת־ = <obj.>
+18 אֲרוֹן = [the] ark of
+19 יְהוָה = Yahweh
+20 וּלְשָׁרְתוֹ = and to serve him (to minister)
+21 עַד־ = until (till)
+22 עוֹלָם ס = perpetuity (forever)
+
+## 13:15:3
+KO: 그리고 다윗이 이스라엘 온 무리를 예루살렘으로 모았으니, 여호와의 궤를 그가 예비한 그(궤의) 처소로 메어 올리기 위함이었다.
+1 וַיַּקְהֵל = and he assembled (to gather)
+2 דָּוִיד = David
+3 אֶת־ = <obj.>
+4 כָּל־ = all
+5 יִשְׂרָאֵל = Israel
+6 אֶל־ = to
+7 יְרוּשָׁלִָם = Jerusalem
+8 לְהַעֲלוֹת = to bring up (to ascend)
+9 אֶת־ = <obj.>
+10 אֲרוֹן = [the] ark of (ark)
+11 יְהוָה = Yahweh (LORD)
+12 אֶל־ = to
+13 מְקוֹמוֹ = place its (standing place)
+14 אֲשֶׁר־ = which
+15 הֵכִין = he had prepared (to establish)
+16 לוֹ = for it (him)
+
+## 13:15:4
+KO: 그리고 다윗이 아론의 자손들과 레위 사람들을 모았다.
+1 וַיֶּאֱסֹף = and he gathered (to gather)
+2 דָּוִיד = David
+3 אֶת־ = <obj.>
+4 בְּנֵי = [the] descendants of (son)
+5 אַהֲרֹן = Aaron
+6 וְאֶת־ = and <obj.>
+7 הַלְוִיִּם = the Levites (Levi)
+
+## 13:15:5
+KO: 그핫의 자손들에게는, 족장 우리엘과 그의 형제들 백이십 인이요.
+1 לִבְנֵי = of [the] descendants of (son)
+2 קְהָת = Kohath
+3 אוּרִיאֵל = Uriel
+4 הַשָּׂר = the leader (ruler)
+5 וְאֶחָיו = and relatives his (brother)
+6 מֵאָה = one hundred (hundred)
+7 וְעֶשְׂרִים ס = and twenty (twenty)
+
+## 13:15:6
+KO: 므라리의 자손들 중에는 통치자 아사야와 그의 형제들 이백이십 인이요.
+1 לִבְנֵי = of [the] descendants of (son)
+2 מְרָרִי = Merari
+3 עֲשָׂיָה = Asaiah
+4 הַשָּׂר = the leader (ruler)
+5 וְאֶחָיו = and relatives his (brother)
+6 מָאתַיִם = two hundred (hundred)
+7 וְעֶשְׂרִים ס = and twenty (twenty)
+
+## 13:15:7
+KO: 게르솜의 자손들에게는 우두머리 요엘과 그의 형제들 일백삼십 인이었더라.
+1 לִבְנֵי = of [the] descendants of (son)
+2 גֵּרְשׁוֹם = Gershom (Gershon)
+3 יוֹאֵל = Joel
+4 הַשָּׂר = the leader (ruler)
+5 וְאֶחָיו = and relatives his (brother)
+6 מֵאָה = one hundred (hundred)
+7 וּשְׁלֹשִׁים ס = and thirty (thirty)
+
+## 13:15:8
+KO: 엘리사반의 자손들에게는, 지도자 스마야와 그의 형제들 이백 명이다.
+1 לִבְנֵי = of [the] descendants of (son)
+2 אֱלִיצָפָן = Elizaphan
+3 שְׁמַעְיָה = Shemaiah
+4 הַשָּׂר = the leader (ruler)
+5 וְאֶחָיו = and relatives his (brother)
+6 מָאתָיִם ס = two hundred (hundred)

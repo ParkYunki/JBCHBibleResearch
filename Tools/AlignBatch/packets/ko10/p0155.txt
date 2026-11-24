@@ -1,0 +1,159 @@
+## 2:1:8
+KO: 그리고 요셉을 알지 못하는 새로운 왕이 애굽 위에 일어났다.
+1 וַיָּקָם = and he arose (to arise)
+2 מֶלֶךְ־ = a king (king)
+3 חָדָשׁ = new
+4 עַל־ = over (upon)
+5 מִצְרָיִם = Egypt
+6 אֲשֶׁר = who (which)
+7 לֹא־ = not
+8 יָדַע = he knew (to know)
+9 אֶת־ = <obj.> ([Obj.])
+10 יוֹסֵף = Joseph
+
+## 2:1:9
+KO: 그리고 그가 그의 백성에게 말했다. "보라, 이스라엘 자손의 백성이 우리보다 많고 강하다."
+1 וַיֹּאמֶר = and he said (to say)
+2 אֶל־ = to (to(wards))
+3 עַמּוֹ = people his
+4 הִנֵּה = here! (behold)
+5 עַם = [the] people of
+6 בְּנֵי = [the] people of (son)
+7 יִשְׂרָאֵל = Israel
+8 רַב = [is] numerous (many)
+9 וְעָצוּם = and mighty (mighty)
+10 מִמֶּנּוּ = more than us (from)
+
+## 2:1:10
+KO: 자, 우리가 그들에게 대하여 지혜롭게 행하자. 혹시 그들이 번성하고, 전쟁이 발생하게 되면, 그 역시 우리의 미워하는 자들에게 더하여 우리와 싸우고 이 땅으로부터 올라갈까 하노라.
+1 הָבָה = give ! (to give)
+2 נִתְחַכְּמָה = let us deal wisely (be wise)
+3 לוֹ = to <the> it (him)
+4 פֶּן־ = lest
+5 יִרְבֶּה = it should increase (to multiply)
+6 וְהָיָה = and it will be (to be)
+7 כִּי־ = that (for)
+8 תִקְרֶאנָה = they will happen (to encounter)
+9 מִלְחָמָה = war (battle)
+10 וְנוֹסַף = and it will be added (to add)
+11 גַּם־ = also
+12 הוּא = it (he;_she;_it)
+13 עַל־ = to (upon)
+14 שֹׂנְאֵינוּ = [those who] hate us (to hate)
+15 וְנִלְחַם־ = and it will fight (to fight)
+16 בָּנוּ = against <the> us (us)
+17 וְעָלָה = and it will go up (to ascend)
+18 מִן־ = from
+19 הָאָרֶץ = the land (land)
+
+## 2:1:11
+KO: 그들이 그들 위에 부역 감독들을 세워 그들의 짐으로 그를 괴롭게 하였고, 그들이 바로를 위하여 비돔과 라암셋 저장 성들을 건축하게 하니라.
+1 וַיָּשִׂימוּ = and they appointed (to set)
+2 עָלָיו = over it (upon)
+3 שָׂרֵי = overseers of (ruler)
+4 מִסִּים = slave gangs (taskworker)
+5 לְמַעַן = so as (because)
+6 עַנֹּתוֹ = to afflict it (to afflict)
+7 בְּסִבְלֹתָם = with forced labor their (burden)
+8 וַיִּבֶן = and it built (to build)
+9 עָרֵי = cities of (city)
+10 מִסְכְּנוֹת = storage
+11 לְפַרְעֹה = for Pharaoh (Pharaoh)
+12 אֶת־ = <obj.>
+13 פִּתֹם = Pithom
+14 וְאֶת־ = and <obj.>
+15 רַעַמְסֵס = Rameses (Raamses)
+
+## 2:1:12
+KO: 그리고 그들이 그를 학대할수록, 그렇게 그는 번식하였고 그렇게 그는 창성하였다. 그리하여 그들은 이스라엘 자손의 면전에서 몹시 괴로워하였다(혐오하였다).
+1 וְכַאֲשֶׁר = and just as (as which)
+2 יְעַנּוּ = people afflicted (to afflict)
+3 אֹתוֹ = <obj.> it ([Obj.])
+4 כֵּן = so
+5 יִרְבֶּה = it increased (to multiply)
+6 וְכֵן = and so
+7 יִפְרֹץ = it spread (to break through)
+8 וַיָּקֻצוּ = and people felt dread (to loathe)
+9 מִפְּנֵי = <from> because of (face)
+10 בְּנֵי = [the] people of (son)
+11 יִשְׂרָאֵל = Israel
+
+## 2:1:13
+KO: 그리고 애굽인들은 이스라엘 자손들을 엄함으로 부렸다.
+1 וַיַּעֲבִדוּ = and they compelled to labor (to serve)
+2 מִצְרַיִם = Egypt (Egyptian)
+3 אֶת־ = <obj.> ([Obj.])
+4 בְּנֵי = [the] people of (son)
+5 יִשְׂרָאֵל = Israel
+6 בְּפָרֶךְ = with harshness (severity)
+
+## 2:1:14
+KO: 그리고 그들은 고된 노동으로 그들의 삶을 쓰라리게 했다. 진흙과 벽돌과 들에서의 모든 노동으로, 그들이 그들을 부렸던 그들의 모든 노동은 가혹함으로 이루어졌다.
+1 וַיְמָרְרוּ = and they made bitter (to provoke)
+2 אֶת־ = <obj.>
+3 חַיֵּיהֶם = lives their (life)
+4 בַּעֲבֹדָה = with labor
+5 קָשָׁה = hard (severe)
+6 בְּחֹמֶר = in mortar (clay)
+7 וּבִלְבֵנִים = and in bricks (brick)
+8 וּבְכָל־ = and in all
+9 עֲבֹדָה = labor
+10 בַּשָּׂדֶה = in the field (land)
+11 אֵת = <obj.>
+12 כָּל־ = all
+13 עֲבֹדָתָם = labor their
+14 אֲשֶׁר־ = which
+15 עָבְדוּ = they labored (to serve)
+16 בָהֶם = by <the> them (them)
+17 בְּפָרֶךְ = with harshness (severity)
+
+## 2:1:15
+KO: 그리고 애굽의 왕이 그 히브리 산파들에게 말하였다. 그 한 명의 이름은 십브라이고, 그 두 번째의 이름은 부아였다.
+1 וַיֹּאמֶר = and he said (to say)
+2 מֶלֶךְ = [the] king of (king)
+3 מִצְרַיִם = Egypt
+4 לַמְיַלְּדֹת = to the midwives (to beget)
+5 הָעִבְרִיֹּת = <the> Hebrew (Hebrew)
+6 אֲשֶׁר = who (which)
+7 שֵׁם = [the] name of
+8 הָאַחַת = the one (one)
+9 שִׁפְרָה = [was] Shiphrah (Shiphrah)
+10 וְשֵׁם = and [the] name of
+11 הַשֵּׁנִית = the second (second)
+12 פּוּעָה = [was] Puah (Puah)
+
+## 2:1:16
+KO: 그가 말하였다. 너희가 히브리 여인들을 해산시킬 때에, 그 조산대 위를 살펴서, 만일 아들이면 그를 죽이고, 만일 딸이면 그(녀)는 살게 하라.
+1 וַיֹּאמֶר = and he said (to say)
+2 בְּיַלֶּדְכֶן = when assist as midwife you (to beget)
+3 אֶת־ = <obj.>
+4 הָעִבְרִיּוֹת = the Hebrew [women] (Hebrew)
+5 וּרְאִיתֶן = and you will look (to see)
+6 עַל־ = at (upon)
+7 הָאָבְנָיִם = the stones (wheel)
+8 אִם־ = if
+9 בֵּן = [is] a son (son)
+10 הוּא = he
+11 וַהֲמִתֶּן = and you will kill (to die)
+12 אֹתוֹ = <obj.> him
+13 וְאִם־ = and if
+14 בַּת = [is] a daughter (daughter)
+15 הִיא = she
+16 וָחָיָה = and she will live (to live)
+
+## 2:1:17
+KO: 그리고 그 산파들은 하나님을 두려워하였다. 그래서 그들은 애굽 왕이 그들에게 말한 대로 행하지 아니하였고, 그 아이들을 살려 두었다.
+1 וַתִּירֶאןָ = and they feared (to fear)
+2 הַמְיַלְּדֹת = the midwives (to beget)
+3 אֶת־ = <obj.>
+4 הָאֱלֹהִים = <the> God (God)
+5 וְלֹא = and not (not)
+6 עָשׂוּ = they did (to make)
+7 כַּאֲשֶׁר = just as (as which)
+8 דִּבֶּר = he had spoken (to speak)
+9 אֲלֵיהֶן = to them (to(wards))
+10 מֶלֶךְ = [the] king of (king)
+11 מִצְרָיִם = Egypt
+12 וַתְּחַיֶּיןָ = and they let live (to live)
+13 אֶת־ = <obj.>
+14 הַיְלָדִים = the [male] children (youth)

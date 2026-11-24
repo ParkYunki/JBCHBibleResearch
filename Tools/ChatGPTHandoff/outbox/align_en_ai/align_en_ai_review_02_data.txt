@@ -1,0 +1,846 @@
+## 5:17:10
+EN: and you have done according to the tenor of the word which they declare to you ([they] of that place which YHWH chooses); and you have observed to do according to all that they direct you.
+1	וְעָשִׂ֗יתָ	and you will do	→ and you have done
+2	עַל־	on	→ according to
+3	פִּ֤י	[the] mouth of	→ the tenor of
+4	הַדָּבָר֙	the word	→ the word
+5	אֲשֶׁ֣ר	which	→ which
+6	יַגִּ֣ידֽוּ	they will tell	→ they declare
+7	לְךָ֔	to <the> you	→ to you
+8	מִן־	from	→ of
+9	הַמָּק֣וֹם	the place	→ that place
+10	הַה֔וּא	<the> that	→ that place
+11	אֲשֶׁ֖ר	which	→ which
+12	יִבְחַ֣ר	he will choose	→ chooses
+13	יְהוָ֑ה	Yahweh	→ YHWH
+14	וְשָׁמַרְתָּ֣	and you will take care	→ and you have observed
+15	לַעֲשׂ֔וֹת	to do	→ to do
+16	כְּכֹ֖ל	according to all	→ according to all
+17	אֲשֶׁ֥ר	that	→ that
+18	יוֹרֽוּךָ	they will instruct you	→ they direct you
+
+## 5:18:5
+EN: for your God YHWH has fixed on him, out of all your tribes, to stand to serve in the Name of YHWH—him and his sons continually.
+1	כִּ֣י	for	→ for
+2	ב֗וֹ	<in> <the> him	→ on him
+3	בָּחַ֛ר	he has chosen	→ has fixed
+4	יְהוָ֥ה	Yahweh	→ YHWH
+5	אֱלֹהֶ֖יךָ	God your	→ your God
+6	מִכָּל־	from all	→ out of all
+7	שְׁבָטֶ֑יךָ	tribes your	→ your tribes
+8	לַעֲמֹ֨ד	to stand	→ to stand
+9	לְשָׁרֵ֧ת	to serve	→ to serve
+10	בְּשֵׁם־	in [the] name of	→ in the Name of
+11	יְהוָ֛ה	Yahweh	→ YHWH
+12	ה֥וּא	he	→ him
+13	וּבָנָ֖יו	and descendants his	→ and his sons
+14	כָּל־	all	→ continually
+15	הַיָּמִֽים׃ ס	the days	→ continually
+
+## 5:23:1
+EN: “No one wounded, bruised, or cut in the genitals enters into the assembly of YHWH;
+1	לֹֽא־	not	→ No one
+2	יָבֹ֧א	he will go	→ enters
+3	פְצֽוּעַ־	[one who] is wounded of	→ wounded
+4	דַּכָּ֛א	crushing	→ bruised
+5	וּכְר֥וּת	and [one who] is cut off of	→ or cut
+6	שָׁפְכָ֖ה	penis	→ the genitals
+7	בִּקְהַ֥ל	in [the] assembly of	→ into the assembly of
+8	יְהוָֽה ס	Yahweh	→ YHWH
+
+## 5:23:8
+EN: sons who are begotten of them, a third generation of them, enter into the assembly of YHWH.
+1	בָּנִ֛ים	children	→ sons
+2	אֲשֶׁר־	who	→ who
+3	יִוָּלְד֥וּ	they will be born	→ are begotten
+4	לָהֶ֖ם	to <the> them	→ of them
+5	דּ֣וֹר	a generation	→ a third generation
+6	שְׁלִישִׁ֑י	third	→ a third generation
+7	יָבֹ֥א	it will go	→ enter
+8	לָהֶ֖ם	of <the> them	→ of them
+9	בִּקְהַ֥ל	in [the] assembly of	→ into the assembly of
+10	יְהוָֽה ס	Yahweh	→ YHWH
+
+## 5:24:7
+EN: When a man is found stealing a person from his brothers, from the sons of Israel, and has tyrannized over him and sold him, then that thief has died, and you have put away evil out of your midst.
+1	כִּי־	if	→ When
+2	יִמָּצֵ֣א	he will be found	→ is found
+3	אִ֗ישׁ	anyone	→ a man
+4	גֹּנֵ֨ב	stealing	→ stealing
+5	נֶ֤פֶשׁ	a person	→ a person
+6	מֵאֶחָיו֙	any of countrymen his	→ from his brothers
+7	מִבְּנֵ֣י	any of [the] people of	→ from the sons of
+8	יִשְׂרָאֵ֔ל	Israel	→ Israel
+9	וְהִתְעַמֶּר־	and he will treat as a slave	→ and has tyrannized
+10	בּ֖וֹ	<in> <the> him	→ over him
+11	וּמְכָר֑וֹ	and he will sell him	→ and sold him
+12	וּמֵת֙	and he will die	→ has died
+13	הַגַּנָּ֣ב	the thief	→ that thief
+14	הַה֔וּא	<the> that	→ that thief
+15	וּבִֽעַרְתָּ֥	and you will remove	→ and you have put away
+16	הָרָ֖ע	the evil	→ evil
+17	מִקִּרְבֶּֽךָ	from midst your	→ out of your midst
+
+## 5:32:25
+EN: The sword destroys from outside, || And out of the inner-chambers—terror, || Both youth and virgin, || Suckling with man of grey hair.
+1	מִחוּץ֙	from outside	→ from outside
+2	תְּשַׁכֶּל־	it will make childless	→ destroys
+3	חֶ֔רֶב	a sword	→ The sword
+4	וּמֵחֲדָרִ֖ים	and [will be] from inner rooms	→ And out of the inner-chambers
+5	אֵימָ֑ה	terror	→ terror
+6	גַּם־	both	→ Both
+7	בָּחוּר֙	young man	→ youth
+8	גַּם־	as well as	→ and
+9	בְּתוּלָ֔ה	young woman	→ virgin
+10	יוֹנֵ֖ק	a suckling-child	→ Suckling
+11	עִם־	with	→ with
+12	אִ֥ישׁ	a person of	→ man of grey hair
+13	שֵׂיבָֽה	gray hair	→ man of grey hair
+
+## 6:2:14
+EN: And the men say to her, “Our soul to die for yours; if you do not declare this—our matter, then it has been, in YHWH’s giving this land to us, that we have done kindness and truth with you.”
+1	וַיֹּ֧אמְרוּ	and they said	→ say
+2	לָ֣הּ	to <the> her	→ to her
+3	הָאֲנָשִׁ֗ים	the men	→ the men
+4	נַפְשֵׁ֤נוּ	life our	→ Our soul
+5	תַחְתֵּיכֶם֙	for you	→ for yours
+6	לָמ֔וּת	to die	→ to die
+7	אִ֚ם	if	→ if
+8	לֹ֣א	not	→ you do not declare
+9	תַגִּ֔ידוּ	you will tell	→ you do not declare
+10	אֶת־	<obj.>	→ —
+11	דְּבָרֵ֖נוּ	business our	→ our matter
+12	זֶ֑ה	this	→ this
+13	וְהָיָ֗ה	and it will be	→ then it has been
+14	בְּתֵת־	when gives	→ giving
+15	יְהוָ֥ה	Yahweh	→ YHWH’s
+16	לָ֙נוּ֙	to <the> us	→ to us
+17	אֶת־	<obj.>	→ —
+18	הָאָ֔רֶץ	the land	→ this land
+19	וְעָשִׂ֥ינוּ	and we will do	→ we have done
+20	עִמָּ֖ךְ	with you	→ with you
+21	חֶ֥סֶד	loyalty	→ kindness
+22	וֶאֱמֶֽת	and faithfulness	→ and truth
+
+## 6:15:29
+EN: Ba‘alah, and Iim, and Azem,
+1	בַּעֲלָ֥ה	Baalah	→ Ba‘alah
+2	וְעִיִּ֖ים	and Iim	→ and Iim
+3	וָעָֽצֶם	and Ezem	→ and Azem
+
+## 6:18:24
+EN: and Chephar-Haammonai, and Ophni, and Gaba; twelve cities and their villages.
+1	וּכְפַ֧ר	and Kephar	→ and Chephar-Haammonai
+2	הָֽעַמֹּנָ֛ה	<the> Ammonah	→ and Chephar-Haammonai
+3	וְהָֽעָפְנִ֖י	and <the> Ophni	→ and Ophni
+4	וָגָ֑בַע	and Geba	→ and Gaba
+5	עָרִ֥ים	cities	→ twelve cities
+6	שְׁתֵּים־	two [plus]	→ twelve cities
+7	עֶשְׂרֵ֖ה	ten	→ twelve cities
+8	וְחַצְרֵיהֶֽן	and villages their	→ and their villages
+
+## 6:18:28
+EN: and Zelah, Eleph, and Jebusi (it [is] Jerusalem), Gibeath, Kirjath; fourteen cities and their villages. This [is] the inheritance of the sons of Benjamin, for their families.
+1	וְצֵלַ֡ע	and Zelah	→ and Zelah
+2	הָאֶ֜לֶף	Haeleph	→ Eleph
+3	וְהַיְבוּסִ֨י	and the Jebusite	→ and Jebusi
+4	הִ֤יא	that	→ it
+5	יְרֽוּשָׁלִַ֙ם֙	[is] Jerusalem	→ Jerusalem
+6	גִּבְעַ֣ת	Gibeah	→ Gibeath
+7	קִרְיַ֔ת	Kiriath	→ Kirjath
+8	עָרִ֥ים	cities	→ fourteen cities
+9	אַרְבַּֽע־	four-	→ fourteen cities
+10	עֶשְׂרֵ֖ה	teen	→ fourteen cities
+11	וְחַצְרֵיהֶ֑ן	and villages their	→ and their villages
+12	זֹ֛את	this	→ This
+13	נַֽחֲלַ֥ת	[was] [the] inheritance of	→ the inheritance of
+14	בְּנֵֽי־	[the] descendants of	→ the sons of
+15	בִנְיָמִ֖ן	Benjamin	→ Benjamin
+16	לְמִשְׁפְּחֹתָֽם׃ פ	to clans their	→ for their families
+
+## 6:19:2
+EN: and they have in their inheritance Beer-Sheba, and Sheba, and Moladah,
+1	וַיְהִ֥י	and it belonged	→ and they have
+2	לָהֶ֖ם	to <the> them	→ and they have
+3	בְּנַֽחֲלָתָ֑ם	<in> inheritance their	→ in their inheritance
+4	בְּאֵֽר־	Beer	→ Beer-Sheba
+5	שֶׁ֥בַע	Sheba	→ Beer-Sheba
+6	וְשֶׁ֖בַע	and Sheba	→ and Sheba
+7	וּמוֹלָדָֽה	and Moladah	→ and Moladah
+
+## 6:19:6
+EN: and Beth-Lebaoth, and Sharuhen; thirteen cities and their villages.
+1	וּבֵ֥ית	and Beth	→ and Beth-Lebaoth
+2	לְבָא֖וֹת	Lebaoth	→ and Beth-Lebaoth
+3	וְשָֽׁרוּחֶ֑ן	and Sharuhen	→ and Sharuhen
+4	עָרִ֥ים	cities	→ cities
+5	שְׁלֹשׁ־	thir-	→ thirteen
+6	עֶשְׂרֵ֖ה	teen	→ thirteen
+7	וְחַצְרֵיהֶֽן	and villages their	→ and their villages
+
+## 6:19:19
+EN: and Haphraim, and Shihon, and Anaharath,
+1	וַחֲפָרַ֥יִם	and Hapharaim	→ and Haphraim
+2	וְשִׁיאֹ֖ן	and Shion	→ and Shihon
+3	וַאֲנָחֲרַֽת	and Anaharath	→ and Anaharath
+
+## 6:19:42
+EN: and Shalabbin, and Aijalon, and Jethlah,
+1	וְשַֽׁעֲלַבִּ֥ין	and Shaalabbin	→ and Shalabbin
+2	וְאַיָּל֖וֹן	and Aijalon	→ and Aijalon
+3	וְיִתְלָֽה	and Ithlah	→ and Jethlah
+
+## 6:22:11
+EN: And the sons of Israel hear, saying, “Behold, the sons of Reuben, and the sons of Gad, and the half-tribe of Manasseh, have built the altar at the frontier of the land of Canaan, in the districts of the Jordan, at the passage of the sons of Israel.”
+1	וַיִּשְׁמְע֥וּ	and they heard	→ hear
+2	בְנֵֽי־	[the] people of	→ the sons of
+3	יִשְׂרָאֵ֖ל	Israel	→ Israel
+4	לֵאמֹ֑ר	<to> saying	→ saying
+5	הִנֵּ֣ה	there!	→ Behold
+6	בָנ֣וּ	they have built	→ built
+7	בְנֵֽי־	[the] descendants of	→ the sons of
+8	רְאוּבֵ֣ן	Reuben	→ Reuben
+9	וּבְנֵי־	and [the] descendants of	→ and the sons of
+10	גָ֡ד	Gad	→ Gad
+11	וַחֲצִי֩	and [the] half of	→ and the half-tribe of
+12	שֵׁ֨בֶט	[the] tribe of	→ and the half-tribe of
+13	הַֽמְנַשֶּׁ֜ה	<the> Manasseh	→ Manasseh
+14	אֶת־	<obj.>	→ —
+15	הַמִּזְבֵּ֗חַ	the altar	→ the altar
+16	אֶל־	to	→ at the frontier of
+17	מוּל֙	opposite to	→ at the frontier of
+18	אֶ֣רֶץ	[the] land of	→ the land of
+19	כְּנַ֔עַן	Canaan	→ Canaan
+20	אֶל־	to	→ in the districts of
+21	גְּלִילוֹת֙	Geliloth of	→ in the districts of
+22	הַיַּרְדֵּ֔ן	the Jordan	→ the Jordan
+23	אֶל־	to	→ at the passage of
+24	עֵ֖בֶר	[the] side of	→ at the passage of
+25	בְּנֵ֥י	[the] people of	→ the sons of
+26	יִשְׂרָאֵֽל	Israel	→ Israel
+
+## 6:24:14
+EN: And now, fear YHWH, and serve Him, in perfection and in truth, and turn aside the gods which your fathers served beyond the River, and in Egypt, and serve YHWH;
+1	וְעַתָּ֞ה	and therefore	→ now
+2	יְר֧אוּ	fear	→ fear
+3	אֶת־	<obj.>	→ —
+4	יְהוָ֛ה	Yahweh	→ YHWH
+5	וְעִבְד֥וּ	and serve	→ serve
+6	אֹת֖וֹ	<obj.> him	→ Him
+7	בְּתָמִ֣ים	in integrity	→ in perfection
+8	וּבֶֽאֱמֶ֑ת	and in faithfulness	→ and in truth
+9	וְהָסִ֣ירוּ	and remove	→ turn aside
+10	אֶת־	<obj.>	→ —
+11	אֱלֹהִ֗ים	[the] gods	→ the gods
+12	אֲשֶׁר֩	which	→ which
+13	עָבְד֨וּ	they served	→ served
+14	אֲבוֹתֵיכֶ֜ם	ancestors your	→ your fathers
+15	בְּעֵ֤בֶר	on [the] other side of	→ beyond
+16	הַנָּהָר֙	the river	→ the River
+17	וּבְמִצְרַ֔יִם	and in Egypt	→ in Egypt
+18	וְעִבְד֖וּ	and serve	→ serve
+19	אֶת־	<obj.>	→ —
+20	יְהוָֽה	Yahweh	→ YHWH
+
+## 6:24:15
+EN: and if [it is] wrong in your eyes to serve YHWH—choose for yourselves today whom you serve—whether the gods whom your fathers served, which [are] beyond the River, or the gods of the Amorite in whose land you are dwelling; but me and my house—we serve YHWH.”
+1	וְאִם֩	and if	→ and if
+2	רַ֨ע	is displeasing	→ wrong
+3	בְּֽעֵינֵיכֶ֜ם	in view your	→ in your eyes
+4	לַעֲבֹ֣ד	to serve	→ to serve
+5	אֶת־	<obj.>	→ —
+6	יְהוָ֗ה	Yahweh	→ YHWH
+7	בַּחֲר֨וּ	choose	→ choose
+8	לָכֶ֣ם	for <the> yourselves	→ for yourselves
+9	הַיּוֹם֮	this day	→ today
+10	אֶת־	<obj.>	→ —
+11	מִ֣י	whom?	→ whom
+12	תַעֲבֹדוּן֒	will you serve !	→ serve
+13	אִ֣ם	whether	→ whether
+14	אֶת־	<obj.>	→ —
+15	אֱלֹהִ֞ים	[the] gods	→ the gods
+16	אֲשֶׁר־	which	→ whom
+17	עָבְד֣וּ	they served	→ served
+18	אֲבוֹתֵיכֶ֗ם	ancestors your	→ your fathers
+19	אֲשֶׁר֙	who	→ which
+20	מֵעֵ֣בֶר	[were] from [the] other side of	→ beyond
+21	הַנָּהָ֔ר	the river	→ the River
+22	וְאִם֙	and or	→ or
+23	אֶת־	<obj.>	→ —
+24	אֱלֹהֵ֣י	[the] gods of	→ the gods of
+25	הָאֱמֹרִ֔י	the Amorite[s]	→ the Amorite
+26	אֲשֶׁ֥ר	whom	→ in whose land
+27	אַתֶּ֖ם	you	→ you
+28	יֹשְׁבִ֣ים	[are] dwelling	→ dwelling
+29	בְּאַרְצָ֑ם	in land their	→ in whose land
+30	וְאָנֹכִ֣י	and I	→ me
+31	וּבֵיתִ֔י	and household my	→ my house
+32	נַעֲבֹ֖ד	we will serve	→ serve
+33	אֶת־	<obj.>	→ —
+34	יְהוָֽה׃ פ	Yahweh	→ YHWH
+
+## 7:2:1
+EN: And the Messenger of YHWH goes up from Gilgal to Bochim,
+1	וַיַּ֧עַל	and he went up	→ goes up
+2	מַלְאַךְ־	[the] angel of	→ the Messenger of
+3	יְהוָ֛ה	Yahweh	→ YHWH
+4	מִן־	from	→ from
+5	הַגִּלְגָּ֖ל	<the> Gilgal	→ Gilgal
+6	אֶל־	to	→ to
+7	הַבֹּכִ֑ים פ	<the> Bokim	→ Bochim
+8	וַיֹּאמֶר֩	and he said	→ —
+9	אַעֲלֶ֨ה	I brought up	→ —
+10	אֶתְכֶ֜ם	<obj.> you	→ —
+11	מִמִּצְרַ֗יִם	from Egypt	→ —
+12	וָאָבִ֤יא	and I brought	→ —
+13	אֶתְכֶם֙	<obj.> you	→ —
+14	אֶל־	into	→ —
+15	הָאָ֗רֶץ	the land	→ —
+16	אֲשֶׁ֤ר	which	→ —
+17	נִשְׁבַּ֙עְתִּי֙	I swore	→ —
+18	לַאֲבֹ֣תֵיכֶ֔ם	to ancestors your	→ —
+19	וָאֹמַ֕ר	and I said	→ —
+20	לֹֽא־	not	→ —
+21	אָפֵ֧ר	I will break	→ —
+22	בְּרִיתִ֛י	covenant my	→ —
+23	אִתְּכֶ֖ם	with you	→ —
+24	לְעוֹלָֽם	for ever	→ —
+
+## 7:2:15
+EN: in every [place] where they have gone out, the hand of YHWH has been against them for calamity, as YHWH has spoken, and as YHWH has sworn to them, and they are greatly distressed.
+1	בְּכֹ֣ל׀	in every	→ in every
+2	אֲשֶׁ֣ר	where	→ where
+3	יָצְא֗וּ	they went out	→ gone out
+4	יַד־	[the] hand of	→ the hand of
+5	יְהוָה֙	Yahweh	→ YHWH
+6	הָיְתָה־	it was	→ been
+7	בָּ֣ם	on <the> them	→ against them
+8	לְרָעָ֔ה	for harm	→ for calamity
+9	כַּֽאֲשֶׁר֙	just as	→ as
+10	דִּבֶּ֣ר	he had spoken	→ spoken
+11	יְהוָ֔ה	Yahweh	→ YHWH
+12	וְכַאֲשֶׁ֛ר	and just as	→ as
+13	נִשְׁבַּ֥ע	he had sworn	→ sworn
+14	יְהוָ֖ה	Yahweh	→ YHWH
+15	לָהֶ֑ם	to <the> them	→ to them
+16	וַיֵּ֥צֶר	and it was distress	→ distressed
+17	לָהֶ֖ם	to <the> them	→ —
+18	מְאֹֽד	exceedingly	→ greatly
+
+## 7:5:13
+EN: Then him who is left of the majestic ones He caused to rule the people of YHWH, || He caused me to rule among the mighty.
+1	אָ֚ז	then	→ Then
+2	יְרַ֣ד	he went down	→ He caused to rule
+3	שָׂרִ֔יד	[the] survivor[s]	→ him who is left
+4	לְאַדִּירִ֖ים	of [the] nobles	→ of the majestic ones
+5	עָ֑ם	[the] people	→ the people
+6	יְהוָ֕ה	Yahweh	→ YHWH
+7	יְרַד־	he went down	→ He caused
+8	לִ֖י	to <the> me	→ me
+9	בַּגִּבּוֹרִֽים	among the mighty [ones]	→ among the mighty
+
+## 7:6:40
+EN: And God does so on that night, and there is only dryness on the fleece, and there has been dew on all the earth.
+1	וַיַּ֧עַשׂ	and he did	→ does
+2	אֱלֹהִ֛ים	God	→ God
+3	כֵּ֖ן	so	→ so
+4	בַּלַּ֣יְלָה	in the night	→ on that night
+5	הַה֑וּא	<the> that	→ on that night
+6	וַיְהִי־	and it was	→ there is
+7	חֹ֤רֶב	dryness	→ dryness
+8	אֶל־	to	→ on the fleece
+9	הַגִּזָּה֙	the fleece	→ on the fleece
+10	לְבַדָּ֔הּ	to alone it	→ only
+11	וְעַל־	and on	→ on all the earth
+12	כָּל־	all	→ on all the earth
+13	הָאָ֖רֶץ	the ground	→ on all the earth
+14	הָ֥יָה	it was	→ there has been
+15	טָֽל׃ פ	dew	→ dew
+
+## 7:9:37
+EN: And Gaal adds yet to speak and says, “Behold, people are coming down from the high part of the land, and another detachment is coming by the way of the oak of Meonenim.”
+1	וַיֹּ֨סֶף	and he repeated	→ adds
+2	ע֣וֹד	again	→ yet
+3	גַּעַל֮	Gaal	→ Gaal
+4	לְדַבֵּר֒	to speak	→ to speak
+5	וַיֹּ֕אמֶר	and he said	→ says
+6	הִנֵּה־	there!	→ Behold
+7	עָם֙	a people	→ people
+8	יֽוֹרְדִ֔ים	[are] coming down	→ coming down
+9	מֵעִ֖ם	from with	→ from
+10	טַבּ֣וּר	[the] center of	→ high part of
+11	הָאָ֑רֶץ	the land	→ the land
+12	וְרֹאשׁ־	and a company	→ detachment
+13	אֶחָ֣ד	one	→ another
+14	בָּ֔א	[is] coming	→ coming
+15	מִדֶּ֖רֶךְ	from [the] direction of	→ by the way of
+16	אֵל֥וֹן	[the] great tree of	→ the oak of
+17	מְעוֹנְנִֽים	[the] soothsayer	→ Meonenim
+
+## 8:2:15
+EN: And she rises to glean, and Boaz charges his young men, saying, “Even between the sheaves she gleans, and you do not cause her to blush;
+1	וַתָּ֖קָם	and she arose	→ And she rises
+2	לְלַקֵּ֑ט	to glean	→ to glean
+3	וַיְצַו֩	and he commanded	→ charges
+4	בֹּ֨עַז	Boaz	→ Boaz
+5	אֶת־	<obj.>	→ —
+6	נְעָרָ֜יו	servants his	→ his young men
+7	לֵאמֹ֗ר	<to> saying	→ saying
+8	גַּ֣ם	also	→ Even
+9	בֵּ֧ין	between	→ between
+10	הָֽעֳמָרִ֛ים	the sheaves	→ the sheaves
+11	תְּלַקֵּ֖ט	she will glean	→ she gleans
+12	וְלֹ֥א	and not	→ and you do not
+13	תַכְלִימֽוּהָ	you must humiliate her	→ cause her to blush
+
+## 8:2:21
+EN: And Ruth the Moabitess says, “Also he surely said to me, Near the young people whom I have you cleave until they have completed the whole of the harvest which I have.”
+1	וַתֹּ֖אמֶר	and she said	→ says
+2	ר֣וּת	Ruth	→ Ruth
+3	הַמּוֹאֲבִיָּ֑ה	the Moabite [woman]	→ the Moabitess
+4	גַּ֣ם׀	also	→ Also
+5	כִּי־	that	→ he surely said
+6	אָמַ֣ר	he said	→ he surely said
+7	אֵלַ֗י	to me	→ to me
+8	עִם־	with	→ Near
+9	הַנְּעָרִ֤ים	the servants	→ the young people
+10	אֲשֶׁר־	who	→ whom I have
+11	לִי֙	[belong] to <the> me	→ whom I have
+12	תִּדְבָּקִ֔ין	you will stay !	→ you cleave
+13	עַ֣ד	until	→ until
+14	אִם־	<if>	→ —
+15	כִּלּ֔וּ	they have completed	→ they have completed
+16	אֵ֥ת	<obj.>	→ —
+17	כָּל־	all	→ the whole of
+18	הַקָּצִ֖יר	the harvest	→ the harvest
+19	אֲשֶׁר־	which	→ which I have
+20	לִֽי	[belongs] to <the> me	→ which I have
+
+## 8:4:20
+EN: and Amminidab begot Nahshon, and Nahshon begot Salmon,
+1	וְעַמִּֽינָדָב֙	and Amminadab	→ and Amminidab
+2	הוֹלִ֣יד	he fathered	→ begot
+3	אֶת־	<obj.>	→ —
+4	נַחְשׁ֔וֹן	Nahshon	→ Nahshon
+5	וְנַחְשׁ֖וֹן	and Nahshon	→ and Nahshon
+6	הוֹלִ֥יד	he fathered	→ begot
+7	אֶת־	<obj.>	→ —
+8	שַׂלְמָֽה	Salmah	→ Salmon
+
+## 9:1:6
+EN: and her rival has also provoked her greatly, so as to make her tremble, for YHWH has shut up her womb.
+1	וְכִֽעֲסַ֤תָּה	and she provoked her	→ provoked her
+2	צָֽרָתָהּ֙	rival her	→ her rival
+3	גַּם־	also	→ also
+4	כַּ֔עַס	provocation	→ greatly
+5	בַּעֲב֖וּר	in order	→ so as
+6	הַרְּעִמָ֑הּ	to disconcert her	→ make her tremble
+7	כִּֽי־	for	→ for
+8	סָגַ֥ר	he had closed	→ has shut up
+9	יְהוָ֖ה	Yahweh	→ YHWH
+10	בְּעַ֥ד	behind	→ —
+11	רַחְמָֽהּ	womb her	→ her womb
+
+## 9:12:7
+EN: And now, station yourselves, and I judge you before YHWH, with all the righteous acts of YHWH, which He did with you, and with your fathers.
+1	וְעַתָּ֗ה	and therefore	→ And now
+2	הִֽתְיַצְּב֛וּ	present yourselves	→ station yourselves
+3	וְאִשָּׁפְטָ֥ה	so let me enter into judgment	→ and I judge you
+4	אִתְּכֶ֖ם	with you	→ and I judge you
+5	לִפְנֵ֣י	<to> before	→ before
+6	יְהוָ֑ה	Yahweh	→ YHWH
+7	אֵ֚ת	<obj.>	→ —
+8	כָּל־	all	→ with all the righteous acts of
+9	צִדְק֣וֹת	[the] righteousness<es> of	→ with all the righteous acts of
+10	יְהוָ֔ה	Yahweh	→ YHWH
+11	אֲשֶׁר־	which	→ which
+12	עָשָׂ֥ה	he did	→ He did
+13	אִתְּכֶ֖ם	with you	→ with you
+14	וְאֶת־	and with	→ and with your fathers
+15	אֲבוֹתֵיכֶֽם	ancestors your	→ and with your fathers
+
+## 9:15:18
+EN: and YHWH sends you in the way, and says, Go, and you have devoted the sinners, the Amalekite, and fought against them until they are consumed;
+1	וַיִּשְׁלָחֲךָ֥	and he sent you	→ sends you
+2	יְהוָ֖ה	Yahweh	→ YHWH
+3	בְּדָ֑רֶךְ	on a journey	→ way
+4	וַיֹּ֗אמֶר	and he said	→ says
+5	לֵ֣ךְ	go	→ Go
+6	וְהַחֲרַמְתָּ֞ה	and you will totally destroy	→ devoted
+7	אֶת־	<obj.>	→ —
+8	הַֽחַטָּאִים֙	the sinners	→ sinners
+9	אֶת־	<obj.>	→ —
+10	עֲמָלֵ֔ק	Amalek	→ Amalekite
+11	וְנִלְחַמְתָּ֣	and you will wage war	→ fought
+12	ב֔וֹ	against <the> it	→ against them
+13	עַ֥ד	until	→ until
+14	כַּלּוֹתָ֖ם	destroy they	→ consumed
+15	אֹתָֽם	<obj.> them	→ —
+
+## 9:24:18
+EN: and you have declared today how that you have done good with me, how that YHWH shut me up into your hand, and you did not slay me,
+1	וְאַתָּה֙	and you	→ you
+2	הִגַּ֣דְתָּ	you have told	→ declared
+3	הַיּ֔וֹם	this day	→ today
+4	אֵ֛ת	<obj.>	→ —
+5	אֲשֶׁר־	this:	→ how that
+6	עָשִׂ֥יתָה	you have done	→ done
+7	אִתִּ֖י	with me	→ with me
+8	טוֹבָ֑ה	good	→ good
+9	אֵת֩	<obj.>	→ —
+10	אֲשֶׁ֨ר	[and] this:	→ how that
+11	סִגְּרַ֧נִי	he delivered up me	→ shut me up
+12	יְהוָ֛ה	Yahweh	→ YHWH
+13	בְּיָדְךָ֖	in hand your	→ into your hand
+14	וְלֹ֥א	and not	→ did not
+15	הֲרַגְתָּֽנִי	you killed me	→ slay me
+
+## 9:28:17
+EN: And YHWH does for Himself as He has spoken by my hand, and YHWH tears the kingdom out of your hand, and gives it to your neighbor—to David.
+1	וַיַּ֤עַשׂ	and he has done	→ does
+2	יְהוָה֙	Yahweh	→ YHWH
+3	ל֔וֹ	to <the> him	→ Himself
+4	כַּאֲשֶׁ֖ר	just as	→ as
+5	דִּבֶּ֣ר	he spoke	→ spoken
+6	בְּיָדִ֑י	by hand my	→ by my hand
+7	וַיִּקְרַ֨ע	and he has torn	→ tears
+8	יְהוָ֤ה	Yahweh	→ YHWH
+9	אֶת־	<obj.>	→ —
+10	הַמַּמְלָכָה֙	the kingdom	→ the kingdom
+11	מִיָּדֶ֔ךָ	from hand your	→ out of your hand
+12	וַֽיִּתְּנָ֖הּ	and he has given it	→ gives it
+13	לְרֵעֲךָ֥	to neighbor your	→ to your neighbor
+14	לְדָוִֽד	to David	→ to David
+
+## 9:30:4
+EN: And David lifts up—and the people who [are] with him—their voice and weep, until they have no power to weep.
+1	וַיִּשָּׂ֨א	and he lifted up	→ lifts up
+2	דָוִ֜ד	David	→ David
+3	וְהָעָ֧ם	and the people	→ the people
+4	אֲשֶׁר־	which	→ who
+5	אִתּ֛וֹ	[was] with him	→ with him
+6	אֶת־	<obj.>	→ —
+7	קוֹלָ֖ם	voice their	→ their voice
+8	וַיִּבְכּ֑וּ	and they wept	→ weep
+9	עַ֣ד	until	→ until
+10	אֲשֶׁ֧ר	that	→ —
+11	אֵין־	not	→ they have no
+12	בָּהֶ֛ם	[was] in <the> them	→ they have no
+13	כֹּ֖חַ	strength	→ power
+14	לִבְכּֽוֹת	to weep	→ weep
+
+## 9:31:10
+EN: and they place his weapons [in] the house of Ashtaroth, and they have fixed his body on the wall of Beth-Shan.
+1	וַיָּשִׂ֙מוּ֙	and they put	→ place
+2	אֶת־	<obj.>	→ —
+3	כֵּלָ֔יו	armor his	→ his weapons
+4	בֵּ֖ית	[the] house of	→ the house
+5	עַשְׁתָּר֑וֹת	Ashtaroth	→ Ashtaroth
+6	וְאֶת־	and <obj.>	→ —
+7	גְּוִיָּתוֹ֙	corpse his	→ his body
+8	תָּקְע֔וּ	they fixed	→ fixed
+9	בְּחוֹמַ֖ת	on [the] wall of	→ the wall
+10	בֵּ֥ית	Beth	→ Beth-Shan
+11	שָֽׁן	Shan	→ Beth-Shan
+
+## 10:12:20
+EN: And David rises from the earth, and bathes and anoints [himself], and changes his raiment, and comes into the house of YHWH, and bows himself, and comes to his house, and asks and they place bread for him, and he eats.
+1	וַיָּקָם֩	and he arose	→ rises
+2	דָּוִ֨ד	David	→ David
+3	מֵהָאָ֜רֶץ	from the ground	→ from the earth
+4	וַיִּרְחַ֣ץ	and he bathed	→ bathes
+5	וַיָּ֗סֶךְ	and he anointed himself	→ anoints
+6	וַיְחַלֵּף֙	and he changed	→ changes
+7	שִׂמְלֹתָ֔יו	garments his	→ his raiment
+8	וַיָּבֹ֥א	and he went	→ comes
+9	בֵית־	[the] house of	→ the house of
+10	יְהוָ֖ה	Yahweh	→ YHWH
+11	וַיִּשְׁתָּ֑חוּ	and he bowed down	→ bows himself
+12	וַיָּבֹא֙	and he went	→ comes
+13	אֶל־	to	→ to
+14	בֵּית֔וֹ	own house his	→ his house
+15	וַיִּשְׁאַ֕ל	and he asked	→ asks
+16	וַיָּשִׂ֥ימוּ	and they set	→ they place
+17	ל֛וֹ	for <the> him	→ for him
+18	לֶ֖חֶם	food	→ bread
+19	וַיֹּאכַֽל	and he ate	→ he eats
+
+## 10:12:21
+EN: And his servants say to him, “What [is] this thing you have done? Because of the living boy you have fasted and you weep, and when the boy is dead you have risen and eat bread.”
+1	וַיֹּאמְר֤וּ	and they said	→ say
+2	עֲבָדָיו֙	servants his	→ his servants
+3	אֵלָ֔יו	to him	→ to him
+4	מָֽה־	what?	→ What
+5	הַדָּבָ֥ר	[is] the thing	→ this thing
+6	הַזֶּ֖ה	<the> this	→ this thing
+7	אֲשֶׁ֣ר	which	→ you have done
+8	עָשִׂ֑יתָה	you have done	→ you have done
+9	בַּעֲב֞וּר	forsake of	→ Because of
+10	הַיֶּ֤לֶד	the child	→ the living boy
+11	חַי֙	[was] alive	→ the living boy
+12	צַ֣מְתָּ	you fasted	→ you have fasted
+13	וַתֵּ֔בְךְּ	and you wept	→ you weep
+14	וְכַֽאֲשֶׁר֙	and just when	→ when
+15	מֵ֣ת	he died	→ the boy is dead
+16	הַיֶּ֔לֶד	the child	→ the boy is dead
+17	קַ֖מְתָּ	you arose	→ you have risen
+18	וַתֹּ֥אכַל	and you ate	→ eat
+19	לָֽחֶם	food	→ bread
+
+## 10:22:33
+EN: God—my bulwark, [my] strength, || And He makes my way perfect;
+1	הָאֵ֥ל	<the> God	→ God
+2	מָעוּזִּ֖י	[is] place of refuge my	→ my bulwark
+3	חָ֑יִל	strength	→ strength
+4	וַיַּתֵּ֥ר	and he set free	→ He makes
+5	תָּמִ֖ים	a blameless [person]	→ perfect
+6	דַּרְכִּֽי	way my	→ my way
+
+## 10:23:12
+EN: and he stations himself in the midst of the portion, and delivers it, and strikes the Philistines, and YHWH works a great salvation.
+1	וַיִּתְיַצֵּ֤ב	and he took his stand	→ he stations himself
+2	בְּתוֹךְ־	in [the] middle of	→ in the midst of
+3	הַֽחֶלְקָה֙	the portion	→ the portion
+4	וַיַּצִּילֶ֔הָ	and he delivered it	→ delivers it
+5	וַיַּ֖ךְ	and he struck down	→ strikes
+6	אֶת־	<obj.>	→ —
+7	פְּלִשְׁתִּ֑ים	[the] Philistines	→ Philistines
+8	וַיַּ֥עַשׂ	and he did	→ works
+9	יְהוָ֖ה	Yahweh	→ YHWH
+10	תְּשׁוּעָ֥ה	a deliverance	→ a great salvation
+11	גְדוֹלָֽה׃ ס	great	→ a great salvation
+
+## 11:5:10
+EN: And Hiram is giving cedar-trees and fir-trees to Solomon—all his desire,
+1	וַיְהִ֨י	and he was	→ is
+2	חִיר֜וֹם	Hiram	→ Hiram
+3	נֹתֵ֣ן	giving	→ giving
+4	לִשְׁלֹמֹ֗ה	to Solomon	→ to Solomon—all
+5	עֲצֵ֧י	wood<s> of	→ cedar-trees
+6	אֲרָזִ֛ים	cedar<s>	→ cedar-trees
+7	וַעֲצֵ֥י	and wood<s> of	→ fir-trees
+8	בְרוֹשִׁ֖ים	cypress<es>	→ fir-trees
+9	כָּל־	all	→ to Solomon—all
+10	חֶפְצֽוֹ	desire his	→ his desire
+
+## 11:8:32
+EN: then You hear in the heavens, and have done, and have judged Your servants, to declare wicked the wicked, to put his way on his [own] head, and to declare righteous the righteous, to give him according to his righteousness.
+1	וְאַתָּ֣ה׀	and you	→ You
+2	תִּשְׁמַ֣ע	you will hear	→ hear
+3	הַשָּׁמַ֗יִם	the heavens	→ the heavens
+4	וְעָשִׂ֙יתָ֙	and you will act	→ have done
+5	וְשָׁפַטְתָּ֣	and you will judge	→ have judged
+6	אֶת־	<obj.>	→ —
+7	עֲבָדֶ֔יךָ	servants your	→ Your servants
+8	לְהַרְשִׁ֣יעַ	to condemn as guilty	→ to declare wicked
+9	רָשָׁ֔ע	a guilty [person]	→ the wicked
+10	לָתֵ֥ת	to requite	→ to put
+11	דַּרְכּ֖וֹ	conduct his	→ his way
+12	בְּרֹאשׁ֑וֹ	on own head his	→ on his [own] head
+13	וּלְהַצְדִּ֣יק	and to declare righteous	→ to declare righteous
+14	צַדִּ֔יק	a righteous [person]	→ the righteous
+15	לָ֥תֶת	to give	→ to give
+16	ל֖וֹ	to him	→ him
+17	כְּצִדְקָתֽוֹ׃ ס	according to righteousness his	→ according to his righteousness
+
+## 11:17:3
+EN: “Go from this [place]; and you have turned for yourself eastward, and been hidden by the Brook of Cherith that [is] on the front of the Jordan,
+1	לֵ֣ךְ	go	→ Go
+2	מִזֶּ֔ה	from here	→ from this
+3	וּפָנִ֥יתָ	and you will turn	→ you have turned
+4	לְּךָ֖	<for> yourself	→ for yourself
+5	קֵ֑דְמָה	east -ward	→ eastward
+6	וְנִסְתַּרְתָּ֙	and you will hide yourself	→ been hidden
+7	בְּנַ֣חַל	at [the] wadi of	→ by the Brook of
+8	כְּרִ֔ית	Kerith	→ Cherith
+9	אֲשֶׁ֖ר	which	→ that
+10	עַל־	[is] on	→ on the front of
+11	פְּנֵ֥י	[the] face of	→ on the front of
+12	הַיַּרְדֵּֽן	the Jordan	→ the Jordan
+
+## 11:18:3
+EN: and Ahab calls to Obadiah, who [is] over the house—and Obadiah has been fearing YHWH greatly,
+1	וַיִּקְרָ֣א	and he summoned	→ calls
+2	אַחְאָ֔ב	Ahab	→ Ahab
+3	אֶל־	<to>	→ to
+4	עֹבַדְיָ֖הוּ	Obadiah	→ Obadiah
+5	אֲשֶׁ֣ר	who	→ who
+6	עַל־	[was] over	→ over
+7	הַבָּ֑יִת	the household	→ the house—and Obadiah
+8	וְעֹבַדְיָ֗הוּ	and Obadiah	→ the house—and Obadiah
+9	הָיָ֥ה	he was	→ has been
+10	יָרֵ֛א	fearing	→ fearing
+11	אֶת־	<obj.>	→ —
+12	יְהוָ֖ה	Yahweh	→ YHWH
+13	מְאֹֽד	exceedingly	→ greatly
+
+## 11:18:18
+EN: And he says, “I have not troubled Israel, but you and the house of your father, in your forsaking the commands of YHWH, and you go after the Ba‘alim;
+1	וַיֹּ֗אמֶר	and he said	→ he says
+2	לֹ֤א	not	→ I have not troubled
+3	עָכַ֙רְתִּי֙	I have troubled	→ I have not troubled
+4	אֶת־	<obj.>	→ —
+5	יִשְׂרָאֵ֔ל	Israel	→ Israel
+6	כִּ֥י	that	→ but
+7	אִם־	except	→ but
+8	אַתָּ֖ה	you	→ you
+9	וּבֵ֣ית	and [the] household of	→ the house of your father
+10	אָבִ֑יךָ	father your	→ the house of your father
+11	בַּֽעֲזָבְכֶם֙	because have forsaken you	→ in your forsaking
+12	אֶת־	<obj.>	→ —
+13	מִצְוֹ֣ת	[the] commandments of	→ the commands of
+14	יְהוָ֔ה	Yahweh	→ YHWH
+15	וַתֵּ֖לֶךְ	and you have walked	→ you go
+16	אַחֲרֵ֥י	after	→ after
+17	הַבְּעָלִֽים	the Baals	→ the Ba‘alim
+
+## 12:9:34
+EN: And he comes in, and eats, and drinks, and says, “Now look after this cursed one and bury her, for she [is] a king’s daughter.”
+1	וַיָּבֹ֖א	and he went	→ he comes in
+2	וַיֹּ֣אכַל	and he ate	→ eats
+3	וַיֵּ֑שְׁתְּ	and he drank	→ drinks
+4	וַיֹּ֗אמֶר	and he said	→ says
+5	פִּקְדוּ־	attend to	→ look after
+6	נָ֞א	please	→ Now
+7	אֶת־	<obj.>	→ —
+8	הָאֲרוּרָ֤ה	the accursed [woman]	→ this cursed one
+9	הַזֹּאת֙	<the> this	→ this cursed one
+10	וְקִבְר֔וּהָ	and bury her	→ bury her
+11	כִּ֥י	for	→ for
+12	בַת־	[was] a daughter of	→ a king’s daughter
+13	מֶ֖לֶךְ	a king	→ a king’s daughter
+14	הִֽיא	she	→ she
+
+## 12:10:27
+EN: and break down the standing-pillar of Ba‘al, and break down the house of Ba‘al, and appoint it for a latrine to this day.
+1	וַֽיִּתְּצ֔וּ	and they pulled down	→ break down
+2	אֵ֖ת	<obj.>	→ —
+3	מַצְּבַ֣ת	[the] sacred pillar of	→ the standing-pillar of
+4	הַבָּ֑עַל	<the> Baal	→ Ba‘al
+5	וַֽיִּתְּצוּ֙	and they pulled down	→ break down
+6	אֶת־	<obj.>	→ —
+7	בֵּ֣ית	[the] house of	→ the house of
+8	הַבַּ֔עַל	<the> Baal	→ Ba‘al
+9	וַיְשִׂמֻ֥הוּ	and they made it	→ appoint it
+10	לְמֽוֹצָא֖וֹת	<into> outhouses	→ for a latrine
+11	עַד־	until	→ to this day
+12	הַיּֽוֹם	this day	→ to this day
+
+## 13:9:40
+EN: And a son of Jonathan [is] Merib-Ba‘al, and Merib-Ba‘al begot Micah.
+1	וּבֶן־	and [the] son of	→ And a son of
+2	יְהוֹנָתָ֖ן	Jonathan	→ Jonathan
+3	מְרִ֣יב	[was] Merib-	→ Merib-Ba‘al
+4	בָּ֑עַל	-baal	→ Merib-Ba‘al
+5	וּמְרִי־	and Meri-	→ and Merib-Ba‘al
+6	בַ֖עַל	-baal	→ and Merib-Ba‘al
+7	הוֹלִ֥יד	he fathered	→ begot
+8	אֶת־	<obj.>	→ —
+9	מִיכָֽה	Micah	→ Micah
+
+## 13:17:14
+EN: and I have established him in My house, and in My kingdom for all time, and his throne is established for all time.”
+1	וְהַֽעֲמַדְתִּ֛יהוּ	and I will appoint him	→ and I have established him
+2	בְּבֵיתִ֥י	in house my	→ in My house
+3	וּבְמַלְכוּתִ֖י	and in kingdom my	→ and in My kingdom
+4	עַד־	until	→ for all time
+5	הָעוֹלָ֑ם	<the> perpetuity	→ for all time
+6	וְכִסְא֕וֹ	and throne his	→ and his throne
+7	יִהְיֶ֥ה	it will be	→ is
+8	נָכ֖וֹן	established	→ established
+9	עַד־	until	→ for all time
+10	עוֹלָֽם	perpetuity	→ for all time
+
+## 13:17:22
+EN: Indeed, You appoint Your people Israel to Yourself for a people for all time, and You, O YHWH, have been to them for God.
+1	וַ֠תִּתֵּן	and you made	→ You appoint
+2	אֶת־	<obj.>	→ —
+3	עַמְּךָ֨	people your	→ Your people
+4	יִשְׂרָאֵ֧ל׀	Israel	→ Israel
+5	לְךָ֛	for yourself	→ to Yourself
+6	לְעָ֖ם	<into> a people	→ for a people
+7	עַד־	until	→ for all time
+8	עוֹלָ֑ם	perpetuity	→ for all time
+9	וְאַתָּ֣ה	and you	→ and You
+10	יְהוָ֔ה	O Yahweh	→ O YHWH
+11	הָיִ֥יתָ	you became	→ have been
+12	לָהֶ֖ם	for them	→ to them
+13	לֵאלֹהִֽים	<into> God	→ for God
+
+## 13:19:10
+EN: And Joab sees that the front of the battle has been to him, before and behind, and he chooses out of all the choice in Israel, and sets in array to meet Aram,
+1	וַיַּ֣רְא	and he saw	→ And Joab sees
+2	יוֹאָ֗ב	Joab	→ And Joab sees
+3	כִּֽי־	that	→ that
+4	הָיְתָ֧ה	it was	→ has been
+5	פְנֵי־	[the] face of	→ the front of
+6	הַמִּלְחָמָ֛ה	the battle	→ the battle
+7	אֵלָ֖יו	against him	→ to him
+8	פָּנִ֣ים	face	→ before
+9	וְאָח֑וֹר	and back	→ and behind
+10	וַיִּבְחַ֗ר	and he chose	→ and he chooses
+11	מִכָּל־	from every	→ out of all
+12	בָּחוּר֙	chosen [man]	→ the choice
+13	בְּיִשְׂרָאֵ֔ל	in Israel	→ in Israel
+14	וַֽיַּעֲרֹ֖ךְ	and he deployed	→ and sets in array
+15	לִקְרַ֥את	to meet	→ to meet
+16	אֲרָֽם	Aram	→ Aram
+
+## 13:21:24
+EN: And King David says to Ornan, “No, for I surely buy [it] for full price; for I do not lift up that which is yours to YHWH, so as to offer a burnt-offering without cost.”
+1	וַיֹּ֨אמֶר	and he said	→ says
+2	הַמֶּ֤לֶךְ	the king	→ —
+3	דָּוִיד֙	David	→ David
+4	לְאָרְנָ֔ן	to Ornan	→ to Ornan
+5	לֹ֕א	In-	→ No
+6	כִּֽי־	deed	→ for
+7	קָנֹ֥ה	certainly <to acquire>	→ I surely buy
+8	אֶקְנֶ֖ה	I will acquire [it]	→ I surely buy
+9	בְּכֶ֣סֶף	for money	→ for full price
+10	מָלֵ֑א	full	→ for full price
+11	כִּ֠י	for	→ for
+12	לֹא־	not	→ I do not lift up
+13	אֶשָּׂ֤א	I will take	→ I do not lift up
+14	אֲשֶׁר־	[that] which	→ that which is yours
+15	לְךָ֙	[belongs] to you	→ that which is yours
+16	לַיהוָ֔ה	for Yahweh	→ to YHWH
+17	וְהַעֲל֥וֹת	and to offer up	→ so as to offer
+18	עוֹלָ֖ה	a burnt offering	→ a burnt-offering
+19	חִנָּֽם	for nothing	→ without cost
+
+## 13:22:13
+EN: then you prosper, if you observe to do the statutes and the judgments that YHWH charged Moses with concerning Israel; be strong and courageous; do not fear, nor be cast down.
+1	אָ֣ז	then	→ then
+2	תַּצְלִ֔יחַ	you will be successful	→ you prosper
+3	אִם־	if	→ if
+4	תִּשְׁמ֗וֹר	you will take care	→ you observe
+5	לַעֲשׂוֹת֙	to observe	→ to do
+6	אֶת־	<obj.>	→ —
+7	הַֽחֻקִּ֣ים	the statutes	→ the statutes
+8	וְאֶת־	and <obj.>	→ and the judgments
+9	הַמִּשְׁפָּטִ֔ים	the judgments	→ and the judgments
+10	אֲשֶׁ֨ר	which	→ that
+11	צִוָּ֧ה	he commanded	→ charged
+12	יְהוָ֛ה	Yahweh	→ YHWH
+13	אֶת־	<obj.>	→ —
+14	מֹשֶׁ֖ה	Moses	→ Moses
+15	עַל־	on	→ concerning
+16	יִשְׂרָאֵ֑ל	Israel	→ Israel
+17	חֲזַ֣ק	be strong	→ be strong
+18	וֶאֱמָ֔ץ	and be courageous	→ and courageous
+19	אַל־	may not	→ do not fear
+20	תִּירָ֖א	you be afraid	→ do not fear
+21	וְאַל־	and may not	→ nor be cast down
+22	תֵּחָֽת	you be dismayed	→ nor be cast down
+
+## 13:27:3
+EN: [he was] of the sons of Perez, [and] the head of all princes of the hosts for the first month.
+1	מִן־	one of	→ of the sons of
+2	בְּנֵי־	[the] descendants of	→ of the sons of
+3	פֶ֗רֶץ	Perez	→ Perez
+4	הָרֹ֛אשׁ	the chief	→ the head
+5	לְכָל־	of all	→ of all
+6	שָׂרֵ֥י	[the] commanders of	→ princes of
+7	הַצְּבָא֖וֹת	the armies	→ the hosts
+8	לַחֹ֥דֶשׁ	for the month	→ for the first month
+9	הָרִאשֽׁוֹן	<the> first	→ for the first month

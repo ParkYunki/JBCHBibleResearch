@@ -1,0 +1,889 @@
+## 16:12:26
+KO: 이들은 요야김의 날들과, 요사닥의 아들 예수아의 아들인 요야김의 날들과, 총독 느헤미야와 제사장이며 서기관인 에스라의 날들에 있었더라.
+1 אֵלֶּה = these
+2 בִּימֵי = [were] in [the] days of
+3 יוֹיָקִים = Joiakim
+4 בֶּן־ = [the] son of
+5 יֵשׁוּעַ = Jeshua
+6 בֶּן־ = [the] son of
+7 יוֹצָדָק = Jozadak
+8 וּבִימֵי = and in [the] days of
+9 נְחֶמְיָה = Nehemiah
+10 הַפֶּחָה = the governor (governor)
+11 וְעֶזְרָא = and Ezra (Ezra)
+12 הַכֹּהֵן = the priest (priest)
+13 הַסּוֹפֵר פ = the scribe (secretary)
+
+## 16:12:27
+KO: 그리고 예루살렘 성벽의 봉헌 때에, 그들은 레위 사람들을 그들의 모든 처소로부터 찾아내어 예루살렘으로 데려왔으니, 봉헌과 기쁨과 감사와 노래로, 제금과 비파와 수금으로 행하기 위함이었다.
+1 וּבַחֲנֻכַּת = and at [the] dedication of
+2 חוֹמַת = [the] wall of (wall)
+3 יְרוּשָׁלִַם = Jerusalem
+4 בִּקְשׁוּ = people sought (to seek)
+5 אֶת־ = <obj.> ([Obj.])
+6 הַלְוִיִּם = the Levites (Levi)
+7 מִכָּל־ = from all (all)
+8 מְקוֹמֹתָם = places their (standing place)
+9 לַהֲבִיאָם = to bring them (to come (in))
+10 לִירוּשָׁלִָם = to Jerusalem
+11 לַעֲשֹׂת = to celebrate (to make)
+12 חֲנֻכָּה = dedication
+13 וְשִׂמְחָה = and joy (joy)
+14 וּבְתוֹדוֹת = and with thanksgivings (thanksgiving)
+15 וּבְשִׁיר = and with song (song)
+16 מְצִלְתַּיִם = cymbals (cymbal)
+17 נְבָלִים = lyres (harp)
+18 וּבְכִנֹּרוֹת = and with harps (lyre)
+
+## 16:12:28
+KO: 그리고 노래하는 자들의 자손들이 모였다. 예루살렘 사방의 들(지역)로부터, 그리고 느도바 사람들의 마을들로부터.
+1 וַיֵּאָסְפוּ = and they gathered (to gather)
+2 בְּנֵי = [the] sons of (son)
+3 הַמְשֹׁרְרִים = the singers (to sing)
+4 וּמִן־ = and from
+5 הַכִּכָּר = the district (talent)
+6 סְבִיבוֹת = around
+7 יְרוּשָׁלִַם = Jerusalem
+8 וּמִן־ = and from
+9 חַצְרֵי = [the] villages of (village)
+10 נְטֹפָתִי = [the] Netophathite[s] (Netophathite)
+
+## 16:12:29
+KO: 그리고 벧길갈과 게바와 아스마웹의 들판들로부터, 왜냐하면 노래하는 자들이 자기들을 위하여 예루살렘 사방에 마을들을 세웠기 때문이다.
+1 וּמִבֵּית = and from Beth
+2 הַגִּלְגָּל = <of the> Gilgal
+3 וּמִשְּׂדוֹת = and from [the] fields of (land)
+4 גֶּבַע = Geba
+5 וְעַזְמָוֶת = and Azmaveth (Azmaveth)
+6 כִּי = for
+7 חֲצֵרִים = villages (village)
+8 בָּנוּ = they had built (to build)
+9 לָהֶם = for themselves (them)
+10 הַמְשֹׁרֲרִים = the singers (to sing)
+11 סְבִיבוֹת = around
+12 יְרוּשָׁלִָם = Jerusalem
+
+## 16:12:30
+KO: 그리고 제사장들과 레위 사람들은 그들 자신을 정결케 하였고, 백성들과 성문들과 성벽을 정결케 하였다.
+1 וַיִּטַּהֲרוּ = and they purified themselves
+2 הַכֹּהֲנִים = the priests (priest)
+3 וְהַלְוִיִּם = and the Levites (Levi)
+4 וַיְטַהֲרוּ = and they purified
+5 אֶת־ = <obj.>
+6 הָעָם = the people (people)
+7 וְאֶת־ = and <obj.>
+8 הַשְּׁעָרִים = the gates (gate)
+9 וְאֶת־ = and <obj.>
+10 הַחוֹמָה = the wall (wall)
+
+## 16:12:31
+KO: 그리고 내가 유다의 방백들을 성벽 위로 오르게 하였고, 두 개의 큰 감사 찬송의 행렬을 세웠으며, 성벽 위로 오른쪽으로 분문을 향하여 가게 하였다.
+1 וָאַעֲלֶה = and I caused to go up (to ascend)
+2 אֶת־ = <obj.> ([Obj.])
+3 שָׂרֵי = [the] leaders of (ruler)
+4 יְהוּדָה = Judah
+5 מֵעַל = from on
+6 לַחוֹמָה = to the wall
+7 וָאַעֲמִידָה = and I appointed ! (to stand)
+8 שְׁתֵּי = two
+9 תוֹדֹת = thanksgiving choirs (thanksgiving)
+10 גְּדוֹלֹת = large (great)
+11 וְתַהֲלֻכֹת = and processions (procession)
+12 לַיָּמִין = to the right (right)
+13 מֵעַל = from on
+14 לַחוֹמָה = to the wall
+15 לְשַׁעַר = to [the] gate of (gate)
+16 הָאַשְׁפֹּת = the dung (Dung( Gate))
+
+## 16:12:32
+KO: 그리고 그들 뒤로 호세야와 유다 방백들의 절반이 걸어갔다.
+1 וַיֵּלֶךְ = and he went (to go)
+2 אַחֲרֵיהֶם = behind them (after)
+3 הוֹשַׁעְיָה = Hoshaiah
+4 וַחֲצִי = and [the] half of (half)
+5 שָׂרֵי = [the] leaders of (ruler)
+6 יְהוּדָה = Judah
+
+## 16:12:33
+KO: 그리고 아사랴와 에스라와 므술람과
+1 וַעֲזַרְיָה = and Azariah (Azariah)
+2 עֶזְרָא = Ezra
+3 וּמְשֻׁלָּם = and Meshullam (Meshullam)
+
+## 16:12:34
+KO: 유다와, 그리고 베냐민과, 그리고 스마야와, 그리고 예레미야라.
+1 יְהוּדָה = Judah
+2 וּבִנְיָמִן = and Benjamin (Benjamin)
+3 וּשְׁמַעְיָה = and Shemaiah (Shemaiah)
+4 וְיִרְמְיָה ס = and Jeremiah (Jeremiah)
+
+## 16:12:35
+KO: 그리고 나팔들을 잡은 제사장들의 자손들 중에는, 요나단의 아들 스마야의 아들 맛다냐의 아들 미가야의 아들 삭굴의 아들 아삽의 아들 스가랴와
+1 וּמִבְּנֵי = and some of [the] sons of
+2 הַכֹּהֲנִים = the priests (priest)
+3 בַּחֲצֹצְרוֹת = with trumpets (trumpet)
+4 זְכַרְיָה = Zechariah
+5 בֶן־ = [the] son of
+6 יוֹנָתָן = Jonathan
+7 בֶּן־ = [the] son of
+8 שְׁמַעְיָה = Shemaiah
+9 בֶּן־ = [the] son of
+10 מַתַּנְיָה = Mattaniah
+11 בֶּן־ = [the] son of
+12 מִיכָיָה = Micaiah
+13 בֶּן־ = [the] son of
+14 זַכּוּר = Zaccur
+15 בֶּן־ = [the] son of
+16 אָסָף = Asaph
+
+## 16:12:36
+KO: 그리고 그의 형제들 스마야와 아사렐과 밀랄래와 길랄래와 마애와 느다넬과 유다와 하나니는 다윗, 곧 하나님의 사람의 노래의 악기들을 가지고 있었고, 서기관 에스라가 그들 앞에 있었다.
+1 וְאֶחָיו = and brothers his (brother)
+2 שְׁמַעְיָה = Shemaiah
+3 וַעֲזַרְאֵל = and Azarel (Azarel)
+4 מִלֲלַי = Milalai
+5 גִּלֲלַי = Gilalai
+6 מָעַי = Maai
+7 נְתַנְאֵל = Nethanel
+8 וִיהוּדָה = and Judah (Judah)
+9 חֲנָנִי = Hanani
+10 בִּכְלֵי־ = with [the] instruments of (article|utensil)
+11 שִׁיר = <the> song of (song)
+12 דָּוִיד = David
+13 אִישׁ = [the] man of (man)
+14 הָאֱלֹהִים = <the> God (God)
+15 וְעֶזְרָא = and Ezra (Ezra)
+16 הַסּוֹפֵר = the scribe (secretary)
+17 לִפְנֵיהֶם = [was] <to> before them (face)
+
+## 16:12:37
+KO: 그리고 샘 문 위에 그들 앞에 올라갔으니, 다윗 성의 층계들 위로 성벽으로 올라가는 곳에서, 다윗의 집 위로, 그리고 동쪽의 물 문까지 이르렀다.
+1 וְעַל = and over
+2 שַׁעַר = [the] gate of
+3 הָעַיִן = the spring (Fountain( Gate))
+4 וְנֶגְדָּם = and before themselves (before)
+5 עָלוּ = they went up (to ascend)
+6 עַל־ = on
+7 מַעֲלוֹת = [the] steps of (step)
+8 עִיר = [the] city of (city)
+9 דָּוִיד = David
+10 בַּמַּעֲלֶה = at the ascent (ascent)
+11 לַחוֹמָה = to the wall (wall)
+12 מֵעַל = from above
+13 לְבֵית = to [the] house of (house)
+14 דָּוִיד = David
+15 וְעַד = and to (till)
+16 שַׁעַר = [the] gate of
+17 הַמַּיִם = the water (Water( Gate))
+18 מִזְרָח = east
+
+## 16:12:38
+KO: 그리고 두 번째 감사 찬송하는 무리가 맞은편으로 가고, 나도 백성의 절반과 함께 그 뒤를 따라 성벽 위로, 풀무 망대 윗길로, 그리고 넓은 성벽까지 행하였다.
+1 וְהַתּוֹדָה = and the thanksgiving choir (thanksgiving)
+2 הַשֵּׁנִית = <the> second (second)
+3 הַהוֹלֶכֶת = [was] the [one which] was going (to go)
+4 לְמוֹאל = to [the] front (opposite)
+5 וַאֲנִי = and I (I)
+6 אַחֲרֶיהָ = [was] behind it (after)
+7 וַחֲצִי = and [the] half of (half)
+8 הָעָם = the people (people)
+9 מֵעַל = from on
+10 לְהַחוֹמָה = to the wall
+11 מֵעַל = from above
+12 לְמִגְדַּל = to [the] tower of (tower)
+13 הַתַּנּוּרִים = the ovens (of the Ovens)
+14 וְעַד = and to (till)
+15 הַחוֹמָה = the wall
+16 הָרְחָבָה = <the> broad (Broad)
+
+## 16:12:39
+KO: 그리고 에브라임 문 위로부터, 옛 문과 어문과 하나넬 망대와 함메아 망대 위로, 그리고 양 문에 이르기까지, 그리고 그들은 감옥 문에 멈추었다.
+1 וּמֵעַל = and from over
+2 לְשַׁעַר־ = to [the] gate of
+3 אֶפְרַיִם = Ephraim ((Gate of )Ephraim)
+4 וְעַל־ = and over
+5 שַׁעַר = [the] gate of
+6 הַיְשָׁנָה = <the> Jeshanah ((Gate of )Yeshanah (KJV: old gate))
+7 וְעַל־ = and over
+8 שַׁעַר = [the] gate of
+9 הַדָּגִים = the fish (Fish( Gate))
+10 וּמִגְדַּל = and [the] tower of
+11 חֲנַנְאֵל = Hananel (of Hananel)
+12 וּמִגְדַּל = and [the] tower of
+13 הַמֵּאָה = the hundred (of the Hundred)
+14 וְעַד = and to (till)
+15 שַׁעַר = [the] gate of
+16 הַצֹּאן = the sheep (Sheep( Gate))
+17 וְעָמְדוּ = and they stopped (to stand)
+18 בְּשַׁעַר = at [the] gate of
+19 הַמַּטָּרָה = the guard ((Gate of the )Guard (KJV: prison gate))
+
+## 16:12:40
+KO: 그리고 두 감사 찬송하는 무리가 하나님의 집에 섰고, 나와 관리들의 절반이 나와 함께하였다.
+1 וַתַּעֲמֹדְנָה = and they took their stand (to stand)
+2 שְׁתֵּי = [the] two (two)
+3 הַתּוֹדֹת = the thanksgiving choirs (thanksgiving)
+4 בְּבֵית = in [the] house of (house)
+5 הָאֱלֹהִים = <the> God (God)
+6 וַאֲנִי = and I (I)
+7 וַחֲצִי = and [the] half of (half)
+8 הַסְּגָנִים = the officials (ruler)
+9 עִמִּי = with me (with)
+
+## 16:12:41
+KO: 그리고 제사장들인 엘리아김, 마아세야, 미냐민, 미가야, 엘료에내, 스가랴, 하나냐는 나팔들을 가지고(잡고) 있었다.
+1 וְהַכֹּהֲנִים = and the priests (priest)
+2 אֶלְיָקִים = Eliakim
+3 מַעֲשֵׂיָה = Maaseiah
+4 מִנְיָמִין = Miniamin
+5 מִיכָיָה = Micaiah
+6 אֶלְיוֹעֵינַי = Elioenai
+7 זְכַרְיָה = Zechariah
+8 חֲנַנְיָה = Hananiah
+9 בַּחֲצֹצְרוֹת = with trumpets (trumpet)
+
+## 16:12:42
+KO: 그리고 마아세야와, 그리고 스마야와, 그리고 엘르아살과, 그리고 웃시와, 그리고 여호하난과, 그리고 말기야와, 그리고 엘람과, 그리고 에셀과, 노래하는 자들이 소리를 높였고(들리게 하였고), 그리고 감독(파키드)은 예스라히야였다.
+1 וּמַעֲשֵׂיָה = and Maaseiah (Maaseiah)
+2 וּשְׁמַעְיָה = and Shemaiah (Shemaiah)
+3 וְאֶלְעָזָר = and Eleazar (Eleazar)
+4 וְעֻזִּי = and Uzzi (Uzzi)
+5 וִיהוֹחָנָן = and Jehohanan (Jehohanan)
+6 וּמַלְכִּיָּה = and Malkijah (Malchijah)
+7 וְעֵילָם = and Elam (Elam)
+8 וָעָזֶר = and Ezer (Ezer)
+9 וַיַּשְׁמִיעוּ = and they caused to hear (to hear)
+10 הַמְשֹׁרְרִים = the singers (to sing)
+11 וְיִזְרַחְיָה = and Izrahiah (Jezrahiah)
+12 הַפָּקִיד = [was] the overseer (overseer)
+
+## 16:12:43
+KO: 그날에 그들이 큰 제사들을 드리고 즐거워하였으니, 이는 하나님께서 그들을 큰 즐거움으로 즐겁게 하셨음이라. 또한 여자들과 아이들도 즐거워하였으므로 예루살렘의 즐거움이 멀리서 들렸다.
+1 וַיִּזְבְּחוּ = and they sacrificed (to sacrifice)
+2 בַיּוֹם־ = on the day (day;_when)
+3 הַהוּא = <the> that (he;_she;_it)
+4 זְבָחִים = sacrifices (sacrifice)
+5 גְּדוֹלִים = great
+6 וַיִּשְׂמָחוּ = and they rejoiced
+7 כִּי = for
+8 הָאֱלֹהִים = <the> God (God)
+9 שִׂמְּחָם = he had made rejoice them
+10 שִׂמְחָה = joy
+11 גְדוֹלָה = great
+12 וְגַם = and also (also)
+13 הַנָּשִׁים = the women (woman)
+14 וְהַיְלָדִים = and the children (youth)
+15 שָׂמֵחוּ = they rejoiced
+16 וַתִּשָּׁמַע = and it was heard (to hear)
+17 שִׂמְחַת = [the] rejoicing of
+18 יְרוּשָׁלִַם = Jerusalem
+19 מֵרָחוֹק = from a distance (distant)
+
+## 16:12:44
+KO: 그날에 사람들을 임명하여 곳간들과 보물 창고들과 거제물들과 첫 열매들과 십일조들을 위하여 (그것들을) 모으게 하였으니, 도시들의 들로부터 율법의 몫들을 제사장들과 레위 사람들을 위하여 (그 안에) 두게 하였음이라. 이는 유다가 섬기는 제사장들과 레위 사람들을 인하여 즐거워했기 때문이라.
+1 וַיִּפָּקְדוּ = and they were appointed (to reckon)
+2 בַיּוֹם = on the day (day;_when)
+3 הַהוּא = <the> that (he;_she;_it)
+4 אֲנָשִׁים = men (human)
+5 עַל־ = over
+6 הַנְּשָׁכוֹת = the rooms (chamber)
+7 לָאוֹצָרוֹת = for the stores (treasure)
+8 לַתְּרוּמוֹת = for the contributions (contribution)
+9 לָרֵאשִׁית = for the first [fruit] (first)
+10 וְלַמַּעַשְׂרוֹת = and for the tithes (tithe)
+11 לִכְנוֹס = to gather
+12 בָּהֶם = in them (them)
+13 לִשְׂדֵי = to [the] fields of (land)
+14 הֶעָרִים = the cities (city)
+15 מְנָאוֹת = [the] portions of (portion)
+16 הַתּוֹרָה = the law (instruction)
+17 לַכֹּהֲנִים = for the priests
+18 וְלַלְוִיִּם = and for the Levites
+19 כִּי = for
+20 שִׂמְחַת = [the] joy of (joy)
+21 יְהוּדָה = Judah
+22 עַל־ = [was] on
+23 הַכֹּהֲנִים = the priests
+24 וְעַל־ = and on
+25 הַלְוִיִּם = the Levites
+26 הָעֹמְדִים = who were standing (to stand)
+
+## 16:12:45
+KO: 그리고 그들은 그들의 하나님을 지키는 직무와 정결의 직무를 지켰고, 노래하는 자들과 문지기들도 다윗과 그의 아들 솔로몬의 명령대로 행하였다.
+1 וַיִּשְׁמְרוּ = and they kept (to keep)
+2 מִשְׁמֶרֶת = [the] service of
+3 אֱלֹהֵיהֶם = God their (God)
+4 וּמִשְׁמֶרֶת = and [the] service of
+5 הַטָּהֳרָה = <the> purification (purifying)
+6 וְהַמְשֹׁרְרִים = and the singers (to sing)
+7 וְהַשֹּׁעֲרִים = and the gatekeepers (gatekeeper)
+8 כְּמִצְוַת = according to [the] command of (commandment)
+9 דָּוִיד = David
+10 שְׁלֹמֹה = Solomon
+11 בְנוֹ = son his (son)
+
+## 16:12:46
+KO: 이는 다윗과 아삽의 옛적 날들에 노래하는 자들의 우두머리들이 있었고, 하나님께 향한 찬송의 노래와 감사의 노래들이 있었기 때문이라.
+1 כִּי־ = for
+2 בִימֵי = in [the] days of (day;_when)
+3 דָוִיד = David
+4 וְאָסָף = and Asaph (Asaph)
+5 מִקֶּדֶם = from antiquity (front)
+6 רָאשֵׁי = [the] leaders of (head)
+7 הַמְשֹׁרְרִים = the singers (to sing)
+8 וְשִׁיר־ = and [the] song of (song)
+9 תְּהִלָּה = praise
+10 וְהֹדוֹת = and thanksgiving (to give thanks)
+11 לֵאלֹהִים = to God (God)
+
+## 16:12:47
+KO: 그리고 온 이스라엘은 스룹바벨의 날들과 느헤미야의 날들에 노래하는 자들과 문지기들에게 날마다 그 날의 몫을 주었고, 레위 사람들에게 구별하여 주었으며, 레위 사람들은 아론의 자손들을 위하여 구별하였느니라.
+1 וְכָל־ = and all (all)
+2 יִשְׂרָאֵל = Israel
+3 בִּימֵי = in [the] days of
+4 זְרֻבָּבֶל = Zerubbabel
+5 וּבִימֵי = and in [the] days of
+6 נְחֶמְיָה = Nehemiah
+7 נֹתְנִים = [were] giving (to give)
+8 מְנָיוֹת = [the] portions of (portion)
+9 הַמְשֹׁרְרִים = the singers (to sing)
+10 וְהַשֹּׁעֲרִים = and the gatekeepers (gatekeeper)
+11 דְּבַר־ = [the] matter of (word)
+12 יוֹם = a day
+13 בְּיוֹמוֹ = in day its
+14 וּמַקְדִּשִׁים = and [were] setting apart
+15 לַלְוִיִּם = for the Levites
+16 וְהַלְוִיִּם = and the Levites
+17 מַקְדִּשִׁים = [were] setting apart
+18 לִבְנֵי = for [the] descendants of (son)
+19 אַהֲרֹן פ = Aaron
+
+## 16:13:1
+KO: 그 날에 모세의 책이 백성들의 귀에 낭독되었는데, 그 책에 기록된 것이 발견되기를 암몬 사람과 모압 사람은 영원히 하나님의 회중에 들어오지 못하리니.
+1 בַּיּוֹם = on the day (day;_when)
+2 הַהוּא = <the> that (he;_she;_it)
+3 נִקְרָא = it was read aloud (to call)
+4 בְּסֵפֶר = in [the] scroll of (scroll)
+5 מֹשֶׁה = Moses
+6 בְּאָזְנֵי = in [the] ears of (ear)
+7 הָעָם = the people (people)
+8 וְנִמְצָא = and it was found (to find)
+9 כָּתוּב = written (to write)
+10 בּוֹ = in it (him)
+11 אֲשֶׁר = that (which)
+12 לֹא־ = not
+13 יָבוֹא = he will come (to come (in))
+14 עַמֹּנִי = an Ammonite (Ammon)
+15 וּמֹאָבִי = and a Moabite (Moab)
+16 בִּקְהַל = in [the] assembly of (assembly)
+17 הָאֱלֹהִים = <the> God (God)
+18 עַד־ = until (till)
+19 עוֹלָם = perpetuity (forever)
+
+## 16:13:2
+KO: 이는 그들이 이스라엘 자손을 빵과 물로 맞이하지 않았기 때문이라. 그러나 그가 발람을 그에게 고용하여 저주하게 하였으나, 우리 하나님께서 그 저주를 돌이켜 복이 되게 하셨느니라.
+1 כִּי = for
+2 לֹא = not
+3 קִדְּמוּ = they had met (to meet)
+4 אֶת־ = <obj.>
+5 בְּנֵי = [the] people of (son)
+6 יִשְׂרָאֵל = Israel
+7 בַּלֶּחֶם = with <the> food (food)
+8 וּבַמָּיִם = and with <the> water (water)
+9 וַיִּשְׂכֹּר = and he had hired (to hire)
+10 עָלָיו = on it (upon)
+11 אֶת־ = <obj.>
+12 בִּלְעָם = Balaam
+13 לְקַלְלוֹ = to curse it (to lighten)
+14 וַיַּהֲפֹךְ = and he turned (to overturn)
+15 אֱלֹהֵינוּ = God our (God)
+16 הַקְּלָלָה = the curse (curse)
+17 לִבְרָכָה = into blessing (blessing)
+
+## 16:13:3
+KO: 그리고 그들이 율법을 들었을 때, 그들은 모든 섞인 무리를 이스라엘로부터 분리하였다.
+1 וַיְהִי = and it was (to be)
+2 כְּשָׁמְעָם = when heard they (to hear)
+3 אֶת־ = <obj.> ([Obj.])
+4 הַתּוֹרָה = the law (instruction)
+5 וַיַּבְדִּילוּ = and they separated (to separate)
+6 כָל־ = every (all)
+7 עֵרֶב = person of mixed ancestry (racial-mix)
+8 מִיִּשְׂרָאֵל = from Israel (Israel)
+
+## 16:13:4
+KO: 그리고 이보다 앞서, 우리 하나님의 집의 방을 맡은 제사장 엘리아십이 도비야와 가까운 사이였으므로
+1 וְלִפְנֵי = and <to> before (face)
+2 מִזֶּה = from this (this)
+3 אֶלְיָשִׁיב = Eliashib
+4 הַכֹּהֵן = the priest (priest)
+5 נָתוּן = [was] appointed (to give)
+6 בְּלִשְׁכַּת = over [the] store-room of (chamber)
+7 בֵּית־ = [the] house of (house)
+8 אֱלֹהֵינוּ = God our (God)
+9 קָרוֹב = [one] near (near)
+10 לְטוֹבִיָּה = to Tobiah (Tobiah)
+
+## 16:13:5
+KO: 그리고 그가 그를 위하여 큰 방 하나를 만들었으니, 그곳에는 이전부터 그들이 소제물과 유향과 기명들과 레위 사람들과 노래하는 자들과 문지기들에게 속한 곡식과 새 포도주와 기름의 십일조와 제사장들의 거제물을 두고 있었다.
+1 וַיַּעַשׂ = and he made (to make)
+2 לוֹ = for him (him)
+3 לִשְׁכָּה = a room (chamber)
+4 גְדוֹלָה = large (great)
+5 וְשָׁם = and there (there)
+6 הָיוּ = people were (to be)
+7 לְפָנִים = <to> before (face)
+8 נֹתְנִים = putting (to give)
+9 אֶת־ = <obj.> ([Obj.])
+10 הַמִּנְחָה = the grain offering (offering)
+11 הַלְּבוֹנָה = the frankincense (frankincense)
+12 וְהַכֵּלִים = and the utensils (article|utensil)
+13 וּמַעְשַׂר = and [the] tithe of (tithe)
+14 הַדָּגָן = the grain (grain)
+15 הַתִּירוֹשׁ = the new wine (new wine)
+16 וְהַיִּצְהָר = and the fresh oil (oil)
+17 מִצְוַת = [the] commandment of (commandment)
+18 הַלְוִיִּם = the Levites (Levi)
+19 וְהַמְשֹׁרְרִים = and the singers (to sing)
+20 וְהַשֹּׁעֲרִים = and the gatekeepers (gatekeeper)
+21 וּתְרוּמַת = and [the] contribution of (contribution)
+22 הַכֹּהֲנִים = the priests (priest)
+
+## 16:13:6
+KO: 그리고 이 모든 때에 나는 예루살렘에 있지 아니하였으니, 바벨론 왕 아닥사스다 제 삼십이년에 내가 왕에게로 들어갔다가, 며칠의 끝에 왕으로부터 (말미를) 구하였더라.
+1 וּבְכָל־ = and in all (all)
+2 זֶה = this
+3 לֹא = not
+4 הָיִיתִי = I was (to be)
+5 בִּירוּשָׁלִָם = in Jerusalem (Jerusalem)
+6 כִּי = for
+7 בִּשְׁנַת = in year (year)
+8 שְׁלֹשִׁים = thirty
+9 וּשְׁתַּיִם = and two (two)
+10 לְאַרְתַּחְשַׁסְתְּא = of Artaxerxes (Artaxerxes)
+11 מֶלֶךְ־ = [the] king of
+12 בָּבֶל = Babylon
+13 בָּאתִי = I had gone (to come (in))
+14 אֶל־ = to (to(wards))
+15 הַמֶּלֶךְ = the king
+16 וּלְקֵץ = and to [the] end of (end)
+17 יָמִים = days (day;_when)
+18 נִשְׁאַלְתִּי = I requested leave of absence (to ask)
+19 מִן־ = from
+20 הַמֶּלֶךְ = the king
+
+## 16:13:7
+KO: 그리고 내가 예루살렘에 이르렀고, 엘리아십이 도비야를 위하여 하나님의 집 뜰에 방을 만들어 준 악한 일을 깨달았다.
+1 וָאָבוֹא = and I came (to come (in))
+2 לִירוּשָׁלִָם = to Jerusalem (Jerusalem)
+3 וָאָבִינָה = and I perceived ! (to understand)
+4 בָרָעָה = <in> the evil thing (distress)
+5 אֲשֶׁר = which
+6 עָשָׂה = he had done
+7 אֶלְיָשִׁיב = Eliashib
+8 לְטוֹבִיָּה = for Tobiah (Tobiah)
+9 לַעֲשׂוֹת = by making
+10 לוֹ = for him (him)
+11 נִשְׁכָּה = a room (chamber)
+12 בְּחַצְרֵי = in [the] courtyards of (court)
+13 בֵּית = [the] house of (house)
+14 הָאֱלֹהִים = <the> God (God)
+
+## 16:13:8
+KO: 그리고 그것이 나에게 매우 악하게 보였다. 그래서 내가 도비야의 집의 모든 세간들을 그 방 밖으로 던져 버렸다.
+1 וַיֵּרַע = and it was displeasing (be evil)
+2 לִי = to me (me)
+3 מְאֹד = exceedingly (much)
+4 וָאַשְׁלִיכָה = and I threw ! (to throw)
+5 אֶת־ = <obj.> ([Obj.])
+6 כָּל־ = all
+7 כְּלֵי = [the] articles of (article|utensil)
+8 בֵית־ = [the] household of (house)
+9 טוֹבִיָּה = Tobiah
+10 הַחוּץ = the outside (outside)
+11 מִן־ = from
+12 הַלִּשְׁכָּה = the room (chamber)
+
+## 16:13:9
+KO: 그리고 내가 명령하였고 그들이 그 방들을 정결하게 하였다. 그리고 내가 하나님의 집의 기명들과 소제물과 유향을 그리로 다시 돌려놓았다.
+1 וָאֹמְרָה = and I said ! (to say)
+2 וַיְטַהֲרוּ = and people purified (be pure)
+3 הַלְּשָׁכוֹת = the store-rooms (chamber)
+4 וָאָשִׁיבָה = and I brought back ! (to return)
+5 שָּׁם = there
+6 כְּלֵי = [the] utensils of (article|utensil)
+7 בֵּית = [the] house of (house)
+8 הָאֱלֹהִים = <the> God (God)
+9 אֶת־ = <obj.> ([Obj.])
+10 הַמִּנְחָה = the grain offering (offering)
+11 וְהַלְּבוֹנָה פ = and the frankincense (frankincense)
+
+## 16:13:10
+KO: 그리고 내가 알게 되었다. 레위 사람들의 몫이 그들에게 주어지지 않았으므로, 그 직무를 수행하는 레위 사람들과 노래하는 자들이 각각 자기의 밭으로 도망하였다는 것을.
+1 וָאֵדְעָה = and I perceived ! (to know)
+2 כִּי־ = that (for)
+3 מְנָיוֹת = [the] portions of (portion)
+4 הַלְוִיִּם = the Levites
+5 לֹא = not
+6 נִתָּנָה = it had been given (to give)
+7 וַיִּבְרְחוּ = and they had fled (to flee)
+8 אִישׁ־ = each one (man)
+9 לְשָׂדֵהוּ = to own field his (land)
+10 הַלְוִיִּם = the Levites
+11 וְהַמְשֹׁרְרִים = and the singers (to sing)
+12 עֹשֵׂי = [who] did (to make)
+13 הַמְּלָאכָה = <of> the work (work)
+
+## 16:13:11
+KO: 그리고 내가 민장들과 다투며 말하기를 "어찌하여 하나님의 집이 버려졌는가?" 하였고, 내가 그들을 모아 그들의 처소에 그들을 세웠다.
+1 וָאָרִיבָה = and I contended ! (to contend)
+2 אֶת־ = with
+3 הַסְּגָנִים = the officials (ruler)
+4 וָאֹמְרָה = and I said ! (to say)
+5 מַדּוּעַ = why?
+6 נֶעֱזַב = has it been neglected (to leave)
+7 בֵּית־ = [the] house of (house)
+8 הָאֱלֹהִים = <the> God (God)
+9 וָאֶקְבְּצֵם = and I assembled them (to gather)
+10 וָאַעֲמִדֵם = and I made stand them (to stand)
+11 עַל־ = at (upon)
+12 עָמְדָם = place their (post)
+
+## 16:13:12
+KO: 그리고 모든 유다가 곡식과 새 포도주와 기름의 십일조를 곳간들로 가져왔다.
+1 וְכָל־ = and all (all)
+2 יְהוּדָה = Judah
+3 הֵבִיאוּ = they brought (to come (in))
+4 מַעְשַׂר = [the] tithe of (tithe)
+5 הַדָּגָן = the grain (grain)
+6 וְהַתִּירוֹשׁ = and the new wine (new wine)
+7 וְהַיִּצְהָר = and the fresh oil (oil)
+8 לָאוֹצָרוֹת = to the storerooms (treasure)
+
+## 16:13:13
+KO: 내가 제사장 셀레먀와 서기관 사독과 레위 사람 브다야를 창고들 위에 맡게 하였고, 그들의 손 아래에는 맛다냐의 아들인 삭굴의 아들 하난을 두었으니, 이는 그들이 신실한 자들로 여겨졌기 때문이며 그들의 임무는 그들의 형제들에게 분배하는 것이었다.
+1 וָאוֹצְרָה = and I appointed as treasurers ! (to store)
+2 עַל־ = over
+3 אוֹצָרוֹת = [the] storerooms (treasure)
+4 שֶׁלֶמְיָה = Shelemiah
+5 הַכֹּהֵן = the priest (priest)
+6 וְצָדוֹק = and Zadok (Zadok)
+7 הַסּוֹפֵר = the scribe (secretary)
+8 וּפְדָיָה = and Pedaiah (Pedaiah)
+9 מִן־ = one of (from)
+10 הַלְוִיִּם = the Levites (Levi)
+11 וְעַל־ = and [was] on
+12 יָדָם = hand their (hand)
+13 חָנָן = Hanan
+14 בֶּן־ = [the] son of
+15 זַכּוּר = Zaccur
+16 בֶּן־ = [the] son of
+17 מַתַּנְיָה = Mattaniah
+18 כִּי = for
+19 נֶאֱמָנִים = reliable (be faithful)
+20 נֶחְשָׁבוּ = they were thought (to devise)
+21 וַעֲלֵיהֶם = and [was] on them
+22 לַחֲלֹק = to distribute (to divide)
+23 לַאֲחֵיהֶם פ = to brothers their (brother)
+
+## 16:13:14
+KO: 나의 하나님이여, 이것에 관하여 나를 기억하소서. 그리고 나의 하나님 집과 그 직무들을 위하여 내가 행한 나의 경건한 행위들을 도말하지 마소서.
+1 זָכְרָה־ = remember ! (to remember)
+2 לִּי = to me (me)
+3 אֱלֹהַי = O God my
+4 עַל־ = on (upon)
+5 זֹאת = this
+6 וְאַל־ = and may not (not)
+7 תֶּמַח = you wipe out (to wipe)
+8 חֲסָדַי = loyalti<es> my (kindness)
+9 אֲשֶׁר = which
+10 עָשִׂיתִי = I have done (to make)
+11 בְּבֵית = in [the] house of (house)
+12 אֱלֹהַי = God my
+13 וּבְמִשְׁמָרָיו = and in services its (custody)
+
+## 16:13:15
+KO: 그 날들에 내가 유다에서 포도주 틀들을 밟고 곡식 더미들을 가져오며 나귀들에 싣는 자들을 보았고, 또한 포도주와 포도들과 무화과들과 모든 짐을 가지고 안식일 날에 예루살렘에 들어오니, 그들이 식물을 파는 날에 내가 경고하였다.
+1 בַּיָּמִים = in the days
+2 הָהֵמָּה = <the> those (they(masc.))
+3 רָאִיתִי = I saw (to see)
+4 בִיהוּדָה = in Judah (Judah)
+5 דֹּרְכִים־ = [some who] trod (to tread)
+6 גִּתּוֹת = winepresses (wine press)
+7 בַּשַּׁבָּת = on the sabbath
+8 וּמְבִיאִים = and [some who] brought
+9 הָעֲרֵמוֹת = <the> heaps of grain (heap)
+10 וְעֹמְסִים = and [some who] loaded [them] (to lift)
+11 עַל־ = on (upon)
+12 הַחֲמֹרִים = <the> donkeys (donkey)
+13 וְאַף־ = and also (also)
+14 יַיִן = wine
+15 עֲנָבִים = grapes (grape)
+16 וּתְאֵנִים = and figs (fig)
+17 וְכָל־ = and every (all)
+18 מַשָּׂא = load (burden)
+19 וּמְבִיאִים = and [some who] brought [them]
+20 יְרוּשָׁלִַם = Jerusalem
+21 בְּיוֹם = on [the] day of
+22 הַשַּׁבָּת = the sabbath
+23 וָאָעִיד = and I protested (to testify)
+24 בְּיוֹם = on [the] day
+25 מִכְרָם = sold they (to sell)
+26 צָיִד = food
+
+## 16:13:16
+KO: 그리고 두로 사람들이 그 안에 거주하며, 물고기와 모든 상품을 가져와 안식일에 유다의 자손들에게 그리고 예루살렘에서 팔더라.
+1 וְהַצֹּרִים = and the Tyrians (Tyrian)
+2 יָשְׁבוּ = [who] they dwelt (to dwell)
+3 בָהּ = in it (her)
+4 מְבִיאִים = [were] bringing (to come (in))
+5 דָּאג = fish
+6 וְכָל־ = and every (all)
+7 מֶכֶר = merchandise
+8 וּמֹכְרִים = and [were] selling [it] (to sell)
+9 בַּשַּׁבָּת = on the sabbath (Sabbath)
+10 לִבְנֵי = to [the] people of (son)
+11 יְהוּדָה = Judah
+12 וּבִירוּשָׁלִָם = and in Jerusalem (Jerusalem)
+
+## 16:13:17
+KO: 그리고 내가 유다의 귀인들과 다투며 그들에게 이르기를, 너희가 어찌하여 이 악한 일을 행하며 안식일을 더럽히느냐.
+1 וָאָרִיבָה = and I contended ! (to contend)
+2 אֵת = with
+3 חֹרֵי = [the] nobles of (noble)
+4 יְהוּדָה = Judah
+5 וָאֹמְרָה = and I said ! (to say)
+6 לָהֶם = to them (them)
+7 מָה־ = what?
+8 הַדָּבָר = [is] the thing (word)
+9 הָרָע = <the> evil (bad)
+10 הַזֶּה = <the> this (this)
+11 אֲשֶׁר = which
+12 אַתֶּם = you (you(m.p.))
+13 עֹשִׂים = [are] doing (to make)
+14 וּמְחַלְּלִים = and [are] profaning (to profane;_begin)
+15 אֶת־ = <obj.> ([Obj.])
+16 יוֹם = [the] day of (day;_when)
+17 הַשַּׁבָּת = the sabbath (Sabbath)
+
+## 16:13:18
+KO: 너희 조상들이 이같이 행하지 아니하였느냐? 그러므로 우리 하나님께서 이 모든 재앙을 우리와 이 성읍 위에 내리셨도다. 그런데 너희는 안식일을 더럽힘으로써 이스라엘 위에 진노를 더욱 더하게 하는도다.
+1 הֲלוֹא = ¿ not (not)
+2 כֹה = thus
+3 עָשׂוּ = did they do (to make)
+4 אֲבֹתֵיכֶם = ancestors your (father)
+5 וַיָּבֵא = and he brought (to come (in))
+6 אֱלֹהֵינוּ = God our (God)
+7 עָלֵינוּ = on us
+8 אֵת = <obj.>
+9 כָּל־ = all
+10 הָרָעָה = the trouble (distress)
+11 הַזֹּאת = <the> this
+12 וְעַל = and on
+13 הָעִיר = the city (city)
+14 הַזֹּאת = <the> this
+15 וְאַתֶּם = and you (you(m.p.))
+16 מוֹסִיפִים = [are] increasing (to add)
+17 חָרוֹן = anger (burning anger)
+18 עַל־ = toward
+19 יִשְׂרָאֵל = Israel
+20 לְחַלֵּל = by profaning (to profane;_begin)
+21 אֶת־ = <obj.>
+22 הַשַּׁבָּת פ = the sabbath (Sabbath)
+
+## 16:13:19
+KO: 그늘지게 되었을 때, 예루살렘의 성문들이 안식일 앞에, 그리고 내가 명하였고 문들이 닫혔다. 그리고 내가 명하였다. 그들이 안식일 뒤까지 그것들을 열지 않도록. 그리고 나의 종들 중 일부를 나는 성문들 위에 세웠다. 짐이 안식일에 들어오지 못하게 하기 위함이었다.
+1 וַיְהִי = and it was (to be)
+2 כַּאֲשֶׁר = just when
+3 צָלֲלוּ = they became dark (to shade)
+4 שַׁעֲרֵי = [the] gates of
+5 יְרוּשָׁלִַם = Jerusalem
+6 לִפְנֵי = <to> before (face)
+7 הַשַּׁבָּת = the sabbath
+8 וָאֹמְרָה = and I said !
+9 וַיִּסָּגְרוּ = and they were closed (to shut)
+10 הַדְּלָתוֹת = the doors (door)
+11 וָאֹמְרָה = and I said !
+12 אֲשֶׁר = that
+13 לֹא = not
+14 יִפְתָּחוּם = people will open them (to open)
+15 עַד = until (till)
+16 אַחַר = after
+17 הַשַּׁבָּת = the sabbath
+18 וּמִנְּעָרַי = and some of servants my (youth)
+19 הֶעֱמַדְתִּי = I stationed (to stand)
+20 עַל־ = at (upon)
+21 הַשְּׁעָרִים = the gates
+22 לֹא־ = not
+23 יָבוֹא = it will come (to come (in))
+24 מַשָּׂא = a load (burden)
+25 בְּיוֹם = on [the] day of (day;_when)
+26 הַשַּׁבָּת = the sabbath
+
+## 16:13:20
+KO: 그리고 상인들과 모든 물건을 파는 자들이 예루살렘 밖에서 한 번, 두 번 유숙하였다.
+1 וַיָּלִינוּ = and they passed [the] night (to lodge)
+2 הָרֹכְלִים = the traders (to trade)
+3 וּמֹכְרֵי = and [the] sellers of (to sell)
+4 כָל־ = every (all)
+5 מִמְכָּר = merchandise (sale)
+6 מִחוּץ = from [the] outside (outside)
+7 לִירוּשָׁלִָם = of Jerusalem (Jerusalem)
+8 פַּעַם = a time (beat)
+9 וּשְׁתָּיִם = and two [times] (two)
+
+## 16:13:21
+KO: 그리고 내가 그들에게 엄중히 경고하며 말하기를 “어찌하여 너희가 성벽 앞에서 유숙하느냐? 만약 너희가 다시 반복하면 내가 너희에게 손을 대리라” 하였더니, 그때로부터 그들이 안식일에 오지 아니하였더라.
+1 וָאָעִידָה = and I warned ! (to testify)
+2 בָהֶם = <in> them (them)
+3 וָאֹמְרָה = and I said ! (to say)
+4 אֲלֵיהֶם = to them (to(wards))
+5 מַדּוּעַ = why?
+6 אַתֶּם = [are] you (you(m.p.))
+7 לֵנִים = passing [the] night (to lodge)
+8 נֶגֶד = before
+9 הַחוֹמָה = the wall (wall)
+10 אִם־ = if
+11 תִּשְׁנוּ = you will do [it] again (to repeat)
+12 יָד = a hand (hand)
+13 אֶשְׁלַח = I will stretch out (to send)
+14 בָּכֶם = on you (you)
+15 מִן־ = from
+16 הָעֵת = the time (time)
+17 הַהִיא = <the> that (he;_she;_it)
+18 לֹא־ = not
+19 בָאוּ = they came (to come (in))
+20 בַּשַּׁבָּת ס = on the sabbath (Sabbath)
+
+## 16:13:22
+KO: 그리고 내가 레위 사람들에게 말하여 그들이 스스로를 정결하게 하고 와서 성문들을 지켜 안식일을 거룩하게 하도록 하였다. 나의 하나님이여, 이 일 또한 나를 위하여 기억하시고 주의 풍성하신 인애를 따라 나를 불쌍히 여기소서.
+1 וָאֹמְרָה = and I said ! (to say)
+2 לַלְוִיִּם = to the Levites (Levi)
+3 אֲשֶׁר = that (which)
+4 יִהְיוּ = they will be (to be)
+5 מִטַּהֲרִים = purifying themselves (be pure)
+6 וּבָאִים = and coming (to come (in))
+7 שֹׁמְרִים = guarding (to keep)
+8 הַשְּׁעָרִים = the gates (gate)
+9 לְקַדֵּשׁ = to keep holy (to consecrate)
+10 אֶת־ = <obj.> ([Obj.])
+11 יוֹם = [the] day of (day;_when)
+12 הַשַּׁבָּת = the sabbath (Sabbath)
+13 גַּם־ = also
+14 זֹאת = this
+15 זָכְרָה־ = remember ! (to remember)
+16 לִּי = to me (me)
+17 אֱלֹהַי = O God my (God)
+18 וְחוּסָה = and have mercy ! (to pity)
+19 עָלַי = on me (upon)
+20 כְּרֹב = according to [the] greatness of (abundance)
+21 חַסְדֶּךָ פ = covenant loyalty your (kindness)
+
+## 16:13:23
+KO: 그날들에 또한 내가 보았는데, 유다 사람들이 아스돗 여인들, 암몬 여인들, 모압 여인들을 아내로 삼았더라.
+1 גַּם = also
+2 בַּיָּמִים = in the days (day;_when)
+3 הָהֵם = <the> those (they(masc.))
+4 רָאִיתִי = I saw (to see)
+5 אֶת־ = <obj.> ([Obj.])
+6 הַיְּהוּדִים = the Jews (Jew)
+7 הֹשִׁיבוּ = [who] they had married (to dwell)
+8 נָשִׁים = women (woman)
+9 אַשְׁדֳּדִיּוֹת = Ashdodite (Ashdod)
+10 עַמֳּנִיּוֹת = Ammonite (Ammon)
+11 מוֹאֲבִיּוֹת = Moabite (Moab)
+
+## 16:13:24
+KO: 그리고 그들의 자녀들은 절반은 아스돗 방언을 말하고, 유다 방언은 말할 줄 모르니, 민족과 민족의 언어와 같도다.
+1 וּבְנֵיהֶם = and children their (son)
+2 חֲצִי = half
+3 מְדַבֵּר = [were] speaking
+4 אַשְׁדּוֹדִית = Ashdodite (Ashdod)
+5 וְאֵינָם = and not they (nothing)
+6 מַכִּירִים = [were] knowing (to recognize)
+7 לְדַבֵּר = to speak
+8 יְהוּדִית = [in] Judean (Judean)
+9 וְכִלְשׁוֹן = and according to [the] language of (tongue)
+10 עַם = people
+11 וָעָם = and people
+
+## 16:13:25
+KO: 그리고 내가 그들과 다투었고, 그리고 내가 그들을 저주하였고, 그리고 내가 그들 중 사람들을 쳤고, 그리고 내가 그들의 머리털을 뽑았고, 그리고 내가 그들에게 하나님을 가리켜 맹세하게 하였으니, 너희는 너희 딸들을 그들의 아들들에게 주지 말고, 너희 아들들이나 너희를 위하여 그들의 딸들을 데려오지 말라 하였다.
+1 וָאָרִיב = and I contended (to contend)
+2 עִמָּם = with them (with)
+3 וָאֲקַלְלֵם = and I cursed them (to lighten)
+4 וָאַכֶּה = and I struck (to smite)
+5 מֵהֶם = some of <the> them (them)
+6 אֲנָשִׁים = men (human)
+7 וָאֶמְרְטֵם = and I pulled out beard their (to smooth)
+8 וָאַשְׁבִּיעֵם = and I made take an oath them (to swear)
+9 בֵּאלֹהִים = by God (God)
+10 אִם־ = if
+11 תִּתְּנוּ = you will give (to give)
+12 בְנֹתֵיכֶם = daughters your
+13 לִבְנֵיהֶם = to sons their
+14 וְאִם־ = and if
+15 תִּשְׂאוּ = you will take (to lift)
+16 מִבְּנֹתֵיהֶם = any of daughters their
+17 לִבְנֵיכֶם = for sons your
+18 וְלָכֶם = and for <the> yourselves (you)
+
+## 16:13:26
+KO: 과연 이 일들로 인하여 이스라엘 왕 솔로몬이 범죄하지 않았느냐? 많은 민족들 중에 그와 같은 왕이 없었고, 그는 그의 하나님께 사랑받는 자였으며, 하나님이 그를 온 이스라엘 위에 왕으로 삼으셨으나, 이방 여인들이 그를 범죄하게 하였도다.
+1 הֲלוֹא = ¿ not
+2 עַל־ = on
+3 אֵלֶּה = these
+4 חָטָא־ = did he sin
+5 שְׁלֹמֹה = Solomon
+6 מֶלֶךְ = [the] king of
+7 יִשְׂרָאֵל = Israel
+8 וּבַגּוֹיִם = and among the nations (nation)
+9 הָרַבִּים = <the> many (many)
+10 לֹא־ = not
+11 הָיָה = he was
+12 מֶלֶךְ = a king
+13 כָּמֹהוּ = like him (like)
+14 וְאָהוּב = and loved (to love)
+15 לֵאלֹהָיו = by God his
+16 הָיָה = he was
+17 וַיִּתְּנֵהוּ = and he made him (to give)
+18 אֱלֹהִים = God
+19 מֶלֶךְ = king
+20 עַל־ = over
+21 כָּל־ = all
+22 יִשְׂרָאֵל = Israel
+23 גַּם־ = also
+24 אוֹתוֹ = <obj.> him ([Obj.])
+25 הֶחֱטִיאוּ = they caused to sin
+26 הַנָּשִׁים = the wives (woman)
+27 הַנָּכְרִיּוֹת = <the> foreign (foreign)
+
+## 16:13:27
+KO: 그리고 너희에 관하여, 이 모든 큰 악을 행하여 우리 하나님께 신실치 못하게 함으로써 이방 여인들을 거하게 하는 이 일을 우리가 들어야 하겠느냐?
+1 וְלָכֶם = and to you (you)
+2 הֲנִשְׁמַע = ¿ is it heard (to hear)
+3 לַעֲשֹׂת = to do (to make)
+4 אֵת = <obj.> ([Obj.])
+5 כָּל־ = all
+6 הָרָעָה = the evil (distress)
+7 הַגְּדוֹלָה = <the> great (great)
+8 הַזֹּאת = <the> this (this)
+9 לִמְעֹל = to act unfaithfully (be unfaithful)
+10 בֵּאלֹהֵינוּ = against God our (God)
+11 לְהֹשִׁיב = by marrying (to dwell)
+12 נָשִׁים = wives (woman)
+13 נָכְרִיּוֹת = foreign
+
+## 16:13:28
+KO: 그리고 대제사장 엘리아십의 손자 요야다의 아들들 중 하나가, 호론 사람 산발랏의 사위였으므로, 내가 그를 내 앞에서 쫓아내었도다.
+1 וּמִבְּנֵי = and one of [the] sons of
+2 יוֹיָדָע = Joiada
+3 בֶּן־ = [the] son of
+4 אֶלְיָשִׁיב = Eliashib
+5 הַכֹּהֵן = the priest (priest)
+6 הַגָּדוֹל = <the> great (great)
+7 חָתָן = [was] a son-in-law (son-in-law)
+8 לְסַנְבַלַּט = of Sanballat (Sanballat)
+9 הַחֹרֹנִי = the Horonite (Horonite)
+10 וָאַבְרִיחֵהוּ = and I drove away him (to flee)
+11 מֵעָלָי = from with <the> me (upon)

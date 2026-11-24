@@ -95,6 +95,11 @@ struct SermonDetailView: View {
     @Environment(\.self) private var environment
     @Environment(\.sermonHasFixedTitle) private var hasFixedTitle
 
+    @State private var isParentPickerPresented = false
+    @State private var comparingDelivery: SermonDelivery?
+    @State private var openedLinkedSermon: Sermon?
+    @AppStorage(SermonPrefs.charsPerMinute) private var charsPerMinute = SermonPrefs.defaultCharsPerMinute
+
     private var settings: UserSettingsStore { .shared }
 
     /// 테마색상 반영 액센트 — `SermonHomeView.accent`와 같은 코드.
@@ -118,15 +123,31 @@ struct SermonDetailView: View {
         ScrollView {
             VStack(alignment: .leading, spacing: 20) {
                 titleSection
+                metaSection
                 // 아이패드·맥은 편집/뷰어 버튼이 왼쪽 설교함(`SermonHomeView.sermonSidebar`) 행에 있어 중복하지 않는다.
                 // 아이폰은 이 화면이 push로 도달하는 유일한 경로라 남긴다.
                 if isPhoneIdiom {
                     actionButtons
                 }
                 deliverySection
+                SermonLinkChainSection(
+                    sermon: sermon, accent: accent,
+                    onOpen: { openLinkedSermon($0) },
+                    onEdit: { isParentPickerPresented = true }
+                )
+                SermonReferenceLinksSection(sermon: sermon, accent: accent)
             }
             .padding(20)
         }
+        .sheet(isPresented: $isParentPickerPresented) { SermonParentLinkPicker(sermon: sermon) }
+        .sheet(item: $comparingDelivery) { delivery in
+            SermonDeliveryCompareView(sermon: sermon, initialDelivery: delivery)
+        }
+        #if os(iOS)
+        .navigationDestination(item: $openedLinkedSermon) { linked in
+            SermonDetailView(sermon: linked)
+        }
+        #endif
         .navigationTitle(hasFixedTitle ? SermonFixedTitle.navigationText : (sermon.title.isEmpty ? String(localized: "새 설교") : sermon.title))
         #if os(iOS)
         .navigationBarTitleDisplayMode(.inline)
@@ -143,6 +164,57 @@ struct SermonDetailView: View {
         Text(sermon.title.isEmpty ? String(localized: "제목 없음") : sermon.title)
             .font(.title2.bold())
             .foregroundStyle(settings.bibleTextColor ?? .primary)
+    }
+
+    // MARK: - 메타데이터 (상태 · 주 본문 · 분량)
+
+    private var metaSection: some View {
+        let stats = SermonTextStats.compute(text: sermon.contentText)
+        let minutes = stats.estimatedMinutes(charsPerMinute: charsPerMinute)
+        let suggestion = sermon.effectiveMainPassage
+        return VStack(alignment: .leading, spacing: 8) {
+            HStack(spacing: 10) {
+                Menu {
+                    Picker(String(localized: "상태"), selection: Binding(get: { sermon.status }, set: { sermon.status = $0; sermon.updatedAt = .now })) {
+                        ForEach(SermonStatus.allCases, id: \.self) { status in Text(status.displayName).tag(status) }
+                    }
+                } label: {
+                    SermonBadge(text: sermon.status.displayName, color: sermon.status.tint, systemImage: "circle.fill")
+                }
+                .menuStyle(.button)
+                .buttonStyle(.plain)
+                .fixedSize()
+                Text(String(localized: "\(stats.characters)자 · \(SermonTextStats.minutesLabel(minutes))"))
+                    .font(.caption.monospacedDigit())
+                    .foregroundStyle(settings.bibleTextColor?.opacity(0.6) ?? Color.secondary)
+            }
+            HStack(spacing: 6) {
+                Image(systemName: "book.closed").font(.caption).foregroundStyle(.secondary)
+                TextField(
+                    suggestion?.isSuggested == true
+                        ? String(localized: "주 본문 · 제안: \(suggestion?.text ?? "")")
+                        : String(localized: "주 본문 (예: 요 3:1-15)"),
+                    text: $sermon.mainPassage
+                )
+                .textFieldStyle(.plain)
+                .font(.callout)
+                if sermon.mainPassage.isEmpty, let suggestion, suggestion.isSuggested {
+                    Button(String(localized: "제안 적용")) { sermon.mainPassage = suggestion.text }
+                        .buttonStyle(SermonMiniPillButtonStyle(isFilled: false, tint: accent))
+                }
+            }
+        }
+    }
+
+    /// 이어지는 설교 열기 — 아이폰은 같은 스택에 push, 아이패드·맥은 상세 창.
+    private func openLinkedSermon(_ linked: Sermon) {
+        #if os(iOS)
+        if isPhoneIdiom {
+            openedLinkedSermon = linked
+            return
+        }
+        #endif
+        openWindow(id: "sermon-detail", value: linked.persistentModelID)
     }
 
     // MARK: - 본문 편집 / 뷰어로 보기 (목업 Detail.dc.html의 버튼 한 쌍)
@@ -272,6 +344,8 @@ struct SermonDetailView: View {
                 statusBadge(for: delivery)
                     .lineLimit(1)
                 HStack(spacing: 6) {
+                    Button { comparingDelivery = delivery } label: { Text("비교") }
+                        .buttonStyle(SermonMiniPillButtonStyle(isFilled: false, tint: accent))
                     deliveryEditorLink(delivery)
                     deliveryViewerLink(delivery)
                 }

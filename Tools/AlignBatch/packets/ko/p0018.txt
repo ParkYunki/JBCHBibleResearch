@@ -1,0 +1,834 @@
+## 1:30:20
+KO: 레아가 말했다. “하나님이 나에게 좋은 선물을 주셨다. 이번에 나의 남편이 나와 함께 거하리라. 왜냐하면 내가 그에게 여섯 아들을 낳았기 때문이다.” 그리고 그가 그 이름을 스불론이라 불렀다.
+1 וַתֹּאמֶר = and she said (to say)
+2 לֵאָה = Leah
+3 זְבָדַנִי = he has endowed me (to endow)
+4 אֱלֹהִים = God
+5 אֹתִי = <obj.> me
+6 זֵבֶד = an endowment (dowry)
+7 טוֹב = good (pleasant)
+8 הַפַּעַם = this time (beat)
+9 יִזְבְּלֵנִי = he will honor me (to dwell)
+10 אִישִׁי = husband my (man)
+11 כִּי־ = for
+12 יָלַדְתִּי = I have borne (to beget)
+13 לוֹ = to <the> him (him)
+14 שִׁשָּׁה = six
+15 בָנִים = sons (son)
+16 וַתִּקְרָא = and she called (to call)
+17 אֶת־ = <obj.>
+18 שְׁמוֹ = name his (name)
+19 זְבֻלוּן = Zebulun
+
+## 1:30:21
+KO: 그리고 그 후에 그녀가 딸을 낳았고, 그녀가 그 이름을 디나라고 불렀다.
+1 וְאַחַר = and after (after)
+2 יָלְדָה = she bore (to beget)
+3 בַּת = a daughter (daughter)
+4 וַתִּקְרָא = and she called (to call)
+5 אֶת־ = <obj.> ([Obj.])
+6 שְׁמָהּ = name her (name)
+7 דִּינָה = Dinah
+
+## 1:30:22
+KO: 그리고 하나님이 라헬을 기억하셨다. 그리고 하나님이 그에게 들으셨고, 그의 태를 여셨다.
+1 וַיִּזְכֹּר = and he remembered (to remember)
+2 אֱלֹהִים = God
+3 אֶת־ = <obj.>
+4 רָחֵל = Rachel
+5 וַיִּשְׁמַע = and he listened (to hear)
+6 אֵלֶיהָ = to her (to(wards))
+7 אֱלֹהִים = God
+8 וַיִּפְתַּח = and he opened (to open)
+9 אֶת־ = <obj.>
+10 רַחְמָהּ = womb her (womb)
+
+## 1:30:23
+KO: 그리고 그가 잉태하였고 그가 아들을 낳았으며, 그가 말하였다. "하나님께서 나의 수치를 거두어 가셨다."
+1 וַתַּהַר = and she conceived (to conceive)
+2 וַתֵּלֶד = and she bore (to beget)
+3 בֵּן = a son (son)
+4 וַתֹּאמֶר = and she said (to say)
+5 אָסַף = he has removed (to gather)
+6 אֱלֹהִים = God
+7 אֶת־ = <obj.> ([Obj.])
+8 חֶרְפָּתִי = reproach my (reproach)
+
+## 1:30:24
+KO: 그리고 그녀가 그(의) 이름을 요셉이라 불렀다, 말하며 “여호와께서 나에게 다른 아들을 더하시기를(바란다).”
+1 וַתִּקְרָא = and she called (to call)
+2 אֶת־ = <obj.> ([Obj.])
+3 שְׁמוֹ = name his (name)
+4 יוֹסֵף = Joseph
+5 לֵאמֹר = <to> saying (to say)
+6 יֹסֵף = may he add (to add)
+7 יְהוָה = Yahweh (LORD)
+8 לִי = to <the> me (me)
+9 בֵּן = a son (son)
+10 אַחֵר = another
+
+## 1:30:25
+KO: 라헬이 요셉을 낳았을 때에, 야곱이 라반에게 말하였다. "나를 보내소서, 내가 나의 장소와 나의 땅으로 가겠나이다."
+1 וַיְהִי = and it was (to be)
+2 כַּאֲשֶׁר = just as (as which)
+3 יָלְדָה = she had borne (to beget)
+4 רָחֵל = Rachel
+5 אֶת־ = <obj.> ([Obj.])
+6 יוֹסֵף = Joseph
+7 וַיֹּאמֶר = and he said (to say)
+8 יַעֲקֹב = Jacob
+9 אֶל־ = to
+10 לָבָן = Laban
+11 שַׁלְּחֵנִי = send off me (to send)
+12 וְאֵלְכָה = so let me go (to go)
+13 אֶל־ = to
+14 מְקוֹמִי = place my (standing place)
+15 וּלְאַרְצִי = and to land my (land)
+
+## 1:30:26
+KO: 나의 아내들과 나의 자녀들을 내게 주소서, 내가 그들로 말미암아 당신을 섬겼으니 내가 가게 하소서. 왜냐하면 당신은 내가 당신을 섬긴 나의 섬김을 아시기 때문입니다.
+1 תְּנָה = give ! (to give)
+2 אֶת־ = <obj.>
+3 נָשַׁי = wives my (woman)
+4 וְאֶת־ = and <obj.>
+5 יְלָדַי = children my (youth)
+6 אֲשֶׁר = whom
+7 עָבַדְתִּי = I have served
+8 אֹתְךָ = <obj.> you
+9 בָּהֵן = for them (them)
+10 וְאֵלֵכָה = so I may go (to go)
+11 כִּי = for
+12 אַתָּה = you (you(m.s.))
+13 יָדַעְתָּ = you know (to know)
+14 אֶת־ = <obj.>
+15 עֲבֹדָתִי = service my (service)
+16 אֲשֶׁר = which
+17 עֲבַדְתִּיךָ = I have served you
+
+## 1:30:27
+KO: 라반이 그에게 말하였다. “만약 부디 내가 네 눈에 은혜를 입었다면, 내가 점을 쳐 보았더니 여호와께서 너 때문에 나에게 복을 주셨다.”
+1 וַיֹּאמֶר = and he said (to say)
+2 אֵלָיו = to him (to(wards))
+3 לָבָן = Laban
+4 אִם־ = if
+5 נָא = please
+6 מָצָאתִי = I have found (to find)
+7 חֵן = favor
+8 בְּעֵינֶיךָ = in view your (eye)
+9 נִחַשְׁתִּי = I have learned by divination (to divine)
+10 וַיְבָרֲכֵנִי = and he has blessed me (to bless)
+11 יְהוָה = Yahweh (LORD)
+12 בִּגְלָלֶךָ = on account of you (because of)
+
+## 1:30:28
+KO: 그가 말하였다. "네 품삯을 정하라. 내가 그것을 주리라."
+1 וַיֹּאמַר = and he said (to say)
+2 נָקְבָה = designate ! (to pierce)
+3 שְׂכָרְךָ = wage[s] your (wages)
+4 עָלַי = on me (upon)
+5 וְאֶתֵּנָה = so let me give [it] (to give)
+
+## 1:30:29
+KO: 그가 그에게 이르되, 당신은 내가 당신을 어떻게 섬겼는지, 그리고 당신의 가축이 나와 함께 어떻게 되었는지를 당신이 아나이다.
+1 וַיֹּאמֶר = and he said (to say)
+2 אֵלָיו = to him (to(wards))
+3 אַתָּה = you (you(m.s.))
+4 יָדַעְתָּ = you know (to know)
+5 אֵת = <obj.>
+6 אֲשֶׁר = how
+7 עֲבַדְתִּיךָ = I have served you (to serve)
+8 וְאֵת = and <obj.>
+9 אֲשֶׁר־ = how
+10 הָיָה = it has been (to be)
+11 מִקְנְךָ = livestock your (livestock)
+12 אִתִּי = with me (with)
+
+## 1:30:30
+KO: 왜냐하면 내 앞에 당신에게 있던 것이 적었으나, 그것이 다량으로 불어났고, 여호와께서 나의 발걸음을 따라 당신에게 복을 주셨기 때문입니다. 그런데 이제, 나 또한 언제 내 집을 세울 수 있겠습니까?
+1 כִּי = for
+2 מְעַט = a little (little)
+3 אֲשֶׁר־ = which
+4 הָיָה = it be[longed] (to be)
+5 לְךָ = to <the> you (you)
+6 לְפָנַי = <to> before me (face)
+7 וַיִּפְרֹץ = and it has increased (to break through)
+8 לָרֹב = to abundance (abundance)
+9 וַיְבָרֶךְ = and he has blessed (to bless)
+10 יְהוָה = Yahweh (LORD)
+11 אֹתְךָ = <obj.> you ([Obj.])
+12 לְרַגְלִי = to foot my (foot)
+13 וְעַתָּה = and now (now)
+14 מָתַי = when? (how)
+15 אֶעֱשֶׂה = will I work (to make)
+16 גַם־ = also
+17 אָנֹכִי = I
+18 לְבֵיתִי = for own household my (house)
+
+## 1:30:31
+KO: 그가 말하였다. "내가 무엇을 네게 줄까?" 야곱이 말하였다. "너는 내게 아무것도 주지 마십시오. 만일 당신이 내게 이 일을 행하시면, 내가 다시 당신의 양 떼를 먹이고 지키겠습니다."
+1 וַיֹּאמֶר = and he said
+2 מָה = what?
+3 אֶתֶּן־ = will I give
+4 לָךְ = to <the> you (you)
+5 וַיֹּאמֶר = and he said
+6 יַעֲקֹב = Jacob
+7 לֹא־ = not
+8 תִתֶּן־ = you will give
+9 לִי = to <the> me
+10 מְאוּמָה = anything
+11 אִם־ = if
+12 תַּעֲשֶׂה־ = you will do (to make)
+13 לִּי = for <the> me
+14 הַדָּבָר = the thing (word)
+15 הַזֶּה = <the> this (this)
+16 אָשׁוּבָה = I will return (to return)
+17 אֶרְעֶה = I will tend (to pasture)
+18 צֹאנְךָ = flock your (flock)
+19 אֶשְׁמֹר = I will protect [it] (to keep)
+
+## 1:30:32
+KO: 오늘 내가 네 양 떼를 두루 다니리라. 그곳에서 점 있는 모든 양과 얼룩진 모든 것과 양 떼 가운데 검은 것, 그리고 염소들 가운데 얼룩진 것과 점 있는 것을 제거하여 내리니, 그것이 나의 삯이 되리라.
+1 אֶעֱבֹר = let me pass (to pass)
+2 בְּכָל־ = in all
+3 צֹאנְךָ = flock your (flock)
+4 הַיּוֹם = this day (day;_when)
+5 הָסֵר = I will remove (to turn aside)
+6 מִשָּׁם = from there (there)
+7 כָּל־ = every
+8 שֶׂה = sheep
+9 נָקֹד = speckled
+10 וְטָלוּא = and spotted
+11 וְכָל־ = and every
+12 שֶׂה־ = sheep
+13 חוּם = dark (darkened)
+14 בַּכְּשָׂבִים = among the lambs (sheep)
+15 וְטָלוּא = and [the] spotted
+16 וְנָקֹד = and [the] speckled
+17 בָּעִזִּים = among the goats (goat)
+18 וְהָיָה = and it will be (to be)
+19 שְׂכָרִי = wage[s] my (wages)
+
+## 1:30:33
+KO: 그리고 나의 의가 내게 응답할 것이다, 내일 나의 품삯 위에 당신이 올 그 날에; 염소들 중에 아롱지지 아니한 모든 것과 점이 없는 것, 그리고 양들 중에 검지 아니한 것은 그것은 내게 도둑질한 것이다.
+1 וְעָנְתָה־ = and it will testify (to answer)
+2 בִּי = for me (me)
+3 צִדְקָתִי = righteousness my (righteousness)
+4 בְּיוֹם = on a day (day;_when)
+5 מָחָר = in future time (tomorrow)
+6 כִּי־ = for
+7 תָבוֹא = you will come (to come (in))
+8 עַל־ = on (upon)
+9 שְׂכָרִי = wage[s] my (wages)
+10 לְפָנֶיךָ = <to> before you (face)
+11 כֹּל = all
+12 אֲשֶׁר־ = that (which)
+13 אֵינֶנּוּ = not [is] it (nothing)
+14 נָקֹד = speckled
+15 וְטָלוּא = and spotted (to spot)
+16 בָּעִזִּים = among the goats (goat)
+17 וְחוּם = and dark (darkened)
+18 בַּכְּשָׂבִים = among the lambs (sheep)
+19 גָּנוּב = [is] stolen (to steal)
+20 הוּא = it (he;_she;_it)
+21 אִתִּי = with me (with)
+
+## 1:30:34
+KO: 그리고 라반이 말했다. "보라, 네 말대로 될지어다."
+1 וַיֹּאמֶר = and he said (to say)
+2 לָבָן = Laban
+3 הֵן = there! (look!)
+4 לוּ = if
+5 יְהִי = let it be (to be)
+6 כִדְבָרֶךָ = according to word your (word)
+
+## 1:30:35
+KO: 그리고 그가 그날에 줄무늬 있는 수염소들과 점 있는 것들을 따로 떼어놓았고, 점 있는 암염소들과 흰색이 있는 모든 것, 그리고 양들 가운데서 검은 것들을 따로 떼어놓아 자기 아들들의 손에 맡겼다.
+1 וַיָּסַר = and he removed (to turn aside)
+2 בַּיּוֹם = on the day (day;_when)
+3 הַהוּא = <the> that (he;_she;_it)
+4 אֶת־ = <obj.>
+5 הַתְּיָשִׁים = the male goats (male goat)
+6 הָעֲקֻדִּים = <the> striped (striped)
+7 וְהַטְּלֻאִים = and <the> spotted
+8 וְאֵת = and <obj.>
+9 כָּל־ = all
+10 הָעִזִּים = the female goats (goat)
+11 הַנְּקֻדּוֹת = <the> speckled (speckled)
+12 וְהַטְּלֻאֹת = and <the> spotted
+13 כֹּל = all
+14 אֲשֶׁר־ = that (which)
+15 לָבָן = white
+16 בּוֹ = [was] on <the> it (him)
+17 וְכָל־ = and every
+18 חוּם = dark [one] (darkened)
+19 בַּכְּשָׂבִים = among the lambs (sheep)
+20 וַיִּתֵּן = and he gave [them] (to give)
+21 בְּיַד־ = in [the] hand of (hand)
+22 בָּנָיו = sons his (son)
+
+## 1:30:36
+KO: 그리고 그는 자기와 야곱 사이에 삼 일 길을 두었고, 야곱은 라반의 남아 있는 양 떼를 쳤다.
+1 וַיָּשֶׂם = and he put (to set)
+2 דֶּרֶךְ = a journey of (way)
+3 שְׁלֹשֶׁת = three
+4 יָמִים = days (day;_when)
+5 בֵּינוֹ = between himself
+6 וּבֵין = and between
+7 יַעֲקֹב = Jacob
+8 וְיַעֲקֹב = and Jacob
+9 רֹעֶה = [was] pasturing (to pasture)
+10 אֶת־ = <obj.> ([Obj.])
+11 צֹאן = [the] flock of (flock)
+12 לָבָן = Laban
+13 הַנּוֹתָרֹת = which remained (to remain)
+
+## 1:30:37
+KO: 그리고 야곱은 그를 위하여 신선한 버드나무와 살구나무와 신풍나무의 지팡이들을 취하여, 그 지팡이들 위에 흰 무늬들을 내며 흰색을 드러나게 하였다.
+1 וַיִּקַּח־ = and he took (to take)
+2 לוֹ = for <the> himself (him)
+3 יַעֲקֹב = Jacob
+4 מַקַּל = branch[es] of
+5 לִבְנֶה = poplar
+6 לַח = freshly cut (fresh)
+7 וְלוּז = and almond (almond)
+8 וְעֶרְמוֹן = and plane tree (plane tree)
+9 וַיְפַצֵּל = and he stripped (to peel)
+10 בָּהֵן = on <the> them (them)
+11 פְּצָלוֹת = strips (stripe)
+12 לְבָנוֹת = white
+13 מַחְשֹׂף = [the] peeling of (exposing)
+14 הַלָּבָן = the white [wood]
+15 אֲשֶׁר = which
+16 עַל־ = [was] on (upon)
+17 הַמַּקְלוֹת = the branches
+
+## 1:30:38
+KO: 그리고 그가 껍질을 벗긴 가지들을 양 떼가 마시러 오는 그 물들의 물구유들 안에, 곧 양 떼의 앞에 세웠으니, 그것들이 마시러 올 때에 그것들이 새끼를 배었더라.
+1 וַיַּצֵּג = and he placed (to set)
+2 אֶת־ = <obj.> ([Obj.])
+3 הַמַּקְלוֹת = the branches (rod)
+4 אֲשֶׁר = which
+5 פִּצֵּל = he had stripped (to peel)
+6 בָּרֳהָטִים = in the drinking troughs (trough)
+7 בְּשִׁקֲתוֹת = in [the] watering channels of (trough)
+8 הַמָּיִם = <the> water (water)
+9 אֲשֶׁר = which
+10 תָּבֹאןָ = they came
+11 הַצֹּאן = the flock
+12 לִשְׁתּוֹת = to drink
+13 לְנֹכַח = to before (before)
+14 הַצֹּאן = the flock
+15 וַיֵּחַמְנָה = and they mated (to conceive)
+16 בְּבֹאָן = when came they
+17 לִשְׁתּוֹת = to drink
+
+## 1:30:39
+KO: 그리고 양들이 막대기들을 향하여 교미하였고, 양들이 줄무늬 있는 것들과 점 있는 것들과 아롱진 것들을 낳았다.
+1 וַיֶּחֱמוּ = and they mated (to conceive)
+2 הַצֹּאן = the flock
+3 אֶל־ = to (to(wards))
+4 הַמַּקְלוֹת = the branches (rod)
+5 וַתֵּלַדְןָ = and they bore (to beget)
+6 הַצֹּאן = the flock
+7 עֲקֻדִּים = striped [ones] (striped)
+8 נְקֻדִּים = speckled [ones] (speckled)
+9 וּטְלֻאִים = and spotted [ones] (to spot)
+
+## 1:30:40
+KO: 그리고 야곱은 어린 양들을 갈라놓았고, 양 떼의 얼굴(앞면)을 라반의 양 떼 가운데 있는 얼룩무늬 있는 것과 모든 검은 것 쪽으로 향하게 하였으며, 자기에게는 따로 양 떼를 두어 라반의 양 떼와 섞지 아니하였다.
+1 וְהַכְּשָׂבִים = and the lambs (sheep)
+2 הִפְרִיד = he separated (to separate)
+3 יַעֲקֹב = Jacob
+4 וַיִּתֵּן = and he set (to give)
+5 פְּנֵי = [the] faces of (face)
+6 הַצֹּאן = the flock
+7 אֶל־ = to (to(wards))
+8 עָקֹד = [the] striped (striped)
+9 וְכָל־ = and every (all)
+10 חוּם = dark [one] (darkened)
+11 בְּצֹאן = among [the] flock of
+12 לָבָן = Laban
+13 וַיָּשֶׁת־ = and he made
+14 לוֹ = for <the> himself (him)
+15 עֲדָרִים = flocks (flock)
+16 לְבַדּוֹ = to only him (alone)
+17 וְלֹא = and not (not)
+18 שָׁתָם = he put them
+19 עַל־ = with (upon)
+20 צֹאן = [the] flock of
+21 לָבָן = Laban
+
+## 1:30:41
+KO: 그리고 튼튼한 양들이 교미할 때마다 야곱이 그 가지들을 양들의 눈앞에 개천들에 두어, 그 가지들 안에서 그것들이 교미하게 하였다.
+1 וְהָיָה = and it was (to be)
+2 בְּכָל־ = in all (all)
+3 יַחֵם = [the] being in heat of
+4 הַצֹּאן = the sheep
+5 הַמְקֻשָּׁרוֹת = <the> vigorous [female] (to conspire)
+6 וְשָׂם = and he put out (to set)
+7 יַעֲקֹב = Jacob
+8 אֶת־ = <obj.> ([Obj.])
+9 הַמַּקְלוֹת = the branches
+10 לְעֵינֵי = to [the] eyes of (eye)
+11 הַצֹּאן = the sheep
+12 בָּרֳהָטִים = in the drinking troughs (trough)
+13 לְיַחְמֵנָּה = to mate her
+14 בַּמַּקְלוֹת = at the branches
+
+## 1:30:42
+KO: 그리고 양들이 기운이 없을 때에는 그는 두지 않았고, 기운이 없는 것들은 라반의 것이 되었고, 튼튼한 것들은 야곱의 것이 되었다.
+1 וּבְהַעֲטִיף = and when was feeble
+2 הַצֹּאן = the sheep (flock)
+3 לֹא = not
+4 יָשִׂים = he put [them] out (to set)
+5 וְהָיָה = and it was (to be)
+6 הָעֲטֻפִים = the enfeebled ones
+7 לְלָבָן = [belonged] to Laban (Laban)
+8 וְהַקְּשֻׁרִים = and the vigorous [ones] (to conspire)
+9 לְיַעֲקֹב = [belonged] to Jacob (Jacob)
+
+## 1:30:43
+KO: 그 사람이 매우 매우 크게 번성하였고, 그에게 많은 양 떼와 여종들과 남종들과 낙타들과 나귀들이 있었다.
+1 וַיִּפְרֹץ = and he increased (to break through)
+2 הָאִישׁ = the man (man)
+3 מְאֹד = very
+4 מְאֹד = very
+5 וַיְהִי־ = and it be[longed] (to be)
+6 לוֹ = to <the> him (him)
+7 צֹאן = sheep (flock)
+8 רַבּוֹת = many
+9 וּשְׁפָחוֹת = and female servants (maidservant)
+10 וַעֲבָדִים = and [male] servants (servant;_slave)
+11 וּגְמַלִּים = and camels (camel)
+12 וַחֲמֹרִים = and donkeys (donkey)
+
+## 1:31:1
+KO: 그리고 야곱은 라반의 아들들의 말들을 들었다. "야곱이 우리 아버지에게 속한 모든 것을 취했고, 우리 아버지에게 속한 것으로부터 이 모든 영광을 만들었다"라고.
+1 וַיִּשְׁמַע = and he heard (to hear)
+2 אֶת־ = <obj.>
+3 דִּבְרֵי = [the] words of (word)
+4 בְנֵי־ = [the] sons of (son)
+5 לָבָן = Laban
+6 לֵאמֹר = <to> saying (to say)
+7 לָקַח = he has taken (to take)
+8 יַעֲקֹב = Jacob
+9 אֵת = <obj.>
+10 כָּל־ = all
+11 אֲשֶׁר = that
+12 לְאָבִינוּ = [belonged] to father our
+13 וּמֵאֲשֶׁר = and from [that] which
+14 לְאָבִינוּ = [belonged] to father our
+15 עָשָׂה = he has acquired (to make)
+16 אֵת = <obj.>
+17 כָּל־ = all
+18 הַכָּבֹד = the abundance (glory)
+19 הַזֶּה = <the> this (this)
+
+## 1:31:2
+KO: 그리고 야곱이 라반의 얼굴을 보았는데, 보라, 그(라반)가 어제와 그저께와 같이 그(야곱)와 함께 있지 아니하였다.
+1 וַיַּרְא = and he saw (to see)
+2 יַעֲקֹב = Jacob
+3 אֶת־ = <obj.> ([Obj.])
+4 פְּנֵי = [the] face of (face)
+5 לָבָן = Laban
+6 וְהִנֵּה = and there! (behold)
+7 אֵינֶנּוּ = not [was] he (nothing)
+8 עִמּוֹ = with him (with)
+9 כִּתְמוֹל = as yesterday (yesterday)
+10 שִׁלְשׁוֹם = three days ago (before)
+
+## 1:31:3
+KO: 그리고 여호와께서 야곱에게 말씀하셨다. "네 조상들의 땅과 네 친족에게로 돌아가라. 내가 너와 함께 있겠다."
+1 וַיֹּאמֶר = and he said (to say)
+2 יְהוָה = Yahweh (LORD)
+3 אֶל־ = to
+4 יַעֲקֹב = Jacob
+5 שׁוּב = return (to return)
+6 אֶל־ = to
+7 אֶרֶץ = [the] land of (land)
+8 אֲבוֹתֶיךָ = fathers your (father)
+9 וּלְמוֹלַדְתֶּךָ = and to kindred your (relatives)
+10 וְאֶהְיֶה = so I may be (to be)
+11 עִמָּךְ = with you (with)
+
+## 1:31:4
+KO: 그리고 야곱이 보냈고, 라헬과 레아를 그의 양 떼가 있는 들판으로 불렀다.
+1 וַיִּשְׁלַח = and he sent (to send)
+2 יַעֲקֹב = Jacob
+3 וַיִּקְרָא = and he summoned (to call)
+4 לְרָחֵל = <to> Rachel (Rachel)
+5 וּלְלֵאָה = and <to> Leah (Leah)
+6 הַשָּׂדֶה = the field (land)
+7 אֶל־ = to (to(wards))
+8 צֹאנוֹ = flock his (flock)
+
+## 1:31:5
+KO: 그가 그들에게 말하였다. "내가 너희 아버지의 얼굴을 보니, 그가 나를 향하여 어제나 그제와 같지 아니하도다. 그러나 내 아버지의 하나님은 나와 함께 계셨느니라."
+1 וַיֹּאמֶר = and he said (to say)
+2 לָהֶן = to <the> them (them)
+3 רֹאֶה = [am] seeing (to see)
+4 אָנֹכִי = I
+5 אֶת־ = <obj.> ([Obj.])
+6 פְּנֵי = [the] face of (face)
+7 אֲבִיכֶן = father your
+8 כִּי־ = that (for)
+9 אֵינֶנּוּ = not [is] he (nothing)
+10 אֵלַי = to me (to(wards))
+11 כִּתְמֹל = as yesterday (yesterday)
+12 שִׁלְשֹׁם = three days ago (before)
+13 וֵאלֹהֵי = and [the] God of (God)
+14 אָבִי = father my
+15 הָיָה = he has been (to be)
+16 עִמָּדִי = with me
+
+## 1:31:6
+KO: 그리고 너희(여성들)는 알았노라, 왜냐하면 나의 모든 힘으로 내가 너희(여성들)의 아버지를 섬겼기 때문이다.
+1 וְאַתֵּנָה = and you (you(f.p.))
+2 יְדַעְתֶּן = you know (to know)
+3 כִּי = that (for)
+4 בְּכָל־ = with all (all)
+5 כֹּחִי = strength my (strength)
+6 עָבַדְתִּי = I have served (to serve)
+7 אֶת־ = <obj.> ([Obj.])
+8 אֲבִיכֶן = father your (father)
+
+## 1:31:7
+KO: 그리고 너희의 아버지가 나를 속였고, 열 번이나 내 품삯을 바꾸었으나, 하나님께서 그에게 나를 해치지 못하게 하셨다.
+1 וַאֲבִיכֶן = and father your (father)
+2 הֵתֶל = he has deceived (to deceive)
+3 בִּי = <in> <the> me (me)
+4 וְהֶחֱלִף = and he has changed (to pass)
+5 אֶת־ = <obj.> ([Obj.])
+6 מַשְׂכֻּרְתִּי = wage[s] my (wage)
+7 עֲשֶׂרֶת = ten
+8 מֹנִים = times (time)
+9 וְלֹא־ = and not (not)
+10 נְתָנוֹ = he has permitted him (to give)
+11 אֱלֹהִים = God
+12 לְהָרַע = to do harm (be evil)
+13 עִמָּדִי = with me
+
+## 1:31:8
+KO: 만일 그가 '점 있는 것이 네 삯이 될 것이다'라고 말하면, 온 양 떼가 점 있는 것을 낳고, 만일 그가 '줄무늬 있는 것이 네 삯이 될 것이다'라고 말하면, 온 양 떼가 줄무늬 있는 것을 낳을 것이다.
+1 אִם־ = if
+2 כֹּה = thus
+3 יֹאמַר = he said
+4 נְקֻדִּים = speckled [ones]
+5 יִהְיֶה = it will be
+6 שְׂכָרֶךָ = wage[s] your
+7 וְיָלְדוּ = and they bore
+8 כָל־ = all
+9 הַצֹּאן = the flock
+10 נְקֻדִּים = speckled [ones]
+11 וְאִם־ = and if
+12 כֹּה = thus
+13 יֹאמַר = he said
+14 עֲקֻדִּים = striped [ones]
+15 יִהְיֶה = it will be
+16 שְׂכָרֶךָ = wage[s] your
+17 וְיָלְדוּ = and they bore
+18 כָל־ = all
+19 הַצֹּאן = the flock
+20 עֲקֻדִּים = striped [ones]
+
+## 1:31:9
+KO: 그리고 하나님이 그대들의 아버지의 가축을 구출하시어 나에게 주셨느니라.
+1 וַיַּצֵּל = and he has taken away (to rescue)
+2 אֱלֹהִים = God
+3 אֶת־ = <obj.> ([Obj.])
+4 מִקְנֵה = [the] livestock of (livestock)
+5 אֲבִיכֶם = father your (father)
+6 וַיִּתֶּן־ = and he has given [it] (to give)
+7 לִי = to <the> me (me)
+
+## 1:31:10
+KO: 그 양들이 새끼를 밸 때에, 내가 내 눈들을 들어 보았는데, 꿈속에서 보라, 그 양들을 타고 올라가는 수염소들은 얼룩무늬가 있고, 점이 있고, 아롱진 것들이었더라.
+1 וַיְהִי = and it was (to be)
+2 בְּעֵת = at [the] time (time)
+3 יַחֵם = mated (to conceive)
+4 הַצֹּאן = the flock
+5 וָאֶשָּׂא = and I lifted up (to lift)
+6 עֵינַי = eyes my (eye)
+7 וָאֵרֶא = and I saw (to see)
+8 בַּחֲלוֹם = in a dream (dream)
+9 וְהִנֵּה = and there! (behold)
+10 הָעַתֻּדִים = the male goats (goat)
+11 הָעֹלִים = which were going up (to ascend)
+12 עַל־ = on (upon)
+13 הַצֹּאן = the flock
+14 עֲקֻדִּים = [were] striped (striped)
+15 נְקֻדִּים = speckled
+16 וּבְרֻדִּים = and mottled (spotted)
+
+## 1:31:11
+KO: 그리고 하나님의 사자가 꿈속에서 내게 말씀하시기를 “야곱아” 하시니, 내가 대답하기를 “보소서, 나 여기 있나이다” 하였다.
+1 וַיֹּאמֶר = and he said
+2 אֵלַי = to me (to(wards))
+3 מַלְאַךְ = [the] angel of (messenger)
+4 הָאֱלֹהִים = <the> God (God)
+5 בַּחֲלוֹם = in a dream (dream)
+6 יַעֲקֹב = O Jacob (Jacob)
+7 וָאֹמַר = and I said
+8 הִנֵּנִי = here [am] I (behold)
+
+## 1:31:12
+KO: 그가 말씀하시기를 "부디 네 눈을 들어 보라. 양 떼 위에 올라타는 숫염소들은 다 줄무늬 있는 것, 점 있는 것, 그리고 얼룩진 것이니라. 왜냐하면 라반이 네게 행하고 있는 모든 것을 내가 보았기 때문이니라."
+1 וַיֹּאמֶר = and he said (to say)
+2 שָׂא־ = lift up (to lift)
+3 נָא = please
+4 עֵינֶיךָ = eyes your (eye)
+5 וּרְאֵה = and see
+6 כָּל־ = all
+7 הָעַתֻּדִים = the male goats (goat)
+8 הָעֹלִים = which are going up (to ascend)
+9 עַל־ = on (upon)
+10 הַצֹּאן = the flock (flock)
+11 עֲקֻדִּים = [are] striped (striped)
+12 נְקֻדִּים = speckled
+13 וּבְרֻדִּים = and mottled (spotted)
+14 כִּי = for
+15 רָאִיתִי = I have seen
+16 אֵת = <obj.> ([Obj.])
+17 כָּל־ = all
+18 אֲשֶׁר = that (which)
+19 לָבָן = Laban
+20 עֹשֶׂה = [is] doing (to make)
+21 לָּךְ = to <the> you (you)
+
+## 1:31:13
+KO: 나는 벧엘의 하나님이다. 그곳에서 네가 기둥에 기름을 부었고, 그곳에서 네가 내게 서원을 서원하였다. 이제 일어나 이 땅으로부터 나가서 네 출생지의 땅으로 돌아가라.
+1 אָנֹכִי = I
+2 הָאֵל = [am] the God of (God)
+3 בֵּית־ = Beth-
+4 אֵל = -el
+5 אֲשֶׁר = where
+6 מָשַׁחְתָּ = you anointed (to anoint)
+7 שָּׁם = there
+8 מַצֵּבָה = a pillar (pillar)
+9 אֲשֶׁר = where
+10 נָדַרְתָּ = you vowed (to vow)
+11 לִּי = to <the> me (me)
+12 שָׁם = there
+13 נֶדֶר = a vow (vow)
+14 עַתָּה = now
+15 קוּם = arise (to arise)
+16 צֵא = go out (to come out)
+17 מִן־ = from
+18 הָאָרֶץ = the land
+19 הַזֹּאת = <the> this (this)
+20 וְשׁוּב = and return (to return)
+21 אֶל־ = to (to(wards))
+22 אֶרֶץ = [the] land of
+23 מוֹלַדְתֶּךָ = kindred your (relatives)
+
+## 1:31:14
+KO: 라헬과 레아가 그에게 대답하여 말하였다. 우리에게 우리 아버지의 집 안에 아직 분깃이나 유업이 있느냐?
+1 וַתַּעַן = and she answered (to answer)
+2 רָחֵל = Rachel
+3 וְלֵאָה = and Leah (Leah)
+4 וַתֹּאמַרְנָה = and they said (to say)
+5 לוֹ = to <the> him (him)
+6 הַעוֹד = ¿ still (still)
+7 לָנוּ = [belong] to <the> us (us)
+8 חֵלֶק = [does] a share (portion)
+9 וְנַחֲלָה = and an inheritance (inheritance)
+10 בְּבֵית = in [the] household of (house)
+11 אָבִינוּ = father our (father)
+
+## 1:31:15
+KO: 우리가 그에게 외인으로 여겨지지 않았는가? 이는 그가 우리를 팔았고, 또한 우리의 돈을 먹어 치워 버렸기 때문이다.
+1 הֲלוֹא = ¿ not (not)
+2 נָכְרִיּוֹת = foreigners (foreign)
+3 נֶחְשַׁבְנוּ = are we accounted (to devise)
+4 לוֹ = by <the> him (him)
+5 כִּי = for
+6 מְכָרָנוּ = he has sold us (to sell)
+7 וַיֹּאכַל = and he has consumed
+8 גַּם־ = also
+9 אָכוֹל = continuously <to consume>
+10 אֶת־ = <obj.> ([Obj.])
+11 כַּסְפֵּנוּ = money our (silver)
+
+## 1:31:16
+KO: 왜냐하면 하나님께서 우리 아버지로부터 건져내신 모든 재물은 우리와 우리 자식들의 것이니, 이제 하나님께서 당신에게 말씀하신 모든 것을 행하십시오.
+1 כִּי = for
+2 כָל־ = all
+3 הָעֹשֶׁר = the wealth (riches)
+4 אֲשֶׁר = which
+5 הִצִּיל = he has taken away (to rescue)
+6 אֱלֹהִים = God
+7 מֵאָבִינוּ = from father our (father)
+8 לָנוּ = [belongs] to <the> us (us)
+9 הוּא = it (he;_she;_it)
+10 וּלְבָנֵינוּ = and to children our (son)
+11 וְעַתָּה = and therefore (now)
+12 כֹּל = all
+13 אֲשֶׁר = that
+14 אָמַר = he has said (to say)
+15 אֱלֹהִים = God
+16 אֵלֶיךָ = to you (to(wards))
+17 עֲשֵׂה = do (to make)
+
+## 1:31:17
+KO: 그리고 야곱이 일어났다. 그리고 그가 그의 아들들과 그의 아내들을 낙타들 위에 태웠다.
+1 וַיָּקָם = and he arose (to arise)
+2 יַעֲקֹב = Jacob
+3 וַיִּשָּׂא = and he lifted up (to lift)
+4 אֶת־ = <obj.>
+5 בָּנָיו = children his (son)
+6 וְאֶת־ = and <obj.>
+7 נָשָׁיו = wives his (woman)
+8 עַל־ = on (upon)
+9 הַגְּמַלִּים = <the> camels (camel)
+
+## 1:31:18
+KO: 그리고 그는 그의 모든 가축과, 그가 획득한 모든 소유물 곧 밧단아람에서 획득한 그 가축의 획득물을 이끌고 가나안 땅에 있는 그의 아버지 이삭에게로 가려 하였다.
+1 וַיִּנְהַג = and he drove (to lead)
+2 אֶת־ = <obj.>
+3 כָּל־ = all
+4 מִקְנֵהוּ = livestock his
+5 וְאֶת־ = and <obj.>
+6 כָּל־ = all
+7 רְכֻשׁוֹ = possession[s] his (property)
+8 אֲשֶׁר = which
+9 רָכָשׁ = he had accumulated
+10 מִקְנֵה = [the] livestock of
+11 קִנְיָנוֹ = acquisition his (acquisition)
+12 אֲשֶׁר = which
+13 רָכַשׁ = he had accumulated
+14 בְּפַדַּן = in Paddan (Paddan)
+15 אֲרָם = Aram (-aram)
+16 לָבוֹא = to go (to come (in))
+17 אֶל־ = to (to(wards))
+18 יִצְחָק = Isaac
+19 אָבִיו = father his (father)
+20 אַרְצָה = [the] land of towards (land)
+21 כְּנָעַן = Canaan
+
+## 1:31:19
+KO: 그리고 라반이 자기 양 떼를 깎으러 갔으므로 라헬은 자기 아버지의 드라빔을 훔쳤다.
+1 וְלָבָן = and Laban (Laban)
+2 הָלַךְ = he had gone (to go)
+3 לִגְזֹז = to shear
+4 אֶת־ = <obj.>
+5 צֹאנוֹ = sheep his (flock)
+6 וַתִּגְנֹב = and she stole (to steal)
+7 רָחֵל = Rachel
+8 אֶת־ = <obj.>
+9 הַתְּרָפִים = the teraphim (teraphim)
+10 אֲשֶׁר = which
+11 לְאָבִיהָ = [belonged] to father her (father)
+
+## 1:31:20
+KO: 그리고 야곱은 아람 사람 라반의 마음을 훔쳤으니, 그에게 그가 도망하고 있다는 것을 알리지 않았기 때문이다.
+1 וַיִּגְנֹב = and he stole (to steal)
+2 יַעֲקֹב = Jacob
+3 אֶת־ = <obj.> ([Obj.])
+4 לֵב = [the] heart of (heart)
+5 לָבָן = Laban
+6 הָאֲרַמִּי = the Aramean (Aramean)
+7 עַל־ = on (upon)
+8 בְּלִי = not (without)
+9 הִגִּיד = he told (to tell)
+10 לוֹ = to <the> him (him)
+11 כִּי = that (for)
+12 בֹרֵחַ = [was] fleeing (to flee)
+13 הוּא = he (he;_she;_it)
+
+## 1:31:21
+KO: 그리고 그가 도망하였다. 그리고 그에게 속한 모든 것과 함께, 그리고 그가 일어났고, 그리고 그가 강을 건너갔고, 그리고 그가 길르앗 산을 향하여 그의 얼굴을 두었다.
+1 וַיִּבְרַח = and he fled (to flee)
+2 הוּא = he (he;_she;_it)
+3 וְכָל־ = and all (all)
+4 אֲשֶׁר־ = that (which)
+5 לוֹ = [belonged] to <the> him (him)
+6 וַיָּקָם = and he arose (to arise)
+7 וַיַּעֲבֹר = and he passed over (to pass)
+8 אֶת־ = <obj.>
+9 הַנָּהָר = the river (River)
+10 וַיָּשֶׂם = and he set (to set)
+11 אֶת־ = <obj.>
+12 פָּנָיו = face his (face)
+13 הַר = [the] hill country of (mountain)
+14 הַגִּלְעָד = <the> Gilead (Gilead)
+
+## 1:31:22
+KO: 그리고 야곱이 도망쳤다는 것이 제삼일에 라반에게 알려졌다.
+1 וַיֻּגַּד = and it was told (to tell)
+2 לְלָבָן = to Laban (Laban)
+3 בַּיּוֹם = on the day (day;_when)
+4 הַשְּׁלִישִׁי = <the> third (third)
+5 כִּי = that (for)
+6 בָרַח = he had fled (to flee)
+7 יַעֲקֹב = Jacob
+
+## 1:31:23
+KO: 그리고 그가 그의 형제들을 그와 함께 데리고, 칠 일 길을 그의 뒤를 쫓아가서, 길르앗 산에서 그에게 따라붙었다.
+1 וַיִּקַּח = and he took (to take)
+2 אֶת־ = <obj.>
+3 אֶחָיו = relatives his (brother)
+4 עִמּוֹ = with him (with)
+5 וַיִּרְדֹּף = and he pursued (to pursue)
+6 אַחֲרָיו = after him (after)
+7 דֶּרֶךְ = a journey of (way)
+8 שִׁבְעַת = seven
+9 יָמִים = days (day;_when)
+10 וַיַּדְבֵּק = and he overtook (to cleave)
+11 אֹתוֹ = <obj.> him
+12 בְּהַר = in [the] hill country of (mountain)
+13 הַגִּלְעָד = <the> Gilead (Gilead)
+
+## 1:31:24
+KO: 그리고 하나님이 밤에 꿈으로 아람 사람 라반에게 오셔서 그에게 말씀하시기를, 너는 스스로 삼가서 야곱에게 좋음에서부터 나쁨까지 말하지 않도록 하라 하셨더라.
+1 וַיָּבֹא = and he came (to come (in))
+2 אֱלֹהִים = God
+3 אֶל־ = to (to(wards))
+4 לָבָן = Laban
+5 הָאֲרַמִּי = the Aramean (Aramean)
+6 בַּחֲלֹם = in [the] dream of (dream)
+7 הַלָּיְלָה = the night (night)
+8 וַיֹּאמֶר = and he said (to say)
+9 לוֹ = to <the> him (him)
+10 הִשָּׁמֶר = take heed (to keep)
+11 לְךָ = to <the> yourself (you)
+12 פֶּן־ = lest
+13 תְּדַבֵּר = you should speak (to speak)
+14 עִם־ = with
+15 יַעֲקֹב = Jacob
+16 מִטּוֹב = from good (pleasant)
+17 עַד־ = unto (till)
+18 רָע = bad
+
+## 1:31:25
+KO: 그리고 라반이 야곱을 따라잡았다. 그런데 야곱은 그 산에 자기의 장막을 쳤고, 라반은 그의 형제들과 함께 길르앗 산에 자기의 장막을 쳤다.
+1 וַיַּשֵּׂג = and he overtook (to overtake)
+2 לָבָן = Laban
+3 אֶת־ = <obj.>
+4 יַעֲקֹב = Jacob
+5 וְיַעֲקֹב = and Jacob
+6 תָּקַע = he had pitched
+7 אֶת־ = <obj.>
+8 אָהֳלוֹ = tent his (tent)
+9 בָּהָר = in the hill country
+10 וְלָבָן = and Laban
+11 תָּקַע = he pitched tent
+12 אֶת־ = with
+13 אֶחָיו = relatives his (brother)
+14 בְּהַר = in [the] hill country of
+15 הַגִּלְעָד = <the> Gilead (Gilead)
+
+## 1:31:26
+KO: 라반이 야곱에게 말했다. "네가 무슨 짓을 하였느냐? 네가 내 마음을 훔치고, 내 딸들을 칼에 사로잡힌 자들처럼 끌고 갔으니 말이다."
+1 וַיֹּאמֶר = and he said (to say)
+2 לָבָן = Laban
+3 לְיַעֲקֹב = to Jacob (Jacob)
+4 מֶה = what?
+5 עָשִׂיתָ = have you done (to make)
+6 וַתִּגְנֹב = and you have stolen (to steal)
+7 אֶת־ = <obj.>
+8 לְבָבִי = heart my (heart)
+9 וַתְּנַהֵג = and you have led away (to lead)
+10 אֶת־ = <obj.>
+11 בְּנֹתַי = daughters my (daughter)
+12 כִּשְׁבֻיוֹת = like captives of (to take captive)
+13 חָרֶב = [the] sword (sword)

@@ -145,12 +145,14 @@ struct DocumentSearchResult: Identifiable {
 /// 개념이 없어 `pageNumber`만 뺐다.
 struct SermonSearchResult: Identifiable {
     let sermon: Sermon
-    var id: PersistentIdentifier { sermon.persistentModelID }
+    var id: PersistentIdentifier { delivery?.persistentModelID ?? sermon.persistentModelID }
     var bodyExcerpt: String?
     var bodyOccurrenceSum: Int = 0
     var matchedTagNames: [String] = []
     var highlightKeywords: [String] = []
     var matchedWordCount: Int = 0
+    /// [2026-11-14] 메인 설교와 내용이 달라진 회차 사본에서 찾은 결과면 그 회차. nil이면 메인 설교 결과.
+    var delivery: SermonDelivery?
 }
 
 @MainActor
@@ -1288,8 +1290,8 @@ final class SearchViewModel {
     // MARK: - 키워드 검색: 내 설교(Sermon)
 
     /// `searchDocuments`와 같은 구조 — 제목(`sermon.title`)/태그(`sermon.sermonTags`)/본문
-    /// (`sermon.contentText`) + 성경구절 파싱. 회차 사본(`SermonDelivery`)은 범위 밖이라
-    /// 메인 설교문만 대상으로 한다(`VerseMentionSourceType.sermon` 참고).
+    /// (`sermon.contentText`) + 성경구절 파싱. 회차 사본(`SermonDelivery`)은 메인과 내용이 달라진 것만
+    /// 낱말 일치로 덧붙인다(성경구절 인덱스 `VerseMentionSourceType.sermon`은 메인 설교문 기준).
     private func searchSermons(words: [String], queryMatches: [BibleReferenceExtractor.Match]) -> [SermonSearchResult] {
         let sermons = (try? modelContext.fetch(
             FetchDescriptor<Sermon>(sortBy: [SortDescriptor(\.updatedAt, order: .reverse)])
@@ -1310,7 +1312,7 @@ final class SearchViewModel {
                 words.contains { name.localizedCaseInsensitiveContains($0) } && seenTagNames.insert(name).inserted
             }
 
-            let titleCount = words.filter { sermon.title.localizedCaseInsensitiveContains($0) }.count
+            let titleCount = words.filter { sermon.title.localizedCaseInsensitiveContains($0) || sermon.mainPassage.localizedCaseInsensitiveContains($0) }.count
 
             guard tagCount > 0 || titleCount > 0 || sermonContentCandidates.contains(sermon.id.uuidString) else { continue }
             let verseTerms = verseMentionSearchTexts(mentions: mentions, sourceType: .sermon, sourceId: sermon.id.uuidString, queryMatches: queryMatches)
@@ -1324,6 +1326,23 @@ final class SearchViewModel {
                 matchedWordCount: wordScore.distinctTermMatchCount
             )
             results.append((result, wordScore.distinctTermMatchCount, tagCount + titleCount))
+        }
+        // [2026-11-14] 회차 사본 — 메인 설교와 내용이 달라진 사본만 대상으로 한다. 복사만 한 사본까지 넣으면 같은 문구가
+        // 회차 수만큼 되풀이돼 결과가 어지러워진다. 사본은 성경구절 인덱스가 없어 낱말 일치만 본다.
+        let deliveries = (try? modelContext.fetch(FetchDescriptor<SermonDelivery>())) ?? []
+        for delivery in deliveries {
+            guard let parent = delivery.sermon, !delivery.contentText.isEmpty, delivery.contentText != parent.contentText else { continue }
+            guard words.contains(where: { delivery.contentText.localizedCaseInsensitiveContains($0) }) else { continue }
+            let wordScore = computeWordMatchScore(words: words, verseTerms: [], contentText: delivery.contentText)
+            guard wordScore.isTextMatch else { continue }
+            let result = SermonSearchResult(
+                sermon: parent,
+                bodyExcerpt: wordScore.bodyExcerpt, bodyOccurrenceSum: wordScore.bodyOccurrenceSum,
+                matchedTagNames: [], highlightKeywords: wordScore.highlightKeywords,
+                matchedWordCount: wordScore.distinctTermMatchCount,
+                delivery: delivery
+            )
+            results.append((result, wordScore.distinctTermMatchCount, 0))
         }
         return Self.sortedByWordCoverage(results).map(\.result)
     }

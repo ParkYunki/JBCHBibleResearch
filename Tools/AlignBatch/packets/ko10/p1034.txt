@@ -1,0 +1,125 @@
+## 13:2:24
+KO: 헤스론이 갈렙 에브라다에서 죽은 후에, 헤스론의 아내 아비야가 그(헤스론)에게 아스훌을 낳아주었으니, 아스훌은 드고아의 아버지이다.
+1 וְאַחַר = and after (after)
+2 מוֹת־ = [the] death of (death)
+3 חֶצְרוֹן = Hezron
+4 בְּכָלֵב = in Caleb
+5 אֶפְרָתָה = Ephrathah
+6 וְאֵשֶׁת = and [the] wife of (woman)
+7 חֶצְרוֹן = Hezron
+8 אֲבִיָּה = Abijah ("his father")
+9 וַתֵּלֶד = and she bore (to beget)
+10 לוֹ = to him (him)
+11 אֶת־ = <obj.> ([Obj.])
+12 אַשְׁחוּר = Ashhur
+13 אֲבִי = [the] father of (father)
+14 תְקוֹעַ = Tekoa
+
+## 13:2:25
+KO: 그리고 헤스론의 맏아들 여라므엘의 아들들은 [곧] 맏아들 람과, 그리고 브나와, 그리고 오렌과, 그리고 오셈과, 아히야더라.
+1 וַיִּהְיוּ = and they were (to be)
+2 בְנֵי־ = [the] sons of (son)
+3 יְרַחְמְאֵל = Jerahmeel
+4 בְּכוֹר = [the] firstborn of
+5 חֶצְרוֹן = Hezron
+6 הַבְּכוֹר = the firstborn
+7 רָם = Ram
+8 וּבוּנָה = and Bunah (Bunah)
+9 וָאֹרֶן = and Oren (Oren)
+10 וָאֹצֶם = and Ozem (Ozem)
+11 אֲחִיָּה = Ahijah
+
+## 13:2:26
+KO: 그리고 여라므엘에게 다른 아내가 있었으니, 그 이름은 아다라였고, 그녀는 오남의 어머니였다.
+1 וַתְּהִי = and she belonged (to be)
+2 אִשָּׁה = a wife (woman)
+3 אַחֶרֶת = another
+4 לִירַחְמְאֵל = to Jerahmeel (Jerahmeel)
+5 וּשְׁמָהּ = and name her (name)
+6 עֲטָרָה = [was] Atarah (Atarah)
+7 הִיא = she (he;_she;_it)
+8 אֵם = [was] [the] mother of (mother)
+9 אוֹנָם ס = Onam
+
+## 13:2:27
+KO: 그리고 여라므엘의 맏아들 람의 아들들은 마아스와 야민과 에겔이었다.
+1 וַיִּהְיוּ = and they were (to be)
+2 בְנֵי־ = [the] sons of (son)
+3 רָם = Ram
+4 בְּכוֹר = [the] firstborn of (firstborn)
+5 יְרַחְמְאֵל = Jerahmeel
+6 מַעַץ = Maaz
+7 וְיָמִין = and Jamin (Jamin)
+8 וָעֵקֶר = and Eker (Eker)
+
+## 13:2:28
+KO: 그리고 오남의 아들들은 삼매와 야다였고, 삼매의 아들들은 나답과 아비술이다.
+1 וַיִּהְיוּ = and they were (to be)
+2 בְנֵי־ = [the] sons of
+3 אוֹנָם = Onam
+4 שַׁמַּי = Shammai
+5 וְיָדָע = and Jada (Jada)
+6 וּבְנֵי = and [the] sons of
+7 שַׁמַּי = Shammai
+8 נָדָב = Nadab
+9 וַאֲבִישׁוּר = and Abishur (Abishur)
+
+## 13:2:29
+KO: 그리고 아비술의 아내의 이름은 아비하일이니, 그가 그에게 아반과 몰릿을 낳았다.
+1 וְשֵׁם = and [the] name of (name)
+2 אֵשֶׁת = [the] wife of (woman)
+3 אֲבִישׁוּר = Abishur
+4 אֲבִיהָיִל = [was] Abihail (Abihail)
+5 וַתֵּלֶד = and she bore (to beget)
+6 לוֹ = to him (him)
+7 אֶת־ = <obj.>
+8 אַחְבָּן = Ahban
+9 וְאֶת־ = and <obj.>
+10 מוֹלִיד = Molid
+
+## 13:2:30
+KO: 그리고 나답의 아들들은 셀렛과 압바임이라. 그리고 셀렛은 죽었으니 아들들이 없었더라.
+1 וּבְנֵי = and [the] sons of
+2 נָדָב = Nadab
+3 סֶלֶד = Seled
+4 וְאַפָּיִם = and Appaim (Appaim)
+5 וַיָּמָת = and he died (to die)
+6 סֶלֶד = Seled
+7 לֹא = not
+8 בָנִים ס = sons
+
+## 13:2:31
+KO: 그리고 압바임의 아들들은 이시요, 이시의 아들들은 세산이요, 세산의 아들들은 알라이이다.
+1 וּבְנֵי = and [the] sons of
+2 אַפַּיִם = Appaim
+3 יִשְׁעִי = Ishi
+4 וּבְנֵי = and [the] sons of
+5 יִשְׁעִי = Ishi
+6 שֵׁשָׁן = Sheshan
+7 וּבְנֵי = and [the] sons of
+8 שֵׁשָׁן = Sheshan
+9 אַחְלָי = Ahlai
+
+## 13:2:32
+KO: 그리고 삼매의 형제 야다의 아들들은 예델과 요나단이며, 예델은 아들이 없이 죽었다.
+1 וּבְנֵי = and [the] sons of
+2 יָדָע = Jada
+3 אֲחִי = [the] brother of (brother)
+4 שַׁמַּי = Shammai
+5 יֶתֶר = Jether
+6 וְיוֹנָתָן = and Jonathan (Jonathan)
+7 וַיָּמָת = and he died (to die)
+8 יֶתֶר = Jether
+9 לֹא = not
+10 בָנִים ס = sons
+
+## 13:2:33
+KO: 그리고 요나단의 아들들은 벨렛과 자사라, 이것들이 여라므엘의 아들들이었다.
+1 וּבְנֵי = and [the] sons of
+2 יוֹנָתָן = Jonathan
+3 פֶּלֶת = Peleth
+4 וְזָזָא = and Zaza (Zaza)
+5 אֵלֶּה = these
+6 הָיוּ = they were (to be)
+7 בְּנֵי = [the] sons of
+8 יְרַחְמְאֵל = Jerahmeel

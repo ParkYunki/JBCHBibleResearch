@@ -1,0 +1,856 @@
+## 3:19:19
+KO: 너희는 나의 규례들을 지킬지어다. 네 가축을 다른 종류와 교합시키지 말며, 네 밭에 다른 종류(의 씨)를 뿌리지 말며, 다른 종류가 섞인 직물로 된 옷은 네 몸에 올라오지 않게 할지니라.
+1 אֶת־ = <obj.> ([Obj.])
+2 חֻקֹּתַי = statutes my (statute)
+3 תִּשְׁמֹרוּ = you will keep (to keep)
+4 בְּהֶמְתְּךָ = livestock your (animal)
+5 לֹא־ = not
+6 תַרְבִּיעַ = you will make lie (to mate)
+7 כִּלְאַיִם = two kinds
+8 שָׂדְךָ = field your (land)
+9 לֹא־ = not
+10 תִזְרַע = you will sow (to sow)
+11 כִּלְאָיִם = two kinds
+12 וּבֶגֶד = and clothing (garment)
+13 כִּלְאַיִם = two kinds
+14 שַׁעַטְנֵז = mixed stuff
+15 לֹא = not
+16 יַעֲלֶה = it will go up (to ascend)
+17 עָלֶיךָ פ = on you (upon)
+
+## 3:19:20
+KO: 어떤 남자가 어떤 여자와 동침(씨의 동침)을 하는데, 그 여자가 다른 남자에게 정혼된 여종이고, 아직 속량되지 않았거나 혹은 자유가 그에게 주어지지 않았다면, 조사가 있을 것이나 그들은 죽임을 당하지 않을 것이다. 왜냐하면 그녀는 자유롭지 못했기 때문이다.
+1 וְאִישׁ = and a man
+2 כִּי־ = if
+3 יִשְׁכַּב = he will lie with (to lie down)
+4 אֶת־ = <obj.> ([Obj.])
+5 אִשָּׁה = a woman (woman)
+6 שִׁכְבַת־ = a laying of (act|product of lying)
+7 זֶרַע = seed
+8 וְהִוא = and she (he;_she;_it)
+9 שִׁפְחָה = [is] a female slave (maidservant)
+10 נֶחֱרֶפֶת = intended (to acquire)
+11 לְאִישׁ = for a man
+12 וְהָפְדֵּה = and certainly <to be released>
+13 לֹא = not
+14 נִפְדָּתָה = she had been released
+15 אוֹ = or
+16 חֻפְשָׁה = freedom
+17 לֹא = not
+18 נִתַּן־ = it had been given (to give)
+19 לָהּ = to <the> her (her)
+20 בִּקֹּרֶת = compensation (scourging)
+21 תִּהְיֶה = it will be (to be)
+22 לֹא = not
+23 יוּמְתוּ = they will be put to death (to die)
+24 כִּי־ = for
+25 לֹא = not
+26 חֻפָּשָׁה = she had been given freedom (be free)
+
+## 3:19:21
+KO: 그리고 그는 그의 속건 제물을 여호와께, 곧 회막 문으로, 속건 제물인 수양을 가져올 것이다.
+1 וְהֵבִיא = and he will bring (to come (in))
+2 אֶת־ = <obj.> ([Obj.])
+3 אֲשָׁמוֹ = guilt offering his
+4 לַיהוָה = to Yahweh (LORD)
+5 אֶל־ = to (to(wards))
+6 פֶּתַח = [the] entrance of (entrance)
+7 אֹהֶל = [the] tent of (tent)
+8 מוֹעֵד = meeting
+9 אֵיל = a ram of (ram)
+10 אָשָׁם = a guilt offering
+
+## 3:19:22
+KO: 그리고 그 제사장은 그가 범한 그의 죄에 대하여 그 속건제의 수양으로 여호와 앞에 그를 위하여 속죄할 것이요, 그리하면 그가 범한 그의 죄로부터 그에게 사함이 임할 것이다.
+1 וְכִפֶּר = and he will make atonement (to atone)
+2 עָלָיו = on him
+3 הַכֹּהֵן = the priest (priest)
+4 בְּאֵיל = by [the] ram of (ram)
+5 הָאָשָׁם = the guilt offering (guilt (offering))
+6 לִפְנֵי = <to> before (face)
+7 יְהוָה = Yahweh (LORD)
+8 עַל־ = on
+9 חַטָּאתוֹ = sin his
+10 אֲשֶׁר = which
+11 חָטָא = he has sinned
+12 וְנִסְלַח = and it will be forgiven (to forgive)
+13 לוֹ = to <the> him (him)
+14 מֵחַטָּאתוֹ = from sin his
+15 אֲשֶׁר = which
+16 חָטָא פ = he has sinned
+
+## 3:19:23
+KO: 그리고 너희가 그 땅에 들어와서 식용 나무를 모두 심으면, 그 열매는 그 할례받지 못함을 너희가 할례받지 못한 것으로 여기고, 삼 년 동안 그것은 너희에게 할례받지 못한 것이 될 것이니 먹지 말라.
+1 וְכִי־ = and if (for)
+2 תָבֹאוּ = you will go (to come (in))
+3 אֶל־ = into (to(wards))
+4 הָאָרֶץ = the land (land)
+5 וּנְטַעְתֶּם = and you will plant (to plant)
+6 כָּל־ = every (all)
+7 עֵץ = tree of (tree)
+8 מַאֲכָל = food
+9 וַעֲרַלְתֶּם = and you will regard as uncircumcised (be uncircumcised)
+10 עָרְלָתוֹ = foreskin its (foreskin)
+11 אֶת־ = <obj.> ([Obj.])
+12 פִּרְיוֹ = fruit its (fruit)
+13 שָׁלֹשׁ = three
+14 שָׁנִים = years (year)
+15 יִהְיֶה = it will be (to be)
+16 לָכֶם = to <the> you (you)
+17 עֲרֵלִים = uncircumcised
+18 לֹא = not
+19 יֵאָכֵל = it will be eaten (to eat)
+
+## 3:19:24
+KO: 그리고 넷째 해에는 그 모든 열매가 거룩함, 곧 여호와를 위한 찬송이 될 것이다.
+1 וּבַשָּׁנָה = and in the year (year)
+2 הָרְבִיעִת = <the> fourth (fourth)
+3 יִהְיֶה = it will be (to be)
+4 כָּל־ = all
+5 פִּרְיוֹ = fruit its (fruit)
+6 קֹדֶשׁ = a holy thing (holiness)
+7 הִלּוּלִים = praise offerings (praise)
+8 לַיהוָה = to Yahweh (LORD)
+
+## 3:19:25
+KO: 그리고 다섯째 해에는 그것의 열매를 너희가 먹을지니, 너희에게 그것의 소산을 더하게 하리라. 나는 너희 하나님 여호와니라.
+1 וּבַשָּׁנָה = and in the year (year)
+2 הַחֲמִישִׁת = <the> fifth (fifth)
+3 תֹּאכְלוּ = you will eat (to eat)
+4 אֶת־ = <obj.> ([Obj.])
+5 פִּרְיוֹ = fruit its (fruit)
+6 לְהוֹסִיף = to add
+7 לָכֶם = to <the> you (you)
+8 תְּבוּאָתוֹ = produce its (produce)
+9 אֲנִי = I
+10 יְהוָה = [am] Yahweh (LORD)
+11 אֱלֹהֵיכֶם = God your (God)
+
+## 3:19:26
+KO: 너희는 피 위에(피와 함께) 먹지 말며, 너희는 점치지 말며, 또한 너희는 주문을 외우지 말라.
+1 לֹא = not
+2 תֹאכְלוּ = you must eat (to eat)
+3 עַל־ = with (upon)
+4 הַדָּם = the blood (blood)
+5 לֹא = not
+6 תְנַחֲשׁוּ = you will practice divination (to divine)
+7 וְלֹא = and not
+8 תְעוֹנֵנוּ = you will practice soothsaying (to divine)
+
+## 3:19:27
+KO: 너희는 너희 머리의 모퉁이를 둥글게 깎지 말며, 너희 수염의 모퉁이를 손상시키지 말라.
+1 לֹא = not
+2 תַקִּפוּ = you will round off (to surround)
+3 פְּאַת = [the] side of
+4 רֹאשְׁכֶם = head your (head)
+5 וְלֹא = and not
+6 תַשְׁחִית = you will trim (to ruin)
+7 אֵת = <obj.> ([Obj.])
+8 פְּאַת = [the] side of
+9 זְקָנֶךָ = beard your (beard)
+
+## 3:19:28
+KO: 죽은 자를 위하여 너희는 너희 살에 상처를 내지 말며, 몸에 무늬를 새기지 말라. 나는 여호와니라.
+1 וְשֶׂרֶט = and cut[s] (incision)
+2 לָנֶפֶשׁ = for a corpse (soul)
+3 לֹא = not
+4 תִתְּנוּ = you will make
+5 בִּבְשַׂרְכֶם = in flesh your (flesh)
+6 וּכְתֹבֶת = and [the] inscription of (imprint)
+7 קַעֲקַע = an incision (incision)
+8 לֹא = not
+9 תִתְּנוּ = you will make
+10 בָּכֶם = in <the> yourselves (you)
+11 אֲנִי = I
+12 יְהוָה = [am] Yahweh (LORD)
+
+## 3:19:29
+KO: 네 딸을 더럽혀서 음행하게 하지 말라. 그 땅이 음행하지 않게 하고, 그 땅이 음란함으로 가득 차게 하지 말라.
+1 אַל־ = may not (not)
+2 תְּחַלֵּל = you profane (to profane;_begin)
+3 אֶת־ = <obj.> ([Obj.])
+4 בִּתְּךָ = daughter your (daughter)
+5 לְהַזְנוֹתָהּ = by making prostitute [herself] her
+6 וְלֹא־ = and not (not)
+7 תִזְנֶה = it will prostitute itself
+8 הָאָרֶץ = the land
+9 וּמָלְאָה = and it will be full (to fill)
+10 הָאָרֶץ = the land
+11 זִמָּה = wickedness
+
+## 3:19:30
+KO: 나의 안식일들을 너희는 지키라, 그리고 나의 성소를 너희는 경외하라. 나, 여호와니라.
+1 אֶת־ = <obj.> ([Obj.])
+2 שַׁבְּתֹתַי = sabbaths my (Sabbath)
+3 תִּשְׁמֹרוּ = you will keep (to keep)
+4 וּמִקְדָּשִׁי = and sanctuary my (sanctuary)
+5 תִּירָאוּ = you will fear (to fear)
+6 אֲנִי = I
+7 יְהוָה = [am] Yahweh (LORD)
+
+## 3:19:31
+KO: 너희는 신접한 자들에게로 돌이키지 말며, 박수들에게로 구하지 말라. 그것들로 스스로를 더럽히지 말라. 나는 너희 하나님 여호와니라.
+1 אַל־ = may not
+2 תִּפְנוּ = you turn (to turn)
+3 אֶל־ = to
+4 הָאֹבֹת = the necromancers (medium)
+5 וְאֶל־ = and to
+6 הַיִּדְּעֹנִים = the soothsayers (spiritist)
+7 אַל־ = may not
+8 תְּבַקְשׁוּ = you seek [them] (to seek)
+9 לְטָמְאָה = to become unclean (to defile)
+10 בָהֶם = by <the> them (them)
+11 אֲנִי = I
+12 יְהוָה = [am] Yahweh (LORD)
+13 אֱלֹהֵיכֶם = God your (God)
+
+## 3:19:32
+KO: 센 머리 앞에서 너는 일어서라. 그리고 노인의 얼굴을 공경하라. 그리고 네 하나님을 경외하라. 나(는) 여호와이다.
+1 מִפְּנֵי = from before
+2 שֵׂיבָה = gray hair (greyheaded)
+3 תָּקוּם = you will arise (to arise)
+4 וְהָדַרְתָּ = and you will honor (to honor)
+5 פְּנֵי = [the] face
+6 זָקֵן = an old [person] (old)
+7 וְיָרֵאתָ = and you will fear (to fear)
+8 מֵּאֱלֹהֶיךָ = from God your (God)
+9 אֲנִי = I
+10 יְהוָה פ = [am] Yahweh (LORD)
+
+## 3:19:33
+KO: 그리고 만일 나그네가 너희의 땅에서 너희와 함께 우거하거든, 너희는 그를 학대하지 말라.
+1 וְכִי־ = and if (for)
+2 יָגוּר = he will sojourn (to sojourn)
+3 אִתְּךָ = with you (with)
+4 גֵּר = a sojourner (sojourner)
+5 בְּאַרְצְכֶם = in land your (land)
+6 לֹא = not
+7 תוֹנוּ = you will maltreat (to oppress)
+8 אֹתוֹ = <obj.> him ([Obj.])
+
+## 3:19:34
+KO: 너희 중에서 난 자처럼 너희와 함께 머무는 그 체류자가 너희에게 있어야 하며, 너는 그를 너 자신과 같이 사랑할지니라. 왜냐하면 너희가 애굽 땅에서 체류자들이 되었었기 때문이니라. 나는 너희의 하나님 여호와니라.
+1 כְּאֶזְרָח = like [the] native-born (born)
+2 מִכֶּם = from <the> you
+3 יִהְיֶה = he will be
+4 לָכֶם = to <the> you
+5 הַגֵּר = the sojourner
+6 הַגָּר = who sojourns (to sojourn)
+7 אִתְּכֶם = with you (with)
+8 וְאָהַבְתָּ = and you will love (to love)
+9 לוֹ = <to> <the> him (him)
+10 כָּמוֹךָ = like yourself (like)
+11 כִּי־ = for
+12 גֵרִים = sojourners
+13 הֱיִיתֶם = you were
+14 בְּאֶרֶץ = in [the] land of (land)
+15 מִצְרָיִם = Egypt
+16 אֲנִי = I
+17 יְהוָה = [am] Yahweh (LORD)
+18 אֱלֹהֵיכֶם = God your (God)
+
+## 3:19:35
+KO: 너희는 재판과 척도와 무게와 용량에 있어서 불의를 행하지 말라.
+1 לֹא־ = not
+2 תַעֲשׂוּ = you will do (to make)
+3 עָוֶל = injustice
+4 בַּמִּשְׁפָּט = in <the> judgment (justice)
+5 בַּמִּדָּה = in <the> measurement (measure)
+6 בַּמִּשְׁקָל = in <the> weight (weight)
+7 וּבַמְּשׂוּרָה = and in <the> volume (capacity)
+
+## 3:19:36
+KO: 정의의 저울들과 정의의 돌들과 정의의 에바와 정의의 힌이 너희에게 있을지어다. 나는 너희를 애굽 땅에서 인도하여 낸 너희 하나님 여호와니라.
+1 מֹאזְנֵי = balances of (balance)
+2 צֶדֶק = righteousness
+3 אַבְנֵי־ = weights of (stone)
+4 צֶדֶק = righteousness
+5 אֵיפַת = an ephah of (ephah)
+6 צֶדֶק = righteousness
+7 וְהִין = and a hin of (hin)
+8 צֶדֶק = righteousness
+9 יִהְיֶה = it will belong (to be)
+10 לָכֶם = to <the> you (you)
+11 אֲנִי = I
+12 יְהוָה = [am] Yahweh (LORD)
+13 אֱלֹהֵיכֶם = God your (God)
+14 אֲשֶׁר־ = who (which)
+15 הוֹצֵאתִי = I brought out (to come out)
+16 אֶתְכֶם = <obj.> you ([Obj.])
+17 מֵאֶרֶץ = from [the] land of (land)
+18 מִצְרָיִם = Egypt
+
+## 3:19:37
+KO: 너희는 나의 모든 규례들과 나의 모든 법도들을 지키고, 그것들을 행하라. 나(는) 여호와이다.
+1 וּשְׁמַרְתֶּם = and you will keep (to keep)
+2 אֶת־ = <obj.>
+3 כָּל־ = all
+4 חֻקֹּתַי = statutes my (statute)
+5 וְאֶת־ = and <obj.>
+6 כָּל־ = all
+7 מִשְׁפָּטַי = judgments my (justice)
+8 וַעֲשִׂיתֶם = and you will do (to make)
+9 אֹתָם = <obj.> them
+10 אֲנִי = I
+11 יְהוָה פ = [am] Yahweh (LORD)
+
+## 3:20:1
+KO: 그리고 여호와께서 모세에게 말씀하셨다, 가라사대.
+1 וַיְדַבֵּר = and he spoke (to speak)
+2 יְהוָה = Yahweh (LORD)
+3 אֶל־ = to (to(wards))
+4 מֹשֶׁה = Moses
+5 לֵּאמֹר = <to> saying (to say)
+
+## 3:20:2
+KO: 이스라엘 자손에게 말하라. 이스라엘 자손 중의 사람이든 이스라엘에 거류하는 거류민이든 누구든지 자기 씨(자식)를 몰렉에게 주면, 반드시 죽임을 당할 것이요 그 땅의 백성이 돌로 그를 칠 것이다.
+1 וְאֶל־ = and to (to(wards))
+2 בְּנֵי = [the] people of
+3 יִשְׂרָאֵל = Israel
+4 תֹּאמַר = you will say (to say)
+5 אִישׁ = a person
+6 אִישׁ = a person
+7 מִבְּנֵי = from [the] people of
+8 יִשְׂרָאֵל = Israel
+9 וּמִן־ = and of (from)
+10 הַגֵּר = the sojourner[s] (sojourner)
+11 הַגָּר = who sojourns (to sojourn)
+12 בְּיִשְׂרָאֵל = in Israel
+13 אֲשֶׁר = who (which)
+14 יִתֵּן = he will give (to give)
+15 מִזַּרְעוֹ = any of offspring his (seed)
+16 לַמֹּלֶךְ = to <the> Molech (Molech)
+17 מוֹת = certainly <to die>
+18 יוּמָת = he will be put to death
+19 עַם = [the] people of (people)
+20 הָאָרֶץ = the land (land)
+21 יִרְגְּמֻהוּ = they will stone him (to stone)
+22 בָאָבֶן = with <the> stone[s] (stone)
+
+## 3:20:3
+KO: 그리고 나 또한 그 사람에게 내 얼굴을 둘 것이며, 그를 그 백성의 한가운데로부터 끊어 버릴 것이니, 이는 그가 자기 자식을 몰렉에게 주어 내 성소를 더럽히고 내 거룩한 이름을 욕되게 하였기 때문이다.
+1 וַאֲנִי = and I (I)
+2 אֶתֵּן = I will set
+3 אֶת־ = <obj.>
+4 פָּנַי = face my (face)
+5 בָּאִישׁ = on the person (man)
+6 הַהוּא = <the> that (he;_she;_it)
+7 וְהִכְרַתִּי = and I will cut off (to cut)
+8 אֹתוֹ = <obj.> him
+9 מִקֶּרֶב = from among (entrails)
+10 עַמּוֹ = people his (people)
+11 כִּי = for
+12 מִזַּרְעוֹ = one of offspring his (seed)
+13 נָתַן = he has given
+14 לַמֹּלֶךְ = to <the> Molech (Molech)
+15 לְמַעַן = so as (because)
+16 טַמֵּא = to make unclean (to defile)
+17 אֶת־ = <obj.>
+18 מִקְדָּשִׁי = sanctuary my (sanctuary)
+19 וּלְחַלֵּל = and to profane (to profane;_begin)
+20 אֶת־ = <obj.>
+21 שֵׁם = [the] name of (name)
+22 קָדְשִׁי = holiness my (holiness)
+
+## 3:20:4
+KO: 만약 그 땅의 백성이 그 사람에게서 자신들의 눈을 감겨(외면하여) 그가 자기 자손을 몰렉에게 주는 것을 죽이지 아니하면,
+1 וְאִם = and if (if)
+2 הַעְלֵם = certainly <to hide>
+3 יַעְלִימוּ = they will hide
+4 עַם = [the] people of (people)
+5 הָאָרֶץ = the land (land)
+6 אֶת־ = <obj.>
+7 עֵינֵיהֶם = eyes their (eye)
+8 מִן־ = from
+9 הָאִישׁ = the person (man)
+10 הַהוּא = <the> that (he;_she;_it)
+11 בְּתִתּוֹ = when gives he (to give)
+12 מִזַּרְעוֹ = one of offspring his (seed)
+13 לַמֹּלֶךְ = to <the> Molech (Molech)
+14 לְבִלְתִּי = to not (lest)
+15 הָמִית = to put to death (to die)
+16 אֹתוֹ = <obj.> him
+
+## 3:20:5
+KO: 내가 그 사람과 그의 가족 위에 내 얼굴을 둘 것이고, 그와 그를 따라 몰렉을 음란하게 섬기기 위해 음란히 행하는 모든 자를 그들의 백성 가운데서 끊어 버릴 것이다.
+1 וְשַׂמְתִּי = and I will set (to set)
+2 אֲנִי = I
+3 אֶת־ = <obj.>
+4 פָּנַי = face my (face)
+5 בָּאִישׁ = on the person (man)
+6 הַהוּא = <the> that (he;_she;_it)
+7 וּבְמִשְׁפַּחְתּוֹ = and on clan his (family)
+8 וְהִכְרַתִּי = and I will cut off (to cut)
+9 אֹתוֹ = <obj.> him
+10 וְאֵת = and <obj.>
+11 כָּל־ = all
+12 הַזֹּנִים = those [who] act as prostitutes
+13 אַחֲרָיו = after him
+14 לִזְנוֹת = by acting as prostitutes
+15 אַחֲרֵי = after
+16 הַמֹּלֶךְ = <the> Molech (Molech)
+17 מִקֶּרֶב = from among (entrails)
+18 עַמָּם = people their (people)
+
+## 3:20:6
+KO: 그리고 신접한 자들과 박수들에게로 음란하게 그들 뒤를 쫓아 향하는 그 영혼에게, 내가 나의 얼굴을 그 영혼에게 두어 그를 그 백성 가운데로부터 끊어 버릴 것이다.
+1 וְהַנֶּפֶשׁ = and the person
+2 אֲשֶׁר = who (which)
+3 תִּפְנֶה = it will turn (to turn)
+4 אֶל־ = to
+5 הָאֹבֹת = the necromancers (medium)
+6 וְאֶל־ = and to
+7 הַיִּדְּעֹנִים = the soothsayers (spiritist)
+8 לִזְנוֹת = to act as a prostitute (to fornicate)
+9 אַחֲרֵיהֶם = after them (after)
+10 וְנָתַתִּי = and I will set (to give)
+11 אֶת־ = <obj.>
+12 פָּנַי = face my (face)
+13 בַּנֶּפֶשׁ = on the person
+14 הַהִוא = <the> that (he;_she;_it)
+15 וְהִכְרַתִּי = and I will cut off (to cut)
+16 אֹתוֹ = <obj.> him
+17 מִקֶּרֶב = from among (entrails)
+18 עַמּוֹ = people his (people)
+
+## 3:20:7
+KO: 그리고 너희 자신을 거룩하게 하라, 그리고 너희는 거룩한 자들이 되어라, 왜냐하면 나, 곧 여호와가 너희의 하나님이기 때문이다.
+1 וְהִתְקַדִּשְׁתֶּם = and you will keep yourselves holy (to consecrate)
+2 וִהְיִיתֶם = and you will be (to be)
+3 קְדֹשִׁים = holy
+4 כִּי = for
+5 אֲנִי = I
+6 יְהוָה = [am] Yahweh (LORD)
+7 אֱלֹהֵיכֶם = God your (God)
+
+## 3:20:8
+KO: 그리고 너희는 나의 규례들을 지키라. 그리고 너희는 그것들을 행하라. 나, 여호와는 너희를 거룩하게 하는 자이니라.
+1 וּשְׁמַרְתֶּם = and you will keep (to keep)
+2 אֶת־ = <obj.>
+3 חֻקֹּתַי = statutes my (statute)
+4 וַעֲשִׂיתֶם = and you will do (to make)
+5 אֹתָם = <obj.> them
+6 אֲנִי = I
+7 יְהוָה = [am] Yahweh (LORD)
+8 מְקַדִּשְׁכֶם = [who] sets apart as holy you (to consecrate)
+
+## 3:20:9
+KO: 대저 자기 아버지나 자기 어머니를 저주하는 모든 사람은 반드시 죽임을 당할 것이다. 그가 자기 아버지나 자기 어머니를 저주했으니, 그의 피들이 그에게로 돌아갈 것이다.
+1 כִּי־ = if (for)
+2 אִישׁ = a person
+3 אִישׁ = a person
+4 אֲשֶׁר = who (which)
+5 יְקַלֵּל = he will curse
+6 אֶת־ = <obj.>
+7 אָבִיו = father his
+8 וְאֶת־ = and <obj.>
+9 אִמּוֹ = mother his
+10 מוֹת = certainly <to die>
+11 יוּמָת = he will be put to death
+12 אָבִיו = father his
+13 וְאִמּוֹ = and mother his
+14 קִלֵּל = he has cursed
+15 דָּמָיו = blood<s> his (blood)
+16 בּוֹ = [are] on <the> him (him)
+
+## 3:20:10
+KO: 어떤 사람이 다른 남자의 아내와 간음하고, 또 그의 이웃의 아내와 간음하는 그 간음한 자와 간음한 여자는 반드시 죽임을 당할 것이다.
+1 וְאִישׁ = and a man
+2 אֲשֶׁר = who
+3 יִנְאַף = he will commit adultery
+4 אֶת־ = <obj.>
+5 אֵשֶׁת = a wife of
+6 אִישׁ = a man
+7 אֲשֶׁר = who
+8 יִנְאַף = he will commit adultery
+9 אֶת־ = <obj.>
+10 אֵשֶׁת = [the] wife of
+11 רֵעֵהוּ = neighbor his (neighbor)
+12 מוֹת־ = certainly <to die>
+13 יוּמַת = he will be put to death
+14 הַנֹּאֵף = the adulterer
+15 וְהַנֹּאָפֶת = and the adulteress
+
+## 3:20:11
+KO: 그리고 자기 아버지의 아내와 동침하는 남자는, 그는 자기 아버지의 하체를 드러낸 것이니, 그 둘은 반드시 죽임을 당할 것이요 그들의 피가 그들 위에 있을 것이다.
+1 וְאִישׁ = and a man (man)
+2 אֲשֶׁר = who (which)
+3 יִשְׁכַּב = he will lie with (to lie down)
+4 אֶת־ = <obj.> ([Obj.])
+5 אֵשֶׁת = [the] wife of (woman)
+6 אָבִיו = father his
+7 עֶרְוַת = [the] nakedness of (nakedness)
+8 אָבִיו = father his
+9 גִּלָּה = he has uncovered (to reveal)
+10 מוֹת־ = certainly <to die>
+11 יוּמְתוּ = they will be put to death
+12 שְׁנֵיהֶם = both of them (two)
+13 דְּמֵיהֶם = blood<s> their (blood)
+14 בָּם = [are] on <the> them (them)
+
+## 3:20:12
+KO: 그리고 만일 어떤 사람이 그의 며느리와 동침하면, 둘 다 반드시 죽임을 당할 것이니, 그들이 가증한 일을 행하였음이라. 그들의 피가 그들 위에 있으리라.
+1 וְאִישׁ = and a man (man)
+2 אֲשֶׁר = who (which)
+3 יִשְׁכַּב = he will lie with (to lie down)
+4 אֶת־ = <obj.> ([Obj.])
+5 כַּלָּתוֹ = daughter-in-law his (daughter-in-law)
+6 מוֹת = certainly <to die>
+7 יוּמְתוּ = they will be put to death
+8 שְׁנֵיהֶם = both of them (two)
+9 תֶּבֶל = confusion (perversion)
+10 עָשׂוּ = they have done (to make)
+11 דְּמֵיהֶם = blood<s> their (blood)
+12 בָּם = [are] on <the> them (them)
+
+## 3:20:13
+KO: 그리고 어떤 사람이 여자와 침상들(동침)하는 것처럼 남자와 침상하면, 그들 둘이 가증한 일을 행하였으니, 반드시 죽임을 당할 것이요 그들의 피가 그들 위에 있으리라.
+1 וְאִישׁ = and a man (man)
+2 אֲשֶׁר = who (which)
+3 יִשְׁכַּב = he will lie with (to lie down)
+4 אֶת־ = <obj.> ([Obj.])
+5 זָכָר = a male (male)
+6 מִשְׁכְּבֵי = [the] lyings of (bed)
+7 אִשָּׁה = a woman (woman)
+8 תּוֹעֵבָה = an abomination (abomination)
+9 עָשׂוּ = they have done (to make)
+10 שְׁנֵיהֶם = both of them (two)
+11 מוֹת = certainly <to die>
+12 יוּמָתוּ = they will be put to death
+13 דְּמֵיהֶם = blood<s> their (blood)
+14 בָּם = [are] on <the> them (them)
+
+## 3:20:14
+KO: 그리고 만일 어떤 사람이 아내와 그녀의 어머니를 취한다면, 그것은 악행이다. 그와 그들을 불속에서 태워야 한다. 그리하여 너희 가운데 악행이 없게 할 것이다.
+1 וְאִישׁ = and a man (man)
+2 אֲשֶׁר = who (which)
+3 יִקַּח = he will take (to take)
+4 אֶת־ = <obj.>
+5 אִשָּׁה = a woman (woman)
+6 וְאֶת־ = and <obj.>
+7 אִמָּהּ = mother her (mother)
+8 זִמָּה = [is] wickedness
+9 הִוא = it (he;_she;_it)
+10 בָּאֵשׁ = with <the> fire (fire)
+11 יִשְׂרְפוּ = people will burn (to burn)
+12 אֹתוֹ = <obj.> him
+13 וְאֶתְהֶן = and <obj.> them
+14 וְלֹא־ = and not (not)
+15 תִהְיֶה = it will be (to be)
+16 זִמָּה = wickedness
+17 בְּתוֹכְכֶם = in midst of you (midst)
+
+## 3:20:15
+KO: 그리고 짐승과 동침(그의 정액을 줌)을 하는 남자는 반드시 죽임을 당할 것이며, 너희는 그 짐승도 죽일 것이다.
+1 וְאִישׁ = and a man (man)
+2 אֲשֶׁר = who (which)
+3 יִתֵּן = he will give (to give)
+4 שְׁכָבְתּוֹ = copulation his (copulation)
+5 בִּבְהֵמָה = in an animal
+6 מוֹת = certainly <to die>
+7 יוּמָת = he will be put to death
+8 וְאֶת־ = and <obj.> ([Obj.])
+9 הַבְּהֵמָה = the animal
+10 תַּהֲרֹגוּ = you will kill (to kill)
+
+## 3:20:16
+KO: 그리고 짐승에게 가까이하여 그것과 교합하는 여자가 있다면, 너는 그 여자와 그 짐승을 죽일지니, 그들은 반드시 죽임을 당할 것이며 그들의 피가 그들 위에 돌아갈 것이다.
+1 וְאִשָּׁה = and a woman
+2 אֲשֶׁר = who (which)
+3 תִּקְרַב = she will draw near (to present)
+4 אֶל־ = to (to(wards))
+5 כָּל־ = any (all)
+6 בְּהֵמָה = animal
+7 לְרִבְעָה = to stretch out with (to mate)
+8 אֹתָהּ = with <the> it (with)
+9 וְהָרַגְתָּ = and you will kill (to kill)
+10 אֶת־ = <obj.>
+11 הָאִשָּׁה = the woman
+12 וְאֶת־ = and <obj.>
+13 הַבְּהֵמָה = the animal
+14 מוֹת = certainly <to die>
+15 יוּמָתוּ = they will be put to death
+16 דְּמֵיהֶם = blood<s> their (blood)
+17 בָּם = [are] on <the> them (them)
+
+## 3:20:17
+KO: 어떤 사람이 자기 누이 곧 자기 아버지의 딸이나 자기 어머니의 딸을 취하여 그 여자의 하체를 보고, 그 여자가 그 남자의 하체를 보면, 그것은 부끄러운 일이다. 그들은 자기 백성 자손들의 눈앞에서 끊어질 것이니, 그가 자기 누이의 하체를 드러냈으므로 자기 죄를 담당할 것이다.
+1 וְאִישׁ = and a man (man)
+2 אֲשֶׁר־ = who (which)
+3 יִקַּח = he will take (to take)
+4 אֶת־ = <obj.>
+5 אֲחֹתוֹ = sister his
+6 בַּת־ = [the] daughter of
+7 אָבִיו = father his (father)
+8 אוֹ = or
+9 בַת־ = [the] daughter of
+10 אִמּוֹ = mother his (mother)
+11 וְרָאָה = and he will see
+12 אֶת־ = <obj.>
+13 עֶרְוָתָהּ = nakedness her
+14 וְהִיא־ = and she
+15 תִרְאֶה = she will see
+16 אֶת־ = <obj.>
+17 עֶרְוָתוֹ = nakedness his
+18 חֶסֶד = [is] a shame (shame)
+19 הוּא = it
+20 וְנִכְרְתוּ = and they will be cut off (to cut)
+21 לְעֵינֵי = to [the] eyes of (eye)
+22 בְּנֵי = [the] sons of (son)
+23 עַמָּם = people their (people)
+24 עֶרְוַת = [the] nakedness of
+25 אֲחֹתוֹ = sister his
+26 גִּלָּה = he has uncovered (to reveal)
+27 עֲוֹנוֹ = iniquity his (iniquity)
+28 יִשָּׂא = he will bear (to lift)
+
+## 3:20:18
+KO: 어떤 남자가 월경 중인 여인과 동침하여 그의 하체를 드러내면, 그는 그 여인의 근원을 드러낸 것이며 그 여인은 자기의 피의 근원을 드러낸 것이니, 둘 다 자기 백성 중에서 끊어지리라.
+1 וְאִישׁ = and a man (man)
+2 אֲשֶׁר־ = who (which)
+3 יִשְׁכַּב = he will lie with (to lie down)
+4 אֶת־ = <obj.>
+5 אִשָּׁה = a woman (woman)
+6 דָּוָה = menstruating (sick)
+7 וְגִלָּה = and he will uncover
+8 אֶת־ = <obj.>
+9 עֶרְוָתָהּ = nakedness her (nakedness)
+10 אֶת־ = <obj.>
+11 מְקֹרָהּ = spring her
+12 הֶעֱרָה = he has made naked (to uncover)
+13 וְהִיא = and she (he;_she;_it)
+14 גִּלְּתָה = she has uncovered
+15 אֶת־ = <obj.>
+16 מְקוֹר = [the] spring of
+17 דָּמֶיהָ = blood<s> her (blood)
+18 וְנִכְרְתוּ = and they will be cut off (to cut)
+19 שְׁנֵיהֶם = both of them (two)
+20 מִקֶּרֶב = from among (entrails)
+21 עַמָּם = people their (people)
+
+## 3:20:19
+KO: 네 어머니의 자매의 하체나 네 아버지의 자매의 하체를 드러내지 말라. 이는 그의 살붙이의 하체를 드러냄이니 그들이 그 죄악을 짊어질 것이다.
+1 וְעֶרְוַת = and [the] nakedness of (nakedness)
+2 אֲחוֹת = [the] sister of
+3 אִמְּךָ = mother your (mother)
+4 וַאֲחוֹת = and [the] sister of
+5 אָבִיךָ = father your (father)
+6 לֹא = not
+7 תְגַלֵּה = you will uncover (to reveal)
+8 כִּי = for
+9 אֶת־ = <obj.> ([Obj.])
+10 שְׁאֵרוֹ = relative his (flesh)
+11 הֶעֱרָה = he has made naked (to uncover)
+12 עֲוֹנָם = iniquity their (iniquity)
+13 יִשָּׂאוּ = they will bear (to lift)
+
+## 3:20:20
+KO: 그리고 만일 어떤 사람이 그의 숙모와 동침하면, 그는 그의 숙부의 하체를 드러낸 것이다. 그들이 그들의 죄를 짊어질 것이며, 자식 없이 죽을 것이다.
+1 וְאִישׁ = and a man (man)
+2 אֲשֶׁר = who (which)
+3 יִשְׁכַּב = he will lie with (to lie down)
+4 אֶת־ = <obj.> ([Obj.])
+5 דֹּדָתוֹ = aunt his (aunt)
+6 עֶרְוַת = [the] nakedness of (nakedness)
+7 דֹּדוֹ = uncle his (beloved)
+8 גִּלָּה = he has uncovered (to reveal)
+9 חֶטְאָם = sin their (sin)
+10 יִשָּׂאוּ = they will bear (to lift)
+11 עֲרִירִים = childless
+12 יָמֻתוּ = they will die (to die)
+
+## 3:20:21
+KO: 그리고 만일 어떤 사람이 자기 형제의 아내를 취하면, 그것은 더러운 일이다. 그가 자기 형제의 하체를 드러낸 것이니, 그들은 자식이 없을 것이다.
+1 וְאִישׁ = and a man (man)
+2 אֲשֶׁר = who (which)
+3 יִקַּח = he will take (to take)
+4 אֶת־ = <obj.> ([Obj.])
+5 אֵשֶׁת = [the] wife of (woman)
+6 אָחִיו = brother his
+7 נִדָּה = [is] impurity (impurity)
+8 הִוא = it (he;_she;_it)
+9 עֶרְוַת = [the] nakedness of (nakedness)
+10 אָחִיו = brother his
+11 גִּלָּה = he has uncovered (to reveal)
+12 עֲרִירִים = childless
+13 יִהְיוּ = they will be (to be)
+
+## 3:20:22
+KO: 너희는 나의 모든 규례와 나의 모든 법도를 지키고, 너희는 그것들을 행하라. 그리하면 내가 너희를 인도하여 거하게 하는 땅이 너희를 토하지 아니할 것이다.
+1 וּשְׁמַרְתֶּם = and you will keep (to keep)
+2 אֶת־ = <obj.>
+3 כָּל־ = all
+4 חֻקֹּתַי = statutes my (statute)
+5 וְאֶת־ = and <obj.>
+6 כָּל־ = all
+7 מִשְׁפָּטַי = judgments my (justice)
+8 וַעֲשִׂיתֶם = and you will do (to make)
+9 אֹתָם = <obj.> them
+10 וְלֹא־ = and not (not)
+11 תָקִיא = it will vomit up (to vomit)
+12 אֶתְכֶם = <obj.> you
+13 הָאָרֶץ = the land (land)
+14 אֲשֶׁר = where (which)
+15 אֲנִי = I
+16 מֵבִיא = [am] about to bring (to come (in))
+17 אֶתְכֶם = <obj.> you
+18 שָׁמָּה = there towards (there)
+19 לָשֶׁבֶת = to dwell
+20 בָּהּ = in <the> it (her)
+
+## 3:20:23
+KO: 너희는 내가 너희 앞에서 쫓아내는 그 민족의 규례들을 따라 행하지 말라. 이는 그들이 이 모든 것을 행하였으므로 내가 그들을 가증히 여겼음이라.
+1 וְלֹא = and not (not)
+2 תֵלְכוּ = you will walk (to go)
+3 בְּחֻקֹּת = in [the] statutes of (statute)
+4 הַגּוֹי = the nation (nation)
+5 אֲשֶׁר־ = which
+6 אֲנִי = I
+7 מְשַׁלֵּחַ = [am] about to send away (to send)
+8 מִפְּנֵיכֶם = from before you (face)
+9 כִּי = for
+10 אֶת־ = <obj.> ([Obj.])
+11 כָּל־ = all
+12 אֵלֶּה = these [things] (these)
+13 עָשׂוּ = they have done (to make)
+14 וָאָקֻץ = and I loathed (to loathe)
+15 בָּם = <in> <the> them (them)
+
+## 3:20:24
+KO: 그리고 내가 너희에게 말하였다. 너희는 그들의 땅을 차지할 것이며, 나는 너희가 그것을 기업으로 얻도록 그것을 너희에게 줄 것이다. 곧 젖과 꿀이 흐르는 땅이다. 나는 너희를 만민으로부터 구별한 너희 하나님 여호와이다.
+1 וָאֹמַר = and I have said (to say)
+2 לָכֶם = to <the> you
+3 אַתֶּם = you (you(m.p.))
+4 תִּירְשׁוּ = you will take possession of
+5 אֶת־ = <obj.>
+6 אַדְמָתָם = ground their (land)
+7 וַאֲנִי = and I
+8 אֶתְּנֶנָּה = I will give it (to give)
+9 לָכֶם = to <the> you
+10 לָרֶשֶׁת = to take possession of
+11 אֹתָהּ = <obj.> it
+12 אֶרֶץ = a land (land)
+13 זָבַת = flowing of (to flow)
+14 חָלָב = milk
+15 וּדְבָשׁ = and honey (honey)
+16 אֲנִי = I
+17 יְהוָה = [am] Yahweh (LORD)
+18 אֱלֹהֵיכֶם = God your (God)
+19 אֲשֶׁר־ = who (which)
+20 הִבְדַּלְתִּי = I have separated (to separate)
+21 אֶתְכֶם = <obj.> you
+22 מִן־ = from
+23 הָעַמִּים = the peoples (people)
+
+## 3:20:25
+KO: 그리고 너희는 정한 짐승과 부정한 짐승을 구별하고, 부정한 새와 정한 새를 구별하며, 너희는 너희 영혼들을 짐승이나 새나 땅 위를 기는 모든 것들로 인하여 가증하게 하지 말라. 그것들은 내가 너희에게 부정하다고 구별하여 둔 것이니라.
+1 וְהִבְדַּלְתֶּם = and you will separate
+2 בֵּין־ = between
+3 הַבְּהֵמָה = the animal[s]
+4 הַטְּהֹרָה = <the> pure
+5 לַטְּמֵאָה = and <the> unclean
+6 וּבֵין־ = and between
+7 הָעוֹף = the bird[s]
+8 הַטָּמֵא = <the> unclean
+9 לַטָּהֹר = and <the> pure
+10 וְלֹא־ = and not (not)
+11 תְשַׁקְּצוּ = you will make detestable (to detest)
+12 אֶת־ = <obj.> ([Obj.])
+13 נַפְשֹׁתֵיכֶם = selves your (soul)
+14 בַּבְּהֵמָה = by <the> animal[s]
+15 וּבָעוֹף = and by <the> bird[s]
+16 וּבְכֹל = and by all (all)
+17 אֲשֶׁר = that
+18 תִּרְמֹשׂ = it creeps (to creep)
+19 הָאֲדָמָה = the ground (land)
+20 אֲשֶׁר־ = which
+21 הִבְדַּלְתִּי = I have separated
+22 לָכֶם = for <the> you (you)
+23 לְטַמֵּא = to declare unclean (to defile)
+
+## 3:20:26
+KO: 너희는 나에게 거룩한 자들이 되어라. 왜냐하면 나 여호와가 거룩하고, 내가 너희를 내 것이 되게 하려고 만민 중에서 구별하였기 때문이다.
+1 וִהְיִיתֶם = and you will be
+2 לִי = to <the> me
+3 קְדֹשִׁים = holy
+4 כִּי = for
+5 קָדוֹשׁ = [am] holy
+6 אֲנִי = I
+7 יְהוָה = Yahweh (LORD)
+8 וָאַבְדִּל = and I have separated (to separate)
+9 אֶתְכֶם = <obj.> you ([Obj.])
+10 מִן־ = from
+11 הָעַמִּים = the peoples (people)
+12 לִהְיוֹת = to belong
+13 לִי = to <the> me
+
+## 3:20:27
+KO: 남자나 혹은 여자가 그들 가운데 신접한 자나 박수(영을 부리는 자)가 된다면, 반드시 죽임을 당할 것이니, 돌로 그들을 칠 것이다. 그들의 피가 그들 위에 있을 것이다.
+1 וְאִישׁ = and a man (man)
+2 אוֹ־ = or
+3 אִשָּׁה = a woman (woman)
+4 כִּי־ = that (for)
+5 יִהְיֶה = he will be (to be)
+6 בָהֶם = among <the> them
+7 אוֹב = a necromancer (medium)
+8 אוֹ = or
+9 יִדְּעֹנִי = a soothsayer (spiritist)
+10 מוֹת = certainly <to die>
+11 יוּמָתוּ = they will be put to death
+12 בָּאֶבֶן = with <the> stone[s] (stone)
+13 יִרְגְּמוּ = people will stone (to stone)
+14 אֹתָם = <obj.> them ([Obj.])
+15 דְּמֵיהֶם = blood<s> their (blood)
+16 בָּם פ = [are] on <the> them
+
+## 3:21:1
+KO: 그리고 여호와께서 모세에게 말씀하셨다. "아론의 자손인 제사장들에게 말하여라. 그들에게 이르기를, 제사장은 자기 백성 가운데 죽은 자로 인하여 자신을 더럽히지 말아야 한다."
+1 וַיֹּאמֶר = and he said
+2 יְהוָה = Yahweh (LORD)
+3 אֶל־ = to
+4 מֹשֶׁה = Moses
+5 אֱמֹר = say
+6 אֶל־ = to
+7 הַכֹּהֲנִים = the priests (priest)
+8 בְּנֵי = [the] sons of (son)
+9 אַהֲרֹן = Aaron
+10 וְאָמַרְתָּ = and you will say
+11 אֲלֵהֶם = to them
+12 לְנֶפֶשׁ = for a corpse (soul)
+13 לֹא־ = not
+14 יִטַּמָּא = he will make himself unclean (to defile)
+15 בְּעַמָּיו = among kinspeople<s> his (kinsman)
+
+## 3:21:2
+KO: 그에게 가까운 혈육, 곧 그의 어머니와 그의 아버지와 그의 아들과 그의 딸과 그의 형제에게는 (부정해질 수 있다).
+1 כִּי = that
+2 אִם־ = except (if)
+3 לִשְׁאֵרוֹ = for relative his (flesh)
+4 הַקָּרֹב = <the> near (near)
+5 אֵלָיו = to him (to(wards))
+6 לְאִמּוֹ = for mother his (mother)
+7 וּלְאָבִיו = and for father his (father)
+8 וְלִבְנוֹ = and for son his (son)
+9 וּלְבִתּוֹ = and for daughter his (daughter)
+10 וּלְאָחִיו = and for brother his (brother)
+
+## 3:21:3
+KO: 그리고 그에게 가까운, 남편이 없었던 처녀인 자매로 인하여는 스스로를 더럽힐 수 있다.
+1 וְלַאֲחֹתוֹ = and for sister his (sister)
+2 הַבְּתוּלָה = the virgin (virgin)
+3 הַקְּרוֹבָה = <the> near (near)
+4 אֵלָיו = to him (to(wards))
+5 אֲשֶׁר = who (which)
+6 לֹא־ = not
+7 הָיְתָה = she has belonged (to be)
+8 לְאִישׁ = to a husband (man)
+9 לָהּ = for <the> her (her)
+10 יִטַּמָּא = he will make himself unclean (to defile)
+
+## 3:21:4
+KO: 그는 자기 백성들 가운데 있는 지도자로서, 자신을 더럽혀 스스로를 욕되게 하지 말아야 한다.
+1 לֹא = not
+2 יִטַּמָּא = he will make himself unclean (to defile)
+3 בַּעַל = a husband (master)
+4 בְּעַמָּיו = among kinspeople<s> his (kinsman)
+5 לְהֵחַלּוֹ = to profane himself (to profane;_begin)

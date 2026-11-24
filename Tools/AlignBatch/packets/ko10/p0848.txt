@@ -1,0 +1,195 @@
+## 10:17:21
+KO: 그리고 그들이 떠난 후에, 그들이 우물로부터 올라와서 가서 다윗 왕에게 고하며 다윗에게 말하기를, "일어나서 급히 물을 건너소서, 왜냐하면 아히도벨이 당신들에 대하여 이와 같이 모략을 베풀었기 때문입니다"라고 하였다.
+1 וַיְהִי = and it was (to be)
+2 אַחֲרֵי = after
+3 לֶכְתָּם = had gone they
+4 וַיַּעֲלוּ = and they came up (to ascend)
+5 מֵהַבְּאֵר = from the well (well)
+6 וַיֵּלְכוּ = and they went
+7 וַיַּגִּדוּ = and they told (to tell)
+8 לַמֶּלֶךְ = to the king (king)
+9 דָּוִד = David
+10 וַיֹּאמְרוּ = and they said (to say)
+11 אֶל־ = to (to(wards))
+12 דָּוִד = David
+13 קוּמוּ = arise (to arise)
+14 וְעִבְרוּ = and pass over (to pass)
+15 מְהֵרָה = quickly (haste)
+16 אֶת־ = <obj.> ([Obj.])
+17 הַמַּיִם = the water (water)
+18 כִּי־ = for
+19 כָכָה = thus
+20 יָעַץ = he has counseled (to advise)
+21 עֲלֵיכֶם = on you (upon)
+22 אֲחִיתֹפֶל = Ahithophel
+
+## 10:17:22
+KO: 그리고 다윗이 일어났다, 그와 함께한 모든 백성과 함께, 그리고 그들이 요단을 건넜다. 아침의 빛까지, 한 사람도 요단을 건너지 않은 자가 부족함이 없었다.
+1 וַיָּקָם = and he arose (to arise)
+2 דָּוִד = David
+3 וְכָל־ = and all (all)
+4 הָעָם = the people (people)
+5 אֲשֶׁר = which
+6 אִתּוֹ = [was] with him (with)
+7 וַיַּעַבְרוּ = and they passed over
+8 אֶת־ = <obj.>
+9 הַיַּרְדֵּן = the Jordan
+10 עַד־ = until
+11 אוֹר = [the] light of (light)
+12 הַבֹּקֶר = the morning (morning)
+13 עַד־ = up to
+14 אַחַד = one [person] (one)
+15 לֹא = not
+16 נֶעְדָּר = [was] missing (to lack)
+17 אֲשֶׁר = who
+18 לֹא־ = not
+19 עָבַר = he had passed over
+20 אֶת־ = <obj.>
+21 הַיַּרְדֵּן = the Jordan
+
+## 10:17:23
+KO: 그리고 아히도벨은 보았다, 왜냐하면 그의 모략이 시행되지 않았기 때문이다. 그리고 그는 나귀에 안장을 지웠고, 일어나서 그의 집으로, 그의 성읍으로 갔다. 그리고 그는 그의 집에 명령하였고, 스스로 목을 매었으며, 그리고 그는 죽었다. 그리고 그는 그의 아버지의 무덤에 장사되었다.
+1 וַאֲחִיתֹפֶל = and Ahithophel (Ahithophel)
+2 רָאָה = he saw (to see)
+3 כִּי = that (for)
+4 לֹא = not
+5 נֶעֶשְׂתָה = it was done (to make)
+6 עֲצָתוֹ = counsel his (counsel)
+7 וַיַּחֲבֹשׁ = and he saddled (to saddle|tie)
+8 אֶת־ = <obj.> ([Obj.])
+9 הַחֲמוֹר = the donkey (donkey)
+10 וַיָּקָם = and he arose (to arise)
+11 וַיֵּלֶךְ = and he went (to go)
+12 אֶל־ = to
+13 בֵּיתוֹ = house his
+14 אֶל־ = to
+15 עִירוֹ = city his (city)
+16 וַיְצַו = and he commanded (to command)
+17 אֶל־ = concerning
+18 בֵּיתוֹ = household his
+19 וַיֵּחָנַק = and he hanged himself (to strangle)
+20 וַיָּמָת = and he died (to die)
+21 וַיִּקָּבֵר = and he was buried (to bury)
+22 בְּקֶבֶר = in [the] tomb of (grave)
+23 אָבִיו ס = father his (father)
+
+## 10:17:24
+KO: 그리고 다윗은 마하나임에 이르렀고, 압살롬은 요단을 건넜으니, 그와 이스라엘의 모든 사람이 그와 함께였더라.
+1 וְדָוִד = and David (David)
+2 בָּא = he had gone (to come (in))
+3 מַחֲנָיְמָה = Mahanaim towards (Mahanaim)
+4 וְאַבְשָׁלֹם = and Absalom (Absalom)
+5 עָבַר = he had passed over (to pass)
+6 אֶת־ = <obj.> ([Obj.])
+7 הַיַּרְדֵּן = the Jordan (Jordan)
+8 הוּא = he (he;_she;_it)
+9 וְכָל־ = and every (all)
+10 אִישׁ = <the> man of (man)
+11 יִשְׂרָאֵל = Israel
+12 עִמּוֹ = with him (with)
+
+## 10:17:25
+KO: 그리고 압살롬은 아마사를 요압을 대신하여 군대 위에 세웠다. 그리고 아마사는 이스라엘 사람 이드라라는 자의 아들이었는데, 그는 나하스의 딸 아비갈에게 들어갔고, 아비갈은 요압의 어머니 스루야의 자매였다.
+1 וְאֶת־ = and <obj.> ([Obj.])
+2 עֲמָשָׂא = Amasa
+3 שָׂם = he had appointed (to set)
+4 אַבְשָׁלֹם = Absalom
+5 תַּחַת = in place of (underneath)
+6 יוֹאָב = Joab
+7 עַל־ = over (upon)
+8 הַצָּבָא = the army (army)
+9 וַעֲמָשָׂא = and Amasa
+10 בֶן־ = [was] a son of (son)
+11 אִישׁ = a man (man)
+12 וּשְׁמוֹ = and name his (name)
+13 יִתְרָא = [was] Jether (Ithra)
+14 הַיִּשְׂרְאֵלִי = the Israelite (Ishmaelite)
+15 אֲשֶׁר־ = who (which)
+16 בָּא = he had gone (to come (in))
+17 אֶל־ = into (to(wards))
+18 אֲבִיגַל = Abigail
+19 בַּת־ = [the] daughter of (daughter)
+20 נָחָשׁ = Nahash
+21 אֲחוֹת = [the] sister of (sister)
+22 צְרוּיָה = Zeruiah
+23 אֵם = [the] mother of (mother)
+24 יוֹאָב = Joab
+
+## 10:17:26
+KO: 그리고 이스라엘과 압살롬이 길르앗 땅에 진을 쳤다.
+1 וַיִּחַן = and it encamped (to camp)
+2 יִשְׂרָאֵל = Israel
+3 וְאַבְשָׁלֹם = and Absalom (Absalom)
+4 אֶרֶץ = [the] land of (land)
+5 הַגִּלְעָד ס = <the> Gilead (Gilead)
+
+## 10:17:27
+KO: 다윗이 마하나임에 이르렀을 때에, 암몬 자손의 랍바 출신 나하스의 아들 소비와 로드발 출신 암미엘의 아들 마길과 로글림 출신 길르앗 사람 바르질래가 (있었다).
+1 וַיְהִי = and it was (to be)
+2 כְּבוֹא = when came (to come (in))
+3 דָוִד = David
+4 מַחֲנָיְמָה = Mahanaim towards (Mahanaim)
+5 וְשֹׁבִי = and Shobi (Shobi)
+6 בֶן־ = [the] son of
+7 נָחָשׁ = Nahash
+8 מֵרַבַּת = from Rabbah of (Rabbah)
+9 בְּנֵי־ = [the] people of
+10 עַמּוֹן = Ammon
+11 וּמָכִיר = and Makir (Machir)
+12 בֶּן־ = [the] son of
+13 עַמִּיאֵל = Ammiel
+14 מִלֹּא = from Lo
+15 דְבָר = Debar
+16 וּבַרְזִלַּי = and Barzillai (Barzillai)
+17 הַגִּלְעָדִי = the Gileadite (Gileadite)
+18 מֵרֹגְלִים = from Rogelim (Rogelim)
+
+## 10:17:28
+KO: 침상과 대야들과 토기 장인의 그릇과 밀과 보리와 밀가루와 볶은 곡식과 콩과 팥과 볶은 곡식과
+1 מִשְׁכָּב = bed[s] (bed)
+2 וְסַפּוֹת = and basins (basin)
+3 וּכְלִי = and a vessel of (article|utensil)
+4 יוֹצֵר = a potter (to form)
+5 וְחִטִּים = and wheat<s> (wheat)
+6 וּשְׂעֹרִים = and barley<s> (barley)
+7 וְקֶמַח = and flour (flour)
+8 וְקָלִי = and roasted grain
+9 וּפוֹל = and bean[s] (bean)
+10 וַעֲדָשִׁים = and lentils (lentil)
+11 וְקָלִי = and roasted grain
+
+## 10:17:29
+KO: 그리고 꿀과 버터와 양과 소의 치즈를 그들이 다윗과 그와 함께한 백성에게 먹으라고 가져왔으니, 이는 그들이 생각하기를 "백성이 들에서 주리고 피곤하고 목마르다"라고 했기 때문이었다.
+1 וּדְבַשׁ = and honey (honey)
+2 וְחֶמְאָה = and curd<s> (curd)
+3 וְצֹאן = and sheep (flock)
+4 וּשְׁפוֹת = and cheese of (cheese)
+5 בָּקָר = [the] herd (cattle)
+6 הִגִּישׁוּ = they brought (to approach)
+7 לְדָוִד = for David (David)
+8 וְלָעָם = and for the people
+9 אֲשֶׁר־ = which
+10 אִתּוֹ = [was] with him (with)
+11 לֶאֱכוֹל = to eat
+12 כִּי = for
+13 אָמְרוּ = they said (to say)
+14 הָעָם = the people
+15 רָעֵב = [is] hungry (hungry)
+16 וְעָיֵף = and weary (faint)
+17 וְצָמֵא = and thirsty (thirsty)
+18 בַּמִּדְבָּר = in the wilderness (wilderness)
+
+## 10:18:1
+KO: 그리고 다윗이 자기와 함께한 그 백성을 점검하고 그들 위에 천부장들과 백부장들을 세웠다.
+1 וַיִּפְקֹד = and he mustered (to reckon)
+2 דָּוִד = David
+3 אֶת־ = <obj.> ([Obj.])
+4 הָעָם = the people (people)
+5 אֲשֶׁר = which
+6 אִתּוֹ = [was] with him (with)
+7 וַיָּשֶׂם = and he appointed (to set)
+8 עֲלֵיהֶם = over them (upon)
+9 שָׂרֵי = commanders of
+10 אֲלָפִים = thousands (thousand)
+11 וְשָׂרֵי = and commanders of
+12 מֵאוֹת = hundreds (hundred)
